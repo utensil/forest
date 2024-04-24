@@ -1,15 +1,43 @@
-To build this forest, you need to have a working installation of the following software:
+This forest is initialized with the following command:
 
-- LaTeX, preferably the _full_ [TeXLive distribution](https://tug.org/texlive/)
+```bash
+brew install opam fswatch
+opam init
+opam update
+opam install forester
+forester --version
 
-- `forester`, which you can install using `opam install forester`; at times, you may need to build from [source](https://git.sr.ht/~jonsterling/ocaml-forester) if I haven't released the latest version to opam
+cd ~/projects/
+git init forest
+cd forest
+git pull https://git.sr.ht/~jonsterling/forest-template
 
-Once you have ensured that these programs are installed and in your `PATH`, simply run `./build.sh`. To view the forest, you can open `output/index.xml` in your favorite browser: for Firefox, you may need to set `security.fileuri.strict_origin_policy` to `false` in `about:config`. Alternatively, you can serve the `output` directory from a local webserver to avoid this.
+git remote add origin https://github.com/utensil/forest.git
+git branch -M main
+git push -u origin main
 
-If you have [`fswatch`](https://github.com/emcrisostomo/fswatch) installed, you can run `./watch.sh` to watch for changes to the `trees` directory and rebuild accordingly.
+git submodule update --init --recursive
+git submodule update --remote --merge 
+```
 
-If you prefer to use [`nix`](https://github.com/NixOS/nix), you can simply run `nix develop` to enter a shell with TexLive and `fswatch` available. If you additionally use [`direnv`](https://direnv.net/), run `direnv allow` to automatically enter the shell when you enter the repository. Note that this is entirely optional.
+Add a `forest.toml`, then:
 
-### JavaScript dependencies
+```bash
+forester new --dest=trees --prefix=uts
+```
+Update `build.sh`, then
 
-This forest has a small JavaScript component (`javascript/forester.js`), which creates a keyboard command palette. There is no need to have any of the JavaScript or Node ecosystem installed on your machine; all JavaScript dependencies are kept bundled in source control. If you wish to _upgrade_ this bundle, you will need to have a working installation of `npm`, and then run `./bundle-js.sh` and commit the resulting changes. It is not ordinarily necessary to do this.
+```bash
+./build.sh && ./watch.sh
+```
+
+And in a separate terminal:
+
+```bash
+# python3 -m http.server 1314 -d output
+http-server -p 1314 output
+```
+
+Then open `http://localhost:1314` in your browser.
+
+If something goes wrong, check out https://github.com/jonsterling/forest .

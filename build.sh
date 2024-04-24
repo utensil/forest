@@ -1,3 +1,3 @@
 #!/bin/bash
-
-opam exec -- forester build --dev --root xxx-0001 trees/
+rm -rf output
+opam exec -- forester build --dev
