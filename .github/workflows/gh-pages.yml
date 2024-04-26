@@ -41,7 +41,7 @@ jobs:
           echo "$(brew --prefix)/bin" >> $GITHUB_PATH
       - name: Install opam and forester
         run: |
-          brew install opam
+          brew install opam bubblewrap
           opam init --auto-setup --yes
           opam update
           opam install forester
