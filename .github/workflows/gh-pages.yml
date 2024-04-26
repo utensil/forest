@@ -1,0 +1,89 @@
+name: Deploy My forest to Pages
+
+on:
+  push:
+    paths-ignore:
+      - "LICENSE"
+      - "README.md"
+    branches:
+      - main
+
+# Allow one concurrent deployment
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+# Default to bash
+defaults:
+  run:
+    shell: bash
+
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  # Build job
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          submodules: recursive
+      - name: Install Homebrew
+        run: |
+          bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+          eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+          echo "$(brew --prefix)/bin" >> $GITHUB_PATH
+      - name: Install opam and forester
+        run: |
+          brew install opam
+          opam init --auto-setup --yes
+          opam update
+          opam install forester
+          forester --version
+      - name: Install TinyTeX via Quarto
+        uses: quarto-dev/quarto-actions/setup@v2
+        with:
+          version: 1.4.553
+          tinytex: true
+      - name: Update submodules
+        run: |
+            git submodule update --init --recursive
+            git submodule update --remote --merge
+      - name: Setup Pages
+        id: pages
+        uses: actions/configure-pages@v5
+      - name: Build forest
+        run: |
+          bash ./build.sh
+      - name: Fix permissions
+        run: |
+          chmod -c -R +rX "./public/" | while read line; do
+            echo "::warning title=Invalid file permissions automatically fixed::$line"
+          done
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./output
+
+  # Deploy job
+  deploy:
+    # Add a dependency to the build job
+    needs: build
+
+    # Deploy to the github-pages environment
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    # Specify runner + deployment step
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
