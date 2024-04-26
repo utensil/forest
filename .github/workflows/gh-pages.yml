@@ -54,6 +54,7 @@ jobs:
           opam init --auto-setup --yes
           opam update --yes
           opam install forester --yes
+          eval $(opam env)
           forester --version
           bash ./build.sh
       - name: Fix permissions
