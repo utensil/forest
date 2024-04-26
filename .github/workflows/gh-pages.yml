@@ -49,6 +49,7 @@ jobs:
         uses: actions/configure-pages@v5
       - name: Install forester and build
         run: |
+          sudo apt-get install libev-dev
           brew install opam bubblewrap
           opam init --auto-setup --yes
           opam update --yes
