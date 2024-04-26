@@ -36,30 +36,24 @@ jobs:
           submodules: recursive
       - name: Install Homebrew
         run: |
-          bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-          eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-          echo "$(brew --prefix)/bin" >> $GITHUB_PATH
-      - name: Install opam and forester
-        run: |
-          brew install opam bubblewrap
-          opam init --auto-setup --yes
-          opam update
-          opam install forester
-          forester --version
+            bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+            eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+            echo "$(brew --prefix)/bin" >> $GITHUB_PATH
       - name: Install TinyTeX via Quarto
         uses: quarto-dev/quarto-actions/setup@v2
         with:
-          version: 1.4.553
-          tinytex: true
-      - name: Update submodules
-        run: |
-            git submodule update --init --recursive
-            git submodule update --remote --merge
+            version: 1.4.553
+            tinytex: true
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v5
-      - name: Build forest
+      - name: Install forester and build
         run: |
+          brew install opam bubblewrap
+          opam init --auto-setup --yes
+          opam update --yes
+          opam install forester
+          forester --version
           bash ./build.sh
       - name: Fix permissions
         run: |
