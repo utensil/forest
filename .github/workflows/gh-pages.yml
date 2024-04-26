@@ -34,26 +34,28 @@ jobs:
         with:
           ref: main
           submodules: recursive
-      - name: Install Homebrew
-        run: |
-            bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-            eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-            echo "$(brew --prefix)/bin" >> $GITHUB_PATH
-      - name: Install TinyTeX via Quarto
-        uses: quarto-dev/quarto-actions/setup@v2
+      - name: Setup TeX Live
+        uses: teatimeguest/setup-texlive-action@v3
         with:
-            version: 1.4.553
-            tinytex: true
+          packages: scheme-basic
+      - name: Check `latex`
+        run: |
+          echo $GITHUB_PATH
+          tlmgr --version
+          which latex
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v5
-      - name: Install forester and build
+      - name: Set-up OCaml 5.1
+        uses: ocaml/setup-ocaml@v2
+        with:
+          ocaml-compiler: "5.1"
+      - name: Install forester
         run: |
-          sudo apt-get install libev-dev
-          brew install opam bubblewrap
-          opam init --auto-setup --yes
-          opam update --yes
+          sudo apt-get install libev-dev dvisvgm
           opam install forester --yes
+      - name: Build with forester
+        run: |
           eval $(opam env)
           forester --version
           bash ./build.sh
