@@ -1,11 +1,14 @@
 \title{basic macros}
 
+\p{Here we define:}
+
 \import{latex-preamble}
 
 \alloc\base/tex-preamble
 
-% minitex: a macro for typesetting LaTeX code in a minipage, with the width of an A5 paper,
-% so the text size almost matches the size output by native forester code.
+\p{\code{minitex}: A macro for typesetting LaTeX code in a minipage, with the width of an A5 paper,
+so the text size almost matches the size output by native forester code. This doesn't work very well on mobile yet.}
+
 \def\minitex[body]{
  \scope{
   \put?\base/tex-preamble{
@@ -25,4 +28,22 @@
     \end{minipage}
   }
  }
+}
+
+\p{\code{texdef}: A macro for making a \code{minitex} definition with a reference.}
+
+\p{Usage:}
+
+\p{
+\startverb
+\texdef{name}{reference}{
+    definition body in LaTeX
+}
+\stopverb
+}
+
+\def\texdef[name][reference][body]{
+  \title{\name ([[\reference]])}
+  \taxon{definition}
+  \minitex{\body}
 }
