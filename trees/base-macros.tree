@@ -1,0 +1,14 @@
+\title{basic macros}
+
+\import{latex-preamble}
+
+\alloc\base/tex-preamble
+
+\def\latex[body]{
+ \scope{
+  \put?\base/tex-preamble{
+   \latex-preamble/common
+  }
+  \tex{\get\base/tex-preamble}{\body}
+ }
+}
