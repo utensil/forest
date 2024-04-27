@@ -4,11 +4,21 @@
 
 \alloc\base/tex-preamble
 
-\def\latex[body]{
+% minitex: a macro for typesetting LaTeX code in a minipage, with the width of an A5 paper,
+% so the text size almost matches the size output by native forester code.
+\def\minitex[body]{
  \scope{
   \put?\base/tex-preamble{
    \latex-preamble/common
   }
-  \tex{\get\base/tex-preamble}{\body}
+  \tex{\get\base/tex-preamble}{
+    \begin{minipage}{5.8in}
+
+    \setlength{\parindent}{10pt}
+    \setlength{\parskip}{3ex plus 0.5ex minus 0.2ex}
+    \body
+
+    \end{minipage}
+  }
  }
 }
