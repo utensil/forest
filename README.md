@@ -2,6 +2,7 @@ This forest is initialized with the following command:
 
 ```bash
 brew install opam fswatch
+
 opam init
 opam update
 opam install forester
@@ -17,7 +18,7 @@ git branch -M main
 git push -u origin main
 
 git submodule update --init --recursive
-git submodule update --remote --merge 
+git submodule update --remote --merge
 ```
 
 Add a `forest.toml`, then:
@@ -41,3 +42,12 @@ http-server -p 1314 output
 Then open `http://localhost:1314` in your browser.
 
 If something goes wrong, check out https://github.com/jonsterling/forest .
+
+In order to use `dvisvgm` required by forester to compile LaTeX to SVG, I have to:
+
+```bash
+brew uninstall textlive
+brew install --cask mactex
+```
+
+See https://tex.stackexchange.com/a/676179/75671 for why.
