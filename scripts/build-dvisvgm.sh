@@ -1,4 +1,6 @@
 #!/bin/bash
+# Based on https://gist.github.com/tobywf/aeeeee63053aaaa841b4032963406684
+
 set -xeuo pipefail
 IFS=$'\n\t'
 
