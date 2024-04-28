@@ -1,40 +1,51 @@
 \import{base-macros}
 
 \texdef{Spin group}{sommer2013geometric}{
-A versor is any multivector that can be expressed as the geometric product of invertible vectors. 
 
-An even versor $R=R^*$ is called a spinor or rotor if
+The Clifford group $\Gamma_{\mathrm{p}, \mathrm{q}}$ of a Clifford algebra $\mathcal{C}_{p, q}$ is defined as
 $$
-R R^{\dagger}=|R|^2,
-$$
-
-so that
-$$
-R^{-1}=\frac{1}{R}=\frac{R^{\dagger}}{R R^{\dagger}}=\frac{R^{\dagger}}{|R|^2} .
+\Gamma_{\mathrm{p}, \mathrm{q}}:=\left\{s \in \mathcal{C}_{p, q} \mid \forall x \in \mathbb{R}_{p, q}: s x \hat{s}^{-1} \in \mathbb{R}_{p, q}\right\} .
 $$
 
-Alternative, but closely related, definitions of ``spinor" and ``rotor" are common. Often the term rotor presumes the normalization $|R|^2=1$.
-
-The versors in $\mathcal{G}_n$ form a group under the geometric product, called the versor group. The versors of unit magnitude form a subgroup, called the pin group. Since $\underline{U}$ in (1.67) is independent of the sign and magnitude of $U$, the two groups are equivalent double coverings of the orthogonal group $\mathrm{O}(p, q)$, where the signature of $\mathcal{V}^n=\mathbb{R}^{p, q}$ is displayed to enable crucial distinctions. 
-
-
-For any $\underline{U}$
+From that definition we get immediately
 $$
-\operatorname{det} \underline{U}= \pm 1 \text {, }
+\Gamma_{\mathrm{p}, \mathrm{q}} \times \mathbb{R}_{p, q} \rightarrow \mathbb{R}_{p, q} ; \quad(s, x) \mapsto s x \hat{s}^{-1}
 $$
-where the sign corresponds to the parity of the versor $U$ which generates it.
+as the operation of the Clifford group $\Gamma_{\mathrm{p}, \mathrm{q}}$ on $\mathbb{R}_{p, q}$. Thus, the operation of $\Gamma_{\mathrm{p}, \mathrm{q}}$ is not one single primitive operation, as it was the case in the example of $G L(n, \mathbb{R})(12.28)$. Another important difference to that case is, that the elements of the group are of the same type as the elements of the set on which the group is operating. Actually, this is one of the great advantages of Clifford algebra. We shall call an element of $\Gamma_{\mathrm{p}, \mathrm{q}}$ a linear operator to distinguish it from an ordinary multivector. It is indeed a linear operator since the Clifford group $\Gamma_{\mathrm{p}, \mathrm{q}}$ consists of linear transformations of $\mathbb{R}_{p, q}$ by definition (12.26).
 
-Those with positive determinant compose the special orthogonal group $\mathrm{SO}(p, r)$. It is doubly covered by the subgroup of even versors. The subgroup of
-elements in $\mathrm{SO}(p, r)$ which are continuously connected to the identity is called the rotation group $\mathrm{SO}^{+}(p, r)$.
-
-The versor group covering $\mathrm{SO}(p, r)$ is called the spin group $\operatorname{Spin}(p, r)$. Let us write $\operatorname{Spin}^{+}(p, r)$ for the group of rotors covering $\mathrm{SO}^{+}(p, r)$. This group is distingiushed by the condition
-
+Hence, $\Gamma_{\mathrm{p}, \mathrm{q}}$ is isomorphic to a general linear group or one of its subgroups. The relation of $\Gamma_{\mathrm{p}, \mathrm{q}}$ to those classical groups can be concluded from the map
 $$
-\underline{U}(M)=U M U^{-1} \quad \text { for } \quad U^*=U,
+\psi_s: \mathbb{R}^{p, q} \rightarrow \mathbb{R}^{p, q} ; x \mapsto s x \hat{s}^{-1} .
 $$
 
-on its elements, and that ensures that the rotations are continuously connected to the identity.
+For all $x \in \mathbb{R}_{p, q}, s \in \Gamma_{\mathrm{p}, \mathrm{q}}$ we have
+$$
+Q\left(\psi_s(x)\right)=\left(\widehat{s x \hat{s}^{-1}}\right) s x \hat{s}^{-1}=\hat{s} \hat{x} s^{-1} s x \hat{s}^{-1}=\hat{x} x=Q(x),
+$$
+so $\psi_s$ is an orthogonal map. In fact, it is easy to see that $\psi_s$ is even an orthogonal automorphism of $\mathbb{R}_{p, q}$. Thereby, we have proofed the following theorem in principle.
 
-The distinction between $\mathrm{SO}$ and $\mathrm{SO}^{+}$or between Spin and $\operatorname{Spin}^{+}$ is not always recognized in the literature, but that seldom creates problems. For Euclidean or anti-Euclidean signature there is no distinction.
+Theorem 12.4.1. The map $\Psi_s: \Gamma_{\mathrm{p}, \mathrm{q}} \rightarrow O(p, q) ; s \mapsto \psi_s$ is a group epimorphism.
+
+Indeed, $\Gamma_{\mathrm{p}, \mathrm{q}}$ is a multiple cover of the orthogonal group $O(p, q)$ since the kernel of $\Psi_s$ is $\mathbb{R} \backslash\{0\}$.
+
+Altogether, we know now that the Clifford group $\Gamma_{\mathrm{p}, \mathrm{q}}$ is an orthogonal transformation group. However, it is still unnecessarily large. Therefore, we first reduce $\Gamma_{\mathrm{p}, \mathrm{q}}$ to a two-fold cover of $O(p, q)$ by defining the so-called Pin group
+$$
+\operatorname{Pin}(\mathrm{p}, \mathrm{q}):=\left\{s \in \Gamma_{\mathrm{p}, \mathrm{q}} \mid s \tilde{s}= \pm 1\right\} .
+$$
+
+The even elements of $\operatorname{Pin}(p, q)$ form the spin group
+$$
+\operatorname{Spin}(\mathrm{p}, \mathrm{q}):=\operatorname{Pin}(\mathrm{p}, \mathrm{q}) \cap \mathcal{C}_{p, q}^{+}
+$$
+which is a double cover of the special orthogonal group $S O(p, q)$. Finally, those elements of $\operatorname{Spin}(\mathrm{p}, \mathrm{q})$ with Clifford norm equal 1 form a further subgroup
+$$
+\operatorname{Spin}_{+}(\mathrm{p}, \mathrm{q}):=\{s \in \operatorname{Spin}(\mathrm{p}, \mathrm{q}) \mid s \tilde{s}=1\}
+$$
+that covers $\mathrm{SO}_{+}(p, q)$ twice. Thereby, $\mathrm{SO}_{+}(p, q)$ is the connected component of the identity of $O(p, q)$.
+
+As usual, we write $\operatorname{Pin}(p)$ for $\operatorname{Pin}(p, q)$ and so on. We shall remark here, that $\operatorname{Spin}(p, q) \simeq \operatorname{Spin}(q, p)$ and $\operatorname{Spin}(p)=\operatorname{Spin}_{+}(p)$. Both follows easily from the properties of the orthogonal groups together with $\mathcal{C}_{p, q}^{+} \simeq \mathcal{C}_{q, p}^{+}$.
+
+For the spin group $\operatorname{Spin}(\mathrm{p}, \mathrm{q})$ there exists another way besides the standard one (12.30) of operating as a dilatation-rotation operator. This way will allow the reduction of the dimension of the Clifford algebra in use. Also it will resolve the interpretation problem regarding complex multiplication noticed earlier in section 3.
+$\operatorname{Spin}(\mathrm{p}, \mathrm{q})$ consists by definition only of even elements. Remembering $\mathcal{C}_{p, q}^{+} \simeq \mathcal{C}_{p, q-1}$, we can interpret a spinor also as an element of $\mathcal{C}_{p, q-1}$.
 
 }
