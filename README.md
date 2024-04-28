@@ -1,11 +1,10 @@
 This forest is initialized with the following command:
 
 ```bash
-brew install opam fswatch
-
-opam init
-opam update
-opam install forester
+brew install opam bubblewrap fswatch
+opam init --auto-setup --yes
+opam update --yes
+opam install forester --yes
 forester --version
 
 cd ~/projects/
@@ -42,6 +41,14 @@ http-server -p 1314 output
 Then open `http://localhost:1314` in your browser.
 
 If something goes wrong, check out https://github.com/jonsterling/forest .
+
+Locally I will
+
+```bash
+git clone https://git.sr.ht/~jonsterling/public-trees jms
+```
+
+so I can check Jon Sterling's use of Forester conveniently.
 
 In order to use `dvisvgm` required by forester to compile LaTeX to SVG, I have to:
 

@@ -1,3 +1,3 @@
 #!/bin/bash
 rm -rf output
-opam exec -- forester build --dev
+opam exec -- forester build # --dev
