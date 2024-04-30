@@ -6,7 +6,7 @@
 
 \alloc\base/tex-preamble
 
-\p{\code{minitex}: A macro for typesetting LaTeX code in a minipage, with the width of an A5 paper,
+\p{\code{minitex[body]}: Typesetting LaTeX code in a minipage, with the width of an A5 paper,
 so the text size almost matches the size output by native forester code. This doesn't work very well on mobile yet.}
 
 \def\minitex[body]{
@@ -30,20 +30,81 @@ so the text size almost matches the size output by native forester code. This do
  }
 }
 
-\p{\code{texdef}: A macro for making a \code{minitex} definition with a reference.}
+% From: https://git.sr.ht/~jonsterling/public-trees/tree/main/item/base-macros.tree
+\def\citek[uid]{\let\escape[x]{\x}[\escape{[\uid]}](\uid)}
 
-\p{Usage:}
-
-\p{
-\startverb
-\texdef{name}{reference}{
-    definition body in LaTeX
-}
-\stopverb
-}
+\p{\code{texdef[name][reference][body]}: Making a \code{minitex} definition with a reference.}
 
 \def\texdef[name][reference][body]{
-  \title{\name ([\reference](\reference))}
+  \title{\name \citek{\reference}}
   \taxon{definition}
   \minitex{\body}
+}
+
+\p{\code{wikiref[name][pageid]}: Making a reference to a Wikipedia article.}
+
+\def\wikiref[name][pageid]{
+  \title{\name - Wikipedia}
+  \meta{external}{https://en.wikipedia.org/wiki/\pageid}
+  \taxon{reference}
+}
+
+\p{\code{nlabref[name][wikiid]}: Making a reference to a nLab article.}
+
+\def\nlabref[name][pageid]{
+  \title{\name - nLab}
+  \meta{external}{https://ncatlab.org/nlab/show/\pageid}
+  \taxon{reference}
+}
+
+\p{\code{fold[treeid]}: Making [transcludes](https://www.jonmsterling.com/jms-007L.xml) collapse. (Not working yet)}
+
+\def\fold[body]{
+  \scope{
+    \put?\transclude/expanded{false}
+    \put?\transclude/toc{false}
+
+    \body
+  }
+}
+
+\p{Below are some useful macros taken from [CAIMEOX's macros](https://github.com/CAIMEOX/caimeox.github.io/blob/main/trees/macros.tree):}
+
+\p{\code{block[tit][body]}: A block that is part of the TOC.}
+
+\def\block[tit][body]{
+    \subtree{
+      \title{\tit}
+      \body
+    }
+}
+
+\p{\code{section[tit][body]}: A section that is NOT part of the TOC.}
+
+\def\section[tit][body]{
+  \scope{
+    \put\transclude/toc{false}
+    \subtree{
+      \tit
+      \body
+    }
+  }
+}
+
+\p{\code{tikz[g]}: A TikZ graph rendered via LaTeX.}
+
+\def\tikz[g]{
+    \xml{center}{\tex{
+      \usepackage{tikz-cd}
+      \usepackage{amssymb}
+    }{
+        \g
+    }
+  }
+}
+
+\p{\code{codeblock[lang][body]}: A code block specifying the language.}
+
+\def\codeblock[lang][body]{
+  \pre{ \xml{code}[class]{\lang}{\body} }
 }
