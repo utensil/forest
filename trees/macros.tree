@@ -1,36 +1,11 @@
 \title{basic macros}
 
-\p{Here we define:}
-
 \import{latex-preamble}
 
-\alloc\base/tex-preamble
+\xmlns:html{http://www.w3.org/1999/xhtml}
 
-\p{\code{minitex[body]}: Typesetting LaTeX code in a minipage, with the width of an A5 paper,
-so the text size almost matches the size output by native forester code. This doesn't work very well on mobile yet.}
+\strong{Useful macros from [jonsterling's macros](https://git.sr.ht/~jonsterling/public-trees/tree/main/item/base-macros.tree)}
 
-\def\minitex[body]{
- \scope{
-  \put?\base/tex-preamble{
-   \latex-preamble/common
-  }
-  \tex{\get\base/tex-preamble}{
-    
-    \begin{minipage}{5.8in}
-
-    \vspace{0.5ex}
-
-    % \setlength{\parindent}{10pt}
-    \setlength{\parskip}{3ex plus 0.5ex minus 0.2ex}
-
-    \body
-
-    \end{minipage}
-  }
- }
-}
-
-% From: https://git.sr.ht/~jonsterling/public-trees/tree/main/item/base-macros.tree
 \p{\code{citek[uid]}: Refer to a reference entry with brackets.}
 
 \def\citek[uid]{
@@ -39,55 +14,11 @@ so the text size almost matches the size output by native forester code. This do
   [\escape{[\uid]}](\uid)
 }
 
-\p{\code{texdef[name][reference][body]}: Making a \code{minitex} definition with a reference.}
+\p{\code{mark[body]}: Some yellow background mark text.}
 
-\def\texdef[name][reference][body]{
-  \title{\name \citek{\reference}}
-  \taxon{definition}
-  \minitex{\body}
-}
+\def\mark[body]{\<html:mark>{\body}}
 
-\p{\code{wikiref[name][pageid]}: Making a reference to a Wikipedia article.}
-
-\def\wikiref[name][pageid]{
-  \title{\name - Wikipedia}
-  \meta{external}{https://en.wikipedia.org/wiki/\pageid}
-  \taxon{reference}
-}
-
-\p{\code{nlabref[name][wikiid]}: Making a reference to a nLab article.}
-
-\def\nlabref[name][pageid]{
-  \title{\name - nLab}
-  \meta{external}{https://ncatlab.org/nlab/show/\pageid}
-  \taxon{reference}
-}
-
-\p{\code{edit[treeid]}: Making a reference to a nLab article.}
-
-\def\edit[treeid]{
-  \let\escape[x]{\x}
-  [\escape{Edit}](https://github.com/utensil/forest/blob/main/trees/\treeid.tree)
-}
-
-\p{\code{link[url]}: Linking to a URL without an explicit title.}
-
-\def\link[url]{
-  [⧉](\url)
-}
-
-\p{\code{fold[treeid]}: Making [transcludes](https://www.jonmsterling.com/jms-007L.xml) collapse. (Not working yet)}
-
-\def\fold[body]{
-  \scope{
-    \put?\transclude/expanded{false}
-    \put?\transclude/toc{false}
-
-    \body
-  }
-}
-
-\p{Below are some useful macros taken from [CAIMEOX's macros](https://github.com/CAIMEOX/caimeox.github.io/blob/main/trees/macros.tree):}
+\strong{Useful macros from [CAIMEOX's macros](https://github.com/CAIMEOX/caimeox.github.io/blob/main/trees/macros.tree)}
 
 \p{\code{block[tit][body]}: A block that is part of the TOC.}
 
@@ -127,3 +58,81 @@ so the text size almost matches the size output by native forester code. This do
 \def\codeblock[lang][body]{
   \pre{ \xml{code}[class]{\lang}{\body} }
 }
+
+\strong{Useful macros we defined}
+
+\alloc\base/tex-preamble
+
+\p{\code{minitex[body]}: Typesetting LaTeX code in a minipage, with the width of an A5 paper,
+so the text size almost matches the size output by native forester code. This doesn't work very well on mobile yet.}
+
+\def\minitex[body]{
+ \scope{
+  \put?\base/tex-preamble{
+   \latex-preamble/common
+  }
+  \tex{\get\base/tex-preamble}{
+    
+    \begin{minipage}{5.8in}
+
+    \vspace{0.5ex}
+
+    % \setlength{\parindent}{10pt}
+    \setlength{\parskip}{3ex plus 0.5ex minus 0.2ex}
+
+    \body
+
+    \end{minipage}
+  }
+ }
+}
+
+\p{\code{texdef[name][reference][body]}: A \code{minitex} definition with a reference.}
+
+\def\texdef[name][reference][body]{
+  \title{\name \citek{\reference}}
+  \taxon{definition}
+  \minitex{\body}
+}
+
+\p{\code{wikiref[name][pageid]}: A reference to a Wikipedia article.}
+
+\def\wikiref[name][pageid]{
+  \title{\name - Wikipedia}
+  \meta{external}{https://en.wikipedia.org/wiki/\pageid}
+  \taxon{reference}
+}
+
+\p{\code{nlabref[name][pageid]}: A reference to a nLab article.}
+
+\def\nlabref[name][pageid]{
+  \title{\name - nLab}
+  \meta{external}{https://ncatlab.org/nlab/show/\pageid}
+  \taxon{reference}
+}
+
+\p{\code{edit[treeid]}: A link to the source code of a tree.}
+
+\def\edit[treeid]{
+  \let\escape[x]{\x}
+  [\escape{Edit}](https://github.com/utensil/forest/blob/main/trees/\treeid.tree)
+}
+
+\p{\code{link[url]}: Linking to a URL without an explicit title.}
+
+\def\link[url]{
+  [⧉](\url)
+}
+
+\p{\code{fold[treeid]}: Making [transcludes](https://www.jonmsterling.com/jms-007L.xml) collapse. (Not working yet)}
+
+\def\fold[body]{
+  \scope{
+    \put?\transclude/expanded{false}
+    \put?\transclude/toc{false}
+
+    \body
+  }
+}
+
+\meta{source}{ \edit{macros} }
