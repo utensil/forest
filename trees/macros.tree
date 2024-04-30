@@ -63,12 +63,17 @@ so the text size almost matches the size output by native forester code. This do
   \taxon{reference}
 }
 
-
 \p{\code{edit[treeid]}: Making a reference to a nLab article.}
 
 \def\edit[treeid]{
   \let\escape[x]{\x}
   [\escape{Edit}](https://github.com/utensil/forest/blob/main/trees/\treeid.tree)
+}
+
+\p{\code{link[url]}: Linking to a URL without an explicit title.}
+
+\def\link[url]{
+  [⧉](\url)
 }
 
 \p{\code{fold[treeid]}: Making [transcludes](https://www.jonmsterling.com/jms-007L.xml) collapse. (Not working yet)}
