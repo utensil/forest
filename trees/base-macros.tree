@@ -31,7 +31,13 @@ so the text size almost matches the size output by native forester code. This do
 }
 
 % From: https://git.sr.ht/~jonsterling/public-trees/tree/main/item/base-macros.tree
-\def\citek[uid]{\let\escape[x]{\x}[\escape{[\uid]}](\uid)}
+\p{\code{citek[uid]}: Refer to a reference entry with brackets.}
+
+\def\citek[uid]{
+  \let\escape[x]{\x}
+  
+  [\escape{[\uid]}](\uid)
+}
 
 \p{\code{texdef[name][reference][body]}: Making a \code{minitex} definition with a reference.}
 
@@ -55,6 +61,14 @@ so the text size almost matches the size output by native forester code. This do
   \title{\name - nLab}
   \meta{external}{https://ncatlab.org/nlab/show/\pageid}
   \taxon{reference}
+}
+
+
+\p{\code{edit[treeid]}: Making a reference to a nLab article.}
+
+\def\edit[treeid]{
+  \let\escape[x]{\x}
+  [\escape{Edit}](https://github.com/utensil/forest/blob/main/trees/\treeid.tree)
 }
 
 \p{\code{fold[treeid]}: Making [transcludes](https://www.jonmsterling.com/jms-007L.xml) collapse. (Not working yet)}
