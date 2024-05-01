@@ -1,17 +1,19 @@
 \title{LaTeX preambles}
 
+\p{These LaTeX preambles are used by [[macros]].}
+
 \p{We place LaTeX preambles in the directory \code{trees} along with the other \code{.trees} files, but we need to refer to them \code{../trees/name.tex}, because LaTeX is running in \code{build} directory.}
 
-\p{We mark every preamble line with a comment \code{tex-strip}, so that we can strip it out when we include the preamble in an actual LaTeX document, or render them via MathJax etc.}
+\p{We mark every preamble line with a comment \code{texstrip}, so that we can strip it out when we convert the whole page to an actual LaTeX document, or render individual snippets via MathJax etc.}
 
 \p{Here we define:}
 
-\p{\code{latex-preamble/common}: Some common LaTeX preambles.}
+\p{\code{latex-preamble/common}: Common LaTeX preambles in \code{preamble.tex}.}
 
 \def\latex-preamble/common{
  \startverb
-\input{../trees/preamble}                               % tex-strip
+\input{../trees/preamble}                               % texstrip
  \stopverb
 }
 
-\p{They are used by [[macros]].}
+
