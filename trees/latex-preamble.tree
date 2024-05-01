@@ -1,13 +1,16 @@
 \title{LaTeX preambles}
 
+\p{We place LaTeX preambles in the directory \code{trees} along with the other \code{.trees} files, but we need to refer to them \code{../trees/name.tex}, because LaTeX is running in \code{build} directory.}
+
+\p{We mark every preamble line with a comment \code{tex-strip}, so that we can strip it out when we include the preamble in an actual LaTeX document, or render them via MathJax etc.}
+
 \p{Here we define:}
 
 \p{\code{latex-preamble/common}: Some common LaTeX preambles.}
 
 \def\latex-preamble/common{
  \startverb
-% because LaTeX is running in `build` directory
-\input{../trees/preamble}
+\input{../trees/preamble}                               % tex-strip
  \stopverb
 }
 
