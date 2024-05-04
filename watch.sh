@@ -2,7 +2,7 @@
 
 ./build.sh
 
-fswatch -o trees/ | while read num ; \
+fswatch -o trees/ assets/ | while read num ; \
   do \
     echo "Rebuilding forest"
     time ./build.sh
