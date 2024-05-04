@@ -28,7 +28,7 @@ forester new --dest=trees --prefix=uts
 Update `build.sh`, then
 
 ```bash
-./build.sh && ./watch.sh
+./watch.sh
 ```
 
 And in a separate terminal:
