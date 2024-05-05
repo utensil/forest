@@ -98,20 +98,36 @@ so the text size almost matches the size output by native forester code. This do
   \body
 }
 
-\p{\code{wikiref[name][pageid]}: A reference to a Wikipedia article.}
+\p{\code{wikiref[name][citeid][pageid]}: A reference to a Wikipedia article.}
 
-\def\wikiref[name][pageid]{
+\def\wikiref[name][citeid][pageid]{
   \title{\name - Wikipedia}
   \meta{external}{https://en.wikipedia.org/wiki/\pageid}
   \taxon{reference}
+  \meta{bibtex}{\startverb
+@misc{wiki-\stopverb\citeid\startverb,
+  title  = {\stopverb\name - Wikipedia\startverb},
+  author = {Wikipedia},
+  year   = {2024},
+  url    = {\stopverbhttps://en.wikipedia.org/wiki/\pageid\startverb}
+}
+  \stopverb}
 }
 
-\p{\code{nlabref[name][pageid]}: A reference to a nLab article.}
+\p{\code{nlabref[name][citeid][pageid]}: A reference to a nLab article.}
 
-\def\nlabref[name][pageid]{
+\def\nlabref[name][citeid][pageid]{
   \title{\name - nLab}
   \meta{external}{https://ncatlab.org/nlab/show/\pageid}
   \taxon{reference}
+  \meta{bibtex}{\startverb
+@misc{nlab-\stopverb\citeid\startverb,
+  title  = {\stopverb\name - nLab\startverb},
+  author = {nLab},
+  year   = {2024},
+  url    = {\stopverbhttps://ncatlab.org/nlab/show/\pageid\startverb}
+}
+  \stopverb}
 }
 
 \p{\code{edit[treeid]}: A link to the source code of a tree.}

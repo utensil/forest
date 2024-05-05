@@ -57,7 +57,7 @@
     <xsl:apply-templates select="/f:tree/f:mainmatter" />
     <xsl:text>\backmatter</xsl:text>
     <xsl:text>\nocite{*}</xsl:text>
-    <xsl:text>\bibliographystyle{plain}</xsl:text>
+    <xsl:text>\bibliographystyle{amsalpha}</xsl:text>
     <xsl:text>\bibliography{\jobname.bib}</xsl:text>
     <xsl:text>\end{document}</xsl:text>
   </xsl:template>
@@ -264,6 +264,10 @@
         <xsl:value-of select="@addr" />
         <xsl:text>}</xsl:text>
       </xsl:when>
+      <xsl:otherwise>
+        <!-- The link links to a tree that's not transcluded, keep the text at least -->
+        <xsl:apply-templates />
+      </xsl:otherwise>
     </xsl:choose>
   </xsl:template>
 
