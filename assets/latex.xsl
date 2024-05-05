@@ -177,7 +177,6 @@
         <xsl:text>}</xsl:text>
       </xsl:when>
       <xsl:when test="/f:tree/f:backmatter/f:references/f:tree/f:frontmatter[f:addr/text()=current()/@addr]">
-        <!-- <xsl:apply-templates /> -->
         <xsl:text>~\cite{</xsl:text>
         <xsl:value-of select="@addr" />
         <xsl:text>}</xsl:text>

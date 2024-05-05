@@ -38,6 +38,7 @@
     <xsl:text>\maketitle</xsl:text>
     <xsl:apply-templates select="/f:tree/f:mainmatter" />
     <xsl:text>\bibliographystyle{ACM-Reference-Format}</xsl:text>
+    <!-- <xsl:text>\bibliographystyle{amsalpha}</xsl:text> -->
     <xsl:text>\bibliography{\jobname.bib}</xsl:text>
     <xsl:text>\end{document}</xsl:text>
   </xsl:template>
