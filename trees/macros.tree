@@ -127,18 +127,26 @@ so the text size almost matches the size output by native forester code. This do
   \stopverb}
 }
 
-\p{\code{prref[name][citeid][prspec][prauthor]}: A reference to a Github Pull Request.}
+\p{\code{prref[citeid][user][repo][prid][prauthor][pryear]}: A reference to a Github Pull Request.}
 
-\def\prref[name][citeid][prspec][prauthor][pryear]{
-  \title{\name - Github PR}
-  \meta{external}{https://github.com/\prspec}
+\def\prref[citeid][user][repo][prid][prauthor][pryear]{
+  \def\prname{\repo PR \prid}
+  \def\prspec{\user\startverb
+/
+\stopverb\repo\startverb
+/pull/
+\stopverb\prid}
+  \def\prurl{https://github.com/\prspec}
+  \def\prtitle{\prname}
+  \title{\prtitle}
+  \meta{external}{\prurl}
   \taxon{reference}
   \meta{bibtex}{\startverb
 @misc{pr-\stopverb\citeid\startverb,
-  title  = {\stopverb\name - Github PR\startverb},
+  title  = {\stopverb\prtitle\startverb},
   author = {\stopverb\prauthor\startverb},
   year   = {\stopverb\pryear\startverb},
-  url    = {\stopverbhttps://github.com/\prspec\startverb}
+  url    = {\stopverb\prurl\startverb}
 }
   \stopverb}
 }
