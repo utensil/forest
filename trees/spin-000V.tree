@@ -5,15 +5,17 @@
 % TODO
 \def\Cl{\mathcal{C}\kern-2pt\ell}
 
-Let $R$ be a commutative ring, $M$ a module over $R$, and $Q$ a quadratic form on $M$.
+Let $M$ be a module over a commutative ring $R$, equipped with a quadratic form $Q: M \to R$.
 
-We have the Clifford algebra equipped with the quadratic form $Q$,
-
+A Clifford algebra over $Q$, denoted $\Cl(Q)$, is
+the ring quotient of the tensor algebra $T(M)$
+by the equivalence relation satisfying $\iota_Q(m)^2 \sim Q(m)$ for all $m \in M,$
+or as in other literatures, is the quotient taken by the two-sided ideal $I_Q$ generated from the set
 $$
-\Cl(Q) \equiv \Cl(M,Q)
+\{ m \otimes m - Q(m) \mid m \in M \}.
 $$
 
-and the group of units (i.e. invertible elements) of $\Cl(Q)$,
+We then have the group of units (i.e. invertible elements) of $\Cl(Q)$,
 
 $$
 \Cl^{\times}(Q) \equiv \left\{ x \in \Cl(Q) \mid \exists x^{-1} \in \Cl(Q), x^{-1} x = x x^{-1}=1\right\}
