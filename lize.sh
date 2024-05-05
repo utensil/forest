@@ -17,10 +17,11 @@ PDF_FILE="$1.pdf"
 saxon -s:output/$XML_FILE -xsl:assets/$XSLFILE -o:output/$TEX_FILE
 
 cd output
-xelatex -halt-on-error -interaction=nonstopmode $TEX_FILE
+xelatex -halt-on-error -interaction=nonstopmode --shell-escape $TEX_FILE
 bibtex $AUX_FILE
-xelatex -halt-on-error -interaction=nonstopmode $TEX_FILE
-xelatex -halt-on-error -interaction=nonstopmode $TEX_FILE
+xelatex -halt-on-error -interaction=nonstopmode --shell-escape $TEX_FILE
+xelatex -halt-on-error -interaction=nonstopmode --shell-escape $TEX_FILE
 
+echo "Open output/$1.log to see the log."
 echo "Open output/$TEX_FILE to see the LaTeX source."
 echo "Open output/$PDF_FILE to see the result."
