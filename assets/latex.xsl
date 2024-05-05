@@ -191,11 +191,12 @@
   <xsl:template match="f:headline" />
 
   <xsl:template match="f:embedded-tex">
-    <xsl:text>\begin{center}</xsl:text>
+    <xsl:text>\hfill \break</xsl:text>
+    <xsl:text>{\centering</xsl:text>
     <xsl:text>\includestandalone{</xsl:text>
     <xsl:value-of select="@hash" />
     <xsl:text>}</xsl:text>
-    <xsl:text>\end{center}</xsl:text>
+    <xsl:text>}</xsl:text>
   </xsl:template>
 
 </xsl:stylesheet>
