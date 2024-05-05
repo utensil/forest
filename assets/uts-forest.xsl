@@ -48,9 +48,24 @@
         <xsl:value-of select="." />
         <xsl:text>]</xsl:text>
     </a>
-    <a class="slug" href="https://github.com/utensil/forest/blob/main/trees/{../f:addr}.tree">
-        <xsl:text>[source]</xsl:text>
-    </a>
+    <xsl:choose>
+        <xsl:when test="/f:tree/f:frontmatter/f:taxon[text()='Person']">
+            <a class="slug" href="https://github.com/utensil/forest/blob/main/trees/people/{../f:addr}.tree">
+                <xsl:text>[source]</xsl:text>
+            </a>
+        </xsl:when>
+        <xsl:when test="/f:tree/f:frontmatter/f:taxon[text()='Reference']">
+            <a class="slug" href="https://github.com/utensil/forest/blob/main/trees/refs/{../f:addr}.tree">
+                <xsl:text>[source]</xsl:text>
+            </a>
+        </xsl:when>
+        <xsl:otherwise>
+            <a class="slug" href="https://github.com/utensil/forest/blob/main/trees/{../f:addr}.tree">
+                <xsl:text>[source]</xsl:text>
+            </a>
+        </xsl:otherwise>
+    </xsl:choose>
+
  </xsl:template>
 
 </xsl:stylesheet>
