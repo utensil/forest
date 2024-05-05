@@ -67,15 +67,13 @@ so the text size almost matches the size output by native forester code. This do
 \def\minitex[body]{
  \scope{
   \put?\base/tex-preamble{
-   \latex-preamble/common
+   \latex-preamble/minipage
   }
   \tex{\get\base/tex-preamble}{
     \begin{minipage}{5.8in}\texstrip
     \vspace{0.5ex}\texstrip
     \setlength{\parskip}{3ex plus 0.5ex minus 0.2ex}\texstrip
-
     \body
-
     \end{minipage}\texstrip
   }
  }
@@ -94,7 +92,6 @@ so the text size almost matches the size output by native forester code. This do
 \def\refdef[name][reference][body]{
   \title{\name \citek{\reference}}
   \taxon{definition}
-  
   \body
 }
 

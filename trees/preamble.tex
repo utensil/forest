@@ -1,12 +1,87 @@
+% From my print.tex
+
+\usepackage{fontspec} % requires xelatex
 \usepackage{amsmath,amsfonts,amsthm,amssymb}
-\usepackage{tikz, tikz-cd, mathtools, stmaryrd}
-\usepackage[a5paper,margin=1in]{geometry}
+\usepackage{newpxtext,newpxmath}
+
+% Extra stuff for Forester
+\newcommand{\texstrip}{}
+\usepackage{mathtools, stmaryrd}
+\usepackage[mode=buildmissing]{standalone}
+\setcounter{tocdepth}{5}
+\setcounter{secnumdepth}{5}
+
+% https://tex.stackexchange.com/a/364574/75671
+\newcommand{\subsubsubsection}[1]{\paragraph{#1}\mbox{}\\}
+% \setcounter{secnumdepth}{4}
+% \setcounter{tocdepth}{4}
+
+% From my preamble/common.tex
+
+\usepackage[usenames,svgnames,dvipsnames]{xcolor}
+\usepackage{amsmath,amsfonts,amsthm,amssymb}
+
+\usepackage{graphicx}
+\DeclareGraphicsExtensions{.svg,.png,.jpg}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{shapes,arrows,decorations}
+% \usepackage{color} 
+% \PassOptionsToPackage{hyphens}{url}
+% \usepackage[unicode]{hyperref}
+\usepackage[unicode,pagebackref=true,bookmarksopen=true, bookmarksdepth=5]{hyperref}
+\setcounter{tocdepth}{5}
+\setcounter{secnumdepth}{5}
+\hypersetup{
+    bookmarksnumbered=true,     
+    bookmarksopen=true,         
+    bookmarksopenlevel=1, 
+    pdfpagemode=UseOutlines
+}
+\usepackage{cleveref}
+
+% NOTE: Won't work in web version for roman numerals, but it works well for PDF version
+\usepackage{enumerate}% http://ctan.org/pkg/enumerate
+
+\date{\today}
+
+\numberwithin{equation}{subsection}
+
+% From my preamble/print.tex
+
+\hyphenpenalty=750
+
+\hypersetup{%
+  colorlinks=true,
+  linkcolor={red!50!black},
+  citecolor={green!50!black},
+  urlcolor={blue!80!black}
+}
+
+\usepackage[utf8]{inputenc}
+
+\usepackage{xspace}
+\usepackage{xpatch}
+
+\usepackage{newunicodechar}
+
+\usepackage{float} %figure inside minipage
+\usepackage[autosize,debug]{dot2texi}
+
+
+\usepackage{backref}
+% Back refs
+\renewcommand*{\backrefalt}[4]{%
+    \ifcase #1 \footnotesize{(Not cited.)}%
+    \or        \footnotesize{(Cited on page~#2)}%
+    \else      \footnotesize{(Cited on pages~#2)}%
+    \fi}
+
+% theorem styles are implemented by package `mdframed` for LaTeX i.e. PDF
+% mostly follows https://github.com/vEnhance/napkin/blob/main/tex/preamble.tex
 \usepackage{thmtools}
 \usepackage[framemethod=TikZ]{mdframed}
 
-\newcommand{\texstrip}{}
-
-\theoremstyle{definition}
 \theoremstyle{definition}
 \mdfdefinestyle{mdbluebox}{%
 	roundcorner = 10pt,
@@ -100,14 +175,6 @@
 	spacebelow=0pt
 ]{def}
 
-\declaretheoremstyle[
-	headfont=\bfseries\sffamily,
-	bodyfont=\normalfont, %\small, %\sffamily,
-	spaceabove=0pt,
-	spacebelow=0pt,
-    numbered=no
-]{def*}
-
 \theoremstyle{definition}
 % \declaretheorem[style=thmblackbox,name=Definition,numberwithin=subsection]{definition}
 \declaretheorem[style=thmbluebox,name=Theorem,numberwithin=subsection]{theorem}
@@ -121,7 +188,6 @@
 % \newtheorem{claim}[theorem]{Claim}
 % \newtheorem{definition}[theorem]{Definition}
 \declaretheorem[style=def,name=Definition,sibling=theorem]{definition}
-\declaretheorem[style=def*,name=Definition]{definition*}
 % \newtheorem{fact}[theorem]{Fact}
 % \newtheorem{abuse}[theorem]{Abuse of Notation}
 
@@ -133,3 +199,4 @@
 \declaretheorem[name=Remark,sibling=theorem,style=thmgreenbox]{remark}
 \declaretheorem[name=Remark,sibling=theorem,style=thmgreenbox*]{remark*}
 % \declaretheorem[name=Step,style=thmgreenbox]{step} % only used in Lebesgue int
+

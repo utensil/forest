@@ -9,7 +9,7 @@
   <xsl:include href="latex.xsl" />
   
   <xsl:template match="/">
-    <xsl:text>\input{../trees/a_book}</xsl:text>
+    <xsl:text>\input{../trees/an_article}</xsl:text>
 
     <xsl:apply-templates select="/f:tree/f:frontmatter" mode="top" />
 
@@ -35,35 +35,33 @@
     </xsl:for-each>
 
     <xsl:apply-templates select="/f:tree/f:backmatter/f:references" />
-    <xsl:text>\frontmatter\maketitle\tableofcontents\mainmatter</xsl:text>
+    <xsl:text>\maketitle</xsl:text>
     <xsl:apply-templates select="/f:tree/f:mainmatter" />
-    <xsl:text>\backmatter</xsl:text>
-    <xsl:text>\nocite{*}</xsl:text>
     <xsl:text>\bibliographystyle{ACM-Reference-Format}</xsl:text>
     <xsl:text>\bibliography{\jobname.bib}</xsl:text>
     <xsl:text>\end{document}</xsl:text>
   </xsl:template>
 
   <xsl:template match="/f:tree/f:mainmatter/f:tree[not(f:frontmatter/f:taxon)]/f:frontmatter/f:title">
-    <xsl:text>\chapter{</xsl:text>
-    <xsl:apply-templates />
-    <xsl:text>}</xsl:text>
-  </xsl:template>
-
-  <xsl:template match="/f:tree/f:mainmatter/f:tree/f:mainmatter/f:tree[not(f:frontmatter/f:taxon)]/f:frontmatter/f:title">
     <xsl:text>\section{</xsl:text>
     <xsl:apply-templates />
     <xsl:text>}</xsl:text>
   </xsl:template>
 
-  <xsl:template match="/f:tree/f:mainmatter/f:tree/f:mainmatter/f:tree/f:mainmatter/f:tree[not(f:frontmatter/f:taxon)]/f:frontmatter/f:title">
+  <xsl:template match="/f:tree/f:mainmatter/f:tree/f:mainmatter/f:tree[not(f:frontmatter/f:taxon)]/f:frontmatter/f:title">
     <xsl:text>\subsection{</xsl:text>
     <xsl:apply-templates />
     <xsl:text>}</xsl:text>
   </xsl:template>
 
-  <xsl:template match="/f:tree/f:mainmatter/f:tree/f:mainmatter/f:tree/f:mainmatter/f:tree/f:mainmatter/f:tree[not(f:frontmatter/f:taxon)]/f:frontmatter/f:title">
+  <xsl:template match="/f:tree/f:mainmatter/f:tree/f:mainmatter/f:tree/f:mainmatter/f:tree[not(f:frontmatter/f:taxon)]/f:frontmatter/f:title">
     <xsl:text>\subsubsection{</xsl:text>
+    <xsl:apply-templates />
+    <xsl:text>}</xsl:text>
+  </xsl:template>
+
+  <xsl:template match="/f:tree/f:mainmatter/f:tree/f:mainmatter/f:tree/f:mainmatter/f:tree/f:mainmatter/f:tree[not(f:frontmatter/f:taxon)]/f:frontmatter/f:title">
+    <xsl:text>\subsubsubsection{</xsl:text>
     <xsl:apply-templates />
     <xsl:text>}</xsl:text>
   </xsl:template>
