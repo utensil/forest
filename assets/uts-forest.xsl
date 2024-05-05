@@ -48,7 +48,7 @@
         <xsl:value-of select="." />
         <xsl:text>]</xsl:text>
     </a>
-    <a class="slug" href="https://github.com/search?q=repo%3Autensil%2Fforest+path%3A**%2F{../f:addr}*">
+    <a class="slug" href="https://github.com/utensil/forest/blob/main/trees/{../f:addr}.tree">
         <xsl:text>[source]</xsl:text>
     </a>
  </xsl:template>
