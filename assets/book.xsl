@@ -180,7 +180,7 @@
   </xsl:template>
 
   <xsl:template match="f:mainmatter">
-    <xsl:apply-templates select="f:p|f:tex|f:ol|f:ul|f:tree" />
+    <xsl:apply-templates />
   </xsl:template>
 
   <xsl:template match="f:p">

@@ -2,9 +2,9 @@
 
 # LaTeXize an xml: NOT working yet!
 
-$XML_FILE = $1
-$TEX_FILE = ${$XML_FILE%.xml}.tex
-$AUX_FILE = ${$XML_FILE%.xml}.aux
+XML_FILE="$1.xml"
+TEX_FILE="$1.tex"
+AUX_FILE="$1.aux"
 
 # brew install saxon
 
