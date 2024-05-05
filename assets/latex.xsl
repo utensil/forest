@@ -188,6 +188,14 @@
     </xsl:choose>
   </xsl:template>
 
+  <xsl:template match="f:link[@type='external']">
+    <xsl:text>\href{</xsl:text>
+    <xsl:value-of select="@href" />
+    <xsl:text>}{</xsl:text>
+    <xsl:apply-templates />
+    <xsl:text>}</xsl:text>
+  </xsl:template>
+
   <xsl:template match="f:headline" />
 
   <xsl:template match="f:embedded-tex">
