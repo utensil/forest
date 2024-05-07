@@ -8,14 +8,29 @@
 
 \p{I'm [[utensil]], my notes are hosted here.} 
 
-\transclude{uts-0001}
+\scope{
+  \put\transclude/title{About}
+    \transclude{uts-0001}
+}
 
-\transclude{uts-0002}
-
-\block{
-    \strong{Math notes}
-}{
-    \ul{
-        \li{ [[spin-0001]] }
+\scope{
+  \put\transclude/title{Math notes}
+  \query{
+    \query/and{
+      \query/tag{notes}
+      \query/tag{math}
+      \query/not{
+        \query/taxon{definition}
+      }
+      \query/not{
+        \query/taxon{reference}
+      }
+      \query/not{
+        \query/taxon{person}
+      }
+      \query/not{
+        \query/tag{macro}
+      }
     }
+  }
 }

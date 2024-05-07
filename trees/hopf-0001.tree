@@ -2,6 +2,7 @@
 
 \import{macros}
 
+\tag{notes}
 \tag{math}
 \tag{clifford}
 \tag{hopf}
@@ -26,4 +27,22 @@
 
   \li{ [[bulacu2011clifford]]: category }
 
+}
+
+\scope{
+  \put\transclude/title{Scattered notes}
+  \query{
+    \query/and{
+      \query/tag{hopf}
+      \query/not{
+        \query/tag{notes}
+      }
+      \query/or{
+        \query/taxon{definition}
+        \query/taxon{theorem}
+        \query/taxon{proof}
+        \query/taxon{lemma}
+      }
+    }
+  }
 }

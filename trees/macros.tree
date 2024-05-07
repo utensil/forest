@@ -1,10 +1,11 @@
 \title{basic macros}
+\tag{macro}
 
 \import{latex-preamble}
 
 \xmlns:html{http://www.w3.org/1999/xhtml}
 
-\strong{Useful macros from [jonsterling's macros](https://git.sr.ht/~jonsterling/public-trees/tree/main/item/base-macros.tree)}
+\strong{Useful macros from [[jonmsterling]]'s [macros](https://git.sr.ht/~jonsterling/public-trees/tree/main/item/base-macros.tree)}
 
 \p{\code{citek[uid]}: Refer to a reference entry with brackets.}
 
@@ -13,6 +14,105 @@
 \p{\code{mark[body]}: Some yellow background mark text.}
 
 \def\mark[body]{\<html:mark>{\body}}
+
+\strong{Useful macros based on [[jonmsterling]]'s [Public bibliographies](https://www.jonmsterling.com/jms-005X.xml)}
+
+\p{\code{make-topic-bibliography[topic]}: A bibliography of papers, presentations, and people related to a topic.}
+
+\def\make-topic-bibliography[topic]{
+  \subtree{
+    \title{accepted papers}
+    \query{
+      \query/and{
+        \query/taxon{reference}
+        \query/tag{accepted}
+        \query/tag{\topic}
+      }
+    }
+  }
+
+  \subtree{
+    \title{refereed papers}
+    \query{
+      \query/and{
+        \query/taxon{reference}
+        \query/tag{refereed}
+        \query/tag{\topic}
+      }
+    }
+  }
+
+  \subtree{
+    \title{manuscripts}
+    \query{
+      \query/and{
+        \query/taxon{reference}
+        \query/tag{preprint}
+        \query/tag{\topic}
+      }
+    }
+  }
+
+  \subtree{
+    \title{dissertations}
+    \query{
+      \query/and{
+        \query/taxon{reference}
+        \query/tag{dissertation}
+        \query/tag{\topic}
+      }
+    }
+  }
+
+  \subtree{
+    \title{technical reports}
+    \query{
+      \query/and{
+        \query/taxon{reference}
+        \query/tag{techreport}
+        \query/tag{\topic}
+      }
+    }
+  }
+
+  \subtree{
+    \title{presentations}
+    \query{
+      \query/and{
+        \query/or{
+         \query/and{
+          \query/tag{workshop}
+          \query/taxon{reference}
+         }
+         \query/taxon{presentation}
+        }
+        \query/tag{\topic}
+      }
+    }
+  }
+
+
+  \subtree{
+    \title{seminar talks}
+    \query{
+      \query/and{
+        \query/taxon{reference}
+        \query/tag{seminar}
+        \query/tag{\topic}
+      }
+    }
+  }
+
+  \subtree{
+    \title{roladex}
+    \query{
+      \query/and{
+        \query/taxon{person}
+        \query/tag{\topic}
+      }
+    }
+  }
+}
 
 \strong{Useful macros from [CAIMEOX's macros](https://github.com/CAIMEOX/caimeox.github.io/blob/main/trees/macros.tree)}
 
