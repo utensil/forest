@@ -45,12 +45,14 @@
 
  <!-- Mine -->
 
+ <!-- Override the addr template -->
  <xsl:template match="f:addr" priority="10">
     <a class="slug" href="{../f:route}">
         <xsl:text>[</xsl:text>
         <xsl:value-of select="." />
         <xsl:text>]</xsl:text>
     </a>
+    <!-- uts-begin: Add the source link to the source of the tree, only works for my own forest -->
     <xsl:choose>
         <xsl:when test="/f:tree/f:frontmatter/f:taxon[text()='Person']">
             <a class="slug" href="https://github.com/utensil/forest/blob/main/trees/people/{../f:addr}.tree">
@@ -68,6 +70,7 @@
             </a>
         </xsl:otherwise>
     </xsl:choose>
+    <!-- uts-end -->
 
  </xsl:template>
 
