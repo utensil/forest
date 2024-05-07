@@ -155,7 +155,7 @@
 
   <xsl:template match="f:ref[@taxon]">
     <xsl:value-of select="@taxon" />
-    <xsl:text>~</xsl:text>
+    <xsl:text>\unskip~</xsl:text>
     <xsl:text>\ref{</xsl:text>
     <xsl:value-of select="@addr" />
     <xsl:text>}</xsl:text>
