@@ -182,8 +182,11 @@
         <xsl:text>}</xsl:text>
       </xsl:when>
       <xsl:otherwise>
-        <!-- The link links to a tree that's not transcluded, keep the text at least -->
+        <xsl:text>\href{https://utensil.github.io/forest/</xsl:text>
+        <xsl:value-of select="@href" />
+        <xsl:text>}{</xsl:text>
         <xsl:apply-templates />
+        <xsl:text>}</xsl:text>
       </xsl:otherwise>
     </xsl:choose>
   </xsl:template>
