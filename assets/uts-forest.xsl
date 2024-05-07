@@ -16,6 +16,9 @@
  <xsl:include href="links.xsl" />
  <xsl:include href="tree.xsl" />
 
+ <!-- Override layout -->
+ <xsl:include href="uts-layout.xsl" />
+
  <!-- From https://git.sr.ht/~jonsterling/forest-assets/tree/main/item/jms-forest.xsl -->
 
  <xsl:template match="beamer:*"></xsl:template>
