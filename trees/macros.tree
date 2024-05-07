@@ -4,6 +4,7 @@
 \import{latex-preamble}
 
 \xmlns:html{http://www.w3.org/1999/xhtml}
+\xmlns:fr{http://www.jonmsterling.com/jms-005P.xml}
 
 \strong{Useful macros from [[jonmsterling]]'s [macros](https://git.sr.ht/~jonsterling/public-trees/tree/main/item/base-macros.tree)}
 
@@ -170,29 +171,41 @@ so the text size almost matches the size output by native forester code. This do
    \latex-preamble/minipage
   }
   \tex{\get\base/tex-preamble}{
-    \begin{minipage}{5.8in}\texstrip
+    % \begin{minipage}{5.8in}\texstrip
+    \begin{minipage}{80ex}\texstrip
     \vspace{0.5ex}\texstrip
-    \setlength{\parskip}{3ex plus 0.5ex minus 0.2ex}\texstrip
+    \setlength{\parskip}{3.3ex}\texstrip
     \body
     \end{minipage}\texstrip
   }
  }
 }
 
-\p{\code{texdef[name][reference][body]}: A \code{minitex} definition with a reference.}
+\p{\code{refnote[name][reference][body]}: A note with a reference.}
 
-\def\texdef[name][reference][body]{
+\def\refnote[name][reference][body]{
   \title{\name \citek{\reference}}
-  \taxon{definition}
-  \minitex{\body}
+  \body
+}
+
+\p{\code{texnote[name][reference][body]}: A \code{minitex} note with a reference.}
+
+\def\texnote[name][reference][body]{
+  \refnote{\name}{\reference}{\minitex{\body}}
 }
 
 \p{\code{refdef[name][reference][body]}: A definition with a reference.}
 
 \def\refdef[name][reference][body]{
-  \title{\name \citek{\reference}}
   \taxon{definition}
-  \body
+  \refnote{\name}{\reference}{\body}
+}
+
+\p{\code{texdef[name][reference][body]}: A \code{minitex} definition with a reference.}
+
+\def\texdef[name][reference][body]{
+  \taxon{definition}
+  \texnote{\name}{\reference}{\body}
 }
 
 \p{\code{wikiref[name][citeid][pageid]}: A reference to a Wikipedia article.}

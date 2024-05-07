@@ -76,6 +76,10 @@
     <xsl:text>exercise</xsl:text>
   </xsl:template>
 
+  <xsl:template match="f:taxon[text()='Remark']">
+    <xsl:text>remark</xsl:text>
+  </xsl:template>
+
   <xsl:template match="f:tree[f:frontmatter/f:taxon[text()='Proof']]">
     <xsl:text>\begin{proof}</xsl:text>
     <xsl:apply-templates select="f:mainmatter" />
@@ -204,7 +208,10 @@
   <xsl:template match="f:embedded-tex">
     <xsl:text>\hfill \break</xsl:text>
     <xsl:text>{\centering</xsl:text>
-    <xsl:text>\includestandalone{</xsl:text>
+    <!-- https://tex.stackexchange.com/a/550265/75671 -->
+    <!-- https://tex.stackexchange.com/a/308876/75671 -->
+    <!-- <xsl:text>\fontsize{14}{14}\selectfont</xsl:text> -->
+    <xsl:text>\includestandalone[scale=0.91]{</xsl:text>
     <xsl:value-of select="@hash" />
     <xsl:text>}</xsl:text>
     <xsl:text>}</xsl:text>
