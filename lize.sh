@@ -19,12 +19,12 @@ cp output/$XML_FILE build/$XML_FILE
 saxon -s:build/$XML_FILE -xsl:assets/$XSLFILE -o:build/$TEX_FILE
 
 cd build
-# xelatex -halt-on-error -interaction=nonstopmode --shell-escape $TEX_FILE
-# bibtex $AUX_FILE
-# xelatex -halt-on-error -interaction=nonstopmode --shell-escape $TEX_FILE
-# xelatex -halt-on-error -interaction=nonstopmode --shell-escape $TEX_FILE
+xelatex -halt-on-error -interaction=nonstopmode --shell-escape $TEX_FILE
+bibtex $AUX_FILE
+xelatex -halt-on-error -interaction=nonstopmode --shell-escape $TEX_FILE
+xelatex -halt-on-error -interaction=nonstopmode --shell-escape $TEX_FILE
 
-tectonic -Z shell-escape-cwd=. --keep-intermediates --outdir . $TEX_FILE
+# tectonic -Z shell-escape-cwd=. --keep-intermediates --outdir . $TEX_FILE
 
 cd ..
 
