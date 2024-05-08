@@ -206,11 +206,13 @@
   <xsl:template match="f:headline" />
 
   <xsl:template match="f:embedded-tex">
-    <xsl:text>\hfill \break</xsl:text>
+    <!-- https://tex.stackexchange.com/a/630191/75671 -->
+    <xsl:text>\unskip \hspace*{\fill} \break</xsl:text>
     <xsl:text>{\centering</xsl:text>
     <!-- https://tex.stackexchange.com/a/550265/75671 -->
     <!-- https://tex.stackexchange.com/a/308876/75671 -->
     <!-- <xsl:text>\fontsize{14}{14}\selectfont</xsl:text> -->
+    <!-- https://latexref.xyz/_005cincludegraphics.html -->
     <xsl:text>\includestandalone[width=1.0\textwidth]{</xsl:text>
     <xsl:value-of select="@hash" />
     <xsl:text>}</xsl:text>

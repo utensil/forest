@@ -2,6 +2,7 @@
 
 echo
 echo "Rebuilding forest"
+rm -rf build
 rm -rf output
 time opam exec -- forester build # --dev
 echo
