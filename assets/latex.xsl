@@ -211,7 +211,7 @@
     <!-- https://tex.stackexchange.com/a/550265/75671 -->
     <!-- https://tex.stackexchange.com/a/308876/75671 -->
     <!-- <xsl:text>\fontsize{14}{14}\selectfont</xsl:text> -->
-    <xsl:text>\includestandalone[scale=0.91]{</xsl:text>
+    <xsl:text>\includestandalone[width=1.0\textwidth]{</xsl:text>
     <xsl:value-of select="@hash" />
     <xsl:text>}</xsl:text>
     <xsl:text>}</xsl:text>
