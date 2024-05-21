@@ -1,0 +1,25 @@
+\import{macros}
+% clifford hopf spin
+\tag{clifford}
+
+% definition theorem lemma construction observation
+% convention corollary axiom example exercise proof
+% discussion remark
+\taxon{definition}
+\refnote{Kronecker delta}{wiki-dirac-matrices}{
+\p{
+Kronecker delta
+##{\delta_{i j}= \begin{cases}0 & \text { if } i \neq j \\ 1 & \text { if } i=j\end{cases}}
+or with use of [Iverson bracket](https://en.wikipedia.org/wiki/Iverson_bracket):
+##{
+\delta_{i j}=[i=j] .
+}
+where #{[P]} is defined as:
+##{
+[P]=\begin{cases}1 & \text { if } P \text { is true } \\ 0 & \text { if } P \text { is false }\end{cases}
+}
+}
+
+\p{In Lean 4, the Kronecker delta [could be defined as](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/kronecker.20symbol):}
+\code{def δ (i j : I) : R := (Pi.single i 1 : _ → R) j}
+}
