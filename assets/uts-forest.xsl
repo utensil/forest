@@ -9,7 +9,7 @@
 
  <xsl:output method="html" encoding="utf-8" indent="yes" doctype-public="" doctype-system="" />
 
- <!-- base -->
+ <!-- base from https://git.sr.ht/~jonsterling/forester-base-theme -->
 
  <xsl:include href="core.xsl" />
  <xsl:include href="metadata.xsl" />
@@ -73,5 +73,20 @@
     <!-- uts-end -->
 
  </xsl:template>
+
+<xsl:template match="f:embedded-tex">
+<center>
+    <!-- https://www.xml.com/pub/a/2003/07/09/xslt.html -->
+    <!-- <xsl:value-of select="unparsed-text('resources/{@hash}.svg','UTF-8')"/> -->
+    <!-- <xsl:copy-of select="document('resources/{@hash}.svg')"/> -->
+    <!-- <img src="resources/{@hash}.svg" class="uts111"/> -->
+    <!-- https://vecta.io/blog/best-way-to-embed-svg -->
+    <!-- <object type="image/svg+xml" data="resources/{@hash}.svg" class="embedded-tex"> -->
+        <!-- fall back -->
+        <!-- <img src="resources/{@hash}.svg" /> -->
+    <!-- </object> -->
+    <img src="resources/{@hash}.svg" onload="SVGInject(this)" class="embedded-tex-svg"/>
+</center>
+</xsl:template>
 
 </xsl:stylesheet>

@@ -29,6 +29,8 @@
         <title>
           <xsl:value-of select="/f:tree/f:frontmatter/f:title" />
         </title>
+        <script src="https://cdn.jsdelivr.net/gh/iconfu/svg-inject@v1.2.3/dist/svg-inject.min.js"></script>
+        <script src="uts-forester.js"></script>
       </head>
       <body>
         <ninja-keys placeholder="Start typing a note title or ID"></ninja-keys>
@@ -39,6 +41,9 @@
                 <a href="index.xml" title="Home">
                   <xsl:text>« Home</xsl:text>
                 </a>
+                <span class="logo-switches">
+                  <button id="theme-toggle" accesskey="t" title="(Alt + T)"><svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path></svg><svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg></button>
+                </span>
               </div>
             </nav>
           </header>

@@ -50,3 +50,88 @@ nav#toc a.slug {
     line-break: strict;
     word-break: keep-all;
 } */
+
+:root,
+:root[data-applied-mode="light"] {
+    color-scheme: light;
+    --uts-text: black;
+    --uts-text-gentle: rgb(132, 132, 132);
+    --uts-background: white;
+    /* #f4ecd9; */
+}
+
+:root[data-applied-mode="dark"] {
+    color-scheme: dark;
+    --uts-text: #d5d4d0;
+    --uts-text-gentle: #d5d4d0;
+    --uts-background: #262626;
+}
+
+body {
+    background-color: var(--uts-background) !important;
+}
+
+body,
+a,
+span.taxon,
+nav#toc,
+nav#toc a {
+    color: var(--uts-text) !important;
+}
+
+.slug,
+.doi,
+.orcid,
+nav#toc a.link.local,
+nav#toc .link.local a,
+nav#toc a.slug {
+    color: var(--uts-text-gentle) !important;
+}
+
+button#theme-toggle {
+    font-size: 26px;
+    margin: auto 4px;
+    cursor: pointer;
+    adding: 0;
+    font: inherit;
+    background: 0 0;
+    border: 0;
+}
+
+:root svg#sun,
+:root[data-applied-mode="dark"] svg#moon {
+    display: none;
+}
+
+:root[data-applied-mode="dark"] svg#sun {
+    display: block;
+    color: var(--uts-text);
+}
+
+/* :root[data-applied-mode="dark"] img[src$=".svg"] {
+    background-color: white;
+} */
+
+/* object.embedded-tex {
+    width: 88ex
+}
+
+:root[data-applied-mode="dark"] .embedded-tex svg text {
+    fill: white;
+}
+
+:root[data-applied-mode="dark"] .embedded-tex svg path.outline_glyph {
+    fill: white;
+}
+
+:root[data-applied-mode="dark"] .embedded-tex svg path.typst-shape {
+    stroke: white;
+} */
+
+svg.embedded-tex-svg {
+    max-width: 97%;
+}
+
+:root[data-applied-mode="dark"] svg.embedded-tex-svg text {
+    fill: white;
+}
