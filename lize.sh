@@ -5,7 +5,7 @@ set -e
 
 # LaTeXize an xml: NOT working yet!
 
-XSLFILE="${2:-book}".xsl
+XSLFILE="${2:-article}".xsl
 
 XML_FILE="$1.xml"
 TEX_FILE="$1.tex"
