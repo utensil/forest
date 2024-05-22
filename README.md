@@ -16,6 +16,9 @@ git remote add origin https://github.com/utensil/forest.git
 git branch -M main
 git push -u origin main
 
+# git submodule deinit --all -f
+# git rm theme -f
+# git submodule add -f -b fix-data-taxon --name theme https://git.sr.ht/~utensil/forester-base-theme theme
 git submodule update --init --recursive
 git submodule update --remote --merge
 ```

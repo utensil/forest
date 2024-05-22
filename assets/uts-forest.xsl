@@ -83,7 +83,7 @@
   <!-- uts-end -->
 
   <!-- uts-begin: Override to add a taxon class -->
-  <xsl:template match="f:tree">
+  <!-- <xsl:template match="f:tree">
     <section>
       <xsl:attribute name="lang">
         <xsl:choose>
@@ -131,7 +131,7 @@
     </section>
 
     <xsl:apply-templates select="f:backmatter" />
-  </xsl:template>
+  </xsl:template> -->
 
   <!-- uts-end -->
 
