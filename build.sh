@@ -15,7 +15,7 @@ function build {
 }
 
 echo
-echo "Rebuilding forest"
+echo "⭐ Rebuilding forest"
 time build
 echo
 
