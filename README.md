@@ -1,7 +1,7 @@
 This forest is initialized with the following command:
 
 ```bash
-brew install opam bubblewrap fswatch
+brew install opam bubblewrap watchexec
 opam init --auto-setup --yes
 opam update --yes
 opam install forester --yes
