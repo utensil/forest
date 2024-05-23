@@ -19,17 +19,23 @@ cp output/$XML_FILE build/$XML_FILE
 saxon -s:build/$XML_FILE -xsl:assets/$XSLFILE -o:build/$TEX_FILE
 
 cd build
-xelatex -halt-on-error -interaction=nonstopmode --shell-escape $TEX_FILE
-bibtex $AUX_FILE
-xelatex -halt-on-error -interaction=nonstopmode --shell-escape $TEX_FILE
-xelatex -halt-on-error -interaction=nonstopmode --shell-escape $TEX_FILE
 
-# tectonic -Z shell-escape-cwd=. --keep-intermediates --outdir . $TEX_FILE
+# if environment variable CI is set
+# if [ -n "$CI" ]; then
+#     echo "lize.sh| CI is set, using xelatex"
+    xelatex -halt-on-error -interaction=nonstopmode --shell-escape $TEX_FILE
+    bibtex $AUX_FILE
+    xelatex -halt-on-error -interaction=nonstopmode --shell-escape $TEX_FILE
+    xelatex -halt-on-error -interaction=nonstopmode --shell-escape $TEX_FILE
+# else
+#     echo "lize.sh| CI is not set, using tectonic"
+#     tectonic -Z shell-escape-cwd=. --keep-intermediates --keep-logs --outdir . $TEX_FILE
+# fi
 
 cd ..
 
 cp build/$PDF_FILE output/$PDF_FILE
 
-echo "Open build/$1.log to see the log."
-echo "Open build/$TEX_FILE to see the LaTeX source."
-echo "Open output/$PDF_FILE to see the result."
+echo "lize.sh| Open build/$1.log to see the log."
+echo "lize.sh| Open build/$TEX_FILE to see the LaTeX source."
+echo "lize.sh| Open output/$PDF_FILE to see the result."
