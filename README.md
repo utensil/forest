@@ -28,18 +28,7 @@ Add a `forest.toml`, then:
 ```bash
 forester new --dest=trees --prefix=uts
 ```
-Update `build.sh`, then
-
-```bash
-./watch.sh
-```
-
-And in a separate terminal:
-
-```bash
-# python3 -m http.server 1314 -d output
-http-server -p 1314 output
-```
+Run `./dev.sh` to watch the modified files and serve them to be browsed.
 
 Then open `http://localhost:1314` in your browser.
 
