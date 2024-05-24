@@ -25,17 +25,14 @@ function setAppliedMode(mode) {
 }
 
 function rotatePreferences(userPreference) {
-    if (userPreference === "system") {
+    if (userPreference === "dark") {
         return "light";
     }
     if (userPreference === "light") {
         return "dark";
     }
-    if (userPreference === "dark") {
-        return "system";
-    }
     // for invalid values, just in case
-    return "system";
+    return rotatePreferences(getAppliedMode("system"));
 }
 
 // the class of body is toggled between none and dark
