@@ -27,6 +27,10 @@ echo "⭐ Rebuilding forest"
 time build
 echo
 
-echo "⭐ Rebuilding LaTeX"
-time lize
-echo
+#if environment variable CI or LIZE is set
+if [ -n "$CI" ] || [ -n "$LIZE" ]; then
+  echo "⭐ Rebuilding LaTeX"
+  time lize
+  echo
+fi
+

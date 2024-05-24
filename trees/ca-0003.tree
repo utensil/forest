@@ -1,0 +1,30 @@
+\import{spin-macros}
+% clifford hopf spin
+\tag{clifford}
+
+% definition theorem lemma construction observation
+% convention corollary axiom example exercise proof
+% discussion remark
+% \taxon{}
+\refdef{Bilinear form}{wieser2024blueprint}{
+\p{
+    \label{BilinForm}
+    \leanok
+    \lean{BilinForm}
+    \uses{Module}}
+
+\p{Let #{R} be a ring, #{M} an #{R}-module. An \newvocab{bilinear form} #{B} over #{M} is a map #{B : M \to M \to R}, satisfying:
+
+\ol{
+    \li{#{ B(x + y, z) = B(x, z) +B(y, z) }}
+    
+    \li{#{ B(x, y + z) = B(x, y) +B(x, z) }}
+    
+    \li{#{ B(a \bu x, y) = a * B(x, y)}}
+    
+    \li{#{ B(x, a \bu y) = a * B(x, y)}}
+}
+
+for all #{a \in R, x, y, z \in M}.
+}}
+
