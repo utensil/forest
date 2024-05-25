@@ -43,7 +43,7 @@ TREE_TEMPLATE = r"""
 \date{{{date}}}
 {authors}
 \taxon{{reference}}
-
+{meta_doi}{meta_external}
 \meta{{bibtex}}{{\startverb
 {original_bibtex}\stopverb}}
 """
@@ -68,6 +68,14 @@ def format_number(number, length=2):
 
 def format_date(date_parts):
     return '-'.join([format_number(part) for part in date_parts])
+
+def format_doi(reference):
+    doi = reference.get('DOI', None)
+    return f'\\meta{{doi}}{{{doi}}}\n' if doi else ''
+
+def format_external(reference):
+    url = reference.get('URL', None)
+    return f'\\meta{{external}}{{{url}}}\n' if url else ''
 
 print(f'📚 Splitting {csljson_file.relative_to(project_root)}')
 csl_file = bib_dir / 'forest.csl'
@@ -95,6 +103,8 @@ for i, reference in enumerate(references):
         formatted = TREE_TEMPLATE.format(
             title=reference['title'],
             date=format_date(reference['issued']['date-parts'][0]),
+            meta_doi=format_doi(reference),
+            meta_external=format_external(reference),
             authors=''.join([f'\\author{{{format_author(author)}}}' for author in reference['author']]),
             original_bibtex=original_bibtex)
         f.write(formatted)
