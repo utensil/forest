@@ -54,6 +54,10 @@ jobs:
         run: |
           sudo apt-get install libev-dev dvisvgm
           opam install forester --yes
+      - name: Install Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
       - name: Build with forester
         run: |
           eval $(opam env)

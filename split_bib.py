@@ -5,6 +5,8 @@ import shutil
 import subprocess
 import sys
 from pathlib import Path
+# pip install bibtexparser
+import bibtexparser
 
 # Get the script directory
 script_dir = Path(__file__).resolve().parent
@@ -23,28 +25,75 @@ print(f'📚 {bib_file.relative_to(project_root)} -> {csljson_file.relative_to(p
 # Run the pandoc command
 subprocess.run(['pandoc', f'{bib_file}', '-s', '-f', 'biblatex', '-t', 'csljson', '-o', csljson_file], check=True)
 
+# Load the BibTeX file
+with open(bib_file, encoding='utf-8') as f:
+    bib_db = bibtexparser.load(f)
+
 csljson_file_name = csljson_file.stem
 
 with open(csljson_file, encoding='utf-8') as f:
     references = json.load(f)
 
 # create a directory to store the split files
-csljson_files = bib_dir / 'csljson_files'
-os.makedirs(csljson_files, exist_ok=True)
+generated_dir = bib_dir / 'generated'
+os.makedirs(generated_dir, exist_ok=True)
+
+TREE_TEMPLATE = r"""
+\title{{{title}}}
+\date{{{date}}}
+{authors}
+\taxon{{reference}}
+
+\meta{{bibtex}}{{\startverb
+{original_bibtex}\stopverb}}
+"""
+
+def format_author(author):
+    if 'literal' in author:
+        return author['literal']
+    elif 'given' in author and 'family' in author:
+        return f'{author["given"]} {author["family"]}'
+    else:
+        return ''
+
+# format a number with leading zeros
+def format_number(number, length=2):
+    format_string = "{:0" + str(length) + "}"
+    return format_string.format(number)
+
+def format_date(date_parts):
+    return '-'.join([format_number(part) for part in date_parts])
+
 
 print(f'📚 Splitting {csljson_file.relative_to(project_root)}')
 csl_file = bib_dir / 'forest.csl'
 for i, reference in enumerate(references):
-    citekey = reference.get('id', f'{csljson_file_name}_{i}')
-    csljson_file_i = csljson_files / f'{citekey}.json'
-    tree_file_i = csljson_files / f'{citekey}.tree'
+    citekey = reference['id']
+    csljson_file_i = generated_dir / f'{citekey}.json'
+    tree_file_i = generated_dir / f'{citekey}.tree'
+    print(f'📚 {csljson_file_i.relative_to(project_root)} -> {tree_file_i.relative_to(project_root)}')
+
+    bibtex_entry = bib_db.entries_dict[citekey]
+    entrydb = bibtexparser.bibdatabase.BibDatabase()
+    entrydb.entries = [bibtex_entry]
+    original_bibtex = bibtexparser.dumps(entrydb)
 
     with open(csljson_file_i, 'w', encoding='utf-8') as f:
-        # replace all line breaks to a space
-        reference['title'] = reference.get('title', '').replace('\n', ' ')
-        reference['title_short'] = reference.get('title', '').split(' ')[0]
+        # reference['title'] = reference.get('title', '').replace('\n', ' ')
+        # reference['title_short'] = reference.get('title', '').split(' ')[0].lower()
+
+        # print(original_bibtex)
+        reference['original_bibtex'] = original_bibtex
         json.dump([reference], f)
         f.flush()
 
-    print(f'📚 {csljson_file_i.relative_to(project_root)} -> {tree_file_i.relative_to(project_root)}')
-    subprocess.run(['pandoc', '--citeproc', '-f', 'csljson', csljson_file_i, f'--csl={csl_file}', '-s', '-t', 'plain', '-o', tree_file_i], check=True)
+    with open(tree_file_i, 'w', encoding='utf-8') as f:
+        formatted = TREE_TEMPLATE.format(
+            title=reference['title'],
+            date=format_date(reference['issued']['date-parts'][0]),
+            authors=''.join([f'\\author{{{format_author(author)}}}' for author in reference['author']]),
+            original_bibtex=original_bibtex)
+        f.write(formatted)
+        f.flush()
+
+    # subprocess.run(['pandoc', '--citeproc', '-f', 'csljson', csljson_file_i, f'--csl={csl_file}', '-s', '-t', 'plain', '-o', tree_file_i], check=True)
