@@ -52,7 +52,12 @@ def format_author(author):
     if 'literal' in author:
         return author['literal']
     elif 'given' in author and 'family' in author:
-        return f'{author["given"]} {author["family"]}'
+        author_name = []
+        author_name.append(author['given'])
+        if 'dropping-particle' in author:
+            author_name.append(author['dropping-particle'])
+        author_name.append(author['family'])
+        return ' '.join(author_name)
     else:
         return ''
 
@@ -64,13 +69,12 @@ def format_number(number, length=2):
 def format_date(date_parts):
     return '-'.join([format_number(part) for part in date_parts])
 
-
 print(f'📚 Splitting {csljson_file.relative_to(project_root)}')
 csl_file = bib_dir / 'forest.csl'
 for i, reference in enumerate(references):
     citekey = reference['id']
     csljson_file_i = generated_dir / f'{citekey}.json'
-    tree_file_i = generated_dir / f'{citekey}.tree'
+    tree_file_i = bib_dir / f'{citekey}.tree'
     print(f'📚 {csljson_file_i.relative_to(project_root)} -> {tree_file_i.relative_to(project_root)}')
 
     bibtex_entry = bib_db.entries_dict[citekey]
@@ -95,5 +99,3 @@ for i, reference in enumerate(references):
             original_bibtex=original_bibtex)
         f.write(formatted)
         f.flush()
-
-    # subprocess.run(['pandoc', '--citeproc', '-f', 'csljson', csljson_file_i, f'--csl={csl_file}', '-s', '-t', 'plain', '-o', tree_file_i], check=True)
