@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Based on https://gist.github.com/AyeGill/8ddd7d895dbc5b4f215574c0dae428f6#file-forester-csl, heavily modified -->
+<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" demote-non-dropping-particle="sort-only" default-locale="en-US">
+    <info>
+        <title>Forester Citation Style</title>
+        <id>http://www.zotero.org/styles/forester-citation-style</id>
+        <author>
+            <name>Eigil Fjeldgren Rischel</name>
+        </author>
+        <category citation-format="label"/>
+        <category field="generic-base"/>
+        <updated>2024-05-24T13:26:25+00:00</updated>
+        <rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License</rights>
+    </info>
+    <macro name="zotero2bibtexType">
+        <choose>
+            <if type="bill book graphic legal_case legislation motion_picture report song" match="any">
+                <text value="book"/>
+            </if>
+            <else-if type="chapter" match="any">
+                <text value="inbook"/>
+            </else-if>
+            <else-if type="article article-journal article-magazine article-newspaper" match="any">
+                <text value="article"/>
+            </else-if>
+            <else-if type="thesis" match="any">
+                <text value="phdthesis"/>
+            </else-if>
+            <else-if type="manuscript" match="any">
+                <text value="unpublished"/>
+            </else-if>
+            <else-if type="paper-conference" match="any">
+                <text value="inproceedings"/>
+            </else-if>
+            <else-if type="report" match="any">
+                <text value="techreport"/>
+            </else-if>
+            <else>
+                <text value="misc"/>
+            </else>
+        </choose>
+    </macro>
+    <macro name="citeKey">
+        <text variable="id"/>
+    </macro>
+    <macro name="author-short">
+        <names variable="author">
+            <name form="short" delimiter="_" delimiter-precedes-last="always" et-al-min="11" et-al-use-first="10"/>
+            <substitute>
+                <names variable="editor"/>
+                <names variable="translator"/>
+                <choose>
+                    <if type="bill book graphic legal_case legislation motion_picture report song" match="any">
+                        <text variable="title" form="short"/>
+                    </if>
+                    <else>
+                        <text variable="title" form="short"/>
+                    </else>
+                </choose>
+            </substitute>
+        </names>
+    </macro>
+    <macro name="issued-year">
+        <date variable="issued">
+            <date-part name="year"/>
+        </date>
+    </macro>
+    <macro name="issued-month">
+        <date variable="issued">
+            <date-part name="month" form="short" strip-periods="true"/>
+        </date>
+    </macro>
+    <macro name="author">
+        <names variable="author">
+            <name sort-separator=", " delimiter=" and " delimiter-precedes-last="always" name-as-sort-order="all"/>
+        </names>
+    </macro>
+    <macro name="editor-translator">
+        <names variable="editor translator" delimiter=", ">
+            <name sort-separator=", " delimiter=" and " delimiter-precedes-last="always" name-as-sort-order="all"/>
+        </names>
+    </macro>
+    <macro name="title">
+        <text variable="title"/>
+    </macro>
+    <macro name="title-short">
+        <text variable="title_short"/>
+    </macro>
+    <macro name="number">
+        <text variable="issue"/>
+        <text variable="number"/>
+    </macro>
+    <macro name="container-title">
+        <choose>
+            <if type="chapter paper-conference" match="any">
+                <text variable="container-title" prefix=" booktitle={" suffix="}"/>
+            </if>
+            <else>
+                <text variable="container-title" prefix=" journal={" suffix="}"/>
+            </else>
+        </choose>
+    </macro>
+    <macro name="publisher">
+        <choose>
+            <if type="thesis">
+                <text variable="publisher" prefix=" school={" suffix="}"/>
+            </if>
+            <else-if type="report">
+                <text variable="publisher" prefix=" institution={" suffix="}"/>
+            </else-if>
+            <else>
+                <text variable="publisher" prefix=" publisher={" suffix="}"/>
+            </else>
+        </choose>
+    </macro>
+    <macro name="pages">
+        <text variable="page"/>
+    </macro>
+    <macro name="edition">
+        <text variable="edition"/>
+    </macro>
+    <citation disambiguate-add-year-suffix="true" disambiguate-add-names="false" disambiguate-add-givenname="false" collapse="year">
+        <sort>
+            <key macro="author"/>
+            <key variable="issued"/>
+        </sort>
+        <layout delimiter="_">
+            <text macro="citeKey"/>
+        </layout>
+    </citation>
+    <bibliography hanging-indent="false">
+        <sort>
+            <key macro="author"/>
+            <key variable="issued"/>
+        </sort>
+        <layout>
+            <group display="block">
+                <text macro="title" prefix="\title{" suffix="}"/>
+            </group>
+            <group display="block">
+                <date delimiter="-" variable="issued" text-case="lowercase" prefix="\date{" suffix="}&#xA;">
+                    <date-part name="year"/>
+                    <date-part name="month" form="numeric-leading-zeros"/>
+                    <date-part name="day" form="numeric-leading-zeros"/>
+                </date>
+            </group>
+            <group display="block">
+                <text value="\taxon{reference}" />
+            </group>
+            <group display="block">
+                <text variable="DOI" prefix="\meta{doi}{" suffix="}"/>
+            </group>
+            <group display="block">
+                <text variable="URL" prefix="\meta{external}{" suffix="}"/>
+            </group>
+            <group display="block">
+                <names variable="author">
+                    <name prefix="\author{" suffix="}" delimiter=""/>
+                </names>
+            </group>
+            <group display="block">
+                <text value="\meta{bibtex}{\startverb"/>
+            </group>
+            <group display="block">
+                <text macro="zotero2bibtexType" prefix="@"/>
+                <text value="{"/>
+                <text macro="citeKey" suffix=","/>
+            </group>
+            <group display="block">
+                <text macro="title" prefix=" title={" suffix="},"/>
+            </group>
+            <group display="block">
+                <text macro="author" prefix=" author={" suffix="},"/>
+            </group>
+            <group display="block">
+                <text macro="issued-year" prefix=" year={" suffix="},"/>
+            </group>
+            <group display="block">
+                <text macro="issued-month" prefix=" month={" suffix="},"/>
+            </group>
+            <group display="block">
+                <text variable="publisher-place" prefix=" address={" suffix="},"/>
+            </group>
+            <group display="block">
+                <text variable="chapter-number" prefix=" chapter={" suffix="},"/>
+            </group>
+            <group display="block">
+                <text macro="edition" prefix=" edition={" suffix="},"/>
+            </group>
+            <group display="block">
+                <text variable="genre" prefix=" type={" suffix="},"/>
+            </group>
+            <group display="block">
+                <text variable="collection-title" prefix=" series={" suffix="},"/>
+            </group>
+            <group display="block">
+                <text variable="volume" prefix=" volume={" suffix="},"/>
+            </group>
+            <group display="block">
+                <text variable="license" prefix=" rights={" suffix="},"/>
+            </group>
+            <group display="block">
+                <text variable="ISBN" prefix=" ISBN={" suffix="},"/>
+            </group>
+            <group display="block">
+                <text variable="ISSN" prefix=" ISSN={" suffix="},"/>
+            </group>
+            <group display="block">
+                <text variable="call-number" prefix=" callNumber={" suffix="},"/>
+            </group>
+            <group display="block">
+                <text variable="archive_location" prefix=" archiveLocation={" suffix="},"/>
+            </group>
+            <group display="block">
+                <text variable="URL" prefix=" url={" suffix="},"/>
+            </group>
+            <group display="block">
+                <text variable="DOI" prefix=" DOI={" suffix="},"/>
+            </group>
+            <group display="block">
+                <text variable="abstract" prefix=" abstractNote={" suffix="},"/>
+            </group>
+            <group display="block">
+                <text variable="note" prefix=" note={" suffix="},"/>
+            </group>
+            <group display="block">
+                <text macro="number" prefix=" number={" suffix="},"/>
+            </group>
+            <group display="block">
+                <text macro="container-title"/>
+            </group>
+            <group display="block">
+                <text macro="publisher"/>
+            </group>
+            <group display="block">
+                <text macro="editor-translator" prefix=" editor={" suffix="},"/>
+            </group>
+            <group display="block">
+                <text macro="pages" prefix=" pages={" suffix="},"/>
+            </group>
+            <group display="block">
+                <text variable="collection-title" prefix=" collection={" suffix="},"/>
+            </group>
+            <group display="block">
+                <text variable="keyword" prefix=" keywords={" suffix="},"/>
+            </group>
+            <group display="block">
+                <text variable="language" prefix=" language={" suffix="},"/>
+            </group>
+            <group display="block">
+                <text variable="annote" prefix=" annote={" suffix="},"/>
+            </group>
+            <group display="block">
+                <text value="}"/>
+            </group>
+            <group display="block">
+                <text value="\stopverb}"/>
+            </group>
+            <!-- <text variable="abstract" prefix="\subtree{\title{Abstract}&#xA;" suffix="&#xA;}&#xA;"/> -->
+        </layout>
+    </bibliography>
+</style>
