@@ -191,10 +191,6 @@
       <xsl:otherwise>
         <xsl:text>\href{https://utensil.github.io/forest/</xsl:text>
         <xsl:value-of select="@href" />
-        <xsl:text>?back_addr=</xsl:text>
-        <xsl:value-of select="/f:tree/f:backmatter/f:references/f:tree/f:frontmatter/f:addr" />
-        <xsl:text>&amp;current_addr=</xsl:text>
-        <xsl:value-of select="current()/@addr" />
         <xsl:text>}{</xsl:text>
         <xsl:apply-templates />
         <xsl:text>}</xsl:text>
