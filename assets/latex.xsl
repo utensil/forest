@@ -89,9 +89,12 @@
   <xsl:template match="f:tree[f:frontmatter/f:taxon[not(text()='Proof')]]">
     <xsl:text>\begin{</xsl:text>
     <xsl:apply-templates select="f:frontmatter/f:taxon" />
-    <xsl:text>}[{</xsl:text>
+    <xsl:text>}</xsl:text>
+    <xsl:if test="f:frontmatter/f:title">
+      <xsl:text>[{</xsl:text>
     <xsl:apply-templates select="f:frontmatter/f:title" />
     <xsl:text>}]</xsl:text>
+    </xsl:if>
     <xsl:text>\label{</xsl:text>
     <xsl:value-of select="f:frontmatter/f:addr" />
     <xsl:text>}</xsl:text>
