@@ -7,6 +7,16 @@ import sys
 from pathlib import Path
 # pip install bibtexparser
 import bibtexparser
+from bibtexparser.bwriter import BibTexWriter, SortingStrategy
+
+BIB_TEX_WRITER = BibTexWriter()
+BIB_TEX_WRITER.display_order = [
+    'title', 'author', 'year', 'date', 'isbn', 'doi', 'url', 'urldate', 'howpublished',
+    'journal', 'journaltitle', 'booktitle', 'edition', 'series',
+    'editor', 'volume', 'number', 'pages', 'publisher', 'institution', 'address'
+]
+BIB_TEX_WRITER.display_order_sorting = SortingStrategy.PRESERVE # ALPHABETICAL_ASC ALPHABETICAL_DESC
+
 
 # Get the script directory
 script_dir = Path(__file__).resolve().parent
@@ -88,7 +98,7 @@ for i, reference in enumerate(references):
     bibtex_entry = bib_db.entries_dict[citekey]
     entrydb = bibtexparser.bibdatabase.BibDatabase()
     entrydb.entries = [bibtex_entry]
-    original_bibtex = bibtexparser.dumps(entrydb)
+    original_bibtex = bibtexparser.dumps(entrydb, BIB_TEX_WRITER)
 
     with open(csljson_file_i, 'w', encoding='utf-8') as f:
         # reference['title'] = reference.get('title', '').replace('\n', ' ')
