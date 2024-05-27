@@ -21,5 +21,18 @@ where #{[P]} is defined as:
 }
 
 \p{In Lean 4, the Kronecker delta [could be defined as](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/kronecker.20symbol):}
-\code{def δ (i j : I) : R := (Pi.single i 1 : _ → R) j}
+\codeblock{lean}{
+def δ (i j : I) : R := (Pi.single i 1 : _ → R) j
+
+theorem test (p q : Prop) (hp : p) (hq : q): p ∧ q ↔ q ∧ p := by
+  apply Iff.intro
+  . intro h
+    apply And.intro
+    . exact hq
+    . exact hp
+  . intro h
+    apply And.intro
+    . exact hp
+    . exact hq
+}
 }

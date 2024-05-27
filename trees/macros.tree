@@ -138,22 +138,21 @@
   }
 }
 
-\p{\code{tikz[g]}: A TikZ graph rendered via LaTeX.}
+\p{\code{tikz[a]}: A TikZ graph rendered via LaTeX.}
 
-\def\tikz[g]{
-    \xml{center}{\tex{
+\def\tikz[a]{
+    \tex{
       \usepackage{tikz-cd}
       \usepackage{amssymb}
     }{
-        \g
+        \a
     }
-  }
 }
 
 \p{\code{codeblock[lang][body]}: A code block specifying the language.}
 
 \def\codeblock[lang][body]{
-  \pre{ \xml{code}[class]{\lang}{\body} }
+  \<html:code>[class]{\lang}{\body}
 }
 
 \strong{Useful macros we defined}

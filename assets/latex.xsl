@@ -2,6 +2,7 @@
 <!-- SPDX-License-Identifier: CC0-1.0 -->
 <xsl:stylesheet version="1.0"
                 xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+                xmlns:html="http://www.w3.org/1999/xhtml"
                 xmlns:f="http://www.jonmsterling.com/jms-005P.xml">
   
   <xsl:template match="/f:tree/f:backmatter/f:references">
@@ -220,6 +221,14 @@
     <xsl:value-of select="@hash" />
     <xsl:text>}</xsl:text>
     <xsl:text>}</xsl:text>
+  </xsl:template>
+
+  <xsl:template match="html:code">
+    <xsl:text>\begin{lstlisting}[mathescape=true,language=</xsl:text>
+    <xsl:value-of select="@class" />
+    <xsl:text>]</xsl:text>
+    <xsl:apply-templates />
+    <xsl:text>\end{lstlisting}</xsl:text>
   </xsl:template>
   
 </xsl:stylesheet>
