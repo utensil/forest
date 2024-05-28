@@ -23,7 +23,7 @@
                     </xsl:otherwise>
                 </xsl:choose>
             </xsl:if>
-            <xsl:if test="f:taxon or (not(ancestor-or-self::f:tree[@numbered='false' or ../@toc='false']) and count(../../f:tree) >= 1) or f:number">
+            <xsl:if test="f:taxon or (not(ancestor-or-self::f:tree[@numbered='false' or ../@toc='false']) and count(../../f:tree) > 1) or f:number">
                 <xsl:text>.&#160;</xsl:text>
             </xsl:if>
         </span>
