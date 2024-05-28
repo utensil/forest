@@ -1,38 +1,38 @@
 \import{macros}
 % clifford hopf spin math
 \tag{math}
+\tag{notes}
 
-% definition theorem lemma construction observation
-% convention corollary axiom example exercise proof
-% discussion remark
-\taxon{definition}
-\refnote{Kronecker delta}{wiki-dirac-matrices}{
-\p{
-Kronecker delta
-##{\delta_{i j}= \begin{cases}0 & \text { if } i \neq j \\ 1 & \text { if } i=j\end{cases}}
-or with use of [Iverson bracket](https://en.wikipedia.org/wiki/Iverson_bracket):
-##{
-\delta_{i j}=[i=j] .
-}
-where #{[P]} is defined as:
-##{
-[P]=\begin{cases}1 & \text { if } P \text { is true } \\ 0 & \text { if } P \text { is false }\end{cases}
-}
-}
+\title{Drafts}
 
-\p{In Lean 4, the Kronecker delta [could be defined as](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/kronecker.20symbol):}
-\codeblock{lean}{
-def δ (i j : I) : R := (Pi.single i 1 : _ → R) j
+\author{utensil}
 
-theorem test (p q : Prop) (hp : p) (hq : q): p ∧ q ↔ q ∧ p := by
-  apply Iff.intro
-  . intro h
-    apply And.intro
-    . exact hq
-    . exact hp
-  . intro h
-    apply And.intro
-    . exact hp
-    . exact hq
-}
+\date{2024-05-28}
+
+\p{These are my scattered notes:}
+
+\scope{
+  % \put\transclude/toc{true}
+  % \put\transclude/numbered{true}
+  % \put\transclude/metadata{true}
+  % \put\transclude/expanded{true}
+  \query{
+      \query/and{
+        \query/tag{draft}
+        % \query/or{
+        %   \query/taxon{definition}
+        %   \query/taxon{theorem}
+        %   \query/taxon{lemma}
+        %   \query/taxon{construction}
+        %   \query/taxon{observation}
+        %   \query/taxon{convention}
+        %   \query/taxon{corollary}
+        %   \query/taxon{axiom}
+        %   \query/taxon{example}
+        %   \query/taxon{exercise}
+        %   \query/taxon{proof}
+        %   \query/taxon{remark}
+        % }
+      }
+  }
 }
