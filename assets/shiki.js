@@ -1,27 +1,34 @@
 import { getHighlighter } from 'https://esm.sh/shiki@1.6.0'
 
+async function loadJson(url) {
+    const res = await fetch(url)
+    let json;
+    try {
+        json = await res.json()
+    } catch(err) {
+        json = undefined
+        console.error(err)
+    }
+    return json
+}
+
 document.addEventListener('DOMContentLoaded', async () => {
 
-    const lean4res = await fetch('https://cdn.jsdelivr.net/gh/leanprover/vscode-lean4@master/vscode-lean4/syntaxes/lean4.json')
+    // https://github.com/PaulOlteanu/Railscasts-Renewed/blob/master/themes/Railscasts-Renewed.json
+    const railscastsjson = await loadJson('https://cdn.jsdelivr.net/gh/PaulOlteanu/Railscasts-Renewed@master/themes/Railscasts-Renewed.json')
 
-    console.log(lean4res)
+    // https://github.com/leanprover/vscode-lean4/blob/master/vscode-lean4/syntaxes/lean4.json
+    const lean4json = await loadJson('https://cdn.jsdelivr.net/gh/leanprover/vscode-lean4@master/vscode-lean4/syntaxes/lean4.json')
 
-    if(!lean4res.ok) {
-        console.error('Failed to fetch lean4.json')
-    }
-    let lean4json;
-    try {
-        lean4json = await lean4res.json()
-    } catch(err) {
-      console.error(err);
-    }
+    const highlightAllCode = async () => { 
+        let isDark = document.querySelector('html[data-applied-mode="dark"]')
+        let theme = isDark ? 'aurora-x' : 'one-light' // 'ayu-dark' //'aurora-x'
+        let themes = ['aurora-x', 'one-light']
 
-    const codes = document.querySelectorAll('code')
-        codes.forEach(async code => {
+        document.querySelectorAll('code').forEach(async code => {
             let lang = code.getAttribute('class') || 'plaintext'
             let langAlias = {}
-
-            if((lang == 'lean4' || lang == 'lean') && lean4json) {
+            if(/lean.*/.test(lang) && lean4json) {
                 lang = lean4json
                 langAlias = { 
                     lean4: 'Lean 4',
@@ -29,16 +36,30 @@ document.addEventListener('DOMContentLoaded', async () => {
                 }
             }
 
+            if(isDark && railscastsjson) {
+                theme = 'Railscasts Renewed'
+                themes = [railscastsjson]
+            }
+
             const highlighter = await getHighlighter({
                 langs: [lang],
                 langAlias,
-                themes: ['one-dark-pro'],
+                themes,
             })
 
             const html = await highlighter.codeToHtml(
                 code.textContent.replaceAll(/^\n/g, '').replaceAll(/\n$/g, ''),
-                { lang, theme: 'one-dark-pro' }
+                { lang, theme }
             )
             code.innerHTML = html
         })
+    }
+
+    await highlightAllCode()
+
+    const toggleTheme = document.getElementById("theme-toggle").onclick
+    document.getElementById("theme-toggle").onclick = async () => {
+        toggleTheme()
+        await highlightAllCode()
+    }
 })
