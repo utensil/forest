@@ -3,9 +3,7 @@
 
 \p{These LaTeX preambles are used by [[macros]].}
 
-\p{We place LaTeX preambles in the directory \code{trees} along with the other \code{.trees} files, but we need to refer to them \code{../tex/name.tex}, because LaTeX is running in \code{build} directory.}
-
-\p{We mark every preamble line with a comment \code{texstrip}, so that we can strip it out when we convert the whole page to an actual LaTeX document, or render individual snippets via MathJax etc.}
+\p{We place LaTeX preambles in the directory \code{tex} which is at the same level of the directory \code{trees}, but we need to refer to them \code{../tex/name.tex}, because LaTeX is running in \code{build} directory.}
 
 \p{Here we define:}
 
@@ -13,7 +11,7 @@
 
 \def\latex-preamble/common{
  \startverb
-\input{../tex/preamble}                               % texstrip
+\input{../tex/preamble}
  \stopverb
 }
 
@@ -21,7 +19,7 @@
 
 \def\latex-preamble/minipage{
  \startverb
-\input{../tex/a_minipage}                               % texstrip
+\input{../tex/a_minipage}
  \stopverb
 }
 
