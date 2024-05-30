@@ -1,0 +1,33 @@
+\import{spin-macros}
+% clifford hopf spin draft
+\tag{clifford}
+
+% definition theorem lemma construction observation
+% convention corollary axiom example exercise proof
+% discussion remark
+% \taxon{}
+% \texnote{}{}{
+% }
+
+\refdef{Universal property}{wieser2022formalizing}{
+\p{
+  \label{univ}
+  \lean{CliffordAlgebra.ι_comp_lift, CliffordAlgebra.lift_unique}
+  \leanok
+  \uses{iota, lift}}
+
+\p{  Given #{f : M \lmap{R} A}, which \vocab{is Clifford}, #{F = \operatorname{lift} f} (denoted #{\bar{f}} in some literatures), we have:}
+
+\p{  1. #{F \circ \iota = f}, i.e. the following diagram commutes:}
+
+\tikz{
+\begin{tikzcd}[column sep=huge, row sep=huge]
+    \Cl(Q) \arrow[r, "F = \operatorname{lift} f"] & A \\
+    V \arrow[ru, "f"'] \arrow[u, "\iota"]
+\end{tikzcd}
+}
+
+\p{  2. #{\operatorname{lift}} is unique, i.e. given #{G : \Cl(Q) \amap A}, we have:}
+
+\p{  #{ G \circ \iota = f \iff G = \operatorname{lift} f}
+}}
