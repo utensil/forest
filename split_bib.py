@@ -27,9 +27,12 @@ project_root = script_dir
 bib_dir = project_root / 'trees' / 'refs'
 # Set the bib file name
 bib_filename = sys.argv[1] if len(sys.argv) > 1 else 'references'
+# create a directory to store the split files
+generated_dir = bib_dir / 'generated'
+os.makedirs(generated_dir, exist_ok=True)
 
 bib_file = pathlib.Path(bib_dir) / f'{bib_filename}.bib'
-csljson_file = pathlib.Path(bib_dir) / f'{bib_filename}.json'
+csljson_file = generated_dir / f'{bib_filename}.json'
 
 print(f'📚 {bib_file.relative_to(project_root)} -> {csljson_file.relative_to(project_root)}')
 # Run the pandoc command
@@ -43,10 +46,6 @@ csljson_file_name = csljson_file.stem
 
 with open(csljson_file, encoding='utf-8') as f:
     references = json.load(f)
-
-# create a directory to store the split files
-generated_dir = bib_dir / 'generated'
-os.makedirs(generated_dir, exist_ok=True)
 
 TREE_TEMPLATE = r"""
 \title{{{title}}}
