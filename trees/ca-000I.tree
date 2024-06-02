@@ -1,0 +1,48 @@
+\import{spin-macros}
+% clifford hopf spin draft
+\tag{clifford}
+
+% definition theorem lemma construction observation
+% convention corollary axiom example exercise proof
+% discussion remark
+% \taxon{}
+% \refnote{}{}{
+% }
+
+\refdef{Grade involution}{wieser2022formalizing}{
+\p{
+    \label{involute}
+    \lean{CliffordAlgebra.involute}
+    \leanok
+    \uses{iota}}
+
+\p{    \newvocab{Grade involution}, intuitively, is negating each basis vector.}
+
+\p{    Formally, it's an \vocab{algebra homomorphism} #{\alpha : \Cl(Q) \amap \Cl(Q)}, satisfying:}
+
+\ol{
+
+    \li{#{\alpha \circ \alpha = \operatorname{id}}}
+    
+    \li{#{\alpha(\iota(m)) = - \iota(m)}}
+    
+}
+
+\p{    for all #{m \in M}.}
+
+\p{    That is, the following diagram commutes:}
+
+\tikz{
+    \begin{tikzcd}[column sep=huge, row sep=huge]
+    \Cl(Q) \arrow[r, "\alpha"] & \Cl(Q) \\
+    V \arrow[ru, "-\iota"] \arrow[u, "\iota"]
+    \end{tikzcd}
+}
+
+\p{    It's called \newvocab{main involution} #{\alpha} or \newvocab{main automorphism} in \cite{jadczyk2019notes}, 
+    the \newvocab{canonical automorphism} in \cite{gallier2008clifford}.}
+
+\p{    It's denoted #{\hat{m}} in \cite{lounesto2001clifford}, #{\alpha(m)} in \cite{jadczyk2019notes}, #{m^*} in \cite{chisolm2012geometric}.}
+
+}
+

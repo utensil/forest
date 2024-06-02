@@ -1,0 +1,56 @@
+\import{spin-macros}
+% clifford hopf spin draft
+\tag{clifford}
+
+% definition theorem lemma construction observation
+% convention corollary axiom example exercise proof
+% discussion remark
+% \taxon{}
+% \refnote{}{}{
+% }
+
+\refdef{Clifford conjugate}{wieser2022formalizing}{
+\p{
+    \label{conjugate}
+    \lean{CliffordAlgebra.reverse}
+    \leanok
+    \uses{involute,reverse}}
+
+\p{    \newvocab{Clifford conjugate} is an \vocab{algebra homomorphism}  #{{*} : \Cl(Q) \amap \Cl(Q)},
+    denoted #{x^{*}} (or even #{x^\dagger}, #{x^v} in some literatures),
+    defined to be:
+
+    ##{ x^{*} = \operatorname{reverse}(\operatorname{involute}(x)) = \tau(\alpha(x)) }
+
+    for all #{x \in \Cl(Q)}, satisfying
+    (as a \href{https://en.wikipedia.org/wiki/*-algebra#*-ring}{\newvocab{#{*}-ring}}):
+
+\ol{
+
+\li{#{(x + y)^{*} = (x)^{*} + (y)^{*}}}
+    \li{#{(x y)^{*} = (y)^{*} (x)^{*}}}
+    \li{#{{*} \circ {*} = \operatorname{id}}}
+    \li{#{1^{*} = 1}}
+    
+}
+
+and (as a \href{https://en.wikipedia.org/wiki/*-algebra#*-algebra}{\newvocab{#{*}-algebra}}):
+
+    ##{ (r x)^{*} = r' x^{*} }
+    
+    for all #{r \in R}, #{x, y \in \Cl(Q)} where #{'} is the involution of the commutative #{*}-ring #{R}.
+}
+
+\p{    Note: In our current formalization in \Mathlib, the application of the involution on #{r} is ignored,
+    as there appears to be nothing in the literature that advocates doing this.}
+
+\p{    % Grade reversion, reversing the multiplication order of basis vectors.
+    % Also called *transpose* in some literature, thus denoted
+}
+
+\p{    % It's called \newvocab{anti-involution} #{\tau} in \cite{jadczyk2019notes}.
+}
+
+\p{    \vocab{Clifford conjugate} is denoted #{\bar{m}} in \cite{lounesto2001clifford} and most literatures, #{m^\ddagger} in \cite{chisolm2012geometric}.
+}}
+

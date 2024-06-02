@@ -1,0 +1,45 @@
+\import{spin-macros}
+% clifford hopf spin draft
+\tag{clifford}
+
+% definition theorem lemma construction observation
+% convention corollary axiom example exercise proof
+% discussion remark
+% \taxon{}
+% \refnote{}{}{
+% }
+
+\refdef{Grade reversion}{wieser2022formalizing}{
+\p{
+    \label{reverse}
+    \lean{CliffordAlgebra.reverse}
+    \leanok
+    \uses{iota}}
+
+\p{    \newvocab{Grade reversion}, intuitively, is reversing the multiplication order of basis vectors.
+    
+    Formally, it's an \vocab{algebra homomorphism} #{\tau : \Cl(Q) \amap \Cl(Q)^{\mathtt{op}}}, satisfying:}
+
+\ol{
+
+    \li{#{\tau(m_1 m_2) = \tau(m_2) \tau(m_1)}}
+    \li{#{\tau \circ \tau = \operatorname{id}}}
+    \li{#{\tau(\iota(m)) = \iota(m)}}
+    
+}
+
+\p{    That is, the following diagram commutes:}
+
+\p{    \tikz{
+        \begin{tikzcd}[column sep=huge, row sep=huge]
+        \Cl(Q) \arrow[r, "\tau"] & \Cl(Q)^{\mathtt{op}} \\
+        V \arrow[ru, "\iota"] \arrow[u, "\iota"]
+        \end{tikzcd}
+      }}
+
+\p{    It's called \newvocab{anti-involution} #{\tau} in \cite{jadczyk2019notes}, the \newvocab{canonical anti-automorphism} in \cite{gallier2008clifford},
+    also called \newvocab{transpose}/\newvocab{transposition} in some literature, following tensor algebra or matrix.}
+
+\p{    It's denoted #{\tilde{m}} in \cite{lounesto2001clifford}, #{m^\tau} in \cite{jadczyk2019notes} (with variants like #{m^t} or #{m^\top} in other literatures), #{m^\dagger} in \cite{chisolm2012geometric}.
+}}
+
