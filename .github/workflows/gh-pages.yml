@@ -50,9 +50,11 @@ jobs:
         uses: ocaml/setup-ocaml@v2
         with:
           ocaml-compiler: "5.1"
+          dune-cache : true
       - name: Install forester
         run: |
           sudo apt-get install libev-dev dvisvgm
+          opam pin add forester git+https://git.sr.ht/~jonsterling/ocaml-forester#9417a56f2c82ece589146746db39f3430de04266 --yes
           opam install forester --yes
       - name: Install Python
         uses: actions/setup-python@v5
