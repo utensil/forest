@@ -13,7 +13,7 @@
 
 \p{The following code is taken from [pygments](https://github.com/eric-wieser/pygments/blob/9d0a36c34ae06c3e318ccbc4b9b43ab16e395e35/tests/examplefiles/lean4/Test.lean) to test Lean 4 code highlighting, with only wrapped strings removed because it confuses forester.}
 
-\codeblock{lean}{
+\codeblock{lean}{\verb<<<|
 /-
 Copyright (c) 2017 Johannes Hölzl. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
@@ -256,6 +256,11 @@ variable {ι A B : Type*} (𝒜 : ι → A) (ℬ : ι → B)
 
 #check 1.0 + 2. + 0.3e1
 
+#check "\
+  This is\na \
+  wrapped string."
+
 @[to_additive "See note [foo]"]
 lemma mul_one : sorry := sorry
-}
+
+<<<}
