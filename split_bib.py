@@ -93,7 +93,6 @@ def format_external(reference):
             url = re.search('(https?://[^\s]+)', publisher)
             if url is not None:
                 url = url.group(1)
-                # print blue square emoji
                 print(f'🔵 {url}')
 
     return f'\\meta{{external}}{{{url}}}\n' if url else ''
@@ -138,6 +137,10 @@ for i, reference in enumerate(references):
                     bib_filenames_i = list(set(first_line_json + bib_filenames_i))
             except json.JSONDecodeError:
                 pass
+
+    # detect duplication
+    if len(bib_filenames_i) > 1:
+        print(f'🟡 {bib_filenames_i}')
 
     with open(tree_file_i, 'w', encoding='utf-8') as f:
         formatted = TREE_TEMPLATE.format(
