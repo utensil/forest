@@ -8,10 +8,9 @@ curl --clobber -H 'Cache-Control: no-cache, no-store' https://raw.githubusercont
 curl --clobber -H 'Cache-Control: no-cache, no-store' https://raw.githubusercontent.com/utensil/lean-ga/blueprint/blueprint/src/references.bib -o trees/refs/lean-ga.bib
 
 python split_bib.py transformer
-python split_bib.py math-2024
+python split_bib.py math-2024 
 python split_bib.py zeon-algebra
+# lean-ga should be more updated if duplicated
 python split_bib.py lean-ga
+# forest overrides external bibs
 python split_bib.py forest
-
-
-

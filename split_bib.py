@@ -96,13 +96,13 @@ def format_external(reference):
 
     return f'\\meta{{external}}{{{url}}}\n' if url else ''
 
-print(f'📚 Splitting {csljson_file.relative_to(project_root)}')
+# print(f'📚 Splitting {csljson_file.relative_to(project_root)}')
 csl_file = bib_dir / 'forest.csl'
 for i, reference in enumerate(references):
     citekey = reference['id']
     csljson_file_i = generated_dir / f'{citekey}.json'
     tree_file_i = bib_dir / f'{citekey}.tree'
-    print(f'📚 {csljson_file_i.relative_to(project_root)} -> {tree_file_i.relative_to(project_root)}')
+    print(f'  {csljson_file_i.relative_to(project_root)} -> {tree_file_i.relative_to(project_root)}')
 
     bibtex_entry = bib_db.entries_dict[citekey]
     entrydb = bibtexparser.bibdatabase.BibDatabase()
@@ -132,13 +132,19 @@ for i, reference in enumerate(references):
                 first_line_json = json.loads(first_line)
                 # check if it's an array
                 if isinstance(first_line_json, list):
-                    # union it with bib_file_name_i
-                    bib_filenames_i = list(set(first_line_json + bib_filenames_i))
+                    # remove bib_filename from it
+                    bib_filenames_i = [
+                        filename for filename in first_line_json
+                        if filename != bib_filename
+                    ]
+                    # add bib_filename to the end of it
+                    bib_filenames_i.append(bib_filename)
             except json.JSONDecodeError:
                 pass
 
     # detect duplication
     if len(bib_filenames_i) > 1:
+        #  {tree_file_i.relative_to(project_root)}: 
         print(f'🟡 {bib_filenames_i}')
 
     with open(tree_file_i, 'w', encoding='utf-8') as f:
