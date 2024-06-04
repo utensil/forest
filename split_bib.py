@@ -48,8 +48,7 @@ csljson_file_name = csljson_file.stem
 with open(csljson_file, encoding='utf-8') as f:
     references = json.load(f)
 
-TREE_TEMPLATE = r"""
-% {bib_filenames}
+TREE_TEMPLATE = r"""% {bib_filenames}
 \title{{{title}}}
 \date{{{date}}}
 {authors}
