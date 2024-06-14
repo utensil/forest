@@ -25,11 +25,11 @@
 %%fakesection Special markers
 
 % FIXME: figure out why we need these
-\def\textbf[x]{\x}
-\def\textsf[x]{\x}
-\def\color[x]{}
-\def\newvocab[x]{\textbf{\color{MidnightBlue} \x}}
-\def\vocab[x]{\textbf{\x}}
+% \def\textbf[x]{\x}
+% \def\textsf[x]{\x}
+% \def\color[x]{}
+\def\newvocab[x]{#{\textbf{\color{blue} \x}}}
+\def\vocab[x]{#{\textbf{\x}}}
 
 %%fakesection Math symbols
 
@@ -51,7 +51,7 @@
 \def\afun{\iota_{a}}
 
 \def\href[url][t]{[\t](\url)}
-\def\Mathlib{\textsf{Mathlib} }
+\def\Mathlib{#{\textsf{Mathlib}}}
 \def\MathlibDoc[x]{\href{https://leanprover-community.github.io/mathlib4_docs/find/\#docs/\x}{\x}}
 
 \def\bu{\bullet}

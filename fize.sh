@@ -10,6 +10,7 @@ sed -i '' -E 's/\\end\{enumerate\}/\}/g' $TREE
 sed -i '' -E 's/\\begin\{itemize\}/\\ul\{/g' $TREE
 sed -i '' -E 's/\\end\{itemize\}/\}/g' $TREE
 sed -i '' -E 's/\\item (.*)/\\li{\1}/g' $TREE
+sed -i '' -E 's/\\ii (.*)/\\li{\1}/g' $TREE
 
 # for the file $TREE, replace all string matching regrex \$([^$]+)\$ to #{$1} where $1 is the first match using sed inplace
 sed -i '' -E 's/\$([^$]+)\$/#{\1}/g' $TREE

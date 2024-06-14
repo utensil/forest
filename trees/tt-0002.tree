@@ -7,35 +7,34 @@
 % convention corollary axiom example exercise proof
 % discussion remark
 % \taxon{}
-% \texnote{}{}{
-% }
 
-\texdef{category}{chen2016infinitely}{\verb<<<|
-	A \newvocab{category} $\AA$ consists of:
-	\begin{itemize}
-		\ii A class of \vocab{objects}, denoted $\obj(\AA)$.
-		\ii For any two objects $A_1, A_2 \in \obj(\AA)$,
+\refdef{category}{chen2016infinitely}{
+\p{
+	A \newvocab{category} #{\AA} consists of:
+	\ul{
+		\li{A class of \vocab{objects}, denoted #{\obj(\AA)}.}
+		\li{For any two objects #{A_1, A_2 \in \obj(\AA)},}
 		a class of \vocab{arrows} (also called \vocab{morphisms} or \vocab{maps}) between them.
-		We'll denote the set of these arrows by $\Hom_\AA(A_1, A_2)$.
-		\ii For any $A_1, A_2, A_3 \in \obj(\AA)$,
-		if $f \colon A_1 \to A_2$ is an arrow and $g \colon A_2 \to A_3$ is an arrow,
-		we can compose these arrows to get an arrow $g \circ f \colon A_1 \to A_3$.
+		We'll denote the set of these arrows by #{\Hom_\AA(A_1, A_2)}.
+		\li{For any #{A_1, A_2, A_3 \in \obj(\AA)},}
+		if #{f \colon A_1 \to A_2} is an arrow and #{g \colon A_2 \to A_3} is an arrow,
+		we can compose these arrows to get an arrow #{g \circ f \colon A_1 \to A_3}.}
 
-		We can represent this in a \vocab{commutative diagram}
-		\begin{center}
+\p{		We can represent this in a \vocab{commutative diagram}
+		\tikz{
 		\begin{tikzcd}
 			A_1 \ar[r, "f"] \ar[rd, "h"'] & A_2 \ar[d, "g"] \\
 			& A_3
 		\end{tikzcd}
-		\end{center}
-		where $h = g \circ f$.
-		The composition operation $\circ$ is part of the data of $\AA$;
-		it must be associative.
-		In the diagram above we say that $h$ \vocab{factors} through $A_2$.
+		}
 
-		\ii Finally, every object $A \in \obj(\AA)$ has a special \vocab{identity arrow} $\id_A$;
-		you can guess what it does.\footnote{To be painfully explicit:
-			if $f \colon A' \to A$ is an arrow then $\id_A \circ f = f$;
-		similarly, if $g \colon A \to A'$ is an arrow then $g \circ \id_A = g$.}
-	\end{itemize}
-<<<}
+		where #{h = g \circ f}.
+		The composition operation #{\circ} is part of the data of #{\AA};
+		it must be associative.
+		In the diagram above we say that #{h} \vocab{factors} through #{A_2}.}
+
+\p{		\li{Finally, every object #{A \in \obj(\AA)} has a special \vocab{identity arrow} #{\id_A};}
+		you can guess what it does.
+}
+}}
+
