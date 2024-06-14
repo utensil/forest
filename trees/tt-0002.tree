@@ -8,33 +8,55 @@
 % discussion remark
 % \taxon{}
 
-\refdef{category}{chen2016infinitely}{
+\refdef{category}{kostecki2011introduction}{
 \p{
-	A \newvocab{category} #{\AA} consists of:
+	A \newvocab{category} #{\C} consists of:
 	\ul{
-		\li{A class of \vocab{objects}, denoted #{\obj(\AA)}.}
-		\li{For any two objects #{A_1, A_2 \in \obj(\AA)},}
-		a class of \vocab{arrows} (also called \vocab{morphisms} or \vocab{maps}) between them.
-		We'll denote the set of these arrows by #{\Hom_\AA(A_1, A_2)}.
-		\li{For any #{A_1, A_2, A_3 \in \obj(\AA)},}
-		if #{f \colon A_1 \to A_2} is an arrow and #{g \colon A_2 \to A_3} is an arrow,
-		we can compose these arrows to get an arrow #{g \circ f \colon A_1 \to A_3}.}
+		\li{\newvocab{objects}: #{X, Y, \dots}, whose collection is denoted #{\Ob(\C)}}
+		\li{\newvocab{arrows} or \newvocab{morphisms}: #{f, g, \dots}, whose collection is denoted #{\Arr(\C)} or #{\Mor(\C)}}
+    \li{a pair of operations: for each arrow #{f},
+    \ul{
+      \li{\vocab{codomain} #{\cod : \Arr(\C) \to \Ob(\C), f \mapsto X},}
+      \li{\vocab{domain} #{\dom : \Arr(\C) \to \Ob(\C), f \mapsto Y},}
+    }
+    denoted by #{f : X \to Y} or #{\arrow{X}{f}{Y}},
+    }
+  }
+  such that,
 
-\p{		We can represent this in a \vocab{commutative diagram}
-		\tikz{
-		\begin{tikzcd}
-			A_1 \ar[r, "f"] \ar[rd, "h"'] & A_2 \ar[d, "g"] \\
-			& A_3
-		\end{tikzcd}
-		}
+  \ol{
+    \li{(associativity of composition) there exists a \newvocab{composite arrow} of any arrows #{\arrow{X}{f}{Y}} and #{\arrow{Y}{g}{Z}}, denoted by #{g \circ f : X \to Z}, makes the diagram 
+      \tikz{
+      \begin{tikzcd}
+        X \ar[r, "f"] \ar[rd, "g \circ f"'] & Y \ar[d, "g"] \\
+        & Z
+      \end{tikzcd}
+      }
+      commute,
+      % and we say that #{g \circ f} \newvocab{factors} through #{Y}.
+      and such that for any arrows #{\arrow{\arrow{\arrow{X}{f}{Y}}{g}{Z}}{h}{W}}, the diagram
+      \tikz\verb<<<|
+\begin{tikzcd}
+	X &&&& Y
+  \\ \\ \\ \\
+	W &&&& Z
+	\arrow["f", from=1-1, to=1-5]
+	\arrow["{h \circ (g \circ f) = (h \circ g) \circ f}"', from=1-1, to=5-1]
+	\arrow["{g \circ f}"{description, pos=0.25}, from=1-1, to=5-5]
+	\arrow["{h \circ g}"{description, pos=0.75}, from=1-5, to=5-1]
+	\arrow["g", from=1-5, to=5-5]
+	\arrow["h", from=5-5, to=5-1]
+\end{tikzcd}
+<<<
+      commutes.
+    }
 
-		where #{h = g \circ f}.
-		The composition operation #{\circ} is part of the data of #{\AA};
-		it must be associative.
-		In the diagram above we say that #{h} \vocab{factors} through #{A_2}.}
+    \li{(identity arrow) TODO
 
-\p{		\li{Finally, every object #{A \in \obj(\AA)} has a special \vocab{identity arrow} #{\id_A};}
-		you can guess what it does.
-}
+    }
+  }
 }}
 
+\p{In most literatures (e.g. \cite{chen2016infinitely}), objects in #{\C} are denoted like #{X, Y \in \Ob(\C)}, the set of these arrows are denoted by #{\Hom_\C(X, Y)}, thus an arrow from #{X} to #{Y} is #{f \in \Hom_\C(X, Y)}. }
+
+\p{\cite{zhang2021type} simply writes the above as #{X \in \C} and #{f \in \C(X, Y)}, respectively, which is quite friendly.}
