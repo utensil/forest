@@ -44,6 +44,9 @@ nav#toc a.slug {
     text-decoration-line: underline;
     text-decoration-style: dotted;
     color: rgb(132, 132, 132);
+    /* text-decoration-line: unset;
+    text-decoration-style: unset;
+    color: #10731d; */
 }
 
 /* article {
@@ -55,7 +58,8 @@ nav#toc a.slug {
 :root[data-applied-mode="light"] {
     color-scheme: light;
     --uts-text: black;
-    --uts-text-gentle: rgb(132, 132, 132);
+    --uts-text-gentle-grey: rgb(132, 132, 132);
+    --uts-text-gentle: #10731d;
     --uts-background: white;
     /* #f4ecd9; */
 }
@@ -63,7 +67,8 @@ nav#toc a.slug {
 :root[data-applied-mode="dark"] {
     color-scheme: dark;
     --uts-text: #d5d4d0;
-    --uts-text-gentle: #d5d4d0;
+    --uts-text-gentle-grey: rgb(174, 174, 174);
+    --uts-text-gentle: #8cd295;
     --uts-background: #262626;
 }
 
@@ -85,7 +90,31 @@ nav#toc a {
 nav#toc a.link.local,
 nav#toc .link.local a,
 nav#toc a.slug {
+    color: var(--uts-text-gentle-grey) !important;
+    /* text-decoration-line: unset !important;
+    text-decoration-style: unset !important; */
+}
+
+a.slug-source {
+    text-decoration-line: underline;
+    text-decoration-style: dotted;
+    color: var(--uts-text-gentle-grey) !important;
+    font-weight: normal;
+}
+
+/* The intention is that this only applies to references */
+.link.local a, nav#toc .link.local a {
     color: var(--uts-text-gentle) !important;
+    box-shadow: none;
+    text-decoration-line: unset;
+    text-decoration-style: unset;
+}
+
+/* So we fix meta items, and local links to normal notes (which looks like prefix-numeric) */
+.meta-item .link.local a, .link.local a[href*="-"] {
+    color: var(--uts-text) !important;
+    text-decoration-line: underline !important;
+    text-decoration-style: dotted !important;
 }
 
 button#theme-toggle {
@@ -190,11 +219,13 @@ section[data-taxon="Example"] h1 span.taxon {
 }
 
 :root[data-applied-mode="dark"] section[data-taxon="Example"] {
-    background-color: #3c3838;
+    border: 1px solid #afdff6;
+    background-color: #424647;
 }
 
 :root[data-applied-mode="dark"] section[data-taxon="Example"]:hover {
-    background-color: #474242;
+    border: 1px solid #aff0f6;
+    background-color: #4f5e5b;
 }
 
 /*
