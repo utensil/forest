@@ -16,6 +16,18 @@
 
 \def\mark[body]{\<html:mark>{\body}}
 
+\alloc\base/tex-preamble
+
+\def\texfig[body]{
+ \scope{
+  \put?\base/tex-preamble{
+   \latex-preamble/string-diagrams
+   \latex-preamble/diagrams
+  }
+  \tex{\get\base/tex-preamble}{\body}
+ }
+}
+
 \strong{Useful macros based on [[jonmsterling]]'s [Public bibliographies](https://www.jonmsterling.com/jms-005X.xml)}
 
 \p{\code{make-topic-bibliography[topic]}: A bibliography of papers, presentations, and people related to a topic.}
