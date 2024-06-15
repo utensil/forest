@@ -80,6 +80,10 @@
   <xsl:template match="f:taxon[text()='Remark']">
     <xsl:text>remark</xsl:text>
   </xsl:template>
+
+  <xsl:template match="f:taxon[text()='Notation']">
+    <xsl:text>notation</xsl:text>
+  </xsl:template> 
   
   <xsl:template match="f:tree[f:frontmatter/f:taxon[text()='Proof']]">
     <xsl:text>\begin{proof}</xsl:text>
