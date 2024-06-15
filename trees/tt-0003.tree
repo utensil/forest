@@ -45,3 +45,33 @@
     \end{scope}
   \end{tikzpicture}
 }
+
+\texfig{
+  \begin{tikzpicture}[scale=0.6]
+  \node[box=0/2/0/1] (A) at (-2, 0) {A};
+  \node[box=0/1/0/2] (B) at (+2, 0) {B};
+  \node[box=0/1/0/1] (C) at ( 0,+1) {C};
+  \node[box=0/1/0/1] (D) at ( 0,-1) {D};
+  \wires{
+  A = { east.1 = C.west, east.2 = D.west },
+  C = { east = B.west.1 },
+  D = { east = B.west.2 },
+  }{ A.west, B.east }
+  \end{tikzpicture}
+}
+
+\texfig{
+  \begin{tikzpicture}
+  \node[box=0/1/0/2] (A) at ( 0,+1) {A};
+  \node[box=0/2/0/1] (B) at ( 0,-1) {B};
+  \node[dot] (x) at (+1, 0) {};
+  \node[dot] (y) at (-1, 0) {};
+  \wires[looseness=1.5, dashed]{
+  A = { east = x.north },
+  B = { east.1 = x.south },
+  y = { north = A.west.2, south = B.west },
+  }{
+  A.west.1, B.east.2, x.east, y.west
+  }
+  \end{tikzpicture}
+}
