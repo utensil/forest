@@ -1,4 +1,4 @@
-% \usepackage{string-diagrams}
+\usepackage{string-diagrams}
 % \usepackage{xparse}
 
 \definecolor{catccolor}{RGB}{255,244,138}
@@ -13,6 +13,9 @@
 \tikzstyle{blue halo}=[fill=blue!10, opacity=0.7, rounded corners]
 \tikzstyle{white halo}=[fill=white, opacity=0.7, rounded corners]
 
+\makeatletter
+\@ifundefined{CreateRect}{
+
 \NewDocumentCommand\CreateRect{D<>{} m m}{
   \path
     coordinate (#1nw)
@@ -26,3 +29,6 @@
   \path[spath/save = #1east] (#1ne) to (#1se);
   \path[spath/save = #1south] (#1sw) to (#1se);
 }
+
+}{}
+\makeatother
