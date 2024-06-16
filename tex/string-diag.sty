@@ -1,0 +1,974 @@
+% This file is part of the source of https://arxiv.org/abs/1401.7220, renamed to string-diag
+\ProvidesPackage{string-diag}
+
+\RequirePackage{tikz}
+
+\newcommand{\catstyle}[2]{
+\tikzset{#1/.style={color=#2}}
+}
+
+\newcommand{\catccol}{blue!20}
+\newcommand{\catcpcol}{blue!50}
+\newcommand{\catcppcol}{blue!80}
+\newcommand{\catcopcol}{blue!75}
+
+\newcommand{\catdcol}{green!20}
+\newcommand{\catdpcol}{green!50}
+\newcommand{\catdppcol}{green!80}
+\newcommand{\catdopcol}{green!75}
+
+\newcommand{\catecol}{orange!20}
+\newcommand{\catepcol}{orange!50}
+\newcommand{\cateppcol}{orange!80}
+\newcommand{\cateopcol}{orange!75}
+
+\newcommand{\cattermcol}{yellow!20}
+\newcommand{\catsetcol}{red!20}
+\newcommand{\catsetopcol}{red!75}
+
+\catstyle{catc}{\catccol}
+\catstyle{catc'}{\catcpcol}
+\catstyle{catc''}{\catcppcol}
+\catstyle{catcop}{\catcopcol}
+
+\catstyle{catd}{\catdcol}
+\catstyle{catd'}{\catdpcol}
+\catstyle{catd''}{\catdppcol}
+\catstyle{catdop}{\catdopcol}
+
+\catstyle{cate}{\catecol}
+\catstyle{cate'}{\catepcol}
+\catstyle{cate''}{\cateppcol}
+\catstyle{cateop}{\cateopcol}
+
+\catstyle{catterm}{\cattermcol}
+\catstyle{catset}{\catsetcol}
+\catstyle{catsetop}{\catsetopcol}
+
+\tikzset{dot/.style={circle,draw=black,fill=black,minimum size=1mm,inner sep=0mm}}
+\tikzset{region/.style={rectangle,draw=black,fill=black!10, rounded corners}}
+
+\pgfdeclarelayer{background}
+\pgfsetlayers{background,main}
+
+\newcommand{\strbounds}[2]{
+ \path[use as bounding box, clip] (0,0) rectangle (#1,#2) }
+
+% Bounding box macro that does not interfere with
+% the current bounding box
+\newcommand{\diagbb}[2]{
+ \node[rectangle, minimum width=#1, minimum height=#2, opacity=1] (cbb) {}
+}
+
+\newcommand{\strnat}[1]{
+ \coordinate[dot] (tmp) at (#1)
+}
+
+\newcommand{\strlabu}[2]{
+ \node at ($(#1) + (0,0.5)$) {#2}}
+
+\newcommand{\strlabd}[2]{
+ \node at ($(#1) + (0,-0.5)$) {#2}}
+
+\newcommand{\strlabr}[2]{
+ \node at ($(#1) + (0.5,0)$) {#2}}
+
+\newcommand{\strlabl}[2]{
+ \node at ($(#1) + (-0.5,0)$) {#2}}
+
+\newcommand{\strlabur}[2]{
+ \node at ($(#1) + (0.5,0.5)$) {#2}}
+
+\newcommand{\strlabul}[2]{
+ \node at ($(#1) + (-0.5,0.5)$) {#2}}
+
+\newcommand{\strlabdr}[2]{
+ \node at ($(#1) + (0.5,-0.5)$) {#2}}
+
+\newcommand{\strlabdl}[2]{
+ \node at ($(#1) + (-0.5,-0.5)$) {#2}}
+
+\newcommand{\fillall}[1]{
+ \fill[#1] (current bounding box.south west) rectangle (current bounding box.north east)
+}
+
+\newcommand{\fillwest}[3]{
+ \fill[#1] (#2) -- (#3) -- (current bounding box.north west) -- (current bounding box.south west) -- cycle
+}
+
+\newcommand{\zeromor}[4]{
+ \fill[#4] (#1.south west) rectangle (#1.north east);
+ \fill[#3] (#1.south west) rectangle (#1.north);
+ \draw (#1.south) to node{#2} (#1.north);
+}
+\newcommand{\singlemor}[6]{
+\path (#1.center) coordinate (#1-mor);
+\fill[#5] (#1.south west) rectangle (#1.north);
+\fill[#6] (#1.south) rectangle (#1.north east);
+\draw (#1.south) to node[right]{#3} (#1-mor) to node[right]{#4} (#1.north);
+\strnat{#1-mor};
+\strlabl{#1-mor}{#2}
+}
+\newcommand{\doublemor}[8]{
+\path coordinate (#1-mor1) at ($(#1.south)!0.333!(#1.north)$) 
+      coordinate (#1-mor2) at ($(#1.south)!0.666!(#1.north)$);
+\fill[#7] (#1.south west) rectangle (#1.north);
+\fill[#8] (#1.south) rectangle (#1.north east);
+\draw (#1.south) to node{#4} (#1-mor1) to node{#5} (#1-mor2) to node{#6} (#1.north);
+\strnat{#1-mor1};
+\strlabr{#1-mor1}{#2};
+\strnat{#1-mor2};
+\strlabr{#1-mor2}{#3}
+}
+
+\newcommand{\catdiag}[1]{
+ \begin{tikzpicture}[auto, x=0.5cm, y=0.5cm]
+  \path[use as bounding box] (0,0) rectangle (4,4);
+  \fillall{#1};
+ \end{tikzpicture}
+}
+
+\newcommand{\funcdiag}[3]{
+ \begin{tikzpicture}[auto, x=0.5cm, y=0.5cm]
+  \path[use as bounding box] (0,0) rectangle (4,4);
+  \fillall{#3};
+  \fillwest{#2}{current bounding box.south}{current bounding box.north};
+  \draw (current bounding box.south) to node{#1} (current bounding box.north);
+ \end{tikzpicture}
+}
+
+\newcommand{\natdiag}[5]{
+ \begin{tikzpicture}[auto, x=0.5cm, y=0.5cm]
+  \path[use as bounding box] (0,0) rectangle (4,4);
+  \fillall{#5};
+  \fillwest{#4}{current bounding box.south}{current bounding box.north};
+  \singlemor{current bounding box}{#1}{#2}{#3}{#4}{#5};
+ \end{tikzpicture}
+}
+
+\newcommand{\drawnatu}[6]{
+\begin{tikzpicture}[scale=0.5]
+\path
+ +(1,1) coordinate[label=above:#5] (tr)
+ +(0,1) coordinate[label=above:#3] (tl)
+ +(-1,-1) coordinate[label=below:#4] (bl)
+ +(0,-1) coordinate[label=below:#2] (br);
+\draw[name path=vert] (br) -- (tl);
+\draw[name path=curv] (bl) to[out=90, in=-90] (tr);
+\path[name intersections={of=vert and curv}] coordinate[dot, label=-45:#1] (cell) at (intersection-1);
+\begin{pgfonlayer}{background}
+\fill[catd] ($(bl) + (-#6,0)$) rectangle (tl);
+\fill[catd'] ($(tr) + (#6,0)$) rectangle (br);
+\begin{scope}
+\clip ($(bl) + (-#6,0)$) rectangle (tl);
+\fill[catc] (bl) to[out=90, in=-90] (tr) -- ++(#6,0) -- ++(0,-2) -- cycle;
+\end{scope}
+\begin{scope}
+\clip ($(tr) + (#6,0)$) rectangle (br);
+\fill[catc'] (bl) to[out=90, in=-90] (tr) -- ++(#6,0) -- ++(0,-2) -- cycle;
+\end{scope}
+\end{pgfonlayer}
+\end{tikzpicture}
+}
+
+\newcommand{\drawnatd}[6]{
+\begin{tikzpicture}[scale=0.5]
+\path
+ +(-1,1) coordinate[label=above:#4] (tl)
+ +(0,1) coordinate[label=above:#3] (tr)
+ +(0,-1) coordinate[label=below:#2] (bl)
+ +(1,-1) coordinate[label=below:#5] (br);
+\draw[name path=vert] (bl) -- (tr);
+\draw[name path=curv] (br) to[out=90, in=-90] (tl);
+\path[name intersections={of=vert and curv}] coordinate[dot, label=-135:#1] (cell) at (intersection-1);
+\begin{pgfonlayer}{background}
+\fill[catc] ($(tl) + (-#6,0)$) rectangle (bl);
+\fill[catd'] (tr) rectangle ($(br) + (#6,0)$);
+\begin{scope}
+\clip ($(tl) + (-#6,0)$) rectangle (bl);
+\fill[catd] (br) to[out=90, in=-90] (tl) -- ++(2,0) -- cycle;
+\end{scope}
+\begin{scope}
+\clip (tr) rectangle ($(br) + (#6,0)$);
+\fill[catc'] (br) to[out=90, in=-90] (tl) -- ++(0,-2) -- cycle;
+\end{scope}
+\end{pgfonlayer}
+\end{tikzpicture}
+}
+
+\newcommand{\upforkl}[6]{
+\begin{tikzpicture}[scale=0.5]
+\path coordinate[dot, label={[label distance=0.25cm]right:\ensuremath{#1}}] (sigma) 
+ ++(-2,1) coordinate[dot, label=below:\ensuremath{#2}] (epsilon) ++(-1,-1) coordinate (a)
+ ++(0,-0.5) coordinate[label=below:\ensuremath{#5}] (bl)
+ (sigma) ++(1,1.5) coordinate[label=above:\ensuremath{#6}] (tr)
+ (sigma) ++(0,1.5) coordinate[label=above:\ensuremath{#4}] (tl)
+ (sigma) ++(0,-0.5) coordinate[label=below:\ensuremath{#3}] (br);
+\draw (tr) to[out=-90, in=0] (sigma) to[out=180, in=0] (epsilon) to[out=180, in=90] (a) -- (bl);
+\draw (br) -- (tl);
+\begin{pgfonlayer}{background}
+\fill[catd] ($(bl) + (-1,0)$) rectangle (tl);
+\fill[catd'] ($(tr) + (1,0)$) rectangle (br);
+\begin{scope}
+\clip ($(bl) + (-1,0)$) rectangle (tl);
+\fill[catc] (tr) to[out=-90, in=0] (sigma) to[out=180, in=0] (epsilon) to[out=180, in=90] (a) -- (bl) -- ++(5,0) -- ++(0,2) -- cycle;
+\end{scope}
+\begin{scope}
+\clip ($(tr) + (1,0)$) rectangle (br);
+\fill[catc'] (tr) to[out=-90, in=0] (sigma) to[out=180, in=0] (epsilon) to[out=180, in=90] (a) -- (bl) -- ++(5,0) -- ++(0,2) -- cycle;
+\end{scope}
+\end{pgfonlayer}
+\end{tikzpicture}
+}
+
+\newcommand{\upforkr}[6]{
+\begin{tikzpicture}[scale=0.5]
+\path coordinate[dot, label={[label distance=0.25cm]left:\ensuremath{#1}}] (sigma) 
+ ++(2,1) coordinate[dot, label=below:\ensuremath{#2}] (epsilon) ++(1,-1) coordinate (a) 
+ ++(0, -0.5) coordinate[label=below:\ensuremath{#6}] (br)
+ (sigma) ++(-1, 1.5) coordinate[label=above:\ensuremath{#5}] (tl)
+ (sigma) ++(0, 1.5) coordinate[label=above:\ensuremath{#4}] (tr)
+ (sigma) ++(0, -0.5) coordinate[label=below:\ensuremath{#3}] (bl);
+\draw (tl) to[out=-90, in=180] (sigma) to[out=0, in=180] (epsilon) to[out=0, in=90] (a) -- (br);
+\draw (bl) -- (sigma) -- (tr);
+\begin{pgfonlayer}{background}
+\fill[catc] ($(tl) + (-1,0)$) rectangle (bl);
+\fill[catc'] (tr) rectangle ($(br) + (1,0)$);
+\begin{scope}
+\clip ($(tl) + (-1,0)$) rectangle (bl);
+\fill[catd] (tl) to[out=-90, in=180] (sigma) to[out=0, in=180] (epsilon) to[out=0, in=90] (a) -- (br) 
+ -- ++(1,0) -- ++(0,2) -- cycle;
+\end{scope}
+\begin{scope}
+\clip (tr) rectangle ($(br) + (1,0)$);
+\fill[catd'] (tl) to[out=-90, in=180] (sigma) to[out=0, in=180] (epsilon) to[out=0, in=90] (a) -- (br) 
+ -- ++(1,0) -- ++(0,2) -- cycle;
+\end{scope}
+\end{pgfonlayer}
+\end{tikzpicture}
+}
+
+\newcommand{\downforkr}[6]{
+\begin{tikzpicture}[scale=0.5]
+\path coordinate[dot, label={[label distance=0.25cm]left:\ensuremath{#1}}] (sigma) 
+ ++(2,-1) coordinate[dot, label=above:\ensuremath{#2}] (eta) ++(1,1) coordinate (a) 
+ ++(0,0.5) coordinate[label=above:\ensuremath{#6}] (tr)
+ (sigma) ++(-1,-1.5) coordinate[label=below:\ensuremath{#5}] (bl)
+ (sigma) ++(0, 0.5) coordinate[label=above:\ensuremath{#4}] (tl)
+ (sigma) ++(0, -1.5) coordinate[label=below:\ensuremath{#3}] (br);
+\draw (bl) to[out=90, in=180] (sigma) to[out=0, in=180] (eta) to[out=0, in=-90] (a) -- (tr);
+\draw (br) -- (sigma) -- (tl);
+\begin{pgfonlayer}{background}
+\fill[catd] ($(bl) + (-1,0)$) rectangle (tl);
+\fill[catd'] ($(tr) + (1,0)$) rectangle (br);
+\begin{scope}
+\clip ($(bl) + (-1,0)$) rectangle (tl);
+\fill[catc] (bl) to[out=90, in=180] (sigma) to[out=0, in=180] (eta) to[out=0, in=-90] (a) -- (tr) -- ++(1,0) -- ++(0,-2) -- cycle;
+\end{scope}
+\begin{scope}
+\clip ($(tr) + (1,0)$) rectangle (br);
+\fill[catc'] (bl) to[out=90, in=180] (sigma) to[out=0, in=180] (eta) to[out=0, in=-90] (a) -- (tr) -- ++(1,0) -- ++(0,-2) -- cycle;
+\end{scope}
+\end{pgfonlayer}
+\end{tikzpicture}
+}
+
+\newcommand{\downforkl}[6]{
+\begin{tikzpicture}[scale=0.5]
+\path coordinate[dot, label={[label distance=0.25cm]right:\ensuremath{#1}}] (sigma) 
+ ++(-2,-1) coordinate[dot, label=above:\ensuremath{#2}] (eta) ++(-1,1) coordinate (a) 
+ ++(0,0.5) coordinate[label=above:\ensuremath{#5}] (tl)
+ (sigma) ++(1,-1.5) coordinate[label=below:\ensuremath{#6}] (br)
+ (sigma) ++(0, 0.5) coordinate[label=above:\ensuremath{#4}] (tr)
+ (sigma) ++(0, -1.5) coordinate[label=below:\ensuremath{#3}] (bl);
+\draw (br) to[out=90, in=0] (sigma) to[out=180, in=0] (eta) to[out=180, in=-90] (a) -- (tl);
+\draw (bl) -- (sigma) -- (tr);
+\begin{pgfonlayer}{background}
+\fill[catc] ($(tl) + (-1,0)$) rectangle (bl);
+\fill[catc'] ($(br) + (1,0)$) rectangle (tr);
+\begin{scope}
+\clip ($(tl) + (-1,0)$) rectangle (bl);
+\fill[catd] (br) to[out=90, in=0] (sigma) to[out=180, in=0] (eta) to[out=180, in=-90] (a) -- (tl) -- ++(5,0) -- ++(0,-2) -- cycle;
+\end{scope}
+\begin{scope}
+\clip ($(br) + (1,0)$) rectangle (tr);
+\fill[catd'] (br) to[out=90, in=0] (sigma) to[out=180, in=0] (eta) to[out=180, in=-90] (a) -- (tl) -- ++(5,0) -- ++(0,-2) -- cycle;
+\end{scope}
+\end{pgfonlayer}
+\end{tikzpicture}
+}
+
+\newcommand{\upfork}[6]{
+\begin{tikzpicture}[scale=0.5]
+\path coordinate[label=below:\ensuremath{#2}] (b) ++(0,#6) coordinate[dot, label=-45:\ensuremath{#1}] (cell)
+ +(-2,1) coordinate[label=above:\ensuremath{#4}] (tl)
+ +(0,1) coordinate[label=above:\ensuremath{#3}] (tm)
+ +(2,1) coordinate[label=above:\ensuremath{#5}] (tr);
+\draw (b) -- (cell) -- (tm)
+      (tl) to[out=-90, in=180] (cell) to[out=0, in=-90] (tr);
+\begin{pgfonlayer}{background}
+\fill[catc] ($(b) + (-3,0)$) rectangle (tm);
+\fill[catc'] ($(b) + (3,0)$) rectangle (tm);
+\begin{scope}
+\clip ($(b) + (-3,0)$) rectangle (tm);
+\fill[catd] (tl) to[out=-90, in=180] (cell) to[out=0, in=-90] (tr) -- cycle;
+\end{scope}
+\begin{scope}
+\clip ($(b) + (3,0)$) rectangle (tm);
+\fill[catd'] (tl) to[out=-90, in=180] (cell) to[out=0, in=-90] (tr) -- cycle;
+\end{scope}
+\end{pgfonlayer}
+\end{tikzpicture}
+}
+
+\newcommand{\downfork}[6]{
+\begin{tikzpicture}[scale=0.5]
+\path coordinate[label=above:\ensuremath{#3}] (t) ++(0,-#6) coordinate[dot, label=45:\ensuremath{#1}] (cell)
+ +(-2,-1) coordinate[label=below:\ensuremath{#4}] (bl)
+ +(0,-1) coordinate[label=below:\ensuremath{#2}] (bm)
+ +(2,-1) coordinate[label=below:\ensuremath{#5}] (br);
+\draw (bm) -- (cell) -- (t)
+ (bl) to[out=90, in=180] (cell) to[out=0, in=90] (br);
+\begin{pgfonlayer}{background}
+\fill[catd] ($(t) + (-3,0)$) rectangle (bm);
+\fill[catd'] ($(t) + (3,0)$) rectangle (bm);
+\begin{scope}
+\clip ($(t) + (-3,0)$) rectangle (bm);
+\fill[catc] (bl) to[out=90, in=180] (cell) to[out=0, in=90] (br) -- cycle;
+\end{scope}
+\begin{scope}
+\clip ($(t) + (3,0)$) rectangle (bm);
+\fill[catc'] (bl) to[out=90, in=180] (cell) to[out=0, in=90] (br) -- cycle;
+\end{scope}
+\end{pgfonlayer}
+\end{tikzpicture}
+}
+
+\newcommand{\slideaex}[6]{
+\begin{tikzpicture}[scale=0.5]
+\path coordinate[dot, label=below:#2] (epsilon)
+ +(-2,-1) coordinate[label=below:\ensuremath{#3}] (bl)
+ +(2,-1) coordinate[label=below:\ensuremath{#4}] (br)
+ (bl) ++(1,0) coordinate[label=below:\ensuremath{#5}] (bm)
+ (epsilon) ++(-1,1) coordinate[label=above:\ensuremath{#6}] (t);
+\draw[name path=vert] (bm) -- (t);
+\draw[name path=curv] (bl) to[out=90, in=180] (epsilon) to[out=0, in=90] (br);
+\path[name intersections={of=vert and curv}] coordinate[dot, label=135:#1] (sigma) at (intersection-1);
+\begin{pgfonlayer}{background}
+\fill[catd] ($(bl) + (-1,0)$) rectangle (t);
+\fill[catd'] ($(br) + (1,0)$) rectangle (t);
+\begin{scope}
+\clip ($(bl) + (-1,0)$) rectangle (t);
+\fill[catc] (bl) to[out=90, in=180] (epsilon) to[out=0, in=90] (br) -- cycle;
+\end{scope}
+\begin{scope}
+\clip ($(br) + (1,0)$) rectangle (t);
+\fill[catc'] (bl) to[out=90, in=180] (epsilon) to[out=0, in=90] (br) -- cycle;
+\end{scope}
+\end{pgfonlayer}
+\end{tikzpicture}
+}
+
+\newcommand{\slidea}[1]{
+ \slideaex{#1}{$\epsilon$}{catc}{catc}{catd}{catd}
+}
+
+\newcommand{\slidebex}[6]{
+\begin{tikzpicture}[scale=0.5]
+\path coordinate[dot, label=below:#2] (epsilon)
+ +(-2,-1) coordinate[label=below:\ensuremath{#3}] (bl)
+ +(2,-1) coordinate[label=below:\ensuremath{#4}] (br)
+ (br) +(-1,0) coordinate[label=below:\ensuremath{#5}] (bm)
+ (epsilon) +(1,1) coordinate[label=above:\ensuremath{#6}] (t);
+\draw[name path=vert] (bm) -- (t);
+\draw[name path=curv] (bl) to[out=90, in=180] (epsilon) to[out=0, in=90] (br);
+\path[name intersections={of=vert and curv}] coordinate[dot, label=45:#1] (sigma) at (intersection-1);
+\begin{pgfonlayer}{background}
+\fill[catd] ($(bl) + (-1,0)$) rectangle (t);
+\fill[catd'] ($(br) + (1,0)$) rectangle (t);
+\begin{scope}
+\clip ($(bl) + (-1,0)$) rectangle (t);
+\fill[catc] (bl) to[out=90, in=180] (epsilon) to[out=0, in=90] (br) -- cycle;
+\end{scope}
+\begin{scope}
+\clip ($(br) + (1,0)$) rectangle (t);
+\fill[catc'] (bl) to[out=90, in=180] (epsilon) to[out=0, in=90] (br) -- cycle;
+\end{scope}
+\end{pgfonlayer}
+\end{tikzpicture}
+}
+
+\newcommand{\slideb}[1]{
+ \slidebex{#1}{$\epsilon$}{catc}{catc}{catd}{catd}
+}
+
+\newcommand{\slidecex}[6]{
+\begin{tikzpicture}[scale=0.5]
+\path coordinate[dot, label=above:#2] (eta)
+ +(-2,1) coordinate[label=above:\ensuremath{#3}] (tl)
+ +(2,1) coordinate[label=above:\ensuremath{#4}] (tr)
+ (tl) ++(1,0) coordinate[label=above:\ensuremath{#6}] (tm)
+ (eta) ++(-1,-1) coordinate[label=below:\ensuremath{#5}] (b);
+\draw[name path=vert] (b) -- (tm);
+\draw[name path=curv] (tl) to[out=-90, in=180] (eta) to[out=0, in=-90] (tr);
+\path[name intersections={of=vert and curv}] coordinate[dot, label=-135:#1] (sigma) at (intersection-1);
+\begin{pgfonlayer}{background}
+\fill[catc] ($(tl) + (-1,0)$) rectangle (b);
+\fill[catc'] (tm) rectangle ($(tr) + (1,-2)$);
+\begin{scope}
+\clip ($(tl) + (-1,0)$) rectangle (b);
+\fill[catd] (tl) to[out=-90, in=180] (eta) to[out=0, in=-90] (tr) -- cycle;
+\end{scope}
+\begin{scope}
+\clip (tm) rectangle ($(tr) + (1,-2)$);
+\fill[catd'] (tl) to[out=-90, in=180] (eta) to[out=0, in=-90] (tr) -- cycle;
+\end{scope}
+\end{pgfonlayer}
+\end{tikzpicture}
+}
+
+\newcommand{\slidec}[1]{
+ \slidecex{#1}{$\eta$}{catc}{catc}{catd}{catd}
+}
+
+\newcommand{\slidedex}[6]{
+\begin{tikzpicture}[scale=0.5]
+\path coordinate[dot, label=above:#2] (eta)
+ +(-2,1) coordinate[label=above:\ensuremath{#3}] (tl)
+ +(2,1) coordinate[label=above:\ensuremath{#4}] (tr)
+ (tr) ++(-1,0) coordinate[label=above:\ensuremath{#6}] (tm)
+ (eta) ++(1,-1) coordinate[label=below:\ensuremath{#5}] (b);
+\draw[name path=curv] (tl) to[out=-90, in=180] (eta) to[out=0, in=-90] (tr);
+\draw[name path=vert] (b) -- (tm);
+\path[name intersections={of=vert and curv}] coordinate[dot, label=-45:#1] (sigma) at (intersection-1);
+\begin{pgfonlayer}{background}
+\fill[catc] ($(tl) + (-1,0)$) rectangle (b);
+\fill[catc'] ($(tr) + (1,0)$) rectangle (b);
+\begin{scope}
+\clip ($(tl) + (-1,0)$) rectangle (b);
+\fill[catd] (tl) to[out=-90, in=180] (eta) to[out=0, in=-90] (tr) -- cycle;
+\end{scope}
+\begin{scope}
+\clip ($(tr) + (1,0)$) rectangle (b);
+\fill[catd'] (tl) to[out=-90, in=180] (eta) to[out=0, in=-90] (tr) -- cycle;
+\end{scope}
+\end{pgfonlayer}
+\end{tikzpicture}
+}
+
+\newcommand{\slided}[1]{
+ \slidedex{#1}{$\eta$}{catc}{catc}{catd}{catd}
+}
+
+\newcommand{\repto}[5]{
+\path (#1.center) ++(0, -0.5) coordinate (#1-r)
+     +(-1,1) coordinate (#1-rl)
+     +(1,1) coordinate (#1-rr);
+\coordinate (#1-a) at (#1.south);
+\path
+ let \p1 = (#1.north) in
+ let \p2 = (#1-rl) in
+ let \p3 = (#1-rr) in
+ coordinate (#1-b) at (\x2, \y1)
+ coordinate (#1-c) at (\x3, \y1);
+\fill[catset] (#1.south) -- (#1-r) to[out=0, in=270] (#1-rr) -- (#1-c) -- (#1.north east) -- (#1.south east) -- cycle;
+\fill[catc] (#1-b) -- (#1-rl) to[out=270,in=180] (#1-r) to[out=0,in=270] (#1-rr) -- (#1-c) -- cycle;
+\fill[catterm] (#1.south) -- (#1-r) to[out=180, in=270] (#1-rl) -- (#1-b) -- (#1.north west) -- (#1.south west) -- cycle;
+\draw (#1-r) to[out=180,in=270] (#1-rl) to node[swap]{#2} (#1-b);
+\draw (#1-r) to[out=0, in=270] (#1-rr) to node[swap]{#3} (#1-c);
+\draw (#1-a) to node[swap]{#5} (#1-r);
+\strnat{#1-r};
+\strlabu{#1-r}{#4}
+}
+
+\newcommand{\reptoex}[5]{
+ \fill[catterm] (#1.south west) rectangle (#1.north);
+ \fill[catc] (#1.south east) rectangle (#1.north);
+ \draw (#1.south) -- ++(0,1.5)
+       (#1.north) -- ++(0,-1.5);
+ \path (#1.south west) -- ++(0.5,1) coordinate (#1-bl)
+       (#1.north east) -- ++(-0.5,-1) coordinate (#1-tr);
+ \node[rectangle, fit=(#1-bl)(#1-tr)] (#1-subdiag) {};
+ \repto{#1-subdiag}{#2}{#3}{#4}{*};
+ \draw[very thick] (#1-subdiag.south west) rectangle (#1-subdiag.north east)
+}
+
+\newcommand{\outerreptoex}[5]{
+\coordinate[label=above:#2] (#1-t) at (#1.north);
+\coordinate[label=below:#5] (#1-b) at (#1.south);
+ \draw (#1-b) -- ++(0,1.5)
+       (#1-t) -- ++(0,-1.5);
+ \path (#1.south west) -- ++(0.5,1) coordinate (#1-bl)
+       (#1.north east) -- ++(-0.5,-1) coordinate (#1-tr);
+ \node[rectangle, fit=(#1-bl)(#1-tr)] (#1-subdiag) {};
+ \repto{#1-subdiag}{#2}{#3}{#4}{*};
+ \draw[very thick] (#1-subdiag.south west) rectangle (#1-subdiag.north east);
+\begin{pgfonlayer}{background}
+ \fill[catterm] (#1.south west) rectangle (#1.north);
+ \fill[catc] (#1.south east) rectangle (#1.north);
+\end{pgfonlayer}
+}
+
+\newcommand{\repfrom}[4]{
+ \fill[catterm] (#1.south west) rectangle (#1.north);
+ \fill[catc] (#1.south east) rectangle (#1.north);
+ \draw (#1.south) to node{#2} (#1.center) to node{#3} (#1.north);
+ \strnat{#1.center};
+ \strlabr{#1.center}{#4}
+}
+
+\newcommand{\repfromex}[5]{
+ \path (#1.north)
+       -- ++(-1,0) coordinate (#1-a)
+       -- ++(0,-1.5) coordinate (#1-a')
+       (#1.north)
+       -- ++(1,0) coordinate (#1-b)
+       -- ++(0,-1.5) coordinate (#1-b');
+ \fill[catc] (#1-a) rectangle (#1-b');
+ \fill[catterm] (#1.south west) -- (#1.south) -- (#1.center) -- (#1-a') -- (#1-a) -- (#1.north west) -- cycle;
+ \fill[catset] (#1.south east) -- (#1.south) -- (#1.center) -- (#1-b') -- (#1-b) -- (#1.north east) -- cycle;
+ \draw (#1.south) to node[near start]{$*$} ++(0,1.5)
+       (#1-b) -- (#1-b')
+       (#1-a) -- (#1-a');
+ \path (#1.south west) -- ++(0.5,1) coordinate (#1-bl)
+       (#1.north east) -- ++(-0.5,-1) coordinate (#1-tr);
+ \node[rectangle, fit=(#1-bl)(#1-tr)] (#1-subdiag) {};
+ \repfrom{#1-subdiag}{#2}{#3}{#4};
+ \draw[very thick] (#1-subdiag.south west) rectangle (#1-subdiag.north east)
+}
+
+\newcommand{\outerrepfromex}[5]{
+ \path (#1.north)
+       -- ++(-1,0) coordinate[label=above:#3] (#1-a)
+       -- ++(0,-1.5) coordinate (#1-a')
+       (#1.north)
+       -- ++(1,0) coordinate[label=above:#5] (#1-b)
+       -- ++(0,-1.5) coordinate (#1-b');
+\coordinate[label=below:$*$] (#1-bot) at (#1.south);
+ \draw (#1-bot) -- ++(0,1.5)
+       (#1-b) -- (#1-b')
+       (#1-a) -- (#1-a');
+ \path (#1.south west) -- ++(0.5,1) coordinate (#1-bl)
+       (#1.north east) -- ++(-0.5,-1) coordinate (#1-tr);
+ \node[rectangle, fit=(#1-bl)(#1-tr)] (#1-subdiag) {};
+ \repfrom{#1-subdiag}{#2}{#3}{#4};
+ \draw[very thick] (#1-subdiag.south west) rectangle (#1-subdiag.north east);
+\begin{pgfonlayer}{background}
+ \fill[catc] (#1-a) rectangle (#1-b');
+ \fill[catterm] (#1.south west) -- (#1.south) -- (#1.center) -- (#1-a') -- (#1-a) -- (#1.north west) -- cycle;
+ \fill[catset] (#1.south east) -- (#1.south) -- (#1.center) -- (#1-b') -- (#1-b) -- (#1.north east) -- cycle;
+\end{pgfonlayer}
+}
+
+\newcommand{\reptocomp}[7]{
+ \path (#1.center)
+       -- ++(0,-1) coordinate (r)
+       -- +(-1,1) coordinate (a)
+       -- +(1,1) coordinate (b);
+ \path
+  let \p1 = (#1.north) in
+  let \p2 = (a) in
+  let \p3 = (b) in
+  coordinate (a') at (\x2, \y1)
+  coordinate (b') at (\x3, \y1);
+
+ \coordinate (h) at ($(a)!0.5!(a')$);
+
+ \fill[catterm] (#1.south) -- (r) to[out=180,in=270] (a) -- (a') -- (#1.north west) -- (#1.south west) -- cycle;
+ \fill[catset] (#1.south) -- (r) to[out=0,in=270] (b) -- (b') -- (#1.north east) -- (#1.south east) -- cycle;
+ \fill[catc] (a') -- (a) to[out=270,in=180] (r) to[out=0,in=270] (b) -- (b') -- cycle;
+
+ \draw (#1.south) to node{#7} (r)
+       to[out=180,in=270] (a) to node{#2} (h) to node{#3} (a')
+       (r)
+       to[out=0,in=270] (b) to node[swap]{#4} (b');
+ \strnat{r};
+ \strlabu{r}{#5};
+ \strnat{h};
+ \strlabr{h}{#6}
+}
+
+\newcommand{\repfromcomp}[6]{
+ \fill[catterm] (#1.south west) rectangle (#1.north);
+ \fill[catc] (#1.south east) rectangle (#1.north);
+ \coordinate (k) at ($(#1.north)!0.666!(#1.south)$);
+ \coordinate (h) at ($(#1.north)!0.333!(#1.south)$);
+ \draw (#1.south) to node{#2} (k) to node{#3} (h) to node{#4} (#1.north);
+ \strnat{k};
+ \strlabr{k}{#5};
+ \strnat{h};
+ \strlabr{h}{#6}
+}
+
+\newcommand{\bendfmorph}[2]{
+\begin{tikzpicture}[scale=0.5]
+\path coordinate[dot, label=left:\ensuremath{#1}] (fhat) ++(1,-1) coordinate[dot, label=above:$\eta$] (eta) ++(1,1) coordinate (a) 
+ ++(0,#2) coordinate[label=above:$G$] (tr)
+ (fhat) ++(0,#2) coordinate[label=above:$Y$] (tl)
+ (fhat) ++(0,-1) ++(0,-#2) coordinate[label=below:$X$] (b);
+\draw (b) -- (fhat) -- (tl);
+\draw (fhat) to[out=-90, in=-180] (eta) to[out=0, in=-90] (a) -- (tr);
+\begin{pgfonlayer}{background}
+\fill[catterm] ($(tl) + (-1,0)$) rectangle (b);
+\fill[catc] ($(tr) + (1,0)$) rectangle (b);
+\fill[catd] (fhat) to[out=-90, in=-180] (eta) to[out=0, in=-90] (a) -- (tr) -- (tl) -- cycle;
+\end{pgfonlayer}
+\end{tikzpicture}
+}
+
+\newcommand{\bendgmorph}[2]{
+\begin{tikzpicture}[scale=0.5]
+\path coordinate[dot, label=left:\ensuremath{#1}] (f) ++(1,1) coordinate[dot, label=below:$\epsilon$] (epsilon) ++(1,-1) coordinate (a) 
+ ++(0,-#2) coordinate[label=below:$F$] (br)
+ (f) ++(0,-#2) coordinate[label=below:$X$] (bl)
+ (f) ++(0, 1) ++(0,#2) coordinate[label=above:$Y$] (t);
+\draw (bl) -- (f) -- (t)
+ (f) to[out=90, in=180] (epsilon) to[out=0, in=90] (a) -- (br);
+\begin{pgfonlayer}{background}
+\fill[catterm] ($(bl) + (-1,0)$) rectangle (t);
+\fill[catd] ($(br) + (1,0)$) rectangle (t);
+\fill[catc] (f) to[out=90, in=180] (epsilon) to[out=0, in=90] (a) -- (br) -- (bl) -- cycle;
+\end{pgfonlayer}
+\end{tikzpicture}
+}
+
+\newcommand{\fmorph}[9]{
+\begin{tikzpicture}[scale=0.5]
+\path coordinate[dot, label=left:\ensuremath{#1}] (f) +(1,#8) coordinate[label=above:\ensuremath{#2}] (tr)
+ +(0,#8) coordinate[label=above:\ensuremath{#4}] (tl)
+ +(0,-#8) coordinate[label=below:\ensuremath{#3}] (b);
+\draw (b) -- (f) -- (tl)
+      (f) to[out=0, in=-90] (tr);
+\begin{pgfonlayer}{background}
+\fill[#5] ($(b) + (-#9,0)$) rectangle (tl);
+\fill[#6] ($(tr) + (1,0)$) rectangle (b);
+\fill[#7] (f.east) to[out=0, in=-90] (tr) -- (tl) -- (f.north) -- cycle;
+\end{pgfonlayer}
+\end{tikzpicture}
+}
+
+\newcommand{\gmorph}[9]{
+\begin{tikzpicture}[scale=0.5]
+\path coordinate[dot, label=left:\ensuremath{#1}] (g) +(1,-#8) coordinate[label=below:\ensuremath{#2}] (br)
+ +(0,#8) coordinate[label=above:\ensuremath{#4}] (t)
+ +(0,-#8) coordinate[label=below:\ensuremath{#3}] (bl);
+\draw (g) to[out=0, in=90] (br)
+ (bl) -- (g) -- (t);
+\begin{pgfonlayer}{background}
+\fill[#5] ($(t) + (-#9,0)$) rectangle (bl);
+\fill[#7] (t) rectangle ($(br) + (1,0)$);
+\fill[#6] (g.east) to[out=0, in=90] (br) -- (bl) -- (g.south) -- cycle;
+\end{pgfonlayer}
+\end{tikzpicture}
+}
+
+\newcommand{\hmorph}[3]{
+\begin{tikzpicture}[scale=0.5]
+\path coordinate[dot, label=left:\ensuremath{#1}] (f) +(0,-1) coordinate[label=below:\ensuremath{#2}] (b)
+ ++(0,1) coordinate[label=above:\ensuremath{#3}] (tl) ++(1,0) coordinate[label=above:$T$] (tr)
+ ++(0,-1) coordinate[dot, label=below:$\eta$] (eta);
+\draw (eta) -- (tr)
+ (b) -- (f) -- (tl);
+\begin{pgfonlayer}{background}
+\fill[catterm] ($(b) + (-1,0)$) rectangle (tl);
+\fill[catc] (b) rectangle ($(tr) + (1,0)$);
+\end{pgfonlayer}
+\end{tikzpicture}
+}
+
+\newcommand{\onecelldiag}[5]{
+\begin{tikzpicture}[scale=0.5]
+\path coordinate[label=below:\ensuremath{#1}] (b) ++(0,#4) coordinate[label=above:\ensuremath{#1}] (t);
+\draw (b) -- (t);
+\begin{pgfonlayer}{background}
+\fill[#2] ($(t) + (-#5,0)$) rectangle (b);
+\fill[#3] (t) rectangle ($(b) + (#5,0)$);
+\end{pgfonlayer}
+\end{tikzpicture}
+}
+
+\newcommand{\twocelldiag}[8]{
+\begin{tikzpicture}[scale=0.5]
+\path coordinate[dot, label=right:\ensuremath{#1}] (alpha)
+ +(0,#8) coordinate[label=above:\ensuremath{#3}] (t)
+ +(0,-#8) coordinate[label=below:\ensuremath{#2}] (b);
+\draw (b) -- (alpha) -- (t);
+\begin{pgfonlayer}{background}
+\fill[#4] ($(t) + (-#6,0)$) rectangle (b);
+\fill[#5] ($(t) + (#7,0)$) rectangle (b);
+\end{pgfonlayer}
+\end{tikzpicture}
+}
+
+\newcommand{\twocellpairdiag}[9]{
+\begin{tikzpicture}[scale=0.5]
+\path coordinate[dot, label=right:\ensuremath{#1}] (alpha) +(0,-#9) coordinate[label=below:\ensuremath{#3}] (b)
+ ++(0,1) coordinate[dot, label=right:\ensuremath{#2}] (beta) ++(0,#9) coordinate[label=above:\ensuremath{#4}] (t);
+\draw (b) -- (alpha) -- (beta) -- (t);
+\begin{pgfonlayer}{background}
+\fill[#5] ($(t) + (-#7,0)$) rectangle (b);
+\fill[#6] ($(t) + (#8,0)$) rectangle (b);
+\end{pgfonlayer}
+\end{tikzpicture}
+}
+
+%This diagram has padding at the bottom to aid layout
+\newcommand{\cupcell}[5]{
+\begin{tikzpicture}[scale=0.5]
+\path coordinate[dot, label=above:\ensuremath{#1}] 
+ (eta) ++(-1,1) coordinate (a) ++(0,0.5) coordinate[label=above:\ensuremath{#2}] (tl)
+ (eta) ++(1,1) coordinate (b) ++(0,0.5) coordinate[label=above:\ensuremath{#3}] (tr);
+\draw (tl) -- (a) to[out=-90, in=180] (eta.west) -- (eta.east) to[out=0, in=-90] (b) -- (tr);
+\begin{pgfonlayer}{background}
+\fill[#4] ($(tl) + (-1,0)$) rectangle ($(tr) + (1,-2)$);
+\fill[#5] (tl) -- (a) to[out=-90, in=180] (eta.west) -- (eta.east) to[out=0, in=-90] (b) -- (tr) -- cycle;
+\fill[white] ($(tl) + (-1,-2)$) rectangle ($(tr) + (1,-3)$);
+\end{pgfonlayer}
+\end{tikzpicture}
+}
+
+\newcommand{\capcell}[5]{
+\begin{tikzpicture}[scale=0.5]
+\path coordinate[dot, label=below:\ensuremath{#1}] 
+ (epsilon) ++(-1,-1) coordinate (a) ++(0,-0.5) coordinate[label=below:\ensuremath{#2}] (bl)
+ (epsilon) ++(1,-1) coordinate (b) ++(0,-0.5) coordinate[label=below:\ensuremath{#3}] (br);
+\draw (bl) -- (a) to[out=90, in=180] (epsilon.west) -- (epsilon.east) to[out=0, in=90] (b) -- (br);
+\begin{pgfonlayer}{background}
+\fill[#4] ($(bl) + (-1,0)$) rectangle ($(br) + (1,2)$);
+\fill[#5] (bl) -- (a) to[out=90, in=180] (epsilon.west) -- (epsilon.east) to[out=0, in=90] (b) -- (br) -- cycle;
+\end{pgfonlayer}
+\end{tikzpicture}
+}
+
+\newcommand{\klcomp}{
+\begin{tikzpicture}[scale=0.5]
+\path coordinate[dot, label=left:$f$] (f) +(0,-1) coordinate[label=below:$X$] (b)
+ ++(0,1) coordinate[dot, label=left:$g$] (g) +(0,3) coordinate[label=above:$Z$] (tl)
+ ++(2,2) coordinate[dot, label=below:$\mu$] (mu) ++(0,1) coordinate[label=above:$T$] (tr)
+ (mu) ++(1,-1) coordinate (a);
+\draw (b) -- (f) -- (g) -- (tl)
+ (mu) -- (tr)
+ (f) to[out=0, in=-90] (a) to[out=90, in=0] (mu)
+ (g) to[out=0, in=180] (mu);
+\begin{pgfonlayer}{background}
+\fill[catterm] ($(b) + (-1,0)$) rectangle (tl);
+\fill[catc] (b) rectangle ($(tr) + (2,0)$);
+\end{pgfonlayer}
+\end{tikzpicture}
+}
+
+\newcommand{\unitpullleft}[6]{
+\begin{tikzpicture}[scale=0.5]
+\path coordinate[label=below:\ensuremath{#4}] (b)
+ ++(0,2) coordinate (l)
+ ++(2,1) coordinate[label=above:\ensuremath{#4}] (tr)
+ (b) ++(1,1) coordinate[dot, label=right:\ensuremath{#1}] (eta) ++(0,2) coordinate[label=above:\ensuremath{#3}] (tl);
+\draw[name path=curv] (b) -- (l) to[out=90, in=-90] (tr);
+\draw[name path=vert] (eta) -- (tl);
+\path[name intersections={of=vert and curv}] coordinate[dot, label=-45:\ensuremath{#2}] (sigma) at (intersection-1);
+\begin{pgfonlayer}{background}
+\fill[#5] ($(b) + (-0.5,0)$) rectangle ($(tr) + (0.5,0)$);
+\fill[#6] (b) -- (l) to[out=90, in=-90] (tr) -- ++(0.5,0) -- ++(0,-3) -- cycle;
+\end{pgfonlayer}
+\end{tikzpicture}
+}
+
+\newcommand{\unitpulledleft}[5]{
+\begin{tikzpicture}[scale=0.5]
+\path coordinate[dot, label=left:\ensuremath{#1}] (eta) +(0,1) coordinate[label=above:\ensuremath{#2}] (tl)
+ ++(1,0) coordinate (r) +(0,1) coordinate[label=above:\ensuremath{#3}] (tr)
+ ++(-2,-2) coordinate[label=below:\ensuremath{#3}] (b);
+\draw (eta) -- (tl)
+ (b) to[out=90, in=-90] (r) -- (tr);
+\begin{pgfonlayer}{background}
+\fill[#4] ($(b) + (-0.5,0)$) rectangle ($(tr) + (0.5,0)$);
+\fill[#5] (b) to[out=90, in=-90] (r) -- (tr) -- ++(0.5,0) -- ++(0,-3) -- cycle;
+\end{pgfonlayer}
+\end{tikzpicture}
+}
+
+\newcommand{\unitpullright}[6]{
+\begin{tikzpicture}[scale=0.5]
+\path coordinate[dot, label=left:\ensuremath{#1}] (eta) ++(0,2) coordinate[label=above:\ensuremath{#3}] (tr)
+ ++(-1,0) coordinate[label=above:\ensuremath{#4}] (tl)
+ (eta) ++(1,0) coordinate (r) ++(0,-1) coordinate[label=below:\ensuremath{#4}] (b);
+\draw[name path=curv] (b) -- (r) to[out=90, in=-90] (tl);
+\draw[name path=vert] (eta) -- (tr);
+\path[name intersections={of=vert and curv}] coordinate[dot, label={[label distance=0.25cm]right:\ensuremath{#2}}] (f) at (intersection-1);
+\begin{pgfonlayer}{background}
+\fill[#6] ($(tl) + (-0.5,0)$) rectangle ($(b) + (0.5,0)$);
+\fill[#5] (b) -- (r) to[out=90, in=-90] (tl) -- ++(-0.5,0) -- ++(0,-3) -- cycle;
+\end{pgfonlayer}
+\end{tikzpicture}
+}
+\newcommand{\unitpulledright}[5]{
+\begin{tikzpicture}[scale=0.5]
+\path coordinate[dot, label=right:\ensuremath{#1}] (eta) ++(0,1) coordinate[label=above:\ensuremath{#2}] (tr)
+ ++(-1,0) coordinate[label=above:\ensuremath{#3}] (tl) ++(0,-2) coordinate (l) ++(2,-1) coordinate[label=below:\ensuremath{#3}] (b);
+\draw (eta) -- (tr);
+\draw (b) to[out=90, in=-90] (l) -- (tl);
+\begin{pgfonlayer}{background}
+\fill[#5] ($(tl) + (-0.5,0)$) rectangle ($(b) + (0.5,0)$);
+\fill[#4] (b) to[out=90, in=-90] (l) -- (tl) -- ++(-0.5,0) -- ++(0,-3) -- cycle;
+\end{pgfonlayer}
+\end{tikzpicture}
+}
+
+\newcommand{\multpulledleft}[7]{
+\begin{tikzpicture}[scale=0.5]
+\path coordinate[dot, label=below:\ensuremath{#1}] (mu) +(0,1) coordinate[label=above:\ensuremath{#3}] (tl)
+ +(-1,-3) coordinate[label=-45:\ensuremath{#4}] (bm)
+ +(1,-3) coordinate[label=below:\ensuremath{#4}] (br)
+ (bm) ++(-0.5,0) coordinate[label=below:\ensuremath{#5}] (bl)
+ (mu) ++(1.5,0) coordinate (r) ++(0,1) coordinate[label=above:\ensuremath{#5}] (tr);
+\draw (mu) -- (tl);
+\draw[name path=vert1] (bm) to[out=90, in=180] (mu.west);
+\draw[name path=vert2] (br) to[out=90, in=0] (mu.east);
+\draw[name path=curv] (bl) to[out=90, in=-90] (r) -- (tr);
+\path[name intersections={of=vert1 and curv}] coordinate[dot, label=135:\ensuremath{#2}] (f1) at (intersection-1);
+\path[name intersections={of=vert2 and curv}] coordinate[dot, label=-45:\ensuremath{#2}] (f2) at (intersection-1);
+\begin{pgfonlayer}{background}
+\fill[#6] ($(bl) + (-0.5,0)$) rectangle ($(tr) + (0.5,0)$);
+\fill[#7] (bl) to[out=90, in=-90] (r) -- (tr) -- ++(0.5,0) -- ++(0,-4) -- cycle;
+\end{pgfonlayer}
+\end{tikzpicture}
+}
+
+\newcommand{\multpullleft}[7]{
+\begin{tikzpicture}[scale=0.5]
+\path coordinate[dot, label=below:\ensuremath{#1}] (mu) +(0,2) coordinate[label=above:\ensuremath{#3}] (tl)
+ +(-1,-2) coordinate[label=-45:\ensuremath{#4}] (bm)
+ +(1,-2) coordinate[label=below:\ensuremath{#4}] (br)
+ (tl) ++(1.5,0) coordinate[label=above:\ensuremath{#5}] (tr)
+ (bm) ++(-0.5,0) coordinate[label=below:\ensuremath{#5}] (bl) ++(0,1) coordinate (l);
+\draw[name path=vert] (mu) -- (tl);
+\draw (bm) to[out=90, in=180] (mu.west);
+\draw (br) to[out=90, in=0] (mu.east);
+\draw[name path=curv] (bl) -- (l) to[out=90, in=-90] (tr);
+\path[name intersections={of=vert and curv}] coordinate[dot, label=135:\ensuremath{#2}] (f) at (intersection-1);
+\begin{pgfonlayer}{background}
+\fill[#6] ($(bl) + (-0.5,0)$) rectangle ($(tr) + (0.5,0)$);
+\fill[#7] (bl) -- (l) to[out=90, in=-90] (tr) -- ++(0.5,0) -- ++(0,-4) -- cycle;
+\end{pgfonlayer}
+\end{tikzpicture}
+}
+
+\newcommand{\multpullright}[7]{
+\begin{tikzpicture}[scale=0.5]
+\path coordinate[dot, label=below:\ensuremath{#1}] (mu) +(0,2) coordinate[label=above:\ensuremath{#3}] (tr)
+ +(-1,-2) coordinate[label=below:\ensuremath{#4}] (bl)
+ +(1,-2) coordinate[label=-135:\ensuremath{#4}] (bm)
+ (tr) ++(-1.5,0) coordinate[label=above:\ensuremath{#5}] (tl)
+ (bm) ++(0.5,0) coordinate[label=below:\ensuremath{#5}] (br) ++(0,1) coordinate (r);
+\draw[name path=curv] (br) -- (r) to[out=90, in=-90] (tl);
+\draw[name path=vert] (mu) -- (tr);
+\draw (bl) to[out=90, in=180] (mu.west) -- (mu.east) to[out=0, in=90] (bm);
+\path[name intersections={of=vert and curv}] coordinate[dot, label=45:\ensuremath{#2}] (f) at (intersection-1);
+\begin{pgfonlayer}{background}
+\fill[#6] ($(tl) + (-0.5,0)$) rectangle ($(br) + (0.5,0)$);
+\fill[#7] (br) -- (r) to[out=90, in=-90] (tl) -- ++(3.5,0) -- ++(0,-4) -- cycle;
+\end{pgfonlayer}
+\end{tikzpicture}
+}
+
+\newcommand{\multpulledright}[7]{
+\begin{tikzpicture}[scale=0.5]
+\path coordinate[dot, label=below:$\mu'$] (mu) +(0,1) coordinate[label=above:\ensuremath{#3}] (tr)
+ +(-1,-3) coordinate[label=below:\ensuremath{#4}] (bl)
+ +(1,-3) coordinate[label=-135:\ensuremath{#4}] (bm)
+ (tr) ++(-1.5,0) coordinate[label=above:\ensuremath{#5}] (tl) ++(0,-1) coordinate (l)
+ (bm) ++(0.5,0) coordinate[label=below:\ensuremath{#5}] (br);
+\draw (mu) -- (tr);
+\draw[name path=vert1] (bl) to[out=90, in=180] (mu.west);
+\draw[name path=vert2] (bm) to[out=90, in=0] (mu.east);
+\draw[name path=curv] (br) to[out=90, in=-90] (l) -- (tl);
+\path[name intersections={of=vert1 and curv}] coordinate[dot, label=-135:\ensuremath{#2}] (f1) at (intersection-1);
+\path[name intersections={of=vert2 and curv}] coordinate[dot, label={[label distance=0.25cm]left:\ensuremath{#2}}] (f2) at (intersection-1);
+\begin{pgfonlayer}{background}
+\fill[#6] ($(tl) + (-0.5,0)$) rectangle ($(br) + (0.5,0)$);
+\fill[#7] (br) to[out=90, in=-90] (l) -- (tl) -- ++(3.5,0) -- ++(0,-4) -- cycle;
+\end{pgfonlayer}
+\end{tikzpicture}
+}
+
+\newcommand{\coalgmordom}[8]{
+\begin{tikzpicture}[scale=0.5]
+\path coordinate[dot, label=left:\ensuremath{#1}] (a)
+ +(0,-1) coordinate[label=below:\ensuremath{#3}] (b)
+ ++(0,1) coordinate[dot, label=left:\ensuremath{#2}] (h)
+ ++(0,1) coordinate[label=above:\ensuremath{#4}] (tl)
+ ++(1,0) coordinate[label=above:\ensuremath{#5}] (tr);
+\draw (b) -- (a) -- (h) -- (tl)
+ (a) to[out=0, in=-90] (tr);
+\begin{pgfonlayer}{background}
+\fill[catterm] ($(b) + (-#7,0)$) rectangle (tl);
+\fill[#6] (b) rectangle ($(tr) + (#8,0)$);
+\end{pgfonlayer}
+\end{tikzpicture}
+}
+
+\newcommand{\coalgmorcodom}[8]{
+\begin{tikzpicture}[scale=0.5]
+\path coordinate[dot, label=left:\ensuremath{#2}] (h)
+ +(0,-1) coordinate[label=below:\ensuremath{#3}] (bot)
+ ++(0,1) coordinate[dot, label=left:\ensuremath{#1}] (b)
+ ++(0,1) coordinate[label=above:\ensuremath{#4}] (tl)
+ ++(1,0) coordinate[label=above:\ensuremath{#5}] (tr);
+\draw (bot) -- (h) -- (b) -- (tl)
+ (b) to[out=0, in=-90] (tr);
+\begin{pgfonlayer}{background}
+\fill[catterm] ($(bot) + (-#7,0)$) rectangle (tl);
+\fill[catc] (bot) rectangle ($(tr) + (#8,0)$);
+\end{pgfonlayer}
+\end{tikzpicture}
+}
+
+\newcommand{\diagrepto}[9]{
+\begin{tikzpicture}[scale=0.5]
+\path coordinate[dot, label=above:\ensuremath{#1}] (cell)
+ +(-1,#9) coordinate[label=above:\ensuremath{#3}] (tl)
+ +(1,#9) coordinate[label=above:\ensuremath{#4}] (tr)
+ +(0,-1) coordinate[label=below:\ensuremath{#2}] (b);
+\draw (b) -- (cell)
+ (tl) to[out=-90, in=180] (cell.west) -- (cell.east) to[out=0, in=-90] (tr);
+\begin{pgfonlayer}{background}
+\fill[#5] ($(tl) + (-#8,0)$) rectangle (b);
+\fill[#7] ($(tr) + (#8,0)$) rectangle (b);
+\fill[#6] (tl) to[out=-90, in=180] (cell.west) -- (cell.east) to[out=0, in=-90] (tr) -- cycle;
+\end{pgfonlayer}
+\end{tikzpicture}
+}
+
+\newcommand{\repuniva}[1]{
+\begin{tikzpicture}[auto, x=0.5cm, y=0.5cm]
+\diagbb{2cm}{2cm};
+\path (cbb.north west) ++(0.5,-1.5) coordinate (tl)
+      (cbb.south east) ++(-0.5, 1) coordinate (br);
+\node[rectangle, fit=(tl)(br)] (subdiag) {};
+\path (subdiag.north)
+      +(-1,0) coordinate (a)
+      +(1,0) coordinate (b)
+      (subdiag.south) coordinate (c);
+\path let \p1 = (cbb.north) in
+      let \p2 = (cbb.south) in
+      let \p3 = (a) in
+      let \p4 = (b) in
+      let \p5 = (c) in
+ coordinate[label=above:$X$] (a') at (\x3, \y1)
+ coordinate[label=above:$G$] (b') at (\x4, \y1)
+ coordinate[label=below:$*$] (c') at (\x5, \y2)
+ coordinate[dot, label=right:\ensuremath{#1}] (f) at ($(a)!0.5!(a')$);
+\begin{pgfonlayer}{background}
+\fill[catset] (cbb.north west) rectangle (cbb.south east);
+\fill[catc] (a) rectangle (b');
+\fill[catterm] (c') -- (c) -- (a) -- (a') -- (cbb.north west) -- (cbb.south west) -- cycle;
+\fill[catc] (subdiag.south west) rectangle (subdiag.north east);
+\fill[catterm] (subdiag.south west) rectangle (subdiag.north);
+\end{pgfonlayer}
+\draw (subdiag.south) to node{$R$} (subdiag.north)
+      (a) -- (f) -- (a')
+      (b) -- (b')
+      (c') -- (c);
+\draw[very thick] (subdiag.south west) rectangle (subdiag.north east);
+\end{tikzpicture}
+}
