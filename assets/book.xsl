@@ -24,7 +24,6 @@
       <xsl:text>\documentclass[crop]{standalone}</xsl:text>
       <xsl:text>&#xa;</xsl:text>
       <xsl:value-of select="f:embedded-tex-preamble" />
-      <xsl:text>\usepackage{newtxmath,newtxtext}</xsl:text>
       <xsl:text>&#xa;</xsl:text>
       <xsl:text>\begin{document}</xsl:text>
       <xsl:value-of select="f:embedded-tex-body" />

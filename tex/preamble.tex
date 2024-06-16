@@ -6,9 +6,24 @@
 % Extra stuff for Forester
 \newcommand{\texstrip}{}
 \usepackage{mathtools, stmaryrd}
-\usepackage[mode=tex]{standalone}
-\setcounter{tocdepth}{5}
-\setcounter{secnumdepth}{5}
+
+% avoid package load order conflicts etc.
+% otherwise with only
+% \usepackage[subpreambles=true]{standalone}
+% we have errors like:
+% (/usr/local/texlive/2024/texmf-dist/tex/latex/spath3/tikzlibraryspath3.code.tex
+% (/usr/local/texlive/2024/texmf-dist/tex/latex/spath3/spath3.sty)))
+% (../tex/string-diagrams.tex
+% (/usr/local/texlive/2024/texmf-dist/tex/latex/string-diagrams/string-diagrams.s
+% ty)) (../tex/diagrams.tex
+
+% ! LaTeX Error: Command \dontworryaboutit already defined.
+%                Or name \end... illegal, see p.192 of the manual.
+\usepackage[mode=tex,subpreambles=true]{standalone}
+% \usepackage[mode=tex,subpreambles=true,print,sort]{standalone}
+
+% \setcounter{tocdepth}{5}
+% \setcounter{secnumdepth}{5}
 
 % https://www.overleaf.com/learn/latex/Articles%2FHow_to_change_paragraph_spacing_in_LaTeX#Understanding_\baselinestretch_and_\linespread
 % \renewcommand{\baselinestretch}{1.2}\selectfont
@@ -31,12 +46,12 @@
 % From my preamble/common.tex
 \usepackage[svgnames,dvipsnames]{xcolor}
 % \PassOptionsToPackage{usenames,svgnames,dvipsnames}{xcolor}
-\usepackage{amsmath,amsfonts,amsthm,amssymb}
+% \usepackage{amsmath,amsfonts,amsthm,amssymb}
 \usepackage{graphicx}
 \DeclareGraphicsExtensions{.svg,.png,.jpg}
-\usepackage{tikz}
-\usepackage{tikz-cd}
-\usetikzlibrary{shapes,arrows,decorations}
+% \usepackage{tikz}
+% \usepackage{tikz-cd}
+% \usetikzlibrary{shapes,arrows,decorations}
 % \usepackage{color} 
 % \PassOptionsToPackage{hyphens}{url}
 % \usepackage[unicode]{hyperref}
