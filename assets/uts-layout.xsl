@@ -29,7 +29,7 @@
         <title>
           <xsl:value-of select="/f:tree/f:frontmatter/f:title" />
         </title>
-        <script src="https://cdn.jsdelivr.net/gh/iconfu/svg-inject@v1.2.3/dist/svg-inject.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/gh/iconfu/svg-inject@v1.2.3/dist/svg-inject.min.js"></script> -->
         <script src="uts-forester.js"></script>
         <script type="module" src="shiki.js"></script>
       </head>

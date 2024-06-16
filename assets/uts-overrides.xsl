@@ -58,7 +58,8 @@
     <!-- uts-begin: Override embeded-tex to be injected SVG to support dark theme, resize etc. -->
     <xsl:template match="f:embedded-tex">
     <center>
-        <img src="resources/{@hash}.svg" onload="SVGInject(this)" class="embedded-tex-svg"/>
+        <img src="resources/{@hash}.svg" class="embedded-tex-svg"/>
+        <!-- <img src="resources/{@hash}.svg" onload="SVGInject(this)" class="embedded-tex-svg"/> -->
     </center>
     </xsl:template>
     <!-- uts-end -->
