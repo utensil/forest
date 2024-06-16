@@ -152,27 +152,12 @@
 
 \p{\code{tikz[a]}: A TikZ graph rendered via LaTeX.}
 
-\def\tikz[a]{
-    \tex{
-      \usepackage{amsmath,amsfonts,amsthm,amssymb}
-      \usepackage{newpxtext,newpxmath}
-      \usepackage{tikz-cd}
-    }{
-        \startverb
-        \begin{minipage}{1.0\linewidth}
-        \begin{figure}[H]
-        \centering
-        \stopverb
-        \a
-        \startverb
-        \end{figure}
-        \end{minipage}
-        \stopverb
-    }
-}
-
 % \def\tikz[a]{
-%     \texfig{
+%     \tex{
+%       \usepackage{amsmath,amsfonts,amsthm,amssymb}
+%       \usepackage{newpxtext,newpxmath}
+%       \usepackage{tikz-cd}
+%     }{
 %         \startverb
 %         \begin{minipage}{1.0\linewidth}
 %         \begin{figure}[H]
@@ -185,6 +170,21 @@
 %         \stopverb
 %     }
 % }
+
+\def\tikz[a]{
+    \texfig{
+        \startverb
+        \begin{minipage}{1.0\linewidth}
+        \begin{figure}[H]
+        \centering
+        \stopverb
+        \a
+        \startverb
+        \end{figure}
+        \end{minipage}
+        \stopverb
+    }
+}
 
 \p{\code{codeblock[lang][body]}: A code block specifying the language.}
 
