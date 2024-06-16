@@ -41,6 +41,8 @@
   \end{tikzpicture}
 }
 
+\p{The following is testing string diagram drawing using the example from [LaTeX package "string-diagrams"](https://www.ctan.org/pkg/string-diagrams):}
+
 \tikz{
   \begin{tikzpicture}[scale=0.6]
   \node[box=0/2/0/1] (A) at (-2, 0) {A};
@@ -70,3 +72,48 @@
   }
   \end{tikzpicture}
 }
+
+\p{The following is testing string diagram drawing using the example from [[marsden2014category]]:}
+
+\tikz{
+  \begin{tikzpicture}[scale=0.5]
+  \fill[catc] (0,0) rectangle (4,4);
+  \end{tikzpicture}
+}
+
+\tikz{
+\begin{tikzpicture}[scale=0.5]
+\path coordinate[label=below:$F$] (b) ++(0,4) coordinate[label=above:$F$] (t);
+\draw (b) -- (t);
+\begin{pgfonlayer}{background}
+\fill[catc] ($(t) + (-2,0)$) rectangle (b);
+\fill[catd] (t) rectangle ($(b) + (2,0)$);
+\end{pgfonlayer}
+\end{tikzpicture}
+}
+
+\tikz{
+\begin{tikzpicture}[scale=0.5]
+\path coordinate[label=below:$F$] (bl) +(0,4) coordinate[label=above:$F$] (tl)
+ ++(2,0) coordinate[label=below:$G$] (br) ++(0,4) coordinate[label=above:$G$] (tr);
+\draw (bl) -- (tl)
+      (br) -- (tr);
+\begin{pgfonlayer}{background}
+\fill[catc] ($(tl) + (-2,0)$) rectangle (bl);
+\fill[catd] (tl) rectangle (br);
+\fill[cate] (tr) rectangle ($(br) + (2,0)$);
+\end{pgfonlayer}
+\end{tikzpicture}
+}
+
+\tikz{
+\begin{tikzpicture}[scale=0.5]
+\path coordinate[label=below:$F$] (b) ++(0,2) coordinate[dot, label=right:$\alpha$] (alpha) ++(0,2) coordinate[label=above:$F'$] (t);
+\draw (b) -- (alpha) -- (t);
+\begin{pgfonlayer}{background}
+\fill[catc] ($(t) + (-2,0)$) rectangle (b);
+\fill[catd] (t) rectangle ($(b) + (2,0)$);
+\end{pgfonlayer}
+\end{tikzpicture}
+}
+
