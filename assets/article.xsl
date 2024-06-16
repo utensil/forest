@@ -36,11 +36,13 @@
     <xsl:apply-templates select="/f:tree/f:backmatter/f:references" />
     <xsl:text>\maketitle</xsl:text>
     <xsl:apply-templates select="/f:tree/f:mainmatter" />
-    <!-- https://www.bibtex.com/s/bibliography-style-acmart-acm-reference-format/ -->
-    <xsl:text>\bibliographystyle{ACM-Reference-Format}</xsl:text>
-    <!-- https://www.bibtex.com/s/bibliography-style-misc-amsalpha/ -->
-    <!-- <xsl:text>\bibliographystyle{amsalpha}</xsl:text> -->
-    <xsl:text>\bibliography{\jobname.bib}</xsl:text>
+    <xsl:if test="count(/f:tree/f:backmatter/f:references/f:tree)>0">
+      <!-- https://www.bibtex.com/s/bibliography-style-acmart-acm-reference-format/ -->
+      <xsl:text>\bibliographystyle{ACM-Reference-Format}</xsl:text>
+      <!-- https://www.bibtex.com/s/bibliography-style-misc-amsalpha/ -->
+      <!-- <xsl:text>\bibliographystyle{amsalpha}</xsl:text> -->
+      <xsl:text>\bibliography{\jobname.bib}</xsl:text>
+    </xsl:if>
     <xsl:text>\end{document}</xsl:text>
   </xsl:template>
 

@@ -24,7 +24,10 @@ cd build
 # if [ -n "$CI" ]; then
 #     echo "lize.sh| CI is set, using xelatex"
     xelatex -halt-on-error -interaction=nonstopmode --shell-escape $TEX_FILE
-    bibtex $AUX_FILE
+    # https://tex.stackexchange.com/a/295524/75671
+    # biber $TEX_FILE
+    # We should ignore bibtex errors if it's simply an empty .bib file
+    bibtex $AUX_FILE || echo "lize.sh| Ignoring bibtex error"
     xelatex -halt-on-error -interaction=nonstopmode --shell-escape $TEX_FILE
     xelatex -halt-on-error -interaction=nonstopmode --shell-escape $TEX_FILE
 # else
@@ -39,3 +42,5 @@ cp build/$PDF_FILE output/$PDF_FILE
 echo "lize.sh| Open build/$1.log to see the log."
 echo "lize.sh| Open build/$TEX_FILE to see the LaTeX source."
 echo "lize.sh| Open output/$PDF_FILE to see the result."
+
+# use ./lize.sh math-0001 2>&1|grep lize to see a short output
