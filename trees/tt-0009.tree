@@ -1,0 +1,29 @@
+\import{tt-macros}
+% clifford hopf spin tt math draft
+\tag{tt}
+
+% definition theorem lemma construction observation
+% convention corollary axiom example exercise proof
+% discussion remark notation
+% \taxon{}
+
+\refdef{comma category}{kostecki2011introduction}{
+  The comma category #{\C \downarrow X}, also called slice category and denoted by #{\C / X}, is the category whose objects are arrows in #{\C} with fixed codomain #{X}, such that the diagram
+
+  \tikz{
+\begin{tikzcd}
+	Y &&&& W \\
+	&& Z \\
+	\\
+	&& X
+	\arrow["{{i ; j}}"{description}, from=1-1, to=1-5]
+	\arrow["i"{description}, from=1-1, to=2-3]
+	\arrow["f"{description}, color={rgb,255:red,153;green,92;blue,214}, from=1-1, to=4-3]
+	\arrow["h"{description}, color={rgb,255:red,153;green,92;blue,214}, from=1-5, to=4-3]
+	\arrow["j"{description}, from=2-3, to=1-5]
+	\arrow["g"{description}, color={rgb,255:red,153;green,92;blue,214}, from=2-3, to=4-3]
+\end{tikzcd}
+  }
+
+  commute, where purple arrows are in #{\C \downarrow X}.
+}
