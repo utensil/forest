@@ -11,45 +11,37 @@
 \p{
 	A \newvocab{category} #{\C} consists of:
 	\ul{
-		\li{\newvocab{objects}: #{X, Y, \dots \in \Ob(\C)}}
-		\li{\newvocab{arrows} or \newvocab{morphisms}: #{f, g, \dots \in \Arr(\C)} or #{\Mor(\C)}}
+		\li{\newvocab{objects} #{\Ob(\C)}: #{X, Y, \dots}}
+		\li{\newvocab{arrows} #{\Arr(\C)}: #{f, g, \dots}}
+    \li{a pair of operations #{\cod} and #{\dom} that assign a \newvocab{codomain} object #{X=cod(f)} and a \newvocab{domain} object #{Y=dom(f)} to each arrow #{f}, which is now denoted by ##{f : X \to Y} or ##{\arr{X}{f}{Y}}
   }
 
-  (where #{\Ob(\C)} and #{\Arr(\C)} are [class](https://en.wikipedia.org/wiki/Class_(set_theory))es, i.e. a collection of sets), and
-
-  \ul{
-  
-  \li{a pair of operations: \newvocab{codomain} #{\cod} and \newvocab{domain} #{\dom} for each arrow #{f}}
-    \ul{
-      \li{ #{\cod : \Arr(\C) \to \Ob(\C), f \mapsto X},}
-      \li{ #{\dom : \Arr(\C) \to \Ob(\C), f \mapsto Y},}
-    }
-  }
-
-  denoted by #{f : X \to Y} or #{\arr{X}{f}{Y}}, satisfying,
+  such that,
 
   \ol{
-    \li{(associativity of composition) there exists a \newvocab{composite arrow} of any pair of arrows #{f} and #{g}, denoted by #{g \circ f}, makes the diagrams 
+    \li{(associativity of composition) there exists a \newvocab{composite arrow} of any pair of arrows #{f} and #{g}, denoted by #{g \circ f} or #{ f ; g }, makes the diagrams 
       \tikz{
-      \begin{tikzcd}[column sep=huge, row sep=huge]
-        X \ar[r, "f"] \ar[rd, "g \circ f"'] & Y \ar[d, "g"] \\
-        & Z
-      \end{tikzcd}
+\begin{tikzcd}
+	& Y \\
+	X && Z
+	\arrow["g", from=1-2, to=2-3]
+	\arrow["f", from=2-1, to=1-2]
+	\arrow["{g \circ f} \equiv {f ; g}"', from=2-1, to=2-3]
+\end{tikzcd}
       }
       % commute,
       % % and we say that #{g \circ f} \newvocab{factors} through #{Y}.
       % and such that for any arrows #{\arr{\arr{\arr{X}{f}{Y}}{g}{Z}}{h}{W}}, the diagram
       and
       \tikz{
-\begin{tikzcd}[column sep=huge, row sep=huge]
-	X && Y \\ \\
-	W && Z
-	\arrow["f", from=1-1, to=1-3]
-	\arrow["{h \circ (g \circ f) = (h \circ g) \circ f}"', from=1-1, to=3-1]
-	\arrow["{g \circ f}"{description, pos=0.25}, from=1-1, to=3-3]
-	\arrow["{h \circ g}"{description, pos=0.75}, from=1-3, to=3-1]
-	\arrow["g", from=1-3, to=3-3]
-	\arrow["h", from=3-3, to=3-1]
+\begin{tikzcd}
+	X && Y && Z && W
+	\arrow["f"{description}, from=1-1, to=1-3]
+	\arrow["{{f; g}}"{description}, curve={height=-30pt}, from=1-1, to=1-5]
+	\arrow["{{(f;g);h = f;(g;h)}}"{description}, curve={height=30pt}, from=1-1, to=1-7]
+	\arrow["g"{description}, from=1-3, to=1-5]
+	\arrow["{{g; h}}"{description}, curve={height=-30pt}, from=1-3, to=1-7]
+	\arrow["h"{description}, from=1-5, to=1-7]
 \end{tikzcd}
       }
       commute,
@@ -57,19 +49,20 @@
 
     \li{(identity arrow) for each object #{Y}, there exists an \newvocab{identity arrow} #{\id_Y : Y \to Y} such that the diagram
       \tikz{
-\begin{tikzcd}[column sep=huge, row sep=huge]
-	X & Y \\
-	& Y & Z
-	\arrow["f", from=1-1, to=1-2]
-	\arrow["f", from=1-1, to=2-2]
-	\arrow["{\id_Y}", from=1-2, to=2-2]
-	\arrow["g", from=1-2, to=2-3]
-	\arrow["g", from=2-2, to=2-3]
+\begin{tikzcd}
+	& Y && Z \\
+	X && Y
+	\arrow["g"{description}, from=1-2, to=1-4]
+	\arrow["{{\id_Y}}"{description}, from=1-2, to=2-3]
+	\arrow["f"{description}, from=2-1, to=1-2]
+	\arrow["f"{description}, from=2-1, to=2-3]
+	\arrow["g"{description}, from=2-3, to=1-4]
 \end{tikzcd}
       }
-      commutes.
+      commutes, i.e. #{ f; \id_Y = f} and #{ \id_Y ; g = g}.
     }
   }
 }
 
+}
 }
