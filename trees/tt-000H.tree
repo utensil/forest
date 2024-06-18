@@ -1,0 +1,42 @@
+\import{tt-macros}
+% clifford hopf spin tt math draft
+\tag{tt}
+\tag{draft}
+
+% definition theorem lemma construction observation
+% convention corollary axiom example exercise proof
+% discussion remark notation
+% \taxon{}
+
+\refdef{opposite category}{kostecki2011introduction}{
+
+A category is called the \newvocab{opposite category} of #{\C} and is denoted by #{C^{op}} iff
+
+\ol{
+  \li{(reversion of arrows)
+    ##{\Ob(\C^{op}) = \Ob(\C)}
+    
+    ##{\Arr(\C^{op}) \ni f: Y \rightarrow X \Longleftrightarrow \Arr(\C) \ni f: X \rightarrow Y}
+  }
+  \li{(reversion of composition)
+
+\tikz{
+$\C \ni$ \begin{tikzcd}
+	X && Y \\
+	& Z
+	\arrow["{{f;g}}"{description}, from=1-1, to=1-3]
+	\arrow["f"', from=1-1, to=2-2]
+	\arrow["g"', from=2-2, to=1-3]
+\end{tikzcd} $\implies$ \begin{tikzcd}
+    X && Y \\
+    & Z
+    \arrow["{g;f}"{description}, from=1-3, to=1-1]
+    \arrow["g", from=1-3, to=2-2]
+    \arrow["f", from=2-2, to=1-1]
+  \end{tikzcd} $ \in \C^{op} $
+}
+
+  }
+}
+
+}
