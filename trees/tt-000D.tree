@@ -1,0 +1,31 @@
+\import{tt-macros}
+% clifford hopf spin tt math draft
+\tag{tt}
+
+% definition theorem lemma construction observation
+% convention corollary axiom example exercise proof
+% discussion remark notation
+% \taxon{}
+
+\refdef{iso}{kostecki2011introduction}{
+
+\p{An arrow #{f : X \to Y} is \newvocab{iso} if both triangles of the diagram
+
+\tikz{
+\begin{tikzcd}[column sep=huge, row sep=huge]
+	X & Y \\
+	X & Y
+	\arrow["f", from=1-1, to=1-2]
+	\arrow["{\id_Y}"', from=1-1, to=2-1]
+	\arrow["{!g}", dotted, from=1-2, to=2-1]
+	\arrow["{\id_Y}", from=1-2, to=2-2]
+	\arrow["f"', from=2-1, to=2-2]
+\end{tikzcd}
+}
+
+commutes, where #{!g} means there exists a unique arrow #{g}, and it's called the \newvocab{inverse} of #{f}.
+}
+
+\p{"Iso" is short for "isomorphism", which is a generalization of the concept of bijective (one-to-one and onto) functions.}
+
+}
