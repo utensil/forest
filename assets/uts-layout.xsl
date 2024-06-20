@@ -57,6 +57,12 @@
           </article>
           <xsl:if test="f:tree/f:mainmatter/f:tree[not(@toc='false')] and not(/f:tree/f:frontmatter/f:meta[@name = 'toc']/.='false')">
             <nav id="toc">
+              <xsl:if test="f:tree/f:frontmatter/f:meta[@name='pdf']">
+                <div>
+                  <a class="link-pdf" href="{/f:tree/f:frontmatter/f:addr}.pdf">📄 View as PDF</a>
+                </div>
+                <hr />
+              </xsl:if>
               <div class="block">
                 <h1>Table of Contents</h1>
                 <xsl:apply-templates select="f:tree/f:mainmatter" mode="toc" />
