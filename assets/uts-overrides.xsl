@@ -46,6 +46,11 @@
                 <xsl:text>[source]</xsl:text>
             </a>
             </xsl:when>
+            <xsl:when test="/f:tree/f:frontmatter/f:taxon[text()='Proof']">
+            <a class="slug-source" href="https://github.com/utensil/forest/blob/main/trees/{../../f:backmatter/f:context/f:tree/f:frontmatter/f:addr}.tree">
+                <xsl:text>[source]</xsl:text>
+            </a>
+            </xsl:when>
             <xsl:otherwise>
             <a class="slug-source" href="https://github.com/utensil/forest/blob/main/trees/{../f:addr}.tree">
                 <xsl:text>[source]</xsl:text>
