@@ -28,6 +28,16 @@
  }
 }
 
+\def\proof[body]{
+ \scope{
+   \put\transclude/toc{false}
+   \subtree{
+     \taxon{proof}
+     \body
+   }
+ }
+}
+
 \strong{Useful macros based on [[jonmsterling]]'s [Public bibliographies](https://www.jonmsterling.com/jms-005X.xml)}
 
 \p{\code{make-topic-bibliography[topic]}: A bibliography of papers, presentations, and people related to a topic.}
