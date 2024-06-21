@@ -25,6 +25,7 @@ script_dir = Path(__file__).resolve().parent
 project_root = script_dir
 
 # Set the bib directory
+tex_dir = project_root / 'tex'
 bib_dir = project_root / 'trees' / 'refs'
 # Set the bib file name
 bib_filename = sys.argv[1] if len(sys.argv) > 1 else 'references'
@@ -32,7 +33,7 @@ bib_filename = sys.argv[1] if len(sys.argv) > 1 else 'references'
 generated_dir = bib_dir / 'generated'
 os.makedirs(generated_dir, exist_ok=True)
 
-bib_file = pathlib.Path(bib_dir) / f'{bib_filename}.bib'
+bib_file = pathlib.Path(tex_dir) / f'{bib_filename}.bib'
 csljson_file = generated_dir / f'{bib_filename}.json'
 
 print(f'📚 {bib_file.relative_to(project_root)} -> {csljson_file.relative_to(project_root)}')
