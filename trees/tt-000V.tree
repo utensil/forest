@@ -7,7 +7,7 @@
 % discussion remark notation
 % \taxon{}
 
-\refdef{pullback}{kostecki2011introduction}{
+\refdef{pullback (fiber product)}{kostecki2011introduction}{
 \p{
 A \newvocab{pullback} of a shape #{P(f, g)} is an object #{X \times_O Y} in #{\C} together with arrows #{p_X} and #{p_Y}, called \newvocab{projection}s, such that, for any object #{D} and arrows #{h} and #{k}, the diagram
 
@@ -32,6 +32,24 @@ commutes.
 }
 
 \p{We say that a category #{\C} \newvocab{has pullbacks} iff \em{every} diagram like #{f} and #{g} (i.e. share the same codomain) in #{\C} has a pullback.}
+
+\p{A pullback is also called a \newvocab{fiber product}.}
+
+\p{The square
+
+\tikz{
+\begin{tikzcd}
+	{X \times_{O} Y} && Y \\
+	\\
+	X && O
+	\arrow["{{p_Y}}", from=1-1, to=1-3]
+	\arrow["{{p_X}}"', from=1-1, to=3-1]
+	\arrow["g", from=1-3, to=3-3]
+	\arrow["f"', from=3-1, to=3-3]
+\end{tikzcd}
+}
+
+is called the \newvocab{pullback square} of #{f} and #{g}.}
 
 }
 
