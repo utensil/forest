@@ -1,0 +1,37 @@
+\import{tt-macros}
+% clifford hopf spin tt math draft
+\tag{draft}
+
+% definition theorem lemma construction observation
+% convention corollary axiom example exercise proof
+% discussion remark notation
+% \taxon{}
+
+\refdef{pullback}{kostecki2011introduction}{
+\p{
+A \newvocab{pullback} of a shape #{P(f, g)} is an object #{X \times_O Y} in #{\C} together with arrows #{p_X} and #{p_Y}, called \newvocab{projection}s, such that, for any object #{D} and arrows #{h} and #{k}, the diagram
+
+\tikz{
+\begin{tikzcd}
+	D \\
+	\\
+	&& {X \times_{O} Y} && Y \\
+	\\
+	&& X && O
+	\arrow["{! \langle h, k \rangle}"{description}, dashed, from=1-1, to=3-3]
+	\arrow["k"{description}, curve={height=-12pt}, from=1-1, to=3-5]
+	\arrow["h"{description}, curve={height=12pt}, from=1-1, to=5-3]
+	\arrow["{p_Y}", from=3-3, to=3-5]
+	\arrow["{p_X}"', from=3-3, to=5-3]
+	\arrow["g", from=3-5, to=5-5]
+	\arrow["f"', from=5-3, to=5-5]
+\end{tikzcd}
+}
+
+commutes.
+}
+
+\p{We say that a category #{\C} \newvocab{has pullbacks} iff \em{every} diagram like #{f} and #{g} (i.e. share the same codomain) in #{\C} has a pullback.}
+
+}
+

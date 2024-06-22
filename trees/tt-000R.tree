@@ -7,16 +7,28 @@
 % discussion remark notation
 % \taxon{}
 
-\refdef{cone}{leinster2016basic}{
+\refdef{fork}{leinster2016basic}{
 \p{
-A \newvocab{cone} over a \vocab{fork} #{(X, Y)} is an object #{E} and arrows over the fork which make the diagram
+A \newvocab{fork} over a shape #{E(f, g)} is the diagram
+
+\tikz{
+\begin{tikzcd}
+	E && X && Y
+	\arrow["\iota", from=1-1, to=1-3]
+	\arrow["f", shift left, from=1-3, to=1-5]
+	\arrow["g"', shift right, from=1-3, to=1-5]
+\end{tikzcd}
+}
+
+
+that makes the diagram
 
 \tikz{
   \begin{tikzcd}
     & E \\
     X && Y
-    \arrow["e"', from=1-2, to=2-1]
-    \arrow["{e;f = e;g}", curve={height=-6pt}, dotted, from=1-2, to=2-3]
+    \arrow["\iota"', from=1-2, to=2-1]
+    \arrow["{{\iota;f = \iota;g}}", curve={height=-6pt}, dotted, from=1-2, to=2-3]
     \arrow["f", shift left, from=2-1, to=2-3]
     \arrow["g"', shift right, from=2-1, to=2-3]
   \end{tikzcd}
@@ -25,4 +37,4 @@ A \newvocab{cone} over a \vocab{fork} #{(X, Y)} is an object #{E} and arrows ove
  commute.
 }}
 
-\p{For simplicity, we refer to a cone by "a cone #{(E, e)} over the fork #{(X, Y)}".}
+\p{For simplicity, we refer to a fork by "a fork #{(E, \iota)} (over the shape #{E(f, g)})".}
