@@ -1,0 +1,34 @@
+\import{tt-macros}
+% clifford hopf spin tt math draft
+\tag{tt}
+
+% definition theorem lemma construction observation
+% convention corollary axiom example exercise proof
+% discussion remark notation
+% \taxon{}
+
+\refdef{binary product}{kostecki2011introduction}{
+A \newvocab{binary product} of objects #{X} and #{Y} is an object #{X \times Y} in #{\C} together with arrows #{p_X} and #{p_Y}, called \newvocab{projection}s, such that, for any object #{D} and arrows #{h} and #{k}, the diagram
+
+\tikz{
+\begin{tikzcd}
+	D \\
+	\\
+	&& {X \times Y} && Y \\
+	\\
+	&& X
+	\arrow["{{! \langle h, k \rangle}}"{description}, dashed, from=1-1, to=3-3]
+	\arrow["k"{description}, curve={height=-12pt}, from=1-1, to=3-5]
+	\arrow["h"{description}, curve={height=12pt}, from=1-1, to=5-3]
+	\arrow["{{p_Y}}", from=3-3, to=3-5]
+	\arrow["{{p_X}}"', from=3-3, to=5-3]
+\end{tikzcd}
+}
+
+commutes.
+
+\p{We say that a category #{\C} \newvocab{has binary products} iff \em{every} pair #{X, Y} in #{\C} has a binary product #{X \times Y} in #{\C}.}
+
+\p{When there is no confusion, we simply call bianry products \newvocab{product}s.}
+
+}
