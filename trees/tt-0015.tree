@@ -1,0 +1,39 @@
+\import{tt-macros}
+% clifford hopf spin tt math draft
+\tag{tt}
+
+% definition theorem lemma construction observation
+% convention corollary axiom example exercise proof
+% discussion remark notation
+% \taxon{}
+
+\refdef{contravariant functor}{kostecki2011introduction}{
+\p{
+A functor #{F} is called a \newvocab{contravariant functor} from #{\C} to #{\D}, and denoted #{F : \C^{op} \Rightarrow \D}, if it obeys the definition given by the \vocab{(covariant) functor} for #{\C} replaced by #{\C^{op}}, i.e. it's given by the diagram
+
+\tikz{
+\begin{tikzcd}
+	X &&&&&& {F(X)} \\
+	\\
+	Y && {} && {} && {F(Y)} \\
+	\\
+	Z &&&&&& {F(Z)} \\
+	{\C^{op}} &&&&&& \D
+	\arrow["f", from=1-1, to=3-1]
+	\arrow["{f;g}"', curve={height=30pt}, from=1-1, to=5-1]
+	\arrow["{\id_Y}", from=3-1, to=3-1, loop, in=325, out=35, distance=10mm]
+	\arrow["g", from=3-1, to=5-1]
+	\arrow["F", Rightarrow, maps to, from=3-3, to=3-5]
+	\arrow["{F(f)}", from=3-7, to=1-7]
+	\arrow["{\id_{F(Y)}}", from=3-7, to=3-7, loop, in=145, out=215, distance=10mm]
+	\arrow["{F(g);F(f)}"', curve={height=30pt}, from=5-7, to=1-7]
+	\arrow["{F(g)}", from=5-7, to=3-7]
+	\arrow["F", Rightarrow, from=6-1, to=6-7]
+\end{tikzcd}
+}
+
+i.e. a map of objects and arrows between categories #{\C} and #{\D} that \em{reverses} the structure of the arrows, compositions and identities.
+
+
+}}
+

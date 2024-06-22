@@ -1,0 +1,35 @@
+\import{tt-macros}
+% clifford hopf spin tt math draft
+\tag{tt}
+
+% definition theorem lemma construction observation
+% convention corollary axiom example exercise proof
+% discussion remark notation
+\taxon{example}
+
+\title{special functors \citek{kostecki2011introduction}}
+
+\p{
+The \newvocab{identity functor} #{\id_{\C}: \C \Rightarrow \C} (denoted also by #{ 1_{\C}: \C \Rightarrow \C}), defined by #{\id_{\C}(X)=X} and #{\id_{\C}(f)=f} for every #{X \in \Ob(\C)} and every #{f \in \Arr(\C)}.
+}
+
+\p{
+The \newvocab{constant functor} #{\Delta_O: \C \Rightarrow \D} which assigns a fixed #{O \in \mathrm{Ob}(\D)} to any object of #{\C} and id #{{ }_O}, the identity arrow on #{O}, to any arrows from #{\C} :
+
+\tikz{
+\begin{tikzcd}
+	X &&&& O \\
+	& {} && {} \\
+	Y &&&& O \\
+	\C &&&& \D
+	\arrow["f"', from=1-1, to=3-1]
+	\arrow["{\id_O}", from=1-5, to=3-5]
+	\arrow["{\Delta_O}", Rightarrow, maps to, from=2-2, to=2-4]
+	\arrow["{\Delta_O}", Rightarrow, from=4-1, to=4-5]
+\end{tikzcd}
+}
+
+with compositions and identities preserved in a trivial way.}
+
+\p{The \newvocab{forgetful functor}, which \em{forgets} some part of structure, however arrows, compositions and identities are preserved.
+}
