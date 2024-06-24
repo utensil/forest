@@ -972,3 +972,19 @@
 \draw[very thick] (subdiag.south west) rectangle (subdiag.north east);
 \end{tikzpicture}
 }
+
+% The following are my custom macros to draw string diagrams in a similar manner
+
+\newcommand{\onecelldiagcomposite}[7]{
+\begin{tikzpicture}[scale=0.5]
+\path coordinate[label=below:#1] (bl) +(0,#6) coordinate[label=above:#1] (tl)
+++(2,0) coordinate[label=below:#2] (br) ++(0,#6) coordinate[label=above:#2] (tr);
+\draw (bl) -- (tl)
+      (br) -- (tr);
+\begin{pgfonlayer}{background}
+\fill[#3] ($(tl) + (-#7,0)$) rectangle (bl);
+\fill[#4] (tl) rectangle (br);
+\fill[#5] (tr) rectangle ($(br) + (#7,0)$);
+\end{pgfonlayer}
+\end{tikzpicture}
+}
