@@ -70,7 +70,7 @@
     }
   }
 
-  \li{The two ways of composing natural transformations are related by the interchange law:
+  \li{The two ways of composing natural transformations are related by the \newvocab{interchange law}:
     \tikz{
 \begin{tikzpicture}[scale=0.5]
 \path coordinate[label=below:$F$] (bl) +(0,4) coordinate[label=above:$F''$] (tl)
@@ -90,5 +90,44 @@
     }
 
   i.e. ##{(\alpha;\alpha');(\beta;\beta') = (\alpha;\beta);(\alpha';\beta')}
+  }
+
+  \li{\newvocab{Naturality} in natural transformations is equivalent to the following equality:
+    \tikz{
+\begin{equation*}
+\begin{gathered}
+\begin{tikzpicture}[scale=0.5]
+\path coordinate[label=below:$X$] (bl) ++(0,1) coordinate[dot, label=left:$\alpha_X$] (alphax) ++(0,1) coordinate[dot, label=left:$f$] (f) 
+ ++(0,1) coordinate[label=above:$X'$] (tl)
+ (bl) +(1,0) coordinate[label=below:$F$] (br)
+ (tl) ++(1,0) coordinate[label=above:$G$] (tr) +(0,-1) coordinate (a);
+\draw[spath/save=xxp] (bl) -- (alphax) -- (f) -- (tl);
+\draw[spath/save=fg] (br) to[out=90, in=0] (alphax) to[out=0, in=-90] (a) -- (tr);
+\begin{pgfonlayer}{background}
+\fill[catc] ($(tl) + (-2,0)$) rectangle ($(br) + (1,0)$);
+\fill[catterm] ($(tl) + (-2,0)$) rectangle (bl);
+\fill[catd] [spath/use={fg,weld}] -- ($(tr) + (1,0)$) -- ($(br) + (1,0)$) -- (br) -- cycle;
+\end{pgfonlayer}
+\end{tikzpicture}
+\end{gathered}
+=
+\begin{gathered}
+\begin{tikzpicture}[scale=0.5]
+\path coordinate[label=below:$X$] (bl) ++(0,1) coordinate[dot, label=left:$f$] (f) ++(0,1) coordinate[dot, label=left:$\alpha_{X'}$] (alphaxp) 
+ ++(0,1) coordinate[label=above:$X'$] (tl)
+ (bl) ++(1,0) coordinate[label=below:$F$] (br) ++(0,1) coordinate (a)
+ (tl) ++(1,0) coordinate[label=above:$G$] (tr);
+\draw[spath/save=xxp] (bl) -- (f) -- (alphaxp) -- (tl);
+\draw[spath/save=fg] (br) -- (a) to[out=90, in=0] (alphaxp) to[out=0, in=-90] (tr);
+\begin{pgfonlayer}{background}
+\fill[catc] ($(tl) + (-2,0)$) rectangle ($(br) + (1,0)$);
+\fill[catterm] ($(tl) + (-2,0)$) rectangle (bl);
+\fill[catd] [spath/use={fg,weld}] -- ($(tr) + (1,0)$) -- ($(br) + (1,0)$) -- (br) -- cycle;
+\end{pgfonlayer}
+\end{tikzpicture}
+\end{gathered}
+\end{equation*}
+    }
+
   }
 }
