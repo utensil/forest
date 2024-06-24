@@ -26,7 +26,9 @@ document.addEventListener('DOMContentLoaded', async () => {
         let themes = ['aurora-x', 'one-light']
 
         document.querySelectorAll('code').forEach(async code => {
-            let lang = code.getAttribute('class') || 'plaintext'
+            let lang = code.getAttribute('class')
+            if(!lang) return
+
             let langAlias = {}
             if(/lean.*/.test(lang) && lean4json) {
                 lang = lean4json
