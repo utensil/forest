@@ -10,11 +10,11 @@
 \title{special functors \citek{kostecki2011introduction}}
 
 \p{
-The \newvocab{identity functor} #{\id_{\C}: \C \Rightarrow \C} (denoted also by #{ 1_{\C}: \C \Rightarrow \C}), defined by #{\id_{\C}(X)=X} and #{\id_{\C}(f)=f} for every #{X \in \Ob(\C)} and every #{f \in \Arr(\C)}.
+The \newvocab{identity functor} #{\id_{\C}: \C \to \C} (denoted also by #{ 1_{\C}: \C \to \C}), defined by #{\id_{\C}(X)=X} and #{\id_{\C}(f)=f} for every #{X \in \Ob(\C)} and every #{f \in \Arr(\C)}.
 }
 
 \p{
-The \newvocab{constant functor} #{\Delta_O: \C \Rightarrow \D} which assigns a fixed #{O \in \mathrm{Ob}(\D)} to any object of #{\C} and #{\id_O}, the identity arrow on #{O}, to any arrows from #{\C} :
+The \newvocab{constant functor} #{\Delta_O: \C \to \D} which assigns a fixed #{O \in \mathrm{Ob}(\D)} to any object of #{\C} and #{\id_O}, the identity arrow on #{O}, to any arrows from #{\C} :
 
 \tikz{
 \begin{tikzcd}
@@ -32,4 +32,20 @@ The \newvocab{constant functor} #{\Delta_O: \C \Rightarrow \D} which assigns a f
 with compositions and identities preserved in a trivial way.}
 
 \p{The \newvocab{forgetful functor}, which \em{forgets} some part of structure, however arrows, compositions and identities are preserved.
+}
+
+\p{
+Let #{\C} be a subcategory of #{\D}. The \newvocab{inclusion functor}, denoted #{\hookrightarrow}, sends objects and arrows of #{\D} into themselves in category #{\D}.}
+
+\p{
+The \newvocab{diagonal functor} #{\Delta: \mathcal{C} \to \mathcal{C} \times \mathcal{C}, \Delta(X)=(X, X)} and #{\Delta(f)=(f, f)} for #{f: X \to X^{\prime}}.
+}
+
+\p{For every [locally small category](tt-000A) #{\C}, the \newvocab{covariant hom-functor}, denoted #{\C(X,-): \C \to \Set }, is given by #{ Y \mapsto \C(X, Y)} for #{Y \in \Ob(\C)} and #{f \mapsto (-;f) } for #{f \in \Arr(\C)}.
+}
+
+\p{Conversely, the \newvocab{contravariant hom-functor}, denoted #{\C(-,X): \C^{op} \to \Set }, is given by #{ Y \mapsto \C(Y, X)} for #{Y \in \Ob(\C)} and #{f \mapsto (f;-) } for #{f \in \Arr(\C)}.
+}
+
+\p{Further, the \newvocab{hom-bifunctor} #{\C(-,-): \C^{op} \times \C \to \Set }, defined as a contravariant hom-functor at first argument and as a covariant hom-functor at second argument.
 }
