@@ -7,8 +7,29 @@
 % discussion remark notation
 \taxon{remark}
 
-\refnote{adjoint functor}{leinster2016basic}{
-\p{An [adjunction](tt-001Q) #{L \dashv R} means arrows #{L(X) \to Y} are essentially the same thing as arrows #{X \to R(Y)} for any #{X \in \C} and #{Y \in \D}, schematically denoted by \newvocab{transposition diagram} (\citek{kostecki2011introduction})
+\refnote{adjoint functor}{kostecki2011introduction}{
+\p{An [adjunction](tt-001Q) #{L \dashv R} means arrows #{L(X) \to Y} are essentially the same thing as arrows #{X \to R(Y)} for any #{X \in \C} and #{Y \in \D}.
+}
+
+\p{This means the diagram
+
+\tikz{
+\begin{tikzcd}
+	f && \bullet \\
+	\\
+	\bullet && \bullet
+	\arrow["{{L(x);-;y}}", maps to, from=1-1, to=1-3]
+	\arrow["{{\sigma_{XY}}}"', maps to, from=1-1, to=3-1]
+	\arrow[maps to, from=1-3, to=3-3]
+	\arrow["{{x;-;R(y)}}"', maps to, from=3-1, to=3-3]
+\end{tikzcd}
+}
+
+commutes for any arrows #{f: L(X) \to Y} in #{\D}.
+
+}
+
+\p{The above can also be schematically denoted by \newvocab{transposition diagram}
 
 ##{
 \begin{array}{ccccccc}
@@ -25,5 +46,5 @@ or simply,
 
 }
 
-\p{An adjunction between #{L} and #{R} is a choice of [natural isomorphism](tt-001H).}
+
 }

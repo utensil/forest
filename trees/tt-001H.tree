@@ -8,10 +8,21 @@
 % \taxon{}
 
 \refdef{natural isomorphism}{kostecki2011introduction}{
-\p{A natural transformation #{\alpha: F \rightarrow G} between functors #{F: \C \rightarrow \D} and #{G: \C \rightarrow \D} is called a \newvocab{natural isomorphism} or a \newvocab{natural equivalence} if each \vocab{component} #{\alpha_X : F(X) \to G(X)} is an isomorphism in #{\D}, i.e. #{F(X) \underset{\alpha_X}{\iso} G(X)}. 
+\p{A natural transformation #{\sigma: F \rightarrow G} between functors #{F: \C \rightarrow \D} and #{G: \C \rightarrow \D} is called a \newvocab{natural isomorphism} or a \newvocab{natural equivalence}, denoted #{\sigma: F \cong G}, if each \vocab{component} #{\sigma_X : F(X) \to G(X)} is an isomorphism in #{\D}, i.e. #{F(X) \underset{\sigma_X}{\iso} G(X)}. 
 }
 
-\p{We denote the natural isomorphism of functors as #{\alpha: F \cong G}, and call #{F} and #{G} \newvocab{naturally isomorphic} to each other.
+\p{We call #{F} and #{G} \newvocab{naturally isomorphic} to each other.
+}
+
+\p{Diagramatically, 
+\tikz{
+\begin{tikzcd}
+	\C && \D
+	\arrow[""{name=0, anchor=center, inner sep=0}, "F", curve={height=-18pt}, from=1-1, to=1-3]
+	\arrow[""{name=1, anchor=center, inner sep=0}, "G"', curve={height=18pt}, from=1-1, to=1-3]
+	\arrow["\sigma", shorten <=5pt, shorten >=5pt, Rightarrow, 2tail reversed, from=0, to=1]
+\end{tikzcd}
+}
 }
 
 }
