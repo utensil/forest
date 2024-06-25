@@ -9,5 +9,17 @@
 
 \refdef{equivalence of categories}{kostecki2011introduction}{
 \p{
-The categories #{\C} and #{\D} are called \newvocab{equivalent} iff there exist functors #{F: \C \rightarrow \D} and #{G: \D \rightarrow \C} such that there exist \vocab{natural isomorphism}s #{\alpha: \id_{\C} \rightarrow F;G} and #{\tau: \id_{\D} \rightarrow G;F}.
+The categories #{\C} and #{\D} are called \newvocab{equivalent} iff there exist functors
+
+\tikz{
+\begin{tikzcd}
+	\C && \D
+	\arrow["F", shift left, from=1-1, to=1-3]
+	\arrow["G", shift left, from=1-3, to=1-1]
+\end{tikzcd}
+}
+
+together with \vocab{natural isomorphism}s
+
+##{\id_{\C} \iso F;G} and ##{G;F \iso \id_{\D} }
 }}
