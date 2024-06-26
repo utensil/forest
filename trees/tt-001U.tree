@@ -1,0 +1,112 @@
+\import{tt-macros}
+% clifford hopf spin tt math draft
+\tag{tt}
+
+% definition theorem lemma construction observation
+% convention corollary axiom example exercise proof
+% discussion remark notation
+\taxon{notation}
+
+\title{string diagrams: adjunction \citek{nakahira2023diagrammatic}}
+
+\let\cat/term{
+  \patch{\category/new}{
+    [name]{\id}
+    [fill]{catterm}
+  }
+}
+
+\let\cat/C{
+  \patch{\category/new}{
+    [name]{\C}
+    [fill]{catc}
+  }
+}
+
+\let\cat/Set{
+  \patch{\category/new}{
+    [name]{Set}
+    [fill]{catd}
+  }
+}
+
+\let\obj/X{
+  \patch{\functor/new}{
+    [dom]{\cat/term}
+    [cod]{\cat/C}
+    [name]{X}
+  }
+}
+
+\let\obj/dash{
+  \patch{\functor/new}{
+    [dom]{\cat/term}
+    [cod]{\cat/C}
+    [name]{-}
+  }
+}
+
+\let\fun/hom{
+  \patch{\functor/new}{
+    [dom]{\cat/C}
+    [cod]{\cat/Set}
+    [name]{-^X}
+  }
+}
+
+\let\nat/hom{
+  \patch{\nat-transf/new}{
+    [dom]{\obj/X}
+    [cod]{\obj/dash}
+    [name]{\circ}
+    [catopacity]{0.6}
+  }
+}
+
+\let\fun/hom/bi{
+  \patch{\fun/hom}{
+    [name]{=^-}
+  }
+}
+
+\let\obj/ddash{
+  \patch{\obj/dash}{
+    [name]{=}
+  }
+}
+
+\let\nat/hom/bi{
+  \patch{\nat/hom}{
+    [dom]{\obj/dash}
+    [cod]{\obj/ddash}
+    [name]{\circ}
+    [catopacity]{0.6}
+  }
+}
+
+\p{Here we follow the string diagram style of \citek{marsden2014category} and \citek{sterling2023models}, but with additional string diagrams inspired by \citek{nakahira2023diagrammatic}.}
+
+\ol{
+  \li{The \vocab{covariant hom-functor} #{\C(X, -)}, also denoted #{-^X}, can be represented in string diagrams as
+
+  \tikz{
+    \fun/hom#draw $=$ \nat/hom#draw
+  }
+
+  where #{\circ} denotes any arrows with the domain #{X} and codomain #{-}.
+  }
+
+  \li{The \vocab{contravariant hom-functor} #{\C(-, X)}, also denoted #{X^-}, can be represented in a similar manner.}
+
+  \li{The \vocab{hom-bifunctor} #{\C(-,=)}, also denoted #{=^-}, can be represented as
+
+  \tikz{
+    \fun/hom/bi#draw $=$ \nat/hom/bi#draw
+  }
+
+  where #{\circ} denotes any arrows with the domain #{-} and codomain #{=}.
+  }
+
+  \li{The \vocab{natural isomorphism} #{\D(L(-), =) \iso \C(-, R(=))} in \vocab{adjunction} can be represented as TODO.
+  }
+}

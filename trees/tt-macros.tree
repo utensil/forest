@@ -74,12 +74,12 @@
       \begin{tikzpicture}[scale=0.5,baseline=($(nw)!0.5!(se)$)]
         \CreateRect{\self#width}{\self#height}
         \path
-          coordinate[label=above:$\strut\self#name$] (n) at (spath cs:north 0.5)
-          coordinate[label=below:$\strut\self#name$] (s) at (spath cs:south 0.5)
+          coordinate[label=above:\ensuremath{\strut\self#name}] (n) at (spath cs:north 0.5)
+          coordinate[label=below:\ensuremath{\strut\self#name}] (s) at (spath cs:south 0.5)
         ;
         \draw (n) to (s);
-        \node[between = nw and s, opacity=0.6] {$\self#dom#name$};
-        \node[between = n and se, opacity=0.6] {$\self#cod#name$};
+        \node[between = nw and s, opacity=0.6] {\ensuremath{\self#dom#name}};
+        \node[between = n and se, opacity=0.6] {\ensuremath{\self#cod#name}};
         \begin{scope}[on background layer]
           \fill[\self#dom#fill] (nw) rectangle (s);
           \fill[\self#cod#fill] (n) rectangle (se);
@@ -137,15 +137,20 @@
     [dom]{\functor/new}
     [cod]{\functor/new}
     [name]{?\alpha}
+    [catopacity]{0}
     [draw]{
       \begin{tikzpicture}[scale=0.5,baseline=($(nw)!0.5!(se)$)]
         \CreateRect{\self#width}{\self#height}
         \path
-          coordinate[label=above:$\strut\self#dom#name$] (n) at (spath cs:north 0.5)
-          coordinate[label=below:$\strut\self#cod#name$] (s) at (spath cs:south 0.5)
+          coordinate[label=above:\ensuremath{\self#dom#name}] (n) at (spath cs:north 0.5)
+          coordinate[label=below:\ensuremath{\self#cod#name}] (s) at (spath cs:south 0.5)
         ;
         \draw[spath/save=vert] (n) to (s);
         \path coordinate[dot,label=left:$\self#name$] (cell) at (spath cs:vert 0.5);
+
+        \node[between = nw and s, opacity=\self#catopacity] {\ensuremath{\self#dom#dom#name}};
+        \node[between = n and se, opacity=\self#catopacity] {\ensuremath{\self#dom#cod#name}};
+
         \begin{scope}[on background layer]
           \fill[\self#dom#dom#fill] (nw) rectangle (s);
           \fill[\self#dom#cod#fill] (n) rectangle (se);
@@ -228,6 +233,8 @@
     [fun2nat]{\nat-transf/new}
     [fun2nat2]{\nat-transf/new}
 
+    [catopacity]{0}
+
     [draw]{
       \begin{tikzpicture}[scale=0.5,baseline=($(nw)!0.5!(se)$)]
       \CreateRect{\self#width}{\self#height}
@@ -246,9 +253,9 @@
       \path coordinate[dot,label=right:$\self#fun2nat#name$] (fun2nat) at (spath cs:right 0.33);
       \path coordinate[dot,label=right:$\self#fun2nat2#name$] (fun2nat2) at (spath cs:right 0.66);
 
-      % \node[between = nw and bl, opacity=0.1] {$\self#fun1nat#dom#dom#name$};
-      % \node[between = tl and br, opacity=0.1] {$\self#fun1nat#dom#cod#name$};
-      % \node[between = tr and se, opacity=0.1] {$\self#fun2nat#dom#cod#name$};
+      \node[between = nw and bl, opacity=\self#catopacity] {$\self#fun1nat#dom#dom#name$};
+      \node[between = tl and br, opacity=\self#catopacity] {$\self#fun1nat#dom#cod#name$};
+      \node[between = tr and se, opacity=\self#catopacity] {$\self#fun2nat#dom#cod#name$};
       \begin{pgfonlayer}{background}
       \fill[\self#fun1nat#dom#dom#fill] (nw) rectangle (bl);
       \fill[\self#fun1nat#dom#cod#fill] (tl) rectangle (br);
