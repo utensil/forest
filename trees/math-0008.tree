@@ -41,37 +41,174 @@
   \end{tikzpicture}
 }
 
-\p{The following is testing string diagram drawing using the example from [LaTeX package "string-diagrams"](https://www.ctan.org/pkg/string-diagrams):}
+\p{The following follows [Algebraic description of natural models](https://www.jonmsterling.com/jms-00E4.xml)}
 
-\tikz{
-  \begin{tikzpicture}[scale=0.6]
-  \node[box=0/2/0/1] (A) at (-2, 0) {A};
-  \node[box=0/1/0/2] (B) at (+2, 0) {B};
-  \node[box=0/1/0/1] (C) at ( 0,+1) {C};
-  \node[box=0/1/0/1] (D) at ( 0,-1) {D};
-  \wires{
-  A = { east.1 = C.west, east.2 = D.west },
-  C = { east = B.west.1 },
-  D = { east = B.west.2 },
-  }{ A.west, B.east }
-  \end{tikzpicture}
-}
+\def\natural-model/new{
+  \object[M]{
+    [suffix]{}
+    [C-cat]{
+      \patch{\category/new}{
+        [name]{\mathcal{C}\M#suffix}
+        [fill]{catf}
+      }
+    }
+    [E-cat]{
+      \patch{\category/new}{
+        [name]{E\M#suffix}
+        [fill]{catd}
+      }
+    }
+    [U-cat]{
+      \patch{\category/new}{
+        [name]{U\M#suffix}
+        [fill]{catc}
+      }
+    }
+    [trm-cat]{
+      \category/terminal
+    }
+    [p-fun]{
+      \patch{\functor/new}{
+        [name]{p\M#suffix}
+        [dom]{\M#E-cat}
+        [cod]{\M#U-cat}
+      }
+    }
+    [c-fun]{
+      \patch{\functor/new}{
+        [name]{c\M#suffix}
+        [dom]{\M#U-cat}
+        [cod]{\M#C-cat}
+      }
+    }
+    [q-fun]{
+      \patch{\functor/new}{
+        [name]{q\M#suffix}
+        [dom]{\M#U-cat}
+        [cod]{\M#E-cat}
+      }
+    }
+    [trm-fun]{
+      \patch{\functor/new}{
+        [name]{*\M#suffix}
+        [dom]{\M#C-cat}
+        [cod]{\M#trm-cat}
+      }
+    }
+    [ecx-fun]{
+      \patch{\functor/new}{
+        [name]{\diamond\M#suffix}
+        [cod]{\M#C-cat}
+        [dom]{\M#trm-cat}
+      }
+    }
+    [trm-ecx-adj]{
+      \patch{\adjunction/new}[adj]{
+        [left]{\M#trm-fun}
+        [right]{\M#ecx-fun}
+      }
+    }
+    [p-q-adj]{
+      \patch{\adjunction/new}{
+        [left]{\M#p-fun}
+        [right]{\M#q-fun}
+      }
+    }
 
-\tikz{
-  \begin{tikzpicture}
-  \node[box=0/1/0/2] (A) at ( 0,+1) {A};
-  \node[box=0/2/0/1] (B) at ( 0,-1) {B};
-  \node[dot] (x) at (+1, 0) {};
-  \node[dot] (y) at (-1, 0) {};
-  \wires[looseness=1.5, dashed]{
-  A = { east = x.north },
-  B = { east.1 = x.south },
-  y = { north = A.west.2, south = B.west },
-  }{
-  A.west.1, B.east.2, x.east, y.west
+    [width]{5}
+    [height]{2}
+
+    [draw]{
+      \begin{tikzpicture}[scale=0.5,baseline=($(nw)!0.5!(se)$)]
+        \CreateRect{\M#width}{\M#height}
+        \path
+          coordinate[label=above:$\strut\M#p-fun#name$] (n/p) at (spath cs:north 0.33)
+          coordinate[label=below:$\strut\M#p-fun#name$] (s/p) at (spath cs:south 0.33)
+          coordinate[label=above:$\strut\M#c-fun#name$] (n/c) at (spath cs:north 0.66)
+          coordinate[label=below:$\strut\M#c-fun#name$] (s/c) at (spath cs:south 0.66)
+        ;
+
+        \node[between = nw and s/p, opacity=0.6] {$\M#E-cat#name$};
+        \node[between = n/p and s/c, opacity=0.6] {$\M#U-cat#name$};
+        \node[between = n/c and se, opacity=0.6] {$\M#C-cat#name$};
+
+        \draw (n/p) to (s/p);
+        \draw (n/c) to (s/c);
+
+        \begin{scope}[on background layer]
+          \fill[\M#E-cat#fill] (nw) rectangle (s/p);
+          \fill[\M#U-cat#fill] (n/p) rectangle (s/c);
+          \fill[\M#C-cat#fill] (n/c) rectangle (se);
+        \end{scope}
+      \end{tikzpicture}
+    }
   }
-  \end{tikzpicture}
 }
+
+\let\M{\natural-model/new}
+
+\tikz{
+  \M#draw
+}
+
+\let\cat/term{
+  \patch{\category/new}{
+    [name]{\id}
+    [fill]{catterm}
+  }
+}
+
+\let\cat/C{
+  \patch{\category/new}{
+    [name]{\C}
+    [fill]{catc}
+  }
+}
+
+\let\fun/F{
+  \patch{\functor/new}{
+    [dom]{\cat/term}
+    [cod]{\cat/C}
+    [name]{F}
+  }
+}
+
+\tikz{
+  \cat/C#draw
+  \fun/F#draw
+}
+
+% \p{The following is testing string diagram drawing using the example from [LaTeX package "string-diagrams"](https://www.ctan.org/pkg/string-diagrams):}
+
+% \tikz{
+%   \begin{tikzpicture}[scale=0.6]
+%   \node[box=0/2/0/1] (A) at (-2, 0) {A};
+%   \node[box=0/1/0/2] (B) at (+2, 0) {B};
+%   \node[box=0/1/0/1] (C) at ( 0,+1) {C};
+%   \node[box=0/1/0/1] (D) at ( 0,-1) {D};
+%   \wires{
+%   A = { east.1 = C.west, east.2 = D.west },
+%   C = { east = B.west.1 },
+%   D = { east = B.west.2 },
+%   }{ A.west, B.east }
+%   \end{tikzpicture}
+% }
+
+% \tikz{
+%   \begin{tikzpicture}
+%   \node[box=0/1/0/2] (A) at ( 0,+1) {A};
+%   \node[box=0/2/0/1] (B) at ( 0,-1) {B};
+%   \node[dot] (x) at (+1, 0) {};
+%   \node[dot] (y) at (-1, 0) {};
+%   \wires[looseness=1.5, dashed]{
+%   A = { east = x.north },
+%   B = { east.1 = x.south },
+%   y = { north = A.west.2, south = B.west },
+%   }{
+%   A.west.1, B.east.2, x.east, y.west
+%   }
+%   \end{tikzpicture}
+% }
 
 \p{The following is testing string diagram drawing using the example from [[marsden2014category]]:}
 
