@@ -35,28 +35,30 @@
             <xsl:text>]</xsl:text>
         </a>
         <!-- uts-begin: Add the source link to the source of the tree, only works for my own forest -->
-        <xsl:choose>
-            <xsl:when test="/f:tree/f:frontmatter/f:taxon[text()='Person']">
-            <a class="slug-source" href="https://github.com/utensil/forest/blob/main/trees/people/{../f:addr}.tree">
-                <xsl:text>[source]</xsl:text>
-            </a>
-            </xsl:when>
-            <xsl:when test="/f:tree/f:frontmatter/f:taxon[text()='Reference']">
-            <a class="slug-source" href="https://github.com/utensil/forest/blob/main/trees/refs/{../f:addr}.tree">
-                <xsl:text>[source]</xsl:text>
-            </a>
-            </xsl:when>
-            <xsl:when test="/f:tree/f:frontmatter/f:taxon[text()='Proof']">
-            <a class="slug-source" href="https://github.com/utensil/forest/blob/main/trees/{../../f:backmatter/f:context/f:tree/f:frontmatter/f:addr}.tree">
-                <xsl:text>[source]</xsl:text>
-            </a>
-            </xsl:when>
-            <xsl:otherwise>
-            <a class="slug-source" href="https://github.com/utensil/forest/blob/main/trees/{../f:addr}.tree">
-                <xsl:text>[source]</xsl:text>
-            </a>
-            </xsl:otherwise>
-        </xsl:choose>
+        <xsl:if test="../f:addr=/f:tree/f:frontmatter/f:addr">
+            <xsl:choose>
+                <xsl:when test="../f:taxon[text()='Person']">
+                <a class="slug-source" href="https://github.com/utensil/forest/blob/main/trees/people/{../f:addr}.tree">
+                    <xsl:text>[source]</xsl:text>
+                </a>
+                </xsl:when>
+                <xsl:when test="../f:taxon[text()='Reference']">
+                <a class="slug-source" href="https://github.com/utensil/forest/blob/main/trees/refs/{../f:addr}.tree">
+                    <xsl:text>[source]</xsl:text>
+                </a>
+                </xsl:when>
+                <xsl:when test="../f:taxon[text()='Proof']">
+                <a class="slug-source" href="https://github.com/utensil/forest/blob/main/trees/{../../f:backmatter/f:context/f:tree/f:frontmatter/f:addr}.tree">
+                    <xsl:text>[source]</xsl:text>
+                </a>
+                </xsl:when>
+                <xsl:otherwise>
+                <a class="slug-source" href="https://github.com/utensil/forest/blob/main/trees/{../f:addr}.tree">
+                    <xsl:text>[source]</xsl:text>
+                </a>
+                </xsl:otherwise>
+            </xsl:choose>
+        </xsl:if>
         <!-- uts-end -->
     </xsl:template>
 
