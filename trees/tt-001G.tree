@@ -166,26 +166,26 @@
   }
 }
 
-\let\obj/Xpp{
+\let\obj/O{
   \patch{\functor/new}{
     [dom]{\cat/term}
     [cod]{\cat/C}
-    [name]{X''}
+    [name]{O}
   }
 }
 
 \let\nat/alphaX{
   \patch{\nat-transf/new}{
     [dom]{\obj/X}
-    [cod]{\obj/Xp}
+    [cod]{\obj/O}
     [name]{\alpha_X}
   }
 }
 
 \let\nat/alphaXp{
   \patch{\nat-transf/new}{
-    [dom]{\obj/Xp}
-    [cod]{\obj/Xpp}
+    [dom]{\obj/O}
+    [cod]{\obj/Xp}
     [name]{\alpha'_X}
   }
 }
@@ -200,8 +200,8 @@
 
 \let\nat/f{
   \patch{\nat-transf/new}{
-    [dom]{\obj/Xp}
-    [cod]{\obj/Xpp}
+    [dom]{\obj/O}
+    [cod]{\obj/Xp}
     [name]{f}
   }
 }
@@ -217,7 +217,7 @@
 \let\nat/fp{
   \patch{\nat-transf/new}{
     [dom]{\obj/X}
-    [cod]{\obj/Xp}
+    [cod]{\obj/O}
     [name]{f}
   }
 }
