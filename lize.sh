@@ -21,8 +21,8 @@ saxon -s:build/$XML_FILE -xsl:assets/$XSLFILE -o:build/$TEX_FILE
 cd build
 
 # if environment variable CI is set
-# if [ -n "$CI" ]; then
-#     echo "lize.sh| CI is set, using xelatex"
+if [ -n "$CI" ]; then
+    echo "lize.sh| CI is set, using xelatex"
     xelatex -halt-on-error -interaction=nonstopmode --shell-escape $TEX_FILE
     # https://tex.stackexchange.com/a/295524/75671
     # biber $TEX_FILE
@@ -30,10 +30,10 @@ cd build
     bibtex $AUX_FILE || echo "lize.sh| Ignoring bibtex error"
     xelatex -halt-on-error -interaction=nonstopmode --shell-escape $TEX_FILE
     xelatex -halt-on-error -interaction=nonstopmode --shell-escape $TEX_FILE
-# else
-#     echo "lize.sh| CI is not set, using tectonic"
-#     tectonic -Z shell-escape-cwd=. --keep-intermediates --keep-logs --outdir . $TEX_FILE
-# fi
+else
+    echo "lize.sh| CI is not set, using tectonic"
+    tectonic -Z shell-escape-cwd=`pwd` --keep-intermediates --keep-logs --outdir `pwd` $TEX_FILE
+fi
 
 cd ..
 

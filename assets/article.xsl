@@ -21,7 +21,7 @@
       <xsl:value-of select="@hash" />
       <xsl:text>.tex}</xsl:text>
       <xsl:text>&#xa;</xsl:text>
-      <xsl:text>\documentclass[crop]{standalone}</xsl:text>
+      <xsl:text>\documentclass[class=article,crop]{standalone}</xsl:text>
       <xsl:text>&#xa;</xsl:text>
       <xsl:value-of select="f:embedded-tex-preamble" />
       <xsl:text>&#xa;</xsl:text>
