@@ -158,14 +158,6 @@
   }
 }
 
-\let\obj/Xmid{
-  \patch{\functor/new}{
-    [dom]{\cat/term}
-    [cod]{\cat/C}
-    [name]{?X}
-  }
-}
-
 \let\obj/Xp{
   \patch{\functor/new}{
     [dom]{\cat/term}
@@ -174,11 +166,27 @@
   }
 }
 
+\let\obj/Xpp{
+  \patch{\functor/new}{
+    [dom]{\cat/term}
+    [cod]{\cat/C}
+    [name]{X''}
+  }
+}
+
 \let\nat/alphaX{
   \patch{\nat-transf/new}{
     [dom]{\obj/X}
-    [cod]{\obj/Xmid}
+    [cod]{\obj/Xp}
     [name]{\alpha_X}
+  }
+}
+
+\let\nat/alphaXp{
+  \patch{\nat-transf/new}{
+    [dom]{\obj/Xp}
+    [cod]{\obj/Xpp}
+    [name]{\alpha'_X}
   }
 }
 
@@ -192,8 +200,8 @@
 
 \let\nat/f{
   \patch{\nat-transf/new}{
-    [dom]{\obj/Xmid}
-    [cod]{\obj/Xp}
+    [dom]{\obj/Xp}
+    [cod]{\obj/Xpp}
     [name]{f}
   }
 }
@@ -203,7 +211,23 @@
     [fun1nat]{\nat/alphaX}
     [fun1nat2]{\nat/f}
     [fun2nat]{\nat/alphaX/FG}
-    [fun2nat2]{\nat/beta2}
+  }
+}
+
+\let\nat/fp{
+  \patch{\nat-transf/new}{
+    [dom]{\obj/X}
+    [cod]{\obj/Xp}
+    [name]{f}
+  }
+}
+
+\let\naturality/xfgp{
+  \patch{\naturality/new}{
+    [fun1nat]{\nat/fp}
+    [fun1nat2]{\nat/alphaXp}
+    [fun2nat]{\nat/alphaX/FG}
+    [fun2through]{fun1nat2}
   }
 }
 
@@ -252,40 +276,7 @@
 
   \li{\newvocab{Naturality} in natural transformations is equivalent to the following equality:
     \tikz{
-\begin{equation*}
-\begin{gathered}
-\begin{tikzpicture}[scale=0.5]
-\path coordinate[label=below:$X$] (bl) ++(0,1) coordinate[dot, label=left:$\alpha_X$] (alphax) ++(0,1) coordinate[dot, label=left:$f$] (f) 
- ++(0,1) coordinate[label=above:$X'$] (tl)
- (bl) +(1,0) coordinate[label=below:$F$] (br)
- (tl) ++(1,0) coordinate[label=above:$G$] (tr) +(0,-1) coordinate (a);
-\draw[spath/save=xxp] (bl) -- (alphax) -- (f) -- (tl);
-\draw[spath/save=fg] (br) to[out=90, in=0] (alphax) to[out=0, in=-90] (a) -- (tr);
-\begin{pgfonlayer}{background}
-\fill[catc] ($(tl) + (-2,0)$) rectangle ($(br) + (1,0)$);
-\fill[catterm] ($(tl) + (-2,0)$) rectangle (bl);
-\fill[catd] [spath/use={fg,weld}] -- ($(tr) + (1,0)$) -- ($(br) + (1,0)$) -- (br) -- cycle;
-\end{pgfonlayer}
-\end{tikzpicture}
-\end{gathered}
-=
-\begin{gathered}
-\begin{tikzpicture}[scale=0.5]
-\path coordinate[label=below:$X$] (bl) ++(0,1) coordinate[dot, label=left:$f$] (f) ++(0,1) coordinate[dot, label=left:$\alpha_{X'}$] (alphaxp) 
- ++(0,1) coordinate[label=above:$X'$] (tl)
- (bl) ++(1,0) coordinate[label=below:$F$] (br) ++(0,1) coordinate (a)
- (tl) ++(1,0) coordinate[label=above:$G$] (tr);
-\draw[spath/save=xxp] (bl) -- (f) -- (alphaxp) -- (tl);
-\draw[spath/save=fg] (br) -- (a) to[out=90, in=0] (alphaxp) to[out=0, in=-90] (tr);
-\begin{pgfonlayer}{background}
-\fill[catc] ($(tl) + (-2,0)$) rectangle ($(br) + (1,0)$);
-\fill[catterm] ($(tl) + (-2,0)$) rectangle (bl);
-\fill[catd] [spath/use={fg,weld}] -- ($(tr) + (1,0)$) -- ($(br) + (1,0)$) -- (br) -- cycle;
-\end{pgfonlayer}
-\end{tikzpicture}
-\end{gathered}
-\end{equation*}
+      \naturality/xfg#draw $=$ \naturality/xfgp#draw
     }
-
   }
 }

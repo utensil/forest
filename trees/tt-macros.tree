@@ -266,26 +266,25 @@
     [fun1nat]{\nat-transf/new}
     [fun1nat2]{\nat-transf/new}
     [fun2nat]{\nat-transf/new}
+    [fun2through]{fun1nat}
     [draw]{
       \begin{tikzpicture}[scale=0.5,baseline=($(nw)!0.5!(se)$)]
       \CreateRect{\self#width}{\self#height}
       \path
         coordinate[label=below:\self#fun1nat2#cod#name] (bl) at (spath cs:south 0.33)
         coordinate[label=above:\self#fun1nat#dom#name] (tl) at (spath cs:north 0.33)
-        coordinate[label=below:\self#fun2nat2#cod#name] (br) at (spath cs:south 0.66)
+        coordinate[label=below:\self#fun2nat#cod#name] (br) at (spath cs:south 0.66)
         coordinate[label=above:\self#fun2nat#dom#name] (tr) at (spath cs:north 0.66);
       \draw[spath/save=left] (tl) -- (bl);
-      \draw[spath/save=right] (tr) -- (br);
-      \path coordinate[label=left:$\self#fun1nat#cod#name$] (fun1mid) at (spath cs:left 0.5);
-      \path coordinate[dot,label=right:$\self#fun1nat#name$] (fun1nat) at (spath cs:left 0.33);
-      \path coordinate[dot,label=right:$\self#fun1nat2#name$] (fun1nat2) at (spath cs:left 0.66);
-      \path coordinate[label=left:$\self#fun2nat#cod#name$] (fun2mid) at (spath cs:right 0.5);
-      \path coordinate[dot,label=right:$\self#fun2nat#name$] (fun2nat) at (spath cs:right 0.33);
-      \path coordinate[dot,label=right:$\self#fun2nat2#name$] (fun2nat2) at (spath cs:right 0.66);
+      \path coordinate[dot,label=left:$\self#fun1nat#name$] (fun1nat) at (spath cs:left 0.33);
+      \path coordinate[dot,label=left:$\self#fun1nat2#name$] (fun1nat2) at (spath cs:left 0.66);
+
+      \draw[spath/save=right] (tr) to[out=-90, in=0] (\self#fun2through) to[out=0, in=90] (br);
+      
       \begin{pgfonlayer}{background}
       \fill[\self#fun1nat#dom#dom#fill] (nw) rectangle (bl);
       \fill[\self#fun1nat#dom#cod#fill] (tl) rectangle (br);
-      \fill[\self#fun2nat#dom#cod#fill] (tr) rectangle (se);
+      \fill[\self#fun2nat#dom#cod#fill] [spath/use={right,weld}] -- (se) -- (ne) -- (tr) -- cycle;
       \end{pgfonlayer}
       \end{tikzpicture}
     }
