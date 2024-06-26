@@ -15,8 +15,9 @@ function show_lize_result {
   # if return code is zero, then echo "Done" else echo "Failed"
   if [ $? -ne 0 ]; then
     # echo a red "Failed"
-    echo -e "\033[0;31mFailed\033[0m"
+    echo -e "\033[0;31mFailed\033[0m"    
     tail -n 50 build/$1.log
+    echo "open build/$1.log to see the log."
 
   else
     # echo a gree "Done"
@@ -28,8 +29,10 @@ function show_lize_result {
 }
 
 function build {
-  opam exec -- forester build # --dev
+  mkdir -p build
+  opam exec -- forester build # 2>&1 > build/forester.log # --dev
   show_result
+  # echo "Open build/forester.log to see the log."
 }
 
 function lize {
