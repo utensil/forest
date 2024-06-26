@@ -9,84 +9,242 @@
 
 \title{string diagrams \citek{marsden2014category}}
 
+\let\cat/term{
+  \patch{\category/new}{
+    [name]{\id}
+    [fill]{catterm}
+  }
+}
+
+\let\cat/C{
+  \patch{\category/new}{
+    [name]{\C}
+    [fill]{catc}
+  }
+}
+
+\let\cat/D{
+  \patch{\category/new}{
+    [name]{\D}
+    [fill]{catd}
+  }
+}
+
+\let\cat/E{
+  \patch{\category/new}{
+    [name]{\E}
+    [fill]{cate}
+  }
+}
+
+\let\fun/F{
+  \patch{\functor/new}{
+    [dom]{\cat/C}
+    [cod]{\cat/D}
+    [name]{F}
+  }
+}
+
+\let\fun/Fp{
+  \patch{\fun/F}{
+    [name]{F'}
+  }
+}
+
+\let\fun/Fpp{
+  \patch{\fun/F}{
+    [name]{F''}
+  }
+}
+
+\let\fun/G{
+  \patch{\functor/new}{
+    [dom]{\cat/D}
+    [cod]{\cat/E}
+    [name]{G}
+  }
+}
+
+\let\fun/Gp{
+  \patch{\fun/G}{
+    [name]{G'}
+  }
+}
+
+\let\fun/Gpp{
+  \patch{\fun/G}{
+    [name]{G''}
+  }
+}
+
+\let\fun/FG{
+  \patch{\functor/comp/new}{
+    [fun1]{\fun/F}
+    [fun2]{\fun/G}
+  }
+}
+
+\let\nat/alpha{
+  \patch{\nat-transf/new}{
+    [dom]{\fun/F}
+    [cod]{\fun/Fp}
+    [name]{\alpha}
+  }
+}
+
+\let\nat/beta{
+  \patch{\nat-transf/new}{
+    [dom]{\fun/G}
+    [cod]{\fun/Gp}
+    [name]{\beta}
+  }
+}
+
+\let\nat/vcomp/alpha{
+  \patch{\nat-transf/vcomp/new}{
+    [dom]{\fun/F}
+    [mid]{\fun/Fp}
+    [cod]{\fun/Fpp}
+    [name1]{\alpha}
+    [name2]{\alpha'}
+  }
+}
+
+\let\nat/hcomp/ab{
+  \patch{\nat-transf/hcomp/new}{
+    [fun1nat]{\nat/alpha}
+    [fun2nat]{\nat/beta}
+  }
+}
+
+\let\nat/alpha2{
+  \patch{\nat-transf/new}{
+    [dom]{\fun/Fp}
+    [cod]{\fun/Fpp}
+    [name]{\alpha'}
+  }
+}
+
+\let\nat/beta2{
+  \patch{\nat-transf/new}{
+    [dom]{\fun/Gp}
+    [cod]{\fun/Gpp}
+    [name]{\beta'}
+  }
+}
+
+\let\nat/hvcomp/ab{
+  \patch{\nat-transf/hvcomp/new}{
+    [fun1nat]{\nat/alpha}
+    [fun1nat2]{\nat/alpha2}
+    [fun2nat]{\nat/beta}
+    [fun2nat2]{\nat/beta2}
+  }
+}
+
+\let\nat/alpha{
+  \patch{\nat-transf/new}{
+    [dom]{\fun/F}
+    [cod]{\fun/Fp}
+    [name]{\alpha}
+  }
+}
+
+\let\obj/X{
+  \patch{\functor/new}{
+    [dom]{\cat/term}
+    [cod]{\cat/C}
+    [name]{X}
+  }
+}
+
+\let\obj/Xmid{
+  \patch{\functor/new}{
+    [dom]{\cat/term}
+    [cod]{\cat/C}
+    [name]{?X}
+  }
+}
+
+\let\obj/Xp{
+  \patch{\functor/new}{
+    [dom]{\cat/term}
+    [cod]{\cat/C}
+    [name]{X'}
+  }
+}
+
+\let\nat/alphaX{
+  \patch{\nat-transf/new}{
+    [dom]{\obj/X}
+    [cod]{\obj/Xmid}
+    [name]{\alpha_X}
+  }
+}
+
+\let\nat/alphaX/FG{
+  \patch{\nat-transf/new}{
+    [dom]{\fun/F}
+    [cod]{\fun/G}
+    [name]{\alpha_X}
+  }
+}
+
+\let\nat/f{
+  \patch{\nat-transf/new}{
+    [dom]{\obj/Xmid}
+    [cod]{\obj/Xp}
+    [name]{f}
+  }
+}
+
+\let\naturality/xfg{
+  \patch{\naturality/new}{
+    [fun1nat]{\nat/alphaX}
+    [fun1nat2]{\nat/f}
+    [fun2nat]{\nat/alphaX/FG}
+    [fun2nat2]{\nat/beta2}
+  }
+}
+
 \ol{
   \li{A \newvocab{functor} #{F : \C \to \D} can be represented as an edge, commonly referred to as a wire:
   
     \tikz{
-      \onecelldiag{F}{catc}{catd}{4}{2}
+      \fun/F#draw
     }
   
   }
 
   \li{Functors compose from left to right:
     \tikz{
-      \onecelldiagcomposite{F}{G}{catc}{catd}{cate}{4}{2}
+      \fun/FG#draw
     }
   }
 
-  \li{A \newvocab{natural transformation} #{\alpha : F \to F'} can be represented as a dot on the wire connecting the two functors:
+  \li{A \newvocab{natural transformation} #{\alpha : F \to F'} can be represented as a dot on the wire from top to bottem (the opposite of \citek{marsden2014category}, but the same as \citek{sterling2023models}), connecting the two functors :
     \tikz{
-\begin{tikzpicture}[scale=0.5]
-\path coordinate[label=below:$F$] (b) ++(0,2) coordinate[dot, label=right:$\alpha$] (alpha) ++(0,2) coordinate[label=above:$F'$] (t);
-\draw (b) -- (alpha) -- (t);
-\begin{pgfonlayer}{background}
-\fill[catc] ($(t) + (-2,0)$) rectangle (b);
-\fill[catd] (t) rectangle ($(b) + (2,0)$);
-\end{pgfonlayer}
-\end{tikzpicture}
+      \nat/alpha#draw
     }
   }
 
-  \li{Natural transformations (for the same pair of categories) compose vertically from bottom to top:
+  \li{Natural transformations (for the same pair of categories) compose vertically from top to bottem:
 
     \tikz{
-\begin{tikzpicture}[scale=0.5]
-\path coordinate[label=below:$F$] (b) ++(0,4) coordinate[label=above:$F''$] (t);
-\coordinate[dot, label=right:$\alpha$] (alpha) at ($(b)!0.333!(t)$);
-\coordinate[dot, label=right:$\alpha'$] (alpha') at ($(b)!0.666!(t)$);
-\draw (b) -- (alpha) to node[left]{$F'$} (alpha') -- (t);
-\begin{pgfonlayer}{background}
-\fill[catc] ($(t) + (-2,0)$) rectangle (b);
-\fill[catd] (t) rectangle ($(b) + (2,0)$);
-\end{pgfonlayer}
-\end{tikzpicture}
+      \nat/vcomp/alpha#draw
     }
 
   }
 
   \li{Natural transformations (from different pairs of categories) compose horizontally from left to right:
     \tikz{
-\begin{tikzpicture}[scale=0.5]
-\path coordinate[label=below:$F$] (bl) ++(0,2) coordinate[dot, label=left:$\alpha$] (alpha) ++(0,2) coordinate[label=above:$F'$] (tl)
- (bl) ++(2,0) coordinate[label=below:$G$] (br) ++(0,2) coordinate[dot, label=right:$\beta$] (beta) ++(0,2) coordinate[label=above:$G'$] (tr);
-\draw (bl) -- (alpha) -- (tl)
-      (br) -- (beta) -- (tr);
-\begin{pgfonlayer}{background}
-\fill[catc] ($(tl) + (-2,0)$) rectangle (bl);
-\fill[catd] (tl) rectangle (br);
-\fill[cate] (tr) rectangle ($(br) + (2,0)$);
-\end{pgfonlayer}
-\end{tikzpicture}
+      \nat/hcomp/ab#draw
     }
   }
 
   \li{The two ways of composing natural transformations are related by the \newvocab{interchange law}:
     \tikz{
-\begin{tikzpicture}[scale=0.5]
-\path coordinate[label=below:$F$] (bl) +(0,4) coordinate[label=above:$F''$] (tl)
- ++(2,0) coordinate[label=below:$G$] (br) ++(0,4) coordinate[label=above:$G''$] (tr);
-\coordinate[dot, label=right:$\alpha$] (alpha) at ($(bl)!0.333!(tl)$);
-\coordinate[dot, label=right:$\alpha'$] (alpha') at ($(bl)!0.666!(tl)$);
-\coordinate[dot, label=right:$\beta$] (beta) at ($(br)!0.333!(tr)$);
-\coordinate[dot, label=right:$\beta'$] (beta') at ($(br)!0.666!(tr)$);
-\draw (bl) -- (alpha) to node[left]{$F'$} (alpha') -- (tl)
-      (br) -- (beta) to node[left]{$G'$} (beta') -- (tr);
-\begin{pgfonlayer}{background}
-\fill[catc] ($(tl) + (-2,0)$) rectangle (bl);
-\fill[catd] (tl) rectangle (br);
-\fill[cate] (tr) rectangle ($(br) + (2,0)$);
-\end{pgfonlayer}
-\end{tikzpicture}
+      \nat/hvcomp/ab#draw
     }
 
   i.e. ##{(\alpha;\alpha');(\beta;\beta') = (\alpha;\beta);(\alpha';\beta')}

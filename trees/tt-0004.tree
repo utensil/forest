@@ -9,6 +9,42 @@
 
 \title{string diagrams \citek{marsden2014category}}
 
+\let\cat/C{
+  \patch{\category/new}{
+    [name]{\C}
+    [fill]{catc}
+  }
+}
+
+\let\cat/term{
+  \patch{\category/new}{
+    [name]{\id}
+    [fill]{catterm}
+  }
+}
+
+\let\obj/X{
+  \patch{\functor/new}{
+    [dom]{\cat/term}
+    [cod]{\cat/C}
+    [name]{X}
+  }
+}
+
+\let\obj/Y{
+  \patch{\obj/X}{
+    [name]{Y}
+  }
+}
+
+\let\arr/f{
+  \patch{\nat-transf/new}{
+    [dom]{\obj/X}
+    [cod]{\obj/Y}
+    [name]{f}
+  }
+}
+
 \p{
   Later, when we have learned about [functor](tt-0014)s and [natural transformation](tt-001E)s, we will see that, in \newvocab{string diagrams} for 1-category:
 
@@ -17,9 +53,7 @@
       A \newvocab{category} #{\C} is represented as a colored region:
 
       \tikz{
-        \begin{tikzpicture}[scale=0.5]
-        \fill[catc] (0,0) rectangle (2,2);
-        \end{tikzpicture}
+        \cat/C#draw
       }
     }
 
@@ -27,7 +61,7 @@
       \vocab{Functor}s of type #{1 \to \C} can be identified with objects of the category #{\C}, where #{1} is the the [terminal category](tt-000I), so an \newvocab{object} #{X \in \Ob(\C)} can be represented as:
 
       \tikz{
-        \onecelldiag{X}{catterm}{catc}{2}{2}
+        \obj/X#draw
       }
     }
 
@@ -35,7 +69,7 @@
       An \newvocab{arrow} #{f : X \to Y} is then a \vocab{natural transformation} between two of these functors, represented as:
 
       \tikz{
-        \twocelldiag{f}{X}{Y}{catterm}{catc}{2}{2}{2}
+        \arr/f#draw
       }
 
     }

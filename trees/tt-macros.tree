@@ -31,3 +31,414 @@
 \def\Set{\mathbf{Set}}
 \def\Eq{\operatorname{Eq}}
 \def\Nat{\operatorname{Nat}}
+
+
+
+% The following macros are adapted from https://www.jonmsterling.com/jms-00B8.xml
+
+\def\category/new{
+  \object[self]{
+    [name]{?\mathcal{C}}
+    [fill]{fill=none}
+    % uts mod begin
+    [height]{4}
+    [width]{2}
+    [draw]{
+      \begin{tikzpicture}[scale=0.5,baseline=($(nw)!0.5!(se)$)]
+        \CreateRect{\self#width}{\self#height}
+        \node[between = nw and se, opacity=0.6] {$\self#name$};
+        \begin{scope}[on background layer]
+          \fill[\self#fill] (nw) rectangle (se);
+        \end{scope}
+      \end{tikzpicture}
+    }
+    % uts mod end
+  }
+}
+
+\def\category/terminal{
+  \patch{\category/new}{
+    [name]{\mathbf{1}}
+    [fill]{gray!10}
+  }
+}
+
+\def\functor/new{
+  \object[self]{
+    [height]{4}
+    [width]{4}
+    [name]{?f}
+    [dom]{\category/new}
+    [cod]{\category/new}
+    [draw]{
+      \begin{tikzpicture}[scale=0.5,baseline=($(nw)!0.5!(se)$)]
+        \CreateRect{\self#width}{\self#height}
+        \path
+          coordinate[label=above:$\strut\self#name$] (n) at (spath cs:north 0.5)
+          coordinate[label=below:$\strut\self#name$] (s) at (spath cs:south 0.5)
+        ;
+        \draw (n) to (s);
+        \node[between = nw and s, opacity=0.6] {$\self#dom#name$};
+        \node[between = n and se, opacity=0.6] {$\self#cod#name$};
+        \begin{scope}[on background layer]
+          \fill[\self#dom#fill] (nw) rectangle (s);
+          \fill[\self#cod#fill] (n) rectangle (se);
+        \end{scope}
+      \end{tikzpicture}
+    }
+  }
+}
+
+% uts mod begin
+
+\def\functor/comp/new{
+  \object[self]{
+    [height]{4}
+    [width]{6}
+    [fun1]{\functor/new}
+    [fun2]{\functor/new}
+    [draw]{
+      \begin{tikzpicture}[scale=0.5,baseline=($(nw)!0.5!(se)$)]
+      \CreateRect{\self#width}{\self#height}
+      \path
+        coordinate[label=below:\self#fun1#name] (bl) at (spath cs:south 0.33)
+        coordinate[label=above:\self#fun1#name] (tl) at (spath cs:north 0.33)
+        coordinate[label=below:\self#fun2#name] (br) at (spath cs:south 0.66)
+        coordinate[label=above:\self#fun2#name] (tr) at (spath cs:north 0.66);
+      \draw (bl) -- (tl)
+            (br) -- (tr);
+      \node[between = nw and bl, opacity=0.6] {$\self#fun1#dom#name$};
+      \node[between = tl and br, opacity=0.6] {$\self#fun1#cod#name$};
+      \node[between = tr and se, opacity=0.6] {$\self#fun2#cod#name$};
+      \begin{pgfonlayer}{background}
+      \fill[\self#fun1#dom#fill] (nw) rectangle (bl);
+      \fill[\self#fun1#cod#fill] (tl) rectangle (br);
+      \fill[\self#fun2#cod#fill] (tr) rectangle (se);
+      \end{pgfonlayer}
+      \end{tikzpicture}
+    }
+  }
+}
+
+% uts mod end
+
+\def\functor/identity[C]{
+  \patch{\functor/new}{
+    [dom]{\C}
+    [cod]{\C}
+    [name]{\Idn{\C#name}}
+  }
+}
+
+\def\nat-transf/new{
+  \object[self]{
+    [width]{4}
+    [height]{4}
+    [dom]{\functor/new}
+    [cod]{\functor/new}
+    [name]{?\alpha}
+    [draw]{
+      \begin{tikzpicture}[scale=0.5,baseline=($(nw)!0.5!(se)$)]
+        \CreateRect{\self#width}{\self#height}
+        \path
+          coordinate[label=above:$\strut\self#dom#name$] (n) at (spath cs:north 0.5)
+          coordinate[label=below:$\strut\self#cod#name$] (s) at (spath cs:south 0.5)
+        ;
+        \draw[spath/save=vert] (n) to (s);
+        \path coordinate[dot,label=left:$\self#name$] (cell) at (spath cs:vert 0.5);
+        \begin{scope}[on background layer]
+          \fill[\self#dom#dom#fill] (nw) rectangle (s);
+          \fill[\self#dom#cod#fill] (n) rectangle (se);
+        \end{scope}
+      \end{tikzpicture}
+    }
+  }
+}
+
+% uts mod begin
+
+\def\nat-transf/vcomp/new{
+  \object[self]{
+    [width]{4}
+    [height]{4}
+    [dom]{\functor/new}
+    [mid]{\functor/new}
+    [cod]{\functor/new}
+    [name1]{?\alpha_1}
+    [name2]{?\alpha_2}
+    [draw]{
+      \begin{tikzpicture}[scale=0.5,baseline=($(nw)!0.5!(se)$)]
+        \CreateRect{\self#width}{\self#height}
+        \path
+          coordinate[label=above:$\strut\self#dom#name$] (n) at (spath cs:north 0.5)
+          coordinate[label=below:$\strut\self#cod#name$] (s) at (spath cs:south 0.5)
+        ;
+        \draw[spath/save=vert] (n) to (s);
+        \path coordinate[label=left:$\self#mid#name$] (cell) at (spath cs:vert 0.5);
+        \path coordinate[dot,label=right:$\self#name1$] (cell) at (spath cs:vert 0.33);
+        \path coordinate[dot,label=right:$\self#name2$] (cell) at (spath cs:vert 0.66);
+        \begin{scope}[on background layer]
+          \fill[\self#dom#dom#fill] (nw) rectangle (s);
+          \fill[\self#dom#cod#fill] (n) rectangle (se);
+        \end{scope}
+      \end{tikzpicture}
+    }
+  }
+}
+
+\def\nat-transf/hcomp/new{
+  \object[self]{
+    [height]{4}
+    [width]{6}
+    [fun1nat]{\nat-transf/new}
+    [fun2nat]{\nat-transf/new}
+    [draw]{
+      \begin{tikzpicture}[scale=0.5,baseline=($(nw)!0.5!(se)$)]
+      \CreateRect{\self#width}{\self#height}
+      \path
+        coordinate[label=below:\self#fun1nat#cod#name] (bl) at (spath cs:south 0.33)
+        coordinate[label=above:\self#fun1nat#dom#name] (tl) at (spath cs:north 0.33)
+        coordinate[label=below:\self#fun2nat#cod#name] (br) at (spath cs:south 0.66)
+        coordinate[label=above:\self#fun2nat#dom#name] (tr) at (spath cs:north 0.66);
+      \draw[spath/save=left] (bl) -- (tl);
+      \draw[spath/save=right] (br) -- (tr);
+      \path coordinate[dot,label=right:$\self#fun1nat#name$] (fun1nat) at (spath cs:left 0.5);
+      \path coordinate[dot,label=right:$\self#fun2nat#name$] (fun2nat) at (spath cs:right 0.5);
+      % \node[between = nw and bl, opacity=0.1] {$\self#fun1nat#dom#dom#name$};
+      % \node[between = tl and br, opacity=0.1] {$\self#fun1nat#dom#cod#name$};
+      % \node[between = tr and se, opacity=0.1] {$\self#fun2nat#dom#cod#name$};
+      \begin{pgfonlayer}{background}
+      \fill[\self#fun1nat#dom#dom#fill] (nw) rectangle (bl);
+      \fill[\self#fun1nat#dom#cod#fill] (tl) rectangle (br);
+      \fill[\self#fun2nat#dom#cod#fill] (tr) rectangle (se);
+      \end{pgfonlayer}
+      \end{tikzpicture}
+    }
+  }
+}
+
+\def\nat-transf/hvcomp/new{
+  \object[self]{
+    [height]{4}
+    [width]{6}
+
+    [fun1nat]{\nat-transf/new}
+    [fun1nat2]{\nat-transf/new}
+
+    [fun2nat]{\nat-transf/new}
+    [fun2nat2]{\nat-transf/new}
+
+    [draw]{
+      \begin{tikzpicture}[scale=0.5,baseline=($(nw)!0.5!(se)$)]
+      \CreateRect{\self#width}{\self#height}
+      \path
+        coordinate[label=below:\self#fun1nat2#cod#name] (bl) at (spath cs:south 0.33)
+        coordinate[label=above:\self#fun1nat#dom#name] (tl) at (spath cs:north 0.33)
+        coordinate[label=below:\self#fun2nat2#cod#name] (br) at (spath cs:south 0.66)
+        coordinate[label=above:\self#fun2nat#dom#name] (tr) at (spath cs:north 0.66);
+      \draw[spath/save=left] (tl) -- (bl);
+      \draw[spath/save=right] (tr) -- (br);
+
+      \path coordinate[label=left:$\self#fun1nat#cod#name$] (fun1mid) at (spath cs:left 0.5);
+      \path coordinate[dot,label=right:$\self#fun1nat#name$] (fun1nat) at (spath cs:left 0.33);
+      \path coordinate[dot,label=right:$\self#fun1nat2#name$] (fun1nat2) at (spath cs:left 0.66);
+      \path coordinate[label=left:$\self#fun2nat#cod#name$] (fun2mid) at (spath cs:right 0.5);
+      \path coordinate[dot,label=right:$\self#fun2nat#name$] (fun2nat) at (spath cs:right 0.33);
+      \path coordinate[dot,label=right:$\self#fun2nat2#name$] (fun2nat2) at (spath cs:right 0.66);
+
+      % \node[between = nw and bl, opacity=0.1] {$\self#fun1nat#dom#dom#name$};
+      % \node[between = tl and br, opacity=0.1] {$\self#fun1nat#dom#cod#name$};
+      % \node[between = tr and se, opacity=0.1] {$\self#fun2nat#dom#cod#name$};
+      \begin{pgfonlayer}{background}
+      \fill[\self#fun1nat#dom#dom#fill] (nw) rectangle (bl);
+      \fill[\self#fun1nat#dom#cod#fill] (tl) rectangle (br);
+      \fill[\self#fun2nat#dom#cod#fill] (tr) rectangle (se);
+      \end{pgfonlayer}
+      \end{tikzpicture}
+    }
+  }
+}
+
+\def\naturality/new{
+  \object[self]{
+    [height]{4}
+    [width]{6}
+    [fun1nat]{\nat-transf/new}
+    [fun1nat2]{\nat-transf/new}
+    [fun2nat]{\nat-transf/new}
+    [draw]{
+      \begin{tikzpicture}[scale=0.5,baseline=($(nw)!0.5!(se)$)]
+      \CreateRect{\self#width}{\self#height}
+      \path
+        coordinate[label=below:\self#fun1nat2#cod#name] (bl) at (spath cs:south 0.33)
+        coordinate[label=above:\self#fun1nat#dom#name] (tl) at (spath cs:north 0.33)
+        coordinate[label=below:\self#fun2nat2#cod#name] (br) at (spath cs:south 0.66)
+        coordinate[label=above:\self#fun2nat#dom#name] (tr) at (spath cs:north 0.66);
+      \draw[spath/save=left] (tl) -- (bl);
+      \draw[spath/save=right] (tr) -- (br);
+      \path coordinate[label=left:$\self#fun1nat#cod#name$] (fun1mid) at (spath cs:left 0.5);
+      \path coordinate[dot,label=right:$\self#fun1nat#name$] (fun1nat) at (spath cs:left 0.33);
+      \path coordinate[dot,label=right:$\self#fun1nat2#name$] (fun1nat2) at (spath cs:left 0.66);
+      \path coordinate[label=left:$\self#fun2nat#cod#name$] (fun2mid) at (spath cs:right 0.5);
+      \path coordinate[dot,label=right:$\self#fun2nat#name$] (fun2nat) at (spath cs:right 0.33);
+      \path coordinate[dot,label=right:$\self#fun2nat2#name$] (fun2nat2) at (spath cs:right 0.66);
+      \begin{pgfonlayer}{background}
+      \fill[\self#fun1nat#dom#dom#fill] (nw) rectangle (bl);
+      \fill[\self#fun1nat#dom#cod#fill] (tl) rectangle (br);
+      \fill[\self#fun2nat#dom#cod#fill] (tr) rectangle (se);
+      \end{pgfonlayer}
+      \end{tikzpicture}
+    }
+  }
+}
+
+% uts mod end
+
+
+\def\adjunction/new{
+  \object[adj]{
+    [left]{\functor/new}
+    [right]{\functor/new}
+
+    [default-counit]{
+      \object[self]{
+        [width]{3}
+        [height]{2}
+        [name]{\epsilon}
+        [draw]{
+          \begin{tikzpicture}[scale=0.5,baseline=($(nw)!0.5!(se)$)]
+            \CreateRect{\self#width}{\self#height}
+            \path
+              coordinate[label=above:$\strut{\adj#left#name}$] (L) at (spath cs:north 0.75)
+              coordinate[label=above:$\strut{\adj#right#name}$] (R) at (spath cs:north 0.25)
+              coordinate[between = L and R] (LR)
+            ;
+            \path[spath/save=guide] (LR) to (sw -| LR);
+            \draw[spath/save=cup] (R) to[out=-90,in=-90,looseness=2.5] (L);
+            \path[name intersections={of=guide and cup}]
+              coordinate[dot,label=above:$\self#name$] (counit) at (intersection-1)
+            ;
+            \begin{scope}[on background layer]
+              \fill[\adj#left#cod#fill] (nw) to (R) to[spath/use={cup,weld}] (L) to (ne) to (se) to (sw) to cycle;
+              \fill[\adj#left#dom#fill] (R) to [spath/use={cup,weld}] (L) to cycle;
+            \end{scope}
+          \end{tikzpicture}
+        }
+      }
+    }
+
+    [default-unit]{
+      \object[self]{
+        [width]{3}
+        [height]{2}
+        [name]{\eta}
+        [draw]{
+          \begin{tikzpicture}[scale=0.5,baseline=($(nw)!0.5!(se)$:)]
+            \CreateRect{\self#width}{\self#height}
+            \path
+              coordinate[label=below:$\strut\adj#left#name$] (L) at (spath cs:south 0.25)
+              coordinate[label=below:$\strut\adj#right#name$] (R) at (spath cs:south 0.75)
+              coordinate[between = L and R] (LR)
+            ;
+            \path[spath/save=guide] (LR) to (nw -| LR);
+            \draw[spath/save=cap] (L) to[out=90,in=90,looseness=2.5] (R);
+            \path[name intersections={of=guide and cap}]
+              coordinate[dot,label=below:$\self#name$] (unit) at (intersection-1)
+            ;
+            \begin{scope}[on background layer]
+              \fill[\adj#left#dom#fill] (sw) to (L) to[spath/use={cap,weld}] (R) to (se) to (ne) to (nw) to cycle;
+              \fill[\adj#left#cod#fill] (L) to[spath/use={cap,weld}] (R) to cycle;
+            \end{scope}
+          \end{tikzpicture}
+        }
+      }
+    }
+
+    [counit]{\adj#default-counit}
+    [unit]{\adj#default-unit}
+
+    [left-snake]{
+      \object[self]{
+        [width]{3}
+        [height]{3}
+        [draw]{
+          \begin{tikzpicture}[scale=0.5,baseline=($(nw)!0.5!(se)$)]
+              \CreateRect{\self#width}{\self#height}
+              \path
+                coordinate[label=above:$\strut\adj#left#name$] (n/L) at (spath cs:north 0.8)
+                coordinate[label=below:$\strut\adj#right#name$] (s/L) at (spath cs:south 0.2)
+              ;
+              \path[spath/save=guide1] (n/L) to[out=180,in=90] (s/L);
+              \path[spath/save=guide2] (s/L) to[out=0,in=-90] (n/L);
+              \path
+                coordinate[dot,label=below:$\strut\adj#unit#name$] (unit) at (spath cs:guide1 0.5)
+                coordinate[dot,label=above:$\strut\adj#counit#name$] (counit) at (spath cs:guide2 0.5)
+              ;
+              \draw[spath/save=wire] (n/L) to[out=-90,in=0] (counit.center) to[out=180,in=0] (unit.center) to[out=180,in=90] (s/L);
+
+              \begin{scope}[on background layer]
+                \fill[\adj#left#dom#fill] (nw) to (n/L) to[spath/use={wire,weld}] (s/L) to (sw) to (nw) to cycle;
+                \fill[\adj#left#cod#fill] (n/L) to[spath/use={wire,weld}] (s/L) to (se) to (ne) to cycle;
+              \end{scope}
+            \end{tikzpicture}
+        }
+      }
+    }
+
+    [right-snake]{
+      \object[self]{
+        [width]{3}
+        [height]{3}
+        [draw]{
+          \begin{tikzpicture}[scale=0.5,baseline=($(nw)!0.5!(se)$)]
+            \CreateRect{\self#width}{\self#height}
+            \path
+              coordinate[label=above:$\strut\adj#right#name$] (n/q) at (spath cs:north 0.2)
+              coordinate[label=below:$\strut\adj#right#name$] (s/q) at (spath cs:south 0.8)
+            ;
+            \path[spath/save=guide1] (n/q) to[out=-90,in=180] (s/q);
+            \path[spath/save=guide2] (s/q) to[out=90,in=0] (n/q);
+            \path
+              coordinate[dot,label=above:$\strut\adj#counit#name$] (counit) at (spath cs:guide1 0.5)
+              coordinate[dot,label=below:$\strut\adj#unit#name$] (unit) at (spath cs:guide2 0.5)
+            ;
+            \draw[spath/save=wire] (n/q) to[out=-90,in=180] (counit.center) to[out=0,in=180] (unit.center) to[out=0,in=90] (s/q);
+            \begin{scope}[on background layer]
+              \fill[\adj#left#cod#fill] (nw) to (n/q) to[spath/use={wire,weld}] (s/q) to (sw) to cycle;
+              \fill[\adj#left#dom#fill] (n/q) to[spath/use={wire,weld}] (s/q) to (se) to (ne) to cycle;
+            \end{scope}
+          \end{tikzpicture}
+        }
+      }
+    }
+
+    [right-snake-identity]{
+      \object[self]{
+        [draw]{
+          \let\long-right{
+            \patch{\adj#right}{
+              [height]{\adj#right-snake#height}
+            }
+          }
+          \adj#right-snake#draw $=$
+          \long-right#draw
+        }
+      }
+    }
+
+    [left-snake-identity]{
+      \object[self]{
+        [draw]{
+          \let\long-left{
+            \patch{\adj#left}{
+              [height]{\adj#left-snake#height}
+            }
+          }
+          \adj#left-snake#draw $=$
+          \long-left#draw
+        }
+      }
+    }
+
+  }
+}
