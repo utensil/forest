@@ -299,6 +299,54 @@
   }
 }
 
+\def\homfun/new{
+  \object[self]{
+    [height]{4}
+    [width]{6}
+    [nat]{\nat-transf/new} % fun1nat
+    [fun]{\functor/new}
+    [topname]{L}
+    [symbol]{circ}
+    [draw]{
+      \begin{tikzpicture}[scale=0.5,baseline=($(nw)!0.5!(se)$)]
+      \CreateRect{\self#width}{\self#height}
+      \path
+        coordinate[label=above:\ensuremath{\self#nat#dom#name}] (tl) at (spath cs:north 0.33)
+        coordinate[label=below:\ensuremath{\self#nat#cod#name}] (bl) at (spath cs:south 0.33)
+        coordinate (tr) at (spath cs:north 0.66)
+        coordinate (br) at (spath cs:south 0.66)
+        ;
+      \draw[spath/save=left] (tl) -- (bl);
+      \path[spath/save=right] (tr) -- (br);
+      \path
+        coordinate (ml) at (spath cs:left 0.5)
+        coordinate[\self#symbol,label=left:\ensuremath{\self#nat#name}] (nat) at (ml);
+
+      \ifthenelse{\equal{\self#fun#name}{\self#topname}}{
+        \path coordinate[label=above:\ensuremath{\self#fun#name}] (L) at (tr);
+        \draw (tr) to[out=-90, in=0] (nat);
+        \path[spath/save=L] (tr) to[out=-90, in=0] (ml);
+      }{
+        \path coordinate[label=below:\ensuremath{\self#fun#name}] (R) at (br);
+        \draw (br) to[out=90, in=0] (nat);
+        \path[spath/save=R] (br) to[out=90, in=0] (ml);
+      }
+
+      \begin{pgfonlayer}{background}
+      \fill[\self#nat#dom#dom#fill] (nw) rectangle (bl);
+      \ifthenelse{\equal{\self#fun#name}{\self#topname}}{
+        \fill[\self#fun#dom#fill] [spath/use={L,weld}] to (tr) to (tl) to (ml) to cycle;
+        \fill[\self#fun#cod#fill] [spath/use={L,weld}] to (bl) to (se) to (ne) to cycle;
+      }{
+        \fill[\self#fun#dom#fill] [spath/use={R,weld}] to (br) to (bl) to (ml) to cycle;
+        \fill[\self#fun#cod#fill] [spath/use={R,weld}] to (tl) to (ne) to (se) to cycle;
+      }
+      \end{pgfonlayer}
+      \end{tikzpicture}
+    }
+  }
+}
+
 % uts mod end
 
 

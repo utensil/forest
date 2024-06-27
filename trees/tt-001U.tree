@@ -23,6 +23,13 @@
   }
 }
 
+\let\cat/D{
+  \patch{\category/new}{
+    [name]{\D}
+    [fill]{catd}
+  }
+}
+
 \let\cat/Set{
   \patch{\category/new}{
     [name]{Set}
@@ -83,6 +90,40 @@
   }
 }
 
+\let\fun/L{
+  \patch{\functor/new}{
+    [dom]{\cat/C}
+    [cod]{\cat/D}
+    [name]{L}
+  }
+}
+
+\let\homfun/L{
+  \patch{\homfun/new}{
+    [height]{4}
+    [width]{6}
+    [nat]{\nat/hom/bi}
+    [fun]{\fun/L}
+  }
+}
+
+\let\fun/R{
+  \patch{\functor/new}{
+    [dom]{\cat/D}
+    [cod]{\cat/C}
+    [name]{R}
+  }
+}
+
+\let\homfun/R{
+  \patch{\homfun/new}{
+    [height]{4}
+    [width]{6}
+    [nat]{\nat/hom/bi}
+    [fun]{\fun/R}
+  }
+}
+
 \p{Here we follow the string diagram style of \citek{marsden2014category} and \citek{sterling2023models}, but with additional string diagrams inspired by \citek{nakahira2023diagrammatic}.}
 
 \ol{
@@ -106,6 +147,11 @@
   where #{\circ} denotes any arrows with the domain #{-} and codomain #{=}.
   }
 
-  \li{The \vocab{natural isomorphism} #{\D(L(-), =) \iso \C(-, R(=))} in \vocab{adjunction} can be represented as TODO.
+  \li{The \vocab{natural isomorphism} #{\D(L(-), =) \iso \C(-, R(=))} in \vocab{adjunction} can be represented as
+
+  \tikz{
+    \homfun/L#draw $=$ \homfun/R#draw
+  }
+
   }
 }
