@@ -18,10 +18,10 @@
 	f && \bullet \\
 	\\
 	\bullet && \bullet
-	\arrow["{{L(x);-;y}}", maps to, from=1-1, to=1-3]
-	\arrow["{{\sigma_{XY}}}"', maps to, from=1-1, to=3-1]
-	\arrow[maps to, from=1-3, to=3-3]
-	\arrow["{{x;-;R(y)}}"', maps to, from=3-1, to=3-3]
+	\arrow["{{{L(x);-;y}}}", maps to, from=1-1, to=1-3]
+	\arrow["{{{\sigma_{XY}}}}"', maps to, from=1-1, to=3-1]
+	\arrow["{\sigma_{X'Y'}}", maps to, from=1-3, to=3-3]
+	\arrow["{{{x;-;R(y)}}}"', maps to, from=3-1, to=3-3]
 \end{tikzcd}
 }
 
@@ -33,7 +33,7 @@ commutes for any arrows #{f: L(X) \to Y} in #{\D}.
 
 ##{
 \begin{array}{ccccccc}
-X' & \xrightarrow{x} & X & \xrightarrow{\sigma_{X Y}(f)} & R(Y) & \xrightarrow{R(y)} & R\left(Y'\right) \\
+X' & \xrightarrow{x} & X & \xrightarrow{\sigma_{X Y}(f)} & R(Y) & \xrightarrow{R(y)} & R\left(Y'\right) & \quad &   \\
 \hline L\left(X'\right) & \xrightarrow{L(x)} & L(X) & \xrightarrow{f} & Y & \xrightarrow{y} & Y'
 \end{array}
 }
@@ -41,10 +41,15 @@ X' & \xrightarrow{x} & X & \xrightarrow{\sigma_{X Y}(f)} & R(Y) & \xrightarrow{R
 or simply,
 
 ##{
-\frac{X \rightarrow R(Y)}{L(X) \rightarrow Y}
+\frac{X \rightarrow R(Y) \quad (\C)}{L(X) \rightarrow Y \quad (\D)}
 }
 
 }
 
+\p{
+	An adjunction is a concept that describes the relationship between two functors that are \newvocab{weakly inverse} to each other \citek{nakahira2023diagrammatic}.
+}
+
+\p{By "weakly inverse", we don't mean that applying one after the other gives the identity functor, but in a sense similar to eroding (i.e. enhancing holes) and dilating (i.e. filling holes) an image, applying them in different order yeilds upper/lower "bounds" of the original image \citek{rosiak2022sheaf}. }
 
 }

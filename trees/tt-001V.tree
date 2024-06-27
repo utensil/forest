@@ -1,0 +1,59 @@
+\import{tt-macros}
+% clifford hopf spin tt math draft
+\tag{tt}
+
+% definition theorem lemma construction observation
+% convention corollary axiom example exercise proof
+% discussion remark notation
+% \taxon{}
+
+\refdef{(co)unit}{zhang2021type}{
+\p{
+Consider an adjunction #{L \dashv R: \C \rightleftarrows \D}, we may obtain two \vocab{endofunctors} #{ L;R : \C \to \C} and #{ R;L : \D \to \D} that commute the diagram
+
+\tikz{
+\begin{tikzcd}
+	\C && \D && \C && \D && \C
+	\arrow["L", from=1-1, to=1-3]
+	\arrow["L"', curve={height=-30pt}, from=1-1, to=1-7]
+	\arrow["R", from=1-3, to=1-5]
+	\arrow["R"', curve={height=30pt}, from=1-3, to=1-9]
+	\arrow["L", from=1-5, to=1-7]
+	\arrow["R", from=1-7, to=1-9]
+\end{tikzcd}
+}
+
+that means they are both \vocab{idempotent}, i.e. applying #{L;R} any times yields the same result as applying it once, and similarly for #{R;L}.
+
+}
+ 
+\p{The natural transformation
+
+##{\eta: \id_{\C} \to L;R }
+
+is called the \newvocab{unit} of the adjunction, and
+
+##{\epsilon: R;L \to \id_{\D}}
+
+is called the \newvocab{counit}.
+}
+
+\p{The commutativity is also known as \vocab{triangle identities}, as demonstrated by the diagrams \citek{leinster2016basic}
+
+\tikz{
+\begin{tikzcd}
+	L && {L;R;L} && R && {R;L;R} \\
+	\\
+	&& L &&&& R
+	\arrow["{\eta;L}", Rightarrow, from=1-1, to=1-3]
+	\arrow["{\id_L}"', Rightarrow, from=1-1, to=3-3]
+	\arrow["{L;\epsilon}", Rightarrow, from=1-3, to=3-3]
+	\arrow["{R;\eta}", Rightarrow, from=1-5, to=1-7]
+	\arrow["{\id_R}"', Rightarrow, from=1-5, to=3-7]
+	\arrow["{\epsilon;R}", Rightarrow, from=1-7, to=3-7]
+\end{tikzcd}
+}
+}
+
+}
+
