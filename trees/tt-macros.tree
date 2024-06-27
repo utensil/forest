@@ -137,6 +137,7 @@
     [dom]{\functor/new}
     [cod]{\functor/new}
     [name]{?\alpha}
+    [symbol]{dot}
     [catopacity]{0}
     [draw]{
       \begin{tikzpicture}[scale=0.5,baseline=($(nw)!0.5!(se)$)]
@@ -146,7 +147,7 @@
           coordinate[label=below:\ensuremath{\self#cod#name}] (s) at (spath cs:south 0.5)
         ;
         \draw[spath/save=vert] (n) to (s);
-        \path coordinate[dot,label=left:$\self#name$] (cell) at (spath cs:vert 0.5);
+        \path coordinate[\self#symbol,label=left:\ensuremath{\self#name}] (cell) at (spath cs:vert 0.5);
 
         \node[between = nw and s, opacity=\self#catopacity] {\ensuremath{\self#dom#dom#name}};
         \node[between = n and se, opacity=\self#catopacity] {\ensuremath{\self#dom#cod#name}};

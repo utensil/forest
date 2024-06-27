@@ -246,7 +246,7 @@
     }
   }
 
-  \li{A \newvocab{natural transformation} #{\alpha : F \to F'} can be represented as a dot on the wire from top to bottem (the opposite of \citek{marsden2014category}, but the same as \citek{sterling2023models}), connecting the two functors :
+  \li{A \newvocab{natural transformation} #{\alpha : F \to F'} can be represented as a dot on the wire from top to bottem (the opposite direction of \citek{marsden2014category}, but the same as \citek{sterling2023models}), connecting the two functors :
     \tikz{
       \nat/alpha#draw
     }
@@ -274,9 +274,23 @@
   i.e. ##{(\alpha;\alpha');(\beta;\beta') = (\alpha;\beta);(\alpha';\beta')}
   }
 
-  \li{\newvocab{Naturality} in natural transformations is equivalent to the following equality:
+  \li{
+    \p{\newvocab{Naturality} in natural transformations is equivalent to the following equality:
     \tikz{
       \naturality/xfg#draw $=$ \naturality/xfgp#draw
+    }
+
+    where #{X} and #{X'} are objects in #{\C}, understood as functors from the terminal category #{\id} to #{\C}.
+    }
+
+    \p{We could read this diagram from top to bottem, and wrap each left-to-right composition in parentheses
+    
+    ##{(X;F);(\alpha_X);(f;G)=(X';G)  \quad {\huge =} \quad (X;F);(f;F);(\alpha'_X)=(X';G)}
+    
+    note that we read the wire from #{F} to #{G} as #{F} before the natural transformation, but as #{G} after the transformation.
+    }
+
+    \p{Effectively naturality says that the natural transformation and function #{f} “slide past each other”, and so we can draw them as two parallel wires to illustrate this.
     }
   }
 }
