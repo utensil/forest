@@ -307,6 +307,7 @@
     [fun]{\functor/new}
     [topname]{L}
     [symbol]{circ}
+    [catopacity]{0.5}
     [draw]{
       \begin{tikzpicture}[scale=0.5,baseline=($(nw)!0.5!(se)$)]
       \CreateRect{\self#width}{\self#height}
@@ -320,6 +321,7 @@
       \path[spath/save=right] (tr) -- (br);
       \path
         coordinate (ml) at (spath cs:left 0.5)
+        coordinate (mr) at (spath cs:right 0.5)
         coordinate[\self#symbol,label=left:\ensuremath{\self#nat#name}] (nat) at (ml);
 
       \ifthenelse{\equal{\self#fun#name}{\self#topname}}{
@@ -330,6 +332,15 @@
         \path coordinate[label=below:\ensuremath{\self#fun#name}] (R) at (br);
         \draw (br) to[out=90, in=0] (nat);
         \path[spath/save=R] (br) to[out=90, in=0] (ml);
+      }
+
+      \node[between = nw and bl, opacity=\self#catopacity] {\ensuremath{\self#nat#dom#dom#name}};
+      \ifthenelse{\equal{\self#fun#name}{\self#topname}}{
+        \node[between = tl and mr, opacity=\self#catopacity] {\ensuremath{\self#fun#dom#name}};
+        \node[between = tr and se, opacity=\self#catopacity] {\ensuremath{\self#fun#cod#name}};
+      }{
+        \node[between = bl and mr, opacity=\self#catopacity] {\ensuremath{\self#fun#dom#name}};
+        \node[between = tr and se, opacity=\self#catopacity] {\ensuremath{\self#fun#cod#name}};
       }
 
       \begin{pgfonlayer}{background}
