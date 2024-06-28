@@ -9,40 +9,30 @@
 
 \refdef{transpose}{kostecki2011introduction}{
 \p{
-Given an adjunction #{L \dashv R}, for an arrow #{f: X \rightarrow R(Y)} in #{\mathcal{C}}, there exists its \newvocab{left transpose}
+Given an adjunction #{L \dashv R}, the diagrams
 
-##{f^{\sharp}: L(X) \rightarrow Y}
+	\tikz{
+\begin{tikzcd}
+	X && {R(Y)} && X && {R(Y)} && {(\C)} \\
+	\\
+	{L(X)} && Y && {L(X)} && Y && {(\D)}
+	\arrow[""{name=0, anchor=center, inner sep=0}, "f", from=1-1, to=1-3]
+	\arrow[""{name=1, anchor=center, inner sep=0}, "{{{{g^{\flat}}}}}", from=1-5, to=1-7]
+	\arrow[""{name=2, anchor=center, inner sep=0}, "{{{{f^{\sharp}}}}}"', from=3-1, to=3-3]
+	\arrow[""{name=3, anchor=center, inner sep=0}, "g"', from=3-5, to=3-7]
+	\arrow["{{\sigma_{XY}^{-1}}}", shorten <=9pt, shorten >=9pt, Rightarrow, from=1, to=3]
+	\arrow["{{{{\sigma_{XY}}}}}"', shorten <=9pt, shorten >=9pt, Rightarrow, from=2, to=0]
+\end{tikzcd}
+	}
 
-in #{\mathcal{D}} which corresponds to #{f} under the natural isomorphism: 
+commute for any arrow #{f: X \to R(Y)} in #{\mathcal{C}}, #{g: L(X) \to Y} in #{\mathcal{D}}.
+}
 
-##{\sigma_{XY}\left(f^{\sharp}\right)=f}
-
-conversely, for an arrow #{g: Y \rightarrow L(X)} in #{\mathcal{D}}, there exists its \newvocab{right transpose}
-
-##{g^\flat: R(Y) \rightarrow X}
-
-in #{\mathcal{C}} which corresponds to #{g} under the natural isomorphism:
-
-##{\sigma_{YX}\left(g^\flat\right)=g}
+\p{#{f^{\sharp}} is called the \newvocab{left transpose} of #{f}. #{g^{\flat}} is called the \newvocab{right transpose} of #{g}.
 }
 
 \p{
-  Schematically,
-
-  \tikz{
-\begin{tikzcd}
-	X && {R(Y)} && {R(Y)} && X && {(\C)} \\
-	\\
-	{L(X)} && Y && Y && {L(X)} && {(\D)}
-	\arrow[""{name=0, anchor=center, inner sep=0}, "f", from=1-1, to=1-3]
-	\arrow[""{name=1, anchor=center, inner sep=0}, "{{g^{\flat}}}", from=1-5, to=1-7]
-	\arrow[""{name=2, anchor=center, inner sep=0}, "{{f^{\sharp}}}"', from=3-1, to=3-3]
-	\arrow[""{name=3, anchor=center, inner sep=0}, "g"', from=3-5, to=3-7]
-	\arrow["{{\sigma_{XY}}}"', shorten <=9pt, shorten >=9pt, Rightarrow, from=0, to=2]
-	\arrow["{\sigma_{YX}}"', shorten <=9pt, shorten >=9pt, Rightarrow, from=3, to=1]
-\end{tikzcd}
-}
-  }
-
+Other possible terms are left/right \newvocab{adjunct} of each other, and \newvocab{mate}s \citek{nlab-adjunt}.
 }
 
+}
