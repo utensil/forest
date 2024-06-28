@@ -1,0 +1,57 @@
+\import{tt-macros}
+% clifford hopf spin tt math draft
+\tag{tt}
+
+% definition theorem lemma construction observation
+% convention corollary axiom example exercise proof
+% discussion remark notation
+\taxon{example}
+
+\title{a cone on a diagram \citek{kostecki2011introduction}}
+
+\p{The cone for a diagram
+
+\tikz{
+\begin{tikzcd}
+	\bullet && \bullet \\
+	&&&& \J \\
+	\bullet && \bullet
+	\arrow[from=1-1, to=1-3]
+	\arrow[from=1-3, to=3-3]
+	\arrow[from=3-1, to=1-1]
+	\arrow[from=3-3, to=3-1]
+\end{tikzcd}
+}
+
+is
+
+\tikz{
+\begin{tikzcd}
+	&&& V \\
+	\\
+	&& \bullet &&&& \bullet \\
+	\bullet &&&& \bullet &&&& \C \\
+	\\
+	&& \bullet &&&& \bullet && \J \\
+	\bullet &&&& \bullet
+	\arrow[from=1-4, to=3-3]
+	\arrow[from=1-4, to=3-7]
+	\arrow[from=1-4, to=4-1]
+	\arrow[from=1-4, to=4-5]
+	\arrow[from=3-3, to=3-7]
+	\arrow[""{name=0, anchor=center, inner sep=0}, draw=none, from=3-3, to=4-5]
+	\arrow[from=3-7, to=4-5]
+	\arrow[from=4-1, to=3-3]
+	\arrow[from=4-5, to=4-1]
+	\arrow[from=6-3, to=6-7]
+	\arrow[""{name=1, anchor=center, inner sep=0}, draw=none, from=6-3, to=7-5]
+	\arrow[from=6-7, to=7-5]
+	\arrow[from=7-1, to=6-3]
+	\arrow[from=7-5, to=7-1]
+	\arrow["D"', shorten <=6pt, shorten >=6pt, Rightarrow, from=1, to=0]
+\end{tikzcd}
+}
+
+which indeed looks like a cone with a vertex.
+
+}
