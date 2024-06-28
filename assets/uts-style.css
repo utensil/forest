@@ -102,17 +102,13 @@ a.slug-source {
     font-weight: normal;
 }
 
-/* The intention is that this only applies to references, which should always include year which must be in the 20th and 21th centuries,
-or a prefix of wiki- or nlab- */
-.link.local a[href*="19"], nav#toc .link.local a[href*="19"], a.slug[href*="19"],
-.link.local a[href*="20"], nav#toc .link.local a[href*="20"], a.slug[href*="20"],
-.link.local a[href*="wiki-"], nav#toc .link.local a[href*="wiki-"], a.slug[href*="wiki-"],
-.link.local a[href*="nlab-"], nav#toc .link.local a[href*="nlab-"], a.slug[href*="nlab-"]
+/* This applies to references, including in title, main text, backmatter, but not in toc */
+.link-reference a
 {
     color: var(--uts-text-gentle) !important;
-    box-shadow: none;
-    text-decoration-line: unset;
-    text-decoration-style: unset;
+    box-shadow: none !important;
+    text-decoration-line: unset !important;
+    text-decoration-style: unset !important;
 }
 
 /* So we fix meta items, and local links to normal notes (which looks like prefix-numeric) */
