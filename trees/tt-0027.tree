@@ -1,0 +1,38 @@
+\import{tt-macros}
+% clifford hopf spin tt math draft
+\tag{draft}
+
+% definition theorem lemma construction observation
+% convention corollary axiom example exercise proof
+% discussion remark notation
+% \taxon{}
+
+\refdef{cone}{kostecki2011introduction}{
+\p{
+Let #{\C^{\J}} be a [functor category](tt-001F), where #{\J} is a [small category](tt-000A). 
+}
+
+\p{Let #{\Delta_O} be a [constant functor](tt-0016), which assigns the same object #{O} in #{\C} to any object #{J} in #{\J}.
+}
+
+\p{Let #{K \in \Ob(\J)} and let #{j \in \operatorname{Arr}(\J)} such that #{j: J \to K}. Let #{F} be any functor in #{\C^{\J}}, i.e. it's a [diagram](tt-0025) in #{\C} of shape #{\J}.
+}
+
+\p{A [natural transformation](tt-001E) #{\pi: \Delta_O \to F}, defined as a family of arrows #{\pi_J: O \to F(J)}, such that the triangle
+
+\tikz{
+\begin{tikzcd}
+	&& O \\
+	\\
+	{F(J)} &&&& {F(K)}
+	\arrow["{\pi_J}"', from=1-3, to=3-1]
+	\arrow["{\pi_K}", from=1-3, to=3-5]
+	\arrow["{F(j)}"', from=3-1, to=3-5]
+\end{tikzcd}
+}
+
+commutes, is called a \newvocab{cone} on the functor (diagram) #{F} with \newvocab{vertex} #{O}.
+}}
+
+
+
