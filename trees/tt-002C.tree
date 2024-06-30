@@ -1,0 +1,51 @@
+\import{tt-macros}
+% clifford hopf spin tt math draft
+\tag{draft}
+
+% definition theorem lemma construction observation
+% convention corollary axiom example exercise proof
+% discussion remark notation
+% \taxon{}
+
+\refdeft{preorder, poset}{(10)}{kostecki2011introduction}{
+\p{
+Let #{P} be a set. The properties
+\ul{
+  \li{(a) #{\forall p \in P, p \leq p} (reflexivity)}
+  \li{(b) #{\forall p, q, r \in P, p \leq q \wedge q \leq r \Rightarrow p \leq r} (transitivity)}
+}
+
+define a \newvocab{preorder} #{(P, \leq)}.
+}
+
+\p{A \newvocab{partially ordered set} (\newvocab{poset}) is defined as a \vocab{preorder} #{(P, \leq)} for which
+
+\ul{
+  \li{(c) #{\forall p \in P, p \leq q \wedge q \leq p \Rightarrow p=q} (antisymmetry)}
+}
+
+holds.
+}
+
+\p{Any poset #{(P, \leq)} and any preorder #{(P, \leq)} can be considered as a category #{\mathbf{P}} consisting of objects which are elements of a set #{P} and arrows defined by #{p \to q \Longleftrightarrow p \leq q}. An example of a preorder category which is not poset is:}
+
+\tikz{
+\begin{tikzcd}
+	X && Y
+	\arrow[from=1-1, to=1-1, loop, in=215, out=145, distance=10mm]
+	\arrow[shift left, from=1-1, to=1-3]
+	\arrow[shift left, from=1-3, to=1-1]
+	\arrow[from=1-3, to=1-3, loop, in=35, out=325, distance=10mm]
+\end{tikzcd}
+}
+
+\p{The category #{\Preord} consists of objects which are preorders and of arrows which are orderpreserving functions.
+}
+
+\p{The category #{\Poset} consists of objects which are posets and of arrows which are order-preserving functions between posets, that is, the maps #{T: P \to P'} such that
+##{
+p \leq q \Rightarrow T(p) \leq T(q)
+}}
+
+}
+
