@@ -240,5 +240,11 @@
     <xsl:apply-templates />
     <xsl:text>\end{lstlisting}</xsl:text>
   </xsl:template>
+
+  <xsl:template match="html:span[@class='newvocab']">
+    <xsl:text>{\color{blue} </xsl:text>
+    <xsl:apply-templates />
+    <xsl:text>}</xsl:text>
+  </xsl:template>
   
 </xsl:stylesheet>
