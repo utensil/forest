@@ -8,9 +8,13 @@
 
 \strong{Useful macros from [[jonmsterling]]'s [macros](https://git.sr.ht/~jonsterling/public-trees/tree/main/item/base-macros.tree)}
 
-\p{\code{citek[uid]}: Refer to a reference entry with brackets.}
+\p{\code{citek[refid]}: Refer to a reference entry with brackets.}
 
-\def\citek[uid]{\let\escape[x]{\x}\<html:span>[class]{link-reference}{[\escape{[\uid]}](\uid)}}
+\def\citek[refid]{\let\escape[x]{\x}\<html:span>[class]{link-reference}{[\escape{[\refid]}](\refid)}}
+
+\p{\code{citet[tid][refid]}: Refer to a definition/theorem/page \code{tid} in a reference entry \code{refid} with brackets.}
+
+\def\citet[tid][refid]{\let\escape[x]{\x}\<html:span>[class]{link-reference}[tid]{\tid}[refid]{\refid}{[\escape{[\refid, \tid]}](\refid)}}
 
 \p{\code{mark[body]}: Some yellow background mark text.}
 
@@ -233,6 +237,13 @@ so the text size almost matches the size output by native forester code. This do
   \body
 }
 
+\p{\code{refnotet[name][tid][reference][body]}: A note with a reference.}
+
+\def\refnotet[name][tid][reference][body]{
+  \title{\name \citet{\tid}{\reference}}
+  \body
+}
+
 \p{\code{texnote[name][reference][body]}: A \code{minitex} note with a reference.}
 
 \def\texnote[name][reference][body]{
@@ -244,6 +255,13 @@ so the text size almost matches the size output by native forester code. This do
 \def\refdef[name][reference][body]{
   \taxon{definition}
   \refnote{\name}{\reference}{\body}
+}
+
+\p{\code{refdeft[name][tid][reference][body]}: A definition with a reference to a definition/theorem/page.}
+
+\def\refdeft[name][tid][reference][body]{
+  \taxon{definition}
+  \refnotet{\name}{\tid}{\reference}{\body}
 }
 
 \p{\code{texdef[name][reference][body]}: A \code{minitex} definition with a reference.}

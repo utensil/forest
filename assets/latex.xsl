@@ -189,7 +189,13 @@
         <xsl:text>}</xsl:text>
       </xsl:when>
       <xsl:when test="/f:tree/f:backmatter/f:references/f:tree/f:frontmatter[f:addr/text()=current()/@addr]">
-        <xsl:text>~\cite{</xsl:text>
+        <xsl:text>~\cite</xsl:text>
+        <xsl:if test="../@tid">
+          <xsl:text>[</xsl:text>
+          <xsl:value-of select="../@tid" />
+          <xsl:text>]</xsl:text>
+        </xsl:if>
+        <xsl:text>{</xsl:text>
         <xsl:value-of select="@addr" />
         <xsl:text>}</xsl:text>
       </xsl:when>
