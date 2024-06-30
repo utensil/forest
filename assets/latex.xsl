@@ -242,9 +242,18 @@
   </xsl:template>
 
   <xsl:template match="html:span[@class='newvocab']">
-    <xsl:text>{\color{blue} </xsl:text>
+    <xsl:text>\textbf{\color{blue}</xsl:text>
+    <xsl:apply-templates />
+    <xsl:text>}</xsl:text>
+    <xsl:text>\index{</xsl:text>
     <xsl:apply-templates />
     <xsl:text>}</xsl:text>
   </xsl:template>
-  
+
+  <xsl:template match="html:span[@class='vocab']">
+    <xsl:text>\textbf{</xsl:text>
+    <xsl:apply-templates />
+    <xsl:text>}</xsl:text>
+  </xsl:template>
+
 </xsl:stylesheet>

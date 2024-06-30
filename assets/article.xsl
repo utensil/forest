@@ -43,6 +43,7 @@
       <!-- <xsl:text>\bibliographystyle{amsalpha}</xsl:text> -->
       <xsl:text>\bibliography{\jobname.bib}</xsl:text>
     </xsl:if>
+    <xsl:text>\printindex</xsl:text>
     <xsl:text>\end{document}</xsl:text>
   </xsl:template>
 
