@@ -39,6 +39,7 @@
 
 % https://www.overleaf.com/learn/latex/Articles%2FHow_to_change_paragraph_spacing_in_LaTeX#The_parskip_package
 \setlength{\parskip}{3ex plus 0.5ex minus 0.2ex}
+\setlength{\parindent}{0cm}
 % \usepackage[skip=3.3ex]{parskip}
 
 % https://tex.stackexchange.com/a/364574/75671
@@ -78,8 +79,6 @@
 \usepackage{enumerate}% http://ctan.org/pkg/enumerate
 
 \date{\today}
-
-\numberwithin{equation}{subsection}
 
 % From my preamble/print.tex
 
@@ -214,14 +213,16 @@
 \declaretheoremstyle[
 	headfont=\bfseries\sffamily,
 	bodyfont=\normalfont, %\small, %\sffamily,
-	spaceabove=0pt,
-	spacebelow=0pt
+	% spaceabove=0pt,
+	% spacebelow=0pt,
+	headpunct={\\[3pt]}
 ]{def}
 
+\numberwithin{equation}{subsection}
 \theoremstyle{definition}
 % \declaretheorem[style=thmblackbox,name=Definition,numberwithin=subsection]{definition}
-\declaretheorem[style=thmbluebox,name=Theorem,numberwithin=subsection]{theorem}
-\declaretheorem[style=thmbluebox,name=Theorem,numberwithin=subsection]{theoremx} % theorem not in dep graph
+\declaretheorem[style=thmbluebox,name=Theorem,numberwithin=subsection, numberlike=equation]{theorem}
+\declaretheorem[style=thmbluebox,name=Theorem,numberwithin=subsection, numberlike=equation]{theoremx} % theorem not in dep graph
 \declaretheorem[style=thmbluebox,name=Lemma,sibling=theorem]{lemma}
 \declaretheorem[style=thmbluebox,name=Lemma,sibling=theorem]{lemmax} % lemma not in dep graph
 \declaretheorem[style=thmbluebox,name=Corollary,sibling=theorem]{corollary}

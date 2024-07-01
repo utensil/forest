@@ -137,12 +137,12 @@
   </xsl:template>
   
   <xsl:template match="f:tex[@display='block']">
-    <xsl:text>\[</xsl:text>
+    <xsl:text>\begin{equation}</xsl:text>
     <xsl:apply-templates />
     <xsl:if test="parent::f:mainmatter/parent::f:tree/f:frontmatter/f:taxon[text()='Proof'] and position()=last()">
       <xsl:text>\qedhere</xsl:text>
     </xsl:if>
-    <xsl:text>\]</xsl:text>
+    <xsl:text>\end{equation}</xsl:text>
   </xsl:template>
   
   <xsl:template match="f:ol">
