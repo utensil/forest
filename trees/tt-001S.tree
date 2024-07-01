@@ -7,7 +7,7 @@
 % discussion remark notation
 % \taxon{}
 
-\refdeft{hom-functor}{eq. 57, 58}{kostecki2011introduction}{
+\refdeft{hom-functor}{3.1, example 10}{kostecki2011introduction}{
 
 \p{For every [locally small category](tt-000A) #{\C}, the \newvocab{covariant hom-functor}, denoted
 
@@ -31,5 +31,22 @@ defined as a contravariant hom-functor at first argument and as a covariant hom-
 }
 
 \p{We see #{-} and #{=} as placeholders for any object and its "associated arrow" (whose domain/codomain is the object, respectively) in the corresponding category.}
+
+\p{Schematically \citet{4.1.22}{leinster2016basic},
+
+\tikz{
+\begin{tikzcd}
+	{(X, Y)} &&& {\C(X, Y)} \\
+	\\
+	{(X', Y')} &&& {\C(X', Y')}
+	\arrow[shorten <=16pt, shorten >=16pt, maps to, from=1-1, to=1-4]
+	\arrow[""{name=0, anchor=center, inner sep=0}, "g", shift left=2, from=1-1, to=3-1]
+	\arrow[""{name=1, anchor=center, inner sep=0}, "{f;-;g}", from=1-4, to=3-4]
+	\arrow["f", shift left=2, from=3-1, to=1-1]
+	\arrow[shorten <=15pt, shorten >=15pt, maps to, from=3-1, to=3-4]
+	\arrow[shorten <=22pt, shorten >=22pt, maps to, from=0, to=1]
+\end{tikzcd}
+}
+}
 
 }
