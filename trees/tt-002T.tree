@@ -10,16 +10,55 @@
 
 % kostecki2011introduction leinster2016basic
 
-\refdeft{Yoneda embedding, seen embedding}{4.1.15}{leinster2016basic}{
+\refdeft{Yoneda embedding functors}{4.1.15}{leinster2016basic}{
 \p{
-Let #{\C} be a locally small category. The \newvocab{Yoneda embedding} of #{\C} is the functor
+Let #{\C} be a locally small category. The \newvocab{covariant Yoneda embedding functor} of #{\C} is the functor
+##{
+H^{\bullet}: \C^{op} \to [\C, \Set]
+}
+defined on objects #{X} by the \vocabk{covariant hom-functor}{tt-001S} on #{X}.
+}
+
+\p{This functor embeds what every object in #{\C} \em{sees} the "world" of the category #{\C}, i.e. arrows \em{from} each object.
+}
+
+\p{Conversely, the (contravariant) \newvocab{Yoneda embedding functor} of #{\C} is the functor
 ##{
 H_{\bullet}: \C \to [\C^{op}, \Set]
 }
-is defined on objects #{X} by the \vocabk{contravariant hom-functor}{tt-001S} on #{X}.
+defined on objects #{X} by the \vocabk{contravariant hom-functor}{tt-001S} on #{X}.
 }
 
-\p{We also call this functor the \newvocab{Seen embedding} of #{\C} because it embeds how every object is "seen" in #{\C}, i.e. arrows \em{to} each object. Note that this term is not from any literature.
+\p{This functor embeds how every object in #{\C} is "seen", i.e. arrows \em{to} each object.
+}
+
+\p{#{\bullet} is a placeholder for an object. #{H^X} and #{H_X} denote the corresponding Yoneda embedding functors applied to #{X}, and are called covariant/contravariant \newvocab{Yoneda functor}s, respectively.
+}
+
+\p{Schematically \citek{def. 161}{rosiak2022sheaf}:
+
+\tikz{
+\begin{tikzcd}
+	{\C^{op}} && {[\C, Set]} && \C && {[\C^{op}, Set ]} \\
+	\\
+	X && {\Hom(X, -)} && X && {\Hom(-, X)} \\
+	\\
+	Y && {\Hom(Y, -)} && Y && {\Hom(-, Y)}
+	\arrow["{H^{\bullet}}", hook, from=1-1, to=1-3]
+	\arrow["{H_{\bullet}}", hook, from=1-5, to=1-7]
+	\arrow[maps to, from=3-1, to=3-3]
+	\arrow["f"', from=3-1, to=5-1]
+	\arrow[maps to, from=3-5, to=3-7]
+	\arrow["f"', from=3-5, to=5-5]
+	\arrow[from=3-7, to=5-7]
+	\arrow[maps to, from=5-1, to=5-3]
+	\arrow[from=5-3, to=3-3]
+	\arrow[maps to, from=5-5, to=5-7]
+\end{tikzcd}
+}
+}
+
+\p{When one speaks of the Yoneda (embedding) functor without specifying covariant or contravariant, it means the contravariant one, because it's the one used in the \vocab{Yoneda lemma}.
 }
 }
 
