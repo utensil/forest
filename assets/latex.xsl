@@ -256,4 +256,10 @@
     <xsl:text>}</xsl:text>
   </xsl:template>
 
+  <xsl:template match="html:blockquote">
+    <xsl:text>\begin{displayquote}</xsl:text>
+    <xsl:apply-templates />
+    <xsl:text>\end{displayquote}</xsl:text>
+  </xsl:template>
+
 </xsl:stylesheet>
