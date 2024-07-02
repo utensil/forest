@@ -61,6 +61,7 @@ nav#toc a.slug {
     --uts-text-gentle-grey: rgb(132, 132, 132);
     --uts-text-gentle: #10731d;
     --uts-background: white;
+    --uts-vocab: #75140c;
     /* #f4ecd9; */
 }
 
@@ -70,6 +71,7 @@ nav#toc a.slug {
     --uts-text-gentle-grey: rgb(174, 174, 174);
     --uts-text-gentle: #8cd295;
     --uts-background: #262626;
+    --uts-vocab: #db8c84;
 }
 
 body {
@@ -267,6 +269,12 @@ span.newvocab {
 
 span.vocab {
     font-weight: bold;
+}
+
+span.vocab .link.local a {
+    /* text-decoration-style: solid; */
+    text-decoration-color: color-mix(in srgb, var(--uts-vocab) 40%, var(--uts-background) 60%);
+    color: var(--uts-vocab) !important;
 }
 
 :root[data-applied-mode="dark"] span.newvocab {
