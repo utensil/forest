@@ -1,0 +1,48 @@
+\import{tt-macros}
+\import{tt-0030}
+\import{tt-001Z}
+% clifford hopf spin tt math draft
+\tag{tt}
+
+% definition theorem lemma construction observation
+% convention corollary axiom example exercise proof
+% discussion remark notation
+% \taxon{}
+% \taxon{lemma}\refnotet{}{}{}{
+
+% kostecki2011introduction leinster2016basic
+
+\def\adj/LR/halo{
+  \patch{\adj/LR}{
+    [left-snake]{
+      \patch{\adj/LR#left-snake}{
+        [rest]{
+          % \node[white halo, fit=(unit)(unit -| n/L)]{};
+          % \node[white halo, fit=(counit)(counit -| s/L)]{};
+
+          \path[spath/save=unitLguide] (unit) -- (unit -| ne);
+          \path[name intersections={of=wire and unitLguide, by={unitL}}];
+          \node[white halo, fit=(unit)(unitL)]{};
+          \path[spath/save=counitLguide] (counit) -- (counit -| sw);
+          \path[name intersections={of=wire and counitLguide, by={counitL}}];
+          \node[white halo, fit=(counit)(counitL)]{};
+        }
+      }
+    }
+  }
+}
+
+\taxon{notation}\refnotet{string diagram: snake identities}{thm. 4.8}{nakahira2023diagrammatic}{
+\p{Following [[tt-001G]], recall that a string diagrams is composed from top to bottem, left to right, we can read the left snake
+\tikz{
+\adj/LR/halo#left-snake#draw
+}
+in \vocabk{snake identities}{tt-0030} as
+##{ L \xmapsto{(\eta;L);(L;\epsilon)} L}
+}
+where each pair of parentheses corresponds to an overlay in the string diagram, and this is equivalent to
+\tikz{
+\adj/left-triangle
+}
+in \vocabk{triangle identities}{tt-001Z}.
+}

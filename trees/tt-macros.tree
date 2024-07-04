@@ -446,8 +446,9 @@
 
     [left-snake]{
       \object[self]{
-        [width]{3}
-        [height]{3}
+        [width]{4}
+        [height]{4}
+        [rest]{}
         [draw]{
           \begin{tikzpicture}[scale=0.5,baseline=($(nw)!0.5!(se)$)]
               \CreateRect{\self#width}{\self#height}
@@ -462,6 +463,8 @@
                 coordinate[dot,label=above:$\strut\adj#counit#name$] (counit) at (spath cs:guide2 0.5)
               ;
               \draw[spath/save=wire] (n/L) to[out=-90,in=0] (counit.center) to[out=180,in=0] (unit.center) to[out=180,in=90] (s/L);
+              
+              \self#rest
 
               \begin{scope}[on background layer]
                 \fill[\adj#left#dom#fill] (nw) to (n/L) to[spath/use={wire,weld}] (s/L) to (sw) to (nw) to cycle;
@@ -474,8 +477,9 @@
 
     [right-snake]{
       \object[self]{
-        [width]{3}
-        [height]{3}
+        [width]{4}
+        [height]{4}
+        [rest]{}
         [draw]{
           \begin{tikzpicture}[scale=0.5,baseline=($(nw)!0.5!(se)$)]
             \CreateRect{\self#width}{\self#height}
@@ -490,6 +494,9 @@
               coordinate[dot,label=below:$\strut\adj#unit#name$] (unit) at (spath cs:guide2 0.5)
             ;
             \draw[spath/save=wire] (n/q) to[out=-90,in=180] (counit.center) to[out=0,in=180] (unit.center) to[out=0,in=90] (s/q);
+
+            \self#rest
+
             \begin{scope}[on background layer]
               \fill[\adj#left#cod#fill] (nw) to (n/q) to[spath/use={wire,weld}] (s/q) to (sw) to cycle;
               \fill[\adj#left#dom#fill] (n/q) to[spath/use={wire,weld}] (s/q) to (se) to (ne) to cycle;

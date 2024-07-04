@@ -6,21 +6,21 @@
 % convention corollary axiom example exercise proof
 % discussion remark notation
 
-\let\cat/C{
+\def\cat/C{
   \patch{\category/new}{
     [name]{\C}
     [fill]{catc}
   }
 }
 
-\let\cat/D{
+\def\cat/D{
   \patch{\category/new}{
     [name]{\D}
     [fill]{catd}
   }
 }
 
-\let\fun/L{
+\def\fun/L{
   \patch{\functor/new}{
     [dom]{\cat/C}
     [cod]{\cat/D}
@@ -28,7 +28,7 @@
   }
 }
 
-\let\fun/R{
+\def\fun/R{
   \patch{\functor/new}{
     [dom]{\cat/D}
     [cod]{\cat/C}
@@ -36,14 +36,14 @@
   }
 }
 
-\let\adj/LR{
+\def\adj/LR{
   \patch{\adjunction/new}{
     [left]{\fun/L}
     [right]{\fun/R}
   }
 }
 
-\taxon{remark}\refnotet{snake identities}{thm. 4.8}{nakahira2023diagrammatic}{
+\taxon{lemma}\refnotet{snake identities}{thm. 4.8}{nakahira2023diagrammatic}{
 \p{Continuing from [[tt-001U]], the \vocabk{triangle identities}{tt-001Z} can be represented as follows, and called the \newvocab{snake identities} (or \newvocab{zig-zag identities}):
 \tikz{
 \adj/LR#left-snake-identity#draw
