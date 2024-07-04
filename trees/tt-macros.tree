@@ -319,14 +319,14 @@
   }
 }
 
-\def\homfun/new{
+\def\joinfun/new{
   \object[self]{
     [height]{4}
     [width]{6}
     [nat]{\nat-transf/new} % fun1nat
     [fun]{\functor/new}
     [topname]{L}
-    [symbol]{circ}
+    [symbol]{dot}
     [catopacity]{0.5}
     [draw]{
       \begin{tikzpicture}[scale=0.5,baseline=($(nw)!0.5!(se)$)]
@@ -345,11 +345,9 @@
 
       \ifthenelse{\equal{\self#fun#name}{\self#topname}}{
         \path coordinate[label=above:\ensuremath{\self#fun#name}] (L) at (tr);
-        %\draw (tr) to[out=-90, in=0] (nat);
         \draw[spath/save=L] (tr) to[out=-90, in=0] (ml);
       }{
         \path coordinate[label=below:\ensuremath{\self#fun#name}] (R) at (br);
-        % \draw (br) to[out=90, in=0] (nat);
         \draw[spath/save=R] (br) to[out=90, in=0] (ml);
       }
 
@@ -376,6 +374,12 @@
       \end{pgfonlayer}
       \end{tikzpicture}
     }
+  }
+}
+
+\def\homfun/new{
+  \patch{\joinfun/new}{
+    [symbol]{circ}
   }
 }
 

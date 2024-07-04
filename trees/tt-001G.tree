@@ -2,41 +2,7 @@
 % clifford hopf spin tt math draft
 \tag{tt}
 
-\let\cat/term{
-  \patch{\category/new}{
-    [name]{\id}
-    [fill]{catterm}
-  }
-}
-
-\let\cat/C{
-  \patch{\category/new}{
-    [name]{\C}
-    [fill]{catc}
-  }
-}
-
-\let\cat/D{
-  \patch{\category/new}{
-    [name]{\D}
-    [fill]{catd}
-  }
-}
-
-\let\cat/E{
-  \patch{\category/new}{
-    [name]{\E}
-    [fill]{cate}
-  }
-}
-
-\let\fun/F{
-  \patch{\functor/new}{
-    [dom]{\cat/C}
-    [cod]{\cat/D}
-    [name]{F}
-  }
-}
+\import{tt-0032}
 
 \let\fun/Fp{
   \patch{\fun/F}{
@@ -47,14 +13,6 @@
 \let\fun/Fpp{
   \patch{\fun/F}{
     [name]{F''}
-  }
-}
-
-\let\fun/G{
-  \patch{\functor/new}{
-    [dom]{\cat/D}
-    [cod]{\cat/E}
-    [name]{G}
   }
 }
 
@@ -140,14 +98,6 @@
     [dom]{\fun/F}
     [cod]{\fun/Fp}
     [name]{\alpha}
-  }
-}
-
-\let\obj/X{
-  \patch{\functor/new}{
-    [dom]{\cat/term}
-    [cod]{\cat/C}
-    [name]{X}
   }
 }
 

@@ -1,0 +1,79 @@
+\import{tt-macros}
+% clifford hopf spin tt math draft
+% \tag{tt}
+% \tag{draft}
+
+% this is a macro-only tree, basic objects in category theory are defined here
+
+\def\cat/term{
+  \patch{\category/new}{
+    [name]{\id}
+    [fill]{catterm}
+  }
+}
+
+\def\cat/C{
+  \patch{\category/new}{
+    [name]{\C}
+    [fill]{catc}
+  }
+}
+
+\def\cat/D{
+  \patch{\category/new}{
+    [name]{\D}
+    [fill]{catd}
+  }
+}
+
+\def\cat/E{
+  \patch{\category/new}{
+    [name]{\E}
+    [fill]{cate}
+  }
+}
+
+\def\obj/X{
+  \patch{\functor/new}{
+    [dom]{\cat/term}
+    [cod]{\cat/C}
+    [name]{X}
+  }
+}
+
+\def\obj/Y{
+  \patch{\obj/X}{
+    [name]{Y}
+  }
+}
+
+\def\arr/f{
+  \patch{\nat-transf/new}{
+    [dom]{\obj/X}
+    [cod]{\obj/Y}
+    [name]{f}
+  }
+}
+
+\def\fun/F{
+  \patch{\functor/new}{
+    [dom]{\cat/C}
+    [cod]{\cat/D}
+    [name]{F}
+  }
+}
+
+\def\fun/G{
+  \patch{\functor/new}{
+    [dom]{\cat/D}
+    [cod]{\cat/E}
+    [name]{G}
+  }
+}
+
+\def\cat/Set{
+  \patch{\category/new}{
+    [name]{Set}
+    [fill]{catd}
+  }
+}
