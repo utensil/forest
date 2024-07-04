@@ -323,7 +323,7 @@
   \object[self]{
     [height]{4}
     [width]{6}
-    [nat]{\nat-transf/new} % fun1nat
+    [nat]{\nat-transf/new}
     [fun]{\functor/new}
     [topname]{L}
     [symbol]{dot}
@@ -369,6 +369,73 @@
         \fill[\self#fun#cod#fill] [spath/use={L,weld}] to (bl) to (se) to (ne) to cycle;
       }{
         \fill[\self#fun#dom#fill] [spath/use={R,weld}] to (br) to (bl) to (ml) to cycle;
+        \fill[\self#fun#cod#fill] [spath/use={R,weld}] to (tl) to (ne) to (se) to cycle;
+      }
+      \end{pgfonlayer}
+      \end{tikzpicture}
+    }
+  }
+}
+
+\def\cupfun/new{
+  \object[self]{
+    [height]{4}
+    [width]{6}
+    [nat]{\nat-transf/new}
+    [unit]{\nat-transf/new}
+    [fun]{\functor/new}
+    [topname]{L}
+    [symbol]{dot}
+    [catopacity]{0.5}
+    [draw]{
+      \begin{tikzpicture}[scale=0.5,baseline=($(nw)!0.5!(se)$)]
+      \CreateRect{\self#width}{\self#height}
+      \path
+        coordinate[label=above:\ensuremath{\self#nat#dom#name}] (tl) at (spath cs:north 0.25)
+        coordinate[label=below:\ensuremath{\self#nat#cod#name}] (bl) at (spath cs:south 0.25)
+        coordinate (tr) at (spath cs:north 0.75)
+        coordinate (br) at (spath cs:south 0.75)
+        coordinate[between = tl and tr] (midlr)
+        ;
+      \draw[spath/save=left] (tl) -- (bl);
+      \path[spath/save=right] (tr) -- (br); %path
+      \path[spath/save=guide] (midlr) to (sw -| midlr); %path
+      \path
+        coordinate (ml) at (spath cs:left 0.5)
+        coordinate (mr) at (spath cs:right 0.5);
+
+      \ifthenelse{\equal{\self#fun#name}{\self#topname}}{
+        \path coordinate (nl) at (spath cs:left 0.25);
+        \path coordinate (fg) at (spath cs:guide 0.75);
+        \path coordinate[label=above:\ensuremath{\self#fun#name}] (L) at (tr); %path
+        \draw[spath/save=L] (tr) to[out=-90, in=0] (fg) to[out=180, in=-90] (nl);
+        \path coordinate[\self#symbol,label=above:\ensuremath{\self#unit#name}] (unit) at (fg);
+      }{
+        \path coordinate (nl) at (spath cs:left 0.75);
+        \path coordinate (fg) at (spath cs:guide 0.25);
+        \path coordinate[label=below:\ensuremath{\self#fun#name}] (R) at (br); %path
+        \draw[spath/save=R] (br) to[out=90, in=0] (fg) to[out=180, in=90] (nl);
+        \path coordinate[\self#symbol,label=below:\ensuremath{\self#unit#name}] (unit) at (fg);
+      }
+
+      \path coordinate[\self#symbol,label=left:\ensuremath{\self#nat#name}] (nat) at (nl);
+
+      \node[between = nw and bl, opacity=\self#catopacity] {\ensuremath{\self#nat#dom#dom#name}};
+      \ifthenelse{\equal{\self#fun#name}{\self#topname}}{
+        \node[between = tl and mr, opacity=\self#catopacity] {\ensuremath{\self#fun#dom#name}};
+        \node[between = tr and se, opacity=\self#catopacity] {\ensuremath{\self#fun#cod#name}};
+      }{
+        \node[between = bl and mr, opacity=\self#catopacity] {\ensuremath{\self#fun#dom#name}};
+        \node[between = tr and se, opacity=\self#catopacity] {\ensuremath{\self#fun#cod#name}};
+      }
+
+      \begin{pgfonlayer}{background}
+      \fill[\self#nat#dom#dom#fill] (nw) rectangle (bl);
+      \ifthenelse{\equal{\self#fun#name}{\self#topname}}{
+        \fill[\self#fun#dom#fill] [spath/use={L,weld}] to (tr) to (tl) to (nl) to cycle;
+        \fill[\self#fun#cod#fill] [spath/use={L,weld}] to (bl) to (se) to (ne) to cycle;
+      }{
+        \fill[\self#fun#dom#fill] [spath/use={R,weld}] to (br) to (bl) to (nl) to cycle;
         \fill[\self#fun#cod#fill] [spath/use={R,weld}] to (tl) to (ne) to (se) to cycle;
       }
       \end{pgfonlayer}
