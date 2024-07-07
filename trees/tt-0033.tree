@@ -1,0 +1,75 @@
+\import{tt-macros}
+% clifford hopf spin tt math draft
+\tag{tt}
+
+\import{tt-0032}
+\import{tt-0030}
+
+\let\arr/fsharp{
+  \patch{\arr/f}{
+    [name]{f^{\sharp}}
+  }
+}
+
+\let\arr/h{
+  \patch{\arr/f}{
+    [name]{h}
+  }
+}
+
+\let\arr/hsharp{
+  \patch{\arr/h}{
+    [name]{h^{\sharp}}
+  }
+}
+
+\let\joinfun/X/RY{
+  \patch{\joinfun/new}{
+    [nat]{\arr/h}
+    [fun]{\fun/R}
+    [catopacity]{0}
+  }
+}
+
+\let\cupfun/X/eta/RY{
+  \patch{\cupfun/new}{
+    [nat]{\arr/hsharp}
+    [fun]{\fun/R}
+    [unit]{\adjunction/new#default-unit}
+    % [topname]{R}
+    [catopacity]{0}
+  }
+}
+
+\let\joinfun/LX/Y{
+  \patch{\joinfun/new}{
+    [nat]{\arr/fsharp}
+    [fun]{\fun/L}
+    [catopacity]{0}
+  }
+}
+
+\let\cupfun/LX/epsilon/Y{
+  \patch{\cupfun/new}{
+    [nat]{\arr/f}
+    [fun]{\fun/L}
+    [unit]{\adjunction/new#default-counit}
+    % [topname]{L}
+    [catopacity]{0}
+  }
+}
+
+% definition theorem lemma construction observation
+% convention corollary axiom example exercise proof
+% discussion remark notation
+\taxon{remark}\refnotet{string diagram: unit/counit and transposes}{lem. 3.6}{marsden2014category}{
+\p{In string diagrams, lemma [[tt-001Y]] can be represented as:
+
+\tikz{
+\cupfun/X/eta/RY#draw $=$ \joinfun/X/RY#draw
+
+\cupfun/LX/epsilon/Y#draw $=$ \joinfun/LX/Y#draw 
+}
+
+}
+}
