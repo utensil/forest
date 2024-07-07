@@ -6,25 +6,25 @@
 
 \let\fun/Fp{
   \patch{\fun/F}{
-    [name]{F'}
+    [name]{\fF'}
   }
 }
 
 \let\fun/Fpp{
   \patch{\fun/F}{
-    [name]{F''}
+    [name]{\fF''}
   }
 }
 
 \let\fun/Gp{
   \patch{\fun/G}{
-    [name]{G'}
+    [name]{\fG'}
   }
 }
 
 \let\fun/Gpp{
   \patch{\fun/G}{
-    [name]{G''}
+    [name]{\fG''}
   }
 }
 
@@ -180,7 +180,7 @@
 \taxon{notation}\refnotet{string diagrams: functor and natural transformation}{sec. 2}{marsden2014category}{
 
 \ol{
-  \li{A \newvocab{functor} #{F : \C \to \D} can be represented as an edge, commonly referred to as a wire:
+  \li{A \newvocab{functor} #{\fF : \C \to \D} can be represented as an edge, commonly referred to as a wire:
   
     \tikz{
       \fun/F#draw
@@ -194,7 +194,7 @@
     }
   }
 
-  \li{A \newvocab{natural transformation} #{\alpha : F \to F'} can be represented as a dot on the wire from top to bottem (the opposite direction of \citek{marsden2014category}, but the same as \citek{sterling2023models}), connecting the two functors :
+  \li{A \newvocab{natural transformation} #{\alpha : \fF \to \fF'} can be represented as a dot on the wire from top to bottem (the opposite direction of \citek{marsden2014category}, but the same as \citek{sterling2023models}), connecting the two functors :
     \tikz{
       \nat/alpha#draw
     }
@@ -237,9 +237,9 @@
 
     or with the notation in the opposite direction that is more familiar to most:
 
-    ##{G(f) \circ \alpha_X \circ F(X) = G(X') \quad {\large =} \quad \alpha'_X \circ F(f) \circ F(X) = G(X')}
+    ##{\fG(f) \circ \alpha_X \circ \fF(X) = \fG(X') \quad {\large =} \quad \alpha'_X \circ \fF(f) \circ \fF(X) = \fG(X')}
     
-    note that we read the wire from #{F} to #{G} as #{F} before the natural transformation, but as #{G} after the transformation.
+    note that we read the wire from #{\fF} to #{\fG} as #{\fF} before the natural transformation, but as #{\fG} after the transformation.
     }
 
     \p{Effectively naturality says that the natural transformation and function #{f} “slide past each other”, and so we can draw them as two parallel wires to illustrate this.

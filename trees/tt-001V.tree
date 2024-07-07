@@ -9,42 +9,42 @@
 
 \refdeft{(co)unit}{5.30}{zhang2021type}{
 \p{
-Given an adjunction #{L \dashv R: \C \rightleftarrows \D}, we may obtain two \vocab{endofunctors} #{ L;R : \C \to \C} and #{ R;L : \D \to \D} that commute the diagram
+Given an adjunction #{\fL \dashv \fR: \C \rightleftarrows \D}, we may obtain two \vocab{endofunctors} #{ \fL;\fR : \C \to \C} and #{ \fR;\fL : \D \to \D} that commute the diagram
 
 \tikz{
 \begin{tikzcd}
 	\C && \D && \C && \D && \C
-	\arrow["L", from=1-1, to=1-3]
-	\arrow["L"', curve={height=-30pt}, from=1-1, to=1-7]
-	\arrow["R", from=1-3, to=1-5]
-	\arrow["R"', curve={height=30pt}, from=1-3, to=1-9]
-	\arrow["L", from=1-5, to=1-7]
-	\arrow["R", from=1-7, to=1-9]
+	\arrow["\fL", from=1-1, to=1-3]
+	\arrow["\fL", curve={height=-30pt}, from=1-1, to=1-7]
+	\arrow["\fR", from=1-3, to=1-5]
+	\arrow["\fR"', curve={height=30pt}, from=1-3, to=1-9]
+	\arrow["\fL", from=1-5, to=1-7]
+	\arrow["\fR", from=1-7, to=1-9]
 \end{tikzcd}
 }
 
-that means they are both \vocab{idempotent}, i.e. applying #{L;R} any times yields the same result as applying it once, and similarly for #{R;L}.
+that means they are both \vocab{idempotent}, i.e. applying #{\fL;\fR} any times yields the same result as applying it once, and similarly for #{\fR;\fL}.
 
 }
  
 \p{The natural transformation
 
-##{\eta: \id_{\C} \to L;R }
+##{\eta: \id_{\C} \to \fL;\fR }
 
 is called the \newvocab{unit} of the adjunction, and
 
-##{\epsilon: R;L \to \id_{\D}}
+##{\epsilon: \fR;\fL \to \id_{\D}}
 
 is called the \newvocab{counit}.
 }
 
 \p{We call an arrow
 
-##{\eta_X: X \to (L;R)(X)}
+##{\eta_X: X \to (\fL;\fR)(X)}
 
 a \vocab{unit} over #{X}, and
 
-##{\epsilon_Y: (R;L)(Y) \to Y}
+##{\epsilon_Y: (\fR;\fL)(Y) \to Y}
 
 a \vocab{counit} over #{Y}. They are components of the natural transformations #{\eta} and #{\epsilon}, respectively.
 }
@@ -59,11 +59,11 @@ a \vocab{counit} over #{Y}. They are components of the natural transformations #
 	\bullet && \bullet \\
 	&& Y
 	\arrow["{{{{\eta_X}}}}"', from=2-1, to=3-1]
-	\arrow["L", Rightarrow, from=2-1, to=3-3]
-	\arrow["R", Rightarrow, from=3-3, to=3-1]
-	\arrow["L", Rightarrow, from=4-1, to=4-3]
+	\arrow["\fL", Rightarrow, from=2-1, to=3-3]
+	\arrow["\fR", Rightarrow, from=3-3, to=3-1]
+	\arrow["\fL", Rightarrow, from=4-1, to=4-3]
 	\arrow["{\epsilon_Y}", from=4-3, to=5-3]
-	\arrow["R", Rightarrow, from=5-3, to=4-1]
+	\arrow["\fR", Rightarrow, from=5-3, to=4-1]
 \end{tikzcd}
 }
 

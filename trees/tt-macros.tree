@@ -19,13 +19,14 @@
 \def\S{{\cal S}}
 
 % functors
-\def\fF{F}
-\def\fG{G}
-\def\fH{H}
-\def\fK{K}
-\def\fL{L}
-\def\fR{R}
-\def\fD{D}
+\def\fF{\mathscr{F}}
+\def\fG{\mathscr{G}}
+\def\fH{\mathscr{H}}
+\def\fI{\mathscr{I}}
+\def\fK{\mathscr{K}}
+\def\fL{\mathscr{L}}
+\def\fR{\mathscr{R}}
+\def\fD{\mathscr{D}}
 
 \def\emptycat{\mathrm{0}}
 \def\termobj{\mathrm{1}}
@@ -130,15 +131,15 @@
       \begin{tikzpicture}[scale=0.5,baseline=($(nw)!0.5!(se)$)]
       \CreateRect{\self#width}{\self#height}
       \path
-        coordinate[label=below:\self#fun1#name] (bl) at (spath cs:south 0.33)
-        coordinate[label=above:\self#fun1#name] (tl) at (spath cs:north 0.33)
-        coordinate[label=below:\self#fun2#name] (br) at (spath cs:south 0.66)
-        coordinate[label=above:\self#fun2#name] (tr) at (spath cs:north 0.66);
+        coordinate[label=below:\ensuremath{\self#fun1#name}] (bl) at (spath cs:south 0.33)
+        coordinate[label=above:\ensuremath{\self#fun1#name}] (tl) at (spath cs:north 0.33)
+        coordinate[label=below:\ensuremath{\self#fun2#name}] (br) at (spath cs:south 0.66)
+        coordinate[label=above:\ensuremath{\self#fun2#name}] (tr) at (spath cs:north 0.66);
       \draw (bl) -- (tl)
             (br) -- (tr);
-      \node[between = nw and bl, opacity=0.6] {$\self#fun1#dom#name$};
-      \node[between = tl and br, opacity=0.6] {$\self#fun1#cod#name$};
-      \node[between = tr and se, opacity=0.6] {$\self#fun2#cod#name$};
+      \node[between = nw and bl, opacity=0.6] {\ensuremath{\self#fun1#dom#name}};
+      \node[between = tl and br, opacity=0.6] {\ensuremath{\self#fun1#cod#name}};
+      \node[between = tr and se, opacity=0.6] {\ensuremath{\self#fun2#cod#name}};
       \begin{pgfonlayer}{background}
       \fill[\self#fun1#dom#fill] (nw) rectangle (bl);
       \fill[\self#fun1#cod#fill] (tl) rectangle (br);
@@ -205,13 +206,13 @@
       \begin{tikzpicture}[scale=0.5,baseline=($(nw)!0.5!(se)$)]
         \CreateRect{\self#width}{\self#height}
         \path
-          coordinate[label=above:$\strut\self#dom#name$] (n) at (spath cs:north 0.5)
-          coordinate[label=below:$\strut\self#cod#name$] (s) at (spath cs:south 0.5)
+          coordinate[label=above:\ensuremath{\strut\self#dom#name}] (n) at (spath cs:north 0.5)
+          coordinate[label=below:\ensuremath{\strut\self#cod#name}] (s) at (spath cs:south 0.5)
         ;
         \draw[spath/save=vert] (n) to (s);
-        \path coordinate[label=left:$\self#mid#name$] (cell) at (spath cs:vert 0.5);
-        \path coordinate[dot,label=right:$\self#name1$] (cell) at (spath cs:vert 0.33);
-        \path coordinate[dot,label=right:$\self#name2$] (cell) at (spath cs:vert 0.66);
+        \path coordinate[label=left:\ensuremath{\self#mid#name}] (cell) at (spath cs:vert 0.5);
+        \path coordinate[dot,label=right:\ensuremath{\self#name1}] (cell) at (spath cs:vert 0.33);
+        \path coordinate[dot,label=right:\ensuremath{\self#name2}] (cell) at (spath cs:vert 0.66);
         \begin{scope}[on background layer]
           \fill[\self#dom#dom#fill] (nw) rectangle (s);
           \fill[\self#dom#cod#fill] (n) rectangle (se);
@@ -231,14 +232,14 @@
       \begin{tikzpicture}[scale=0.5,baseline=($(nw)!0.5!(se)$)]
       \CreateRect{\self#width}{\self#height}
       \path
-        coordinate[label=below:\self#fun1nat#cod#name] (bl) at (spath cs:south 0.33)
-        coordinate[label=above:\self#fun1nat#dom#name] (tl) at (spath cs:north 0.33)
-        coordinate[label=below:\self#fun2nat#cod#name] (br) at (spath cs:south 0.66)
-        coordinate[label=above:\self#fun2nat#dom#name] (tr) at (spath cs:north 0.66);
+        coordinate[label=below:\ensuremath{\self#fun1nat#cod#name}] (bl) at (spath cs:south 0.33)
+        coordinate[label=above:\ensuremath{\self#fun1nat#dom#name}] (tl) at (spath cs:north 0.33)
+        coordinate[label=below:\ensuremath{\self#fun2nat#cod#name}] (br) at (spath cs:south 0.66)
+        coordinate[label=above:\ensuremath{\self#fun2nat#dom#name}] (tr) at (spath cs:north 0.66);
       \draw[spath/save=left] (bl) -- (tl);
       \draw[spath/save=right] (br) -- (tr);
-      \path coordinate[dot,label=right:$\self#fun1nat#name$] (fun1nat) at (spath cs:left 0.5);
-      \path coordinate[dot,label=right:$\self#fun2nat#name$] (fun2nat) at (spath cs:right 0.5);
+      \path coordinate[dot,label=right:\ensuremath{\self#fun1nat#name}] (fun1nat) at (spath cs:left 0.5);
+      \path coordinate[dot,label=right:\ensuremath{\self#fun2nat#name}] (fun2nat) at (spath cs:right 0.5);
       % \node[between = nw and bl, opacity=0.1] {$\self#fun1nat#dom#dom#name$};
       % \node[between = tl and br, opacity=0.1] {$\self#fun1nat#dom#cod#name$};
       % \node[between = tr and se, opacity=0.1] {$\self#fun2nat#dom#cod#name$};
@@ -269,19 +270,19 @@
       \begin{tikzpicture}[scale=0.5,baseline=($(nw)!0.5!(se)$)]
       \CreateRect{\self#width}{\self#height}
       \path
-        coordinate[label=below:\self#fun1nat2#cod#name] (bl) at (spath cs:south 0.33)
-        coordinate[label=above:\self#fun1nat#dom#name] (tl) at (spath cs:north 0.33)
-        coordinate[label=below:\self#fun2nat2#cod#name] (br) at (spath cs:south 0.66)
-        coordinate[label=above:\self#fun2nat#dom#name] (tr) at (spath cs:north 0.66);
+        coordinate[label=below:\ensuremath{\self#fun1nat2#cod#name}] (bl) at (spath cs:south 0.33)
+        coordinate[label=above:\ensuremath{\self#fun1nat#dom#name}] (tl) at (spath cs:north 0.33)
+        coordinate[label=below:\ensuremath{\self#fun2nat2#cod#name}] (br) at (spath cs:south 0.66)
+        coordinate[label=above:\ensuremath{\self#fun2nat#dom#name}] (tr) at (spath cs:north 0.66);
       \draw[spath/save=left] (tl) -- (bl);
       \draw[spath/save=right] (tr) -- (br);
 
-      \path coordinate[label=left:$\self#fun1nat#cod#name$] (fun1mid) at (spath cs:left 0.5);
-      \path coordinate[dot,label=right:$\self#fun1nat#name$] (fun1nat) at (spath cs:left 0.33);
-      \path coordinate[dot,label=right:$\self#fun1nat2#name$] (fun1nat2) at (spath cs:left 0.66);
-      \path coordinate[label=left:$\self#fun2nat#cod#name$] (fun2mid) at (spath cs:right 0.5);
-      \path coordinate[dot,label=right:$\self#fun2nat#name$] (fun2nat) at (spath cs:right 0.33);
-      \path coordinate[dot,label=right:$\self#fun2nat2#name$] (fun2nat2) at (spath cs:right 0.66);
+      \path coordinate[label=left:\ensuremath{\self#fun1nat#cod#name}] (fun1mid) at (spath cs:left 0.5);
+      \path coordinate[dot,label=right:\ensuremath{\self#fun1nat#name}] (fun1nat) at (spath cs:left 0.33);
+      \path coordinate[dot,label=right:\ensuremath{\self#fun1nat2#name}] (fun1nat2) at (spath cs:left 0.66);
+      \path coordinate[label=left:\ensuremath{\self#fun2nat#cod#name}] (fun2mid) at (spath cs:right 0.5);
+      \path coordinate[dot,label=right:\ensuremath{\self#fun2nat#name}] (fun2nat) at (spath cs:right 0.33);
+      \path coordinate[dot,label=right:\ensuremath{\self#fun2nat2#name}] (fun2nat2) at (spath cs:right 0.66);
 
       \node[between = nw and bl, opacity=\self#catopacity] {$\self#fun1nat#dom#dom#name$};
       \node[between = tl and br, opacity=\self#catopacity] {$\self#fun1nat#dom#cod#name$};
@@ -308,13 +309,13 @@
       \begin{tikzpicture}[scale=0.5,baseline=($(nw)!0.5!(se)$)]
       \CreateRect{\self#width}{\self#height}
       \path
-        coordinate[label=below:\self#fun1nat2#cod#name] (bl) at (spath cs:south 0.33)
-        coordinate[label=above:\self#fun1nat#dom#name] (tl) at (spath cs:north 0.33)
-        coordinate[label=below:\self#fun2nat#cod#name] (br) at (spath cs:south 0.66)
-        coordinate[label=above:\self#fun2nat#dom#name] (tr) at (spath cs:north 0.66);
+        coordinate[label=below:\ensuremath{\self#fun1nat2#cod#name}] (bl) at (spath cs:south 0.33)
+        coordinate[label=above:\ensuremath{\self#fun1nat#dom#name}] (tl) at (spath cs:north 0.33)
+        coordinate[label=below:\ensuremath{\self#fun2nat#cod#name}] (br) at (spath cs:south 0.66)
+        coordinate[label=above:\ensuremath{\self#fun2nat#dom#name}] (tr) at (spath cs:north 0.66);
       \draw[spath/save=left] (tl) -- (bl);
-      \path coordinate[dot,label=left:$\self#fun1nat#name$] (fun1nat) at (spath cs:left 0.33);
-      \path coordinate[dot,label=left:$\self#fun1nat2#name$] (fun1nat2) at (spath cs:left 0.66);
+      \path coordinate[dot,label=left:\ensuremath{\self#fun1nat#name}] (fun1nat) at (spath cs:left 0.33);
+      \path coordinate[dot,label=left:\ensuremath{\self#fun1nat2#name}] (fun1nat2) at (spath cs:left 0.66);
 
       \draw[spath/save=right] (tr) to[out=-90, in=0] (\self#fun2through) to[out=0, in=90] (br);
       
@@ -481,14 +482,14 @@
           \begin{tikzpicture}[scale=0.5,baseline=($(nw)!0.5!(se)$)]
             \CreateRect{\self#width}{\self#height}
             \path
-              coordinate[label=above:$\strut{\adj#left#name}$] (L) at (spath cs:north 0.75)
-              coordinate[label=above:$\strut{\adj#right#name}$] (R) at (spath cs:north 0.25)
-              coordinate[between = \fLand R] (LR)
+              coordinate[label=above:\ensuremath{\strut{\adj#left#name}}] (L) at (spath cs:north 0.75)
+              coordinate[label=above:\ensuremath{\strut{\adj#right#name}}] (R) at (spath cs:north 0.25)
+              coordinate[between = L and R] (LR)
             ;
             \path[spath/save=guide] (LR) to (sw -| LR);
             \draw[spath/save=cup] (R) to[out=-90,in=-90,looseness=2.5] (L);
             \path[name intersections={of=guide and cup}]
-              coordinate[dot,label=above:$\self#name$] (counit) at (intersection-1)
+              coordinate[dot,label=above:\ensuremath{\self#name}] (counit) at (intersection-1)
             ;
             \begin{scope}[on background layer]
               \fill[\adj#left#cod#fill] (nw) to (R) to[spath/use={cup,weld}] (L) to (ne) to (se) to (sw) to cycle;
@@ -508,14 +509,14 @@
           \begin{tikzpicture}[scale=0.5,baseline=($(nw)!0.5!(se)$:)]
             \CreateRect{\self#width}{\self#height}
             \path
-              coordinate[label=below:$\strut\adj#left#name$] (L) at (spath cs:south 0.25)
-              coordinate[label=below:$\strut\adj#right#name$] (R) at (spath cs:south 0.75)
-              coordinate[between = \fLand R] (LR)
+              coordinate[label=below:\ensuremath{\strut\adj#left#name}] (L) at (spath cs:south 0.25)
+              coordinate[label=below:\ensuremath{\strut\adj#right#name}] (R) at (spath cs:south 0.75)
+              coordinate[between = L and R] (LR)
             ;
             \path[spath/save=guide] (LR) to (nw -| LR);
             \draw[spath/save=cap] (L) to[out=90,in=90,looseness=2.5] (R);
             \path[name intersections={of=guide and cap}]
-              coordinate[dot,label=below:$\self#name$] (unit) at (intersection-1)
+              coordinate[dot,label=below:\ensuremath{\self#name}] (unit) at (intersection-1)
             ;
             \begin{scope}[on background layer]
               \fill[\adj#left#dom#fill] (sw) to (L) to[spath/use={cap,weld}] (R) to (se) to (ne) to (nw) to cycle;
@@ -538,14 +539,14 @@
           \begin{tikzpicture}[scale=0.5,baseline=($(nw)!0.5!(se)$)]
               \CreateRect{\self#width}{\self#height}
               \path
-                coordinate[label=above:$\strut\adj#left#name$] (n/L) at (spath cs:north 0.8)
-                coordinate[label=below:$\strut\adj#left#name$] (s/L) at (spath cs:south 0.2)
+                coordinate[label=above:\ensuremath{\strut\adj#left#name}] (n/L) at (spath cs:north 0.8)
+                coordinate[label=below:\ensuremath{\strut\adj#left#name}] (s/L) at (spath cs:south 0.2)
               ;
               \path[spath/save=guide1] (n/L) to[out=180,in=90] (s/L);
               \path[spath/save=guide2] (s/L) to[out=0,in=-90] (n/L);
               \path
-                coordinate[dot,label=below:$\strut\adj#unit#name$] (unit) at (spath cs:guide1 0.5)
-                coordinate[dot,label=above:$\strut\adj#counit#name$] (counit) at (spath cs:guide2 0.5)
+                coordinate[dot,label=below:\ensuremath{\strut\adj#unit#name}] (unit) at (spath cs:guide1 0.5)
+                coordinate[dot,label=above:\ensuremath{\strut\adj#counit#name}] (counit) at (spath cs:guide2 0.5)
               ;
               \draw[spath/save=wire] (n/L) to[out=-90,in=0] (counit.center) to[out=180,in=0] (unit.center) to[out=180,in=90] (s/L);
               
@@ -569,14 +570,14 @@
           \begin{tikzpicture}[scale=0.5,baseline=($(nw)!0.5!(se)$)]
             \CreateRect{\self#width}{\self#height}
             \path
-              coordinate[label=above:$\strut\adj#right#name$] (n/q) at (spath cs:north 0.2)
-              coordinate[label=below:$\strut\adj#right#name$] (s/q) at (spath cs:south 0.8)
+              coordinate[label=above:\ensuremath{\strut\adj#right#name}] (n/q) at (spath cs:north 0.2)
+              coordinate[label=below:\ensuremath{\strut\adj#right#name}] (s/q) at (spath cs:south 0.8)
             ;
             \path[spath/save=guide1] (n/q) to[out=-90,in=180] (s/q);
             \path[spath/save=guide2] (s/q) to[out=90,in=0] (n/q);
             \path
-              coordinate[dot,label=above:$\strut\adj#counit#name$] (counit) at (spath cs:guide1 0.5)
-              coordinate[dot,label=below:$\strut\adj#unit#name$] (unit) at (spath cs:guide2 0.5)
+              coordinate[dot,label=above:\ensuremath{\strut\adj#counit#name}] (counit) at (spath cs:guide1 0.5)
+              coordinate[dot,label=below:\ensuremath{\strut\adj#unit#name}] (unit) at (spath cs:guide2 0.5)
             ;
             \draw[spath/save=wire] (n/q) to[out=-90,in=180] (counit.center) to[out=0,in=180] (unit.center) to[out=0,in=90] (s/q);
 

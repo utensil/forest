@@ -14,22 +14,22 @@ Given functors
 \tikz{
 \begin{tikzcd}
 	\C && \D
-	\arrow["L", shift left, from=1-1, to=1-3]
-	\arrow["R", shift left, from=1-3, to=1-1]
+	\arrow["\fL", shift left, from=1-1, to=1-3]
+	\arrow["\fR", shift left, from=1-3, to=1-1]
 \end{tikzcd}
 }
 
-we say #{L} and #{R} are a pair of \newvocab{adjoint functor}s, or together called an \newvocab{adjunction} between them, #{L} is called \newvocab{left adjoint} to #{R}, and #{R} is called \newvocab{right adjoint} to #{L}, denoted
+we say #{\fL} and #{\fR} are a pair of \newvocab{adjoint functor}s, or together called an \newvocab{adjunction} between them, #{\fL} is called \newvocab{left adjoint} to #{\fR}, and #{\fR} is called \newvocab{right adjoint} to #{\fL}, denoted
 
-##{L \dashv R : \C \rightleftarrows \D}
+##{\fL \dashv \fR : \C \rightleftarrows \D}
 
 or
 
 \tikz{
 \begin{tikzcd}
 	\C && \D
-	\arrow[""{name=0, anchor=center, inner sep=0}, "L", curve={height=-6pt}, from=1-1, to=1-3]
-	\arrow[""{name=1, anchor=center, inner sep=0}, "R", curve={height=-6pt}, from=1-3, to=1-1]
+	\arrow[""{name=0, anchor=center, inner sep=0}, "\fL", curve={height=-6pt}, from=1-1, to=1-3]
+	\arrow[""{name=1, anchor=center, inner sep=0}, "\fR", curve={height=-6pt}, from=1-3, to=1-1]
 	\arrow["\dashv"{anchor=center, rotate=-90}, draw=none, from=0, to=1]
 \end{tikzcd}
 }
@@ -37,7 +37,7 @@ or
 iff there exists a \vocabk{natural isomorphism}{tt-001H} #{\sigma} between the following two \vocabk{hom-bifunctor}{tt-001S}s:
 
 ##{
-  \D(L(-), =) \iso \C(-, R(=))
+  \D(\fL(-), =) \iso \C(-, \fR(=))
 }
 
 diagramatically,
@@ -45,8 +45,8 @@ diagramatically,
 \tikz{
 \begin{tikzcd}
 	{\C^{op} \times \D} && \Set
-	\arrow[""{name=0, anchor=center, inner sep=0}, "{{{\D(L(-),=)}}}", curve={height=-18pt}, from=1-1, to=1-3]
-	\arrow[""{name=1, anchor=center, inner sep=0}, "{{{\C(-,R(=))}}}"', curve={height=18pt}, from=1-1, to=1-3]
+	\arrow[""{name=0, anchor=center, inner sep=0}, "{{{\D(\fL(-),=)}}}", curve={height=-18pt}, from=1-1, to=1-3]
+	\arrow[""{name=1, anchor=center, inner sep=0}, "{{{\C(-,\fR(=))}}}"', curve={height=18pt}, from=1-1, to=1-3]
 	\arrow["\sigma", shorten <=5pt, shorten >=5pt, Rightarrow, 2tail reversed, from=0, to=1]
 \end{tikzcd}
 }
@@ -54,7 +54,7 @@ diagramatically,
 
 \p{The components of the natural isomorphism #{\sigma} are isomorphisms
 
-##{ \sigma_{XY} : \D(L(X), Y) \iso \C(X, R(Y)) }
+##{ \sigma_{XY} : \D(\fL(X), Y) \iso \C(X, \fR(Y)) }
 
 }
 }

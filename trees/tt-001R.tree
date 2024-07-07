@@ -6,7 +6,7 @@
 % convention corollary axiom example exercise proof
 % discussion remark notation
 \taxon{remark}\refnotet{adjoint functor}{5.1}{kostecki2011introduction}{
-\p{An [adjunction](tt-001Q) #{L \dashv R} means arrows #{L(X) \to Y} are essentially the same thing as arrows #{X \to R(Y)} for any #{X \in \C} and #{Y \in \D}.
+\p{An [adjunction](tt-001Q) #{\fL \dashv \fR} means arrows #{\fL(X) \to Y} are essentially the same thing as arrows #{X \to \fR(Y)} for any #{X \in \C} and #{Y \in \D}.
 }
 
 \p{This means the diagram
@@ -16,14 +16,14 @@
 	f && \bullet \\
 	\\
 	\bullet && \bullet
-	\arrow["{{{L(x);-;y}}}", maps to, from=1-1, to=1-3]
+	\arrow["{{{\fL(x);-;y}}}", maps to, from=1-1, to=1-3]
 	\arrow["{{{\sigma_{XY}}}}"', maps to, from=1-1, to=3-1]
 	\arrow["{\sigma_{X'Y'}}", maps to, from=1-3, to=3-3]
-	\arrow["{{{x;-;R(y)}}}"', maps to, from=3-1, to=3-3]
+	\arrow["{{{x;-;\fR(y)}}}"', maps to, from=3-1, to=3-3]
 \end{tikzcd}
 }
 
-commutes for any arrows #{f: L(X) \to Y} in #{\D}.
+commutes for any arrows #{f: \fL(X) \to Y} in #{\D}.
 
 }
 
@@ -31,15 +31,15 @@ commutes for any arrows #{f: L(X) \to Y} in #{\D}.
 
 ##{
 \begin{array}{ccccccc}
-X' & \xrightarrow{x} & X & \xrightarrow{\sigma_{X Y}(f)} & R(Y) & \xrightarrow{R(y)} & R\left(Y'\right) \\
-\hline L\left(X'\right) & \xrightarrow{L(x)} & L(X) & \xrightarrow{f} & Y & \xrightarrow{y} & Y'
+X' & \xrightarrow{x} & X & \xrightarrow{\sigma_{X Y}(f)} & \fR(Y) & \xrightarrow{\fR(y)} & \fR\left(Y'\right) \\
+\hline \fL\left(X'\right) & \xrightarrow{\fL(x)} & \fL(X) & \xrightarrow{f} & Y & \xrightarrow{y} & Y'
 \end{array}
 }
 
 or simply,
 
 ##{
-\frac{X \to R(Y) \quad (\C)}{L(X) \to Y \quad (\D)}
+\frac{X \to \fR(Y) \quad (\C)}{\fL(X) \to Y \quad (\D)}
 }
 
 }
