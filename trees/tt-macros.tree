@@ -387,8 +387,15 @@
     [topname]{L}
     [symbol]{dot}
     [catopacity]{0.5}
+    [near]{0.25}
     [draw]{
       \begin{tikzpicture}[scale=0.5,baseline=($(nw)!0.5!(se)$)]
+      \ifthenelse{\equal{\self#fun#name}{\self#topname}}{
+      \tikzmath{\near = \self#near; \far = 1 - \near;}
+      }{
+      \tikzmath{\far = \self#near; \near = 1 - \far;}
+      }
+      \tikzmath{\u = 90; \d = -\u; \l = 180; \r = 0;}
       \CreateRect{\self#width}{\self#height}
       \path
         coordinate[label=above:\ensuremath{\self#nat#dom#name}] (tl) at (spath cs:north 0.25)
@@ -402,19 +409,17 @@
       \path[spath/save=guide] (midlr) to (sw -| midlr); %path
       \path
         coordinate (ml) at (spath cs:left 0.5)
-        coordinate (mr) at (spath cs:right 0.5);
+        coordinate (mr) at (spath cs:right 0.5)
+        coordinate (nl) at (spath cs:left \near)
+        coordinate (fg) at (spath cs:guide \far);
 
       \ifthenelse{\equal{\self#fun#name}{\self#topname}}{
-        \path coordinate (nl) at (spath cs:left 0.25);
-        \path coordinate (fg) at (spath cs:guide 0.75);
         \path coordinate[label=above:\ensuremath{\self#fun#name}] (L) at (tr); %path
-        \draw[spath/save=L] (tr) to[out=-90, in=0] (fg) to[out=180, in=-90] (nl);
+        \draw[spath/save=L] (tr) to[out=\d, in=\r] (fg) to[out=\l, in=\d] (nl);
         \path coordinate[\self#symbol,label=above:\ensuremath{\self#unit#name}] (unit) at (fg);
       }{
-        \path coordinate (nl) at (spath cs:left 0.75);
-        \path coordinate (fg) at (spath cs:guide 0.25);
         \path coordinate[label=below:\ensuremath{\self#fun#name}] (R) at (br); %path
-        \draw[spath/save=R] (br) to[out=90, in=0] (fg) to[out=180, in=90] (nl);
+        \draw[spath/save=R] (br) to[out=\u, in=\r] (fg) to[out=\l, in=\u] (nl);
         \path coordinate[\self#symbol,label=below:\ensuremath{\self#unit#name}] (unit) at (fg);
       }
 
