@@ -43,10 +43,16 @@ function toggleTheme() {
     setAppliedMode(getAppliedMode(newUserPref));
 }
 
+function search() {
+    const ninja = document.querySelector('ninja-keys');
+    ninja.open();
+}
+
 // on document ready
 document.addEventListener("DOMContentLoaded", function () {
     // on clicking the button with id theme-toggle, the function toggleTheme is called
     document.getElementById("theme-toggle").onclick = toggleTheme;
+    document.getElementById("search").onclick = search;
 });
 
 // Important to be 1st in the DOM
