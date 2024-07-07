@@ -292,11 +292,22 @@ span.vocab .link.local a {
     font-weight: bold;
 } */
 
-/* https://css-tricks.com/a-dynamically-sized-sticky-sidebar-with-html-and-css/ */
+/* https://blog.logrocket.com/implementing-scroll-aware-ui-state-css/ */
 
-/* :root {
-    --space: 2rem;
-}
+/* article {
+    scroll-timeline: --article-scroll inline;
+} */
+
+/* @keyframes toc_animation {
+    from {
+        top: var(--offset);
+    }
+    to {
+        top: calc( var(--offset) - 0.5 * var(--eh));
+    }
+} */
+
+/* https://css-tricks.com/a-dynamically-sized-sticky-sidebar-with-html-and-css/ */
 
 nav#toc {
     display: flex;
@@ -304,12 +315,22 @@ nav#toc {
 }
 
 nav#toc > .block {
-    --offset: var(--space);
+    --offset: 5em;
+    --eh: 100%;
+    --vh: 100vh;
     flex-grow: 1;
     flex-basis: 300px;
     align-self: start;
     position: sticky;
     top: var(--offset);
-    max-height: calc(100vh - var(--offset) * 2);
+    /* animation: auto toc_animation linear forwards;
+    animation-timeline: scroll(); */
+}
+
+nav#toc > .block > ul.block {
+    max-height: calc(70vh - var(--offset) * 2);
     overflow-y: auto;
-} */
+}
+
+
+
