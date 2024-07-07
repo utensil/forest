@@ -18,6 +18,15 @@
 \def\J{{\cal J}}
 \def\S{{\cal S}}
 
+% functors
+\def\fF{F}
+\def\fG{G}
+\def\fH{H}
+\def\fK{K}
+\def\fL{L}
+\def\fR{R}
+\def\fD{D}
+
 \def\emptycat{\mathrm{0}}
 \def\termobj{\mathrm{1}}
 \def\initobj{\mathrm{0}}
@@ -474,7 +483,7 @@
             \path
               coordinate[label=above:$\strut{\adj#left#name}$] (L) at (spath cs:north 0.75)
               coordinate[label=above:$\strut{\adj#right#name}$] (R) at (spath cs:north 0.25)
-              coordinate[between = L and R] (LR)
+              coordinate[between = \fLand R] (LR)
             ;
             \path[spath/save=guide] (LR) to (sw -| LR);
             \draw[spath/save=cup] (R) to[out=-90,in=-90,looseness=2.5] (L);
@@ -501,7 +510,7 @@
             \path
               coordinate[label=below:$\strut\adj#left#name$] (L) at (spath cs:south 0.25)
               coordinate[label=below:$\strut\adj#right#name$] (R) at (spath cs:south 0.75)
-              coordinate[between = L and R] (LR)
+              coordinate[between = \fLand R] (LR)
             ;
             \path[spath/save=guide] (LR) to (nw -| LR);
             \draw[spath/save=cap] (L) to[out=90,in=90,looseness=2.5] (R);
