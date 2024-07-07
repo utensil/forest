@@ -282,15 +282,20 @@ span.vocab .link.local a {
     /* filter: brightness(800%) !important; */
 }
 
+#toc a.bullet {
+    display: none;
+}
+
 /* #toc > .block > ul > li > a.bullet {
     color: transparent !important;
     border-left: 5px solid color-mix(in srgb, rgb(0, 106, 255) 40%, var(--uts-text) 60%);
     border-radius: 5px 0px 0px 5px;
-}
+} */
 
 #toc > .block > ul > li > span.link.local {
     font-weight: bold;
-} */
+    border-bottom: 1px solid var(--uts-text-gentle-grey);
+}
 
 /* https://blog.logrocket.com/implementing-scroll-aware-ui-state-css/ */
 
@@ -318,6 +323,7 @@ nav#toc > .block {
     --offset: 5em;
     --eh: 100%;
     --vh: 100vh;
+    --ratio: calc(var(--vh) / var(--eh));
     flex-grow: 1;
     flex-basis: 300px;
     align-self: start;
