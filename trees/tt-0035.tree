@@ -1,0 +1,38 @@
+\import{tt-macros}
+% clifford hopf spin tt math draft
+\tag{tt}
+
+% definition theorem lemma construction observation
+% convention corollary axiom example exercise proof
+% discussion remark notation
+% \taxon{}
+% \taxon{lemma}\refnotet{}{}{}{
+
+% kostecki2011introduction leinster2016basic
+
+\taxon{corollary}\refnotet{a representation is a universal element}{4.3.2}{leinster2016basic}{
+\p{Let #{\C} be a locally small category and #{\fF : \C^{op} \to \Set}. Then a \vocabk{representation}{tt-001O} of #{\fF} consists of an object #{X \in \C} together with an element #{u \in \fF(X)} such that:
+}
+
+\p{for each #{Y \in \C} and #{y \in \fF(Y)}, there is a unique map #{\bar{y}: Y \to X} such that #{(\fF \bar{y})(u)=y}.
+\tikz{
+\begin{tikzcd}
+	&&&& X \\
+	X &&&& O \\
+	\\
+	\\
+	Y &&&& Y \\
+	&&&& O \\
+	\C &&&& \Set
+	\arrow[""{name=0, anchor=center, inner sep=0}, "u"', from=1-5, to=2-5]
+	\arrow[""{name=1, anchor=center, inner sep=0}, "{{\bar{y}}}", dashed, from=5-1, to=2-1]
+	\arrow[""{name=2, anchor=center, inner sep=0}, "y"', from=5-5, to=6-5]
+	\arrow["{{\fF : \C^{op} \to \Set, - \mapsto \C(-, O)}}"', Rightarrow, from=7-1, to=7-5]
+	\arrow[""{name=3, anchor=center, inner sep=0}, "{{\bar{y} \cp -}}"', curve={height=-30pt}, shorten <=10pt, shorten >=10pt, maps to, from=0, to=2]
+	\arrow[shorten <=24pt, shorten >=24pt, Rightarrow, maps to, from=2-1, to=0]
+	\arrow[shorten <=24pt, shorten >=24pt, Rightarrow, maps to, from=5-1, to=2]
+	\arrow[shorten <=32pt, shorten >=32pt, Rightarrow, maps to, from=1, to=3]
+\end{tikzcd}
+}
+}
+}
