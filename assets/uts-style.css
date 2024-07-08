@@ -58,8 +58,8 @@ nav#toc a.slug {
 :root[data-applied-mode="light"] {
     color-scheme: light;
     --uts-text: black;
-    --uts-text-gentle-grey: rgb(132, 132, 132);
-    --uts-text-gentle: #10731d;
+    --uts-text-gentle: rgb(132, 132, 132);
+    --uts-text-cite: #10731d;
     --uts-background: white;
     --uts-vocab: #75140c;
     /* #f4ecd9; */
@@ -68,8 +68,8 @@ nav#toc a.slug {
 :root[data-applied-mode="dark"] {
     color-scheme: dark;
     --uts-text: #d5d4d0;
-    --uts-text-gentle-grey: rgb(174, 174, 174);
-    --uts-text-gentle: #8cd295;
+    --uts-text-gentle: rgb(174, 174, 174);
+    --uts-text-cite: #8cd295;
     --uts-background: #262626;
     --uts-vocab: #db8c84;
 }
@@ -92,7 +92,8 @@ nav#toc a {
 nav#toc a.link.local,
 nav#toc .link.local a,
 nav#toc a.slug {
-    color: var(--uts-text-gentle-grey) !important;
+    color: var(--uts-text-gentle) !important;
+    font-weight: normal;
     /* text-decoration-line: unset !important;
     text-decoration-style: unset !important; */
 }
@@ -100,14 +101,14 @@ nav#toc a.slug {
 a.slug-source {
     text-decoration-line: underline;
     text-decoration-style: dotted;
-    color: var(--uts-text-gentle-grey) !important;
+    color: var(--uts-text-gentle) !important;
     font-weight: normal;
 }
 
 /* This applies to references, including in title, main text, backmatter, but not in toc */
 .link-reference a
 {
-    color: var(--uts-text-gentle) !important;
+    color: var(--uts-text-cite) !important;
     box-shadow: none !important;
     text-decoration-line: unset !important;
     text-decoration-style: unset !important;
@@ -123,7 +124,7 @@ a.slug-source {
 
 a.slug[href*="-"], a.slug[href*="index"], a.slug[href*="macro"],
 a.slug[href*="utensil"], a.slug[href*="jonmsterling"] {
-    color: var(--uts-text-gentle-grey) !important;
+    color: var(--uts-text-gentle) !important;
     text-decoration-line: underline !important;
     text-decoration-style: dotted !important;
 } */
@@ -208,53 +209,59 @@ svg.embedded-tex-svg {
     stroke: white;
 } */
 
-section[data-taxon="Remark"] {
-    border-left: 5px solid #458933;
+[data-taxon="Remark"] {
+    --taxon-color: #97da9b;  /* #239f5c; */
+}
+
+[data-taxon="Example"] {
+    --taxon-color: #e28563; /* #d7511f #cd7e62 #9e3c17 #8C2700 */
+}
+
+[data-taxon="Theorem"], [data-taxon="Lemma"], [data-taxon="Corollary"] {
+    --taxon-color: #95dbfc; /* #006994; */
+}
+
+[data-taxon="Notation"] {
+    --taxon-color: #ffd27f;
+}
+
+[data-taxon="Convention"] {
+    --taxon-color: #d369cb;
+}
+
+[data-taxon="Proof"] {
+    --taxon-color: transparent;
+}
+
+section[data-taxon] {
+    border-left: 5px solid var(--taxon-color);
     margin: 1em 0 1em 0;
     padding: 1em 1em 1em 1em;
-    background-color: #f5f9f4;
+    background-color: color-mix(in srgb, var(--taxon-color) 5%, var(--uts-background) 95%);
 }
 
-section[data-taxon="Remark"]:hover {
-    background-color: #eef4ed;
+section[data-taxon]:hover {
+    background-color: color-mix(in srgb, var(--taxon-color) 8%, var(--uts-background) 92%);
 }
 
-section[data-taxon="Remark"] h1 span.taxon {
-    color: #2f6023;
-    /* #399D3C; */
+section[data-taxon] h1 span.taxon, #toc span.taxon[data-taxon] {
+    color: color-mix(in srgb, var(--taxon-color) 60%, var(--uts-text) 40%) !important;
 }
 
-:root[data-applied-mode="dark"] section[data-taxon="Remark"] {
-    background-color: #383c38;
+section[data-taxon="Proof"] {
+    background-color: unset;
 }
 
-:root[data-applied-mode="dark"] section[data-taxon="Remark"]:hover {
-    background-color: #424742;
+section[data-taxon="Proof"]:hover {
+    background-color: rgba(0, 100, 255, 0.04);
 }
 
-section[data-taxon="Example"] {
-    border: 1px solid #8C2700;
-    margin: 1em 0 1em 0;
-    padding: 1em 1em 1em 1em;
-    background-color: #fef9f8;
-}
-
-section[data-taxon="Example"]:hover {
-    background-color: #faf3f2;
-}
-
-section[data-taxon="Example"] h1 span.taxon {
-    color: #8C2700;
-}
-
-:root[data-applied-mode="dark"] section[data-taxon="Example"] {
-    border: 1px solid #afdff6;
-    background-color: #424647;
-}
-
-:root[data-applied-mode="dark"] section[data-taxon="Example"]:hover {
-    border: 1px solid #aff0f6;
-    background-color: #4f5e5b;
+section[data-taxon="Definition"] {
+    margin: unset;
+    padding-left: 5px;
+    padding-right: 10px;
+    padding-bottom: 2px;
+    border-radius: 5px;
 }
 
 /*
@@ -304,7 +311,11 @@ span.vocab .link.local a {
 
 #toc > .block > ul > li > span.link.local {
     font-weight: bold;
-    border-bottom: 1px solid var(--uts-text-gentle-grey);
+    /* border-bottom: 1px solid var(--uts-text-gentle); */
+}
+
+#toc > .block > ul > li > ul.block {
+    margin-top: 0.5em;
 }
 
 /* https://blog.logrocket.com/implementing-scroll-aware-ui-state-css/ */

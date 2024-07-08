@@ -71,4 +71,48 @@
     </xsl:template>
     <!-- uts-end -->
 
+    <!-- uts-begin: Override the toc template to add data-taxon -->
+    <xsl:template match="f:tree" mode="toc">
+    <li>
+        <xsl:for-each select="f:frontmatter">
+        <a class="bullet">
+            <xsl:choose>
+            <xsl:when test="f:addr and f:route">
+                <xsl:attribute name="href">
+                <xsl:value-of select="f:route" />
+                </xsl:attribute>
+                <xsl:attribute name="title">
+                <xsl:value-of select="f:title" />
+                <xsl:text>[</xsl:text>
+                <xsl:value-of select="f:addr" />
+                <xsl:text>]</xsl:text>
+                </xsl:attribute>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:attribute name="href">
+                <xsl:text>#tree-</xsl:text>
+                <xsl:value-of select="f:anchor"/>
+                </xsl:attribute>
+                <xsl:attribute name="title">
+                <xsl:value-of select="f:title" />
+                </xsl:attribute>
+            </xsl:otherwise>
+            </xsl:choose>
+            <xsl:text>■</xsl:text>
+        </a>
+        <span class="link local" data-target="#tree-{f:anchor}">
+            <span class="taxon" data-taxon="{f:taxon}">
+            <xsl:apply-templates select=".." mode="tree-taxon-with-number">
+                <xsl:with-param name="suffix">.&#160;</xsl:with-param>
+            </xsl:apply-templates>
+            </span>
+
+            <xsl:apply-templates select="f:title" />
+        </span>
+        </xsl:for-each>
+        <xsl:apply-templates select="f:mainmatter" mode="toc" />
+    </li>
+    </xsl:template>
+    <!-- uts-end -->
+
 </xsl:stylesheet>
