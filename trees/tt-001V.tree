@@ -9,7 +9,7 @@
 
 \refdeft{(co)unit}{5.30}{zhang2021type}{
 \p{
-Given an adjunction #{\fL \dashv \fR: \C \rightleftarrows \D}, we may obtain two \vocab{endofunctors} #{ \fL;\fR : \C \to \C} and #{ \fR;\fL : \D \to \D} that commute the diagram
+Given an adjunction #{\fL \dashv \fR: \C \rightleftarrows \D}, we may obtain two \vocab{endofunctors} #{ \fL \cp \fR : \C \to \C} and #{ \fR \cp \fL : \D \to \D} that commute the diagram
 
 \tikz{
 \begin{tikzcd}
@@ -23,28 +23,28 @@ Given an adjunction #{\fL \dashv \fR: \C \rightleftarrows \D}, we may obtain two
 \end{tikzcd}
 }
 
-that means they are both \vocab{idempotent}, i.e. applying #{\fL;\fR} any times yields the same result as applying it once, and similarly for #{\fR;\fL}.
+that means they are both \vocab{idempotent}, i.e. applying #{\fL \cp \fR} any times yields the same result as applying it once, and similarly for #{\fR \cp \fL}.
 
 }
  
 \p{The natural transformation
 
-##{\eta: \id_{\C} \to \fL;\fR }
+##{\eta: \id_{\C} \to \fL \cp \fR }
 
 is called the \newvocab{unit} of the adjunction, and
 
-##{\epsilon: \fR;\fL \to \id_{\D}}
+##{\epsilon: \fR \cp \fL \to \id_{\D}}
 
 is called the \newvocab{counit}.
 }
 
 \p{We call an arrow
 
-##{\eta_X: X \to (\fL;\fR)(X)}
+##{\eta_X: X \to (\fL \cp \fR)(X)}
 
 a \vocab{unit} over #{X}, and
 
-##{\epsilon_Y: (\fR;\fL)(Y) \to Y}
+##{\epsilon_Y: (\fR \cp \fL)(Y) \to Y}
 
 a \vocab{counit} over #{Y}. They are components of the natural transformations #{\eta} and #{\epsilon}, respectively.
 }
