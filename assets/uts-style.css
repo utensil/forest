@@ -240,6 +240,14 @@ section[data-taxon] {
     background-color: color-mix(in srgb, var(--taxon-color) 5%, var(--uts-background) 95%);
 }
 
+/* test with http://127.0.0.1:1314/tt-001Q.xml for References/Context/Backlinks/Related and Remark/Convention/Definition  */
+.link-list section[data-taxon] {
+    margin-top: 2px;
+    margin-bottom: 2px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
 section[data-taxon]:hover {
     background-color: color-mix(in srgb, var(--taxon-color) 8%, var(--uts-background) 92%);
 }
@@ -256,15 +264,7 @@ section[data-taxon="Proof"]:hover {
     background-color: rgba(0, 100, 255, 0.04);
 }
 
-section[data-taxon="Definition"], section[data-taxon="Reference"] {
-    margin: unset;
-    padding-left: 5px;
-    padding-right: 10px;
-    padding-bottom: 2px;
-    border-radius: 5px;
-}
-
-section[data-taxon="Example"] {
+section[data-taxon="Example"], section[data-taxon="Notation"], section[data-taxon="Convention"] {
     border: 1px solid var(--taxon-color);
     border-radius: 5px;
 }
