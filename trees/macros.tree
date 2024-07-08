@@ -43,6 +43,17 @@
  }
 }
 
+\def\collapsed[t][body]{
+ \scope{
+   \put\transclude/toc{false}
+    \put\transclude/expanded{false}
+   \subtree{
+      \title{\t}
+      \body
+   }
+ }
+}
+
 \strong{Useful macros based on [[jonmsterling]]'s [Public bibliographies](https://www.jonmsterling.com/jms-005X.xml)}
 
 \p{\code{make-topic-bibliography[topic]}: A bibliography of papers, presentations, and people related to a topic.}

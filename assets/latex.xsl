@@ -31,9 +31,11 @@
   
   <xsl:template match="f:tree[not(f:frontmatter/f:taxon)]">
     <xsl:apply-templates select="f:frontmatter/f:title" />
-    <xsl:text>\label{</xsl:text>
-    <xsl:value-of select="f:frontmatter/f:addr" />
-    <xsl:text>}</xsl:text>
+    <xsl:if test="f:frontmatter/f:addr[not(contains(text(), '#'))]">
+      <xsl:text>\label{</xsl:text>
+      <xsl:value-of select="f:frontmatter/f:addr" />
+      <xsl:text>}</xsl:text>
+    </xsl:if>
     <xsl:apply-templates select="f:mainmatter" />
   </xsl:template>
   
@@ -100,9 +102,11 @@
       <xsl:apply-templates select="f:frontmatter/f:title" />
       <xsl:text>}]</xsl:text>
     </xsl:if>
-    <xsl:text>\label{</xsl:text>
-    <xsl:value-of select="f:frontmatter/f:addr" />
-    <xsl:text>}</xsl:text>
+    <xsl:if test="f:frontmatter/f:addr[not(contains(text(), '#'))]">
+      <xsl:text>\label{</xsl:text>
+      <xsl:value-of select="f:frontmatter/f:addr" />
+      <xsl:text>}</xsl:text>
+    </xsl:if>
     <xsl:apply-templates select="f:mainmatter" />
     <xsl:text>\end{</xsl:text>
     <xsl:apply-templates select="f:frontmatter/f:taxon" />

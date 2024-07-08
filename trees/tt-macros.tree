@@ -307,6 +307,7 @@
     [fun1nat2]{\nat-transf/new}
     [fun2nat]{\nat-transf/new}
     [fun2through]{fun1nat}
+    [rest]{}
     [draw]{
       \begin{tikzpicture}[scale=0.5,baseline=($(nw)!0.5!(se)$)]
       \CreateRect{\self#width}{\self#height}
@@ -320,6 +321,8 @@
       \path coordinate[dot,label=left:\ensuremath{\self#fun1nat2#name}] (fun1nat2) at (spath cs:left 0.66);
 
       \draw[spath/save=right] (tr) to[out=-90, in=0] (\self#fun2through) to[out=0, in=90] (br);
+
+      \self#rest
       
       \begin{pgfonlayer}{background}
       \fill[\self#fun1nat#dom#dom#fill] (nw) rectangle (bl);

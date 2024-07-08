@@ -154,6 +154,18 @@
     [fun1nat]{\nat/alphaX}
     [fun1nat2]{\nat/f}
     [fun2nat]{\nat/alphaX/FG}
+    [fun2through]{fun1nat}
+  }
+}
+
+\let\naturality/xfg/halo{
+  \patch{\naturality/xfg}{
+    [rest]{
+      \node[white halo, fit=(fun1nat)(fun1nat)]{};
+      \path[spath/save=guide] (fun1nat2) -- (fun1nat2 -| ne);
+          \path[name intersections={of=right and guide, by={rg}}];
+      \node[white halo, fit=(fun1nat2)(rg)]{};
+    }
   }
 }
 
@@ -171,6 +183,17 @@
     [fun1nat2]{\nat/alphaXp}
     [fun2nat]{\nat/alphaX/FG}
     [fun2through]{fun1nat2}
+  }
+}
+
+\let\naturality/xfgp/halo{
+  \patch{\naturality/xfgp}{
+    [rest]{
+      \node[white halo, fit=(fun1nat2)(fun1nat2)]{};
+      \path[spath/save=guide] (fun1nat) -- (fun1nat -| ne);
+          \path[name intersections={of=right and guide, by={rg}}];
+      \node[white halo, fit=(fun1nat)(rg)]{};
+    }
   }
 }
 
@@ -231,15 +254,27 @@
     where #{X} and #{X'} are objects in #{\C}, understood as functors from the terminal category #{\id} to #{\C}.
     }
 
-    \p{We could read each diagram from top to bottem, and wrap each left-to-right composition in parentheses
+    \collapsed{👉}{
+
+    \p{Since a string diagrams is composed from top to bottem, left to right, we can read
+
+    \tikz{
+      \naturality/xfg/halo#draw $=$ \naturality/xfgp/halo#draw
+    }
+
+    as
     
-    ##{(X \cp F) \cp (\alpha_X) \cp (f \cp G)=(X' \cp G) \quad {\large =} \quad (X \cp F) \cp (f \cp F) \cp (\alpha'_X)=(X' \cp G)}
+    ##{(X \cp \fF) \cp (\alpha_X) \cp (f \cp \fG)=(X' \cp \fG) \quad {\large =} \quad (X \cp \fF) \cp (f \cp \fF) \cp (\alpha'_X)=(X' \cp \fG)}
+
+    where each pair of parentheses corresponds to an overlay in the string diagram,
 
     or with the notation in the opposite direction that is more familiar to most:
 
     ##{\fG(f) \circ \alpha_X \circ \fF(X) = \fG(X') \quad {\large =} \quad \alpha'_X \circ \fF(f) \circ \fF(X) = \fG(X')}
     
-    note that we read the wire from #{\fF} to #{\fG} as #{\fF} before the natural transformation, but as #{\fG} after the transformation.
+    Note that we read the wire from #{\fF} to #{\fG} as #{\fF} before the natural transformation, but as #{\fG} after the transformation.
+    }
+
     }
 
     \p{Effectively naturality says that the natural transformation and function #{f} “slide past each other”, and so we can draw them as two parallel wires to illustrate this.
