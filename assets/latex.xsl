@@ -186,11 +186,20 @@
   <xsl:template match="f:link[@type='local']">
     <xsl:choose>
       <xsl:when test="//f:tree/f:frontmatter[f:addr/text()=current()/@addr and not(ancestor::f:backmatter)]">
-        <xsl:text>\hyperref[</xsl:text>
-        <xsl:value-of select="@addr" />
-        <xsl:text>]{</xsl:text>
-        <xsl:apply-templates />
-        <xsl:text>}</xsl:text>
+        <xsl:choose>
+          <xsl:when test="ancestor::html:span[@class='cref']">
+            <xsl:text>\Cref{</xsl:text>
+            <xsl:value-of select="@addr" />
+            <xsl:text>}</xsl:text>
+          </xsl:when>
+          <xsl:otherwise>
+            <xsl:text>\hyperref[</xsl:text>
+            <xsl:value-of select="@addr" />
+            <xsl:text>]{</xsl:text>
+            <xsl:apply-templates />
+            <xsl:text>}</xsl:text>
+          </xsl:otherwise>
+        </xsl:choose>
       </xsl:when>
       <xsl:when test="/f:tree/f:backmatter/f:references/f:tree/f:frontmatter[f:addr/text()=current()/@addr]">
         <xsl:text>~\cite</xsl:text>
