@@ -169,7 +169,7 @@
     </xsl:if>
   </xsl:template>
   
-  <xsl:template match="f:ref[@taxon]">
+  <!-- <xsl:template match="f:ref[@taxon]">
     <xsl:value-of select="@taxon" />
     <xsl:text>\unskip~</xsl:text>
     <xsl:text>\ref{</xsl:text>
@@ -181,25 +181,42 @@
     <xsl:text>\S~\ref{</xsl:text>
     <xsl:value-of select="@addr" />
     <xsl:text>}</xsl:text>
+  </xsl:template> -->
+
+  <xsl:template match="f:ref">
+    <xsl:choose>
+      <xsl:when test="//f:tree/f:frontmatter[f:addr/text()=current()/@addr and not(ancestor::f:backmatter)]">
+        <xsl:text>\Cref{</xsl:text>
+        <xsl:value-of select="@addr" />
+        <xsl:text>}</xsl:text>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:choose>
+          <xsl:when test="@taxon">
+            <xsl:value-of select="@taxon" />
+            <xsl:text>\unskip~</xsl:text>
+          </xsl:when>
+          <xsl:otherwise>
+            <xsl:text>\S~</xsl:text>
+          </xsl:otherwise>
+        </xsl:choose>
+        <xsl:text>\href{https://utensil.github.io/forest/</xsl:text>
+        <xsl:value-of select="@href" />
+        <xsl:text>}{[</xsl:text>
+        <xsl:value-of select="@addr" />
+        <xsl:text>]}</xsl:text>
+      </xsl:otherwise>
+    </xsl:choose>
   </xsl:template>
   
   <xsl:template match="f:link[@type='local']">
     <xsl:choose>
       <xsl:when test="//f:tree/f:frontmatter[f:addr/text()=current()/@addr and not(ancestor::f:backmatter)]">
-        <xsl:choose>
-          <xsl:when test="ancestor::html:span[@class='cref']">
-            <xsl:text>\Cref{</xsl:text>
-            <xsl:value-of select="@addr" />
-            <xsl:text>}</xsl:text>
-          </xsl:when>
-          <xsl:otherwise>
-            <xsl:text>\hyperref[</xsl:text>
-            <xsl:value-of select="@addr" />
-            <xsl:text>]{</xsl:text>
-            <xsl:apply-templates />
-            <xsl:text>}</xsl:text>
-          </xsl:otherwise>
-        </xsl:choose>
+        <xsl:text>\hyperref[</xsl:text>
+        <xsl:value-of select="@addr" />
+        <xsl:text>]{</xsl:text>
+        <xsl:apply-templates />
+        <xsl:text>}</xsl:text>
       </xsl:when>
       <xsl:when test="/f:tree/f:backmatter/f:references/f:tree/f:frontmatter[f:addr/text()=current()/@addr]">
         <xsl:text>~\cite</xsl:text>

@@ -71,7 +71,6 @@
     </xsl:template>
     <!-- uts-end -->
 
-    <!-- uts-begin: Override the toc template to add data-taxon -->
     <xsl:template match="f:tree" mode="toc">
     <li>
         <xsl:for-each select="f:frontmatter">
@@ -101,18 +100,19 @@
             <xsl:text>■</xsl:text>
         </a>
         <span class="link local" data-target="#tree-{f:anchor}">
+            <!-- uts-begin: Override the toc template to add data-taxon -->
             <span class="taxon" data-taxon="{f:taxon}">
             <xsl:apply-templates select=".." mode="tree-taxon-with-number">
                 <xsl:with-param name="suffix">.&#160;</xsl:with-param>
             </xsl:apply-templates>
             </span>
-
+            <!-- uts-end -->
             <xsl:apply-templates select="f:title" />
         </span>
         </xsl:for-each>
         <xsl:apply-templates select="f:mainmatter" mode="toc" />
     </li>
     </xsl:template>
-    <!-- uts-end -->
+    
 
 </xsl:stylesheet>
