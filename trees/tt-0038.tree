@@ -1,0 +1,30 @@
+\import{tt-macros}
+% clifford hopf spin tt math draft
+\tag{tt}
+
+% definition theorem lemma construction observation
+% convention corollary axiom example exercise proof
+% discussion remark notation
+% \taxon{}
+
+\taxon{theorem}\refnotet{adjunction via (co)units}{2.2.5}{leinster2016basic}{
+\p{Given categories and functors
+
+\tikz{
+\begin{tikzcd}
+  \C && \D
+  \arrow["\fL", shift left=2, from=1-1, to=1-3]
+  \arrow["\fR", shift left=2, from=1-3, to=1-1]
+\end{tikzcd}
+}
+
+there is a \em{one-to-one correspondence} between the \vocabk{adjunction}{tt-001Q} #{\fL \dashv \fR} and the pairs of \vocabk{natural transformation}{tt-001E}s #{\fL} and #{\fR} satisfying the the \vocabk{triangle identities}{tt-001Z}.
+}
+
+\proof{
+\p{From \ref{tt-001Z}, it follows that every adjunction between #{\fL} and #{\fR} gives rise to a pair of transformations #{\eta} and #{\epsilon} satisfying the triangle identities.
+}
+\p{To show that there exists a unique adjunction for #{\eta} and #{\epsilon}, the uniqueness follows from \ref{tt-001Y}, the existence can use the construction in the spirit of \ref{tt-001X}.
+}
+}
+}
