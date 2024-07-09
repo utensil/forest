@@ -368,3 +368,12 @@ so the text size almost matches the size output by native forester code. This do
     \body
   }
 }
+
+
+
+\def\newvocab[x]{\<html:span>[class]{newvocab}{\x}}
+% htmlClass doesn't work because trust is not set to true
+% see https://github.com/KaTeX/KaTeX/blob/main/docs/options.md
+% \def\newvocab[x]{#{\htmlData{type=newvocab}{\textbf{\x}}}}
+\def\vocab[x]{\<html:span>[class]{vocab}{\x}}
+\def\vocabk[x][addr]{\<html:span>[class]{vocab}{[\x](\addr)}}
