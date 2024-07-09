@@ -235,17 +235,9 @@ svg.embedded-tex-svg {
 
 section[data-taxon] {
     border-left: 5px solid var(--taxon-color);
-    margin: 1em 0 0em 0;
+    margin: 0.5em 0 0.5em 0;
     padding: 1em 1em 1em 1em;
     background-color: color-mix(in srgb, var(--taxon-color) 6%, var(--uts-background) 94%);
-}
-
-/* test with http://127.0.0.1:1314/tt-001Q.xml for References/Context/Backlinks/Related and Remark/Convention/Definition  */
-.link-list section[data-taxon] {
-    margin-top: 2px;
-    margin-bottom: 2px;
-    padding-top: 5px;
-    padding-bottom: 2px;
 }
 
 section[data-taxon]:hover {
@@ -256,17 +248,22 @@ section[data-taxon] h1 span.taxon, #toc span.taxon[data-taxon] {
     color: color-mix(in srgb, var(--taxon-color) 60%, var(--uts-text) 40%) !important;
 }
 
-section[data-taxon="Proof"] {
-    background-color: unset;
+section[data-taxon="Example"], section[data-taxon="Notation"], section[data-taxon="Convention"] {
+    border: 1px solid var(--taxon-color);
+    border-radius: 5px;
+}
+
+/* test with http://127.0.0.1:1314/tt-001Q.xml for References/Context/Backlinks/Related and Remark/Convention/Definition  */
+.link-list section[data-taxon], section[data-taxon="Proof"], section[data-taxon="Definition"], section[data-taxon="Reference"] {
+    margin-top: 5px;
+    margin-bottom: 2px;
+    padding-top: 5px;
+    padding-bottom: 2px;
+    /* background-color: unset; */
 }
 
 section[data-taxon="Proof"]:hover, section[data-taxon="Definition"]:hover, section[data-taxon="Reference"]:hover {
     background-color: rgba(0, 100, 255, 0.04);
-}
-
-section[data-taxon="Example"], section[data-taxon="Notation"], section[data-taxon="Convention"] {
-    border: 1px solid var(--taxon-color);
-    border-radius: 5px;
 }
 
 /*
