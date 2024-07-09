@@ -299,17 +299,17 @@ so the text size almost matches the size output by native forester code. This do
   \stopverb}
 }
 
-\p{\code{nlabref[name][citeid][pageid]}: A reference to a nLab article.}
+\p{\code{nlabref[name][citeid][pageid][year]}: A reference to a nLab article.}
 
-\def\nlabref[name][citeid][pageid]{
+\def\nlabref[name][citeid][pageid][year]{
   \title{\name - nLab}
   \meta{external}{https://ncatlab.org/nlab/show/\pageid}
   \taxon{reference}
   \meta{bibtex}{\startverb
-@misc{nlab-\stopverb\citeid\startverb,
+@misc{nlab\stopverb\year\citeid\startverb,
   title  = {\stopverb\name - nLab\startverb},
   author = {nLab},
-  year   = {2024},
+  year   = {\stopverb\year\startverb},
   url    = {\stopverbhttps://ncatlab.org/nlab/show/\pageid\startverb}
 }
   \stopverb}
