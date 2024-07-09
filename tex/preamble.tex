@@ -4,8 +4,9 @@
 \usepackage{newpxtext,newpxmath}
 
 % Extra stuff for Forester
-\newcommand{\texstrip}{}
 \usepackage{mathtools, stmaryrd}
+\usepackage{mathrsfs}
+\usepackage[textsize=scriptsize,shadow]{todonotes}
 
 % https://www.overleaf.com/learn/latex/Indices
 % https://tex.stackexchange.com/a/58236/75671
@@ -67,7 +68,7 @@
 % \usepackage{color} 
 % \PassOptionsToPackage{hyphens}{url}
 % \usepackage[unicode]{hyperref}
-\usepackage[unicode,pagebackref=true,bookmarksopen=true,bookmarksdepth=5,backref=section]{hyperref}
+\usepackage[unicode,pagebackref=true,bookmarksopen=true,bookmarksdepth=5,backref=section,pdfusetitle]{hyperref}
 \setcounter{tocdepth}{5}
 \setcounter{secnumdepth}{5}
 \hypersetup{
@@ -139,95 +140,115 @@
 
 \theoremstyle{definition}
 \mdfdefinestyle{mdbluebox}{%
-	% roundcorner = 10pt,
-	% linewidth=1pt,
-	% skipabove=4ex,
-	% innertopmargin=4ex,
-	% innerbottommargin=9pt,
-	% skipbelow=2pt,
-	% innermargin=2em,
-	% % nobreak=true,
-	% needspace=20em,
-	% usetwoside=false,
-	% linecolor=blue,
-	% backgroundcolor=TealBlue!5,
+	% same
 	skipabove=4ex,
-	linewidth=2pt,
-	rightline=false,
-	leftline=true,
-	topline=false,
-	bottomline=false,
-	innermargin=2em,
-	% nobreak=true,
-	needspace=20em,
-	linecolor=MidnightBlue,
-	backgroundcolor=TealBlue!5,
-	usetwoside=false,
-	% innerleftmargin=20pt,
-}
-\declaretheoremstyle[
-	spaceabove=12pt,
-	spacebelow=1pt,
-	headfont=\sffamily\bfseries\color{MidnightBlue!70!black},
-	mdframed={style=mdbluebox},
-	headpunct={\\[3pt]}
-]{thmbluebox}
-
-\mdfdefinestyle{mdredbox}{%
-	linewidth=0.5pt,
-	skipabove=4ex,
-	frametitleaboveskip=5pt,
-	frametitlebelowskip=0pt,
-	skipbelow=2pt,
-	frametitlefont=\bfseries,
+	skipbelow=4ex,
 	innertopmargin=4ex,
 	innerbottommargin=8pt,
+	usetwoside=false,
 	innermargin=2em,
 	% tt-002B is too tall
 	% nobreak=true,
 	needspace=20em,
+	frametitleaboveskip=5pt,
+	frametitlebelowskip=0pt,
+	% spaceabove=12pt,
+	% spacebelow=1pt,
+	% shared by left framed
+	leftline=true,
+	rightline=false,
+	topline=false,
+	bottomline=false,
+	linewidth=2pt,
+	% customizations
+	linecolor=MidnightBlue,
+	backgroundcolor=TealBlue!5,
+}
+\declaretheoremstyle[%
+	% same
+	headpunct={\\[3pt]},
+	% customizations
+	headfont=\sffamily\bfseries\color{MidnightBlue!70!black},
+	mdframed={style=mdbluebox}
+]{thmbluebox}
+
+\mdfdefinestyle{mdredbox}{%
+	% same
+	skipabove=4ex,
+	skipbelow=4ex,
+	innertopmargin=4ex,
+	innerbottommargin=8pt,
+	usetwoside=false,
+	innermargin=2em,
+	% tt-002B is too tall
+	% nobreak=true,
+	needspace=20em,
+	frametitleaboveskip=5pt,
+	frametitlebelowskip=0pt,
+	% spaceabove=12pt,
+	% spacebelow=1pt,
+	% tt-002B is too tall
+	% nobreak=true,
+	needspace=20em,
+	frametitleaboveskip=5pt,
+	frametitlebelowskip=0pt,
+	% shared by full framed
+	linewidth=0.5pt,
+	% customizations
+	frametitlefont=\bfseries,
 	linecolor=RawSienna,
 	backgroundcolor=Salmon!5,
-	usetwoside=false,
 }
 \declaretheoremstyle[
+	% same
+	headpunct={\\[3pt]},
+	% customizations
+	postheadspace={0pt},
 	headfont=\bfseries\color{RawSienna},
 	mdframed={style=mdredbox},
-	headpunct={\\[3pt]},
-	postheadspace={0pt},
 ]{thmredbox}
 
 \mdfdefinestyle{mdgreenbox}{%
+	% same
 	skipabove=4ex,
-	linewidth=2pt,
-	rightline=false,
-	leftline=true,
-	topline=false,
-	bottomline=false,
+	skipbelow=4ex,
+	innertopmargin=4ex,
+	innerbottommargin=8pt,
+	usetwoside=false,
 	innermargin=2em,
+	% tt-002B is too tall
 	% nobreak=true,
 	needspace=20em,
+	frametitleaboveskip=5pt,
+	frametitlebelowskip=0pt,
+	% spaceabove=12pt,
+	% spacebelow=1pt,
+	% shared by left framed
+	leftline=true,
+	rightline=false,
+	topline=false,
+	bottomline=false,
+	linewidth=2pt,
+	% customizations
 	linecolor=ForestGreen,
 	backgroundcolor=ForestGreen!5,
-	usetwoside=false,
-	% innerleftmargin=20pt,
 }
 \declaretheoremstyle[
+	% same
+	headpunct={\\[3pt]},
+	% customizations
 	headfont=\bfseries\sffamily\color{ForestGreen!70!black},
 	bodyfont=\normalfont,
-	% spaceabove=2pt,
-	spaceabove=12pt,
-	spacebelow=1pt,
 	mdframed={style=mdgreenbox},
-	headpunct={\\[3pt]},
 ]{thmgreenbox}
+
 \declaretheoremstyle[
+	% same
+	headpunct={\\[3pt]},
+	% customizations
 	headfont=\bfseries\sffamily\color{ForestGreen!70!black},
 	bodyfont=\normalfont,
-	spaceabove=12pt,
-	spacebelow=1pt,
 	mdframed={style=mdgreenbox},
-	headpunct={\\[3pt]},
 ]{thmgreenbox*}
 
 \mdfdefinestyle{mdblackbox}{%
