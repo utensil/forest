@@ -67,7 +67,7 @@
 % \usepackage{color} 
 % \PassOptionsToPackage{hyphens}{url}
 % \usepackage[unicode]{hyperref}
-\usepackage[unicode,pagebackref=true,bookmarksopen=true, bookmarksdepth=5]{hyperref}
+\usepackage[unicode,pagebackref=true,bookmarksopen=true,bookmarksdepth=5,backref=section]{hyperref}
 \setcounter{tocdepth}{5}
 \setcounter{secnumdepth}{5}
 \hypersetup{
@@ -118,12 +118,19 @@
 
 
 \usepackage{backref}
+% % Back refs
+% \renewcommand*{\backrefalt}[4]{%
+%     \ifcase #1 \footnotesize{(Not cited.)}%
+%     \or        \footnotesize{(Cited on page~#2)}%
+%     \else      \footnotesize{(Cited on pages~#2)}%
+%     \fi}
 % Back refs
 \renewcommand*{\backrefalt}[4]{%
-    \ifcase #1 \footnotesize{(Not cited.)}%
-    \or        \footnotesize{(Cited on page~#2)}%
-    \else      \footnotesize{(Cited on pages~#2)}%
+    \ifcase #1 \relax % No citations
+    \or        \footnotesize{(Cited in section~#2)}%
+    \else      \footnotesize{(Cited in sections~#2)}%
     \fi}
+
 
 % theorem styles are implemented by package `mdframed` for LaTeX i.e. PDF
 % mostly follows https://github.com/vEnhance/napkin/blob/main/tex/preamble.tex
