@@ -1,7 +1,8 @@
 % From my print.tex
 \usepackage[utf8]{inputenc}
 \usepackage{amsmath,amsfonts,amssymb}
-
+% e.g. \xmapsto
+\usepackage{mathtools}
 % Extra stuff for Forester
 \usepackage{stmaryrd}
 \usepackage{mathrsfs}
@@ -100,22 +101,8 @@
 \usepackage{xspace}
 \usepackage{xpatch}
 
-\usepackage{newunicodechar}
-
-% \usepackage{mathbbol}
-% \DeclareMathSymbol{\fcmp}{\mathrel}{bbold}{\lq\;}
-% \newunicodechar{⨾}{\fcmp}
-
-% from stmaryrd
-\newunicodechar{⨾}{\fatsemi}
-% \usepackage{utfsym}
-% \newunicodechar{👉}{\usym{261E}}
-% hide it for now
-\newunicodechar{👉}{}
-
 \usepackage{float} %figure inside minipage
 \usepackage[autosize,debug]{dot2texi}
-
 
 \usepackage{backref}
 % % Back refs
@@ -131,12 +118,25 @@
     \else      \footnotesize{(Cited in sections~#2)}%
     \fi}
 
-\input{../tex/mdframed}
-% \input{../tex/tcolorbox}
+% \input{../tex/mdframed}
+\input{../tex/tcolorbox}
 
 % From my macros.tex
 
 %%fakesection Special markers
+
+\usepackage{newunicodechar}
+
+% \usepackage{mathbbol}
+% \DeclareMathSymbol{\fcmp}{\mathrel}{bbold}{\lq\;}
+% \newunicodechar{⨾}{\fcmp}
+
+% from stmaryrd
+\newunicodechar{⨾}{\fatsemi}
+% \usepackage{utfsym}
+% \newunicodechar{👉}{\usym{261E}}
+% hide it for now
+\newunicodechar{👉}{}
 
 \newcommand{\newvocab}[1]{\textbf{\color{MidnightBlue} #1}}
 \newcommand{\vocab}[1]{\textbf{#1}}
