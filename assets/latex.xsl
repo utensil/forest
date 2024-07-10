@@ -116,7 +116,7 @@
   <!-- use mdframed end -->
 
   <!-- use tcolorbox begin -->
-  <xsl:template match="f:tree[f:frontmatter/f:taxon[not(text()='Proof')]]">
+  <!-- <xsl:template match="f:tree[f:frontmatter/f:taxon[not(text()='Proof')]]">
     <xsl:text>\begin{</xsl:text>
     <xsl:apply-templates select="f:frontmatter/f:taxon" />
     <xsl:text>}</xsl:text>
@@ -134,7 +134,7 @@
     <xsl:text>}\end{</xsl:text>
     <xsl:apply-templates select="f:frontmatter/f:taxon" />
     <xsl:text>}</xsl:text>
-  </xsl:template>
+  </xsl:template> -->
   <!-- use tcolorbox end -->
   
   <xsl:template match="f:mainmatter">
