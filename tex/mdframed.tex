@@ -1,7 +1,10 @@
 % theorem styles are implemented by package `mdframed` for LaTeX i.e. PDF
 % mostly follows https://github.com/vEnhance/napkin/blob/main/tex/preamble.tex
 \usepackage{amsthm}
+% they have to be loaded afer `amsthm`
+\usepackage{newpxtext,newpxmath}
 \usepackage{thmtools}
+\usepackage{mathtools}
 \usepackage[framemethod=TikZ]{mdframed}
 
 \theoremstyle{definition}
@@ -182,3 +185,6 @@
 \declaretheorem[name=Remark,sibling=theorem,style=thmgreenbox]{remark}
 \declaretheorem[name=Remark,sibling=theorem,style=thmgreenbox*]{remark*}
 % \declaretheorem[name=Step,style=thmgreenbox]{step} % only used in Lebesgue int
+
+\crefname{notation}{notation}{notations}
+\crefname{convention}{convention}{conventions}
