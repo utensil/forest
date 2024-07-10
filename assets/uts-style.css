@@ -217,7 +217,7 @@ svg.embedded-tex-svg {
     --taxon-color: #e28563; /* #d7511f #cd7e62 #9e3c17 #8C2700 */
 }
 
-[data-taxon="Theorem"], [data-taxon="Lemma"], [data-taxon="Corollary"] {
+[data-taxon="Theorem"], [data-taxon="Lemma"], [data-taxon="Corollary"], [data-taxon="Proof"] {
     --taxon-color: #95dbfc; /* #006994; */
 }
 
@@ -227,10 +227,6 @@ svg.embedded-tex-svg {
 
 [data-taxon="Convention"] {
     --taxon-color: #d369cb;
-}
-
-[data-taxon="Proof"] {
-    --taxon-color: transparent;
 }
 
 section[data-taxon] {
@@ -253,6 +249,10 @@ section[data-taxon="Example"], section[data-taxon="Notation"], section[data-taxo
     border-radius: 5px;
 }
 
+section[data-taxon="Proof"] {
+    border-left: unset;
+}
+
 /* test with http://127.0.0.1:1314/tt-001Q.xml for References/Context/Backlinks/Related and Remark/Convention/Definition  */
 .link-list section[data-taxon], section[data-taxon="Proof"], section[data-taxon="Definition"], section[data-taxon="Reference"] {
     margin-top: 5px;
@@ -262,7 +262,7 @@ section[data-taxon="Example"], section[data-taxon="Notation"], section[data-taxo
     /* background-color: unset; */
 }
 
-section[data-taxon="Proof"]:hover, section[data-taxon="Definition"]:hover, section[data-taxon="Reference"]:hover {
+section[data-taxon]:hover section[data-taxon="Proof"], section[data-taxon="Proof"]:hover, section[data-taxon="Definition"]:hover, section[data-taxon="Reference"]:hover {
     background-color: rgba(0, 100, 255, 0.04);
 }
 
