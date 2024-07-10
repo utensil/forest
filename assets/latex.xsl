@@ -93,6 +93,7 @@
     <xsl:text>\end{proof}</xsl:text>
   </xsl:template>
   
+  <!-- use mdframed begin -->
   <xsl:template match="f:tree[f:frontmatter/f:taxon[not(text()='Proof')]]">
     <xsl:text>\begin{</xsl:text>
     <xsl:apply-templates select="f:frontmatter/f:taxon" />
@@ -112,6 +113,29 @@
     <xsl:apply-templates select="f:frontmatter/f:taxon" />
     <xsl:text>}</xsl:text>
   </xsl:template>
+  <!-- use mdframed end -->
+
+  <!-- use tcolorbox begin -->
+  <xsl:template match="f:tree[f:frontmatter/f:taxon[not(text()='Proof')]]">
+    <xsl:text>\begin{</xsl:text>
+    <xsl:apply-templates select="f:frontmatter/f:taxon" />
+    <xsl:text>}</xsl:text>
+    <xsl:if test="f:frontmatter/f:title">
+      <xsl:text>{{\normalfont\color{black}</xsl:text>
+      <xsl:apply-templates select="f:frontmatter/f:title" />
+      <xsl:text>}}</xsl:text>
+    </xsl:if>
+    <xsl:text>{</xsl:text>
+    <xsl:if test="f:frontmatter/f:addr[not(contains(text(), '#'))]">
+      <xsl:value-of select="f:frontmatter/f:addr" />
+    </xsl:if>
+    <xsl:text>}{</xsl:text>
+    <xsl:apply-templates select="f:mainmatter" />
+    <xsl:text>}\end{</xsl:text>
+    <xsl:apply-templates select="f:frontmatter/f:taxon" />
+    <xsl:text>}</xsl:text>
+  </xsl:template>
+  <!-- use tcolorbox end -->
   
   <xsl:template match="f:mainmatter">
     <xsl:apply-templates />
@@ -119,7 +143,9 @@
   
   <xsl:template match="f:p">
     <xsl:text>\par{}</xsl:text>
+    <!-- <xsl:text>\paragraph{</xsl:text> -->
     <xsl:apply-templates />
+    <!-- <xsl:text>}</xsl:text> -->
   </xsl:template>
   
   <xsl:template match="f:strong">
@@ -219,7 +245,7 @@
         <xsl:text>}</xsl:text>
       </xsl:when>
       <xsl:when test="/f:tree/f:backmatter/f:references/f:tree/f:frontmatter[f:addr/text()=current()/@addr]">
-        <xsl:text>~\cite</xsl:text>
+        <xsl:text>{\sloppy\cite</xsl:text>
         <xsl:if test="../@tid">
           <xsl:text>[</xsl:text>
           <xsl:value-of select="../@tid" />
@@ -227,7 +253,7 @@
         </xsl:if>
         <xsl:text>{</xsl:text>
         <xsl:value-of select="@addr" />
-        <xsl:text>}</xsl:text>
+        <xsl:text>}}</xsl:text>
       </xsl:when>
       <xsl:otherwise>
         <xsl:text>\href{https://utensil.github.io/forest/</xsl:text>

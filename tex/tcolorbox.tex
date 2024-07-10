@@ -1,0 +1,108 @@
+\usepackage[amsmath,thmmarks]{ntheorem}
+\usepackage[many]{tcolorbox}
+% \tcbset
+\tcbset{
+	enhanced,breakable,
+	titlerule=0mm,
+	halign=left,parbox=false,
+	theorem style=plain apart,
+	left=2ex,right=2ex,boxsep=1.5ex,top=0mm,bottom=0mm,
+	label separator=,
+}
+\newcounter{tcbthm}[section]
+
+\newtcbtheorem[auto counter,number within=subsection]{definition}{Definition}{
+	label type=definition,
+	frame hidden,boxrule=0mm,sharp corners, % interior hidden,
+	colbacktitle=white,
+	colback=white,
+	fonttitle=\bfseries\sffamily\color{black},
+	fontlower=\normalfont,
+}{}
+
+\newtcbtheorem[use counter from=definition,crefname={convention}{conventions}]{convention}{Convention}{
+	frame hidden,boxrule=0mm,sharp corners, % interior hidden,
+	colbacktitle=white,
+	colback=white,
+	fonttitle=\bfseries\sffamily\color{black},
+	fontlower=\normalfont,
+}{}
+
+\newtcbtheorem[use counter from=definition,crefname={notation}{notations}]{notation}{Notation}{
+	frame hidden,boxrule=0mm,sharp corners, % interior hidden,
+	colbacktitle=white,
+	colback=white,
+	fonttitle=\bfseries\sffamily\color{black},
+	fontlower=\normalfont,
+}{}
+
+\newtcbtheorem[use counter from=definition]{remark}{Remark}{
+	label type=remark,
+	frame hidden,boxrule=0mm,sharp corners, % interior hidden,
+	borderline west={2pt}{0mm}{ForestGreen},
+	colbacktitle=ForestGreen!5,
+	colback=ForestGreen!5,
+	% colframe=ForestGreen,
+	fonttitle=\bfseries\sffamily\color{ForestGreen!70!black},
+	fontlower=\normalfont,
+}{}
+
+\newtcbtheorem[use counter from=definition]{example}{Example}{
+	label type=example,
+	boxrule=0.5pt,titlerule=0pt,titlerule style=Salmon!5,
+	colbacktitle=Salmon!5,
+	colback=Salmon!5,
+	colframe=RawSienna,
+	fonttitle=\bfseries\sffamily\color{RawSienna},
+	fontlower=\normalfont,
+}{}
+
+\newtcbtheorem[use counter from=definition]{theorem}{Theorem}{
+	label type=theorem,
+	% same below
+	frame hidden,boxrule=0mm,sharp corners, % interior hidden,
+	borderline west={2pt}{0mm}{MidnightBlue},
+	colbacktitle=TealBlue!5,
+	colback=TealBlue!5,
+	fonttitle=\bfseries\sffamily\color{MidnightBlue!70!black},
+	fontlower=\normalfont,
+}{}
+
+\newtcbtheorem[use counter from=definition]{lemma}{Lemma}{
+	label type=lemma,
+	% same below
+	frame hidden,boxrule=0mm,sharp corners, % interior hidden,
+	borderline west={2pt}{0mm}{MidnightBlue},
+	colbacktitle=TealBlue!5,
+	colback=TealBlue!5,
+	fonttitle=\bfseries\sffamily\color{MidnightBlue!70!black},
+	fontlower=\normalfont,
+}{}
+
+\newtcbtheorem[use counter from=definition]{corollary}{Corollary}{
+	label type=corollary,
+	% same below
+	frame hidden,boxrule=0mm,sharp corners, % interior hidden,
+	borderline west={2pt}{0mm}{MidnightBlue},
+	colbacktitle=TealBlue!5,
+	colback=TealBlue!5,
+	fonttitle=\bfseries\sffamily\color{MidnightBlue!70!black},
+	fontlower=\normalfont,
+}{}
+
+\theoremstyle{nonumberbreak} % nonumberplain
+% \theoremseparator{:\smallskip}
+\theoremheaderfont{\bfseries\sffamily\color{MidnightBlue!70!black}}
+% \theoremheaderfont{\itshape\rmfamily}
+\theorembodyfont{\normalfont}
+\theoremsymbol{\ensuremath{\square}}
+\newtheorem{proof}{Proof}
+
+\tcolorboxenvironment{proof}{
+	enhanced,boxrule=0pt,frame hidden,sharp corners,
+	top=0mm,bottom=0mm,left=0mm,right=0mm,
+	colbacktitle=TealBlue!5,
+	colback=TealBlue!5,
+	after upper={\hfill\ensuremath{\square}}
+}
+
