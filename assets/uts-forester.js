@@ -56,10 +56,26 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("theme-toggle").onclick = toggleTheme;
     document.getElementById("search").onclick = search;
 
-    const out_of_sight_observer = new IntersectionObserver(entries => {
+    const content_out_of_sight_observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            const details = entry.target.querySelector('section > details[id]');
+            const id = details.getAttribute('id');
+            // console.log(entry);
+            
+            const toc_entry = document.querySelector(`nav#toc [data-target="#${id}"]`);
+
+            if (!entry.isIntersecting && toc_entry && !toc_entry.parentElement.querySelector(`ul li`)) {
+                console.log("Scrolling out of view", entry.target, entry.intersectionRatio, entry.isIntersecting, entry);
+                toc_entry.parentElement.parentElement.classList.remove('active');
+                content_out_of_sight_observer.unobserve(entry.target);
+            }
+        });
+    });
+
+    const toc_out_of_sight_observer = new IntersectionObserver(entries => {
         entries.forEach(entry => {
             // console.log(entry);
-            out_of_sight_observer.unobserve(entry.target);
+            toc_out_of_sight_observer.unobserve(entry.target);
             if (!entry.isIntersecting) {
                 // console.log("Scrolling into view", entry.target);
                 entry.target.scrollIntoView({block: "center"});
@@ -79,8 +95,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 const toc_entry = document.querySelector(`nav#toc [data-target="#${id}"]`);
 
                 if (toc_entry && !toc_entry.parentElement.querySelector(`ul li`)) {
-                    toc_entry.parentElement.classList.add('active');
-                    out_of_sight_observer.observe(toc_entry);
+                    toc_entry.parentElement.parentElement.classList.add('active');
+                    toc_out_of_sight_observer.observe(toc_entry);
                 }
                 // else {
                 //     target_element = document.querySelector(`#${id} h1`);
@@ -93,7 +109,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 // }
                 const toc_entry = document.querySelector(`nav#toc [data-target="#${id}"]`);
                 if (toc_entry && !toc_entry.parentElement.querySelector(`ul li`)) {
-                    toc_entry.parentElement.classList.remove('active');
+                    // toc_entry.parentElement.parentElement.classList.remove('active');
+                    content_out_of_sight_observer.observe(entry.target.closest('details').parentElement.closest('details'));
                 }
             }
         });
