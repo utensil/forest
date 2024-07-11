@@ -343,7 +343,7 @@ nav#toc {
 }
 
 nav#toc > .block {
-    --offset: 5em;
+    --offset: 7em;
     --eh: 100%;
     --vh: 100vh;
     --ratio: calc(var(--vh) / var(--eh));
@@ -357,9 +357,22 @@ nav#toc > .block {
 }
 
 nav#toc > .block > ul.block {
-    max-height: calc(80vh - var(--offset) * 2);
+    max-height: calc(90vh - var(--offset) * 2);
     overflow-y: auto;
 }
 
+nav#toc li {
+    padding-left: 10px;
+}
 
+nav#toc li.active {
+    font-weight: bold;
+    border-left: var(--uts-text) 5px solid;
+    padding-left: 5px;
+    /* color: color-mix(in srgb, var(--uts-text) 30%, blue 70%); */
+    /* background-color: rgba(0, 100, 255, .1); */
+}
 
+/* :root[data-applied-mode="dark"] nav#toc .link.local.active {
+    color: color-mix(in srgb, var(--uts-text) 30%, yellow 70%);
+} */

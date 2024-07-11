@@ -55,6 +55,53 @@ document.addEventListener("DOMContentLoaded", function () {
     // on clicking the button with id theme-toggle, the function toggleTheme is called
     document.getElementById("theme-toggle").onclick = toggleTheme;
     document.getElementById("search").onclick = search;
+
+    const out_of_sight_observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            // console.log(entry);
+            out_of_sight_observer.unobserve(entry.target);
+            if (!entry.isIntersecting) {
+                // console.log("Scrolling into view", entry.target);
+                entry.target.scrollIntoView({block: "center"});
+            }
+        });
+    });
+
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            // console.log(entry);
+            const id = entry.target.getAttribute('id');
+            if (entry.intersectionRatio > 0) {
+                // handle only leaf sections
+                if(entry.target.querySelector(`section`)) {
+                    return;
+                }
+                const toc_entry = document.querySelector(`nav#toc [data-target="#${id}"]`);
+
+                if (toc_entry) {
+                    toc_entry.parentElement.classList.add('active');
+                    out_of_sight_observer.observe(toc_entry);
+                } else {
+                    target_element = document.querySelector(`#${id} h1`);
+                    console.warn("Not found", target_element.textContent);
+                }
+            } else {
+                // handle only leaf sections
+                if(entry.target.querySelector(`section`)) {
+                    return;
+                }
+                const toc_entry = document.querySelector(`nav#toc [data-target="#${id}"]`);
+                if (toc_entry) {
+                    toc_entry.parentElement.classList.remove('active');
+                }
+            }
+        });
+    });
+    
+    // Track all sections that have an `id` applied
+    document.querySelectorAll('article section > details[id]').forEach((section) => {
+        observer.observe(section);
+    });
 });
 
 // Important to be 1st in the DOM
