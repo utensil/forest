@@ -73,25 +73,26 @@ document.addEventListener("DOMContentLoaded", function () {
             const id = entry.target.getAttribute('id');
             if (entry.intersectionRatio > 0) {
                 // handle only leaf sections
-                if(entry.target.querySelector(`section`)) {
-                    return;
-                }
+                // if(entry.target.querySelector(`section`)) {
+                //     return;
+                // }
                 const toc_entry = document.querySelector(`nav#toc [data-target="#${id}"]`);
 
-                if (toc_entry) {
+                if (toc_entry && !toc_entry.parentElement.querySelector(`ul li`)) {
                     toc_entry.parentElement.classList.add('active');
                     out_of_sight_observer.observe(toc_entry);
-                } else {
-                    target_element = document.querySelector(`#${id} h1`);
-                    console.warn("Not found", target_element.textContent);
                 }
+                // else {
+                //     target_element = document.querySelector(`#${id} h1`);
+                //     console.warn("Not found", target_element.textContent);
+                // }
             } else {
                 // handle only leaf sections
-                if(entry.target.querySelector(`section`)) {
-                    return;
-                }
+                // if(entry.target.querySelector(`section`)) {
+                //     return;
+                // }
                 const toc_entry = document.querySelector(`nav#toc [data-target="#${id}"]`);
-                if (toc_entry) {
+                if (toc_entry && !toc_entry.parentElement.querySelector(`ul li`)) {
                     toc_entry.parentElement.classList.remove('active');
                 }
             }
