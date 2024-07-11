@@ -66,7 +66,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             if (!entry.isIntersecting && toc_entry && !toc_entry.parentElement.querySelector(`ul li`)) {
                 console.log("Scrolling out of view", entry.target, entry.intersectionRatio, entry.isIntersecting, entry);
-                toc_entry.parentElement.parentElement.classList.remove('active');
+                toc_entry.closest("li").parentElement.closest("li").classList.remove('active');
                 content_out_of_sight_observer.unobserve(entry.target);
             }
         });
@@ -95,7 +95,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 const toc_entry = document.querySelector(`nav#toc [data-target="#${id}"]`);
 
                 if (toc_entry && !toc_entry.parentElement.querySelector(`ul li`)) {
-                    toc_entry.parentElement.parentElement.classList.add('active');
+                    toc_entry.closest("li").parentElement.closest("li").classList.add('active');
                     toc_out_of_sight_observer.observe(toc_entry);
                 }
                 // else {
