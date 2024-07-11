@@ -5,13 +5,98 @@
 % definition theorem lemma construction observation
 % convention corollary axiom example exercise proof
 % discussion remark notation
-\taxon{remark}\refnotet{coshape, coequalizer, pushout (fiber coproduct), binary coproduct}{2.14, 2.16, 2.19}{kostecki2011introduction}{
+\refdeft{coshape, coequalizer, pushout (fiber coproduct), binary coproduct}{2.14, 2.16, 2.19}{kostecki2011introduction}{
 \p{
-  \newvocab{coshape}, \newvocab{coequalizer}, \newvocab{pushout (fiber coproduct)}, \newvocab{binary coproduct} can be defined by \em{reversing all arrows} in the definitions of \vocab{shape}, \vocab{equalizer}, \vocab{pullback (fiber product)}, \vocab{binary product} respectively.
+  \newvocab{coshape}, \newvocab{coequalizer}, \newvocab{pushout} (\newvocab{fiber coproduct}), \newvocab{binary coproduct} can be defined by \em{reversing all arrows} in the definitions of \vocabk{shape}{tt-0025}, \vocabk{equalizer}{tt-000Q}, \vocabk{pullback (fiber product)}{tt-000V}, \vocabk{binary product}{tt-000Y} respectively.
 }
 
-\p{The pushout equivalent of the \vocab{fiber product object} in pullback is the \newvocab{fiber coproduct object}, denoted #{X +_{O} Y}, and the pushout equivalent of \vocab{projection}s in pullback are \newvocab{injection}s, denoted #{i_X} and #{i_Y}, respectively. The unique arrow of a pushout is denoted #{[f, g]}.}
+\p{The \newvocab{pushout} equivalent of the \vocab{fiber product object} in pullback is the \newvocab{fiber coproduct object}, denoted #{X +_{O} Y}, and the \newvocab{pushout} equivalent of \vocab{projection}s in pullback are \newvocab{injection}s, denoted #{i_X} and #{i_Y}, respectively. The unique arrow of a pushout is denoted #{[f, g]}.}
 
 \p{The binary coproduct equivalent of the \vocab{binary product object} in binary product is the \newvocab{binary coproduct object}, denoted #{X + Y}, and the binary coproduct equivalent of \vocab{projection}s in binary product are \newvocab{injection}s, denoted #{i_X} and #{i_Y}, respectively. The unique arrow of a binary coproduct is denoted #{[f, g]}.}
+
+\p{Schematically,
+
+\ul{
+\li{Coshapes:
+  \ul{
+    \li{#{T} = \tikz{
+\begin{tikzcd}
+	\bullet && \bullet
+\end{tikzcd}
+}}
+    \li{#{E} = \tikz{
+\begin{tikzcd}
+	\bullet && \bullet
+	\arrow[shift right, from=1-3, to=1-1]
+	\arrow[shift left, from=1-3, to=1-1]
+\end{tikzcd}
+}}
+    \li{#{P} = \tikz{
+\begin{tikzcd}
+	&& \bullet \\
+	\\
+	\bullet && \bullet
+	\arrow[from=3-3, to=1-3]
+	\arrow[from=3-3, to=3-1]
+\end{tikzcd}
+}}
+  }
+}
+\li{coequalizer:
+\tikz{
+\begin{tikzcd}
+	& \bullet \\
+	\\
+	& E \\
+	\bullet && \bullet
+	\arrow["{{{{{{!h}}}}}}"', dashed, from=3-2, to=1-2]
+	\arrow[from=4-1, to=1-2]
+	\arrow["\iota", from=4-1, to=3-2]
+	\arrow[color={rgb,255:red,204;green,204;blue,204}, curve={height=6pt}, from=4-3, to=1-2]
+	\arrow[color={rgb,255:red,204;green,204;blue,204}, from=4-3, to=3-2]
+	\arrow[shift right, from=4-3, to=4-1]
+	\arrow[shift left, from=4-3, to=4-1]
+\end{tikzcd}
+}
+}
+\li{pushout (fiber coproduct):
+\tikz{
+\begin{tikzcd}
+	\bullet \\
+	\\
+	&& {X +_{O} Y} && Y \\
+	\\
+	&& X && O
+	\arrow["{{{{! \langle h, k \rangle}}}}"{description}, dashed, from=3-3, to=1-1]
+	\arrow["\lrcorner"{anchor=center, pos=0.125}, draw=none, from=3-3, to=5-5]
+	\arrow["k"{description}, curve={height=12pt}, from=3-5, to=1-1]
+	\arrow["{{{{i_Y}}}}"', from=3-5, to=3-3]
+	\arrow["h"{description}, curve={height=-12pt}, from=5-3, to=1-1]
+	\arrow["{{{{i_X}}}}", from=5-3, to=3-3]
+	\arrow["g"', from=5-5, to=3-5]
+	\arrow["f", from=5-5, to=5-3]
+\end{tikzcd}
+}
+}
+\li{binary coproduct:
+\tikz{
+\begin{tikzcd}
+	\anyobj \\
+	\\
+	&& {X + Y} && Y \\
+	\\
+	&& X
+	\arrow["{{{! \langle h, k \rangle}}}"{description}, dashed, from=3-3, to=1-1]
+	\arrow["k"{description}, curve={height=12pt}, from=3-5, to=1-1]
+	\arrow["{{{i_Y}}}"', from=3-5, to=3-3]
+	\arrow["h"{description}, curve={height=-12pt}, from=5-3, to=1-1]
+	\arrow["{{{i_X}}}", from=5-3, to=3-3]
+\end{tikzcd}
+}
+}
+
+}
+
+}
 
 }
