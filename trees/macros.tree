@@ -283,15 +283,15 @@ so the text size almost matches the size output by native forester code. This do
 
 \p{\code{wikiref[name][citeid][pageid]}: A reference to a Wikipedia article.}
 
-\def\wikiref[name][citeid][pageid]{
+\def\wikiref[name][citeid][pageid][year]{
   \title{\name - Wikipedia}
   \meta{external}{https://en.wikipedia.org/wiki/\pageid}
   \taxon{reference}
   \meta{bibtex}{\startverb
-@misc{wiki-\stopverb\citeid\startverb,
+@misc{wiki\stopverb\year\citeid\startverb,
   title  = {\stopverb\name - Wikipedia\startverb},
   author = {Wikipedia},
-  year   = {2024},
+  year   = {\stopverb\year\startverb},
   url    = {\stopverbhttps://en.wikipedia.org/wiki/\pageid\startverb}
 }
   \stopverb}
