@@ -13,6 +13,22 @@
 \p{A \newvocab{commuting diagram} is defined as such diagram that any two arrows of this diagram which have the same domain and codomain are equal. 
 }
 
-\p{It's also called a \newvocab{arrow diagram} when compared to a \vocabk{string diagram}{tt-003V} \citet{1.1}{nakahira2023diagrammatic}, as it represents \vocab{arrow}s with #{\to}.
+\p{For example, that the diagram
+\tikz{
+\begin{tikzcd}
+	\bullet && \bullet \\
+	\\
+	\bullet && \bullet
+	\arrow["f", from=1-1, to=1-3]
+	\arrow["h"', from=1-1, to=3-1]
+	\arrow["g", from=1-3, to=3-3]
+	\arrow["k"', from=3-1, to=3-3]
+\end{tikzcd}
+}
+
+commutes means #{f \cp g = h \cp k}.
+}
+
+\p{It's also called a \newvocab{arrow diagram} \citet{1.1}{nakahira2023diagrammatic} when compared to a \vocabk{string diagram}{tt-003V}, as it represents \vocab{arrow}s with #{\to}.
 }
 }
