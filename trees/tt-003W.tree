@@ -4,55 +4,14 @@
 
 \import{tt-0032}
 
-\let\fun/G{
-  \patch{\fun/F}{
-    [name]{\fG}
-  }
-}
+\let\fun/G{\create/fun{\fG}{\cat/C}{\cat/D}}
+\let\fun/H{\create/fun{\fH}{\cat/C}{\cat/D}}
+\let\fun/L{\create/fun{\fL}{\cat/D}{\cat/E}}
+\let\fun/K{\create/fun{\fK}{\cat/D}{\cat/E}}
 
-\let\fun/H{
-  \patch{\fun/F}{
-    [name]{\fH}
-  }
-}
-
-\let\fun/L{
-  \patch{\functor/new}{
-    [dom]{\cat/D}
-    [cod]{\cat/E}
-    [name]{\fL}
-  }
-}
-
-\let\fun/K{
-  \patch{\fun/L}{
-    [name]{\fK}
-  }
-}
-
-\let\nat/alpha{
-  \patch{\nat-transf/new}{
-    [dom]{\fun/F}
-    [cod]{\fun/G}
-    [name]{\alpha}
-  }
-}
-
-\let\nat/beta{
-  \patch{\nat-transf/new}{
-    [dom]{\fun/G}
-    [cod]{\fun/H}
-    [name]{\beta}
-  }
-}
-
-\let\nat/gamma{
-  \patch{\nat-transf/new}{
-    [dom]{\fun/K}
-    [cod]{\fun/L}
-    [name]{\gamma}
-  }
-}
+\let\nat/alpha{\create/nat{\alpha}{\fun/F}{\fun/G}}
+\let\nat/beta{\create/nat{\beta}{\fun/G}{\fun/H}}
+\let\nat/gamma{\create/nat{\gamma}{\fun/K}{\fun/L}}
 
 \let\nat-transf/pasting/abc{
   \patch{\nat-transf/pasting/new}{

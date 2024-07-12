@@ -280,6 +280,96 @@
   }
 }
 
+\def\sd/init{
+  \path
+    coordinate (tl) at (nw)
+    coordinate (tr) at (ne)
+    coordinate (bl) at (sw)
+    coordinate (br) at (se)
+  ;
+}
+
+\def\sd/wire/new{
+  \object[self]{
+    [total]{6}
+    [nth]{1}
+    [dom]{\functor/new}
+    [cod]{\functor/new}
+    % [do]{draw} % path
+    [wirename]{wire\self#total\self#nth}
+    [t]{t/\self#nth}
+    [b]{b/\self#nth}
+    [guide]{
+      \tikzmath{\wireratio = \self#nth / (1 + \self#total); }
+      \path coordinate (\self#t) at (spath cs:north \wireratio);
+      \path coordinate (\self#b) at (spath cs:south \wireratio);
+      \path[spath/save=\self#wirename] (\self#t) -- (\self#b);
+      % \ifthenelse{\equal{\self#do}{draw}}{
+      %   \draw[spath/use=\self#wirename];
+      % }{}
+    }
+    [drawwire]{
+      \draw[spath/use=\self#wirename];
+    }
+    [drawlabel]{
+      \path coordinate[label=above:\ensuremath{\self#dom#name}] (label\self#t) at (\self#t);
+      \path coordinate[label=below:\ensuremath{\self#cod#name}] (label\self#b) at (\self#b);
+    }
+    [draw]{
+      \self#guide
+      \self#drawwire
+      \self#drawlabel
+    }
+  }
+}
+
+\def\create/wire[total][nth][dom][cod]{
+  \patch{\sd/wire/new}{
+    [total]{\total}
+    [nth]{\nth}
+    [dom]{\dom}
+    [cod]{\cod}
+  }
+}
+
+\def\sd/dot/new{
+  \object[self]{
+    [wire]{\sd/wire/new}
+    [total]{2}
+    [nth]{1}
+    [nat]{\nat-transf/new}
+    [symbol]{dot}
+    [pos]{left}
+    [coord]{dot/\self#wire#wirename\self#nth}
+    [guide]{
+      \tikzmath{\dotratio = \self#nth / (1 + \self#total); }
+      \path coordinate (\self#coord) at (spath cs:\self#wire#wirename \dotratio);
+    }
+    [drawsymbol]{
+      \path coordinate[\self#symbol] (\self#coord) at (\self#coord);
+    }
+    [drawlabel]{
+      \path coordinate[label=\self#pos:\ensuremath{\self#nat#name}] (label\self#coord) at (\self#coord);
+    }
+    [draw]{
+      \self#guide
+      \self#drawsymbol
+      \self#drawlabel
+    }
+  }
+}
+
+\def\create/dot[wire][total][nth][nat][symbol][pos]{
+  \patch{\sd/dot/new}{
+    [wire]{\wire}
+    [total]{\total}
+    [nth]{\nth}
+    [nat]{\nat}
+    [symbol]{\symbol}
+    [pos]{\pos}
+  }
+}
+
 \def\nat-transf/pasting/new{
   \object[self]{
     [height]{4}
@@ -295,27 +385,30 @@
     [draw]{
       \begin{tikzpicture}[scale=0.5,baseline=($(nw)!0.5!(se)$)]
       \CreateRect{\self#width}{\self#height}
-      \path
-        coordinate[label=below:\ensuremath{\self#fun1nat2#cod#name}] (bl) at (spath cs:south 0.33)
-        coordinate[label=above:\ensuremath{\self#fun1nat#dom#name}] (tl) at (spath cs:north 0.33)
-        coordinate[label=below:\ensuremath{\self#fun2nat#cod#name}] (br) at (spath cs:south 0.66)
-        coordinate[label=above:\ensuremath{\self#fun2nat#dom#name}] (tr) at (spath cs:north 0.66);
-      \draw[spath/save=left] (tl) -- (bl);
-      \draw[spath/save=right] (tr) -- (br);
+      \sd/init
+      \let\wire/L{\create/wire{2}{1}{\self#fun1nat#dom}{\self#fun1nat2#cod}}
+      \wire/L#draw
+      \let\dot/f1n1{\create/dot{\wire/L}{2}{1}{\self#fun1nat}{dot}{left}}
+      \dot/f1n1#draw
+      \let\dot/f1n2{\create/dot{\wire/L}{2}{2}{\self#fun1nat2}{dot}{left}}
+      \dot/f1n2#draw
+      \let\wire/R{\create/wire{2}{2}{\self#fun2nat#dom}{\self#fun1nat2#cod}}
+      \wire/R#draw
+      \let\dot/f2n1{\create/dot{\wire/R}{1}{1}{\self#fun2nat}{dot}{left}}
+      \dot/f2n1#draw
 
-      \path coordinate[label=left:\ensuremath{\self#fun1nat#cod#name}] (fun1mid) at (spath cs:left 0.5);
-      \path coordinate[dot,label=right:\ensuremath{\self#fun1nat#name}] (fun1nat) at (spath cs:left 0.33);
-      \path coordinate[dot,label=right:\ensuremath{\self#fun1nat2#name}] (fun1nat2) at (spath cs:left 0.66);
-      \path coordinate[dot,label=right:\ensuremath{\self#fun2nat#name}] (fun2nat) at (spath cs:right 0.5);
-      \path coordinate (rn) at (fun1nat -| tr);
+      \let\f2near{\create/dot{\wire/R}{2}{1}{\self#fun2nat}{dot}{left}}
+      \f2near#guide
 
-      \node[between = nw and fun1nat, opacity=\self#catopacity] {$\self#fun1nat#dom#dom#name$};
-      \node[between = fun1nat and tr, opacity=\self#catopacity] {$\self#fun1nat#dom#cod#name$};
-      \node[between = rn and ne, opacity=\self#catopacity] {$\self#fun2nat#dom#cod#name$};
+      % \path coordinate (rn) at (\dot/f1n1#coord -| \wire/R#t);
+
+      \node[between = tl and \dot/f1n1#coord, opacity=\self#catopacity] {\ensuremath{\self#fun1nat#dom#dom#name}};
+      \node[between = \dot/f1n1#coord and \wire/R#t, opacity=\self#catopacity] {\ensuremath{\self#fun1nat#dom#cod#name}};
+      \node[between = \f2near#coord and tr, opacity=\self#catopacity] {\ensuremath{\self#fun2nat#dom#cod#name}};
       \begin{pgfonlayer}{background}
-      \fill[\self#fun1nat#dom#dom#fill] (nw) rectangle (bl);
-      \fill[\self#fun1nat#dom#cod#fill] (tl) rectangle (br);
-      \fill[\self#fun2nat#dom#cod#fill] (tr) rectangle (se);
+      \fill[\self#fun1nat#dom#dom#fill] (tl) rectangle (\wire/L#b);
+      \fill[\self#fun1nat#dom#cod#fill] (\wire/L#t) rectangle (\wire/R#b);
+      \fill[\self#fun2nat#dom#cod#fill] (\wire/R#t) rectangle (br);
       \end{pgfonlayer}
       \end{tikzpicture}
     }
@@ -690,5 +783,21 @@
       }
     }
 
+  }
+}
+
+\def\create/fun[name][dom][cod]{
+  \patch{\functor/new}{
+    [name]{\name}
+    [dom]{\dom}
+    [cod]{\cod}
+  }
+}
+
+\def\create/nat[name][dom][cod]{
+  \patch{\nat-transf/new}{
+    [name]{\name}
+    [dom]{\dom}
+    [cod]{\cod}
   }
 }
