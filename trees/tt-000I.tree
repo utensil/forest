@@ -10,38 +10,35 @@
 \refdeft{initial, terminal and null objects}{2.6}{kostecki2011introduction}{
 
 \p{
-  An \newvocab{initial object} in a category #{\C} is an object #{\initobj \in \Ob(\C)} such that for any object #{X} in #{\C}, there exists a unique arrow #{\initobj \to X}. It's also called a \newvocab{universal object}.
-
-\tikz{
-\begin{tikzcd}
-    \bullet & \bullet & \bullet \\
-    \bullet & \initobj & \bullet
-    \arrow[dashed, from=2-2, to=1-1]
-    \arrow[dashed, from=2-2, to=1-2]
-    \arrow[dashed, from=2-2, to=1-3]
-    \arrow[dashed, from=2-2, to=2-1]
-    \arrow[dashed, from=2-2, to=2-3]
-\end{tikzcd}
-}
-
+  An \newvocab{initial object} in a category #{\C} is an object #{\initobj \in \Ob(\C)} such that for any object #{X} in #{\C}, there exists a unique arrow #{\initobj \to X}. It's also called a \newvocab{universal object}, or a \newvocab{free object}.
 }
   
-\p{A \newvocab{terminal object} in a category C is an object #{\termobj \in \Ob(\C)} such that for any object #{X} in #{\C}, there exists a unique arrow #{X \to \termobj}. It's also called a \newvocab{final object}.
+\p{A \newvocab{terminal object} in a category C is an object #{\termobj \in \Ob(\C)} such that for any object #{X} in #{\C}, there exists a unique arrow #{X \to \termobj}. It's also called a \newvocab{final object}, or a \newvocab{bound object}.
+}
+
+\p{Schematically,
 
 \tikz{
 \begin{tikzcd}
-    \bullet & \bullet & \bullet \\
-    \bullet & \termobj & \bullet
-    \arrow[dashed, from=1-1, to=2-2]
-    \arrow[dashed, from=1-2, to=2-2]
-    \arrow[dashed, from=1-3, to=2-2]
-    \arrow[dashed, from=2-1, to=2-2]
-    \arrow[dashed, from=2-3, to=2-2]
+	&& \initobj \\
+	\\
+	\bullet & \bullet & \bullet & \bullet & \bullet && \C \\
+	\\
+	&& \termobj
+	\arrow[dashed, from=1-3, to=3-1]
+	\arrow[dashed, from=1-3, to=3-2]
+	\arrow[dashed, from=1-3, to=3-3]
+	\arrow[dashed, from=1-3, to=3-4]
+	\arrow[dashed, from=1-3, to=3-5]
+	\arrow[dashed, from=3-1, to=5-3]
+	\arrow[dashed, from=3-2, to=5-3]
+	\arrow[dashed, from=3-3, to=5-3]
+	\arrow[dashed, from=3-4, to=5-3]
+	\arrow[dashed, from=3-5, to=5-3]
 \end{tikzcd}
 }
-
 }
 
-\p{A \newvocab{null object} is an object which is both \vocab{terminal} and \vocab{initial}, it's also called a \vocab{zero object}.}
+\p{A \newvocab{null object} is an object which is both \vocab{terminal} and \vocab{initial}, confusingly, it's also called a \vocab{zero object}.}
 
 }

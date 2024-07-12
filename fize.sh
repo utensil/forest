@@ -35,4 +35,5 @@ sed -i '' -E 's/\\\[/##\{/g' $TREE
 sed -i '' -E 's/\\\]/}/g' $TREE
 # for the file $TREE, replace \texdef to \refdef using sed inplace
 # sed -i '' -E 's/\\texdef/\\refdef/g' $TREE
+echo "}" >> $TREE
 
