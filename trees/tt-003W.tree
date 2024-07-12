@@ -2,27 +2,95 @@
 % clifford hopf spin tt math draft
 \tag{tt}
 
+\import{tt-0032}
+
+\let\fun/G{
+  \patch{\fun/F}{
+    [name]{\fG}
+  }
+}
+
+\let\fun/H{
+  \patch{\fun/F}{
+    [name]{\fH}
+  }
+}
+
+\let\fun/L{
+  \patch{\functor/new}{
+    [dom]{\cat/D}
+    [cod]{\cat/E}
+    [name]{\fL}
+  }
+}
+
+\let\fun/K{
+  \patch{\fun/L}{
+    [name]{\fK}
+  }
+}
+
+\let\nat/alpha{
+  \patch{\nat-transf/new}{
+    [dom]{\fun/F}
+    [cod]{\fun/G}
+    [name]{\alpha}
+  }
+}
+
+\let\nat/beta{
+  \patch{\nat-transf/new}{
+    [dom]{\fun/G}
+    [cod]{\fun/H}
+    [name]{\beta}
+  }
+}
+
+\let\nat/gamma{
+  \patch{\nat-transf/new}{
+    [dom]{\fun/K}
+    [cod]{\fun/L}
+    [name]{\gamma}
+  }
+}
+
+\let\nat-transf/pasting/abc{
+  \patch{\nat-transf/pasting/new}{
+    [catopacity]{0.1}
+    [fun1nat]{\nat/alpha}
+    [fun1nat2]{\nat/beta}
+    [fun2nat]{\nat/gamma}
+  }
+}
+
 % definition theorem lemma construction observation
 % convention corollary axiom example exercise proof
 % discussion remark notation
 \refdeft{pasting diagram}{table 1.1}{nakahira2023diagrammatic}{
-\p{A \newvocab{pasting diagram} represents categories as points (0-dimensional), arrows #{\to} (1-dimensional), natural transformations as surfaces with level-2 arrows #{\Rightarrow} (0-dimensional). 
+\p{A \newvocab{pasting diagram} represents categories as points (0-dimensional), arrows #{\to} (1-dimensional), natural transformations as surfaces with level-2 arrows #{\Rightarrow} (0-dimensional).}
+
+\p{For example:
 
 \tikz{
 \begin{tikzcd}
 	\C && \D && \E
 	\arrow[""{name=0, anchor=center, inner sep=0}, "\fG"{description}, from=1-1, to=1-3]
-	\arrow[""{name=1, anchor=center, inner sep=0}, "\fH", curve={height=-40pt}, from=1-1, to=1-3]
-	\arrow[""{name=2, anchor=center, inner sep=0}, "\fF"', curve={height=40pt}, from=1-1, to=1-3]
-	\arrow[""{name=3, anchor=center, inner sep=0}, "\fK"', curve={height=20pt}, from=1-3, to=1-5]
-	\arrow[""{name=4, anchor=center, inner sep=0}, "\fL", curve={height=-20pt}, from=1-3, to=1-5]
+	\arrow[""{name=1, anchor=center, inner sep=0}, "\fH"', curve={height=30pt}, from=1-1, to=1-3]
+	\arrow[""{name=2, anchor=center, inner sep=0}, "\fF", curve={height=-30pt}, from=1-1, to=1-3]
+	\arrow[""{name=3, anchor=center, inner sep=0}, "\fK", curve={height=-30pt}, from=1-3, to=1-5]
+	\arrow[""{name=4, anchor=center, inner sep=0}, "\fL"', curve={height=30pt}, from=1-3, to=1-5]
 	\arrow["\alpha", shorten <=4pt, shorten >=4pt, Rightarrow, from=2, to=0]
 	\arrow["\beta", shorten <=4pt, shorten >=4pt, Rightarrow, from=0, to=1]
-	\arrow["\gamma", shorten <=3pt, shorten >=3pt, Rightarrow, from=3, to=4]
+	\arrow["\gamma", shorten <=4pt, shorten >=4pt, Rightarrow, from=3, to=4]
 \end{tikzcd}
 }
 }
 
-\p{It's dual to a corresponding \vocabk{string diagram}{tt-003V}.
+\p{It's dual to a corresponding \vocabk{string diagram}{tt-003V}
+
+\tikz{
+\nat-transf/pasting/abc#draw
+}
+
 }
 }

@@ -280,6 +280,48 @@
   }
 }
 
+\def\nat-transf/pasting/new{
+  \object[self]{
+    [height]{4}
+    [width]{6}
+
+    [fun1nat]{\nat-transf/new}
+    [fun1nat2]{\nat-transf/new}
+
+    [fun2nat]{\nat-transf/new}
+
+    [catopacity]{0}
+
+    [draw]{
+      \begin{tikzpicture}[scale=0.5,baseline=($(nw)!0.5!(se)$)]
+      \CreateRect{\self#width}{\self#height}
+      \path
+        coordinate[label=below:\ensuremath{\self#fun1nat2#cod#name}] (bl) at (spath cs:south 0.33)
+        coordinate[label=above:\ensuremath{\self#fun1nat#dom#name}] (tl) at (spath cs:north 0.33)
+        coordinate[label=below:\ensuremath{\self#fun2nat#cod#name}] (br) at (spath cs:south 0.66)
+        coordinate[label=above:\ensuremath{\self#fun2nat#dom#name}] (tr) at (spath cs:north 0.66);
+      \draw[spath/save=left] (tl) -- (bl);
+      \draw[spath/save=right] (tr) -- (br);
+
+      \path coordinate[label=left:\ensuremath{\self#fun1nat#cod#name}] (fun1mid) at (spath cs:left 0.5);
+      \path coordinate[dot,label=right:\ensuremath{\self#fun1nat#name}] (fun1nat) at (spath cs:left 0.33);
+      \path coordinate[dot,label=right:\ensuremath{\self#fun1nat2#name}] (fun1nat2) at (spath cs:left 0.66);
+      \path coordinate[dot,label=right:\ensuremath{\self#fun2nat#name}] (fun2nat) at (spath cs:right 0.5);
+      \path coordinate (rn) at (fun1nat -| tr);
+
+      \node[between = nw and fun1nat, opacity=\self#catopacity] {$\self#fun1nat#dom#dom#name$};
+      \node[between = fun1nat and tr, opacity=\self#catopacity] {$\self#fun1nat#dom#cod#name$};
+      \node[between = rn and ne, opacity=\self#catopacity] {$\self#fun2nat#dom#cod#name$};
+      \begin{pgfonlayer}{background}
+      \fill[\self#fun1nat#dom#dom#fill] (nw) rectangle (bl);
+      \fill[\self#fun1nat#dom#cod#fill] (tl) rectangle (br);
+      \fill[\self#fun2nat#dom#cod#fill] (tr) rectangle (se);
+      \end{pgfonlayer}
+      \end{tikzpicture}
+    }
+  }
+}
+
 \def\nat-transf/hvcomp/new{
   \object[self]{
     [height]{4}
