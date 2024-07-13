@@ -1,0 +1,41 @@
+\import{tt-macros}
+% clifford hopf spin tt math draft
+\tag{tt}
+
+% definition theorem lemma construction observation
+% convention corollary axiom example exercise proof
+% discussion remark notation
+% \taxon{}
+% \taxon{lemma}\refnotet{}{}{}{
+
+% kostecki2011introduction leinster2016basic nakahira2023diagrammatic 
+
+\taxon{lemma}\refnotet{limits commute with limits}{6.2.8}{leinster2016basic}{
+\p{
+Let #{\I} and #{\J} be small categories. Let #{\C} be a locally small category with limits of shape #{\I} and of shape
+#{\J}.}
+
+\p{Define
+
+##{\begin{array}{llll}
+\fD^{\bullet}: & \I & \to & {[\J, \C]} \\
+& I & \mapsto & \fD(I,-)
+\end{array}}
+
+and
+
+##{\begin{array}{rrrr}
+\fD_{\bullet}: & \J & \to & {[\I, \C]} \\
+& J & \mapsto & \fD(-, J)
+\end{array}}
+}
+
+\p{Then for all #{\fD: \I \times \J \to \C}, we have
+##{
+\lim _{\leftarrow \J} \lim _{\leftarrow \I} \fD^{\bullet} \cong \lim _{\leftarrow \I \J} \fD \cong \lim _{\leftarrow \I \leftarrow \J} \fD_{\bullet}
+}
+and all these limits exist. In particular, #{\C} has limits of shape #{\I \times \J}.
+}
+
+% \p{This is sometimes half-jokingly called Fubini's theorem, as it is something like changing the order of integration in a double integral. The analogy is more appealing with colimits, since, like integrals, colimits can be thought of as a context-sensitive version of sums.}
+}

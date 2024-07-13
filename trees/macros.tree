@@ -346,9 +346,9 @@ so the text size almost matches the size output by native forester code. This do
 
 \p{\code{link[url]}: Linking to a URL without an explicit title.}
 
-\def\link[url]{
-  [⧉](\url)
-}
+\def\link[url]{[⧉](\url)}
+
+\def\citelink[url]{\let\escape[x]{\x}[\escape{[⧉]}](\url)}
 
 \p{\code{quote[body]}: A blockquote.}
 
