@@ -1,0 +1,29 @@
+\import{tt-macros}
+% clifford hopf spin tt math draft
+\tag{tt}
+
+% definition theorem lemma construction observation
+% convention corollary axiom example exercise proof
+% discussion remark notation
+\refdeft{functorial in}{sec. 4.1}{leinster2016basic}{
+\p{
+For some expression #{E(X)} containing #{X}, when we say #{E(X)} is (covariant) \newvocab{functorial in} #{X}, we mean that there exists a functor #{\fF} such that
+
+\tikz{
+\begin{tikzcd}
+	X &&& {E(X)} \\
+	\\
+	{X'} &&& {E(X')}
+	\arrow[""{name=0, anchor=center, inner sep=0}, "f"', from=1-1, to=3-1]
+	\arrow[""{name=1, anchor=center, inner sep=0}, from=1-4, to=3-4]
+	\arrow["\fF", shorten <=20pt, shorten >=20pt, Rightarrow, maps to, from=0, to=1]
+\end{tikzcd}
+}
+
+for every #{f : X \to X'}.
+}
+
+\p{Dually, we use the term \newvocab{contravariantly functorial in}.
+}
+
+}

@@ -12,13 +12,47 @@
 
 \taxon{lemma}\refnotet{limit via representation}{6.1.1}{leinster2016basic}{
 \p{
-Let #{\J} be a small category, #{\C} a category, and #{\fD: \J \to \C} a diagram. Then there is a one-to-one correspondence between limit cones on #{\fD} and representations of the \vocabk{cone functor}{tt-0040}
+Let #{\J} be a small category, #{\C} a category, and #{\fD: \J \to \C} a diagram. Then there is a one-to-one correspondence between
 
-##{\Cone(-, \fD): \C^{op} \to \Set}
-
-with the representing objects of #{\Cone(-, \fD)} being the limit objects (that is, the vertices of the limit cones) of #{\fD}.
+\ul{
+  \li{limit cones on #{\fD}}
+  \li{representations of the natural transformation \vocabk{Cone}{tt-0040}}
 }
 
-\p{Briefly put: a \vocabk{limit}{tt-002A} of #{\fD} is a \vocabk{representation}{tt-001O} of #{[\J, \C] (\Delta_{-}, \fD)}.
+with the representing objects being the limit objects (i.e. the vertices) of #{\fD}.
+
+}
+
+\p{Briefly put: a \vocabk{limit}{tt-002A} #{(V, \pi)} of #{\fD} is a \vocabk{representation}{tt-001O} of #{[\J, \C] (\Delta_{-}, \fD)}.
+}
+
+\p{Schematically,
+\tikz{
+\begin{tikzcd}
+	&&& \anyobj \\
+	\\
+	&&&& V \\
+	J &&&&& \bullet \\
+	\\
+	{J'} &&&&& \bullet \\
+	\J &&& \C
+	\arrow[dashed, from=1-4, to=3-5]
+	\arrow["{\pi_J}", from=3-5, to=4-6]
+	\arrow["{\pi_{J'}}"'{pos=0.2}, shorten >=6pt, from=3-5, to=6-6]
+	\arrow[""{name=0, anchor=center, inner sep=0}, from=4-1, to=6-1]
+	\arrow[""{name=1, anchor=center, inner sep=0}, from=4-6, to=6-6]
+	\arrow[""{name=2, anchor=center, inner sep=0}, "{\Delta_{\anyobj}}"{pos=0.8}, shorten <=12pt, Rightarrow, maps to, from=0, to=1-4]
+	\arrow["{\Delta_V}"{pos=0.8}, shorten <=13pt, Rightarrow, maps to, from=0, to=3-5]
+	\arrow[""{name=3, anchor=center, inner sep=0}, "\fD"', shorten <=17pt, Rightarrow, maps to, from=0, to=1]
+	\arrow["{[\J, \C] (\Delta_{-}, \fD)}"{pos=0.8}, shorten <=5pt, shorten >=5pt, Rightarrow, scaling nfold=3, maps to, from=2, to=3]
+\end{tikzcd}
+}
+}
+
+\p{It implies that
+
+##{\Cone(\anyobj, \fD) \iso \C\left(\anyobj, \lim\limits_{\longleftarrow \J} \fD\right)}
+
+for any #{\anyobj \in \C}.
 }
 }
