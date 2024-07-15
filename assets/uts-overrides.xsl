@@ -27,6 +27,37 @@
         </span>
     </xsl:template> -->
 
+    <xsl:template name="splitlean">
+        <xsl:param name="pText" select="."/>
+        <xsl:param name="sep" select="."/>
+        <xsl:if test="string-length($pText)">
+            <xsl:if test="not($pText=.)">
+                <!-- <xsl:text>,</xsl:text> -->
+            </xsl:if>
+        <a target="_blank" href="https://leanprover-community.github.io/mathlib4_docs/find/#doc/{substring-before(concat($pText,$sep),$sep)}">
+            <!-- <xsl:text>L∃∀N</xsl:text> -->
+            <xsl:value-of select="substring-before(concat($pText,$sep),$sep)" />
+        </a>
+        <xsl:call-template name="splitlean">
+            <xsl:with-param name="pText" select="substring-after($pText, $sep)"/>
+            <xsl:with-param name="sep" select="$sep"/>
+        </xsl:call-template>
+        </xsl:if>
+    </xsl:template>
+
+    <xsl:template match="f:meta[@name='lean']">
+        <span class="meta-lean">
+            <div class="meta-lean-list">
+                <xsl:call-template name="splitlean">
+                    <xsl:with-param name="pText" select="."/>
+                    <xsl:with-param name="sep" select="','"/>
+                </xsl:call-template>
+            </div>
+            <!-- <span class="meta-lean-symbol">✓</span> -->
+            <span class="meta-lean-symbol">L∃∀N</span>
+        </span>
+    </xsl:template>
+
     <!-- Override the addr template -->
     <xsl:template match="f:addr" priority="10">
         <a class="slug" href="{../f:route}">
@@ -60,6 +91,11 @@
             </xsl:choose>
         </xsl:if>
         <!-- uts-end -->
+        <!-- uts-begin -->
+        <!-- match f:meta with attribute lean -->
+        <xsl:if test="../f:meta[@name='lean']">
+            <xsl:apply-templates select="../f:meta[@name='lean']" />
+        </xsl:if>
     </xsl:template>
 
     <!-- uts-begin: Override embeded-tex to be injected SVG to support dark theme, resize etc. -->
@@ -113,6 +149,5 @@
         <xsl:apply-templates select="f:mainmatter" mode="toc" />
     </li>
     </xsl:template>
-    
 
 </xsl:stylesheet>

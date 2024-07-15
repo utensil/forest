@@ -381,3 +381,71 @@ nav#toc li.active {
 /* :root[data-applied-mode="dark"] nav#toc .link.local.active {
     color: color-mix(in srgb, var(--uts-text) 30%, yellow 70%);
 } */
+
+
+/* a.slug {
+    word-break: keep-all;
+} */
+
+.meta-lean {
+    display: block;
+    float: right;
+    height: 2em;
+    width: 5%;
+    cursor: pointer;
+    position: relative;
+    z-index: 1;
+}
+
+/* clearfix hack */
+/* header h1::after {
+    content: "";
+    clear: both;
+    display: table;
+} */
+
+.meta-lean a, .meta-lean-symbol {
+    font-weight: normal;
+    font-family: Fira Code, DejaVu Sans Mono, monospace;
+    font-size: 60%;
+    border-radius: 5px;
+    color: var(--uts-text-gentle) !important;
+    background-color: var(--uts-background) !important;
+    border: var(--uts-text-gentle) 1px solid;
+    padding: 3px 1ex 3px 1ex;
+    margin: 0 0.5ex 1ex 0.5ex;
+    cursor: pointer;
+    float: right;
+}
+
+/* details:hover > summary .meta-lean a {
+    display: inline;
+} */
+
+.meta-lean-symbol {
+    /* margin: 1ex 0.5ex 1ex 0.5ex; */
+    /* cursor: pointer; */
+    /* visibility: hidden; */
+    /* text-align: right; */
+    /* font-weight: normal;
+    font-family: Fira Code, DejaVu Sans Mono, monospace; */
+}
+
+.meta-lean-list {
+    display: none;
+    visibility: hidden;
+}
+
+.meta-lean:hover .meta-lean-list {
+    display: block;
+    visibility: visible;
+}
+
+.meta-lean-list:hover {
+    display: block;
+    visibility: visible;
+}
+
+.meta-lean:hover .meta-lean-symbol {
+    visibility: hidden;
+}
