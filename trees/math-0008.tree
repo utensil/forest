@@ -10,8 +10,7 @@
 
 \p{The following is testing string diagram drawing using the example from [Jon Sterling's String diagrams](https://www.jonmsterling.com/jms-00B8.xml) (extensively used in \citek{sterling2023models} and \citek{sterling2023monads}):}
 
-\tikz{
-  \begin{tikzpicture}[scale=0.5]
+\tikzfig{  \begin{tikzpicture}[scale=0.5]
     \CreateRect{7}{4}
 
     \path
@@ -147,8 +146,7 @@
 
 \let\M{\natural-model/new}
 
-\tikz{
-  \M#draw
+\tikzfig{  \M#draw
 }
 
 \let\cat/term{
@@ -173,15 +171,13 @@
   }
 }
 
-\tikz{
-  \cat/C#draw
+\tikzfig{  \cat/C#draw
   \fun/F#draw
 }
 
 % \p{The following is testing string diagram drawing using the example from [LaTeX package "string-diagrams"](https://www.ctan.org/pkg/string-diagrams):}
 
-% \tikz{
-%   \begin{tikzpicture}[scale=0.6]
+% \tikzfig{%   \begin{tikzpicture}[scale=0.6]
 %   \node[box=0/2/0/1] (A) at (-2, 0) {A};
 %   \node[box=0/1/0/2] (B) at (+2, 0) {B};
 %   \node[box=0/1/0/1] (C) at ( 0,+1) {C};
@@ -194,8 +190,7 @@
 %   \end{tikzpicture}
 % }
 
-% \tikz{
-%   \begin{tikzpicture}
+% \tikzfig{%   \begin{tikzpicture}
 %   \node[box=0/1/0/2] (A) at ( 0,+1) {A};
 %   \node[box=0/2/0/1] (B) at ( 0,-1) {B};
 %   \node[dot] (x) at (+1, 0) {};
@@ -212,8 +207,7 @@
 
 \p{The following is testing string diagram drawing using the example from [[marsden2014category]]:}
 
-\tikz{
-  \begin{tikzpicture}[scale=0.5]
+\tikzfig{  \begin{tikzpicture}[scale=0.5]
   \CreateRect{4}{4}
   \fill[catc] (0,0) rectangle (4,4);
   \begin{scope}[on background layer]
@@ -222,8 +216,7 @@
   \end{tikzpicture}
 }
 
-\tikz{
-\begin{tikzpicture}[scale=0.5]
+\tikzfig{\begin{tikzpicture}[scale=0.5]
 \CreateRect{4}{4}
 \path
   coordinate[label=below:$F$] (b) at (spath cs:south 0.5)
@@ -237,8 +230,7 @@
 \end{tikzpicture}
 }
 
-\tikz{
-\begin{tikzpicture}[scale=0.5]
+\tikzfig{\begin{tikzpicture}[scale=0.5]
 \CreateRect{6}{4}
 \path
   coordinate[label=below:$F$] (bl) at (spath cs:south 0.66)
@@ -257,8 +249,7 @@
 \end{tikzpicture}
 }
 
-\tikz{
-\begin{tikzpicture}[scale=0.5]
+\tikzfig{\begin{tikzpicture}[scale=0.5]
 \path coordinate[label=below:$F$] (b) ++(0,2) coordinate[dot, label=right:$\alpha$] (alpha) ++(0,2) coordinate[label=above:$F'$] (t);
 \draw (b) -- (alpha) -- (t);
 \begin{pgfonlayer}{background}
