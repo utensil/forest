@@ -12,15 +12,13 @@
 
 \def\citek[refid]{\let\escape[x]{\x}\<html:span>[class]{link-reference}{[\escape{[\refid]}](\refid)}}
 
-\p{\code{citet[tid][refid]}: Refer to a definition/theorem/page \code{tid} in a reference entry \code{refid} with brackets.}
-
-\def\citet[tid][refid]{\let\escape[x]{\x}\<html:span>[class]{link-reference}[tid]{\tid}[refid]{\refid}{[\escape{[\refid, \tid]}](\refid)}}
-
 \p{\code{mark[body]}: Some yellow background mark text.}
 
 \def\mark[body]{\<html:mark>{\body}}
 
 \alloc\base/tex-preamble
+
+\p{\code{texfig[body]}: A figure rendered by LaTeX.}
 
 \def\texfig[body]{
  \scope{
@@ -32,6 +30,8 @@
  }
 }
 
+\p{\code{proof[body]}: A proof block that's NOT part of the TOC.}
+
 \def\proof[body]{
  \scope{
    \put\transclude/toc{false}
@@ -39,17 +39,6 @@
    \subtree{
      \taxon{proof}
      \body
-   }
- }
-}
-
-\def\collapsed[t][body]{
- \scope{
-   \put\transclude/toc{false}
-    \put\transclude/expanded{false}
-   \subtree{
-      \title{\t}
-      \body
    }
  }
 }
@@ -176,26 +165,13 @@
   }
 }
 
-\p{\code{tikz[a]}: A TikZ graph rendered via LaTeX.}
+\strong{Useful macros we defined}
 
-% \def\tikz[a]{
-%     \tex{
-%       \usepackage{amsmath,amsfonts,amsthm,amssymb}
-%       \usepackage{newpxtext,newpxmath}
-%       \usepackage{tikz-cd}
-%     }{
-%         \startverb
-%         \begin{minipage}{1.0\linewidth}
-%         \begin{figure}[H]
-%         \centering
-%         \stopverb
-%         \a
-%         \startverb
-%         \end{figure}
-%         \end{minipage}
-%         \stopverb
-%     }
-% }
+\p{\code{citet[tid][refid]}: Refer to a definition/theorem/page \code{tid} in a reference entry \code{refid} with brackets.}
+
+\def\citet[tid][refid]{\let\escape[x]{\x}\<html:span>[class]{link-reference}[tid]{\tid}[refid]{\refid}{[\escape{[\refid, \tid]}](\refid)}}
+
+\p{\code{tikz[a]}: A TikZ graph rendered via LaTeX.}
 
 \def\tikz[a]{
     \texfig{
@@ -212,18 +188,10 @@
     }
 }
 
-\p{\code{codeblock[lang][body]}: A code block specifying the language.}
-
-\def\codeblock[lang][body]{
-  \<html:code>[class]{\lang}{\body}
-}
-
-\strong{Useful macros we defined}
-
-\alloc\base/tex-preamble
-
 \p{\code{minitex[body]}: Typesetting LaTeX code in a minipage, with the width of an A5 paper,
 so the text size almost matches the size output by native forester code. This doesn't work very well on mobile yet.}
+
+\alloc\base/tex-preamble
 
 \def\minitex[body]{
  \scope{
@@ -281,7 +249,7 @@ so the text size almost matches the size output by native forester code. This do
   \texnote{\name}{\reference}{\body}
 }
 
-\p{\code{wikiref[name][citeid][pageid]}: A reference to a Wikipedia article.}
+\p{\code{wikiref[name][citeid][pageid][year]}: A reference to a Wikipedia article.}
 
 \def\wikiref[name][citeid][pageid][year]{
   \title{\name - Wikipedia}
@@ -348,6 +316,8 @@ so the text size almost matches the size output by native forester code. This do
 
 \def\link[url]{[⧉](\url)}
 
+\p{\code{citelink[url]}: Linking to a URL without an explicit title, in a citation style (i.e. with brackets).}
+
 \def\citelink[url]{\let\escape[x]{\x}[\escape{[⧉]}](\url)}
 
 \p{\code{quote[body]}: A blockquote.}
@@ -367,19 +337,43 @@ so the text size almost matches the size output by native forester code. This do
   }
 }
 
+\p{\code{collapsed[t][body]}: A block that is collapsed by default and NOT part of the TOC.}
 
+\def\collapsed[t][body]{
+ \scope{
+    \put\transclude/toc{false}
+    \put\transclude/expanded{false}
+    \subtree{
+      \title{\t}
+      \body
+   }
+ }
+}
+
+\p{\code{codeblock[lang][body]}: A code block specifying the language.}
+
+\def\codeblock[lang][body]{
+  \<html:code>[class]{\lang}{\body}
+}
+
+\p{\code{newvocab[x]}: A newly defined term with an emphazised style.}
 
 \def\newvocab[x]{\<html:span>[class]{newvocab}{\x}}
 % htmlClass doesn't work because trust is not set to true
 % see https://github.com/KaTeX/KaTeX/blob/main/docs/options.md
 % \def\newvocab[x]{#{\htmlData{type=newvocab}{\textbf{\x}}}}
+
+\p{\code{vocab[x]}: A previously defined term with a less emphazised style.}
+
 \def\vocab[x]{\<html:span>[class]{vocab}{\x}}
+
+\p{\code{vocabk[x][addr]}: A previously defined term with a less emphazised style and a link to the defining note.}
+
 \def\vocabk[x][addr]{\<html:span>[class]{vocab}{[\x](\addr)}}
 
-% \def\cref[addr]{\<html:span>[class]{cref}{[\addr](\addr)}}
+% \def\cref[addr]{\<html:span>[class]{cref}{[\addr](\addr)}} % this is not required as XSLT can handle local links with or without taxons like cleveref automatically
 
-
-%%fakesection Math symbols
+% Some Math symbols that are common in all topics
 
 \def\CC{\mathbb C}
 \def\FF{\mathbb F}
