@@ -280,12 +280,6 @@ code {
     font-size: unset;
 }
 
-.link-pdf {
-    float: right;
-    text-decoration: none;
-    cursor: pointer;
-}
-
 span.newvocab {
     color:blue;
     font-weight: bold;
@@ -403,6 +397,27 @@ nav#toc li.active {
     clear: both;
     display: table;
 } */
+
+.link-pdf {
+    font-weight: normal;
+    font-size: 80%;
+    border-radius: 5px;
+    color: var(--uts-text-gentle) !important;
+    background-color: var(--uts-background) !important;
+    border: var(--uts-text-gentle) 1px solid;
+    padding: 3px 1ex 3px 1ex;
+    margin: 0 0.5ex 1ex 0.5ex;
+    cursor: pointer;
+    float: right;
+}
+
+.link-pdf span {
+    display: none;
+}
+
+.link-pdf:hover span {
+    display: inline;
+}
 
 .meta-lean a, .meta-lean-symbol {
     font-weight: normal;
