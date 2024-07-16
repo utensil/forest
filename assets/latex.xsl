@@ -277,7 +277,7 @@
   
   <xsl:template match="f:embedded-tex">
     <!-- https://tex.stackexchange.com/a/630191/75671 -->
-    <xsl:text>\unskip \hspace*{\fill} \break</xsl:text>
+    <!-- <xsl:text>\unskip \hspace*{\fill} \break</xsl:text> -->
     <xsl:text>{\centering</xsl:text>
     <!-- https://tex.stackexchange.com/a/550265/75671 -->
     <!-- https://tex.stackexchange.com/a/308876/75671 -->

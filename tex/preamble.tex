@@ -1,23 +1,114 @@
-% From my print.tex
 \usepackage[utf8]{inputenc}
 \usepackage{amsmath,amsfonts,amssymb}
 % e.g. \xmapsto
 \usepackage{mathtools}
-% Extra stuff for Forester
+% e.g. \fatsemi
 \usepackage{stmaryrd}
 \usepackage{mathrsfs}
-\usepackage[textsize=scriptsize,shadow]{todonotes}
+
+%% TOC and Index
+
+\setcounter{tocdepth}{5}
+\setcounter{secnumdepth}{5}
 
 % https://www.overleaf.com/learn/latex/Indices
 % https://tex.stackexchange.com/a/58236/75671
 \usepackage{imakeidx}
 \makeindex[columns=3, title=Alphabetical Index, intoc]
 
+%% Sections and paragraphs
+
+% https://www.overleaf.com/learn/latex/Articles%2FHow_to_change_paragraph_spacing_in_LaTeX#Understanding_\baselinestretch_and_\linespread
+% \renewcommand{\baselinestretch}{1.2}\selectfont
+\linespread{1.1}
+
+% https://www.overleaf.com/learn/latex/Articles%2FHow_to_change_paragraph_spacing_in_LaTeX#The_parskip_package
+\setlength{\parskip}{3ex plus 0.5ex minus 0.2ex}
+\setlength{\parindent}{0cm}
+% \usepackage[skip=3.3ex]{parskip}
+
+% https://tex.stackexchange.com/a/364574/75671
+\newcommand{\subsubsubsection}[1]{\paragraph{#1}\mbox{}\\}
+
+%% Typesetting
+
+\hyphenpenalty=750
+
+\usepackage{microtype}
+\usepackage{xspace}
+\usepackage{xpatch}
+
+% https://tex.stackexchange.com/a/119229/75671
+% \newlength{\mytextsize}
+% \makeatletter
+% \setlength{\mytextsize}{\f@size pt}
+
+%% Colors and graphics
+
+\usepackage[svgnames,dvipsnames]{xcolor}
+% \PassOptionsToPackage{usenames,svgnames,dvipsnames}{xcolor}
+% \usepackage{amsmath,amsfonts,amsthm,amssymb}
+\usepackage{graphicx}
+\DeclareGraphicsExtensions{.svg,.png,.jpg}
+% \usepackage{tikz}
+% \usepackage{tikz-cd}
+% \usetikzlibrary{shapes,arrows,decorations}
+% \usepackage{color}
+
+\usepackage{float} %figure inside minipage
+
+\usepackage[autosize,debug]{dot2texi}
+
+%% Url and cross-references
+
+% \PassOptionsToPackage{hyphens}{url}
+% \usepackage[unicode]{hyperref}
+\usepackage[unicode,pagebackref=true,bookmarksopen=true,bookmarksdepth=5,backref=section,pdfusetitle]{hyperref}
+\hypersetup{
+    bookmarksnumbered=true,     
+    bookmarksopen=true,         
+    bookmarksopenlevel=1, 
+    pdfpagemode=UseOutlines,
+    colorlinks=true,
+    linkcolor={red!50!black},
+    citecolor={green!50!black},
+    urlcolor={blue!80!black}
+}
+% `cleverref`' has to be loaded after `hyperref`
+\usepackage{cleveref}
+\usepackage{backref}
+% % Back refs
+% \renewcommand*{\backrefalt}[4]{%
+%     \ifcase #1 \footnotesize{(Not cited.)}%
+%     \or        \footnotesize{(Cited on page~#2)}%
+%     \else      \footnotesize{(Cited on pages~#2)}%
+%     \fi}
+% Back refs
+\renewcommand*{\backrefalt}[4]{%
+    \ifcase #1 \relax % No citations
+    \or        \footnotesize{(Cited in section~#2)}%
+    \else      \footnotesize{(Cited in sections~#2)}%
+    \fi}
+
+%% Framed boxes for definitions, theorems, remarks etc.
+
+\input{../tex/mdframed}
+% \input{../tex/tcolorbox}
+
+%% Special markups
+
 % https://www.overleaf.com/learn/latex/Typesetting_quotations
 \usepackage{csquotes}
 
+% NOTE: Won't work in web version for roman numerals, but it works well for PDF version
+\usepackage{enumerate}% http://ctan.org/pkg/enumerate
+
+\usepackage[textsize=scriptsize,shadow]{todonotes}
+
 % https://tex.stackexchange.com/questions/383054/biblatex-error-incompatible-backref-package
 % \usepackage[backend=biber]{biblatex}
+
+%% Include tex or graphics
 
 % avoid package load order conflicts etc.
 % otherwise with only
@@ -34,96 +125,11 @@
 \usepackage[mode=tex,subpreambles=true]{standalone}
 % \usepackage[mode=tex,subpreambles=true,print,sort]{standalone}
 
-% \setcounter{tocdepth}{5}
-% \setcounter{secnumdepth}{5}
-
-% https://www.overleaf.com/learn/latex/Articles%2FHow_to_change_paragraph_spacing_in_LaTeX#Understanding_\baselinestretch_and_\linespread
-% \renewcommand{\baselinestretch}{1.2}\selectfont
-\linespread{1.1}
-
-% https://www.overleaf.com/learn/latex/Articles%2FHow_to_change_paragraph_spacing_in_LaTeX#The_parskip_package
-\setlength{\parskip}{3ex plus 0.5ex minus 0.2ex}
-\setlength{\parindent}{0cm}
-% \usepackage[skip=3.3ex]{parskip}
-
-% https://tex.stackexchange.com/a/364574/75671
-\newcommand{\subsubsubsection}[1]{\paragraph{#1}\mbox{}\\}
-% \setcounter{secnumdepth}{4}
-% \setcounter{tocdepth}{4}
-
-% https://tex.stackexchange.com/a/119229/75671
-% \newlength{\mytextsize}
-% \makeatletter
-% \setlength{\mytextsize}{\f@size pt}
-
-% From my preamble/common.tex
-\usepackage[svgnames,dvipsnames]{xcolor}
-% \PassOptionsToPackage{usenames,svgnames,dvipsnames}{xcolor}
-% \usepackage{amsmath,amsfonts,amsthm,amssymb}
-\usepackage{graphicx}
-\DeclareGraphicsExtensions{.svg,.png,.jpg}
-% \usepackage{tikz}
-% \usepackage{tikz-cd}
-% \usetikzlibrary{shapes,arrows,decorations}
-% \usepackage{color} 
-% \PassOptionsToPackage{hyphens}{url}
-% \usepackage[unicode]{hyperref}
-\usepackage[unicode,pagebackref=true,bookmarksopen=true,bookmarksdepth=5,backref=section,pdfusetitle]{hyperref}
-\setcounter{tocdepth}{5}
-\setcounter{secnumdepth}{5}
-\hypersetup{
-    bookmarksnumbered=true,     
-    bookmarksopen=true,         
-    bookmarksopenlevel=1, 
-    pdfpagemode=UseOutlines
-}
-% `cleverref`' has to be loaded after `hyperref`
-\usepackage{cleveref}
-
-% NOTE: Won't work in web version for roman numerals, but it works well for PDF version
-\usepackage{enumerate}% http://ctan.org/pkg/enumerate
+%% Meta information
 
 \date{\today}
 
-% From my preamble/print.tex
-
-\hyphenpenalty=750
-
-\hypersetup{%
-  colorlinks=true,
-  linkcolor={red!50!black},
-  citecolor={green!50!black},
-  urlcolor={blue!80!black}
-}
-
-\usepackage{microtype}
-
-\usepackage{xspace}
-\usepackage{xpatch}
-
-\usepackage{float} %figure inside minipage
-\usepackage[autosize,debug]{dot2texi}
-
-\usepackage{backref}
-% % Back refs
-% \renewcommand*{\backrefalt}[4]{%
-%     \ifcase #1 \footnotesize{(Not cited.)}%
-%     \or        \footnotesize{(Cited on page~#2)}%
-%     \else      \footnotesize{(Cited on pages~#2)}%
-%     \fi}
-% Back refs
-\renewcommand*{\backrefalt}[4]{%
-    \ifcase #1 \relax % No citations
-    \or        \footnotesize{(Cited in section~#2)}%
-    \else      \footnotesize{(Cited in sections~#2)}%
-    \fi}
-
-\input{../tex/mdframed}
-% \input{../tex/tcolorbox}
-
-% From my macros.tex
-
-%%fakesection Special markers
+%% Special symbols
 
 \usepackage{newunicodechar}
 
@@ -141,7 +147,7 @@
 \newcommand{\newvocab}[1]{\textbf{\color{MidnightBlue} #1}}
 \newcommand{\vocab}[1]{\textbf{#1}}
 
-%%fakesection Math symbols
+%% Math symbols
 
 \newcommand{\CC}{\mathbb C}
 \newcommand{\FF}{\mathbb F}
@@ -171,6 +177,7 @@
 \newcommand\pre{\mathtt{pre}}
 
 %% Category Theory macros
+
 \renewcommand{\AA}{\mathcal A}
 \newcommand{\BB}{\mathcal B}
 \newcommand{\C}{\mathcal C}
@@ -181,5 +188,7 @@
 \DeclareMathOperator{\ran}{ran} % range
 \DeclareMathOperator{\Hom}{Hom} % homomorphism
 \DeclareMathOperator{\End}{End} % endomorphism
+
+%% Code highlighting
 
 \input{../tex/code}
