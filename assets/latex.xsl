@@ -318,4 +318,7 @@
     <xsl:text>\end{displayquote}</xsl:text>
   </xsl:template>
 
+  <xsl:template match="html:span[@class='related']">
+  </xsl:template>
+
 </xsl:stylesheet>
