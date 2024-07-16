@@ -4,7 +4,7 @@ body {
     line-height: 1.55; */
 }
 
-@media only screen and (min-width: 1000px) {
+@media screen {
     body {
         margin-top: 2em;
         transition: ease all .2s;
@@ -23,6 +23,30 @@ body {
     }
 
     #grid-wrapper nav#toc {
+        display: none;
+    }
+}
+
+@media only screen and (min-width: 160ex) {
+    body {
+        margin-top: 2em;
+        transition: ease all .2s;
+    }
+
+    #grid-wrapper {
+        display: grid;
+        grid-template-columns: 100ex;
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 160ex;
+    }
+
+    #grid-wrapper article {
+        max-width: 100ex;
+    }
+
+    #grid-wrapper nav#toc {
+        display: unset;
         max-width: 60ex;
     }
 }
