@@ -321,4 +321,14 @@
   <xsl:template match="html:span[@class='related']">
   </xsl:template>
 
+  <xsl:template match="html:span[@class='todo']">
+    <xsl:text>\todo[uts]{</xsl:text>
+    <xsl:apply-templates />
+    <xsl:text>}</xsl:text>
+  </xsl:template>
+
+  <xsl:template match="html:span[@class='todolist']">
+    <xsl:text>\listoftodos</xsl:text>
+  </xsl:template>
+
 </xsl:stylesheet>

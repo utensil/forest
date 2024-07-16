@@ -5,6 +5,7 @@
                 xmlns:beamer="http://ctan.org/pkg/beamer"
                 xmlns:indenting="jonmsterling:indenting"
                 xmlns:f="http://www.jonmsterling.com/jms-005P.xml"
+                xmlns:html="http://www.w3.org/1999/xhtml"
     >
     
     <!-- <xsl:template name="numbered-taxon">
@@ -156,5 +157,29 @@
         <xsl:apply-templates select="f:mainmatter" mode="toc" />
     </li>
     </xsl:template>
+
+    <!-- <xsl:template match="html:span[@class='todo']" mode="render">
+        <span class="rendered-todo">
+            <xsl:apply-templates />
+        </span>
+    </xsl:template> -->
+    <xsl:template match="html:span[@class='todo']">
+        <span class="todo">
+            <xsl:apply-templates />
+        </span>
+    </xsl:template>
+
+    <!-- uts-begin: extend mainmatter -->
+    <!-- <xsl:template match="f:mainmatter">
+        <div class="tree-content">
+            <xsl:if test="../*/html:span[@class='todo']">
+                <xsl:for-each select="../*/html:span[@class='todo']">
+                    <xsl:apply-templates select="." mode="render" />
+                </xsl:for-each>
+            </xsl:if>
+            <xsl:apply-templates />
+        </div>
+    </xsl:template> -->
+    <!-- uts-end -->
 
 </xsl:stylesheet>
