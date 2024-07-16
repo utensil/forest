@@ -1,0 +1,37 @@
+\import{tt-macros}
+% clifford hopf spin tt math draft
+\tag{tt}
+\tag{draft}
+
+% definition theorem lemma construction observation
+% convention corollary axiom example exercise proof
+% discussion remark notation
+% \taxon{}
+% \taxon{lemma}\refnotet{}{}{}{
+
+% kostecki2011introduction leinster2016basic nakahira2023diagrammatic
+
+\refdeft{subobject classifier}{6.4}{kostecki2011introduction}{
+
+\p{
+A \newvocab{subobject classifier} is an object #{\Omega} in #{\C}, together with an arrow #{\top: \termcat \to \Omega}, called the \newvocab{true arrow}, such that for each monic arrow #{m: Y \mapsto X} there is a \em{unique} arrow #{\chi : X \to \Omega}, called the \newvocab{characteristic arrow} of #{m} (or of #{Y}), such that the diagram
+
+\tikzfig{
+\begin{tikzcd}
+	Y && \termcat \\
+	\\
+	X && \Omega
+	\arrow["{!}", dashed, from=1-1, to=1-3]
+	\arrow["m"', tail, from=1-1, to=3-1]
+	\arrow["\top", tail, from=1-3, to=3-3]
+	\arrow["{\chi}"', dashed, from=3-1, to=3-3]
+\end{tikzcd}
+}
+
+is a \vocabk{pullback}{tt-000V}, where #{!} is the \vocabk{unique functor}{tt-003Z}.
+}
+
+\p{#{\Omega} is also called a \newvocab{generalized truth-value object}.}
+
+\p{The arrow #{(! \cp T) : Y \stackrel{!}{\to} \termcat \monic \Omega} is often denoted as #{\top_Y: Y \to \Omega}.}
+}
