@@ -16,6 +16,10 @@ body {
         margin-right: auto;
     }
 
+    #grid-wrapper article {
+        max-width: 100%;
+    }
+
     #grid-wrapper nav#toc {
         display: none;
     }
@@ -114,13 +118,6 @@ nav#toc a.slug {
     font-weight: normal;
     /* text-decoration-line: unset !important;
     text-decoration-style: unset !important; */
-}
-
-a.slug-source {
-    text-decoration-line: underline;
-    text-decoration-style: dotted;
-    color: var(--uts-text-gentle) !important;
-    font-weight: normal;
 }
 
 /* This applies to references, including in title, main text, backmatter, but not in toc */
@@ -416,30 +413,8 @@ nav#toc li.active {
     display: table;
 } */
 
-.link-pdf {
+.link-source, .link-pdf, .meta-lean a, .meta-lean-symbol {
     font-weight: normal;
-    font-size: 80%;
-    border-radius: 5px;
-    color: var(--uts-text-gentle) !important;
-    background-color: var(--uts-background) !important;
-    border: var(--uts-text-gentle) 1px solid;
-    padding: 3px 1ex 3px 1ex;
-    margin: 0 0.5ex 1ex 0.5ex;
-    cursor: pointer;
-    float: right;
-}
-
-.link-pdf span {
-    display: none;
-}
-
-.link-pdf:hover span {
-    display: inline;
-}
-
-.meta-lean a, .meta-lean-symbol {
-    font-weight: normal;
-    font-family: Fira Code, DejaVu Sans Mono, monospace;
     font-size: 60%;
     border-radius: 5px;
     color: var(--uts-text-gentle) !important;
@@ -449,6 +424,19 @@ nav#toc li.active {
     margin: 0 0.5ex 1ex 0.5ex;
     cursor: pointer;
     float: right;
+}
+
+.link-source span, .link-pdf span {
+    display: none;
+    margin-left: 1ex;
+}
+
+.link-source:hover span, .link-pdf:hover span {
+    display: inline;
+}
+
+.meta-lean a, .meta-lean-symbol, .link-source span, .link-pdf span {
+    font-family: Fira Code, DejaVu Sans Mono, monospace;
 }
 
 /* details:hover > summary .meta-lean a {

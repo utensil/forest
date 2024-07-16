@@ -69,23 +69,27 @@
         <xsl:if test="../f:addr=/f:tree/f:frontmatter/f:addr">
             <xsl:choose>
                 <xsl:when test="../f:taxon[text()='Person']">
-                <a class="slug-source" href="https://github.com/utensil/forest/blob/main/trees/people/{../f:addr}.tree">
-                    <xsl:text>[source]</xsl:text>
+                <a class="link-source" href="https://github.com/utensil/forest/blob/main/trees/people/{../f:addr}.tree">
+                    <xsl:text>✍️</xsl:text>
+                    <span>source</span>
                 </a>
                 </xsl:when>
                 <xsl:when test="../f:taxon[text()='Reference']">
-                <a class="slug-source" href="https://github.com/utensil/forest/blob/main/trees/refs/{../f:addr}.tree">
-                    <xsl:text>[source]</xsl:text>
+                <a class="link-source" href="https://github.com/utensil/forest/blob/main/trees/refs/{../f:addr}.tree">
+                    <xsl:text>✍️</xsl:text>
+                    <span>source</span>
                 </a>
                 </xsl:when>
                 <xsl:when test="../f:taxon[text()='Proof']">
-                <a class="slug-source" href="https://github.com/utensil/forest/blob/main/trees/{../../f:backmatter/f:context/f:tree/f:frontmatter/f:addr}.tree">
-                    <xsl:text>[source]</xsl:text>
+                <a class="link-source" href="https://github.com/utensil/forest/blob/main/trees/{../../f:backmatter/f:context/f:tree/f:frontmatter/f:addr}.tree">
+                    <xsl:text>✍️</xsl:text>
+                    <span>source</span>
                 </a>
                 </xsl:when>
                 <xsl:otherwise>
-                <a class="slug-source" href="https://github.com/utensil/forest/blob/main/trees/{../f:addr}.tree">
-                    <xsl:text>[source]</xsl:text>
+                <a class="link-source" href="https://github.com/utensil/forest/blob/main/trees/{../f:addr}.tree">
+                    <xsl:text>✍️</xsl:text>
+                    <span>source</span>
                 </a>
                 </xsl:otherwise>
             </xsl:choose>
@@ -93,7 +97,7 @@
         <!-- uts-end -->
         <!-- uts-begin -->
         <xsl:if test="../f:meta[@name='pdf']">
-            <a target="_blank" class="link-pdf" href="{../f:addr}.pdf">📄<span> PDF</span></a>
+            <a target="_blank" class="link-pdf" href="{../f:addr}.pdf">📄<span>PDF</span></a>
         </xsl:if>
         <xsl:if test="../f:meta[@name='lean']">
             <xsl:apply-templates select="../f:meta[@name='lean']" />
