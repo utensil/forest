@@ -33,10 +33,17 @@
       <xsl:text>&#xa;</xsl:text>
     </xsl:for-each>
 
-    <xsl:apply-templates select="/f:tree/f:backmatter/f:references" />
+    <xsl:text>&#xa;</xsl:text>
+    <xsl:text>\begin{filecontents*}[overwrite]{\jobname.bib}</xsl:text>
+    <xsl:text>&#xa;</xsl:text>
+    <xsl:apply-templates select="/f:tree/f:backmatter//f:tree[f:frontmatter/f:taxon[text()='Reference']]" />
+    <xsl:text>&#xa;</xsl:text>
+    <xsl:text>\end{filecontents*}</xsl:text>
+    <xsl:text>&#xa;</xsl:text>
+    
     <xsl:text>\maketitle</xsl:text>
     <xsl:apply-templates select="/f:tree/f:mainmatter" />
-    <xsl:if test="count(/f:tree/f:backmatter/f:references/f:tree)>0">
+    <xsl:if test="count(/f:tree/f:backmatter//f:tree[f:frontmatter/f:taxon[text()='Reference']])>0">
       <!-- https://www.bibtex.com/s/bibliography-style-acmart-acm-reference-format/ -->
       <xsl:text>\bibliographystyle{ACM-Reference-Format}</xsl:text>
       <!-- https://www.bibtex.com/s/bibliography-style-misc-amsalpha/ -->

@@ -5,14 +5,8 @@
                 xmlns:html="http://www.w3.org/1999/xhtml"
                 xmlns:f="http://www.jonmsterling.com/jms-005P.xml">
   
-  <xsl:template match="/f:tree/f:backmatter/f:references">
-    <xsl:text>&#xa;</xsl:text>
-    <xsl:text>\begin{filecontents*}[overwrite]{\jobname.bib}</xsl:text>
-    <xsl:text>&#xa;</xsl:text>
-    <xsl:apply-templates select="f:tree/f:frontmatter/f:meta[@name='bibtex']" />
-    <xsl:text>&#xa;</xsl:text>
-    <xsl:text>\end{filecontents*}</xsl:text>
-    <xsl:text>&#xa;</xsl:text>
+  <xsl:template match="/f:tree/f:backmatter//f:tree[f:frontmatter/f:taxon[text()='Reference']]">
+    <xsl:apply-templates select="f:frontmatter/f:meta[@name='bibtex']" />
   </xsl:template>
   
   <xsl:template match="f:frontmatter" mode="top">
@@ -94,7 +88,7 @@
   </xsl:template>
   
   <!-- use mdframed begin -->
-  <xsl:template match="f:tree[f:frontmatter/f:taxon[not(text()='Proof')]]">
+  <xsl:template match="f:tree[f:frontmatter/f:taxon[not(text()='Proof' or (ancestor::f:backmatter))]]">
     <xsl:text>\begin{</xsl:text>
     <xsl:apply-templates select="f:frontmatter/f:taxon" />
     <xsl:text>}</xsl:text>
@@ -244,7 +238,7 @@
         <xsl:apply-templates />
         <xsl:text>}</xsl:text>
       </xsl:when>
-      <xsl:when test="/f:tree/f:backmatter/f:references/f:tree/f:frontmatter[f:addr/text()=current()/@addr]">
+      <xsl:when test="/f:tree/f:backmatter//f:tree/f:frontmatter[f:taxon/text()='Reference' and f:addr/text()=current()/@addr]">
         <xsl:text>{\sloppy\cite</xsl:text>
         <xsl:if test="../@tid">
           <xsl:text>[</xsl:text>

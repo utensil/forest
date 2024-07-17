@@ -33,7 +33,14 @@
       <xsl:text>&#xa;</xsl:text>
     </xsl:for-each>
 
-    <xsl:apply-templates select="/f:tree/f:backmatter/f:references" />
+    <xsl:text>&#xa;</xsl:text>
+    <xsl:text>\begin{filecontents*}[overwrite]{\jobname.bib}</xsl:text>
+    <xsl:text>&#xa;</xsl:text>
+    <xsl:apply-templates select="/f:tree/f:backmatter//f:tree[f:frontmatter/f:taxon[text()='Reference']]" />
+    <xsl:text>&#xa;</xsl:text>
+    <xsl:text>\end{filecontents*}</xsl:text>
+    <xsl:text>&#xa;</xsl:text>
+    
     <xsl:text>\frontmatter\maketitle\tableofcontents\mainmatter</xsl:text>
     <xsl:apply-templates select="/f:tree/f:mainmatter" />
     <xsl:text>\backmatter</xsl:text>
