@@ -1,0 +1,43 @@
+\import{tt-macros}
+% clifford hopf spin tt math draft
+\tag{tt}
+
+% definition theorem lemma construction observation
+% convention corollary axiom example exercise proof
+% discussion remark notation
+% \taxon{}
+% \taxon{lemma}\refnotet{}{}{}{
+
+% kostecki2011introduction leinster2016basic nakahira2023diagrammatic
+
+\title{Lost notes}
+
+\p{The following are normal leaf notes that are not transcluded by any note, and are not captured by [[math-0001]], thus might be lost.
+}
+
+\scope{
+  \open\query
+  \open\rel
+  \def\query/root{
+    \union{\tag{root}}{\tag{notes}}
+  }
+  \def\query/root/transcluded{
+    \union-fam{\query/root}{\paths}{\outgoing}{\transclusion}
+  }
+  \def\query/has/home{
+    \union{\query/root}{\query/root/transcluded}
+  }
+  \def\query/normal{
+    \compl{
+      \union{\query/root}{\tag{draft}}{\tag{macro}}{\taxon{person}}{\taxon{reference}}
+    }
+  }
+  \def\query/lost{
+    \isect{\query/normal}{\compl{\query/has/home}}
+  }
+  \query{
+    \open\query
+    \lost
+  }
+}
+
