@@ -16,26 +16,8 @@
   % \put\transclude/metadata{true}
   % \put\transclude/expanded{true}
   \query{
-      \query/and{
-        \query/tag{draft}
-        \query/not{
-          \query/tag{tt}
-        }
-        % \query/or{
-        %   \query/taxon{definition}
-        %   \query/taxon{theorem}
-        %   \query/taxon{lemma}
-        %   \query/taxon{construction}
-        %   \query/taxon{observation}
-        %   \query/taxon{convention}
-        %   \query/taxon{corollary}
-        %   \query/taxon{axiom}
-        %   \query/taxon{example}
-        %   \query/taxon{exercise}
-        %   \query/taxon{proof}
-        %   \query/taxon{remark}
-        % }
-      }
+      \open\query
+      \isect{\tag{draft}}{\compl{\tag{tt}}}
   }
 }
 

@@ -49,96 +49,72 @@
 
 \def\make-topic-bibliography[topic]{
   \subtree{
-    \title{accepted papers}
-    \query{
-      \query/and{
-        \query/taxon{reference}
-        \query/tag{accepted}
-        \query/tag{\topic}
-      }
-    }
+   \title{accepted papers}
+   \query{
+    \open\query
+    \isect{\tag{\topic}}{\taxon{reference}}{\tag{accepted}}
+   }
   }
 
   \subtree{
-    \title{refereed papers}
-    \query{
-      \query/and{
-        \query/taxon{reference}
-        \query/tag{refereed}
-        \query/tag{\topic}
-      }
-    }
+   \title{refereed papers}
+   \query{
+    \open\query
+    \isect{\tag{\topic}}{\taxon{reference}}{\tag{refereed}}
+   }
   }
 
   \subtree{
-    \title{manuscripts}
-    \query{
-      \query/and{
-        \query/taxon{reference}
-        \query/tag{preprint}
-        \query/tag{\topic}
-      }
-    }
+   \title{manuscripts}
+   \query{
+    \open\query
+    \isect{\tag{\topic}}{\taxon{reference}}{\tag{preprint}}{\compl{\tag{accepted}}}
+   }
   }
 
   \subtree{
-    \title{dissertations}
-    \query{
-      \query/and{
-        \query/taxon{reference}
-        \query/tag{dissertation}
-        \query/tag{\topic}
-      }
-    }
+   \title{dissertations}
+   \query{
+    \open\query
+    \isect{\tag{\topic}}{\taxon{reference}}{\tag{dissertation}}
+   }
   }
 
   \subtree{
-    \title{technical reports}
-    \query{
-      \query/and{
-        \query/taxon{reference}
-        \query/tag{techreport}
-        \query/tag{\topic}
-      }
-    }
+   \title{technical reports}
+   \query{
+    \open\query
+    \isect{\tag{\topic}}{\taxon{reference}}{\tag{techreport}}
+   }
   }
 
   \subtree{
-    \title{presentations}
-    \query{
-      \query/and{
-        \query/or{
-         \query/and{
-          \query/tag{workshop}
-          \query/taxon{reference}
-         }
-         \query/taxon{presentation}
-        }
-        \query/tag{\topic}
-      }
+   \title{presentations}
+   \query{
+    \open\query
+    \isect{\tag{\topic}}{
+     \union{
+      \isect{\tag{workshop}}{\taxon{reference}}
+     }{\taxon{presentation}}
     }
+   }
   }
 
 
   \subtree{
-    \title{seminar talks}
-    \query{
-      \query/and{
-        \query/taxon{reference}
-        \query/tag{seminar}
-        \query/tag{\topic}
-      }
-    }
+   \title{seminar talks}
+   \query{
+    \open\query
+    \isect{\tag{\topic}}{\taxon{reference}}{\tag{seminar}}
+   }
   }
 
   \subtree{
-    \title{roladex}
-    \query{
-      \query/and{
-        \query/taxon{person}
-        \query/tag{\topic}
-      }
-    }
+   \title{roladex}
+   \query{
+    \open\query
+    \isect{\taxon{person}}{\tag{\topic}}
+   }
   }
 }
 
