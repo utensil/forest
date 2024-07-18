@@ -325,4 +325,27 @@
     <xsl:text>\listoftodos</xsl:text>
   </xsl:template>
 
+  <xsl:template match="html:table">
+    <xsl:text>\begin{tabular}{</xsl:text>
+    <xsl:for-each select="html:thead/html:tr/html:th">
+        <xsl:text> c </xsl:text>
+    </xsl:for-each>
+    <xsl:text>}</xsl:text>
+    <xsl:text>\toprule&#xa;</xsl:text>
+    <xsl:for-each select="html:thead/html:tr/html:th">
+        <xsl:if test="position() > 1"><xsl:text> &amp; </xsl:text></xsl:if>
+        <xsl:apply-templates />
+    </xsl:for-each>
+    <xsl:text> \\ \midrule&#xa;</xsl:text>
+    <xsl:for-each select="html:tbody/html:tr">
+        <xsl:for-each select="html:td">
+            <xsl:if test="position() > 1"><xsl:text> &amp; </xsl:text></xsl:if>
+            <xsl:apply-templates />
+        </xsl:for-each>
+        <xsl:text> \\&#xa;</xsl:text>
+    </xsl:for-each>
+    <xsl:text>\bottomrule&#xa;</xsl:text>
+    <xsl:text>\end{tabular}</xsl:text>
+  </xsl:template>
+
 </xsl:stylesheet>
