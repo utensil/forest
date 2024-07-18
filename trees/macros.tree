@@ -43,6 +43,36 @@
  }
 }
 
+\p{\code{table[body]}: A table.}
+
+\def\table[body]{
+  \<html:table>{\body}
+}
+
+\p{\code{tr[body]}: A table row.}
+
+\def\tr[body]{
+  \<html:tr>{\body}
+}
+
+\p{\code{td[body]}: A table cell.}
+
+\def\td[body]{
+  \<html:td>{\body}
+}
+
+\p{\code{th[body]}: A table header.}
+
+\def\th[body]{
+  \<html:th>{\body}
+}
+
+\p{\code{hr}: A horizontal rule.}
+
+\def\hr{
+  \<html:hr>{}
+}
+
 \strong{Useful macros based on [[jonmsterling]]'s [Public bibliographies](https://www.jonmsterling.com/jms-005X.xml)}
 
 \p{\code{make-topic-bibliography[topic]}: A bibliography of papers, presentations, and people related to a topic.}
@@ -184,11 +214,17 @@ so the text size almost matches the size output by native forester code. This do
  }
 }
 
+\p{\code{note[name][body]}: A note.}
+
+\def\note[name][body]{
+    \title{\name}
+    \body
+}
+
 \p{\code{refnote[name][reference][body]}: A note with a reference.}
 
 \def\refnote[name][reference][body]{
-  \title{\name \citek{\reference}}
-  \body
+  \note{\name \citek{\reference}}{\body}
 }
 
 \p{\code{refnotet[name][tid][reference][body]}: A note with a reference.}
