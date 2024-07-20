@@ -15,6 +15,7 @@
 \def\eqtag[eqno][body]{
   \let\eqid{\get\current-refid\eqno}
   \put\transclude/numbered{false}
+  \put\transclude/expanded{true} % not working yet
   \subtree[eqid]{
     \taxon{eq}
     ##{\body \verb~|\tag{~\eqno\verb~|}~}
