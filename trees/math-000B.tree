@@ -7,18 +7,28 @@
 % discussion remark notation
 % \taxon{}
 
-\title{Testing equation tagging and referencing}
+\title{Test equation tagging and referencing}
 
 % https://todo.sr.ht/~jonsterling/forester/70
 % \put?\current-refid{leinster2016basic}
 
-% \def\eqref[eqno]{
-%   \let\eqid{\get\current-refid\eqno}
-%   \subtree[\eqid]{
-%     \taxon{eq}
-%     \body
-%   }
-% }
+\def\eqtag[eqno][body]{
+  \let\eqid{\get\current-refid\eqno}
+  \put\transclude/numbered{false}
+  \subtree[eqid]{
+    \taxon{eq}
+    ##{\body \verb~|\tag{~\eqno\verb~|}~}
+  }
+}
+
+\def\eqtag2[eqno][body]{
+  \let\eqid{\get\current-refid\eqno}
+  \put\transclude/numbered{false}
+  \subtree[eqid2]{
+    \taxon{eq}
+    ##{\body \verb~|\tag{~\eqno\verb~|}~}
+  }
+}
 
 \p{Inspired by [thosgood/fga](https://github.com/thosgood/fga).}
 
@@ -26,8 +36,17 @@
 
 \subtree[math-eq-1.1]{
   \taxon{eq}
-  ##{E = m c^2 \verb>>>|\tag{>>>math-eq-1.1\verb>>>|}>>>}
+  ##{E = m c^2 \verb*|\tag{*math-eq-1.1\verb*|}*}
 }
 
-\p{Now we refer to \ref{math-eq-1.1}.}
+\eqtag{1.2}{E = m c^2}
+
+\eqtag2{1.3}{E = m c^2}
+
+\subtree[math-eq-1.4]{
+  \taxon{eq}
+  ##{E = m c^2 \verb*|\tag{*math-eq-1.4\verb*|}*}
+}
+
+\p{Now we refer to \ref{math-eq-1.1}, \ref{eqid}.}
 }
