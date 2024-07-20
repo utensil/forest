@@ -1,0 +1,35 @@
+\import{tt-macros}
+% clifford hopf spin tt math draft
+\tag{tt}
+\tag{draft}
+
+% definition theorem lemma construction observation
+% convention corollary axiom example exercise proof
+% discussion remark notation
+% \taxon{}
+% \taxon{lemma}\refnotet{}{}{}{
+
+% kostecki2011introduction leinster2016basic nakahira2023diagrammatic rosiak2022sheaf
+
+\taxon{lemma}\refnotet{initial and terminal objects via adjunction}{2.1.9}{leinster2016basic}{
+
+\p{
+Initial and terminal objects can be described as adjoints. Let #{\C} be a category. There exist the \vocab{unique functor} #{\fUniq : \C \to \termcat}, and a \vocab{constant object functor} #{X : 1 \to \C} for each object #{X}.
+}
+
+\p{A \vocab{left adjoint} to #{\fUniq} is exactly an \vocab{initial object} of #{\C}:
+
+##{ \initobj \dashv \  \fUniq : \termcat \rightleftarrows \C }
+}
+
+\p{Similarly, a \vocab{right adjoint} to #{\fUniq} is exactly a \vocab{terminal object} of #{\C}:
+
+##{ \fUniq \dashv \termobj : \C \rightleftarrows \termcat }
+}
+
+\proof{In both cases, being an adjunction gives an isomorphism for each object #{X}, one side of the isomorphism is #{\termcat(\uniqobj, \uniqobj)} which is just #{\id_{\uniqobj}}, and the other side are #{\C(\initobj, X)} or #{\C(X, \termobj)}, and the isomorphism establishes the uniqueness of the arrows (from #{\initobj} or to #{\termobj}) for each object. The initial or terminal object exists if the corresponding adjunction exists.
+}
+
+}
+
+\related{\ref{tt-000I}\ref{tt-001Q}\ref{tt-003Z}\ref{tt-003H}}
