@@ -407,6 +407,42 @@ so the text size almost matches the size output by native forester code. This do
 
 \def\todolist{\<html:span>[class]{todolist}{}}
 
+\def\langblock[symbol][body]{
+  \<html:span>[class]{langblock}{
+    \<html:span>[class]{langblock-symbol}{\symbol}
+    \<html:span>[class]{langblock-body}{\body}
+  }
+}
+
+\alloc\translation/src
+\alloc\translation/dst
+
+\def\translation/tp[dst-content][src-content]{
+  \put?\translation/src{🇫🇷}
+  \put?\translation/dst{🇺🇸}
+  \let\src{\get\translation/src}
+  \let\dst{\get\translation/dst}
+
+  \p{
+    \dst-content
+
+    \put\transclude/expanded{false}
+
+    \langblock{\src}{
+      \src-content
+    }
+  }
+}
+
+\def\translation/tsec[dst-content][src-content][body]{
+  \put?\translation/src{🇫🇷}
+  \put?\translation/dst{🇺🇸}
+  \let\src{\get\translation/src}
+  \let\dst{\get\translation/dst}
+
+  \block{\dst-content \langblock{\src}{\src-content}}{\body}
+}
+
 % \def\cref[addr]{\<html:span>[class]{cref}{[\addr](\addr)}} % this is not required as XSLT can handle local links with or without taxons like cleveref automatically
 
 % Some Math symbols that are common in all topics

@@ -21,14 +21,14 @@ with open(TREE, 'r+') as file:
     content = re.sub(r'\\item (.*)', r'\\li{\1}', content)
     content = re.sub(r'\\ii (.*)', r'\\li{\1}', content)
 
-    # Replace inline math `$...$` with `#{...}`
-    content = re.sub(r'\$([^$]+)\$', r'#{\1}', content)
-
     # Replace all line breaks to `\r` to handle multiline replacements
     content.replace('\n', '\r')
 
     # Replace display math `$$...$$` with `##{...}`
     content = re.sub(r'\$\$([^$]+)\$\$', r'##{\1}', content)
+
+    # Replace inline math `$...$` with `#{...}`
+    content = re.sub(r'\$([^$]+)\$', r'#{\1}', content)
 
     # Replace LaTeX block openning with a forester block openning, plus a paragraph openning
     # Particularly, this introduce a line break after the block openning

@@ -488,3 +488,38 @@ nav#toc li.active {
     content: "TODO: ";
     font-weight: bold;
 }
+
+.langblock {
+    display: none;
+}
+
+.langblock-body {
+    font-style: italic;
+    font-size: 90%;
+    font-weight: normal;
+    color: var(--uts-text-gentle);
+}
+
+.show-langblock .langblock {
+    margin-left: 1em;
+    display: block;
+}
+
+.show-langblock h1 .langblock {
+    margin-left: 0em;
+    display: inline;
+}
+
+button#langblock-toggle {
+    font-size: 26px;
+    margin: auto 4px;
+    cursor: pointer;
+    adding: 0;
+    font: inherit;
+    background: 0 0;
+    border: 0;
+}
+
+:root[data-applied-mode="dark"] #langblock-toggle svg {
+    filter: invert(0.85);
+}
