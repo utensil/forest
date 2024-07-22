@@ -14,6 +14,10 @@ async function loadJson(url) {
 
 document.addEventListener('DOMContentLoaded', async () => {
 
+    const code_tags = document.querySelectorAll('article code')
+
+    if(code_tags.length == 0) return
+
     // https://github.com/PaulOlteanu/Railscasts-Renewed/blob/master/themes/Railscasts-Renewed.json
     const railscastsjson = await loadJson('https://cdn.jsdelivr.net/gh/PaulOlteanu/Railscasts-Renewed@master/themes/Railscasts-Renewed.json')
 
@@ -25,7 +29,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         let theme = isDark ? 'aurora-x' : 'one-light' // 'ayu-dark' //'aurora-x'
         let themes = ['aurora-x', 'one-light']
 
-        document.querySelectorAll('code').forEach(async code => {
+        code_tags.forEach(async code => {
             let lang = code.getAttribute('class')
             if(!lang) return
 
