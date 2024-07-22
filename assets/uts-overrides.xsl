@@ -70,25 +70,25 @@
         <xsl:if test="../f:addr=/f:tree/f:frontmatter/f:addr">
             <xsl:choose>
                 <xsl:when test="../f:taxon[text()='Person']">
-                <a class="link-source" href="https://github.com/utensil/forest/blob/main/trees/people/{../f:addr}.tree">
+                <a class="link-source" title="source" href="https://github.com/utensil/forest/blob/main/trees/people/{../f:addr}.tree">
                     <xsl:text>✍️</xsl:text>
                     <span>source</span>
                 </a>
                 </xsl:when>
                 <xsl:when test="../f:taxon[text()='Reference']">
-                <a class="link-source" href="https://github.com/utensil/forest/blob/main/trees/refs/{../f:addr}.tree">
+                <a class="link-source" title="source" target="_blank" href="https://github.com/utensil/forest/blob/main/trees/refs/{../f:addr}.tree">
                     <xsl:text>✍️</xsl:text>
                     <span>source</span>
                 </a>
                 </xsl:when>
                 <xsl:when test="../f:taxon[text()='Proof']">
-                <a class="link-source" href="https://github.com/utensil/forest/blob/main/trees/{../../f:backmatter/f:context/f:tree/f:frontmatter/f:addr}.tree">
+                <a class="link-source" title="source" target="_blank" href="https://github.com/utensil/forest/blob/main/trees/{../../f:backmatter/f:context/f:tree/f:frontmatter/f:addr}.tree">
                     <xsl:text>✍️</xsl:text>
                     <span>source</span>
                 </a>
                 </xsl:when>
                 <xsl:otherwise>
-                <a class="link-source" href="https://github.com/utensil/forest/blob/main/trees/{../f:addr}.tree">
+                <a class="link-source" title="source" target="_blank" href="https://github.com/utensil/forest/blob/main/trees/{../f:addr}.tree">
                     <xsl:text>✍️</xsl:text>
                     <span>source</span>
                 </a>
