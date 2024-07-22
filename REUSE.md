@@ -1,4 +1,4 @@
-This example forest bundles code that was written by Jonathan Sterling with (minified) components from the KaTeX project, as well as webfonts for [Inria Sans](https://github.com/BlackFoundryCom/InriaFonts).
+This repo was based on example forest bundles code that was written by Jonathan Sterling with (minified) components from the KaTeX project, as well as webfonts for [Inria Sans](https://github.com/BlackFoundryCom/InriaFonts).
 
 1. Distributed under the CC0 License are the files `assets/forest.xsl`,
 `assets/forester.js`, `assets/forester.sty`, `assets/style.css`,
@@ -11,3 +11,4 @@ under the `trees` directory.
 3. Distributed under the Open Font License are all the Inria Sans font files in
 the `assets/fonts` directory.
 
+Any other code in this repo are distributed under the MIT License, and any contents are distributed under the CC0 License.
