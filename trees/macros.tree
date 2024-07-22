@@ -164,8 +164,8 @@
 
 \p{\code{block[tit][body]}: A block that is part of the TOC.}
 
-\def\block[tit][body]{
-    \subtree{
+\def\block[tit][body]{%
+    \subtree{%
       \title{\tit}
       \body
     }
@@ -407,43 +407,34 @@ so the text size almost matches the size output by native forester code. This do
 
 \def\todolist{\<html:span>[class]{todolist}{}}
 
-\def\langblock[symbol][body]{
-  \<html:span>[class]{langblock}{
-    \<html:span>[class]{langblock-symbol}{\symbol}
-    \<html:span>[class]{langblock-body}{\body}
-  }
+\def\langblock[symbol][body]{%
+  \<html:span>[class]{langblock}{\<html:span>[class]{langblock-symbol}{\symbol} \<html:span>[class]{langblock-body}{\body}}
 }
 
 \alloc\translation/src
 \alloc\translation/dst
 
-\def\translation/tp[dst-content][src-content]{
+\def\translation/tp[dst-content][src-content]{%
   \put?\translation/src{🇫🇷}
   \put?\translation/dst{🇺🇸}
   \let\src{\get\translation/src}
   \let\dst{\get\translation/dst}
-
-  \p{
+  \p{%
     \dst-content
-
     \put\transclude/expanded{false}
-
-    \langblock{\src}{
-      \src-content
-    }
+    \langblock{\src}{\src-content}
   }
 }
 
-\def\translation/tsec[dst-content][src-content][body]{
+\def\translation/tsec[dst-content][src-content][body]{%
   \put?\translation/src{🇫🇷}
   \put?\translation/dst{🇺🇸}
   \let\src{\get\translation/src}
   \let\dst{\get\translation/dst}
-
   \block{\dst-content \langblock{\src}{\src-content}}{\body}
 }
 
-\def\translation/ttitle[dst-content][src-content]{
+\def\translation/ttitle[dst-content][src-content]{%
   \put?\translation/src{🇫🇷}
   \put?\translation/dst{🇺🇸}
   \let\src{\get\translation/src}
@@ -453,6 +444,10 @@ so the text size almost matches the size output by native forester code. This do
 
 \def\eqtag[eqno][equation]{
   ##{\equation \verb*|\tag{*\eqno\verb*|}*}
+}
+
+\def\eqnotag[equation]{
+  ##{\equation \verb*|\notag*}
 }
 
 % \def\cref[addr]{\<html:span>[class]{cref}{[\addr](\addr)}} % this is not required as XSLT can handle local links with or without taxons like cleveref automatically

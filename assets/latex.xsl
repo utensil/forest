@@ -348,4 +348,10 @@
     <xsl:text>\end{tabular}</xsl:text>
   </xsl:template>
 
+  <xsl:template match="html:span[@class='langblock']">
+    <xsl:text>{\small \em \color{gray}</xsl:text>
+    <xsl:apply-templates />
+    <xsl:text>}</xsl:text>
+  </xsl:template>
+
 </xsl:stylesheet>
