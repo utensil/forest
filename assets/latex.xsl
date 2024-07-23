@@ -89,6 +89,9 @@
   
   <!-- use mdframed begin -->
   <xsl:template match="f:tree[f:frontmatter/f:taxon[not(text()='Proof' or (ancestor::f:backmatter))]]">
+    <!-- <xsl:text>\reversemarginpar\marginpar{</xsl:text>
+    <xsl:apply-templates select="f:frontmatter/f:addr" />
+    <xsl:text>}</xsl:text> -->
     <xsl:text>\begin{</xsl:text>
     <xsl:apply-templates select="f:frontmatter/f:taxon" />
     <xsl:text>}</xsl:text>
