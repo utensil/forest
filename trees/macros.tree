@@ -252,26 +252,33 @@ so the text size almost matches the size output by native forester code. This do
   \refnote{\name}{\reference}{\minitex{\body}}
 }
 
+\p{\code{card[taxa][name][body]}: A card.}
+
+\def\card[taxa][name][body]{\taxon{\taxa}\note{\name}{\body}}
+
+\p{\code{refcard[taxa][name][reference][body]}: A card with a reference.}
+
+\def\refcard[taxa][name][reference][body]{\taxon{\taxa}\refnote{\name}{\reference}{\body}}
+
+\p{\code{cardt[taxa][name][tid][body]}: A card with a reference to a definition/theorem/page.}
+
+\def\refcardt[taxa][name][tid][reference][body]{\taxon{\taxa}\refnotet{\name}{\tid}{\reference}{\body}}
+
+\p{\code{texcard[taxa][name][reference][body]}: A \code{minitex} card with a reference.}
+
+\def\texcard[taxa][name][reference][body]{\refcard{\taxa}{\name}{\reference}{\minitex{\body}}}
+
 \p{\code{refdef[name][reference][body]}: A definition with a reference.}
 
-\def\refdef[name][reference][body]{
-  \taxon{definition}
-  \refnote{\name}{\reference}{\body}
-}
+\def\refdef[name][reference][body]{\refcard{definition}{\name}{\reference}{\body}}
 
 \p{\code{refdeft[name][tid][reference][body]}: A definition with a reference to a definition/theorem/page.}
 
-\def\refdeft[name][tid][reference][body]{
-  \taxon{definition}
-  \refnotet{\name}{\tid}{\reference}{\body}
-}
+\def\refdeft[name][tid][reference][body]{\refcardt{definition}{\name}{\tid}{\reference}{\body}}
 
 \p{\code{texdef[name][reference][body]}: A \code{minitex} definition with a reference.}
 
-\def\texdef[name][reference][body]{
-  \taxon{definition}
-  \texnote{\name}{\reference}{\body}
-}
+\def\texdef[name][reference][body]{\texcard{definition}{\name}{\reference}{\body}}
 
 \p{\code{wikiref[name][citeid][pageid][year]}: A reference to a Wikipedia article.}
 
