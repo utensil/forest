@@ -44,6 +44,8 @@ function lize {
   show_lize_result ca-0001
   ./lize.sh tt-0001 2>&1 > /dev/null
   show_lize_result tt-0001
+  ./lize.sh math-000C 2>&1 > /dev/null
+  show_lize_result math-000C
 #   ./lize.sh math-0001 2>&1 > /dev/null
 #   show_lize_result math-0001
 }

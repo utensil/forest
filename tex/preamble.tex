@@ -149,9 +149,6 @@
 
 \usepackage{newunicodechar}
 
-% requires lualatex
-\usepackage{emoji}
-
 % \usepackage{mathbbol}
 % \DeclareMathSymbol{\fcmp}{\mathrel}{bbold}{\lq\;}
 % \newunicodechar{⨾}{\fcmp}
@@ -168,8 +165,15 @@
 % \newunicodechar{👉}{\usym{261E}}
 \newunicodechar{👉}{}
 
-\newunicodechar{🇫}{\emoji{fr}}
+% requires lualatex
+% \usepackage{emoji}
+% \newunicodechar{🇫}{\emoji{fr}}
+% \newunicodechar{🇷}{}
+
+\usepackage{worldflags}
+\newunicodechar{🇫}{\worldflag[width=1em,framewidth=0.001mm]{FR}}
 \newunicodechar{🇷}{}
+
 
 % \newcommand{\newvocab}[1]{\textbf{\color{MidnightBlue} #1}}
 % \newcommand{\vocab}[1]{\textbf{#1}}
