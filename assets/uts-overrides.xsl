@@ -98,7 +98,7 @@
         <!-- uts-end -->
         <!-- uts-begin -->
         <xsl:if test="../f:meta[@name='pdf']">
-            <a target="_blank" class="link-pdf" href="{../f:addr}.pdf">📄<span>PDF</span></a>
+            <a target="_blank" title="PDF" class="link-pdf" href="{../f:addr}.pdf">📄<span>PDF</span></a>
         </xsl:if>
         <xsl:if test="../f:meta[@name='lean']">
             <xsl:apply-templates select="../f:meta[@name='lean']" />
