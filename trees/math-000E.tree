@@ -615,4 +615,145 @@ cross/.default={1pt}}
     \end{tikzpicture}
 }
 
+\p{From [tikz.org](https://tikz.org/examples/chapter-13-plotting-in-2d-and-3d/):
+}
+
+\tikzfig{
+\usepgfplotslibrary{colormaps}
+  \begin{tikzpicture}
+    \begin{axis}[hide axis, colormap/hot2]
+      \addplot3 [surf, z buffer=sort, trig format plots=rad,
+        samples=40, domain=-pi:pi, y domain=0:1.25,
+        variable=t, variable y=r]
+        ({r*sin(t)}, {r*cos(t)}, {(r^2-1)^2});
+    \end{axis}
+  \end{tikzpicture}
+}
+
+\p{From \link{https://latexdraw.com/three-dimensional-plotting-in-latex/}:
+}
+
+\tikzfig{
+\pgfplotsset{compat = newest}
+
+\begin{tikzpicture}
+ 
+\begin{axis}
+ 
+\addplot3 [
+    domain=-5:2,
+    domain y = -3:1,
+    samples = 20,
+    samples y = 8,
+    surf,
+    shader = flat] {x^2 + y^2};
+ 
+\end{axis}
+ 
+\end{tikzpicture}
+}
+
+\p{From \link{https://texwelt.de/fragen/10257/farbdarstellungsmoglichkeiten-mit-tikz-3dplot?Seite=1&focusedAnswerId=17716#17716}:
+}
+
+\tikzfig{
+            % \tdplotsetmaincoords{70}{135}
+            % \begin{tikzpicture}[line join=bevel,tdplot_main_coords,->,samples=100,>=stealth,fill opacity=.1,scale=0.8,font=\footnotesize]
+            %     \coordinate (xMin) at ( -1.75,   0,  0);
+            %     \coordinate (xMax) at ( 1.5,    0,  0);
+            %     \coordinate (yMin) at ( 0,  -1.75,   0);
+            %     \coordinate (yMax) at ( 0,  1.5,    0);
+            %     \coordinate (zMin) at ( 0,  0,  -1);
+            %     \coordinate (zMax) at ( 0,  0,  2.3);
+            %     \pgfsetlinewidth{.1pt}
+            %     \tdplotsphericalsurfaceplot[parametricfill]{72}{36}{1+1*cos(\tdplottheta)}{black}{\tdplottheta}%
+            %     {\draw[->, black] (xMin) -- (0,0,0) node [below right] {$O$} -- (xMax) node[anchor=north east]{$y$};}
+            %     {\draw[->, black] (yMin) -- (0,0,0) -- (yMax) node[anchor=north west]{$z$};}
+            %     {\draw[->, black] (zMin) -- (0,0,0) -- (zMax) node[anchor=south]{$x$};}
+            % \end{tikzpicture}
+% \tdplotsetmaincoords{70}{135}
+% \begin{tikzpicture}[scale=4,line join=bevel,tdplot_main_coords, fill opacity=0.1]
+% 	\pgfsetlinewidth{.2pt}
+% 	\tdplotsphericalsurfaceplot[parametricfill]{72}{36}{sin(\tdplottheta)*cos(\tdplottheta)}{black}{random(0,360)}%
+% 		{\draw[color=black,thick,->] (0,0,0) -- (1,0,0) node[anchor=north east]{$x$};}%
+% 		{\draw[color=black,thick,->] (0,0,0) -- (0,1,0) node[anchor=north west]{$y$};}%
+% 		{\draw[color=black,thick,->] (0,0,0) -- (0,0,1) node[anchor=south]{$z$};}%
+% \end{tikzpicture}
+
+\pgfplotsset{
+  compat=1.13,
+  ticks=none,
+  /pgf/declare function={
+    surface(\theta,\phi)=1/(7.74-1.8*(1-cos(2*\theta))*((1+cos(2*\theta))+0.25*(1-cos(2*\theta))*(1-0.5*(1+cos(4*\phi)))));
+  }
+}
+
+\begin{tikzpicture}
+  \begin{axis}
+    [
+      width=6cm,height=6cm,
+      axis equal,
+      enlargelimits=false,
+      domain=0:180,samples=35,
+      y domain=0:360,samples y=35,
+      colormap/viridis,colorbar,
+      % hide axis
+    ]
+    \addplot3
+      [
+        surf,opacity=0.7,
+        z buffer=sort,
+        faceted color=black,
+        point meta={abs(sqrt(x^2+y^2+z^2))},
+        % axis x line=none,
+        % axis y line=none,
+        % axis z line=none,
+        % xticklabels={,,},
+        % yticklabels={,,},
+        % zticklabels={,,},
+        % xticklabels=\empty,
+        % yticklabels=\empty,
+        % zticklabels=\empty
+      ] (
+        {sin(x)*cos(y)*surface(x,y)},
+        {sin(x)*sin(y)*surface(x,y)},
+        {cos(x)*surface(x,y)}
+      );
+  \end{axis}
+\end{tikzpicture}
+
+}
+
+\p{From \link{https://stackoverflow.com/a/67924963/200764}:
+}
+
+\tikzfig{
+\begin{tikzpicture}
+     \begin{axis}[
+        xmin=-pi,
+        xmax=pi,
+        ymin=-pi,
+        ymax=pi,
+        zmin=0,
+        zmax=2.5,
+        xlabel={$\kappa_x$},
+        ylabel={$\kappa_y$},
+        zlabel={$\omega$},
+        xtick={-pi,-pi/2,0,pi/2,pi},
+        xticklabels={$-\pi$,$-\frac{\pi}{2}$,$0$,$\frac{\pi}{2}$,$\pi$},
+        ytick={-pi,-pi/2,0,pi/2,pi},
+        yticklabels={$-\pi$,$-\frac{\pi}{2}$,$0$,$\frac{\pi}{2}$,$\pi$}
+        ]
+        \addplot3[surf,domain=-pi:pi,samples=40]{sqrt(2*sin(deg((x+y)/2))^2+sin(deg(x/2))^2+sin(deg(y/2))^2-sqrt(4*sin(deg((x+y)/2))^4+(sin(deg(x/2))^2-sin(deg(y/2))^2)^2))};
+        \addplot3[surf,domain=-pi:pi,samples=40]{sqrt(2*sin(deg((x+y)/2))^2+sin(deg(x/2))^2+sin(deg(y/2))^2+sqrt(4*sin(deg((x+y)/2))^4+(sin(deg(x/2))^2-sin(deg(y/2))^2)^2))};
+        \addplot3[
+          surf,
+          domain=0:pi, 
+          y domain=-pi:0,
+          samples=20,
+        ]{sqrt(2*sin(deg((x+y)/2))^2+sin(deg(x/2))^2+sin(deg(y/2))^2-sqrt(4*sin(deg((x+y)/2))^4+(sin(deg(x/2))^2-sin(deg(y/2))^2)^2))};        
+     \end{axis}
+  \end{tikzpicture}
+}
+
 }
