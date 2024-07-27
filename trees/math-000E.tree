@@ -1,0 +1,270 @@
+\import{tt-macros}
+% clifford hopf spin tt math draft
+% \tag{tt}
+\tag{draft}
+
+% definition theorem lemma construction observation
+% convention corollary axiom example exercise proof
+% discussion remark notation
+% \taxon{}
+% \refcardt{lemma}{}{}{}{
+
+% kostecki2011introduction leinster2016basic nakahira2023diagrammatic rosiak2022sheaf
+
+\note{test tikz drawing}{
+
+\p{The following is adapted from [exo7math/deepmath-exo7](https://github.com/exo7math/deepmath-exo7/blob/master/chatgpt1/figures/projection-01.tikz):
+}
+
+\tikzfig{
+\begin{tikzpicture}[scale=1]
+
+\begin{scope}[rotate=10]
+
+
+\draw[blue!50, thick] (-1,0) -- (5,0);
+\draw[->,>=latex,very thick,blue] (0,0) -- +(1,0) node[midway,below]{$u$};
+
+\coordinate (X) at (3,2);
+\coordinate (H) at (3,0);
+
+\draw[dashed] (X) -- (H);
+
+\draw[->,>=latex,very thick,red!50] (0,0) -- (X) node[above left]{$x$};
+\fill[red] (X) circle(2pt);
+
+
+\fill (H) circle(2pt);
+\node at (H) [below]{$p(x)$};
+
+\end{scope}
+
+\end{tikzpicture}
+}
+
+\p{The following is adapted from [bcharlier/HLMA410](https://github.com/bcharlier/HLMA410/blob/master/Cours/geometrie/chap_geometrie_vectorielle/figures/axis_1.tex):
+}
+
+\tikzfig{
+\usetikzlibrary{3d}
+\begin{tikzpicture}
+	[%x={(-0.5cm,-0.5cm)},
+%	    y={(1cm,0cm)},
+%	    z={(0cm,1cm)}, 
+		scale=1,
+		fill opacity=1,%0.80,
+		very thin,
+	every node/.append style={transform shape}]
+
+\def\ctr{1}
+\def\side{2}
+\def\sideT{.4}
+\filldraw[color=blue!40] (-\sideT,-\sideT,0) -- (-\sideT,\side,0) -- (\side,\side,0) -- (\side,-\sideT,0) -- cycle;
+\filldraw[color=gray!40] (-\sideT,0,-\sideT) -- (-\sideT,0,\side) -- (\side,0,\side) -- (\side,0,-\sideT) -- cycle;
+\filldraw[color=green!40] (0,-\sideT,-\sideT) -- (0,-\sideT,\side) -- (0,\side,\side) -- (0,\side,-\sideT) -- cycle;
+
+\def\sideT{0}
+\filldraw[color=blue!40] (-\sideT,-\sideT,0) -- (-\sideT,\side,0) -- (\side,\side,0) -- (\side,-\sideT,0) -- cycle;
+\filldraw[color=gray!40] (-\sideT,0,-\sideT) -- (-\sideT,0,\side) -- (\side,0,\side) -- (\side,0,-\sideT) -- cycle;
+	\filldraw[color=green!40] (0,-\sideT,-\sideT) -- (0,-\sideT,\side) -- (0,\side,\side) -- (0,\side,-\sideT) -- cycle;
+
+%	% face #3
+	\begin{scope}[canvas is zx plane at y=0]
+		\draw[thick,->] (1.5,1) arc (0:90:.5cm) node[above right,midway]{$+$};
+		\node[rotate=90] at (\ctr / 2,\ctr) {plan $xz$};
+	\end{scope}
+%	% face #2
+	\begin{scope}[canvas is yx plane at z=0]
+		\draw[thick,<-] (1.5,1) arc (0:90:.5cm) node[above right,midway]{$+$};
+		\node[yscale=-1,rotate=-90] at (\ctr / 2,\ctr) {plan $xy$};
+	\end{scope} 
+%
+%      % face #1
+	\begin{scope}[canvas is yz plane at x=0]
+		\draw[thick,->] (1.5,1) arc (0:90:.5cm) node[above right,midway]{$+$};
+		\node[rotate=-90] at (\ctr / 2,\ctr) {plan $yz$};
+	\end{scope}
+
+	\draw[thick,->] (0,0,0) -- (\side+.3,0,0) node[right,text width=2cm, align=center] {$x$ (pouce)};
+	\draw[thick,->] (0,0,0) -- (0,\side+.3,0) node[above,text width=2.1cm, align=center] {$y$ (index)};
+	\draw[thick,->] (0,0,0) -- (0,0,\side+.3) node[below left,text width=2.4cm, align=center] {$z$ (majeur)};
+
+\end{tikzpicture}
+}
+
+\p{The following is adapted from [giaan-nguyen/latex-notes](https://github.com/giaan-nguyen/latex-notes/blob/main/signals-and-systems/Ch1/complex_3d.tex):
+}
+
+
+\tikzfig{
+\verb<<<|
+\usetikzlibrary{shapes.arrows}
+\usetikzlibrary{shapes.misc}
+\usetikzlibrary{backgrounds}
+\tikzset{cross/.style={cross out, draw=black, minimum size=2*(#1-\pgflinewidth), inner sep=0pt, outer sep=0pt},
+%default radius will be 1pt. 
+cross/.default={1pt}}
+
+\pgfplotsset{compat=1.18}
+\pgfplotsset{
+    dirac/.style={
+        mark=triangle*,
+        mark options={scale=1.5},
+        ycomb,
+        scatter,
+        visualization depends on={y/abs(y)-1 \as \sign},
+        scatter/@pre marker code/.code={\scope[rotate=90*\sign,yshift=-2pt]}
+    }
+}
+
+\tikzset{every tree node/.style={anchor=north,align=center}}
+\usetikzlibrary{decorations.markings}
+\usetikzlibrary{arrows}
+\definecolor{darkgreen}{rgb}{0.133,0.545,0.133}
+\tikzstyle{n}= [circle, fill=blue, minimum size=4pt,inner sep=0pt, outer sep=0pt]
+
+
+% \documentclass[border=3pt,tikz]{standalone}
+% \usepackage{amsmath}
+% \usepackage{tikz}
+% \usepackage{physics}
+% \usepackage[outline]{contour} % glow around text
+\usetikzlibrary{angles,quotes} % for pic
+\usetikzlibrary{bending} % for arrow head angle
+\contourlength{1.0pt}
+\usetikzlibrary{3d}
+
+\tikzset{>=latex} % for LaTeX arrow head
+% \usepackage{xcolor}
+\colorlet{myblue}{blue!65!black}
+\colorlet{mydarkblue}{blue!50!black}
+\colorlet{myred}{red!65!black}
+\colorlet{mydarkred}{red!40!black}
+\colorlet{veccol}{green!70!black}
+\colorlet{vcol}{green!70!black}
+\colorlet{xcol}{blue!85!black}
+\tikzstyle{vector}=[->,very thick,xcol,line cap=round]
+\tikzstyle{xline}=[myblue,very thick]
+\tikzstyle{yzp}=[canvas is zy plane at x=0]
+\tikzstyle{xzp}=[canvas is xz plane at y=0]
+\tikzstyle{xyp}=[canvas is xy plane at z=0]
+\def\tick#1#2{\draw[thick] (#1) ++ (#2:0.12) --++ (#2-180:0.24)}
+\def\N{100}
+\definecolor{darkgreen}{rgb}{0.133,0.545,0.133}
+<<<
+
+% COMPLEX OSCILLATOR 3D
+\def\xang{-13}
+\def\zang{45}
+\begin{tikzpicture}[x=(\xang:0.9), y=(90:0.9), z=(\zang:1.1)]
+  \verb<<<|
+  \def\xmax{8.8}         % max x axis
+  \def\ymin{-1.5}        % min y axis
+  \def\ymax{1.6}         % max y axis
+  \def\zmax{1.6}         % max z axis
+  \def\xf{1.17*\xmax}    % x position frequency axis
+  \def\A{(0.70*\ymax)}   % amplitude
+  \def\T{(0.335*\xmax)}  % period
+  \def\w{\zmax / 11.2}     % spacing components
+  \def\ang{47}           % angle
+  \def\s{\ang / 360*\T}    % time component
+  \def\x{\A*cos(\ang)}   % real component
+  \def\y{\A*sin(\ang)}   % imaginary component
+  <<<
+  
+  % COMPLEX PLANE
+  \begin{scope}[shift={(-1.6*\zmax,0,0)}]
+    \draw[black,fill=white,opacity=0.3,yzp]
+      (-1.25*\zmax,-1.25*\ymax) rectangle (1.6*\zmax,1.25*\ymax);
+    \draw[->,thick] (0,\ymin,0) -- (0,\ymax+0.02,0)
+      node[pos=1,left=0,yzp] {Im};
+    \draw[->,thick] (0,0,-\zmax) -- (0,0,\zmax+0.02)
+      node[right=1,below=0,yzp] {Re} coordinate (X);
+    %\node[scale=1,yzp] at (0,-\ymax,0) {Complex plane};
+    \draw[xline,yzp] (0,0) circle(0.991*\A) coordinate (O);
+    \fill[myred,yzp] (\ang:{\A}) circle(0.07) coordinate(P);
+    \node[mydarkblue,above=0,right=-0.6,yzp,scale=1] at (P) {$z(t)=A_0e^{j\omega_0 t}$};
+    \draw[vector,orange,thick,yzp] (0,0) -- (\ang:{\A-0.03}) coordinate (R);
+    \draw pic[-{>[flex'=1]},draw=mydarkblue,angle radius=14,angle eccentricity=1,
+              "$\omega_0 t$"{above=0,right=-0.5,yslant=0.69,scale=0.65},mydarkblue,yzp]
+      {angle = X--O--R};
+    \tick{0,0,{\A}}{90};
+    \tick{0,0,{-\A}}{90};
+    \tick{0,{\A},0}{\zang};
+    \tick{0,{-\A},0}{\zang};
+  \end{scope}
+  
+  % IMAGINARY
+  \begin{scope}[shift={(0,0,1.9*\zmax)}]
+    \draw[black,fill=white,opacity=0.3,xyp]
+      (-0.5*\ymax,-1.2*\ymax) rectangle (1.10*\xmax,1.25*\ymax);
+    \draw[->,thick] (-0.3*\ymax,0,0) -- (\xmax,0,0)
+      node[below right=-2,xyp] {$t$ [s]};
+    \draw[->,thick] (0,\ymin,0) -- (0,\ymax,0)
+      node[left,xyp] {Im};
+    \draw[xline,darkgreen,samples=\N,smooth,variable=\t,domain=-0.05*\T:0.95*\xmax]
+      plot(\t,{\A*sin(360/\T*\t)},0);
+    %\node[below=0,xyp] at (0.4*\xmax,-\ymax,0) {Imaginary component};
+    \fill[myred,xyp] ({\s},{\y}) circle(0.07) coordinate(I);
+    \draw[vector,orange,thick,xyp] ({\s},0) --++ (0,{\y-0.03});
+    \tick{0,{\A},0}{180};
+    \tick{0,{-\A},0}{180};
+    \tick{{\s},0,0}{90} node[right=0,below=-1,xyp] {$\omega_0 t$};
+    \tick{{\T},0,0}{90} node[right=0,below,xyp] {\contour{white}{$T$}};
+    \tick{{2*\T},0,0}{90} node[right=0,below,xyp] {\contour{white}{$2T$}};
+    \node[mydarkblue,below=0,xyp] at (0.4*\xmax,1.15*\ymax,0) {$y(t)=A_0\sin(\omega_0 t)$};
+  \end{scope}
+  
+  % REAL
+  \begin{scope}[shift={(0,-1.8*\zmax,0)}]
+    \draw[black,fill=white,opacity=0.3,xzp]
+      (-0.5*\ymax,-1.4*\ymax) rectangle (1.10*\xmax,1.25*\ymax);
+    \draw[->,thick] (-0.3*\ymax,0,0) -- (\xmax,0,0)
+      node[below right=-1,xzp] {$t$ [s]};
+    \draw[->,thick] (0,0,-\zmax) -- (0,0,\zmax)
+      node[left=-1,xzp] {Re};
+    \draw[xline,darkgreen,samples=\N,smooth,variable=\t,domain=-0.05*\T:0.95*\xmax]
+      plot(\t,0,{\A*cos(360/\T*\t)});
+    %\node[below=0,xzp] at (0.4*\xmax,-\ymax,0) {Real component};
+    \fill[myred,xzp] ({\s},{\x}) circle(0.07) coordinate(R);
+    \draw[vector,orange,thick,xzp] ({\s},0) --++ (0,{\x-0.03});
+    \tick{0,0,{\A}}{180};
+    \tick{0,0,{-\A}}{180};
+    \tick{{\s},0,0}{\zang} node[below=-1,xzp] {$\omega_0 t$};
+    \tick{{\T},0,0}{\zang} node[below,xzp] {$T$};
+    \tick{{2*\T},0,0}{\zang} node[below,xzp] {$2T$};
+    \node[mydarkblue,above=0,xzp] at (0.3*\xmax,-\ymax,0) {$x(t)=A_0\cos(\omega_0 t)$};
+  \end{scope}
+  
+  % COMPONENTS
+  \draw[myred!80!black,dashed]
+    (P) -- ({\s},{\y},{\x})
+    (I) -- ({\s},{\y},{\x+0.05})
+    ({\s},{\y-0.06},{\x}) -- (R);
+  \draw[->,black,thick] (-0.1*\ymax,0,0) -- (\xmax,0,0) node[below right=-2] {$t$ [s]};
+  \draw[->,black,thick] (0,\ymin,0,0) -- (0,\ymax+0.02,0) node[above] {};
+  \draw[->,black,thick] (0,0,-\zmax) -- (0,0,\zmax+0.02) node[right=1,below=3] {};
+  \foreach \i [evaluate={\tmin=max(-0.05*\T,(\i-0.05)*\T); \tmax=min(0.95*\xmax,(\i+1)*\T);}] in {0,...,2}{
+    %\draw[white,line width=1.2] (\tmin,0,0) -- (\tmax,0,0);
+    \draw[thick] (\tmin,0,0) -- (\tmax,0,0);
+    \draw[xline,samples=0.4*\N,smooth,variable=\t]
+      plot[domain=\tmin:\tmax]\verb<<<|(<<<\t,{\A*sin(360/\T*\t)},{\A*cos(360/\T*\t)}\verb<<<|)<<<;
+  }
+  \draw[thick] (0,0,{0.9*\A}) -- (0,0,{\A});
+  \fill[myred] ({\s},{\y},{\x}) circle(0.07) coordinate(Z);
+  \draw[vector,orange,thick] ({\s},0,0) --++ (0,{\y-0.03},{\x-0.03});
+  \draw[xline,samples=0.3*\N,smooth,variable=\t,domain=\s+0.03:\s+0.4*\T,line cap=round]
+    plot(\t,{\A*sin(360/\T*\t)},{\A*cos(360/\T*\t)});
+  \tick{{\T},0,0}{90};
+  \tick{{2*\T},0,0}{90};
+  \tick{0,0,{\A}}{90};
+  \tick{0,0,{-\A}}{90};
+  \tick{0,{\A},0}{\zang};
+  \tick{0,{-\A},0}{\zang};
+  \draw[myred!80!black,dashed]
+    ({\s},{\y-0.06},{\x}) --++ (0,-0.2*\ymax,0);
+  
+\end{tikzpicture}
+}
+
+}
