@@ -148,14 +148,21 @@ for i, reference in enumerate(references):
         #  {tree_file_i.relative_to(project_root)}: 
         print(f'🟡 {bib_filenames_i}')
 
+    formatted = TREE_TEMPLATE.format(
+        bib_filenames=json.dumps(bib_filenames_i),
+        title=reference['title'],
+        date=format_date(reference['issued']['date-parts'][0]),
+        meta_doi=format_doi(reference),
+        meta_external=format_external(reference),
+        authors=''.join([f'\\author{{{format_author(author)}}}' for author in reference['author']]),
+        original_bibtex=original_bibtex)
+
+    if tree_file_i.exists():
+        with open(tree_file_i, 'r', encoding='utf-8') as f:
+            existing = f.read()
+            if existing == formatted:
+                continue
+
     with open(tree_file_i, 'w', encoding='utf-8') as f:
-        formatted = TREE_TEMPLATE.format(
-            bib_filenames=json.dumps(bib_filenames_i),
-            title=reference['title'],
-            date=format_date(reference['issued']['date-parts'][0]),
-            meta_doi=format_doi(reference),
-            meta_external=format_external(reference),
-            authors=''.join([f'\\author{{{format_author(author)}}}' for author in reference['author']]),
-            original_bibtex=original_bibtex)
         f.write(formatted)
         f.flush()
