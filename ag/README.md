@@ -2,7 +2,7 @@ This directory contains some source code explpring algebraic geometry.
 
 ## Macaulay2
 
-To install Macaul2 on MacOS:
+To install Macaulay2 on MacOS:
 
 ```bash
 -- brew install Macaulay2/tap/M2

@@ -1,5 +1,5 @@
 -- brew install Macaulay2/tap/M2
--- m2 --script m2/hello.m2 > output/hello.svg
+-- m2 --script ag/hello.m2 > output/hello.svg
 -- example from https://www.unimelb-macaulay2.cloud.edu.au/#editor
 
 needsPackage "VectorGraphics"
