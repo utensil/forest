@@ -992,52 +992,16 @@ colormap={blueblack}{color=(green) color=(orange)},opacity=.6,faceted color=blac
 \end{tikzpicture}
 }
 
-\p{From \link{https://github.com/dweggg/Inverter/blob/main/Memoria/fig/figures.tex}:
+\p{Reproducing #{\mathbf{V}\left(x^2-y^2 z^2+z^3\right)} from \citet{p. 7, p. 16}{cox1997ideals} using \code{addplot3}
 }
 
 \tikzfig{
-        \begin{tikzpicture}
-        \begin{axis}[
-            %view={-45}{-35},
-            view={-20}{-15},
-            %view={54.74}{-15},
-            axis lines=none,
-            xmin=-1.5,
-            xmax=1.5,
-            ymin=-1.5,
-            ymax=1.5,
-            zmin=-1.5,
-            zmax=1.5,
-            no markers,
-            axis equal,
-            enlargelimits={upper=0.2},
-            scale=1,
-        ]
-        \addplot3+[no markers, samples=30, domain=-pi:pi, variable=\t]
-            ({sin(deg(\t - 2*pi/3))}, {sin(deg(\t ))}, {sin(deg(\t + 2*pi/3))});
+\begin{tikzpicture}
+\begin{axis}[view={120}{20}, colormap/hot2, colorbar,opacity=1] % axis lines*=center,ticks=none,
+ \addplot3 [surf] ({x*(y^2-x^2)},{y},{y^2-x^2});
+\end{axis}
+\end{tikzpicture}
 
-        \addplot3[draw=gray, no markers] coordinates {(-1.1, -1.1, -1.1) (-1.1, 1.1, -1.1)};
-        \addplot3[draw=gray, no markers] coordinates {(-1.1, 1.1, -1.1) (1.1, 1.1, -1.1)};
-        \addplot3[draw=gray, no markers] coordinates {(1.1, 1.1, -1.1) (1.1, -1.1, -1.1)};
-        \addplot3[draw=gray, no markers] coordinates {(1.1, -1.1, -1.1) (-1.1, -1.1, -1.1)};
-        \addplot3[draw=gray, no markers] coordinates {(-1.1, -1.1, 1.1) (-1.1, 1.1, 1.1)};
-        \addplot3[draw=gray, no markers] coordinates {(-1.1, 1.1, 1.1) (1.1, 1.1, 1.1)};
-        \addplot3[draw=gray, no markers] coordinates {(1.1, 1.1, 1.1) (1.1, -1.1, 1.1)};
-        \addplot3[draw=gray, no markers] coordinates {(1.1, -1.1, 1.1) (-1.1, -1.1, 1.1)};
-        \addplot3[draw=gray, no markers] coordinates {(-1.1, -1.1, -1.1) (-1.1, -1.1, 1.1)};
-        \addplot3[draw=gray, no markers] coordinates {(-1.1, 1.1, -1.1) (-1.1, 1.1, 1.1)};
-        \addplot3[draw=gray, no markers] coordinates {(1.1, 1.1, -1.1) (1.1, 1.1, 1.1)};
-        \addplot3[draw=gray, no markers] coordinates {(1.1, -1.1, -1.1) (1.1, -1.1, 1.1)};
-        
-        \draw [-stealth] (axis cs:0, 0, 0) -- (axis cs:0.5, 0, 0) node[pos=1.5]{$b$};
-        \draw [-stealth] (axis cs:0, 0, 0) -- (axis cs:0, 0.5, 0) node[pos=1.5]{$a$};
-        \draw [-stealth] (axis cs:0, 0, 0) -- (axis cs:0, 0, 0.5) node[pos=1.5]{$c$};
-
-        \draw [red, -stealth] (axis cs:0, 0, 0) -- (axis cs: 0.5*-0.57735, 0.5*0.8165, 0.5*-0.57735) node[pos=1.5]{$\alpha$};
-        
-
-        \end{axis}
-        \end{tikzpicture}
 }
 
 }
