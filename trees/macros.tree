@@ -17,6 +17,7 @@
 \def\mark[body]{\<html:mark>{\body}}
 
 \alloc\base/tex-preamble
+\alloc\base/extra-preamble
 
 \p{\code{texfig[body]}: A figure rendered by LaTeX.}
 
@@ -26,7 +27,8 @@
    \latex-preamble/diagrams
    \latex-preamble/string-diagrams
   }
-  \tex{\get\base/tex-preamble}{\body}
+  \put?\base/extra-preamble{}
+  \tex{\get\base/tex-preamble\get\base/extra-preamble}{\body}
  }
 }
 

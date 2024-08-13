@@ -11,6 +11,39 @@
 
 % kostecki2011introduction leinster2016basic nakahira2023diagrammatic rosiak2022sheaf
 
+\put\base/extra-preamble{
+\tikzset{
+  knot diagram/every strand/.append style={
+    ultra thick,
+    red
+  },
+  show curve controls/.style={
+    postaction=decorate,
+    decoration={show path construction,
+      curveto code={
+        \draw [blue, dashed]
+        (\tikzinputsegmentfirst) -- (\tikzinputsegmentsupporta)
+        node [at end, draw, solid, red, inner sep=2pt]{};
+        \draw [blue, dashed]
+        (\tikzinputsegmentsupportb) -- (\tikzinputsegmentlast)
+        node [at start, draw, solid, red, inner sep=2pt]{}
+        node [at end, fill, blue, ellipse, inner sep=2pt]{}
+        ;
+      }
+    }
+  },
+  show curve endpoints/.style={
+    postaction=decorate,
+    decoration={show path construction,
+      curveto code={
+        \node [fill, blue, ellipse, inner sep=2pt] at (\tikzinputsegmentlast) {}
+        ;
+      }
+    }
+  }
+}
+}
+
 \note{test drawing knots and braids}{
 
 \p{From \link{https://loopspace.mathforge.org/HowDidIDoThat/TeX/Knots/} ([doc](https://ctan.math.washington.edu/tex-archive/graphics/pgf/contrib/spath3/knots.pdf)):
@@ -20,10 +53,10 @@
 \begin{tikzpicture}
 \begin{knot}[
   consider self intersections=true,
-%  draft mode=crossings,
+ draft mode=crossings,
   flip crossing=2,
   only when rendering/.style={
-%    show curve controls
+   show curve controls
   }
   ]
 \strand (0,2) .. controls +(2.2,0) and +(120:-2.2) .. (210:2) .. controls +(120:2.2) and +(60:2.2) .. (-30:2) .. controls +(60:-2.2) and +(-2.2,0) .. (0,2);
@@ -35,16 +68,36 @@
 \begin{tikzpicture}
 \begin{knot}[
   consider self intersections=true,
-%  draft mode=crossings,
+  draft mode=crossings,
   flip crossing/.list={2,4},
   only when rendering/.style={
-%    show curve controls
+   show curve controls
   }
 ]
 \strand (2,0) .. controls +(0,1.0) and +(54:1.0) .. (144:2) .. controls +(54:-1.0) and +(18:-1.0) .. (-72:2) .. controls +(18:1.0) and +(162:-1.0) .. (72:2) .. controls +(162:1.0) and +(126:1.0) .. (-144:2) .. controls +(126:-1.0) and +(0,-1.0) .. (2,0);
 \end{knot}
 \end{tikzpicture}
 }
+
+\tikzfig\verb<<|
+\begin{tikzpicture}[use Hobby shortcut]
+\begin{knot}[
+  consider self intersections=true,
+  draft mode=crossings,
+  ignore endpoint intersections=false,
+  flip crossing/.list={6,4,2},
+  only when rendering/.style={
+   show curve controls
+  }
+]
+\strand ([closed]2,2) .. (1.8,0) .. (-2.3,-1) .. (.5,1) .. (-2,2) .. (-1.8,0) .. (2.3,-1) .. (-.5,1) .. (2,2);
+\end{knot}
+\node at (0,0) {$(0,0)$};
+\node at (2,2) {$(2,2)$};
+\node at (1.8,0) {$(1.8,0)$};
+\node at (-2.3,-1) {$(-2.3,-1)$};
+\end{tikzpicture}
+<<
 
 \p{From \link{https://mirror-hk.koddos.net/CTAN/graphics/pgf/contrib/braids/braids.pdf}:
 }
