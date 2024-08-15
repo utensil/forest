@@ -12,11 +12,11 @@ async function loadJson(url) {
     return json
 }
 
-document.addEventListener('DOMContentLoaded', async () => {
+// document.addEventListener('DOMContentLoaded', async () => {
 
     const code_tags = document.querySelectorAll('article code')
 
-    if(code_tags.length == 0) return
+    if(code_tags.length != 0) {
 
     // https://github.com/PaulOlteanu/Railscasts-Renewed/blob/master/themes/Railscasts-Renewed.json
     const railscastsjson = await loadJson('https://cdn.jsdelivr.net/gh/PaulOlteanu/Railscasts-Renewed@master/themes/Railscasts-Renewed.json')
@@ -68,4 +68,5 @@ document.addEventListener('DOMContentLoaded', async () => {
         toggleTheme()
         await highlightAllCode()
     }
-})
+    }
+// })

@@ -433,12 +433,16 @@ so the text size almost matches the size output by native forester code. This do
 
 \def\todolist{\<html:span>[class]{todolist}{}}
 
+\p{\code{langblock[symbol][body]}: A block with a language symbol.}
+
 \def\langblock[symbol][body]{%
   \<html:span>[class]{langblock}{\<html:span>[class]{langblock-symbol}{\symbol} \<html:span>[class]{langblock-body}{\body}}
 }
 
 \alloc\translation/src
 \alloc\translation/dst
+
+\p{\code{translation/tp[dst-content][src-content]}: A translation paragraph.}
 
 \def\translation/tp[dst-content][src-content]{%
   \put?\translation/src{🇫🇷}
@@ -452,6 +456,8 @@ so the text size almost matches the size output by native forester code. This do
   }
 }
 
+\p{\code{translation/tsec[dst-content][src-content][body]}: A translation section.}
+
 \def\translation/tsec[dst-content][src-content][body]{%
   \put?\translation/src{🇫🇷}
   \put?\translation/dst{🇺🇸}
@@ -459,6 +465,8 @@ so the text size almost matches the size output by native forester code. This do
   \let\dst{\get\translation/dst}
   \block{\dst-content \langblock{\src}{\src-content}}{\body}
 }
+
+\p{\code{translation/ttitle[dst-content][src-content]}: A translation title.}
 
 \def\translation/ttitle[dst-content][src-content]{%
   \put?\translation/src{🇫🇷}
@@ -468,12 +476,22 @@ so the text size almost matches the size output by native forester code. This do
   \title{\dst-content \langblock{\src}{\src-content}}
 }
 
+\p{\code{eqtag[eqno][equation]}: A tagged equation.}
+
 \def\eqtag[eqno][equation]{
   ##{\equation \verb*|\tag{*\eqno\verb*|}*}
 }
 
+\p{\code{eqnotag[equation]}: An equation without a tag.}
+
 \def\eqnotag[equation]{
   ##{\equation \verb*|\notag*}
+}
+
+\p{\code{embed[src]}: Embedding an external HTML file, adapted from [here](https://lists.sr.ht/~jonsterling/forester-discuss/\%3CouGgO2PnjJxebrCO-YzNYlSBYnEF9DiupMdWtSP7Q-jVApwBuqrz5AbukPL58LBLpzFVR-C26ULjwbl5sDa9TxzTEDciNZ4Uaux0AfQJ40c=@dannypsnl.me\%3E). }
+
+\def\embed[src]{
+  \<html:embed>[type]{text/html}[src]{\src}{}
 }
 
 % \def\cref[addr]{\<html:span>[class]{cref}{[\addr](\addr)}} % this is not required as XSLT can handle local links with or without taxons like cleveref automatically

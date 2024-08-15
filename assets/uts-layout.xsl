@@ -31,7 +31,9 @@
         </title>
         <!-- <script src="https://cdn.jsdelivr.net/gh/iconfu/svg-inject@v1.2.3/dist/svg-inject.min.js"></script> -->
         <script src="uts-forester.js"></script>
-        <script type="module" src="shiki.js"></script>
+        <script src="uts-ondemand.js"></script>
+        <!-- <script type="module" src="shiki.js"></script>
+        <script type="module" src="glsl.js"></script> -->
       </head>
       <body>
         <ninja-keys placeholder="Start typing a note title or ID"></ninja-keys>
