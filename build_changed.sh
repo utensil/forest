@@ -15,6 +15,10 @@ while IFS= read -r line; do
         ./build.sh
     elif [[ $CHANGED_FILE == *".tree" ]] || [[ $CHANGED_FILE == *".tex" ]]; then
         ./build.sh
+    elif [[ $CHANGED_FILE == *".glsl" ]]; then
+        mkdir -p output/shader/
+        rm -f output/shader/*.glsl
+        ./build.sh
     else
         echo "🤷 No action for $LINE"
     fi

@@ -32,6 +32,8 @@ function build {
   mkdir -p build
   opam exec -- forester build # 2>&1 > build/forester.log # --dev
   show_result
+  mkdir -p output/shader/
+  cp -f assets/shader/*.glsl output/shader/
   # echo "Open build/forester.log to see the log."
 }
 

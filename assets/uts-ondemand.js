@@ -10,9 +10,9 @@ document.addEventListener('DOMContentLoaded', async () => {
         document.head.appendChild(script);
     }
 
-    const glslWrapperElement = document.querySelector('#glsl-wrapper');
+    const embeded_shaders = document.querySelectorAll('.embeded-shader');
 
-    if (glslWrapperElement) {
+    if (embeded_shaders.length != 0) {
         console.log('loading glsl.js');
         const glslScript = document.createElement('script');
         glslScript.type = 'module';
