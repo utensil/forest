@@ -1,7 +1,7 @@
 #!/bin/bash
 
 echo "🛁 Cleaning up build and output"
-rm -rf build
+# rm -rf build
 rm -rf output
 ./build.sh
 
