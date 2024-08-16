@@ -13,10 +13,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     const embeded_shaders = document.querySelectorAll('.embeded-shader');
 
     if (embeded_shaders.length != 0) {
-        console.log('loading glsl.js');
-        const glslScript = document.createElement('script');
-        glslScript.type = 'module';
-        glslScript.src = 'glsl.js';
-        document.head.appendChild(glslScript);
+        console.log('loading shader.js');
+        const shaderScript = document.createElement('script');
+        shaderScript.type = 'module';
+        shaderScript.src = 'shader.js';
+        document.head.appendChild(shaderScript);
     }
 });

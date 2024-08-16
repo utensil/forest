@@ -14,9 +14,8 @@
 % cox1997ideals gathmann2013commutative
 
 \note{test GLSL render}{
-% \<html:div>[id]{glsl-wrapper}{}
 
-\shader{width: 50\%}{ }\verb>>>|
+\shader{ }\verb>>>|
 #include "./shader/test.glsl"
 #include "lygia/generative/pnoise.glsl"
 
@@ -558,6 +557,27 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
     
     col = clamp(col, 0., 1.);
     fragColor = vec4(col,1.0);
+}
+>>>
+
+\shader{ }\verb>>>|
+// Adapted from https://lygia.xyz/
+
+#include "lygia/space/ratio.glsl"
+#include "lygia/math/decimate.glsl"
+#include "lygia/draw/circle.glsl"
+
+void mainImage( out vec4 fragColor, in vec2 fragCoord )
+{
+    vec3 color = vec3(0.0);
+    vec2 st = fragCoord.xy/iResolution.xy;
+    st = ratio(st, iResolution);
+
+    color = vec3(st.x,st.y,abs(sin(iTime)));
+    color = decimate(color, 20.);
+    color += circle(st, .5, .1);
+
+    fragColor = vec4(color, 1.0);
 }
 >>>
 

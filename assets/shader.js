@@ -1,4 +1,7 @@
 import { ImageEffectRenderer } from 'https://esm.sh/@mediamonks/image-effect-renderer@2.4.0'
+
+// uts begin adapted from https://lygia.xyz/resolve.js
+
 // import resolveLygia from "https://lygia.xyz/resolve.esm.js"
 
 function getFile(url) {
@@ -39,8 +42,7 @@ function resolveLygia(lines) {
     return src;
 }
 
-// const shader = `
-// `;
+// uts end
 
 const options = { loop: true };
 
