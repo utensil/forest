@@ -595,8 +595,27 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
 #include "lygia/lighting/raymarch.glsl"
 #include "lygia/color/space/linear2gamma.glsl"
 
+float checkBoard(vec2 uv, vec2 _scale) {
+    uv = floor(fract(uv * _scale) * 2.0);
+    return min(1.0, uv.x + uv.y) - (uv.x * uv.y);
+}
+
+float mySDF(vec3 p) {
+    return pow(p.x, 6.)+pow(p.y, 6.)+pow(p.z, 6.)-1.;
+}
+
+float mySDF2(vec3 p) {
+    return pow(p.y, 2.)+pow(p.z, 3.)-pow(p.z, 4.)-pow(p.x, 2.)*pow(p.z, 2.);
+}
+
 Material raymarchMap( in vec3 pos ) {
-    Material res = materialNew( vec3(1.0, 1.0, 1.0), 1.0, 0.0, sphereSDF( pos-vec3( 0.0, 0.0, 0.0), 1.5 ) ) ;
+    float check = 0.5 + checkBoard(pos.xz, vec2(1.0, 1.0)) * 0.5;
+    Material res = materialNew(vec3(check), 0.0, 0.5, planeSDF(pos - vec3(0.0, -2.0, 0.0)));
+    
+    res = opUnion( res, materialNew( vec3(1.0, 1.0, 1.0), 1.0, 0.0, mySDF(pos - vec3(0.0, 0.0, -5.0))*0.004 ) );
+
+    // res = opUnion(res, materialNew( vec3(1.0, 1.0, 1.0), 1.0, 0.0, mySDF2(pos - vec3(0.0, 0.0, -5.0))*0.1 ) );
+
     return res;
 }
 
