@@ -53,6 +53,6 @@ embeded_shaders.forEach((element) => {
     element.textContent = '';
     
     shader = resolveLygia(shader);
-    console.log(shader.substring(0, 100));
+    // console.log(shader.substring(0, 100));
     const renderer = ImageEffectRenderer.createTemporary(element, shader, options);
 });
