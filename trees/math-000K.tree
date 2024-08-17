@@ -53,16 +53,22 @@ float mySDF2(vec3 p) {
     float x = p.x;
     float y = p.y;
     float z = p.z;
+
+    float x2 = pow(x, 2.);
     float y2 = pow(y, 2.);
+    float z2 = pow(z, 2.);
+
+    float x3 = pow(x, 3.);
+    float y3 = pow(y, 3.);
     float z3 = pow(z, 3.);
+
     float x4 = pow(x, 4.);
     float y4 = pow(y, 4.);
     float z4 = pow(z, 4.);
-    float x2 = pow(x, 2.);
-    float z2 = pow(z, 2.);
-    float y3 = pow(y, 3.);
+
+    // return (y-x2)*(z-x3);
     
-    return 5.*(z2+y3-y4-x2*y2);
+    // return 5.*(z2+y3-y4-x2*y2);
 
     // return (y2-x2-z2);
 
@@ -122,7 +128,7 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
     // pitch and yaw rotations (column-wise matrices)
     mat3 rot = mat3(cos(yaw), sin(yaw), 0., -sin(yaw), cos(yaw), 0., 0., 0., 1.);
     rot = rot * mat3(cos(pitch), 0., -sin(pitch), 0., 1., 0., sin(pitch), 0., cos(pitch));
-    vec3 camPos = vec3(-3., 2., -2.);
+    vec3 camPos = 0.8*vec3(-4., 2.2, -2.);
     // apply
     vec3 cam = rot*camPos;
 
