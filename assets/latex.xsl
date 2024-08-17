@@ -357,4 +357,7 @@
     <xsl:text>}</xsl:text>
   </xsl:template>
 
+  <xsl:template match="html:span[@class='webonly']">
+  </xsl:template>
+
 </xsl:stylesheet>

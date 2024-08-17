@@ -7,7 +7,7 @@
 // Surface decoration pattern (0-8)
 #define surfacePattern 0
 // Background / environment (0-7)
-#define background 4 // 4 is white, 0 is black
+#define background 4 // 4 is white, 0 is black, 5 is cubemap(error), 8 is light blue
 // (0-1)
 #define showBoundingCube 0
 // (0-3)
@@ -430,4 +430,57 @@ vec3 with_shading(vec3 col, vec3 grad, float s, vec3 rayDir)
     #endif
     
     return col;
+}
+
+vec3 with_background(vec3 cubemapDir)
+{
+        vec3 col;
+
+        #if background==1
+        col = vec3(0.2);
+        
+        #elif background==2
+        col = vec3(0.5);
+        
+        #elif background==3
+        col = vec3(0.8);
+        
+        #elif background==4
+        col = vec3(1.);
+        
+        #elif background==5
+        // Real life environment
+        col = vec3(1.); // 1. * cubemap(cubemapDir);
+        
+        #elif background==6
+        // Stylized sky
+        if (cubemapDir.z > 0.) {
+            col = mix(vec3(0.7,1.,1.), vec3(0.5,0.7,0.9), sqrt(cubemapDir.z));
+        } else {
+            col = mix(vec3(0.5,0.6,0.7),vec3(0.3,0.3,0.3),asin(-cubemapDir.z));
+        }
+        
+        #elif background==7
+        // Sphere slices
+        
+        //col = mix(vec3(0.2), vec3(0.7,1.,1.), clamp(0.5+4.*dot(normalize(cubemapDir),normalize(vec3(0.,0.,1.))), 0., 1.));
+        col = vec3(0.4);
+        
+        float linewidthSky = 0.003;
+        float gridStepSky = 0.2;
+        float gridAlpha = 0.3;
+        col = mix(col,vec3(1.,0.,0.),gridAlpha*(1.-step(linewidthSky,mod(asin(cubemapDir.x)+linewidthSky/2.,gridStepSky))));
+        col = mix(col,vec3(0.,1.,0.),gridAlpha*(1.-step(linewidthSky,mod(asin(cubemapDir.y)+linewidthSky/2.,gridStepSky))));
+        col = mix(col,vec3(0.,0.,1.),gridAlpha*(1.-step(linewidthSky,mod(asin(cubemapDir.z)+linewidthSky/2.,gridStepSky))));
+        
+        #elif background==8
+
+        col = vec3(0.7, 0.9, 1.0);
+
+        #else
+        col = vec3(0.);
+        
+        #endif
+
+        return col;
 }

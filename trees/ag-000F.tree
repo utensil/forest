@@ -16,7 +16,7 @@
 \tikzfig{
 \begin{tikzpicture}
 \begin{axis}[view={0}{90},opacity=1,hide axis] % axis lines*=center,ticks=none, colormap/hot2,colormap/viridis,
- \addplot3 [surf,shader=flat,black] ({\x1}, {\x2}, {0});
+ \addplot3 [shader=flat,black,samples=70] ({\x1}, {\x2}, {0});
 \end{axis}
 \end{tikzpicture}
 }
@@ -25,7 +25,7 @@
 \def\plot3d[x1][x2][x3]{
 \tikzfig{
 \begin{tikzpicture}
-\begin{axis}[view={120}{20},colormap/viridis,opacity=1,hide axis] % axis lines*=center,ticks=none, colormap/hot2
+\begin{axis}[view={120}{20},colormap/viridis,opacity=1,hide axis,variable=t,variable y=u] % axis lines*=center,ticks=none, colormap/hot2
  \addplot3 [surf,shader=flat] ({\x1},{\x2},{\x3});
 \end{axis}
 \end{tikzpicture}
@@ -34,13 +34,40 @@
 
 \card{example}{varieties}{
 
-\p{#{\mathbf{V}\left(x^3-y\right)}:}
+% \p{#{\mathbf{V}\left(x^3-y\right)}:}
 
-\plot2d{x}{x^3}
+% \plot2d{x}{x^3}
+
+% \p{#{\mathbf{V}\left(y-x^2+2 x-2\right)}:}
+
+% \plot2d{1+x}{1+x^2}
+
+% \plot2d{(1-x^2)/(1+x^2)}{(x*2)/(1+x^2)}
+
+\p{#{\mathbf{V}\left(10 x^2-x^3-y^2\right)} from \citet{p. 24}{cox1997ideals}:
+}
+
+\plot3d{10-t^2}{t*(10-t^2)}{0}
+
+% \p{A plane from \citet{p. 26}{cox1997ideals}:
+% }
+
+% \plot3d{1+u-t}{u+2*t}{-1-u+t}
+
+\p{#{\mathbf{V}\left(y-x^2, z-x^3\right)} from \citet{p. 19}{cox1997ideals}:}
+
+\plot3d{t+u}{t^2+2*t*u}{t^3+3*t^2*u}
 
 \p{#{\mathbf{V}\left(x^2-y^2 z^2+z^3\right)} from \citet{p. 7, p. 16}{cox1997ideals}:
 }
 
-\plot3d{x*(y^2-x^2)}{y}{y^2-x^2}
+\plot3d{t*(u^2-t^2)}{u}{u^2-t^2}
+
+\webonly{
+\scope{
+\put\transclude/title{varieties rendered by raycasting}
+\transclude{math-000J}
+}
+}
 
 }

@@ -79,47 +79,7 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
     if (hitPoint == NOBOUNDHIT  || hitPoint == NOHIT || hitPoint == ESCAPEDBOUNDS || hitPoint == MAXITERREACHED) {
         //fragColor = vec4(vec3(0.2),1.0); return;
         
-        #if background==1
-        col = vec3(0.2);
-        
-        #elif background==2
-        col = vec3(0.5);
-        
-        #elif background==3
-        col = vec3(0.8);
-        
-        #elif background==4
-        col = vec3(1.);
-        
-        #elif background==5
-        // Real life environment
-        col = 1.; // * cubemap(cubemapDir);
-        
-        #elif background==6
-        // Stylized sky
-        if (cubemapDir.z > 0.) {
-            col = mix(vec3(0.7,1.,1.), vec3(0.5,0.7,0.9), sqrt(cubemapDir.z));
-        } else {
-            col = mix(vec3(0.5,0.6,0.7),vec3(0.3,0.3,0.3),asin(-cubemapDir.z));
-        }
-        
-        #elif background==7
-        // Sphere slices
-        
-        //col = mix(vec3(0.2), vec3(0.7,1.,1.), clamp(0.5+4.*dot(normalize(cubemapDir),normalize(vec3(0.,0.,1.))), 0., 1.));
-        col = vec3(0.4);
-        
-        float linewidthSky = 0.003;
-        float gridStepSky = 0.2;
-        float gridAlpha = 0.3;
-        col = mix(col,vec3(1.,0.,0.),gridAlpha*(1.-step(linewidthSky,mod(asin(cubemapDir.x)+linewidthSky/2.,gridStepSky))));
-        col = mix(col,vec3(0.,1.,0.),gridAlpha*(1.-step(linewidthSky,mod(asin(cubemapDir.y)+linewidthSky/2.,gridStepSky))));
-        col = mix(col,vec3(0.,0.,1.),gridAlpha*(1.-step(linewidthSky,mod(asin(cubemapDir.z)+linewidthSky/2.,gridStepSky))));
-        
-        #else
-        col = vec3(0.);
-        
-        #endif
+        col = with_background(cubemapDir);
         
         #if showBoundingCube
         // darken bounding cube
