@@ -169,11 +169,11 @@
         </span>
     </xsl:template>
 
-    <xsl:template match="html:div[@class='embeded-shader']">
+    <!-- <xsl:template match="html:div[@class='embeded-shader']">
         <xsl:element namespace="http://www.w3.org/1999/xhtml" name="{local-name()}">
         <xsl:apply-templates select="@* | node()" />
         </xsl:element>
-    </xsl:template>
+    </xsl:template> -->
 
     <!-- uts-begin: extend mainmatter -->
     <!-- <xsl:template match="f:mainmatter">
