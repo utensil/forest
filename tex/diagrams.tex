@@ -1,11 +1,18 @@
 \usepackage{amsmath,amsfonts,amssymb}
+% https://tex.stackexchange.com/questions/404566/is-glyphtounicode-useful-with-lualatex-or-not-useful
+\makeatletter
+\@ifundefined{pdfglyphtounicode}{}{
+\def\pdfglyphtounicode#1#2{}
+}
+\makeatother
 \usepackage{newpxtext,newpxmath}
-\usepackage{tikz, tikz-cd, mathtools, amssymb, stmaryrd}
+% \usepackage{newpx}
+\usepackage{tikz, tikz-cd, mathtools, stmaryrd}
 \usepackage{pgfplots}
 \usepgfplotslibrary{colormaps}
 \usepackage[outline]{contour} % glow around text
 % https://q.uiver.app/
-\usepackage{../tex/quiver}
+\usepackage{quiver}
 \usetikzlibrary{math}
 \usetikzlibrary{matrix,arrows}
 \usetikzlibrary{backgrounds,intersections,fit,positioning,calc,shapes,spath3}
@@ -263,8 +270,8 @@
 
 \usepackage{newunicodechar}
 
-% \usepackage{mathbbol}
-% \DeclareMathSymbol{\fcmp}{\mathrel}{bbold}{\lq\;}
-% \newunicodechar{⨾}{\fcmp}
+% % \usepackage{mathbbol}
+% % \DeclareMathSymbol{\fcmp}{\mathrel}{bbold}{\lq\;}
+% % \newunicodechar{⨾}{\fcmp}
 
 \newunicodechar{⨾}{\fatsemi}

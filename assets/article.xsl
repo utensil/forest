@@ -9,7 +9,7 @@
   <xsl:include href="latex.xsl" />
   
   <xsl:template match="/">
-    <xsl:text>\input{../tex/an_article}</xsl:text>
+    <xsl:text>\input{an_article}</xsl:text>
 
     <xsl:apply-templates select="/f:tree/f:frontmatter" mode="top" />
 
