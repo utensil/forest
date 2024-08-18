@@ -1,5 +1,12 @@
 #!/bin/bash
 
+SCRIPT_DIR=$(dirname "$(readlink -f "$0")")
+PROJECT_ROOT="$SCRIPT_DIR"
+
+export TEXINPUTS=.:$PROJECT_ROOT/tex/:
+
+echo "TEXINPUTS=$TEXINPUTS"
+
 function show_result {
   # if return code is zero, then echo "Done" else echo "Failed"
   if [ $? -ne 0 ]; then

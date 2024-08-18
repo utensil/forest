@@ -2,7 +2,7 @@
 
 echo "🛁 Cleaning up build and output"
 # rm -rf build
-rm -rf output
+# rm -rf output
 ./build.sh
 
 watchexec --quiet --no-vcs-ignore --project-origin . --on-busy-update queue --poll 500ms -e tree,tex,css,js,xsl,glsl -w trees -w assets -w tex --emit-events-to=stdio -- ./build_changed.sh &

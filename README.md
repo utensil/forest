@@ -49,7 +49,7 @@ so I can check Jon Sterling's use of Forester conveniently.
 In order to use `dvisvgm` required by forester to compile LaTeX to SVG, I have to:
 
 ```bash
-brew uninstall textlive
+brew uninstall texlive
 brew install --cask mactex
 ```
 
