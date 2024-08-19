@@ -1,4 +1,10 @@
 \usepackage{amsmath,amsfonts,amssymb}
+% https://tex.stackexchange.com/questions/404566/is-glyphtounicode-useful-with-lualatex-or-not-useful
+\makeatletter
+\@ifundefined{pdfglyphtounicode}{}{
+\def\pdfglyphtounicode#1#2{}
+}
+\makeatother
 \usepackage{newpxtext,newpxmath}
 \usepackage{tikz, tikz-cd, mathtools, amssymb, stmaryrd}
 \usepackage{pgfplots}
