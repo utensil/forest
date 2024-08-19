@@ -44,7 +44,15 @@ embeded_shaders.forEach((element) => {
     let shader = element.textContent;
     element.textContent = '';
 
-    resolveIncludesAsync(shader).then((shader) => {
-        const renderer = ImageEffectRenderer.createTemporary(element, shader, options);
-    });
+    element.classList.add('lazy-loading');
+
+    let handleMouseOver = (event) => {
+        resolveIncludesAsync(shader).then((shader) => {
+            element.classList.remove('lazy-loading');
+            const renderer = ImageEffectRenderer.createTemporary(element, shader, options);
+            element.removeEventListener('mouseover', handleMouseOver);
+        });
+    };
+
+    element.addEventListener('mouseover', handleMouseOver);
 });

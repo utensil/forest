@@ -530,7 +530,30 @@ button#langblock-toggle {
     filter: invert(0.85);
 }
 
+@keyframes breathing {
+    0% {
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 0.3;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
 .embeded-shader {
     color: transparent;
     padding: 1em 1em 1em 1em;
+}
+
+.embeded-shader.lazy-loading {
+    height: 30ex;
+    background-image: url(./images/3d-cube-scan-svgrepo-com.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 20%;
+    animation: breathing 2s ease-out infinite;
 }
