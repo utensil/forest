@@ -188,4 +188,18 @@
     </xsl:template> -->
     <!-- uts-end -->
 
+    <xsl:template match="f:resource">
+        <xsl:apply-templates select="f:resource-content"/>
+    </xsl:template>
+
+    <xsl:template match="f:resource-content">
+        <xsl:apply-templates/>
+    </xsl:template>
+
+    <xsl:template match="f:img[@src]">
+        <figure>
+            <img src="{@src}"/>
+        </figure>
+    </xsl:template>
+
 </xsl:stylesheet>

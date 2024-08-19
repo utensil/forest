@@ -21,14 +21,14 @@
 
 \p{\code{texfig[body]}: A figure rendered by LaTeX.}
 
-\def\texfig[body]{
- \scope{
-  \put?\base/tex-preamble{
-   \latex-preamble/diagrams
-   \latex-preamble/string-diagrams
-  }
-  \put?\base/extra-preamble{}
-  \tex{\get\base/tex-preamble\get\base/extra-preamble}{\body}
+\def\texfig[body]{%
+ \scope{%
+  \put?\base/tex-preamble{%
+   \latex-preamble/diagrams%
+   \latex-preamble/string-diagrams%
+  }%
+  \put?\base/extra-preamble{}%
+  \tex{\get\base/tex-preamble\get\base/extra-preamble}{\body}%
  }
 }
 
@@ -193,37 +193,21 @@
 
 \p{\code{tikzfig[a]}: A TikZ graph rendered via LaTeX.}
 
-\def\tikzfig[a]{
-    \texfig{
-        \startverb
-        \begin{minipage}{1.1\linewidth}
+\def\tikzfig[a]{\texfig{\startverb\begin{minipage}{1.1\linewidth}
         \begin{figure}[H]
         \centering
-        \stopverb
-        \a
-        \startverb
+        \stopverb\a\startverb
         \end{figure}
-        \end{minipage}
-        \stopverb
-    }
-}
+        \end{minipage}\stopverb}}
 
 \p{\code{tikzfig[a]}: A TikZ graph rendered via LaTeX, adjusted the width to be half, so it could be used in a table and such.}
 
-\def\tikzfig2[a]{
-    \texfig{
-        \startverb
-        \begin{minipage}{0.5\linewidth}
+\def\tikzfig2[a]{\texfig{\startverb\begin{minipage}{0.5\linewidth}
         \begin{figure}[H]
-        \centering
-        \stopverb
-        \a
-        \startverb
+        \centering\stopverb
+        \a\startverb
         \end{figure}
-        \end{minipage}
-        \stopverb
-    }
-}
+        \end{minipage}\stopverb}}
 
 \p{\code{minitex[body]}: Typesetting LaTeX code in a minipage, with the width of an A5 paper,
 so the text size almost matches the size output by native forester code. This doesn't work very well on mobile yet.}
