@@ -29,8 +29,8 @@ saxon -s:build/$XML_FILE -xsl:assets/$XSLFILE -o:build/$TEX_FILE
 
 cd build
 
-UNICOCE_LATEX=xelatex
-# UNICOCE_LATEX=lualatex
+# UNICOCE_LATEX=xelatex
+UNICOCE_LATEX=lualatex
 
 # if environment variable CI is set
 if [ -n "$CI" ]; then
