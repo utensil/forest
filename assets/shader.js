@@ -47,10 +47,10 @@ embeded_shaders.forEach((element) => {
     element.classList.add('lazy-loading');
 
     let handleMouseOver = (event) => {
+        element.removeEventListener('mouseover', handleMouseOver);
         resolveIncludesAsync(shader).then((shader) => {
             element.classList.remove('lazy-loading');
             const renderer = ImageEffectRenderer.createTemporary(element, shader, options);
-            element.removeEventListener('mouseover', handleMouseOver);
         });
     };
 

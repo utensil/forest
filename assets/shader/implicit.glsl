@@ -3,7 +3,7 @@
 // Perspective or orthographic camera (0-1)
 #define perspective 1
 // Surface cloring modes (1-8)
-#define colorMode 4
+#define colorMode 3
 // Surface decoration pattern (0-8)
 #define surfacePattern 0
 // Background / environment (0-7)
