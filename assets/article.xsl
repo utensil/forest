@@ -15,7 +15,7 @@
 
     <xsl:text>\begin{document}</xsl:text>
 
-    <xsl:for-each select="//f:embedded-tex[not(ancestor::f:backmatter)]">
+    <xsl:for-each select="//f:resource[not(ancestor::f:backmatter)]">
       <xsl:text>&#xa;</xsl:text>
       <xsl:text>\begin{filecontents*}[overwrite]{</xsl:text>
       <xsl:value-of select="@hash" />
@@ -23,10 +23,10 @@
       <xsl:text>&#xa;</xsl:text>
       <xsl:text>\documentclass[class=article,crop]{standalone}</xsl:text>
       <xsl:text>&#xa;</xsl:text>
-      <xsl:value-of select="f:embedded-tex-preamble" />
+      <xsl:value-of select="f:resource-source[@type='latex' and @part='preamble']" />
       <xsl:text>&#xa;</xsl:text>
       <xsl:text>\begin{document}</xsl:text>
-      <xsl:value-of select="f:embedded-tex-body" />
+      <xsl:value-of select="f:resource-source[@type='latex' and @part='body']" />
       <xsl:text>\end{document}</xsl:text>
       <xsl:text>&#xa;</xsl:text>
       <xsl:text>\end{filecontents*}</xsl:text>

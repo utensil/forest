@@ -3,6 +3,13 @@
 # fail fast for this shell
 set -e
 
+SCRIPT_DIR=$(dirname "$(readlink -f "$0")")
+PROJECT_ROOT="$SCRIPT_DIR"
+
+export TEXINPUTS=.:$PROJECT_ROOT/tex/:
+
+echo "TEXINPUTS=$TEXINPUTS"
+
 # LaTeXize an xml: NOT working yet!
 
 XSLFILE="${2:-article}".xsl
@@ -27,17 +34,17 @@ UNICOCE_LATEX=xelatex
 
 # if environment variable CI is set
 if [ -n "$CI" ]; then
-    echo "lize.sh| CI is set, using xelatex"
-    $UNICOCE_LATEX -halt-on-error -interaction=nonstopmode --shell-escape $TEX_FILE
+    echo "lize.sh| CI is set, using $UNICOCE_LATEX"
+    $UNICOCE_LATEX -halt-on-error -interaction=nonstopmode --shell-escape $TEX_FILE 2>&1 >/dev/null
     # https://tex.stackexchange.com/a/295524/75671
     # biber $TEX_FILE
     # We should ignore bibtex errors if it's simply an empty .bib file
-    bibtex $AUX_FILE || echo "lize.sh| Ignoring bibtex error"
-    $UNICOCE_LATEX -halt-on-error -interaction=nonstopmode --shell-escape $TEX_FILE
-    $UNICOCE_LATEX -halt-on-error -interaction=nonstopmode --shell-escape $TEX_FILE
+    bibtex $AUX_FILE 2>&1 >/dev/null || echo "lize.sh| Ignoring bibtex error"
+    $UNICOCE_LATEX -halt-on-error -interaction=nonstopmode --shell-escape $TEX_FILE 2>&1 >/dev/null
+    $UNICOCE_LATEX -halt-on-error -interaction=nonstopmode --shell-escape $TEX_FILE 2>&1 >/dev/null
 else
     echo "lize.sh| CI is not set, using tectonic"
-    tectonic -Z shell-escape-cwd=`pwd` --keep-intermediates --keep-logs --outdir `pwd` $TEX_FILE
+    tectonic -Z shell-escape-cwd=`pwd` --keep-intermediates --keep-logs --outdir `pwd` $TEX_FILE 2>&1 >/dev/null
 fi
 
 cd ..

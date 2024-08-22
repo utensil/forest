@@ -89,9 +89,6 @@
   
   <!-- use mdframed begin -->
   <xsl:template match="f:tree[f:frontmatter/f:taxon[not(text()='Proof' or (ancestor::f:backmatter))]]">
-    <!-- <xsl:text>\reversemarginpar\marginpar{</xsl:text>
-    <xsl:apply-templates select="f:frontmatter/f:addr" />
-    <xsl:text>}</xsl:text> -->
     <xsl:text>\begin{</xsl:text>
     <xsl:apply-templates select="f:frontmatter/f:taxon" />
     <xsl:text>}</xsl:text>
@@ -113,7 +110,7 @@
   <!-- use mdframed end -->
 
   <!-- use tcolorbox begin -->
-  <!-- <xsl:template match="f:tree[f:frontmatter/f:taxon[not(text()='Proof')]]">
+  <!-- <xsl:template match="f:tree[f:frontmatter/f:taxon[not(text()='Proof' or (ancestor::f:backmatter))]]">
     <xsl:text>\begin{</xsl:text>
     <xsl:apply-templates select="f:frontmatter/f:taxon" />
     <xsl:text>}</xsl:text>
@@ -272,18 +269,34 @@
   
   <xsl:template match="f:headline" />
   
-  <xsl:template match="f:embedded-tex">
-    <!-- https://tex.stackexchange.com/a/630191/75671 -->
-    <!-- <xsl:text>\unskip \hspace*{\fill} \break</xsl:text> -->
-    <xsl:text>{\centering</xsl:text>
-    <!-- https://tex.stackexchange.com/a/550265/75671 -->
-    <!-- https://tex.stackexchange.com/a/308876/75671 -->
-    <!-- <xsl:text>\fontsize{14}{14}\selectfont</xsl:text> -->
-    <!-- https://latexref.xyz/_005cincludegraphics.html -->
-    <xsl:text>\includestandalone[width=1.0\textwidth]{</xsl:text>
-    <xsl:value-of select="@hash" />
-    <xsl:text>}</xsl:text>
-    <xsl:text>}</xsl:text>
+  <xsl:template match="f:resource">
+    <xsl:choose>
+        <xsl:when test="not(ancestor::html:table)">
+            <!-- https://tex.stackexchange.com/a/630191/75671 -->
+            <!-- <xsl:text>\unskip \hspace*{\fill} \break</xsl:text> -->
+            <xsl:text>&#xa;&#xa;{\centering</xsl:text>
+            <!-- https://tex.stackexchange.com/a/550265/75671 -->
+            <!-- https://tex.stackexchange.com/a/308876/75671 -->
+            <!-- <xsl:text>\fontsize{14}{14}\selectfont</xsl:text> -->
+            <!-- https://latexref.xyz/_005cincludegraphics.html -->
+            <!-- <xsl:text>\begin{center}</xsl:text> -->
+            <xsl:text>\includestandalone[width=1.0\textwidth]{</xsl:text>
+            <xsl:value-of select="@hash" />
+            <xsl:text>}</xsl:text>
+            <xsl:text>}&#xa;&#xa;</xsl:text>
+            <!-- <xsl:text>\end{center}</xsl:text> -->
+        </xsl:when>
+        <xsl:otherwise>
+            <xsl:text>&#xa;&#xa;{\centering</xsl:text>
+            <xsl:variable name="colcount" select="count(ancestor::html:table/html:thead/html:tr/html:th)" />
+            <xsl:text>\includestandalone[width=</xsl:text>
+            <xsl:value-of select="1 div $colcount" />
+            <xsl:text>\textwidth]{</xsl:text>
+            <xsl:value-of select="@hash" />
+            <xsl:text>}</xsl:text>
+            <xsl:text>}&#xa;&#xa;</xsl:text>
+        </xsl:otherwise>
+    </xsl:choose>
   </xsl:template>
 
   <xsl:template match="html:code">
@@ -329,7 +342,9 @@
   </xsl:template>
 
   <xsl:template match="html:table">
-    <xsl:text>\begin{tabular}{</xsl:text>
+    <xsl:text>
+    \resizebox{\columnwidth}{!}{%&#xa;
+    \begin{tabular}{</xsl:text>
     <xsl:for-each select="html:thead/html:tr/html:th">
         <xsl:text> c </xsl:text>
     </xsl:for-each>
@@ -349,6 +364,7 @@
     </xsl:for-each>
     <xsl:text>\bottomrule&#xa;</xsl:text>
     <xsl:text>\end{tabular}</xsl:text>
+    <xsl:text>}</xsl:text>
   </xsl:template>
 
   <xsl:template match="html:span[@class='langblock']">
