@@ -66,43 +66,47 @@
             <xsl:value-of select="." />
             <xsl:text>]</xsl:text>
         </a>
-        <!-- uts-begin: Add the source link to the source of the tree, only works for my own forest -->
+        <!-- uts-begin -->
+        <div class="link-buttons">
+        <!-- : Add the source link to the source of the tree, only works for my own forest -->
         <xsl:if test="../f:addr=/f:tree/f:frontmatter/f:addr">
             <xsl:choose>
                 <xsl:when test="../f:taxon[text()='Person']">
-                <a class="link-source" title="source" href="https://github.com/utensil/forest/blob/main/trees/people/{../f:addr}.tree">
+                <a class="link-button link-source" title="source" href="https://github.com/utensil/forest/blob/main/trees/people/{../f:addr}.tree">
                     <xsl:text>✍️</xsl:text>
                     <span>source</span>
                 </a>
                 </xsl:when>
                 <xsl:when test="../f:taxon[text()='Reference']">
-                <a class="link-source" title="source" target="_blank" href="https://github.com/utensil/forest/blob/main/trees/refs/{../f:addr}.tree">
+                <a class="link-button link-source" title="source" target="_blank" href="https://github.com/utensil/forest/blob/main/trees/refs/{../f:addr}.tree">
                     <xsl:text>✍️</xsl:text>
                     <span>source</span>
                 </a>
                 </xsl:when>
                 <xsl:when test="../f:taxon[text()='Proof']">
-                <a class="link-source" title="source" target="_blank" href="https://github.com/utensil/forest/blob/main/trees/{../../f:backmatter/f:context/f:tree/f:frontmatter/f:addr}.tree">
+                <a class="link-button link-source" title="source" target="_blank" href="https://github.com/utensil/forest/blob/main/trees/{../../f:backmatter/f:context/f:tree/f:frontmatter/f:addr}.tree">
                     <xsl:text>✍️</xsl:text>
                     <span>source</span>
                 </a>
                 </xsl:when>
                 <xsl:otherwise>
-                <a class="link-source" title="source" target="_blank" href="https://github.com/utensil/forest/blob/main/trees/{../f:addr}.tree">
+                <a class="link-button link-source" title="source" target="_blank" href="https://github.com/utensil/forest/blob/main/trees/{../f:addr}.tree">
                     <xsl:text>✍️</xsl:text>
                     <span>source</span>
                 </a>
                 </xsl:otherwise>
             </xsl:choose>
         </xsl:if>
-        <!-- uts-end -->
-        <!-- uts-begin -->
         <xsl:if test="../f:meta[@name='pdf']">
-            <a target="_blank" title="PDF" class="link-pdf" href="{../f:addr}.pdf">📄<span>PDF</span></a>
+            <a target="_blank" title="PDF" class="link-button link-pdf" href="{../f:addr}.pdf">📄<span>PDF</span></a>
         </xsl:if>
         <xsl:if test="../f:meta[@name='lean']">
             <xsl:apply-templates select="../f:meta[@name='lean']" />
         </xsl:if>
+        <xsl:if test="../f:addr=/f:tree/f:frontmatter/f:addr and ../f:meta[@name='multilang']">
+            <a id="langblock-toggle" class="link-button" href="javascript:void(0)" title="Show hidden languages">🌎</a>
+        </xsl:if>
+        </div>
         <!-- uts-end -->
     </xsl:template>
 

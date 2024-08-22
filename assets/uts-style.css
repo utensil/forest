@@ -413,7 +413,11 @@ nav#toc li.active {
     display: table;
 } */
 
-.link-source, .link-pdf, .meta-lean a, .meta-lean-symbol {
+.link-buttons {
+    cursor:pointer;
+}
+
+.link-button, .meta-lean a, .meta-lean-symbol {
     font-weight: normal;
     font-size: 60%;
     border-radius: 5px;
@@ -422,8 +426,11 @@ nav#toc li.active {
     border: var(--uts-text-gentle) 1px solid;
     padding: 3px 1ex 3px 1ex;
     margin: 0 0.5ex 1ex 0.5ex;
-    cursor: pointer;
     float: right;
+}
+
+.link-button:hover, .meta-lean a:hover, .meta-lean-symbol:hover {
+    box-shadow: #95dbfc 0 0 5px;
 }
 
 .link-source span, 
