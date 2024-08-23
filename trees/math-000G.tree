@@ -12,23 +12,61 @@
 % kostecki2011introduction leinster2016basic nakahira2023diagrammatic rosiak2022sheaf
 
 \note{some links for rendering implicit surfaces}{
-  \ul{
-    \li{\citek{singh2009real} has reviews on related work, an algorithm and many examples. But it has no code.
+  \block{readings: raymarching on implicit surfaces}{
+    \ul{
+      \li{\citek{singh2009real} has reviews on related work, an algorithm and many examples. But it has no code.
+      }
+      \li{[Ray Marching and Signed Distance Functions](https://jamie-wong.com/2016/07/15/ray-marching-signed-distance-functions/) is a good introduction to ray-marching and signed distance functions, and the author learns from [Inigo Quilez](https://iquilezles.org/).
+      }
+      \li{[Rendering Worlds with Two Triangles with raytracing on the GPU in 4096 bytes](https://iquilezles.org/articles/nvscene2008/rwwtt.pdf) by Iñigo Quilez in 2008
+      }
+      \li{[Raymarching Distance Fields](https://9bitscience.blogspot.com/2013/07/raymarching-distance-fields_14.html) in 2013
+      }
+      \li{[raymarching terrains](https://iquilezles.org/articles/terrainmarching/) by Iñigo Quilez in 2002}
+      \li{[CUDA Ray Marching](https://granskog.xyz/blog/2017/1/11/cuda-ray-marching/) by Jonathan Granskog
+      }
+      \li{[Notes on GPU Ray Marching](https://www.cl.cam.ac.uk/teaching/1718/AdvGraph/5.\%20GPU\%20Ray\%20Marching.pdf) by Alex Benton in 2017–18, with more related materials [here](https://www.cl.cam.ac.uk/teaching/1718/AdvGraph/materials.html).
+      }
+      \li{[Ray Tracing Deterministic 3-D Fractals](https://www.cs.drexel.edu/~deb39/Classes/Papers/rtqjs.pdf) in 1989
+      }
+      \li{[Ray-marching Thurston geometries in 2022](https://arxiv.org/abs/2010.15801)}
+      \li{[PU-Ray: Domain-Independent Point Cloud Upsampling via Ray Marching on Neural Implicit Surface](https://arxiv.org/abs/2310.08755) in 2024}
     }
-    \li{[SURFER](https://github.com/IMAGINARY/SURFER) renders implicit surfaces using ray-tracing, the result is stunning well. It also has a Java library with [many examples](https://github.com/IMAGINARY/jsurf/tree/master/examples).
+  }
+  \block{libraries and tools: raymarching on implicit surfaces}{
+    \ul{
+      \li{[SURFER](https://github.com/IMAGINARY/SURFER) renders implicit surfaces using ray-tracing, the result is stunning well. It also has a Java library with [many examples](https://github.com/IMAGINARY/jsurf/tree/master/examples).
+      }
+      \li{[Raycasting Implicit Surfaces](https://cindyjs.org/gallery/main/Raytracer/) based on [CindyJS](https://cindyjs.org/) is Web-based implicit surface renderer using ray-tracing, and the source code is best suited for reproducing and learning. It also has a rich set of examples.
+      }
+      \li{[Raycasting a surface of degree 4](https://cindyjs.org/examples/cindygl/36_raycasting_kummer.html) is a relatively simpler example of ray-tracing implicit surfaces with source [here](https://github.com/CindyJS/CindyJS/blob/main/examples/cindygl/36_raycasting_kummer.html).
+      }
+      \li{[mla](https://www.shadertoy.com/user/mla) has a series of shaders from simple to complicated to render the Kummer surface, see [here](https://www.shadertoy.com/results?query=Kummer). mla has also ported a tiny ray tracer [here](https://www.shadertoy.com/view/tsjGRW) which could be a starting point.
+      }
+      \li{A simpler but more versatile ray-tracer for implicit surfaces is [Implicit surfaces created by Rogolop](https://www.shadertoy.com/view/l3BSRG).
+      }
     }
-    \li{[Raycasting Implicit Surfaces](https://cindyjs.org/gallery/main/Raytracer/) based on [CindyJS](https://cindyjs.org/) is Web-based implicit surface renderer using ray-tracing, and the source code is best suited for reproducing and learning. It also has a rich set of examples.
-    }
-    \li{[Raycasting a surface of degree 4](https://cindyjs.org/examples/cindygl/36_raycasting_kummer.html) is a relatively simpler example of ray-tracing implicit surfaces with source [here](https://github.com/CindyJS/CindyJS/blob/main/examples/cindygl/36_raycasting_kummer.html).
-    }
-    \li{[mla](https://www.shadertoy.com/user/mla) has a series of shaders from simple to complicated to render the Kummer surface, see [here](https://www.shadertoy.com/results?query=Kummer). mla has also ported a tiny ray tracer [here](https://www.shadertoy.com/view/tsjGRW) which could be a starting point.
-    }
-    \li{A simpler but more versatile ray-tracer for implicit surfaces is [Implicit surfaces created by Rogolop](https://www.shadertoy.com/view/l3BSRG).
-    }
-    \li{[Ray Marching and Signed Distance Functions](https://jamie-wong.com/2016/07/15/ray-marching-signed-distance-functions/) is a good introduction to ray-marching and signed distance functions, and the author learns from [Inigo Quilez](https://iquilezles.org/).
+  }
+  \block{Implicit reconstruction or polygonization}{
+    \ul{
+      \li{Robust Creation of Implicit Surfaces from Polygonal Meshes in 2002}
+      \li{Curvature Dependent Polygonization of Implicit Surfaces in 2004}
+      \li{Implicit Meshes for Modeling and Reconstruction in 2018}
+      \li{Differential Geometry in Neural Implicits in 2022}
+      \li{Differentiable Iterated Function Systems in 2024}
+      \li{[SDFGen](https://github.com/christopherbatty/SDFGen): A simple commandline utility to generate grid-based signed distance field (level set) generator from triangle meshes, using code from Robert Bridson's website. Found from [Merging Meshes with Signed Distance Fields](https://www.gradientspace.com/tutorials/2017/11/21/signed-distance-fields-tutorial).
+      }
+      \li{[sdf](https://github.com/fogleman/sdf): Generate 3D meshes based on SDFs (signed distance functions) with a dirt simple Python API.
+      }
+      \li{[SDFStudio](https://github.com/autonomousvision/sdfstudio): A Unified Framework for Surface Reconstruction
+      }
     }
   }
 
   \p{For learning shaders, see [[math-000H]].
   }
+
+  \todo{Convert some of the links to citations.}
+
+  \todo{I would like to have a formal specification of the raymarching algorithm (in [algorithm2e](https://amirsojoodi.github.io/posts/LaTeX-Algorithm2e/) or [algorithmicx+algpseudocode or even algpseudocodex](https://tex.stackexchange.com/questions/229355/algorithm-algorithmic-algorithmicx-algorithm2e-algpseudocode-confused)), and find propositions worth proving.}
 }
