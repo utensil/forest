@@ -8,6 +8,12 @@ const load_script = (src) => {
 
 document.addEventListener('DOMContentLoaded', async () => {
 
+    const markdownit_tags = document.querySelectorAll('.markdownit-raw');
+
+    if (markdownit_tags.length != 0) {
+        load_script('markdownit.js');
+    }
+
     const code_tags = document.querySelectorAll('article code');
 
     if (code_tags.length != 0) {
