@@ -36,6 +36,9 @@ function show_lize_result {
 }
 
 function bun_build {
+    if [ -n "$CI" ]; then
+        bun install
+    fi
     # for each files in the directory `bun`, run bun build
     for FILE in $(ls -1 bun); do
         bun build bun/$FILE --outdir output
