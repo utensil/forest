@@ -54,3 +54,20 @@ brew install --cask mactex
 ```
 
 See https://tex.stackexchange.com/a/676179/75671 for why.
+
+I'm experimenting with authoring `js/ts/jsx/tsx` using `bun`, so I also need to run
+
+```bash
+curl -fsSL https://bun.sh/install | bash
+source ~/.zshrc # or ~/.bashrc
+```
+
+to install `bun`.
+
+Rendering `js/ts/jsx/tsx` are also done by `dev.sh` in development with watch support or `build.sh` in CI. Manually this is:
+
+```bash
+bun build ./bun/<file-name> --outdir output
+```
+
+To use any package, just figure out the package name from the import and run `bun install <package-name>`, `package.json` will be updated by `bun`.

@@ -62,7 +62,8 @@ document.addEventListener("DOMContentLoaded", function () {
     // on clicking the button with id theme-toggle, the function toggleTheme is called
     document.getElementById("theme-toggle").onclick = toggleTheme;
     document.getElementById("search").onclick = search;
-    document.getElementById("langblock-toggle").onclick = togglelang;
+    const langblock_toggle = document.getElementById("langblock-toggle");
+    if(langblock_toggle) langblock_toggle.onclick = togglelang;
 
     const content_out_of_sight_observer = new IntersectionObserver(entries => {
         entries.forEach(entry => {

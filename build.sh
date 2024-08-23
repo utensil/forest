@@ -35,8 +35,18 @@ function show_lize_result {
   echo "Open output/$1.pdf to see the result."
 }
 
+function bun_build {
+    # for each files in the directory `bun`, run bun build
+    for FILE in $(ls -1 bun); do
+        bun build bun/$FILE --outdir output
+    done
+}
+
 function build {
   mkdir -p build
+  echo "⭐ Rebuilding bun"
+  bun_build
+  echo "⭐ Rebuilding forest"
   opam exec -- forester build # 2>&1 > build/forester.log # --dev
   show_result
   mkdir -p output/shader/
@@ -59,7 +69,6 @@ function lize {
 #   show_lize_result math-0001
 }
 
-echo "⭐ Rebuilding forest"
 time build
 echo
 
