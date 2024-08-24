@@ -31,4 +31,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     if(r3f_root) {
         load_script('hello-react-three-fiber.js');
     }
+
+    const three2svg_root = document.querySelector('#three2svg-root');
+
+    if(three2svg_root) {
+        load_script('test-three-to-svg.js');
+    }
 });
