@@ -15,6 +15,78 @@
 
 \note{test tikz drawing for ray-tracing}{
 
+\p{Adpated from Eric Wieser's snippet from the bivector discord (is it possible to combine this with kingdon and pylatex to render it with PGA etc.?):
+}
+
+\tikzfig\verb>>>|
+        \tikzstyle{dimetric2}=[x={(0.935cm,-0.118cm)},z={(0cm,0.943cm)},y={(0.354cm,0.312cm)}]
+        \begin{tikzpicture}[dimetric2]
+            \def\ninf{n_{\infty}}
+            \def\r{3};
+            \def\opac{1/3}
+            \draw[black] (-\r/2,0,0) -- (0,0,0);
+            \draw[black,-latex] (0,0,0) -- (0,\r,0) node[above right] {$e_y$};
+            \draw[black] (0,0,0) -- ({0.5-0.25/2},0,0);
+            % no-plane
+            \def\lpsi{-50}
+            
+            \foreach \i in {0,30,...,359}
+                \draw [dotted, domain=0:{sqrt(\r)}, samples=20]
+                    plot({\x*cos(\i)}, {\x*sin(\i)}, {(\x)^2});
+            \draw[gray] (0, 0, \r) circle ({sqrt(\r)});
+        
+            \begin{scope}[
+                plane x={($(1,0,1.25) + ({1/sqrt(5)},0,{2/sqrt(5)})$)},
+                plane y={($(1,0,1.25) + (0,1,0)$)},
+                plane origin={(1,0,1.25)},
+                canvas is plane
+            ]
+                \path[save path=\rplane] (0, 0, 0) circle (\r);
+            \end{scope}
+            \begin{scope}[
+                plane x={($(1,0,1.25) + ({1},0,{2})$)},
+                plane y={($(1,0,1.25) + (0,1,0)$)},
+                plane origin={(1,0,1.25)},
+                canvas is plane
+            ]
+                \path[save path=\rparab]  (0, 0, 0) circle (0.5);
+                \clip [use path=\rplane];
+                \draw[blue]
+                    ({-\r*cos(\lpsi)},{-\r*sin(\lpsi)}, 0) --
+                    ({\r*cos(\lpsi)},{\r*sin(\lpsi)}, 0);
+            \end{scope}
+            \begin{scope}
+                \draw[red,dashed,fill=red, opacity=\opac, even odd rule] [use path=\rplane];
+                \draw[fill=white,opacity=0.5] [use path=\rparab];
+            \end{scope}
+            \draw[red] [use path=\rparab];
+            \begin{scope}
+                \clip [use path=\rparab];
+                \draw[gray] (0, 0, \r) circle ({sqrt(\r)});
+            \end{scope}
+            \draw[very thick,red] (1, 0, 0) circle(0.5);
+            \draw[fill=blue] ({1+0.5*cos(\lpsi)},{0.5*sin(\lpsi)},0) circle[shift only,radius=1.8 pt];
+            \draw[fill=blue] ({1-0.5*cos(\lpsi)},{-0.5*sin(\lpsi)},0) circle[shift only,radius=1.8 pt];
+    
+            \draw[dashed,red] (1.5,0,0) -- (1.5, 0, 2.25);
+            \draw[dashed,red] (0.5,0,0) -- (0.5, 0, 0.25);
+            \draw[dashed,blue]
+                ({1+0.5*cos(\lpsi)},{0.5*sin(\lpsi)},0) --
+                ({1+0.5*cos(\lpsi)},{0.5*sin(\lpsi)},{1.25+cos(\lpsi)});
+            \draw[dashed,blue]
+                ({1-0.5*cos(\lpsi)},{-0.5*sin(\lpsi)},0) --
+                ({1-0.5*cos(\lpsi)},{-0.5*sin(\lpsi)},{1.25-cos(\lpsi)});
+            \draw[fill=blue]
+                ({1+0.5*cos(\lpsi)},{0.5*sin(\lpsi)},{1.25+cos(\lpsi)}) circle[shift only,radius=1.2 pt];
+            \draw[fill=blue]
+                ({1-0.5*cos(\lpsi)},{-0.5*sin(\lpsi)},{1.25-cos(\lpsi)}) circle[shift only,radius=1.2 pt];
+    
+            \draw[black,-latex] (0,0,0) -- (0,0,\r) node[above] {$\ninf$};
+            \draw[black,-latex] ({0.5-0.25/2},0,0) -- (\r,0,0) node[right] {$e_x$};
+            \draw[black] (0,-\r,0) -- (0,0,0);
+        \end{tikzpicture}
+>>>
+
 \p{From \link{https://github.com/AmesingFlank/Aquarius/blob/master/report/ChapterRender.tex}:
 }
 
