@@ -8,7 +8,7 @@ const load_script = (src) => {
 
 document.addEventListener('DOMContentLoaded', async () => {
 
-    const markdownit_tags = document.querySelectorAll('.markdownit-raw');
+    const markdownit_tags = document.querySelectorAll('.markdownit.lazy-loading');
 
     if (markdownit_tags.length != 0) {
         load_script('markdownit.js');
