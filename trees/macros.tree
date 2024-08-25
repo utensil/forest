@@ -504,6 +504,10 @@ so the text size almost matches the size output by native forester code. This do
   \<html:style>{\body}
 }
 
+\def\component[componentClass][cssbody][jsbody][body]{
+  \<html:div>[class]{\componentClass}{\css{\cssbody} \js{\jsbody} \body}
+}
+
 % \def\cref[addr]{\<html:span>[class]{cref}{[\addr](\addr)}} % this is not required as XSLT can handle local links with or without taxons like cleveref automatically
 
 % Some Math symbols that are common in all topics
