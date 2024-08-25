@@ -509,7 +509,7 @@ so the text size almost matches the size output by native forester code. This do
 }
 
 \def\penrose[domain][substance][style]{
-  \<html:div>[class]{penrose-root}{
+  \<html:div>[class]{penrose-root lazy-loading}{
     \<html:div>[class]{penrose-domain}{\domain}
     \<html:div>[class]{penrose-substance}{\substance}
     \<html:div>[class]{penrose-style}{\style}
@@ -517,7 +517,7 @@ so the text size almost matches the size output by native forester code. This do
 }
 
 \def\penrose/trio[trio]{
-  \<html:div>[class]{penrose-root}[data-trio]{\trio}{}
+  \<html:div>[class]{penrose-root lazy-loading}[data-trio]{\trio}{}
 }
 
 % \def\cref[addr]{\<html:span>[class]{cref}{[\addr](\addr)}} % this is not required as XSLT can handle local links with or without taxons like cleveref automatically
