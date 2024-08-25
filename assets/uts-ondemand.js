@@ -25,16 +25,4 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (embeded_shaders.length != 0) {
         load_script('shader.js');
     }
-
-    const r3f_root = document.querySelector('#r3f-root');
-
-    if(r3f_root) {
-        load_script('hello-react-three-fiber.js');
-    }
-
-    const three2svg_root = document.querySelector('#three2svg-root');
-
-    if(three2svg_root) {
-        load_script('test-three-to-svg.js');
-    }
 });
