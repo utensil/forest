@@ -15,12 +15,14 @@
 
 \note{test typst}{
 
-\p{The following loads a Typst file from a path relative to \code{/typst/}
+\p{Note: The Typst files and their imports must be placed under \code{typst}, as it's set up as the root directory for Typst imports.
 }
 
+\block{rendering a Typst file with imports}{
 \typst{hello.typ}
+}
 
-\p{The following renders an inline Typst code block, with access to other .typ files.}
+\block{rendering a Typst code block with imports}{
 
 \typst-inline\verb>>>|
 #import "config.typ" : setup
@@ -59,4 +61,23 @@ The first #count numbers of the sequence are:
 
 #show : setup(fulltext)
 >>>
+}
+
+\block{hybrid typst with forester markup}{
+\typst-inline{
+#import "config.typ" : setup
+
+#let fulltext = [
+We wish to use
+
+- forester link [markdown-it demo](https://markdown-it.github.io/)
+- wiki link [[math-000E]]
+- citations \citek{nakahira2023diagrammatic}
+- cross-references \ref{math-000E}
+]
+
+#show : setup(fulltext)
+}
+}
+
 }
