@@ -55,4 +55,4 @@ echo "lize.sh| Open build/$1.log to see the log."
 echo "lize.sh| Open build/$TEX_FILE to see the LaTeX source."
 echo "lize.sh| Open output/$PDF_FILE to see the result."
 
-# use ./lize.sh math-0001 2>&1|grep lize to see a short output
+# use ./lize.sh uts-0001 2>&1|grep lize to see a short output
