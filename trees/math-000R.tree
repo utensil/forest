@@ -20,14 +20,19 @@
 
 \typst{hello.typ}
 
-\p{The following renders an inline Typst code block, with no access to any other .typ files (yet).}
+\p{The following renders an inline Typst code block, with access to other .typ files.}
 
 \typst-inline\verb>>>|
-#set page(width: 595.28pt, height: auto, margin: (x: 0.5cm, y: 0.5cm))
-#set text(size: 16pt)
-#set heading(numbering: "1.")
+#import "config.typ" : setup
+
+#let fulltext = [
+
+// #set page(width: 595.28pt, height: auto, margin: (x: 0.5cm, y: 0.5cm))
+// #set text(size: 16pt)
+// #set heading(numbering: "1.")
 
 = Fibonacci sequence
+
 The Fibonacci sequence is defined through the
 recurrence relation $F_n = F_(n-1) + F_(n-2)$.
 It can also be expressed in _closed form:_
@@ -49,5 +54,9 @@ The first #count numbers of the sequence are:
   ..nums.map(n => $F_#n$),
   ..nums.map(n => str(fib(n))),
 ))
+
+]
+
+#show : setup(fulltext)
 >>>
 }
