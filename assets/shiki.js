@@ -14,7 +14,7 @@ async function loadJson(url) {
 
 // document.addEventListener('DOMContentLoaded', async () => {
 
-    const code_tags = document.querySelectorAll('article code')
+    const code_tags = document.querySelectorAll('article code.highlight')
 
     if(code_tags.length != 0) {
 

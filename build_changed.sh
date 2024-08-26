@@ -21,6 +21,13 @@ while IFS= read -r line; do
         ./build.sh
     elif [[ $CHANGED_FILE == *".glsl" ]]; then
         mkdir -p output/shader/
+        cp -f assets/shader/* output/shader/
+    elif [[ $CHANGED_FILE == *".typ" ]]; then
+        mkdir -p output/shader/
+        cp -f assets/typst/* output/typst/
+    elif [[ $CHANGED_FILE == *".domain" ]] || [[ $CHANGED_FILE == *".style" ]] || [[ $CHANGED_FILE == *".substance" ]] || [[ $CHANGED_FILE == *".trio.json" ]]; then
+        mkdir -p output/penrose/
+        cp -f assets/penrose/* output/penrose/
     elif [[ $CHANGED_FILE_DIRNAME == "bun" ]]; then
         ./build.sh
     else

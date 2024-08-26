@@ -14,7 +14,13 @@ document.addEventListener('DOMContentLoaded', async () => {
         load_script('markdownit.js');
     }
 
-    const code_tags = document.querySelectorAll('article code');
+    const typst_tags = document.querySelectorAll('.typst-root.lazy-loading');
+
+    if (typst_tags.length != 0) {
+        load_script('typst.js');
+    }
+
+    const code_tags = document.querySelectorAll('article code.highlight');
 
     if (code_tags.length != 0) {
         load_script('shiki.js');

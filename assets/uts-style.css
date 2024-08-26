@@ -576,7 +576,7 @@ figure {
     white-space: pre-wrap;
 }
 
-.penrose-root.lazy-loading {
+.penrose-root.lazy-loading, .typst-root.lazy-loading {
     color: transparent;
     height: 70ex;
     background-image: url(./images/3d-cube-scan-loading.svg);
@@ -584,4 +584,12 @@ figure {
     background-position: center;
     background-size: 80%;
     animation: breathing 2s ease-out infinite;
+}
+
+:root[data-applied-mode="dark"] .typst-root {
+    filter: invert(1.0);
+}
+
+.typst-root svg {
+    width: 100%;
 }
