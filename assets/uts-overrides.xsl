@@ -206,20 +206,36 @@
         </figure>
     </xsl:template>
 
-    <xsl:template match="html:div[@class='typst-root lazy-loading']//f:link">
+    <xsl:template match="html:div[@class='typst-root lazy-loading']//f:link[@type='external']">
         <xsl:text>#link("</xsl:text>
         <xsl:value-of select="@href"/>
-        <xsl:text>")[</xsl:text>
+        <xsl:text>", underline(text(black)[</xsl:text>
         <xsl:value-of select="."/>
-        <xsl:text>]</xsl:text>
+        <xsl:text>]))</xsl:text>
+    </xsl:template>
+
+    <xsl:template match="html:div[@class='typst-root lazy-loading']//f:link[@type='local']">
+        <xsl:text>#link("</xsl:text>
+        <xsl:value-of select="@href"/>
+        <xsl:text>", underline(stroke: (dash: "dotted"), text(black)[</xsl:text>
+        <xsl:value-of select="."/>
+        <xsl:text>]))</xsl:text>
+    </xsl:template>
+
+    <xsl:template match="html:div[@class='typst-root lazy-loading']//html:span[@class='link-reference']/f:link">
+        <xsl:text>#link("</xsl:text>
+        <xsl:value-of select="@href"/>
+        <xsl:text>", text(rgb("#10731d"))[</xsl:text>
+        <xsl:value-of select="."/>
+        <xsl:text>])</xsl:text>
     </xsl:template>
 
     <xsl:template match="html:div[@class='typst-root lazy-loading']//f:ref">
         <xsl:text>#link("</xsl:text>
         <xsl:value-of select="@href"/>
-        <xsl:text>")[§ [</xsl:text>
+        <xsl:text>", underline(stroke: (dash: "dotted"), text(black)[§ [</xsl:text>
         <xsl:value-of select="@addr"/>
-        <xsl:text>]]</xsl:text>
+        <xsl:text>]]))</xsl:text>
     </xsl:template>
 
 </xsl:stylesheet>

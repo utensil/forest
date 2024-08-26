@@ -19,11 +19,10 @@
     set text(size: 16pt)
     set heading(numbering: "1.")
 
-    show link: it => {
-      set underline()
-      set text(blue)
-      it
-    }
+    // show link: it => {
+    //   // set text(blue)
+    //   underline(stroke: (dash: "dotted"), it)
+    // }
 
     body
 }

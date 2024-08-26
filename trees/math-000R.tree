@@ -64,13 +64,27 @@ The first #count numbers of the sequence are:
 }
 
 \block{hybrid typst with forester markup}{
+
+\p{This is native forester markup:
+}
+
+\ul{
+  \li{external link: [typst docs](https://typst.app/docs)}
+  \li{wiki link: [[math-000E]]}
+  \li{citations: \citek{nakahira2023diagrammatic}}
+  \li{cross-references: \ref{math-000E}}
+}
+
+\p{This is the same markup rendered in Typst:
+}
+
 \typst-inline{
 #import "config.typ" : setup
 
 #let fulltext = [
 We wish to use
 
-- forester link: [markdown-it demo](https://markdown-it.github.io/)
+- external link: [typst docs](https://typst.app/docs)
 - wiki link: [[math-000E]]
 - citations: \citek{nakahira2023diagrammatic}
 - cross-references: \ref{math-000E}
