@@ -20,6 +20,12 @@ document.addEventListener('DOMContentLoaded', async () => {
         load_script('typst.js');
     }
 
+    const pikchr_tags = document.querySelectorAll('.pikchr-root.lazy-loading');
+
+    if (pikchr_tags.length != 0) {
+        load_script('pikchr.js');
+    }
+
     const code_tags = document.querySelectorAll('article code.highlight');
 
     if (code_tags.length != 0) {
