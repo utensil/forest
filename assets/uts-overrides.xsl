@@ -206,4 +206,20 @@
         </figure>
     </xsl:template>
 
+    <xsl:template match="html:div[@class='typst-root lazy-loading']//f:link">
+        <xsl:text>#link("</xsl:text>
+        <xsl:value-of select="@href"/>
+        <xsl:text>")[</xsl:text>
+        <xsl:value-of select="."/>
+        <xsl:text>]</xsl:text>
+    </xsl:template>
+
+    <xsl:template match="html:div[@class='typst-root lazy-loading']//f:ref">
+        <xsl:text>#link("</xsl:text>
+        <xsl:value-of select="@href"/>
+        <xsl:text>")[§ [</xsl:text>
+        <xsl:value-of select="@addr"/>
+        <xsl:text>]]</xsl:text>
+    </xsl:template>
+
 </xsl:stylesheet>

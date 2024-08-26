@@ -1,4 +1,11 @@
 #!/bin/bash
+SCRIPT_DIR=$(dirname "$(readlink -f "$0")")
+PROJECT_ROOT="$SCRIPT_DIR"
+
+function remove_output_file {
+    echo "🚨removing output/$1"
+    rm output/$1
+}
 
 while IFS= read -r line; do
     IFS=':' read -ra ADDR <<< "$line"
@@ -9,15 +16,19 @@ while IFS= read -r line; do
     CHANGED_FILE_BASENAME=$(basename $CHANGED_FILE)
     # get the dirname of the changed file
     CHANGED_FILE_DIRNAME=$(basename $(dirname $CHANGED_FILE))
-    echo "📂$CHANGED_FILE_DIRNAME"
-    echo "🚨removing output/$CHANGED_FILE_BASENAME"
-    rm output/$CHANGED_FILE_BASENAME
-
+    # # get the file name relative to the project root
+    # CHANGED_FILE_RELATIVE=$(realpath --relative-to=$PROJECT_ROOT $CHANGED_FILE)
+    # echo "📂$CHANGED_FILE_DIRNAME"
     if [[ $CHANGED_FILE == *".css" ]] || [[ $CHANGED_FILE == *".js" ]]; then
+        remove_output_file $CHANGED_FILE_BASENAME
         ./build.sh
     elif [[ $CHANGED_FILE == *".xsl" ]]; then
+        remove_output_file $CHANGED_FILE_BASENAME
         ./build.sh
-    elif [[ $CHANGED_FILE == *".tree" ]] || [[ $CHANGED_FILE == *".tex" ]]; then
+    elif [[ $CHANGED_FILE == *".tree" ]]; then
+        # remove_output_file $CHANGED_FILE_BASENAME
+        ./build.sh
+    elif [[ $CHANGED_FILE == *".tex" ]]; then
         ./build.sh
     elif [[ $CHANGED_FILE == *".glsl" ]]; then
         mkdir -p output/shader/

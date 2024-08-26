@@ -19,5 +19,11 @@
     set text(size: 16pt)
     set heading(numbering: "1.")
 
+    show link: it => {
+      set underline()
+      set text(blue)
+      it
+    }
+
     body
 }
