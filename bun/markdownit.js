@@ -9,7 +9,7 @@ console.log(markdownit_tags);
 for (let i = 0; i < markdownit_tags.length; i++) {
     const markdownit_tag = markdownit_tags[i];
     const markdown_source = markdownit_tag.innerHTML;
-    console.log(markdown_source);
+    // console.log(markdown_source);
     markdownit_tag.innerHTML = md.render(markdown_source);
     markdownit_tag.classList.remove('lazy-loading');
 }

@@ -39,23 +39,33 @@ function bun_build {
     if [ -n "$CI" ]; then
         bun install
     fi
-    cp -f node_modules/@myriaddreamin/typst-ts-web-compiler/pkg/typst_ts_web_compiler_bg.wasm output/
-    cp -f node_modules/@myriaddreamin/typst-ts-renderer/pkg/typst_ts_renderer_bg.wasm output/
+
     # for each files in the directory `bun`, run bun build
     for FILE in $(ls -1 bun); do
         bun build bun/$FILE --outdir output
     done
 }
 
+function copy_extra_assets {
+    mkdir -p output/shader/
+    cp -f assets/shader/*.glsl output/shader/
+    ls output/shader/
+
+    cp node_modules/@myriaddreamin/typst-ts-web-compiler/pkg/typst_ts_web_compiler_bg.wasm output/
+    cp node_modules/@myriaddreamin/typst-ts-renderer/pkg/typst_ts_renderer_bg.wasm output/
+    ls output/*.wasm
+}
+
 function build {
   mkdir -p build
+  echo "⭐ Copying assets"
+  copy_extra_assets
   echo "⭐ Rebuilding bun"
   bun_build
   echo "⭐ Rebuilding forest"
   opam exec -- forester build # 2>&1 > build/forester.log # --dev
   show_result
-  mkdir -p output/shader/
-  cp -f assets/shader/*.glsl output/shader/
+
   # echo "Open build/forester.log to see the log."
 }
 
