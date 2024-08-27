@@ -14,7 +14,7 @@ async function loadJson(url) {
 
 // document.addEventListener('DOMContentLoaded', async () => {
 
-    const code_tags = document.querySelectorAll('article code.highlight')
+    const code_tags = document.querySelectorAll('article code.highlight.lazy-loading')
 
     if(code_tags.length != 0) {
 
@@ -30,7 +30,7 @@ async function loadJson(url) {
         let themes = ['aurora-x', 'one-light']
 
         code_tags.forEach(async code => {
-            let lang = code.getAttribute('class')
+            let lang = code.classList[0] // assuming the first class is the language
             if(!lang) return
 
             let langAlias = {}
@@ -58,6 +58,7 @@ async function loadJson(url) {
                 { lang, theme }
             )
             code.innerHTML = html
+            code.classList.remove('lazy-loading')
         })
     }
 

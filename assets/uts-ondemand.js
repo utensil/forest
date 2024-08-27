@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         load_script('pikchr.js');
     }
 
-    const code_tags = document.querySelectorAll('article code.highlight');
+    const code_tags = document.querySelectorAll('article code.highlight.lazy-loading');
 
     if (code_tags.length != 0) {
         load_script('shiki.js');

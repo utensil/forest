@@ -1,0 +1,91 @@
+\import{macros}
+% clifford hopf spin tt ag math draft
+\tag{math}
+\tag{draft}
+
+\note{test syntax highlighting}{
+
+\p{This is an additional test to [[uts-0003]], which should load language highlighting syntax from CDN on demand to avoid a huge bundle of all languages.
+}
+
+\block{Python}{
+
+\p{From \link{https://learnxinyminutes.com/docs/python/}:
+}
+
+\codeblock{python}\verb<<<|
+# Closures in nested functions:
+# We can use the nonlocal keyword to work with variables in nested scope which shouldn't be declared in the inner functions.
+def create_avg():
+    total = 0
+    count = 0
+    def avg(n):
+        nonlocal total, count
+        total += n
+        count += 1
+        return total/count
+    return avg
+avg = create_avg()
+avg(3)  # => 3.0
+avg(5)  # (3+5)/2 => 4.0
+avg(7)  # (8+7)/3 => 5.0
+
+# There are also anonymous functions
+(lambda x: x > 2)(3)                  # => True
+(lambda x, y: x ** 2 + y ** 2)(2, 1)  # => 5
+
+# There are built-in higher order functions
+list(map(add_10, [1, 2, 3]))          # => [11, 12, 13]
+list(map(max, [1, 2, 3], [4, 2, 1]))  # => [4, 2, 3]
+
+list(filter(lambda x: x > 5, [3, 4, 5, 6, 7]))  # => [6, 7]
+<<<
+}
+
+\block{OCaml}{
+
+\p{From \link{https://learnxinyminutes.com/docs/ocaml/}:
+}
+
+\codeblock{python}\verb<<<|
+
+(** Matching type constructors **)
+
+type animal = Dog of string | Cat of string ;;
+
+let say x =
+    match x with
+    | Dog x -> x ^ " says woof"
+    | Cat x -> x ^ " says meow"
+;;
+
+say (Cat "Fluffy") ;; (* "Fluffy says meow". *)
+
+(* However, pattern matching must be exhaustive *)
+type color = Red | Blue | Green ;;
+let what_color x = 
+   match x with 
+   | Red -> "color is red"
+   | Blue -> "color is blue"
+   (* Won't compile! You have to add a _ case or a Green case 
+      to ensure all possibilities are accounted for *)
+;;
+(* Also, the match statement checks each case in order.
+   So, if a _ case appears first, none of the 
+   following cases will be reached! *)
+
+(** Traversing data structures with pattern matching **)
+
+(* Recursive types can be traversed with pattern matching easily.
+   Let's see how we can traverse a data structure of the built-in list type.
+   Even though the built-in cons ("::") looks like an infix operator,
+   it's actually a type constructor and can be matched like any other. *)
+let rec sum_list l =
+    match l with
+    | [] -> 0
+    | head :: tail -> head + (sum_list tail)
+;;
+<<<
+}
+
+}
