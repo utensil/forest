@@ -58,12 +58,12 @@ function copy_extra_assets {
 
 function build {
   mkdir -p build
-  echo "⭐ Copying assets"
-  copy_extra_assets
   echo "⭐ Rebuilding bun"
   bun_build
   echo "⭐ Rebuilding forest"
   opam exec -- forester build # 2>&1 > build/forester.log # --dev
+  echo "⭐ Copying assets"
+  copy_extra_assets
   show_result
 
   # echo "Open build/forester.log to see the log."
