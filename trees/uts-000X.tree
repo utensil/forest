@@ -1,0 +1,102 @@
+\import{macros}
+% clifford hopf spin tt ag math draft
+\tag{math}
+\tag{draft}
+
+\note{a customizable, hybrid approach to code & resource pipeline and embedding}{
+\md{
+## TL;DR
+
+This is the proposal I mentioned in [#82](https://todo.sr.ht/~jonsterling/forester/82#event-382183). It's an informal RFC about what I wish to do about embedding both the code and the resource (primarily images) generated in forester output.
+
+The code is there so that the resource generated is fully reproducible, the resource is there so that if the consumer of the forester output (e.g. browser or LaTeX) could gracefully downgrade to use the resource instead. And the pipeline handles regeneration when the source code or dependencies (e.g. imported external files, used assets) change.
+
+## Feasibility
+
+The proposal is already feasible with current forester implementation with some external add-ons, so it might not bring too much complexity to immediate forester development. It can be viewed as not a feature request, but a way to make use of existing features whose equivalents may or may not be included in future forester development, e.g. XML/XSLT etc. That said, it would be nice to have some degree of native support from forester to smooth things out. Actually, this proposal is inspired by how forester handles LaTeX diagrams embedding, with visions on more diagram tools and beyond.
+
+Now that let's assume the feasibility is not a problem, and take a closer look at the approach.
+
+## The customizable, hybrid Approach
+
+The "customizable" part in the approach means the user can choose the kind of tools and pipelines (e.g. parameter customzation or post-processing) to generated the resource, as well as the format(s) of the resource. Currently, the only natively support tool is `latex`, with fixed parameters (e.g. no `--shell-escape`), and a pipeline to generate DVI then post-process it with `divsvgm`, and the format is SVG, with a naming convention of hashing the source code to guarantee browser-cache invalidation of the image whenever the source dode is changed. The pipeline also watch the source change and trigger the regeneration and copying related assets to the output, to an extent that it would be triggered by changes of upstream macro (as it would impact the source code) but not including some `.tex`/`.sty` files that's "imported" in the source code, but forester has no way of detecting that in the current implementation. Imagine all these can be customized for a second, it would be a great productivity boost for the users, but would this bring a ton of complexity into forester? Not neccessarily. If we view forester as a kernel, then it could just provide a minimal infrastructure to allow all these to happen, instead of handling all tools, pipelins, and formats by itself.
+
+The "hybrid" part in the approach, at least in the web context, means the code can be executed both in browser (browser-side render, BSR for short, which might result in a more interactive experience, e.g. WebGL animations), and in server-side generation (SSR). The technical possibility thanks to that JS libraries that can be executed both in browser and in a JS runtime on server-side (e.g. node.js, deno), and that native libraries can be executed both on server, and in browser as WASM, that includes programs written in C, Rust, Go and more.
+
+In the LaTeX context (or equivalently Typst or other authoring tools), the hybrid approach means whether to execute the code inside the document environment to regenerate, e.g. to preserve the same font and style settings, or to just include the externally generated diagrams. The current forester-to-latex takes the former approach, and usually results in a more desired, style-consistent result, while the latter may have the advantage of stabibility and efficiency, as the diagram could have unexpected errors or deformations during regeneration, and it could be more time consuming to regenerate too many diagrams when you are just authoring some text, and expect to preview the result in real-time.
+
+Now it become clear that this hybrid approach facilitates both the reproducibliity and the graceful downgrade, as long as there is a customizable pipeline to handle it.
+
+## Teaser: authoring tool candidates
+
+Let's get a bit more concrete about the tools that could be used in the customizable pipeline, and see how it opens to endless possibilities. Here are some candidates that I have experimented with:
+
+- Rich text (including math, diagrams)
+  - [Markdown](http://spec.commonmark.org/): a easy-to-write, source-code-readable format
+    - both BSR and SSR capable
+    - it plays well with forester markups, as fr XML nodes are transformed to HTML tags to be rendered as is by the markdown renderer
+    - it can downgrade to plain text (but preserving rendered forester markups) when the markdown renderer is not loaded
+    - experiment: [[uts-000M]] (via [markdown-it](https://github.com/markdown-it/markdown-it) )
+    - it's at least very convenient for writing paragraph/link/list/footnote-heavy notes compared to forester markups
+    - plus, users could write the same text for forester, or for external communication, such as this very proposal which is written in Markdown, submitted to forester ticket system, but also rendered in my forest
+  - [Typst](https://typst.app/)
+    - both BSR and SSR capable
+    - it can be made to plays with forester markups, to support links/cross-references/citations etc.
+    - it renders to text-selctable SVG, indistinguishable from ordinary text
+    - besides text and math, it can be used as a modern diagram authoring tool with decent scripting support
+    - experiment: [[uts-000R]] (via [typst.ts](https://github.com/Myriad-Dreamin/typst.ts) )
+  - Syntax-highlighted code blocks
+    - both BSR and SSR capable
+    - experiment: [[uts-0003]] (via [shiki](https://github.com/shikijs/shiki) )
+- Static diagrams
+  - [Penrose](https://penrose.github.io/): creating diagrams with a declarative language with separation of domain knowlege, layout constraints&styling, and concrete substances
+    - both BSR and SSR capable
+    - experiment: [[uts-000Q]]
+  - [Pikchr](https://pikchr.org/): an open-source text-to-diagram tool, the language is [simple](https://pikchr.org/home/doc/trunk/doc/grammar.md) yet has great support for [relative positioning](https://pikchr.org/home/doc/trunk/doc/position.md) and [flexible path guiding](https://pikchr.org/home/doc/trunk/doc/locattr.md)
+    - experiment: [[uts-000W]]
+    - SSR first, BSR-capable thanks to WASM
+  - [D2](https://d2lang.com/): a modern diagram scripting language, [preferred](https://text-to-diagram.com/) over [PlantUML](https://plantuml.com/), [Mermaid](https://mermaid-js.github.io/mermaid/#/), and [Graphviz](https://graphviz.org/), for its great layout support for complex diagrams and its declarative design.
+    - no BSR experiments yet, but I have used its SSR with other static site generators
+- Animated, interactive diagrams
+  - WebGL
+    - experiments: [[uts-000J]], [[uts-000L]]
+    - still trying to work out a SSR pipeline, but combining `xvfb-run`, [headless-gl](https://github.com/stackgl/headless-gl), three.js, should make it possible, e.g. see [this gist](https://gist.github.com/crabmusket/b164c9b9d3c43db9bddbfb83afde0319).
+    - a less preferred alternative is to use the SVGRenderer addon from three.js, but its render result is visually worse than WebGLRenderer, per my experiment in [[uts-000O]].
+
+For SSR for other output format, users could use XSLT to transform the XML output to make the downstream tools (e.g. LaTeX) to consume the source code, or the resource produced by the SSR pipeline. If neither is consumable, the same content could be excluded, using a macro like `webonly` to surround the forester markup.
+
+Note that these experiments are mostly done for BSR. SSR experiments are not done for forester, as I have learned the feasibility from my experiment with other static site generators.
+
+## Elements of an implementation external to forester
+
+Currently, forester can:
+
+- consume `.tree` files, and output `.xml` files, from which the final HTML are produced by XSLT on browser side, or by LaTeX on server side
+- allowing user to define macros, which could emitted HTML tags in the XML output (this could also be done as XML tags)
+- forester 4.3 uses `fr:resource`, `fr:img`, `fr:resource-source` (with type and part attributes) for rendered SVG image, and the LaTeX source code, which is general enough to be used for other `type` of code that renders to images
+
+To make it available to BSR, the users could:
+
+- use XSLT to transform `fr:resource` tags to HTML tags with certain `class` attribute
+- use CSS to render them to show the source code, or a loading animation, or a fallback image rendered by the SSR pipeline described below
+- some JS can be loaded on demand to replace the the HTML tag with a rendered, potentially interactive HTML element
+
+To make a SSR pipeline external to forester, the users could:
+
+- define macros accepting the source code to emit `fr:resource`, `fr:img`, `fr:resource-source` following the forester practice on LaTeX diagrams, but with a filename specified by the user, instead of generated from the source code hash
+- use a file change watcher (e.g. [watchexec](https://github.com/watchexec/watchexec)) to check the change of XML, then detect `fr:resource-source` presence, then render the source using external scripts to call the corresponding tools by the `type` attribute, and generate an image file with the specified filename
+- use a browser cache bustering mechanism (e.g. use XSLT to generate a random number to be appended to the image URL) for reloading the latest image whenever the source code changes if the user refreshes the page
+
+So far, BSR are implemented for the experiments mentioned above, and SSR could wait for the standardization of `fr:resource`, and the resolution of this proposal, or just use any other XML tags in a similar spirit.
+
+## Concluding remarks
+
+The text above is organized so that a reader might gradually see the full vision of the proposal, then the feasibility, and many possible path, downgraded or even upgraded.
+
+To reiterate, this is already feasible with current forester implementation with some external add-ons, and will continue to work if the used features or their equivalents are available in future forester.
+
+It might coincide with the direction of forester development (e.g. the on-going pipeline refactor might just provide the minimal native support needed for this approach to work more smoothly), or it might exceeds what forester was originally designed for (thus should not pose a maintenance burden to forester). Hence this informal RFC.
+
+}
+
+}
