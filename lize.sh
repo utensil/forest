@@ -32,9 +32,9 @@ cd build
 # UNICOCE_LATEX=xelatex
 UNICOCE_LATEX=lualatex
 
-# if environment variable CI is set
-if [ -n "$CI" ]; then
-    echo "lize.sh| CI is set, using $UNICOCE_LATEX"
+# if environment variable TEC is not set
+if [ -z "$TEC" ]; then
+    echo "lize.sh| using $UNICOCE_LATEX"
     $UNICOCE_LATEX -halt-on-error -interaction=nonstopmode --shell-escape $TEX_FILE 2>&1 >/dev/null
     # https://tex.stackexchange.com/a/295524/75671
     # biber $TEX_FILE
@@ -43,7 +43,7 @@ if [ -n "$CI" ]; then
     $UNICOCE_LATEX -halt-on-error -interaction=nonstopmode --shell-escape $TEX_FILE 2>&1 >/dev/null
     $UNICOCE_LATEX -halt-on-error -interaction=nonstopmode --shell-escape $TEX_FILE 2>&1 >/dev/null
 else
-    echo "lize.sh| CI is not set, using tectonic"
+    echo "lize.sh| using tectonic"
     tectonic -Z shell-escape-cwd=`pwd` --keep-intermediates --keep-logs --outdir `pwd` $TEX_FILE 2>&1 >/dev/null
 fi
 

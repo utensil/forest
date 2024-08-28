@@ -16,8 +16,9 @@ $typst.setRendererInitOptions({
 });
 
 const fetchBackend = new FetchAccessModel(
-    '/typst/',
+    process.env.CI ? '/forest/typst/' : '/typst/'
 );
+
 $typst.use(
     TypstSnippet.withAccessModel(fetchBackend),
 );

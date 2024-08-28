@@ -51,10 +51,6 @@ function copy_extra_assets {
     cp -f assets/shader/*.glsl output/shader/
     ls output/shader/
 
-    mkdir -p output/typst/
-    cp -f assets/typst/* output/typst/
-    ls output/typst/
-
     cp node_modules/@myriaddreamin/typst-ts-web-compiler/pkg/typst_ts_web_compiler_bg.wasm output/
     cp node_modules/@myriaddreamin/typst-ts-renderer/pkg/typst_ts_renderer_bg.wasm output/
     ls output/*.wasm
