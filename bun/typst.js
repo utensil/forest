@@ -15,12 +15,8 @@ $typst.setRendererInitOptions({
     getModule: () => './typst_ts_renderer_bg.wasm',
 });
 
-const isProduction = () => {
-    return window.location.hostname === 'utensil.github.io';
-}
-
 const fetchBackend = new FetchAccessModel(
-    isProduction() ? '/forest/typst/' : '/typst/'
+    window.location.hostname === 'utensil.github.io' ? '/forest/typst/' : '/typst/'
 );
 
 $typst.use(
