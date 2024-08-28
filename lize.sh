@@ -19,7 +19,7 @@ TEX_FILE="$1.tex"
 AUX_FILE="$1.aux"
 PDF_FILE="$1.pdf"
 
-rm build/$1.* || echo no files to clean
+rm build/$1.* 2>&1 >/dev/null || echo no files to clean
 
 cp output/$XML_FILE build/$XML_FILE
 
