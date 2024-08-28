@@ -80,6 +80,7 @@ nav#toc a.slug {
 :root[data-applied-mode="light"] {
     color-scheme: light;
     --uts-text: black;
+    --uts-link: black;
     --uts-text-gentle: rgb(132, 132, 132);
     --uts-text-cite: #10731d;
     --uts-background: white;
@@ -90,6 +91,7 @@ nav#toc a.slug {
 :root[data-applied-mode="dark"] {
     color-scheme: dark;
     --uts-text: #d5d4d0;
+    --uts-link: #d5d4d0;
     --uts-text-gentle: rgb(174, 174, 174);
     --uts-text-cite: #8cd295;
     --uts-background: #262626;
@@ -101,16 +103,22 @@ body {
 }
 
 body,
-a,
 span.taxon,
-nav#toc,
-nav#toc a {
+nav#toc {
     color: var(--uts-text) !important;
+}
+
+a,
+nav#toc a {
+    color: var(--uts-link) !important;
+    cursor: pointer;
+    text-decoration: underline;
 }
 
 .slug,
 .doi,
 .orcid,
+.meta-item .link.local a,
 nav#toc a.link.local,
 nav#toc .link.local a,
 nav#toc a.slug {
