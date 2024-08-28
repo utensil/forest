@@ -1,0 +1,22 @@
+\import{macros}
+% clifford hopf spin tt ag math draft tech exp
+\tag{tech}
+\tag{exp}
+
+\note{choosing the bundler for JS/CSS}{
+\md{
+So far I have settled on [Bun](https://bun.sh/) for JS bundling including support for TS, WASM, and maybe running tools from node.js ecosystem.
+
+I have encountered 2 issues so far: [one](https://github.com/oven-sh/bun/issues/13582) is crashing for WASM, but I have worked around it. The other is weird behavior of `bunx` failing to recognize `lighteningcss`, similar to [this issue](https://github.com/oven-sh/bun/issues/12330). It's a nice all-in-one solution, but I'll keep in mind that I could move away from it anytime due to lessons learned as described in [this post](https://dev.to/thejaredwilcurt/bun-hype-how-we-learned-nothing-from-yarn-2n3j), and that I'm a bit scared by the thousands of open issues on the repo.
+
+Some interesting posts on Bun:
+
+- [Bun vs Node.js: Everything you need to know](https://www.builder.io/blog/bun-vs-node-js)
+- [Bun, Biome/OXC, AI Tools and Rsbuild](https://onwebfocus.com/bun)
+- [What I learned by building static website with Bun, Elysia and JSX in 2024](https://medium.com/@laidrivm/what-i-learned-by-building-a-static-website-with-bun-elysia-and-jsx-in-2024-dac7d4d19521)
+
+For CSS, I have chosen [Lightning CSS](https://lightningcss.dev/), which seems to be supported by other modern JS bunlders. What I need most is the [nesting](https://lightningcss.dev/transpilation.html#nesting) feature, to avoid making a further mess of CSS around a same class. I'm aware of post-css, css-in-js, css-modules, atomic css etc. but I just want a modern solution that is not unlike CSS, and is more like LESS and SASS that I'm used to.
+
+Bun and lighteningcss are written in Zig and Rust, respectively. I like both languages, and they seem to be favored by the JS community too.
+}
+}
