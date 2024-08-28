@@ -27,7 +27,7 @@ In the LaTeX context (or equivalently Typst or other authoring tools), the hybri
 
 Now it become clear that this hybrid approach facilitates both the reproducibliity and the graceful downgrade, as long as there is a customizable pipeline to handle it.
 
-## Teaser: authoring tool candidates
+## A teaser: authoring tool candidates
 
 Let's get a bit more concrete about the tools that could be used in the customizable pipeline, and see how it opens to endless possibilities. Here are some candidates that I have experimented with:
 
@@ -65,7 +65,7 @@ Let's get a bit more concrete about the tools that could be used in the customiz
 
 For SSR for other output format, users could use XSLT to transform the XML output to make the downstream tools (e.g. LaTeX) to consume the source code, or the resource produced by the SSR pipeline. If neither is consumable, the same content could be excluded, using a macro like `webonly` to surround the forester markup.
 
-Note that these experiments are mostly done for BSR. SSR experiments are not done for forester, as I have learned the feasibility from my experiment with other static site generators.
+Note that these experiments are mostly done for only BSR. SSR experiments are not done for forester, as I have learned the feasibility from my experiment with other static site generators. Without SSR gracefully downgrade, it will take a bit time to load on first visit.
 
 ## Elements of an implementation external to forester
 
