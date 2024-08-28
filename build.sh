@@ -40,20 +40,28 @@ function bun_build {
         bun install
     fi
 
+    mkdir -p output
+
     # for each files in the directory `bun`, run bun build
     for FILE in $(ls -1 bun); do
-        bun build bun/$FILE --outdir output
+        # if the file extension is .css
+        if [[ $FILE == *".css" ]]; then
+            echo "🚀 lightningcss"
+            bunx lightningcss --minify --bundle --targets '>= 0.25%' bun/$FILE -o output/$FILE
+        else
+            bun build bun/$FILE --outdir output
+        fi
     done
 }
 
 function copy_extra_assets {
     mkdir -p output/shader/
     cp -f assets/shader/*.glsl output/shader/
-    ls output/shader/
+    # ls output/shader/
 
     cp node_modules/@myriaddreamin/typst-ts-web-compiler/pkg/typst_ts_web_compiler_bg.wasm output/
     cp node_modules/@myriaddreamin/typst-ts-renderer/pkg/typst_ts_renderer_bg.wasm output/
-    ls output/*.wasm
+    # ls output/*.wasm
 }
 
 function build {
@@ -62,9 +70,9 @@ function build {
   bun_build
   echo "⭐ Rebuilding forest"
   opam exec -- forester build # 2>&1 > build/forester.log # --dev
-  echo "⭐ Copying assets"
-  copy_extra_assets
   show_result
+  # echo "⭐ Copying assets"
+  copy_extra_assets
 
   # echo "Open build/forester.log to see the log."
 }
