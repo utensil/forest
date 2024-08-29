@@ -15,8 +15,18 @@ $typst.setRendererInitOptions({
     getModule: () => './typst_ts_renderer_bg.wasm',
 });
 
+const getUrlBase = () => {
+    const url = new URL(window.location.href);
+    const urlParts = url.pathname.split('/');
+    urlParts.pop();
+    const urlBase = url.origin + urlParts.join('/') + '/typst/';
+    console.log(urlBase);
+    return urlBase;
+}
+
 const fetchBackend = new FetchAccessModel(
-    window.location.hostname === 'utensil.github.io' ? '/forest/typst/' : '/typst/'
+    // window.location.hostname === 'utensil.github.io' ? '/forest/typst/' : '/typst/'
+    getUrlBase()
 );
 
 $typst.use(
