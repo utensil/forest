@@ -15,11 +15,9 @@
 
 \note{test tikz drawing: season 3}{
 
-\md\verb>>>|
+\block{pgfplots.net}{
 
-Here we only list some graphs worth adapting:
-
-## pgfplots.net
+\md{
 
 - [Heteroskedasticity in a model of linear regression](https://pgfplots.net/heteroskedasticity-linear-regression/)
 - [Spiral cone with projections and annotations](https://pgfplots.net/spiral-cone/)
@@ -27,18 +25,718 @@ Here we only list some graphs worth adapting:
 - [Lorentz system](https://pgfplots.net/lorentz-system/) (requires LuaLaTeX)
 - [Moebius strip](https://pgfplots.net/moebius-strip/) (requires non-DVI drivers)
 
-## TikZ.net
+}
+
+\tikzfig\verb>>>|
+\pgfplotsset{width=7cm,compat=1.8}
+\def\Point{36.9}
+\begin{tikzpicture}
+  \begin{axis}[
+    view       = {-25}{-25},
+    axis lines = middle,
+    zmax       = 60,
+    height     = 8cm,
+    xtick      = \empty,
+    ytick      = \empty,
+    ztick      = \empty
+  ]
+  \addplot3+ [
+    ytick      = \empty,
+    yticklabel = \empty,
+    domain     = 0:14.7*pi,
+    samples    = 400,
+    samples y  = 0,
+    mark       = none,
+    thick,
+    red,
+  ]
+  ( {x*sin(0.28*pi*deg(x))},{x*cos(0.28*pi*deg(x)},{x});
+  \addplot3+ [
+    mark options = {color=blue},
+    mark         = *
+  ] 
+  coordinates {({\Point*sin(0.28*pi*deg(\Point))},
+    {\Point*cos(0.28*pi*deg(\Point)}, {\Point})};
+  \addplot3+ [
+    domain    = 0:12*pi,
+    samples   = 100,
+    samples y = 0,
+    mark      = none,
+    dashed,
+  ]  
+  ( {\Point*sin(0.28*pi*deg(\Point))}, {\Point*cos(0.28*pi*deg(\Point)}, {x} );
+  \addplot3[
+    mark=none,
+    dashed
+  ]
+  coordinates {(0,0,0) ({\Point*sin(0.28*pi*deg(\Point))},
+    {\Point*cos(0.28*pi*deg(\Point)}, {0})};
+  \draw[
+    radius = 80,
+    decoration = {
+      markings,
+      mark= at position 0.99 with {\arrow{latex}}
+    },
+    postaction=decorate
+  ] 
+  (axis cs:0,10,0) arc[start angle=80,end angle=14] (axis cs:14,0,0);
+  \node at (axis cs:20,0,30) {$P$};
+  \node at (axis cs:24,0,7) {$z$};
+  \node [font=\footnotesize] at (axis cs:20,17,0) {$\varrho$};
+  \node [font=\footnotesize] at (axis cs:6,15,0) {$\varphi$};
+  \end{axis}
+\end{tikzpicture}
+>>>
+
+}
+
+\block{TikZ.net}{
+
+\md{
 
 - [Izaak Neutelings](https://tikz.net/author/izaak/) has diagrams covering all areas of Physics, e.g. [vector analysis on manifolds](https://tikz.net/dynamics_moment_of_inertia_parrallel_axis/), [3D coordinate systems](https://tikz.net/axis3d/), [diagrams on different planes](https://tikz.net/decay_planes/)
 - [Analysis](https://tikz.net/category/mathematics/analysis/) has many diagrams on analysis.
 - [Bernouilli’s equation](https://tikz.net/fluid_dynamics_bernouilli/) has diagrams with proper shading of complicated smooth geometries.
 - Some other interesting diagrams: [Helicoid](https://tikz.net/helicoid/), [Manifold mapping](https://tikz.net/manifold/), [topology](https://tikz.net/closed-string-topologies/), [Convolution Operator](https://tikz.net/conv2d/), [Fourier series & synthesis with projections](https://tikz.net/fourier_series/), [Tree with aligned matrix](https://tikz.net/tree-matrix/)
 
-## how to compose plots with annotations
+}
 
-- [Three-dimensional graphics with PGF/TikZ](https://tug.org/TUGboat/tb33-1/tb103wolcott.pdf) by Keith Wolcott
-- [Draw a surface using Tikz](https://tex.stackexchange.com/questions/501479/draw-a-surface-using-tikz) on SE
+\p{The following are adapted to minimize the dependencies, and fix wierd render issues.
 
+\todo{figure out why all distance has to be 0, or all of them become too far away}
+}
+
+\tikzfig\verb>>>|
+\tikzset{>=latex} % for LaTeX arrow head
+\contourlength{1.35pt}
+
+\colorlet{xcol}{blue!70!black}
+\colorlet{xcol'}{xcol!50!red!80!black}
+\colorlet{vcol}{green!60!black}
+\colorlet{myred}{red!65!black}
+\colorlet{mydarkred}{red!40!black}
+\colorlet{mypurple}{blue!60!red!80}
+\colorlet{mydarkgreen}{green!20!black}
+\tikzstyle{rvec}=[->,xcol,very thick,line cap=round]
+\tikzstyle{vvec}=[->,vcol,very thick,line cap=round]
+\tikzstyle{CM}=[mydarkred,fill=red!80!black!80]
+\tikzstyle{mass}=[line width=0.6,draw=red!30!black, %rounded corners=1,
+                  top color=mydarkred!30,bottom color=mydarkred!10,shading angle=30]
+\tikzstyle{dark mass}=[line width=0.3,red!30!black, %rounded corners=1,
+                       top color=mydarkred!40,bottom color=mydarkred!60,shading angle=30]
+
+\def\r{0.05} % pulley small radius
+\tikzset{
+  pics/rotarr/.style={
+    code={
+      \draw[white,very thick] ({#1*cos(200)},0) arc(-200:30:{#1} and {#1/2}) --++ (125:0.1);
+      \draw[->,mydarkgreen] ({#1*cos(200)},0) coordinate (W1) arc(-200:20:{#1} and {#1/2}) node[midway] (W2) {} --++ (125:0.1) coordinate (W3);
+  }},
+  pics/rotarr/.default=0.4,
+}
+
+% PARALLEL AXIS (STEINER'S) THEOREM
+\def\L{1.2}    % size scale
+\def\A{1.8}    % height axis above body
+\def\d{2.2}    % distance parallel axis to CM
+\def\ang{-20}  % angle connection between axes
+\def\anga{72}  % angle axes
+\def\bodyshape{
+  (-100:1.0*\L) to[out=190,in=-90]
+  (180:1.4*\L) to[out=90,in=175]
+  (110:1.0*\L) to[out=-5,in=185]
+  ($(R)+(110:0.6*\L)$) to[out=5,in=90]
+  ($(R)+(15:0.7*\L)$) to[out=-90,in=-20]
+  ($(R)+(-120:0.7*\L)$) to[out=160,in=10] cycle
+}
+\def\body{ % shape
+  \fill[ball color=red!80!black] \bodyshape;
+  \draw[line width=0.6,draw=red!30!black,fill=red!60!black!5,fill opacity=0.85]
+    \bodyshape;
+  %\fill[mass] \bodyshape;
+}
+
+% PARALLEL AXIS (STEINER'S) THEOREM - derivation with position vector
+\def\ys{0.6}     % vertical minor axis ellipse
+\def\ri{0.56*\d} % small mass m_i distance from axis
+\def\angi{210}   % small mass m_i polar angle
+\def\dx{0.15}    % size small mass m_i
+\def\massi{
+  \draw[dark mass,rotate=\ang+\angi+30] % mass m_i
+    (Ri)++(-45:{\dx/sqrt(2)}) to[out=95,in=-100]++
+    (90:\dx) to[out=170,in=10]++
+    (180:\dx) to[out=-100,in=100]++
+    (-90:\dx) to[out=10,in=175]++ (0:\dx) -- cycle;
+}
+
+% PARALLEL AXIS (STEINER'S) THEOREM - derivation with velocity
+\def\massi{
+  \draw[dark mass,rotate=\ang+\angi-20] % mass m_i
+    (Ri)++(-45:{\dx/sqrt(2)}) to[out=95,in=-100]++
+    (90:\dx) to[out=170,in=10]++
+    (180:\dx) to[out=-100,in=100]++
+    (-90:\dx) to[out=10,in=175]++ (0:\dx) -- cycle;
+}
+
+% PARALLEL AXIS (STEINER'S) THEOREM - derivation with velocity (CM frame)
+\begin{tikzpicture}
+  \def\ricm{sqrt(\d*\d-2*\d*\ri*cos(\angi-180)+\ri*\ri)} % distance to mass i from CM
+  \def\angicm{atan2(\ri*sin(\angi-180),\ri*cos(\angi-180)-\d)} % distance to mass i from CM
+  \coordinate (M) at (0,0);      % center of mass
+  \coordinate (R) at (\ang:\d);  % intersection with new axis
+  \path[rotate around={\ang:(R)}]
+    (R) --++ (\angi:{\ri} and {\ys*\ri}) coordinate(Ri); % small mass m_i
+  
+  % BODY
+  \draw (M) --++ (\anga-180:1.5*\L) node[above left] {$I_\text{cm}$}; % axis below
+  \draw (R) --++ (\anga-180:1.1*\L) node[above=0,right=0] {$I$}; % axis below
+  \body
+  
+  % CENTER OF MASS
+  \draw[dashed,rotate=\ang] % rotation ellipse through CM
+    (45:{\d} and {\ys*\d}) arc(45:-55:{\d} and {\ys*\d});
+  \draw[CM] (M) circle(0.09) node[above=0,left] {CM}; % center of mass point
+  
+  % SMALL MASS m_i
+  \draw[dashed,rotate=\ang] % rotation ellipse through R
+    (55:{\ricm} and {\ys*\ricm}) arc(55:-60:{\ricm} and {\ys*\ricm});
+  \massi
+  \node[mydarkred,right=0,below=0,scale=0.9] at (Ri) {$m_i$};
+  \draw[vvec,line width=0.8,rotate=\ang]
+    (Ri)++({\angicm-90}:0.04) --++ ({\angicm-90}:{0.6} and {\ys*0.6}) % velocity mass m_i
+    node[pos=0.8,below right=-0,scale=0.9] {$\vb{v}_{i,\text{cm}}$};
+  \draw[rvec] (M)++({145+\angicm}:0.06) -- (Ri) node[pos=0.4,above right=-0] {$\vb{r}_{i,\text{cm}}$};
+  
+  % AXES
+  \fill[red!80!black] (R) circle(0.02);
+  \draw (M)++(\anga:0.05) --++ (\anga:\A); % axis above
+  \draw (R) --++ (\anga:1.2*\A); % axis above
+  \pic[rotate=\anga-90] at (\anga:0.9*\A) {rotarr}; % rotation arrow
+  \node[mydarkgreen,right=0] at (W3) {$\omega$};
+  \draw[<->] (\anga:0.65*\A) --++ (\ang:\d) % distance/radius R
+    node[pos=0.5,above] {\contour{white}{$d$}};
+  
+\end{tikzpicture}
+>>>
+
+\tikzfig\verb>>>|
+\colorlet{veccol}{green!50!black}
+\colorlet{projcol}{blue!70!black}
+\colorlet{myblue}{blue!80!black}
+\colorlet{myred}{red!90!black}
+\colorlet{mydarkblue}{blue!50!black}
+\tikzset{>=latex} % for LaTeX arrow head
+\tikzstyle{proj}=[projcol!80,line width=0.08] %very thin
+\tikzstyle{area}=[draw=veccol,fill=veccol!80,fill opacity=0.6]
+\tikzstyle{vector}=[-stealth,myblue,thick,line cap=round]
+\tikzstyle{unit vector}=[->,veccol,thick,line cap=round]
+\tikzstyle{dark unit vector}=[unit vector,veccol!70!black]
+\usetikzlibrary{angles,quotes} % for pic (angle labels)
+\contourlength{1.3pt}
+
+% 3D AXIS with spherical coordinates, dA
+\tdplotsetmaincoords{60}{103}
+\begin{tikzpicture}[scale=1.0,tdplot_main_coords]
+  
+  % VARIABLE
+  \def\rvec{5.0}
+  \def\thetavec{35}
+  \def\phivec{45}
+  \def\dtheta{10}
+  \def\dphi{16}
+  \def\sphere#1#2#3{plot[domain=#1]({\rvec*sin(#2)*cos(#3)},{\rvec*sin(#2)*sin(#3)},{\rvec*cos(#2)})}
+  \contourlength{0.8pt}
+  
+  % AXES
+  \coordinate (O) at (0,0,0);
+  \draw[thick,->] (0,0,0) -- (1.16*\rvec,0,0) node[left=0,below]{$x$};
+  \draw[thick,->] (0,0,0) -- (0,1.1*\rvec,0) node[below=0,right=0]{$y$};
+  \draw[thick,->] (0,0,0) -- (0,0,1.1*\rvec) node[above]{$z$};
+  
+  % COORDINATES
+  \tdplotsetcoord{P}{\rvec}{\thetavec}{\phivec}
+  \tdplotsetcoord{PB}{\rvec}{\thetavec+\dtheta}{\phivec}
+  \tdplotsetcoord{PR}{\rvec}{\thetavec}{\phivec+\dphi}
+  \tdplotsetcoord{PBR}{\rvec}{\thetavec+\dtheta}{\phivec+\dphi}
+  
+  % CONE
+  \draw[veccol!20,very thin] (O)  -- (PBR);
+  \draw[veccol!20,very thin] (O)  -- (PR);
+  \draw[->,veccol] (O)  -- (P) node[left,pos=0.8] {$\vb{r}$};
+  \draw[veccol,very thin] (O)  -- (PB);
+  
+  % PROJECTIONS
+  \draw[proj] %\thetavec+\dtheta
+    plot[domain=0:90]({\rvec*sin(\x)*cos(\phivec)},{\rvec*sin(\x)*sin(\phivec)},{\rvec*cos(\x)}) coordinate (BL);
+  \draw[proj]
+    plot[domain=0:90]({\rvec*sin(\x)*cos(\phivec+\dphi)},{\rvec*sin(\x)*sin(\phivec+\dphi)},{\rvec*cos(\x)}) coordinate (BR);
+  \draw[proj]
+    plot[domain=0:90]({\rvec*cos(\x)},{\rvec*sin(\x)},0);
+  \draw[proj] (O)  -- (BL); % PBxy
+  \draw[proj] (O)  -- (BR); % PBRxy
+  \draw[proj] (P)  -- (Pz);
+  \draw[proj] (PR)  -- (Pz) node[midway,above=-0,rotate=-24] {\contour{white}{$r\sin\theta$}};
+  %\draw[proj,projcol!15,dashed] (P) -- (Pxy);
+  %\draw[proj,projcol!15,dashed] (PR) -- (PRxy);
+  %\draw[proj,projcol!15,dashed] (PB) -- (PBxy);
+  %\draw[proj,projcol!15,dashed] (PBR) -- (PBRxy);
+  
+  % AREA
+  \draw[area]
+    plot[domain=0:.99*\dphi]({\rvec*sin(\thetavec)*cos(\phivec+\x)},{\rvec*sin(\thetavec)*sin(\phivec+\x)},{\rvec*cos(\thetavec)}) --
+    plot[domain=0:.99*\dtheta]({\rvec*sin(\thetavec+\x)*cos(\phivec+\dphi)},{\rvec*sin(\thetavec+\x)*sin(\phivec+\dphi)},{\rvec*cos(\thetavec+\x)}) --
+    plot[domain=.99*\dphi:0]({\rvec*sin(\thetavec+\dtheta)*cos(\phivec+\x)},{\rvec*sin(\thetavec+\dtheta)*sin(\phivec+\x)},{\rvec*cos(\thetavec+\dtheta)}) --
+    plot[domain=.99*\dtheta:0]({\rvec*sin(\thetavec+\x)*cos(\phivec)},{\rvec*sin(\thetavec+\x)*sin(\phivec)},{\rvec*cos(\thetavec+\x)}) --
+    cycle;
+    
+  % MEASURES
+  %\node[right=3,below right=-2] at (PB) {$r\sin\theta\dd{\phi}$};
+  %\node[right=5,below right=-2] at (PR) {$r\dd{\theta}$};
+  \draw[<->,proj,thin]
+    plot[domain=0:\dphi]({\rvec*sin(\thetavec+1.11*\dtheta)*cos(\phivec+\x)},{\rvec*sin(\thetavec+1.11*\dtheta)*sin(\phivec+\x)},{\rvec*cos(\thetavec+1.11*\dtheta)})
+    node[below right=-0.5] {\contour{white}{$r\sin\theta\dd{\phi}$}};
+  \draw[<->,proj,thin]
+    plot[domain=0:\dtheta]({\rvec*sin(\thetavec+\x)*cos(\phivec+1.15*\dphi)},{\rvec*sin(\thetavec+\x)*sin(\phivec+1.15*\dphi)},{\rvec*cos(\thetavec+\x)}) 
+    node[above right=-0.5] {$r\dd{\theta}$};
+    
+  % ANGLES
+  \tdplotdrawarc[->]{(O)}{0.35*\rvec}{0}{\phivec}
+    {below=-0}{$\phi$}
+  \tdplotdrawarc[->]{(O)}{0.45*\rvec}{\phivec}{\phivec+\dphi}
+    {anchor=145,inner sep=1}{\contour{white}{$\dd{\phi}$}}
+  \tdplotsetthetaplanecoords{\phivec}
+  \tdplotdrawarc[->,tdplot_rotated_coords]{(0,0,0)}{0.36*\rvec}{0}{\thetavec}
+    {above right=-0}{$\theta$}
+  \tdplotdrawarc[->,tdplot_rotated_coords]{(0,0,0)}{0.54*\rvec}{\thetavec}{\thetavec+\dtheta}
+    {above right=-0}{\contour{white}{$\dd{\theta}$}}
+  
+\end{tikzpicture}
+>>>
+
+\tikzfig\verb>>>|
+\tikzset{>=latex}
+\contourlength{1.1pt}
+
+\colorlet{mydarkblue}{blue!40!black}
+\colorlet{myblue}{blue!30}
+\colorlet{myred}{red!65!black}
+\colorlet{vcol}{green!45!black}
+\colorlet{watercol}{blue!80!cyan!10!white}
+\colorlet{darkwatercol}{blue!80!cyan!80!black!30!white}
+\tikzstyle{water}=[draw=mydarkblue,top color=watercol!90,bottom color=watercol!90!black,middle color=watercol!50,shading angle=0]
+\tikzstyle{horizontal water}=[water,
+  top color=watercol!90!black!90,bottom color=watercol!90!black!90,middle color=watercol!80,shading angle=0]
+\tikzstyle{dark water}=[draw=blue!20!black,top color=darkwatercol,bottom color=darkwatercol!80!black,middle color=darkwatercol!40,shading angle=0]
+\tikzstyle{vvec}=[->,very thick,vcol,line cap=round]
+\tikzstyle{force}=[->,myred,very thick,line cap=round]
+\tikzstyle{width}=[{Latex[length=3,width=3]}-{Latex[length=3,width=3]}]
+
+% BERNOUILLI EQUATION
+\begin{tikzpicture}
+  \def\LL{1.7}          % length pipe left
+  \def\LR{1.7}          % length pipe right
+  \def\L{3.5*\LL}       % total length
+  \def\H{2.0}           % height
+  \def\l{\L-\LL-\LR}    % length between pipes
+  \def\xL{0.32*\LL}     % position volume left
+  \def\xR{\L-0.80*\LR}  % position volume right
+  \def\lL{0.2*\LR}      % length volume left
+  \def\lR{\lL*\Ry/\ry}  % length volume right
+  \def\rx{0.08}         % small pipe horizontal radius left
+  \def\ry{0.32}         % small pipe vertical radius left
+  \def\Rx{0.18}         % big pipe vertical radius right
+  \def\Ry{0.90}         % big pipe vertical radius right
+  \def\v{1.0}           % velocity magnitude
+  \def\F{0.9}           % force magnitude
+  \def\y{(\Ry+0.35*\H)} % height from ground
+  
+  % WATER
+  \draw[horizontal water,thick]
+    (0,\Ry) -- (0,-\Ry) coordinate (P1) --++ (\LL,0) to[out=0,in=180]
+    (\L-\LR,\H-\ry) -- (\L,\H-\ry) coordinate (P2) arc(-90:90:{\rx} and \ry)
+    --++ (-\LR,0)  to[out=180,in=0] (\LL,\Ry) -- cycle;
+  \node[above left=0] at (P1) {$P_1$};
+  \node[above=-0,right=0] at (P2) {$P_2$};
+  
+  % VOLUMES
+  \draw[vvec] (\xL+\lL+\Rx,0) --++ (\v*1.2*\ry/\Ry,0) node[above=-0] {$v_1$};
+  \draw[vvec] (\xR+\lR+\rx,\H-0.2*\ry) --++ (\v,0) node[right=-0] {$v_2$};
+  \draw[force] (\L-0.7*\ry+0.8*\F,\H+0.2*\ry) --++ (-0.8*\F,0) node[pos=0.3,above] {$F_2$};
+  \draw[dark water,dashed,very thin]
+    (\xL,0) ellipse({\Rx} and \Ry)
+    (\xR,\H) ellipse({\rx} and \ry);
+  \draw[dark water]
+    (\xL,\Ry)
+      arc(90:-90:{\Rx} and \Ry) coordinate (A1) --++ (\lL,0)
+      arc(-90:90:{\Rx} and \Ry) -- cycle;
+  \draw[dark water]
+    (\xR,\H+\ry) coordinate (A2)
+      arc(90:-90:{\rx} and \ry) --++ (\lR,0)
+      arc(-90:90:{\rx} and \ry) -- cycle;
+  \draw[width]
+    (\xL,1.15*\Ry) --++ (\lL,0) node[midway,above] {$\ell_1$};
+  \draw[width]
+    (\xR,\H-1.6*\ry) --++ (\lR,0) node[midway,fill=white,inner sep=0] {$\ell_2$};
+  \node[left=0,below=-0] at (A1) {$A_1$};
+  \node[left=0,above=-0] at (A2) {$A_2$};
+  
+  % CONTAINER
+  \draw[mydarkblue,thick]
+    (0,\Ry) -- (0,-\Ry)  coordinate (A1) --++ (\LL,0) to[out=0,in=180]
+    (\L-\LR,\H-\ry) -- (\L,\H-\ry) coordinate (A2) arc(-90:90:{\rx} and \ry)
+    --++ (-\LR,0)  to[out=180,in=0] (\LL,\Ry) -- cycle;
+  \draw[water,thick]
+    (0,0) ellipse({\Rx} and \Ry);
+  
+  % HEIGHT
+  \draw[dashed] (0.23*\L,{-\y}) --++ (0.6*\L,0);
+  \draw[<->]
+    (1.1*\LL,{-\y}) --++ (0,{\y}) node[pos=0.13,above right=-0] {$h_1$};
+  \draw[<->]
+    (0.95*\xR,{-\y}) --++ (0,{\H+\y}) node[midway,fill=white,inner sep=1] {$h_2$};
+  \draw[force] (0.1*\Ry-\F,0) --++ (\F,0) node[pos=0.4,above=-0] {$F_1$};
+  
+\end{tikzpicture}
+>>>
+
+\tikzfig\verb>>>|
+\definecolor{green}{rgb}{0.0,0.50,0.0}
+\tikzset{>={Straight Barb[angle'=80, scale=1.1]}}
+
+\begin{tikzpicture}
+\draw[->] (0, 0) -- ++(0, 2);
+\draw[->] (0, 0) -- ++(2.5, 0.6);
+\draw[->] (0, 0) -- ++(3, 0) node[midway, below, yshift=-0.5em]
+    {Original space ${\cal X}$};
+
+\draw[fill=green!50, draw=none, shift={(0.2, 0.7)},scale=0.5]
+  (0, 0) to[out=20, in=140] (1.5, -0.2) to [out=60, in=160]
+  (5, 0.5) to[out=130, in=60]
+  cycle;
+
+\shade[thin, left color=green!10, right color=green!50, draw=none,
+  shift={(0.2, 0.7)},scale=0.5]
+  (0, 0) to[out=10, in=140] (3.3, -0.8) to [out=60, in=190] (5, 0.5)
+    to[out=130, in=60] cycle;
+
+  \draw[->] (4.8, 0.8) -- ++(0, 2);
+  \draw[->] (4.8, 0.8) -- ++(2, 0) node[midway, below, yshift=-0.5em]
+      {Latent space ${\cal F}$};
+
+  \draw[thin, fill=green!30, draw=none, shift={(5.4, 1.1)}, rotate=20]
+    (0, 0) -- (1, 0) -- (1, 1) -- (0, 1) -- cycle;
+
+  \draw[thick,->,red]
+    (1.5, 1.3) to [out=55, in=150] node[midway, above, xshift=6pt, yshift=2pt]
+    {$f$} (5.7, 2);
+
+  \draw[thick,->,blue] (1.5, 1.3) ++(4.03, 0.3) to [out=150, in=55]
+    node[midway, below, xshift=2pt, yshift=-2pt] {$g$} ++(-3.6, -0.5);
+
+\end{tikzpicture}
 >>>
 
 }
+
+\block{how to compose plots with annotations}{
+
+\md{
+- [Three-dimensional graphics with PGF/TikZ](https://tug.org/TUGboat/tb33-1/tb103wolcott.pdf) by Keith Wolcott
+- [Draw a surface using Tikz](https://tex.stackexchange.com/questions/501479/draw-a-surface-using-tikz) on SE
+}
+
+}
+
+\block{holatex.app}{
+
+\p{From \link{https://holatex.app/examples.html?package=tikz}:
+}
+
+\tikzfigs{1.5}\verb>>>|
+% Belt and pulley system
+% Author: Jimi Oke
+\begin{tikzpicture}
+ 
+      % Definitions
+      \pgfmathsetmacro{\b}{75}
+      \pgfmathsetmacro{\a}{15}
+      \pgfmathsetmacro{\R}{2}
+      \pgfmathsetmacro{\r}{1}
+      \pgfmathsetmacro{\P}{\R*tan(\b)}
+      \pgfmathsetmacro{\Q}{\R/cos(\b)}
+      \pgfmathsetmacro{\p}{\r/tan(\a)}
+      \pgfmathsetmacro{\q}{\r/sin(\a)}
+
+      % Pulleys
+      
+      % big pulley
+      \draw (0,0) circle (\R) ;
+      \fill[left color=gray!80, right color=gray!60, middle
+        color=white] (0,0) circle (\R) ;
+      \draw[thick, white] (0,0) circle (.8*\R);
+      \shade[ball color=white] (0,0) circle (.3) node[left,xshift=-5] {$P$};
+
+      % small pulley
+      \draw (\Q+\q-.3, 0) circle (\r);
+      \fill[left color=gray!80, right color=gray!60, middle
+        color=white] (\Q+\q-.3, 0) circle (\r) ;
+      \draw[thick, white] (\Q+\q-.3,0) circle (.8*\r);
+      \shade[ball color=white] (\Q+\q-.3,0) circle (.15) 
+      node[right, xshift=2] {$Q$};
+
+      % belt and point labels
+      \begin{scope}[ultra thick]
+        \draw (\b:\R) arc (\b:360-\b:\R) ;
+        \draw (\b:\R) -- ( \P, 0 ); 
+        \draw (-\b:\R) -- ( \P, 0 );
+        \draw (\Q-.3,0) -- + (\a:\p)  arc (105:-105:\r) ;
+        \draw (\Q-.3,0) -- + (-\a:\p);
+        %\draw (\b:\R) arc (\b:360-\b:\r) ;
+      \end{scope}
+   
+      \draw (0,0) -- (\b:\R) node[midway, above,sloped] {$R$} node[above] {$A$};
+      \draw (-\b:\R)--(0,0) ;
+      \draw (\Q+\q-.3,0) -- +(105:\r) node[midway,above, sloped] {$r$}
+        node[above] {$E$};
+      \draw (\Q+\q-.3,0) -- +(-105:\r) node[below] {$D$};
+      \node[below] at (-\b:\R) {$B$};
+      \node[below] at (\Q-.3,0) {$C$};
+
+      % center line
+      \draw[dash pattern=on5pt off3pt] (0,0) -- (\Q+\q-.3,0);
+
+      % angle label
+      \node[fill=white] at (0.73*\Q, 0) {$\theta$} ;
+      \draw (\Q-1.8,0) arc (180:195:1.5);
+      \draw (\Q-1.8,0) arc (180:165:1.5);
+\end{tikzpicture}
+>>>
+
+\tikzfig\verb>>>|
+% Author: Julien Cretel
+% Date:   24/02/2013
+    \begin{tikzpicture}[scale=4.5, line join=bevel]
+	
+      % \a and \b are two macros defining characteristic
+      % dimensions of the impossible brick.
+      \pgfmathsetmacro{\a}{0.18}
+      \pgfmathsetmacro{\b}{1.37}
+
+      \tikzset{%
+        apply style/.code={\tikzset{#1}},
+        brick_edges/.style={thick,draw=black},
+        face_colourA/.style={fill=gray!50},
+        face_colourB/.style={fill=gray!25},
+        face_colourC/.style={fill=gray!90},
+      }
+
+      \foreach \theta/\v/\facestyleone/\facestyletwo in {%
+        0/0/{brick_edges,face_colourA}/{brick_edges,face_colourC},
+        180/-\a/{brick_edges,face_colourB}/{brick_edges,face_colourC}
+      }{
+      \begin{scope}[rotate=\theta,shift={(\v,0)}]
+        \draw[apply style/.expand once=\facestyleone]  		
+          ({-.5*\b},{1.5*\a}) --
+          ++(\b,0)            --
+          ++(-\a,-\a)         --
+          ++({-\b+2*\a},0)    --
+          ++(0,-{2*\a})       --
+          ++(\b,0)            --
+          ++(-\a,-\a)         --
+          ++(-\b,0)           --
+          cycle;
+        \draw[apply style/.expand once=\facestyletwo] 
+          ({.5*\b},{1.5*\a})  --
+          ++(0,{-2*\a})       --
+          ++(-\a,0)           --
+          ++(0,\a)            --
+          cycle;
+        \end{scope}
+      }
+    \end{tikzpicture}
+
+    \vspace{1cm}
+
+    \begin{tikzpicture}[scale=1, line join=bevel]
+	
+    % \a and \b are two macros defining characteristic
+    % dimensions of the Penrose triangle.		
+    \pgfmathsetmacro{\a}{2.5}
+    \pgfmathsetmacro{\b}{0.9}
+
+    \tikzset{%
+      apply style/.code     = {\tikzset{#1}},
+      triangle_edges/.style = {thick,draw=black}
+    }
+
+    \foreach \theta/\facestyle in {%
+        0/{triangle_edges, fill = gray!50},
+      120/{triangle_edges, fill = gray!25},
+      240/{triangle_edges, fill = gray!90}%
+    }{
+      \begin{scope}[rotate=\theta]
+        \draw[apply style/.expand once=\facestyle]
+          ({-sqrt(3)/2*\a},{-0.5*\a})                     --
+          ++(-\b,0)                                       --
+            ({0.5*\b},{\a+3*sqrt(3)/2*\b})                -- % higher point	
+            ({sqrt(3)/2*\a+2.5*\b},{-.5*\a-sqrt(3)/2*\b}) -- % rightmost point
+          ++({-.5*\b},-{sqrt(3)/2*\b})                    -- % lower point
+            ({0.5*\b},{\a+sqrt(3)/2*\b})                  --
+          cycle;
+        \end{scope}
+      }	
+	  \end{tikzpicture}
+>>>
+
+\tikzfig\verb>>>|
+% Plane Sections of the Cylinder - Dandelin Spheres
+% Author: Hugues Vermeiren
+\tikzset{
+	MyPersp/.style={scale=1.8,x={(-0.8cm,-0.4cm)},y={(0.8cm,-0.4cm)},
+    z={(0cm,1cm)}},
+%  MyPersp/.style={scale=1.5,x={(0cm,0cm)},y={(1cm,0cm)},
+%    z={(0cm,1cm)}}, % uncomment the two lines to get a lateral view
+	MyPoints/.style={fill=white,draw=black,thick}
+		}
+
+\begin{tikzpicture}[MyPersp,font=\large]
+	% the base circle is the unit circle in plane Oxy
+	\def\h{2.5}% Heigth of the ellipse center (on the axis of the cylinder)
+	\def\a{35}% angle of the section plane with the horizontal
+	\def\aa{35}% angle that defines position of generatrix PA--PB
+	\pgfmathparse{\h/tan(\a)}
+  \let\b\pgfmathresult
+	\pgfmathparse{sqrt(1/cos(\a)/cos(\a)-1)}
+  \let\c\pgfmathresult %Center Focus distance of the section ellipse.
+	\pgfmathparse{\c/sin(\a)}
+  \let\p\pgfmathresult % Position of Dandelin spheres centers
+                       % on the Oz axis (\h +/- \p)
+	\coordinate (A) at (2,\b,0);
+	\coordinate (B) at (-2,\b,0);
+	\coordinate (C) at (-2,-1.5,{(1.5+\b)*tan(\a)});
+	\coordinate (D) at (2,-1.5,{(1.5+\b)*tan(\a)});
+	\coordinate (E) at (2,-1.5,0);
+	\coordinate (F) at (-2,-1.5,0);
+	\coordinate (CLS) at (0,0,{\h-\p});
+	\coordinate (CUS) at (0,0,{\h+\p});
+	\coordinate (FA) at (0,{\c*cos(\a)},{-\c*sin(\a)+\h});% Focii
+	\coordinate (FB) at (0,{-\c*cos(\a)},{\c*sin(\a)+\h});
+	\coordinate (SA) at (0,1,{-tan(\a)+\h}); % Vertices of the
+                                           % great axes of the ellipse
+	\coordinate (SB) at (0,-1,{tan(\a)+\h});
+	\coordinate (PA) at ({sin(\aa},{cos(\aa)},{\h+\p});
+	\coordinate (PB) at ({sin(\aa},{cos(\aa)},{\h-\p});
+	\coordinate (P) at ({sin(\aa)},{cos(\aa)},{-tan(\a)*cos(\aa)+\h});
+     % Point on the ellipse on generatrix PA--PB
+
+	\draw (A)--(B)--(C)--(D)--cycle;
+	\draw (D)--(E)--(F)--(C);
+	\draw (A)--(E) (B)--(F);
+	\draw[blue,very thick] (SA)--(SB);
+
+%	\coordinate (O) at (0,0,0);
+%	\draw[->] (O)--(2.5,0,0)node[below left]{x};
+%	\draw[->] (O)--(0,3,0)node[right]{y};
+%	\draw[->] (O)--(0,0,6)node[left]{z};
+
+	\foreach \t in {20,40,...,360}% generatrices
+		\draw[magenta,dashed] ({cos(\t)},{sin(\t)},0)
+      --({cos(\t)},{sin(\t)},{2.0*\h});
+	\draw[magenta,very thick] (1,0,0) % lower circle
+		\foreach \t in {5,10,...,360}
+			{--({cos(\t)},{sin(\t)},0)}--cycle;
+	\draw[magenta,very thick] (1,0,{2*\h}) % upper circle
+		\foreach \t in {10,20,...,360}
+			{--({cos(\t)},{sin(\t)},{2*\h})}--cycle;
+	\fill[blue!15,draw=blue,very thick,opacity=0.5]
+     (0,1,{\h-tan(\a)}) % elliptical section
+		\foreach \t in {5,10,...,360}
+			{--({sin(\t)},{cos(\t)},{-tan(\a)*cos(\t)+\h})}--cycle;
+
+	\foreach \i in {-1,1}{%Spheres!
+		\foreach \t in {0,15,...,165}% meridians
+			{\draw[gray] ({cos(\t)},{sin(\t)},\h+\i*\p)
+				\foreach \rho in {5,10,...,360}
+					{--({cos(\t)*cos(\rho)},{sin(\t)*cos(\rho)},
+          {sin(\rho)+\h+\i*\p})}--cycle;
+			}
+		\foreach \t in {-75,-60,...,75}% parallels
+			{\draw[gray] ({cos(\t)},0,{sin(\t)+\h+\i*\p})
+				\foreach \rho in {5,10,...,360}
+					{--({cos(\t)*cos(\rho)},{cos(\t)*sin(\rho)},
+          {sin(\t)+\h+\i*\p})}--cycle;
+			}
+					\draw[orange,very thick] (1,0,{\h+\i*\p})% Equators
+		\foreach \t in {5,10,...,360}
+			{--({cos(\t)},{sin(\t)},{\h+\i*\p})}--cycle;
+		}
+	\draw[red,very thick] (PA)--(PB);
+	\draw[red,very thick] (FA)--(P)--(FB);
+%	\fill[MyPoints] (CLS) circle (1pt);% center of lower sphere
+%	\fill[MyPoints] (CUS) circle (1pt);% center of upper sphere
+	\fill[MyPoints] (FA) circle (1pt)node[right]{$F_1$};
+	\fill[MyPoints] (FB) circle (1pt)node[left]{$F_2$};
+	\fill[MyPoints] (SA) circle (1pt);
+	\fill[MyPoints] (SB) circle (1pt);
+	\fill[MyPoints] (P) circle (1pt)node[below left]{$P$};
+	\fill[MyPoints] (PA) circle (1pt)node[below right]{$P_1$};
+	\fill[MyPoints] (PB) circle (1pt)node[above right]{$P_2$};
+\end{tikzpicture}
+>>>
+
+\tikzfig\verb>>>|
+% Steradian cone in sphere
+% Author: Bartman
+\begin{tikzpicture}
+  \coordinate (O) at (0,0);
+
+  % ball background color
+  \shade[ball color = blue, opacity = 0.2] (0,0) circle [radius = 2cm];
+
+  % cone
+  \begin{scope}
+    \def\rx{0.71}% horizontal radius of the ellipse
+    \def\ry{0.15}% vertical radius of the ellipse
+    \def\z{0.725}% distance from center of ellipse to origin
+
+    \path [name path = ellipse]    (0,\z) ellipse ({\rx} and {\ry});
+    \path [name path = horizontal] (-\rx,\z-\ry*\ry/\z)
+                                -- (\rx,\z-\ry*\ry/\z);
+    \path [name intersections = {of = ellipse and horizontal}];
+
+    % radius to base of cone in ball
+    \draw[fill = gray!50, gray!50] (intersection-1) -- (0,0)
+      -- (intersection-2) -- cycle;
+    % base of cone in ball
+    \draw[fill = gray!30, densely dashed] (0,\z) ellipse ({\rx} and {\ry});
+  \end{scope}
+
+  % label of cone
+  \draw (0.25,0.4) -- (0.9,0.1) node at (1.05,0.0) {$q$};
+
+  % ball
+  \draw (O) circle [radius=2cm];
+  % label of ball center point
+  \filldraw (O) circle (1pt) node[below] {$P$};
+
+  % radius
+  \draw[densely dashed] (O) to [edge label = $r$] (-1.33,1.33);
+  \draw[densely dashed] (O) -- (1.33,1.33);
+
+  % cut of ball surface
+  \draw[red] (-1.35,1.47) arc [start angle = 140, end angle = 40,
+    x radius = 17.6mm, y radius = 14.75mm];
+  \draw[red, densely dashed] (-1.36,1.46) arc [start angle = 170, end angle = 10,
+    x radius = 13.8mm, y radius = 3.6mm];
+  \draw[red] (-1.29,1.52) arc [start angle=-200, end angle = 20,
+    x radius = 13.75mm, y radius = 3.15mm];
+
+  % label of cut of ball surface
+  \draw (-1.2,2.2) -- (-0.53,1.83) node at (-1.37,2.37) {$A$};
+\end{tikzpicture}
+>>>
+
+}
+
+}
+
