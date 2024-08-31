@@ -13,13 +13,28 @@
 
 \note{test tikz drawing}{
 
-\p{Styling considerations: [Illustrating Geometry by Keenan Crane](https://www.cs.cmu.edu/~kmcrane/Projects/Other/IllustratingGeometry.pdf)
+\p{This is a series of experiments with TikZ drawing to ensure my `diagrams.tex` has sufficient preambles to render them. Most of them are adapted to minimize dependencies, and fix wierd render issues.
 }
 
-\p{Workflow: [Explanatory paper figures with Illustrator and Blender](https://research.siggraph.org/blog/guides/explanatory-paper-figures-with-illustrator-and-blender/)
+\block{some related links}{
+
+\md{
+
+- Styling considerations: [Illustrating Geometry by Keenan Crane](https://www.cs.cmu.edu/~kmcrane/Projects/Other/IllustratingGeometry.pdf)
+- Workflow: [Explanatory paper figures with Illustrator and Blender](https://research.siggraph.org/blog/guides/explanatory-paper-figures-with-illustrator-and-blender/)
+- Tool: [PGFPlotsEdt](https://logcreative.github.io/PGFPlotsEdt/)
+
 }
 
-\p{Tool: [PGFPlotsEdt](https://logcreative.github.io/PGFPlotsEdt/)}
+}
+
+\scope{
+\put\transclude/title{from sites collecting TikZ examples}
+% \put\transclude/expanded{false}
+\transclude{uts-000P}
+}
+
+\block{from various sources: annotating on 2D/3D diagrams}{
 
 \p{The following is adapted from [exo7math/deepmath-exo7](https://github.com/exo7math/deepmath-exo7/blob/master/chatgpt1/figures/projection-01.tikz):
 }
@@ -415,6 +430,63 @@ cross/.default={1pt}}
 
 % <<<}
 
+
+\p{From \link{https://github.com/APEXCalculus/APEXCalculusV4/blob/master/figures/fig_double1.tex}:
+}
+
+\tikzfig{
+\begin{tikzpicture}[>=stealth]
+\begin{axis}%
+[width=175pt,height=200pt,
+tick label style={font=\scriptsize},%axis on top,
+			axis lines=center,
+			view={30}{20},
+			name=myplot,
+			xtick={1,2,3,4},
+			%ytick={5},
+			%ztick={.7,-.7},
+			minor xtick=1,
+			minor ytick=1,
+			ymin=-.1,ymax=2.5,
+			xmin=-.1,xmax=4.5,
+			zmin=-.1, zmax=16,
+			every axis x label/.style={at={(axis cs:\pgfkeysvalueof{/pgfplots/xmax},0,0)},xshift=-1pt,yshift=-4pt},
+				xlabel={\scriptsize $x$},
+			every axis y label/.style={at={(axis cs:0,\pgfkeysvalueof{/pgfplots/ymax},0)},xshift=5pt,yshift=-3pt},
+				ylabel={\scriptsize $y$},
+				every axis z label/.style={at={(axis cs:0,0,\pgfkeysvalueof{/pgfplots/zmax})},xshift=0pt,yshift=4pt},
+				zlabel={\scriptsize $z$}
+			]
+
+\draw [thick,{red}] (axis cs: 3,1,0) -- (axis cs: 3,2,0) -- (axis cs: 4,2,0) -- node [above,pos=.7,black] {\scriptsize $R$} (axis cs: 4,1,0) -- cycle;
+
+\addplot3[domain=0:4.3,,y domain=0:2.1,surf,%fill=white,
+colormap={blueblack}{color=(green) color=(orange)},opacity=.6,faceted color=black!40,samples=13,samples y=18,very thin,z buffer=sort] {x*y+exp(y)};
+
+\addplot3[domain=1:2,%fill=white,
+{red}, thick,samples=20,samples y=0] ({3},{x},{3*x+exp(x)});
+
+\addplot3[domain=1:2,%fill=white,
+{red}, thick,samples=20,samples y=0] ({4},{x},{4*x+exp(x)});
+
+\addplot3[domain=3:4,%fill=white,
+{red}, thick,samples=20,samples y=0] ({x},{1},{1*x+exp(1)});
+
+\addplot3[domain=3:4,%fill=white,
+{red}, thick,samples=20,samples y=0] ({x},{2},{2*x+exp(2)});
+
+\draw [{red},dashed,thin] 
+						(axis cs: 3,1,0) -- (axis cs: 3,1,5.7)
+						(axis cs: 3,2,0) -- (axis cs: 3,2,13.4)
+						(axis cs: 4,2,0) -- (axis cs: 4,2,15.4)
+						(axis cs: 4,1,0) -- (axis cs: 4,1,6.7);
+
+\end{axis}
+
+
+\end{tikzpicture}
+}
+
 \p{The following is adapted from [20squares/blog](https://github.com/20squares/blog/tree/master/assetsPosts/2023-07-26-lagrangian-intent-search-i/tex) ([rendered](https://blog.20squares.xyz/lagrangian-intent-search-i/)):
 }
 
@@ -623,6 +695,10 @@ cross/.default={1pt}}
     \end{tikzpicture}
 }
 
+}
+
+\block{from various sources: plots}{
+
 \p{From [tikz.org](https://tikz.org/examples/chapter-13-plotting-in-2d-and-3d/):
 }
 
@@ -762,44 +838,6 @@ cross/.default={1pt}}
         ]{sqrt(2*sin(deg((x+y)/2))^2+sin(deg(x/2))^2+sin(deg(y/2))^2-sqrt(4*sin(deg((x+y)/2))^4+(sin(deg(x/2))^2-sin(deg(y/2))^2)^2))};        
      \end{axis}
   \end{tikzpicture}
-}
-
-\p{From \link{https://grandfleet.eu.org/ArtificialIntelligence/feature_selection}:
-}
-
-\tikzfig{
-\usetikzlibrary{arrows,shadows,positioning}
- 
-\tikzset{
-  frame/.style={
-    rectangle, draw, 
-    text width=6em, text centered,
-    minimum height=4em,drop shadow,fill=yellow!40,
-    rounded corners,
-  },
-  line/.style={
-    draw, -latex',rounded corners=3mm,
-  }
-}
-
-\begin{tikzpicture}[font=\small\sffamily\bfseries,very thick,node distance = 4cm]
-\node [frame] (pop) {Population};
-\node [above=2cm, text width=2cm, align=center, left of=pop] (init) {Random \\ Initialisation};
-\node [below=2cm, text width = 2cm, align = center, left of=pop] (term) {Termination};
-\node [frame, above=2cm, right of=pop] (parents)  {Parents};
-\node [frame, below=2cm, right of=pop] (off)  {Offspring};
- 
-% termination condition label
-\node [draw=none, text width=3cm, above right = -0.1cm and -1cm of term ] () {(unique features \\ less than $\frac{1}{3}$ of \\ maximum features)};
-\path [line] (parents)
- -- node[right,align=left,pos=.5] {Crossover\\[3mm]Inversion\\[3mm]Mutation}
- (off);
-\path [line] (init) |- (pop.170);
-\path [line] (pop.190) -| (term);
-\path [line] (off) -| node[below,pos=.25, align=center] {Survivor\\ selection}(pop);
-\path [line] (pop) |- node[above,pos=.75, align=center] {Parents\\ selection}(parents);
-\end{tikzpicture}
-
 }
 
 \p{From \link{https://github.com/antonvladyka/neuralnetworksanddeeplearning.com.pdf/blob/master/ch4_visualproof.tex}:
@@ -942,62 +980,6 @@ cross/.default={1pt}}
 \end{tikzpicture}
 }
 
-\p{From \link{https://github.com/APEXCalculus/APEXCalculusV4/blob/master/figures/fig_double1.tex}:
-}
-
-\tikzfig{
-\begin{tikzpicture}[>=stealth]
-\begin{axis}%
-[width=175pt,height=200pt,
-tick label style={font=\scriptsize},%axis on top,
-			axis lines=center,
-			view={30}{20},
-			name=myplot,
-			xtick={1,2,3,4},
-			%ytick={5},
-			%ztick={.7,-.7},
-			minor xtick=1,
-			minor ytick=1,
-			ymin=-.1,ymax=2.5,
-			xmin=-.1,xmax=4.5,
-			zmin=-.1, zmax=16,
-			every axis x label/.style={at={(axis cs:\pgfkeysvalueof{/pgfplots/xmax},0,0)},xshift=-1pt,yshift=-4pt},
-				xlabel={\scriptsize $x$},
-			every axis y label/.style={at={(axis cs:0,\pgfkeysvalueof{/pgfplots/ymax},0)},xshift=5pt,yshift=-3pt},
-				ylabel={\scriptsize $y$},
-				every axis z label/.style={at={(axis cs:0,0,\pgfkeysvalueof{/pgfplots/zmax})},xshift=0pt,yshift=4pt},
-				zlabel={\scriptsize $z$}
-			]
-
-\draw [thick,{red}] (axis cs: 3,1,0) -- (axis cs: 3,2,0) -- (axis cs: 4,2,0) -- node [above,pos=.7,black] {\scriptsize $R$} (axis cs: 4,1,0) -- cycle;
-
-\addplot3[domain=0:4.3,,y domain=0:2.1,surf,%fill=white,
-colormap={blueblack}{color=(green) color=(orange)},opacity=.6,faceted color=black!40,samples=13,samples y=18,very thin,z buffer=sort] {x*y+exp(y)};
-
-\addplot3[domain=1:2,%fill=white,
-{red}, thick,samples=20,samples y=0] ({3},{x},{3*x+exp(x)});
-
-\addplot3[domain=1:2,%fill=white,
-{red}, thick,samples=20,samples y=0] ({4},{x},{4*x+exp(x)});
-
-\addplot3[domain=3:4,%fill=white,
-{red}, thick,samples=20,samples y=0] ({x},{1},{1*x+exp(1)});
-
-\addplot3[domain=3:4,%fill=white,
-{red}, thick,samples=20,samples y=0] ({x},{2},{2*x+exp(2)});
-
-\draw [{red},dashed,thin] 
-						(axis cs: 3,1,0) -- (axis cs: 3,1,5.7)
-						(axis cs: 3,2,0) -- (axis cs: 3,2,13.4)
-						(axis cs: 4,2,0) -- (axis cs: 4,2,15.4)
-						(axis cs: 4,1,0) -- (axis cs: 4,1,6.7);
-
-\end{axis}
-
-
-\end{tikzpicture}
-}
-
 \p{Reproducing #{\mathbf{V}\left(x^2-y^2 z^2+z^3\right)} from \citet{p. 7, p. 16}{cox1997ideals} using \code{addplot3}
 }
 
@@ -1008,6 +990,14 @@ colormap={blueblack}{color=(green) color=(orange)},opacity=.6,faceted color=blac
 \end{axis}
 \end{tikzpicture}
 
+}
+
+}
+
+\scope{
+\put\transclude/title{from various sources: candidates for ray-tracing}
+% \put\transclude/expanded{false}
+\transclude{uts-000N}
 }
 
 }
