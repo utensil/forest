@@ -1,0 +1,33 @@
+\import{macros}
+% clifford hopf spin tt ag math draft tech exp notes
+\tag{notes}
+\tag{tech}
+\tag{draft}
+
+\note{SSR of WebGL}{
+\md{
+
+## Server-side rendering of WebGL
+
+Combining `xvfb-run`, [headless-gl](https://github.com/stackgl/headless-gl), three.js, should make it possible, e.g. see [Headless rendering with THREE.js](https://gist.github.com/crabmusket/b164c9b9d3c43db9bddbfb83afde0319), see also:
+
+- [sharp](https://sharp.pixelplumbing.com/) for rendering to various image formats
+- [three.js + headless.gl rendering with texturing](https://gist.github.com/bsergean/08be90a2f21205062ccc) in CoffeeScript
+- [How to run OpenGL based tests on Github Actions](https://amiralizadeh9480.medium.com/how-to-run-opengl-based-tests-on-github-actions-60f270b1ea2c)
+
+## Plotly.js
+
+I wish to draw a style similar to [Project contour profiles onto a graph](https://matplotlib.org/stable/gallery/mplot3d/contour3d_3.html#sphx-glr-gallery-mplot3d-contour3d-3-py) by Matplotlib, which plots a 3D surface then its contour profiles projected to surrounding planes.
+
+[Plotly.js](https://plotly.com/javascript/) has a similar example as [Surface Plot With Contours](https://plotly.com/javascript/3d-surface-plots/#surface-plot-with-contours).
+
+Plotly [requires](https://plotly.com/javascript/plotlyjs-function-reference/) a `div` element to render the plot, it will initialize a WebGL-capable `canvas` to do so. It has support for using [virtual WebGL context](https://github.com/greggman/virtual-webgl) but no native way to specify a `canvas` from the outside.
+
+When running in headless mode from node, we will typically use [jsdom](https://github.com/jsdom/jsdom/) which in turn uses [node-canvas](https://github.com/Automattic/node-canvas) that's not WebGL-capable. There is an [open issue](https://github.com/jsdom/jsdom/issues/3617) to detect the presence of [node-canvas-webgl](https://github.com/akira-cn/node-canvas-webgl/) and use it, as it integrations `node-canvas` and [headless-gl](https://github.com/stackgl/headless-gl). Another idea is to make NPM packages `get-canvas-context` and in turn `webgl-context` to handle this.
+
+A commercial plot libraries `LightningChart JS` has made [Headless server use support for itself](https://github.com/Arction/lcjs-headless), which could be used as a reference.
+
+[Should I Render Three.js to Video on the Client or Server?](https://cliffordhall.com/2016/09/render-three-js-videos-on-client-or-server/) has some discussions on this topic.
+
+}
+}
