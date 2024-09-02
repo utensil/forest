@@ -13,7 +13,7 @@
 
 \note{test implicit surface shader 1}{
 
-\shader{ }\verb>>>|
+\shadertoy{ }\verb>>>|
 // Adapted from https://www.shadertoy.com/view/l3BSRG
 
 #define AS_LIB 1
@@ -76,6 +76,9 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
     
     if (hitPoint == NOBOUNDHIT  || hitPoint == NOHIT || hitPoint == ESCAPEDBOUNDS || hitPoint == MAXITERREACHED) {
         //fragColor = vec4(vec3(0.2),1.0); return;
+
+        // make background transparent
+        fragColor = vec4(0.0,0.0,0.0,0.0); return;
         
         col = with_background(cubemapDir);
         
@@ -99,6 +102,7 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
     col = with_shading(col, grad, s, rayDir);
     
     col = clamp(col, 0., 1.);
+
     fragColor = vec4(col,1.0);
 }
 >>>

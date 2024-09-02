@@ -133,7 +133,12 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
     color = raymarch(cam, vec3(0.0), uv).rgb;
     color = linear2gamma(color);
 
-    fragColor = vec4( color, 1.0 );
+    // if color is almost white, make it transparent
+    // if (color.r > 0.99 && color.g > 0.99 && color.b > 0.99) {
+    //     fragColor = vec4(0.0,0.0,0.0,0.0);
+    // } else {
+        fragColor = vec4( color, 1.0 );
+    // }
 }
 
 >>>
