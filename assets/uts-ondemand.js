@@ -37,4 +37,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (embeded_shaders.length != 0) {
         load_script('shader.js');
     }
+
+    const embeded_shadertoys = document.querySelectorAll('.embeded-shadertoy');
+
+    if (embeded_shadertoys.length != 0) {
+        load_script('shadertoy.js');
+    }
 });
