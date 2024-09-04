@@ -97,6 +97,20 @@ def format_external(reference):
 
     return f'\\meta{{external}}{{{url}}}\n' if url else ''
 
+def parse_frontmatter(line):
+    # strip beginning whitespace and %
+    line = line.lstrip().lstrip('%').lstrip()
+    # try parse it as JSON
+    try:
+        ret = json.loads(line)
+        # check if it's an array
+        if isinstance(ret, list):
+            return ret
+        else:
+            return []
+    except json.JSONDecodeError:
+        return []
+
 # print(f'📚 Splitting {csljson_file.relative_to(project_root)}')
 csl_file = bib_dir / 'forest.csl'
 for i, reference in enumerate(references):
@@ -126,22 +140,16 @@ for i, reference in enumerate(references):
         # read the first line
         with open(tree_file_i, 'r', encoding='utf-8') as f:
             first_line = f.readline()
-            # strip beginning whitespace and %
-            first_line = first_line.lstrip().lstrip('%').lstrip()
-            # try parse it as JSON
-            try:
-                first_line_json = json.loads(first_line)
-                # check if it's an array
-                if isinstance(first_line_json, list):
-                    # remove bib_filename from it
-                    bib_filenames_i = [
-                        filename for filename in first_line_json
-                        if filename != bib_filename
-                    ]
-                    # add bib_filename to the end of it
-                    bib_filenames_i.append(bib_filename)
-            except json.JSONDecodeError:
-                pass
+            first_line_json = parse_frontmatter(first_line)
+            # remove bib_filename from it
+            bib_filenames_i = [
+                filename for filename in first_line_json
+                if filename != bib_filename
+            ]
+            # add bib_filename to the end of it
+            bib_filenames_i.append(bib_filename)
+            # sort the list
+            bib_filenames_i.sort()
 
     # detect duplication
     if len(bib_filenames_i) > 1:
@@ -160,8 +168,14 @@ for i, reference in enumerate(references):
     if tree_file_i.exists():
         with open(tree_file_i, 'r', encoding='utf-8') as f:
             existing = f.read()
-            if existing == formatted:
-                continue
+            # get the first line
+            existing_first_line, existing_rest = existing.split('\n', 1)
+            existing_bib_filenames_i = parse_frontmatter(existing_first_line)
+            # if it's the same or shorter
+            if len(existing_bib_filenames_i) <= len(bib_filenames_i) or set(existing_bib_filenames_i) == set(bib_filenames_i):
+                formatted_first_line, formatted_rest = formatted.split('\n', 1)
+                if existing_rest == formatted_rest:
+                    continue
 
     with open(tree_file_i, 'w', encoding='utf-8') as f:
         f.write(formatted)
