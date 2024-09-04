@@ -30,6 +30,8 @@ while IFS= read -r line; do
         ./build.sh
     elif [[ $CHANGED_FILE == *".tex" ]]; then
         ./build.sh
+    elif [[ $CHANGED_FILE == *".bib" ]]; then
+        ./bib.sh
     elif [[ $CHANGED_FILE == *".glsl" ]]; then
         mkdir -p output/shader/
         cp -f assets/shader/* output/shader/

@@ -172,7 +172,7 @@ for i, reference in enumerate(references):
             existing_first_line, existing_rest = existing.split('\n', 1)
             existing_bib_filenames_i = parse_frontmatter(existing_first_line)
             # if it's the same or shorter
-            if len(existing_bib_filenames_i) <= len(bib_filenames_i) or set(existing_bib_filenames_i) == set(bib_filenames_i):
+            if len(existing_bib_filenames_i) >= len(bib_filenames_i) or set(existing_bib_filenames_i) == set(bib_filenames_i):
                 formatted_first_line, formatted_rest = formatted.split('\n', 1)
                 if existing_rest == formatted_rest:
                     continue
