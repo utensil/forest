@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # fail fast for this shell
-set -e
+# set -e
 
 SCRIPT_DIR=$(dirname "$(readlink -f "$0")")
 PROJECT_ROOT="$SCRIPT_DIR"

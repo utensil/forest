@@ -299,9 +299,15 @@
     </xsl:choose>
   </xsl:template>
 
-  <xsl:template match="html:code">
+  <xsl:template match="f:code">
+    <xsl:text>\lstinline|</xsl:text>
+    <xsl:apply-templates />
+    <xsl:text>|</xsl:text>
+  </xsl:template>
+
+  <xsl:template match="html:code[contains(concat(' ', @class, ' '), ' highlight ')]">
     <xsl:text>\begin{lstlisting}[mathescape=true,language=</xsl:text>
-    <xsl:value-of select="@class" />
+    <xsl:value-of select="substring-before(@class, ' ')" />
     <xsl:text>]</xsl:text>
     <xsl:apply-templates />
     <xsl:text>\end{lstlisting}</xsl:text>
@@ -339,6 +345,12 @@
 
   <xsl:template match="html:span[@class='todolist']">
     <xsl:text>\listoftodos</xsl:text>
+  </xsl:template>
+
+  <xsl:template match="html:span[@class='optional']">
+    <xsl:text>{\color{Grey}</xsl:text>
+    <xsl:apply-templates />
+    <xsl:text>}</xsl:text>
   </xsl:template>
 
   <xsl:template match="html:table">
