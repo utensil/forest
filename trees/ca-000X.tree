@@ -1,0 +1,40 @@
+\import{spin-macros}
+% clifford hopf spin draft
+\tag{clifford}
+\tag{draft}
+
+% definition theorem lemma construction observation
+% convention corollary axiom example exercise proof
+% discussion remark notation
+% \taxon{}
+% \refcardt{lemma}{}{}{}{
+
+% kostecki2011introduction leinster2016basic nakahira2023diagrammatic rosiak2022sheaf
+
+% cox1997ideals gathmann2013commutative
+
+\card{definition}{module}{
+
+\p{
+    \label{Module}
+    \leanok
+    \lean{Module}
+    \uses{Group,Ring}
+
+    Let #{R} be a commutative ring. A \newvocab{module} over #{R}, called an \vocab{#{R}-module}, is a pair #{(M, \bu)}, satisfying:
+
+    \ol{
+      \li{M is a group under #{+}.}
+    
+      \li{#{\bu : R \to M \to M} is called \newvocab{scalar multiplication}, for every #{a, b \in R}, #{x, y \in M}, we have}
+      
+        \ol{
+            \li{#{a \bu (x + y) = a \bu x + b \bu y}}
+            \li{#{(a + b) \bu x = a \bu x + b \bu x}}
+            \li{#{a * (b \bu x)=(a * b) \bu x}}
+            \li{#{1_R \bu x = x}}
+        }
+    }
+}
+
+}

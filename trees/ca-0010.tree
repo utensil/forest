@@ -1,0 +1,35 @@
+\import{spin-macros}
+% clifford hopf spin draft
+\tag{clifford}
+\tag{draft}
+
+% definition theorem lemma construction observation
+% convention corollary axiom example exercise proof
+% discussion remark notation
+% \taxon{}
+% \refcardt{lemma}{}{}{}{
+
+% kostecki2011introduction leinster2016basic nakahira2023diagrammatic rosiak2022sheaf
+
+% cox1997ideals gathmann2013commutative
+
+\card{remark}{vector space}{
+\label{mk:VectorSpace}
+\p{
+    For generality, \Mathlib uses \MathlibDoc{Module} throughout for vector spaces,
+    particularly, for a vector space #{V}, it's usually declared as
+
+\codeblock{lean}\verb>>>|
+/--
+    Let #{K} be a division ring, a module #{V} over #{K} is a vector space
+    where being a module requires #{V} to be a commutative group over #{+}.
+-/
+variable [DivisionRing K] [AddCommGroup V] [Module K V]
+>>>
+}
+
+\p{For definitions/theorems about it, and most of them can be found under \code{Mathlib.LinearAlgebra} e.g. \MathlibDoc{LinearIndependent}.
+}
+    
+}
+
