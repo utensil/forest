@@ -40,7 +40,7 @@ body {
     }
 
     #grid-wrapper article {
-        max-width: 100ex;
+        width: 100ex;
     }
 
     #grid-wrapper nav#toc {
@@ -627,9 +627,18 @@ figure {
 }
 
 ol {
-    > ol {
-        > li {
-        list-style-type: lower-roman;
+    > li {
+        > ol {
+            counter-reset: ol2;
+            list-style-type: none;
+
+            > li {
+                counter-increment: ol2;
+            }
+
+            > li::before {
+                content: counter(ol2, lower-roman) ") ";
+            }
         }
     }
 }
