@@ -21,6 +21,9 @@ with open(TREE, 'r+') as file:
     content = re.sub(r'\\item (.*)', r'\\li{\1}', content)
     content = re.sub(r'\\ii (.*)', r'\\li{\1}', content)
 
+    # Convert some LaTeX commands to forester commands
+    content = re.sub(r'\\emph\{([^}]*)\}', r'\\em{\1}', content)
+
     # Replace all line breaks to `\r` to handle multiline replacements
     content.replace('\n', '\r')
 
