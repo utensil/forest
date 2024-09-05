@@ -626,8 +626,13 @@ figure {
     color: var(--uts-text-gentle);
 }
 
-ol {
+[data-taxon] ol {
+    counter-reset: ol;
+    list-style-type: none;
+
     > li {
+        counter-increment: ol;
+
         > ol {
             counter-reset: ol2;
             list-style-type: none;
@@ -640,5 +645,9 @@ ol {
                 content: counter(ol2, lower-roman) ") ";
             }
         }
+    }
+
+    > li::before {
+        content: counter(ol, numeric) ") ";
     }
 }
