@@ -44,9 +44,9 @@ document.addEventListener('DOMContentLoaded', async () => {
         load_script('shadertoy.js');
     }
 
-    // const embeded_usegpu = document.querySelectorAll('.usegpu');
+    const embeded_usegpus = document.querySelectorAll('.usegpu');
 
-    // if (embeded_usegpu.length != 0) {
-    //     load_script('usegpu.js');
-    // }
+    if (embeded_usegpus.length != 0) {
+        load_script('usegpu.js');
+    }
 });

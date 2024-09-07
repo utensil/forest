@@ -50,7 +50,8 @@ function bun_build {
             echo "🚀 lightningcss"
             bunx lightningcss --minify --bundle --targets '>= 0.25%' bun/$FILE -o output/$FILE
         else
-            bun build bun/$FILE --outdir output
+            bun run ./bun_build.js bun/$FILE ./bun/usegpu.js
+            # bun build bun/$FILE --outdir output
         fi
     done
 }
