@@ -43,4 +43,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (embeded_shadertoys.length != 0) {
         load_script('shadertoy.js');
     }
+
+    const embeded_usegpu = document.querySelectorAll('.usegpu');
+
+    if (embeded_usegpu.length != 0) {
+        load_script('usegpu.js');
+    }
 });
