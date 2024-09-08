@@ -49,4 +49,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (embeded_usegpus.length != 0) {
         load_script('usegpu.js');
     }
+
+    // load_script('uwal.js');
 });

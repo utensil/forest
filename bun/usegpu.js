@@ -1,4 +1,4 @@
-// bun install @use-gpu/webgpu
+// bun add @use-gpu/webgpu
 // Follows https://usegpu.live/docs/guides-webgpu-canvas
 import React, { render } from '@use-gpu/live';
 import { createRoot } from 'react-dom/client'
