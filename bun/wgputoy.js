@@ -42,6 +42,10 @@ embeded_wgputoys.forEach(async (element) => {
                     // console.log(width, height);
                 
                     const renderer = await create_renderer(width, height, canvas.id);
+                    renderer.on_success = () => {};
+                    renderer.on_error = (error) => {
+                        console.error(error);
+                    };
                 
                     // console.log(renderer);
 
