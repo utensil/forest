@@ -36,12 +36,29 @@ function show_lize_result {
   echo "Open output/$1.pdf to see the result."
 }
 
+function prep_wgputoy {
+    mkdir -p lib
+    # if the directory `lib/wgputoy` does not exist
+    if [ ! -d "lib/wgputoy" ]; then
+        # clone the repository shallowly
+        git clone --depth 1 https://github.com/compute-toys/wgpu-compute-toy.git lib/wgputoy
+    fi
+
+    if [ ! -d "lib/wgputoy/pkg" ]; then
+        # run wasm-pack
+        # wasm-pack build --release wgpu-compute-toy --out-dir ../lib/wgputoy
+        bunx wasm-pack build --target web --release lib/wgputoy --out-dir pkg
+    fi
+}
+
 function bun_build {
     if [ -n "$CI" ]; then
         bun install
     fi
 
     mkdir -p output
+
+    prep_wgputoy
 
     # for each files in the directory `bun`, run bun build
     for FILE in $(ls -1 bun); do
@@ -50,7 +67,7 @@ function bun_build {
             echo "🚀 lightningcss"
             bunx lightningcss --minify --bundle --targets '>= 0.25%' bun/$FILE -o output/$FILE
         else
-            bun run ./bun_build.js bun/$FILE ./bun/usegpu.js
+            bun run ./bun_build.js bun/$FILE
             # bun build bun/$FILE --outdir output
         fi
     done
@@ -64,6 +81,8 @@ function copy_extra_assets {
     cp node_modules/@myriaddreamin/typst-ts-web-compiler/pkg/typst_ts_web_compiler_bg.wasm output/
     cp node_modules/@myriaddreamin/typst-ts-renderer/pkg/typst_ts_renderer_bg.wasm output/
     # ls output/*.wasm
+
+    cp lib/wgputoy/pkg/wgputoy_bg.wasm output/
 }
 
 function build {

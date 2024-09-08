@@ -50,5 +50,11 @@ document.addEventListener('DOMContentLoaded', async () => {
         load_script('usegpu.js');
     }
 
+    const embeded_wgputoys = document.querySelectorAll('.wgputoy');
+
+    if (embeded_wgputoys.length != 0) {
+        load_script('wgputoy.js');
+    }
+
     // load_script('uwal.js');
 });
