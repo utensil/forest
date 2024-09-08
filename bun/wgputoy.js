@@ -9,6 +9,13 @@ embeded_wgputoys.forEach(async (element) => {
     canvas.id = 'wgputoy-' + Math.random().toString(36).substring(7);
 
     let shader = element.textContent;
+    let custom = element.getAttribute('data-custom');
+    console.log('custom', custom);
+    if (custom) {
+        custom = JSON.parse(custom);
+    } else {
+        custom = {};
+    }
     element.innerHTML = '';
     element.classList.add('lazy-loading');
 
@@ -37,12 +44,20 @@ embeded_wgputoys.forEach(async (element) => {
                     const renderer = await create_renderer(width, height, canvas.id);
                 
                     // console.log(renderer);
-                
+
+                    shader = shader.replace('@group(0) @binding(5) var<uniform> custom: Custom;', '');
+
+                    // if custom has more than 0 keys
+                    if (Object.keys(custom).length > 0) {
+                        renderer.set_custom_floats(Object.keys(custom), Float32Array.from(Object.values(custom)));
+                    }
+
                     renderer.preprocess(shader).then(s => {
                             if (s) {
                                 let start;
                                 let last = 0;
                                 renderer.compile(s);
+                                // renderer.render();
 
                                 const step = (timestamp) => {
                                     if (start === undefined) {
