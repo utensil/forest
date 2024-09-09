@@ -57,4 +57,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     // load_script('uwal.js');
+
+    // load_script('hello-egglog.js');
 });

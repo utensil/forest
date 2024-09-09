@@ -36,19 +36,20 @@ function show_lize_result {
   echo "Open output/$1.pdf to see the result."
 }
 
-function prep_wgputoy {
+function prep_wasm {
     mkdir -p lib
-    # if the directory `lib/wgputoy` does not exist
-    if [ ! -d "lib/wgputoy" ]; then
-        # clone the repository shallowly
-        git clone --depth 1 https://github.com/compute-toys/wgpu-compute-toy.git lib/wgputoy
+    lib_name=$1
+    url=$2
+    lib_path=${3:-$lib_name}
+    if [ ! -d "lib/$lib_name" ]; then
+        git clone --depth 1 $url lib/$lib_name
     fi
 
-    if [ ! -d "lib/wgputoy/pkg" ]; then
-        # run wasm-pack
-        # wasm-pack build --release wgpu-compute-toy --out-dir ../lib/wgputoy
-        bunx wasm-pack build --target web --release lib/wgputoy --out-dir pkg
+    if [ ! -d "lib/$lib_path/pkg" ]; then
+        (cd lib/$lib_path && bunx wasm-pack build --target web --release . --out-dir pkg)
     fi
+
+    cp lib/$lib_path/pkg/*.wasm output/
 }
 
 function bun_build {
@@ -58,7 +59,10 @@ function bun_build {
 
     mkdir -p output
 
-    prep_wgputoy
+    prep_wasm wgputoy https://github.com/compute-toys/wgpu-compute-toy.git
+    prep_wasm egglog https://github.com/egraphs-good/egglog.git egglog/web-demo
+    # failed: 
+    # prep_wasm nalgebra https://github.com/dimforge/nalgebra
 
     # for each files in the directory `bun`, run bun build
     for FILE in $(ls -1 bun); do
@@ -82,7 +86,7 @@ function copy_extra_assets {
     cp node_modules/@myriaddreamin/typst-ts-renderer/pkg/typst_ts_renderer_bg.wasm output/
     # ls output/*.wasm
 
-    cp lib/wgputoy/pkg/wgputoy_bg.wasm output/
+    # cp lib/wgputoy/pkg/wgputoy_bg.wasm output/
 }
 
 function build {

@@ -1,3 +1,11 @@
+# Utensil's Forest
+
+https://utensil.github.io/forest/
+
+## Development
+
+### Initial Setup
+
 This forest is initialized with the following command:
 
 ```bash
@@ -32,9 +40,15 @@ Add a `forest.toml`, then:
 ```bash
 forester new --dest=trees --prefix=uts
 ```
+### How to run
+
 Run `./dev.sh` to watch the modified files and serve them to be browsed.
 
 Then open `http://localhost:1314` in your browser.
+
+`./dev.sh` internally run `./build.sh` to build the forest and its dependencies. `./build.sh` is also used in CI, check out `.github/workflows/gh-pages.yml` for more details.
+
+### Trouble Shooting
 
 If something goes wrong, check out https://github.com/jonsterling/forest .
 
@@ -55,7 +69,11 @@ brew install --cask mactex
 
 See https://tex.stackexchange.com/a/676179/75671 for why.
 
-I'm experimenting with authoring `js/ts/jsx/tsx` using `bun`, so I also need to run
+### Experimental features
+
+#### `bun`
+
+I'm experimenting with authoring `js/ts/jsx/tsx` using [bun](https://bun.sh/), so I also need to run
 
 ```bash
 curl -fsSL https://bun.sh/install | bash
@@ -71,3 +89,9 @@ bun build ./bun/<file-name> --outdir output
 ```
 
 To use any package, just figure out the package name from the import and run `bun install <package-name>`, `package.json` will be updated by `bun`.
+
+#### WASM
+
+I'm also experimenting with WebAssembly, and some of the JS/TS code will rely on WASM.
+
+As long as one has working `bun` and [rustup](https://rustup.rs/), the `build.sh` should take care of the rest.
