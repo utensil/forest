@@ -60,5 +60,5 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // load_script('hello-egglog.js');
 
-    load_script('hello-ginac.js');
+    // load_script('hello-ginac.js');
 });
