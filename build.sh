@@ -86,7 +86,8 @@ function copy_extra_assets {
     cp node_modules/@myriaddreamin/typst-ts-renderer/pkg/typst_ts_renderer_bg.wasm output/
     # ls output/*.wasm
 
-    # cp lib/wgputoy/pkg/wgputoy_bg.wasm output/
+    cp node_modules/ginac-wasm/dist/ginac.wasm output/
+
 }
 
 function build {
