@@ -45,20 +45,26 @@ function prep_wasm {
         git clone --depth 1 $url lib/$lib_name
     fi
 
-    if [ ! -d "lib/$lib_path/pkg" ]; then
-        (cd lib/$lib_path && bunx wasm-pack build --target web --release . --out-dir pkg)
+    # only run wasm-pack build in CI or for `dev.sh`, so other people would not need Rust dependencies
+    if [ -n "$CI" ] || [ -n "$UTS_DEV" ]; then
+        if [ ! -d "lib/$lib_path/pkg" ]; then
+            (cd lib/$lib_path && bunx wasm-pack build --target web --release . --out-dir pkg)
+        fi
+    else
+        # echo warning emoji
+        echo "🟡 Skipping wasm-pack build for $lib_name, some notes that used Rust and WASM might not work as epected."
     fi
 
     cp lib/$lib_path/pkg/*.wasm output/
 }
 
 function bun_build {
-    if [ -n "$CI" ]; then
+    # don't run `bun install` for `dev.sh`
+    if [ -z "$UTS_DEV" ]; then
         bun install
     fi
 
     mkdir -p output
-
     prep_wasm wgputoy https://github.com/compute-toys/wgpu-compute-toy.git
     prep_wasm egglog https://github.com/egraphs-good/egglog.git egglog/web-demo
     # failed: 
