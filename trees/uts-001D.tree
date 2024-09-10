@@ -154,23 +154,23 @@ vec4 getPixel(vec2 p, vec3 from, vec3 increment, vec3 light)
   vec3 normalDir = normal(hitPos);
   
   
-  float diffuse = 1.0 + min(0.0, dot(normalDir, -light));
+  float diffuse = 1.0 - max(0.0, dot(normalDir, light));
   float inshadow = (1.0 - shadow(hitPos, -light)) * SHADOW_DARKNESS;
   
   // diffuse = max(diffuse, inshadow);
   
-  if (c.z != 1.0 && c.y == 0.0) return vec4(0.96, 0.94, 0.87, 1);
+  if (c.z != 1.0 && c.y == 0.0) return vec4(0.96, 0.94, 0.87,1);
   
-  float low = 0.05;
+  float low = 0.01;
   float high = 0.95;
+  float mid = (low + high) * 0.2;
     
-  diffuse = diffuse > high ? 1.0 : (diffuse > low ? low : diffuse);
+  diffuse = diffuse > high ? 1.0 : (diffuse > low ? mid : diffuse);
 
   vec4 mCol = mix(vec4(vec3(0.78, 0.76, 0.78) * 1.15,1), vec4(0.70, 0.68, 0.75,1), diffuse);
           
   return mix(mCol,vec4(vec3(1,0.9,0.8) * 0.5,1),c.z);
 }
-
 
 void mainImage( out vec4 fragColor, in vec2 fragCoord )
 {	
