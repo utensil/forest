@@ -1,5 +1,7 @@
 \import{macros}
 % clifford hopf spin tt ag math draft tech exp notes
+\tag{tech}
+\tag{exp}
 
 \note{test Keenan Crane's style for rendering edge and shade}{
 
@@ -74,16 +76,33 @@ float distf(vec3 p)
 }
 
 
-vec3 normal(vec3 p)
+vec3 grad(vec3 p)
 {
   const float eps = 0.01;
   float m;
-    vec3 n = vec3( (distf(vec3(p.x-eps,p.y,p.z)) - distf(vec3(p.x+eps,p.y,p.z))),
+    vec3 d_distf = vec3( (distf(vec3(p.x-eps,p.y,p.z)) - distf(vec3(p.x+eps,p.y,p.z))),
                    (distf(vec3(p.x,p.y-eps,p.z)) - distf(vec3(p.x,p.y+eps,p.z))),
                    (distf(vec3(p.x,p.y,p.z-eps)) - distf(vec3(p.x,p.y,p.z+eps)))
          );
-    return normalize(n);
+    return d_distf / (2.*eps);
 }
+
+vec3 grad2(vec3 p)
+{
+  const float eps = 0.01;
+  float m;
+    vec3 d_grad = vec3( (grad(vec3(p.x-eps,p.y,p.z)) - grad(vec3(p.x+eps,p.y,p.z))).x,
+                   (grad(vec3(p.x,p.y-eps,p.z)) - grad(vec3(p.x,p.y+eps,p.z))).y,
+                   (grad(vec3(p.x,p.y,p.z-eps)) - grad(vec3(p.x,p.y,p.z+eps)).z)
+         );
+    return d_grad / (2.*eps);
+}
+
+vec3 normal(vec3 p)
+{
+    return normalize(grad(p));
+}
+
 
 vec4 raymarch(vec3 from, vec3 increment)
 {
@@ -146,6 +165,14 @@ float triangle(float x)
   return abs(1.0 - mod(abs(x), 2.0)) * 2.0 - 1.0;
 }
 
+// Camera localized normal
+vec3 campos, camup;
+vec3 localNormal(vec3 p, vec3 rd) {
+    vec3 n = normal(p), ln;
+    vec3 side = cross(campos, camup);
+    return vec3(dot(n,  side), dot(n,  camup), dot(n,  -rd));
+}
+
 float time;
 vec4 getPixel(vec2 p, vec3 from, vec3 increment, vec3 light)
 {
@@ -159,6 +186,7 @@ vec4 getPixel(vec2 p, vec3 from, vec3 increment, vec3 light)
   
   // diffuse = max(diffuse, inshadow);
   
+  // if it's not edge, and no contact
   if (c.z != 1.0 && c.y == 0.0) return vec4(0.96, 0.94, 0.87,1);
   
   float low = 0.05;
@@ -168,10 +196,47 @@ vec4 getPixel(vec2 p, vec3 from, vec3 increment, vec3 light)
 
   vec4 mCol = mix(vec4(vec3(0.78, 0.76, 0.78) * 1.15,1), vec4(0.70, 0.68, 0.75,1), diffuse);
 
-  float gridStep = 2.0;
+  float gridStep = 1.0;
   
   // optional chess style grid
   // mCol = mix(mCol,vec4(0.,0.,0.,1.0),0.1*mod(floor(hitPos.x/gridStep)+floor(hitPos.y/gridStep)+floor(hitPos.z/gridStep),2.));
+  
+  float dt = dot(vec3(0., 0., 1.), normalDir);
+  
+  float eps_high = 0.02;
+  float eps_low = 0.00000;
+  
+  // vec3 n = vec4(normalDir, 0.).xyz;
+  vec3 n = localNormal(hitPos, increment); // grad(hitPos); // localNormal(hitPos, increment);
+  vec3 ez = vec3(0.,0.,0.1);
+  
+  // https://www.shadertoy.com/view/fsGXzc
+  
+  const float MAX_DIST = 200.0;
+  float depth = distance(from, hitPos); // /MAX_DIST;
+  
+    // I've mostly just copied and pasted Evan's code.
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	// Compute curvature
+	vec3 dx = dFdx(n);
+	vec3 dy = dFdy(n);
+	vec3 xneg = n - dx;
+	vec3 xpos = n + dx;
+	vec3 yneg = n - dy;
+	vec3 ypos = n + dy;
+	float curvature = (cross(xneg, xpos).y - cross(yneg, ypos).x) * 2.0 / (depth*5.);
+  
+  // curvature debug
+  // return vec4(vec3(1,0.9,0.8) * 0.7 * (abs(curvature) * 5000.),1);
+
+  float curvature_eps = 0.0000001;
+  if(c.z != 1. && abs(curvature) > curvature_eps && length(grad(hitPos).z) > eps_low && ( length(grad(hitPos).z) < eps_high) ) {
+      return vec4(mix(vec3(1,0.9,0.8) * 0.5, vec3(1.), 0.6), 1.); // * (abs(curvature) * 1000.),1);
+  }
+      
+  if(c.z != 1. && length(grad(hitPos).z) > eps_low && ( length(grad(hitPos).z) < eps_high) ) {
+      // return vec4(mix(vec3(1,0.9,0.8) * 0.5, vec3(1.), 0.5), 1.); // * (abs(curvature) * 1000.),1);
+  }
 
   // .z is edge        
   mCol = mix(mCol,vec4(vec3(1,0.9,0.8) * 0.5,1),c.z);
@@ -209,6 +274,7 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
   vec3 cu = normalize( cross(cw,cp) );
   vec3 cv = normalize( cross(cu,cw) );
   vec3 rd = normalize( p.x*cu + p.y*cv + 2.5*cw );
+  campos = cw, camup = cp;
 
   // calculate color
   vec4 col = getPixel(p, ro, rd, normalize(light));
