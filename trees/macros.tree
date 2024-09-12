@@ -297,6 +297,12 @@ so the text size almost matches the size output by native forester code. This do
   \stopverb}
 }
 
+\p{\code{citewiki[shortname][wikiid]}: A citation-style link to a Wikipedia article, it's a lightweight alternative to \code{wikiref}.}
+
+\def\citewiki[shortname][wikiid]{
+  \let\escape[x]{\x}\<html:span>[class]{link-reference}{[\escape{[wiki-\shortname]}](https://en.wikipedia.org/wiki/\wikiid)}
+}
+
 \p{\code{nlabref[name][citeid][pageid][year]}: A reference to a nLab article.}
 
 \def\nlabref[name][citeid][pageid][year]{
