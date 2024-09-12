@@ -76,6 +76,12 @@ nav#toc a.slug {
     word-break: keep-all;
 } */
 
+:root {
+    /* 16:9 */
+    --uts-canvas-width: 80%; /* 80ex; */
+    --uts-canvas-height: 45ex;
+}
+
 :root,
 :root[data-applied-mode="light"] {
     color-scheme: light;
@@ -568,9 +574,8 @@ button#langblock-toggle {
 
 .embeded-shader, .embeded-shadertoy {
     color: transparent;
-    /* 16:9 */
-    width: 80ex;
-    height: 45ex;
+    width: var(--uts-canvas-width);
+    height: var(--uts-canvas-height);
     /* center */
     margin-left: auto;
     margin-right: auto;
@@ -581,13 +586,13 @@ button#langblock-toggle {
 
 } */
 
-.embeded-shader.lazy-loading, .embeded-shadertoy.lazy-loading {
+.lazy-loading {
     color: transparent;
-    height: 70ex;
+    height: var(--uts-canvas-height);
     background-image: url(./images/3d-cube-scan-hover.svg);
     background-repeat: no-repeat;
     background-position: center;
-    background-size: 80%;
+    background-size: contain;
     animation: breathing 2s ease-out infinite;
 }
 
@@ -611,13 +616,7 @@ code.highlight, code.highlight code {
 }
 
 .penrose-root.lazy-loading, .typst-root.lazy-loading, .pikchr-root.lazy-loading {
-    color: transparent;
-    height: 70ex;
     background-image: url(./images/3d-cube-scan-loading.svg);
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 80%;
-    animation: breathing 2s ease-out infinite;
 }
 
 :root[data-applied-mode="dark"] .typst-root, :root[data-applied-mode="dark"] .pikchr-root {
@@ -661,9 +660,8 @@ code.highlight, code.highlight code {
 
 .usegpu, .wgputoy {
     color: transparent;
-    /* 16:9 */
-    width: 80ex;
-    height: 45ex;
+    width: var(--uts-canvas-width);
+    height: var(--uts-canvas-height);
     /* center */
     margin-left: auto;
     margin-right: auto;
@@ -672,14 +670,4 @@ code.highlight, code.highlight code {
     canvas {
         position: relative !important;
     }
-}
-
-.wgputoy.lazy-loading {
-    color: transparent;
-    height: 70ex;
-    background-image: url(./images/3d-cube-scan-hover.svg);
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 80%;
-    animation: breathing 2s ease-out infinite;
 }
