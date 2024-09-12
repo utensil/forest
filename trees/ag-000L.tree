@@ -59,16 +59,16 @@ as depicted below:
   \coordinate (R/tangent) at ({\radius*cos(\angle)}, {\radius*sin(\angle)});
   \def\radius{1.5}
   \coordinate (R/tangent_dir) at ({\radius*cos(\angle+90)}, {\radius*sin(\angle+90)});
-  \draw (R/tangent) -- ++(R/tangent_dir);
+  \draw[densely dashed] (R/tangent) -- ++(R/tangent_dir);
   \def\radius{2}
   \def\angle{150}
   \coordinate (P/tangent) at ({\radius*cos(\angle)}, {\radius*sin(\angle)});
   \def\radius{1.5}
   \coordinate (P/tangent_dir) at ({\radius*cos(\angle+90)}, {\radius*sin(\angle+90)});
-  \draw (P/tangent) -- ++(P/tangent_dir);
+  \draw[densely dashed] (P/tangent) -- ++(P/tangent_dir);
   \coordinate (d/start) at ($(R/tangent) + 0.8*(R/tangent_dir)$);
   \coordinate (d/end) at ($(P/tangent) + 0.8*(P/tangent_dir)$);
-  \draw[<->] (d/start) -- (d/end) node[pos=0.6, below] {$d$};
+  \draw[<->,densely dashed] (d/start) -- (d/end) node[pos=0.6, below] {$d$};
 
 \end{tikzpicture}
 >>>
