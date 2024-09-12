@@ -7,30 +7,33 @@ import { FullScreen } from '@use-gpu/workbench';
 import { wgsl } from '@use-gpu/shader/wgsl';
 import { Loop, Pass, RawFullScreen, RawTexture } from '@use-gpu/workbench';
 
+// adapted from the default new compute.toys shader
 const shader = wgsl`
 //   @link fn getSample(i: u32) -> vec4<f32> {};
 //   @link fn getSize() -> vec4<u32> {};
 
-  fn main(uv: vec2<f32>) -> vec4<f32> {
-    let size = vec4<u32>(3, 4, 5, 6); // getSize();
-    let iuv = vec2<u32>(uv * vec2<f32>(size.xy));
-    let i = iuv.x + iuv.y * size.x;
+// @link fn getTexture(uv: vec2<f32>) -> vec4<f32> {}
+@link fn getTextureSize() -> vec2<f32> {}
+@link fn getTargetSize() -> vec2<f32> {}
 
-    let value = vec4<f32>(3.0, 4.0, 5.0, 6.0); // getSample(i);
-    let tone = normalize(vec3<f32>(0.5 + value.xy, 1.0));
-    let color = vec3<f32>(
-      tone.x * tone.x * tone.z + tone.y * tone.y * tone.y,
-      tone.y * tone.z,
-      tone.z + tone.y * tone.y
-    ) * value.z;
+fn rand(co: vec2<f32>) -> f32
+{
+    return fract(sin(dot(co.xy ,vec2(12.9898,78.233))) * 43758.5453);
+}
 
-    let b = color.b;
-    let boost = vec3<f32>(b*b*b*.25, b*b*.25 + b*.125, 0.0);
-    let mapped = (1.0 - 1.0 / (max(vec3<f32>(0.0), (color + boost*0.5) * 2.0) + 1.0));
+fn main(uv: vec2<f32>) -> vec4<f32> {
+    let size = getTextureSize(); // getSize();
+    let fragCoord = vec2f(f32(uv.x) + .5, f32(size.y - uv.y) - .5);
+    let fragCoordNormalized = fragCoord / vec2f(size);
 
-    return vec4<f32>(mapped, 1.0);
+    // Time varying pixel colour
+    var col = .5 + .5 * cos(rand(uv.xy) + uv.xyx + vec3<f32>(0.,2.,4.));
+
+    // Convert from gamma-encoded to linear colour space
+    col = pow(col, vec3<f32>(2.2));
+
+    return vec4<f32>(col, 1.0);
   }
-
 `;
 
 const embeded_usegpus = document.querySelectorAll('.usegpu');
@@ -44,7 +47,7 @@ render(() => {
             >
                 <Loop>
                     <Pass>
-                        <RawFullScreen texture={shader} />
+                        <FullScreen shader={shader} />
                     </Pass>
                 </Loop>
             </AutoCanvas>
