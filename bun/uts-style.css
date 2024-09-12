@@ -236,11 +236,6 @@ svg.embedded-tex-svg, img[src^="data:image/svg+xml"] {
     filter: invert(0.85);
 }
 
-:root[data-applied-mode="dark"] .lazy-loading {
-    filter: invert(0.85);
-}
-
-
 /* :root[data-applied-mode="dark"] svg.embedded-tex-svg text {
     fill: white;
 }
@@ -612,7 +607,20 @@ code.highlight, code.highlight code {
 }
 
 .markdownit.lazy-loading, code.highlight.lazy-loading {
+    color: var(--uts-text);
     white-space: pre-wrap;
+    background: unset;
+    animation: unset;
+    height: unset;
+}
+
+[data-applied-mode="dark"] {
+    .lazy-loading {
+        filter: invert(0.85);
+    }
+    .markdownit.lazy-loading, code.highlight.lazy-loading {
+        filter: unset;
+    }
 }
 
 .penrose-root.lazy-loading, .typst-root.lazy-loading, .pikchr-root.lazy-loading {
