@@ -204,7 +204,7 @@ vec4 getPixel(vec2 p, vec3 from, vec3 increment, vec3 light)
   float dt = dot(vec3(0., 0., 1.), normalDir);
   
   float eps_high = 0.02;
-  float eps_low = 0.00000;
+  float eps_low = 0.00000; //1;
   
   // vec3 n = vec4(normalDir, 0.).xyz;
   vec3 n = localNormal(hitPos, increment); // grad(hitPos); // localNormal(hitPos, increment);
@@ -224,14 +224,24 @@ vec4 getPixel(vec2 p, vec3 from, vec3 increment, vec3 light)
 	vec3 xpos = n + dx;
 	vec3 yneg = n - dy;
 	vec3 ypos = n + dy;
-	float curvature = (cross(xneg, xpos).y - cross(yneg, ypos).x) * 2.0 / (depth*5.);
+	float curvature = (cross(xneg, xpos).y - cross(yneg, ypos).x) * 4.0 / (depth);
   
   // curvature debug
-  // return vec4(vec3(1,0.9,0.8) * 0.7 * (abs(curvature) * 5000.),1);
+  // return vec4(vec3(1,0.9,0.8) * 0.7 * (abs(curvature) * 500.),1);
+  ;
+  vec4 curve_color = vec4(mix(vec3(1,0.9,0.8) * 0.5, vec3(1.), 0.5), 1.); // * length(grad(hitPos).xy) //  * abs(curvature) * 200.
 
-  float curvature_eps = 0.0000001;
-  if(c.z != 1. && abs(curvature) > curvature_eps && length(grad(hitPos).z) > eps_low && ( length(grad(hitPos).z) < eps_high) ) {
-      return vec4(mix(vec3(1,0.9,0.8) * 0.5, vec3(1.), 0.6), 1.); // * (abs(curvature) * 1000.),1);
+  float curvature_eps = 0.0001;
+  if(c.z != 1. && abs(curvature) > curvature_eps && length(grad(hitPos).z) > eps_low && ( length(grad(hitPos).z) < eps_high * abs(curvature) * 100. ) ) {
+      return curve_color;
+  }
+  
+  if(c.z != 1. && abs(curvature) > curvature_eps && length(grad(hitPos).y) > eps_low && ( length(grad(hitPos).y) < eps_high * abs(curvature) * 100.) ) {
+      return curve_color;
+  }
+  
+  if(c.z != 1. && abs(curvature) > curvature_eps && length(grad(hitPos).x) > eps_low && ( length(grad(hitPos).x) < eps_high * abs(curvature) * 100.) ) {
+      return curve_color;
   }
       
   if(c.z != 1. && length(grad(hitPos).z) > eps_low && ( length(grad(hitPos).z) < eps_high) ) {
@@ -274,7 +284,7 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
   vec3 cu = normalize( cross(cw,cp) );
   vec3 cv = normalize( cross(cu,cw) );
   vec3 rd = normalize( p.x*cu + p.y*cv + 2.5*cw );
-  campos = cw, camup = cp;
+  campos = -cw, camup = cv;
 
   // calculate color
   vec4 col = getPixel(p, ro, rd, normalize(light));
