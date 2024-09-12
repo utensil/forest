@@ -6,6 +6,11 @@
 \note{reading diary}{
 \p{I wish to keep a reading diary, to keep track of partial reading progress.
 }
+\mdblock{2024-09-11}{
+- trying to figure out curvature calculation in shaders
+  - [Screen Space Curvature Shader](https://madebyevan.com/shaders/curvature/) is a trick to mimic curvature calculation in shaders,using [dFdx, dFdy in GLSL](https://registry.khronos.org/OpenGL-Refpages/gl4/html/dFdx.xhtml), [Curvature shader by iY0Yi](https://www.shadertoy.com/view/fsGXzc) used it but it shows certain shower door effect
+  - [glsl-autodiff](https://github.com/sibaku/glsl-autodiff) properly uses forward auto differentiation to calculate curvature in shaders, but it requires rewrite every math function for bookkeeping the gradient and the Hessian
+}
 
 \mdblock{2024-09-10}{
 - work out shader for [[uts-001D]]
