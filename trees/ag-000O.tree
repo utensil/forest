@@ -19,8 +19,16 @@
     [draw/boundary]{
       \draw[name path=\self#boundary/id] \self#center circle [radius=\self#radius];
     }
+    [shading/angle]{270}
     [draw/body]{
-      \shade[\self#color] \self#center circle [radius=\self#radius];
+      \filldraw[white] \self#center circle [radius=\self#radius];
+      \shade[\self#color,shading angle=\self#shading/angle] \self#center circle [radius=\self#radius];
+    }
+    [draw/shadow]{
+      % note: shadow must be drawn before body, or we need to use layers
+      % \begin{pgfonlayer}{background}
+      \shade[inner color = gray,opacity = 0.8] ($\self#center + (-0.5*\self#radius,-0.9*\self#radius)$) ellipse [x radius=1.1*\self#radius, y radius=0.3*\self#radius];
+      % \end{pgfonlayer}
     }
     [radius/id]{R}
     [radius/angle]{180}
@@ -91,6 +99,7 @@
       [radius]{2.5cm}
     }
   }
+  \myball#draw/shadow
   \myball#draw/center
   \myball#draw/boundary
   \myball#draw/body
