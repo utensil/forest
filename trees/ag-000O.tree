@@ -2,6 +2,8 @@
 % clifford hopf spin tt ag math draft cg
 \tag{cg}
 
+\taxon{figure}
+
 \def\ball/new{
   \object[self]{
     [radius]{1cm}
@@ -75,20 +77,20 @@
   }
 }
 
-\let\myball{
-  \patch{\ball/new}{
-  }
-}
-
-\let\point/p{
-  \patch{\point/new}{
-  }
-}
-
 \tikzfig{
 \tikzset{>=latex}
 \begin{tikzpicture}
-  
+  \let\myball{
+    \patch{\ball/new}{
+      [radius]{1.5cm}
+    }
+  }
+
+  \let\point/p{
+    \patch{\point/new}{
+      [radius]{2.5cm}
+    }
+  }
   \myball#draw/center
   \myball#draw/boundary
   \myball#draw/body
