@@ -1,0 +1,122 @@
+\import{ag-macros}
+% clifford hopf spin tt ag math draft cg
+\tag{cg}
+
+\def\ball/new{
+  \object[self]{
+    [radius]{1cm}
+    [center]{(0,0)}
+    [center/id]{O}
+    [center/label]{o}
+    [color]{ball color = blue,opacity = 0.2}
+    [draw/center]{
+      \coordinate (\self#center/id) at \self#center;
+      \filldraw \self#center circle (1pt) node[below] {\ensuremath{\self#center/label}};
+    }
+    [boundary/id]{\self#center/id\verb~|/~boundary}
+    [draw/boundary]{
+      \draw[name path=\self#boundary/id] \self#center circle [radius=\self#radius];
+    }
+    [draw/body]{
+      \shade[\self#color] \self#center circle [radius=\self#radius];
+    }
+    [radius/id]{R}
+    [radius/angle]{180}
+    [draw/radius]{
+      \coordinate (\self#radius/id) at (\self#radius/angle:\self#radius);
+      \draw[densely dashed] \self#center to [edge label = $r$] (\self#radius/id);
+    }
+  }
+}
+
+\def\point/new{
+  \object[self]{
+    [id]{P}
+    [label]{p}
+    [angle]{150}
+    [radius]{2cm}
+    [origin]{(0,0)}
+    [draw]{
+      \coordinate (\self#id) at ($\self#origin + (\self#angle:\self#radius)$);
+    }
+    [arrow/id]{\self#id\verb~|/~arrow}
+    [draw/arrow]{
+      \draw[->,name path=\self#arrow/id] \self#origin to (\self#id);
+    }
+    [draw/label]{
+      \filldraw (\self#id) circle (1pt) node[above] {\ensuremath{\self#label}};
+    }
+  }
+}
+
+\def\measure/new{
+  \object[self]{
+    [start]{\point/new#id}
+    [end]{\point/new#id}
+    [id]{measure}
+    [mark/length]{1cm}
+    [mark/pos]{0.8}
+    [label]{d}
+    [label/pos]{0.5}
+    [draw]{
+      \tikzmath{
+        coordinate \dir, \vdir;
+        \dir = (\self#end) - (\self#start);
+        \vdirlen = {veclen(\dir)};
+        \vdir = (-\diry / \vdirlen * \self#mark/length, \dirx / \vdirlen * \self#mark/length);
+      }
+
+      \draw[densely dashed] (\self#start) -- ++(\vdir);
+      \draw[densely dashed] (\self#end) -- ++(\vdir);
+      \coordinate (\self#id\verb~|/~start) at ($(\self#start) + \self#mark/pos*(\vdir)$);
+      \coordinate (\self#id\verb~|/~end) at ($(\self#end) + \self#mark/pos*(\vdir)$);
+      \draw[<->,densely dashed] (\self#id\verb~|/~start) -- (\self#id\verb~|/~end) node[pos=\self#label/pos, below] {\ensuremath{\self#label}};
+    }
+  }
+}
+
+\let\myball{
+  \patch{\ball/new}{
+  }
+}
+
+\let\point/p{
+  \patch{\point/new}{
+  }
+}
+
+\tikzfig{
+\tikzset{>=latex}
+\begin{tikzpicture}
+  
+  \myball#draw/center
+  \myball#draw/boundary
+  \myball#draw/body
+  \myball#draw/radius
+  \point/p#draw
+  \point/p#draw/arrow
+  \point/p#draw/label
+  % set Omega
+  \coordinate (ball/label) at (45:1.5*\myball#radius);
+  \draw ($(\myball#center/id)!0.5!(ball/label)$) -- ($(\myball#center/id)!0.8!(ball/label)$) node at (ball/label) {$\Omega$};
+  \let\angle{150}
+  % intersection of arrow p and ball boundary
+  \path[name intersections={of=\myball#boundary/id and \point/p#arrow/id, by={I}}]; % by={[label=above:Intersection] I}}
+  % \node[above] at (I) {$I$};
+  % \node[above,circ] at ($(P-|I)$) {$PI$};
+  % \draw[name path=N] (P) -- ++(P-|I) node[above] {$N$};
+  % \path[name intersections={of=\myball#boundary/id and \point/p#arrow/id, by={NI}}];
+
+  \let\measure/d{
+    \patch{\measure/new}{
+      [start]{I}
+      [end]{P}
+      [label]{d}
+      [label/pos]{0.6}
+    }
+  }
+
+  \measure/d#draw
+
+\end{tikzpicture}
+}

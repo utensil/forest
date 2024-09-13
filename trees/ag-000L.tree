@@ -13,7 +13,7 @@
 % cox1997ideals gathmann2013commutative hart1996sphere
 
 \card{example}{SDFs of geometric primitives}{
-\p{If #{X} is also a normed space, i.e. for a point #{p \in X}, we may define its [norm](https://en.wikipedia.org/wiki/Norm_(mathematics)), e.g. in a Euclidean where #{p} can be expressed by basis vectors #{(p_1, \ldots, p_n)}, then its norm #{\verb~|\|p\|~} can be defined as the Euclidean norm
+\p{If #{X} is also a normed space, i.e. for a point #{p \in X}, its [norm](https://en.wikipedia.org/wiki/Norm_(mathematics)) can be defined, e.g. in a Euclidean where #{p} can be expressed by basis vectors #{(p_1, \ldots, p_n)}, then its norm #{\verb~|\|p\|~} can be defined as the Euclidean norm
 
 ##{\verb>>>|
 \|p\|_2:=\sqrt{p_1^2+\cdots+p_n^2}
@@ -28,52 +28,9 @@ f(p)=\|p\|-r
 as depicted below:
 }
 
-\tikzfig\verb>>>|
-\tikzset{>=latex}
-\begin{tikzpicture}
-  \coordinate (O) at (0,0);
-  \coordinate (R) at (-1,0);
+\transclude{ag-000O}
 
-  % ball background color
-  \shade[ball color = blue, opacity = 0.2] (0,0) circle [radius = 1cm];
-
-  % ball
-  \draw (O) circle [radius=1cm];
-  % label of ball center point
-  \filldraw (O) circle (1pt) node[below] {$o$};
-  \def\radius{2}
-  \def\angle{150}
-  \coordinate (P) at ({\radius*cos(\angle)}, {\radius*sin(\angle)});
-
-  % radius
-  \draw[densely dashed] (O) to [edge label = $r$] (R);
-  % point p
-  \draw[->] (O) to (P);
-  \filldraw (P) circle (1pt) node[above] {$p$};
-
-  % set Omega
-  \draw (0.53,0.33) -- (1.1,0.7) node at (1.4,0.8) {$\Omega$};
-
-  \def\radius{1}
-  \def\angle{150}
-  \coordinate (R/tangent) at ({\radius*cos(\angle)}, {\radius*sin(\angle)});
-  \def\radius{1.5}
-  \coordinate (R/tangent_dir) at ({\radius*cos(\angle+90)}, {\radius*sin(\angle+90)});
-  \draw[densely dashed] (R/tangent) -- ++(R/tangent_dir);
-  \def\radius{2}
-  \def\angle{150}
-  \coordinate (P/tangent) at ({\radius*cos(\angle)}, {\radius*sin(\angle)});
-  \def\radius{1.5}
-  \coordinate (P/tangent_dir) at ({\radius*cos(\angle+90)}, {\radius*sin(\angle+90)});
-  \draw[densely dashed] (P/tangent) -- ++(P/tangent_dir);
-  \coordinate (d/start) at ($(R/tangent) + 0.8*(R/tangent_dir)$);
-  \coordinate (d/end) at ($(P/tangent) + 0.8*(P/tangent_dir)$);
-  \draw[<->,densely dashed] (d/start) -- (d/end) node[pos=0.6, below] {$d$};
-
-\end{tikzpicture}
->>>
-
-\p{We will continue to work under such assumptions, and for our purpose, we will be working with Euclidean space #{\RR^n}.}
+\p{In the following, we will be working with Euclidean space #{\RR^n}, which is both a metric space and a normed space.}
 
 \p{SDFs of many geometric primitives in #{\RR^3}, written in [GLSL](https://en.wikipedia.org/wiki/OpenGL_Shading_Language), can be found in Inigo Quilez's article [Distance functions](https://iquilezles.org/articles/distfunctions/) which includes an example that renders them by ray-marching.
 }
