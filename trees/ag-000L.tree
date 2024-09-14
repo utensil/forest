@@ -12,22 +12,7 @@
 
 % cox1997ideals gathmann2013commutative hart1996sphere
 
-\card{example}{SDFs of geometric primitives}{
-\p{If #{X} is also a normed space, i.e. for a point #{\point{p} \in X}, its [norm](https://en.wikipedia.org/wiki/Norm_(mathematics)) can be defined, e.g. in a Euclidean space where #{\point{p}} can be expressed by basis vectors as #{(p_1, \ldots, p_n)}, then its norm #{\norm{\point{p}}} can be defined as the Euclidean norm
-
-##{
-\norm{\point{p}}_2:=\sqrt{p_1^2+\cdots+p_n^2}
-}
-
-which is essentially the distance from the origin #{\point{o}=(0, \ldots, 0)} to the point #{p}
-
-##{
-\norm{\point{p}}=d(\point{p}, \point{o})=\norm{\point{p} - \point{o}}
-}
-
-where #{d} is the Euclidean distance function.
-}
-
+\card{example}{SDF of a sphere}{
 \p{The SDF of a sphere with radius #{r} centered at the origin #{\point{o}} is
 ##{
 f(\point{p})=\norm{\point{p}}-r
@@ -40,9 +25,6 @@ as depicted below:
 
 \p{In the following, we will be working with Euclidean space #{\RR^n}, which is both a metric space and a normed space.}
 
-\p{SDFs of many geometric primitives in #{\RR^3}, written in [GLSL](https://en.wikipedia.org/wiki/OpenGL_Shading_Language), can be found in Inigo Quilez's article [Distance functions](https://iquilezles.org/articles/distfunctions/) which includes an example that renders them by ray-marching.
-}
-
 \p{The SDF above for a sphere translates to the following GLSL:
 }
 
@@ -52,15 +34,5 @@ float sdSphere(vec3 p, float r)
   return length(p) - r;
 }
 >>>
-
-\webonly{
-\p{Here's another example from [shadertoy.com](https://shadertoy.com), rendered by ray-marching:
-}
-\scope{
-\put\transclude/title{ }
-\put\transclude/toc{false}
-\transclude{uts-000J}
-}
-}
 
 }

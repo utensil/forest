@@ -139,7 +139,7 @@
 
   \let\point/p{
     \patch{\point/new}{
-      [radius]{7cm}
+      [radius]{3cm}
       [angle]{150}
       [label]{\point{p}}
     }
@@ -172,8 +172,8 @@
       [start]{I}
       [end]{P}
       [label]{d}
-      [label/pos]{0.3}
-      [mark/length]{1.7cm}
+      [label/pos]{0.6}
+      [mark/length]{1cm}
     }
   }
 
@@ -257,7 +257,7 @@
       % \draw[color=red] (0,0,0) -- (1,0,0);
       % \draw[color=blue] (0,0,0) -- (0,1,0);
       % \draw[color=green] (0,0,0) -- (0,0,1);
-      \draw [every edge/.append style={pic actions, densely dashed, opacity=0.0}, pic actions]
+      \filldraw [fill=white,every edge/.append style={pic actions, densely dashed, opacity=0.0}, pic actions]
       (0,0,0) coordinate (o) -- ++(-\cubescale*\cubex,0,0) coordinate (a) -- ++(0,-\cubescale*\cubey,0) coordinate (b) edge coordinate [pos=1] (g) ++(0,0,-\cubescale*\cubez)  -- ++(\cubescale*\cubex,0,0) coordinate (c) -- cycle
       (o) -- ++(0,0,-\cubescale*\cubez) coordinate (d) -- ++(0,-\cubescale*\cubey,0) coordinate (e) edge (g) -- (c) -- cycle
       (o) -- (a) -- ++(0,0,-\cubescale*\cubez) coordinate (f) edge (g) -- (d) -- cycle;
