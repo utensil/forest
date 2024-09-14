@@ -1,4 +1,4 @@
-\import{ag-macros}
+\import{cg-macros}
 % clifford hopf spin tt ag math draft cg
 \tag{cg}
 
@@ -11,9 +11,14 @@
     [center/id]{O}
     [center/label]{o}
     [color]{ball color = blue,opacity = 0.2}
-    [draw/center]{
+    [coord/center]{
       \coordinate (\self#center/id) at \self#center;
-      \filldraw \self#center circle (1pt) node[below] {\ensuremath{\self#center/label}};
+    }
+    [draw/center]{
+      \filldraw \self#center circle (1pt);
+    }
+    [draw/center/label]{
+      \node[below] at (\self#center/id) {\ensuremath{\self#center/label}};
     }
     [boundary/id]{\self#center/id\verb~|/~boundary}
     [draw/boundary]{
@@ -60,7 +65,7 @@
       \filldraw (\self#id) circle (1pt);
     }
     [draw/label]{
-      node[above] {\ensuremath{\self#label}} at (\self#id);
+      \node[below] at (\self#id) {\ensuremath{\self#label}};
     }
   }
 }
@@ -133,14 +138,17 @@
 
   \let\point/p{
     \patch{\point/new}{
-      [radius]{2.5cm}
+      [radius]{7cm}
+      [angle]{150}
     }
   }
   \myball#draw/shadow
-  \myball#draw/center
+  \myball#coord/center
   \myball#draw/boundary
   \myball#draw/body
   \myball#draw/radius
+  \myball#draw/center
+  \myball#draw/center/label
 
   \begin{pgfonlayer}{foreground}
   \point/p#coord
@@ -162,7 +170,8 @@
       [start]{I}
       [end]{P}
       [label]{d}
-      [label/pos]{0.6}
+      [label/pos]{0.3}
+      [mark/length]{1.7cm}
     }
   }
 
@@ -195,6 +204,7 @@
     }
 
     \ball/screen#draw/shadow
+    \ball/screen#coord/center
     \ball/screen#draw/center
     \ball/screen#draw/boundary
     \ball/screen#draw/body
@@ -209,7 +219,7 @@
 
     \let\point/camera{
       \patch{\point/new}{
-        [id]{camera}
+        [id]{pcamera}
         [label]{camera}
         [radius]{0cm}
         [angle]{0}
@@ -225,10 +235,10 @@
   snake,amplitude=.4mm,segment length=2.5mm,post length=0mm}]
 
   \begin{pgfonlayer}{background}
-    \draw[photon] (camera) -- (sreenball);
+    \draw[photon] (\point/camera#id) -- (\ball/screen#center/id);
   \end{pgfonlayer}
 
-  \draw[photon] (sreenball) -- (O);
+  \draw[photon] (\ball/screen#center/id) -- (I);
 
   % adapted from https://tex.stackexchange.com/a/288101/75671
   \tikzset{
@@ -282,8 +292,9 @@
     scale=.1,
   }
 
-  \pic at (-30:-7.5cm) {camera={width=1.5, height=2.5, depth=3, scale=0.15, units=cm, zangle=30, xangle=20}};
-  \node[above] at ($(-30:-7.5cm)+(0, 0.5cm)$) {camera};
+  \coordinate (camera) at (-30:-7.5cm);
+  \pic at (camera) {camera={width=1.5, height=2.5, depth=3, scale=0.15, units=cm, zangle=30, xangle=20}};
+  \node[above] at ($(camera)+(0, 0.5cm)$) {camera};
 
 \end{tikzpicture}
 }
