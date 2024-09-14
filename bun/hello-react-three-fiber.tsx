@@ -163,6 +163,7 @@ void main() {
     float scatterFactor = 1.0 / sqrt(distance(worldCoordinate, lightSource)/5.0);
 
     gl_FragColor = vec4(renderable * (diffuseLight + ambientLight + specularLight) * scatterFactor * vec3(1.0, 1.0, 1.0), 1.0);
+    // gl_FragColor = vec4((diffuseLight + ambientLight + specularLight) * scatterFactor * vec3(1.0, 1.0, 1.0), renderable);
 
     // gl_FragColor = (diffuseLight + ambientLight + specularLight) * scatterFactor * vec4(1.0, 1.0, 1.0, 1.0);
 
@@ -196,7 +197,7 @@ createRoot(document.getElementById('r3f-root') as HTMLElement).render(
     <Box position={[0, -1.2, 0]} />
     <Box position={[0, 1.2, 0]} />
     <Billboard>
-        <Text fontSize="0.2" color="black">rotate the boxes by dragging, scroll to zoom
+        <Text fontSize="0.2" color="black">rotate the camera by dragging, scroll to zoom
         </Text>
         <ShaderPlane />
     </Billboard>
