@@ -13,17 +13,25 @@
 % cox1997ideals gathmann2013commutative hart1996sphere
 
 \card{example}{SDFs of geometric primitives}{
-\p{If #{X} is also a normed space, i.e. for a point #{p \in X}, its [norm](https://en.wikipedia.org/wiki/Norm_(mathematics)) can be defined, e.g. in a Euclidean where #{p} can be expressed by basis vectors #{(p_1, \ldots, p_n)}, then its norm #{\verb~|\|p\|~} can be defined as the Euclidean norm
+\p{If #{X} is also a normed space, i.e. for a point #{\point{p} \in X}, its [norm](https://en.wikipedia.org/wiki/Norm_(mathematics)) can be defined, e.g. in a Euclidean space where #{\point{p}} can be expressed by basis vectors as #{(p_1, \ldots, p_n)}, then its norm #{\norm{\point{p}}} can be defined as the Euclidean norm
 
-##{\verb>>>|
-\|p\|_2:=\sqrt{p_1^2+\cdots+p_n^2}
->>>}
+##{
+\norm{\point{p}}_2:=\sqrt{p_1^2+\cdots+p_n^2}
 }
 
-\p{The SDF of a sphere with radius #{r} centered at the origin #{o=(0, \ldots, 0)} is
-##{\verb>>>|
-f(p)=\|p\|-r
->>>}
+which is essentially the distance from the origin #{\point{o}=(0, \ldots, 0)} to the point #{p}
+
+##{
+\norm{\point{p}}=d(\point{p}, \point{o})=\norm{\point{p} - \point{o}}
+}
+
+where #{d} is the Euclidean distance function.
+}
+
+\p{The SDF of a sphere with radius #{r} centered at the origin #{\point{o}} is
+##{
+f(\point{p})=\norm{\point{p}}-r
+}
 
 as depicted below:
 }

@@ -15,20 +15,20 @@
 \card{definition}{signed distance function \citewiki{sdf}{Signed_distance_function}}{
 
 \p{
-Let #{\Omega} be a subset of a [metric space](https://en.wikipedia.org/wiki/Metric_space) #{X} with metric #{d}, and #{\partial \Omega} be its boundary. The distance between a point #{p} of #{X} and the subset #{\partial \Omega} of #{X} is defined as usual as
+Let #{\Omega} be a subset of a [metric space](https://en.wikipedia.org/wiki/Metric_space) #{X} with metric #{d}, and #{\partial \Omega} be its boundary. The distance between a point #{\point{p}} of #{X} and the subset #{\partial \Omega} of #{X} is defined as usual as
 
 ##{
-d(p, \partial \Omega)=\inf_{q \in \partial \Omega} d(p, q)
+d(\point{p}, \partial \Omega)=\inf_{\point{q} \in \partial \Omega} d(\point{p}, \point{q})
 }
 
 where #{\inf} denotes the infimum, i.e. the greatest lower bound.
 }
 
 \p{
-The \newvocab{signed distance function} or \newvocab{signed distance field} (\newvocab{SDF}) from a point #{p} of #{X} to #{\Omega} is defined by
+The \newvocab{signed distance function} or \newvocab{signed distance field} (\newvocab{SDF}) from a point #{\point{p}} of #{X} to #{\Omega} is defined by
 
 ##{
-f(p)= \begin{cases} -d(p, \partial \Omega) & \text { if } p \in \Omega \\ d(p, \partial \Omega) & \text { if } p \notin \Omega\end{cases}
+f(\point{p})= \begin{cases} -d(\point{p}, \partial \Omega) & \text { if } \point{p} \in \Omega \\ d(\point{p}, \partial \Omega) & \text { if } \point{p} \notin \Omega\end{cases}
 }
 }
 }

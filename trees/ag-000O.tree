@@ -9,7 +9,7 @@
     [radius]{1cm}
     [center]{(0,0)}
     [center/id]{O}
-    [center/label]{o}
+    [center/label]{O}
     [color]{ball color = blue,opacity = 0.2}
     [coord/center]{
       \coordinate (\self#center/id) at \self#center;
@@ -47,7 +47,7 @@
 \def\point/new{
   \object[self]{
     [id]{P}
-    [label]{p}
+    [label]{P}
     [angle]{150}
     [radius]{2cm}
     [origin]{(0,0)}
@@ -133,6 +133,7 @@
   \let\myball{
     \patch{\ball/new}{
       [radius]{1.5cm}
+      [center/label]{\point{o}}
     }
   }
 
@@ -140,6 +141,7 @@
     \patch{\point/new}{
       [radius]{7cm}
       [angle]{150}
+      [label]{\point{p}}
     }
   }
   \myball#draw/shadow
@@ -294,7 +296,7 @@
 
   \coordinate (camera) at (-30:-7.6cm);
   \pic at (camera) {camera={width=1.5, height=2.5, depth=3, scale=0.15, units=cm, zangle=30, xangle=20}};
-  \node[above] at ($(camera)+(0, 0.5cm)$) {camera};
+  \node[above] at ($(camera)+(0, 0.5cm)$) {\point/camera#label};
 
 \end{tikzpicture}
 }
