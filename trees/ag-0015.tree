@@ -1,0 +1,1150 @@
+\import{macros}
+% clifford hopf spin tt ag math draft tech exp
+\taxon{figure}
+
+\note{test implicit surface shader 4}{
+
+\figure{
+\shadertoy{ }\verb>>>|
+
+//********************************************************************
+//
+// Begin of automatic differentiation header
+// Full code with additional functions (gradients, jacobians, ...) can be found
+// at: https://github.com/sibaku/glsl-autodiff
+//
+//********************************************************************
+#ifndef HESSNUM_3_H_
+#define HESSNUM_3_H_
+
+// This file contains methods to compute the gradient and hessian 
+// of a scalar valued 3 dimensional function using automatic forward differentiation
+
+//--------------------------------
+// Types
+//--------------------------------
+
+// Data type to hold information about a scalar valued 3 dimensional function
+// These should be created by the constH3 (for constants) and varH3 (for variables) helpers
+struct HNum3
+{
+    // The current value
+    float val;
+    // The current gradient
+    vec3 g;
+    // The current hessian
+    mat3 h;
+};
+
+//--------------------------------
+// Prototypes
+//--------------------------------
+
+/**
+* Creates a constant HNum3
+* @param val The current value of the constant
+*/
+HNum3 constH3(in float val);
+/**
+* Creates a HNum3 corresponding to the variable with the given index
+* @param val The current value of the variable
+* @param index The variable's index
+*/
+HNum3 varH3(in float val, in int index);
+/**
+* Creates a HNum3 corresponding to the variable x (index = 0)
+* @param val The current value of the variable
+*/
+HNum3 varH3x(in float val);
+/**
+* Creates a HNum3 corresponding to the variable y (index = 1)
+* @param val The current value of the variable
+*/
+HNum3 varH3y(in float val);
+/**
+* Creates a HNum3 corresponding to the variable z (index = 2)
+* @param val The current value of the variable
+*/
+HNum3 varH3z(in float val);
+HNum3 add(in HNum3 a, in HNum3 b);
+HNum3 add(in HNum3 a, in float b);
+HNum3 add(in float a, in HNum3 b);
+HNum3 sub(in HNum3 a, in HNum3 b);
+HNum3 sub(in HNum3 a, in float b);
+HNum3 sub(in float a, in HNum3 b);
+HNum3 mult(in HNum3 a, in HNum3 b);
+HNum3 mult(in HNum3 a, in float b);
+HNum3 mult(in float a, in HNum3 b);
+HNum3 neg(in HNum3 a);
+HNum3 div(in HNum3 a, in HNum3 b);
+HNum3 div(in HNum3 a, in float b);
+HNum3 div(in float a, in HNum3 b);
+HNum3 inv(in HNum3 a);
+HNum3 a_pow(in HNum3 a, in HNum3 b);
+HNum3 a_pow(in HNum3 a, in float b);
+HNum3 a_pow(in float a, in HNum3 b);
+HNum3 a_min(in HNum3 a, in HNum3 b);
+HNum3 a_max(in HNum3 a, in HNum3 b);
+HNum3 a_exp2(in HNum3 a);
+HNum3 a_inversesqrt(in HNum3 a);
+HNum3 a_atan(in HNum3 a);
+HNum3 a_sqrt(in HNum3 a);
+HNum3 a_sinh(in HNum3 a);
+HNum3 a_ceil(in HNum3 a);
+HNum3 a_tan(in HNum3 a);
+HNum3 a_asinh(in HNum3 a);
+HNum3 a_asin(in HNum3 a);
+HNum3 a_acosh(in HNum3 a);
+HNum3 a_abs(in HNum3 a);
+HNum3 a_exp(in HNum3 a);
+HNum3 a_cosh(in HNum3 a);
+HNum3 a_floor(in HNum3 a);
+HNum3 a_log(in HNum3 a);
+HNum3 a_atanh(in HNum3 a);
+HNum3 a_log2(in HNum3 a);
+HNum3 a_acos(in HNum3 a);
+HNum3 a_tanh(in HNum3 a);
+HNum3 a_cos(in HNum3 a);
+HNum3 a_sin(in HNum3 a);
+HNum3 a_atan2(in HNum3 y, in HNum3 x);
+HNum3 a_atan2(in HNum3 y, in float x);
+HNum3 a_atan2(in float y, in HNum3 x);
+HNum3 a_mix(in HNum3 a, in HNum3 b, in HNum3 t);
+HNum3 a_mix(in HNum3 a, in HNum3 b, in float t);
+HNum3 a_mix(in HNum3 a, in float b, in HNum3 t);
+HNum3 a_mix(in HNum3 a, in float b, in float t);
+HNum3 a_mix(in float a, in HNum3 b, in HNum3 t);
+HNum3 a_mix(in float a, in HNum3 b, in float t);
+HNum3 a_mix(in float a, in float b, in HNum3 t);
+
+//--------------------------------
+// Macros
+//--------------------------------
+
+#define HESSIAN3(f,x, y, z,result)  {     result = f(varH3x(x), varH3y(y), varH3z(z)); }
+
+//--------------------------------
+// Utilities prototypes
+//--------------------------------
+
+mat3 a_outerProduct(in vec3 a, in vec3 b);
+
+//--------------------------------
+// Implementation
+//--------------------------------
+
+HNum3 constH3(in float val)
+{
+    return HNum3(val, vec3(0.0), mat3(0.0));
+}
+//--------------------------------
+HNum3 varH3(in float val, in int index)
+{   
+    vec3 g = vec3(0.0);
+    g[index] = 1.0;
+    return HNum3(val, g, mat3(0.0));
+}
+//--------------------------------
+HNum3 varH3x(in float val)
+{   
+    vec3 g = vec3(0.0);
+    g[0] = 1.0;
+    return HNum3(val, g, mat3(0.0));
+}
+//--------------------------------
+HNum3 varH3y(in float val)
+{   
+    vec3 g = vec3(0.0);
+    g[1] = 1.0;
+    return HNum3(val, g, mat3(0.0));
+}
+//--------------------------------
+HNum3 varH3z(in float val)
+{   
+    vec3 g = vec3(0.0);
+    g[2] = 1.0;
+    return HNum3(val, g, mat3(0.0));
+}
+//--------------------------------
+HNum3 add(in HNum3 a, in HNum3 b)
+{
+    return HNum3(a.val + b.val , a.g + b.g, a.h + b.h);
+}
+//--------------------------------
+HNum3 add(in HNum3 a, in float b)
+{
+    return HNum3(a.val + b , a.g, a.h);
+}
+//--------------------------------
+HNum3 add(in float a, in HNum3 b)
+{
+    return HNum3(a + b.val , b.g, b.h);
+}
+//--------------------------------
+HNum3 sub(in HNum3 a, in HNum3 b)
+{
+    return HNum3(a.val - b.val , a.g - b.g, a.h - b.h);
+}
+//--------------------------------
+HNum3 sub(in HNum3 a, in float b)
+{
+    return HNum3(a.val - b , a.g, a.h);
+}
+//--------------------------------
+HNum3 sub(in float a, in HNum3 b)
+{
+    return HNum3(a - b.val , - b.g, - b.h);
+}
+//--------------------------------
+HNum3 mult(in HNum3 a, in HNum3 b)
+{
+    return HNum3(a.val * b.val, 
+        a.val*b.g + b.val*a.g, 
+        a.val*b.h + b.val*a.h + a_outerProduct(b.g,a.g) + a_outerProduct(a.g,b.g)
+    );
+}
+//--------------------------------
+HNum3 mult(in HNum3 a, in float b)
+{
+    return HNum3(a.val * b, b*a.g, b*a.h);
+}
+//--------------------------------
+HNum3 mult(in float a, in HNum3 b)
+{
+    return HNum3(a * b.val, a*b.g, a*b.h);
+}
+//--------------------------------
+HNum3 neg(in HNum3 a)
+{
+    return mult(-1.0,a);
+}
+//--------------------------------
+HNum3 div(in HNum3 a, in HNum3 b)
+{
+    float b1 = b.val;
+    float b2 = b1*b1;
+    float b3 = b2*b1;
+
+    return HNum3(a.val / b.val , 
+        (b.val*a.g - a.val*b.g)/b2, 
+        2.0*a.val/b3*a_outerProduct(b.g,b.g) 
+        - a.val/b2*b.h
+        + a.h/b1 
+        - a_outerProduct(b.g/b2, a.g)
+        - a_outerProduct(a.g/b2, b.g)
+    );
+}
+//--------------------------------
+HNum3 div(in HNum3 a, in float b)
+{
+    return HNum3(a.val / b, a.g/b, a.h/b);
+}
+//--------------------------------
+HNum3 div(in float a, in HNum3 b)
+{
+    float b1 = b.val;
+    float b2 = b1*b1;
+    float b3 = b2*b1;
+
+    return HNum3(a / b.val, 
+        -a*b.g/b2, 
+        2.0*a/b3*a_outerProduct(b.g,b.g) - a/b2*b.h
+    );
+}
+//--------------------------------
+HNum3 inv(in HNum3 a)
+{
+    return div(1.0, a);
+}
+//--------------------------------
+HNum3 a_pow(in HNum3 a, in HNum3 b)
+{
+    return a_exp(mult(b,a_log(a)));
+}
+//--------------------------------
+HNum3 a_pow(in HNum3 a, in float b)
+{
+    // constant exponent -> make special case
+    float v = pow(a.val, b); // value f(a(x))
+    float da = b*pow(a.val,b-1.0); // first derivative f'(a(x))
+    float dda = b*(b-1.0)*pow(a.val,b-2.0); // second derivative f''(a(x))
+    return HNum3(v , da * a.g,  da * a.h + dda * a_outerProduct(a.g,a.g));
+}
+//--------------------------------
+HNum3 a_pow(in float a, in HNum3 b)
+{
+    return a_exp(mult(b,log(a)));
+}
+//--------------------------------
+HNum3 a_min(in HNum3 a, in HNum3 b)
+{
+    if(a.val < b.val)
+    {
+        return a;
+    }
+    return b;
+}
+//--------------------------------
+HNum3 a_max(in HNum3 a, in HNum3 b)
+{
+    if(a.val > b.val)
+    {
+        return a;
+    }
+    return b;
+}
+//--------------------------------
+HNum3 a_exp2(in HNum3 a)
+{
+    float v = exp2(a.val); // value f(a(x))
+    float da = log(2.0)*exp2(a.val); // first derivative f'(a(x))
+    float dda = log(2.0)*log(2.0)*exp2(a.val); // second derivative f''(a(x))
+
+    return HNum3(v , da * a.g,  da * a.h + dda * a_outerProduct(a.g,a.g));
+}
+//--------------------------------
+HNum3 a_inversesqrt(in HNum3 a)
+{
+    float v = inversesqrt(a.val); // value f(a(x))
+    float da = -0.5/pow(sqrt(a.val),3.0); // first derivative f'(a(x))
+    float dda = 0.75/pow(sqrt(a.val),5.0); // second derivative f''(a(x))
+
+    return HNum3(v , da * a.g,  da * a.h + dda * a_outerProduct(a.g,a.g));
+}
+//--------------------------------
+HNum3 a_atan(in HNum3 a)
+{
+    float v = atan(a.val); // value f(a(x))
+    float da = 1.0/(1.0 + a.val * a.val); // first derivative f'(a(x))
+    float dda = -2.0*a.val/pow(1.0 + a.val * a.val, 2.0); // second derivative f''(a(x))
+
+    return HNum3(v , da * a.g,  da * a.h + dda * a_outerProduct(a.g,a.g));
+}
+//--------------------------------
+HNum3 a_sqrt(in HNum3 a)
+{
+    float v = sqrt(a.val); // value f(a(x))
+    float da = 0.5/sqrt(a.val); // first derivative f'(a(x))
+    float dda = -0.25/pow(sqrt(a.val),3.0); // second derivative f''(a(x))
+
+    return HNum3(v , da * a.g,  da * a.h + dda * a_outerProduct(a.g,a.g));
+}
+//--------------------------------
+HNum3 a_sinh(in HNum3 a)
+{
+    float v = sinh(a.val); // value f(a(x))
+    float da = cosh(a.val); // first derivative f'(a(x))
+    float dda = sinh(a.val); // second derivative f''(a(x))
+
+    return HNum3(v , da * a.g,  da * a.h + dda * a_outerProduct(a.g,a.g));
+}
+//--------------------------------
+HNum3 a_ceil(in HNum3 a)
+{
+    float v = ceil(a.val); // value f(a(x))
+    float da = 0.0; // first derivative f'(a(x))
+    float dda = 0.0; // second derivative f''(a(x))
+
+    return HNum3(v , da * a.g,  da * a.h + dda * a_outerProduct(a.g,a.g));
+}
+//--------------------------------
+HNum3 a_tan(in HNum3 a)
+{
+    float v = tan(a.val); // value f(a(x))
+    float da = 1.0 + pow(tan(a.val),2.0); // first derivative f'(a(x))
+    float dda = 2.0*tan(a.val)*(1.0 + pow(tan(a.val),2.0)); // second derivative f''(a(x))
+
+    return HNum3(v , da * a.g,  da * a.h + dda * a_outerProduct(a.g,a.g));
+}
+//--------------------------------
+HNum3 a_asinh(in HNum3 a)
+{
+    float v = asinh(a.val); // value f(a(x))
+    float da = 1.0/sqrt(1.0 + a.val * a.val); // first derivative f'(a(x))
+    float dda = -a.val/pow(sqrt(1.0 + a.val * a.val),3.0); // second derivative f''(a(x))
+
+    return HNum3(v , da * a.g,  da * a.h + dda * a_outerProduct(a.g,a.g));
+}
+//--------------------------------
+HNum3 a_asin(in HNum3 a)
+{
+    float v = asin(a.val); // value f(a(x))
+    float da = 1.0/sqrt(1.0 - a.val * a.val); // first derivative f'(a(x))
+    float dda = a.val/pow(sqrt(1.0 - a.val * a.val),3.0); // second derivative f''(a(x))
+
+    return HNum3(v , da * a.g,  da * a.h + dda * a_outerProduct(a.g,a.g));
+}
+//--------------------------------
+HNum3 a_acosh(in HNum3 a)
+{
+    float v = acosh(a.val); // value f(a(x))
+    float da = 1.0/sqrt(-1.0 + a.val * a.val); // first derivative f'(a(x))
+    float dda = -a.val/pow(sqrt(-1.0 + a.val * a.val),3.0); // second derivative f''(a(x))
+
+    return HNum3(v , da * a.g,  da * a.h + dda * a_outerProduct(a.g,a.g));
+}
+//--------------------------------
+HNum3 a_abs(in HNum3 a)
+{
+    float v = abs(a.val); // value f(a(x))
+    float da = a.val < 0.0 ? -1.0 : 1.0; // first derivative f'(a(x))
+    float dda = 0.0; // second derivative f''(a(x))
+
+    return HNum3(v , da * a.g,  da * a.h + dda * a_outerProduct(a.g,a.g));
+}
+//--------------------------------
+HNum3 a_exp(in HNum3 a)
+{
+    float v = exp(a.val); // value f(a(x))
+    float da = exp(a.val); // first derivative f'(a(x))
+    float dda = exp(a.val); // second derivative f''(a(x))
+
+    return HNum3(v , da * a.g,  da * a.h + dda * a_outerProduct(a.g,a.g));
+}
+//--------------------------------
+HNum3 a_cosh(in HNum3 a)
+{
+    float v = cosh(a.val); // value f(a(x))
+    float da = sinh(a.val); // first derivative f'(a(x))
+    float dda = cosh(a.val); // second derivative f''(a(x))
+
+    return HNum3(v , da * a.g,  da * a.h + dda * a_outerProduct(a.g,a.g));
+}
+//--------------------------------
+HNum3 a_floor(in HNum3 a)
+{
+    float v = floor(a.val); // value f(a(x))
+    float da = 0.0; // first derivative f'(a(x))
+    float dda = 0.0; // second derivative f''(a(x))
+
+    return HNum3(v , da * a.g,  da * a.h + dda * a_outerProduct(a.g,a.g));
+}
+//--------------------------------
+HNum3 a_log(in HNum3 a)
+{
+    float v = log(a.val); // value f(a(x))
+    float da = 1.0/a.val; // first derivative f'(a(x))
+    float dda = -1.0/(a.val * a.val); // second derivative f''(a(x))
+
+    return HNum3(v , da * a.g,  da * a.h + dda * a_outerProduct(a.g,a.g));
+}
+//--------------------------------
+HNum3 a_atanh(in HNum3 a)
+{
+    float v = atanh(a.val); // value f(a(x))
+    float da = 1.0/(1.0 - a.val * a.val); // first derivative f'(a(x))
+    float dda = 2.0*a.val/pow(1.0 - a.val * a.val,2.0); // second derivative f''(a(x))
+
+    return HNum3(v , da * a.g,  da * a.h + dda * a_outerProduct(a.g,a.g));
+}
+//--------------------------------
+HNum3 a_log2(in HNum3 a)
+{
+    float v = log2(a.val); // value f(a(x))
+    float da = 1.0/(a.val * log(2.0)); // first derivative f'(a(x))
+    float dda = -1.0/(a.val * a.val * log(2.0)); // second derivative f''(a(x))
+
+    return HNum3(v , da * a.g,  da * a.h + dda * a_outerProduct(a.g,a.g));
+}
+//--------------------------------
+HNum3 a_acos(in HNum3 a)
+{
+    float v = acos(a.val); // value f(a(x))
+    float da = -1.0/sqrt(1.0 - a.val * a.val); // first derivative f'(a(x))
+    float dda = -a.val/pow(sqrt(1.0 - a.val * a.val),3.0); // second derivative f''(a(x))
+
+    return HNum3(v , da * a.g,  da * a.h + dda * a_outerProduct(a.g,a.g));
+}
+//--------------------------------
+HNum3 a_tanh(in HNum3 a)
+{
+    float v = tanh(a.val); // value f(a(x))
+    float da = 1.0 - pow(tanh(a.val),2.0); // first derivative f'(a(x))
+    float dda = -2.0*tanh(a.val)*(1.0 - pow(tanh(a.val),2.0)); // second derivative f''(a(x))
+
+    return HNum3(v , da * a.g,  da * a.h + dda * a_outerProduct(a.g,a.g));
+}
+//--------------------------------
+HNum3 a_cos(in HNum3 a)
+{
+    float v = cos(a.val); // value f(a(x))
+    float da = -sin(a.val); // first derivative f'(a(x))
+    float dda = -cos(a.val); // second derivative f''(a(x))
+
+    return HNum3(v , da * a.g,  da * a.h + dda * a_outerProduct(a.g,a.g));
+}
+//--------------------------------
+HNum3 a_sin(in HNum3 a)
+{
+    float v = sin(a.val); // value f(a(x))
+    float da = cos(a.val); // first derivative f'(a(x))
+    float dda = -sin(a.val); // second derivative f''(a(x))
+
+    return HNum3(v , da * a.g,  da * a.h + dda * a_outerProduct(a.g,a.g));
+}
+//--------------------------------
+HNum3 a_atan2(in HNum3 y, in HNum3 x)
+{
+    const float pi = 3.14159265; 
+    // from https://en.wikipedia.org/wiki/Atan2
+    if(x.val > 0.0)
+    {
+        HNum3 n = a_sqrt(add(mult(x,x),mult(y,y)));
+        HNum3 inner = div(y, add(n,x));
+        
+        return mult(2.0,a_atan(inner));
+        
+    }else if(x.val <= 0.0 && abs(y.val) > 1E-6)
+    {
+        HNum3 n = a_sqrt(add(mult(x,x),mult(y,y)));
+        HNum3 inner = div(sub(n,x),y);
+         return mult(2.0,a_atan(inner));
+    }else if(x.val < 0.0 && abs(y.val) <= 1E-6)
+    {
+        return constH3(pi);
+    }
+    // return 0 for undefined
+    return constH3(0.0); 
+}
+//--------------------------------
+HNum3 a_atan2(in HNum3 y, in float x)
+{
+    return a_atan2(y,constH3(x));
+}
+//--------------------------------
+HNum3 a_atan2(in float y, in HNum3 x)
+{
+    return a_atan2(constH3(y),x);
+}
+//--------------------------------
+HNum3 a_mix(in HNum3 a, in HNum3 b, in HNum3 t)
+{
+    return add(mult(a, sub(1.0, t)), mult(b, t));
+}
+
+//--------------------------------
+HNum3 a_mix(in HNum3 a, in HNum3 b, in float t)
+{
+    return add(mult(a, 1.0 - t), mult(b, t));
+}
+
+//--------------------------------
+HNum3 a_mix(in HNum3 a, in float b, in HNum3 t)
+{
+    return add(mult(a, sub(1.0, t)), mult(b, t));
+}
+
+//--------------------------------
+HNum3 a_mix(in HNum3 a, in float b, in float t)
+{
+    return add(mult(a, 1.0 - t), b*t);
+}
+
+//--------------------------------
+HNum3 a_mix(in float a, in HNum3 b, in HNum3 t)
+{
+    return add(mult(a, sub(1.0, t)), mult(b, t));
+}
+
+//--------------------------------
+HNum3 a_mix(in float a, in HNum3 b, in float t)
+{
+    return add(a * (1.0 - t), mult(b, t));
+}
+
+//--------------------------------
+HNum3 a_mix(in float a, in float b, in HNum3 t)
+{
+    return add(mult(a, sub(1.0, t)), mult(b, t));
+}
+
+
+//--------------------------------
+// Implementation prototypes
+//--------------------------------
+
+mat3 a_outerProduct(in vec3 a, in vec3 b)
+{
+    return mat3(a * b[0], a * b[1], a * b[2]);
+}
+
+
+#endif // HESSNUM_3_H_
+//********************************************************************
+//
+// End automatic differentiation header
+//
+//********************************************************************
+
+//********************************************************************
+//
+// Metric functions
+//
+//********************************************************************
+#define PI 3.14159265359
+
+// float pSphere(vec3 p, float s) {return length(p)-s;}
+HNum3 fSphere(in HNum3 x, in HNum3 y, in HNum3 z,
+                 float globalTime) {             
+                 
+   return sub(a_sqrt(add(add(mult(x,x), mult(y,y)), mult(z,z))), 5.0)  ;
+}
+
+// Predefined functions!
+// Just comment in the one you want to see! (comment out the other ones)
+// If none is defined, the default identity operation is used (f(x,y,z) = 0).
+// You can comment out all predefined ones and implement your own in fCustom
+
+// #define EXPONENTIAL
+// #define SADDLE// 
+// #define WAVES
+// #define PARABOLA
+// #define IDENTITY
+
+HNum3 fExponential(in HNum3 x, in HNum3 y, in HNum3 z,
+                      float globalTime);
+HNum3 fSaddle(in HNum3 x, in HNum3 y, in HNum3 z, float globalTime);
+HNum3 fWaves(in HNum3 x, in HNum3 y, in HNum3 z, float globalTime);
+HNum3 fParabola(in HNum3 x, in HNum3 y, in HNum3 z,
+                   float globalTime);
+HNum3 fIdentity(in HNum3 x, in HNum3 y, in HNum3 z,
+                   float globalTime);
+                   
+// Implement your custom height function here and comment out all the defines
+// above! You can use all the mathematical operations defined in the automatic
+// differentiation header above
+HNum3 fCustom(in HNum3 x, in HNum3 y, in HNum3 z,
+                 float globalTime) {
+  return div(fExponential(x, y, z, globalTime), 1.0);
+  // return a_max(fExponential(x, y, z, globalTime), fSphere(x, y, z, globalTime));
+}
+
+// Height function used for the metric. More information in compute_update
+HNum3 f(in HNum3 x, in HNum3 y, in HNum3 z, float globalTime) {
+
+#if defined EXPONENTIAL
+  return fExponential(x, y, z, globalTime);
+#elif defined SADDLE
+  return fSaddle(x, y, z, globalTime);
+#elif defined WAVES
+  return fWaves(x, y, z, globalTime);
+#elif defined PARABOLA
+  return fParabola(x, y, z, globalTime);
+#elif defined IDENTITY
+  return fIdentity(x, y, z, globalTime);
+#else
+  return fCustom(x, y, z, globalTime);
+#endif
+}
+
+HNum3 hessF(vec3 p, float globalTime) {
+  // compute hessian with addition time parameter
+
+  vec3 uGrad = vec3(1., 0., 0.);
+  HNum3 uHessian = HNum3(p.x, uGrad, mat3(0.));
+  vec3 vGrad = vec3(0., 1., 0.);
+  HNum3 vHessian = HNum3(p.y, vGrad, mat3(0.));
+  vec3 wGrad = vec3(0., 0., 1.);
+  HNum3 wHessian = HNum3(p.z, wGrad, mat3(0.));
+  return f(uHessian, vHessian, wHessian, globalTime);
+}
+vec3 compute_update(vec3 p, vec3 v, float globalTime) {
+
+  // explicit form of the christoffel symbols for the metric given by graph of
+  // the function f(x_1,x_1,x_3) df/dx_i = f_i d^2f/(dx_j dx_j) = f_{i,j}
+  // gamma_{i,j}^k = f_k*f_{i,j}/(1 + |grad(f)|^2)
+
+  // This is the update given by the differential geodesic equation used for
+  // numerical integration in local coordinates (x_i) for a curve c_i(t) = x_i
+  // d^2 c_k/dt^2 = gamma_{i,j}^k * d c_i/dt * d c_j/dt
+
+  // The local position's velocity is given by the ray's current direction
+
+  // compute first and second order derivatives
+  HNum3 r = hessF(p, globalTime);
+
+  vec3 vp = vec3(0.0);
+
+  for (int k = 0; k < 3; k++) {
+    for (int i = 0; i < 3; i++) {
+      for (int j = 0; j < 3; j++) {
+        vp[k] += r.g[k] * r.h[j][i] * v[i] * v[j];
+      }
+    }
+  }
+
+  return -vp / (1.0 + dot(r.g, r.g));
+}
+
+//********************************************************************
+//
+// Data
+//
+//********************************************************************
+
+const float deg2Rad = PI / 180.0;
+const vec2 D_lastMouse = vec2(0., 0.);
+vec4 D_thetaPhi;
+const vec3 D_pos = vec3(0.0);
+
+//********************************************************************
+//
+// Camera functions
+//
+//********************************************************************
+// This assumes the pixel position px to be in [0,1],
+// which can be done by (x+0.5)/w or (y+0.5)/h (or h-y +0.5 for screens
+// with top left origin) to sample pixel centers
+vec3 createRay(vec2 px, mat4 PInv, mat4 VInv);
+
+mat4 translate(vec3 t);
+mat4 translateInv(vec3 t);
+
+mat4 scale(vec3 s);
+mat4 scaleInv(vec3 s);
+
+mat4 rightToLeft();
+mat4 rightToLeftInv();
+
+mat4 ortho(float l, float r, float b, float t, float n, float f);
+mat4 orthoInv(float l, float r, float b, float t, float n, float f);
+
+mat4 projection(float n, float f);
+mat4 projectionInv(float n, float f);
+
+mat4 perspective(float fov, float aspect, float n, float f);
+mat4 perspectiveInv(float fov, float aspect, float n, float f);
+
+mat4 lookAt(vec3 eye, vec3 center, vec3 up);
+mat4 lookAtInv(vec3 eye, vec3 center, vec3 up);
+
+//********************************************************************
+//
+// Implementation
+//
+//********************************************************************
+HNum3 fExponential(in HNum3 x, in HNum3 y, in HNum3 z,
+                      float globalTime) {
+  HNum3 rx = sub(x, 0.0);
+  HNum3 ry = sub(y, 1.0);
+  HNum3 rz = sub(z, 2.0);
+
+  HNum3 x2 = mult(rx, rx);
+  HNum3 y2 = mult(ry, ry);
+  HNum3 z2 = mult(rz, rz);
+
+  HNum3 sum = neg(add(x2, add(y2, z2)));
+
+  HNum3 f1 = a_exp(mult(sum, 1.0 / (abs(sin(globalTime / 5.0)) + 0.1)));
+
+  rx = sub(x, -6.0);
+  ry = sub(y, -0.25);
+  rz = sub(z, 3.5);
+
+  x2 = mult(rx, rx);
+  y2 = mult(ry, ry);
+  z2 = mult(rz, rz);
+
+  sum = neg(add(x2, add(y2, z2)));
+  sum = mult(sum, 0.1);
+  HNum3 f2 = mult(a_exp(sum), abs(sin(globalTime / 5.0)) * 5.0);
+  return add(f1, f2);
+}
+HNum3 fSaddle(in HNum3 x, in HNum3 y, in HNum3 z,
+                 float globalTime) {
+  return mult(0.25 * pow(sin(globalTime / 2.0), 2.0),
+              sub(add(mult(x, x), mult(z, z)), mult(y, y)));
+}
+HNum3 fWaves(in HNum3 x, in HNum3 y, in HNum3 z, float globalTime) {
+  float frequency = 2.0 * PI / (10.0 + 3.0 * sin(0.1 * globalTime));
+  return a_cos(add(mult(x, frequency), mult(z, frequency)));
+}
+HNum3 fParabola(in HNum3 x, in HNum3 y, in HNum3 z,
+                   float globalTime) {
+  HNum3 rel = sub(x, 0.0);
+  HNum3 sum = mult(rel, rel);
+
+  rel = sub(y, 0.0);
+  sum = add(sum, mult(rel, rel));
+
+  rel = sub(z, -10.0);
+  sum = add(sum, mult(rel, rel));
+  return mult(sum, 0.1);
+}
+HNum3 fIdentity(in HNum3 x, in HNum3 y, in HNum3 z,
+                   float globalTime) {
+  return constH3(0.0);
+}
+
+
+//********************************************************************
+vec3 createRay(vec2 px, mat4 PInv, mat4 VInv) {
+
+  // convert pixel to NDS
+  // [0,1] -> [-1,1]
+  vec2 pxNDS = px * 2. - 1.;
+
+  // choose an arbitrary point in the viewing volume
+  // z = -1 equals a point on the near plane, i.e. the screen
+  vec3 pointNDS = vec3(pxNDS, -1.);
+
+  // as this is in homogenous space, add the last homogenous coordinate
+  vec4 pointNDSH = vec4(pointNDS, 1.0);
+  // transform by inverse projection to get the point in view space
+  vec4 dirEye = PInv * pointNDSH;
+
+  // since the camera is at the origin in view space by definition,
+  // the current point is already the correct direction (dir(0,P) = P - 0 = P
+  // as a direction, an infinite point, the homogenous component becomes 0
+  // the scaling done by the w-division is not of interest, as the direction
+  // in xyz will stay the same and we can just normalize it later
+  dirEye.w = 0.;
+
+  // compute world ray direction by multiplying the inverse view matrix
+  vec3 dirWorld = (VInv * dirEye).xyz;
+
+  // now normalize direction
+  return normalize(dirWorld);
+}
+
+// matrix operations
+mat4 translate(vec3 t) {
+  return mat4(vec4(1., 0., 0., 0.), vec4(0., 1., 0., 0.), vec4(0., 0., 1., 0.),
+              vec4(t, 1.));
+}
+mat4 translateInv(vec3 t) { return translate(-t); }
+
+mat4 scale(vec3 s) {
+  return mat4(vec4(s.x, 0., 0., 0.), vec4(0., s.y, 0., 0.),
+              vec4(0., 0., s.z, 0.), vec4(0., 0., 0., 1.));
+}
+mat4 scaleInv(vec3 s) { return scale(1. / s); }
+
+mat4 rightToLeft() {
+  // 1 0 0  0
+  // 0 1 0  0
+  // 0 0 -1 0
+  // 0 0 0  1
+  return scale(vec3(1., 1., -1.));
+}
+
+mat4 rightToLeftInv() {
+  // same matrix
+  return rightToLeft();
+}
+
+mat4 ortho(float l, float r, float b, float t, float n, float f) {
+
+  // translation and scale
+  return scale(vec3(2. / (r - l), 2. / (t - b), 2. / (f - n))) *
+         translate(vec3(-(l + r) / 2., -(t + b) / 2., -(f + n) / 2.));
+}
+
+mat4 orthoInv(float l, float r, float b, float t, float n, float f) {
+  return translateInv(vec3(-(l + r) / 2., -(t + b) / 2., -(f + n) / 2.)) *
+         scaleInv(vec3(2. / (r - l), 2. / (t - b), 2. / (f - n)));
+}
+
+mat4 projection(float n, float f) {
+  // n 0 0 0	0
+  // 0 n 0 0	0
+  // 0 0 n+f	-fn
+  // 0 0 1	0
+  return mat4(vec4(n, 0., 0., 0.), vec4(0., n, 0., 0.), vec4(0., 0., n + f, 1.),
+              vec4(0., 0., -f * n, 0.));
+}
+
+mat4 projectionInv(float n, float f) {
+  // 1/n 	0 	0 		0
+  // 0 	1/n	0 		0
+  // 0	0	0 		1
+  // 0	0	-1/fn	(f+n)/fn
+
+  return mat4(vec4(1. / n, 0., 0., 0.), vec4(0., 1. / n, 0., 0.),
+              vec4(0., 0., 0., -1. / (f * n)),
+              vec4(0., 0., 1., (f + n) / (f * n)));
+}
+
+mat4 perspective(float fov, float aspect, float n, float f) {
+  float l = tan(fov / 2.) * n;
+  float b = l / aspect;
+
+  return ortho(-l, l, -b, b, n, f) * projection(n, f) * rightToLeft();
+}
+
+mat4 perspectiveInv(float fov, float aspect, float n, float f) {
+  float l = tan(fov / 2.) * n;
+  float b = l / aspect;
+
+  return rightToLeftInv() * projectionInv(n, f) * orthoInv(-l, l, -b, b, n, f);
+}
+
+mat4 lookAt(vec3 eye, vec3 center, vec3 up) {
+
+  vec3 z = normalize(eye - center);
+  vec3 x = normalize(cross(up, z));
+  vec3 y = cross(z, x);
+
+  mat4 v = mat4(vec4(x.x, y.x, z.x, 0.), vec4(x.y, y.y, z.y, 0.),
+                vec4(x.z, y.z, z.z, 0.), vec4(0., 0., 0., 1.));
+
+  return v * translate(-eye);
+}
+
+mat4 lookAtInv(vec3 eye, vec3 center, vec3 up) {
+  vec3 z = normalize(eye - center);
+  vec3 x = normalize(cross(up, z));
+  vec3 y = cross(z, x);
+
+  return translateInv(-eye) *
+         mat4(vec4(x, 0.), vec4(y, 0.), vec4(z, 0.), vec4(0., 0., 0., 1.));
+}
+
+//********************************************************************
+//
+// INSTRUCTIONS:
+//
+// This shader implements basic distancefield raytracing of a regular grid on
+// a 3D manifold given as the graph of a function f(x,y,z).
+//
+// Click and drag the mouse to look around. WASD for movement. You are moving
+// through distorted space, so you might not move in a straight line, but
+// instead move along the shortest paths in curved space.
+// Press "R" to reset the view.
+//
+// WARNING: The space-bending and movement might be a bit nauseating. I tried to
+// not make stuff move too fast, but wanted to give a short warning anyways.
+
+// DISPLAY OPTIONS:
+// Below you can find a few defines to control the look of the grid, background
+// and general tracing
+//
+// FUNCTIONAL OPTIONS
+// The actual function is defined in the common shader part under "Metric
+// functions".  A few functions are predefined, but you can implement your own
+// in "HessNum3 fCustom(in HessNum3 x, in HessNum3 y, in HessNum3 z, float
+// globalTime)". Just comment in the one you want to see or comment all of them
+// out to use the custom function. Additional information can be found there as
+// well.
+//
+// Note: As calculating the metric from the function requires 1st and 2nd order
+// derivatives and it would be cumbersome to calculate and implement them for
+// each function, I use automatic differentiation, which is why you need to use
+// the special types and operations defined in the automatic differentiation
+// header below to implement your own f.
+//
+//
+//********************************************************************
+
+// Maximum number of trace steps
+// Higher step number will let you look farther, especially with higher
+// deformations
+#define MAX_STEPS 100
+// The maximum length traversed per step. Lower values produce higher quality
+// paths through the curved space
+#define STEP_LENGTH 0.2
+
+// Grid parameters
+#define GRID_SIZE 1.0
+#define GRID_THICKNESS 0.0001
+
+// Linear fog parameters
+#define FOG_MAX_DIST 50.0
+#define FOG_MIN_DIST 10.0
+#define FOG_COLOR vec3(0.1)
+
+// Surface epsilon
+#define EPS 0.005
+
+//********************************************************************
+//
+// Distance helpers and tracing
+//
+//********************************************************************
+#define INF 3.402823466e+38
+
+float sdf(in vec3 p);
+
+vec3 g_eye;
+
+// Tracing function
+bool trace(inout vec3 p, in vec3 dir, out float t, out int steps) {
+
+  steps = 0;
+  t = 0.0;
+  
+  for (int n = 0; n < MAX_STEPS && t < FOG_MAX_DIST; n++) {
+
+    float d = sdf(p);
+
+    if (d < EPS) {
+    
+     if(length(p - g_eye) > 10.0 * GRID_SIZE) return false;
+    
+      return true;
+    }
+
+
+    // make step length dependent on distance field to not miss geometry, but
+    // also use EPS as a min step
+    float s = max(EPS, min(d, STEP_LENGTH));
+
+    // "acceleration" of a particle traveling along the geodesic
+    vec3 vp = compute_update(p, dir, iTime);
+
+    // euler integration
+    dir += vp * s;
+    // position euler step
+    p += dir * s;
+
+    // maybe not fully correct, but try to preserve arc length by normalizing
+    // dir
+    dir = normalize(dir);
+
+    // length traveled, used for fog
+    t += s;
+
+    steps++;
+  }
+
+  return false;
+}
+
+float sdfBox2d(vec2 p, vec2 b);
+float sdfGrid(vec3 p, vec3 cellSize, vec3 gridHalfLength);
+vec3 normal(in vec3 p);
+
+//********************************************************************
+//
+// Image formation
+//
+//********************************************************************
+
+vec3 shade(in vec3 P, in vec3 N, in vec3 color, in vec3 LPos);
+
+float simpleColor(float coord, float gridSize, float repetition);
+
+// vec4 loadValue(in ivec2 re) { return texelFetch(iChannel0, re, 0); }
+
+
+void mainImage(out vec4 fragColor, in vec2 fragCoord) {
+
+  vec2 uv = fragCoord.xy / iResolution.xy;
+
+  float aspect = iResolution.x / iResolution.y;
+
+  D_thetaPhi = vec4(90.0 * deg2Rad - clamp(2.0 * PI * iTime, 0., 2.0*PI) / 20., 0.0, 0.0, 0.0);
+
+  vec3 rayDir;
+  vec3 p;
+
+  // {
+    vec2 thetaPhi = D_thetaPhi.xy; // loadValue(D_thetaPhi).xy;
+    float theta = thetaPhi.x;
+    float phi = thetaPhi.y;
+
+    vec3 eye = D_pos.xyz; // loadValue(D_pos).xyz;
+    // vec3 eye = vec3(0.0);
+    vec3 center =
+        eye + vec3(sin(theta) * sin(phi), cos(theta), sin(theta) * cos(phi));
+        
+    g_eye = eye;
+    // inverse projection and view matrices
+    mat4 PInv = perspectiveInv(radians(90.), aspect, 0.1, 100.);
+    mat4 VInv = lookAtInv(eye, center, vec3(0., 1., 0.));
+
+    rayDir = createRay(uv, PInv, VInv);
+    p = eye;
+  // }
+
+  float t = 0.0;
+  int steps = 100;
+
+  vec3 col = vec3(0.0);
+  
+  if (trace(p, rayDir, t, steps)) {
+  
+    vec3 N = normal(p);
+
+    col =
+        vec3(simpleColor(p.x, GRID_SIZE, 3.0), simpleColor(p.y, GRID_SIZE, 7.0),
+             simpleColor(p.z, GRID_SIZE, 11.0));
+
+    vec3 LPos = vec3(1.0, 2.0, 0.0);
+    col = shade(p, N, col, LPos);
+
+  } else {
+    t = INF;
+  }
+
+  // simple linear fog
+  float fogFactor = (FOG_MAX_DIST - t) / (FOG_MAX_DIST - FOG_MIN_DIST);
+  fogFactor = clamp(fogFactor, 0.0, 1.0);
+  col = mix(FOG_COLOR, col, fogFactor);
+
+  fragColor = vec4(col, t == INF ? 0.0 : 1.0);
+}
+
+//***************
+
+float sdfBox2d(vec2 p, vec2 b) {
+  vec2 d = abs(p) - b;
+  return min(max(d.x, d.y), 0.0) + length(max(d, 0.0));
+}
+
+float sdfGrid(vec3 p, vec3 cellSize, vec3 gridHalfLength) {
+  vec3 pg = floor(p / cellSize) * cellSize;
+
+  vec3 center = pg + cellSize * 0.5;
+
+  float d = INF;
+  
+  d = min(d, sdfBox2d(p.xz - center.xz, gridHalfLength.xz));
+  d = min(d, sdfBox2d(p.xy - center.xy, gridHalfLength.xy));
+  d = min(d, sdfBox2d(p.yz - center.yz, gridHalfLength.yz));
+  
+  return d;
+}
+
+float pSphere(vec3 p, float s) {return length(p)-s;}
+
+float sdf(in vec3 p) {
+  float d = sdfGrid(p, vec3(GRID_SIZE), vec3(GRID_THICKNESS));
+  
+  // d = max(d, pSphere(p - g_center, 5.0 * GRID_SIZE));
+  
+  return d;
+}
+
+vec3 normal(in vec3 p) {
+  return normalize(
+      vec3(sdf(p + vec3(EPS, 0., 0.)) - sdf(p - vec3(EPS, 0., 0.)),
+           sdf(p + vec3(0., EPS, 0.)) - sdf(p - vec3(0., EPS, 0.)),
+           sdf(p + vec3(0., 0., EPS)) - sdf(p - vec3(0., 0., EPS))));
+}
+
+//********************************************************************
+//
+// Shading and main
+//
+//********************************************************************
+vec3 shade(in vec3 P, in vec3 N, in vec3 color, in vec3 LPos) {
+  vec3 L = normalize(LPos - P);
+  // simple two sided diffuse shading
+  return vec3(0.1, 0.8, 0.1) * clamp(abs(dot(L, N)), 0.0, 1.0);
+}
+
+float simpleColor(float coord, float gridSize, float repetition) {
+
+  float cr = (gridSize * 0.5 - coord) / gridSize;
+
+  float v = pow(sin(PI * cr / 2.0), 2.0);
+
+  return v;
+}
+>>>
+
+\figcaption{adapted from [sibaku's Geodesic raytracer](https://www.shadertoy.com/view/fdBGDz)}
+
+}
+}
