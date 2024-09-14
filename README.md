@@ -95,3 +95,7 @@ To use any package, just figure out the package name from the import and run `bu
 I'm also experimenting with WebAssembly, and some of the JS/TS code will rely on WASM.
 
 As long as one has working `bun` and [rustup](https://rustup.rs/), the `build.sh` should take care of the rest.
+
+## License
+
+See [REUSE.md](REUSE.md) for details.
