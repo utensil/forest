@@ -46,7 +46,7 @@
     [angle]{150}
     [radius]{2cm}
     [origin]{(0,0)}
-    [draw]{
+    [coord]{
       \coordinate (\self#id) at ($\self#origin + (\self#angle:\self#radius)$);
     }
     [arrow/id]{\self#id\verb~|/~arrow}
@@ -56,8 +56,11 @@
     [draw/arrow]{
       \draw[->,name path=\self#arrow/id] \self#origin to (\self#id);
     }
+    [draw/dot]{
+      \filldraw (\self#id) circle (1pt);
+    }
     [draw/label]{
-      \filldraw (\self#id) circle (1pt) node[above] {\ensuremath{\self#label}};
+      node[above] {\ensuremath{\self#label}} at (\self#id);
     }
   }
 }
@@ -88,6 +91,36 @@
   }
 }
 
+\def\screen/new{
+  \object[self]{
+    [center]{(0,0)}
+    [label]{viewport}
+    [width]{8cm}
+    [height]{6cm}
+    [draw/body]{
+      \fill[color=gray!20,opacity=0.1] (-0.5*\self#width,-0.5*\self#height) rectangle (0.5*\self#width,0.5*\self#height);
+    }
+    [draw/border]{
+      \draw (-0.5*\self#width,-0.5*\self#height) rectangle (0.5*\self#width,0.5*\self#height);
+    }
+    [draw/label]{
+      \node[above] at (0,0.8*\self#height) {\self#label};
+    }
+  }
+}
+
+\def\camera/new{
+  \object[self]{
+    [width]{10}
+    [height]{10}
+    [depth]{10}
+    [scale]{0.1}
+    [units]{cm}
+    [draw]{
+    }
+  }
+}
+
 \tikzfig{
 \tikzset{>=latex}
 
@@ -110,22 +143,19 @@
   \myball#draw/radius
 
   \begin{pgfonlayer}{foreground}
-  \point/p#draw
+  \point/p#coord
   \point/p#path/arrow
   % \point/p#draw/arrow
+  \point/p#draw/dot
   \point/p#draw/label
   \end{pgfonlayer}
 
   % set Omega
   \coordinate (ball/label) at (45:1.5*\myball#radius);
   \draw ($(\myball#center/id)!0.5!(ball/label)$) -- ($(\myball#center/id)!0.8!(ball/label)$) node at (ball/label) {$\Omega$};
-  \let\angle{150}
+
   % intersection of arrow p and ball boundary
-  \path[name intersections={of=\myball#boundary/id and \point/p#arrow/id, by={I}}]; % by={[label=above:Intersection] I}}
-  % \node[above] at (I) {$I$};
-  % \node[above,circ] at ($(P-|I)$) {$PI$};
-  % \draw[name path=N] (P) -- ++(P-|I) node[above] {$N$};
-  % \path[name intersections={of=\myball#boundary/id and \point/p#arrow/id, by={NI}}];
+  \path[name intersections={of=\myball#boundary/id and \point/p#arrow/id, by={I}}];
 
   \let\measure/d{
     \patch{\measure/new}{
@@ -141,14 +171,22 @@
   \begin{scope}[
     shift=(-30:-5cm),
     scale=0.5,
+    % canvas is zy plane at x=0]
     plane x={(0,0,-1)},
     plane y={(0,1,0)},
     canvas is plane]   % [xshift=-4cm,yshift=2.5cm,rotate=40,xscale=0.28,yscale=0.3]
 
-    % draw a rectangle width 8cm and height 6cm at (-4,-3) with a lable at top
-    \fill[color=gray!20,opacity=0.1] (-4,-3) rectangle (4,3);
-    \draw (-4,-3) rectangle (4,3) node[above] {viewport};
+    \let\screen{
+      \patch{\screen/new}{
+        [plane]{xzp}
+      }
+    }
 
+    \screen#draw/border
+    \screen#draw/body
+    \screen#draw/label
+
+    % draw the same ball on screen
     \let\ball/screen{
       \patch{\ball/new}{
         [center/id]{sreenball}
@@ -171,38 +209,39 @@
 
     \let\point/camera{
       \patch{\point/new}{
-        [id]{C}
+        [id]{camera}
         [label]{camera}
         [radius]{0cm}
         [angle]{0}
       }
     }
 
-    \point/camera#draw
-    % \point/camera#draw/label
-    % draw a line from O to C
+    \point/camera#coord
 
   \end{scope}
 
   \colorlet{photoncol}{yellow!60!orange!95!black}
   \tikzstyle{photon}=[thick,line cap=round,photoncol,decorate,decoration={
-  snake,amplitude=.4mm,segment length=2.5mm,post length=1mm}]
+  snake,amplitude=.4mm,segment length=2.5mm,post length=0mm}]
 
   \begin{pgfonlayer}{background}
-    \draw[photon] (C) -- (sreenball);
+    \draw[photon] (camera) -- (sreenball);
   \end{pgfonlayer}
 
   \draw[photon] (sreenball) -- (O);
 
   % adapted from https://tex.stackexchange.com/a/288101/75671
   \tikzset{
-    cuboid/.pic={
+    camera/.pic={
       \tikzset{%
         every edge quotes/.append style={midway, auto},
-        /cuboid/.cd,
+        /camera/.cd,
         #1
       }
-      \begin{scope}[z={(-135:1cm)}]
+      \tikzmath{
+        \aspect = cos(\cubezang);
+      }
+      \begin{scope}[z={(-180+\cubezang:1cm)}, x={(-\cubexang:1cm)}]
       % \draw[color=red] (0,0,0) -- (1,0,0);
       % \draw[color=blue] (0,0,0) -- (0,1,0);
       % \draw[color=green] (0,0,0) -- (0,0,1);
@@ -211,70 +250,31 @@
       (o) -- ++(0,0,-\cubescale*\cubez) coordinate (d) -- ++(0,-\cubescale*\cubey,0) coordinate (e) edge (g) -- (c) -- cycle
       (o) -- (a) -- ++(0,0,-\cubescale*\cubez) coordinate (f) edge (g) -- (d) -- cycle;
 
+      % \tikzmath{
+      %   \lenslength = 0.5*\cubescale*\cubex;
+      %   \lensradius = 0.2*\cubescale*\cubey;
+      % }
+      % \coordinate (lens/center) at ($(o)!0.5!(e)$);
+      % \draw (lens/center) circle [name path=lensback,radius=\lensradius,canvas is yz plane at x=0];
+      % \coordinate (lens/nosecenter) at ($(lens/center)+(\lenslength,0,0)$);
+      % \draw (lens/nosecenter) circle [name path=lensfront,radius=\lensradius,canvas is yz plane at x=0];
+      % \draw (lens/center) ++(0,\lensradius,0) -- ($(lens/nosecenter)+(0,\lensradius,0)$);
+      % \draw (lens/center) ++(0,-\lensradius,0) -- ($(lens/nosecenter)+(0,-\lensradius,0)$);
+
       \node [cylinder, cylinder uses custom fill, cylinder end fill=white,
-         cylinder body fill=white,draw,shape aspect=.5,inner xsep=3.5*\cubescale*\cubey, inner ysep=8.0*\cubescale*\cubey] at ($(o)!0.5!(e)$) {};
+         cylinder body fill=white,draw,shape aspect=\aspect,inner xsep=3.5*\cubescale*\cubey, inner ysep=8.0*\cubescale*\cubey] at ($(o)!0.5!(e)$) {};
 
-        \begin{scope}[canvas is yz plane at x=0,xshift=-0.5*\cubescale*\cubex]
-          % draw a circle at the center of the cuboid, radius half of the height
-          % \draw[fill=black] ($(o)!0.5!(e)$) circle (0.2*\cubescale*\cubey);
-          % \draw[fill=gray!50] ($(o)!0.5!(e)$) circle (0.16*\cubescale*\cubey);
-          % \draw[fill=black] ($(o)!0.5!(e)$) circle (0.1*\cubescale*\cubey);
-          % % Draw the body of the camera
-          % \draw[fill=gray!30] (0,0) rectangle (6,4);
-
-          % % Draw the lens
-          % \draw[fill=black] (4,2) circle (1);
-          % \draw[fill=gray!50] (4,2) circle (0.8);
-          % \draw[fill=black] (4,2) circle (0.5);
-
-          % % Draw the flash
-          % \draw[fill=yellow] (1,3.5) rectangle (2,3.8);
-
-          % % Draw the shutter button
-          % \draw[fill=gray!50] (5.5,3.5) circle (0.3);
-
-          % % Draw the viewfinder
-          % \draw[fill=black] (0.5,2.5) rectangle (1.5,3);
-        \end{scope}
       \end{scope}
     },
-    /cuboid/.search also={/tikz},
-    /cuboid/.cd,
+    /camera/.search also={/tikz},
+    /camera/.cd,
     width/.store in=\cubex,
     height/.store in=\cubey,
     depth/.store in=\cubez,
     units/.store in=\cubeunits,
     scale/.store in=\cubescale,
-    width=10,
-    height=10,
-    depth=10,
-    units=cm,
-    scale=.1,
-  }
-  \tikzset{
-    annotated cuboid/.pic={
-      \tikzset{%
-        every edge quotes/.append style={midway, auto},
-        /cuboid/.cd,
-        #1
-      }
-      \draw [every edge/.append style={pic actions, densely dashed, opacity=.5}, pic actions]
-      (0,0,0) coordinate (o) -- ++(-\cubescale*\cubex,0,0) coordinate (a) -- ++(0,-\cubescale*\cubey,0) coordinate (b) edge coordinate [pos=1] (g) ++(0,0,-\cubescale*\cubez)  -- ++(\cubescale*\cubex,0,0) coordinate (c) -- cycle
-      (o) -- ++(0,0,-\cubescale*\cubez) coordinate (d) -- ++(0,-\cubescale*\cubey,0) coordinate (e) edge (g) -- (c) -- cycle
-      (o) -- (a) -- ++(0,0,-\cubescale*\cubez) coordinate (f) edge (g) -- (d) -- cycle;
-      \path [every edge/.append style={pic actions, |-|}]
-      (b) +(0,-5pt) coordinate (b1) edge ["\cubex \cubeunits"'] (b1 -| c)
-      (b) +(-5pt,0) coordinate (b2) edge ["\cubey \cubeunits"] (b2 |- a)
-      (c) +(3.5pt,-3.5pt) coordinate (c2) edge ["\cubez \cubeunits"'] ([xshift=3.5pt,yshift=-3.5pt]e)
-      ;
-    },
-    /cuboid/.search also={/tikz},
-    /cuboid/.cd,
-    width/.store in=\cubex,
-    height/.store in=\cubey,
-    depth/.store in=\cubez,
-    units/.store in=\cubeunits,
-    scale/.store in=\cubescale,
+    zangle/.store in=\cubezang,
+    xangle/.store in=\cubexang,
     width=10,
     height=10,
     depth=10,
@@ -282,49 +282,11 @@
     scale=.1,
   }
 
-  \pic at (-30:-7.5cm) {cuboid={width=2, height=3, depth=2, scale=0.15, units=cm}};
-  % add a text node above the cuboid
+  \pic at (-30:-7.5cm) {camera={width=2, height=3, depth=2.5, scale=0.15, units=cm, zangle=30, xangle=10}};
   \node[above] at ($(-30:-7.5cm)+(0, 0.5cm)$) {camera};
-
-  \begin{scope}[
-    shift=(-30:-7.5cm),
-    scale=0.1,
-    plane x={(0,0,-1)},
-    plane y={(0,1,0)},
-    canvas is plane]
-
-    %  \draw (-4,-3) rectangle (4,3) node[above] {camera};
-    
-  \end{scope}
 
 \end{tikzpicture}
 }
-
-% \tikzfig\verb>>>|
-% \begin{tikzpicture}
-%     % Draw the sclera (white part of the eye)
-%     \fill[white] (0,0) ellipse (2 and 1);
-
-%     % Draw the iris
-%     \fill[blue] (1,0) circle (0.5);
-
-%     % Draw the pupil
-%     \fill[black] (1,0) circle (0.2);
-
-%     % Draw highlights
-%     \fill[white] (0.8,0.2) circle (0.05);
-%     \fill[white] (1.1,-0.1) circle (0.03);
-
-%     % Draw the upper eyelid
-%     \draw[thick] (-2,0) arc[start angle=180, end angle=360, x radius=2, y radius=1];
-
-%     % Draw the lower eyelid
-%     \draw[thick] (-2,0) arc[start angle=180, end angle=0, x radius=2, y radius=1];
-
-%     % Optionally, draw the outline of the eye
-%     \draw (0,0) ellipse (2 and 1);
-% \end{tikzpicture}
-% >>>
 
 % \tikzfig\verb>>>|
 % \colorlet{mydarkblue}{blue!40!black}
