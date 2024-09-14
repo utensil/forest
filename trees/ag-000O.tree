@@ -254,7 +254,7 @@
       %   \lenslength = 0.5*\cubescale*\cubex;
       %   \lensradius = 0.2*\cubescale*\cubey;
       % }
-      % \coordinate (lens/center) at ($(o)!0.5!(e)$);
+      \coordinate (lens/center) at ($(o)!0.4!(e)+(0, -0.1*\cubescale*\cubey,0)$);
       % \draw (lens/center) circle [name path=lensback,radius=\lensradius,canvas is yz plane at x=0];
       % \coordinate (lens/nosecenter) at ($(lens/center)+(\lenslength,0,0)$);
       % \draw (lens/nosecenter) circle [name path=lensfront,radius=\lensradius,canvas is yz plane at x=0];
@@ -262,7 +262,7 @@
       % \draw (lens/center) ++(0,-\lensradius,0) -- ($(lens/nosecenter)+(0,-\lensradius,0)$);
 
       \node [cylinder, cylinder uses custom fill, cylinder end fill=white,
-         cylinder body fill=white,draw,shape aspect=\aspect,inner xsep=3.5*\cubescale*\cubey, inner ysep=8.0*\cubescale*\cubey] at ($(o)!0.5!(e)$) {};
+         cylinder body fill=white,draw,shape aspect=\aspect,inner xsep=3.5*\cubescale*\cubey, inner ysep=9.0*\cubescale*\cubey,rotate=-\cubexang] at (lens/center) {};
 
       \end{scope}
     },
@@ -282,7 +282,7 @@
     scale=.1,
   }
 
-  \pic at (-30:-7.5cm) {camera={width=2, height=3, depth=2.5, scale=0.15, units=cm, zangle=30, xangle=10}};
+  \pic at (-30:-7.5cm) {camera={width=1.5, height=2.5, depth=3, scale=0.15, units=cm, zangle=30, xangle=20}};
   \node[above] at ($(-30:-7.5cm)+(0, 0.5cm)$) {camera};
 
 \end{tikzpicture}
