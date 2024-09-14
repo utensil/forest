@@ -51,8 +51,13 @@
 % uts mod end
 \tikzset{region/.style={rectangle,draw=black,fill=black!10, rounded corners}}
 
+% uts mod begin
 \pgfdeclarelayer{background}
-\pgfsetlayers{background,main}
+\pgfdeclarelayer{foreground}
+\pgfsetlayers{background,main,foreground}
+% uts mod end
+% \pgfdeclarelayer{background}
+% \pgfsetlayers{background,main}
 
 \newcommand{\strbounds}[2]{
  \path[use as bounding box, clip] (0,0) rectangle (#1,#2) }
