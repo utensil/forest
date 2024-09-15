@@ -48,7 +48,7 @@ function prep_wasm {
     # only run wasm-pack build in CI or for `dev.sh`, so other people would not need Rust dependencies
     if [ -n "$CI" ] || [ -n "$UTS_DEV" ]; then
         if [ ! -d "lib/$lib_path/pkg" ]; then
-            (cd lib/$lib_path && bunx wasm-pack build --target web --release . --out-dir pkg)
+            (cd lib/$lib_path && bunx wasm-pack -v build --target web --release . --out-dir pkg)
         fi
     else
         # echo warning emoji
