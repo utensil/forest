@@ -32,6 +32,30 @@
  }
 }
 
+\p{\code{texalg[body]}: An algorithm rendered by LaTeX.}
+
+\def\texalg[body]{%
+ \scope{%
+  \put?\base/tex-preamble{%
+  %  \latex-preamble/diagrams%
+  %  \latex-preamble/string-diagrams%
+    \latex-preamble/algorithms
+  }%
+  \put?\base/extra-preamble{}%
+  \tex{\get\base/tex-preamble\get\base/extra-preamble}{\body}%
+ }
+}
+
+\def\minialg[body]{
+ \texalg{
+    \begin{minipage}{0.9\linewidth}
+    % \vspace{4ex}
+    % \setlength{\parskip}{3ex plus 0.5ex minus 0.2ex}
+    \body
+    \end{minipage}
+  }
+}
+
 \p{\code{proof[body]}: A proof block that's NOT part of the TOC.}
 
 \def\proof[body]{

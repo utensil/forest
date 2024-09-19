@@ -1,0 +1,48 @@
+% deps
+\usepackage{amsmath,amsfonts}
+\usepackage{graphicx}
+% \usepackage{kvoptions}
+% \usepackage{algorithmicx}
+% \usepackage{etoolbox}
+% \usepackage{fifo-stack}
+% \usepackage{varwidth}
+% \usepackage{tabto}
+% \usepackage{totcount}
+\usepackage{tikz}
+\usetikzlibrary{calc,fit,tikzmark}
+\usepackage{tabto}
+\TabPositions{1.5cm} % Adjust as needed!
+
+% algpseudocodex works as a drop-in replacement for algorithmic, with enhancements
+\usepackage[endComment={\quad}]{algpseudocodex} % endComment for avoiding cropping the end of comment
+% weirdly, the indent line is not working
+\tikzset{algpxIndentLine/.style={draw=gray,very thin}}
+
+
+% pseudo seems to be very straightforward
+\usepackage[kw]{pseudo}
+\pseudoset{label={\color{gray} \small\arabic*},ct-left=$\triangleright$} % indent-mark,line-height=0.5,
+
+% algorithm somehow not working
+% \usepackage{algorithm}
+% instead, we use tcolorbox, adapted from doc of package pseudo
+\usepackage{tcolorbox}
+\tcbuselibrary{skins}
+\tcbuselibrary{theorems}
+\newtcbtheorem{algorithm}{Algorithm}{pseudo/ruled, float}{alg}
+
+% fill out entire line, adapted from doc of package pseudo
+\usepackage{tabularx}
+\pseudodefinestyle{fullwidth}{
+begin-tabular =
+\tabularx{\linewidth}[t]{@{}
+r % Labels
+>{\pseudosetup} % Indent, font, ...
+X % Code (flexible)
+>{\leavevmode\small\color{gray}} % Comment styling
+p{0.5\linewidth} % Comments (fixed)
+@{}},
+end-tabular = \endtabularx,
+setup-append = \RestorePseudoEq
+}
+
