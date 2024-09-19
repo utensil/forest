@@ -1,0 +1,55 @@
+\import{cg-macros}
+% clifford hopf spin tt ag math draft cg
+\tag{cg}
+
+% definition theorem lemma construction observation
+% convention corollary axiom example exercise proof
+% discussion remark notation
+% \taxon{}
+% \refcardt{lemma}{}{}{}{
+
+% kostecki2011introduction leinster2016basic nakahira2023diagrammatic rosiak2022sheaf
+
+% cox1997ideals gathmann2013commutative hart1996sphere gillespie2024ray winchenbach2024lipschitz
+
+\def\alg/input[x]{\textbf{Input:} \x \\ }
+\def\alg/inputc[x]{\phantom{\textbf{Input:}} \x \\ }
+\def\alg/param[x]{\textbf{Parameters:} \x \\ }
+\def\alg/paramc[x]{\phantom{\textbf{Parameters:}} \x \\ }
+\def\alg/output[x]{\textbf{Output:} \x \\ }
+\def\alg/outputc[x]{\phantom{\textbf{Output:}} \x \\ }
+
+\def\ro{\mathbf{r}_o}
+\def\rd{\mathbf{r}_d}
+\def\rt{\mathbf{r}_t}
+\def\dt{\Delta t}
+\def\eps{\varepsilon}
+\def\tmax{t_{\max}}
+
+\card{algorithm}{ray marching (naïve)}{
+\minialg{
+% \begin{algorithm*}{Ray marching (naive)}{}
+\alg/input{$\ro \in \RR^3$, ray origin}
+\alg/inputc{$\rd \in \RR^3$, unit ray direction}
+\alg/inputc{$f: \RR^3 \to \RR$, implicit surface function}
+\alg/param{$\dt$, step size}
+\alg/paramc{$\eps>0$, stopping tolerance}
+\alg/paramc{$\tmax>0$, maximum ray time}
+\alg/output{$t^*$, the time of the first intersection, $\tmax$ if no intersection occurs}
+\begin{algorithmic}
+    \Procedure{RayMarch}{$\ro,\rd,f;\dt, \eps,\tmax$}
+        \State $t \gets 0$
+        \While{$t < \tmax $}
+            \State $\rt \gets \ro + t \rd $  \Comment{current point along ray}
+            \State $f_t \gets f(\rt)$        \Comment{current function value}
+            \If{$f_t < \eps$}                \Comment{stopping condition}
+                \State \textbf{return} $t$
+            \EndIf
+            \State $t \gets t + \dt$         \Comment{take step}
+        \EndWhile
+        \State \textbf{return} $\tmax$       \Comment{ray does not hit surface}
+    \EndProcedure
+\end{algorithmic}
+% \end{algorithm*}
+}
+}
