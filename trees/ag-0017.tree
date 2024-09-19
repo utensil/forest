@@ -1,0 +1,67 @@
+\import{cg-macros}
+% clifford hopf spin tt ag math draft cg
+\tag{cg}
+
+\taxon{figure}
+
+\title{SDF for a sphere}
+
+\def\myball{
+  \patch{\ball/new}{
+    [radius]{1.5cm}
+    [center/label]{\point{o}}
+  }
+}
+
+\def\point/p{
+  \patch{\point/new}{
+    [radius]{3cm}
+    [angle]{150}
+    [label]{\point{p}}
+  }
+}
+
+\def\measure/d{
+  \patch{\measure/new}{
+    [start]{I}
+    [end]{P}
+    [label]{d}
+    [label/pos]{0.6}
+    [mark/length]{1cm}
+  }
+}
+
+\figure{
+\tikzfig{
+\tikzset{>=latex}
+\begin{tikzpicture}
+
+  \myball#draw/shadow
+  \myball#coord/center
+  \myball#draw/boundary
+  \myball#draw/body
+  \myball#draw/radius
+  \myball#draw/center
+  \myball#draw/center/label
+
+  \begin{pgfonlayer}{foreground}
+  \point/p#coord
+  \point/p#path/arrow
+  \point/p#draw/arrow
+  \point/p#draw/dot
+  \point/p#draw/label
+  \end{pgfonlayer}
+
+  % set Omega
+  \coordinate (ball/label) at (45:1.5*\myball#radius);
+  \draw ($(\myball#center/id)!0.5!(ball/label)$) -- ($(\myball#center/id)!0.8!(ball/label)$) node at (ball/label) {$\Omega$};
+
+  % intersection of arrow p and ball boundary
+  \path[name intersections={of=\myball#boundary/id and \point/p#arrow/id, by={I}}];
+
+  \measure/d#draw
+
+\end{tikzpicture}
+}
+
+}

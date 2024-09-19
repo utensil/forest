@@ -4,3 +4,126 @@
 \def\norm[x]{\normbar\x\normbar}
 
 \def\point[x]{\boldsymbol{\x}}
+
+
+\def\ball/new{
+  \object[self]{
+    [radius]{1cm}
+    [center]{(0,0)}
+    [center/id]{O}
+    [center/label]{O}
+    [color]{ball color = blue,opacity = 0.2}
+    [coord/center]{
+      \coordinate (\self#center/id) at \self#center;
+    }
+    [draw/center]{
+      \filldraw \self#center circle (1pt);
+    }
+    [draw/center/label]{
+      \node[above] at (\self#center/id) {\ensuremath{\self#center/label}};
+    }
+    [boundary/id]{\self#center/id\verb~|/~boundary}
+    [draw/boundary]{
+      \draw[name path=\self#boundary/id] \self#center circle [radius=\self#radius];
+    }
+    [shading/angle]{270}
+    [draw/body]{
+      \filldraw[white] \self#center circle [radius=\self#radius];
+      \shade[\self#color,shading angle=\self#shading/angle] \self#center circle [radius=\self#radius];
+    }
+    [draw/shadow]{
+      % note: shadow must be drawn before body, or we need to use layers
+      % \begin{pgfonlayer}{background}
+      \shade[inner color = gray,opacity = 0.8] ($\self#center + (-0.5*\self#radius,-0.9*\self#radius)$) ellipse [x radius=1.1*\self#radius, y radius=0.3*\self#radius];
+      % \end{pgfonlayer}
+    }
+    [radius/id]{R}
+    [radius/angle]{180}
+    [draw/radius]{
+      \coordinate (\self#radius/id) at (\self#radius/angle:\self#radius);
+      \draw[densely dashed] \self#center to [edge label = $r$] (\self#radius/id);
+    }
+  }
+}
+
+\def\point/new{
+  \object[self]{
+    [id]{P}
+    [label]{P}
+    [angle]{150}
+    [radius]{2cm}
+    [origin]{(0,0)}
+    [coord]{
+      \coordinate (\self#id) at ($\self#origin + (\self#angle:\self#radius)$);
+    }
+    [arrow/id]{\self#id\verb~|/~arrow}
+    [path/arrow]{
+      \path[name path=\self#arrow/id] \self#origin to (\self#id);
+    }
+    [draw/arrow]{
+      \draw[->,name path=\self#arrow/id] \self#origin to (\self#id);
+    }
+    [draw/dot]{
+      \filldraw (\self#id) circle (1pt);
+    }
+    [draw/label]{
+      \node[above] at (\self#id) {\ensuremath{\self#label}};
+    }
+  }
+}
+
+\def\measure/new{
+  \object[self]{
+    [start]{\point/new#id}
+    [end]{\point/new#id}
+    [id]{measure}
+    [mark/length]{1cm}
+    [mark/pos]{0.8}
+    [label]{d}
+    [label/pos]{0.5}
+    [draw]{
+      \tikzmath{
+        coordinate \dir, \vdir;
+        \dir = (\self#end) - (\self#start);
+        \vdirlen = {veclen(\dir)};
+        \vdir = (-\diry / \vdirlen * \self#mark/length, \dirx / \vdirlen * \self#mark/length);
+      }
+
+      \draw[densely dashed] (\self#start) -- ++(\vdir);
+      \draw[densely dashed] (\self#end) -- ++(\vdir);
+      \coordinate (\self#id\verb~|/~start) at ($(\self#start) + \self#mark/pos*(\vdir)$);
+      \coordinate (\self#id\verb~|/~end) at ($(\self#end) + \self#mark/pos*(\vdir)$);
+      \draw[<->,densely dashed] (\self#id\verb~|/~start) -- (\self#id\verb~|/~end) node[pos=\self#label/pos, below] {\ensuremath{\self#label}};
+    }
+  }
+}
+
+\def\screen/new{
+  \object[self]{
+    [center]{(0,0)}
+    [label]{screen}
+    [width]{8cm}
+    [height]{6cm}
+    [draw/body]{
+      \fill[color=gray!20,opacity=0.1] (-0.5*\self#width,-0.5*\self#height) rectangle (0.5*\self#width,0.5*\self#height);
+    }
+    [draw/border]{
+      \draw (-0.5*\self#width,-0.5*\self#height) rectangle (0.5*\self#width,0.5*\self#height);
+    }
+    [draw/label]{
+      \node[above] at (0,0.8*\self#height) {\self#label};
+    }
+  }
+}
+
+\def\camera/new{
+  \object[self]{
+    [width]{10}
+    [height]{10}
+    [depth]{10}
+    [scale]{0.1}
+    [units]{cm}
+    [draw]{
+    }
+  }
+}
