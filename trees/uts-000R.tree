@@ -94,4 +94,590 @@ We wish to use
 }
 }
 
+\block{render a complicated Typst file}{
+\p{Adapted from \link{https://utensil.github.io/blog/posts/typst-test/}, removed figures and bib for now, due to depending on external non-Typst files.
+}
+
+\typst-inline\verb>>>|
+// This is for adjusting the size so it can fit into the blog post
+#import "config.typ" : setup
+
+#let fulltext = [
+
+= Examples
+
+Paragraph 1.
+
+Paragraph 2.
+
+Paragraph 3 \
+with line break.
+
+== Simple content
+
+- *bold*
+- _emphasis_
+- `code`
+- "quotes"
+    - Indented
+    + numbered
+    + #lorem(10)
+    + #underline[underline]
+    + #text(orange, size: 0.8em)[orange smaller text]
+- #link("https://typst.app/docs/reference/")[link]
+- #[[]]
+
+```typ
+_fenced code block_ with *syntax highlighting*
+```
+
+#quote(block: true, attribution: "Me")[
+  We are not born to be doomed on one planet.
+]
+
+#quote(block: false, attribution: "Me")[
+  Never lose hope.
+]
+
+inline math: $a + b/c = sum_i x^i$
+
+display math:
+
+$
+7.32 beta +
+  sum_(i=0)^nabla
+    (Q_i (a_i - epsilon)) / 2
+$
+
+#set heading(numbering: "I.1:")
+
+== Figure
+
+#set heading(numbering: "1.1.")
+
+== Tables
+
+#set rect(height: 1em)
+
+#table(
+  columns: 2,
+  [Points], rect(width: 72pt),
+  [Millimeters], rect(width: 25.4mm),
+  [Centimeters], rect(width: 2.54cm),
+  [Inches], rect(width: 1in),
+  [Relative to font size], rect(width: 6.5em)
+)
+
+== Show rules
+
+#show "green text": text(green)[text]
+
+Here is some green text.
+
+#show emph: set text(blue)
+
+_emphasized_ text is now blue.
+
+#block[
+
+#show heading.where(level: 3): set align(center)
+
+=== centered heading
+
+#show heading.where(level: 4): it => {
+    set align(right)
+    set text(red)
+    // set heading(numbering: "1.I:") // not working
+    block(it.body)
+    //it
+}
+
+==== red heading
+
+#let apply-template(body, name: "My document") = {
+  show heading.where(level: 4): emph
+  set heading(numbering: "1.1")
+
+  align(center, text(name, size: 2em))
+
+  body
+}
+
+#show: apply-template.with(name: "Report")
+
+#lorem(20)
+
+]
+
+#box(stroke: red, inset: 1em)[Box text]
+#block(stroke: red, inset: 1em)[Block text]
+
+#set rect(height: auto)  // without auto, would be affected by the rect height
+
+#rect[Rect text]
+
+#figure(
+  text(size: 5em)[I],
+  caption: [I'm cool, right?],
+)
+
+Horizontal #h(1cm) spacing.
+#v(1cm)
+And some vertical too!
+
+Double font size: #box(stroke: red, baseline: 40%, height: 2em, width: 2em)
+
+This line width is 50% of the box width: #box(stroke: red, width: 4em, inset: (y: 0.5em), line(length: 50%))
+
+
+Single fraction length just takes maximum size possible to fill the parent:
+
+Left #h(1fr) Right
+
+#rect(height: 1em)[
+  #h(1fr)
+]
+
+If you use several fractions inside one parent, they will take all remaining space proportional to their number:
+
+Left #h(1fr) Left-ish #h(2fr) Right
+
+
+#block(
+    fill: luma(230),
+    inset: 8pt,
+    radius: 4pt,
+    width: 100%,
+    height: 200pt,
+    [
+        #place(
+            top + right, // place at the page right and top
+            square(
+                width: 20pt,
+                stroke: 2pt + blue
+            ),
+        )
+
+        #let note(where, body) = place(
+            center + where,
+            float: true,
+            clearance: 6pt,
+            rect(body),
+        )
+
+        #lorem(10)
+        #note(bottom)[Bottom 1]
+        #note(bottom)[Bottom 2]
+        #lorem(10)
+        #note(top)[Top]
+        #lorem(10)
+
+        #for i in range(16) {
+            let amount = i * 6pt
+            place(center, dx: 2*amount - 32pt, dy: -0.2*amount)[A]
+        }
+
+        #rect(inset: 0pt, move(
+            dx: 6pt, dy: 6pt,
+            rect(
+                inset: 8pt,
+                fill: white,
+                stroke: black,
+                [Abra cadabra]
+            )
+        ))
+    ]
+)
+
+This is mirrored.
+
+#scale(y: -100%)[This is mirrored.]
+
+#scale(200%, origin: bottom + left)[This is enlarged.]
+#scale(200%, origin: top + left, text(blue)[This is enlarged \ and eats what follows.])
+
+#lorem(20)
+
+#hide(lorem(20)) Something is hidden before this but occupies space.
+
+The rest are shown in two columns except for this paragraph. #lorem(10)
+
+#block[
+
+#show: rest => columns(2, rest)
+
+#lorem(20)
+
+#colbreak()
+
+#lorem(20)
+
+#colbreak()
+
+// #show: rest => columns(1, rest) // not working
+
+]
+
+== Scripting
+
+#table(
+    columns: 2,
+    fill: (x, y) => if x+y == 2 { yellow } else if x + y == 3 { red } else { blue.lighten(50%) },
+    ..for i in range(5) {
+        for j in range(2) {
+            (text(str(i + j)),)
+        }
+    }
+)
+
+#let f = (name) => "Hello, " + name
+
+#f("Typst function!")
+
+#let g(name) = "Hello, " + name
+
+#g("Typst function shorthand!")
+
+By default braces return anything that "returns" into them.
+
+#let h() = {
+    "Str1"
+
+    [Str2]
+
+    lorem(5)
+}
+
+#h()
+
+#let i() = {
+    "Str1"
+
+    return "Str"
+}
+
+#i()
+
+#let j(name: "Typst function with default value") = "Hello, " + name + "."
+
+#j()
+
+
+#j(name: "Typst function with named argument")
+
+
+#(type([content]) == content)
+
+#repr([It is _content_!])
+
+#repr(none)
+
+=== String
+
+#let s = "another small string"
+#s.replace("a", sym.alpha) \
+#s.split(" ") // split by space
+
+#(2 - 5) \
+#0xff \
+#0o10 \
+#0b1001
+
+#calc.pow(2, 10)
+
+=== List
+
+#let values = (1, 7, 4, -3, 2)
+
+#repr(values)
+
+#values.at(-1)
+
+#values.find(calc.even)
+
+#values.filter(calc.odd)
+
+#()
+
+=== Dict
+
+#let dict = (
+  name: "Typst",
+  born: 2019,
+)
+
+#repr(dict)
+
+#dict.at("born")
+
+#dict.insert("city", "Berlin ")
+
+#("name" in dict)
+
+#(:)
+
+=== Conditions & loops
+
+#let a = 5
+
+#if (a > 1 and a <= 4) or a == 5 [
+    `a` matches the condition
+]
+
+#let s = 0
+
+#for i in range(3, 6) {
+    s += i
+    [Number #i is added to sum. Now sum is #s.]
+}
+
+#let people = (Alice: 3, Bob: 5)
+
+#for (name, value) in people [
+    #name has #value apples.
+]
+
+#let text-params = (fill: blue, size: 0.8em)
+
+Some #text(..text-params)[text].
+
+#let f(..args) = [
+  #args.pos()\
+  #args.named()
+]
+
+#f(1, "a", width: 50%, block: false)
+
+=== State
+
+#let s = state("x", 0)
+#let compute(expr) = [
+  #s.update(x =>
+    eval(expr.replace("x", str(x)))
+  )
+  New value is #context s.get().
+]
+
+#compute("10") \
+#compute("x + 3") \
+#compute("x * 2") \
+#compute("x - 5")
+
+Value at `<here>` is
+#context s.at(<here>)
+
+#compute("10") \
+#compute("x + 3") \
+*Here.* <here> \
+#compute("x * 2") \
+#compute("x - 5")
+
+=== Math  <math>
+
+$
+forall v, w in V, alpha in KK: alpha dot (v + w) = alpha v + alpha w \
+
+// cont — contour
+integral, integral.cont, integral.double, integral.square, sum.integral \
+
+// lt — less than, gt — greater than
+lt, lt.circle, lt.curly, lt.eq, lt.eq.curly, lt.not, lt.eq.not, lt.eq.not.curly, gt, lt.gt.eq, lt.gt.not \
+
+gt.nequiv, gt.napprox, gt.ntilde, gt.tilde.not \
+
+arrow.b, triangle.r, angle.l \
+
+plus.circle.big plus.circle, times.circle.big plus.circle \
+
+square, square.filled, diamond.filled, arrow.filled \
+
+alpha, Alpha, beta, Beta, beta.alt, gamma, pi, Pi,\
+pi.alt, phi, phi.alt, Phi, omicron, kappa, kappa.alt, Psi,\
+theta, theta.alt, xi, zeta, rho, rho.alt, kai, Kai,\
+
+bb(A), AA, bb(1) \
+
+nothing, nothing.rev, diameter \
+$
+
+#show math.equation: set text(features: ("cv01",))
+
+$
+nothing, nothing.rev, diameter
+$
+
+#show math.nothing: math.diameter
+
+$
+nothing, nothing.rev, diameter
+$
+
+$
+
+(a^2 + b^2)/2 \
+
+{[((a + b)/2) + 1]_0} \
+
+lr([a/2, b), size: #150%) \
+
+abs(a + b), norm(a + b), floor(a + b), ceil(a + b), round(a + b) \
+
+
+
+$
+
+// #block[
+
+// #show math.equation: set align(right)
+
+// $
+// (a + b)/2
+// $
+
+// ]
+
+// the above is not working
+
+#align(center, block($ x = 5 $))
+
+$ (3x + y) / 7 &= 9 && "given" \
+  3x + y &= 63 && "multiply by 7" \
+  3x &= 63 - y && "subtract y" \
+  x &= 21 - y/3 && "divide by 3" $
+
+#show math.integral: math.limits
+#show math.sum: math.limits
+
+$
+sum_a^b \
+
+integral_a^b \
+
+scripts(sum)_a^b \
+
+a =_"By lemme 1" b, a scripts(=)_+ b \
+
+arccos, arcsin, arctan, arg, cos, cosh, cot, coth, csc,\
+csch, ctg, deg, det, dim, exp, gcd, hom, id, im, inf, ker,\
+lg, lim, liminf, limsup, ln, log, max, min, mod, Pr, sec,\
+sech, sin, sinc, sinh, sup, tan, tanh, tg "and" tr \
+$
+
+#let arcsinh = math.op("arcsinh")
+
+$
+arcsinh x
+$
+
+#let liminf = math.op(math.underline(math.lim), limits: true)
+#let limsup = math.op(math.overline(math.lim), limits: true)
+#let integrate = math.op($integral dif x$)
+
+$
+liminf_(x->oo)\
+limsup_(x->oo)\
+integrate x^2
+$
+
+Inline, but like true display: $display(sum_0^oo e^x^a)$
+
+$
+vec(a, b, c) + vec(1, 2, 3) = vec(a + 1, b + 2, c + 3) \
+
+vec(1, 2, 3, delim: "{") \
+vec(1, 2, 3, delim: "||") \
+vec(1, 2, 3, delim: #none) \
+
+vec(a, b, c)
+vec(a, b, c, gap:#0em)
+vec(a, b, c, gap:#1em) \
+
+mat(
+    1, 2, ..., 10;
+    2, 2, ..., 10;
+    dots.v, dots.v, dots.down, dots.v;
+    10, 10, ..., 10; // `;` in the end is optional
+) \
+
+mat(
+    delim: "|",
+    1, 2, ..., 10;
+    2, 2, ..., 10;
+    dots.v, dots.v, dots.down, dots.v;
+    10, 10, ..., 10;
+    gap: #0.3em
+) \
+
+$'
+
+#set math.equation(numbering: "(1)")
+
+#for klass in ("normal",
+                "punctuation",
+                "opening",
+                "closing",
+                "fence",
+                "large",
+                "relation",
+                "unary",
+                "binary",
+                "vary"
+                ) {
+    align(center, block[
+        #show math.circle: math.class.with(klass)
+
+        $
+        text(#klass : )
+        class("normal", a) class(#klass, b) class("normal", c) quad square circle square
+        $
+    ])
+
+}
+
+#align(center, block(width: 7em)[
+
+// Cruel and world are separated.
+// Imagine this is a phrase that can't be split, what to do then?
+Hello cruel world
+
+// Let's connect them with a special space!
+
+// No usual spacing is allowed, so either use semicolumn...
+Hello cruel#sym.space.nobreak;world
+
+// ...parentheses...
+Hello cruel#(sym.space.nobreak)world
+
+// ...or unicode code
+Hello cruel\u{00a0}world
+
+// Well, to achieve the same effect I recommend using box:
+Hello #box[cruel world]
+
+])
+
+#align(center, block(width: 5em)[
+
+This is an $i$-th element.
+
+This is an $i$\u{2011}th element.
+
+// the best way would be
+#show "-th": "\u{2011}th"
+
+This is an $i$-th element.
+
+])
+
+== Bibliography and Citation Style
+
+Goes back to @math .
+
+]
+
+#show : setup(fulltext)
+
+>>>
+}
+
 }
