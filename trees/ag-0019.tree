@@ -1,0 +1,80 @@
+\import{cg-macros}
+% clifford hopf spin tt ag math draft cg
+\tag{cg}
+
+% definition theorem lemma construction observation
+% convention corollary axiom example exercise proof
+% discussion remark notation
+% \taxon{}
+% \refcardt{lemma}{}{}{}{
+
+% kostecki2011introduction leinster2016basic nakahira2023diagrammatic rosiak2022sheaf
+
+% cox1997ideals gathmann2013commutative hart1996sphere gillespie2024ray winchenbach2024lipschitz
+
+\card{example}{ray marching (naïve)}{
+
+\figure{
+\shadertoy{ }\verb>>>|
+float sdSphere(vec3 p, float r)
+{
+  return length(p) - r;
+}
+
+float sdScene(in vec3 pos) {
+    return sdSphere(pos, 1.0);
+}
+
+#define EPSILON 0.01
+#define T_MAX 10.0
+#define DELTA_T 0.1
+#define SDF_FUNCTION sdScene
+
+float rayMarch(in vec3 ro, in vec3 rd) {
+
+    float t = 0.0;
+
+    while(t < T_MAX) {
+        vec3 rt = ro + t * rd;
+        float ft = SDF_FUNCTION(rt);
+        
+        if(ft < EPSILON) return t;
+
+        t += DELTA_T;
+    }
+    
+    return T_MAX;
+}
+
+void mainImage(out vec4 pixelColor, in vec2 pixelCoordinate) {
+    
+    float aspect = iResolution.x/iResolution.y;
+    
+    vec2 uv = pixelCoordinate/iResolution.xy;
+    
+    uv -= vec2(0.5, 0.5);
+    uv *= 2.0 * vec2(aspect, 1.0);
+
+    float observerDistance = 8.0;
+    
+    vec3 observerPosition = vec3(0.0, 0.0, -observerDistance);
+    
+    vec3 cameraBox = observerPosition + vec3(uv, 5.0);
+    
+    vec3 rayDirection = normalize(cameraBox - observerPosition);
+
+    float t = rayMarch(observerPosition, rayDirection);
+
+    float hit = t != T_MAX ? 1.0 : 0.0;
+
+    float baseRatio = 0.65;
+
+    float distRatio = baseRatio + smoothstep(0.0, 1.0-baseRatio, 1.0 - t / observerDistance);
+
+    pixelColor = vec4(hit * distRatio * vec3(1.0), hit);
+}
+>>>
+\figcaption{simplified from [zmcbeth's Raymarch 3.0](https://www.shadertoy.com/view/mtyyWt)}
+}
+
+}
