@@ -32,21 +32,21 @@
 \alg/input{$\ro \in \RR^3$, ray origin}
 \alg/inputc{$\rd \in \RR^3$, unit ray direction}
 \alg/inputc{$f: \RR^3 \to \RR$, implicit surface function}
-\alg/param{$\dt$, step size}
+\alg/param{$\dt>0$, a fixed step size}
 \alg/paramc{$\eps>0$, stopping tolerance}
 \alg/paramc{$\tmax>0$, maximum ray time}
 \alg/output{$t^*$, the time of the first intersection, $\tmax$ if no intersection occurs}
 \begin{algorithmic}
     \Procedure{RayMarch}{$\ro,\rd,f;\dt, \eps,\tmax$}
         \State $t \gets 0$
-        \While{$t < \tmax $}
+        \Repeat
             \State $\rt \gets \ro + t \rd $  \Comment{current point along ray}
             \State $f_t \gets f(\rt)$        \Comment{current function value}
             \If{$f_t < \eps$}                \Comment{stopping condition}
                 \State \textbf{return} $t$
             \EndIf
             \State $t \gets t + \dt$         \Comment{take step}
-        \EndWhile
+        \Until{$t \ge \tmax $}
         \State \textbf{return} $\tmax$       \Comment{ray does not hit surface}
     \EndProcedure
 \end{algorithmic}

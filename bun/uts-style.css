@@ -300,11 +300,35 @@ section[data-taxon="Figure"] {
     background-color: unset;
 }
 
-section[data-taxon="Figure"].block:hover {
-    background-color: rgba(0, 100, 255, 0.04);
+section[data-taxon="Algorithm"] {
+    --taxon-color: var(--uts-text);
+    border-left: unset;
+    background-color: unset;
+    border-radius: unset;
+    border-top: 3px solid var(--taxon-color);
+    border-bottom: 1px solid var(--taxon-color);
+    margin-left: 1em;
+    margin-right: 1em;
+    padding: 0px 0px 0px 0px;
+
+    summary {
+        border-bottom: 1px solid var(--taxon-color);
+        padding-top: 3ex;
+        padding-bottom: 3ex;
+
+        /* h1 {
+            padding-left: 1em;
+            padding-right: 1em;
+        } */
+    }
+
+    figure {
+        margin-left: 0px;
+        margin-right: 0px;
+    }
 }
 
-section[data-taxon="Proof"].block:hover {
+section[data-taxon="Figure"].block:hover, section[data-taxon="Proof"].block:hover, section[data-taxon="Algorithm"].block:hover {
     background-color: rgba(0, 100, 255, 0.04);
 }
 
