@@ -718,3 +718,21 @@ code.highlight, code.highlight code {
         position: relative !important;
     }
 }
+
+.shadertoywithcode {
+    details {
+        cursor: pointer;
+
+        summary::after {
+            content: " \25B8";
+            font-size: 80%;
+            color: var(--uts-text-gentle);
+        }
+    }
+
+    details[open] {
+        summary::after {
+            content: " \25BE";
+        }
+    }
+}
