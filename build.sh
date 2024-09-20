@@ -40,9 +40,13 @@ function prep_wasm {
     mkdir -p lib
     lib_name=$1
     url=$2
-    lib_path=${3:-$lib_name}
+    hash=$3
+    lib_path=${4:-$lib_name}
     if [ ! -d "lib/$lib_name" ]; then
         git clone --depth 1 $url lib/$lib_name
+        if [ -n "$hash" ]; then
+            (cd lib/$lib_name && git fetch --depth 1 origin $hash && git checkout $hash)
+        fi
     fi
 
     # only run wasm-pack build in CI or for `dev.sh`, so other people would not need Rust dependencies
@@ -65,8 +69,8 @@ function bun_build {
     fi
 
     mkdir -p output
-    prep_wasm wgputoy https://github.com/compute-toys/wgpu-compute-toy.git
-    prep_wasm egglog https://github.com/egraphs-good/egglog.git egglog/web-demo
+    prep_wasm wgputoy https://github.com/compute-toys/wgpu-compute-toy.git 3fee2f5d9441aa4c55ea9e7a0b6a1daa21e8e874
+    prep_wasm egglog https://github.com/egraphs-good/egglog.git 8d9b10ec712106b21d10b7bf45d10c0f9d1d09c7 egglog/web-demo
     # failed: 
     # prep_wasm nalgebra https://github.com/dimforge/nalgebra
 
