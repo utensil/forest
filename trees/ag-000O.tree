@@ -5,7 +5,7 @@
 
 \taxon{figure}
 
-\title{ray trace diagram}
+\title{ray marching (naïve)}
 
 \let\ball/screen{
   \patch{\ball/new}{
@@ -34,30 +34,70 @@
 
 \begin{tikzpicture}
 
-  \myball#draw/shadow
   \myball#coord/center
   \myball#draw/boundary
   \myball#draw/body
-  \myball#draw/radius
-  \myball#draw/center
-  \myball#draw/center/label
+  \begin{pgfonlayer}{background}
+  \myball#draw/shadow
+  \end{pgfonlayer}
 
+  % \myball#draw/radius
+  % \myball#draw/center
+  % \myball#draw/center/label
+
+  \let\point/p0{
+    \patch{\point/new}[self]{
+      [id]{p0}
+      [label]{p_0}
+      [radius]{7cm}
+      [angle]{150}
+      [draw]{
+        \self#coord
+        \self#path/arrow
+        \self#draw/dot
+        \self#draw/label
+      }
+    }
+  }
+  \let\point/p1{\patch{\point/p0}{[id]{p1}[label]{p_1}[radius]{5cm}}}
+  \let\point/p2{\patch{\point/p0}{[id]{p2}[label]{p_2}[radius]{3cm}}}
+  \let\point/p3{\patch{\point/p0}{[id]{p3}[label]{p_3}[radius]{1cm}}}
+
+  \point/p0#draw
   \begin{pgfonlayer}{foreground}
-  \point/p#coord
-  \point/p#path/arrow
-  % \point/p#draw/arrow
-  \point/p#draw/dot
-  \point/p#draw/label
+  \point/p1#draw
+  \point/p2#draw
+  \point/p3#draw
   \end{pgfonlayer}
 
   % set Omega
-  \coordinate (ball/label) at (45:1.5*\myball#radius);
-  \draw ($(\myball#center/id)!0.5!(ball/label)$) -- ($(\myball#center/id)!0.8!(ball/label)$) node at (ball/label) {$\Omega$};
+  % \coordinate (ball/label) at (45:1.5*\myball#radius);
+  % \draw ($(\myball#center/id)!0.5!(ball/label)$) -- ($(\myball#center/id)!0.8!(ball/label)$) node at (ball/label) {$\Omega$};
 
   % intersection of arrow p and ball boundary
-  \path[name intersections={of=\myball#boundary/id and \point/p#arrow/id, by={I}}];
+  \path[name intersections={of=\myball#boundary/id and \point/p0#arrow/id, by={I}}];
 
-  \measure/d#draw
+  \let\dt{\Delta t}
+
+  \let\measure/p01{
+    \patch{\measure/new}{
+      [id]{p01}
+      [start]{p0}
+      [end]{p1}
+      [label]{\dt}
+      [label/pos]{0.5}
+      [mark/length]{1cm}
+    }
+  }
+  
+  \let\measure/p12{\patch{\measure/p01}{[id]{p12}[start]{p1}[end]{p2}}}
+  \let\measure/p23{\patch{\measure/p01}{[id]{p23}[start]{p2}[end]{p3}}}
+
+  \begin{pgfonlayer}{foreground}
+  \measure/p01#draw
+  \measure/p12#draw
+  \measure/p23#draw
+  \end{pgfonlayer}
 
   \begin{scope}[
     shift=(-30:-5cm),
@@ -153,9 +193,52 @@
     scale=.1,
   }
 
-  \coordinate (camera) at (-30:-7.6cm);
+  \coordinate (camera) at (-30:-7.8cm);
   \pic at (camera) {camera={width=1.5, height=2.5, depth=3, scale=0.15, units=cm, zangle=30, xangle=20}};
   \node[above] at ($(camera)+(0, 0.5cm)$) {\point/camera#label};
+
+  \tikzset{
+      lightbulb/.pic={
+          \tikzset{%
+            /lightbulb/.cd,
+            #1
+          }
+          \begin{scope}[scale=\lightbulbscale, rotate=\lightbulbangle]
+          % Base of the light bulb
+          \draw[fill=gray] (-0.5,0) rectangle (0.5,0.6);
+          
+          % Screw threads
+          \foreach \y in {0.2, 0.4} {
+              \draw (-0.5,\y) -- (0.5,\y);
+          }
+          
+          % Contact point
+          \draw[fill=black] (0,0) circle (0.1);
+          
+          % Filament
+          \draw[thick] (0,1) -- (0,1.5);
+          \draw[thick] (-0.2,1.5) -- (0.2,1.5);
+          \draw[thick] (-0.2,1.5) arc[start angle=180, end angle=0, radius=0.2];
+          
+          % Bulb
+          \draw[thick] (1,1.5) arc[start angle=0, end angle=180, radius=1];
+          \draw[thick] (-1,1.5) to[out=-90, in=90] (-0.5,0.6);
+          \draw[thick] (1,1.5) to[out=-90, in=90] (0.5,0.6);
+          \end{scope}
+      },
+      /lightbulb/.search also={/tikz},
+      /lightbulb/.cd,
+      scale/.store in=\lightbulbscale,
+      angle/.store in=\lightbulbangle,
+      scale=1,
+      angle=0,
+  }
+
+  \coordinate (lightbulb) at (60:5cm);
+  \pic at (lightbulb) {lightbulb={scale=0.2,angle=150}};
+  \begin{pgfonlayer}{background}
+    \draw[photon] ($\myball#center + (-1*\myball#radius,-0.9*\myball#radius)$) -- (60:4.4cm);
+  \end{pgfonlayer}
 
 \end{tikzpicture}
 }
