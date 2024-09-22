@@ -197,8 +197,33 @@ snake,amplitude=.4mm,segment length=2.5mm,post length=1mm}]
     scale=.1,
   }
 
-  \coordinate (camera) at (-30:-7.8cm);
+  \tikzset{
+      eye/.pic={
+          \tikzmath{
+            \halfangle = 30;
+            \radius = 1.5;
+            \arcradius = \radius * 0.7;
+            \pupillong = 0.3;
+            \pupilshort = 0.15;
+            \pupilpos = \arcradius - \pupilshort;
+          }
+          % Upper line of the eye
+          \draw (0,0) -- (\halfangle:\radius);
+          
+          % Lower line of the eye
+          \draw (0,0) -- (-\halfangle:\radius);
+          
+          % Arc for the eye shape
+          \draw (\halfangle:\arcradius) arc[start angle=\halfangle, end angle=-\halfangle, radius=\arcradius];
+          
+          % Filled ellipse for the pupil
+          \fill (0:\pupilpos) ellipse[x radius=\pupilshort, y radius=\pupillong];
+      }
+  }
+
+  \coordinate (camera) at (-30:-7.6cm);
   \pic at (camera) {camera={width=1.5, height=2.5, depth=3, scale=0.15, units=cm, zangle=30, xangle=20}};
+  % \pic[rotate=-30,scale=0.4] at (camera) {eye};
   \node[above] at ($(camera)+(0, 0.5cm)$) {\point/camera#label};
 
   \tikzset{
@@ -238,13 +263,25 @@ snake,amplitude=.4mm,segment length=2.5mm,post length=1mm}]
       angle=0,
   }
 
+  \tikzset{
+      sun/.pic={
+          % Waving boundary for the rays
+          \foreach \angle in {0,30,...,330} {
+            \filldraw[thick, photoncol] (\angle:1) -- (\angle+15:1.5) -- (\angle+30:1) -- (\angle+45:1.5) -- (\angle+60:1);
+          }
+
+          % Core of the sun
+          \fill[orange] (0,0) circle (0.8);
+      }
+  }
+
   \coordinate (shadowro) at ($\myball#center + (-1.3*\myball#radius,-0.9*\myball#radius)$);
   \filldraw[photoncol] (shadowro) circle (1pt);
   \filldraw[photoncol] (I) circle (1pt);
   \node[below=0.3cm] at (shadowro) {\ensuremath{\text{\small shadow ray}}};
 
-  \coordinate (lightbulb) at (60:5cm);
-  \pic at (lightbulb) {lightbulb={scale=0.2,angle=150}};
+  \coordinate (lightbulb) at (60:4.8cm);
+  \pic[scale=0.2] at (lightbulb) {sun};
   \begin{pgfonlayer}{background}
     \draw[photon,->] (\point/p0#id) -- (shadowro);
     \draw[photon,->] (shadowro) -- (60:4.4cm);
