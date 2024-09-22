@@ -87,6 +87,7 @@
       [label]{\dt}
       [label/pos]{0.5}
       [mark/length]{1cm}
+      [style]{densely dashed,gray}
     }
   }
   
@@ -132,8 +133,8 @@
   \end{scope}
 
   \colorlet{photoncol}{yellow!60!orange!95!black}
-  \tikzstyle{photon}=[thick,line cap=round,photoncol,decorate,decoration={
-  snake,amplitude=.4mm,segment length=2.5mm,post length=0mm}]
+  \tikzstyle{photon}=[->,thick,line cap=round,photoncol,decorate,decoration={
+  snake,amplitude=.4mm,segment length=2.5mm,post length=1mm}]
 
   \begin{pgfonlayer}{background}
     \draw[photon] (\point/camera#id) -- (\ball/screen#center/id);

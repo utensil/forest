@@ -84,6 +84,7 @@
     [mark/pos]{0.8}
     [label]{d}
     [label/pos]{0.5}
+    [style]{densely dashed}
     [draw]{
       \tikzmath{
         coordinate \dir, \vdir;
@@ -92,11 +93,11 @@
         \vdir = (-\diry / \vdirlen * \self#mark/length, \dirx / \vdirlen * \self#mark/length);
       }
 
-      \draw[densely dashed] (\self#start) -- ++(\vdir);
-      \draw[densely dashed] (\self#end) -- ++(\vdir);
+      \draw[\self#style] (\self#start) -- ++(\vdir);
+      \draw[\self#style] (\self#end) -- ++(\vdir);
       \coordinate (\self#id\verb~|/~start) at ($(\self#start) + \self#mark/pos*(\vdir)$);
       \coordinate (\self#id\verb~|/~end) at ($(\self#end) + \self#mark/pos*(\vdir)$);
-      \draw[<->,densely dashed] (\self#id\verb~|/~start) -- (\self#id\verb~|/~end) node[pos=\self#label/pos, below] {\ensuremath{\self#label}};
+      \draw[<->,\self#style] (\self#id\verb~|/~start) -- (\self#id\verb~|/~end) node[pos=\self#label/pos, below] {\ensuremath{\self#label}};
     }
   }
 }
