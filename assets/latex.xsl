@@ -313,12 +313,27 @@
     <xsl:text>\end{lstlisting}</xsl:text>
   </xsl:template>
 
+    <!-- https://stackoverflow.com/a/9612082/200764 -->
+    <xsl:variable name="vLower" select=
+    "'abcdefghijklmnopqrstuvwxyz'"/>
+    <xsl:variable name="vUpper" select=
+    "'ABCDEFGHIJKLMNOPQRSTUVWXYZ'"/>
+    <xsl:template name="capitalizeFirstLetter">
+        <xsl:param name="pText" select="."/>
+        <xsl:value-of select=
+        "concat(translate(substring($pText,1,1), $vLower, $vUpper),
+                substring($pText, 2)
+                )"/>
+    </xsl:template>
+
   <xsl:template match="html:span[@class='newvocab']">
     <xsl:text>\textbf{\color{blue}</xsl:text>
     <xsl:apply-templates />
     <xsl:text>}</xsl:text>
     <xsl:text>\index{</xsl:text>
-    <xsl:apply-templates />
+        <xsl:call-template name="capitalizeFirstLetter">
+            <xsl:with-param name="pText" select="."/>
+        </xsl:call-template>
     <xsl:text>}</xsl:text>
   </xsl:template>
 
