@@ -130,12 +130,12 @@
       \cy = -7 * sin(-30);
       \radius = sdf_two_circles(\cx, \cy);
       int \k;
-      for \k in {1,...,10} {
+      for \k in {0,...,10} {
         if \radius > 0 then {
           {
             \filldraw (\cx, \cy) circle (1pt);
             \draw[gray,densely dashed,very thin] (\cx, \cy) circle (\radius);
-            \node[below,gray] at (\cx, \cy) { \ensuremath{r_{\k}} };
+            \node[below,gray] at (\cx, \cy) { \ensuremath{\point{r}_{\k}} };
           };
           \ang = atan2(-\cy, -\cx);
           \cx = \cx + \radius * cos(\ang);

@@ -12,14 +12,19 @@
 
 % cox1997ideals gathmann2013commutative hart1996sphere gillespie2024ray winchenbach2024lipschitz
 
-\refdeft{sphere tracing}{sec. 2.2, eq. 11}{hart1996sphere}{
-\p{The \newvocab{sphere tracing} algorithm is to march a ray by an adaptive safe step size, which is the absolute value of the \vocab{signed distance bound} calculated by #{f/\lambda} from \ref{ag-000T}, the rest is the same as \vocabk{ray marching (naïve)}{ag-001B}.
+\refdeft{sphere tracing}{sec. 2.3, eq. 12}{hart1996sphere}{
+\p{The \newvocab{sphere tracing} algorithm is to march a ray by an adaptive safe step size, which is the absolute value of the \vocab{signed distance bound} calculated by #{F/\lambda} per \ref{ag-000T}, the rest is the same as \vocabk{ray marching (naïve)}{ag-001B}.
 }
 
 \p{Formally, the root found by \vocab{sphere tracing} is the limit point of the sequence defined by the recurrence equation
 
-##{t_{i+1} = t_i + \frac{|f(t_i)|}{\lambda} }
+##{t_{i+1} = t_i + \frac{|F(t_i)|}{\lambda} = t_i + \frac{f(\point{r}(t_i))}{\lambda} }
 
-where #{t_0 = 0} and usually #{\lambda = 1}.
+where #{F} is the \vocabk{ray intersection}{ag-000W}, and #{f} is the SDF.
+}
+
+\p{Usually #{\lambda = 1}, and #{F(t_i)} stays positive until the stopping condition #{F(t_i) < \epsilon} is met, so the above can be simplified to
+
+##{t_{i+1} = t_i + F(t_i) = t_i + f(\point{r}(t_i)) }
 }
 }
