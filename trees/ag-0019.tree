@@ -14,7 +14,7 @@
 
 \card{example}{ray marching (naïve)}{
 
-\p{The following renders a scene with a unit sphere at the origin, the camera at #{(0,0,-8)} and looking at the origin, through a screen of height 1.0, centered at 5.0 from the camera.
+\p{The following renders a scene with a unit sphere at the origin, the camera at #{(0,0,8)} and looking at the origin, through a screen of height 1.0, centered at 5.0 from the camera.
 }
 
 \p{The color of pixels are adjusted so that they are brighter the closer they are to the camera, as if there is a light source at the camera. As it takes a fixed step size of 0.1 (not small enough), the sphere is not rendered smoothly, and clearly shows the stepping artifacts.
@@ -65,9 +65,9 @@ void mainImage(out vec4 pixelColor, in vec2 pixelCoordinate) {
 
     // set up camera and view ray
     float observerDistance = 8.0;
-    vec3 ro = vec3(0.0, 0.0, -observerDistance);
-    vec3 cameraBox = ro + vec3(uv, 5.0);
-    vec3 rd = normalize(cameraBox - ro);
+    vec3 ro = vec3(0.0, 0.0, observerDistance);
+    vec3 ta = ro - vec3(uv, 5.0);
+    vec3 rd = normalize(ta - ro);
 
     // ray march
     float t = rayMarch(ro, rd);
