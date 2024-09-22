@@ -52,7 +52,7 @@
   \let\point/p0{
     \patch{\point/new}[self]{
       [id]{p0}
-      [label]{r_o}
+      [label]{\point{r}_o}
       [radius]{7cm}
       [angle]{150}
       [draw]{
@@ -63,9 +63,9 @@
       }
     }
   }
-  \let\point/p1{\patch{\point/p0}{[id]{p1}[label]{r_{t_1}}[radius]{5cm}}}
-  \let\point/p2{\patch{\point/p0}{[id]{p2}[label]{r_{t_2}}[radius]{3cm}}}
-  \let\point/p3{\patch{\point/p0}{[id]{p3}[label]{r_{t_3}}[radius]{1cm}}}
+  \let\point/p1{\patch{\point/p0}{[id]{p1}[label]{\point{r}(t_1)}[radius]{5cm}}}
+  \let\point/p2{\patch{\point/p0}{[id]{p2}[label]{\point{r}(t_2)}[radius]{3cm}}}
+  \let\point/p3{\patch{\point/p0}{[id]{p3}[label]{\point{r}(t_3)}[radius]{1cm}}}
 
   \point/p0#draw
   \begin{pgfonlayer}{foreground}

@@ -1,0 +1,151 @@
+\import{cg-macros}
+\import{ag-0017}
+% clifford hopf spin tt ag math draft cg
+\tag{cg}
+
+\taxon{figure}
+
+\title{sphere tracing}
+
+\let\point/camera{
+  \patch{\point/new}{
+    [id]{pcamera}
+    [label]{camera}
+    [radius]{0cm}
+    [angle]{0}
+  }
+}
+
+\def\obstacle{
+  \patch{\ball/new}{
+    [center]{(0:-6cm)}
+    [radius]{2.5cm}
+    [color]{ball color = gray,opacity = 0.2}
+    [center/label]{\point{o}}
+  }
+}
+
+\figure{
+\tikzfig{
+\tikzset{>=latex}
+\define/photon
+\define/camera
+\define/eye
+\define/sun
+\define/lightbulb
+\begin{tikzpicture}
+
+  \myball#coord/center
+  \myball#draw/boundary
+  \myball#draw/body
+  \begin{pgfonlayer}{background}
+  \myball#draw/shadow
+  \end{pgfonlayer}
+
+  % \myball#draw/radius
+  % \myball#draw/center
+  % \myball#draw/center/label
+
+  \let\point/p0{
+    \patch{\point/new}[self]{
+      [id]{p0}
+      [label]{\text{\small view rays}}
+      [radius]{7cm}
+      [angle]{150}
+      [arrow/style]{->}
+      [dot/style]{photoncol}
+      [label/style]{below=0.7cm}
+      [draw]{
+        \self#coord
+        \self#path/arrow
+        \self#draw/dot
+        \self#draw/label
+      }
+    }
+  }
+  % \let\point/p1{\patch{\point/p0}{[id]{p1}[label]{p_1}[radius]{5cm}}}
+  % \let\point/p2{\patch{\point/p0}{[id]{p2}[label]{p_2}[radius]{3cm}}}
+  % \let\point/p3{\patch{\point/p0}{[id]{p3}[label]{p_3}[radius]{1cm}}}
+
+  \point/p0#coord
+  \point/p0#path/arrow
+  \point/p0#draw/dot
+  % \point/p0#draw/label
+  % \begin{pgfonlayer}{foreground}
+  % \point/p1#draw
+  % \point/p2#draw
+  % \point/p3#draw
+  % \end{pgfonlayer}
+
+  % set Omega
+  % \coordinate (ball/label) at (45:1.5*\myball#radius);
+  % \draw ($(\myball#center/id)!0.5!(ball/label)$) -- ($(\myball#center/id)!0.8!(ball/label)$) node at (ball/label) {$\Omega$};
+
+  % intersection of arrow p and ball boundary
+  \path[name intersections={of=\myball#boundary/id and \point/p0#arrow/id, by={I}}];
+
+  \let\dt{\Delta t}
+
+  \begin{scope}[
+    shift=(-30:-7cm),
+    scale=0.4,
+    plane x={(0,0,-1)},
+    plane y={(0,1,0)},
+    canvas is plane]
+
+    \point/camera#coord
+
+  \end{scope}
+
+  \obstacle#coord/center
+  \obstacle#draw/boundary
+  \obstacle#draw/body
+  \begin{pgfonlayer}{background}
+  \obstacle#draw/shadow
+  \end{pgfonlayer}
+
+  \draw[photon,->] (\point/camera#id) -- (I);
+
+  \coordinate (camera) at (-30:-7.6cm);
+  \pic at (camera) {camera={width=1.5, height=2.5, depth=3, scale=0.15, units=cm, zangle=30, xangle=20}};
+  % \pic[rotate=-30,scale=0.4] at (camera) {eye};
+  % \node[above] at ($(camera)+(0, 0.5cm)$) {\point/camera#label};
+
+  \tikzmath{
+      % Define the SDF for a circle using veclen
+      function sdf_circle(\x, \y, \cx, \cy, \r) {
+          return veclen(\x - \cx, \y - \cy) - \r;
+      };
+      % Define the SDF for the two circles
+      function sdf_two_circles(\x, \y) {
+          % Circle 1 at (0,0) with radius 1.5cm
+          \d1 = sdf_circle(\x, \y, 0, 0, 1.5);
+          % Circle 2 at (-6,0) with radius 2.5cm
+          \d2 = sdf_circle(\x, \y, -6, 0, 2.5);
+          % Return the minimum distance
+          return min(\d1, \d2);
+      };
+      % Initial center
+      \cx = -7 * cos(-30);
+      \cy = -7 * sin(-30);
+      \radius = sdf_two_circles(\cx, \cy);
+      int \k;
+      for \k in {1,...,10} {
+        if \radius > 0 then {
+          {
+            \filldraw (\cx, \cy) circle (1pt);
+            \draw[gray,densely dashed,very thin] (\cx, \cy) circle (\radius);
+            \node[below,gray] at (\cx, \cy) { \ensuremath{r_{\k}} };
+          };
+          \ang = atan2(-\cy, -\cx);
+          \cx = \cx + \radius * cos(\ang);
+          \cy = \cy + \radius * sin(\ang);
+          \radius = sdf_two_circles(\cx, \cy);
+        } else { \radius = \radius; };
+      };
+  }
+\end{tikzpicture}
+}
+
+\figcaption{Inspired by \citet{fig. 2.2}{coulon2022ray}}
+}
