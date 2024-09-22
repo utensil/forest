@@ -57,17 +57,20 @@
       \coordinate (\self#id) at ($\self#origin + (\self#angle:\self#radius)$);
     }
     [arrow/id]{\self#id\verb~|/~arrow}
+    [arrow/style]{->}
     [path/arrow]{
       \path[name path=\self#arrow/id] \self#origin to (\self#id);
     }
     [draw/arrow]{
-      \draw[->,name path=\self#arrow/id] \self#origin to (\self#id);
+      \draw[\self#arrow/style,name path=\self#arrow/id] \self#origin to (\self#id);
     }
+    [dot/style]{ }
     [draw/dot]{
-      \filldraw (\self#id) circle (1pt);
+      \filldraw[\self#dot/style] (\self#id) circle (1pt);
     }
+    [label/style]{above}
     [draw/label]{
-      \node[above] at (\self#id) {\ensuremath{\self#label}};
+      \node[\self#label/style] at (\self#id) {\ensuremath{\self#label}};
     }
   }
 }

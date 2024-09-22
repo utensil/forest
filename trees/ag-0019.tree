@@ -17,6 +17,9 @@
 \p{The following renders a scene with a unit sphere at the origin, the camera at #{(0,0,-8)} and looking at the origin, through a screen of height 1.0, centered at 5.0 from the camera.
 }
 
+\p{The color of pixels are adjusted so that they are brighter the closer they are to the camera. As it takes a fixed step size of 0.1 (not small enough), the sphere is not rendered smoothly, and clearly shows the stepping artifacts.
+}
+
 \shadertoywithcode{simplified from [zmcbeth's Raymarch 3.0](https://www.shadertoy.com/view/mtyyWt)}\verb>>>|
 /* The SDF for a sphere with radius r */
 float sdSphere(vec3 p, float r)
