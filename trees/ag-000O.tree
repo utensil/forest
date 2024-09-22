@@ -31,7 +31,11 @@
 \figure{
 \tikzfig{
 \tikzset{>=latex}
-
+\define/photon
+\define/camera
+\define/eye
+\define/sun
+\define/lightbulb
 \begin{tikzpicture}
 
   \myball#coord/center
@@ -132,67 +136,11 @@
 
   \end{scope}
 
-  \colorlet{photoncol}{yellow!60!orange!95!black}
-  \tikzstyle{photon}=[->,thick,line cap=round,photoncol,decorate,decoration={
-  snake,amplitude=.4mm,segment length=2.5mm,post length=1mm}]
-
   \begin{pgfonlayer}{background}
     \draw[photon] (\point/camera#id) -- (\ball/screen#center/id);
   \end{pgfonlayer}
 
   \draw[photon] (\ball/screen#center/id) -- (I);
-
-  % adapted from https://tex.stackexchange.com/a/288101/75671
-  \tikzset{
-    camera/.pic={
-      \tikzset{%
-        every edge quotes/.append style={midway, auto},
-        /camera/.cd,
-        #1
-      }
-      \tikzmath{
-        \aspect = cos(\cubezang);
-      }
-      \begin{scope}[z={(-180+\cubezang:1cm)}, x={(-\cubexang:1cm)}]
-      % \draw[color=red] (0,0,0) -- (1,0,0);
-      % \draw[color=blue] (0,0,0) -- (0,1,0);
-      % \draw[color=green] (0,0,0) -- (0,0,1);
-      \filldraw [fill=white,every edge/.append style={pic actions, densely dashed, opacity=0.0}, pic actions]
-      (0,0,0) coordinate (o) -- ++(-\cubescale*\cubex,0,0) coordinate (a) -- ++(0,-\cubescale*\cubey,0) coordinate (b) edge coordinate [pos=1] (g) ++(0,0,-\cubescale*\cubez)  -- ++(\cubescale*\cubex,0,0) coordinate (c) -- cycle
-      (o) -- ++(0,0,-\cubescale*\cubez) coordinate (d) -- ++(0,-\cubescale*\cubey,0) coordinate (e) edge (g) -- (c) -- cycle
-      (o) -- (a) -- ++(0,0,-\cubescale*\cubez) coordinate (f) edge (g) -- (d) -- cycle;
-
-      % \tikzmath{
-      %   \lenslength = 0.5*\cubescale*\cubex;
-      %   \lensradius = 0.2*\cubescale*\cubey;
-      % }
-      \coordinate (lens/center) at ($(o)!0.4!(e)+(0, -0.1*\cubescale*\cubey,0)$);
-      % \draw (lens/center) circle [name path=lensback,radius=\lensradius,canvas is yz plane at x=0];
-      % \coordinate (lens/nosecenter) at ($(lens/center)+(\lenslength,0,0)$);
-      % \draw (lens/nosecenter) circle [name path=lensfront,radius=\lensradius,canvas is yz plane at x=0];
-      % \draw (lens/center) ++(0,\lensradius,0) -- ($(lens/nosecenter)+(0,\lensradius,0)$);
-      % \draw (lens/center) ++(0,-\lensradius,0) -- ($(lens/nosecenter)+(0,-\lensradius,0)$);
-
-      \node [cylinder, cylinder uses custom fill, cylinder end fill=white,
-         cylinder body fill=white,draw,shape aspect=\aspect,inner xsep=3.5*\cubescale*\cubey, inner ysep=9.0*\cubescale*\cubey,rotate=-\cubexang] at (lens/center) {};
-
-      \end{scope}
-    },
-    /camera/.search also={/tikz},
-    /camera/.cd,
-    width/.store in=\cubex,
-    height/.store in=\cubey,
-    depth/.store in=\cubez,
-    units/.store in=\cubeunits,
-    scale/.store in=\cubescale,
-    zangle/.store in=\cubezang,
-    xangle/.store in=\cubexang,
-    width=10,
-    height=10,
-    depth=10,
-    units=cm,
-    scale=.1,
-  }
 
   \coordinate (camera) at (-30:-7.8cm);
   \pic at (camera) {camera={width=1.5, height=2.5, depth=3, scale=0.15, units=cm, zangle=30, xangle=20}};

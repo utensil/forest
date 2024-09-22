@@ -131,3 +131,142 @@
     }
   }
 }
+
+\def\define/photon{
+\colorlet{photoncol}{yellow!60!orange!95!black}
+\tikzstyle{photon}=[thick,line cap=round,photoncol,decorate,decoration={
+snake,amplitude=.4mm,segment length=2.5mm,post length=1mm}]
+}
+
+\def\define/camera{
+  % adapted from https://tex.stackexchange.com/a/288101/75671
+  \tikzset{
+    camera/.pic={
+      \tikzset{%
+        every edge quotes/.append style={midway, auto},
+        /camera/.cd,
+        #1
+      }
+      \tikzmath{
+        \aspect = cos(\cubezang);
+      }
+      \begin{scope}[z={(-180+\cubezang:1cm)}, x={(-\cubexang:1cm)}]
+      % \draw[color=red] (0,0,0) -- (1,0,0);
+      % \draw[color=blue] (0,0,0) -- (0,1,0);
+      % \draw[color=green] (0,0,0) -- (0,0,1);
+      \filldraw [fill=white,every edge/.append style={pic actions, densely dashed, opacity=0.0}, pic actions]
+      (0,0,0) coordinate (o) -- ++(-\cubescale*\cubex,0,0) coordinate (a) -- ++(0,-\cubescale*\cubey,0) coordinate (b) edge coordinate [pos=1] (g) ++(0,0,-\cubescale*\cubez)  -- ++(\cubescale*\cubex,0,0) coordinate (c) -- cycle
+      (o) -- ++(0,0,-\cubescale*\cubez) coordinate (d) -- ++(0,-\cubescale*\cubey,0) coordinate (e) edge (g) -- (c) -- cycle
+      (o) -- (a) -- ++(0,0,-\cubescale*\cubez) coordinate (f) edge (g) -- (d) -- cycle;
+
+      % \tikzmath{
+      %   \lenslength = 0.5*\cubescale*\cubex;
+      %   \lensradius = 0.2*\cubescale*\cubey;
+      % }
+      \coordinate (lens/center) at ($(o)!0.4!(e)+(0, -0.1*\cubescale*\cubey,0)$);
+      % \draw (lens/center) circle [name path=lensback,radius=\lensradius,canvas is yz plane at x=0];
+      % \coordinate (lens/nosecenter) at ($(lens/center)+(\lenslength,0,0)$);
+      % \draw (lens/nosecenter) circle [name path=lensfront,radius=\lensradius,canvas is yz plane at x=0];
+      % \draw (lens/center) ++(0,\lensradius,0) -- ($(lens/nosecenter)+(0,\lensradius,0)$);
+      % \draw (lens/center) ++(0,-\lensradius,0) -- ($(lens/nosecenter)+(0,-\lensradius,0)$);
+
+      \node [cylinder, cylinder uses custom fill, cylinder end fill=white,
+         cylinder body fill=white,draw,shape aspect=\aspect,inner xsep=3.5*\cubescale*\cubey, inner ysep=9.0*\cubescale*\cubey,rotate=-\cubexang] at (lens/center) {};
+
+      \end{scope}
+    },
+    /camera/.search also={/tikz},
+    /camera/.cd,
+    width/.store in=\cubex,
+    height/.store in=\cubey,
+    depth/.store in=\cubez,
+    units/.store in=\cubeunits,
+    scale/.store in=\cubescale,
+    zangle/.store in=\cubezang,
+    xangle/.store in=\cubexang,
+    width=10,
+    height=10,
+    depth=10,
+    units=cm,
+    scale=.1,
+  }
+}
+
+\def\define/eye{
+  \tikzset{
+      eye/.pic={
+          \tikzmath{
+            \halfangle = 30;
+            \radius = 1.5;
+            \arcradius = \radius * 0.7;
+            \pupillong = 0.3;
+            \pupilshort = 0.15;
+            \pupilpos = \arcradius - \pupilshort;
+          }
+          % Upper line of the eye
+          \draw (0,0) -- (\halfangle:\radius);
+          
+          % Lower line of the eye
+          \draw (0,0) -- (-\halfangle:\radius);
+          
+          % Arc for the eye shape
+          \draw (\halfangle:\arcradius) arc[start angle=\halfangle, end angle=-\halfangle, radius=\arcradius];
+          
+          % Filled ellipse for the pupil
+          \fill (0:\pupilpos) ellipse[x radius=\pupilshort, y radius=\pupillong];
+      }
+  }
+}
+
+\def\define/lightbulb{
+  \tikzset{
+      lightbulb/.pic={
+          \tikzset{%
+            /lightbulb/.cd,
+            #1
+          }
+          \begin{scope}[scale=\lightbulbscale, rotate=\lightbulbangle]
+          % Base of the light bulb
+          \draw[fill=gray] (-0.5,0) rectangle (0.5,0.6);
+          
+          % Screw threads
+          \foreach \y in {0.2, 0.4} {
+              \draw (-0.5,\y) -- (0.5,\y);
+          }
+          
+          % Contact point
+          \draw[fill=black] (0,0) circle (0.1);
+          
+          % Filament
+          \draw[thick] (0,1) -- (0,1.5);
+          \draw[thick] (-0.2,1.5) -- (0.2,1.5);
+          \draw[thick] (-0.2,1.5) arc[start angle=180, end angle=0, radius=0.2];
+          
+          % Bulb
+          \draw[thick] (1,1.5) arc[start angle=0, end angle=180, radius=1];
+          \draw[thick] (-1,1.5) to[out=-90, in=90] (-0.5,0.6);
+          \draw[thick] (1,1.5) to[out=-90, in=90] (0.5,0.6);
+          \end{scope}
+      },
+      /lightbulb/.search also={/tikz},
+      /lightbulb/.cd,
+      scale/.store in=\lightbulbscale,
+      angle/.store in=\lightbulbangle,
+      scale=1,
+      angle=0,
+  }
+}
+
+\def\define/sun{
+  \tikzset{
+      sun/.pic={
+          % Waving boundary for the rays
+          \foreach \angle in {0,30,...,330} {
+            \filldraw[thick, photoncol] (\angle:1) -- (\angle+15:1.5) -- (\angle+30:1) -- (\angle+45:1.5) -- (\angle+60:1);
+          }
+
+          % Core of the sun
+          \fill[orange] (0,0) circle (0.8);
+      }
+  }
+}
