@@ -8,8 +8,8 @@
 // bun install three react-dom react @react-three/fiber @react-three/drei
 import * as THREE from 'three'
 import { createRoot } from 'react-dom/client'
-import React, { useRef, useMemo } from 'react'
-import { Canvas, useFrame } from '@react-three/fiber'
+import React, { useRef, useMemo, useState, useEffect } from 'react'
+import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import { Billboard, Text, Plane, CameraControls } from '@react-three/drei'
 
 const defaults = {
@@ -79,14 +79,65 @@ async function resolveIncludesAsync(lines) {
 
 // uts end
 
+const defaultTime = 0.0;
+
 const ShaderPlane = (props) => {
     // This reference will give us direct access to the mesh
     const mesh = useRef();
-  
+    const clock = useRef(new THREE.Clock());
+    const [isHovered, setIsHovered] = useState(false);
+    const [initialHoverTime, setInitialHoverTime] = useState(0);
+    const [isInView, setIsInView] = useState(false);
+    const { invalidate, setFrameloop } = useThree();
+
+    useFrame(() => {
+        if (mesh.current) {
+            const elapsedTime = clock.current.getElapsedTime();
+            mesh.current.material.uniforms.iTime.value = initialHoverTime != 0 ? elapsedTime - initialHoverTime : defaultTime;
+        }
+    });
+    // const element = props.element;
+
+    // useEffect(() => {
+    //     const observer = new IntersectionObserver(
+    //         ([entry]) => {
+    //             setIsInView(entry.isIntersecting);
+    //         },
+    //         { threshold: 0.1 }
+    //     );
+
+    //     if (element) {
+    //         observer.observe(element);
+    //     }
+
+    //     return () => {
+    //         if (element) {
+    //             observer.unobserve(element);
+    //         }
+    //     };
+    // }, [element]);
+
+    // useEffect(() => {
+    //     if (isInView) {
+    //         setInitialHoverTime(clock.current.getElapsedTime());
+    //         setFrameloop("always");
+    //     }
+    // }, [isInView]);
+
+    // useFrame(() => {
+    //     if (mesh.current) {
+    //         const elapsedTime = clock.current.getElapsedTime();
+    //         mesh.current.material.uniforms.iTime.value = isInView ? elapsedTime - initialHoverTime : defaultTime;
+    //         // if(!isInView) {
+    //         //     setFrameloop("demand");
+    //         // }
+    //     }
+    // });
+
     const uniforms = useMemo(
       () => ({
         iTime: {
-            value: 0.0,
+            value: defaultTime,
         },
         iFrame: {
             value: 0.0,
@@ -97,14 +148,26 @@ const ShaderPlane = (props) => {
         iResolution: { value: new THREE.Vector3(16, 9, 1) }
       }), []
     );
-  
-    useFrame((state) => {
-      const { clock } = state;
-      mesh.current.material.uniforms.iTime.value = clock.getElapsedTime();
-    });
+
+    const handlePointerOver = () => {
+        setIsHovered(true);
+        if(initialHoverTime == 0) {
+            setInitialHoverTime(clock.current.getElapsedTime());
+        }
+        invalidate();
+        setFrameloop("always");
+    };
+
+    const handlePointerOut = () => {
+        setIsHovered(false);
+        setFrameloop("demand");
+    };
   
     return (
-        <Plane args={[16, 9]} ref={mesh}>
+        <Plane args={[16, 9]} ref={mesh}
+            onPointerOver={handlePointerOver}
+            onPointerOut={handlePointerOut}
+        >
             <shaderMaterial
                 uniforms={uniforms}
                 fragmentShader={defaults.fragmentShaderPreamble + props.fragmentShader + defaults.fragmentShaderPostemable}
@@ -122,26 +185,27 @@ embeded_shaders.forEach((element) => {
 
     element.classList.add('lazy-loading');
 
-    let handleMouseOver = (event) => {
-        element.removeEventListener('mouseover', handleMouseOver);
+    // let handleMouseOver = (event) => {
+    //     element.removeEventListener('mouseover', handleMouseOver);
         resolveIncludesAsync(shader).then((shader) => {
             element.classList.remove('lazy-loading');
             // const renderer = ImageEffectRenderer.createTemporary(element, shader, options);
             createRoot(element).render(
-                <Canvas>
+                // https://r3f.docs.pmnd.rs/advanced/scaling-performance
+                <Canvas frameloop="demand">
                   {/* <CameraControls /> */}
                   {/* <ambientLight intensity={Math.PI / 2} />
                   <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} decay={0} intensity={Math.PI} />
                   <pointLight position={[-10, -10, -10]} decay={0} intensity={Math.PI} /> */}
                   <Billboard>
-                      <ShaderPlane fragmentShader={shader}/>
+                      <ShaderPlane fragmentShader={shader} element={element}/>
                   </Billboard>
                 </Canvas>,
               );
         });
-    };
+    // };
 
-    element.addEventListener('mouseover', handleMouseOver);
+    // element.addEventListener('mouseover', handleMouseOver);
 });
 
 
