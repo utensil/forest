@@ -8,7 +8,7 @@ const fetch_text = async (url) => {
     return await response.text();
 };
 
-const penrose_roots = document.querySelectorAll('.penrose-root.lazy-loading');
+const penrose_roots = document.querySelectorAll('.penrose-root.loading');
 penrose_roots.forEach(async (penrose_root) => {
     let trio = {};
     let penrose_root_trio = penrose_root.getAttribute('data-trio');
@@ -32,5 +32,5 @@ penrose_roots.forEach(async (penrose_root) => {
 
     penrose_root.innerHTML = "";
     const dia = await Penrose.diagram(trio, penrose_root, async () => undefined);
-    penrose_root.classList.remove('lazy-loading');
+    penrose_root.classList.remove('loading');
 });

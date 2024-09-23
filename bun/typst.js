@@ -61,7 +61,7 @@ const fetch_text = async (url) => {
     return await response.text();
 };
 
-const typst_tags = document.querySelectorAll('.typst-root.lazy-loading');
+const typst_tags = document.querySelectorAll('.typst-root.loading');
 // console.log(typst_tags);
 for (let i = 0; i < typst_tags.length; i++) {
     const typst_tag = typst_tags[i];
@@ -74,18 +74,18 @@ for (let i = 0; i < typst_tags.length; i++) {
             }
             const rendered = await $typst.svg({ mainFilePath: typst_src_url });
             typst_tag.innerHTML = rendered;
-            typst_tag.classList.remove('lazy-loading');
+            typst_tag.classList.remove('loading');
         } else {
             const typst_source = typst_tag.textContent;
             // console.log(typst_source);
             const rendered = await $typst.svg({ mainContent: typst_source });
             typst_tag.innerHTML = rendered;
-            typst_tag.classList.remove('lazy-loading');
+            typst_tag.classList.remove('loading');
         }
     }
     catch (e) {
         console.error(e);
         typst_tag.innerHTML = `<pre>The Typst file fails to render:\n\n${e.stack}</pre>`;
-        typst_tag.classList.remove('lazy-loading');
+        typst_tag.classList.remove('loading');
     }
 }

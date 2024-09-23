@@ -8,11 +8,11 @@ import pikchr from 'pikchr-wasm'; // Default entrypoint, optimized for speed, ~7
 
 await pikchr.loadWASM (); // First of all you need to load the WASM instance and wait for it
 
-const pikchr_roots = document.querySelectorAll('.pikchr-root.lazy-loading');
+const pikchr_roots = document.querySelectorAll('.pikchr-root.loading');
 pikchr_roots.forEach(async (pikchr_root) => {
     const pikchr_source = pikchr_root.textContent;
     pikchr_root.innerHTML = "";
     const pikchr_svg = pikchr.render(pikchr_source);
     pikchr_root.innerHTML = pikchr_svg;
-    pikchr_root.classList.remove('lazy-loading');
+    pikchr_root.classList.remove('loading');
 });

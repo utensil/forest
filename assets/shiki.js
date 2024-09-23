@@ -14,7 +14,7 @@ async function loadJson(url) {
 
 // document.addEventListener('DOMContentLoaded', async () => {
 
-    const code_tags = document.querySelectorAll('article code.highlight.lazy-loading')
+    const code_tags = document.querySelectorAll('article code.highlight.grace-loading')
 
     if(code_tags.length != 0) {
 
@@ -58,7 +58,7 @@ async function loadJson(url) {
                 { lang, theme }
             )
             code.innerHTML = html
-            code.classList.remove('lazy-loading')
+            code.classList.remove('grace-loading')
         })
     }
 

@@ -8,25 +8,25 @@ const load_script = (src) => {
 
 document.addEventListener('DOMContentLoaded', async () => {
 
-    const markdownit_tags = document.querySelectorAll('.markdownit.lazy-loading');
+    const markdownit_tags = document.querySelectorAll('.markdownit');
 
     if (markdownit_tags.length != 0) {
         load_script('markdownit.js');
     }
 
-    const typst_tags = document.querySelectorAll('.typst-root.lazy-loading');
+    const typst_tags = document.querySelectorAll('.typst-root');
 
     if (typst_tags.length != 0) {
         load_script('typst.js');
     }
 
-    const pikchr_tags = document.querySelectorAll('.pikchr-root.lazy-loading');
+    const pikchr_tags = document.querySelectorAll('.pikchr-root');
 
     if (pikchr_tags.length != 0) {
         load_script('pikchr.js');
     }
 
-    const code_tags = document.querySelectorAll('article code.highlight.lazy-loading');
+    const code_tags = document.querySelectorAll('article code.highlight');
 
     if (code_tags.length != 0) {
         load_script('shiki.js');

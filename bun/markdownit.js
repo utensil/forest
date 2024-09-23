@@ -4,12 +4,12 @@ import markdownit from 'markdown-it'
 
 const md = markdownit({html: true});
 
-const markdownit_tags = document.querySelectorAll('.markdownit.lazy-loading');
+const markdownit_tags = document.querySelectorAll('.markdownit.grace-loading');
 console.log(markdownit_tags);
 for (let i = 0; i < markdownit_tags.length; i++) {
     const markdownit_tag = markdownit_tags[i];
     const markdown_source = markdownit_tag.innerHTML;
     // console.log(markdown_source);
     markdownit_tag.innerHTML = md.render(markdown_source);
-    markdownit_tag.classList.remove('lazy-loading');
+    markdownit_tag.classList.remove('grace-loading');
 }

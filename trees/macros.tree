@@ -415,7 +415,7 @@ so the text size almost matches the size output by native forester code. This do
 \p{\code{codeblock[lang][body]}: A syntax-highlighted code block specifying the language.}
 
 \def\codeblock[lang][body]{
-  \<html:code>[class]{\lang highlight lazy-loading}{\body}
+  \<html:code>[class]{\lang highlight grace-loading}{\body}
 }
 
 \p{\code{newvocab[x]}: A newly defined term with an emphazised style.}
@@ -528,11 +528,11 @@ so the text size almost matches the size output by native forester code. This do
 }
 
 \def\md[body]{
-  \<html:div>[class]{markdownit lazy-loading}{\body}
+  \<html:div>[class]{markdownit grace-loading}{\body}
 }
 
 \def\mdblock[t][body]{
-  \block{\t}{\<html:div>[class]{markdownit lazy-loading}{\body}}
+  \block{\t}{\<html:div>[class]{markdownit grace-loading}{\body}}
 }
 
 \def\loadjs[src]{
@@ -552,7 +552,7 @@ so the text size almost matches the size output by native forester code. This do
 }
 
 \def\penrose-inline[domain][substance][style]{
-  \<html:div>[class]{penrose-root lazy-loading}{
+  \<html:div>[class]{penrose-root loading}{
     \<html:div>[class]{penrose-domain}{\domain}
     \<html:div>[class]{penrose-substance}{\substance}
     \<html:div>[class]{penrose-style}{\style}
@@ -560,19 +560,19 @@ so the text size almost matches the size output by native forester code. This do
 }
 
 \def\penrose[trio]{
-  \<html:div>[class]{penrose-root lazy-loading}[data-trio]{\trio}{}
+  \<html:div>[class]{penrose-root loading}[data-trio]{\trio}{}
 }
 
 \def\typst-inline[body]{
-  \<html:div>[class]{typst-root lazy-loading}{\body}
+  \<html:div>[class]{typst-root loading}{\body}
 }
 
 \def\typst[src]{
-  \<html:div>[class]{typst-root lazy-loading}[data-src]{\src}{}
+  \<html:div>[class]{typst-root loading}[data-src]{\src}{}
 }
 
 \def\pikchr-inline[body]{
-  \<html:div>[class]{pikchr-root lazy-loading}{\body}
+  \<html:div>[class]{pikchr-root loading}{\body}
 }
 
 % \def\cref[addr]{\<html:span>[class]{cref}{[\addr](\addr)}} % this is not required as XSLT can handle local links with or without taxons like cleveref automatically

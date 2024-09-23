@@ -24,4 +24,65 @@ ellipse "example.html" fill whitesmoke;
 arrow from MK.e then right until even with CC then to CC.n rad 0.5
 "runs" at last.ne + (.2,.1) color 0xaaaaaa; 
 }
+
+\p{The following is from my blog post [Transformers: from self-attention to performance optimizations](https://utensil.github.io/blog/posts/transformer/):
+}
+
+\pikchr-inline\verb>>>|
+up
+
+TB: [
+    IN: text "Input"
+    A_in: arrow
+    LN_pre1: box "LayerNorm" bold \
+        wid 0.8 ht 0.4 rad 0.1 \
+        fill 0xf2f4c1
+    A_qkv: arrow ht 60%
+    K: box "K" ht 0.2 wid 0.2
+    MHSA: box "MHSA" bold \
+        same as LN_pre1\
+        fill 0xffe2bb
+    arrow ht 50%
+    Res1: text "&#8853;" big big
+    A_attn: arrow ht 60%
+
+    LN_pre2: box "LayerNorm" bold same as LN_pre1
+
+    arrow ht 50%
+    FFN: box "FFN" bold \
+        same as LN_pre1\
+        fill 0xc2e8f7
+    arrow ht 50%
+    Res2: text "&#8853;" big big
+    arrow ht 50%
+    OUT: text "Output"
+
+    Q: box "Q" with right at K.left same as K
+    V: box "V" with left at K.right same as K
+    arrow from A_qkv.c left until even with Q then to Q.start rad 0.03
+    arrow from A_qkv.c right until even with V then to V.start rad 0.03
+
+    arrow from A_in.c \
+    right 0.6 \
+    then up until even with Res1 \
+    then to Res1.right rad 0.1
+
+    arrow from A_attn.c \
+    right 0.6 \
+    then up until even with Res2 \
+    then to Res2.right rad 0.1
+]
+
+TB_border: box behind TB \
+wid TB.wid+0.5 ht TB.ht-0.7 rad 0.1 \
+at TB.c \
+fill 0xf3f3f4
+
+TB_background: box behind TB_border \
+wid TB_border.wid+1 ht TB_border.ht+1 rad 0.1 \
+at TB.c \
+fill 0xf3f3f4 \
+color 0xf3f3f4
+>>>
+
 }
