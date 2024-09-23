@@ -79,8 +79,6 @@ async function resolveIncludesAsync(lines) {
 
 // uts end
 
-const defaultTime = 0.0;
-
 const ShaderPlane = (props) => {
     // This reference will give us direct access to the mesh
     const mesh = useRef();
@@ -89,11 +87,12 @@ const ShaderPlane = (props) => {
     const [initialHoverTime, setInitialHoverTime] = useState(0);
     const [isInView, setIsInView] = useState(false);
     const { invalidate, setFrameloop } = useThree();
+    const initialTime = props.initialTime;
 
     useFrame(() => {
         if (mesh.current) {
             const elapsedTime = clock.current.getElapsedTime();
-            mesh.current.material.uniforms.iTime.value = initialHoverTime != 0 ? elapsedTime - initialHoverTime : defaultTime;
+            mesh.current.material.uniforms.iTime.value = initialHoverTime != 0 ? elapsedTime - initialHoverTime : initialTime;
         }
     });
     // const element = props.element;
@@ -137,7 +136,7 @@ const ShaderPlane = (props) => {
     const uniforms = useMemo(
       () => ({
         iTime: {
-            value: defaultTime,
+            value: initialTime,
         },
         iFrame: {
             value: 0.0,
@@ -161,6 +160,7 @@ const ShaderPlane = (props) => {
     const handlePointerOut = () => {
         setIsHovered(false);
         setFrameloop("demand");
+        console.debug("iTime", mesh.current.material.uniforms.iTime.value);
     };
   
     return (
@@ -185,6 +185,15 @@ embeded_shaders.forEach((element) => {
 
     element.classList.add('lazy-loading');
 
+    let initialTime = 0.0;
+    // if classList has something starting with iTime-, then extract the rest as a number and use it as initial time
+    for (let className of element.classList) {
+        if (className.startsWith('iTime-')) {
+            initialTime = parseFloat(className.substring(6));
+            element.classList.remove(className);
+        }
+    }
+
     // let handleMouseOver = (event) => {
     //     element.removeEventListener('mouseover', handleMouseOver);
         resolveIncludesAsync(shader).then((shader) => {
@@ -198,7 +207,7 @@ embeded_shaders.forEach((element) => {
                   <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} decay={0} intensity={Math.PI} />
                   <pointLight position={[-10, -10, -10]} decay={0} intensity={Math.PI} /> */}
                   <Billboard>
-                      <ShaderPlane fragmentShader={shader} element={element}/>
+                      <ShaderPlane fragmentShader={shader} element={element} initialTime={initialTime}/>
                   </Billboard>
                 </Canvas>,
               );

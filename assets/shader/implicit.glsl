@@ -125,6 +125,7 @@ float f(vec3 pos) {
     float R, R2, r, r2, term, v, v2, t, t2, t3;
     
     switch (shape) {
+    case 0: return z; // plane
     case 1: return x; // plane
     case 2: return x*x + y*y + z*z - 1.; // sphere
     case 3: return -(x*x + y*y + z*z - 1.); // inside out sphere

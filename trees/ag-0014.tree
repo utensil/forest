@@ -5,7 +5,7 @@
 \note{test implicit surface shader 3}{
 
 \figure{
-\shadertoy{ }\verb>>>|
+\shadertoy{iTime-10}\verb>>>|
 #define HW_PERFORMANCE 0
 // The MIT License
 // Copyright © 2013 Inigo Quilez
@@ -624,8 +624,8 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
 	float time = 32.0 + iTime*1.5;
 
     // camera	
-    vec3 ta = vec3( 0.25, -0.75, -0.75 );
-    vec3 ro = ta + vec3( 4.5*cos(0.1*time + 7.0*mo.x), 2.2, 4.5*sin(0.1*time + 7.0*mo.x) );
+    vec3 ta = vec3( 0.25, -0.75, -0.25 );
+    vec3 ro = ta + vec3( 6.0*cos(0.1*time + 7.0*mo.x), 4.5, 6.0*sin(0.1*time + 7.0*mo.x) );
     // camera-to-world transformation
     mat3 ca = setCamera( ro, ta, 0.0 );
 
