@@ -7,7 +7,10 @@
 \title{raymarching in raymarching (sphere tracing)}
 
 \figure{
-\shadertoy{ }\verb>>>|
+% iTime-8.921700000047593 debug
+% iTime-8.45 debug
+% iTime-8.8 good
+\shadertoy{iTime-8.8}\verb>>>|
 #define MAT_SCREEN 0.
 #define MAT_SPHERE1 1.
 #define MAT_FLOOR  2.
@@ -42,6 +45,8 @@ float rayDirectionAnim = 0.0;
 float rayDirectionAnim2 = 0.0;
 
 float screenAlpha = 0.0;
+
+float hitSphereID = 0.0;
 
 // =====================Camera========================
 vec3 cameraPos, cameraTarget;
@@ -133,7 +138,7 @@ void timeLine(float time)
     
     raySphereAlpha = 1.;
     
-    for (int i=0; i<10; i++) {
+    for (int i=0; i<20; i++) {
         t = tl(time, 0., 0.5);
         radiusAnim = mix(radiusAnim, float(i) + 2., t);
         t = tl(time, 0., 0.5);
@@ -243,7 +248,8 @@ vec3 normal(vec3 p)
 void sceneTrace(inout vec3 pos, vec3 ray, out vec2 mat, inout float depth, float maxD)
 {
     vec3 ro = pos;
-    for(int i = 0; i < 70; i++) {
+    int i = 0;
+    for(; i < 70; i++) {
         if (depth > maxD) {
         	depth = maxD;
             break;
@@ -309,7 +315,7 @@ vec2 gizmoScreenZ(vec3 p)
 }
 
 float sphereID = 0.0;
-float hitSphereID = 0.0;
+
 vec3 rayRoute = vec3(0., 1., 0.); // y must be init to non-zero
 vec2 gizmoMarching(vec3 p)
 {
@@ -318,16 +324,17 @@ vec2 gizmoMarching(vec3 p)
     
     if(rayDirectionAnim2 > 0.0) {
         if(abs(rayRoute.y - 0.) <= 0.01) {
-            ray = normalize(vec3(rayRoute.x, 0., rayRoute.z));
-            radiusAnim = 1.;
-            radiusAnim = 100.;
-            sphereAnim = 100.;
+            ray = normalize(vec3(rayRoute.x, rayRoute.y, rayRoute.z));
+            radiusAnim = 20.;
+            routeAnim = 20.;
+            sphereAnim = 20.;
         }
     }
     
     float t = 0.0;
     vec3 pos;
-    for(int i=0; i<10; i++) {
+    int maxSteps = hitSphereID == 0. ? 20 : int(hitSphereID) + 1;
+    for(int i=0; i<maxSteps; i++) {
     	pos = ray * t;
         vec2 s = vec2(sdSphere(p - pos, 0.15), MAT_MARCHSPHERE);
         if (s.x < d.x) {
@@ -367,9 +374,12 @@ vec2 gizmoRayDirection(vec3 p)
     vec3 ray = normalize(vec3(screenSize, screenZ));
     vec3 pos;
     float t = 0.01;
-    for(int i = 0; i < 20; i++) {
+    for(int i = 0; i < 40; i++) {
     	pos = ray * t;
         vec2 d = sceneMap(pos);
+        if (d.x < 0.001) {
+            break;
+        }
         t += d.x;
     }
     
@@ -535,14 +545,16 @@ vec4 gizmoShade(vec2 mat, vec3 p)
     	col = vec4(0.05, 0.05, 1., screenZAlpha);
     } else if (mat.y == MAT_MARCHSPHERE) {
         float alpha = clamp(sphereAnim - sphereID, 0.0, 1.0);
-        vec3 sc = mix(vec3(.0, .1, 3.), vec3(.02, 1., .02), float(sphereID == 0. || sphereID >= hitSphereID));
-    	col = vec4(sc, alpha * raySphereAlpha);
+        vec3 sc = mix(vec3(.0, .1, 3.), vec3(1.02, 1., 0.02), float(sphereID == 0. || sphereID == hitSphereID));
+        // vec3 sc = mix(vec3(.0, .1, 3.), vec3(.02, 1., 1.02), float(sphereID == 0. || sphereID == hitSphereID));
+        float inRange = 1.0; //sphereID <= hitSphereID ? 1.0 : 0.0;
+    	col = vec4(sc, alpha * raySphereAlpha * inRange);
     } else if (mat.y == MAT_MARCHROUTE) {
         col = vec4(1., 0., 0., .9);
     } else if (mat.y == MAT_RAYDIRECTION) {
         col = vec4(1., 0., 0., .9);
     } else if (mat.y == MAT_HITPOINT) {
-    	col = vec4(.02, 1., .02, raySphereAlpha);
+    	col = vec4(1.02, 1., .02, raySphereAlpha);
     }
     return col;
 }
@@ -556,26 +568,34 @@ vec4 radiusShade(vec2 mat, vec3 p)
     
     if(rayDirectionAnim2 > 0.0) {
         if(abs(rayRoute.y - 0.) <= 0.01) {
-            ray = normalize(vec3(rayRoute.x, 0., rayRoute.z));
-            radiusAnim = 1.;
-            radiusAnim = 100.;
-            sphereAnim = 100.;
+            ray = normalize(vec3(rayRoute.x, rayRoute.y, rayRoute.z));
+            radiusAnim = 20.;
+            routeAnim = 20.;
+            sphereAnim = 20.;
         }
     }
     
     float t = 0.0;
-    for(int i=0; i<10; i++) {
+    for(int i=0; i<20; i++) {
         vec3 pos = ray * t;
         vec2 dd = sceneSpheres(pos);
         d = vec2(sdSphere(p - pos, dd.x), MAT_MARCHSPHERE);
-        if(dd.x < 0.001 && hitSphereID == 0.) {
-            hitSphereID = float(i);
+
+        vec2 sceneDist = sceneMap(pos);
+        if (sceneDist.x < 0.001) {
+            if(hitSphereID == 0.) {
+              hitSphereID = float(i);
+            }
+            break;
         }
+
         float alpha2 = step(radiusAnim, float(i) + 2.);
         float alpha = clamp(radiusAnim - float(i) - 1., 0.0, 1.0);
         
-        vec4 cirCol = mix(vec4(.0, 0.05, 0.1, 0.9), vec4(0.2, 1., 1.4, .6) , alpha2);
+        vec4 cirCol = vec4(.0, 0.05, 0.1, 0.9); //mix(vec4(.0, 0.05, 0.1, 0.9), vec4(0.2, 1., 1.4, .6) , alpha2);
+        // fill
         col = mix(col, cirCol, smoothstep(0.01, 0., d.x) * cirCol.a * alpha);
+        // strike
         col = mix(col, vec4(0., 0., 0., 1.), smoothstep(0.02, 0., abs(d.x) - 0.01) * alpha);
         t += dd.x;
     }
