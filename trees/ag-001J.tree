@@ -75,14 +75,14 @@ float eio(float t) {
 float fio(float t) {
 	return t == 0.0 || t == 1.0
 		? t
-		: t < 0.5
+		: t <= 0.5
 		? -0.5 * pow(2.0, 5.0 - ((t + 0.5) * 10.0)) + 1.0 - 0.5
 		: +0.5 * pow(2.0, (10.0 * (t - 0.5)) - 5.0) + 0.5;
 }
 
 void timeLine(float time)
 {
-    cameraPos = vec3(5., 2., -3.); // mix(vec3(0.0), , eio(t));
+    cameraPos = vec3(5., 5., -3.); // mix(vec3(0.0), , eio(t));
     cameraTarget = vec3(0.0, 0.0, 5.);
     
     //time += 32.;
@@ -99,7 +99,7 @@ void timeLine(float time)
     // cornersAnim = mix(0., 1., t);
     
     t = tl(time, 0.0, 0.5);
-    cameraPos = mix(cameraPos, vec3(5., 6., -3.) , t); // eio(t));
+    // cameraPos = mix(cameraPos, vec3(5., 6., -3.) , t); // eio(t));
     ///cameraTarget = vec3(0.0, 0.0, 3.0); //mix(cameraTarget, , eio(t));
     
     // t = tl(time, 0.5, 0.5);
@@ -310,19 +310,20 @@ vec2 gizmoScreenZ(vec3 p)
 
 float sphereID = 0.0;
 float hitSphereID = 0.0;
+vec3 rayRoute = vec3(0., 1., 0.); // y must be init to non-zero
 vec2 gizmoMarching(vec3 p)
 {
     vec3 ray = vec3(0., 0., 1.);
     vec2 d = vec2(10000.);
     
-    // if(rayDirectionAnim2 > 0.0) {
-    //    float a1 = fract(rayDirectionAnim * 19.99999);
-    //    float a2 = floor(rayDirectionAnim * 19.99999) / 20.;
-    //    vec2 screenSize = iResolution.xy / min(iResolution.x, iResolution.y);
-    //    screenSize.y *= -1.;
-    //    screenSize = mix(-screenSize, screenSize, vec2(a1, a2));
-    //    ray = mix(vec3(0.), vec3(screenSize, screenZ) * 10.0, rayDirectionAnim2) - vec3(0.);
-    // }
+    if(rayDirectionAnim2 > 0.0) {
+        if(abs(rayRoute.y - 0.) <= 0.01) {
+            ray = normalize(vec3(rayRoute.x, 0., rayRoute.z));
+            radiusAnim = 1.;
+            radiusAnim = 100.;
+            sphereAnim = 100.;
+        }
+    }
     
     float t = 0.0;
     vec3 pos;
@@ -360,6 +361,7 @@ vec2 gizmoRayDirection(vec3 p)
     vec2 screenSize = iResolution.xy / min(iResolution.x, iResolution.y);
     screenSize.y *= -1.;
     screenSize = mix(-screenSize, screenSize, vec2(a1, a2));
+    rayRoute = mix(vec3(0.), vec3(screenSize, screenZ) * 10.0, rayDirectionAnim2);
     vec2 c1 = vec2(sdLine(p, vec3(0.), mix(vec3(0.), vec3(screenSize, screenZ) * 10.0, rayDirectionAnim2), 0.02), MAT_RAYDIRECTION);
     
     vec3 ray = normalize(vec3(screenSize, screenZ));
@@ -551,7 +553,16 @@ vec4 radiusShade(vec2 mat, vec3 p)
 
     vec3 ray = vec3(0., 0., 1.);
     vec2 d = vec2(10000.);
-
+    
+    if(rayDirectionAnim2 > 0.0) {
+        if(abs(rayRoute.y - 0.) <= 0.01) {
+            ray = normalize(vec3(rayRoute.x, 0., rayRoute.z));
+            radiusAnim = 1.;
+            radiusAnim = 100.;
+            sphereAnim = 100.;
+        }
+    }
+    
     float t = 0.0;
     for(int i=0; i<10; i++) {
         vec3 pos = ray * t;
@@ -572,7 +583,7 @@ vec4 radiusShade(vec2 mat, vec3 p)
     return col;
 }
 
-float luminance2(vec3 col)
+float luminance(vec3 col)
 {
     return dot(vec3(0.298912, 0.586611, 0.114478), col);
 }
@@ -580,7 +591,7 @@ float luminance2(vec3 col)
 vec3 reinhard(vec3 col, float exposure, float white) {
     col *= exposure;
     white *= exposure;
-    float lum = luminance2(col);
+    float lum = luminance(col);
     return (col * (lum / (white * white) + 1.0) / (lum + 1.0));
 }
 
