@@ -39,7 +39,7 @@ const app = new Elysia({
 app.listen(port, async ({ hostname, port }) => {
         console.log(`Serving: http://${hostname}:${port}/index.xml`)
 
-        console.log(app.server?.publish)
+        // console.log(app.server?.publish)
 
         const watcher = watch('build/live/')
         let lastSent = Date.now()
