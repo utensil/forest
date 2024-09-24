@@ -14,11 +14,15 @@ new Elysia()
     }))
 	.ws('/live', {
 		async open(ws) {
+            // ws.subscribe('update')
             all_ws.push(ws)
             // set a limit of 20 connections for now, enough for my local development
-            while (all_ws.length > 20) {
-                const ws_to_close = all_ws.shift()
-                ws_to_close.close()
+            if(all_ws.length > 20) {
+                console.log(`Too many connections: ${all_ws.length}`)
+                while (all_ws.length > 20) {
+                    const ws_to_close = all_ws.shift()
+                    ws_to_close?.close()
+                }
             }
         },
         async close(ws) {
@@ -30,7 +34,9 @@ new Elysia()
 
         const watcher = watch('build/live/')
         let lastSent = Date.now()
+        let lastSentFile
         for await (const event of watcher) {
+            // debounce
             if (Date.now() - lastSent < 1000) {
                 continue
             }
@@ -43,13 +49,21 @@ new Elysia()
 
                 if (await updated_file.exists()) {
                     const updated_file_name = await updated_file.text()
+
+                    // same file debounce
+                    if (updated_file_name == lastSentFile && Date.now() - lastSent < 5000) {
+                        continue
+                    }
+
                     for (const ws of all_ws) {
                         ws.send({
                             type: 'update',
                             data: updated_file_name
                         })
                     }
+
                     lastSent = Date.now()
+                    lastSentFile = updated_file_name
                 }
             }
         }

@@ -30,7 +30,7 @@ export PORT=1314
 # ps aux|grep reload|grep node|awk '{print $2}'|xargs kill -9 #-s index.xml -f
 # bunx reload -d output -p $PORT &
 
-bun --hot dev.ts &
+bun --watch --no-clear-screen dev.ts &
 
 # echo "Open http://localhost:$PORT/index.xml"
 

@@ -21,7 +21,7 @@ ws.onmessage = function(event) {
             let page = path_parts.pop() || window.location.pathname;
             page = page.replace(/\.tree$/, '.xml');
             console.debug(`navigate to ${page}`);
-            window.location.href = `/${page}`;
+            window.location.replace(`/${page}`);
         } else {
             console.debug('reloading current page');
             window.location.reload();

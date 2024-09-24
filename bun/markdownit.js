@@ -5,7 +5,7 @@ import markdownit from 'markdown-it'
 const md = markdownit({html: true});
 
 const markdownit_tags = document.querySelectorAll('.markdownit.grace-loading');
-console.log(markdownit_tags);
+// console.log(markdownit_tags);
 for (let i = 0; i < markdownit_tags.length; i++) {
     const markdownit_tag = markdownit_tags[i];
     const markdown_source = markdownit_tag.innerHTML;
