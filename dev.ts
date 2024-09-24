@@ -1,4 +1,4 @@
-// bun add elysia @elysiajs/static
+// bun add elysia @elysiajs/static @types/bun
 import { Elysia } from 'elysia'
 import { staticPlugin } from '@elysiajs/static'
 import { watch } from "fs/promises";
@@ -18,11 +18,11 @@ new Elysia()
 	// 	yield 'Hello'
 	// 	yield 'World'
 	// })
-	.get('/ok', function* () {
-		yield 1
-		yield 2
-		yield 3
-	})
+	// .get('/ok', function* () {
+	// 	yield 1
+	// 	yield 2
+	// 	yield 3
+	// })
 	.ws('/live', {
 		async open(ws) {
             all_ws.push(ws)
@@ -42,21 +42,26 @@ new Elysia()
         const watcher = watch('build/live/')
         let lastSent = Date.now()
         for await (const event of watcher) {
-            if (Date.now() - lastSent < 10000) {
+            if (Date.now() - lastSent < 1000) {
                 continue
             }
 
-            const trigger = Bun.file('build/live/trigger.txt')
-            const updated_file = await trigger.text()
+            console.log('event:', event)
 
-            if (trigger.exists()) {
-                for (const ws of all_ws) {
-                    ws.send({
-                        type: 'update',
-                        data: updated_file
-                    })
+            if(event.eventType == 'change' && event.filename == 'trigger.txt') {
+
+                const updated_file = Bun.file('build/live/updated_file.txt')
+
+                if (await updated_file.exists()) {
+                    const updated_file_name = await updated_file.text()
+                    for (const ws of all_ws) {
+                        ws.send({
+                            type: 'update',
+                            data: updated_file_name
+                        })
+                    }
+                    lastSent = Date.now()
                 }
-                lastSent = Date.now()
             }
         }
     })

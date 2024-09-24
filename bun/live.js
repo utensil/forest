@@ -11,10 +11,21 @@ ws.onerror = function(event) {
 ws.onmessage = function(event) {
     const message = JSON.parse(event.data);
     if (message.type === 'update') {
-        console.debug('reloading for ' + message.data);
+        console.debug('reloading for:', message.data);
         ws.onclose = null;
         ws.close();
-        window.location.reload();
+        // trim messgae.data
+        message.data = message.data.trim();
+        if (/\.tree$/.test(message.data)) {
+            let path_parts = message.data.split('/');
+            let page = path_parts.pop() || window.location.pathname;
+            page = page.replace(/\.tree$/, '.xml');
+            console.debug(`navigate to ${page}`);
+            window.location.href = `/${page}`;
+        } else {
+            console.debug('reloading current page');
+            window.location.reload();
+        } 
     }
 };
 ws.onclose = function() {
