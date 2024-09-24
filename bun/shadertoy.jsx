@@ -79,22 +79,33 @@ async function resolveIncludesAsync(lines) {
 
 // uts end
 
+const HOVER_OUT = 0;
+const HOVER_STARTED = 1;
+const HOVERING = 2;
+
 const ShaderPlane = (props) => {
     // This reference will give us direct access to the mesh
     const mesh = useRef();
-    const clock = useRef(new THREE.Clock());
-    const [isHovered, setIsHovered] = useState(false);
+    const [isHovered, setIsHovered] = useState(HOVER_OUT);
     const [initialHoverTime, setInitialHoverTime] = useState(0);
     // const [isInView, setIsInView] = useState(false);
     const { invalidate, setFrameloop } = useThree();
     const initialTime = props.initialTime;
 
-    useFrame(() => {
-        if (mesh.current) {
-            const elapsedTime = clock.current.getElapsedTime();
-            if(isHovered) {
-                mesh.current.material.uniforms.iTime.value = elapsedTime - initialHoverTime;
+    useFrame((state) => {
+        const { clock } = state;
+        const elapsedTime = clock.getElapsedTime();
+        if (!mesh.current) {
+            return;
+        }
+        if (isHovered === HOVER_STARTED) {
+            if(mesh.current.material.uniforms.iTime.value == initialTime) {
+                mesh.current.material.uniforms.iTime.value = 0;
             }
+            setInitialHoverTime(elapsedTime - mesh.current.material.uniforms.iTime.value);
+            setIsHovered(HOVERING);
+        } else if (isHovered === HOVERING) {
+            mesh.current.material.uniforms.iTime.value = elapsedTime - initialHoverTime;
         }
     });
     // const element = props.element;
@@ -150,17 +161,16 @@ const ShaderPlane = (props) => {
       }), []
     );
 
-    const handlePointerOver = () => {
-        setIsHovered(true);
-        if (mesh.current && mesh.current.material.uniforms.iTime.value != initialTime) {
-            setInitialHoverTime(clock.current.getElapsedTime() - mesh.current.material.uniforms.iTime.value);
-        }
-        invalidate();
+    const handlePointerOver = (e) => {
+        // console.debug(e);
+        setIsHovered(HOVER_STARTED);
+        // invalidate();
         setFrameloop("always");
     };
 
-    const handlePointerOut = () => {
-        setIsHovered(false);
+    const handlePointerOut = (e) => {
+        // console.debug(e);
+        setIsHovered(HOVER_OUT);
         setFrameloop("demand");
         console.debug("iTime", mesh.current.material.uniforms.iTime.value);
     };

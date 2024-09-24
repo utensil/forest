@@ -16,7 +16,7 @@ penrose_roots.forEach(async (penrose_root) => {
         // fetch trio json
         let response = await fetch(penrose_root_trio);
         const trio_spec = await response.json();
-        console.log(trio_spec);
+        // console.debug(trio_spec);
         const domain = await fetch_text(`./penrose/${trio_spec['domain']}`);
         const substance = await fetch_text(`./penrose/${trio_spec['substance']}`);
         const style = await fetch_text(`./penrose/${trio_spec['style'][0]}`);

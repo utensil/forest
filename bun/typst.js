@@ -20,7 +20,7 @@ const getUrlBase = () => {
     const urlParts = url.pathname.split('/');
     urlParts.pop();
     const urlBase = url.origin + urlParts.join('/') + '/typst/';
-    console.log(urlBase);
+    // console.debug(urlBase);
     return urlBase;
 }
 

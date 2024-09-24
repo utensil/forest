@@ -10,7 +10,7 @@ embeded_wgputoys.forEach(async (element) => {
 
     let shader = element.textContent;
     let custom = element.getAttribute('data-custom');
-    console.log('custom', custom);
+    // console.debug('custom', custom);
     if (custom) {
         custom = JSON.parse(custom);
     } else {
