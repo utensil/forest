@@ -6,13 +6,13 @@ const startLiveReload = () => {
     const ws = new WebSocket(`ws://${hostname}:${port}/live`);
     ws.onopen = function() {
         console.debug('live reload connected');
-        const intervalID = setInterval(function() {
-            if (ws.readyState === WebSocket.OPEN) {
-                ws.send('ping');
-            } else {
-                clearInterval(intervalID);
-            }
-        }, 10*60*1000);
+        // const intervalID = setInterval(function() {
+        //     if (ws.readyState === WebSocket.OPEN) {
+        //         ws.send('ping');
+        //     } else {
+        //         clearInterval(intervalID);
+        //     }
+        // }, 10*60*1000);
     };
     ws.onerror = function(event) {
         console.error('live reload error:', event);
