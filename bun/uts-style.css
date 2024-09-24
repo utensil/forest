@@ -664,37 +664,42 @@ code.highlight, code.highlight code {
 }
 
 
-:root[data-applied-mode="dark"] svg.embedded-tex-svg {
-    filter: invert(0.85);
-}
+:root[data-applied-mode="dark"] {
 
-:root[data-applied-mode="dark"] img.embedded-tex-svg {
-    filter: invert(0.85);
-}
+    svg.embedded-tex-svg {
+        filter: invert(0.85);
+    }
 
-:root[data-applied-mode="dark"] img[src^="data:image/svg+xml"] {
-    filter: invert(0.85);
-}
+    img.embedded-tex-svg {
+        filter: invert(0.85);
+    }
 
+    img[src^="data:image/svg+xml"] {
+        filter: invert(0.85);
+    }
 
-:root[data-applied-mode="dark"] span.newvocab {
-    filter: invert(1) !important;
-    /* filter: brightness(800%) !important; */
-}
+    span.newvocab {
+        filter: invert(1) !important;
+        /* filter: brightness(800%) !important; */
+    }
 
-:root[data-applied-mode="dark"] #langblock-toggle svg {
-    filter: invert(0.85);
-}
+    #langblock-toggle svg {
+        filter: invert(0.85);
+    }
 
-[data-applied-mode="dark"] {
     .lazy-loading, .loading, .grace-loading {
         filter: invert(0.85);
     }
     .markdownit.grace-loading, code.highlight.grace-loading {
         filter: unset;
     }
-}
 
-:root[data-applied-mode="dark"] .typst-root, :root[data-applied-mode="dark"] .pikchr-root {
-    filter: invert(1.0);
+    .typst-root, .pikchr-root {
+        filter: invert(1.0);
+    }
+
+    .penrose-root svg {
+        filter: invert(1.0); 
+        /* drop-shadow(0 0 5px #ffffff); */
+    }
 }
