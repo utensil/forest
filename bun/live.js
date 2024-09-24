@@ -18,6 +18,7 @@ const startLiveReload = () => {
         console.error('live reload error:', event);
     };
     ws.onmessage = function(event) {
+        // console.log(event);
         const message = JSON.parse(event.data);
         if (message.type === 'update') {
             console.debug('reloading for:', message.data);

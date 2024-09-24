@@ -18,7 +18,7 @@ const app = new Elysia({
     }))
 	.ws('/live', {
 		async open(ws) {
-            // ws.subscribe('update')
+            ws.subscribe('update')
             // console.log(ws.raw)
             all_ws.push(ws)
             // set a limit of 20 connections for now, enough for my local development
@@ -34,8 +34,12 @@ const app = new Elysia({
             all_ws = all_ws.filter((w) => w.id !== ws.id)
         }
 	})
-	.listen(port, async ({ hostname, port }) => {
+
+
+app.listen(port, async ({ hostname, port }) => {
         console.log(`Serving: http://${hostname}:${port}/index.xml`)
+
+        console.log(app.server?.publish)
 
         const watcher = watch('build/live/')
         let lastSent = Date.now()
@@ -67,13 +71,16 @@ const app = new Elysia({
                     
                     // postpone to debounce
                     setTimeout(() => {
-                        for (const ws of all_ws) {
-                            ws.send({
-                                type: 'update',
-                                data: updated_file_name
-                            })
-                        }
-
+                        app.server?.publish('update', JSON.stringify({
+                            type: 'update',
+                            data: updated_file_name.trim()
+                        }))
+                        // for (const ws of all_ws) {
+                        //     ws.send({
+                        //         type: 'update',
+                        //         data: updated_file_name
+                        //     })
+                        // }
                         lastSent = Date.now()
                         lastSentFile = updated_file_name
                     }, 500)
