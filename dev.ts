@@ -12,17 +12,6 @@ new Elysia()
         assets: 'output',
         prefix: ''
     }))
-	// .get('/', 'Hello World')
-	// .get('/image', Bun.file('mika.webp'))
-	// .get('/stream', function* () {
-	// 	yield 'Hello'
-	// 	yield 'World'
-	// })
-	// .get('/ok', function* () {
-	// 	yield 1
-	// 	yield 2
-	// 	yield 3
-	// })
 	.ws('/live', {
 		async open(ws) {
             all_ws.push(ws)
@@ -46,7 +35,7 @@ new Elysia()
                 continue
             }
 
-            console.log('event:', event)
+            // console.log('event:', event)
 
             if(event.eventType == 'change' && event.filename == 'trigger.txt') {
 
