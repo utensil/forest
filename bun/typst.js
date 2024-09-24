@@ -5,14 +5,14 @@ import { FetchAccessModel } from '@myriaddreamin/typst.ts';
 import { randstr } from '@myriaddreamin/typst.ts/dist/esm/utils.mjs';
 // The following paths come from https://github.com/Myriad-Dreamin/typst.ts/blob/main/packages/typst.ts/examples/all-in-one-lite.html
 // But they crashes bun so we do the copy manually in our build.sh
-// import typst_ts_web_compiler_bg from '@myriaddreamin/typst-ts-web-compiler/pkg/typst_ts_web_compiler_bg.wasm';
-// import typst_ts_renderer_bg from '@myriaddreamin/typst-ts-renderer/pkg/typst_ts_renderer_bg.wasm';
+import typst_ts_web_compiler_bg from '@myriaddreamin/typst-ts-web-compiler/pkg/typst_ts_web_compiler_bg.wasm';
+import typst_ts_renderer_bg from '@myriaddreamin/typst-ts-renderer/pkg/typst_ts_renderer_bg.wasm';
 
 $typst.setCompilerInitOptions({
-    getModule: () => './typst_ts_web_compiler_bg.wasm',
+    getModule: () => typst_ts_web_compiler_bg,
 });
 $typst.setRendererInitOptions({
-    getModule: () => './typst_ts_renderer_bg.wasm',
+    getModule: () => typst_ts_renderer_bg,
 });
 
 const getUrlBase = () => {
