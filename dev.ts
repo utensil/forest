@@ -41,10 +41,10 @@ const app = new Elysia({
         let lastSent = Date.now()
         let lastSentFile
         for await (const event of watcher) {
-            // debounce
-            if (Date.now() - lastSent < 500) {
-                continue
-            }
+            // // debounce
+            // if (Date.now() - lastSent < 2000) {
+            //     continue
+            // }
 
             // console.log('event:', event)
 
@@ -56,24 +56,27 @@ const app = new Elysia({
                     const updated_file_name = await updated_file.text()
 
                     // same file debounce
-                    if (updated_file_name == lastSentFile && Date.now() - lastSent < 6000) {
-                        continue
-                    }
+                    // if (updated_file_name == lastSentFile && Date.now() - lastSent < 3000) {
+                    //     continue
+                    // }
 
                     // if(all_ws.length > 1) {
                     //     all_ws[0].publish('update', updated_file_name)
                     //     console.log('publish update:', updated_file_name)
                     // }
+                    
+                    // postpone to debounce
+                    setTimeout(() => {
+                        for (const ws of all_ws) {
+                            ws.send({
+                                type: 'update',
+                                data: updated_file_name
+                            })
+                        }
 
-                    for (const ws of all_ws) {
-                        ws.send({
-                            type: 'update',
-                            data: updated_file_name
-                        })
-                    }
-
-                    lastSent = Date.now()
-                    lastSentFile = updated_file_name
+                        lastSent = Date.now()
+                        lastSentFile = updated_file_name
+                    }, 500)
                 }
             }
         }

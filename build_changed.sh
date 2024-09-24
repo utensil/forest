@@ -1,4 +1,6 @@
 #!/bin/bash
+set -eo pipefail
+
 SCRIPT_DIR=$(dirname "$(readlink -f "$0")")
 PROJECT_ROOT="$SCRIPT_DIR"
 
@@ -46,5 +48,8 @@ while IFS= read -r line; do
     else
         echo "🤷 No action for $LINE"
     fi
-    (mkdir -p build/live && realpath --relative-to=$PROJECT_ROOT $CHANGED_FILE > build/live/updated_file.txt && touch build/live/trigger.txt)
+
+    (mkdir -p build/live && realpath --relative-to=$PROJECT_ROOT $CHANGED_FILE > build/live/updated_file.txt)
 done
+
+touch build/live/trigger.txt
