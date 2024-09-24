@@ -80,6 +80,11 @@ function bun_build {
         if [[ $FILE == *".css" ]]; then
             echo "🚀 lightningcss"
             bunx lightningcss --minify --bundle --targets '>= 0.25%' bun/$FILE -o output/$FILE
+            # check result
+            if [ $? -ne 0 ]; then
+                echo "🚨 lightningcss failed"
+                exit 1
+            fi
         else
             bun run ./bun_build.js bun/$FILE
             # bun build bun/$FILE --outdir output
@@ -92,11 +97,11 @@ function copy_extra_assets {
     cp -f assets/shader/*.glsl output/shader/
     # ls output/shader/
 
-    cp node_modules/@myriaddreamin/typst-ts-web-compiler/pkg/typst_ts_web_compiler_bg.wasm output/
-    cp node_modules/@myriaddreamin/typst-ts-renderer/pkg/typst_ts_renderer_bg.wasm output/
+    # cp node_modules/@myriaddreamin/typst-ts-web-compiler/pkg/typst_ts_web_compiler_bg.wasm output/
+    # cp node_modules/@myriaddreamin/typst-ts-renderer/pkg/typst_ts_renderer_bg.wasm output/
     # ls output/*.wasm
 
-    cp node_modules/ginac-wasm/dist/ginac.wasm output/
+    # cp node_modules/ginac-wasm/dist/ginac.wasm output/
 
 }
 
