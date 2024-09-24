@@ -191,58 +191,9 @@ button#search {
     border: 0;
 }
 
-/* :root[data-applied-mode="dark"] [style*="color"] {
-    filter: invert(1) !important;
-    /* filter: brightness(800%) !important;
-} */
-
-/* :root[data-applied-mode="dark"] code [style*="color"] {
-    filter: unset !important;
-} */
-
-/* :root[data-applied-mode="dark"] img[src$=".svg"] {
-    background-color: white;
-} */
-
-/* object.embedded-tex {
-    width: 88ex
-}
-
-:root[data-applied-mode="dark"] .embedded-tex svg text {
-    fill: white;
-}
-
-:root[data-applied-mode="dark"] .embedded-tex svg path.outline_glyph {
-    fill: white;
-}
-
-:root[data-applied-mode="dark"] .embedded-tex svg path.typst-shape {
-    stroke: white;
-} */
-
 svg.embedded-tex-svg, img[src^="data:image/svg+xml"] {
     max-width: 97%;
 }
-
-:root[data-applied-mode="dark"] svg.embedded-tex-svg {
-    filter: invert(0.85);
-}
-
-:root[data-applied-mode="dark"] img.embedded-tex-svg {
-    filter: invert(0.85);
-}
-
-:root[data-applied-mode="dark"] img[src^="data:image/svg+xml"] {
-    filter: invert(0.85);
-}
-
-/* :root[data-applied-mode="dark"] svg.embedded-tex-svg text {
-    fill: white;
-}
-
-:root[data-applied-mode="dark"] svg.embedded-tex-svg path {
-    stroke: white;
-} */
 
 [data-taxon="Remark"] {
     --taxon-color: #97da9b;  /* #239f5c; */
@@ -360,11 +311,6 @@ span.vocab .link.local a {
     color: var(--uts-vocab) !important;
 }
 
-:root[data-applied-mode="dark"] span.newvocab {
-    filter: invert(1) !important;
-    /* filter: brightness(800%) !important; */
-}
-
 #toc a.bullet {
     display: none;
 }
@@ -437,9 +383,6 @@ nav#toc li.active {
     /* background-color: rgba(0, 100, 255, .1); */
 }
 
-/* :root[data-applied-mode="dark"] nav#toc .link.local.active {
-    color: color-mix(in srgb, var(--uts-text) 30%, yellow 70%);
-} */
 
 
 /* a.slug {
@@ -583,10 +526,6 @@ button#langblock-toggle {
     border: 0;
 }
 
-:root[data-applied-mode="dark"] #langblock-toggle svg {
-    filter: invert(0.85);
-}
-
 @keyframes breathing {
     0% {
         opacity: 0;
@@ -653,21 +592,8 @@ code.highlight, code.highlight code {
     height: unset;
 }
 
-[data-applied-mode="dark"] {
-    .lazy-loading, .loading, .grace-loading {
-        filter: invert(0.85);
-    }
-    .markdownit.grace-loading, code.highlight.grace-loading {
-        filter: unset;
-    }
-}
-
 .penrose-root.loading, .typst-root.loading, .pikchr-root.loading {
     background-image: url(./images/3d-cube-scan-loading.svg);
-}
-
-:root[data-applied-mode="dark"] .typst-root, :root[data-applied-mode="dark"] .pikchr-root {
-    filter: invert(1.0);
 }
 
 .typst-root svg, .pikchr-root svg {
@@ -735,4 +661,83 @@ code.highlight, code.highlight code {
             content: " \25BE";
         }
     }
+}
+
+/* :root[data-applied-mode="dark"] [style*="color"] {
+    filter: invert(1) !important;
+    /* filter: brightness(800%) !important;
+} */
+
+/* :root[data-applied-mode="dark"] code [style*="color"] {
+    filter: unset !important;
+} */
+
+/* :root[data-applied-mode="dark"] img[src$=".svg"] {
+    background-color: white;
+} */
+
+/* object.embedded-tex {
+    width: 88ex
+}
+
+:root[data-applied-mode="dark"] .embedded-tex svg text {
+    fill: white;
+}
+
+:root[data-applied-mode="dark"] .embedded-tex svg path.outline_glyph {
+    fill: white;
+}
+
+:root[data-applied-mode="dark"] .embedded-tex svg path.typst-shape {
+    stroke: white;
+} */
+
+/* :root[data-applied-mode="dark"] svg {
+    filter: invert(0.85);
+} */
+
+:root[data-applied-mode="dark"] svg.embedded-tex-svg {
+    filter: invert(0.85);
+}
+
+:root[data-applied-mode="dark"] img.embedded-tex-svg {
+    filter: invert(0.85);
+}
+
+:root[data-applied-mode="dark"] img[src^="data:image/svg+xml"] {
+    filter: invert(0.85);
+}
+
+/* :root[data-applied-mode="dark"] svg.embedded-tex-svg text {
+    fill: white;
+}
+
+:root[data-applied-mode="dark"] svg.embedded-tex-svg path {
+    stroke: white;
+} */
+
+:root[data-applied-mode="dark"] span.newvocab {
+    filter: invert(1) !important;
+    /* filter: brightness(800%) !important; */
+}
+
+/* :root[data-applied-mode="dark"] nav#toc .link.local.active {
+    color: color-mix(in srgb, var(--uts-text) 30%, yellow 70%);
+} */
+
+:root[data-applied-mode="dark"] #langblock-toggle svg {
+    filter: invert(0.85);
+}
+
+[data-applied-mode="dark"] {
+    .lazy-loading, .loading, .grace-loading {
+        filter: invert(0.85);
+    }
+    .markdownit.grace-loading, code.highlight.grace-loading {
+        filter: unset;
+    }
+}
+
+:root[data-applied-mode="dark"] .typst-root, :root[data-applied-mode="dark"] .pikchr-root {
+    filter: invert(1.0);
 }
