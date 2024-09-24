@@ -85,14 +85,16 @@ const ShaderPlane = (props) => {
     const clock = useRef(new THREE.Clock());
     const [isHovered, setIsHovered] = useState(false);
     const [initialHoverTime, setInitialHoverTime] = useState(0);
-    const [isInView, setIsInView] = useState(false);
+    // const [isInView, setIsInView] = useState(false);
     const { invalidate, setFrameloop } = useThree();
     const initialTime = props.initialTime;
 
     useFrame(() => {
         if (mesh.current) {
             const elapsedTime = clock.current.getElapsedTime();
-            mesh.current.material.uniforms.iTime.value = initialHoverTime != 0 ? elapsedTime - initialHoverTime : initialTime;
+            if(isHovered) {
+                mesh.current.material.uniforms.iTime.value = elapsedTime - initialHoverTime;
+            }
         }
     });
     // const element = props.element;
@@ -150,8 +152,8 @@ const ShaderPlane = (props) => {
 
     const handlePointerOver = () => {
         setIsHovered(true);
-        if(initialHoverTime == 0) {
-            setInitialHoverTime(clock.current.getElapsedTime());
+        if (mesh.current && mesh.current.material.uniforms.iTime.value != initialTime) {
+            setInitialHoverTime(clock.current.getElapsedTime() - mesh.current.material.uniforms.iTime.value);
         }
         invalidate();
         setFrameloop("always");
@@ -207,7 +209,8 @@ embeded_shaders.forEach((element) => {
                   <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} decay={0} intensity={Math.PI} />
                   <pointLight position={[-10, -10, -10]} decay={0} intensity={Math.PI} /> */}
                   <Billboard>
-                      <ShaderPlane fragmentShader={shader} element={element} initialTime={initialTime}/>
+                      <ShaderPlane fragmentShader={shader} initialTime={initialTime}/> 
+                      {/* element={element}  */}
                   </Billboard>
                 </Canvas>,
               );
