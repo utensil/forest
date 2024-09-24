@@ -4,6 +4,12 @@ body {
     line-height: 1.55; */
 }
 
+:root {
+    /* 16:9 */
+    --uts-canvas-width: 80%; /* 80ex; */
+    --uts-canvas-height: 45ex;
+}
+
 @media screen {
     body {
         margin-top: 2em;
@@ -18,6 +24,8 @@ body {
 
     #grid-wrapper article {
         max-width: 100%;
+        margin-left: unset;
+        margin-right: unset;
     }
 
     #grid-wrapper nav#toc {
@@ -49,37 +57,24 @@ body {
     }
 }
 
-.link.external a:after {
-    font-size: 50%;
-    vertical-align: super;
-    /* content: "\2197"; */
-    /* content: "\21A0"; */
-    /* content: "\2192"; */
-    /* content: "⧉"; */
-}
+/* for media width < 450px */
+@media only screen and (max-width: 450px) {
+    :root {
+        --uts-canvas-width: 53.33ex;
+        --uts-canvas-height: 30ex;
+    }
 
-nav#toc a.link.local,
-nav#toc .link.local a,
-nav#toc a.slug {
-    font-size: 80%;
-    box-shadow: none;
-    text-decoration-line: underline;
-    text-decoration-style: dotted;
-    color: rgb(132, 132, 132);
-    /* text-decoration-line: unset;
-    text-decoration-style: unset;
-    color: #10731d; */
-}
-
-/* article {
-    line-break: strict;
-    word-break: keep-all;
-} */
-
-:root {
-    /* 16:9 */
-    --uts-canvas-width: 80%; /* 80ex; */
-    --uts-canvas-height: 45ex;
+    [data-taxon="Figure"] {
+        figure {
+            margin-left: 0;
+            margin-right: 0;
+            width: 60ex;
+    
+            img {
+                min-height: var(--uts-canvas-height);
+            }
+        }
+    }
 }
 
 :root,
@@ -107,6 +102,33 @@ nav#toc a.slug {
 body {
     background-color: var(--uts-background) !important;
 }
+
+.link.external a:after {
+    font-size: 50%;
+    vertical-align: super;
+    /* content: "\2197"; */
+    /* content: "\21A0"; */
+    /* content: "\2192"; */
+    /* content: "⧉"; */
+}
+
+nav#toc a.link.local,
+nav#toc .link.local a,
+nav#toc a.slug {
+    font-size: 80%;
+    box-shadow: none;
+    text-decoration-line: underline;
+    text-decoration-style: dotted;
+    color: rgb(132, 132, 132);
+    /* text-decoration-line: unset;
+    text-decoration-style: unset;
+    color: #10731d; */
+}
+
+/* article {
+    line-break: strict;
+    word-break: keep-all;
+} */
 
 body,
 span.taxon,
