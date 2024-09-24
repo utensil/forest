@@ -7,7 +7,11 @@ const port = process.env.PORT || 3000
 
 let all_ws : any[] = []
 
-new Elysia()
+const app = new Elysia({
+        websocket: {
+            idleTimeout: 960
+        }
+    })
     .use(staticPlugin({
         assets: 'output',
         prefix: ''
@@ -15,6 +19,7 @@ new Elysia()
 	.ws('/live', {
 		async open(ws) {
             // ws.subscribe('update')
+            // console.log(ws.raw)
             all_ws.push(ws)
             // set a limit of 20 connections for now, enough for my local development
             if(all_ws.length > 20) {
@@ -26,7 +31,7 @@ new Elysia()
             }
         },
         async close(ws) {
-            all_ws = all_ws.filter((w) => w !== ws)
+            all_ws = all_ws.filter((w) => w.id !== ws.id)
         }
 	})
 	.listen(port, async ({ hostname, port }) => {
@@ -37,7 +42,7 @@ new Elysia()
         let lastSentFile
         for await (const event of watcher) {
             // debounce
-            if (Date.now() - lastSent < 1000) {
+            if (Date.now() - lastSent < 500) {
                 continue
             }
 
@@ -51,9 +56,14 @@ new Elysia()
                     const updated_file_name = await updated_file.text()
 
                     // same file debounce
-                    if (updated_file_name == lastSentFile && Date.now() - lastSent < 5000) {
+                    if (updated_file_name == lastSentFile && Date.now() - lastSent < 6000) {
                         continue
                     }
+
+                    // if(all_ws.length > 1) {
+                    //     all_ws[0].publish('update', updated_file_name)
+                    //     console.log('publish update:', updated_file_name)
+                    // }
 
                     for (const ws of all_ws) {
                         ws.send({
