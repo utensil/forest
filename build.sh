@@ -105,6 +105,12 @@ function copy_extra_assets {
 
 }
 
+function build_ssr {
+    echo "⭐ Rebuilding SSR assets"
+    echo > build/ssr.log
+    bunx roger trios assets/penrose/*.trio.json -o output 1>> build/ssr.log 2>> build/ssr.log
+}
+
 function build {
   mkdir -p build
   echo "⭐ Rebuilding bun"
@@ -114,7 +120,8 @@ function build {
   show_result
   # echo "⭐ Copying assets"
   copy_extra_assets
-
+  build_ssr
+  show_result
   # echo "Open build/forester.log to see the log."
 }
 
