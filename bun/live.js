@@ -1,3 +1,16 @@
+const saveScrollPosition = () => {
+    sessionStorage.setItem(window.location.href, JSON.stringify({
+        x: window.scrollX,
+        y: window.scrollY
+    }));
+    // console.debug('saved scroll position:', window.scrollX, window.scrollY);
+}
+
+const reloadWithScroll = () => {
+    saveScrollPosition();
+    window.location.reload();
+}
+
 const startLiveReload = () => {
 
     const hostname = window.location.hostname;
@@ -30,11 +43,18 @@ const startLiveReload = () => {
                 let path_parts = message.data.split('/');
                 let page = path_parts.pop() || window.location.pathname;
                 page = page.replace(/\.tree$/, '.xml');
-                console.debug(`navigate to ${page}`);
-                window.location.replace(`/${page}`);
+                page = `/${page}`
+                console.debug(window.location.pathname, page)
+                if(window.location.pathname != page) {
+                    console.debug(`redirecting to ${page}`);
+                    window.location.replace(page);
+                } else {
+                    console.debug('reloading current page');
+                    reloadWithScroll();
+                }
             } else {
                 console.debug('reloading current page');
-                window.location.reload();
+                reloadWithScroll();
             } 
         } else {
             console.debug('recv:', event);
@@ -45,5 +65,14 @@ const startLiveReload = () => {
         setTimeout(startLiveReload, 1000 * Math.random());
     };
 }
+
+window.addEventListener('load', function() {
+    const scrollPosition = JSON.parse(sessionStorage.getItem(window.location.href));
+    // console.debug('scroll position:', scrollPosition);
+    if (scrollPosition) {
+        window.scrollTo(scrollPosition.x, scrollPosition.y);
+        sessionStorage.removeItem(window.location.href);
+    }
+});
 
 startLiveReload();
