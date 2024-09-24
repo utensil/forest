@@ -20,7 +20,7 @@ while IFS= read -r line; do
     # CHANGED_FILE_RELATIVE=$(realpath --relative-to=$PROJECT_ROOT $CHANGED_FILE)
     # echo "📂$CHANGED_FILE_DIRNAME"
     if [[ $CHANGED_FILE == *".css" ]] || [[ $CHANGED_FILE == *".js" ]]; then
-        remove_output_file $CHANGED_FILE_BASENAME
+        # remove_output_file $CHANGED_FILE_BASENAME
         ./build.sh
     elif [[ $CHANGED_FILE == *".xsl" ]]; then
         remove_output_file $CHANGED_FILE_BASENAME
@@ -46,4 +46,5 @@ while IFS= read -r line; do
     else
         echo "🤷 No action for $LINE"
     fi
+    mkdir -p build/live && echo $CHANGED_FILE_DIRNAME/$CHANGED_FILE_BASENAME > build/live/trigger.txt
 done

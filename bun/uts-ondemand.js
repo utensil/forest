@@ -1,5 +1,5 @@
 const load_script = (src) => {
-    console.log(`loading ${src}`);
+    console.debug(`loading ${src}`);
     const script = document.createElement('script');
     script.type = 'module';
     script.src = src;
@@ -61,4 +61,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     // load_script('hello-egglog.js');
 
     // load_script('hello-ginac.js');
+
+    const hostname = window.location.hostname;
+    
+    if (hostname === 'localhost' || hostname === '127.0.0.1') {
+        load_script('live.js');
+    }
 });

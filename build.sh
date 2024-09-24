@@ -120,8 +120,8 @@ function build {
   show_result
   # echo "⭐ Copying assets"
   copy_extra_assets
-  build_ssr
-  show_result
+#   build_ssr
+#   show_result
   # echo "Open build/forester.log to see the log."
 }
 
