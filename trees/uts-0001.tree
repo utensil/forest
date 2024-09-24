@@ -4,24 +4,26 @@
 
 \title{draft notes}
 
-\p{Some draft notes are captured by topic:
+\block{draft notes captured by topic}{
 
-\ul{
-  \li{[[tt-000L]] with tag \code{tt}}
+\scope{
+\put\transclude/title{draft notes for [[tt-0001]]}
+\put\transclude/expanded{false}
+\transclude{tt-000L}
+\transclude{ag-000C}
+}
 }
 
-}
-
-\p{Other draft notes:}
-
+\block{other draft notes}{
 \scope{
   % \put\transclude/toc{true}
   % \put\transclude/numbered{true}
   % \put\transclude/metadata{true}
-  % \put\transclude/expanded{true}
-
+  % \put\transclude/expanded{false}
   \query{
       \open\query
       \isect{\tag{draft}}{\compl{\tag{tt}}}
   }
+}
+
 }
