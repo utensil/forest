@@ -1,8 +1,12 @@
 # Utensil's Forest
 
+[![Built with Forester](https://img.shields.io/badge/Built_with-Forester-27560f?style=flat)](https://www.jonmsterling.com/jms-005P.xml)
+
 https://utensil.github.io/forest/
 
 ## Development
+
+[![Bundled with Bun](https://img.shields.io/badge/Bundled_with-Bun-f9f1e2?style=flat)](https://bun.sh) [![Styled with Lightning CSS](https://img.shields.io/badge/Styled_with-Lightning_CSS-faba32?style=flat)](https://lightningcss.com) [![Linted with Biome](https://img.shields.io/badge/Linted_with-Biome-60a5fa?style=flat&logo=biome)](https://biomejs.dev)
 
 ### Initial Setup
 
