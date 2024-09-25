@@ -73,9 +73,13 @@ for (const typst_tag of typst_tags) {
                 typst_src_url = `/${typst_src_url}`
             }
             const rendered = await $typst.svg({
-                mainFilePath: typst_src_url, data_selection: {
-                    js: true, css: false, defs: true, body: true
-                }
+                mainFilePath: typst_src_url,
+                data_selection: {
+                    js: true,
+                    css: false,
+                    defs: true,
+                    body: true,
+                },
             })
             typst_tag.innerHTML = rendered
             typst_tag.classList.remove('loading')
@@ -85,8 +89,11 @@ for (const typst_tag of typst_tags) {
             const rendered = await $typst.svg({
                 mainContent: typst_source,
                 data_selection: {
-                    js: true, css: false, defs: true, body: true
-                }
+                    js: true,
+                    css: false,
+                    defs: true,
+                    body: true,
+                },
             })
             typst_tag.innerHTML = rendered
             typst_tag.classList.remove('loading')
