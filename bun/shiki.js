@@ -18,7 +18,7 @@ const code_tags = document.querySelectorAll(
     'article code.highlight.grace-loading',
 )
 
-if (code_tags.length != 0) {
+if (code_tags.length !== 0) {
     // https://github.com/PaulOlteanu/Railscasts-Renewed/blob/master/themes/Railscasts-Renewed.json
     const railscastsjson = await loadJson(
         'https://cdn.jsdelivr.net/gh/PaulOlteanu/Railscasts-Renewed@master/themes/Railscasts-Renewed.json',

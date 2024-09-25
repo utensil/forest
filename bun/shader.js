@@ -13,20 +13,19 @@ async function resolveIncludesAsync(lines) {
             const line_trim = line.trim()
             if (line_trim.startsWith('#include "lygia')) {
                 let include_url = line_trim.substring(15)
-                include_url =
-                    'https://lygia.xyz' + include_url.replace(/\"|\;|\s/g, '')
+                include_url = `https://lygia.xyz${include_url.replace(/\"|\;|\s/g, '')}`
                 console.debug('fetching', include_url)
                 return fetch(include_url).then((res) => res.text())
             }
             // uts begin
-            else if (line_trim.startsWith('#include "')) {
+            if (line_trim.startsWith('#include "')) {
                 let include_url = line_trim.substring(10)
                 include_url = include_url.replace(/\"|\;|\s/g, '')
                 console.debug('fetching', include_url)
                 return fetch(include_url).then((res) => res.text())
             }
             // uts end
-            else return line
+            return line
         }),
     )
 

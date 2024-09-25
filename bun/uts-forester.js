@@ -81,7 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (
                     !entry.isIntersecting &&
                     toc_entry &&
-                    !toc_entry.parentElement.querySelector(`ul li`)
+                    !toc_entry.parentElement.querySelector('ul li')
                 ) {
                     // console.log("Scrolling out of view", entry.target, entry.intersectionRatio, entry.isIntersecting, entry);
                     const toc_container = toc_entry
@@ -120,7 +120,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 if (
                     toc_entry &&
-                    !toc_entry.parentElement.querySelector(`ul li`)
+                    !toc_entry.parentElement.querySelector('ul li')
                 ) {
                     const toc_container = toc_entry
                         .closest('li')
@@ -142,7 +142,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 )
                 if (
                     toc_entry &&
-                    !toc_entry.parentElement.querySelector(`ul li`)
+                    !toc_entry.parentElement.querySelector('ul li')
                 ) {
                     // toc_entry.parentElement.parentElement.classList.remove('active');
                     content_out_of_sight_observer.observe(
