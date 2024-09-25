@@ -34,7 +34,7 @@ if (code_tags.length !== 0) {
         let theme = isDark ? 'aurora-x' : 'one-light' // 'ayu-dark' //'aurora-x'
         let themes = ['aurora-x', 'one-light']
 
-        code_tags.forEach(async (code) => {
+        for (const code of code_tags) {
             let lang = code.classList[0] // assuming the first class is the language
             if (!lang) return
 
@@ -64,7 +64,7 @@ if (code_tags.length !== 0) {
             )
             code.innerHTML = html
             code.classList.remove('grace-loading')
-        })
+        }
     }
 
     await highlightAllCode()

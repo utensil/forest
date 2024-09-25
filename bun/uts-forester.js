@@ -67,7 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const content_out_of_sight_observer = new IntersectionObserver(
         (entries) => {
-            entries.forEach((entry) => {
+            for (const entry of entries) {
                 const details = entry.target.querySelector(
                     'section > details[id]',
                 )
@@ -90,23 +90,23 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (toc_container) toc_container.classList.remove('active')
                     content_out_of_sight_observer.unobserve(entry.target)
                 }
-            })
+            }
         },
     )
 
     const toc_out_of_sight_observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
+        for (const entry of entries) {
             // console.log(entry);
             toc_out_of_sight_observer.unobserve(entry.target)
             if (!entry.isIntersecting) {
                 // console.log("Scrolling into view", entry.target);
                 entry.target.scrollIntoView({ block: 'center' })
             }
-        })
+        }
     })
 
     const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
+        for (const entry of entries) {
             // console.log(entry);
             const id = entry.target.getAttribute('id')
             if (entry.intersectionRatio > 0) {
@@ -152,15 +152,15 @@ document.addEventListener('DOMContentLoaded', () => {
                     )
                 }
             }
-        })
+        }
     })
 
     // Track all sections that have an `id` applied
-    document
-        .querySelectorAll('article section > details[id]')
-        .forEach((section) => {
-            observer.observe(section)
-        })
+    for (const section of document.querySelectorAll(
+        'article section > details[id]',
+    )) {
+        observer.observe(section)
+    }
 })
 
 // Important to be 1st in the DOM

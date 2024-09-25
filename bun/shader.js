@@ -4,8 +4,8 @@ import { ImageEffectRenderer } from 'https://esm.sh/@mediamonks/image-effect-ren
 
 // import resolveLygia from "https://lygia.xyz/resolve.esm.js"
 
-async function resolveIncludesAsync(lines) {
-    if (!Array.isArray(lines)) lines = lines.split(/\r?\n/)
+async function resolveIncludesAsync(input) {
+    const lines = Array.isArray(input) ? input : input.split(/\r?\n/)
 
     const src = ''
     const response = await Promise.all(
@@ -38,7 +38,7 @@ const options = { loop: true }
 
 const embeded_shaders = document.querySelectorAll('.embeded-shader')
 
-embeded_shaders.forEach((element) => {
+for (const element of embeded_shaders) {
     const shader = element.textContent
     element.textContent = ''
 
@@ -57,4 +57,4 @@ embeded_shaders.forEach((element) => {
     }
 
     element.addEventListener('mouseover', handleMouseOver)
-})
+}
