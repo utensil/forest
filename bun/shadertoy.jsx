@@ -48,8 +48,8 @@ void main() {
 
 // import resolveLygia from "https://lygia.xyz/resolve.esm.js"
 
-async function resolveIncludesAsync(lines) {
-    if (!Array.isArray(lines)) lines = lines.split(/\r?\n/)
+async function resolveIncludesAsync(input) {
+    const lines = Array.isArray(input) ? input : input.split(/\r?\n/)
 
     const src = ''
     const response = await Promise.all(
@@ -57,20 +57,19 @@ async function resolveIncludesAsync(lines) {
             const line_trim = line.trim()
             if (line_trim.startsWith('#include "lygia')) {
                 let include_url = line_trim.substring(15)
-                include_url =
-                    'https://lygia.xyz' + include_url.replace(/\"|\;|\s/g, '')
+                include_url = `https://lygia.xyz${include_url.replace(/\"|\;|\s/g, '')}`
                 console.debug('fetching', include_url)
                 return fetch(include_url).then((res) => res.text())
             }
             // uts begin
-            else if (line_trim.startsWith('#include "')) {
+            if (line_trim.startsWith('#include "')) {
                 let include_url = line_trim.substring(10)
                 include_url = include_url.replace(/\"|\;|\s/g, '')
                 console.debug('fetching', include_url)
                 return fetch(include_url).then((res) => res.text())
             }
             // uts end
-            else return line
+            return line
         }),
     )
 
@@ -99,7 +98,7 @@ const ShaderPlane = (props) => {
             return
         }
         if (isHovered === HOVER_STARTED) {
-            if (mesh.current.material.uniforms.iTime.value == initialTime) {
+            if (mesh.current.material.uniforms.iTime.value === initialTime) {
                 mesh.current.material.uniforms.iTime.value = 0
             }
             setInitialHoverTime(
@@ -162,7 +161,7 @@ const ShaderPlane = (props) => {
             },
             iResolution: { value: new THREE.Vector3(16, 9, 1) },
         }),
-        [],
+        [initialTime],
     )
 
     const handlePointerOver = (e) => {
@@ -201,7 +200,7 @@ const ShaderPlane = (props) => {
 
 const embeded_shaders = document.querySelectorAll('.embeded-shadertoy')
 
-embeded_shaders.forEach((element) => {
+for (const element of embeded_shaders) {
     const shader = element.textContent
     element.textContent = ''
 
@@ -241,4 +240,4 @@ embeded_shaders.forEach((element) => {
     // };
 
     // element.addEventListener('mouseover', handleMouseOver);
-})
+}

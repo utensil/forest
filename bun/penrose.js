@@ -9,7 +9,7 @@ const fetch_text = async (url) => {
 }
 
 const penrose_roots = document.querySelectorAll('.penrose-root.loading')
-penrose_roots.forEach(async (penrose_root) => {
+for (const penrose_root of penrose_roots) {
     let trio = {}
     const penrose_root_trio = penrose_root.getAttribute('data-trio')
     if (penrose_root_trio) {
@@ -34,4 +34,4 @@ penrose_roots.forEach(async (penrose_root) => {
     penrose_root.innerHTML = ''
     const dia = await Penrose.diagram(trio, penrose_root, async () => undefined)
     penrose_root.classList.remove('loading')
-})
+}

@@ -4,7 +4,7 @@ await init()
 
 const embeded_wgputoys = document.querySelectorAll('.wgputoy')
 
-embeded_wgputoys.forEach(async (element) => {
+for (const element of embeded_wgputoys) {
     const canvas = document.createElement('canvas')
     canvas.id = `wgputoy-${Math.random().toString(36).substring(7)}`
 
@@ -100,4 +100,4 @@ embeded_wgputoys.forEach(async (element) => {
     }
 
     element.addEventListener('mouseover', handleMouseOver)
-})
+}

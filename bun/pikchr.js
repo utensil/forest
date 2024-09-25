@@ -9,10 +9,10 @@ import pikchr from 'pikchr-wasm' // Default entrypoint, optimized for speed, ~76
 await pikchr.loadWASM() // First of all you need to load the WASM instance and wait for it
 
 const pikchr_roots = document.querySelectorAll('.pikchr-root.loading')
-pikchr_roots.forEach(async (pikchr_root) => {
+for (const pikchr_root of pikchr_roots) {
     const pikchr_source = pikchr_root.textContent
     pikchr_root.innerHTML = ''
     const pikchr_svg = pikchr.render(pikchr_source)
     pikchr_root.innerHTML = pikchr_svg
     pikchr_root.classList.remove('loading')
-})
+}
