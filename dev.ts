@@ -2,11 +2,8 @@
 import { watch } from 'node:fs/promises'
 import { staticPlugin } from '@elysiajs/static'
 import { Elysia } from 'elysia'
-import type { websocket } from 'elysia/ws'
 
 const port = process.env.PORT || 3000
-
-let all_ws: (typeof websocket)[] = []
 
 const app = new Elysia({
     websocket: {
@@ -22,19 +19,9 @@ const app = new Elysia({
     .ws('/live', {
         async open(ws) {
             ws.subscribe('update')
-            // console.log(ws.raw)
-            all_ws.push(ws)
-            // set a limit of 20 connections for now, enough for my local development
-            if (all_ws.length > 20) {
-                console.log(`Too many connections: ${all_ws.length}`)
-                while (all_ws.length > 20) {
-                    const ws_to_close = all_ws.shift()
-                    ws_to_close?.close()
-                }
-            }
         },
         async close(ws) {
-            all_ws = all_ws.filter((w) => w.id !== ws.id)
+            ws.unsubscribe('update')
         },
     })
 
@@ -65,11 +52,6 @@ app.listen(port, async ({ hostname, port }) => {
                 //     continue
                 // }
 
-                // if(all_ws.length > 1) {
-                //     all_ws[0].publish('update', updated_file_name)
-                //     console.log('publish update:', updated_file_name)
-                // }
-
                 // postpone to debounce
                 setTimeout(() => {
                     app.server?.publish(
@@ -79,12 +61,6 @@ app.listen(port, async ({ hostname, port }) => {
                             data: updated_file_name.trim(),
                         }),
                     )
-                    // for (const ws of all_ws) {
-                    //     ws.send({
-                    //         type: 'update',
-                    //         data: updated_file_name
-                    //     })
-                    // }
                     lastSent = Date.now()
                     lastSentFile = updated_file_name
                 }, 500)
