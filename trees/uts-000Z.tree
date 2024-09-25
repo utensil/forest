@@ -7,7 +7,11 @@
 \md{
 So far I have settled on [Bun](https://bun.sh/) for JS bundling including support for TS, WASM, and maybe running tools from node.js ecosystem.
 
-I have encountered 2 issues so far: [one](https://github.com/oven-sh/bun/issues/13582) is crashing for WASM, but I have worked around it. The other is weird behavior of `bunx` failing to recognize `lighteningcss`, similar to [this issue](https://github.com/oven-sh/bun/issues/12330). It's a nice all-in-one solution, but I'll keep in mind that I could move away from it anytime due to lessons learned as described in [this post](https://dev.to/thejaredwilcurt/bun-hype-how-we-learned-nothing-from-yarn-2n3j), and that I'm a bit scared by the thousands of open issues on the repo.
+I have encountered 2 issues so far: [one](https://github.com/oven-sh/bun/issues/13582) (✅fixed) is crashing for WASM, but I have worked around it. The other is weird behavior of `bunx` failing to recognize `lighteningcss`, similar to [this issue](https://github.com/oven-sh/bun/issues/12330) (✅turns out that I should use `bunx lighteningcss-cli`).
+
+It's a nice all-in-one solution, but I'll keep in mind that I could move away from it anytime due to lessons learned as described in [this post](https://dev.to/thejaredwilcurt/bun-hype-how-we-learned-nothing-from-yarn-2n3j), and that I'm a bit scared by the thousands of open issues on the repo.
+
+UPDATE on Sep 25: I'm using more and more Bun features, and it no longer seems neccessary to be ready to switch to another bundler as I've tried almost all of them, and none has the ease of using Bun.
 
 Some interesting posts on Bun:
 
