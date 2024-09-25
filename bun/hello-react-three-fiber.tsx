@@ -1,48 +1,50 @@
+import { Billboard, CameraControls, Plane, Text } from '@react-three/drei'
+import { Canvas, type ThreeElements, useFrame } from '@react-three/fiber'
+import React, { useRef, useState, useMemo } from 'react'
+import { createRoot } from 'react-dom/client'
 // example from https://github.com/pmndrs/react-three-fiber
 // bun install three react-dom react @react-three/fiber @react-three/drei
 import * as THREE from 'three'
-import { createRoot } from 'react-dom/client'
-import React, { useRef, useState, useMemo } from 'react'
-import { Canvas, useFrame, ThreeElements } from '@react-three/fiber'
-import { Billboard, Text, Plane, CameraControls } from '@react-three/drei'
 
 function Box(props: ThreeElements['mesh']) {
-  const ref = useRef<THREE.Mesh>(null!)
-  const [hovered, hover] = useState(false)
-  const [clicked, click] = useState(false)
-  useFrame((state, delta) => (ref.current.rotation.x += delta))
-  return (
-    <mesh
-      {...props}
-      ref={ref}
-      scale={clicked ? 1.5 : 1}
-      onClick={(event) => click(!clicked)}
-      onPointerOver={(event) => hover(true)}
-      onPointerOut={(event) => hover(false)}>
-      <boxGeometry args={[1, 1, 1]} />
-      <meshStandardMaterial color={hovered ? 'hotpink' : 'orange'} />
-    </mesh>
-  )
+    const ref = useRef<THREE.Mesh>(null!)
+    const [hovered, hover] = useState(false)
+    const [clicked, click] = useState(false)
+    useFrame((state, delta) => (ref.current.rotation.x += delta))
+    return (
+        <mesh
+            {...props}
+            ref={ref}
+            scale={clicked ? 1.5 : 1}
+            onClick={(event) => click(!clicked)}
+            onPointerOver={(event) => hover(true)}
+            onPointerOut={(event) => hover(false)}
+        >
+            <boxGeometry args={[1, 1, 1]} />
+            <meshStandardMaterial color={hovered ? 'hotpink' : 'orange'} />
+        </mesh>
+    )
 }
 
 const ShaderPlane = () => {
     // This reference will give us direct access to the mesh
-    const mesh = useRef();
-  
+    const mesh = useRef()
+
     const uniforms = useMemo(
-      () => ({
-        iTime: {
-          value: 0.0,
-        },
-        iResolution: { value: new THREE.Vector2(10, 10) }
-      }), []
-    );
-  
+        () => ({
+            iTime: {
+                value: 0.0,
+            },
+            iResolution: { value: new THREE.Vector2(10, 10) },
+        }),
+        [],
+    )
+
     useFrame((state) => {
-      const { clock } = state;
-      mesh.current.material.uniforms.iTime.value = clock.getElapsedTime();
-    });
-  
+        const { clock } = state
+        mesh.current.material.uniforms.iTime.value = clock.getElapsedTime()
+    })
+
     return (
         <Plane args={[10, 10]} ref={mesh}>
             <shaderMaterial
@@ -182,24 +184,31 @@ void main() {
   gl_Position = projectedPosition;
 }`}
             />
-        </Plane>      
-    );
-  };
+        </Plane>
+    )
+}
 
 createRoot(document.getElementById('r3f-root') as HTMLElement).render(
-  <Canvas>
-    <CameraControls />
-    <ambientLight intensity={Math.PI / 2} />
-    <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} decay={0} intensity={Math.PI} />
-    <pointLight position={[-10, -10, -10]} decay={0} intensity={Math.PI} />
-    <Box position={[-7, 0, 0]} />
-    <Box position={[7, 0, 0]} />
-    <Box position={[0, -1.2, 0]} />
-    <Box position={[0, 1.2, 0]} />
-    <Billboard>
-        <Text fontSize="0.2" color="black">rotate the camera by dragging, scroll to zoom
-        </Text>
-        <ShaderPlane />
-    </Billboard>
-  </Canvas>,
+    <Canvas>
+        <CameraControls />
+        <ambientLight intensity={Math.PI / 2} />
+        <spotLight
+            position={[10, 10, 10]}
+            angle={0.15}
+            penumbra={1}
+            decay={0}
+            intensity={Math.PI}
+        />
+        <pointLight position={[-10, -10, -10]} decay={0} intensity={Math.PI} />
+        <Box position={[-7, 0, 0]} />
+        <Box position={[7, 0, 0]} />
+        <Box position={[0, -1.2, 0]} />
+        <Box position={[0, 1.2, 0]} />
+        <Billboard>
+            <Text fontSize={0.2} color="black">
+                rotate the camera by dragging, scroll to zoom
+            </Text>
+            <ShaderPlane />
+        </Billboard>
+    </Canvas>,
 )

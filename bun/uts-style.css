@@ -1,5 +1,6 @@
 body {
-    font-family: Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif;
+    font-family: Palatino, "Palatino Linotype", "Palatino LT STD",
+        "Book Antiqua", Georgia, serif;
     /* font-size: 12pt;
     line-height: 1.55; */
 }
@@ -70,7 +71,7 @@ body {
             margin-left: 0;
             margin-right: 0;
             width: 60ex;
-    
+
             img {
                 min-height: var(--uts-canvas-height);
             }
@@ -158,8 +159,7 @@ nav#toc a.slug {
 }
 
 /* This applies to references, including in title, main text, backmatter, but not in toc */
-.link-reference a
-{
+.link-reference a {
     color: var(--uts-text-cite) !important;
     box-shadow: none !important;
     text-decoration: none !important;
@@ -214,19 +214,23 @@ button#search {
     border: 0;
 }
 
-svg.embedded-tex-svg, img[src^="data:image/svg+xml"] {
+svg.embedded-tex-svg,
+img[src^="data:image/svg+xml"] {
     max-width: 97%;
 }
 
 [data-taxon="Remark"] {
-    --taxon-color: #97da9b;  /* #239f5c; */
+    --taxon-color: #97da9b; /* #239f5c; */
 }
 
 [data-taxon="Example"] {
     --taxon-color: #e28563; /* #d7511f #cd7e62 #9e3c17 #8C2700 */
 }
 
-[data-taxon="Theorem"], [data-taxon="Lemma"], [data-taxon="Corollary"], [data-taxon="Proof"] {
+[data-taxon="Theorem"],
+[data-taxon="Lemma"],
+[data-taxon="Corollary"],
+[data-taxon="Proof"] {
     --taxon-color: #95dbfc; /* #006994; */
 }
 
@@ -247,18 +251,29 @@ section[data-taxon] {
     margin: 1em 0 1em 0;
     padding: 1em 1em 1em 1em;
     border-left: 5px solid var(--taxon-color);
-    background-color: color-mix(in srgb, var(--taxon-color) 6%, var(--uts-background) 94%);
+    background-color: color-mix(
+        in srgb,
+        var(--taxon-color) 6%,
+        var(--uts-background) 94%
+    );
 }
 
 section[data-taxon]:hover {
-    background-color: color-mix(in srgb, var(--taxon-color) 12%, var(--uts-background) 88%);
+    background-color: color-mix(
+        in srgb,
+        var(--taxon-color) 12%,
+        var(--uts-background) 88%
+    );
 }
 
-section[data-taxon] h1 span.taxon, #toc span.taxon[data-taxon] {
+section[data-taxon] h1 span.taxon,
+#toc span.taxon[data-taxon] {
     color: color-mix(in srgb, var(--taxon-color) 60%, var(--uts-text) 40%) !important;
 }
 
-section[data-taxon="Example"], section[data-taxon="Notation"], section[data-taxon="Convention"] {
+section[data-taxon="Example"],
+section[data-taxon="Notation"],
+section[data-taxon="Convention"] {
     border: 1px solid var(--taxon-color);
     border-radius: 5px;
 }
@@ -302,12 +317,17 @@ section[data-taxon="Algorithm"] {
     }
 }
 
-section[data-taxon="Figure"].block:hover, section[data-taxon="Proof"].block:hover, section[data-taxon="Algorithm"].block:hover {
+section[data-taxon="Figure"].block:hover,
+section[data-taxon="Proof"].block:hover,
+section[data-taxon="Algorithm"].block:hover {
     background-color: rgba(0, 100, 255, 0.04);
 }
 
 /* test with http://127.0.0.1:1314/tt-001Q.xml for References/Context/Backlinks/Related and Remark/Convention/Definition  */
-.link-list section[data-taxon], section[data-taxon="Proof"], section[data-taxon="Definition"], section[data-taxon="Reference"] {
+.link-list section[data-taxon],
+section[data-taxon="Proof"],
+section[data-taxon="Definition"],
+section[data-taxon="Reference"] {
     margin-top: 5px;
     margin-bottom: 2px;
     padding-top: 5px;
@@ -315,12 +335,15 @@ section[data-taxon="Figure"].block:hover, section[data-taxon="Proof"].block:hove
     /* background-color: unset; */
 }
 
-section[data-taxon]:hover section[data-taxon="Proof"], section[data-taxon="Proof"]:hover, section[data-taxon="Definition"]:hover, section[data-taxon="Reference"]:hover {
+section[data-taxon]:hover section[data-taxon="Proof"],
+section[data-taxon="Proof"]:hover,
+section[data-taxon="Definition"]:hover,
+section[data-taxon="Reference"]:hover {
     background-color: rgba(0, 100, 255, 0.04);
 }
 
 span.newvocab {
-    color:blue;
+    color: blue;
     font-weight: bold;
 }
 
@@ -330,7 +353,11 @@ span.vocab {
 
 span.vocab .link.local a {
     /* text-decoration-style: solid; */
-    text-decoration-color: color-mix(in srgb, var(--uts-vocab) 40%, var(--uts-background) 60%);
+    text-decoration-color: color-mix(
+        in srgb,
+        var(--uts-vocab) 40%,
+        var(--uts-background) 60%
+    );
     color: var(--uts-vocab) !important;
 }
 
@@ -406,8 +433,6 @@ nav#toc li.active {
     /* background-color: rgba(0, 100, 255, .1); */
 }
 
-
-
 /* a.slug {
     word-break: keep-all;
 } */
@@ -430,10 +455,12 @@ nav#toc li.active {
 } */
 
 .link-buttons {
-    cursor:pointer;
+    cursor: pointer;
 }
 
-.link-button, .meta-lean a, .meta-lean-symbol {
+.link-button,
+.meta-lean a,
+.meta-lean-symbol {
     font-weight: normal;
     font-size: 60%;
     border-radius: 5px;
@@ -445,11 +472,13 @@ nav#toc li.active {
     float: right;
 }
 
-.link-button:hover, .meta-lean a:hover, .meta-lean-symbol:hover {
+.link-button:hover,
+.meta-lean a:hover,
+.meta-lean-symbol:hover {
     box-shadow: #95dbfc 0 0 5px;
 }
 
-.link-source span, 
+.link-source span,
 .link-pdf span {
     display: none;
     margin-left: 1ex;
@@ -460,7 +489,10 @@ nav#toc li.active {
     display: inline;
 } */
 
-.meta-lean a, .meta-lean-symbol, .link-source span, .link-pdf span {
+.meta-lean a,
+.meta-lean-symbol,
+.link-source span,
+.link-pdf span {
     font-family: Fira Code, DejaVu Sans Mono, monospace;
 }
 
@@ -502,8 +534,8 @@ nav#toc li.active {
 
 .todo {
     display: block;
-    background-color: /* light sepia */ rgba(255, 255, 0, 0.1);
-    border: 1px solid /* dark sepia */ rgb(129, 129, 24);
+    /* light sepia */ background-color: rgba(255, 255, 0, 0.1);
+    border: 1px /* dark sepia */ solid rgb(129, 129, 24);
     border-radius: 5px;
     padding: 1em;
     margin: 1em 0;
@@ -563,7 +595,8 @@ button#langblock-toggle {
     }
 }
 
-.embeded-shader, .embeded-shadertoy {
+.embeded-shader,
+.embeded-shadertoy {
     color: transparent;
     width: var(--uts-canvas-width);
     height: var(--uts-canvas-height);
@@ -577,7 +610,8 @@ button#langblock-toggle {
 
 } */
 
-.lazy-loading, .loading {
+.lazy-loading,
+.loading {
     color: transparent;
     height: var(--uts-canvas-height);
     background-image: url(./images/3d-cube-scan-hover.svg);
@@ -596,7 +630,8 @@ figure {
 /*
     Overrides extra styling in style.css
 */
-code.highlight, code.highlight code {
+code.highlight,
+code.highlight code {
     background-color: unset;
     padding: unset;
     font-size: unset;
@@ -607,7 +642,8 @@ code.highlight, code.highlight code {
     margin-bottom: 5em;
 } */
 
-.markdownit.grace-loading, code.highlight.grace-loading {
+.markdownit.grace-loading,
+code.highlight.grace-loading {
     color: var(--uts-text);
     white-space: pre-wrap;
     background: unset;
@@ -615,11 +651,14 @@ code.highlight, code.highlight code {
     height: unset;
 }
 
-.penrose-root.loading, .typst-root.loading, .pikchr-root.loading {
+.penrose-root.loading,
+.typst-root.loading,
+.pikchr-root.loading {
     background-image: url(./images/3d-cube-scan-loading.svg);
 }
 
-.typst-root svg, .pikchr-root svg {
+.typst-root svg,
+.pikchr-root svg {
     width: 100%;
     min-width: 70ex;
 }
@@ -654,7 +693,8 @@ code.highlight, code.highlight code {
     }
 }
 
-.usegpu, .wgputoy {
+.usegpu,
+.wgputoy {
     color: transparent;
     width: var(--uts-canvas-width);
     height: var(--uts-canvas-height);
@@ -662,7 +702,7 @@ code.highlight, code.highlight code {
     margin-left: auto;
     margin-right: auto;
     display: block;
-    
+
     canvas {
         position: relative !important;
     }
@@ -686,9 +726,7 @@ code.highlight, code.highlight code {
     }
 }
 
-
 :root[data-applied-mode="dark"] {
-
     svg.embedded-tex-svg {
         filter: invert(0.85);
     }
@@ -710,19 +748,23 @@ code.highlight, code.highlight code {
         filter: invert(0.85);
     }
 
-    .lazy-loading, .loading, .grace-loading {
+    .lazy-loading,
+    .loading,
+    .grace-loading {
         filter: invert(0.85);
     }
-    .markdownit.grace-loading, code.highlight.grace-loading {
+    .markdownit.grace-loading,
+    code.highlight.grace-loading {
         filter: unset;
     }
 
-    .typst-root, .pikchr-root {
+    .typst-root,
+    .pikchr-root {
         filter: invert(1.0);
     }
 
     .penrose-root svg {
-        filter: invert(1.0); 
+        filter: invert(1.0);
         /* drop-shadow(0 0 5px #ffffff); */
     }
 }

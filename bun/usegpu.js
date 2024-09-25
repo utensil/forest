@@ -1,11 +1,11 @@
 // bun add @use-gpu/webgpu
 // Follows https://usegpu.live/docs/guides-webgpu-canvas
-import React, { render } from '@use-gpu/live';
+import React, { render } from '@use-gpu/live'
+import { wgsl } from '@use-gpu/shader/wgsl'
+import { AutoCanvas, Canvas, WebGPU } from '@use-gpu/webgpu'
+import { FullScreen } from '@use-gpu/workbench'
+import { Loop, Pass, RawFullScreen, RawTexture } from '@use-gpu/workbench'
 import { createRoot } from 'react-dom/client'
-import { WebGPU, AutoCanvas, Canvas } from '@use-gpu/webgpu';
-import { FullScreen } from '@use-gpu/workbench';
-import { wgsl } from '@use-gpu/shader/wgsl';
-import { Loop, Pass, RawFullScreen, RawTexture } from '@use-gpu/workbench';
 
 // adapted from the default new compute.toys shader
 const shader = wgsl`
@@ -34,27 +34,23 @@ fn main(uv: vec2<f32>) -> vec4<f32> {
 
     return vec4<f32>(col, 1.0);
   }
-`;
+`
 
-const embeded_usegpus = document.querySelectorAll('.usegpu');
+const embeded_usegpus = document.querySelectorAll('.usegpu')
 
 render(() => {
-        return (
-          <WebGPU>
-            <AutoCanvas
-              selector={".usegpu"}
-              samples={4}
-            >
+    return (
+        <WebGPU>
+            <AutoCanvas selector={'.usegpu'} samples={4}>
                 <Loop>
                     <Pass>
                         <FullScreen shader={shader} />
                     </Pass>
                 </Loop>
             </AutoCanvas>
-          </WebGPU>
-        )
-      });
-
+        </WebGPU>
+    )
+})
 
 // const embeded_shaders = document.querySelectorAll('.usegpu');
 
@@ -69,11 +65,8 @@ render(() => {
 //         resolveIncludesAsync(shader).then((shader) => {
 //             element.classList.remove('lazy-loading');
 
-            
-
 //         });
 //     };
 
 //     element.addEventListener('mouseover', handleMouseOver);
 // });
-

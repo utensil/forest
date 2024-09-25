@@ -1,14 +1,14 @@
-import init, { start, run_program } from '../lib/egglog/web-demo/pkg';
+import init, { start, run_program } from '../lib/egglog/web-demo/pkg'
 
-await init();
+await init()
 
 function log(level, str) {
     // console.log(str);
 }
 
-window.log = log;
+window.log = log
 
-let result = run_program(`(function fib (i64) i64)
+const result = run_program(`(function fib (i64) i64)
 (set (fib 0) 0)
 (set (fib 1) 1)
 
@@ -18,6 +18,6 @@ let result = run_program(`(function fib (i64) i64)
 
 (run 7)
 
-(check (= (fib 7) 13))`);
+(check (= (fib 7) 13))`)
 
-console.log(result);
+console.log(result)
