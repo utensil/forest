@@ -77,11 +77,11 @@ function bun_build {
         # if the file extension is .css
         if [[ $FILE == *".css" ]]; then
             echo "🚀 lightningcss"
-            bunx lightningcss --error-recovery --minify --bundle --targets '>= 0.25%' bun/$FILE -o output/$FILE
+            bunx lightningcss-cli --minify --bundle --targets '>= 0.25%' bun/$FILE -o output/$FILE
             # check result
             EXIT_CODE=$?
             if [ $EXIT_CODE -ne 0 ]; then
-                echo "🚨 lightningcss failed"
+                echo "🚨 lightningcss failed with $EXIT_CODE"
                 exit $EXIT_CODE
             fi
         else
