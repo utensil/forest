@@ -1,6 +1,6 @@
 // bun add ginac-wasm
 import ginac_wasm from 'ginac-wasm/dist/ginac.wasm';
-const { initGiNaC, getFactory } = require('ginac-wasm');
+import { initGiNaC, getFactory } from 'ginac-wasm';
 
 (async () => {
   const GiNaC = await initGiNaC(ginac_wasm);
