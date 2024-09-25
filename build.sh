@@ -1,6 +1,4 @@
 #!/bin/bash
-set -eo pipefail
-
 SCRIPT_DIR=$(dirname "$(readlink -f "$0")")
 PROJECT_ROOT="$SCRIPT_DIR"
 
@@ -23,7 +21,7 @@ function show_lize_result {
   # if return code is zero, then echo "Done" else echo "Failed"
   if [ $? -ne 0 ]; then
     # echo a red "Failed"
-    echo -e "\033[0;31mFailed\033[0m"    
+    echo -e "\033[0;31mFailed\033[0m"
     tail -n 50 build/$1.log
     echo "open build/$1.log to see the log."
 
@@ -71,7 +69,7 @@ function bun_build {
     mkdir -p output
     prep_wasm wgputoy https://github.com/compute-toys/wgpu-compute-toy.git 3fee2f5d9441aa4c55ea9e7a0b6a1daa21e8e874
     prep_wasm egglog https://github.com/egraphs-good/egglog.git 8d9b10ec712106b21d10b7bf45d10c0f9d1d09c7 egglog/web-demo
-    # failed: 
+    # failed:
     # prep_wasm nalgebra https://github.com/dimforge/nalgebra
 
     # for each files in the directory `bun`, run bun build
