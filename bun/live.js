@@ -47,7 +47,7 @@ const startLiveReload = () => {
                 page = page.replace(/\.tree$/, '.xml')
                 page = `/${page}`
                 console.debug(window.location.pathname, page)
-                if (window.location.pathname != page) {
+                if (window.location.pathname !== page) {
                     console.debug(`redirecting to ${page}`)
                     window.location.replace(page)
                 } else {

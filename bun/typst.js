@@ -22,7 +22,7 @@ const getUrlBase = () => {
     const url = new URL(window.location.href)
     const urlParts = url.pathname.split('/')
     urlParts.pop()
-    const urlBase = url.origin + urlParts.join('/') + '/typst/'
+    const urlBase = `${url.origin + urlParts.join('/')}/typst/`
     // console.debug(urlBase);
     return urlBase
 }
@@ -43,10 +43,9 @@ $typst.getCompileOptions = async (opts) => {
         const destFile = `/${randstr()}.typ`
         await $typst.addSource(destFile, opts.mainContent)
         return { mainFilePath: destFile, diagnostics: 'none' }
-    } else {
-        // console.log('calling old');
-        return await $typst.getCompileOptionsOld(opts)
     }
+    // console.log('calling old');
+    return await $typst.getCompileOptionsOld(opts)
 }
 
 TypstSnippet.prototype.removeTmpOld = TypstSnippet.prototype.removeTmp

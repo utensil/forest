@@ -6,7 +6,7 @@ const embeded_wgputoys = document.querySelectorAll('.wgputoy')
 
 embeded_wgputoys.forEach(async (element) => {
     const canvas = document.createElement('canvas')
-    canvas.id = 'wgputoy-' + Math.random().toString(36).substring(7)
+    canvas.id = `wgputoy-${Math.random().toString(36).substring(7)}`
 
     let shader = element.textContent
     let custom = element.getAttribute('data-custom')
@@ -23,7 +23,7 @@ embeded_wgputoys.forEach(async (element) => {
         element.removeEventListener('mouseover', handleMouseOver)
         element.classList.remove('lazy-loading')
         element.appendChild(canvas)
-        if (canvas && canvas.getContext('webgpu') && 'gpu' in navigator) {
+        if (canvas?.getContext('webgpu') && 'gpu' in navigator) {
             const context = canvas.getContext('webgpu')
             const presentationFormat = navigator.gpu.getPreferredCanvasFormat()
             const adapter = await navigator.gpu.requestAdapter()
