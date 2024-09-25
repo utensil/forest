@@ -1,0 +1,127 @@
+\import{macros}
+% clifford hopf spin tt ag math draft tech exp notes
+\tag{tech}
+\tag{exp}
+
+\note{test graphviz}{
+\p{Adapted from \link{https://utensil.github.io/lean-ga/blueprint/dep_graph_section_1.html}:
+}
+
+\graphviz{dot}\verb>>>|
+
+strict digraph "" {	graph [bgcolor=transparent];	node [label="\N",		penwidth=1.8	];	edge [arrowhead=vee];	QuadraticForm	[color=green,		fillcolor="#B0ECA3",		label=QuadraticForm,		shape=box,		style=filled];	LinearMap	[color=green,		fillcolor="#B0ECA3",		label=LinearMap,		shape=box,		style=filled];	Dual	[color=green,		fillcolor="#B0ECA3",		label=Dual,		shape=box,		style=filled];	LinearMap -> Dual	[style=dashed];	TensorAlgebra	[color=green,		fillcolor="#B0ECA3",		label=TensorAlgebra,		shape=box,		style=filled];	LinearMap -> TensorAlgebra	[style=dashed];	Group	[color=green,		fillcolor="#B0ECA3",		label=Group,		shape=box,		style=filled];	Ring	[color=green,		fillcolor="#B0ECA3",		label=Ring,		shape=box,		style=filled];	Group -> Ring	[style=dashed];	Module	[color=green,		fillcolor="#B0ECA3",		label=Module,		shape=box,		style=filled];	Ring -> Module	[style=dashed];	DivisionRing	[color=green,		fillcolor="#B0ECA3",		label=DivisionRing,		shape=box,		style=filled];	Ring -> DivisionRing	[style=dashed];	RingHom	[color=green,		fillcolor="#B0ECA3",		label=RingHom,		shape=box,		style=filled];	Ring -> RingHom	[style=dashed];	Module -> LinearMap	[style=dashed];	VectorSpace	[color=green,		fillcolor="#B0ECA3",		label=VectorSpace,		shape=box,		style=filled];	Module -> VectorSpace	[style=dashed];	Algebra	[color=green,		fillcolor="#B0ECA3",		label=Algebra,		shape=box,		style=filled];	Module -> Algebra	[style=dashed];	RingQuot	[color=green,		fillcolor="#B0ECA3",		label=RingQuot,		shape=box,		style=filled];	Module -> RingQuot	[style=dashed];	BilinForm	[color=green,		fillcolor="#B0ECA3",		label=BilinForm,		shape=box,		style=filled];	Module -> BilinForm	[style=dashed];	FreeAlgebra	[color=green,		fillcolor="#B0ECA3",		label=FreeAlgebra,		shape=box,		style=filled];	Algebra -> FreeAlgebra	[style=dashed];	RingQuot -> FreeAlgebra	[style=dashed];	BilinForm -> QuadraticForm	[style=dashed];	DivisionRing -> VectorSpace	[style=dashed];	RingHom -> LinearMap	[style=dashed];	RingHom -> Algebra	[style=dashed];	RingHom -> RingQuot	[style=dashed];	AlgHom	[color=green,		fillcolor="#B0ECA3",		label=AlgHom,		shape=box,		style=filled];	RingHom -> AlgHom	[style=dashed];	FreeAlgebra -> TensorAlgebra	[style=dashed];	Monoid	[color=green,		fillcolor="#B0ECA3",		label=Monoid,		shape=box,		style=filled];	Monoid -> Ring	[style=dashed];}
+
+>>>
+
+\p{Adapted from \link{https://viz-js.com/}:
+}
+
+\graphviz{dot}\verb>>>|
+digraph {
+  graph [rankdir=LR];
+  node [shape=record];
+  0 [label="0 | [&bull; S, $]\n[S &rarr; &bull; a S b, $]\n[S &rarr; &bull;, $]"];
+  1 [label="1 | [S &bull;, $]"];
+  2 [label="2 | [S &rarr; a &bull; S b, $]\n[S &rarr; &bull; a S b, b]\n[S &rarr; &bull;, b]"];
+  3 [label="3 | [S &rarr; a S &bull; b, $]"];
+  4 [label="4 | [S &rarr; a &bull; S b, b]\n[S &rarr; &bull; a S b, b]\n[S &rarr; &bull;, b]"];
+  5 [label="5 | [S &rarr; a S b &bull;, $]"];
+  6 [label="6 | [S &rarr; a S &bull; b, b]"];
+  7 [label="7 | [S &rarr; a S b &bull;, b]"];
+  0 -> 1 [label=S];
+  0 -> 2 [label=a];
+  2 -> 3 [label=S];
+  2 -> 4 [label=a];
+  3 -> 5 [label=b];
+  4 -> 6 [label=S];
+  4 -> 4 [label=a];
+  6 -> 7 [label=b];
+}
+>>>
+
+\p{Adapted from \link{https://renenyffenegger.ch/notes/tools/Graphviz/examples/edge-crossing}:
+}
+\graphviz{dot}\verb>>>|
+digraph G {
+
+  node [shape=plaintext fontname="Arial"];
+
+  0  -> 1  [arrowhead=none];
+  1  -> 2  [arrowhead=none];
+  2  -> 7  [arrowhead=none];
+  7  -> 8  [arrowhead=none];
+  8  -> 9  [arrowhead=none];
+  8  -> 10 [arrowhead=none];
+  9  -> 10 [color="#aaaaaa" constraint=false];
+  10 -> 11 [arrowhead=none];
+  10 -> 12 [arrowhead=none];
+  11 -> 12 [color="#aaaaaa" constraint=false];
+  7  -> 13 [arrowhead=none];
+  8  -> 13 [color="#aaaaaa" constraint=false];
+  13 -> 14 [arrowhead=none];
+  7  -> 15 [arrowhead=none];
+  13 -> 15 [color="#aaaaaa" constraint=false];
+  15 -> 16 [arrowhead=none];
+  15 -> 17 [arrowhead=none];
+  16 -> 17 [color="#aaaaaa" constraint=false];
+  2  -> 3  [arrowhead=none];
+  7  -> 3  [color="#aaaaaa" constraint=false];
+  3  -> 4  [arrowhead=none];
+  2  -> 5  [arrowhead=none];
+  3  -> 5  [color="#aaaaaa" constraint=false];
+  5  -> 6  [arrowhead=none];
+  2  -> 18 [arrowhead=none];
+  5  -> 18 [color="#aaaaaa" constraint=false];
+  18 -> 19 [arrowhead=none];
+  19 -> 20 [arrowhead=none];
+  19 -> 21 [arrowhead=none];
+  20 -> 21 [color="#aaaaaa" constraint=false];
+  18 -> 22 [arrowhead=none];
+  19 -> 22 [color="#aaaaaa" constraint=false];
+}
+>>>
+
+\p{The same, but randomly choose a layout from one of 'circo', 'dot', 'fdp', 'sfdp', 'neato', 'osage', 'patchwork', 'twopi':
+}
+
+\graphviz{random}\verb>>>|
+digraph G {
+
+  node [shape=plaintext fontname="Arial"];
+
+  0  -> 1  [arrowhead=none];
+  1  -> 2  [arrowhead=none];
+  2  -> 7  [arrowhead=none];
+  7  -> 8  [arrowhead=none];
+  8  -> 9  [arrowhead=none];
+  8  -> 10 [arrowhead=none];
+  9  -> 10 [color="#aaaaaa" constraint=false];
+  10 -> 11 [arrowhead=none];
+  10 -> 12 [arrowhead=none];
+  11 -> 12 [color="#aaaaaa" constraint=false];
+  7  -> 13 [arrowhead=none];
+  8  -> 13 [color="#aaaaaa" constraint=false];
+  13 -> 14 [arrowhead=none];
+  7  -> 15 [arrowhead=none];
+  13 -> 15 [color="#aaaaaa" constraint=false];
+  15 -> 16 [arrowhead=none];
+  15 -> 17 [arrowhead=none];
+  16 -> 17 [color="#aaaaaa" constraint=false];
+  2  -> 3  [arrowhead=none];
+  7  -> 3  [color="#aaaaaa" constraint=false];
+  3  -> 4  [arrowhead=none];
+  2  -> 5  [arrowhead=none];
+  3  -> 5  [color="#aaaaaa" constraint=false];
+  5  -> 6  [arrowhead=none];
+  2  -> 18 [arrowhead=none];
+  5  -> 18 [color="#aaaaaa" constraint=false];
+  18 -> 19 [arrowhead=none];
+  19 -> 20 [arrowhead=none];
+  19 -> 21 [arrowhead=none];
+  20 -> 21 [color="#aaaaaa" constraint=false];
+  18 -> 22 [arrowhead=none];
+  19 -> 22 [color="#aaaaaa" constraint=false];
+}
+>>>
+
+}
