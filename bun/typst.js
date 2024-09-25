@@ -64,8 +64,7 @@ const fetch_text = async (url) => {
 
 const typst_tags = document.querySelectorAll('.typst-root.loading')
 // console.log(typst_tags);
-for (let i = 0; i < typst_tags.length; i++) {
-    const typst_tag = typst_tags[i]
+for (const typst_tag of typst_tags) {
     let typst_src_url = typst_tag.getAttribute('data-src')
 
     try {
@@ -73,13 +72,22 @@ for (let i = 0; i < typst_tags.length; i++) {
             if (!typst_src_url.startsWith('/')) {
                 typst_src_url = `/${typst_src_url}`
             }
-            const rendered = await $typst.svg({ mainFilePath: typst_src_url })
+            const rendered = await $typst.svg({
+                mainFilePath: typst_src_url, data_selection: {
+                    js: true, css: false, defs: true, body: true
+                }
+            })
             typst_tag.innerHTML = rendered
             typst_tag.classList.remove('loading')
         } else {
             const typst_source = typst_tag.textContent
             // console.log(typst_source);
-            const rendered = await $typst.svg({ mainContent: typst_source })
+            const rendered = await $typst.svg({
+                mainContent: typst_source,
+                data_selection: {
+                    js: true, css: false, defs: true, body: true
+                }
+            })
             typst_tag.innerHTML = rendered
             typst_tag.classList.remove('loading')
         }
