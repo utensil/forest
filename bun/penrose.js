@@ -1,7 +1,6 @@
 // Adapted from https://penrose.cs.cmu.edu/docs/ref/react
 // bun install @penrose/core
 import * as Penrose from '@penrose/core'
-import { a } from '@react-spring/three'
 
 const fetch_text = async (url) => {
     const response = await fetch(url)
