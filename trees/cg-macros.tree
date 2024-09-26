@@ -1,5 +1,7 @@
 \export{ag-macros}
 
+\tag{macro}
+
 \def\normbar{\verb~|\|~}
 \def\norm[x]{\normbar\x\normbar}
 
@@ -205,13 +207,13 @@ snake,amplitude=.4mm,segment length=2.5mm,post length=1mm}]
           }
           % Upper line of the eye
           \draw (0,0) -- (\halfangle:\radius);
-          
+
           % Lower line of the eye
           \draw (0,0) -- (-\halfangle:\radius);
-          
+
           % Arc for the eye shape
           \draw (\halfangle:\arcradius) arc[start angle=\halfangle, end angle=-\halfangle, radius=\arcradius];
-          
+
           % Filled ellipse for the pupil
           \fill (0:\pupilpos) ellipse[x radius=\pupilshort, y radius=\pupillong];
       }
@@ -228,20 +230,20 @@ snake,amplitude=.4mm,segment length=2.5mm,post length=1mm}]
           \begin{scope}[scale=\lightbulbscale, rotate=\lightbulbangle]
           % Base of the light bulb
           \draw[fill=gray] (-0.5,0) rectangle (0.5,0.6);
-          
+
           % Screw threads
           \foreach \y in {0.2, 0.4} {
               \draw (-0.5,\y) -- (0.5,\y);
           }
-          
+
           % Contact point
           \draw[fill=black] (0,0) circle (0.1);
-          
+
           % Filament
           \draw[thick] (0,1) -- (0,1.5);
           \draw[thick] (-0.2,1.5) -- (0.2,1.5);
           \draw[thick] (-0.2,1.5) arc[start angle=180, end angle=0, radius=0.2];
-          
+
           % Bulb
           \draw[thick] (1,1.5) arc[start angle=0, end angle=180, radius=1];
           \draw[thick] (-1,1.5) to[out=-90, in=90] (-0.5,0.6);

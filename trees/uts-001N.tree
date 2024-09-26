@@ -1,0 +1,32 @@
+\import{macros}
+% clifford hopf spin tt ag math draft tech exp notes
+\tag{tech}
+\tag{notes}
+\tag{draft}
+
+\note{initial survey on headless render/testing for WebGL}{
+\md{
+I want to be able to run headless render or visual regression tests, both locally where GPU is available, and on CI where GPU has to be emulated.
+
+The ingredients seems to be Storybook+Playwright+Xvfb.
+
+- use [OrbStack](https://docs.orbstack.dev/) as local docker engine
+- use [act](https://github.com/nektos/act) ([usage](https://nektosact.com/usage/index.html)) to run GitHub Actions locally
+- use [Storybook](https://storybook.js.org/) to building pages and components in isolation
+- use [Playwright](https://playwright.dev/) to verify the visual appearance on different browsers
+- use [Xvfb](https://en.wikipedia.org/wiki/Xvfb) to emulate a display server
+
+If I'm a bit more ambitious, I would like to be able to do the same for WebGPU. At least we do know that Xvfb support OpenGL via [mesa](https://www.mesa3d.org/) (which also supports Vulkan etc.), and there are some libraries to run WebGPU via WebGL 2.
+
+Some resources I found so far:
+
+- [Effortless CI Integration: Running Playwright Tests with GitHub Actions](https://medium.com/@merisstupar11/effortless-ci-integration-running-playwright-tests-with-github-actions-9df48837d68f) uses `xvfb-run`
+- `playwright`'s [own CI](https://github.com/microsoft/playwright/blob/597642d26929656ce629af89089cd157ccdc506c/.github/actions/run-test/action.yml#L61) uses `xvfb-run`
+- [Headless chrome – testing WebGL using playwright](https://github.com/createit-dev/168-headless-chrome-get-60fps-in-windows) demonstrates WegGL testing when GPU is available, see also its [writeup](https://www.createit.com/blog/headless-chrome-testing-webgl-using-playwright/)
+- [Options to enable GPU Hardware Acceleration in headeless mode](https://github.com/microsoft/playwright/issues/11627)
+- [use xquartz with PyVirtualDisplay on Mac](https://stackoverflow.com/a/72874345/200764)
+- [use libosmesa with Chrome](https://stackoverflow.com/a/39060739/200764) from 2016
+- use [VirtualGL](https://virtualgl.org/) with Xvfb \link{https://stackoverflow.com/a/78725632/200764}
+}
+
+}
