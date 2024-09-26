@@ -54,6 +54,7 @@ jobs:
           tlmgr --version
           which latex
       - name: Setup Pages
+        if: ${{ !env.ACT }}
         id: pages
         uses: actions/configure-pages@v5
       - name: Set-up OCaml
@@ -89,6 +90,7 @@ jobs:
             echo "::warning title=Invalid file permissions automatically fixed::$line"
           done
       - name: Upload Pages artifact
+        if: ${{ !env.ACT }}
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./output
