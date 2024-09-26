@@ -10,6 +10,9 @@ const app = new Elysia({
         idleTimeout: 960,
     },
 })
+    .get('/', ({ redirect }) => {
+        return redirect('/index.xml')
+    })
     .use(
         staticPlugin({
             assets: 'output',
@@ -26,7 +29,7 @@ const app = new Elysia({
     })
 
 app.listen(port, async ({ hostname, port }) => {
-    console.log(`Serving: http://${hostname}:${port}/index.xml`)
+    console.log(`Serving: http://${hostname}:${port}/`)
 
     // console.log(app.server?.publish)
 
