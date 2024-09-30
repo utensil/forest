@@ -13,6 +13,7 @@
     <html>
       <head>
         <meta name="viewport" content="width=device-width" />
+        <style> :root { background-color: #151a1f !important; }</style>
         <link rel="stylesheet" href="style.css" />
         <link rel="stylesheet" href="katex.min.css" />
         <!-- uts-begin -->
@@ -37,7 +38,7 @@
       </head>
       <body>
         <ninja-keys placeholder="Start typing a note title or ID"></ninja-keys>
-        
+
         <header class="header">
           <nav class="nav">
             <div class="logo">
@@ -53,7 +54,7 @@
             </div>
           </nav>
         </header>
-        
+
         <div id="grid-wrapper">
           <article>
             <xsl:apply-templates select="f:tree" />
