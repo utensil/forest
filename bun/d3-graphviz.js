@@ -32,7 +32,10 @@ for (const graphviz_root of graphviz_roots) {
     graphviz_root.innerHTML = ''
     graphviz(graphviz_root, {
         fit: true,
-        zoom: false
-    }).engine(layout).dot(graphviz_source).render()
+        zoom: false,
+    })
+        .engine(layout)
+        .dot(graphviz_source)
+        .render()
     graphviz_root.classList.remove('loading')
 }
