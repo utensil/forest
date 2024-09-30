@@ -24,6 +24,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     register('.usegpu', 'usegpu.js')
     register('.wgputoy', 'wgputoy.js')
     register('.graphviz-root', 'graphviz.js')
+    register('.d3-graphviz-root', 'd3-graphviz.js')
 
     const hostname = window.location.hostname
 
