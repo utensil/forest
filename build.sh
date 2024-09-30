@@ -78,15 +78,15 @@ function bun_build {
         # if the file extension is .css
         if [[ $FILE == *".css" ]]; then
             echo "🚀 lightningcss"
-            bunx lightningcss-cli --minify --bundle --targets '>= 0.25%' bun/$FILE -o output/$FILE
+            just css bun/$FILE
             # check result
-            EXIT_CODE=$?
-            if [ $EXIT_CODE -ne 0 ]; then
-                echo "🚨 lightningcss failed with $EXIT_CODE"
-                exit $EXIT_CODE
-            fi
+            # EXIT_CODE=$?
+            # if [ $EXIT_CODE -ne 0 ]; then
+            #     echo "🚨 lightningcss failed with $EXIT_CODE"
+            #     exit $EXIT_CODE
+            # fi
         else
-            bun run ./bun_build.js bun/$FILE
+            just js bun/$FILE
             # bun build bun/$FILE --outdir output
         fi
     done
@@ -116,7 +116,7 @@ function build {
   echo "⭐ Rebuilding bun"
   bun_build
   echo "⭐ Rebuilding forest"
-  opam exec -- forester build # 2>&1 > build/forester.log # --dev
+  just forest
   show_result
   # echo "⭐ Copying assets"
   copy_extra_assets

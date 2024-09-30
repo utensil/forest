@@ -57,6 +57,7 @@ app.listen(port, async ({ hostname, port }) => {
 
                 // postpone to debounce
                 setTimeout(() => {
+                    console.log('🔥live reload:', updated_file_name.trim())
                     app.server?.publish(
                         'update',
                         JSON.stringify({
