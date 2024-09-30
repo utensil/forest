@@ -22,8 +22,8 @@ function getAppliedMode(userPreference) {
 
 function setAppliedMode(mode) {
     document.documentElement.dataset.appliedMode = mode
-    // const ninja = document.querySelector('ninja-keys');
-    // ninja.setAttribute('class', mode);
+    const ninja = document.querySelector('ninja-keys');
+    ninja.setAttribute('class', mode);
 }
 
 function rotatePreferences(userPreference) {

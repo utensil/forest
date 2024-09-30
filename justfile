@@ -1,9 +1,11 @@
-# to access recipes without prefixing `just`, run `source ./init.sh` after openning each new terminal
+export PROJECT_ROOT := justfile_directory()
+
 default:
     just --list
+    @echo '💡Tip: run "source ./init.sh" after openning each new terminal, to access recipes without prefixing "just"'
 
-new +X:
-    ./new.sh {{X}}
+new +PARAMS:
+    ./new.sh {{PARAMS}}
 
 build:
     ./build.sh
@@ -50,6 +52,10 @@ typ SOURCE:
 penrose SOURCE:
     mkdir -p output/penrose/
     cp -f {{SOURCE}} output/penrose/
+
+envs:
+    #!/usr/bin/env bash
+    echo "PROJECT_ROOT: $PROJECT_ROOT"
 
 # act:
 #     ./act.sh
