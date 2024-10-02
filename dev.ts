@@ -1,5 +1,6 @@
 // bun add elysia @elysiajs/static @types/bun
 import { watch } from 'node:fs/promises'
+import { mkdir } from "node:fs/promises"
 import { staticPlugin } from '@elysiajs/static'
 import { Elysia } from 'elysia'
 
@@ -32,6 +33,7 @@ app.listen(port, async ({ hostname, port }) => {
     console.log(`Serving: http://${hostname}:${port}/`)
 
     // console.log(app.server?.publish)
+    await mkdir("build/live/", { recursive: true });
 
     const watcher = watch('build/live/')
     let lastSent = Date.now()

@@ -4,6 +4,14 @@ set -eo pipefail
 SCRIPT_DIR=$(dirname "$(readlink -f "$0")")
 PROJECT_ROOT="$SCRIPT_DIR"
 
+# https://unix.stackexchange.com/a/655825/145128
+pnrelbase() {
+    set -- "${1%/}/" "${2%/}/"      ## '/'-end to avoid mismatch
+    REPLY="${2#"$1"}"               ## build result
+    # unless root chomp trailing '/', replace '' with '.'
+    [ "${REPLY#/}" ] && REPLY="${REPLY%/}" || REPLY="${REPLY:-.}"
+}
+
 while IFS= read -r line; do
     IFS=':' read -ra ADDR <<< "$line"
     EVENT="${ADDR[0]}"
@@ -14,7 +22,7 @@ while IFS= read -r line; do
     # get the dirname of the changed file
     CHANGED_FILE_DIRNAME=$(basename $(dirname $CHANGED_FILE))
     # # get the file name relative to the project root
-    CHANGED_FILE_RELATIVE=$(realpath --relative-to=$PROJECT_ROOT $CHANGED_FILE)
+    CHANGED_FILE_RELATIVE=$(pnrelbase $PROJECT_ROOT $CHANGED_FILE)
     # echo "📂$CHANGED_FILE_DIRNAME"
     if [[ $CHANGED_FILE == *".css" ]]; then
         just css $CHANGED_FILE_RELATIVE

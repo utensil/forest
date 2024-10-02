@@ -73,7 +73,8 @@ I'm experimenting with authoring `js/ts/jsx/tsx` using [bun](https://bun.sh/), s
 
 ```bash
 curl -fsSL https://bun.sh/install | bash
-source ~/.zshrc # or ~/.bashrc
+# source ~/.bashrc
+source ~/.zshrc
 ```
 
 to install `bun`.

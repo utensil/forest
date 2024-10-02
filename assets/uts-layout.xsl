@@ -13,7 +13,7 @@
     <html>
       <head>
         <meta name="viewport" content="width=device-width" />
-        <style> :root { background-color: #151a1f !important; }</style>
+        <!-- <style> :root { background-color: #262626 !important; }</style> -->
         <link rel="stylesheet" href="style.css" />
         <link rel="stylesheet" href="katex.min.css" />
         <!-- uts-begin -->
