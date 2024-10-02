@@ -4,12 +4,17 @@ set -eo pipefail
 SCRIPT_DIR=$(dirname "$(readlink -f "$0")")
 PROJECT_ROOT="$SCRIPT_DIR"
 
-# https://unix.stackexchange.com/a/655825/145128
-pnrelbase() {
-    set -- "${1%/}/" "${2%/}/"      ## '/'-end to avoid mismatch
-    REPLY="${2#"$1"}"               ## build result
-    # unless root chomp trailing '/', replace '' with '.'
-    [ "${REPLY#/}" ] && REPLY="${REPLY%/}" || REPLY="${REPLY:-.}"
+function relative_to_project_root() {
+    local target=$1
+    local common_part=$PROJECT_ROOT
+    local back=
+
+    while [[ "${target#$common_part}" == "${target}" ]]; do
+        common_part=$(dirname $common_part)
+        back="../${back}"
+    done
+
+    echo "${back}${target#$common_part/}"
 }
 
 while IFS= read -r line; do
@@ -22,7 +27,7 @@ while IFS= read -r line; do
     # get the dirname of the changed file
     CHANGED_FILE_DIRNAME=$(basename $(dirname $CHANGED_FILE))
     # # get the file name relative to the project root
-    CHANGED_FILE_RELATIVE=$(pnrelbase $PROJECT_ROOT $CHANGED_FILE)
+    CHANGED_FILE_RELATIVE=$(relative_to_project_root $CHANGED_FILE)
     # echo "📂$CHANGED_FILE_DIRNAME"
     if [[ $CHANGED_FILE == *".css" ]]; then
         just css $CHANGED_FILE_RELATIVE
@@ -49,7 +54,7 @@ while IFS= read -r line; do
         echo "🤷 No action for $LINE"
     fi
 
-    (mkdir -p build/live && realpath --relative-to=$PROJECT_ROOT $CHANGED_FILE > build/live/updated_file.txt)
+    (mkdir -p build/live && echo -n $CHANGED_FILE_RELATIVE > build/live/updated_file.txt)
 done
 
 touch build/live/trigger.txt
