@@ -14,10 +14,10 @@ else
     echo update only local bib files
 fi
 
-python split_bib.py transformer
-python split_bib.py math-2024 
-python split_bib.py zeon-algebra
+./split_bib.py transformer
+./split_bib.py math-2024
+./split_bib.py zeon-algebra
 # lean-ga should be more updated if duplicated
-python split_bib.py lean-ga
+./split_bib.py lean-ga
 # forest overrides external bibs
-python split_bib.py forest
+./split_bib.py forest

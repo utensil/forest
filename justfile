@@ -25,6 +25,10 @@ chk:
 thm:
     ./thm.sh
 
+prep-bib:
+    @echo "pyenv shell 3.11"
+    @echo "pip3 install bibtexparser"
+
 bib:
     ./bib.sh
 

@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import json
 import os
 import pathlib
@@ -153,7 +154,7 @@ for i, reference in enumerate(references):
 
     # detect duplication
     if len(bib_filenames_i) > 1:
-        #  {tree_file_i.relative_to(project_root)}: 
+        #  {tree_file_i.relative_to(project_root)}:
         print(f'🟡 {bib_filenames_i}')
 
     formatted = TREE_TEMPLATE.format(
