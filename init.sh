@@ -24,8 +24,5 @@ if ! command -v just &> /dev/null; then
   curl --proto '=https' --tlsv1.2 -sSf https://just.systems/install.sh | bash -s -- --to /usr/local/bin
 fi
 
-# TODO: how to make this work without requiring a `source init.sh`
-for recipe in `just --summary`; do
-    alias $recipe="just $recipe"
-done
-echo "✅ aliases initialized: $(just --summary)"
+echo "✅ dependencies installed: bun, just"
+echo "To initialize alias: source alias.sh"
