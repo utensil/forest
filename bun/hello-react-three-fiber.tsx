@@ -50,6 +50,7 @@ const ShaderPlane = () => {
     return (
         <Plane args={[10, 10]} ref={mesh}>
             <shaderMaterial
+                transparent={true}
                 uniforms={uniforms}
                 fragmentShader={`
 varying vec2 vUv;
@@ -81,7 +82,7 @@ float SDScene(in vec3 worldCoordinate, in vec3 rayDirection) {
     //float sphereTwo = SDSphere(worldCoordinate, vec3(cos(iTime/3.0), -0.3, sin(iTime/5.0)), 0.2);
     //float sphereThree = SDSphere(worldCoordinate, vec3(sin(iTime/5.0), 0.3, cos(iTime/5.0)), 0.2);
     float orbital = SDOctahedron(worldCoordinate - vec3(cos(iTime/2.0), -0.15, sin(iTime/2.0)), 0.2);
-    
+
     float groundPlane = SDPlane(worldCoordinate, -0.5, rayDirection);
 
     return min(min(sphereOne, orbital), groundPlane);
@@ -98,7 +99,7 @@ vec3 estimateNormal(in vec3 worldCoordinate) {
     float partialX = SDScene(worldCoordinate + vec3(EPSILON, 0.0, 0.0), vec3(0.0, 0.0, 1.0)) - SDScene(worldCoordinate - vec3(EPSILON, 0.0, 0.0), vec3(0.0, 0.0, 1.0));
     float partialY = SDScene(worldCoordinate + vec3(0.0, EPSILON, 0.0), vec3(0.0, 0.0, 1.0)) - SDScene(worldCoordinate - vec3(0.0, EPSILON, 0.0), vec3(0.0, 0.0, 1.0));
     float partialZ = SDScene(worldCoordinate + vec3(0.0, 0.0, EPSILON), vec3(0.0, 0.0, 1.0)) - SDScene(worldCoordinate - vec3(0.0, 0.0, EPSILON), vec3(0.0, 0.0, 1.0));
-    
+
     return normalize(vec3(partialX, partialY, partialZ));
 
 }
@@ -111,15 +112,15 @@ vec3 rayMarch(in vec3 rayOrigin, in vec3 rayDirection) {
     vec3 ray = rayOrigin;
 
     for (int index = 0; index < MAX_STEPS; index++) {
-   
+
         float distanceToScene = SDScene(ray, rayDirection);
-        
+
         if (distanceToScene < EPSILON) return ray;
-        
+
         ray += distanceToScene * rayDirection;
-    
+
     }
-    
+
     return vec3(0.0, 0.0, 0.0);
 
 }
@@ -129,7 +130,7 @@ vec3 colorB = vec3(1.000,0.777,0.052);
 
 void main() {
     float aspect = iResolution.x/iResolution.y;
-    
+
     // vec2 xy = gl_FragCoord.xy/iResolution.xy;
 
 
@@ -138,36 +139,36 @@ void main() {
     vec2 xy = vUv;
     xy -= vec2(0.5, 0.5);
     xy *= 2.0 * vec2(aspect, 1.0);
-    
+
     vec3 observerPosition = vec3(0.0, 0.0, -5.0);
-    
+
     vec3 cameraBox = observerPosition + vec3(xy, 5.0);
-    
+
     vec3 rayDirection = normalize(cameraBox - observerPosition);
     vec3 worldCoordinate = rayMarch(observerPosition, rayDirection);
-    
+
     float renderable = length(worldCoordinate) > 0.0 ? 1.0 : 0.0;
-    
+
     vec3 surfaceNormal = estimateNormal(worldCoordinate);
     float fresnel = 0.9 + dot(surfaceNormal, rayDirection);
-    
+
     vec3 lightSource = vec3(7.0 * cos(iTime), 5.0, 7.0 * sin(iTime));
-    
+
     vec3 photonDirection = normalize(worldCoordinate - lightSource);
     vec3 photonPosition = rayMarch(lightSource, photonDirection);
-    
+
     float directLight = 1.2 - step(0.01, distance(photonPosition, worldCoordinate));
-    
+
     float diffuseLight = 0.25 * smoothstep(0.0, 1.0, directLight * dot(surfaceNormal, -photonDirection));
-    
+
     float ambientLight = 0.7;
 
     float specularLight = 0.1 * smoothstep(0.0, 1.0, dot(reflect(photonDirection, surfaceNormal), normalize(observerPosition - worldCoordinate)));
 
     float scatterFactor = 1.0 / sqrt(distance(worldCoordinate, lightSource)/5.0);
 
-    gl_FragColor = vec4(renderable * (diffuseLight + ambientLight + specularLight) * scatterFactor * vec3(1.0, 1.0, 1.0), 1.0);
-    // gl_FragColor = vec4((diffuseLight + ambientLight + specularLight) * scatterFactor * vec3(1.0, 1.0, 1.0), renderable);
+    // gl_FragColor = vec4(renderable * (diffuseLight + ambientLight + specularLight) * scatterFactor * vec3(1.0, 1.0, 1.0), 1.0);
+    gl_FragColor = vec4((diffuseLight + ambientLight + specularLight) * scatterFactor * vec3(1.0, 1.0, 1.0), renderable);
 
     // gl_FragColor = (diffuseLight + ambientLight + specularLight) * scatterFactor * vec4(1.0, 1.0, 1.0, 1.0);
 
