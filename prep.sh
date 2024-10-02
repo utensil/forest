@@ -25,4 +25,4 @@ if ! command -v just &> /dev/null; then
 fi
 
 echo "✅ dependencies installed: bun, just"
-echo "To initialize alias: source alias.sh"
+echo "💡 To initialize just aliases: source alias.sh"

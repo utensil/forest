@@ -2,7 +2,7 @@ export PROJECT_ROOT := justfile_directory()
 
 default:
     just --list
-    @echo '💡Tip: run "source ./init.sh" after openning each new terminal, to access recipes without prefixing "just"'
+    @echo '💡 To initialize just aliases: source alias.sh'
 
 new +PARAMS:
     ./new.sh {{PARAMS}}
