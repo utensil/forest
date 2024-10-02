@@ -3,7 +3,8 @@ set -eo
 
 # I'm experimenting using warp as my terminal
 # if warp is not installed
-if ! command -v warp &> /dev/null; then
+# if path /Applications/Warp.app/ not exists
+if [ ! -d "/Applications/Warp.app" ]; then
     # install warp
     if [[ "$OSTYPE" == "darwin"* ]]; then
         brew install --cask warp
