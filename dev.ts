@@ -69,7 +69,7 @@ app.listen(port, async ({ hostname, port }) => {
                     )
                     lastSent = Date.now()
                     lastSentFile = updated_file_name
-                }, 500)
+                }, 10)
             }
         }
     }
