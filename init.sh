@@ -1,16 +1,16 @@
 #!/bin/bash
 set -eo
 
-# I'm experimenting using warp as my terminal
-# if warp is not installed
-# if path /Applications/Warp.app/ not exists
-if [ ! -d "/Applications/Warp.app" ]; then
-    # install warp
-    if [[ "$OSTYPE" == "darwin"* ]]; then
-        brew install --cask warp
-        echo "CMD+, then search for terminal, specify External: Osx Exec to Warp.app"
-    fi
-fi
+# # I'm experimenting using warp as my terminal
+# # if warp is not installed
+# # if path /Applications/Warp.app/ not exists
+# if [ ! -d "/Applications/Warp.app" ]; then
+#     # install warp
+#     if [[ "$OSTYPE" == "darwin"* ]]; then
+#         brew install --cask warp
+#         echo "CMD+, then search for terminal, specify External: Osx Exec to Warp.app"
+#     fi
+# fi
 
 # if bun is not installed
 if ! command -v bun &> /dev/null; then
