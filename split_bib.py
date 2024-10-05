@@ -177,6 +177,10 @@ for i, reference in enumerate(references):
                 formatted_first_line, formatted_rest = formatted.split('\n', 1)
                 if existing_rest == formatted_rest:
                     continue
+            # if manually modified, skip
+            if 'manual' in existing_bib_filenames_i:
+                print(f"🦘Skipping {tree_file_i.relative_to(project_root)} as it's manually modified")
+                continue
 
     with open(tree_file_i, 'w', encoding='utf-8') as f:
         f.write(formatted)
