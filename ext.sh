@@ -20,6 +20,7 @@ npm install
 npm install -g vsce
 yes|npx vsce package
 
+# requires https://code.visualstudio.com/docs/setup/mac#_launching-from-the-command-line
 code --install-extension /tmp/vscode-forester-$RANDOM_ID/vscode-forester-0.0.7-dev-uts.vsix
 # echo "run this to clean up: rm -rf /tmp/vscode-forester-$RANDOM_ID"
 rm -rf /tmp/vscode-forester-$RANDOM_ID
