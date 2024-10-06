@@ -14,9 +14,12 @@ cd /tmp/vscode-forester-$RANDOM_ID
 git checkout dev
 npm install
 
+# npm run compile
+
 # https://stackoverflow.com/a/54409592/200764
 npm install -g vsce
+yes|npx vsce package
 
-npx vsce package
-# code --install-extension my-extension-0.0.1.vsix
+code --install-extension /tmp/vscode-forester-$RANDOM_ID/vscode-forester-0.0.7-dev-uts.vsix
+# echo "run this to clean up: rm -rf /tmp/vscode-forester-$RANDOM_ID"
 rm -rf /tmp/vscode-forester-$RANDOM_ID
