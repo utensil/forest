@@ -67,6 +67,33 @@ See https://tex.stackexchange.com/a/676179/75671 for why.
 
 ### Experimental features
 
+#### `just`
+
+I'm experimenting with [just](https://github.com/casey/just) as a task runner, ideally one can just install `just` then install all deps and run all the task via `just`.
+
+`just` is useful for registering many few-liner tasks, maintaining sanity for file path handling, environment variable setting,
+task dependency declaration, and parameter passing.
+
+More complex tasks are still done by Bash and Python scripts.
+
+To install `just`, run
+
+```bash
+curl --proto '=https' --tlsv1.2 -sSf https://just.systems/install.sh | bash -s -- --to /usr/local/bin
+```
+
+To check all available tasks, run
+
+```bash
+just --list
+```
+
+To add aliases to the current shell, run
+
+```bash
+source ./alias.sh
+```
+
 #### `bun`
 
 I'm experimenting with authoring `js/ts/jsx/tsx` using [bun](https://bun.sh/), so I also need to run
@@ -85,13 +112,13 @@ Rendering `js/ts/jsx/tsx` are also done by `dev.sh` in development with watch su
 bun build ./bun/<file-name> --outdir output
 ```
 
-To use any package, just figure out the package name from the import and run `bun install <package-name>`, `package.json` will be updated by `bun`.
+To use any package, just figure out the package name from the import and run `bun add <package-name>`, `package.json` will be updated by `bun`.
 
 #### WASM
 
 I'm also experimenting with WebAssembly, and some of the JS/TS code will rely on WASM.
 
-As long as one has working `bun` and [rustup](https://rustup.rs/), the `build.sh` should take care of the rest.
+As long as one has working `bun` and [rustup](https://rustup.rs/), the `build.sh` should take care of the rest. It also silently skips the WASM build if failed, to ensure the rest of the site can still be built.
 
 ## License
 
