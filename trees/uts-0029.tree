@@ -1,0 +1,41 @@
+\import{macros}
+
+\mdnote{Sheaves}{
+
+My first impression of sheaves is that they are useful to local-to-global applications "which ask for global solutions to problems whose hypotheses are local".
+
+Roughly speaking, a sheaf requires some gluing conditions (axioms "Locality" and "Gluing") so that local data can be collated compatibly into a global algebraic structure that varies continuously over local covering domains ("sections" of sheaves).
+
+To do so, a sheaf in general, as defined in the category-theoretical language, needs
+
+- a topological space (or a site in general), denoted #{X} (or #{\mathcal{C}} for a site)
+- a category, sometimes denoted #{\mathcal{D}}, meaning "data category", whose objects are algebraic structures and morphisms are structure-preserving maps
+
+and builds (gluing conditions) on a #{\mathcal{D}}-valued presheaf over #{X} (or #{\mathcal{C}}), denoted #{\mathcal{F}} (as its French name is "faisceau"), which is essentially a  contravariant functor #{\mathcal{F}: \mathcal{C}^{op} \to \mathcal{D}} but a [concept with an attitude](https://ncatlab.org/nlab/show/concept+with+an+attitude#presheaves_and_copresheaves), and its morphisms are restriction maps between open sets in #{X} (or between objects that satisfy the pretopology #{\mathcal{J}} in #{C}, where #{\mathcal{J}} is the pretopology on #{\operatorname{Open}(X)}, which specifies when a covering family of open sets exists).
+
+Its latest application to deep learning, Thomas Gebhart's thesis \citek{gebhart2023sheaf} sees a sheaf over a topological space as a data structure "which defines rules for associating data to a space so that local agreements in data assignment align with a coherent global representation", thus a generalization of both:
+
+- relational learning, which aims to "combine symbolic, potentially hand-engineered prior knowledge with the tabula rasa representational flexibility of deep learning to achieve a synthetic model family which can be defined with respect to symbolic knowledge priors about the data domain"
+- geometric deep learning, which "provides a group-theoretic approach to reasoning about and encoding domain-symmetry invariance or equivariance within machine learning models",
+
+"providing a mathematical framework for characterizing the interplay between the topological information embedded within a domain and the representations of data learned by machine learning models".
+
+My prior interest in geometric deep learning, particularly group-equivariant neural networks, and my believe in symbolism, are the background of my interest in sheaf representation learning.
+
+Notably, this thesis treats the discrete case of sheaves, a cellular sheaf, whose
+
+- topological space is a cell complex, which is "a topological generalization of a graph, with set inclusion and intersection given by the incidence relationships among cells in the complex", thus "admitting a computable, linear-algebraic representation".
+- data category is #{\mathtt{FVect}}, the category of finite-dimensional vector spaces over a field #{\mathbb{F}}, which is a common choice for the data category in machine learning applications, a model-free approach with massive parameter space, flexible representational capacity, but inherits fundamental limitations, e.g. data inefficiency, generalization failure, and interpretability issues.
+
+For more details, see also Thomas Gebhart's talk [Sheaves for AI: Graph Representation Learning through Sheaf Theory](https://cats.for.ai/assets/slides/sheaves_for_AI.pdf).
+
+<!-- has the potential to learn sheaf representations of data, which is essentially assigning observed data to a space in a way that's
+
+globally consistent with the constraints imposed by the topology of the application domain .
+
+a richer but still tractable representation that is an algebraic structure richer than a vector space commonly used in ML, to sampled data, which is in the form of components of a category (e.g. a category of a data structure like a Graph).  -->
+
+Its application to physics has the potential to formulate differential geometry in a more general setting, without assuming the existence of a locally Euclidean space as manifold did. It's believe that this approach can overcome some difficulties in Quantum field theory even Quantum gravity, because locally there might be no concept of a metric space at all \citek{mallios2015differential}.
+
+Note that there are CAS systems that can do sheaf cohomology etc., e.g. [Macaulay2](https://macaulay2.com/), [OSCAR](https://www.oscar-system.org/).
+}

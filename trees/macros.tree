@@ -527,13 +527,11 @@ so the text size almost matches the size output by native forester code. This do
   }
 }
 
-\def\md[body]{
-  \<html:div>[class]{markdownit grace-loading}{\body}
-}
+\def\md[body]{\<html:div>[class]{markdownit grace-loading}{\body}}
 
-\def\mdblock[t][body]{
-  \block{\t}{\<html:div>[class]{markdownit grace-loading}{\body}}
-}
+\def\mdblock[t][body]{\block{\t}{\md{\body}}}
+
+\def\mdnote[t][body]{\note{\t}{\md{\body}}}
 
 \def\loadjs[src]{
   \<html:script>[type]{module}[src]{\src}{}

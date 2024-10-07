@@ -7,7 +7,7 @@
                 xmlns:f="http://www.jonmsterling.com/jms-005P.xml"
                 xmlns:html="http://www.w3.org/1999/xhtml"
     >
-    
+
     <!-- <xsl:template name="numbered-taxon">
         <span class="taxon">
             <xsl:apply-templates select="f:taxon" />
@@ -237,5 +237,17 @@
         <xsl:value-of select="@addr"/>
         <xsl:text>]]))</xsl:text>
     </xsl:template>
+
+    <!-- A simple hack to make f:tex pass through markdown-it, but not handling more escape cases yet -->
+    <!-- <xsl:template match="html:div[@class='markdownit grace-loading']//f:tex[@display='block']">
+    <xsl:text>\\[</xsl:text>
+    <xsl:value-of select="." />
+    <xsl:text>\\]</xsl:text>
+    </xsl:template>
+    <xsl:template match="html:div[@class='markdownit grace-loading']//f:tex[not(@display='block')]">
+    <xsl:text>\\(</xsl:text>
+    <xsl:value-of select="." />
+    <xsl:text>\\)</xsl:text>
+    </xsl:template> -->
 
 </xsl:stylesheet>
