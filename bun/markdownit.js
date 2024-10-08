@@ -17,7 +17,7 @@ for (let i = 0; i < markdownit_tags.length; i++) {
         // we escape fr:tex tags to avoid conflicts with markdown syntax
         // note that we need to use `+?` which is a lazy quantifier, meaning it matches as few characters as possible
         .replaceAll(/\\([\[\(])(.+?)\\([\)\]])/g, '\\\\$1$2\\\\$3')
-    console.log(converted_source)
+    // console.log(converted_source)
     markdownit_tag.innerHTML = md.render(converted_source)
     markdownit_tag.classList.remove('grace-loading')
 }

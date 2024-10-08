@@ -15,6 +15,7 @@ const register = (selector, script) => {
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
+    // register('.link-reference', 'backref.js') // it works but not ideal
     register('.markdownit', 'markdownit.js')
     register('.typst-root', 'typst.js')
     register('.pikchr-root', 'pikchr.js')
