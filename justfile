@@ -62,5 +62,11 @@ envs:
     #!/usr/bin/env bash
     echo "PROJECT_ROOT: $PROJECT_ROOT"
 
+install-shellcheck:
+    brew install shellcheck
+
+run-shellcheck:
+    shellcheck *.sh
+
 # act:
 #     ./act.sh

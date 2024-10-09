@@ -126,17 +126,17 @@ function build {
 }
 
 function lize {
-  ./lize.sh spin-0001 2>&1 > /dev/null
+  ./lize.sh spin-0001 > /dev/null 2>&1
   show_lize_result spin-0001
-  ./lize.sh hopf-0001 2>&1 > /dev/null
+  ./lize.sh hopf-0001 > /dev/null 2>&1
   show_lize_result hopf-0001
-  ./lize.sh ca-0001 2>&1 > /dev/null
+  ./lize.sh ca-0001 > /dev/null 2>&1
   show_lize_result ca-0001
-  ./lize.sh tt-0001 2>&1 > /dev/null
+  ./lize.sh tt-0001 > /dev/null 2>&1
   show_lize_result tt-0001
-  ./lize.sh uts-000C 2>&1 > /dev/null
+  ./lize.sh uts-000C > /dev/null 2>&1
   show_lize_result uts-000C
-#   ./lize.sh uts-0001 2>&1 > /dev/null
+#   ./lize.sh uts-0001 > /dev/null 2>&1
 #   show_lize_result uts-0001
 }
 

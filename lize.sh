@@ -19,7 +19,7 @@ TEX_FILE="$1.tex"
 AUX_FILE="$1.aux"
 PDF_FILE="$1.pdf"
 
-rm build/$1.* 2>&1 >/dev/null || echo no files to clean
+rm build/$1.* >/dev/null 2>&1 || echo no files to clean
 
 cp output/$XML_FILE build/$XML_FILE
 
@@ -35,16 +35,16 @@ UNICOCE_LATEX=lualatex
 # if environment variable TEC is not set
 if [ -z "$TEC" ]; then
     echo "lize.sh| using $UNICOCE_LATEX"
-    $UNICOCE_LATEX -halt-on-error -interaction=nonstopmode --shell-escape $TEX_FILE 2>&1 >/dev/null
+    $UNICOCE_LATEX -halt-on-error -interaction=nonstopmode --shell-escape $TEX_FILE >/dev/null 2>&1
     # https://tex.stackexchange.com/a/295524/75671
     # biber $TEX_FILE
     # We should ignore bibtex errors if it's simply an empty .bib file
-    bibtex $AUX_FILE 2>&1 >/dev/null || echo "lize.sh| Ignoring bibtex error"
-    $UNICOCE_LATEX -halt-on-error -interaction=nonstopmode --shell-escape $TEX_FILE 2>&1 >/dev/null
-    $UNICOCE_LATEX -halt-on-error -interaction=nonstopmode --shell-escape $TEX_FILE 2>&1 >/dev/null
+    bibtex $AUX_FILE >/dev/null 2>&1 || echo "lize.sh| Ignoring bibtex error"
+    $UNICOCE_LATEX -halt-on-error -interaction=nonstopmode --shell-escape $TEX_FILE >/dev/null 2>&1
+    $UNICOCE_LATEX -halt-on-error -interaction=nonstopmode --shell-escape $TEX_FILE >/dev/null 2>&1
 else
     echo "lize.sh| using tectonic"
-    tectonic -Z shell-escape-cwd=`pwd` --keep-intermediates --keep-logs --outdir `pwd` $TEX_FILE 2>&1 >/dev/null
+    tectonic -Z shell-escape-cwd=`pwd` --keep-intermediates --keep-logs --outdir `pwd` $TEX_FILEi >/dev/null 2>&1
 fi
 
 cd ..
