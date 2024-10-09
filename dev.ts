@@ -11,9 +11,9 @@ const app = new Elysia({
         idleTimeout: 960,
     },
 })
-    .get('/', ({ redirect }) => {
-        return redirect('/index.xml')
-    })
+    // .get('/', ({ redirect }) => {
+    //     return redirect('/index.xml')
+    // })
     .use(
         staticPlugin({
             assets: 'output',
