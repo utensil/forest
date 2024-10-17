@@ -26,7 +26,7 @@ float pTorus(vec3 p, vec2 t) {vec2 q = vec2(length(p.xz)-t.x,p.y); return length
 float pTorus2(vec3 p, vec2 t) {vec2 q = vec2(length(p.xy)-t.x,p.z); return length(q)-t.y;}
 float pCapsule(vec3 p, vec3 a, vec3 b, float r) {vec3 pa = p - a, ba = b - a;
 float h = clamp( dot(pa,ba)/dot(ba,ba), 0.0, 1.0 ); return length( pa - ba*h ) - r;}
-    
+
 float mySDF(vec3 p) {
   float x = p.x;
   float y = p.y;
@@ -45,7 +45,7 @@ float mySDF(vec3 p) {
   float z4 = pow(z, 4.);
 
   // return (y-x2)*(z-x3);
-  
+
   // return 5.*(z2+y3-y4-x2*y2);
 
   // return (y2-x2-z2);
@@ -56,7 +56,7 @@ float mySDF(vec3 p) {
 float distf(vec3 p)
 {
   float d = 100000.0;
-  
+
   fUnion(d, pRoundBox(vec3(0,0,10) + p, vec3(21,21,1), 1.0));
   fUnion(d, pSphere(vec3(10,10,0) + p, 8.0));
   fUnion(d, pSphere(vec3(16,0,4) + p, 4.0));
@@ -68,10 +68,10 @@ float distf(vec3 p)
   fUnion(d, pRoundBox(vec3(-10,10,-2) + p, vec3(1,1,9), 1.0));
   fUnion(d, pRoundBox(vec3(-10,10,-4) + p, vec3(0.5,6,0.5), 1.0));
   fUnion(d, pRoundBox(vec3(-10,10,2) + p, vec3(6,0.5,0.5), 1.0));
-    
+
   // d = mySDF(p);
   // d = fIntersection(d, pSphere(p,15.0));
-  
+
   return d;
 }
 
@@ -109,46 +109,46 @@ vec4 raymarch(vec3 from, vec3 increment)
   const float maxDist = 200.0;
   const float minDist = 0.001;
   const int maxIter = RAYMARCH_ITERATIONS;
-  
+
   float dist = 0.0;
-  
+
   float lastDistEval = 1e10;
   float edge = 0.0;
-  
+
   for(int i = 0; i < maxIter; i++) {
     vec3 pos = (from + increment * dist);
     float distEval = distf(pos);
-    
+
     if (lastDistEval < EDGE_WIDTH && distEval > lastDistEval + 0.001) {
       edge = 1.0;
     }
-        
-    
+
+
     if (distEval < minDist) {
       break;
     }
-    
+
     dist += distEval;
     if (distEval < lastDistEval) lastDistEval = distEval;
   }
-  
+
   float mat = 1.0;
   if (dist >= maxDist) mat = 0.0;
-  
+
   return vec4(dist, mat, edge, 0);
 }
 
 float shadow(vec3 from, vec3 increment)
 {
   const float minDist = 1.0;
-  
+
   float res = 1.0;
   float t = 1.0;
   for(int i = 0; i < SHADOW_ITERATIONS; i++) {
     float h = distf(from + increment * t);
     if(h < minDist)
       return 0.0;
-  
+
       res = min(res, SHADOW_SMOOTHNESS * h / t);
       t += SHADOW_STEP;
     }
@@ -179,42 +179,42 @@ vec4 getPixel(vec2 p, vec3 from, vec3 increment, vec3 light)
   vec4 c = raymarch(from, increment);
   vec3 hitPos = from + increment * c.x;
   vec3 normalDir = normal(hitPos);
-  
-  
+
+
   float diffuse = 1.0 + min(0.0, dot(normalDir, -light));
   float inshadow = (1.0 - shadow(hitPos, -light)) * SHADOW_DARKNESS;
-  
+
   // diffuse = max(diffuse, inshadow);
-  
+
   // if it's not edge, and no contact
   if (c.z != 1.0 && c.y == 0.0) return vec4(0.96, 0.94, 0.87,1);
-  
+
   float low = 0.05;
   float high = 0.95;
-    
+
   diffuse = diffuse > high ? 1.0 : (diffuse > low ? low : diffuse);
 
   vec4 mCol = mix(vec4(vec3(0.78, 0.76, 0.78) * 1.15,1), vec4(0.70, 0.68, 0.75,1), diffuse);
 
   float gridStep = 1.0;
-  
+
   // optional chess style grid
   // mCol = mix(mCol,vec4(0.,0.,0.,1.0),0.1*mod(floor(hitPos.x/gridStep)+floor(hitPos.y/gridStep)+floor(hitPos.z/gridStep),2.));
-  
+
   float dt = dot(vec3(0., 0., 1.), normalDir);
-  
+
   float eps_high = 0.02;
   float eps_low = 0.00000; //1;
-  
+
   // vec3 n = vec4(normalDir, 0.).xyz;
   vec3 n = localNormal(hitPos, increment); // grad(hitPos); // localNormal(hitPos, increment);
   vec3 ez = vec3(0.,0.,0.1);
-  
+
   // https://www.shadertoy.com/view/fsGXzc
-  
+
   const float MAX_DIST = 200.0;
   float depth = distance(from, hitPos); // /MAX_DIST;
-  
+
     // I've mostly just copied and pasted Evan's code.
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	// Compute curvature
@@ -225,7 +225,7 @@ vec4 getPixel(vec2 p, vec3 from, vec3 increment, vec3 light)
 	vec3 yneg = n - dy;
 	vec3 ypos = n + dy;
 	float curvature = (cross(xneg, xpos).y - cross(yneg, ypos).x) * 4.0 / (depth);
-  
+
   // curvature debug
   // return vec4(vec3(1,0.9,0.8) * 0.7 * (abs(curvature) * 500.),1);
   ;
@@ -235,38 +235,38 @@ vec4 getPixel(vec2 p, vec3 from, vec3 increment, vec3 light)
   if(c.z != 1. && abs(curvature) > curvature_eps && length(grad(hitPos).z) > eps_low && ( length(grad(hitPos).z) < eps_high * abs(curvature) * 100. ) ) {
       return curve_color;
   }
-  
+
   if(c.z != 1. && abs(curvature) > curvature_eps && length(grad(hitPos).y) > eps_low && ( length(grad(hitPos).y) < eps_high * abs(curvature) * 100.) ) {
       return curve_color;
   }
-  
+
   if(c.z != 1. && abs(curvature) > curvature_eps && length(grad(hitPos).x) > eps_low && ( length(grad(hitPos).x) < eps_high * abs(curvature) * 100.) ) {
       return curve_color;
   }
-      
+
   if(c.z != 1. && length(grad(hitPos).z) > eps_low && ( length(grad(hitPos).z) < eps_high) ) {
       // return vec4(mix(vec3(1,0.9,0.8) * 0.5, vec3(1.), 0.5), 1.); // * (abs(curvature) * 1000.),1);
   }
 
-  // .z is edge        
+  // .z is edge
   mCol = mix(mCol,vec4(vec3(1,0.9,0.8) * 0.5,1),c.z);
 
   return mCol;
 }
 
 void mainImage( out vec4 fragColor, in vec2 fragCoord )
-{	
+{
   time = floor(iTime * 16.0) / 16.0;
   // pixel position
   vec2 q = fragCoord.xy / iResolution.xy;
   vec2 p = -1.0+2.0*q;
   p.x *= -iResolution.x/iResolution.y;
-  
+
   // mouse
   vec2 mo = iMouse.xy/iResolution.xy;
   vec2 m = iMouse.xy / iResolution.xy;
   if (iMouse.x == 0.0 && iMouse.y == 0.0) {
-    m = vec2(time * 0.06 + 1.67, 0.78);	
+    m = vec2(time * 0.06 + 1.67, 0.78);
   }
   m = -1.0 + 2.0 * m;
   m *= vec2(4.0,-0.75);
@@ -277,7 +277,7 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
   vec3 ta = vec3(0,0,0);
   vec3 ro = vec3(cos(m.x) * cos(m.y) * dist, sin(m.x) * cos(m.y) * dist, sin(m.y) * dist);
   vec3 light = vec3(cos(m.x - 2.27) * 50.0, sin(m.x - 2.27) * 50.0, -20.0);
-  
+
   // camera direction
   vec3 cw = normalize( ta-ro );
   vec3 cp = vec3( 0.0, 0.0, 1.0 );
@@ -296,4 +296,13 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
 }
 
 \p{Color extracted with the help of \link{https://www.invectorize.com/learn/webgl/rgb}.
+}
+
+\md{See also:
+
+- [toon shader](https://www.maya-ndljk.com/blog/threejs-basic-toon-shader)
+- [GLSL Fragment Shader: Sobel Edge Detection](https://gist.github.com/Hebali/6ebfc66106459aacee6a9fac029d0115)
+- [Cross hatching WebGL shader](http://creativejs.com/2013/07/cross-hatching-webgl-shader/index.html)
+- [Penumbra Maps: Approximate Soft Shadows in Real-Time](https://my.eng.utah.edu/~cs5610/handouts/PenumbraMaps.pdf)
+- [stackgl/glsl-lighting-walkthrough](https://github.com/stackgl/glsl-lighting-walkthrough)
 }
