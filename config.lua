@@ -24,7 +24,18 @@ lvim.plugins = {
             { "nvim-treesitter/nvim-treesitter" },
             { "nvim-lua/plenary.nvim" },
         },
+    },
+    {
+        "mrjones2014/nvim-ts-rainbow",
     }
+    -- {
+    --     "iamcco/markdown-preview.nvim",
+    --     build = "cd app && npm install",
+    --     ft = "markdown",
+    --     config = function()
+    --       vim.g.mkdp_auto_start = 1
+    --     end,
+    -- }
     -- {
     --     "Zeioth/hot-reload.nvim",
     --     dependencies = "nvim-lua/plenary.nvim",
@@ -46,3 +57,5 @@ vim.schedule(function()
     require("cmp").setup.filetype("forester", { sources = { { name = "forester", dup = 0 } } })
 
 end)
+
+lvim.builtin.treesitter.rainbow.enable = true
