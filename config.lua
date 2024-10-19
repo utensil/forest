@@ -24,7 +24,13 @@ lvim.plugins = {
             { "nvim-treesitter/nvim-treesitter" },
             { "nvim-lua/plenary.nvim" },
         },
-    },
+    }
+    -- {
+    --     "Zeioth/hot-reload.nvim",
+    --     dependencies = "nvim-lua/plenary.nvim",
+    --     event = "BufEnter",
+    --     opts = {}
+    -- }
 }
 
 vim.schedule(function()

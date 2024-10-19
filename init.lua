@@ -34,9 +34,24 @@ keymap("n", "<C-j>", "<C-w>j", opts)
 keymap("n", "<C-k>", "<C-w>k", opts)
 keymap("n", "<C-l>", "<C-w>l", opts)
 
+-- Resize with arrows
+keymap("n", "-", ":resize -2<CR>", opts)
+keymap("n", "=", ":resize +2<CR>", opts)
+keymap("n", "<C-->", ":vertical resize -2<CR>", opts)
+keymap("n", "<C-=>", ":vertical resize +2<CR>", opts)
+
 -- Navigate buffers
 keymap("n", "<S-l>", ":bnext<CR>", opts)
 keymap("n", "<S-h>", ":bprevious<CR>", opts)
+
+-- use U for redo :))
+keymap('n', 'U', '<C-r>', opts)
+
+-- terminal
+-- keymap("t", "<C-h>", "<cmd>wincmd h<CR>", opts)
+-- keymap("t", "<C-j>", "<cmd>wincmd j<CR>", opts)
+-- keymap("t", "<C-k>", "<cmd>wincmd k<CR>", opts)
+-- keymap("t", "<C-l>", "<cmd>wincmd l<CR>", opts)
 
 -- Insert --
 -- Press jk fast to exit insert mode
