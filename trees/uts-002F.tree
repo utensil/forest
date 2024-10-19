@@ -7,10 +7,29 @@
 \mdnote{some useful keys in Vim mode}{
 I'm a bit rusty on Vim mode of VS Code, here are some useful keys that I like using:
 
+- ESC
+    - configure CapsLock to ESC
+    - configure `jk` to ESC
+- explore file
+    - my `<leader>` is the default: space
+    - `<leader>+e` to toggle file explorer on the left
+    - `<leader>_f` to fuzzy find files
+    - `gd`: go to definition
+    - `<C+o>`: go back
+    - `gf`: go to file
+    - `K` : hover
+- open file
+    - `:e` to open a file
+    - `:vs` to open a file on the right
+    - `:sp` to open a file on the bottom
+    - I'v configured neovim to
+        - use `<S-l>` for going to next buffer
+        - use `<C-hjkl>` to move between windows
 - save & quit
     - should stick to `cmd+s` for saving, `cmd+w` for closing a tab
     - `ZZ` to save and quit
     - `:q!` to quit without saving
+    - `:qa` to quit vim when there are multiple windows in vim
 - move
     - `gg` for beginning, `G` for end
     - `w`/`b` to move forward/backward by word
@@ -19,6 +38,9 @@ I'm a bit rusty on Vim mode of VS Code, here are some useful keys that I like us
         - I can never remember this in my muscle memory
     - `0` to move to the beginning of the line
         - I don't like `^` and `$` because they are difficult to reach
+- move to character
+    - `f` + character to move to the next such character
+    - `;` and `,` to move to next or previous
 - move & edit
     - `i` to enter INSERT mode
     - `A` to append at the end of the line
@@ -27,6 +49,11 @@ I'm a bit rusty on Vim mode of VS Code, here are some useful keys that I like us
     - `u` to undo, surprisingly `Ctrl`+`r` to redo
     - `x`/`dw`/`dd` to delete a character/word/line
     - `yyp` to duplicate a line
+    - `yw` to copy the current word
+- indentation & comment
+    - use `V` to enter line visual mode
+    - `<`/`>` to unindent/indent
+    - `gc` to toggle comment, or `<leader>+/`
 - add a number before a command to repeat it, e.g. `3j`, `3W`, `3u` for the impatient
 - search
     - `/` to search forward, `n`/`p` to go to next/previous match
