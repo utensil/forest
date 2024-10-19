@@ -1,4 +1,5 @@
 export PROJECT_ROOT := justfile_directory()
+export HOMEBREW_NO_AUTO_UPDATE := "1"
 
 default:
     just --list
@@ -67,6 +68,36 @@ install-shellcheck:
 
 run-shellcheck:
     shellcheck *.sh
+
+nvim:
+    #!/usr/bin/env bash
+    # Install FiraCode Nerd Font from https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/FiraCode.zip
+    # After installation, run: fc-cache -f -v
+    # Default Mac terminal cannot support true color
+    # Install rio: brew install --cask rio
+    brew install --cask alacritty
+    # configure alacritty
+    # https://alacritty.org/config-alacritty.html
+    cat <<EOF > $HOME/.alacritty.toml
+        [font]
+        normal = { family = "FiraCode Nerd Font Mono", style = "Regular" }
+        size = 16
+    EOF
+    brew install neovim
+    # rm -rf ~/.config/nvim ~/.bun/install ~/.local/share/lunarvim ~/.config/lvim/
+    # git clone https://github.com/utensil/dotnvim.git ~/.config/nvim
+    # git clone https://github.com/ntk148v/neovim-config.git "${XDG_CONFIG_HOME:-$HOME/.config}"/nvim
+    # :NvCheatsheet
+    # bun upgrade
+    yes|bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/master/utils/installer/install.sh)
+    echo 'export PATH=$HOME/.local/bin:$PATH' >> ~/.bashrc
+    echo '. $HOME/.bashrc' >> ~/.zshrc
+    # (cd ~/.config/lvim/ && lvim --headless +'lua require("lvim.utils").generate_settings()' +qa && sort -o lv-settings.lua{,} )
+    cp config.lua ~/.config/lvim/
+    echo 'Use lvim to start LunarVim'
+
+
+
 
 # act:
 #     ./act.sh
