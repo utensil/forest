@@ -61,7 +61,9 @@ lvim.plugins = {
     },
     {
         "github/copilot.vim",
-    }
+    },
+    -- play also https://www.vim-hero.com/lessons/basic-movement
+    { "ThePrimeagen/vim-be-good" }
     -- {
     --     "iamcco/markdown-preview.nvim",
     --     build = "cd app && npm install",
