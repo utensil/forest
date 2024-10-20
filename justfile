@@ -71,6 +71,7 @@ run-shellcheck:
 
 prep-term: prep-kitty
     which lazygit || brew install lazygit
+    which yq || brew install yq
 
 prep-alacritty:
     #!/usr/bin/env bash

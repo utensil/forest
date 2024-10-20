@@ -166,10 +166,23 @@ lvim.plugins = {
         },
         -- setting the keybinding for LazyGit with 'keys' is recommended in
         -- order to load the plugin when the command is run for the first time
+        -- keys = {
+        --     { "<leader>lg", "<cmd>LazyGit<cr>", desc = "LazyGit" }
+        -- }
+    },
+    {
+        'topaxi/gh-actions.nvim',
         keys = {
-            { "<leader>lg", "<cmd>LazyGit<cr>", desc = "LazyGit" }
+            { '<leader>gh', '<cmd>GhActions<cr>', desc = 'Open Github Actions' },
+        },
+        -- optional, you can also install and use `yq` instead.
+        -- build = 'make',
+        ---@type GhActionsConfig
+        opts = {},
+        dependencies = {
+            'MunifTanjim/nui.nvim'
         }
-    }
+    },
     -- play also https://www.vim-hero.com/lessons/basic-movement
     -- { "ThePrimeagen/vim-be-good" }
     -- {
