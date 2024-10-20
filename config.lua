@@ -27,6 +27,9 @@ lvim.plugins = {
     },
     {
         "mrjones2014/nvim-ts-rainbow",
+    },
+    {
+        "github/copilot.vim",
     }
     -- {
     --     "iamcco/markdown-preview.nvim",
@@ -47,15 +50,16 @@ lvim.plugins = {
 vim.schedule(function()
     -- Lua
     -- vim.cmd.colorscheme "railscasts"
-    vim.cmd('colorscheme base16-railscasts')
 
-    require("forester").setup()
 
-    local foresterCompletionSource = require("forester.completion")
-
-    require("cmp").register_source("forester", foresterCompletionSource)
-    require("cmp").setup.filetype("forester", { sources = { { name = "forester", dup = 0 } } })
+    -- require("forester").setup()
 
 end)
 
+vim.cmd('colorscheme base16-railscasts')
 lvim.builtin.treesitter.rainbow.enable = true
+
+local foresterCompletionSource = require("forester.completion")
+
+require("cmp").register_source("forester", foresterCompletionSource)
+require("cmp").setup.filetype("forester", { sources = { { name = "forester", dup = 0 } } })
