@@ -183,6 +183,7 @@ lvim.plugins = {
             'MunifTanjim/nui.nvim'
         }
     },
+    { 'wakatime/vim-wakatime', lazy = false }
     -- play also https://www.vim-hero.com/lessons/basic-movement
     -- { "ThePrimeagen/vim-be-good" }
     -- {
