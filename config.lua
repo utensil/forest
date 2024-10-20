@@ -10,23 +10,52 @@ package.path = package.path .. ';' .. current_dir .. '?.lua'
 
 require "init"
 
+lvim.builtin.treesitter.rainbow.enable = true
+lvim.colorscheme = 'base16-railscasts'
+
 lvim.plugins = {
     -- {
     --   "lukelex/railscasts.nvim",
     --   dependencies = { "rktjmp/lush.nvim" }
     -- },
-    { "RRethy/base16-nvim" },
+    {
+        "RRethy/base16-nvim",
+        config = function()
+            vim.cmd('colorscheme base16-railscasts')
+        end},
     {
         "kentookura/forester.nvim",
-        -- event = "VeryLazy",
+        -- have to remove this for the auto-completion to have a non-nil `forester_current_config`
+        event = "VeryLazy",
         dependencies = {
             { "nvim-telescope/telescope.nvim" },
             { "nvim-treesitter/nvim-treesitter" },
             { "nvim-lua/plenary.nvim" },
+            { "hrsh7th/nvim-cmp"}
         },
-    },
-    {
-        "mrjones2014/nvim-ts-rainbow",
+        -- -- maybe could be even lazier with this, but not working
+        -- ft = "tree",
+        config = function()
+            -- can't run this because it treesitter might not be initialized
+            -- vim.cmd.TSInstall "toml"
+
+            -- this ensures that the treesitter is initialized, and toml is installed
+            local configs = require("nvim-treesitter.configs")
+            configs.setup {
+                ensure_installed = { "toml" },
+            }
+
+            -- this ensures forester is initialized, makeing `forester` tree-sitter available
+            require("forester").setup()
+
+            -- can't run this explicitly, because next launch of nvim will ask for reinstallation
+            -- vim.cmd.TSInstall "forester"
+
+            -- installs the forester tree-sitter, so the syntax highlighting is available
+            configs.setup {
+                ensure_installed = { "toml", "forester" }
+            }
+        end,
     },
     {
         "github/copilot.vim",
@@ -48,18 +77,17 @@ lvim.plugins = {
 }
 
 vim.schedule(function()
+    -- vim.cmd.TSInstall "forester"
+
     -- Lua
     -- vim.cmd.colorscheme "railscasts"
-
-
-    -- require("forester").setup()
-
 end)
 
-vim.cmd('colorscheme base16-railscasts')
-lvim.builtin.treesitter.rainbow.enable = true
+require("forester").setup()
 
 local foresterCompletionSource = require("forester.completion")
 
-require("cmp").register_source("forester", foresterCompletionSource)
-require("cmp").setup.filetype("forester", { sources = { { name = "forester", dup = 0 } } })
+local cmp = require("cmp")
+
+cmp.register_source("forester", foresterCompletionSource)
+cmp.setup.filetype("forester", { sources = { { name = "forester", dup = 0 } } })
