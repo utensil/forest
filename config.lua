@@ -10,6 +10,10 @@ package.path = package.path .. ';' .. current_dir .. '?.lua'
 
 require "init"
 
+-- to prevent colision with rusteceanvim
+-- https://github.com/mrcjkb/rustaceanvim/discussions/174#discussioncomment-8193827
+vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "rust_analyzer" })
+
 lvim.plugins = {
     -- {
     --   "lukelex/railscasts.nvim",
@@ -67,6 +71,12 @@ lvim.plugins = {
 
             -- cmp.setup()
         end,
+    },
+    {
+        'mrcjkb/rustaceanvim',
+        version = '^5', -- Recommended
+        -- lazy = false, -- This plugin is already lazy
+        ft = { "rust" },
     },
     {
         "github/copilot.vim",
