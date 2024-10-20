@@ -72,6 +72,8 @@ run-shellcheck:
 prep-term: prep-kitty
     which lazygit || brew install lazygit
     which yq || brew install yq
+    which gh || brew install gh
+    @echo "Remember to run: gh auth login"
 
 prep-alacritty:
     #!/usr/bin/env bash
