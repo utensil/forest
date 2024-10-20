@@ -20,21 +20,23 @@ lvim.plugins = {
     -- },
     {
         "RRethy/base16-nvim",
-        config = function()
-            vim.cmd('colorscheme base16-railscasts')
-        end},
+        lazy = false,
+        -- config = function()
+        --     vim.cmd('colorscheme base16-railscasts')
+        -- end
+    },
     {
         "kentookura/forester.nvim",
         -- have to remove this for the auto-completion to have a non-nil `forester_current_config`
-        event = "VeryLazy",
+        -- event = "VeryLazy",
         dependencies = {
             { "nvim-telescope/telescope.nvim" },
             { "nvim-treesitter/nvim-treesitter" },
-            { "nvim-lua/plenary.nvim" },
-            { "hrsh7th/nvim-cmp"}
+            { "nvim-lua/plenary.nvim" }
         },
-        -- -- maybe could be even lazier with this, but not working
+        -- -- maybe could be even lazier with these, but not working
         -- ft = "tree",
+        -- ft = "forester",
         config = function()
             -- can't run this because it treesitter might not be initialized
             -- vim.cmd.TSInstall "toml"
@@ -83,7 +85,7 @@ vim.schedule(function()
     -- vim.cmd.colorscheme "railscasts"
 end)
 
-require("forester").setup()
+-- require("forester").setup()
 
 local foresterCompletionSource = require("forester.completion")
 
