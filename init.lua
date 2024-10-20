@@ -16,6 +16,8 @@ end
 
 -- https://github.com/LunarVim/Neovim-from-scratch/blob/master/lua/user/keymaps.lua
 
+local opts = { noremap = true, silent = true }
+
 local keymap = vim.keymap.set
 
 -- Modes

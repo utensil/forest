@@ -10,14 +10,20 @@ package.path = package.path .. ';' .. current_dir .. '?.lua'
 
 require "init"
 
--- to prevent colision with rusteceanvim: not working
+-- to prevent colision with rusteceanvim
 -- https://github.com/mrcjkb/rustaceanvim/discussions/174#discussioncomment-8193827
 vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "rust_analyzer" })
 
--- https://github.com/mrcjkb/rustaceanvim/discussions/94#discussioncomment-7813716: not working
-require("mason-lspconfig").setup_handlers {
-    ["rust_analyzer"] = function() end,
-}
+-- In order for the above to work, one must excute `:LvimCacheReset` manually'
+-- or uncomment the following
+-- vim.schedule(function()
+--     vim.cmd('LvimCacheReset')
+-- end)
+
+-- -- https://github.com/mrcjkb/rustaceanvim/discussions/94#discussioncomment-7813716: not working
+-- require("mason-lspconfig").setup_handlers {
+--     ["rust_analyzer"] = function() end,
+-- }
 
 lvim.plugins = {
     -- {
@@ -30,6 +36,12 @@ lvim.plugins = {
         -- config = function()
         --     vim.cmd('colorscheme base16-railscasts')
         -- end
+    },
+    {
+        "j-hui/fidget.nvim",
+        opts = {
+            -- options
+        },
     },
     {
         "kentookura/forester.nvim",
