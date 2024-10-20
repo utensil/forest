@@ -77,15 +77,21 @@ lvim.plugins = {
             -- cmp.setup()
         end,
     },
-    -- https://github.com/mrcjkb/rustaceanvim/discussions/94#discussioncomment-7813716 not working
+    -- https://github.com/mrcjkb/rustaceanvim/discussions/94#discussioncomment-7813716 not working:
+    -- error: lazy.nvim/lua/lazy/core/loader.lua:373: attempt to call field 'setup' (a table value)
+    -- {
+    --     "mrcjkb/rustaceanvim",
+    --     version = "^3", -- Recommended
+    --     ft = { "rust" },
+    -- },
     -- {
     --     "neovim/nvim-lspconfig",
     --     opts = {
-    --       setup = {
-    --         rust_analyzer = function()
-    --           return true
-    --         end,
-    --       },
+    --         setup = {
+    --             rust_analyzer = function()
+    --                 return true
+    --             end,
+    --         },
     --     },
     -- },
     {
@@ -121,7 +127,7 @@ lvim.plugins = {
         -- See Commands section for default commands if you want to lazy load on them
       },
     -- play also https://www.vim-hero.com/lessons/basic-movement
-    { "ThePrimeagen/vim-be-good" }
+    -- { "ThePrimeagen/vim-be-good" }
     -- {
     --     "iamcco/markdown-preview.nvim",
     --     build = "cd app && npm install",
