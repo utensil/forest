@@ -10,9 +10,14 @@ package.path = package.path .. ';' .. current_dir .. '?.lua'
 
 require "init"
 
--- to prevent colision with rusteceanvim
+-- to prevent colision with rusteceanvim: not working
 -- https://github.com/mrcjkb/rustaceanvim/discussions/174#discussioncomment-8193827
 vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "rust_analyzer" })
+
+-- https://github.com/mrcjkb/rustaceanvim/discussions/94#discussioncomment-7813716: not working
+require("mason-lspconfig").setup_handlers {
+    ["rust_analyzer"] = function() end,
+}
 
 lvim.plugins = {
     -- {
@@ -72,11 +77,29 @@ lvim.plugins = {
             -- cmp.setup()
         end,
     },
+    -- https://github.com/mrcjkb/rustaceanvim/discussions/94#discussioncomment-7813716 not working
+    -- {
+    --     "neovim/nvim-lspconfig",
+    --     opts = {
+    --       setup = {
+    --         rust_analyzer = function()
+    --           return true
+    --         end,
+    --       },
+    --     },
+    -- },
     {
         'mrcjkb/rustaceanvim',
         version = '^5', -- Recommended
-        -- lazy = false, -- This plugin is already lazy
-        ft = { "rust" },
+        lazy = false, -- This plugin is already lazy
+        -- ft = { "rust" },
+        -- config = function()
+        --   vim.g.rustaceanvim = {
+        --     server = {
+        --       on_attach = require("lvim.lsp").common_on_attach
+        --     },
+        --   }
+        -- end,
     },
     {
         "github/copilot.vim",
