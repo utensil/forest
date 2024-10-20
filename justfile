@@ -70,6 +70,7 @@ run-shellcheck:
     shellcheck *.sh
 
 prep-term: prep-kitty
+    which lazygit || brew install lazygit
 
 prep-alacritty:
     #!/usr/bin/env bash
