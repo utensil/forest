@@ -45,6 +45,7 @@ lvim.plugins = {
     },
     {
         "kentookura/forester.nvim",
+        branch = "36-installation-and-initialization",
         -- tried removing this for the auto-completion to have a non-nil `forester_current_config`
         event = "VeryLazy",
         dependencies = {
@@ -78,15 +79,6 @@ lvim.plugins = {
                 ensure_installed = { "toml", "forester" },
                 sync_install = false,
             }
-
-            -- local foresterCompletionSource = require("forester.completion")
-
-            -- local cmp = require("cmp")
-
-            -- cmp.register_source("forester", foresterCompletionSource)
-            -- cmp.setup.filetype("forester", { sources = { { name = "forester", dup = 0 } } })
-
-            -- cmp.setup()
         end,
     },
     -- https://github.com/mrcjkb/rustaceanvim/discussions/94#discussioncomment-7813716 not working:
@@ -174,3 +166,12 @@ lvim.plugins = {
 
 lvim.colorscheme = 'base16-railscasts'
 lvim.builtin.treesitter.rainbow.enable = true
+
+local foresterCompletionSource = require("forester.completion")
+
+local cmp = require("cmp")
+
+cmp.register_source("forester", foresterCompletionSource)
+cmp.setup.filetype("forester", { sources = { { name = "forester", dup = 0 } } })
+
+cmp.setup()
