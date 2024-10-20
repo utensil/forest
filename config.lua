@@ -10,9 +10,6 @@ package.path = package.path .. ';' .. current_dir .. '?.lua'
 
 require "init"
 
-lvim.builtin.treesitter.rainbow.enable = true
-lvim.colorscheme = 'base16-railscasts'
-
 lvim.plugins = {
     -- {
     --   "lukelex/railscasts.nvim",
@@ -27,14 +24,15 @@ lvim.plugins = {
     },
     {
         "kentookura/forester.nvim",
-        -- have to remove this for the auto-completion to have a non-nil `forester_current_config`
-        -- event = "VeryLazy",
+        -- tried removing this for the auto-completion to have a non-nil `forester_current_config`
+        event = "VeryLazy",
         dependencies = {
             { "nvim-telescope/telescope.nvim" },
             { "nvim-treesitter/nvim-treesitter" },
-            { "nvim-lua/plenary.nvim" }
+            { "nvim-lua/plenary.nvim" },
+            { "hrsh7th/nvim-cmp" }
         },
-        -- -- maybe could be even lazier with these, but not working
+        -- -- maybe could be even lazier with these, but not working, because `forester` filetype is not registered yet
         -- ft = "tree",
         -- ft = "forester",
         config = function()
@@ -55,13 +53,38 @@ lvim.plugins = {
 
             -- installs the forester tree-sitter, so the syntax highlighting is available
             configs.setup {
-                ensure_installed = { "toml", "forester" }
+                ensure_installed = { "toml", "forester" },
             }
+
+            -- local foresterCompletionSource = require("forester.completion")
+
+            -- local cmp = require("cmp")
+
+            -- cmp.register_source("forester", foresterCompletionSource)
+            -- cmp.setup.filetype("forester", { sources = { { name = "forester", dup = 0 } } })
+
+            -- cmp.setup()
         end,
     },
     {
         "github/copilot.vim",
+        event = "VeryLazy",
     },
+    {
+        "CopilotC-Nvim/CopilotChat.nvim",
+        event = "VeryLazy",
+        branch = "canary",
+        dependencies = {
+          { "github/copilot.vim" }, -- or zbirenbaum/copilot.lua
+          { "nvim-lua/plenary.nvim" }, -- for curl, log wrapper
+        },
+        build = "make tiktoken", -- Only on MacOS or Linux
+        opts = {
+          debug = true, -- Enable debugging
+          -- See Configuration section for rest
+        },
+        -- See Commands section for default commands if you want to lazy load on them
+      },
     -- play also https://www.vim-hero.com/lessons/basic-movement
     { "ThePrimeagen/vim-be-good" }
     -- {
@@ -80,18 +103,5 @@ lvim.plugins = {
     -- }
 }
 
-vim.schedule(function()
-    -- vim.cmd.TSInstall "forester"
-
-    -- Lua
-    -- vim.cmd.colorscheme "railscasts"
-end)
-
--- require("forester").setup()
-
-local foresterCompletionSource = require("forester.completion")
-
-local cmp = require("cmp")
-
-cmp.register_source("forester", foresterCompletionSource)
-cmp.setup.filetype("forester", { sources = { { name = "forester", dup = 0 } } })
+lvim.colorscheme = 'base16-railscasts'
+lvim.builtin.treesitter.rainbow.enable = true
