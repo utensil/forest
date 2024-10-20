@@ -69,7 +69,9 @@ install-shellcheck:
 run-shellcheck:
     shellcheck *.sh
 
-prep-term:
+prep-term: prep-kitty
+
+prep-alacritty:
     #!/usr/bin/env bash
     # Install FiraCode Nerd Font from https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/FiraCode.zip
     # After installation, run: fc-cache -f -v
@@ -79,6 +81,14 @@ prep-term:
     # https://alacritty.org/config-alacritty.html
     cp .alacritty.toml ~/.alacritty.toml
 
+prep-kitty:
+    #!/usr/bin/env bash
+    which kitty || brew install --cask kitty
+    # configure kitty
+    # https://sw.kovidgoyal.net/kitty/conf.html
+    mkdir -p ~/.config/kitty
+    cp -f kitty.conf ~/.config/kitty/kitty.conf
+
 sync-nvim:
     #!/usr/bin/env bash
     mkdir -p ~/.config/nvim
@@ -87,7 +97,7 @@ sync-nvim:
     cp -f init.lua ~/.config/lvim/init.lua
     cp -f config.lua ~/.config/lvim/config.lua
 
-nvim: prep-term
+prep-nvim: prep-term
     #!/usr/bin/env bash
     which nvim || brew install neovim
     # rm -rf ~/.config/nvim ~/.cache/lvim ~/.bun/install ~/.local/share/lunarvim ~/.config/lvim/
@@ -102,6 +112,10 @@ nvim: prep-term
     # (cd ~/.config/lvim/ && lvim --headless +'lua require("lvim.utils").generate_settings()' +qa && sort -o lv-settings.lua{,} )
     echo
     echo "Use lvim to start LunarVim"
+
+nvim PROJ: sync-nvim
+    #!/usr/bin/env bash
+    cd ~/projects/{{PROJ}} && lvim .
 
 # act:
 #     ./act.sh
