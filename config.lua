@@ -43,6 +43,7 @@ lvim.plugins = {
             local configs = require("nvim-treesitter.configs")
             configs.setup {
                 ensure_installed = { "toml" },
+                sync_install = true,
             }
 
             -- this ensures forester is initialized, makeing `forester` tree-sitter available
@@ -54,6 +55,7 @@ lvim.plugins = {
             -- installs the forester tree-sitter, so the syntax highlighting is available
             configs.setup {
                 ensure_installed = { "toml", "forester" },
+                sync_install = false,
             }
 
             -- local foresterCompletionSource = require("forester.completion")
