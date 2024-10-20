@@ -138,6 +138,22 @@ lvim.plugins = {
         },
         -- See Commands section for default commands if you want to lazy load on them
       },
+      {
+        'Julian/lean.nvim',
+        event = { 'BufReadPre *.lean', 'BufNewFile *.lean' },
+
+        dependencies = {
+          'neovim/nvim-lspconfig',
+          'nvim-lua/plenary.nvim',
+          -- you also will likely want nvim-cmp or some completion engine
+        },
+
+        -- see details below for full configuration options
+        opts = {
+          lsp = {},
+          mappings = true,
+        }
+      }
     -- play also https://www.vim-hero.com/lessons/basic-movement
     -- { "ThePrimeagen/vim-be-good" }
     -- {
