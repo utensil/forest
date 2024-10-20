@@ -88,6 +88,7 @@ prep-kitty:
     # https://sw.kovidgoyal.net/kitty/conf.html
     mkdir -p ~/.config/kitty
     cp -f kitty.conf ~/.config/kitty/kitty.conf
+    cp -f kitty_session.conf ~/.config/kitty/kitty_session.conf
 
 sync-nvim:
     #!/usr/bin/env bash
