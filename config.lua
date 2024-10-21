@@ -5,8 +5,8 @@
 -- Discord: https://discord.com/invite/Xb9B4Ny
 
 local current_file = debug.getinfo(1, "S").source:sub(2)
-local current_dir = current_file:match("(.*/)")
-package.path = package.path .. ';' .. current_dir .. '?.lua'
+local current_dir = current_file:match "(.*/)"
+package.path = package.path .. ";" .. current_dir .. "?.lua"
 
 require "init"
 
@@ -17,7 +17,7 @@ vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "rust_analyz
 -- In order for the above to work, one must excute `:LvimCacheReset` manually'
 -- or uncomment the following
 vim.schedule(function()
-    vim.cmd('LvimCacheReset')
+    vim.cmd "LvimCacheReset"
 end)
 
 -- -- https://github.com/mrcjkb/rustaceanvim/discussions/94#discussioncomment-7813716: not working
@@ -52,7 +52,7 @@ lvim.plugins = {
             { "nvim-telescope/telescope.nvim" },
             { "nvim-treesitter/nvim-treesitter" },
             { "nvim-lua/plenary.nvim" },
-            { "hrsh7th/nvim-cmp" }
+            { "hrsh7th/nvim-cmp" },
         },
         -- -- maybe could be even lazier with these, but not working, because `forester` filetype is not registered yet
         -- ft = "tree",
@@ -62,7 +62,7 @@ lvim.plugins = {
             -- vim.cmd.TSInstall "toml"
 
             -- this ensures that the treesitter is initialized, and toml is installed
-            local configs = require("nvim-treesitter.configs")
+            local configs = require "nvim-treesitter.configs"
             configs.setup {
                 ensure_installed = { "toml" },
                 sync_install = true,
@@ -99,8 +99,8 @@ lvim.plugins = {
     --     },
     -- },
     {
-        'mrcjkb/rustaceanvim',
-        version = '^5', -- Recommended
+        "mrcjkb/rustaceanvim",
+        version = "^5", -- Recommended
         lazy = false, -- This plugin is already lazy
         -- ft = { "rust" },
         -- config = function()
@@ -120,35 +120,35 @@ lvim.plugins = {
         event = "VeryLazy",
         branch = "canary",
         dependencies = {
-          { "github/copilot.vim" }, -- or zbirenbaum/copilot.lua
-          { "nvim-lua/plenary.nvim" }, -- for curl, log wrapper
+            { "github/copilot.vim" }, -- or zbirenbaum/copilot.lua
+            { "nvim-lua/plenary.nvim" }, -- for curl, log wrapper
         },
         build = "make tiktoken", -- Only on MacOS or Linux
         opts = {
-          debug = true, -- Enable debugging
-          -- See Configuration section for rest
+            debug = true, -- Enable debugging
+            -- See Configuration section for rest
         },
         -- See Commands section for default commands if you want to lazy load on them
-      },
-      {
-        'Julian/lean.nvim',
-        event = { 'BufReadPre *.lean', 'BufNewFile *.lean' },
+    },
+    {
+        "Julian/lean.nvim",
+        event = { "BufReadPre *.lean", "BufNewFile *.lean" },
 
         dependencies = {
-          'neovim/nvim-lspconfig',
-          'nvim-lua/plenary.nvim',
-          -- you also will likely want nvim-cmp or some completion engine
+            "neovim/nvim-lspconfig",
+            "nvim-lua/plenary.nvim",
+            -- you also will likely want nvim-cmp or some completion engine
         },
 
         -- see details below for full configuration options
         opts = {
-          lsp = {},
-          mappings = true,
-        }
+            lsp = {},
+            mappings = true,
+        },
     },
     {
-      "sindrets/diffview.nvim",
-      event = "BufRead",
+        "sindrets/diffview.nvim",
+        event = "BufRead",
     },
     {
         "kdheepak/lazygit.nvim",
@@ -171,67 +171,67 @@ lvim.plugins = {
         -- }
     },
     {
-        'topaxi/gh-actions.nvim',
+        "topaxi/gh-actions.nvim",
         keys = {
-            { '<leader>gh', '<cmd>GhActions<cr>', desc = 'Open Github Actions' },
+            { "<leader>gh", "<cmd>GhActions<cr>", desc = "Open Github Actions" },
         },
         -- optional, you can also install and use `yq` instead.
         -- build = 'make',
         ---@type GhActionsConfig
         opts = {},
         dependencies = {
-            'MunifTanjim/nui.nvim'
-        }
+            "MunifTanjim/nui.nvim",
+        },
     },
-    { 'wakatime/vim-wakatime', lazy = false },
+    { "wakatime/vim-wakatime", lazy = false },
     {
-      "pwntester/octo.nvim",
-      dependencies = {
-        'nvim-lua/plenary.nvim',
-        'nvim-telescope/telescope.nvim',
-        'nvim-tree/nvim-web-devicons',
-      },
-      config = function()
-        require("octo").setup()
-      end,
+        "pwntester/octo.nvim",
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+            "nvim-telescope/telescope.nvim",
+            "nvim-tree/nvim-web-devicons",
+        },
+        config = function()
+            require("octo").setup()
+        end,
     },
     {
-      "folke/trouble.nvim",
-      opts = {}, -- for default options, refer to the configuration section for custom setup.
-      cmd = "Trouble",
-      keys = {
-        {
-          "<leader>xx",
-          "<cmd>Trouble diagnostics toggle<cr>",
-          desc = "Diagnostics (Trouble)",
+        "folke/trouble.nvim",
+        opts = {}, -- for default options, refer to the configuration section for custom setup.
+        cmd = "Trouble",
+        keys = {
+            {
+                "<leader>xx",
+                "<cmd>Trouble diagnostics toggle<cr>",
+                desc = "Diagnostics (Trouble)",
+            },
+            {
+                "<leader>xX",
+                "<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
+                desc = "Buffer Diagnostics (Trouble)",
+            },
+            {
+                "<leader>cs",
+                "<cmd>Trouble symbols toggle focus=false<cr>",
+                desc = "Symbols (Trouble)",
+            },
+            {
+                "<leader>cl",
+                "<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
+                desc = "LSP Definitions / references / ... (Trouble)",
+            },
+            {
+                "<leader>xL",
+                "<cmd>Trouble loclist toggle<cr>",
+                desc = "Location List (Trouble)",
+            },
+            {
+                "<leader>xQ",
+                "<cmd>Trouble qflist toggle<cr>",
+                desc = "Quickfix List (Trouble)",
+            },
         },
-        {
-          "<leader>xX",
-          "<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
-          desc = "Buffer Diagnostics (Trouble)",
-        },
-        {
-          "<leader>cs",
-          "<cmd>Trouble symbols toggle focus=false<cr>",
-          desc = "Symbols (Trouble)",
-        },
-        {
-          "<leader>cl",
-          "<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
-          desc = "LSP Definitions / references / ... (Trouble)",
-        },
-        {
-          "<leader>xL",
-          "<cmd>Trouble loclist toggle<cr>",
-          desc = "Location List (Trouble)",
-        },
-        {
-          "<leader>xQ",
-          "<cmd>Trouble qflist toggle<cr>",
-          desc = "Quickfix List (Trouble)",
-        },
-      },
-    }
+    },
     -- play also https://www.vim-hero.com/lessons/basic-movement
     -- { "ThePrimeagen/vim-be-good" }
     -- {
@@ -250,12 +250,12 @@ lvim.plugins = {
     -- }
 }
 
-lvim.colorscheme = 'base16-railscasts'
+lvim.colorscheme = "base16-railscasts"
 lvim.builtin.treesitter.rainbow.enable = true
 
-local foresterCompletionSource = require("forester.completion")
+local foresterCompletionSource = require "forester.completion"
 
-local cmp = require("cmp")
+local cmp = require "cmp"
 
 cmp.register_source("forester", foresterCompletionSource)
 cmp.setup.filetype("forester", { sources = { { name = "forester", dup = 0 } } })

@@ -47,7 +47,7 @@ keymap("n", "<S-l>", ":bnext<CR>", opts)
 keymap("n", "<S-h>", ":bprevious<CR>", opts)
 
 -- use U for redo :))
-keymap('n', 'U', '<C-r>', opts)
+keymap("n", "U", "<C-r>", opts)
 
 -- terminal
 -- keymap("t", "<C-h>", "<cmd>wincmd h<CR>", opts)

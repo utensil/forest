@@ -77,6 +77,7 @@ prep-term: prep-kitty
     @echo "And possibly: gh auth refresh -s read:project"
     which fzf || brew install fzf
     which yazi || brew install yazi
+    which stylua || brew install stylua
 
 prep-alacritty:
     #!/usr/bin/env bash
@@ -101,6 +102,8 @@ sync-nvim:
     #!/usr/bin/env bash
     mkdir -p ~/.config/nvim
     mkdir -p ~/.config/lvim
+    stylua init.lua
+    stylua config.lua
     cp -f init.lua ~/.config/nvim/init.lua
     cp -f init.lua ~/.config/lvim/init.lua
     cp -f config.lua ~/.config/lvim/config.lua
@@ -121,7 +124,7 @@ prep-nvim: prep-term
     echo
     echo "Use lvim to start LunarVim"
 
-nvim PROJ: sync-nvim
+nvim PROJ="forest": sync-nvim
     #!/usr/bin/env bash
     cd ~/projects/{{PROJ}} && lvim .
 
