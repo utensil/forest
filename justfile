@@ -129,5 +129,9 @@ nvim PROJ="forest": sync-nvim
     #!/usr/bin/env bash
     cd ~/projects/{{PROJ}} && lvim .
 
+yazi DIR="{{HOME}}/projects":
+    #!/usr/bin/env bash
+    EDITOR=lvim yazi {{DIR}}
+
 # act:
 #     ./act.sh
