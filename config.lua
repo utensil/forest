@@ -123,16 +123,148 @@ lvim.plugins = {
         event = "VeryLazy",
         branch = "canary",
         dependencies = {
-            { "zbirenbaum/copilot.lua" },
-            -- { "github/copilot.vim" }, -- or zbirenbaum/copilot.lua
+            -- { "zbirenbaum/copilot.lua" },
+            { "github/copilot.vim" }, -- or zbirenbaum/copilot.lua
+            { "nvim-telescope/telescope.nvim" }, -- Use telescope for help actions
             { "nvim-lua/plenary.nvim" }, -- for curl, log wrapper
         },
         build = "make tiktoken", -- Only on MacOS or Linux
         opts = {
-            debug = true, -- Enable debugging
+            -- debug = true, -- Enable debugging
             -- See Configuration section for rest
+            window = {
+                layout = "float",
+                relative = "cursor",
+                width = 1,
+                height = 0.4,
+                row = 1,
+            },
         },
-        -- See Commands section for default commands if you want to lazy load on them
+        -- adapted from https://github.com/jellydn/lazy-nvim-ide/blob/main/lua/plugins/extras/copilot-chat-v2.lua
+        -- config = function(_, opts)
+        --     local chat = require "CopilotChat"
+        --     local select = require "CopilotChat.select"
+        --     -- Use unnamed register for the selection
+        --     opts.selection = select.unnamed
+
+        --     -- Override the git prompts message
+        --     opts.prompts.Commit = {
+        --         prompt = "Write commit message for the change with commitizen convention",
+        --         selection = select.gitdiff,
+        --     }
+        --     opts.prompts.CommitStaged = {
+        --         prompt = "Write commit message for the change with commitizen convention",
+        --         selection = function(source)
+        --             return select.gitdiff(source, true)
+        --         end,
+        --     }
+
+        --     chat.setup(opts)
+        --     -- Setup the CMP integration
+        --     require("CopilotChat.integrations.cmp").setup()
+
+        --     vim.api.nvim_create_user_command("CopilotChatVisual", function(args)
+        --         chat.ask(args.args, { selection = select.visual })
+        --     end, { nargs = "*", range = true })
+
+        --     -- Inline chat with Copilot
+        --     vim.api.nvim_create_user_command("CopilotChatInline", function(args)
+        --         chat.ask(args.args, {
+        --             selection = select.visual,
+        --             window = {
+        --                 layout = "float",
+        --                 relative = "cursor",
+        --                 width = 1,
+        --                 height = 0.4,
+        --                 row = 1,
+        --             },
+        --         })
+        --     end, { nargs = "*", range = true })
+
+        --     -- Restore CopilotChatBuffer
+        --     vim.api.nvim_create_user_command("CopilotChatBuffer", function(args)
+        --         chat.ask(args.args, { selection = select.buffer })
+        --     end, { nargs = "*", range = true })
+
+        --     -- Custom buffer for CopilotChat
+        --     vim.api.nvim_create_autocmd("BufEnter", {
+        --         pattern = "copilot-*",
+        --         callback = function()
+        --             vim.opt_local.relativenumber = true
+        --             vim.opt_local.number = true
+
+        --             -- Get current filetype and set it to markdown if the current filetype is copilot-chat
+        --             local ft = vim.bo.filetype
+        --             if ft == "copilot-chat" then
+        --                 vim.bo.filetype = "markdown"
+        --             end
+        --         end,
+        --     })
+        -- end,
+        keys = {
+            -- Code related commands
+            { "<leader>ae", "<cmd>CopilotChatExplain<cr>", desc = "CopilotChat - Explain code" },
+            { "<leader>at", "<cmd>CopilotChatTests<cr>", desc = "CopilotChat - Generate tests" },
+            { "<leader>ar", "<cmd>CopilotChatReview<cr>", desc = "CopilotChat - Review code" },
+            { "<leader>aR", "<cmd>CopilotChatRefactor<cr>", desc = "CopilotChat - Refactor code" },
+            { "<leader>an", "<cmd>CopilotChatBetterNamings<cr>", desc = "CopilotChat - Better Naming" },
+            -- -- Chat with Copilot in visual mode
+            -- {
+            --     "<leader>av",
+            --     "<cmd>CopilotChatVisual<cr>",
+            --     mode = "x",
+            --     desc = "CopilotChat - Open in vertical split",
+            -- },
+            -- {
+            --     "<leader>ax",
+            --     "<cmd>CopilotChatInline<cr>",
+            --     mode = "x",
+            --     desc = "CopilotChat - Inline chat",
+            -- },
+            -- Custom input for CopilotChat
+            {
+                "<leader>ai",
+                function()
+                    local input = vim.fn.input "Ask Copilot: "
+                    if input ~= "" then
+                        vim.cmd("CopilotChat " .. input)
+                    end
+                end,
+                desc = "CopilotChat - Ask input",
+            },
+            -- Generate commit message based on the git diff
+            {
+                "<leader>am",
+                "<cmd>CopilotChatCommit<cr>",
+                desc = "CopilotChat - Generate commit message for all changes",
+            },
+            {
+                "<leader>aM",
+                "<cmd>CopilotChatCommitStaged<cr>",
+                desc = "CopilotChat - Generate commit message for staged changes",
+            },
+            -- -- Quick chat with Copilot
+            -- {
+            --     "<leader>aq",
+            --     function()
+            --         local input = vim.fn.input "Quick Chat: "
+            --         if input ~= "" then
+            --             vim.cmd("CopilotChatBuffer " .. input)
+            --         end
+            --     end,
+            --     desc = "CopilotChat - Quick chat",
+            -- },
+            -- Debug
+            { "<leader>ad", "<cmd>CopilotChatDebugInfo<cr>", desc = "CopilotChat - Debug Info" },
+            -- Fix the issue with diagnostic
+            { "<leader>af", "<cmd>CopilotChatFixDiagnostic<cr>", desc = "CopilotChat - Fix Diagnostic" },
+            -- Clear buffer and chat history
+            { "<leader>al", "<cmd>CopilotChatReset<cr>", desc = "CopilotChat - Clear buffer and chat history" },
+            -- Toggle Copilot Chat Vsplit
+            { "<leader>av", "<cmd>CopilotChatToggle<cr>", desc = "CopilotChat - Toggle" },
+            -- Copilot Chat Models
+            { "<leader>a?", "<cmd>CopilotChatModels<cr>", desc = "CopilotChat - Select Models" },
+        },
     },
     {
         "Julian/lean.nvim",
@@ -236,53 +368,53 @@ lvim.plugins = {
             },
         },
     },
-    {
-        "yetone/avante.nvim",
-        event = "VeryLazy",
-        lazy = false,
-        version = false, -- set this if you want to always pull the latest change
-        opts = {
-            provider = "copilot",
-            ---@alias Provider "claude" | "openai" | "azure" | "gemini" | "cohere" | "copilot" | string
-        },
-        -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
-        build = "make",
-        -- build = "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false" -- for windows
-        dependencies = {
-            "nvim-treesitter/nvim-treesitter",
-            "stevearc/dressing.nvim",
-            "nvim-lua/plenary.nvim",
-            "MunifTanjim/nui.nvim",
-            --- The below dependencies are optional,
-            "nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
-            "zbirenbaum/copilot.lua", -- for providers='copilot'
-            {
-                -- support for image pasting
-                "HakonHarnes/img-clip.nvim",
-                event = "VeryLazy",
-                opts = {
-                    -- recommended settings
-                    default = {
-                        embed_image_as_base64 = false,
-                        prompt_for_file_name = false,
-                        drag_and_drop = {
-                            insert_mode = true,
-                        },
-                        -- required for Windows users
-                        use_absolute_path = true,
-                    },
-                },
-            },
-            {
-                -- Make sure to set this up properly if you have lazy=true
-                "MeanderingProgrammer/render-markdown.nvim",
-                opts = {
-                    file_types = { "markdown", "Avante" },
-                },
-                ft = { "markdown", "Avante" },
-            },
-        },
-    },
+    -- {
+    --     "yetone/avante.nvim",
+    --     event = "VeryLazy",
+    --     lazy = false,
+    --     version = false, -- set this if you want to always pull the latest change
+    --     opts = {
+    --         provider = "copilot",
+    --         ---@alias Provider "claude" | "openai" | "azure" | "gemini" | "cohere" | "copilot" | string
+    --     },
+    --     -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
+    --     build = "make",
+    --     -- build = "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false" -- for windows
+    --     dependencies = {
+    --         "nvim-treesitter/nvim-treesitter",
+    --         "stevearc/dressing.nvim",
+    --         "nvim-lua/plenary.nvim",
+    --         "MunifTanjim/nui.nvim",
+    --         --- The below dependencies are optional,
+    --         "nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
+    --         "zbirenbaum/copilot.lua", -- for providers='copilot'
+    --         {
+    --             -- support for image pasting
+    --             "HakonHarnes/img-clip.nvim",
+    --             event = "VeryLazy",
+    --             opts = {
+    --                 -- recommended settings
+    --                 default = {
+    --                     embed_image_as_base64 = false,
+    --                     prompt_for_file_name = false,
+    --                     drag_and_drop = {
+    --                         insert_mode = true,
+    --                     },
+    --                     -- required for Windows users
+    --                     use_absolute_path = true,
+    --                 },
+    --             },
+    --         },
+    --         {
+    --             -- Make sure to set this up properly if you have lazy=true
+    --             "MeanderingProgrammer/render-markdown.nvim",
+    --             opts = {
+    --                 file_types = { "markdown", "Avante" },
+    --             },
+    --             ft = { "markdown", "Avante" },
+    --         },
+    --     },
+    -- },
     {
         "nvim-pack/nvim-spectre",
         event = "BufRead",
