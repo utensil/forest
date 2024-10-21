@@ -283,6 +283,34 @@ lvim.plugins = {
             },
         },
     },
+    {
+        "nvim-pack/nvim-spectre",
+        event = "BufRead",
+        config = function()
+            require("spectre").setup {
+                use_trouble_qf = true,
+                default = {
+                    replace = {
+                        cmd = "sd",
+                    },
+                },
+            }
+        end,
+    },
+    {
+        "neovim/nvim-lspconfig",
+        dependencies = {
+            {
+                "SmiteshP/nvim-navbuddy",
+                dependencies = {
+                    "SmiteshP/nvim-navic",
+                    "MunifTanjim/nui.nvim",
+                },
+                opts = { lsp = { auto_attach = true } },
+            },
+        },
+        -- your lsp config or other stuff
+    },
     -- play also https://www.vim-hero.com/lessons/basic-movement
     -- { "ThePrimeagen/vim-be-good" }
     -- {

@@ -78,6 +78,7 @@ prep-term: prep-kitty
     which fzf || brew install fzf
     which yazi || brew install yazi
     which stylua || brew install stylua
+    which sd || brew install sd
 
 prep-alacritty:
     #!/usr/bin/env bash
