@@ -28,6 +28,7 @@ Here are some useful keys that I like using in NeoVim, with [my LunarVim configu
 - LSP
     - `gd`: go to definition
         - ctrl+click also works, note that it's not cmd+click on mac
+    - `gl`: show diagnostics under cursor
     - `<C+o>`: go back, `<C+i>`: go forward
         `:jum` to see the jump history
     - `gf`: go to file
@@ -38,14 +39,15 @@ Here are some useful keys that I like using in NeoVim, with [my LunarVim configu
     - `:vs` to open a file on the right
     - `:sp` to open a file on the bottom
 - navigating between buffers and windows
-    - `:q` to close a split window, `<leader>+c` to close a buffer
-    - I'v configured neovim to
-        - use `L` for going to next buffer, `H` for previous buffer
-        - use `<C-hjkl>` to move between windows
-        - use `-`/`=` to resizing, or with `C-` for vertical resizing
+    - use `L` for going to next buffer, `H` for previous buffer
+    - use `<C-hjkl>` to move between windows
+    - use `-`/`=` to resizing, or with `C-` for vertical resizing
 - save & quit
     - In VSCode Vim mode, should stick to `cmd+s` for saving, `cmd+w` for closing a tab
-    - In NeoVim, use `<leader>+w` to save
+    - In NeoVim, prefer to use
+        - `<leader>+w` to save
+        - `<leader>+c` to close a buffer
+        - cautious: `<leader>+q` to close a split window
     - `ZZ` to save and quit
     - `:q!` to quit without saving
     - `:qa` to quit vim when there are multiple windows in vim
@@ -98,13 +100,17 @@ Here are some useful keys that I like using in NeoVim, with [my LunarVim configu
     - `:term` to open a terminal with vim motions
 - git
     - install and use `lazygit`
-    - `<leader>+gg` to open lazygit, space to stage, `c` to commit, `P` to push, `q` to quit
+    - `<leader>+gg` to open lazygit, space to stage/unstage, `c` to commit, `P` to push, `q` to quit
+    - `<leader>+gs` to stage the current hunk, `<leader>+gr` to revert the current hunk
 - Github Actions
     - `<leader>+gh` to open the Github Actions split window
     - `gj` to open the job under cursor, see also [other keys](https://github.com/topaxi/gh-actions.nvim?tab=readme-ov-file#keybindings)
 - Github Copilot
     - `:CopilotChat` can be triggered by `:Co<tab>C<Tab><CR>`
     - `C-s` to send the prompt
+- Octo
+    - `:Octo <Tab>` to operate on issues and PRs
+
 
 Recalled by [VSCode Vim ROADMAP](https://github.com/VSCodeVim/Vim/blob/HEAD/ROADMAP.md).
 

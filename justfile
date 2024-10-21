@@ -74,6 +74,7 @@ prep-term: prep-kitty
     which yq || brew install yq
     which gh || brew install gh
     @echo "Remember to run: gh auth login"
+    @echo "And possibly: gh auth refresh -s read:project"
     which fzf || brew install fzf
     which yazi || brew install yazi
 
