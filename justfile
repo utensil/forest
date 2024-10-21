@@ -121,7 +121,7 @@ prep-nvim: prep-term
     echo 'export PATH=$HOME/.local/bin:$PATH' >> ~/.bashrc
     echo '. $HOME/.bashrc' >> ~/.zshrc
     just sync-nvim
-    # (cd ~/.config/lvim/ && lvim --headless +'lua require("lvim.utils").generate_settings()' +qa && sort -o lv-settings.lua{,} )
+    (cd ~/.config/lvim/ && lvim --headless +'lua require("lvim.utils").generate_settings()' +qa && sort -o lv-settings.lua{,} )
     echo
     echo "Use lvim to start LunarVim"
 

@@ -322,17 +322,17 @@ lvim.plugins = {
         },
     },
     { "wakatime/vim-wakatime", lazy = false },
-    {
-        "pwntester/octo.nvim",
-        dependencies = {
-            "nvim-lua/plenary.nvim",
-            "nvim-telescope/telescope.nvim",
-            "nvim-tree/nvim-web-devicons",
-        },
-        config = function()
-            require("octo").setup()
-        end,
-    },
+    -- {
+    --     "pwntester/octo.nvim",
+    --     dependencies = {
+    --         "nvim-lua/plenary.nvim",
+    --         "nvim-telescope/telescope.nvim",
+    --         "nvim-tree/nvim-web-devicons",
+    --     },
+    --     config = function()
+    --         require("octo").setup()
+    --     end,
+    -- },
     {
         "folke/trouble.nvim",
         opts = {}, -- for default options, refer to the configuration section for custom setup.
@@ -473,8 +473,9 @@ lvim.plugins = {
 
 lvim.colorscheme = "base16-railscasts"
 lvim.builtin.treesitter.rainbow.enable = true
+-- lvim.builtin.cmp.on_config_done = function(cmp)
+--     local foresterCompletionSource = require "forester.completion"
 
--- local foresterCompletionSource = require "forester.completion"
-
--- require("cmp").register_source("forester", foresterCompletionSource)
--- require("cmp").setup.filetype("forester", { sources = { { name = "forester", dup = 0 } } })
+--     cmp.register_source("forester", foresterCompletionSource)
+--     cmp.setup.filetype("forester", { sources = { { name = "forester", dup = 0 } } })
+-- end
