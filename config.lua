@@ -52,7 +52,7 @@ lvim.plugins = {
             { "nvim-telescope/telescope.nvim" },
             { "nvim-treesitter/nvim-treesitter" },
             { "nvim-lua/plenary.nvim" },
-            { "hrsh7th/nvim-cmp" },
+            -- { "hrsh7th/nvim-cmp" },
         },
         -- -- maybe could be even lazier with these, but not working, because `forester` filetype is not registered yet
         -- ft = "tree",
@@ -474,11 +474,7 @@ lvim.plugins = {
 lvim.colorscheme = "base16-railscasts"
 lvim.builtin.treesitter.rainbow.enable = true
 
-local foresterCompletionSource = require "forester.completion"
+-- local foresterCompletionSource = require "forester.completion"
 
-local cmp = require "cmp"
-
-cmp.register_source("forester", foresterCompletionSource)
-cmp.setup.filetype("forester", { sources = { { name = "forester", dup = 0 } } })
-
-cmp.setup()
+-- require("cmp").register_source("forester", foresterCompletionSource)
+-- require("cmp").setup.filetype("forester", { sources = { { name = "forester", dup = 0 } } })
