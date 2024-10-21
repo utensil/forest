@@ -16,9 +16,9 @@ vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "rust_analyz
 
 -- In order for the above to work, one must excute `:LvimCacheReset` manually'
 -- or uncomment the following
--- vim.schedule(function()
---     vim.cmd('LvimCacheReset')
--- end)
+vim.schedule(function()
+    vim.cmd('LvimCacheReset')
+end)
 
 -- -- https://github.com/mrcjkb/rustaceanvim/discussions/94#discussioncomment-7813716: not working
 -- require("mason-lspconfig").setup_handlers {
