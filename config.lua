@@ -296,6 +296,14 @@ lvim.plugins = {
                 },
             }
         end,
+        keys = {
+            { "<leader>ss", "<cmd>lua require('spectre').toggle()<cr>", desc = "Toggle Spectre" },
+            {
+                "<leader>sw",
+                "<cmd>lua require('spectre').open_visual({select_word=true})<cr>",
+                desc = "Spectre (word)",
+            },
+        },
     },
     {
         "neovim/nvim-lspconfig",
