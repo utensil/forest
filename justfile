@@ -74,6 +74,8 @@ prep-term: prep-kitty
     which yq || brew install yq
     which gh || brew install gh
     @echo "Remember to run: gh auth login"
+    which fzf || brew install fzf
+    which yazi || brew install yazi
 
 prep-alacritty:
     #!/usr/bin/env bash
