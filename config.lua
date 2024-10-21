@@ -111,10 +111,10 @@ lvim.plugins = {
         --   }
         -- end,
     },
-    -- {
-    --     "github/copilot.vim",
-    --     event = "VeryLazy",
-    -- },
+    {
+        "github/copilot.vim",
+        event = "VeryLazy",
+    },
     -- {
     --     "zbirenbaum/copilot.lua",
     -- },
