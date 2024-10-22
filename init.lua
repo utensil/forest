@@ -14,6 +14,10 @@ for k, v in pairs(options) do
     vim.opt[k] = v
 end
 
+-- set local leader
+
+vim.g.maplocalleader = "  "
+
 -- https://github.com/LunarVim/Neovim-from-scratch/blob/master/lua/user/keymaps.lua
 
 local opts = { noremap = true, silent = true }
