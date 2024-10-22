@@ -316,7 +316,26 @@ lvim.plugins = {
         -- optional, you can also install and use `yq` instead.
         -- build = 'make',
         ---@type GhActionsConfig
-        opts = {},
+        opts = {
+            icons = {
+                workflow_dispatch = "⚡️",
+                conclusion = {
+                    success = "✅",
+                    failure = "❌",
+                    startup_failure = "❗",
+                    cancelled = "⊘",
+                    skipped = "◌",
+                },
+                status = {
+                    unknown = "?",
+                    pending = "○",
+                    queued = "○",
+                    requested = "○",
+                    waiting = "○",
+                    in_progress = "●",
+                },
+            },
+        },
         dependencies = {
             "MunifTanjim/nui.nvim",
         },
