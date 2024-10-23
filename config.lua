@@ -43,6 +43,7 @@ lvim.plugins = {
             -- options
         },
     },
+    { "lewis6991/satellite.nvim" },
     {
         "kentookura/forester.nvim",
         -- before = { "nvim-cmp" },
@@ -53,7 +54,7 @@ lvim.plugins = {
             { "nvim-telescope/telescope.nvim" },
             { "nvim-treesitter/nvim-treesitter" },
             { "nvim-lua/plenary.nvim" },
-            -- { "hrsh7th/nvim-cmp" },
+            { "hrsh7th/nvim-cmp" },
         },
         -- -- maybe could be even lazier with these, but not working, because `forester` filetype is not registered yet
         -- ft = "tree",
@@ -80,10 +81,10 @@ lvim.plugins = {
                 ensure_installed = { "toml", "forester" },
                 sync_install = false,
             }
-            local foresterCompletionSource = require "forester.completion"
-            local cmp = require "nvim-cmp"
-            cmp.register_source("forester", foresterCompletionSource)
-            cmp.setup.filetype("forester", { sources = { { name = "forester", dup = 0 } } })
+            -- local foresterCompletionSource = require "forester.completion"
+            -- local cmp = require "cmp"
+            -- cmp.register_source("forester", foresterCompletionSource)
+            -- cmp.setup.filetype("forester", { sources = { { name = "forester", dup = 0 } } })
             -- cmp.setup()
         end,
     },
@@ -318,6 +319,13 @@ lvim.plugins = {
         "topaxi/gh-actions.nvim",
         keys = {
             { "<leader>gh", "<cmd>GhActions<cr>", desc = "Open Github Actions" },
+            {
+                "<leader>gq",
+                function()
+                    require("gh-actions").close()
+                end,
+                desc = "Close Github Actions",
+            },
         },
         -- optional, you can also install and use `yq` instead.
         -- build = 'make',
@@ -488,6 +496,13 @@ lvim.plugins = {
             vim.g.mkdp_auto_start = 1
         end,
     },
+    {
+        "zbirenbaum/copilot-cmp",
+        after = { "copilot.lua", "nvim-cmp" },
+        config = function()
+            require("copilot_cmp").setup()
+        end,
+    },
     -- {
     --     "Zeioth/hot-reload.nvim",
     --     dependencies = "nvim-lua/plenary.nvim",
@@ -498,6 +513,11 @@ lvim.plugins = {
 
 lvim.colorscheme = "base16-railscasts"
 lvim.builtin.treesitter.rainbow.enable = true
+-- lvim.builtin.cmp
+--
+
+table.insert(lvim.builtin.cmp.sources, { name = "forester" })
+
 -- lvim.builtin.cmp.on_config_done = function(cmp)
 --     local foresterCompletionSource = require "forester.completion"
 --     -- local cmp = require "cmp"
