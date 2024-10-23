@@ -474,14 +474,14 @@ lvim.plugins = {
     },
     -- play also https://www.vim-hero.com/lessons/basic-movement
     -- { "ThePrimeagen/vim-be-good" }
-    -- {
-    --     "iamcco/markdown-preview.nvim",
-    --     build = "cd app && npm install",
-    --     ft = "markdown",
-    --     config = function()
-    --       vim.g.mkdp_auto_start = 1
-    --     end,
-    -- }
+    {
+        "iamcco/markdown-preview.nvim",
+        build = "cd app && npm install",
+        ft = "markdown",
+        config = function()
+            vim.g.mkdp_auto_start = 1
+        end,
+    },
     -- {
     --     "Zeioth/hot-reload.nvim",
     --     dependencies = "nvim-lua/plenary.nvim",

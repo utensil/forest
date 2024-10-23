@@ -79,6 +79,7 @@ prep-term: prep-kitty
     which yazi || brew install yazi
     which stylua || brew install stylua
     which sd || brew install sd
+    which luarocks || brew install luarocks
     which starship || brew install starship
     # grep ~/.bashrc -F 'eval "$(starship init bash)"' || echo 'eval "$(starship init bash)"' >> ~/.bashrc
     grep -F 'eval "$(starship init zsh)"' ~/.zshrc || echo 'eval "$(starship init zsh)"' >> ~/.zshrc
