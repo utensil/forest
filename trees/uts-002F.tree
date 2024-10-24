@@ -4,38 +4,85 @@
 \tag{notes}
 \tag{draft}
 
-\mdnote{some useful keys in Neovim}\verb>>>|
+\note{some useful keys in Neovim}{
+
+\mdblock{Introduction}{
 Here are some useful keys that I like using in NeoVim, some of them require corresponding plugins.
 
 I use [LunarVim](https://github.com/lunarvim/lunarvim) with some [pre-installed plugins](https://www.lunarvim.org/docs/features/core-plugins-list).
 
-See task `prep-nvim` in [my justfile](https://github.com/utensil/forest/blob/main/justfile) is how I have installed LunarVim.
+Task `prep-nvim` in [my justfile](https://github.com/utensil/forest/blob/main/justfile) is how I have installed LunarVim. Task `nvim` will syncrhonize the configurations, change the working directory and open LunarVim for a specified project.
 
 See also [my LunarVim configuration](https://github.com/utensil/forest/blob/main/config.lua).
+}
 
-- help
-    - `:map` to see all key mappings
-    - `:help key-notation`
-    - use `:Lazy` to check on plugins
-    - use `:Mason` to check on LSPs
-    - `<leader>` and wait to see which key showing some useful mappings
-    - `<leader>+L;` to open the dashboard for frequently used actions
-    - `<leader>+Lr` to reload the config
-    - `<leader>+li` to see LSP informations
-- ESC
-    - configure CapsLock to ESC from Mac
-    - configure `jk` to ESC
-- explore file
-    - my `<leader>` is the default: space
+\block{Vital meta keys}{
+\mdblock{Esc}{
+The `Esc` key is used to escape to normal mode, to use Vim's powerful motions. It's the most frequently used key in Vim.
+
+-  I have configured CapsLock to mean Esc
+    - on Mac, go to `System Preferences > Keyboard > Modifier Keys > Caps Lock Key`
+-  I have configured `jk` in insert mode to mean Esc
+    -  this is a common practice, but I don't seem to need it much
+}
+
+\mdblock{Leader key}{
+The leader key is used to trigger many key mappings in normal mode.
+
+The default leader key is a single space, represented by `<leader>` below.
+
+The default local leader key is not set, I've configure it to be two consecutive spaces. `,` is also a common choice.
+
+With plugin `whichkey` installed, `<leader>` and wait to see some useful mappings.
+
+Most frequently used key mappings is `<leader>` + one character. There are also many two-character mappings, with the first character indicating a category.
+}
+
+}
+
+\mdblock{First aid}{
+
+Most of the time, one can use `Esc` + `:qa!` to force quit Vim, with potential loss of unsaved changes.
+
+In most plugin UIs,
+
+- it can be quit with a single `q`, or `Esc` + `:q`, when in despair, try also `Ctrl+c`
+- it will usually enter normal mode first, even in terminals, a single `i` is required to enter insert mode, to acually type something.
+- it might provide visual hints on how to navigate, usually a single number or a character in brackets.
+- `g?` or `?` might bring up help on key mappings.
+
+Recording is a powerful feature of Vim, but one can accidentally trigger it with an out-of-order `q`, so one simply need to remember to press `q` again to quit recording if seeing something like `recording @a` in the status bar.
+
+Other first aid key mappings or commands available in LunarVim:
+
+- `:map` to see all key mappings
+- `:help key-notation`
+    - in case it's not immediately clear that
+        - `C` means `Ctrl`, `S` means `Shift`, `M` means `Alt`/`Option`
+- use `:Lazy` to check on plugins
+- use `:Mason` to check on LSPs
+- `<leader>` and wait to see which key showing some useful mappings
+- `<leader>+L;` to open the dashboard for frequently used actions
+- `<leader>+Lr` to reload the config
+- `<leader>+li` to see LSP informations
+}
+
+\mdblock{Navigation}{
+- Explore and find files
     - `<leader>+e` to toggle file explorer on the left
         - `x` to cut, `c` to copy, `p` to paste
         - `a` to create a file, `d` to delete, `r` to rename
         - `g?` for help, `q` to quit, `R` to refresh
         - `hjkl` to move up/down, collapse/expand
+        - it will automatically follow the current file
     - `<leader>+s+r` to fuzzy find recent files
     - `<leader>+s+f` to fuzzy find files
     - `<leader>+s+t` to grep text in files
-- LSP
+- Manipulate buffers and windows
+    - use `L` for going to next buffer, `H` for previous buffer
+    - use `<C-hjkl>` to move between windows
+    - use `-`/`=` to resizing, or with `C-` for vertical resizing
+- Jump between files
     - `gd`: go to definition
         - ctrl+click also works, note that it's not cmd+click on mac
     - `gl`: show diagnostics under cursor
@@ -45,73 +92,132 @@ See also [my LunarVim configuration](https://github.com/utensil/forest/blob/main
     - `K` : hover, backspace to cancel hover
     - shift+click on URL to open in browser
     - use `:NavBuddy` to navigate the outline
-- open file
-    - `:e` to open a file
-    - `:vs` to open a file on the right
-    - `:sp` to open a file on the bottom
-- navigating between buffers and windows
-    - use `L` for going to next buffer, `H` for previous buffer
-    - use `<C-hjkl>` to move between windows
-    - use `-`/`=` to resizing, or with `C-` for vertical resizing
-- save & quit
+}
+
+\block{Editing}{
+
+\mdblock{Basics}{
+- Open file
+    - `:e` to open a file, with tab completion, but it's better to use the fuzzy finder above
+    - `:vs` to open a file (or the current buffer) on the right
+    - `:sp` to open a file (or the current buffer) on the bottom
+- Save & quit
     - In VSCode Vim mode, should stick to `cmd+s` for saving, `cmd+w` for closing a tab
     - In NeoVim, prefer to use
         - `<leader>+w` to save
         - `<leader>+c` to close a buffer
-        - cautious: `<leader>+q` to close a split window
+            - if there are unsaved changes, it will prompt you
     - `ZZ` to save and quit
-    - `:q!` to quit without saving
-    - `:qa` to quit vim when there are multiple windows in vim
-- move
+}
+
+\mdblock{Motions}{
+- Repeatition
+    - prefix with a number to repeat a motion multiple times, e.g. `3j`, `3w` for the impatient
+    - `.` to repeat the last editing motion, but not move motions
+- Move motions
+    - On Mac, combine with the touchpad to be even more efficient
     - `gg` for beginning, `G` for end
     - `w`/`b` to move forward/backward by word
-    - shift+`w`/`b` to move by space-separated words
+        - shift+`w`/`b` to move by space-separated words
+    - `e` works like `w` but moves to the end of the word
+        - `ge` works like `b` but moves to the end of the previous word
     - left `hj` are for left, down; right `kl` are for right, up
-        - I can never remember this in my muscle memory
+        - pointer finger on `j`, then muscle memory for `jkl` but `h` is a little difficult to reach
     - `0` to move to the beginning of the line
         - I don't like `^` and `$` because they are difficult to reach
-    - pointer finger on `j`, muscle memory for `jkl` but `h` is a little difficult to reach
-- move to character
     - `f` + character to move to the next such character
-    - `;` and `,` to move to next or previous
-- move & edit
-    - `i` to enter INSERT mode
-    - `A` to append at the end of the line
-    - `0i` to insert at the beginning of the line
-    - `R` to replace
+        - `;` and `,` to move to next or previous
+- Edit motions
+    - to enter INSERT mode
+        - `i` for before the cursor
+        - `a` for after the cursor
+        - `A` to append at the end of the line
+        - `0i` to insert at the beginning of the line
+        - `R` to replace by character, `c` (i.e. change) to replace by motion, e.g. `cw` to replace a word
     - `u` to undo, surprisingly `Ctrl`+`r` to redo
-    - `x`/`dw`/`dd` to delete a character/word/line
+- Cut/copy/paste
+    - `x` to immediately delete the character under the cursor
+    - `d`+direction to delete a character in that direction
+    - `dw`/`dd` to delete a character/word/line
+    - all the above will also cut the deleted text
+    - `yw` to copy the current word, `yy` to copy the current line
+    - `p` to paste after, `P` to paste before
     - `yyp` to duplicate a line
-    - `yw` to copy the current word
-- indentation & comment
-    - use `V` to enter line visual mode
-    - `<`/`>` to unindent/indent
-    - `<leader>+/` to toggle comment, or verbosely `gc`
-- add a number before a command to repeat it, e.g. `3j`, `3W`, `3u` for the impatient
-- search
+    - `<leader>+s+R` to search the registers for cut/copied text
+    - on Mac, `Cmd`+`c`/`v`/`x` also works despite which mode Vim is in
+        - but it seems to be not working stably across difference instances of Vim, especially when inside various plugins
+        - `y` usually guarantees the text is copied to the system clipboard, then use it in other applications
+}
+
+\mdblock{Search & replace}{
+- Search
     - `/` to search forward, `n`/`p` to go to next/previous match
     - `?` to search backward
     - `*` to search the word under the cursor
     - remember to press `Enter` after typing the search term
     - use `<leader>+h` to clear the search highlight
-    - use `s/before/after/g` to replace all occurrences, remember `%`, otherwise it will only look for the pattern in the current line
+- Replace
+    - \verb~|use `%s/before/after/g` to replace all occurrences, remember`%`, otherwise it will only look for the pattern in the current line~
     - use `:lua require("spectre").toggle()` to toggle the search and replace panel
         - `<leader>+R` to replace all occurrences
-- edits in normal mode (status quo in VSCode Vim mode)
+}
+
+\mdblock{Visual selection}{
+- Indentation & comment
+    - use `V` to enter line visual mode
+        - this is the most frequently used visual mode, to select multiple lines
+        - lowercase `v` can be used for character visual mode, but I find it less useful
+    - `<`/`>` to unindent/indent
+    - `<leader>+/` to toggle comment, or verbosely `gc`
+- Multiple-cursor editing ([source](https://medium.com/@schtoeffel/you-don-t-need-more-than-one-cursor-in-vim-2c44117d51db))
+    - use `/xyz` + enter to search for `xyz`, then `cgn` to change it to something else, `Esc`, then
+        - use `.` to do the same for next occurrences
+        - use `n` to skip, and `u` to undo
+    - use `ctrl+v` and direction keys (e.g. `j` or `5j`) to vertically select
+        - use `c` to change, other editing motions also work, e.g. `i`, `a`, `d`
+        - type the new text, then `Esc`, then it will be applied to all lines of selection
+    - use `gv` to reselect the last selection
+- Visual selection with mouse/touchpad
+    - motion-compatible selections
+        - dragging works like `v`
+        - triple click works like `V`
+        - `alt/option` + drag works like `ctrl+v`
     - select and
         - ✅ delete by `d`/`x`
         - ✅ cut/copy/paste
         - ✅ comment/uncomment
         - ❌ typing
-        - ❌ indent/unindent
+        - ✅ use one of `i`, `a`, `c` etc., then start typing
+        - ❌ indent/unindent with Tab/Shift+Tab
+        - ✅ indent/unindent with `<`/`>`
     - vertical select and
         - ✅ delete
         - ✅ paste
         - ❌ typing
-- terminal
-    - `ctrl+backslash` to toggle a float terminal without vim motions
-        - number + `ctrl+backslash` to toggle the n-th terminal
-    - `:term` to open a terminal with vim motions
+        - ✅ use one of `i`, `a`, `c` etc., then start typing
+- Recording
+    - `qa` starts recording user's inputs, `q` quits recording, `@a` replays the recording, `a` could be any other letter
+    - it could serve as ad hoc key mappings
+}
+
+}
+
+\mdblock{Terminal}{
+It's very important to stay in the flow and Zen mode as much as possible. Split windows for terminals breaks the flow, so I prefer to use float terminals.
+
+- Float terminals
+    - `ctrl+backslash` to toggle a float terminal
+    - number + `ctrl+backslash` to toggle the n-th float terminal
+    - it's insert mode by default
+- Split terminals
+    - `:term` to open a terminal
+    - it's normal mode by default, `i` to start typing commands
+- Working inside the terminal
+    - `exit` will exit the terminal and close the window associated with it
+    - `ctrl`+`c` can be used for interrupting the terminal
+}
+
+\mdblock{Git & Github}{
 - git
     - install and use `lazygit`
         - `<leader>+gg` to open lazygit,  `q` to quit
@@ -125,6 +231,12 @@ See also [my LunarVim configuration](https://github.com/utensil/forest/blob/main
     - `<leader>+gh` to open the Github Actions split window
     - `gj` to open the job under cursor, `gr` for the run, `gw` for the workflow file
     - `<leader>+gq` to close the split window
+- Octo
+    - `:Octo <Tab>` to operate on issues and PRs
+    - it's interesting but I've disabled it for now, in favor of using the web interface
+}
+
+\mdblock{Auto-completion}{
 - Auto-complete
     - `Tab` to cycle through suggestions from `cmp`, reverse cycle with `Shift+Tab`
     - continue to type to select a suggestion, this is better then hitting `Enter`
@@ -134,28 +246,33 @@ See also [my LunarVim configuration](https://github.com/utensil/forest/blob/main
         - `<leader>+aa` to toggle the chat, `<leader>+al` to clear chat history
         - **e**xplain, **r**eview, **R**factor, **t**est, **d**ebug, **f**ix, co**m**mit log, **n**aming etc.
         - `C-s` to send the prompt
-    - Avante (disabled)
+    - Avante
         - `<leader>+aa` to open the chat, use `a` to accept individual suggestions, or `A` to accept all
         - select code and `<leader>+ae` to modify code
-- Octo (disabled)
-    - `:Octo <Tab>` to operate on issues and PRs
+        - it's interesting but I've disabled it for now, in favor of Github Copilot
+}
+
+\mdblock{Useful plugins}{
 - Trouble
     - `<leader>+xx` to open the trouble panel at the bottom
-- recording
-    - recording is a powerful feature of Vim, but one can accidentally trigger it with an out-of-order `q`
-    - so one simply need to remember to press `q` to quit recording in such scenarios
-    - `qa` starts recording user's inputs, `q` quits recording, `@a` replays the recording, `a` could be any other letter
-    - it could serve as ad hoc key mappings
+
 - Lean
     - set local leader to "  " (tentative)
     - `<localleader>+i` to toggle Lean Infoview
+    - `<localleader>+r` to restart Lean server for the current file
+}
 
+\mdblock{Further reading}{
 
-Recalled by [VSCode Vim ROADMAP](https://github.com/VSCodeVim/Vim/blob/HEAD/ROADMAP.md).
+See [Vim cheatsheet](https://devhints.io/vim) for key mappings that apply to vanilla Vim.
 
-See also [Vim cheatsheet](https://devhints.io/vim) and [Keybinds overview](https://www.lunarvim.org/docs/beginners-guide/keybinds-overview).
+See [VSCode Vim ROADMAP](https://github.com/VSCodeVim/Vim/blob/HEAD/ROADMAP.md) for key mappings that apply to (limited) VSCode Vim mode, but now I have switch to use the real NeoVim.
 
-Got to this because of trying Vim mode in Zed lately. Should also check out [zed-101-setup](https://github.com/jellydn/zed-101-setup) for configurations and key maps inspirations.
+When I use VSCode, I would also use [vscode-neovim](https://github.com/vscode-neovim/vscode-neovim) which would connect to my real NeoVim instance that has some basic configurations [here](https://github.com/utensil/forest/blob/main/init.lua).
 
-I have also added more entries during trying out NeoVim.
->>>
+See [Keybinds overview](https://www.lunarvim.org/docs/beginners-guide/keybinds-overview) for LunarVim key mappings.
+
+See [zed-101-setup](https://github.com/jellydn/zed-101-setup) for configurations and key maps inspirations.
+}
+
+}
