@@ -61,8 +61,7 @@ Other first aid key mappings or commands available in LunarVim:
         - `C` means `Ctrl`, `S` means `Shift`, `M` means `Alt`/`Option`
 - use `:Lazy` to check on plugins
 - use `:Mason` to check on LSPs
-- `<leader>` and wait to see which key showing some useful mappings
-- `<leader>+L;` to open the dashboard for frequently used actions
+- `<leader>+;` to open the dashboard for frequently used actions
 - `<leader>+Lr` to reload the config
 - `<leader>+li` to see LSP informations
 }
@@ -84,13 +83,13 @@ Other first aid key mappings or commands available in LunarVim:
     - use `-`/`=` to resizing, or with `C-` for vertical resizing
 - Jump between files
     - `gd`: go to definition
-        - ctrl+click also works, note that it's not cmd+click on mac
+        - `Ctrl`+click also works, note that it's not cmd+click on mac
     - `gl`: show diagnostics under cursor
     - `<C+o>`: go back, `<C+i>`: go forward
         `:jum` to see the jump history
     - `gf`: go to file
     - `K` : hover, backspace to cancel hover
-    - shift+click on URL to open in browser
+    - `Shift`+click on URL to open in browser
     - use `:NavBuddy` to navigate the outline
 }
 
@@ -113,12 +112,12 @@ Other first aid key mappings or commands available in LunarVim:
 \mdblock{Motions}{
 - Repeatition
     - prefix with a number to repeat a motion multiple times, e.g. `3j`, `3w` for the impatient
-    - `.` to repeat the last editing motion, but not move motions
+    - `.` to repeat the last edit motion, but not move motions
 - Move motions
     - On Mac, combine with the touchpad to be even more efficient
     - `gg` for beginning, `G` for end
     - `w`/`b` to move forward/backward by word
-        - shift+`w`/`b` to move by space-separated words
+        - `W`/`B` to move by space-separated words
     - `e` works like `w` but moves to the end of the word
         - `ge` works like `b` but moves to the end of the previous word
     - left `hj` are for left, down; right `kl` are for right, up
@@ -130,11 +129,13 @@ Other first aid key mappings or commands available in LunarVim:
 - Edit motions
     - to enter INSERT mode
         - `i` for before the cursor
+            - `I` to insert at non-whitespace beginning of the line
+            - `0i` to insert at the beginning of the line
         - `a` for after the cursor
-        - `A` to append at the end of the line
-        - `0i` to insert at the beginning of the line
-        - `R` to replace by character, `c` (i.e. change) to replace by motion, e.g. `cw` to replace a word
-    - `u` to undo, surprisingly `Ctrl`+`r` to redo
+            - `A` to append at the end of the line
+        - `c` (i.e. change) to replace by motion, e.g. `cw` to replace a word
+            - `R` to replace by character
+    - `u` to undo, surprisingly `Ctrl+r` to redo
 - Cut/copy/paste
     - `x` to immediately delete the character under the cursor
     - `d`+direction to delete a character in that direction
@@ -163,17 +164,21 @@ Other first aid key mappings or commands available in LunarVim:
 }
 
 \mdblock{Visual selection}{
-- Indentation & comment
+- Select text
     - use `V` to enter line visual mode
         - this is the most frequently used visual mode, to select multiple lines
-        - lowercase `v` can be used for character visual mode, but I find it less useful
-    - `<`/`>` to unindent/indent
-    - `<leader>+/` to toggle comment, or verbosely `gc`
+    - lowercase `v` can be used for character visual mode, but I find it less useful
+- Indentation & comment
+    - use `<<`/`>>` to indent/unindent the current line
+        - use a single `<`/`>` to unindent/indent the selected text
+    - `<leader>+/` to toggle comment
+        - works for both current line and selected text
+        - (not recommended) use `gc` to toggle comment for selected text
 - Multiple-cursor editing (\link{https://medium.com/@schtoeffel/you-don-t-need-more-than-one-cursor-in-vim-2c44117d51db})
     - use `/xyz` + enter to search for `xyz`, then `cgn` to change it to something else, `Esc`, then
         - use `.` to do the same for next occurrences
         - use `n` to skip, and `u` to undo
-    - use `ctrl+v` and direction keys (e.g. `j` or `5j`) to vertically select
+    - use `Ctrl+v` and direction keys (e.g. `j` or `5j`) to vertically select
         - use `c` to change, other editing motions also work, e.g. `i`, `a`, `d`
         - type the new text, then `Esc`, then it will be applied to all lines of selection
     - use `gv` to reselect the last selection
@@ -181,14 +186,14 @@ Other first aid key mappings or commands available in LunarVim:
     - motion-compatible selections
         - dragging works like `v`
         - triple click + scroll works like `V`
-        - `alt/option` + drag works like `ctrl+v`
+        - `alt/option` + drag works like `Ctrl+v`
     - select and
         - ✅ delete by `d`/`x`
         - ✅ cut/copy/paste
         - ✅ comment/uncomment
         - ❌ typing
             - ✅ use one of `i`, `a`, `c` etc., then start typing
-        - ❌ indent/unindent with Tab/Shift+Tab
+        - ❌ indent/unindent with `Tab`/`Shift+Tab`
             - ✅ indent/unindent with `<`/`>`
     - vertical select and
         - ✅ delete
@@ -206,15 +211,16 @@ Other first aid key mappings or commands available in LunarVim:
 It's very important to stay in the flow and Zen mode as much as possible. Split windows for terminals breaks the flow, so I prefer to use float terminals.
 
 - Float terminals
-    - `ctrl+backslash` to toggle a float terminal
-    - number + `ctrl+backslash` to toggle the n-th float terminal
+    - `Ctrl`+backslash to toggle a float terminal
+    - number + `Ctrl`+backslash to toggle the n-th float terminal
     - it's insert mode by default
 - Split terminals
     - `:term` to open a terminal
     - it's normal mode by default, `i` to start typing commands
+    - `:sp term://zsh` to open a terminal running `zsh` at the bottom
 - Working inside the terminal
     - `exit` will exit the terminal and close the window associated with it
-    - `ctrl`+`c` can be used for interrupting the terminal
+    - `Ctrl`+`c` can be used for interrupting the terminal
 }
 
 \mdblock{Git & Github}{
@@ -273,6 +279,11 @@ When I use VSCode, I would also use [vscode-neovim](https://github.com/vscode-ne
 See [Keybinds overview](https://www.lunarvim.org/docs/beginners-guide/keybinds-overview) for LunarVim key mappings.
 
 See [zed-101-setup](https://github.com/jellydn/zed-101-setup) for configurations and key maps inspirations.
+
+See the following articles for further inspirations:
+
+- [My Favourite Neovim Plugins](https://haseebmajid.dev/posts/2024-04-06-my-favourite-neovim-plugins/)
+- [You don’t need more than one cursor in vim](https://medium.com/@schtoeffel/you-don-t-need-more-than-one-cursor-in-vim-2c44117d51db)
 }
 
 }
