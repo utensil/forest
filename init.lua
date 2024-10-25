@@ -15,8 +15,9 @@ for k, v in pairs(options) do
 end
 
 -- set local leader
-
-vim.g.maplocalleader = "  "
+if vim.g.maplocalleader == nil then
+    vim.g.maplocalleader = "  "
+end
 
 -- https://github.com/LunarVim/Neovim-from-scratch/blob/master/lua/user/keymaps.lua
 
