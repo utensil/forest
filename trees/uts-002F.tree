@@ -40,9 +40,7 @@ The leader key is used to trigger many key mappings in normal mode.
 
 The default leader key is a single space, represented by `<leader>` below.
 
-🌕The default local leader key is not set.
-
-💤The default local leader key is set to backslash.
+🌕The default local leader key is not set. 💤The default local leader key is set to backslash.
 
 I've configure it to be two consecutive spaces. `,` is also a common choice.
 
@@ -76,9 +74,10 @@ Other first aid key mappings or commands available in LunarVim:
         - `C` means `Ctrl`, `S` means `Shift`, `M` means `Alt`/`Option`
 - use `:Lazy` to check on plugins
 - use `:Mason` to check on LSPs
-- `<leader>+;` to open the dashboard for frequently used actions
-- `<leader>+Lr` to reload the config
-- `<leader>+li` to see LSP informations
+- 🌕
+    - `<leader>+;` to open the dashboard for frequently used actions
+    - `<leader>+Lr` to reload the config
+    - `<leader>+li` to see LSP informations
 }
 
 \mdblock{Navigation}{
@@ -89,9 +88,14 @@ Other first aid key mappings or commands available in LunarVim:
         - `g?` for help, `q` to quit, `R` to refresh
         - `hjkl` to move up/down, collapse/expand
         - it will automatically follow the current file
-    - `<leader>+s+r` to fuzzy find recent files
-    - `<leader>+s+f` to fuzzy find files
-    - `<leader>+s+t` to grep text in files
+    - 🌕
+        - `<leader>+sr` to fuzzy find recent files
+        - `<leader>+sf` to fuzzy find files
+        - `<leader>+st` to grep text in files
+    - 💤
+        - `<leader>+fr` to fuzzy find recent files
+        - `<leader>+ff` to fuzzy find files
+        - `<leader>+/` to grep text in files
 - Manipulate buffers and windows
     - use `L` for going to next buffer, `H` for previous buffer
     - use `<C-hjkl>` to move between windows
@@ -117,10 +121,11 @@ Other first aid key mappings or commands available in LunarVim:
     - `:sp` to open a file (or the current buffer) on the bottom
 - Save & quit
     - In VSCode Vim mode, should stick to `cmd+s` for saving, `cmd+w` for closing a tab
+    - 💤 `Ctrl+s` to save
     - 🌕 prefer to use
         - `<leader>+w` to save
         - `<leader>+c` to close a buffer
-            - if there are unsaved changes, it will prompt you
+        - if there are unsaved changes, it will prompt you
     - `ZZ` to save and quit
 }
 
@@ -187,9 +192,9 @@ Other first aid key mappings or commands available in LunarVim:
 - Indentation & comment
     - use `<<`/`>>` to indent/unindent the current line
         - use a single `<`/`>` to unindent/indent the selected text
-    - `<leader>+/` to toggle comment
+    - 🌕 `<leader>+/` to toggle comment
         - works for both current line and selected text
-        - (not recommended) use `gc` to toggle comment for selected text
+    - 💤 use `gc` to toggle comment for selected text
 - Multiple-cursor editing (\link{https://medium.com/@schtoeffel/you-don-t-need-more-than-one-cursor-in-vim-2c44117d51db})
     - use `/xyz` + enter to search for `xyz`, then `cgn` to change it to something else, `Esc`, then
         - use `.` to do the same for next occurrences
@@ -227,8 +232,9 @@ Other first aid key mappings or commands available in LunarVim:
 It's very important to stay in the flow and Zen mode as much as possible. Split windows for terminals breaks the flow, so I prefer to use float terminals.
 
 - Float terminals
-    - `Ctrl`+backslash to toggle a float terminal
-    - number + `Ctrl`+backslash to toggle the n-th float terminal
+    - 🌕 `Ctrl`+backslash to toggle a float terminal
+    - 🌕 number + `Ctrl`+backslash to toggle the n-th float terminal
+    - 💤 same, but with `Ctrl+/`
     - it's insert mode by default
 - Split terminals
     - `:term` to open a terminal

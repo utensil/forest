@@ -29,10 +29,12 @@ lvim.plugins = require "uts-plugins"
 
 lvim.colorscheme = "base16-railscasts"
 lvim.builtin.treesitter.rainbow.enable = true
+-- lvim.builtin.cmp.active = false
+
 -- lvim.builtin.cmp
 --
 
-table.insert(lvim.builtin.cmp.sources, { name = "forester" })
+-- table.insert(lvim.builtin.cmp.sources, { name = "forester" })
 
 -- lvim.builtin.cmp.on_config_done = function(cmp)
 --     local foresterCompletionSource = require "forester.completion"
