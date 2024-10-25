@@ -103,15 +103,26 @@ prep-kitty:
     cp -f kitty.conf ~/.config/kitty/kitty.conf
     cp -f kitty_session.conf ~/.config/kitty/kitty_session.conf
 
-sync-nvim:
+stylua:
+    stylua *.lua
+
+sync-nvim: stylua
     #!/usr/bin/env bash
     mkdir -p ~/.config/nvim
-    mkdir -p ~/.config/lvim
-    stylua init.lua
-    stylua config.lua
     cp -f init.lua ~/.config/nvim/init.lua
-    cp -f init.lua ~/.config/lvim/init.lua
+
+sync-lvim: stylua sync-nvim
+    mkdir -p ~/.config/lvim
+    cp -f init.lua ~/.config/lvim/nvim-init.lua
+    cp -f uts-plugins.lua ~/.config/lvim/uts-plugins.lua
     cp -f config.lua ~/.config/lvim/config.lua
+
+sync-lazyvim: stylua
+    mkdir -p ~/.config/lazyvim
+    cp -f init.lua ~/.config/lazyvim/nvim-init.lua
+    cp -f lazyvim-init.lua ~/.config/lazyvim/lazyvim-init.lua
+    mkdir -p ~/.config/nvim/lua/plugins
+    cp -f uts-plugins.lua ~/.config/nvim/lua/plugins/spec.lua
 
 prep-nvim: prep-term
     #!/usr/bin/env bash
@@ -131,11 +142,27 @@ prep-nvim: prep-term
 
 nvim PROJ="forest": sync-nvim
     #!/usr/bin/env bash
+    cd ~/projects/{{PROJ}} && nvim .
+
+lvim PROJ="forest": sync-lvim
+    #!/usr/bin/env bash
     cd ~/projects/{{PROJ}} && lvim .
 
 yazi DIR="{{HOME}}/projects":
     #!/usr/bin/env bash
     EDITOR=lvim yazi {{DIR}}
+
+prep-lazyvim:
+    #!/usr/bin/env bash
+    if [ -d ~/.config/lazyvim ]; then
+        (cd ~/.config/lazyvim && git pull)
+    else
+        git clone https://github.com/LazyVim/starter ~/.config/lazyvim
+    fi
+
+lazyvim PROJ="forest": sync-lazyvim
+    #!/usr/bin/env bash
+    cd ~/projects/{{PROJ}} && nvim --cmd 'set runtimepath+=~/.config/lazyvim/' -u ~/.config/lazyvim/lazyvim-init.lua .
 
 # act:
 #     ./act.sh

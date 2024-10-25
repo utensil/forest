@@ -9,11 +9,20 @@
 \mdblock{Introduction}{
 Here are some useful keys that I like using in NeoVim, some of them require corresponding plugins.
 
-I use [LunarVim](https://github.com/lunarvim/lunarvim) with some [pre-installed plugins](https://www.lunarvim.org/docs/features/core-plugins-list).
+I use
 
-Task `prep-nvim` in [my justfile](https://github.com/utensil/forest/blob/main/justfile) is how I have installed LunarVim. Task `nvim` will syncrhonize the configurations, change the working directory and open LunarVim for a specified project.
-
-See also [my LunarVim configuration](https://github.com/utensil/forest/blob/main/config.lua).
+- [LunarVim](https://github.com/lunarvim/lunarvim)
+    - it has some [pre-installed plugins](https://www.lunarvim.org/docs/features/core-plugins-list)
+    - Task `prep-lvim` in [my justfile](https://github.com/utensil/forest/blob/main/justfile) is how I have installed LunarVim. Task `lvim` will syncrhonize the configurations, change the working directory and open LunarVim for a specified project.
+    - [my LunarVim configuration](https://github.com/utensil/forest/blob/main/config.lua)
+    - LunarVim specific keys are marked with 🌕
+- [LazyVim](https://github.com/LazyVim/LazyVim)
+    - it has some [pre-installed plugins](https://www.lazyvim.org/plugins)
+    - similarly, see task `prep-lazyvim` and `lazyvim` in my justfile
+    - LazyVim specific keys are marked with 💤
+- for both Vim flavors, the following apply:
+    - [shared configurations](https://github.com/utensil/forest/blob/main/init.lua)
+    - [shared plugins](https://github.com/utensil/forest/blob/main/uts-plugins.lua)
 }
 
 \block{Vital meta keys}{
@@ -31,7 +40,11 @@ The leader key is used to trigger many key mappings in normal mode.
 
 The default leader key is a single space, represented by `<leader>` below.
 
-The default local leader key is not set, I've configure it to be two consecutive spaces. `,` is also a common choice.
+🌕The default local leader key is not set.
+
+💤The default local leader key is set to backslash.
+
+I've configure it to be two consecutive spaces. `,` is also a common choice.
 
 With plugin `whichkey` installed, `<leader>` and wait to see some useful mappings.
 
@@ -104,7 +117,7 @@ Other first aid key mappings or commands available in LunarVim:
     - `:sp` to open a file (or the current buffer) on the bottom
 - Save & quit
     - In VSCode Vim mode, should stick to `cmd+s` for saving, `cmd+w` for closing a tab
-    - In NeoVim, prefer to use
+    - 🌕 prefer to use
         - `<leader>+w` to save
         - `<leader>+c` to close a buffer
             - if there are unsaved changes, it will prompt you
