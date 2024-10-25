@@ -123,6 +123,7 @@ sync-lazyvim: stylua
     cp -f lazyvim-init.lua ~/.config/lazyvim/lazyvim-init.lua
     mkdir -p ~/.config/nvim/lua/plugins
     cp -f uts-plugins.lua ~/.config/nvim/lua/plugins/spec.lua
+    cp -f lazyvim-cmp.lua ~/.config/nvim/lua/plugins/lazyvim-cmp.lua
 
 prep-nvim: prep-term
     #!/usr/bin/env bash

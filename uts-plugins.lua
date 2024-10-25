@@ -219,6 +219,7 @@ local plugins = {
                 require("copilot_cmp").setup()
             end,
         },
+        { "hrsh7th/cmp-emoji" },
         -- adapted from https://github.com/jellydn/lazy-nvim-ide/blob/main/lua/plugins/extras/copilot-chat-v2.lua
         -- config = function(_, opts)
         --     local chat = require "CopilotChat"

@@ -30,6 +30,7 @@ lvim.plugins = require "uts-plugins"
 lvim.colorscheme = "base16-railscasts"
 lvim.builtin.treesitter.rainbow.enable = true
 -- lvim.builtin.cmp.active = false
+table.insert(lvim.builtin.cmp.sources, { name = "emoji" })
 
 -- lvim.builtin.cmp
 --
