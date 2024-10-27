@@ -59,7 +59,7 @@ local plugins = {
             -- options
         },
     },
-    { "lewis6991/satellite.nvim" },
+    -- { "lewis6991/satellite.nvim" },
     {
         "kentookura/forester.nvim",
         -- before = { "nvim-cmp" },
