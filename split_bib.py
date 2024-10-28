@@ -1,4 +1,8 @@
-#!/usr/bin/env python3
+#!/usr/bin/env -S uv run
+# /// script
+# requires-python = ">=3.11,<3.12"
+# dependencies = ["bibtexparser"]
+# ///
 import json
 import os
 import pathlib
@@ -6,7 +10,6 @@ import shutil
 import subprocess
 import sys
 from pathlib import Path
-# pip install bibtexparser
 import bibtexparser
 from bibtexparser.bwriter import BibTexWriter, SortingStrategy
 import re

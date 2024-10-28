@@ -173,5 +173,21 @@ lazyvim PROJ="forest": sync-lazyvim
     #!/usr/bin/env bash
     cd ~/projects/{{PROJ}} && nvim --cmd 'set runtimepath+=~/.config/lazyvim/' -u ~/.config/lazyvim/lazyvim-init.lua .
 
+# https://github.com/astral-sh/uv
+
+[unix]
+prep-uv:
+    curl -LsSf https://astral.sh/uv/install.sh | sh
+
+
+[windows]
+prep-uv:
+    powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
+
+prep-py:
+    uv python install 3.11
+    uv venv --python 3.11
+
+
 # act:
 #     ./act.sh

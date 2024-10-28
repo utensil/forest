@@ -1,5 +1,8 @@
-#!/usr/bin/env python3
-
+#!/usr/bin/env -S uv run
+# /// script
+# requires-python = ">=3.11,<3.12"
+# dependencies = []
+# ///
 import sys
 import re
 

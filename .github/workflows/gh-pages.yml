@@ -70,10 +70,10 @@ jobs:
           sudo apt-get install libev-dev
           opam pin add forester git+https://git.sr.ht/~jonsterling/ocaml-forester#56de06afe952d752c1a13fdcd8bb56c5fef9956f --yes
           opam install forester --yes
-      - name: Install Python
-        uses: actions/setup-python@v5
+      - name: Setup Python via uv
+        uses: astral-sh/setup-uv@v3
         with:
-          python-version: "3.11"
+          enable-cache: true
       - name: Install Homebrew
         run: |
           bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
