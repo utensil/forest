@@ -103,6 +103,14 @@ prep-kitty:
     cp -f kitty.conf ~/.config/kitty/kitty.conf
     cp -f kitty_session.conf ~/.config/kitty/kitty_session.conf
 
+[macos]
+prep-warp:
+    #!/usr/bin/env bash
+    if [ ! -d "/Applications/Warp.app" ]; then
+        brew install --cask warp
+        echo "CMD+, then search for terminal, specify External: Osx Exec to Warp.app"
+    fi
+
 stylua:
     stylua *.lua
 
