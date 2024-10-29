@@ -1,0 +1,57 @@
+\import{macros}
+% clifford hopf spin tt ag math draft tech exp notes
+\tag{tech}
+\tag{notes}
+\tag{draft}
+
+\note{useful key mappings for TUI}{
+\mdblock{Top bar}{
+Setup:
+
+- Use [SketchyBar](https://github.com/FelixKratz/SketchyBar)
+- Use `just prep-sbar` to setup SketchyBar
+- Modify `~/.config/sketchybar/bar.lua as follows:
+
+```lua
+  display = "all",
+  sticky = true,
+```
+
+for better multi-monitor support, and make the bar sticky.
+
+Unfortunatly, SketchyBar actively hides itself for fullscreen spaces, see [this issue](https://github.com/FelixKratz/SketchyBar/issues/594) for more info.
+
+So, remember to use `Cmd + Ctrl + F` to toggle fullscreen mode.
+}
+
+\mdblock{Window tiling}{
+Setup:
+
+- Use [Amethyst](https://github.com/ianyh/Amethyst)
+    - sensible default
+    - less confusing configuration than [yabai](https://github.com/koekeishiya/yabai) it seems
+- Use `just prep-tile` to install Amethyst
+
+Keys:
+
+- `Option + Shift + Space` to cycle through layouts, prefer Tall
+- `Option + Shift + J/K` to cycle through windows
+- `Option + Shift + H/L` to resize windows
+}
+
+\mdblock{Terminal}{
+Setup:
+
+- Use [Kitty](https://sw.kovidgoyal.net/kitty/)
+- Use `just prep-kitty` to install Kitty
+
+Keys:
+
+- `Cmd + N` to open a new OS window with the same current directory
+- `Cmd + T` to open a new tab with the same current directory
+- `Cmd + number` to switch to tab number
+- `Cmd + w` to close the current tab
+- `Cmd + q` to quit kitty
+
+}
+}

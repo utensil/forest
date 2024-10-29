@@ -95,9 +95,11 @@ prep-alacritty:
     # https://alacritty.org/config-alacritty.html
     cp .alacritty.toml ~/.alacritty.toml
 
-prep-kitty:
+prep-kitty: && sync-kitty
     #!/usr/bin/env bash
     which kitty || brew install --cask kitty
+
+@sync-kitty:
     # configure kitty
     # https://sw.kovidgoyal.net/kitty/conf.html
     mkdir -p ~/.config/kitty
@@ -120,7 +122,7 @@ sync-nvim: stylua
     mkdir -p ~/.config/nvim
     cp -f init.lua ~/.config/nvim/init.lua
 
-sync-lvim: stylua sync-nvim
+sync-lvim: stylua sync-nvim sync-kitty
     mkdir -p ~/.config/lvim
     cp -f init.lua ~/.config/lvim/nvim-init.lua
     cp -f uts-plugins.lua ~/.config/lvim/uts-plugins.lua
@@ -212,7 +214,13 @@ config-sbar:
 sbar:
     brew services restart felixkratz/formulae/sketchybar
 
-prep-tile:
+prep-tile: prep-amethyst
+
+prep-yabai:
+    brew install koekeishiya/formulae/yabai
+    yabai --start-service
+
+prep-amethyst:
     brew install --cask amethyst
 
 # act:
