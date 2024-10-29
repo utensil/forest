@@ -22,8 +22,6 @@ function getAppliedMode(userPreference) {
 
 function setAppliedMode(mode) {
     document.documentElement.dataset.appliedMode = mode
-    const ninja = document.querySelector('ninja-keys')
-    ninja.setAttribute('class', mode)
 }
 
 function rotatePreferences(userPreference) {
@@ -47,6 +45,8 @@ function toggleTheme() {
 
 function search() {
     const ninja = document.querySelector('ninja-keys')
+    const mode = document.documentElement.dataset.appliedMode
+    ninja.setAttribute('class', mode)
     ninja.open()
 }
 
