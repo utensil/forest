@@ -225,3 +225,7 @@ prep-amethyst:
 
 # act:
 #     ./act.sh
+
+prep-monit:
+    which btop || brew install btop
+    which macmon || brew install vladkens/tap/macmon
