@@ -1,0 +1,100 @@
+\import{macros}
+% clifford hopf spin tt ag math draft tech exp notes
+\tag{tech}
+\tag{notes}
+\tag{draft}
+
+\note{Notes on modern C++ programming}{
+\mdblock{Scope}{
+This note will cover some modern C++ features interesting to me during reading [Modern C++ Programming](https://federico-busato.github.io/Modern-CPP-Programming/).
+
+Features standardized in C++23, or implemented for C++26, are in scope.
+}
+
+\block{Introduction}{
+
+\quote{Curiosity and persistence matter. -- Ben Cichy}
+
+\quote{C++ achieves uncompromised performance by living with undefined behavior, accepting a safety trade-off. -- [This is C++: Uncompromised Performance, Undefined Behavior, & Move Semantics - Jon Kalb C++Now 2024](https://www.youtube.com/watch?v=08gvuBC-MIE)}
+
+\quote{The problem with using C++...is that there’s already a strong tendency in the language to require you to know everything before you can do anything -- Larry Wall}
+
+}
+
+\mdblock{Preparation}{
+- C++23 `std::print`
+- [Reducing C++ Compilation Times Through Good Design - Andrew Pearcy - ACCU 2024](https://www.youtube.com/watch?v=ItcGevumW-8)
+}
+
+\mdblock{Basic Concepts I}{
+
+- C++14 digit separators, e.g. `1'000'000`
+- C++14 `auto` for function return types, e.g. `auto f() { return 1; }`
+- C++20 `auto` for function input,  equivalent to templates but less expensive at compile-time
+- C++20 `<utility>` for safely comparing signed/unsigned types
+
+}
+
+\mdblock{Basic Concepts II}{
+
+- Detecting wraparound for unsigned integral types is not trivial
+- C++23 `std::float128`, `std::binary16`, `std::bfloat16`
+- `inf` and `nan` for floating-point types
+- Floating-point Arithmetic Properties
+- Catastrophic Cancellation
+    - Fixed epsilon “looks small” but it could be too large when the numbers being compared are very small
+    - `areFloatNearlyEqual`
+    - compensation algorithm like Kahan summation, Dekker’s FastTwoSum, Rump’s AccSum
+}
+
+\block{Basic Concepts III}{
+
+\md\verb>>>|
+- C++11/C++17/C++20 enum class, e.g. `using enum Color`
+- C++17 range-based loop for structure binding: `for (auto [key, value] : map)`
+- C++17/C++20 initializing statement in `if`/`switch` and range-for loop, e.g. `for (int i = 0; auto x : {'A', 'B', 'C'}) {}`
+- C++17 `[[maybe_unused]]` attribute, C++26 `auto _`
+>>>
+
+}
+
+\block{Basic Concepts IV}{
+
+\md\verb>>>|
+
+- C++11 Dynamic memory 2D allocation/deallocation: `new int[3][4]` and `delete[]`
+- `new (buffer)`: `delele[] buffer`, explicit `x->∼A()`
+- `new (std::nothrow)`
+- C++20 Designated Initializer List: `struct A { int x, y; }; A a{.x = 1, .y = 2};`
+- Pointer arithmetic rule: `address(ptr + i) = address(ptr) + (sizeof(T) * i)`
+- C++11 `constexpr`: _can_ be evaluated at compile-time
+    - variable: always evaluated at compile-time
+    - function
+        - evaluated at compile-time as long as all its arguments are evaluated at compile-time
+        - always evaluated at run-time if
+            - contain run-time functions
+            - contain references to run-time global variables
+- C++20 `consteval`: guarantees compile-time evaluation
+    - A run-time value always produces a compile error
+- C++20 `constinit`: guarantees initialization at compile-time
+    - A run-time initialization value always produces a compile error
+    - The value of a variable _can_ change during the execution
+- C++17 `if constexpr`: compile-time branching
+    - C++20 `std::is_constant_evaluated()`
+    - C++23 `if consteval`
+- C++20 `std::bit_cast`
+
+>>>
+
+}
+
+\block{Basic Concepts V}{
+
+\md\verb>>>|
+- C++20 `[[nodiscard("reason")]]`:
+This issues a warning if the return value of a function is discarded (not handled), which is good for ensuring error handling.
+>>>
+
+}
+
+}
