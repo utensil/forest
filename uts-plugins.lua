@@ -568,6 +568,9 @@ local plugins = {
         config = function()
             vim.g.mkdp_auto_start = 1
         end,
+        keys = {
+            { "<leader>mm", "<cmd>MarkdownPreviewToggle<cr>", desc = "Toggle Markdown Preview" },
+        },
     },
 
     -- {

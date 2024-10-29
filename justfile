@@ -77,6 +77,7 @@ prep-term: prep-kitty
     @echo "And possibly: gh auth refresh -s read:project"
     which fzf || brew install fzf
     which yazi || brew install yazi
+    which nnn || brew install nnn
     which stylua || brew install stylua
     which sd || brew install sd
     which luarocks || brew install luarocks
@@ -188,6 +189,31 @@ prep-py:
     uv python install 3.11
     uv venv --python 3.11
 
+prep-sbar:
+    #!/usr/bin/env bash
+    curl -L https://raw.githubusercontent.com/FelixKratz/dotfiles/master/install_sketchybar.sh | sh
+    mkdir -p ~/.config/sketchybar/plugins
+    cp /opt/homebrew/opt/sketchybar/share/sketchybar/examples/sketchybarrc ~/.config/sketchybar/sketchybarrc
+    cp -r /opt/homebrew/opt/sketchybar/share/sketchybar/examples/plugins/ ~/.config/sketchybar/plugins/
+    chmod +x ~/.config/sketchybar/plugins/*
+    brew services restart felixkratz/formulae/sketchybar
+
+# Inspired by https://github.com/FelixKratz/dotfiles
+dotfiletmpdir := "/tmp/dotfiles-" + choose('8', HEX)
+
+config-sbar:
+    #!/usr/bin/env bash
+    rm -rf ~/.config/sketchybar
+    git clone https://github.com/FelixKratz/dotfiles {{dotfiletmpdir}}
+    cp -r {{dotfiletmpdir}}/.config/sketchybar ~/.config/
+    rm -rf {{dotfiletmpdir}}
+    brew services restart felixkratz/formulae/sketchybar
+
+sbar:
+    brew services restart felixkratz/formulae/sketchybar
+
+prep-tile:
+    brew install --cask amethyst
 
 # act:
 #     ./act.sh
