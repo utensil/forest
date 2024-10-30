@@ -117,12 +117,12 @@ This note serves as a holistic view and a reminder.
 
 \codeblock{cpp}\verb>>>|
 auto lambda = []<typename T>(T value)
-requires std::is_arithmetic_v<T> {
-return value * 2;
-};
-auto v = lambda(3.4); // v: 6.8 (double)
+    requires std::is_arithmetic_v<T> {
+        return value * 2;
+    };
+auto v = lambda(3.4);   // v: 6.8 (double)
 struct A{} a;
-// auto v = lambda(a); // compiler error
+// auto v = lambda(a);  // compiler error
 >>>
 
 \md\verb>>>|
@@ -244,6 +244,7 @@ struct A{} a;
 >>>
 
 \codeblock{cpp}\verb>>>|
+#include <concept>
 
 requires [(arguments)] {
     [SFINAE contrain]; // or
@@ -252,16 +253,63 @@ requires [(arguments)] {
 
 template<typename T>
 concept MyConcept = requires (T a, T b) { // First case: SFINAE constrains
-    a + b;                                // Req. 1 - support add operator
-    a[0];                                 // Req. 2 - support subscript operator
-    a.x;                                  // Req. 3 - has "x" data member
-    a.f();                                // Req. 4 - has "f" function member
-    typename T::type;                     // Req. 5 - has "type" field
+    a + b;                                      // Req. 1 - support add operator
+    a[0];                                       // Req. 2 - support subscript operator
+    a.x;                                        // Req. 3 - has "x" data member
+    a.f();                                      // Req. 4 - has "f" function member
+    typename T::type;                           // Req. 5 - has "type" field
+    {*a + 1} -> std::convertible_to<float>;     // Req. 6 - can be deferred and the sum
+                                                // with an integer is convertible
+                                                // to float
+    {a * a} -> std::same_as<int>;               // Req. 7 - "a * a" must be valid and
+                                                // the result type is "int"
 };
 >>>
 
+}
 
+\block{Translation Units I}{
 
+\md\verb>>>|
+- storage duration
+- static initialization order fiasco
+- One Definition Rule (ODR)
+- C++11 `extern template class A<int>;`
+>>>
+
+}
+
+\block{Translation Units II}{
+
+\md\verb>>>|
+
+- common linker errors
+    - multiple definitions
+    - undefined reference
+- C++20 modules
+    - a module is a set of source code files that are compiled independently of the translation units that import them
+    - `module module.name;`
+    - `import module.name;`
+    - `export`
+        - `export { ... }`
+        - `export module module.name;`
+        - `expor import module.name;`
+    - global module fragment: include header files in a module interface
+        - `module;`
+    - private module fragment: include header files in a module implementation
+        - `module :private;`
+    - legacy headers can be directly imported with import
+        - all declarations are implicitly exported and attached to the global module (fragment)
+    - a module can be organized in isolated module partitions
+- namespace
+    - anonymous namespace
+        - visible only in the translation unit, internal linkage
+    - inline namespace
+        - can be used to version a library
+    - C++17 attributes on namespaces
+- tools
+    - `c++filt`, `ldd`, `nm`, `objdump`, `readelf`
+>>>
 }
 
 
