@@ -18,8 +18,14 @@ fi
 POLL="--poll 500ms" # $POLL
 BUZY_UPDATE="--on-busy-update queue" # $BUZY_UPDATE
 DEBOUNCE="--debounce 500ms" # $DEBOUNCE
+WPN="--wrap-process=none"
+WPS="--wrap-process=session"
+NPG="--no-process-group"
+PO="--project-origin=."
 
-watchexec --quiet --ignore-nothing --no-meta $DEBOUNCE --project-origin . -e tree,tex,bib,css,js,jsx,xsl,ts,tsx,glsl,typ,domain,style,substance,trio.json -w trees -w assets -w tex -w bun --emit-events-to=stdio -- ./build_changed.sh &
+# watchexec --quiet --ignore-nothing --no-meta $POLL $PO -e tree,tex,bib,css,js,jsx,xsl,ts,tsx,glsl,typ,domain,style,substance,trio.json -w trees -w assets -w tex -w bun --emit-events-to=stdio -- ./build_changed.sh &
+
+watchexec --quiet --ignore-nothing --no-meta $PO -w trees -w assets -w tex -w bun --emit-events-to=stdio -- ./build_changed.sh &
 
 export PORT=1314
 
