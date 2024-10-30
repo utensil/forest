@@ -9,6 +9,8 @@
 This note will cover some modern C++ features interesting to me during reading [Modern C++ Programming](https://federico-busato.github.io/Modern-CPP-Programming/).
 
 Features standardized in C++23, or implemented for C++26, are in scope.
+
+This note serves as a holistic view and a reminder.
 }
 
 \block{Introduction}{
@@ -94,7 +96,9 @@ Features standardized in C++23, or implemented for C++26, are in scope.
 - `=delete` can be used to prevent calling the wrong overload
 - C++20 `[[nodiscard("reason")]]`
     - This issues a warning if the return value of a function is discarded (not handled), which is good for ensuring error handling.
-    - C++23 `[[nodiscard]]` for lambdas
+    - C++17 for the entire class/struct
+    - C++20 for constructors
+    - C++23 for lambdas
 - The compiler injects `operator()` in the code of the destination function and then compile the routine. Operator inlining is the standard behavior
 - C++11 lambda expression: capture clause
     - `[]` captures nothing
@@ -106,7 +110,8 @@ Features standardized in C++23, or implemented for C++26, are in scope.
     - C++20 deprecates `[=]` capturing `this` pointer by value
 - C++14 `[](auto value)`, `[](int i = 6)`
 - A function can return a lambda (dynamic dispatch is also possible)
-- C++17 `constexpr` lambda, C++20 `consteval` lambda, syntax: post specifier
+- C++17 `constexpr` lambda, C++20 `consteval` lambda, `mutable`
+    - syntax: post specifier
 - C++20 `template` and `requires` clause for lambda
 >>>
 
@@ -138,5 +143,126 @@ struct A{} a;
 - C++11 `__VA_ARGS__`
 >>>
 }
+
+\block{Object-Oriented Programming I}{
+
+\md\verb>>>|
+- C++11 In-class non-static data members initialization (NSDMI)
+    - allows initializing the data members where they are declared
+    - a user-defined constructor can be used to override their default values
+- C++11 uniform initialization `{}`
+    - in function arguments and return values
+- C++11 delegate constructor
+- C++11 `=default`, `=delete`
+- `using` for type aliasing
+    - e.g. partial specialization for templates
+>>>
+
+}
+
+\block{Object-Oriented Programming II}{
+
+\md\verb>>>|
+
+- C++11 `override`
+    - ensures that the function is virtual and is overriding a virtual function from a base class
+- C++11 `final`
+    - prevents a virtual function from being overridden in a derived class
+- `dynamic_cast`
+    - upcast: `dynamic_cast<Base*>(derived)`
+- C++23 multidimensional subscript operator `[]`
+- C++23 static `[]` and `()` operators
+- C++11 `explicit` for conversion operators
+- `std:swap`
+- operators preserve precedence and short-circuit properties
+- binary operators should be implemented as friend methods
+- layouts
+    - aggregate
+        - initializable with `{}`
+    - trivial copyable
+        - can be copied with `memcpy`
+    - standard layout
+        - just like a struct or a union
+    - POD
+        - trivial copyable + standard layout
+- C++11/C++20 `<type_traits>` to check layout
+
+>>>
+
+}
+
+\block{Templates and Meta-programming I}{
+
+\md\verb>>>|
+- C++17 automatic deduction of non-type template parameters, with `auto`
+- non-type template parameters
+    - C++20 a class literal type
+        - `constexpr` assignable
+        - public, non-mutable
+        - for all base classes and non-static data members
+    - pointer, reference, and pointer to member
+    - function, e.g. `decltype(f)`
+- C++26 assertion with text formatting
+    - e.g. `static_assert(sizeof(T) != 4, std::format("test1 with sizeof(T)={}", sizeof(T)));`
+- `decltype((expr))` for `lvalue` reference to the type of `expr`
+- C++14 `auto` for function template return types
+    - replaces e.g. `decltype(T{} + R{})`
+- `<type_traits>`
+    - type query
+    - type manipulation
+>>>
+}
+
+\block{Templates and Meta-programming II}{
+
+\md\verb>>>|
+- C++17 CTAD
+    - automatic deduction of class template arguments in constructor calls (CTAD)
+    - template deduction guide
+        - map constructor parameter types to class template parameters
+        - e.g. `MyString(char const*) -> MyString<std::string>;`
+        - doesn’t work within the class scope
+        - C++20 alias template deduction
+- use `std::enable_if` to make use of SFINAE
+    - helper alias: `_t` for `::type`, `_v` for `::value`
+    - using `std::enable_if_t` for the return type prevents `auto` deduction
+- variadic template
+    - captures a parameter pack of arguments, which hold an arbitrary number of values or types
+    - ellipsis `...`
+        - prefix an identifier to introduce/capture
+        - suffix the identifier to expand
+        - `sizeof...(args)` to get the number of arguments
+        - C++17 fold
+            `(other op ... op pack)`
+        - C++14 for lambdas
+        - C++20 for concepts
+    - [C++20 idioms for parameter packs](https://www.scs.stanford.edu/~dm/blog/param-pack.html)
+- C++20 concepts
+    - `concept [name] = [compile-time boolean expression];`
+    - `requires` clause: `requires [compile-time boolean expression or Concept]`
+    - `requires` expression:
+>>>
+
+\codeblock{cpp}\verb>>>|
+
+requires [(arguments)] {
+    [SFINAE contrain]; // or
+    requires [predicate];
+} -> bool
+
+template<typename T>
+concept MyConcept = requires (T a, T b) { // First case: SFINAE constrains
+    a + b;                                // Req. 1 - support add operator
+    a[0];                                 // Req. 2 - support subscript operator
+    a.x;                                  // Req. 3 - has "x" data member
+    a.f();                                // Req. 4 - has "f" function member
+    typename T::type;                     // Req. 5 - has "type" field
+};
+>>>
+
+
+
+}
+
 
 }
