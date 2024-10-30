@@ -91,10 +91,52 @@ Features standardized in C++23, or implemented for C++26, are in scope.
 \block{Basic Concepts V}{
 
 \md\verb>>>|
-- C++20 `[[nodiscard("reason")]]`:
-This issues a warning if the return value of a function is discarded (not handled), which is good for ensuring error handling.
+- `=delete` can be used to prevent calling the wrong overload
+- C++20 `[[nodiscard("reason")]]`
+    - This issues a warning if the return value of a function is discarded (not handled), which is good for ensuring error handling.
+    - C++23 `[[nodiscard]]` for lambdas
+- The compiler injects `operator()` in the code of the destination function and then compile the routine. Operator inlining is the standard behavior
+- C++11 lambda expression: capture clause
+    - `[]` captures nothing
+    - `[&]` captures all variables by reference
+    - `[=]` captures all variables by value
+    - `[=, x, &y]` captures `x` by value and `y` by reference, all other variables by value
+    - C++17 `[this]` captures the current object by reference
+    - C++14 `[x=x]`, `[&x=x]` capture current object member `x` by value/reference
+    - C++20 deprecates `[=]` capturing `this` pointer by value
+- C++14 `[](auto value)`, `[](int i = 6)`
+- A function can return a lambda (dynamic dispatch is also possible)
+- C++17 `constexpr` lambda, C++20 `consteval` lambda, syntax: post specifier
+- C++20 `template` and `requires` clause for lambda
 >>>
 
+\codeblock{cpp}\verb>>>|
+auto lambda = []<typename T>(T value)
+requires std::is_arithmetic_v<T> {
+return value * 2;
+};
+auto v = lambda(3.4); // v: 6.8 (double)
+struct A{} a;
+// auto v = lambda(a); // compiler error
+>>>
+
+\md\verb>>>|
+- When Preprocessors are Necessary
+    - Conditional compiling
+        - [Abseil Platform Check Macros](https://abseil.io/docs/cpp/platforms/macros)
+    - Mixing different languages
+    - Complex name replacing
+- [Are We Macro free Yet, CppCon2019](https://github.com/CppCon/CppCon2019/blob/master/Presentations/are_we_macrofree_yet/are_we_macrofree_yet__zhihao_yuan__cppcon_2019.pdf)
+- C++20 `<source location>`
+    - replaces `__FILE__`, `__LINE__`, C++11 `__func__`
+    - still: non-standard `__PRETTY_FUNCTION__`
+- C++17 [`__has_include`](https://en.cppreference.com/w/cpp/preprocessor/include)
+- stringizing macro operator `#`, e.g. `#string` expands to `"string"`
+- token pasting macro operator `##`, e.g. `x##y` expands to `xy`
+- `#error`, C++23 `#warning`
+- non-portable `pragma`, C++11 `_Pragma`
+- C++11 `__VA_ARGS__`
+>>>
 }
 
 }
