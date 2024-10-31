@@ -203,10 +203,12 @@ prep-sbar:
 # Inspired by https://github.com/FelixKratz/dotfiles
 dotfiletmpdir := "/tmp/dotfiles-" + choose('8', HEX)
 
-config-sbar:
+prep-dotfiles-tmp:
+    git clone https://github.com/FelixKratz/dotfiles {{dotfiletmpdir}}
+
+config-sbar: prep-dotfiles-tmp
     #!/usr/bin/env bash
     rm -rf ~/.config/sketchybar
-    git clone https://github.com/FelixKratz/dotfiles {{dotfiletmpdir}}
     cp -r {{dotfiletmpdir}}/.config/sketchybar ~/.config/
     rm -rf {{dotfiletmpdir}}
     brew services restart felixkratz/formulae/sketchybar
@@ -216,9 +218,19 @@ sbar:
 
 prep-tile: prep-amethyst
 
-prep-yabai:
+prep-yabai: prep-dotfiles-tmp
     brew install koekeishiya/formulae/yabai
-    yabai --start-service
+    brew install koekeishiya/formulae/skhd
+    rm -rf ~/.config/yabai
+    cp -r {{dotfiletmpdir}}/.config/yabai ~/.config/
+    rm -rf ~/.config/skhd
+    cp -r {{dotfiletmpdir}}/.config/skhd ~/.config/
+    yabai --restart-service
+    skhd --restart-service
+
+no-yabai:
+    yabai --stop-service
+    skhd --stop-service
 
 prep-amethyst:
     brew install --cask amethyst
