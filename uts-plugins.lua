@@ -126,13 +126,36 @@ local plugins = {
         version = "^5", -- Recommended
         lazy = false, -- This plugin is already lazy
         -- ft = { "rust" },
-        -- config = function()
-        --   vim.g.rustaceanvim = {
-        --     server = {
-        --       on_attach = require("lvim.lsp").common_on_attach
-        --     },
-        --   }
-        -- end,
+        config = function()
+            vim.g.rustaceanvim = {
+                -- server = {
+                --     on_attach = require("lvim.lsp").common_on_attach,
+                -- },
+                server = {
+                    default_settings = {
+                        -- rust-analyzer language server configuration
+                        ["rust-analyzer"] = {
+                            checkOnSave = {
+                                enable = true,
+                                command = "clippy",
+                            },
+                            cargo = {
+                                buildScripts = {
+                                    enable = false,
+                                },
+                            },
+                            procMacro = {
+                                enable = false,
+                            },
+                            cachePriming = {
+                                enable = true,
+                                numThreads = 4,
+                            },
+                        },
+                    },
+                },
+            }
+        end,
     },
     {
         "github/copilot.vim",
