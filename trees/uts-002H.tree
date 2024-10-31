@@ -253,16 +253,18 @@ requires [(arguments)] {
 
 template<typename T>
 concept MyConcept = requires (T a, T b) { // First case: SFINAE constrains
-    a + b;                                      // Req. 1 - support add operator
-    a[0];                                       // Req. 2 - support subscript operator
-    a.x;                                        // Req. 3 - has "x" data member
-    a.f();                                      // Req. 4 - has "f" function member
-    typename T::type;                           // Req. 5 - has "type" field
-    {*a + 1} -> std::convertible_to<float>;     // Req. 6 - can be deferred and the sum
-                                                // with an integer is convertible
-                                                // to float
-    {a * a} -> std::same_as<int>;               // Req. 7 - "a * a" must be valid and
-                                                // the result type is "int"
+    a + b;                         // Req. 1 - support add operator
+    a[0];                          // Req. 2 - support subscript operator
+    a.x;                           // Req. 3 - has "x" data member
+    a.f();                         // Req. 4 - has "f" function member
+    typename T::type;              // Req. 5 - has "type" field
+
+    {*a + 1} -> std::convertible_to<float>;// Req. 6 - can be deferred
+                                           // and the sum
+                                           // with an integer is convertible
+                                           // to float
+    {a * a} -> std::same_as<int>;          // Req. 7 - "a * a" must be valid
+                                           // and the result type is "int"
 };
 >>>
 
