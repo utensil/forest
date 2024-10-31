@@ -312,5 +312,116 @@ concept MyConcept = requires (T a, T b) { // First case: SFINAE constrains
 >>>
 }
 
+\block{Code Conventions}{
+
+\md\verb>>>|
+- “Common” Project Organization
+- [C++ Core Guidelines](https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines)
+- Naming style conventions can be also enforced by using tools like `clang-tidy`'s [readability-identifier-naming](https://clang.llvm.org/extra/clang-tidy/checks/readability/identifier-naming.html#readability-identifier-naming)
+- Use braced direct-list-initialization or copy-initialization for setting default data member value. Avoid initialization in constructors if possible
+>>>
+
+\codeblock{cpp}\verb>>>|
+struct A {
+    int x = 3;      // copy-initialization
+    int x { 3 };    // direct-list-initialization (best option)
+};
+>>>
+
+}
+
+
+\mdblock{Debugging and Testing}{
+- Cost of Software Defects
+- [60 terrible tips for a C++ developer](https://pvs-studio.com/en/blog/posts/cpp/1053/)
+- [Compiler Options Hardening Guide for C and C++](https://best.openssf.org/Compiler-Hardening-Guides/Compiler-Options-Hardening-Guide-for-C-and-C++.html)
+- Sanitizers
+- Static Analyzers
+- Linters
+}
+
+\mdblock{Ecosystem}{
+
+- [xmake vs cmake](https://tboox.org/2019/05/29/xmake-vs-cmake/)
+- [Compiler Explorer](https://godbolt.org/)
+- [CppInsights](https://cppinsights.io/): see what your compiler does behind the scenes
+- [grep.app](https://grep.app/): search git repos
+- [Quick C++ Benchmark](https://quick-bench.com/)
+
+}
+
+\mdblock{Utilities}{
+- C++20 `std::format`
+- C++23 `std::print`, `std::println`
+- C++20 `std::span`: non-owning view of an underlying sequence or array
+- C++20 `<numeric>`
+- C++11 pseudo random number generation (PRNG)
+- C++11 `<chrono>`
+    - overhead ~20-40ns
+- C++17 `<optional>`, `<any>`
+- C++23 `<stacktrace>`
+}
+
+\mdblock{Containers, Iterators, and Algorithms}{
+
+- C++20 Ranges
+    - operate on elements of data structures uniformly
+    - pipe operator `|`, `|=`
+        - `std::views::*`, `std::actions::*`
+    - range factory: produces a view that contains no elements
+
+}
+
+\mdblock{Advanced Topics I}{
+- lvalue, rvalue (could be *p*ure rvalue, or e*x*piring *g*eneralized lvalue)
+- `std::move` indicates that an object is no longer needed and can be moved
+- C++11 reference collapsing rules
+- C++11 perfect forwarding with `std::forward`: allows preserving argument value category and const/volatile modifiers
+- copy elision for return value (C++17 guarantees some cases)
+- C++23 decay copy with `auto`
+}
+
+\mdblock{Advanced Topics II}{
+- C++23 `std::expected`
+    - return a value or an `std::unexpected`
+    - the user can choose how to handle the error: check return value, throw an exception, or monadic operations
+- future
+    - `std::async(f, args)`
+        - launch policy: `std::launch::async`, `std::launch::deferred`
+    - `.get()` or `.wait()`
+
+}
+
+\mdblock{Performance Optimizations I}{
+Mostly known conceptual introductions, good reference.
+}
+
+\mdblock{Performance Optimizations II}{
+- C++11 `std:fma`
+- C++20 `<bit>`
+- C++20 \code\verb`|[[unlikely]]`
+- C++23 \code\verb`|[[assume(boolean expression)]]`
+}
+
+\mdblock{Performance Optimizations III}{
+- compiler flags and optimization
+- consider using optimized external libraries for critical program operations (good reference)
+- profiling tools
+- parallel computing
+    - OpenACC
+    - Intel OneAPI
+}
+
+\mdblock{Software Design I}{
+- functions that are strongly suggested being non-member
+    - binary operators
+    - template functions within a class template
+- `std::linalg` proposal
+}
+
+\mdblock{Software Design II}{
+- Curiously Recurring Template Pattern (CRTP): static polymorphism
+- Template Virtual Function
+}
 
 }
