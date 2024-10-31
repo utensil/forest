@@ -218,15 +218,17 @@ sbar:
 
 prep-tile: prep-amethyst
 
-prep-yabai: prep-dotfiles-tmp
-    brew install koekeishiya/formulae/yabai
+prep-skhd: prep-dotfiles-tmp
     brew install koekeishiya/formulae/skhd
-    rm -rf ~/.config/yabai
-    cp -r {{dotfiletmpdir}}/.config/yabai ~/.config/
     rm -rf ~/.config/skhd
     cp -r {{dotfiletmpdir}}/.config/skhd ~/.config/
-    yabai --restart-service
-    skhd --restart-service
+    skhd --start-service
+
+prep-yabai: prep-dotfiles-tmp prep-skhd
+    brew install koekeishiya/formulae/yabai
+    rm -rf ~/.config/yabai
+    cp -r {{dotfiletmpdir}}/.config/yabai ~/.config/
+    yabai --start-service
 
 no-yabai:
     yabai --stop-service
@@ -234,6 +236,7 @@ no-yabai:
 
 prep-amethyst:
     brew install --cask amethyst
+    cp -f .amethyst.yml ~/.amethyst.yml
 
 # act:
 #     ./act.sh
