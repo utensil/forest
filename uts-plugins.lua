@@ -177,7 +177,6 @@ local plugins = {
         --             return col ~= 0
         --                 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match "%s" == nil
         --         end
-
         --         opts.mapping = vim.tbl_extend("force", opts.mapping, {
         --             ["<Tab>"] = cmp.mapping(function(fallback)
         --                 local copilot_ok, copilot_suggestion = pcall(require, "copilot.suggestion")
@@ -208,18 +207,7 @@ local plugins = {
         --         })
         --     end,
         -- },
-        {
-            "zbirenbaum/copilot-cmp",
-            after = {
-                "copilot.vim",
-                -- "copilot.lua",
-                "nvim-cmp",
-            },
-            config = function()
-                require("copilot_cmp").setup()
-            end,
-        },
-        { "hrsh7th/cmp-emoji" },
+
         -- adapted from https://github.com/jellydn/lazy-nvim-ide/blob/main/lua/plugins/extras/copilot-chat-v2.lua
         -- config = function(_, opts)
         --     local chat = require "CopilotChat"
@@ -283,25 +271,17 @@ local plugins = {
         -- end,
         keys = {
             -- Code related commands
-            { "<leader>ae", "<cmd>CopilotChatExplain<cr>", desc = "CopilotChat - Explain code" },
-            { "<leader>at", "<cmd>CopilotChatTests<cr>", desc = "CopilotChat - Generate tests" },
-            { "<leader>ar", "<cmd>CopilotChatReview<cr>", desc = "CopilotChat - Review code" },
-            { "<leader>aR", "<cmd>CopilotChatRefactor<cr>", desc = "CopilotChat - Refactor code" },
-            { "<leader>an", "<cmd>CopilotChatBetterNamings<cr>", desc = "CopilotChat - Better Naming" },
-            -- -- Chat with Copilot in visual mode
-            -- {
-            --     "<leader>av",
-            --     "<cmd>CopilotChatVisual<cr>",
-            --     mode = "x",
-            --     desc = "CopilotChat - Open in vertical split",
-            -- },
-            -- {
-            --     "<leader>ax",
-            --     "<cmd>CopilotChatInline<cr>",
-            --     mode = "x",
-            --     desc = "CopilotChat - Inline chat",
-            -- },
-            -- Custom input for CopilotChat
+            { "<leader>ae", mode = "x", "<cmd>CopilotChatExplain<cr>", desc = "CopilotChat - Explain code" },
+            { "<leader>at", mode = "x", "<cmd>CopilotChatTests<cr>", desc = "CopilotChat - Generate tests" },
+            { "<leader>ar", mode = "x", "<cmd>CopilotChatReview<cr>", desc = "CopilotChat - Review code" },
+            { "<leader>aR", mode = "x", "<cmd>CopilotChatRefactor<cr>", desc = "CopilotChat - Refactor code" },
+            { "<leader>an", mode = "x", "<cmd>CopilotChatBetterNamings<cr>", desc = "CopilotChat - Better Naming" },
+            { "<leader>ao", mode = "x", "<cmd>CopilotChatOptimize<cr>", desc = "CopilotChat - Optimize code" },
+            { "<leader>ad", "<cmd>CopilotChatDebugInfo<cr>", desc = "CopilotChat - Debug Info" },
+            { "<leader>af", "<cmd>CopilotChatFixDiagnostic<cr>", desc = "CopilotChat - Fix Diagnostic" },
+            { "<leader>al", "<cmd>CopilotChatReset<cr>", desc = "CopilotChat - Clear buffer and chat history" },
+            { "<leader>aa", "<cmd>CopilotChatToggle<cr>", desc = "CopilotChat - Toggle" },
+            { "<leader>a?", "<cmd>CopilotChatModels<cr>", desc = "CopilotChat - Select Models" },
             {
                 "<leader>ai",
                 function()
@@ -323,31 +303,20 @@ local plugins = {
                 "<cmd>CopilotChatCommitStaged<cr>",
                 desc = "CopilotChat - Generate commit message for staged changes",
             },
-            -- -- Quick chat with Copilot
-            -- {
-            --     "<leader>aq",
-            --     function()
-            --         local input = vim.fn.input "Quick Chat: "
-            --         if input ~= "" then
-            --             vim.cmd("CopilotChatBuffer " .. input)
-            --         end
-            --     end,
-            --     desc = "CopilotChat - Quick chat",
-            -- },
-            -- Debug
-            { "<leader>ad", "<cmd>CopilotChatDebugInfo<cr>", desc = "CopilotChat - Debug Info" },
-            -- Fix the issue with diagnostic
-            { "<leader>af", "<cmd>CopilotChatFixDiagnostic<cr>", desc = "CopilotChat - Fix Diagnostic" },
-            -- Clear buffer and chat history
-            { "<leader>al", "<cmd>CopilotChatReset<cr>", desc = "CopilotChat - Clear buffer and chat history" },
-            -- Toggle Copilot Chat Vsplit
-            { "<leader>av", "<cmd>CopilotChatToggle<cr>", desc = "CopilotChat - Toggle" },
-            -- Also toggle, easier to type
-            { "<leader>aa", "<cmd>CopilotChatToggle<cr>", desc = "CopilotChat - Toggle" },
-            -- Copilot Chat Models
-            { "<leader>a?", "<cmd>CopilotChatModels<cr>", desc = "CopilotChat - Select Models" },
         },
     },
+    {
+        "zbirenbaum/copilot-cmp",
+        after = {
+            "copilot.vim",
+            -- "copilot.lua",
+            "nvim-cmp",
+        },
+        config = function()
+            require("copilot_cmp").setup()
+        end,
+    },
+    { "hrsh7th/cmp-emoji" },
     {
         "Julian/lean.nvim",
         event = { "BufReadPre *.lean", "BufNewFile *.lean" },
