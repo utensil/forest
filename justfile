@@ -158,7 +158,7 @@ nvim PROJ="forest": sync-nvim
 
 lvim PROJ="forest": sync-lvim
     #!/usr/bin/env bash
-    cd ~/projects/{{PROJ}} && lvim .
+    cd ~/projects/{{PROJ}} && lvim
 
 yazi DIR="{{HOME}}/projects":
     #!/usr/bin/env bash

@@ -97,12 +97,34 @@ local plugins = {
                 ensure_installed = { "toml", "forester" },
                 sync_install = false,
             }
-            -- local foresterCompletionSource = require "forester.completion"
-            -- local cmp = require "cmp"
-            -- cmp.register_source("forester", foresterCompletionSource)
-            -- cmp.setup.filetype("forester", { sources = { { name = "forester", dup = 0 } } })
-            -- cmp.setup()
+
+            -- require("lspconfig").texlab.setup {
+            --     filetypes = { "tex", "bib", "forester" },
+            -- }
+
+            local foresterCompletionSource = require "forester.completion"
+            local cmp = require "cmp"
+            cmp.register_source("forester", foresterCompletionSource)
+            cmp.setup.filetype("forester", { sources = { { name = "forester", dup = 0 } } })
+            cmp.setup()
         end,
+        keys = {
+            { "<localleader>n", "<cmd>Forester new<cr>", desc = "Forester - New" },
+            { "<localleader>b", "<cmd>Forester browse<cr>", desc = "Forester - Browse" },
+            -- same for link_new transclude_new
+            { "<localleader>l", "<cmd>Forester link_new<cr>", desc = "Forester - Link New" },
+            { "<localleader>t", "<cmd>Forester transclude_new<cr>", desc = "Forester - Transclude New" },
+            -- bind c to run a shell command ./new.sh uts , then get its standard output as a relative file name to the current working directory, then open the file in nvim
+            {
+                "<localleader>c",
+                function()
+                    local cmd = "./new.sh uts"
+                    local file = io.popen(cmd):read "*a"
+                    vim.cmd("e " .. file)
+                end,
+                desc = "Forester - New from Command",
+            },
+        },
     },
     -- https://github.com/mrcjkb/rustaceanvim/discussions/94#discussioncomment-7813716 not working:
     -- error: lazy.nvim/lua/lazy/core/loader.lua:373: attempt to call field 'setup' (a table value)
