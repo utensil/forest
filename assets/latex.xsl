@@ -3,7 +3,7 @@
 <xsl:stylesheet version="1.0"
                 xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
                 xmlns:html="http://www.w3.org/1999/xhtml"
-                xmlns:f="http://www.jonmsterling.com/jms-005P.xml">
+                xmlns:f="http://www.jonmsterling.com/foreign-forester-jms-005P.xml">
   
   <xsl:template match="/f:tree/f:backmatter//f:tree[f:frontmatter/f:taxon[text()='Reference']]">
     <xsl:apply-templates select="f:frontmatter/f:meta[@name='bibtex']" />
