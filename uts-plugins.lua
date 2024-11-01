@@ -586,6 +586,17 @@ local plugins = {
             { "<leader>mm", "<cmd>MarkdownPreviewToggle<cr>", desc = "Toggle Markdown Preview" },
         },
     },
+    {
+        "nvchad/showkeys",
+        cmd = "ShowkeysToggle",
+        opts = {
+            timeout = 1,
+            maxkeys = 7,
+            show_count = true,
+            excluded_modes = { "i" },
+            position = "top-right",
+        },
+    },
 
     -- {
     --     "Zeioth/hot-reload.nvim",
