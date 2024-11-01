@@ -112,8 +112,7 @@ local plugins = {
             {
                 "<localleader>c",
                 function()
-                    local cmd = "./new.sh"
-                    -- get input from user
+                    local cmd = "just new"
                     local prefix = vim.fn.input "Enter prefix: "
                     if prefix ~= "" then
                         cmd = cmd .. " " .. prefix
