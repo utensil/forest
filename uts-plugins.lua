@@ -98,10 +98,6 @@ local plugins = {
                 sync_install = false,
             }
 
-            -- require("lspconfig").texlab.setup {
-            --     filetypes = { "tex", "bib", "forester" },
-            -- }
-
             local foresterCompletionSource = require "forester.completion"
             local cmp = require "cmp"
             cmp.register_source("forester", foresterCompletionSource)
@@ -111,14 +107,19 @@ local plugins = {
         keys = {
             { "<localleader>n", "<cmd>Forester new<cr>", desc = "Forester - New" },
             { "<localleader>b", "<cmd>Forester browse<cr>", desc = "Forester - Browse" },
-            -- same for link_new transclude_new
             { "<localleader>l", "<cmd>Forester link_new<cr>", desc = "Forester - Link New" },
             { "<localleader>t", "<cmd>Forester transclude_new<cr>", desc = "Forester - Transclude New" },
-            -- bind c to run a shell command ./new.sh uts , then get its standard output as a relative file name to the current working directory, then open the file in nvim
             {
                 "<localleader>c",
                 function()
-                    local cmd = "./new.sh uts"
+                    local cmd = "./new.sh"
+                    -- get input from user
+                    local prefix = vim.fn.input "Enter prefix: "
+                    if prefix ~= "" then
+                        cmd = cmd .. " " .. prefix
+                    else
+                        cmd = cmd .. " uts"
+                    end
                     local file = io.popen(cmd):read "*a"
                     vim.cmd("e " .. file)
                 end,
