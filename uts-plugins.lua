@@ -627,6 +627,14 @@ local plugins = {
             position = "top-right",
         },
     },
+    -- {
+    --     "dnlhc/glance.nvim",
+    --     config = function()
+    --         require("glance").setup {
+    --             -- your configuration
+    --         }
+    --     end,
+    -- },
 
     -- {
     --     "Zeioth/hot-reload.nvim",
