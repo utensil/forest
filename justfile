@@ -242,5 +242,14 @@ prep-amethyst:
 #     ./act.sh
 
 prep-monit:
+    #!/usr/bin/env bash
     which btop || brew install btop
-    which macmon || brew install vladkens/tap/macmon
+    # if it's macos and the arch is arm64, then install macmon
+    if [ "$(uname)" == "Darwin" ]; then
+        if [ "$(uname -m)" == "aarch64" ]; then
+            which macmon || brew install vladkens/tap/macmon
+            # which neoasitop || (brew tap op06072/neoasitop && brew install neoasitop)
+        else
+           echo "No GPU monit tools found yet"
+        fi
+    fi
