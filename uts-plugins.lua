@@ -63,7 +63,7 @@ local plugins = {
     {
         "kentookura/forester.nvim",
         -- before = { "nvim-cmp" },
-        branch = "36-installation-and-initialization",
+        -- branch = "36-installation-and-initialization",
         -- tried removing this for the auto-completion to have a non-nil `forester_current_config`
         event = "VeryLazy",
         dependencies = {

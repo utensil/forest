@@ -136,6 +136,10 @@ sync-lazyvim: stylua
     cp -f uts-plugins.lua ~/.config/nvim/lua/plugins/spec.lua
     cp -f lazyvim-cmp.lua ~/.config/nvim/lua/plugins/lazyvim-cmp.lua
 
+sync-nvchad: stylua
+    mkdir -p ~/.config/nvim/lua/plugins
+    cp -f uts-plugins.lua ~/.config/nvim/lua/plugins/spec.lua
+
 prep-nvim: prep-term
     #!/usr/bin/env bash
     which nvim || brew install neovim
@@ -175,6 +179,19 @@ prep-lazyvim:
 lazyvim PROJ="forest": sync-lazyvim
     #!/usr/bin/env bash
     cd ~/projects/{{PROJ}} && nvim --cmd 'set runtimepath+=~/.config/lazyvim/' -u ~/.config/lazyvim/lazyvim-init.lua .
+
+prep-nvchad:
+    #!/usr/bin/env bash
+    if [ -d ~/.config/nvchad ]; then
+        (cd ~/.config/nvchad && git pull)
+    else
+        git clone https://github.com/NvChad/starter ~/.config/nvchad
+    fi
+
+
+nvchad PROJ="forest": sync-nvchad
+    #!/usr/bin/env bash
+    cd ~/projects/{{PROJ}} && nvim --cmd 'set runtimepath+=~/.config/nvchad/' --cmd 'lua package.path = package.path .. ";{{home_directory()}}/.config/nvchad/lua/?.lua"' -u ~/.config/nvchad/init.lua .
 
 # https://github.com/astral-sh/uv
 
