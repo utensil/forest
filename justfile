@@ -244,7 +244,7 @@ prep-amethyst:
 prep-monit:
     #!/usr/bin/env bash
     which btop || brew install btop
-    # if it's macos and the arch is arm64, then install macmon
+    # which glances || brew install glances
     if [ "$(uname)" == "Darwin" ]; then
         if [ "$(uname -m)" == "aarch64" ]; then
             which macmon || brew install vladkens/tap/macmon
