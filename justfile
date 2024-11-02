@@ -82,6 +82,8 @@ prep-term: prep-kitty
     which sd || brew install sd
     which luarocks || brew install luarocks
     which starship || brew install starship
+    which z || brew install zoxide
+    grep -F 'eval "$(zoxide init zsh)"' ~/.zshrc|| echo 'eval "$(zoxide init zsh)"' >> ~/.zshrc
     # grep ~/.bashrc -F 'eval "$(starship init bash)"' || echo 'eval "$(starship init bash)"' >> ~/.bashrc
     grep -F 'eval "$(starship init zsh)"' ~/.zshrc || echo 'eval "$(starship init zsh)"' >> ~/.zshrc
 
