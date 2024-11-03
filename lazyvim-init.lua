@@ -15,8 +15,8 @@ vim.schedule(function()
     vim.cmd "colorscheme base16-railscasts"
 end)
 
-local cmp = require "cmp"
-local foresterCompletionSource = require "forester.completion"
-
-cmp.register_source("forester", foresterCompletionSource)
+-- local cmp = require "cmp"
+-- local foresterCompletionSource = require "forester.completion"
+--
+-- cmp.register_source("forester", foresterCompletionSource)
 -- cmp.setup.filetype("forester", { sources = { { name = "forester", dup = 0 } } })

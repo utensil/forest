@@ -141,13 +141,16 @@ sync-lazyvim: stylua
     mkdir -p ~/.config/lazyvim
     cp -f init.lua ~/.config/lazyvim/nvim-init.lua
     cp -f lazyvim-init.lua ~/.config/lazyvim/lazyvim-init.lua
-    mkdir -p ~/.config/nvim/lua/plugins
-    cp -f uts-plugins.lua ~/.config/nvim/lua/plugins/spec.lua
-    cp -f lazyvim-cmp.lua ~/.config/nvim/lua/plugins/lazyvim-cmp.lua
+    mkdir -p ~/.config/lazyvim/lua/plugins
+    cp -f uts-plugins.lua ~/.config/lazyvim/lua/plugins/spec.lua
+    cp -f lazyvim-cmp.lua ~/.config/lazyvim/lua/plugins/lazyvim-cmp.lua
 
 sync-nvchad: stylua
-    mkdir -p ~/.config/nvim/lua/plugins
-    cp -f uts-plugins.lua ~/.config/nvim/lua/plugins/spec.lua
+    mkdir -p ~/.config/nvchad/
+    cp -f init.lua ~/.config/nvchad/nvim-init.lua
+    cp -f lazyvim-init.lua ~/.config/nvchad/nvchad-init.lua
+    mkdir -p ~/.config/nvchad/lua/plugins
+    cp -f uts-plugins.lua ~/.config/nvchad/lua/plugins/spec.lua
 
 prep-nvim: prep-term
     #!/usr/bin/env bash
@@ -187,7 +190,7 @@ prep-lazyvim:
 
 lazyvim PROJ="forest": sync-lazyvim
     #!/usr/bin/env bash
-    cd ~/projects/{{PROJ}} && nvim --cmd 'set runtimepath+=~/.config/lazyvim/' -u ~/.config/lazyvim/lazyvim-init.lua .
+    cd ~/projects/{{PROJ}} && nvim --cmd 'set runtimepath+=~/.config/lazyvim/' --cmd 'lua package.path = package.path .. ";{{home_directory()}}/.config/lazyvim/lua/?.lua"' -u ~/.config/lazyvim/lazyvim-init.lua
 
 prep-nvchad:
     #!/usr/bin/env bash
@@ -200,7 +203,7 @@ prep-nvchad:
 
 nvchad PROJ="forest": sync-nvchad
     #!/usr/bin/env bash
-    cd ~/projects/{{PROJ}} && nvim --cmd 'set runtimepath+=~/.config/nvchad/' --cmd 'lua package.path = package.path .. ";{{home_directory()}}/.config/nvchad/lua/?.lua"' -u ~/.config/nvchad/init.lua .
+    cd ~/projects/{{PROJ}} && nvim --cmd 'set runtimepath+=~/.config/nvchad/' --cmd 'lua package.path = package.path .. ";{{home_directory()}}/.config/nvchad/lua/?.lua"' -u ~/.config/nvchad/nvchad-init.lua
 
 # https://github.com/astral-sh/uv
 

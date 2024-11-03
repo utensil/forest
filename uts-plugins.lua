@@ -7,8 +7,8 @@ local plugins = {
         "RRethy/base16-nvim",
         lazy = false,
         -- config = function()
-        --     vim.cmd('colorscheme base16-railscasts')
-        -- end
+        --     vim.cmd "colorscheme base16-railscasts"
+        -- end,
     },
     -- https://www.lazyvim.org/configuration/recipes#supertab
     -- {
@@ -629,24 +629,37 @@ local plugins = {
     },
     {
         "MeanderingProgrammer/render-markdown.nvim",
-        dependencies = { "nvim-treesitter/nvim-treesitter", "echasnovski/mini.nvim" }, -- if you use the mini.nvim suite
-        -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.icons' }, -- if you use standalone mini plugins
+        -- dependencies = { "nvim-treesitter/nvim-treesitter", "echasnovski/mini.nvim" }, -- if you use the mini.nvim suite
+        dependencies = { "nvim-treesitter/nvim-treesitter", "echasnovski/mini.icons" }, -- if you use standalone mini plugins
         -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
-        ---@module 'render-markdown'
-        ---@type render.md.UserConfig
         opts = {
             enable = true,
             render_modes = true,
-            -- heading = {
-            --     backgrounds = {
-            --         "RenderMarkdownH1Bg",
-            --         "RenderMarkdownH2Bg",
-            --         "RenderMarkdownH3Bg",
-            --         "RenderMarkdownH4Bg",
-            --         "RenderMarkdownH5Bg",
-            --         "RenderMarkdownH6Bg",
-            --     },
-            -- },
+            heading = {
+                position = "inline",
+                -- width = "block",
+                -- min_width = 30,
+                width = "full",
+                -- border_prefix = true,
+                -- border = true,
+                -- border_virtual = true,
+                -- foregrounds = {
+                --     "RenderMarkdownH1",
+                --     "RenderMarkdownH2",
+                --     "RenderMarkdownH3",
+                --     "RenderMarkdownH4",
+                --     "RenderMarkdownH5",
+                --     "RenderMarkdownH6",
+                -- -- },
+                -- backgrounds = {
+                --     "RenderMarkdownH1",
+                --     "RenderMarkdownH2",
+                --     "RenderMarkdownH3",
+                --     "RenderMarkdownH4",
+                --     "RenderMarkdownH5",
+                --     "RenderMarkdownH6",
+                -- },
+            },
         },
         ft = { "markdown", "quarto" },
     },
@@ -670,6 +683,7 @@ local plugins = {
         dependencies = { "luarocks.nvim" },
         config = function()
             require("image").setup {
+                backend = "kitty",
                 processor = "magick_cli",
                 integrations = {
                     markdown = {
