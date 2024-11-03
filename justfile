@@ -244,3 +244,6 @@ prep-amethyst:
 prep-monit:
     which btop || brew install btop
     which macmon || brew install vladkens/tap/macmon
+
+rec:
+    uvx asciinema rec
