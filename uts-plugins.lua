@@ -634,7 +634,21 @@ local plugins = {
         -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
         ---@module 'render-markdown'
         ---@type render.md.UserConfig
-        opts = {},
+        opts = {
+            enable = true,
+            render_modes = true,
+            -- heading = {
+            --     backgrounds = {
+            --         "RenderMarkdownH1Bg",
+            --         "RenderMarkdownH2Bg",
+            --         "RenderMarkdownH3Bg",
+            --         "RenderMarkdownH4Bg",
+            --         "RenderMarkdownH5Bg",
+            --         "RenderMarkdownH6Bg",
+            --     },
+            -- },
+        },
+        ft = { "markdown", "quarto" },
     },
     -- {
     --     "3rd/image.nvim",

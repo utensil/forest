@@ -80,6 +80,11 @@ prep-term: prep-kitty
     which nnn || brew install nnn
     which stylua || brew install stylua
     which sd || brew install sd
+    which dua || brew install dua-cli
+    which bat || brew install bat
+    which eza || brew install eza
+    which rg || brew install ripgrep
+    which rip || brew install rm-improved
     which luarocks || brew install luarocks
     # luarocks --local --lua-version=5.1 install magick
     which starship || brew install starship
