@@ -42,7 +42,7 @@ The default leader key is a single space, represented by `<leader>` below.
 
 🌕 The default local leader key is not set. I've configure it to be two consecutive spaces. `,` is also a common choice.
 
-💤 The default local leader key is set to backslash. I didn't change it.
+💤 The default local leader key is set to \verb`|\\`. I didn't change it.
 
 With plugin `whichkey` installed, `<leader>` and wait to see some useful mappings.
 
@@ -98,7 +98,7 @@ Other first aid key mappings or commands available in LunarVim:
         - `<leader>+bf` to fuzzy find buffers
     - 💤
         - `<leader>+fr` to fuzzy find recent files
-        - `<leader>+ff` to fuzzy find files
+        - `<leader>+ff` to fuzzy find files, or simply double space
         - `<leader>+/` to grep text in files
 - Manipulate buffers and windows
     - use `L` for going to next buffer, `H` for previous buffer
@@ -125,11 +125,12 @@ Other first aid key mappings or commands available in LunarVim:
     - `:sp` to open a file (or the current buffer) on the bottom
 - Save & quit
     - In VSCode Vim mode, should stick to `cmd+s` for saving, `cmd+w` for closing a tab
-    - 💤 `Ctrl+s` to save
+    - 💤
+        - `:w` or `Ctrl+s` to save
+        - `<leader>+bd` to close a buffer with confirmation on unsaved changes
     - 🌕 prefer to use
         - `<leader>+w` to save
-        - `<leader>+c` to close a buffer
-        - if there are unsaved changes, it will prompt you
+        - `<leader>+c` to close a buffer with confirmation on unsaved changes
     - `ZZ` to save and quit
 }
 
@@ -200,6 +201,7 @@ Other first aid key mappings or commands available in LunarVim:
     - 🌕 `<leader>+/` to toggle comment
         - works for both current line and selected text
     - 💤 use `gc` to toggle comment for selected text
+        - that measn `Vgc` to comment/uncomment a line
 - Multiple-cursor editing (\link{https://medium.com/@schtoeffel/you-don-t-need-more-than-one-cursor-in-vim-2c44117d51db})
     - use `/xyz` + enter to search for `xyz`, then `cgn` to change it to something else, `Esc`, then
         - use `.` to do the same for next occurrences
@@ -261,7 +263,8 @@ It's very important to stay in the flow and Zen mode as much as possible. Split 
     - in editor, `<leader>+gs` to stage the current hunk, `<leader>+gr` to revert the current hunk
     - usually lazygit is good enough, one can also use `:DiffviewOpen` to inspect diff and handle merge conflicts
 - Github Actions
-    - `<leader>+gh` to open the Github Actions split window
+    - `<leader>+ga` to open the Github Actions split window
+        - deprecated: `<leader>+gh` because it conflicts with 💤
     - `gj` to open the job under cursor, `gr` for the run, `gw` for the workflow file
     - `<leader>+gq` to close the split window
 - Octo
