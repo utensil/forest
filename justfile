@@ -126,28 +126,28 @@ prep-warp:
 stylua:
     stylua *.lua
 
-@sync-nvim: stylua
+sync-nvim: stylua
     #!/usr/bin/env bash
     mkdir -p ~/.config/nvim
     cp -f init.lua ~/.config/nvim/init.lua
 
-@sync-plugins: stylua
+sync-plugins: stylua
     mkdir -p ~/.config/nvim/lua/plugins/
     cp -f uts-plugins.lua ~/.config/nvim/lua/plugins/spec.lua
     cp -f lazyvim-cmp.lua ~/.config/nvim/lua/plugins/lazyvim-cmp.lua
 
-@sync-lvim: stylua sync-nvim sync-kitty
+sync-lvim: stylua sync-nvim sync-kitty
     mkdir -p ~/.config/lvim
     cp -f init.lua ~/.config/lvim/nvim-init.lua
     cp -f uts-plugins.lua ~/.config/lvim/uts-plugins.lua
     cp -f config.lua ~/.config/lvim/config.lua
 
-@sync-lazyvim: stylua sync-plugins
+sync-lazyvim: stylua sync-plugins
     mkdir -p ~/.config/lazyvim
     cp -f init.lua ~/.config/lazyvim/nvim-init.lua
     cp -f lazyvim-init.lua ~/.config/lazyvim/lazyvim-init.lua
 
-@sync-nvchad: stylua sync-plugins
+sync-nvchad: stylua sync-plugins
     mkdir -p ~/.config/nvchad/
     cp -f init.lua ~/.config/nvchad/nvim-init.lua
     cp -f lazyvim-init.lua ~/.config/nvchad/nvchad-init.lua
