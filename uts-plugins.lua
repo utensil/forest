@@ -63,7 +63,7 @@ local plugins = {
     {
         "kentookura/forester.nvim",
         -- before = { "nvim-cmp" },
-        branch = "36-installation-and-initialization",
+        -- branch = "36-installation-and-initialization",
         -- tried removing this for the auto-completion to have a non-nil `forester_current_config`
         event = "VeryLazy",
         dependencies = {
@@ -627,6 +627,73 @@ local plugins = {
             position = "top-right",
         },
     },
+    {
+        "MeanderingProgrammer/render-markdown.nvim",
+        dependencies = { "nvim-treesitter/nvim-treesitter", "echasnovski/mini.nvim" }, -- if you use the mini.nvim suite
+        -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.icons' }, -- if you use standalone mini plugins
+        -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
+        ---@module 'render-markdown'
+        ---@type render.md.UserConfig
+        opts = {
+            enable = true,
+            render_modes = true,
+            -- heading = {
+            --     backgrounds = {
+            --         "RenderMarkdownH1Bg",
+            --         "RenderMarkdownH2Bg",
+            --         "RenderMarkdownH3Bg",
+            --         "RenderMarkdownH4Bg",
+            --         "RenderMarkdownH5Bg",
+            --         "RenderMarkdownH6Bg",
+            --     },
+            -- },
+        },
+        ft = { "markdown", "quarto" },
+    },
+    -- {
+    --     "3rd/image.nvim",
+    --     config = function()
+    --         require("image").setup {
+    --             -- processor = "magick_cli",
+    --         }
+    --     end,
+    -- },
+    {
+        "vhyrro/luarocks.nvim",
+        priority = 1001, -- this plugin needs to run before anything else
+        opts = {
+            rocks = { "magick" },
+        },
+    },
+    {
+        "3rd/image.nvim",
+        dependencies = { "luarocks.nvim" },
+        config = function()
+            require("image").setup {
+                processor = "magick_cli",
+                integrations = {
+                    markdown = {
+                        filetypes = { "markdown", "vimwiki", "quarto", "forester" },
+                        only_render_image_at_cursor = true,
+                    },
+                },
+            }
+            -- ...
+        end,
+    },
+    -- {
+    --     "ThePrimeagen/harpoon",
+    --     branch = "harpoon2",
+    --     dependencies = { "nvim-lua/plenary.nvim" },
+    -- },
+    -- {
+    --     "dnlhc/glance.nvim",
+    --     config = function()
+    --         require("glance").setup {
+    --             -- your configuration
+    --         }
+    --     end,
+    -- },
 
     -- {
     --     "Zeioth/hot-reload.nvim",

@@ -4,7 +4,7 @@
  xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
  xmlns:beamer="http://ctan.org/pkg/beamer"
  xmlns:indenting="jonmsterling:indenting"
- xmlns:f="http://www.jonmsterling.com/foreign-forester-jms-005P.xml"
+ xmlns:f="http://www.jonmsterling.com/jms-005P.xml"
  >
 
 <!-- The following is based on https://git.sr.ht/~jonsterling/forester-base-theme/tree/main/item/tree.xsl -->

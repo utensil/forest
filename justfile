@@ -80,8 +80,17 @@ prep-term: prep-kitty
     which nnn || brew install nnn
     which stylua || brew install stylua
     which sd || brew install sd
+    which dua || brew install dua-cli
+    which bat || brew install bat
+    which eza || brew install eza
+    which rg || brew install ripgrep
+    which rip || brew install rm-improved
     which luarocks || brew install luarocks
+    # luarocks --local --lua-version=5.1 install magick
     which starship || brew install starship
+    which z || brew install zoxide
+    which imagemagick ||brew install imagemagick
+    grep -F 'eval "$(zoxide init zsh)"' ~/.zshrc|| echo 'eval "$(zoxide init zsh)"' >> ~/.zshrc
     # grep ~/.bashrc -F 'eval "$(starship init bash)"' || echo 'eval "$(starship init bash)"' >> ~/.bashrc
     grep -F 'eval "$(starship init zsh)"' ~/.zshrc || echo 'eval "$(starship init zsh)"' >> ~/.zshrc
 
@@ -136,6 +145,10 @@ sync-lazyvim: stylua
     cp -f uts-plugins.lua ~/.config/nvim/lua/plugins/spec.lua
     cp -f lazyvim-cmp.lua ~/.config/nvim/lua/plugins/lazyvim-cmp.lua
 
+sync-nvchad: stylua
+    mkdir -p ~/.config/nvim/lua/plugins
+    cp -f uts-plugins.lua ~/.config/nvim/lua/plugins/spec.lua
+
 prep-nvim: prep-term
     #!/usr/bin/env bash
     which nvim || brew install neovim
@@ -175,6 +188,19 @@ prep-lazyvim:
 lazyvim PROJ="forest": sync-lazyvim
     #!/usr/bin/env bash
     cd ~/projects/{{PROJ}} && nvim --cmd 'set runtimepath+=~/.config/lazyvim/' -u ~/.config/lazyvim/lazyvim-init.lua .
+
+prep-nvchad:
+    #!/usr/bin/env bash
+    if [ -d ~/.config/nvchad ]; then
+        (cd ~/.config/nvchad && git pull)
+    else
+        git clone https://github.com/NvChad/starter ~/.config/nvchad
+    fi
+
+
+nvchad PROJ="forest": sync-nvchad
+    #!/usr/bin/env bash
+    cd ~/projects/{{PROJ}} && nvim --cmd 'set runtimepath+=~/.config/nvchad/' --cmd 'lua package.path = package.path .. ";{{home_directory()}}/.config/nvchad/lua/?.lua"' -u ~/.config/nvchad/init.lua .
 
 # https://github.com/astral-sh/uv
 
@@ -242,8 +268,17 @@ prep-amethyst:
 #     ./act.sh
 
 prep-monit:
+    #!/usr/bin/env bash
     which btop || brew install btop
-    which macmon || brew install vladkens/tap/macmon
+    # which glances || brew install glances
+    if [ "$(uname)" == "Darwin" ]; then
+        if [ "$(uname -m)" == "aarch64" ]; then
+            which macmon || brew install vladkens/tap/macmon
+            # which neoasitop || (brew tap op06072/neoasitop && brew install neoasitop)
+        else
+           echo "No GPU monit tools found yet"
+        fi
+    fi
 
 rec:
     uvx asciinema rec
