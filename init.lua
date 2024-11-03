@@ -14,8 +14,8 @@ for k, v in pairs(options) do
     vim.opt[k] = v
 end
 
--- set local leader
-if vim.g.maplocalleader == nil then
+-- set local leader, won't work for LazyVim, as it has mapped "  "  to find files
+if vim.g.maplocalleader == nil or vim.g.maplocalleader == "\\" then
     vim.g.maplocalleader = "  "
 end
 

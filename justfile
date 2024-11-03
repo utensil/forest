@@ -131,34 +131,40 @@ sync-nvim: stylua
     mkdir -p ~/.config/nvim
     cp -f init.lua ~/.config/nvim/init.lua
 
+sync-plugins: stylua
+    mkdir -p ~/.config/nvim/lua/plugins/
+    cp -f uts-plugins.lua ~/.config/nvim/lua/plugins/spec.lua
+    cp -f lazyvim-cmp.lua ~/.config/nvim/lua/plugins/lazyvim-cmp.lua
+
 sync-lvim: stylua sync-nvim sync-kitty
     mkdir -p ~/.config/lvim
     cp -f init.lua ~/.config/lvim/nvim-init.lua
     cp -f uts-plugins.lua ~/.config/lvim/uts-plugins.lua
     cp -f config.lua ~/.config/lvim/config.lua
 
-sync-lazyvim: stylua
+sync-lazyvim: stylua sync-plugins
     mkdir -p ~/.config/lazyvim
     cp -f init.lua ~/.config/lazyvim/nvim-init.lua
     cp -f lazyvim-init.lua ~/.config/lazyvim/lazyvim-init.lua
-    mkdir -p ~/.config/lazyvim/lua/plugins
-    cp -f uts-plugins.lua ~/.config/lazyvim/lua/plugins/spec.lua
-    cp -f lazyvim-cmp.lua ~/.config/lazyvim/lua/plugins/lazyvim-cmp.lua
 
-sync-nvchad: stylua
+sync-nvchad: stylua sync-plugins
     mkdir -p ~/.config/nvchad/
     cp -f init.lua ~/.config/nvchad/nvim-init.lua
     cp -f lazyvim-init.lua ~/.config/nvchad/nvchad-init.lua
-    mkdir -p ~/.config/nvchad/lua/plugins
-    cp -f uts-plugins.lua ~/.config/nvchad/lua/plugins/spec.lua
 
 prep-nvim: prep-term
     #!/usr/bin/env bash
     which nvim || brew install neovim
-    # rm -rf ~/.config/nvim ~/.cache/lvim ~/.bun/install ~/.local/share/lunarvim ~/.config/lvim/
-    # git clone https://github.com/utensil/dotnvim.git ~/.config/nvim
+    # rip ~/.config/nvim
     # git clone https://github.com/ntk148v/neovim-config.git "${XDG_CONFIG_HOME:-$HOME/.config}"/nvim
-    # :NvCheatsheet
+
+@nvim PROJ="forest": sync-nvim
+    #!/usr/bin/env bash
+    cd ~/projects/{{PROJ}} && nvim
+
+prep-lvim: prep-term prep-nvim
+    #!/usr/bin/env bash
+    # rip ~/.cache/lvim ~/.bun/install ~/.local/share/lunarvim ~/.config/lvim/
     # bun upgrade
     yes|bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/master/utils/installer/install.sh)
     echo 'export PATH=$HOME/.local/bin:$PATH' >> ~/.bashrc
@@ -168,17 +174,9 @@ prep-nvim: prep-term
     echo
     echo "Use lvim to start LunarVim"
 
-nvim PROJ="forest": sync-nvim
-    #!/usr/bin/env bash
-    cd ~/projects/{{PROJ}} && nvim .
-
-lvim PROJ="forest": sync-lvim
+@lvim PROJ="forest": sync-lvim
     #!/usr/bin/env bash
     cd ~/projects/{{PROJ}} && lvim
-
-yazi DIR="{{HOME}}/projects":
-    #!/usr/bin/env bash
-    EDITOR=lvim yazi {{DIR}}
 
 prep-lazyvim:
     #!/usr/bin/env bash
@@ -188,7 +186,7 @@ prep-lazyvim:
         git clone https://github.com/LazyVim/starter ~/.config/lazyvim
     fi
 
-lazyvim PROJ="forest": sync-lazyvim
+@lazyvim PROJ="forest": sync-lazyvim
     #!/usr/bin/env bash
     cd ~/projects/{{PROJ}} && nvim --cmd 'set runtimepath+=~/.config/lazyvim/' --cmd 'lua package.path = package.path .. ";{{home_directory()}}/.config/lazyvim/lua/?.lua"' -u ~/.config/lazyvim/lazyvim-init.lua
 
@@ -200,10 +198,13 @@ prep-nvchad:
         git clone https://github.com/NvChad/starter ~/.config/nvchad
     fi
 
-
-nvchad PROJ="forest": sync-nvchad
+@nvchad PROJ="forest": sync-nvchad
     #!/usr/bin/env bash
     cd ~/projects/{{PROJ}} && nvim --cmd 'set runtimepath+=~/.config/nvchad/' --cmd 'lua package.path = package.path .. ";{{home_directory()}}/.config/nvchad/lua/?.lua"' -u ~/.config/nvchad/nvchad-init.lua
+
+yazi DIR="{{HOME}}/projects":
+    #!/usr/bin/env bash
+    EDITOR=lvim yazi {{DIR}}
 
 # https://github.com/astral-sh/uv
 
