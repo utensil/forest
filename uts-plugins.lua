@@ -627,6 +627,51 @@ local plugins = {
             position = "top-right",
         },
     },
+    {
+        "MeanderingProgrammer/render-markdown.nvim",
+        dependencies = { "nvim-treesitter/nvim-treesitter", "echasnovski/mini.nvim" }, -- if you use the mini.nvim suite
+        -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.icons' }, -- if you use standalone mini plugins
+        -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
+        ---@module 'render-markdown'
+        ---@type render.md.UserConfig
+        opts = {},
+    },
+    -- {
+    --     "3rd/image.nvim",
+    --     config = function()
+    --         require("image").setup {
+    --             -- processor = "magick_cli",
+    --         }
+    --     end,
+    -- },
+    {
+        "vhyrro/luarocks.nvim",
+        priority = 1001, -- this plugin needs to run before anything else
+        opts = {
+            rocks = { "magick" },
+        },
+    },
+    {
+        "3rd/image.nvim",
+        dependencies = { "luarocks.nvim" },
+        config = function()
+            require("image").setup {
+                processor = "magick_cli",
+                integrations = {
+                    markdown = {
+                        filetypes = { "markdown", "vimwiki", "quarto", "forester" },
+                        only_render_image_at_cursor = true,
+                    },
+                },
+            }
+            -- ...
+        end,
+    },
+    -- {
+    --     "ThePrimeagen/harpoon",
+    --     branch = "harpoon2",
+    --     dependencies = { "nvim-lua/plenary.nvim" },
+    -- },
     -- {
     --     "dnlhc/glance.nvim",
     --     config = function()
