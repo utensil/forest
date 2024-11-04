@@ -70,6 +70,7 @@ run-shellcheck:
     shellcheck *.sh
 
 prep-term: prep-kitty
+    which zsh || brew install zsh
     which nvim || brew install neovim
     which lazygit || brew install lazygit
     which yq || brew install yq
@@ -274,9 +275,6 @@ prep-amethyst:
     brew install --cask amethyst
     cp -f .amethyst.yml ~/.amethyst.yml
 
-# act:
-#     ./act.sh
-
 prep-monit:
     #!/usr/bin/env bash
     which btop || brew install btop
@@ -308,3 +306,25 @@ prep-centos:
     # chsh -s `chsh -l|grep zsh|head -1` `whoami`
     just prep-term
     which node || brew install node
+    yes|sudo yum install gtk2-devel
+
+prep-ubuntu:
+    sudo apt update
+    sudo apt install -y build-essential curl file git
+    yes|/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    just add-zrc 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"'
+    sudo apt install -y zsh
+
+prep-act: prep-term
+    #!/usr/bin/env bash
+    which act || brew install act
+
+# act:
+#     ./act.sh
+
+mk-act:
+    sudo docker run -d --name act-dev -v{{justfile_directory()}}:/root/projects/forest ghcr.io/catthehacker/ubuntu:act-latest bash -c 'sleep infinity'
+
+run-act:
+    sudo docker exec -it -w /root/projects/forest act-dev bash
+
