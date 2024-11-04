@@ -89,8 +89,8 @@ prep-term: prep-kitty
     which luarocks || brew install luarocks
     # luarocks --local --lua-version=5.1 install magick
     which starship || brew install starship
-    which z || brew install zoxide
-    which imagemagick ||brew install imagemagick
+    which zoxide || brew install zoxide
+    which magick ||brew install imagemagick
     grep -F 'eval "$(zoxide init zsh)"' ~/.zshrc|| echo 'eval "$(zoxide init zsh)"' >> ~/.zshrc
     # grep ~/.bashrc -F 'eval "$(starship init bash)"' || echo 'eval "$(starship init bash)"' >> ~/.bashrc
     grep -F 'eval "$(starship init zsh)"' ~/.zshrc || echo 'eval "$(starship init zsh)"' >> ~/.zshrc
@@ -105,9 +105,15 @@ prep-alacritty:
     # https://alacritty.org/config-alacritty.html
     cp .alacritty.toml ~/.alacritty.toml
 
+[macos]
 prep-kitty: && sync-kitty
     #!/usr/bin/env bash
     which kitty || brew install --cask kitty
+
+[linux]
+prep-kitty:
+    # no op for now
+    # curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
 
 @sync-kitty:
     # configure kitty
@@ -289,7 +295,7 @@ rec:
     uvx asciinema rec
 
 add-brc LINE:
-    grep -F '{{LINE}}' ~/.bashrc|| echo '{{LINE}}' >> ~/.bashrc
+    grep -F '{{LINE}}' ~/.bashrc || echo '{{LINE}}' >> ~/.bashrc
 
 prep-centos:
     yes|sudo yum groupinstall 'Development Tools'
