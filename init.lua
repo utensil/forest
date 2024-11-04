@@ -70,4 +70,5 @@ keymap("i", "kj", "<ESC>", opts)
 keymap("v", "<", "<gv^", opts)
 keymap("v", ">", ">gv^", opts)
 
-keymap("v", "/", "gc", opts)
+-- doesn't work
+-- keymap("v", "/", "gc", opts)

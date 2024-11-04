@@ -20,7 +20,11 @@ I use
     - it has some [pre-installed plugins](https://www.lazyvim.org/plugins)
     - similarly, see task `prep-lazyvim` and `lazyvim` in my justfile
     - LazyVim specific keys are marked with 💤
-- for both Vim flavors, the following apply:
+- [NvChad](https://nvchad.com/)
+    - it's ~ 900 LOC lightweight configuration
+    - see tasks `prep-chad` and `chad` in my justfile
+    - NvChad specific keys are marked with 📦
+- for all Vim flavors, the following apply:
     - [shared configurations](https://github.com/utensil/forest/blob/main/init.lua)
     - [shared plugins](https://github.com/utensil/forest/blob/main/uts-plugins.lua)
 }
@@ -78,6 +82,8 @@ Other first aid key mappings or commands available in LunarVim:
     - `<leader>+;` to open the dashboard for frequently used actions
     - `<leader>+Lr` to reload the config
     - `<leader>+li` to see LSP informations
+- 📦
+    - `<leader>+ch` to open cheatsheet
 }
 
 \mdblock{Navigation}{
@@ -85,12 +91,13 @@ Other first aid key mappings or commands available in LunarVim:
     - `<leader>+e` to toggle file explorer on the left
         - `x` to cut, `c` to copy, `p` to paste
         - `a` to create a file, `d` to delete, `r` to rename
-        - `H` to toggle hidden files
+        - `H` to toggle hidden files, `I` to toggle git ignored files
         - `Y` to copy relative path, `gy` to copy absolute path
         - `s` to open in system file explorer
         - `g?` for help, `q` to quit, `R` to refresh
         - `hjkl` to move up/down, collapse/expand
         - it will automatically follow the current file
+        - 💤 and 📦 can't be toggled, need `q` to quit
     - 🌕
         - `<leader>+sr` to fuzzy find recent files
         - `<leader>+sf` to fuzzy find files
@@ -198,10 +205,12 @@ Other first aid key mappings or commands available in LunarVim:
 - Indentation & comment
     - use `<<`/`>>` to indent/unindent the current line
         - use a single `<`/`>` to unindent/indent the selected text
-    - 🌕 `<leader>+/` to toggle comment
+    - 🌕
+        - `<leader>+/` to toggle comment
         - works for both current line and selected text
-    - 💤 use `gc` to toggle comment for selected text
-        - that measn `Vgc` to comment/uncomment a line
+    - 💤
+        - `gc` to toggle comment for selected text
+        - `gcc` to comment/uncomment a line
 - Multiple-cursor editing (\link{https://medium.com/@schtoeffel/you-don-t-need-more-than-one-cursor-in-vim-2c44117d51db})
     - use `/xyz` + enter to search for `xyz`, then `cgn` to change it to something else, `Esc`, then
         - use `.` to do the same for next occurrences
@@ -247,6 +256,10 @@ It's very important to stay in the flow and Zen mode as much as possible. Split 
     - `:term` to open a terminal
     - it's normal mode by default, `i` to start typing commands
     - `:sp term://zsh` to open a terminal running `zsh` at the bottom
+    - 📦
+        - use `<leader>+h` to open a new horizontal split terminal
+        - `:q` to hide terminal
+        - `<leader>+pt` to pick hidden terminal
 - Working inside the terminal
     - `exit` will exit the terminal and close the window associated with it
     - `Ctrl`+`c` can be used for interrupting the terminal

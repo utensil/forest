@@ -70,6 +70,7 @@ run-shellcheck:
     shellcheck *.sh
 
 prep-term: prep-kitty
+    which nvim || brew install neovim
     which lazygit || brew install lazygit
     which yq || brew install yq
     which gh || brew install gh
@@ -147,7 +148,7 @@ sync-lazyvim: stylua sync-plugins
     cp -f init.lua ~/.config/lazyvim/nvim-init.lua
     cp -f lazyvim-init.lua ~/.config/lazyvim/lazyvim-init.lua
 
-sync-nvchad: stylua sync-plugins
+sync-chad: stylua sync-plugins
     mkdir -p ~/.config/nvchad/
     cp -f init.lua ~/.config/nvchad/nvim-init.lua
     cp -f lazyvim-init.lua ~/.config/nvchad/nvchad-init.lua
@@ -190,7 +191,7 @@ prep-lazyvim:
     #!/usr/bin/env bash
     cd ~/projects/{{PROJ}} && nvim --cmd 'set runtimepath+=~/.config/lazyvim/' --cmd 'lua package.path = package.path .. ";{{home_directory()}}/.config/lazyvim/lua/?.lua"' -u ~/.config/lazyvim/lazyvim-init.lua
 
-prep-nvchad:
+prep-chad:
     #!/usr/bin/env bash
     if [ -d ~/.config/nvchad ]; then
         (cd ~/.config/nvchad && git pull)
@@ -198,7 +199,7 @@ prep-nvchad:
         git clone https://github.com/NvChad/starter ~/.config/nvchad
     fi
 
-@nvchad PROJ="forest": sync-nvchad
+@chad PROJ="forest": sync-chad
     #!/usr/bin/env bash
     cd ~/projects/{{PROJ}} && nvim --cmd 'set runtimepath+=~/.config/nvchad/' --cmd 'lua package.path = package.path .. ";{{home_directory()}}/.config/nvchad/lua/?.lua"' -u ~/.config/nvchad/nvchad-init.lua
 
@@ -286,3 +287,12 @@ prep-monit:
 
 rec:
     uvx asciinema rec
+
+add-brc LINE:
+    grep -F '{{LINE}}' ~/.bashrc|| echo '{{LINE}}' >> ~/.bashrc
+
+prep-centos:
+    yes|sudo yum groupinstall 'Development Tools'
+    yes|sudo yum install procps-ng curl file git
+    yes|/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    just add-brc 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"'
