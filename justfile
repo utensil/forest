@@ -174,8 +174,7 @@ prep-lvim: prep-term prep-nvim
     # rip ~/.cache/lvim ~/.bun/install ~/.local/share/lunarvim ~/.config/lvim/
     # bun upgrade
     yes|bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/master/utils/installer/install.sh)
-    echo 'export PATH=$HOME/.local/bin:$PATH' >> ~/.bashrc
-    echo '. $HOME/.bashrc' >> ~/.zshrc
+    add-zrc 'export PATH=$HOME/.local/bin:$PATH'
     just sync-lvim
     (cd ~/.config/lvim/ && lvim --headless +'lua require("lvim.utils").generate_settings()' +qa && sort -o lv-settings.lua{,} )
     echo
@@ -306,4 +305,6 @@ prep-centos:
     yes|/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
     just add-zrc 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"'
     yes|sudo yum install util-linux-user
-    chsh -s `chsh -l|grep zsh|head -1` `whoami`
+    # chsh -s `chsh -l|grep zsh|head -1` `whoami`
+    just prep-term
+    which node || brew install node
