@@ -91,9 +91,9 @@ prep-term: prep-kitty
     which starship || brew install starship
     which zoxide || brew install zoxide
     which magick ||brew install imagemagick
-    grep -F 'eval "$(zoxide init zsh)"' ~/.zshrc|| echo 'eval "$(zoxide init zsh)"' >> ~/.zshrc
+    just add-zrc 'eval "$(zoxide init zsh)"'
+    just add-zrc 'eval "$(starship init zsh)"'
     # grep ~/.bashrc -F 'eval "$(starship init bash)"' || echo 'eval "$(starship init bash)"' >> ~/.bashrc
-    grep -F 'eval "$(starship init zsh)"' ~/.zshrc || echo 'eval "$(starship init zsh)"' >> ~/.zshrc
 
 prep-alacritty:
     #!/usr/bin/env bash
@@ -176,7 +176,7 @@ prep-lvim: prep-term prep-nvim
     yes|bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/master/utils/installer/install.sh)
     echo 'export PATH=$HOME/.local/bin:$PATH' >> ~/.bashrc
     echo '. $HOME/.bashrc' >> ~/.zshrc
-    just sync-nvim
+    just sync-lvim
     (cd ~/.config/lvim/ && lvim --headless +'lua require("lvim.utils").generate_settings()' +qa && sort -o lv-settings.lua{,} )
     echo
     echo "Use lvim to start LunarVim"
@@ -294,6 +294,9 @@ prep-monit:
 rec:
     uvx asciinema rec
 
+add-zrc LINE:
+    grep -F '{{LINE}}' ~/.zshrc|| echo '{{LINE}}' >> ~/.zshrc
+
 add-brc LINE:
     grep -F '{{LINE}}' ~/.bashrc || echo '{{LINE}}' >> ~/.bashrc
 
@@ -301,4 +304,6 @@ prep-centos:
     yes|sudo yum groupinstall 'Development Tools'
     yes|sudo yum install procps-ng curl file git
     yes|/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-    just add-brc 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"'
+    just add-zrc 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"'
+    yes|sudo yum install util-linux-user
+    chsh -s `chsh -l|grep zsh|head -1` `whoami`
