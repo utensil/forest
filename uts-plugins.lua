@@ -431,13 +431,13 @@ local plugins = {
         opts = {
             -- debug = true, -- Enable debugging
             -- See Configuration section for rest
-            window = {
-                layout = "float",
-                relative = "cursor",
-                width = 1,
-                height = 0.4,
-                row = 1,
-            },
+            -- window = {
+            --     layout = "float",
+            --     relative = "cursor",
+            --     width = 1,
+            --     height = 0.4,
+            --     row = 1,
+            -- },
         },
         -- {
         --     "hrsh7th/nvim-cmp",
@@ -587,6 +587,20 @@ local plugins = {
             { "<leader>af", "<cmd>CopilotChatFixDiagnostic<cr>", desc = "CopilotChat - Fix Diagnostic" },
             { "<leader>al", "<cmd>CopilotChatReset<cr>", desc = "CopilotChat - Clear buffer and chat history" },
             { "<leader>aa", "<cmd>CopilotChatToggle<cr>", desc = "CopilotChat - Toggle" },
+            {
+                "<leader>aa",
+                mode = "x",
+                function()
+                    require("CopilotChat").ask("Let's discuss the following", {
+                        selection = require("CopilotChat.select").visual,
+                    })
+                    -- local actions = require "CopilotChat.actions"
+                    -- actions.pick(actions.prompt_actions {
+                    --     selection = require("CopilotChat.select").visual,
+                    -- })
+                end,
+                desc = "CopilotChat - for selection",
+            },
             { "<leader>a?", "<cmd>CopilotChatModels<cr>", desc = "CopilotChat - Select Models" },
             {
                 "<leader>ai",
@@ -616,7 +630,7 @@ local plugins = {
         dependencies = {
             "nvim-lua/plenary.nvim",
             "nvim-treesitter/nvim-treesitter",
-            "hrsh7th/nvim-cmp", -- Optional: For using slash commands and variables in the chat buffer
+            -- "hrsh7th/nvim-cmp", -- Optional: For using slash commands and variables in the chat buffer
             "nvim-telescope/telescope.nvim", -- Optional: For using slash commands
             { "stevearc/dressing.nvim", opts = {} }, -- Optional: Improves `vim.ui.select`
             { "echasnovski/mini.diff", version = false },
@@ -626,6 +640,14 @@ local plugins = {
                 display = {
                     diff = {
                         provider = "mini_diff",
+                    },
+                },
+                strategies = {
+                    chat = {
+                        adapter = "copilot",
+                    },
+                    inline = {
+                        adapter = "copilot",
                     },
                 },
             }
@@ -1280,6 +1302,24 @@ local plugins = {
                 timeout_ms = 500,
                 lsp_format = "fallback",
             },
+        },
+    },
+    -- { "neoclide/coc.nvim", branch = "release" },
+    {
+        "barreiroleo/ltex_extra.nvim",
+        branch = "dev",
+        ft = { "markdown", "tex" },
+        opts = {
+            ---@type string[]
+            -- See https://valentjn.github.io/ltex/supported-languages.html#natural-languages
+            load_langs = { "en-US" },
+            ---@type "none" | "fatal" | "error" | "warn" | "info" | "debug" | "trace"
+            log_level = "none",
+            ---@type string File's path to load.
+            -- The setup will normalice it running vim.fs.normalize(path).
+            -- e.g. subfolder in project root or cwd: ".ltex"
+            -- e.g. cross project settings:  vim.fn.expand("~") .. "/.local/share/ltex"
+            path = ".ltex",
         },
     },
     -- {
