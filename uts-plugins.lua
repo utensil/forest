@@ -41,8 +41,6 @@ local plugins = {
         -- build = 'cargo build --release',
         -- If you use nix, you can build from source using latest nightly rust with:
         -- build = 'nix run .#build-plugin',
-        ---@module 'blink.cmp'
-        ---@type blink.cmp.Config
         opts = {
             -- 'default' for mappings similar to built-in completion
             -- 'super-tab' for mappings similar to vscode (tab to accept, arrow keys to navigate)
@@ -732,7 +730,6 @@ local plugins = {
         },
         -- optional, you can also install and use `yq` instead.
         -- build = 'make',
-        ---@type GhActionsConfig
         opts = {
             icons = {
                 workflow_dispatch = "⚡️",
@@ -1149,9 +1146,7 @@ local plugins = {
                         height = "auto",
                     },
                     border = {
-                        ---@type _.NuiBorderStyle
                         style = "double", -- 'double'"|"'none'"|"'rounded'"|"'shadow'"|"'single'"|"'solid'
-                        ---@type _.NuiBorderPadding
                         padding = { 0, 1 },
                     },
                     win_options = {
