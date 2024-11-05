@@ -144,18 +144,17 @@ sync-nvim: stylua
 sync-plugins: stylua
     mkdir -p ~/.config/nvim/lua/plugins/
     cp -f uts-plugins.lua ~/.config/nvim/lua/plugins/spec.lua
-    # cp -f lazyvim-cmp.lua ~/.config/nvim/lua/plugins/lazyvim-cmp.lua
 
 sync-lvim: stylua sync-nvim sync-kitty
     mkdir -p ~/.config/lvim
     cp -f init.lua ~/.config/lvim/nvim-init.lua
-    cp -f uts-plugins.lua ~/.config/lvim/uts-plugins.lua
+    # cp -f uts-plugins.lua ~/.config/lvim/uts-plugins.lua
     cp -f config.lua ~/.config/lvim/config.lua
 
 sync-lazyvim: stylua sync-plugins
     mkdir -p ~/.config/lazyvim
-    cp -f init.lua ~/.config/lazyvim/nvim-init.lua
-    cp -f lazyvim-init.lua ~/.config/lazyvim/lazyvim-init.lua
+    cp -f init.lua ~/.config/lazyvim/lua/config/options.lua
+    # cp -f lazyvim-init.lua ~/.config/lazyvim/lazyvim-init.lua
 
 sync-chad: stylua sync-plugins
     mkdir -p ~/.config/nvchad/
@@ -197,7 +196,7 @@ prep-lazyvim:
 
 @lazyvim PROJ="forest": sync-lazyvim
     #!/usr/bin/env bash
-    cd ~/projects/{{PROJ}} && nvim --cmd 'set runtimepath+=~/.config/lazyvim/' --cmd 'lua package.path = package.path .. ";{{home_directory()}}/.config/lazyvim/lua/?.lua"' -u ~/.config/lazyvim/lazyvim-init.lua
+    cd ~/projects/{{PROJ}} && nvim --cmd 'set runtimepath+=~/.config/lazyvim/' --cmd 'lua package.path = package.path .. ";{{home_directory()}}/.config/lazyvim/lua/?.lua"' -u ~/.config/lazyvim/init.lua
 
 prep-chad:
     #!/usr/bin/env bash
