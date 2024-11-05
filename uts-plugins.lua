@@ -1155,6 +1155,29 @@ local plugins = {
             },
         },
     },
+    {
+        "hedyhli/outline.nvim",
+        lazy = true,
+        cmd = { "Outline", "OutlineOpen" },
+        keys = { -- Example mapping to toggle outline
+            { "<leader>o", "<cmd>Outline<CR>", desc = "Toggle outline" },
+        },
+        opts = {
+            symbol_folding = {
+                autofold_depth = 1,
+                auto_unfold = {
+                    hovered = true,
+                },
+            },
+            auto_jump = true,
+            outline_window = {
+                auto_jump = true,
+            },
+            -- preview_window = {
+            --     auto_preview = true,
+            -- },
+        },
+    },
     -- {
     --     "ThePrimeagen/harpoon",
     --     branch = "harpoon2",

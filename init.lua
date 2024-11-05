@@ -8,6 +8,12 @@ local options = {
     tabstop = 4,
     wrap = true,
     linebreak = true,
+    -- https://essais.co/better-folding-in-neovim/
+    foldenable = false,
+    foldlevel = 0,
+    -- foldmethod = "indent",
+    foldmethod = "expr",
+    foldexpr = "nvim_treesitter#foldexpr()",
 }
 
 for k, v in pairs(options) do
