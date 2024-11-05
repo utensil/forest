@@ -10,13 +10,19 @@ local plugins = {
         --     vim.cmd "colorscheme base16-railscasts"
         -- end,
     },
-    {
-        "echasnovski/mini.nvim",
-        version = false,
-        config = function()
-            require("mini.ai").setup {}
-        end,
-    },
+    -- {
+    --     "folke/tokyonight.nvim",
+    --     lazy = true,
+    --     opts = { style = "moon" },
+    -- },
+    { "echasnovski/mini.ai", version = false },
+    -- {
+    --     "echasnovski/mini.nvim",
+    --     version = false,
+    --     config = function()
+    --         require("mini.ai").setup {}
+    --     end,
+    -- },
     -- { "saghen/blink.compat",
     --     opts = {
     --         impersonate_nvim_cmp = true,
@@ -30,11 +36,11 @@ local plugins = {
         dependencies = "rafamadriz/friendly-snippets",
         -- use a release tag to download pre-built binaries
         version = "v0.*",
+
         -- OR build from source, requires nightly: https://rust-lang.github.io/rustup/concepts/channels.html#working-with-nightly-rust
         -- build = 'cargo build --release',
         -- If you use nix, you can build from source using latest nightly rust with:
         -- build = 'nix run .#build-plugin',
-
         ---@module 'blink.cmp'
         ---@type blink.cmp.Config
         opts = {
@@ -583,7 +589,7 @@ local plugins = {
             "hrsh7th/nvim-cmp", -- Optional: For using slash commands and variables in the chat buffer
             "nvim-telescope/telescope.nvim", -- Optional: For using slash commands
             { "stevearc/dressing.nvim", opts = {} }, -- Optional: Improves `vim.ui.select`
-            "echasnovski/mini.nvim",
+            { "echasnovski/mini.diff", version = false },
         },
         config = function()
             require("codecompanion").setup {
@@ -873,21 +879,71 @@ local plugins = {
             show_count = true,
             excluded_modes = { "i" },
             position = "top-right",
+            winopts = {
+                focusable = false,
+                relative = "editor",
+                style = "minimal",
+                border = "rounded",
+                height = 1,
+                row = 1,
+                col = 0,
+            },
+        },
+        keys = {
+            { "<leader>kk", "<cmd>ShowkeysToggle<cr>", desc = "Show Keys" },
         },
     },
+    -- {
+    --     "4513ECHO/nvim-keycastr",
+    --     init = function()
+    --         local enabled = false
+    --         local config_set = false
+    --         vim.keymap.set("n", "<Leader>kk", function()
+    --             vim.notify(("%s keycastr"):format(enabled and "Disabling" or "Enabling"))
+    --             local keycastr = require "keycastr"
+    --             if not config_set then
+    --                 keycastr.config.set { win_config = { border = "rounded" }, position = "NE" }
+    --                 config_set = true
+    --             end
+    --             keycastr[enabled and "disable" or "enable"]()
+    --             enabled = not enabled
+    --         end)
+    --     end,
+    -- },
     {
         "MeanderingProgrammer/render-markdown.nvim",
-        dependencies = { "nvim-treesitter/nvim-treesitter", "echasnovski/mini.nvim" }, -- if you use the mini.nvim suite
+        -- dependencies = { "nvim-treesitter/nvim-treesitter", "echasnovski/mini.nvim" }, -- if you use the mini.nvim suite
         -- dependencies = { "nvim-treesitter/nvim-treesitter", "echasnovski/mini.icons" }, -- if you use standalone mini plugins
-        -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
+        dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" }, -- if you prefer nvim-web-devicons
         opts = {
             enable = true,
             render_modes = true,
             heading = {
                 position = "inline",
+                -- border = true,
                 -- width = "block",
                 -- min_width = 30,
+                -- above = "▃",
+                -- below = "🬂",
                 width = "full",
+                -- icons = { "◉ ", "○ ", "✸ ", "✿ " },
+                -- backgrounds = { "CursorLine" },
+                -- foregrounds = {
+                --     "@markup.heading.1.markdown",
+                --     "@markup.heading.2.markdown",
+                --     "@markup.heading.3.markdown",
+                --     "@markup.heading.4.markdown",
+                --     "@markup.heading.5.markdown",
+                --     "@markup.heading.6.markdown",
+                -- },
+                -- backgrounds = {
+                --     "@text.title.1.markdown",
+                --     "@text.title.2.markdown",
+                --     "@text.title.3.markdown",
+                --     "@text.title.4.markdown",
+                --     "@text.title.5.markdown",
+                --     "@text.title.6.markdown",
+                -- },
                 -- border_prefix = true,
                 -- border = true,
                 -- border_virtual = true,
