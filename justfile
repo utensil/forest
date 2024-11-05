@@ -1,3 +1,5 @@
+set dotenv-load
+
 export PROJECT_ROOT := justfile_directory()
 export HOMEBREW_NO_AUTO_UPDATE := "1"
 

@@ -644,10 +644,12 @@ local plugins = {
                 },
                 strategies = {
                     chat = {
-                        adapter = "copilot",
+                        -- adapter = "copilot",
+                        adapter = "xai",
                     },
                     inline = {
-                        adapter = "copilot",
+                        -- adapter = "copilot",
+                        adapter = "xai",
                     },
                 },
             }
