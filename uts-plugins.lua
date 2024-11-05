@@ -17,24 +17,156 @@ local plugins = {
             require("mini.ai").setup {}
         end,
     },
-    -- https://gronskiy.com/posts/2023-03-26-copy-via-vim-tmux-ssh/
-    {
-        "ojroques/nvim-osc52",
-        config = function()
-            require("osc52").setup {
-                max_length = 0, -- Maximum length of selection (0 for no limit)
-                silent = false, -- Disable message on successful copy
-                trim = false, -- Trim surrounding whitespaces before copy
-            }
-            local function copy()
-                if (vim.v.event.operator == "y" or vim.v.event.operator == "d") and vim.v.event.regname == "" then
-                    require("osc52").copy_register ""
-                end
-            end
+    -- { "saghen/blink.compat" },
+    -- { "hrsh7th/cmp-emoji" },
+    -- {
+    --     "saghen/blink.cmp",
+    --     lazy = false, -- lazy loading handled internally
+    --     -- optional: provides snippets for the snippet source
+    --     dependencies = "rafamadriz/friendly-snippets",
+    --
+    --     -- use a release tag to download pre-built binaries
+    --     version = "v0.*",
+    --     -- OR build from source, requires nightly: https://rust-lang.github.io/rustup/concepts/channels.html#working-with-nightly-rust
+    --     -- build = 'cargo build --release',
+    --     -- If you use nix, you can build from source using latest nightly rust with:
+    --     -- build = 'nix run .#build-plugin',
+    --
+    --     ---@module 'blink.cmp'
+    --     ---@type blink.cmp.Config
+    --     opts = {
+    --         -- 'default' for mappings similar to built-in completion
+    --         -- 'super-tab' for mappings similar to vscode (tab to accept, arrow keys to navigate)
+    --         -- 'enter' for mappings similar to 'super-tab' but with 'enter' to accept
+    --         -- see the "default configuration" section below for full documentation on how to define
+    --         -- your own keymap.
+    --         keymap = { preset = "super-tab" },
+    --
+    --         highlight = {
+    --             -- sets the fallback highlight groups to nvim-cmp's highlight groups
+    --             -- useful for when your theme doesn't support blink.cmp
+    --             -- will be removed in a future release, assuming themes add support
+    --             use_nvim_cmp_as_default = true,
+    --         },
+    --         -- set to 'mono' for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
+    --         -- adjusts spacing to ensure icons are aligned
+    --         nerd_font_variant = "mono",
+    --
+    --         -- experimental auto-brackets support
+    --         accept = { auto_brackets = { enabled = true } },
+    --
+    --         -- experimental signature help support
+    --         trigger = { signature_help = { enabled = true } },
+    --
+    --         sources = {
+    --             completion = {
+    --                 enabled_providers = { "lsp", "path", "snippets" }, -- , "emoji" }, -- , 'buffer' },
+    --             },
+    --         },
+    --         -- providers = {
+    --         --     -- create provider
+    --         --     emoji = {
+    --         --         name = "emoji", -- IMPORTANT: use the same name as you would for nvim-cmp
+    --         --         module = "blink.compat.source",
+    --         --         opts = {
+    --         --             -- this table is passed directly to the proxied completion source
+    --         --             -- as the `option` field in nvim-cmp's source config
+    --         --         },
+    --         --     },
+    --         -- },
+    --     },
+    -- },
 
-            vim.api.nvim_create_autocmd("TextYankPost", { callback = copy })
+    -- LSP servers and clients communicate what features they support through "capabilities".
+    --  By default, Neovim support a subset of the LSP specification.
+    --  With blink.cmp, Neovim has *more* capabilities which are communicated to the LSP servers.
+    --  Explanation from TJ: https://youtu.be/m8C0Cq9Uv9o?t=1275
+    --
+    -- This can vary by config, but in-general for nvim-lspconfig:
+
+    {
+        "neovim/nvim-lspconfig",
+        dependencies = { "saghen/blink.cmp" },
+        config = function(_, opts)
+            local lspconfig = require "lspconfig"
+            for server, config in pairs(opts.servers or {}) do
+                config.capabilities = require("blink.cmp").get_lsp_capabilities(config.capabilities)
+                lspconfig[server].setup(config)
+            end
         end,
     },
+    -- { "LazyVim/LazyVim", import = "lazyvim.plugins" },
+    -- adapted from https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/plugins/extras/ui/mini-animate.lua
+    -- {
+    --     "echasnovski/mini.animate",
+    --     recommended = true,
+    --     event = "VeryLazy",
+    --     opts = function()
+    --         -- don't use animate when scrolling with the mouse
+    --         local mouse_scrolled = false
+    --         for _, scroll in ipairs { "Up", "Down" } do
+    --             local key = "<ScrollWheel" .. scroll .. ">"
+    --             vim.keymap.set({ "", "i" }, key, function()
+    --                 mouse_scrolled = true
+    --                 return key
+    --             end, { expr = true })
+    --         end
+
+    --         vim.api.nvim_create_autocmd("FileType", {
+    --             pattern = "grug-far",
+    --             callback = function()
+    --                 vim.b.minianimate_disable = true
+    --             end,
+    --         })
+
+    --         -- LazyVim.toggle.map("<leader>ua", {
+    --         --     name = "Mini Animate",
+    --         --     get = function()
+    --         --         return not vim.g.minianimate_disable
+    --         --     end,
+    --         --     set = function(state)
+    --         --         vim.g.minianimate_disable = not state
+    --         --     end,
+    --         -- })
+
+    --         local animate = require "mini.animate"
+    --         return {
+    --             resize = {
+    --                 timing = animate.gen_timing.linear { duration = 50, unit = "total" },
+    --             },
+    --             scroll = {
+    --                 timing = animate.gen_timing.linear { duration = 150, unit = "total" },
+    --                 subscroll = animate.gen_subscroll.equal {
+    --                     predicate = function(total_scroll)
+    --                         if mouse_scrolled then
+    --                             mouse_scrolled = false
+    --                             return false
+    --                         end
+    --                         return total_scroll > 1
+    --                     end,
+    --                 },
+    --             },
+    --         }
+    --     end,
+    -- },
+    -- -- https://gronskiy.com/posts/2023-03-26-copy-via-vim-tmux-ssh/
+    -- {
+    --     "ojroques/nvim-osc52",
+    --     config = function()
+    --         require("osc52").setup {
+    --             max_length = 0, -- Maximum length of selection (0 for no limit)
+    --             silent = false, -- Disable message on successful copy
+    --             trim = false, -- Trim surrounding whitespaces before copy
+    --         }
+    --         local function copy()
+    --             if (vim.v.event.operator == "y" or vim.v.event.operator == "d") and vim.v.event.regname == "" then
+    --                 require("osc52").copy_register ""
+    --             end
+    --         end
+
+    --         vim.api.nvim_create_autocmd("TextYankPost", { callback = copy })
+    --     end,
+    -- },
     -- {
     --     "stevearc/oil.nvim",
     --     config = function()
@@ -158,11 +290,11 @@ local plugins = {
                 sync_install = false,
             }
 
-            local foresterCompletionSource = require "forester.completion"
-            local cmp = require "cmp"
-            cmp.register_source("forester", foresterCompletionSource)
-            cmp.setup.filetype("forester", { sources = { { name = "forester", dup = 0 } } })
-            cmp.setup()
+            -- local foresterCompletionSource = require "forester.completion"
+            -- local cmp = require "cmp"
+            -- cmp.register_source("forester", foresterCompletionSource)
+            -- cmp.setup.filetype("forester", { sources = { { name = "forester", dup = 0 } } })
+            -- cmp.setup()
         end,
         keys = {
             { "<localleader>n", "<cmd>Forester new<cr>", desc = "Forester - New" },
@@ -440,18 +572,18 @@ local plugins = {
             { "ga", mode = "v", "<cmd>CodeCompanionChat Add<cr>", desc = "CodeCompanion - Chat Add" },
         },
     },
-    {
-        "zbirenbaum/copilot-cmp",
-        after = {
-            "copilot.vim",
-            -- "copilot.lua",
-            "nvim-cmp",
-        },
-        config = function()
-            require("copilot_cmp").setup()
-        end,
-    },
-    { "hrsh7th/cmp-emoji" },
+    -- {
+    --     "zbirenbaum/copilot-cmp",
+    --     after = {
+    --         "copilot.vim",
+    --         -- "copilot.lua",
+    --         "nvim-cmp",
+    --     },
+    --     config = function()
+    --         require("copilot_cmp").setup()
+    --     end,
+    -- },
+
     {
         "Julian/lean.nvim",
         event = { "BufReadPre *.lean", "BufNewFile *.lean" },

@@ -24,13 +24,12 @@ end)
 -- require("mason-lspconfig").setup_handlers {
 --     ["rust_analyzer"] = function() end,
 -- }
-
-lvim.plugins = require "uts-plugins"
-
 lvim.colorscheme = "base16-railscasts"
 lvim.builtin.treesitter.rainbow.enable = true
--- lvim.builtin.cmp.active = false
-table.insert(lvim.builtin.cmp.sources, { name = "emoji" })
+lvim.builtin.cmp.active = false
+lvim.plugins = require "uts-plugins"
+
+-- table.insert(lvim.builtin.cmp.sources, { name = "emoji" })
 
 -- lvim.builtin.cmp
 --
