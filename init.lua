@@ -20,6 +20,8 @@ for k, v in pairs(options) do
     vim.opt[k] = v
 end
 
+vim.g.base46_cache = vim.fn.stdpath "data" .. "/base46_cache/"
+
 -- set local leader, won't work for LazyVim, as it has mapped "  "  to find files
 if vim.g.maplocalleader == nil or vim.g.maplocalleader == "\\" then
     vim.g.maplocalleader = "  "
@@ -78,3 +80,8 @@ keymap("v", ">", ">gv^", opts)
 
 -- doesn't work
 -- keymap("v", "/", "gc", opts)
+
+-- vim.schedule(function()
+--     dofile(vim.g.base46_cache .. "defaults")
+--     dofile(vim.g.base46_cache .. "statusline")
+-- end)

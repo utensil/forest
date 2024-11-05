@@ -547,12 +547,42 @@ local plugins = {
         -- end,
         keys = {
             -- Code related commands
-            { "<leader>ae", mode = "x", "<cmd>CopilotChatExplain<cr>", desc = "CopilotChat - Explain code" },
-            { "<leader>at", mode = "x", "<cmd>CopilotChatTests<cr>", desc = "CopilotChat - Generate tests" },
-            { "<leader>ar", mode = "x", "<cmd>CopilotChatReview<cr>", desc = "CopilotChat - Review code" },
-            { "<leader>aR", mode = "x", "<cmd>CopilotChatRefactor<cr>", desc = "CopilotChat - Refactor code" },
-            { "<leader>an", mode = "x", "<cmd>CopilotChatBetterNamings<cr>", desc = "CopilotChat - Better Naming" },
-            { "<leader>ao", mode = "x", "<cmd>CopilotChatOptimize<cr>", desc = "CopilotChat - Optimize code" },
+            {
+                "<leader>ae",
+                mode = "x",
+                "<cmd>CopilotChatExplain<cr>",
+                desc = "CopilotChat - Explain code",
+            },
+            {
+                "<leader>at",
+                mode = "x",
+                "<cmd>CopilotChatTests<cr>",
+                desc = "CopilotChat - Generate tests",
+            },
+            {
+                "<leader>ar",
+                mode = "x",
+                "<cmd>CopilotChatReview<cr>",
+                desc = "CopilotChat - Review code",
+            },
+            {
+                "<leader>aR",
+                mode = "x",
+                "<cmd>CopilotChatRefactor<cr>",
+                desc = "CopilotChat - Refactor code",
+            },
+            {
+                "<leader>an",
+                mode = "x",
+                "<cmd>CopilotChatBetterNamings<cr>",
+                desc = "CopilotChat - Better Naming",
+            },
+            {
+                "<leader>ao",
+                mode = "x",
+                "<cmd>CopilotChatOptimize<cr>",
+                desc = "CopilotChat - Optimize code",
+            },
             { "<leader>ad", "<cmd>CopilotChatDebugInfo<cr>", desc = "CopilotChat - Debug Info" },
             { "<leader>af", "<cmd>CopilotChatFixDiagnostic<cr>", desc = "CopilotChat - Fix Diagnostic" },
             { "<leader>al", "<cmd>CopilotChatReset<cr>", desc = "CopilotChat - Clear buffer and chat history" },
@@ -1241,6 +1271,37 @@ local plugins = {
             -- },
         },
     },
+    {
+        "stevearc/conform.nvim",
+        opts = {
+            formatters_by_ft = { lua = { "stylua" } },
+            format_on_save = {
+                -- These options will be passed to conform.format()
+                timeout_ms = 500,
+                lsp_format = "fallback",
+            },
+        },
+    },
+    -- {
+    --     "nvchad/ui",
+    --     config = function()
+    --         require "nvchad"
+    --     end,
+    -- },
+    -- {
+    --     "nvchad/base46",
+    --     lazy = false,
+    --     build = function()
+    --         require("base46").load_all_highlights()
+    --     end,
+    --     opts = {
+    --         theme = "onedark",
+    --     },
+    --     -- config = function()
+    --     --     local base46 = require "base46"
+    --     -- end,
+    -- },
+    -- "nvchad/volt",
     -- {
     --     "ThePrimeagen/harpoon",
     --     branch = "harpoon2",
