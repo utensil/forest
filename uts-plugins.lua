@@ -67,11 +67,11 @@ local plugins = {
             accept = { auto_brackets = { enabled = true } },
 
             -- experimental signature help support
-            trigger = { signature_help = { enabled = true }, show_in_snippet = false },
+            -- trigger = { signature_help = { enabled = true }, show_in_snippet = false },
 
             sources = {
                 completion = {
-                    enabled_providers = { "path", "snippets", "lsp", "buffer" }, -- , "emoji" }, -- , 'buffer' },
+                    enabled_providers = { "lsp", "path", "snippets", "buffer" }, -- , "emoji" }, -- , 'buffer' },
                 },
             },
             providers = {
@@ -87,6 +87,13 @@ local plugins = {
                     auto_show = false,
                     selection = "manual",
                     draw = "reversed",
+                    -- winblend = vim.o.pumblend,
+                },
+                documentation = {
+                    auto_show = false,
+                },
+                ghost_text = {
+                    enabled = false,
                 },
             },
             -- providers = {
