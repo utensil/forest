@@ -10,11 +10,71 @@ local plugins = {
         --     vim.cmd "colorscheme base16-railscasts"
         -- end,
     },
+    {
+        "echasnovski/mini.nvim",
+        version = false,
+        config = function()
+            require("mini.ai").setup {}
+        end,
+    },
+    -- https://gronskiy.com/posts/2023-03-26-copy-via-vim-tmux-ssh/
+    {
+        "ojroques/nvim-osc52",
+        config = function()
+            require("osc52").setup {
+                max_length = 0, -- Maximum length of selection (0 for no limit)
+                silent = false, -- Disable message on successful copy
+                trim = false, -- Trim surrounding whitespaces before copy
+            }
+            local function copy()
+                if (vim.v.event.operator == "y" or vim.v.event.operator == "d") and vim.v.event.regname == "" then
+                    require("osc52").copy_register ""
+                end
+            end
+
+            vim.api.nvim_create_autocmd("TextYankPost", { callback = copy })
+        end,
+    },
+    -- {
+    --     "stevearc/oil.nvim",
+    --     config = function()
+    --         require("oil").setup {
+    --             float = {
+    --                 border = "rounded",
+    --                 -- max_width = 30,
+    --                 -- max_height = 30,
+    --                 -- override the layout to be on the left top corner
+    --                 -- override = function()
+    --                 --     return {
+    --                 --         relative = "editor",
+    --                 --         width = 30,
+    --                 --         height = 30,
+    --                 --         row = 0,
+    --                 --         col = 0,
+    --                 --     }
+    --                 -- end,
+    --             },
+    --         }
+    --     end,
+    --     -- Optional dependencies
+    --     dependencies = { { "echasnovski/mini.icons", opts = {} } },
+    --     -- dependencies = { "nvim-tree/nvim-web-devicons" }, -- use if prefer nvim-web-devicons
+    --     keys = {
+    --         -- map leader o to oil open_float
+    --         {
+    --             "<leader>o",
+    --             function()
+    --                 require("oil").open_float()
+    --             end,
+    --             desc = "Oil - Open Float",
+    --         },
+    --     },
+    -- },
     -- https://www.lazyvim.org/configuration/recipes#supertab
     -- {
     --     "hrsh7th/nvim-cmp",
     --     ---@param opts cmp.ConfigSchema
-    --     opts = function(_, opts)
+    --     opts = function()
     --         local has_words_before = function()
     --             unpack = unpack or table.unpack
     --             local line, col = unpack(vim.api.nvim_win_get_cursor(0))
@@ -630,8 +690,8 @@ local plugins = {
     },
     {
         "MeanderingProgrammer/render-markdown.nvim",
-        -- dependencies = { "nvim-treesitter/nvim-treesitter", "echasnovski/mini.nvim" }, -- if you use the mini.nvim suite
-        dependencies = { "nvim-treesitter/nvim-treesitter", "echasnovski/mini.icons" }, -- if you use standalone mini plugins
+        dependencies = { "nvim-treesitter/nvim-treesitter", "echasnovski/mini.nvim" }, -- if you use the mini.nvim suite
+        -- dependencies = { "nvim-treesitter/nvim-treesitter", "echasnovski/mini.icons" }, -- if you use standalone mini plugins
         -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
         opts = {
             enable = true,

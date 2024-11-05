@@ -142,7 +142,7 @@ sync-nvim: stylua
 sync-plugins: stylua
     mkdir -p ~/.config/nvim/lua/plugins/
     cp -f uts-plugins.lua ~/.config/nvim/lua/plugins/spec.lua
-    cp -f lazyvim-cmp.lua ~/.config/nvim/lua/plugins/lazyvim-cmp.lua
+    # cp -f lazyvim-cmp.lua ~/.config/nvim/lua/plugins/lazyvim-cmp.lua
 
 sync-lvim: stylua sync-nvim sync-kitty
     mkdir -p ~/.config/lvim
@@ -306,7 +306,7 @@ prep-centos:
     # chsh -s `chsh -l|grep zsh|head -1` `whoami`
     just prep-term
     which node || brew install node
-    yes|sudo yum install gtk2-devel
+    yes|sudo yum install gtk2-devel openssl-devel
 
 prep-ubuntu:
     sudo apt update
@@ -327,4 +327,21 @@ mk-act:
 
 run-act:
     sudo docker exec -it -w /root/projects/forest act-dev bash
+
+mk-rp:
+    sudo docker run -d --privileged --name rp-dev -v{{justfile_directory()}}:/root/projects/forest runpod/pytorch:2.2.1-py3.10-cuda12.1.1-devel-ubuntu22.04 bash -c 'sleep infinity'
+
+run-rp:
+    sudo docker exec -it -w /root/projects/forest rp-dev bash
+
+# copy and paste to run, because we have no just at this point
+bootstrp-ubuntu:
+    #!/usr/bin/env bash
+    apt update
+    apt install -y build-essential curl file git sudo
+    wget -qO - 'https://proget.makedeb.org/debian-feeds/prebuilt-mpr.pub' | gpg --dearmor | sudo tee /usr/share/keyrings/prebuilt-mpr-archive-keyring.gpg 1> /dev/null
+    echo "deb [arch=all,$(dpkg --print-architecture) signed-by=/usr/share/keyrings/prebuilt-mpr-archive-keyring.gpg] https://proget.makedeb.org prebuilt-mpr $(lsb_release -cs)" | sudo tee /etc/apt/sources.list.d/prebuilt-mpr.list
+    sudo apt update
+    sudo apt install -y just
+
 

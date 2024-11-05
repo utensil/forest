@@ -168,6 +168,19 @@ Other first aid key mappings or commands available in LunarVim:
         - `c` (i.e. change) to replace by motion, e.g. `cw` to replace a word
             - `R` to replace by character
     - `u` to undo, surprisingly `Ctrl+r` to redo
+- Text objects
+    - `i` for inside, `a` for around
+        - works after the action, before the motion
+            - e.g. `ciw` to *c*hange *i*nside the *w*ord
+            - note that `cw` only changes the part of the word after the cursor, but `ciw` changes the whole word
+            - `a` will affect the surrounding whitespace and punctuation
+    - with `mini.ai` extending the text objects, we have more general way to discribe the text objects
+        - `b` for brackets
+        - `q` for quotes
+        - `c` for class
+        - `f` for function bodies
+        - `a` for arguments
+        - `?` to specify left and right delimiters interactively
 - Cut/copy/paste
     - `x` to immediately delete the character under the cursor
     - `d`+direction to delete a character in that direction
