@@ -17,7 +17,11 @@ local plugins = {
             require("mini.ai").setup {}
         end,
     },
-    -- { "saghen/blink.compat" },
+    -- { "saghen/blink.compat",
+    --     opts = {
+    --         impersonate_nvim_cmp = true,
+    --     }
+    -- },
     -- { "hrsh7th/cmp-emoji" },
     {
         "saghen/blink.cmp",
@@ -782,24 +786,46 @@ local plugins = {
     --         },
     --     },
     -- },
+    -- {
+    --     "nvim-pack/nvim-spectre",
+    --     event = "BufRead",
+    --     config = function()
+    --         require("spectre").setup {
+    --             use_trouble_qf = true,
+    --             default = {
+    --                 replace = {
+    --                     cmd = "sd",
+    --                 },
+    --             },
+    --         }
+    --     end,
+    --     keys = {
+    --         { "<leader>ss", "<cmd>lua require('spectre').toggle()<cr>", desc = "Toggle Spectre" },
+    --         {
+    --             "<leader>sw",
+    --             "<cmd>lua require('spectre').open_visual({select_word=true})<cr>",
+    --             desc = "Spectre (word)",
+    --         },
+    --     },
+    -- },
     {
-        "nvim-pack/nvim-spectre",
-        event = "BufRead",
+        "MagicDuck/grug-far.nvim",
         config = function()
-            require("spectre").setup {
-                use_trouble_qf = true,
-                default = {
-                    replace = {
-                        cmd = "sd",
-                    },
-                },
+            require("grug-far").setup {
+                -- options, see Configuration section below
+                -- there are no required options atm
+                -- engine = 'ripgrep' is default, but 'astgrep' can be specified
             }
         end,
         keys = {
-            { "<leader>ss", "<cmd>lua require('spectre').toggle()<cr>", desc = "Toggle Spectre" },
+            {
+                "<leader>ss",
+                "<cmd>lua require('grug-far').toggle_instance({instanceName='default'})<cr>",
+                desc = "Toggle Spectre",
+            },
             {
                 "<leader>sw",
-                "<cmd>lua require('spectre').open_visual({select_word=true})<cr>",
+                "<cmd>lua require('grug-far').open({ prefills = { search = vim.fn.expand('<cword>') } })<cr>",
                 desc = "Spectre (word)",
             },
         },
