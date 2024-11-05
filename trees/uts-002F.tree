@@ -300,9 +300,15 @@ It's very important to stay in the flow and Zen mode as much as possible. Split 
 
 \mdblock{Auto-completion}{
 - Auto-complete
-    - `Tab` to cycle through suggestions from `cmp`, reverse cycle with `Shift+Tab`
-    - continue to type to select a suggestion, this is better then hitting `Enter`
-    - `Ctrl+e` to reject suggestions, and `Tab` to take suggestions from Github Copilot
+    - with `blink.cmp`
+        - won't show by default, in favor of Github Copilot
+        - toggle by `Ctrl+q`
+        - up/down to cycle through suggestions, `Enter` to accept
+        - the above is set up so all this key mapping are explicit, intuitive and won't interfere with `<Tab>` for Github Copilot
+    - with `nvim-cmp` (deprecated)
+        - `Tab` to cycle through suggestions from `cmp`, reverse cycle with `Shift+Tab`
+        - continue to type to select a suggestion, this is better then hitting `Enter`
+        - `Ctrl+e` to reject suggestions, and `Tab` to take suggestions from Github Copilot
 - LLM Chats
     - Github Copilot
         - `<leader>+aa` to toggle the chat, `<leader>+al` to clear chat history
