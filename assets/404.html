@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 Not Found</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa;
+            color: #343a40;
+            text-align: center;
+            padding: 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 1.2rem;
+            max-width: 600px;
+        }
+    </style>
+    <script type="text/javascript">
+        const redirectConfig = [
+            // {regex: /^\/example$/, redirect: "/example.html"},
+            {regex: /\/.*\/$/, redirect: (path) => path.replace(/\/$/, '.xml'))},
+            {regex: /\/.*\.html$/, redirect: (path) => path.replace(/\.html$/, '.xml')},
+            {regex: /.*/, redirect: "/index.xml"}
+        ];
+
+        function redirectToPage() {
+            const referrer = document.referrer || window.location.href;
+            let path = referrer && !referrer.includes('404.html') ? new URL(referrer).pathname : '/forest/';
+            console.log('referrer:', path);
+            const pathParts = path.split('/');
+            path = pathParts.length > 2 ? '/' + pathParts.slice(2).join('/') : path;
+
+            let recentRedirects = JSON.parse(localStorage.getItem('recentRedirects') || '[]');
+
+            for (let rule of redirectConfig) {
+                if (rule.regex.test(path)) {
+                    const redirectTo = typeof rule.redirect === 'function' ? rule.redirect(path) : rule.redirect;
+                    if (redirectTo && !recentRedirects.includes(redirectTo)) {
+                        if (recentRedirects.length >= 3) {
+                            recentRedirects.shift();
+                        }
+                        recentRedirects.push(path);
+                        localStorage.setItem('recentRedirects', JSON.stringify(recentRedirects));
+                        window.location.href = '/' + pathParts[1] + redirectTo;
+                        break;
+                    }
+                }
+            }
+        }
+
+        window.onload = redirectToPage;
+    </script>
+</head>
+
+<body>
+    <h1>Oops! Page Not Found</h1>
+    <p>We can't find the page you're looking for. However, we'll try to redirect you to where you might have intended to
+        go.</p>
+</body>
+
+</html>
