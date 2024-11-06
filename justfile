@@ -148,7 +148,7 @@ sync-plugins: stylua
 sync-lvim: stylua sync-nvim sync-kitty
     mkdir -p ~/.config/lvim
     cp -f init.lua ~/.config/lvim/nvim-init.lua
-    # cp -f uts-plugins.lua ~/.config/lvim/uts-plugins.lua
+    cp -f uts-plugins.lua ~/.config/lvim/uts-plugins.lua
     cp -f config.lua ~/.config/lvim/config.lua
 
 sync-lazyvim: stylua sync-plugins
