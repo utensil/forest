@@ -137,6 +137,7 @@ Other first aid key mappings or commands available in LunarVim:
     - `za` to toggle fold
     - `zA` to toggle all folds
     - `zO` or `zC` to open/close folds recursively
+        - e.g. it's useful `zCV` then `<leader>+/` to toggle comment for a fold range
 }
 
 \block{Editing}{
@@ -172,8 +173,14 @@ Other first aid key mappings or commands available in LunarVim:
         - pointer finger on `j`, then muscle memory for `jkl` but `h` is a little difficult to reach
     - `0` to move to the beginning of the line
         - I don't like `^` and `$` because they are difficult to reach
-    - `f` + character to move to the next such character
+    - `f` + character to move to the next such character on the same line
         - `;` and `,` to move to next or previous
+        - `t` works like `f` but moves to one character before, just like `i` for `a`
+        - e.g.
+            - `ct)` is useful for change until the next `)`
+            - `vt)p` is useful for select until the next `)` and paste and replace
+    - `zz` to center the current line, `zt` to top, `zb` to bottom
+        - prefixing with a number works on the corresponding line
 - Edit motions
     - to enter INSERT mode
         - `i` for before the cursor
@@ -200,6 +207,7 @@ Other first aid key mappings or commands available in LunarVim:
 - Cut/copy/paste
     - `x` to immediately delete the character under the cursor
     - `d`+direction to delete a character in that direction
+        - prefer to use number + `dj`/`dk` to delete multiple lines
     - `dw`/`dd` to delete a character/word/line
     - all the above will also cut the deleted text
     - `yw` to copy the current word, `yy` to copy the current line
@@ -219,6 +227,9 @@ Other first aid key mappings or commands available in LunarVim:
     - `*` to search the word under the cursor
     - remember to press `Enter` after typing the search term
     - use `<leader>+h` to clear the search highlight
+    - `gn` to select the next match, `gN` to select the previous match
+        - repeating this would select *to* the following matches
+        - prefix with an [operator](https://neovim.io/doc/user/motion.html#operator) to operate on the selected text
 - Replace
     - \verb~|use `%s/before/after/g` to replace all occurrences, remember`%`, otherwise it will only look for the pattern in the current line~
     - `<leader>+ss` to toggle the search and replace panel
@@ -231,6 +242,7 @@ Other first aid key mappings or commands available in LunarVim:
     - use `V` to enter line visual mode
         - this is the most frequently used visual mode, to select multiple lines
     - lowercase `v` can be used for character visual mode, but I find it less useful
+    - `Ctrl+v` to enter block visual mode, i.e. select by column
 - Indentation & comment
     - use `<<`/`>>` to indent/unindent the current line
         - use a single `<`/`>` to unindent/indent the selected text
@@ -370,22 +382,19 @@ It's very important to stay in the flow and Zen mode as much as possible. Split 
 
 \mdblock{Further reading}{
 
-See also [[uts-002G]] for related TUI key mappings.
+See the following articles for further inspirations:
 
-See [Vim cheat sheet](https://devhints.io/vim) for key mappings that apply to vanilla Vim.
-
-See [VSCode Vim ROADMAP](https://github.com/VSCodeVim/Vim/blob/HEAD/ROADMAP.md) for key mappings that apply to (limited) VSCode Vim mode, but now I have switch to use the real NeoVim.
+- [[uts-002G]] for related TUI key mappings.
+- [Vim cheat sheet](https://devhints.io/vim) for key mappings that apply to vanilla Vim.
+- [VSCode Vim ROADMAP](https://github.com/VSCodeVim/Vim/blob/HEAD/ROADMAP.md) for key mappings that apply to (limited) VSCode Vim mode, but now I have switch to use the real NeoVim.
+- [Keybinds overview](https://www.lunarvim.org/docs/beginners-guide/keybinds-overview) for LunarVim key mappings.
+- [zed-101-setup](https://github.com/jellydn/zed-101-setup) for configurations and key maps inspirations.
+- [My Favorite Neovim Plugins](https://haseebmajid.dev/posts/2024-04-06-my-favourite-neovim-plugins/)
+- [You don’t need more than one cursor in vim](https://medium.com/@schtoeffel/you-don-t-need-more-than-one-cursor-in-vim-2c44117d51db)
 
 When I use VSCode, I would also use [vscode-neovim](https://github.com/vscode-neovim/vscode-neovim) which would connect to my real NeoVim instance that has some basic configurations [here](https://github.com/utensil/forest/blob/main/init.lua).
 
-See [Keybinds overview](https://www.lunarvim.org/docs/beginners-guide/keybinds-overview) for LunarVim key mappings.
-
-See [zed-101-setup](https://github.com/jellydn/zed-101-setup) for configurations and key maps inspirations.
-
-See the following articles for further inspirations:
-
-- [My Favorite Neovim Plugins](https://haseebmajid.dev/posts/2024-04-06-my-favourite-neovim-plugins/)
-- [You don’t need more than one cursor in vim](https://medium.com/@schtoeffel/you-don-t-need-more-than-one-cursor-in-vim-2c44117d51db)
+[Zed's Vim mode](https://zed.dev/docs/vim) has many widely used enhancements built in, see also [rationale](https://zed.dev/blog/zed-decoded-vim) here.
 }
 
 }
