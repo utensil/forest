@@ -345,4 +345,14 @@ bootstrp-ubuntu:
     sudo apt update
     sudo apt install -y just
 
+prep-chisel:
+    #!/usr/bin/env bash
+    which chisel || (curl https://i.jpillora.com/chisel! | bash)
 
+# authenticated by environment variable AUTH user:pass
+
+cs-remote PORT="8066":
+    chisel server --port {{PORT}}
+
+cs-local MID="localhost:8066" LOCAL="1315" TARGET="1314":
+    chisel client http://{{MID}} {{LOCAL}}:{{TARGET}}
