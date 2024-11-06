@@ -167,9 +167,9 @@ prep-nvim: prep-term
     # rip ~/.config/nvim
     # git clone https://github.com/ntk148v/neovim-config.git "${XDG_CONFIG_HOME:-$HOME/.config}"/nvim
 
-@nvim PROJ="forest": sync-nvim
+@nvim PROJ="forest" *PARAMS="": sync-nvim
     #!/usr/bin/env bash
-    cd ~/projects/{{PROJ}} && nvim
+    cd ~/projects/{{PROJ}} && nvim {{PARAMS}}
 
 prep-lvim: prep-term prep-nvim
     #!/usr/bin/env bash
@@ -182,9 +182,9 @@ prep-lvim: prep-term prep-nvim
     echo
     echo "Use lvim to start LunarVim"
 
-@lvim PROJ="forest": sync-lvim
+@lvim PROJ="forest" *PARAMS="": sync-lvim
     #!/usr/bin/env bash
-    cd ~/projects/{{PROJ}} && lvim
+    cd ~/projects/{{PROJ}} && lvim {{PARAMS}}
 
 prep-lazyvim:
     #!/usr/bin/env bash
@@ -349,10 +349,20 @@ prep-chisel:
     #!/usr/bin/env bash
     which chisel || (curl https://i.jpillora.com/chisel! | bash)
 
+# default ports are ordered so it's clear that local nvim -> local 1312 -> mid 1313 -> remote nvim 1314
 # authenticated by environment variable AUTH user:pass
 
-cs-remote PORT="8066":
-    chisel server --port {{PORT}}
+cs-remote PORT="1313":
+    chisel server -v --port {{PORT}}
 
-cs-local MID="localhost:8066" LOCAL="1315" TARGET="1314":
-    chisel client http://{{MID}} {{LOCAL}}:{{TARGET}}
+cs_mid := env("CS_MID", "localhost:1313")
+
+cs-local MID=cs_mid LOCAL="1312" TARGET="1314":
+    chisel client -v http://{{MID}} {{LOCAL}}:{{TARGET}}
+
+nv-remote PROJ="forest" PORT="1314":
+    just nvim {{PROJ}} --embed --listen localhost:{{PORT}}
+
+nv-local PROJ="forest" PORT="1312":
+    just nvim {{PROJ}} --server localhost:{{PORT}} --remote-ui
+
