@@ -24,7 +24,7 @@ I use
     - it's ~ 900 LOC lightweight configuration
     - see tasks `prep-chad` and `chad` in my justfile
     - NvChad specific keys are marked with 📦
-- for all Vim flavors, the following apply:
+- For all Vim flavors, the following apply:
     - [shared configurations](https://github.com/utensil/forest/blob/main/init.lua)
     - [shared plugins](https://github.com/utensil/forest/blob/main/uts-plugins.lua)
 }
@@ -46,7 +46,7 @@ The default leader key is a single space, represented by `<leader>` below.
 
 🌕 The default local leader key is not set. I've configure it to be two consecutive spaces. `,` is also a common choice.
 
-💤 The default local leader key is set to \verb`|\\`. I didn't change it.
+💤 \verb>>>|The default local leader key is set to `\\`. I didn't change it.>>>
 
 With plugin `whichkey` installed, `<leader>` and wait to see some useful mappings.
 
@@ -70,12 +70,14 @@ In most plugin UIs,
 
 Recording is a powerful feature of Vim, but one can accidentally trigger it with an out-of-order `q`, so one simply need to remember to press `q` again to quit recording if seeing something like `recording @a` in the status bar.
 
-Other first aid key mappings or commands available in LunarVim:
+Other first aid key mappings or commands available:
 
 - `:map` to see all key mappings
 - `:help key-notation`
     - in case it's not immediately clear that
-        - `C` means `Ctrl`, `S` means `Shift`, `M` means `Alt`/`Option`
+        - `C` means `Ctrl`, `S` means `Shift`
+        - `M` means `Alt`/`Option`
+        - `D` means `Cmd` on Mac
 - use `:Lazy` to check on plugins
 - use `:Mason` to check on LSPs
 - 🌕
@@ -85,7 +87,9 @@ Other first aid key mappings or commands available in LunarVim:
 - 📦
     - `<leader>+ch` to open cheatsheet
 - Theming
-    - `<leader>+sp` to search/select and preview themes
+    - dropping into an unfamiliar theme is worth a first aid
+    - `:colorscheme ` and tab to select a theme
+    - 🌕 `<leader>+sp` to search/select and preview themes
     - my favorite is `railscasts`
     - 💤 defaults to `tokyonight`
     - 📦 defaults to `onedark`
@@ -134,6 +138,8 @@ Other first aid key mappings or commands available in LunarVim:
     - `<leader>+o` to toggle the outline on the right
     - I have configure it to autojump and autoexpand
 - Folding
+    - the following needs to be run inside the fold
+        - otherwist it will work on the upper level
     - `za` to toggle fold
     - `zA` to toggle all folds
     - `zO` or `zC` to open/close folds recursively
@@ -173,6 +179,7 @@ Other first aid key mappings or commands available in LunarVim:
         - pointer finger on `j`, then muscle memory for `jkl` but `h` is a little difficult to reach
     - `0` to move to the beginning of the line
         - I don't like `^` and `$` because they are difficult to reach
+            - but in the case of `d$`, it's worth it to reach for `$`
     - `f` + character to move to the next such character on the same line
         - `;` and `,` to move to next or previous
         - `t` works like `f` but moves to one character before, just like `i` for `a`
@@ -181,6 +188,7 @@ Other first aid key mappings or commands available in LunarVim:
             - \verb>>>|`vt)p` is useful for select until the next `)` and paste and replace>>>
     - `zz` to center the current line, `zt` to top, `zb` to bottom
         - prefixing with a number works on the corresponding line
+    - \verb>>>|`}` to the next paragraph>>>
 - Edit motions
     - to enter INSERT mode
         - `i` for before the cursor
@@ -226,12 +234,14 @@ Other first aid key mappings or commands available in LunarVim:
     - `?` to search backward
     - `*` to search the word under the cursor
     - remember to press `Enter` after typing the search term
+    - remember to treat the search as a regex
+        - \verb>>>|i.e. to escape `\`, `()`, `[]`, `{}`, `^`, `$`, `*`, `+`, `?`, `|`, `.` etc.>>>
     - use `<leader>+h` to clear the search highlight
     - `gn` to select the next match, `gN` to select the previous match
         - repeating this would select *to* the following matches
         - prefix with an [operator](https://neovim.io/doc/user/motion.html#operator) to operate on the selected text
 - Replace
-    - \verb~|use `%s/before/after/g` to replace all occurrences, remember`%`, otherwise it will only look for the pattern in the current line~
+    - \verb>>>|use `%s/before/after/g` to replace all occurrences, remember`%`, otherwise it will only look for the pattern in the current line>>>
     - `<leader>+ss` to toggle the search and replace panel
         - `<localleader>+r` to replace all occurrences
         - manually: use `gf` to go to each file, do edits, then `Ctrl+o` to go back and continue for the next file
@@ -289,10 +299,11 @@ Other first aid key mappings or commands available in LunarVim:
 It's very important to stay in the flow and Zen mode as much as possible. Split windows for terminals breaks the flow, so I prefer to use float terminals.
 
 - Float terminals
-    - 🌕 `Ctrl`+backslash to toggle a float terminal
+    - 🌕 \verb>>>|`Ctrl+\`to toggle a float terminal>>>
     - 🌕 number + `Ctrl`+backslash to toggle the n-th float terminal
     - 💤 same, but with `Ctrl+/`
-    - it's insert mode by default
+    - it's insert mode on first launch
+        - but usually enter normal mode when lost focus
 - Split terminals
     - `:term` to open a terminal
     - it's normal mode by default, `i` to start typing commands
@@ -329,8 +340,8 @@ It's very important to stay in the flow and Zen mode as much as possible. Split 
 \mdblock{Auto-completion}{
 - Auto-complete
     - with `blink.cmp`
-        - won't show by default, in favor of Github Copilot
-        - toggle by `Ctrl+q`
+        - I've configure it to not triggered by default, in favor of Github Copilot
+            - toggle by `Ctrl+q`
         - up/down to cycle through suggestions, `Enter` to accept
         - the above is set up so all this key mapping are explicit, intuitive and won't interfere with `<Tab>` for Github Copilot
     - with `nvim-cmp` (deprecated)
@@ -349,7 +360,7 @@ It's very important to stay in the flow and Zen mode as much as possible. Split 
     - Code Companion
         - `<localleader>+a` to toggle the inline chat (works also for selection)
         - `<localleader>+z` to toggle the chat sidebar
-    - Avante (deprecated)
+    - Avante (deprecated for now)
         - `<leader>+aa` to open the chat, use `a` to accept individual suggestions, or `A` to accept all
         - select code and `<leader>+ae` to modify code
         - it's interesting but I've disabled it for now, in favor of Github Copilot
