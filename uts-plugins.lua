@@ -456,6 +456,24 @@ local plugins = {
     },
     -- {
     --     "zbirenbaum/copilot.lua",
+    --     cmd = "Copilot",
+    --     event = "InsertEnter",
+    --     config = function()
+    --         require("copilot").setup {
+    --             suggestion = {
+    --                 auto_trigger = true,
+    --                 keymap = {
+    --                     -- but this has made the normal tab not working
+    --                     accept = "<Tab>",
+    --                     accept_word = false,
+    --                     accept_line = false,
+    --                     next = "<M-]>",
+    --                     prev = "<M-[>",
+    --                     dismiss = "<S-Tab>",
+    --                 },
+    --             },
+    --         }
+    --     end,
     -- },
     {
         "CopilotC-Nvim/CopilotChat.nvim",
