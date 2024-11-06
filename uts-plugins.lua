@@ -894,20 +894,20 @@ local plugins = {
             },
         },
     },
-    {
-        "neovim/nvim-lspconfig",
-        dependencies = {
-            {
-                "SmiteshP/nvim-navbuddy",
-                dependencies = {
-                    "SmiteshP/nvim-navic",
-                    "MunifTanjim/nui.nvim",
-                },
-                opts = { lsp = { auto_attach = true } },
-            },
-        },
-        -- your lsp config or other stuff
-    },
+    -- {
+    --     "neovim/nvim-lspconfig",
+    --     dependencies = {
+    --         {
+    --             "SmiteshP/nvim-navbuddy",
+    --             dependencies = {
+    --                 "SmiteshP/nvim-navic",
+    --                 "MunifTanjim/nui.nvim",
+    --             },
+    --             opts = { lsp = { auto_attach = true } },
+    --         },
+    --     },
+    --     -- your lsp config or other stuff
+    -- },
     -- play also https://www.vim-hero.com/lessons/basic-movement
     -- { "ThePrimeagen/vim-be-good" }
     {
@@ -1302,23 +1302,23 @@ local plugins = {
         },
     },
     -- { "neoclide/coc.nvim", branch = "release" },
-    {
-        "barreiroleo/ltex_extra.nvim",
-        branch = "dev",
-        ft = { "markdown", "tex" },
-        opts = {
-            ---@type string[]
-            -- See https://valentjn.github.io/ltex/supported-languages.html#natural-languages
-            load_langs = { "en-US" },
-            ---@type "none" | "fatal" | "error" | "warn" | "info" | "debug" | "trace"
-            log_level = "none",
-            ---@type string File's path to load.
-            -- The setup will normalice it running vim.fs.normalize(path).
-            -- e.g. subfolder in project root or cwd: ".ltex"
-            -- e.g. cross project settings:  vim.fn.expand("~") .. "/.local/share/ltex"
-            path = ".ltex",
-        },
-    },
+    -- {
+    --     "barreiroleo/ltex_extra.nvim",
+    --     branch = "dev",
+    --     ft = { "markdown", "tex" },
+    --     opts = {
+    --         ---@type string[]
+    --         -- See https://valentjn.github.io/ltex/supported-languages.html#natural-languages
+    --         load_langs = { "en-US" },
+    --         ---@type "none" | "fatal" | "error" | "warn" | "info" | "debug" | "trace"
+    --         log_level = "none",
+    --         ---@type string File's path to load.
+    --         -- The setup will normalice it running vim.fs.normalize(path).
+    --         -- e.g. subfolder in project root or cwd: ".ltex"
+    --         -- e.g. cross project settings:  vim.fn.expand("~") .. "/.local/share/ltex"
+    --         path = ".ltex",
+    --     },
+    -- },
     -- {
     --     "nvchad/ui",
     --     config = function()
