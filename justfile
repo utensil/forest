@@ -110,7 +110,6 @@ prep-alacritty:
 
 [macos]
 prep-kitty: && sync-kitty
-    #!/usr/bin/env bash
     which kitty || brew install --cask kitty
 
 [linux]
@@ -176,7 +175,7 @@ prep-lvim: prep-term prep-nvim
     # rip ~/.cache/lvim ~/.bun/install ~/.local/share/lunarvim ~/.config/lvim/
     # bun upgrade
     yes|bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/master/utils/installer/install.sh)
-    add-zrc 'export PATH=$HOME/.local/bin:$PATH'
+    just add-zrc 'export PATH=$HOME/.local/bin:$PATH'
     just sync-lvim
     (cd ~/.config/lvim/ && lvim --headless +'lua require("lvim.utils").generate_settings()' +qa && sort -o lv-settings.lua{,} )
     echo
@@ -304,10 +303,14 @@ prep-centos:
     yes|/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
     just add-zrc 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"'
     yes|sudo yum install util-linux-user
-    # chsh -s `chsh -l|grep zsh|head -1` `whoami`
+    just chsh
     just prep-term
     which node || brew install node
     yes|sudo yum install gtk2-devel openssl-devel
+
+chsh:
+    # chsh -s `chsh -l|grep zsh|head -1` `whoami`
+    # chsh -s `which zsh` `whoami`
 
 prep-ubuntu:
     sudo apt update
@@ -324,10 +327,28 @@ prep-act: prep-term
 #     ./act.sh
 
 mk-act:
-    sudo docker run -d --name act-dev -v{{justfile_directory()}}:/root/projects/forest ghcr.io/catthehacker/ubuntu:act-latest bash -c 'sleep infinity'
+    sudo docker run -d --name act-dev -v{{justfile_directory()}}:/root/projects/forest -p 1214:1214 ghcr.io/catthehacker/ubuntu:act-latest bash -c 'sleep infinity'
 
 run-act:
     sudo docker exec -it -w /root/projects/forest act-dev bash
+
+# manually run bootstrp-ubuntu first, or we won't even have just
+prep-act:
+    # for brew and zsh
+    just prep-ubuntu
+    just prep-act-in-zsh
+
+prep-act-in-zsh:
+    #!/usr/bin/env zsh
+    just prep-term
+    just prep-rust
+    just prep-lvim-in-zsh
+    echo 'To start lvim in server mode, run: just lv-remote'
+    echo 'Then from outside the container, run: just lv-local'
+
+prep-lvim-in-zsh:
+    #!/usr/bin/env zsh
+    just prep-lvim
 
 mk-rp:
     sudo docker run -d --privileged --name rp-dev -v{{justfile_directory()}}:/root/projects/forest runpod/pytorch:2.2.1-py3.10-cuda12.1.1-devel-ubuntu22.04 bash -c 'sleep infinity'
@@ -349,20 +370,30 @@ prep-chisel:
     #!/usr/bin/env bash
     which chisel || (curl https://i.jpillora.com/chisel! | bash)
 
-# default ports are ordered so it's clear that local nvim -> local 1312 -> mid 1313 -> remote nvim 1314
+# default ports are ordered so it's clear that local nvim -> local 1212 -> mid 1213 -> remote nvim 1214
 # authenticated by environment variable AUTH user:pass
 
-cs-remote PORT="1313":
+cs-remote PORT="1213":
     chisel server -v --port {{PORT}}
 
-cs_mid := env("CS_MID", "localhost:1313")
+cs_mid := env("CS_MID", "localhost:1213")
 
-cs-local MID=cs_mid LOCAL="1312" TARGET="1314":
+cs-local MID=cs_mid LOCAL="1212" TARGET="1214":
     chisel client -v http://{{MID}} {{LOCAL}}:{{TARGET}}
 
-nv-remote PROJ="forest" PORT="1314":
+nv-remote PROJ="forest" PORT="1214":
     just nvim {{PROJ}} --embed --listen localhost:{{PORT}}
 
-nv-local PROJ="forest" PORT="1312":
+nv-local PROJ="forest" PORT="1212":
     just nvim {{PROJ}} --server localhost:{{PORT}} --remote-ui
 
+# an alternative is use local on CentOS and remote on Ubuntu in docker, no chisel needed, just docekr port mapping
+lv-remote PROJ="forest" PORT="1214":
+    just lvim {{PROJ}} --embed --listen localhost:{{PORT}}
+
+lv-local PROJ="forest" PORT="1214":
+    just lvim {{PROJ}} --server localhost:{{PORT}} --remote-ui
+
+prep-rust:
+    which cargo || (curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --default-toolchain nightly)
+    which cargo || (just add-zrc '. $HOME/.cargo/env' && echo 'Run: . $HOME/.cargo/env')
