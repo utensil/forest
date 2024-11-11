@@ -1353,7 +1353,10 @@ local plugins = {
     {
         "stevearc/conform.nvim",
         opts = {
-            formatters_by_ft = { lua = { "stylua" } },
+            formatters_by_ft = {
+                lua = { "stylua" },
+                bib = { "trim_whitespace" },
+            },
             format_on_save = {
                 -- These options will be passed to conform.format()
                 timeout_ms = 500,
