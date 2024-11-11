@@ -341,6 +341,7 @@ prep-act:
 
 prep-act-in-zsh:
     #!/usr/bin/env zsh
+    source ~/.zshrc
     just prep-term
     just prep-rust
     just prep-lvim-in-zsh
@@ -390,9 +391,11 @@ nv-local PROJ="forest" PORT="1212":
 
 # an alternative is use local on CentOS and remote on Ubuntu in docker, no chisel needed, just docekr port mapping
 lv-remote PROJ="forest" PORT="1214":
-    just lvim {{PROJ}} --embed --listen localhost:{{PORT}}
+    #!/usr/bin/env zsh
+    just lvim {{PROJ}} --embed --listen 0.0.0.0:{{PORT}}
 
 lv-local PROJ="forest" PORT="1214":
+    #!/usr/bin/env zsh
     just lvim {{PROJ}} --server localhost:{{PORT}} --remote-ui
 
 prep-rust:
