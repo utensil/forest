@@ -317,20 +317,21 @@ prep-ubuntu:
     sudo apt install -y build-essential curl file git
     yes|/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
     just add-zrc 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"'
+    just add-brc 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"'
     sudo apt install -y zsh
 
-prep-act: prep-term
-    #!/usr/bin/env bash
-    which act || brew install act
+# prep-act: prep-term
+#     #!/usr/bin/env bash
+#     which act || brew install act
 
 # act:
 #     ./act.sh
 
 mk-act:
-    sudo docker run -d --name act-dev -v{{justfile_directory()}}:/root/projects/forest -p 1214:1214 ghcr.io/catthehacker/ubuntu:act-latest bash -c 'sleep infinity'
+    sudo docker run -d --name act-dev -v{{justfile_directory()}}:/root/projects/forest -p 127.0.0.1:1214:1214 ghcr.io/catthehacker/ubuntu:act-latest bash -c 'sleep infinity'
 
-run-act:
-    sudo docker exec -it -w /root/projects/forest act-dev bash
+run-act CMD="bash" OPTS="-it":
+    sudo docker exec {{OPTS}} -w /root/projects/forest act-dev {{CMD}}
 
 # manually run bootstrp-ubuntu first, or we won't even have just
 prep-act:
