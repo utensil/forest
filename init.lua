@@ -85,3 +85,24 @@ keymap("v", ">", ">gv^", opts)
 --     dofile(vim.g.base46_cache .. "defaults")
 --     dofile(vim.g.base46_cache .. "statusline")
 -- end)
+
+-- https://stackoverflow.com/a/70760302/200764
+vim.diagnostic.config {
+    virtual_text = false,
+}
+
+-- Show line diagnostics automatically in hover window
+-- vim.o.updatetime = 250
+-- vim.cmd [[autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})]]
+
+-- https://samuellawrentz.com/hacks/neovim/disable-annoying-eslint-lsp-server-and-hide-virtual-text/
+-- Disable ESLint LSP server and hide virtual text in Neovim
+-- Add this to your init.lua or init.vim file
+local isLspDiagnosticsVisible = true
+vim.keymap.set("n", "<leader>lx", function()
+    isLspDiagnosticsVisible = not isLspDiagnosticsVisible
+    vim.diagnostic.config {
+        virtual_text = isLspDiagnosticsVisible,
+        underline = isLspDiagnosticsVisible,
+    }
+end)

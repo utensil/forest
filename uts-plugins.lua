@@ -437,9 +437,9 @@ local plugins = {
                                     enable = false,
                                 },
                             },
-                            procMacro = {
-                                enable = false,
-                            },
+                            -- procMacro = {
+                            --     enable = false,
+                            -- },
                             cachePriming = {
                                 enable = true,
                                 numThreads = 4,
