@@ -403,21 +403,49 @@ lv-local PROJ="forest" PORT="1214":
 prep-rust:
     #!/usr/bin/env bash
     set -e
-    which cargo || (curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --default-toolchain nightly)
-    which cargo || (just add-zrc '. $HOME/.cargo/env' && echo 'Run: . $HOME/.cargo/env')
+    which cargo || (
+        (curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --default-toolchain nightly) &&
+        (just add-zrc '. $HOME/.cargo/env' && echo 'Run: . $HOME/.cargo/env')
+    )
     . $HOME/.cargo/env
     which cargo-binstall || cargo install cargo-binstall
 
-prep-sync-dir-tools: prep-rust
+@prep-sync-dir-tools: prep-rust
     which jw || (yes|cargo binstall jw)
     which rusync || (yes|cargo binstall rusync)
+    which rip || (yes|cargo binstall rm-improved)
 
-sync-dirs SRC DST: prep-sync-dir-tools
+sync-dirs SRC DST:
+    @just rusync-dirs {{SRC}} {{DST}}
+    @just check-dirs {{SRC}} {{DST}}
+
+rusync-dirs SRC DST: prep-sync-dir-tools
     #!/usr/bin/env bash
     echo "🚀 Initiating sync..."
     rusync {{SRC}} {{DST}}
+    # using this would trigger mismatch
+    # rusync --err-list {{DST}}/.rusync.err.log {{SRC}} {{DST}}
+
+check-dirs SRC DST:
+    #!/usr/bin/env bash
     echo "🔍 Checking hash..."
-    (cd {{SRC}} && jw -c . > hash.jw)
-    (cd {{DST}} && jw -c . > hash.jw)
-    jw -D {{SRC}}/hash.jw {{DST}}/hash.jw && echo "✅ Sync successful" || echo "❌ Sync with hash mismatch"
+    date
+    (cd {{SRC}} && jw -c . > .hash.jw) && echo "1. source hashed: `date`"
+    (cd {{DST}} && jw -c . > .hash.jw) && echo "2. destination hashed: `date`"
+    MISMATCH=`jw -D {{SRC}}/.hash.jw {{DST}}/.hash.jw`
+    if [ -z "$MISMATCH" ]; then
+        echo "✅ Perfect match"
+    else
+        echo "❌ Mismatch detected"
+        if [ ${#MISMATCH} -gt 1000 ]; then
+            echo "$MISMATCH"|less
+        else
+            echo "$MISMATCH"
+        fi
+    fi
+    # keep them both, avoid recalculation of hash
+    # only remove hash.jw file from the source
+    # rip {{SRC}}/.hash.jw
+    # rip {{DST}}/.hash.jw
+    echo "Open {{DST}}/.hash.jw to inspect"
 
