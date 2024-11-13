@@ -96,7 +96,9 @@ prep-term: prep-kitty
     which magick ||brew install imagemagick
     just add-zrc 'eval "$(zoxide init zsh)"'
     just add-zrc 'eval "$(starship init zsh)"'
-    # grep ~/.bashrc -F 'eval "$(starship init bash)"' || echo 'eval "$(starship init bash)"' >> ~/.bashrc
+    which progress || brew install progress
+    which 7z || brew install sevenzip
+    which ffmpeg || brew install ffmpeg
 
 prep-alacritty:
     #!/usr/bin/env bash
@@ -399,5 +401,23 @@ lv-local PROJ="forest" PORT="1214":
     just lvim {{PROJ}} --server localhost:{{PORT}} --remote-ui
 
 prep-rust:
+    #!/usr/bin/env bash
+    set -e
     which cargo || (curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --default-toolchain nightly)
     which cargo || (just add-zrc '. $HOME/.cargo/env' && echo 'Run: . $HOME/.cargo/env')
+    . $HOME/.cargo/env
+    which cargo-binstall || cargo install cargo-binstall
+
+prep-sync-dir-tools: prep-rust
+    which jw || (yes|cargo binstall jw)
+    which rusync || (yes|cargo binstall rusync)
+
+sync-dirs SRC DST: prep-sync-dir-tools
+    #!/usr/bin/env bash
+    echo "🚀 Initiating sync..."
+    rusync {{SRC}} {{DST}}
+    echo "🔍 Checking hash..."
+    (cd {{SRC}} && jw -c . > hash.jw)
+    (cd {{DST}} && jw -c . > hash.jw)
+    jw -D {{SRC}}/hash.jw {{DST}}/hash.jw && echo "✅ Sync successful" || echo "❌ Sync with hash mismatch"
+
