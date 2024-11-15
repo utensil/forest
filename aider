@@ -3,4 +3,4 @@
 # This is need for Mac as the default clang is too old
 export CC=/opt/homebrew/opt/llvm/bin/clang CXX=/opt/homebrew/opt/llvm/bin/clang++ CPATH=/opt/homebrew/opt/llvm/include LIBRARY_PATH=/opt/homebrew/opt/llvm/lib
 # This runs aider in a virtual environment with the specified model, configs etc.
-uvx --python 3.11 --from aider-chat[help,playwright] aider --no-show-model-warnings --model github/gpt-4o --max-chat-history-tokens 8000 --dark-mode --subtree-only "$@"
+uvx --python 3.11 --from 'aider-chat[help,playwright]' aider --no-show-model-warnings --model 'openai/xai:grok-beta' --max-chat-history-tokens 8000 --dark-mode --subtree-only "$@"

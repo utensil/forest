@@ -455,3 +455,8 @@ prep-llm:
     # docker pull dockerproxy.net/paulgauthier/aider-full
     cp -f aider /usr/local/bin
 
+llm-proxy *PARAMS:
+    #!/usr/bin/env bash
+    # uvx --python 3.11 --from 'litellm[proxy]' litellm {{PARAMS}}
+    aichat --serve 0.0.0.0:4000
+
