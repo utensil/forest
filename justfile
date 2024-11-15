@@ -452,6 +452,6 @@ check-dirs SRC DST:
 prep-llm:
     which aichat || brew install aichat
     which cortex || echo "Visit https://cortex.so/docs/installation to download and install cortex"
-    docker pull dockerproxy.net/paulgauthier/aider-full
+#     docker pull dockerproxy.net/paulgauthier/aider-full
     cp -f aider /usr/local/bin
 

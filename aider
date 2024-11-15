@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
-# git config user.email "utensilcandel@gmail.com"
-# git config user.name "utensil"
-# docker run --rm -it --user $(id -u):$(id -g) --volume $(pwd):/app dockerproxy.net/paulgauthier/aider-full --model github/gpt-4o --dark-mode --subtree-only "$@"
-
+# TODO adjust for other OS
+# This is need for Mac as the default clang is too old
 export CC=/opt/homebrew/opt/llvm/bin/clang CXX=/opt/homebrew/opt/llvm/bin/clang++ CPATH=/opt/homebrew/opt/llvm/include LIBRARY_PATH=/opt/homebrew/opt/llvm/lib
+# This runs aider in a virtual environment with the specified model, configs etc.
 uvx --python 3.11 --from aider-chat[help,playwright] aider --model github/gpt-4o --dark-mode --subtree-only "$@"
