@@ -1006,6 +1006,21 @@ local plugins = {
             { "<leader>pn", "<cmd>PrtVnew<cr>", desc = "PtrVnew", mode = "n" },
         },
     },
+    {
+        "jondkinney/aider.nvim",
+        -- "joshuavial/aider.nvim",
+        config = function()
+            require("aider").setup {
+                auto_manage_context = true,
+                default_bindings = true,
+                debug = false,
+            }
+        end,
+        keys = {
+            { "<leader>po", "<cmd>AiderOpen<cr>", desc = "AiderOpen", mode = "x" },
+            { "<leader>po", "<cmd>AiderOpen<cr>", desc = "AiderOpen", mode = "n" },
+        },
+    },
     -- {
     --     "ddzero2c/aider.nvim",
     --     opts = {
