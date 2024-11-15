@@ -228,7 +228,7 @@ prep-uv:
 
 prep-py:
     uv python install 3.11
-    uv venv --python 3.11
+    uv venv --python 3.11 --seed
 
 prep-sbar:
     #!/usr/bin/env bash
@@ -448,4 +448,10 @@ check-dirs SRC DST:
     # rip {{SRC}}/.hash.jw
     # rip {{DST}}/.hash.jw
     echo "Open {{DST}}/.hash.jw to inspect"
+
+prep-llm:
+    which aichat || brew install aichat
+    which cortex || echo "Visit https://cortex.so/docs/installation to download and install cortex"
+    docker pull dockerproxy.net/paulgauthier/aider-full
+    cp -f aider /usr/local/bin
 

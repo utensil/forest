@@ -1007,6 +1007,31 @@ local plugins = {
         },
     },
     -- {
+    --     "ddzero2c/aider.nvim",
+    --     opts = {
+    --         {
+    --             command = "aider", -- Path to aider command
+    --             model = "github/gpt-4o",
+    --             -- model = "sonnet", -- AI model to use
+    --             mode = "inline", -- Edit mode: 'diff' or 'inline'
+    --             -- Floating window options
+    --             float_opts = {
+    --                 relative = "editor",
+    --                 width = 0.8, -- 80% of editor width
+    --                 height = 0.8, -- 80% of editor height
+    --                 style = "minimal",
+    --                 border = "rounded",
+    --                 title = " Aider ",
+    --                 title_pos = "center",
+    --             },
+    --         },
+    --     },
+    --     keys = {
+    --         { "<leader>po", "<cmd>AiderEdit<cr>", desc = "AiderEdit", mode = "x" },
+    --         { "<leader>po", "<cmd>AiderEdit<cr>", desc = "AiderEdit", mode = "n" },
+    --     },
+    -- },
+    -- {
     --     "zbirenbaum/copilot-cmp",
     --     after = {
     --         "copilot.vim",
@@ -1017,7 +1042,6 @@ local plugins = {
     --         require("copilot_cmp").setup()
     --     end,
     -- },
-
     {
         "Julian/lean.nvim",
         event = { "BufReadPre *.lean", "BufNewFile *.lean" },
