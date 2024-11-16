@@ -73,11 +73,9 @@
         ];
 
         async function redirectToPage() {
-            // Don't redirect if opened from file system
-            if (window.location.protocol === 'file:') {
-                document.getElementById('loader').style.display = 'none';
-                document.getElementById('error-content').style.display = 'block';
-                return;
+            const isLocalFile = window.location.protocol === 'file:';
+            if (isLocalFile) {
+                console.debug('Running in local file system mode - redirects will be simulated');
             }
 
             // Check query param first, then referrer, then default
@@ -115,7 +113,13 @@
                         
                         // Clear timeout before redirect
                         clearTimeout(timeoutId);
-                        window.location.href = '/' + pathParts[1] + redirectTo;
+                        if (!isLocalFile) {
+                            window.location.href = '/' + pathParts[1] + redirectTo;
+                        } else {
+                            console.debug(`Would redirect to: ${'/'}${pathParts[1]}${redirectTo}`);
+                            document.getElementById('loader').style.display = 'none';
+                            document.getElementById('error-content').style.display = 'block';
+                        }
                         return;
                     }
                 }
