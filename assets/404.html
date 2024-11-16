@@ -20,6 +20,10 @@
             margin: 0;
         }
 
+        #error-content {
+            display: none;
+        }
+
         h1 {
             font-size: 3rem;
             margin-bottom: 20px;
@@ -29,8 +33,25 @@
             font-size: 1.2rem;
             max-width: 600px;
         }
+
+        .loader {
+            width: 48px;
+            height: 48px;
+            border: 5px solid #343a40;
+            border-bottom-color: transparent;
+            border-radius: 50%;
+            display: inline-block;
+            box-sizing: border-box;
+            animation: rotation 1s linear infinite;
+        }
+
+        @keyframes rotation {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
     </style>
     <script type="text/javascript">
+        const REDIRECT_TIMEOUT = 3000; // Show error after 3 seconds
         const redirectConfig = [
             // {regex: /^\/example$/, redirect: "/example.html"},
             {regex: /\/.*\/$/, redirect: (path) => path.replace(/\/$/, '.xml')},
@@ -38,7 +59,7 @@
             {regex: /.*/, redirect: "/index.xml"}
         ];
 
-        function redirectToPage() {
+        async function redirectToPage() {
             const referrer = document.referrer || window.location.href;
             let path = referrer && !referrer.includes('404.html') ? new URL(referrer).pathname : '/forest/';
             console.log('referrer:', path);
@@ -56,8 +77,14 @@
                         }
                         recentRedirects.push(path);
                         localStorage.setItem('recentRedirects', JSON.stringify(recentRedirects));
+                        // Set a timeout to show error if redirect doesn't happen
+                        setTimeout(() => {
+                            document.getElementById('loader').style.display = 'none';
+                            document.getElementById('error-content').style.display = 'block';
+                        }, REDIRECT_TIMEOUT);
+                        
                         window.location.href = '/' + pathParts[1] + redirectTo;
-                        break;
+                        return;
                     }
                 }
             }
@@ -68,9 +95,11 @@
 </head>
 
 <body>
-    <h1>Oops! Page Not Found</h1>
-    <p>We can't find the page you're looking for. However, we'll try to redirect you to where you might have intended to
-        go.</p>
+    <span id="loader" class="loader"></span>
+    <div id="error-content">
+        <h1>Oops! Page Not Found</h1>
+        <p>We can't find the page you're looking for. The automatic redirect either failed or took too long.</p>
+    </div>
 </body>
 
 </html>
