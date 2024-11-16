@@ -87,24 +87,27 @@
             const pathParts = path.split('/');
             path = pathParts.length > 2 ? '/' + pathParts.slice(2).join('/') : path;
 
-            // Store pairs of [source, destination] instead of just paths
-            let recentRedirects = JSON.parse(localStorage.getItem('recentRedirectPairs') || '[]');
+            // Get redirect chain from URL parameters
+            const redirectChain = urlParams.getAll('r') || [];
+            const MAX_REDIRECTS = 5; // Maximum redirects in a single chain
 
             for (let rule of redirectConfig) {
                 if (rule.regex.test(path)) {
                     const redirectTo = typeof rule.redirect === 'function' ? rule.redirect(path) : rule.redirect;
+                    const redirectPair = `${path}>${redirectTo}`;
                     
-                    // Check if this exact source->destination pair exists
+                    // Check for redirect loops and chain length
                     if (!redirectTo) {
                         console.debug(`Skipping redirect: rule ${rule.regex} produced no redirect target for path ${path}`);
-                    } else if (recentRedirects.some(pair => pair[0] === path && pair[1] === redirectTo)) {
-                        console.debug(`Skipping redirect: ${path} -> ${redirectTo} was already attempted`);
+                    } else if (redirectChain.length >= MAX_REDIRECTS) {
+                        console.debug(`Stopping: Maximum redirect chain length (${MAX_REDIRECTS}) reached`);
+                        break;
+                    } else if (redirectChain.some(r => r.split('>')[1] === redirectTo)) {
+                        console.debug(`Stopping: Detected loop - ${redirectTo} was already a destination in chain:`, redirectChain);
+                        break;
                     } else {
-                        if (recentRedirects.length >= 3) {
-                            recentRedirects.shift();
-                        }
-                        recentRedirects.push([path, redirectTo]);
-                        localStorage.setItem('recentRedirectPairs', JSON.stringify(recentRedirects));
+                        // Add this redirect to the chain
+                        const newChain = [...redirectChain, redirectPair];
                         
                         const timeoutId = setTimeout(() => {
                             document.getElementById('loader').style.display = 'none';
@@ -114,9 +117,13 @@
                         // Clear timeout before redirect
                         clearTimeout(timeoutId);
                         if (!isLocalFile) {
-                            window.location.href = '/' + pathParts[1] + redirectTo;
+                            // Build new URL with updated chain
+                            const newUrl = new URL('/' + pathParts[1] + redirectTo, window.location.origin);
+                            newChain.forEach(r => newUrl.searchParams.append('r', r));
+                            window.location.href = newUrl.toString();
                         } else {
                             console.debug(`Would redirect to: ${'/'}${pathParts[1]}${redirectTo}`);
+                            console.debug('Current redirect chain:', newChain);
                             document.getElementById('loader').style.display = 'none';
                             document.getElementById('error-content').style.display = 'block';
                         }
