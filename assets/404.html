@@ -49,6 +49,19 @@
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
+
+        .ghost {
+            margin: 20px auto;
+        }
+
+        .ghost-body {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
     </style>
     <script type="text/javascript">
         const REDIRECT_TIMEOUT = 3000; // Show error after 3 seconds
@@ -104,6 +117,16 @@
 <body>
     <span id="loader" class="loader"></span>
     <div id="error-content">
+        <svg class="ghost" width="120" height="120" viewBox="0 0 120 120">
+            <g class="ghost-body">
+                <!-- Ghost body -->
+                <path fill="#f0f0f0" stroke="#343a40" stroke-width="3" 
+                    d="M30,50 C30,30 50,15 60,15 C70,15 90,30 90,50 C90,90 90,105 90,105 L80,95 L70,105 L60,95 L50,105 L40,95 L30,105 C30,105 30,90 30,50 Z" />
+                <!-- Eyes -->
+                <circle cx="50" cy="45" r="4" fill="#343a40" />
+                <circle cx="70" cy="45" r="4" fill="#343a40" />
+            </g>
+        </svg>
         <h1>Oops! Page Not Found</h1>
         <p>We can't find the page you're looking for. The automatic redirect either failed or took too long.</p>
     </div>
