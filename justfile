@@ -460,3 +460,6 @@ llm-proxy *PARAMS:
     # uvx --python 3.11 --from 'litellm[proxy]' litellm {{PARAMS}}
     aichat --serve 0.0.0.0:4000
 
+# a zsh that inherits .env
+zsh:
+    zsh
