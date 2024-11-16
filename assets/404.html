@@ -60,6 +60,13 @@
         ];
 
         async function redirectToPage() {
+            // Don't redirect if opened from file system
+            if (window.location.protocol === 'file:') {
+                document.getElementById('loader').style.display = 'none';
+                document.getElementById('error-content').style.display = 'block';
+                return;
+            }
+
             const referrer = document.referrer || window.location.href;
             let path = referrer && !referrer.includes('404.html') ? new URL(referrer).pathname : '/forest/';
             console.log('referrer:', path);
