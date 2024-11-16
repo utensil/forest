@@ -122,6 +122,11 @@ function build {
   echo "⭐ Rebuilding forest"
   just forest
   show_result
+  # Check if index.xml was generated
+  if [ ! -f "output/index.xml" ]; then
+    echo -e "\033[0;31mError: index.xml not found in output directory. Forest build likely failed.\033[0m"
+    exit 1
+  fi
   # echo "⭐ Copying assets"
   copy_extra_assets
 #   build_ssr
