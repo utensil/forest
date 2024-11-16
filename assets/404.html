@@ -80,9 +80,12 @@
                 return;
             }
 
+            // Check query param first, then referrer, then default
+            const urlParams = new URLSearchParams(window.location.search);
+            const fromPath = urlParams.get('from');
             const referrer = document.referrer || window.location.href;
-            let path = referrer && !referrer.includes('404.html') ? new URL(referrer).pathname : '/forest/';
-            console.log('referrer:', path);
+            let path = fromPath || (referrer && !referrer.includes('404.html') ? new URL(referrer).pathname : '/forest/');
+            console.log('source path:', path);
             const pathParts = path.split('/');
             path = pathParts.length > 2 ? '/' + pathParts.slice(2).join('/') : path;
 
