@@ -104,11 +104,13 @@
                         recentRedirects.push([path, redirectTo]);
                         localStorage.setItem('recentRedirectPairs', JSON.stringify(recentRedirects));
                         
-                        setTimeout(() => {
+                        const timeoutId = setTimeout(() => {
                             document.getElementById('loader').style.display = 'none';
                             document.getElementById('error-content').style.display = 'block';
                         }, REDIRECT_TIMEOUT);
                         
+                        // Clear timeout before redirect
+                        clearTimeout(timeoutId);
                         window.location.href = '/' + pathParts[1] + redirectTo;
                         return;
                     }
