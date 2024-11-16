@@ -97,7 +97,11 @@
                     const redirectTo = typeof rule.redirect === 'function' ? rule.redirect(path) : rule.redirect;
                     
                     // Check if this exact source->destination pair exists
-                    if (redirectTo && !recentRedirects.some(pair => pair[0] === path && pair[1] === redirectTo)) {
+                    if (!redirectTo) {
+                        console.debug(`Skipping redirect: rule ${rule.regex} produced no redirect target for path ${path}`);
+                    } else if (recentRedirects.some(pair => pair[0] === path && pair[1] === redirectTo)) {
+                        console.debug(`Skipping redirect: ${path} -> ${redirectTo} was already attempted`);
+                    } else {
                         if (recentRedirects.length >= 3) {
                             recentRedirects.shift();
                         }
@@ -118,6 +122,7 @@
             }
             
             // If we get here, either no redirect rule matched or we detected a redirect loop
+            console.debug('No valid redirect found for path:', path);
             document.getElementById('loader').style.display = 'none';
             document.getElementById('error-content').style.display = 'block';
         }
