@@ -86,18 +86,21 @@
             const pathParts = path.split('/');
             path = pathParts.length > 2 ? '/' + pathParts.slice(2).join('/') : path;
 
-            let recentRedirects = JSON.parse(localStorage.getItem('recentRedirects') || '[]');
+            // Store pairs of [source, destination] instead of just paths
+            let recentRedirects = JSON.parse(localStorage.getItem('recentRedirectPairs') || '[]');
 
             for (let rule of redirectConfig) {
                 if (rule.regex.test(path)) {
                     const redirectTo = typeof rule.redirect === 'function' ? rule.redirect(path) : rule.redirect;
-                    if (redirectTo && !recentRedirects.includes(redirectTo)) {
+                    
+                    // Check if this exact source->destination pair exists
+                    if (redirectTo && !recentRedirects.some(pair => pair[0] === path && pair[1] === redirectTo)) {
                         if (recentRedirects.length >= 3) {
                             recentRedirects.shift();
                         }
-                        recentRedirects.push(path);
-                        localStorage.setItem('recentRedirects', JSON.stringify(recentRedirects));
-                        // Set a timeout to show error if redirect doesn't happen
+                        recentRedirects.push([path, redirectTo]);
+                        localStorage.setItem('recentRedirectPairs', JSON.stringify(recentRedirects));
+                        
                         setTimeout(() => {
                             document.getElementById('loader').style.display = 'none';
                             document.getElementById('error-content').style.display = 'block';
@@ -108,6 +111,10 @@
                     }
                 }
             }
+            
+            // If we get here, either no redirect rule matched or we detected a redirect loop
+            document.getElementById('loader').style.display = 'none';
+            document.getElementById('error-content').style.display = 'block';
         }
 
         window.onload = redirectToPage;
