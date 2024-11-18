@@ -25,7 +25,7 @@ cp output/$XML_FILE build/$XML_FILE
 
 # brew install saxon
 
-saxon -s:build/$XML_FILE -xsl:assets/$XSLFILE -o:build/$TEX_FILE
+bunx xslt3 -s:build/$XML_FILE -xsl:assets/$XSLFILE -o:build/$TEX_FILE
 
 cd build
 
@@ -44,7 +44,7 @@ if [ -z "$TEC" ]; then
     $UNICOCE_LATEX -halt-on-error -interaction=nonstopmode --shell-escape $TEX_FILE >/dev/null 2>&1
 else
     echo "lize.sh| using tectonic"
-    tectonic -Z shell-escape-cwd=`pwd` --keep-intermediates --keep-logs --outdir `pwd` $TEX_FILEi >/dev/null 2>&1
+    tectonic -Z shell-escape-cwd=$(pwd) --keep-intermediates --keep-logs --outdir $(pwd) $TEX_FILEi >/dev/null 2>&1
 fi
 
 cd ..
