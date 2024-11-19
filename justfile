@@ -98,8 +98,9 @@ prep-term: prep-kitty
     just add-zrc 'eval "$(zoxide init zsh)"'
     just add-zrc 'eval "$(starship init zsh)"'
     which progress || brew install progress
-    which 7z || brew install sevenzip
+    which 7zz || brew install sevenzip
     which ffmpeg || brew install ffmpeg
+    which tokei || brew install tokei
 
 prep-alacritty:
     #!/usr/bin/env bash
@@ -475,3 +476,6 @@ prep-delta:
     git config --global merge.conflictStyle zdiff3
     mkdir -p ~/.config/lazygit
     cp -f .lazygit.yml ~/.config/lazygit/config.yml
+
+loc:
+    tokei -o json|uvx tokei-pie
