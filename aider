@@ -6,7 +6,7 @@ export CC=/opt/homebrew/opt/llvm/bin/clang CXX=/opt/homebrew/opt/llvm/bin/clang+
 export MODEL='openai/xai:grok-beta'
 
 if [ -n "$ANTHROPIC_API_KEY" ]; then
-  export MODEL=""
+    export MODEL=""
 fi
 # This runs aider in a virtual environment with the specified model, configs etc.
-uvx --python 3.11 --from 'aider-chat[help,playwright]' aider --no-show-model-warnings --model "$MODEL" --max-chat-history-tokens 8000 --dark-mode --subtree-only "$@"
+uvx --python 3.11 --from 'aider-chat[help,playwright]' aider --no-show-model-warnings --model "$MODEL" --max-chat-history-tokens 8000 --map-tokens 1024 --dark-mode --subtree-only "$@"
