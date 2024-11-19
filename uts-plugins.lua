@@ -330,6 +330,16 @@ local plugins = {
             -- options
         },
     },
+    {
+        "mcauley-penney/visual-whitespace.nvim",
+        config = true,
+        opts = {
+            space_char = " ", -- ·
+            tab_char = "→",
+            nl_char = "", -- ↲
+            cr_char = "←",
+        },
+    },
     -- { "lewis6991/satellite.nvim" },
     {
         "kentookura/forester.nvim",
