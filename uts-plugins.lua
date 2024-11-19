@@ -333,6 +333,9 @@ local plugins = {
     -- { "lewis6991/satellite.nvim" },
     {
         "kentookura/forester.nvim",
+        -- "utensil/forester.nvim",
+        -- branch = "main",
+        -- dir = "/Users/utensil/projects/forester.nvim",
         -- before = { "nvim-cmp" },
         -- branch = "36-installation-and-initialization",
         -- tried removing this for the auto-completion to have a non-nil `forester_current_config`
