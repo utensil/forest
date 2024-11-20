@@ -73,14 +73,14 @@ jobs:
         uses: ocaml/setup-ocaml@v3
         with:
           ocaml-compiler: "5.2.1"
-          dune-cache: true
-      - name: Cache opam packages
-        uses: actions/cache@v4
-        with:
-          path: ~/.opam
-          key: ${{ runner.os }}-opam-${{ hashFiles('**/*.opam') }}
-          restore-keys: |
-            ${{ runner.os }}-opam-
+          # dune-cache: true
+      # - name: Cache opam packages
+      #   uses: actions/cache@v4
+      #   with:
+      #     path: ~/.opam
+      #     key: ${{ runner.os }}-opam-${{ hashFiles('**/*.opam') }}
+      #     restore-keys: |
+      #       ${{ runner.os }}-opam-
       - name: Install forester
         run: |
           sudo apt-get install libev-dev
