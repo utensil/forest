@@ -331,15 +331,39 @@ local plugins = {
         },
     },
     {
-        "mcauley-penney/visual-whitespace.nvim",
-        config = true,
-        opts = {
-            space_char = " ", -- ·
-            tab_char = "→",
-            nl_char = "", -- ↲
-            cr_char = "←",
-        },
+        "oxtna/vshow.nvim",
+        config = function()
+            require("vshow").setup {
+                all = {
+                    { character = "eol", symbol = "↲" },
+                    { character = "tab", symbol = "→•" },
+                    { character = "space", symbol = "·" },
+                    { character = "multispace", symbol = "··" },
+                    { character = "lead", symbol = "·" },
+                    { character = "trail", symbol = "-" },
+                    { character = "extends", symbol = "" },
+                    { character = "precedes", symbol = "" },
+                    { character = "conceal", symbol = "" },
+                    { character = "nbsp", symbol = "+" },
+                },
+                -- char = {},
+                -- line = {},
+                -- block = {},
+            }
+        end,
     },
+    -- {
+    --     "mcauley-penney/visual-whitespace.nvim",
+    --     config = function()
+    --         require("visual-whitespace").setup {
+    --             space_char = " ", -- ·
+    --             tab_char = "→",
+    --             nl_char = "", -- ↲
+    --             cr_char = "←",
+    --         }
+    --         vim.api.nvim_set_hl(0, "VisualNonText", { link = "Whitespace" })
+    --     end,
+    -- },
     -- { "lewis6991/satellite.nvim" },
     {
         "kentookura/forester.nvim",
