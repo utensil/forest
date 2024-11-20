@@ -72,7 +72,7 @@ jobs:
       - name: Set-up OCaml
         uses: ocaml/setup-ocaml@v3
         with:
-          ocaml-compiler: "5.2"
+          ocaml-compiler: "5.2.1"
           dune-cache: true
       - name: Cache opam packages
         uses: actions/cache@v4
@@ -84,7 +84,6 @@ jobs:
       - name: Install forester
         run: |
           sudo apt-get install libev-dev
-          opam pin add ocaml-base-compiler 5.2.0
           opam pin add forester git+https://git.sr.ht/~jonsterling/ocaml-forester#56de06afe952d752c1a13fdcd8bb56c5fef9956f --yes
           opam install forester --yes
           # opam install forester.4.3.1 --yes
