@@ -301,16 +301,23 @@ add-zrc LINE:
 add-brc LINE:
     grep -F '{{LINE}}' ~/.bashrc || echo '{{LINE}}' >> ~/.bashrc
 
-prep-centos:
+# Copy and paste to run in zsh, because we have no just at this point
+# Next, run: just prep-term
+# Then, maybe run: just mk-act
+# So the work can be continued in the Ubuntu container
+bootstrap-centos:
+    #!/usr/bin/env zsh
     yes|sudo yum groupinstall 'Development Tools'
     yes|sudo yum install procps-ng curl file git
     yes|/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-    just add-zrc 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"'
     yes|sudo yum install util-linux-user
+    which node || brew install node
+    yes|sudo yum install -y gtk2-devel openssl-devel
+    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+    brew install just
+    just add-zrc 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"'
     just chsh
     just prep-term
-    which node || brew install node
-    yes|sudo yum install gtk2-devel openssl-devel
 
 chsh:
     # chsh -s `chsh -l|grep zsh|head -1` `whoami`
@@ -331,8 +338,12 @@ prep-ubuntu:
 # act:
 #     ./act.sh
 
+rm-act:
+    sudo docker stop act-dev
+    sudo docker rm act-dev
+
 mk-act:
-    sudo docker run -d --name act-dev -v{{justfile_directory()}}:/root/projects/forest -p 127.0.0.1:1214:1214 ghcr.io/catthehacker/ubuntu:act-latest bash -c 'sleep infinity'
+    sudo docker run -d --name act-dev -v{{justfile_directory()}}:/root/projects/forest -p 127.0.0.1:1210-1214:1210-1214 ghcr.io/catthehacker/ubuntu:act-latest bash -c 'sleep infinity'
 
 run-act CMD="bash" OPTS="-it":
     sudo docker exec {{OPTS}} -w /root/projects/forest act-dev {{CMD}}
@@ -461,6 +472,9 @@ llm-proxy *PARAMS:
     #!/usr/bin/env bash
     # uvx --python 3.11 --from 'litellm[proxy]' litellm {{PARAMS}}
     aichat --serve 0.0.0.0:4000
+
+prep-ds:
+    cortex pull bartowski/DeepSeek-V2.5-GGUF
 
 # a zsh that inherits .env
 zsh:
