@@ -373,7 +373,8 @@ mk-rp:
 run-rp:
     sudo docker exec -it -w /root/projects/forest rp-dev bash
 
-# copy and paste to run, because we have no just at this point
+# Copy and paste to run, because we have no just at this point
+# Next, run: just prep-act
 bootstrp-ubuntu:
     #!/usr/bin/env bash
     apt update
@@ -473,8 +474,18 @@ llm-proxy *PARAMS:
     # uvx --python 3.11 --from 'litellm[proxy]' litellm {{PARAMS}}
     aichat --serve 0.0.0.0:4000
 
-prep-ds:
-    cortex pull bartowski/DeepSeek-V2.5-GGUF
+# works only for Ubuntu
+[linux]
+prep-cortex:
+    #!/usr/bin/env bash
+    curl -L https://app.cortexcpp.com/download/latest/linux-amd64-local -o cortex.deb
+    sudo dpkg -i cortex.deb
+    # fix broken dependencies
+    sudo apt-get install -f -y
+
+prep-coder:
+    # cortex pull bartowski/DeepSeek-V2.5-GGUF
+    cortex run qwen2.5-coder
 
 # a zsh that inherits .env
 zsh:
