@@ -1217,6 +1217,27 @@ local llm_plugins = {
 }
 
 local unused_llm_plugins = {
+    -- {
+    --     "zbirenbaum/copilot.lua",
+    --     cmd = "Copilot",
+    --     event = "InsertEnter",
+    --     config = function()
+    --         require("copilot").setup {
+    --             suggestion = {
+    --                 auto_trigger = true,
+    --                 keymap = {
+    --                     -- but this has made the normal tab not working
+    --                     accept = "<Tab>",
+    --                     accept_word = false,
+    --                     accept_line = false,
+    --                     next = "<M-]>",
+    --                     prev = "<M-[>",
+    --                     dismiss = "<S-Tab>",
+    --                 },
+    --             },
+    --         }
+    --     end,
+    -- },
     {
         "olimorris/codecompanion.nvim",
         dependencies = {
@@ -1313,160 +1334,137 @@ local unused_llm_plugins = {
             online_model_selection = true,
             command_auto_select_response = true,
             enable_spinner = false,
-        keys = {
-            { "<leader>pr", "<cmd>'<,'>PrtRewrite<cr>", desc = "PtrRewrite", mode = "x" },
-            { "<leader>pp", "<cmd>'<,'>PrtImplement<cr>", desc = "PtrImplement", mode = "x" },
-            { "<leader>pn", "<cmd>'<,'>PrtVnew<cr>", desc = "PtrVnew", mode = "x" },
-            { "<leader>pn", "<cmd>PrtVnew<cr>", desc = "PtrVnew", mode = "n" },
+            keys = {
+                { "<leader>pr", "<cmd>'<,'>PrtRewrite<cr>", desc = "PtrRewrite", mode = "x" },
+                { "<leader>pp", "<cmd>'<,'>PrtImplement<cr>", desc = "PtrImplement", mode = "x" },
+                { "<leader>pn", "<cmd>'<,'>PrtVnew<cr>", desc = "PtrVnew", mode = "x" },
+                { "<leader>pn", "<cmd>PrtVnew<cr>", desc = "PtrVnew", mode = "n" },
+            },
         },
-    },
-    {
-        "jondkinney/aider.nvim",
-        -- "joshuavial/aider.nvim",
-        config = function()
-            require("aider").setup {
-                auto_manage_context = true,
-                default_bindings = true,
-                debug = false,
-            }
-        end,
-        keys = {
-            { "<leader>po", "<cmd>AiderOpen<cr>", desc = "AiderOpen", mode = "x" },
-            { "<leader>po", "<cmd>AiderOpen<cr>", desc = "AiderOpen", mode = "n" },
+        {
+            "jondkinney/aider.nvim",
+            -- "joshuavial/aider.nvim",
+            config = function()
+                require("aider").setup {
+                    auto_manage_context = true,
+                    default_bindings = true,
+                    debug = false,
+                }
+            end,
+            keys = {
+                { "<leader>po", "<cmd>AiderOpen<cr>", desc = "AiderOpen", mode = "x" },
+                { "<leader>po", "<cmd>AiderOpen<cr>", desc = "AiderOpen", mode = "n" },
+            },
         },
+        -- {
+        --     "ddzero2c/aider.nvim",
+        --     opts = {
+        --         {
+        --             command = "aider", -- Path to aider command
+        --             model = "github/gpt-4o",
+        --             -- model = "sonnet", -- AI model to use
+        --             mode = "inline", -- Edit mode: 'diff' or 'inline'
+        --             -- Floating window options
+        --             float_opts = {
+        --                 relative = "editor",
+        --                 width = 0.8, -- 80% of editor width
+        --                 height = 0.8, -- 80% of editor height
+        --                 style = "minimal",
+        --                 border = "rounded",
+        --                 title = " Aider ",
+        --                 title_pos = "center",
+        --             },
+        --         },
+        --     },
+        --     keys = {
+        --         { "<leader>po", "<cmd>AiderEdit<cr>", desc = "AiderEdit", mode = "x" },
+        --         { "<leader>po", "<cmd>AiderEdit<cr>", desc = "AiderEdit", mode = "n" },
+        --     },
+        -- },
+        -- {
+        --     "zbirenbaum/copilot-cmp",
+        --     after = {
+        --         "copilot.vim",
+        --         -- "copilot.lua",
+        --         "nvim-cmp",
+        --     },
+        --     config = function()
+        --         require("copilot_cmp").setup()
+        --     end,
+        -- },
+        -- {
+        --     "yetone/avante.nvim",
+        --     event = "VeryLazy",
+        --     lazy = false,
+        --     version = false, -- set this if you want to always pull the latest change
+        --     opts = {
+        --         provider = "copilot",
+        --         ---@alias Provider "claude" | "openai" | "azure" | "gemini" | "cohere" | "copilot" | string
+        --     },
+        --     -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
+        --     build = "make",
+        --     -- build = "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false" -- for windows
+        --     dependencies = {
+        --         "nvim-treesitter/nvim-treesitter",
+        --         "stevearc/dressing.nvim",
+        --         "nvim-lua/plenary.nvim",
+        --         "MunifTanjim/nui.nvim",
+        --         --- The below dependencies are optional,
+        --         "nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
+        --         "zbirenbaum/copilot.lua", -- for providers='copilot'
+        --         {
+        --             -- support for image pasting
+        --             "HakonHarnes/img-clip.nvim",
+        --             event = "VeryLazy",
+        --             opts = {
+        --                 -- recommended settings
+        --                 default = {
+        --                     embed_image_as_base64 = false,
+        --                     prompt_for_file_name = false,
+        --                     drag_and_drop = {
+        --                         insert_mode = true,
+        --                     },
+        --                     -- required for Windows users
+        --                     use_absolute_path = true,
+        --                 },
+        --             },
+        --         },
+        --         {
+        --             -- Make sure to set this up properly if you have lazy=true
+        --             "MeanderingProgrammer/render-markdown.nvim",
+        --             opts = {
+        --                 file_types = { "markdown", "Avante" },
+        --             },
+        --             ft = { "markdown", "Avante" },
+        --         },
+        --     },
+        -- },
+        -- {
+        --     "nvim-pack/nvim-spectre",
+        --     event = "BufRead",
+        --     config = function()
+        --         require("spectre").setup {
+        --             use_trouble_qf = true,
+        --             default = {
+        --                 replace = {
+        --                     cmd = "sd",
+        --                 },
+        --             },
+        --         }
+        --     end,
+        --     keys = {
+        --         { "<leader>ss", "<cmd>lua require('spectre').toggle()<cr>", desc = "Toggle Spectre" },
+        --         {
+        --             "<leader>sw",
+        --             "<cmd>lua require('spectre').open_visual({select_word=true})<cr>",
+        --             desc = "Spectre (word)",
+        --         },
+        --     },
+        -- },
     },
-    -- {
-    --     "ddzero2c/aider.nvim",
-    --     opts = {
-    --         {
-    --             command = "aider", -- Path to aider command
-    --             model = "github/gpt-4o",
-    --             -- model = "sonnet", -- AI model to use
-    --             mode = "inline", -- Edit mode: 'diff' or 'inline'
-    --             -- Floating window options
-    --             float_opts = {
-    --                 relative = "editor",
-    --                 width = 0.8, -- 80% of editor width
-    --                 height = 0.8, -- 80% of editor height
-    --                 style = "minimal",
-    --                 border = "rounded",
-    --                 title = " Aider ",
-    --                 title_pos = "center",
-    --             },
-    --         },
-    --     },
-    --     keys = {
-    --         { "<leader>po", "<cmd>AiderEdit<cr>", desc = "AiderEdit", mode = "x" },
-    --         { "<leader>po", "<cmd>AiderEdit<cr>", desc = "AiderEdit", mode = "n" },
-    --     },
-    -- },
-    -- {
-    --     "zbirenbaum/copilot-cmp",
-    --     after = {
-    --         "copilot.vim",
-    --         -- "copilot.lua",
-    --         "nvim-cmp",
-    --     },
-    --     config = function()
-    --         require("copilot_cmp").setup()
-    --     end,
-    -- },
-    -- {
-    --     "yetone/avante.nvim",
-    --     event = "VeryLazy",
-    --     lazy = false,
-    --     version = false, -- set this if you want to always pull the latest change
-    --     opts = {
-    --         provider = "copilot",
-    --         ---@alias Provider "claude" | "openai" | "azure" | "gemini" | "cohere" | "copilot" | string
-    --     },
-    --     -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
-    --     build = "make",
-    --     -- build = "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false" -- for windows
-    --     dependencies = {
-    --         "nvim-treesitter/nvim-treesitter",
-    --         "stevearc/dressing.nvim",
-    --         "nvim-lua/plenary.nvim",
-    --         "MunifTanjim/nui.nvim",
-    --         --- The below dependencies are optional,
-    --         "nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
-    --         "zbirenbaum/copilot.lua", -- for providers='copilot'
-    --         {
-    --             -- support for image pasting
-    --             "HakonHarnes/img-clip.nvim",
-    --             event = "VeryLazy",
-    --             opts = {
-    --                 -- recommended settings
-    --                 default = {
-    --                     embed_image_as_base64 = false,
-    --                     prompt_for_file_name = false,
-    --                     drag_and_drop = {
-    --                         insert_mode = true,
-    --                     },
-    --                     -- required for Windows users
-    --                     use_absolute_path = true,
-    --                 },
-    --             },
-    --         },
-    --         {
-    --             -- Make sure to set this up properly if you have lazy=true
-    --             "MeanderingProgrammer/render-markdown.nvim",
-    --             opts = {
-    --                 file_types = { "markdown", "Avante" },
-    --             },
-    --             ft = { "markdown", "Avante" },
-    --         },
-    --     },
-    -- },
-    -- {
-    --     "nvim-pack/nvim-spectre",
-    --     event = "BufRead",
-    --     config = function()
-    --         require("spectre").setup {
-    --             use_trouble_qf = true,
-    --             default = {
-    --                 replace = {
-    --                     cmd = "sd",
-    --                 },
-    --             },
-    --         }
-    --     end,
-    --     keys = {
-    --         { "<leader>ss", "<cmd>lua require('spectre').toggle()<cr>", desc = "Toggle Spectre" },
-    --         {
-    --             "<leader>sw",
-    --             "<cmd>lua require('spectre').open_visual({select_word=true})<cr>",
-    --             desc = "Spectre (word)",
-    --         },
-    --     },
-    -- },
 }
 
-local used_llm_plugins = {
-    -- {
-    --     "zbirenbaum/copilot.lua",
-    --     cmd = "Copilot",
-    --     event = "InsertEnter",
-    --     config = function()
-    --         require("copilot").setup {
-    --             suggestion = {
-    --                 auto_trigger = true,
-    --                 keymap = {
-    --                     -- but this has made the normal tab not working
-    --                     accept = "<Tab>",
-    --                     accept_word = false,
-    --                     accept_line = false,
-    --                     next = "<M-]>",
-    --                     prev = "<M-[>",
-    --                     dismiss = "<S-Tab>",
-    --                 },
-    --             },
-    --         }
-    --     end,
-    -- },
-}
-
-function merge(...)
+local merge = function(...)
     local result = {}
     for _, t in ipairs { ... } do
         for _, v in ipairs(t) do
