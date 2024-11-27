@@ -1,78 +1,5 @@
-local plugins = {
-    -- {
-    --   "lukelex/railscasts.nvim",
-    --   dependencies = { "rktjmp/lush.nvim" }
-    -- },
-    {
-        "RRethy/base16-nvim",
-        lazy = false,
-        -- config = function()
-        --     vim.cmd "colorscheme base16-railscasts"
-        -- end,
-    },
-    -- {
-    --     "folke/tokyonight.nvim",
-    --     lazy = true,
-    --     opts = { style = "moon" },
-    -- },
+local basic_plugins = {
     { "echasnovski/mini.ai", version = false },
-    -- {
-    --     "echasnovski/mini.nvim",
-    --     version = false,
-    --     config = function()
-    --         require("mini.ai").setup {}
-    --     end,
-    -- },
-    -- { "saghen/blink.compat",
-    --     opts = {
-    --         impersonate_nvim_cmp = true,
-    --     }
-    -- },
-    -- { "hrsh7th/cmp-emoji" },
-    -- {
-    --     "allaman/emoji.nvim",
-    --     version = "1.0.0", -- optionally pin to a tag
-    --     ft = "markdown", -- adjust to your needs
-    --     dependencies = {
-    --         -- util for handling paths
-    --         "nvim-lua/plenary.nvim",
-    --         -- optional for nvim-cmp integration
-    --         -- "hrsh7th/nvim-cmp",
-    --         -- optional for telescope integration
-    --         "nvim-telescope/telescope.nvim",
-    --     },
-    --     opts = {
-    --         -- default is false
-    --         enable_cmp_integration = false,
-    --         -- optional if your plugin installation directory
-    --         -- is not vim.fn.stdpath("data") .. "/lazy/
-    --         -- plugin_path = vim.fn.expand "$HOME/plugins/",
-    --     },
-    --     config = function(_, opts)
-    --         require("emoji").setup(opts)
-    --         -- optional for telescope integration
-    --         local ts = require("telescope").load_extension "emoji"
-    --         vim.keymap.set("n", "<leader>se", ts.emoji, { desc = "[S]earch [E]moji" })
-    --     end,
-    -- },
-    -- {
-    --     "xiyaowong/telescope-emoji.nvim",
-    --     dependencies = {
-    --         "nvim-telescope/telescope.nvim",
-    --     },
-    --     config = function()
-    --         require("telescope").load_extension "emoji"
-    --     end,
-    --     keys = {
-    --         { "<leader>se", "<cmd>Telescope emoji<cr>", desc = "Search Emoji" },
-    --     },
-    -- },
-    {
-        "nvim-telescope/telescope-symbols.nvim",
-        keys = {
-            { "<leader>se", "<cmd>Telescope symbols<cr>", desc = "Search Symbols: emoji, latex" },
-        },
-    },
     {
         "saghen/blink.cmp",
         lazy = false, -- lazy loading handled internally
@@ -174,156 +101,31 @@ local plugins = {
             end
         end,
     },
-    -- { "LazyVim/LazyVim", import = "lazyvim.plugins" },
-    -- adapted from https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/plugins/extras/ui/mini-animate.lua
+}
+
+local ui_plugins = {
     -- {
-    --     "echasnovski/mini.animate",
-    --     recommended = true,
-    --     event = "VeryLazy",
-    --     opts = function()
-    --         -- don't use animate when scrolling with the mouse
-    --         local mouse_scrolled = false
-    --         for _, scroll in ipairs { "Up", "Down" } do
-    --             local key = "<ScrollWheel" .. scroll .. ">"
-    --             vim.keymap.set({ "", "i" }, key, function()
-    --                 mouse_scrolled = true
-    --                 return key
-    --             end, { expr = true })
-    --         end
-
-    --         vim.api.nvim_create_autocmd("FileType", {
-    --             pattern = "grug-far",
-    --             callback = function()
-    --                 vim.b.minianimate_disable = true
-    --             end,
-    --         })
-
-    --         -- LazyVim.toggle.map("<leader>ua", {
-    --         --     name = "Mini Animate",
-    --         --     get = function()
-    --         --         return not vim.g.minianimate_disable
-    --         --     end,
-    --         --     set = function(state)
-    --         --         vim.g.minianimate_disable = not state
-    --         --     end,
-    --         -- })
-
-    --         local animate = require "mini.animate"
-    --         return {
-    --             resize = {
-    --                 timing = animate.gen_timing.linear { duration = 50, unit = "total" },
-    --             },
-    --             scroll = {
-    --                 timing = animate.gen_timing.linear { duration = 150, unit = "total" },
-    --                 subscroll = animate.gen_subscroll.equal {
-    --                     predicate = function(total_scroll)
-    --                         if mouse_scrolled then
-    --                             mouse_scrolled = false
-    --                             return false
-    --                         end
-    --                         return total_scroll > 1
-    --                     end,
-    --                 },
-    --             },
-    --         }
-    --     end,
+    --   "lukelex/railscasts.nvim",
+    --   dependencies = { "rktjmp/lush.nvim" }
     -- },
-    -- -- https://gronskiy.com/posts/2023-03-26-copy-via-vim-tmux-ssh/
-    -- {
-    --     "ojroques/nvim-osc52",
-    --     config = function()
-    --         require("osc52").setup {
-    --             max_length = 0, -- Maximum length of selection (0 for no limit)
-    --             silent = false, -- Disable message on successful copy
-    --             trim = false, -- Trim surrounding whitespaces before copy
-    --         }
-    --         local function copy()
-    --             if (vim.v.event.operator == "y" or vim.v.event.operator == "d") and vim.v.event.regname == "" then
-    --                 require("osc52").copy_register ""
-    --             end
-    --         end
-
-    --         vim.api.nvim_create_autocmd("TextYankPost", { callback = copy })
-    --     end,
-    -- },
-    -- {
-    --     "stevearc/oil.nvim",
-    --     config = function()
-    --         require("oil").setup {
-    --             float = {
-    --                 border = "rounded",
-    --                 -- max_width = 30,
-    --                 -- max_height = 30,
-    --                 -- override the layout to be on the left top corner
-    --                 -- override = function()
-    --                 --     return {
-    --                 --         relative = "editor",
-    --                 --         width = 30,
-    --                 --         height = 30,
-    --                 --         row = 0,
-    --                 --         col = 0,
-    --                 --     }
-    --                 -- end,
-    --             },
-    --         }
-    --     end,
-    --     -- Optional dependencies
-    --     dependencies = { { "echasnovski/mini.icons", opts = {} } },
-    --     -- dependencies = { "nvim-tree/nvim-web-devicons" }, -- use if prefer nvim-web-devicons
-    --     keys = {
-    --         -- map leader o to oil open_float
-    --         {
-    --             "<leader>o",
-    --             function()
-    --                 require("oil").open_float()
-    --             end,
-    --             desc = "Oil - Open Float",
-    --         },
-    --     },
-    -- },
-    -- https://www.lazyvim.org/configuration/recipes#supertab
-    -- {
-    --     "hrsh7th/nvim-cmp",
-    --     ---@param opts cmp.ConfigSchema
-    --     opts = function()
-    --         local has_words_before = function()
-    --             unpack = unpack or table.unpack
-    --             local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-    --             return col ~= 0
-    --                 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match "%s" == nil
-    --         end
-
-    --         local cmp = require "cmp"
-
-    --         opts.mapping = vim.tbl_extend("force", opts.mapping, {
-    --             ["<Tab>"] = cmp.mapping(function(fallback)
-    --                 if cmp.visible() then
-    --                     -- You could replace select_next_item() with confirm({ select = true }) to get VS Code autocompletion behavior
-    --                     cmp.select_next_item()
-    --                 elseif vim.snippet.active { direction = 1 } then
-    --                     vim.schedule(function()
-    --                         vim.snippet.jump(1)
-    --                     end)
-    --                 elseif has_words_before() then
-    --                     cmp.complete()
-    --                 else
-    --                     fallback()
-    --                 end
-    --             end, { "i", "s" }),
-    --             ["<S-Tab>"] = cmp.mapping(function(fallback)
-    --                 if cmp.visible() then
-    --                     cmp.select_prev_item()
-    --                 elseif vim.snippet.active { direction = -1 } then
-    --                     vim.schedule(function()
-    --                         vim.snippet.jump(-1)
-    --                     end)
-    --                 else
-    --                     fallback()
-    --                 end
-    --             end, { "i", "s" }),
-    --         })
-    --     end,
-    -- },
+    {
+        "RRethy/base16-nvim",
+        lazy = false,
+        -- config = function()
+        --     vim.cmd "colorscheme base16-railscasts"
+        -- end,
+    },
+    {
+        "tribela/transparent.nvim",
+        event = "VimEnter",
+        config = true,
+    },
+    {
+        "nvim-telescope/telescope-symbols.nvim",
+        keys = {
+            { "<leader>se", "<cmd>Telescope symbols<cr>", desc = "Search Symbols: emoji, latex" },
+        },
+    },
     {
         "j-hui/fidget.nvim",
         opts = {
@@ -352,157 +154,7 @@ local plugins = {
             }
         end,
     },
-    -- {
-    --     "mcauley-penney/visual-whitespace.nvim",
-    --     config = function()
-    --         require("visual-whitespace").setup {
-    --             space_char = " ", -- ·
-    --             tab_char = "→",
-    --             nl_char = "", -- ↲
-    --             cr_char = "←",
-    --         }
-    --         vim.api.nvim_set_hl(0, "VisualNonText", { link = "Whitespace" })
-    --     end,
-    -- },
-    -- { "lewis6991/satellite.nvim" },
-    {
-        "kentookura/forester.nvim",
-        -- "utensil/forester.nvim",
-        -- branch = "main",
-        -- dir = "/Users/utensil/projects/forester.nvim",
-        -- before = { "nvim-cmp" },
-        -- branch = "36-installation-and-initialization",
-        -- tried removing this for the auto-completion to have a non-nil `forester_current_config`
-        event = "VeryLazy",
-        dependencies = {
-            { "nvim-telescope/telescope.nvim" },
-            { "nvim-treesitter/nvim-treesitter" },
-            { "nvim-lua/plenary.nvim" },
-            { "hrsh7th/nvim-cmp" },
-        },
-        -- -- maybe could be even lazier with these, but not working, because `forester` filetype is not registered yet
-        -- ft = "tree",
-        -- ft = "forester",
-        config = function()
-            -- can't run this because it treesitter might not be initialized
-            -- vim.cmd.TSInstall "toml"
 
-            -- this ensures that the treesitter is initialized, and toml is installed
-            local configs = require "nvim-treesitter.configs"
-            configs.setup {
-                ensure_installed = { "toml" },
-                sync_install = true,
-            }
-
-            -- this ensures forester is initialized, makeing `forester` tree-sitter available
-            require("forester").setup()
-
-            -- can't run this explicitly, because next launch of nvim will ask for reinstallation
-            -- vim.cmd.TSInstall "forester"
-
-            -- installs the forester tree-sitter, so the syntax highlighting is available
-            configs.setup {
-                ensure_installed = { "toml", "forester" },
-                sync_install = false,
-            }
-
-            -- local foresterCompletionSource = require "forester.completion"
-            -- local cmp = require "cmp"
-            -- cmp.register_source("forester", foresterCompletionSource)
-            -- cmp.setup.filetype("forester", { sources = { { name = "forester", dup = 0 } } })
-            -- cmp.setup()
-        end,
-        keys = {
-            { "<localleader>n", "<cmd>Forester new<cr>", desc = "Forester - New" },
-            { "<localleader>b", "<cmd>Forester browse<cr>", desc = "Forester - Browse" },
-            { "<localleader>l", "<cmd>Forester link_new<cr>", desc = "Forester - Link New" },
-            { "<localleader>t", "<cmd>Forester transclude_new<cr>", desc = "Forester - Transclude New" },
-            {
-                "<localleader>c",
-                function()
-                    local cmd = "just new"
-                    local prefix = vim.fn.input "Enter prefix: "
-                    if prefix ~= "" then
-                        cmd = cmd .. " " .. prefix
-                    else
-                        cmd = cmd .. " uts"
-                    end
-                    local file = io.popen(cmd):read "*a"
-                    vim.cmd("e " .. file)
-                end,
-                desc = "Forester - New from Command",
-            },
-        },
-    },
-    -- https://github.com/mrcjkb/rustaceanvim/discussions/94#discussioncomment-7813716 not working:
-    -- error: lazy.nvim/lua/lazy/core/loader.lua:373: attempt to call field 'setup' (a table value)
-    -- {
-    --     "mrcjkb/rustaceanvim",
-    --     version = "^3", -- Recommended
-    --     ft = { "rust" },
-    -- },
-    -- {
-    --     "neovim/nvim-lspconfig",
-    --     opts = {
-    --         setup = {
-    --             rust_analyzer = function()
-    --                 return true
-    --             end,
-    --         },
-    --     },
-    -- },
-    {
-        "mrcjkb/rustaceanvim",
-        version = "^5", -- Recommended
-        lazy = false, -- This plugin is already lazy
-        -- ft = { "rust" },
-        config = function()
-            vim.g.rustaceanvim = {
-                -- server = {
-                --     on_attach = require("lvim.lsp").common_on_attach,
-                -- },
-                server = {
-                    default_settings = {
-                        -- rust-analyzer language server configuration
-                        ["rust-analyzer"] = {
-                            checkOnSave = {
-                                enable = true,
-                                command = "clippy",
-                            },
-                            cargo = {
-                                buildScripts = {
-                                    enable = false,
-                                },
-                            },
-                            -- procMacro = {
-                            --     enable = false,
-                            -- },
-                            cachePriming = {
-                                enable = true,
-                                numThreads = 4,
-                            },
-                        },
-                    },
-                },
-            }
-        end,
-    },
-    {
-        "Julian/lean.nvim",
-        event = { "BufReadPre *.lean", "BufNewFile *.lean" },
-
-        dependencies = {
-            "neovim/nvim-lspconfig",
-            "nvim-lua/plenary.nvim",
-            -- you also will likely want nvim-cmp or some completion engine
-        },
-
-        -- see details below for full configuration options
-        opts = {
-            lsp = {},
-            mappings = true,
-        },
-    },
     {
         "sindrets/diffview.nvim",
         event = "BufRead",
@@ -567,17 +219,7 @@ local plugins = {
         },
     },
     { "wakatime/vim-wakatime", lazy = false },
-    -- {
-    --     "pwntester/octo.nvim",
-    --     dependencies = {
-    --         "nvim-lua/plenary.nvim",
-    --         "nvim-telescope/telescope.nvim",
-    --         "nvim-tree/nvim-web-devicons",
-    --     },
-    --     config = function()
-    --         require("octo").setup()
-    --     end,
-    -- },
+
     {
         "folke/trouble.nvim",
         opts = {}, -- for default options, refer to the configuration section for custom setup.
@@ -637,22 +279,7 @@ local plugins = {
             },
         },
     },
-    -- {
-    --     "neovim/nvim-lspconfig",
-    --     dependencies = {
-    --         {
-    --             "SmiteshP/nvim-navbuddy",
-    --             dependencies = {
-    --                 "SmiteshP/nvim-navic",
-    --                 "MunifTanjim/nui.nvim",
-    --             },
-    --             opts = { lsp = { auto_attach = true } },
-    --         },
-    --     },
-    --     -- your lsp config or other stuff
-    -- },
-    -- play also https://www.vim-hero.com/lessons/basic-movement
-    -- { "ThePrimeagen/vim-be-good" }
+
     {
         "iamcco/markdown-preview.nvim",
         build = "cd app && npm install",
@@ -793,34 +420,7 @@ local plugins = {
             -- ...
         end,
     },
-    -- {
-    --     "rcarriga/nvim-notify",
-    --     keys = {
-    --         {
-    --             "<leader>un",
-    --             function()
-    --                 require("notify").dismiss { silent = true, pending = true }
-    --             end,
-    --             desc = "Dismiss All Notifications",
-    --         },
-    --     },
-    --     opts = {
-    --         stages = "static",
-    --         timeout = 3000,
-    --         max_height = function()
-    --             return math.floor(vim.o.lines * 0.75)
-    --         end,
-    --         max_width = function()
-    --             return math.floor(vim.o.columns * 0.75)
-    --         end,
-    --         on_open = function(win)
-    --             vim.api.nvim_win_set_config(win, { zindex = 100 })
-    --         end,
-    --     },
-    --     init = function()
-    --         vim.notify = require "notify"
-    --     end,
-    -- },
+
     {
         "folke/noice.nvim",
         event = "VeryLazy",
@@ -1033,6 +633,10 @@ local plugins = {
             -- },
         },
     },
+
+}
+
+local lang_plugins = {
     {
         "stevearc/conform.nvim",
         opts = {
@@ -1047,64 +651,127 @@ local plugins = {
             },
         },
     },
-    -- { "neoclide/coc.nvim", branch = "release" },
-    -- {
-    --     "barreiroleo/ltex_extra.nvim",
-    --     branch = "dev",
-    --     ft = { "markdown", "tex" },
-    --     opts = {
-    --         ---@type string[]
-    --         -- See https://valentjn.github.io/ltex/supported-languages.html#natural-languages
-    --         load_langs = { "en-US" },
-    --         ---@type "none" | "fatal" | "error" | "warn" | "info" | "debug" | "trace"
-    --         log_level = "none",
-    --         ---@type string File's path to load.
-    --         -- The setup will normalice it running vim.fs.normalize(path).
-    --         -- e.g. subfolder in project root or cwd: ".ltex"
-    --         -- e.g. cross project settings:  vim.fn.expand("~") .. "/.local/share/ltex"
-    --         path = ".ltex",
-    --     },
-    -- },
-    -- {
-    --     "nvchad/ui",
-    --     config = function()
-    --         require "nvchad"
-    --     end,
-    -- },
-    -- {
-    --     "nvchad/base46",
-    --     lazy = false,
-    --     build = function()
-    --         require("base46").load_all_highlights()
-    --     end,
-    --     opts = {
-    --         theme = "onedark",
-    --     },
-    --     -- config = function()
-    --     --     local base46 = require "base46"
-    --     -- end,
-    -- },
-    -- "nvchad/volt",
-    -- {
-    --     "ThePrimeagen/harpoon",
-    --     branch = "harpoon2",
-    --     dependencies = { "nvim-lua/plenary.nvim" },
-    -- },
-    -- {
-    --     "dnlhc/glance.nvim",
-    --     config = function()
-    --         require("glance").setup {
-    --             -- your configuration
-    --         }
-    --     end,
-    -- },
+    {
+        "kentookura/forester.nvim",
+        -- "utensil/forester.nvim",
+        -- branch = "main",
+        -- dir = "/Users/utensil/projects/forester.nvim",
+        -- before = { "nvim-cmp" },
+        -- branch = "36-installation-and-initialization",
+        -- tried removing this for the auto-completion to have a non-nil `forester_current_config`
+        event = "VeryLazy",
+        dependencies = {
+            { "nvim-telescope/telescope.nvim" },
+            { "nvim-treesitter/nvim-treesitter" },
+            { "nvim-lua/plenary.nvim" },
+            { "hrsh7th/nvim-cmp" },
+        },
+        -- -- maybe could be even lazier with these, but not working, because `forester` filetype is not registered yet
+        -- ft = "tree",
+        -- ft = "forester",
+        config = function()
+            -- can't run this because it treesitter might not be initialized
+            -- vim.cmd.TSInstall "toml"
 
-    -- {
-    --     "Zeioth/hot-reload.nvim",
-    --     dependencies = "nvim-lua/plenary.nvim",
-    --     event = "BufEnter",
-    --     opts = {}
-    -- }
+            -- this ensures that the treesitter is initialized, and toml is installed
+            local configs = require "nvim-treesitter.configs"
+            configs.setup {
+                ensure_installed = { "toml" },
+                sync_install = true,
+            }
+
+            -- this ensures forester is initialized, makeing `forester` tree-sitter available
+            require("forester").setup()
+
+            -- can't run this explicitly, because next launch of nvim will ask for reinstallation
+            -- vim.cmd.TSInstall "forester"
+
+            -- installs the forester tree-sitter, so the syntax highlighting is available
+            configs.setup {
+                ensure_installed = { "toml", "forester" },
+                sync_install = false,
+            }
+
+            -- local foresterCompletionSource = require "forester.completion"
+            -- local cmp = require "cmp"
+            -- cmp.register_source("forester", foresterCompletionSource)
+            -- cmp.setup.filetype("forester", { sources = { { name = "forester", dup = 0 } } })
+            -- cmp.setup()
+        end,
+        keys = {
+            { "<localleader>n", "<cmd>Forester new<cr>", desc = "Forester - New" },
+            { "<localleader>b", "<cmd>Forester browse<cr>", desc = "Forester - Browse" },
+            { "<localleader>l", "<cmd>Forester link_new<cr>", desc = "Forester - Link New" },
+            { "<localleader>t", "<cmd>Forester transclude_new<cr>", desc = "Forester - Transclude New" },
+            {
+                "<localleader>c",
+                function()
+                    local cmd = "just new"
+                    local prefix = vim.fn.input "Enter prefix: "
+                    if prefix ~= "" then
+                        cmd = cmd .. " " .. prefix
+                    else
+                        cmd = cmd .. " uts"
+                    end
+                    local file = io.popen(cmd):read "*a"
+                    vim.cmd("e " .. file)
+                end,
+                desc = "Forester - New from Command",
+            },
+        },
+    },
+    {
+        "mrcjkb/rustaceanvim",
+        version = "^5", -- Recommended
+        lazy = false, -- This plugin is already lazy
+        -- ft = { "rust" },
+        config = function()
+            vim.g.rustaceanvim = {
+                -- server = {
+                --     on_attach = require("lvim.lsp").common_on_attach,
+                -- },
+                server = {
+                    default_settings = {
+                        -- rust-analyzer language server configuration
+                        ["rust-analyzer"] = {
+                            checkOnSave = {
+                                enable = true,
+                                command = "clippy",
+                            },
+                            cargo = {
+                                buildScripts = {
+                                    enable = false,
+                                },
+                            },
+                            -- procMacro = {
+                            --     enable = false,
+                            -- },
+                            cachePriming = {
+                                enable = true,
+                                numThreads = 4,
+                            },
+                        },
+                    },
+                },
+            }
+        end,
+    },
+    {
+        "Julian/lean.nvim",
+        event = { "BufReadPre *.lean", "BufNewFile *.lean" },
+
+        dependencies = {
+            "neovim/nvim-lspconfig",
+            "nvim-lua/plenary.nvim",
+            -- you also will likely want nvim-cmp or some completion engine
+        },
+
+        -- see details below for full configuration options
+        opts = {
+            lsp = {},
+            mappings = true,
+        },
+    },
 }
 
 local llm_plugins = {
@@ -1474,6 +1141,342 @@ local merge = function(...)
     return result
 end
 
-local all_plugins = merge(plugins, llm_plugins)
+local all_plugins = merge(basic_plugins, lang_plugins, ui_plugins, llm_plugins)
 
 return all_plugins
+
+local unused_plugins = {
+    -- {
+    --     "folke/tokyonight.nvim",
+    --     lazy = true,
+    --     opts = { style = "moon" },
+    -- },
+    -- {
+    --     "echasnovski/mini.nvim",
+    --     version = false,
+    --     config = function()
+    --         require("mini.ai").setup {}
+    --     end,
+    -- },
+    -- { "saghen/blink.compat",
+    --     opts = {
+    --         impersonate_nvim_cmp = true,
+    --     }
+    -- },
+    -- { "hrsh7th/cmp-emoji" },
+    -- {
+    --     "allaman/emoji.nvim",
+    --     version = "1.0.0", -- optionally pin to a tag
+    --     ft = "markdown", -- adjust to your needs
+    --     dependencies = {
+    --         -- util for handling paths
+    --         "nvim-lua/plenary.nvim",
+    --         -- optional for nvim-cmp integration
+    --         -- "hrsh7th/nvim-cmp",
+    --         -- optional for telescope integration
+    --         "nvim-telescope/telescope.nvim",
+    --     },
+    --     opts = {
+    --         -- default is false
+    --         enable_cmp_integration = false,
+    --         -- optional if your plugin installation directory
+    --         -- is not vim.fn.stdpath("data") .. "/lazy/
+    --         -- plugin_path = vim.fn.expand "$HOME/plugins/",
+    --     },
+    --     config = function(_, opts)
+    --         require("emoji").setup(opts)
+    --         -- optional for telescope integration
+    --         local ts = require("telescope").load_extension "emoji"
+    --         vim.keymap.set("n", "<leader>se", ts.emoji, { desc = "[S]earch [E]moji" })
+    --     end,
+    -- },
+    -- {
+    --     "xiyaowong/telescope-emoji.nvim",
+    --     dependencies = {
+    --         "nvim-telescope/telescope.nvim",
+    --     },
+    --     config = function()
+    --         require("telescope").load_extension "emoji"
+    --     end,
+    --     keys = {
+    --         { "<leader>se", "<cmd>Telescope emoji<cr>", desc = "Search Emoji" },
+    --     },
+    -- },
+    -- { "LazyVim/LazyVim", import = "lazyvim.plugins" },
+    -- adapted from https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/plugins/extras/ui/mini-animate.lua
+    -- {
+    --     "echasnovski/mini.animate",
+    --     recommended = true,
+    --     event = "VeryLazy",
+    --     opts = function()
+    --         -- don't use animate when scrolling with the mouse
+    --         local mouse_scrolled = false
+    --         for _, scroll in ipairs { "Up", "Down" } do
+    --             local key = "<ScrollWheel" .. scroll .. ">"
+    --             vim.keymap.set({ "", "i" }, key, function()
+    --                 mouse_scrolled = true
+    --                 return key
+    --             end, { expr = true })
+    --         end
+
+    --         vim.api.nvim_create_autocmd("FileType", {
+    --             pattern = "grug-far",
+    --             callback = function()
+    --                 vim.b.minianimate_disable = true
+    --             end,
+    --         })
+
+    --         -- LazyVim.toggle.map("<leader>ua", {
+    --         --     name = "Mini Animate",
+    --         --     get = function()
+    --         --         return not vim.g.minianimate_disable
+    --         --     end,
+    --         --     set = function(state)
+    --         --         vim.g.minianimate_disable = not state
+    --         --     end,
+    --         -- })
+
+    --         local animate = require "mini.animate"
+    --         return {
+    --             resize = {
+    --                 timing = animate.gen_timing.linear { duration = 50, unit = "total" },
+    --             },
+    --             scroll = {
+    --                 timing = animate.gen_timing.linear { duration = 150, unit = "total" },
+    --                 subscroll = animate.gen_subscroll.equal {
+    --                     predicate = function(total_scroll)
+    --                         if mouse_scrolled then
+    --                             mouse_scrolled = false
+    --                             return false
+    --                         end
+    --                         return total_scroll > 1
+    --                     end,
+    --                 },
+    --             },
+    --         }
+    --     end,
+    -- },
+    -- -- https://gronskiy.com/posts/2023-03-26-copy-via-vim-tmux-ssh/
+    -- {
+    --     "ojroques/nvim-osc52",
+    --     config = function()
+    --         require("osc52").setup {
+    --             max_length = 0, -- Maximum length of selection (0 for no limit)
+    --             silent = false, -- Disable message on successful copy
+    --             trim = false, -- Trim surrounding whitespaces before copy
+    --         }
+    --         local function copy()
+    --             if (vim.v.event.operator == "y" or vim.v.event.operator == "d") and vim.v.event.regname == "" then
+    --                 require("osc52").copy_register ""
+    --             end
+    --         end
+
+    --         vim.api.nvim_create_autocmd("TextYankPost", { callback = copy })
+    --     end,
+    -- },
+    -- {
+    --     "stevearc/oil.nvim",
+    --     config = function()
+    --         require("oil").setup {
+    --             float = {
+    --                 border = "rounded",
+    --                 -- max_width = 30,
+    --                 -- max_height = 30,
+    --                 -- override the layout to be on the left top corner
+    --                 -- override = function()
+    --                 --     return {
+    --                 --         relative = "editor",
+    --                 --         width = 30,
+    --                 --         height = 30,
+    --                 --         row = 0,
+    --                 --         col = 0,
+    --                 --     }
+    --                 -- end,
+    --             },
+    --         }
+    --     end,
+    --     -- Optional dependencies
+    --     dependencies = { { "echasnovski/mini.icons", opts = {} } },
+    --     -- dependencies = { "nvim-tree/nvim-web-devicons" }, -- use if prefer nvim-web-devicons
+    --     keys = {
+    --         -- map leader o to oil open_float
+    --         {
+    --             "<leader>o",
+    --             function()
+    --                 require("oil").open_float()
+    --             end,
+    --             desc = "Oil - Open Float",
+    --         },
+    --     },
+    -- },
+    -- https://www.lazyvim.org/configuration/recipes#supertab
+    -- {
+    --     "hrsh7th/nvim-cmp",
+    --     ---@param opts cmp.ConfigSchema
+    --     opts = function()
+    --         local has_words_before = function()
+    --             unpack = unpack or table.unpack
+    --             local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+    --             return col ~= 0
+    --                 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match "%s" == nil
+    --         end
+
+    --         local cmp = require "cmp"
+
+    --         opts.mapping = vim.tbl_extend("force", opts.mapping, {
+    --             ["<Tab>"] = cmp.mapping(function(fallback)
+    --                 if cmp.visible() then
+    --                     -- You could replace select_next_item() with confirm({ select = true }) to get VS Code autocompletion behavior
+    --                     cmp.select_next_item()
+    --                 elseif vim.snippet.active { direction = 1 } then
+    --                     vim.schedule(function()
+    --                         vim.snippet.jump(1)
+    --                     end)
+    --                 elseif has_words_before() then
+    --                     cmp.complete()
+    --                 else
+    --                     fallback()
+    --                 end
+    --             end, { "i", "s" }),
+    --             ["<S-Tab>"] = cmp.mapping(function(fallback)
+    --                 if cmp.visible() then
+    --                     cmp.select_prev_item()
+    --                 elseif vim.snippet.active { direction = -1 } then
+    --                     vim.schedule(function()
+    --                         vim.snippet.jump(-1)
+    --                     end)
+    --                 else
+    --                     fallback()
+    --                 end
+    --             end, { "i", "s" }),
+    --         })
+    --     end,
+    -- },
+    -- {
+    --     "mcauley-penney/visual-whitespace.nvim",
+    --     config = function()
+    --         require("visual-whitespace").setup {
+    --             space_char = " ", -- ·
+    --             tab_char = "→",
+    --             nl_char = "", -- ↲
+    --             cr_char = "←",
+    --         }
+    --         vim.api.nvim_set_hl(0, "VisualNonText", { link = "Whitespace" })
+    --     end,
+    -- },
+    -- { "lewis6991/satellite.nvim" },
+    -- {
+    --     "pwntester/octo.nvim",
+    --     dependencies = {
+    --         "nvim-lua/plenary.nvim",
+    --         "nvim-telescope/telescope.nvim",
+    --         "nvim-tree/nvim-web-devicons",
+    --     },
+    --     config = function()
+    --         require("octo").setup()
+    --     end,
+    -- },
+    -- {
+    --     "neovim/nvim-lspconfig",
+    --     dependencies = {
+    --         {
+    --             "SmiteshP/nvim-navbuddy",
+    --             dependencies = {
+    --                 "SmiteshP/nvim-navic",
+    --                 "MunifTanjim/nui.nvim",
+    --             },
+    --             opts = { lsp = { auto_attach = true } },
+    --         },
+    --     },
+    --     -- your lsp config or other stuff
+    -- },
+    -- play also https://www.vim-hero.com/lessons/basic-movement
+    -- { "ThePrimeagen/vim-be-good" }
+    -- {
+    --     "rcarriga/nvim-notify",
+    --     keys = {
+    --         {
+    --             "<leader>un",
+    --             function()
+    --                 require("notify").dismiss { silent = true, pending = true }
+    --             end,
+    --             desc = "Dismiss All Notifications",
+    --         },
+    --     },
+    --     opts = {
+    --         stages = "static",
+    --         timeout = 3000,
+    --         max_height = function()
+    --             return math.floor(vim.o.lines * 0.75)
+    --         end,
+    --         max_width = function()
+    --             return math.floor(vim.o.columns * 0.75)
+    --         end,
+    --         on_open = function(win)
+    --             vim.api.nvim_win_set_config(win, { zindex = 100 })
+    --         end,
+    --     },
+    --     init = function()
+    --         vim.notify = require "notify"
+    --     end,
+    -- },
+
+    -- { "neoclide/coc.nvim", branch = "release" },
+    -- {
+    --     "barreiroleo/ltex_extra.nvim",
+    --     branch = "dev",
+    --     ft = { "markdown", "tex" },
+    --     opts = {
+    --         ---@type string[]
+    --         -- See https://valentjn.github.io/ltex/supported-languages.html#natural-languages
+    --         load_langs = { "en-US" },
+    --         ---@type "none" | "fatal" | "error" | "warn" | "info" | "debug" | "trace"
+    --         log_level = "none",
+    --         ---@type string File's path to load.
+    --         -- The setup will normalice it running vim.fs.normalize(path).
+    --         -- e.g. subfolder in project root or cwd: ".ltex"
+    --         -- e.g. cross project settings:  vim.fn.expand("~") .. "/.local/share/ltex"
+    --         path = ".ltex",
+    --     },
+    -- },
+    -- {
+    --     "nvchad/ui",
+    --     config = function()
+    --         require "nvchad"
+    --     end,
+    -- },
+    -- {
+    --     "nvchad/base46",
+    --     lazy = false,
+    --     build = function()
+    --         require("base46").load_all_highlights()
+    --     end,
+    --     opts = {
+    --         theme = "onedark",
+    --     },
+    --     -- config = function()
+    --     --     local base46 = require "base46"
+    --     -- end,
+    -- },
+    -- "nvchad/volt",
+    -- {
+    --     "ThePrimeagen/harpoon",
+    --     branch = "harpoon2",
+    --     dependencies = { "nvim-lua/plenary.nvim" },
+    -- },
+    -- {
+    --     "dnlhc/glance.nvim",
+    --     config = function()
+    --         require("glance").setup {
+    --             -- your configuration
+    --         }
+    --     end,
+    -- },
+
+    -- {
+    --     "Zeioth/hot-reload.nvim",
+    --     dependencies = "nvim-lua/plenary.nvim",
+    --     event = "BufEnter",
+    --     opts = {}
+    -- }
+}
