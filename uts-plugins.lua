@@ -633,7 +633,6 @@ local ui_plugins = {
             -- },
         },
     },
-
 }
 
 local lang_plugins = {
@@ -1143,8 +1142,6 @@ end
 
 local all_plugins = merge(basic_plugins, lang_plugins, ui_plugins, llm_plugins)
 
-return all_plugins
-
 local unused_plugins = {
     -- {
     --     "folke/tokyonight.nvim",
@@ -1480,3 +1477,5 @@ local unused_plugins = {
     --     opts = {}
     -- }
 }
+
+return all_plugins
