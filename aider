@@ -3,10 +3,15 @@
 # This is need for Mac as the default clang is too old
 export CC=/opt/homebrew/opt/llvm/bin/clang CXX=/opt/homebrew/opt/llvm/bin/clang++ CPATH=/opt/homebrew/opt/llvm/include LIBRARY_PATH=/opt/homebrew/opt/llvm/lib
 
-export MODEL='openai/xai:grok-beta'
-
-if [ -n "$ANTHROPIC_API_KEY" ]; then
+if [[ "$OPENAI_API_BASE" == *"hunyuan"* ]]; then
+    export MODEL='openai/hunyuan-code'
+elif [ -n "$ANTHROPIC_API_KEY" ]; then
     export MODEL=""
+elif [[ "$OPENAI_API_BASE" == *"0.0.0.0"* ]]; then
+    export MODEL='openai/xai:grok-beta'
+else
+    echo "No model available in the environment, please check .env file"
+    exit 1
 fi
 # This runs aider in a virtual environment with the specified model, configs etc.
 uvx --python 3.11 --from 'aider-chat[help,playwright]' aider --no-show-model-warnings --model "$MODEL" --max-chat-history-tokens 8000 --map-tokens 1024 --dark-mode --subtree-only "$@"
