@@ -707,6 +707,10 @@ local lang_plugins = {
                 function()
                     local cmd = "just new"
                     local prefix = vim.fn.input "Enter prefix: "
+                    if not prefix:match "^[a-z]+$" or #prefix > 10 then
+                        print "Error: Prefix must be no more than 10 lowercase a-z characters."
+                        return
+                    end
                     if prefix ~= "" then
                         cmd = cmd .. " " .. prefix
                     else
