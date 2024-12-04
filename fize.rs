@@ -134,9 +134,15 @@ enum Token {
     ListItem(String),
 
     // Math expressions
-    #[regex(r"\$\$([^$]*)\$\$", |lex| lex.captures_iter(lex.slice()).next().unwrap()[1].to_string())]
+    #[regex(r"\$\$([^$]*)\$\$", |lex| {
+        let content = lex.slice();
+        content.trim_start_matches("$$").trim_end_matches("$$").to_string()
+    })]
     DisplayMath(String),
-    #[regex(r"\$([^$]*)\$", |lex| lex.captures_iter(lex.slice()).next().unwrap()[1].to_string())]
+    #[regex(r"\$([^$]*)\$", |lex| {
+        let content = lex.slice();
+        content.trim_start_matches("$").trim_end_matches("$").to_string()
+    })]
     InlineMath(String),
 
     // Special blocks - capture command type and arguments
@@ -232,9 +238,7 @@ fn parse_tokens(lex: logos::Lexer<Token>) -> Node {
                 println!("DEBUG: Created minitex command node");
             }
             Ok(Token::EmphText) => {
-                let content = token.as_ref()
-                    .map(|_| lex.slice())
-                    .unwrap_or("")
+                let content = lex.slice()
                     .trim_start_matches("\\emph{")
                     .trim_end_matches("}");
                 nodes.push(Node::Command {
