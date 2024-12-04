@@ -126,7 +126,11 @@ enum Token {
     EndList,
     
     // List items - capture content after command
-    #[regex(r"\\(item|ii)\s+([^\n\r]+)", |lex| lex.slice()[5..].trim().to_string())]
+    #[regex(r"\\(item|ii)\s+([^\n\r]+)", |lex| {
+        let content = lex.slice();
+        let after_command = content.find(' ').map(|i| i + 1).unwrap_or(content.len());
+        content[after_command..].trim().to_string()
+    })]
     ListItem(String),
 
     // Math expressions
@@ -137,9 +141,16 @@ enum Token {
 
     // Special blocks - capture command type and arguments
     #[regex(r"\\(texdef|texnote)\{([^}]*)\}\{([^}]*)\}\{", 
-        |lex| (lex.slice().starts_with("\\texdef"), 
-              lex.slice()[8..].split('}').next().unwrap().to_string(),
-              lex.slice().split('}').nth(1).unwrap()[1..].to_string()))]
+        |lex| {
+            let content = lex.slice();
+            let is_def = content.starts_with("\\texdef");
+            let args: Vec<&str> = content.split('{')
+                .skip(1)  // Skip command name
+                .take(2)  // Take first two arguments
+                .map(|s| s.trim_end_matches('}'))
+                .collect();
+            (is_def, args[0].to_string(), args[1].to_string())
+        })]
     DefBlock(bool, String, String),  // true for texdef, false for texnote
     #[token("\\minitex{")]
     MiniTex,
