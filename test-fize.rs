@@ -17,19 +17,19 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     // Ensure we have a clean copy of the test file
     let original = fs::read_to_string("trees/complex.tree")?;
     
-    // Run fize.py
-    let py_output = {
+    // Run fize.rs first
+    let rs_output = {
         fs::write("trees/complex.tree", &original)?;
-        Command::new("./fize.py")
+        Command::new("./fize.rs")
             .arg("complex")
             .output()?;
         fs::read_to_string("trees/complex.tree")?
     };
     
-    // Run fize.rs
-    let rs_output = {
+    // Run fize.py second
+    let py_output = {
         fs::write("trees/complex.tree", &original)?;
-        Command::new("./fize.rs")
+        Command::new("./fize.py")
             .arg("complex")
             .output()?;
         fs::read_to_string("trees/complex.tree")?
