@@ -119,22 +119,22 @@ impl Node {
 
 #[derive(Logos, Debug, PartialEq)]
 enum Token {
-    // Lists
-    #[regex(r"\\begin\{enumerate\}", priority = 2)]
-    BeginEnumerate,
-    #[regex(r"\\end\{enumerate\}", priority = 2)]
-    EndEnumerate,
-    #[regex(r"\\begin\{itemize\}", priority = 2)]
-    BeginItemize,
-    #[regex(r"\\end\{itemize\}", priority = 2)]
-    EndItemize,
+    // Lists - preserve original LaTeX commands
+    #[regex(r"\\begin\{enumerate\}")]
+    Text1,
+    #[regex(r"\\end\{enumerate\}")]
+    Text2,
+    #[regex(r"\\begin\{itemize\}")]
+    Text3,
+    #[regex(r"\\end\{itemize\}")]
+    Text4,
     // Match list items like:
     // \item This is a list item
     // \ii Another list item style
-    #[regex(r"\\item\s+([^\n\r]+)", |lex| lex.slice().trim_start_matches("\\item").trim().to_string())]
-    Item(String),
-    #[regex(r"\\ii\s+([^\n\r]+)", |lex| lex.slice().trim_start_matches("\\ii").trim().to_string())]
-    Ii(String),
+    #[regex(r"\\item\s+[^\n\r]+")]
+    ItemText,
+    #[regex(r"\\ii\s+[^\n\r]+")]
+    IiText,
 
     // Math expressions:
     // Display math: $$x^2 + y^2 = z^2$$
@@ -148,32 +148,16 @@ enum Token {
     // Match definition blocks like:
     // \texdef{Definition 1}{Title}{Content}
     // Captures the two arguments before the content block
-    #[regex(r"\\texdef\{([^}]*)\}\{([^}]*)\}\{", |lex| {
-        let content = lex.slice();
-        let mut parts = content.split('{');
-        parts.next(); // skip command
-        let arg1 = parts.next().unwrap().trim_end_matches('}').to_string();
-        let arg2 = parts.next().unwrap().trim_end_matches('}').to_string();
-        (arg1, arg2)
-    })]
-    TexDef((String, String)),
-    #[regex(r"\\texnote\{([^}]*)\}\{([^}]*)\}\{", |lex| {
-        let content = lex.slice();
-        let mut parts = content.split('{');
-        parts.next(); // skip command
-        let arg1 = parts.next().unwrap().trim_end_matches('}').to_string();
-        let arg2 = parts.next().unwrap().trim_end_matches('}').to_string();
-        (arg1, arg2)
-    })]
-    TexNote((String, String)),
+    #[regex(r"\\texdef\{[^}]*\}\{[^}]*\}\{")]
+    TexDefText,
+    #[regex(r"\\texnote\{[^}]*\}\{[^}]*\}\{")]
+    TexNoteText,
     #[token("\\minitex{")]
     MiniTex,
 
     // Other commands
-    #[regex(r"\\emph\{([^}]*)\}", |lex| {
-        lex.slice().trim_start_matches("\\emph{").trim_end_matches('}').to_string()
-    })]
-    Emph(String),
+    #[regex(r"\\emph\{[^}]*\}")]
+    EmphText,
 
     // Basic text token - matches any sequence of characters that:
     // - isn't a command (no backslash)
@@ -203,17 +187,12 @@ fn parse_tokens(lex: logos::Lexer<Token>) -> Node {
     
     for token in lex {
         match token {
-            Ok(Token::BeginEnumerate) => list_stack.push((true, Vec::new())),
-            Ok(Token::EndEnumerate) => handle_list_end(&mut nodes, &mut list_stack, true),
-            Ok(Token::BeginItemize) => list_stack.push((false, Vec::new())),
-            Ok(Token::EndItemize) => handle_list_end(&mut nodes, &mut list_stack, false),
-            Ok(Token::Item(content)) | Ok(Token::Ii(content)) => {
-                let item = Node::ListItem(content);
-                if let Some((_, items)) = list_stack.last_mut() {
-                    items.push(item);
-                } else {
-                    nodes.push(item);
-                }
+            Ok(Token::Text1) => nodes.push(Node::Text("\\begin{enumerate}".to_string())),
+            Ok(Token::Text2) => nodes.push(Node::Text("\\end{enumerate}".to_string())),
+            Ok(Token::Text3) => nodes.push(Node::Text("\\begin{itemize}".to_string())),
+            Ok(Token::Text4) => nodes.push(Node::Text("\\end{itemize}".to_string())),
+            Ok(Token::ItemText) | Ok(Token::IiText) => {
+                nodes.push(Node::Text(lex.slice().to_string()));
             }
             Ok(Token::DisplayMath(content)) | Ok(Token::InlineMath(content)) => {
                 let display = matches!(token, Ok(Token::DisplayMath(_)));
@@ -228,13 +207,8 @@ fn parse_tokens(lex: logos::Lexer<Token>) -> Node {
                     _ => nodes.push(Node::Math { display, content }),
                 }
             }
-            Ok(Token::TexDef((arg1, arg2))) | Ok(Token::TexNote((arg1, arg2))) => {
-                let name = if matches!(token, Ok(Token::TexDef(_))) { "refdef" } else { "refnote" };
-                nodes.push(Node::Command {
-                    name: name.to_string(),
-                    args: vec![arg1, arg2],
-                    body: Some(Box::new(Node::Block(Vec::new()))),
-                });
+            Ok(Token::TexDefText) | Ok(Token::TexNoteText) => {
+                nodes.push(Node::Text(lex.slice().to_string()));
             }
             Ok(Token::MiniTex) => {
                 nodes.push(Node::Command {
@@ -243,12 +217,8 @@ fn parse_tokens(lex: logos::Lexer<Token>) -> Node {
                     body: Some(Box::new(Node::Block(Vec::new()))),
                 });
             }
-            Ok(Token::Emph(content)) => {
-                nodes.push(Node::Command {
-                    name: "em".to_string(),
-                    args: vec![content],
-                    body: None,
-                });
+            Ok(Token::EmphText) => {
+                nodes.push(Node::Text(lex.slice().to_string()));
             }
             Ok(Token::Text(text)) => {
                 // Join consecutive text nodes
