@@ -210,19 +210,27 @@ fn parse_tokens(lex: logos::Lexer<Token>) -> Node {
                 println!("DEBUG: Created inline math node: content={}", content);
             }
             Ok(Token::DefBlock) => {
-                let slice = lex.slice();
-                let cmd_type = if slice.starts_with("\\texdef") { "refdef" } else { "refnote" };
-                let args: Vec<&str> = slice.split('{')
-                    .skip(1)  // Skip command name
-                    .take(2)  // Take first two arguments
-                    .map(|s| s.trim_end_matches('}'))
-                    .collect();
-                nodes.push(Node::Command {
-                    name: cmd_type.to_string(),
-                    args: vec![args[0].to_string(), args[1].to_string()],
-                    body: None
-                });
-                println!("DEBUG: Created command node: name={}, args={:?}", cmd_type, args);
+                let slice = token.as_ref().ok().and_then(|t| match t {
+                    Token::DefBlock => {
+                        let slice = lex.slice();
+                        let cmd_type = if slice.starts_with("\\texdef") { "refdef" } else { "refnote" };
+                        let args: Vec<&str> = slice.split('{')
+                            .skip(1)  // Skip command name
+                            .take(2)  // Take first two arguments
+                            .map(|s| s.trim_end_matches('}'))
+                            .collect();
+                        Some((cmd_type.to_string(), args))
+                    },
+                    _ => None
+                }).unwrap_or_default();
+                if let (cmd_type, args) = slice {
+                    nodes.push(Node::Command {
+                        name: cmd_type,
+                        args: args.iter().map(|s| s.to_string()).collect(),
+                        body: None
+                    });
+                    println!("DEBUG: Created command node: name={}, args={:?}", cmd_type, args);
+                }
             }
             Ok(Token::MiniTex) => {
                 nodes.push(Node::Command {
