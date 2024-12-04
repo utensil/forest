@@ -210,20 +210,22 @@ fn parse_tokens(lex: logos::Lexer<Token>) -> Node {
                 println!("DEBUG: Created inline math node: content={}", content);
             }
             Ok(Token::DefBlock) => {
-                let slice = lex.slice();
-                let cmd_type = if slice.starts_with("\\texdef") { "refdef" } else { "refnote" };
-                let args: Vec<&str> = slice.split('{')
-                    .skip(1)  // Skip command name
-                    .take(2)  // Take first two arguments
-                    .map(|s| s.trim_end_matches('}'))
-                    .collect();
-                let cmd_type = cmd_type.to_string();
-                nodes.push(Node::Command {
-                    name: cmd_type.clone(),
-                    args: args.iter().map(|s| s.to_string()).collect(),
-                    body: None
-                });
-                println!("DEBUG: Created command node: name={}, args={:?}", cmd_type, args);
+                if let Ok(Token::DefBlock) = token {
+                    let slice = token.as_ref().ok().map(|_| lex.slice()).unwrap_or_default();
+                    let cmd_type = if slice.starts_with("\\texdef") { "refdef" } else { "refnote" };
+                    let args: Vec<&str> = slice.split('{')
+                        .skip(1)  // Skip command name
+                        .take(2)  // Take first two arguments
+                        .map(|s| s.trim_end_matches('}'))
+                        .collect();
+                    let cmd_type = cmd_type.to_string();
+                    nodes.push(Node::Command {
+                        name: cmd_type.clone(),
+                        args: args.iter().map(|s| s.to_string()).collect(),
+                        body: None
+                    });
+                    println!("DEBUG: Created command node: name={}, args={:?}", cmd_type, args);
+                }
             }
             Ok(Token::MiniTex) => {
                 nodes.push(Node::Command {
@@ -234,16 +236,18 @@ fn parse_tokens(lex: logos::Lexer<Token>) -> Node {
                 println!("DEBUG: Created minitex command node");
             }
             Ok(Token::EmphText) => {
-                let slice = lex.slice();
-                let content = slice.trim_start_matches("\\emph{")
-                    .trim_end_matches("}")
-                    .to_string();
-                nodes.push(Node::Command {
-                    name: "em".to_string(),
-                    args: vec![content.clone()],
-                    body: None
-                });
-                println!("DEBUG: Created em command node with content: {}", content);
+                if let Ok(Token::EmphText) = token {
+                    let slice = token.as_ref().ok().map(|_| lex.slice()).unwrap_or_default();
+                    let content = slice.trim_start_matches("\\emph{")
+                        .trim_end_matches("}")
+                        .to_string();
+                    nodes.push(Node::Command {
+                        name: "em".to_string(),
+                        args: vec![content.clone()],
+                        body: None
+                    });
+                    println!("DEBUG: Created em command node with content: {}", content);
+                }
             }
             Ok(Token::Text(text)) => {
                 // Join consecutive text nodes
