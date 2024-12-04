@@ -238,18 +238,19 @@ fn parse_tokens(lex: logos::Lexer<Token>) -> Node {
                 println!("DEBUG: Created minitex command node");
             }
             Ok(Token::EmphText) => {
-                let content = match token {
+                let slice = match &token {
                     Ok(Token::EmphText) => {
-                        let slice = lex.slice();
-                        slice.trim_start_matches("\\emph{")
+                        let content = slice.trim_start_matches("\\emph{")
                             .trim_end_matches("}")
-                            .to_string()
+                            .to_string();
+                        content
                     },
                     _ => String::new()
                 };
+                let content = slice.clone();
                 nodes.push(Node::Command {
                     name: "em".to_string(),
-                    args: vec![content],
+                    args: vec![content.clone()],
                     body: None
                 });
                 println!("DEBUG: Created em command node with content: {}", content);
