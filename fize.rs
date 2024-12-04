@@ -56,7 +56,7 @@ impl Node {
             if Self::is_empty_doc(&acc).unwrap_or(true) {
                 doc
             } else {
-                acc.append(BoxDoc::line()).append(doc)
+                acc.append(BoxDoc::hardline()).append(doc)
             }
         })
     }
@@ -68,9 +68,9 @@ impl Node {
                 let items_doc = Self::fold_docs(items.iter().map(|item| item.to_doc()));
                 BoxDoc::text(format!("\\{}", cmd))
                     .append(BoxDoc::text("{"))
-                    .append(BoxDoc::text("\r"))
+                    .append(BoxDoc::hardline())
                     .append(items_doc.nest(2))
-                    .append(BoxDoc::text("\r"))
+                    .append(BoxDoc::hardline())
                     .append(BoxDoc::text("}"))
                     .group()
             }
@@ -89,13 +89,18 @@ impl Node {
                 if let Some(body) = body {
                     doc = doc
                         .append(BoxDoc::text("{"))
-                        .append(BoxDoc::text("\r\r"))
+                        .append(BoxDoc::hardline())
+                        .append(BoxDoc::hardline())
                         .append(BoxDoc::text("\\p{"))
                         .append(body.to_doc())
                         .append(BoxDoc::text("}"))
-                        .append(BoxDoc::text("\r\r"))
+                        .append(BoxDoc::hardline())
+                        .append(BoxDoc::hardline())
                         .append(BoxDoc::text("}"))
-                        .append(BoxDoc::text("\r\r}\r"));
+                        .append(BoxDoc::hardline())
+                        .append(BoxDoc::hardline())
+                        .append(BoxDoc::text("}"))
+                        .append(BoxDoc::hardline());
                 }
                 doc.group()
             }
@@ -235,7 +240,7 @@ fn parse_tokens(lex: logos::Lexer<Token>) -> Node {
                 nodes.push(Node::Text(text.to_string()));
             }
             Ok(Token::Newline) => {
-                nodes.push(Node::Text("\r".to_string()));
+                // Skip newlines as they'll be handled by the pretty printer
             }
             Ok(Token::OpenBrace) => {
                 nodes.push(Node::Text("{".to_string()));
