@@ -17,7 +17,6 @@ type Result<T> = std::result::Result<T, Box<dyn std::error::Error>>;
 type ListStack = Vec<(bool, Vec<Node>)>;
 
 const DEFAULT_LINE_WIDTH: usize = 80;
-const INDENT_SPACES: isize = 2;
 
 /// Represents a node in the abstract syntax tree for the document
 #[derive(Debug)]
