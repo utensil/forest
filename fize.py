@@ -16,17 +16,6 @@ TREE = f"trees/{sys.argv[1]}.tree"
 
 with open(TREE, 'r+') as file:
     content = file.read()
-    # Fix enumerate and itemize
-    content = re.sub(r'\\begin\{enumerate\}', r'\\ol{', content)
-    content = re.sub(r'\\end\{enumerate\}', r'}', content)
-    content = re.sub(r'\\begin\{itemize\}', r'\\ul{', content)
-    content = re.sub(r'\\end\{itemize\}', r'}', content)
-    content = re.sub(r'\\item (.*)', r'\\li{\1}', content)
-    content = re.sub(r'\\ii (.*)', r'\\li{\1}', content)
-
-    # Convert some LaTeX commands to forester commands
-    content = re.sub(r'\\emph\{([^}]*)\}', r'\\em{\1}', content)
-
     # Convert math first
     content = re.sub(r'\$\$([^$]+)\$\$', r'##{\1}', content)
     content = re.sub(r'\$([^$]+)\$', r'#{\1}', content)
@@ -46,7 +35,7 @@ with open(TREE, 'r+') as file:
     content = re.sub(r'\\ii (.*)', r'\\li{\1}', content)
 
     # Fix line endings and brace structure
-    content = re.sub(r'}\s*$', r'}\n\n}\n', content)
+    content = re.sub(r'}\s*$', r'}\n\n}\n\n}\n', content)
 
     # Replace the file content
     file.seek(0)
