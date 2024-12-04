@@ -134,24 +134,24 @@ enum Token {
     ListItem(String),
 
     // Math expressions
-    #[regex(r"\$\$[^$]*\$\$", |lex| lex.slice().trim_matches('$').to_string())]
+    #[regex(r"\$\$([^$]*)\$\$", |lex| lex.captures_iter(lex.slice()).next().unwrap()[1].to_string())]
     DisplayMath(String),
-    #[regex(r"\$[^$]*\$", |lex| lex.slice().trim_matches('$').to_string())]
+    #[regex(r"\$([^$]*)\$", |lex| lex.captures_iter(lex.slice()).next().unwrap()[1].to_string())]
     InlineMath(String),
 
     // Special blocks - capture command type and arguments
     #[regex(r"\\(texdef|texnote)\{([^}]*)\}\{([^}]*)\}\{", 
         |lex| {
             let content = lex.slice();
-            let is_def = content.starts_with("\\texdef");
+            let cmd_type = if content.starts_with("\\texdef") { "refdef" } else { "refnote" };
             let args: Vec<&str> = content.split('{')
                 .skip(1)  // Skip command name
                 .take(2)  // Take first two arguments
                 .map(|s| s.trim_end_matches('}'))
                 .collect();
-            (is_def, args[0].to_string(), args[1].to_string())
+            (cmd_type.to_string(), args[0].to_string(), args[1].to_string())
         })]
-    DefBlock(bool, String, String),  // true for texdef, false for texnote
+    DefBlock(String, String, String),  // command name, arg1, arg2
     #[token("\\minitex{")]
     MiniTex,
 
@@ -205,18 +205,17 @@ fn parse_tokens(lex: logos::Lexer<Token>) -> Node {
                     nodes.push(Node::ListItem(content));
                 }
             }
-            Ok(Token::DisplayMath(content)) | Ok(Token::InlineMath(content)) => {
-                let display = matches!(token, Ok(Token::DisplayMath(_)));
-                nodes.push(Node::Math { 
-                    display, 
-                    content 
-                });
-                println!("DEBUG: Created math node: display={}, content={}", display, content);
+            Ok(Token::DisplayMath(content)) => {
+                nodes.push(Node::Text(format!("##{{{}}}",content)));
+                println!("DEBUG: Created display math node: content={}", content);
             }
-            Ok(Token::DefBlock(is_def, arg1, arg2)) => {
-                let cmd = if is_def { "refdef" } else { "refnote" };
+            Ok(Token::InlineMath(content)) => {
+                nodes.push(Node::Text(format!("#{{{}}}",content)));
+                println!("DEBUG: Created inline math node: content={}", content);
+            }
+            Ok(Token::DefBlock(cmd, arg1, arg2)) => {
                 nodes.push(Node::Command {
-                    name: cmd.to_string(),
+                    name: cmd,
                     args: vec![arg1, arg2],
                     body: None
                 });
