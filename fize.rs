@@ -43,7 +43,13 @@ impl Node {
                 let items_doc = items.iter()
                     .map(|item| item.to_doc())
                     .fold(BoxDoc::nil(), |acc, doc| {
-                        if BoxDoc::nil().append(acc) == acc { doc } else { acc.append(BoxDoc::line()).append(doc) }
+                        let mut vec = Vec::new();
+                        acc.pretty(&BoxAllocator).render(0, &mut vec).unwrap();
+                        if String::from_utf8(vec).unwrap().is_empty() { 
+                            doc 
+                        } else { 
+                            acc.append(BoxDoc::line()).append(doc) 
+                        }
                     });
                 BoxDoc::text(format!("\\{}", cmd))
                     .append(BoxDoc::text("{"))
@@ -85,7 +91,13 @@ impl Node {
                 nodes.iter()
                     .map(|node| node.to_doc())
                     .fold(BoxDoc::nil(), |acc, doc| {
-                        if BoxDoc::nil().append(acc) == acc { doc } else { acc.append(doc) }
+                        let mut vec = Vec::new();
+                        acc.pretty(&BoxAllocator).render(0, &mut vec).unwrap();
+                        if String::from_utf8(vec).unwrap().is_empty() {
+                            doc
+                        } else {
+                            acc.append(doc)
+                        }
                     })
             }
         }
