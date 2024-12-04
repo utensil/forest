@@ -177,7 +177,7 @@ fn handle_list_end(nodes: &mut Vec<Node>, list_stack: &mut ListStack, ordered: b
     }
 }
 
-fn parse_tokens(mut lex: logos::Lexer<Token>) -> Node {
+fn parse_tokens(lex: logos::Lexer<Token>) -> Node {
     let mut nodes = Vec::new();
     let mut list_stack = Vec::new();
     
@@ -217,7 +217,7 @@ fn parse_tokens(mut lex: logos::Lexer<Token>) -> Node {
                 let args = vec!["arg1".to_string(), "arg2".to_string()];  // Default args
                 nodes.push(Node::Command {
                     name: cmd_type.to_string(),
-                    args,
+                    args: args.clone(),
                     body: None
                 });
                 println!("DEBUG: Created command node: name={}, args={:?}", cmd_type, args);
