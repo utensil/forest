@@ -43,7 +43,7 @@ impl Node {
                 let items_doc = items.iter()
                     .map(|item| item.to_doc())
                     .fold(BoxDoc::nil(), |acc, doc| {
-                        if acc == BoxDoc::nil() { doc } else { acc.append(BoxDoc::line()).append(doc) }
+                        if BoxDoc::nil().append(acc) == acc { doc } else { acc.append(BoxDoc::line()).append(doc) }
                     });
                 BoxDoc::text(format!("\\{}", cmd))
                     .append(BoxDoc::text("{"))
@@ -85,7 +85,7 @@ impl Node {
                 nodes.iter()
                     .map(|node| node.to_doc())
                     .fold(BoxDoc::nil(), |acc, doc| {
-                        if acc == BoxDoc::nil() { doc } else { acc.append(doc) }
+                        if BoxDoc::nil().append(acc) == acc { doc } else { acc.append(doc) }
                     })
             }
         }
