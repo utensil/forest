@@ -251,6 +251,11 @@ fn parse_tokens(lex: logos::Lexer<Token>) -> Node {
                     args: vec![text],
                     body: None
                 });
+                // Don't add extra newline after em command
+                match nodes.last_mut() {
+                    Some(Node::Command { body: None, .. }) => (),
+                    _ => nodes.push(Node::Text(" ".to_string()))
+                }
             }
             Ok(Token::Text(text)) => {
                 if !text.is_empty() {
