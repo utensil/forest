@@ -162,9 +162,7 @@ enum Token {
     #[regex(r"\{")]
     OpenBrace,
     #[regex(r"\}")]
-    CloseBrace,
-
-    Error,
+    CloseBrace
 }
 
 fn parse_tokens(lex: logos::Lexer<Token>) -> Node {
@@ -255,7 +253,7 @@ fn parse_tokens(lex: logos::Lexer<Token>) -> Node {
             Ok(Token::CloseBrace) => {
                 nodes.push(Node::Text("}".to_string()));
             }
-            Ok(Token::Error) | Err(_) => (), // Skip errors
+            Err(_) => (), // Skip errors
         }
     }
     
