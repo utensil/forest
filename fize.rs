@@ -68,9 +68,9 @@ impl Node {
                 let items_doc = Self::fold_docs(items.iter().map(|item| item.to_doc()));
                 BoxDoc::text(format!("\\{}", cmd))
                     .append(BoxDoc::text("{"))
-                    .append(BoxDoc::line())
+                    .append(BoxDoc::text("\r"))
                     .append(items_doc.nest(2))
-                    .append(BoxDoc::line())
+                    .append(BoxDoc::text("\r"))
                     .append(BoxDoc::text("}"))
                     .group()
             }
@@ -89,13 +89,11 @@ impl Node {
                 if let Some(body) = body {
                     doc = doc
                         .append(BoxDoc::text("{"))
-                        .append(BoxDoc::line())
-                        .append(BoxDoc::line())
+                        .append(BoxDoc::text("\r\r"))
                         .append(BoxDoc::text("\\p{"))
                         .append(body.to_doc())
                         .append(BoxDoc::text("}"))
-                        .append(BoxDoc::line())
-                        .append(BoxDoc::line())
+                        .append(BoxDoc::text("\r\r"))
                         .append(BoxDoc::text("}"))
                         .append(BoxDoc::text("\r\r}\r"));
                 }
@@ -252,19 +250,6 @@ fn parse_tokens(lex: logos::Lexer<Token>) -> Node {
     Node::Block(nodes)
 }
 
-/// Post-processes the content to match fize.py behavior
-fn post_process(content: &str) -> String {
-    let mut result = content.to_string();
-    // Replace double newlines with closing brace + double newline + paragraph
-    result = result.replace("\r\r", "}\r\r\\p{");
-    // Replace trailing brace with proper closing sequence
-    if result.trim_end().ends_with('}') {
-        result = result.trim_end().trim_end_matches('}').to_string();
-        result.push_str("}\r\r}\r");
-    }
-    result
-}
-
 /// Processes the input content by tokenizing, parsing and pretty printing
 fn process_content(input: &str) -> Result<String> {
     let lex = Token::lexer(input);
@@ -272,8 +257,7 @@ fn process_content(input: &str) -> Result<String> {
     let doc = ast.to_doc();
     let mut output = Vec::new();
     doc.pretty(&BoxAllocator).render(DEFAULT_LINE_WIDTH, &mut output)?;
-    let content = String::from_utf8(output)?;
-    Ok(post_process(&content))
+    Ok(String::from_utf8(output)?)
 }
 
 fn main() -> Result<()> {
