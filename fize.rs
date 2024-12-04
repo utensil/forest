@@ -86,19 +86,22 @@ impl Node {
                         .append(BoxDoc::hardline())
                         .append(BoxDoc::hardline())
                         .append(BoxDoc::text("\\p{"))
+                        .append(BoxDoc::hardline())
                         .append(body.to_doc())
+                        .append(BoxDoc::hardline())
                         .append(BoxDoc::text("}"))
                         .append(BoxDoc::hardline())
+                        .append(BoxDoc::text("}"))
                         .append(BoxDoc::hardline())
-                        .append(BoxDoc::text("}"));
+                        .append(BoxDoc::hardline());
                 } else {
                     doc = doc.append(BoxDoc::text("{"))
                         .append(BoxDoc::hardline())
-                        .append(BoxDoc::text("}"));
+                        .append(BoxDoc::text("}"))
+                        .append(BoxDoc::hardline());
                 }
                 
-                doc.append(BoxDoc::hardline())
-                   .append(BoxDoc::hardline())
+                doc
             }
             Node::Text(text) => {
                 if text.ends_with('\n') {
