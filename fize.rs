@@ -56,25 +56,19 @@ impl Node {
         })
     }
 
-    /// Converts an AST node into a pretty-printable document
-    /// 
-    /// The document structure uses these formatting rules:
-    /// - Lists are indented by 2 spaces
-    /// - Double hardlines create paragraph breaks
-    /// - Commands with bodies get paragraph breaks around the body
-    /// - Groups allow the pretty printer to choose optimal line breaks
     fn to_doc(&self) -> BoxDoc<'_> {
+        // Helper to create paragraph breaks
+        let para_break = BoxDoc::hardline().append(BoxDoc::hardline());
         match self {
             Node::List { ordered, items } => {
                 let cmd = if *ordered { "ol" } else { "ul" };
-                let items_doc = Self::fold_docs(items.iter().map(|item| item.to_doc()));
+                let items_doc = Self::fold_docs(items.iter().map(|item| item.to_doc())).nest(2);
                 BoxDoc::text(format!("\\{}", cmd))
                     .append(BoxDoc::text("{"))
                     .append(BoxDoc::hardline())
-                    .append(items_doc.nest(2))  // Indent list items
+                    .append(items_doc)
                     .append(BoxDoc::hardline())
                     .append(BoxDoc::text("}"))
-                    .group()  // Allow pretty printer to optimize breaks
             }
             Node::ListItem(content) => {
                 BoxDoc::text(format!("\\li{{{}}}", content))
@@ -137,14 +131,24 @@ enum Token {
     InlineMath(String),
 
     // Special blocks - capture command type and arguments
-    #[regex(r"\\(texdef|texnote)\{([^}]*)\}\{([^}]*)\}\{")]
-    DefBlock,
+    #[regex(r"\\(texdef|texnote)\{([^}]*)\}\{([^}]*)\}\{", |lex| {
+        let content = lex.slice();
+        let parts: Vec<&str> = content.split('{')
+            .map(|s| s.trim_end_matches('}'))
+            .collect();
+        (parts[1].to_string(), parts[2].to_string())
+    })]
+    DefBlock(String, String),
+
     #[token("\\minitex{")]
     MiniTex,
 
-    // Other commands
-    #[regex(r"\\emph\{[^}]*\}")]
-    EmphText,
+    // Other commands - capture the text content
+    #[regex(r"\\emph\{([^}]*)\}", |lex| {
+        let content = lex.slice();
+        content[6..content.len()-1].to_string()
+    })]
+    EmphText(String),
 
     // Basic text token - matches any sequence of characters that:
     // - isn't a command (no backslash)
@@ -197,15 +201,12 @@ fn parse_tokens(lex: logos::Lexer<Token>) -> Node {
                 nodes.push(Node::Text(format!("#{{{}}}",content)));
                 println!("DEBUG: Created inline math node: content={}", content);
             }
-            Ok(Token::DefBlock) => {
-                let cmd_type = "refdef";  // Default to refdef since we can't check slice anymore
-                let args = vec!["arg1".to_string(), "arg2".to_string()];  // Default args
+            Ok(Token::DefBlock(arg1, arg2)) => {
                 nodes.push(Node::Command {
-                    name: cmd_type.to_string(),
-                    args: args.clone(),
+                    name: "refdef".to_string(),
+                    args: vec![arg1, arg2],
                     body: None
                 });
-                println!("DEBUG: Created command node: name={}, args={:?}", cmd_type, args);
             }
             Ok(Token::MiniTex) => {
                 nodes.push(Node::Command {
@@ -215,13 +216,12 @@ fn parse_tokens(lex: logos::Lexer<Token>) -> Node {
                 });
                 println!("DEBUG: Created minitex command node");
             }
-            Ok(Token::EmphText) => {
+            Ok(Token::EmphText(text)) => {
                 nodes.push(Node::Command {
                     name: "em".to_string(),
-                    args: vec!["text".to_string()],  // Default text since we can't access slice
+                    args: vec![text],
                     body: None
                 });
-                println!("DEBUG: Created em command node");
             }
             Ok(Token::Text(text)) => {
                 // Join consecutive text nodes
