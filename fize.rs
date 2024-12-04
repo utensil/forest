@@ -238,7 +238,9 @@ fn parse_tokens(lex: logos::Lexer<Token>) -> Node {
                 println!("DEBUG: Created minitex command node");
             }
             Ok(Token::EmphText) => {
-                let content = lex.slice()
+                // Capture the slice before using token
+                let slice = token.as_ref().map(|_| lex.slice()).unwrap_or("");
+                let content = slice
                     .trim_start_matches("\\emph{")
                     .trim_end_matches("}");
                 nodes.push(Node::Command {
