@@ -43,7 +43,7 @@ impl Node {
                 let items_doc = items.iter()
                     .map(|item| item.to_doc())
                     .fold(BoxDoc::nil(), |acc, doc| {
-                        if acc.is_empty() { doc } else { acc.append(BoxDoc::line()).append(doc) }
+                        if acc == BoxDoc::nil() { doc } else { acc.append(BoxDoc::line()).append(doc) }
                     });
                 BoxDoc::text(format!("\\{}", cmd))
                     .append(BoxDoc::text("{"))
@@ -85,7 +85,7 @@ impl Node {
                 nodes.iter()
                     .map(|node| node.to_doc())
                     .fold(BoxDoc::nil(), |acc, doc| {
-                        if acc.is_empty() { doc } else { acc.append(doc) }
+                        if acc == BoxDoc::nil() { doc } else { acc.append(doc) }
                     })
             }
         }
@@ -255,9 +255,8 @@ fn process_content(input: &str) -> String {
     let ast = parse_tokens(lex);
     let doc = ast.to_doc();
     let width = 80; // configurable line width
-    let allocator = BoxAllocator;
     let mut vec = Vec::new();
-    doc.pretty(&allocator).render(width, &mut vec).unwrap();
+    doc.pretty(&BoxAllocator).render(width, &mut vec).unwrap();
     String::from_utf8(vec).unwrap()
 }
 
