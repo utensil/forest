@@ -36,14 +36,15 @@ enum Node {
 }
 
 impl Node {
-    fn to_doc(&self) -> BoxDoc<'static> {
+    fn to_doc(&self) -> Doc<'static, ()> {
         match self {
             Node::List { ordered, items } => {
                 let cmd = if *ordered { "ol" } else { "ul" };
-                let items_doc = Doc::intersperse(
-                    items.iter().map(|item| item.to_doc()),
-                    Doc::line()
-                );
+                let items_doc = items.iter()
+                    .map(|item| item.to_doc())
+                    .fold(Doc::nil(), |acc, doc| {
+                        if acc == Doc::nil() { doc } else { acc.append(Doc::line()).append(doc) }
+                    });
                 Doc::text(format!("\\{}", cmd))
                     .append(Doc::text("{"))
                     .append(Doc::line())
@@ -51,16 +52,13 @@ impl Node {
                     .append(Doc::line())
                     .append(Doc::text("}"))
                     .group()
-                    .into_boxed()
             }
             Node::ListItem(content) => {
                 Doc::text(format!("\\li{{{}}}", content))
-                    .into_boxed()
             }
             Node::Math { display, content } => {
                 let delim = if *display { "##" } else { "#" };
                 Doc::text(format!("{}{{{}}}", delim, content))
-                    .into_boxed()
             }
             Node::Command { name, args, body } => {
                 let mut doc = Doc::text(format!("\\{}", name));
@@ -80,14 +78,15 @@ impl Node {
                         .append(Doc::text("}"))
                         .append(Doc::text("\r\r}\r"));
                 }
-                doc.group().into_boxed()
+                doc.group()
             }
-            Node::Text(text) => Doc::text(text).into_boxed(),
+            Node::Text(text) => Doc::text(text),
             Node::Block(nodes) => {
-                Doc::intersperse(
-                    nodes.iter().map(|node| node.to_doc()),
-                    Doc::nil()
-                ).into_boxed()
+                nodes.iter()
+                    .map(|node| node.to_doc())
+                    .fold(Doc::nil(), |acc, doc| {
+                        if acc == Doc::nil() { doc } else { acc.append(doc) }
+                    })
             }
         }
     }
@@ -153,7 +152,6 @@ enum Token {
     #[regex(r"\}")]
     CloseBrace,
 
-    #[error]
     Error,
 }
 
@@ -163,10 +161,10 @@ fn parse_tokens(lex: logos::Lexer<Token>) -> Node {
     
     for token in lex {
         match token {
-            Token::BeginEnumerate => {
+            Ok(Token::BeginEnumerate) => {
                 list_stack.push((true, Vec::new())); // ordered=true
             }
-            Token::EndEnumerate => {
+            Ok(Token::EndEnumerate) => {
                 if let Some((_, items)) = list_stack.pop() {
                     nodes.push(Node::List { 
                         ordered: true, 
@@ -174,10 +172,10 @@ fn parse_tokens(lex: logos::Lexer<Token>) -> Node {
                     });
                 }
             }
-            Token::BeginItemize => {
+            Ok(Token::BeginItemize) => {
                 list_stack.push((false, Vec::new())); // ordered=false
             }
-            Token::EndItemize => {
+            Ok(Token::EndItemize) => {
                 if let Some((_, items)) = list_stack.pop() {
                     nodes.push(Node::List { 
                         ordered: false, 
@@ -185,7 +183,7 @@ fn parse_tokens(lex: logos::Lexer<Token>) -> Node {
                     });
                 }
             }
-            Token::Item(content) | Token::Ii(content) => {
+            Ok(Token::Item(content)) | Ok(Token::Ii(content)) => {
                 let item = Node::ListItem(content);
                 if let Some((_, items)) = list_stack.last_mut() {
                     items.push(item);
@@ -193,59 +191,59 @@ fn parse_tokens(lex: logos::Lexer<Token>) -> Node {
                     nodes.push(item);
                 }
             }
-            Token::DisplayMath(content) => {
+            Ok(Token::DisplayMath(content)) => {
                 nodes.push(Node::Math {
                     display: true,
                     content,
                 });
             }
-            Token::InlineMath(content) => {
+            Ok(Token::InlineMath(content)) => {
                 nodes.push(Node::Math {
                     display: false,
                     content,
                 });
             }
-            Token::TexDef((arg1, arg2)) => {
+            Ok(Token::TexDef((arg1, arg2))) => {
                 nodes.push(Node::Command {
                     name: "refdef".to_string(),
                     args: vec![arg1, arg2],
                     body: Some(Box::new(Node::Text(String::new()))),
                 });
             }
-            Token::TexNote((arg1, arg2)) => {
+            Ok(Token::TexNote((arg1, arg2))) => {
                 nodes.push(Node::Command {
                     name: "refnote".to_string(),
                     args: vec![arg1, arg2],
                     body: Some(Box::new(Node::Text(String::new()))),
                 });
             }
-            Token::MiniTex => {
+            Ok(Token::MiniTex) => {
                 nodes.push(Node::Command {
                     name: "p".to_string(),
                     args: vec![],
                     body: Some(Box::new(Node::Text(String::new()))),
                 });
             }
-            Token::Emph(content) => {
+            Ok(Token::Emph(content)) => {
                 nodes.push(Node::Command {
                     name: "em".to_string(),
                     args: vec![content],
                     body: None,
                 });
             }
-            Token::Text(text) => {
+            Ok(Token::Text(text)) => {
                 nodes.push(Node::Text(text.to_string()));
             }
-            Token::Newline => {
+            Ok(Token::Newline) => {
                 nodes.push(Node::Text("\r".to_string()));
             }
-            Token::OpenBrace => {
+            Ok(Token::OpenBrace) => {
                 nodes.push(Node::Text("{".to_string()));
             }
-            Token::CloseBrace => {
+            Ok(Token::CloseBrace) => {
                 nodes.push(Node::Text("}".to_string()));
             }
-            Token::Error => (), // Skip errors
+            Ok(Token::Error) | Err(_) => (), // Skip errors
         }
     }
     
