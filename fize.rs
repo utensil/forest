@@ -61,6 +61,13 @@ impl Node {
         })
     }
 
+    /// Converts an AST node into a pretty-printable document
+    /// 
+    /// The document structure uses these formatting rules:
+    /// - Lists are indented by 2 spaces
+    /// - Double hardlines create paragraph breaks
+    /// - Commands with bodies get paragraph breaks around the body
+    /// - Groups allow the pretty printer to choose optimal line breaks
     fn to_doc(&self) -> BoxDoc<'_> {
         match self {
             Node::List { ordered, items } => {
@@ -69,10 +76,10 @@ impl Node {
                 BoxDoc::text(format!("\\{}", cmd))
                     .append(BoxDoc::text("{"))
                     .append(BoxDoc::hardline())
-                    .append(items_doc.nest(2))
+                    .append(items_doc.nest(2))  // Indent list items
                     .append(BoxDoc::hardline())
                     .append(BoxDoc::text("}"))
-                    .group()
+                    .group()  // Allow pretty printer to optimize breaks
             }
             Node::ListItem(content) => {
                 BoxDoc::text(format!("\\li{{{}}}", content))
@@ -121,18 +128,26 @@ enum Token {
     BeginItemize,
     #[regex(r"\\end\{itemize\}", priority = 2)]
     EndItemize,
+    // Match list items like:
+    // \item This is a list item
+    // \ii Another list item style
     #[regex(r"\\item\s+([^\n\r]+)", |lex| lex.slice().trim_start_matches("\\item").trim().to_string())]
     Item(String),
     #[regex(r"\\ii\s+([^\n\r]+)", |lex| lex.slice().trim_start_matches("\\ii").trim().to_string())]
     Ii(String),
 
-    // Math
+    // Math expressions:
+    // Display math: $$x^2 + y^2 = z^2$$
+    // Inline math: $x + y = z$
     #[regex(r"\$\$[^$]*\$\$", |lex| lex.slice().trim_matches('$').to_string())]
     DisplayMath(String),
     #[regex(r"\$[^$]*\$", |lex| lex.slice().trim_matches('$').to_string())]
     InlineMath(String),
 
-    // Special blocks
+    // Special LaTeX-style blocks with arguments:
+    // Match definition blocks like:
+    // \texdef{Definition 1}{Title}{Content}
+    // Captures the two arguments before the content block
     #[regex(r"\\texdef\{([^}]*)\}\{([^}]*)\}\{", |lex| {
         let content = lex.slice();
         let mut parts = content.split('{');
@@ -160,7 +175,11 @@ enum Token {
     })]
     Emph(String),
 
-    // Basic tokens
+    // Basic text token - matches any sequence of characters that:
+    // - isn't a command (no backslash)
+    // - isn't math (no dollar signs)
+    // - isn't braces
+    // - isn't line endings
     #[regex(r"[^\\$\{\}\n\r]+", |lex| lex.slice().to_string())]
     Text(String),
     #[regex(r"[\n\r]+")]
