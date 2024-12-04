@@ -9,12 +9,17 @@ logos = "0.13.0"
 pretty = "0.12.1"
 ---
 
-use std::env;
-use std::fs;
-use std::process;
+use std::{env, fs, process};
 use logos::Logos;
 use pretty::{BoxDoc, Pretty, BoxAllocator};
 
+type Result<T> = std::result::Result<T, Box<dyn std::error::Error>>;
+type ListStack = Vec<(bool, Vec<Node>)>;
+
+const DEFAULT_LINE_WIDTH: usize = 80;
+const INDENT_SPACES: isize = 2;
+
+/// Represents a node in the abstract syntax tree for the document
 #[derive(Debug)]
 enum Node {
     List {
@@ -36,13 +41,15 @@ enum Node {
 }
 
 impl Node {
-    fn is_empty_doc(doc: &BoxDoc) -> bool {
-        let mut vec = Vec::new();
-        doc.clone().pretty(&BoxAllocator).render(0, &mut vec).unwrap();
-        String::from_utf8(vec).unwrap().is_empty()
+    /// Checks if a BoxDoc is empty by rendering it and checking the result
+    fn is_empty_doc(doc: &BoxDoc) -> Result<bool> {
+        let mut output = Vec::new();
+        doc.clone().pretty(&BoxAllocator).render(0, &mut output)?;
+        Ok(String::from_utf8(output)?.is_empty())
     }
 
-    fn fold_docs<'a, I>(docs: I) -> BoxDoc<'a>
+    /// Combines multiple BoxDocs into a single document, separated by newlines
+    fn fold_docs<'a, I>(docs: I) -> BoxDoc<'a> 
     where
         I: Iterator<Item = BoxDoc<'a>>,
     {
@@ -162,7 +169,8 @@ enum Token {
     CloseBrace
 }
 
-fn handle_list_end(nodes: &mut Vec<Node>, list_stack: &mut Vec<(bool, Vec<Node>)>, ordered: bool) {
+/// Handles the end of a list by popping it from the stack and adding it to the nodes
+fn handle_list_end(nodes: &mut Vec<Node>, list_stack: &mut ListStack, ordered: bool) {
     if let Some((_, items)) = list_stack.pop() {
         nodes.push(Node::List { ordered, items });
     }
@@ -245,34 +253,27 @@ fn parse_tokens(lex: logos::Lexer<Token>) -> Node {
     Node::Block(nodes)
 }
 
-fn process_content(input: &str) -> String {
+/// Processes the input content by tokenizing, parsing and pretty printing
+fn process_content(input: &str) -> Result<String> {
     let lex = Token::lexer(input);
     let ast = parse_tokens(lex);
     let doc = ast.to_doc();
-    let width = 80; // configurable line width
-    let mut vec = Vec::new();
-    doc.pretty(&BoxAllocator).render(width, &mut vec).unwrap();
-    String::from_utf8(vec).unwrap()
+    let mut output = Vec::new();
+    doc.pretty(&BoxAllocator).render(DEFAULT_LINE_WIDTH, &mut output)?;
+    Ok(String::from_utf8(output)?)
 }
 
-fn main() {
+fn main() -> Result<()> {
     let args: Vec<String> = env::args().collect();
     
     if args.len() != 2 {
-        println!("Usage: ./fize.rs <tree>");
+        eprintln!("Usage: ./fize.rs <tree>");
         process::exit(1);
     }
 
     let tree_path = format!("trees/{}.tree", args[1]);
-    
-    // Read the file content
-    let content = fs::read_to_string(&tree_path)
-        .expect("Should have been able to read the file");
-
-    // Process content using lexer
-    let processed = process_content(&content);
-
-    // Write back to file
-    fs::write(&tree_path, processed)
-        .expect("Should have been able to write the file");
+    let content = fs::read_to_string(&tree_path)?;
+    let processed = process_content(&content)?;
+    fs::write(&tree_path, processed)?;
+    Ok(())
 }
