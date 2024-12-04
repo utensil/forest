@@ -9,7 +9,7 @@ logos = "0.13.0"
 pretty = "0.12.1"
 ---
 
-use std::{env, fs, process};
+use std::{env, fs, process, io::Write};
 use logos::Logos;
 use pretty::{BoxDoc, Pretty, BoxAllocator};
 
@@ -290,6 +290,11 @@ fn main() -> Result<()> {
     let tree_path = format!("trees/{}.tree", args[1]);
     let content = fs::read_to_string(&tree_path)?;
     let processed = process_content(&content)?;
-    fs::write(&tree_path, processed)?;
+    let mut file = fs::OpenOptions::new()
+        .write(true)
+        .truncate(true)
+        .open(&tree_path)?;
+    file.write_all(processed.as_bytes())?;
+    file.flush()?;
     Ok(())
 }
