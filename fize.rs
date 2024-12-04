@@ -14,7 +14,6 @@ use logos::Logos;
 use pretty::{BoxDoc, Pretty, BoxAllocator};
 
 type Result<T> = std::result::Result<T, Box<dyn std::error::Error>>;
-type ListStack = Vec<(bool, Vec<Node>)>;
 
 const DEFAULT_LINE_WIDTH: usize = 80;
 
@@ -26,10 +25,6 @@ enum Node {
         items: Vec<Node>,
     },
     ListItem(String),
-    Math {
-        display: bool,
-        content: String,
-    },
     Command {
         name: String,
         args: Vec<String>,
@@ -170,12 +165,6 @@ enum Token {
     CloseBrace
 }
 
-/// Handles the end of a list by popping it from the stack and adding it to the nodes
-fn handle_list_end(nodes: &mut Vec<Node>, list_stack: &mut ListStack, ordered: bool) {
-    if let Some((_, items)) = list_stack.pop() {
-        nodes.push(Node::List { ordered, items });
-    }
-}
 
 fn parse_tokens(lex: logos::Lexer<Token>) -> Node {
     let mut nodes = Vec::new();
