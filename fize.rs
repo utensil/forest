@@ -36,7 +36,7 @@ enum Node {
 }
 
 impl Node {
-    fn to_doc(&self) -> BoxDoc<'static> {
+    fn to_doc(&self) -> BoxDoc<'_> {
         match self {
             Node::List { ordered, items } => {
                 let cmd = if *ordered { "ol" } else { "ul" };
@@ -44,7 +44,7 @@ impl Node {
                     .map(|item| item.to_doc())
                     .fold(BoxDoc::nil(), |acc, doc| {
                         let mut vec = Vec::new();
-                        acc.pretty(&BoxAllocator).render(0, &mut vec).unwrap();
+                        acc.clone().pretty(&BoxAllocator).render(0, &mut vec).unwrap();
                         if String::from_utf8(vec).unwrap().is_empty() { 
                             doc 
                         } else { 
@@ -86,13 +86,13 @@ impl Node {
                 }
                 doc.group()
             }
-            Node::Text(text) => BoxDoc::text(text),
+            Node::Text(text) => BoxDoc::text(text.clone()),
             Node::Block(nodes) => {
                 nodes.iter()
                     .map(|node| node.to_doc())
                     .fold(BoxDoc::nil(), |acc, doc| {
                         let mut vec = Vec::new();
-                        acc.pretty(&BoxAllocator).render(0, &mut vec).unwrap();
+                        acc.clone().pretty(&BoxAllocator).render(0, &mut vec).unwrap();
                         if String::from_utf8(vec).unwrap().is_empty() {
                             doc
                         } else {
