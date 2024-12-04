@@ -216,13 +216,11 @@ fn parse_tokens(lex: logos::Lexer<Token>) -> Node {
                     .replace("\\texnote", "\\refnote");
                 nodes.push(Node::Text(text));
                 nodes.push(Node::Text("\n\n\\p{".to_string()));
+                nodes.push(Node::Text("\n".to_string()));
             }
             Ok(Token::MiniTex) => {
-                nodes.push(Node::Command {
-                    name: "p".to_string(),
-                    args: vec![],
-                    body: Some(Box::new(Node::Block(Vec::new()))),
-                });
+                nodes.push(Node::Text("{\n\n\\p{".to_string()));
+                nodes.push(Node::Text("\n".to_string()));
             }
             Ok(Token::EmphText) => {
                 let text = lex.slice().replace("\\emph", "\\em");
@@ -243,7 +241,7 @@ fn parse_tokens(lex: logos::Lexer<Token>) -> Node {
                 nodes.push(Node::Text("{".to_string()));
             }
             Ok(Token::CloseBrace) => {
-                nodes.push(Node::Text("}".to_string()));
+                nodes.push(Node::Text("}\n".to_string()));
             }
             Err(_) => (), // Skip errors
         }
