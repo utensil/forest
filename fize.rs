@@ -59,40 +59,38 @@ impl Node {
     fn to_doc(&self) -> BoxDoc<'_, ()> {
         match self {
             Node::List { ordered, items } => {
-                let cmd = if *ordered { "ol" } else { "ul" };
+                let cmd = if *ordered { "\\ol" } else { "\\ul" };
                 let items_doc = Self::fold_docs(items.iter().map(|item| item.to_doc())).nest(2);
-                BoxDoc::text(format!("\\{}", cmd))
+                BoxDoc::text(cmd)
                     .append(BoxDoc::text("{"))
                     .append(BoxDoc::hardline())
                     .append(items_doc)
                     .append(BoxDoc::hardline())
                     .append(BoxDoc::text("}"))
+                    .append(BoxDoc::hardline())
             }
             Node::ListItem(content) => {
-                BoxDoc::text(format!("\\li{{{}}}", content))
+                BoxDoc::text("\\li{")
+                    .append(content)
+                    .append(BoxDoc::text("}"))
+                    .append(BoxDoc::hardline())
             }
             Node::Command { name, args, body } => {
                 let mut doc = BoxDoc::text(format!("\\{}", name));
                 for arg in args {
                     doc = doc.append(BoxDoc::text(format!("{{{}}}", arg)));
                 }
+                doc = doc.append(BoxDoc::text("{")).append(BoxDoc::hardline());
+                
                 if let Some(body) = body {
-                    doc = doc
-                        .append(BoxDoc::text("{"))
-                        .append(BoxDoc::hardline())
-                        .append(BoxDoc::hardline())
+                    doc = doc.append(BoxDoc::hardline())
                         .append(BoxDoc::text("\\p{"))
                         .append(body.to_doc())
                         .append(BoxDoc::text("}"))
-                        .append(BoxDoc::hardline())
-                        .append(BoxDoc::hardline())
-                        .append(BoxDoc::text("}"))
-                        .append(BoxDoc::hardline())
-                        .append(BoxDoc::hardline())
-                        .append(BoxDoc::text("}"))
                         .append(BoxDoc::hardline());
                 }
-                doc.group()
+                
+                doc.append(BoxDoc::text("}")).group()
             }
             Node::Text(text) => BoxDoc::text(text.clone()),
             Node::Block(nodes) => Self::fold_docs(nodes.iter().map(|node| node.to_doc()))
@@ -192,11 +190,11 @@ fn parse_tokens(lex: logos::Lexer<Token>) -> Node {
                 }
             }
             Ok(Token::DisplayMath(content)) => {
-                nodes.push(Node::Text(format!("##{{{}}}",content)));
+                nodes.push(Node::Text(format!("##{{{}}}", content.trim())));
                 println!("DEBUG: Created display math node: content={}", content);
             }
             Ok(Token::InlineMath(content)) => {
-                nodes.push(Node::Text(format!("#{{{}}}",content)));
+                nodes.push(Node::Text(format!("#{{{}}}", content.trim())));
                 println!("DEBUG: Created inline math node: content={}", content);
             }
             Ok(Token::DefBlock(combined)) => {
@@ -223,11 +221,16 @@ fn parse_tokens(lex: logos::Lexer<Token>) -> Node {
                 });
             }
             Ok(Token::Text(text)) => {
-                // Join consecutive text nodes
-                if let Some(Node::Text(prev)) = nodes.last_mut() {
-                    prev.push_str(&text);
-                } else {
-                    nodes.push(Node::Text(text));
+                let text = text.trim();
+                if !text.is_empty() {
+                    if let Some(Node::Text(prev)) = nodes.last_mut() {
+                        if !prev.ends_with(' ') {
+                            prev.push(' ');
+                        }
+                        prev.push_str(text);
+                    } else {
+                        nodes.push(Node::Text(text.to_string()));
+                    }
                 }
             }
             Ok(Token::Newline) => {
