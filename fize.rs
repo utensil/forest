@@ -119,39 +119,28 @@ impl Node {
 
 #[derive(Logos, Debug, PartialEq)]
 enum Token {
-    // Lists - preserve original LaTeX commands
-    #[regex(r"\\begin\{enumerate\}")]
-    Text1,
-    #[regex(r"\\end\{enumerate\}")]
-    Text2,
-    #[regex(r"\\begin\{itemize\}")]
-    Text3,
-    #[regex(r"\\end\{itemize\}")]
-    Text4,
-    // Match list items like:
-    // \item This is a list item
-    // \ii Another list item style
-    #[regex(r"\\item\s+[^\n\r]+")]
-    ItemText,
-    #[regex(r"\\ii\s+[^\n\r]+")]
-    IiText,
+    // Lists - capture list type and content
+    #[regex(r"\\begin\{(enumerate|itemize)\}", |lex| lex.slice().contains("enumerate"))]
+    BeginList(bool),  // true for enumerate, false for itemize
+    #[regex(r"\\end\{(enumerate|itemize)\}")]
+    EndList,
+    
+    // List items - capture content after command
+    #[regex(r"\\(item|ii)\s+([^\n\r]+)", |lex| lex.slice()[5..].trim().to_string())]
+    ListItem(String),
 
-    // Math expressions:
-    // Display math: $$x^2 + y^2 = z^2$$
-    // Inline math: $x + y = z$
+    // Math expressions
     #[regex(r"\$\$[^$]*\$\$", |lex| lex.slice().trim_matches('$').to_string())]
     DisplayMath(String),
     #[regex(r"\$[^$]*\$", |lex| lex.slice().trim_matches('$').to_string())]
     InlineMath(String),
 
-    // Special LaTeX-style blocks with arguments:
-    // Match definition blocks like:
-    // \texdef{Definition 1}{Title}{Content}
-    // Captures the two arguments before the content block
-    #[regex(r"\\texdef\{[^}]*\}\{[^}]*\}\{")]
-    TexDefText,
-    #[regex(r"\\texnote\{[^}]*\}\{[^}]*\}\{")]
-    TexNoteText,
+    // Special blocks - capture command type and arguments
+    #[regex(r"\\(texdef|texnote)\{([^}]*)\}\{([^}]*)\}\{", 
+        |lex| (lex.slice().starts_with("\\texdef"), 
+              lex.slice()[8..].split('}').next().unwrap().to_string(),
+              lex.slice().split('}').nth(1).unwrap()[1..].to_string()))]
+    DefBlock(bool, String, String),  // true for texdef, false for texnote
     #[token("\\minitex{")]
     MiniTex,
 
@@ -187,15 +176,13 @@ fn parse_tokens(lex: logos::Lexer<Token>) -> Node {
     
     for token in lex {
         match token {
-            Ok(Token::Text1) => nodes.push(Node::Text("\\ol{".to_string())),
-            Ok(Token::Text2) => nodes.push(Node::Text("}".to_string())),
-            Ok(Token::Text3) => nodes.push(Node::Text("\\ul{".to_string())),
-            Ok(Token::Text4) => nodes.push(Node::Text("}".to_string())),
-            Ok(Token::ItemText) | Ok(Token::IiText) => {
-                let content = lex.slice()
-                    .trim_start_matches("\\item ")
-                    .trim_start_matches("\\ii ")
-                    .trim();
+            Ok(Token::BeginList(ordered)) => {
+                nodes.push(Node::Text(format!("\\{}{{", if ordered { "ol" } else { "ul" })));
+            }
+            Ok(Token::EndList) => {
+                nodes.push(Node::Text("}".to_string()));
+            }
+            Ok(Token::ListItem(content)) => {
                 nodes.push(Node::Text(format!("\\li{{{}}}", content)));
             }
             Ok(Token::DisplayMath(content)) | Ok(Token::InlineMath(content)) => {
@@ -210,12 +197,9 @@ fn parse_tokens(lex: logos::Lexer<Token>) -> Node {
                     _ => nodes.push(Node::Text(text)),
                 }
             }
-            Ok(Token::TexDefText) | Ok(Token::TexNoteText) => {
-                let text = lex.slice()
-                    .replace("\\texdef", "\\refdef")
-                    .replace("\\texnote", "\\refnote");
-                nodes.push(Node::Text(text));
-                nodes.push(Node::Text("\n\n\\p{".to_string()));
+            Ok(Token::DefBlock(is_def, arg1, arg2)) => {
+                let cmd = if is_def { "refdef" } else { "refnote" };
+                nodes.push(Node::Text(format!("\\{}{{{}}}{{{}}}{{\n\n\\p{{", cmd, arg1, arg2)));
             }
             Ok(Token::MiniTex) => {
                 nodes.push(Node::Text("\\minitex{".to_string()));
