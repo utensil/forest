@@ -84,21 +84,15 @@ impl Node {
                 if let Some(body) = body {
                     doc = doc.append(BoxDoc::text("{"))
                         .append(BoxDoc::hardline())
-                        .append(BoxDoc::hardline())
                         .append(BoxDoc::text("\\p{"))
-                        .append(BoxDoc::hardline())
                         .append(body.to_doc())
-                        .append(BoxDoc::hardline())
                         .append(BoxDoc::text("}"))
                         .append(BoxDoc::hardline())
                         .append(BoxDoc::text("}"))
-                        .append(BoxDoc::hardline())
                         .append(BoxDoc::hardline());
                 } else {
                     doc = doc.append(BoxDoc::text("{"))
-                        .append(BoxDoc::hardline())
-                        .append(BoxDoc::text("}"))
-                        .append(BoxDoc::hardline());
+                        .append(BoxDoc::text("}"));
                 }
                 
                 doc
@@ -111,12 +105,7 @@ impl Node {
                 }
             },
             Node::Block(nodes) => {
-                let doc = Self::fold_docs(nodes.iter().map(|node| node.to_doc()));
-                if nodes.len() > 1 {
-                    doc.append(BoxDoc::hardline())
-                } else {
-                    doc
-                }
+                Self::fold_docs(nodes.iter().map(|node| node.to_doc()))
             }
         }
     }
