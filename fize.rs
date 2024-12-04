@@ -43,9 +43,9 @@ impl Node {
     }
 
     /// Combines multiple BoxDocs into a single document, separated by newlines
-    fn fold_docs<'a, I>(docs: I) -> BoxDoc<'a> 
+    fn fold_docs<'a, I>(docs: I) -> BoxDoc<'a, ()> 
     where
-        I: Iterator<Item = BoxDoc<'a>>,
+        I: Iterator<Item = BoxDoc<'a, ()>>,
     {
         docs.fold(BoxDoc::nil(), |acc, doc| {
             if Self::is_empty_doc(&acc).unwrap_or(true) {
@@ -56,9 +56,9 @@ impl Node {
         })
     }
 
-    fn to_doc(&self) -> BoxDoc<'_> {
+    fn to_doc(&self) -> BoxDoc<'_, ()> {
         // Helper to create paragraph breaks
-        let para_break = BoxDoc::hardline().append(BoxDoc::hardline());
+        let para_break = BoxDoc::<()>::hardline().append(BoxDoc::hardline());
         match self {
             Node::List { ordered, items } => {
                 let cmd = if *ordered { "ol" } else { "ul" };
@@ -136,9 +136,9 @@ enum Token {
         let parts: Vec<&str> = content.split('{')
             .map(|s| s.trim_end_matches('}'))
             .collect();
-        (parts[1].to_string(), parts[2].to_string())
+        format!("{}|{}", parts[1], parts[2])
     })]
-    DefBlock(String, String),
+    DefBlock(String),
 
     #[token("\\minitex{")]
     MiniTex,
@@ -201,10 +201,11 @@ fn parse_tokens(lex: logos::Lexer<Token>) -> Node {
                 nodes.push(Node::Text(format!("#{{{}}}",content)));
                 println!("DEBUG: Created inline math node: content={}", content);
             }
-            Ok(Token::DefBlock(arg1, arg2)) => {
+            Ok(Token::DefBlock(combined)) => {
+                let parts: Vec<&str> = combined.split('|').collect();
                 nodes.push(Node::Command {
                     name: "refdef".to_string(),
-                    args: vec![arg1, arg2],
+                    args: vec![parts[0].to_string(), parts[1].to_string()],
                     body: None
                 });
             }
