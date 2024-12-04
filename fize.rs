@@ -1,9 +1,11 @@
 #!/usr/bin/env cargo +nightly -Zscript
 ---cargo
 [package]
+name = "fize"
+version = "0.1.0"
 edition = "2021"
 [dependencies]
-regex = "1.10.2"
+regex = "1.9.5"
 ---
 
 use std::env;
