@@ -146,18 +146,8 @@ enum Token {
     InlineMath(String),
 
     // Special blocks - capture command type and arguments
-    #[regex(r"\\(texdef|texnote)\{([^}]*)\}\{([^}]*)\}\{", 
-        |lex| {
-            let content = lex.slice();
-            let cmd_type = if content.starts_with("\\texdef") { "refdef" } else { "refnote" };
-            let args: Vec<&str> = content.split('{')
-                .skip(1)  // Skip command name
-                .take(2)  // Take first two arguments
-                .map(|s| s.trim_end_matches('}'))
-                .collect();
-            format!("{}:{}:{}", cmd_type, args[0], args[1])
-        })]
-    DefBlock(String),  // Combined string with format "cmd:arg1:arg2"
+    #[regex(r"\\(texdef|texnote)\{([^}]*)\}\{([^}]*)\}\{")]
+    DefBlock,
     #[token("\\minitex{")]
     MiniTex,
 
@@ -219,15 +209,20 @@ fn parse_tokens(lex: logos::Lexer<Token>) -> Node {
                 nodes.push(Node::Text(format!("#{{{}}}",content)));
                 println!("DEBUG: Created inline math node: content={}", content);
             }
-            Ok(Token::DefBlock(combined)) => {
-                let parts: Vec<&str> = combined.split(':').collect();
-                let (cmd, arg1, arg2) = (parts[0], parts[1], parts[2]);
+            Ok(Token::DefBlock) => {
+                let slice = lex.slice();
+                let cmd_type = if slice.starts_with("\\texdef") { "refdef" } else { "refnote" };
+                let args: Vec<&str> = slice.split('{')
+                    .skip(1)  // Skip command name
+                    .take(2)  // Take first two arguments
+                    .map(|s| s.trim_end_matches('}'))
+                    .collect();
                 nodes.push(Node::Command {
-                    name: cmd.to_string(),
-                    args: vec![arg1.to_string(), arg2.to_string()],
+                    name: cmd_type.to_string(),
+                    args: vec![args[0].to_string(), args[1].to_string()],
                     body: None
                 });
-                println!("DEBUG: Created command node: name={}, args={:?}", cmd, vec![arg1, arg2]);
+                println!("DEBUG: Created command node: name={}, args={:?}", cmd_type, args);
             }
             Ok(Token::MiniTex) => {
                 nodes.push(Node::Command {
@@ -238,10 +233,15 @@ fn parse_tokens(lex: logos::Lexer<Token>) -> Node {
                 println!("DEBUG: Created minitex command node");
             }
             Ok(Token::EmphText) => {
-                let slice = lex.slice().to_string();
-                let content = slice.trim_start_matches("\\emph{")
-                    .trim_end_matches("}")
-                    .to_string();
+                let content = token.as_ref().ok().and_then(|t| match t {
+                    Token::EmphText => {
+                        let slice = lex.slice();
+                        Some(slice.trim_start_matches("\\emph{")
+                            .trim_end_matches("}")
+                            .to_string())
+                    },
+                    _ => None
+                }).unwrap_or_default();
                 nodes.push(Node::Command {
                     name: "em".to_string(),
                     args: vec![content.clone()],
