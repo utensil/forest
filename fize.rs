@@ -36,21 +36,30 @@ enum Node {
 }
 
 impl Node {
+    fn is_empty_doc(doc: &BoxDoc) -> bool {
+        let mut vec = Vec::new();
+        doc.clone().pretty(&BoxAllocator).render(0, &mut vec).unwrap();
+        String::from_utf8(vec).unwrap().is_empty()
+    }
+
+    fn fold_docs<I>(docs: I) -> BoxDoc<'_>
+    where
+        I: Iterator<Item = BoxDoc<'_>>,
+    {
+        docs.fold(BoxDoc::nil(), |acc, doc| {
+            if Self::is_empty_doc(&acc) {
+                doc
+            } else {
+                acc.append(BoxDoc::line()).append(doc)
+            }
+        })
+    }
+
     fn to_doc(&self) -> BoxDoc<'_> {
         match self {
             Node::List { ordered, items } => {
                 let cmd = if *ordered { "ol" } else { "ul" };
-                let items_doc = items.iter()
-                    .map(|item| item.to_doc())
-                    .fold(BoxDoc::nil(), |acc, doc| {
-                        let mut vec = Vec::new();
-                        acc.clone().pretty(&BoxAllocator).render(0, &mut vec).unwrap();
-                        if String::from_utf8(vec).unwrap().is_empty() { 
-                            doc 
-                        } else { 
-                            acc.append(BoxDoc::line()).append(doc) 
-                        }
-                    });
+                let items_doc = Self::fold_docs(items.iter().map(|item| item.to_doc()));
                 BoxDoc::text(format!("\\{}", cmd))
                     .append(BoxDoc::text("{"))
                     .append(BoxDoc::line())
@@ -87,19 +96,7 @@ impl Node {
                 doc.group()
             }
             Node::Text(text) => BoxDoc::text(text.clone()),
-            Node::Block(nodes) => {
-                nodes.iter()
-                    .map(|node| node.to_doc())
-                    .fold(BoxDoc::nil(), |acc, doc| {
-                        let mut vec = Vec::new();
-                        acc.clone().pretty(&BoxAllocator).render(0, &mut vec).unwrap();
-                        if String::from_utf8(vec).unwrap().is_empty() {
-                            doc
-                        } else {
-                            acc.append(doc)
-                        }
-                    })
-            }
+            Node::Block(nodes) => Self::fold_docs(nodes.iter().map(|node| node.to_doc()))
         }
     }
 }
@@ -165,34 +162,22 @@ enum Token {
     CloseBrace
 }
 
+fn handle_list_end(nodes: &mut Vec<Node>, list_stack: &mut Vec<(bool, Vec<Node>)>, ordered: bool) {
+    if let Some((_, items)) = list_stack.pop() {
+        nodes.push(Node::List { ordered, items });
+    }
+}
+
 fn parse_tokens(lex: logos::Lexer<Token>) -> Node {
     let mut nodes = Vec::new();
     let mut list_stack = Vec::new();
     
     for token in lex {
         match token {
-            Ok(Token::BeginEnumerate) => {
-                list_stack.push((true, Vec::new())); // ordered=true
-            }
-            Ok(Token::EndEnumerate) => {
-                if let Some((_, items)) = list_stack.pop() {
-                    nodes.push(Node::List { 
-                        ordered: true, 
-                        items 
-                    });
-                }
-            }
-            Ok(Token::BeginItemize) => {
-                list_stack.push((false, Vec::new())); // ordered=false
-            }
-            Ok(Token::EndItemize) => {
-                if let Some((_, items)) = list_stack.pop() {
-                    nodes.push(Node::List { 
-                        ordered: false, 
-                        items 
-                    });
-                }
-            }
+            Ok(Token::BeginEnumerate) => list_stack.push((true, Vec::new())),
+            Ok(Token::EndEnumerate) => handle_list_end(&mut nodes, &mut list_stack, true),
+            Ok(Token::BeginItemize) => list_stack.push((false, Vec::new())),
+            Ok(Token::EndItemize) => handle_list_end(&mut nodes, &mut list_stack, false),
             Ok(Token::Item(content)) | Ok(Token::Ii(content)) => {
                 let item = Node::ListItem(content);
                 if let Some((_, items)) = list_stack.last_mut() {
