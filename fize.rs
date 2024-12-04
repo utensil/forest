@@ -10,8 +10,67 @@ logos = "0.13.0"
 
 use std::env;
 use std::fs;
+use std::fmt;
 use std::process;
 use logos::Logos;
+
+#[derive(Debug)]
+enum Node {
+    List {
+        ordered: bool,
+        items: Vec<Node>,
+    },
+    ListItem(String),
+    Math {
+        display: bool,
+        content: String,
+    },
+    Command {
+        name: String,
+        args: Vec<String>,
+        body: Option<Box<Node>>,
+    },
+    Text(String),
+    Block(Vec<Node>),
+}
+
+impl fmt::Display for Node {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        match self {
+            Node::List { ordered, items } => {
+                write!(f, "\\{}{{", if *ordered { "ol" } else { "ul" })?;
+                for item in items {
+                    write!(f, "{}", item)?;
+                }
+                write!(f, "}}")
+            }
+            Node::ListItem(content) => write!(f, "\\li{{{}}}", content),
+            Node::Math { display, content } => {
+                write!(f, "{}{{{}}}",
+                    if *display { "##" } else { "#" },
+                    content
+                )
+            }
+            Node::Command { name, args, body } => {
+                write!(f, "\\{}", name)?;
+                for arg in args {
+                    write!(f, "{{{}}}", arg)?;
+                }
+                if let Some(body) = body {
+                    write!(f, "{{\n\n\\p{{{}}}\n\n}}\r\r}}\r", body)?;
+                }
+                Ok(())
+            }
+            Node::Text(text) => write!(f, "{}", text),
+            Node::Block(nodes) => {
+                for node in nodes {
+                    write!(f, "{}", node)?;
+                }
+                Ok(())
+            }
+        }
+    }
+}
 
 #[derive(Logos, Debug, PartialEq)]
 enum Token {
@@ -77,61 +136,105 @@ enum Token {
     Error,
 }
 
-fn process_content(input: &str) -> String {
-    let mut output = String::new();
-    let lex = Token::lexer(input);
+fn parse_tokens(lex: logos::Lexer<Token>) -> Node {
+    let mut nodes = Vec::new();
+    let mut list_stack = Vec::new();
     
     for token in lex {
         match token {
-            Token::BeginEnumerate => output.push_str("\\ol{"),
-            Token::EndEnumerate => output.push('}'),
-            Token::BeginItemize => output.push_str("\\ul{"),
-            Token::EndItemize => output.push('}'),
-            Token::Item(content) => output.push_str(&format!("\\li{{{}}}", content)),
-            Token::Ii(content) => output.push_str(&format!("\\li{{{}}}", content)),
-            Token::DisplayMath(content) => output.push_str(&format!("##{{{}}}", content)),
-            Token::InlineMath(content) => output.push_str(&format!("#{{{}}}", content)),
+            Token::BeginEnumerate => {
+                list_stack.push((true, Vec::new())); // ordered=true
+            }
+            Token::EndEnumerate => {
+                if let Some((_, items)) = list_stack.pop() {
+                    nodes.push(Node::List { 
+                        ordered: true, 
+                        items 
+                    });
+                }
+            }
+            Token::BeginItemize => {
+                list_stack.push((false, Vec::new())); // ordered=false
+            }
+            Token::EndItemize => {
+                if let Some((_, items)) = list_stack.pop() {
+                    nodes.push(Node::List { 
+                        ordered: false, 
+                        items 
+                    });
+                }
+            }
+            Token::Item(content) | Token::Ii(content) => {
+                let item = Node::ListItem(content);
+                if let Some((_, items)) = list_stack.last_mut() {
+                    items.push(item);
+                } else {
+                    nodes.push(item);
+                }
+            }
+            Token::DisplayMath(content) => {
+                nodes.push(Node::Math {
+                    display: true,
+                    content,
+                });
+            }
+            Token::InlineMath(content) => {
+                nodes.push(Node::Math {
+                    display: false,
+                    content,
+                });
+            }
             Token::TexDef((arg1, arg2)) => {
-                output.push_str(&format!("\\refdef{{{}}}{{{}}}{{\n\n\\p{{", arg1, arg2))
-            },
+                nodes.push(Node::Command {
+                    name: "refdef".to_string(),
+                    args: vec![arg1, arg2],
+                    body: Some(Box::new(Node::Text(String::new()))),
+                });
+            }
             Token::TexNote((arg1, arg2)) => {
-                output.push_str(&format!("\\refnote{{{}}}{{{}}}{{\n\n\\p{{", arg1, arg2))
-            },
-            Token::MiniTex => output.push_str("{\n\n\\p{"),
-            Token::Emph(content) => output.push_str(&format!("\\em{{{}}}", content)),
-            Token::Text(text) => output.push_str(text),
-            Token::Newline => output.push_str("\r"),
-            Token::OpenBrace => output.push('{'),
-            Token::CloseBrace => output.push('}'),
+                nodes.push(Node::Command {
+                    name: "refnote".to_string(),
+                    args: vec![arg1, arg2],
+                    body: Some(Box::new(Node::Text(String::new()))),
+                });
+            }
+            Token::MiniTex => {
+                nodes.push(Node::Command {
+                    name: "p".to_string(),
+                    args: vec![],
+                    body: Some(Box::new(Node::Text(String::new()))),
+                });
+            }
+            Token::Emph(content) => {
+                nodes.push(Node::Command {
+                    name: "em".to_string(),
+                    args: vec![content],
+                    body: None,
+                });
+            }
+            Token::Text(text) => {
+                nodes.push(Node::Text(text.to_string()));
+            }
+            Token::Newline => {
+                nodes.push(Node::Text("\r".to_string()));
+            }
+            Token::OpenBrace => {
+                nodes.push(Node::Text("{".to_string()));
+            }
+            Token::CloseBrace => {
+                nodes.push(Node::Text("}".to_string()));
+            }
             Token::Error => (), // Skip errors
         }
     }
+    
+    Node::Block(nodes)
+}
 
-    // Handle paragraph breaks after refdef/refnote
-    let lines: Vec<&str> = output.split('\n').collect();
-    let mut skip = true;
-    let mut new_content = Vec::new();
-
-    for line in lines {
-        if line.contains("\\refdef") || line.contains("\\refnote") {
-            skip = false;
-            new_content.push(line.to_string());
-            continue;
-        }
-        if !skip {
-            new_content.push(line.replace("\r\r", "}\r\r\\p{"));
-        } else {
-            new_content.push(line.to_string());
-        }
-    }
-    output = new_content.join("\n");
-
-    // Final cleanup
-    if output.trim_end().ends_with('}') {
-        output.push_str("\r\r}\r");
-    }
-
-    output
+fn process_content(input: &str) -> String {
+    let lex = Token::lexer(input);
+    let ast = parse_tokens(lex);
+    ast.to_string()
 }
 
 fn main() {
