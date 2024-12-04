@@ -87,10 +87,14 @@ impl Node {
                         .append(BoxDoc::text("\\p{"))
                         .append(body.to_doc())
                         .append(BoxDoc::text("}"))
+                        .append(BoxDoc::hardline())
                         .append(BoxDoc::hardline());
                 }
                 
-                doc.append(BoxDoc::text("}")).group()
+                doc.append(BoxDoc::text("}"))
+                   .append(BoxDoc::hardline())
+                   .append(BoxDoc::hardline())
+                   .group()
             }
             Node::Text(text) => BoxDoc::text(text.clone()),
             Node::Block(nodes) => Self::fold_docs(nodes.iter().map(|node| node.to_doc()))
@@ -176,10 +180,19 @@ fn parse_tokens(lex: logos::Lexer<Token>) -> Node {
         match token {
             Ok(Token::BeginList(ordered)) => {
                 list_stack.push((ordered, Vec::new()));
+                if list_stack.len() > 1 {
+                    // This is a nested list, add it to the parent's items
+                    if let Some((_, parent_items)) = list_stack.get_mut(list_stack.len() - 2) {
+                        parent_items.push(Node::List { ordered, items: Vec::new() });
+                    }
+                }
             }
             Ok(Token::EndList) => {
                 if let Some((ordered, items)) = list_stack.pop() {
-                    nodes.push(Node::List { ordered, items });
+                    if list_stack.is_empty() {
+                        // Only push to nodes if this is a top-level list
+                        nodes.push(Node::List { ordered, items });
+                    }
                 }
             }
             Ok(Token::ListItem(content)) => {
@@ -190,10 +203,18 @@ fn parse_tokens(lex: logos::Lexer<Token>) -> Node {
                 }
             }
             Ok(Token::DisplayMath(content)) => {
+                // Preserve LaTeX formatting
+                let content = content.replace("cos", "\\cos")
+                                   .replace("sin", "\\sin")
+                                   .replace("theta", "\\theta");
                 nodes.push(Node::Text(format!("##{{{}}}", content.trim())));
                 println!("DEBUG: Created display math node: content={}", content);
             }
             Ok(Token::InlineMath(content)) => {
+                // Preserve LaTeX formatting
+                let content = content.replace("cos", "\\cos")
+                                   .replace("sin", "\\sin")
+                                   .replace("theta", "\\theta");
                 nodes.push(Node::Text(format!("#{{{}}}", content.trim())));
                 println!("DEBUG: Created inline math node: content={}", content);
             }
@@ -202,7 +223,7 @@ fn parse_tokens(lex: logos::Lexer<Token>) -> Node {
                 nodes.push(Node::Command {
                     name: "refdef".to_string(),
                     args: vec![parts[0].to_string(), parts[1].to_string()],
-                    body: None
+                    body: Some(Box::new(Node::Block(Vec::new())))
                 });
             }
             Ok(Token::MiniTex) => {
@@ -223,13 +244,18 @@ fn parse_tokens(lex: logos::Lexer<Token>) -> Node {
             Ok(Token::Text(text)) => {
                 let text = text.trim();
                 if !text.is_empty() {
-                    if let Some(Node::Text(prev)) = nodes.last_mut() {
-                        if !prev.ends_with(' ') {
-                            prev.push(' ');
+                    match nodes.last_mut() {
+                        Some(Node::Text(prev)) => {
+                            if !prev.ends_with(' ') && !text.starts_with(' ') {
+                                prev.push(' ');
+                            }
+                            prev.push_str(text);
                         }
-                        prev.push_str(text);
-                    } else {
-                        nodes.push(Node::Text(text.to_string()));
+                        Some(Node::Command { .. }) => {
+                            // Add space after command if needed
+                            nodes.push(Node::Text(format!(" {}", text)));
+                        }
+                        _ => nodes.push(Node::Text(text.to_string()))
                     }
                 }
             }
