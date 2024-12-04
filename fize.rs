@@ -187,22 +187,18 @@ fn parse_tokens(lex: logos::Lexer<Token>) -> Node {
     
     for token in lex {
         match token {
-            Ok(Token::Text1) => nodes.push(Node::Text("\\ol{".to_string())),
-            Ok(Token::Text2) => nodes.push(Node::Text("}".to_string())),
-            Ok(Token::Text3) => nodes.push(Node::Text("\\ul{".to_string())),
-            Ok(Token::Text4) => nodes.push(Node::Text("}".to_string())),
+            Ok(Token::Text1) => nodes.push(Node::Text("\\begin{enumerate}".to_string())),
+            Ok(Token::Text2) => nodes.push(Node::Text("\\end{enumerate}".to_string())),
+            Ok(Token::Text3) => nodes.push(Node::Text("\\begin{itemize}".to_string())),
+            Ok(Token::Text4) => nodes.push(Node::Text("\\end{itemize}".to_string())),
             Ok(Token::ItemText) | Ok(Token::IiText) => {
-                let content = lex.slice()
-                    .trim_start_matches("\\item ")
-                    .trim_start_matches("\\ii ")
-                    .trim();
-                nodes.push(Node::Text(format!("\\li{{{}}}", content)));
+                nodes.push(Node::Text(lex.slice().to_string()));
             }
             Ok(Token::DisplayMath(content)) | Ok(Token::InlineMath(content)) => {
                 let display = matches!(token, Ok(Token::DisplayMath(_)));
-                let text = format!("{}{{{}}}",
-                    if display { "##" } else { "#" },
-                    content
+                let text = format!("${}${}",
+                    content,
+                    if display { "$" } else { "" }
                 );
                 // Join math with surrounding text if possible
                 match nodes.last_mut() {
@@ -211,20 +207,13 @@ fn parse_tokens(lex: logos::Lexer<Token>) -> Node {
                 }
             }
             Ok(Token::TexDefText) | Ok(Token::TexNoteText) => {
-                let text = lex.slice()
-                    .replace("\\texdef", "\\refdef")
-                    .replace("\\texnote", "\\refnote");
-                nodes.push(Node::Text(text));
-                nodes.push(Node::Text("\n\n\\p{".to_string()));
-                nodes.push(Node::Text("\n".to_string()));
+                nodes.push(Node::Text(lex.slice().to_string()));
             }
             Ok(Token::MiniTex) => {
-                nodes.push(Node::Text("{\n\n\\p{".to_string()));
-                nodes.push(Node::Text("\n".to_string()));
+                nodes.push(Node::Text("\\minitex{".to_string()));
             }
             Ok(Token::EmphText) => {
-                let text = lex.slice().replace("\\emph", "\\em");
-                nodes.push(Node::Text(text));
+                nodes.push(Node::Text(lex.slice().to_string()));
             }
             Ok(Token::Text(text)) => {
                 // Join consecutive text nodes
