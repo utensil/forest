@@ -179,18 +179,20 @@ fn parse_tokens(lex: logos::Lexer<Token>) -> Node {
         println!("\nDEBUG: Processing token: {:?}", token);
         match token {
             Ok(Token::BeginList(ordered)) => {
-                list_stack.push((ordered, Vec::new()));
-                if list_stack.len() > 1 {
-                    // This is a nested list, add it to the parent's items
-                    if let Some((_, parent_items)) = list_stack.get_mut(list_stack.len() - 2) {
-                        parent_items.push(Node::List { ordered, items: Vec::new() });
+                let stack_len = list_stack.len();
+                if stack_len > 0 {
+                    // This is a nested list
+                    let new_list = Node::List { ordered, items: Vec::new() };
+                    if let Some((_, parent_items)) = list_stack.last_mut() {
+                        parent_items.push(new_list);
                     }
                 }
+                list_stack.push((ordered, Vec::new()));
             }
             Ok(Token::EndList) => {
                 if let Some((ordered, items)) = list_stack.pop() {
-                    if list_stack.is_empty() {
-                        // Only push to nodes if this is a top-level list
+                    let is_top_level = list_stack.is_empty();
+                    if is_top_level {
                         nodes.push(Node::List { ordered, items });
                     }
                 }
