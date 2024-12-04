@@ -215,37 +215,32 @@ fn parse_tokens(lex: logos::Lexer<Token>) -> Node {
                     nodes.push(item);
                 }
             }
-            Ok(Token::DisplayMath(content)) => {
-                nodes.push(Node::Math {
-                    display: true,
-                    content,
-                });
+            Ok(Token::DisplayMath(content)) | Ok(Token::InlineMath(content)) => {
+                let display = matches!(token, Ok(Token::DisplayMath(_)));
+                // Join math with surrounding text if possible
+                match nodes.last_mut() {
+                    Some(Node::Text(text)) => {
+                        text.push_str(if display { "##" } else { "#" });
+                        text.push_str("{");
+                        text.push_str(&content);
+                        text.push_str("}");
+                    }
+                    _ => nodes.push(Node::Math { display, content }),
+                }
             }
-            Ok(Token::InlineMath(content)) => {
-                nodes.push(Node::Math {
-                    display: false,
-                    content,
-                });
-            }
-            Ok(Token::TexDef((arg1, arg2))) => {
+            Ok(Token::TexDef((arg1, arg2))) | Ok(Token::TexNote((arg1, arg2))) => {
+                let name = if matches!(token, Ok(Token::TexDef(_))) { "refdef" } else { "refnote" };
                 nodes.push(Node::Command {
-                    name: "refdef".to_string(),
+                    name: name.to_string(),
                     args: vec![arg1, arg2],
-                    body: Some(Box::new(Node::Text(String::new()))),
-                });
-            }
-            Ok(Token::TexNote((arg1, arg2))) => {
-                nodes.push(Node::Command {
-                    name: "refnote".to_string(),
-                    args: vec![arg1, arg2],
-                    body: Some(Box::new(Node::Text(String::new()))),
+                    body: Some(Box::new(Node::Block(Vec::new()))),
                 });
             }
             Ok(Token::MiniTex) => {
                 nodes.push(Node::Command {
                     name: "p".to_string(),
                     args: vec![],
-                    body: Some(Box::new(Node::Text(String::new()))),
+                    body: Some(Box::new(Node::Block(Vec::new()))),
                 });
             }
             Ok(Token::Emph(content)) => {
@@ -256,7 +251,12 @@ fn parse_tokens(lex: logos::Lexer<Token>) -> Node {
                 });
             }
             Ok(Token::Text(text)) => {
-                nodes.push(Node::Text(text.to_string()));
+                // Join consecutive text nodes
+                if let Some(Node::Text(prev)) = nodes.last_mut() {
+                    prev.push_str(&text);
+                } else {
+                    nodes.push(Node::Text(text));
+                }
             }
             Ok(Token::Newline) => {
                 // Skip newlines as they'll be handled by the pretty printer
