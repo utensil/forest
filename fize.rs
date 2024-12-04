@@ -174,7 +174,10 @@ fn parse_tokens(lex: logos::Lexer<Token>) -> Node {
     let mut nodes = Vec::new();
     let mut list_stack = Vec::new();
     
+    println!("\nDEBUG: Starting tokenization...");
+    
     for token in lex {
+        println!("DEBUG: Token: {:?}", token);
         match token {
             Ok(Token::BeginList(ordered)) => {
                 list_stack.push((ordered, Vec::new()));
@@ -240,8 +243,12 @@ fn parse_tokens(lex: logos::Lexer<Token>) -> Node {
 
 /// Processes the input content by tokenizing, parsing and pretty printing
 fn process_content(input: &str) -> Result<String> {
+    println!("\nDEBUG: Input content:");
+    println!("{}", input);
     let lex = Token::lexer(input);
     let ast = parse_tokens(lex);
+    println!("\nDEBUG: Generated AST:");
+    println!("{:#?}", ast);
     let doc = ast.to_doc();
     let mut output = Vec::new();
     doc.pretty(&BoxAllocator).render(DEFAULT_LINE_WIDTH, &mut output)?;
