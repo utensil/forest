@@ -45,7 +45,7 @@ impl Node {
     /// Combines multiple BoxDocs into a single document, separated by newlines
     fn fold_docs<'a, I>(docs: I) -> BoxDoc<'a, ()> 
     where
-        I: Iterator<Item = BoxDoc<'a, ()>>,
+        I: Iterator<Item = BoxDoc<'a, ()>> + 'a,
     {
         docs.fold(BoxDoc::nil(), |acc, doc| {
             if Self::is_empty_doc(&acc).unwrap_or(true) {
@@ -168,7 +168,7 @@ enum Token {
 
 fn parse_tokens(lex: logos::Lexer<Token>) -> Node {
     let mut nodes = Vec::new();
-    let mut list_stack = Vec::new();
+    let mut list_stack: Vec<(bool, Vec<Node>)> = Vec::new();
     
     println!("\nDEBUG: Starting tokenization...");
     
