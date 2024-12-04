@@ -13,7 +13,7 @@ use std::env;
 use std::fs;
 use std::process;
 use logos::Logos;
-use pretty::{BoxDoc, Doc};
+use pretty::{BoxDoc, Doc, Pretty};
 
 #[derive(Debug)]
 enum Node {
@@ -36,56 +36,56 @@ enum Node {
 }
 
 impl Node {
-    fn to_doc(&self) -> Doc<'static, ()> {
+    fn to_doc(&self) -> BoxDoc<'static> {
         match self {
             Node::List { ordered, items } => {
                 let cmd = if *ordered { "ol" } else { "ul" };
                 let items_doc = items.iter()
                     .map(|item| item.to_doc())
-                    .fold(Doc::nil(), |acc, doc| {
-                        if acc == Doc::nil() { doc } else { acc.append(Doc::line()).append(doc) }
+                    .fold(BoxDoc::nil(), |acc, doc| {
+                        if acc == BoxDoc::nil() { doc } else { acc.append(BoxDoc::line()).append(doc) }
                     });
-                Doc::text(format!("\\{}", cmd))
-                    .append(Doc::text("{"))
-                    .append(Doc::line())
+                BoxDoc::text(format!("\\{}", cmd))
+                    .append(BoxDoc::text("{"))
+                    .append(BoxDoc::line())
                     .append(items_doc.nest(2))
-                    .append(Doc::line())
-                    .append(Doc::text("}"))
+                    .append(BoxDoc::line())
+                    .append(BoxDoc::text("}"))
                     .group()
             }
             Node::ListItem(content) => {
-                Doc::text(format!("\\li{{{}}}", content))
+                BoxDoc::text(format!("\\li{{{}}}", content))
             }
             Node::Math { display, content } => {
                 let delim = if *display { "##" } else { "#" };
-                Doc::text(format!("{}{{{}}}", delim, content))
+                BoxDoc::text(format!("{}{{{}}}", delim, content))
             }
             Node::Command { name, args, body } => {
-                let mut doc = Doc::text(format!("\\{}", name));
+                let mut doc = BoxDoc::text(format!("\\{}", name));
                 for arg in args {
-                    doc = doc.append(Doc::text(format!("{{{}}}", arg)));
+                    doc = doc.append(BoxDoc::text(format!("{{{}}}", arg)));
                 }
                 if let Some(body) = body {
                     doc = doc
-                        .append(Doc::text("{"))
-                        .append(Doc::line())
-                        .append(Doc::line())
-                        .append(Doc::text("\\p{"))
+                        .append(BoxDoc::text("{"))
+                        .append(BoxDoc::line())
+                        .append(BoxDoc::line())
+                        .append(BoxDoc::text("\\p{"))
                         .append(body.to_doc())
-                        .append(Doc::text("}"))
-                        .append(Doc::line())
-                        .append(Doc::line())
-                        .append(Doc::text("}"))
-                        .append(Doc::text("\r\r}\r"));
+                        .append(BoxDoc::text("}"))
+                        .append(BoxDoc::line())
+                        .append(BoxDoc::line())
+                        .append(BoxDoc::text("}"))
+                        .append(BoxDoc::text("\r\r}\r"));
                 }
                 doc.group()
             }
-            Node::Text(text) => Doc::text(text),
+            Node::Text(text) => BoxDoc::text(text),
             Node::Block(nodes) => {
                 nodes.iter()
                     .map(|node| node.to_doc())
-                    .fold(Doc::nil(), |acc, doc| {
-                        if acc == Doc::nil() { doc } else { acc.append(doc) }
+                    .fold(BoxDoc::nil(), |acc, doc| {
+                        if acc == BoxDoc::nil() { doc } else { acc.append(doc) }
                     })
             }
         }
@@ -143,8 +143,8 @@ enum Token {
     Emph(String),
 
     // Basic tokens
-    #[regex(r"[^\\$\{\}\n\r]+")]
-    Text(&'static str),
+    #[regex(r"[^\\$\{\}\n\r]+", |lex| lex.slice().to_string())]
+    Text(String),
     #[regex(r"[\n\r]+")]
     Newline,
     #[regex(r"\{")]
