@@ -80,24 +80,41 @@ impl Node {
                 for arg in args {
                     doc = doc.append(BoxDoc::text(format!("{{{}}}", arg)));
                 }
-                doc = doc.append(BoxDoc::text("{")).append(BoxDoc::hardline());
                 
                 if let Some(body) = body {
-                    doc = doc.append(BoxDoc::hardline())
+                    doc = doc.append(BoxDoc::text("{"))
+                        .append(BoxDoc::hardline())
+                        .append(BoxDoc::hardline())
                         .append(BoxDoc::text("\\p{"))
                         .append(body.to_doc())
                         .append(BoxDoc::text("}"))
                         .append(BoxDoc::hardline())
-                        .append(BoxDoc::hardline());
+                        .append(BoxDoc::hardline())
+                        .append(BoxDoc::text("}"));
+                } else {
+                    doc = doc.append(BoxDoc::text("{"))
+                        .append(BoxDoc::hardline())
+                        .append(BoxDoc::text("}"));
                 }
                 
-                doc.append(BoxDoc::text("}"))
+                doc.append(BoxDoc::hardline())
                    .append(BoxDoc::hardline())
-                   .append(BoxDoc::hardline())
-                   .group()
             }
-            Node::Text(text) => BoxDoc::text(text.clone()),
-            Node::Block(nodes) => Self::fold_docs(nodes.iter().map(|node| node.to_doc()))
+            Node::Text(text) => {
+                if text.ends_with('\n') {
+                    BoxDoc::text(text.clone()).append(BoxDoc::hardline())
+                } else {
+                    BoxDoc::text(text.clone())
+                }
+            },
+            Node::Block(nodes) => {
+                let doc = Self::fold_docs(nodes.iter().map(|node| node.to_doc()));
+                if nodes.len() > 1 {
+                    doc.append(BoxDoc::hardline())
+                } else {
+                    doc
+                }
+            }
         }
     }
 }
@@ -222,8 +239,9 @@ fn parse_tokens(lex: logos::Lexer<Token>) -> Node {
             }
             Ok(Token::DefBlock(combined)) => {
                 let parts: Vec<&str> = combined.split('|').collect();
+                let name = if combined.starts_with("texdef") { "refdef" } else { "refnote" };
                 nodes.push(Node::Command {
-                    name: "refdef".to_string(),
+                    name: name.to_string(),
                     args: vec![parts[0].to_string(), parts[1].to_string()],
                     body: Some(Box::new(Node::Block(Vec::new())))
                 });
@@ -232,9 +250,8 @@ fn parse_tokens(lex: logos::Lexer<Token>) -> Node {
                 nodes.push(Node::Command {
                     name: "minitex".to_string(),
                     args: vec![],
-                    body: None
+                    body: Some(Box::new(Node::Block(Vec::new())))
                 });
-                println!("DEBUG: Created minitex command node");
             }
             Ok(Token::EmphText(text)) => {
                 nodes.push(Node::Command {
@@ -244,18 +261,10 @@ fn parse_tokens(lex: logos::Lexer<Token>) -> Node {
                 });
             }
             Ok(Token::Text(text)) => {
-                let text = text.trim();
                 if !text.is_empty() {
                     match nodes.last_mut() {
                         Some(Node::Text(prev)) => {
-                            if !prev.ends_with(' ') && !text.starts_with(' ') {
-                                prev.push(' ');
-                            }
-                            prev.push_str(text);
-                        }
-                        Some(Node::Command { .. }) => {
-                            // Add space after command if needed
-                            nodes.push(Node::Text(format!(" {}", text)));
+                            prev.push_str(&text);
                         }
                         _ => nodes.push(Node::Text(text.to_string()))
                     }
