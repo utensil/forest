@@ -177,13 +177,19 @@ fn parse_tokens(lex: logos::Lexer<Token>) -> Node {
     for token in lex {
         match token {
             Ok(Token::BeginList(ordered)) => {
-                nodes.push(Node::Text(format!("\\{}{{", if ordered { "ol" } else { "ul" })));
+                list_stack.push((ordered, Vec::new()));
             }
             Ok(Token::EndList) => {
-                nodes.push(Node::Text("}".to_string()));
+                if let Some((ordered, items)) = list_stack.pop() {
+                    nodes.push(Node::List { ordered, items });
+                }
             }
             Ok(Token::ListItem(content)) => {
-                nodes.push(Node::Text(format!("\\li{{{}}}", content)));
+                if let Some((_, items)) = list_stack.last_mut() {
+                    items.push(Node::ListItem(content));
+                } else {
+                    nodes.push(Node::ListItem(content));
+                }
             }
             Ok(Token::DisplayMath(content)) | Ok(Token::InlineMath(content)) => {
                 let display = matches!(token, Ok(Token::DisplayMath(_)));
@@ -199,10 +205,10 @@ fn parse_tokens(lex: logos::Lexer<Token>) -> Node {
             }
             Ok(Token::DefBlock(is_def, arg1, arg2)) => {
                 let cmd = if is_def { "refdef" } else { "refnote" };
-                nodes.push(Node::Text(format!("\\{}{{{}}}{{{}}}{{\n\n\\p{{", cmd, arg1, arg2)));
+                nodes.push(Node::Text(format!("\\{}{{{}}}{{{}}}{{\n\n\\p{{\n", cmd, arg1, arg2)));
             }
             Ok(Token::MiniTex) => {
-                nodes.push(Node::Text("\\minitex{".to_string()));
+                nodes.push(Node::Text("{\n\n\\p{\n".to_string()));
             }
             Ok(Token::EmphText) => {
                 let text = lex.slice().replace("\\emph", "\\em");
