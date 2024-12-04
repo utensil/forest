@@ -27,41 +27,26 @@ with open(TREE, 'r+') as file:
     # Convert some LaTeX commands to forester commands
     content = re.sub(r'\\emph\{([^}]*)\}', r'\\em{\1}', content)
 
-    # Replace all line breaks to `\r` to handle multiline replacements
-    content.replace('\n', '\r')
-
-    # Replace display math `$$...$$` with `##{...}`
+    # Convert math first
     content = re.sub(r'\$\$([^$]+)\$\$', r'##{\1}', content)
-
-    # Replace inline math `$...$` with `#{...}`
     content = re.sub(r'\$([^$]+)\$', r'#{\1}', content)
 
-    # Replace LaTeX block openning with a forester block openning, plus a paragraph openning
-    # Particularly, this introduce a line break after the block openning
+    # Convert LaTeX commands to forester commands
+    content = re.sub(r'\\emph\{([^}]*)\}', r'\\em{\1}', content)
     content = re.sub(r'\\texdef\{([^\}]*)\}\{([^\}]*)\}\{', r'\\refdef{\1}{\2}{\n\n\\p{', content)
     content = re.sub(r'\\texnote\{([^\}]*)\}\{([^\}]*)\}\{', r'\\refnote{\1}{\2}{\n\n\\p{', content)
     content = re.sub(r'\\minitex\{', r'{\n\n\\p{', content)
 
-    # Before the line containing \refdef, skip; after the line, replace \r\r with }\r\r\\p{
-    content = content.split('\n')
-    skip = True
-    for i in range(len(content)):
-        if re.search(r'\\(refdef|refnote)', content[i]):
-            skip = False
-            continue
-        if not skip:
-            content[i] = content[i].replace('\r\r', '}\r\r\\p{')
-    content = '\n'.join(content)
-
-    # Replace an ending } with proper closing structure
-    content = re.sub(r'}\s*$', r'}\n\n}\n\n}\n', content)
-
-    # Replace \texdef with \refdef
-    content = re.sub(r'\\texdef', r'\\refdef', content)
+    # Fix enumerate and itemize
+    content = re.sub(r'\\begin\{enumerate\}', r'\\ol{', content)
+    content = re.sub(r'\\end\{enumerate\}', r'}', content)
+    content = re.sub(r'\\begin\{itemize\}', r'\\ul{', content)
+    content = re.sub(r'\\end\{itemize\}', r'}', content)
+    content = re.sub(r'\\item (.*)', r'\\li{\1}', content)
+    content = re.sub(r'\\ii (.*)', r'\\li{\1}', content)
 
     # Fix line endings and brace structure
-    content = content.replace('\r\r', '\n\n')
-    content = re.sub(r'}\n*$', '}\n\n}\n', content)
+    content = re.sub(r'}\s*$', r'}\n\n}\n', content)
 
     # Replace the file content
     file.seek(0)
