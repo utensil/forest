@@ -53,23 +53,15 @@ with open(TREE, 'r+') as file:
             content[i] = content[i].replace('\r\r', '}\r\r\\p{')
     content = '\n'.join(content)
 
-    # Replace an ending } with } }, the inserted } is to close the paragraph
-    content = re.sub(r'}\s*$', r'}\r\r}\r', content)
-
-    # Replace \( with #{   -- obsolete
-    # content = re.sub(r'\\\(', r'#\{', content)
-
-    # Replace \) with }   -- obsolete
-    # content = re.sub(r'\\\)', r'}', content)
-
-    # Replace \[ with ##{   -- obsolete
-    # content = re.sub(r'\\\[', r'##\{', content)
-
-    # Replace \] with }  -- obsolete
-    # content = re.sub(r'\\\]', r'}', content)
+    # Replace an ending } with proper closing structure
+    content = re.sub(r'}\s*$', r'}\n\n}\n\n}\n', content)
 
     # Replace \texdef with \refdef
     content = re.sub(r'\\texdef', r'\\refdef', content)
+
+    # Fix line endings and brace structure
+    content = content.replace('\r\r', '\n\n')
+    content = re.sub(r'}\n*$', '}\n\n}\n', content)
 
     # Replace the file content
     file.seek(0)
