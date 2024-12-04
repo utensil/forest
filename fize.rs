@@ -79,10 +79,6 @@ impl Node {
             Node::ListItem(content) => {
                 BoxDoc::text(format!("\\li{{{}}}", content))
             }
-            Node::Math { display, content } => {
-                let delim = if *display { "##" } else { "#" };
-                BoxDoc::text(format!("{}{{{}}}", delim, content))
-            }
             Node::Command { name, args, body } => {
                 let mut doc = BoxDoc::text(format!("\\{}", name));
                 for arg in args {
