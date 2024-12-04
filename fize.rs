@@ -221,18 +221,6 @@ fn parse_tokens(mut lex: logos::Lexer<Token>) -> Node {
                     body: None
                 });
                 println!("DEBUG: Created command node: name={}, args={:?}", cmd_type, args);
-                        .skip(1)  // Skip command name
-                        .take(2)  // Take first two arguments
-                        .map(|s| s.trim_end_matches('}'))
-                        .collect();
-                    let cmd_type = cmd_type.to_string();
-                    nodes.push(Node::Command {
-                        name: cmd_type.clone(),
-                        args: args.iter().map(|s| s.to_string()).collect(),
-                        body: None
-                    });
-                    println!("DEBUG: Created command node: name={}, args={:?}", cmd_type, args);
-                }
             }
             Ok(Token::MiniTex) => {
                 nodes.push(Node::Command {
