@@ -57,8 +57,6 @@ impl Node {
     }
 
     fn to_doc(&self) -> BoxDoc<'_, ()> {
-        // Helper to create paragraph breaks
-        let para_break = BoxDoc::<()>::hardline().append(BoxDoc::hardline());
         match self {
             Node::List { ordered, items } => {
                 let cmd = if *ordered { "ol" } else { "ul" };
