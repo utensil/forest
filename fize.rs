@@ -6,13 +6,14 @@ version = "0.1.0"
 edition = "2021"
 [dependencies]
 logos = "0.13.0"
+pretty = "0.12.1"
 ---
 
 use std::env;
 use std::fs;
-use std::fmt;
 use std::process;
 use logos::Logos;
+use pretty::{BoxDoc, Doc};
 
 #[derive(Debug)]
 enum Node {
@@ -34,39 +35,59 @@ enum Node {
     Block(Vec<Node>),
 }
 
-impl fmt::Display for Node {
-    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+impl Node {
+    fn to_doc(&self) -> BoxDoc<'static> {
         match self {
             Node::List { ordered, items } => {
-                write!(f, "\\{}{{", if *ordered { "ol" } else { "ul" })?;
-                for item in items {
-                    write!(f, "{}", item)?;
-                }
-                write!(f, "}}")
+                let cmd = if *ordered { "ol" } else { "ul" };
+                let items_doc = Doc::intersperse(
+                    items.iter().map(|item| item.to_doc()),
+                    Doc::line()
+                );
+                Doc::text(format!("\\{}", cmd))
+                    .append(Doc::text("{"))
+                    .append(Doc::line())
+                    .append(items_doc.nest(2))
+                    .append(Doc::line())
+                    .append(Doc::text("}"))
+                    .group()
+                    .into_boxed()
             }
-            Node::ListItem(content) => write!(f, "\\li{{{}}}", content),
+            Node::ListItem(content) => {
+                Doc::text(format!("\\li{{{}}}", content))
+                    .into_boxed()
+            }
             Node::Math { display, content } => {
-                write!(f, "{}{{{}}}",
-                    if *display { "##" } else { "#" },
-                    content
-                )
+                let delim = if *display { "##" } else { "#" };
+                Doc::text(format!("{}{{{}}}", delim, content))
+                    .into_boxed()
             }
             Node::Command { name, args, body } => {
-                write!(f, "\\{}", name)?;
+                let mut doc = Doc::text(format!("\\{}", name));
                 for arg in args {
-                    write!(f, "{{{}}}", arg)?;
+                    doc = doc.append(Doc::text(format!("{{{}}}", arg)));
                 }
                 if let Some(body) = body {
-                    write!(f, "{{\n\n\\p{{{}}}\n\n}}\r\r}}\r", body)?;
+                    doc = doc
+                        .append(Doc::text("{"))
+                        .append(Doc::line())
+                        .append(Doc::line())
+                        .append(Doc::text("\\p{"))
+                        .append(body.to_doc())
+                        .append(Doc::text("}"))
+                        .append(Doc::line())
+                        .append(Doc::line())
+                        .append(Doc::text("}"))
+                        .append(Doc::text("\r\r}\r"));
                 }
-                Ok(())
+                doc.group().into_boxed()
             }
-            Node::Text(text) => write!(f, "{}", text),
+            Node::Text(text) => Doc::text(text).into_boxed(),
             Node::Block(nodes) => {
-                for node in nodes {
-                    write!(f, "{}", node)?;
-                }
-                Ok(())
+                Doc::intersperse(
+                    nodes.iter().map(|node| node.to_doc()),
+                    Doc::nil()
+                ).into_boxed()
             }
         }
     }
@@ -234,7 +255,9 @@ fn parse_tokens(lex: logos::Lexer<Token>) -> Node {
 fn process_content(input: &str) -> String {
     let lex = Token::lexer(input);
     let ast = parse_tokens(lex);
-    ast.to_string()
+    let doc = ast.to_doc();
+    let width = 80; // configurable line width
+    doc.pretty(width).to_string()
 }
 
 fn main() {
