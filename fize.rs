@@ -54,7 +54,7 @@ impl Node {
         I: Iterator<Item = BoxDoc<'a>>,
     {
         docs.fold(BoxDoc::nil(), |acc, doc| {
-            if Self::is_empty_doc(&acc) {
+            if Self::is_empty_doc(&acc).unwrap_or(true) {
                 doc
             } else {
                 acc.append(BoxDoc::line()).append(doc)
