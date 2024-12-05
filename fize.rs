@@ -274,6 +274,7 @@ fn parse_tokens(lex: logos::Lexer<Token>) -> Node {
             Ok(Token::CloseBrace) => {
                 nodes.push(Node::Text("}\n".to_string()));
             }
+            Ok(Token::Whitespace) => (), // Skip whitespace tokens
             Err(_) => (), // Skip errors
         }
     }
