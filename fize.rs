@@ -151,9 +151,6 @@ enum Token {
     #[regex(r"\\minitex\{", |lex| lex.slice().to_string())]
     MiniTex,
 
-    #[token("\\minitex{")]
-    MiniTex,
-
     // Other commands - capture the text content
     #[regex(r"\\emph\{([^}]*)\}", |lex| {
         let content = lex.slice();
