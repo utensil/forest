@@ -174,7 +174,6 @@ enum Token {
     
     // Skip whitespace
     #[regex(r"[ \t]+", logos::skip)]
-    Whitespace
 }
 
 
@@ -275,7 +274,6 @@ fn parse_tokens(lex: logos::Lexer<Token>) -> Node {
                 nodes.push(Node::Text("}\n".to_string()));
             }
             Err(_) => (), // Skip errors
-            Ok(Token::Whitespace) => () // Skip whitespace tokens
         }
     }
     
