@@ -163,7 +163,7 @@ enum Token {
     // - isn't math (no dollar signs)
     // - isn't braces
     // - isn't line endings
-    #[regex(r"[^\\$\{\}\n\r]+", |lex| lex.slice().to_string())]
+    #[regex(r"[^\\$\{\}\n\r]+", |lex| lex.slice().to_string(), priority = 2)]
     Text(String),
     #[regex(r"[\n\r]+")]
     Newline,
@@ -174,8 +174,7 @@ enum Token {
     
     // Skip whitespace
     #[regex(r"[ \t]+", logos::skip)]
-    #[error]
-    Error,
+    Error
 }
 
 
@@ -276,6 +275,7 @@ fn parse_tokens(lex: logos::Lexer<Token>) -> Node {
                 nodes.push(Node::Text("}\n".to_string()));
             }
             Err(_) => (), // Skip errors
+            Ok(Token::Error) => (), // Skip error tokens
         }
     }
     
