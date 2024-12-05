@@ -174,6 +174,7 @@ enum Token {
     
     // Skip whitespace
     #[regex(r"[ \t]+", logos::skip)]
+    Whitespace,
 }
 
 
