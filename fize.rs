@@ -148,7 +148,7 @@ enum Token {
         format!("{}|{}", parts[1], parts[2])
     })]
     DefBlock(String),
-    #[regex(r"\\minitex\{", |lex| lex.slice().to_string())]
+    #[regex(r"\\minitex\{", |lex| Some(Token::MiniTex))]
     MiniTex,
 
     // Other commands - capture the text content
