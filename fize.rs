@@ -247,13 +247,6 @@ fn parse_tokens(lex: logos::Lexer<Token>) -> Node {
                     body: Some(Box::new(Node::Block(Vec::new())))
                 });
             }
-            Ok(Token::MiniTex) => {
-                nodes.push(Node::Command {
-                    name: "minitex".to_string(),
-                    args: vec![],
-                    body: Some(Box::new(Node::Block(Vec::new())))
-                });
-            }
             Ok(Token::EmphText(text)) => {
                 nodes.push(Node::Command {
                     name: "em".to_string(),
@@ -270,9 +263,6 @@ fn parse_tokens(lex: logos::Lexer<Token>) -> Node {
                         _ => nodes.push(Node::Text(text.to_string()))
                     }
                 }
-            }
-            Ok(Token::Newline) => {
-                // Skip newlines as they'll be handled by the pretty printer
             }
             Ok(Token::Newline) => {
                 // Skip newlines as they'll be handled by the pretty printer
