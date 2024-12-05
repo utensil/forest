@@ -148,7 +148,7 @@ enum Token {
         format!("{}|{}", parts[1], parts[2])
     })]
     DefBlock(String),
-    #[regex(r"\\minitex\{", |lex| Some(Token::MiniTex))]
+    #[regex(r"\\minitex\{")]
     MiniTex,
 
     // Other commands - capture the text content
@@ -170,7 +170,12 @@ enum Token {
     #[regex(r"\{")]
     OpenBrace,
     #[regex(r"\}")]
-    CloseBrace
+    CloseBrace,
+    
+    // Skip whitespace
+    #[regex(r"[ \t]+", logos::skip)]
+    #[error]
+    Error,
 }
 
 
