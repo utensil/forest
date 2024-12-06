@@ -3,17 +3,24 @@
 # This is need for Mac as the default clang is too old
 export CC=/opt/homebrew/opt/llvm/bin/clang CXX=/opt/homebrew/opt/llvm/bin/clang++ CPATH=/opt/homebrew/opt/llvm/include LIBRARY_PATH=/opt/homebrew/opt/llvm/lib
 
+# ALIASES="--alias 'best:sonnet' --alias 'weak:haiku'"
+
 if [[ "$OPENAI_API_BASE" == *"hunyuan"* ]]; then
-    export MODEL='openai/hunyuan-code'
-elif [ -n "$DEEPSEEK_API_KEY" ]: then
-    export MODEL='deepseek'
+    export MODELS='--model openai/hunyuan-code'
+elif [ -n "$DEEPSEEK_API_KEY" ]; then
+    export MODELS='--model deepseek'
+elif [[ "$OPENAI_API_BASE" == *"glhf.chat"* ]]; then
+    # inspired by https://www.youtube.com/watch?v=AFiH_aErDBA&ab_channel=AICodeKing
+    export MODELS="--architect --model openai/hf:Qwen/QwQ-32B-Preview --editor-model openai/hf:Qwen/Qwen2.5-Coder-32B-Instruct"
 elif [ -n "$ANTHROPIC_API_KEY" ]; then
-    export MODEL=""
+    # explicitly set the default
+    export MODELS="--model sonnet --weak-model haiku"
 elif [[ "$OPENAI_API_BASE" == *"0.0.0.0"* ]]; then
-    export MODEL='openai/xai:grok-beta'
+    export MODELS='--model openai/xai:grok-beta'
 else
     echo "No model available in the environment, please check .env file"
     exit 1
 fi
+echo "Using model: $MODELS"
 # This runs aider in a virtual environment with the specified model, configs etc.
-uvx --python 3.11 --from 'aider-chat[help,playwright]' aider --no-show-model-warnings --model "$MODEL" --max-chat-history-tokens 8000 --map-tokens 1024 --dark-mode --subtree-only "$@"
+uvx --python 3.11 --from 'aider-chat[help,playwright]' aider --no-show-model-warnings $MODELS --max-chat-history-tokens 8000 --map-tokens 1024 --dark-mode --subtree-only "$@"

@@ -469,6 +469,9 @@ prep-llm:
     # docker pull dockerproxy.net/paulgauthier/aider-full
     cp -f aider /usr/local/bin
 
+aider: prep-llm
+    aider
+
 llm-proxy *PARAMS:
     #!/usr/bin/env bash
     # uvx --python 3.11 --from 'litellm[proxy]' litellm {{PARAMS}}
