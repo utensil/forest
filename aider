@@ -23,4 +23,4 @@ else
 fi
 echo "Using model: $MODELS"
 # This runs aider in a virtual environment with the specified model, configs etc.
-uvx --python 3.11 --from 'aider-chat[help,playwright]' aider --no-show-model-warnings $MODELS --max-chat-history-tokens 8000 --map-tokens 1024 --dark-mode --subtree-only "$@"
+uvx --python 3.11 --from 'aider-chat[help,playwright]' aider --no-show-model-warnings --no-auto-lint $MODELS --max-chat-history-tokens 8000 --map-tokens 1024 --dark-mode --subtree-only "$@"
