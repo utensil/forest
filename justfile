@@ -469,8 +469,8 @@ prep-llm:
     # docker pull dockerproxy.net/paulgauthier/aider-full
     cp -f aider /usr/local/bin
 
-aider: prep-llm
-    aider
+aider PARAMS: prep-llm
+    aider {{PARAMS}}
 
 llm-proxy *PARAMS:
     #!/usr/bin/env bash
