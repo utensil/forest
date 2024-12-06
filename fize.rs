@@ -145,11 +145,11 @@ enum Token {
         let parts: Vec<&str> = content.split('{')
             .map(|s| s.trim_end_matches('}'))
             .collect();
-        format!("{}|{}", parts[1], parts[2])
+        (parts[0], format!("{}|{}", parts[1], parts[2]))
     })]
-    DefBlock(String),
-    #[regex(r"\\minitex\{")]
-    MiniTex,
+    DefBlock(String, String),
+    #[regex(r"\\minitex\{", logos::skip)]
+    MiniTexStart,
 
     // Other commands - capture the text content
     #[regex(r"\\emph\{([^}]*)\}", |lex| {
@@ -169,7 +169,7 @@ enum Token {
     Newline,
     #[regex(r"\{")]
     OpenBrace,
-    #[regex(r"\}")]
+    #[regex(r"\}", logos::skip)]
     CloseBrace,
     
     // Skip whitespace
