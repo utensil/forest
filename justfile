@@ -469,13 +469,28 @@ prep-llm:
     # docker pull dockerproxy.net/paulgauthier/aider-full
     cp -f aider /usr/local/bin
 
-aider PARAMS: prep-llm
+aider *PARAMS: prep-llm
     aider {{PARAMS}}
 
 llm-proxy *PARAMS:
     #!/usr/bin/env bash
     # uvx --python 3.11 --from 'litellm[proxy]' litellm {{PARAMS}}
     aichat --serve 0.0.0.0:4000
+
+cpm:
+    #!/usr/bin/env bash
+    # if env var REFRESH_TOKEN is not set, prompt for it
+    if [ -z "$REFRESH_TOKEN" ]; then
+        # curl https://github.com/login/device/code -X POST -d 'client_id=01ab8ac9400c4e429b23&scope=user:email'
+        # curl https://github.com/login/oauth/access_token -X POST -d 'client_id=01ab8ac9400c4e429b23&scope=user:email&device_code=YOUR_DEVICE_CODE&grant_type=urn:ietf:params:oauth:grant-type:device_code'
+        echo "Please follow https://github.com/jjleng/copilot-more to set up REFRESH_TOKEN"
+    fi
+    if [ ! -d ../copilot-more ]; then
+        (cd .. && git clone https://github.com/jjleng/copilot-more.git)
+    fi
+    cd ../copilot-more
+    uvx peotry install
+    uvx poetry run uvicorn copilot_more.server:app --port 15432
 
 # works only for Ubuntu
 [linux]
