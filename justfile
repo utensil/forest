@@ -101,6 +101,9 @@ prep-term: prep-kitty
     which 7zz || brew install sevenzip
     which ffmpeg || brew install ffmpeg
     which tokei || brew install tokei
+    # awrit installation usually fails with some warning
+    which awrit || brew install chase/tap/awrit || true
+    which mpv || brew install mpv
 
 prep-alacritty:
     #!/usr/bin/env bash
