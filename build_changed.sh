@@ -37,6 +37,7 @@ while IFS= read -r line; do
     elif [[ $CHANGED_FILE == *".xsl" ]]; then
         just copy $CHANGED_FILE_RELATIVE
     elif [[ $CHANGED_FILE == *".tree" ]]; then
+        backup_xml_files
         just forest
         # After forest rebuild, convert any updated XML files
         for xml_file in output/*.xml; do
@@ -47,6 +48,7 @@ while IFS= read -r line; do
             fi
         done
     elif [[ $CHANGED_FILE == *".xml" ]]; then
+        backup_xml_files
         just forest
         # Convert the changed XML file to HTML
         basename=$(basename "$CHANGED_FILE" .xml)
