@@ -468,6 +468,7 @@ check-dirs SRC DST:
 
 prep-llm:
     which aichat || brew install aichat
+    which assembllm || (brew tap bradyjoslin/assembllm && brew install bradyjoslin/assembllm/assembllm)
     which cortex || echo "Visit https://cortex.so/docs/installation to download and install cortex"
     # docker pull dockerproxy.net/paulgauthier/aider-full
     cp -f aider /usr/local/bin
@@ -525,3 +526,25 @@ prep-delta:
 
 loc:
     tokei -o json|uvx tokei-pie
+
+md FILE:
+    uvx markitdown "{{FILE}}"
+
+p2t FILE:
+    uvx --python 3.12 --from 'pix2text[multilingual]' p2t predict --device mps --file-type pdf -i "{{FILE}}"
+
+prep-p2t:
+    #!/usr/bin/env bash
+    set -e
+    # if the directory not exits
+    if [ ! -d ~/.pix2text-mac ]; then
+        git clone https://github.com/breezedeus/Pix2Text-Mac ~/.pix2text-mac
+    fi
+    cd ~/.pix2text-mac
+    uv venv --python 3.12 --seed
+    source ~/.pix2text/.venv/bin/activate
+    pip install -r requirements.txt
+    pip install pix2text[multilingual]>=1.1.0.1
+    python setup.py py2app -A
+
+
