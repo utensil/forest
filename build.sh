@@ -115,17 +115,29 @@ function build_ssr {
     bunx roger trios assets/penrose/*.trio.json -o output 1>>build/ssr.log 2>>build/ssr.log
 }
 
+function backup_xml_files() {
+    echo "⭐ Backing up XML files"
+    mkdir -p output/.bak
+    cp output/*.xml output/.bak/ 2>/dev/null || true
+}
+
 function needs_update() {
     local xml_file=$1
     local html_file=$2
+    local backup_file="output/.bak/$(basename "$xml_file")"
 
     # If HTML doesn't exist, needs update
     if [ ! -f "$html_file" ]; then
         return 0
     fi
 
-    # Compare modification times
-    if [ "$xml_file" -nt "$html_file" ]; then
+    # If backup doesn't exist (first run), needs update
+    if [ ! -f "$backup_file" ]; then
+        return 0
+    fi
+
+    # Compare current XML with backup
+    if ! cmp -s "$xml_file" "$backup_file"; then
         return 0
     fi
 
@@ -180,6 +192,7 @@ function build {
     mkdir -p build
     echo "⭐ Rebuilding bun"
     bun_build
+    backup_xml_files
     echo "⭐ Rebuilding forest"
     just forest
     show_result
