@@ -547,4 +547,18 @@ prep-p2t:
     pip install pix2text[multilingual]>=1.1.0.1
     python setup.py py2app -A
 
+# https://github.com/Byaidu/PDFMathTranslate
+pzh:
+    uvx pdf2zh -i
+
+prep-date:
+    which git-backdate || (curl https://raw.githubusercontent.com/rixx/git-backdate/main/git-backdate > /usr/local/bin/git-backdate && chmod +x /usr/local/bin/git-backdate)
+    which gdate || brew install coreutils
+    alias date=gdate
+
+date: prep-date
+    #!/usr/bin/env zsh
+    alias date=gdate
+    git backdate origin/main "7 days ago..today" --no-business-hours
+
 
