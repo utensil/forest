@@ -69,6 +69,8 @@ touch build/live/trigger.txt
 
 # Post-process: Convert HTML files for tree changes
 updated_count=0
+start_time=$(date +%s)
+
 for xml_file in output/*.xml; do
     if [ -f "output/.bak/$(basename $xml_file)" ] && ! cmp -s "$xml_file" "output/.bak/$(basename $xml_file)"; then
         basename=$(basename "$xml_file" .xml)
@@ -77,4 +79,7 @@ for xml_file in output/*.xml; do
         ((updated_count++))
     fi
 done
-echo "📝Updated $updated_count HTML file(s)"
+
+end_time=$(date +%s)
+duration=$((end_time - start_time))
+echo "📝 Updated $updated_count HTML file(s) in ${duration}s"
