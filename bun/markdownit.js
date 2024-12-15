@@ -2,7 +2,8 @@
 // for advanced usage, see https://github.com/markdown-it/markdown-it/blob/master/support/demo_template/index.mjs
 
 /* https://github.com/Mathpix/mathpix-markdown-it
- * use mathpix-markdown-it instead of raw markdown-it, rewrite the code AI!
+ * TODO use mathpix-markdown-it instead of raw markdown-it, rewrite the code
+ * but it errors with `Uncaught ReferenceError: global is not defined`
  */
 import markdownit from 'markdown-it'
 
