@@ -4,6 +4,12 @@ set -eo pipefail
 SCRIPT_DIR=$(dirname "$(readlink -f "$0")")
 PROJECT_ROOT="$SCRIPT_DIR"
 
+function backup_xml_files() {
+    echo "⭐ Backing up XML files"
+    mkdir -p output/.bak
+    cp output/*.xml output/.bak/ 2>/dev/null || true
+}
+
 function relative_to_project_root() {
     local target=$1
     local common_part=$PROJECT_ROOT
