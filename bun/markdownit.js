@@ -1,4 +1,4 @@
-// bun install mathpix-markdown-it
+// bun add mathpix-markdown-it
 import { MathpixMarkdownModel } from 'mathpix-markdown-it'
 
 // Initialize with options for math rendering
@@ -25,7 +25,7 @@ for (const markdownit_tag of markdownit_tags) {
         .replaceAll(/&lt;/g, '<')
         .replaceAll(/&gt;/g, '>')
         .replaceAll(/\\([\[\(])(.+?)\\([\)\]])/g, '\\\\$1$2\\\\$3')
-    
+
     markdownit_tag.innerHTML = MathpixMarkdownModel.markdownToHTML(converted_source, options)
     markdownit_tag.classList.remove('grace-loading')
 }
