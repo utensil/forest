@@ -2,8 +2,8 @@
 // for advanced usage, see https://github.com/markdown-it/markdown-it/blob/master/support/demo_template/index.mjs
 
 /* https://github.com/Mathpix/mathpix-markdown-it
-* use mathpix-markdown-it instead of raw markdown-it, rewrite the code AI!
-*/
+ * use mathpix-markdown-it instead of raw markdown-it, rewrite the code AI!
+ */
 import markdownit from 'markdown-it'
 
 const md = markdownit({ html: true })
