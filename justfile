@@ -566,6 +566,6 @@ date: prep-date
 
 # based on https://github.com/zachdaniel/dotfiles/blob/main/priv_scripts/project
 proj:
-    fd --type d --max-depth 1 --base-directory {{home_directory()}}/projects|fzf --prompt 'Select a directory: '|xargs kitty @ launch --type os-window --cwd {{home_directory()}}/projects/forest --hold just lvim
+    fd --type d --max-depth 1 --base-directory {{home_directory()}}/projects|fzf --prompt 'Select a directory: '|xargs -I {} kitty @ launch --type os-window --cwd {{home_directory()}}/projects/forest --copy-env zsh -c 'just lvim {}'
 
 
