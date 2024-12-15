@@ -480,8 +480,13 @@ aider *PARAMS: prep-llm
     aider {{PARAMS}}
 
 # this works for AI! AI? ai! but it needs to be in a single-line comment
-aw:
-    just aider -v --watch-files
+# if you want to work with another project
+# you can
+# 1. `just proj` to pick and open the project in a new kitty terminal
+# 2. `just aider ../proj_name` to start aider in the project directory
+# Improve the doc above AI!
+aw *PARAMS:
+    just aider -v --watch-files {{PARAMS}}
 
 llm-proxy *PARAMS:
     #!/usr/bin/env bash
