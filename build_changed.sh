@@ -46,6 +46,12 @@ while IFS= read -r line; do
                 bunx xslt3 -s:"$xml_file" -xsl:assets/html.xsl -o:"output/$basename.html"
             fi
         done
+    elif [[ $CHANGED_FILE == *".xml" ]]; then
+        just forest
+        # Convert the changed XML file to HTML
+        basename=$(basename "$CHANGED_FILE" .xml)
+        echo "Converting $basename.xml to HTML..."
+        bunx xslt3 -s:"output/$basename.xml" -xsl:assets/html.xsl -o:"output/$basename.html"
     elif [[ $CHANGED_FILE == *".tex" ]]; then
         # even with full rebuild, updates to preambles are NOT reflected
         # ./build.sh
