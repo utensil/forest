@@ -38,6 +38,14 @@ while IFS= read -r line; do
         just copy $CHANGED_FILE_RELATIVE
     elif [[ $CHANGED_FILE == *".tree" ]]; then
         just forest
+        # After forest rebuild, convert any updated XML files
+        for xml_file in output/*.xml; do
+            if [ -f "output/.bak/$(basename $xml_file)" ] && ! cmp -s "$xml_file" "output/.bak/$(basename $xml_file)"; then
+                basename=$(basename "$xml_file" .xml)
+                echo "Converting updated $basename.xml to HTML..."
+                bunx xslt3 -s:"$xml_file" -xsl:assets/html.xsl -o:"output/$basename.html"
+            fi
+        done
     elif [[ $CHANGED_FILE == *".tex" ]]; then
         # even with full rebuild, updates to preambles are NOT reflected
         # ./build.sh
