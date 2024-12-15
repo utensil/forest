@@ -568,4 +568,8 @@ date: prep-date
 proj:
     fd --type d --max-depth 1 --base-directory {{home_directory()}}/projects|fzf --prompt 'Select a directory: '|xargs -I {} kitty @ launch --type os-window --cwd {{home_directory()}}/projects/forest --copy-env zsh -c 'just lvim {}'
 
+# to search history, use Ctrl+R instead
+# here is how to search files
+fzf:
+    fzf --preview 'bat {}'|xargs lvim
 
