@@ -24,7 +24,7 @@ function relative_to_project_root() {
 }
 
 while IFS= read -r line; do
-    IFS=':' read -ra ADDR <<< "$line"
+    IFS=':' read -ra ADDR <<<"$line"
     EVENT="${ADDR[0]}"
     CHANGED_FILE="${ADDR[1]}"
     # echo emoji for information
@@ -53,13 +53,6 @@ while IFS= read -r line; do
                 bunx xslt3 -s:"$xml_file" -xsl:assets/html.xsl -o:"output/$basename.html"
             fi
         done
-    elif [[ $CHANGED_FILE == *".xml" ]]; then
-        backup_xml_files
-        just forest
-        # Convert the changed XML file to HTML
-        basename=$(basename "$CHANGED_FILE" .xml)
-        echo "Converting $basename.xml to HTML..."
-        bunx xslt3 -s:"output/$basename.xml" -xsl:assets/html.xsl -o:"output/$basename.html"
     elif [[ $CHANGED_FILE == *".tex" ]]; then
         # even with full rebuild, updates to preambles are NOT reflected
         # ./build.sh
@@ -76,7 +69,7 @@ while IFS= read -r line; do
         echo "🤷 No action for $LINE"
     fi
 
-    (mkdir -p build/live && echo -n $CHANGED_FILE_RELATIVE > build/live/updated_file.txt)
+    (mkdir -p build/live && echo -n $CHANGED_FILE_RELATIVE >build/live/updated_file.txt)
 done
 
 touch build/live/trigger.txt
