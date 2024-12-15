@@ -118,7 +118,7 @@ function build_ssr {
 function convert_xml_to_html() {
     local xml_file=$1
     local basename=$(basename "$xml_file" .xml)
-    echo "Converting $xml_file to HTML..."
+    # echo "Converting $xml_file to HTML..."
     bunx xslt3 -s:"$xml_file" -xsl:assets/html.xsl -o:"output/$basename.html"
 }
 
@@ -127,7 +127,7 @@ function convert_all_xml() {
     local xml_files=(output/*.xml)
     local num_cores=$(sysctl -n hw.ncpu)
     local max_jobs=$((num_cores > 2 ? num_cores - 2 : 2))
-    
+
     # Process files in parallel
     for ((i=0; i<${#xml_files[@]}; i+=max_jobs)); do
         for ((j=i; j<i+max_jobs && j<${#xml_files[@]}; j++)); do
