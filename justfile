@@ -483,6 +483,7 @@ aider *PARAMS: prep-llm
 # To work with other projects:
 #   1. Use `just proj` to select and open a project in a new kitty terminal
 #   2. Or use `just aider ../project_name` to start aider in another directory
+# I've tested that it works with `AI!`, `AI?`, and `ai!`
 aw *PARAMS:
     just aider -v --watch-files {{PARAMS}}
 
