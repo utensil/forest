@@ -125,11 +125,14 @@ prep-kitty:
     # curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
 
 @sync-kitty:
+    #!/usr/bin/env bash
     # configure kitty
     # https://sw.kovidgoyal.net/kitty/conf.html
     mkdir -p ~/.config/kitty
     cp -f kitty.conf ~/.config/kitty/kitty.conf
     cp -f kitty_session.conf ~/.config/kitty/kitty_session.conf
+    # this should make kitty reload the config
+    kill -SIGUSR1 $KITTY_PID
 
 [macos]
 prep-warp:
@@ -560,5 +563,9 @@ date: prep-date
     #!/usr/bin/env zsh
     alias date=gdate
     git backdate origin/main "7 days ago..today" --no-business-hours
+
+# based on https://github.com/zachdaniel/dotfiles/blob/main/priv_scripts/project
+proj:
+    fd --type d --max-depth 1 --base-directory {{home_directory()}}/projects|fzf --prompt 'Select a directory: '|xargs kitty @ launch --type os-window --cwd {{home_directory()}}/projects/forest --hold just lvim
 
 
