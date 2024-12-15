@@ -479,6 +479,10 @@ prep-llm:
 aider *PARAMS: prep-llm
     aider {{PARAMS}}
 
+# this works for AI! AI? ai! but it needs to be in a single-line comment
+aw:
+    just aider -v --watch-files
+
 llm-proxy *PARAMS:
     #!/usr/bin/env bash
     # uvx --python 3.11 --from 'litellm[proxy]' litellm {{PARAMS}}
