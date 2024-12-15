@@ -77,4 +77,4 @@ for xml_file in output/*.xml; do
         ((updated_count++))
     fi
 done
-echo "Updated $updated_count HTML file(s)"
+echo "📝Updated $updated_count HTML file(s)"
