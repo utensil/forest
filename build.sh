@@ -115,6 +115,28 @@ function build_ssr {
     bunx roger trios assets/penrose/*.trio.json -o output 1>> build/ssr.log 2>> build/ssr.log
 }
 
+function convert_xml_to_html() {
+    local xml_file=$1
+    local basename=$(basename "$xml_file" .xml)
+    echo "Converting $xml_file to HTML..."
+    bunx xslt3 -s:"$xml_file" -xsl:assets/html.xsl -o:"output/$basename.html"
+}
+
+function convert_all_xml() {
+    echo "⭐ Converting XML to HTML"
+    local xml_files=(output/*.xml)
+    local num_cores=$(sysctl -n hw.ncpu)
+    local max_jobs=$((num_cores > 2 ? num_cores - 2 : 2))
+    
+    # Process files in parallel
+    for ((i=0; i<${#xml_files[@]}; i+=max_jobs)); do
+        for ((j=i; j<i+max_jobs && j<${#xml_files[@]}; j++)); do
+            convert_xml_to_html "${xml_files[j]}" &
+        done
+        wait
+    done
+}
+
 function build {
   mkdir -p build
   echo "⭐ Rebuilding bun"
@@ -129,6 +151,8 @@ function build {
   fi
   # echo "⭐ Copying assets"
   copy_extra_assets
+  convert_all_xml
+  show_result
 #   build_ssr
 #   show_result
   # echo "Open build/forester.log to see the log."
