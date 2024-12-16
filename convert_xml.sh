@@ -28,7 +28,9 @@ function convert_xml_files() {
     local total_files=${#xml_files[@]}
     # Cross-platform CPU core detection
     local num_cores
-    if [ -f /proc/cpuinfo ]; then
+    if [ -n "$CI" ]; then
+        num_cores=2
+    elif [ -f /proc/cpuinfo ]; then
         num_cores=$(grep -c ^processor /proc/cpuinfo)
     elif [ "$(uname)" = "Darwin" ]; then
         num_cores=$(sysctl -n hw.ncpu 2>/dev/null || echo 4)
