@@ -67,18 +67,29 @@ done
 
 touch build/live/trigger.txt
 
-# Post-process: Convert HTML files for tree changes or when XSL files change
+# Post-process: Convert HTML files for tree or XSL changes
 updated_count=0
 start_time=$(date +%s)
 
-for xml_file in output/*.xml; do
-    if [[ $CHANGED_FILE == *".xsl" ]] || ( [ -f "output/.bak/$(basename $xml_file)" ] && ! cmp -s "$xml_file" "output/.bak/$(basename $xml_file)" ); then
+if [[ $CHANGED_FILE == *".xsl" ]]; then
+    # Convert all XML files when XSL changes
+    for xml_file in output/*.xml; do
         basename=$(basename "$xml_file" .xml)
-        echo "Converting updated $basename.xml to HTML..."
+        echo "Converting $basename.xml due to XSL change..."
         bunx xslt3 -s:"$xml_file" -xsl:assets/uts-forest.xsl -o:"output/$basename.html"
         ((updated_count++))
-    fi
-done
+    done
+elif [[ $CHANGED_FILE == *".tree" ]]; then
+    # Only compare and convert changed XML files for tree changes
+    for xml_file in output/*.xml; do
+        if [ -f "output/.bak/$(basename $xml_file)" ] && ! cmp -s "$xml_file" "output/.bak/$(basename $xml_file)"; then
+            basename=$(basename "$xml_file" .xml)
+            echo "Converting updated $basename.xml to HTML..."
+            bunx xslt3 -s:"$xml_file" -xsl:assets/uts-forest.xsl -o:"output/$basename.html"
+            ((updated_count++))
+        fi
+    done
+fi
 
 end_time=$(date +%s)
 duration=$((end_time - start_time))
