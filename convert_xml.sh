@@ -65,8 +65,12 @@ function convert_xml_files() {
         echo "Converting all ${total_files} XML files..."
     fi
 
-    # Process files in parallel
-    # for every 5% of the files, print a block character AI!
+    # Process files in parallel with progress indicator
+    local progress=0
+    local progress_step=$((total_files / 20)) # 5% intervals
+    [ $progress_step -eq 0 ] && progress_step=1
+    echo -n "Progress: "
+    
     for ((i = 0; i < total_files; i += max_jobs)); do
         for ((j = i; j < i + max_jobs && j < total_files; j++)); do
             local xml_file="${xml_files[j]}"
@@ -77,7 +81,15 @@ function convert_xml_files() {
             fi
         done
         wait
+        
+        # Update progress indicator every 5%
+        local new_progress=$((i / progress_step))
+        while [ $progress -lt $new_progress ] && [ $progress -lt 20 ]; do
+            echo -n "█"
+            ((progress++))
+        done
     done
+    echo # New line after progress bar
 
     local end_time=$(date +%s)
     local duration=$((end_time - start_time))
