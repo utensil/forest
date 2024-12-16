@@ -71,7 +71,7 @@ source convert_xml.sh
 
 # Post-process: Convert HTML files for tree or XSL changes
 if [[ $CHANGED_FILE == *".xsl" ]]; then
-    convert_xml_files true
+    XSL_CHANGED=1 convert_xml_files true
 elif [[ $CHANGED_FILE == *".tree" ]]; then
     convert_xml_files false
 fi
