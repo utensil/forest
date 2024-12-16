@@ -45,12 +45,12 @@ function convert_xml_files() {
         backup_html_files
         local changes_detected=false
         local sample_size=3
-        
+
         for ((i = 0; i < sample_size && i < total_files; i++)); do
             local xml_file="${xml_files[i]}"
             local basename=$(basename "$xml_file" .xml)
             convert_xml_to_html "$xml_file"
-            
+
             if check_html_changes "$basename"; then
                 changes_detected=true
                 break
@@ -61,7 +61,8 @@ function convert_xml_files() {
             echo "⏩ XSL changes don't affect HTML output, skipping conversion"
             return 0
         fi
-        
+
+        # this should repot file count AI!
         echo "Converting all XML files..."
     fi
 
@@ -69,8 +70,8 @@ function convert_xml_files() {
     for ((i = 0; i < total_files; i += max_jobs)); do
         for ((j = i; j < i + max_jobs && j < total_files; j++)); do
             local xml_file="${xml_files[j]}"
-            if [ "$convert_all" = true ] || \
-               ([ -f "output/.bak/$(basename $xml_file)" ] && ! cmp -s "$xml_file" "output/.bak/$(basename $xml_file)"); then
+            if [ "$convert_all" = true ] ||
+                ([ -f "output/.bak/$(basename $xml_file)" ] && ! cmp -s "$xml_file" "output/.bak/$(basename $xml_file)"); then
                 convert_xml_to_html "$xml_file" &
                 ((updated_count++))
             fi
@@ -81,7 +82,7 @@ function convert_xml_files() {
     local end_time=$(date +%s)
     local duration=$((end_time - start_time))
     echo "📝 Updated $updated_count HTML file(s) in ${duration}s"
-    
+
     # Clean up backup files after conversion
     rm -rf output/.bak
 }
