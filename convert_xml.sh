@@ -26,7 +26,13 @@ function convert_xml_files() {
     # Get all XML files
     local xml_files=(output/*.xml)
     local total_files=${#xml_files[@]}
-    local num_cores=$(sysctl -n hw.ncpu)
+    # Cross-platform CPU core detection
+    local num_cores
+    if [ -f /proc/cpuinfo ]; then
+        num_cores=$(grep -c ^processor /proc/cpuinfo)
+    else
+        num_cores=$(sysctl -n hw.ncpu 2>/dev/null || echo 4)
+    fi
     local max_jobs=$((num_cores > 2 ? num_cores - 2 : 2))
 
     if [ "$convert_all" = true ]; then
