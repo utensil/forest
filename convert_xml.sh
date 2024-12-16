@@ -76,8 +76,11 @@ function convert_xml_files() {
     for ((i = 0; i < total_files; i += max_jobs)); do
         for ((j = i; j < i + max_jobs && j < total_files; j++)); do
             local xml_file="${xml_files[j]}"
-            if [ "$convert_all" = true ] ||
-                ([ -f "output/.bak/$(basename $xml_file)" ] && ! cmp -s "$xml_file" "output/.bak/$(basename $xml_file)"); then
+            # Only convert if:
+            # 1. XSL changed and we detected changes in sample testing, or
+            # 2. Individual XML file changed (comparing with backup)
+            if ([ "$convert_all" = true ] && [ -n "$XSL_CHANGED" ] && [ "$changes_detected" = true ]) ||
+               ([ -f "output/.bak/$(basename $xml_file)" ] && ! cmp -s "$xml_file" "output/.bak/$(basename $xml_file)"); then
                 convert_xml_to_html "$xml_file" &
                 ((updated_count++))
             fi
