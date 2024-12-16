@@ -62,8 +62,7 @@ function convert_xml_files() {
             return 0
         fi
 
-        # this should repot file count AI!
-        echo "Converting all XML files..."
+        echo "Converting all ${total_files} XML files..."
     fi
 
     # Process files in parallel
