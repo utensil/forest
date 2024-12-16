@@ -568,8 +568,9 @@ prep-date:
 
 date: prep-date
     #!/usr/bin/env zsh
-    # use gdate to generate dates like 2024-03-16 from 7 days ago and today and change the following command accordingly AI!
-    git backdate origin/main "7 days ago..today" --no-business-hours
+    START_DATE=$(gdate -d "7 days ago" +%Y-%m-%d)
+    END_DATE=$(gdate +%Y-%m-%d)
+    git backdate origin/main "${START_DATE}..${END_DATE}" --no-business-hours
 
 # based on https://github.com/zachdaniel/dotfiles/blob/main/priv_scripts/project
 proj:
