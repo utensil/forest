@@ -67,31 +67,12 @@ done
 
 touch build/live/trigger.txt
 
+source convert_xml.sh
+
 # Post-process: Convert HTML files for tree or XSL changes
-updated_count=0
-start_time=$(date +%s)
-
 if [[ $CHANGED_FILE == *".xsl" ]]; then
-    # Convert all XML files when XSL changes
-    echo "Converting all XML files due to XSL change..."
-    for xml_file in output/*.xml; do
-        basename=$(basename "$xml_file" .xml)
-        bunx xslt3 -s:"$xml_file" -xsl:output/uts-forest.xsl -o:"output/$basename.html"
-        ((updated_count++))
-    done
+    convert_xml_files true
 elif [[ $CHANGED_FILE == *".tree" ]]; then
-    # Only compare and convert changed XML files for tree changes
-    for xml_file in output/*.xml; do
-        if [ -f "output/.bak/$(basename $xml_file)" ] && ! cmp -s "$xml_file" "output/.bak/$(basename $xml_file)"; then
-            basename=$(basename "$xml_file" .xml)
-            echo "Converting updated $basename.xml to HTML..."
-            bunx xslt3 -s:"$xml_file" -xsl:output/uts-forest.xsl -o:"output/$basename.html"
-            ((updated_count++))
-        fi
-    done
+    convert_xml_files false
 fi
-
-end_time=$(date +%s)
-duration=$((end_time - start_time))
-echo "📝 Updated $updated_count HTML file(s) in ${duration}s"
 

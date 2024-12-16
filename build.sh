@@ -149,44 +149,7 @@ function needs_update() {
     return 1
 }
 
-function convert_xml_to_html() {
-    local xml_file=$1
-    local basename=$(basename "$xml_file" .xml)
-    local html_file="output/$basename.html"
-
-    if needs_update "$xml_file" "$html_file"; then
-        bunx xslt3 -s:"$xml_file" -xsl:output/uts-forest.xsl -o:"$html_file"
-    fi
-}
-
-function convert_all_xml() {
-    echo "⭐ Converting XML to HTML (if needed)"
-    local xml_files=(output/*.xml)
-    local total_files=${#xml_files[@]}
-    local num_cores=$(sysctl -n hw.ncpu)
-    local max_jobs=$((num_cores > 2 ? num_cores - 2 : 2))
-    local files_processed=0
-    local last_percentage=0
-
-    echo "📝 Processing $total_files XML files..."
-
-    # Process files in parallel
-    for ((i = 0; i < total_files; i += max_jobs)); do
-        for ((j = i; j < i + max_jobs && j < total_files; j++)); do
-            convert_xml_to_html "${xml_files[j]}" &
-        done
-        wait
-
-        # Update progress
-        files_processed=$((j))
-        local percentage=$((files_processed * 100 / total_files))
-        while ((percentage >= last_percentage + 5)); do
-            printf "█"
-            last_percentage=$((last_percentage + 5))
-        done
-    done
-    echo # New line after dots
-}
+source convert_xml.sh
 
 function build {
     mkdir -p build
@@ -203,7 +166,7 @@ function build {
     fi
     # echo "⭐ Copying assets"
     copy_extra_assets
-    convert_all_xml
+    convert_xml_files true
     show_result
     #   build_ssr
     #   show_result
