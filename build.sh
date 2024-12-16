@@ -168,7 +168,7 @@ function convert_all_xml() {
     local files_processed=0
     local last_percentage=0
 
-    echo "Processing $total_files XML files..."
+    echo "📝 Processing $total_files XML files..."
 
     # Process files in parallel
     for ((i = 0; i < total_files; i += max_jobs)); do
@@ -181,7 +181,7 @@ function convert_all_xml() {
         files_processed=$((j))
         local percentage=$((files_processed * 100 / total_files))
         while ((percentage >= last_percentage + 5)); do
-            printf "."
+            printf "█"
             last_percentage=$((last_percentage + 5))
         done
     done
