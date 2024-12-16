@@ -76,7 +76,7 @@ if [[ $CHANGED_FILE == *".xsl" ]]; then
     for xml_file in output/*.xml; do
         basename=$(basename "$xml_file" .xml)
         echo "Converting $basename.xml due to XSL change..."
-        bunx xslt3 -s:"$xml_file" -xsl:assets/uts-forest.xsl -o:"output/$basename.html"
+        bunx xslt3 -s:"$xml_file" -xsl:output/uts-forest.xsl -o:"output/$basename.html"
         ((updated_count++))
     done
 elif [[ $CHANGED_FILE == *".tree" ]]; then
@@ -85,7 +85,7 @@ elif [[ $CHANGED_FILE == *".tree" ]]; then
         if [ -f "output/.bak/$(basename $xml_file)" ] && ! cmp -s "$xml_file" "output/.bak/$(basename $xml_file)"; then
             basename=$(basename "$xml_file" .xml)
             echo "Converting updated $basename.xml to HTML..."
-            bunx xslt3 -s:"$xml_file" -xsl:assets/uts-forest.xsl -o:"output/$basename.html"
+            bunx xslt3 -s:"$xml_file" -xsl:output/uts-forest.xsl -o:"output/$basename.html"
             ((updated_count++))
         fi
     done
