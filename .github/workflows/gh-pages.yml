@@ -65,6 +65,14 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-wasm-
 
+      - name: Cache HTML files
+        uses: actions/cache@v4
+        with:
+          path: output/*.html
+          key: ${{ runner.os }}-html-${{ hashFiles('output/*.xml', 'output/*.xsl') }}
+          restore-keys: |
+            ${{ runner.os }}-html-
+
       - name: Setup Pages
         if: ${{ !env.ACT }}
         id: pages
