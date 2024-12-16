@@ -30,8 +30,11 @@ function convert_xml_files() {
     local num_cores
     if [ -f /proc/cpuinfo ]; then
         num_cores=$(grep -c ^processor /proc/cpuinfo)
-    else
+    elif [ "$(uname)" = "Darwin" ]; then
         num_cores=$(sysctl -n hw.ncpu 2>/dev/null || echo 4)
+    else
+        # Default to 4 cores if we can't detect
+        num_cores=4
     fi
     local max_jobs=$((num_cores > 2 ? num_cores - 2 : 2))
 
