@@ -24,6 +24,7 @@ rm build/$1.* >/dev/null 2>&1 || echo no files to clean
 cp output/$XML_FILE build/$XML_FILE
 
 # brew install saxon
+# bun add xslt3
 
 bunx xslt3 -s:build/$XML_FILE -xsl:assets/$XSLFILE -o:build/$TEX_FILE
 
