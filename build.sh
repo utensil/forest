@@ -155,7 +155,7 @@ function convert_xml_to_html() {
     local html_file="output/$basename.html"
 
     if needs_update "$xml_file" "$html_file"; then
-        bunx xslt3 -s:"$xml_file" -xsl:assets/html.xsl -o:"$html_file"
+        bunx xslt3 -s:"$xml_file" -xsl:assets/uts-forest.xsl -o:"$html_file"
     fi
 }
 

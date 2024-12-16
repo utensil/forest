@@ -75,7 +75,7 @@ for xml_file in output/*.xml; do
     if [ -f "output/.bak/$(basename $xml_file)" ] && ! cmp -s "$xml_file" "output/.bak/$(basename $xml_file)"; then
         basename=$(basename "$xml_file" .xml)
         echo "Converting updated $basename.xml to HTML..."
-        bunx xslt3 -s:"$xml_file" -xsl:assets/html.xsl -o:"output/$basename.html"
+        bunx xslt3 -s:"$xml_file" -xsl:assets/uts-forest.xsl -o:"output/$basename.html"
         ((updated_count++))
     fi
 done
