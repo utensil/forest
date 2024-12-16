@@ -66,6 +66,7 @@ function convert_xml_files() {
     fi
 
     # Process files in parallel
+    # for every 5% of the files, print a block character AI!
     for ((i = 0; i < total_files; i += max_jobs)); do
         for ((j = i; j < i + max_jobs && j < total_files; j++)); do
             local xml_file="${xml_files[j]}"
