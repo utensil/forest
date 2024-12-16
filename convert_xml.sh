@@ -27,16 +27,16 @@ function convert_xml_files() {
     local xml_files=(output/*.xml)
     local total_files=${#xml_files[@]}
     # Cross-platform CPU core detection
-    local num_cores
+    local num_cores=1
     if [ -n "$CI" ]; then
         num_cores=2
     elif [ -f /proc/cpuinfo ]; then
         num_cores=$(grep -c ^processor /proc/cpuinfo)
     elif [ "$(uname)" = "Darwin" ]; then
-        num_cores=$(sysctl -n hw.ncpu 2>/dev/null || echo 4)
+        num_cores=$(sysctl -n hw.ncpu 2>/dev/null || echo 1)
     else
-        # Default to 4 cores if we can't detect
-        num_cores=4
+        # Default to 1 core if we can't detect
+        num_cores=1
     fi
     local max_jobs=$((num_cores > 2 ? num_cores - 2 : 2))
 
