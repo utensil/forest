@@ -70,4 +70,7 @@ function convert_xml_files() {
     local end_time=$(date +%s)
     local duration=$((end_time - start_time))
     echo "📝 Updated $updated_count HTML file(s) in ${duration}s"
+    
+    # Clean up backup files after conversion
+    rm -rf output/.bak
 }
