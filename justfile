@@ -565,11 +565,10 @@ pzh:
 prep-date:
     which git-backdate || (curl https://raw.githubusercontent.com/rixx/git-backdate/main/git-backdate > /usr/local/bin/git-backdate && chmod +x /usr/local/bin/git-backdate)
     which gdate || brew install coreutils
-    alias date=gdate
 
 date: prep-date
     #!/usr/bin/env zsh
-    alias date=gdate
+    # use gdate to generate dates like 2024-03-16 from 7 days ago and today and change the following command accordingly AI!
     git backdate origin/main "7 days ago..today" --no-business-hours
 
 # based on https://github.com/zachdaniel/dotfiles/blob/main/priv_scripts/project
