@@ -73,9 +73,9 @@ start_time=$(date +%s)
 
 if [[ $CHANGED_FILE == *".xsl" ]]; then
     # Convert all XML files when XSL changes
+    echo "Converting all XML files due to XSL change..."
     for xml_file in output/*.xml; do
         basename=$(basename "$xml_file" .xml)
-        echo "Converting $basename.xml due to XSL change..."
         bunx xslt3 -s:"$xml_file" -xsl:output/uts-forest.xsl -o:"output/$basename.html"
         ((updated_count++))
     done
