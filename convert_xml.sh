@@ -8,6 +8,16 @@ function convert_xml_to_html() {
     bunx xslt3 -s:"$xml_file" -xsl:output/uts-forest.xsl -o:"$html_file"
 }
 
+function backup_html_files() {
+    mkdir -p output/.bak
+    cp output/*.html output/.bak/ 2>/dev/null || true
+}
+
+function check_html_changes() {
+    local basename=$1
+    [ ! -f "output/.bak/$basename.html" ] || ! cmp -s "output/$basename.html" "output/.bak/$basename.html"
+}
+
 function convert_xml_files() {
     local convert_all=$1
     local updated_count=0
@@ -20,6 +30,27 @@ function convert_xml_files() {
     local max_jobs=$((num_cores > 2 ? num_cores - 2 : 2))
 
     if [ "$convert_all" = true ]; then
+        # Test with a sample of 3 files first
+        backup_html_files
+        local changes_detected=false
+        local sample_size=3
+        
+        for ((i = 0; i < sample_size && i < total_files; i++)); do
+            local xml_file="${xml_files[i]}"
+            local basename=$(basename "$xml_file" .xml)
+            convert_xml_to_html "$xml_file"
+            
+            if check_html_changes "$basename"; then
+                changes_detected=true
+                break
+            fi
+        done
+
+        if [ "$changes_detected" = false ]; then
+            echo "⏩ XSL changes don't affect HTML output, skipping conversion"
+            return 0
+        fi
+        
         echo "Converting all XML files..."
     fi
 
