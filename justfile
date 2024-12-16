@@ -568,9 +568,10 @@ prep-date:
 
 date: prep-date
     #!/usr/bin/env zsh
-    START_DATE=$(gdate -d "7 days ago" +%Y-%m-%d)
-    END_DATE=$(gdate +%Y-%m-%d)
-    git backdate origin/main "${START_DATE}..${END_DATE}" --no-business-hours
+    BEGIN_DATE=$(gdate -d "3 days ago" +%Y-%m-%d)
+    END_DATE=$(gdate -d "today" +%Y-%m-%d)
+    echo "Rewriting history to distribute commits between ${BEGIN_DATE} and ${END_DATE}"
+    git backdate origin/main "${BEGIN_DATE}..${END_DATE}" --no-business-hours
 
 # based on https://github.com/zachdaniel/dotfiles/blob/main/priv_scripts/project
 proj:
