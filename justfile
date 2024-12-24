@@ -132,7 +132,10 @@ prep-kitty:
     cp -f kitty.conf ~/.config/kitty/kitty.conf
     cp -f kitty_session.conf ~/.config/kitty/kitty_session.conf
     # this should make kitty reload the config
-    kill -SIGUSR1 $KITTY_PID
+    # if env var KITTY_PID is set
+    if [ -n "$KITTY_PID" ]; then
+        kill -SIGUSR1 $KITTY_PID
+    fi
 
 [macos]
 prep-warp:
@@ -141,6 +144,14 @@ prep-warp:
         brew install --cask warp
         echo "CMD+, then search for terminal, specify External: Osx Exec to Warp.app"
     fi
+
+prep-wez:
+    which wezterm || brew install --cask wezterm
+    # brew install --cask wezterm@nightly
+
+sync-wez:
+    mkdir -p ~/.config/wezterm
+    cp -f wezterm.lua ~/.config/wezterm/wezterm.lua
 
 stylua:
     stylua *.lua
@@ -581,4 +592,7 @@ proj:
 # here is how to search files
 fzf:
     fzf --preview 'bat {}'|xargs lvim
+
+view URL="http://localhost:1314/":
+    awrit {{URL}}
 
