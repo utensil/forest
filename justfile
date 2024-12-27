@@ -153,6 +153,22 @@ sync-wez:
     mkdir -p ~/.config/wezterm
     cp -f wezterm.lua ~/.config/wezterm/wezterm.lua
 
+prep-gt:
+    which ghostty || brew install ghostty
+
+# Cmd+Ctrl+F to toggle fullscreen
+# Cmd + D to split right
+# Cmd + Shift + D to split bottom
+# Cmd + w to close the current split
+# Drag the separator to resize splits
+# Cmd + Shift + , to reload the config
+keys-gt:
+    ghostty +list-keybinds --default
+
+sync-gt:
+    mkdir -p ~/.config/ghostty
+    cp -f ghostty.conf ~/.config/ghostty/config
+
 stylua:
     stylua *.lua
 
