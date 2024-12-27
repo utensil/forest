@@ -161,6 +161,7 @@ prep-gt:
 # Cmd + Shift + D to split bottom
 # Cmd + w to close the current split
 # Drag the separator to resize splits
+# Cmd + Option + arrows to move between splits
 # Cmd + Shift + , to reload the config
 keys-gt:
     ghostty +list-keybinds --default
