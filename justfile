@@ -613,3 +613,11 @@ fzf:
 view URL="http://localhost:1314/":
     awrit {{URL}}
 
+prep-zsh:
+    brew install zsh-autosuggestions zsh-syntax-highlighting
+
+prep-rc:
+    # copy with confirmation
+    cp -i dotfiles/.envrc ~/.envrc
+    cp -i dotfiles/.bashrc ~/.bashrc
+    cp -i dotfiles/.zshrc ~/.zshrc
