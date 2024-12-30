@@ -104,6 +104,22 @@ prep-term: prep-kitty
     # awrit installation usually fails with some warning
     which awrit || brew install chase/tap/awrit || true
     which mpv || brew install mpv
+    # just prep-fancycat
+
+prep-fancycat:
+    #!/usr/bin/env bash
+    set -e
+    which mutool || brew install mupdf
+    which zig || brew install zig
+    fancy_cat_dir="/tmp/fancy-cat-$(date +%s)"
+    mkdir -p $fancy_cat_dir
+    git clone https://github.com/freref/fancy-cat $fancy_cat_dir
+    cd $fancy_cat_dir
+    # 429 Too Many Requests for fetching https://codeberg.org/atman/zg/archive/v0.13.2.tar.gz
+    zig build --fetch
+    zig build --release=fast
+    mv zig-out/bin/fancy-cat /usr/local/bin/
+    rm -rf $fancy_cat_dir
 
 prep-alacritty:
     #!/usr/bin/env bash
