@@ -630,7 +630,7 @@ view URL="http://localhost:1314/":
     awrit {{URL}}
 
 prep-zsh:
-    brew install zsh-autosuggestions zsh-syntax-highlighting
+    brew install zsh-autosuggestions zsh-syntax-highlighting zsh-vi-mode
 
 prep-rc:
     # copy with confirmation
