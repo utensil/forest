@@ -637,3 +637,8 @@ prep-rc:
     cp -i dotfiles/.envrc ~/.envrc
     cp -i dotfiles/.bashrc ~/.bashrc
     cp -i dotfiles/.zshrc ~/.zshrc
+
+postman:
+    # uv tool install --python 3.12 posting
+    uvx --python 3.12 posting
+
