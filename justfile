@@ -192,7 +192,7 @@ keys-gt:
 
 sync-gt:
     mkdir -p ~/.config/
-    rm ~/.config/ghostty
+    rm ~/.config/ghostty || true
     ln -s {{justfile_directory()}}/dotfiles/.config/ghostty ~/.config/ghostty
 
 reset-gt:
@@ -643,6 +643,11 @@ view URL="http://localhost:1314/":
 
 prep-zsh:
     brew install zsh-autosuggestions zsh-syntax-highlighting zsh-vi-mode
+
+# https://kasad.com/blog/zsh-profiling/
+# also uncomment the lines at the start and the end of .zshrc
+prof-zsh:
+    time zsh -i -c exit
 
 prep-rc:
     # copy with confirmation
