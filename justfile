@@ -171,6 +171,14 @@ sync-wez:
 
 prep-gt:
     which ghostty || brew install ghostty
+    just prep-gtsh
+
+prep-gtsh:
+    #!/usr/bin/env bash
+    mkdir -p ~/projects
+    if [ ! -d ~/projects/ghostty-shaders ]; then
+        git clone https://github.com/m-ahdal/ghostty-shaders ~/projects/ghostty-shaders
+    fi
 
 # Cmd+Ctrl+F to toggle fullscreen
 # Cmd + D to split right
@@ -183,8 +191,12 @@ keys-gt:
     ghostty +list-keybinds --default
 
 sync-gt:
-    mkdir -p ~/.config/ghostty
-    cp -f ghostty.conf ~/.config/ghostty/config
+    mkdir -p ~/.config/
+    rm ~/.config/ghostty
+    ln -s {{justfile_directory()}}/dotfiles/.config/ghostty ~/.config/ghostty
+
+reset-gt:
+    rm ~/.config/ghostty
 
 stylua:
     stylua *.lua
@@ -199,7 +211,7 @@ sync-plugins: stylua
     cp -f uts-plugins.lua ~/.config/nvim/lua/plugins/spec.lua
 
 sync-lvim: stylua sync-nvim sync-kitty
-    mkdir -p ~/.config/lvim
+    mkdir -p ~/.config/lvir
     cp -f init.lua ~/.config/lvim/nvim-init.lua
     cp -f uts-plugins.lua ~/.config/lvim/uts-plugins.lua
     cp -f config.lua ~/.config/lvim/config.lua
@@ -207,7 +219,7 @@ sync-lvim: stylua sync-nvim sync-kitty
 sync-lazyvim: stylua sync-plugins
     mkdir -p ~/.config/lazyvim
     cp -f init.lua ~/.config/lazyvim/lua/config/options.lua
-    # cp -f lazyvim-init.lua ~/.config/lazyvim/lazyvim-init.lua
+    # cp -f lazyvim-init.lua ~/.config/lazyvim/lazyvim-init.lur
 
 sync-chad: stylua sync-plugins
     mkdir -p ~/.config/nvchad/
