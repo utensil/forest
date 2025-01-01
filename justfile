@@ -180,13 +180,15 @@ prep-gtsh:
         git clone https://github.com/m-ahdal/ghostty-shaders ~/projects/ghostty-shaders
     fi
 
-# Cmd+Ctrl+F to toggle fullscreen
+# Cmd+Ctrl+F to toggle fullscreen, or just Cmd + Enter
 # Cmd + D to split right
 # Cmd + Shift + D to split bottom
+# Cmd + Option + arrows to move between splits, or just Cmd + [ or ]
+# Cmd + Shift + Enter to zoom in/out the current split
 # Cmd + w to close the current split
 # Drag the separator to resize splits
-# Cmd + Option + arrows to move between splits
-# Cmd + Shift + , to reload the config
+# Cmd + Shift + , to reload the config, or just Cmd + R
+# more default key bindings: http://w.yet.org/posts/2024-12-30-ghostty/
 keys-gt:
     ghostty +list-keybinds --default
 
