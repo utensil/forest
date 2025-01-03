@@ -1,0 +1,64 @@
+\import{macros}
+% clifford hopf spin tt ag math draft tech exp notes
+\tag{tech}
+\tag{notes}
+\tag{draft}
+
+\mdnote{Organizing files}{
+I wish to note down my exploration of solutions to organize massive amount of (mostly binary media) files.
+
+## Wishlist
+
+- Performant
+    - it should be able to handle huge amount of files, with cached metadata, thumbnails, etc. so I can browse over their contents quickly
+    - batch operations to files on NAS should be as performant as local files, e.g. using client-server architecture, using rsync to determine the diff, etc.
+- Data integrity
+    - it should be able to use versioning, deduplication, etc. to ensure data integrity so I can mess with the files (mostly moving around, renaming) without worrying about losing them and their metadata such as timestamp, and this should be efficient in terms of storage
+- Semi-auto tagging
+    - I should be able to tag files manually, in batch, and set rules to tag files automatically with metadata or based on content (using ML models)
+    - preferably, tags could have its own hierarchy
+    - tags should not be using filename or metadata, but rather a separate database
+- Open-source, freemium or affordable one-time purchase
+    - in anycase, I should not be locked in, and the data should be exportable, so I can script
+
+## Candidate solutions
+
+- [git-annex](https://git-annex.branchable.com/)
+    - Pros
+        - it maintains a versioned record for files, can even track offline media
+    - Cons
+        - it only have access to the file contents when they are present at the registered location
+- [DataLad](https://www.datalad.org/)
+    - it builds on git-annex
+- [kopia](https://kopia.io/)
+    - Pros
+        - backup, versioning, deduplication, encryption, compression, error correction etc.
+        - it can mount or restore any snapshot to a directory
+        - there is official support for syncing the repo, making it reliable to backup the backup
+    - Cons
+        - can't really check the history of a file
+        - relies on other tools for checking file location changes
+        - lost the time added, preserving only the modification time
+- [Commander One](https://mac.eltima.com/file-manager.html)
+    - dual-pane file manager, trying out
+- [`dua -i`](https://github.com/Byron/dua-cli)
+    - it can analyze disk usage recursively, interactively
+    - I can mark files for deletion
+- [jw](https://github.com/PsychedelicShayna/jw)
+    - Pros
+        - it can calculate the hashes of files in deep directories really quick
+        - I use it to check the integrity of files after copying files
+    - Cons
+        - it doesn't check file renaming/moving
+- [VeraCrypt](https://www.veracrypt.fr/en/Home.html)
+    - Pros
+        - useful if you just want to encrypt files in a container
+    - Cons
+        - it's inconvenient to mount in docker
+- [Garage](https://garagehq.deuxfleurs.fr/)
+    - Pros
+        - it's a S3-compatible storage
+        - it works with git-annex and kopia
+- [macFUSE](https://macfuse.github.io/)
+    - needed to mount various filesystems
+}
