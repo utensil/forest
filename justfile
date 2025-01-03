@@ -662,8 +662,10 @@ postman:
     uvx --python 3.12 posting
 
 prep-kopia:
-    which kopia || brew install kopia kopiaui
+    which kopia || (brew install kopia; brew install --cask kopiaui)
 
 prep-annex:
-    brew install git-annex
-    brew services start git-annex
+    which git-annex || brew install git-annex
+    # brew services start git-annex
+    mkdir -p ~/annex
+    (cd ~/annex && git annex webapp)
