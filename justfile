@@ -669,3 +669,16 @@ prep-annex:
     # brew services start git-annex
     mkdir -p ~/annex
     (cd ~/annex && git annex webapp)
+
+
+gal:
+    #!/usr/bin/env zsh
+    mkdir -p ~/home-gallery/data/config
+    cd ~/home-gallery/
+    alias gallery="docker run -ti --rm \
+      -v $(pwd)/data:/data \
+      -v $HOME/Pictures/photos:/data/Pictures \
+      -u $(id -u):$(id -g) \
+      -p 3000:3000 docker.wanpeng.top/xemle/home-gallery:latest"
+    gallery run init --source /data/Pictures
+    gallery run server

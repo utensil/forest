@@ -69,6 +69,7 @@ app.listen(port, async ({ hostname, port }) => {
                     )
                     lastSent = Date.now()
                     lastSentFile = updated_file_name
+                    console.log(`Serving: http://${hostname}:${port}/`)
                 }, 10)
             }
         }
