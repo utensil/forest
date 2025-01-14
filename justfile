@@ -670,7 +670,7 @@ prep-annex:
     mkdir -p ~/annex
     (cd ~/annex && git annex webapp)
 
-
+# https://www.kelen.cc/dry/docker-hub-mirror
 gal:
     #!/usr/bin/env zsh
     mkdir -p ~/home-gallery/data/config
@@ -682,3 +682,15 @@ gal:
       -p 3000:3000 docker.wanpeng.top/xemle/home-gallery:latest"
     gallery run init --source /data/Pictures
     gallery run server
+
+prism:
+    #!/usr/bin/env zsh
+    mkdir -p $HOME/photoprism/storage
+    cd $HOME/photoprism
+    # if the file does not exist
+    [ -f docker-compose.yaml ] || curl -L https://dl.photoprism.app/docker/macos/compose.yaml -o docker-compose.yaml
+    # replace ~/Pictures with  ~/Pictures/photos
+    sed -i '' 's|~/Pictures:|~/Pictures/photos:|g' docker-compose.yaml
+    echo "Visit http://localhost:2342/, login with admin:insecure"
+    docker compose up
+
