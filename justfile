@@ -669,7 +669,6 @@ prep-annex:
     # brew services start git-annex
     mkdir -p ~/annex
     (cd ~/annex && git annex webapp)
-
 # https://www.kelen.cc/dry/docker-hub-mirror
 gal:
     #!/usr/bin/env zsh
@@ -694,3 +693,5 @@ prism:
     echo "Visit http://localhost:2342/, login with admin:insecure"
     docker compose up
 
+ghost:
+    npx ghosttime
