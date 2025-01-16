@@ -674,7 +674,7 @@ gal:
     #!/usr/bin/env zsh
     mkdir -p ~/home-gallery/data/config
     cd ~/home-gallery/
-    alias gallery="docker run -ti --rm \
+    alias gallery="docker run -it --rm \
       -v $(pwd)/data:/data \
       -v $HOME/Pictures/photos:/data/Pictures \
       -u $(id -u):$(id -g) \
@@ -692,6 +692,12 @@ prism:
     sed -i '' 's|~/Pictures:|~/Pictures/photos:|g' docker-compose.yaml
     echo "Visit http://localhost:2342/, login with admin:insecure"
     docker compose up
+
+pica:
+    #!/usr/bin/env zsh
+    mkdir -p $HOME/picapport
+    cd $HOME/picapport
+    docker run -it --rm --name picapport -p 8888:8888 -v $HOME/Pictures/photos:/opt/picapport/photos -v $HOME/picapport:/opt/picapport/data -e "PICAPPORT_PORT=8888" -e "PICAPPORT_LANG=en" fionnb/picapport:latest
 
 ghost:
     npx ghosttime
