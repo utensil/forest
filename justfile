@@ -560,9 +560,11 @@ cpm:
     fi
     if [ ! -d ../copilot-more ]; then
         (cd .. && git clone https://github.com/jjleng/copilot-more.git)
+    else
+        (cd ../copilot-more && git pull)
     fi
     cd ../copilot-more
-    uvx peotry install
+    uvx poetry install
     uvx poetry run uvicorn copilot_more.server:app --port 15432
 
 # works only for Ubuntu
