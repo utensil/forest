@@ -718,3 +718,25 @@ zj:
     which zellij || brew install zellij
     # bash <(curl -L https://zellij.dev/launch)
     zellij
+
+prep-hx:
+    which hx || brew install helix
+    mkdir -p ~/.config/helix
+    cp -f dotfiles/.config/helix/config.toml ~/.config/helix/config.toml
+    just prep-lsp-ai
+
+prep-lsp-ai:
+    which cargo || just prep-rust
+    which lsp-ai || cargo install lsp-ai # -F llama_cpp -F metal
+    mkdir -p ~/.config/helix
+    cp -f dotfiles/.config/helix/languages.toml ~/.config/helix/languages.toml
+
+prep-ollama:
+    which ollama || brew install ollama
+    ollama pull deepseek-r1:14b
+
+ollama:
+    ollama run deepseek-r1:14b
+
+git:
+    lazygit
