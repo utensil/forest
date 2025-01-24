@@ -6,9 +6,12 @@
 
 [language-server.lsp-ai]
 command = "lsp-ai"
+args = ["lsp"]
+timeout = 60
+environment = { "RUST_LOG" = "info" }
 
-[language-server.lsp-ai.config.memory]
-file_store = { }
+[language-server.lsp-ai.config]
+memory = { file_store = {} }
 
 # [language-server.lsp-ai.config.models.model1]
 # type = "open_ai"
@@ -86,5 +89,41 @@ content = "{CODE}"
 [[language]]
 name = "rust"
 language-servers = ["rust-analyzer", "lsp-ai"]
+auto-format = true
+formatter = { command = "rustfmt" }
 
-## Configure other languages here
+[[language]]
+name = "python"
+language-servers = ["pyright", "lsp-ai"]
+auto-format = true
+formatter = { command = "black" }
+
+[[language]]
+name = "javascript"
+language-servers = ["typescript-language-server", "lsp-ai"]
+auto-format = true
+formatter = { command = "prettier", args = ["--stdin-filepath", "{file}"], stdin = true }
+
+[[language]]
+name = "typescript"
+language-servers = ["typescript-language-server", "lsp-ai"]
+auto-format = true
+formatter = { command = "prettier", args = ["--stdin-filepath", "{file}"], stdin = true }
+
+[[language]]
+name = "markdown"
+language-servers = ["marksman", "lsp-ai"]
+auto-format = true
+formatter = { command = "prettier", args = ["--stdin-filepath", "{file}"], stdin = true }
+
+[[language]]
+name = "html"
+language-servers = ["vscode-html-language-server", "lsp-ai"]
+auto-format = true
+formatter = { command = "prettier", args = ["--stdin-filepath", "{file}"], stdin = true }
+
+[[language]]
+name = "css"
+language-servers = ["vscode-css-language-server", "lsp-ai"]
+auto-format = true
+formatter = { command = "prettier", args = ["--stdin-filepath", "{file}"], stdin = true }
