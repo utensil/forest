@@ -250,7 +250,7 @@ prep-lvim: prep-term prep-nvim
     echo "Use lvim to start LunarVim"
 
 @lvim PROJ="forest" *PARAMS="": sync-lvim
-    #!/usr/bin/env bash
+    #!/usr/bin/env zsh
     cd ~/projects/{{PROJ}} && lvim {{PARAMS}}
 
 prep-lazyvim:
@@ -534,16 +534,17 @@ prep-llm:
     # docker pull dockerproxy.net/paulgauthier/aider-full
     cp -f aider /usr/local/bin
 
-aider *PARAMS: prep-llm
-    aider {{PARAMS}}
+aider PROJ="forest" *PARAMS="": prep-llm
+    #!/usr/bin/env zsh
+    cd ~/projects/{{PROJ}} && aider {{PARAMS}}
 
 # Uses aider in watch mode to actively monitor and assist with code changes.
 # To work with other projects:
 #   1. Use `just proj` to select and open a project in a new kitty terminal
 #   2. Or use `just aider ../project_name` to start aider in another directory
 # I've tested that it works with `AI!`, `AI?`, and `ai!`
-aw *PARAMS:
-    just aider -v --watch-files {{PARAMS}}
+aw PROJ="forest" *PARAMS="":
+    just aider {{PROJ}} -v --watch-files {{PARAMS}}
 
 llm-proxy *PARAMS:
     #!/usr/bin/env bash
@@ -733,12 +734,17 @@ prep-lsp-ai:
     mkdir -p ~/.config/helix
     cp -f dotfiles/.config/helix/languages.toml ~/.config/helix/languages.toml
 
-prep-ollama:
-    which ollama || brew install ollama
-    ollama pull deepseek-r1:14b
+DS_MODEL := "deepseek-r1:32b"
 
-ollama:
-    ollama run deepseek-r1:14b
+prep-ds:
+    which ollama || brew install ollama
+    ollama pull {{DS_MODEL}}
+
+ds:
+    ollama serve
+
+dsr:
+    ollama run {{DS_MODEL}}
 
 git:
     lazygit
@@ -752,5 +758,4 @@ prep-homerow:
     # [ -d ../home-row-mods ] || git clone https://github.com/dreamsofcode-io/home-row-mods/ ../home-row-mods
     # cd ../home-row-mods/kanata/macos
     # sudo kanata -c kanata.kbd
-
 
