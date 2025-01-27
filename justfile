@@ -734,17 +734,24 @@ prep-lsp-ai:
     mkdir -p ~/.config/helix
     cp -f dotfiles/.config/helix/languages.toml ~/.config/helix/languages.toml
 
-DS_MODEL := "deepseek-r1:32b"
+DS_MODEL := "deepseek-r1:7b"
+# DS_MODEL := "deepseek-r1:14b"
+# DS_MODEL := "deepseek-r1:32b"
 
-prep-ds:
+prep-om:
     which ollama || brew install ollama
-    ollama pull {{DS_MODEL}}
 
-ds:
+om:
     ollama serve
 
-dsr:
+ds:
     ollama run {{DS_MODEL}}
+
+VISUAL_MODEL := "llama3.2-vision"
+# VISUAL_MODEL := "minicpm-v"
+
+lv:
+    ollama run {{VISUAL_MODEL}}
 
 git:
     lazygit
