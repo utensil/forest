@@ -7,6 +7,9 @@ export CC=/opt/homebrew/opt/llvm/bin/clang CXX=/opt/homebrew/opt/llvm/bin/clang+
 
 if [[ "$OPENAI_API_BASE" == *"hunyuan"* ]]; then
     export MODELS='--model openai/hunyuan-code'
+# https://aider.chat/2025/01/24/r1-sonnet.html
+elif [[ "$OPENAI_API_BASE" == *"localhost:15432"* ]] && [ -n "$DEEPSEEK_API_KEY" ]; then
+    export MODELS='--architect --model deepseek/deepseek-reasoner --editor-model openai/claude-3.5-sonnet'
 elif [ -n "$DEEPSEEK_API_KEY" ]; then
     export MODELS='--model deepseek'
 elif [[ "$OPENAI_API_BASE" == *"glhf.chat"* ]]; then
