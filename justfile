@@ -742,3 +742,15 @@ ollama:
 
 git:
     lazygit
+
+prep-homerow:
+    #!/usr/bin/env zsh
+    # which kanata || brew install kanata
+    # https://github.com/pqrs-org/Karabiner-DriverKit-VirtualHIDDevice/raw/refs/heads/main/dist/Karabiner-DriverKit-VirtualHIDDevice-5.0.0.pkg
+    # [ -d /Applications/.Karabiner-VirtualHIDDevice-Manager.app/Contents/MacOS ] || (echo You need to install Karabiner VirtualHiDDevice Driver from https://github.com/pqrs-org/Karabiner-DriverKit-VirtualHIDDevice/blob/main/dist/Karabiner-DriverKit-VirtualHIDDevice-5.0.0.pkg && exit 1)
+    # /Applications/.Karabiner-VirtualHIDDevice-Manager.app/Contents/MacOS/Karabiner-VirtualHIDDevice-Manager activate
+    # [ -d ../home-row-mods ] || git clone https://github.com/dreamsofcode-io/home-row-mods/ ../home-row-mods
+    # cd ../home-row-mods/kanata/macos
+    # sudo kanata -c kanata.kbd
+
+
