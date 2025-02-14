@@ -104,6 +104,9 @@ prep-term: prep-kitty
     # awrit installation usually fails with some warning
     which awrit || brew install chase/tap/awrit || true
     which mpv || brew install mpv
+    which cmake || brew install cmake
+    which pkg-config || brew install pkg-config
+    which nproc || brew install coreutils
     # just prep-fancycat
 
 prep-fancycat:
@@ -360,7 +363,7 @@ rec:
     uvx asciinema rec
 
 add-zrc LINE:
-    grep -F '{{LINE}}' ~/.zshrc|| echo '{{LINE}}' >> ~/.zshrc
+    grep -F '{{LINE}}' ~/.zshrc || echo '{{LINE}}' >> ~/.zshrc
 
 add-brc LINE:
     grep -F '{{LINE}}' ~/.bashrc || echo '{{LINE}}' >> ~/.bashrc
@@ -381,6 +384,18 @@ bootstrap-centos:
     brew install just
     just add-zrc 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"'
     just chsh
+    just prep-term
+
+# Copy and paste to run in zsh, because we have no just at this point
+bootstrap-mac:
+    #!/usr/bin/env zsh
+    xcode-select --install
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    brew install just
+    mkdir -p ~/projects
+    cd ~/projects && git clone https://github.com/utensil/forest
+    cd forest
+    just add-zrc 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"'
     just prep-term
 
 chsh:
@@ -747,8 +762,9 @@ om:
 ds:
     ollama run {{DS_MODEL}}
 
-VISUAL_MODEL := "llama3.2-vision"
+# VISUAL_MODEL := "llama3.2-vision"
 # VISUAL_MODEL := "minicpm-v"
+VISUAL_MODEL := "erwan2/DeepSeek-Janus-Pro-7B"
 
 lv:
     ollama run {{VISUAL_MODEL}}
@@ -766,3 +782,12 @@ prep-homerow:
     # cd ../home-row-mods/kanata/macos
     # sudo kanata -c kanata.kbd
 
+prep-exo:
+    # 1. we need uv venv --python 3.12 --seed
+    # 2. we need to install exo from source
+    echo "visit https://github.com/exo-explore/exo?tab=readme-ov-file#from-source"
+    # 3. we need to manually install pytorch in the venv
+    # 4. when in doubt, run: DEBUG=9 exo --disable-tui
+
+prep-tr:
+    brew install --cask buzz
