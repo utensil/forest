@@ -791,3 +791,8 @@ prep-exo:
 
 prep-tr:
     brew install --cask buzz
+
+gs *PARAMS:
+    #!/usr/bin/env zsh
+    uvx --python 3.12 --from 'gpustack[all]' gpustack {{PARAMS}}
+
