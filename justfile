@@ -792,6 +792,9 @@ prep-exo:
 prep-tr:
     brew install --cask buzz
 
+# just gs start -s SERVER_IP --token TOKEN
+# TOKEN is retrieved on server via:
+# cat /var/lib/gpustack/token
 gs *PARAMS:
     #!/usr/bin/env zsh
     uvx --python 3.12 --from 'gpustack[all]' gpustack {{PARAMS}}
