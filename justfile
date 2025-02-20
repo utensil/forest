@@ -799,3 +799,13 @@ gs *PARAMS:
     #!/usr/bin/env zsh
     uvx --python 3.12 --from 'gpustack[all]' gpustack {{PARAMS}}
 
+prep-pl:
+    curl -sL https://plandex.ai/install.sh | bash
+
+pl PROJ="forest":
+    #!/usr/bin/env zsh
+    cd ~/projects/{{PROJ}}
+    while read -r line; do
+        plandex $line
+    done
+
