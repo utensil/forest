@@ -112,6 +112,7 @@ jobs:
       - name: Build with forester
         run: |
           eval $(opam env)
+          export TERM=xterm-256color
           forester --version
           bash ./build.sh
       - name: Check for PDF files
