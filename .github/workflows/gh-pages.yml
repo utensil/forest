@@ -114,6 +114,14 @@ jobs:
           eval $(opam env)
           forester --version
           bash ./build.sh
+      - name: Check for PDF files
+        run: |
+          pdf_count=$(find ./output -name "*.pdf" | wc -l)
+          if [ "$pdf_count" -eq 0 ]; then
+            echo "Error: No PDF files found in the output directory."
+            exit 1
+          fi
+          echo "Found $pdf_count PDF files."
       - name: Fix permissions
         run: |
           chmod -c -R +rX "./output/" | while read line; do
