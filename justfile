@@ -769,8 +769,9 @@ VISUAL_MODEL := "erwan2/DeepSeek-Janus-Pro-7B"
 lv:
     ollama run {{VISUAL_MODEL}}
 
-git:
-    lazygit
+git PROJ="forest" *PARAMS="":
+    #!/usr/bin/env zsh
+    cd ~/projects/{{PROJ}} && lazygit {{PARAMS}}
 
 prep-homerow:
     #!/usr/bin/env zsh
