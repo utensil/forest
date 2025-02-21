@@ -16,7 +16,11 @@ elif [[ "$OPENAI_API_BASE" == *"glhf.chat"* ]]; then
     # inspired by https://www.youtube.com/watch?v=AFiH_aErDBA&ab_channel=AICodeKing
     export MODELS="--architect --model openai/hf:Qwen/QwQ-32B-Preview --editor-model openai/hf:Qwen/Qwen2.5-Coder-32B-Instruct"
 elif [[ "$OPENAI_API_BASE" == *"localhost:15432"* ]]; then
-    export MODELS='--model openai/claude-3.5-sonnet'
+    if [ -n "$OPENAI_API_MODEL" ]; then
+        export MODELS="--model openai/$OPENAI_API_MODEL"
+    else
+        export MODELS='--model openai/claude-3.5-sonnet'
+    fi
 elif [[ "$OPENAI_API_BASE" == *"0.0.0.0:4000"* ]]; then
     export MODELS='--model openai/xai:grok-beta'
 elif [ -n "$ANTHROPIC_API_KEY" ]; then
