@@ -809,3 +809,8 @@ pl PROJ="forest":
         plandex $line
     done
 
+prep-sg:
+    #!/usr/bin/env zsh
+    # https://docs.sglang.ai/start/install.html
+    uv pip install sgl-kernel --force-reinstall --no-deps
+    uv pip install "sglang[all]>=0.4.3.post2" --find-links https://flashinfer.ai/whl/cu124/torch2.5/flashinfer-python
