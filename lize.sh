@@ -36,13 +36,13 @@ UNICOCE_LATEX=lualatex
 # if environment variable TEC is not set
 if [ -z "$TEC" ]; then
     echo "lize.sh| using $UNICOCE_LATEX"
-    $UNICOCE_LATEX -halt-on-error -interaction=nonstopmode --shell-escape $TEX_FILE >/dev/null # 2>&1
+    $UNICOCE_LATEX -halt-on-error -interaction=nonstopmode --shell-escape $TEX_FILE # >/dev/null # 2>&1
     # https://tex.stackexchange.com/a/295524/75671
     # biber $TEX_FILE
     # We should ignore bibtex errors if it's simply an empty .bib file
     bibtex $AUX_FILE >/dev/null 2>&1 || echo "lize.sh| Ignoring bibtex error"
-    $UNICOCE_LATEX -halt-on-error -interaction=nonstopmode --shell-escape $TEX_FILE >/dev/null # 2>&1
-    $UNICOCE_LATEX -halt-on-error -interaction=nonstopmode --shell-escape $TEX_FILE >/dev/null # 2>&1
+    $UNICOCE_LATEX -halt-on-error -interaction=nonstopmode --shell-escape $TEX_FILE # >/dev/null # 2>&1
+    $UNICOCE_LATEX -halt-on-error -interaction=nonstopmode --shell-escape $TEX_FILE # >/dev/null # 2>&1
 else
     echo "lize.sh| using tectonic"
     tectonic -Z shell-escape-cwd=$(pwd) --keep-intermediates --keep-logs --outdir $(pwd) $TEX_FILEi >/dev/null # 2>&1
