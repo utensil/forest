@@ -542,14 +542,16 @@ check-dirs SRC DST:
     # rip {{DST}}/.hash.jw
     echo "Open {{DST}}/.hash.jw to inspect"
 
-prep-llm:
+prep-llms:
     which aichat || brew install aichat
     which assembllm || (brew tap bradyjoslin/assembllm && brew install bradyjoslin/assembllm/assembllm)
     which cortex || echo "Visit https://cortex.so/docs/installation to download and install cortex"
+
+prep-aider:
     # docker pull dockerproxy.net/paulgauthier/aider-full
     cp -f aider /usr/local/bin
 
-aider PROJ="forest" *PARAMS="": prep-llm
+aider PROJ="forest" *PARAMS="": prep-aider
     #!/usr/bin/env zsh
     cd ~/projects/{{PROJ}} && aider {{PARAMS}}
 
@@ -822,10 +824,15 @@ prep-mlx:
     # https://simonwillison.net/2025/Feb/15/llm-mlx/
     uvx llm install llm-mlx
 
-# mlx-community/DeepSeek-R1-Distill-Qwen-32B-4bit
-# llm mlx download-model mlx-community/DeepSeek-R1-Distill-Qwen-32B-abliterated
-# llm char -m MODEL
+# Models are downloaded to ~/.cache/huggingface/hub/
+# See https://github.com/simonw/llm-mlx?tab=readme-ov-file#models-to-try for models to try
+
+# just mlx download-model MODEL
 mlx *PARAMS:
     #!/usr/bin/env zsh
-    uvx llm {{PARAMS}}
+    uvx llm mlx {{PARAMS}}
 
+# just llm chat -m MODEL
+llm *PARAMS:
+    #!/usr/bin/env zsh
+    uvx llm {{PARAMS}}
