@@ -828,11 +828,28 @@ prep-mlx:
 # See https://github.com/simonw/llm-mlx?tab=readme-ov-file#models-to-try for models to try
 
 # just mlx download-model MODEL
+# just mlx models
+# just mlx import-models
 mlx *PARAMS:
     #!/usr/bin/env zsh
     uvx llm mlx {{PARAMS}}
 
+# just llm models default mlx-community/DeepSeek-R1-Distill-Qwen-32B-4bit
 # just llm chat -m MODEL
 llm *PARAMS:
     #!/usr/bin/env zsh
     uvx llm {{PARAMS}}
+
+# lms comes with LMStudio: https://github.com/lmstudio-ai/lms
+# I want it for https://github.com/lmstudio-ai/mlx-engine
+prep-lms:
+    #!/usr/bin/env zsh
+    npx lmstudio install-cli
+
+# lms get mlx-community/DeepSeek-R1-Distill-Qwen-32B-4bit
+# open ~/.cache/lm-studio
+# lms load mlx-community/DeepSeek-R1-Distill-Qwen-32B-4bit
+# lms server start
+lms *PARAMS:
+    #!/usr/bin/env zsh
+    lms {{PARAMS}}
