@@ -815,3 +815,17 @@ prep-sg:
     # https://docs.sglang.ai/start/install.html
     uv pip install sgl-kernel --force-reinstall --no-deps
     uv pip install "sglang[all]>=0.4.3.post2" --find-links https://flashinfer.ai/whl/cu124/torch2.5/flashinfer-python
+
+prep-mlx:
+    #!/usr/bin/env zsh
+    # https://kconner.com/2025/02/17/running-local-llms-with-mlx.html
+    # https://simonwillison.net/2025/Feb/15/llm-mlx/
+    uvx llm install llm-mlx
+
+# mlx-community/DeepSeek-R1-Distill-Qwen-32B-4bit
+# llm mlx download-model mlx-community/DeepSeek-R1-Distill-Qwen-32B-abliterated
+# llm char -m MODEL
+mlx *PARAMS:
+    #!/usr/bin/env zsh
+    uvx llm {{PARAMS}}
+
