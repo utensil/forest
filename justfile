@@ -857,3 +857,7 @@ prep-lms:
 lms *PARAMS:
     #!/usr/bin/env zsh
     lms {{PARAMS}}
+
+omni *PARAMS:
+    #!/usr/bin/env zsh
+    uvx mlx-omni-server {{PARAMS}}
