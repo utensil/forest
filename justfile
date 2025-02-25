@@ -347,11 +347,14 @@ prep-amethyst:
     cp -f .amethyst.yml ~/.amethyst.yml
 
 prep-monit:
-    #!/usr/bin/env bash
-    which btop || brew install btop
+    #!/usr/bin/env zsh
     # which glances || brew install glances
+    which btop || brew install btop
+    # stats is part of the sudoless monit tool community
+    [ ! -f /Applications/Stats.app ] && brew install stats
     if [ "$(uname)" == "Darwin" ]; then
-        if [ "$(uname -m)" == "aarch64" ]; then
+        # if the arch is aarch64 or arm64
+        if [ "$(uname -m)" == "arm64" ] || [ "$(uname -m)" == "aarch64" ]; then
             which macmon || brew install vladkens/tap/macmon
             # which neoasitop || (brew tap op06072/neoasitop && brew install neoasitop)
         else
