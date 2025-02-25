@@ -547,6 +547,10 @@ prep-llms:
     which assembllm || (brew tap bradyjoslin/assembllm && brew install bradyjoslin/assembllm/assembllm)
     which cortex || echo "Visit https://cortex.so/docs/installation to download and install cortex"
 
+
+aichat *PARAMS:
+    aichat {{PARAMS}}
+
 prep-aider:
     # docker pull dockerproxy.net/paulgauthier/aider-full
     cp -f aider /usr/local/bin
