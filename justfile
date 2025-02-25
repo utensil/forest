@@ -865,22 +865,6 @@ omni *PARAMS:
     #!/usr/bin/env zsh
     uvx mlx-omni-server {{PARAMS}}
 
-# not working: run https://github.com/ray-project/llmperf using uvx
-# also not easily working without a config python:
-# https://opencompass.readthedocs.io/en/latest/user_guides/models.html#api-based-models
-
 perf *PARAMS:
-    #!/usr/bin/env zsh
-    mkdir -p /tmp/opencompass
-    cd /tmp/opencompass
-    # if the file does not exist
-    if [ ! -f OpenCompassData-core-20240207.zip ]; then
-        wget https://github.com/open-compass/opencompass/releases/download/0.2.2.rc1/OpenCompassData-core-20240207.zip
-    fi
-    # if dir data does not exist
-    if [ ! -d data ]; then
-        unzip OpenCompassData-core-20240207.zip
-    fi
-    ls /tmp/opencompass
-    uvx --python 3.10 --from 'opencompass[api]' opencompass {{PARAMS}} # --models lms:deepseek-r1-distill-qwen-32b --datasets "opencompass/humaneval"
-
+    # run llm_perf.py using uv with package requests installed
+    uv run --with requests llm_perf.py {{PARAMS}}
