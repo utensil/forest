@@ -6,10 +6,21 @@
 litellm_settings:
     # set_verbose: true
     # callbacks:
+        # No even token count
         # - langsmith
+        # Error
         # - otel
+        # No even input/output, also no token count
         # - arize
-    success_callback: ["lunary"]
-    failure_callback: ["lunary"]
-    # success_callback:
-    #     - helicone
+    # Token and latency, can calc token per second
+    # Export requires pro
+    # TTFT is in metric, but not reported
+    # success_callback: ["lunary"]
+    # failure_callback: ["lunary"]
+    success_callback:
+        # Only latency, TTFT is in metric, but not reported
+        # Confusing token per minute (too small)
+        # Token and latency, can calc token per second
+        # Export supported
+        # Better navigation and view switch for each request
+        - helicone
