@@ -575,6 +575,10 @@ llm-proxy *PARAMS:
     # uvx --python 3.11 --from 'litellm[proxy]' litellm {{PARAMS}}
     aichat --serve 0.0.0.0:4000
 
+llp *PARAMS:
+    #!/usr/bin/env zsh
+    uvx --python 3.11 --from 'litellm[proxy]' --with opentelemetry-api --with opentelemetry-sdk --with opentelemetry-exporter-otlp --with langchain --with langchain-openai --with lunary --with openinference-instrumentation-litellm litellm {{PARAMS}} --api_base {{env('OPENAI_API_BASE')}} -m 'openai/{{env('OPENAI_API_MODEL')}}' -c litellm.yaml
+
 cpm:
     #!/usr/bin/env bash
     # if env var REFRESH_TOKEN is not set, prompt for it
