@@ -872,3 +872,24 @@ omni *PARAMS:
 perf *PARAMS:
     # run llm_perf.py using uv with package requests installed
     uv run --with requests llm_perf.py {{PARAMS}}
+
+awake:
+    caffeinate -d -s
+
+vlm *PARAMS:
+    #!/usr/bin/env zsh
+    # uvx --python 3.12 --from 'mlx-vlm' mlx_vlm.chat_ui {{PARAMS}}
+    uv run --python 3.12 --with 'mlx-vlm' --with torch python -m mlx_vlm.chat_ui {{PARAMS}}
+
+lobe *PARAMS:
+    #!/usr/bin/env zsh
+    docker run -d -p 3210:3210 \
+      -e OPENAI_API_KEY={{env('OPENAI_API_KEY')}} \
+      -e OPENAI_PROXY_URL={{env('OPENAI_API_BASE')}} \
+      -e ACCESS_CODE=lobe66 \
+      --name lobe-chat \
+      lobehub/lobe-chat
+
+# https://bhoot.dev/2025/cp-dot-copies-everything/
+clone SRC DST:
+    cp -R {{SRC}}/. {{DST}}
