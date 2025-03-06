@@ -555,10 +555,14 @@ aichat *PARAMS:
     aichat {{PARAMS}}
 
 prep-aider:
+    just sync-aider
+    which mcpm-aider || npm install -g @poai/mcpm-aider
+
+sync-aider:
     # docker pull dockerproxy.net/paulgauthier/aider-full
     cp -f aider /usr/local/bin
 
-aider PROJ="forest" *PARAMS="": prep-aider
+aider PROJ="forest" *PARAMS="": sync-aider
     #!/usr/bin/env zsh
     cd ~/projects/{{PROJ}} && aider {{PARAMS}}
 
