@@ -557,10 +557,21 @@ aichat *PARAMS:
 prep-aider:
     just sync-aider
     which mcpm-aider || npm install -g @poai/mcpm-aider
+    mkdir -p ~/.config/claude
+    [[ -f ~/.config/claude/claude_desktop_config.json ]] || echo '{"mcpServers": {} }' > ~/.config/claude/claude_desktop_config.json
 
 sync-aider:
     # docker pull dockerproxy.net/paulgauthier/aider-full
     cp -f aider /usr/local/bin
+
+# just mcp search
+# just mcp install XXX
+# just mcp list
+# just mcp remove XXX
+# just mcp toolprompt
+mcp *PARAMS="":
+    #!/usr/bin/env bash
+    mcpm-aider {{PARAMS}}
 
 aider PROJ="forest" *PARAMS="": sync-aider
     #!/usr/bin/env zsh
@@ -897,3 +908,5 @@ lobe *PARAMS:
 # https://bhoot.dev/2025/cp-dot-copies-everything/
 clone SRC DST:
     cp -R {{SRC}}/. {{DST}}
+
+
