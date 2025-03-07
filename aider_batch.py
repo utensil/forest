@@ -91,16 +91,12 @@ def main():
     # Determine model from environment if not specified
     model_name = args.model
     if not model_name:
-        if os.getenv("OPENAI_API_BASE") and "hunyuan" in os.getenv("OPENAI_API_BASE"):
-            model_name = "hunyuan-code"
-        elif os.getenv("DEEPSEEK_API_KEY"):
-            model_name = "deepseek"
-        elif os.getenv("ANTHROPIC_API_KEY"):
-            model_name = "claude-3-sonnet" 
-        elif os.getenv("OPENAI_API_MODEL"):
+        if os.getenv("OPENAI_API_MODEL"):
             model_name = os.getenv("OPENAI_API_MODEL")
         else:
-            print("No model available in the environment, please check .env file or specify --model")
+            print(
+                "No model available in the environment, please check .env file or specify --model"
+            )
             sys.exit(1)
 
     # Create model and coder
@@ -122,7 +118,7 @@ def main():
     # Process each matched file
     for fname in matched_files:
         print(f"\nProcessing {fname}...")
-        
+
         # Random sleep between 1-5 seconds
         sleep_time = random.uniform(1, 5)
         print(f"Waiting {sleep_time:.1f} seconds...")
