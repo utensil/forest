@@ -11,108 +11,164 @@ Forester is a tool for creating and managing collections of interconnected notes
 - Configuration via `forest.toml`
 
 ## Tree Structure
-Each tree file has two main sections:
 
-### 1. Frontmatter
-Metadata declarations at the start of the file:
+### 1. File Header
+Common imports and metadata at the start of the file:
 
 ```
-\title{My Tree Title}
-\author{username}
-\date{YYYY-MM-DD}
-\taxon{type}  # Optional classification like: definition, theorem, etc.
-\parent{xxx-NNNN}  # Optional parent tree reference
+\import{other-tree}  # Import definitions from another tree
+\tag{topic}         # Topic tags for categorization
 ```
 
-### 2. Mainmatter 
-The main content using Forester markup:
+### 2. Content Elements
 
-Basic Elements:
+#### Basic Structure
+Every tree must have properly nested structure elements:
+
 ```
-\p{paragraph text}  # Paragraphs must be explicitly marked
-\em{italic text}
-\strong{bold text}
-\code{monospace text}
+\title{Title of the Note}  # Optional but recommended
+\p{Paragraph text}        # Paragraphs must be explicitly marked
+\subtree{                 # Create a subsection
+  \title{Subsection}
+  \p{Content...}
+}
+```
 
+#### Lists and Items
+```
 \ol{  # Ordered list
-  \li{first item}
-  \li{second item}
+  \li{First item} 
+  \li{Second item}
 }
 
-\ul{  # Unordered list
-  \li{bullet item}
-  \li{another item}
-}
-```
-
-Math Content:
-```
-#{inline math}  # Inline math using KaTeX
-##{display math}  # Display math using KaTeX
-
-\tex{preamble}{body}  # LaTeX content rendered to SVG
-```
-
-Links and Transclusion:
-```
-[link text](xxx-NNNN)  # Link to another tree
-[[xxx-NNNN]]  # Wiki-style link showing tree's title
-
-\transclude{xxx-NNNN}  # Include another tree as a subsection
-```
-
-## Special Features
-
-### Transclusion Options
-Control how trees are transcluded using fluid bindings:
-
-```
-\scope{
-  \put\transclude/title{Override Title}
-  \put\transclude/expanded{false}  # Collapsed by default
-  \put\transclude/heading{false}   # Inline contents
-  \put\transclude/metadata{true}   # Show metadata
-  \put\transclude/numbered{false}  # Hide numbering
-  \transclude{xxx-NNNN}
+\ul{  # Unordered list 
+  \li{Item one}
+  \li{Item two}
 }
 ```
 
-### Queries
-Generate sections by querying the forest:
-
+#### Text Styling and References
 ```
-\query{
-  \query/and{
-    \query/author{username}
-    \query/taxon{definition}
-    \query/tag{important}
+\strong{bold text}
+\em{italic text}
+\code{monospace}
+\newvocab{new term}      # Highlight new terminology
+\vocab{previously defined term}
+\related{hidden reference text}
+
+# Citations and References
+\citek{reference-id}     # Citation with brackets
+\citet{tag}{ref-id}     # Citation with specific tag
+\citelink{url}          # URL citation
+```
+
+#### Math Content
+```
+#{inline math}           # Inline KaTeX math
+##{display math}         # Display KaTeX math
+
+\eqtag{eq1}{equation}    # Numbered equation
+\eqnotag{equation}       # Unnumbered equation
+```
+
+#### Diagrams and Figures
+```
+\tikzfig{                # TikZ diagram
+  \begin{tikzcd}
+    # TikZ content
+  \end{tikzcd}
+}
+
+\figure{
+  content
+  \figcaption{Caption text}
+}
+```
+
+#### Special Blocks
+```
+\proof{                  # Proof block (not in TOC)
+  \p{Proof content...}
+}
+
+\collapsed{title}{       # Collapsible section
+  content
+}
+
+\quote{quoted text}      # Blockquote
+```
+
+### 3. References and Links
+
+#### Internal Links
+```
+[link text](tree-id)     # Link to another tree
+\vocabk{term}{tree-id}   # Link to term definition
+```
+
+#### External Links
+```
+\meta{external}{url}     # External resource metadata
+\link{url}              # Simple URL link
+```
+
+### 4. Custom Components
+
+#### Component Definition
+```
+\def\customblock[param1][param2]{
+  content with #param1 and #param2
+}
+```
+
+#### Taxonomy Markers
+```
+\taxon{definition}       # Mark as definition
+\taxon{theorem}         # Mark as theorem
+\taxon{lemma}          # Mark as lemma
+```
+
+## Common Patterns
+
+### Math Note Structure
+```
+\refcardt{type}{name}{tag}{reference}{
+  \p{Statement...}
+  
+  \proof{
+    \p{Proof details...}
   }
 }
 ```
 
-### Namespaces
-Organize identifiers hierarchically:
-
+### Translation Block
 ```
-\namespace\foo{
-  \def\bar{...}  # Accessible as \foo/bar
+\translation/tp[english]{[foreign]{
+  Parallel text content
+}}
+```
+
+### Code Block
+```
+\codeblock[language]{
+  code content
 }
-
-\open\foo  # Import foo's definitions directly
 ```
 
-## XML Output
-Forester generates XML that is transformed to HTML via XSLT. Custom XML can be emitted using:
+## Best Practices
+- Import shared macros at the start
+- Use proper taxonomy markers
+- Structure content hierarchically 
+- Cite sources with proper references
+- Use newvocab for first occurrence of terms
+- Link to term definitions with vocabk
+- Include proofs in collapsible blocks
+- Tag notes for topic organization
 
-```
-\xmlns:ns{uri}  # Declare namespace
-\<ns:elem>[attr]{value}{content}  # Generate XML element
-```
-
-## Common Conventions
-- Tree titles should be lowercase (except proper nouns)
-- Each paragraph needs explicit \p{...}
-- Keep trees atomic and focused
-- Use transclusion rather than copy-paste
-- Prefer descriptive titles
-- Include creation dates
+## Common Pitfalls
+- Missing \p{} around paragraphs
+- Incorrect nesting of blocks
+- Uncited theorems/definitions
+- Missing taxonomy markers
+- Improper citation format
+- Unlinked terminology
