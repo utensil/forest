@@ -45,11 +45,36 @@ Common tag categories:
 Reference cards marked with \refcardt format:
 ```
 \refcardt{type}{name}{section}{citation}{
-  content...
+  \p{Statement...}
+  
+  \proof{
+    \p{Proof details...}
+  }
+  
+  \tikzfig{     # Optional diagrams
+    \begin{tikzcd}
+      # Diagram content
+    \end{tikzcd}
+  }
+  
+  \ol{          # Optional lists
+    \li{Point 1}
+    \li{Point 2}
+  }
 }
 ```
 
-Types include: definition, theorem, lemma, construction, observation, convention, corollary, axiom, example, exercise, proof, discussion, remark, notation
+Types include:
+- definition, theorem, lemma
+- construction, observation, convention 
+- corollary, axiom, example, exercise
+- proof, discussion, remark, notation
+
+Common patterns:
+- Mathematical definitions with proofs
+- Category theory with string diagrams
+- Physics/geometry with TikZ figures
+- Algorithms with pseudocode
 
 ### 2. Content Elements
 
@@ -186,6 +211,41 @@ Every tree must have properly nested structure elements:
 }
 ```
 
+## Organization Patterns
+
+### Note Types
+- Root notes (\tag{root}): Entry points and indexes
+- Draft notes (\tag{draft}): Work in progress
+- Macro notes (\tag{macro}): Shared definitions
+- Experimental notes (\tag{exp}): Trials and tests
+- Special notes: person, reference, equation
+
+### Query Patterns
+Common queries for organizing notes:
+```
+# Find notes without a home
+\def\query/normal{
+  \compl{
+    \union{\tag{root}}{\tag{draft}}{\tag{macro}}
+    {\tag{exp}}{\taxon{person}}{\taxon{reference}}
+  }
+}
+
+# Find lost notes not transcluded anywhere
+\def\query/root/transcluded{
+  \union-fam-rel{\tag{root}}{\paths}{\outgoing}{\transclusion}
+}
+\def\query/lost{
+  \isect{\query/normal}{\compl{\query/root/transcluded}}
+}
+```
+
+### Documentation Patterns
+- Learning diaries with dated entries
+- Topic-based note collections
+- Cross-referenced theorem networks
+- Citation and bibliography systems
+
 ## Best Practices
 - Import shared macros at the start
 - Use proper taxonomy markers
@@ -195,6 +255,8 @@ Every tree must have properly nested structure elements:
 - Link to term definitions with vocabk
 - Include proofs in collapsible blocks
 - Tag notes for topic organization
+- Query to find orphaned/lost notes
+- Date entries in learning diaries
 
 ## Common Pitfalls
 - Missing \p{} around paragraphs
