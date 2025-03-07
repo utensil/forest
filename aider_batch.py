@@ -1,4 +1,4 @@
-#!/usr/bin/env uv run --python 3.11 --with 'aider-chat[help,playwright,browser]'
+#!/usr/bin/env uv run --python 3.11 --with aider-chat
 """
 Batch Processing Script for Aider
 
