@@ -100,6 +100,7 @@ def main():
         print(f"No files matched pattern: {args.pattern}")
         return 1
 
+    print(f"Using model: {args.model}")
     print(f"Processing {len(matched_files)} files...")
 
     # Process each matched file
