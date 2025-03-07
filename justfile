@@ -608,8 +608,10 @@ cpm:
         (cd ../copilot-more && git pull)
     fi
     cd ../copilot-more
+    git reset --hard 21d9ee3dce5c7852d431d2c13cca72c426c8a302
     uvx poetry install
-    uvx poetry run uvicorn copilot_more.server:app --port 15432
+    uvx poetry run uvicorn copilot_more.server:app --port 15432 --host {{env('COPILOT_HOST', '127.0.0.1')}}
+
 
 # works only for Ubuntu
 [linux]
@@ -896,9 +898,15 @@ vlm *PARAMS:
     # uvx --python 3.12 --from 'mlx-vlm' mlx_vlm.chat_ui {{PARAMS}}
     uv run --python 3.12 --with 'mlx-vlm' --with torch python -m mlx_vlm.chat_ui {{PARAMS}}
 
+prep-pod:
+    # brew uninstall orbstack
+    brew install docker
+    brew install podman-desktop
+    docker context use default
+
 lobe *PARAMS:
     #!/usr/bin/env zsh
-    docker run -d -p 3210:3210 \
+    docker run -it --rm -p 3210:3210 \
       -e OPENAI_API_KEY={{env('OPENAI_API_KEY')}} \
       -e OPENAI_PROXY_URL={{env('OPENAI_API_BASE')}} \
       -e ACCESS_CODE=lobe66 \
