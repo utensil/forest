@@ -40,6 +40,7 @@ import os
 import random
 import time
 from pathlib import Path
+import sys
 
 from aider.coders import Coder
 from aider.io import InputOutput
@@ -67,7 +68,7 @@ def main():
     )
     parser.add_argument("--context", help="Optional context file to include")
     parser.add_argument(
-        "--model", default="gpt-4", help="Model to use (default: gpt-4)"
+        "--model", help="Model to use (defaults to environment settings)"
     )
     args = parser.parse_args()
 
@@ -87,9 +88,24 @@ def main():
         if context is None:
             return 1
 
+    # Determine model from environment if not specified
+    model_name = args.model
+    if not model_name:
+        if os.getenv("OPENAI_API_BASE") and "hunyuan" in os.getenv("OPENAI_API_BASE"):
+            model_name = "hunyuan-code"
+        elif os.getenv("DEEPSEEK_API_KEY"):
+            model_name = "deepseek"
+        elif os.getenv("ANTHROPIC_API_KEY"):
+            model_name = "claude-3-sonnet" 
+        elif os.getenv("OPENAI_API_MODEL"):
+            model_name = os.getenv("OPENAI_API_MODEL")
+        else:
+            print("No model available in the environment, please check .env file or specify --model")
+            sys.exit(1)
+
     # Create model and coder
     io = InputOutput(yes=True)  # Auto-confirm all prompts
-    model = Model(args.model)
+    model = Model(model_name)
 
     # Get absolute path of base file
     base_file = os.path.abspath(args.base_file)
