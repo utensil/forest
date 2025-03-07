@@ -49,29 +49,12 @@ from aider.models import Model
 
 def infer_model():
     """Infer the model from environment variables"""
-    api_base = os.getenv("OPENAI_API_BASE")
-    
-    # Check for various API bases and environments
-    if api_base and "hunyuan" in api_base:
-        model_name = "hunyuan-code"
-    elif os.getenv("DEEPSEEK_API_KEY"):
-        model_name = "deepseek"
-    elif api_base and "glhf.chat" in api_base:
-        model_name = "hf:Qwen/Qwen2.5-Coder-32B-Instruct"
-    elif api_base and "localhost:15432" in api_base:
-        model_name = os.getenv("OPENAI_API_MODEL", "claude-3.5-sonnet")
-    elif api_base and "0.0.0.0:4000" in api_base:
-        model_name = "xai:grok-beta"
-    elif os.getenv("ANTHROPIC_API_KEY"):
-        model_name = "claude-3-sonnet-20240229"
-    elif os.getenv("OPENAI_API_MODEL"):
-        model_name = os.getenv("OPENAI_API_MODEL")
-    else:
-        print("No model available in the environment, please check .env file or specify --model")
-        sys.exit(1)
-        
+    model_id = os.getenv("OPENAI_API_MODEL", "claude-3.5-sonnet")
+    model_name = f"openai/{model_id}"
+
     print(f"Using model: {model_name}")
     return model_name
+
 
 def read_file(fname):
     """Read and return file contents, or None if file can't be read"""
