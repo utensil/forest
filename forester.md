@@ -78,7 +78,77 @@ Common patterns:
 - Physics/geometry with TikZ figures
 - Algorithms with pseudocode
 
-### 2. Content Elements
+### 2. Mathematical Typesetting
+
+#### Category Theory Macros
+Common category theory notation:
+```
+# Categories
+\Cat        # Category of categories 
+\Set        # Category of sets
+\Grp        # Category of groups
+\Top        # Category of topological spaces
+\Poset      # Category of posets
+\Preord     # Category of preorders
+\Topoi      # Category of topoi
+
+# Basic operators
+\dom        # Domain operator
+\cod        # Codomain operator
+\Ob         # Objects functor
+\Arr        # Arrows functor
+\Mor        # Morphisms
+\Sub        # Subobjects
+
+# Common symbols
+\fatsemi    # Composition operator ⨟
+\cp         # Bullet composition •
+\monic      # Monomorphism ↣
+\epic       # Epimorphism ↠
+\equiv      # Equivalence ~
+\iso        # Isomorphism ≅
+```
+
+#### String Diagrams
+Components for building string diagrams:
+
+```
+# Base components
+\category/new              # New category box
+\functor/new              # New functor wire
+\nat-transf/new           # Natural transformation dot
+
+# Compositions
+\functor/comp/new         # Compose functors horizontally  
+\nat-transf/vcomp/new     # Vertical composition of transformations
+\nat-transf/hcomp/new     # Horizontal composition
+\nat-transf/pasting/new   # Pasting diagram
+
+# Constructors
+\create/fun[name][dom][cod]     # Named functor
+\create/nat[name][dom][cod]     # Named transformation
+\create/wire[total][nth][d][c]  # Wire in diagram
+\create/dot[w][t][n][nat][s][p] # Dot on wire
+
+# Special constructions
+\joinfun/new              # Join functors
+\homfun/new              # Hom functor
+\cupfun/new              # Cup/cap diagrams
+\naturality/new          # Naturality squares
+\adjunction/new          # Adjunction diagrams
+```
+
+#### String Diagram Styling
+Control diagram appearance:
+```
+[fill]{fill=none}        # Background fill
+[opacity]{0.6}           # Element opacity
+[symbol]{dot|circ}       # Node style
+[height]{4}              # Diagram height
+[width]{2}               # Diagram width
+```
+
+### 3. Content Elements
 
 #### Basic Structure
 Every tree must have properly nested structure elements:
