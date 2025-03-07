@@ -254,20 +254,98 @@ Common math operator patterns:
 \link{url}              # Simple URL link
 ```
 
-### 4. Custom Components
+### 4. Custom Components and TikZ Integration
+
+#### Object Definitions
+Objects are defined using nested property blocks:
+```
+\def\object/name{
+  \object[self]{
+    [property1]{value1}
+    [property2]{value2}
+    [nested/prop]{value3}
+    [draw]{
+      \draw commands...
+    }
+  }
+}
+```
+
+Properties can be accessed with \self#property syntax:
+```
+\coordinate (\self#id) at (\self#origin);
+\draw (\self#start) -- (\self#end);
+```
+
+#### TikZ Integration
+Common TikZ patterns:
+```
+# Basic drawing
+\draw (x,y) -- (x2,y2);
+\filldraw[style] (x,y) circle (r);
+\shade[options] ... ;
+
+# Coordinate systems
+\coordinate (name) at (x,y);
+\node[style] at (x,y) {text};
+
+# Transformations
+\begin{scope}[transform]
+  drawing commands...
+\end{scope}
+
+# Pictures
+name/.pic={
+  drawing commands...
+}
+```
+
+#### Style Definitions
+```
+\tikzset{
+  style/.cd,
+  property/.store in=\variable,
+  property=default,
+}
+
+\colorlet{name}{color!percent!color}
+\tikzstyle{name}=[options]
+```
 
 #### Component Definition
 ```
-\def\customblock[param1][param2]{
+# Basic macro
+\def\name[param1][param2]{
   content with #param1 and #param2
 }
+
+# With verification
+\def\name{
+  \verify{param1}{type}
+  content...
+}
+
+# Complex object
+\def\name/new{
+  \object[self]{
+    [props]{...}
+    [draw]{...}
+  }
+}
+```
+
+#### Special Commands
+```
+\verb~special chars~     # Verbatim text
+\ensuremath{math}        # Ensure math mode
+\lVert x \rVert         # Math delimiters
 ```
 
 #### Taxonomy Markers
 ```
 \taxon{definition}       # Mark as definition
 \taxon{theorem}         # Mark as theorem
-\taxon{lemma}          # Mark as lemma
+\taxon{lemma}           # Mark as lemma
 ```
 
 ## Common Patterns
