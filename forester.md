@@ -8,6 +8,7 @@ Forester is a tool for creating and managing collections of interconnected notes
 - Each tree has a unique address in format `xxx-NNNN` where:
   - `xxx` is a namespace prefix (often user initials)
   - `NNNN` is a base-36 number
+- References are stored in `refs/` subdirectory
 - Configuration via `forest.toml`
 
 ## Tree Structure
@@ -16,9 +17,39 @@ Forester is a tool for creating and managing collections of interconnected notes
 Common imports and metadata at the start of the file:
 
 ```
-\import{other-tree}  # Import definitions from another tree
-\tag{topic}         # Topic tags for categorization
+\import{macros}     # Import common macros
+\import{other-tree} # Import definitions from another tree
+% topic1 topic2     # Topic tags as comments
+\tag{topic1}        # Topic tags via command
+\tag{topic2}
+\taxon{type}       # Document type classification
 ```
+
+### 2. Important Concepts
+
+#### Document Types
+Common document types marked with \taxon:
+- person: Author/person profile
+- reference: Citation reference
+- definition/theorem/lemma: Mathematical content 
+- root: Top-level index document
+- eq: Equation reference
+
+#### Tags
+Common tag categories:
+- Subject areas: clifford, hopf, spin, tt (category theory), ag (algebraic geometry)
+- Status: draft, notes, exp (experimental)
+- Type: tech, macro (macro definitions)
+
+#### References
+Reference cards marked with \refcardt format:
+```
+\refcardt{type}{name}{section}{citation}{
+  content...
+}
+```
+
+Types include: definition, theorem, lemma, construction, observation, convention, corollary, axiom, example, exercise, proof, discussion, remark, notation
 
 ### 2. Content Elements
 
