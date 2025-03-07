@@ -1,5 +1,40 @@
 #!/usr/bin/env python
 
+"""
+Batch Processing Script for Aider
+
+This script uses aider to process multiple input files and edit a base file according to a prompt.
+
+Usage:
+    python aider_batch.py base_file pattern [options]
+
+Arguments:
+    base_file       The file to be edited by aider
+    pattern         Glob pattern to match input files (e.g., "inputs/*.py")
+
+Options:
+    --prompt TEXT   Prompt text or @filename to read prompt from file
+    --context FILE  Optional context file to include
+    --model MODEL   Model to use (default: gpt-4)
+
+Examples:
+    1. Basic usage with direct prompt:
+        python aider_batch.py app.py "tests/*.py" --prompt "Add error handling to app.py based on these test cases"
+
+    2. Using a prompt file:
+        python aider_batch.py app.py "examples/*.py" --prompt @prompt.txt
+
+    3. With context and specific model:
+        python aider_batch.py app.py "data/*.json" --prompt @prompt.txt --context setup.txt --model gpt-4-turbo
+
+Notes:
+    - Requires aider-chat to be installed (pip install aider-chat)
+    - OpenAI API key must be set in environment
+    - Creates a fresh aider session for each input file
+    - Auto-confirms all prompts
+    - Processes files one at a time to avoid context pollution
+"""
+
 import argparse
 import glob
 import os
