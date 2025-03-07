@@ -1,6 +1,8 @@
 # Forester Documentation for AI Assistants
 
-## Overview
+## Overview and Configuration
+
+### Basic Overview
 Forester is a tool for creating and managing collections of interconnected notes ("trees") organized into "forests". It uses a markup language similar to LaTeX with influences from Markdown.
 
 ## File Structure
