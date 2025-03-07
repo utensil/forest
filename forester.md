@@ -5,6 +5,12 @@
 ### Basic Overview
 Forester is a tool for creating and managing collections of interconnected notes ("trees") organized into "forests". It uses a markup language similar to LaTeX with influences from Markdown.
 
+A tree file can:
+- Export macros for use by other trees using \export{macros}
+- Import macros from other trees using \import{name}
+- Define new macros with \def\name[param]{definition}
+- Use topic tags either as comments (% tag1 tag2) or commands (\tag{tag})
+
 ## File Structure
 - Trees are stored as `.tree` files
 - Each tree has a unique address in format `xxx-NNNN` where:
@@ -197,6 +203,14 @@ Every tree must have properly nested structure elements:
 
 \eqtag{eq1}{equation}    # Numbered equation
 \eqnotag{equation}       # Unnumbered equation
+```
+
+Common math operator patterns:
+```
+\def\op{\operatorname{op}}     # Named operators
+\def\symbol{\mathcal{S}}       # Mathcal symbols
+\def\decorated[x]{\x^{*}}      # Parameterized operators
+\def\spacing{\kern-2pt}        # Fine spacing control
 ```
 
 #### Diagrams and Figures
