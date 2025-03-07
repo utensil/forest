@@ -49,25 +49,20 @@ from aider.models import Model
 
 def infer_model():
     """Infer the model from environment variables
-    
+
     This function determines which model to use based on environment variables:
     - OPENAI_API_BASE: The API endpoint to use (can be OpenAI-compatible servers)
         - localhost:15432 -> Local copilot-more server (needs OPENAI_API_MODEL set)
-        - 0.0.0.0:4000 -> Local Grok server
-        - glhf.chat -> GLHF chat server (uses Qwen models)
         etc.
-    
+
     - OPENAI_API_KEY: The API key for authentication
         - Some local servers accept any dummy key like 'sk-dummy'
         - Each service has its own key format:
             - OpenAI: sk-...
-            - Anthropic: sk-ant-...
-            - DeepSeek: sk-...
-            - GLHF: glhf_...
             etc.
-            
+
     Returns:
-        str: The inferred model name with provider prefix (e.g. 'openai/gpt-4')
+        str: The inferred model name with provider prefix (e.g. 'openai/claude-3.5-sonnet')
     """
     api_base = os.getenv("OPENAI_API_BASE")
     model_id = os.getenv("OPENAI_API_MODEL", "claude-3.5-sonnet")
