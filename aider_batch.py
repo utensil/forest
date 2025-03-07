@@ -37,6 +37,8 @@ Notes:
 import argparse
 import glob
 import os
+import random
+import time
 from pathlib import Path
 
 from aider.coders import Coder
@@ -103,6 +105,11 @@ def main():
     # Process each matched file
     for fname in matched_files:
         print(f"\nProcessing {fname}...")
+        
+        # Random sleep between 1-5 seconds
+        sleep_time = random.uniform(1, 5)
+        print(f"Waiting {sleep_time:.1f} seconds...")
+        time.sleep(sleep_time)
 
         # Read the input file
         content = read_file(fname)
