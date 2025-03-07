@@ -47,6 +47,16 @@ from aider.io import InputOutput
 from aider.models import Model
 
 
+def infer_model():
+    """Infer the model from environment variables"""
+    if os.getenv("OPENAI_API_MODEL"):
+        model_name = os.getenv("OPENAI_API_MODEL")
+    else:
+        print("No model available in the environment, please check .env file or specify --model")
+        sys.exit(1)
+    print(f"Using model: {model_name}")
+    return model_name
+
 def read_file(fname):
     """Read and return file contents, or None if file can't be read"""
     try:
@@ -58,6 +68,9 @@ def read_file(fname):
 
 
 def main():
+    # Infer model first
+    model_name = infer_model()
+
     parser = argparse.ArgumentParser(
         description="Use aider to batch edit a base file using a pattern of input files"
     )
@@ -88,16 +101,10 @@ def main():
         if context is None:
             return 1
 
-    # Determine model from environment if not specified
-    model_name = args.model
-    if not model_name:
-        if os.getenv("OPENAI_API_MODEL"):
-            model_name = os.getenv("OPENAI_API_MODEL")
-        else:
-            print(
-                "No model available in the environment, please check .env file or specify --model"
-            )
-            sys.exit(1)
+    # Override inferred model if specified in args
+    if args.model:
+        model_name = args.model
+        print(f"Overriding with specified model: {model_name}")
 
     # Create model and coder
     io = InputOutput(yes=True)  # Auto-confirm all prompts
@@ -112,7 +119,6 @@ def main():
         print(f"No files matched pattern: {args.pattern}")
         return 1
 
-    print(f"Using model: {args.model}")
     print(f"Processing {len(matched_files)} files...")
 
     # Process each matched file
