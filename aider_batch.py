@@ -1,4 +1,10 @@
-#!/usr/bin/env python
+#!/usr/bin/env uv python
+
+# /// script
+# dependencies = [
+#   "aider-chat",
+# ]
+# ///
 
 """
 Batch Processing Script for Aider
