@@ -893,10 +893,11 @@ perf *PARAMS:
 awake:
     caffeinate -d -s
 
-vlm *PARAMS:
+vlm IMAGE *PARAMS="--model mlx-community/Qwen2.5-VL-3B-Instruct-4bit --max-tokens 100 --prompt 'describe the image as detailed as possible'":
     #!/usr/bin/env zsh
     # uvx --python 3.12 --from 'mlx-vlm' mlx_vlm.chat_ui {{PARAMS}}
-    uv run --python 3.12 --with 'mlx-vlm' --with torch python -m mlx_vlm.chat_ui {{PARAMS}}
+    # uv run --python 3.12 --with 'mlx-vlm' --with torch python -m mlx_vlm.chat_ui {{PARAMS}}
+    uv run --python 3.12 --with 'mlx-vlm' --with torch python -m mlx_vlm.generate {{PARAMS}} --image {{IMAGE}}
 
 prep-pod:
     # brew uninstall orbstack
