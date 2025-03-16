@@ -21,6 +21,8 @@ cursor-line = "hint"
 
 # theme = "everforest_dark"
 
+# https://docs.helix-editor.com/keymap.html
+
 [keys.normal]
 "ret" = "goto_word"
 # https://github.com/TimothyYe/mydotfiles/blob/51160e906cf9c1192bc75ea8f76e92f628f097d6/helix/config.toml#L19
@@ -120,7 +122,7 @@ o = "file_picker_in_current_buffer_directory"
 # my ZZ 
 z = ":wqa"
 # https://github.com/TimothyYe/mydotfiles/blob/51160e906cf9c1192bc75ea8f76e92f628f097d6/helix/config.toml#L19
-b = { d = ":buffer-close" }
+# b = { d = ":buffer-close" } # this make buffer picker gone, to close a buffer, use `:bc`
 w = { h = "hsplit", v = "vsplit", d = "wclose", w = ":w" } # space+ww is my mucsle memory
 
 [keys.normal.g]
@@ -194,8 +196,8 @@ render = true
 character = "▏"
 
 [editor.statusline]
-left = ["mode", "spinner", "version-control", "file-name", "file-modification-indicator"]
-right = ["diagnostics", "spacer", "file-type", "separator", "position", "separator", "spacer", "position-percentage"]
+left = ["mode", "spacer", "version-control", "file-name", "file-modification-indicator"]
+right = ["diagnostics", "spacer", "spinner", "spacer", "file-type", "separator", "position", "separator", "spacer", "position-percentage"]
 mode.normal = "NORMAL"
 mode.insert = "INSERT"
 mode.select = "SELECT"
