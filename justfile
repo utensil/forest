@@ -216,7 +216,7 @@ sync-plugins: stylua
     cp -f uts-plugins.lua ~/.config/nvim/lua/plugins/spec.lua
 
 sync-lvim: stylua sync-nvim sync-kitty
-    mkdir -p ~/.config/lvim
+    mkdir -p ~/.config/lvir
     cp -f init.lua ~/.config/lvim/nvim-init.lua
     cp -f uts-plugins.lua ~/.config/lvim/uts-plugins.lua
     cp -f config.lua ~/.config/lvim/config.lua
@@ -348,12 +348,11 @@ prep-amethyst:
 
 prep-monit:
     #!/usr/bin/env zsh
-    # which glances || brew install glances
     which btop || brew install btop
-    which mactop || brew install mactop
     # stats is part of the sudoless monit tool community
-    [ ! -f /Applications/Stats.app ] && brew install stats
+    # [ ! -f /Applications/Stats.app ] && brew install stats
     if [ "$(uname)" == "Darwin" ]; then
+        which mactop || brew install mactop
         # if the arch is aarch64 or arm64
         if [ "$(uname -m)" == "arm64" ] || [ "$(uname -m)" == "aarch64" ]; then
             which macmon || brew install vladkens/tap/macmon
