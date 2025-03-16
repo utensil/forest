@@ -561,7 +561,6 @@ prep-aider:
     [[ -f ~/.config/claude/claude_desktop_config.json ]] || echo '{"mcpServers": {} }' > ~/.config/claude/claude_desktop_config.json
 
 sync-aider:
-    # docker pull dockerproxy.net/paulgauthier/aider-full
     cp -f aider /usr/local/bin
 
 # just mcp search
@@ -771,7 +770,12 @@ prep-hx:
     which hx || brew install helix
     mkdir -p ~/.config/helix
     cp -f dotfiles/.config/helix/config.toml ~/.config/helix/config.toml
-    just prep-lsp-ai
+    # just prep-lsp-ai
+
+hx PROJ="forest":
+    #!/usr/bin/env zsh
+    cd ~/projects/{{PROJ}}
+    helix
 
 prep-lsp-ai:
     which cargo || just prep-rust
