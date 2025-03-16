@@ -776,7 +776,13 @@ prep-hx:
 hx PROJ="forest": prep-hx
     #!/usr/bin/env zsh
     cd ~/projects/{{PROJ}}
+    export GITHUB_COPILOT_TOKEN=$(gh auth token)
     hx
+
+prep-hxcp:
+    which copilot-language-server || npm install -g @github/copilot-language-server
+    mkdir -p ~/.config/helix
+    cp -f dotfiles/.config/helix/languages.toml ~/.config/helix/languages.toml
 
 prep-lsp-ai:
     which cargo || just prep-rust
