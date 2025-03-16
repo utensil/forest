@@ -772,10 +772,10 @@ prep-hx:
     cp -f dotfiles/.config/helix/config.toml ~/.config/helix/config.toml
     # just prep-lsp-ai
 
-hx PROJ="forest":
+hx PROJ="forest": prep-hx
     #!/usr/bin/env zsh
     cd ~/projects/{{PROJ}}
-    helix
+    hx
 
 prep-lsp-ai:
     which cargo || just prep-rust
