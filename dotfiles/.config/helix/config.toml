@@ -1,6 +1,7 @@
-theme = "onedark"
+# theme = "onedark"
 # theme = "github_dark"
 # theme = "tokyonight_moon"
+theme = "catppuccin_mocha"
 
 [editor.file-picker]
 hidden = false
@@ -8,11 +9,12 @@ hidden = false
 [editor]
 line-number = "relative"
 # mouse = false
+color-modes = true
+auto-completion = true
 
 # Following https://felix-knorr.net/posts/2025-03-16-helix-review.html
 
 cursorline = true
-lsp.display-inlay-hints = true
 
 [editor.inline-diagnostics]
 cursor-line = "hint"
@@ -191,11 +193,34 @@ render = true
 character = "▏"
 
 [editor.statusline]
-left = ["mode", "spacer", "spacer", "version-control", "file-name", "file-modification-indicator"]
-right = ["spinner", "spacer", "file-type", "separator", "position", "separator", "spacer", "position-percentage", "spacer", "diagnostics"]
+left = ["mode", "spinner", "version-control", "file-name", "file-modification-indicator"]
+right = ["diagnostics", "spacer", "file-type", "separator", "position", "separator", "spacer", "position-percentage"]
 mode.normal = "NORMAL"
 mode.insert = "INSERT"
 mode.select = "SELECT"
 
+# https://github.com/mimame/.dotfiles/blob/81d1c6caa6d28ed223d54b3067311743300b8f6d/helix/config.toml#L10
+[editor.lsp]
+# Display LSP progress messages below statusline
+display-messages = true
+# Display inlay hints
+display-inlay-hints = true
 
+[editor.whitespace]
+# Whether to render whitespace
+render = "none"
+
+[editor.whitespace.characters]
+# Literal characters to use when rendering whitespace
+
+# Sub-keys may be any of
+# Options for rendering whitespace with visible characters.
+# Use `:set whitespace.render all` to temporarily enable visible whitespace.
+space = "·"
+nbsp = "⍽"
+tab = "→"
+newline = "⏎"
+
+[editor.soft-wrap]
+enable = true
 
