@@ -26,7 +26,7 @@ elif [[ "$OPENAI_API_BASE" == *"0.0.0.0:4000"* ]]; then
 elif [ -n "$ANTHROPIC_API_KEY" ]; then
     # explicitly set the default
     export MODELS="--model sonnet --weak-model haiku"
-# if OPENAI_API_BASE is set
+# if OPENAI_API_MODEL is set
 elif [ -n "$OPENAI_API_MODEL" ]; then
     export MODELS="--model openai/$OPENAI_API_MODEL"
 else

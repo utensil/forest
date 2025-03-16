@@ -556,10 +556,25 @@ aichat *PARAMS:
     aichat {{PARAMS}}
 
 prep-aider:
+    just sync-aider
+    which mcpm-aider || npm install -g @poai/mcpm-aider
+    mkdir -p ~/.config/claude
+    [[ -f ~/.config/claude/claude_desktop_config.json ]] || echo '{"mcpServers": {} }' > ~/.config/claude/claude_desktop_config.json
+
+sync-aider:
     # docker pull dockerproxy.net/paulgauthier/aider-full
     cp -f aider /usr/local/bin
 
-aider PROJ="forest" *PARAMS="": prep-aider
+# just mcp search
+# just mcp install XXX
+# just mcp list
+# just mcp remove XXX
+# just mcp toolprompt
+mcp *PARAMS="":
+    #!/usr/bin/env bash
+    mcpm-aider {{PARAMS}}
+
+aider PROJ="forest" *PARAMS="": sync-aider
     #!/usr/bin/env zsh
     cd ~/projects/{{PROJ}} && aider {{PARAMS}}
 
@@ -594,8 +609,10 @@ cpm:
         (cd ../copilot-more && git pull)
     fi
     cd ../copilot-more
+    git reset --hard 21d9ee3dce5c7852d431d2c13cca72c426c8a302
     uvx poetry install
-    uvx poetry run uvicorn copilot_more.server:app --port 15432
+    uvx poetry run uvicorn copilot_more.server:app --port 15432 --host {{env('COPILOT_HOST', '127.0.0.1')}}
+
 
 # works only for Ubuntu
 [linux]
@@ -877,14 +894,23 @@ perf *PARAMS:
 awake:
     caffeinate -d -s
 
-vlm *PARAMS:
+# ~/.cache/lm-studio/models/
+VLM_MODEL := env("VLM_MODEL", "mlx-community/Qwen2.5-VL-3B-Instruct-4bit")
+VLM_PROMPT := env("VLM_PROMPT", "describe the image as detailed as possible")
+
+vlm IMAGE *PARAMS=" --max-tokens 100 ":
     #!/usr/bin/env zsh
-    # uvx --python 3.12 --from 'mlx-vlm' mlx_vlm.chat_ui {{PARAMS}}
-    uv run --python 3.12 --with 'mlx-vlm' --with torch python -m mlx_vlm.chat_ui {{PARAMS}}
+    uv run --python 3.12 --with 'mlx-vlm' --with torch python -m mlx_vlm.generate --model '{{VLM_MODEL}}' --prompt '{{VLM_PROMPT}}' --image {{IMAGE}} {{PARAMS}}
+
+prep-pod:
+    # brew uninstall orbstack
+    brew install docker
+    brew install podman-desktop
+    docker context use default
 
 lobe *PARAMS:
     #!/usr/bin/env zsh
-    docker run -d -p 3210:3210 \
+    docker run -it --rm -p 3210:3210 \
       -e OPENAI_API_KEY={{env('OPENAI_API_KEY')}} \
       -e OPENAI_PROXY_URL={{env('OPENAI_API_BASE')}} \
       -e ACCESS_CODE=lobe66 \
@@ -894,3 +920,5 @@ lobe *PARAMS:
 # https://bhoot.dev/2025/cp-dot-copies-everything/
 clone SRC DST:
     cp -R {{SRC}}/. {{DST}}
+
+
