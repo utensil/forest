@@ -7,28 +7,22 @@
 
 [language-server.lsp-ai]
 command = "lsp-ai"
-args = ["lsp"]
+# args = ["--stdio"]
 timeout = 60
-environment = { "RUST_LOG" = "info" }
-roots = [".git"]
+environment = { "LSP_AI_LOG" = "debug" }
+# roots = [".git"]
 
 [language-server.lsp-ai.config]
 memory = { file_store = {} }
 
-# [language-server.lsp-ai.config.models.model1]
-# type = "open_ai"
-# chat_endpoint = "https://api.openai.com/v1/chat/completions"
-# model =  "gpt-4o"
-# auth_token_env_var_name = "OPENAI_API_KEY"
-
-[language-server.lsp-ai.config.models.model1]
+[language-server.lsp-ai.config.models.cpm]
 type = "open_ai"
 chat_endpoint = "http://127.0.0.1:15432/chat/completions"
 model = "claude-3.5-sonnet"
-# auth_token_env_var_name = "OPENAI_API_KEY"
+auth_token_env_var_name = "OPENAI_API_KEY"
 
 [language-server.lsp-ai.config.completion]
-model = "model1"
+model = "cpm"
 
 [language-server.lsp-ai.config.completion.parameters]
 max_tokens = 64
@@ -83,7 +77,6 @@ content = "def is_even(n):\n    return n % 2 == 0"
 role = "user"
 content = "{CODE}"
 
-
 #################################
 ## Configuration for languages ##
 #################################
@@ -114,9 +107,14 @@ formatter = { command = "prettier", args = ["--stdin-filepath", "{file}"], stdin
 
 [[language]]
 name = "markdown"
-language-servers = ["marksman", "lsp-ai"]
-auto-format = true
-formatter = { command = "prettier", args = ["--stdin-filepath", "{file}"], stdin = true }
+scope = "source.md"
+injection-regex = "md|markdown"
+file-types = ["md", "livemd", "markdown", "mdx", "mkd", "mkdn", "mdwn", "mdown", "markdn", "mdtxt", "mdtext", "workbook", { glob = "PULLREQ_EDITMSG" }]
+roots = [".marksman.toml"]
+language-servers = [ "marksman", "lsp-ai" ]
+# "markdown-oxide" ]
+indent = { tab-width = 2, unit = "  " }
+block-comment-tokens = { start = "<!--", end = "-->" }
 
 [[language]]
 name = "html"

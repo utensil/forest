@@ -577,6 +577,21 @@ aider PROJ="forest" *PARAMS="": sync-aider
     #!/usr/bin/env zsh
     cd ~/projects/{{PROJ}} && aider {{PARAMS}}
 
+# prep-ad:
+#    #!/usr/bin/env zsh
+#    rm -rf ../aider-desk
+#    if [ ! -d ../aider-desk ]; then
+#        # (cd .. && git clone https://github.com/hotovo/aider-desk)
+#        # clone a tag v0.4.0
+#        (cd .. && git clone --branch v0.4.0 https://github.com/hotovo/aider-desk)
+#    else
+#        (cd ../aider-desk && git pull)
+#    fi
+#    cd ../aider-desk
+#    npm install
+#    npm run build:mac
+
+
 # Uses aider in watch mode to actively monitor and assist with code changes.
 # To work with other projects:
 #   1. Use `just proj` to select and open a project in a new kitty terminal
@@ -771,12 +786,12 @@ prep-hx:
     which hx || brew install helix
     mkdir -p ~/.config/helix
     cp -f dotfiles/.config/helix/config.toml ~/.config/helix/config.toml
-    # just prep-lsp-ai
+    just prep-lsp-ai
 
 hx PROJ="forest": prep-hx
     #!/usr/bin/env zsh
     cd ~/projects/{{PROJ}}
-    export GITHUB_COPILOT_TOKEN=$(gh auth token)
+    # export GITHUB_COPILOT_TOKEN=$(gh auth token)
     hx
 
 prep-hxcp:
@@ -787,6 +802,7 @@ prep-hxcp:
 prep-lsp-ai:
     which cargo || just prep-rust
     which lsp-ai || cargo install lsp-ai # -F llama_cpp -F metal
+    which marksman || brew install marksman
     mkdir -p ~/.config/helix
     cp -f dotfiles/.config/helix/languages.toml ~/.config/helix/languages.toml
 
