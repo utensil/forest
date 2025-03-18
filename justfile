@@ -438,7 +438,8 @@ view URL="http://localhost:1314/":
     awrit {{URL}}
 
 prep-zsh:
-    brew install zsh-autosuggestions zsh-syntax-highlighting zsh-vi-mode
+    brew install zsh-autosuggestions zsh-syntax-highlighting
+    # zsh-vi-mode
 
 # https://kasad.com/blog/zsh-profiling/
 # also uncomment the lines at the start and the end of .zshrc
