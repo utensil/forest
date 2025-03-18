@@ -537,6 +537,20 @@ clone SRC DST:
 prep-font:
     brew install --cask font-maple-mono-nf-cn
 
+# https://github.com/kovidgoyal/kitty/issues/391#issuecomment-778703119
+# persistent session: abduco
+# multiplexer: dvtm
+# Creating a session
+# just tach -c name zsh
+# Ctrl+\ to detach, or use -e ^q to use Ctrl+q
+# Attaching to a session
+# BUT can't detach from within Helix
+# just tach -a name
+tach *PARAMS:
+    abduco {{PARAMS}}
+
+prep-tach:
+    which abduco || brew install abduco
 
 import 'dotfiles/llm.just'
 import 'dotfiles/archived.just'
