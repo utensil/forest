@@ -469,8 +469,8 @@ ghost:
 
 prep-hx:
     which hx || brew install helix
-    mkdir -p ~/.config/helix
-    cp -f dotfiles/.config/helix/config.toml ~/.config/helix/config.toml
+    rm -rf ~/.config/helix || true
+    ln -s {{justfile_directory()}}/dotfiles/.config/helix ~/.config/helix
     just prep-lsp-ai
 
 hx PROJ="forest": prep-hx
@@ -479,17 +479,17 @@ hx PROJ="forest": prep-hx
     # export GITHUB_COPILOT_TOKEN=$(gh auth token)
     hx
 
-prep-hxcp:
-    which copilot-language-server || npm install -g @github/copilot-language-server
-    mkdir -p ~/.config/helix
-    cp -f dotfiles/.config/helix/languages.toml ~/.config/helix/languages.toml
+# prep-hxcp:
+#     which copilot-language-server || npm install -g @github/copilot-language-server
+#     mkdir -p ~/.config/helix
+#     cp -f dotfiles/.config/helix/languages.toml ~/.config/helix/languages.toml
 
 prep-lsp-ai:
     which cargo || just prep-rust
     which lsp-ai || cargo install lsp-ai # -F llama_cpp -F metal
     which marksman || brew install marksman
-    mkdir -p ~/.config/helix
-    cp -f dotfiles/.config/helix/languages.toml ~/.config/helix/languages.toml
+    # mkdir -p ~/.config/helix
+    # cp -f dotfiles/.config/helix/languages.toml ~/.config/helix/languages.toml
 
 git PROJ="forest" *PARAMS="":
     #!/usr/bin/env zsh
@@ -516,6 +516,10 @@ pod CMD="start":
 # https://bhoot.dev/2025/cp-dot-copies-everything/
 clone SRC DST:
     cp -R {{SRC}}/. {{DST}}
+
+# https://github.com/subframe7536/Maple-font
+prep-font:
+    brew install --cask font-maple-mono-nf-cn
 
 
 import 'dotfiles/llm.just'
