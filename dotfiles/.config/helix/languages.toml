@@ -9,7 +9,7 @@
 command = "lsp-ai"
 # args = ["--stdio"]
 timeout = 60
-environment = { "LSP_AI_LOG" = "debug" }
+# environment = { "LSP_AI_LOG" = "debug" }
 # roots = [".git"]
 
 [language-server.lsp-ai.config]
@@ -84,46 +84,43 @@ content = "{CODE}"
 [[language]]
 name = "rust"
 language-servers = ["rust-analyzer", "lsp-ai"]
-auto-format = true
-formatter = { command = "rustfmt" }
 
 [[language]]
 name = "python"
 language-servers = ["pyright", "lsp-ai"]
-auto-format = true
-formatter = { command = "black" }
 
 [[language]]
 name = "javascript"
 language-servers = ["typescript-language-server", "lsp-ai"]
-auto-format = true
-formatter = { command = "prettier", args = ["--stdin-filepath", "{file}"], stdin = true }
 
 [[language]]
 name = "typescript"
 language-servers = ["typescript-language-server", "lsp-ai"]
-auto-format = true
-formatter = { command = "prettier", args = ["--stdin-filepath", "{file}"], stdin = true }
 
 [[language]]
 name = "markdown"
-scope = "source.md"
-injection-regex = "md|markdown"
-file-types = ["md", "livemd", "markdown", "mdx", "mkd", "mkdn", "mdwn", "mdown", "markdn", "mdtxt", "mdtext", "workbook", { glob = "PULLREQ_EDITMSG" }]
-roots = [".marksman.toml"]
 language-servers = [ "marksman", "lsp-ai" ]
-# "markdown-oxide" ]
-indent = { tab-width = 2, unit = "  " }
-block-comment-tokens = { start = "<!--", end = "-->" }
+
 
 [[language]]
 name = "html"
 language-servers = ["vscode-html-language-server", "lsp-ai"]
-auto-format = true
-formatter = { command = "prettier", args = ["--stdin-filepath", "{file}"], stdin = true }
 
 [[language]]
 name = "css"
 language-servers = ["vscode-css-language-server", "lsp-ai"]
-auto-format = true
-formatter = { command = "prettier", args = ["--stdin-filepath", "{file}"], stdin = true }
+
+[[grammar]]
+name = "forester"
+source = { git = "https://github.com/kentookura/tree-sitter-forester", rev = "42709f432a2ff64a93e50185af16cecb9a0ec15f" }
+
+# based on https://github.com/helix-editor/helix/issues/5365
+[[language]]
+name = "forester"
+scope = "source.tree"
+injection-regex = "forester"
+file-types = ["tree"]
+roots = [ "forest.toml" ]
+comment-tokens = "%"
+indent = { tab-width = 2, unit = "  " }
+grammar = "forester"

@@ -473,7 +473,11 @@ prep-hx:
     ln -s {{justfile_directory()}}/dotfiles/.config/helix ~/.config/helix
     just prep-lsp-ai
 
-hx PROJ="forest": prep-hx
+sync-hx:
+    hx --grammar fetch
+    hx --grammar build
+
+hx PROJ="forest":
     #!/usr/bin/env zsh
     cd ~/projects/{{PROJ}}
     # export GITHUB_COPILOT_TOKEN=$(gh auth token)
