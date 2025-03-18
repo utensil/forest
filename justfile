@@ -8,6 +8,9 @@ default:
     just --list
     @echo '💡 To initialize just aliases: source alias.sh'
 
+
+import 'dotfiles/llm.just'
+
 new +PARAMS:
     ./new.sh {{PARAMS}}
 
