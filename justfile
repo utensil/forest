@@ -928,11 +928,19 @@ vlm IMAGE *PARAMS=" --max-tokens 100 ":
     #!/usr/bin/env zsh
     uv run --python 3.12 --with 'mlx-vlm' --with torch python -m mlx_vlm.generate --model '{{VLM_MODEL}}' --prompt '{{VLM_PROMPT}}' --image {{IMAGE}} {{PARAMS}}
 
+# prep-pod:
+#    # brew uninstall orbstack
+#    which docker || brew install docker
+#    brew install podman-desktop
+#    docker context use default
+
 prep-pod:
-    # brew uninstall orbstack
-    brew install docker
-    brew install podman-desktop
+    which docker || brew install docker
+    which colima || brew install colima
     docker context use default
+
+pod CMD="start":
+    colima {{CMD}}
 
 lobe *PARAMS:
     #!/usr/bin/env zsh
