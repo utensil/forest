@@ -467,10 +467,22 @@ prep-annex:
 ghost:
     npx ghosttime
 
+prep-base16-helix:
+    #!/usr/bin/env zsh
+    # if ../base16-helix doesn't exist, clone it
+    if [ ! -d ../base16-helix ]; then
+        git clone https://github.com/tinted-theming/base16-helix ../base16-helix
+    else
+        (cd ../base16-helix && git pull)
+    fi
+    mkdir -p ~/.config/helix/themes
+    cp -f ../base16-helix/themes/base16-railscasts.toml ~/.config/helix/themes/base16-railscasts.toml
+
 prep-hx:
     which hx || brew install helix
     rm -rf ~/.config/helix || true
     ln -s {{justfile_directory()}}/dotfiles/.config/helix ~/.config/helix
+    just prep-base16-helix
     just prep-lsp-ai
 
 sync-hx:
