@@ -785,7 +785,8 @@ local llm_plugins = {
     {
         "CopilotC-Nvim/CopilotChat.nvim",
         event = "VeryLazy",
-        branch = "canary",
+        branch = "main",
+        -- branch = "canary",
         dependencies = {
             -- { "zbirenbaum/copilot.lua" },
             { "github/copilot.vim" },

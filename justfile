@@ -72,7 +72,7 @@ install-shellcheck:
 run-shellcheck:
     shellcheck *.sh
 
-prep-term: prep-kitty
+prep-term:
     which zsh || brew install zsh
     which nvim || brew install neovim
     which lazygit || brew install lazygit
@@ -107,70 +107,6 @@ prep-term: prep-kitty
     which cmake || brew install cmake
     which pkg-config || brew install pkg-config
     which nproc || brew install coreutils
-    # just prep-fancycat
-
-prep-fancycat:
-    #!/usr/bin/env bash
-    set -e
-    which mutool || brew install mupdf
-    which zig || brew install zig
-    fancy_cat_dir="/tmp/fancy-cat-$(date +%s)"
-    mkdir -p $fancy_cat_dir
-    git clone https://github.com/freref/fancy-cat $fancy_cat_dir
-    cd $fancy_cat_dir
-    # 429 Too Many Requests for fetching https://codeberg.org/atman/zg/archive/v0.13.2.tar.gz
-    zig build --fetch
-    zig build --release=fast
-    mv zig-out/bin/fancy-cat /usr/local/bin/
-    rm -rf $fancy_cat_dir
-
-prep-alacritty:
-    #!/usr/bin/env bash
-    # Install FiraCode Nerd Font from https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/FiraCode.zip
-    # After installation, run: fc-cache -f -v
-    # Default Mac terminal cannot support true color
-    which alacritty || brew install --cask alacritty
-    # configure alacritty
-    # https://alacritty.org/config-alacritty.html
-    cp .alacritty.toml ~/.alacritty.toml
-
-[macos]
-prep-kitty: && sync-kitty
-    which kitty || brew install --cask kitty
-
-[linux]
-prep-kitty:
-    # no op for now
-    # curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
-
-@sync-kitty:
-    #!/usr/bin/env bash
-    # configure kitty
-    # https://sw.kovidgoyal.net/kitty/conf.html
-    mkdir -p ~/.config/kitty
-    cp -f kitty.conf ~/.config/kitty/kitty.conf
-    cp -f kitty_session.conf ~/.config/kitty/kitty_session.conf
-    # this should make kitty reload the config
-    # if env var KITTY_PID is set
-    if [ -n "$KITTY_PID" ]; then
-        kill -SIGUSR1 $KITTY_PID
-    fi
-
-[macos]
-prep-warp:
-    #!/usr/bin/env bash
-    if [ ! -d "/Applications/Warp.app" ]; then
-        brew install --cask warp
-        echo "CMD+, then search for terminal, specify External: Osx Exec to Warp.app"
-    fi
-
-prep-wez:
-    which wezterm || brew install --cask wezterm
-    # brew install --cask wezterm@nightly
-
-sync-wez:
-    mkdir -p ~/.config/wezterm
-    cp -f wezterm.lua ~/.config/wezterm/wezterm.lua
 
 prep-gt:
     which ghostty || brew install ghostty
@@ -215,8 +151,8 @@ sync-plugins: stylua
     mkdir -p ~/.config/nvim/lua/plugins/
     cp -f uts-plugins.lua ~/.config/nvim/lua/plugins/spec.lua
 
-sync-lvim: stylua sync-nvim sync-kitty
-    mkdir -p ~/.config/lvir
+sync-lvim: stylua sync-nvim
+    mkdir -p ~/.config/lvim
     cp -f init.lua ~/.config/lvim/nvim-init.lua
     cp -f uts-plugins.lua ~/.config/lvim/uts-plugins.lua
     cp -f config.lua ~/.config/lvim/config.lua
@@ -299,66 +235,20 @@ prep-py:
     uv python install 3.11
     uv venv --python 3.11 --seed
 
-prep-sbar:
-    #!/usr/bin/env bash
-    curl -L https://raw.githubusercontent.com/FelixKratz/dotfiles/master/install_sketchybar.sh | sh
-    mkdir -p ~/.config/sketchybar/plugins
-    cp /opt/homebrew/opt/sketchybar/share/sketchybar/examples/sketchybarrc ~/.config/sketchybar/sketchybarrc
-    cp -r /opt/homebrew/opt/sketchybar/share/sketchybar/examples/plugins/ ~/.config/sketchybar/plugins/
-    chmod +x ~/.config/sketchybar/plugins/*
-    brew services restart felixkratz/formulae/sketchybar
-
-# Inspired by https://github.com/FelixKratz/dotfiles
-dotfiletmpdir := "/tmp/dotfiles-" + choose('8', HEX)
-
-prep-dotfiles-tmp:
-    git clone https://github.com/FelixKratz/dotfiles {{dotfiletmpdir}}
-
-config-sbar: prep-dotfiles-tmp
-    #!/usr/bin/env bash
-    rm -rf ~/.config/sketchybar
-    cp -r {{dotfiletmpdir}}/.config/sketchybar ~/.config/
-    rm -rf {{dotfiletmpdir}}
-    brew services restart felixkratz/formulae/sketchybar
-
-sbar:
-    brew services restart felixkratz/formulae/sketchybar
-
-prep-tile: prep-amethyst
-
-prep-skhd: prep-dotfiles-tmp
-    brew install koekeishiya/formulae/skhd
-    rm -rf ~/.config/skhd
-    cp -r {{dotfiletmpdir}}/.config/skhd ~/.config/
-    skhd --start-service
-
-prep-yabai: prep-dotfiles-tmp prep-skhd
-    brew install koekeishiya/formulae/yabai
-    rm -rf ~/.config/yabai
-    cp -r {{dotfiletmpdir}}/.config/yabai ~/.config/
-    yabai --start-service
-
-no-yabai:
-    yabai --stop-service
-    skhd --stop-service
-
-prep-amethyst:
-    brew install --cask amethyst
-    cp -f .amethyst.yml ~/.amethyst.yml
-
 prep-monit:
     #!/usr/bin/env zsh
     # which glances || brew install glances
     which btop || brew install btop
     # stats is part of the sudoless monit tool community
-    [ ! -f /Applications/Stats.app ] && brew install stats
-    if [ "$(uname)" == "Darwin" ]; then
+    # [ ! -f /Applications/Stats.app ] && brew install stats
+    if [ "$(uname)" = "Darwin" ]; then
+        which mactop || brew install mactop
         # if the arch is aarch64 or arm64
-        if [ "$(uname -m)" == "arm64" ] || [ "$(uname -m)" == "aarch64" ]; then
+        if [ "$(uname -m)" = "arm64" ] || [ "$(uname -m)" = "aarch64" ]; then
             which macmon || brew install vladkens/tap/macmon
             # which neoasitop || (brew tap op06072/neoasitop && brew install neoasitop)
         else
-           echo "No GPU monit tools found yet"
+            echo "No GPU monit tools found yet"
         fi
     fi
 
@@ -506,112 +396,21 @@ prep-rust:
     . $HOME/.cargo/env
     which cargo-binstall || cargo install cargo-binstall
 
-@prep-sync-dir-tools: prep-rust
-    which jw || (yes|cargo binstall jw)
-    which rusync || (yes|cargo binstall rusync)
-    which rip || (yes|cargo binstall rm-improved)
-
-sync-dirs SRC DST:
-    @just rusync-dirs {{SRC}} {{DST}}
-    @just check-dirs {{SRC}} {{DST}}
-
-rusync-dirs SRC DST: prep-sync-dir-tools
-    #!/usr/bin/env bash
-    echo "🚀 Initiating sync..."
-    rusync {{SRC}} {{DST}}
-    # using this would trigger mismatch
-    # rusync --err-list {{DST}}/.rusync.err.log {{SRC}} {{DST}}
-
-check-dirs SRC DST:
-    #!/usr/bin/env bash
-    echo "🔍 Checking hash..."
-    date
-    (cd {{SRC}} && jw -c . > .hash.jw) && echo "1. source hashed: `date`"
-    (cd {{DST}} && jw -c . > .hash.jw) && echo "2. destination hashed: `date`"
-    MISMATCH=`jw -D {{SRC}}/.hash.jw {{DST}}/.hash.jw`
-    if [ -z "$MISMATCH" ]; then
-        echo "✅ Perfect match"
-    else
-        echo "❌ Mismatch detected"
-        if [ ${#MISMATCH} -gt 1000 ]; then
-            echo "$MISMATCH"|less
-        else
-            echo "$MISMATCH"
-        fi
-    fi
-    # keep them both, avoid recalculation of hash
-    # only remove hash.jw file from the source
-    # rip {{SRC}}/.hash.jw
-    # rip {{DST}}/.hash.jw
-    echo "Open {{DST}}/.hash.jw to inspect"
-
-prep-llms:
-    which aichat || brew install aichat
-    which assembllm || (brew tap bradyjoslin/assembllm && brew install bradyjoslin/assembllm/assembllm)
-    which cortex || echo "Visit https://cortex.so/docs/installation to download and install cortex"
-
-
-aichat *PARAMS:
-    aichat {{PARAMS}}
-
-prep-aider:
-    # docker pull dockerproxy.net/paulgauthier/aider-full
-    cp -f aider /usr/local/bin
-
-aider PROJ="forest" *PARAMS="": prep-aider
-    #!/usr/bin/env zsh
-    cd ~/projects/{{PROJ}} && aider {{PARAMS}}
-
-# Uses aider in watch mode to actively monitor and assist with code changes.
-# To work with other projects:
-#   1. Use `just proj` to select and open a project in a new kitty terminal
-#   2. Or use `just aider ../project_name` to start aider in another directory
-# I've tested that it works with `AI!`, `AI?`, and `ai!`
-aw PROJ="forest" *PARAMS="":
-    just aider {{PROJ}} -v --watch-files {{PARAMS}}
-
-llm-proxy *PARAMS:
-    #!/usr/bin/env bash
-    # uvx --python 3.11 --from 'litellm[proxy]' litellm {{PARAMS}}
-    aichat --serve 0.0.0.0:4000
-
-llp *PARAMS:
-    #!/usr/bin/env zsh
-    uvx --python 3.11 --from 'litellm[proxy]' --with opentelemetry-api --with opentelemetry-sdk --with opentelemetry-exporter-otlp --with langchain --with langchain-openai --with lunary --with openinference-instrumentation-litellm litellm {{PARAMS}} --api_base {{env('OPENAI_API_BASE')}} -m 'openai/{{env('OPENAI_API_MODEL')}}' -c litellm.yaml
-
-cpm:
-    #!/usr/bin/env bash
-    # if env var REFRESH_TOKEN is not set, prompt for it
-    if [ -z "$REFRESH_TOKEN" ]; then
-        # curl https://github.com/login/device/code -X POST -d 'client_id=01ab8ac9400c4e429b23&scope=user:email'
-        # curl https://github.com/login/oauth/access_token -X POST -d 'client_id=01ab8ac9400c4e429b23&scope=user:email&device_code=YOUR_DEVICE_CODE&grant_type=urn:ietf:params:oauth:grant-type:device_code'
-        echo "Please follow https://github.com/jjleng/copilot-more to set up REFRESH_TOKEN"
-    fi
-    if [ ! -d ../copilot-more ]; then
-        (cd .. && git clone https://github.com/jjleng/copilot-more.git)
-    else
-        (cd ../copilot-more && git pull)
-    fi
-    cd ../copilot-more
-    uvx poetry install
-    uvx poetry run uvicorn copilot_more.server:app --port 15432
-
-# works only for Ubuntu
-[linux]
-prep-cortex:
-    #!/usr/bin/env bash
-    curl -L https://app.cortexcpp.com/download/latest/linux-amd64-local -o cortex.deb
-    sudo dpkg -i cortex.deb
-    # fix broken dependencies
-    sudo apt-get install -f -y
-
-prep-coder:
-    # cortex pull bartowski/DeepSeek-V2.5-GGUF
-    cortex run qwen2.5-coder
-
 # a zsh that inherits .env
 zsh:
     zsh
+
+prep-git:
+    #!/usr/bin/env zsh
+    which git || brew install git
+    # list the current settings
+    git config --list
+    printf "Enter your name: "
+    read name
+    printf "Enter your email: "
+    read email
+    git config --global user.name "$name"
+    git config --global user.email "$email"
 
 prep-delta:
     which delta || brew install git-delta
@@ -626,30 +425,6 @@ prep-delta:
 
 loc:
     tokei -o json|uvx tokei-pie
-
-md FILE:
-    uvx markitdown "{{FILE}}"
-
-p2t FILE:
-    uvx --python 3.12 --from 'pix2text[multilingual]' p2t predict --device mps --file-type pdf -i "{{FILE}}"
-
-prep-p2t:
-    #!/usr/bin/env bash
-    set -e
-    # if the directory not exits
-    if [ ! -d ~/.pix2text-mac ]; then
-        git clone https://github.com/breezedeus/Pix2Text-Mac ~/.pix2text-mac
-    fi
-    cd ~/.pix2text-mac
-    uv venv --python 3.12 --seed
-    source ~/.pix2text/.venv/bin/activate
-    pip install -r requirements.txt
-    pip install pix2text[multilingual]>=1.1.0.1
-    python setup.py py2app -A
-
-# https://github.com/Byaidu/PDFMathTranslate
-pzh:
-    uvx pdf2zh -i
 
 prep-date:
     which git-backdate || (curl https://raw.githubusercontent.com/rixx/git-backdate/main/git-backdate > /usr/local/bin/git-backdate && chmod +x /usr/local/bin/git-backdate)
@@ -675,7 +450,8 @@ view URL="http://localhost:1314/":
     awrit {{URL}}
 
 prep-zsh:
-    brew install zsh-autosuggestions zsh-syntax-highlighting zsh-vi-mode
+    brew install zsh-autosuggestions zsh-syntax-highlighting
+    # zsh-vi-mode
 
 # https://kasad.com/blog/zsh-profiling/
 # also uncomment the lines at the start and the end of .zshrc
@@ -700,196 +476,95 @@ prep-annex:
     # brew services start git-annex
     mkdir -p ~/annex
     (cd ~/annex && git annex webapp)
-# https://www.kelen.cc/dry/docker-hub-mirror
-gal:
-    #!/usr/bin/env zsh
-    mkdir -p ~/home-gallery/data/config
-    cd ~/home-gallery/
-    alias gallery="docker run -it --rm \
-      -v $(pwd)/data:/data \
-      -v $HOME/Pictures/photos:/data/Pictures \
-      -u $(id -u):$(id -g) \
-      -p 3000:3000 docker.wanpeng.top/xemle/home-gallery:latest"
-    gallery run init --source /data/Pictures
-    gallery run server
-
-prism:
-    #!/usr/bin/env zsh
-    mkdir -p $HOME/photoprism/storage
-    cd $HOME/photoprism
-    # if the file does not exist
-    [ -f docker-compose.yaml ] || curl -L https://dl.photoprism.app/docker/macos/compose.yaml -o docker-compose.yaml
-    # replace ~/Pictures with  ~/Pictures/photos
-    sed -i '' 's|~/Pictures:|~/Pictures/photos:|g' docker-compose.yaml
-    echo "Visit http://localhost:2342/, login with admin:insecure"
-    docker compose up
-
-pica:
-    #!/usr/bin/env zsh
-    mkdir -p $HOME/picapport
-    cd $HOME/picapport
-    docker run -it --rm --name picapport -p 8888:8888 -v $HOME/Pictures/photos:/opt/picapport/photos -v $HOME/picapport:/opt/picapport/data -e "PICAPPORT_PORT=8888" -e "PICAPPORT_LANG=en" fionnb/picapport:latest
 
 ghost:
     npx ghosttime
 
-# prepare raycast
-prep-ray:
-    #!/usr/bin/env bash
-    brew install --cask raycast
-
-# try Zellij
-# Ctrl+P N to create a new pane
-# Ctrl+P then direction keys to move between panes
-# Ctrl+P Z to hide frames
-# Ctrl+N then direction keys to resize the corrent pane towards the direction
-# Ctrl+O W to manage sessions
-zj:
+prep-base16-helix:
     #!/usr/bin/env zsh
-    which zellij || brew install zellij
-    # bash <(curl -L https://zellij.dev/launch)
-    zellij
+    # if ../base16-helix doesn't exist, clone it
+    if [ ! -d ../base16-helix ]; then
+        git clone https://github.com/tinted-theming/base16-helix ../base16-helix
+    else
+        (cd ../base16-helix && git pull)
+    fi
+    mkdir -p ~/.config/helix/themes
+    cp -f ../base16-helix/themes/base16-railscasts.toml ~/.config/helix/themes/base16-railscasts.toml
 
 prep-hx:
     which hx || brew install helix
-    mkdir -p ~/.config/helix
-    cp -f dotfiles/.config/helix/config.toml ~/.config/helix/config.toml
+    rm -rf ~/.config/helix || true
+    ln -s {{justfile_directory()}}/dotfiles/.config/helix ~/.config/helix
+    just prep-base16-helix
     just prep-lsp-ai
+
+sync-hx:
+    hx --grammar fetch
+    hx --grammar build
+
+hx PROJ="forest":
+    #!/usr/bin/env zsh
+    cd ~/projects/{{PROJ}}
+    # export GITHUB_COPILOT_TOKEN=$(gh auth token)
+    hx
+
+# prep-hxcp:
+#     which copilot-language-server || npm install -g @github/copilot-language-server
+#     mkdir -p ~/.config/helix
+#     cp -f dotfiles/.config/helix/languages.toml ~/.config/helix/languages.toml
 
 prep-lsp-ai:
     which cargo || just prep-rust
     which lsp-ai || cargo install lsp-ai # -F llama_cpp -F metal
-    mkdir -p ~/.config/helix
-    cp -f dotfiles/.config/helix/languages.toml ~/.config/helix/languages.toml
-
-DS_MODEL := "deepseek-r1:7b"
-# DS_MODEL := "deepseek-r1:14b"
-# DS_MODEL := "deepseek-r1:32b"
-
-prep-om:
-    which ollama || brew install ollama
-
-om:
-    ollama serve
-
-ds:
-    ollama run {{DS_MODEL}}
-
-# VISUAL_MODEL := "llama3.2-vision"
-# VISUAL_MODEL := "minicpm-v"
-VISUAL_MODEL := "erwan2/DeepSeek-Janus-Pro-7B"
-
-lv:
-    ollama run {{VISUAL_MODEL}}
+    which marksman || brew install marksman
+    # mkdir -p ~/.config/helix
+    # cp -f dotfiles/.config/helix/languages.toml ~/.config/helix/languages.toml
 
 git PROJ="forest" *PARAMS="":
     #!/usr/bin/env zsh
     cd ~/projects/{{PROJ}} && lazygit {{PARAMS}}
 
-prep-homerow:
-    #!/usr/bin/env zsh
-    # which kanata || brew install kanata
-    # https://github.com/pqrs-org/Karabiner-DriverKit-VirtualHIDDevice/raw/refs/heads/main/dist/Karabiner-DriverKit-VirtualHIDDevice-5.0.0.pkg
-    # [ -d /Applications/.Karabiner-VirtualHIDDevice-Manager.app/Contents/MacOS ] || (echo You need to install Karabiner VirtualHiDDevice Driver from https://github.com/pqrs-org/Karabiner-DriverKit-VirtualHIDDevice/blob/main/dist/Karabiner-DriverKit-VirtualHIDDevice-5.0.0.pkg && exit 1)
-    # /Applications/.Karabiner-VirtualHIDDevice-Manager.app/Contents/MacOS/Karabiner-VirtualHIDDevice-Manager activate
-    # [ -d ../home-row-mods ] || git clone https://github.com/dreamsofcode-io/home-row-mods/ ../home-row-mods
-    # cd ../home-row-mods/kanata/macos
-    # sudo kanata -c kanata.kbd
-
-prep-exo:
-    # 1. we need uv venv --python 3.12 --seed
-    # 2. we need to install exo from source
-    echo "visit https://github.com/exo-explore/exo?tab=readme-ov-file#from-source"
-    # 3. we need to manually install pytorch in the venv
-    # 4. when in doubt, run: DEBUG=9 exo --disable-tui
-
-prep-tr:
-    brew install --cask buzz
-
-# just gs start -s SERVER_IP --token TOKEN
-# TOKEN is retrieved on server via:
-# cat /var/lib/gpustack/token
-gs *PARAMS:
-    #!/usr/bin/env zsh
-    uvx --python 3.12 --from 'gpustack[all]' gpustack {{PARAMS}}
-
-prep-pl:
-    curl -sL https://plandex.ai/install.sh | bash
-
-pl PROJ="forest":
-    #!/usr/bin/env zsh
-    cd ~/projects/{{PROJ}}
-    while read -r line; do
-        plandex $line
-    done
-
-prep-sg:
-    #!/usr/bin/env zsh
-    # https://docs.sglang.ai/start/install.html
-    uv pip install sgl-kernel --force-reinstall --no-deps
-    uv pip install "sglang[all]>=0.4.3.post2" --find-links https://flashinfer.ai/whl/cu124/torch2.5/flashinfer-python
-
-prep-mlx:
-    #!/usr/bin/env zsh
-    # https://kconner.com/2025/02/17/running-local-llms-with-mlx.html
-    # https://simonwillison.net/2025/Feb/15/llm-mlx/
-    uvx llm install llm-mlx
-
-# Models are downloaded to ~/.cache/huggingface/hub/
-# See https://github.com/simonw/llm-mlx?tab=readme-ov-file#models-to-try for models to try
-
-# just mlx download-model MODEL
-# just mlx models
-# just mlx import-models
-mlx *PARAMS:
-    #!/usr/bin/env zsh
-    uvx llm mlx {{PARAMS}}
-
-# just llm models default mlx-community/DeepSeek-R1-Distill-Qwen-32B-4bit
-# just llm chat -m MODEL
-llm *PARAMS:
-    #!/usr/bin/env zsh
-    uvx llm {{PARAMS}}
-
-# lms comes with LMStudio: https://github.com/lmstudio-ai/lms
-# I want it for https://github.com/lmstudio-ai/mlx-engine
-prep-lms:
-    #!/usr/bin/env zsh
-    npx lmstudio install-cli
-
-# lms get mlx-community/DeepSeek-R1-Distill-Qwen-32B-4bit
-# open ~/.cache/lm-studio
-# lms load mlx-community/DeepSeek-R1-Distill-Qwen-32B-4bit
-# lms server start
-lms *PARAMS:
-    #!/usr/bin/env zsh
-    lms {{PARAMS}}
-
-omni *PARAMS:
-    #!/usr/bin/env zsh
-    uvx mlx-omni-server {{PARAMS}}
-
-perf *PARAMS:
-    # run llm_perf.py using uv with package requests installed
-    uv run --with requests llm_perf.py {{PARAMS}}
 
 awake:
     caffeinate -d -s
 
-vlm *PARAMS:
-    #!/usr/bin/env zsh
-    # uvx --python 3.12 --from 'mlx-vlm' mlx_vlm.chat_ui {{PARAMS}}
-    uv run --python 3.12 --with 'mlx-vlm' --with torch python -m mlx_vlm.chat_ui {{PARAMS}}
+# prep-pod:
+#    # brew uninstall orbstack
+#    which docker || brew install docker
+#    brew install podman-desktop
+#    docker context use default
 
-lobe *PARAMS:
-    #!/usr/bin/env zsh
-    docker run -d -p 3210:3210 \
-      -e OPENAI_API_KEY={{env('OPENAI_API_KEY')}} \
-      -e OPENAI_PROXY_URL={{env('OPENAI_API_BASE')}} \
-      -e ACCESS_CODE=lobe66 \
-      --name lobe-chat \
-      lobehub/lobe-chat
+prep-pod:
+    which docker || brew install docker
+    which colima || brew install colima
+    docker context use default
+
+pod CMD="start":
+    colima {{CMD}}
 
 # https://bhoot.dev/2025/cp-dot-copies-everything/
 clone SRC DST:
     cp -R {{SRC}}/. {{DST}}
+
+# https://github.com/subframe7536/Maple-font
+prep-font:
+    brew install --cask font-maple-mono-nf-cn
+
+# https://github.com/kovidgoyal/kitty/issues/391#issuecomment-778703119
+# persistent session: abduco
+# multiplexer: dvtm
+# Creating a session
+# just tach -c name zsh
+# Ctrl+\ to detach, or use -e ^q to use Ctrl+q
+# Attaching to a session
+# BUT can't detach from within Helix
+# just tach -a name
+tach *PARAMS:
+    abduco {{PARAMS}}
+
+prep-tach:
+    which abduco || brew install abduco
+
+import 'dotfiles/llm.just'
+import 'dotfiles/archived.just'
+
