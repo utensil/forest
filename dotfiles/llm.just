@@ -231,3 +231,8 @@ lobe *PARAMS:
       -e ACCESS_CODE=lobe66 \
       --name lobe-chat \
       lobehub/lobe-chat
+
+# Not working
+prep-scr:
+    curl -fsSL get.screenpi.pe/cli | sh
+
