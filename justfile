@@ -401,12 +401,13 @@ zsh:
     zsh
 
 prep-git:
+    #!/usr/bin/env zsh
     which git || brew install git
     # list the current settings
-    git config --global --list
+    git config --list
     stty -echo
-    read -p "Enter your name (for git): " name
-    read -p "Enter your email: " email
+    read "Enter your name (for git): " name
+    read "Enter your email: " email
     git config --global user.name "$name"
     git config --global user.email "$email"
 
