@@ -400,6 +400,16 @@ prep-rust:
 zsh:
     zsh
 
+prep-git:
+    which git || brew install git
+    # list the current settings
+    git config --global --list
+    stty -echo
+    read -p "Enter your name (for git): " name
+    read -p "Enter your email: " email
+    git config --global user.name "$name"
+    git config --global user.email "$email"
+
 prep-delta:
     which delta || brew install git-delta
     git config --global core.pager "delta"
