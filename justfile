@@ -405,9 +405,10 @@ prep-git:
     which git || brew install git
     # list the current settings
     git config --list
-    stty -echo
-    read "Enter your name (for git): " name
-    read "Enter your email: " email
+    printf "Enter your name: "
+    read name
+    printf "Enter your email: "
+    read email
     git config --global user.name "$name"
     git config --global user.email "$email"
 
