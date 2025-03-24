@@ -236,5 +236,14 @@ lobe *PARAMS:
 prep-scr:
     curl -fsSL get.screenpi.pe/cli | sh
 
-rd *PARAMS:
-    uvx --python 3.12 ra-aid {{PARAMS}}
+# prep-rd:
+#     #!/usr/bin/env zsh
+#     which ra-aid || (brew tap ai-christianson/homebrew-ra-aid && brew install ra-aid)
+
+# -m Hi
+# --chat
+rd PROJ="forest" *PARAMS="":
+    #!/usr/bin/env zsh
+    cd ~/projects/{{PROJ}}
+    OPENAI_API_MODEL=${OPENAI_API_MODEL:-"claude-3.5-sonnet"}
+    uvx --python 3.12 ra-aid --model $OPENAI_API_MODEL {{PARAMS}}
