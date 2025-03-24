@@ -236,3 +236,5 @@ lobe *PARAMS:
 prep-scr:
     curl -fsSL get.screenpi.pe/cli | sh
 
+rd *PARAMS:
+    uvx --python 3.12 ra-aid {{PARAMS}}
