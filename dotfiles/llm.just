@@ -15,7 +15,7 @@ prep-aider:
     [[ -f ~/.config/claude/claude_desktop_config.json ]] || echo '{"mcpServers": {} }' > ~/.config/claude/claude_desktop_config.json
 
 sync-aider:
-    cp -f aider /usr/local/bin
+    cp -f aider /usr/local/bin || sudo cp -f aider /usr/local/bin
 
 # just mcp search
 # just mcp install XXX
