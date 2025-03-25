@@ -378,13 +378,13 @@ nv-local PROJ="forest" PORT="1212":
     just nvim {{PROJ}} --server localhost:{{PORT}} --remote-ui
 
 # an alternative is use local on CentOS and remote on Ubuntu in docker, no chisel needed, just docekr port mapping
-lv-remote PROJ="forest" PORT="1214":
+lv-remote PROJ="forest" HOST="0.0.0.0" PORT="1214":
     #!/usr/bin/env zsh
-    just lvim {{PROJ}} --embed --listen 0.0.0.0:{{PORT}}
+    just lvim {{PROJ}} --embed --listen {{HOST}}:{{PORT}}
 
-lv-local PROJ="forest" PORT="1214":
+lv-local PROJ="forest" HOST="localhost" PORT="1214":
     #!/usr/bin/env zsh
-    just lvim {{PROJ}} --server localhost:{{PORT}} --remote-ui
+    just lvim {{PROJ}} --server {{HOST}}:{{PORT}} --remote-ui
 
 prep-rust:
     #!/usr/bin/env bash
