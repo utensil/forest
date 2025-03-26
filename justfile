@@ -575,6 +575,13 @@ tach *PARAMS:
 prep-tach:
     which abduco || brew install abduco
 
+# Inspired by https://github.com/Ranchero-Software/NetNewsWire/issues/978#issuecomment-1320911427
+rss-stars:
+    #!/usr/bin/env zsh
+    cd ~/Library/Containers/com.ranchero.NetNewsWire-Evergreen/Data/Library/Application\ Support/NetNewsWire/Accounts/2_iCloud
+    # get a JSON of all the starred items with only title, url, externalURL, datePublished
+    sqlite3 DB.sqlite3 '.mode json' 'select * from articles a join statuses s on a.articleID = s.articleID where s.starred = 1 order by a.datePublished'|jq -r '.[]|{title, url, externalURL, datePublished}'
+
 import 'dotfiles/llm.just'
 import 'dotfiles/archived.just'
 
