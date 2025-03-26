@@ -3,6 +3,7 @@ set dotenv-load
 export PROJECT_ROOT := justfile_directory()
 export HOMEBREW_NO_AUTO_UPDATE := "1"
 export XDG_CONFIG_HOME := home_directory() / ".config"
+export TERM := "xterm-256color"
 
 default:
     just --list
@@ -400,9 +401,14 @@ prep-rust:
 zsh:
     zsh
 
+# a ssh that inherits .env etc.
+ssh *PARAMS:
+    ssh {{PARAMS}}
+
 prep-git:
     #!/usr/bin/env zsh
     which git || brew install git
+    which gh || brew install gh
     # list the current settings
     git config --list
     printf "Enter your name: "
@@ -411,6 +417,10 @@ prep-git:
     read email
     git config --global user.name "$name"
     git config --global user.email "$email"
+    git config --global --unset credential.helper
+    git config --global credential.helper "store --file ~/.git-credentials"
+    gh auth status || gh auth login
+    gh auth setup-git
 
 prep-delta:
     which delta || brew install git-delta
