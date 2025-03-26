@@ -64,3 +64,52 @@ When editing the learning diary:
 - read \citek{roelfs2025willing}, the [Kingdon](https://github.com/tBuLi/kingdon) paper
 }
 ```
+
+## Processing RSS Stars
+
+When processing output from `just rss-stars`, follow these guidelines:
+
+1. Data Structure Understanding:
+   ```json
+   {
+     "title": "Article Title",
+     "url": "Primary URL (often Lobste.rs)",
+     "externalURL": "Original source URL",
+     "datePublished": Unix timestamp
+   }
+   ```
+
+2. URL Selection:
+   - Always prefer externalURL when available
+   - Only use url when externalURL is null
+   - Links should be in format: `[Title](URL)`
+
+3. Date Processing:
+   - Convert Unix timestamp (datePublished) to YYYY-MM-DD format
+   - Find or create the corresponding date block in the diary
+   - If multiple entries share same date, group under same mdblock
+   - Maintain chronological order within the diary
+
+4. Entry Integration:
+   - Add entries under existing date blocks if present
+   - Create new date blocks if needed
+   - Use the "read" prefix for completed readings
+   - Group related items under topic headers if multiple exist
+
+Example transformation:
+```json
+{
+  "title": "Example Article",
+  "url": "https://lobste.rs/s/example",
+  "externalURL": "https://original.com/article",
+  "datePublished": 1742748008
+}
+```
+Becomes:
+```
+\mdblock{2025-03-24}{
+- read [Example Article](https://original.com/article)
+}
+```
+
+Always maintain the diary's existing structure and formatting conventions while integrating new entries.
