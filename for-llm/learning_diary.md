@@ -86,6 +86,10 @@ When processing output from `just rss-stars`, follow these guidelines:
 
 3. Date Processing:
    - Convert Unix timestamp (datePublished) to YYYY-MM-DD format
+   - Validate the converted date:
+     - Issue warnings for dates before 2020 or after 2026
+     - Include the full entry details in the warning
+     - Skip adding entries with invalid dates to the diary
    - Find or create the corresponding date block in the diary
    - If multiple entries share same date, group under same mdblock
    - Maintain chronological order within the diary
