@@ -585,6 +585,22 @@ rss-stars:
 stars:
     just rss-stars|./stars.py
 
+# https://thinkingelixir.com/install-elixir-using-asdf/
+# prep-asdf:
+#     which asdf || brew install asdf
+#     just prep-rc
+
+# prep-ex: prep-asdf
+#     asdf plugin add elixir https://github.com/asdf-vm/asdf-elixir.git
+#     asdf install elixir v1.18
+#     asdf global elixir ref:v1.18
+
+prep-ex:
+    which iex || brew install elixir
+    which elixir
+    which elixirc
+    which mix
+
 import 'dotfiles/llm.just'
 import 'dotfiles/archived.just'
 
