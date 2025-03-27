@@ -8,9 +8,13 @@
 
 \strong{Useful macros from [[jonmsterling]]'s [macros](https://git.sr.ht/~jonsterling/public-trees/tree/main/item/base-macros.tree)}
 
-\p{\code{citek[refid]}: Refer to a reference entry with brackets.}
+\p{\code{citek[refid]}: Refer to a reference entry with only its id, and surrouding brackets.}
 
 \def\citek[refid]{\let\escape[x]{\x}\<html:span>[class]{link-reference}{[\escape{[\refid]}](\refid)}}
+
+\p{\code{citef[refid]}: Refer to a reference entry with the full title, and the id like \code{citek}.}
+
+\def\citef[refid]{\let\escape[x]{\x}\<html:span>[class]{link-reference-full}{[\escape{[\refid]}](\refid)}}
 
 \p{\code{mark[body]}: Some yellow background mark text.}
 

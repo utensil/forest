@@ -12,7 +12,8 @@ body {
 
 :root {
     /* 16:9 */
-    --uts-canvas-width: 80%; /* 80ex; */
+    --uts-canvas-width: 80%;
+    /* 80ex; */
     --uts-canvas-height: 45ex;
 }
 
@@ -164,10 +165,18 @@ nav#toc a.slug {
 }
 
 /* This applies to references, including in title, main text, backmatter, but not in toc */
-.link-reference a {
+.link-reference a,
+.link-reference-full a {
     color: var(--uts-text-cite) !important;
     box-shadow: none !important;
     text-decoration: none !important;
+}
+
+.link-reference-full a .link-title {
+    color: var(--uts-text-gentle) !important;
+    margin-right: 0.5ex;
+    /* font-style: italic; */
+    /* font-weight: bold; */
 }
 
 .link-reference .link.external {
@@ -225,18 +234,21 @@ img[src^="data:image/svg+xml"] {
 }
 
 [data-taxon="Remark"] {
-    --taxon-color: #97da9b; /* #239f5c; */
+    --taxon-color: #97da9b;
+    /* #239f5c; */
 }
 
 [data-taxon="Example"] {
-    --taxon-color: #e28563; /* #d7511f #cd7e62 #9e3c17 #8C2700 */
+    --taxon-color: #e28563;
+    /* #d7511f #cd7e62 #9e3c17 #8C2700 */
 }
 
 [data-taxon="Theorem"],
 [data-taxon="Lemma"],
 [data-taxon="Corollary"],
 [data-taxon="Proof"] {
-    --taxon-color: #95dbfc; /* #006994; */
+    --taxon-color: #95dbfc;
+    /* #006994; */
 }
 
 [data-taxon="Notation"] {
@@ -256,19 +268,15 @@ section[data-taxon] {
     margin: 1em 0 1em 0;
     padding: 1em 1em 1em 1em;
     border-left: 5px solid var(--taxon-color);
-    background-color: color-mix(
-        in srgb,
-        var(--taxon-color) 6%,
-        var(--uts-background) 94%
-    );
+    background-color: color-mix(in srgb,
+            var(--taxon-color) 6%,
+            var(--uts-background) 94%);
 }
 
 section[data-taxon]:hover {
-    background-color: color-mix(
-        in srgb,
-        var(--taxon-color) 12%,
-        var(--uts-background) 88%
-    );
+    background-color: color-mix(in srgb,
+            var(--taxon-color) 12%,
+            var(--uts-background) 88%);
 }
 
 section[data-taxon] h1 span.taxon,
@@ -358,11 +366,9 @@ span.vocab {
 
 span.vocab .link.local a {
     /* text-decoration-style: solid; */
-    text-decoration-color: color-mix(
-        in srgb,
-        var(--uts-vocab) 40%,
-        var(--uts-background) 60%
-    );
+    text-decoration-color: color-mix(in srgb,
+            var(--uts-vocab) 40%,
+            var(--uts-background) 60%);
     color: var(--uts-vocab) !important;
 }
 
@@ -376,12 +382,12 @@ span.vocab .link.local a {
     border-radius: 5px 0px 0px 5px;
 } */
 
-#toc > .block > ul > li > span.link.local {
+#toc>.block>ul>li>span.link.local {
     font-weight: bold;
     /* border-bottom: 1px solid var(--uts-text-gentle); */
 }
 
-#toc > .block > ul > li > ul.block {
+#toc>.block>ul>li>ul.block {
     margin-top: 0.5em;
 }
 
@@ -407,7 +413,7 @@ nav#toc {
     flex-wrap: wrap;
 }
 
-nav#toc > .block {
+nav#toc>.block {
     --offset: 1em;
     --eh: 100%;
     --vh: 100vh;
@@ -421,7 +427,7 @@ nav#toc > .block {
     animation-timeline: scroll(); */
 }
 
-nav#toc > .block > ul.block {
+nav#toc>.block>ul.block {
     max-height: calc(80vh - var(--offset) * 2);
     overflow-y: auto;
 }
@@ -539,8 +545,10 @@ nav#toc li.active {
 
 .todo {
     display: block;
-    background-color: rgba(255, 255, 0, 0.1); /* light sepia */
-    border: 1px solid rgb(129, 129, 24); /* dark sepia */
+    background-color: rgba(255, 255, 0, 0.1);
+    /* light sepia */
+    border: 1px solid rgb(129, 129, 24);
+    /* dark sepia */
     border-radius: 5px;
     padding: 1em;
     margin: 1em 0;
@@ -679,24 +687,24 @@ code.highlight.grace-loading {
     counter-reset: ol;
     list-style-type: none;
 
-    > li {
+    >li {
         counter-increment: ol;
 
-        > ol {
+        >ol {
             counter-reset: ol2;
             list-style-type: none;
 
-            > li {
+            >li {
                 counter-increment: ol2;
             }
 
-            > li::before {
+            >li::before {
                 content: counter(ol2, lower-roman) ") ";
             }
         }
     }
 
-    > li::before {
+    >li::before {
         content: counter(ol, numeric) ") ";
     }
 }
@@ -735,6 +743,7 @@ code.highlight.grace-loading {
 }
 
 :root[data-applied-mode="dark"] {
+
     svg.embedded-tex-svg,
     img.embedded-tex-svg {
         filter: invert(0.85);
@@ -758,6 +767,7 @@ code.highlight.grace-loading {
     .grace-loading {
         filter: invert(0.85);
     }
+
     .markdownit.grace-loading,
     code.highlight.grace-loading {
         filter: unset;
