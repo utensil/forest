@@ -5,12 +5,15 @@ This document describes the format for maintaining a learning diary that can be 
 ## Entry Structure
 
 ### Date Blocks
-Entries are organized in chronological blocks (newest first) using this format:
+Entries are organized by arrival date (newest first) using this format:
 ```
 \mdblock{YYYY-MM-DD}{
 - content
 }
 ```
+
+The block date should be the publication date (datePublished) converted from Unix timestamp.
+Entries are sorted by arrival date (dateArrived) in descending order within the diary.
 
 Date formats:
 - Single day: `2025-03-24`
@@ -74,8 +77,9 @@ When processing output from `just rss-stars`, follow these guidelines:
    {
      "title": "Article Title",
      "url": "Primary URL (often Lobste.rs)",
-     "externalURL": "Original source URL",
-     "datePublished": Unix timestamp
+     "externalURL": "Original source URL", 
+     "datePublished": Unix timestamp,
+     "dateArrived": Unix timestamp
    }
    ```
 
@@ -85,14 +89,14 @@ When processing output from `just rss-stars`, follow these guidelines:
    - Links should be in format: `[Title](URL)`
 
 3. Date Processing:
-   - Convert Unix timestamp (datePublished) to YYYY-MM-DD format
+   - Convert Unix timestamp (datePublished) to YYYY-MM-DD format for the mdblock date
    - Validate the converted date:
      - Issue warnings for dates before 2020 or after 2026
      - Include the full entry details in the warning
      - Skip adding entries with invalid dates to the diary
    - Find or create the corresponding date block in the diary
    - If multiple entries share same date, group under same mdblock
-   - Maintain chronological order within the diary
+   - Sort entries by dateArrived timestamp (newest first) within the diary
 
 4. Entry Integration:
    - Add entries under existing date blocks if present

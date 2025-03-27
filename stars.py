@@ -39,7 +39,7 @@ def process_stars(input_text):
                     entry = json.loads("\n".join(content_lines))
 
                     # Convert timestamp to date
-                    date = datetime.fromtimestamp(entry["datePublished"]).strftime(
+                    date = datetime.fromtimestamp(entry["dateArrived"]).strftime(
                         "%Y-%m-%d"
                     )
 
