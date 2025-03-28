@@ -9,7 +9,7 @@ A tree file can:
 - Export macros for use by other trees using \export{macros}
 - Import macros from other trees using \import{name}
 - Define new macros with \def\name[param]{definition}
-- Use topic tags either as comments (% tag1 tag2) or commands (\tag{tag})
+- Use topic tags either as or commands (\tag{tag})
 
 ## File Structure
 - Trees are stored as `.tree` files
@@ -27,7 +27,6 @@ Common imports and metadata at the start of the file:
 ```
 \import{macros}     # Import common macros
 \import{other-tree} # Import definitions from another tree
-% topic1 topic2     # Topic tags as comments
 \tag{topic1}        # Topic tags via command
 \tag{topic2}
 \taxon{type}       # Document type classification
