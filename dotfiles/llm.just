@@ -242,6 +242,7 @@ prep-scr:
 
 # -m Hi
 # --chat
+# --use-aider
 rd PROJ="forest" *PARAMS="":
     #!/usr/bin/env zsh
     cd ~/projects/{{PROJ}}
