@@ -506,7 +506,7 @@ prep-hx:
     rm -rf ~/.config/helix || true
     ln -s {{justfile_directory()}}/dotfiles/.config/helix ~/.config/helix
     just prep-base16-helix
-    just prep-lsp-ai
+    # just prep-lsp-ai
 
 sync-hx:
     hx --grammar fetch
