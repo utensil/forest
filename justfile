@@ -545,7 +545,7 @@ awake:
 #    docker context use default
 
 prep-pod:
-    which docker || brew install docker
+    which docker || (brew install docker; brew link docker)
     which colima || brew install colima
     docker context use default
 
@@ -600,6 +600,16 @@ prep-ex:
     which elixir
     which elixirc
     which mix
+
+prep-fj:
+    docker pull data.forgejo.org/forgejo/forgejo:10
+
+FJ_DIR :=  join(home_directory(), ".forgejo")
+
+fj:
+    #!/usr/bin/env zsh
+    mkdir -p {{FJ_DIR}}/ssh
+    docker run --rm -it -e USER_UID=$(id -u) -e USER_GID=$(id -g) --env-file .env -p 23000:3000 -p 2222:22 -v {{FJ_DIR}}:/data -v /etc/timezone:/etc/timezone:ro -v /etc/localtime:/etc/localtime:ro data.forgejo.org/forgejo/forgejo:10
 
 import 'dotfiles/llm.just'
 import 'dotfiles/archived.just'
