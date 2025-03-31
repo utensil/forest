@@ -12,6 +12,16 @@ set -eo
 #     fi
 # fi
 
+brew uninstall texlive || true
+brew install --cask mactex
+
+if ! command -v opam exec forester -- --help|head &> /dev/null; then
+  brew install opam  watchexec
+  opam init --auto-setup --yes
+  opam update --yes
+  opam pin add forester git+https://git.sr.ht/~jonsterling/ocaml-forester#56de06afe952d752c1a13fdcd8bb56c5fef9956f --yes
+fi
+
 # if bun is not installed
 if ! command -v bun &> /dev/null; then
   # install bun
@@ -24,5 +34,5 @@ if ! command -v just &> /dev/null; then
   curl --proto '=https' --tlsv1.2 -sSf https://just.systems/install.sh | bash -s -- --to /usr/local/bin
 fi
 
-echo "✅ dependencies installed: bun, just"
-echo "💡 To initialize just aliases: source alias.sh"
+echo "✅ dependencies installed: mactex, forester, bun, just"
+# echo "💡 To initialize just aliases: source alias.sh"

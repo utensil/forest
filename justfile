@@ -30,6 +30,15 @@ chk:
 thm:
     ./thm.sh
 
+prep:
+    ./prep.sh
+
+init: prep
+    #!/usr/bin/env zsh
+    bun install
+    just thm
+
+
 prep-bib:
     @echo "pyenv shell 3.11"
     @echo "pip3 install bibtexparser"
