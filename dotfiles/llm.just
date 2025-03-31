@@ -248,3 +248,16 @@ rd PROJ="forest" *PARAMS="":
     cd ~/projects/{{PROJ}}
     OPENAI_API_MODEL=${OPENAI_API_MODEL:-"claude-3.5-sonnet"}
     uvx --python 3.12 ra-aid --model $OPENAI_API_MODEL {{PARAMS}}
+
+# --output .
+# --enrich-code
+# --enrich-formula
+# --enrich-picture-classes
+# --enrich-picture-description
+# --image-export-mode [placeholder|embedded|referenced]
+dl *PARAMS:
+    uvx --with mlx-vlm docling {{PARAMS}}
+
+# DOC could be a local file or an URL
+dlmd DOC:
+    just dl --pipeline vlm --vlm-model smoldocling {{DOC}}
