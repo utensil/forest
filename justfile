@@ -506,7 +506,7 @@ prep-hx:
     rm -rf ~/.config/helix || true
     ln -s {{justfile_directory()}}/dotfiles/.config/helix ~/.config/helix
     just prep-base16-helix
-    just prep-lsp-ai
+    # just prep-lsp-ai
 
 sync-hx:
     hx --grammar fetch
@@ -545,7 +545,7 @@ awake:
 #    docker context use default
 
 prep-pod:
-    which docker || brew install docker
+    which docker || (brew install docker; brew link docker)
     which colima || brew install colima
     docker context use default
 
@@ -574,6 +574,42 @@ tach *PARAMS:
 
 prep-tach:
     which abduco || brew install abduco
+
+# Inspired by https://github.com/Ranchero-Software/NetNewsWire/issues/978#issuecomment-1320911427
+rss-stars:
+    #!/usr/bin/env zsh
+    cd ~/Library/Containers/com.ranchero.NetNewsWire-Evergreen/Data/Library/Application\ Support/NetNewsWire/Accounts/2_iCloud
+    # get a JSON of all the starred items with only title, url, externalURL, datePublished
+    sqlite3 DB.sqlite3 '.mode json' 'select a.*, s.* from articles a join statuses s on a.articleID = s.articleID where s.starred = 1 order by s.dateArrived' |jq -r '.[]|{title, url, externalURL, datePublished, dateArrived}'
+
+stars:
+    just rss-stars|./stars.py
+
+# https://thinkingelixir.com/install-elixir-using-asdf/
+# prep-asdf:
+#     which asdf || brew install asdf
+#     just prep-rc
+
+# prep-ex: prep-asdf
+#     asdf plugin add elixir https://github.com/asdf-vm/asdf-elixir.git
+#     asdf install elixir v1.18
+#     asdf global elixir ref:v1.18
+
+prep-ex:
+    which iex || brew install elixir
+    which elixir
+    which elixirc
+    which mix
+
+prep-fj:
+    docker pull data.forgejo.org/forgejo/forgejo:10
+
+FJ_DIR :=  join(home_directory(), ".forgejo")
+
+fj:
+    #!/usr/bin/env zsh
+    mkdir -p {{FJ_DIR}}/ssh
+    docker run --rm -it -e USER_UID=$(id -u) -e USER_GID=$(id -g) --env-file .env -p 23000:3000 -p 2222:22 -v {{FJ_DIR}}:/data -v /etc/timezone:/etc/timezone:ro -v /etc/localtime:/etc/localtime:ro data.forgejo.org/forgejo/forgejo:10
 
 import 'dotfiles/llm.just'
 import 'dotfiles/archived.just'

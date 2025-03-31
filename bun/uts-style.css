@@ -12,7 +12,8 @@ body {
 
 :root {
     /* 16:9 */
-    --uts-canvas-width: 80%; /* 80ex; */
+    --uts-canvas-width: 80%;
+    /* 80ex; */
     --uts-canvas-height: 45ex;
 }
 
@@ -164,10 +165,18 @@ nav#toc a.slug {
 }
 
 /* This applies to references, including in title, main text, backmatter, but not in toc */
-.link-reference a {
+.link-reference a,
+.link-reference-full a {
     color: var(--uts-text-cite) !important;
     box-shadow: none !important;
     text-decoration: none !important;
+}
+
+.link-reference-full a .link-title {
+    color: var(--uts-text-gentle) !important;
+    margin-right: 0.5ex;
+    /* font-style: italic; */
+    /* font-weight: bold; */
 }
 
 .link-reference .link.external {
@@ -225,18 +234,21 @@ img[src^="data:image/svg+xml"] {
 }
 
 [data-taxon="Remark"] {
-    --taxon-color: #97da9b; /* #239f5c; */
+    --taxon-color: #97da9b;
+    /* #239f5c; */
 }
 
 [data-taxon="Example"] {
-    --taxon-color: #e28563; /* #d7511f #cd7e62 #9e3c17 #8C2700 */
+    --taxon-color: #e28563;
+    /* #d7511f #cd7e62 #9e3c17 #8C2700 */
 }
 
 [data-taxon="Theorem"],
 [data-taxon="Lemma"],
 [data-taxon="Corollary"],
 [data-taxon="Proof"] {
-    --taxon-color: #95dbfc; /* #006994; */
+    --taxon-color: #95dbfc;
+    /* #006994; */
 }
 
 [data-taxon="Notation"] {
@@ -539,8 +551,10 @@ nav#toc li.active {
 
 .todo {
     display: block;
-    background-color: rgba(255, 255, 0, 0.1); /* light sepia */
-    border: 1px solid rgb(129, 129, 24); /* dark sepia */
+    background-color: rgba(255, 255, 0, 0.1);
+    /* light sepia */
+    border: 1px solid rgb(129, 129, 24);
+    /* dark sepia */
     border-radius: 5px;
     padding: 1em;
     margin: 1em 0;
@@ -758,6 +772,7 @@ code.highlight.grace-loading {
     .grace-loading {
         filter: invert(0.85);
     }
+
     .markdownit.grace-loading,
     code.highlight.grace-loading {
         filter: unset;
