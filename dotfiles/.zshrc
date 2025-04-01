@@ -9,6 +9,9 @@ eval "$(zoxide init zsh)"
 # ---- FZF -----
 
 # Set up fzf key bindings and fuzzy completion
+# Ctrl+t list files+folders in current directory
+# Ctrl+r search history of shell commands
+# Alt+c fuzzy change directory
 eval "$(fzf --zsh)"
 
 # --- setup fzf theme ---
