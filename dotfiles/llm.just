@@ -248,3 +248,7 @@ rd PROJ="forest" *PARAMS="":
     cd ~/projects/{{PROJ}}
     OPENAI_API_MODEL=${OPENAI_API_MODEL:-"claude-3.5-sonnet"}
     uvx --python 3.12 ra-aid --model $OPENAI_API_MODEL {{PARAMS}}
+
+# Not working yet
+dt:
+    uv run --python 3.11 --with 'detikzify @ git+https://github.com/potamides/DeTikZify' -m detikzify.webui --light
