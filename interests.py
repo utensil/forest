@@ -77,8 +77,8 @@ if __name__ == "__main__":
 {issue["content"]}
 }}
 """
-        print(f"Would create tree: {tree_name}.tree")
-        print("=" * 80)
-        print(tree_content)
-        print("=" * 80)
-        print()
+        # Create the tree file
+        tree_path = trees_dir / f"{tree_name}.tree"
+        with open(tree_path, "w", encoding="utf-8") as f:
+            f.write(tree_content)
+        print(f"Created tree: {tree_path}")
