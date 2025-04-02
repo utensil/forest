@@ -63,29 +63,25 @@ if __name__ == "__main__":
     ]
     next_num = max(existing_trees) + 1 if existing_trees else 1
 
+    # First create all trees and store their IDs
+    tree_ids = []
     for issue in issues:
-        # Generate tree filename
         tree_name = f"uts-{next_num:04d}"
+        tree_ids.append((issue, tree_name))
         next_num += 1
 
-        escaped_content = issue[
-            "content"
-        ]  # .replace("%", "\\%")  # .replace("\\", "\\\\")
-
-        # replace % in markdown URLs with \%
+        escaped_content = issue["content"]
         for url in re.findall(r"\[([^\]]+)\]\(([^)]+)\)", escaped_content):
             escaped_content = escaped_content.replace(
                 url[1], url[1].replace("%", "\\%")
             )
 
-        # remove HTML img tags that are from https://avatars.githubusercontent.com/
         escaped_content = re.sub(
             r'<img src="https://avatars.githubusercontent.com/[^"]+"[^>]*>',
             "",
             escaped_content,
         )
 
-        # Create Forester tree content
         tree_content = f"""\\import{{macros}}\\title{{{issue["title"]}}}
 \\date{{{issue["date"]}}}
 \\author{{{issue["opener"]}}}
@@ -94,8 +90,26 @@ if __name__ == "__main__":
 {escaped_content}
 }}
 """
-        # Create the tree file
         tree_path = trees_dir / f"{tree_name}.tree"
         with open(tree_path, "w", encoding="utf-8") as f:
             f.write(tree_content)
         print(f"Created tree: {tree_path}")
+
+    # Then create index using the stored tree IDs
+    if tree_ids:
+        # Sort by date descending using the stored IDs
+        sorted_trees = sorted(tree_ids, key=lambda x: x[0]["date"], reverse=True)
+
+        index_content = """\\title{Interests in early years}
+
+\\ul{
+"""
+        for issue, tree_id in sorted_trees:
+            index_content += f"  \\li{{{issue['date']} [[{tree_id}]]}}\n"
+
+        index_content += "}\n"
+
+        index_path = trees_dir / f"uts-{next_num:04d}.tree"
+        with open(index_path, "w", encoding="utf-8") as f:
+            f.write(index_content)
+        print(f"Created index tree: {index_path}")
