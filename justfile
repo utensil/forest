@@ -611,6 +611,13 @@ fj:
     mkdir -p {{FJ_DIR}}/ssh
     docker run --rm -it -e USER_UID=$(id -u) -e USER_GID=$(id -g) --env-file .env -p 23000:3000 -p 2222:22 -v {{FJ_DIR}}:/data -v /etc/timezone:/etc/timezone:ro -v /etc/localtime:/etc/localtime:ro data.forgejo.org/forgejo/forgejo:10
 
+# relies on GITHUB_ACCESS_TOKEN
+gh2md REPO OUTPUT *PARAMS="--no-prs":
+    #!/usr/bin/env zsh
+    GITHUB_ACCESS_TOKEN=$(gh auth token) uvx gh2md --idempotent {{PARAMS}} {{REPO}} {{OUTPUT}}
+    # https://github.com/mattduck/gh2md/issues/39
+    # docker run --rm -it -e GITHUB_ACCESS_TOKEN=$(gh auth token) dockerproxy.net/library/python:3.11.2 bash -c 'pip install gh2md && gh2md --idempotent {{REPO}} {{OUTPUT}}'
+
 import 'dotfiles/llm.just'
 import 'dotfiles/archived.just'
 
