@@ -7,7 +7,7 @@
  */
 import markdownit from 'markdown-it'
 
-const md = markdownit({ html: true })
+const md = markdownit({ html: true, linkify: true })
 
 const markdownit_tags = document.querySelectorAll('.markdownit.grace-loading')
 // console.log(markdownit_tags);
