@@ -33,7 +33,7 @@ def parse_interests(md_content):
                 # Extract content after first #### line
                 content_start = section.find("####")
                 if content_start != -1:
-                    content = section[content_start + 4 :].strip()
+                    content = section[content_start:].strip()
                 else:
                     content = ""
 
@@ -68,13 +68,30 @@ if __name__ == "__main__":
         tree_name = f"uts-{next_num:04d}"
         next_num += 1
 
+        escaped_content = issue[
+            "content"
+        ]  # .replace("%", "\\%")  # .replace("\\", "\\\\")
+
+        # replace % in markdown URLs with \%
+        for url in re.findall(r"\[([^\]]+)\]\(([^)]+)\)", escaped_content):
+            escaped_content = escaped_content.replace(
+                url[1], url[1].replace("%", "\\%")
+            )
+
+        # remove HTML img tags that are from https://avatars.githubusercontent.com/
+        escaped_content = re.sub(
+            r'<img src="https://avatars.githubusercontent.com/[^"]+"[^>]*>',
+            "",
+            escaped_content,
+        )
+
         # Create Forester tree content
-        tree_content = f"""\\title{{{issue["title"]}}}
+        tree_content = f"""\\import{{macros}}\\title{{{issue["title"]}}}
 \\date{{{issue["date"]}}}
 \\author{{{issue["opener"]}}}
 
 \\md{{
-{issue["content"]}
+{escaped_content}
 }}
 """
         # Create the tree file
