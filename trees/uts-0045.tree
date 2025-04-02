@@ -1,0 +1,59 @@
+\import{macros}\title{Investigate Paxos-related with TLA+ in mind}
+\date{2018-09-26}
+\author{utensil}
+
+\md{
+#### [utensil](https://github.com/utensil) opened issue at [2018-09-26 06:22](https://github.com/utensil/utensil.github.io/issues/125):
+
+- Paxos
+  - https://zhuanlan.zhihu.com/p/21895686
+  - http://rystsov.info/2016/05/01/paxos.html#visualization
+- Raft
+  - https://raft.github.io/slides/raftuserstudy2013.pdf
+  - http://thesecretlivesofdata.com/raft/
+  - http://open.qiniudn.com/ecug-2016/thought-of-tidb-tech-choices.pdf
+  - https://github.com/pingcap/raft-rs/blob/master/examples/single_mem_node/main.rs
+  - https://www.jianshu.com/p/81fe3e4f51a5
+  - http://hustcat.github.io/go_raft_in_etcd/
+- ZK
+  - https://blog.acolyer.org/2015/01/27/zookeeper-wait-free-coordination-for-internet-scale-systems/
+  - ZAB: http://www.solinx.co/archives/435
+  - ZAB: https://my.oschina.net/u/1378920/blog/914215
+  - Raft vs. ZAB: https://my.oschina.net/pingpangkuangmo/blog/782702
+- Vs.
+  - http://jonathanb.me/DistributedConsensusProtocols.pdf
+  - https://zhuanlan.zhihu.com/p/31119178
+  - http://baotiao.github.io/2017/11/08/state-machine-vs-primary-backup/
+- TLA+
+  - https://lamport.azurewebsites.net/tla/summary.pdf
+- MySQL MGR
+  - http://mysqlhighavailability.com/order-from-chaos-member-coordination-in-group-replication/
+  - http://mysqlhighavailability.com/the-king-is-dead-long-live-the-king-our-homegrown-paxos-based-consensus/
+  - http://mysqlhighavailability.com/good-leaders-are-game-changers-raft-paxos/
+  - https://www.slideshare.net/alfranio1/group-replication-a-journey-to-the-group-communication-core-71845289
+  - http://paxos.systems/variants.html
+  - [Replicated State Machine in Wide-area Networks](https://pdfs.semanticscholar.org/presentation/0c09/d0662bc1ae0d25028685d900fa5a32fbb971.pdf)
+
+#### [utensil](https://github.com/utensil) commented at [2023-08-24 03:21](https://github.com/utensil/utensil.github.io/issues/125#issuecomment-1690933060):
+
+- https://github.com/leanprover-community/iris-lean (updated: 3 weeks ago)
+  - has: Higher-Order Concurrent Separation Logic
+  - ref: https://iris-project.org/
+- https://github.com/loganrjmurphy/lean-temporal (updated: Nov 11, 2020)
+  - has: LTL (Linear Temporal Logic) + CTL (Computational Tree Logic)
+  - ref: Baier, Christel, and Joost-Pieter Katoen. Principles of model checking. MIT press, 2008
+- https://github.com/unitb/temporal-logic (updated: Nov 1, 2018)
+  - has: LTL + refinement 
+  - ref: https://lean-forward.github.io/lean-together/2019/slides/hudon.pdf
+  - see also: 
+    - its usage in [unitb-semantics](https://github.com/unitb/unitb-semantics), ref: https://arxiv.org/abs/1810.10143
+    - [separation-logic](https://github.com/unitb/separation-logic)
+- https://github.com/GaloisInc/lean-protocol-support/tree/master/galois/temporal (updated: Sep 22, 2017)
+  - has: LTL + LTS (Labelled Transition System)
+  - ref: Roberto Gorrieri. Process Algebras for Petri Nets: The Alphabetization of Distributed Systems. Springer, 2017
+
+- https://pron.github.io/posts/tlaplus_part1
+- https://github.com/HappyCS-Gu/Parallel-Raft-tla
+- https://github.com/fpaxos/raft.tla
+- https://github.com/uwplse/verdi
+}

@@ -1,0 +1,67 @@
+\import{macros}\title{Write C++ backend server guide}
+\date{2016-04-15}
+\author{utensil}
+
+\md{
+#### [utensil](https://github.com/utensil) opened issue at [2016-04-15 14:33](https://github.com/utensil/utensil.github.io/issues/69):
+
+## Toolchain
+
+such as:
+- http://www3.ntu.edu.sg/home/ehchua/programming/cpp/gcc_make.html
+- http://www.csee.umbc.edu/courses/undergraduate/202/fall04/Projects/CommonErrors.shtml
+- https://www.gnu.org/software/make/manual/html_node/Implicit-Rules.html#Implicit-Rules
+- https://www.gnu.org/software/make/manual/html_node/Implicit-Variables.html
+- https://www.gnu.org/prep/standards/html_node/Makefile-Conventions.html
+- http://www.oreilly.com/openbook/make3/book/ch07.pdf
+## QA
+
+such as:
+- character encoding: UTF-8
+- coding standard: https://github.com/utensil/behind-programming/blob/master/cpp_coding_standards.md
+- formatting: astyle/clang-format
+- compile: CMake
+- static/dynamic analyze:
+  - clang-analyzer
+  - cppcheck
+  - valgrind
+  - perf
+- test: Google Test
+- doc: Doxygen
+## Design
+- soft restart
+- multi-queue networking
+- http://www.kegel.com/c10k.html
+- libuv-like async io/idle connection
+- interprocess and interthread comunication cost
+- typical synchronize situation and solution/double buffer
+- process, thread and coroutine
+- logging
+- load so
+- rpc/serialize: thrift/capnproto
+- service route
+- ha/lvs/dns-like
+- auto-heal
+- leader-follower-arbitor/remote lock
+- mq
+- adaptive timeout
+- compression
+- cache beyond kv/local to global
+- call chain/volume
+- errorcode/assert
+- accounting
+- dup/db delay switch
+- semi-static route
+- master-slave fail-tolerant system
+- gradient sharding system
+
+
+#### [utensil](https://github.com/utensil) commented at [2016-04-15 14:36](https://github.com/utensil/utensil.github.io/issues/69#issuecomment-210486004):
+
+C10M
+- https://news.ycombinator.com/item?id=7250505
+- https://github.com/clowwindy/Awesome-Networking/pull/3/files
+- http://www.cs.dartmouth.edu/~sergey/cs108/2013/C10M-Defending-the-Internet-at-Scale-Dartmouth-2013.pdf
+- http://www.erlang-factory.com/upload/presentations/558/efsf2012-whatsapp-scaling.pdf
+- http://highscalability.com/blog/2013/5/13/the-secret-to-10-million-concurrent-connections-the-kernel-i.html
+}

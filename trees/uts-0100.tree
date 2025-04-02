@@ -1,0 +1,127 @@
+\import{macros}\title{Utilize Julia}
+\date{2016-04-24}
+\author{utensil}
+
+\md{
+#### [utensil](https://github.com/utensil) opened issue at [2016-04-24 11:19](https://github.com/utensil/utensil.github.io/issues/70):
+
+## Install Python, INotebook and Julia
+
+```
+# Install miniconda from http://conda.pydata.org/miniconda.html
+# And then
+conda install numpy scipy ipython jupyter matplotlib
+jupyter notebook
+# See https://caskroom.github.io/
+brew tap caskroom/cask
+brew cask install julia
+```
+## Julia-Python bridge
+
+``` julia
+julia> Pkg.add("PyCall")
+INFO: Initializing package repository /Users/utensil/.julia/v0.4
+INFO: Cloning METADATA from git://github.com/JuliaLang/METADATA.jl
+# The first time takes a long time to do git clone......
+julia> using PyCall
+INFO: Precompiling module PyCall...
+
+julia> @pyimport numpy.random as nr
+
+julia> nr.rand(3,4)
+3x4 Array{Float64,2}:
+ 0.104454  0.847609  0.810417  0.939161
+ 0.266673  0.186059  0.651118  0.861648
+ 0.720235  0.164573  0.448754  0.183331
+
+Pkg.add("IJulia")
+using IJulia
+notebook()
+```
+
+
+#### [utensil](https://github.com/utensil) commented at [2016-04-24 13:16](https://github.com/utensil/utensil.github.io/issues/70#issuecomment-213954597):
+
+## More Packages
+
+``` julia
+# Math
+for pkg in ["Mocha", "Distributions", "DataFrames", "JuMP", "Graphs", "GLM", "GeneticAlgorithms", "ControlSystems", "DiscriminantAnalysis", "HTSLIB"]
+    Pkg.add(pkg)
+end
+
+# Faster
+for pkg in ["ParallelAccelerator","NLopt", "Optim"]
+    Pkg.add(pkg)
+end
+
+# Vis
+for pkg in ["Escher", "Plots", "Gadfly", "PyPlot", "GR", "Immerse", "UnicodePlots", "Qwt", "PlotlyJS", "Interact", "Mux", "GLVisualize", "Blink"]
+    Pkg.add(pkg)
+end
+
+# Utility
+# brew install llvm
+for pkg in ["Reactive", "Maker", "FactCheck", "BuildExecutable", "Clang"]
+    Pkg.add(pkg)
+end
+```
+
+#### [utensil](https://github.com/utensil) commented at [2016-04-24 13:16](https://github.com/utensil/utensil.github.io/issues/70#issuecomment-213954601):
+
+## Related links
+
+### Learn
+- https://github.com/svaksha/Julia.jl
+- https://github.com/utensil-star/awesome-julia
+- http://learnxinyminutes.com/docs/julia
+- http://rogerluo.cc/slides/contents/lqcc.html#/
+
+### Community
+- http://pkg.julialang.org/pulse.html
+- http://julialang.cn/
+
+### Misc
+- http://www.mkdocs.org/
+- http://stackoverflow.com/questions/2607425/is-google-s-cdn-for-jquery-available-in-china/22060903#22060903
+
+#### [utensil](https://github.com/utensil) commented at [2016-04-27 09:26](https://github.com/utensil/utensil.github.io/issues/70#issuecomment-215025351):
+
+## CUDA related
+
+See https://gist.github.com/mlhales/5785725
+
+``` julia
+Pkg.add("CUDArt")
+using CUDArt
+Pkg.test("CUDArt")
+```
+
+#### [utensil](https://github.com/utensil) commented at [2016-04-28 17:21](https://github.com/utensil/utensil.github.io/issues/70#issuecomment-215500593):
+
+For atom:
+
+```
+apm install uber-juno
+```
+
+In Julia:
+
+``` julia
+Pkg.add("Atom")
+```
+
+#### [utensil](https://github.com/utensil) commented at [2016-04-29 14:18](https://github.com/utensil/utensil.github.io/issues/70#issuecomment-215732118):
+
+For JuMP:
+
+``` julia
+for pkg in ["GLPKMathProgInterface", "Cbc", "Clp"]
+    Pkg.add(pkg)
+end
+```
+
+#### [utensil](https://github.com/utensil) commented at [2016-04-30 15:44](https://github.com/utensil/utensil.github.io/issues/70#issuecomment-215974291):
+
+Work continues at https://github.com/utensil/julia-playground/
+}

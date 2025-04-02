@@ -1,0 +1,16 @@
+\import{macros}\title{Investigate Collation in MySQL}
+\date{2016-06-23}
+\author{utensil}
+
+\md{
+#### [utensil](https://github.com/utensil) opened issue at [2016-06-23 02:47](https://github.com/utensil/utensil.github.io/issues/100):
+
+See http://dev.mysql.com/doc/refman/5.7/en/charset-collation-effect.html .
+
+``` bash
+echo -n 德|iconv -f 'utf-8' -t 'GBK'|xxd -p
+b5c2
+echo -n 得|iconv -f 'utf-8' -t 'GBK'|xxd -p
+b5c3
+```
+}
