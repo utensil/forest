@@ -252,3 +252,7 @@ rd PROJ="forest" *PARAMS="":
 # Not working yet
 dt:
     uv run --python 3.11 --with 'detikzify @ git+https://github.com/potamides/DeTikZify' -m detikzify.webui --light
+
+kj:
+    #!/usr/bin/env zsh
+    CMAKE_ARGS="-DGGML_METAL=on" USE_EMBEDDED_DB="true" uvx --from 'khoj[local]' khoj --help
