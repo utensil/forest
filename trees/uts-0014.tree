@@ -19,17 +19,23 @@
   \open\query
   \open\rel
   \def\query/root{
-    \union{\tag{root}}{\tag{notes}}{\tag{exp}}
+    \union{\tag{root}}{\tag{notes}}{\tag{exp}}{\tag{post}}
   }
   \def\query/root/transcluded{
     \union-fam-rel{\query/root}{\paths}{\outgoing}{\transclusion}
   }
+  \def\query/index{
+    \tag{interest}
+  }
+  \def\query/index/linked{
+    \union-fam-rel{\query/index}{\paths}{\outgoing}{\links}
+  }
   \def\query/has/home{
-    \union{\query/root}{\query/root/transcluded}
+    \union{\query/root}{\query/root/transcluded}{\query/index/linked}
   }
   \def\query/normal{
     \compl{
-      \union{\query/root}{\tag{draft}}{\tag{macro}}{\tag{exp}}{\taxon{person}}{\taxon{reference}}{\taxon{eq}}{\tag{mwe}}
+      \union{\query/root}{\tag{draft}}{\tag{macro}}{\tag{exp}}{\taxon{person}}{\taxon{reference}}{\taxon{eq}}{\tag{mwe}}{\tag{post}}
     }
   }
   \def\query/lost{
