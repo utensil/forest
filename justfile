@@ -117,6 +117,8 @@ prep-term:
     which cmake || brew install cmake
     which pkg-config || brew install pkg-config
     which nproc || brew install coreutils
+    which fastfetch || brew install fastfetch
+    which tty-clock || brew install tty-clock
 
 prep-gt:
     which ghostty || brew install ghostty
@@ -626,6 +628,10 @@ gh2md REPO OUTPUT *PARAMS="--no-prs":
     GITHUB_ACCESS_TOKEN=$(gh auth token) uvx gh2md --idempotent {{PARAMS}} {{REPO}} {{OUTPUT}}
     # https://github.com/mattduck/gh2md/issues/39
     # docker run --rm -it -e GITHUB_ACCESS_TOKEN=$(gh auth token) dockerproxy.net/library/python:3.11.2 bash -c 'pip install gh2md && gh2md --idempotent {{REPO}} {{OUTPUT}}'
+
+time:
+    # -s -c 1 -w 2 -g 2 -C 1
+    tty-clock -c
 
 import 'dotfiles/llm.just'
 import 'dotfiles/archived.just'
