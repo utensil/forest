@@ -629,6 +629,15 @@ gh2md REPO OUTPUT *PARAMS="--no-prs":
     # https://github.com/mattduck/gh2md/issues/39
     # docker run --rm -it -e GITHUB_ACCESS_TOKEN=$(gh auth token) dockerproxy.net/library/python:3.11.2 bash -c 'pip install gh2md && gh2md --idempotent {{REPO}} {{OUTPUT}}'
 
+# run fastfetch every time Enter is pressed
+fetch:
+    #!/usr/bin/env zsh
+    while true; do
+        clear
+        fastfetch
+        read -n 1
+    done
+
 time:
     # -s -c 1 -w 2 -g 2 -C 1
     tty-clock -c
