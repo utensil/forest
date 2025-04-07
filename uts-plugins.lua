@@ -420,173 +420,175 @@ local ui_plugins = {
             -- ...
         end,
     },
-
-    -- {
-    --     "folke/noice.nvim",
-    --     event = "VeryLazy",
-    --     opts = {
-    --         lsp = {
-    --             override = {
-    --                 ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-    --                 ["vim.lsp.util.stylize_markdown"] = true,
-    --                 ["cmp.entry.get_documentation"] = true,
-    --             },
-    --         },
-    --         routes = {
-    --             {
-    --                 filter = {
-    --                     event = "msg_show",
-    --                     any = {
-    --                         { find = "%d+L, %d+B" },
-    --                         { find = "; after #%d+" },
-    --                         { find = "; before #%d+" },
-    --                     },
-    --                 },
-    --                 view = "mini",
-    --             },
-    --         },
-    --         presets = {
-    --             bottom_search = true,
-    --             command_palette = true,
-    --             long_message_to_split = true,
-    --         },
-    --         -- based on https://github.com/folke/noice.nvim/issues/779#issuecomment-2081998250
-    --         views = {
-    --             cmdline_popup = {
-    --                 -- backend = "popup",
-    --                 -- relative = "editor",
-    --                 -- zindex = 200,
-    --                 position = {
-    --                     row = "40%", -- 40% from top of the screen. This will position it almost at the center.
-    --                     col = "50%",
-    --                 },
-    --                 size = {
-    --                     width = 120,
-    --                     height = "auto",
-    --                 },
-    --                 -- win_options = {
-    --                 --     winhighlight = {
-    --                 --         Normal = "NoiceCmdlinePopup",
-    --                 --         FloatTitle = "NoiceCmdlinePopupTitle",
-    --                 --         FloatBorder = "NoiceCmdlinePopupBorder",
-    --                 --         IncSearch = "",
-    --                 --         CurSearch = "",
-    --                 --         Search = "",
-    --                 --     },
-    --                 --     winbar = "",
-    --                 --     foldenable = false,
-    --                 --     cursorline = false,
-    --                 -- },
-    --             },
-    --             popupmenu = {
-    --                 -- relative = 'editor', -- "'cursor'"|"'editor'"|"'win'"
-    --                 position = {
-    --                     row = "auto", -- Popup will show up below the cmdline automatically
-    --                     col = "auto",
-    --                 },
-    --                 size = {
-    --                     width = 120, -- Making this as wide as the cmdline_popup
-    --                     height = "auto",
-    --                 },
-    --                 border = {
-    --                     style = "double", -- 'double'"|"'none'"|"'rounded'"|"'shadow'"|"'single'"|"'solid'
-    --                     padding = { 0, 1 },
-    --                 },
-    --                 win_options = {
-    --                     winhighlight = {
-    --                         Normal = "NoicePopupmenu", -- Normal | NoicePopupmenu
-    --                         FloatBorder = "NoicePopupmenuBorder", -- DiagnosticInfo | NoicePopupmenuBorder
-    --                         CursorLine = "NoicePopupmenuSelected",
-    --                         PmenuMatch = "NoicePopupmenuMatch",
-    --                     },
-    --                 },
-    --             },
-    --         },
-    --         cmdline = {
-    --             -- view = "cmdline",
-    --             view = "cmdline_popup",
-    --         },
-    --     },
-    --     keys = {
-    --         { "<leader>sn", "", desc = "+noice" },
-    --         {
-    --             "<S-Enter>",
-    --             function()
-    --                 require("noice").redirect(vim.fn.getcmdline())
-    --             end,
-    --             mode = "c",
-    --             desc = "Redirect Cmdline",
-    --         },
-    --         {
-    --             "<leader>snl",
-    --             function()
-    --                 require("noice").cmd "last"
-    --             end,
-    --             desc = "Noice Last Message",
-    --         },
-    --         {
-    --             "<leader>snh",
-    --             function()
-    --                 require("noice").cmd "history"
-    --             end,
-    --             desc = "Noice History",
-    --         },
-    --         {
-    --             "<leader>sna",
-    --             function()
-    --                 require("noice").cmd "all"
-    --             end,
-    --             desc = "Noice All",
-    --         },
-    --         {
-    --             "<leader>snd",
-    --             function()
-    --                 require("noice").cmd "dismiss"
-    --             end,
-    --             desc = "Dismiss All",
-    --         },
-    --         {
-    --             "<leader>snt",
-    --             function()
-    --                 require("noice").cmd "nick"
-    --             end,
-    --             desc = "Noice Picker (Telescope/FzfLua)",
-    --         },
-    --         {
-    --             "<c-f>",
-    --             function()
-    --                 if not require("noice.lsp").scroll(4) then
-    --                     return "<c-f>"
-    --                 end
-    --             end,
-    --             silent = true,
-    --             expr = true,
-    --             desc = "Scroll Forward",
-    --             mode = { "i", "n", "s" },
-    --         },
-    --         {
-    --             "<c-b>",
-    --             function()
-    --                 if not require("noice.lsp").scroll(-4) then
-    --                     return "<c-b>"
-    --                 end
-    --             end,
-    --             silent = true,
-    --             expr = true,
-    --             desc = "Scroll Backward",
-    --             mode = { "i", "n", "s" },
-    --         },
-    --     },
-    --     config = function(_, opts)
-    --         -- HACK: noice shows messages from before it was enabled,
-    --         -- but this is not ideal when Lazy is installing plugins,
-    --         -- so clear the messages in this case.
-    --         if vim.o.filetype == "lazy" then
-    --             vim.cmd [[messages clear]]
-    --         end
-    --         require("noice").setup(opts)
-    --     end,
-    -- },
+    {
+        "folke/noice.nvim",
+        event = "VeryLazy",
+        opts = {
+            lsp = {
+                override = {
+                    ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+                    ["vim.lsp.util.stylize_markdown"] = true,
+                    ["cmp.entry.get_documentation"] = true,
+                },
+            },
+            routes = {
+                {
+                    filter = {
+                        event = "msg_show",
+                        any = {
+                            { find = "%d+L, %d+B" },
+                            { find = "; after #%d+" },
+                            { find = "; before #%d+" },
+                        },
+                    },
+                    view = "mini",
+                },
+            },
+            presets = {
+                bottom_search = true,
+                command_palette = true,
+                long_message_to_split = true,
+            },
+            -- based on https://github.com/folke/noice.nvim/issues/779#issuecomment-2081998250
+            views = {
+                cmdline_popup = {
+                    -- backend = "popup",
+                    -- relative = "editor",
+                    -- zindex = 200,
+                    position = {
+                        row = "40%", -- 40% from top of the screen. This will position it almost at the center.
+                        col = "50%",
+                    },
+                    size = {
+                        width = "95%",
+                        height = "auto",
+                    },
+                    win_options = {
+                        wrap = true,
+                    },
+                    -- win_options = {
+                    --     winhighlight = {
+                    --         Normal = "NoiceCmdlinePopup",
+                    --         FloatTitle = "NoiceCmdlinePopupTitle",
+                    --         FloatBorder = "NoiceCmdlinePopupBorder",
+                    --         IncSearch = "",
+                    --         CurSearch = "",
+                    --         Search = "",
+                    --     },
+                    --     winbar = "",
+                    --     foldenable = false,
+                    --     cursorline = false,
+                    -- },
+                },
+                popupmenu = {
+                    -- relative = 'editor', -- "'cursor'"|"'editor'"|"'win'"
+                    position = {
+                        row = "auto", -- Popup will show up below the cmdline automatically
+                        col = "auto",
+                    },
+                    size = {
+                        width = 120, -- Making this as wide as the cmdline_popup
+                        height = "auto",
+                    },
+                    border = {
+                        style = "double", -- 'double'"|"'none'"|"'rounded'"|"'shadow'"|"'single'"|"'solid'
+                        padding = { 0, 1 },
+                    },
+                    win_options = {
+                        winhighlight = {
+                            Normal = "NoicePopupmenu", -- Normal | NoicePopupmenu
+                            FloatBorder = "NoicePopupmenuBorder", -- DiagnosticInfo | NoicePopupmenuBorder
+                            CursorLine = "NoicePopupmenuSelected",
+                            PmenuMatch = "NoicePopupmenuMatch",
+                        },
+                    },
+                },
+            },
+            cmdline = {
+                -- view = "cmdline",
+                view = "cmdline_popup",
+            },
+        },
+        keys = {
+            { "<leader>sn", "", desc = "+noice" },
+            {
+                "<S-Enter>",
+                function()
+                    require("noice").redirect(vim.fn.getcmdline())
+                end,
+                mode = "c",
+                desc = "Redirect Cmdline",
+            },
+            {
+                "<leader>snl",
+                function()
+                    require("noice").cmd "last"
+                end,
+                desc = "Noice Last Message",
+            },
+            {
+                "<leader>snh",
+                function()
+                    require("noice").cmd "history"
+                end,
+                desc = "Noice History",
+            },
+            {
+                "<leader>sna",
+                function()
+                    require("noice").cmd "all"
+                end,
+                desc = "Noice All",
+            },
+            {
+                "<leader>snd",
+                function()
+                    require("noice").cmd "dismiss"
+                end,
+                desc = "Dismiss All",
+            },
+            {
+                "<leader>snt",
+                function()
+                    require("noice").cmd "nick"
+                end,
+                desc = "Noice Picker (Telescope/FzfLua)",
+            },
+            {
+                "<c-f>",
+                function()
+                    if not require("noice.lsp").scroll(4) then
+                        return "<c-f>"
+                    end
+                end,
+                silent = true,
+                expr = true,
+                desc = "Scroll Forward",
+                mode = { "i", "n", "s" },
+            },
+            {
+                "<c-b>",
+                function()
+                    if not require("noice.lsp").scroll(-4) then
+                        return "<c-b>"
+                    end
+                end,
+                silent = true,
+                expr = true,
+                desc = "Scroll Backward",
+                mode = { "i", "n", "s" },
+            },
+        },
+        config = function(_, opts)
+            -- HACK: noice shows messages from before it was enabled,
+            -- but this is not ideal when Lazy is installing plugins,
+            -- so clear the messages in this case.
+            if vim.o.filetype == "lazy" then
+                vim.cmd [[messages clear]]
+            end
+            require("noice").setup(opts)
+        end,
+    },
     {
         "folke/persistence.nvim",
         event = "BufReadPre", -- this will only start session saving when an actual file was opened
@@ -841,11 +843,11 @@ local lang_plugins = {
     },
 }
 
--- local llm_plugins_au = {
---     { "augmentcode/augment.vim" },
--- }
+local llm_plugins_au = {
+    { "augmentcode/augment.vim" },
+}
 
-local llm_plugins = {
+local llm_plugins_cp = {
     {
         "github/copilot.vim",
         event = "VeryLazy",
@@ -1212,6 +1214,8 @@ local merge = function(...)
     end
     return result
 end
+
+local llm_plugins = llm_plugins_cp
 
 local all_plugins = merge(basic_plugins, lang_plugins, ui_plugins, llm_plugins)
 
