@@ -639,8 +639,7 @@ fetch:
     done
 
 time:
-    # -s -c 1 -w 2 -g 2 -C 1
-    tty-clock -c
+    tty-clock -c -s -C 3
 
 import 'dotfiles/llm.just'
 import 'dotfiles/archived.just'
