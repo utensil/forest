@@ -5,11 +5,13 @@
 \tag{draft}
 
 \mdnote{4 different bugs caught me off guard recently}{
-And it's non-trivial to hunt their families down. But unfortunately, that's pretty much my job description.
+And it's non-trivial to hunt their families down.
+
+But yeah, that's pretty much my job description, that is, to set up mechanisms to eliminate similar problems from all systems in future.
 
 They are from different kind of systems and varying technical stacks, so it would be interesting to pin these specimens down for a display.
 
-How to hunt their families down are left as exercises for the readers, that is, to set up mechanisms to eliminate similar problems from all systems in future.
+How to hunt their families down are left as exercises for the readers.
 
 ## Legacy configuration removal
 
@@ -43,7 +45,7 @@ The developers of Sink were also confused, as the concurrent queries on the same
 
 The truth did come out in the end. There was 2 tasks configured in Sink, which will be broken down into many sub-tasks for different time spans, and subsequently, queries for different shards of the same table across different asynchronous nodes. And there is a bug in the task configuration that caused slow queries, and the bug was copy-pasted to affect both tasks. Both tasks were running slow slow, but the database nodes could handle the load along with online queries, as the concurrent slow queries are well below the CPU cores that the nodes could use.
 
-One that day, both the tasks were requested to be rerun for 2 time spans by the same person who introduced the bug, which caused concurrent slow queries on the same node to exceed the core count, blocking the online queries. But as the queries are rate-limited so they hit different nodes in a rotating manner, each node was only affected for a few seconds, the overall impact could only be observed by SREs monitoring the online services, and DBAs considers the phenomenon as a normal load spike.
+One that day, both the tasks were requested to be rerun for 2 time spans by the same person who introduced the bug, which caused concurrent slow queries on the same node to exceed the core count, blocking the online queries. But as the queries are rate-limited so they hit different nodes in a rotating manner, each node was only affected for a few seconds, the overall impact could only be observed by SREs monitoring the online services, and DBAs considered the phenomenon as a normal load spike.
 
 The lesson learned? Each piece of measures were working individually, but they could not account for combinations of different issues, namely too many *concurrent* (and) *slow* queries, and only the combination could cause an impactful issue. And the information about different parts of the system (the online service, database nodes, and Sink) were not shared across teams.
 
@@ -61,11 +63,15 @@ During sending the request, there was a call to a method using local const stati
 
 Why would this cause an OOM? After destruction, the heap memory involved were still valid, as they were not released but reused by the allocator, thus there is no SEGFAULT, but the memory for `size()` of the strings contains garbage value, which happens to be a large number, and the strings were appending to a `std::stringstream` to form the heartbeat request, causing endless memory allocation until the OOM.
 
+The issue became more reproducible after using an allocator (`tcmalloc`) that would retain the heap memory longer after destruction. It would have been caught by various [sanitizers](https://clickhouse.com/blog/rust#sanitizers) if we have integrated them in CI.
+
 ## Silently hanging tasks
 
 It's again about the batch processing system Sink. Internally it uses an MQ to queue tasks, so it can retry failed tasks. To prevent aggressive retries, there is a backoff mechanism that will exponentially increase the delay between retries, and the maximum number of retries is also limited.
 
-One day, an incident caused all available zones of the MQ were dropping a certain percentage of network packets, causing a stable failure rate of task dispatching. If the retries are performed in a regular rate, the aggregate delay of tasks would not be too long. Unfortunately, the backoff mechanism backfired, along with other rate-limiting mechanisms, eventually causing all task to hang indefinitely. Again, existing metrics were not able to pinpoint the issue, and the developers took some time to figure out the root cause. But as the incident causing all SREs were in a all-hands-on-deck mode, the hung were noticed quickly from less sensitive monitoring metrics, resulted in a relatively timely fix.
+One day, an incident caused all available zones of the MQ to drop a certain percentage of network packets, causing a stable failure rate of task dispatching. If the retries are performed in a regular rate, the aggregate delay of tasks would not be too long.
+
+Unfortunately, the backoff mechanism backfired, along with other rate-limiting mechanisms, eventually causing all task to hang indefinitely. Again, existing metrics were not able to pinpoint the issue, and the developers took some time to figure out the root cause. But as the incident causing all SREs to be in a all-hands-on-deck mode, the hung were noticed quickly from less sensitive monitoring metrics, resulted in a relatively timely fix.
 
 A more sensitive monitoring metric was deployed to detect hanging tasks, and it caught another issue a few days later, and the issue was handled swiftly before causing actual delay.
 
@@ -75,13 +81,13 @@ The bug should only hang one processes that handled the task, unfortunately, the
 
 With early detection of hanging tasks, developers were able to try fixes quickly. It should not be easy to find the root cause, but the developers noticed long pauses between two log entries, and the removal loop was the only code there when they wanted to add some logging between the log entries, thus the obvious bug was immediately identified.
 
-It's really lucky that the first issue which was not too serious helped to deploy the more sensitive monitoring metric, so the second issue, which could be much fatal, was detected and fixed promptly, on the morning of the first day of a national holiday.
+It's really lucky that the first issue which was not too serious helped to deploy the more sensitive monitoring metric, so the second issue, which could be much fatal, was detected and fixed promptly, on the morning of the first day of a national holiday. Task re-assignment were then limited to prevent poluting more processes with a bad task.
 
 ## LLM's takeaways
 
 Disclaimer: The above stories are slightly modified from the actual events, and they are mannually written by me, not generated by LLM.
 
-I asked DeepSeek to write some takeaways as I'm a bit tired after telling these stories. This is the version I'm happy with:
+I asked DeepSeek to write some takeaways as I was a bit tired after telling these stories. This is the version I'm happy with:
 
 1. **Legacy safeguards breed hidden traps**
    Undocumented checks (Bug 1) and copy-pasted code (Bugs 2, 4) linger as systemic debt. Always audit dependencies before removal or reuse.
@@ -92,9 +98,8 @@ I asked DeepSeek to write some takeaways as I'm a bit tired after telling these 
 3. **Own lifecycle control explicitly**
    Destructor chaos (Bug 3) and hanging tasks (Bug 4) stem from assuming cleanup. Govern threads, memory, and resources with strict ownership.
 
-4. **Instrument for *why*, not *what***
+4. **Instrument for why, not what**
    Missing alerts for config errors (Bug 1), slow queries (Bug 2), or hung processes (Bug 4) delay fixes. Metrics must expose root causes, not just symptoms.
 
 **Core**: Systems fail in layers. Anticipate overlap, govern lifecycles ruthlessly, and monitor for causality—not just correlation.
-
 }
