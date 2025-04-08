@@ -5,14 +5,14 @@ prep-llms:
     which cortex || echo "Visit https://cortex.so/docs/installation to download and install cortex"
 
 
-aichat *PARAMS:
+aichat *PARAMS: sync-aichat
     aichat {{PARAMS}}
 
-# a Python script to render the aichat config
+# render the aichat config
 sync-aichat:
     #!/usr/bin/env zsh
     ./render_yaml.py dotfiles/.config/aichat/config.yaml.in ~/.config/aichat/config.yaml
-    bat ~/.config/aichat/config.yaml
+    cat ~/.config/aichat/config.yaml|sd 'api_key:(.*)' 'api_key: <hidden>'
 
 prep-aider:
     just sync-aider
@@ -181,7 +181,7 @@ prep-mlx:
     #!/usr/bin/env zsh
     # https://kconner.com/2025/02/17/running-local-llms-with-mlx.html
     # https://simonwillison.net/2025/Feb/15/llm-mlx/
-    uvx llm install llm-mlx
+    just llm install llm-mlx
 
 # Models are downloaded to ~/.cache/huggingface/hub/
 # See https://github.com/simonw/llm-mlx?tab=readme-ov-file#models-to-try for models to try
@@ -191,13 +191,24 @@ prep-mlx:
 # just mlx import-models
 mlx *PARAMS:
     #!/usr/bin/env zsh
-    uvx llm mlx {{PARAMS}}
+    just llm mlx {{PARAMS}}
 
 # just llm models default mlx-community/DeepSeek-R1-Distill-Qwen-32B-4bit
 # just llm chat -m MODEL
 llm *PARAMS:
     #!/usr/bin/env zsh
     uvx llm {{PARAMS}}
+
+sync-llm:
+    #!/usr/bin/env zsh
+    dir_llm=`dirname "$(uvx llm logs path)"`
+    ./render_yaml.py dotfiles/.config/llm/extra-openai-models.yaml.in $dir_llm/extra-openai-models.yaml
+    cat $dir_llm/extra-openai-models.yaml
+    uvx llm keys set env_key --value ${OPENAI_API_KEY}
+    uvx llm models default env
+
+# dir-llm:
+#     uv run --with 'llm' python -c 'import llm; print(llm.user_dir())'
 
 # lms comes with LMStudio: https://github.com/lmstudio-ai/lms
 # I want it for https://github.com/lmstudio-ai/mlx-engine
