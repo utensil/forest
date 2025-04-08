@@ -8,6 +8,25 @@ prep-llms:
 aichat *PARAMS:
     aichat {{PARAMS}}
 
+# a Python script to render the aichat config
+sync-aichat:
+    #!/usr/bin/env -S uv run
+    # /// script
+    # requires-python = ">=3.11,<3.12"
+    # dependencies = [ "pyaml-env" ]
+    # ///
+
+    import os
+    from pyaml_env import parse_config
+    config = parse_config('dotfiles/.config/aichat/config.yaml.in')
+    home = os.path.expanduser("~")
+    dir = os.path.join(home, '.config', 'aichat')
+    # mkdir -p
+    os.makedirs(dir, exist_ok=True)
+    path = os.path.join(dir, 'config.yaml')
+    with open(path, 'w') as f:
+        f.write(config)
+
 prep-aider:
     just sync-aider
     which mcpm-aider || npm install -g @poai/mcpm-aider
