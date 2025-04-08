@@ -10,22 +10,9 @@ aichat *PARAMS:
 
 # a Python script to render the aichat config
 sync-aichat:
-    #!/usr/bin/env -S uv run
-    # /// script
-    # requires-python = ">=3.11,<3.12"
-    # dependencies = [ "pyaml-env" ]
-    # ///
-
-    import os
-    from pyaml_env import parse_config
-    config = parse_config('dotfiles/.config/aichat/config.yaml.in')
-    home = os.path.expanduser("~")
-    dir = os.path.join(home, '.config', 'aichat')
-    # mkdir -p
-    os.makedirs(dir, exist_ok=True)
-    path = os.path.join(dir, 'config.yaml')
-    with open(path, 'w') as f:
-        f.write(config)
+    #!/usr/bin/env zsh
+    ./render_yaml.py dotfiles/.config/aichat/config.yaml.in ~/.config/aichat/config.yaml
+    bat ~/.config/aichat/config.yaml
 
 prep-aider:
     just sync-aider
