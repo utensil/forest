@@ -181,7 +181,7 @@ prep-mlx:
     #!/usr/bin/env zsh
     # https://kconner.com/2025/02/17/running-local-llms-with-mlx.html
     # https://simonwillison.net/2025/Feb/15/llm-mlx/
-    just llm install llm-mlx
+    uvx llm install llm-mlx
 
 # Models are downloaded to ~/.cache/huggingface/hub/
 # See https://github.com/simonw/llm-mlx?tab=readme-ov-file#models-to-try for models to try
@@ -191,13 +191,22 @@ prep-mlx:
 # just mlx import-models
 mlx *PARAMS:
     #!/usr/bin/env zsh
-    just llm mlx {{PARAMS}}
+    uvx llm mlx {{PARAMS}}
 
-# just llm models default mlx-community/DeepSeek-R1-Distill-Qwen-32B-4bit
-# just llm chat -m MODEL
-llm *PARAMS:
-    #!/usr/bin/env zsh
-    uvx llm {{PARAMS}}
+# Note: just llm doesn't work for passing quoted strings
+# Use the shell alias instead
+# llm models default mlx-community/DeepSeek-R1-Distill-Qwen-32B-4bit
+# llm chat -m MODEL
+# llm plugins
+# llm -f github:simonw/s3-credentials 'Suggest new features for this tool'
+# llm -f docs: "How do I embed a binary file?"
+# llm *PARAMS:
+#     uvx llm {{PARAMS}}
+
+prep-llm:
+    uvx llm install llm-docs
+    uvx llm install llm-fragments-github
+    uvx llm install llm-mlx
 
 sync-llm:
     #!/usr/bin/env zsh
