@@ -641,6 +641,32 @@ fetch:
 time:
     tty-clock -c -s -C 3
 
+# then run: git clone http://localhost:63000/username/repo.git:/dir.git
+# but no arm64 version yet
+# josh-proxy:
+#     #!/usr/bin/env zsh
+#     docker run \
+#         -p 63000:8000 \
+#         -e JOSH_REMOTE=https://github.com \
+#         dockerproxy.net/joshproject/josh-proxy:latestS
+
+josh-proxy:
+    #!/usr/bin/env zsh
+    mkdir -p ~/.josh
+    cd ~/projects/
+    if [ ! -d josh ]; then
+        git clone https://github.com/josh-project/josh
+    else
+        (cd josh && git pull)
+    fi
+    cd josh/josh-proxy
+    cargo run -- --port 63000 --remote https://github.com --local ~/.josh
+
+josh WHERE USER REPO DIR:
+    #!/usr/bin/env zsh
+    cd ~/projects/
+    git clone http://localhost:63000/{{USER}}/{{REPO}}.git:/{{DIR}}.git {{WHERE}}
+
 import 'dotfiles/llm.just'
 import 'dotfiles/archived.just'
 
