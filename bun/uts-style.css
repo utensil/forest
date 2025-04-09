@@ -3,18 +3,28 @@
 @tailwind utilities;
  */
 
-body {
-    font-family: Palatino, "Palatino Linotype", "Palatino LT STD",
-        "Book Antiqua", Georgia, serif;
-    /* font-size: 12pt;
-    line-height: 1.55; */
-}
-
 :root {
     /* 16:9 */
     --uts-canvas-width: 80%;
     /* 80ex; */
     --uts-canvas-height: 45ex;
+
+    --serif: Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua",
+        Georgia, serif;
+
+    /* from https://entropicthoughts.com/etc/style/css/main.css */
+    /* --serif: Whitman, serif; */
+    --sans: "CooperHewitt", Arial;
+    /* --mono: 'Hack', monospace; */
+
+    /* mine */
+    --mono: "Maple Mono", "Fira Code", "DejaVu Sans Mono", monospace;
+}
+
+body {
+    font-family: var(--serif);
+    /* font-size: 12pt;
+    line-height: 1.55; */
 }
 
 @media screen {
@@ -510,7 +520,7 @@ nav#toc li.active {
 .meta-lean-symbol,
 .link-source span,
 .link-pdf span {
-    font-family: Fira Code, DejaVu Sans Mono, monospace;
+    font-family: var(--mono);
 }
 
 /* details:hover > summary .meta-lean a {
@@ -523,7 +533,7 @@ nav#toc li.active {
     /* visibility: hidden; */
     /* text-align: right; */
     /* font-weight: normal;
-    font-family: Fira Code, DejaVu Sans Mono, monospace; */
+    font-family: var(--mono); */
 }
 
 .meta-lean-list {
@@ -787,6 +797,11 @@ code.highlight.grace-loading {
         filter: invert(1.0);
         /* drop-shadow(0 0 5px #ffffff); */
     }
+}
+
+/* the first h1 in the first section */
+article > section:first-of-type > details > summary > header > h1 {
+    font-size: 2em;
 }
 
 h1,
