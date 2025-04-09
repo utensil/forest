@@ -98,7 +98,12 @@ body {
 :root[data-applied-mode="light"] {
     color-scheme: light;
     --uts-text: black;
-    --uts-link: black;
+    /* --uts-link: black; */
+    /* brown */
+    --uts-link: #9e7140;
+    /* dark grey */
+    /* --uts-link: #5d5d5d; */
+    --uts-link-internal: black;
     --uts-text-gentle: rgb(132, 132, 132);
     --uts-text-cite: #10731d;
     --uts-background: white;
@@ -110,7 +115,12 @@ body {
 :root[data-applied-mode="dark"] {
     color-scheme: dark;
     --uts-text: #cbd1db;
-    --uts-link: #cbd1db;
+    /* --uts-link: #cbd1db; */
+    /* light brown */
+    --uts-link: #d7b28b;
+    /* lighter grey than --uts-text */
+    /* --uts-link: #dddddd; */
+    --uts-link-internal: #cbd1db;
     --uts-text-gentle: rgb(174, 174, 174);
     --uts-text-cite: #8cd295;
     --uts-background: #151a1f;
@@ -156,9 +166,23 @@ nav#toc {
 
 a,
 nav#toc a {
-    color: var(--uts-link) !important;
+    color: var(--uts-text) !important;
     cursor: pointer;
-    text-decoration: underline;
+    /* text-decoration: underline; */
+    text-decoration: none !important;
+}
+
+.link.external {
+    text-decoration: none;
+}
+
+.link.external a,
+.markdownit a {
+    color: var(--uts-link) !important;
+}
+
+.link.local a {
+    color: var(--uts-link-internal) !important;
 }
 
 .slug,
