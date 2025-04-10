@@ -228,6 +228,22 @@ prep-chad:
     #!/usr/bin/env bash
     cd ~/projects/{{PROJ}} && nvim --cmd 'set runtimepath+=~/.config/nvchad/' --cmd 'lua package.path = package.path .. ";{{home_directory()}}/.config/nvchad/lua/?.lua"' -u ~/.config/nvchad/nvchad-init.lua
 
+try-astro:
+    #!/usr/bin/env zsh
+    if docker ps -a | grep -q astro; then
+        if ! docker ps | grep -q astro; then
+            docker start astro
+        fi
+        docker exec -it astro sh
+    else
+        docker run --name astro -w /root -it alpine:edge sh -uelic '
+        apk add bash curl git lua nodejs npm lazygit bottom python3 go neovim ripgrep alpine-sdk --update
+        # Replace with your own configuration repository to load a user configuration
+        [ ! -d ~/.config/nvim ] && git clone --depth 1 https://github.com/AstroNvim/template ~/.config/nvim
+        sh
+        '
+    fi
+
 yazi DIR="{{HOME}}/projects":
     #!/usr/bin/env bash
     EDITOR=lvim yazi {{DIR}}
@@ -517,7 +533,6 @@ prep-hx:
     rm -rf ~/.config/helix || true
     ln -s {{justfile_directory()}}/dotfiles/.config/helix ~/.config/helix
     just prep-base16-helix
-    # just prep-lsp-ai
 
 sync-hx:
     hx --grammar fetch
@@ -693,6 +708,15 @@ dockge COMMAND="up":
     elif [ "{{COMMAND}}" = "down" ]; then
         docker-compose down
     fi
+
+# https://github.com/livebook-dev/livebook#installation
+prep-lb:
+    #!/usr/bin/env zsh
+    mix do local.rebar --force, local.hex --force
+    yes|mix escript.install hex livebook
+
+lb:
+    LIVEBOOK_IFRAME_PORT=58081 livebook server --port 58080
 
 import 'dotfiles/llm.just'
 import 'dotfiles/archived.just'
