@@ -557,6 +557,7 @@ awake:
 
 prep-pod:
     which docker || (brew install docker; brew link docker)
+    which docker-compose || brew install docker-compose
     which colima || brew install colima
     docker context use default
 
@@ -666,6 +667,32 @@ josh WHERE USER REPO DIR:
     #!/usr/bin/env zsh
     cd ~/projects/
     git clone http://localhost:63000/{{USER}}/{{REPO}}.git:/{{DIR}}.git {{WHERE}}
+    cd {{WHERE}}
+    git remote rename origin origin_josh || true
+    echo 'cd ~/projects/{{WHERE}} && git remote add origin https://github.com/{{USER}}/NEW_REPO_NAME.git'
+    echo 'gh auth setup-git'
+    echo 'git push -u origin BRANCH'
+# https://github.com/louislam/dockge
+prep-dockge:
+    #!/usr/bin/env zsh
+    sudo mkdir -p /opt/stacks /opt/dockge
+    sudo chown -R $(whoami) /opt/stacks
+    sudo chown -R $(whoami) /opt/dockge
+    cd /opt/dockge
+    curl https://raw.githubusercontent.com/louislam/dockge/master/compose.yaml --output compose.yaml
+
+# https://github.com/abiosoft/colima/issues/265
+
+dockge COMMAND="up":
+    #!/usr/bin/env zsh
+    cd /opt/dockge
+    # if COMMAND is up
+    if [ "{{COMMAND}}" = "up" ]; then
+        docker-compose up -d
+        echo Dockge is now running on http://localhost:5001
+    elif [ "{{COMMAND}}" = "down" ]; then
+        docker-compose down
+    fi
 
 import 'dotfiles/llm.just'
 import 'dotfiles/archived.just'
