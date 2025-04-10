@@ -84,7 +84,7 @@ cpm:
     cd ../copilot-more
     git reset --hard 21d9ee3dce5c7852d431d2c13cca72c426c8a302
     uvx poetry install
-    uvx poetry run uvicorn copilot_more.server:app --port 15432 --host {{env('COPILOT_HOST', '127.0.0.1')}}
+    LOGURU_LEVEL=DEBUG uvx poetry run uvicorn copilot_more.server:app --port 15432 --host {{env('COPILOT_HOST', '127.0.0.1')}}
 
 
 # works only for Ubuntu
