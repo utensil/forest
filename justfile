@@ -179,6 +179,10 @@ sync-chad: stylua sync-plugins
     cp -f init.lua ~/.config/nvchad/nvim-init.lua
     cp -f lazyvim-init.lua ~/.config/nvchad/nvchad-init.lua
 
+sync-astro: stylua sync-plugins
+    mkdir -p ~/.config/astro
+    cp -f dotfiles/.config/astro/lua/community.lua ~/.config/astro/lua/
+
 prep-nvim: prep-term
     #!/usr/bin/env bash
     which nvim || brew install neovim
@@ -227,6 +231,20 @@ prep-chad:
 @chad PROJ="forest": sync-chad
     #!/usr/bin/env bash
     cd ~/projects/{{PROJ}} && nvim --cmd 'set runtimepath+=~/.config/nvchad/' --cmd 'lua package.path = package.path .. ";{{home_directory()}}/.config/nvchad/lua/?.lua"' -u ~/.config/nvchad/nvchad-init.lua
+
+# https://docs.astronvim.com/reference/alt_install/
+
+prep-astro:
+    #!/usr/bin/env zsh
+    if [ -d ~/.config/astro ]; then
+        (cd ~/.config/astro && git pull)
+    else
+        git clone https://github.com/AstroNvim/template ~/.config/astro
+    fi
+
+@astro PROJ="forest": sync-astro
+    #!/usr/bin/env zsh
+    cd ~/projects/{{PROJ}} && NVIM_APPNAME=astro nvim
 
 try-astro:
     #!/usr/bin/env zsh
