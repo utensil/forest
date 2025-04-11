@@ -182,6 +182,8 @@ sync-chad: stylua sync-plugins
 sync-astro: stylua sync-plugins
     mkdir -p ~/.config/astro
     cp -f dotfiles/.config/astro/lua/community.lua ~/.config/astro/lua/
+    mkdir -p ~/.config/astro/lua/plugins
+    cp -f dotfiles/.config/astro/lua/plugins/spec.lua ~/.config/astro/lua/plugins/spec.lua
 
 prep-nvim: prep-term
     #!/usr/bin/env bash
