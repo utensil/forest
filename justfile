@@ -425,7 +425,9 @@ prep-rust:
     which cargo-binstall || cargo install cargo-binstall
 
 # a zsh that inherits .env
-zsh:
+zsh PROJ="forest":
+    #!/usr/bin/env zsh
+    cd ~/projects/{{PROJ}}
     zsh
 
 # a ssh that inherits .env etc.
