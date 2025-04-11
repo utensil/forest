@@ -9,5 +9,4 @@ return {
     { import = "astrocommunity.pack.just" },
     { import = "astrocommunity.pack.html-css"},
     { import = "astrocommunity.completion.copilot-vim-cmp" }
-    -- { import = "astrocommunity.recipes.ai" },
 }
