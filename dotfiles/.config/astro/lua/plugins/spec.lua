@@ -2,9 +2,9 @@ return {
     {
         "RRethy/base16-nvim",
         lazy = false,
-        -- config = function()
-        --     vim.cmd "colorscheme base16-railscasts"
-        -- end,
+        config = function()
+            vim.cmd "colorscheme base16-railscasts"
+        end,
     },
     {
         "tribela/transparent.nvim",
