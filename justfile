@@ -246,7 +246,7 @@ prep-astro:
 
 @astro PROJ="forest": sync-astro
     #!/usr/bin/env zsh
-    cd ~/projects/{{PROJ}} && NVIM_APPNAME=astro nvim
+    cd ~/projects/{{PROJ}} && NVIM_APPNAME=astro nvim .
 
 try-astro:
     #!/usr/bin/env zsh
