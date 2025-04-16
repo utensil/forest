@@ -74,6 +74,12 @@ function y() {
 	rm -f -- "$tmp"
 }
 
+# # Source .fex.zsh if it's present
+# [ -f ~/.fex.zsh ] && source ~/.fex.zsh
+
+# # Bind CTRL-F to invoke fex (key binds can be custom)
+# bindkey '^f' fex-widget
+
 # https://github.com/Sin-cy/dotfiles
 # run `just prep-zsh` first
 source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh

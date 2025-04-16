@@ -120,6 +120,7 @@ prep-term:
     which fastfetch || brew install fastfetch
     which tty-clock || brew install tty-clock
     which duf || brew install duf
+    which fex || (curl -sSL https://raw.githubusercontent.com/18alantom/fex/master/install.sh | bash)
     # which broot || brew install broot
 
 tree DIR="." LEVEL="1":
