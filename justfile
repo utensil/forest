@@ -119,6 +119,11 @@ prep-term:
     which nproc || brew install coreutils
     which fastfetch || brew install fastfetch
     which tty-clock || brew install tty-clock
+    which duf || brew install duf
+    # which broot || brew install broot
+
+tree DIR="." LEVEL="1":
+    eza --git -T -L {{LEVEL}} --hyperlink {{DIR}}
 
 prep-gt:
     which ghostty || brew install ghostty
@@ -129,6 +134,8 @@ prep-gtsh:
     mkdir -p ~/projects
     if [ ! -d ~/projects/ghostty-shaders ]; then
         git clone https://github.com/m-ahdal/ghostty-shaders ~/projects/ghostty-shaders
+    else
+        (cd ~/projects/ghostty-shaders && git pull)
     fi
 
 # Cmd+Ctrl+F to toggle fullscreen, or just Cmd + Enter
