@@ -740,6 +740,18 @@ prep-lb:
 lb:
     LIVEBOOK_IFRAME_PORT=58081 livebook server --port 58080
 
+prep-music:
+    # it doesn't support free spotify accounts
+    # which spotify_player || brew install spotify_player
+    # it's no longer available
+    # which spt || brew install spotify-tui
+    # it doesn't support free spotify accounts
+    # which ncspot || brew install ncspot
+    which code-radio || cargo install code-radio-cli
+
+music:
+    code-radio --no-logo --volume 5
+
 import 'dotfiles/llm.just'
 import 'dotfiles/archived.just'
 
