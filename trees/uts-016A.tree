@@ -81,13 +81,13 @@ Unfortunately, the backoff mechanism backfired, along with other rate-limiting m
 
 A more sensitive monitoring metric was deployed to detect hanging tasks, and it caught another issue a few days later, and the issue was handled swiftly before causing actual delay.
 
-The issue was that there was a silly bug that runs `remove()` for every element in a long list, and overall it would take `O(n^2)` time to finish, it's almost forever for such long lists. The removal would only be triggered when certain conditions are met, and the bug of removal was copy-pasted from some other utility package.
+The issue was that there was a silly bug that runs `remove()` for every element in a huge array, and overall it would take `O(n^2)` time to finish, it's almost forever for such huge arrays. The removal would only be triggered when certain conditions are met, and the bug of removal was copy-pasted from some other utility package.
 
 The bug should only hang one processes that handled the task, unfortunately, the dispatcher would detect timeout tasks, considered the process as dead, reassign the task to other processes when the task was still occupying the old process which was burying its head deep in the `remove()` calls, missing its own checkpoint for timeout. The re-assignment happened over and over again for each timeout, eventually causing all processes to be busy with the same task, and the `remove()` calls would almost never finish. The world literally stopped for that task.
 
 With early detection of hanging tasks, developers were able to try fixes quickly. It should not be easy to find the root cause, but the developers noticed long pauses between two log entries, and the removal loop was the only code there when they wanted to add some logging between the log entries, thus the obvious bug was immediately identified.
 
-It's really lucky that the first issue which was not too serious helped to deploy the more sensitive monitoring metric, so the second issue, which could be much fatal, was detected and fixed promptly, on the morning of the first day of a national holiday. Task re-assignment were then limited to prevent poluting more processes with a bad task.
+It's really lucky that the first issue that was not too serious helped to deploy the more sensitive monitoring metric, so the second issue, which could be much fatal, was detected and fixed promptly, on the morning of the first day of a national holiday. Task re-assignment were then limited to prevent poluting more processes with a bad task.
 
 ## LLM's takeaways
 

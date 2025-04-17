@@ -120,7 +120,10 @@ prep-term:
     which fastfetch || brew install fastfetch
     which tty-clock || brew install tty-clock
     which duf || brew install duf
+    which jq || brew install jq
+    which sq || brew install sq
     which fex || (curl -sSL https://raw.githubusercontent.com/18alantom/fex/master/install.sh | bash)
+    # -O https://raw.githubusercontent.com/18alantom/fex/master/install.sh
     # which broot || brew install broot
 
 tree DIR="." LEVEL="1":
@@ -759,6 +762,43 @@ prep-music:
 
 music:
     code-radio --no-logo --volume 5
+
+nbview FILE:
+    uvx euporie preview {{FILE}}
+
+weather CITY:
+    curl 'wttr.in/{{CITY}}'
+    # ?format=3'
+
+prep-gitlog:
+    which serie || brew install lusingander/tap/serie
+
+gitlog:
+    serie
+
+# Error: Your Xcode (15.4) at /Applications/Xcode.app is too outdated.
+# Please update to Xcode 16.0 (or delete it).
+# Xcode can be updated from the App Store.
+
+# Error: Your Command Line Tools are too outdated.
+# Update them from Software Update in System Settings.
+
+# If that doesn't show you any updates, run:
+#   sudo rm -rf /Library/Developer/CommandLineTools
+#   sudo xcode-select --install
+
+# Alternatively, manually download them from:
+#   https://developer.apple.com/download/all/.
+# You should download the Command Line Tools for Xcode 16.0.
+
+# Error: You have not agreed to the Xcode license. Please resolve this by running:
+#   sudo xcodebuild -license accept
+
+prep-scp:
+    which termscp || brew install veeso/termscp/termscp
+
+scp *PARAMS:
+    termscp {{PARAMS}}
 
 import 'dotfiles/llm.just'
 import 'dotfiles/archived.just'
