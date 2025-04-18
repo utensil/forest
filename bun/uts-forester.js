@@ -189,7 +189,7 @@ document.addEventListener('DOMContentLoaded', () => {
 })
 
 // Important to be 1st in the DOM
-const theme = localStorage.getItem('theme') || 'light'
+const theme = localStorage.getItem('theme') || getAppliedMode('system')
 document.documentElement.dataset.appliedMode = theme
 const font = localStorage.getItem('font') || 'serif'
 document.documentElement.dataset.appliedFont = font
