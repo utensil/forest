@@ -14,10 +14,10 @@ function getAppliedMode(userPreference) {
         return 'dark'
     }
     // system
-    if (matchMedia('(prefers-color-scheme: light)').matches) {
-        return 'light'
+    if (matchMedia('(prefers-color-scheme: dark)').matches) {
+        return 'dark'
     }
-    return 'dark'
+    return 'light'
 }
 
 function setAppliedMode(mode) {
