@@ -74,12 +74,8 @@
                                 </button>
                                 <button id="font-toggle" title="Font (serif/mono/sans)">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="18"
-                                        viewBox="0 0 24 24" fill="none" stroke="currentcolor"
-                                        stroke-width="2" stroke-linecap="round"
-                                        stroke-linejoin="round">
-                                        <path d="M4 7V4h16v3"></path>
-                                        <path d="M9 20h6"></path>
-                                        <path d="M12 4v16"></path>
+                                        viewBox="0 0 24 24" fill="currentcolor">
+                                        <text x="12" y="16" text-anchor="middle" font-weight="bold">T</text>
                                     </svg>
                                 </button>
                                 <button id="search">
