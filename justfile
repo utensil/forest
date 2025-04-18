@@ -751,17 +751,17 @@ prep-lb:
 lb:
     LIVEBOOK_IFRAME_PORT=58081 livebook server --port 58080
 
-prep-music:
-    # it doesn't support free spotify accounts
-    # which spotify_player || brew install spotify_player
-    # it's no longer available
-    # which spt || brew install spotify-tui
-    # it doesn't support free spotify accounts
-    # which ncspot || brew install ncspot
-    which code-radio || cargo install code-radio-cli
+# prep-music:
+#     # it doesn't support free spotify accounts
+#     # which spotify_player || brew install spotify_player
+#     # it's no longer available
+#     # which spt || brew install spotify-tui
+#     # it doesn't support free spotify accounts
+#     # which ncspot || brew install ncspot
+#     which code-radio || cargo install code-radio-cli
 
-music:
-    code-radio --no-logo --volume 5
+# music:
+#     code-radio --no-logo --volume 5
 
 nbview FILE:
     uvx euporie preview {{FILE}}
@@ -799,6 +799,37 @@ prep-scp:
 
 scp *PARAMS:
     termscp {{PARAMS}}
+
+# https://www.reddit.com/r/youtubedl/comments/155kkcc/youtube_music_how/
+
+ytm PLAYLIST:
+    #!/usr/bin/env zsh
+    cd ~/Music
+    uvx --with 'mutagen' yt-dlp -f bestaudio --cookies-from-browser chrome -x --embed-metadata --embed-thumbnail '{{PLAYLIST}}' --output '%(uploader)s/%(title)s.%(ext)s'
+
+prep-music:
+    which cmus || brew install cmus
+    which mpd || brew install mpd
+    mkdir -p ~/.mpd
+    cp -f dotfiles/.mpd/mpd.conf ~/.mpd/mpd.conf
+    brew services restart mpd
+    which mpc || brew install mpc
+    which ncmpcpp || brew install ncmpcpp
+    mkdir -p ~/.ncmpcpp
+    cp -f dotfiles/.ncmpcpp/config ~/.ncmpcpp/config
+
+# for keybindings, see https://github.com/ncmpcpp/ncmpcpp/blob/master/doc/bindings
+# 1-9 to switch between interfaces
+# = is clock
+# space will add the current song to the playlist, and move to the next one, just space over all songs to add them to the playlist
+# p to play/pause, <> for previous/next song, -+ for volume
+# fn+backspace can be used as delete, useful to delete a song from the playlist
+# 8 is visualization, space to switch visualization type
+music:
+    #!/usr/bin/env zsh
+    cd ~/Music
+    # cmus
+    ncmpcpp -s media_library
 
 import 'dotfiles/llm.just'
 import 'dotfiles/archived.just'
