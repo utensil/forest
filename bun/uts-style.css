@@ -21,10 +21,16 @@
     --mono: "Maple Mono", "Fira Code", "DejaVu Sans Mono", monospace;
 }
 
-body {
+:root[data-applied-font="serif"] body {
     font-family: var(--serif);
-    /* font-size: 12pt;
-    line-height: 1.55; */
+}
+
+:root[data-applied-font="mono"] body {
+    font-family: var(--mono);
+}
+
+:root[data-applied-font="sans"] body {
+    font-family: var(--sans);
 }
 
 @media screen {
