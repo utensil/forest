@@ -117,6 +117,17 @@ prep-term:
     which cmake || brew install cmake
     which pkg-config || brew install pkg-config
     which nproc || brew install coreutils
+    which fastfetch || brew install fastfetch
+    which tty-clock || brew install tty-clock
+    which duf || brew install duf
+    which jq || brew install jq
+    which sq || brew install sq
+    which fex || (curl -sSL https://raw.githubusercontent.com/18alantom/fex/master/install.sh | bash)
+    # -O https://raw.githubusercontent.com/18alantom/fex/master/install.sh
+    # which broot || brew install broot
+
+tree DIR="." LEVEL="1":
+    eza --git -T -L {{LEVEL}} --hyperlink {{DIR}}
 
 prep-gt:
     which ghostty || brew install ghostty
@@ -127,6 +138,8 @@ prep-gtsh:
     mkdir -p ~/projects
     if [ ! -d ~/projects/ghostty-shaders ]; then
         git clone https://github.com/m-ahdal/ghostty-shaders ~/projects/ghostty-shaders
+    else
+        (cd ~/projects/ghostty-shaders && git pull)
     fi
 
 # Cmd+Ctrl+F to toggle fullscreen, or just Cmd + Enter
@@ -177,6 +190,12 @@ sync-chad: stylua sync-plugins
     cp -f init.lua ~/.config/nvchad/nvim-init.lua
     cp -f lazyvim-init.lua ~/.config/nvchad/nvchad-init.lua
 
+sync-astro: stylua sync-plugins
+    mkdir -p ~/.config/astro
+    cp -f dotfiles/.config/astro/lua/community.lua ~/.config/astro/lua/
+    mkdir -p ~/.config/astro/lua/plugins
+    cp -f dotfiles/.config/astro/lua/plugins/spec.lua ~/.config/astro/lua/plugins/spec.lua
+
 prep-nvim: prep-term
     #!/usr/bin/env bash
     which nvim || brew install neovim
@@ -225,6 +244,36 @@ prep-chad:
 @chad PROJ="forest": sync-chad
     #!/usr/bin/env bash
     cd ~/projects/{{PROJ}} && nvim --cmd 'set runtimepath+=~/.config/nvchad/' --cmd 'lua package.path = package.path .. ";{{home_directory()}}/.config/nvchad/lua/?.lua"' -u ~/.config/nvchad/nvchad-init.lua
+
+# https://docs.astronvim.com/reference/alt_install/
+
+prep-astro:
+    #!/usr/bin/env zsh
+    if [ -d ~/.config/astro ]; then
+        (cd ~/.config/astro && git pull)
+    else
+        git clone https://github.com/AstroNvim/template ~/.config/astro
+    fi
+
+@astro PROJ="forest": sync-astro
+    #!/usr/bin/env zsh
+    cd ~/projects/{{PROJ}} && NVIM_APPNAME=astro nvim .
+
+try-astro:
+    #!/usr/bin/env zsh
+    if docker ps -a | grep -q astro; then
+        if ! docker ps | grep -q astro; then
+            docker start astro
+        fi
+        docker exec -it astro sh
+    else
+        docker run --name astro -w /root -it alpine:edge sh -uelic '
+        apk add bash curl git lua nodejs npm lazygit bottom python3 go neovim ripgrep alpine-sdk --update
+        # Replace with your own configuration repository to load a user configuration
+        [ ! -d ~/.config/nvim ] && git clone --depth 1 https://github.com/AstroNvim/template ~/.config/nvim
+        sh
+        '
+    fi
 
 yazi DIR="{{HOME}}/projects":
     #!/usr/bin/env bash
@@ -407,7 +456,9 @@ prep-rust:
     which cargo-binstall || cargo install cargo-binstall
 
 # a zsh that inherits .env
-zsh:
+zsh PROJ="forest":
+    #!/usr/bin/env zsh
+    cd ~/projects/{{PROJ}}
     zsh
 
 # a ssh that inherits .env etc.
@@ -515,7 +566,6 @@ prep-hx:
     rm -rf ~/.config/helix || true
     ln -s {{justfile_directory()}}/dotfiles/.config/helix ~/.config/helix
     just prep-base16-helix
-    # just prep-lsp-ai
 
 sync-hx:
     hx --grammar fetch
@@ -555,6 +605,7 @@ awake:
 
 prep-pod:
     which docker || (brew install docker; brew link docker)
+    which docker-compose || brew install docker-compose
     which colima || brew install colima
     docker context use default
 
@@ -619,6 +670,166 @@ fj:
     #!/usr/bin/env zsh
     mkdir -p {{FJ_DIR}}/ssh
     docker run --rm -it -e USER_UID=$(id -u) -e USER_GID=$(id -g) --env-file .env -p 23000:3000 -p 2222:22 -v {{FJ_DIR}}:/data -v /etc/timezone:/etc/timezone:ro -v /etc/localtime:/etc/localtime:ro data.forgejo.org/forgejo/forgejo:10
+
+# relies on GITHUB_ACCESS_TOKEN
+gh2md REPO OUTPUT *PARAMS="--no-prs":
+    #!/usr/bin/env zsh
+    GITHUB_ACCESS_TOKEN=$(gh auth token) uvx gh2md --idempotent {{PARAMS}} {{REPO}} {{OUTPUT}}
+    # https://github.com/mattduck/gh2md/issues/39
+    # docker run --rm -it -e GITHUB_ACCESS_TOKEN=$(gh auth token) dockerproxy.net/library/python:3.11.2 bash -c 'pip install gh2md && gh2md --idempotent {{REPO}} {{OUTPUT}}'
+
+# run fastfetch every time Enter is pressed
+fetch:
+    #!/usr/bin/env zsh
+    while true; do
+        clear
+        fastfetch
+        read -n 1
+    done
+
+time:
+    tty-clock -c -s -C 3
+
+# then run: git clone http://localhost:63000/username/repo.git:/dir.git
+# but no arm64 version yet
+# josh-proxy:
+#     #!/usr/bin/env zsh
+#     docker run \
+#         -p 63000:8000 \
+#         -e JOSH_REMOTE=https://github.com \
+#         dockerproxy.net/joshproject/josh-proxy:latestS
+
+josh-proxy:
+    #!/usr/bin/env zsh
+    mkdir -p ~/.josh
+    cd ~/projects/
+    if [ ! -d josh ]; then
+        git clone https://github.com/josh-project/josh
+    else
+        (cd josh && git pull)
+    fi
+    cd josh/josh-proxy
+    cargo run -- --port 63000 --remote https://github.com --local ~/.josh
+
+josh WHERE USER REPO DIR:
+    #!/usr/bin/env zsh
+    cd ~/projects/
+    git clone http://localhost:63000/{{USER}}/{{REPO}}.git:/{{DIR}}.git {{WHERE}}
+    cd {{WHERE}}
+    git remote rename origin origin_josh || true
+    echo 'cd ~/projects/{{WHERE}} && git remote add origin https://github.com/{{USER}}/NEW_REPO_NAME.git'
+    echo 'gh auth setup-git'
+    echo 'git push -u origin BRANCH'
+# https://github.com/louislam/dockge
+prep-dockge:
+    #!/usr/bin/env zsh
+    sudo mkdir -p /opt/stacks /opt/dockge
+    sudo chown -R $(whoami) /opt/stacks
+    sudo chown -R $(whoami) /opt/dockge
+    cd /opt/dockge
+    curl https://raw.githubusercontent.com/louislam/dockge/master/compose.yaml --output compose.yaml
+
+# https://github.com/abiosoft/colima/issues/265
+
+dockge COMMAND="up":
+    #!/usr/bin/env zsh
+    cd /opt/dockge
+    # if COMMAND is up
+    if [ "{{COMMAND}}" = "up" ]; then
+        docker-compose up -d
+        echo Dockge is now running on http://localhost:5001
+    elif [ "{{COMMAND}}" = "down" ]; then
+        docker-compose down
+    fi
+
+# https://github.com/livebook-dev/livebook#installation
+prep-lb:
+    #!/usr/bin/env zsh
+    mix do local.rebar --force, local.hex --force
+    yes|mix escript.install hex livebook
+
+lb:
+    LIVEBOOK_IFRAME_PORT=58081 livebook server --port 58080
+
+# prep-music:
+#     # it doesn't support free spotify accounts
+#     # which spotify_player || brew install spotify_player
+#     # it's no longer available
+#     # which spt || brew install spotify-tui
+#     # it doesn't support free spotify accounts
+#     # which ncspot || brew install ncspot
+#     which code-radio || cargo install code-radio-cli
+
+# music:
+#     code-radio --no-logo --volume 5
+
+nbview FILE:
+    uvx euporie preview {{FILE}}
+
+weather CITY:
+    curl 'wttr.in/{{CITY}}'
+    # ?format=3'
+
+prep-gitlog:
+    which serie || brew install lusingander/tap/serie
+
+gitlog:
+    serie
+
+# Error: Your Xcode (15.4) at /Applications/Xcode.app is too outdated.
+# Please update to Xcode 16.0 (or delete it).
+# Xcode can be updated from the App Store.
+
+# Error: Your Command Line Tools are too outdated.
+# Update them from Software Update in System Settings.
+
+# If that doesn't show you any updates, run:
+#   sudo rm -rf /Library/Developer/CommandLineTools
+#   sudo xcode-select --install
+
+# Alternatively, manually download them from:
+#   https://developer.apple.com/download/all/.
+# You should download the Command Line Tools for Xcode 16.0.
+
+# Error: You have not agreed to the Xcode license. Please resolve this by running:
+#   sudo xcodebuild -license accept
+
+prep-scp:
+    which termscp || brew install veeso/termscp/termscp
+
+scp *PARAMS:
+    termscp {{PARAMS}}
+
+# https://www.reddit.com/r/youtubedl/comments/155kkcc/youtube_music_how/
+
+ytm PLAYLIST:
+    #!/usr/bin/env zsh
+    cd ~/Music
+    uvx --with 'mutagen' yt-dlp -f bestaudio --cookies-from-browser chrome -x --embed-metadata --embed-thumbnail '{{PLAYLIST}}' --output '%(uploader)s/%(title)s.%(ext)s'
+
+prep-music:
+    which cmus || brew install cmus
+    which mpd || brew install mpd
+    mkdir -p ~/.mpd
+    cp -f dotfiles/.mpd/mpd.conf ~/.mpd/mpd.conf
+    brew services restart mpd
+    which mpc || brew install mpc
+    which ncmpcpp || brew install ncmpcpp
+    mkdir -p ~/.ncmpcpp
+    cp -f dotfiles/.ncmpcpp/config ~/.ncmpcpp/config
+
+# for keybindings, see https://github.com/ncmpcpp/ncmpcpp/blob/master/doc/bindings
+# 1-9 to switch between interfaces
+# = is clock
+# space will add the current song to the playlist, and move to the next one, just space over all songs to add them to the playlist
+# p to play/pause, <> for previous/next song, -+ for volume
+# fn+backspace can be used as delete, useful to delete a song from the playlist
+# 8 is visualization, space to switch visualization type
+music:
+    #!/usr/bin/env zsh
+    cd ~/Music
+    # cmus
+    ncmpcpp -s media_library
 
 import 'dotfiles/llm.just'
 import 'dotfiles/archived.just'

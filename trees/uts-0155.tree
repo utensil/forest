@@ -1,0 +1,105 @@
+\import{macros}\title{Investigate Linux performance tools}
+\date{2014-08-30}
+\author{utensil}
+
+\md{
+#### [utensil](https://github.com/utensil) opened issue at [2014-08-30 12:31](https://github.com/utensil/utensil.github.io/issues/12):
+
+- [ ] Investigate [sysdig](http://www.sysdig.org/install/)
+- [ ] [20 Command Line Tools to Monitor Linux Performance](http://www.tecmint.com/command-line-tools-to-monitor-linux-performance/)
+- [ ] [Performance analysis tools based on Linux perf_events (aka perf) and ftrace](https://github.com/brendangregg/perf-tools)
+
+
+#### [utensil](https://github.com/utensil) commented at [2016-06-15 03:57](https://github.com/utensil/utensil.github.io/issues/12#issuecomment-226082033):
+
+```
+ dstat -cmndpyr
+----total-cpu-usage---- ------memory-usage----- -net/total- -dsk/total- ---procs--- ---system-- --io/total-
+usr sys idl wai hiq siq| used  buff  cach  free| recv  send| read  writ|run blk new| int   csw | read  writ
+```
+
+```
+dstat --ipc --lock --socket --unix
+--sysv-ipc- ---file-locks-- ------sockets------ --unix-sockets-
+msg sem shm|pos lck rea wri|tot tcp udp raw frg|dgm str lis act
+```
+
+```
+strace -T -r -F -c -p PID
+Process PIDattached - interrupt to quit
+^CProcess PID detached
+% time     seconds  usecs/call     calls    errors syscall
+------ ----------- ----------- --------- --------- ----------------
+```
+
+```
+perf top -a -e cycles:u -p PID
+perf  record -e cycles:u -a -p PID -g
+perf report
+```
+
+[Zoom](http://www.rotateright.com/): GUI for perf
+
+```
+#
+zoom run --time_limit 60 --start immediate  --process `pgrep PROC_NAME` --thread_time_trigger 10 --trace_thread_scheduler --profile_driver perf
+# system wide
+zoom run --time_limit 10 --start immediate
+```
+
+```
+pstack `pgrep TARGET_PROCESS_NAME`|grep Proc -B 4|awk -f ./thr.awk |column -t
+```
+
+where `thr.awk` is:
+
+\verb>>>|
+```awk
+BEGIN {
+
+}
+
+/Thread/ {
+    tid = gensub(/\)|:/, "", "g", $6)
+}
+
+/#1/ {
+    doing = $4
+    old_tids = doings[doing]
+    doings[doing] = sprintf("%s %s", old_tids, tid)
+}
+
+/Proc/ {
+    proc_name = gensub(/\(void\*\)/, "", "g", $4)
+    old_doings = procs[proc_name]
+    procs[proc_name]= sprintf("%s %s", old_doings, doing)
+}
+
+END {
+    for(proc_name in procs) {
+        proc_doing = procs[proc_name]
+        # print proc_name, ":\n"
+        split(proc_doing, proc_doings, " ")
+        for(i in proc_doings) {
+                        stat[proc_doings[i]] +=1
+                }
+                row_first = proc_name
+                for(fun in stat) {
+                        print row_first, fun, stat[fun], "\n"
+                        row_first = "_"
+                }
+                for(fun in stat) {
+                        delete stat[fun]
+                }
+        }
+}
+```
+>>>
+
+#### [utensil](https://github.com/utensil) commented at [2016-06-15 04:08](https://github.com/utensil/utensil.github.io/issues/12#issuecomment-226083119):
+
+Debug tools:
+- [GDB dashboard](https://github.com/cyrus-and/gdb-dashboard)
+- [Record and Replay Framework](https://github.com/mozilla/rr)
+- [Immunity Debugger](http://www.immunityinc.com/products/debugger/)
+}

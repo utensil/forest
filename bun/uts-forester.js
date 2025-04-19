@@ -14,10 +14,10 @@ function getAppliedMode(userPreference) {
         return 'dark'
     }
     // system
-    if (matchMedia('(prefers-color-scheme: light)').matches) {
-        return 'light'
+    if (matchMedia('(prefers-color-scheme: dark)').matches) {
+        return 'dark'
     }
-    return 'dark'
+    return 'light'
 }
 
 function setAppliedMode(mode) {
@@ -36,6 +36,30 @@ function rotatePreferences(userPreference) {
 }
 
 // the class of body is toggled between none and dark
+function rotateFontPreferences(currentFont) {
+    if (currentFont === 'serif') return 'mono'
+    if (currentFont === 'mono') return 'sans'
+    return 'serif'
+}
+
+function getFontPreference() {
+    return localStorage.getItem('font') || 'serif'
+}
+
+function saveFontPreference(font) {
+    localStorage.setItem('font', font)
+}
+
+function setAppliedFont(font) {
+    document.documentElement.dataset.appliedFont = font
+}
+
+function toggleFont() {
+    const newFontPref = rotateFontPreferences(getFontPreference())
+    saveFontPreference(newFontPref)
+    setAppliedFont(newFontPref)
+}
+
 function toggleTheme() {
     const newUserPref = rotatePreferences(getUserPreference())
     userPreference = newUserPref
@@ -61,6 +85,7 @@ function togglelang() {
 document.addEventListener('DOMContentLoaded', () => {
     // on clicking the button with id theme-toggle, the function toggleTheme is called
     document.getElementById('theme-toggle').onclick = toggleTheme
+    document.getElementById('font-toggle').onclick = toggleFont
     document.getElementById('search').onclick = search
     const langblock_toggle = document.getElementById('langblock-toggle')
     if (langblock_toggle) langblock_toggle.onclick = togglelang
@@ -164,5 +189,7 @@ document.addEventListener('DOMContentLoaded', () => {
 })
 
 // Important to be 1st in the DOM
-const theme = localStorage.getItem('theme') || 'light'
+const theme = localStorage.getItem('theme') || getAppliedMode('system')
 document.documentElement.dataset.appliedMode = theme
+const font = localStorage.getItem('font') || 'serif'
+document.documentElement.dataset.appliedFont = font

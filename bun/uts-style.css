@@ -3,18 +3,34 @@
 @tailwind utilities;
  */
 
-body {
-    font-family: Palatino, "Palatino Linotype", "Palatino LT STD",
-        "Book Antiqua", Georgia, serif;
-    /* font-size: 12pt;
-    line-height: 1.55; */
-}
-
 :root {
     /* 16:9 */
     --uts-canvas-width: 80%;
     /* 80ex; */
     --uts-canvas-height: 45ex;
+
+    --serif: Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua",
+        Georgia, serif;
+
+    /* from https://entropicthoughts.com/etc/style/css/main.css */
+    /* --serif: Whitman, serif; */
+    --sans: "CooperHewitt", Arial;
+    /* --mono: 'Hack', monospace; */
+
+    /* mine */
+    --mono: "Maple Mono", "Fira Code", "DejaVu Sans Mono", monospace;
+}
+
+:root[data-applied-font="serif"] body {
+    font-family: var(--serif);
+}
+
+:root[data-applied-font="mono"] body {
+    font-family: var(--mono);
+}
+
+:root[data-applied-font="sans"] body {
+    font-family: var(--sans);
 }
 
 @media screen {
@@ -88,7 +104,14 @@ body {
 :root[data-applied-mode="light"] {
     color-scheme: light;
     --uts-text: black;
-    --uts-link: black;
+    /* --uts-link: black; */
+    /* brown */
+    --uts-link: #9e7140;
+    /* orange */
+    /* --uts-link: #D96E34; */
+    /* dark grey */
+    /* --uts-link: #5d5d5d; */
+    --uts-link-internal: #5d5d5d;
     --uts-text-gentle: rgb(132, 132, 132);
     --uts-text-cite: #10731d;
     --uts-background: white;
@@ -100,7 +123,14 @@ body {
 :root[data-applied-mode="dark"] {
     color-scheme: dark;
     --uts-text: #cbd1db;
-    --uts-link: #cbd1db;
+    /* --uts-link: #cbd1db; */
+    /* light brown */
+    --uts-link: #d7b28b;
+    /* lighter orange */
+    /* --uts-link: #f5a25d; */
+    /* lighter grey than --uts-text */
+    /* --uts-link: #dddddd; */
+    --uts-link-internal: #adadad;
     --uts-text-gentle: rgb(174, 174, 174);
     --uts-text-cite: #8cd295;
     --uts-background: #151a1f;
@@ -146,9 +176,23 @@ nav#toc {
 
 a,
 nav#toc a {
-    color: var(--uts-link) !important;
+    color: var(--uts-text) !important;
     cursor: pointer;
-    text-decoration: underline;
+    /* text-decoration: underline; */
+    /* text-decoration: none !important; */
+}
+
+.link.external {
+    text-decoration: none;
+}
+
+.link.external a,
+.markdownit a {
+    color: var(--uts-link) !important;
+}
+
+.link.local a {
+    color: var(--uts-link-internal) !important;
 }
 
 .slug,
@@ -158,15 +202,15 @@ nav#toc a {
 nav#toc a.link.local,
 nav#toc .link.local a,
 nav#toc a.slug {
-    color: var(--uts-text-gentle) !important;
+    color: var(--uts-link-internal) !important;
     font-weight: normal;
     /* text-decoration-line: unset !important;
     text-decoration-style: unset !important; */
 }
 
 /* This applies to references, including in title, main text, backmatter, but not in toc */
-.link-reference a,
-.link-reference-full a {
+.link-reference .link.local a,
+.link-reference-full .link.local a {
     color: var(--uts-text-cite) !important;
     box-shadow: none !important;
     text-decoration: none !important;
@@ -198,7 +242,8 @@ a.slug[href*="utensil"], a.slug[href*="jonmsterling"] {
     text-decoration-style: dotted !important;
 } */
 
-button#theme-toggle {
+button#theme-toggle,
+button#font-toggle {
     /* font-size: 26px; */
     margin: auto 4px;
     cursor: pointer;
@@ -510,7 +555,7 @@ nav#toc li.active {
 .meta-lean-symbol,
 .link-source span,
 .link-pdf span {
-    font-family: Fira Code, DejaVu Sans Mono, monospace;
+    font-family: var(--mono);
 }
 
 /* details:hover > summary .meta-lean a {
@@ -523,7 +568,7 @@ nav#toc li.active {
     /* visibility: hidden; */
     /* text-align: right; */
     /* font-weight: normal;
-    font-family: Fira Code, DejaVu Sans Mono, monospace; */
+    font-family: var(--mono); */
 }
 
 .meta-lean-list {
@@ -787,4 +832,18 @@ code.highlight.grace-loading {
         filter: invert(1.0);
         /* drop-shadow(0 0 5px #ffffff); */
     }
+}
+
+/* the first h1 in the first section */
+article > section:first-of-type > details > summary > header > h1 {
+    font-size: 2em;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin-bottom: 0.5em;
 }

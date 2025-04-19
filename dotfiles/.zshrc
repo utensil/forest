@@ -9,6 +9,9 @@ eval "$(zoxide init zsh)"
 # ---- FZF -----
 
 # Set up fzf key bindings and fuzzy completion
+# Ctrl+t list files+folders in current directory
+# Ctrl+r search history of shell commands
+# Alt+c fuzzy change directory
 eval "$(fzf --zsh)"
 
 # --- setup fzf theme ---
@@ -71,6 +74,12 @@ function y() {
 	rm -f -- "$tmp"
 }
 
+# # Source .fex.zsh if it's present
+# [ -f ~/.fex.zsh ] && source ~/.fex.zsh
+
+# # Bind CTRL-F to invoke fex (key binds can be custom)
+# bindkey '^f' fex-widget
+
 # https://github.com/Sin-cy/dotfiles
 # run `just prep-zsh` first
 source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
@@ -83,6 +92,8 @@ function needs_nvim() {
     [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
     [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 }
+
+alias llm="uvx llm"
 
 # zprof
 

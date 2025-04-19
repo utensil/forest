@@ -1,17 +1,17 @@
 # see https://github.com/sigoden/aichat/blob/main/config.example.yaml
 
-model: tds
+model: env
 rag_embedding_model: om:bge-m3
 rag_chunk_size: 1500
 rag_chunk_overlap: 75
 
 clients:
   - type: openai-compatible
-    name: tds
-    api_base: https://api.lkeap.cloud.tencent.com/v1/
-    api_key: sk-secret
+    name: env
+    api_base: !ENV ${OPENAI_API_BASE}
+    api_key: !ENV ${OPENAI_API_KEY}
     models:
-    - name: deepseek-v3-0324
+    - name: !ENV ${OPENAI_API_MODEL}
       max_input_tokens: null
   - type: openai-compatible
     name: om
@@ -22,3 +22,11 @@ clients:
         type: embedding
         default_chunk_size: 1500
         max_batch_size: 100
+  - type: openai-compatible
+    name: mini
+    api_base: !ENV ${MINI_API_BASE}
+    models:
+      - name: lms:deepseek-r1-distill-qwen-32b
+      - name: lms:deepseek-r1-distill-llama-70b
+      - name: lms:fuseo1-deepseekr1-qwq-skyt1-flash-32b-preview
+      - name: lms:qwq-32b

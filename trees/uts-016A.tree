@@ -1,0 +1,111 @@
+\import{macros}
+% clifford hopf spin tt ag math draft tech exp notes
+% \tag{math}
+\tag{tech}
+\tag{notes}
+\tag{draft}
+
+\author{utensil}
+\date{2025-04-07}
+
+\mdnote{4 bugs caught me off guard recently}{
+> Initially posted [on Bear](https://utensil.bearblog.dev/bugs/).
+
+And it's non-trivial to hunt their families down.
+
+But yeah, that's pretty much my job description, that is, to set up mechanisms to eliminate similar problems from all systems in future.
+
+They are from different kind of systems and varying technical stacks, so it would be interesting to pin these specimens down for a display.
+
+How to hunt their families down are left as exercises for the readers.
+
+## Legacy configuration removal
+
+The system in question is a proxy server that routes requests to different backends that are responsible for communicating with different third-party APIs. Two keys in the request are used to determine the backend: `party` and `service`, which indicate *who* does *what*, respectively. For the same pair of these keys, even if there is only one type of backend, there could be multiple instances in different availability zones (AZs) and regions.
+
+There is a subsystem (let's call it the "Switch") to route requests based on the health of these instances. It's vital for the switch to always work, so the requests won't go to a bad instance that is already unresponsive.
+
+The Switch will reuse the *static* configurations of the proxy that lists combinations of `party` and `service`, along with *dynamic* instance information. The static and dynamic information as a whole is written to a cache, whenever an arbiter detects unhealthy instances. The proxy will use the cache to change its routing dynamically.
+
+There was a special party (let's call it "Bob") that requires 2 steps/services (namely "Pre" and "Main") to complete what other parties can do in 1 step ("Main"). These 2 steps are stateful in the sense that if an intance can't do "Main", requests should not be routed to "Pre" either.
+
+So when the Switch reads the blob from the cache, a special check is in place to ensure "Bob" & "Pre" are in the combination list, if they are not, the switch will reject to read, and report an error as a monitoring metric which didn't set up a proper alerting threshold for sudden increase in error rate, because it's an error that never happened before, and is missed when SREs setting up the thresholds for important metrics.
+
+10 years passed by, and "Bob" can also do it in one step, "Main". There are also many legacy combinations that are not used anymore. One day it becomes necessary to remove unused combinations, the includes the combination "Bob" & "Pre".
+
+Bang! The Switch rejects all new writes to the cache for 6 days and no one noticed because no major outage happened, the error rate due to unhealthy instances was low enough to be ignored. The issue is only discovered when the same person is observing the Switch for a different deployment, and it took almost a day to figure out the root cause.
+
+The interesting part? The same person who removed the legacy configuration placed those special checks 10 years ago, the reviewer of the removal also reviewed the check 10 years ago. The check was just an unthoughtful precaution, recalling the check and predicting its ramifications on config removal didn't cross the minds of both of them, even during the initial stage of debugging.
+
+## Too many concurrent slow queries
+
+There is a batch processing system (let's call it the "Sink") that loads different kinds of data from asynchronous nodes of production database clusters, according the configured rules about data source, conditions, how to process etc. There are many rate limits in place to prevent the system from overwhelming the database clusters, such as limiting the concurrent number of tasks, and the threshold of the number of concurrent queries on the same database node. It's also an assumption that the asynchronous nodes are not used for user-facing online queries but other batch processing systems.
+
+The rate limits gradually converged to a balance that maximizes the throughput without overwhelming the nodes even during stress tests of high data volume.
+
+There is also a separate monitor metric that tracks slow queries over a certain threshold, and the threshold was also converging, so SREs could focus on the top issues.
+
+One day, many different databases nodes were reporting high load, only for a few seconds each, but continuously affecting an online service that happens to be using asynchronous nodes, as the service is considered less time-sensitive thus tolerable to the delay that asynchronous nodes might have. SREs and DBAs are confused for quite a while, until a technical lead who guessed it might be caused by the batch processing system Sink, which turned out to be true.
+
+The developers of Sink were also confused, as the concurrent queries on the same node, and the slow queries were both within the limits.
+
+The truth did come out in the end. There was 2 tasks configured in Sink, which will be broken down into many sub-tasks for different time spans, and subsequently, queries for different shards of the same table across different asynchronous nodes. And there is a bug in the task configuration that caused slow queries, and the bug was copy-pasted to affect both tasks. Both tasks were running slow slow, but the database nodes could handle the load along with online queries, as the concurrent slow queries are well below the CPU cores that the nodes could use.
+
+One that day, both the tasks were requested to be rerun for 2 time spans by the same person who introduced the bug, which caused concurrent slow queries on the same node to exceed the core count, blocking the online queries. But as the queries are rate-limited so they hit different nodes in a rotating manner, each node was only affected for a few seconds, the overall impact could only be observed by SREs monitoring the online services, and DBAs considered the phenomenon as a normal load spike.
+
+The lesson learned? Each piece of measures were working individually, but they could not account for combinations of different issues, namely too many *concurrent* (and) *slow* queries, and only the combination could cause an impactful issue. And the information about different parts of the system (the online service, database nodes, and Sink) were not shared across teams.
+
+## OOM when retiring old worker processes
+
+This story is about an SOA framework written in C++ (let's call it the "Framework") that will spawn many worker processes to handle requests for a service, and when a new version of the service is deployed, it will gracefully retire the old worker processes, and spawn new ones of the new version to handle requests. The framework also integrates a few plugins to extend its functionality, and the plugins have their own lifecycle management, e.g. `init`, and `fini`.
+
+One of these plugins (let's call it "Charlie") will starts an asynchronous thread for each worker process, and signals the termination of the thread in `fini`. It recommends an explicit call to `fini`, but `fini` was considered trivial enough to be also called in the destructor of the plugin. It's a bad practice in the eyes of any C++ expert, but it worked well for a long time, there was also no issue calling `fini` twice, once explicitly and once in the destructor.
+
+Every few ten thousand deployments, there is an OOM ("Out of memory") when retiring the old worker processes, but it will be killed per cgroup thresholds on memory consumptions, so only few requests are impacted overtime, eventually SREs concluded that the OOMs are not isolated events.
+
+It was a nightmare to reproduce the issue without know the cause upfront, and code looked innocent enough in review. Finally enough data were collected on rare reproductions, and the clues pointed to `fini` in the destructor of Charlie, but there is only the signaling in `fini`. Further investigation revealed that the asynchronous thread was sending a heartbeat request which caused the OOM.
+
+During sending the request, there was a call to a method using local const static `std::array` holding some `std::string` initialized by literals. That static variable had been destroyed when the asynchronous thread is still alive, which would be signaled to terminate later in `fini` in the destructor of Charlie. The destructor was doing its thing not too non-trivial, but too late, due to the undefined execution order of destructors.
+
+Why would this cause an OOM? After destruction, the heap memory involved were still valid, as they were not released but reused by the allocator, thus there is no SEGFAULT, but the memory for `size()` of the strings contains garbage value, which happens to be a large number, and the strings were appending to a `std::stringstream` to form the heartbeat request, causing endless memory allocation until the OOM.
+
+The issue became more reproducible after using an allocator (`tcmalloc`) that would retain the heap memory longer after destruction. It would have been caught by various [sanitizers](https://clickhouse.com/blog/rust#sanitizers) if we have integrated them in CI.
+
+## Silently hanging tasks
+
+It's again about the batch processing system Sink. Internally it uses an MQ to queue tasks, so it can retry failed tasks. To prevent aggressive retries, there is a backoff mechanism that will exponentially increase the delay between retries, and the maximum number of retries is also limited.
+
+One day, an incident caused all available zones of the MQ to drop a certain percentage of network packets, causing a stable failure rate of task dispatching. If the retries are performed in a regular rate, the aggregate delay of tasks would not be too long.
+
+Unfortunately, the backoff mechanism backfired, along with other rate-limiting mechanisms, eventually causing all task to hang indefinitely. Again, existing metrics were not able to pinpoint the issue, and the developers took some time to figure out the root cause. But as the incident causing all SREs to be in a all-hands-on-deck mode, the hung were noticed quickly from less sensitive monitoring metrics, resulted in a relatively timely fix.
+
+A more sensitive monitoring metric was deployed to detect hanging tasks, and it caught another issue a few days later, and the issue was handled swiftly before causing actual delay.
+
+The issue was that there was a silly bug that runs `remove()` for every element in a huge array, and overall it would take `O(n^2)` time to finish, it's almost forever for such huge arrays. The removal would only be triggered when certain conditions are met, and the bug of removal was copy-pasted from some other utility package.
+
+The bug should only hang one processes that handled the task, unfortunately, the dispatcher would detect timeout tasks, considered the process as dead, reassign the task to other processes when the task was still occupying the old process which was burying its head deep in the `remove()` calls, missing its own checkpoint for timeout. The re-assignment happened over and over again for each timeout, eventually causing all processes to be busy with the same task, and the `remove()` calls would almost never finish. The world literally stopped for that task.
+
+With early detection of hanging tasks, developers were able to try fixes quickly. It should not be easy to find the root cause, but the developers noticed long pauses between two log entries, and the removal loop was the only code there when they wanted to add some logging between the log entries, thus the obvious bug was immediately identified.
+
+It's really lucky that the first issue that was not too serious helped to deploy the more sensitive monitoring metric, so the second issue, which could be much fatal, was detected and fixed promptly, on the morning of the first day of a national holiday. Task re-assignment were then limited to prevent poluting more processes with a bad task.
+
+## LLM's takeaways
+
+Disclaimer: The above stories are slightly modified from the actual events, and they are mannually written by me, not generated by LLM.
+
+I asked DeepSeek to write some takeaways as I was a bit tired after telling these stories. This is the version I'm happy with:
+
+1. **Legacy safeguards breed hidden traps**
+   Undocumented checks (Bug 1) and copy-pasted code (Bugs 2, 4) linger as systemic debt. Always audit dependencies before removal or reuse.
+
+2. **Test failure *combinations*, not thresholds**
+   Rate limits + slow queries (Bug 2), retries + packet loss (Bug 4): isolated safeguards fail when risks collide. Model interactions, not silos.
+
+3. **Own lifecycle control explicitly**
+   Destructor chaos (Bug 3) and hanging tasks (Bug 4) stem from assuming cleanup. Govern threads, memory, and resources with strict ownership.
+
+4. **Instrument for why, not what**
+   Missing alerts for config errors (Bug 1), slow queries (Bug 2), or hung processes (Bug 4) delay fixes. Metrics must expose root causes, not just symptoms.
+
+**Core**: Systems fail in layers. Anticipate overlap, govern lifecycles ruthlessly, and monitor for causality—not just correlation.
+}

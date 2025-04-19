@@ -420,7 +420,6 @@ local ui_plugins = {
             -- ...
         end,
     },
-
     {
         "folke/noice.nvim",
         event = "VeryLazy",
@@ -461,8 +460,11 @@ local ui_plugins = {
                         col = "50%",
                     },
                     size = {
-                        width = 120,
+                        width = "95%",
                         height = "auto",
+                    },
+                    win_options = {
+                        wrap = true,
                     },
                     -- win_options = {
                     --     winhighlight = {
@@ -841,7 +843,11 @@ local lang_plugins = {
     },
 }
 
-local llm_plugins = {
+local llm_plugins_au = {
+    { "augmentcode/augment.vim" },
+}
+
+local llm_plugins_cp = {
     {
         "github/copilot.vim",
         event = "VeryLazy",
@@ -1208,6 +1214,8 @@ local merge = function(...)
     end
     return result
 end
+
+local llm_plugins = llm_plugins_cp
 
 local all_plugins = merge(basic_plugins, lang_plugins, ui_plugins, llm_plugins)
 
