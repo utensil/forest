@@ -831,6 +831,13 @@ music:
     # cmus
     ncmpcpp -s media_library
 
+# I'v configured it to use double tap opt then hold to trigger the radial menu
+# direction keys to place the window in 8 directions, space to maximize, enter to center
+# It's so smooth
+prep-loop:
+    #!/usr/bin/env zsh
+    [ -d /Applications/Loop.app ] || brew install loop
+
 import 'dotfiles/llm.just'
 import 'dotfiles/archived.just'
 
