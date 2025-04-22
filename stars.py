@@ -43,6 +43,10 @@ def process_stars(input_text):
                         "%Y-%m-%d"
                     )
 
+                    date = datetime.fromtimestamp(entry["datePublished"]).strftime(
+                        "%Y-%m-%d"
+                    )
+
                     # Use externalURL if available, otherwise use url
                     url = entry.get("externalURL") or entry.get("url")
                     if not url:  # Skip if no URL available
