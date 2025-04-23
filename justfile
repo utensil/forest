@@ -191,7 +191,7 @@ sync-chad: stylua sync-plugins
     cp -f lazyvim-init.lua ~/.config/nvchad/nvchad-init.lua
 
 sync-astro: stylua sync-plugins
-    mkdir -p ~/.config/astro
+    mkdir -p ~/.config/astro/lua/
     cp -f dotfiles/.config/astro/lua/community.lua ~/.config/astro/lua/
     mkdir -p ~/.config/astro/lua/plugins
     cp -f dotfiles/.config/astro/lua/plugins/spec.lua ~/.config/astro/lua/plugins/spec.lua
