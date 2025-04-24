@@ -481,6 +481,7 @@ prep-git:
     git config --global credential.helper "store --file ~/.git-credentials"
     gh auth status || gh auth login
     gh auth setup-git
+    echo 'Remember to run `just prep-delta` for better lazygit experience'
 
 prep-delta:
     which delta || brew install git-delta
@@ -837,6 +838,10 @@ music:
 prep-loop:
     #!/usr/bin/env zsh
     [ -d /Applications/Loop.app ] || brew install loop
+
+prep-space:
+    #!/usr/bin/env zsh
+    [ -d /Applications/FlashSpace.app ] || brew install flashspace
 
 import 'dotfiles/llm.just'
 import 'dotfiles/archived.just'
