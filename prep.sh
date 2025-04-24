@@ -22,6 +22,11 @@ if ! command -v opam exec forester -- --help|head &> /dev/null; then
   opam pin add forester git+https://git.sr.ht/~jonsterling/ocaml-forester#56de06afe952d752c1a13fdcd8bb56c5fef9956f --yes
 fi
 
+# if pandoc is not installed
+if ! command -v pandoc &> /dev/null; then
+  brew install pandoc
+fi
+
 # if bun is not installed
 if ! command -v bun &> /dev/null; then
   # install bun
@@ -34,5 +39,5 @@ if ! command -v just &> /dev/null; then
   curl --proto '=https' --tlsv1.2 -sSf https://just.systems/install.sh | bash -s -- --to /usr/local/bin
 fi
 
-echo "✅ dependencies installed: mactex, forester, bun, just"
+echo "✅ dependencies installed: mactex, forester, pandoc, bun, just"
 # echo "💡 To initialize just aliases: source alias.sh"

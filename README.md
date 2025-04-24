@@ -53,8 +53,13 @@ Locally I will
 ```bash
 git clone https://git.sr.ht/~jonsterling/public-trees jms
 ```
-
 so I can check Jon Sterling's use of Forester conveniently.
+
+### Additional dependencies
+
+The following should be all taken cared of by `./prep.sh`, at least on Mac.
+
+#### LaTeX
 
 In order to use `dvisvgm` required by forester to compile LaTeX to SVG, I have to:
 
@@ -65,11 +70,9 @@ brew install --cask mactex
 
 See https://tex.stackexchange.com/a/676179/75671 for why.
 
-### Experimental features
-
 #### `just`
 
-I'm experimenting with [just](https://github.com/casey/just) as a task runner, ideally one can just install `just` then install all deps and run all the task via `just`.
+I'm using [just](https://github.com/casey/just) as a task runner, ideally one can just install `just` then install all deps and run all the task via `just`.
 
 `just` is useful for registering many few-liner tasks, maintaining sanity for file path handling, environment variable setting,
 task dependency declaration, and parameter passing.
@@ -88,11 +91,9 @@ To check all available tasks, run
 just --list
 ```
 
-To add aliases to the current shell, run
+#### Bibliography
 
-```bash
-source ./alias.sh
-```
+I use a combination of `pandoc` and a Python script to generate Forester-style bibliography tree files from a few `.bib` files.
 
 #### `bun`
 
