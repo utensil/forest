@@ -853,6 +853,9 @@ prep-file:
     #!/usr/bin/env zsh
     [ -d /Applications/Marta.app ] || brew install --cask marta
 
+# Can't do the same for FreeFileSync due to https://github.com/Homebrew/homebrew-cask/issues/63069,
+# but actually https://github.com/Marcuzzz/homebrew-marcstap/blob/master/Casks/freefilesync.rb proves that it could work
+
 import 'dotfiles/llm.just'
 import 'dotfiles/archived.just'
 
