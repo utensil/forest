@@ -843,6 +843,16 @@ prep-space:
     #!/usr/bin/env zsh
     [ -d /Applications/FlashSpace.app ] || brew install flashspace
 
+# Tab to switch between 2 Tab
+# Cmd+Shift+. to toggle hidden files
+# Cmd+Shift+P to open Command Palette
+# Cmd+G to go to path
+# / to search by regex, \ by substring, then up/down to navigate between search results
+# Set /Users/utensil/Library/Mobile Documents/com~apple~CloudDocs to favorites for iCloud docs
+prep-file:
+    #!/usr/bin/env zsh
+    [ -d /Applications/Marta.app ] || brew install --cask marta
+
 import 'dotfiles/llm.just'
 import 'dotfiles/archived.just'
 
