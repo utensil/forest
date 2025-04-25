@@ -849,11 +849,27 @@ prep-space:
 # Cmd+G to go to path
 # / to search by regex, \ by substring, then up/down to navigate between search results
 # Set /Users/utensil/Library/Mobile Documents/com~apple~CloudDocs to favorites for iCloud docs
-prep-file:
+# for long copy/move operations, = to open the operation queue (with per-task and per-file progress bars)
+# Cmd+Y to preview a file, Cmd+Enter to select an app to open the file
+# Opt+1: Volumes, 2: Favorites, 3: Recent Locations, 0: parent directories
+# it supports [Disk Usage Analyzing](https://marta.sh/docs/actions/disk-usage/), but note that it's async and will be queued
+# Cmd+O to open embeded terminal, useful to run git commands, `z` into recent directories, run `dua i`
+# Cmd+Opt+O to close it
+# See dotfiles/.config/marta/marta.marco for configuration (Cmd+, then copy-paste it)
+# Cmd+Opt+G to lauch Ghostty from the current directory
+p rep-file:
     #!/usr/bin/env zsh
     [ -d /Applications/Marta.app ] || brew install --cask marta
+    which marta || sudo ln -s /Applications/Marta.app/Contents/Resources/launcher /usr/local/bin/marta || true
 
-# Can't do the same for FreeFileSync due to https://github.com/Homebrew/homebrew-cask/issues/63069,
+file LEFT RIGHT:
+    #!/usr/bin/env zsh
+    marta --new-window {{LEFT}} {{RIGHT}}
+
+icloud:
+    just file '~/Downloads' '~/Library/Mobile\ Documents/com~apple~CloudDocs'
+
+# Can't brew install FreeFileSync due to https://github.com/Homebrew/homebrew-cask/issues/63069,
 # but actually https://github.com/Marcuzzz/homebrew-marcstap/blob/master/Casks/freefilesync.rb proves that it could work
 
 import 'dotfiles/llm.just'

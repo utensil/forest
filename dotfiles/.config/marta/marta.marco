@@ -1,0 +1,18 @@
+behavior {
+    theme "Kon"
+}
+
+gadgets [
+    {
+        id "gadget.action.ut.open.ghostty"
+        name "Open Ghostty"
+        type "executable"
+
+        executable "/usr/bin/open"
+        args ["-na" "Ghostty" "--args" "--working-directory=${active.folder.path}"]
+    }
+]
+
+keyBindings {
+    "Cmd+Opt+g" "gadget.action.ut.open.ghostty"
+}
