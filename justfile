@@ -856,7 +856,8 @@ prep-space:
 # Cmd+O to open embeded terminal, useful to run git commands, `z` into recent directories, run `dua i`
 # Cmd+Opt+O to close it
 # See dotfiles/.config/marta/marta.marco for configuration (Cmd+, then copy-paste it)
-# Cmd+Opt+G to lauch Ghostty from the current directory
+# e.g. Cmd+Opt+G to lauch Ghostty from the current directory
+# use the first letter to copy, move, rename, new folder, trash, delete etc.
 p rep-file:
     #!/usr/bin/env zsh
     [ -d /Applications/Marta.app ] || brew install --cask marta
