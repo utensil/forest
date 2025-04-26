@@ -365,6 +365,21 @@ bootstrap-mac:
     # /Users/utensil/.zshrc:source:85: no such file or directory: /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
     # /Users/utensil/.zshrc:source:87: no such file or directory: /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
+init-mac:
+    # add .env for proxy
+    # just prep-zsh
+    # just prep-term
+    # just prep-gt
+    # just sync-gt
+    # just prep-rust
+    # just prep-node
+    # see https://macos-defaults.com/ and https://github.com/Swiss-Mac-User/macOS-scripted-setup and https://github.com/mathiasbynens/dotfiles/blob/main/.macos
+    # just prep-def
+    # needs sudo
+    # just prep
+    # just prep-git
+    # just prep-delta
+
 chsh:
     # chsh -s `chsh -l|grep zsh|head -1` `whoami`
     # chsh -s `which zsh` `whoami`
