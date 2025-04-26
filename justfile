@@ -12,6 +12,9 @@ default:
 new +PARAMS:
     ./new.sh {{PARAMS}}
 
+# Should run the following first:
+# just thm
+# bun install
 build:
     ./build.sh
 
@@ -371,6 +374,7 @@ init-mac:
     just prep-gt
     just sync-gt
     just prep-rust
+    just prep-uv
     just prep-node
     just prep-term
     # might need sudo or human interaction
