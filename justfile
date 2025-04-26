@@ -358,11 +358,11 @@ bootstrap-mac:
     cd forest
     just prep-rc
     brew install --cask ghostty@tip
+    just prep-proxy
+    just prep-zsh
     echo "Now, open ghostty and run `just init-mac`"
 
 init-mac:
-    just prep-proxy
-    just prep-zsh
     just prep-font
     just prep-gt
     just sync-gt
