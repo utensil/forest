@@ -338,16 +338,24 @@ bootstrap-centos:
     just chsh
     just prep-term
 
-# Copy and paste to run in zsh, because we have no just at this point
+# 1. Cmd+Space then enter Term, hit enter
+# 2. Cmd++ to make the font and the terminal window bigger
+# 3. Enter zsh
+# 4. Copy and paste to run, because we have no just at this point
 bootstrap-mac:
     #!/usr/bin/env zsh
     xcode-select --install
+    # export HTTP_PROXY=
+    # export HTTPS_PROXY=$HTTP_PROXY
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    eval "$(/opt/homebrew/bin/brew shellenv)"
     brew install just
     mkdir -p ~/projects
     cd ~/projects && git clone https://github.com/utensil/forest
     cd forest
-    just add-zrc 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"'
+    just prep-rc
+    brew install --cask ghostty@tip
+    # put the rest to just init-mac etc.
     just prep-term
 
 chsh:
