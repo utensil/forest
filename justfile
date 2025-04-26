@@ -358,15 +358,7 @@ bootstrap-mac:
     cd forest
     just prep-rc
     brew install --cask ghostty@tip
-    # put the rest to just init-mac etc.
-    just prep-term
-    # without this and probably more, we would have
-    # /Users/utensil/.envrc:.:29: no such file or directory: /Users/utensil/.cargo/env
-    # /Users/utensil/.zshrc:5: command not found: starship
-    # /Users/utensil/.zshrc:7: command not found: zoxide
-    # /Users/utensil/.zshrc:15: command not found: fzf
-    # /Users/utensil/.zshrc:source:85: no such file or directory: /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-    # /Users/utensil/.zshrc:source:87: no such file or directory: /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+    echo "Now, open ghostty and run `just init-mac`"
 
 init-mac:
     just prep-proxy
