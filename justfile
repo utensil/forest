@@ -378,6 +378,7 @@ init-mac:
     just prep-uv
     just prep-node
     just prep-term
+    just prep-monit
     just prep-file
     just prep-loop
     # might need sudo or human interaction
@@ -953,6 +954,7 @@ music:
     #!/usr/bin/env zsh
     cd ~/Music
     # cmus
+    mpc update
     ncmpcpp -s media_library
 
 # I'v configured it to use double tap opt then hold to trigger the radial menu
