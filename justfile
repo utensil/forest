@@ -371,12 +371,15 @@ bootstrap-mac:
 init-mac:
     just prep-proxy
     just prep-zsh
+    just prep-font
     just prep-gt
     just sync-gt
     just prep-rust
     just prep-uv
     just prep-node
     just prep-term
+    just prep-file
+    just prep-loop
     # might need sudo or human interaction
     just prep-def
     just prep
@@ -432,6 +435,7 @@ prep-def:
     defaults -currentHost write NSGlobalDomain com.apple.trackpad.trackpadCornerClickBehavior -int 1
     defaults -currentHost write NSGlobalDomain com.apple.trackpad.enableSecondaryClick -bool true
     # Require password immediately after sleep or screen saver begins
+    # Not working! Go to Settings - Screen Saver - Lock Screen to change accordingly
     defaults write com.apple.screensaver askForPassword -int 1
     defaults write com.apple.screensaver askForPasswordDelay -int 0
     # Avoid creating .DS_Store files on network or USB volumes
@@ -977,10 +981,10 @@ prep-space:
 # See dotfiles/.config/marta/marta.marco for configuration (Cmd+, then copy-paste it)
 # e.g. Cmd+Opt+G to lauch Ghostty from the current directory
 # use the first letter to copy, move, rename, new folder, trash, delete etc.
-p rep-file:
+prep-file:
     #!/usr/bin/env zsh
     [ -d /Applications/Marta.app ] || brew install --cask marta
-    which marta || sudo ln -s /Applications/Marta.app/Contents/Resources/launcher /usr/local/bin/marta || true
+    which marta || (sudo mkdir /usr/local/bin/ && sudo ln -s /applications/marta.app/contents/resources/launcher /usr/local/bin/marta) || true
 
 file LEFT RIGHT:
     #!/usr/bin/env zsh
