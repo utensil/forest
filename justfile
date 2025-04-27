@@ -990,6 +990,14 @@ icloud:
 # Can't brew install FreeFileSync due to https://github.com/Homebrew/homebrew-cask/issues/63069,
 # but actually https://github.com/Marcuzzz/homebrew-marcstap/blob/master/Casks/freefilesync.rb proves that it could work
 
+prep-meet:
+    brew tap zackriya-solutions/meetily
+    which meetily-server || brew install --cask meetily
+    meetily-download-model medium
+
+meet LANG="zh" SIZE="medium":
+    meetily-server --language {{LANG}} --model {{SIZE}}
+
 import 'dotfiles/llm.just'
 import 'dotfiles/archived.just'
 
