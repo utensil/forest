@@ -12,6 +12,9 @@ default:
 new +PARAMS:
     ./new.sh {{PARAMS}}
 
+# Should run the following first:
+# just thm
+# bun install
 build:
     ./build.sh
 
@@ -191,7 +194,7 @@ sync-chad: stylua sync-plugins
     cp -f lazyvim-init.lua ~/.config/nvchad/nvchad-init.lua
 
 sync-astro: stylua sync-plugins
-    mkdir -p ~/.config/astro
+    mkdir -p ~/.config/astro/lua/
     cp -f dotfiles/.config/astro/lua/community.lua ~/.config/astro/lua/
     mkdir -p ~/.config/astro/lua/plugins
     cp -f dotfiles/.config/astro/lua/plugins/spec.lua ~/.config/astro/lua/plugins/spec.lua
@@ -338,17 +341,127 @@ bootstrap-centos:
     just chsh
     just prep-term
 
-# Copy and paste to run in zsh, because we have no just at this point
+# 1. Cmd+Space then enter Term, hit enter
+# 2. Cmd++ to make the font and the terminal window bigger
+# 3. Enter zsh
+# 4. Copy and paste to run, because we have no just at this point
 bootstrap-mac:
     #!/usr/bin/env zsh
     xcode-select --install
+    # export HTTP_PROXY=
+    # export HTTPS_PROXY=$HTTP_PROXY
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    eval "$(/opt/homebrew/bin/brew shellenv)"
     brew install just
     mkdir -p ~/projects
     cd ~/projects && git clone https://github.com/utensil/forest
     cd forest
-    just add-zrc 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"'
+    just prep-rc
+    brew install --cask ghostty@tip
+    just prep-proxy
+    just prep-zsh
+    echo "Now, open ghostty and run `just init-mac`"
+
+init-mac:
+    just prep-font
+    just prep-gt
+    just sync-gt
+    just prep-rust
+    just prep-uv
+    just prep-node
     just prep-term
+    just prep-monit
+    just prep-file
+    just prep-loop
+    # might need sudo or human interaction
+    just prep-def
+    just prep
+    just prep-git
+    just prep-delta
+
+prep-proxy:
+    #!/usr/bin/env zsh
+    set -e
+    echo "Enter the proxy URL (e.g. http://proxy.example.com:8080):"
+    read proxy_url
+    echo "HTTP_PROXY=$proxy_url" >> .env
+    echo "HTTPS_PROXY=$proxy_url" >> .env
+
+# see https://macos-defaults.com/ and https://github.com/Swiss-Mac-User/macOS-scripted-setup and https://github.com/mathiasbynens/dotfiles/blob/main/.macos
+prep-def:
+    #!/usr/bin/env zsh
+    set -e
+    osascript -e 'tell application "System Preferences" to quit'
+    # Dock preferences
+    defaults write com.apple.dock "orientation" -string "left"
+    defaults write com.apple.dock "tilesize" -int "36"
+    defaults write com.apple.dock "autohide" -bool "true"
+    defaults write com.apple.dock "mru-spaces" -bool "false"
+    # Automatically open a new Finder window when a volume is mounted
+    defaults write com.apple.frameworks.diskimages auto-open-ro-root -bool true
+    defaults write com.apple.frameworks.diskimages auto-open-rw-root -bool true
+    defaults write com.apple.finder OpenWindowForNewRemovableDisk -bool true
+    # Show quit for Finder
+    # defaults write com.apple.finder "QuitMenuItem" -bool "true"
+    # Show extensions, hidden files, path bar, sort folders first
+    defaults write NSGlobalDomain "AppleShowAllExtensions" -bool "true"
+    defaults write com.apple.finder "AppleShowAllFiles" -bool "true"
+    defaults write com.apple.finder "ShowPathbar" -bool "true"
+    defaults write com.apple.finder "_FXSortFoldersFirst" -bool "true"
+    # Show nothing on desktop
+    defaults write com.apple.finder "CreateDesktop" -bool "false"
+    defaults write com.apple.finder "ShowExternalHardDrivesOnDesktop" -bool "false"
+    defaults write com.apple.finder "ShowRemovableMediaOnDesktop" -bool "false"
+    # Each display has its own space
+    defaults write com.apple.spaces "spans-displays" -bool "true"
+    # Save to disk (not to iCloud) by default
+    defaults write NSGlobalDomain "NSDocumentSaveNewDocumentsToCloud" -bool "false"
+    # Don't be too smart during typing
+    defaults write NSGlobalDomain NSAutomaticCapitalizationEnabled -bool false
+    defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
+    defaults write NSGlobalDomain NSAutomaticPeriodSubstitutionEnabled -bool false
+    defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
+    # defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
+    # Trackpad: map bottom right corner to right-click
+    defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadCornerSecondaryClick -int 2
+    defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadRightClick -bool true
+    defaults -currentHost write NSGlobalDomain com.apple.trackpad.trackpadCornerClickBehavior -int 1
+    defaults -currentHost write NSGlobalDomain com.apple.trackpad.enableSecondaryClick -bool true
+    # Require password immediately after sleep or screen saver begins
+    # Not working! Go to Settings - Screen Saver - Lock Screen to change accordingly
+    defaults write com.apple.screensaver askForPassword -int 1
+    defaults write com.apple.screensaver askForPasswordDelay -int 0
+    # Avoid creating .DS_Store files on network or USB volumes
+    defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
+    defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
+    # Hot corners
+    # top-right: 10: Put display to sleep
+    defaults write com.apple.dock wvous-tr-corner -int 10
+    # bottem-left: 5: Start screen saver
+    defaults write com.apple.dock wvous-bl-corner -int 5
+    # Enable the automatic update check
+    defaults write com.apple.SoftwareUpdate AutomaticCheckEnabled -bool true
+    # Check for software updates daily, not just once per week
+    defaults write com.apple.SoftwareUpdate ScheduleFrequency -int 1
+    # Download newly available updates in background
+    defaults write com.apple.SoftwareUpdate AutomaticDownload -int 1
+    # Don't even install System data files & security updates
+    # defaults write com.apple.SoftwareUpdate CriticalUpdateInstall -int 0
+
+    killall Dock
+    killall Finder
+    killall SystemUIServer
+    killall cfprefsd
+
+    sudo -v
+    # Disable the sound effects on boot
+    sudo nvram SystemAudioVolume=" "
+    # Sleep the display after 15 minutes
+    sudo pmset -a displaysleep 5
+    # Disable machine sleep while charging
+    sudo pmset -c sleep 0
+    # Set machine sleep to 5 minutes on battery
+    sudo pmset -b sleep 5
 
 chsh:
     # chsh -s `chsh -l|grep zsh|head -1` `whoami`
@@ -455,6 +568,9 @@ prep-rust:
     . $HOME/.cargo/env
     which cargo-binstall || cargo install cargo-binstall
 
+prep-node:
+    which node || brew install node
+
 # a zsh that inherits .env
 zsh PROJ="forest":
     #!/usr/bin/env zsh
@@ -481,6 +597,7 @@ prep-git:
     git config --global credential.helper "store --file ~/.git-credentials"
     gh auth status || gh auth login
     gh auth setup-git
+    echo 'Remember to run `just prep-delta` for better lazygit experience'
 
 prep-delta:
     which delta || brew install git-delta
@@ -829,6 +946,7 @@ music:
     #!/usr/bin/env zsh
     cd ~/Music
     # cmus
+    mpc update
     ncmpcpp -s media_library
 
 # I'v configured it to use double tap opt then hold to trigger the radial menu
@@ -837,6 +955,40 @@ music:
 prep-loop:
     #!/usr/bin/env zsh
     [ -d /Applications/Loop.app ] || brew install loop
+
+prep-space:
+    #!/usr/bin/env zsh
+    [ -d /Applications/FlashSpace.app ] || brew install flashspace
+
+# Tab to switch between 2 Tab
+# Cmd+Shift+. to toggle hidden files
+# Cmd+Shift+P to open Command Palette
+# Cmd+G to go to path
+# / to search by regex, \ by substring, then up/down to navigate between search results
+# Set /Users/utensil/Library/Mobile Documents/com~apple~CloudDocs to favorites for iCloud docs
+# for long copy/move operations, = to open the operation queue (with per-task and per-file progress bars)
+# Cmd+Y to preview a file, Cmd+Enter to select an app to open the file
+# Opt+1: Volumes, 2: Favorites, 3: Recent Locations, 0: parent directories
+# it supports [Disk Usage Analyzing](https://marta.sh/docs/actions/disk-usage/), but note that it's async and will be queued
+# Cmd+O to open embeded terminal, useful to run git commands, `z` into recent directories, run `dua i`
+# Cmd+Opt+O to close it
+# See dotfiles/.config/marta/marta.marco for configuration (Cmd+, then copy-paste it)
+# e.g. Cmd+Opt+G to lauch Ghostty from the current directory
+# use the first letter to copy, move, rename, new folder, trash, delete etc.
+prep-file:
+    #!/usr/bin/env zsh
+    [ -d /Applications/Marta.app ] || brew install --cask marta
+    which marta || (sudo mkdir /usr/local/bin/ && sudo ln -s /applications/marta.app/contents/resources/launcher /usr/local/bin/marta) || true
+
+file LEFT RIGHT:
+    #!/usr/bin/env zsh
+    marta --new-window {{LEFT}} {{RIGHT}}
+
+icloud:
+    just file '~/Downloads' '~/Library/Mobile\ Documents/com~apple~CloudDocs'
+
+# Can't brew install FreeFileSync due to https://github.com/Homebrew/homebrew-cask/issues/63069,
+# but actually https://github.com/Marcuzzz/homebrew-marcstap/blob/master/Casks/freefilesync.rb proves that it could work
 
 import 'dotfiles/llm.just'
 import 'dotfiles/archived.just'
