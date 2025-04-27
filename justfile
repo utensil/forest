@@ -105,8 +105,8 @@ prep-term:
     which starship || brew install starship
     which zoxide || brew install zoxide
     which magick ||brew install imagemagick
-    just add-zrc 'eval "$(zoxide init zsh)"'
-    just add-zrc 'eval "$(starship init zsh)"'
+    # just add-zrc 'eval "$(zoxide init zsh)"'
+    # just add-zrc 'eval "$(starship init zsh)"'
     which progress || brew install progress
     which 7zz || brew install sevenzip
     which ffmpeg || brew install ffmpeg
