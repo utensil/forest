@@ -378,6 +378,8 @@ init-mac:
     just prep
     just prep-git
     just prep-delta
+    echo "You may set the wallpapar to Sonoma Horizon, and use it as the screensaver"
+    echo "Otherwise, visit https://wallpaperaccess.com/4k-mountain for wallpapers of mountains, and set the screensaver to Photos with the style of Ken Burns"
 
 prep-proxy:
     #!/usr/bin/env zsh
