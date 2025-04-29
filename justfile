@@ -108,8 +108,8 @@ prep-term:
     which starship || brew install starship
     which zoxide || brew install zoxide
     which magick ||brew install imagemagick
-    just add-zrc 'eval "$(zoxide init zsh)"'
-    just add-zrc 'eval "$(starship init zsh)"'
+    # just add-zrc 'eval "$(zoxide init zsh)"'
+    # just add-zrc 'eval "$(starship init zsh)"'
     which progress || brew install progress
     which 7zz || brew install sevenzip
     which ffmpeg || brew install ffmpeg
@@ -378,6 +378,8 @@ init-mac:
     just prep
     just prep-git
     just prep-delta
+    echo "You may set the wallpapar to Sonoma Horizon, and use it as the screensaver"
+    echo "Otherwise, visit https://wallpaperaccess.com/4k-mountain for wallpapers of mountains, and set the screensaver to Photos with the style of Ken Burns"
 
 prep-proxy:
     #!/usr/bin/env zsh
