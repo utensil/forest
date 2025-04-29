@@ -980,7 +980,7 @@ prep-space:
 prep-file:
     #!/usr/bin/env zsh
     [ -d /Applications/Marta.app ] || brew install --cask marta
-    which marta || (sudo mkdir /usr/local/bin/ && sudo ln -s /applications/marta.app/contents/resources/launcher /usr/local/bin/marta) || true
+    which marta || (sudo mkdir -p /usr/local/bin/ && sudo ln -s /applications/marta.app/contents/resources/launcher /usr/local/bin/marta) || true
 
 file LEFT RIGHT:
     #!/usr/bin/env zsh
