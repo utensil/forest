@@ -313,19 +313,15 @@ section[data-taxon] {
     margin: 1em 0 1em 0;
     padding: 1em 1em 1em 1em;
     border-left: 5px solid var(--taxon-color);
-    background-color: color-mix(
-        in srgb,
-        var(--taxon-color) 6%,
-        var(--uts-background) 94%
-    );
+    background-color: color-mix(in srgb,
+            var(--taxon-color) 6%,
+            var(--uts-background) 94%);
 }
 
 section[data-taxon]:hover {
-    background-color: color-mix(
-        in srgb,
-        var(--taxon-color) 12%,
-        var(--uts-background) 88%
-    );
+    background-color: color-mix(in srgb,
+            var(--taxon-color) 12%,
+            var(--uts-background) 88%);
 }
 
 section[data-taxon] h1 span.taxon,
@@ -415,11 +411,9 @@ span.vocab {
 
 span.vocab .link.local a {
     /* text-decoration-style: solid; */
-    text-decoration-color: color-mix(
-        in srgb,
-        var(--uts-vocab) 40%,
-        var(--uts-background) 60%
-    );
+    text-decoration-color: color-mix(in srgb,
+            var(--uts-vocab) 40%,
+            var(--uts-background) 60%);
     color: var(--uts-vocab) !important;
 }
 
@@ -433,12 +427,12 @@ span.vocab .link.local a {
     border-radius: 5px 0px 0px 5px;
 } */
 
-#toc > .block > ul > li > span.link.local {
+#toc>.block>ul>li>span.link.local {
     font-weight: bold;
     /* border-bottom: 1px solid var(--uts-text-gentle); */
 }
 
-#toc > .block > ul > li > ul.block {
+#toc>.block>ul>li>ul.block {
     margin-top: 0.5em;
 }
 
@@ -464,7 +458,7 @@ nav#toc {
     flex-wrap: wrap;
 }
 
-nav#toc > .block {
+nav#toc>.block {
     --offset: 1em;
     --eh: 100%;
     --vh: 100vh;
@@ -478,7 +472,7 @@ nav#toc > .block {
     animation-timeline: scroll(); */
 }
 
-nav#toc > .block > ul.block {
+nav#toc>.block>ul.block {
     max-height: calc(80vh - var(--offset) * 2);
     overflow-y: auto;
 }
@@ -738,24 +732,24 @@ code.highlight.grace-loading {
     counter-reset: ol;
     list-style-type: none;
 
-    > li {
+    >li {
         counter-increment: ol;
 
-        > ol {
+        >ol {
             counter-reset: ol2;
             list-style-type: none;
 
-            > li {
+            >li {
                 counter-increment: ol2;
             }
 
-            > li::before {
+            >li::before {
                 content: counter(ol2, lower-roman) ") ";
             }
         }
     }
 
-    > li::before {
+    >li::before {
         content: counter(ol, numeric) ") ";
     }
 }
@@ -794,6 +788,7 @@ code.highlight.grace-loading {
 }
 
 :root[data-applied-mode="dark"] {
+
     svg.embedded-tex-svg,
     img.embedded-tex-svg {
         filter: invert(0.85);
@@ -835,7 +830,7 @@ code.highlight.grace-loading {
 }
 
 /* the first h1 in the first section */
-article > section:first-of-type > details > summary > header > h1 {
+article>section:first-of-type>details>summary>header>h1 {
     font-size: 2em;
 }
 
@@ -846,4 +841,14 @@ h4,
 h5,
 h6 {
     margin-bottom: 0.5em;
+}
+
+/* Inspired by https://matklad.github.io/2025/04/22/horizontal-scroll.html */
+
+p {
+    hyphens: auto;
+}
+
+a {
+    word-break: break-all;
 }
