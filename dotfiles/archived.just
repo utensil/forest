@@ -197,6 +197,14 @@ zj:
     # bash <(curl -L https://zellij.dev/launch)
     zellij
 
+prep-meet:
+    brew tap zackriya-solutions/meetily
+    which meetily-server || brew install --cask meetily
+    meetily-download-model medium
+
+meet LANG="zh" SIZE="medium":
+    meetily-server --language {{LANG}} --model {{SIZE}}
+
 # prep-homerow:
 #    !/usr/bin/env zsh
 #     which kanata || brew install kanata
