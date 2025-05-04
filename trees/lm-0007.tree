@@ -1,0 +1,29 @@
+\import{lm-macros}
+
+\tag{lm}
+\tag{draft}
+
+% definition theorem lemma construction observation
+% convention corollary axiom example exercise proof
+% discussion remark notation
+% \taxon{}
+% \refcardt{lemma}{}{}{}{
+
+% spinner2024lorentz
+
+\refdeft{transformer architecture}{p. 5}{spinner2024lorentz}{
+
+##{
+\begin{align*}
+\bar{x}&=\operatorname{LayerNorm}(x),\\
+\operatorname{AttentionBlock}(x)&=\operatorname{Linear} \circ \operatorname{Attention}(\operatorname{Linear}(\bar{x}), \operatorname{Linear}(\bar{x}), \operatorname{Linear}(\bar{x})) + x,\\
+\operatorname{MLPBlock}(x)&=\operatorname{Linear} \circ \operatorname{GatedGELU} \circ \operatorname{Linear} \circ \operatorname{GP}(\operatorname{Linear}(\bar{x}), \operatorname{Linear}(\bar{x})) + x,\\
+\operatorname{Block}(x)&=\operatorname{MLPBlock} \circ \operatorname{AttentionBlock}(x),\\
+\operatorname{L - GATr}(x)&=\operatorname{Linear} \circ \operatorname{Block} \circ \operatorname{Block} \circ \cdots \circ \operatorname{Block} \circ \operatorname{Linear}(x).
+\end{align*}
+}
+
+}
+
+
+
