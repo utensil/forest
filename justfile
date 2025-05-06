@@ -714,7 +714,8 @@ git PROJ="forest" *PARAMS="":
 
 
 awake:
-    caffeinate -d -s
+    # caffeinate -d -s
+    caffeinate -s
 
 # prep-pod:
 #    # brew uninstall orbstack
