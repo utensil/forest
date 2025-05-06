@@ -4,6 +4,10 @@ set -eo pipefail
 SCRIPT_DIR=$(dirname "$(readlink -f "$0")")
 PROJECT_ROOT="$SCRIPT_DIR"
 
+export TEXINPUTS=.:$PROJECT_ROOT/tex/:
+
+echo "TEXINPUTS=$TEXINPUTS"
+
 function backup_xml_files() {
     echo "⭐ Backing up XML files"
     mkdir -p output/.bak
