@@ -126,6 +126,8 @@ prep-term:
     which jq || brew install jq
     which sq || brew install sq
     which fex || (curl -sSL https://raw.githubusercontent.com/18alantom/fex/master/install.sh | bash)
+    # which serpl || brew install serpl
+    which scooter || brew install scooter
     # -O https://raw.githubusercontent.com/18alantom/fex/master/install.sh
     # which broot || brew install broot
 
