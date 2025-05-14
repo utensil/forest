@@ -4,7 +4,7 @@ import '@mariohamann/activity-graph';
 function initTracker() {
     // Wait until markdown content exists
     if (!document.querySelector('.markdownit li')) {
-        setTimeout(initTracker, 500);
+        setTimeout(initTracker, 200);
         return;
     }
 
@@ -26,11 +26,9 @@ function initTracker() {
     const activityMap = new Map();
 
     dateSections.forEach(section => {
-        // Debug: Log the section we're processing
-        console.log('Processing section:', section.textContent.trim());
         // Extract just the date portion (before first space)
         const dateText = section.textContent.trim().split(' ')[0];
-        console.log(`Processing date: ${dateText}`);
+        // console.log(`Processing date: ${dateText}`);
 
         let dates = [];
         const [year, month, day] = dateText.split('-');
@@ -39,29 +37,29 @@ function initTracker() {
         if (dateText.includes('~')) {
             const [start, end] = dateText.split('~');
             const [startYear, startMonth, startDay] = start.split('-');
-            
+
             // Check if end date has year or just month-day
             const endParts = end.split('-');
             const endYear = endParts.length === 3 ? endParts[0] : startYear;
             const endMonth = endParts.length === 3 ? endParts[1] : endParts[0];
             const endDay = endParts.length === 3 ? endParts[2] : endParts[1];
-            
+
             const date = new Date(endYear, endMonth - 1, endDay);
             const dateStr = `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')}`;
             dates.push(dateStr);
-            console.log(`  Adding date range end date: ${dateStr}`, {
-                start,
-                end,
-                endYear,
-                endMonth, 
-                endDay
-            });
+            // console.log(`  Adding date range end date: ${dateStr}`, {
+            //     start,
+            //     end,
+            //     endYear,
+            //     endMonth,
+            //     endDay
+            // });
         } else {
             // Standardize single date format
             const date = new Date(year, month - 1, day);
             const dateStr = `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')}`;
             dates.push(dateStr);
-            console.log(`  Adding single date entry: ${dateStr}`);
+            // console.log(`  Adding single date entry: ${dateStr}`);
         }
 
         // Count items using same logic as test function
@@ -76,11 +74,9 @@ function initTracker() {
             if (content) {
                 const items = content.querySelectorAll('li');
                 count = items.length;
-                console.log(`Found ${count} items for ${dateText}`, items);
-
                 // Special case for busy days
                 if (content.textContent.includes('🚧 busy')) {
-                    console.log('Found busy day marker');
+                    // console.log('Found busy day marker');
                     count = 0.5;
                 }
             }
@@ -91,14 +87,14 @@ function initTracker() {
             const [year, month, day] = date.split('-');
             const dateKey = `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
 
-            console.log(`Storing activity for ${dateKey}:`, count);
+            // console.log(`Storing activity for ${dateKey}:`, count);
             activityMap.set(dateKey, count);
         });
     });
 
     // Make activityMap available globally for debugging
     window.activityMap = activityMap;
-    console.log('activityMap available as window.activityMap', activityMap);
+    // console.log('activityMap available as window.activityMap', activityMap);
 
     // Generate activity data string for the graph
     const activityData = Array.from(activityMap.entries())
@@ -121,7 +117,7 @@ function initTracker() {
     }
 
     // Test specific date
-    testDateActivity('2025-05-14');
+    // testDateActivity('2025-05-14');
 }
 
 // Start the tracker after DOM is ready
@@ -201,7 +197,7 @@ function renderHabitTracker(activityMap) {
             // Use strictly padded format for lookup (YYYY-MM-DD)
             const lookupDate = `${currentYear}-${(month + 1).toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
             const activity = activityMap.get(lookupDate) || 0;
-            // console.log(`Activity for ${lookupDate}:`, activity);
+            // Activity lookup remains silent now
             const intensity = Math.min(1, activity / 5); // Normalize to 0-1 scale
 
             const dayCell = document.createElement('div');
@@ -286,9 +282,9 @@ function renderHabitTracker(activityMap) {
     const trackerDiv = document.getElementById('habit-tracker');
     if (trackerDiv) {
         trackerDiv.appendChild(container);
-    } else {
-        console.warn('Could not find #habit-tracker div');
-    }
+    } // else {
+    //     console.warn('Could not find #habit-tracker div');
+    // }
 }
 
 function testDateActivity(dateStr) {
