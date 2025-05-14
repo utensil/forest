@@ -727,10 +727,21 @@ prep-pod:
     which docker || (brew install docker; brew link docker)
     which docker-compose || brew install docker-compose
     which colima || brew install colima
+    which kubectl || brew install kubectl
     docker context use default
 
 pod CMD="start":
     colima {{CMD}}
+
+k8s:
+    colima start --kubernetes
+
+prep-tilt:
+    which tilt || brew install tilt-dev/tap/tilt
+
+# tilt up is usually all you need
+tilt *PARAMS:
+    tilt {{PARAMS}}
 
 # https://bhoot.dev/2025/cp-dot-copies-everything/
 clone SRC DST:
