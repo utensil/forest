@@ -1,22 +1,22 @@
 import '@mariohamann/activity-graph'
 
 const DEFAULT_CONFIG = {
-  activityLevels: [0, 1, 3, 5, 8],
-  colors: [
-    '#ebedf0', // No activity
-    '#9be9a8', // Light green
-    '#40c463', // Medium green
-    '#30a14e', // Dark green
-    '#216e39'  // Darkest green
-  ],
-  dateFormat: 'YYYY-MM-DD',
-  firstDayOfWeek: 1,
-  maxItems: 8
+    activityLevels: [0, 1, 3, 5, 8],
+    colors: [
+        '#ebedf0', // No activity
+        '#9be9a8', // Light green
+        '#40c463', // Medium green
+        '#30a14e', // Dark green
+        '#216e39', // Darkest green
+    ],
+    dateFormat: 'YYYY-MM-DD',
+    firstDayOfWeek: 1,
+    maxItems: 8,
 }
 
 // GitHub-style habit tracker for learning diary
 function initTracker(userConfig = {}) {
-  const config = { ...DEFAULT_CONFIG, ...userConfig };
+    const config = { ...DEFAULT_CONFIG, ...userConfig }
     // Ensure activity-graph component is defined
     if (!customElements.get('activity-graph')) {
         console.error('activity-graph component not registered')
@@ -27,16 +27,16 @@ function initTracker(userConfig = {}) {
     if (!document.querySelector('.markdownit li')) {
         const observer = new MutationObserver((mutations, obs) => {
             if (document.querySelector('.markdownit li')) {
-                obs.disconnect();
-                initTracker(userConfig);
+                obs.disconnect()
+                initTracker(userConfig)
             }
-        });
+        })
 
         observer.observe(document.body, {
             childList: true,
-            subtree: true
-        });
-        return;
+            subtree: true,
+        })
+        return
     }
 
     // Find all h1 date sections within article tree-content
@@ -363,9 +363,9 @@ function testDateActivity(dateStr) {
 
 function getActivityColor(intensity, config = DEFAULT_CONFIG) {
     // GitHub-style color gradient
-    if (intensity <= 0) return config.colors[0];
-    if (intensity < 0.2) return config.colors[1];
-    if (intensity < 0.4) return config.colors[2];
-    if (intensity < 0.6) return config.colors[3];
-    return config.colors[4];
+    if (intensity <= 0) return config.colors[0]
+    if (intensity < 0.2) return config.colors[1]
+    if (intensity < 0.4) return config.colors[2]
+    if (intensity < 0.6) return config.colors[3]
+    return config.colors[4]
 }
