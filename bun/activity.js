@@ -103,7 +103,7 @@ function initTracker() {
         .join(',')
 
     // Render the activity graph
-    const graphContainer = document.getElementById('habit-tracker')
+    const graphContainer = document.getElementById('learning-activity')
     if (graphContainer) {
         graphContainer.innerHTML = `
             <activity-graph
