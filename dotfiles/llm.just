@@ -303,6 +303,7 @@ prep-probe:
     which probe || npm install -g @buger/probe@latest
     which probe-chat || npm install -g @buger/probe-chat@latest
 
+# in `just zsh`, --allow-edit
 # --web
 probe *PARAMS="":
     #!/usr/bin/env zsh

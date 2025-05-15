@@ -1,17 +1,42 @@
 import '@mariohamann/activity-graph'
 
-// GitHub-style habit tracker for learning diary
-function initTracker() {
-    // Wait until markdown content exists
-    if (!document.querySelector('.markdownit li')) {
-        setTimeout(initTracker, 200)
-        return
-    }
+const DEFAULT_CONFIG = {
+  activityLevels: [0, 1, 3, 5, 8],
+  colors: [
+    '#ebedf0', // No activity
+    '#9be9a8', // Light green
+    '#40c463', // Medium green
+    '#30a14e', // Dark green
+    '#216e39'  // Darkest green
+  ],
+  dateFormat: 'YYYY-MM-DD',
+  firstDayOfWeek: 1,
+  maxItems: 8
+}
 
+// GitHub-style habit tracker for learning diary
+function initTracker(userConfig = {}) {
+  const config = { ...DEFAULT_CONFIG, ...userConfig };
     // Ensure activity-graph component is defined
     if (!customElements.get('activity-graph')) {
         console.error('activity-graph component not registered')
         return
+    }
+
+    // Wait for markdown content using MutationObserver
+    if (!document.querySelector('.markdownit li')) {
+        const observer = new MutationObserver((mutations, obs) => {
+            if (document.querySelector('.markdownit li')) {
+                obs.disconnect();
+                initTracker(userConfig);
+            }
+        });
+
+        observer.observe(document.body, {
+            childList: true,
+            subtree: true
+        });
+        return;
     }
 
     // Find all h1 date sections within article tree-content
@@ -108,8 +133,8 @@ function initTracker() {
         graphContainer.innerHTML = `
             <activity-graph
                 activity-data="${activityData}"
-                activity-levels="0,1,3,5,8"
-                first-day-of-week="1"
+                activity-levels="${config.activityLevels.join(',')}"
+                first-day-of-week="${config.firstDayOfWeek}"
                 style="width:100%"
             ></activity-graph>
         `
@@ -120,9 +145,9 @@ function initTracker() {
 }
 
 // Start the tracker after DOM is ready
-document.addEventListener('DOMContentLoaded', initTracker)
+document.addEventListener('DOMContentLoaded', () => initTracker())
 
-function renderHabitTracker(activityMap) {
+function renderHabitTracker(activityMap, config = DEFAULT_CONFIG) {
     const now = new Date()
     const currentYear = now.getFullYear()
     const months = [
@@ -219,7 +244,7 @@ function renderHabitTracker(activityMap) {
             dayCell.style.width = '15px'
             dayCell.style.height = '15px'
             dayCell.style.borderRadius = '2px'
-            dayCell.style.backgroundColor = getActivityColor(intensity)
+            dayCell.style.backgroundColor = getActivityColor(intensity, config)
             dayCell.style.position = 'relative'
 
             // Tooltip with date and activity info
@@ -266,11 +291,11 @@ function renderHabitTracker(activityMap) {
     legend.style.fontSize = '12px'
 
     const legendItems = [
-        { color: '#ebedf0', label: 'No activity' },
-        { color: '#9be9a8', label: '1 item' },
-        { color: '#40c463', label: '2-3 items' },
-        { color: '#30a14e', label: '4-5 items' },
-        { color: '#216e39', label: '5+ items' },
+        { color: config.colors[0], label: 'No activity' },
+        { color: config.colors[1], label: '1 item' },
+        { color: config.colors[2], label: '2-3 items' },
+        { color: config.colors[3], label: '4-5 items' },
+        { color: config.colors[4], label: '5+ items' },
     ]
 
     for (const item of legendItems) {
@@ -336,11 +361,11 @@ function testDateActivity(dateStr) {
     console.groupEnd()
 }
 
-function getActivityColor(intensity) {
+function getActivityColor(intensity, config = DEFAULT_CONFIG) {
     // GitHub-style color gradient
-    if (intensity <= 0) return '#ebedf0' // No activity
-    if (intensity < 0.2) return '#9be9a8' // Light green
-    if (intensity < 0.4) return '#40c463' // Medium green
-    if (intensity < 0.6) return '#30a14e' // Dark green
-    return '#216e39' // Darkest green
+    if (intensity <= 0) return config.colors[0];
+    if (intensity < 0.2) return config.colors[1];
+    if (intensity < 0.4) return config.colors[2];
+    if (intensity < 0.6) return config.colors[3];
+    return config.colors[4];
 }
