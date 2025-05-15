@@ -299,3 +299,14 @@ dl *PARAMS:
 dlmd DOC:
     just dl --pipeline vlm --vlm-model smoldocling {{DOC}}
 
+prep-probe:
+    which probe || npm install -g @buger/probe@latest
+    which probe-chat || npm install -g @buger/probe-chat@latest
+
+# --web
+probe *PARAMS="":
+    #!/usr/bin/env zsh
+    export OPENAI_API_URL=$OPENAI_API_BASE
+    export MODEL_NAME=$OPENAI_API_MODEL
+    probe-chat {{PARAMS}}
+
