@@ -74,11 +74,6 @@ function initTracker() {
             if (content) {
                 const items = content.querySelectorAll('li');
                 count = items.length;
-                // Special case for busy days
-                if (content.textContent.includes('🚧 busy')) {
-                    // console.log('Found busy day marker');
-                    count = 0.5;
-                }
             }
         }
 
