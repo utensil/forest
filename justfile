@@ -965,6 +965,21 @@ music:
     mpc update
     ncmpcpp -s media_library
 
+prep-tm:
+    which protoc || brew install protobuf
+    which termusic || cargo install termusic termusic-server --locked
+
+# 2 go to artist/album layout
+# enter/backspace/tab for navigation
+# l or L to add one or all songs to the playlist
+# d or D to delete one or all songs from the playlist
+# space to play/pause
+# m to change play mode, r to random
+# Ctrl+H for help
+# no visualization
+tm *PARAMS="":
+    termusic {{PARAMS}}
+
 # I'v configured it to use double tap opt then hold to trigger the radial menu
 # direction keys to place the window in 8 directions, space to maximize, enter to center
 # It's so smooth
