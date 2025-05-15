@@ -12,6 +12,9 @@ elif [[ "$OPENAI_API_BASE" == *"localhost:15432"* ]] && [ -n "$DEEPSEEK_API_KEY"
     export MODELS='--architect --model deepseek/deepseek-reasoner --editor-model openai/claude-3.5-sonnet'
 elif [ -n "$DEEPSEEK_API_KEY" ]; then
     export MODELS='--model deepseek'
+elif [[ "$OPENAI_API_BASE" == *"openrouter.ai"* ]]; then
+    export MODELS="--model openrouter/$OPENAI_API_MODEL"
+    export OPENROUTER_API_KEY="$OPENAI_API_KEY"
 elif [[ "$OPENAI_API_BASE" == *"glhf.chat"* ]]; then
     # inspired by https://www.youtube.com/watch?v=AFiH_aErDBA&ab_channel=AICodeKing
     export MODELS="--architect --model openai/hf:Qwen/QwQ-32B-Preview --editor-model openai/hf:Qwen/Qwen2.5-Coder-32B-Instruct"

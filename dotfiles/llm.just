@@ -36,6 +36,9 @@ aider PROJ="forest" *PARAMS="": sync-aider
     #!/usr/bin/env zsh
     cd ~/projects/{{PROJ}} && aider {{PARAMS}}
 
+aiderweb URL:
+   uvx --python 3.11 --from 'aider-chat[help,playwright,browser]' python -m aider.scrape {{URL}}
+
 # prep-ad:
 #    #!/usr/bin/env zsh
 #    rm -rf ../aider-desk
