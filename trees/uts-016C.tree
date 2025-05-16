@@ -11,7 +11,7 @@ Reasoning, agent, and multimodality are top 3 research topics for LLMs, as far a
 
 Verifiable reinforcement learning boosted the reasoning performance as explored by DeepSeek and others, but it requires much more output tokens, to a factor of almost 10. That would be 10x inference compute, and to solve the same problem in the same time, you would need another 10x compute to achieve that. Such a 100x compute demand, is not desirable.
 
-I was wrong in 2023, about the inefficient inference of LLMs. I didn't like the quadratic scaling of the attention mechanism, but it turns out that there are more ways to workaround the bottleneck than seeking linear attention such as RWKV and other alternatives. Inference time scaling is also a game changer.
+I was wrong in 2023, about the inefficient inference of LLMs. I didn't like the quadratic scaling of the attention mechanism, but it turns out that there are more ways to workaround the bottleneck than seeking linear attention such as RWKV and other alternatives. Inference time scaling, and MoE are both game changers.
 
 So I would expect myself to be wrong again about the cost of reasoning. And there are preliminary researches showing that reasoning [is already inside](https://transformer-circuits.pub/2025/attribution-graphs/biology.html) and [can be further trained into](https://huggingface.co/papers/2505.10554) the LLMs.
 
@@ -23,7 +23,9 @@ Prompt engineering and reasoning by output tokens are two sides of the same coin
 
 Agent is another layer of waste, on top of individual inferences. Agents fall into fruitless planning and exploration, failing to snap out of the infinite loop, by acquiring the extra information or triggering the extra side effects. Their interactions with tools (e.g. MCP), agents (e.g. A2A), and humans (e.g. A2H) are all inefficient due to using natural language as the intermediate representation.
 
-Imagine an alien spiecies speaking a far more efficient language, like the one in the movie *Arrival*, it shoule be able to express far more complicated concept such as how to call a tool with paramters in a single or just few tokens, or rather, a single multimodal token. There should be special tokens, highly compressed, to represent tools or even ways to think (e.g. the MCP for "Sequential Thinking"). And why should a token just be an embedding of high dimensional vector? Why isn't it a curve, a hypersurface, or a manifold?
+Imagine an alien species with a far more efficient language, like the one depicted in *Arrival*. Such a language could express complex concepts like tool invocation with parameters using just a single token - or perhaps a single multimodal token combining multiple meanings.
+
+There should be special dense tokens, to represent tools or even ways to think (e.g. the MCP for "Sequential Thinking"). And why should a token just be an embedding of high dimensional vector? Why isn't it a curve, a hypersurface, or a manifold?
 
 Take some time to think about this, while showing the visualization of [the Biology of a Large Language Model](https://transformer-circuits.pub/2025/attribution-graphs/biology.html) on the screen.
 
