@@ -1,0 +1,35 @@
+\import{macros}
+% clifford hopf spin tt ag math draft tech exp notes
+\tag{tech}
+\tag{notes}
+\tag{draft}
+
+\mdnote{What's next for LLMs?}{
+This is no way a professional prediction, just summarizing some ideas popped into my head in a recent discussion with friends. Read this with a grain of salt.
+
+Reasoning, agent, and multimoduality are top 3 research topics for LLMs, as far as I can tell. And for me, there is always the topic of efficiency or scalability. And of course, beyond that, world models, and intelligent robotics.
+
+Verifiable reinforcement learning boosted the reasoning performance as explored by DeepSeek and others, but it requires much more output tokens, to a factor of almost 10. That would be 10x inference compute, and to solve the same problem in the same time, you would need another 10x compute to achieve that. Such a 100x compute demand, is not desirable.
+
+I was wrong in 2023, about the inefficient inference of LLMs. I didn't like the quadratic scaling of the attention mechanism, but it turns out that there are more ways to workaround the bottleneck than seeking linear attention such as RWKV and other alternatives. Inference time scaling is also a game changer.
+
+So I would expect myself to be wrong again about the cost of reasoning. And there are preliminary researching showing that reasoning [is alreayd inside](https://transformer-circuits.pub/2025/attribution-graphs/biology.html) and [can be further trained into](https://huggingface.co/papers/2505.10554) the LLMs.
+
+That is, reasoning should not be happening at the ouput layer, but intermediate layers. Writing down the reasoning process, should merely serve as a memory of explored paths, to keep things on track, or materialize the box to think out of.
+
+The waste is not just on the input side, there are significant waste of input tokens by prompts that are not part of the instruction nor the context, but guidance. These guidance should not just be cached, but "compiled", in a more efficient and controllable manner, while remaining the interpretability.
+
+Prompt engineering and reasoning by output tokens are two sides of the same coin: we are reaching better results in an interpretable way, but much more expensive than it should be, and it would become obvious once we find the right principle. Of course, history relies on such detours to get back on track.
+
+Agent is another layer of waste, on top of individual inferences. Agents fall into fruitless planning and exploration, failing to snap out of the infinite loop, by aquiring the extra information or triggering the extra side effects. Their interactions with tools (e.g. MCP), agents (e.g. A2A), and humans (e.g. A2H) are all inefficient due to using natural language as the intermediate representation.
+
+Imagine an alien spiecies speaking a far more efficient language, like the one in the movie *Arrival*, it shoule be able to express far more complicated concept such as how to call a tool with paramters in a single or just few tokens, or rather, a single multimodal token. There should be special tokens, highly compressed, to represent tools or even ways to think (e.g. the MCP for "Sequential Thinking"). And why should a token just be an embedding of high dimensional vector? Why isn't it a curve, a hypersurface, or a manifold?
+
+Take some time to think about this, while showing the visualization of [the Biology of a Large Language Model](https://transformer-circuits.pub/2025/attribution-graphs/biology.html) on the screen.
+
+I believe using modularity other than human perceptions, as the intermediate representation, is the key to the next breakthrough. They would also represent the world model better.
+
+At the end of the day, it all comes down to human-level efficiency to reach human-level intelligence. And the efficiency will come from using the right principle, which will also result in better performance.
+
+And all of reasoning, agent, multimoduality, efficiency, world model, and robotics, are all covered by this one integrated solution.
+}
