@@ -375,9 +375,9 @@ init-mac:
     just prep-node
     just prep-term
     just prep-monit
-    just prep-file
     just prep-loop
     # might need sudo or human interaction
+    just prep-file
     just prep-def
     just prep
     just prep-git
