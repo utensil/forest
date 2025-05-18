@@ -38,14 +38,12 @@ def process_stars(input_text):
                 try:
                     entry = json.loads("\n".join(content_lines))
 
-                    # Convert timestamp to date
-                    date = datetime.fromtimestamp(entry["dateArrived"]).strftime(
-                        "%Y-%m-%d"
-                    )
-
-                    date = datetime.fromtimestamp(entry["datePublished"]).strftime(
-                        "%Y-%m-%d"
-                    )
+                    # Convert timestamps to date, using dateArrived as fallback
+                    timestamp = entry.get("datePublished") or entry.get("dateArrived")
+                    if timestamp is None:
+                        continue  # Skip if no timestamp available
+                    
+                    date = datetime.fromtimestamp(timestamp).strftime("%Y-%m-%d")
 
                     # Use externalURL if available, otherwise use url
                     url = entry.get("externalURL") or entry.get("url")
