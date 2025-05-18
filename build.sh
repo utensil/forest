@@ -167,9 +167,9 @@ function build {
     # echo "⭐ Copying assets"
     copy_extra_assets
     # if the env var UTS_DEV is not set
-    if [ -z "$UTS_DEV" ]; then
+    # if [ -z "$UTS_DEV" ]; then
         convert_xml_files true
-    fi
+    # fi
     show_result
     #   build_ssr
     #   show_result

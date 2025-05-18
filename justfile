@@ -1029,6 +1029,9 @@ prep-irc:
 irc CHANNEL:
     weechat irc://utensil@irc.libera.chat/#{{CHANNEL}}
 
+pathfind:
+    npx -y pagefind --site output --serve --root-selector 'article > section'
+
 import 'dotfiles/llm.just'
 import 'dotfiles/archived.just'
 

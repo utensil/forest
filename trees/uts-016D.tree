@@ -1,0 +1,20 @@
+\import{macros}
+% clifford hopf spin tt ag math draft tech exp notes
+\tag{draft}
+
+\title{Fulltext Search with Pagefind}
+
+\loadcss{pagefind/pagefind-ui.css}
+\loadjs{pagefind/pagefind-ui.js}
+
+\md{
+> For now, this page only works if the forest site is started with `just pathfind`.
+}
+
+\<html:div>[id]{pathfind-search}{}
+
+\js\verb>>>|
+    window.addEventListener('DOMContentLoaded', (event) => {
+        new PagefindUI({ element: "#pathfind-search", showSubResults: true });
+    });
+>>>
