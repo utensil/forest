@@ -311,3 +311,20 @@ probe *PARAMS="":
     export MODEL_NAME=$OPENAI_API_MODEL
     probe-chat {{PARAMS}}
 
+
+prep-dw:
+    #!/usr/bin/env zsh
+    # if ../deepwiki-open doesn't exist, clone it
+    if [ ! -d ../deepwiki-open ]; then
+        git clone https://github.com/AsyncFuncAI/deepwiki-open.git ../deepwiki-open
+    else
+        (cd ../deepwiki-open && git pull)
+    fi
+    cd ../deepwiki-open
+    echo "OPENAI_API_KEY=$OPENAI_API_KEY" >> .env
+    echo "OPENAI_API_URL=$OPENAI_API_BASE" >> .env
+
+dw:
+    #!/usr/bin/env zsh
+    cd ../deepwiki-open
+    docker-compose up
