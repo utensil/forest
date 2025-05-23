@@ -321,10 +321,12 @@ prep-dw:
         (cd ../deepwiki-open && git pull)
     fi
     cd ../deepwiki-open
-    echo "OPENAI_API_KEY=$OPENAI_API_KEY" >> .env
+    echo "OPENAI_API_KEY=$OPENAI_API_KEY" > .env
     echo "OPENAI_API_URL=$OPENAI_API_BASE" >> .env
+    mkdir -p ~/.adalflow
+    # https://github.com/AsyncFuncAI/deepwiki-open/issues/20#issuecomment-2857485755
 
-dw:
+dw: prep-dw
     #!/usr/bin/env zsh
     cd ../deepwiki-open
     docker-compose up
