@@ -330,3 +330,13 @@ dw: prep-dw
     #!/usr/bin/env zsh
     cd ../deepwiki-open
     docker-compose up
+
+prep-goose:
+    curl -fsSL https://github.com/block/goose/releases/download/stable/download_cli.sh | bash
+
+# goose info
+# goose configure
+goose *PARAMS="session":
+    #!/usr/bin/env zsh
+    goose {{PARAMS}}
+
