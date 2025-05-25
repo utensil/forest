@@ -72,7 +72,8 @@ llp *PARAMS:
     uvx --python 3.11 --from 'litellm[proxy]' --with opentelemetry-api --with opentelemetry-sdk --with opentelemetry-exporter-otlp --with langchain --with langchain-openai --with lunary --with openinference-instrumentation-litellm litellm {{PARAMS}} --api_base {{env('OPENAI_API_BASE')}} -m 'openai/{{env('OPENAI_API_MODEL')}}' -c litellm.yaml
 
 cpm:
-    #!/usr/bin/env bash
+    #!/usr/bin/env zsh
+    set -e
     # if env var REFRESH_TOKEN is not set, prompt for it
     if [ -z "$REFRESH_TOKEN" ]; then
         # curl https://github.com/login/device/code -X POST -d 'client_id=01ab8ac9400c4e429b23&scope=user:email'
@@ -89,6 +90,9 @@ cpm:
     uvx poetry install
     LOGURU_LEVEL=DEBUG uvx poetry run uvicorn copilot_more.server:app --port 15432 --host {{env('COPILOT_HOST', '127.0.0.1')}}
 
+cpa:
+    #!/usr/bin/env zsh
+    npx -y copilot-api@latest start --port 15432
 
 # works only for Ubuntu
 [linux]
@@ -330,3 +334,16 @@ dw: prep-dw
     #!/usr/bin/env zsh
     cd ../deepwiki-open
     docker-compose up
+
+prep-goose:
+    #!/usr/bin/env zsh
+    mkdir -p ~/.config/goose
+    cp -f dotfiles/.config/goose/config.yaml ~/.config/goose/config.yaml
+    curl -fsSL https://github.com/block/goose/releases/download/stable/download_cli.sh | bash
+
+# goose info
+# goose configure
+goose *PARAMS="session":
+    #!/usr/bin/env zsh
+    goose {{PARAMS}}
+
