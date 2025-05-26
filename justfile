@@ -1032,6 +1032,16 @@ irc CHANNEL:
 pathfind:
     npx -y pagefind --site output --serve --root-selector 'article > section'
 
+prep-ag:
+    #!/usr/bin/env zsh
+    which ast-grep || brew install ast-grep
+    just prep-hx
+    just sync-hx
+
+# just ag '\query{$$$}'
+ag PAT LANG="forester" DIR="trees":
+    ast-grep run --config dotfiles/.config/ast-grep/sgconfig.yml --lang {{LANG}} -p '{{PAT}}' {{DIR}}
+
 import 'dotfiles/llm.just'
 import 'dotfiles/archived.just'
 
