@@ -12,8 +12,8 @@ from termcolor import colored
 
 def find_method_syntax_in_content(content: str) -> Tuple[List[str], List[str]]:
     """Find all method definitions and calls in content"""
-    # Match method definitions like [draw/something] or [draw/sb/sth]
-    def_pattern = r'\[([a-zA-Z0-9_-]+)/([a-zA-Z0-9_/-]+)\]'
+    # Match method definitions like [draw/something]{ or [draw/sb/sth]{
+    def_pattern = r'\[([a-zA-Z0-9_-]+)/([a-zA-Z0-9_/-]+)\]\s*\{'
     definitions = re.findall(def_pattern, content)
     
     # Match method calls like #draw/something or #draw/sb/sth
@@ -25,8 +25,8 @@ def find_method_syntax_in_content(content: str) -> Tuple[List[str], List[str]]:
 def replace_method_syntax(content: str) -> str:
     """Replace method syntax with dashes in content"""
     # Replace definitions [draw/something] -> [draw-something]
-    content = re.sub(r'\[([a-zA-Z0-9_-]+)/([a-zA-Z0-9_/-]+)\]', 
-                    lambda m: f'[{m.group(1)}-{m.group(2).replace("/", "-")}]', 
+    content = re.sub(r'\[([a-zA-Z0-9_-]+)/([a-zA-Z0-9_/-]+)\]\s*\{', 
+                    lambda m: f'[{m.group(1)}-{m.group(2).replace("/", "-")}] {{', 
                     content)
     
     # Replace calls #draw/something -> #draw-something
