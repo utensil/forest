@@ -339,7 +339,7 @@ prep-goose:
     #!/usr/bin/env zsh
     mkdir -p ~/.config/goose
     cp -f dotfiles/.config/goose/config.yaml ~/.config/goose/config.yaml
-    curl -fsSL https://github.com/block/goose/releases/download/stable/download_cli.sh | bash
+    which goose || (curl -fsSL https://github.com/block/goose/releases/download/stable/download_cli.sh | bash)
 
 # goose info
 # goose configure
