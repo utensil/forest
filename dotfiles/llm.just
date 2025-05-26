@@ -343,6 +343,7 @@ prep-goose:
 
 # goose info
 # goose configure
+# MEMORY_BANK_ROOT="$HOME/.membank" goose session
 goose *PARAMS="session":
     #!/usr/bin/env zsh
     goose {{PARAMS}}
