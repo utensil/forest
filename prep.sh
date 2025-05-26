@@ -15,29 +15,33 @@ set -eo
 brew uninstall texlive || true
 brew install --cask mactex
 
-if ! command -v opam exec forester -- --help|head &> /dev/null; then
-  brew install opam  watchexec
-  opam init --auto-setup --yes
-  opam update --yes
-  opam pin add forester git+https://git.sr.ht/~jonsterling/ocaml-forester#56de06afe952d752c1a13fdcd8bb56c5fef9956f --yes
+if ! command -v opam exec forester -- --help | head &>/dev/null; then
+    brew install opam watchexec
+    opam init --auto-setup --yes
+    opam update --yes
+    opam pin add forester git+https://git.sr.ht/~jonsterling/ocaml-forester#56de06afe952d752c1a13fdcd8bb56c5fef9956f --yes
 fi
 
 # if pandoc is not installed
-if ! command -v pandoc &> /dev/null; then
-  brew install pandoc
+if ! command -v pandoc &>/dev/null; then
+    brew install pandoc
 fi
 
 # if bun is not installed
-if ! command -v bun &> /dev/null; then
-  # install bun
-  curl -fsSL https://bun.sh/install | bash
+if ! command -v bun &>/dev/null; then
+    # install bun
+    curl -fsSL https://bun.sh/install | bash
 fi
 
 # if just is not installed
-if ! command -v just &> /dev/null; then
-  # install just
-  curl --proto '=https' --tlsv1.2 -sSf https://just.systems/install.sh | bash -s -- --to /usr/local/bin
+if ! command -v just &>/dev/null; then
+    # install just
+    curl --proto '=https' --tlsv1.2 -sSf https://just.systems/install.sh | bash -s -- --to /usr/local/bin
 fi
+
+# required by
+# Opam package conf-libffi.2.0.0 depends on the following system package that can no longer be found: libffi
+brew install libffi
 
 echo "✅ dependencies installed: mactex, forester, pandoc, bun, just"
 # echo "💡 To initialize just aliases: source alias.sh"
