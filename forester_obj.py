@@ -45,7 +45,6 @@ def process_file(file_path: Path, dry_run: bool = True) -> None:
         definitions, calls = find_method_syntax_in_content(content)
         
         if not definitions and not calls:
-            print(colored(f"No methods found in {file_path}", 'yellow'))
             return
             
         print(colored(f"\nProcessing {file_path}:", 'blue'))
