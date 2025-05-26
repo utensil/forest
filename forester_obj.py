@@ -1,3 +1,9 @@
+#!/usr/bin/env -S uv run
+# /// script
+# requires-python = ">=3.11,<3.12"
+# dependencies = ["termcolor"]
+# ///
+
 import re
 from pathlib import Path
 from typing import List, Tuple
@@ -71,8 +77,11 @@ def process_files(dry_run: bool = True) -> None:
     for file_path in Path('trees').glob('*g-*.tree'):
         process_file(file_path, dry_run)
 
-if __name__ == '__main__':
+def main():
     dry_run = '--apply' not in sys.argv
     print(colored(f"Running in {'dry-run' if dry_run else 'apply'} mode", 
                  'magenta' if dry_run else 'green'))
     process_files(dry_run)
+
+if __name__ == '__main__':
+    main()
