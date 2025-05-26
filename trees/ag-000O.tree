@@ -9,7 +9,7 @@
 
 \let\ball/screen{
   \patch{\ball/new}{
-    [center/id]{sreenball}
+    [center-id] {sreenball}
     [radius]{1.5cm}
   }
 }
@@ -38,16 +38,16 @@
 \define/lightbulb
 \begin{tikzpicture}
 
-  \myball#coord/center
-  \myball#draw/boundary
-  \myball#draw/body
+  \myball#coord-center
+  \myball#draw-boundary
+  \myball#draw-body
   \begin{pgfonlayer}{background}
-  \myball#draw/shadow
+  \myball#draw-shadow
   \end{pgfonlayer}
 
-  % \myball#draw/radius
-  % \myball#draw/center
-  % \myball#draw/center/label
+  % \myball#draw-radius
+  % \myball#draw-center
+  % \myball#draw-center-label
 
   \let\point/p0{
     \patch{\point/new}[self]{
@@ -57,9 +57,9 @@
       [angle]{150}
       [draw]{
         \self#coord
-        \self#path/arrow
-        \self#draw/dot
-        \self#draw/label
+        \self#path-arrow
+        \self#draw-dot
+        \self#draw-label
       }
     }
   }
@@ -76,10 +76,10 @@
 
   % set Omega
   % \coordinate (ball/label) at (45:1.5*\myball#radius);
-  % \draw ($(\myball#center/id)!0.5!(ball/label)$) -- ($(\myball#center/id)!0.8!(ball/label)$) node at (ball/label) {$\Omega$};
+  % \draw ($(\myball#center-id)!0.5!(ball/label)$) -- ($(\myball#center-id)!0.8!(ball/label)$) node at (ball/label) {$\Omega$};
 
   % intersection of arrow p and ball boundary
-  \path[name intersections={of=\myball#boundary/id and \point/p0#arrow/id, by={I}}];
+  \path[name intersections={of=\myball#boundary-id and \point/p0#arrow-id, by={I}}];
 
   \let\dt{\Delta t}
 
@@ -89,8 +89,8 @@
       [start]{p0}
       [end]{p1}
       [label]{\dt}
-      [label/pos]{0.5}
-      [mark/length]{1cm}
+      [label-pos] {0.5}
+      [mark-length] {1cm}
       [style]{densely dashed,gray}
     }
   }
@@ -112,17 +112,17 @@
     plane y={(0,1,0)},
     canvas is plane]   % [xshift=-4cm,yshift=2.5cm,rotate=40,xscale=0.28,yscale=0.3]
 
-    \screen#draw/border
-    \screen#draw/body
-    \screen#draw/label
+    \screen#draw-border
+    \screen#draw-body
+    \screen#draw-label
 
     % draw the same ball on screen
 
-    \ball/screen#draw/shadow
-    \ball/screen#coord/center
-    \ball/screen#draw/center
-    \ball/screen#draw/boundary
-    \ball/screen#draw/body
+    \ball/screen#draw-shadow
+    \ball/screen#coord-center
+    \ball/screen#draw-center
+    \ball/screen#draw-boundary
+    \ball/screen#draw-body
   \end{scope}
 
   \begin{scope}[
@@ -137,10 +137,10 @@
   \end{scope}
 
   \begin{pgfonlayer}{background}
-    \draw[photon] (\point/camera#id) -- (\ball/screen#center/id);
+    \draw[photon] (\point/camera#id) -- (\ball/screen#center-id);
   \end{pgfonlayer}
 
-  \draw[photon] (\ball/screen#center/id) -- (I);
+  \draw[photon] (\ball/screen#center-id) -- (I);
 
   \coordinate (camera) at (-30:-7.8cm);
   \pic at (camera) {camera={width=1.5, height=2.5, depth=3, scale=0.15, units=cm, zangle=30, xangle=20}};
