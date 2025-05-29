@@ -27,6 +27,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     register('.graphviz-root', 'graphviz.js')
     register('.d3-graphviz-root', 'd3-graphviz.js')
     register('.mermaid', 'mermaid.js')
+    register('.markmap', 'markmap.js')
 
     const hostname = window.location.hostname
 
