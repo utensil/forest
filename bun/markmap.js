@@ -22,7 +22,6 @@ const renderMarkmapDiagrams = async () => {
 
             console.debug('Transformed markmap data:', root, features)
 
-            // const { styles, scripts } = transformer.getAssets();
             const { styles, scripts } = transformer.getUsedAssets(features)
 
             if (styles && loadCSS) loadCSS(styles)
@@ -38,13 +37,6 @@ const renderMarkmapDiagrams = async () => {
 
             container.style.width = '100%'
             container.style.minHeight = '70vh'
-            // container.style.height = '600px'
-
-            // <svg id="markmap" style="width: 800px; height: 800px"></svg>
-            // container.style.width = '800px'
-            // container.style.height = '800px'
-            // set attributes for SVG namespace
-            // container.setAttribute('xmlns', 'http://www.w3.org/2000/svg')
 
             // Clear the markmap tag content but keep the element itself
             markmapTag.innerHTML = ''
@@ -64,9 +56,6 @@ const renderMarkmapDiagrams = async () => {
 
             // markmap.renderData();
             // markmap.fit();
-
-            // // Store the markmap instance on the element for potential future reference
-            // markmapTag.markmap = markmap
 
             console.debug('Markmap rendered successfully:', markmapTag)
 
