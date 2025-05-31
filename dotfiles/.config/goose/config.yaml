@@ -98,5 +98,37 @@ extensions:
         name: speech-mcp
         timeout: 300
         type: stdio
+    kit:
+        args:
+        - run
+        - --python
+        - '3.11'
+        - --with
+        - cased-kit
+        - python
+        - -m
+        - kit.mcp
+        bundled: null
+        cmd: uv
+        description: null
+        enabled: true
+        env_keys: []
+        envs: {}
+        name: kit
+        timeout: 300
+        type: stdio
+    mcp-deepwiki:
+        args:
+            - -y
+            - mcp-deepwiki@latest
+        bundled: null
+        cmd: npx
+        description: null
+        enabled: true
+        env_keys: []
+        envs: {}
+        name: mcp-deepwiki
+        timeout: 300
+        type: stdio
 # GOOSE_MODEL: deepseek-v3-0324
 GOOSE_MODE: smart_approve
