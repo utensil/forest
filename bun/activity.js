@@ -101,7 +101,7 @@ function initTracker(userConfig = {}) {
                 header.closest('.tree-content')?.querySelector('.markdownit')
 
             if (content) {
-                const items = content.querySelectorAll('li')
+                const items = content.querySelectorAll(':scope > ul > li')
                 count = items.length
             }
         }
