@@ -367,3 +367,6 @@ goose *PARAMS="session":
     #!/usr/bin/env zsh
     goose {{PARAMS}}
 
+kit-mcp:
+    uv run --python 3.11 --with cased-kit python -m kit.mcp
+
