@@ -143,4 +143,3 @@ function initTracker(userConfig = {}) {
 
 // Start the tracker after DOM is ready
 document.addEventListener('DOMContentLoaded', () => initTracker())
-
