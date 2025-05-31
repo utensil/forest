@@ -169,14 +169,22 @@ gs *PARAMS:
     uvx --python 3.12 --from 'gpustack[all]' gpustack {{PARAMS}}
 
 prep-pl:
-    curl -sL https://plandex.ai/install.sh | bash
+    #!/usr/bin/env zsh
+    which plandex || (curl -sL https://plandex.ai/install.sh | bash)
+    if [[ ! -d ~/projects/plandex ]]; then
+        git clone https://github.com/plandex-ai/plandex.git ../plandex
+    else
+        (cd ../plandex && git pull --ff-only)
+    fi
+    cd ../plandex/app
+    sd 'docker compose' 'docker-compose' start_local.sh
+    ./start_local.sh
 
 pl PROJ="forest":
     #!/usr/bin/env zsh
     cd ~/projects/{{PROJ}}
-    while read -r line; do
-        plandex $line
-    done
+    plandex --semi
+
 
 prep-sg:
     #!/usr/bin/env zsh
