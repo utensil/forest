@@ -322,7 +322,7 @@ prep-dw:
     if [ ! -d ../deepwiki-open ]; then
         git clone https://github.com/AsyncFuncAI/deepwiki-open.git ../deepwiki-open
     else
-        (cd ../deepwiki-open && git pull)
+        # (cd ../deepwiki-open && git pull --ff-only )
     fi
     cd ../deepwiki-open
     echo "OPENAI_API_KEY=$OPENAI_API_KEY" > .env
@@ -334,6 +334,17 @@ dw: prep-dw
     #!/usr/bin/env zsh
     cd ../deepwiki-open
     docker-compose up
+
+# Not working yet
+prep-odw:
+    #!/usr/bin/env zsh
+    if [ ! -d ../OpenDeepWiki ]; then
+        git clone https://github.com/AIDotNet/OpenDeepWiki.git ../OpenDeepWiki
+    else
+    # (cd ../OpenDeepWiki && git pull --ff-only)
+    fi
+    cd ../OpenDeepWiki
+    make build
 
 prep-goose:
     #!/usr/bin/env zsh
