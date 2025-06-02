@@ -1,14 +1,14 @@
 // bun add cubing
 
 // import { Alg } from "cubing/alg";
-import { TwistyPlayer } from "cubing/twisty";
+import { TwistyAlgViewer, TwistyPlayer } from 'cubing/twisty'
 // import { randomScrambleForEvent } from "cubing/scramble";
 
 const twistyOptions = window.twistyOptions || {
     puzzle: '3x3x3',
     hintFacelets: 'none',
     controlPanel: 'bottom-row',
-    background: 'none'
+    background: 'none',
 }
 
 const twisty_tags = document.querySelectorAll('.twisty.grace-loading')
@@ -22,19 +22,21 @@ for (let i = 0; i < twisty_tags.length; i++) {
     const twistyOptionsLocal = {
         experimentalSetupAlg: setup || '',
         alg: alg || '',
-        ...twistyOptions
+        ...twistyOptions,
     }
 
     const player = new TwistyPlayer(twistyOptionsLocal)
 
     player.style.width = '95%'
 
-    // const pre = document.createElement('pre')
-    // pre.textContent = alg
+    const viewer = new TwistyAlgViewer({ twistyPlayer: player })
+
+    viewer.style.display = 'flex'
+    viewer.style.justifyContent = 'center'
 
     twisty_tag.innerHTML = ''
 
-    // twisty_tag.appendChild(pre)
+    twisty_tag.appendChild(viewer)
 
     twisty_tag.appendChild(player)
 
