@@ -16,6 +16,25 @@ def strip_ansi(text):
     return ansi_escape.sub("", text)
 
 
+def generate_title_from_url(url):
+    """Generate a title from URL for cases where title is missing"""
+    # Match Mastodon-like URLs: https://mathstodon.xyz/@tao/114603605315214772
+    mastodon_pattern = re.compile(r"https?://([^/]+)/@([^/]+)")
+    mastodon_match = mastodon_pattern.match(url)
+    
+    if mastodon_match:
+        domain = mastodon_match.group(1)
+        username = mastodon_match.group(2)
+        return f"{username}'s post on {domain}"
+    
+    # Default case - use domain name
+    try:
+        domain = re.match(r"https?://(?:www\.)?([^/]+)", url).group(1)
+        return f"Post on {domain}"
+    except (AttributeError, IndexError):
+        return "Untitled post"
+
+
 def process_stars(input_text):
     # Group by date
     date_groups = defaultdict(list)
@@ -50,12 +69,15 @@ def process_stars(input_text):
                     if not url:  # Skip if no URL available
                         continue
 
-                    title = entry.get(
-                        "title", ""
-                    )  # .replace('[AINews]', '')  # Clean up title
+                    # Handle null title or empty title
+                    title = entry.get("title")
+                    if not title:  # If title is None or empty string
+                        title = generate_title_from_url(url)
+                    else:
+                        title = title.strip()
 
                     # Create markdown link
-                    link = f"- read [{title.strip()}]({url})"
+                    link = f"- read [{title}]({url})"
 
                     date_groups[date].append(link)
                 except json.JSONDecodeError:
