@@ -77,6 +77,21 @@ penrose SOURCE:
     mkdir -p output/penrose/
     cp -f {{SOURCE}} output/penrose/
 
+fix-thm:
+    #!/usr/bin/env zsh
+    # mv output/default.xsl output/default.xsl.bak || true
+    cp -f assets/*.xsl output/
+    cp -f assets/uts-forest.xsl output/default.xsl
+    # cp -f every file/dir in output except the dir forest
+    for file in output/*; do
+        if [ -d "$file" ] && [ "$(basename "$file")" != "forest" ]; then
+            cp -rf "$file" output/forest/
+        elif [ -f "$file" ]; then
+            cp -f "$file" output/forest/
+        fi
+    done
+
+
 envs:
     #!/usr/bin/env bash
     echo "PROJECT_ROOT: $PROJECT_ROOT"
