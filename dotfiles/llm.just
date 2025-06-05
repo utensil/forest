@@ -388,3 +388,11 @@ cc:
     echo openai $OPENAI_API_MODEL --baseURL "$OPENAI_API_BASE" --debug
     claude-bridge openai $OPENAI_API_MODEL --baseURL "$OPENAI_API_BASE" --debug
 
+prep-codex:
+    npm install -g @openai/codex
+
+codex *PARAMS:
+    #!/usr/bin/env zsh
+    export LOCAL_API_KEY=$OPENAI_API_KEY
+    export LOCAL_BASE_URL=$OPENAI_API_BASE
+    codex --provider LOCAL --model $OPENAI_API_MODEL {{PARAMS}}
