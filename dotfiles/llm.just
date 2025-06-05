@@ -395,4 +395,4 @@ codex *PARAMS:
     #!/usr/bin/env zsh
     export LOCAL_API_KEY=$OPENAI_API_KEY
     export LOCAL_BASE_URL=$OPENAI_API_BASE
-    codex --provider LOCAL --model $OPENAI_API_MODEL {{PARAMS}}
+    codex -a auto-edit --provider LOCAL --model $OPENAI_API_MODEL {{PARAMS}}
