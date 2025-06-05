@@ -370,3 +370,21 @@ goose *PARAMS="session":
 kit-mcp:
     uv run --python 3.11 --with cased-kit python -m kit.mcp
 
+# Choose other model
+# Put the following in the box below
+# base_url=https://some_api_base/v1
+# api_key=YOUR_API_KEY
+# see https://github.com/frdel/agent-zero/issues/326#issuecomment-2679344132
+zero:
+    docker pull frdel/agent-zero-run
+    docker run --rm -p 50001:80 frdel/agent-zero-run
+
+prep-cc:
+    npm install -g @anthropic-ai/claude-code
+    npm install -g @mariozechner/claude-bridge
+
+cc:
+    #!/usr/bin/env zsh
+    echo openai $OPENAI_API_MODEL --baseURL "$OPENAI_API_BASE" --debug
+    claude-bridge openai $OPENAI_API_MODEL --baseURL "$OPENAI_API_BASE" --debug
+
