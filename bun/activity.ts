@@ -1,6 +1,14 @@
 import '@mariohamann/activity-graph'
 
-const DEFAULT_CONFIG = {
+interface ActivityConfig {
+    activityLevels: number[]
+    colors?: string[]
+    dateFormat?: string
+    firstDayOfWeek?: number
+    maxItems?: number
+}
+
+const DEFAULT_CONFIG: ActivityConfig = {
     activityLevels: [0, 1, 3, 5, 8],
     colors: [
         '#ebedf0', // No activity
@@ -15,8 +23,8 @@ const DEFAULT_CONFIG = {
 }
 
 // GitHub-style habit tracker for learning diary
-function initTracker(userConfig = {}) {
-    const config = { ...DEFAULT_CONFIG, ...userConfig }
+function initTracker(userConfig: Partial<ActivityConfig> = {}): void {
+    const config: ActivityConfig = { ...DEFAULT_CONFIG, ...userConfig }
     // Ensure activity-graph component is defined
     if (!customElements.get('activity-graph')) {
         console.error('activity-graph component not registered')
@@ -49,14 +57,14 @@ function initTracker(userConfig = {}) {
     })
 
     // Create and populate activity map
-    const activityMap = new Map()
+    const activityMap = new Map<string, number>()
 
     for (const section of dateSections) {
         // Extract just the date portion (before first space)
         const dateText = section.textContent.trim().split(' ')[0]
         // console.log(`Processing date: ${dateText}`);
 
-        const dates = []
+        const dates: string[] = []
         const [year, month, day] = dateText.split('-')
 
         // Handle date ranges (e.g., 2024-10-18~10-24)
@@ -115,9 +123,9 @@ function initTracker(userConfig = {}) {
             activityMap.set(dateKey, count)
         }
     }
-
     // Make activityMap available globally for debugging
-    window.activityMap = activityMap
+    // biome-ignore lint/suspicious/noExplicitAny: accessing browser window object
+    ;(window as any).activityMap = activityMap
     // console.log('activityMap available as window.activityMap', activityMap);
 
     // Generate activity data string for the graph
