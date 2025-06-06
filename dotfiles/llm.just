@@ -40,7 +40,23 @@ aiderweb URL:
     uvx --python 3.11 --from 'aider-chat[help,playwright,browser]' python -m aider.scrape {{URL}}
 
 
-# following https://github.com/Olow304/memvid/raw/refs/heads/main/README.md add a just task called mp4 to clone it then run example/file_chat.py with *PARAMS, like task prep-pl AI!
+prep-mp4:
+    #!/usr/bin/env zsh
+    if [ ! -d ../memvid ]; then
+        git clone https://github.com/Olow304/memvid.git ../memvid
+    else
+        (cd ../memvid && git pull)
+    fi
+    cd ../memvid
+    uv venv --python 3.11 --seed
+    source .venv/bin/activate
+    pip install memvid PyPDF2
+
+mp4 *PARAMS:
+    #!/usr/bin/env zsh
+    cd ../memvid
+    source .venv/bin/activate
+    python examples/file_chat.py {{PARAMS}}
 
 # prep-ad:
 #    #!/usr/bin/env zsh
