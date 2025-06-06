@@ -1,6 +1,6 @@
 // bun add markmap-lib markmap-view
 // Similar implementation pattern to mermaid.js for rendering markmap elements
-import { Transformer, builtInPlugins } from 'markmap-lib'
+import { Transformer } from 'markmap-lib'
 import { Markmap, loadCSS, loadJS, refreshHook } from 'markmap-view'
 
 // Initialize the transformer with default plugins
@@ -13,8 +13,8 @@ const renderMarkmapDiagrams = async () => {
     console.log(`Found ${markmapTags.length} markmap elements to render`)
 
     for (let i = 0; i < markmapTags.length; i++) {
-        const markmapTag = markmapTags[i]
-        const markmapCode = markmapTag.textContent.trim()
+        const markmapTag = markmapTags[i] as HTMLElement
+        const markmapCode = markmapTag.textContent?.trim() ?? ''
 
         try {
             // Transform the Markdown content to markmap data
@@ -23,7 +23,6 @@ const renderMarkmapDiagrams = async () => {
             console.debug('Transformed markmap data:', root, features)
 
             const { styles, scripts } = transformer.getUsedAssets(features)
-
             if (styles && loadCSS) loadCSS(styles)
             if (scripts && loadJS) {
                 loadJS(scripts, { getMarkmap: () => ({ refreshHook }) })
