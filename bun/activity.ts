@@ -124,8 +124,7 @@ function initTracker(userConfig: Partial<ActivityConfig> = {}): void {
         }
     }
     // Make activityMap available globally for debugging
-    // biome-ignore lint/suspicious/noExplicitAny: accessing browser window object
-    ;(window as any).activityMap = activityMap
+    // window.activityMap = activityMap
     // console.log('activityMap available as window.activityMap', activityMap);
 
     // Generate activity data string for the graph
