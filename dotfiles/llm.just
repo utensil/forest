@@ -48,15 +48,21 @@ prep-mp4:
         (cd ../memvid && git pull)
     fi
     cd ../memvid
+    git reset --hard 5524b0a8b268c02df01cca87110cc1b978460c97
     uv venv --python 3.11 --seed
     source .venv/bin/activate
-    pip install memvid PyPDF2
+    uv pip install -e .
+    uv pip install PyPDF2 openai
+    # sd 'extensions = \{' 'extensions = { ".tree", ' examples/file_chat.py
 
-mp4 *PARAMS:
+# just mp4 forest --input-dir trees --extensions .tree
+mp4 PROJ="forest" *PARAMS="":
     #!/usr/bin/env zsh
     cd ../memvid
     source .venv/bin/activate
-    python examples/file_chat.py {{PARAMS}}
+    cd ../{{PROJ}}
+    export OPENAI_BASE_URL=$OPENAI_API_BASE
+    python ../memvid/examples/file_chat.py --provider openai --model $OPENAI_API_MODEL {{PARAMS}}
 
 # prep-ad:
 #    #!/usr/bin/env zsh
