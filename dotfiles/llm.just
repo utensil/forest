@@ -37,7 +37,10 @@ aider PROJ="forest" *PARAMS="": sync-aider
     cd ~/projects/{{PROJ}} && aider {{PARAMS}}
 
 aiderweb URL:
-   uvx --python 3.11 --from 'aider-chat[help,playwright,browser]' python -m aider.scrape {{URL}}
+    uvx --python 3.11 --from 'aider-chat[help,playwright,browser]' python -m aider.scrape {{URL}}
+
+
+# following https://github.com/Olow304/memvid/raw/refs/heads/main/README.md add a just task called mp4 to clone it then run example/file_chat.py with *PARAMS, like task prep-pl AI!
 
 # prep-ad:
 #    #!/usr/bin/env zsh
