@@ -54,8 +54,10 @@ prep-mp4:
     uv pip install -e .
     uv pip install PyPDF2 openai
     # sd 'extensions = \{' 'extensions = { ".tree", ' examples/file_chat.py
+    # sd "with_suffix\('_index.json'\)" "with_suffix('.json')" examples/file_chat.py
 
 # just mp4 forest --input-dir trees --extensions .tree
+# just mp4 forest --load-existing output/dir_trees_20250606_200619.mkv
 mp4 PROJ="forest" *PARAMS="":
     #!/usr/bin/env zsh
     cd ../memvid
