@@ -52,7 +52,7 @@ function prep_wasm {
         # Check if pkg directory exists and is not empty
         if [ ! -d "lib/$lib_path/pkg" ] || [ -z "$(ls -A lib/$lib_path/pkg)" ]; then
             echo "Building WASM package for $lib_name..."
-            (cd lib/$lib_path && bunx wasm-pack -v build --target web --release . --out-dir pkg)
+            (cd lib/$lib_path && bunx wasm-pack -v build --target web --release . --out-dir pkg || echo -e "\033[0;31mwasm-pack build failed\033[0m")
         else
             echo "Using cached WASM package for $lib_name"
         fi
