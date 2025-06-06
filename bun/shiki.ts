@@ -1,15 +1,23 @@
-import { getHighlighter } from 'https://esm.sh/shiki@1.6.0'
+// bun add shiki
+import {
+    type Highlighter,
+    type Lang,
+    type Theme,
+    createHighlighter,
+} from 'shiki'
 
-async function loadJson(url) {
+interface LangAlias {
+    [key: string]: string
+}
+
+async function loadJson(url: string) {
     const res = await fetch(url)
-    let json
     try {
-        json = await res.json()
+        return await res.json()
     } catch (err) {
-        json = undefined
         console.error(err)
+        return undefined
     }
-    return json
 }
 
 // document.addEventListener('DOMContentLoaded', async () => {
@@ -35,11 +43,13 @@ if (code_tags.length !== 0) {
         let themes = ['aurora-x', 'one-light']
 
         for (const code of code_tags) {
-            let lang = code.classList[0] // assuming the first class is the language
-            if (!lang) return
+            const firstClass = code.classList[0]
+            if (!firstClass) continue
 
-            let langAlias = {}
-            if (/lean.*/.test(lang) && lean4json) {
+            let lang: Lang | unknown = firstClass
+            let langAlias: LangAlias = {}
+
+            if (/lean.*/.test(firstClass) && lean4json) {
                 lang = lean4json
                 langAlias = {
                     lean4: 'Lean 4',
@@ -52,15 +62,17 @@ if (code_tags.length !== 0) {
                 themes = [railscastsjson]
             }
 
-            const highlighter = await getHighlighter({
-                langs: [lang],
+            const highlighter: Highlighter = await createHighlighter({
+                langs: [lang as Lang],
                 langAlias,
-                themes,
+                themes: themes as Theme[],
             })
 
             const html = await highlighter.codeToHtml(
-                code.textContent.replaceAll(/^\n/g, '').replaceAll(/\n$/g, ''),
-                { lang, theme },
+                code.textContent
+                    ?.replaceAll(/^\n/g, '')
+                    .replaceAll(/\n$/g, '') || '',
+                { lang: lang as Lang, theme: theme as Theme },
             )
             code.innerHTML = html
             code.classList.remove('grace-loading')
