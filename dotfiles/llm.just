@@ -119,7 +119,7 @@ cpm:
 
 cpa:
     #!/usr/bin/env zsh
-    npx -y copilot-api@latest start --port 15432
+    npx -y copilot-api@latest start --port 15432 --verbose
 
 # works only for Ubuntu
 [linux]
@@ -424,6 +424,7 @@ codex *PARAMS:
     export LOCAL_BASE_URL=$OPENAI_API_BASE
     codex -a auto-edit --provider LOCAL --model $OPENAI_API_MODEL {{PARAMS}}
 
+# build failed: FATAL ERROR: Reached heap limit Allocation failed - JavaScript heap out of memory
 prep-ed:
     #!/usr/bin/env zsh
     if [ ! -d ../easy-dataset ]; then
@@ -431,3 +432,16 @@ prep-ed:
     else
         (cd ../easy-dataset && git pull)
     fi
+    cd ../easy-dataset
+    docker build -t easy-dataset .
+
+ed:
+    #!/usr/bin/env zsh
+    mkdir -p ~/.easy-dataset
+    docker run --rm -p 1717:1717 -v ~/.easy-dataset:/app/local-db --name easy-dataset easy-dataset
+
+# tutorial intro
+# edit
+mm *PARAMS:
+    uvx marimo {{PARAMS}}
+
