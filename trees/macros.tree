@@ -508,10 +508,14 @@ so the text size almost matches the size output by native forester code. This do
   ##{\equation \verb*|\notag*}
 }
 
-\p{\code{embed[src]}: Embedding an external HTML file, adapted from [here](https://lists.sr.ht/~jonsterling/forester-discuss/\%3CouGgO2PnjJxebrCO-YzNYlSBYnEF9DiupMdWtSP7Q-jVApwBuqrz5AbukPL58LBLpzFVR-C26ULjwbl5sDa9TxzTEDciNZ4Uaux0AfQJ40c=@dannypsnl.me\%3E). }
+\p{\code{embed[src]}: Embedding an external HTML file, adapted from [here](\verb>>>|https://lists.sr.ht/~jonsterling/forester-discuss/%3CouGgO2PnjJxebrCO-YzNYlSBYnEF9DiupMdWtSP7Q-jVApwBuqrz5AbukPL58LBLpzFVR-C26ULjwbl5sDa9TxzTEDciNZ4Uaux0AfQJ40c=@dannypsnl.me%3E>>>). }
 
 \def\embed[src]{
   \<html:embed>[type]{text/html}[src]{\src}{}
+}
+
+\def\iframe[src]{
+  \<html:iframe>[src]{\src}[style]{\verb>>>|width: 100%; min-height: 100vh; border: none>>>}{}
 }
 
 \p{\code{shader[extraclasses][body]}: Embedding a GLSL shader code.}
