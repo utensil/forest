@@ -426,4 +426,8 @@ codex *PARAMS:
 
 prep-ed:
     #!/usr/bin/env zsh
-    # if ../easy-dataset does not exist, clone it from https://github.com/ConardLi/easy-dataset.git otherwise git pull AI!
+    if [ ! -d ../easy-dataset ]; then
+        git clone https://github.com/ConardLi/easy-dataset.git ../easy-dataset
+    else
+        (cd ../easy-dataset && git pull)
+    fi
