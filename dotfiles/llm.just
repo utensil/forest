@@ -423,3 +423,7 @@ codex *PARAMS:
     export LOCAL_API_KEY=$OPENAI_API_KEY
     export LOCAL_BASE_URL=$OPENAI_API_BASE
     codex -a auto-edit --provider LOCAL --model $OPENAI_API_MODEL {{PARAMS}}
+
+prep-ed:
+    #!/usr/bin/env zsh
+    # if ../easy-dataset does not exist, clone it from https://github.com/ConardLi/easy-dataset.git otherwise git pull AI!
