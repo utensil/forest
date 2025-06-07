@@ -1042,6 +1042,19 @@ prep-ag:
 ag PAT LANG="forester" DIR="trees":
     ast-grep run --config dotfiles/.config/ast-grep/sgconfig.yml --lang {{LANG}} -p '{{PAT}}' {{DIR}}
 
+# linux only for now
+# see https://github.com/shell-pool/shpool/issues/183
+prep-pool:
+    cargo install shpool
+
+prep-ds:
+    cargo install diss
+
+# works for mon running btop
+# not really working for nvim etc.
+at SESSION="main":
+    diss -e g -a {{SESSION}} zsh
+
 import 'dotfiles/llm.just'
 import 'dotfiles/archived.just'
 
