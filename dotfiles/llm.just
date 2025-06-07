@@ -441,7 +441,10 @@ ed:
     docker run --rm -p 1717:1717 -v ~/.easy-dataset:/app/local-db --name easy-dataset easy-dataset
 
 # tutorial intro
-# edit
-mm *PARAMS:
+# https://docs.marimo.io/guides/package_management/inlining_dependencies/
+mm *PARAMS="edit --sandbox":
     uvx marimo {{PARAMS}}
 
+# dspy
+# funnydspy
+# math-equivalence==0.0.0 (from git+https://github.com/hendrycks/math.git@357963a7f5501a6c1708cf3f3fb0cdf525642761)
