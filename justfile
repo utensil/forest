@@ -1055,6 +1055,26 @@ prep-ds:
 at SESSION="main":
     diss -e g -a {{SESSION}} zsh
 
+prep-tmux:
+    which tmux || brew install tmux
+
+tm-mon:
+    #!/usr/bin/env zsh
+    tmux attach -t mon || tmux new-session -s mon -d 'sudo mactop || zsh' \; \
+      split-window -h -p 50 'macmon || zsh' \; \
+      attach
+
+# to exit, Ctrl+B then :kill-session
+# to move to left pane, Ctrl+B then left arrow
+# to detach, Ctrl+B then d
+tm-dev:
+    #!/usr/bin/env zsh
+    tmux attach -t dev || tmux new-session -s dev -d 'just dev || zsh' \; \
+      split-window -h -p 50 'just cpa || zsh' \; \
+      select-pane -t 0 \; \
+      split-window -v -p 25 -t 0 'just awake || zsh' \; \
+      attach
+
 import 'dotfiles/llm.just'
 import 'dotfiles/archived.just'
 
