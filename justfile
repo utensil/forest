@@ -137,7 +137,7 @@ tree DIR="." LEVEL="1":
     eza --git -T -L {{LEVEL}} --hyperlink {{DIR}}
 
 prep-gt:
-    which ghostty || brew install ghostty
+    which ghostty || brew install --cask ghostty@tip
     just prep-gtsh
 
 prep-gtsh:
