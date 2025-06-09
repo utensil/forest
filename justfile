@@ -661,6 +661,12 @@ postman:
     # uv tool install --python 3.12 posting
     uvx --python 3.12 posting
 
+# https://www.fuse-t.org/
+prep-fuse:
+    brew tap macos-fuse-t/homebrew-cask
+    brew install fuse-t
+    brew install fuse-t-sshfs
+
 prep-rest:
     #!/usr/bin/env zsh
     # which restic || brew install restic
