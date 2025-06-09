@@ -661,6 +661,20 @@ postman:
     # uv tool install --python 3.12 posting
     uvx --python 3.12 posting
 
+prep-rest:
+    #!/usr/bin/env zsh
+    # which restic || brew install restic
+    which backrest || (brew tap garethgeorge/homebrew-backrest-tap
+    brew install backrest)
+    brew services restart backrest
+    echo "visit http://127.0.0.1:9898"
+
+mnt-rest REPO:
+    #!/usr/bin/env zsh
+    mkdir -p ~/.mnt/{{REPO}}
+    open ~/.mnt/{{REPO}}
+    ~/.local/share/backrest/restic mount -r ~/.rest/{{REPO}} ~/.mnt/{{REPO}}
+
 prep-kopia:
     which kopia || (brew install kopia; brew install --cask kopiaui)
 
