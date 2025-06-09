@@ -681,6 +681,19 @@ mnt-rest REPO:
     open ~/.mnt/{{REPO}}
     ~/.local/share/backrest/restic mount -r ~/.rest/{{REPO}} ~/.mnt/{{REPO}}
 
+export DREST_HOME := join(home_directory(), ".drest")
+
+prep-drest:
+    docker pull garethgeorge/backrest:latest
+    mkdir -p {{DREST_HOME}}/.backrest/config
+    mkdir -p {{DREST_HOME}}/.backrest/data
+    mkdir -p {{DREST_HOME}}/.backrest/cache
+
+drest:
+    # echo $DREST_HOME
+    echo "Visit http://127.0.0.1:19898"
+    docker run --rm -p 19898:9898 -e BACKREST_PORT=9898 -e BACKREST_DATA=/data -e XDG_CACHE_HOME=/cache -v $DREST_HOME/.backrest/config:/.config/backrest -v $DREST_HOME/.backrest/data:/data -v $DREST_HOME/.backrest/cache:/cache garethgeorge/backrest:latest
+
 prep-kopia:
     which kopia || (brew install kopia; brew install --cask kopiaui)
 
