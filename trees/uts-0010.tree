@@ -7,10 +7,12 @@
 }
 
 \scope{
-%   \query{
-%     \open\query
-%     \isect{\tag{exp}}{\tag{tech}}{\compl{\tag{draft}}}
-%   }
+\query\datalog{
+ ?X -:
+    {\rel/has-tag ?X '{tech}}
+    {\rel/has-tag ?X '{exp}}
+    # {\rel/has-tag ?X '{draft}}
+}
 }
 
 \related{\ref{uts-0012}}

@@ -1,8 +1,10 @@
 \title{Math notes (partially complete)}
 
 \scope{
-%   \query{
-%     \open\query
-%     \isect{\tag{notes}}{\tag{math}}{\compl{\tag{draft}}}
-%   }
+\query\datalog{
+ ?X -:
+     {\rel/has-tag ?X '{math}}
+     {\rel/has-tag ?X '{notes}}
+     # {\rel/has-tag ?X '{draft}}
+ }
 }

@@ -3,12 +3,11 @@
 
 \note{posts}{
 
-% \scope{
-%   \query{
-%     \open\query
-%     \isect{\tag{post}}{\compl{\tag{draft}}}
-%   }
-% }
+\query\datalog{
+    ?X -:
+        {\rel/has-tag ?X '{post}}
+        # {\rel/has-tag ?X '{draft}}
+}
 
 \p{For earlier posts, see [Utensil's Blog](https://utensil.github.io/blog/) powered by [Hugo](https://gohugo.io/).}
 
