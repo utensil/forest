@@ -1117,6 +1117,12 @@ tm-dev:
 uq APP_PATH:
     xattr -d com.apple.quarantine {{APP_PATH}}
 
+# Add a config to ~/Library/Application Support/iamb/config.toml per https://iamb.chat/configure.html
+# Login via SSO on element
+# Verify by `:verify`, comparing emoji on element, and copy-paste the `:verify confirm USER/DEVICE` command on iamb
+prep-matrix:
+    which iamb || brew install iamb
+
 import 'dotfiles/llm.just'
 import 'dotfiles/archived.just'
 
