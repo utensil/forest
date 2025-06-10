@@ -19,6 +19,61 @@
 \subtree[2025-06]{
 \title{June, 2025}
 
+\mdblock{2025-06-09}{
+- read [Ditching HAProxy (in my homelab)](https://arch.dog/bark/ditching-haproxy)
+    - found [Ran out of infrastructure titles](https://arch.dog/bark/2025-03-30-infrastructure) from the author
+        - [backrest](https://github.com/garethgeorge/backrest)
+            - for using `restic` to manage backup [repos](https://restic.readthedocs.io/en/latest/030_preparing_a_new_repo.html) and plans
+            - tested that `restore` and `mount` work, as well as encryption and compression
+                - see also [Running Veracrypt in Docker](\verb>>>|https://ooe.ooo/posts/%E5%9C%A8docker%E4%B8%AD%E8%BF%90%E8%A1%8Cveracrypt/>>>)
+                    - `--privileged`, `-m=nokernelcrypto`, locale etc.
+            - supports monitoring via [Healthchecks](https://healthchecks.io/) if backup jobs don't "check in"
+            - a sec review: [restic cryptography](https://words.filippo.io/restic-cryptography/)
+        - [Talos: a container optimized Linux distro](https://www.talos.dev/), which is declarative, immutable, secure
+            - minimal: consists of only a handful of binaries and shared libraries: just enough to run containerd and a small set of system services
+        - [MetalLB, a load-balancer implementation for bare metal Kubernetes clusters](https://metallb.io/)
+        - [Unbound: a powerful validating, recursive, caching DNS resolver](https://www.unbound.net/)
+            - could be used [for home network](https://unbound.docs.nlnetlabs.nl/en/latest/use-cases/home-resolver.html)
+        - [Salt](https://saltproject.io/) with [its GUI](https://github.com/erwindon/SaltGUI/)
+            - is similar to Ansible, in the sense you use YAML to specify a state, but has a differening architecture, opting for a master/minion setup rather than Ansible's agentless SSH connections to each node
+        - [Apt-Cacher NG](https://www.unix-ag.uni-kl.de/~bloch/acng/) for caching apt packages
+        - [Harbor](https://goharbor.io/) for caching container images
+        - [Headscale](https://github.com/juanfont/headscale): self-hosted implementation of the Tailscale control server
+        - [Pocket ID](https://pocket-id.org/) for authenticate users with their passkeys
+- read [Two Approaches to Solving the “Quiet Fediverse” Problem: Conversation Backfilling Mechanisms](https://hackers.pub/@hongminhee/2025/quiet-fediverse-two-approaches/en)
+    - investigate more on fediverse
+        - [The fediverse, explained](https://www.theverge.com/24063290/fediverse-explained-activitypub-social-media-open-protocol)
+            - [Lemmy](https://join-lemmy.org/)
+            - [Pixelfed](https://pixelfed.org/)
+            - [BookWyrm](https://bookwyrm.social/)
+            - [PeerTube](https://joinpeertube.org/)
+        - [Pleroma](https://pleroma.social/): a lightweight federated social networking server powered by Elixir and PostgreSQL
+            - from [What Is Pleroma?](https://blog.soykaf.com/post/what-is-pleroma/)
+        - [From Fediverse to Creating Personal Digital Space with Memos](https://dev.charizard.page/en/posts/from-fediverse-to-build-my-own-digital-space/)
+            - [Single-user Mastodon Instance is a Bad Idea](https://medium.com/@erinc/single-user-mastodon-instance-is-a-bad-idea-61cfaa62856a)
+        - [jakeg -> notes -> fediverse](https://jakegines.in/notes/fediverse)
+
+        - [ActivityPods: Personal data spaces powered with ActivityPub](https://activitypods.org/)
+- wish to test x86 on ARM Mac
+    - due to [Zig's self-hosted x86 backend is now default in Debug mode](https://ziglang.org/devlog/2025/?unique/#2025-06-08)
+    - found [Intel-on-ARM and ARM-on-Intel](https://lima-vm.io/docs/config/multi-arch/) with lima
+- read [AI at Amazon: a case study of brittleness](https://surfingcomplexity.blog/2025/06/08/ai-at-amazon-a-case-study-of-brittleness/)
+    - that's how things got stuck in a big org, or at least slowed down enought to suffocate innovation
+        - Decompensation: a service fall over after receiving a spike in external requests, mostly due to hierarchical decision-making
+        - Working at cross-purposes: introduced an almost Darwinian flavor to org dynamics where teams scrambled to get their work done to avoid getting reorged and subsumed into a competing team
+        - Getting stuck in outdated behaviors: had to constantly justify our existence and massage our projects with metrics that could be seen as more customer-facing
+- found [Simulating Time With Square-Root Space](https://people.csail.mit.edu/rrw/time-vs-space.pdf) and watched the introduction video
+- read [Thank You, DataFusion: Queries in Rust, Without the Pain](http://pierrezemb.fr/posts/thank-you-datafusion/)
+    - SQL as a library, not a service
+    - own your storage, your execution model, your schema, your optimizer
+    - offers [SQL] and [Dataframe] APIs, excellent performance, built-in support for CSV, Parquet, JSON, and Avro
+    - paper: [Apache Arrow DataFusion: A Fast, Embeddable, Modular Analytic Query Engine](https://dl.acm.org/doi/10.1145/3626246.3653368)
+    - should take a deep look into DuckDB
+- read [One Law to Rule All Code Optimizations](https://blog.codingconfessions.com/p/one-law-to-rule-all-code-optimizations)
+- found [Black Hat Zig: Zig for offensive security.](https://www.reddit.com/r/Zig/comments/1l6tbph/black_hat_zig_zig_for_offensive_security/)
+- read [Training a Rust 1.5B Coder LM with Reinforcement Learning (GRPO) | Oxen.ai](https://ghost.oxen.ai/training-a-rust-1-5b-coder-lm-with-reinforcement-learning-grpo/)
+}
+
 \mdblock{2025-06-08}{
 - read [Vanishing zeroes for geometric algebra in Rust](https://dotat.at/@/2020-12-06-vanishing-zeroes-for-geometric-algebra-in-rust.html)
 - read [A plan for SIMD](https://linebender.org/blog/a-plan-for-simd/)
