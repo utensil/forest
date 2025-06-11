@@ -9,7 +9,7 @@
 
 ## 0. Project overview
 
-Forest is a sophisticated mathematical research environment and Zettelkasten system built using Forester. It serves as a personal knowledge management system for mathematical concepts, technical experiments, and research notes, with over 1300+ commits accumulated since 2024.
+Forest is a sophisticated mathematical and technical research environment and Zettelkasten system built using Forester. It serves as a personal knowledge management system for mathematical concepts, technical experiments, and research notes, with over 1300+ commits accumulated since 2024.
 
 The system combines multiple technologies to create a hybrid authoring environment that supports both web-based browsing and traditional academic PDF generation. It integrates Forester (a Zettelkasten note-taking system) with modern development tools, mathematical typesetting, and experimental interactive content.
 
@@ -28,11 +28,11 @@ The system combines multiple technologies to create a hybrid authoring environme
 - ❌ **Must NOT**: Touch test files, CI configs, or core build scripts without explicit permission
 
 ### G-2: Use anchor comments appropriately
-- ✅ **May**: Add/update `FOREST-NOTE:` anchor comments near non-trivial edited code
-- ❌ **Must NOT**: Delete or mangle existing `FOREST-*` comments
+- ✅ **May**: Add/update `AGENT-NOTE:` anchor comments near non-trivial edited code
+- ❌ **Must NOT**: Delete or mangle existing `AGENT-*` comments
 
 ### G-3: Follow project linting and style
-- ✅ **May**: Follow lint/style configs (`biome.json`, `knip.json`) using the configured linter (Biome)
+- ✅ **May**: Follow lint/style configs (`biome.json`) using the configured linter (Biome)
 - ❌ **Must NOT**: Re-format code to any other style
 
 ### G-4: Get approval for large changes
@@ -51,25 +51,22 @@ Use `just` tasks for consistency (they ensure correct environment variables and 
 
 ```bash
 # Development and building
-just dev             # Development server with file watching at http://localhost:1314
-just build           # Main build command that builds Forest + bun assets
-just forest          # Build the forest using forester
-just chk             # Biome linting/formatting (--fix in dev, ci mode in CI)
+just dev             # Development server with file watching at http://localhost:1314 , agents should assume that this is already running by human, and should not run it, but may access it via http
+just build           # Main build command that builds Forest + bun assets, agents could use this to verify build result and gather feedback
+just chk             # Biome linting/formatting, agents should usually run `just chk` after modifying css, js files, if it failed with unsafe changes, agensts may even run `bunx biome check --fix --unsafe` after reviewing the unsafe changes
 
-# Single file builds
-just js bun/<file>   # Build single JS/TS file
-just css bun/<file>  # Build single CSS file
+# Single file builds, discover more similar tasks from `build_changed.sh` for various file types
+just js <file>   # Build single JS/TS file
+just css <file>  # Build single CSS file
 
 # LaTeX and PDF generation
 ./lize.sh <tree-id>  # Build LaTeX documents to PDF
 just lize            # Build multiple LaTeX documents
 
 # Content management
-just new <prefix>    # Create new tree file
-just rss-stars       # Process RSS starred items into learning diary
+just new <prefix>    # Create new tree file, agents should use this to create a new tree, to ensure the format follows the conventions for the trees with the same prefix
+just stars           # Process RSS starred items into learning diary
 ```
-
-For simple, quick checks: `bunx biome check --fix` (ensure correct CWD).
 
 ---
 
@@ -81,25 +78,12 @@ For simple, quick checks: `bunx biome check --fix` (ensure correct CWD).
 *   **Naming**: `camelCase` (JS/TS functions/variables), `PascalCase` (components), `kebab-case` (files), `SCREAMING_SNAKE` (constants).
 *   **Error Handling**: Graceful degradation; log errors with context.
 *   **Documentation**: JSDoc for complex functions; inline comments for complex logic.
-*   **Dependencies**: Check `knip.json` for unused dependency detection.
 
 **Error handling patterns**:
 - Use try/catch blocks appropriately
 - Provide meaningful error messages
 - Log errors with sufficient context for debugging
 - Gracefully handle missing dependencies (especially WASM modules)
-
-Example:
-```javascript
-// FOREST-NOTE: WASM modules may fail to load; graceful degradation required
-try {
-    const wasmModule = await import('./lib/egglog/pkg/egglog.js')
-    return wasmModule.processData(input)
-} catch (error) {
-    console.warn('WASM module unavailable, falling back to simple processing:', error)
-    return simpleProcessing(input)
-}
-```
 
 ---
 
@@ -133,11 +117,11 @@ Add specially formatted comments throughout the codebase, where appropriate, for
 
 ### Guidelines:
 
-- Use `FOREST-NOTE:`, `FOREST-TODO:`, or `FOREST-QUESTION:` (all-caps prefix) for comments aimed at AI and developers.
+- Use `AGENT-NOTE:`, `AGENT-TODO:`, or `AGENT-QUESTION:` (all-caps prefix) for comments aimed at AI and developers.
 - Keep them concise (≤ 120 chars).
-- **Important:** Before scanning files, always first try to **locate existing anchors** `FOREST-*` in relevant subdirectories.
+- **Important:** Before scanning files, always first try to **locate existing anchors** `AGENT-*` in relevant subdirectories.
 - **Update relevant anchors** when modifying associated code.
-- **Do not remove `FOREST-NOTE`s** without explicit human instruction.
+- **Do not remove `AGENT-NOTE`s** without explicit human instruction.
 - Make sure to add relevant anchor comments, whenever a file or piece of code is:
   * too long, or
   * too complex, or
@@ -147,7 +131,7 @@ Add specially formatted comments throughout the codebase, where appropriate, for
 
 Example:
 ```javascript
-// FOREST-NOTE: perf-hot-path; WASM loading can be slow on first run
+// AGENT-NOTE: perf-hot-path; WASM loading can be slow on first run
 async function loadEgglogWasm() {
     ...
 }
@@ -158,8 +142,8 @@ async function loadEgglogWasm() {
 ## 6. Commit discipline
 
 *   **Granular commits**: One logical change per commit.
-*   **Tag AI-generated commits**: e.g., `feat: optimize shader loading [AI]`.
-*   **Clear commit messages**: Explain the *why*; link to issues if architectural.
+*   **Tag agent-generated commits**: e.g., `feat: optimize shader loading [AGENT]`.
+*   **Clear commit messages**: Explain the *why*; link to issues if applicable.
 *   **Use conventional commits**: `feat:`, `fix:`, `docs:`, `style:`, `refactor:`, etc.
 *   **Review AI-generated code**: Never merge code you don't understand.
 
@@ -169,7 +153,7 @@ async function loadEgglogWasm() {
 
 *   To modify tree content, **edit `.tree` files** in `trees/`.
 *   **Follow Forester syntax**: Use `\import{macros}`, `\taxon{type}`, `\tag{topic}` for organization.
-*   **Mathematical content**: Use `\refcardt{type}{name}{tag}{ref}{}` for theorems, definitions, etc.
+*   **Mathematical content**: Use `\refcardt{type}{name}{tag}{ref}{}` for theorems, definitions, etc. To learn more about such macros, check `trees/macros.tree`, and `trees/*-macros.tree` files.
 *   **Address format**: Use `xxx-NNNN` where `xxx` is prefix (uts, ag, tt, ca, spin, hopf) and `NNNN` is base-36 number.
 *   **Content structure**: Wrap paragraphs in `\p{}`, use proper mathematical notation.
 
@@ -199,9 +183,9 @@ async function loadEgglogWasm() {
 ## 8. 🌲 Learning Diary & RSS Integration
 
 *   Learning diary entries use `\mdblock{YYYY-MM-DD}{}` format.
-*   Process RSS starred items: `just rss-stars` generates JSON data for integration.
+*   Process RSS starred items: `just stars` generates JSON data for integration.
 *   Entries are sorted by arrival date (newest first).
-*   Use consistent link formats: `[Title](URL)` for web resources, `\citek{ref-id}` for citations.
+*   Use consistent link formats: `[Title](URL)` for web resources, `\citef{ref-id}` for citations.
 *   Group related items under topic headers when multiple entries exist.
 
 **Learning diary example**:
@@ -209,7 +193,7 @@ async function loadEgglogWasm() {
 \mdblock{2025-01-06}{
 - Math
     - found [Category Theory Illustrated](https://example.com/ct-illustrated)
-    - read \citek{maclane1971categories}
+    - read \citef{maclane1971categories}
 - ML
     - found [Attention is All You Need](https://arxiv.org/abs/1706.03762)
 }
@@ -312,7 +296,6 @@ This section provides pointers to important files and common patterns within the
 **Validation commands**:
 ```bash
 just chk            # Lint JavaScript/TypeScript files
-just forest         # Validate Forester syntax and build
 just build          # Full build validation
 ```
 
@@ -350,27 +333,6 @@ just build          # Full build validation
 *   **Build optimization**: Use file watching in development to avoid full rebuilds.
 *   **Asset optimization**: Lightning CSS and Bun handle minification and bundling.
 *   **PDF generation**: LaTeX compilation is resource-intensive; run only when needed.
-
-**Performance patterns**:
-```javascript
-// FOREST-NOTE: Cache WASM modules to avoid repeated loading
-let wasmCache = new Map();
-
-async function loadWasmModule(name) {
-    if (wasmCache.has(name)) {
-        return wasmCache.get(name);
-    }
-    
-    try {
-        const module = await import(`./lib/${name}/pkg/${name}.js`);
-        wasmCache.set(name, module);
-        return module;
-    } catch (error) {
-        console.warn(`WASM module ${name} unavailable:`, error);
-        return null;
-    }
-}
-```
 
 ---
 
