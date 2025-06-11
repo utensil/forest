@@ -64,10 +64,14 @@ def extract_keywords_from_content(content):
         # Hardware/Architecture
         'x86', 'arm', 'aarch64', 'sandboxing',
         # Academic/Research domains
-        'paper', 'research', 'theory', 'model', 'citation', 'proof', 'theorem', 'lemma',
-        'gauge', 'quantum', 'physics', 'astrophysical', 'dirac',
+        'research', 'theory', 'model', 'citation', 'proof', 'theorem', 'lemma',
+        'gauge', 'quantum', 'physics', 'astrophysical', 'dirac', 'philosophical',
         # Tools/Libraries broader
-        'symbolica', 'bevy', 'knuckledragger', 'z3', 'bpf', 'atproto'
+        'symbolica', 'bevy', 'knuckledragger', 'z3', 'bpf', 'atproto', 'ghostty',
+        # Personal/Life activities
+        'busy', 'office', 'plans', 'skiing', 'paragliding', 'finish',
+        # Content/Media
+        'zen', 'motorcycle', 'maintenance', 'values', 'wang', 'guowei'
     }
     
     # Extract keywords from content
@@ -105,13 +109,22 @@ def extract_keywords_from_content(content):
         r'\b(backrest|restic|talos|metallb|unbound|headscale|harbor)\b',  # Infrastructure
         r'\b(zigar|perses|pulp|faer|galgebra)\b',  # Specialized tools
         r'\b(datafusion|duckdb|apache|arrow|parquet)\b',  # Analytics
+        r'\[\[(uts|ag|tt|spin|hopf)-[0-9a-z]+\]\]',  # Project tree references
+        r'\\citef\{([^}]+)\}',  # Citation references
     ]
     
     for pattern in project_patterns:
         matches = re.findall(pattern, content_lower)
         for match in sorted(matches):  # Sort for deterministic order
-            if match not in found_keywords:
-                found_keywords.append(match)
+            if isinstance(match, tuple):
+                # Handle patterns that return tuples (like tree references)
+                for submatch in match:
+                    if submatch and submatch not in found_keywords:
+                        # Keep project prefixes as keywords
+                        found_keywords.append(submatch)
+            else:
+                if match and match not in found_keywords:
+                    found_keywords.append(match)
     
     # Remove duplicates and sort for consistent output
     unique_keywords = []
