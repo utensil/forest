@@ -22,6 +22,7 @@ keyword extraction logic to keep titles current and meaningful.
 
 import re
 import sys
+import argparse
 from pathlib import Path
 import glob
 
@@ -216,6 +217,48 @@ def find_matching_brace(text, start_pos):
     
     return -1  # No matching brace found
 
+def reset_titles(filepath):
+    """Reset all daily entry titles to just dates (remove : title part)."""
+    
+    try:
+        with open(filepath, 'r', encoding='utf-8') as f:
+            content = f.read()
+    except FileNotFoundError:
+        print(f"Error: File {filepath} not found")
+        return False
+    except IOError as e:
+        print(f"Error reading {filepath}: {e}")
+        return False
+    
+    # Pattern to match mdnote entries with titles and replace with just date
+    # Handle both single-line and multi-line formats
+    pattern = r'(\\subtree\[[^\]]+\]\{\s*\\mdnote\{)([^:]+): ([^}]+)\}(\{)'
+    replacement = r'\1\2}\4'
+    
+    # Count matches before replacement
+    matches = re.findall(pattern, content, flags=re.DOTALL)
+    if not matches:
+        print(f"No daily entries found in {filepath}")
+        return True
+    
+    # Perform replacement
+    new_content = re.sub(pattern, replacement, content, flags=re.DOTALL)
+    changes_made = len(matches)
+    
+    # Only write if content changed
+    if changes_made > 0:
+        try:
+            with open(filepath, 'w', encoding='utf-8') as f:
+                f.write(new_content)
+            print(f"✅ Reset {changes_made} titles to date-only in {filepath}")
+            return True
+        except IOError as e:
+            print(f"Error writing to {filepath}: {e}")
+            return False
+    else:
+        print(f"No titles to reset in {filepath}")
+        return True
+
 def process_file(filepath):
     """Process the tree file and improve all daily entry titles."""
     
@@ -229,26 +272,46 @@ def process_file(filepath):
         print(f"Error reading {filepath}: {e}")
         return False
     
-    # Pattern to match the start of mdnote entries
-    pattern = r'(\\subtree\[[^\]]+\]\{\\mdnote\{)([^:]+): ([^}]+)\}(\{)'
+    # Pattern to match mdnote entries (with or without titles)
+    # Handle both formats: {date: title} and {date}
+    pattern_with_title = r'(\\subtree\[[^\]]+\]\{\s*\\mdnote\{)([^:]+): ([^}]+)\}(\{)'
+    pattern_without_title = r'(\\subtree\[[^\]]+\]\{\s*\\mdnote\{)([^:}]+)\}(\{)'
     
     # Find all matches and process them in reverse order to avoid position shifts
-    matches = list(re.finditer(pattern, content, flags=re.DOTALL))
-    if not matches:
+    matches_with_title = list(re.finditer(pattern_with_title, content, flags=re.DOTALL))
+    matches_without_title = list(re.finditer(pattern_without_title, content, flags=re.DOTALL))
+    
+    # Combine both types of matches and sort by position (reverse order for processing)
+    all_matches = []
+    for match in matches_with_title:
+        all_matches.append(('with_title', match))
+    for match in matches_without_title:
+        all_matches.append(('without_title', match))
+    
+    # Sort by start position in reverse order
+    all_matches.sort(key=lambda x: x[1].start(), reverse=True)
+    
+    if not all_matches:
         print(f"No daily entries found in {filepath}")
         return True
     
-    print(f"Processing {len(matches)} daily entries...")
+    print(f"Processing {len(all_matches)} daily entries...")
     
     # Process matches in reverse order to maintain correct positions
     new_content = content
     changes_made = 0
     
-    for match in reversed(matches):
-        prefix = match.group(1)  # \subtree[date]{\mdnote{
-        date = match.group(2)    # date part
-        old_title = match.group(3)  # old title part
-        opening_brace = match.group(4)  # opening brace {
+    for match_type, match in all_matches:
+        if match_type == 'with_title':
+            prefix = match.group(1)  # \subtree[date]{\mdnote{
+            date = match.group(2)    # date part
+            old_title = match.group(3)  # old title part
+            opening_brace = match.group(4)  # opening brace {
+        else:  # without_title
+            prefix = match.group(1)  # \subtree[date]{\mdnote{
+            date = match.group(2)    # date part
+            old_title = ""  # no existing title
+            opening_brace = match.group(3)  # opening brace {
         
         # Find the matching closing brace for the content
         content_start = match.end()
@@ -265,11 +328,17 @@ def process_file(filepath):
         new_title = improve_title(date, inner_content)
         
         # Only update if title changed
-        if f"{date}: {old_title}" != new_title:
-            # Replace the title part only
-            title_start = match.start(2)
-            title_end = match.end(3)
-            new_content = new_content[:title_start] + new_title + new_content[title_end:]
+        current_title = f"{date}: {old_title}" if old_title else date
+        if current_title != new_title:
+            if match_type == 'with_title':
+                # Replace the title part only
+                title_start = match.start(2)
+                title_end = match.end(3)
+                new_content = new_content[:title_start] + new_title + new_content[title_end:]
+            else:  # without_title
+                # Insert title after date
+                date_end = match.end(2)
+                new_content = new_content[:date_end] + ": " + new_title.split(": ", 1)[1] + new_content[date_end:]
             changes_made += 1
     
     # Only write if content changed
@@ -287,6 +356,11 @@ def process_file(filepath):
         return True
 
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="TIL (Today I Learned) Title Improver")
+    parser.add_argument("--reset", action="store_true", 
+                       help="Reset all titles to date-only (remove : title part)")
+    args = parser.parse_args()
+    
     filepath = Path("trees/uts-0018.tree")
     
     if not filepath.exists():
@@ -294,11 +368,19 @@ if __name__ == "__main__":
         print("Expected file: trees/uts-0018.tree (learning diary)")
         sys.exit(1)
     
-    print("🔍 TIL Title Improver - Analyzing daily entries...")
-    success = process_file(filepath)
-    
-    if success:
-        print("✨ Title improvement complete!")
+    if args.reset:
+        print("🔄 TIL Title Resetter - Removing all title keywords...")
+        success = reset_titles(filepath)
+        if success:
+            print("✨ Title reset complete!")
+        else:
+            print("❌ Title reset failed")
+            sys.exit(1)
     else:
-        print("❌ Title improvement failed")
-        sys.exit(1)
+        print("🔍 TIL Title Improver - Analyzing daily entries...")
+        success = process_file(filepath)
+        if success:
+            print("✨ Title improvement complete!")
+        else:
+            print("❌ Title improvement failed")
+            sys.exit(1)
