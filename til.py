@@ -30,45 +30,55 @@ def extract_keywords_from_content(content):
     # Priority tech keywords - specific technologies, tools, languages
     priority_keywords = {
         # Programming languages
-        'rust', 'zig', 'elixir', 'clojure', 'javascript', 'typescript', 'python', 'c', 'cpp', 'go', 'lean', 'apl', 'jank',
-        # AI/ML
-        'claude', 'dspy', 'textgrad', 'zenbase', 'simba', 'llm', 'ai', 'ml', 'genai', 'reasoning', 'prompt',
-        # Systems/Performance
-        'simd', 'wasm', 'webgpu', 'gpu', 'ebpf', 'performance', 'optimization', 'pulp', 'faer',
+        'rust', 'zig', 'elixir', 'clojure', 'js', 'typescript', 'python', 'cpp', 'go', 'lean', 'apl',
+        # AI/ML specific tools
+        'claude', 'dspy', 'textgrad', 'zenbase', 'simba', 'llm', 'grpo', 'grok', 'qwen', 'embedding', 'prompt',
+        # Systems/Performance specific
+        'simd', 'wasm', 'webgpu', 'gpu', 'ebpf', 'optimization', 'rustc', 'clang', 'gcc', 'llvm', 'pulp', 'faer',
         # Math/Science
-        'galgebra', 'geometric', 'algebra', 'clifford', 'tla', 'jepsen', 'category', 'theory',
-        # Infrastructure/Tools
-        'kubernetes', 'docker', 'containers', 'backrest', 'restic', 'talos', 'metallb', 'unbound',
-        'headscale', 'tailscale', 'harbor', 'salt', 'ansible', 'lima', 'nsjail',
+        'galgebra', 'geometric', 'algebra', 'clifford', 'tla', 'category', 'theory', 'gradient', 'spiral',
+        # Infrastructure/Tools specific
+        'kubernetes', 'docker', 'containerd', 'backrest', 'restic', 'talos', 'metallb', 'unbound',
+        'headscale', 'tailscale', 'harbor', 'salt', 'ansible', 'lima', 'nsjail', 'haproxy', 'healthchecks',
+        'veracrypt', 'makefile', 'ssh', 'apt', 'homelab', 'infrastructure',
         # Databases/Analytics
-        'datafusion', 'duckdb', 'sqlite', 'postgres', 'apache', 'arrow', 'parquet',
-        # Security/Debugging
-        'fuzzing', 'debugging', 'security', 'vulnerability', 'formal', 'methods', 'verification',
+        'datafusion', 'duckdb', 'sqlite', 'postgres', 'apache', 'arrow', 'parquet', 'litestream',
+        # Security/Testing specific
+        'fuzzing', 'security', 'vulnerability', 'formal', 'methods', 'verification', 'encryption', 'backup',
         # Fediverse/Social
         'fediverse', 'mastodon', 'activitypub', 'lemmy', 'pixelfed', 'bookwyrm', 'peertube', 'pleroma',
         # Development tools
-        'git', 'jujutsu', 'compiler', 'zigar', 'perses', 'benchmark', 'profiling',
+        'git', 'jujutsu', 'compiler', 'zigar', 'perses', 'benchmark', 'profiling', 'agents', 'interop',
         # Specs/Protocols
-        'vulkan', 'opengl', 'mcp', 'nlweb', 'json', 'yaml', 'toml', 'xml'
+        'vulkan', 'opengl', 'mcp', 'nlweb', 'json', 'yaml', 'toml', 'xml', 'csv', 'avro',
+        # Hardware/Architecture
+        'x86', 'arm', 'aarch64', 'sandboxing'
     }
     
     # Extract keywords from content
     content_lower = content.lower()
     found_keywords = []
     
-    # Look for priority keywords
+    # Look for priority keywords with context sensitivity
     for keyword in sorted(priority_keywords):  # Sort for deterministic order
         if keyword in content_lower:
             # Handle special cases
-            if keyword == 'c' and ('c++' in content_lower or 'cpp' in content_lower):
-                continue  # Skip standalone 'c' if c++ is present
             if keyword == 'cpp' and 'c++' in content_lower:
                 found_keywords.append('c++')
                 continue
-            if keyword == 'ai' and ('genai' in content_lower or 'llm' in content_lower):
-                continue  # Skip generic 'ai' if more specific terms present
-            if keyword == 'ml' and ('llm' in content_lower or 'dspy' in content_lower):
-                continue  # Skip generic 'ml' if more specific terms present
+            if keyword == 'js' and 'javascript' in content_lower:
+                found_keywords.append('javascript')
+                continue
+            if keyword == 'git':
+                # Only include 'git' if it's about Git the tool, not just GitHub URLs
+                if any(git_term in content_lower for git_term in [
+                    'git clone', 'git commit', 'git push', 'git pull', 'git branch',
+                    'git merge', 'git rebase', 'git log', 'git status', 'git add',
+                    'git-remote', 'git repo', 'git workflow', 'version control',
+                    'git history', 'git config', 'git diff', 'git checkout'
+                ]):
+                    found_keywords.append(keyword)
+                continue
                 
             found_keywords.append(keyword)
     
