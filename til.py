@@ -31,12 +31,19 @@ def extract_keywords_from_content(content):
     priority_keywords = {
         # Programming languages
         'rust', 'zig', 'elixir', 'clojure', 'js', 'typescript', 'python', 'cpp', 'go', 'lean', 'apl',
+        'racket', 'rhombus', 'effekt', 'slang', 'impala', 'haskell', 'ocaml',
         # AI/ML specific tools
         'claude', 'dspy', 'textgrad', 'zenbase', 'simba', 'llm', 'grpo', 'grok', 'qwen', 'embedding', 'prompt',
+        'neural', 'transformer', 'abliteration', 'codegen', 'assistant', 'workflow',
         # Systems/Performance specific
         'simd', 'wasm', 'webgpu', 'gpu', 'ebpf', 'optimization', 'rustc', 'clang', 'gcc', 'llvm', 'pulp', 'faer',
+        'speedup', 'async', 'runtime', 'performance',
         # Math/Science
         'galgebra', 'geometric', 'algebra', 'clifford', 'tla', 'category', 'theory', 'gradient', 'spiral',
+        'multivector', 'versor', 'lipschitzian',
+        # Graphics/Rendering
+        'shader', 'raymarching', 'rendering', 'webgl', 'fluid', 'simulation', 'siggraph', 'animation',
+        'schwarzschild', 'visualization', 'compute',
         # Infrastructure/Tools specific
         'kubernetes', 'docker', 'containerd', 'backrest', 'restic', 'talos', 'metallb', 'unbound',
         'headscale', 'tailscale', 'harbor', 'salt', 'ansible', 'lima', 'nsjail', 'haproxy', 'healthchecks',
@@ -49,10 +56,18 @@ def extract_keywords_from_content(content):
         'fediverse', 'mastodon', 'activitypub', 'lemmy', 'pixelfed', 'bookwyrm', 'peertube', 'pleroma',
         # Development tools
         'git', 'jujutsu', 'compiler', 'zigar', 'perses', 'benchmark', 'profiling', 'agents', 'interop',
+        'biome', 'aider', 'htmx', 'neovim', 'zed', 'tmux', 'worktree',
+        # File/Media tools
+        'exif', 'id3', 'renaming', 'bulk', 'metadata', 'typst',
         # Specs/Protocols
         'vulkan', 'opengl', 'mcp', 'nlweb', 'json', 'yaml', 'toml', 'xml', 'csv', 'avro',
         # Hardware/Architecture
-        'x86', 'arm', 'aarch64', 'sandboxing'
+        'x86', 'arm', 'aarch64', 'sandboxing',
+        # Academic/Research domains
+        'paper', 'research', 'theory', 'model', 'citation', 'proof', 'theorem', 'lemma',
+        'gauge', 'quantum', 'physics', 'astrophysical', 'dirac',
+        # Tools/Libraries broader
+        'symbolica', 'bevy', 'knuckledragger', 'z3', 'bpf', 'atproto'
     }
     
     # Extract keywords from content
