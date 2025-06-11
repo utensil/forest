@@ -1,6 +1,6 @@
 # Agent Instructions for Forest
 
-*Last updated 2025-01-06*
+*Last updated 2025-01-11*
 
 > **purpose** – This file is the onboarding manual for every AI assistant (Claude, Cursor, GPT, etc.) and every human who edits this repository.  
 > It encodes our coding standards, guard-rails, and workflow tricks so the *human 30 %* (architecture, tests, domain judgment) stays in human hands.
@@ -156,6 +156,10 @@ async function loadEgglogWasm() {
 *   **Mathematical content**: Use `\refcardt{type}{name}{tag}{ref}{}` for theorems, definitions, etc. To learn more about such macros, check `trees/macros.tree`, and `trees/*-macros.tree` files.
 *   **Address format**: Use `xxx-NNNN` where `xxx` is prefix (uts, ag, tt, ca, spin, hopf) and `NNNN` is base-36 number.
 *   **Content structure**: Wrap paragraphs in `\p{}`, use proper mathematical notation.
+*   **Citation formats**: 
+    - `\citef{ref-id}` in learning diary (shows full paper title)
+    - `\citek{ref-id}` in mathematical content (cites whole papers/books)
+    - `\citet{section}{ref-id}` in mathematical content (cites specific sections/theorems)
 
 **Tree file pattern example**:
 ```forester
@@ -182,22 +186,15 @@ async function loadEgglogWasm() {
 
 ## 8. 🌲 Learning Diary & RSS Integration
 
-*   Learning diary entries use `\mdblock{YYYY-MM-DD}{}` format.
-*   Process RSS starred items: `just stars` generates JSON data for integration.
-*   Entries are sorted by arrival date (newest first).
-*   Use consistent link formats: `[Title](URL)` for web resources, `\citef{ref-id}` for citations.
-*   Group related items under topic headers when multiple entries exist.
+See `for-llm/learning_diary.md` for comprehensive documentation on learning diary format, RSS processing, and integration patterns.
 
-**Learning diary example**:
-```forester
-\mdblock{2025-01-06}{
-- Math
-    - found [Category Theory Illustrated](https://example.com/ct-illustrated)
-    - read \citef{maclane1971categories}
-- ML
-    - found [Attention is All You Need](https://arxiv.org/abs/1706.03762)
-}
-```
+Key points:
+*   Learning diary entries use `\mdblock{YYYY-MM-DD}{}` format
+*   Process RSS starred items: `just stars` generates JSON data for integration
+*   Entries are sorted by arrival date (newest first)
+*   Use consistent link formats: `[Title](URL)` for web resources, `\citef{ref-id}` for citations (shows full title)
+*   Group related items under topic headers when multiple entries exist
+*   Use hierarchical organization with year and month subtrees
 
 ---
 
