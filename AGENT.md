@@ -2,8 +2,8 @@
 
 *Last updated 2025-01-11*
 
-> **purpose** – This file is the onboarding manual for every AI assistant (Claude, Cursor, GPT, etc.) and every human who edits this repository.  
-> It encodes our coding standards, guard-rails, and workflow tricks so the *human 30 %* (architecture, tests, domain judgment) stays in human hands.
+> **purpose** – This file is the onboarding manual[^1] for every AI assistant (Claude, Cursor, GPT, etc.) and every human who edits this repository.  
+> It encodes our coding standards, guard-rails, and workflow tricks so the *human 30 %*[^2] (architecture, tests, domain judgment) stays in human hands.
 
 ---
 
@@ -356,4 +356,5 @@ The 🌲 marker indicates sections specific to the Forest project, while unmarke
 
 ---
 
-[^1]: The "human 30%" refers to keeping strategic decisions, architectural choices, test design, and domain expertise in human hands while leveraging AI for implementation, documentation, and routine tasks.
+[^1]: This file is adapted from [AGENTS.md by Julep AI](https://github.com/julep-ai/julep/blob/dev/AGENTS.md)
+[^2]: The "human 30%" refers to keeping strategic decisions, architectural choices, test design, and domain expertise in human hands while leveraging AI for implementation, documentation, and routine tasks.
