@@ -32,9 +32,9 @@ function initTracker(userConfig: Partial<ActivityConfig> = {}): void {
     }
 
     // Wait for markdown content using MutationObserver
-    if (!document.querySelector('.markdownit li')) {
+    if (document.querySelector('.markdownit.grace-loading')) {
         const observer = new MutationObserver((mutations, obs) => {
-            if (document.querySelector('.markdownit li')) {
+            if (!document.querySelector('.markdownit.grace-loading')) {
                 obs.disconnect()
                 initTracker(userConfig)
             }
@@ -60,8 +60,8 @@ function initTracker(userConfig: Partial<ActivityConfig> = {}): void {
     const activityMap = new Map<string, number>()
 
     for (const section of dateSections) {
-        // Extract just the date portion (before first space)
-        const dateText = section.textContent.trim().split(' ')[0]
+        // Extract just the date portion (before first space or :)
+        const dateText = section.textContent.trim().split(/[ :]/)[0]
         // console.log(`Processing date: ${dateText}`);
 
         const dates: string[] = []
@@ -111,6 +111,7 @@ function initTracker(userConfig: Partial<ActivityConfig> = {}): void {
             if (content) {
                 const items = content.querySelectorAll(':scope > ul > li')
                 count = items.length
+                // console.log(`${dateText}: ${count}, ${content.innerHTML.trim()}`);
             }
         }
 
