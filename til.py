@@ -130,6 +130,7 @@ def extract_keywords_from_content(content):
         "abliteration",
         "codegen",
         "assistant",
+        "agent",
         "workflow",
         # Systems/Performance specific
         "simd",
@@ -231,7 +232,6 @@ def extract_keywords_from_content(content):
         "perses",
         "benchmark",
         "profiling",
-        "agents",
         "interop",
         "biome",
         "aider",
