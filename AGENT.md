@@ -19,14 +19,29 @@ The system combines multiple technologies to create a hybrid authoring environme
 
 ## 1. Non-negotiable golden rules
 
-| #: | AI *may* do                                                            | AI *must NOT* do                                                                    |
-|---|------------------------------------------------------------------------|-------------------------------------------------------------------------------------|
-| G-0 | Whenever unsure about something that's related to the project, ask the developer for clarification before making changes.    |  ❌ Write changes or use tools when you are not sure about something project specific, or if you don't have context for a particular feature/decision. |
-| G-1 | Generate code **only inside** relevant source directories (e.g., `bun/`, `trees/`, `tex/`, `assets/`) or explicitly pointed files.    | ❌ Touch test files, CI configs, or core build scripts without explicit permission. |
-| G-2 | Add/update **`FOREST-NOTE:` anchor comments** near non-trivial edited code. | ❌ Delete or mangle existing `FOREST-` comments.                                     |
-| G-3 | Follow lint/style configs (`biome.json`, `knip.json`). Use the project's configured linter (Biome), if available, instead of manually re-formatting code. | ❌ Re-format code to any other style.                                               |
-| G-4 | For changes >300 LOC or >3 files, **ask for confirmation**.            | ❌ Refactor large modules without human guidance.                                     |
-| G-5 | Stay within the current task context. Inform the dev if it'd be better to start afresh.                                  | ❌ Continue work from a prior prompt after "new task" – start a fresh session.      |
+### G-0: Always ask for clarification when unsure
+- ✅ **May**: Ask the developer for clarification before making changes when unsure about project-specific details
+- ❌ **Must NOT**: Write changes or use tools when uncertain about something project-specific or lacking context for a particular feature/decision
+
+### G-1: Stay within designated code areas  
+- ✅ **May**: Generate code only inside relevant source directories (`bun/`, `trees/`, `tex/`, `assets/`) or explicitly pointed files
+- ❌ **Must NOT**: Touch test files, CI configs, or core build scripts without explicit permission
+
+### G-2: Use anchor comments appropriately
+- ✅ **May**: Add/update `FOREST-NOTE:` anchor comments near non-trivial edited code
+- ❌ **Must NOT**: Delete or mangle existing `FOREST-*` comments
+
+### G-3: Follow project linting and style
+- ✅ **May**: Follow lint/style configs (`biome.json`, `knip.json`) using the configured linter (Biome)
+- ❌ **Must NOT**: Re-format code to any other style
+
+### G-4: Get approval for large changes
+- ✅ **May**: Make changes, but ask for confirmation if >300 LOC or >3 files
+- ❌ **Must NOT**: Refactor large modules without human guidance
+
+### G-5: Maintain task context boundaries
+- ✅ **May**: Stay within current task context, inform dev if fresh start would be better
+- ❌ **Must NOT**: Continue work from a prior prompt after "new task" – start a fresh session
 
 ---
 
@@ -287,7 +302,79 @@ This section provides pointers to important files and common patterns within the
 
 ---
 
-## 14. Meta: Guidelines for updating AGENT.md files
+## 14. 🌲 Testing framework & validation
+
+*   **No formal testing framework**: This project focuses on mathematical content and documentation.
+*   **Validation approaches**: Build verification, link checking, LaTeX compilation.
+*   **Content validation**: Ensure tree files have proper Forester syntax.
+*   **Manual testing**: Preview changes in development server before committing.
+
+**Validation commands**:
+```bash
+just chk            # Lint JavaScript/TypeScript files
+just forest         # Validate Forester syntax and build
+just build          # Full build validation
+```
+
+---
+
+## 15. Directory-Specific documentation
+
+*   **Always check existing patterns** in directories before adding new content.
+*   **Follow naming conventions** established in each subject area (uts, ag, tt, ca, spin, hopf).
+*   **Mathematical topics** should follow academic conventions and cite sources properly.
+*   **Update macro files** when introducing new notation or symbols.
+
+**Subject-specific guidelines**:
+- **uts**: General mathematical notes and learning diary
+- **ag**: Algebraic geometry concepts and constructions  
+- **tt**: Type theory and categorical logic
+- **ca**: Category theory fundamentals
+- **spin**: Clifford algebras and spin groups
+- **hopf**: Hopf algebras and quantum groups
+
+---
+
+## 16. Versioning & deployment
+
+*   **No formal versioning**: Content-focused repository with continuous integration.
+*   **Deployment**: Automatic GitHub Pages deployment on main branch push.
+*   **Git workflow**: Direct commits to main for content, feature branches for major changes.
+*   **Backup strategy**: Git history serves as version control and backup.
+
+---
+
+## 17. Performance considerations
+
+*   **WASM loading**: First-time WASM module loading can be slow; implement graceful degradation.
+*   **Build optimization**: Use file watching in development to avoid full rebuilds.
+*   **Asset optimization**: Lightning CSS and Bun handle minification and bundling.
+*   **PDF generation**: LaTeX compilation is resource-intensive; run only when needed.
+
+**Performance patterns**:
+```javascript
+// FOREST-NOTE: Cache WASM modules to avoid repeated loading
+let wasmCache = new Map();
+
+async function loadWasmModule(name) {
+    if (wasmCache.has(name)) {
+        return wasmCache.get(name);
+    }
+    
+    try {
+        const module = await import(`./lib/${name}/pkg/${name}.js`);
+        wasmCache.set(name, module);
+        return module;
+    } catch (error) {
+        console.warn(`WASM module ${name} unavailable:`, error);
+        return null;
+    }
+}
+```
+
+---
+
+## 18. Meta: Guidelines for updating AGENT.md files
 
 This file should be updated when:
 - New major features or tools are added to the project
@@ -295,5 +382,19 @@ This file should be updated when:
 - New coding standards or conventions are established
 - Common pitfalls or debugging patterns are identified
 - Domain-specific terminology evolves
+- New mathematical subject areas are added
+- WASM integration patterns change
+
+### Maintenance checklist:
+- [ ] Update last modified date at the top
+- [ ] Review golden rules for relevance
+- [ ] Update build commands if changed
+- [ ] Add new domain terminology
+- [ ] Document new pitfalls discovered
+- [ ] Update file pattern references
 
 The 🌲 marker indicates sections specific to the Forest project, while unmarked sections contain general best practices applicable to similar projects.
+
+---
+
+[^1]: The "human 30%" refers to keeping strategic decisions, architectural choices, test design, and domain expertise in human hands while leveraging AI for implementation, documentation, and routine tasks.
