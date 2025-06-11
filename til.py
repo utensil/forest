@@ -23,9 +23,41 @@ keyword extraction logic to keep titles current and meaningful.
 import re
 import sys
 from pathlib import Path
+import glob
+
+def load_bib_titles():
+    """Load all bib titles from tex/*.bib files for citation matching."""
+    bib_titles = {}
+    
+    for bib_file in glob.glob("tex/*.bib"):
+        try:
+            with open(bib_file, 'r', encoding='utf-8') as f:
+                content = f.read()
+                
+            # Extract bib entries with cite keys and titles
+            # Pattern matches: @type{key, ... title={...}, ...}
+            pattern = r'@\w+\{\s*([^,]+),.*?title\s*=\s*\{([^}]+)\}'
+            matches = re.findall(pattern, content, re.DOTALL | re.IGNORECASE)
+            
+            for cite_key, title in matches:
+                cite_key = cite_key.strip()
+                title = title.strip()
+                # Clean up title - remove LaTeX commands and normalize
+                title = re.sub(r'\\[a-zA-Z]+\{([^}]*)\}', r'\1', title)  # Remove LaTeX commands
+                title = re.sub(r'[{}]', '', title)  # Remove remaining braces
+                title = re.sub(r'\s+', ' ', title).strip()  # Normalize whitespace
+                bib_titles[cite_key] = title
+                
+        except Exception as e:
+            print(f"Warning: Could not parse {bib_file}: {e}")
+            
+    return bib_titles
 
 def extract_keywords_from_content(content):
     """Extract meaningful technical keywords from daily entry content."""
+    
+    # Load bib titles for citation keyword extraction
+    bib_titles = load_bib_titles()
     
     # Priority tech keywords - specific technologies, tools, languages
     priority_keywords = {
@@ -33,13 +65,14 @@ def extract_keywords_from_content(content):
         'rust', 'zig', 'elixir', 'clojure', 'js', 'typescript', 'python', 'cpp', 'go', 'lean', 'apl',
         'racket', 'rhombus', 'effekt', 'slang', 'impala', 'haskell', 'ocaml',
         # AI/ML specific tools
-        'claude', 'dspy', 'textgrad', 'zenbase', 'simba', 'llm', 'grpo', 'grok', 'qwen', 'embedding', 'prompt',
+        'claude', 'dspy', 'textgrad', 'zenbase', 'simba', 'grpo', 'grok', 'qwen', 'embedding', 'prompt',
+        'chatgpt', 'gemini', 'anthropic', 'openai', 'reasoning', 'chain-of-thought', 'fine-tuning', 'rlhf',
         'neural', 'transformer', 'abliteration', 'codegen', 'assistant', 'workflow',
         # Systems/Performance specific
         'simd', 'wasm', 'webgpu', 'gpu', 'ebpf', 'optimization', 'rustc', 'clang', 'gcc', 'llvm', 'pulp', 'faer',
         'speedup', 'async', 'runtime', 'performance',
         # Math/Science
-        'galgebra', 'geometric', 'algebra', 'clifford', 'tla', 'category', 'theory', 'gradient', 'spiral',
+        'galgebra', 'geometric', 'clifford', 'tla', 'category', 'theory', 'gradient', 'spiral',
         'multivector', 'versor', 'lipschitzian',
         # Graphics/Rendering
         'shader', 'raymarching', 'rendering', 'webgl', 'fluid', 'simulation', 'siggraph', 'animation',
@@ -64,12 +97,16 @@ def extract_keywords_from_content(content):
         # Hardware/Architecture
         'x86', 'arm', 'aarch64', 'sandboxing',
         # Academic/Research domains
-        'research', 'theory', 'model', 'citation', 'proof', 'theorem', 'lemma',
+        'research', 'theory', 'citation', 'proof', 'theorem', 'lemma',
         'gauge', 'quantum', 'physics', 'astrophysical', 'dirac', 'philosophical',
+        # Keywords from bibliography titles
+        'matrix', 'geometric', 'levenberg', 'marquardt', 'knot', 'origami', 'weyl', 'hamiltonian',
+        'normalization', 'neural', 'translation', 'attention', 'transformer', 'lstm', 'sequence',
+        'tensor', 'alignment',
         # Tools/Libraries broader
         'symbolica', 'bevy', 'knuckledragger', 'z3', 'bpf', 'atproto', 'ghostty',
         # Personal/Life activities
-        'busy', 'office', 'plans', 'skiing', 'paragliding', 'finish',
+        'busy', 'office', 'plans', 'skiing', 'paragliding',
         # Content/Media
         'zen', 'motorcycle', 'maintenance', 'values', 'wang', 'guowei'
     }
@@ -110,7 +147,6 @@ def extract_keywords_from_content(content):
         r'\b(zigar|perses|pulp|faer|galgebra)\b',  # Specialized tools
         r'\b(datafusion|duckdb|apache|arrow|parquet)\b',  # Analytics
         r'\[\[(uts|ag|tt|spin|hopf)-[0-9a-z]+\]\]',  # Project tree references
-        r'\\citef\{([^}]+)\}',  # Citation references
     ]
     
     for pattern in project_patterns:
@@ -120,11 +156,26 @@ def extract_keywords_from_content(content):
                 # Handle patterns that return tuples (like tree references)
                 for submatch in match:
                     if submatch and submatch not in found_keywords:
-                        # Keep project prefixes as keywords
-                        found_keywords.append(submatch)
+                        # Map uts to notes, keep other project prefixes as keywords
+                        if submatch == 'uts':
+                            found_keywords.append('notes')
+                        else:
+                            found_keywords.append(submatch)
             else:
                 if match and match not in found_keywords:
                     found_keywords.append(match)
+    
+    # Process citations - extract keywords from bib titles instead of cite keys
+    citation_pattern = r'\\citef\{([^}]+)\}'
+    citations = re.findall(citation_pattern, content_lower)
+    for cite_key in citations:
+        cite_key = cite_key.strip()
+        if cite_key in bib_titles:
+            title = bib_titles[cite_key].lower()
+            # Extract keywords from the title using the same priority keywords
+            for keyword in sorted(priority_keywords):
+                if keyword in title and keyword not in found_keywords:
+                    found_keywords.append(keyword)
     
     # Remove duplicates and sort for consistent output
     unique_keywords = []
