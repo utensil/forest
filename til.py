@@ -44,8 +44,13 @@ keyword extraction logic to keep titles current and meaningful.
 import re
 import sys
 import argparse
+import logging
 from pathlib import Path
 import glob
+
+# Configure debug logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 
 def load_bib_titles():
@@ -151,7 +156,6 @@ def extract_keywords_from_content(content):
         "performance",
         # Math/Science
         "galgebra",
-        "geometric",
         "clifford",
         "tla",
         "category",
@@ -264,7 +268,6 @@ def extract_keywords_from_content(content):
         "aarch64",
         "sandboxing",
         # Academic/Research domains
-        "research",
         "theory",
         "citation",
         "proof",
@@ -361,6 +364,21 @@ def extract_keywords_from_content(content):
 
             found_keywords.append(keyword)
 
+    # Simplified pattern for both "- [topic] related" and "- topic related" entries
+    topic_related_matches = re.findall(
+        r"^\s*- (?:\[([^\]]+)\]|(\w+))\s+related", content_lower, re.MULTILINE
+    )
+    logger.debug(f"Found {len(topic_related_matches)} topic-related patterns")
+    for match in sorted(topic_related_matches):  # Sort for deterministic order
+        topic = match[0] or match[1]  # Use either bracketed or non-bracketed match
+        logger.debug(f"Processing topic-related: {topic}")
+        if topic:
+            # Handle both single words and multi-word topics
+            for word in topic.split():
+                word = word.strip()
+                if word and word not in found_keywords:
+                    found_keywords.append(word)
+
     # Look for specific project/tool names mentioned
     project_patterns = [
         r"\b([a-z]+(?:db|sql|query))\b",  # Database tools
@@ -374,7 +392,9 @@ def extract_keywords_from_content(content):
 
     for pattern in project_patterns:
         matches = re.findall(pattern, content_lower)
+        logger.debug(f"Pattern '{pattern}' matched {len(matches)} times")
         for match in sorted(matches):  # Sort for deterministic order
+            logger.debug(f"Processing project pattern match: {match}")
             if isinstance(match, tuple):
                 # Handle patterns that return tuples (like tree references)
                 for submatch in match:
@@ -408,8 +428,15 @@ def extract_keywords_from_content(content):
             unique_keywords.append(kw)
             seen.add(kw)
 
+    # Maintain original keyword order from content where possible
+    # This ensures pattern-matched keywords aren't overshadowed by priority keywords
+    final_keywords = []
+    for kw in found_keywords:
+        if kw in unique_keywords and kw not in final_keywords:
+            final_keywords.append(kw)
+
     # Limit to top 6 keywords to keep titles concise
-    return unique_keywords[:6]
+    return final_keywords[:6]
 
 
 def improve_title(date, content):
