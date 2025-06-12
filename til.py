@@ -90,6 +90,19 @@ def extract_keywords_from_content(content):
     # Load bib titles for citation keyword extraction
     bib_titles = load_bib_titles()
 
+    # Words that should be excluded even if they match patterns
+    EXCLUDE_WORDS = {
+        "a", "an", "the", "and", "or", "but", "not", "to", "of", "in", "on", "at", 
+        "for", "with", "by", "as", "is", "are", "was", "were", "be", "been", "being",
+        "have", "has", "had", "do", "does", "did", "can", "could", "shall", "should",
+        "will", "would", "may", "might", "must", "from", "that", "this", "these", "those",
+        "it", "its", "they", "them", "their", "there", "here", "where", "when", "why",
+        "how", "what", "which", "who", "whom", "whose", "about", "into", "out", "up",
+        "down", "over", "under", "after", "before", "between", "through", "during",
+        "since", "until", "while", "because", "if", "else", "then", "so", "than",
+        "about", "above", "below", "through", "via", "per", "via", "via", "via"
+    }
+
     # Priority tech keywords - specific technologies, tools, languages
     priority_keywords = {
         # Programming languages
@@ -364,24 +377,28 @@ def extract_keywords_from_content(content):
 
             found_keywords.append(keyword)
 
-    # Simplified pattern for both "- [topic] related" and "- topic related" entries
+    # Improved pattern with better word boundaries and validation
     topic_related_matches = re.findall(
-        r"^\s*- (?:\[([^\]]+)\]|(\w+))\s+related", content_lower, re.MULTILINE
+        r"^\s*- (?:\[([^\]]+)\]|(\b[a-z][a-z0-9-]*\b))\s+related\b", content_lower, re.MULTILINE
     )
     logger.debug(f"Found {len(topic_related_matches)} topic-related patterns")
     for match in sorted(topic_related_matches):  # Sort for deterministic order
         topic = match[0] or match[1]  # Use either bracketed or non-bracketed match
         logger.debug(f"Processing topic-related: {topic}")
         if topic:
-            # Handle both single words and multi-word topics
+            # Handle both single words and multi-word topics with validation
             for word in topic.split():
-                word = word.strip()
-                if word and word not in found_keywords:
+                word = word.strip().lower()
+                # Validate word meets criteria
+                if (word and 
+                    word not in EXCLUDE_WORDS and
+                    word not in found_keywords and
+                    re.fullmatch(r"[a-z][a-z0-9-]*", word)):
                     found_keywords.append(word)
 
     # Look for specific project/tool names mentioned
     project_patterns = [
-        r"\b([a-z]+(?:db|sql|query))\b",  # Database tools
+        r"\b([a-z][a-z0-9]+(?:db|sql|query))\b",  # Database tools
         r"\b(jepsen|tigerbeetle|cloudflare)\b",  # Specific projects
         r"\b(mastodon|lemmy|pixelfed|bookwyrm|peertube|pleroma)\b",  # Fediverse
         r"\b(backrest|restic|talos|metallb|unbound|headscale|harbor)\b",  # Infrastructure
@@ -398,14 +415,18 @@ def extract_keywords_from_content(content):
             if isinstance(match, tuple):
                 # Handle patterns that return tuples (like tree references)
                 for submatch in match:
-                    if submatch and submatch not in found_keywords:
+                    if (submatch and 
+                        submatch not in EXCLUDE_WORDS and
+                        submatch not in found_keywords):
                         # Map uts to notes, keep other project prefixes as keywords
                         if submatch == "uts":
                             found_keywords.append("notes")
                         else:
                             found_keywords.append(submatch)
             else:
-                if match and match not in found_keywords:
+                if (match and 
+                    match not in EXCLUDE_WORDS and
+                    match not in found_keywords):
                     found_keywords.append(match)
 
     # Process citations - extract keywords from bib titles instead of cite keys
