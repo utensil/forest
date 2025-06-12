@@ -767,11 +767,28 @@ prep-pod:
     which kubectl || brew install kubectl
     docker context use default
 
+# https://github.com/abiosoft/colima?tab=readme-ov-file#customizing-the-vm
+# to run x86_64 containers:
+# 1. run colima delete which will delete all existing container!
+# 2. colima start --vm-type=vz --vz-rosetta
+# 3. docker pull --platform linux/amd64 ubuntu:jammy # with docker login first
+# see also:
+# `just prep-lima` which prepares a Lima VM with Ubuntu 25.04 x86_64 that is ready to run x86_64 static binaries and containers
+# https://github.com/lima-vm/lima/discussions/1573 for realizing the VM is still arm64
+# https://github.com/lima-vm/lima/discussions/1043#discussioncomment-3560889 for realizing only statically linked binaries work in VM, dynamically linked ones fail due to missing shared libraries, so they should be run in containers, so just use colima options for this!
 pod CMD="start":
     colima {{CMD}}
 
 k8s:
     colima start --kubernetes
+
+prep-lima:
+    which lima || brew install lima
+    # limactl stop default
+    # limactl delete default
+    limactl create --name=default dotfiles/lima/ubuntu-25.04-x86_64.yaml
+    # limactl start default
+    # lima
 
 prep-tilt:
     which tilt || brew install tilt-dev/tap/tilt
