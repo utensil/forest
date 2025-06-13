@@ -247,6 +247,11 @@ def extract_keywords_from_content(content):
         # Tools/Libraries broader
         "bevy",
         "z3",
+        # Authoring
+        "wrote",
+        "finish",
+        "start on",
+        "progress on",
     }
 
     # Extract keywords from content
@@ -341,11 +346,7 @@ def extract_keywords_from_content(content):
                         and submatch not in EXCLUDE_WORDS
                         and submatch not in found_keywords
                     ):
-                        # Map uts to notes, keep other project prefixes as keywords
-                        if submatch == "uts":
-                            found_keywords.append("notes")
-                        else:  # Other known project prefixes
-                            found_keywords.append(submatch)
+                        found_keywords.append(submatch)
             else:
                 if match and match not in EXCLUDE_WORDS and match not in found_keywords:
                     found_keywords.append(match)
@@ -362,23 +363,81 @@ def extract_keywords_from_content(content):
                 if keyword in title and keyword not in found_keywords:
                     found_keywords.append(keyword)
 
+    # Keyword mappings to merge semantically similar terms
+    # Keys are the preferred terms, values are sets of alternatives
+    KEYWORD_MAPPINGS = {
+        # Programming languages
+        "rust": {"rustlang"},
+        "go": {"golang"},
+        "zig": {"ziglang"},
+        "elixir": {"elixir-lang"},
+        # AI/ML
+        "agent": {"agents", "llm", "language model"},
+        "prompt": {"prompting"},
+        "dspy": {"dspy-ai"},
+        # Math/Science
+        "theory": {"theoretical"},
+        "physics": {"physical"},
+        "quantum": {"quantum computing"},
+        # Graphics/Rendering
+        "rendering": {"render"},
+        "shader": {"shaders", "shader programming"},
+        "compute": {"gpu compute", "compute shader"},
+        "visualization": {"visualizing"},
+        # Infrastructure
+        "docker": {"containers", "containerization"},
+        # Development tools
+        "git": {"version control"},
+        "neovim": {"vim"},
+        "zed": {"zed-editor"},
+        "benchmark": {"benchmarking"},
+        # Hardware
+        "arm": {"aarch64", "arm64"},
+        # Security
+        "security": {"secure"},
+        "verification": {"formal verification", "formal methods"},
+        # Databases
+        "sqlite": {"sqlite3"},
+        # Fediverse
+        "fediverse": {"activitypub", "decentralized social"},
+        # Math tools
+        "z3": {"z3 theorem prover"},
+        "bevy": {"bevy-engine"},
+        "galgebra": {"geometric algebra"},
+        "clifford": {"clifford algebra"},
+        # others
+        "✍️": {"uts", "wrote", "finish", "start on", "progress on"},
+    }
+
+    # Merge similar keywords according to mappings
+    merged_keywords = set()
+    for kw in found_keywords:
+        found = False
+        for preferred, alternatives in KEYWORD_MAPPINGS.items():
+            if kw == preferred or kw in alternatives:
+                merged_keywords.add(preferred)
+                found = True
+                break
+        if not found:
+            merged_keywords.add(kw)
+
     # Remove duplicates while preserving order
     seen = set()
     final_keywords = []
 
     # First add topic-related keywords (higher priority)
-    for kw in found_keywords:
+    for kw in merged_keywords:
         if kw.startswith("topic_") and kw.replace("topic_", "") not in seen:
             final_keywords.append(kw.replace("topic_", ""))
             seen.add(kw.replace("topic_", ""))
 
     # Then add all other keywords
-    for kw in found_keywords:
+    for kw in merged_keywords:
         if not kw.startswith("topic_") and kw not in seen:
             final_keywords.append(kw)
             seen.add(kw)
 
-    # Limit to top 6 keywords to keep titles concise
+    # Limit to top keywords to keep titles concise
     return final_keywords[:10]  # [:6]
 
 
