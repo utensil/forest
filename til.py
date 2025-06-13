@@ -242,6 +242,8 @@ def extract_keywords_from_content(content, date):
         "security",
         "formal",
         "verification",
+        "smt",
+        "sat",
         "fuzzing",
         # Fediverse/Social
         "fediverse",
@@ -312,7 +314,7 @@ def extract_keywords_from_content(content, date):
                     found_keywords.append(match)
 
     # Then look for priority keywords with context sensitivity
-    for keyword in sorted(priority_keywords):  # Sort for deterministic order
+    for keyword in sorted(priority_keywords):  # Sort alphabetically only
         if keyword in content_lower:
             # Handle special cases
             if keyword == "cpp" and "c++" in content_lower:
@@ -398,7 +400,7 @@ def extract_keywords_from_content(content, date):
         #     "webgl",
         #     "raymarching",
         # },
-        "formal": {"verification"},
+        "formal": {"verification", "smt", "sat"},
     }
 
     # Merge similar keywords according to mappings
@@ -431,14 +433,17 @@ def extract_keywords_from_content(content, date):
     seen = set()
     final_keywords = []
 
+    # Sort all keywords first for deterministic order
+    sorted_keywords = sorted(merged_keywords)
+    
     # First add topic-related keywords (higher priority)
-    for kw in merged_keywords:
+    for kw in sorted_keywords:
         if kw.startswith("topic_") and kw.replace("topic_", "") not in seen:
             final_keywords.append(kw.replace("topic_", ""))
             seen.add(kw.replace("topic_", ""))
 
     # Then add all other keywords
-    for kw in merged_keywords:
+    for kw in sorted_keywords:
         if not kw.startswith("topic_") and kw not in seen:
             final_keywords.append(kw)
             seen.add(kw)
