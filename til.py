@@ -400,6 +400,7 @@ def extract_keywords_from_content(content, date):
         #     "webgl",
         #     "raymarching",
         # },
+        # but lean, z3, tla should get their own keywords due to their importance to me
         "formal": {"verification", "smt", "sat"},
     }
 
@@ -435,7 +436,7 @@ def extract_keywords_from_content(content, date):
 
     # Sort all keywords first for deterministic order
     sorted_keywords = sorted(merged_keywords)
-    
+
     # First add topic-related keywords (higher priority)
     for kw in sorted_keywords:
         if kw.startswith("topic_") and kw.replace("topic_", "") not in seen:

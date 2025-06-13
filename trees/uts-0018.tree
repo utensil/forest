@@ -19,29 +19,45 @@
 \subtree[2025-06]{
 \title{June, 2025}
 
-\subtree[2025-06-13]{\mdnote{2025-06-13}{
+\subtree[2025-06-13]{\mdnote{2025-06-13: agent, bevy, compiler, formal, lean, rust, z3}{
 - read [Solving LinkedIn Queens with SMT](https://buttondown.com/hillelwayne/archive/solving-linkedin-queens-with-smt/)
+    - in Z3 SMT solver instead of CVC5 SMT solver as in [Using SAT to Get the World Record on LinkedIn's Queens](https://ryanberger.me/posts/queens/)
+    -  SAT solvers are "criminally underused by the industry" (from [Modern SAT solvers: fast, neat and underused](https://codingnest.com/modern-sat-solvers-fast-neat-underused-part-1-of-n/))
+    - SMT solvers are "higher-level" than SAT, capable of handling more data types than just boolean variables
+    - It's a lot easier to solve the problem at the SMT level than at the SAT level
+    - people prefer SMT to SAT
+    - [Glucose, an SAT solver](https://github.com/audemard/glucose) is really fast
 - read [jemalloc Postmortem](https://jasone.github.io/2025/06/12/jemalloc-postmortem/)
-- read [A Lightweight Merge Queue using GitHub Actions](https://sketch.dev/blog/lightweight-merge-queue)
+    - they "reached a sad end for jemalloc in the hands of Facebook/Meta even though most of the people involved were acting in good faith"
+    - "the root of the problem is lack of awareness about external uses and needs"
+        - even "unaware of its replacement until after the fact"
+    - "internally siloed open source projects cannot thrive"
+    - should evaluate alternatives
+        - [TCMalloc](https://github.com/google/tcmalloc) by Google (with Bazel painpoint)
+        - [mimalloc](https://github.com/microsoft/mimalloc)
+            - [adopted](https://github.com/python/cpython/issues/90815) by CPython 3.12: "it is fast, thread-safe, and NUMA-aware"
+- looking for best way to read Hacker News comments
+    - most TUI are not working well for reading comments, see `just prep-hkt`
+    - found [Vue HN](https://vue-hn.vercel.app/) that supports dark theme, and groups comments, it works pretty well with Doubao auto-translation
+    - found [Hacker News RSS](https://hnrss.github.io/) and chose the front page feed, and I have already subscribed to the best comments feed
+- read [The last six months in LLMs, illustrated by pelicans on bicycles](https://simonwillison.net/2025/Jun/6/six-months-in-llms/)
+    - an interesting benchmark for LLMs
+- read [\verb>>>|AI Boom Drives 150% Surge in Indirect Emissions at Major Tech Firms, UN Warns>>>](https://esgnews.com/ai-boom-drives-150-surge-in-indirect-emissions-at-major-tech-firms-un-warns/)
+    - numbers for the environmental impact of LLMs
+- found [A Lightweight Merge Queue using GitHub Actions](https://sketch.dev/blog/lightweight-merge-queue)
+- read [Rumour: Google intends to discontinue the Android Open Source Project](https://www.osnews.com/story/142553/rumour-google-intends-to-discontinue-the-android-open-source-project/)
 - read [A tale of two spacetimes](https://robwilson1.wordpress.com/2025/06/12/a-tale-of-two-spacetimes/)
-- read [\verb>>|AI Boom Drives 150% Surge in Indirect Emissions at Major Tech Firms, UN Warns](https://esgnews.com/ai-boom-drives-150-surge-in-indirect-emissions-at-major-tech-firms-un-warns/>>>)
-- read [AOSP project is coming to an end](https://old.reddit.com/r/StallmanWasRight/comments/1l8rhon/aosp_project_is_coming_to_an_end/)
-- read [Agentic Coding Recommendations](https://lucumr.pocoo.org/2025/6/12/agentic-coding/)
-- read [Analysing FIT data with Perl: producing PNG plots](https://peateasea.de/analysing-fit-data-with-perl-producing-png-plots/)
-- read [Compiler Explorer Cost Transparency](https://xania.org/202506/compiler-explorer-cost-transparency)
 - read [Could an LLM create a full Domain-Specific Language?](https://modeling-languages.com/vibe-dsling/)
 - read [From zero to demo: a newcomer's experience learning Bevy](https://www.youtube.com/watch?v=_FIDuLV0ZsA)
 - read [In case of emergency, break glass](https://morrick.me/archives/10048)
 - read [Let us bury the linear model of innovation](https://lemire.me/blog/2025/06/12/let-us-bury-the-linear-model-of-innovation/)
 - read [Patterns for Modeling Overlapping Variant Data in Rust](https://mcmah309.github.io/posts/patterns-for-modeling-overlapping-variant-data-in-rust)
 - read [Reflections on Sudoku, Or the Impossibility of Systematizing Thought](https://rjp.io/blog/2025-06-07-reflections-on-sudoku)
-- read [Rumour: Google intends to discontinue the Android Open Source Project](https://www.osnews.com/story/142553/rumour-google-intends-to-discontinue-the-android-open-source-project/)
-- read [Solving LinkedIn Queens with SMT](https://buttondown.com/hillelwayne/archive/solving-linkedin-queens-with-smt/)
 - read [Type-based vs Value-based Reflection](https://brevzin.github.io/c++/2025/06/09/reflection-ts/)
 - read [What I talk about when I talk about IRs](https://bernsteinbear.com/blog/irs/?utm_source=rss)
 }}
 
-\subtree[2025-06-12]{\mdnote{2025-06-12: formal, rust, lean, ✍️, render, optimization, raku, compiler, debugger}{
+\subtree[2025-06-12]{\mdnote{2025-06-12: compiler, debugger, formal, lean, optimization, raku, render, rust, ✍️}{
 - wrote [[uts-016K]]
 - found [Premise Selection for a Lean Hammer](https://arxiv.org/abs/2506.07477)
     - the paper behind [LeanHammer](https://github.com/JOSHCLUNE/LeanHammer)
@@ -192,9 +208,16 @@
         - [Why agents are bad pair programmers](https://justin.searls.co/posts/why-agents-are-bad-pair-programmers/)
         - [Apple exposes Foundation Models API and... no new Siri](https://news.smol.ai/issues/25-06-09-apple-letdown/)
         - [A tale of two Claudes](https://steveklabnik.com/writing/a-tale-of-two-claudes/)
+        - [Agentic Coding Recommendations](https://lucumr.pocoo.org/2025/6/12/agentic-coding/)
 - read [The Illusion of Thinking: Understanding the Strengths and Limitations of Reasoning Models via the Lens of Problem Complexity](https://machinelearning.apple.com/research/illusion-of-thinking)
     - accuracy progressively declines as problem complexity increases until reaching complete collapse (zero accuracy) beyond a modelspecific complexity threshold
-- read [Thrive in obscurity](https://www.jeetmehta.com/posts/thrive-in-obscurity)
+    - [a rebuttal on X](https://x.com/giffmana/status/1931801836052189191) has some good discussion
+        - for the puzzle Tower of Hannoi with too many disks, the collapse of accuracy is due to output token limit, and the models won't even try to reason with large number of moves, only explains the overall approach
+        - using solution length as a proxy for task difficulty is flawed, e.g. ToH has a long output but low algorithmic complexity: it’s deterministic with no real branching
+        - the paper's observations (collapse, token underuse, overthinking) [still seem to be solid](https://x.com/maw501/status/1932023882912825716)
+- blogging related
+    - [Thrive in obscurity](https://www.jeetmehta.com/posts/thrive-in-obscurity)
+    - [is blogging romantic?](https://blog.avas.space/is-blogging-romantic/)
 - read [Interactive Guide: Mastering Rate Limiting](https://blog.sagyamthapa.com.np/interactive-guide-to-rate-limiting)
 }}
 
