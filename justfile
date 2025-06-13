@@ -1140,6 +1140,29 @@ uq APP_PATH:
 prep-matrix:
     which iamb || brew install iamb
 
+prep-hkt:
+    #!/usr/bin/env zsh
+    # Usage:
+    # hn top # for HackerNews Top stories
+    # hn view 2 -c # for viewing comments on the 2nd story
+    # uvx haxor-news
+    which hackertea || brew install karoloslykos/tap/hackertea
+    # rosetta error: failed to open elf at /lib64/ld-linux-x86-64.so.2
+    # docker pull --platform linux/amd64 aome510/hackernews_tui:latest
+    # fails to fetch
+    which clx || brew install circumflex
+    # can't see replies for hackernews and lobsters yet
+    which neonmodem || (
+        TIMESTAMP=`date +%s`
+        mkdir -p /tmp/neonmodem-${TIMESTAMP}
+        curl -sSL https://github.com/mrusme/neonmodem/releases/download/v1.0.6/neonmodem_1.0.6_darwin_arm64.tar.gz | tar -xz -C /tmp/neonmodem-${TIMESTAMP}
+        sudo mv /tmp/neonmodem-${TIMESTAMP}/neonmodem /usr/local/bin
+    )
+    neonmodem connect --type hackernews || true
+    neonmodem connect --type lobsters --url https://lobste.rs || true
+    # An account is needed
+    # neonmodem connect --type lemmy --url https://lemmy.ml || true
+
 import 'dotfiles/llm.just'
 import 'dotfiles/archived.just'
 
