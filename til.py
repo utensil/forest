@@ -52,6 +52,9 @@ import glob
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
+# Global merge stats aggregated across all entries
+MERGE_STATS = {}
+
 
 def load_bib_titles():
     """Load all bib titles from tex/*.bib files for citation matching."""
@@ -84,7 +87,7 @@ def load_bib_titles():
     return bib_titles
 
 
-def extract_keywords_from_content(content):
+def extract_keywords_from_content(content, date):
     """Extract meaningful technical keywords from daily entry content."""
 
     # Load bib titles for citation keyword extraction
@@ -189,11 +192,12 @@ def extract_keywords_from_content(content):
         "rust",
         "zig",
         "elixir",
-        "go",
         "lean",
         "apl",
         "haskell",
         "ocaml",
+        "clojure",
+        "racket",
         # AI/ML specific tools
         "claude",
         "dspy",
@@ -201,52 +205,77 @@ def extract_keywords_from_content(content):
         "embedding",
         "prompt",
         "agent",
+        "textgrad",
+        "zenbase",
         # Systems/Performance specific
         "simd",
         "wasm",
         "gpu",
         "optimization",
         "performance",
+        "ebpf",
+        "llvm",
         # Math/Science
         "galgebra",
         "clifford",
         "theory",
+        "tla",
+        "category",
+        "gradient",
         # Graphics/Rendering
         "shader",
         "rendering",
         "visualization",
         "compute",
+        "webgl",
+        "raymarching",
         # Infrastructure/Tools specific
         "docker",
-        "apt",
+        "talos",
+        "unbound",
+        "harbor",
         # Databases/Analytics
         "sqlite",
+        "datafusion",
+        "duckdb",
         # Security/Testing specific
         "security",
         "formal",
         "verification",
+        "fuzzing",
         # Fediverse/Social
         "fediverse",
+        "mastodon",
+        "lemmy",
         # Development tools
         "git",
         "compiler",
         "benchmark",
         "neovim",
-        "zed",
+        "jujutsu",
+        "biome",
         # File/Media tools
         "typst",
+        "exif",
+        "id3",
         # Specs/Protocols
         "vulkan",
         "json",
+        "yaml",
+        "toml",
         # Hardware/Architecture
         "arm",
+        "x86",
         # Academic/Research domains
         "proof",
         "quantum",
         "physics",
+        "citation",
+        "lemma",
         # Tools/Libraries broader
         "bevy",
         "z3",
+        "symbolica",
         # Authoring
         "wrote",
         "finish",
@@ -366,47 +395,18 @@ def extract_keywords_from_content(content):
     # Keyword mappings to merge semantically similar terms
     # Keys are the preferred terms, values are sets of alternatives
     KEYWORD_MAPPINGS = {
-        # Programming languages
-        "rust": {"rustlang"},
-        "go": {"golang"},
-        "zig": {"ziglang"},
-        "elixir": {"elixir-lang"},
-        # AI/ML
-        "agent": {"agents", "llm", "language model"},
-        "prompt": {"prompting"},
-        "dspy": {"dspy-ai"},
-        # Math/Science
-        "theory": {"theoretical"},
-        "physics": {"physical"},
-        "quantum": {"quantum computing"},
-        # Graphics/Rendering
-        "rendering": {"render"},
-        "shader": {"shaders", "shader programming"},
-        "compute": {"gpu compute", "compute shader"},
-        "visualization": {"visualizing"},
-        # Infrastructure
-        "docker": {"containers", "containerization"},
+        "_merge_stats": {},  # Track merge stats
+        # Authoring/work tracking
+        "✍️": {"wrote", "finish", "start on", "progress on", "uts"},
         # Development tools
         "git": {"version control"},
-        "neovim": {"vim"},
-        "zed": {"zed-editor"},
-        "benchmark": {"benchmarking"},
-        # Hardware
-        "arm": {"aarch64", "arm64"},
-        # Security
-        "security": {"secure"},
-        "verification": {"formal verification", "formal methods"},
-        # Databases
-        "sqlite": {"sqlite3"},
-        # Fediverse
-        "fediverse": {"activitypub", "decentralized social"},
-        # Math tools
-        "z3": {"z3 theorem prover"},
-        "bevy": {"bevy-engine"},
-        "galgebra": {"geometric algebra"},
-        "clifford": {"clifford algebra"},
-        # others
-        "✍️": {"uts", "wrote", "finish", "start on", "progress on"},
+        # AI/ML
+        "agent": {"agents", "llm"},
+        # Math/Science
+        "theory": {"theoretical"},
+        # Graphics/Rendering
+        "rendering": {"render"},
+        "shader": {"shaders"},
     }
 
     # Merge similar keywords according to mappings
@@ -414,12 +414,26 @@ def extract_keywords_from_content(content):
     for kw in found_keywords:
         found = False
         for preferred, alternatives in KEYWORD_MAPPINGS.items():
+            if preferred == "_merge_stats":
+                continue
             if kw == preferred or kw in alternatives:
                 merged_keywords.add(preferred)
                 found = True
+                # Track merge stats (only if kw is different from preferred)
+                if kw != preferred:
+                    if preferred not in KEYWORD_MAPPINGS["_merge_stats"]:
+                        KEYWORD_MAPPINGS["_merge_stats"][preferred] = set()
+                    KEYWORD_MAPPINGS["_merge_stats"][preferred].add(kw)
                 break
         if not found:
             merged_keywords.add(kw)
+
+    # Track merge stats if enabled
+    if "_merge_stats" in KEYWORD_MAPPINGS:
+        for preferred, merged in KEYWORD_MAPPINGS.get("_merge_stats", {}).items():
+            if preferred not in globals()["MERGE_STATS"]:
+                globals()["MERGE_STATS"][preferred] = set()
+            globals()["MERGE_STATS"][preferred].update(merged)
 
     # Remove duplicates while preserving order
     seen = set()
@@ -443,7 +457,7 @@ def extract_keywords_from_content(content):
 
 def improve_title(date, content):
     """Generate improved title based on content analysis."""
-    keywords = extract_keywords_from_content(content)
+    keywords = extract_keywords_from_content(content, date)
 
     if not keywords:
         # Fallback for entries with no technical keywords
@@ -696,6 +710,18 @@ def test_til():
     return failed == 0
 
 
+def print_merge_stats():
+    """Print aggregated keyword merge statistics."""
+    if MERGE_STATS:
+        print("\nAggregated keyword merge statistics:")
+        for preferred, merged in sorted(
+            MERGE_STATS.items(), key=lambda x: len(x[1]), reverse=True
+        ):
+            if merged:
+                merged_str = ", ".join(sorted(merged))
+                print(f"{preferred} <- {merged_str}")
+
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="TIL (Today I Learned) Title Improver")
     parser.add_argument(
@@ -736,6 +762,7 @@ if __name__ == "__main__":
         success = process_file(filepath)
         if success:
             print("✨ Title improvement complete!")
+            print_merge_stats()
         else:
             print("❌ Title improvement failed")
             sys.exit(1)
