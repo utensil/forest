@@ -92,15 +92,95 @@ def extract_keywords_from_content(content):
 
     # Words that should be excluded even if they match patterns
     EXCLUDE_WORDS = {
-        "a", "an", "the", "and", "or", "but", "not", "to", "of", "in", "on", "at", 
-        "for", "with", "by", "as", "is", "are", "was", "were", "be", "been", "being",
-        "have", "has", "had", "do", "does", "did", "can", "could", "shall", "should",
-        "will", "would", "may", "might", "must", "from", "that", "this", "these", "those",
-        "it", "its", "they", "them", "their", "there", "here", "where", "when", "why",
-        "how", "what", "which", "who", "whom", "whose", "about", "into", "out", "up",
-        "down", "over", "under", "after", "before", "between", "through", "during",
-        "since", "until", "while", "because", "if", "else", "then", "so", "than",
-        "about", "above", "below", "through", "via", "per", "via", "via", "via"
+        "a",
+        "an",
+        "the",
+        "and",
+        "or",
+        "but",
+        "not",
+        "to",
+        "of",
+        "in",
+        "on",
+        "at",
+        "for",
+        "with",
+        "by",
+        "as",
+        "is",
+        "are",
+        "was",
+        "were",
+        "be",
+        "been",
+        "being",
+        "have",
+        "has",
+        "had",
+        "do",
+        "does",
+        "did",
+        "can",
+        "could",
+        "shall",
+        "should",
+        "will",
+        "would",
+        "may",
+        "might",
+        "must",
+        "from",
+        "that",
+        "this",
+        "these",
+        "those",
+        "it",
+        "its",
+        "they",
+        "them",
+        "their",
+        "there",
+        "here",
+        "where",
+        "when",
+        "why",
+        "how",
+        "what",
+        "which",
+        "who",
+        "whom",
+        "whose",
+        "about",
+        "into",
+        "out",
+        "up",
+        "down",
+        "over",
+        "under",
+        "after",
+        "before",
+        "between",
+        "through",
+        "during",
+        "since",
+        "until",
+        "while",
+        "because",
+        "if",
+        "else",
+        "then",
+        "so",
+        "than",
+        "about",
+        "above",
+        "below",
+        "through",
+        "via",
+        "per",
+        "via",
+        "via",
+        "via",
     }
 
     # Priority tech keywords - specific technologies, tools, languages
@@ -379,7 +459,9 @@ def extract_keywords_from_content(content):
 
     # Improved pattern with better word boundaries and validation
     topic_related_matches = re.findall(
-        r"^\s*- (?:\[([^\]]+)\]|(\b[a-z][a-z0-9-]*\b))\s+related\b", content_lower, re.MULTILINE
+        r"^\s*- (?:\[([^\]]+)\]|(\b[a-z][a-z0-9-]*\b))\s+related\b",
+        content_lower,
+        re.MULTILINE,
     )
     logger.debug(f"Found {len(topic_related_matches)} topic-related patterns")
     for match in sorted(topic_related_matches):  # Sort for deterministic order
@@ -390,10 +472,12 @@ def extract_keywords_from_content(content):
             for word in topic.split():
                 word = word.strip().lower()
                 # Validate word meets criteria
-                if (word and 
-                    word not in EXCLUDE_WORDS and
-                    word not in found_keywords and
-                    re.fullmatch(r"[a-z][a-z0-9-]*", word)):
+                if (
+                    word
+                    and word not in EXCLUDE_WORDS
+                    and word not in found_keywords
+                    and re.fullmatch(r"[a-z][a-z0-9-]*", word)
+                ):
                     found_keywords.append(word)
 
     # Look for specific project/tool names mentioned
@@ -404,7 +488,8 @@ def extract_keywords_from_content(content):
         r"\b(backrest|restic|talos|metallb|unbound|headscale|harbor)\b",  # Infrastructure
         r"\b(zigar|perses|pulp|faer|galgebra)\b",  # Specialized tools
         r"\b(datafusion|duckdb|apache|arrow|parquet)\b",  # Analytics
-        r"\[\[(uts|ag|tt|spin|hopf)-[0-9a-z]+\]\]",  # Project tree references
+        r"\[\[(uts|ag|tt|spin|hopf)-[0-9a-z]+\]\]",  # Project tree references with prefix
+        r"\[\[(uts|ag|tt|spin|hopf)-[0-9]+\]\]",  # Project tree references without prefix
     ]
 
     for pattern in project_patterns:
@@ -415,18 +500,18 @@ def extract_keywords_from_content(content):
             if isinstance(match, tuple):
                 # Handle patterns that return tuples (like tree references)
                 for submatch in match:
-                    if (submatch and 
-                        submatch not in EXCLUDE_WORDS and
-                        submatch not in found_keywords):
+                    if (
+                        submatch
+                        and submatch not in EXCLUDE_WORDS
+                        and submatch not in found_keywords
+                    ):
                         # Map uts to notes, keep other project prefixes as keywords
                         if submatch == "uts":
                             found_keywords.append("notes")
-                        else:
+                        else:  # Other known project prefixes
                             found_keywords.append(submatch)
             else:
-                if (match and 
-                    match not in EXCLUDE_WORDS and
-                    match not in found_keywords):
+                if match and match not in EXCLUDE_WORDS and match not in found_keywords:
                     found_keywords.append(match)
 
     # Process citations - extract keywords from bib titles instead of cite keys
@@ -660,6 +745,56 @@ def process_file(filepath):
         return True
 
 
+def test_til():
+    """Run test cases for title improvement logic."""
+    test_cases = [
+        {
+            "name": "Basic technical content",
+            "content": "Worked on Rust compiler optimizations today. Learned about SIMD intrinsics.",
+            "expected": ["rust", "simd", "compiler", "optimization"],
+        },
+        {
+            "name": "Citation content",
+            "content": "Read \\citef{li2023camel}",
+            "expected": ["agent"],
+        },
+        {
+            "name": "Project reference",
+            "content": "Continued work on [[ag-0018]] with new features.",
+            "expected": ["ag"],
+        },
+        {
+            "name": "Mixed content",
+            "content": "- llvm related improvements to codegen\n- Fixed wasm interop issues",
+            "expected": ["llvm", "wasm", "codegen", "interop"],
+        },
+        {
+            "name": "Non-technical content",
+            "content": "Had meeting about project planning and timelines.",
+            "expected": [],
+        },
+    ]
+
+    print("🧪 Running TIL Test Suite...\n")
+    passed = 0
+    failed = 0
+
+    for case in test_cases:
+        print(f"Test: {case['name']}")
+        print(f"Content: {case['content'][:60]}...")
+        result = extract_keywords_from_content(case["content"])
+        if sorted(result) == sorted(case["expected"]):
+            print(f"✅ PASS - Got: {result}")
+            passed += 1
+        else:
+            print(f"❌ FAIL - Expected: {case['expected']}, Got: {result}")
+            failed += 1
+        print()
+
+    print(f"\nTest Results: {passed} passed, {failed} failed")
+    return failed == 0
+
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="TIL (Today I Learned) Title Improver")
     parser.add_argument(
@@ -667,7 +802,18 @@ if __name__ == "__main__":
         action="store_true",
         help="Reset all titles to date-only (remove : title part)",
     )
+    parser.add_argument(
+        "--test",
+        action="store_true",
+        help="Run test cases instead of processing files",
+    )
     args = parser.parse_args()
+
+    if args.test:
+        if test_til():
+            sys.exit(0)
+        else:
+            sys.exit(1)
 
     filepath = Path("trees/uts-0018.tree")
 
