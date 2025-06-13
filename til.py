@@ -223,8 +223,8 @@ def extract_keywords_from_content(content, date):
         "category",
         "gradient",
         # Graphics/Rendering
+        "render",
         "shader",
-        "rendering",
         "visualization",
         "compute",
         "webgl",
@@ -374,7 +374,6 @@ def extract_keywords_from_content(content, date):
                 ):
                     found_keywords.append(word)
 
-
     # Process citations - extract keywords from bib titles instead of cite keys
     citation_pattern = r"\\citef\{([^}]+)\}"
     citations = re.findall(citation_pattern, content_lower)
@@ -393,15 +392,13 @@ def extract_keywords_from_content(content, date):
         "_merge_stats": {},  # Track merge stats
         # Authoring/work tracking
         "✍️": {"wrote", "finish", "start on", "progress on", "uts"},
-        # Development tools
-        "git": {"version control"},
-        # AI/ML
-        "agent": {"agents", "llm"},
-        # Math/Science
-        "theory": {"theoretical"},
-        # Graphics/Rendering
-        "rendering": {"render"},
-        "shader": {"shaders"},
+        # "cg": {
+        #     "render",
+        #     "shader",
+        #     "webgl",
+        #     "raymarching",
+        # },
+        "formal": {"verification"},
     }
 
     # Merge similar keywords according to mappings
