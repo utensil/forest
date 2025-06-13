@@ -189,228 +189,64 @@ def extract_keywords_from_content(content):
         "rust",
         "zig",
         "elixir",
-        "clojure",
-        "js",
-        "typescript",
-        "python",
-        "cpp",
         "go",
         "lean",
         "apl",
-        "racket",
-        "rhombus",
-        "effekt",
-        "slang",
-        "impala",
         "haskell",
         "ocaml",
         # AI/ML specific tools
         "claude",
         "dspy",
-        "textgrad",
-        "zenbase",
-        "simba",
-        "grpo",
-        "grok",
         "qwen",
         "embedding",
         "prompt",
-        "chatgpt",
-        "gemini",
-        "anthropic",
-        "openai",
-        "reasoning",
-        "chain-of-thought",
-        "fine-tuning",
-        "rlhf",
-        "neural",
-        "transformer",
-        "abliteration",
-        "codegen",
-        "assistant",
         "agent",
-        "workflow",
         # Systems/Performance specific
         "simd",
         "wasm",
-        "webgpu",
         "gpu",
-        "ebpf",
         "optimization",
-        "rustc",
-        "clang",
-        "gcc",
-        "llvm",
-        "pulp",
-        "faer",
-        "speedup",
-        "async",
-        "runtime",
         "performance",
         # Math/Science
         "galgebra",
         "clifford",
-        "tla",
-        "category",
         "theory",
-        "gradient",
-        "spiral",
-        "multivector",
-        "versor",
-        "lipschitzian",
         # Graphics/Rendering
         "shader",
-        "raymarching",
         "rendering",
-        "webgl",
-        "fluid",
-        "simulation",
-        "siggraph",
-        "animation",
-        "schwarzschild",
         "visualization",
         "compute",
         # Infrastructure/Tools specific
-        "kubernetes",
         "docker",
-        "containerd",
-        "backrest",
-        "restic",
-        "talos",
-        "metallb",
-        "unbound",
-        "headscale",
-        "tailscale",
-        "harbor",
-        "salt",
-        "ansible",
-        "lima",
-        "nsjail",
-        "haproxy",
-        "healthchecks",
-        "veracrypt",
-        "makefile",
-        "ssh",
         "apt",
-        "homelab",
-        "infrastructure",
         # Databases/Analytics
-        "datafusion",
-        "duckdb",
         "sqlite",
-        "postgres",
-        "apache",
-        "arrow",
-        "parquet",
-        "litestream",
         # Security/Testing specific
-        "fuzzing",
         "security",
-        "vulnerability",
         "formal",
-        "methods",
         "verification",
-        "encryption",
-        "backup",
         # Fediverse/Social
         "fediverse",
-        "mastodon",
-        "activitypub",
-        "lemmy",
-        "pixelfed",
-        "bookwyrm",
-        "peertube",
-        "pleroma",
         # Development tools
         "git",
-        "jujutsu",
         "compiler",
-        "zigar",
-        "perses",
         "benchmark",
-        "profiling",
-        "interop",
-        "biome",
-        "aider",
-        "htmx",
         "neovim",
         "zed",
-        "tmux",
-        "worktree",
         # File/Media tools
-        "exif",
-        "id3",
-        "renaming",
-        "bulk",
-        "metadata",
         "typst",
         # Specs/Protocols
         "vulkan",
-        "opengl",
-        "mcp",
-        "nlweb",
         "json",
-        "yaml",
-        "toml",
-        "xml",
-        "csv",
-        "avro",
         # Hardware/Architecture
-        "x86",
         "arm",
-        "aarch64",
-        "sandboxing",
         # Academic/Research domains
-        "theory",
-        "citation",
         "proof",
-        "theorem",
-        "lemma",
-        "gauge",
         "quantum",
         "physics",
-        "astrophysical",
-        "dirac",
-        "philosophical",
-        # Keywords from bibliography titles
-        "matrix",
-        "geometric",
-        "levenberg",
-        "marquardt",
-        "knot",
-        "origami",
-        "weyl",
-        "hamiltonian",
-        "normalization",
-        "neural",
-        "translation",
-        "attention",
-        "transformer",
-        "lstm",
-        "sequence",
-        "tensor",
-        "alignment",
         # Tools/Libraries broader
-        "symbolica",
         "bevy",
-        "knuckledragger",
         "z3",
-        "bpf",
-        "atproto",
-        "ghostty",
-        # Personal/Life activities
-        "busy",
-        "office",
-        "plans",
-        "skiing",
-        "paragliding",
-        # Content/Media
-        "zen",
-        "motorcycle",
-        "maintenance",
-        "values",
-        "wang",
-        "guowei",
     }
 
     # Extract keywords from content
@@ -526,23 +362,24 @@ def extract_keywords_from_content(content):
                 if keyword in title and keyword not in found_keywords:
                     found_keywords.append(keyword)
 
-    # Remove duplicates and sort for consistent output
-    unique_keywords = []
+    # Remove duplicates while preserving order
     seen = set()
-    for kw in sorted(found_keywords):  # Sort for deterministic order
-        if kw not in seen:
-            unique_keywords.append(kw)
+    final_keywords = []
+
+    # First add topic-related keywords (higher priority)
+    for kw in found_keywords:
+        if kw.startswith("topic_") and kw.replace("topic_", "") not in seen:
+            final_keywords.append(kw.replace("topic_", ""))
+            seen.add(kw.replace("topic_", ""))
+
+    # Then add all other keywords
+    for kw in found_keywords:
+        if not kw.startswith("topic_") and kw not in seen:
+            final_keywords.append(kw)
             seen.add(kw)
 
-    # Maintain original keyword order from content where possible
-    # This ensures pattern-matched keywords aren't overshadowed by priority keywords
-    final_keywords = []
-    for kw in found_keywords:
-        if kw in unique_keywords and kw not in final_keywords:
-            final_keywords.append(kw)
-
     # Limit to top 6 keywords to keep titles concise
-    return final_keywords[:6]
+    return final_keywords[:10]  # [:6]
 
 
 def improve_title(date, content):
@@ -762,6 +599,11 @@ def test_til():
             "name": "Project reference",
             "content": "Continued work on [[ag-0018]] with new features.",
             "expected": ["ag"],
+        },
+        {
+            "name": "Explicit topic",
+            "content": "- debugger related\n- Raku related",
+            "expected": ["debugger", "raku"],
         },
         {
             "name": "Mixed content",
