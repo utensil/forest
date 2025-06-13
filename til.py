@@ -287,7 +287,31 @@ def extract_keywords_from_content(content, date):
     content_lower = content.lower()
     found_keywords = []
 
-    # Look for priority keywords with context sensitivity
+    # Project patterns to match specific tools/projects
+    project_patterns = [
+        r"\b([a-z][a-z0-9]+(?:db|sql|query))\b",  # Database tools
+        r"\b(jepsen|tigerbeetle|cloudflare)\b",  # Specific projects
+        r"\b(mastodon|lemmy|pixelfed|bookwyrm|peertube|pleroma)\b",  # Fediverse
+        r"\b(backrest|restic|talos|metallb|unbound|headscale|harbor)\b",  # Infrastructure
+        r"\b(zigar|perses|pulp|faer|galgebra)\b",  # Specialized tools
+        r"\b(datafusion|duckdb|apache|arrow|parquet)\b",  # Analytics
+        r"\[\[(uts|ag|tt|spin|hopf)-[0-9a-z]+\]\]",  # Project tree references with prefix
+        r"\[\[(uts|ag|tt|spin|hopf)-[0-9]+\]\]",  # Project tree references without prefix
+    ]
+
+    # First look for project/tool names (highest priority)
+    for pattern in project_patterns:
+        matches = re.findall(pattern, content_lower)
+        for match in sorted(matches):  # Sort for deterministic order
+            if isinstance(match, tuple):
+                for submatch in match:
+                    if submatch and submatch not in EXCLUDE_WORDS:
+                        found_keywords.append(submatch)
+            else:
+                if match and match not in EXCLUDE_WORDS:
+                    found_keywords.append(match)
+
+    # Then look for priority keywords with context sensitivity
     for keyword in sorted(priority_keywords):  # Sort for deterministic order
         if keyword in content_lower:
             # Handle special cases
@@ -350,35 +374,6 @@ def extract_keywords_from_content(content, date):
                 ):
                     found_keywords.append(word)
 
-    # Look for specific project/tool names mentioned
-    project_patterns = [
-        r"\b([a-z][a-z0-9]+(?:db|sql|query))\b",  # Database tools
-        r"\b(jepsen|tigerbeetle|cloudflare)\b",  # Specific projects
-        r"\b(mastodon|lemmy|pixelfed|bookwyrm|peertube|pleroma)\b",  # Fediverse
-        r"\b(backrest|restic|talos|metallb|unbound|headscale|harbor)\b",  # Infrastructure
-        r"\b(zigar|perses|pulp|faer|galgebra)\b",  # Specialized tools
-        r"\b(datafusion|duckdb|apache|arrow|parquet)\b",  # Analytics
-        r"\[\[(uts|ag|tt|spin|hopf)-[0-9a-z]+\]\]",  # Project tree references with prefix
-        r"\[\[(uts|ag|tt|spin|hopf)-[0-9]+\]\]",  # Project tree references without prefix
-    ]
-
-    for pattern in project_patterns:
-        matches = re.findall(pattern, content_lower)
-        logger.debug(f"Pattern '{pattern}' matched {len(matches)} times")
-        for match in sorted(matches):  # Sort for deterministic order
-            logger.debug(f"Processing project pattern match: {match}")
-            if isinstance(match, tuple):
-                # Handle patterns that return tuples (like tree references)
-                for submatch in match:
-                    if (
-                        submatch
-                        and submatch not in EXCLUDE_WORDS
-                        and submatch not in found_keywords
-                    ):
-                        found_keywords.append(submatch)
-            else:
-                if match and match not in EXCLUDE_WORDS and match not in found_keywords:
-                    found_keywords.append(match)
 
     # Process citations - extract keywords from bib titles instead of cite keys
     citation_pattern = r"\\citef\{([^}]+)\}"
