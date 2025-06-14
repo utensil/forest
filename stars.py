@@ -4,11 +4,13 @@
 # dependencies = []
 # ///
 
+import argparse
 import json
-import sys
-from datetime import datetime
-from collections import defaultdict
 import re
+import sys
+import urllib.parse
+from collections import defaultdict
+from datetime import datetime
 
 
 def strip_ansi(text):
@@ -35,9 +37,81 @@ def generate_title_from_url(url):
         return "Untitled post"
 
 
-def process_stars(input_text):
+def get_primary_url(entry):
+    """Extract the primary URL from an entry, preferring externalURL if available"""
+    return entry.get("externalURL") or entry.get("url") or entry.get("uniqueID")
+
+
+def normalize_url(url):
+    """
+    Normalize a URL for comparison without altering its content identifiers.
+    Only normalizes scheme, hostname case, and trailing slashes.
+    """
+    if not url:
+        return None
+
+    try:
+        parsed = urllib.parse.urlparse(url)
+
+        # Normalize components that don't affect content
+        normalized = urllib.parse.ParseResult(
+            scheme=parsed.scheme.lower(),
+            netloc=parsed.netloc.lower(),
+            path=parsed.path.rstrip("/")
+            or "/",  # Normalize empty paths to / and remove trailing /
+            params=parsed.params,
+            query=parsed.query,  # Preserve query string as is
+            fragment=parsed.fragment,  # Preserve fragment as is
+        )
+
+        return urllib.parse.urlunparse(normalized)
+    except Exception:
+        return url  # Return original if parsing fails
+
+
+def is_source_from(url, source):
+    """Check if a URL is from a specific source"""
+    if not url:
+        return False
+
+    if source == "lobste.rs":
+        return "lobste.rs" in url
+    elif source == "HN":
+        return "news.ycombinator.com" in url or "ycombinator.com/item" in url
+
+    return False
+
+
+def extract_existing_urls_from_tree(tree_content):
+    """Extract existing URLs from the tree file content"""
+    # Match markdown links in the format [title](url)
+    link_pattern = re.compile(r'\[.*?\]\(([^)]+)\)')
+    urls = set(link_pattern.findall(tree_content))
+    
+    # Normalize all extracted URLs for more accurate comparison
+    normalized_urls = {normalize_url(url) for url in urls if url}
+    return normalized_urls
+
+
+def process_stars(input_text, existing_urls=None, deduplicate=True):
+    # Initialize set of existing URLs if provided
+    if existing_urls is None:
+        existing_urls = set()
+    
     # Group by date
     date_groups = defaultdict(list)
+
+    # Track content by normalized external URLs
+    content_by_external_url = {}
+
+    # Debug info to help understand input
+    debug_info = {
+        "total_entries": 0,
+        "entries_with_hn": 0,
+        "entries_with_lobsters": 0,
+        "entries_with_both": 0,
+        "skipped_duplicates": 0,
+    }
 
     # Split input into JSON objects and process each one
     clean_input = strip_ansi(input_text)
@@ -56,6 +130,7 @@ def process_stars(input_text):
             if line.strip() == "}":
                 try:
                     entry = json.loads("\n".join(content_lines))
+                    debug_info["total_entries"] += 1
 
                     # Convert timestamps to date, using dateArrived as fallback
                     timestamp = entry.get("datePublished") or entry.get("dateArrived")
@@ -64,28 +139,126 @@ def process_stars(input_text):
 
                     date = datetime.fromtimestamp(timestamp).strftime("%Y-%m-%d")
 
-                    # Use externalURL if available, otherwise use url
-                    url = entry.get("externalURL") or entry.get("url")
-                    if not url:  # Skip if no URL available
+                    # Get primary URL (preferring external URL, then url, then uniqueID)
+                    primary_url = get_primary_url(entry)
+                    if not primary_url:  # Skip if no URL available
+                        continue
+
+                    # For deduplication, normalize the URL
+                    normalized_url = normalize_url(primary_url)
+                    if not normalized_url:
+                        continue
+
+                    # Check if URL already exists in the tree file and skip if deduplication is enabled
+                    if deduplicate and normalized_url in existing_urls:
+                        debug_info["skipped_duplicates"] += 1
                         continue
 
                     # Handle null title or empty title
                     title = entry.get("title")
                     if not title:  # If title is None or empty string
-                        title = generate_title_from_url(url)
+                        title = generate_title_from_url(primary_url)
                     else:
                         title = title.strip()
 
-                    # Create markdown link
-                    link = f"- read [{title}]({url})"
+                    # Check if we've seen this content before
+                    if normalized_url not in content_by_external_url:
+                        content_by_external_url[normalized_url] = {
+                            "timestamp": timestamp,
+                            "date": date,
+                            "title": title,
+                            "primary_url": primary_url,
+                            "sources": {},
+                        }
+                    elif timestamp > content_by_external_url[normalized_url]["timestamp"]:
+                        # Update with newer timestamp and title
+                        content_by_external_url[normalized_url]["timestamp"] = timestamp
+                        content_by_external_url[normalized_url]["date"] = date
+                        content_by_external_url[normalized_url]["title"] = title
+                        content_by_external_url[normalized_url][
+                            "primary_url"
+                        ] = primary_url
 
-                    date_groups[date].append(link)
+                    # Make sure sources dict exists
+                    if "sources" not in content_by_external_url[normalized_url]:
+                        content_by_external_url[normalized_url]["sources"] = {}
+
+                    # Record the source information regardless of timestamp
+                    # Check all possible URL fields for source detection
+                    sources_to_check = [entry.get("url"), entry.get("uniqueID"), entry.get("externalURL")]
+
+                    for url in sources_to_check:
+                        if url:
+                            if is_source_from(url, "lobste.rs"):
+                                content_by_external_url[normalized_url]["sources"][
+                                    "lobste.rs"
+                                ] = url
+                                debug_info["entries_with_lobsters"] += 1
+                            elif is_source_from(url, "HN"):
+                                content_by_external_url[normalized_url]["sources"][
+                                    "HN"
+                                ] = url
+                                debug_info["entries_with_hn"] += 1
+
                 except json.JSONDecodeError:
                     continue  # Skip invalid JSON
+                finally:
+                    capturing = False  # Reset capturing state
+
+    # Count entries that have both HN and lobste.rs links
+    for normalized_url, content_data in content_by_external_url.items():
+        sources = content_data.get("sources", {})
+        if "lobste.rs" in sources and "HN" in sources:
+            debug_info["entries_with_both"] += 1
+
+    # Add debug info as a comment at the top of the output
+    debug_comment = [
+        "\\comment{",
+        f"Total entries processed: {debug_info['total_entries']}",
+        f"Entries with HN links: {debug_info['entries_with_hn']}",
+        f"Entries with lobste.rs links: {debug_info['entries_with_lobsters']}",
+        f"Entries with both links: {debug_info['entries_with_both']}",
+        f"Skipped duplicates: {debug_info['skipped_duplicates']}",
+        "}",
+    ]
+
+    # Process unique entries and format them
+    for normalized_url, content_data in content_by_external_url.items():
+        date = content_data["date"]
+        title = content_data["title"]
+        primary_url = content_data["primary_url"]
+
+        # Start building the link with the primary content
+        link_parts = [f"- read [{title}]({primary_url})"]
+
+        # Add source references - only if both HN and lobste.rs links are present
+        sources = content_data.get("sources", {})
+        has_hn = "HN" in sources
+        has_lobsters = "lobste.rs" in sources
+
+        # Only add source references if both sources are present
+        if has_hn and has_lobsters:
+            for source_name, source_url in sorted(sources.items()):
+                # Only add source reference if it's not the same as primary URL
+                if normalize_url(source_url) != normalize_url(primary_url):
+                    link_parts.append(f"([on {source_name}]({source_url}))")
+
+        # Join parts with spaces
+        link = " ".join(link_parts)
+
+        # Add to date group
+        date_groups[date].append(link)
 
     # Generate output in chronological order (newest first)
     output = []
+    output.extend(debug_comment)
+    output.append("")
+
     for date in sorted(date_groups.keys(), reverse=True):
+        # Skip dates with no links
+        if not date_groups[date]:
+            continue
+            
         output.append(f"\\subtree[{date}]{{\\mdnote{{{date}}}{{")
         output.extend(sorted(date_groups[date]))  # Sort links alphabetically
         output.append("}}")
@@ -94,8 +267,30 @@ def process_stars(input_text):
     return "\n".join(output)
 
 
-if __name__ == "__main__":
-    # Wait for all input
+def main():
+    parser = argparse.ArgumentParser(description="Process starred items into Forester format")
+    parser.add_argument('--no-deduplicate', action='store_true', help='Disable deduplication of existing URLs')
+    parser.add_argument('--tree-file', type=str, help='Path to the tree file to extract existing URLs from', default='trees/uts-0018.tree')
+    parser.add_argument('--show-all-sources', action='store_true', help='Show all sources, not just when both lobste.rs and HN are present')
+    args = parser.parse_args()
+
+    # Read input
     input_text = sys.stdin.read()
+    
+    # Extract existing URLs from tree file if provided
+    existing_urls = set()
+    if args.tree_file and not args.no_deduplicate:
+        try:
+            with open(args.tree_file, 'r', encoding='utf-8') as f:
+                tree_content = f.read()
+                existing_urls = extract_existing_urls_from_tree(tree_content)
+                print(f"Extracted {len(existing_urls)} URLs from {args.tree_file}", file=sys.stderr)
+        except Exception as e:
+            print(f"Warning: Could not read tree file: {e}", file=sys.stderr)
+    
     # Process and print
-    print(process_stars(input_text))
+    print(process_stars(input_text, existing_urls, not args.no_deduplicate))
+
+
+if __name__ == "__main__":
+    main()
