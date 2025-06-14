@@ -661,6 +661,39 @@ postman:
     # uv tool install --python 3.12 posting
     uvx --python 3.12 posting
 
+# https://www.fuse-t.org/
+prep-fuse:
+    brew tap macos-fuse-t/homebrew-cask
+    brew install fuse-t
+    brew install fuse-t-sshfs
+
+prep-rest:
+    #!/usr/bin/env zsh
+    # which restic || brew install restic
+    which backrest || (brew tap garethgeorge/homebrew-backrest-tap
+    brew install backrest)
+    brew services restart backrest
+    echo "visit http://127.0.0.1:9898"
+
+mnt-rest REPO:
+    #!/usr/bin/env zsh
+    mkdir -p ~/.mnt/{{REPO}}
+    open ~/.mnt/{{REPO}}
+    ~/.local/share/backrest/restic mount -r ~/.rest/{{REPO}} ~/.mnt/{{REPO}}
+
+export DREST_HOME := join(home_directory(), ".drest")
+
+prep-drest:
+    docker pull garethgeorge/backrest:latest
+    mkdir -p {{DREST_HOME}}/.backrest/config
+    mkdir -p {{DREST_HOME}}/.backrest/data
+    mkdir -p {{DREST_HOME}}/.backrest/cache
+
+drest:
+    # echo $DREST_HOME
+    echo "Visit http://127.0.0.1:19898"
+    docker run --rm -p 19898:9898 -e BACKREST_PORT=9898 -e BACKREST_DATA=/data -e XDG_CACHE_HOME=/cache -v $DREST_HOME/.backrest/config:/.config/backrest -v $DREST_HOME/.backrest/data:/data -v $DREST_HOME/.backrest/cache:/cache garethgeorge/backrest:latest
+
 prep-kopia:
     which kopia || (brew install kopia; brew install --cask kopiaui)
 
@@ -734,6 +767,15 @@ prep-pod:
     which kubectl || brew install kubectl
     docker context use default
 
+# https://github.com/abiosoft/colima?tab=readme-ov-file#customizing-the-vm
+# to run x86_64 containers:
+# 1. run colima delete which will delete all existing container!
+# 2. colima start --vm-type=vz --vz-rosetta
+# 3. docker pull --platform linux/amd64 ubuntu:jammy # with docker login first
+# see also:
+# `just prep-lima` which prepares a Lima VM with Ubuntu 25.04 x86_64 that is ready to run x86_64 static binaries and containers
+# https://github.com/lima-vm/lima/discussions/1573 for realizing the VM is still arm64
+# https://github.com/lima-vm/lima/discussions/1043#discussioncomment-3560889 for realizing only statically linked binaries work in VM, dynamically linked ones fail due to missing shared libraries, so they should be run in containers, so just use colima options for this!
 pod CMD="start":
     colima {{CMD}}
 
@@ -742,6 +784,14 @@ k8s:
 
 docker-save IMAGE FILE:
     docker save {{IMAGE}} -o {{FILE}}
+
+prep-lima:
+    which lima || brew install lima
+    # limactl stop default
+    # limactl delete default
+    limactl create --name=default dotfiles/lima/ubuntu-25.04-x86_64.yaml
+    # limactl start default
+    # lima
 
 prep-tilt:
     which tilt || brew install tilt-dev/tap/tilt
@@ -1086,6 +1136,35 @@ tm-dev:
 # https://www.howtogeek.com/803598/app-is-damaged-and-cant-be-opened/
 uq APP_PATH:
     xattr -d com.apple.quarantine {{APP_PATH}}
+
+# Add a config to ~/Library/Application Support/iamb/config.toml per https://iamb.chat/configure.html
+# Login via SSO on element
+# Verify by `:verify`, comparing emoji on element, and copy-paste the `:verify confirm USER/DEVICE` command on iamb
+prep-matrix:
+    which iamb || brew install iamb
+
+prep-hkt:
+    #!/usr/bin/env zsh
+    # Usage:
+    # hn top # for HackerNews Top stories
+    # hn view 2 -c # for viewing comments on the 2nd story
+    # uvx haxor-news
+    which hackertea || brew install karoloslykos/tap/hackertea
+    # rosetta error: failed to open elf at /lib64/ld-linux-x86-64.so.2
+    # docker pull --platform linux/amd64 aome510/hackernews_tui:latest
+    # fails to fetch
+    which clx || brew install circumflex
+    # can't see replies for hackernews and lobsters yet
+    which neonmodem || (
+        TIMESTAMP=`date +%s`
+        mkdir -p /tmp/neonmodem-${TIMESTAMP}
+        curl -sSL https://github.com/mrusme/neonmodem/releases/download/v1.0.6/neonmodem_1.0.6_darwin_arm64.tar.gz | tar -xz -C /tmp/neonmodem-${TIMESTAMP}
+        sudo mv /tmp/neonmodem-${TIMESTAMP}/neonmodem /usr/local/bin
+    )
+    neonmodem connect --type hackernews || true
+    neonmodem connect --type lobsters --url https://lobste.rs || true
+    # An account is needed
+    # neonmodem connect --type lemmy --url https://lemmy.ml || true
 
 import 'dotfiles/llm.just'
 import 'dotfiles/archived.just'

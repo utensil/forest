@@ -1,0 +1,32 @@
+# https://github.com/lima-vm/lima/blob/master/templates/_images/ubuntu-25.04.yaml
+images:
+# Try to use release-yyyyMMdd image if available. Note that release-yyyyMMdd will be removed after several months.
+- location: "https://cloud-images.ubuntu.com/releases/plucky/release-20250424/ubuntu-25.04-server-cloudimg-amd64.img"
+  arch: "x86_64"
+  digest: "sha256:ee752a88573fc8347b4082657293da54a7ba301e3d83cc935fedb4ab6d7129e2"
+- location: "https://cloud-images.ubuntu.com/releases/plucky/release-20250424/ubuntu-25.04-server-cloudimg-arm64.img"
+  arch: "aarch64"
+  digest: "sha256:9594596f24b6b47aeda06328a79c4626cdb279c3490e05ac1a9113c19c8f161b"
+# Fallback to the latest release image.
+# Hint: run `limactl prune` to invalidate the cache
+- location: https://cloud-images.ubuntu.com/releases/plucky/release/ubuntu-25.04-server-cloudimg-amd64.img
+  arch: x86_64
+- location: https://cloud-images.ubuntu.com/releases/plucky/release/ubuntu-25.04-server-cloudimg-arm64.img
+  arch: aarch64
+
+# https://github.com/lima-vm/lima/blob/master/templates/_default/mounts.yaml
+mounts:
+- location: "~"
+- location: "/tmp/lima"
+  mountPoint: /tmp/lima
+  writable: true
+
+# https://lima-vm.io/docs/config/multi-arch/#fast-mode-2
+vmType: "vz"
+rosetta:
+  # Enable Rosetta for Linux.
+  # Hint: try `softwareupdate --install-rosetta` if Lima gets stuck at `Installing rosetta...`
+  enabled: true
+  # Register rosetta to /proc/sys/fs/binfmt_misc
+  binfmt: true
+

@@ -1225,7 +1225,7 @@ local merge = function(...)
     return result
 end
 
-local llm_plugins = llm_plugins_cp
+local llm_plugins = llm_plugins_au
 
 local all_plugins = merge(basic_plugins, lang_plugins, ui_plugins, llm_plugins)
 

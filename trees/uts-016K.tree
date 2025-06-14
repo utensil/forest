@@ -1,0 +1,171 @@
+\import{macros}
+% clifford hopf spin tt ag math draft tech exp notes
+\tag{tech}
+\tag{exp}
+
+\mdnote{Trying Zig's self-hosted x86 backend on Apple Silicon}{
+> TL;DR: I used `colima` to run a x86_64 Docker container (Ubuntu) on Apple silicon, to quickly test `zig build` with LLVM backend and with self-hosted backend, because it's both [exciting](https://ziggit.dev/t/can-someone-explain-why-zig-is-moving-away-from-llvm-but-in-simple-way/1226/6) and concerning (for missing all the goodies from LLVM) news.
+
+After [Self-Hosted x86 Backend is Now Default in Debug Mode](https://ziglang.org/devlog/2025/?unique/#2025-06-08) dropped, I immediately wanted to try it out, but I only have an Apple Silicon machine (e.g. Mac Mini M4 Pro).
+
+According to [Intel-on-ARM and ARM-on-Intel](https://lima-vm.io/docs/config/multi-arch/), I'm supposed to be able to run x86_64 Zig using `lima` with Apple's native virtualization framework and Rosetta. After some fiddling and [searching](https://github.com/lima-vm/lima/discussions/1043#discussioncomment-3560889), I've realized that I could just use `colima` to run an x86_64 container on an ARM64 VM, which is also backed by `lima`.
+
+OK, let's get started:
+
+First, install `colima` and prepare it properly:
+
+```bash
+# we need `docker` CLI as the client
+which docker || (brew install docker; brew link docker)
+
+# (optional) while we are at it, get `docker-compose` and `kubectl` too
+which docker-compose || brew install docker-compose
+which kubectl || brew install kubectl
+
+# install colima
+which colima || brew install colima
+
+# this is to prevent othere docker daemons from interfering
+docker context use default
+```
+
+Next, let's start colima with Apple's native virtualization framework and rosetta:
+
+```bash
+colima start --vm-type=vz --vz-rosetta
+```
+
+Because I have already used colima before, but without these flags, there is a warning saying that they are ignored, so I have to delete the existing colima VM and start over.
+
+(Warning: the following command will also DELETE all existing images! So I commented out them to prevent accidental execution.)
+
+```bash
+# colima delete
+```
+
+Now, we can pull an x86_64 Docker container with Ubuntu:
+
+```bash
+# asssuming `docker login` has been done already
+docker pull --platform linux/amd64 ubuntu:jammy
+```
+
+and start it (`--rm` means to remove the container after it exits, so we'll lose the changes made inside, remove this option if you want to keep the container):
+
+```bash
+docker run --rm -it ubuntu:jammy bash
+```
+
+Inside the container, let's confirm that we are indeed running x86_64:
+
+```bash
+uname -m
+```
+
+Cool, I'm seeing `x86_64`!
+
+Now, we can install Zig and try it out:
+
+```bash
+# we need a few basic utils
+apt update
+apt install -y wget xz-utils
+
+# Download the corresponding Zig version with self-hosted x86 backend
+wget https://ziglang.org/builds/zig-x86_64-linux-0.15.0-dev.769+4d7980645.tar.xz
+tar xvf zig-x86_64-linux-0.15.0-dev.769+4d7980645.tar.xz
+
+# Make it available in PATH
+export PATH=/zig-x86_64-linux-0.15.0-dev.769+4d7980645/:$PATH
+
+# Verify its version and that it runs
+zig version
+# got: 0.15.0-dev.769+4d7980645
+```
+Let's create a simple Zig project to test building it:
+
+```bash
+mkdir projects
+cd projects
+mkdir zig_x86_64
+cd zig_x86_64
+
+zig init
+zig build
+```
+
+Success!
+
+`zig build run` gives
+
+```
+All your codebase are belong to us.
+Run `zig build test` to run the tests.
+```
+
+and `zig build test --summary all` gives:
+
+```
+Build Summary: 5/5 steps succeeded; 3/3 tests passed
+test success
+├─ run test 1 passed 7ms MaxRSS:5M
+│  └─ compile test Debug native cached 68ms MaxRSS:44M
+└─ run test 2 passed 7ms MaxRSS:5M
+   └─ compile test Debug native cached 67ms MaxRSS:44M
+```
+
+But wait, how do I know it's actually using the self-hosted x86 backend?
+
+Hopefully someone has a better way, I just took the longer way to force Zig to build with and without LLVM.
+
+After reading the [doc](https://ziglang.org/documentation/master/std/#std.Build.addExecutable) and some [searching](https://ziggit.dev/t/pass-build-option-to-a-dependency/4196/7), I figured out that I could expose an extra option to `zig build` in my `build.zig` to set the corresponding flag for the executable, with only 2 edits:
+
+```zig
+    // EDIT 1
+    const use_llvm = b.option(bool, "use_llvm", "Force use llvm or not") orelse false;
+
+    const exe = b.addExecutable(.{
+        .name = "zig_x86_64",
+        .root_module = b.createModule(.{
+            .root_source_file = b.path("src/main.zig"),
+            .target = target,
+            .optimize = optimize,
+            .imports = &.{
+                .{ .name = "zig_x86_64", .module = mod },
+            },
+        }),
+        // EDIT 2
+        .use_llvm = use_llvm,
+    });
+```
+
+Cool, now let's try building with LLVM:
+
+```bash
+rm -rf .zig-cache && time zig build -Duse_llvm=true
+```
+
+```
+real    0m3.068s
+user    0m3.610s
+sys     0m0.363s
+```
+
+Then without (which should be the x86 self-hosted backend):
+
+```bash
+rm -rf .zig-cache && time zig build -Duse_llvm=false
+```
+
+```
+real    0m2.112s
+user    0m2.812s
+sys     0m0.361s
+```
+
+Wow, it's indeed faster without LLVM! I've tested this a few times and getting consistent results. I'll also try this on more complex projects later, but it's so exciting that I just wanted to write a note for this.
+
+[posted on Bear](https://utensil.bearblog.dev/zig-self-hosted-backend/)
+
+[comments on Bluesky](https://bsky.app/profile/iutensil.bsky.social/post/3lrfd2v3zus2n)
+}

@@ -448,3 +448,10 @@ mm *PARAMS="edit --sandbox":
 # dspy
 # funnydspy
 # math-equivalence==0.0.0 (from git+https://github.com/hendrycks/math.git@357963a7f5501a6c1708cf3f3fb0cdf525642761)
+
+prep-amp:
+    which amp || npm install -g @sourcegraph/amp
+    # login, say no to re-login if already logged in
+    yes n|amp login
+
+

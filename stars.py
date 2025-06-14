@@ -21,12 +21,12 @@ def generate_title_from_url(url):
     # Match Mastodon-like URLs: https://mathstodon.xyz/@tao/114603605315214772
     mastodon_pattern = re.compile(r"https?://([^/]+)/@([^/]+)")
     mastodon_match = mastodon_pattern.match(url)
-    
+
     if mastodon_match:
         domain = mastodon_match.group(1)
         username = mastodon_match.group(2)
         return f"{username}'s post on {domain}"
-    
+
     # Default case - use domain name
     try:
         domain = re.match(r"https?://(?:www\.)?([^/]+)", url).group(1)
@@ -61,7 +61,7 @@ def process_stars(input_text):
                     timestamp = entry.get("datePublished") or entry.get("dateArrived")
                     if timestamp is None:
                         continue  # Skip if no timestamp available
-                    
+
                     date = datetime.fromtimestamp(timestamp).strftime("%Y-%m-%d")
 
                     # Use externalURL if available, otherwise use url
@@ -86,9 +86,9 @@ def process_stars(input_text):
     # Generate output in chronological order (newest first)
     output = []
     for date in sorted(date_groups.keys(), reverse=True):
-        output.append(f"\\mdblock{{{date}}}{{")
+        output.append(f"\\subtree[{date}]{{\\mdnote{{{date}}}{{")
         output.extend(sorted(date_groups[date]))  # Sort links alphabetically
-        output.append("}")
+        output.append("}}")
         output.append("")
 
     return "\n".join(output)
