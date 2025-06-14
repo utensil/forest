@@ -11,6 +11,8 @@ import sys
 import urllib.parse
 from collections import defaultdict
 from datetime import datetime
+import signal
+import errno
 
 
 def strip_ansi(text):
@@ -84,8 +86,8 @@ def is_source_from(url, source):
 
 def extract_existing_urls_from_tree(tree_content):
     """Extract existing URLs from the tree file content"""
-    # Match markdown links in the format [title](url)
-    link_pattern = re.compile(r'\[.*?\]\(([^)]+)\)')
+    # Match markdown links with various formats, including verbatim-wrapped URLs
+    link_pattern = re.compile(r'(?:\[.*?\]|\\\verb>>>.*?>>>)\((.*?)\)')
     urls = set(link_pattern.findall(tree_content))
     
     # Normalize all extracted URLs for more accurate comparison
@@ -93,7 +95,27 @@ def extract_existing_urls_from_tree(tree_content):
     return normalized_urls
 
 
-def process_stars(input_text, existing_urls=None, deduplicate=True):
+def needs_verb_wrapping(text):
+    """Check if text needs to be wrapped with \verb>>>| and >>>"""
+    # Texts containing special characters like % need verb wrapping
+    return "%" in text
+
+
+def format_title_with_link(title, url):
+    """Format a title with its link, handling special characters properly"""
+    formatted_title = f"\\verb>>>|{title}>>>" if needs_verb_wrapping(title) else title
+    formatted_url = format_url(url)
+    return f"[{formatted_title}]({formatted_url})"
+
+
+def format_url(url):
+    """Format a URL, handling special characters properly"""
+    if needs_verb_wrapping(url):
+        return f"\\verb>>>|{url}>>>"
+    return url
+
+
+def process_stars(input_text, existing_urls=None, deduplicate=True, show_all_sources=False):
     # Initialize set of existing URLs if provided
     if existing_urls is None:
         existing_urls = set()
@@ -228,20 +250,26 @@ def process_stars(input_text, existing_urls=None, deduplicate=True):
         title = content_data["title"]
         primary_url = content_data["primary_url"]
 
-        # Start building the link with the primary content
-        link_parts = [f"- read [{title}]({primary_url})"]
+        # Format title with special character handling
+        formatted_title_link = format_title_with_link(title, primary_url)
 
-        # Add source references - only if both HN and lobste.rs links are present
+        # Start building the link with the primary content
+        link_parts = [f"- read {formatted_title_link}"]
+
+        # Add source references - only if both HN and lobste.rs links are present or if show_all_sources is true
         sources = content_data.get("sources", {})
         has_hn = "HN" in sources
         has_lobsters = "lobste.rs" in sources
 
-        # Only add source references if both sources are present
-        if has_hn and has_lobsters:
+        # Determine if we should add source references
+        should_add_sources = show_all_sources or (has_hn and has_lobsters)
+        
+        if should_add_sources:
             for source_name, source_url in sorted(sources.items()):
                 # Only add source reference if it's not the same as primary URL
                 if normalize_url(source_url) != normalize_url(primary_url):
-                    link_parts.append(f"([on {source_name}]({source_url}))")
+                    formatted_source_url = format_url(source_url)
+                    link_parts.append(f"([on {source_name}]({formatted_source_url}))")
 
         # Join parts with spaces
         link = " ".join(link_parts)
@@ -267,29 +295,57 @@ def process_stars(input_text, existing_urls=None, deduplicate=True):
     return "\n".join(output)
 
 
+def handle_broken_pipe():
+    """Handle broken pipe errors gracefully"""
+    # Reset signal handler
+    signal.signal(signal.SIGPIPE, signal.SIG_DFL)
+    
+    # Close stdout without causing another error
+    try:
+        sys.stdout.close()
+    except BrokenPipeError:
+        pass
+    
+    # Use os._exit to exit immediately without traceback
+    sys.exit(0)
+
+
 def main():
+    # Set up signal handlers for broken pipe
+    signal.signal(signal.SIGPIPE, signal.SIG_DFL)
+    
     parser = argparse.ArgumentParser(description="Process starred items into Forester format")
     parser.add_argument('--no-deduplicate', action='store_true', help='Disable deduplication of existing URLs')
     parser.add_argument('--tree-file', type=str, help='Path to the tree file to extract existing URLs from', default='trees/uts-0018.tree')
     parser.add_argument('--show-all-sources', action='store_true', help='Show all sources, not just when both lobste.rs and HN are present')
     args = parser.parse_args()
 
-    # Read input
-    input_text = sys.stdin.read()
+    try:
+        # Read input
+        input_text = sys.stdin.read()
+        
+        # Extract existing URLs from tree file if provided
+        existing_urls = set()
+        if args.tree_file and not args.no_deduplicate:
+            try:
+                with open(args.tree_file, 'r', encoding='utf-8') as f:
+                    tree_content = f.read()
+                    existing_urls = extract_existing_urls_from_tree(tree_content)
+                    print(f"Extracted {len(existing_urls)} URLs from {args.tree_file}", file=sys.stderr)
+            except Exception as e:
+                print(f"Warning: Could not read tree file: {e}", file=sys.stderr)
+        
+        # Process and print
+        output = process_stars(input_text, existing_urls, not args.no_deduplicate, args.show_all_sources)
+        print(output)
     
-    # Extract existing URLs from tree file if provided
-    existing_urls = set()
-    if args.tree_file and not args.no_deduplicate:
-        try:
-            with open(args.tree_file, 'r', encoding='utf-8') as f:
-                tree_content = f.read()
-                existing_urls = extract_existing_urls_from_tree(tree_content)
-                print(f"Extracted {len(existing_urls)} URLs from {args.tree_file}", file=sys.stderr)
-        except Exception as e:
-            print(f"Warning: Could not read tree file: {e}", file=sys.stderr)
-    
-    # Process and print
-    print(process_stars(input_text, existing_urls, not args.no_deduplicate))
+    except BrokenPipeError:
+        handle_broken_pipe()
+    except KeyboardInterrupt:
+        sys.exit(130)
+    except Exception as e:
+        print(f"Error: {e}", file=sys.stderr)
+        sys.exit(1)
 
 
 if __name__ == "__main__":
