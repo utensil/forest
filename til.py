@@ -41,12 +41,12 @@ keyword extraction logic to keep titles current and meaningful.
 # Run: just build
 # Expected: Build completes successfully without syntax errors
 
+import argparse
+import glob
+import logging
 import re
 import sys
-import argparse
-import logging
 from pathlib import Path
-import glob
 
 # Configure debug logging
 logging.basicConfig(level=logging.INFO)
@@ -226,9 +226,9 @@ def extract_keywords_from_content(content, date):
         "render",
         "shader",
         "visualization",
-        "compute",
         "webgl",
         "raymarching",
+        "game",
         # Infrastructure/Tools specific
         "docker",
         "talos",
@@ -401,7 +401,8 @@ def extract_keywords_from_content(content, date):
         #     "raymarching",
         # },
         # but lean, z3, tla should get their own keywords due to their importance to me
-        "formal": {"verification", "smt", "sat"},
+        "formal": {"formalization", "verification", "smt", "sat"},
+        "agent": {"ai"},
     }
 
     # Merge similar keywords according to mappings
