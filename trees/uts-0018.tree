@@ -47,9 +47,16 @@
     - [Implementing Logic Programming](https://btmc.substack.com/p/implementing-logic-programming) with Prolog and Datlog
     - [Datalog in Rust](https://github.com/frankmcsherry/blog/blob/master/posts/2025-06-03.md)
 - rust related
-    - [Hypershell: A Type-Level DSL for Shell-Scripting in Rust powered by Context-Generic Programming](https://contextgeneric.dev/blog/hypershell-release/)
-    - [OxCaml, Jane Street's extension of OCaml is now open-source](https://oxcaml.org) ([on HN](https://news.ycombinator.com/item?id=44268782)) ([on lobste.rs](https://lobste.rs/s/unsbmk))
     - [Asterinas: A Linux ABI-compatible, Rust-based framekernel OS](https://asterinas.github.io/2025/06/04/kernel-memory-safety-mission-accomplished.html)
+        - framekernel: he performance of a monolithic kernel and the security of a microkernel
+        - [OSTD](https://crates.io/crates/ostd), an OS framework, so that [a Hello World kernel in 100 lines of safe Rust](https://asterinas.github.io/book/ostd/a-100-line-kernel.html)
+        - TCB (Trusted Computing Base) is the minimal unsafe code required to build a kernel in safe Rust
+            - ~15K LOC, 14% of the kernel codebase, comparable to verified microkernels like seL4 (~10K LoC)
+        - rich OS features
+        - aims to verify unsafe code with [Verus](https://github.com/verus-lang/verus)
+        - uses model checking with Converos to uncover hard-to-find concurrency bugs
+    - [OxCaml, Jane Street's extension of OCaml is now open-source](https://oxcaml.org) ([on HN](https://news.ycombinator.com/item?id=44268782)) ([on lobste.rs](https://lobste.rs/s/unsbmk))
+    - [Hypershell: A Type-Level DSL for Shell-Scripting in Rust powered by Context-Generic Programming](https://contextgeneric.dev/blog/hypershell-release/)
 - zig related
     - watched [Writing polymorphic code (anytype, comptime interface, tagged union)](https://www.reddit.com/r/Zig/comments/1lak6wf/writing_polymorphic_code_anytype_comptime/)
         - found [Zimpl](https://github.com/permutationlock/zimpl) ([why](https://github.com/permutationlock/zimpl/blob/main/why.md))
