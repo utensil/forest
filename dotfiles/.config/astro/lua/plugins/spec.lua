@@ -103,6 +103,13 @@ return {
             -- },
         },
     },
+    { 'HawkinsT/pathfinder.nvim',
+        config = function()
+            require('pathfinder').setup {
+                associated_filetypes = { '.tree' }, -- Add forester filetype
+            }
+        end,
+    }
     -- {
     --     "kentookura/forester.nvim",
     --     -- "utensil/forester.nvim",
