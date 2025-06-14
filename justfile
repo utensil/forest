@@ -740,6 +740,9 @@ pod CMD="start":
 k8s:
     colima start --kubernetes
 
+docker-save IMAGE FILE:
+    docker save {{IMAGE}} -o {{FILE}}
+
 prep-tilt:
     which tilt || brew install tilt-dev/tap/tilt
 
