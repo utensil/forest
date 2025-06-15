@@ -53,7 +53,7 @@ docker pull --platform linux/amd64 ubuntu:jammy
 and start it (`--rm` means to remove the container after it exits, so we'll lose the changes made inside, remove this option if you want to keep the container):
 
 ```bash
-docker run --rm -it ubuntu:jammy bash
+docker run --rm -it --platform linux/amd64 ubuntu:jammy bash
 ```
 
 Inside the container, let's confirm that we are indeed running x86_64:
@@ -69,7 +69,7 @@ Now, we can install Zig and try it out:
 ```bash
 # we need a few basic utils
 apt update
-apt install -y wget xz-utils
+apt install -y wget xz-utils software-properties-common git
 
 # Download the corresponding Zig version with self-hosted x86 backend
 wget https://ziglang.org/builds/zig-x86_64-linux-0.15.0-dev.769+4d7980645.tar.xz
@@ -139,6 +139,15 @@ After reading the [doc](https://ziglang.org/documentation/master/std/#std.Build.
     });
 ```
 
+(Optional) I did the edits by running the following to install a helix editor so I can edit Zig code out-of-the-box:
+
+```bash
+# https://docs.helix-editor.com/package-managers.html#ubuntu-ppa
+add-apt-repository -y ppa:maveonair/helix-editor
+apt install helix
+# then fire up `hx build.zig` and use it mostly like in Vim
+```
+
 Cool, now let's try building with LLVM:
 
 ```bash
@@ -165,7 +174,50 @@ sys     0m0.361s
 
 Wow, it's indeed faster without LLVM! I've tested this a few times and getting consistent results. I'll also try this on more complex projects later, but it's so exciting that I just wanted to write a note for this.
 
-[posted on Bear](https://utensil.bearblog.dev/zig-self-hosted-backend/)
+UPDATE 2025-06-15:
+
+I further tried using [poop](https://github.com/andrewrk/poop) to get more metrics.
+
+First, get and install `poop`:
+
+```bash
+cd /projects && git clone https://github.com/andrewrk/poop && cd poop && zig build && cp -f zig-out/bin/poop /usr/local/bin/
+```
+
+Then let's run the cold start builds again:
+
+```bash
+cd /projects/zig_x86_64
+
+rm -rf .zig-cache* && poop "zig build -Duse_llvm=true --cache-dir .zig-cache-llvm" "zig build -Duse_llvm=false --cache-dir .zig-cache-nollvm"
+```
+
+Well, that doesn't work due to permission denied. And [`--cap-add PERFMON` or even `--cap-add SYS_ADMIN`](https://stackoverflow.com/questions/44745987/use-perf-inside-a-docker-container-without-privileged/78593324) didn't work. Not even `--privileged`.
+
+Let's try `hyperfine` instead:
+
+```bash
+apt install -y hyperfine
+
+hyperfine --prepare "rm -rf .zig-cache*" "zig build -Duse_llvm=true --cache-dir .zig-cache-llvm" "zig build -Duse_llvm=false --cache-dir .zig-cache-nollvm"
+```
+which gives a colorful version of
+
+```
+Benchmark 1: zig build -Duse_llvm=true --cache-dir .zig-cache-llvm
+  Time (mean ± σ):      2.931 s ±  0.014 s    [User: 3.445 s, System: 0.335 s]
+  Range (min … max):    2.913 s …  2.956 s    10 runs
+
+Benchmark 2: zig build -Duse_llvm=false --cache-dir .zig-cache-nollvm
+  Time (mean ± σ):      2.070 s ±  0.008 s    [User: 2.758 s, System: 0.345 s]
+  Range (min … max):    2.058 s …  2.083 s    10 runs
+
+Summary
+  'zig build -Duse_llvm=false --cache-dir .zig-cache-nollvm' ran
+    1.42 ± 0.01 times faster than 'zig build -Duse_llvm=true --cache-dir .zig-cache-llvm'
+```
+
+[comments on Zig subreddit](https://www.reddit.com/r/Zig/comments/1lb2vq8/trying_zigs_selfhosted_x86_backend_on_apple/)
 
 [comments on Bluesky](https://bsky.app/profile/iutensil.bsky.social/post/3lrfd2v3zus2n)
 }
