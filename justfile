@@ -782,6 +782,9 @@ pod CMD="start":
 k8s:
     colima start --kubernetes
 
+docker-save IMAGE FILE:
+    docker save {{IMAGE}} -o {{FILE}}
+
 prep-lima:
     which lima || brew install lima
     # limactl stop default
@@ -825,7 +828,7 @@ rss-stars:
     #!/usr/bin/env zsh
     cd ~/Library/Containers/com.ranchero.NetNewsWire-Evergreen/Data/Library/Application\ Support/NetNewsWire/Accounts/2_iCloud
     # get a JSON of all the starred items with only title, url, externalURL, datePublished
-    sqlite3 DB.sqlite3 '.mode json' 'select a.*, s.* from articles a join statuses s on a.articleID = s.articleID where s.starred = 1 order by s.dateArrived' |jq -r '.[]|{title, url, externalURL, datePublished, dateArrived}'
+    sqlite3 DB.sqlite3 '.mode json' 'select a.*, s.* from articles a join statuses s on a.articleID = s.articleID where s.starred = 1 order by s.dateArrived' |jq -r '.[]|{title, url, externalURL, datePublished, dateArrived, uniqueID}'
 
 stars:
     just rss-stars|./stars.py

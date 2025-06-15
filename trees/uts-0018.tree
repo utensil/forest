@@ -19,7 +19,87 @@
 \subtree[2025-06]{
 \title{June, 2025}
 
-\subtree[2025-06-13]{\mdnote{2025-06-13: benchmark, formal, lean, rust, z3, zig}{
+\subtree[2025-06-14]{\mdnote{2025-06-14: agent, apl, cg, compiler, datalog, formal, game, lean, ocaml, optimization}{
+- started using Mac's dictation in agent coding
+- read [Blogging about papers](https://simonwillison.net/2025/Jun/13/blogging-about-papers/#atom-everything)
+    - [Design Patterns for Securing LLM Agents against Prompt Injections](https://simonwillison.net/2025/Jun/13/prompt-injection-design-patterns/) ([on HN](https://news.ycombinator.com/item?id=44268335)) ([on lobste.rs](https://lobste.rs/s/zuadfv))
+        - "the writing is clear, it’s enjoyable to read and the target audience clearly includes practitioners, not just other researchers"
+- CG related
+    - read [Luxe Game Engine in preview now](https://luxeengine.com/dev-log-15/)
+        - 2D/3D, cross-platform (including web)
+        - written in c++, scriptable with [Wren](https://wren.io/) or any language that can interact with C
+        - optional editor to build worlds, animation, ui etc.
+    - read [Voronoi, Hashing and OSL](https://aras-p.info/blog/2025/06/13/Voronoi-Hashing-and-OSL/)
+        - found [Open Shading Language (OSL)](https://github.com/AcademySoftwareFoundation/OpenShadingLanguage)
+            - was originally developed by Sony Pictures Imageworks for film animation and visual effects
+            - has features such as radiance closures, BSDFs, and deferred ray tracing as first-class concepts
+- read [Three Algorithms for YSH Syntax Highlighting](https://codeberg.org/oils/oils.vim/src/branch/main/doc/algorithms.md)
+    - Coarse Parsing with regexes + a context stack could be even more accurate than Context-Free Parsing used by tree-sitter
+    - recognizing most languages with Tree-sitter requires writing C code in an external scanner
+- found [Tattoy: a text-based terminal compositor](https://tattoy.sh/) ([on HN](https://news.ycombinator.com/item?id=44268644)) ([on lobste.rs](https://lobste.rs/s/bcxcju))
+    - considerate design for text contrasts: "detect low contrast text and auto adjust the foreground colour within the constraints of your chosen terminal theme to find the nearest colour that meets a minimum contrast threshold"
+    - usage example: terminal minimap, background video, shadertoy shaders
+- formalization related
+    - found [Litex: Scale Formal Reasoning in AI Age](https://github.com/litexlang/golitex)
+        - "Traditional proof assistants like Lean4 require learning hundreds of unfamiliar keywords and complex type theories. Litex enables formal verification with just 8 intuitive keywords (forall, exist, not, or, fn, prop, obj, set) and familiar Python/Go-like syntax"
+    - [100 years of Zermelo's axiom of choice: What was the problem with it? (2006)](https://research.mietek.io/mi.MartinLof2006.html) (partially formalized in Agda)
+- datalog related
+    - [Implementing Logic Programming](https://btmc.substack.com/p/implementing-logic-programming) with Prolog and Datlog
+    - [Datalog in Rust](https://github.com/frankmcsherry/blog/blob/master/posts/2025-06-03.md)
+- rust related
+    - [Asterinas: A Linux ABI-compatible, Rust-based framekernel OS](https://asterinas.github.io/2025/06/04/kernel-memory-safety-mission-accomplished.html)
+        - framekernel: he performance of a monolithic kernel and the security of a microkernel
+        - [OSTD](https://crates.io/crates/ostd), an OS framework, so that [a Hello World kernel in 100 lines of safe Rust](https://asterinas.github.io/book/ostd/a-100-line-kernel.html)
+        - TCB (Trusted Computing Base) is the minimal unsafe code required to build a kernel in safe Rust
+            - ~15K LOC, 14% of the kernel codebase, comparable to verified microkernels like seL4 (~10K LoC)
+        - rich OS features
+        - aims to verify unsafe code with [Verus](https://github.com/verus-lang/verus)
+        - uses model checking with Converos to uncover hard-to-find concurrency bugs
+    - [OxCaml, Jane Street's extension of OCaml is now open-source](https://oxcaml.org) ([on HN](https://news.ycombinator.com/item?id=44268782)) ([on lobste.rs](https://lobste.rs/s/unsbmk))
+    - [Hypershell: A Type-Level DSL for Shell-Scripting in Rust powered by Context-Generic Programming](https://contextgeneric.dev/blog/hypershell-release/)
+- zig related
+    - watched [Writing polymorphic code (anytype, comptime interface, tagged union)](https://www.reddit.com/r/Zig/comments/1lak6wf/writing_polymorphic_code_anytype_comptime/)
+        - found [Zimpl](https://github.com/permutationlock/zimpl) ([why](https://github.com/permutationlock/zimpl/blob/main/why.md))
+        - [tagged union example with `inline else`](https://github.com/ComputerBread/videos-code-snippets/blob/main/zig-comptime-polymorphism/union-6-normal-n-inline.zig)
+    - [Compiler optimization options - memchr and ripmemchr case study](https://hwisnu.bearblog.dev/compiler-optimization-options-memchr-and-ripmemchr-case-study/)
+    - [C2y: Hitting the Ground Running](https://thephd.dev/c2y-hitting-the-ground-running)
+- APL related
+    - [APL Style: Patterns/Anti-patterns](https://sway.cloud.microsoft/b1pRwmzuGjqB30On)
+    - [Solving LinkedIn Queens with APL](https://pitr.ca/2025-06-14-queens)
+- read [Introducing Sulka, the Hardened Yocto Distro](https://ejaaskel.dev/introducing-sulka-the-hardened-yocto-distro/)
+    - learn about the possibility to maintain a distro by a single person
+    - the Yocto project provides toolkits to create custom Linux distributions, especially for embedded systems
+    - Sulka is a hardened Poky, and there are alternatives like [Welma](https://theembeddedkit.io/welma-yocto-linux/)
+- AI related
+    - [To fuel AI, US Congress moves to fast-track nuclear plant approvals](https://www.wsj.com/articles/to-feed-power-wolfing-ai-lawmakers-are-embracing-nuclear-a461ab7d)
+    - [The Emperor's New LLM](https://dayafter.substack.com/p/the-emperors-new-llm)
+    - [Builder.ai did not "fake AI with 700 engineers"](https://blog.pragmaticengineer.com/builder-ai-did-not-fake-ai/)
+    - [Self-Adapting Language Models](https://arxiv.org/abs/2506.10943)
+    - [Resa: Transparent Reasoning Models via SAEs](https://arxiv.org/abs/2506.09967)
+    - [Simulink (Matlab) Copilot](https://github.com/Kaamuli/Bloxi)
+    - [Rethinking Losses for Diffusion Bridge Samplers](https://arxiv.org/abs/2506.10982)
+- quantum related
+    - [Quantum Computing without the Linear Algebra](https://eprint.iacr.org/2025/1091.pdf)
+    - [Geometry from Quantum Temporal Correlations](https://arxiv.org/abs/2502.13293)
+- news
+    - [Apple's Liquid Glass is prep work for AR interfaces, not just a design refresh](https://omc345.substack.com/p/from-skeuomorphic-to-liquid-glass)
+    - [Next.js 15.1+ is unusable outside of Vercel](https://omarabid.com/nextjs-vercel)
+    - [The European public DNS that makes your Internet safer](https://www.dns0.eu)
+- general
+    - [Ask HN: How do I give back to people helped me when I was young and had nothing?](https://news.ycombinator.com/item?id=44268448)
+        - "Focus less on those who helped you, and more on helping others."
+    - [am i too self-aware?](https://tala.bearblog.dev/am-i-too-self-aware/)
+    - [When random people give money to random other people (2017)](https://quomodocumque.wordpress.com/2017/06/27/when-random-people-give-money-to-random-other-people/)
+    - [We Live In a Golden Age of Interoperability](https://borretti.me/article/we-live-in-a-golden-age-of-interoperability)
+- found [Modularizing George Cave's eInk Energy Dashboard](https://slipway.co/blog/eink-energy-dashboard)
+    - could be used to make widgets for various devices
+- found [Radicle Desktop: a graphical user interface for the Radicle peer-to-peer code forge](https://radicle.xyz/desktop)
+    - learn about [Radicle](https://radicle.xyz/), a sovereign code forge built on Git
+- found [Qrkey – Offline private key backup on paper](https://github.com/Techwolf12/qrkey)
+    - not sure if it's a good idea security-wise, but neat anyway
+}}
+
+\subtree[2025-06-13]{\mdnote{2025-06-13: arm, benchmark, formal, lean, rust, z3, zig}{
 - read [Solving LinkedIn Queens with SMT](https://buttondown.com/hillelwayne/archive/solving-linkedin-queens-with-smt/)
     - in Z3 SMT solver instead of CVC5 SMT solver as in [Using SAT to Get the World Record on LinkedIn's Queens](https://ryanberger.me/posts/queens/)
     -  SAT solvers are "criminally underused by the industry" (from [Modern SAT solvers: fast, neat and underused](https://codingnest.com/modern-sat-solvers-fast-neat-underused-part-1-of-n/))
@@ -27,6 +107,7 @@
     - It's a lot easier to solve the problem at the SMT level than at the SAT level
     - people prefer SMT to SAT
     - [Glucose, an SAT solver](https://github.com/audemard/glucose) is really fast
+    - [The Hat, the Spectre and SAT Solvers (2024)](https://www.nhatcher.com/post/on-hats-and-sats/) ([on HN](https://news.ycombinator.com/item?id=44269289)) ([on lobste.rs](https://lobste.rs/s/oq0ui4))
 - read [jemalloc Postmortem](https://jasone.github.io/2025/06/12/jemalloc-postmortem/)
     - they "reached a sad end for jemalloc in the hands of Facebook/Meta even though most of the people involved were acting in good faith"
     - "the root of the problem is lack of awareness about external uses and needs"
@@ -36,6 +117,7 @@
         - [TCMalloc](https://github.com/google/tcmalloc) by Google (with Bazel painpoint)
         - [mimalloc](https://github.com/microsoft/mimalloc)
             - [adopted](https://github.com/python/cpython/issues/90815) by CPython 3.12: "it is fast, thread-safe, and NUMA-aware"
+        - [StarMalloc: verified memory allocator](https://dl.acm.org/doi/10.1145/3689773)
 - looking for best way to read Hacker News comments
     - most TUI are not working well for reading comments, see `just prep-hkt`
     - found [Vue HN](https://vue-hn.vercel.app/) that supports dark theme, and groups comments, it works pretty well with Doubao auto-translation
@@ -66,10 +148,15 @@
 - read [What I talk about when I talk about IRs](https://bernsteinbear.com/blog/irs/?utm_source=rss)
 }}
 
-\subtree[2025-06-12]{\mdnote{2025-06-12: compiler, debugger, formal, lean, optimization, raku, render, rust, ✍️}{
-- wrote [[uts-016K]]
-- found [Premise Selection for a Lean Hammer](https://arxiv.org/abs/2506.07477)
-    - the paper behind [LeanHammer](https://github.com/JOSHCLUNE/LeanHammer)
+\subtree[2025-06-12]{\mdnote{2025-06-12: compiler, debugger, formal, game, lean, optimization, proof, raku, render, rust}{
+- wrote [[uts-016K]] ([on reddit](https://www.reddit.com/r/Zig/comments/1lb2vq8/trying_zigs_selfhosted_x86_backend_on_apple/))
+- lean related
+    - [Premise Selection for a Lean Hammer](https://arxiv.org/abs/2506.07477)
+        - the paper behind [LeanHammer](https://github.com/JOSHCLUNE/LeanHammer)
+    - [Lean Copilot: Large Language Models as Copilots for Theorem Proving in Lean](https://neus-2025.github.io/files/papers/paper_33.pdf)
+    - [Trinity: an autoformalization system for verified superintelligence](https://www.morph.so/blog/trinity)
+    - [Mathesis: Towards Formal Theorem Proving from Natural Languages](https://arxiv.org/abs/2506.07047)
+    - watched [Mr. Mario Carneiro | Lean Meta-theory: The Proofs behind the Proofs](https://www.youtube.com/live/YtbfIjgzNDI)
 - read [Rewriting SymCrypt in Rust to modernize Microsoft’s cryptographic library](https://www.microsoft.com/en-us/research/blog/rewriting-symcrypt-in-rust-to-modernize-microsofts-cryptographic-library/)
     - used [Aeneas, a Verification Framework for Rust](https://github.com/AeneasVerif/aeneas) that supports F*, Coq, HOL4 and Lean
         - the team also built
@@ -92,8 +179,9 @@
             - grouping elements (like clustering related components in a software architecture)
             - directing drawing style (for instance, coloring nodes in a red-black tree based on their color)
 - debugger related
-    - read [Demystifying Debuggers](https://www.rfleury.com/p/demystifying-debuggers-part-1-a-busy) (a series)
-    - read [Linus on Why Debuggers Are Actually Bad For Developers](https://lwn.net/2000/0914/a/lt-debugger.php3)
+    - [strace tips for better debugging](https://rrampage.github.io/2025/06/13/strace-tips-for-better-debugging/)
+    - [Demystifying Debuggers](https://www.rfleury.com/p/demystifying-debuggers-part-1-a-busy) (a series)
+    - [Linus on Why Debuggers Are Actually Bad For Developers](https://lwn.net/2000/0914/a/lt-debugger.php3)
     - found [Building a Debugger: Write a Native x64 Debugger From Scratch](https://nostarch.com/building-a-debugger)
 - Raku related
     - [Raku's "core"](https://gist.github.com/raiph/849a4a9d8875542fb86df2b2eda89296)
@@ -265,7 +353,7 @@
     - read [Jepsen: TigerBeetle 0.16.11](https://jepsen.io/analyses/tigerbeetle-0.16.11)
 }}
 
-\subtree[2025-06-06-2]{\mdnote{2025-06-06: apl, lean, shader, tla, vulkan, zig, zigar}{
+\subtree[2025-06-06-2]{\mdnote{2025-06-06: apl, game, lean, shader, tla, vulkan, zig, zigar}{
 - read [AI is a gamechanger for TLA+ users](https://buttondown.com/hillelwayne/archive/ai-is-a-gamechanger-for-tla-users/)
 - read [In which I have Opinions about parsing and grammars](https://www.chiark.greenend.org.uk/~sgtatham/quasiblog/parsing/)
 - read [Experimenting with no-build Web Applications](https://andregarzia.com/2025/06/experimenting-with-no-build-web-applications.html)
@@ -276,7 +364,7 @@
 - read [I Think I’m Done Thinking About genAI For Now](https://blog.glyph.im/2025/06/i-think-im-done-thinking-about-genai-for-now.html)
 }}
 
-\subtree[2025-06-05]{\mdnote{2025-06-05: claude, compiler, compute, jujutsu, lean, mongodb, rust, security, tla}{
+\subtree[2025-06-05]{\mdnote{2025-06-05: claude, compiler, jujutsu, lean, mongodb, rust, security, tla}{
 - read [Physicality: the new age of UI](https://www.lux.camera/physicality-the-new-age-of-ui/)
     - love it
 - read [jujutsu on tangled](https://blog.tangled.sh/stacking)
@@ -488,7 +576,7 @@
 }
 }
 
-\subtree[2025-05-22]{\mdnote{2025-05-22: compute, formal, galgebra}{
+\subtree[2025-05-22]{\mdnote{2025-05-22: formal, galgebra}{
 - read [Adventures in Symbolic Algebra with Model Context Protocol](https://www.stephendiehl.com/posts/computer_algebra_mcp/)
     - maybe I should create MCP for GAlgebra
     - followup: [Interfacing MCP with Combinatorial, Convex, and SMT Solvers](https://www.stephendiehl.com/posts/smt_and_mcp_solvers/)
@@ -528,7 +616,7 @@
 - found [macOS VMs in a Docker Container](https://github.com/trycua/cua/tree/main/libs/lumier)
 }}
 
-\subtree[2025-05-18]{\mdnote{2025-05-18: apl, compiler, gpu, performance, physics, quantum, shader, zig}{
+\subtree[2025-05-18]{\mdnote{2025-05-18: apl, compiler, game, gpu, performance, physics, quantum, shader, zig}{
 - found [Algorithms by Jeff Erickson (2019)](https://jeffe.cs.illinois.edu/teaching/algorithms)
 - read \citef{van2025comparing}
     - learned that APL can run on GPU via [Dyalog](https://www.dyalog.com/), the paper even discussed a flash attention implementation
@@ -544,7 +632,7 @@
 - found [Path Integrals in Quantum Mechanics, Statistics, Polymer Physics, and Financial Markets by Hagen Kleinert](https://hagenkleinert.de/documents/pi/HagenKleinert_PathIntegrals.pdf)
 }}
 
-\subtree[2025-05-17]{\mdnote{2025-05-17: elixir, ocaml, rust}{
+\subtree[2025-05-17]{\mdnote{2025-05-17: elixir, game, ocaml, rust}{
 - read [Parallel Scaling Law for Language Models](https://huggingface.co/papers/2505.10475)
 - read [The Language That Never Was](https://blog.celes42.com/the_language_that_never_was.html)
     - [Leaving Rust gamedev after 3 years](https://loglog.games/blog/leaving-rust-gamedev/)
@@ -560,7 +648,7 @@
 - found [Teal: a statically-typed dialect of Lua](https://teal-language.org/), a statically-typed dialect of Lua
 }}
 
-\subtree[2025-05-16]{\mdnote{2025-05-16: formal, rust, tla, zig}{
+\subtree[2025-05-16]{\mdnote{2025-05-16: formal, game, rust, tla, zig}{
 - read [I don’t like NumPy](https://dynomight.net/numpy/)
     - [Writing a better code with pytorch and einops](https://einops.rocks/pytorch-examples.html)
     - [Einops and Einsum Summarized](https://pratik-doshi-99.github.io/posts/einops/)
@@ -588,7 +676,7 @@
     - discovered [Helicopter game](https://neal.fun/internet-artifacts/helicopter-game/)
 }}
 
-\subtree[2025-05-15]{\mdnote{2025-05-15: compute, formal, tla, zig}{
+\subtree[2025-05-15]{\mdnote{2025-05-15: formal, tla, zig}{
 - read [Introducing oniux: Kernel-level Tor isolation for any Linux app](https://blog.torproject.org/introducing-oniux-tor-isolation-using-linux-namespaces/)
     - [code](https://gitlab.torproject.org/tpo/core/oniux)
     - found [smoltcp](https://github.com/smoltcp-rs/smoltcp)
@@ -701,7 +789,7 @@
 }}
 
 \subtree[2025-05-06]{
-\mdnote{2025-05-06: agent, benchmark, formal, gpu, optimization, performance, physics, render, theory, zig}{
+\mdnote{2025-05-06: agent, benchmark, formal, game, gpu, optimization, performance, physics, render, theory}{
 - LM
     - survey papers
         - [A Survey on Inference Engines for Large Language Models: Perspectives on Optimization and Efficiency](https://huggingface.co/papers/2505.01658)
@@ -749,7 +837,7 @@
 }}
 
 \subtree[2025-05-02]{
-\mdnote{2025-05-02: compute, formal}{
+\mdnote{2025-05-02: formal}{
 - read \citef{ren2025deepseekproverv2}
     - \citef{tie2025survey}
         - notes on LM could be based on this survey and the following papers related to r1
@@ -866,7 +954,7 @@
 }}
 
 \subtree[2025-04-21]{
-\mdnote{2025-04-21: ag, compute, render, rust, theory, z3, zig}{
+\mdnote{2025-04-21: ag, render, rust, theory, z3, zig}{
 - wish to learn more about other architectures of LMs, e.g.
     - \citef{ma2025bitnet}
     - \citef{zhao2025d1}
@@ -1216,6 +1304,8 @@
 
 }
 
+}
+
 \subtree[2024]{
 \title{Year 2024}
 
@@ -1430,7 +1520,7 @@
 - work on [native-land](https://github.com/utensil/native-land) about GPU computation, see relavant README updates.
 }}
 
-\subtree[2024-10-10]{\mdnote{2024-10-10: bevy, rust}{
+\subtree[2024-10-10]{\mdnote{2024-10-10: bevy, game, rust}{
 - watch [Chris Biscardi - Bevy: A case study in ergonomic Rust](https://www.youtube.com/watch?v=CnoDOc6ML0Y)
 - have a better idea about the game about fly, evade, slingshot, and shoot around black holes, 4D implicit surfaces
 - explore [sketchfab](https://sketchfab.com/3d-models/black-hole-e410da98b1e5445eae2acafaaa53587d), [polyhaven](https://polyhaven.com/), and [openverse](https://openverse.org/), and have a basic idea about how to use them in the early stage of the game
@@ -1473,7 +1563,7 @@
 - they are read on mobile app [Reflow](https://apps.apple.com/us/app/pdf-reflow/id1461144444) which has good PDF reflow support for math formulas in Arxiv papers, but not so good for other math book PDFs
 }}
 
-\subtree[2024-10-04]{\mdnote{2024-10-04: category}{
+\subtree[2024-10-04]{\mdnote{2024-10-04: category, game}{
 - learn about [catcolab.org](https://catcolab.org/) and double category
 - learn about [Curved Diffusion: A Generative Model With Optical Geometry Control](https://anylens-diffusion.github.io/) from ECCV 2024
 - read [Reusing Styles from Tailwind CSS](https://tailwindcss.com/docs/reusing-styles), decide to use it for CSS refactor
@@ -1570,7 +1660,7 @@ Make some progress on [[ag-000G]], particularly on mixing 4 elements (formulas, 
 - skimmed \citef{love2024role} \citef{quevedo2024cambridge} \citef{faddeev2009lectures} \citef{takhtajan2008quantum} \citef{komech2019lectures}, and \citef{madrid2005role}
 }}
 
-\subtree[2024-09-16]{\mdnote{2024-09-16: bevy, render, rust, shader, symbolica, visualization}{
+\subtree[2024-09-16]{\mdnote{2024-09-16: bevy, game, render, rust, shader, symbolica, visualization}{
 - found
   - [symbolica](https://github.com/benruijl/symbolica) for Rust and Python
   - [Rusph](https://github.com/JackNarvaez/Rusph): SPH algorithm in Rust for astrophysical simulations
@@ -1584,7 +1674,7 @@ Make some progress on [[ag-000G]], particularly on mixing 4 elements (formulas, 
   - [Normals and the Inverse Transpose, Part 1: Grassmann Algebra](https://www.reedbeta.com/blog/normals-inverse-transpose-part-1/) in 2018
 }}
 
-\subtree[2024-09-15]{\mdnote{2024-09-15: apl, benchmark, compiler, compute, faer, gpu, performance, render, rust, shader}{
+\subtree[2024-09-15]{\mdnote{2024-09-15: apl, benchmark, compiler, faer, gpu, performance, render, rust, shader, webgl}{
 - found [Compile Julia code to WebAssembly](https://tshort.github.io/WebAssemblyCompiler.jl/stable/)
 - found [SHADERed](https://shadered.org/shaders) as another source of shader examples, particularly some are written in Rust, supported via one of its plugins
 - looking for ways to include 3D models in LaTeX, found
@@ -1648,7 +1738,7 @@ Make some progress on [[ag-000G]], particularly on mixing 4 elements (formulas, 
 - [[uts-001B]] and [[uts-001C]]
 }}
 
-\subtree[2024-09-07]{\mdnote{2024-09-07: compute, shader}{
+\subtree[2024-09-07]{\mdnote{2024-09-07: shader}{
 - Skim through \citef{lengyel2024foundations}
 - experiments on compute shaders
 }}
@@ -1680,7 +1770,7 @@ spaces
 - Meta Flow Matching: Integrating Vector Fields on the Wasserstein Manifold
 }}
 
-\subtree[2024-09-03]{\mdnote{2024-09-03: clifford, compute, formal, physics}{
+\subtree[2024-09-03]{\mdnote{2024-09-03: clifford, formal, physics}{
 - \citet{ch. 1-4}{grassmann2000extension}
 - \citet{sec. 1.1-2.8}{browne2012grassmann}
 - \citef{loret2024universe}
@@ -1765,5 +1855,5 @@ The readings during this period are reflected in
 The interests during this period are reflected in [[uts-0166]].
 }
 
-}}
+}
 
