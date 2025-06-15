@@ -1,0 +1,46 @@
+\import{macros}
+% clifford hopf spin tt ag math draft tech exp notes
+\tag{tech}
+\tag{exp}
+
+\mdnote{How to run perf in a colima container}{
+Just to note down that it's not straightforward to get perf working.
+
+Here's what worked finally:
+
+First, the container needs to be started with proper capabilities:
+
+```bash
+docker run --rm -it --platform linux/amd64 --cap-add PERFMON ubuntu:jammy bash
+```
+
+Secondly, some flags need to be set from the VM:
+
+```bash
+# this would start a shell in the VM, outside of containers
+colima ssh
+
+# don't know why, sudo doesn't work, but it works in a root shell
+sudo bash
+
+# -1 or 2 both work
+echo -1 > /proc/sys/kernel/perf_event_paranoid
+```
+
+Lastly, install perf in the container:
+
+```bash
+apt get install -y linux-tools-$(uname -r) linux-cloud-tools-$(uname -r)
+```
+
+Then the following works:
+
+```bash
+perf record -g echo 1
+perf report -g graph,0.5,caller
+```
+
+Note also that you can't do "echo 1" because perf will failed to find a file named "echo 1".
+
+Learned this while working on [[uts-016K]] and before submitting [this issue](https://github.com/andrewrk/poop/issues/17#issuecomment-2973619089) about unable to run `poop` in `colima` containers.
+}
