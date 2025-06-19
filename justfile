@@ -727,11 +727,18 @@ sync-hx:
     hx --grammar fetch
     hx --grammar build
 
+reset-hx:
+    rm -rf ~/.config/helix || true
+
 hx PROJ="forest":
     #!/usr/bin/env zsh
     cd ~/projects/{{PROJ}}
     # export GITHUB_COPILOT_TOKEN=$(gh auth token)
     hx
+
+prep-lsp:
+    which pylsp || brew install python-lsp-server
+    which ruff || brew install ruff
 
 # prep-hxcp:
 #     which copilot-language-server || npm install -g @github/copilot-language-server
