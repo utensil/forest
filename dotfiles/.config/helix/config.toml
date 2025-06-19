@@ -22,7 +22,7 @@ hidden = false
 line-number = "relative"
 # mouse = false
 color-modes = true
-auto-completion = true
+# auto-completion = true
 bufferline = "multiple"
 cursorline = true
 
@@ -43,7 +43,7 @@ render = true
 character = "▏"
 
 [editor.statusline]
-left = ["mode", "spacer", "version-control", "file-name", "file-modification-indicator"]
+left = ["mode", "spacer", "version-control", "file-name", "file-modification-indicator", "register"]
 right = ["diagnostics", "spacer", "spinner", "spacer", "file-type", "separator", "position", "separator", "spacer", "position-percentage"]
 mode.normal = "NORMAL"
 mode.insert = "INSERT"
@@ -55,6 +55,8 @@ mode.select = "SELECT"
 display-messages = true
 # Display inlay hints
 display-inlay-hints = true
+# Display LSP progress messages below statusline
+display-progress-messages = true
 
 [editor.whitespace]
 # Whether to render whitespace
@@ -79,7 +81,7 @@ enable = true
 [keys.normal]
 # Quick iteration on config changes
 C-g = ":config-open"
-C-r = ":config-reload"
+C-r = [":config-reload", ":lsp-restart"]
 
 # Quick navigation between buffers
 # deprecated: use gp and gn to goto prev/next buffer instead
