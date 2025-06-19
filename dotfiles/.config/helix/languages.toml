@@ -8,3 +8,22 @@ roots = [ "forest.toml" ]
 comment-tokens = "%"
 indent = { tab-width = 2, unit = "  " }
 grammar = "forester"
+
+# Not working: panicled
+# # based on https://iwe.md/quick-start/
+# [language-server.iwe]
+# command = "iwes"
+
+# [[language]]
+# name = "markdown"
+# language-servers = [ "iwe" ] # you might want more LSPs in here
+# # auto-format = true # optional, enable format-on-save
+
+[language-server.llmvm-codeassist-rust]
+command = "llmvm-codeassist"
+args = ["rust-analyzer"]
+
+[[language]]
+name = "rust"
+language-servers = [ "llmvm-codeassist-rust" ]
+

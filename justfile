@@ -739,6 +739,21 @@ hx PROJ="forest":
 prep-lsp:
     which pylsp || brew install python-lsp-server
     which ruff || brew install ruff
+    which typescript-language-server || brew install typescript-language-server
+    which cargo || just prep-rust
+    which rust-analyzer || rustup component add rust-analyzer
+    which zls || echo "zls not installed, visit https://zigtools.org/zls/install/ to install a version compatible with the output of 'zig version'"
+    # https://github.com/iwe-org/iwe/wiki/How-to-install
+    # which iwes || cargo install iwe iwes
+
+# https://github.com/DJAndries/llmvm/tree/master/frontends/codeassist
+prep-lsp-lv:
+    #!/usr/bin/env zsh
+    set -e
+    which llmvm-codeassist || (cargo install llmvm-core llmvm-codeassist llmvm-outsource)
+    echo "openai_endpoint=\"$OPENAI_API_BASE\"\nopenai_api_key=\"$OPENAI_API_KEY\"" > ~/Library/Application\ Support/com.djandries.llmvm/outsource.toml
+    echo "model=\"outsource/openai-chat/$OPENAI_API_MODEL\"\nprompt_template_id=\"codegen\"\nmax_tokens=8192" > ~/Library/Application\ Support/com.djandries.llmvm/presets/$OPENAI_API_MODEL.toml
+    echo "default_preset=\"$OPENAI_API_MODEL\"" > ~/Library/Application\ Support/com.djandries.llmvm/codeassist.toml
 
 # prep-hxcp:
 #     which copilot-language-server || npm install -g @github/copilot-language-server
