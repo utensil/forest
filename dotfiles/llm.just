@@ -8,6 +8,10 @@ prep-llms:
 aichat *PARAMS: sync-aichat
     aichat {{PARAMS}}
 
+# In Helix, select some code, press `|` then type `aicode`
+prep-aicode:
+    sudo cp -f aicode /usr/local/bin/
+
 # render the aichat config
 sync-aichat:
     #!/usr/bin/env zsh
