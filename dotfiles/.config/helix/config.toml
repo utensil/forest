@@ -81,7 +81,7 @@ c = ":buffer-close"
 w = ":w"
 v = ":toggle-option whitespace.render all none"
 # scooter - search & replace in workspace - ctrl-c to quit
-t = [
+"/" = [
     ":write-all",
     ":new",
     ":insert-output scooter > /dev/tty",
@@ -102,6 +102,16 @@ g = [
     ":redraw",
     ":reload-all"
 ]
+# Not working yet
+# e = [
+#     ":new",
+#     ":sh rm -f /tmp/unique-file-h21a434",
+#     ":insert-output yazi '%{buffer_name}' --chooser-file=/tmp/unique-file-h21a434",
+#     ":insert-output echo \"x1b[?1049h\" > /dev/tty",
+#     ":bc!",
+#     ":open %sh{cat /tmp/unique-file-h21a434}",
+#     ":redraw",
+# ]
 
 # https://docs.helix-editor.com/keymap.html
 
