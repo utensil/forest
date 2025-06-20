@@ -4,7 +4,9 @@
 # - https://github.com/kristijanhusak/neovim-config/blob/2e1b956910ed635d60631940b3fdd6782352b601/helix/config.toml#L4
 # - https://github.com/mimame/.dotfiles/blob/81d1c6caa6d28ed223d54b3067311743300b8f6d/helix/config.toml#L10
 
-# :config-reload or just Ctrl+r to apply changes
+# ret means enter
+
+# :config-reload or just ret+r to apply changes
 # theme = "onedark"
 # theme = "github_dark"
 # theme = "tokyonight_moon"
@@ -75,11 +77,28 @@ newline = "↩" # ↵ ⏎ ↩
 [editor.soft-wrap]
 enable = true
 
-# Open TUIs
+# Keep all my personal keymap under ret
 [keys.normal.ret]
+
+# reload config and lsp
+r = [":config-reload", ":lsp-restart"]
+
+# close tab
 c = ":buffer-close"
+
+# save file
+ret = ":w"
 w = ":w"
+
+# toggle whitespace render
 v = ":toggle-option whitespace.render all none"
+
+# Really escape - no more fighting with the cursor or with multiple cursors
+# esc = ;,esc
+esc = ["collapse_selection", "keep_primary_selection", "normal_mode"]
+
+# Open TUIs
+ 
 # scooter - search & replace in workspace - ctrl-c to quit
 "/" = [
     ":write-all",
@@ -113,19 +132,21 @@ g = [
 #     ":redraw",
 # ]
 
+# Keep normal mode and space mode as they were
+
 # https://docs.helix-editor.com/keymap.html
 
-[keys.normal]
+# [keys.normal]
 # Quick iteration on config changes
-C-g = ":config-open"
-C-r = [":config-reload", ":lsp-restart"]
+# C-g = ":config-open"
+# C-r = [":config-reload", ":lsp-restart"]
 
 # Quick navigation between buffers
 # deprecated: use gp and gn to goto prev/next buffer instead
 # H = ":buffer-previous"
 # L = ":buffer-next"
 
-[keys.normal."space"]
+# [keys.normal."space"]
 # deprecated: use space + F instead
 # o = "file_picker_in_current_buffer_directory"
 # my ZZ
@@ -279,7 +300,3 @@ C-r = [":config-reload", ":lsp-restart"]
 # Y = ["extend_to_line_bounds", "yank_main_selection_to_clipboard", "goto_line_start", "collapse_selection", "normal_mode"]
 # p = "replace_selections_with_clipboard" # No life without this
 # P = "paste_clipboard_before"
-
-# # Escape the madness! No more fighting with the cursor! Or with multiple cursors!
-# esc = ["collapse_selection", "keep_primary_selection", "normal_mode"]
-
