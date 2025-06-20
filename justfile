@@ -1152,8 +1152,13 @@ zj *PARAMS:
     #!/usr/bin/env zsh
     zellij {{PARAMS}}
 
-zja NAME="mon":
+# Will attatch to a session if running (will attach it as a new client, all clients can see and operate on the same session)
+# or killed (will resurrect it, each pane will remember the last running command and wait for confirm to run)
+at NAME="mon":
     (zellij ls|grep {{NAME}}) && just zj a {{NAME}} || just zj -s {{NAME}}
+
+# runf SESSION="mon" CMD="zsh":
+#     zellij run -f -n {{SESSION}} -- {{CMD}}
 
 # Ctrl+b as trigger, follow by
 # session manager - s
@@ -1169,8 +1174,8 @@ zja NAME="mon":
 
 # works for mon running btop
 # not really working for nvim etc.
-at SESSION="main":
-    diss -e g -a {{SESSION}} zsh
+# at SESSION="main":
+#     diss -e g -a {{SESSION}} zsh
 
 prep-tmux:
     which tmux || brew install tmux
