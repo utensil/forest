@@ -37,7 +37,6 @@ insert = "bar"
 normal = "block"
 select = "underline"
 
-# 
 [editor.indent-guides]
 render = true
 character = "▏"
@@ -49,7 +48,6 @@ mode.normal = "NORMAL"
 mode.insert = "INSERT"
 mode.select = "SELECT"
 
-# 
 [editor.lsp]
 # Display LSP progress messages below statusline
 display-messages = true
@@ -64,11 +62,11 @@ render = "none"
 
 [editor.whitespace.characters]
 # Literal characters to use when rendering whitespace
-
 # Sub-keys may be any of
 # Options for rendering whitespace with visible characters.
 # Use `:set whitespace.render all` to temporarily enable visible whitespace.
-# Use `:set whitespace.render none` to disable again.
+# Use `:set whitespace.render none` to disable again
+# Or, simply use ret+v to toggle
 space = "·"
 nbsp = "⍽"
 tab = "→"
@@ -76,6 +74,34 @@ newline = "↩" # ↵ ⏎ ↩
 
 [editor.soft-wrap]
 enable = true
+
+# Open TUIs
+[keys.normal.ret]
+c = ":buffer-close"
+w = ":w"
+v = ":toggle-option whitespace.render all none"
+# scooter - search & replace in workspace - ctrl-c to quit
+t = [
+    ":write-all",
+    ":new",
+    ":insert-output scooter > /dev/tty",
+    ":set mouse false",
+    ":set mouse true",
+    ":buffer-close!",
+    ":redraw",
+    ":reload-all"
+]
+# lazygit - q to quit
+g = [
+    ":write-all",
+    ":new",
+    ":insert-output lazygit",
+    ":set mouse false",
+    ":set mouse true",
+    ":buffer-close!",
+    ":redraw",
+    ":reload-all"
+]
 
 # https://docs.helix-editor.com/keymap.html
 
@@ -96,9 +122,10 @@ C-r = [":config-reload", ":lsp-restart"]
 # deprecated: use :wqa 
 # z = ":wqa"
 # 
-# short hand for `:bc`
-c = ":buffer-close"
-w = { h = "hsplit", v = "vsplit", d = "wclose", w = ":w" } # space+ww is my mucsle memory
+# short hand for `:bc`, deprecated: use ret+c instead
+# c = ":buffer-close"
+# deprecated, use ret+w instead
+# w = { h = "hsplit", v = "vsplit", d = "wclose", w = ":w" } # space+ww is my mucsle memory
 
 # "ret" = "goto_word"
 
