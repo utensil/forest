@@ -1164,7 +1164,7 @@ at NAME="mon":
 # session manager - s
 #   next tab - tab
 #   rename - ctrl+r
-#   delete - ctrl+d
+#   delete - del
 # d - detach
 # | - vsplit
 # - - hsplit
