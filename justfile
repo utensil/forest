@@ -736,6 +736,27 @@ hx PROJ="forest":
     # export GITHUB_COPILOT_TOKEN=$(gh auth token)
     hx
 
+prep-hxx:
+    #!/usr/bin/env zsh
+    if [ ! -d ../helix ]; then
+        git clone https://github.com/utensil/helix ../helix
+    else
+        (cd ../helix && git checkout patchy && git pull)
+    fi
+    cd ../helix
+    # patchy run
+    cargo clean
+    cargo install --path helix-term --locked
+    export HELIX_RUNTIME=$PWD/runtime
+    ~/.cargo/bin/hx -g fetch
+    ~/.cargo/bin/hx -g build
+
+hxx PROJ="forest":
+    #!/usr/bin/env zsh
+    export HELIX_RUNTIME=~/projects/helix/runtime
+    cd ~/projects/{{PROJ}}
+    ~/.cargo/bin/hx
+
 prep-lsp:
     which pylsp || brew install python-lsp-server
     which ruff || brew install ruff
