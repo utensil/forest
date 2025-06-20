@@ -128,7 +128,7 @@ prep-term:
     which jq || brew install jq
     which sq || brew install sq
     which fex || (curl -sSL https://raw.githubusercontent.com/18alantom/fex/master/install.sh | bash)
-    # which serpl || brew install serpl
+    which serpl || brew install serpl
     which scooter || brew install scooter
     # -O https://raw.githubusercontent.com/18alantom/fex/master/install.sh
     # which broot || brew install broot
@@ -1124,6 +1124,48 @@ prep-pool:
 
 prep-ds:
     cargo install diss
+
+# try Zellij
+# default key bindings (I don't like them)
+# Ctrl+P N to create a new pane
+# Ctrl+P then direction keys to move between panes
+# Ctrl+P Z to hide frames
+# Ctrl+N then direction keys to resize the corrent pane towards the direction
+# Ctrl+O W to manage sessions
+
+# install Zellij, and set its visual to minimal, and keybindings to tmux
+prep-zj:
+    #!/usr/bin/env zsh
+    which zellij || brew install zellij
+    # bash <(curl -L https://zellij.dev/launch)
+    if [ ! -d ~/.config/zellij ]; then
+        git clone https://github.com/t3hmrman/tmux-zellij-shim-config ~/.config/zellij
+    else
+        (cd ~/.config/zellij && git pull)
+    fi
+
+# attach - a
+# list - ls
+# kill all session - ka
+# delete all session - da
+zj *PARAMS:
+    #!/usr/bin/env zsh
+    zellij {{PARAMS}}
+
+zja NAME="mon":
+    (zellij ls|grep {{NAME}}) && just zj a {{NAME}} || just zj -s {{NAME}}
+
+# Ctrl+b as trigger, follow by
+# session manager - s
+#   next tab - tab
+#   rename - ctrl+r
+#   delete - ctrl+d
+# d - detach
+# | - vsplit
+# - - hsplit
+# arrows or hjkl - move between splits
+# t - new tab
+# p n - prev/next tab
 
 # works for mon running btop
 # not really working for nvim etc.
