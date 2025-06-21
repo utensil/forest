@@ -123,7 +123,7 @@ cpm:
 
 cpa:
     #!/usr/bin/env zsh
-    npx -y copilot-api@latest start --port 15432 --verbose
+    npx -y copilot-api@latest start --port 15432 # --verbose
 
 # works only for Ubuntu
 [linux]
