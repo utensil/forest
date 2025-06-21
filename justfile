@@ -722,6 +722,7 @@ prep-hx:
     rm -rf ~/.config/helix || true
     ln -s {{justfile_directory()}}/dotfiles/.config/helix ~/.config/helix
     just prep-base16-helix
+    just sync-hx
 
 sync-hx:
     hx --grammar fetch
@@ -1255,6 +1256,18 @@ prep-hkt:
     neonmodem connect --type lobsters --url https://lobste.rs || true
     # An account is needed
     # neonmodem connect --type lemmy --url https://lemmy.ml || true
+
+prep-chawan:
+    which cha || brew install chawan
+
+# https://git.sr.ht/~bptato/chawan/tree/HEAD/doc/config.md
+# q to quit
+# [] to traverse links on the page
+# {} to traverse paragraphs on the page
+# enter to visit link
+# ,. to go back or forward in history
+cha URL:
+    cha {{URL}}
 
 import 'dotfiles/llm.just'
 import 'dotfiles/archived.just'
