@@ -262,8 +262,8 @@ def process_stars(input_text, existing_urls=None, deduplicate=True, show_all_sou
         # Format title with special character handling
         formatted_title_link = format_title_with_link(title, primary_url)
 
-        # Start building the link with the primary content
-        link_parts = [f"- read {formatted_title_link}"]
+        # Start building the link with the primary content - CHANGED: removed "read " from here
+        link_parts = [f"- {formatted_title_link}"]
 
         # Add source references - only if both HN and lobste.rs links are present or if show_all_sources is true
         sources = content_data.get("sources", {})
