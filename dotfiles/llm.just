@@ -91,7 +91,7 @@ mp4 PROJ="forest" *PARAMS="":
 #   2. Or use `just aider ../project_name` to start aider in another directory
 # I've tested that it works with `AI!`, `AI?`, and `ai!`
 aw PROJ="forest" *PARAMS="":
-    just aider {{PROJ}} -v --watch-files {{PARAMS}}
+    just aider {{PROJ}} --watch-files {{PARAMS}} --read AGENT.md --edit-format diff # -v 
 
 llm-proxy *PARAMS:
     #!/usr/bin/env bash
