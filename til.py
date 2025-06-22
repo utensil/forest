@@ -484,7 +484,7 @@ def find_matching_brace(text, start_pos):
 
 
 def reset_titles(filepath):
-    """Reset all daily entry titles to just dates (remove : title part)."""
+    """Reset all daily entry titles to just dates (remove : title part) and remove tags."""
 
     try:
         with open(filepath, "r", encoding="utf-8") as f:
@@ -498,31 +498,42 @@ def reset_titles(filepath):
 
     # Pattern to match mdnote entries with titles and replace with just date
     # Handle both single-line and multi-line formats
-    pattern = r"(\\subtree\[[^\]]+\]\{\s*\\mdnote\{)([^:]+): ([^}]+)\}(\{)"
-    replacement = r"\1\2}\4"
+    pattern_titled = r"(\\subtree\[[^\]]+\]\{\s*\\mdnote\{)([^:]+): ([^}]+)\}(\{)"
+    replacement_titled = r"\1\2}\4"
 
-    # Count matches before replacement
-    matches = re.findall(pattern, content, flags=re.DOTALL)
-    if not matches:
-        print(f"No daily entries found in {filepath}")
-        return True
-
-    # Perform replacement
-    new_content = re.sub(pattern, replacement, content, flags=re.DOTALL)
-    changes_made = len(matches)
+    # First pass: Remove title part from mdnote entries
+    new_content = re.sub(pattern_titled, replacement_titled, content, flags=re.DOTALL)
+    
+    # Second pass: Remove tags entries at the beginning of content blocks
+    # This pattern matches the opening brace followed by \tags{...} and a newline
+    pattern_tags = r"(\{)\s*\\tags\{[^}]*\}\s*\n"
+    replacement_tags = r"\1"
+    
+    new_content = re.sub(pattern_tags, replacement_tags, new_content, flags=re.DOTALL)
+    
+    # Third pass: Remove standalone \tags{...} lines anywhere in the content
+    pattern_standalone_tags = r"\s*\\tags\{[^}]*\}\s*\n"
+    replacement_standalone_tags = r"\n"
+    
+    new_content = re.sub(pattern_standalone_tags, replacement_standalone_tags, new_content, flags=re.DOTALL)
+    
+    # Count changes
+    title_matches = len(re.findall(pattern_titled, content, flags=re.DOTALL))
+    tag_matches = len(re.findall(pattern_tags, content, flags=re.DOTALL)) + len(re.findall(pattern_standalone_tags, content, flags=re.DOTALL))
+    total_changes = title_matches + tag_matches
 
     # Only write if content changed
-    if changes_made > 0:
+    if total_changes > 0:
         try:
             with open(filepath, "w", encoding="utf-8") as f:
                 f.write(new_content)
-            print(f"✅ Reset {changes_made} titles to date-only in {filepath}")
+            print(f"✅ Reset {title_matches} titles and removed {tag_matches} tag entries in {filepath}")
             return True
         except IOError as e:
             print(f"Error writing to {filepath}: {e}")
             return False
     else:
-        print(f"No titles to reset in {filepath}")
+        print(f"No titles or tags to reset in {filepath}")
         return True
 
 
