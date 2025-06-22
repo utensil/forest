@@ -39,6 +39,14 @@ def generate_title_from_url(url):
         return "Untitled post"
 
 
+def clean_title(title):
+    """Clean a title by replacing newlines and multiple spaces with a single space"""
+    if not title:
+        return ""
+    # Replace newlines with spaces, then collapse multiple spaces into one
+    return re.sub(r'\s+', ' ', title.replace('\n', ' ')).strip()
+
+
 def get_primary_url(entry):
     """Extract the primary URL from an entry, preferring externalURL if available"""
     return entry.get("externalURL") or entry.get("url") or entry.get("uniqueID")
@@ -181,7 +189,8 @@ def process_stars(input_text, existing_urls=None, deduplicate=True, show_all_sou
                     if not title:  # If title is None or empty string
                         title = generate_title_from_url(primary_url)
                     else:
-                        title = title.strip()
+                        # Clean the title by replacing newlines with spaces
+                        title = clean_title(title)
 
                     # Check if we've seen this content before
                     if normalized_url not in content_by_external_url:
@@ -253,8 +262,8 @@ def process_stars(input_text, existing_urls=None, deduplicate=True, show_all_sou
         # Format title with special character handling
         formatted_title_link = format_title_with_link(title, primary_url)
 
-        # Start building the link with the primary content
-        link_parts = [f"- read {formatted_title_link}"]
+        # Start building the link with the primary content - CHANGED: removed "read " from here
+        link_parts = [f"- {formatted_title_link}"]
 
         # Add source references - only if both HN and lobste.rs links are present or if show_all_sources is true
         sources = content_data.get("sources", {})

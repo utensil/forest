@@ -13,27 +13,117 @@
 
 \<html:div>[id]{learning-activity}{}
 
+% gf can open URL in helix
+
 \subtree[2025]{
 \title{Year 2025}
 
 \subtree[2025-06]{
 \title{June, 2025}
 
-\subtree[2025-06-14]{\mdnote{2025-06-14: agent, apl, cg, compiler, datalog, formal, game, lean, ocaml, optimization}{
+\subtree[2025-06-18]{\mdnote{2025-06-18}{
+- [Moving on from Nix](https://carlosbecker.com/posts/bye-nix/)
+    - it's a good thing that I have kept my distance from Nix from the start
+        - mostly because I didn't like the syntax, and I don't want to be locked in
+- [Building JSON on the Command Line is Obnoxious](https://blog.stulta.dev/posts/annoying_json/)
+- [Double-Entry Ledgers: The Missing Primitive in Modern Software](https://www.pgrs.net/2025/06/17/double-entry-ledgers-missing-primitive-in-modern-software/)
+- [Games That Love To Take Things Away From You](https://brainbaking.com/post/2025/06/games-that-love-to-take-things-away-from-you/)
+- security related
+    - [Apple: Prepare your network for quantum-secure encryption in TLS](https://support.apple.com/en-my/122756)
+    - [Blink and you'll miss it — a URL handler surprise](https://dgl.cx/2025/06/blink-at-a-url-handler)
+- agent related
+    - [Building Effective AI Agents](https://www.anthropic.com/engineering/building-effective-agents)
+    - [Is there a Half-Life for the Success Rates of AI Agents?](https://www.tobyord.com/writing/half-life) ([on HN](https://news.ycombinator.com/item?id=44308711)) ([on lobste.rs](https://lobste.rs/s/hcoqxb))
+    - [LLM Agents Are Breaking Your Platform, Not Your Architecture](https://www.junctionlabs.io/blog/llm-agents-are-breaking-your-platform-not-your-architecture)
+    - [LLMs pose an interesting problem for DSL designers](https://kirancodes.me/posts/log-lang-design-llms.html)
+    - [Building agents using streaming SQL queries](https://www.morling.dev/blog/this-ai-agent-should-have-been-sql-query/)
+    - [Bots are overwhelming websites with their hunger for AI data](https://www.theregister.com/2025/06/17/bot_overwhelming_websites_report/)
+    - [You Can’t Pay Me To Prompt!](https://dbushell.com/2025/06/18/ai-policy/)
+    - [Show HN: Trieve CLI – Terminal-based LLM agent loop with search tool for PDFs](https://github.com/devflowinc/trieve/tree/main/clients/cli)
+- wayland related
+    - [Long live Xorg, I mean Xlibre](https://www.dedoimedo.com/computers/xlibre.html)
+- robot related
+    - [Real-time action chunking with large models](https://www.pi.website/research/real_time_chunking)
+- edit related
+    - [Using Microsoft's New CLI Text Editor on Ubuntu](https://www.omgubuntu.co.uk/2025/06/microsoft-edit-text-editor-ubuntu)
+- found snapDOM
+    - from [Benchmark: snapDOM vs html2canvas](https://zumerlab.github.io/snapdom/)
+}}
+
+\subtree[2025-06-17]{\mdnote{2025-06-17}{\tags{#agent #im #news #tech}
+- [Accumulation of Cognitive Debt When Using an AI Assistant for Essay Writing Task](https://www.brainonllm.com/)
+    - now with Helix, I use less of auto-complete, and enjoy genuine programming
+- tech history related
+    - [Why JPEGs still rule the web (2024)](https://spectrum.ieee.org/jpeg-image-format-history)
+    - [Google aims to reinvent email with Wave (2009)](https://www.cbc.ca/news/canada/how-google-aims-to-reinvent-email-with-wave-1.826825)
+    - [A Brief, Incomplete, and Mostly Wrong History of Robotics](https://generalrobots.substack.com/p/a-brief-incomplete-and-mostly-wrong)
+    - [Notes on retries](https://justinblank.com/notebooks/retries.html)
+    - [The Promised LAN](https://notes.pault.ag/tpl/)
+    - [Fun with Telnet](https://brandonrozek.com/blog/fun-with-telnet/)
+- agent related
+    - [\verb>>>|100% effective>>>](https://simonwillison.net/2025/Jun/16/100-percent/#atom-everything)
+        - on LLM safety, there is no guarantee
+    - [TIL:AI. Thoughts on AI](https://cocoaphony.micro.blog/2025/06/16/tilai-thoughts-on-ai.html)
+    - [We Should Identify and Mitigate Third-Party Safety Risks in MCP-Powered Agent Systems](http://arxiv.org/pdf/2506.13666v1)
+    - [Are AI Bots Knocking Cultural Heritage Offline?](https://www.glamelab.org/products/are-ai-bots-knocking-cultural-heritage-offline/)
+- IM related
+    - [Why WhatsApp Didn’t Sell Ads](https://blog.whatsapp.com/why-we-don-t-sell-ads)
+    - [matrix is cooked](https://paper.wf/alexia/matrix-is-cooked)
+- news related
+    - [Rules, Not Renewables, Might Explain the Iberian Blackout](https://spectrum.ieee.org/spain-grid-failure)
+    - [Miscalculation by Spanish power grid operator REE contributed to blackout](https://www.reuters.com/business/energy/investigation-into-spains-april-28-blackout-shows-no-evidence-cyberattack-2025-06-17/)
+- found [Fossify – A suite of open-source, ad-free apps](https://github.com/FossifyOrg)
+- found [zb: An experiment in hermetic, reproducible build systems](https://github.com/256lights/zb)
+    - uses lua to specify build rules
+- found [Type Inference Zoo](https://zoo.cuichen.cc/)
+- [Intuiting Monty Hall](https://entropicthoughts.com/intuiting-monty-hall)
+}}
+
+\subtree[2025-06-16]{\mdnote{2025-06-16}{\tags{#agent #claude #rgsql #rust}
+- agent related
+    - [Agents for the Agent](https://ampcode.com/agents-for-the-agent)
+        - amp on subagent
+    - [Ampcode - First Impressions](https://shantanugoel.com/2025/06/15/ampcode/)
+    - [Coding agents have crossed a chasm](https://blog.singleton.io/posts/2025-06-14-coding-agents-cross-a-chasm/)
+    - [Snorting the AGI with Claude Code](https://kadekillary.work/blog/#2025-06-16-snorting-the-agi-with-claude-code)
+        - use claude code with [marp](https://github.com/marp-team/marp-cli) to create a slide deck that explains the codebase
+    - [The lethal trifecta for AI agents: private data, untrusted content, and external communication](https://simonwillison.net/2025/Jun/16/the-lethal-trifecta/)
+- [I want to be a Journey Programmer Again](https://hexhowells.com/posts/journey.html)
+    - I think I've always been a journey programmer, and didn't know it as a feature
+- found [rgSQL: A test suite to help you build your own database engine](https://technicaldeft.com/posts/rgsql-a-test-suite-for-database-engines)
+}}
+
+\subtree[2025-06-15]{\mdnote{2025-06-15}{\tags{#physics #software #theory}
+- [Q-learning is not yet scalable](https://seohong.me/blog/q-learning-is-not-yet-scalable/)
+- found [Todo.txt](http://todotxt.org/)
+    - from [todo.txt tasks in my TRMNL](https://akselmo.dev/posts/todotxt-in-my-trmnl/)
+- software related
+    - [What is systems programming, really? (2018)](https://willcrichton.net/notes/systems-programming/)
+    - [What Is Open Source?](https://werd.io/what-is-open-source/)
+        - learn about free v.s. open source
+    - found [is it really FOSS?](https://isitreallyfoss.com/)
+- cg related
+    - [On Shaping Light](https://blog.maximeheckel.com/posts/shaping-light-volumetric-lighting-with-post-processing-and-raymarching/)
+    - watched [Physics and Math of Shading](https://www.youtube.com/watch?v=j-A0mwsJRmk)
+        - from [SIGGRAPH 2025 Course: Physically Based Shading in Theory and Practice](https://blog.selfshadow.com/publications/s2025-shading-course/)
+- found [Foundations of Computer Vision](https://visionbook.mit.edu)
+}}
+
+\subtree[2025-06-14]{\mdnote{2025-06-14}{\tags{#agent #apl #biology #cg #compiler #datalog #formal #game #lean #ocaml}
 - started using Mac's dictation in agent coding
-- read [Blogging about papers](https://simonwillison.net/2025/Jun/13/blogging-about-papers/#atom-everything)
+- [Blogging about papers](https://simonwillison.net/2025/Jun/13/blogging-about-papers/#atom-everything)
     - [Design Patterns for Securing LLM Agents against Prompt Injections](https://simonwillison.net/2025/Jun/13/prompt-injection-design-patterns/) ([on HN](https://news.ycombinator.com/item?id=44268335)) ([on lobste.rs](https://lobste.rs/s/zuadfv))
         - "the writing is clear, it’s enjoyable to read and the target audience clearly includes practitioners, not just other researchers"
 - CG related
-    - read [Luxe Game Engine in preview now](https://luxeengine.com/dev-log-15/)
+    - [Luxe Game Engine in preview now](https://luxeengine.com/dev-log-15/)
         - 2D/3D, cross-platform (including web)
         - written in c++, scriptable with [Wren](https://wren.io/) or any language that can interact with C
         - optional editor to build worlds, animation, ui etc.
-    - read [Voronoi, Hashing and OSL](https://aras-p.info/blog/2025/06/13/Voronoi-Hashing-and-OSL/)
+    - [Voronoi, Hashing and OSL](https://aras-p.info/blog/2025/06/13/Voronoi-Hashing-and-OSL/)
         - found [Open Shading Language (OSL)](https://github.com/AcademySoftwareFoundation/OpenShadingLanguage)
             - was originally developed by Sony Pictures Imageworks for film animation and visual effects
             - has features such as radiance closures, BSDFs, and deferred ray tracing as first-class concepts
-- read [Three Algorithms for YSH Syntax Highlighting](https://codeberg.org/oils/oils.vim/src/branch/main/doc/algorithms.md)
+- [Three Algorithms for YSH Syntax Highlighting](https://codeberg.org/oils/oils.vim/src/branch/main/doc/algorithms.md)
     - Coarse Parsing with regexes + a context stack could be even more accurate than Context-Free Parsing used by tree-sitter
     - recognizing most languages with Tree-sitter requires writing C code in an external scanner
 - found [Tattoy: a text-based terminal compositor](https://tattoy.sh/) ([on HN](https://news.ycombinator.com/item?id=44268644)) ([on lobste.rs](https://lobste.rs/s/bcxcju))
@@ -57,16 +147,22 @@
         - uses model checking with Converos to uncover hard-to-find concurrency bugs
     - [OxCaml, Jane Street's extension of OCaml is now open-source](https://oxcaml.org) ([on HN](https://news.ycombinator.com/item?id=44268782)) ([on lobste.rs](https://lobste.rs/s/unsbmk))
     - [Hypershell: A Type-Level DSL for Shell-Scripting in Rust powered by Context-Generic Programming](https://contextgeneric.dev/blog/hypershell-release/)
+    - [Datalog in Minikanren](https://deosjr.github.io/dynamicland/datalog.html) ([on HN](https://news.ycombinator.com/item?id=44283093), many good references about datalog, and scheme) 
+    - [\verb>>>|Bzip2 crate switches from C to 100% Rust>>>](https://trifectatech.org/blog/bzip2-crate-switches-from-c-to-rust/)
+        - `c2rust`, crate [cc](https://crates.io/crates/cc), `miri`
+        - `cargo fuzz`, `cargo audit`, `semgrep` (particularly [semgrep-rules](https://github.com/trailofbits/semgrep-rules))
+    - [hammurabi: A Rust recreation of the classic 1968 BASIC game](https://github.com/stjepangolemac/hammurabi)
 - zig related
     - watched [Writing polymorphic code (anytype, comptime interface, tagged union)](https://www.reddit.com/r/Zig/comments/1lak6wf/writing_polymorphic_code_anytype_comptime/)
         - found [Zimpl](https://github.com/permutationlock/zimpl) ([why](https://github.com/permutationlock/zimpl/blob/main/why.md))
         - [tagged union example with `inline else`](https://github.com/ComputerBread/videos-code-snippets/blob/main/zig-comptime-polymorphism/union-6-normal-n-inline.zig)
     - [Compiler optimization options - memchr and ripmemchr case study](https://hwisnu.bearblog.dev/compiler-optimization-options-memchr-and-ripmemchr-case-study/)
     - [C2y: Hitting the Ground Running](https://thephd.dev/c2y-hitting-the-ground-running)
+    - [The Art Of Packing Data](https://www.elopezr.com/the-art-of-packing-data/#)
 - APL related
     - [APL Style: Patterns/Anti-patterns](https://sway.cloud.microsoft/b1pRwmzuGjqB30On)
     - [Solving LinkedIn Queens with APL](https://pitr.ca/2025-06-14-queens)
-- read [Introducing Sulka, the Hardened Yocto Distro](https://ejaaskel.dev/introducing-sulka-the-hardened-yocto-distro/)
+- [Introducing Sulka, the Hardened Yocto Distro](https://ejaaskel.dev/introducing-sulka-the-hardened-yocto-distro/)
     - learn about the possibility to maintain a distro by a single person
     - the Yocto project provides toolkits to create custom Linux distributions, especially for embedded systems
     - Sulka is a hardened Poky, and there are alternatives like [Welma](https://theembeddedkit.io/welma-yocto-linux/)
@@ -86,11 +182,15 @@
     - [Next.js 15.1+ is unusable outside of Vercel](https://omarabid.com/nextjs-vercel)
     - [The European public DNS that makes your Internet safer](https://www.dns0.eu)
 - general
+    - [Feedback Is Not an Attack](https://ashley.dev/posts/feedback-is-not-an-attack/)
     - [Ask HN: How do I give back to people helped me when I was young and had nothing?](https://news.ycombinator.com/item?id=44268448)
         - "Focus less on those who helped you, and more on helping others."
     - [am i too self-aware?](https://tala.bearblog.dev/am-i-too-self-aware/)
     - [When random people give money to random other people (2017)](https://quomodocumque.wordpress.com/2017/06/27/when-random-people-give-money-to-random-other-people/)
     - [We Live In a Golden Age of Interoperability](https://borretti.me/article/we-live-in-a-golden-age-of-interoperability)
+    - [No Hello](https://nohello.net/en/)
+- biology related
+    - [Sperm are very different from all other cells](https://www.bbc.com/future/article/20250613-untangling-the-mysteries-of-what-we-dont-know-about-sperm)
 - found [Modularizing George Cave's eInk Energy Dashboard](https://slipway.co/blog/eink-energy-dashboard)
     - could be used to make widgets for various devices
 - found [Radicle Desktop: a graphical user interface for the Radicle peer-to-peer code forge](https://radicle.xyz/desktop)
@@ -99,8 +199,8 @@
     - not sure if it's a good idea security-wise, but neat anyway
 }}
 
-\subtree[2025-06-13]{\mdnote{2025-06-13: arm, benchmark, formal, lean, rust, z3, zig}{
-- read [Solving LinkedIn Queens with SMT](https://buttondown.com/hillelwayne/archive/solving-linkedin-queens-with-smt/)
+\subtree[2025-06-13]{\mdnote{2025-06-13}{\tags{#arm #benchmark #formal #lean #rust #z3 #zig}
+- [Solving LinkedIn Queens with SMT](https://buttondown.com/hillelwayne/archive/solving-linkedin-queens-with-smt/)
     - in Z3 SMT solver instead of CVC5 SMT solver as in [Using SAT to Get the World Record on LinkedIn's Queens](https://ryanberger.me/posts/queens/)
     -  SAT solvers are "criminally underused by the industry" (from [Modern SAT solvers: fast, neat and underused](https://codingnest.com/modern-sat-solvers-fast-neat-underused-part-1-of-n/))
     - SMT solvers are "higher-level" than SAT, capable of handling more data types than just boolean variables
@@ -108,7 +208,7 @@
     - people prefer SMT to SAT
     - [Glucose, an SAT solver](https://github.com/audemard/glucose) is really fast
     - [The Hat, the Spectre and SAT Solvers (2024)](https://www.nhatcher.com/post/on-hats-and-sats/) ([on HN](https://news.ycombinator.com/item?id=44269289)) ([on lobste.rs](https://lobste.rs/s/oq0ui4))
-- read [jemalloc Postmortem](https://jasone.github.io/2025/06/12/jemalloc-postmortem/)
+- [jemalloc Postmortem](https://jasone.github.io/2025/06/12/jemalloc-postmortem/)
     - they "reached a sad end for jemalloc in the hands of Facebook/Meta even though most of the people involved were acting in good faith"
     - "the root of the problem is lack of awareness about external uses and needs"
         - even "unaware of its replacement until after the fact"
@@ -118,37 +218,40 @@
         - [mimalloc](https://github.com/microsoft/mimalloc)
             - [adopted](https://github.com/python/cpython/issues/90815) by CPython 3.12: "it is fast, thread-safe, and NUMA-aware"
         - [StarMalloc: verified memory allocator](https://dl.acm.org/doi/10.1145/3689773)
+        - [phkmalloc](https://phk.freebsd.dk/sagas/phkmalloc/)
 - looking for best way to read Hacker News comments
     - most TUI are not working well for reading comments, see `just prep-hkt`
     - found [Vue HN](https://vue-hn.vercel.app/) that supports dark theme, and groups comments, it works pretty well with Doubao auto-translation
     - found [Hacker News RSS](https://hnrss.github.io/) and chose the front page feed, and I have already subscribed to the best comments feed
-- read [Could an LLM create a full Domain-Specific Language?](https://modeling-languages.com/vibe-dsling/)
+- [Could an LLM create a full Domain-Specific Language?](https://modeling-languages.com/vibe-dsling/)
     - rather complete methodology for creating a DSL
     - code: [jcabot/funding-dsl](https://github.com/jcabot/funding-dsl)
-- read [The last six months in LLMs, illustrated by pelicans on bicycles](https://simonwillison.net/2025/Jun/6/six-months-in-llms/)
+- [The last six months in LLMs, illustrated by pelicans on bicycles](https://simonwillison.net/2025/Jun/6/six-months-in-llms/)
     - an interesting benchmark for LLMs
-- read [\verb>>>|AI Boom Drives 150% Surge in Indirect Emissions at Major Tech Firms, UN Warns>>>](https://esgnews.com/ai-boom-drives-150-surge-in-indirect-emissions-at-major-tech-firms-un-warns/)
+- [\verb>>>|AI Boom Drives 150% Surge in Indirect Emissions at Major Tech Firms, UN Warns>>>](https://esgnews.com/ai-boom-drives-150-surge-in-indirect-emissions-at-major-tech-firms-un-warns/)
     - numbers for the environmental impact of LLMs
-- read [Type-based vs Value-based Reflection](https://brevzin.github.io/c++/2025/06/09/reflection-ts/)
+    - related
+        - [AI threatens to raid the water reserves of Europe's driest regions](https://www.politico.eu/article/artificial-intelligence-threat-raid-water-reserves-europe-dry-regions/)
+- [Type-based vs Value-based Reflection](https://brevzin.github.io/c++/2025/06/09/reflection-ts/)
     - value-based (C++26)
         - "while we have new syntax for getting into (`^^e`) and out of (`[: e :]`) the value domain, once you’re in the value domain — it’s nice to just stay there"
         - "C++26 reflection does bring with it new syntax and a bunch of new semantics. But the benefit is that a lot of metaprogramming starts to look more like regular programming. There is a lot less syntax in the implementation side of things. "
     - type-based (Reflection TS published in March, 2020)
     - wondering the Zig equivalent
-- read [Reflections on Sudoku, Or the Impossibility of Systematizing Thought](https://rjp.io/blog/2025-06-07-reflections-on-sudoku)
+- [Reflections on Sudoku, Or the Impossibility of Systematizing Thought](https://rjp.io/blog/2025-06-07-reflections-on-sudoku)
     - limitation of TDD
         - tests don't fix the underlying issue of "knowing what to do"
     - alternative approach by Peter Norvig
         - analyzing the high-level problem and then breaking down the data structures and outlining the solution in the course of ~20 lines of code
 - found [A Lightweight Merge Queue using GitHub Actions](https://sketch.dev/blog/lightweight-merge-queue)
-- read [Rumour: Google intends to discontinue the Android Open Source Project](https://www.osnews.com/story/142553/rumour-google-intends-to-discontinue-the-android-open-source-project/)
-- read [A tale of two spacetimes](https://robwilson1.wordpress.com/2025/06/12/a-tale-of-two-spacetimes/)
-- read [In case of emergency, break glass](https://morrick.me/archives/10048)
+- [Rumour: Google intends to discontinue the Android Open Source Project](https://www.osnews.com/story/142553/rumour-google-intends-to-discontinue-the-android-open-source-project/)
+- [A tale of two spacetimes](https://robwilson1.wordpress.com/2025/06/12/a-tale-of-two-spacetimes/)
+- [In case of emergency, break glass](https://morrick.me/archives/10048)
 - skimmed [Patterns for Modeling Overlapping Variant Data in Rust](https://mcmah309.github.io/posts/patterns-for-modeling-overlapping-variant-data-in-rust)
-- read [What I talk about when I talk about IRs](https://bernsteinbear.com/blog/irs/?utm_source=rss)
+- [What I talk about when I talk about IRs](https://bernsteinbear.com/blog/irs/?utm_source=rss)
 }}
 
-\subtree[2025-06-12]{\mdnote{2025-06-12: compiler, debugger, formal, game, lean, optimization, proof, raku, render, rust}{
+\subtree[2025-06-12]{\mdnote{2025-06-12}{\tags{#compiler #debugger #formal #game #lean #optimization #proof #raku #render #rust}
 - wrote [[uts-016K]] ([on reddit](https://www.reddit.com/r/Zig/comments/1lb2vq8/trying_zigs_selfhosted_x86_backend_on_apple/))
 - lean related
     - [Premise Selection for a Lean Hammer](https://arxiv.org/abs/2506.07477)
@@ -157,7 +260,7 @@
     - [Trinity: an autoformalization system for verified superintelligence](https://www.morph.so/blog/trinity)
     - [Mathesis: Towards Formal Theorem Proving from Natural Languages](https://arxiv.org/abs/2506.07047)
     - watched [Mr. Mario Carneiro | Lean Meta-theory: The Proofs behind the Proofs](https://www.youtube.com/live/YtbfIjgzNDI)
-- read [Rewriting SymCrypt in Rust to modernize Microsoft’s cryptographic library](https://www.microsoft.com/en-us/research/blog/rewriting-symcrypt-in-rust-to-modernize-microsofts-cryptographic-library/)
+- [Rewriting SymCrypt in Rust to modernize Microsoft’s cryptographic library](https://www.microsoft.com/en-us/research/blog/rewriting-symcrypt-in-rust-to-modernize-microsofts-cryptographic-library/)
     - used [Aeneas, a Verification Framework for Rust](https://github.com/AeneasVerif/aeneas) that supports F*, Coq, HOL4 and Lean
         - the team also built
             - [Charon](https://github.com/AeneasVerif/charon) to extract information from rustc internals for semantic analysis thus verification
@@ -188,30 +291,30 @@
     - [Raku's FAQ](https://docs.raku.org/language/faq#Metaquestions_and_advocacy)
     - [RakuAST: a foundation for Raku macros](https://jnthn.net/papers/2020-cic-rakuast.pdf)
     - [Raku in y minutes](https://learnxinyminutes.com/raku/)
-- read [Readings shared June 10, 2025](https://jaalonso.github.io/vestigium/posts/2025/06/11-readings_shared_06-10-25/)
+- [Readings shared June 10, 2025](https://jaalonso.github.io/vestigium/posts/2025/06/11-readings_shared_06-10-25/)
 - realized that [Pocoo](https://www.pocoo.org/) is behind Sphinx, Jinja, Pygments etc.
 - found [Verse Language](https://dev.epicgames.com/documentation/en-us/fortnite/verse-language-reference), a new scripting language for Fortnite by Epic
 }}
 
-\subtree[2025-06-11]{\mdnote{2025-06-11: agent, render, typst, zig}{
-- read [My Unfiltered Take on the AI Coding Agent Landscape](https://xxchan.me/ai/2025/06/10/ai-coding-en.html)
+\subtree[2025-06-11]{\mdnote{2025-06-11}{\tags{#agent #render #typst #zig}
+- [My Unfiltered Take on the AI Coding Agent Landscape](https://xxchan.me/ai/2025/06/10/ai-coding-en.html)
     - found and tried [amp](https://ampcode.com/)
         - love their [Frequently Ignored Feedback](https://ampcode.com/fif) but disagree with some of them
         - it gives me an addictive experience, but it's quite costly and the price model is not very transparent
     - found [YouWare](https://www.youware.com/) and would love to try more
-- read [Zig-style generics are not well-suited for most languages (2022)](https://typesanitizer.com/blog/zig-generics.html)
-- read [Ratatui - Are We Embedded Yet? (#2)](https://jslazak.com/are-we-embedded-yet-2/)
+- [Zig-style generics are not well-suited for most languages (2022)](https://typesanitizer.com/blog/zig-generics.html)
+- [Ratatui - Are We Embedded Yet? (#2)](https://jslazak.com/are-we-embedded-yet-2/)
     - learn about [Mousefood](https://github.com/j-g00da/mousefood), a [embedded-graphics](https://crates.io/crates/embedded-graphics) backend for [Ratatui](https://crates.io/crates/ratatui)
 - found [Quarkdown - Markdown with superpowers](https://quarkdown.com/)
     - interesting but it's a little late to the party now that we have pandoc and quarto
     - the syntax and scripting looks good
     - its PDF output is based on rendering web pages, a big no-no for me, as I need LaTeX-level professional typesetting like Typst has
-- read [Partial Keyframes](https://www.joshwcomeau.com/animation/partial-keyframes/)
+- [Partial Keyframes](https://www.joshwcomeau.com/animation/partial-keyframes/)
     - neat CSS animation trick
 }}
 
-\subtree[2025-06-10]{\mdnote{2025-06-10: compiler, embedding, formal, optimization, os, performance, prolog, qwen, rust, wasm}{
-- read [Lightweight Diagramming for Lightweight Formal Methods](https://blog.brownplt.org/2025/06/09/copeanddrag.html)
+\subtree[2025-06-10]{\mdnote{2025-06-10}{\tags{#compiler #embedding #formal #optimization #os #performance #prolog #qwen #rust #wasm}
+- [Lightweight Diagramming for Lightweight Formal Methods](https://blog.brownplt.org/2025/06/09/copeanddrag.html)
 - performance related
     - [Why doesn’t Rust care more about compiler performance?](https://kobzol.github.io/rust/rustc/2025/06/09/why-doesnt-rust-care-more-about-compiler-performance.html)
     - [One Law to Rule All Code Optimizations](https://blog.codingconfessions.com/p/one-law-to-rule-all-code-optimizations)
@@ -220,15 +323,15 @@
 - OS related
     - [Munal OS: A graphical experimental OS with WASM sandboxing](https://github.com/Askannz/munal-os)
     - [The high-level OS challenge](https://ochagavia.nl/blog/the-high-level-os-challenge/)
-- read [Makefile.md - Possibly Use(ful|less) Polyglot Synthesis of Makefile and Markdown](https://zoo.dev/blog/polyglot-makefile-markdown)
-- read comments on [Qwen3 embedding models](https://huggingface.co/Qwen/Qwen3-Embedding-0.6B-GGUF)
+- [Makefile.md - Possibly Use(ful|less) Polyglot Synthesis of Makefile and Markdown](https://zoo.dev/blog/polyglot-makefile-markdown)
+- comments on [Qwen3 embedding models](https://huggingface.co/Qwen/Qwen3-Embedding-0.6B-GGUF)
 - Prolog related (from [Readings shared June 9, 2025](https://jaalonso.github.io/vestigium/posts/2025/06/09-readings_shared_06-09-25/))
     - [Teaching and learning mathematics with Prolog](https://arxiv.org/abs/2108.09893)
     - [Exploring Topological Spaces with Prolog: A Practical Approach Using “Mathematics with Prolog”](https://medium.com/@kenichisasagawa/exploring-topological-spaces-with-prolog-a-practical-approach-using-mathematics-with-prolog-b5806bb8b98f)
 }}
 
-\subtree[2025-06-09]{\mdnote{2025-06-09: agent, apache, arm, arrow, backrest, bookwyrm, datafusion, docker, duckdb, elixir}{
-- read [Ditching HAProxy (in my homelab)](https://arch.dog/bark/ditching-haproxy)
+\subtree[2025-06-09]{\mdnote{2025-06-09}{\tags{#agent #apache #arm #arrow #backrest #bookwyrm #datafusion #docker #duckdb #elixir}
+- [Ditching HAProxy (in my homelab)](https://arch.dog/bark/ditching-haproxy)
     - found [Ran out of infrastructure titles](https://arch.dog/bark/2025-03-30-infrastructure) from the author
         - [backrest](https://github.com/garethgeorge/backrest)
             - for using `restic` to manage backup [repos](https://restic.readthedocs.io/en/latest/030_preparing_a_new_repo.html) and plans
@@ -248,52 +351,53 @@
         - [Harbor](https://goharbor.io/) for caching container images
         - [Headscale](https://github.com/juanfont/headscale): self-hosted implementation of the Tailscale control server
         - [Pocket ID](https://pocket-id.org/) for authenticate users with their passkeys
-- read [Two Approaches to Solving the “Quiet Fediverse” Problem: Conversation Backfilling Mechanisms](https://hackers.pub/@hongminhee/2025/quiet-fediverse-two-approaches/en)
-    - investigate more on fediverse
-        - [The fediverse, explained](https://www.theverge.com/24063290/fediverse-explained-activitypub-social-media-open-protocol)
-            - [Lemmy](https://join-lemmy.org/)
-            - [Pixelfed](https://pixelfed.org/)
-            - [BookWyrm](https://bookwyrm.social/)
-            - [PeerTube](https://joinpeertube.org/)
-        - [Pleroma](https://pleroma.social/): a lightweight federated social networking server powered by Elixir and PostgreSQL
-            - from [What Is Pleroma?](https://blog.soykaf.com/post/what-is-pleroma/)
-        - [From Fediverse to Creating Personal Digital Space with Memos](https://dev.charizard.page/en/posts/from-fediverse-to-build-my-own-digital-space/)
-            - [Single-user Mastodon Instance is a Bad Idea](https://medium.com/@erinc/single-user-mastodon-instance-is-a-bad-idea-61cfaa62856a)
-        - [jakeg -> notes -> fediverse](https://jakegines.in/notes/fediverse)
-        - [ActivityPods: Personal data spaces powered with ActivityPub](https://activitypods.org/)
-        - tried matrix again and found a good TUI: [iamb](https://iamb.chat/)
+- fediverse related
+    -[Two Approaches to Solving the “Quiet Fediverse” Problem: Conversation Backfilling Mechanisms](https://hackers.pub/@hongminhee/2025/quiet-fediverse-two-approaches/en)
+    - [The fediverse, explained](https://www.theverge.com/24063290/fediverse-explained-activitypub-social-media-open-protocol)
+        - [Lemmy](https://join-lemmy.org/)
+        - [Pixelfed](https://pixelfed.org/)
+        - [BookWyrm](https://bookwyrm.social/)
+        - [PeerTube](https://joinpeertube.org/)
+    - [Pleroma](https://pleroma.social/): a lightweight federated social networking server powered by Elixir and PostgreSQL
+        - from [What Is Pleroma?](https://blog.soykaf.com/post/what-is-pleroma/)
+    - [From Fediverse to Creating Personal Digital Space with Memos](https://dev.charizard.page/en/posts/from-fediverse-to-build-my-own-digital-space/)
+        - [Single-user Mastodon Instance is a Bad Idea](https://medium.com/@erinc/single-user-mastodon-instance-is-a-bad-idea-61cfaa62856a)
+    - [jakeg -> notes -> fediverse](https://jakegines.in/notes/fediverse)
+    - [ActivityPods: Personal data spaces powered with ActivityPub](https://activitypods.org/)
+    - tried matrix again and found a good TUI: [iamb](https://iamb.chat/)
+    - [Threads is adding Fediverse content to social feeds](https://www.theverge.com/news/688267/threads-fediverse-feed-search)
 - wish to test x86 on ARM Mac
     - due to [Zig's self-hosted x86 backend is now default in Debug mode](https://ziglang.org/devlog/2025/?unique/#2025-06-08)
     - found [Intel-on-ARM and ARM-on-Intel](https://lima-vm.io/docs/config/multi-arch/) with lima
     - [container: tool for creating and running Linux containers using lightweight virtual machines on a Mac](https://github.com/apple/container)
-- read [AI at Amazon: a case study of brittleness](https://surfingcomplexity.blog/2025/06/08/ai-at-amazon-a-case-study-of-brittleness/)
+- [AI at Amazon: a case study of brittleness](https://surfingcomplexity.blog/2025/06/08/ai-at-amazon-a-case-study-of-brittleness/)
     - that's how things got stuck in a big org, or at least slowed down enought to suffocate innovation
         - Decompensation: a service fall over after receiving a spike in external requests, mostly due to hierarchical decision-making
         - Working at cross-purposes: introduced an almost Darwinian flavor to org dynamics where teams scrambled to get their work done to avoid getting reorged and subsumed into a competing team
         - Getting stuck in outdated behaviors: had to constantly justify our existence and massage our projects with metrics that could be seen as more customer-facing
-- read [Thank You, DataFusion: Queries in Rust, Without the Pain](http://pierrezemb.fr/posts/thank-you-datafusion/)
+- [Thank You, DataFusion: Queries in Rust, Without the Pain](http://pierrezemb.fr/posts/thank-you-datafusion/)
     - SQL as a library, not a service
     - own your storage, your execution model, your schema, your optimizer
     - offers [SQL] and [Dataframe] APIs, excellent performance, built-in support for CSV, Parquet, JSON, and Avro
     - paper: [Apache Arrow DataFusion: A Fast, Embeddable, Modular Analytic Query Engine](https://dl.acm.org/doi/10.1145/3626246.3653368)
     - should take a deep look into DuckDB
 - found [Black Hat Zig: Zig for offensive security.](https://www.reddit.com/r/Zig/comments/1l6tbph/black_hat_zig_zig_for_offensive_security/)
-- read [Training a Rust 1.5B Coder LM with Reinforcement Learning (GRPO) | Oxen.ai](https://ghost.oxen.ai/training-a-rust-1-5b-coder-lm-with-reinforcement-learning-grpo/)
+- [Training a Rust 1.5B Coder LM with Reinforcement Learning (GRPO) | Oxen.ai](https://ghost.oxen.ai/training-a-rust-1-5b-coder-lm-with-reinforcement-learning-grpo/)
 }}
 
-\subtree[2025-06-08]{\mdnote{2025-06-08: agent, blogging, claude, cloudflare, faer, optimization, pulp, rust, simd, zig}{
-- read [Vanishing zeroes for geometric algebra in Rust](https://dotat.at/@/2020-12-06-vanishing-zeroes-for-geometric-algebra-in-rust.html)
-- read [A plan for SIMD](https://linebender.org/blog/a-plan-for-simd/)
+\subtree[2025-06-08]{\mdnote{2025-06-08}{\tags{#agent #blogging #claude #cloudflare #faer #optimization #pulp #rust #simd #zig}
+- [Vanishing zeroes for geometric algebra in Rust](https://dotat.at/@/2020-12-06-vanishing-zeroes-for-geometric-algebra-in-rust.html)
+- [A plan for SIMD](https://linebender.org/blog/a-plan-for-simd/)
     - learn about [pulp](https://github.com/sarah-quinones/pulp) and [check its usage in faer](https://deepwiki.com/search/is-faer-only-using-pulp-for-si_877456ee-d5c0-4462-bf78-be43779cb07c)
-- read [Using Zig to Unit Test a C Application](https://mtlynch.io/notes/zig-unit-test-c/)
+- [Using Zig to Unit Test a C Application](https://mtlynch.io/notes/zig-unit-test-c/)
     - learn about `[*c]const u8`, `?[*:0]u8`, `.ptr`, `std.mem.span`, `allocator.dupeZ` etc.
-- read [Zig: First Impressions](https://deplet.ing/zig-first-impressions/)
-- read [Optimizations with Zig](https://alloc.dev/2025/06/07/zig_optimization)
+- [Zig: First Impressions](https://deplet.ing/zig-first-impressions/)
+- [Optimizations with Zig](https://alloc.dev/2025/06/07/zig_optimization)
     - learn about `align(64)`, `noalias`
-- read [Too Many Open Files](https://mattrighetti.com/2025/06/04/too-many-files-open.html)
-- read [A masochist's guide to web development](https://sebastiano.tronto.net/blog/2025-06-06-webdev/)
+- [Too Many Open Files](https://mattrighetti.com/2025/06/04/too-many-files-open.html)
+- [A masochist's guide to web development](https://sebastiano.tronto.net/blog/2025-06-06-webdev/)
     - found [Nissy: A Rubik's cube solver and FMC assistant](https://nissy.tronto.net/)
-- read [Field Notes From Shipping Real Code With Claude](https://diwank.space/field-notes-from-shipping-real-code-with-claude)
+- [Field Notes From Shipping Real Code With Claude](https://diwank.space/field-notes-from-shipping-real-code-with-claude)
     - great practice for `CLAUDE.md`, [AGENTS.md](https://github.com/julep-ai/julep/blob/main/AGENTS.md)
     - TODO: I should actually start working on my [CONVENTIONS.md](https://aider.chat/docs/usage/conventions.html)
     - related:
@@ -306,28 +410,32 @@
         - [Apple exposes Foundation Models API and... no new Siri](https://news.smol.ai/issues/25-06-09-apple-letdown/)
         - [A tale of two Claudes](https://steveklabnik.com/writing/a-tale-of-two-claudes/)
         - [Agentic Coding Recommendations](https://lucumr.pocoo.org/2025/6/12/agentic-coding/)
-- read [The Illusion of Thinking: Understanding the Strengths and Limitations of Reasoning Models via the Lens of Problem Complexity](https://machinelearning.apple.com/research/illusion-of-thinking)
+- [The Illusion of Thinking: Understanding the Strengths and Limitations of Reasoning Models via the Lens of Problem Complexity](https://machinelearning.apple.com/research/illusion-of-thinking)
     - accuracy progressively declines as problem complexity increases until reaching complete collapse (zero accuracy) beyond a modelspecific complexity threshold
     - [a rebuttal on X](https://x.com/giffmana/status/1931801836052189191) has some good discussion
         - for the puzzle Tower of Hannoi with too many disks, the collapse of accuracy is due to output token limit, and the models won't even try to reason with large number of moves, only explains the overall approach
         - using solution length as a proxy for task difficulty is flawed, e.g. ToH has a long output but low algorithmic complexity: it’s deterministic with no real branching
         - the paper's observations (collapse, token underuse, overthinking) [still seem to be solid](https://x.com/maw501/status/1932023882912825716)
+    - [Seven replies to the viral Apple reasoning paper and why they fall short](https://garymarcus.substack.com/p/seven-replies-to-the-viral-apple)
+        - [Simon Willison’s quotes and comments](https://simonwillison.net/2025/Jun/15/viral-apple-reasoning-paper/#atom-everything)
+    - [Why Claude's Comment Paper Is a Poor Rebuttal](https://victoramartinez.com/posts/why-claudes-comment-paper-is-a-poor-rebuttal/)
 - blogging related
     - [Thrive in obscurity](https://www.jeetmehta.com/posts/thrive-in-obscurity)
     - [is blogging romantic?](https://blog.avas.space/is-blogging-romantic/)
-- read [Interactive Guide: Mastering Rate Limiting](https://blog.sagyamthapa.com.np/interactive-guide-to-rate-limiting)
+    - [Why Comment Sections suck - re:I want to comment on your blog post](https://kami.bearblog.dev/why-comment-sections-suck-rei-want-to-comment-on-your-blog-post/)
+- [Interactive Guide: Mastering Rate Limiting](https://blog.sagyamthapa.com.np/interactive-guide-to-rate-limiting)
 }}
 
-\subtree[2025-06-07]{\mdnote{2025-06-07: git, perses, sqlite}{
-- read [Simplifying and Isolating Failure-Inducing Input (Delta Debugging)](https://www.cs.purdue.edu/homes/xyzhang/fall07/Papers/delta-debugging.pdf)
+\subtree[2025-06-07]{\mdnote{2025-06-07}{\tags{#git #perses #sqlite}
+- [Simplifying and Isolating Failure-Inducing Input (Delta Debugging)](https://www.cs.purdue.edu/homes/xyzhang/fall07/Papers/delta-debugging.pdf)
     - found [Perses: Syntax-Directed Program Reduction](https://github.com/uw-pluverse/perses)
     - found [WDD: Weighted Delta Debugging](https://arxiv.org/abs/2411.19410)
 - found [git-remote-sqlite: Single-file Git repos that can replicate with Litestream](https://github.com/chrislloyd/git-remote-sqlite)
 }}
 
-\subtree[2025-06-06]{\mdnote{2025-06-06: agent, apl, clojure, compiler, dspy, formal, gradient, jepsen, optimization, prompt}{
+\subtree[2025-06-06]{\mdnote{2025-06-06}{\tags{#agent #apl #clojure #compiler #dspy #formal #gradient #jepsen #optimization #prompt}
 - investigating DSPy (Demonstrate-Search-Predict)
-    - read [Pipelines & Prompt Optimization with DSPy](https://www.dbreunig.com/2024/12/12/pipelines-prompt-optimization-with-dspy.html)
+    - [Pipelines & Prompt Optimization with DSPy](https://www.dbreunig.com/2024/12/12/pipelines-prompt-optimization-with-dspy.html)
     - found [MLflow DSPy Flavor](https://mlflow.org/docs/latest/llms/dspy/index.html)
     - SIMBA (Stochastic Introspective Mini-Batch Ascent)
         - proceeds in a sequence of mini-batches seeking to make incremental improvements to the prompt instructions or few-shot examples
@@ -340,88 +448,91 @@
         - found [Zenbase](https://zenbase.ai/#code-examples)
         - found [Easy Dataset: Custom Prompts](https://docs.easy-dataset.com/ed/en/advanced/markdown)
             - i.e. I can use extra system prompt to generate Q&A pairs then use them to finetune an LM or optimize via DSPy to answer questions without such prompts
-- read [The next phase of jank's C++ interop](https://jank-lang.org/blog/2025-06-06-next-phase-of-interop/)
+- [The next phase of jank's C++ interop](https://jank-lang.org/blog/2025-06-06-next-phase-of-interop/)
     - found [compiler-research/CppInterOp: A Clang-based C++ Interoperability Library](https://github.com/compiler-research/CppInterOp)
         - [cppyy](https://cppyy.readthedocs.io/en/latest/) ([code](https://github.com/wlav/cppyy))
-- read [Sharing everything I could understand about gradient noise](https://blog.pkh.me/p/42-sharing-everything-i-could-understand-about-gradient-noise.html)
-- read [Small Programs and Languages](https://ratfactor.com/cards/pl-small)
-- read [APL tutorial](https://scharenbroch.dev/blog/apl-tutorial/)
-- read [John Carlos Baez on the shape of the Oort cloud](https://mathstodon.xyz/@johncarlosbaez/114636740505216155)
+- [Sharing everything I could understand about gradient noise](https://blog.pkh.me/p/42-sharing-everything-i-could-understand-about-gradient-noise.html)
+- [Small Programs and Languages](https://ratfactor.com/cards/pl-small)
+- [APL tutorial](https://scharenbroch.dev/blog/apl-tutorial/)
+- [John Carlos Baez on the shape of the Oort cloud](https://mathstodon.xyz/@johncarlosbaez/114636740505216155)
     - paper: [A Spiral Structure in the Inner Oort Cloud](https://iopscience.iop.org/article/10.3847/1538-4357/adbf9b)
 - found [Jepsen](https://jepsen.io/), a framework for distributed systems verification, with fault injection, written in Clojure
-    - read [Fuzzer Blind Spots (Meet Jepsen!)](https://tigerbeetle.com/blog/2025-06-06-fuzzer-blind-spots-meet-jepsen/)
-    - read [Jepsen: TigerBeetle 0.16.11](https://jepsen.io/analyses/tigerbeetle-0.16.11)
+    - [Fuzzer Blind Spots (Meet Jepsen!)](https://tigerbeetle.com/blog/2025-06-06-fuzzer-blind-spots-meet-jepsen/)
+    - [Jepsen: TigerBeetle 0.16.11](https://jepsen.io/analyses/tigerbeetle-0.16.11)
 }}
 
-\subtree[2025-06-06-2]{\mdnote{2025-06-06: apl, game, lean, shader, tla, vulkan, zig, zigar}{
-- read [AI is a gamechanger for TLA+ users](https://buttondown.com/hillelwayne/archive/ai-is-a-gamechanger-for-tla-users/)
-- read [In which I have Opinions about parsing and grammars](https://www.chiark.greenend.org.uk/~sgtatham/quasiblog/parsing/)
-- read [Experimenting with no-build Web Applications](https://andregarzia.com/2025/06/experimenting-with-no-build-web-applications.html)
-- read [Zigar 0.14.1: stream integration and more](https://www.reddit.com/r/Zig/comments/1l3hr3p/zigar_0141_stream_integration_and_more/)
-- read [The Lean FRO Year 2 Roadmap](https://lean-fro.org/about/roadmap-y2/)
+\subtree[2025-06-06-2]{\mdnote{2025-06-06}{\tags{#apl #game #lean #shader #tla #vulkan #zig #zigar}
+- [AI is a gamechanger for TLA+ users](https://buttondown.com/hillelwayne/archive/ai-is-a-gamechanger-for-tla-users/)
+- [In which I have Opinions about parsing and grammars](https://www.chiark.greenend.org.uk/~sgtatham/quasiblog/parsing/)
+- [Experimenting with no-build Web Applications](https://andregarzia.com/2025/06/experimenting-with-no-build-web-applications.html)
+- [Zigar 0.14.1: stream integration and more](https://www.reddit.com/r/Zig/comments/1l3hr3p/zigar_0141_stream_integration_and_more/)
+- [The Lean FRO Year 2 Roadmap](https://lean-fro.org/about/roadmap-y2/)
 - found [No More Shading Languages: Compiling C++ to Vulkan Shaders](https://xol.io/random/vcc-paper.pdf)
 - found [APLearn: machine learning library](https://github.com/BobMcDear/aplearn)
-- read [I Think I’m Done Thinking About genAI For Now](https://blog.glyph.im/2025/06/i-think-im-done-thinking-about-genai-for-now.html)
+- [I Think I’m Done Thinking About genAI For Now](https://blog.glyph.im/2025/06/i-think-im-done-thinking-about-genai-for-now.html)
 }}
 
-\subtree[2025-06-05]{\mdnote{2025-06-05: claude, compiler, jujutsu, lean, mongodb, rust, security, tla}{
-- read [Physicality: the new age of UI](https://www.lux.camera/physicality-the-new-age-of-ui/)
+\subtree[2025-06-05]{\mdnote{2025-06-05}{\tags{#claude #compiler #jujutsu #lean #mongodb #rust #security #tla}
+- [Physicality: the new age of UI](https://www.lux.camera/physicality-the-new-age-of-ui/)
     - love it
-- read [jujutsu on tangled](https://blog.tangled.sh/stacking)
+- [jujutsu on tangled](https://blog.tangled.sh/stacking)
     - it's really powerful to edit a changeset to keep commits/PRs clean and focused, no more frustrating rebasing
     - maybe I'll really start using `jj`
     - related: [Example of Splitting a PR](https://www.jefftk.com/p/example-of-splitting-a-pr)
-- read [Why I Think Lean Software Development is Wrong](https://patricia.no/2025/05/30/why_lean_software_dev_is_wrong.html)
-- read [How Compiler Explorer Works in 2025](https://xania.org/202506/how-compiler-explorer-works)
+- [Why I Think Lean Software Development is Wrong](https://patricia.no/2025/05/30/why_lean_software_dev_is_wrong.html)
+- [How Compiler Explorer Works in 2025](https://xania.org/202506/how-compiler-explorer-works)
     - learn about [nsjail](https://nsjail.dev/), a lightweight process isolation tool that’s basically a paranoid security guard for processes
 - vibe coding
     - [Claude Code is My Computer](https://steipete.me/posts/2025/claude-code-is-my-computer)
     - [Vibe coding case study: ScubaDuck](https://blog.ezyang.com/2025/06/vibe-coding-case-study-scubaduck/)
-- read [Deep learning gets the glory, deep fact checking gets ignored](https://rachel.fast.ai/posts/2025-06-04-enzyme-ml-fails/index.html)
-- read [Conformance Checking at MongoDB: Testing That Our Code Matches Our TLA+ Specs | MongoDB Blog](https://www.mongodb.com/blog/post/engineering/conformance-checking-at-mongodb-testing-our-code-matches-our-tla-specs)
-- read [NLWeb: Protocol for AI-Powered Website Search](https://glama.ai/blog/2025-06-01-what-is-nlweb)
+- [Deep learning gets the glory, deep fact checking gets ignored](https://rachel.fast.ai/posts/2025-06-04-enzyme-ml-fails/index.html)
+- [Conformance Checking at MongoDB: Testing That Our Code Matches Our TLA+ Specs | MongoDB Blog](https://www.mongodb.com/blog/post/engineering/conformance-checking-at-mongodb-testing-our-code-matches-our-tla-specs)
+- [NLWeb: Protocol for AI-Powered Website Search](https://glama.ai/blog/2025-06-01-what-is-nlweb)
     - we really nead a lot of AI-facing protocols, MCP, A2A, NLWeb, `llm.txt` etc.
-- read [Tests should not contain logic](https://blog.snork.dev/posts/tests-should-not-contain-logic.html)
-- read [Script Debugger Retired](https://latenightsw.com/script-debugger-retired/), IDE for AppleScript
+- [Tests should not contain logic](https://blog.snork.dev/posts/tests-should-not-contain-logic.html)
+- [Script Debugger Retired](https://latenightsw.com/script-debugger-retired/), IDE for AppleScript
 }}
 
-\subtree[2025-06-02]{\mdnote{2025-06-02: benchmark, compiler, json, rust, z3, ✍️}{
-- read [Fast character classification with z3](https://lemire.me/blog/2025/06/01/easy-vectorized-classification-with-z3/)
+\subtree[2025-06-02]{\mdnote{2025-06-02}{\tags{#aria #benchmark #compiler #json #rust #z3 #✍️}
+- [Fast character classification with z3](https://lemire.me/blog/2025/06/01/easy-vectorized-classification-with-z3/)
 - structured error
-    - read [Designing Error Types in Rust Libraries](https://d34dl0ck.me/rust-bites-designing-error-types-in-rust-libraries/index.html)
-    - read [Structured errors in Go](https://southcla.ws/structured-errors-in-go)
-    - read [Why Use Structured Errors in Rust Applications?](https://home.expurple.me/posts/why-use-structured-errors-in-rust-applications/)
+    - [Designing Error Types in Rust Libraries](https://d34dl0ck.me/rust-bites-designing-error-types-in-rust-libraries/index.html)
+    - [Structured errors in Go](https://southcla.ws/structured-errors-in-go)
+    - [Why Use Structured Errors in Rust Applications?](https://home.expurple.me/posts/why-use-structured-errors-in-rust-applications/)
 - minimalizing Rust
-    - read [Why am I writing a Rust compiler in C?](https://notgull.net/announcing-dozer/)
-    - read [How to deal with Rust dependencies](https://notgull.net/rust-dependencies/)
-    - read [Reducing Cargo target directory size with -Zno-embed-metadata](https://kobzol.github.io/rust/rustc/2025/06/02/reduce-cargo-target-dir-size-with-z-no-embed-metadata.html)
+    - [Why am I writing a Rust compiler in C?](https://notgull.net/announcing-dozer/)
+    - [How to deal with Rust dependencies](https://notgull.net/rust-dependencies/)
+    - [Reducing Cargo target directory size with -Zno-embed-metadata](https://kobzol.github.io/rust/rustc/2025/06/02/reduce-cargo-target-dir-size-with-z-no-embed-metadata.html)
 - found [benchmark-gui](https://github.com/skarupke/benchmark-gui)
     - from [I’m Open-Sourcing my Custom Benchmark GUI](https://probablydance.com/2025/05/31/im-open-sourcing-my-custom-benchmark-gui/)
-- read [The DuckLake Manifesto: SQL as a Lakehouse Format](https://ducklake.select/manifesto/)
-- read [Progressive JSON](https://overreacted.io/progressive-json/)
-- read [johncarlosbaez's post on mathstodon.xyz](https://mathstodon.xyz/@johncarlosbaez/114607489890551731) about [a viXra branch devoted to AI-assisted papers](https://ai.vixra.org/)
+- [The DuckLake Manifesto: SQL as a Lakehouse Format](https://ducklake.select/manifesto/)
+- [Progressive JSON](https://overreacted.io/progressive-json/)
+- [johncarlosbaez's post on mathstodon.xyz](https://mathstodon.xyz/@johncarlosbaez/114607489890551731) about [a viXra branch devoted to AI-assisted papers](https://ai.vixra.org/)
 - learning speed solving Rubik's cube, see [[uts-016J]]
-- read [Devstral](https://mistral.ai/news/devstral)
+- [Devstral](https://mistral.ai/news/devstral)
     - see also [devstral-small-2505-mlx](https://lmstudio.ai/model/devstral-small-2505-mlx)
-- read [WebAIM: Up and Coming ARIA](https://webaim.org/blog/up-and-coming-aria/)
-    - learn about aria features and roles, it also has demo
+- ARIA related
+    - [What I Wish Someone Told Me When I Was Getting into ARIA](https://www.smashingmagazine.com/2025/06/what-i-wish-someone-told-me-aria/) ([on HN](https://news.ycombinator.com/item?id=44299930))
+    - [Selfish reasons for building accessible UIs](https://nolanlawson.com/2025/06/16/selfish-reasons-for-building-accessible-uis/)
+    - [WebAIM: Up and Coming ARIA](https://webaim.org/blog/up-and-coming-aria/)
+        - learn about aria features and roles, it also has demo
 }}
 
-\subtree[2025-06-01]{\mdnote{2025-06-01: git, lean, neovim, tla, zig, ✍️}{
-- read [Tools built on tree-sitter's concrete syntax trees](https://www.scannedinavian.com/tools-built-on-tree-sitters-concrete-syntax-trees.html)
+\subtree[2025-06-01]{\mdnote{2025-06-01}{\tags{#git #lean #neovim #tla #zig #✍️}
+- [Tools built on tree-sitter's concrete syntax trees](https://www.scannedinavian.com/tools-built-on-tree-sitters-concrete-syntax-trees.html)
     - found [ssr.nvim](https://github.com/cshuaimin/ssr.nvim), Structural search and replace for Neovim, seems more convenient than `ast-grep`
     - should take a look at
         - [GritQL](https://github.com/honeycombio/gritql)
         - [srgn](https://crates.io/crates/srgn/)
     - found [mergiraf](https://codeberg.org/mergiraf/mergiraf), a syntax-aware git merge driver
     - reviewed [Quint](https://quint-lang.org/), a modern and executable specification language, as "an updated take on TLA+"
-- read [My experience so far with Zig – a Go dev’s journey](https://www.reddit.com/r/Zig/comments/1l05t3u/my_experience_so_far_with_zig_a_go_devs_journey/)
+- [My experience so far with Zig – a Go dev’s journey](https://www.reddit.com/r/Zig/comments/1l05t3u/my_experience_so_far_with_zig_a_go_devs_journey/)
     - found [backstage: an experimental implementation of an actor framework](https://github.com/Thomvanoorschot/backstage): a great example Zig project using libxev
     - found [Zignite: Cross-Platform Graphics Engine](https://github.com/Thomvanoorschot/zignite)
-- read [tao's post on mathstodon.xyz](https://mathstodon.xyz/@tao/114603605315214772)
+- [tao's post on mathstodon.xyz](https://mathstodon.xyz/@tao/114603605315214772)
     - Tao launched a "Lean companion" to his real analysis undergraduate textbook "Analysis I" at [teorth/analysis](https://github.com/teorth/analysis)
     - blog post: [A Lean companion to “Analysis I”](https://terrytao.wordpress.com/2025/05/31/a-lean-companion-to-analysis-i/)
-- read [Half Spectre, Full Exploit: Hardening Rowhammer Attacks with Half-Spectre Gadgets](https://download.vusec.net/papers/halfspectre_sp25.pdf)
+- [Half Spectre, Full Exploit: Hardening Rowhammer Attacks with Half-Spectre Gadgets](https://download.vusec.net/papers/halfspectre_sp25.pdf)
     - ProbeHammer, the first crash-free end-to-end Rowhammer exploit that does not rely on templating or massaging
     - monitor a controlled victim’s physical memory activity at the cache line granularity
 - found [prose: Serve your blog using SSH](https://pico.sh/prose)
@@ -438,11 +549,11 @@
 % realized that I can open links in NeoVim by Cmd+Shift+Click
 % tried [Ente Photos v1](https://ente.io/blog/v1)
 
-\subtree[2025-05-31]{\mdnote{2025-05-31: agent, dspy, lean, prompt, rust}{
+\subtree[2025-05-31]{\mdnote{2025-05-31}{\tags{#agent #dspy #lean #prompt #rust}
 - found [C++ to Rust Phrasebook](https://cel.cs.brown.edu/crp/title-page.html)
-- read [Simpler backoff](https://commaok.xyz/post/simple-backoff/)
-- read [Consider Knitting](http://journal.stuffwithstuff.com/2025/05/30/consider-knitting/)
-- read [Lean-auto: An Interface between Lean 4 and Automated Theorem Provers](https://arxiv.org/abs/2505.14929)
+- [Simpler backoff](https://commaok.xyz/post/simple-backoff/)
+- [Consider Knitting](http://journal.stuffwithstuff.com/2025/05/30/consider-knitting/)
+- [Lean-auto: An Interface between Lean 4 and Automated Theorem Provers](https://arxiv.org/abs/2505.14929)
     - found [Zipperposition](https://sneeuwballen.github.io/zipperposition/)
 - found [Programming Beyond Practices](https://notes.skillstopractice.com/pbp.pdf)
 - investigate DSPy
@@ -453,44 +564,45 @@
         - [Advances and Challenges in Foundation Agents: From Brain-Inspired Intelligence to Evolutionary, Collaborative, and Safe Systems](https://arxiv.org/abs/2504.01990)
 }}
 
-\subtree[2025-05-30]{\mdnote{2025-05-30: formal, rust}{
+\subtree[2025-05-30]{\mdnote{2025-05-30}{\tags{#formal #rust}
 - found [Grog: the mono-repo build tool for the grug-brained dev](https://grog.build/)
     - then the configuration language [Pkl: Configuration that is Programmable, Scalable, and Safe](https://pkl-lang.org/)
-- read [Rust doesn't actually follow its Golden Rule (when it comes to async functions)](https://lukasatkinson.de/2023/rust-no-golden-rule/)
-- read [Parse, don’t validate](https://lexi-lambda.github.io/blog/2019/11/05/parse-don-t-validate/)
-- read [When was the last time you broke production and how?](https://lobste.rs/s/ytefme/when_was_last_time_you_broke_production)
+    - [The Grug Brained Developer (2022)](https://grugbrain.dev/)
+- [Rust doesn't actually follow its Golden Rule (when it comes to async functions)](https://lukasatkinson.de/2023/rust-no-golden-rule/)
+- [Parse, don’t validate](https://lexi-lambda.github.io/blog/2019/11/05/parse-don-t-validate/)
+- [When was the last time you broke production and how?](https://lobste.rs/s/ytefme/when_was_last_time_you_broke_production)
 }}
 
-\subtree[2025-05-29]{\mdnote{2025-05-29: misc}{
-- read [Why Your AI Coding Assistant Keeps Doing It Wrong, and How To Fix It](https://blog.thepete.net/blog/2025/05/22/why-your-ai-coding-assistant-keeps-doing-it-wrong-and-how-to-fix-it/)
-- read [workflows for ai coding](https://anniecherkaev.com/the-times-they-are-ai-changing)
+\subtree[2025-05-29]{\mdnote{2025-05-29}{\tags{#misc}
+- [Why Your AI Coding Assistant Keeps Doing It Wrong, and How To Fix It](https://blog.thepete.net/blog/2025/05/22/why-your-ai-coding-assistant-keeps-doing-it-wrong-and-how-to-fix-it/)
+- [workflows for ai coding](https://anniecherkaev.com/the-times-they-are-ai-changing)
     - interesting take on human attention span
-- read [Compiling a Neural Net to C for a 1,744× speedup](https://slightknack.dev/blog/difflogic/)
+- [Compiling a Neural Net to C for a 1,744× speedup](https://slightknack.dev/blog/difflogic/)
 }}
 
-\subtree[2025-05-28]{\mdnote{2025-05-28: agent, gpu, performance, proof, render}{
-- read [WebGPU Fluid Simulations: High Performance & Real-Time Rendering](https://tympanus.net/codrops/2025/02/26/webgpu-fluid-simulations-high-performance-real-time-rendering/)
+\subtree[2025-05-28]{\mdnote{2025-05-28}{\tags{#agent #gpu #performance #proof #render}
+- [WebGPU Fluid Simulations: High Performance & Real-Time Rendering](https://tympanus.net/codrops/2025/02/26/webgpu-fluid-simulations-high-performance-real-time-rendering/)
 - learn about [uzi](https://github.com/devflowinc/uzi)
     - from [LLM Codegen go Brrr – Parallelization with Git Worktrees and Tmux](https://www.skeptrune.com/posts/git-worktrees-agents-and-tmux/)
-- read [A thought on JavaScript "proof of work" anti-scraper systems](https://utcc.utoronto.ca/~cks/space/blog/web/JavaScriptScraperObstacles)
-- read [What a Difference a Faster Hash Makes](https://nickdrozd.github.io/2025/05/27/faster-hash.html)
+- [A thought on JavaScript "proof of work" anti-scraper systems](https://utcc.utoronto.ca/~cks/space/blog/web/JavaScriptScraperObstacles)
+- [What a Difference a Faster Hash Makes](https://nickdrozd.github.io/2025/05/27/faster-hash.html)
 }}
 
-\subtree[2025-05-27]{\mdnote{2025-05-27: misc}{
+\subtree[2025-05-27]{\mdnote{2025-05-27}{\tags{#misc}
 - found [Effekt Language: Home](https://effekt-lang.org/)
-- read [The Three Kinds of Money](https://principles.page/three-money-types/)
+- [The Three Kinds of Money](https://principles.page/three-money-types/)
     - summarized with doubao, then inspired me to work on mermaid and markmap integration
-- read [The two types of open source](https://filiph.net/text/two-types-of-open-source.html)
+- [The two types of open source](https://filiph.net/text/two-types-of-open-source.html)
 }}
 
-\subtree[2025-05-26]{\mdnote{2025-05-26: bevy, exif, formal, game, id3, physics, rust, zig, ✍️}{
+\subtree[2025-05-26]{\mdnote{2025-05-26}{\tags{#bevy #exif #formal #game #id3 #physics #rust #zig #✍️}
 - found [F2](https://f2.freshman.tech/guide/how-variables-work), a bulk renaming tool that supports metadata such as EXIF, ID3 and more
-- read Idiomatic Rust
+- Idiomatic Rust
     - [Don't Worry About Lifetimes](https://corrode.dev/blog/lifetimes/)
     - [Don't Unwrap Options: There Are Better Ways](https://corrode.dev/blog/rust-option-handling-best-practices/)
     - [Thinking in Expressions](https://corrode.dev/blog/expressions/)
 - found [DumPy: NumPy except it's OK if you're dum](https://dynomight.net/dumpy/)
-- read [Against Curry-Howard Mysticism](https://liamoc.net/forest/loc-000S/)
+- [Against Curry-Howard Mysticism](https://liamoc.net/forest/loc-000S/)
 - found [Reinforcement Learning: An Overview](https://arxiv.org/abs/2412.05265)
 - found [Modeling Nonlinear Dynamics from Equations and Data — with Applications to Solids, Fluids, and Controls](https://epubs.siam.org/doi/10.1137/1.9781611978353)
 - found [The Ultimate Guide to Fine-Tuning LLMs from Basics to Breakthroughs: An Exhaustive Review of Technologies, Research, Best Practices, Applied Research Challenges and Opportunities](https://arxiv.org/abs/2408.13296)
@@ -498,31 +610,31 @@
     - found [Pong Wars](https://github.com/vnglst/pong-wars)
         - maybe it's fun to rewrite it in Zig, or with Bevy, possibly in 3D
     - [Car Physics for Games](\verb>>>|https://www.asawicki.info/Mirror/Car%20Physics%20for%20Games/Car%20Physics%20for%20Games.html>>>)
-- read [I made a font](https://blog.chay.dev/i-made-a-font/)
-- read [Someone rewrote my Zig CLI in Rust? Let's compare!](https://www.reddit.com/r/Zig/comments/1kv1ozw/someone_rewrote_my_zig_cli_in_rust_lets_compare/)
+- [I made a font](https://blog.chay.dev/i-made-a-font/)
+- [Someone rewrote my Zig CLI in Rust? Let's compare!](https://www.reddit.com/r/Zig/comments/1kv1ozw/someone_rewrote_my_zig_cli_in_rust_lets_compare/)
 - found [Transformer Copilot: Learning from The Mistake Log in LLM Fine-tuning](https://huggingface.co/papers/2505.16270)
     - I've long wished for this kind of meaningful learning, instead of just fine-tuning weights according to loss
 - thoughts on software
-    - read [Design Pressure: The Invisible Hand That Shapes Your Code](https://hynek.me/talks/design-pressure/)
-    - read [Systematic design of multi-join GROUP BY queries](https://kb.databasedesignbook.com/posts/systematic-design-of-join-queries/)
-    - read [Reinvent the Wheel](https://endler.dev/2025/reinvent-the-wheel/)
-    - read [How to Guarantee Your Red Team Will Fail](https://0xda.de/garden/guarantee-red-team-failure/)
-    - read [On File Formats](https://solhsa.com/oldernews2025.html#ON-FILE-FORMATS)
-    - read [What Works (and Doesn't) Selling Formal Methods](https://www.galois.com/articles/what-works-and-doesnt-selling-formal-methods)
+    - [Design Pressure: The Invisible Hand That Shapes Your Code](https://hynek.me/talks/design-pressure/)
+    - [Systematic design of multi-join GROUP BY queries](https://kb.databasedesignbook.com/posts/systematic-design-of-join-queries/)
+    - [Reinvent the Wheel](https://endler.dev/2025/reinvent-the-wheel/)
+    - [How to Guarantee Your Red Team Will Fail](https://0xda.de/garden/guarantee-red-team-failure/)
+    - [On File Formats](https://solhsa.com/oldernews2025.html#ON-FILE-FORMATS)
+    - [What Works (and Doesn't) Selling Formal Methods](https://www.galois.com/articles/what-works-and-doesnt-selling-formal-methods)
 }}
 
-\subtree[2025-05-25]{\mdnote{2025-05-25: formal, galgebra, haskell, lean, ocaml, rust, theory, zig}{
-- read [Having your compile-time cake and eating it too](https://0x44.xyz/blog/comptime-1)
+\subtree[2025-05-25]{\mdnote{2025-05-25}{\tags{#formal #galgebra #haskell #lean #ocaml #rust #theory #zig}
+- [Having your compile-time cake and eating it too](https://0x44.xyz/blog/comptime-1)
     - [Hindley-Milner (HM)](\verb>>>|https://en.wikipedia.org/wiki/Hindley%E2%80%93Milner_type_system>>>), the most popular human-friendly type system, used in Swift, Rust, Scala, Haskell, OCaml etc.
     - proposed four big features to replace pretty much all Rust macros, including derive ones, while keeping Rust's type system, and achieving (most of) Zig's comptime features
         - `@` or `@=`
         - `Abstract`
         - `TypeInfo` and `Field`
         - `Code` and `parse`
-- read [CAPTCHAs don't work any more for ticket sellers](https://behind.pretix.eu/2025/05/23/captchas-are-over/)
-- read [Concepts vs type traits](https://akrzemi1.wordpress.com/2025/05/24/concepts-vs-type-traits/)
-- read [tachy0n: The last 0day jailbreak](https://blog.siguza.net/tachy0n/)
-- read [Who needs graph theory anyway?](https://www.tumblr.com/readevalprint/97467849358/who-needs-graph-theory-anyway)
+- [CAPTCHAs don't work any more for ticket sellers](https://behind.pretix.eu/2025/05/23/captchas-are-over/)
+- [Concepts vs type traits](https://akrzemi1.wordpress.com/2025/05/24/concepts-vs-type-traits/)
+- [tachy0n: The last 0day jailbreak](https://blog.siguza.net/tachy0n/)
+- [Who needs graph theory anyway?](https://www.tumblr.com/readevalprint/97467849358/who-needs-graph-theory-anyway)
     - solving the word segmentation problem using graph theory by modeling it as a longest path problem in a directed acyclic graph (DAG) with dynamic programming
 - found [Domain Theory Lecture Notes](https://liamoc.net/forest/dt-001Y/index.xml)
 - generate and read the following DeepWiki:
@@ -532,33 +644,33 @@
     - [pygae/galgebra](https://deepwiki.com/pygae/galgebra)
     - [utensil/forest](https://deepwiki.com/utensil/forest)
 - use GenSpark to generate [Follow-up Research after Formalizing Geometric Algebra in Lean](https://www.genspark.ai/slides?project_id=c36784da-1876-4ec6-bf09-fb166b647a1a)
-- read [Does gratitude increase happiness?](https://dynomight.net/gratitude/)
+- [Does gratitude increase happiness?](https://dynomight.net/gratitude/)
 }}
 
-\subtree[2025-05-24]{\mdnote{2025-05-24: apl, arm, claude, compiler, git, haskell, hiedb, lean, prompt, rust}{
-- read [Anthropic’s ‘System Card’ for Claude 4 (Opus and Sonnet)](https://www-cdn.anthropic.com/4263b940cabb546aa0e3283f35b686f4f3b2ff47.pdf)
+\subtree[2025-05-24]{\mdnote{2025-05-24}{\tags{#apl #arm #claude #compiler #git #haskell #hiedb #lean #prompt #rust}
+- [Anthropic’s ‘System Card’ for Claude 4 (Opus and Sonnet)](https://www-cdn.anthropic.com/4263b940cabb546aa0e3283f35b686f4f3b2ff47.pdf)
     - particularly fun reading
         - 4.1.1.1 Continuations of self-exfiltration attempts
         - 4.1.1.2 Opportunistic blackmail
         - 4.1.1.3 Self-exfiltration under extreme circumstances
         - 4.1.3 Excessive compliance with harmful system-prompt instructions
             - "mistakenly omitted the only finetuning dataset that included harmful system prompts"
-- read [Forgotten APL Influences (2016)](https://pok.acm.org/meetings/foils/McGrew18paper.pdf)
+- [Forgotten APL Influences (2016)](https://pok.acm.org/meetings/foils/McGrew18paper.pdf)
 - learn about [Glean](https://glean.software/)
     - a system for collecting, deriving and querying facts about source code
     - from [Indexing Hackage: Glean vs. hiedb](https://simonmar.github.io/posts/2025-05-22-Glean-Haskell.html)
-- read [Pain in the dots](https://matthew-brett.github.io/pydagogue/pain_in_dots.html)
+- [Pain in the dots](https://matthew-brett.github.io/pydagogue/pain_in_dots.html)
     - different semantics of two and three dot notation for `git log` and `git diff`
-- read [Make Your Phone Grayscale](https://blog.alexbeals.com/posts/make-your-phone-grayscale)
+- [Make Your Phone Grayscale](https://blog.alexbeals.com/posts/make-your-phone-grayscale)
     - I've already started the practice, combining it with all-day nightshift mode
-- read [The GCC compiler backend can now fully bootstrap the Rust compiler](https://old.reddit.com/r/rust/comments/1ktph3c/media_the_gcc_compiler_backend_can_now_fully)
+- [The GCC compiler backend can now fully bootstrap the Rust compiler](https://old.reddit.com/r/rust/comments/1ktph3c/media_the_gcc_compiler_backend_can_now_fully)
 }}
 
 \subtree[2025-05-23]{
-\mdnote{2025-05-23: ocaml, rust, tla, ✍️}{
-- read [Why I love OCaml](https://mccd.space/posts/ocaml-the-worlds-best/)
-- read [How to Get Your Research Paper Accepted](https://maxwellforbes.com/posts/how-to-get-a-paper-accepted)
-- read [Fork Union: Beyond OpenMP in C++ and Rust?](https://ashvardanian.com/posts/beyond-openmp-in-cpp-rust/)
+\mdnote{2025-05-23}{\tags{#ocaml #rust #tla #✍️}
+- [Why I love OCaml](https://mccd.space/posts/ocaml-the-worlds-best/)
+- [How to Get Your Research Paper Accepted](https://maxwellforbes.com/posts/how-to-get-a-paper-accepted)
+- [Fork Union: Beyond OpenMP in C++ and Rust?](https://ashvardanian.com/posts/beyond-openmp-in-cpp-rust/)
 - found languages
     - [Wren](https://wren.io/), a small, fast, class-based concurrent scripting language
         - "Think Smalltalk in a Lua-sized package with a dash of Erlang and wrapped up in a familiar, modern syntax."
@@ -567,6 +679,8 @@
         - from [Finding hard 24 puzzles with planner programming](https://buttondown.com/hillelwayne/archive/finding-hard-24-puzzles-with-planner-programming/)
             - "the only language that I know has a built-in planner module"
     - [Dark](https://darklang.com/), a serverless backend language
+        - [Darklang Goes Open Source](https://blog.darklang.com/darklang-goes-open-source/)
+        - [Goodbye Dark Inc. - Hello Darklang Inc](https://blog.darklang.com/goodbye-dark-inc-welcome-darklang-inc/)
     - [Roto](https://github.com/NLnetLabs/roto)
         - from [Introducing Roto: A Compiled Scripting Language for Rust](https://blog.nlnetlabs.nl/introducing-roto-a-compiled-scripting-language-for-rust/)
     - [Janet](https://janet-lang.org/)
@@ -576,71 +690,73 @@
 }
 }
 
-\subtree[2025-05-22]{\mdnote{2025-05-22: formal, galgebra}{
-- read [Adventures in Symbolic Algebra with Model Context Protocol](https://www.stephendiehl.com/posts/computer_algebra_mcp/)
+\subtree[2025-05-22]{\mdnote{2025-05-22}{\tags{#formal #galgebra}
+- [Adventures in Symbolic Algebra with Model Context Protocol](https://www.stephendiehl.com/posts/computer_algebra_mcp/)
     - maybe I should create MCP for GAlgebra
     - followup: [Interfacing MCP with Combinatorial, Convex, and SMT Solvers](https://www.stephendiehl.com/posts/smt_and_mcp_solvers/)
-- read [Transpiler is a meaningless word (2023)](https://people.csail.mit.edu/rachit/post/transpiler/)
+- [Transpiler is a meaningless word (2023)](https://people.csail.mit.edu/rachit/post/transpiler/)
     - maybe that means I should give up on the idea that I could build a Forester transpiler
 - found [Obsidian Bases](https://mas.to/@obsidian/114546538858212821)
 }}
 
-\subtree[2025-05-21]{\mdnote{2025-05-21: sqlite}{
-- read [If composers were hackers](https://mmapped.blog/posts/18-if-composers-were-hackers)
+\subtree[2025-05-21]{\mdnote{2025-05-21}{\tags{#sqlite}
+- [If composers were hackers](https://mmapped.blog/posts/18-if-composers-were-hackers)
 - found [Litestream: Revamped](https://fly.io/blog/litestream-revamped/), making SQLite apps reliably recoverable from object storage
-- read [The Ingredients of a Productive Monorepo](https://blog.swgillespie.me/posts/monorepo-ingredients/)
+- [The Ingredients of a Productive Monorepo](https://blog.swgillespie.me/posts/monorepo-ingredients/)
 }}
 
-\subtree[2025-05-20]{\mdnote{2025-05-20: gpu}{
-- read [Not causal chains, but interactions and adaptations](https://surfingcomplexity.blog/2025/05/19/not-causal-chains-but-interactions-and-adaptations/)
+\subtree[2025-05-20]{\mdnote{2025-05-20}{\tags{#gpu}
+- [Not causal chains, but interactions and adaptations](https://surfingcomplexity.blog/2025/05/19/not-causal-chains-but-interactions-and-adaptations/)
     - RCA(root cause analysis) model v.s. RE(resilience engineering) model, for incidents
     - related
         - [The same incident never happens twice, but the patterns recur over and over](https://surfingcomplexity.blog/2025/05/26/the-same-incident-never-happens-twice-but-the-patterns-recur-over-and-over/)
-- read [Open Source Can't Coordinate](https://matklad.github.io/2025/05/20/open-source-cant-coordinate.html)
-- read [Particle Life simulation in browser using WebGPU](https://lisyarus.github.io/blog/posts/particle-life-simulation-in-browser-using-webgpu.html)
+        - [Quick takes on the GCP public incident write-up](https://surfingcomplexity.blog/2025/06/14/quick-takes-on-the-gcp-public-incident-write-up/)
+            - [“What went well” is more than just a pat on the back](https://surfingcomplexity.blog/2025/06/14/what-went-well-is-more-than-just-a-pat-on-the-back/)
+- [Open Source Can't Coordinate](https://matklad.github.io/2025/05/20/open-source-cant-coordinate.html)
+- [Particle Life simulation in browser using WebGPU](https://lisyarus.github.io/blog/posts/particle-life-simulation-in-browser-using-webgpu.html)
 }}
 
-\subtree[2025-05-19]{\mdnote{2025-05-19: agent, docker, lemmy, mastodon, qwen}{
-- read [Agent Recursion](https://choly.ca/post/agent-recursion/)
-- read [Semgrep: AutoFixes using LLMs](https://choly.ca/post/semgrep-autofix-llm/)
+\subtree[2025-05-19]{\mdnote{2025-05-19}{\tags{#agent #docker #lemmy #mastodon #qwen}
+- [Agent Recursion](https://choly.ca/post/agent-recursion/)
+- [Semgrep: AutoFixes using LLMs](https://choly.ca/post/semgrep-autofix-llm/)
     - found a few alternatives to `semgrep`, e.g. [ast-grep](https://ast-grep.github.io/)
-- read [Adding Mastodon Comments to your Blog](https://beej.us/blog/data/mastodon-comments/)
+- [Adding Mastodon Comments to your Blog](https://beej.us/blog/data/mastodon-comments/)
     - [Mastodon as comment system for your static blog](https://danielpecos.com/2022/12/25/mastodon-as-comment-system-for-your-static-blog/)
     - [My blog now has Lemmy comments](https://blog.coship.fyi/blog/lemmy-comments/)
     - learn about [Glasp: Highlight the Internet & Build Your AI Clone](https://glasp.co/)
-- read [async/await versus the Calloop Model](https://notgull.net/calloop/)
-- read [Mimalloc Cigarette: Losing one week of my life catching a memory leak](https://pwy.io/posts/mimalloc-cigarette/)
-- read [Ditching Obsidian and building my own](https://amberwilliams.io/blogs/building-my-own-pkms)
+- [async/await versus the Calloop Model](https://notgull.net/calloop/)
+- [Mimalloc Cigarette: Losing one week of my life catching a memory leak](https://pwy.io/posts/mimalloc-cigarette/)
+- [Ditching Obsidian and building my own](https://amberwilliams.io/blogs/building-my-own-pkms)
 - found [Qwen3 Technical Report](https://huggingface.co/papers/2505.09388)
 - found [TestDesiderata](https://testdesiderata.com/)
 - found [macOS VMs in a Docker Container](https://github.com/trycua/cua/tree/main/libs/lumier)
 }}
 
-\subtree[2025-05-18]{\mdnote{2025-05-18: apl, compiler, game, gpu, performance, physics, quantum, shader, zig}{
+\subtree[2025-05-18]{\mdnote{2025-05-18}{\tags{#apl #compiler #game #gpu #performance #physics #quantum #shader #zig}
 - found [Algorithms by Jeff Erickson (2019)](https://jeffe.cs.illinois.edu/teaching/algorithms)
-- read \citef{van2025comparing}
+- \citef{van2025comparing}
     - learned that APL can run on GPU via [Dyalog](https://www.dyalog.com/), the paper even discussed a flash attention implementation
     - [BQN](https://razetime.github.io/learnxinyminutes-docs/bqn) [doesn't](https://mlochbaum.github.io/BQN/implementation/codfns.html) seem to run on GPU
     - it might be interesting to use [arrayfire](https://arrayfire.com/) [C API](https://arrayfire.org/docs/gettingstarted.htm#gettingstarted_api_usage), even [on Mac](https://arrayfire.org/docs/using_on_osx.htm)
     - prefer [tilelang](https://github.com/tile-ai/tilelang) to DaCe
 - found [A JavaScript library for building parsers, interpreters, compilers, and more](https://ohmjs.org/)
-- read [Layers All The Way Down: The Untold Story of Shader Compilation](https://moonside.games/posts/layers-all-the-way-down/)
+- [Layers All The Way Down: The Untold Story of Shader Compilation](https://moonside.games/posts/layers-all-the-way-down/)
     - introduces the motivation behind [MojoShader](https://github.com/icculus/mojoshader), from Direct3D HLSL bytecode or assembly source to other shader languages
 - found [Mystical](https://suberic.net/~dmm/projects/mystical/README.html), a programming language that resembled magical circles
-- read [Bare Metal Zig (2023)](https://austinhanson.com/bare-metal-ziglang/)
-- read [Google Scholar is manipulatable](https://arxiv.org/abs/2402.04607)
+- [Bare Metal Zig (2023)](https://austinhanson.com/bare-metal-ziglang/)
+- [Google Scholar is manipulatable](https://arxiv.org/abs/2402.04607)
 - found [Path Integrals in Quantum Mechanics, Statistics, Polymer Physics, and Financial Markets by Hagen Kleinert](https://hagenkleinert.de/documents/pi/HagenKleinert_PathIntegrals.pdf)
 }}
 
-\subtree[2025-05-17]{\mdnote{2025-05-17: elixir, game, ocaml, rust}{
-- read [Parallel Scaling Law for Language Models](https://huggingface.co/papers/2505.10475)
-- read [The Language That Never Was](https://blog.celes42.com/the_language_that_never_was.html)
+\subtree[2025-05-17]{\mdnote{2025-05-17}{\tags{#elixir #game #ocaml #rust}
+- [Parallel Scaling Law for Language Models](https://huggingface.co/papers/2505.10475)
+- [The Language That Never Was](https://blog.celes42.com/the_language_that_never_was.html)
     - [Leaving Rust gamedev after 3 years](https://loglog.games/blog/leaving-rust-gamedev/)
     - [Mun](https://mun-lang.org/)
     - [jank](https://jank-lang.org/)
     - [The Little Book of Rust Macros](https://veykril.github.io/tlborm/)
     - [MonoGame](https://monogame.net/)
-- read [Using unwrap() in Rust is Okay](https://burntsushi.net/unwrap/)
+- [Using unwrap() in Rust is Okay](https://burntsushi.net/unwrap/)
     - `anyhow` for applications and [thiserror](https://github.com/dtolnay/thiserror) for libraries
 - found [GNU Parallel Examples](https://www.gnu.org/software/parallel/parallel_examples.html)
 - found [Lua for Elixir](https://davelucia.com/blog/lua-elixir)
@@ -648,8 +764,8 @@
 - found [Teal: a statically-typed dialect of Lua](https://teal-language.org/), a statically-typed dialect of Lua
 }}
 
-\subtree[2025-05-16]{\mdnote{2025-05-16: formal, game, rust, tla, zig}{
-- read [I don’t like NumPy](https://dynomight.net/numpy/)
+\subtree[2025-05-16]{\mdnote{2025-05-16}{\tags{#formal #game #rust #tla #zig}
+- [I don’t like NumPy](https://dynomight.net/numpy/)
     - [Writing a better code with pytorch and einops](https://einops.rocks/pytorch-examples.html)
     - [Einops and Einsum Summarized](https://pratik-doshi-99.github.io/posts/einops/)
 - looking for Zig way to implement eiops
@@ -666,45 +782,45 @@
         - [parcom](https://github.com/dokwork/parcom), see also [this blog post](https://zig.news/vladimir_popov/yet-another-parser-combinators-library-ic2)
     - [einops](https://github.com/VasanthakumarV/einops) in Rust, with only backend `tch`
     - [Einsums](https://github.com/Einsums/Einsums) and [einops-cpp](https://github.com/dorpxam/einops-cpp) are in C++
-- read [The current state of TLA⁺ development](https://ahelwer.ca/post/2025-05-15-tla-dev-status/)
+- [The current state of TLA⁺ development](https://ahelwer.ca/post/2025-05-15-tla-dev-status/)
     - found [Spectacle](https://informal.systems/) and [tlafmt](https://github.com/domodwyer/tlafmt)
-- read [10 Years of Stable Rust: An Infrastructure Story](https://rustfoundation.org/media/10-years-of-stable-rust-an-infrastructure-story/)
-    - read [formal methods projects built on Rust](https://rust-formal-methods.github.io/)
-- read [Beyond 'Aha!': Toward Systematic Meta-Abilities Alignment in Large Reasoning Models](https://huggingface.co/papers/2505.10554)
-- read [Declaring a friendship to self](https://www.sandordargo.com/blog/2025/05/14/friend-self)
-- read [Internet Artifacts](https://neal.fun/internet-artifacts/irc/)
+- [10 Years of Stable Rust: An Infrastructure Story](https://rustfoundation.org/media/10-years-of-stable-rust-an-infrastructure-story/)
+    - [formal methods projects built on Rust](https://rust-formal-methods.github.io/)
+- [Beyond 'Aha!': Toward Systematic Meta-Abilities Alignment in Large Reasoning Models](https://huggingface.co/papers/2505.10554)
+- [Declaring a friendship to self](https://www.sandordargo.com/blog/2025/05/14/friend-self)
+- [Internet Artifacts](https://neal.fun/internet-artifacts/irc/)
     - discovered [Helicopter game](https://neal.fun/internet-artifacts/helicopter-game/)
 }}
 
-\subtree[2025-05-15]{\mdnote{2025-05-15: formal, tla, zig}{
-- read [Introducing oniux: Kernel-level Tor isolation for any Linux app](https://blog.torproject.org/introducing-oniux-tor-isolation-using-linux-namespaces/)
+\subtree[2025-05-15]{\mdnote{2025-05-15}{\tags{#formal #tla #zig}
+- [Introducing oniux: Kernel-level Tor isolation for any Linux app](https://blog.torproject.org/introducing-oniux-tor-isolation-using-linux-namespaces/)
     - [code](https://gitlab.torproject.org/tpo/core/oniux)
     - found [smoltcp](https://github.com/smoltcp-rs/smoltcp)
-- read [The cryptography behind passkeys](https://blog.trailofbits.com/2025/05/14/the-cryptography-behind-passkeys/)
-- read [How fast is CeTZ-Plot?](https://huijzer.xyz/posts/12)
-- read [ZJIT has been merged into Ruby](https://railsatscale.com/2025-05-14-merge-zjit/)
+- [The cryptography behind passkeys](https://blog.trailofbits.com/2025/05/14/the-cryptography-behind-passkeys/)
+- [How fast is CeTZ-Plot?](https://huijzer.xyz/posts/12)
+- [ZJIT has been merged into Ruby](https://railsatscale.com/2025-05-14-merge-zjit/)
     - Instead of compiling YARV bytecode directly to the low-level IR (LIR), it uses an high-level SSA-based intermediate representation (HIR)
         - In the bytecode, which is tersely encoded, jumps are offsets, some control-flow is implicit, and most dataflow is via the stack.
         - By contrast, HIR looks more like a graph. Jumps have pointers to their targets and there’s no stack: instructions that use data have pointers directly to the instructions that create the data.
 - found [Warteschlangensimulator](https://a-herzog.github.io/Warteschlangensimulator/), a event-driven, stochastic simulator for queueing systems
 - found [kowk](https://kwok.sigs.k8s.io/), a ~100k-pod k8s cluster simulator
-- read [Data is code](https://blog.information-superhighway.net/data-is-code), about philosophy behind Forth
+- [Data is code](https://blog.information-superhighway.net/data-is-code), about philosophy behind Forth
     - also [What the hell is Forth?](https://blog.information-superhighway.net/what-the-hell-is-forth)
 - found [Insights into DeepSeek-V3: Scaling Challenges and Reflections on Hardware for AI Architectures](https://huggingface.co/papers/2505.09343)
 - found [Marigold: Affordable Adaptation of Diffusion-Based Image Generators for Image Analysis](https://huggingface.co/papers/2505.09358)
-    - read [Marigold Computer Vision](https://huggingface.co/docs/diffusers/using-diffusers/marigold_usage)
-- read [Zig App Release and Updates via Github ⚡](https://dbushell.com/2025/03/18/zig-app-release-and-updates-via-github/)
+    - [Marigold Computer Vision](https://huggingface.co/docs/diffusers/using-diffusers/marigold_usage)
+- [Zig App Release and Updates via Github ⚡](https://dbushell.com/2025/03/18/zig-app-release-and-updates-via-github/)
 }}
 
-\subtree[2025-05-14]{\mdnote{2025-05-14: agent, ebpf, physics, rust, yaml}{
+\subtree[2025-05-14]{\mdnote{2025-05-14}{\tags{#agent #ebpf #physics #rust #yaml}
 - try [genspark](https://www.genspark.ai/agents?id=0cb4084a-b9ba-4755-8f00-029ddf087680)
     - impressive result
     - one deep research per day for free
-- read [Read the Code, Not the Profile](https://reasonablypolymorphic.com/blog/read-the-code/)
+- [Read the Code, Not the Profile](https://reasonablypolymorphic.com/blog/read-the-code/)
     - Dramatic percentages in software is just linear improvement
-- read [Writing that changed how I think about PL](https://bernsteinbear.com/blog/pl-writing/)
-- read [Experiment on your code freely with Git worktree](https://opensource.com/article/21/4/git-worktree)
-- read [Lock-Free Rust: How to Build a Rollercoaster While It’s on Fire](https://yeet.cx/blog/lock-free-rust/)
+- [Writing that changed how I think about PL](https://bernsteinbear.com/blog/pl-writing/)
+- [Experiment on your code freely with Git worktree](https://opensource.com/article/21/4/git-worktree)
+- [Lock-Free Rust: How to Build a Rollercoaster While It’s on Fire](https://yeet.cx/blog/lock-free-rust/)
 - found
     - [Spall: a code profiler that runs in your browser](https://gravitymoth.com/spall/spall-web.html)
     - TUI for search & replace
@@ -715,81 +831,81 @@
     - [Makepad 1.0 : Rust UI Framework](https://makepad.nl/)
 - checked out [YS — YAML Done Wisely](https://yamlscript.org/)
     - I wish to use it as a template engine, but the scripting syntax is not delicious
-- read [Two months in Servo: CSS nesting, Shadow DOM, Clipboard API, and more](https://servo.org/blog/2025/05/09/this-month-in-servo/)
+- [Two months in Servo: CSS nesting, Shadow DOM, Clipboard API, and more](https://servo.org/blog/2025/05/09/this-month-in-servo/)
     - Servo is still very actively growing
-- read [Misadventures in DTrace: how to debug the macOS kernel](https://jade.fyi/blog/misadventures-in-dtrace/)
+- [Misadventures in DTrace: how to debug the macOS kernel](https://jade.fyi/blog/misadventures-in-dtrace/)
     - I need to compare more with eBPF and DTrace
     - found [DTrace book](https://illumos.org/books/dtrace/preface.html)
 }}
 
-\subtree[2025-05-12]{\mdnote{2025-05-12: apl, formal, mongodb, performance, proof, rust, tla}{
-- read [Are We Serious About Using TLA+ For Statistical Properties?](https://emptysqua.re/blog/are-we-serious-about-statistical-properties-tlaplus/)
+\subtree[2025-05-12]{\mdnote{2025-05-12}{\tags{#apl #formal #mongodb #performance #proof #rust #tla}
+- [Are We Serious About Using TLA+ For Statistical Properties?](https://emptysqua.re/blog/are-we-serious-about-statistical-properties-tlaplus/)
     - found [FizzBee](https://fizzbee.io/) for behavior correctness verification and performance modelling, based on simulation
     - I've wished for a tool like this for a long time
     - see also [Modular verification of MongoDB Transactions using TLA+](http://muratbuffalo.blogspot.com/2025/05/modular-verification-of-mongodb.html)
-- read [Flattening Rust's Learning Curve](https://corrode.dev/blog/flattening-rusts-learning-curve/)
-    - read [The best open source project for someone might not be yours, and that's OK](https://blog.petdance.com/2018/01/02/the-best-open-source-project-for-someone-might-not-be-yours-and-thats-ok/)
-- read [A review of documentation in the Rust ecosystem](https://www.harudagondi.space/blog/rust-documentation-ecosystem-review/)
+- [Flattening Rust's Learning Curve](https://corrode.dev/blog/flattening-rusts-learning-curve/)
+    - [The best open source project for someone might not be yours, and that's OK](https://blog.petdance.com/2018/01/02/the-best-open-source-project-for-someone-might-not-be-yours-and-thats-ok/)
+- [A review of documentation in the Rust ecosystem](https://www.harudagondi.space/blog/rust-documentation-ecosystem-review/)
     - found [Blessed.rs](https://blessed.rs/crates): Recommended Crate Directory
-- read [Secure by Design: Google’s Perspective on Memory Safety (2024)](https://storage.googleapis.com/gweb-research2023-media/pubtools/7665.pdf)
-- read [Microservices Are a Tax Your Startup Probably Can’t Afford](https://nexo.sh/posts/microservices-for-startups/)
-- read [Private Internet (2024)](https://kevincox.ca/2024/08/16/private-internet/)
-- read [A tool to verify estimates, II: a flexible proof assistant](https://terrytao.wordpress.com/2025/05/09/a-tool-to-verify-estimates-ii-a-flexible-proof-assistant/)
+- [Secure by Design: Google’s Perspective on Memory Safety (2024)](https://storage.googleapis.com/gweb-research2023-media/pubtools/7665.pdf)
+- [Microservices Are a Tax Your Startup Probably Can’t Afford](https://nexo.sh/posts/microservices-for-startups/)
+- [Private Internet (2024)](https://kevincox.ca/2024/08/16/private-internet/)
+- [A tool to verify estimates, II: a flexible proof assistant](https://terrytao.wordpress.com/2025/05/09/a-tool-to-verify-estimates-ii-a-flexible-proof-assistant/)
 }}
 
-\subtree[2025-05-09]{\mdnote{2025-05-09: rust, zig}{
-- read [Memory Safety Features in Zig](https://gencmurat.com/en/posts/memory-safety-features-in-zig/)
+\subtree[2025-05-09]{\mdnote{2025-05-09}{\tags{#rust #zig}
+- [Memory Safety Features in Zig](https://gencmurat.com/en/posts/memory-safety-features-in-zig/)
     - very well summarized, with great examples
-- read [Reservoir Sampling](https://samwho.dev/reservoir-sampling/)
-- read [You can use C-Reduce for any language](https://bernsteinbear.com/blog/creduce/)
-- read [Rust Dependencies scare Me](https://lobste.rs/s/j3nhhc)
+- [Reservoir Sampling](https://samwho.dev/reservoir-sampling/)
+- [You can use C-Reduce for any language](https://bernsteinbear.com/blog/creduce/)
+- [Rust Dependencies scare Me](https://lobste.rs/s/j3nhhc)
     - a comment reminds me of [Build It Yourself](https://lucumr.pocoo.org/2025/1/24/build-it-yourself/)
-- read [What's in an e-graph?](https://bernsteinbear.com/blog/whats-in-an-egraph/)
-- read [A catalog of ways to generate SSA](https://bernsteinbear.com/blog/ssa/)
+- [What's in an e-graph?](https://bernsteinbear.com/blog/whats-in-an-egraph/)
+- [A catalog of ways to generate SSA](https://bernsteinbear.com/blog/ssa/)
 }}
 
-\subtree[2025-05-08]{\mdnote{2025-05-08: agent, gpu, performance, zig}{
-- read \citef{zhang2024transformers}
+\subtree[2025-05-08]{\mdnote{2025-05-08}{\tags{#agent #gpu #performance #zig}
+- \citef{zhang2024transformers}
     - insightful, and well summarized related work
 - trying to figure out a way to let AI agent to read all papers citing an paper, and write a summary of the follow-up research
-- read [The magic of software; or, what makes a good engineer also makes a good engineering organization](https://moxie.org/2024/09/23/a-good-engineer.html)
+- [The magic of software; or, what makes a good engineer also makes a good engineering organization](https://moxie.org/2024/09/23/a-good-engineer.html)
     -  "Engineers are most capable and most effective when abstraction layers serve as shorthand for an understanding of what it is doing on your behalf, rather than a black box"
     - "start with deep understanding as the basis for innovation – cultivating the curiosity to look inside the black boxes"
     -  "The magic of both software and software organizations comes from those moments where insight into how something works sparks entirely new ideas about what it could become"
     - related: [Reinvent the Wheel](https://endler.dev/2025/reinvent-the-wheel/)
-- read [Implement your language twice](https://futhark-lang.org/blog/2025-05-07-implement-your-language-twice.html)
+- [Implement your language twice](https://futhark-lang.org/blog/2025-05-07-implement-your-language-twice.html)
     - [Futhark](https://futhark-lang.org/) is a statically typed, data-parallel, and purely functional array language with AoT compilation to CUDA, OpenCL, HIP, and WebGPU (WIP)
-    - read also [Comparing the performance of OpenCL, CUDA, and HIP](https://futhark-lang.org/blog/2024-07-17-opencl-cuda-hip.html)
-- read [Objective-C interop with Zig?](https://www.reddit.com/r/Zig/comments/1khb8yo/objectivec_interop_with_zig/)
+    - also [Comparing the performance of OpenCL, CUDA, and HIP](https://futhark-lang.org/blog/2024-07-17-opencl-cuda-hip.html)
+- [Objective-C interop with Zig?](https://www.reddit.com/r/Zig/comments/1khb8yo/objectivec_interop_with_zig/)
 - got zig to work inside lima with minimal setup
 }}
 
-\subtree[2025-05-07]{\mdnote{2025-05-07: rust, zig}{
-- read [Zig’s Low-Level Safety Features Leave Rust in the Dust](https://www.reddit.com/r/Zig/comments/1kgk07m/zigs_lowlevel_safety_features_leave_rust_in_the/)
-- read [Zig defer Patterns](https://matklad.github.io/2024/03/21/defer-patterns.html)
-- read [Glossary Web Component](https://dbushell.com/2025/05/07/glossary-web-component/)
-- read [Recreating an iOS Animation with GLSL (interactive tutorial)](https://nmattia.com/posts/2025-05-07-airpods-hearing-test-animation/)
+\subtree[2025-05-07]{\mdnote{2025-05-07}{\tags{#rust #zig}
+- [Zig’s Low-Level Safety Features Leave Rust in the Dust](https://www.reddit.com/r/Zig/comments/1kgk07m/zigs_lowlevel_safety_features_leave_rust_in_the/)
+- [Zig defer Patterns](https://matklad.github.io/2024/03/21/defer-patterns.html)
+- [Glossary Web Component](https://dbushell.com/2025/05/07/glossary-web-component/)
+- [Recreating an iOS Animation with GLSL (interactive tutorial)](https://nmattia.com/posts/2025-05-07-airpods-hearing-test-animation/)
 - found [Argo CD - Declarative Continuous Delivery for k8s](https://github.com/argoproj/argo-cd)
 - found [bash/POSIX-compatible shell implemented in Rust](https://github.com/reubeno/brush)
 - found [nnd: A TUI alternative to gdb](https://github.com/al13n321/nnd)
 }}
 
-\subtree[2025-05-07-2]{\mdnote{2025-05-07: ebpf, rust, zig}{
-- read [Zig’s Low-Level Safety Features Leave Rust in the Dust](https://www.reddit.com/r/Zig/comments/1kgk07m/zigs_lowlevel_safety_features_leave_rust_in_the/)
+\subtree[2025-05-07-2]{\mdnote{2025-05-07}{\tags{#ebpf #rust #zig}
+- [Zig’s Low-Level Safety Features Leave Rust in the Dust](https://www.reddit.com/r/Zig/comments/1kgk07m/zigs_lowlevel_safety_features_leave_rust_in_the/)
 - found [Parallel, Concurrent and Distributed Programming](https://ilyasergey.net/YSC4231/) in Scala
 - found [nnd: A TUI alternative to gdb](https://github.com/al13n321/nnd)
 - found [A part of the fundamental group of an n-dimensional beanA](https://tikz.org/bean/)
-- read [Building a regex engine](https://sh4dy.com/2025/05/01/regex_engine/) in C++
+- [Building a regex engine](https://sh4dy.com/2025/05/01/regex_engine/) in C++
 - wondering about chaos engineering in Zig with eBPF
     - learn more about [zbpf](https://github.com/tw4452852/zbpf)
     - maybe it's easiest to use [lima](https://lima-vm.io/) to test eBPF
     - found [Pixie](https://px.dev/) when reading [Debugging Production: eBPF Chaos](https://www.infoq.com/articles/debugging-production-ebpf-chaos/)
-    - read [Introducing Minderbinder](https://blog.scottgerring.com/posts/introducing-minderbinder/) which is in Go
+    - [Introducing Minderbinder](https://blog.scottgerring.com/posts/introducing-minderbinder/) which is in Go
 - found [alternative open source front-ends for popular internet platforms](https://github.com/mendel5/alternative-front-ends)
 }}
 
 \subtree[2025-05-06]{
-\mdnote{2025-05-06: agent, benchmark, formal, game, gpu, optimization, performance, physics, render, theory}{
+\mdnote{2025-05-06}{\tags{#agent #benchmark #formal #game #gpu #optimization #performance #physics #render #theory}
 - LM
     - survey papers
         - [A Survey on Inference Engines for Large Language Models: Perspectives on Optimization and Efficiency](https://huggingface.co/papers/2505.01658)
@@ -804,41 +920,41 @@
     - other
         - [Unlearning Sensitive Information in Multimodal LLMs: Benchmark and Attack-Defense Evaluation](https://huggingface.co/papers/2505.01456)
             - I'm still interested in unlearning and model editing
-- read [Benchmarking Crimes Meet Formal Verification](https://microkerneldude.org/2025/04/27/benchmarking-crimes-meet-formal-verification/)
+- [Benchmarking Crimes Meet Formal Verification](https://microkerneldude.org/2025/04/27/benchmarking-crimes-meet-formal-verification/)
     - learn about [Systems Benchmarking Crimes](https://gernot-heiser.org/benchmarking-crimes.html)
 - Zig related:
-    - read [Implementing a Struct of Arrays](https://brevzin.github.io/c++/2025/05/02/soa/)
+    - [Implementing a Struct of Arrays](https://brevzin.github.io/c++/2025/05/02/soa/)
         - Zig has easy-to-use support of SoA via [MultiArrayList](https://zig.news/kristoff/struct-of-arrays-soa-in-zig-easy-in-userland-40m0)
         - learn about [Data-Oriented Design](https://dataorienteddesign.com/dodbook/)
         - I can't help but feel that new features of C++ such as reflection is really becoming syntax cancer
-    - read [Reflecting on a year of Gamedev in Zig](https://bgthompson.codeberg.page/blog/one-year-zig-gamedev-reflections/)
-    - read [Jai, the game programming contender](https://bitshifters.cc/2025/04/28/jai.html)
+    - [Reflecting on a year of Gamedev in Zig](https://bgthompson.codeberg.page/blog/one-year-zig-gamedev-reflections/)
+    - [Jai, the game programming contender](https://bitshifters.cc/2025/04/28/jai.html)
 - bringing data to AI, not the other way around
-    - read [The Data Surrender Trap: How Enterprises Are Losing Control in the AI Gold Rush—and the Simple Fix](https://www.softinio.com/post/the-data-surrender-trap/)
+    - [The Data Surrender Trap: How Enterprises Are Losing Control in the AI Gold Rush—and the Simple Fix](https://www.softinio.com/post/the-data-surrender-trap/)
 - lifestyle
-    - read [Protect The Habit](https://justinmath.com/protect-the-habit/)
+    - [Protect The Habit](https://justinmath.com/protect-the-habit/)
     - skimmed [blogging in isolation](https://blog.avas.space/blogging-in-isolation/)
 - skimmed [modern-latex: A short guide to LaTeX that avoids legacy cruft](https://github.com/mrkline/modern-latex)
-- read [The Beauty Of Having A Pi-hole](https://den.dev/blog/pihole/)
+- [The Beauty Of Having A Pi-hole](https://den.dev/blog/pihole/)
     - own your own DNS
-- read [An appeal to Apple from Anukari regarding GPU frequency scaling](https://anukari.com/blog/devlog/an-appeal-to-apple)
+- [An appeal to Apple from Anukari regarding GPU frequency scaling](https://anukari.com/blog/devlog/an-appeal-to-apple)
     - I'm amazed that the author is using GPU to simulate physics for realtime audio
 }
 }
 
-\subtree[2025-05-04]{\mdnote{2025-05-04: git, lean}{
+\subtree[2025-05-04]{\mdnote{2025-05-04}{\tags{#git #lean}
 - found [pyonji](https://git.sr.ht/~emersion/pyonji), a tool to support sr.ht style e-mail patches
-- read [Git: programmatic staging](https://choly.ca/post/git-programmatic-staging/)
+- [Git: programmatic staging](https://choly.ca/post/git-programmatic-staging/)
     - and learn about `grepdiff`, unfortunately, it's not available on Mac
     - `git add -p` is also acceptable for a small number of hunks
-- read [MathML with Pandoc](https://leancrew.com/all-this/2025/05/mathml-with-pandoc/)
-- read [Starting on seamless C++ interop in jank](https://jank-lang.org/blog/2025-05-02-starting-seamless-interop/)
+- [MathML with Pandoc](https://leancrew.com/all-this/2025/05/mathml-with-pandoc/)
+- [Starting on seamless C++ interop in jank](https://jank-lang.org/blog/2025-05-02-starting-seamless-interop/)
 - found [Anemll: Artificial Neural Engine Machine Learning Library](https://github.com/Anemll/Anemll)
 }}
 
 \subtree[2025-05-02]{
-\mdnote{2025-05-02: formal}{
-- read \citef{ren2025deepseekproverv2}
+\mdnote{2025-05-02}{\tags{#formal}
+- \citef{ren2025deepseekproverv2}
     - \citef{tie2025survey}
         - notes on LM could be based on this survey and the following papers related to r1
     - \citef{zhang2025days}
@@ -847,10 +963,10 @@
     - found critics of r1/GRPO
         - \citef{liu2025understanding}
         - \citef{yue2025does}
-    - read \citef{wang2025kimina}
+    - \citef{wang2025kimina}
 - found [A Survey of Interactive Generative Video](https://huggingface.co/papers/2504.21853)
-- read [Polishing your typography with line height units](https://webkit.org/blog/16831/line-height-units/)
-- read [Solving Sudoku with Algebraic Geometry and Computer Algebra : A C Programming Approach](https://x.com/7etsuo/status/1813482989139161344)
+- [Polishing your typography with line height units](https://webkit.org/blog/16831/line-height-units/)
+- [Solving Sudoku with Algebraic Geometry and Computer Algebra : A C Programming Approach](https://x.com/7etsuo/status/1813482989139161344)
 }
 }
 
@@ -858,18 +974,18 @@
 
 \subtree[2025-04]{
 \title{April, 2025}
-\subtree[2025-04-30]{\mdnote{2025-04-30: apl, formal, lean}{
+\subtree[2025-04-30]{\mdnote{2025-04-30}{\tags{#apl #formal #lean}
 - found \citef{zhang2025leanabell}
 - skimmed \citef{lipman2024flow}
-- read [APL: Comparison with Traditional Mathematics](https://aplwiki.com/wiki/Comparison_with_traditional_mathematics)
-- read [I use Zip Bombs to Protect my Server](https://idiallo.com/blog/zipbomb-protection)
+- [APL: Comparison with Traditional Mathematics](https://aplwiki.com/wiki/Comparison_with_traditional_mathematics)
+- [I use Zip Bombs to Protect my Server](https://idiallo.com/blog/zipbomb-protection)
 - found [Prolog Notes](https://github.com/dtonhofer/prolog_notes)
 - found [Quotes on notation design & how it affects thought](https://github.com/kai-qu/notation)
 }}
 
-\subtree[2025-04-29]{\mdnote{2025-04-29: prompt, qwen, theory, ✍️}{
+\subtree[2025-04-29]{\mdnote{2025-04-29}{\tags{#prompt #qwen #theory #✍️}
 - found [A Dependently Typed Assembly Language](https://www.cs.cmu.edu/~rwh/papers/dtal/OGI-CSE-99-008.pdf)
-- read [Qwen3: Think Deeper, Act Faster](https://qwenlm.github.io/blog/qwen3/)
+- [Qwen3: Think Deeper, Act Faster](https://qwenlm.github.io/blog/qwen3/)
 - found [Topologies and Sheaves Appeared as Syntax and Semantics of Natural Language (2012)](http://www.pdmi.ras.ru/~prosorov/papers/Prosorov_PhML2012.pdf)
     - reveals connection between sheaf theory and linguistics
 - found \citef{brody2023expressivity} [[code](https://github.com/tech-srl/layer_norm_expressivity_role)]
@@ -877,58 +993,58 @@
 - wrote [[uts-016B]]
 }}
 
-\subtree[2025-04-28]{\mdnote{2025-04-28: compiler, llvm, theory, zig}{
-- read [BitNet v2: Native 4-bit Activations with Hadamard Transformation for 1-bit LLMs](https://huggingface.co/papers/2504.18415)
-- read [Converting a C API to Zig with the help of comptime](https://www.reddit.com/r/Zig/comments/1k9vuni/converting_a_c_api_to_zig_with_the_help_of/)
-- read [How a Single Line Of Code Could Brick Your iPhone](https://rambo.codes/posts/2025-04-24-how-a-single-line-of-code-could-brick-your-iphone)
+\subtree[2025-04-28]{\mdnote{2025-04-28}{\tags{#compiler #llvm #theory #zig}
+- [BitNet v2: Native 4-bit Activations with Hadamard Transformation for 1-bit LLMs](https://huggingface.co/papers/2504.18415)
+- [Converting a C API to Zig with the help of comptime](https://www.reddit.com/r/Zig/comments/1k9vuni/converting_a_c_api_to_zig_with_the_help_of/)
+- [How a Single Line Of Code Could Brick Your iPhone](https://rambo.codes/posts/2025-04-24-how-a-single-line-of-code-could-brick-your-iphone)
 - found [Nouveau: The Rule Based Language Family](https://nouveau.community/)
     - and easily got into an infinite loop by adding a rule trying to combine a match and a box back to a matchbox
-- read [Technical Debt as Theory Building and Practice](https://www.usenix.org/conference/srecon25americas/presentation/lam)
-- read [Using HAProxy to protect me from scrapers](https://dgl.cx/2025/04/using-haproxy-to-stop-scrapers)
-- read [What if we embraced simulation-driven development?](https://pierrezemb.fr/posts/simulation-driven-development/)
+- [Technical Debt as Theory Building and Practice](https://www.usenix.org/conference/srecon25americas/presentation/lam)
+- [Using HAProxy to protect me from scrapers](https://dgl.cx/2025/04/using-haproxy-to-stop-scrapers)
+- [What if we embraced simulation-driven development?](https://pierrezemb.fr/posts/simulation-driven-development/)
     - [Notes about ETCD](https://pierrezemb.fr/posts/notes-about-etcd/), there are some war stories
     - [Notes about Raft's paper](https://pierrezemb.fr/posts/notes-about-raft/)
-- read [toycalculator, an MLIR/LLVM compiler experiment.](https://peeterjoot.com/2025/04/27/toycalculator-an-mlir-llvm-compiler-experiment/)
+- [toycalculator, an MLIR/LLVM compiler experiment.](https://peeterjoot.com/2025/04/27/toycalculator-an-mlir-llvm-compiler-experiment/)
 }}
 
-\subtree[2025-04-27]{\mdnote{2025-04-27: apl}{
+\subtree[2025-04-27]{\mdnote{2025-04-27}{\tags{#apl}
 - found [APL Cultivations](https://xpqz.github.io/cultivations/Intro.html)
-- read [Understanding SVG Paths](https://www.nan.fyi/svg-paths)
-- read [Remove these tags from <head>](https://getoutofmyhead.dev/)
+- [Understanding SVG Paths](https://www.nan.fyi/svg-paths)
+- [Remove these tags from <head>](https://getoutofmyhead.dev/)
 - found [Dive into Systems (2020)](https://diveintosystems.org/)
 - found [Smallweb – Your Internet Folder](https://smallweb.run/)
 - found [Cognition's DeepWiki, a free encyclopedia of all GitHub repos](https://news.smol.ai/issues/25-04-25-cognition-deepwiki/)
 }}
 
-\subtree[2025-04-26]{\mdnote{2025-04-26: benchmark, compiler, formal}{
+\subtree[2025-04-26]{\mdnote{2025-04-26}{\tags{#benchmark #compiler #formal}
 - found [Mitata - a beautiful benchmarking tool](https://hwisnu.bearblog.dev/mitata-benchmarking-tool/)
-- read [Nofl: A Precise Immix](https://arxiv.org/pdf/2503.16971v1)
-- read [O(no) You Didn’t](https://mrshiny608.github.io/MrShiny608/optimisation/2025/04/22/OhNoYouDidnt.html)
+- [Nofl: A Precise Immix](https://arxiv.org/pdf/2503.16971v1)
+- [O(no) You Didn’t](https://mrshiny608.github.io/MrShiny608/optimisation/2025/04/22/OhNoYouDidnt.html)
 - found [PyGraph: Robust Compiler Support for CUDA Graphs in PyTorch](https://arxiv.org/abs/2503.19779)
 }}
 
-\subtree[2025-04-25]{\mdnote{2025-04-25: bevy, gpu, parquet, render, security, spiraldb, tla, wasm}{
-- read [Bevy 0.16](https://bevyengine.org/news/bevy-0-16/)
+\subtree[2025-04-25]{\mdnote{2025-04-25}{\tags{#bevy #gpu #parquet #render #security #spiraldb #tla #wasm}
+- [Bevy 0.16](https://bevyengine.org/news/bevy-0-16/)
     - learn about GPU-Driven Rendering and [WESL](https://wesl-lang.dev/)
-- read [How I Got Hacked: A Warning about Malicious PoCs](https://chocapikk.com/posts/2025/s1nk/)
-- read [MCP Security: Tool Poisoning Attacks](https://invariantlabs.ai/blog/mcp-security-notification-tool-poisoning-attacks)
-- read [The ‘trickonometry’ of math olympiad inequalities](https://www.andreinc.net/2025/03/17/the-trickonometry-of-math-olympiad-inequalities)
+- [How I Got Hacked: A Warning about Malicious PoCs](https://chocapikk.com/posts/2025/s1nk/)
+- [MCP Security: Tool Poisoning Attacks](https://invariantlabs.ai/blog/mcp-security-notification-tool-poisoning-attacks)
+- [The ‘trickonometry’ of math olympiad inequalities](https://www.andreinc.net/2025/03/17/the-trickonometry-of-math-olympiad-inequalities)
     - intriguing write-up, well collected problems, insightful perspective
     - found [My list of challenging software projects some programmers should try](https://www.andreinc.net/2024/03/28/programming-projects-ideas)
-- read [Towards Vortex 1.0](https://spiraldb.com/post/towards-vortex-10)
+- [Towards Vortex 1.0](https://spiraldb.com/post/towards-vortex-10)
     - a next-generation columnar format with self-describing layouts and WASM decoders that is 200x faster than Parquet for random access, among other goodies
 }}
 
-\subtree[2025-04-24]{\mdnote{2025-04-24: duckdb, gpu, llvm, optimization, performance, theory, tla, wasm, ✍️}{
-- read [Abusing DuckDB-WASM by making SQL draw 3D graphics (Sort Of)](https://www.hey.earth/posts/duckdb-doom)
+\subtree[2025-04-24]{\mdnote{2025-04-24}{\tags{#duckdb #gpu #llvm #optimization #performance #theory #tla #wasm #✍️}
+- [Abusing DuckDB-WASM by making SQL draw 3D graphics (Sort Of)](https://www.hey.earth/posts/duckdb-doom)
     - a very cool idea
     - I should learn more about modern databases
 - found [Bluefish](https://bluefishjs.org/)
     - a JS diagram library with quite some potential
     - some teaser examples were added by [this commit](https://github.com/bluefishjs/bluefish/commit/c2fb70cc6e8c8c4f4d2f4a797fc2875ba66d00ba)
-- read \citef{popescu2025exploiting}
+- \citef{popescu2025exploiting}
     - so there are actually many performance-wise well defined UBs in LLVM
-- read [GPU Compilation with MLIR](https://vectorfold.studio/blog/gpu-compilation)
+- [GPU Compilation with MLIR](https://vectorfold.studio/blog/gpu-compilation)
     - found [MLIR Python Bindings](https://mlir.llvm.org/docs/Bindings/Python/)
 - skimmed [Some possible roles for AI of Grothendieck topos theory](https://www.laurentlafforgue.org/Expose_Lafforgue_topos_AI_ETH_sept_2022.pdf) by Laurent Lafforgue (2022)
 - made a start on improving PDF organization in and out of MarginNote
@@ -937,220 +1053,220 @@
     - but `~/Library/Mobile Documents/com~apple~CloudDocs` already works well for my purpose
 }}
 
-\subtree[2025-04-23]{\mdnote{2025-04-23: elixir, rust, zig}{
-- read [Nine Reasons to Use OSH](https://oils.pub/osh.html)
+\subtree[2025-04-23]{\mdnote{2025-04-23}{\tags{#elixir #rust #zig}
+- [Nine Reasons to Use OSH](https://oils.pub/osh.html)
     - it contains a POSIX-compatible shell `osh`, and an incompatible shell `ysh`
     - it's written in a subset of Python, then transpiled to C++ by [mycpp](https://github.com/oils-for-unix/oils/blob/master/mycpp/README.md) that is based on MyPy, an interesting approach
 - found [codapi](https://codapi.org/) which supports sandboxes for Rust, Zig, Elixir etc.
 }}
 
-\subtree[2025-04-22]{\mdnote{2025-04-22: misc}{
-- read [Make Your Own Internet Presence with NetBSD and a 1 euro VPS – Part 1: Your Blog](https://it-notes.dragas.net/2025/04/22/make-your-own-internet-presence-with-netbsd-and-a-1-euro-vps-part-1-your-blog/)
+\subtree[2025-04-22]{\mdnote{2025-04-22}{\tags{#misc}
+- [Make Your Own Internet Presence with NetBSD and a 1 euro VPS – Part 1: Your Blog](https://it-notes.dragas.net/2025/04/22/make-your-own-internet-presence-with-netbsd-and-a-1-euro-vps-part-1-your-blog/)
     - which uses [BSSG](https://bssg.dragas.net/), a simple static site generator written in Bash
     - will settle on UTM for Mac/BSD virtualization, and Lima for Linux virtualization
     - still haven't figure out how to virtualize/emulate NetBSD with UTM, see [this issue](https://github.com/utmapp/UTM/discussions/7069)
-- read [My Dev Workflow: 2025](https://minami.bearblog.dev/my-dev-workflow-2025/)
+- [My Dev Workflow: 2025](https://minami.bearblog.dev/my-dev-workflow-2025/)
     - found and started using [Loop](https://github.com/MrKai77/Loop)
 }}
 
 \subtree[2025-04-21]{
-\mdnote{2025-04-21: ag, render, rust, theory, z3, zig}{
+\mdnote{2025-04-21}{\tags{#ag #render #rust #theory #z3 #zig}
 - wish to learn more about other architectures of LMs, e.g.
     - \citef{ma2025bitnet}
     - \citef{zhao2025d1}
     - \citef{wang2025m1}
     - [RWKV7-G1](https://huggingface.co/BlinkDL/rwkv7-g1) "GooseOne" reasoning model, see \citef{peng2025rwkv}
     - ModernBERT, see \citef{warner2024smarter}
-- read [The State of Reinforcement Learning for LLM Reasoning: Understanding GRPO and New Insights from Reasoning Model Papers](https://magazine.sebastianraschka.com/p/the-state-of-llm-reasoning-model-training)
-- read [Lorenz and modular flows: a visual introduction](https://www.josleys.com/articles/ams_article/Lorenz3.htm) which is "deep, beautiful and with a taste of singularity and knot theory"
+- [The State of Reinforcement Learning for LLM Reasoning: Understanding GRPO and New Insights from Reasoning Model Papers](https://magazine.sebastianraschka.com/p/the-state-of-llm-reasoning-model-training)
+- [Lorenz and modular flows: a visual introduction](https://www.josleys.com/articles/ams_article/Lorenz3.htm) which is "deep, beautiful and with a taste of singularity and knot theory"
     - found [Ultra Fractal 6](https://www.ultrafractal.com/) and [POV-Ray](https://www.povray.org/)
 - found [less_slow.cpp: Playing Around Less Slow Coding Practices for C++, CUDA, and Assembly Code](https://github.com/ashvardanian/less_slow.cpp)
 - found [Common Expression Language](https://github.com/google/cel-spec)
-- read [How I use Kate Editor](https://akselmo.dev/posts/how-i-use-kate-editor/)
+- [How I use Kate Editor](https://akselmo.dev/posts/how-i-use-kate-editor/)
 - watched [Implicit Surfaces (using interval arithmetic to evaluate SDFs)](https://www.youtube.com/watch?v=UxGxsGnbyJ4)
     - [PDF Slides](https://www.mattkeeter.com/research/hmc_colloquium.pdf)
     - the ideas behind [Fidget](https://github.com/mkeeter/fidget) and \citef{keeter2020massively} well explained, GOAT-level inspiring
     - should be further explored in [[ag-000G]]
     - there are also many interesting writeups in [The Prospero Challenge](https://www.mattkeeter.com/projects/prospero/)
-- read [Things Zig comptime Won't Do](https://matklad.github.io/2025/04/19/things-zig-comptime-wont-do.html)
+- [Things Zig comptime Won't Do](https://matklad.github.io/2025/04/19/things-zig-comptime-wont-do.html)
 - [Lustre](https://hexdocs.pm/lustre/index.html) reminds me of [Gleam](https://gleam.run/) that has a Rust-like syntax, runs on Erlang VM, and supports compiling to JavaScript
 - note more about Taiji and practice more
 }
 }
 
-\subtree[2025-04-19]{\mdnote{2025-04-19: elixir, formal}{
-- read [Common shell script mistakes](https://www.pixelbeat.org/programming/shell_script_mistakes.html)
-- read [Four Years of Jai](https://smarimccarthy.is/posts/2024-12-02-four-years-of-jai/)
-- read [My journey from Ruby to Elixir: lessons learned](https://www.erlang-solutions.com/blog/my-journey-from-ruby-to-elixir-lessons-from-a-developer/)
-- read [Revisiting an early critique of formal verification](https://lawrencecpaulson.github.io/2025/03/14/revisiting_demillo.html)
+\subtree[2025-04-19]{\mdnote{2025-04-19}{\tags{#elixir #formal}
+- [Common shell script mistakes](https://www.pixelbeat.org/programming/shell_script_mistakes.html)
+- [Four Years of Jai](https://smarimccarthy.is/posts/2024-12-02-four-years-of-jai/)
+- [My journey from Ruby to Elixir: lessons learned](https://www.erlang-solutions.com/blog/my-journey-from-ruby-to-elixir-lessons-from-a-developer/)
+- [Revisiting an early critique of formal verification](https://lawrencecpaulson.github.io/2025/03/14/revisiting_demillo.html)
 }}
 
-\subtree[2025-04-18]{\mdnote{2025-04-18: gpu, zig}{
+\subtree[2025-04-18]{\mdnote{2025-04-18}{\tags{#gpu #zig}
 - found [Matrix Calculus for Machine Learning and Beyond](https://github.com/mitmath/matrixcalc)
-- read [Reflections on Unikernels](https://dave.recoil.org/unikernels/)
+- [Reflections on Unikernels](https://dave.recoil.org/unikernels/)
     - found [OSv](https://osv.io/)
     - revisit [Seastar](https://seastar.io/), a C++ server framework that uses a shared-nothing model
-- read [Stop Writing `__init__` Methods](https://blog.glyph.im/2025/04/stop-writing-init-methods.html)
+- [Stop Writing `__init__` Methods](https://blog.glyph.im/2025/04/stop-writing-init-methods.html)
     - for potential gotchas, read also [Python dataclasses, a package full of surprises](https://fohlen.github.io/posts/python-dataclasses-a-package-full-of-surprises/index.html)
-- read [Weird / irritating build issue with raylib](https://www.reddit.com/r/Zig/comments/1k1nrf0/weird_irritating_build_issue_with_raylib/)
+- [Weird / irritating build issue with raylib](https://www.reddit.com/r/Zig/comments/1k1nrf0/weird_irritating_build_issue_with_raylib/)
     - so I should also start using the new hash format
-- read [Zig and GPUs](https://alichraghi.github.io/blog/zig-gpu/)
+- [Zig and GPUs](https://alichraghi.github.io/blog/zig-gpu/)
 }}
 
-\subtree[2025-04-17]{\mdnote{2025-04-17: agent, performance, rust, zig, ✍️}{
+\subtree[2025-04-17]{\mdnote{2025-04-17}{\tags{#agent #performance #rust #zig #✍️}
 - found [A practical hacker's guide to the C programming language](https://github.com/codr7/hacktical-c)
-- read [An Intro to DeepSeek's Distributed File System](https://maknee.github.io/blog/2025/3FS-Performance-Journal-1/)
+- [An Intro to DeepSeek's Distributed File System](https://maknee.github.io/blog/2025/3FS-Performance-Journal-1/)
     - my takeaway: DeepSeek's 3FS sacrifices small-file performance, POSIX compatibility, and fault tolerance (single-master risk) to maximize large-file throughput via CRAQ-based chain replication and RDMA-optimized chunk writes on 512B-sector SSDs
-- read [Development On Apple Silicon with UTM](https://rkiselenko.dev/blog/development-on-mac-with-utm/development-on-mac-with-lima/)
+- [Development On Apple Silicon with UTM](https://rkiselenko.dev/blog/development-on-mac-with-utm/development-on-mac-with-lima/)
     - found [cloud-init](https://cloudinit.readthedocs.io/)
-- read [TLS Certificate Lifetimes Will Officially Reduce to 47 Days](https://www.digicert.com/blog/tls-certificate-lifetimes-will-officially-reduce-to-47-days)
+- [TLS Certificate Lifetimes Will Officially Reduce to 47 Days](https://www.digicert.com/blog/tls-certificate-lifetimes-will-officially-reduce-to-47-days)
 - found [Torque – A lightweight meta-assembler for any processor](https://benbridle.com/projects/torque.html)
 - found [Unsure Calculator](https://filiph.github.io/unsure/)
-- read [Zigistry about to reach 300 stars on GitHub ⭐️](https://www.reddit.com/r/Zig/comments/1k0sg2s/zigistry_about_to_reach_300_stars_on_github/)
-- read [[AINews] OpenAI o3, o4-mini, and Codex CLI](https://buttondown.com/ainews/archive/ainews-openai-o3-o4-mini-and-codex-cli/)
+- [Zigistry about to reach 300 stars on GitHub ⭐️](https://www.reddit.com/r/Zig/comments/1k0sg2s/zigistry_about_to_reach_300_stars_on_github/)
+- [[AINews] OpenAI o3, o4-mini, and Codex CLI](https://buttondown.com/ainews/archive/ainews-openai-o3-o4-mini-and-codex-cli/)
     - and particularly [codex: Lightweight coding agent that runs in your terminal](https://github.com/openai/codex)
-- read [the lifecycle of a pull request](https://blog.tangled.sh/pulls) and tried to login to https://tangled.sh/
+- [the lifecycle of a pull request](https://blog.tangled.sh/pulls) and tried to login to https://tangled.sh/
 - learned about [`std::autodiff`](https://rustc-dev-guide.rust-lang.org/autodiff/internals.html) in Rust via `Enzyme`
 - converted some of my playlist to Youtube Music and scrobble them to libre.fm
     - found also [cmus](https://cmus.github.io/), a TUI music player that plays from local files, and supports scrobbling
 - wrote some more Taiji notes
 }}
 
-\subtree[2025-04-16]{\mdnote{2025-04-16: dspy, gradient, tla, webgl, zig}{
-- read [A flowing WebGL gradient, deconstructed](https://alexharri.com/blog/webgl-gradients)
+\subtree[2025-04-16]{\mdnote{2025-04-16}{\tags{#dspy #gradient #tla #webgl #zig}
+- [A flowing WebGL gradient, deconstructed](https://alexharri.com/blog/webgl-gradients)
 - found [An Introduction to Modern CMake](https://cliutils.gitlab.io/modern-cmake/README.html)
-- read [JSX Over The Wire](https://overreacted.io/jsx-over-the-wire/)
+- [JSX Over The Wire](https://overreacted.io/jsx-over-the-wire/)
 - found [ax](https://github.com/ax-llm/ax), DSPy in TypeScript
 - looked for HEIC libraries in C that can be used in Zig
 - found [WebTUI](https://webtui.ironclad.sh/)
 - found [Terminal Trove](https://terminaltrove.com/), a collection of terminal-based applications
 }}
 
-\subtree[2025-04-15]{\mdnote{2025-04-15: compiler, enhancedformysql, helixdb, optimization, render, rust}{
-- read [A 2025 Survey of Rust GUI Libraries](https://www.boringcactus.com/2025/04/13/2025-survey-of-rust-gui-libraries.html)
-- read [Algebraic Semantics for Machine Knitting](https://uwplse.org/2025/03/31/Algebraic-Knitting.html)
+\subtree[2025-04-15]{\mdnote{2025-04-15}{\tags{#compiler #enhancedformysql #helixdb #optimization #render #rust}
+- [A 2025 Survey of Rust GUI Libraries](https://www.boringcactus.com/2025/04/13/2025-survey-of-rust-gui-libraries.html)
+- [Algebraic Semantics for Machine Knitting](https://uwplse.org/2025/03/31/Algebraic-Knitting.html)
     - further reading:
         % - \citef{hofmann2024koda}
         - \citef{lin2023semantics}
-- read [C++20 idioms for parameter packs](https://www.scs.stanford.edu/~dm/blog/param-pack.html)
+- [C++20 idioms for parameter packs](https://www.scs.stanford.edu/~dm/blog/param-pack.html)
 - skimmed \citef{hull2023flat}
-- read [Pretty State Machine Patterns in Rust](https://hoverbear.org/blog/rust-state-machine-pattern/)
-- read [Implementing GRPO](https://www.k-a.in/grpo-1B.html)
+- [Pretty State Machine Patterns in Rust](https://hoverbear.org/blog/rust-state-machine-pattern/)
+- [Implementing GRPO](https://www.k-a.in/grpo-1B.html)
 - found [Networking Research Resources](https://enhancedformysql.github.io/tech-explorer-hub/reading/networking/index.html)
 - found [TeX.social](https://tex.social/): a feed aggregator for LaTeX-related sites, especially blogs.
-- read [A 2025 Survey of Rust GUI Libraries](https://www.boringcactus.com/2025/04/13/2025-survey-of-rust-gui-libraries.html)
+- [A 2025 Survey of Rust GUI Libraries](https://www.boringcactus.com/2025/04/13/2025-survey-of-rust-gui-libraries.html)
 - learn about [AerynOS](https://aerynos.com/)
-- read [Algebraic Semantics for Machine Knitting](https://uwplse.org/2025/03/31/Algebraic-Knitting.html)
-- read [C++20 idioms for parameter packs](https://www.scs.stanford.edu/~dm/blog/param-pack.html)
-- read [Flat origami is Turing complete](https://arxiv.org/abs/2309.07932)
-- read [Frontier AI Models Still Fail at Basic Physical Tasks: A Manufacturing Case Study](https://adamkarvonen.github.io/machine_learning/2025/04/13/llm-manufacturing-eval.html)
-- read [Procedural Foliage Rendering with L-systems and Geometry Instancing](https://jysandy.github.io/posts/procedural-trees/)
-- read [What the Hell Is a Target Triple?](https://mcyoung.xyz/2025/04/14/target-triples/)
+- [Algebraic Semantics for Machine Knitting](https://uwplse.org/2025/03/31/Algebraic-Knitting.html)
+- [C++20 idioms for parameter packs](https://www.scs.stanford.edu/~dm/blog/param-pack.html)
+- [Flat origami is Turing complete](https://arxiv.org/abs/2309.07932)
+- [Frontier AI Models Still Fail at Basic Physical Tasks: A Manufacturing Case Study](https://adamkarvonen.github.io/machine_learning/2025/04/13/llm-manufacturing-eval.html)
+- [Procedural Foliage Rendering with L-systems and Geometry Instancing](https://jysandy.github.io/posts/procedural-trees/)
+- [What the Hell Is a Target Triple?](https://mcyoung.xyz/2025/04/14/target-triples/)
 - try converting some playlist to Spotify with [TuneMyMusic](https://www.tunemymusic.com/)
     - screenshot, VLM OCR, then text to playlist
     - Spotify doesn't always have the songs, even if manual search, e.g. some songs before 2017
 - thinking about Graph RAG, and found [HelixDB](https://github.com/HelixDB/helix-db), a graph-vector database
 }}
 
-\subtree[2025-04-14]{\mdnote{2025-04-14: rust, visualization}{
-- read [A Visual Journey Through Async Rust](https://github.com/alexpusch/rust-magic-patterns/blob/master/visual-journey-through-async-rust/Readme.md)
+\subtree[2025-04-14]{\mdnote{2025-04-14}{\tags{#rust #visualization}
+- [A Visual Journey Through Async Rust](https://github.com/alexpusch/rust-magic-patterns/blob/master/visual-journey-through-async-rust/Readme.md)
     - and it would be insteresting to see the visualization for `monoio`
-- read [Solving One Million Sudoku Puzzles per hour](https://www.miakoring.de/blog/sudoku) in Swift
+- [Solving One Million Sudoku Puzzles per hour](https://www.miakoring.de/blog/sudoku) in Swift
 }}
 
-\subtree[2025-04-13]{\mdnote{2025-04-13: compiler, ebpf, elixir, lean, performance, scylladb, zig}{
+\subtree[2025-04-13]{\mdnote{2025-04-13}{\tags{#compiler #ebpf #elixir #lean #performance #scylladb #zig}
 - looking for Zig libraries for TUI, `io_uring`, eBPF, scripting, e-graph
     - the candidates are `libvaxis`, `libxev`, `zbpf`, `Cyber`, `zegg`, respectively
 - found [Juniper CAS](https://github.com/MixedMatched/juniper), which is exactly my original dream for lean-ga
 - found [Beaver](https://github.com/beaver-lodge/beaver): MLIR Toolkit in Elixir and Zig.
     - one relevant application is [Manx](MLIR compiler/backend for the Nx)
-- read [Building a high-performance database buffer pool in Zig using io_uring's new fixed-buffer mode](https://gavinray97.github.io/blog/io-uring-fixed-bufferpool-zig)
-- read [How io_uring and eBPF Will Revolutionize Programming in Linux](https://www.scylladb.com/2020/05/05/how-io_uring-and-ebpf-will-revolutionize-programming-in-linux/)
+- [Building a high-performance database buffer pool in Zig using io_uring's new fixed-buffer mode](https://gavinray97.github.io/blog/io-uring-fixed-bufferpool-zig)
+- [How io_uring and eBPF Will Revolutionize Programming in Linux](https://www.scylladb.com/2020/05/05/how-io_uring-and-ebpf-will-revolutionize-programming-in-linux/)
 - found [Performance Analysis and Tuning on Modern CPUs](https://github.com/dendibakh/perf-book)
 }}
 
-\subtree[2025-04-12]{\mdnote{2025-04-12: arm, compiler, elixir, gpu, rust, shader, tla}{
-- read [Bootstrapping Understanding: An Introduction to Reverse Engineering](https://www.muppetlabs.com/~breadbox/txt/bure.html)
-- read [Bug in Outlook PST Password Protection (2006)](https://www.nirsoft.net/articles/pst_password_bug.html)
-- read [Erlang’s not about lightweight processes and message passing…](https://stevana.github.io/erlangs_not_about_lightweight_processes_and_message_passing.html)
+\subtree[2025-04-12]{\mdnote{2025-04-12}{\tags{#arm #compiler #elixir #gpu #rust #shader #tla}
+- [Bootstrapping Understanding: An Introduction to Reverse Engineering](https://www.muppetlabs.com/~breadbox/txt/bure.html)
+- [Bug in Outlook PST Password Protection (2006)](https://www.nirsoft.net/articles/pst_password_bug.html)
+- [Erlang’s not about lightweight processes and message passing…](https://stevana.github.io/erlangs_not_about_lightweight_processes_and_message_passing.html)
     - further reading: \citef{armstrong2003making}
 - found [Rust to C compiler - 95.9\% test pass rate, odd platforms](https://fractalfir.github.io/generated_html/cg_clr_odd_platforms.html)
-- read [Shadertoys ported to Rust GPU](https://rust-gpu.github.io/blog/2025/04/10/shadertoys)
-- read [Build a Static Site in Elixir Under 5 Minutes with Phoenix Components](https://mishka.tools/blog/build-a-static-site-in-elixir-under-5-minutes-with-phoenix-components) while looking for SSG in Elixir
+- [Shadertoys ported to Rust GPU](https://rust-gpu.github.io/blog/2025/04/10/shadertoys)
+- [Build a Static Site in Elixir Under 5 Minutes with Phoenix Components](https://mishka.tools/blog/build-a-static-site-in-elixir-under-5-minutes-with-phoenix-components) while looking for SSG in Elixir
 }}
 
-\subtree[2025-04-11]{\mdnote{2025-04-11: agent}{
-- read [12-factor-agents: Principles to build LLM-powered software good enough to put in the hands of production customers](https://github.com/humanlayer/12-factor-agents)
+\subtree[2025-04-11]{\mdnote{2025-04-11}{\tags{#agent}
+- [12-factor-agents: Principles to build LLM-powered software good enough to put in the hands of production customers](https://github.com/humanlayer/12-factor-agents)
 - found [cargo-mutants: Inject bugs and see if your tests catch them](https://github.com/sourcefrog/cargo-mutants)
 - found [DeepCoder: A Fully Open-Source 14B Coder at O3-mini Level](https://pretty-radio-b75.notion.site/DeepCoder-A-Fully-Open-Source-14B-Coder-at-O3-mini-Level-1cf81902c14680b3bee5eb349a512a51)
 }}
 
-\subtree[2025-04-09]{\mdnote{2025-04-09: elixir, rust}{
-- read [Archiving URLs](https://gwern.net/archiving)
+\subtree[2025-04-09]{\mdnote{2025-04-09}{\tags{#elixir #rust}
+- [Archiving URLs](https://gwern.net/archiving)
     - maybe I should use tools like [ArchiveBox](https://github.com/ArchiveBox/ArchiveBox#input-formats) to prevent link rot
-- read [Mistakes and cool things to do with arena allocators](https://zylinski.se/posts/dynamic-arrays-and-arenas/)
+- [Mistakes and cool things to do with arena allocators](https://zylinski.se/posts/dynamic-arrays-and-arenas/)
 - found [shorty: a C++ library for concise lambdas](https://github.com/hanickadot/shorty)
-- read [Parser Combinators Beat Regexes](https://entropicthoughts.com/parser-combinators-beat-regexes)
+- [Parser Combinators Beat Regexes](https://entropicthoughts.com/parser-combinators-beat-regexes)
 - found [facet: Rust reflection, serialization, deserialization — know the shape of your types](https://github.com/facet-rs/facet)
     - thus found [unsynn: a minimalist rust parser library](https://github.com/ShabbirHasan1/unsynn)
-- read [$handle_undefined_function in Elixir/Erlang](https://yiming.dev/blog/2018/11/27/$handle-undefined-function-in-elixir-erlang/)
+- [$handle_undefined_function in Elixir/Erlang](https://yiming.dev/blog/2018/11/27/$handle-undefined-function-in-elixir-erlang/)
 - found [Twee, an equational theorem prover](https://nick8325.github.io/twee/) again
     - from [Automated Equational Reasoning with Twee Pt 1.](https://www.philipzucker.com/twee/)
 
 }}
 
-\subtree[2025-04-08]{\mdnote{2025-04-08: compiler, neovim, render, rust}{
-- read [Beautiful CI for Bazel](https://narang99.github.io/2025-03-22-monorepo-bazel-jenkins/)
+\subtree[2025-04-08]{\mdnote{2025-04-08}{\tags{#compiler #neovim #render #rust}
+- [Beautiful CI for Bazel](https://narang99.github.io/2025-03-22-monorepo-bazel-jenkins/)
 - found [Real-Time Rendering Resources](https://www.realtimerendering.com/)
-- read [The Gamma Knife model of incidents (2019)](https://surfingcomplexity.blog/2019/08/25/the-gamma-knife-model-of-incidents/)
-- read [Thinking like a compiler: places and values in Rust](https://steveklabnik.com/writing/thinking-like-a-compiler-places-and-values-in-rust/)
-- read [Writing good comments: the why, not the how (2020)](https://www.jackfranklin.co.uk/blog/code-comments-why-not-how/)
-- read [My neovim markdown setup in 2025](https://linkarzu.com/posts/neovim/markdown-setup-2025/)
+- [The Gamma Knife model of incidents (2019)](https://surfingcomplexity.blog/2019/08/25/the-gamma-knife-model-of-incidents/)
+- [Thinking like a compiler: places and values in Rust](https://steveklabnik.com/writing/thinking-like-a-compiler-places-and-values-in-rust/)
+- [Writing good comments: the why, not the how (2020)](https://www.jackfranklin.co.uk/blog/code-comments-why-not-how/)
+- [My neovim markdown setup in 2025](https://linkarzu.com/posts/neovim/markdown-setup-2025/)
 }}
 
-\subtree[2025-04-07]{\mdnote{2025-04-07: ✍️}{
-- read [Model error](https://surfingcomplexity.blog/2025/04/06/model-error/)
+\subtree[2025-04-07]{\mdnote{2025-04-07}{\tags{#✍️}
+- [Model error](https://surfingcomplexity.blog/2025/04/06/model-error/)
 - wrote [[uts-016A]]
 }}
 
-\subtree[2025-04-05]{\mdnote{2025-04-05: rust}{
-- read [Atproto Ethos](https://atproto.com/articles/atproto-ethos)
-- read [BPF From Scratch In Rust](https://yeet.cx/blog/bpf-from-scratch-in-rust/)
-- read [Pitfalls of Safe Rust](https://corrode.dev/blog/pitfalls-of-safe-rust/)
+\subtree[2025-04-05]{\mdnote{2025-04-05}{\tags{#rust}
+- [Atproto Ethos](https://atproto.com/articles/atproto-ethos)
+- [BPF From Scratch In Rust](https://yeet.cx/blog/bpf-from-scratch-in-rust/)
+- [Pitfalls of Safe Rust](https://corrode.dev/blog/pitfalls-of-safe-rust/)
 }}
 
-\subtree[2025-04-04]{\mdnote{2025-04-04: lean, performance, rust, simd}{
-- read [Of manners and machines](https://commaok.xyz/post/manners/)
-- read [Rewriting my site in vanilla web](https://leanrada.com/notes/vanilla-web-rewrite/)
+\subtree[2025-04-04]{\mdnote{2025-04-04}{\tags{#lean #performance #rust #simd}
+- [Of manners and machines](https://commaok.xyz/post/manners/)
+- [Rewriting my site in vanilla web](https://leanrada.com/notes/vanilla-web-rewrite/)
     - [TAC: A new CSS methodology](https://jordanbrennan.hashnode.dev/tac-a-new-css-methodology)
     - [Blinded By the Light DOM](https://meyerweb.com/eric/thoughts/2023/11/01/blinded-by-the-light-dom/)
     - maybe I should rewrite most of my customizations to forest markup as web components
-- read [Vector Sets are part of Redis](http://antirez.com/news/149)
-- read [Towards fearless SIMD, 7 years later](https://linebender.org/blog/towards-fearless-simd/)
-- read [Introduction to Monoio: A High-Performance Rust Runtime](https://chesedo.me/blog/monoio-introduction/)
+- [Vector Sets are part of Redis](http://antirez.com/news/149)
+- [Towards fearless SIMD, 7 years later](https://linebender.org/blog/towards-fearless-simd/)
+- [Introduction to Monoio: A High-Performance Rust Runtime](https://chesedo.me/blog/monoio-introduction/)
 - found [Public mdBooks](https://mdbooks.code-maven.com/)
 }}
 
-\subtree[2025-04-03]{\mdnote{2025-04-03: lean, rust}{
+\subtree[2025-04-03]{\mdnote{2025-04-03}{\tags{#lean #rust}
 - learn about [geonum](https://github.com/mxfactorial/geonum), a ridiculously fast Rust library that supports many GA operations except for geometric product
-- read some portions of [On the Biology of a Large Language Model](https://transformer-circuits.pub/2025/attribution-graphs/biology.html)
+- some portions of [On the Biology of a Large Language Model](https://transformer-circuits.pub/2025/attribution-graphs/biology.html)
     - it's a particularly inspiring article on the interpretability of LLMs
     - it's authored with [Distill Template](https://github.com/distillpub/template), see [guide](https://distill.pub/guide/)
     - similarly, found [World Models](https://worldmodels.github.io/)
-- read [A Year of Rust in ClickHouse](https://clickhouse.com/blog/rust)
-- read [AI ambivalence](https://nolanlawson.com/2025/04/02/ai-ambivalence/)
-- read [Minimal CSS-only blurry image placeholders](https://leanrada.com/notes/css-only-lqip/)
+- [A Year of Rust in ClickHouse](https://clickhouse.com/blog/rust)
+- [AI ambivalence](https://nolanlawson.com/2025/04/02/ai-ambivalence/)
+- [Minimal CSS-only blurry image placeholders](https://leanrada.com/notes/css-only-lqip/)
 - found [chawan: TUI Web Browser](\verb>>>|https://sr.ht/%7Ebptato/chawan/>>>)
 }}
 
-\subtree[2025-04-02]{\mdnote{2025-04-02: formal, security, theory}{
-- read [Stop syncing everything](https://sqlsync.dev/posts/stop-syncing-everything/), which launches [Graft](https://github.com/orbitinghail/graft), an open-source transactional storage engine optimized for lazy, partial, and strongly consistent replication—perfect for edge, offline-first, and distributed applications.
-- read [The Most Amusing Security Flaws I've Discovered](https://predr.ag/blog/xorry-not-sorry-most-amusing-security-flaws-ive-discovered/)
-- read [Foundation Models and Unix](https://vagos.github.io/blog/foundation-models-unix.html)
-- read [Goodbye Offpunk, Welcome XKCDpunk](https://ploum.net/2025-04-01-xkcdpunk.html)
-- read [Hello Quarto: Porting my Website from Hugo Apéro](https://silviacanelon.com/blog/2023-09-29-hello-quarto/)
+\subtree[2025-04-02]{\mdnote{2025-04-02}{\tags{#formal #security #theory}
+- [Stop syncing everything](https://sqlsync.dev/posts/stop-syncing-everything/), which launches [Graft](https://github.com/orbitinghail/graft), an open-source transactional storage engine optimized for lazy, partial, and strongly consistent replication—perfect for edge, offline-first, and distributed applications.
+- [The Most Amusing Security Flaws I've Discovered](https://predr.ag/blog/xorry-not-sorry-most-amusing-security-flaws-ive-discovered/)
+- [Foundation Models and Unix](https://vagos.github.io/blog/foundation-models-unix.html)
+- [Goodbye Offpunk, Welcome XKCDpunk](https://ploum.net/2025-04-01-xkcdpunk.html)
+- [Hello Quarto: Porting my Website from Hugo Apéro](https://silviacanelon.com/blog/2023-09-29-hello-quarto/)
 - found [Interaction nets](https://wiki.xxiivv.com/site/interaction_nets.html)
-- read [Programming with an AI copilot: My perspective as a senior dev](https://mlagerberg.com/blog-ai-copilot/)
+- [Programming with an AI copilot: My perspective as a senior dev](https://mlagerberg.com/blog-ai-copilot/)
 - found [Testing Distributed Systems](https://asatarin.github.io/testing-distributed-systems/)
 - found
     - \citef{petersen2024mathematical}
@@ -1163,62 +1279,62 @@
 \subtree[2025-03]{
 \title{March, 2025}
 
-\subtree[2025-03-31]{\mdnote{2025-03-31: rust}{
-- read [There is no Vibe Engineering](https://serce.me/posts/2025-31-03-there-is-no-vibe-engineering)
+\subtree[2025-03-31]{\mdnote{2025-03-31}{\tags{#rust}
+- [There is no Vibe Engineering](https://serce.me/posts/2025-31-03-there-is-no-vibe-engineering)
 - found [Koto Programming Language](https://koto.dev/), it's not so DSL-friendly like Rhai, but a reasonably good script language embeddable in Rust
-- read [Thoughts on ECS](https://blog.voxagon.se/2025/03/28/thoughts-on-ecs.html)
-- read [Expressing Japanese Grammar Through TypeScript Type System](https://github.com/typedgrammar/typed-japanese/blob/main/blog.md)
+- [Thoughts on ECS](https://blog.voxagon.se/2025/03/28/thoughts-on-ecs.html)
+- [Expressing Japanese Grammar Through TypeScript Type System](https://github.com/typedgrammar/typed-japanese/blob/main/blog.md)
     - I really wanted this for French, except for not in TypeScript, but something Rust-like
 }}
 
-\subtree[2025-03-30]{\mdnote{2025-03-30: claude}{
+\subtree[2025-03-30]{\mdnote{2025-03-30}{\tags{#claude}
 - work on exporting Discord chat and feeding them to [RAG](https://github.com/stars/utensil/lists/llm-kb), the result is not quite ideal
 - try DeepSeek-v3-0324, but still not as good as Claude 3.5 for my use cases
 - re-evaluate [marimo](https://marimo.io/) as an alternative to testing with Jupyter notebooks
     - but it doesn' store outputs, and [the candidate testing solution](https://github.com/marimo-team/marimo/discussions/573) is not elegant
 }}
 
-\subtree[2025-03-28]{\mdnote{2025-03-28: rust, theory, ✍️}{
+\subtree[2025-03-28]{\mdnote{2025-03-28}{\tags{#rust #theory #✍️}
 - found
     - \citef{bach2024learning}
     - \citef{feng2023winding}, and read [the blog post](https://nzfeng.github.io/research/WNoDS/index.html)
     - \citef{williams2025simulating}
-- read [Succinct data structures](https://blog.startifact.com/posts/succinct/)
+- [Succinct data structures](https://blog.startifact.com/posts/succinct/)
 - found [Xee: A Modern XPath and XSLT Engine in Rust](https://blog.startifact.com/posts/xee/) which could be used to process Forester XMLs in the future
 - found [The Mean-ing of Loss Functions](https://jiha-kim.github.io/posts/the-mean-ing-of-loss-functions/)
 - wrote [[uts-0167]]
 }}
 
-\subtree[2025-03-27]{\mdnote{2025-03-27: elixir, rust, zig}{
+\subtree[2025-03-27]{\mdnote{2025-03-27}{\tags{#elixir #rust #zig}
 - learn more about Elixir
-    - read [Running ML models in Elixir using Pythonx](https://samrat.me/running-ml-models-in-elixir-using-pythonx/)
-    - read [Embedded Zig with Elixir, Mandelbrot set](https://zig.news/ndrean/embedded-zig-with-elixir-mandelbrot-set-4e31)
-    - read [Rustler Precompilation guide](https://hexdocs.pm/rustler_precompiled/precompilation_guide.html)
+    - [Running ML models in Elixir using Pythonx](https://samrat.me/running-ml-models-in-elixir-using-pythonx/)
+    - [Embedded Zig with Elixir, Mandelbrot set](https://zig.news/ndrean/embedded-zig-with-elixir-mandelbrot-set-4e31)
+    - [Rustler Precompilation guide](https://hexdocs.pm/rustler_precompiled/precompilation_guide.html)
     - learn about [axon](https://github.com/elixir-nx/axon) and the [Numerical Elixir (Nx)](https://github.com/elixir-nx) ecosystem
-- read [Why MCP Won](https://www.latent.space/p/why-mcp-won)
+- [Why MCP Won](https://www.latent.space/p/why-mcp-won)
 }}
 
-\subtree[2025-03-24]{\mdnote{2025-03-24: clifford}{
+\subtree[2025-03-24]{\mdnote{2025-03-24}{\tags{#clifford}
 - slowly picking up open-source work, after fragmented learning due to the DeepSeek hype
 - found [PeanoScript](https://peanoscript.mjgrzymek.com/tutorial), TypeScript but a theorem prover
-- read [attention is logarithmic, actually](https://supaiku.com/attention-is-logarithmic)
-- read \citef{roelfs2025willing}, the [Kingdon](https://github.com/tBuLi/kingdon) paper
+- [attention is logarithmic, actually](https://supaiku.com/attention-is-logarithmic)
+- \citef{roelfs2025willing}, the [Kingdon](https://github.com/tBuLi/kingdon) paper
 }}
 
-\subtree[2025-03-18]{\mdnote{2025-03-18: ocaml, racket}{
+\subtree[2025-03-18]{\mdnote{2025-03-18}{\tags{#ocaml #racket}
 - found [Rhombus](https://rhombus-lang.org/), a Racket without parenthesis
-- read [Writing a SIGGRAPH paper (for fun) (2020)](https://www.mattkeeter.com/projects/siggraph/)
-- read [The 70\% problem: Hard truths about AI-assisted coding](https://addyo.substack.com/p/the-70-problem-hard-truths-about)
+- [Writing a SIGGRAPH paper (for fun) (2020)](https://www.mattkeeter.com/projects/siggraph/)
+- [The 70\% problem: Hard truths about AI-assisted coding](https://addyo.substack.com/p/the-70-problem-hard-truths-about)
 - learn about [owi: Cross-language Bugfinder](https://github.com/OCamlPro/owi)
 - found \citef{murphy2024reinforcement}, some ML books by the same author are [on Github](https://github.com/AniruddhaChattopadhyay/Books)
 - found \citef{prasolov1995intuitive}
 }}
 
-\subtree[2025-03-13]{\mdnote{2025-03-13: galgebra}{
+\subtree[2025-03-13]{\mdnote{2025-03-13}{\tags{#galgebra}
 - learn about \citef{helmstetter2013minimal}, a paper about determining whether a multivector is a versor, as versors are invertible lipschitzian elements, related to [galgebra#533](https://github.com/pygae/galgebra/issues/533)
 }}
 
-\subtree[2025-03-11]{\mdnote{2025-03-11: agent, category, lean, proof, quantum, theory}{
+\subtree[2025-03-11]{\mdnote{2025-03-11}{\tags{#agent #category #lean #proof #quantum #theory}
 - found
     - Math
         - [Category Theory Illustrated](https://github.com/abuseofnotation/category-theory-illustrated)
@@ -1235,8 +1351,7 @@
         - \citef{li2023camel} for [Owl](https://github.com/camel-ai/owl)
 }}
 
-\subtree[2025-03-07]{\mdnote{2025-03-07: rust, zig}{
-
+\subtree[2025-03-07]{\mdnote{2025-03-07}{\tags{#rust #zig}
 - found some readings for Rust and Zig, see [native-land commits](https://github.com/utensil/native-land/commit/e1ced218d8ad3365acca745e38279306644e475f)
 
 }}
@@ -1246,20 +1361,20 @@
 \subtree[2025-02]{
 \title{February, 2025}
 
-\subtree[2025-02-27]{\mdnote{2025-02-27: raymarching}{
-- read [Raymarching The Gunk](https://jarllarsson.github.io/gen/gunkraymarcher.html)
+\subtree[2025-02-27]{\mdnote{2025-02-27}{\tags{#raymarching}
+- [Raymarching The Gunk](https://jarllarsson.github.io/gen/gunkraymarcher.html)
 }}
 
-\subtree[2025-02-26]{\mdnote{2025-02-26: claude, proof, typst, z3}{
-- read [Uncensor any LLM with abliteration](https://huggingface.co/blog/mlabonne/abliteration)
-- read [All the Transformer Math You Need to Know](https://jax-ml.github.io/scaling-book/transformers/)
-- read [[AINews] Claude 3.7 Sonnet](https://buttondown.com/ainews/archive/ainews-claude-37-sonnet/)
+\subtree[2025-02-26]{\mdnote{2025-02-26}{\tags{#claude #proof #typst #z3}
+- [Uncensor any LLM with abliteration](https://huggingface.co/blog/mlabonne/abliteration)
+- [All the Transformer Math You Need to Know](https://jax-ml.github.io/scaling-book/transformers/)
+- [[AINews] Claude 3.7 Sonnet](https://buttondown.com/ainews/archive/ainews-claude-37-sonnet/)
 - learn about [Typst 0.13 is out now: Experimental HTML export, semantic paragraphs, and more](https://typst.app/blog/2025/typst-0.13/)
-- read [Where are all the Rewrite Rules?](https://www.philipzucker.com/rewrite_rules/), using [Knuckledragger](https://github.com/philzook58/knuckledragger), a down to earth, highly automated interactive proof assistant in Python, based on Z3
-- read [My LLM codegen workflow atm](https://harper.blog/2025/02/16/my-llm-codegen-workflow-atm/)
+- [Where are all the Rewrite Rules?](https://www.philipzucker.com/rewrite_rules/), using [Knuckledragger](https://github.com/philzook58/knuckledragger), a down to earth, highly automated interactive proof assistant in Python, based on Z3
+- [My LLM codegen workflow atm](https://harper.blog/2025/02/16/my-llm-codegen-workflow-atm/)
 - found [The FFmpeg School of Assembly Language](https://github.com/FFmpeg/asm-lessons/blob/main/lesson_01/index.md)
-- read [Serving local LLMs with MLX](https://kconner.com/2025/02/17/running-local-llms-with-mlx.html)
-- read [Enough with all the Raft](https://www.hytradboi.com/2025/2016d6c4-b08d-40b3-af2f-67926ca8521f-enough-with-all-the-raft)
+- [Serving local LLMs with MLX](https://kconner.com/2025/02/17/running-local-llms-with-mlx.html)
+- [Enough with all the Raft](https://www.hytradboi.com/2025/2016d6c4-b08d-40b3-af2f-67926ca8521f-enough-with-all-the-raft)
 }}
 
 }
@@ -1268,17 +1383,17 @@
 
 \title{January, 2025}
 
-\subtree[2025-01-23]{\mdnote{2025-01-23: typst, ✍️}{
+\subtree[2025-01-23]{\mdnote{2025-01-23}{\tags{#typst #✍️}
 - busy with Spring Festival
-- read WeRead books and wrote some reviews
+- WeRead books and wrote some reviews
 - casual readings are starred in NetNewsWire
 - learn stuff related to DeepSeek and MLX
 - set up my new Mac Mini with M4 Pro, Logi MX Keys, MX Master 3, and 4 screen working environment
 - organize my Chinese ancient poetry collection (in LaTeX, wishing to port to Typst in the future)
 }
 
-\subtree[2025-01-11]{\mdnote{2025-01-11: gradient, physics, quantum, render, rust, theory, zig}{
-- read articles on lobste.rs
+\subtree[2025-01-11]{\mdnote{2025-01-11}{\tags{#gradient #physics #quantum #render #rust #theory #zig}
+- articles on lobste.rs
     - [Elementary Water Rendering](https://jysandy.github.io/posts/gradient-water-rendering/)
     - [Prototyping in Rust](https://corrode.dev/blog/prototyping/)
     - [Go is a Well-Designed Language, Actually](https://mattjhall.co.uk/posts/go-is-well-designed-actually.html) v.s. [Why Go Should Sometimes Be a No-Go](https://brainbaking.com/post/2024/12/why-go-should-sometimes-be-a-no-go/)
@@ -1295,7 +1410,7 @@
 - found *Histoire de la philosophie* by Émile Bréhier
 }}
 
-\subtree[2025-01-01]{\mdnote{2025-01-01: misc}{
+\subtree[2025-01-01]{\mdnote{2025-01-01}{\tags{#misc}
 - 📦 move to new office and get used to everything
 - 🗓️ making plans for the new year
 }}
@@ -1312,60 +1427,60 @@
 \subtree[2024-12]{
 \title{December, 2024}
 
-\subtree[2024-12-30]{\mdnote{2024-12-30: galgebra, gpu, lean, rust}{
-- read [Fish 4.0: The Fish Of Theseus](https://fishshell.com/blog/rustport/), it's about Fish team porting Fish from C++ to Rust
+\subtree[2024-12-30]{\mdnote{2024-12-30}{\tags{#galgebra #gpu #lean #rust}
+- [Fish 4.0: The Fish Of Theseus](https://fishshell.com/blog/rustport/), it's about Fish team porting Fish from C++ to Rust
 - found [cargo-gpu](https://github.com/rust-gpu/cargo-gpu)
-- read [A letter to open-source maintainers](https://xuanwo.io/2024/10-a-letter-to-open-source-maintainers/)
+- [A letter to open-source maintainers](https://xuanwo.io/2024/10-a-letter-to-open-source-maintainers/)
     - I hope to make a release for both GAlgebra and lean4_jupyter before or around the end of the year
-- read [Dotfile Management using Stow](https://matty.dev/blog/2024-07-12-dot-file-management)
+- [Dotfile Management using Stow](https://matty.dev/blog/2024-07-12-dot-file-management)
     - previously I was reluctant to use stow as it's written in Perl
     - maybe I'll also try `brew bundle` too
 }}
 
-\subtree[2024-12-27]{\mdnote{2024-12-27: rust, zig}{
-- read [When Zig is safer and faster than Rust](https://zackoverflow.dev/writing/unsafe-rust-vs-zig)
+\subtree[2024-12-27]{\mdnote{2024-12-27}{\tags{#rust #zig}
+- [When Zig is safer and faster than Rust](https://zackoverflow.dev/writing/unsafe-rust-vs-zig)
     - and [How to Actually Write C](https://zackoverflow.dev/writing/how-to-actually-write-c)
-- read [PKMs: Less Management, More Knowledge](https://shantanugoel.com/2024/12/26/pkm-less-management-more-knowledge/)
+- [PKMs: Less Management, More Knowledge](https://shantanugoel.com/2024/12/26/pkm-less-management-more-knowledge/)
     - found [capacities](https://capacities.io/) and [hoarder](https://hoarder.app/)
-- read [Gu Shi](https://clarkesworldmagazine.com/author/gu-shi/)'s *Möbius Continuum* and write a review on Weread
+- [Gu Shi](https://clarkesworldmagazine.com/author/gu-shi/)'s *Möbius Continuum* and write a review on Weread
 }}
 
-\subtree[2024-12-24]{\mdnote{2024-12-24: misc}{
+\subtree[2024-12-24]{\mdnote{2024-12-24}{\tags{#misc}
 - found \citef{hutter2024introduction}
 }}
 
-\subtree[2024-12-13]{\mdnote{2024-12-13: clifford, galgebra}{
+\subtree[2024-12-13]{\mdnote{2024-12-13}{\tags{#clifford #galgebra}
 - recieved [pygae/galgebra#529](https://github.com/pygae/galgebra/issues/529) about Shirokov inverse, read \citef{shirokov2021computing}
 }}
 
-\subtree[2024-12-17]{\mdnote{2024-12-17: misc}{
+\subtree[2024-12-17]{\mdnote{2024-12-17}{\tags{#misc}
 - 🎿🪂
 - reading Wang Guowei's philosophical works
-- read [Ghostty Is Native—So What?](https://gpanders.com/blog/ghostty-is-native-so-what/)
+- [Ghostty Is Native—So What?](https://gpanders.com/blog/ghostty-is-native-so-what/)
 }}
 
-\subtree[2024-12-15]{\mdnote{2024-12-15: proof, rust, ✍️}{
-- read [My Ph.D. advisor rewrote himself in bash](https://matt.might.net/articles/shell-scripts-for-passive-voice-weasel-words-duplicates/), and learn about how weasel words, passive voice, and lexical illusions can make technical writing less precise, clear, and convey a lack of proofreading
-- read [Playground Wisdom: Threads Beat Async/Await](https://lucumr.pocoo.org/2024/11/18/threads-beat-async-await/), and learn that in imperative programming, structured concurrency might be better than async/await, we don't always need to introduce functional programming concepts
-- read [From where I left](https://antirez.com/news/144) by antirez, the author of Redis, and learn that he likes the new license, and he does more work but better work by using AI to proofread and help testing the work instead of replace what he does better
-- read [Fermat’s Last Theorem — how it’s going](https://xenaproject.wordpress.com/2024/12/11/fermats-last-theorem-how-its-going/), and enjoy the story of finding the right work for fixing a fixable proof
-- read [Dude, where's my main?](https://samwho.dev/blog/dude-wheres-my-main/) and learn that executables can be position-independent just like libraries, and wonder if I can implement chaos engineering in Rust to learn more about low-level system design
-- read [post-mortems](https://github.com/danluu/post-mortems) for massive IT outage in recent years, and wish to keep a track of inspiring ones of them
+\subtree[2024-12-15]{\mdnote{2024-12-15}{\tags{#proof #rust #✍️}
+- [My Ph.D. advisor rewrote himself in bash](https://matt.might.net/articles/shell-scripts-for-passive-voice-weasel-words-duplicates/), and learn about how weasel words, passive voice, and lexical illusions can make technical writing less precise, clear, and convey a lack of proofreading
+- [Playground Wisdom: Threads Beat Async/Await](https://lucumr.pocoo.org/2024/11/18/threads-beat-async-await/), and learn that in imperative programming, structured concurrency might be better than async/await, we don't always need to introduce functional programming concepts
+- [From where I left](https://antirez.com/news/144) by antirez, the author of Redis, and learn that he likes the new license, and he does more work but better work by using AI to proofread and help testing the work instead of replace what he does better
+- [Fermat’s Last Theorem — how it’s going](https://xenaproject.wordpress.com/2024/12/11/fermats-last-theorem-how-its-going/), and enjoy the story of finding the right work for fixing a fixable proof
+- [Dude, where's my main?](https://samwho.dev/blog/dude-wheres-my-main/) and learn that executables can be position-independent just like libraries, and wonder if I can implement chaos engineering in Rust to learn more about low-level system design
+- [post-mortems](https://github.com/danluu/post-mortems) for massive IT outage in recent years, and wish to keep a track of inspiring ones of them
 - learn about [git-backdate](https://github.com/rixx/git-backdate), which can help me date unpushed commits better
 }}
 
-\subtree[2024-12-12]{\mdnote{2024-12-12: agent, proof}{
-- read [How wide is a proof?](https://robwilson1.wordpress.com/2024/12/07/how-wide-is-a-proof/)
+\subtree[2024-12-12]{\mdnote{2024-12-12}{\tags{#agent #proof}
+- [How wide is a proof?](https://robwilson1.wordpress.com/2024/12/07/how-wide-is-a-proof/)
 - found [Notes on Geometric Algebra](https://github.com/cloudcell/GA_Notes)
 - skimmed \citef{wang2024agents} and related papers
 }}
 
-\subtree[2024-12-09]{\mdnote{2024-12-09: misc}{
+\subtree[2024-12-09]{\mdnote{2024-12-09}{\tags{#misc}
 - 🚧 busy
 - reading 📘*Zen and the Art of Motorcycle Maintenance: An Inquiry into Values*
 }}
 
-\subtree[2024-12-01]{\mdnote{2024-12-01: clifford, git, render, rust, ✍️}{
+\subtree[2024-12-01]{\mdnote{2024-12-01}{\tags{#clifford #git #render #rust #✍️}
 - try Deepseek Deep Think, add [[uts-002I]]
 - rethinking self-hosted git repos, CI, and pages, found
     - [Forgejo](https://code.readeck.org/)
@@ -1374,10 +1489,10 @@
     - based on [an AoC Rust script example](https://github.com/ChristopherBiscardi/advent-of-code/blob/bc5ad528576194355f2fb1b6a03091d8bcd69f76/2024/rust/scripts/get-aoc-input.rs)
     - try QwQ
 - try [copilot-more](https://github.com/jjleng/copilot-more), maybe settle on it
-- read [Clifford algebra or Lie algebra?](https://robwilson1.wordpress.com/2024/11/30/clifford-algebra-or-lie-algebra/)
+- [Clifford algebra or Lie algebra?](https://robwilson1.wordpress.com/2024/11/30/clifford-algebra-or-lie-algebra/)
 - learn a bit more about Slang, V, and Lobster
 - watch [Really amazing talk by Tomasz Stachowiak: Rendering Tiny Glades With Entirely Too Much Ray Marching](https://www.youtube.com/watch?v=jusWW2pPnA0&ab_channel=GraphicsProgrammingConference)
-- read [The Door ProblemA](https://lizengland.com/blog/2014/04/the-door-problem/) from [awesome-falsehood](https://github.com/kdeldycke/awesome-falsehood)
+- [The Door ProblemA](https://lizengland.com/blog/2014/04/the-door-problem/) from [awesome-falsehood](https://github.com/kdeldycke/awesome-falsehood)
 }}
 
 }
@@ -1385,11 +1500,11 @@
 \subtree[2024-11]{
 \title{November, 2024}
 
-\subtree[2024-11-29]{\mdnote{2024-11-29: gpu, rust}{
-- read [Optimizing a Rust GPU matmul kernel](https://rust-gpu.github.io/blog/optimizing-matmul/)
+\subtree[2024-11-29]{\mdnote{2024-11-29}{\tags{#gpu #rust}
+- [Optimizing a Rust GPU matmul kernel](https://rust-gpu.github.io/blog/optimizing-matmul/)
 }}
 
-\subtree[2024-11-28]{\mdnote{2024-11-28: quantum, theory}{
+\subtree[2024-11-28]{\mdnote{2024-11-28}{\tags{#quantum #theory}
 - found
     - \citef{broden2024knots}
     - \citef{etingof2024mathematical}
@@ -1397,21 +1512,21 @@
     - [Competitive Programmer's Handbook](https://github.com/pllk/cphb)
 }}
 
-\subtree[2024-11-27]{\mdnote{2024-11-27: haskell}{
-- read [Haskell: A Great Procedural Language](https://entropicthoughts.com/haskell-procedural-programming)
+\subtree[2024-11-27]{\mdnote{2024-11-27}{\tags{#haskell}
+- [Haskell: A Great Procedural Language](https://entropicthoughts.com/haskell-procedural-programming)
 }}
 
-\subtree[2024-11-23]{\mdnote{2024-11-23: misc}{
+\subtree[2024-11-23]{\mdnote{2024-11-23}{\tags{#misc}
 - 🚧 busy
 }}
 
-\subtree[2024-11-22]{\mdnote{2024-11-22: shader}{
+\subtree[2024-11-22]{\mdnote{2024-11-22}{\tags{#shader}
 - found [Slang](https://github.com/shader-slang/slang)
-- read [Exploring Async Runtimes by Building our Own](https://blog.maguire.tech/posts/explorations/exploring-async-runtimes/)
+- [Exploring Async Runtimes by Building our Own](https://blog.maguire.tech/posts/explorations/exploring-async-runtimes/)
 - found \citef{collas2018dirac}
 }}
 
-\subtree[2024-11-21]{\mdnote{2024-11-21: compiler, performance, vulkan}{
+\subtree[2024-11-21]{\mdnote{2024-11-21}{\tags{#compiler #performance #vulkan}
 - found [Impala](https://anydsl.github.io/Impala.html)
     - skimmed
         - \citef{leissa2018anydsl}
@@ -1421,13 +1536,13 @@
         - [Vulkan Clang Compiler](https://shady-gang.github.io/vcc/)
 }}
 
-\subtree[2024-11-20]{\mdnote{2024-11-20: clifford}{
+\subtree[2024-11-20]{\mdnote{2024-11-20}{\tags{#clifford}
 - skimmed
     - \citef{pepe2024staresnet}
     - \citef{filimoshina2024note}
 }}
 
-\subtree[2024-11-12]{\mdnote{2024-11-12: citation, galgebra, lean, rust, ✍️}{
+\subtree[2024-11-12]{\mdnote{2024-11-12}{\tags{#citation #galgebra #lean #rust #✍️}
 - experiments on using [aider](https://aider.chat/) for LLM assisted project-level pair programming
     - [this PR](https://github.com/utensil/lean4_jupyter/pull/2) is a most extensive one
 - finish citation trace for GAlgebra, see [this PR](https://github.com/pygae/galgebra/pull/528) for relevant readings
@@ -1435,37 +1550,37 @@
 - found [Cario](https://www.cairo-lang.org/), a provable Rust-like language
 }}
 
-\subtree[2024-11-11]{\mdnote{2024-11-11: ag}{
+\subtree[2024-11-11]{\mdnote{2024-11-11}{\tags{#ag}
 - found [Bartosz Ciechanowski's blog](https://ciechanow.ski/)
 - found \citef{michor2008topics} and \citef{milne2012algebraic}, helpful for [[ag-0001]]
 - plan to read \citef{mosto2024templex}
 }}
 
-\subtree[2024-11-10]{\mdnote{2024-11-10: lean, rust, wasm}{
+\subtree[2024-11-10]{\mdnote{2024-11-10}{\tags{#lean #rust #wasm}
 - contemplate the idea of better file management with Rust
 - meet datachain, extism, revisit mage-ai, should evaluate kestra, contemplate the idea of ML orchestration with Rust where each node is a WASM plugin, [BAML](https://github.com/BoundaryML/baml) has some potential
 - wish to get back more on Lean and Math in this month
 }}
 
-\subtree[2024-11-08]{\mdnote{2024-11-08: compiler, rust}{
+\subtree[2024-11-08]{\mdnote{2024-11-08}{\tags{#compiler #rust}
 - 🌴
 - contemplate the idea of a bot to keep me going back to work on my projects, triggered by
     - an update of a related project
     - more than a month of inactivity
         - on the repo
         - or on a recent opened issue
-- read [gccrs: An alternative compiler for Rust](https://blog.rust-lang.org/2024/11/07/gccrs-an-alternative-compiler-for-rust.html)
+- [gccrs: An alternative compiler for Rust](https://blog.rust-lang.org/2024/11/07/gccrs-an-alternative-compiler-for-rust.html)
 }}
 
-\subtree[2024-11-07]{\mdnote{2024-11-07: proof}{
-- read [Isa Proof Shell](https://github.com/xqyww123/Isa-Proof-Shell)
+\subtree[2024-11-07]{\mdnote{2024-11-07}{\tags{#proof}
+- [Isa Proof Shell](https://github.com/xqyww123/Isa-Proof-Shell)
 }}
 
-\subtree[2024-11-06]{\mdnote{2024-11-06: git, gpu, neovim, ocaml, render, rust, shader}{
-- read [Forester 5.x git log](https://git.sr.ht/~jonsterling/ocaml-forester/log/forester-5.0-dev), not bumping to 5.x yet
+\subtree[2024-11-06]{\mdnote{2024-11-06}{\tags{#git #gpu #neovim #ocaml #render #rust #shader}
+- [Forester 5.x git log](https://git.sr.ht/~jonsterling/ocaml-forester/log/forester-5.0-dev), not bumping to 5.x yet
 - evaluate [HTMX](https://htmx.org/server-examples/) a bit
-- read [Why not just embed Neovim?](https://zed.dev/blog/zed-decoded-vim), will need to revisit Zed later
-- read [RustGPU: Pros&Cons](https://github.com/schell/renderling/blob/main/NOTES.md#cons--limititions--gotchas), the author [becomes a maintainer of RustGPU](https://rust-gpu.github.io/blog/2024/11/06/new-maintainers/)
+- [Why not just embed Neovim?](https://zed.dev/blog/zed-decoded-vim), will need to revisit Zed later
+- [RustGPU: Pros&Cons](https://github.com/schell/renderling/blob/main/NOTES.md#cons--limititions--gotchas), the author [becomes a maintainer of RustGPU](https://rust-gpu.github.io/blog/2024/11/06/new-maintainers/)
 - found [VR Schwarzschild black hole shader (works with SPS and SPS-I)](https://gist.github.com/MichaelMoroz/b35d456056f3b958962ffb93f37ac55c)
 }}
 }
@@ -1473,11 +1588,11 @@
 \subtree[2024-10]{
 \title{October, 2024}
 
-\subtree[2024-10-30]{\mdnote{2024-10-30: ✍️}{
+\subtree[2024-10-30]{\mdnote{2024-10-30}{\tags{#✍️}
 - finish [[uts-002H]]
 }}
 
-\subtree[2024-10-25]{\mdnote{2024-10-25: benchmark, formal, rust}{
+\subtree[2024-10-25]{\mdnote{2024-10-25}{\tags{#benchmark #formal #rust}
 - work on native-land
     - trying to make GA and math benchmark work, also evaluating the feasibility of benchmarking C++ libraries from Rust
     - pass CI on runpod
@@ -1485,7 +1600,7 @@
 - debug various TUI tools
 }}
 
-\subtree[2024-10-18]{\mdnote{2024-10-18: formal, gpu, lean, neovim, rust, ✍️}{
+\subtree[2024-10-18]{\mdnote{2024-10-18}{\tags{#formal #gpu #lean #neovim #rust #✍️}
 - work on native-land, trying to make rust-gpu fully work
 - work on formal-land, trying to establish the infrastructure to explore multiple Lean 4 projects with independent toolchains and dependencies
 - switching to Neovim, make it work for Rust, Lean, and forester
@@ -1494,33 +1609,33 @@
 - start reading [Modern C++ Programming Course (C++03/11/14/17/20/23/26)](https://github.com/federico-busato/Modern-CPP-Programming)
 }}
 
-\subtree[2024-10-17]{\mdnote{2024-10-17: citation, haskell, physics, render, shader, vulkan, webgl}{
+\subtree[2024-10-17]{\mdnote{2024-10-17}{\tags{#citation #haskell #physics #render #shader #vulkan #webgl}
 - initial citation trace for \citef{james2015gravitational} and \citef{james2015visualizing}
-- read \citef{meseguer2023custom} (Vulkan, Ray-marching, Kerr black hole) [lrogerorrit/narwhalEngine](https://github.com/lrogerorrit/narwhalEngine)
-- read \citef{bruneton2020real} (CPU precal, WebGL2, Schwarzschild black hole) [ebruneton/black_hole_shader](https://github.com/ebruneton/black_hole_shader)
+- \citef{meseguer2023custom} (Vulkan, Ray-marching, Kerr black hole) [lrogerorrit/narwhalEngine](https://github.com/lrogerorrit/narwhalEngine)
+- \citef{bruneton2020real} (CPU precal, WebGL2, Schwarzschild black hole) [ebruneton/black_hole_shader](https://github.com/ebruneton/black_hole_shader)
 - skimmed \citef{fang2024identifying}
 - learn about \citef{haftmann2013haskell}: the type class for Isabelle, but its expressiveness is limited, see discussions in \citef{schmoetten2024construction}
 }}
 
-\subtree[2024-10-16]{\mdnote{2024-10-16: arm, benchmark, gpu, gradient}{
-- read \citef{siskind2019automatic} and \citef{naumann2024matrix}, seems limited, but have some good references
+\subtree[2024-10-16]{\mdnote{2024-10-16}{\tags{#arm #benchmark #gpu #gradient}
+- \citef{siskind2019automatic} and \citef{naumann2024matrix}, seems limited, but have some good references
 - skim \citef{low2023gafro} (good library and benchmark) and \citef{eid2024developing} (good refs, but in C#)
 - skim \citef{sharma2024comprehensive}, an interesting area with sparse tensors as an in-memory database in mind
 - skim \citef{zhao2024felix} ([uiuc-arc/felix](https://github.com/uiuc-arc/felix)), which uses egg
 }}
 
-\subtree[2024-10-15]{\mdnote{2024-10-15: compiler, gradient}{
+\subtree[2024-10-15]{\mdnote{2024-10-15}{\tags{#compiler #gradient}
 - found \citef{raptis2024functoriality}
 - found \citef{shaikhha2024tensor} and \citef{zhao2024felix}
 - SDQLite \citef{schleich2023optimizing} (based on [SDQL](https://github.com/edin-dal/sdql)) is an intermediate language that expresses sparse tensor workloads by separating the tensoropt computations from the storage formats
 - reminds me of \citef{wu2024multi}
 }}
 
-\subtree[2024-10-11]{\mdnote{2024-10-11: gpu}{
+\subtree[2024-10-11]{\mdnote{2024-10-11}{\tags{#gpu}
 - work on [native-land](https://github.com/utensil/native-land) about GPU computation, see relavant README updates.
 }}
 
-\subtree[2024-10-10]{\mdnote{2024-10-10: bevy, game, rust}{
+\subtree[2024-10-10]{\mdnote{2024-10-10}{\tags{#bevy #game #rust}
 - watch [Chris Biscardi - Bevy: A case study in ergonomic Rust](https://www.youtube.com/watch?v=CnoDOc6ML0Y)
 - have a better idea about the game about fly, evade, slingshot, and shoot around black holes, 4D implicit surfaces
 - explore [sketchfab](https://sketchfab.com/3d-models/black-hole-e410da98b1e5445eae2acafaaa53587d), [polyhaven](https://polyhaven.com/), and [openverse](https://openverse.org/), and have a basic idea about how to use them in the early stage of the game
@@ -1528,13 +1643,13 @@
 - found \citef{garrity2013algebraic}
 }}
 
-\subtree[2024-10-09]{\mdnote{2024-10-09: lean}{
-- read [C++ Package Managers: The Ultimate Roundup](https://moderncppdevops.com/pkg-mngr-roundup/), and start using [xrepo](https://xrepo.xmake.io/) for C/C++ package management, it also supports a wide range of [package repositories](https://xmake.io/#/home?id=supported-package-repositories), including Conan, Conda, Vcpkg, Homebrew, Apt, and Cargo. But not [BinaryBuilder.jl ecosystem](https://github.com/JuliaPackaging/BinaryBuilder.jl) (see also [this FAQ](https://docs.binarybuilder.org/dev/FAQ/#Hey,-this-is-cool,-can-I-use-this-for-my-non-Julia-related-project?)).
+\subtree[2024-10-09]{\mdnote{2024-10-09}{\tags{#lean}
+- [C++ Package Managers: The Ultimate Roundup](https://moderncppdevops.com/pkg-mngr-roundup/), and start using [xrepo](https://xrepo.xmake.io/) for C/C++ package management, it also supports a wide range of [package repositories](https://xmake.io/#/home?id=supported-package-repositories), including Conan, Conda, Vcpkg, Homebrew, Apt, and Cargo. But not [BinaryBuilder.jl ecosystem](https://github.com/JuliaPackaging/BinaryBuilder.jl) (see also [this FAQ](https://docs.binarybuilder.org/dev/FAQ/#Hey,-this-is-cool,-can-I-use-this-for-my-non-Julia-related-project?)).
 - clarify the license for GinacLean, laying the ground for potential future work around [Cadabra 2](https://github.com/kpeeters/cadabra2), which is licensed under GPLv3
 - learn about [Kento Okura's forest and Glade](https://kentookura.srht.site/) and [Nota](https://nota-lang.org/)
 }}
 
-\subtree[2024-10-08]{\mdnote{2024-10-08: formal, gpu, lean, llvm, vulkan, z3}{
+\subtree[2024-10-08]{\mdnote{2024-10-08}{\tags{#formal #gpu #lean #llvm #vulkan #z3}
 - add more plans in formal-land
 - recovered [Research Codebase Manifesto](https://www.moderndescartes.com/essays/research_code/) from [Lean-MLIR](https://github.com/opencompl/lean-mlir)
 - recovered [quotes from CICM 2020 Slack chat](https://gist.github.com/utensil/b4616dd5452d665318780c8a8b193dcc)
@@ -1543,38 +1658,38 @@
 - found [Lorenz and modular flows: a visual introduction](https://www.josleys.com/articles/ams_article/Lorenz3.htm)
 }}
 
-\subtree[2024-10-07]{\mdnote{2024-10-07: rust, ✍️}{
+\subtree[2024-10-07]{\mdnote{2024-10-07}{\tags{#rust #✍️}
 - learned about [lobste.rs](https://lobste.rs/), a computing-focused community centered around link aggregation and discussion, a bit like Hacker News but less noise maybe
-- read [Rewriting Rust](https://lobste.rs/s/29a1eo/rewriting_rust) and [Josh Triplett's comment](https://www.reddit.com/r/rust/comments/1fpomvp/rewriting_rust/lozktuv/)
-- read \citef{wu2024multi} and learn about [mirage](https://github.com/mirage-project/mirage)
+- [Rewriting Rust](https://lobste.rs/s/29a1eo/rewriting_rust) and [Josh Triplett's comment](https://www.reddit.com/r/rust/comments/1fpomvp/rewriting_rust/lozktuv/)
+- \citef{wu2024multi} and learn about [mirage](https://github.com/mirage-project/mirage)
 - port [[uts-001R]]
 - make [the Railscasts theme for Zed](https://gist.github.com/utensil/a279928e07fe23558fa688ca4d82181e)
 }}
 
-\subtree[2024-10-06]{\mdnote{2024-10-06: apl, tla, z3}{
+\subtree[2024-10-06]{\mdnote{2024-10-06}{\tags{#apl #tla #z3}
 - found [ipe](https://github.com/otfried/ipe) that is used extensively in [tungsteno](https://www.tungsteno.io/post/exp-classification_compact_surfaces/) ([source](https://github.com/TungstenHub/tngt-ipe/tree/master))
-- read [Why I use TLA+ and not(TLA+)](https://protocols-made-fun.com/specification/modelchecking/tlaplus/quint/2024/10/05/tla-and-not-tla.html), learn about PlusCal, [Quint](https://quint-lang.org/) and [Apalache](https://apalache-mc.org/) (TLA+ to Z3)
+- [Why I use TLA+ and not(TLA+)](https://protocols-made-fun.com/specification/modelchecking/tlaplus/quint/2024/10/05/tla-and-not-tla.html), learn about PlusCal, [Quint](https://quint-lang.org/) and [Apalache](https://apalache-mc.org/) (TLA+ to Z3)
 - trying to figure out if TLA+ can be run in browser via [TeaVM](https://www.teavm.org/) or [CheerpJ](https://cheerpj.com/cheerpj-core/)
 }}
 
-\subtree[2024-10-05]{\mdnote{2024-10-05: render}{
-- read \citef{wang2024simple}
-- read \citef{estep2024rose}, and learn about \citef{paszke2021getting} [dex-lang](https://github.com/google-research/dex-lang)
+\subtree[2024-10-05]{\mdnote{2024-10-05}{\tags{#render}
+- \citef{wang2024simple}
+- \citef{estep2024rose}, and learn about \citef{paszke2021getting} [dex-lang](https://github.com/google-research/dex-lang)
 - they are read on mobile app [Reflow](https://apps.apple.com/us/app/pdf-reflow/id1461144444) which has good PDF reflow support for math formulas in Arxiv papers, but not so good for other math book PDFs
 }}
 
-\subtree[2024-10-04]{\mdnote{2024-10-04: category, game}{
+\subtree[2024-10-04]{\mdnote{2024-10-04}{\tags{#category #game}
 - learn about [catcolab.org](https://catcolab.org/) and double category
 - learn about [Curved Diffusion: A Generative Model With Optical Geometry Control](https://anylens-diffusion.github.io/) from ECCV 2024
-- read [Reusing Styles from Tailwind CSS](https://tailwindcss.com/docs/reusing-styles), decide to use it for CSS refactor
+- [Reusing Styles from Tailwind CSS](https://tailwindcss.com/docs/reusing-styles), decide to use it for CSS refactor
 - found [vanjs](https://github.com/vanjs-org/van), considering for using it for VDOM and SSR
 - learn about the game [sgued/slingshot](https://codeberg.org/sgued/slingshot) (just like a recent idea about black hole puzzle game inspired by Star Trek: Discovery)
 }}
 
-\subtree[2024-10-03]{\mdnote{2024-10-03: gradient, render, rust, shader}{
+\subtree[2024-10-03]{\mdnote{2024-10-03}{\tags{#gradient #render #rust #shader}
 - Differentiable Programming
     - found [Differentiable Programming for Image Processing and Deep Learning in Halide](http://gradient.halide.ai/) and [gradient-halide autodiff](https://github.com/jrk/gradient-halide/blob/master/test/correctness/autodiff.cpp) for halide
-    - read [Adelta: Automatic Differentiation for Discontinuous Programs](https://medium.com/@yutingyang.wh/adelta-automatic-differentiation-for-discontinuous-programs-de68b4bb8119) for [A𝛿: Autodiff for Discontinuous Programs – Applied to Shaders](https://pixl.cs.princeton.edu/pubs/Yang_2022_AAF/) \citef{yang2022delta}
+    - [Adelta: Automatic Differentiation for Discontinuous Programs](https://medium.com/@yutingyang.wh/adelta-automatic-differentiation-for-discontinuous-programs-de68b4bb8119) for [A𝛿: Autodiff for Discontinuous Programs – Applied to Shaders](https://pixl.cs.princeton.edu/pubs/Yang_2022_AAF/) \citef{yang2022delta}
     - found [Dr.Jit](https://github.com/mitsuba-renderer/drjit)
     - found [Stan Math Library](https://github.com/stan-dev/math)
     - found [Kokkos](https://github.com/kokkos/kokkos)
@@ -1583,7 +1698,7 @@
 - found \citef{bennett2024anything}
 }}
 
-\subtree[2024-10-01]{\mdnote{2024-10-01: render, rust, shader}{
+\subtree[2024-10-01]{\mdnote{2024-10-01}{\tags{#render #rust #shader}
 - found \citef{wang2024simple} and \citef{tricard2024interval}
 - work on Rust stuff, particularly read about [dioxus](https://github.com/DioxusLabs/dioxus)
 }}
@@ -1593,12 +1708,12 @@
 \subtree[2024-09]{
 \title{September, 2024}
 
-\subtree[2024-09-30]{\mdnote{2024-09-30: lean}{
+\subtree[2024-09-30]{\mdnote{2024-09-30}{\tags{#lean}
 - skim [rubik-lean4](https://github.com/vihdzp/rubik-lean4) and be reminded of \citef{bonzio2018nxnxn} and \citef{salkinder2021nxnxn}
 - skim [read-lean](https://github.com/madvorak/read-lean)
 }}
 
-\subtree[2024-09-29]{\mdnote{2024-09-29: gpu}{
+\subtree[2024-09-29]{\mdnote{2024-09-29}{\tags{#gpu}
 - watch [Coding Adventure: Optimizing a Ray Tracer (by building a BVH)](https://www.youtube.com/watch?v=C1H4zIiCOaI) and learn about the importance of BVH in ray tracing, and [gkjohnson/three-mesh-bvh](https://github.com/gkjohnson/three-mesh-bvh)
 - collect [autodiff in GPU](https://github.com/stars/utensil/lists/ad-gpu)
 - submit [a bug report to Chromium](https://issues.chromium.org/issues/370153438)
@@ -1606,7 +1721,7 @@
 - thinking about turning my playground repos to monorepos by language/stack
 }}
 
-\subtree[2024-09-27]{\mdnote{2024-09-27: lean}{
+\subtree[2024-09-27]{\mdnote{2024-09-27}{\tags{#lean}
 - found \citef{massot2024teaching}
 - noticed that [Scientific Computing in Lean](https://lecopivo.github.io/scientific-computing-lean/) is now written in Verso!
 - checked some progress in [Type Checking in Lean 4](https://ammkrn.github.io/type_checking_in_lean4/)
@@ -1614,10 +1729,9 @@
 - improve the VSCode Forester extension to have [Hover, Go to definition, Search by title, and user-defined patterns for triggering completion](https://github.com/Trebor-Huang/vscode-forester/issues/9)
 }}
 
-\subtree[2024-09-26]{\mdnote{2024-09-26: bevy, rust, wasm, ✍️}{
-
+\subtree[2024-09-26]{\mdnote{2024-09-26}{\tags{#bevy #rust #wasm #✍️}
 - add [[uts-001N]]
-    - read [Compiling C to WebAssembly without Emscripten](https://surma.dev/things/c-to-webassembly/) and [WebAssembly without Emscripten](https://schellcode.github.io/webassembly-without-emscripten), a bit dead-end for me
+    - [Compiling C to WebAssembly without Emscripten](https://surma.dev/things/c-to-webassembly/) and [WebAssembly without Emscripten](https://schellcode.github.io/webassembly-without-emscripten), a bit dead-end for me
     - found [twr-wasm](https://github.com/twiddlingbits/twr-wasm), a lightweight emscripten
     - I still need to learn more about wasmer and cranelift
 - add [[uts-001P]]
@@ -1627,40 +1741,40 @@
 - learn about [WLJS](https://jerryi.github.io/wljs-docs/) for Wolfram Mathematica, recalled [my early Mathematica notebooks](https://github.com/utensil/mathematica-notebooks), and wish to do SSR for them
 }}
 
-\subtree[2024-09-25]{\mdnote{2024-09-25: biome, ✍️}{
+\subtree[2024-09-25]{\mdnote{2024-09-25}{\tags{#biome #✍️}
 - use `biome` for linting web source files
 - add [[uts-001K]]
 }}
 
-\subtree[2024-09-24]{\mdnote{2024-09-24: theory, webgl}{
+\subtree[2024-09-24]{\mdnote{2024-09-24}{\tags{#theory #webgl}
 - add live reload
 - improve various loading and WebGL animation experience
 - found [David Tong: Lectures on Gauge Theory](https://www.damtp.cam.ac.uk/user/tong/gaugetheory.html)
 }}
 
-\subtree[2024-09-23]{\mdnote{2024-09-23: ag, gpu, render, shader, ✍️}{
+\subtree[2024-09-23]{\mdnote{2024-09-23}{\tags{#ag #gpu #render #shader #✍️}
 - more progress on [[ag-000G]], particularly on [[ag-001J]]
 - found [shaderfrog](https://shaderfrog.com/)
 - found [three-gpu-pathtracer](https://github.com/gkjohnson/three-gpu-pathtracer) and related projects, particularly [Physically Based Materials](https://gkjohnson.github.io/three-gpu-pathtracer/example/bundle/index.html), and that [Steve Trettel](https://x.com/stevejtrettel) uses it to render black holes and Hopf fibrations
 - found \citef{yariv2020multiview} ([lioryariv/idr](https://github.com/lioryariv/idr))
 }}
 
-\subtree[2024-09-22]{\mdnote{2024-09-22: quantum, theory}{
+\subtree[2024-09-22]{\mdnote{2024-09-22}{\tags{#quantum #theory}
 - skimmed \citef{carosso2018geometric}: "Geometric quantization is an attempt at using the differential-geometric ingredients of classical phase spaces regarded as symplectic manifolds in order to define a corresponding quantum theory."
 - skimmed \citef{pinkall2024differential}: "Unlike the common approach in existing textbooks on this topic, there is a strong focus on variational problems, ranging from elastic curves to surface that minimize area or Willmore functional."
 - found [demo-geodesic-heat](https://github.com/davreev/demo-geodesic-heat) and [mesh-parameterize](https://github.com/davreev/demo-mesh-parameterize)
 - found \citef{broue2024rings}
 }}
 
-\subtree[2024-09-19]{\mdnote{2024-09-19: ag, ✍️}{
+\subtree[2024-09-19]{\mdnote{2024-09-19}{\tags{#ag #✍️}
 Make some progress on [[ag-000G]], particularly on mixing 4 elements (formulas, diagrams, algorithms, and readable working code).
 }}
 
-\subtree[2024-09-17]{\mdnote{2024-09-17: quantum}{
+\subtree[2024-09-17]{\mdnote{2024-09-17}{\tags{#quantum}
 - skimmed \citef{love2024role} \citef{quevedo2024cambridge} \citef{faddeev2009lectures} \citef{takhtajan2008quantum} \citef{komech2019lectures}, and \citef{madrid2005role}
 }}
 
-\subtree[2024-09-16]{\mdnote{2024-09-16: bevy, game, render, rust, shader, symbolica, visualization}{
+\subtree[2024-09-16]{\mdnote{2024-09-16}{\tags{#bevy #game #render #rust #shader #symbolica #visualization}
 - found
   - [symbolica](https://github.com/benruijl/symbolica) for Rust and Python
   - [Rusph](https://github.com/JackNarvaez/Rusph): SPH algorithm in Rust for astrophysical simulations
@@ -1674,7 +1788,7 @@ Make some progress on [[ag-000G]], particularly on mixing 4 elements (formulas, 
   - [Normals and the Inverse Transpose, Part 1: Grassmann Algebra](https://www.reedbeta.com/blog/normals-inverse-transpose-part-1/) in 2018
 }}
 
-\subtree[2024-09-15]{\mdnote{2024-09-15: apl, benchmark, compiler, faer, gpu, performance, render, rust, shader, webgl}{
+\subtree[2024-09-15]{\mdnote{2024-09-15}{\tags{#apl #benchmark #compiler #faer #gpu #performance #render #rust #shader #webgl}
 - found [Compile Julia code to WebAssembly](https://tshort.github.io/WebAssemblyCompiler.jl/stable/)
 - found [SHADERed](https://shadered.org/shaders) as another source of shader examples, particularly some are written in Rust, supported via one of its plugins
 - looking for ways to include 3D models in LaTeX, found
@@ -1702,22 +1816,22 @@ Make some progress on [[ag-000G]], particularly on mixing 4 elements (formulas, 
   - [WebGPU Compute Shader Basics](https://webgpufundamentals.org/webgpu/lessons/webgpu-compute-shaders.html)
 - work through [WebGPU Puzzles](https://gpupuzzles.answer.ai/)
 - learned about [APL](https://xpqz.github.io/learnapl/intro.html) and [BQN](https://mlochbaum.github.io/BQN/index.html)
-- read a portion of [The Dao Of FP](https://github.com/BartoszMilewski/Publications/tree/master/TheDaoOfFP)
+- a portion of [The Dao Of FP](https://github.com/BartoszMilewski/Publications/tree/master/TheDaoOfFP)
 - learned about [fpgatoy](https://github.com/davidar/fpgatoy)
 }}
 
-\subtree[2024-09-12]{\mdnote{2024-09-12: ag, ✍️}{
+\subtree[2024-09-12]{\mdnote{2024-09-12}{\tags{#ag #✍️}
 - make a start on [[ag-000G]]
 - make [[ag-000O]]
 }}
 
-\subtree[2024-09-11]{\mdnote{2024-09-11: gradient, shader}{
+\subtree[2024-09-11]{\mdnote{2024-09-11}{\tags{#gradient #shader}
 - trying to figure out curvature calculation in shaders
   - [Screen Space Curvature Shader](https://madebyevan.com/shaders/curvature/) is a trick to mimic curvature calculation in shaders,using [dFdx, dFdy in GLSL](https://registry.khronos.org/OpenGL-Refpages/gl4/html/dFdx.xhtml), [Curvature shader by iY0Yi](https://www.shadertoy.com/view/fsGXzc) used it but it shows certain shower door effect
   - [glsl-autodiff](https://github.com/sibaku/glsl-autodiff) properly uses forward auto differentiation to calculate curvature in shaders, but it requires rewrite every math function for bookkeeping the gradient and the Hessian
 }}
 
-\subtree[2024-09-10]{\mdnote{2024-09-10: shader, ✍️}{
+\subtree[2024-09-10]{\mdnote{2024-09-10}{\tags{#shader #✍️}
 - work out shader for [[uts-001D]]
 - inspired by [Surface Plotter](https://github.com/jaxry/surface-plotter) ([demo](https://jaxry.github.io/surface-plotter/)), read
   - [Marching Cubes](http://algorithm-interest-group.com/assets/slides/marching_cubes.pdf)
@@ -1726,32 +1840,32 @@ Make some progress on [[ag-000G]], particularly on mixing 4 elements (formulas, 
   - [Marching Cubes Part 1: Explaining marching cubes](https://polycoding.net/marching-cubes/part-1/)
 }}
 
-\subtree[2024-09-09]{\mdnote{2024-09-09: formal, lean, optimization, rust, wasm}{
+\subtree[2024-09-09]{\mdnote{2024-09-09}{\tags{#formal #lean #optimization #rust #wasm}
 - add `egglog` and `ginac`, and streamline the build process of Rust WASM dependencies
 - reading source of projects using egg: `jafioti/luminal`, `marcusrossel/lean-egg`, `verified-optimization/CvxLean` etc. TODO: read more egg papers: \citef{rossel2024bridging}\citef{rossel2024equality}\citef{bentkamp2023verified}
 }}
 
-\subtree[2024-09-08]{\mdnote{2024-09-08: gpu, render, z3, ✍️}{
+\subtree[2024-09-08]{\mdnote{2024-09-08}{\tags{#gpu #render #z3 #✍️}
 - mark candidates for rendering PDB: [[uts-001A]]
 - fail to run Z3 in browser (due to `SharedArrayBuffer` again)
-- read the source of examples of [uwal](https://github.com/UstymUkhman/uwal) and the corresponding articles at [webgpufundamentals.org](https://webgpufundamentals.org/)
+- the source of examples of [uwal](https://github.com/UstymUkhman/uwal) and the corresponding articles at [webgpufundamentals.org](https://webgpufundamentals.org/)
 - [[uts-001B]] and [[uts-001C]]
 }}
 
-\subtree[2024-09-07]{\mdnote{2024-09-07: shader}{
+\subtree[2024-09-07]{\mdnote{2024-09-07}{\tags{#shader}
 - Skim through \citef{lengyel2024foundations}
 - experiments on compute shaders
 }}
 
-\subtree[2024-09-06]{\mdnote{2024-09-06: clifford, ✍️}{
+\subtree[2024-09-06]{\mdnote{2024-09-06}{\tags{#clifford #✍️}
 - Polish [[ca-0001]]
 - Some more on [[uts-000C]]
 - Re-skim \citef{trautman1997clifford}
-- Read \citef{baez2010algebra} and make 97 notes
+- \citef{baez2010algebra} and make 97 notes
 - [Notes on Distributed Systems for Young Bloods (2013)](https://www.somethingsimilar.com/2013/01/14/notes-on-distributed-systems-for-young-bloods/)
 }}
 
-\subtree[2024-09-05]{\mdnote{2024-09-05: formal, lean, spin, ✍️}{
+\subtree[2024-09-05]{\mdnote{2024-09-05}{\tags{#formal #lean #spin #✍️}
 \ul{
 \li{Ported the rest of the prelimilary part of \citef{wieser2024blueprint} to [[ca-0001]], except [#{Z_2}-graded derivations #{i_f}, anti-derivation](https://utensil.github.io/lean-ga/blueprint/sec-ops.html#antiDeriv)
 }
@@ -1759,7 +1873,7 @@ Make some progress on [[ag-000G]], particularly on mixing 4 elements (formulas, 
 }
 }}
 
-\subtree[2024-09-04]{\mdnote{2024-09-04: citation, clifford, theory}{
+\subtree[2024-09-04]{\mdnote{2024-09-04}{\tags{#citation #clifford #theory}
 - \citef{hamilton2023supergeometric} and \citef{hamilton2023unification}: illuminating path towards a unified theory of four fundamental forces, the first theory seemingly capable of reaching the same level of elegance and simplicity as \citef{wilson2024discrete}, the authors are also aware of potential issues and worked out viable solutions to address them. Unfortunately, there are no citations as of now.
   - \citef{trautman1997clifford} has certain historical remarks and a unusual approach that spinor representations are treated first for odd-dimensional spaces
 spaces
@@ -1770,7 +1884,7 @@ spaces
 - Meta Flow Matching: Integrating Vector Fields on the Wasserstein Manifold
 }}
 
-\subtree[2024-09-03]{\mdnote{2024-09-03: clifford, formal, physics}{
+\subtree[2024-09-03]{\mdnote{2024-09-03}{\tags{#clifford #formal #physics}
 - \citet{ch. 1-4}{grassmann2000extension}
 - \citet{sec. 1.1-2.8}{browne2012grassmann}
 - \citef{loret2024universe}
@@ -1796,7 +1910,7 @@ spaces
 \subtree[2024-01~08]{
 \title{January to August, 2024}
 
-\subtree[2024-08-11]{\mdnote{2024-08-11: ✍️}{
+\subtree[2024-08-11]{\mdnote{2024-08-11}{\tags{#✍️}
 The readings during this period are reflected in
 
 - [[uts-000G]]
@@ -1807,21 +1921,21 @@ Many experiments on Forester are done, as summarized in [[uts-000X]].
 }}
 
 
-\subtree[2024-07-27]{\mdnote{2024-07-27: ag}{
+\subtree[2024-07-27]{\mdnote{2024-07-27}{\tags{#ag}
 The readings during this period are yet to be reflected in [[ag-0001]].
 }}
 
-\subtree[2024-05-09]{\mdnote{2024-05-09: tt, ✍️}{
+\subtree[2024-05-09]{\mdnote{2024-05-09}{\tags{#tt #✍️}
 The readings during this period are reflected in [[tt-0001]].
 
 [[uts-000C]] was ported to Forester on 07-22.
 }}
 
-\subtree[2024-04-25]{\mdnote{2024-04-25: hopf, spin}{
+\subtree[2024-04-25]{\mdnote{2024-04-25}{\tags{#hopf #spin}
 The readings during this period are reflected in [[spin-0001]]. Some are yet to be reflected in [[hopf-0001]].
 }}
 
-\subtree[2024-01-01]{\mdnote{2024-01-01: misc}{
+\subtree[2024-01-01]{\mdnote{2024-01-01}{\tags{#misc}
 The readings during this period are reflected in
 
 - [My math interests in 2024](https://utensil.github.io/blog/posts/math-2024/)
