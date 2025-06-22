@@ -355,7 +355,7 @@ def extract_keywords_from_content(content, date):
 
     # Improved pattern with better word boundaries and validation
     topic_related_matches = re.findall(
-        r"^\s*- (?:\[([^\]]+)\]|((?:\b[a-z][a-z0-9]*\b\s*)+))\s+related\b",
+        r"^\s*- (?:\[([^\]]+)\]|((?:\b[a-z][a-z0-9]*\b\s*)+))\s+related\s*$",
         content_lower,
         re.MULTILINE,
     )
@@ -371,10 +371,13 @@ def extract_keywords_from_content(content, date):
                 hyphenated = '-'.join(topic.split())
                 if (
                     hyphenated
-                    and hyphenated not in EXCLUDE_WORDS
+                    and hyphenated not in EXCLUDE_WORDS 
                     and hyphenated not in found_keywords
                     and re.fullmatch(r"[a-z][a-z0-9-]*", hyphenated)
                 ):
+                    # Log hyphenated keywords with more than 2 words
+                    if len(topic.split()) > 2:
+                        logger.debug(f"Found long hyphenated keyword: {hyphenated}")
                     found_keywords.append(hyphenated)
             else:
                 # Handle single word topics normally
