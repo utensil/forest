@@ -1139,6 +1139,12 @@ prep-ag:
 ag PAT LANG="forester" DIR="trees":
     ast-grep run --config dotfiles/.config/ast-grep/sgconfig.yml --lang {{LANG}} -p '{{PAT}}' {{DIR}}
 
+prep-semgrep:
+    which semgrep || brew install semgrep
+
+semscan:
+    semgrep scan --config "p/default" --config "p/trailofbits"
+
 # linux only for now
 # see https://github.com/shell-pool/shpool/issues/183
 prep-pool:
