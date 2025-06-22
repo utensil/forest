@@ -1290,6 +1290,17 @@ bjn *PARAMS:
     #!/usr/bin/env zsh
     xh --offline --print=B fake.url "$@"
 
+prep-go:
+    which go || brew install go
+
+prep-ts-ssh:
+    go install github.com/derekg/ts-ssh@main
+
+# --list
+# USER@HOST:PORT
+ts-ssh *PARAMS:
+    `go env GOPATH`/bin/ts-ssh {{PARAMS}}
+
 import 'dotfiles/llm.just'
 import 'dotfiles/archived.just'
 
