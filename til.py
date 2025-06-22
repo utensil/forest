@@ -284,6 +284,7 @@ def extract_keywords_from_content(content, date):
         "finish",
         "start on",
         "progress on",
+        "work on",
     }
 
     # Extract keywords from content
@@ -407,7 +408,7 @@ def extract_keywords_from_content(content, date):
     KEYWORD_MAPPINGS = {
         "_merge_stats": {},  # Track merge stats
         # Authoring/work tracking
-        "✍️": {"wrote", "finish", "start on", "progress on", "uts"},
+        "✍️": {"wrote", "finish", "start on", "progress on", "uts", "work on"},
         # "cg": {
         #     "render",
         #     "shader",
