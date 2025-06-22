@@ -1266,7 +1266,7 @@ prep-hkt:
     # An account is needed
     # neonmodem connect --type lemmy --url https://lemmy.ml || true
 
-prep-chawan:
+prep-cha:
     which cha || brew install chawan
 
 # https://git.sr.ht/~bptato/chawan/tree/HEAD/doc/config.md
@@ -1275,6 +1275,9 @@ prep-chawan:
 # {} to traverse paragraphs on the page
 # enter to visit link
 # ,. to go back or forward in history
+# opt+i toggle image
+# opt+j toggle scripting
+# opt+k toggle cookie
 cha URL:
     cha {{URL}}
 
