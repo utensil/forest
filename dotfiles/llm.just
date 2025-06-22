@@ -458,4 +458,27 @@ prep-amp:
     # login, say no to re-login if already logged in
     yes n|amp login
 
-
+# not working: panic
+prep-oc:
+    #!/usr/bin/env zsh
+    which opencode || brew install sst/tap/opencode
+    mkdir -p ~/.config/opencode
+    cat > ~/.config/opencode/config.json << EOF
+    {
+      "\$schema": "https://opencode.ai/config.json",
+      "model": "local/$OPENAI_API_MODEL",
+      "provider": {
+        "local": {
+          "npm": "@ai-sdk/openai-compatible",
+          "options": {
+            "baseURL": "$OPENAI_API_BASE"
+          },
+          "models": {
+            "$OPENAI_API_MODEL": {
+                "name": "$OPENAI_API_MODEL"
+            }
+          }
+        }
+      }
+    }
+    EOF
