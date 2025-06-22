@@ -1275,6 +1275,18 @@ prep-chawan:
 cha URL:
     cha {{URL}}
 
+# https://blog.stulta.dev/posts/annoying_json/
+prep-bjn:
+    which xh || brew install xh
+    which jo || brew install jo
+
+# e.g. just bjn "some_key[sub_key]=its value" "another_key=another value"
+# https://github.com/casey/just?tab=readme-ov-file#positional-arguments
+[positional-arguments]
+bjn *PARAMS:
+    #!/usr/bin/env zsh
+    xh --offline --print=B fake.url "$@"
+
 import 'dotfiles/llm.just'
 import 'dotfiles/archived.just'
 
