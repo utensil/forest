@@ -355,7 +355,7 @@ def extract_keywords_from_content(content, date):
 
     # Improved pattern with better word boundaries and validation
     topic_related_matches = re.findall(
-        r"^\s*- (?:\[([^\]]+)\]|(\b[a-z][a-z0-9-]*\b))\s+related\b",
+        r"^\s*- (?:\[([^\]]+)\]|((?:\b[a-z][a-z0-9]*\b\s*)+))\s+related\b",
         content_lower,
         re.MULTILINE,
     )
@@ -364,17 +364,27 @@ def extract_keywords_from_content(content, date):
         topic = match[0] or match[1]  # Use either bracketed or non-bracketed match
         logger.debug(f"Processing topic-related: {topic}")
         if topic:
-            # Handle both single words and multi-word topics with validation
-            for word in topic.split():
-                word = word.strip().lower()
-                # Validate word meets criteria
+            # Convert multi-word topics into hyphenated keywords
+            topic = topic.strip().lower()
+            if ' ' in topic:
+                # Replace spaces with hyphens for multi-word topics
+                hyphenated = '-'.join(topic.split())
                 if (
-                    word
-                    and word not in EXCLUDE_WORDS
-                    and word not in found_keywords
-                    and re.fullmatch(r"[a-z][a-z0-9-]*", word)
+                    hyphenated
+                    and hyphenated not in EXCLUDE_WORDS
+                    and hyphenated not in found_keywords
+                    and re.fullmatch(r"[a-z][a-z0-9-]*", hyphenated)
                 ):
-                    found_keywords.append(word)
+                    found_keywords.append(hyphenated)
+            else:
+                # Handle single word topics normally
+                if (
+                    topic
+                    and topic not in EXCLUDE_WORDS
+                    and topic not in found_keywords
+                    and re.fullmatch(r"[a-z][a-z0-9-]*", topic)
+                ):
+                    found_keywords.append(topic)
 
     # Process citations - extract keywords from bib titles instead of cite keys
     citation_pattern = r"\\citef\{([^}]+)\}"
