@@ -460,11 +460,10 @@ def improve_title(date, content):
 
     if not keywords:
         # Fallback for entries with no technical keywords
-        return f"{date}: misc"
+        return date, ["misc"]
 
-    # Join keywords with commas
-    keyword_str = ", ".join(keywords)
-    return f"{date}: {keyword_str}"
+    # Return date and keywords separately
+    return date, keywords
 
 
 def find_matching_brace(text, start_pos):
@@ -612,31 +611,36 @@ def process_file(filepath):
 
         # Extract the content between braces (excluding the braces themselves)
         inner_content = new_content[
-            content_start : content_end - 1
-        ]  # -1 to exclude the closing brace
+            content_start : content_end
+        ]
 
-        # Generate new title
-        new_title = improve_title(date, inner_content)
+        # Generate new title (now returns date and keywords separately)
+        new_date, keywords = improve_title(date, inner_content)
 
-        # Only update if title changed
-        current_title = f"{date}: {old_title}" if old_title else date
-        if current_title != new_title:
+        # Check if the content already starts with \tags{...}
+        has_tags = re.match(r"^\s*\\tags\{[^}]*\}", inner_content.strip())
+
+        # Only update if keywords changed or there's no tags yet
+        if not has_tags and keywords:
+            # Create tags string
+            tags_str = f"\\tags{{{', '.join(keywords)}}}\n"
+            
+            # For with_title entries, remove the title from mdnote
             if match_type == "with_title":
-                # Replace the title part only
-                title_start = match.start(2)
-                title_end = match.end(3)
-                new_content = (
-                    new_content[:title_start] + new_title + new_content[title_end:]
-                )
+                updated_mdnote = f"{prefix}{date}{opening_brace}"
+                title_start = match.start()
+                title_end = match.end()
+                
+                # Replace the mdnote part
+                new_content = new_content[:title_start] + updated_mdnote + new_content[title_end:]
+                
+                # Insert tags at the beginning of the entry content
+                content_start = title_start + len(updated_mdnote)
+                new_content = new_content[:content_start] + tags_str + new_content[content_start:]
             else:  # without_title
-                # Insert title after date
-                date_end = match.end(2)
-                new_content = (
-                    new_content[:date_end]
-                    + ": "
-                    + new_title.split(": ", 1)[1]
-                    + new_content[date_end:]
-                )
+                # Just insert tags at the beginning of the entry content
+                new_content = new_content[:content_start] + tags_str + new_content[content_start:]
+            
             changes_made += 1
 
     # Only write if content changed
@@ -644,13 +648,13 @@ def process_file(filepath):
         try:
             with open(filepath, "w", encoding="utf-8") as f:
                 f.write(new_content)
-            print(f"✅ Updated {changes_made} titles in {filepath}")
+            print(f"✅ Updated {changes_made} entries with tags in {filepath}")
             return True
         except IOError as e:
             print(f"Error writing to {filepath}: {e}")
             return False
     else:
-        print(f"No title changes needed in {filepath}")
+        print(f"No changes needed in {filepath}")
         return True
 
 
@@ -696,7 +700,8 @@ def test_til():
     for case in test_cases:
         print(f"Test: {case['name']}")
         print(f"Content: {case['content'][:60]}...")
-        result = extract_keywords_from_content(case["content"])
+        date = "2025-01-01"  # Dummy date for testing
+        result = extract_keywords_from_content(case["content"], date)
         if sorted(result) == sorted(case["expected"]):
             print(f"✅ PASS - Got: {result}")
             passed += 1
