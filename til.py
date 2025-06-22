@@ -633,8 +633,8 @@ def process_file(filepath):
 
         # Only update if keywords changed or there's no tags yet
         if not has_tags and keywords:
-            # Create tags string
-            tags_str = f"\\tags{{{', '.join(keywords)}}}\n"
+            # Create tags string with hashtags
+            tags_str = f"\\tags{{{' '.join(['#' + kw for kw in keywords])}}}\n"
             
             # For with_title entries, remove the title from mdnote
             if match_type == "with_title":
