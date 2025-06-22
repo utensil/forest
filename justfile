@@ -1304,6 +1304,10 @@ prep-ts-ssh:
 ts-ssh *PARAMS:
     `go env GOPATH`/bin/ts-ssh {{PARAMS}}
 
+prep-harper:
+    which marksman || brew install marksman
+    which harper-ls || brew install harper
+
 import 'dotfiles/llm.just'
 import 'dotfiles/archived.just'
 

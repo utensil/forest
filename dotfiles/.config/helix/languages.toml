@@ -9,7 +9,21 @@ comment-tokens = "%"
 indent = { tab-width = 2, unit = "  " }
 grammar = "forester"
 
-# Not working: panicled
+# https://writewithharper.com/docs/integrations/helix#Optional-Configuration
+[language-server.harper-ls]
+command = "harper-ls"
+args = ["--stdio"]
+config = { harper-ls = { diagnosticSeverity = "error", linters = { long_sentences = false } } }
+
+[[language]]
+name = "markdown"
+language-servers = ["marksman", "harper-ls"]
+
+[[language]]
+name = "forester"
+language-servers = ["harper-ls"]
+
+# Not working: panicked
 # # based on https://iwe.md/quick-start/
 # [language-server.iwe]
 # command = "iwes"
