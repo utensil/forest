@@ -877,6 +877,9 @@ rss-stars:
 stars:
     just rss-stars|./stars.py
 
+til:
+    ./til.py --reset && ./til.py
+
 # https://thinkingelixir.com/install-elixir-using-asdf/
 # prep-asdf:
 #     which asdf || brew install asdf

@@ -187,6 +187,7 @@ def extract_keywords_from_content(content, date):
     }
 
     # Priority tech keywords - specific technologies, tools, languages
+    # TODO I should take a look at https://lobste.rs/tags#meta and make this list shorter
     priority_keywords = {
         # Programming languages
         "rust",
@@ -416,6 +417,7 @@ def extract_keywords_from_content(content, date):
         # but lean, z3, tla should get their own keywords due to their importance to me
         "formal": {"formalization", "verification", "smt", "sat"},
         "agent": {"ai"},
+        "fuzzing": {"jepsen"}
     }
 
     # Merge similar keywords according to mappings
