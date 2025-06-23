@@ -155,7 +155,7 @@ prep-gtsh:
 # Cmd + Option + arrows to move between splits, or just Cmd + [ or ]
 # Cmd + Shift + Enter to zoom in/out the current split
 # Cmd + w to close the current split
-# Drag the separator to resize splits
+# Drag the separator to resize splits (need to observe a band that's more transparent, then drag it blindly without waiting for the cursor change)
 # Cmd + Shift + , to reload the config, or just Cmd + R
 # more default key bindings: http://w.yet.org/posts/2024-12-30-ghostty/
 keys-gt:
@@ -731,12 +731,13 @@ sync-hx:
 reset-hx:
     rm -rf ~/.config/helix || true
 
-hx PROJ="forest":
+# -v enables verbose logging
+hx PROJ="forest" *PARAMS="":
     #!/usr/bin/env zsh
     cd ~/projects/{{PROJ}}
     # export GITHUB_COPILOT_TOKEN=$(gh auth token)
-    hx
-
+    hx {{PARAMS}}
+ 
 prep-hxx:
     #!/usr/bin/env zsh
     if [ ! -d ../helix ]; then
@@ -752,7 +753,7 @@ prep-hxx:
     ~/.cargo/bin/hx -g fetch
     ~/.cargo/bin/hx -g build
 
-hxx PROJ="forest":
+hxx PROJ="forest" *PARAMS="":
     #!/usr/bin/env zsh
     export HELIX_RUNTIME=~/projects/helix/runtime
     cd ~/projects/{{PROJ}}
@@ -763,7 +764,7 @@ prep-lsp:
     which ruff || brew install ruff
     which typescript-language-server || brew install typescript-language-server
     which cargo || just prep-rust
-    which rust-analyzer || rustup component add rust-analyzer
+    which rust-analyzer || (rustup component add rust-src; rustup component add rust-analyzer)
     which zls || echo "zls not installed, visit https://zigtools.org/zls/install/ to install a version compatible with the output of 'zig version'"
     # https://github.com/iwe-org/iwe/wiki/How-to-install
     # which iwes || cargo install iwe iwes
