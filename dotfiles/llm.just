@@ -412,7 +412,7 @@ zero:
 
 prep-cc:
     npm install -g @anthropic-ai/claude-code
-    npm install -g @mariozechner/claude-bridge
+    npm install -g @musistudio/claude-code-router
 
 cc:
     #!/usr/bin/env zsh
