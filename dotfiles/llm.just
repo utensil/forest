@@ -411,14 +411,23 @@ zero:
     docker run --rm -p 50001:80 frdel/agent-zero-run
 
 prep-cc:
-    npm install -g @anthropic-ai/claude-code
-    npm install -g @musistudio/claude-code-router
-
-cc:
     #!/usr/bin/env zsh
-    echo openai $OPENAI_API_MODEL --baseURL "$OPENAI_API_BASE" --debug
-    claude-bridge openai $OPENAI_API_MODEL --baseURL "$OPENAI_API_BASE" --debug
+    which claude || npm install -g @anthropic-ai/claude-code
+    which ccr || npm install -g @musistudio/claude-code-router
+    cat > ~/.claude-code-router/config.json << EOF 
+    {
+        "log": true,
+        "OPENAI_API_KEY": "$OPENAI_API_KEY",
+        "OPENAI_BASE_URL": "$OPENAI_API_BASE",
+        "OPENAI_MODEL": "$OPENAI_API_MODEL"
+    }
+    EOF
 
+cc PROJ="forest" *PARAMS="":
+    #!/usr/bin/env zsh
+    cd ~/projects/{{PROJ}}
+    ccr code {{PARAMS}}
+ 
 prep-codex:
     npm install -g @openai/codex
 
