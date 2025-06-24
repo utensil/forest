@@ -172,40 +172,6 @@ reset-gt:
     rm ~/.config/ghostty
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# https://docs.astronvim.com/reference/alt_install/
-
-
-
-try-astro:
-    #!/usr/bin/env zsh
-    if docker ps -a | grep -q astro; then
-        if ! docker ps | grep -q astro; then
-            docker start astro
-        fi
-        docker exec -it astro sh
-    else
-        docker run --name astro -w /root -it alpine:edge sh -uelic '
-        apk add bash curl git lua nodejs npm lazygit bottom python3 go neovim ripgrep alpine-sdk --update
-        # Replace with your own configuration repository to load a user configuration
-        [ ! -d ~/.config/nvim ] && git clone --depth 1 https://github.com/AstroNvim/template ~/.config/nvim
-        sh
-        '
-    fi
-
 yazi DIR="{{HOME}}/projects":
     #!/usr/bin/env bash
     EDITOR=lvim yazi {{DIR}}
