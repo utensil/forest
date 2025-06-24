@@ -422,7 +422,38 @@ prep-cc:
         "OPENAI_MODEL": "$OPENAI_API_MODEL"
     }
     EOF
+    # https://docs.anthropic.com/en/docs/claude-code/settings
+    cat > ~/.claude/settings.json << EOF
+    {
+      "permissions": {
+        "allow": [
+          "Bash(sg:*)",
+          "Bash(rg:*)",
+          "WebFetch",
+          "WebSearch",
+          "Edit",
+          "MultiEdit"
+        ],
+        "deny": [
+            "Read(.env)"
+        ]
+      }
+    }
+    EOF
 
+prep-cc-mcp:
+    #!/usr/bin/env zsh
+    claude mcp list|grep -v -F 'No MCP servers'|awk -F":" '{print $1}'|xargs -n 1 claude mcp remove
+    # Add MCP servers from goose config
+    claude mcp add --transport stdio playwright-mcp -- npx -y @executeautomation/playwright-mcp-server
+    # claude mcp add --transport stdio memory-mcp -- npx -y @modelcontextprotocol/server-memory
+    # claude mcp add --transport stdio sequential-thinking-mcp -- npx -y @modelcontextprotocol/server-sequential-thinking
+    claude mcp add --transport stdio ddg-mcp -- uvx ddg-mcp
+    # claude mcp add --transport stdio speech-mcp -- uvx speech-mcp
+    # claude mcp add --transport stdio kit-mcp -- uv run --python 3.11 --with cased-kit python -m kit.mcp
+    claude mcp add --transport stdio deepwiki-mcp -e DEEPWIKI_REQUEST_TIMEOUT=60000 -- npx -y mcp-deepwiki@latest
+
+# just cc forest --debug
 cc PROJ="forest" *PARAMS="":
     #!/usr/bin/env zsh
     cd ~/projects/{{PROJ}}
