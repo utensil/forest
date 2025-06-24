@@ -43,6 +43,10 @@ The system combines multiple technologies to create a hybrid authoring environme
 - ✅ **May**: Stay within current task context, inform dev if fresh start would be better
 - ❌ **Must NOT**: Continue work from a prior prompt after "new task" – start a fresh session
 
+### G-6:
+
+- ✅ **May**: You run in an environment where ast-grep (`sg`) is available; whenever a search requires syntax-aware or structural matching, default to `sg --lang rust -p '<pattern>'` (or set `--lang` appropriately) and avoid falling back to text-only tools `rg` unless I explicitly request a plain-text search.
+
 ---
 
 ## 2. Build, test & utility commands
