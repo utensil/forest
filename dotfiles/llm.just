@@ -461,24 +461,15 @@ prep-amp:
 # not working: panic
 prep-oc:
     #!/usr/bin/env zsh
-    which opencode || brew install sst/tap/opencode
+    which opencode || npm install -g opencode-ai
     mkdir -p ~/.config/opencode
+    # rm ~/.config/opencode/config.json
     cat > ~/.config/opencode/config.json << EOF
     {
       "\$schema": "https://opencode.ai/config.json",
-      "model": "local/$OPENAI_API_MODEL",
-      "provider": {
-        "local": {
-          "npm": "@ai-sdk/openai-compatible",
-          "options": {
-            "baseURL": "$OPENAI_API_BASE"
-          },
-          "models": {
-            "$OPENAI_API_MODEL": {
-                "name": "$OPENAI_API_MODEL"
-            }
-          }
-        }
-      }
+      "model": "github-copilot/claude-3.5-sonnet"
     }
     EOF
+
+# use `opencode auth login` to log into Github Copilot
+# use `opencode run -m github-copilot/claude-3.5-sonnet --print-logs Hi` for a first run, which runs bun install that might take a while
