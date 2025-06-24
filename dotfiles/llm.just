@@ -354,7 +354,6 @@ probe *PARAMS="":
     export MODEL_NAME=$OPENAI_API_MODEL
     probe-chat {{PARAMS}}
 
-
 prep-dw:
     #!/usr/bin/env zsh
     # if ../deepwiki-open doesn't exist, clone it
@@ -450,6 +449,7 @@ prep-cc-mcp PROJ="forest":
     # claude mcp add --transport stdio memory-mcp -- npx -y @modelcontextprotocol/server-memory
     # claude mcp add --transport stdio sequential-thinking-mcp -- npx -y @modelcontextprotocol/server-sequential-thinking
     claude mcp add --transport stdio ddg-mcp -- uvx ddg-mcp
+    claude mcp add --transport stdio probe-mcp -- npx -y @buger/probe-mcp
     # it works but I need to figure out how to actually use it
     # claude mcp add --transport stdio zls-mcp -- npx tritlo/lsp-mcp zig `which zls`
     # claude mcp add --transport stdio speech-mcp -- uvx speech-mcp
