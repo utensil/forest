@@ -157,6 +157,8 @@ prep-gtsh:
 # Cmd + w to close the current split
 # Drag the separator to resize splits (need to observe a band that's more transparent, then drag it blindly without waiting for the cursor change)
 # Cmd + Shift + , to reload the config, or just Cmd + R
+# Cmd + up/down to jump to prev/next command issued in the terminal (a.k.a jump to prompt)
+# Cmd + Shift + J to dump scrollback to a file, allow searching etc. via a pager
 # more default key bindings: http://w.yet.org/posts/2024-12-30-ghostty/
 keys-gt:
     ghostty +list-keybinds --default
@@ -169,102 +171,24 @@ sync-gt:
 reset-gt:
     rm ~/.config/ghostty
 
-stylua:
-    stylua *.lua
 
-sync-nvim: stylua
-    #!/usr/bin/env bash
-    mkdir -p ~/.config/nvim
-    cp -f init.lua ~/.config/nvim/init.lua
 
-sync-plugins: stylua
-    mkdir -p ~/.config/nvim/lua/plugins/
-    cp -f uts-plugins.lua ~/.config/nvim/lua/plugins/spec.lua
 
-sync-lvim: stylua sync-nvim
-    mkdir -p ~/.config/lvim
-    cp -f init.lua ~/.config/lvim/nvim-init.lua
-    cp -f uts-plugins.lua ~/.config/lvim/uts-plugins.lua
-    cp -f config.lua ~/.config/lvim/config.lua
 
-sync-lazyvim: stylua sync-plugins
-    mkdir -p ~/.config/lazyvim
-    cp -f init.lua ~/.config/lazyvim/lua/config/options.lua
-    # cp -f lazyvim-init.lua ~/.config/lazyvim/lazyvim-init.lur
 
-sync-chad: stylua sync-plugins
-    mkdir -p ~/.config/nvchad/
-    cp -f init.lua ~/.config/nvchad/nvim-init.lua
-    cp -f lazyvim-init.lua ~/.config/nvchad/nvchad-init.lua
 
-sync-astro: stylua sync-plugins
-    mkdir -p ~/.config/astro/lua/
-    cp -f dotfiles/.config/astro/lua/community.lua ~/.config/astro/lua/
-    mkdir -p ~/.config/astro/lua/plugins
-    cp -f dotfiles/.config/astro/lua/plugins/spec.lua ~/.config/astro/lua/plugins/spec.lua
 
-prep-nvim: prep-term
-    #!/usr/bin/env bash
-    which nvim || brew install neovim
-    # rip ~/.config/nvim
-    # git clone https://github.com/ntk148v/neovim-config.git "${XDG_CONFIG_HOME:-$HOME/.config}"/nvim
 
-@nvim PROJ="forest" *PARAMS="": sync-nvim
-    #!/usr/bin/env bash
-    cd ~/projects/{{PROJ}} && nvim {{PARAMS}}
 
-prep-lvim: prep-term prep-nvim
-    #!/usr/bin/env bash
-    # rip ~/.cache/lvim ~/.bun/install ~/.local/share/lunarvim ~/.config/lvim/
-    # bun upgrade
-    yes|bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/master/utils/installer/install.sh)
-    just add-zrc 'export PATH=$HOME/.local/bin:$PATH'
-    just sync-lvim
-    (cd ~/.config/lvim/ && lvim --headless +'lua require("lvim.utils").generate_settings()' +qa && sort -o lv-settings.lua{,} )
-    echo
-    echo "Use lvim to start LunarVim"
 
-@lvim PROJ="forest" *PARAMS="": sync-lvim
-    #!/usr/bin/env zsh
-    cd ~/projects/{{PROJ}} && lvim {{PARAMS}}
 
-prep-lazyvim:
-    #!/usr/bin/env bash
-    if [ -d ~/.config/lazyvim ]; then
-        (cd ~/.config/lazyvim && git pull)
-    else
-        git clone https://github.com/LazyVim/starter ~/.config/lazyvim
-    fi
 
-@lazyvim PROJ="forest": sync-lazyvim
-    #!/usr/bin/env bash
-    cd ~/projects/{{PROJ}} && nvim --cmd 'set runtimepath+=~/.config/lazyvim/' --cmd 'lua package.path = package.path .. ";{{home_directory()}}/.config/lazyvim/lua/?.lua"' -u ~/.config/lazyvim/init.lua
 
-prep-chad:
-    #!/usr/bin/env bash
-    if [ -d ~/.config/nvchad ]; then
-        (cd ~/.config/nvchad && git pull)
-    else
-        git clone https://github.com/NvChad/starter ~/.config/nvchad
-    fi
 
-@chad PROJ="forest": sync-chad
-    #!/usr/bin/env bash
-    cd ~/projects/{{PROJ}} && nvim --cmd 'set runtimepath+=~/.config/nvchad/' --cmd 'lua package.path = package.path .. ";{{home_directory()}}/.config/nvchad/lua/?.lua"' -u ~/.config/nvchad/nvchad-init.lua
 
 # https://docs.astronvim.com/reference/alt_install/
 
-prep-astro:
-    #!/usr/bin/env zsh
-    if [ -d ~/.config/astro ]; then
-        (cd ~/.config/astro && git pull)
-    else
-        git clone https://github.com/AstroNvim/template ~/.config/astro
-    fi
 
-@astro PROJ="forest": sync-astro
-    #!/usr/bin/env zsh
-    cd ~/projects/{{PROJ}} && NVIM_APPNAME=astro nvim .
 
 try-astro:
     #!/usr/bin/env zsh
@@ -706,89 +630,22 @@ prep-annex:
 ghost:
     npx ghosttime
 
-prep-base16-helix:
-    #!/usr/bin/env zsh
-    # if ../base16-helix doesn't exist, clone it
-    if [ ! -d ../base16-helix ]; then
-        git clone https://github.com/tinted-theming/base16-helix ../base16-helix
-    else
-        (cd ../base16-helix && git pull)
-    fi
-    mkdir -p ~/.config/helix/themes
-    cp -f ../base16-helix/themes/base16-railscasts.toml ~/.config/helix/themes/base16-railscasts.toml
 
-prep-hx:
-    which hx || brew install helix
-    rm -rf ~/.config/helix || true
-    ln -s {{justfile_directory()}}/dotfiles/.config/helix ~/.config/helix
-    just prep-base16-helix
-    just sync-hx
 
-sync-hx:
-    hx --grammar fetch
-    hx --grammar build
 
-reset-hx:
-    rm -rf ~/.config/helix || true
 
 # -v enables verbose logging
-hx PROJ="forest" *PARAMS="":
-    #!/usr/bin/env zsh
-    cd ~/projects/{{PROJ}}
-    # export GITHUB_COPILOT_TOKEN=$(gh auth token)
-    hx {{PARAMS}}
  
-prep-hxx:
-    #!/usr/bin/env zsh
-    if [ ! -d ../helix ]; then
-        git clone https://github.com/utensil/helix ../helix
-    else
-        (cd ../helix && git checkout patchy && git pull)
-    fi
-    cd ../helix
-    # patchy run
-    cargo clean
-    cargo install --path helix-term --locked
-    export HELIX_RUNTIME=$PWD/runtime
-    ~/.cargo/bin/hx -g fetch
-    ~/.cargo/bin/hx -g build
 
-hxx PROJ="forest" *PARAMS="":
-    #!/usr/bin/env zsh
-    export HELIX_RUNTIME=~/projects/helix/runtime
-    cd ~/projects/{{PROJ}}
-    ~/.cargo/bin/hx
 
-prep-lsp:
-    which pylsp || brew install python-lsp-server
-    which ruff || brew install ruff
-    which typescript-language-server || brew install typescript-language-server
-    which cargo || just prep-rust
-    which rust-analyzer || (rustup component add rust-src; rustup component add rust-analyzer)
-    which zls || echo "zls not installed, visit https://zigtools.org/zls/install/ to install a version compatible with the output of 'zig version'"
-    # https://github.com/iwe-org/iwe/wiki/How-to-install
-    # which iwes || cargo install iwe iwes
 
 # https://github.com/DJAndries/llmvm/tree/master/frontends/codeassist
-prep-lsp-lv:
-    #!/usr/bin/env zsh
-    set -e
-    which llmvm-codeassist || (cargo install llmvm-core llmvm-codeassist llmvm-outsource)
-    echo "openai_endpoint=\"$OPENAI_API_BASE\"\nopenai_api_key=\"$OPENAI_API_KEY\"" > ~/Library/Application\ Support/com.djandries.llmvm/outsource.toml
-    echo "model=\"outsource/openai-chat/$OPENAI_API_MODEL\"\nprompt_template_id=\"codegen\"\nmax_tokens=8192" > ~/Library/Application\ Support/com.djandries.llmvm/presets/$OPENAI_API_MODEL.toml
-    echo "default_preset=\"$OPENAI_API_MODEL\"" > ~/Library/Application\ Support/com.djandries.llmvm/codeassist.toml
 
 # prep-hxcp:
 #     which copilot-language-server || npm install -g @github/copilot-language-server
 #     mkdir -p ~/.config/helix
 #     cp -f dotfiles/.config/helix/languages.toml ~/.config/helix/languages.toml
 
-prep-lsp-ai:
-    which cargo || just prep-rust
-    which lsp-ai || cargo install lsp-ai # -F llama_cpp -F metal
-    which marksman || brew install marksman
-    # mkdir -p ~/.config/helix
-    # cp -f dotfiles/.config/helix/languages.toml ~/.config/helix/languages.toml
 
 git PROJ="forest" *PARAMS="":
     #!/usr/bin/env zsh
@@ -1311,4 +1168,5 @@ prep-harper:
 
 import 'dotfiles/llm.just'
 import 'dotfiles/archived.just'
+import 'dotfiles/editor.just'
 
