@@ -1031,6 +1031,10 @@ at NAME="mon":
 # t - new tab
 # p n - prev/next tab
 
+# on the original tmux
+# c - new window
+# number - switch to window by number
+
 # works for mon running btop
 # not really working for nvim etc.
 # at SESSION="main":
@@ -1038,6 +1042,20 @@ at NAME="mon":
 
 prep-tmux:
     which tmux || brew install tmux
+
+# adapted from https://maxscheijen.github.io/posts/managing-tmux-sessions-with-fzf/
+ftm:
+    #!/usr/bin/env zsh
+    session=$(tmux ls | awk -F: '
+        /attached/ {print $1 "\033[32m *\033[0m"}
+        !/attached/ {print $1} 
+    ' | fzf --ansi)
+    session=$(echo "$session" | sed 's/ (attached)$//')
+    if [ -n "$session" ]; then
+        tmux switch-client -t "$session" || tmux attach-session -t "$session"
+    else
+        echo "No session selected."
+    fi
 
 tm-btop:
     #!/usr/bin/env zsh
