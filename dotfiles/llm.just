@@ -511,9 +511,14 @@ prep-oc:
     cat > ~/.config/opencode/config.json << EOF
     {
       "\$schema": "https://opencode.ai/config.json",
-      "model": "github-copilot/claude-3.5-sonnet"
+      "model": "github-copilot/$OPENAI_API_MODEL"
     }
     EOF
+    just check-oc
+
+check-oc:
+    opencode auth list
+    opencode run -m github-copilot/$OPENAI_API_MODEL --print-logs Hi
 
 # use `opencode auth login` to log into Github Copilot
 # use `opencode run -m github-copilot/claude-3.5-sonnet --print-logs Hi` for a first run, which runs bun install that might take a while
