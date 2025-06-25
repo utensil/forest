@@ -511,14 +511,31 @@ prep-oc:
     cat > ~/.config/opencode/config.json << EOF
     {
       "\$schema": "https://opencode.ai/config.json",
-      "model": "github-copilot/$OPENAI_API_MODEL"
+      "autoshare": false,
+      "autoupdate": false,
+      "model": "${OPENAI_API_PROVIDER:-github-copilot}/${OPENAI_API_MODEL:-claude-sonnet-4}",
+      "provider": {
+        "local": {
+            "npm": "@ai-sdk/openai-compatible",
+            "options": {
+                "baseURL": "$OPENAI_API_BASE"
+            },
+            "models": {
+                "$OPENAI_API_MODEL": {}
+            }
+        }
+      }
     }
     EOF
     just check-oc
 
 check-oc:
+    #!/usr/bin/env zsh
+    set -e
+    cat ~/.config/opencode/config.json
     opencode auth list
-    opencode run -m github-copilot/$OPENAI_API_MODEL --print-logs Hi
+    opencode auth list|grep ${OPENAI_API_PROVIDER:-Github Copilot}
+    opencode run -m "${OPENAI_API_PROVIDER:-github-copilot}/${OPENAI_API_MODEL:-claude-sonnet-4}" --print-logs Hi
 
 # use `opencode auth login` to log into Github Copilot
 # use `opencode run -m github-copilot/claude-3.5-sonnet --print-logs Hi` for a first run, which runs bun install that might take a while
