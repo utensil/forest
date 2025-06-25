@@ -542,6 +542,10 @@ prof-zsh:
     time zsh -i -c exit
 
 prep-rc:
+    # show diff before copying (dotfiles as new, ~ as old)
+    delta --color-only ~/.envrc dotfiles/.envrc || true
+    delta --color-only ~/.bashrc dotfiles/.bashrc || true
+    delta --color-only ~/.zshrc dotfiles/.zshrc || true
     # copy with confirmation
     cp -i dotfiles/.envrc ~/.envrc
     cp -i dotfiles/.bashrc ~/.bashrc
