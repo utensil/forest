@@ -1,7 +1,9 @@
 # Editor/IDE Configuration Tasks
+
 import 'term.just'
 
-# Helix Editor
+## Helix Editor
+
 prep-hx:
     which hx || brew install helix
     rm -rf ~/.config/helix || true
@@ -42,7 +44,19 @@ hxx PROJ="forest" *PARAMS="":
     cd ~/projects/{{PROJ}}
     ~/.cargo/bin/hx
 
-# Neovim
+# Base16 Themes for Helix
+prep-base16-helix:
+    #!/usr/bin/env zsh
+    if [ ! -d ../base16-helix ]; then
+        git clone https://github.com/tinted-theming/base16-helix ../base16-helix
+    else
+        (cd ../base16-helix && git pull)
+    fi
+    mkdir -p ~/.config/helix/themes
+    cp -f ../base16-helix/themes/base16-railscasts.toml ~/.config/helix/themes/base16-railscasts.toml
+
+## Neovim
+
 prep-nvim:
     #!/usr/bin/env bash
     which nvim || brew install neovim
@@ -56,7 +70,17 @@ nvim PROJ="forest" *PARAMS="": sync-nvim
     #!/usr/bin/env bash
     cd ~/projects/{{PROJ}} && nvim {{PARAMS}}
 
-# LunarVim
+## Nvim plugins
+sync-plugins: stylua
+    mkdir -p ~/.config/nvim/lua/plugins/
+    cp -f uts-plugins.lua ~/.config/nvim/lua/plugins/spec.lua
+
+# Stylua
+stylua:
+    stylua *.lua
+
+## LunarVim
+
 prep-lvim: prep-term prep-nvim
     #!/usr/bin/env bash
     yes|bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/master/utils/installer/install.sh)
@@ -75,7 +99,8 @@ lvim PROJ="forest" *PARAMS="": sync-lvim
     #!/usr/bin/env zsh
     cd ~/projects/{{PROJ}} && lvim {{PARAMS}}
 
-# LazyVim
+## LazyVim
+
 prep-lazyvim:
     #!/usr/bin/env bash
     if [ -d ~/.config/lazyvim ]; then
@@ -92,7 +117,8 @@ lazyvim PROJ="forest": sync-lazyvim
     #!/usr/bin/env bash
     cd ~/projects/{{PROJ}} && nvim --cmd 'set runtimepath+=~/.config/lazyvim/' --cmd 'lua package.path = package.path .. ";{{home_directory()}}/.config/lazyvim/lua/?.lua"' -u ~/.config/lazyvim/init.lua
 
-# NvChad
+## NvChad
+
 prep-chad:
     #!/usr/bin/env bash
     if [ -d ~/.config/nvchad ]; then
@@ -110,7 +136,8 @@ chad PROJ="forest": sync-chad
     #!/usr/bin/env bash
     cd ~/projects/{{PROJ}} && nvim --cmd 'set runtimepath+=~/.config/nvchad/' --cmd 'lua package.path = package.path .. ";{{home_directory()}}/.config/nvchad/lua/?.lua"' -u ~/.config/nvchad/nvchad-init.lua
 
-# AstroNvim
+## AstroNvim
+
 prep-astro:
     #!/usr/bin/env zsh
     if [ -d ~/.config/astro ]; then
@@ -147,7 +174,8 @@ try-astro:
         '
     fi
 
-# Language Servers
+## Language Servers
+
 prep-lsp:
     which pylsp || brew install python-lsp-server
     which ruff || brew install ruff
@@ -174,23 +202,3 @@ prep-lsp-ai:
 #     which copilot-language-server || npm install -g @github/copilot-language-server
 #     mkdir -p ~/.config/helix
 #     cp -f dotfiles/.config/helix/languages.toml ~/.config/helix/languages.toml
-
-# Editor Plugins
-sync-plugins: stylua
-    mkdir -p ~/.config/nvim/lua/plugins/
-    cp -f uts-plugins.lua ~/.config/nvim/lua/plugins/spec.lua
-
-# Stylua
-stylua:
-    stylua *.lua
-
-# Base16 Themes for Helix
-prep-base16-helix:
-    #!/usr/bin/env zsh
-    if [ ! -d ../base16-helix ]; then
-        git clone https://github.com/tinted-theming/base16-helix ../base16-helix
-    else
-        (cd ../base16-helix && git pull)
-    fi
-    mkdir -p ~/.config/helix/themes
-    cp -f ../base16-helix/themes/base16-railscasts.toml ~/.config/helix/themes/base16-railscasts.toml

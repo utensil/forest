@@ -9,7 +9,7 @@ export XDG_CONFIG_HOME := home_directory() / ".config"
 export TERM := "xterm-256color"
 
 ## Terminal basic CLIs
-#
+
 # TODO: break down to essentials and extra pack
 
 prep-term:
