@@ -103,6 +103,16 @@ prep-zsh:
 prof-zsh:
     time zsh -i -c exit
 
+# a zsh that inherits .env
+zsh PROJ="forest":
+    #!/usr/bin/env zsh
+    cd ~/projects/{{PROJ}}
+    zsh
+
+# a ssh that inherits .env etc.
+ssh *PARAMS:
+    ssh {{PARAMS}}
+
 prep-rc:
     # show diff before copying (dotfiles as new, ~ as old)
     delta --color-only ~/.envrc dotfiles/.envrc || true
@@ -118,6 +128,61 @@ add-zrc LINE:
 
 add-brc LINE:
     grep -F '{{LINE}}' ~/.bashrc || echo '{{LINE}}' >> ~/.bashrc
+
+
+chsh:
+    # chsh -s `chsh -l|grep zsh|head -1` `whoami`
+    # chsh -s `which zsh` `whoami`
+
+## Git
+
+prep-git:
+    #!/usr/bin/env zsh
+    which git || brew install git
+    which gh || brew install gh
+    # list the current settings
+    git config --list
+    printf "Enter your name: "
+    read name
+    printf "Enter your email: "
+    read email
+    git config --global user.name "$name"
+    git config --global user.email "$email"
+    git config --global --unset credential.helper
+    git config --global credential.helper "store --file ~/.git-credentials"
+    gh auth status || gh auth login
+    gh auth setup-git
+    echo 'Remember to run `just prep-delta` for better lazygit experience'
+
+prep-delta:
+    which delta || brew install git-delta
+    git config --global core.pager "delta"
+    git config --global interactive.diffFilter "delta --color-only"
+    # use n and N to move between diff sections
+    git config --global delta.navigate true
+    git config --global delta.dark true
+    git config --global merge.conflictStyle zdiff3
+    mkdir -p ~/.config/lazygit
+    cp -f .lazygit.yml ~/.config/lazygit/config.yml
+
+git PROJ="forest" *PARAMS="":
+    #!/usr/bin/env zsh
+    cd ~/projects/{{PROJ}} && lazygit {{PARAMS}}
+
+## Languages
+
+prep-rust:
+    #!/usr/bin/env bash
+    set -e
+    which cargo || (
+        (curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --default-toolchain nightly) &&
+        (just add-zrc '. $HOME/.cargo/env' && echo 'Run: . $HOME/.cargo/env')
+    )
+    . $HOME/.cargo/env
+    which cargo-binstall || cargo install cargo-binstall
+
+prep-node:
+    which node || brew install node
 
 
 ## Tmux and friends
@@ -237,3 +302,83 @@ prep-abduco:
 
 abduco *PARAMS:
     abduco {{PARAMS}}
+
+## Container and friends
+# 
+# prep-pod:
+#    # brew uninstall orbstack
+#    which docker || brew install docker
+#    brew install podman-desktop
+#    docker context use default
+
+prep-pod:
+    which docker || (brew install docker; brew link docker)
+    which docker-compose || brew install docker-compose
+    which colima || brew install colima
+    which kubectl || brew install kubectl
+    docker context use default
+
+# https://github.com/abiosoft/colima?tab=readme-ov-file#customizing-the-vm
+# to run x86_64 containers:
+# 1. run colima delete which will delete all existing container!
+# 2. colima start --vm-type=vz --vz-rosetta
+# 3. docker pull --platform linux/amd64 ubuntu:jammy # with docker login first
+# see also:
+# `just prep-lima` which prepares a Lima VM with Ubuntu 25.04 x86_64 that is ready to run x86_64 static binaries and containers
+# https://github.com/lima-vm/lima/discussions/1573 for realizing the VM is still arm64
+# https://github.com/lima-vm/lima/discussions/1043#discussioncomment-3560889 for realizing only statically linked binaries work in VM, dynamically linked ones fail due to missing shared libraries, so they should be run in containers, so just use colima options for this!
+pod CMD="start":
+    colima {{CMD}}
+
+k8s:
+    colima start --kubernetes
+
+docker-save IMAGE FILE:
+    docker save {{IMAGE}} -o {{FILE}}
+
+prep-lima:
+    which lima || brew install lima
+    # limactl stop default
+    # limactl delete default
+    limactl create --name=default dotfiles/lima/ubuntu-25.04-x86_64.yaml
+    # limactl start default
+    # lima
+
+prep-tilt:
+    which tilt || brew install tilt-dev/tap/tilt
+
+# tilt up is usually all you need
+tilt *PARAMS:
+    tilt {{PARAMS}}
+
+# prep-act: prep-term
+#     #!/usr/bin/env bash
+#     which act || brew install act
+
+# act:
+#     ./act.sh
+
+rm-act:
+    sudo docker stop act-dev
+    sudo docker rm act-dev
+
+mk-act:
+    sudo docker run -d --name act-dev -v{{justfile_directory()}}:/root/projects/forest -p 127.0.0.1:1210-1214:1210-1214 ghcr.io/catthehacker/ubuntu:act-latest bash -c 'sleep infinity'
+
+run-act CMD="bash" OPTS="-it":
+    sudo docker exec {{OPTS}} -w /root/projects/forest act-dev {{CMD}}
+
+# manually run bootstrp-ubuntu first, or we won't even have just
+prep-act:
+    # for brew and zsh
+    just prep-ubuntu
+    just prep-act-in-zsh
+
+prep-act-in-zsh:
+    #!/usr/bin/env zsh
+    source ~/.zshrc
+    just prep-term
+    just prep-rust
+    just prep-lvim-in-zsh
+    echo 'To start lvim in server mode, run: just lv-remote'
+    echo 'Then from outside the container, run: just lv-local'
