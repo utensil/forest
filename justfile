@@ -137,7 +137,8 @@ tree DIR="." LEVEL="1":
     eza --git -T -L {{LEVEL}} --hyperlink {{DIR}}
 
 prep-gt:
-    which ghostty || brew install --cask ghostty@tip
+    which ghostty || brew install --cask ghostty
+    just sync-gt
     just prep-gtsh
 
 prep-gtsh:
@@ -146,7 +147,7 @@ prep-gtsh:
     if [ ! -d ~/projects/ghostty-shaders ]; then
         git clone https://github.com/m-ahdal/ghostty-shaders ~/projects/ghostty-shaders
     else
-        (cd ~/projects/ghostty-shaders && git pull)
+        (cd ~/projects/ghostty-shaders && git pull) || true
     fi
 
 # Cmd+Ctrl+F to toggle fullscreen, or just Cmd + Enter
@@ -1020,6 +1021,7 @@ at NAME="mon":
 #     zellij run -f -n {{SESSION}} -- {{CMD}}
 
 # Ctrl+b as trigger, follow by
+# ? for a list of key bindings
 # session manager - s
 #   next tab - tab
 #   rename - ctrl+r
@@ -1030,10 +1032,15 @@ at NAME="mon":
 # arrows or hjkl - move between splits
 # t - new tab
 # p n - prev/next tab
+# [ - into scroll/copy mode
 
 # on the original tmux
 # c - new window
 # number - switch to window by number
+#
+# $ - rename current session
+# . - rename current window
+# , - rename current tab
 
 # works for mon running btop
 # not really working for nvim etc.
