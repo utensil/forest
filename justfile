@@ -11,9 +11,12 @@ default:
 new +PARAMS:
     ./new.sh {{PARAMS}}
 
-# Should run the following first:
-# just thm
-# bun install
+init: prep
+    #!/usr/bin/env zsh
+    bun install
+    just thm
+
+# should run `just init` first
 build:
     ./build.sh
 
@@ -26,19 +29,11 @@ lize:
 fize:
     ./fize.py
 
-chk:
-    ./chk.sh
-
 thm:
     ./thm.sh
 
 prep:
     ./prep.sh
-
-init: prep
-    #!/usr/bin/env zsh
-    bun install
-    just thm
 
 prep-bib:
     @echo "pyenv shell 3.11"
@@ -77,6 +72,17 @@ envs:
     #!/usr/bin/env bash
     echo "PROJECT_ROOT: $PROJECT_ROOT"
 
+## Lint
+ 
+chk:
+    ./chk.sh
+
+install-shellcheck:
+    brew install shellcheck
+
+run-shellcheck:
+    shellcheck *.sh
+
 ## Enrich contents
 
 # Inspired by https://github.com/Ranchero-Software/NetNewsWire/issues/978#issuecomment-1320911427
@@ -101,12 +107,6 @@ gh2md REPO OUTPUT *PARAMS="--no-prs":
 
 ## TODO: Re-organize the rest
 
-install-shellcheck:
-    brew install shellcheck
-
-run-shellcheck:
-    shellcheck *.sh
-
 tree DIR="." LEVEL="1":
     eza --git -T -L {{LEVEL}} --hyperlink {{DIR}}
 
@@ -116,6 +116,8 @@ yazi DIR="{{HOME}}/projects":
 
 rec:
     uvx asciinema rec
+
+## OS related
 
 # Copy and paste to run in zsh, because we have no just at this point
 # Next, run: just prep-term
@@ -320,6 +322,13 @@ lv-local PROJ="forest" HOST="localhost" PORT="1214":
     #!/usr/bin/env zsh
     just lvim {{PROJ}} --server {{HOST}}:{{PORT}} --remote-ui
 
+prep-ts-ssh:
+    go install github.com/derekg/ts-ssh@main
+
+# --list
+# USER@HOST:PORT
+ts-ssh *PARAMS:
+    `go env GOPATH`/bin/ts-ssh {{PARAMS}}
 
 ## Coolness
 
@@ -334,6 +343,10 @@ fetch:
 
 time:
     tty-clock -c -s -C 3
+
+weather CITY:
+    curl 'wttr.in/{{CITY}}'
+    # ?format=3'
 
 ghost:
     npx -y ghosttime
@@ -354,12 +367,39 @@ fzf:
 
 ## Web
 
+prep-cha:
+    which cha || brew install chawan
+
+# https://git.sr.ht/~bptato/chawan/tree/HEAD/doc/config.md
+# q to quit
+# [] to traverse links on the page
+# {} to traverse paragraphs on the page
+# enter to visit link
+# ,. to go back or forward in history
+# opt+i toggle image
+# opt+j toggle scripting
+# opt+k toggle cookie
+cha URL:
+    cha {{URL}}
+
 view URL="http://localhost:1314/":
     awrit {{URL}}
 
 postman:
     # uv tool install --python 3.12 posting
     uvx --python 3.12 posting
+
+# https://blog.stulta.dev/posts/annoying_json/
+prep-bjn:
+    which xh || brew install xh
+    which jo || brew install jo
+
+# e.g. just bjn "some_key[sub_key]=its value" "another_key=another value"
+# https://github.com/casey/just?tab=readme-ov-file#positional-arguments
+[positional-arguments]
+bjn *PARAMS:
+    #!/usr/bin/env zsh
+    xh --offline --print=B fake.url "$@"
 
 ## Backup
 
@@ -478,10 +518,6 @@ lb:
 nbview FILE:
     uvx euporie preview {{FILE}}
 
-weather CITY:
-    curl 'wttr.in/{{CITY}}'
-    # ?format=3'
-
 # Error: Your Xcode (15.4) at /Applications/Xcode.app is too outdated.
 # Please update to Xcode 16.0 (or delete it).
 # Xcode can be updated from the App Store.
@@ -505,6 +541,8 @@ prep-scp:
 
 scp *PARAMS:
     termscp {{PARAMS}}
+
+## Music
 
 # https://www.reddit.com/r/youtubedl/comments/155kkcc/youtube_music_how/
 
@@ -553,6 +591,8 @@ prep-tm:
 tm *PARAMS="":
     termusic {{PARAMS}}
 
+## Tiling
+
 # I'v configured it to use double tap opt then hold to trigger the radial menu
 # direction keys to place the window in 8 directions, space to maximize, enter to center
 # It's so smooth
@@ -563,6 +603,8 @@ prep-loop:
 prep-space:
     #!/usr/bin/env zsh
     [ -d /Applications/FlashSpace.app ] || brew install flashspace
+
+## File
 
 # Tab to switch between 2 Tab
 # Cmd+Shift+. to toggle hidden files
@@ -655,40 +697,8 @@ prep-hkt:
     # An account is needed
     # neonmodem connect --type lemmy --url https://lemmy.ml || true
 
-prep-cha:
-    which cha || brew install chawan
 
-# https://git.sr.ht/~bptato/chawan/tree/HEAD/doc/config.md
-# q to quit
-# [] to traverse links on the page
-# {} to traverse paragraphs on the page
-# enter to visit link
-# ,. to go back or forward in history
-# opt+i toggle image
-# opt+j toggle scripting
-# opt+k toggle cookie
-cha URL:
-    cha {{URL}}
-
-# https://blog.stulta.dev/posts/annoying_json/
-prep-bjn:
-    which xh || brew install xh
-    which jo || brew install jo
-
-# e.g. just bjn "some_key[sub_key]=its value" "another_key=another value"
-# https://github.com/casey/just?tab=readme-ov-file#positional-arguments
-[positional-arguments]
-bjn *PARAMS:
-    #!/usr/bin/env zsh
-    xh --offline --print=B fake.url "$@"
-
-prep-ts-ssh:
-    go install github.com/derekg/ts-ssh@main
-
-# --list
-# USER@HOST:PORT
-ts-ssh *PARAMS:
-    `go env GOPATH`/bin/ts-ssh {{PARAMS}}
+## Spellcheck
 
 prep-harper:
     which marksman || brew install marksman
