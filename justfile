@@ -79,6 +79,25 @@ envs:
 
 ## Enrich contents
 
+# Inspired by https://github.com/Ranchero-Software/NetNewsWire/issues/978#issuecomment-1320911427
+rss-stars:
+    #!/usr/bin/env zsh
+    cd ~/Library/Containers/com.ranchero.NetNewsWire-Evergreen/Data/Library/Application\ Support/NetNewsWire/Accounts/2_iCloud
+    # get a JSON of all the starred items with only title, url, externalURL, datePublished
+    sqlite3 DB.sqlite3 '.mode json' 'select a.*, s.* from articles a join statuses s on a.articleID = s.articleID where s.starred = 1 order by s.dateArrived' |jq -r '.[]|{title, url, externalURL, datePublished, dateArrived, uniqueID}'
+
+stars:
+    just rss-stars|./stars.py
+
+til:
+    ./til.py --reset && ./til.py
+
+# relies on GITHUB_ACCESS_TOKEN
+gh2md REPO OUTPUT *PARAMS="--no-prs":
+    #!/usr/bin/env zsh
+    GITHUB_ACCESS_TOKEN=$(gh auth token) uvx gh2md --idempotent {{PARAMS}} {{REPO}} {{OUTPUT}}
+    # https://github.com/mattduck/gh2md/issues/39
+    # docker run --rm -it -e GITHUB_ACCESS_TOKEN=$(gh auth token) dockerproxy.net/library/python:3.11.2 bash -c 'pip install gh2md && gh2md --idempotent {{REPO}} {{OUTPUT}}'
 
 ## TODO: Re-organize the rest
 
@@ -94,38 +113,6 @@ tree DIR="." LEVEL="1":
 yazi DIR="{{HOME}}/projects":
     #!/usr/bin/env bash
     EDITOR=lvim yazi {{DIR}}
-
-# https://github.com/astral-sh/uv
-
-[unix]
-prep-uv:
-    curl -LsSf https://astral.sh/uv/install.sh | sh
-
-
-[windows]
-prep-uv:
-    powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
-
-prep-py:
-    uv python install 3.11
-    uv venv --python 3.11 --seed
-
-prep-monit:
-    #!/usr/bin/env zsh
-    # which glances || brew install glances
-    which btop || brew install btop
-    # stats is part of the sudoless monit tool community
-    # [ ! -f /Applications/Stats.app ] && brew install stats
-    if [ "$(uname)" = "Darwin" ]; then
-        which mactop || brew install mactop
-        # if the arch is aarch64 or arm64
-        if [ "$(uname -m)" = "arm64" ] || [ "$(uname -m)" = "aarch64" ]; then
-            which macmon || brew install vladkens/tap/macmon
-            # which neoasitop || (brew tap op06072/neoasitop && brew install neoasitop)
-        else
-            echo "No GPU monit tools found yet"
-        fi
-    fi
 
 rec:
     uvx asciinema rec
@@ -301,6 +288,8 @@ bootstrp-ubuntu:
     sudo apt update
     sudo apt install -y just
 
+## Remote
+
 prep-chisel:
     #!/usr/bin/env bash
     which chisel || (curl https://i.jpillora.com/chisel! | bash)
@@ -331,19 +320,28 @@ lv-local PROJ="forest" HOST="localhost" PORT="1214":
     #!/usr/bin/env zsh
     just lvim {{PROJ}} --server {{HOST}}:{{PORT}} --remote-ui
 
-loc:
-    tokei -o json|uvx tokei-pie
 
-prep-date:
-    which git-backdate || (curl https://raw.githubusercontent.com/rixx/git-backdate/main/git-backdate > /usr/local/bin/git-backdate && chmod +x /usr/local/bin/git-backdate)
-    which gdate || brew install coreutils
+## Coolness
 
-date: prep-date
+# run fastfetch every time Enter is pressed
+fetch:
     #!/usr/bin/env zsh
-    BEGIN_DATE=$(gdate -d "3 days ago" +%Y-%m-%d)
-    END_DATE=$(gdate -d "today" +%Y-%m-%d)
-    echo "Rewriting history to distribute commits between ${BEGIN_DATE} and ${END_DATE}"
-    git backdate origin/main "${BEGIN_DATE}..${END_DATE}" --no-business-hours
+    while true; do
+        clear
+        fastfetch
+        read -n 1
+    done
+
+time:
+    tty-clock -c -s -C 3
+
+ghost:
+    npx -y ghosttime
+
+loc:
+    tokei -o json|uvx tokei-pie    
+
+## fzf
 
 # based on https://github.com/zachdaniel/dotfiles/blob/main/priv_scripts/project
 proj:
@@ -353,6 +351,8 @@ proj:
 # here is how to search files
 fzf:
     fzf --preview 'bat {}'|xargs lvim
+
+## Web
 
 view URL="http://localhost:1314/":
     awrit {{URL}}
@@ -405,50 +405,11 @@ prep-annex:
     mkdir -p ~/annex
     (cd ~/annex && git annex webapp)
 
-ghost:
-    npx ghosttime
-
-awake:
-    # caffeinate -d -s
-    caffeinate -s
-
-
 # https://bhoot.dev/2025/cp-dot-copies-everything/
 clone SRC DST:
     cp -R {{SRC}}/. {{DST}}
 
-# https://github.com/subframe7536/Maple-font
-prep-font:
-    brew install --cask font-maple-mono-nf-cn
-
-# Inspired by https://github.com/Ranchero-Software/NetNewsWire/issues/978#issuecomment-1320911427
-rss-stars:
-    #!/usr/bin/env zsh
-    cd ~/Library/Containers/com.ranchero.NetNewsWire-Evergreen/Data/Library/Application\ Support/NetNewsWire/Accounts/2_iCloud
-    # get a JSON of all the starred items with only title, url, externalURL, datePublished
-    sqlite3 DB.sqlite3 '.mode json' 'select a.*, s.* from articles a join statuses s on a.articleID = s.articleID where s.starred = 1 order by s.dateArrived' |jq -r '.[]|{title, url, externalURL, datePublished, dateArrived, uniqueID}'
-
-stars:
-    just rss-stars|./stars.py
-
-til:
-    ./til.py --reset && ./til.py
-
-# https://thinkingelixir.com/install-elixir-using-asdf/
-# prep-asdf:
-#     which asdf || brew install asdf
-#     just prep-rc
-
-# prep-ex: prep-asdf
-#     asdf plugin add elixir https://github.com/asdf-vm/asdf-elixir.git
-#     asdf install elixir v1.18
-#     asdf global elixir ref:v1.18
-
-prep-ex:
-    which iex || brew install elixir
-    which elixir
-    which elixirc
-    which mix
+## Code forge
 
 prep-fj:
     docker pull data.forgejo.org/forgejo/forgejo:10
@@ -459,25 +420,6 @@ fj:
     #!/usr/bin/env zsh
     mkdir -p {{FJ_DIR}}/ssh
     docker run --rm -it -e USER_UID=$(id -u) -e USER_GID=$(id -g) --env-file .env -p 23000:3000 -p 2222:22 -v {{FJ_DIR}}:/data -v /etc/timezone:/etc/timezone:ro -v /etc/localtime:/etc/localtime:ro data.forgejo.org/forgejo/forgejo:10
-
-# relies on GITHUB_ACCESS_TOKEN
-gh2md REPO OUTPUT *PARAMS="--no-prs":
-    #!/usr/bin/env zsh
-    GITHUB_ACCESS_TOKEN=$(gh auth token) uvx gh2md --idempotent {{PARAMS}} {{REPO}} {{OUTPUT}}
-    # https://github.com/mattduck/gh2md/issues/39
-    # docker run --rm -it -e GITHUB_ACCESS_TOKEN=$(gh auth token) dockerproxy.net/library/python:3.11.2 bash -c 'pip install gh2md && gh2md --idempotent {{REPO}} {{OUTPUT}}'
-
-# run fastfetch every time Enter is pressed
-fetch:
-    #!/usr/bin/env zsh
-    while true; do
-        clear
-        fastfetch
-        read -n 1
-    done
-
-time:
-    tty-clock -c -s -C 3
 
 # then run: git clone http://localhost:63000/username/repo.git:/dir.git
 # but no arm64 version yet
@@ -509,27 +451,6 @@ josh WHERE USER REPO DIR:
     echo 'cd ~/projects/{{WHERE}} && git remote add origin https://github.com/{{USER}}/NEW_REPO_NAME.git'
     echo 'gh auth setup-git'
     echo 'git push -u origin BRANCH'
-# https://github.com/louislam/dockge
-prep-dockge:
-    #!/usr/bin/env zsh
-    sudo mkdir -p /opt/stacks /opt/dockge
-    sudo chown -R $(whoami) /opt/stacks
-    sudo chown -R $(whoami) /opt/dockge
-    cd /opt/dockge
-    curl https://raw.githubusercontent.com/louislam/dockge/master/compose.yaml --output compose.yaml
-
-# https://github.com/abiosoft/colima/issues/265
-
-dockge COMMAND="up":
-    #!/usr/bin/env zsh
-    cd /opt/dockge
-    # if COMMAND is up
-    if [ "{{COMMAND}}" = "up" ]; then
-        docker-compose up -d
-        echo Dockge is now running on http://localhost:5001
-    elif [ "{{COMMAND}}" = "down" ]; then
-        docker-compose down
-    fi
 
 # https://github.com/livebook-dev/livebook#installation
 prep-lb:
@@ -539,6 +460,8 @@ prep-lb:
 
 lb:
     LIVEBOOK_IFRAME_PORT=58081 livebook server --port 58080
+
+## TUI
 
 # prep-music:
 #     # it doesn't support free spotify accounts
@@ -558,12 +481,6 @@ nbview FILE:
 weather CITY:
     curl 'wttr.in/{{CITY}}'
     # ?format=3'
-
-prep-gitlog:
-    which serie || brew install lusingander/tap/serie
-
-gitlog:
-    serie
 
 # Error: Your Xcode (15.4) at /Applications/Xcode.app is too outdated.
 # Please update to Xcode 16.0 (or delete it).
@@ -677,12 +594,6 @@ icloud:
 # Can't brew install FreeFileSync due to https://github.com/Homebrew/homebrew-cask/issues/63069,
 # but actually https://github.com/Marcuzzz/homebrew-marcstap/blob/master/Casks/freefilesync.rb proves that it could work
 
-prep-irc:
-    which weechat || brew install weechat
-
-irc CHANNEL:
-    weechat irc://utensil@irc.libera.chat/#{{CHANNEL}}
-
 pathfind:
     npx -y pagefind --site output --serve --root-selector 'article > section'
 
@@ -702,19 +613,18 @@ prep-semgrep:
 semscan:
     semgrep scan --config "p/default" --config "p/trailofbits"
 
-# linux only for now
-# see https://github.com/shell-pool/shpool/issues/183
-prep-pool:
-    cargo install shpool
-
-prep-ds:
-    cargo install diss
-
-
 
 # https://www.howtogeek.com/803598/app-is-damaged-and-cant-be-opened/
 uq APP_PATH:
     xattr -d com.apple.quarantine {{APP_PATH}}
+
+## Info and chat
+
+prep-irc:
+    which weechat || brew install weechat
+
+irc CHANNEL:
+    weechat irc://utensil@irc.libera.chat/#{{CHANNEL}}
 
 # Add a config to ~/Library/Application Support/iamb/config.toml per https://iamb.chat/configure.html
 # Login via SSO on element
@@ -771,9 +681,6 @@ prep-bjn:
 bjn *PARAMS:
     #!/usr/bin/env zsh
     xh --offline --print=B fake.url "$@"
-
-prep-go:
-    which go || brew install go
 
 prep-ts-ssh:
     go install github.com/derekg/ts-ssh@main

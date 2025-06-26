@@ -56,7 +56,32 @@ prep-term:
     which serpl || brew install serpl
     which scooter || brew install scooter
 
+prep-monit:
+    #!/usr/bin/env zsh
+    # which glances || brew install glances
+    which btop || brew install btop
+    # stats is part of the sudoless monit tool community
+    # [ ! -f /Applications/Stats.app ] && brew install stats
+    if [ "$(uname)" = "Darwin" ]; then
+        which mactop || brew install mactop
+        # if the arch is aarch64 or arm64
+        if [ "$(uname -m)" = "arm64" ] || [ "$(uname -m)" = "aarch64" ]; then
+            which macmon || brew install vladkens/tap/macmon
+            # which neoasitop || (brew tap op06072/neoasitop && brew install neoasitop)
+        else
+            echo "No GPU monit tools found yet"
+        fi
+    fi
+
+awake:
+    # caffeinate -d -s
+    caffeinate -s
+
 ## Ghostty
+ 
+# https://github.com/subframe7536/Maple-font
+prep-font:
+    brew install --cask font-maple-mono-nf-cn
 
 prep-gt:
     which ghostty || brew install --cask ghostty
@@ -169,6 +194,23 @@ git PROJ="forest" *PARAMS="":
     #!/usr/bin/env zsh
     cd ~/projects/{{PROJ}} && lazygit {{PARAMS}}
 
+prep-date:
+    which git-backdate || (curl https://raw.githubusercontent.com/rixx/git-backdate/main/git-backdate > /usr/local/bin/git-backdate && chmod +x /usr/local/bin/git-backdate)
+    which gdate || brew install coreutils
+
+date: prep-date
+    #!/usr/bin/env zsh
+    BEGIN_DATE=$(gdate -d "3 days ago" +%Y-%m-%d)
+    END_DATE=$(gdate -d "today" +%Y-%m-%d)
+    echo "Rewriting history to distribute commits between ${BEGIN_DATE} and ${END_DATE}"
+    git backdate origin/main "${BEGIN_DATE}..${END_DATE}" --no-business-hours
+
+prep-gitlog:
+    which serie || brew install lusingander/tap/serie
+
+gitlog:
+    serie
+
 ## Languages
 
 prep-rust:
@@ -184,6 +226,39 @@ prep-rust:
 prep-node:
     which node || brew install node
 
+# https://github.com/astral-sh/uv
+
+[unix]
+prep-uv:
+    curl -LsSf https://astral.sh/uv/install.sh | sh
+
+
+[windows]
+prep-uv:
+    powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
+
+prep-py:
+    uv python install 3.11
+    uv venv --python 3.11 --seed
+
+prep-go:
+    which go || brew install go
+
+# https://thinkingelixir.com/install-elixir-using-asdf/
+# prep-asdf:
+#     which asdf || brew install asdf
+#     just prep-rc
+
+# prep-ex: prep-asdf
+#     asdf plugin add elixir https://github.com/asdf-vm/asdf-elixir.git
+#     asdf install elixir v1.18
+#     asdf global elixir ref:v1.18
+
+prep-ex:
+    which iex || brew install elixir
+    which elixir
+    which elixirc
+    which mix
 
 ## Tmux and friends
 
@@ -283,11 +358,6 @@ tm-dev:
       split-window -v -p 25 -t 0 'just awake || zsh' \; \
       attach
 
-# works for mon running btop
-# not really working for nvim etc.
-# diss-at SESSION="main":
-#     diss -e g -a {{SESSION}} zsh
-
 # https://github.com/kovidgoyal/kitty/issues/391#issuecomment-778703119
 # persistent session: abduco
 # multiplexer: dvtm
@@ -302,6 +372,19 @@ prep-abduco:
 
 abduco *PARAMS:
     abduco {{PARAMS}}
+
+# linux only for now
+# see https://github.com/shell-pool/shpool/issues/183
+prep-pool:
+    cargo install shpool
+
+prep-ds:
+    cargo install diss
+
+# works for mon running btop
+# not really working for nvim etc.
+# diss-at SESSION="main":
+#     diss -e g -a {{SESSION}} zsh
 
 ## Container and friends
 # 
@@ -350,6 +433,28 @@ prep-tilt:
 # tilt up is usually all you need
 tilt *PARAMS:
     tilt {{PARAMS}}
+
+# https://github.com/louislam/dockge
+prep-dockge:
+    #!/usr/bin/env zsh
+    sudo mkdir -p /opt/stacks /opt/dockge
+    sudo chown -R $(whoami) /opt/stacks
+    sudo chown -R $(whoami) /opt/dockge
+    cd /opt/dockge
+    curl https://raw.githubusercontent.com/louislam/dockge/master/compose.yaml --output compose.yaml
+
+# https://github.com/abiosoft/colima/issues/265
+
+dockge COMMAND="up":
+    #!/usr/bin/env zsh
+    cd /opt/dockge
+    # if COMMAND is up
+    if [ "{{COMMAND}}" = "up" ]; then
+        docker-compose up -d
+        echo Dockge is now running on http://localhost:5001
+    elif [ "{{COMMAND}}" = "down" ]; then
+        docker-compose down
+    fi
 
 # prep-act: prep-term
 #     #!/usr/bin/env bash
