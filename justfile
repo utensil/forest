@@ -73,7 +73,7 @@ envs:
     echo "PROJECT_ROOT: $PROJECT_ROOT"
 
 ## Lint
- 
+
 chk:
     ./chk.sh
 
@@ -104,18 +104,6 @@ gh2md REPO OUTPUT *PARAMS="--no-prs":
     GITHUB_ACCESS_TOKEN=$(gh auth token) uvx gh2md --idempotent {{PARAMS}} {{REPO}} {{OUTPUT}}
     # https://github.com/mattduck/gh2md/issues/39
     # docker run --rm -it -e GITHUB_ACCESS_TOKEN=$(gh auth token) dockerproxy.net/library/python:3.11.2 bash -c 'pip install gh2md && gh2md --idempotent {{REPO}} {{OUTPUT}}'
-
-## TODO: Re-organize the rest
-
-tree DIR="." LEVEL="1":
-    eza --git -T -L {{LEVEL}} --hyperlink {{DIR}}
-
-yazi DIR="{{HOME}}/projects":
-    #!/usr/bin/env bash
-    EDITOR=lvim yazi {{DIR}}
-
-rec:
-    uvx asciinema rec
 
 ## OS related
 
@@ -330,6 +318,12 @@ prep-ts-ssh:
 ts-ssh *PARAMS:
     `go env GOPATH`/bin/ts-ssh {{PARAMS}}
 
+prep-scp:
+    which termscp || brew install veeso/termscp/termscp
+
+scp *PARAMS:
+    termscp {{PARAMS}}
+
 ## Coolness
 
 # run fastfetch every time Enter is pressed
@@ -350,6 +344,9 @@ weather CITY:
 
 ghost:
     npx -y ghosttime
+
+rec:
+    uvx asciinema rec
 
 loc:
     tokei -o json|uvx tokei-pie    
@@ -492,6 +489,11 @@ josh WHERE USER REPO DIR:
     echo 'gh auth setup-git'
     echo 'git push -u origin BRANCH'
 
+## Notebook
+
+nbview FILE:
+    uvx euporie preview {{FILE}}
+
 # https://github.com/livebook-dev/livebook#installation
 prep-lb:
     #!/usr/bin/env zsh
@@ -500,47 +502,6 @@ prep-lb:
 
 lb:
     LIVEBOOK_IFRAME_PORT=58081 livebook server --port 58080
-
-## TUI
-
-# prep-music:
-#     # it doesn't support free spotify accounts
-#     # which spotify_player || brew install spotify_player
-#     # it's no longer available
-#     # which spt || brew install spotify-tui
-#     # it doesn't support free spotify accounts
-#     # which ncspot || brew install ncspot
-#     which code-radio || cargo install code-radio-cli
-
-# music:
-#     code-radio --no-logo --volume 5
-
-nbview FILE:
-    uvx euporie preview {{FILE}}
-
-# Error: Your Xcode (15.4) at /Applications/Xcode.app is too outdated.
-# Please update to Xcode 16.0 (or delete it).
-# Xcode can be updated from the App Store.
-
-# Error: Your Command Line Tools are too outdated.
-# Update them from Software Update in System Settings.
-
-# If that doesn't show you any updates, run:
-#   sudo rm -rf /Library/Developer/CommandLineTools
-#   sudo xcode-select --install
-
-# Alternatively, manually download them from:
-#   https://developer.apple.com/download/all/.
-# You should download the Command Line Tools for Xcode 16.0.
-
-# Error: You have not agreed to the Xcode license. Please resolve this by running:
-#   sudo xcodebuild -license accept
-
-prep-scp:
-    which termscp || brew install veeso/termscp/termscp
-
-scp *PARAMS:
-    termscp {{PARAMS}}
 
 ## Music
 
@@ -591,6 +552,18 @@ prep-tm:
 tm *PARAMS="":
     termusic {{PARAMS}}
 
+# prep-music:
+#     # it doesn't support free spotify accounts
+#     # which spotify_player || brew install spotify_player
+#     # it's no longer available
+#     # which spt || brew install spotify-tui
+#     # it doesn't support free spotify accounts
+#     # which ncspot || brew install ncspot
+#     which code-radio || cargo install code-radio-cli
+
+# music:
+#     code-radio --no-logo --volume 5
+
 ## Tiling
 
 # I'v configured it to use double tap opt then hold to trigger the radial menu
@@ -605,6 +578,13 @@ prep-space:
     [ -d /Applications/FlashSpace.app ] || brew install flashspace
 
 ## File
+
+tree DIR="." LEVEL="1":
+    eza --git -T -L {{LEVEL}} --hyperlink {{DIR}}
+
+yazi DIR="{{HOME}}/projects":
+    #!/usr/bin/env bash
+    EDITOR=lvim yazi {{DIR}}
 
 # Tab to switch between 2 Tab
 # Cmd+Shift+. to toggle hidden files
@@ -697,7 +677,6 @@ prep-hkt:
     # An account is needed
     # neonmodem connect --type lemmy --url https://lemmy.ml || true
 
-
 ## Spellcheck
 
 prep-harper:
@@ -706,3 +685,21 @@ prep-harper:
 
 import 'dotfiles/llm.just'
 import 'dotfiles/archived.just'
+
+# Error: Your Xcode (15.4) at /Applications/Xcode.app is too outdated.
+# Please update to Xcode 16.0 (or delete it).
+# Xcode can be updated from the App Store.
+
+# Error: Your Command Line Tools are too outdated.
+# Update them from Software Update in System Settings.
+
+# If that doesn't show you any updates, run:
+#   sudo rm -rf /Library/Developer/CommandLineTools
+#   sudo xcode-select --install
+
+# Alternatively, manually download them from:
+#   https://developer.apple.com/download/all/.
+# You should download the Command Line Tools for Xcode 16.0.
+
+# Error: You have not agreed to the Xcode license. Please resolve this by running:
+#   sudo xcodebuild -license accept
