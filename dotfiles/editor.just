@@ -1,4 +1,5 @@
 # Editor/IDE Configuration Tasks
+import 'term.just'
 
 # Helix Editor
 prep-hx:
@@ -15,6 +16,7 @@ sync-hx:
 reset-hx:
     rm -rf ~/.config/helix || true
 
+# -v enables verbose logging
 hx PROJ="forest" *PARAMS="":
     #!/usr/bin/env zsh
     cd ~/projects/{{PROJ}}
@@ -154,6 +156,7 @@ prep-lsp:
     which rust-analyzer || (rustup component add rust-src; rustup component add rust-analyzer)
     which zls || echo "zls not installed, visit https://zigtools.org/zls/install/"
 
+# https://github.com/DJAndries/llmvm/tree/master/frontends/codeassist
 prep-lsp-lv:
     #!/usr/bin/env zsh
     set -e
@@ -166,6 +169,11 @@ prep-lsp-ai:
     which cargo || just prep-rust
     which lsp-ai || cargo install lsp-ai
     which marksman || brew install marksman
+
+# prep-hxcp:
+#     which copilot-language-server || npm install -g @github/copilot-language-server
+#     mkdir -p ~/.config/helix
+#     cp -f dotfiles/.config/helix/languages.toml ~/.config/helix/languages.toml
 
 # Editor Plugins
 sync-plugins: stylua
