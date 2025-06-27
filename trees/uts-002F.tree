@@ -19,6 +19,11 @@ I use
     - Task `prep-lvim` in [my justfile](https://github.com/utensil/forest/blob/main/justfile) is how I have installed LunarVim. Task `lvim` will syncrhonize the configurations, change the working directory and open LunarVim for a specified project.
     - [my LunarVim configuration](https://github.com/utensil/forest/blob/main/config.lua)
     - LunarVim specific keys are marked with 🌕
+- [AstroVim](https://astronvim.github.io/)
+    - seems to be a better starting point
+    - see [astrocommunity](https://astronvim.github.io/astrocommunity/) for configuring plugin packs
+    - I've ported plugins to use it except for forester
+    - AstroVim specific keys are marked with 🌌
 - [LazyVim](https://github.com/LazyVim/LazyVim)
     - it has some [pre-installed plugins](https://www.lazyvim.org/plugins)
     - similarly, see task `prep-lazyvim` and `lazyvim` in my justfile
@@ -176,6 +181,8 @@ Other first aid key mappings or commands available:
 - Move motions
     - On Mac, combine with the touchpad to be even more efficient
     - `gg` for beginning, `G` for end
+    - `zz` to center the current line, `zt` to top, `zb` to bottom
+        - prefixing with a number works on the corresponding line
     - `w`/`b` to move forward/backward by word
         - `W`/`B` to move by space-separated words
     - `e` works like `w` but moves to the end of the word
@@ -191,8 +198,7 @@ Other first aid key mappings or commands available:
         - e.g.
             - \verb>>>|`ct)` is useful for change until the next `)`>>>
             - \verb>>>|`vt)p` is useful for select until the next `)` and paste and replace>>>
-    - `zz` to center the current line, `zt` to top, `zb` to bottom
-        - prefixing with a number works on the corresponding line
+        - `F` and `T` work like `f` and `t` but move backward
     - \verb>>>|`}` to the next paragraph>>>
 - Edit motions
     - to enter INSERT mode
@@ -272,7 +278,10 @@ Other first aid key mappings or commands available:
         - use `.` to do the same for next occurrences
         - use `n` to skip, and `u` to undo
     - use `Ctrl+v` and direction keys (e.g. `j` or `5j`) to vertically select
-        - use `c` to change, other editing motions also work, e.g. `i`, `a`, `d`
+        - use `c` to change
+        - use `I` to prepend
+        - use `A` to append
+        - use `d` to delete
         - type the new text, then `Esc`, then it will be applied to all lines of selection
     - use `gv` to reselect the last selection
 - Visual selection with mouse/touchpad
@@ -292,7 +301,7 @@ Other first aid key mappings or commands available:
         - ✅ delete
         - ✅ paste
         - ❌ typing
-            - ✅ use one of `i`, `a`, `c` etc., then start typing
+            - ✅ use one of `I`, `A`, `c`, then start typing
 - Recording
     - `qa` starts recording user's inputs, `q` quits recording, `@a` replays the recording, `a` could be any other letter
     - it could serve as ad hoc key mappings
@@ -438,6 +447,7 @@ It's very important to stay in the flow and Zen mode as much as possible. Split 
 See the following articles for further inspirations:
 
 - [[uts-002G]] for related TUI key mappings.
+- [Lucas on Vim bindings ](https://scharenbroch.dev/blog/vim-bindings/) for discovering more key bindings
 - [Vim cheat sheet](https://devhints.io/vim) for key mappings that apply to vanilla Vim.
 - [VSCode Vim ROADMAP](https://github.com/VSCodeVim/Vim/blob/HEAD/ROADMAP.md) for key mappings that apply to (limited) VSCode Vim mode, but now I have switch to use the real NeoVim.
 - [Keybinds overview](https://www.lunarvim.org/docs/beginners-guide/keybinds-overview) for LunarVim key mappings.

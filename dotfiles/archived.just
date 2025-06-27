@@ -185,18 +185,6 @@ prep-ray:
     #!/usr/bin/env bash
     brew install --cask raycast
 
-# try Zellij
-# Ctrl+P N to create a new pane
-# Ctrl+P then direction keys to move between panes
-# Ctrl+P Z to hide frames
-# Ctrl+N then direction keys to resize the corrent pane towards the direction
-# Ctrl+O W to manage sessions
-zj:
-    #!/usr/bin/env zsh
-    which zellij || brew install zellij
-    # bash <(curl -L https://zellij.dev/launch)
-    zellij
-
 prep-meet:
     brew tap zackriya-solutions/meetily
     which meetily-server || brew install --cask meetily

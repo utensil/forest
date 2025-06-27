@@ -18,8 +18,8 @@ const possible_layouts = [
 
 const graphviz_roots = document.querySelectorAll('.d3-graphviz-root.loading')
 for (const graphviz_root of graphviz_roots) {
-    const graphviz_source = graphviz_root.textContent
-    let layout = graphviz_root.getAttribute('data-layout')
+    const graphviz_source = graphviz_root.textContent || ''
+    let layout = graphviz_root.getAttribute('data-layout') || ''
     if (!possible_layouts.includes(layout)) {
         // randomly choose a layout
         layout =

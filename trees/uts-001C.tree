@@ -4,6 +4,17 @@
 \tag{exp}
 
 \note{test 3D Bifurcation Diagram}{
+
+\md\verb>>>|
+2025-06-06 UPDATE: Known to be broken for now. Errors:
+
+```
+Uncaught (in promise) JsValue(OperationError: Failed to execute 'requestDevice' on 'GPUAdapter': The limit "maxInterStageShaderComponents" with a non-undefined value is not recognized.
+OperationError: Failed to execute 'requestDevice' on 'GPUAdapter': The limit "maxInterStageShaderComponents" with a non-undefined value is not recognized.
+```
+
+>>>
+
 \p{Adapted from \link{https://compute.toys/view/736}:
 }
 \<html:div>[class]{wgputoy}[data-custom]\verb>>>|
@@ -29,7 +40,7 @@ const STEP = 0.01;
 const LARGENUM = 1e10;
 const ATOMIC_SCALE = 1024.0;
 
-struct Camera 
+struct Camera
 {
   pos: float3,
   cam: float3x3,
@@ -56,15 +67,15 @@ fn pcg4d(a: uint4) -> uint4
 }
 
 fn rand4() -> float4
-{ 
+{
     state = pcg4d(state);
-    return float4(state)/float(0xffffffffu); 
+    return float4(state)/float(0xffffffffu);
 }
 
 fn nrand4(sigma: float, mean: float4) -> float4
 {
     let Z = rand4();
-    return mean + sigma * sqrt(-2.0 * log(Z.xxyy)) * 
+    return mean + sigma * sqrt(-2.0 * log(Z.xxyy)) *
            float4(cos(TWO_PI * Z.z),sin(TWO_PI * Z.z),cos(TWO_PI * Z.w),sin(TWO_PI * Z.w));
 }
 
@@ -81,18 +92,18 @@ fn disk(rng: float2) -> float2
     return float2(sin(TWO_PI*rng.x), cos(TWO_PI*rng.x))*sqrt(rng.y);
 }
 
-fn Rotate(t: float) -> float2x2 
+fn Rotate(t: float) -> float2x2
 {
     return float2x2(
-        cos(t), sin(t), 
-      - sin(t), cos(t), 
+        cos(t), sin(t),
+      - sin(t), cos(t),
     );
 }
 
 fn RotXY(x: float3, t: float) -> float3
 {
     return float3(Rotate(t)*x.xy, x.z);
-} 
+}
 
 fn GetCameraMatrix(ang: float2) -> float3x3
 {
@@ -109,7 +120,7 @@ fn SetCamera()
     let ang = float2(mouse.pos.xy)*float2(-TWO_PI, PI)/screen_size_f + float2(0.4, 0.4);
 
     camera.fov = FOV;
-    camera.cam = GetCameraMatrix(ang); 
+    camera.cam = GetCameraMatrix(ang);
     camera.pos = - (camera.cam*float3(8.0*custom.Radius+0.5,0.0,0.0));
     camera.size = screen_size_f;
 }
@@ -135,7 +146,7 @@ fn AdditiveBlend(color: float3, depth: float, index: int)
     {
         atomicAdd(&atomic_storage[index*4+0], scaledColor.x);
     }
-       
+
     if(scaledColor.y>0)
     {
         atomicAdd(&atomic_storage[index*4+1], scaledColor.y);
@@ -154,7 +165,7 @@ fn RasterizePoint(pos: float3, color: float3)
     let screenCoord = int2(projectedPos.xy+0.5*rand4().xy);
 
     //outside of our view
-    if(screenCoord.x < 0 || screenCoord.x >= screen_size.x || 
+    if(screenCoord.x < 0 || screenCoord.x >= screen_size.x ||
         screenCoord.y < 0 || screenCoord.y >= screen_size.y || projectedPos.z < 0.0)
     {
         return;
@@ -225,7 +236,7 @@ fn Clear(@builtin(global_invocation_id) id: uint3) {
 }
 
 @compute @workgroup_size(16, 16)
-fn Rasterize(@builtin(global_invocation_id) id: uint3) 
+fn Rasterize(@builtin(global_invocation_id) id: uint3)
 {
     SetCamera();
 
@@ -245,14 +256,14 @@ fn Sample(pos: int2) -> float3
     let x = float(atomicLoad(&atomic_storage[idx*4+0]));
     let y = float(atomicLoad(&atomic_storage[idx*4+1]));
     let z = float(atomicLoad(&atomic_storage[idx*4+2]));
-    
+
     color = float3(x,y,z)/ATOMIC_SCALE;
 
     return abs(color);
 }
 
 @compute @workgroup_size(16, 16)
-fn FinalPass(@builtin(global_invocation_id) id: uint3) 
+fn FinalPass(@builtin(global_invocation_id) id: uint3)
 {
     let screen_size = uint2(textureDimensions(screen));
 
@@ -274,7 +285,7 @@ fn FinalPass(@builtin(global_invocation_id) id: uint3)
     }
 
     let exposed = 1.0 - exp(-5.0*custom.Exposure*color.xyz/color.w);
-    
+
     // Output to buffer
     textureStore(pass_out, int2(id.xy), 0, color);
 

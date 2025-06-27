@@ -14,8 +14,8 @@ A tree file can:
 ## File Structure
 - Trees are stored as `.tree` files
 - Each tree has a unique address in format `xxx-NNNN` where:
-  - `xxx` is a namespace prefix (often user initials)
-  - `NNNN` is a base-36 number
+  - `xxx` is a namespace prefix (often subject area)
+  - `NNNN` is a base-36 number (allowing digits 0-9 and letters A-Z)
 - References are stored in `refs/` subdirectory
 - Configuration via `forest.toml`
 
@@ -49,7 +49,7 @@ Common tag categories:
 - Type: tech, macro (macro definitions)
 
 #### References
-Reference cards marked with \refcardt format:
+Reference cards marked with \refcardt format (formal mathematical statements):
 ```
 \refcardt{type}{name}{section}{citation}{
   \p{Statement...}
@@ -68,6 +68,19 @@ Reference cards marked with \refcardt format:
     \li{Point 1}
     \li{Point 2}
   }
+}
+```
+
+Examples from actual tree files:
+```forester
+\refcardt{lemma}{Yoneda}{4.2.1}{leinster2016basic}{
+\p{
+Let #{\C} be a \vocabk{locally small}{tt-000A} category. Then
+##{
+\Nat(\fH_X, \fF) \cong \fF(X)
+}
+\vocabk{naturally in}{tt-001H} #{X \in \C} and #{\fF \in\left[\C^{\mathrm{op}}, \Set \right]}.
+}
 }
 ```
 
@@ -167,6 +180,46 @@ Every tree must have properly nested structure elements:
 }
 ```
 
+#### Forest-Specific Patterns
+
+**Tree Organization**:
+```forester
+\import{macros}
+\tag{root}                # Top-level index trees
+\tag{draft}              # Work in progress
+\tag{interest}           # Interest tracking
+\put\transclude/numbered{false}
+
+\note{title}{
+  \block{section}{
+    content...
+  }
+}
+```
+
+**Learning Diary Format**:
+See `for-llm/learning_diary.md` for comprehensive documentation on learning diary patterns and RSS integration.
+
+**Transclusion and Queries**:
+```forester
+\transclude{tree-id}     # Include another tree
+\scope{
+  \put\transclude/expanded{false}
+  \query{
+    \open\query
+    \isect{\tag{draft}}{\compl{\tag{completed}}}
+  }
+}
+```
+
+**Special Content Types**:
+```forester
+\card{type}{title}{content}    # Content card
+\note{title}{content}          # Structured note
+\block{title}{content}         # Content block
+\mdnote{title}{markdown-style content}
+```
+
 #### Lists and Items
 ```
 \ol{  # Ordered list
@@ -190,9 +243,15 @@ Every tree must have properly nested structure elements:
 \related{hidden reference text}
 
 # Citations and References
-\citek{reference-id}     # Citation with brackets
-\citet{tag}{ref-id}     # Citation with specific tag
+\citef{reference-id}     # Citation showing full paper title (learning diary)
+\citek{reference-id}     # Citation for whole papers/books (mathematical content)
+\citet{section}{ref-id}  # Citation with specific section/theorem (mathematical content)
 \citelink{url}          # URL citation
+
+# Citation Examples:
+# Learning diary: read \citef{ren2025deepseekproverv2}
+# Mathematical: follows \citek{leinster2016basic}
+# Specific: naturally in X \citet{1.3.12}{leinster2016basic}
 ```
 
 #### Math Content
@@ -376,16 +435,34 @@ name/.pic={
 
 ## Organization Patterns
 
-### Note Types
-- Root notes (\tag{root}): Entry points and indexes
-- Draft notes (\tag{draft}): Work in progress
-- Macro notes (\tag{macro}): Shared definitions
-- Experimental notes (\tag{exp}): Trials and tests
-- Special notes: person, reference, equation
+### Forest-Specific Note Types
+Based on actual tree file patterns:
 
-### Query Patterns
-Common queries for organizing notes:
-```
+**Subject-based prefixes**:
+- `uts-NNNN`: General mathematical notes and learning diary
+- `ag-NNNN`: Algebraic geometry concepts and constructions
+- `tt-NNNN`: Type theory and categorical logic
+- `ca-NNNN`: Category theory fundamentals
+- `spin-NNNN`: Clifford algebras and spin groups
+- `hopf-NNNN`: Hopf algebras and quantum groups
+
+**Tag-based organization**:
+- Root notes (`\tag{root}`): Entry points and indexes
+- Draft notes (`\tag{draft}`): Work in progress
+- Macro notes (`\tag{macro}`): Shared definitions
+- Experimental notes (`\tag{exp}`): Trials and tests
+- Interest tracking (`\tag{interest}`): Learning and research interests
+- Special taxons: `person`, `reference`, `equation`
+
+### Actual Query Patterns
+From Forest tree files:
+```forester
+# Find draft notes by topic
+\query{
+    \open\query
+    \isect{\tag{draft}}{\compl{\union{\tag{tt}}{\tag{ag}}{\tag{clifford}}{\tag{tech}}}}
+}
+
 # Find notes without a home
 \def\query/normal{
   \compl{
@@ -404,27 +481,55 @@ Common queries for organizing notes:
 ```
 
 ### Documentation Patterns
-- Learning diaries with dated entries
-- Topic-based note collections
-- Cross-referenced theorem networks
-- Citation and bibliography systems
+- **Learning diaries**: See `for-llm/learning_diary.md` for comprehensive format documentation
+- **Mathematical notes**: LaTeX PDF generation with `\meta{pdf}{true}`
+- **Topic collections**: Organized by mathematical subjects
+- **Cross-referenced networks**: Using `\vocabk{term}{tree-id}` for definitions
+- **Citation systems**: `\citef{}` (learning diary), `\citek{}` and `\citet{}` (mathematical content)
+- **Macro libraries**: Reusable mathematical notation and string diagrams
 
 ## Best Practices
-- Import shared macros at the start
-- Use proper taxonomy markers
-- Structure content hierarchically 
-- Cite sources with proper references
-- Use newvocab for first occurrence of terms
-- Link to term definitions with vocabk
-- Include proofs in collapsible blocks
-- Tag notes for topic organization
-- Query to find orphaned/lost notes
-- Date entries in learning diaries
+Based on actual Forest usage patterns:
+
+### Content Organization
+- Import shared macros at the start: `\import{macros}` or `\import{spin-macros}`
+- Use proper taxonomy markers: `\taxon{definition}`, `\tag{subject-area}`
+- Structure content hierarchically with `\note{}`, `\block{}`, `\subtree{}`
+- Add metadata for PDF generation: `\meta{pdf}{true}`, `\author{}`, `\date{}`
+
+### Mathematical Content
+- Use `\refcardt{}` for formal mathematical statements
+- Include proofs in `\proof{}` blocks within reference cards
+- Use `\vocabk{term}{tree-id}` to link to definitions
+- Use `\newvocab{}` for first occurrence of terms
+- Employ mathematical macros from subject-specific macro files
+
+### Learning Diary Management
+See `for-llm/learning_diary.md` for detailed documentation on learning diary format, RSS processing, and best practices.
+
+### Cross-References and Citations
+- Cite sources with proper references: `\citek{}` for whole papers, `\citet{}` for specific sections
+- Use internal tree linking: `[text](tree-id)` or `[[tree-id]]`
+- Create queries to find orphaned/lost notes
+- Tag notes for proper topic organization
 
 ## Common Pitfalls
-- Missing \p{} around paragraphs
-- Incorrect nesting of blocks
-- Uncited theorems/definitions
-- Missing taxonomy markers
-- Improper citation format
-- Unlinked terminology
+Based on Forest development experience:
+
+### Syntax Issues
+- Missing `\p{}` around paragraphs (Forester requirement)
+- Incorrect nesting of blocks and commands
+- Not following tree file naming conventions (`xxx-NNNN` format)
+- Forgetting to import required macro files
+
+### Content Issues
+- Uncited theorems/definitions in mathematical content
+- Missing taxonomy markers (`\taxon{}`, `\tag{}`)
+- Improper citation format or missing references
+- Unlinked terminology that should use `\vocabk{}`
+
+### Organization Issues
+- Not updating learning diary consistently (see `for-llm/learning_diary.md` for guidelines)
+- Missing transclusion in root/index trees
+- Not using appropriate subject prefixes for new trees
+- Creating orphaned notes without proper linking

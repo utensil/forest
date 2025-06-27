@@ -710,13 +710,22 @@ code.highlight code {
     margin-bottom: 5em;
 } */
 
+.mermaid.grace-loading,
 .markdownit.grace-loading,
+.twisty.grace-loading,
 code.highlight.grace-loading {
     color: var(--uts-text);
     white-space: pre-wrap;
     background: unset;
     animation: unset;
     height: unset;
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+.mermaid.grace-loading,
+code.highlight.grace-loading {
+    font-family: var(--mono);
 }
 
 .penrose-root.loading,
@@ -823,6 +832,8 @@ code.highlight.grace-loading {
         filter: invert(0.85);
     }
 
+    .tags.grace-loading,
+    .mermaid.grace-loading,
     .markdownit.grace-loading,
     code.highlight.grace-loading {
         filter: unset;
@@ -837,7 +848,25 @@ code.highlight.grace-loading {
         filter: invert(1.0);
         /* drop-shadow(0 0 5px #ffffff); */
     }
+
+    .mermaid svg {
+        filter: invert(0.85);
+    }
+
+    .markmap svg {
+        filter: invert(0.65);
+    }
 }
+
+.mermaid {
+    display: flex;
+    justify-content: center;
+}
+
+/* svg.markmap { */
+/*     width: 100%; */
+/*     height: 100vh; */
+/* } */
 
 /* the first h1 in the first section */
 article > section:first-of-type > details > summary > header > h1 {

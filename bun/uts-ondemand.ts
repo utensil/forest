@@ -26,6 +26,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     register('.wgputoy', 'wgputoy.js')
     register('.graphviz-root', 'graphviz.js')
     register('.d3-graphviz-root', 'd3-graphviz.js')
+    register('.mermaid', 'mermaid.js')
+    register('.markmap', 'markmap.js')
+    register('.twisty', 'twisty.js')
 
     const hostname = window.location.hostname
 

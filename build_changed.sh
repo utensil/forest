@@ -42,7 +42,7 @@ while IFS= read -r line; do
     if [[ $CHANGED_FILE == *".css" ]]; then
         just css $CHANGED_FILE_RELATIVE
     # this should cover .js .ts .jsx .tsx
-    elif [[ $CHANGED_FILE_DIRNAME == "bun" ]]; then
+    elif [[ $CHANGED_FILE_DIRNAME == "bun" ]] && [[ $CHANGED_FILE == *".ts" ]]; then
         just js $CHANGED_FILE_RELATIVE
     elif [[ $CHANGED_FILE == *".xsl" ]]; then
         just copy $CHANGED_FILE_RELATIVE

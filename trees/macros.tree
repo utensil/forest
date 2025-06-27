@@ -508,10 +508,14 @@ so the text size almost matches the size output by native forester code. This do
   ##{\equation \verb*|\notag*}
 }
 
-\p{\code{embed[src]}: Embedding an external HTML file, adapted from [here](https://lists.sr.ht/~jonsterling/forester-discuss/\%3CouGgO2PnjJxebrCO-YzNYlSBYnEF9DiupMdWtSP7Q-jVApwBuqrz5AbukPL58LBLpzFVR-C26ULjwbl5sDa9TxzTEDciNZ4Uaux0AfQJ40c=@dannypsnl.me\%3E). }
+\p{\code{embed[src]}: Embedding an external HTML file, adapted from [here](\verb>>>|https://lists.sr.ht/~jonsterling/forester-discuss/%3CouGgO2PnjJxebrCO-YzNYlSBYnEF9DiupMdWtSP7Q-jVApwBuqrz5AbukPL58LBLpzFVR-C26ULjwbl5sDa9TxzTEDciNZ4Uaux0AfQJ40c=@dannypsnl.me%3E>>>). }
 
 \def\embed[src]{
   \<html:embed>[type]{text/html}[src]{\src}{}
+}
+
+\def\iframe[src]{
+  \<html:iframe>[src]{\src}[style]{\verb>>>|width: 100%; min-height: 100vh; border: none>>>}{}
 }
 
 \p{\code{shader[extraclasses][body]}: Embedding a GLSL shader code.}
@@ -531,11 +535,19 @@ so the text size almost matches the size output by native forester code. This do
   }
 }
 
-\def\md[body]{\<html:pre>[class]{markdownit grace-loading}{\body}}
+\def\mermaid[body]{\<html:div>[class]{mermaid grace-loading}{\body}}
+
+\def\tags[t]{\<html:span>[class]{tags grace-loading}{\t}}
+
+\def\md[body]{\<html:div>[class]{markdownit grace-loading}{\body}}
 
 \def\mdblock[t][body]{\block{\t}{\md{\body}}}
 
 \def\mdnote[t][body]{\note{\t}{\md{\body}}}
+
+\def\loadvjs[src]{
+  \<html:script>[type]{text/javascript}[src]{\src}{}
+}
 
 \def\loadjs[src]{
   \<html:script>[type]{module}[src]{\src}{}

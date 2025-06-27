@@ -1,0 +1,31 @@
+\import{macros}
+% clifford hopf spin tt ag math draft tech exp notes
+\tag{tech}
+\tag{exp}
+
+\loadvjs{vendor/twistysim.js}
+
+\js\verb>>>|
+document.addEventListener("DOMContentLoaded", function() {
+    // console.log(TTk.Puzzle);
+    TTk.AlgorithmPuzzle(3).size({width: 300, height: 300})
+        .case("R U2' R2 U' R2 U' R2 U2' R")('#tp1');
+
+    TTk.AlgorithmPuzzle(3).size({width: 300, height: 300})
+        .case("M2' U M U2 M' U M2")('#tp2');
+});
+>>>
+
+
+\def\twisty-sim[id]{\<html:div>[class]{twisty-sim}[id]{\id}{}}
+
+\note{Test TwistySim}{
+
+\twisty-sim{tp1}
+\twisty-sim{tp2}
+
+\p{For docs, see [TwistySim](https://cube.rider.biz/twistysim.html).}
+
+\p{TwistySim is the work of [Conrad Rider](https://rider.biz/), licensed under the Creative Commons Attribution-ShareAlike 4.0 International License ([CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.en)).}
+
+}

@@ -1,5 +1,9 @@
 import init, { create_renderer, WgpuToyRenderer } from '../lib/wgputoy/pkg'
 
+interface CustomUniforms {
+    [key: string]: number
+}
+
 await init()
 
 const embeded_wgputoys = document.querySelectorAll('.wgputoy')
@@ -8,18 +12,16 @@ for (const element of embeded_wgputoys) {
     const canvas = document.createElement('canvas')
     canvas.id = `wgputoy-${Math.random().toString(36).substring(7)}`
 
-    let shader = element.textContent
-    let custom = element.getAttribute('data-custom')
-    // console.debug('custom', custom);
-    if (custom) {
-        custom = JSON.parse(custom)
-    } else {
-        custom = {}
+    let shader = element.textContent || ''
+    let custom: CustomUniforms = {}
+    const customAttr = element.getAttribute('data-custom')
+    if (customAttr) {
+        custom = JSON.parse(customAttr)
     }
     element.innerHTML = ''
     element.classList.add('lazy-loading')
 
-    const handleMouseOver = async (event) => {
+    const handleMouseOver = async (event: MouseEvent) => {
         element.removeEventListener('mouseover', handleMouseOver)
         element.classList.remove('lazy-loading')
         element.appendChild(canvas)
@@ -68,12 +70,12 @@ for (const element of embeded_wgputoys) {
 
                     renderer.preprocess(shader).then((s) => {
                         if (s) {
-                            let start
+                            let start: number | undefined
                             let last = 0
                             renderer.compile(s)
                             // renderer.render();
 
-                            const step = (timestamp) => {
+                            const step = (timestamp: DOMHighResTimeStamp) => {
                                 if (start === undefined) {
                                     start = timestamp
                                 }

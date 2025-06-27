@@ -8,6 +8,10 @@ prep-llms:
 aichat *PARAMS: sync-aichat
     aichat {{PARAMS}}
 
+# In Helix, select some code, press `|` then type `aicode`
+prep-aicode:
+    sudo cp -f aicode /usr/local/bin/
+
 # render the aichat config
 sync-aichat:
     #!/usr/bin/env zsh
@@ -37,7 +41,34 @@ aider PROJ="forest" *PARAMS="": sync-aider
     cd ~/projects/{{PROJ}} && aider {{PARAMS}}
 
 aiderweb URL:
-   uvx --python 3.11 --from 'aider-chat[help,playwright,browser]' python -m aider.scrape {{URL}}
+    uvx --python 3.11 --from 'aider-chat[help,playwright,browser]' python -m aider.scrape {{URL}}
+
+
+prep-mp4:
+    #!/usr/bin/env zsh
+    if [ ! -d ../memvid ]; then
+        git clone https://github.com/Olow304/memvid.git ../memvid
+    else
+        (cd ../memvid && git pull)
+    fi
+    cd ../memvid
+    git reset --hard 5524b0a8b268c02df01cca87110cc1b978460c97
+    uv venv --python 3.11 --seed
+    source .venv/bin/activate
+    uv pip install -e .
+    uv pip install PyPDF2 openai
+    # sd 'extensions = \{' 'extensions = { ".tree", ' examples/file_chat.py
+    # sd "with_suffix\('_index.json'\)" "with_suffix('.json')" examples/file_chat.py
+
+# just mp4 forest --input-dir trees --extensions .tree
+# just mp4 forest --load-existing output/dir_trees_20250606_200619.mkv
+mp4 PROJ="forest" *PARAMS="":
+    #!/usr/bin/env zsh
+    cd ../memvid
+    source .venv/bin/activate
+    cd ../{{PROJ}}
+    export OPENAI_BASE_URL=$OPENAI_API_BASE
+    python ../memvid/examples/file_chat.py --provider openai --model $OPENAI_API_MODEL {{PARAMS}}
 
 # prep-ad:
 #    #!/usr/bin/env zsh
@@ -60,7 +91,7 @@ aiderweb URL:
 #   2. Or use `just aider ../project_name` to start aider in another directory
 # I've tested that it works with `AI!`, `AI?`, and `ai!`
 aw PROJ="forest" *PARAMS="":
-    just aider {{PROJ}} -v --watch-files {{PARAMS}}
+    just aider {{PROJ}} --watch-files {{PARAMS}} --read AGENT.md --edit-format diff # -v 
 
 llm-proxy *PARAMS:
     #!/usr/bin/env bash
@@ -72,7 +103,8 @@ llp *PARAMS:
     uvx --python 3.11 --from 'litellm[proxy]' --with opentelemetry-api --with opentelemetry-sdk --with opentelemetry-exporter-otlp --with langchain --with langchain-openai --with lunary --with openinference-instrumentation-litellm litellm {{PARAMS}} --api_base {{env('OPENAI_API_BASE')}} -m 'openai/{{env('OPENAI_API_MODEL')}}' -c litellm.yaml
 
 cpm:
-    #!/usr/bin/env bash
+    #!/usr/bin/env zsh
+    set -e
     # if env var REFRESH_TOKEN is not set, prompt for it
     if [ -z "$REFRESH_TOKEN" ]; then
         # curl https://github.com/login/device/code -X POST -d 'client_id=01ab8ac9400c4e429b23&scope=user:email'
@@ -89,6 +121,9 @@ cpm:
     uvx poetry install
     LOGURU_LEVEL=DEBUG uvx poetry run uvicorn copilot_more.server:app --port 15432 --host {{env('COPILOT_HOST', '127.0.0.1')}}
 
+cpa:
+    #!/usr/bin/env zsh
+    npx -y copilot-api@latest start --port 15432 # --verbose
 
 # works only for Ubuntu
 [linux]
@@ -165,14 +200,22 @@ gs *PARAMS:
     uvx --python 3.12 --from 'gpustack[all]' gpustack {{PARAMS}}
 
 prep-pl:
-    curl -sL https://plandex.ai/install.sh | bash
+    #!/usr/bin/env zsh
+    which plandex || (curl -sL https://plandex.ai/install.sh | bash)
+    if [[ ! -d ~/projects/plandex ]]; then
+        git clone https://github.com/plandex-ai/plandex.git ../plandex
+    else
+        (cd ../plandex && git pull --ff-only)
+    fi
+    cd ../plandex/app
+    sd 'docker compose' 'docker-compose' start_local.sh
+    ./start_local.sh
 
 pl PROJ="forest":
     #!/usr/bin/env zsh
     cd ~/projects/{{PROJ}}
-    while read -r line; do
-        plandex $line
-    done
+    plandex --semi
+
 
 prep-sg:
     #!/usr/bin/env zsh
@@ -311,3 +354,191 @@ probe *PARAMS="":
     export MODEL_NAME=$OPENAI_API_MODEL
     probe-chat {{PARAMS}}
 
+prep-dw:
+    #!/usr/bin/env zsh
+    # if ../deepwiki-open doesn't exist, clone it
+    if [ ! -d ../deepwiki-open ]; then
+        git clone https://github.com/AsyncFuncAI/deepwiki-open.git ../deepwiki-open
+    else
+        # (cd ../deepwiki-open && git pull --ff-only )
+    fi
+    cd ../deepwiki-open
+    echo "OPENAI_API_KEY=$OPENAI_API_KEY" > .env
+    echo "OPENAI_API_URL=$OPENAI_API_BASE" >> .env
+    mkdir -p ~/.adalflow
+    # https://github.com/AsyncFuncAI/deepwiki-open/issues/20#issuecomment-2857485755
+
+dw: prep-dw
+    #!/usr/bin/env zsh
+    cd ../deepwiki-open
+    docker-compose up
+
+# Not working yet
+prep-odw:
+    #!/usr/bin/env zsh
+    if [ ! -d ../OpenDeepWiki ]; then
+        git clone https://github.com/AIDotNet/OpenDeepWiki.git ../OpenDeepWiki
+    else
+    # (cd ../OpenDeepWiki && git pull --ff-only)
+    fi
+    cd ../OpenDeepWiki
+    make build
+
+prep-goose:
+    #!/usr/bin/env zsh
+    mkdir -p ~/.config/goose
+    cp -f dotfiles/.config/goose/config.yaml ~/.config/goose/config.yaml
+    which goose || (curl -fsSL https://github.com/block/goose/releases/download/stable/download_cli.sh | bash)
+
+# goose info
+# goose configure
+# MEMORY_BANK_ROOT="$HOME/.membank" goose session
+goose *PARAMS="session":
+    #!/usr/bin/env zsh
+    goose {{PARAMS}}
+
+kit-mcp:
+    uv run --python 3.11 --with cased-kit python -m kit.mcp
+
+# Choose other model
+# Put the following in the box below
+# base_url=https://some_api_base/v1
+# api_key=YOUR_API_KEY
+# see https://github.com/frdel/agent-zero/issues/326#issuecomment-2679344132
+zero:
+    docker pull frdel/agent-zero-run
+    docker run --rm -p 50001:80 frdel/agent-zero-run
+
+prep-cc:
+    #!/usr/bin/env zsh
+    which claude || npm install -g @anthropic-ai/claude-code
+    which ccr || npm install -g @musistudio/claude-code-router
+    cat > ~/.claude-code-router/config.json << EOF 
+    {
+        "log": true,
+        "OPENAI_API_KEY": "$OPENAI_API_KEY",
+        "OPENAI_BASE_URL": "$OPENAI_API_BASE",
+        "OPENAI_MODEL": "$OPENAI_API_MODEL"
+    }
+    EOF
+    # https://docs.anthropic.com/en/docs/claude-code/settings
+    cat > ~/.claude/settings.json << EOF
+    {
+      "permissions": {
+        "allow": [
+          "Bash(sg:*)",
+          "Bash(rg:*)",
+          "WebFetch",
+          "WebSearch",
+          "Edit",
+          "MultiEdit"
+        ],
+        "deny": [
+            "Read(.env)"
+        ]
+      }
+    }
+    EOF
+
+prep-cc-mcp PROJ="forest":
+    #!/usr/bin/env zsh
+    cd ~/projects/{{PROJ}}
+    claude mcp list|grep -v -F 'No MCP servers'|awk -F":" '{print $1}'|xargs -n 1 claude mcp remove
+    # Add MCP servers from goose config
+    claude mcp add --transport stdio playwright-mcp -- npx -y @executeautomation/playwright-mcp-server
+    # claude mcp add --transport stdio memory-mcp -- npx -y @modelcontextprotocol/server-memory
+    # claude mcp add --transport stdio sequential-thinking-mcp -- npx -y @modelcontextprotocol/server-sequential-thinking
+    claude mcp add --transport stdio ddg-mcp -- uvx ddg-mcp
+    claude mcp add --transport stdio probe-mcp -- npx -y @buger/probe-mcp
+    # it works but I need to figure out how to actually use it
+    # claude mcp add --transport stdio zls-mcp -- npx tritlo/lsp-mcp zig `which zls`
+    # claude mcp add --transport stdio speech-mcp -- uvx speech-mcp
+    # claude mcp add --transport stdio kit-mcp -- uv run --python 3.11 --with cased-kit python -m kit.mcp
+    # claude mcp add --transport stdio deepwiki-mcp -e DEEPWIKI_REQUEST_TIMEOUT=60000 -- npx -y mcp-deepwiki@latest
+    # claude mcp add serena -- uvx --from git+https://github.com/oraios/serena serena-mcp-server --context ide-assistant # --project $(pwd)
+
+# just cc forest --debug
+cc PROJ="forest" *PARAMS="":
+    #!/usr/bin/env zsh
+    cd ~/projects/{{PROJ}}
+    ccr code {{PARAMS}}
+
+prep-codex:
+    npm install -g @openai/codex
+
+codex *PARAMS:
+    #!/usr/bin/env zsh
+    export LOCAL_API_KEY=$OPENAI_API_KEY
+    export LOCAL_BASE_URL=$OPENAI_API_BASE
+    codex -a auto-edit --provider LOCAL --model $OPENAI_API_MODEL {{PARAMS}}
+
+# build failed: FATAL ERROR: Reached heap limit Allocation failed - JavaScript heap out of memory
+prep-ed:
+    #!/usr/bin/env zsh
+    if [ ! -d ../easy-dataset ]; then
+        git clone https://github.com/ConardLi/easy-dataset.git ../easy-dataset
+    else
+        (cd ../easy-dataset && git pull)
+    fi
+    cd ../easy-dataset
+    docker build -t easy-dataset .
+
+ed:
+    #!/usr/bin/env zsh
+    mkdir -p ~/.easy-dataset
+    docker run --rm -p 1717:1717 -v ~/.easy-dataset:/app/local-db --name easy-dataset easy-dataset
+
+# tutorial intro
+# https://docs.marimo.io/guides/package_management/inlining_dependencies/
+mm *PARAMS="edit --sandbox":
+    uvx marimo {{PARAMS}}
+
+# dspy
+# funnydspy
+# math-equivalence==0.0.0 (from git+https://github.com/hendrycks/math.git@357963a7f5501a6c1708cf3f3fb0cdf525642761)
+
+prep-amp:
+    which amp || npm install -g @sourcegraph/amp
+    # login, say no to re-login if already logged in
+    yes n|amp login
+
+# not working: panic
+prep-oc:
+    #!/usr/bin/env zsh
+    which opencode || npm install -g opencode-ai
+    mkdir -p ~/.config/opencode
+    # rm ~/.config/opencode/config.json
+    cat > ~/.config/opencode/config.json << EOF
+    {
+      "\$schema": "https://opencode.ai/config.json",
+      "autoshare": false,
+      "autoupdate": false,
+      "model": "${OPENAI_API_PROVIDER:-github-copilot}/${OPENAI_API_MODEL:-claude-sonnet-4}",
+      "provider": {
+        "local": {
+            "npm": "@ai-sdk/openai-compatible",
+            "options": {
+                "baseURL": "$OPENAI_API_BASE"
+            },
+            "models": {
+                "$OPENAI_API_MODEL": {}
+            }
+        }
+      }
+    }
+    EOF
+    just check-oc
+
+check-oc:
+    #!/usr/bin/env zsh
+    set -e
+    cat ~/.config/opencode/config.json
+    opencode auth list
+    opencode auth list|grep ${OPENAI_API_PROVIDER:-Github Copilot}
+    opencode run -m "${OPENAI_API_PROVIDER:-github-copilot}/${OPENAI_API_MODEL:-claude-sonnet-4}" --print-logs Hi
+
+# use `opencode auth login` to log into Github Copilot
+# use `opencode run -m github-copilot/claude-3.5-sonnet --print-logs Hi` for a first run, which runs bun install that might take a while
+
+prep-uz:
+    which uzi || go install github.com/devflowinc/uzi@latest

@@ -15,10 +15,10 @@ const reloadWithScroll = () => {
 }
 
 const startLiveReload = () => {
-    const hostname = window.location.hostname
-    const port = window.location.port
+    const hostname: string = window.location.hostname
+    const port: string = window.location.port
 
-    const ws = new WebSocket(`ws://${hostname}:${port}/live`)
+    const ws: WebSocket = new WebSocket(`ws://${hostname}:${port}/live`)
     ws.onopen = () => {
         console.debug('live reload connected')
         // const intervalID = setInterval(function() {
@@ -29,12 +29,12 @@ const startLiveReload = () => {
         //     }
         // }, 10*60*1000);
     }
-    ws.onerror = (event) => {
+    ws.onerror = (event: Event) => {
         console.error('live reload error:', event)
     }
-    ws.onmessage = (event) => {
+    ws.onmessage = (event: MessageEvent) => {
         // console.log(event);
-        const message = JSON.parse(event.data)
+        const message: { type: string; data: string } = JSON.parse(event.data)
         if (message.type === 'update') {
             console.debug('reloading for:', message.data)
             ws.onclose = null
@@ -42,8 +42,8 @@ const startLiveReload = () => {
             // trim messgae.data
             message.data = message.data.trim()
             if (/\.tree$/.test(message.data)) {
-                const path_parts = message.data.split('/')
-                let page = path_parts.pop() || window.location.pathname
+                const path_parts: string[] = message.data.split('/')
+                let page: string = path_parts.pop() || window.location.pathname
                 page = page.replace(/\.tree$/, '.xml')
                 page = `/${page}`
                 console.debug(window.location.pathname, page)
@@ -69,8 +69,8 @@ const startLiveReload = () => {
 }
 
 window.addEventListener('load', () => {
-    const scrollPosition = JSON.parse(
-        sessionStorage.getItem(window.location.href),
+    const scrollPosition: { x: number; y: number } | null = JSON.parse(
+        sessionStorage.getItem(window.location.href) || 'null',
     )
     // console.debug('scroll position:', scrollPosition);
     if (scrollPosition) {
