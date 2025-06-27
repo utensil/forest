@@ -219,20 +219,20 @@
 
 \def\citet[tid][refid]{\let\escape[x]{\x}\<html:span>[class]{link-reference}[tid]{\tid}[refid]{\refid}{[\escape{[\refid, \tid]}](\refid)}}
 
-\p{\code{tikzfig[a]}: A TikZ graph rendered via LaTeX.}
+\p{\code{tikzfig[~a]}: A TikZ graph rendered via LaTeX.}
 
-\def\tikzfig[a]{\texfig{\startverb\begin{minipage}{1.1\linewidth}
-        \begin{figure}[H]\centering\stopverb\a\startverb\end{figure}
+\def\tikzfig[~a]{\texfig{\startverb\begin{minipage}{1.1\linewidth}
+        \begin{figure}[H]\centering\stopverb\a{}\startverb\end{figure}
         \end{minipage}\stopverb}}
 
-\p{\code{tikzfig[a]}: A TikZ graph rendered via LaTeX, adjusted the width to be half, so it could be used in a table and such.}
+\p{\code{tikzfig[~a]}: A TikZ graph rendered via LaTeX, adjusted the width to be half, so it could be used in a table and such.}
 
-\def\tikzfig2[a]{\texfig{\startverb\begin{minipage}{0.5\linewidth}
-        \begin{figure}[H]\centering\stopverb\a\startverb\end{figure}
+\def\tikzfig2[~a]{\texfig{\startverb\begin{minipage}{0.5\linewidth}
+        \begin{figure}[H]\centering\stopverb\a{}\startverb\end{figure}
         \end{minipage}\stopverb}}
 
-\def\tikzfigs[scale][a]{\texfig{\startverb\begin{minipage}{\stopverb\scale\startverb\linewidth}
-        \begin{figure}[H]\centering\stopverb\a\startverb\end{figure}
+\def\tikzfigs[scale][~a]{\texfig{\startverb\begin{minipage}{\stopverb\scale\startverb\linewidth}
+        \begin{figure}[H]\centering\stopverb\a{}\startverb\end{figure}
         \end{minipage}\stopverb}}
 
 \p{\code{minitex[body]}: Typesetting LaTeX code in a minipage, with the width of an A5 paper,
