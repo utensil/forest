@@ -96,6 +96,11 @@ prep-gtsh:
     else
         (cd ~/projects/ghostty-shaders && git pull) || true
     fi
+    if [ ! -d ~/projects/shader-playground ]; then
+        git clone https://github.com/KroneCorylus/shader-playground ~/projects/shader-playground
+    else
+        (cd ~/projects/shader-playground && git pull) || true
+    fi
 
 # Cmd+Ctrl+F to toggle fullscreen, or just Cmd + Enter
 # Cmd + D to split right
