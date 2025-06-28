@@ -413,6 +413,7 @@ prep-cc:
     #!/usr/bin/env zsh
     which claude || npm install -g @anthropic-ai/claude-code
     which ccr || npm install -g @musistudio/claude-code-router
+    mkdir -p ~/.claude-code-router
     cat > ~/.claude-code-router/config.json << EOF 
     {
         "log": true,
@@ -421,6 +422,7 @@ prep-cc:
         "OPENAI_MODEL": "$OPENAI_API_MODEL"
     }
     EOF
+    mkdir -p ~/.claude
     # https://docs.anthropic.com/en/docs/claude-code/settings
     cat > ~/.claude/settings.json << EOF
     {
@@ -431,7 +433,15 @@ prep-cc:
           "WebFetch",
           "WebSearch",
           "Edit",
-          "MultiEdit"
+          "MultiEdit",
+          "mcp__container-use__environment_checkpoint",
+          "mcp__container-use__environment_file_delete",
+          "mcp__container-use__environment_file_list",
+          "mcp__container-use__environment_file_read",
+          "mcp__container-use__environment_file_write",
+          "mcp__container-use__environment_open",
+          "mcp__container-use__environment_run_cmd",
+          "mcp__container-use__environment_update"
         ],
         "deny": [
             "Read(.env)"
@@ -440,10 +450,13 @@ prep-cc:
     }
     EOF
 
+cc-mcp-reset:
+    claude mcp list|grep -v -F 'No MCP servers'|awk -F":" '{print $1}'|xargs -n 1 claude mcp remove
+
 prep-cc-mcp PROJ="forest":
     #!/usr/bin/env zsh
     cd ~/projects/{{PROJ}}
-    claude mcp list|grep -v -F 'No MCP servers'|awk -F":" '{print $1}'|xargs -n 1 claude mcp remove
+    just cc-mcp-reset
     # Add MCP servers from goose config
     claude mcp add --transport stdio playwright-mcp -- npx -y @executeautomation/playwright-mcp-server
     # claude mcp add --transport stdio memory-mcp -- npx -y @modelcontextprotocol/server-memory
@@ -457,6 +470,15 @@ prep-cc-mcp PROJ="forest":
     # claude mcp add --transport stdio deepwiki-mcp -e DEEPWIKI_REQUEST_TIMEOUT=60000 -- npx -y mcp-deepwiki@latest
     # claude mcp add serena -- uvx --from git+https://github.com/oraios/serena serena-mcp-server --context ide-assistant # --project $(pwd)
 
+prep-cu:
+    brew install dagger/tap/container-use
+
+prep-cc-cu:
+    #!/usr/bin/env zsh
+    claude mcp add --scope user container-use -- `which cu` stdio
+    # curl https://raw.githubusercontent.com/dagger/container-use/main/rules/agent.md >> CLAUDE.md
+    # claude --allowedTools mcp__container-use__environment_checkpoint,mcp__container-use__environment_file_delete,mcp__container-use__environment_file_list,mcp__container-use__environment_file_read,mcp__container-use__environment_file_write,mcp__container-use__environment_open,mcp__container-use__environment_run_cmd,mcp__container-use__environment_update
+    
 # just cc forest --debug
 cc PROJ="forest" *PARAMS="":
     #!/usr/bin/env zsh
