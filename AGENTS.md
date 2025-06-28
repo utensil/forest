@@ -425,19 +425,15 @@ This file should be updated when:
 - Build processes or development workflows change significantly  
 - New coding standards or conventions are established
 - Common pitfalls or debugging patterns are identified
-- Domain-specific terminology evolves
-- New mathematical subject areas are added
-- WASM integration patterns change
 
 ### Maintenance checklist:
 - [ ] Update last modified date at the top
 - [ ] Review golden rules for relevance
 - [ ] Update build commands if changed
-- [ ] Add new domain terminology
 - [ ] Document new pitfalls discovered
 - [ ] Update file pattern references
 
-The 🌲 marker indicates sections specific to the Forest project, while unmarked sections contain general best practices applicable to similar projects.
+For Forest-specific guidelines (mathematical notation, tree files, etc.), see [for-llm/forest.md](./for-llm/forest.md).
 
 ---
 
