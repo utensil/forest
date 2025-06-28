@@ -97,7 +97,7 @@ prep-gtsh:
         (cd ~/projects/ghostty-shaders && git pull) || true
     fi
     if [ ! -d ~/projects/shader-playground ]; then
-        git clone https://github.com/KroneCorylus/shader-playground ~/projects/shader-playground
+        git clone https://github.com/utensil/shader-playground ~/projects/shader-playground
     else
         (cd ~/projects/shader-playground && git pull) || true
     fi
