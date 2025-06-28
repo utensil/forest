@@ -14,6 +14,7 @@ export TERM := "xterm-256color"
 
 prep-term:
     which zsh || brew install zsh
+    which wget || brew install wget
     which nvim || brew install neovim
     which lazygit || brew install lazygit
     which yq || brew install yq
@@ -53,7 +54,7 @@ prep-term:
     which jq || brew install jq
     which sq || brew install sq
     which fex || (curl -sSL https://raw.githubusercontent.com/18alantom/fex/master/install.sh | bash)
-    which serpl || brew install serpl
+    # which serpl || brew install serpl
     which scooter || brew install scooter
 
 prep-monit:
