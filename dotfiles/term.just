@@ -124,6 +124,10 @@ sync-gt:
 reset-gt:
     rm ~/.config/ghostty
 
+# https://github.com/ghostty-org/ghostty/discussions/7194
+log-gt:
+    sudo log stream --level debug --predicate 'subsystem=="com.mitchellh.ghostty"'
+
 ## Shell setup
 
 prep-zsh:
