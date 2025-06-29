@@ -21,7 +21,104 @@
 \subtree[2025-06]{
 \title{June, 2025}
 
+% \subtree[2025-06-27]{\mdnote{2025-06-27}{
+% - [Researchers develop a battery cathode material that does it all](https://arstechnica.com/science/2025/06/researchers-develop-a-battery-cathode-material-that-does-it-all/)
+% - found [Magnitude – Open-source AI browser automation framework](https://github.com/magnitudedev/magnitude)
+% - learn about [Dark Archive](https://mathstodon.xyz/@johncarlosbaez/114752342143968527)
+% }}
+
+\subtree[2025-06-26]{\mdnote{2025-06-26}{
+- agent related
+    - [AI Improves at Improving Itself Using an Evolutionary Trick](https://spectrum.ieee.org/evolutionary-ai)
+    - [Learnings from building AI agents](https://www.cubic.dev/blog/learnings-from-building-ai-agents)
+    - [Jan-nano-128k: A 4B Model with a Super-Long Context Window (Still Outperforms 671B [in MCP])](https://huggingface.co/Menlo/Jan-nano-128k)
+        - it's an interesting direction
+    - news
+        - [Build and Host AI-Powered Apps with Claude – No Deployment Needed](https://www.anthropic.com/news/claude-powered-artifacts)
+        - [MCP in LM Studio](https://lmstudio.ai/blog/lmstudio-v0.3.17)
+- [A CRDT-based Messenger in 12 Lines of Bash Using a Synced Folder](https://holdtherobot.com/blog/crdt-messenger-in-12-lines-of-bash/)
+    - how about an editor? edits can't be dealt with in the same manner
+- [Iroh: A library to establish direct connection between peers](https://github.com/n0-computer/iroh)
+    - built on QUIC, but use TCP for falling back to relay servers
+- [Notes on type inference and polymorphism](https://blog.snork.dev/posts/notes-on-type-inference-and-polymorphism.html)
+    - polymorphism is hard to combine with Hindley-Milner type inference
+    - [Type Inference Was A Mistake](https://borretti.me/article/type-inference-was-a-mistake)
+- [RSS Server Side Reader](https://matklad.github.io/2025/06/26/rssssr.html) ([on HN](https://news.ycombinator.com/item?id=44386637)) ([on lobste.rs](https://lobste.rs/s/nr9t3s))
+    - I had the similar idea, but for filtering and merging RSS, particularly for papers
+    - the author didn't even want read/unread state and post content, but they are useful for me
+- [JavaScript Chose Violence](https://martinrue.com/javascript-chose-violence)
+    - a series of caveats of JavaScript, some are new to me
+- [Games run faster on SteamOS than Windows 11, Ars testing finds](https://arstechnica.com/gaming/2025/06/games-run-faster-on-steamos-than-windows-11-ars-testing-finds/)
+    - a nice surprise, hopefully, games running on wine are the only legacy of Windows in future
+    - I'm really frustrated by Github Actions Windows CI build failure that has little information to debug
+}}
+
+\subtree[2025-06-25]{\mdnote{2025-06-25}{
+- new CLI agents
+    - [Gemini CLI: your open-source AI agent](https://blog.google/technology/developers/introducing-gemini-cli-open-source-ai-agent/) ([on HN](https://news.ycombinator.com/item?id=44377031)) ([on lobste.rs](https://lobste.rs/s/f9xdsg))
+    - [Introducing Qodo Gen CLI: Build and Run Coding Agents Anywhere in the SDLC](https://www.qodo.ai/blog/introducing-qodo-gen-cli-build-run-and-automate-agents-anywhere-in-your-sdlc/)
+- [A new PNG spec](https://www.programmax.net/articles/png-is-back/)
+    - I'm thinking about preserving the most valuable photos in minimal size, encrypted, stored in public repo, and the format might be just png
+- AI safety related
+    - copyright
+        - [Anthropic wins a major fair use victory for AI — but it’s still in trouble for stealing books](https://simonwillison.net/2025/Jun/24/anthropic-training/#atom-everything)
+        - place holder for anti-AI post
+    - [LLM code generation may lead to an erosion of trust](https://jaysthoughts.com/aithoughts1)
+    - [AI Is Dehumanization Technology](https://thedabbler.patatas.ca/pages/ai-is-dehumanization-technology.html)
+- time related
+    - [Assembly Theory of Time](\verb>>>|https://faculty.ucr.edu/~legneref/Assembly%20Theory.htm>>>)
+        - time is a measurable physical entity, with complex objects' formation paths and "assembly indexes" revealing time's unidirectional depth and causal chains
+    - [How to Think About Time in Programming](https://shanrauf.com/archive/how-to-think-about-time-in-programming)
+    - [Managing time when time doesn't exist](https://multiverseemployeehandbook.com/blog/temporal-resources-managing-time-when-time-doesnt-exist/)
+- CG related
+    - [TinyRenderer: Software rendering in 500 lines of bare C++](https://haqr.eu/) ([code](https://github.com/ssloy/tinyrenderer))
+    - [Porting GPU shaders to Rust GPU 30x faster with AI](https://rust-gpu.github.io/blog/2025/06/24/vulkan-shader-port/)
+    - [CUDA Ray Tracing 2x Faster Than RTX: My CUDA Ray Tracing Journey](https://karimsayedre.github.io/RTIOW.html)
+    - [Chili3D: A web-based 3D CAD application for online model design and editing](https://chili3d.com/)
+- rust related
+    - [Why is the Rust compiler so slow?](https://sharnoff.io/blog/why-rust-compiler-slow) ([on HN](https://news.ycombinator.com/item?id=44390488)) ([on lobste.rs](https://lobste.rs/s/72hbqg))
+        - a lot of useful tools to debug rust compilation process
+    - [Cross-Compiling 10,000+ Rust CLI Crates Statically](https://blog.pkgforge.dev/cross-compiling-10000-rust-cli-crates-statically)
+    - [How much code does that proc macro generate?](https://nnethercote.github.io/2025/06/26/how-much-code-does-that-proc-macro-generate.html)
+    - compilation time
+        - [Subsecond: A runtime hotpatching engine for Rust hot-reloading](https://docs.rs/subsecond/0.7.0-alpha.1/subsecond/index.html)
+            - TODO: merge with related work
+    - [Weird Expressions in Rust](https://www.wakunguma.com/blog/rust-weird-expr) ([on HN](https://news.ycombinator.com/item?id=44397367)) ([on lobste.rs](https://lobste.rs/s/tc2s00))
+- [How to Write Compelling Release Announcements](https://refactoringenglish.com/chapters/release-announcements/)
+}}
+
+\subtree[2025-06-24]{\mdnote{2025-06-24}{
+- build related
+    - [Bazel’s Original Sins](https://fzakaria.com/2025/06/22/bazel-s-original-sins)
+    - [Chromium's build system is switching from Ninja to Siso for external developers](https://groups.google.com/a/chromium.org/g/chromium-dev/c/v-WOvWUtOpg)
+    - [Build an iOS app on Linux or Windows](https://xtool.sh/tutorials/xtool/first-app/) ([on HN](https://news.ycombinator.com/item?id=44372881)) ([on lobste.rs](https://lobste.rs/s/ccit25))
+    - [Uv and Ray: Pain-Free Python Dependencies in Clusters](https://news.ycombinator.com/item?id=44394114)
+    - [New comment by acheong08 in "uv: An extremely fast Python package and project manager, written in Rust"](https://news.ycombinator.com/item?id=44358882)
+        - I think I might switch from `asdf` to [mise](https://mise.jdx.dev/), unfortunately it didn't port asdf zig plugin yet
+    - [XSLT – Native, zero-config build system for the Web](https://github.com/pacocoursey/xslt)
+- [Interesting Bits of Postgres Grammar](https://steve.dignam.xyz/2025/06/20/interesting-bits-of-postgres-grammar/)
+    - found [Geometric Functions and Operators](https://www.postgresql.org/docs/17/functions-geometry.html)
+- TUI related
+    - [fclones](https://terminaltrove.com/fclones/) - finds and handles duplicate files across directories 
+    - [tatuin](https://terminaltrove.com/tatuin/) - aggregates TODOs from various sources
+    - [alden: detachable terminal sessions without breaking scrollback](https://ansuz.sooke.bc.ca/entry/389) - only a source tarball
+    - [Atuin – Magical Shell History](https://atuin.sh)
+        - with zsh autocomplete and just, I thought I didn't need it, but maybe I need it so that history won't be easily lost, they could form a story of what I was experimenting
+    - [Can your terminal do emojis? How big?](https://dgl.cx/2025/06/can-your-terminal-do-emojis)
+        - surprisingly old protocol for this
+- [Everyone should copy Thunderbird's donation model](https://blog.cyrneko.eu/everyone-should-copy-thunderbird)
+    - it asks for donation with low frequency (yearly), and good timing (Chrismas?)
+- [Retrieval Augmented Generation Based on SQLite](https://github.com/ggozad/haiku.rag)
+    - I do prefer RAG on SQLite, need to try it out
+- [The Bitter Lesson is coming for Tokenization](https://lucalp.dev/bitter-lesson-tokenization-and-blt/)
+    - but how to part with tokenization?
+- [Phoenix.new is Fly's entry into the prompt-driven app development space](https://simonwillison.net/2025/Jun/23/phoenix-new/#atom-everything)
+    - I need to give it and fly.io a try
+}}
+
 \subtree[2025-06-23]{\mdnote{2025-06-23}{
+- [How I use my terminal](https://jyn.dev/how-i-use-my-terminal/)
+    - the author explains how things work, especially for those that people are surprised to find possible at all
 - [I wrote my PhD Thesis in Typst](https://fransskarman.com/phd_thesis_in_typst.html) ([on HN](https://news.ycombinator.com/item?id=44350322)) ([on lobste.rs](https://lobste.rs/s/pdrso1))
     - it's an unusual journey, the author fought through the process by
         - writing a recursive descent parser in Typst for [custom code syntax highlighting](https://gitlab.com/TheZoq2/typst-common/-/blob/main/highlight.typ)
@@ -30,14 +127,23 @@
         - the advisors perspective is also informative 
 - [Nano-Vllm: lightweight vLLM implementation built from scratch](https://github.com/GeeeekExplorer/nano-vllm)
     - I would wonder if I could do this in Zig
-- [Pallene Language](https://github.com/pallene-lang/pallene)
-    - a statically typed and ahead-of-time compiled sister language to Lua
+- language related
+    - [Cyber Programming Language](https://cyberscript.dev/)
+        - written in Zig
+        - fast, efficient, and concurrent scripting
+        - faster than Wren (written in C & Wren) that are used in game engine
+    - [Pallene Language](https://github.com/pallene-lang/pallene)
+        - a statically typed and ahead-of-time compiled sister language to Lua
 - found [Telescopes Are Tries: A Dependent Type Shellac on SQLite](https://www.philipzucker.com/telescope_tries/)
     - I should give it a good read to understand both telescope (in the formal world) and tries (as a data structure)
 - [Announcing the Clippy feature freeze](https://blog.rust-lang.org/inside-rust/2025/06/21/announcing-the-clippy-feature-freeze/) ([on HN](https://news.ycombinator.com/item?id=44344601)) ([on lobste.rs](https://lobste.rs/s/mvoez2))
     - an inspiring way to allow the team to have a period of time for repaying tech debts
 - learn about [Git Notes: Git's coolest, most unloved­ feature (2022)](https://tylercipriani.com/blog/2022/11/19/git-notes-gits-coolest-most-unloved-feature/)
 - found [LeetCode for System Design](https://leetsys.dev)
+- Go related
+    - [Go should be more opinionated](https://eltonminetto.dev/en/post/2025-06-19-go-more-opinated/)
+    - [How to store Go pointers from assembly](https://mazzo.li/posts/go-asm-pointers.html) ([on HN](https://news.ycombinator.com/item?id=44355187)) ([on lobste.rs](https://lobste.rs/s/obsh1m))
+    - [Why Go Rocks for Building a Lua Interpreter](https://www.zombiezen.com/blog/2025/06/why-go-rocks-for-building-lua-interpreter/)
 }}
 
 \subtree[2025-06-22]{\mdnote{2025-06-22}{\tags{#gpu #rust #yaml #zig}
@@ -49,6 +155,8 @@
 - zig related
     - [Zig And Rust (2023)](https://matklad.github.io/2023/03/26/zig-and-rust.html)
     - [Polystate: Composable Finite State Machines](https://www.reddit.com/r/Zig/comments/1lhfbjk/polystate_composable_finite_state_machines/) in Zig
+    - [comphash - A very lightweight Zig package offering a zero-cost compile-time hash map](https://www.reddit.com/r/Zig/comments/1lkgr54/comphash_a_very_lightweight_zig_package_offering/)
+        - [Andrew Kelly experimented with perfect hashes](https://andrewkelley.me/post/string-matching-comptime-perfect-hashing-zig.html)
     - [Syntax highlighting for Zig's documentation comments](https://www.reddit.com/r/Zig/comments/1lhhgh8/syntax_highlighting_for_zigs_documentation/)
 }}
 
@@ -138,6 +246,7 @@
         - an interesting yet too traditional experiment
     - [Bots are overwhelming websites with their hunger for AI data](https://www.theregister.com/2025/06/17/bot_overwhelming_websites_report/)
     - [Show HN: Trieve CLI – Terminal-based LLM agent loop with search tool for PDFs](https://github.com/devflowinc/trieve/tree/main/clients/cli)
+    - [GitHub CEO: manual coding remains key despite AI boom](https://www.techinasia.com/news/github-ceo-manual-coding-remains-key-despite-ai-boom)
 - wayland related
     - [Long live Xorg, I mean Xlibre](https://www.dedoimedo.com/computers/xlibre.html)
     - [It's true, “we” don't care about accessibility on Linux](https://tesk.page/2025/06/18/its-true-we-dont-care-about-accessibility-on-linux/) ([on HN](https://news.ycombinator.com/item?id=44314372)) ([on lobste.rs](https://lobste.rs/s/1nyzfj))
@@ -154,9 +263,15 @@
         - built on SDL, C and Lua, low footprint
         - forked from lite XL (which is forked from lite) to be [more practical rather than minimalist](https://github.com/pragtical/pragtical/issues/6#issuecomment-1581650875)
 - security related
+    - [How keys are used in FileVault and encryption](https://eclecticlight.co/2025/06/25/how-keys-are-used-in-filevault-and-encryption/)
+        - VEK (Volume Encryption Key) never leaves Secure Enclave, destroyed on "Erase All Content and Settings (EACAS)"
+        - wrapping: encrypting the VEK using a KEK (Key Encryption Key)
+            - user password can be changed without the contents of the protected volume having to be fully decrypted and encrypted again
+            - possible to generate multiple KEKs to support the use of recovery keys that can be used to unlock the VEK when the user’s password is lost or forgotten
     - [Apple: Prepare your network for quantum-secure encryption in TLS](https://support.apple.com/en-my/122756)
     - [Blink and you'll miss it — a URL handler surprise](https://dgl.cx/2025/06/blink-at-a-url-handler)
     - [New Linux Flaws Enable Full Root Access via PAM and Udisks Across Major Distributions](https://thehackernews.com/2025/06/new-linux-flaws-enable-full-root-access.html)
+    - [Getting ready to issue IP address certificates](https://community.letsencrypt.org/t/getting-ready-to-issue-ip-address-certificates/238777) ([on HN](https://news.ycombinator.com/item?id=44379034)) ([on lobste.rs](https://lobste.rs/s/ljfoxr))
 - found snapDOM
     - from [Benchmark: snapDOM vs html2canvas](https://zumerlab.github.io/snapdom/)
 }}
@@ -348,6 +463,7 @@
         - numbers for the environmental impact of LLMs
         - related
             - [AI threatens to raid the water reserves of Europe's driest regions](https://www.politico.eu/article/artificial-intelligence-threat-raid-water-reserves-europe-dry-regions/)
+    - [Environmental Impacts of Artificial Intelligence](https://www.greenpeace.de/publikationen/environmental-impacts-of-artificial-intelligence)
 - [Type-based vs Value-based Reflection](https://brevzin.github.io/c++/2025/06/09/reflection-ts/)
     - value-based (C++26)
         - "while we have new syntax for getting into (`^^e`) and out of (`[: e :]`) the value domain, once you’re in the value domain — it’s nice to just stay there"
@@ -431,6 +547,8 @@
         - neat CSS animation trick
     - [More Frontend Web Tricks](https://kaiwenwang.com/writing/more-frontend-web-tricks)
     - [Color Everything in CSS](https://css-tricks.com/color-everything-in-css/)
+    - [Printing the web: making webpages look good on paper](https://piccalil.li/blog/printing-the-web-making-webpages-look-good-on-paper/)
+    - [HUG CSS, how I approach CSS architecture](https://gomakethings.com/hug-css-how-i-approach-css-architecture/)
 }}
 
 \subtree[2025-06-10]{\mdnote{2025-06-10}{\tags{#compiler #embedding #formal #optimization #os #performance #qwen #rust #wasm}
@@ -815,7 +933,7 @@
 - [Why I love OCaml](https://mccd.space/posts/ocaml-the-worlds-best/)
 - [How to Get Your Research Paper Accepted](https://maxwellforbes.com/posts/how-to-get-a-paper-accepted)
 - [Fork Union: Beyond OpenMP in C++ and Rust?](https://ashvardanian.com/posts/beyond-openmp-in-cpp-rust/)
-- found languages
+- language related
     - [Wren](https://wren.io/), a small, fast, class-based concurrent scripting language
         - "Think Smalltalk in a Lua-sized package with a dash of Erlang and wrapped up in a familiar, modern syntax."
         - [Talon](https://github.com/jossephus/talon): Write Raylib programs in Wren

@@ -235,6 +235,8 @@ def extract_keywords_from_content(content, date):
         "talos",
         "unbound",
         "harbor",
+        "build tool",
+        "build system",
         # Databases/Analytics
         "sqlite",
         "datafusion",
@@ -418,7 +420,9 @@ def extract_keywords_from_content(content, date):
         # but lean, z3, tla should get their own keywords due to their importance to me
         "formal": {"formalization", "verification", "smt", "sat"},
         "agent": {"ai"},
-        "fuzzing": {"jepsen"}
+        "fuzzing": {"jepsen"},
+        "lang": {"language"},
+        "build": {"build tool", "build system"}
     }
 
     # Merge similar keywords according to mappings
