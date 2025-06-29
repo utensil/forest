@@ -183,6 +183,7 @@ prep-lsp:
     which cargo || just prep-rust
     which rust-analyzer || (rustup component add rust-src; rustup component add rust-analyzer)
     which zls || echo "zls not installed, visit https://zigtools.org/zls/install/"
+    which glsl_analyzer || ( cd /tmp && wget https://github.com/nolanderc/glsl_analyzer/releases/download/v1.6.0/aarch64-macos.zip && unzip aarch64-macos.zip && sudo mv bin/glsl_analyzer /usr/local/bin/)
 
 # https://github.com/DJAndries/llmvm/tree/master/frontends/codeassist
 prep-lsp-lv:

@@ -14,6 +14,7 @@ export TERM := "xterm-256color"
 
 prep-term:
     which zsh || brew install zsh
+    which wget || brew install wget
     which nvim || brew install neovim
     which lazygit || brew install lazygit
     which yq || brew install yq
@@ -53,7 +54,7 @@ prep-term:
     which jq || brew install jq
     which sq || brew install sq
     which fex || (curl -sSL https://raw.githubusercontent.com/18alantom/fex/master/install.sh | bash)
-    which serpl || brew install serpl
+    # which serpl || brew install serpl
     which scooter || brew install scooter
 
 prep-monit:
@@ -97,7 +98,7 @@ prep-gtsh:
         (cd ~/projects/ghostty-shaders && git pull) || true
     fi
     if [ ! -d ~/projects/shader-playground ]; then
-        git clone https://github.com/KroneCorylus/shader-playground ~/projects/shader-playground
+        git clone https://github.com/utensil/shader-playground ~/projects/shader-playground
     else
         (cd ~/projects/shader-playground && git pull) || true
     fi
@@ -123,6 +124,10 @@ sync-gt:
 
 reset-gt:
     rm ~/.config/ghostty
+
+# https://github.com/ghostty-org/ghostty/discussions/7194
+log-gt:
+    sudo log stream --level debug --predicate 'subsystem=="com.mitchellh.ghostty"'
 
 ## Shell setup
 

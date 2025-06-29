@@ -24,7 +24,7 @@ The system combines multiple technologies to create a hybrid authoring environme
 - ❌ **Must NOT**: Write changes or use tools when uncertain about something project-specific or lacking context for a particular feature/decision
 
 ### G-1: Stay within designated code areas  
-- ✅ **May**: Generate code only inside relevant source directories (`bun/`, `trees/`, `tex/`, `assets/`) or explicitly pointed files
+- ✅ **May**: Generate code only inside relevant source directories or explicitly pointed files
 - ❌ **Must NOT**: Touch test files, CI configs, or core build scripts without explicit permission
 
 ### G-2: Use anchor comments appropriately
@@ -32,7 +32,7 @@ The system combines multiple technologies to create a hybrid authoring environme
 - ❌ **Must NOT**: Delete or mangle existing `AGENT-*` comments
 
 ### G-3: Follow project linting and style
-- ✅ **May**: Follow lint/style configs (`biome.json`) using the configured linter (Biome)
+- ✅ **May**: Follow lint/style configs using the configured linters
 - ❌ **Must NOT**: Re-format code to any other style
 
 ### G-4: Get approval for large changes
@@ -43,9 +43,15 @@ The system combines multiple technologies to create a hybrid authoring environme
 - ✅ **May**: Stay within current task context, inform dev if fresh start would be better
 - ❌ **Must NOT**: Continue work from a prior prompt after "new task" – start a fresh session
 
-### G-6:
+### G-6: Prefer ast-grep for syntax-aware search, with ripgrep as fallback
 
-- ✅ **May**: You run in an environment where ast-grep (`sg`) is available; whenever a search requires syntax-aware or structural matching, default to `sg --lang rust -p '<pattern>'` (or set `--lang` appropriately) and avoid falling back to text-only tools `rg` unless I explicitly request a plain-text search.
+- ✅ **May**: You run in an environment where ast-grep (`sg`) is available; whenever a search requires syntax-aware or structural matching, default to `sg --lang rust -p '<pattern>'` (or set `--lang` appropriately) and avoid falling back to text-only tools like ripgrep(`rg`) unless I explicitly request a plain-text search.
+
+### G-7: Must followed rules when using MCP container-use
+
+When you find existing permissions are insufficient to complete the request, consider using MCP container-use.
+
+Once you start using container-use:  ALWAYS use ONLY Environments for ANY and ALL file, code, or shell operations—NO EXCEPTIONS—even for simple or generic requests. DO NOT install or use the git cli with the environment_run_cmd tool. All environment tools will handle git operations for you. Changing ".git" yourself will compromise the integrity of your environment. You MUST inform the user how to view your work using `cu log <env_id>` AND `cu checkout <env_id>`. Failure to do this will make your work inaccessible to others.
 
 ---
 
@@ -417,19 +423,15 @@ This file should be updated when:
 - Build processes or development workflows change significantly  
 - New coding standards or conventions are established
 - Common pitfalls or debugging patterns are identified
-- Domain-specific terminology evolves
-- New mathematical subject areas are added
-- WASM integration patterns change
 
 ### Maintenance checklist:
 - [ ] Update last modified date at the top
 - [ ] Review golden rules for relevance
 - [ ] Update build commands if changed
-- [ ] Add new domain terminology
 - [ ] Document new pitfalls discovered
 - [ ] Update file pattern references
 
-The 🌲 marker indicates sections specific to the Forest project, while unmarked sections contain general best practices applicable to similar projects.
+For Forest-specific guidelines (mathematical notation, tree files, etc.), see [for-llm/forest.md](./for-llm/forest.md).
 
 ---
 
