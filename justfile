@@ -492,7 +492,7 @@ josh WHERE USER REPO DIR:
 ## Notebook
 
 nbview FILE:
-    uvx euporie preview {{FILE}}
+    uvx euporie notebook {{FILE}}
 
 # https://github.com/livebook-dev/livebook#installation
 prep-lb:
