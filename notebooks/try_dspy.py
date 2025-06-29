@@ -11,14 +11,17 @@
 
 import marimo
 
-__generated_with = "0.13.15"
-app = marimo.App(width="medium", auto_download=["ipynb"])
+__generated_with = "0.14.9"
+app = marimo.App(width="medium")
 
 with app.setup:
     # Initialization code that runs before all other cells
     import subprocess
-
+    subprocess.run(["uv", "pip", "install", "dspy"])
+    subprocess.run(["uv", "pip", "install", "funnydspy"])
     subprocess.run(["uv", "pip", "install", "git+https://github.com/hendrycks/math.git"])
+    # for ipynb export
+    subprocess.run(["uv", "pip", "install", "nbformat"])
 
 
 @app.cell
@@ -183,9 +186,9 @@ def _(compiled_analyze):
 
 @app.cell
 def _(analyze_data, analyze_optimized, dataset):
-    for q in dataset.train[7:9]:
+    for q in dataset.train[20:24]:
         print(
-            f"{q['answer']}: {analyze_data(q['question'])}, {analyze_optimized(q['question'])}\n"
+            f"Ground truth: {q['answer']}\nUnoptimized answer:\n{analyze_data(q['question'])}\nOptimized answer:\n{analyze_optimized(q['question'])}\n--------------\n"
         )
     return
 
@@ -209,7 +212,7 @@ def _():
 
 @app.cell
 def _(compiled_analyze, dataset, dspy):
-    devset = dataset.dev[10:14]
+    devset = dataset.dev[20:24]
     evaluate = dspy.Evaluate(devset=devset, metric=dataset.metric, num_threads=4, display_progress=True, display_table=0, max_errors=999)
     evaluate(compiled_analyze)
     return
