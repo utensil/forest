@@ -325,7 +325,7 @@ def main():
     
     parser = argparse.ArgumentParser(description="Process starred items into Forester format")
     parser.add_argument('--no-deduplicate', action='store_true', help='Disable deduplication of existing URLs')
-    parser.add_argument('--tree-file', type=str, help='Path to the tree file to extract existing URLs from', default='trees/uts-0018.tree')
+    parser.add_argument('--tree-files', type=str, nargs='+', help='Paths to tree files to extract existing URLs from', default=['trees/uts-0018.tree', 'trees/uts-016E.tree'])
     parser.add_argument('--show-all-sources', action='store_true', help='Show all sources, not just when both lobste.rs and HN are present')
     args = parser.parse_args()
 
@@ -333,16 +333,18 @@ def main():
         # Read input
         input_text = sys.stdin.read()
         
-        # Extract existing URLs from tree file if provided
+        # Extract existing URLs from tree files if provided
         existing_urls = set()
-        if args.tree_file and not args.no_deduplicate:
-            try:
-                with open(args.tree_file, 'r', encoding='utf-8') as f:
-                    tree_content = f.read()
-                    existing_urls = extract_existing_urls_from_tree(tree_content)
-                    print(f"Extracted {len(existing_urls)} URLs from {args.tree_file}", file=sys.stderr)
-            except Exception as e:
-                print(f"Warning: Could not read tree file: {e}", file=sys.stderr)
+        if args.tree_files and not args.no_deduplicate:
+            for tree_file in args.tree_files:
+                try:
+                    with open(tree_file, 'r', encoding='utf-8') as f:
+                        tree_content = f.read()
+                        urls = extract_existing_urls_from_tree(tree_content)
+                        existing_urls.update(urls)
+                        print(f"Extracted {len(urls)} URLs from {tree_file}", file=sys.stderr)
+                except Exception as e:
+                    print(f"Warning: Could not read tree file {tree_file}: {e}", file=sys.stderr)
         
         # Process and print
         output = process_stars(input_text, existing_urls, not args.no_deduplicate, args.show_all_sources)
