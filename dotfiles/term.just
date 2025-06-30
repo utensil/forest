@@ -287,8 +287,11 @@ prep-zj:
     # bash <(curl -L https://zellij.dev/launch)
     if [ ! -d ~/.config/zellij ]; then
         git clone https://github.com/t3hmrman/tmux-zellij-shim-config ~/.config/zellij
-    else
+    elif [ -d ~/.config/zellij/.git ]; then
         (cd ~/.config/zellij && git pull)
+    else
+        rip ~/.config/zellij
+        just prep-zj
     fi
 
 # attach - a
