@@ -177,12 +177,16 @@ prep-git:
     which gh || brew install gh
     # list the current settings
     git config --list
-    printf "Enter your name: "
-    read name
-    printf "Enter your email: "
-    read email
-    git config --global user.name "$name"
-    git config --global user.email "$email"
+    if [ -z "$(git config --global user.name)" ]; then
+        printf "Enter your name: "
+        read name
+        git config --global user.name "$name"
+    fi
+    if [ -z "$(git config --global user.email)" ]; then
+        printf "Enter your email: "
+        read email
+        git config --global user.email "$email"
+    fi
     git config --global --unset credential.helper
     git config --global credential.helper "store --file ~/.git-credentials"
 
