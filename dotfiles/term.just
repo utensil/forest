@@ -333,13 +333,6 @@ prep-zj:
 # p n - prev/next tab
 # [ - into scroll/copy mode
 
-# on the original tmux
-# c - new window
-# number - switch to window by number
-#
-# $ - rename current session
-# . - rename current window
-# , - rename current tab
 zj *PARAMS:
     #!/usr/bin/env zsh
     zellij {{PARAMS}}
@@ -371,6 +364,21 @@ ftm:
     else
         echo "No session selected."
     fi
+
+# on the original tmux
+# c - new window
+# number - switch to window by number
+#
+# $ - rename current session
+# . - rename current window
+# , - rename current tab
+# x - kill the current pane
+# & - kill the current window
+# " - split ----
+# % - split |
+tm-at NAME:
+    #!/usr/bin/env zsh
+    tmux attach -t {{NAME}} || tmux new-session -s {{NAME}}
 
 tm-btop:
     #!/usr/bin/env zsh
@@ -520,3 +528,69 @@ prep-act-in-zsh:
     just prep-lvim-in-zsh
     echo 'To start lvim in server mode, run: just lv-remote'
     echo 'Then from outside the container, run: just lv-local'
+
+## SSH
+
+reset-ssh-keys:
+    rip ~/.ssh/id_*; rip ~/.ssh/*_rsa; rip ~/.ssh/*_dsa; rip ~/.ssh/*_ecdsa; rip ~/.ssh/*_ed25519 || true
+
+# still verifying
+prep-ssh-keys:
+    #!/usr/bin/env zsh
+    key_path=~/.ssh/id_ed25519
+    if [[ ! -f "$key_path" && ! -f "$key_path.pub" ]]; then
+        echo "Generating new SSH key pair..."
+        ssh-keygen -t ed25519 -a 100 -f "$key_path" -q -N ""
+        chmod 600 "$key_path" "$key_path.pub"
+        echo "SSH keys generated and permissions set."
+    else
+        echo "SSH keys already exist at $key_path and $key_path.pub"
+        echo "Skipping key generation."
+    fi
+    cat "$key_path.pub"
+
+# initial draft, not verified
+prep-ssh-server:
+    #!/usr/bin/env zsh
+
+    # Check if running as root
+    if [[ $EUID -ne 0 ]]; then
+        echo "This script must be run as root" 
+        exit 1
+    fi
+
+    # Prompt for the public key
+    echo "Please paste your public SSH key (typically from ~/.ssh/id_rsa.pub):"
+    read -r public_key
+
+    # Verify the key looks like a valid SSH public key
+    if [[ ! "$public_key" =~ ^ssh-(rsa|dss|ed25519|ecdsa) ]]; then
+        echo "Error: This doesn't look like a valid SSH public key"
+        exit 1
+    fi
+
+    # Create .ssh directory if it doesn't exist
+    mkdir -p /root/.ssh
+
+    # Add key to authorized_keys
+    echo "$public_key" >> /root/.ssh/authorized_keys
+
+    # Set correct permissions
+    chmod 700 /root/.ssh
+    chmod 600 /root/.ssh/authorized_keys
+
+    # Configure SSH server (uncomment to enable)
+    # echo "Adding key to SSH server configuration..."
+    # echo "PermitRootLogin prohibit-password" >> /etc/ssh/sshd_config
+    # echo "AuthorizedKeysFile .ssh/authorized_keys" >> /etc/ssh/sshd_config
+
+    # Restart SSH service (uncomment to enable)
+    # echo "Restarting SSH service..."
+    # if command -v systemctl >/dev/null; then
+    #     systemctl restart sshd
+    # else
+    #     service ssh restart
+    # fi
+
+    echo "Public key added to /root/.ssh/authorized_keys"
+    echo "You should now be able to SSH as root using this key"
