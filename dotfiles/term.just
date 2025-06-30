@@ -185,6 +185,22 @@ prep-git:
     git config --global user.email "$email"
     git config --global --unset credential.helper
     git config --global credential.helper "store --file ~/.git-credentials"
+
+    git config --global pull.rebase true
+    # https://blog.buenzli.dev/rust-for-linux-first-contrib/#git-gud
+    # Automatically squash fixup/squash commits during rebase
+    git config --global rebase.autoSquash true
+    # Stash uncommitted changes before rebase and reapply afterward
+    git config --global rebase.autoStash true
+    # Preserve merge commits instead of flattening them
+    git config --global rebase.rebaseMerges true
+    # Update branch refs pointing to rebased commits (useful for stacked changes)
+    git config --global rebase.updateRefs true
+    # Enable Reuse Recorded Resolution (remember conflict resolutions)
+    git config --global rerere.enabled true
+    # Automatically stage rerere-resolved files
+    git config --global rerere.autoupdate true
+
     gh auth status || gh auth login
     gh auth setup-git
     echo 'Remember to run `just prep-delta` for better lazygit experience'
