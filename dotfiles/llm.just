@@ -1,9 +1,25 @@
 
-prep-llms:
-    which aichat || brew install aichat
-    which assembllm || (brew tap bradyjoslin/assembllm && brew install bradyjoslin/assembllm/assembllm)
-    which cortex || echo "Visit https://cortex.so/docs/installation to download and install cortex"
+# prep-llms:
+#     which aichat || brew install aichat
+#     which assembllm || (brew tap bradyjoslin/assembllm && brew install bradyjoslin/assembllm/assembllm)
+#     which cortex || echo "Visit https://cortex.so/docs/installation to download and install cortex"
 
+prep-aichat:
+    #!/usr/bin/env zsh
+    which aichat || brew install aichat
+    mkdir -p "$HOME/Library/Application Support/aichat/"
+    cat > "$HOME/Library/Application Support/aichat/config.yaml" << EOF
+    model: $OPENAI_API_PROVIDER
+    clients:
+    - type: openai-compatible
+      name: $OPENAI_API_PROVIDER
+      api_base: $OPENAI_API_BASE
+      api_key: $OPENAI_API_KEY
+      models:
+        - name: $OPENAI_API_MODEL
+       
+    EOF
+    cat "$HOME/Library/Application Support/aichat/config.yaml"
 
 aichat *PARAMS: sync-aichat
     aichat {{PARAMS}}
@@ -36,7 +52,7 @@ mcp *PARAMS="":
     #!/usr/bin/env bash
     mcpm-aider {{PARAMS}}
 
-aider PROJ="forest" *PARAMS="": sync-aider
+aider PROJ="forest" *PARAMS="": # sync-aider
     #!/usr/bin/env zsh
     cd ~/projects/{{PROJ}} && aider {{PARAMS}}
 
