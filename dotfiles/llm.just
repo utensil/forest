@@ -24,7 +24,10 @@ prep-aichat:
 aichat *PARAMS: sync-aichat
     aichat {{PARAMS}}
 
+# Deprecated:
 # In Helix, select some code, press `|` then type `aicode`
+# Instead:
+# In Helix, select some code, press `|` then type `aichat -c` optionally with extra `--prompt` as system prompt
 prep-aicode:
     sudo cp -f aicode /usr/local/bin/
 
@@ -42,6 +45,10 @@ prep-aider:
 
 sync-aider:
     cp -f aider /usr/local/bin || sudo cp -f aider /usr/local/bin
+
+todo:
+    #!/usr/bin/env zsh
+    cat trees/uts-0018.tree |aichat --prompt "randomly suggest 3 small TODOs that I was interested to read or I intend to try"
 
 # just mcp search
 # just mcp install XXX
