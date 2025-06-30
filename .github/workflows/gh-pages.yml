@@ -91,7 +91,8 @@ jobs:
       #       ${{ runner.os }}-opam-
       - name: Install forester
         run: |
-          sudo apt-get install libev-dev
+          sudo apt update
+          sudo apt install libev-dev
           opam pin add forester git+https://git.sr.ht/~jonsterling/ocaml-forester#56de06afe952d752c1a13fdcd8bb56c5fef9956f --yes
           opam install forester --yes
           # opam install forester.4.3.1 --yes
@@ -103,7 +104,7 @@ jobs:
           # enable-cache: true
       - name: Install xsltproc
         run: |
-          sudo apt-get install xsltproc
+          sudo apt install xsltproc
       # - name: Install Homebrew
       #   run: |
       #     bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
