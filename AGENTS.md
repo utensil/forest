@@ -19,6 +19,8 @@ The system combines multiple technologies to create a hybrid authoring environme
 
 ## 1. Non-negotiable golden rules
 
+ALWAYS cite the rules which you are following at the end of your reply, like this: "(per G-0, G-3)".
+
 ### G-0: Always ask for clarification when unsure
 - ✅ **May**: Ask the developer for clarification before making changes when unsure about project-specific details
 - ❌ **Must NOT**: Write changes or use tools when uncertain about something project-specific or lacking context for a particular feature/decision
@@ -45,9 +47,13 @@ The system combines multiple technologies to create a hybrid authoring environme
 
 ### G-6: Prefer ast-grep for syntax-aware search, with ripgrep as fallback
 
-- ✅ **May**: You run in an environment where ast-grep (`sg`) is available; whenever a search requires syntax-aware or structural matching, default to `sg --lang rust -p '<pattern>'` (or set `--lang` appropriately) and avoid falling back to text-only tools like ripgrep(`rg`) unless I explicitly request a plain-text search.
+- ✅ **May**: You run in an environment where ast-grep (`sg`) is available. Whenever a search requires syntax-aware or structural matching, default to `sg --lang <lang> -p '<pattern>'`. Avoid falling back to text-only tools like ripgrep(`rg`) unless `sg` fails to do the job, or plain-text search is explicitly requested.
 
-### G-7: Must followed rules when using MCP container-use
+### G-7: Commit your changes to git
+
+- **May**: Before editing files, commit those files to git if they are not committed. After editing files, before pausing and asking for further instructions, commit your changes to git with a short message complying to conventional commit message, and a longer summary of the changes.
+
+### G-8: Must followed rules when using MCP container-use
 
 When you find existing permissions are insufficient to complete the request, consider using MCP container-use.
 
