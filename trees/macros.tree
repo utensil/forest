@@ -23,16 +23,16 @@
 \alloc\base/tex-preamble
 \alloc\base/extra-preamble
 
-\p{\code{texfig[body]}: A figure rendered by LaTeX.}
+\p{\code{texfig[~body]}: A figure rendered by LaTeX.}
 
-\def\texfig[body]{%
+\def\texfig[~body]{%
  \scope{%
   \put?\base/tex-preamble{%
    \latex-preamble/diagrams%
    \latex-preamble/string-diagrams%
   }%
   \put?\base/extra-preamble{}%
-  \tex{\get\base/tex-preamble\get\base/extra-preamble}{\body}%
+  \tex{\get\base/tex-preamble\get\base/extra-preamble}{\body{}}%
  }
 }
 
