@@ -587,3 +587,6 @@ check-oc:
 
 prep-uz:
     which uzi || go install github.com/devflowinc/uzi@latest
+
+prep-aq:
+    which q || brew install amazon-q
