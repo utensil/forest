@@ -21,6 +21,59 @@
 \subtree[2025-06]{
 \title{June, 2025}
 
+\subtree[2025-06-28]{\mdnote{2025-06-28}{
+- [A Newbie's First Contribution to (Rust for) Linux](https://blog.buenzli.dev/rust-for-linux-first-contrib/)
+    - Raspberry Pi has a fork of kernel
+    - it's possible to write out-of-tree kernel module in Rust
+    - kconfig has great dependency complexity
+    - git gud
+        - fast pace and numerous active forks make patches quickly outdated and dependent branches hard to manage
+        - pick a primary base branch and use `--squash` merges for other branches
+        - keep commits on parallel branches logically independent
+        - with some rebase and rerere config, use `git rebase -i <common base>` to modify the entire history tree
+- agent related
+    - [Context engineering](https://simonwillison.net/2025/Jun/27/context-engineering/#atom-everything)
+    - [definitions of "agents" collected by Simon Willison](https://simonwillison.net/tags/agent-definitions/)
+        - the most precise one I think (from [An Introduction to Google’s Approach to AI Agent Security](https://simonwillison.net/2025/Jun/15/ai-agent-security/))
+            - AI systems designed to perceive their environment, make decisions, and take autonomous actions to achieve user-defined goals.
+        - most liked by Simon Willison
+            - an LLM wrecking its environment in a loop
+        - mine combining a few
+            - models autonomously acting in its environment, by using tools in a loop
+    - [MCP: An (Accidentally) Universal Plugin System](https://worksonmymachine.substack.com/p/mcp-an-accidentally-universal-plugin)
+- OCaml related
+    - [First thoughts on Rust vs OCaml](https://blog.darklang.com/first-thoughts-on-rust-vs-ocaml/)
+        - pattern matching can't penetrate `Box`, `Arc` etc.
+        - a red flag: `Rc`/`Arc`, sync/async end up requiring different libary, e.g. `im` and `im-rc`
+        - [im](https://docs.rs/im/15.0.0/im/):  immutable data structures for Rust
+        - [PureScript](A strongly-typed functional programming language that compiles to JavaScript)
+    - [Learn OCaml](https://ocaml-sf.org/learn-ocaml-public/#activity=exercises)
+        - [practical ocaml](https://dev.to/yawaramin/practical-ocaml-314j)
+        - the background story of OxCaml: [Jane Street’s sneaky retention tactic](https://archive.ph/u10ol#selection-1133.0-1136.0)
+- formal related
+    - [Multi-Stage Programming with Splice Variables](https://tsung-ju.org/icfp25/)
+        - an interactive demonstration in TS, the original implemtation is in Agda ([examples](https://tsung-ju.org/icfp25/agda/Pat.Examples.html))
+        - typed meta-programming, to make code generation predictable and safe
+        - provides precise control over the generation process and seamlessly scales to advanced features like code pattern matching and rewriting
+        - the type system automatically tracks variable dependencies, ensuring that generated code is always well-formed, properly scoped, and type-checks correctly
+- [I deleted my second brain](https://www.joanwestenberg.com/p/i-deleted-my-second-brain)
+    - [Niklas Luhmann's Zettelkasten Archive](https://niklas-luhmann-archiv.de/bestand/zettelkasten/zettel/ZK_1_NB_1_1_V)
+    - [Johnny.Decimal: A system to organise your life](https://johnnydecimal.com/)
+    - [Howm: Write fragmentarily and read collectively](https://github.com/kaorahi/howm/)
+        - for emacs, but it might be interesting to me for a TUI for forester in Helix?
+    - [rule of three](https://en.m.wikipedia.org/wiki/Rule_of_three_(writing))
+- [Notes on Epistemic Collapse](https://www.math.columbia.edu/~woit/wordpress/?p=14999)
+    - Epistemic collapse in science means losing shared reality due to unreliable info sources.
+    - In physics, it's seen in tribalism: string theory tribes dominated despite failures, with research driven by trends over evidence.
+    - Particle theory lacks experimental input, relying on "hot topics" under oligarchs, now facing funding collapse.
+    - This shows how loss of truth-seeking harms scientific progress.
+- performance related
+    - [Announcing Sniffnet v1.4: it’s 2X faster than Wireshark at processing PCAP files](https://sniffnet.net/news/v1.4/)
+        - by focusing on extracting only the most relevant fields from the packets’ headers
+    - [Avoiding PostgreSQL Pitfalls: The Hidden Cost of Failing Inserts](https://johnnymetz.com/posts/postgresql-failing-insert/)
+        - `ON CONFLICT DO NOTHING` came to rescue
+}}
+
 % \subtree[2025-06-27]{\mdnote{2025-06-27}{
 % - [Researchers develop a battery cathode material that does it all](https://arstechnica.com/science/2025/06/researchers-develop-a-battery-cathode-material-that-does-it-all/)
 % - found [Magnitude – Open-source AI browser automation framework](https://github.com/magnitudedev/magnitude)
@@ -142,6 +195,7 @@
 - found [LeetCode for System Design](https://leetsys.dev)
 - Go related
     - [Go should be more opinionated](https://eltonminetto.dev/en/post/2025-06-19-go-more-opinated/)
+    - [Go is an 80/20 language](https://blog.kowalczyk.info/article/d-2025-06-26/go-is-8020-language.html)
     - [How to store Go pointers from assembly](https://mazzo.li/posts/go-asm-pointers.html) ([on HN](https://news.ycombinator.com/item?id=44355187)) ([on lobste.rs](https://lobste.rs/s/obsh1m))
     - [Why Go Rocks for Building a Lua Interpreter](https://www.zombiezen.com/blog/2025/06/why-go-rocks-for-building-lua-interpreter/)
 }}
@@ -158,6 +212,8 @@
     - [comphash - A very lightweight Zig package offering a zero-cost compile-time hash map](https://www.reddit.com/r/Zig/comments/1lkgr54/comphash_a_very_lightweight_zig_package_offering/)
         - [Andrew Kelly experimented with perfect hashes](https://andrewkelley.me/post/string-matching-comptime-perfect-hashing-zig.html)
     - [Syntax highlighting for Zig's documentation comments](https://www.reddit.com/r/Zig/comments/1lhhgh8/syntax_highlighting_for_zigs_documentation/)
+    - [Parameterized types in C using the new tag compatibility rule](https://nullprogram.com/blog/2025/06/26/)
+        - C23 has a new rule for struct, union, and enum compatibility
 }}
 
 \subtree[2025-06-21]{\mdnote{2025-06-21}{\tags{#agent #formal #scheme}
@@ -221,7 +277,9 @@
 }}
 
 \subtree[2025-06-18]{\mdnote{2025-06-18}{\tags{#agent #benchmark #docker #editor #prompt #quantum #robot #security #wayland #✍️}
-- work on [helix-cheat-sheet](https://github.com/utensil/helix-cheat-sheet)
+- Helix related
+    - work on [helix-cheat-sheet](https://github.com/utensil/helix-cheat-sheet)
+    - [I really like the Helix editor](https://herecomesthemoon.net/2025/06/i-like-helix/)
 - [Moving on from Nix](https://carlosbecker.com/posts/bye-nix/)
     - it's a good thing that I have kept my distance from Nix from the start
         - mostly because I didn't like the syntax, and I don't want to be locked in
