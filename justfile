@@ -86,14 +86,14 @@ run-shellcheck:
 ## Enrich contents
 
 # Inspired by https://github.com/Ranchero-Software/NetNewsWire/issues/978#issuecomment-1320911427
-rss-stars days="7":
+rss-stars days="7" *PARAMS:
     #!/usr/bin/env zsh
     cd ~/Library/Containers/com.ranchero.NetNewsWire-Evergreen/Data/Library/Application\ Support/NetNewsWire/Accounts/2_iCloud
     # get a JSON of all the starred items with only title, url, externalURL, datePublished
     sqlite3 DB.sqlite3 '.mode json' 'select a.*, s.* from articles a join statuses s on a.articleID = s.articleID where s.starred = 1 order by s.dateArrived' |jq -r '.[]|{title, url, externalURL, datePublished, dateArrived, uniqueID}'
 
-stars days="7":
-    just rss-stars {{days}}|./stars.py --days {{days}}
+stars days="7" *PARAMS:
+    just rss-stars {{days}} {{PARAMS}}|./stars.py --days {{days}} {{PARAMS}}
 
 til:
     ./til.py --reset && ./til.py
