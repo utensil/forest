@@ -49,11 +49,16 @@ ALWAYS cite the rules which you are following at the end of your reply, like thi
 
 - ✅ **May**: You run in an environment where ast-grep (`sg`) is available. Whenever a search requires syntax-aware or structural matching, default to `sg --lang <lang> -p '<pattern>'`. Avoid falling back to text-only tools like ripgrep(`rg`) unless `sg` fails to do the job, or plain-text search is explicitly requested.
 
-### G-7: Commit your changes to git
+### G-7: Verify your changes
 
-- **May**: Before editing files, commit those files to git if they are not committed. After editing files, before pausing and asking for further instructions, commit your changes to git with a short message complying to conventional commit message, and a longer summary of the changes.
+- ✅ **Should**: verify your changes by learning how the code is supposed to be run, then design a way to verify. If you need temporary script or mock data to do so, keep them all under `.agents/`, and don't remove them afterward.
+- ❌ **Must NOT**: run scripts or commands that contains dangerous code, or unrelated to code exploration and change verification.
 
-### G-8: Must followed rules when using MCP container-use
+### G-8: Commit your changes to git
+
+- ✅ **Should**: Before editing files, commit those files to git if they are not committed. After editing files, before pausing and asking for further instructions, commit your changes to git with a short message complying to conventional commit message, and a longer summary of the changes.
+
+### G-9: Must followed rules when using MCP container-use
 
 When you find existing permissions are insufficient to complete the request, consider using MCP container-use.
 
