@@ -275,7 +275,8 @@ def process_stars(input_text, existing_urls=None, deduplicate=True, show_all_sou
         # Start building the link with the primary content - CHANGED: removed "read " from here
         link_parts = [f"- {formatted_title_link}"]
 
-        # Add source references - show when show_all_sources is true, or when there are source links different from primary URL
+        # Add source references - show when show_all_sources is true, or when there's HN (alone or with lobste.rs)
+        # AGENT-NOTE: Source link display logic - only show links when HN is present (alone or with lobste.rs), not for lobste.rs-only
         sources = content_data.get("sources", {})
         
         if show_all_sources:
@@ -286,12 +287,16 @@ def process_stars(input_text, existing_urls=None, deduplicate=True, show_all_sou
                     formatted_source_url = format_url(source_url)
                     link_parts.append(f"([on {source_name}]({formatted_source_url}))")
         else:
-            # Show source references when there are any sources different from primary URL
-            for source_name, source_url in sorted(sources.items()):
-                # Only add source reference if it's not the same as primary URL
-                if normalize_url(source_url) != normalize_url(primary_url):
-                    formatted_source_url = format_url(source_url)
-                    link_parts.append(f"([on {source_name}]({formatted_source_url}))")
+            # Show source references only when there's HN (alone or with lobste.rs)
+            has_hn = "HN" in sources
+            
+            # Show links if there's HN present
+            if has_hn:
+                for source_name, source_url in sorted(sources.items()):
+                    # Only add source reference if it's not the same as primary URL
+                    if normalize_url(source_url) != normalize_url(primary_url):
+                        formatted_source_url = format_url(source_url)
+                        link_parts.append(f"([on {source_name}]({formatted_source_url}))")
 
         # Join parts with spaces
         link = " ".join(link_parts)
