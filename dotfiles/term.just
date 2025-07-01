@@ -548,6 +548,24 @@ prep-ssh-keys:
         echo "Skipping key generation."
     fi
     cat "$key_path.pub"
+    # Read remote user and host
+    read "remote_user?Enter remote username: " || return
+    read "remote_host?Enter remote hostname or IP: " || return
+
+    # Ask if user wants to proceed with key deployment
+    if read -q "?Do you want to deploy the public key now? (y/n) "; then
+        echo  # Add a newline after the prompt
+        if ssh-copy-id -x -i "$key_path.pub" "$remote_user@$remote_host"; then
+            echo "Public key deployed successfully!"
+            echo "You can now connect with: ssh $remote_user@$remote_host"
+        else
+            echo "Failed to deploy key. Please check connection or manually add the key:"
+            cat "$key_path.pub"
+        fi
+    else
+        echo "\nPublic key was not deployed. You can manually add this key:"
+        cat "$key_path.pub"
+    fi
 
 # initial draft, not verified
 prep-ssh-server:
