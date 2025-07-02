@@ -70,6 +70,8 @@ The system combines multiple technologies to create a hybrid authoring environme
 
 Use `just` tasks for consistency (they ensure correct environment variables and configuration).
 
+### Core build commands
+
 ```bash
 # Development and building
 just dev             # Development server with file watching at http://localhost:1314 , agents should assume that this is already running by human, and should not run it, but may access it via http
@@ -87,6 +89,34 @@ just lize            # Build multiple LaTeX documents
 # Content management
 just new <prefix>    # Create new tree file, agents should use this to create a new tree, to ensure the format follows the conventions for the trees with the same prefix
 just stars           # Process RSS starred items into learning diary
+```
+
+### Build system & dependencies
+
+*   **Bun**: Primary JavaScript/TypeScript runtime and package manager.
+*   **Biome**: Linting and formatting (configured in `biome.json`).
+*   **Lightning CSS**: CSS processing and bundling.
+*   **Forester**: Tree file processing and site generation.
+*   **WASM modules**: Custom modules cloned to `lib/` directory, built with `wasm-pack`.
+*   **LaTeX**: PDF generation using custom templates in `tex/`.
+
+**Build process**:
+1. `just dev` starts development server with file watching
+2. Changes to `.tree` files trigger Forester rebuild
+3. Changes to `bun/` files trigger JavaScript/CSS rebuilding
+4. WASM modules are built in CI or when `UTS_DEV` environment variable is set
+
+### Testing & validation
+
+*   **No formal testing framework**: This project focuses on mathematical content and documentation.
+*   **Validation approaches**: Build verification, link checking, LaTeX compilation.
+*   **Content validation**: Ensure tree files have proper Forester syntax.
+*   **Manual testing**: Preview changes in development server before committing.
+
+**Validation commands**:
+```bash
+just chk            # Lint JavaScript/TypeScript files
+just build          # Full build validation
 ```
 
 ---
@@ -217,26 +247,11 @@ Key points:
 *   Group related items under topic headers when multiple entries exist
 *   Use hierarchical organization with year and month subtrees
 
----
 
-## 9. 🌲 Build system & dependencies
-
-*   **Bun**: Primary JavaScript/TypeScript runtime and package manager.
-*   **Biome**: Linting and formatting (configured in `biome.json`).
-*   **Lightning CSS**: CSS processing and bundling.
-*   **Forester**: Tree file processing and site generation.
-*   **WASM modules**: Custom modules cloned to `lib/` directory, built with `wasm-pack`.
-*   **LaTeX**: PDF generation using custom templates in `tex/`.
-
-**Build process**:
-1. `just dev` starts development server with file watching
-2. Changes to `.tree` files trigger Forester rebuild
-3. Changes to `bun/` files trigger JavaScript/CSS rebuilding
-4. WASM modules are built in CI or when `UTS_DEV` environment variable is set
 
 ---
 
-## 10. 🌲 Mathematical notation & macros
+## 9. 🌲 Mathematical notation & macros
 
 *   **Inline math**: `#{math expression}`
 *   **Display math**: `##{math expression}`
@@ -253,7 +268,7 @@ Key points:
 
 ---
 
-## 11. Common pitfalls
+## 10. Common pitfalls
 
 *   Forgetting to import `macros.tree` in new tree files.
 *   Using incorrect Forester syntax (missing `\p{}` around paragraphs).
@@ -265,7 +280,7 @@ Key points:
 
 ---
 
-## 12. 🌲 Domain-Specific Terminology
+## 11. 🌲 Domain-Specific Terminology
 
 *   **Tree**: A single note file in Forester format (`.tree` extension).
 *   **Forest**: The collection of all trees and their interconnections.
@@ -282,7 +297,7 @@ Key points:
 
 ---
 
-## 13. Key File & Pattern References
+## 12. Key File & Pattern References
 
 This section provides pointers to important files and common patterns within the codebase.
 
@@ -302,24 +317,11 @@ This section provides pointers to important files and common patterns within the
     *   Location: `justfile`, `biome.json`, `package.json`
     *   Pattern: Centralized configuration for development tools.
 
----
 
-## 14. 🌲 Testing framework & validation
-
-*   **No formal testing framework**: This project focuses on mathematical content and documentation.
-*   **Validation approaches**: Build verification, link checking, LaTeX compilation.
-*   **Content validation**: Ensure tree files have proper Forester syntax.
-*   **Manual testing**: Preview changes in development server before committing.
-
-**Validation commands**:
-```bash
-just chk            # Lint JavaScript/TypeScript files
-just build          # Full build validation
-```
 
 ---
 
-## 15. Directory-Specific documentation
+## 13. Directory-Specific documentation
 
 *   **Always check existing patterns** in directories before adding new content.
 *   **Follow naming conventions** established in each subject area (uts, ag, tt, ca, spin, hopf).
@@ -336,7 +338,7 @@ just build          # Full build validation
 
 ---
 
-## 16. Versioning & deployment
+## 14. Versioning & deployment
 
 *   **No formal versioning**: Content-focused repository with continuous integration.
 *   **Deployment**: Automatic GitHub Pages deployment on main branch push.
@@ -345,7 +347,7 @@ just build          # Full build validation
 
 ---
 
-## 17. Performance considerations
+## 15. Performance considerations
 
 *   **WASM loading**: First-time WASM module loading can be slow; implement graceful degradation.
 *   **Build optimization**: Use file watching in development to avoid full rebuilds.
@@ -354,7 +356,7 @@ just build          # Full build validation
 
 ---
 
-## 18. 🌲 Writing task automation scripts
+## 16. 🌲 Writing task automation scripts
 
 When implementing complex data processing or automation tasks, create standalone Python scripts that integrate with the project workflow.
 
@@ -427,7 +429,7 @@ just build
 
 ---
 
-## 19. Meta: Guidelines for updating AGENT.md files
+## 17. Meta: Guidelines for updating AGENT.md files
 
 This file should be updated when:
 - New major features or tools are added to the project
