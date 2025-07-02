@@ -38,7 +38,7 @@
 
 \p{\code{texalg[body]}: An algorithm rendered by LaTeX.}
 
-\def\texalg[body]{%
+\def\texalg[~body]{%
  \scope{%
   \put?\base/tex-preamble{%
   %  \latex-preamble/diagrams%
@@ -46,16 +46,16 @@
     \latex-preamble/algorithms
   }%
   \put?\base/extra-preamble{}%
-  \tex{\get\base/tex-preamble\get\base/extra-preamble}{\body}%
+  \tex{\get\base/tex-preamble\get\base/extra-preamble}{\body{}}%
  }
 }
 
-\def\minialg[body]{
+\def\minialg[~body]{
  \texalg{
     \begin{minipage}{0.97\linewidth}
     \vspace{2ex}
     % \setlength{\parskip}{3ex plus 0.5ex minus 0.2ex}
-    \body
+    \body{}
     \end{minipage}
   }
 }
