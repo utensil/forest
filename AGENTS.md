@@ -1,29 +1,19 @@
 # Agent Instructions for Forest
 
-*Last updated 2025-01-11*
+*Last updated 2025-07-02*
 
-> **purpose** – This file is the onboarding manual[^1] for every AI assistant (Claude, Cursor, GPT, etc.) and every human who edits this repository.  
+> **Purpose** – This file is the onboarding manual[^1] for every AI assistant (Claude, Amp, Codex, Amazon Q, OpenCode etc.) and every human who edits this repository.
 > It encodes our coding standards, guard-rails, and workflow tricks so the *human 30 %*[^2] (architecture, tests, domain judgment) stays in human hands.
 
 ---
 
-## 0. Project overview
-
-Forest is a sophisticated mathematical and technical research environment and Zettelkasten system built using Forester. It serves as a personal knowledge management system for mathematical concepts, technical experiments, and research notes, with over 1300+ commits accumulated since 2024.
-
-The system combines multiple technologies to create a hybrid authoring environment that supports both web-based browsing and traditional academic PDF generation. It integrates Forester (a Zettelkasten note-taking system) with modern development tools, mathematical typesetting, and experimental interactive content.
-
-**Golden rule**: When unsure about implementation details or requirements, ALWAYS consult the developer rather than making assumptions.
-
----
-
-## 1. Non-negotiable golden rules
+## 0. Non-negotiable GOLDEN rules
 
 ALWAYS cite the rules which you are following at the end of your reply, like this: "(per G-ask, G-verify)".
 
 ### G-ask: Always ask for clarification when unsure
-- ✅ **May**: Ask the developer for clarification before making changes when unsure about project-specific details
-- ❌ **Must NOT**: Write changes or use tools when uncertain about something project-specific or lacking context for a particular feature/decision
+- ✅ **Should**: Ask the developer for clarification before making changes when unsure about project-specific details or lacking context for a particular feature/decision
+ - ❌ **Must NOT**: make assumptions, write changes or use tools when uncertain
 
 ### G-scope: Stay within designated code areas  
 - ✅ **May**: Generate code only inside relevant source directories or explicitly pointed files
@@ -47,22 +37,32 @@ ALWAYS cite the rules which you are following at the end of your reply, like thi
 
 ### G-search: Prefer ast-grep for syntax-aware search, with ripgrep as fallback
 
-- ✅ **May**: You run in an environment where ast-grep (`sg`) is available. Whenever a search requires syntax-aware or structural matching, default to `sg --lang <lang> -p '<pattern>'`. Avoid falling back to text-only tools like ripgrep(`rg`) unless `sg` fails to do the job, or plain-text search is explicitly requested.
+✅You run in an environment where ast-grep (`sg`) is available. Whenever a search requires syntax-aware or structural matching, default to `sg --lang <lang> -p '<pattern>'`. Avoid falling back to text-only tools like ripgrep (`rg`) unless `sg` fails to do the job, or plain-text search is explicitly requested.
 
 ### G-verify: Verify your changes
 
-- ✅ **Should**: verify your changes by learning how the code is supposed to be run, then design a way to verify. If you need temporary script or mock data to do so, keep them all under `.agents/`, and don't remove them afterward.
-- ❌ **Must NOT**: run scripts or commands that contains dangerous code, or unrelated to code exploration and change verification.
+- ✅ **Should**: Verify/test your changes by learning how the code is supposed to be run, then design a way to verify. Prefer to re-use or add tests to verify. If you need temporary script or mock data to do so, keep them all under `.agents/`, and don't remove them afterward.
+- ❌ **Must NOT**: Run scripts or commands that contains dangerous code, or unrelated to code exploration and change verification.
 
 ### G-commit: Commit your changes to git
 
-- ✅ **Should**: Before editing files, commit those files to git if they are not committed. After editing files, before pausing and asking for further instructions, commit your changes to git with a short message complying to conventional commit message, and a longer summary of the changes.
+- ✅ **Should**: Before editing files, commit those files to git if they are not committed. After editing files, before pausing and asking for further instructions, commit your changes to git. ALWAYS commit with a short message complying to conventional commit message, and a longer summary of the changes.
+- ❌ **Must NOT**: Commit files that are not changed or going to be changed by you.
 
 ### G-sandbox: Must followed rules when using MCP container-use
 
 When you find existing permissions are insufficient to complete the request, consider using MCP container-use.
 
 Once you start using container-use:  ALWAYS use ONLY Environments for ANY and ALL file, code, or shell operations—NO EXCEPTIONS—even for simple or generic requests. DO NOT install or use the git cli with the `environment_run_cmd` tool. All environment tools will handle git operations for you. Changing ".git" yourself will compromise the integrity of your environment. You MUST inform the user how to view your work using `cu log <env_id>` AND `cu checkout <env_id>`. Failure to do this will make your work inaccessible to others.
+
+---
+
+## 1. Project overview
+
+Forest is a sophisticated mathematical and technical research environment and Zettelkasten system built using Forester. It serves as a personal knowledge management system for mathematical concepts, technical experiments, and research notes, with over 1300+ commits accumulated since 2024.
+
+The system combines multiple technologies to create a hybrid authoring environment that supports both web-based browsing and traditional academic PDF generation. It integrates Forester (a Zettelkasten note-taking system) with modern development tools, mathematical typesetting, and experimental interactive content.
+
 
 ---
 
