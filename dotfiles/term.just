@@ -79,9 +79,20 @@ awake:
     caffeinate -s
 
 ## Ghostty
- 
+
+# based on https://gist.github.com/davidteren/898f2dcccd42d9f8680ec69a3a5d350e
+find-font FONT="maple":
+    #!/usr/bin/env zsh
+    brew search '/font-.*-(nerd-font|nf)/' | awk '{ print $1 }' | grep -i {{FONT}}
+
+# mac only
+list-font FONT="fonts":
+    fc-list|grep -i {{FONT}}
+
 # https://github.com/subframe7536/Maple-font
 prep-font:
+    brew install --cask font-fira-code-nerd-font
+    brew install --cask font-fira-mono-nerd-font
     brew install --cask font-maple-mono-nf-cn
 
 prep-gt:
