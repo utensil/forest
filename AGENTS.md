@@ -20,11 +20,11 @@ ALWAYS cite the rules which you are following at the end of your reply, like thi
 - ❌ **Must NOT**: Touch test files, CI configs, or core build scripts without explicit permission
 
 ### G-note: Use anchor comments appropriately
-- ✅ **May**: Add/update `AGENT-NOTE:` anchor comments near non-trivial edited code
+- ✅ **May**: Add/update `AGENT-NOTE:` anchor comments (see section "Anchor comments" below) near non-trivial edited code
 - ❌ **Must NOT**: Delete or mangle existing `AGENT-*` comments
 
 ### G-lint: Follow project linting and style
-- ✅ **May**: Follow lint/style configs using the configured linters
+- ✅ **May**: Follow section "Coding standards" below, and lint/style configs using the configured linters
 - ❌ **Must NOT**: Re-format code to any other style
 
 ### G-size: Get approval for large changes
@@ -41,12 +41,12 @@ ALWAYS cite the rules which you are following at the end of your reply, like thi
 
 ### G-verify: Verify your changes
 
-- ✅ **Should**: Verify/test your changes by learning how the code is supposed to be run, then design a way to verify. Prefer to re-use or add tests to verify. If you need temporary script or mock data to do so, keep them all under `.agents/`, and don't remove them afterward.
+- ✅ **Should**: Verify your changes by learning how the code is supposed to run/test/lint (see also section "Build, test & utility commands" below), then design a way to verify. Prefer to re-use or add tests to verify. If you need temporary script or mock data to do so, keep them all under `.agents/`, and don't remove them afterward.
 - ❌ **Must NOT**: Run scripts or commands that contains dangerous code, or unrelated to code exploration and change verification.
 
 ### G-commit: Commit your changes to git
 
-- ✅ **Should**: Before editing files, commit those files to git if they are not committed. After editing files, before pausing and asking for further instructions, commit your changes to git. ALWAYS commit with a short message complying to conventional commit message, and a longer summary of the changes.
+- ✅ **Should**: Before editing files, commit those files to git if they are not committed. After editing files, before pausing and asking for further instructions, commit your changes to git. ALWAYS commit per section "Commit discipline" below.
 - ❌ **Must NOT**: Commit files that are not changed or going to be changed by you.
 
 ### G-sandbox: Must followed rules when using MCP container-use
@@ -164,8 +164,8 @@ async function loadEgglogWasm() {
 
 *   **Granular commits**: One logical change per commit.
 *   **Tag agent-generated commits**: e.g., `feat: optimize shader loading [AGENT]`.
-*   **Clear commit messages**: Explain the *why*; link to issues if applicable.
 *   **Use conventional commits**: `feat:`, `fix:`, `docs:`, `style:`, `refactor:`, etc.
+*   **Clear commit messages**: a short message explaining the *why* with a longer summary of the changes; link to issues if applicable.
 *   **Review AI-generated code**: Never merge code you don't understand.
 
 ---
