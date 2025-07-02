@@ -19,50 +19,50 @@ The system combines multiple technologies to create a hybrid authoring environme
 
 ## 1. Non-negotiable golden rules
 
-ALWAYS cite the rules which you are following at the end of your reply, like this: "(per G-0, G-3)".
+ALWAYS cite the rules which you are following at the end of your reply, like this: "(per G-ask, G-verify)".
 
-### G-0: Always ask for clarification when unsure
+### G-ask: Always ask for clarification when unsure
 - ✅ **May**: Ask the developer for clarification before making changes when unsure about project-specific details
 - ❌ **Must NOT**: Write changes or use tools when uncertain about something project-specific or lacking context for a particular feature/decision
 
-### G-1: Stay within designated code areas  
+### G-scope: Stay within designated code areas  
 - ✅ **May**: Generate code only inside relevant source directories or explicitly pointed files
 - ❌ **Must NOT**: Touch test files, CI configs, or core build scripts without explicit permission
 
-### G-2: Use anchor comments appropriately
+### G-note: Use anchor comments appropriately
 - ✅ **May**: Add/update `AGENT-NOTE:` anchor comments near non-trivial edited code
 - ❌ **Must NOT**: Delete or mangle existing `AGENT-*` comments
 
-### G-3: Follow project linting and style
+### G-lint: Follow project linting and style
 - ✅ **May**: Follow lint/style configs using the configured linters
 - ❌ **Must NOT**: Re-format code to any other style
 
-### G-4: Get approval for large changes
+### G-size: Get approval for large changes
 - ✅ **May**: Make changes, but ask for confirmation if >300 LOC or >3 files
 - ❌ **Must NOT**: Refactor large modules without human guidance
 
-### G-5: Maintain task context boundaries
+### G-focus: Maintain task context boundaries
 - ✅ **May**: Stay within current task context, inform dev if fresh start would be better
 - ❌ **Must NOT**: Continue work from a prior prompt after "new task" – start a fresh session
 
-### G-6: Prefer ast-grep for syntax-aware search, with ripgrep as fallback
+### G-search: Prefer ast-grep for syntax-aware search, with ripgrep as fallback
 
 - ✅ **May**: You run in an environment where ast-grep (`sg`) is available. Whenever a search requires syntax-aware or structural matching, default to `sg --lang <lang> -p '<pattern>'`. Avoid falling back to text-only tools like ripgrep(`rg`) unless `sg` fails to do the job, or plain-text search is explicitly requested.
 
-### G-7: Verify your changes
+### G-verify: Verify your changes
 
 - ✅ **Should**: verify your changes by learning how the code is supposed to be run, then design a way to verify. If you need temporary script or mock data to do so, keep them all under `.agents/`, and don't remove them afterward.
 - ❌ **Must NOT**: run scripts or commands that contains dangerous code, or unrelated to code exploration and change verification.
 
-### G-8: Commit your changes to git
+### G-commit: Commit your changes to git
 
 - ✅ **Should**: Before editing files, commit those files to git if they are not committed. After editing files, before pausing and asking for further instructions, commit your changes to git with a short message complying to conventional commit message, and a longer summary of the changes.
 
-### G-9: Must followed rules when using MCP container-use
+### G-sandbox: Must followed rules when using MCP container-use
 
 When you find existing permissions are insufficient to complete the request, consider using MCP container-use.
 
-Once you start using container-use:  ALWAYS use ONLY Environments for ANY and ALL file, code, or shell operations—NO EXCEPTIONS—even for simple or generic requests. DO NOT install or use the git cli with the environment_run_cmd tool. All environment tools will handle git operations for you. Changing ".git" yourself will compromise the integrity of your environment. You MUST inform the user how to view your work using `cu log <env_id>` AND `cu checkout <env_id>`. Failure to do this will make your work inaccessible to others.
+Once you start using container-use:  ALWAYS use ONLY Environments for ANY and ALL file, code, or shell operations—NO EXCEPTIONS—even for simple or generic requests. DO NOT install or use the git cli with the `environment_run_cmd` tool. All environment tools will handle git operations for you. Changing ".git" yourself will compromise the integrity of your environment. You MUST inform the user how to view your work using `cu log <env_id>` AND `cu checkout <env_id>`. Failure to do this will make your work inaccessible to others.
 
 ---
 
