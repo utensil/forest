@@ -17,7 +17,8 @@ ALWAYS cite the rules which you are following at the end of your reply, like thi
 
 ### G-scope: Stay within designated code areas  
 - ✅ **May**: Generate code only inside relevant source directories or explicitly pointed files
-- ❌ **Must NOT**: Touch test files, CI configs, or core build scripts without explicit permission
+- ✅ **May**: Execute build scripts and commands as documented in section "Build, test & utility commands"
+- ❌ **Must NOT**: Modify test files, CI configs, or core build scripts without explicit permission
 
 ### G-note: Use anchor comments appropriately
 - ✅ **May**: Add/update `AGENT-NOTE:` anchor comments (see section "Anchor comments" below) near non-trivial edited code
@@ -46,7 +47,7 @@ ALWAYS cite the rules which you are following at the end of your reply, like thi
 
 ### G-commit: Commit your changes to git
 
-- ✅ **Should**: Before editing files, commit those files to git if they are not committed. After editing files, before pausing and asking for further instructions, commit your changes to git. ALWAYS commit per section "Commit discipline" below.
+- ✅ **Should**: Ensure files are in a clean committed state before making changes (to establish a baseline). After editing files, before pausing and asking for further instructions, commit your changes to git. ALWAYS commit per section "Commit discipline" below.
 - ❌ **Must NOT**: Commit files that are not changed or going to be changed by you.
 
 ### G-sandbox: Must followed rules when using MCP container-use
@@ -108,10 +109,11 @@ just stars           # Process RSS starred items into learning diary
 
 ### Testing & validation
 
-*   **No formal testing framework**: This project focuses on mathematical content and documentation.
-*   **Validation approaches**: Build verification, link checking, LaTeX compilation.
+*   **No formal unit testing framework**: This project focuses on mathematical content and documentation rather than traditional software testing.
+*   **Validation approaches**: Build verification, link checking, LaTeX compilation, and custom validation scripts serve as the testing methodology.
 *   **Content validation**: Ensure tree files have proper Forester syntax.
 *   **Manual testing**: Preview changes in development server before committing.
+*   **Verification scripts**: Create validation scripts under `.agents/` to verify changes work correctly.
 
 **Validation commands**:
 ```bash
