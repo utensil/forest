@@ -48,7 +48,7 @@ ALWAYS cite the rules which you are following at the end of your reply, like thi
 ### G-commit: Commit your changes to git
 
 - ✅ **Should**: Ensure files are in a clean committed state before making changes (to establish a baseline). After editing files, before pausing and asking for further instructions, commit your changes to git. ALWAYS commit per section "Commit discipline" below.
-- ❌ **Must NOT**: Commit files that are not changed or going to be changed by you.
+- ❌ **Must NOT**: Commit files that are not directly related to your current task. Only commit files you have intentionally modified as part of the specific work requested. Do not commit unrelated changes, even if they exist in your working directory.
 
 ### G-sandbox: Must followed rules when using MCP container-use
 
