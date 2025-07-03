@@ -82,8 +82,8 @@ function convert_xml_files() {
             # 2. Individual XML file changed (comparing with backup)
             # 3. The target HTML file doesn't exist
             if ([ "$convert_all" = true ] && [ -n "$XSL_CHANGED" ] && [ "$changes_detected" = true ]) ||
-               ([ -f "output/.bak/$(basename $xml_file)" ] && ! cmp -s "$xml_file" "output/.bak/$(basename $xml_file)") ||
-                [ ! -f "output/$(basename $xml_file .xml).html" ]; then
+               ([ -f "output/.bak/$(basename "$xml_file")" ] && ! cmp -s "$xml_file" "output/.bak/$(basename "$xml_file")") ||
+                [ ! -f "output/$(basename "$xml_file" .xml).html" ]; then
                 convert_xml_to_html "$xml_file" &
                 ((updated_count++))
             fi

@@ -9,12 +9,12 @@ FOUND_LOST_NOTE=0
 for f in trees/*.tree; do
     echo -n "."
     # extract the filename without the extension
-    FILENAME=$(basename $f .tree)
+    FILENAME=$(basename "$f" .tree)
     # if FILENAME is not included in any files trees/*.tree
     # echo "^\\\\transclude\\{$FILENAME\\}"
     if ! grep -q -E "^\\\\transclude\\{$FILENAME\\}" trees/*.tree; then
         # if "\tag{draft}" is not in the FILENAME
-        if ! grep -q -F "\tag{draft}" $f; then
+        if ! grep -q -F "\tag{draft}" "$f"; then
             # if FILENAME is not started with "math-"
             if [[ $FILENAME != math-* && $FILENAME != *-0001 && $FILENAME != *macros && $FILENAME != index && $FILENAME != latex-preamble ]]; then
                 # add 1 to FOUND_LOST_NOTE
