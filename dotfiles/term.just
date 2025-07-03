@@ -1,6 +1,7 @@
 # Terminal Setup Tasks
 
 set dotenv-load
+set ignore-comments
 
 export HOMEBREW_NO_AUTO_UPDATE := "1"
 # https://blog.rust-lang.org/inside-rust/2023/01/30/cargo-sparse-protocol/
@@ -234,6 +235,11 @@ prep-delta:
 git PROJ="forest" *PARAMS="":
     #!/usr/bin/env zsh
     cd ~/projects/{{PROJ}} && lazygit {{PARAMS}}
+
+# -w to open in browser
+actions PROJ="forest" *PARAMS="":
+    #!/usr/bin/env zsh
+    cd ~/projects/{{PROJ}} && gh workflow view {{PARAMS}}
 
 prep-date:
     which git-backdate || (curl https://raw.githubusercontent.com/rixx/git-backdate/main/git-backdate > /usr/local/bin/git-backdate && chmod +x /usr/local/bin/git-backdate)
