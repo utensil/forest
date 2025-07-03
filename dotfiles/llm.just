@@ -579,7 +579,7 @@ check-oc:
     set -e
     cat ~/.config/opencode/config.json
     opencode auth list
-    opencode auth list|grep ${OPENAI_API_PROVIDER:-Github Copilot}
+    opencode auth list|grep ${OPENAI_API_PROVIDER:-GitHub Copilot}
     opencode run -m "${OPENAI_API_PROVIDER:-github-copilot}/${OPENAI_API_MODEL:-claude-sonnet-4}" --print-logs Hi
 
 # use `opencode auth login` to log into Github Copilot
