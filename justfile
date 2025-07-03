@@ -123,10 +123,10 @@ unprep-push:
         echo "ℹ️  No pre-push hook found - nothing to remove"
     fi
 
-install-shellcheck:
-    brew install shellcheck
+prep-shellcheck:
+    which shellcheck || brew install shellcheck
 
-run-shellcheck:
+shellcheck:
     shellcheck *.sh
 
 ## Enrich contents
