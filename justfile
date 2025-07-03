@@ -406,6 +406,9 @@ prep-fuse:
     brew install fuse-t
     brew install fuse-t-sshfs
 
+prep-vera:
+    brew install --cask veracrypt
+
 prep-rest:
     #!/usr/bin/env zsh
     # which restic || brew install restic
