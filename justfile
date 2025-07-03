@@ -269,7 +269,7 @@ run-rp:
 
 # Copy and paste to run, because we have no just at this point
 # Next, run: just prep-act
-bootstrp-ubuntu:
+bootstrap-ubuntu:
     #!/usr/bin/env bash
     apt update
     apt install -y build-essential curl file git sudo
