@@ -129,6 +129,19 @@ prep-shellcheck:
 shellcheck:
     shellcheck *.sh
 
+proselint FILE="":
+    #!/usr/bin/env zsh
+    # Fuzzy find FILE and pass it to proselint
+    if [[ -n "{{FILE}}" ]]; then
+        uvx proselint "{{FILE}}"
+    else
+        local file
+        file=$(fzf --height 40% --reverse --preview 'bat --color=always {}' --preview-window right:60%)
+        if [[ -n "$file" ]]; then
+            uvx proselint "$file"
+        fi
+    fi
+
 ## Enrich contents
 
 # Inspired by https://github.com/Ranchero-Software/NetNewsWire/issues/978#issuecomment-1320911427
