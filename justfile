@@ -77,6 +77,52 @@ envs:
 chk:
     ./chk.sh
 
+pre-push:
+    just chk
+
+# Set up Git pre-push hook to run 'just pre-push' before every push
+# This will block pushes if checks fail - run 'just unprep-push' to disable
+prep-push:
+    #!/usr/bin/env bash
+    echo "Setting up Git pre-push hook..."
+    echo "This will run 'just pre-push' before every 'git push'"
+    echo "If checks fail, the push will be blocked"
+    echo "Run 'just unprep-push' to remove this hook if needed"
+    echo ""
+    
+    cat > .git/hooks/pre-push << 'EOF'
+    #!/bin/sh
+    
+    # Git pre-push hook to run just pre-push
+    # This will run before every git push
+    
+    echo "Running pre-push checks..."
+    
+    # Run just pre-push
+    if ! just pre-push; then
+        echo "Pre-push checks failed. Push aborted."
+        exit 1
+    fi
+    
+    echo "Pre-push checks passed."
+    exit 0
+    EOF
+    
+    chmod +x .git/hooks/pre-push
+    echo "✅ Git pre-push hook installed successfully"
+    echo "Now 'git push' will automatically run 'just pre-push' first"
+
+# Remove Git pre-push hook
+unprep-push:
+    #!/usr/bin/env bash
+    if [ -f .git/hooks/pre-push ]; then
+        rm .git/hooks/pre-push
+        echo "✅ Git pre-push hook removed"
+        echo "Pushes will no longer run automatic checks"
+    else
+        echo "ℹ️  No pre-push hook found - nothing to remove"
+    fi
+
 install-shellcheck:
     brew install shellcheck
 
