@@ -174,6 +174,12 @@ try-astro:
         '
     fi
 
+## Zed editor
+
+prep-zed:
+    #!/usr/bin/env zsh
+    [[ -f /Applications/Zed.app/Contents/MacOS/zed ]] || brew install --cask zed@preview
+
 ## Language Servers
 
 prep-lsp:
