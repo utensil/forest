@@ -311,9 +311,8 @@ prep-def:
 prep-ubuntu:
     sudo apt update
     sudo apt install -y build-essential curl file git
-    yes|/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-    just add-zrc 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"'
-    just add-brc 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"'
+    yes|sudo /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    just prep-rc
     sudo apt install -y zsh
 
 prep-lvim-in-zsh:
@@ -326,7 +325,7 @@ mk-rp:
 run-rp:
     sudo docker exec -it -w /root/projects/forest rp-dev bash
 
-# Copy and paste to run, because we have no just at this point
+# Copy and paste to run as root, because we have no just at this point
 # Next, run: just prep-act
 bootstrap-ubuntu:
     #!/usr/bin/env bash
@@ -334,8 +333,8 @@ bootstrap-ubuntu:
     apt install -y build-essential curl file git sudo
     wget -qO - 'https://proget.makedeb.org/debian-feeds/prebuilt-mpr.pub' | gpg --dearmor | sudo tee /usr/share/keyrings/prebuilt-mpr-archive-keyring.gpg 1> /dev/null
     echo "deb [arch=all,$(dpkg --print-architecture) signed-by=/usr/share/keyrings/prebuilt-mpr-archive-keyring.gpg] https://proget.makedeb.org prebuilt-mpr $(lsb_release -cs)" | sudo tee /etc/apt/sources.list.d/prebuilt-mpr.list
-    sudo apt update
-    sudo apt install -y just
+    apt update
+    apt install -y just
 
 ## Remote
 
@@ -368,6 +367,10 @@ lv-remote PROJ="forest" HOST="0.0.0.0" PORT="1214":
 lv-local PROJ="forest" HOST="localhost" PORT="1214":
     #!/usr/bin/env zsh
     just lvim {{PROJ}} --server {{HOST}}:{{PORT}} --remote-ui
+
+prep-ts:
+    # brew install tailscale
+    brew install homebrew/cask/tailscale-app
 
 prep-ts-ssh:
     go install github.com/derekg/ts-ssh@main
