@@ -321,6 +321,15 @@ prep-ubuntu:
     just prep-rc
     sudo apt install -y zsh
 
+prep-user USER:
+    #!/usr/bin/env bash
+    set -e
+    useradd --shell "`which bash`" {{USER}}
+    mkdir ~{{USER}}
+    chown -R {{USER}}.{{USER}} ~{{USER}}
+    passwd {{USER}}
+    echo "{{USER}} ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+
 prep-lvim-in-zsh:
     #!/usr/bin/env zsh
     just prep-lvim
