@@ -309,9 +309,15 @@ prep-def:
     sudo pmset -b sleep 5
 
 prep-ubuntu:
+    #!/usr/bin/env bash
     sudo apt update
     sudo apt install -y build-essential curl file git
-    yes|sudo /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    # this fix weird issue that $USER is root, no matter I use `su -` or ssh with non-root user
+    # causing: /home/linuxbrew/.linuxbrew/Homebrew/.git: Permission denied
+    export USER=`whoami`
+    sudo rm -rf /home/linuxbrew
+    rm -rf ~/.cache/Homebrew
+    yes|/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
     just prep-rc
     sudo apt install -y zsh
 
