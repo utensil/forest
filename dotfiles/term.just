@@ -50,12 +50,6 @@ prep-term-fancy:
     which fastfetch || brew install fastfetch
     which tty-clock || brew install tty-clock
 
-prep-term-nvim:
-    which nvim || brew install neovim
-    which luarocks || brew install luarocks
-    # luarocks --local --lua-version=5.1 install magick
-    which stylua || brew install stylua
-
 prep-media:
     which magick ||brew install imagemagick
     which ffmpeg || brew install ffmpeg

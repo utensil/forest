@@ -58,8 +58,10 @@ prep-base16-helix:
 ## Neovim
 
 prep-nvim:
-    #!/usr/bin/env bash
     which nvim || brew install neovim
+    which luarocks || brew install luarocks
+    # luarocks --local --lua-version=5.1 install magick
+    which stylua || brew install stylua
 
 sync-nvim:
     #!/usr/bin/env bash
