@@ -7,7 +7,7 @@ import 'term.just'
 prep-hx:
     which hx || brew install helix
     rm -rf ~/.config/helix || true
-    mkdir ~/.config
+    mkdir -p ~/.config
     ln -s {{justfile_directory()}}/dotfiles/.config/helix ~/.config/helix
     just prep-base16-helix
     just sync-hx
