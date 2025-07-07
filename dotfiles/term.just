@@ -280,6 +280,7 @@ init-jj PROJ="forest" *PARAMS="":
     jj config set --user user.name "$(git config --get user.name)"
     jj config set --user user.email "$(git config --get user.email)"
     jj config set --user git.auto-local-bookmark true
+    jj config list
     # jj describe --reset-author --no-edit
 
 ## Languages
