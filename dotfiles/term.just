@@ -262,8 +262,24 @@ date: prep-date
 prep-gitlog:
     which serie || brew install lusingander/tap/serie
 
+# ? for help
+# <Tab>  Open refs list
+# <Alt-Down> <Alt-j>  Go to parent
+# Vim-like keybindings
 gitlog:
     serie
+
+prep-jj:
+    which jj || brew install jj
+    which lazyjj || brew install lazyjj
+
+init-jj PROJ="forest" *PARAMS="":
+    #!/usr/bin/env zsh
+    cd ~/projects/{{PROJ}}
+    jj status || jj git init --colocate
+    jj config set --user user.name "$(git config --get user.name)"
+    jj config set --user user.email "$(git config --get user.email)"
+    # jj describe --reset-author --no-edit
 
 ## Languages
 
