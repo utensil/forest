@@ -269,43 +269,43 @@ prep-gitlog:
 gitlog:
     serie
 
- # # Frequently used jj command alias
- #
- # ## Edits
- #
- # l - log (there is always a dirty change @, could be empty)
- # n <revset> - create a new change based on <revset> which could be a short change id, a bookmark, and defaults to @ (working copy)
- # ci - use builtin diff editor to choose what to commit, use text editor to edit commit message
- # cim <message> / cm <message> - variants
- # d - the diff of current change
- # dr <revset> - the diff of revision <revset>
- # e <revset> - edit any <revset> after commit
- # 
- # after edit, just go anywhere else (with e or n), the changes will be commited; or an explicit `jj commit` will do
- # 
- # ## Typical workflow with GitHub
- #
- # (inspired by https://jj-vcs.github.io/jj/latest/github/ )
- #
- # ### named branch
- # 
- # bs <bookmark> -r <revset> - move bookmark <bookmark> to <revset>
- # psb <bookmark> - push bookmark to remote branch named <bookmark>
- # gh pr create --head <bookmark> - create a PR from <bookmark> to the default branch
- # git fetch - will update local bookmark from remote branch
- #
- # ### unamed branch
- # 
- # pscw - push changes of working copy to remote branch named jj/<changeid>
- # prow - open working copy as a PR
- #
- # ### History cleanup
- # 
- # undo - undo last jj operation when messed up
- # rebase -s <src> -d <dst> - rebase <src> onto <dst>
- # jj sqar <revset> - squash <revset> into its parent
- # jj squash --from <src> --to <dst> - squash <src> into <dst>
- #
+# # Frequently used jj command alias
+#
+# ## Edits
+#
+# l - log (there is always a dirty change @, could be empty)
+# n <revset> - create a new change based on <revset> which could be a short change id, a bookmark, and defaults to @ (working copy)
+# ci - use builtin diff editor to choose what to commit, use text editor to edit commit message
+# cim <message> / cm <message> - variants
+# d - the diff of current change
+# dr <revset> - the diff of revision <revset>
+# e <revset> - edit any <revset> after commit
+# (after edit, just go anywhere else (with e or n), the changes will be commited; or an explicit `jj commit` will do)
+# 
+# ## Typical workflow with GitHub
+#
+# (inspired by https://jj-vcs.github.io/jj/latest/github/ )
+#
+# ### named branch
+# 
+# bs <bookmark> -r <revset> - move bookmark <bookmark> to <revset>
+# psb <bookmark> - push bookmark to remote branch named <bookmark>
+# gh pr create --head <bookmark> - create a PR from <bookmark> to the default branch
+# git fetch - will update local bookmark from remote branch
+#
+# ### unamed branch
+# 
+# pscw - push changes of working copy to remote branch named jj/<changeid>
+# prow - open working copy as a PR
+#
+# ### History cleanup
+# 
+# undo - undo last jj operation when messed up
+# rebase -s <src> -d <dst> - rebase <src> onto <dst>
+# jj sqar <revset> - squash <revset> into its parent
+# jj squash --from <src> --to <dst> - squash <src> into <dst>
+#
+#
 prep-jj:
     which jj || brew install jj
     which lazyjj || brew install lazyjj
@@ -319,7 +319,6 @@ init-jj PROJ="forest" *PARAMS="":
     #!/usr/bin/env zsh
     cd ~/projects/{{PROJ}}
     jj status || jj git init --colocate
-    # jj describe --reset-author --no-edit
 
 ## Languages
 
