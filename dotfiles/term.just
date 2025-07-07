@@ -269,6 +269,17 @@ prep-gitlog:
 gitlog:
     serie
 
+# Frequently used jj command alias
+#
+# l - log (there is always a dirty change @, could be empty)
+# n <revset> - create a new change based on <revset> which could ba a short change id, a bookmark, and defaults to @ (working copy)
+# ci - use builtin diff editor to choose what to commit, use text editor to edit commit message
+# cim <message> / cm <message> - variants
+# dr <revset> - the diff of revision <revset>
+# pscw - push changes of working copy (as jj/changeid)
+# prow - open working copy as a PR
+# bs <bookmark> -r <revset> - move bookmark <bookmark> to <revset>
+# psb <bookmark> - push bookmark
 prep-jj:
     which jj || brew install jj
     which lazyjj || brew install lazyjj
@@ -282,7 +293,6 @@ init-jj PROJ="forest" *PARAMS="":
     #!/usr/bin/env zsh
     cd ~/projects/{{PROJ}}
     jj status || jj git init --colocate
-    # jj describe --reset-author --no-edit
 
 ## Languages
 
