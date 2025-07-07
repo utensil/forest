@@ -272,15 +272,16 @@ gitlog:
 prep-jj:
     which jj || brew install jj
     which lazyjj || brew install lazyjj
+    mkdir -p ~/.config/jj
+    cp -f dotfiles/.config/jj/config.toml  ~/.config/jj/config.toml
+    jj config set --user user.name "$(git config --get user.name)"
+    jj config set --user user.email "$(git config --get user.email)"
+    jj config list --no-pager
 
 init-jj PROJ="forest" *PARAMS="":
     #!/usr/bin/env zsh
     cd ~/projects/{{PROJ}}
     jj status || jj git init --colocate
-    jj config set --user user.name "$(git config --get user.name)"
-    jj config set --user user.email "$(git config --get user.email)"
-    jj config set --user git.auto-local-bookmark true
-    jj config list
     # jj describe --reset-author --no-edit
 
 ## Languages
