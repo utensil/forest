@@ -7,6 +7,7 @@ import 'term.just'
 prep-hx:
     which hx || brew install helix
     rm -rf ~/.config/helix || true
+    mkdir -p ~/.config
     ln -s {{justfile_directory()}}/dotfiles/.config/helix ~/.config/helix
     just prep-base16-helix
     just sync-hx
@@ -58,8 +59,10 @@ prep-base16-helix:
 ## Neovim
 
 prep-nvim:
-    #!/usr/bin/env bash
     which nvim || brew install neovim
+    which luarocks || brew install luarocks
+    # luarocks --local --lua-version=5.1 install magick
+    which stylua || brew install stylua
 
 sync-nvim:
     #!/usr/bin/env bash

@@ -14,49 +14,56 @@ export TERM := "xterm-256color"
 # TODO: break down to essentials and extra pack
 
 prep-term:
-    which zsh || brew install zsh
+    # Basic CLI
     which wget || brew install wget
-    which nvim || brew install neovim
+    which nproc || brew install coreutils
+    # Shell
+    which zsh || brew install zsh
+    which starship || brew install starship
+    which zoxide || brew install zoxide
+    # Git
     which lazygit || brew install lazygit
-    which yq || brew install yq
     which gh || brew install gh
     @echo "Remember to run: gh auth login"
     @echo "And possibly: gh auth refresh -s read:project"
-    which fzf || brew install fzf
-    which yazi || brew install yazi
-    which nnn || brew install nnn
-    which stylua || brew install stylua
-    which sd || brew install sd
+    # File
+    which duf || brew install duf
     which dua || brew install dua-cli
     which bat || brew install bat
     which eza || brew install eza
-    which rg || brew install ripgrep
     which rip || brew install rm-improved
-    which luarocks || brew install luarocks
-    # luarocks --local --lua-version=5.1 install magick
-    which starship || brew install starship
-    which zoxide || brew install zoxide
-    which magick ||brew install imagemagick
-    # just add-zrc 'eval "$(zoxide init zsh)"'
-    # just add-zrc 'eval "$(starship init zsh)"'
-    which progress || brew install progress
+    which yazi || brew install yazi
     which 7zz || brew install sevenzip
-    which ffmpeg || brew install ffmpeg
-    which tokei || brew install tokei
-    # awrit installation usually fails with some warning
-    which awrit || brew install chase/tap/awrit || true
-    which mpv || brew install mpv
-    which cmake || brew install cmake
-    which pkg-config || brew install pkg-config
-    which nproc || brew install coreutils
-    which fastfetch || brew install fastfetch
-    which tty-clock || brew install tty-clock
-    which duf || brew install duf
-    which jq || brew install jq
-    which sq || brew install sq
-    which fex || (curl -sSL https://raw.githubusercontent.com/18alantom/fex/master/install.sh | bash)
+    # Search & replace
+    which fzf || brew install fzf
+    which rg || brew install ripgrep
+    which sd || brew install sd
     # which serpl || brew install serpl
     which scooter || brew install scooter
+    # Code
+    which cmake || brew install cmake
+    which pkg-config || brew install pkg-config
+    which tokei || brew install tokei
+    which jq || brew install jq
+
+prep-term-fancy:
+    which fastfetch || brew install fastfetch
+    which tty-clock || brew install tty-clock
+
+prep-media:
+    which magick ||brew install imagemagick
+    which ffmpeg || brew install ffmpeg
+    which mpv || brew install mpv
+
+# they were tried but seldom used
+prep-term-seldom:
+    which yq || brew install yq
+    which nnn || brew install nnn
+    which progress || brew install progress
+    which sq || brew install sq
+    which fex || (curl -sSL https://raw.githubusercontent.com/18alantom/fex/master/install.sh | bash)
+    # awrit installation usually fails with some warning
+    which awrit || brew install chase/tap/awrit || true
 
 prep-monit:
     #!/usr/bin/env zsh

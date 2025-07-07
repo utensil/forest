@@ -232,6 +232,9 @@ prep-proxy:
     echo "HTTP_PROXY=$proxy_url" >> .env
     echo "HTTPS_PROXY=$proxy_url" >> .env
 
+prep-proxy-ui:
+    docker run --rm -it -p 5080:80 dockerproxy.net/haishanh/yacd
+
 # see https://macos-defaults.com/ and https://github.com/Swiss-Mac-User/macOS-scripted-setup and https://github.com/mathiasbynens/dotfiles/blob/main/.macos
 prep-def:
     #!/usr/bin/env zsh
@@ -309,12 +312,26 @@ prep-def:
     sudo pmset -b sleep 5
 
 prep-ubuntu:
+    #!/usr/bin/env bash
     sudo apt update
     sudo apt install -y build-essential curl file git
+    # this fix weird issue that $USER is root, no matter I use `su -` or ssh with non-root user
+    # causing: /home/linuxbrew/.linuxbrew/Homebrew/.git: Permission denied
+    export USER=`whoami`
+    sudo rm -rf /home/linuxbrew
+    rm -rf ~/.cache/Homebrew
     yes|/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-    just add-zrc 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"'
-    just add-brc 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"'
+    just prep-rc
     sudo apt install -y zsh
+
+prep-user USER:
+    #!/usr/bin/env bash
+    set -e
+    useradd --shell "`which bash`" {{USER}}
+    mkdir ~{{USER}}
+    chown -R {{USER}}.{{USER}} ~{{USER}}
+    passwd {{USER}}
+    echo "{{USER}} ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
 prep-lvim-in-zsh:
     #!/usr/bin/env zsh
@@ -326,7 +343,7 @@ mk-rp:
 run-rp:
     sudo docker exec -it -w /root/projects/forest rp-dev bash
 
-# Copy and paste to run, because we have no just at this point
+# Copy and paste to run as root, because we have no just at this point
 # Next, run: just prep-act
 bootstrap-ubuntu:
     #!/usr/bin/env bash
@@ -334,8 +351,8 @@ bootstrap-ubuntu:
     apt install -y build-essential curl file git sudo
     wget -qO - 'https://proget.makedeb.org/debian-feeds/prebuilt-mpr.pub' | gpg --dearmor | sudo tee /usr/share/keyrings/prebuilt-mpr-archive-keyring.gpg 1> /dev/null
     echo "deb [arch=all,$(dpkg --print-architecture) signed-by=/usr/share/keyrings/prebuilt-mpr-archive-keyring.gpg] https://proget.makedeb.org prebuilt-mpr $(lsb_release -cs)" | sudo tee /etc/apt/sources.list.d/prebuilt-mpr.list
-    sudo apt update
-    sudo apt install -y just
+    apt update
+    apt install -y just
 
 ## Remote
 
@@ -368,6 +385,10 @@ lv-remote PROJ="forest" HOST="0.0.0.0" PORT="1214":
 lv-local PROJ="forest" HOST="localhost" PORT="1214":
     #!/usr/bin/env zsh
     just lvim {{PROJ}} --server {{HOST}}:{{PORT}} --remote-ui
+
+prep-ts:
+    # brew install tailscale
+    brew install homebrew/cask/tailscale-app
 
 prep-ts-ssh:
     go install github.com/derekg/ts-ssh@main
