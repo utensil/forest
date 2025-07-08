@@ -25,7 +25,7 @@ function show_lize_result {
     if [ $? -ne 0 ]; then
         # echo a red "Failed"
         echo -e "\033[0;31mFailed\033[0m"
-        tail -n 50 build/$1.log
+        tail -n 50 "build/$1.log"
         echo "open build/$1.log to see the log."
 
     else
@@ -44,18 +44,18 @@ function prep_wasm {
     hash=$3
     lib_path=${4:-$lib_name}
     if [ ! -d "lib/$lib_name" ]; then
-        git clone --depth 1 $url lib/$lib_name
+        git clone --depth 1 "$url" "lib/$lib_name"
         if [ -n "$hash" ]; then
-            (cd lib/$lib_name && git fetch --depth 1 origin $hash && git checkout $hash)
+            (cd "lib/$lib_name" && git fetch --depth 1 origin "$hash" && git checkout "$hash")
         fi
     fi
 
     # only run wasm-pack build in CI or for `dev.sh`, so other people would not need Rust dependencies
     if [ -n "$CI" ] || [ -n "$UTS_DEV" ]; then
         # Check if pkg directory exists and is not empty
-        if [ ! -d "lib/$lib_path/pkg" ] || [ -z "$(ls -A lib/$lib_path/pkg)" ]; then
+        if [ ! -d "lib/$lib_path/pkg" ] || [ -z "$(ls -A "lib/$lib_path/pkg")" ]; then
             echo "Building WASM package for $lib_name..."
-            (cd lib/$lib_path && bunx wasm-pack -v build --target web --release . --out-dir pkg || echo -e "\033[0;31mwasm-pack build failed\033[0m")
+            (cd "lib/$lib_path" && bunx wasm-pack -v build --target web --release . --out-dir pkg || echo -e "\033[0;31mwasm-pack build failed\033[0m")
         else
             echo "Using cached WASM package for $lib_name"
         fi
@@ -64,7 +64,7 @@ function prep_wasm {
         echo "🟡 Skipping wasm-pack build for $lib_name, some notes that used Rust and WASM might not work as epected."
     fi
 
-    cp lib/$lib_path/pkg/*.wasm output/
+    cp "lib/$lib_path"/pkg/*.wasm output/
 }
 
 function bun_build {
@@ -85,7 +85,7 @@ function bun_build {
         # if the file extension is .css
         if [[ $FILE == *".css" ]]; then
             echo "🚀 lightningcss"
-            just css bun/$FILE
+            just css "bun/$FILE"
             # check result
             # EXIT_CODE=$?
             # if [ $EXIT_CODE -ne 0 ]; then
@@ -93,7 +93,7 @@ function bun_build {
             #     exit $EXIT_CODE
             # fi
         else
-            just js bun/$FILE
+            just js "bun/$FILE"
             # bun build bun/$FILE --outdir output
         fi
     done

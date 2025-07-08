@@ -7,6 +7,7 @@ import 'term.just'
 prep-hx:
     which hx || brew install helix
     rm -rf ~/.config/helix || true
+    mkdir -p ~/.config
     ln -s {{justfile_directory()}}/dotfiles/.config/helix ~/.config/helix
     just prep-base16-helix
     just sync-hx
@@ -58,8 +59,10 @@ prep-base16-helix:
 ## Neovim
 
 prep-nvim:
-    #!/usr/bin/env bash
     which nvim || brew install neovim
+    which luarocks || brew install luarocks
+    # luarocks --local --lua-version=5.1 install magick
+    which stylua || brew install stylua
 
 sync-nvim:
     #!/usr/bin/env bash
@@ -174,6 +177,12 @@ try-astro:
         '
     fi
 
+## Zed editor
+
+prep-zed:
+    #!/usr/bin/env zsh
+    [[ -f /Applications/Zed.app/Contents/MacOS/zed ]] || brew install --cask zed@preview
+
 ## Language Servers
 
 prep-lsp:
@@ -183,6 +192,7 @@ prep-lsp:
     which cargo || just prep-rust
     which rust-analyzer || (rustup component add rust-src; rustup component add rust-analyzer)
     which zls || echo "zls not installed, visit https://zigtools.org/zls/install/"
+    which glsl_analyzer || ( cd /tmp && wget https://github.com/nolanderc/glsl_analyzer/releases/download/v1.6.0/aarch64-macos.zip && unzip aarch64-macos.zip && sudo mv bin/glsl_analyzer /usr/local/bin/)
 
 # https://github.com/DJAndries/llmvm/tree/master/frontends/codeassist
 prep-lsp-lv:

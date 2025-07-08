@@ -1,14 +1,33 @@
 
-prep-llms:
-    which aichat || brew install aichat
-    which assembllm || (brew tap bradyjoslin/assembllm && brew install bradyjoslin/assembllm/assembllm)
-    which cortex || echo "Visit https://cortex.so/docs/installation to download and install cortex"
+# prep-llms:
+#     which aichat || brew install aichat
+#     which assembllm || (brew tap bradyjoslin/assembllm && brew install bradyjoslin/assembllm/assembllm)
+#     which cortex || echo "Visit https://cortex.so/docs/installation to download and install cortex"
 
+prep-aichat:
+    #!/usr/bin/env zsh
+    which aichat || brew install aichat
+    mkdir -p "$HOME/Library/Application Support/aichat/"
+    cat > "$HOME/Library/Application Support/aichat/config.yaml" << EOF
+    model: $OPENAI_API_PROVIDER
+    clients:
+    - type: openai-compatible
+      name: $OPENAI_API_PROVIDER
+      api_base: $OPENAI_API_BASE
+      api_key: $OPENAI_API_KEY
+      models:
+        - name: $OPENAI_API_MODEL
+       
+    EOF
+    cat "$HOME/Library/Application Support/aichat/config.yaml"
 
 aichat *PARAMS: sync-aichat
     aichat {{PARAMS}}
 
+# Deprecated:
 # In Helix, select some code, press `|` then type `aicode`
+# Instead:
+# In Helix, select some code, press `|` then type `aichat -c` optionally with extra `--prompt` as system prompt
 prep-aicode:
     sudo cp -f aicode /usr/local/bin/
 
@@ -27,6 +46,10 @@ prep-aider:
 sync-aider:
     cp -f aider /usr/local/bin || sudo cp -f aider /usr/local/bin
 
+todo:
+    #!/usr/bin/env zsh
+    cat trees/uts-0018.tree |aichat --prompt "randomly suggest 3 small TODOs that I was interested to read or I intend to try"
+
 # just mcp search
 # just mcp install XXX
 # just mcp list
@@ -36,7 +59,7 @@ mcp *PARAMS="":
     #!/usr/bin/env bash
     mcpm-aider {{PARAMS}}
 
-aider PROJ="forest" *PARAMS="": sync-aider
+aider PROJ="forest" *PARAMS="": # sync-aider
     #!/usr/bin/env zsh
     cd ~/projects/{{PROJ}} && aider {{PARAMS}}
 
@@ -413,6 +436,7 @@ prep-cc:
     #!/usr/bin/env zsh
     which claude || npm install -g @anthropic-ai/claude-code
     which ccr || npm install -g @musistudio/claude-code-router
+    mkdir -p ~/.claude-code-router
     cat > ~/.claude-code-router/config.json << EOF 
     {
         "log": true,
@@ -421,6 +445,7 @@ prep-cc:
         "OPENAI_MODEL": "$OPENAI_API_MODEL"
     }
     EOF
+    mkdir -p ~/.claude
     # https://docs.anthropic.com/en/docs/claude-code/settings
     cat > ~/.claude/settings.json << EOF
     {
@@ -431,7 +456,15 @@ prep-cc:
           "WebFetch",
           "WebSearch",
           "Edit",
-          "MultiEdit"
+          "MultiEdit",
+          "mcp__container-use__environment_checkpoint",
+          "mcp__container-use__environment_file_delete",
+          "mcp__container-use__environment_file_list",
+          "mcp__container-use__environment_file_read",
+          "mcp__container-use__environment_file_write",
+          "mcp__container-use__environment_open",
+          "mcp__container-use__environment_run_cmd",
+          "mcp__container-use__environment_update"
         ],
         "deny": [
             "Read(.env)"
@@ -440,10 +473,13 @@ prep-cc:
     }
     EOF
 
+cc-mcp-reset:
+    claude mcp list|grep -v -F 'No MCP servers'|awk -F":" '{print $1}'|xargs -n 1 claude mcp remove
+
 prep-cc-mcp PROJ="forest":
     #!/usr/bin/env zsh
     cd ~/projects/{{PROJ}}
-    claude mcp list|grep -v -F 'No MCP servers'|awk -F":" '{print $1}'|xargs -n 1 claude mcp remove
+    just cc-mcp-reset
     # Add MCP servers from goose config
     claude mcp add --transport stdio playwright-mcp -- npx -y @executeautomation/playwright-mcp-server
     # claude mcp add --transport stdio memory-mcp -- npx -y @modelcontextprotocol/server-memory
@@ -457,6 +493,15 @@ prep-cc-mcp PROJ="forest":
     # claude mcp add --transport stdio deepwiki-mcp -e DEEPWIKI_REQUEST_TIMEOUT=60000 -- npx -y mcp-deepwiki@latest
     # claude mcp add serena -- uvx --from git+https://github.com/oraios/serena serena-mcp-server --context ide-assistant # --project $(pwd)
 
+prep-cu:
+    brew install dagger/tap/container-use
+
+prep-cc-cu:
+    #!/usr/bin/env zsh
+    claude mcp add --scope user container-use -- `which cu` stdio
+    # curl https://raw.githubusercontent.com/dagger/container-use/main/rules/agent.md >> CLAUDE.md
+    # claude --allowedTools mcp__container-use__environment_checkpoint,mcp__container-use__environment_file_delete,mcp__container-use__environment_file_list,mcp__container-use__environment_file_read,mcp__container-use__environment_file_write,mcp__container-use__environment_open,mcp__container-use__environment_run_cmd,mcp__container-use__environment_update
+    
 # just cc forest --debug
 cc PROJ="forest" *PARAMS="":
     #!/usr/bin/env zsh
@@ -534,7 +579,7 @@ check-oc:
     set -e
     cat ~/.config/opencode/config.json
     opencode auth list
-    opencode auth list|grep ${OPENAI_API_PROVIDER:-Github Copilot}
+    opencode auth list|grep ${OPENAI_API_PROVIDER:-GitHub Copilot}
     opencode run -m "${OPENAI_API_PROVIDER:-github-copilot}/${OPENAI_API_MODEL:-claude-sonnet-4}" --print-logs Hi
 
 # use `opencode auth login` to log into Github Copilot
@@ -542,3 +587,6 @@ check-oc:
 
 prep-uz:
     which uzi || go install github.com/devflowinc/uzi@latest
+
+prep-aq:
+    which q || brew install amazon-q

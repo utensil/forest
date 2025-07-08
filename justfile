@@ -92,23 +92,82 @@ envs:
 chk:
     ./chk.sh
 
-install-shellcheck:
-    brew install shellcheck
+pre-push:
+    just chk
 
-run-shellcheck:
+# Set up Git pre-push hook to run 'just pre-push' before every push
+# This will block pushes if checks fail - run 'just unprep-push' to disable
+prep-push:
+    #!/usr/bin/env bash
+    echo "Setting up Git pre-push hook..."
+    echo "This will run 'just pre-push' before every 'git push'"
+    echo "If checks fail, the push will be blocked"
+    echo "Run 'just unprep-push' to remove this hook if needed"
+    echo ""
+    
+    cat > .git/hooks/pre-push << 'EOF'
+    #!/bin/sh
+    
+    # Git pre-push hook to run just pre-push
+    # This will run before every git push
+    
+    echo "Running pre-push checks..."
+    
+    # Run just pre-push
+    if ! just pre-push; then
+        echo "Pre-push checks failed. Push aborted."
+        exit 1
+    fi
+    
+    echo "Pre-push checks passed."
+    exit 0
+    EOF
+    
+    chmod +x .git/hooks/pre-push
+    echo "✅ Git pre-push hook installed successfully"
+    echo "Now 'git push' will automatically run 'just pre-push' first"
+
+# Remove Git pre-push hook
+unprep-push:
+    #!/usr/bin/env bash
+    if [ -f .git/hooks/pre-push ]; then
+        rm .git/hooks/pre-push
+        echo "✅ Git pre-push hook removed"
+        echo "Pushes will no longer run automatic checks"
+    else
+        echo "ℹ️  No pre-push hook found - nothing to remove"
+    fi
+
+prep-shellcheck:
+    which shellcheck || brew install shellcheck
+
+shellcheck:
     shellcheck *.sh
+
+proselint FILE="":
+    #!/usr/bin/env zsh
+    # Fuzzy find FILE and pass it to proselint
+    if [[ -n "{{FILE}}" ]]; then
+        uvx proselint "{{FILE}}"
+    else
+        local file
+        file=$(fzf --height 40% --reverse --preview 'bat --color=always {}' --preview-window right:60%)
+        if [[ -n "$file" ]]; then
+            uvx proselint "$file"
+        fi
+    fi
 
 ## Enrich contents
 
 # Inspired by https://github.com/Ranchero-Software/NetNewsWire/issues/978#issuecomment-1320911427
-rss-stars:
+rss-stars *PARAMS:
     #!/usr/bin/env zsh
     cd ~/Library/Containers/com.ranchero.NetNewsWire-Evergreen/Data/Library/Application\ Support/NetNewsWire/Accounts/2_iCloud
     # get a JSON of all the starred items with only title, url, externalURL, datePublished
     sqlite3 DB.sqlite3 '.mode json' 'select a.*, s.* from articles a join statuses s on a.articleID = s.articleID where s.starred = 1 order by s.dateArrived' |jq -r '.[]|{title, url, externalURL, datePublished, dateArrived, uniqueID}'
 
-stars:
-    just rss-stars|./stars.py
+stars *PARAMS="--days 7":
+    just rss-stars {{PARAMS}}|./stars.py {{PARAMS}}
 
 til:
     ./til.py --reset && ./til.py
@@ -188,6 +247,9 @@ prep-proxy:
     echo "HTTP_PROXY=$proxy_url" >> .env
     echo "HTTPS_PROXY=$proxy_url" >> .env
 
+prep-proxy-ui:
+    docker run --rm -it -p 5080:80 dockerproxy.net/haishanh/yacd
+
 # see https://macos-defaults.com/ and https://github.com/Swiss-Mac-User/macOS-scripted-setup and https://github.com/mathiasbynens/dotfiles/blob/main/.macos
 prep-def:
     #!/usr/bin/env zsh
@@ -265,12 +327,26 @@ prep-def:
     sudo pmset -b sleep 5
 
 prep-ubuntu:
+    #!/usr/bin/env bash
     sudo apt update
     sudo apt install -y build-essential curl file git
+    # this fix weird issue that $USER is root, no matter I use `su -` or ssh with non-root user
+    # causing: /home/linuxbrew/.linuxbrew/Homebrew/.git: Permission denied
+    export USER=`whoami`
+    sudo rm -rf /home/linuxbrew
+    rm -rf ~/.cache/Homebrew
     yes|/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-    just add-zrc 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"'
-    just add-brc 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"'
+    just prep-rc
     sudo apt install -y zsh
+
+prep-user USER:
+    #!/usr/bin/env bash
+    set -e
+    useradd --shell "`which bash`" {{USER}}
+    mkdir ~{{USER}}
+    chown -R {{USER}}.{{USER}} ~{{USER}}
+    passwd {{USER}}
+    echo "{{USER}} ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
 prep-lvim-in-zsh:
     #!/usr/bin/env zsh
@@ -282,16 +358,16 @@ mk-rp:
 run-rp:
     sudo docker exec -it -w /root/projects/forest rp-dev bash
 
-# Copy and paste to run, because we have no just at this point
+# Copy and paste to run as root, because we have no just at this point
 # Next, run: just prep-act
-bootstrp-ubuntu:
+bootstrap-ubuntu:
     #!/usr/bin/env bash
     apt update
     apt install -y build-essential curl file git sudo
     wget -qO - 'https://proget.makedeb.org/debian-feeds/prebuilt-mpr.pub' | gpg --dearmor | sudo tee /usr/share/keyrings/prebuilt-mpr-archive-keyring.gpg 1> /dev/null
     echo "deb [arch=all,$(dpkg --print-architecture) signed-by=/usr/share/keyrings/prebuilt-mpr-archive-keyring.gpg] https://proget.makedeb.org prebuilt-mpr $(lsb_release -cs)" | sudo tee /etc/apt/sources.list.d/prebuilt-mpr.list
-    sudo apt update
-    sudo apt install -y just
+    apt update
+    apt install -y just
 
 ## Remote
 
@@ -324,6 +400,10 @@ lv-remote PROJ="forest" HOST="0.0.0.0" PORT="1214":
 lv-local PROJ="forest" HOST="localhost" PORT="1214":
     #!/usr/bin/env zsh
     just lvim {{PROJ}} --server {{HOST}}:{{PORT}} --remote-ui
+
+prep-ts:
+    # brew install tailscale
+    brew install homebrew/cask/tailscale-app
 
 prep-ts-ssh:
     go install github.com/derekg/ts-ssh@main
@@ -421,6 +501,9 @@ prep-fuse:
     brew install fuse-t
     brew install fuse-t-sshfs
 
+prep-vera:
+    brew install --cask veracrypt
+
 prep-rest:
     #!/usr/bin/env zsh
     # which restic || brew install restic
@@ -507,7 +590,7 @@ josh WHERE USER REPO DIR:
 ## Notebook
 
 nbview FILE:
-    uvx euporie preview {{FILE}}
+    uvx euporie notebook {{FILE}}
 
 # https://github.com/livebook-dev/livebook#installation
 prep-lb:

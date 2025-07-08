@@ -25,12 +25,25 @@ keybind = super+q=ignore
 ### Fonts
 
 # font-family = FiraCode Nerd Font Mono
-font-family = Maple Mono
+font-family = Maple Mono NF CN
 font-size = 18.0
 font-thicken = true
 # https://font.subf.dev/en/playground/
-# ==> 0 l t g ?
-font-feature = +liga, +dlig, +calt, -zero, -cv01, +cv02, -cv03, -cv04
+# In general, prefer hand written style, or special feeling
+# +calt ==> (already enable by +liga)
+# +zero 0 (dot in zero)
+# -cv01 @$& (cross over) (don't like cv65 &)
+# -cv02 a (no hat)
+# +cv03 i (cute tail) (don't like the cv06 i with no tail)
+# -cv04 l (cute tail)
+# -cv05 g (not the one looks like 8)
+# +cv07 j (no hat)
+# -cv08 r (less stiff)
+# -cv61 ,; (less stiff)
+# +cv62 ? (open question)
+# -cv63 <= (less than or equal to, not left arrow) (don't like cv64 flat equal sign)
+# skip the rest for now
+font-feature = +liga, +dlig, +calt, +zero, -cv01, -cv02, +cv03, -cv04, -cv05, +cv07, -cv08, -cv61, +cv62, -cv63
 bold-is-bright = true
 # font-feature = -liga
 
@@ -69,7 +82,7 @@ macos-option-as-alt = true
 
 ### Window
 
-window-title-font-family=Maple Mono
+window-title-font-family=Maple Mono NF CN
 # no window title bar, just tabs
 macos-titlebar-style=tabs
 # macos-titlebar-style=transparent
@@ -92,6 +105,8 @@ quit-after-last-window-closed = true
 ### Initial session
 
 working-directory = "/Users/utensil/projects/forest"
+# ~ is not working yet, unlike background image
+# working-directory = "~/projects/forest"
 # prefer the default false for now, so I would always have common just tasks available
 # window-inherit-working-directory = true
 
@@ -108,7 +123,6 @@ keybind = global:cmd+grave_accent=toggle_quick_terminal
 # inside-the-matrix.glsl
 # water.glsl
 # galaxy.glsl
+# ~ not working yet
 # custom-shader = "/Users/utensil/projects/ghostty-shaders/galaxy.glsl"
-
-
-
+# custom-shader = "/Users/utensil/projects/shader-playground/shaders/cursor_blaze_lightning_boom.glsl"

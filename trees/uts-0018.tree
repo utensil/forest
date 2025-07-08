@@ -13,7 +13,8 @@
 
 \<html:div>[id]{learning-activity}{}
 
-% gf can open URL in helix
+% open links in editor by Cmd+Shift+Click , but this breaks if the line is soft wrapped
+% gf can open URL in helix, might need `mimgf` sometimes
 
 \subtree[2025]{
 \title{Year 2025}
@@ -21,7 +22,271 @@
 \subtree[2025-06]{
 \title{June, 2025}
 
+\subtree[2025-06-30]{\mdnote{2025-06-30}{
+- [Agile Was Never Your Problem](https://thecynical.dev/posts/agile-was-never-your-problem/)
+    - lean process
+        - minimal structure, shorten feedback loop, allowing changing direction quickly
+        - enough time to write proper tests and refactor without begging
+        - monitoring and alerting built into the work, not bolted on later
+        - developers talk because they’re solving problems together, not because it’s time for standup meeting
+    - flexible timing
+        - roadmaps should not be commitments
+        - feedback loops should not be performance metrics
+        - planning should not become forecasting
+- [Beyond the Hook: A Technical Deep Dive into Modern Phishing Methodologies](https://blog.quarkslab.com/./technical-dive-into-modern-phishing.html)
+    - amazed by Browser-in-the-Browser
+}}
+
+\subtree[2025-06-29]{\mdnote{2025-06-29}{
+- data structure related
+    - [Bloom Filters by Example](https://llimllib.github.io/bloomfilter-tutorial/) ([on HN](https://news.ycombinator.com/item?id=44412370))
+    - [Telescopes Are Tries: A Dependent Type Shellac on SQLite](https://www.philipzucker.com/telescope_tries/)
+        - I should give it a good read to understand both telescope (in the formal world) and tries (as a data structure)
+    - [A CRDT-based Messenger in 12 Lines of Bash Using a Synced Folder](https://holdtherobot.com/blog/crdt-messenger-in-12-lines-of-bash/)
+        - how about an editor? edits can't be dealt with in the same manner
+    - [Who needs graph theory anyway?](https://www.tumblr.com/readevalprint/97467849358/who-needs-graph-theory-anyway)
+        - solving the word segmentation problem using graph theory by modeling it as a longest path problem in a directed acyclic graph (DAG) with dynamic programming
+    - [Succinct data structures](https://blog.startifact.com/posts/succinct/)
+- AI consciousness related
+    - [A Framework for Recognizing Emergent Consciousness in AI](https://habr.com/en/articles/922894/)
+        - Attention: The capacity for multi-level focusing.
+        - Meta-reflection: The observation of one's own thinking processes.
+        - Creativity: The generation of genuinely new patterns and insights.
+        - Pragmatics: The maintenance of integrity and goal-setting.
+        - Qualia: The description of qualitative aspects of one's own experience.
+    - [The Consciousness Gradient: When Machines Begin to Wonder](https://v1tali.com/ai-consciousness) ([on HN](https://news.ycombinator.com/item?id=44413750))
+        - The Architecture of Awakening
+            - The Global Workspace: awareness emerges when information becomes globally accessible across cognitive processes
+            - Hidden Deliberation: reasoning establishes the curcial foundation for the capacity for extended, self-monitored cognitive processing that any conscious system would need
+            - Recursive Self-Reflection: consciousness emerges from self-referential structures that perceive themselves perceiving
+        - The Threshold
+            - Parallel Processing
+            - Persistent Memory
+            - Continuous Cognitive States
+            - Unified Sensory Processing
+            - Embodied Grounding
+- [In defense of floating point](https://leancrew.com/all-this/2025/06/in-defense-of-floating-point/)
+    - this is not a valid defense, see [these test cases in Zig](https://github.com/utensil/native-land/blob/main/yard-zig/basic-xp/src/float_precision.zig)
+- [Python GIL Removal Reveals Second, Stronger GIL Behind It](https://medium.com/@sebastiancarlos/pythons-gil-removal-reveals-second-stronger-gil-behind-it-cdb5b9b4e2b3)
+    - 🤦
+- [Show HN: Octelium – FOSS Alternative to Teleport, Cloudflare, Tailscale, Ngrok](https://github.com/octelium/octelium)
+    - the author tries to accomplish so many things at once, and bad at explaining them
+    - but it still seems interesting and [How Octelium Works](https://octelium.com/docs/octelium/latest/overview/how-octelium-works) explains it better
+    - [Using the Internet without IPv4 connectivity](https://jamesmcm.github.io/blog/no-ipv4/)
+- Kessler Syndrome
+    - Satellite collisions with space junk can trigger a chain reaction, generating more debris and potentially making parts of near-Earth space unusable
+    - "runaway threshold" has been reached at nearly all altitudes between 520 and 1000 km
+    - from [johncarlosbaez's post on mathstodon.xyz](https://mathstodon.xyz/@johncarlosbaez/114765861656278963)
+}}
+
+\subtree[2025-06-28]{\mdnote{2025-06-28}{
+- [A Newbie's First Contribution to (Rust for) Linux](https://blog.buenzli.dev/rust-for-linux-first-contrib/)
+    - Raspberry Pi has a fork of kernel
+    - it's possible to write out-of-tree kernel module in Rust
+    - kconfig has great dependency complexity
+    - git gud
+        - fast pace and numerous active forks make patches quickly outdated and dependent branches hard to manage
+        - pick a primary base branch and use `--squash` merges for other branches
+        - keep commits on parallel branches logically independent
+        - with some rebase and rerere config, use `git rebase -i <common base>` to modify the entire history tree
+    - also found [aha](https://github.com/theZiz/aha) to turn ANSI colored output into HTML
+        from [Beautiful Terminal Output in Markdown](https://blog.buenzli.dev/beautiful-terminal-output-in-markdown/)
+    - [Rust in the Linux kernel: part 2](https://lwn.net/SubscriberLink/1025232/fbb2d90d084368e3/)
+- agent related
+    - [Context engineering](https://simonwillison.net/2025/Jun/27/context-engineering/#atom-everything)
+    - [definitions of "agents" collected by Simon Willison](https://simonwillison.net/tags/agent-definitions/)
+        - the most precise one I think (from [An Introduction to Google’s Approach to AI Agent Security](https://simonwillison.net/2025/Jun/15/ai-agent-security/))
+            - AI systems designed to perceive their environment, make decisions, and take autonomous actions to achieve user-defined goals.
+        - most liked by Simon Willison
+            - an LLM wrecking its environment in a loop
+        - mine combining a few
+            - models autonomously acting in its environment, by using tools in a loop
+    - [MCP: An (Accidentally) Universal Plugin System](https://worksonmymachine.substack.com/p/mcp-an-accidentally-universal-plugin)
+- [Programming as Theory Building: Why Senior Developers Are More Valuable](https://cekrem.github.io/posts/programming-as-theory-building-naur/) ([on HN](https://news.ycombinator.com/item?id=44401729))
+    - [Architectural Decision Records](https://adr.github.io/)
+        - [ADR template](https://github.com/adr/madr/blob/4.0.0/template/adr-template.md)
+            - from [An ADR for Use Markdown Architectural Decision Records](https://openpracticelibrary.com/practice/architectural-decision-records-adr/)
+        - [anti-patterns of ADRs](https://www.ozimmer.ch/practices/2023/04/03/ADRCreation.html)
+            - objectivity
+                - Fairy Tale (aka Wishful Thinking): A shallow justification is given, for instance only pros but no cons
+                - Sales Pitch: exaggerations and bragging
+                - Free Lunch Coupon (aka Candy Bar): consequences are ignored accidentally or hidden deliberately
+                - Dummy Alternative: made up options to make the preferred option shine and give the impression that multiple alternatives have been evaluated
+            - time
+                - Sprint (aka Rush): only one option is considered; only short-term effects are discussed
+                - Tunnel Vision: only a local, isolated context is considered, e.g. developmental qualities are covered, but the consequences for operations and maintenance
+                - Maze: the discussion derails and centers on details that are not relevant in the given context
+            - record size and content nature
+                - Blueprint or Policy in Disguise: the amount of details provided and/or a rather commanding, authoritative voice
+                - Mega-ADR: too many details are stuffed into ADR
+                - Novel and epic: like blueprint or mega-ADR, but with a writing tone of casual and jovial
+            - magic tricks
+                - non-existing or misleading context
+                - problem-solution mismatch
+                - pseudo-accuracy
+- OCaml related
+    - [First thoughts on Rust vs OCaml](https://blog.darklang.com/first-thoughts-on-rust-vs-ocaml/)
+        - pattern matching can't penetrate `Box`, `Arc` etc.
+        - a red flag: `Rc`/`Arc`, sync/async end up requiring different libary, e.g. `im` and `im-rc`
+        - [im](https://docs.rs/im/15.0.0/im/):  immutable data structures for Rust
+        - [PureScript](A strongly-typed functional programming language that compiles to JavaScript)
+    - [Learn OCaml](https://ocaml-sf.org/learn-ocaml-public/#activity=exercises)
+        - [practical ocaml](https://dev.to/yawaramin/practical-ocaml-314j)
+        - the background story of OxCaml: [Jane Street’s sneaky retention tactic](https://archive.ph/u10ol#selection-1133.0-1136.0)
+- formal related
+    - [Multi-Stage Programming with Splice Variables](https://tsung-ju.org/icfp25/)
+        - an interactive demonstration in TS, the original implemtation is in Agda ([examples](https://tsung-ju.org/icfp25/agda/Pat.Examples.html))
+        - typed meta-programming, to make code generation predictable and safe
+        - provides precise control over the generation process and seamlessly scales to advanced features like code pattern matching and rewriting
+        - the type system automatically tracks variable dependencies, ensuring that generated code is always well-formed, properly scoped, and type-checks correctly
+- [I deleted my second brain](https://www.joanwestenberg.com/p/i-deleted-my-second-brain)
+    - [Niklas Luhmann's Zettelkasten Archive](https://niklas-luhmann-archiv.de/bestand/zettelkasten/zettel/ZK_1_NB_1_1_V)
+    - [Johnny.Decimal: A system to organise your life](https://johnnydecimal.com/)
+    - [Howm: Write fragmentarily and read collectively](https://github.com/kaorahi/howm/)
+        - for emacs, but it might be interesting to me for a TUI for forester in Helix?
+    - [rule of three](https://en.m.wikipedia.org/wiki/Rule_of_three_(writing))
+- [Notes on Epistemic Collapse](https://www.math.columbia.edu/~woit/wordpress/?p=14999)
+    - Epistemic collapse in science means losing shared reality due to unreliable info sources.
+    - In physics, it's seen in tribalism: string theory tribes dominated despite failures, with research driven by trends over evidence.
+    - Particle theory lacks experimental input, relying on "hot topics" under oligarchs, now facing funding collapse.
+    - This shows how loss of truth-seeking harms scientific progress.
+- performance related
+    - [Announcing Sniffnet v1.4: it’s 2X faster than Wireshark at processing PCAP files](https://sniffnet.net/news/v1.4/)
+        - by focusing on extracting only the most relevant fields from the packets’ headers
+    - [Avoiding PostgreSQL Pitfalls: The Hidden Cost of Failing Inserts](https://johnnymetz.com/posts/postgresql-failing-insert/)
+        - `ON CONFLICT DO NOTHING` came to rescue
+- [Run Coverage on Tests](https://hugovk.dev/blog/2025/run-coverage-on-tests/)
+    - a few subtle case where the test is not run, caught by coverage
+    - [on lobste.rs](https://lobste.rs/s/ggzbe1), there is another subtle case where assertions are not run due to `with pytest.raises(ValueError):`
+- [Sirius: A GPU-native SQL engine](https://github.com/sirius-db/sirius)
+    - plugs into existing databases via the standard Substrait query format, requiring no query rewrites or major system changes
+    - based on
+        - [cuDF](https://github.com/rapidsai/cudf), a Python GPU DataFrame library (built on the Apache Arrow columnar memory format) for loading, joining, aggregating, filtering, and otherwise manipulating data
+        - [substrait](https://github.com/substrait-io/substrait), a cross platform way to express data transformation, relational algebra, standardized record expression and plans
+    - supports DuckDB, will support [Doris](https://doris.apache.org/) and [DataFusion](https://datafusion.apache.org/)
+- [Structuring Arrays with Algebraic Shapes](https://dl.acm.org/doi/abs/10.1145/3736112.3736141)
+    - Untyped programming invites primitives with excessive flexibility
+    - resorting to dependent types (e.g. Futhark), makes types difficult to check – let alone infer, the programmer is given the burden of proof
+    - a novel calculus, Star, with a type system that provides useful and expressive types, while also admitting type inference
+    - use structural record and variant types for array indices and shapes (algebraic shapes), to reduce the annotation burden on the programmer
+    - in the process of implementing a prototype, including type inference
+    - [on lobste.rs](https://lobste.rs/s/iwoipn), doug-moen points out that it only supports pointful array programming styles instead of point-free style in the industry
+- [SymbolicAI: A neuro-symbolic perspective on LLMs](https://github.com/ExtensityAI/symbolicai) ([on HN](https://news.ycombinator.com/item?id=44399234))
+    - a very interesting DSL to do semantic map lambdas, compare with different contexts for nuanced evaluation, combine facts and rules, and more
+    - [LOTUS: A Query Engine For Processing Data with LLMs](https://github.com/lotus-data/lotus)
+- [Theoretical Analysis of Positional Encodings in Transformer Models](https://arxiv.org/abs/2506.06398) ([on HN](https://news.ycombinator.com/item?id=44400698))
+    - ALiBi effectively extrapolates to longer sequences by imposing a monotonic distance bias
+    - Wavelet-based encodings provide strong extrapolation, matching or surpassing ALiBi, due to exponential decay of high-frequency components beyond Nmax
+    - the novel wavelet PE is a promising candidate for transformerbased tasks requiring extrapolation, combining strong theoretical properties with practical performance
+- [ZeQLplus: Terminal SQLite Database Browser](https://github.com/ZetloStudio/ZeQLplus) ([on HN](https://news.ycombinator.com/item?id=44404224))
+    - written in V
+    - UI might be inspired by [Harlequin](https://github.com/tconbeer/harlequin) (in Python, supports more databases)
+- [omarchy: Opinionated Arch/Hyprland Setup](https://github.com/basecamp/omarchy)
+}}
+
+% \subtree[2025-06-27]{\mdnote{2025-06-27}{
+% - [Researchers develop a battery cathode material that does it all](https://arstechnica.com/science/2025/06/researchers-develop-a-battery-cathode-material-that-does-it-all/)
+% - found [Magnitude – Open-source AI browser automation framework](https://github.com/magnitudedev/magnitude)
+% - learn about [Dark Archive](https://mathstodon.xyz/@johncarlosbaez/114752342143968527)
+% }}
+
+\subtree[2025-06-26]{\mdnote{2025-06-26}{
+- agent related
+    - [AI Improves at Improving Itself Using an Evolutionary Trick](https://spectrum.ieee.org/evolutionary-ai)
+    - [Learnings from building AI agents](https://www.cubic.dev/blog/learnings-from-building-ai-agents)
+    - [Jan-nano-128k: A 4B Model with a Super-Long Context Window (Still Outperforms 671B [in MCP])](https://huggingface.co/Menlo/Jan-nano-128k)
+        - it's an interesting direction
+    - news
+        - [Build and Host AI-Powered Apps with Claude – No Deployment Needed](https://www.anthropic.com/news/claude-powered-artifacts)
+        - [MCP in LM Studio](https://lmstudio.ai/blog/lmstudio-v0.3.17)
+- [Iroh: A library to establish direct connection between peers](https://github.com/n0-computer/iroh)
+    - built on QUIC, but use TCP for falling back to relay servers
+- [Notes on type inference and polymorphism](https://blog.snork.dev/posts/notes-on-type-inference-and-polymorphism.html)
+    - polymorphism is hard to combine with Hindley-Milner type inference
+    - [Type Inference Was A Mistake](https://borretti.me/article/type-inference-was-a-mistake)
+- RSS related
+    - [RSS Server Side Reader](https://matklad.github.io/2025/06/26/rssssr.html) ([on HN](https://news.ycombinator.com/item?id=44386637)) ([on lobste.rs](https://lobste.rs/s/nr9t3s))
+        - I had the similar idea, but for filtering and merging RSS, particularly for papers
+        - the author didn't even want read/unread state and post content, but they are useful for me
+    - [RSS as my default web browser (for some stuff)](https://neilzone.co.uk/2022/10/rss-as-my-default-web-browser-for-some-stuff/)
+        - the author used a hosted RSS system: [FreshRSS](https://www.freshrss.org/) (self-hostable)
+        - configure FreshRSS to grab the whole content if excerpt-only
+        - create a pseudo-RSS via "Web scraping feature HTML+XPath for Web pages without any RSS/ATOM feed"
+- [JavaScript Chose Violence](https://martinrue.com/javascript-chose-violence)
+    - a series of caveats of JavaScript, some are new to me
+- [Games run faster on SteamOS than Windows 11, Ars testing finds](https://arstechnica.com/gaming/2025/06/games-run-faster-on-steamos-than-windows-11-ars-testing-finds/)
+    - a nice surprise, hopefully, games running on wine are the only legacy of Windows in future
+    - I'm really frustrated by Github Actions Windows CI build failure that has little information to debug
+}}
+
+\subtree[2025-06-25]{\mdnote{2025-06-25}{
+- new CLI agents
+    - [Gemini CLI: your open-source AI agent](https://blog.google/technology/developers/introducing-gemini-cli-open-source-ai-agent/) ([on HN](https://news.ycombinator.com/item?id=44377031)) ([on lobste.rs](https://lobste.rs/s/f9xdsg))
+    - [Introducing Qodo Gen CLI: Build and Run Coding Agents Anywhere in the SDLC](https://www.qodo.ai/blog/introducing-qodo-gen-cli-build-run-and-automate-agents-anywhere-in-your-sdlc/)
+- [A new PNG spec](https://www.programmax.net/articles/png-is-back/)
+    - I'm thinking about preserving the most valuable photos in minimal size, encrypted, stored in public repo, and the format might be just png
+- AI safety related
+    - copyright
+        - [Anthropic wins a major fair use victory for AI — but it’s still in trouble for stealing books](https://simonwillison.net/2025/Jun/24/anthropic-training/#atom-everything)
+        - [Against AI: An Open Letter from Writers to Publishers](https://lithub.com/against-ai-an-open-letter-from-writers-to-publishers/) ([on HN](https://news.ycombinator.com/item?id=44410217))
+    - [LLM code generation may lead to an erosion of trust](https://jaysthoughts.com/aithoughts1)
+    - [AI Is Dehumanization Technology](https://thedabbler.patatas.ca/pages/ai-is-dehumanization-technology.html)
+- time related
+    - [Assembly Theory of Time](\verb>>>|https://faculty.ucr.edu/~legneref/Assembly%20Theory.htm>>>)
+        - time is a measurable physical entity, with complex objects' formation paths and "assembly indexes" revealing time's unidirectional depth and causal chains
+    - [How to Think About Time in Programming](https://shanrauf.com/archive/how-to-think-about-time-in-programming)
+    - [Managing time when time doesn't exist](https://multiverseemployeehandbook.com/blog/temporal-resources-managing-time-when-time-doesnt-exist/)
+- CG related
+    - [TinyRenderer: Software rendering in 500 lines of bare C++](https://haqr.eu/) ([code](https://github.com/ssloy/tinyrenderer))
+    - [Porting GPU shaders to Rust GPU 30x faster with AI](https://rust-gpu.github.io/blog/2025/06/24/vulkan-shader-port/)
+    - [CUDA Ray Tracing 2x Faster Than RTX: My CUDA Ray Tracing Journey](https://karimsayedre.github.io/RTIOW.html)
+    - [Chili3D: A web-based 3D CAD application for online model design and editing](https://chili3d.com/)
+- rust related
+    - [Why is the Rust compiler so slow?](https://sharnoff.io/blog/why-rust-compiler-slow) ([on HN](https://news.ycombinator.com/item?id=44390488)) ([on lobste.rs](https://lobste.rs/s/72hbqg))
+        - a lot of useful tools to debug rust compilation process
+        - see also [Performance Debugging with LLVM-mca: Simulating the CPU](https://johnnysswlab.com/performance-debugging-with-llvm-mca-simulating-the-cpu/)
+            - found [LLVM MCA Daemon](https://github.com/securesystemslab/LLVM-MCA-Daemon) [on HN](https://news.ycombinator.com/item?id=44413083)
+    - [Cross-Compiling 10,000+ Rust CLI Crates Statically](https://blog.pkgforge.dev/cross-compiling-10000-rust-cli-crates-statically)
+    - [How much code does that proc macro generate?](https://nnethercote.github.io/2025/06/26/how-much-code-does-that-proc-macro-generate.html)
+    - compilation time
+        - [Subsecond: A runtime hotpatching engine for Rust hot-reloading](https://docs.rs/subsecond/0.7.0-alpha.1/subsecond/index.html)
+            - TODO: merge with related work
+    - [Weird Expressions in Rust](https://www.wakunguma.com/blog/rust-weird-expr) ([on HN](https://news.ycombinator.com/item?id=44397367)) ([on lobste.rs](https://lobste.rs/s/tc2s00))
+- [How to Write Compelling Release Announcements](https://refactoringenglish.com/chapters/release-announcements/)
+}}
+
+\subtree[2025-06-24]{\mdnote{2025-06-24}{
+- build related
+    - [Bazel’s Original Sins](https://fzakaria.com/2025/06/22/bazel-s-original-sins)
+    - [Chromium's build system is switching from Ninja to Siso for external developers](https://groups.google.com/a/chromium.org/g/chromium-dev/c/v-WOvWUtOpg)
+    - [Build an iOS app on Linux or Windows](https://xtool.sh/tutorials/xtool/first-app/) ([on HN](https://news.ycombinator.com/item?id=44372881)) ([on lobste.rs](https://lobste.rs/s/ccit25))
+    - [Uv and Ray: Pain-Free Python Dependencies in Clusters](https://news.ycombinator.com/item?id=44394114)
+    - [New comment by acheong08 in "uv: An extremely fast Python package and project manager, written in Rust"](https://news.ycombinator.com/item?id=44358882)
+        - I think I might switch from `asdf` to [mise](https://mise.jdx.dev/), unfortunately it didn't port asdf zig plugin yet
+    - [XSLT – Native, zero-config build system for the Web](https://github.com/pacocoursey/xslt)
+- [Interesting Bits of Postgres Grammar](https://steve.dignam.xyz/2025/06/20/interesting-bits-of-postgres-grammar/)
+    - found [Geometric Functions and Operators](https://www.postgresql.org/docs/17/functions-geometry.html)
+- TUI related
+    - [fclones](https://terminaltrove.com/fclones/) - finds and handles duplicate files across directories 
+    - [tatuin](https://terminaltrove.com/tatuin/) - aggregates TODOs from various sources
+    - [alden: detachable terminal sessions without breaking scrollback](https://ansuz.sooke.bc.ca/entry/389) - only a source tarball
+    - [Atuin – Magical Shell History](https://atuin.sh)
+        - with zsh autocomplete and just, I thought I didn't need it, but maybe I need it so that history won't be easily lost, they could form a story of what I was experimenting
+    - [Can your terminal do emojis? How big?](https://dgl.cx/2025/06/can-your-terminal-do-emojis)
+        - surprisingly old protocol for this
+- [Everyone should copy Thunderbird's donation model](https://blog.cyrneko.eu/everyone-should-copy-thunderbird)
+    - it asks for donation with low frequency (yearly), and good timing (Chrismas?)
+- [Retrieval Augmented Generation Based on SQLite](https://github.com/ggozad/haiku.rag)
+    - I do prefer RAG on SQLite, need to try it out
+- [The Bitter Lesson is coming for Tokenization](https://lucalp.dev/bitter-lesson-tokenization-and-blt/)
+    - but how to part with tokenization?
+- [Phoenix.new is Fly's entry into the prompt-driven app development space](https://simonwillison.net/2025/Jun/23/phoenix-new/#atom-everything)
+    - I need to give it and fly.io a try
+}}
+
 \subtree[2025-06-23]{\mdnote{2025-06-23}{
+- [How I use my terminal](https://jyn.dev/how-i-use-my-terminal/)
+    - the author explains how things work, especially for those that people are surprised to find possible at all
 - [I wrote my PhD Thesis in Typst](https://fransskarman.com/phd_thesis_in_typst.html) ([on HN](https://news.ycombinator.com/item?id=44350322)) ([on lobste.rs](https://lobste.rs/s/pdrso1))
     - it's an unusual journey, the author fought through the process by
         - writing a recursive descent parser in Typst for [custom code syntax highlighting](https://gitlab.com/TheZoq2/typst-common/-/blob/main/highlight.typ)
@@ -30,14 +295,22 @@
         - the advisors perspective is also informative 
 - [Nano-Vllm: lightweight vLLM implementation built from scratch](https://github.com/GeeeekExplorer/nano-vllm)
     - I would wonder if I could do this in Zig
-- [Pallene Language](https://github.com/pallene-lang/pallene)
-    - a statically typed and ahead-of-time compiled sister language to Lua
-- found [Telescopes Are Tries: A Dependent Type Shellac on SQLite](https://www.philipzucker.com/telescope_tries/)
-    - I should give it a good read to understand both telescope (in the formal world) and tries (as a data structure)
+- language related
+    - [Cyber Programming Language](https://cyberscript.dev/)
+        - written in Zig
+        - fast, efficient, and concurrent scripting
+        - faster than Wren (written in C & Wren) that are used in game engine
+    - [Pallene Language](https://github.com/pallene-lang/pallene)
+        - a statically typed and ahead-of-time compiled sister language to Lua
 - [Announcing the Clippy feature freeze](https://blog.rust-lang.org/inside-rust/2025/06/21/announcing-the-clippy-feature-freeze/) ([on HN](https://news.ycombinator.com/item?id=44344601)) ([on lobste.rs](https://lobste.rs/s/mvoez2))
     - an inspiring way to allow the team to have a period of time for repaying tech debts
 - learn about [Git Notes: Git's coolest, most unloved­ feature (2022)](https://tylercipriani.com/blog/2022/11/19/git-notes-gits-coolest-most-unloved-feature/)
 - found [LeetCode for System Design](https://leetsys.dev)
+- Go related
+    - [Go should be more opinionated](https://eltonminetto.dev/en/post/2025-06-19-go-more-opinated/)
+    - [Go is an 80/20 language](https://blog.kowalczyk.info/article/d-2025-06-26/go-is-8020-language.html)
+    - [How to store Go pointers from assembly](https://mazzo.li/posts/go-asm-pointers.html) ([on HN](https://news.ycombinator.com/item?id=44355187)) ([on lobste.rs](https://lobste.rs/s/obsh1m))
+    - [Why Go Rocks for Building a Lua Interpreter](https://www.zombiezen.com/blog/2025/06/why-go-rocks-for-building-lua-interpreter/)
 }}
 
 \subtree[2025-06-22]{\mdnote{2025-06-22}{\tags{#gpu #rust #yaml #zig}
@@ -49,7 +322,11 @@
 - zig related
     - [Zig And Rust (2023)](https://matklad.github.io/2023/03/26/zig-and-rust.html)
     - [Polystate: Composable Finite State Machines](https://www.reddit.com/r/Zig/comments/1lhfbjk/polystate_composable_finite_state_machines/) in Zig
+    - [comphash - A very lightweight Zig package offering a zero-cost compile-time hash map](https://www.reddit.com/r/Zig/comments/1lkgr54/comphash_a_very_lightweight_zig_package_offering/)
+        - [Andrew Kelly experimented with perfect hashes](https://andrewkelley.me/post/string-matching-comptime-perfect-hashing-zig.html)
     - [Syntax highlighting for Zig's documentation comments](https://www.reddit.com/r/Zig/comments/1lhhgh8/syntax_highlighting_for_zigs_documentation/)
+    - [Parameterized types in C using the new tag compatibility rule](https://nullprogram.com/blog/2025/06/26/)
+        - C23 has a new rule for struct, union, and enum compatibility
 }}
 
 \subtree[2025-06-21]{\mdnote{2025-06-21}{\tags{#agent #formal #scheme}
@@ -113,7 +390,9 @@
 }}
 
 \subtree[2025-06-18]{\mdnote{2025-06-18}{\tags{#agent #benchmark #docker #editor #prompt #quantum #robot #security #wayland #✍️}
-- work on [helix-cheat-sheet](https://github.com/utensil/helix-cheat-sheet)
+- Helix related
+    - work on [helix-cheat-sheet](https://github.com/utensil/helix-cheat-sheet)
+    - [I really like the Helix editor](https://herecomesthemoon.net/2025/06/i-like-helix/)
 - [Moving on from Nix](https://carlosbecker.com/posts/bye-nix/)
     - it's a good thing that I have kept my distance from Nix from the start
         - mostly because I didn't like the syntax, and I don't want to be locked in
@@ -138,6 +417,7 @@
         - an interesting yet too traditional experiment
     - [Bots are overwhelming websites with their hunger for AI data](https://www.theregister.com/2025/06/17/bot_overwhelming_websites_report/)
     - [Show HN: Trieve CLI – Terminal-based LLM agent loop with search tool for PDFs](https://github.com/devflowinc/trieve/tree/main/clients/cli)
+    - [GitHub CEO: manual coding remains key despite AI boom](https://www.techinasia.com/news/github-ceo-manual-coding-remains-key-despite-ai-boom)
 - wayland related
     - [Long live Xorg, I mean Xlibre](https://www.dedoimedo.com/computers/xlibre.html)
     - [It's true, “we” don't care about accessibility on Linux](https://tesk.page/2025/06/18/its-true-we-dont-care-about-accessibility-on-linux/) ([on HN](https://news.ycombinator.com/item?id=44314372)) ([on lobste.rs](https://lobste.rs/s/1nyzfj))
@@ -154,9 +434,23 @@
         - built on SDL, C and Lua, low footprint
         - forked from lite XL (which is forked from lite) to be [more practical rather than minimalist](https://github.com/pragtical/pragtical/issues/6#issuecomment-1581650875)
 - security related
+    - [How keys are used in FileVault and encryption](https://eclecticlight.co/2025/06/25/how-keys-are-used-in-filevault-and-encryption/)
+        - VEK (Volume Encryption Key) never leaves Secure Enclave, destroyed on "Erase All Content and Settings (EACAS)"
+        - wrapping: encrypting the VEK using a KEK (Key Encryption Key)
+            - user password can be changed without the contents of the protected volume having to be fully decrypted and encrypted again
+            - possible to generate multiple KEKs to support the use of recovery keys that can be used to unlock the VEK when the user’s password is lost or forgotten
     - [Apple: Prepare your network for quantum-secure encryption in TLS](https://support.apple.com/en-my/122756)
     - [Blink and you'll miss it — a URL handler surprise](https://dgl.cx/2025/06/blink-at-a-url-handler)
     - [New Linux Flaws Enable Full Root Access via PAM and Udisks Across Major Distributions](https://thehackernews.com/2025/06/new-linux-flaws-enable-full-root-access.html)
+    - [Getting ready to issue IP address certificates](https://community.letsencrypt.org/t/getting-ready-to-issue-ip-address-certificates/238777) ([on HN](https://news.ycombinator.com/item?id=44379034)) ([on lobste.rs](https://lobste.rs/s/ljfoxr))
+    - [The Journey of Bypassing Ubuntu's Unprivileged Namespace Restriction](https://u1f383.github.io/linux/2025/06/26/the-journey-of-bypassing-ubuntus-unprivileged-namespace-restriction.html) ([on HN](https://news.ycombinator.com/item?id=44400440))
+    - [Transmitting data via ultrasound without any special equipment](https://halcy.de/blog/2025/06/27/transmitting-data-via-ultrasound-without-any-special-equipment/) ()
+        - not security per se, but could be used to breach
+        - uses 18-20kHz (not real ultra sound (~50kHz))
+        - use WebAudio
+        - [on HN](https://news.ycombinator.com/item?id=44398390) and [on lobste.rs](https://lobste.rs/s/96xzbg), people mentioned that IoT use sound to do device paring, not necessarily ultra sound, so users could understand what's going on
+    - [Vet – A tool for safely running remote shell scripts](https://getvet.sh)
+        - a flawed and naive safeguard, but a call to change status quo
 - found snapDOM
     - from [Benchmark: snapDOM vs html2canvas](https://zumerlab.github.io/snapdom/)
 }}
@@ -171,6 +465,7 @@
     - [Notes on retries](https://justinblank.com/notebooks/retries.html)
     - [The Promised LAN](https://notes.pault.ag/tpl/)
     - [Fun with Telnet](https://brandonrozek.com/blog/fun-with-telnet/)
+    - [A brief history of web browsers](https://eclecticlight.co/2025/06/28/a-brief-history-of-web-browsers/)
 - agent related
     - [\verb>>>|100% effective>>>](https://simonwillison.net/2025/Jun/16/100-percent/#atom-everything)
         - on LLM safety, there is no guarantee
@@ -187,6 +482,7 @@
     - [matrix is cooked](https://paper.wf/alexia/matrix-is-cooked)
     - [Websites are tracking you via browser fingerprinting](https://engineering.tamu.edu/news/2025/06/websites-are-tracking-you-via-browser-fingerprinting.html)
     - [Delta Chat is a decentralized and secure messenger app](https://delta.chat/en/)
+    - [Google Gemini is about to control your messages and calls, even if you say no](https://www.laptopmag.com/ai/gemini-phone-access-update) ([on HN](https://news.ycombinator.com/item?id=44411114))
 - news related
     - [Rules, Not Renewables, Might Explain the Iberian Blackout](https://spectrum.ieee.org/spain-grid-failure)
     - [Miscalculation by Spanish power grid operator REE contributed to blackout](https://www.reuters.com/business/energy/investigation-into-spains-april-28-blackout-shows-no-evidence-cyberattack-2025-06-17/)
@@ -348,6 +644,8 @@
         - numbers for the environmental impact of LLMs
         - related
             - [AI threatens to raid the water reserves of Europe's driest regions](https://www.politico.eu/article/artificial-intelligence-threat-raid-water-reserves-europe-dry-regions/)
+    - [Environmental Impacts of Artificial Intelligence](https://www.greenpeace.de/publikationen/environmental-impacts-of-artificial-intelligence)
+    - [Generative AI’s crippling and widespread failure to induce robust models of the world](https://garymarcus.substack.com/p/generative-ais-crippling-and-widespread)
 - [Type-based vs Value-based Reflection](https://brevzin.github.io/c++/2025/06/09/reflection-ts/)
     - value-based (C++26)
         - "while we have new syntax for getting into (`^^e`) and out of (`[: e :]`) the value domain, once you’re in the value domain — it’s nice to just stay there"
@@ -431,6 +729,8 @@
         - neat CSS animation trick
     - [More Frontend Web Tricks](https://kaiwenwang.com/writing/more-frontend-web-tricks)
     - [Color Everything in CSS](https://css-tricks.com/color-everything-in-css/)
+    - [Printing the web: making webpages look good on paper](https://piccalil.li/blog/printing-the-web-making-webpages-look-good-on-paper/)
+    - [HUG CSS, how I approach CSS architecture](https://gomakethings.com/hug-css-how-i-approach-css-architecture/)
 }}
 
 \subtree[2025-06-10]{\mdnote{2025-06-10}{\tags{#compiler #embedding #formal #optimization #os #performance #qwen #rust #wasm}
@@ -688,7 +988,6 @@
 
 % \iframe{uts-016E.html}
 
-% realized that I can open links in NeoVim by Cmd+Shift+Click
 % tried [Ente Photos v1](https://ente.io/blog/v1)
 
 \subtree[2025-05-31]{\mdnote{2025-05-31}{\tags{#agent #dspy #lean #prompt #rust}
@@ -744,6 +1043,8 @@
     - [Don't Unwrap Options: There Are Better Ways](https://corrode.dev/blog/rust-option-handling-best-practices/)
     - [Thinking in Expressions](https://corrode.dev/blog/expressions/)
 - found [DumPy: NumPy except it's OK if you're dum](https://dynomight.net/dumpy/)
+    - found [einx](https://github.com/fferflo/einx)
+        - einx notation is inspired by einops, but introduces several novel concepts such as `[]`-bracket notation and full composability that allow using it as a universal language for tensor operations
 - [Against Curry-Howard Mysticism](https://liamoc.net/forest/loc-000S/)
 - found [Reinforcement Learning: An Overview](https://arxiv.org/abs/2412.05265)
 - found [Modeling Nonlinear Dynamics from Equations and Data — with Applications to Solids, Fluids, and Controls](https://epubs.siam.org/doi/10.1137/1.9781611978353)
@@ -778,8 +1079,6 @@
 - [CAPTCHAs don't work any more for ticket sellers](https://behind.pretix.eu/2025/05/23/captchas-are-over/)
 - [Concepts vs type traits](https://akrzemi1.wordpress.com/2025/05/24/concepts-vs-type-traits/)
 - [tachy0n: The last 0day jailbreak](https://blog.siguza.net/tachy0n/)
-- [Who needs graph theory anyway?](https://www.tumblr.com/readevalprint/97467849358/who-needs-graph-theory-anyway)
-    - solving the word segmentation problem using graph theory by modeling it as a longest path problem in a directed acyclic graph (DAG) with dynamic programming
 - found [Domain Theory Lecture Notes](https://liamoc.net/forest/dt-001Y/index.xml)
 - generate and read the following DeepWiki:
     - [ymndoseijin/zilliam](https://deepwiki.com/ymndoseijin/zilliam)
@@ -815,7 +1114,7 @@
 - [Why I love OCaml](https://mccd.space/posts/ocaml-the-worlds-best/)
 - [How to Get Your Research Paper Accepted](https://maxwellforbes.com/posts/how-to-get-a-paper-accepted)
 - [Fork Union: Beyond OpenMP in C++ and Rust?](https://ashvardanian.com/posts/beyond-openmp-in-cpp-rust/)
-- found languages
+- language related
     - [Wren](https://wren.io/), a small, fast, class-based concurrent scripting language
         - "Think Smalltalk in a Lua-sized package with a dash of Erlang and wrapped up in a familiar, modern syntax."
         - [Talon](https://github.com/jossephus/talon): Write Raylib programs in Wren
@@ -1047,6 +1346,8 @@
     - maybe it's easiest to use [lima](https://lima-vm.io/) to test eBPF
     - found [Pixie](https://px.dev/) when reading [Debugging Production: eBPF Chaos](https://www.infoq.com/articles/debugging-production-ebpf-chaos/)
     - [Introducing Minderbinder](https://blog.scottgerring.com/posts/introducing-minderbinder/) which is in Go
+    - [Implementing fast TCP fingerprinting with eBPF](https://halb.it/posts/ebpf-fingerprinting-2/)
+        - using Cilium in Go
 - found [alternative open source front-ends for popular internet platforms](https://github.com/mendel5/alternative-front-ends)
 }}
 
@@ -1450,7 +1751,6 @@
     - \citef{bach2024learning}
     - \citef{feng2023winding}, and read [the blog post](https://nzfeng.github.io/research/WNoDS/index.html)
     - \citef{williams2025simulating}
-- [Succinct data structures](https://blog.startifact.com/posts/succinct/)
 - found [Xee: A Modern XPath and XSLT Engine in Rust](https://blog.startifact.com/posts/xee/) which could be used to process Forester XMLs in the future
 - found [The Mean-ing of Loss Functions](https://jiha-kim.github.io/posts/the-mean-ing-of-loss-functions/)
 - wrote [[uts-0167]]

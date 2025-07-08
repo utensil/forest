@@ -1,0 +1,277 @@
+'$schema' = 'https://jj-vcs.github.io/jj/latest/config-schema.json'
+
+# adapted from https://gist.github.com/pksunkara/622bc04242d402c4e43c7328234fd01c
+# related article: https://pksunkara.com/thoughts/git-experts-should-try-jujutsu/
+# adapted config entries are commented with [NOTE]
+
+[ui]
+default-command = 'default'
+# [NOTE] prefer helix
+# editor = 'nvim'
+editor = 'hx'
+pager = ['delta', '--pager', 'less -FRX']
+# [NOTE] keybindings for builtin diff editor
+# - direction keys or f to unfold/fold
+# - space to select
+# - c to commit
+# - q to quit
+diff-editor = ':builtin'
+diff-formatter = ':git'
+graph.style = 'square'
+
+[git]
+push-new-bookmarks = true
+# [NOTE] user neutral prefix
+push-bookmark-prefix = 'jj/'
+private-commits = 'private()'
+# [NOTE] This feature writes change-id headers directly into the git commit object, and is visible to code forges upon push
+# see https://blog.tangled.sh/stacking
+write-change-id-header = true
+
+[colors]
+change_id = 'yellow'
+'working_copy change_id' = 'yellow'
+
+[templates]
+op_log = 'builtin_op_log_comfortable'
+
+[template-aliases]
+builtin_log_compact = '''
+if(root,
+  format_root_commit(self),
+  label(if(current_working_copy, 'working_copy'),
+    separate(' ',
+      format_short_commit_header(self),
+      if(empty, label('empty', '(empty)')),
+      if(description,
+        description.first_line(),
+        label(if(empty, 'empty'), description_placeholder),
+      ),
+    ),
+  ),
+)
+'''
+
+'format_short_commit_header(commit)' = '''
+separate(' ',
+  format_short_change_id_with_hidden_and_divergent_info(commit),
+  format_short_commit_id(commit.commit_id()),
+  commit.bookmarks(),
+  commit.tags(),
+  commit.working_copies(),
+  if(commit.conflict(), label('conflict', 'conflict')),
+  if(config('ui.show-cryptographic-signatures').as_boolean(),
+    format_short_cryptographic_signature(commit.signature())
+  ),
+)
+'''
+
+'format_operation(op)' = '''
+concat(
+  format_time_range(op.time()), "\n",
+  format_short_operation_id(op.id()), "\n",
+  op.description().first_line(), "\n",
+  if(op.tags(), op.tags() ++ "\n")
+)
+'''
+
+[revsets]
+log = '(present(@) | ancestors(immutable_heads().., 2) | present(trunk())) & ~stash()'
+
+[revset-aliases]
+'stash()' = 'description(glob:"stash:*")'
+'private()' = 'mutable() & (description(exact:"") | stash() | (empty() & ~merges()))'
+'until(to)' = 'heads(::to & ~private())'
+'until_bookmark(to)' = 'heads(::to & bookmarks())'
+'branch(to)' = 'heads((::to | to::) & ~private())'
+'branch_bookmark(to)' = 'heads((::to | to::) & bookmarks())'
+
+[aliases]
+# status
+s = ['status']
+sf = ['log', '--no-graph', '-r', '@', '-T', 'if(empty, "", diff.summary() ++ "\n")']
+
+# log
+l = ['log']
+lr = ['log', '-r']
+ls = ['log', '-r', 'stash()']
+lp = ['log', '-r', 'private() & ~stash()']
+lg = ['log', '-r', 'all()']
+
+# default
+default = ['util', 'exec', '--', 'bash', '-c', 'echo "" && jj sf --no-pager && jj log']
+
+# init
+init = ['git', 'init', '--colocate']
+
+# clone
+cl = ['git', 'clone', '--colocate']
+clg = ['util', 'exec', '--', 'bash', '-c', 'jj cl https://github.com/$0']
+clgp = ['util', 'exec', '--', 'bash', '-c', 'jj cl git@github.com:$0']
+clgu = ['util', 'exec', '--', 'bash', '-c', 'jj cl git@github.com:$(jj config get user.username)/$0']
+clsp = ['util', 'exec', '--', 'bash', '-c', 'jj cl git@git.sr.ht:~$0']
+clsu = ['util', 'exec', '--', 'bash', '-c', 'jj cl git@git.sr.ht:~$(jj config get user.username)/$0']
+
+# diff
+d = ['diff']
+dr = ['diff', '-r']
+
+# new
+n = ['new']
+nm = ['new', '-m']
+nt = ['new', 'trunk()']
+ntm = ['new', 'trunk()', '-m']
+na = ['new', '--insert-after']
+nae = ['new', '--insert-after', '@']
+naem = ['new', '--insert-after', '@', '-m']
+nb = ['new', '--insert-before']
+nbe = ['new', '--insert-before', '@']
+nbem = ['new', '--insert-before', '@', '-m']
+
+# describe
+de = ['describe']
+dem = ['describe', '-m']
+
+# commit
+ci = ['commit', '-i']
+cm = ['commit', '-m']
+cim = ['commit', '-i', '-m']
+
+# show
+w = ['show']
+ws = ['show', '--stat']
+
+# edit
+e = ['edit']
+eh = ['edit', 'heads(@::)']
+ep = ['prev', '--edit']
+epc = ['prev', '--edit', '--conflict']
+en = ['next', '--edit']
+enc = ['next', '--edit', '--conflict']
+
+# abandon
+ad = ['abandon']
+adb = ['abandon', '--retain-bookmarks']
+adk = ['abandon', '--retain-bookmarks', '--restore-descendants']
+
+# split
+sp = ['split']
+spr = ['split', '-r']
+spp = ['split', '--parallel']
+sppr = ['split', '--parallel', '-r']
+
+# squash
+sq = ['squash', '-i']
+sqa = ['squash']
+sqt = ['squash', '-i', '--into']
+sqat = ['squash', '--into']
+sqf = ['squash', '-i', '--from']
+sqaf = ['squash', '--from']
+sqr = ['squash', '-i', '-r']
+sqar = ['squash', '-r']
+
+# rebase
+rb = ['rebase', '--skip-emptied']
+rba = ['rebase', '--skip-emptied', '--insert-after']
+rbb = ['rebase', '--skip-emptied', '--insert-before']
+rbd = ['rebase', '--skip-emptied', '--destination']
+rbt = ['rebase', '--skip-emptied', '--destination', 'trunk()']
+rbtr = ['rebase', '--skip-emptied', '--destination', 'trunk()', '-r']
+rbtw = ['rebase', '--skip-emptied', '--destination', 'trunk()', '-r', 'until(@)']
+rbte = ['rebase', '--skip-emptied', '--destination', 'trunk()', '-r', '@']
+rbtb = ['rebase', '--skip-emptied', '--destination', 'trunk()', '--branch']
+rbta = ['rebase', '--skip-emptied', '--destination', 'trunk()', '--branch', 'all:(visible_heads() & mutable())']
+rbts = ['rebase', '--skip-emptied', '--destination', 'trunk()', '--source']
+rbtse = ['rebase', '--skip-emptied', '--destination', 'trunk()', '--source', '@']
+rbe = ['rebase', '--skip-emptied', '--destination', '@']
+rber = ['rebase', '--skip-emptied', '--destination', '@', '-r']
+rbeb = ['rebase', '--skip-emptied', '--destination', '@', '--branch']
+rbes = ['rebase', '--skip-emptied', '--destination', '@', '--source']
+rbs = ['rebase', '--skip-emptied', '--source']
+rbse = ['rebase', '--skip-emptied', '--source', '@']
+rbsed = ['rebase', '--skip-emptied', '--source', '@', '--destination']
+rbsea = ['rebase', '--skip-emptied', '--source', '@', '--insert-after']
+rbseb = ['rebase', '--skip-emptied', '--source', '@', '--insert-before']
+rbr = ['rebase', '--skip-emptied', '-r']
+rbrw = ['rebase', '--skip-emptied', '-r', 'until(@)']
+rbrwd = ['rebase', '--skip-emptied', '-r', 'until(@)', '--destination']
+rbrwa = ['rebase', '--skip-emptied', '-r', 'until(@)', '--insert-after']
+rbrwb = ['rebase', '--skip-emptied', '-r', 'until(@)', '--insert-before']
+rbre = ['rebase', '--skip-emptied', '-r', '@']
+rbred = ['rebase', '--skip-emptied', '-r', '@', '--destination']
+rbrea = ['rebase', '--skip-emptied', '-r', '@', '--insert-after']
+rbreb = ['rebase', '--skip-emptied', '-r', '@', '--insert-before']
+rbrb = ['rebase', '--skip-emptied', '--branch']
+
+# absorb
+ab = ['absorb']
+abf = ['absorb', '--from']
+
+# restore
+re = ['restore']
+
+# bookmarks
+bd = ['bookmark', 'delete']
+bf = ['bookmark', 'forget']
+bl = ['bookmark', 'list', '--all-remotes']
+blr = ['bookmark', 'list', '-r']
+blrw = ['bookmark', 'list', '-r', 'until(@)']
+blrb = ['bookmark', 'list', '-r', 'branch(@)']
+bmw = ['bookmark', 'move', '--from', 'until_bookmark(@)', '--to', 'until(@)']
+bmb = ['bookmark', 'move', '--from', 'branch_bookmark(@)', '--to', 'branch(@)']
+br = ['bookmark', 'rename']
+bs = ['bookmark', 'set']
+bsr = ['bookmark', 'set', '--allow-backwards', '-r']
+bst = ['bookmark', 'set', '-r', 'trunk()']
+bt = ['bookmark', 'track']
+bu = ['bookmark', 'untrack']
+
+# pull
+f = ['util', 'exec', '--', 'bash', '-c', 'jj fo && jj rbt']
+fw = ['util', 'exec', '--', 'bash', '-c', 'gh pr checks --watch $0 && jj f']
+fo = ['git', 'fetch', '--all-remotes']
+fa = ['util', 'exec', '--', 'bash', '-c', 'jj fo && jj rbta']
+faw = ['util', 'exec', '--', 'bash', '-c', 'gh pr checks --watch $0 && jj fa']
+
+# push
+ps = ['git', 'push']
+psb = ['git', 'push', '--bookmark']
+psc = ['git', 'push', '--change']
+pscw = ['git', 'push', '--change', 'until(@)']
+pscb = ['git', 'push', '--change', 'branch(@)']
+psca = ['git', 'push', '--change', 'all:(visible_heads() & ~private())']
+psa = ['git', 'push', '--all']
+psd = ['git', 'push', '--deleted']
+
+# pr
+pro = ['util', 'exec', '--', 'bash', '-c', 'gh pr create --head $(jj blrb -T name)']
+pr = ['util', 'exec', '--', 'bash', '-c', 'jj pscb && jj pro']
+prow = ['util', 'exec', '--', 'bash', '-c', 'gh pr create --head $(jj blrw -T name)']
+prw = ['util', 'exec', '--', 'bash', '-c', 'jj pscw && jj prow']
+
+# op
+ol = ['op', 'log']
+or = ['op', 'restore']
+ow = ['op', 'show']
+owp = ['op', 'show', '--patch']
+
+# file
+fn = ['file', 'annotate']
+fnr = ['file', 'annotate', '-r']
+ft = ['file', 'track']
+fu = ['file', 'untrack']
+
+# workspace
+wl = ['workspace', 'list']
+wa = ['workspace', 'add']
+wa1 = ['workspace', 'add', '--name', 'one', '.jj/workspace-one']
+wa2 = ['workspace', 'add', '--name', 'two', '.jj/workspace-two']
+wa3 = ['workspace', 'add', '--name', 'three', '.jj/workspace-three']
+wo1 = ['util', 'exec', '--', 'bash', '-c', 'cd .jj/workspace-one']
+wo2 = ['util', 'exec', '--', 'bash', '-c', 'cd .jj/workspace-two']
+wo3 = ['util', 'exec', '--', 'bash', '-c', 'cd .jj/workspace-three']
+wf = ['workspace', 'forget']
+wf1 = ['workspace', 'forget', 'one']
+wf2 = ['workspace', 'forget', 'two']
+wf3 = ['workspace', 'forget', 'three']
+wr = ['workspace', 'rename']

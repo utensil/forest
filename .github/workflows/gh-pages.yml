@@ -48,7 +48,7 @@ jobs:
         run: |
           ./chk.sh
       - name: Setup TeX Live
-        uses: teatimeguest/setup-texlive-action@v3
+        uses: utensil/setup-texlive-action@v3
         with:
           packages: scheme-full
       - name: Check `latex`
@@ -91,9 +91,11 @@ jobs:
       #       ${{ runner.os }}-opam-
       - name: Install forester
         run: |
-          sudo apt-get install libev-dev
+          sudo apt install libev-dev
           # opam pin add forester git+https://git.sr.ht/~jonsterling/ocaml-forester#5ceee0e7d20febc0552caad0f71aa01750574d43 --yes
           # opam pin add forester git+https://git.sr.ht/~jonsterling/ocaml-forester#11b08cf812e65870167333da4b19d684d8d1846c --yes
+          sudo apt update
+          sudo apt install libev-dev
           opam pin add forester git+https://git.sr.ht/~jonsterling/ocaml-forester#56de06afe952d752c1a13fdcd8bb56c5fef9956f --yes
           opam install forester --yes
           # opam install forester.4.3.1 --yes
@@ -105,7 +107,7 @@ jobs:
           # enable-cache: true
       - name: Install xsltproc
         run: |
-          sudo apt-get install xsltproc
+          sudo apt install xsltproc
       # - name: Install Homebrew
       #   run: |
       #     bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"

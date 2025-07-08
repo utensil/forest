@@ -1,6 +1,7 @@
 # Terminal Setup Tasks
 
 set dotenv-load
+set ignore-comments
 
 export HOMEBREW_NO_AUTO_UPDATE := "1"
 # https://blog.rust-lang.org/inside-rust/2023/01/30/cargo-sparse-protocol/
@@ -13,48 +14,56 @@ export TERM := "xterm-256color"
 # TODO: break down to essentials and extra pack
 
 prep-term:
+    # Basic CLI
+    which wget || brew install wget
+    which nproc || brew install coreutils
+    # Shell
     which zsh || brew install zsh
-    which nvim || brew install neovim
+    which starship || brew install starship
+    which zoxide || brew install zoxide
+    # Git
     which lazygit || brew install lazygit
-    which yq || brew install yq
     which gh || brew install gh
     @echo "Remember to run: gh auth login"
     @echo "And possibly: gh auth refresh -s read:project"
-    which fzf || brew install fzf
-    which yazi || brew install yazi
-    which nnn || brew install nnn
-    which stylua || brew install stylua
-    which sd || brew install sd
+    # File
+    which duf || brew install duf
     which dua || brew install dua-cli
     which bat || brew install bat
     which eza || brew install eza
-    which rg || brew install ripgrep
     which rip || brew install rm-improved
-    which luarocks || brew install luarocks
-    # luarocks --local --lua-version=5.1 install magick
-    which starship || brew install starship
-    which zoxide || brew install zoxide
-    which magick ||brew install imagemagick
-    # just add-zrc 'eval "$(zoxide init zsh)"'
-    # just add-zrc 'eval "$(starship init zsh)"'
-    which progress || brew install progress
+    which yazi || brew install yazi
     which 7zz || brew install sevenzip
-    which ffmpeg || brew install ffmpeg
-    which tokei || brew install tokei
-    # awrit installation usually fails with some warning
-    which awrit || brew install chase/tap/awrit || true
-    which mpv || brew install mpv
+    # Search & replace
+    which fzf || brew install fzf
+    which rg || brew install ripgrep
+    which sd || brew install sd
+    # which serpl || brew install serpl
+    which scooter || brew install scooter
+    # Code
     which cmake || brew install cmake
     which pkg-config || brew install pkg-config
-    which nproc || brew install coreutils
+    which tokei || brew install tokei
+    which jq || brew install jq
+
+prep-term-fancy:
     which fastfetch || brew install fastfetch
     which tty-clock || brew install tty-clock
-    which duf || brew install duf
-    which jq || brew install jq
+
+prep-media:
+    which magick ||brew install imagemagick
+    which ffmpeg || brew install ffmpeg
+    which mpv || brew install mpv
+
+# they were tried but seldom used
+prep-term-seldom:
+    which yq || brew install yq
+    which nnn || brew install nnn
+    which progress || brew install progress
     which sq || brew install sq
     which fex || (curl -sSL https://raw.githubusercontent.com/18alantom/fex/master/install.sh | bash)
-    which serpl || brew install serpl
-    which scooter || brew install scooter
+    # awrit installation usually fails with some warning
+    which awrit || brew install chase/tap/awrit || true
 
 prep-monit:
     #!/usr/bin/env zsh
@@ -78,9 +87,20 @@ awake:
     caffeinate -s
 
 ## Ghostty
- 
+
+# based on https://gist.github.com/davidteren/898f2dcccd42d9f8680ec69a3a5d350e
+find-font FONT="maple":
+    #!/usr/bin/env zsh
+    brew search '/font-.*-(nerd-font|nf)/' | awk '{ print $1 }' | grep -i {{FONT}}
+
+# mac only
+list-font FONT="fonts":
+    fc-list|grep -i {{FONT}}
+
 # https://github.com/subframe7536/Maple-font
 prep-font:
+    brew install --cask font-fira-code-nerd-font
+    brew install --cask font-fira-mono-nerd-font
     brew install --cask font-maple-mono-nf-cn
 
 prep-gt:
@@ -95,6 +115,11 @@ prep-gtsh:
         git clone https://github.com/m-ahdal/ghostty-shaders ~/projects/ghostty-shaders
     else
         (cd ~/projects/ghostty-shaders && git pull) || true
+    fi
+    if [ ! -d ~/projects/shader-playground ]; then
+        git clone https://github.com/utensil/shader-playground ~/projects/shader-playground
+    else
+        (cd ~/projects/shader-playground && git pull) || true
     fi
 
 # Cmd+Ctrl+F to toggle fullscreen, or just Cmd + Enter
@@ -118,6 +143,10 @@ sync-gt:
 
 reset-gt:
     rm ~/.config/ghostty
+
+# https://github.com/ghostty-org/ghostty/discussions/7194
+log-gt:
+    sudo log stream --level debug --predicate 'subsystem=="com.mitchellh.ghostty"'
 
 ## Shell setup
 
@@ -167,14 +196,34 @@ prep-git:
     which gh || brew install gh
     # list the current settings
     git config --list
-    printf "Enter your name: "
-    read name
-    printf "Enter your email: "
-    read email
-    git config --global user.name "$name"
-    git config --global user.email "$email"
+    if [ -z "$(git config --global user.name)" ]; then
+        printf "Enter your name: "
+        read name
+        git config --global user.name "$name"
+    fi
+    if [ -z "$(git config --global user.email)" ]; then
+        printf "Enter your email: "
+        read email
+        git config --global user.email "$email"
+    fi
     git config --global --unset credential.helper
     git config --global credential.helper "store --file ~/.git-credentials"
+
+    git config --global pull.rebase true
+    # https://blog.buenzli.dev/rust-for-linux-first-contrib/#git-gud
+    # Automatically squash fixup/squash commits during rebase
+    git config --global rebase.autoSquash true
+    # Stash uncommitted changes before rebase and reapply afterward
+    git config --global rebase.autoStash true
+    # Preserve merge commits instead of flattening them
+    git config --global rebase.rebaseMerges true
+    # Update branch refs pointing to rebased commits (useful for stacked changes)
+    git config --global rebase.updateRefs true
+    # Enable Reuse Recorded Resolution (remember conflict resolutions)
+    git config --global rerere.enabled true
+    # Automatically stage rerere-resolved files
+    git config --global rerere.autoupdate true
+
     gh auth status || gh auth login
     gh auth setup-git
     echo 'Remember to run `just prep-delta` for better lazygit experience'
@@ -194,6 +243,11 @@ git PROJ="forest" *PARAMS="":
     #!/usr/bin/env zsh
     cd ~/projects/{{PROJ}} && lazygit {{PARAMS}}
 
+# -w to open in browser
+actions PROJ="forest" *PARAMS="":
+    #!/usr/bin/env zsh
+    cd ~/projects/{{PROJ}} && gh workflow view {{PARAMS}}
+
 prep-date:
     which git-backdate || (curl https://raw.githubusercontent.com/rixx/git-backdate/main/git-backdate > /usr/local/bin/git-backdate && chmod +x /usr/local/bin/git-backdate)
     which gdate || brew install coreutils
@@ -208,8 +262,63 @@ date: prep-date
 prep-gitlog:
     which serie || brew install lusingander/tap/serie
 
+# ? for help
+# <Tab>  Open refs list
+# <Alt-Down> <Alt-j>  Go to parent
+# Vim-like keybindings
 gitlog:
     serie
+
+# # Frequently used jj command alias
+#
+# ## Edits
+#
+# l - log (there is always a dirty change @, could be empty)
+# n <revset> - create a new change based on <revset> which could be a short change id, a bookmark, and defaults to @ (working copy)
+# ci - use builtin diff editor to choose what to commit, use text editor to edit commit message
+# cim <message> / cm <message> - variants
+# d - the diff of current change
+# dr <revset> - the diff of revision <revset>
+# e <revset> - edit any <revset> after commit
+# (after edit, just go anywhere else (with e or n), the changes will be commited; or an explicit `jj commit` will do)
+# 
+# ## Typical workflow with GitHub
+#
+# (inspired by https://jj-vcs.github.io/jj/latest/github/ )
+#
+# ### named branch
+# 
+# bs <bookmark> -r <revset> - move bookmark <bookmark> to <revset>
+# psb <bookmark> - push bookmark to remote branch named <bookmark>
+# gh pr create --head <bookmark> - create a PR from <bookmark> to the default branch
+# git fetch - will update local bookmark from remote branch
+#
+# ### unamed branch
+# 
+# pscw - push changes of working copy to remote branch named jj/<changeid>
+# prow - open working copy as a PR
+#
+# ### History cleanup
+# 
+# undo - undo last jj operation when messed up
+# rebase -s <src> -d <dst> - rebase <src> onto <dst>
+# jj sqar <revset> - squash <revset> into its parent
+# jj squash --from <src> --to <dst> - squash <src> into <dst>
+#
+#
+prep-jj:
+    which jj || brew install jj
+    which lazyjj || brew install lazyjj
+    mkdir -p ~/.config/jj
+    cp -f dotfiles/.config/jj/config.toml  ~/.config/jj/config.toml
+    jj config set --user user.name "$(git config --get user.name)"
+    jj config set --user user.email "$(git config --get user.email)"
+    jj config list --no-pager
+
+init-jj PROJ="forest" *PARAMS="":
+    #!/usr/bin/env zsh
+    cd ~/projects/{{PROJ}}
+    jj status || jj git init --colocate
 
 ## Languages
 
@@ -303,13 +412,6 @@ prep-zj:
 # p n - prev/next tab
 # [ - into scroll/copy mode
 
-# on the original tmux
-# c - new window
-# number - switch to window by number
-#
-# $ - rename current session
-# . - rename current window
-# , - rename current tab
 zj *PARAMS:
     #!/usr/bin/env zsh
     zellij {{PARAMS}}
@@ -341,6 +443,21 @@ ftm:
     else
         echo "No session selected."
     fi
+
+# on the original tmux
+# c - new window
+# number - switch to window by number
+#
+# $ - rename current session
+# . - rename current window
+# , - rename current tab
+# x - kill the current pane
+# & - kill the current window
+# " - split ----
+# % - split |
+tm-at NAME:
+    #!/usr/bin/env zsh
+    tmux attach -t {{NAME}} || tmux new-session -s {{NAME}}
 
 tm-btop:
     #!/usr/bin/env zsh
@@ -476,7 +593,7 @@ mk-act:
 run-act CMD="bash" OPTS="-it":
     sudo docker exec {{OPTS}} -w /root/projects/forest act-dev {{CMD}}
 
-# manually run bootstrp-ubuntu first, or we won't even have just
+# manually run bootstrap-ubuntu first, or we won't even have just
 prep-act:
     # for brew and zsh
     just prep-ubuntu
@@ -490,3 +607,87 @@ prep-act-in-zsh:
     just prep-lvim-in-zsh
     echo 'To start lvim in server mode, run: just lv-remote'
     echo 'Then from outside the container, run: just lv-local'
+
+## SSH
+
+reset-ssh-keys:
+    rip ~/.ssh/id_*; rip ~/.ssh/*_rsa; rip ~/.ssh/*_dsa; rip ~/.ssh/*_ecdsa; rip ~/.ssh/*_ed25519 || true
+
+# still verifying
+prep-ssh-keys:
+    #!/usr/bin/env zsh
+    key_path=~/.ssh/id_ed25519
+    if [[ ! -f "$key_path" && ! -f "$key_path.pub" ]]; then
+        echo "Generating new SSH key pair..."
+        ssh-keygen -t ed25519 -a 100 -f "$key_path" -q -N ""
+        chmod 600 "$key_path" "$key_path.pub"
+        echo "SSH keys generated and permissions set."
+    else
+        echo "SSH keys already exist at $key_path and $key_path.pub"
+        echo "Skipping key generation."
+    fi
+    cat "$key_path.pub"
+    # Read remote user and host
+    read "remote_user?Enter remote username: " || return
+    read "remote_host?Enter remote hostname or IP: " || return
+
+    # Ask if user wants to proceed with key deployment
+    if read -q "?Do you want to deploy the public key now? (y/n) "; then
+        echo  # Add a newline after the prompt
+        if ssh-copy-id -x -i "$key_path.pub" "$remote_user@$remote_host"; then
+            echo "Public key deployed successfully!"
+            echo "You can now connect with: ssh $remote_user@$remote_host"
+        else
+            echo "Failed to deploy key. Please check connection or manually add the key:"
+            cat "$key_path.pub"
+        fi
+    else
+        echo "\nPublic key was not deployed. You can manually add this key:"
+        cat "$key_path.pub"
+    fi
+
+# initial draft, not verified
+prep-ssh-server:
+    #!/usr/bin/env zsh
+
+    # Check if running as root
+    if [[ $EUID -ne 0 ]]; then
+        echo "This script must be run as root" 
+        exit 1
+    fi
+
+    # Prompt for the public key
+    echo "Please paste your public SSH key (typically from ~/.ssh/id_rsa.pub):"
+    read -r public_key
+
+    # Verify the key looks like a valid SSH public key
+    if [[ ! "$public_key" =~ ^ssh-(rsa|dss|ed25519|ecdsa) ]]; then
+        echo "Error: This doesn't look like a valid SSH public key"
+        exit 1
+    fi
+
+    # Create .ssh directory if it doesn't exist
+    mkdir -p /root/.ssh
+
+    # Add key to authorized_keys
+    echo "$public_key" >> /root/.ssh/authorized_keys
+
+    # Set correct permissions
+    chmod 700 /root/.ssh
+    chmod 600 /root/.ssh/authorized_keys
+
+    # Configure SSH server (uncomment to enable)
+    # echo "Adding key to SSH server configuration..."
+    # echo "PermitRootLogin prohibit-password" >> /etc/ssh/sshd_config
+    # echo "AuthorizedKeysFile .ssh/authorized_keys" >> /etc/ssh/sshd_config
+
+    # Restart SSH service (uncomment to enable)
+    # echo "Restarting SSH service..."
+    # if command -v systemctl >/dev/null; then
+    #     systemctl restart sshd
+    # else
+    #     service ssh restart
+    # fi
+
+    echo "Public key added to /root/.ssh/authorized_keys"
+    echo "You should now be able to SSH as root using this key"

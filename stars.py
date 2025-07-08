@@ -10,7 +10,7 @@ import re
 import sys
 import urllib.parse
 from collections import defaultdict
-from datetime import datetime
+from datetime import datetime, timedelta
 import signal
 import errno
 
@@ -123,10 +123,16 @@ def format_url(url):
     return url
 
 
-def process_stars(input_text, existing_urls=None, deduplicate=True, show_all_sources=False):
+def process_stars(input_text, existing_urls=None, deduplicate=True, show_all_sources=False, days_filter=7):
     # Initialize set of existing URLs if provided
     if existing_urls is None:
         existing_urls = set()
+    
+    # Calculate cutoff date for filtering if days_filter is not -1
+    cutoff_timestamp = None
+    if days_filter != -1:
+        cutoff_date = datetime.now() - timedelta(days=days_filter)
+        cutoff_timestamp = cutoff_date.timestamp()
     
     # Group by date
     date_groups = defaultdict(list)
@@ -166,6 +172,10 @@ def process_stars(input_text, existing_urls=None, deduplicate=True, show_all_sou
                     timestamp = entry.get("datePublished") or entry.get("dateArrived")
                     if timestamp is None:
                         continue  # Skip if no timestamp available
+
+                    # Filter by days if specified
+                    if cutoff_timestamp is not None and timestamp < cutoff_timestamp:
+                        continue  # Skip entries older than the cutoff
 
                     date = datetime.fromtimestamp(timestamp).strftime("%Y-%m-%d")
 
@@ -265,20 +275,28 @@ def process_stars(input_text, existing_urls=None, deduplicate=True, show_all_sou
         # Start building the link with the primary content - CHANGED: removed "read " from here
         link_parts = [f"- {formatted_title_link}"]
 
-        # Add source references - only if both HN and lobste.rs links are present or if show_all_sources is true
+        # Add source references - show when show_all_sources is true, or when there's HN (alone or with lobste.rs)
+        # AGENT-NOTE: Source link display logic - only show links when HN is present (alone or with lobste.rs), not for lobste.rs-only
         sources = content_data.get("sources", {})
-        has_hn = "HN" in sources
-        has_lobsters = "lobste.rs" in sources
-
-        # Determine if we should add source references
-        should_add_sources = show_all_sources or (has_hn and has_lobsters)
         
-        if should_add_sources:
+        if show_all_sources:
+            # Show all sources when explicitly requested
             for source_name, source_url in sorted(sources.items()):
                 # Only add source reference if it's not the same as primary URL
                 if normalize_url(source_url) != normalize_url(primary_url):
                     formatted_source_url = format_url(source_url)
                     link_parts.append(f"([on {source_name}]({formatted_source_url}))")
+        else:
+            # Show source references only when there's HN (alone or with lobste.rs)
+            has_hn = "HN" in sources
+            
+            # Show links if there's HN present
+            if has_hn:
+                for source_name, source_url in sorted(sources.items()):
+                    # Only add source reference if it's not the same as primary URL
+                    if normalize_url(source_url) != normalize_url(primary_url):
+                        formatted_source_url = format_url(source_url)
+                        link_parts.append(f"([on {source_name}]({formatted_source_url}))")
 
         # Join parts with spaces
         link = " ".join(link_parts)
@@ -325,27 +343,30 @@ def main():
     
     parser = argparse.ArgumentParser(description="Process starred items into Forester format")
     parser.add_argument('--no-deduplicate', action='store_true', help='Disable deduplication of existing URLs')
-    parser.add_argument('--tree-file', type=str, help='Path to the tree file to extract existing URLs from', default='trees/uts-0018.tree')
+    parser.add_argument('--tree-files', type=str, nargs='+', help='Paths to tree files to extract existing URLs from', default=['trees/uts-0018.tree', 'trees/uts-016E.tree'])
     parser.add_argument('--show-all-sources', action='store_true', help='Show all sources, not just when both lobste.rs and HN are present')
+    parser.add_argument('--days', type=int, default=7, help='Show only entries from the last X days (default: 7, use -1 for all days)')
     args = parser.parse_args()
 
     try:
         # Read input
         input_text = sys.stdin.read()
         
-        # Extract existing URLs from tree file if provided
+        # Extract existing URLs from tree files if provided
         existing_urls = set()
-        if args.tree_file and not args.no_deduplicate:
-            try:
-                with open(args.tree_file, 'r', encoding='utf-8') as f:
-                    tree_content = f.read()
-                    existing_urls = extract_existing_urls_from_tree(tree_content)
-                    print(f"Extracted {len(existing_urls)} URLs from {args.tree_file}", file=sys.stderr)
-            except Exception as e:
-                print(f"Warning: Could not read tree file: {e}", file=sys.stderr)
+        if args.tree_files and not args.no_deduplicate:
+            for tree_file in args.tree_files:
+                try:
+                    with open(tree_file, 'r', encoding='utf-8') as f:
+                        tree_content = f.read()
+                        urls = extract_existing_urls_from_tree(tree_content)
+                        existing_urls.update(urls)
+                        print(f"Extracted {len(urls)} URLs from {tree_file}", file=sys.stderr)
+                except Exception as e:
+                    print(f"Warning: Could not read tree file {tree_file}: {e}", file=sys.stderr)
         
         # Process and print
-        output = process_stars(input_text, existing_urls, not args.no_deduplicate, args.show_all_sources)
+        output = process_stars(input_text, existing_urls, not args.no_deduplicate, args.show_all_sources, args.days)
         print(output)
     
     except BrokenPipeError:

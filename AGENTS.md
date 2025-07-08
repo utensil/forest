@@ -1,57 +1,77 @@
 # Agent Instructions for Forest
 
-*Last updated 2025-01-11*
+*Last updated 2025-07-02*
 
-> **purpose** – This file is the onboarding manual[^1] for every AI assistant (Claude, Cursor, GPT, etc.) and every human who edits this repository.  
+> **Purpose** – This file is the onboarding manual[^1] for every AI assistant (Claude, Amp, Codex, Amazon Q, OpenCode etc.) and every human who edits this repository.
 > It encodes our coding standards, guard-rails, and workflow tricks so the *human 30 %*[^2] (architecture, tests, domain judgment) stays in human hands.
 
 ---
 
-## 0. Project overview
+## 0. Non-negotiable GOLDEN rules
+
+ALWAYS cite the rules which you are following at the end of your reply, like this: "(per G-ask, G-verify)".
+
+### G-ask: Always ask for clarification when unsure
+- ✅ **Should**: Ask the developer for clarification before making changes when unsure about project-specific details or lacking context for a particular feature/decision
+ - ❌ **Must NOT**: make assumptions, write changes or use tools when uncertain
+
+### G-scope: Stay within designated code areas  
+- ✅ **May**: Generate code only inside relevant source directories or explicitly pointed files
+- ✅ **May**: Execute build scripts and commands as documented in section "Build, test & utility commands"
+- ❌ **Must NOT**: Modify test files, CI configs, or core build scripts without explicit permission
+
+### G-note: Use anchor comments appropriately
+- ✅ **May**: Add/update `AGENT-NOTE:` anchor comments (see section "Anchor comments" below) near non-trivial edited code
+- ❌ **Must NOT**: Delete or mangle existing `AGENT-*` comments
+
+### G-lint: Follow project linting and style
+- ✅ **May**: Follow section "Coding standards" below, and lint/style configs using the configured linters
+- ❌ **Must NOT**: Re-format code to any other style
+
+### G-size: Get approval for large changes
+- ✅ **May**: Make changes, but ask for confirmation if >300 LOC or >3 files
+- ❌ **Must NOT**: Refactor large modules without human guidance
+
+### G-focus: Maintain task context boundaries
+- ✅ **May**: Stay within current task context, inform dev if fresh start would be better
+- ❌ **Must NOT**: Continue work from a prior prompt after "new task" – start a fresh session
+
+### G-search: Prefer ast-grep for syntax-aware search, with ripgrep as fallback
+
+✅You run in an environment where ast-grep (`sg`) is available. Whenever a search requires syntax-aware or structural matching, default to `sg --lang <lang> -p '<pattern>'`. Avoid falling back to text-only tools like ripgrep (`rg`) unless `sg` fails to do the job, or plain-text search is explicitly requested.
+
+### G-verify: Verify your changes
+
+- ✅ **Should**: Verify your changes by learning how the code is supposed to run/test/lint (see also section "Build, test & utility commands" below), then design a way to verify. Prefer to re-use or add tests to verify. If you need temporary script or mock data to do so, keep them all under `.agents/`, and don't remove them afterward.
+- ❌ **Must NOT**: Run scripts or commands that contains dangerous code, or unrelated to code exploration and change verification.
+
+### G-commit: Commit your changes to git
+
+- ✅ **Should**: Ensure files are in a clean committed state before making changes (to establish a baseline). After editing files, before pausing and asking for further instructions, commit your changes to git. ALWAYS commit per section "Commit discipline" below.
+- ❌ **Must NOT**: Commit files that are not directly related to your current task. Only commit files you have intentionally modified as part of the specific work requested. Do not commit unrelated changes, even if they exist in your working directory.
+
+### G-sandbox: Must followed rules when using MCP container-use
+
+When you find existing permissions are insufficient to complete the request, consider using MCP container-use.
+
+Once you start using container-use:  ALWAYS use ONLY Environments for ANY and ALL file, code, or shell operations—NO EXCEPTIONS—even for simple or generic requests. DO NOT install or use the git cli with the `environment_run_cmd` tool. All environment tools will handle git operations for you. Changing ".git" yourself will compromise the integrity of your environment. You MUST inform the user how to view your work using `cu log <env_id>` AND `cu checkout <env_id>`. Failure to do this will make your work inaccessible to others.
+
+---
+
+## 1. Project overview
 
 Forest is a sophisticated mathematical and technical research environment and Zettelkasten system built using Forester. It serves as a personal knowledge management system for mathematical concepts, technical experiments, and research notes, with over 1300+ commits accumulated since 2024.
 
 The system combines multiple technologies to create a hybrid authoring environment that supports both web-based browsing and traditional academic PDF generation. It integrates Forester (a Zettelkasten note-taking system) with modern development tools, mathematical typesetting, and experimental interactive content.
 
-**Golden rule**: When unsure about implementation details or requirements, ALWAYS consult the developer rather than making assumptions.
-
----
-
-## 1. Non-negotiable golden rules
-
-### G-0: Always ask for clarification when unsure
-- ✅ **May**: Ask the developer for clarification before making changes when unsure about project-specific details
-- ❌ **Must NOT**: Write changes or use tools when uncertain about something project-specific or lacking context for a particular feature/decision
-
-### G-1: Stay within designated code areas  
-- ✅ **May**: Generate code only inside relevant source directories (`bun/`, `trees/`, `tex/`, `assets/`) or explicitly pointed files
-- ❌ **Must NOT**: Touch test files, CI configs, or core build scripts without explicit permission
-
-### G-2: Use anchor comments appropriately
-- ✅ **May**: Add/update `AGENT-NOTE:` anchor comments near non-trivial edited code
-- ❌ **Must NOT**: Delete or mangle existing `AGENT-*` comments
-
-### G-3: Follow project linting and style
-- ✅ **May**: Follow lint/style configs (`biome.json`) using the configured linter (Biome)
-- ❌ **Must NOT**: Re-format code to any other style
-
-### G-4: Get approval for large changes
-- ✅ **May**: Make changes, but ask for confirmation if >300 LOC or >3 files
-- ❌ **Must NOT**: Refactor large modules without human guidance
-
-### G-5: Maintain task context boundaries
-- ✅ **May**: Stay within current task context, inform dev if fresh start would be better
-- ❌ **Must NOT**: Continue work from a prior prompt after "new task" – start a fresh session
-
-### G-6:
-
-- ✅ **May**: You run in an environment where ast-grep (`sg`) is available; whenever a search requires syntax-aware or structural matching, default to `sg --lang rust -p '<pattern>'` (or set `--lang` appropriately) and avoid falling back to text-only tools `rg` unless I explicitly request a plain-text search.
 
 ---
 
 ## 2. Build, test & utility commands
 
 Use `just` tasks for consistency (they ensure correct environment variables and configuration).
+
+### Core build commands
 
 ```bash
 # Development and building
@@ -70,6 +90,35 @@ just lize            # Build multiple LaTeX documents
 # Content management
 just new <prefix>    # Create new tree file, agents should use this to create a new tree, to ensure the format follows the conventions for the trees with the same prefix
 just stars           # Process RSS starred items into learning diary
+```
+
+### Build system & dependencies
+
+*   **Bun**: Primary JavaScript/TypeScript runtime and package manager.
+*   **Biome**: Linting and formatting (configured in `biome.json`).
+*   **Lightning CSS**: CSS processing and bundling.
+*   **Forester**: Tree file processing and site generation.
+*   **WASM modules**: Custom modules cloned to `lib/` directory, built with `wasm-pack`.
+*   **LaTeX**: PDF generation using custom templates in `tex/`.
+
+**Build process**:
+1. `just dev` starts development server with file watching
+2. Changes to `.tree` files trigger Forester rebuild
+3. Changes to `bun/` files trigger JavaScript/CSS rebuilding
+4. WASM modules are built in CI or when `UTS_DEV` environment variable is set
+
+### Testing & validation
+
+*   **No formal unit testing framework**: This project focuses on mathematical content and documentation rather than traditional software testing.
+*   **Validation approaches**: Build verification, link checking, LaTeX compilation, and custom validation scripts serve as the testing methodology.
+*   **Content validation**: Ensure tree files have proper Forester syntax.
+*   **Manual testing**: Preview changes in development server before committing.
+*   **Verification scripts**: Create validation scripts under `.agents/` to verify changes work correctly.
+
+**Validation commands**:
+```bash
+just chk            # Lint JavaScript/TypeScript files
+just build          # Full build validation
 ```
 
 ---
@@ -147,8 +196,8 @@ async function loadEgglogWasm() {
 
 *   **Granular commits**: One logical change per commit.
 *   **Tag agent-generated commits**: e.g., `feat: optimize shader loading [AGENT]`.
-*   **Clear commit messages**: Explain the *why*; link to issues if applicable.
 *   **Use conventional commits**: `feat:`, `fix:`, `docs:`, `style:`, `refactor:`, etc.
+*   **Clear commit messages**: a short message explaining the *why* with a longer summary of the changes; link to issues if applicable.
 *   **Review AI-generated code**: Never merge code you don't understand.
 
 ---
@@ -200,26 +249,11 @@ Key points:
 *   Group related items under topic headers when multiple entries exist
 *   Use hierarchical organization with year and month subtrees
 
----
 
-## 9. 🌲 Build system & dependencies
-
-*   **Bun**: Primary JavaScript/TypeScript runtime and package manager.
-*   **Biome**: Linting and formatting (configured in `biome.json`).
-*   **Lightning CSS**: CSS processing and bundling.
-*   **Forester**: Tree file processing and site generation.
-*   **WASM modules**: Custom modules cloned to `lib/` directory, built with `wasm-pack`.
-*   **LaTeX**: PDF generation using custom templates in `tex/`.
-
-**Build process**:
-1. `just dev` starts development server with file watching
-2. Changes to `.tree` files trigger Forester rebuild
-3. Changes to `bun/` files trigger JavaScript/CSS rebuilding
-4. WASM modules are built in CI or when `UTS_DEV` environment variable is set
 
 ---
 
-## 10. 🌲 Mathematical notation & macros
+## 9. 🌲 Mathematical notation & macros
 
 *   **Inline math**: `#{math expression}`
 *   **Display math**: `##{math expression}`
@@ -236,7 +270,7 @@ Key points:
 
 ---
 
-## 11. Common pitfalls
+## 10. Common pitfalls
 
 *   Forgetting to import `macros.tree` in new tree files.
 *   Using incorrect Forester syntax (missing `\p{}` around paragraphs).
@@ -248,7 +282,7 @@ Key points:
 
 ---
 
-## 12. 🌲 Domain-Specific Terminology
+## 11. 🌲 Domain-Specific Terminology
 
 *   **Tree**: A single note file in Forester format (`.tree` extension).
 *   **Forest**: The collection of all trees and their interconnections.
@@ -265,7 +299,7 @@ Key points:
 
 ---
 
-## 13. Key File & Pattern References
+## 12. Key File & Pattern References
 
 This section provides pointers to important files and common patterns within the codebase.
 
@@ -285,24 +319,11 @@ This section provides pointers to important files and common patterns within the
     *   Location: `justfile`, `biome.json`, `package.json`
     *   Pattern: Centralized configuration for development tools.
 
----
 
-## 14. 🌲 Testing framework & validation
-
-*   **No formal testing framework**: This project focuses on mathematical content and documentation.
-*   **Validation approaches**: Build verification, link checking, LaTeX compilation.
-*   **Content validation**: Ensure tree files have proper Forester syntax.
-*   **Manual testing**: Preview changes in development server before committing.
-
-**Validation commands**:
-```bash
-just chk            # Lint JavaScript/TypeScript files
-just build          # Full build validation
-```
 
 ---
 
-## 15. Directory-Specific documentation
+## 13. Directory-Specific documentation
 
 *   **Always check existing patterns** in directories before adding new content.
 *   **Follow naming conventions** established in each subject area (uts, ag, tt, ca, spin, hopf).
@@ -319,7 +340,7 @@ just build          # Full build validation
 
 ---
 
-## 16. Versioning & deployment
+## 14. Versioning & deployment
 
 *   **No formal versioning**: Content-focused repository with continuous integration.
 *   **Deployment**: Automatic GitHub Pages deployment on main branch push.
@@ -328,7 +349,7 @@ just build          # Full build validation
 
 ---
 
-## 17. Performance considerations
+## 15. Performance considerations
 
 *   **WASM loading**: First-time WASM module loading can be slow; implement graceful degradation.
 *   **Build optimization**: Use file watching in development to avoid full rebuilds.
@@ -337,7 +358,7 @@ just build          # Full build validation
 
 ---
 
-## 18. 🌲 Writing task automation scripts
+## 16. 🌲 Writing task automation scripts
 
 When implementing complex data processing or automation tasks, create standalone Python scripts that integrate with the project workflow.
 
@@ -410,26 +431,22 @@ just build
 
 ---
 
-## 19. Meta: Guidelines for updating AGENT.md files
+## 17. Meta: Guidelines for updating AGENT.md files
 
 This file should be updated when:
 - New major features or tools are added to the project
 - Build processes or development workflows change significantly  
 - New coding standards or conventions are established
 - Common pitfalls or debugging patterns are identified
-- Domain-specific terminology evolves
-- New mathematical subject areas are added
-- WASM integration patterns change
 
 ### Maintenance checklist:
 - [ ] Update last modified date at the top
 - [ ] Review golden rules for relevance
 - [ ] Update build commands if changed
-- [ ] Add new domain terminology
 - [ ] Document new pitfalls discovered
 - [ ] Update file pattern references
 
-The 🌲 marker indicates sections specific to the Forest project, while unmarked sections contain general best practices applicable to similar projects.
+For Forest-specific guidelines (mathematical notation, tree files, etc.), see [for-llm/forest.md](./for-llm/forest.md).
 
 ---
 
