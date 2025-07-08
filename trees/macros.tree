@@ -419,7 +419,7 @@ so the text size almost matches the size output by native forester code. This do
 \p{\code{codeblock[lang][body]}: A syntax-highlighted code block specifying the language.}
 
 \def\codeblock[lang][body]{
-  \<html:code>[class]{\lang highlight grace-loading}{\body}
+  \<html:code>[style]{white-space: pre-wrap;}[class]{\lang highlight grace-loading}{\body}
 }
 
 \p{\code{newvocab[x]}: A newly defined term with an emphazised style.}
@@ -525,7 +525,7 @@ so the text size almost matches the size output by native forester code. This do
 }
 
 \def\shadertoy[extraclasses][body]{
-  \<html:pre>[class]{embeded-shadertoy \extraclasses}{\body}
+  \<html:pre>[style]{text-align: left;}[class]{embeded-shadertoy \extraclasses}{\body}
 }
 
 \def\shadertoywithcode[caption][body]{
@@ -535,11 +535,11 @@ so the text size almost matches the size output by native forester code. This do
   }
 }
 
-\def\mermaid[body]{\<html:div>[class]{mermaid grace-loading}{\body}}
+\def\mermaid[body]{\<html:pre>[class]{mermaid grace-loading}{\body}}
 
 \def\tags[t]{\<html:span>[class]{tags grace-loading}{\t}}
 
-\def\md[body]{\<html:div>[class]{markdownit grace-loading}{\body}}
+\def\md[body]{\<html:pre>[class]{markdownit grace-loading}{\body}}
 
 \def\mdblock[t][body]{\block{\t}{\md{\body}}}
 
