@@ -301,7 +301,7 @@ gitlog:
 #
 # ### unamed branch
 #
-# prw - open (commited) working copy as a PR
+# prw - open (committed) working copy as a PR
 #
 # This actually combines:
 #
