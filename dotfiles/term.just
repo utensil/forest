@@ -289,21 +289,31 @@ gitlog:
 # ### named branch
 # 
 # bs <bookmark> -r <revset> - move bookmark <bookmark> to <revset>
+#
+# prb <bookmark> - create a PR from <bookmark> to the default branch
+#
+# This actually combines:
+#
 # psb <bookmark> - push bookmark to remote branch named <bookmark>
 # gh pr create --head <bookmark> - create a PR from <bookmark> to the default branch
+#
 # git fetch - will update local bookmark from remote branch
 #
 # ### unamed branch
-# 
+#
+# prw - open (commited) working copy as a PR
+#
+# This actually combines:
+#
 # pscw - push changes of working copy to remote branch named jj/<changeid>
 # prow - open working copy as a PR
 #
 # ### History cleanup
-# 
+#
 # undo - undo last jj operation when messed up
 # rebase -s <src> -d <dst> - rebase <src> onto <dst>
-# jj sqar <revset> - squash <revset> into its parent
-# jj squash --from <src> --to <dst> - squash <src> into <dst>
+# sqar <revset> - squash <revset> into its parent
+# squash --from <src> --to <dst> - squash <src> into <dst>
 #
 #
 prep-jj:
