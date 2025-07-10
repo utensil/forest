@@ -244,6 +244,10 @@ pscb = ['git', 'push', '--change', 'branch(@)']
 psca = ['git', 'push', '--change', 'all:(visible_heads() & ~private())']
 psa = ['git', 'push', '--all']
 psd = ['git', 'push', '--deleted']
+# [NOTE] it's handy if you mainly work on main and push it
+psm = ['util', 'exec', '--', 'bash', '-c', 'jj bs main -r @- && jj psb main']
+# [NOTE] the master branch variant of psm, for working with older repos
+psms = ['util', 'exec', '--', 'bash', '-c', 'jj bs master -r @- && jj psb master']
 
 # pr
 pro = ['util', 'exec', '--', 'bash', '-c', 'gh pr create --head $(jj blrb -T name)']
