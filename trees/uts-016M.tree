@@ -162,7 +162,11 @@ will auto stash any dirty edits, and reset local files to the state of that `<re
 
 We don't need to explictly commit, when we use `jj n <revset>` or `jj e <revset>` to jump to anywhere else, the local edits will be automatically committed to the original change.
 
+## Evolution of a change
+
 Wait, what if I messed up when editing a commit, and left it, can I go back?
+
+At that time, it's beyond what `jj undo` can easily do, especially we might be confused by what we did and didn't do.
 
 The first thing we can do is to inspect how a change has evolved over time by
 
@@ -213,6 +217,8 @@ Abandoned 1 commits:
 Rebased 1 descendant commits onto parents of abandoned commits
 </pre>
 </details>
+
+We may also use `jj op diff --op <operationid>` to inspect meta changes of an operation (it has `--from` `--to` variant so it also works on a range of operations).
 
 ## PR with an ad hoc branch
 
