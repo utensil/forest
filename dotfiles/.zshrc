@@ -6,6 +6,8 @@ eval "$(starship init zsh)"
 
 eval "$(zoxide init zsh)"
 
+(which mise > /dev/null) && eval "$(mise activate bash)"
+
 # https://github.com/Sin-cy/dotfiles
 # run `just prep-zsh` first
 source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh

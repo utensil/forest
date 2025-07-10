@@ -332,6 +332,18 @@ init-jj PROJ="forest" *PARAMS="":
 
 ## Languages
 
+# https://blog.vbang.dk/2025/06/29/tools-i-love-mise/
+prep-mise:
+    #!/usr/bin/env zsh
+    which mise || brew install mise
+    echo 'Ensure run the following in ~/.bashrc or ~/.zshrc:'
+    echo 'eval "$(mise activate $(basename "$0"))"'
+    cat << 'EOF'
+    e.g. echo 'eval "$(mise activate zsh)"' >> ~/.zshrc
+    EOF
+    # mise supports popular programming languages (including zig) with core plugins
+    # https://github.com/jdx/mise/tree/main/src/plugins/core
+
 prep-rust:
     #!/usr/bin/env bash
     set -e
