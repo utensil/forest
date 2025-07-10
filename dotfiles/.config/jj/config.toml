@@ -99,7 +99,8 @@ lp = ['log', '-r', 'private() & ~stash()']
 lg = ['log', '-r', 'all()']
 
 # default
-default = ['util', 'exec', '--', 'bash', '-c', 'echo "" && jj sf --no-pager && jj log']
+# [NOTE] limit jj log to occupy ~2/3 the screen and use no pager
+default = ['util', 'exec', '--', 'bash', '-c', 'echo "" && jj sf --no-pager && jj log --no-pager --limit 20']
 
 # init
 init = ['git', 'init', '--colocate']
