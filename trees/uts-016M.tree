@@ -355,9 +355,11 @@ After opening the PR, I've noticed a weird non-empty commit `xm`
 After inspecting the diff, I believe its changes is aborbed into `rz` (`#1`), so I rebased `xm` on top of `rz` to see if there is any diff left.
 
 ```
-❯ jj rebase -s xm -d rz 
+❯ jj rb -s xm -d rz 
 Rebased 1 commits to destination
 ```
+
+where `rb` stands for `rebase`.
 
 I just need to remember that I'll be rebasing source (`-s`) onto destination (`-d`).
 
@@ -414,21 +416,38 @@ This doesn't demonstrate the full power of `jj`, but imagining how the same thin
 
 I'll wrap up with a summary of the commands/aliases that would be enough for daily work:
 
+### Show
+
+| alias | when to use |
+|-------|-------------|
+| `l`   | show log, `jj` works better |
+| `lp`  | show private log |
+| `lg`  | show all log, even elided changes |
+| `s`   | show status |
+| `w`   | show status and diff |
+| `d` | show the diff of current change |
+| `dr <revset>` | show the diff of revision `<revset>` |
+
 ### Edits
 
 | alias | when to use |
 |-------|-------------|
-| `l`  | log |
 | `n <revset>` | create a new change based on `<revset>` |
 | `cm <message>` | commit everything with `<message>` |
 | `ci` | commit the change, choose interactively, write commit message in `$EDITOR` | 
-| `d` | the diff of current change |
-| `dr <revset>` | the diff of revision `<revset>` |
 | `e <revset>` | edit any `<revset>` after commit |
 
 `<revset>` could be a short change id, a bookmark, and defaults to @ (working copy).
 
 After edit, just go anywhere else (with e or n), the changes will be commited; or an explicit commit will do.
+
+### Working with remote branch
+
+| alias | when to use |
+|-------|-------------|
+| `git fetch` |  will update local bookmark from remote branch |
+| `bt <branch>@origin` | track remote branch |
+| `bd <bookmark>` | delete a bookmark |
  
 ### PR with named branch
 
@@ -437,23 +456,25 @@ After edit, just go anywhere else (with e or n), the changes will be commited; o
 | `bs <bookmark> -r <revset>` | move bookmark `<bookmark>` to `<revset>` |
 | `psb <bookmark>` | push bookmark to remote branch named `<bookmark>` |
 | `prb <bookmark>` |  create a PR from `<bookmark>` to the default branch |
-| `git fetch` |  will update local bookmark from remote branch |
 
 ### PR with ad hoc branch
 
 | alias | when to use |
 |-------|-------------|
-| prw | open (committed) working copy as a PR |
-| pscw | push changes of working copy to remote branch named `jj/<changeid>` |
+| `prw` | open (committed) working copy as a PR |
+| `pscw` | push changes of working copy to remote branch named `jj/<changeid>` |
 
 ### History cleanup
 
 | alias | when to use |
 |-------|-------------|
 | `undo` | undo last jj operation when messed up |
-| `rebase -s <src> -d <dst>` | rebase `<src>` onto `<dst>` |
+| `rb -s <src> -d <dst>` | rebase `<src>` onto `<dst>` |
 | `sqar <revset>` | squash `<revset>` into its parent |
-| `squash --from <src> --to <dst>` | squash `<src>` into `<dst>` |
+| `sqa --from <src> --to <dst>` | squash `<src>` into `<dst>` |
+| `ad <revset>` | abandon a change |
+| `evolog <revset>` | show how a change evolve in time |
+| `op log` | show log of operations on jj |
 
 These aliases can be found in this [config file](https://github.com/utensil/forest/blob/main/dotfiles/.config/jj/config.toml) which is based on pksunkara's [gist](https://gist.github.com/pksunkara/622bc04242d402c4e43c7328234fd01c).
 
