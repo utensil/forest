@@ -765,6 +765,10 @@ prep-hkt:
 prep-harper:
     which marksman || brew install marksman
     which harper-ls || brew install harper
+    # requires a recent nightly, otherwise compilation will fail on an unstable feature
+    # it reports too many spell errors from links and code, making it unsable
+    # pretty output, though, thanks to https://docs.rs/crate/ariadne
+    which harper-cli || cargo +nightly install --git https://github.com/Automattic/harper harper-cli --locked
 
 import 'dotfiles/llm.just'
 import 'dotfiles/archived.just'
