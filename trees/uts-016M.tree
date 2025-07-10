@@ -26,7 +26,7 @@ I wouldn't know this when I first read [Steve's Jujutsu Tutorial](https://stevek
 
 [A Newbie's First Contribution to (Rust for) Linux: Git gud](https://blog.buenzli.dev/rust-for-linux-first-contrib/#git-gud) shows the author's Git workflow to contribute to Linux kernel with a lot of fast moving forks. The configuration for `rebase` and `rerere` seems really solving the roadblocks of contributing to a thriving project. But the author said: "Jujutsu is much better at this kind of workflow and what I was actually using most of the time. I first discovered this workflow while using Jujutsu and only later found out you could do something similar with Git." A refreshing remark! Maybe I do need native and friendly support for more advanced features, even just to alleviate my mind.
 
-Eventually, pksunkara's [Git experts should try Jujutsu](https://pksunkara.com/thoughts/git-experts-should-try-jujutsu/), and his side-by-side workflow comparisons with Git, and his [`jj` configuration full of aliases](https://gist.github.com/pksunkara/622bc04242d402c4e43c7328234fd01c)  that gave me the first boost, so I finally decided to spend a day with  `jj`. I definitely no Git expert, but those aliases really look attempting, what if I can pick my a few favorites?
+Eventually, pksunkara's [Git experts should try Jujutsu](https://pksunkara.com/thoughts/git-experts-should-try-jujutsu/), and his side-by-side workflow comparisons with Git, and his [`jj` configuration full of aliases](https://gist.github.com/pksunkara/622bc04242d402c4e43c7328234fd01c)  that gave me the first boost, so I finally decided to spend a day with  `jj`. I definitely no Git expert, but those aliases really look attempting, what if I can pick my few favorites?
 
 I started the journey with a minimal goal. I just wanted to recover my Git workflow in `jj`, as `jj` coexists with a local Git repo, and I need `jj` to work with my GitHub (or any code forge I might migrate to in future). I learned much more, and they are much easier than I thought.
 
@@ -75,17 +75,17 @@ Actually it's already alias to `jj init` by pksunkara, but here we go with the o
 
 ## Thrown into limbo
 
-Once `jj` is initialized, you are no longer on any branch of Git. If you go back to `git` or `lazygit`, you'll see that you are on a detached state.
+Once `jj` is initialized, we are no longer on any branch of Git. If we go back to `git` or `lazygit`, we'll see that we are on a detached state.
 
-I don't know about you, but my feeling is like I'm floating in the air, with no solid ground under my feet.
+I don't know about you, but my feeling was like floating in the air, with no solid ground under my feet.
 
 I felt much better when I learned that what I commit as *change*s in `jj` will still be reflected in Git as commits, and commits can still find their parents.
 
-I can go back and edit a *change* then commit again, it would be become a new Git commit, but its identity as the original *change* remains the same. So changes can still find their parent changes.
+We can go back and edit a *change* then commit again, it would be become a new Git commit, but its identity as the original *change* remains the same. So changes can still find their parent changes.
 
 Actually, a branch in Git, is just a reference always point to the latest commit of the branch, so its history can be traced via parents.
 
-`jj` has *bookmark* for pointing to a *change*. Unlike in Git, when you commit more changes on top of it, the *bookmark* doesn't move to the latest change automatically, however, *you* can move it.
+`jj` has *bookmark* for pointing to a *change*. Unlike in Git, when you commit more changes on top of it, the *bookmark* doesn't move to the latest change automatically, however, *we* can move it.
 
 With these 2 powerful concept, we are lifted off ground, start flying among changes, with bookmarks marking our path.
 
