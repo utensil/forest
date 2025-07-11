@@ -192,6 +192,19 @@ DS_MODEL := "deepseek-r1:7b"
 prep-om:
     which ollama || brew install ollama
 
+prep-gom:
+    which gollama || go install github.com/sammcj/gollama@HEAD
+
+gom-link: prep-gom
+    #!/usr/bin/env zsh
+    gollama -link-lmstudio --dry-run
+    read -q "?Confirm linking LMStudio models to ollama (y/n)? " && gollama -link-lmstudio
+    gollama -L --dry-run
+    read -q "?Confirm linking ollma models to LMStudio (y/n)? " && gollama -L
+
+gom-reset:
+    gollama -cleanup
+
 om:
     ollama serve
 
