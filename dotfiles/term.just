@@ -562,6 +562,15 @@ prep-pod:
 pod CMD="start":
     colima {{CMD}}
 
+# tested in lima
+# distrobox create --name test --init --image quay.io/toolbx-images/alpine-toolbox:latest
+# distrobox enter test
+# https://github.com/89luca89/distrobox/blob/main/docs/compatibility.md#containers-distros
+[linux]
+prep-dist:
+    which distrobox || sudo apt install -y distrobox
+    which docker || sudo apt install podman-docker
+
 k8s:
     colima start --kubernetes
 
