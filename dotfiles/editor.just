@@ -4,6 +4,10 @@ import 'term.just'
 
 ## Helix Editor
 
+prep-scls:
+    which simple-completion-language-server || cargo install --git https://github.com/estin/simple-completion-language-server.git
+    simple-completion-language-server fetch-external-snippets || true
+
 prep-hx:
     which hx || brew install helix
     rm -rf ~/.config/helix || true
@@ -11,6 +15,7 @@ prep-hx:
     ln -s {{justfile_directory()}}/dotfiles/.config/helix ~/.config/helix
     just prep-base16-helix
     just sync-hx
+    just prep-scls
 
 sync-hx:
     hx --grammar fetch
@@ -186,7 +191,6 @@ prep-zed:
 ## Language Servers
 
 prep-lsp:
-    which simple-completion-language-server || cargo install --git https://github.com/estin/simple-completion-language-server.git
     which pylsp || brew install python-lsp-server
     which ruff || brew install ruff
     which typescript-language-server || brew install typescript-language-server
