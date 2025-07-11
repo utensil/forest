@@ -757,7 +757,7 @@ irc CHANNEL:
 prep-im:
     which iamb || brew install iamb
 
-prep-hkt:
+prep-hkt-archived:
     #!/usr/bin/env zsh
     # Usage:
     # hn top # for HackerNews Top stories
@@ -779,6 +779,16 @@ prep-hkt:
     neonmodem connect --type lobsters --url https://lobste.rs || true
     # An account is needed
     # neonmodem connect --type lemmy --url https://lemmy.ml || true
+
+prep-hk:
+    #!/usr/bin/env zsh
+    which hackernews_tui || cargo install --git https://github.com/utensil/hackernews-TUI --branch proxy hackernews_tui --locked
+    cp -f dotfiles/.config/hn-tui.toml ~/.config/
+
+# -i ITEM
+# Open HackerNews TUI
+hk *PARAMS:
+    hackernews_tui {{PARAMS}}
 
 ## Spellcheck
 
