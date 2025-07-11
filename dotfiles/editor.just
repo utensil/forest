@@ -186,6 +186,7 @@ prep-zed:
 ## Language Servers
 
 prep-lsp:
+    which simple-completion-language-server || cargo install --git https://github.com/estin/simple-completion-language-server.git
     which pylsp || brew install python-lsp-server
     which ruff || brew install ruff
     which typescript-language-server || brew install typescript-language-server
