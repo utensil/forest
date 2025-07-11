@@ -265,6 +265,12 @@ prep-gitlog:
 gitlog:
     serie
 
+prep-zizmor:
+    which zizmor || brew install zizmor
+
+lint-gh *PARAMS : prep-zizmor
+    zizmor {{PARAMS}} .github/workflows
+
 # # Frequently used jj command alias
 #
 # ## Edits
