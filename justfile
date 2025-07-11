@@ -682,6 +682,7 @@ yazi DIR="$HOME/projects":
 
 prep-br:
     which broot || brew install broot
+    mkdir -p ~/.config/broot/
     cp -f dotfiles/.config/broot/conf.toml ~/.config/broot/
 
 br DIR="$HOME/projects":
