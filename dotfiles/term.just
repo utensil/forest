@@ -33,6 +33,7 @@ prep-term:
     which eza || brew install eza
     which rip || brew install rm-improved
     which yazi || brew install yazi
+    which broot || brew install broot
     which 7zz || brew install sevenzip
     # Search & replace
     which fzf || brew install fzf

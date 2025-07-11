@@ -676,9 +676,14 @@ prep-space:
 tree DIR="." LEVEL="1":
     eza --git -T -L {{LEVEL}} --hyperlink {{DIR}}
 
-yazi DIR="{{HOME}}/projects":
+yazi DIR="$HOME/projects":
     #!/usr/bin/env bash
-    EDITOR=lvim yazi {{DIR}}
+    EDITOR=hx yazi {{DIR}}
+
+br DIR="$HOME/projects":
+    #!/usr/bin/env bash
+    echo {{DIR}}
+    EDITOR=hx broot {{DIR}}
 
 # Tab to switch between 2 Tab
 # Cmd+Shift+. to toggle hidden files
