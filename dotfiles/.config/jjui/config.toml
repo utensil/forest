@@ -1,0 +1,30 @@
+# default config: https://github.com/idursun/jjui/blob/main/default-config.toml
+
+# https://github.com/idursun/jjui/discussions/163
+
+# Not working
+# [[--scope]]
+# "--when.commands" = ["diff", "show"]
+
+# [--scope.ui]
+# pager = "delta"
+# diff-formatter = "delta"
+
+[custom_commands]
+"delta" = { args = [
+  "util",
+  "exec",
+  "--",
+  "bash",
+  "-c",
+  """jj show -r $change_id --summary --git --color=always | delta --pager 'less -R'""",
+], show = "interactive" }
+
+"ci" = { args = [
+  "util",
+  "exec",
+  "--",
+  "bash",
+  "-c",
+  "jj ci"
+], show = "interactive" }

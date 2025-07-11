@@ -320,13 +320,18 @@ lint-gh *PARAMS : prep-zizmor
 #
 prep-jj:
     which jj || brew install jj
-    which lazyjj || brew install lazyjj
     mkdir -p ~/.config/jj
-    cp -f dotfiles/.config/jj/config.toml  ~/.config/jj/config.toml
+    cp -f dotfiles/.config/jj/config.toml ~/.config/jj/config.toml
     jj config set --user user.name "$(git config --get user.name)"
     jj config set --user user.email "$(git config --get user.email)"
     jj config list --no-pager
 
+prep-jjui:
+    # which lazyjj || brew install lazyjj
+    which jjui || brew install jjui
+    mkdir -p ~/.config/jjui
+    cp -f dotfiles/.config/jjui/config.toml ~/.config/jjui/config.toml
+    
 init-jj PROJ="forest" *PARAMS="":
     #!/usr/bin/env zsh
     cd ~/projects/{{PROJ}}
