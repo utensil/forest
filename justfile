@@ -680,6 +680,10 @@ yazi DIR="$HOME/projects":
     #!/usr/bin/env bash
     EDITOR=hx yazi {{DIR}}
 
+prep-br:
+    which broot || brew install broot
+    cp -f dotfiles/.config/broot/conf.toml ~/.config/broot/
+
 br DIR="$HOME/projects":
     #!/usr/bin/env bash
     echo {{DIR}}
