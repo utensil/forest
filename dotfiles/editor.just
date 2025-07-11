@@ -1,7 +1,5 @@
 # Editor/IDE Configuration Tasks
 
-import 'term.just'
-
 ## Helix Editor
 
 prep-scls:
