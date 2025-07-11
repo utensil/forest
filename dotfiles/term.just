@@ -46,10 +46,6 @@ prep-term:
     which tokei || brew install tokei
     which jq || brew install jq
 
-prep-term-fancy:
-    which fastfetch || brew install fastfetch
-    which tty-clock || brew install tty-clock
-
 prep-media:
     which magick ||brew install imagemagick
     which ffmpeg || brew install ffmpeg

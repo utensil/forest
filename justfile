@@ -404,7 +404,12 @@ prep-scp:
 scp *PARAMS:
     termscp {{PARAMS}}
 
-## Coolness
+## Fancy
+
+prep-fancy:
+    which fastfetch || brew install fastfetch
+    which tty-clock || brew install tty-clock
+    which rusty-rain || cargo install rusty-rain
 
 # run fastfetch every time Enter is pressed
 fetch:
@@ -421,6 +426,12 @@ time:
 weather CITY:
     curl 'wttr.in/{{CITY}}'
     # ?format=3'
+
+matrix:
+    # rusty-rain -C green -H white -s -c jap
+    # Colors extracted from ANSI color 2 (green) & 7 (white)
+    # theme: https://raw.githubusercontent.com/mbadolato/iTerm2-Color-Schemes/master/schemes/GitHub-Dark-Default.itermcolors
+    rusty-rain -C 63,185,80 -H 177,186,196 -s -c jap
 
 ghost:
     npx -y ghosttime
@@ -734,7 +745,7 @@ irc CHANNEL:
 # Add a config to ~/Library/Application Support/iamb/config.toml per https://iamb.chat/configure.html
 # Login via SSO on element
 # Verify by `:verify`, comparing emoji on element, and copy-paste the `:verify confirm USER/DEVICE` command on iamb
-prep-matrix:
+prep-im:
     which iamb || brew install iamb
 
 prep-hkt:
