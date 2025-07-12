@@ -153,8 +153,7 @@ j = [
     ":write-all",
     ":new",
     ":insert-output jjui >/dev/tty",
-    ":set mouse false",
-    ":set mouse true",
+    ':insert-output echo "\x1b[?1049h\x1b[?2004h" > /dev/tty',
     ":buffer-close!",
     ":redraw",
     ":reload-all"
@@ -169,7 +168,5 @@ y = [
     ':insert-output yazi %{buffer_name} --chooser-file=/tmp/yazi-uniq-file',
     ':insert-output echo "\x1b[?1049h\x1b[?2004h" > /dev/tty',
     ':open %sh{cat /tmp/yazi-uniq-file}',
-    ":set mouse false",
-    ":set mouse true",
     ':redraw',
 ]
