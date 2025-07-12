@@ -197,12 +197,22 @@ prep-zed:
 ## Language Servers
 
 prep-lsp:
+    # html, css, json, eslint
+    # css ls enables color swatches in helix
+    which vscode-css-language-server || npm i -g vscode-langservers-extracted
+    # python
     which pylsp || brew install python-lsp-server
     which ruff || brew install ruff
+    # js & ts
     which typescript-language-server || brew install typescript-language-server
+    # rust
     which cargo || just prep-rust
     which rust-analyzer || (rustup component add rust-src; rustup component add rust-analyzer)
+    # zig
+    # https://github.com/jdx/mise/discussions/3390 for mise
+    # https://mise.jdx.dev/registry.html#registry
     which zls || echo "zls not installed, visit https://zigtools.org/zls/install/"
+    # GLSL
     which glsl_analyzer || ( cd /tmp && wget https://github.com/nolanderc/glsl_analyzer/releases/download/v1.6.0/aarch64-macos.zip && unzip aarch64-macos.zip && sudo mv bin/glsl_analyzer /usr/local/bin/)
 
 # https://github.com/DJAndries/llmvm/tree/master/frontends/codeassist
