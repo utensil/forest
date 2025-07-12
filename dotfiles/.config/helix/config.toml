@@ -115,14 +115,16 @@ v = ":toggle-option whitespace.render all none"
 # Really escape - no more fighting with the cursor or with multiple cursors
 # esc = ;,esc
 # Not working as it only stops the key seqence
-esc = ["collapse_selection", "keep_primary_selection", "normal_mode"]
-
+# esc = ["collapse_selection", "keep_primary_selection", "normal_mode"]
 
 # set lang
 m = ":lang markdown"
 
+# open log
+l = ":log-open"
+
 # Open TUIs
- 
+
 # scooter - search & replace in workspace - ctrl-c to quit
 "/" = [
     ":write-all",
@@ -158,16 +160,16 @@ j = [
     ":reload-all"
 ]
 
-# open log
-l = ":log-open"
-
-# Not working yet
-# e = [
-#     ":new",
-#     ":sh rm -f /tmp/unique-file-h21a434",
-#     ":insert-output yazi '%{buffer_name}' --chooser-file=/tmp/unique-file-h21a434",
-#     ":insert-output echo \"x1b[?1049h\" > /dev/tty",
-#     ":bc!",
-#     ":open %sh{cat /tmp/unique-file-h21a434}",
-#     ":redraw",
-# ]
+# yazi
+# https://www.reddit.com/r/HelixEditor/comments/1kwk74i/trying_to_use_yazi_inside_of_helix/
+# https://github.com/sxyazi/yazi/pull/2461
+# requires helix HEAD and latest yazi
+y = [
+    ':sh rm -f /tmp/yazi-uniq-file',
+    ':insert-output yazi %{buffer_name} --chooser-file=/tmp/yazi-uniq-file',
+    ':insert-output echo "\x1b[?1049h\x1b[?2004h" > /dev/tty',
+    ':open %sh{cat /tmp/yazi-uniq-file}',
+    ":set mouse false",
+    ":set mouse true",
+    ':redraw',
+]
