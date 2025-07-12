@@ -7,20 +7,20 @@ prep-scls:
     simple-completion-language-server fetch-external-snippets || true
 
 prep-hx:
-    which hx || brew install helix
-    rm -rf ~/.config/helix || true
-    mkdir -p ~/.config
-    ln -s {{justfile_directory()}}/dotfiles/.config/helix ~/.config/helix
-    just prep-base16-helix
-    just sync-hx
-    just prep-scls
-
-sync-hx:
+    which hx || brew install helix --HEAD
+    just prep-hx-conf
     hx --grammar fetch
     hx --grammar build
 
+prep-hx-conf:
+    just reset-hx
+    mkdir -p ~/.config
+    ln -s {{justfile_directory()}}/dotfiles/.config/helix ~/.config/helix
+    just prep-base16-helix
+    just prep-scls
+
 reset-hx:
-    rm -rf ~/.config/helix || true
+    rm -f ~/.config/helix || true
 
 # -v enables verbose logging
 hx PROJ="forest" *PARAMS="":
@@ -30,14 +30,15 @@ hx PROJ="forest" *PARAMS="":
 
 prep-hxx:
     #!/usr/bin/env zsh
+    just prep-hx-conf
     if [ ! -d ../helix ]; then
         git clone https://github.com/utensil/helix ../helix
     else
         (cd ../helix && git checkout patchy && git pull)
     fi
     cd ../helix
-    cargo clean
-    cargo install --path helix-term --locked
+    # cargo clean
+    cargo +nightly install --path helix-term # --locked
     export HELIX_RUNTIME=$PWD/runtime
     ~/.cargo/bin/hx -g fetch
     ~/.cargo/bin/hx -g build
