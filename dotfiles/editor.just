@@ -13,14 +13,20 @@ prep-hx:
     hx --grammar build
 
 prep-hx-conf:
-    just reset-hx
+    just reset-hx-conf
     mkdir -p ~/.config
     ln -s {{justfile_directory()}}/dotfiles/.config/helix ~/.config/helix
     just prep-base16-helix
     just prep-scls
 
-reset-hx:
+reset-hx-conf:
     rm -f ~/.config/helix || true
+
+reset-hx:
+    brew uninstall helix || true
+
+reset-hxx:
+    cargo uninstall helix-term || true
 
 # -v enables verbose logging
 hx PROJ="forest" *PARAMS="":
@@ -28,6 +34,7 @@ hx PROJ="forest" *PARAMS="":
     cd ~/projects/{{PROJ}}
     hx {{PARAMS}}
 
+# doc: https://docs.helix-editor.com/master/
 prep-hxx:
     #!/usr/bin/env zsh
     just prep-hx-conf
