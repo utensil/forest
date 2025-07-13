@@ -601,5 +601,9 @@ check-oc:
 prep-uz:
     which uzi || go install github.com/devflowinc/uzi@latest
 
-prep-aq:
+prep-q:
     which q || brew install amazon-q
+    which q || sudo ln -s "/Applications/Amazon Q.app/Contents/MacOS/q" /usr/local/bin/q
+    which qchat || sudo ln -s "/Applications/Amazon Q.app/Contents/MacOS/qchat" /usr/local/bin/qchat
+    which qterm || sudo ln -s "/Applications/Amazon Q.app/Contents/MacOS/qterm" /usr/local/bin/qterm
+    # q login
