@@ -41,11 +41,15 @@ prep-hxx:
     if [ ! -d ../helix ]; then
         git clone https://github.com/utensil/helix ../helix
     else
+        # sometimes we may need to delete and retrack
+        # git checkout personal
+        # git branch -d patchy
+        # git checkout --track origin/patchy
         (cd ../helix && git checkout patchy && git pull)
     fi
     cd ../helix
     # cargo clean
-    cargo +nightly install --path helix-term # --locked
+    cargo install --path helix-term # --locked
     export HELIX_RUNTIME=$PWD/runtime
     ~/.cargo/bin/hx -g fetch
     ~/.cargo/bin/hx -g build
