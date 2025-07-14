@@ -215,9 +215,22 @@ prep-lsp:
     # zig
     # https://github.com/jdx/mise/discussions/3390 for mise
     # https://mise.jdx.dev/registry.html#registry
-    which zls || echo "zls not installed, visit https://zigtools.org/zls/install/"
+    which zls || just prep-zls || echo "zls not installed, visit https://zigtools.org/zls/install/"
     # GLSL
     which glsl_analyzer || ( cd /tmp && wget https://github.com/nolanderc/glsl_analyzer/releases/download/v1.6.0/aarch64-macos.zip && unzip aarch64-macos.zip && sudo mv bin/glsl_analyzer /usr/local/bin/)
+
+# https://github.com/zigtools/zls/issues/2402
+prep-zls:
+    #!/usr/bin/env zsh
+    set -e
+    which zig || (echo "zig not found in this environment, failed to install zls" && exit 1)
+    ZIG_VERSION=`zig version`
+    ZIG_VERSION_ESCAPED=`echo $ZIG_VERSION|sed -e 's/\+/%2B/g'`
+    # ZIG_ARCH=`zig env|jq -r '.target | split(".")[0]'`
+    # echo "$ZIG_VERSION $ZIG_VERSION_ESCAPED $ZIG_ARCH"
+    # curl "https://releases.zigtools.org/v1/zls/select-version?zig_version=$ZIG_VERSION_ESCAPED&compatibility=only-runtime"|jq ".\"$ZIG_ARCH\""
+    ZLS_VERSION=`curl "https://releases.zigtools.org/v1/zls/select-version?zig_version=$ZIG_VERSION_ESCAPED&compatibility=only-runtime"|jq -r ".version"`
+    mise use -g aqua:zigtools/zls@$ZLS_VERSION
 
 # https://github.com/DJAndries/llmvm/tree/master/frontends/codeassist
 prep-lsp-lv:
