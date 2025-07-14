@@ -23,15 +23,61 @@
 \title{July, 2025}
 
 \subtree[2025-07-01]{\mdnote{2025-07-01}{
-- [Alternative Blanket Implementations for a Single Rust Trait](https://www.greyblake.com/blog/alternative-blanket-implementations-for-single-rust-trait/)
-- [Building Replication-Safe LSM Trees in Postgres](https://www.paradedb.com/blog/lsm_trees_in_postgres)
 - agent related
     - [Claude Code now supports hooks](https://docs.anthropic.com/en/docs/claude-code/hooks) ([on HN](https://news.ycombinator.com/item?id=44429225))
         - Claude Code hooks: user-defined shell commands that execute at various points in Claude Code’s lifecycle.
+    - [Interesting prompts found in vscode-copilot-chat](https://simonwillison.net/2025/Jun/30/vscode-copilot-chat/#atom-everything)
+    - [Using Claude Code to build a GitHub Actions workflow](https://simonwillison.net/2025/Jul/1/claude-code-github-actions/#atom-everything)
+        - recorded by [Descript: Edit Videos & Podcasts Like a Doc | AI Video Editor](https://www.descript.com/?redirect=false)
+            - Direct your AI co-editor to turn your vision into video
 - [Doing My Day Job on Chimera Linux](https://www.wezm.net/v2/posts/2025/daily-driving-chimera-for-work/)
     - [Chimera](https://chimera-linux.org/) is built from scratch using novel tooling, approaches, and userland (FreeBSD + Musl C)
-    - [Distrobox](https://distrobox.it/) creates a container that's tightly integrated with the host (break isolation whenever possible) 
-- [Converting a large mathematical software package written in C++ to C++20 modules](https://arxiv.org/abs/2506.21654) ([on HN](https://news.ycombinator.com/item?id=44433899))
+    - [Distrobox](https://distrobox.it/) creates a container that's tightly integrated with the host (break isolation whenever possible)
+- formal related
+    [From Python Programmer to Distributed Systems Researcher in 10 Years Without a PhD](https://emptysqua.re/blog/from-python-programmer-to-distributed-systems-researcher-in-10-years/)
+        - [Conformance Checking at MongoDB: Testing That Our Code Matches Our TLA+ Specs](https://emptysqua.re/blog/mongodb-conformance-checking/)
+            - use the model-checker to output the entire state graph for the spec. The state space is a DAG, with a finite number of behaviors (paths from an initial state to a final state). There are 30,184 states and 4913 behaviors. Max wrote a Go program to parse the model-checker’s output and write out a C++ unit test for each behavior, 4913 tests in total.
+- zig related
+    - [The build cache of Zig](https://alexrios.me/blog/zig-build-cache/)
+        - how the cache is structured
+        - what's included in hash to check modification
+        - incremental compilation: working toward cache per top-level declaration
+        - cross compilation: musl, libc, compiler-rt, libunwind etc. are compiled from source and cached
+    - [Zprof: Cross-allocator profiler](https://github.com/ANDRVV/zprof)
+- antibot related
+    - [Cloudflare: Introducing pay per crawl: enabling content owners to charge AI crawlers for access](https://blog.cloudflare.com/introducing-pay-per-crawl/)
+- [My Database Is My Application: Rethinking Webhook Logic with DuckDB and SQL](https://www.hey.earth/posts/duckdb-webhook-gateway)
+    - DuckDB as an in-process SQL engine capable of acting as a programmable substrate for data transformation at runtime
+    - [manifold](https://github.com/manifold-systems/manifold/)
+        - a Java compiler plugin
+        - use DSL directly and type-safely from Java
+            - SQL, JSON, GraphQL, XML, YAML, CSV, JavaScript
+- diagram related
+    - [OpenFLOW – Quickly make beautiful infrastructure diagrams local to your machine](https://github.com/stan-smith/OpenFLOW)
+        - based on [markmanx/isoflow](https://github.com/markmanx/isoflow)
+    - [mmastrac/stylus: Lightweight status page for home infrastructure](https://github.com/mmastrac/stylus)
+        - architecture and health status
+- language related
+    - [Pluto is a unique dialect of Lua with a focus on general-purpose programming](https://github.com/PlutoLang/Pluto) ([on HN](https://news.ycombinator.com/item?id=44429531))
+    - [Helix language](https://github.com/helixlang/helix-lang)
+    - [Reflections on Haskell and Rust](https://academy.fpblock.com/blog/rust-haskell-reflections/)
+- rust related
+    - [Exception handling in rustc_codegen_cranelift](https://tweedegolf.nl/en/blog/157/exception-handling-in-rustc-codegen-cranelift)
+        - introduces ["landing pad" style expcetion handling](https://llvm.org/docs/LangRef.html#landingpad-instruction)
+            - see also [Lele's Memo: Landingpad](https://cnlelema.github.io/memo/en/compilers/llvm/exceptions/landingpad/)
+        - unwinding ABI crash course
+            - personality function: language-specific data format during unwinding
+        - the appendix provided a gdb script for reproducing the debugger session
+    - [Alternative Blanket Implementations for a Single Rust Trait](https://www.greyblake.com/blog/alternative-blanket-implementations-for-single-rust-trait/)
+    - [It's Types All the Way Down - Rust CLI with Clap](https://tucson-josh.com/posts/rust-clap-cli/) ([on HN](https://news.ycombinator.com/item?id=44429695))
+- agent management related
+    - [Vibe Kanban - Orchestrate AI Coding Agents](https://www.vibekanban.com/)
+    - [VibeTunnel - access terminal from the browser to command agents](https://github.com/amantus-ai/vibetunnel)
+- Misc
+    - [Melbourne man discovers extensive model train network underneath house](https://www.sbs.com.au/news/article/i-was-shocked-melbourne-mans-unbelievable-find-after-buying-house/m4sksfer8) ([on HN](https://news.ycombinator.com/item?id=44429182))
+    - [Feasibility study of a mission to Sedna - Nuclear propulsion and solar sailing](https://arxiv.org/abs/2506.17732)
+    - [GPEmu: A GPU emulator for rapid, low-cost deep learning prototyping [pdf]](https://vldb.org/pvldb/vol18/p1919-wang.pdf) ([on HN](https://news.ycombinator.com/item?id=44428674))
+    - [Converting a large mathematical software package written in C++ to C++20 modules](https://arxiv.org/abs/2506.21654) ([on HN](https://news.ycombinator.com/item?id=44433899))
 }}
 
 }
@@ -54,6 +100,7 @@
     - [How to Fix Your Context](https://simonwillison.net/2025/Jun/29/how-to-fix-your-context/)
         - context rot: poisoning, distraction, confusion, clash
         - solution: quarantine, pruning, offloading
+    - [The new skill in AI is not prompting, it's context engineering](https://www.philschmid.de/context-engineering) ([on HN](https://news.ycombinator.com/item?id=44427757))
 - security related
     - [Beyond the Hook: A Technical Deep Dive into Modern Phishing Methodologies](https://blog.quarkslab.com/./technical-dive-into-modern-phishing.html)
         - amazed by Browser-in-the-Browser
@@ -74,6 +121,16 @@
     - [Who needs graph theory anyway?](https://www.tumblr.com/readevalprint/97467849358/who-needs-graph-theory-anyway)
         - solving the word segmentation problem using graph theory by modeling it as a longest path problem in a directed acyclic graph (DAG) with dynamic programming
     - [Succinct data structures](https://blog.startifact.com/posts/succinct/)
+    - [People Keep Inventing Prolly Trees](https://www.dolthub.com/blog/2025-06-03-people-keep-inventing-prolly-trees/)
+        - Merkle Tree is one of its variants
+        - properties
+            - searchable
+            - history independence
+            - self-balancing
+            - structural sharing
+            - efficient diffing
+            - efficient mutation
+    - [Building Replication-Safe LSM Trees in Postgres](https://www.paradedb.com/blog/lsm_trees_in_postgres)
 - AI consciousness related
     - [A Framework for Recognizing Emergent Consciousness in AI](https://habr.com/en/articles/922894/)
         - Attention: The capacity for multi-level focusing.
@@ -294,7 +351,7 @@
 - [Interesting Bits of Postgres Grammar](https://steve.dignam.xyz/2025/06/20/interesting-bits-of-postgres-grammar/)
     - found [Geometric Functions and Operators](https://www.postgresql.org/docs/17/functions-geometry.html)
 - TUI related
-    - [fclones](https://terminaltrove.com/fclones/) - finds and handles duplicate files across directories 
+    - [fclones](https://terminaltrove.com/fclones/) - finds and handles duplicate files across directories
     - [tatuin](https://terminaltrove.com/tatuin/) - aggregates TODOs from various sources
     - [alden: detachable terminal sessions without breaking scrollback](https://ansuz.sooke.bc.ca/entry/389) - only a source tarball
     - [Atuin – Magical Shell History](https://atuin.sh)
@@ -319,7 +376,7 @@
         - writing a recursive descent parser in Typst for [custom code syntax highlighting](https://gitlab.com/TheZoq2/typst-common/-/blob/main/highlight.typ)
         - death by a thousand papercuts for bibliography management
         - writing [a tool](https://gitlab.com/TheZoq2/typstex2/) to convert Typst to LaTeX for submitting paper to LaTeX only journal
-        - the advisors perspective is also informative 
+        - the advisors perspective is also informative
 - [Nano-Vllm: lightweight vLLM implementation built from scratch](https://github.com/GeeeekExplorer/nano-vllm)
     - I would wonder if I could do this in Zig
 - language related
@@ -405,6 +462,7 @@
     - [Learn you Galois Fields for Great Good](https://xorvoid.com/galois_fields_for_great_good_00.html)
     - [Finding a billion factorials in 60 ms with SIMD](https://codeforces.com/blog/entry/143279) ([on HN](https://news.ycombinator.com/item?id=44351068)) ([on lobste.rs](https://lobste.rs/s/vaxtvz))
     - [Y Combinator (Math) Explained](https://anish.ink/posts/ycombinator.html)
+    - [Entropy of a Mixture](https://cgad.ski/blog/entropy-of-a-mixture.html) ([on HN](https://news.ycombinator.com/item?id=44427929))
 - ai safety related
     - [Moral puzzles: Man vs. machine](https://dynomight.net/puzzles-results/)
     - [Rolling the ladder up behind us](https://xeiaso.net/blog/2025/rolling-ladder-behind-us/) ([on HN](https://news.ycombinator.com/item?id=44328894)) ([on lobste.rs](https://lobste.rs/s/dl5sj9))
@@ -494,6 +552,7 @@
     - [The Promised LAN](https://notes.pault.ag/tpl/)
     - [Fun with Telnet](https://brandonrozek.com/blog/fun-with-telnet/)
     - [A brief history of web browsers](https://eclecticlight.co/2025/06/28/a-brief-history-of-web-browsers/)
+    - [Emoji Kitchen - Browse Google's unique emoji combinations](https://emojikitchen.dev/)
 - agent related
     - [\verb>>>|100% effective>>>](https://simonwillison.net/2025/Jun/16/100-percent/#atom-everything)
         - on LLM safety, there is no guarantee
@@ -584,7 +643,7 @@
 - rust related
     - [OxCaml, Jane Street's extension of OCaml is now open-source](https://oxcaml.org) ([on HN](https://news.ycombinator.com/item?id=44268782)) ([on lobste.rs](https://lobste.rs/s/unsbmk))
     - [Hypershell: A Type-Level DSL for Shell-Scripting in Rust powered by Context-Generic Programming](https://contextgeneric.dev/blog/hypershell-release/)
-    - [Datalog in Minikanren](https://deosjr.github.io/dynamicland/datalog.html) ([on HN](https://news.ycombinator.com/item?id=44283093), many good references about datalog, and scheme) 
+    - [Datalog in Minikanren](https://deosjr.github.io/dynamicland/datalog.html) ([on HN](https://news.ycombinator.com/item?id=44283093), many good references about datalog, and scheme)
     - [\verb>>>|Bzip2 crate switches from C to 100% Rust>>>](https://trifectatech.org/blog/bzip2-crate-switches-from-c-to-rust/)
         - `c2rust`, crate [cc](https://crates.io/crates/cc), `miri`
         - `cargo fuzz`, `cargo audit`, `semgrep` (particularly [semgrep-rules](https://github.com/trailofbits/semgrep-rules))
