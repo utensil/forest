@@ -45,9 +45,9 @@ ALWAYS cite the rules which you are following at the end of your reply, like thi
 - ✅ **Should**: Verify your changes by learning how the code is supposed to run/test/lint (see also section "Build, test & utility commands" below), then design a way to verify. Prefer to re-use or add tests to verify. If you need temporary script or mock data to do so, keep them all under `.agents/`, and don't remove them afterward.
 - ❌ **Must NOT**: Run scripts or commands that contains dangerous code, or unrelated to code exploration and change verification.
 
-### G-commit: Commit your changes to git
+### G-commit: Commit your changes to version control system
 
-- ✅ **Should**: Ensure files are in a clean committed state before making changes (to establish a baseline). After editing files, before pausing and asking for further instructions, commit your changes to git. ALWAYS commit per section "Commit discipline" below.
+- ✅ **Should**: After editing files, before pausing and asking for further instructions, commit your changes to version control system. ALWAYS commit per section "Commit discipline" below. ALL commits MUST include [AGENT] tag.
 - ❌ **Must NOT**: Commit files that are not directly related to your current task. Only commit files you have intentionally modified as part of the specific work requested. Do not commit unrelated changes, even if they exist in your working directory.
 
 ### G-sandbox: Must followed rules when using MCP container-use
@@ -194,10 +194,20 @@ async function loadEgglogWasm() {
 
 ## 6. Commit discipline
 
+The version control system is `jj`, NOT git.
+
+To commit file `A.txt`, `B that has spaces.txt`, and directory `src`, use `jj commit 'A.txt | "B that has spaces.txt"' -m "your commit message here"`.
+
 *   **Granular commits**: One logical change per commit.
-*   **Tag agent-generated commits**: e.g., `feat: optimize shader loading [AGENT]`.
+*   **MANDATORY [AGENT] tag**: ALL agent-generated commits MUST end with `[AGENT]` tag. NO EXCEPTIONS.
+    - ✅ Correct: `feat: optimize shader loading [AGENT]`
+    - ❌ Wrong: `feat: optimize shader loading` (missing [AGENT] tag)
 *   **Use conventional commits**: `feat:`, `fix:`, `docs:`, `style:`, `refactor:`, etc.
-*   **Clear commit messages**: a short message explaining the *why* with a longer summary of the changes; link to issues if applicable.
+*   **Descriptive commit messages**: ALWAYS include both:
+    - Short title explaining the *why* (what problem this solves)
+    - Detailed description of *what* changed (specific files, functions, behavior)
+    - Link to issues if applicable
+    - Example: `fix: resolve WASM loading timeout in dev mode [AGENT]` + description of which files were modified and how
 *   **Review AI-generated code**: Never merge code you don't understand.
 
 ---
