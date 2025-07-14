@@ -17,7 +17,7 @@ prep-aichat:
       api_key: $OPENAI_API_KEY
       models:
         - name: $OPENAI_API_MODEL
-       
+
     EOF
     cat "$HOME/Library/Application Support/aichat/config.yaml"
 
@@ -114,7 +114,7 @@ mp4 PROJ="forest" *PARAMS="":
 #   2. Or use `just aider ../project_name` to start aider in another directory
 # I've tested that it works with `AI!`, `AI?`, and `ai!`
 aw PROJ="forest" *PARAMS="":
-    just aider {{PROJ}} --watch-files {{PARAMS}} --read AGENT.md --edit-format diff # -v 
+    just aider {{PROJ}} --watch-files {{PARAMS}} --read AGENT.md --edit-format diff # -v
 
 llm-proxy *PARAMS:
     #!/usr/bin/env bash
@@ -450,7 +450,7 @@ prep-cc:
     which claude || npm install -g @anthropic-ai/claude-code
     which ccr || npm install -g @musistudio/claude-code-router
     mkdir -p ~/.claude-code-router
-    cat > ~/.claude-code-router/config.json << EOF 
+    cat > ~/.claude-code-router/config.json << EOF
     {
         "log": true,
         "OPENAI_API_KEY": "$OPENAI_API_KEY",
@@ -514,7 +514,7 @@ prep-cc-cu:
     claude mcp add --scope user container-use -- `which cu` stdio
     # curl https://raw.githubusercontent.com/dagger/container-use/main/rules/agent.md >> CLAUDE.md
     # claude --allowedTools mcp__container-use__environment_checkpoint,mcp__container-use__environment_file_delete,mcp__container-use__environment_file_list,mcp__container-use__environment_file_read,mcp__container-use__environment_file_write,mcp__container-use__environment_open,mcp__container-use__environment_run_cmd,mcp__container-use__environment_update
-    
+
 # just cc forest --debug
 cc PROJ="forest" *PARAMS="":
     #!/usr/bin/env zsh
@@ -607,3 +607,12 @@ prep-q:
     which qchat || sudo ln -s "/Applications/Amazon Q.app/Contents/MacOS/qchat" /usr/local/bin/qchat
     which qterm || sudo ln -s "/Applications/Amazon Q.app/Contents/MacOS/qterm" /usr/local/bin/qterm
     # q login
+
+# requires too many permissions to my GitHub account, rejected
+prep-kb:
+    npx -y vibe-kanban
+
+# backlog init <project name>
+# backlog browser
+prep-backlog:
+    bun i -g backlog.md
