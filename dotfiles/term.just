@@ -274,13 +274,13 @@ lint-gh *PARAMS : prep-zizmor
 # dr <revset> - the diff of revision <revset>
 # e <revset> - edit any <revset> after commit
 # (after edit, just go anywhere else (with e or n), the changes will be commited; or an explicit `jj commit` will do)
-# 
+#
 # ## Typical workflow with GitHub
 #
 # (inspired by https://jj-vcs.github.io/jj/latest/github/ )
 #
 # ### named branch
-# 
+#
 # bs <bookmark> -r <revset> - move bookmark <bookmark> to <revset>
 #
 # prb <bookmark> - create a PR from <bookmark> to the default branch
@@ -308,6 +308,11 @@ lint-gh *PARAMS : prep-zizmor
 # sqar <revset> - squash <revset> into its parent
 # squash --from <src> --to <dst> - squash <src> into <dst>
 #
+# ### Safeguard
+#
+# log -r <revset> - check your understanding of <revset> syntax: https://github.com/mmlb/jj-vcs-jj/blob/main/docs/revsets.md
+# file list <fileset> - check your understanding of <fileset> syntax: https://github.com/mmlb/jj-vcs-jj/blob/main/docs/filesets.md
+#
 #
 prep-jj:
     which jj || brew install jj
@@ -322,7 +327,7 @@ prep-jjui:
     which jjui || brew install jjui
     mkdir -p ~/.config/jjui
     cp -f dotfiles/.config/jjui/config.toml ~/.config/jjui/config.toml
-    
+
 init-jj PROJ="forest" *PARAMS="":
     #!/usr/bin/env zsh
     cd ~/projects/{{PROJ}}
@@ -417,7 +422,7 @@ prep-zj:
 # list - ls
 # kill all session - ka
 # delete all session - da
-# 
+#
 # Ctrl+b as trigger, follow by
 # ? for a list of key bindings
 # session manager - s
@@ -455,7 +460,7 @@ ftm:
     #!/usr/bin/env zsh
     session=$(tmux ls | awk -F: '
         /attached/ {print $1 "\033[32m *\033[0m"}
-        !/attached/ {print $1} 
+        !/attached/ {print $1}
     ' | fzf --ansi)
     session=$(echo "$session" | sed 's/ (attached)$//')
     if [ -n "$session" ]; then
@@ -527,7 +532,7 @@ prep-ds:
 #     diss -e g -a {{SESSION}} zsh
 
 ## Container and friends
-# 
+#
 # prep-pod:
 #    # brew uninstall orbstack
 #    which docker || brew install docker
@@ -681,7 +686,7 @@ prep-ssh-server:
 
     # Check if running as root
     if [[ $EUID -ne 0 ]]; then
-        echo "This script must be run as root" 
+        echo "This script must be run as root"
         exit 1
     fi
 
