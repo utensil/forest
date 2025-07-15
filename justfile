@@ -678,6 +678,19 @@ prep-space:
 tree DIR="." LEVEL="1":
     eza --git -T -L {{LEVEL}} --hyperlink {{DIR}}
 
+# https://yazi-rs.github.io/docs/quick-start#keybindings
+# ~ - get help
+# t - open a tab
+# <number> - open tab <number>
+# . - toggle hidden
+# f - smart filter; s - search via fd; S - search via rg
+# r - rename
+# x - cut
+# y - copy
+# p - paste
+# d - trash
+# D - delete
+# cc - copy file path; cd - copy directory; cf - copy filename; cn - copy filename w/o ext
 yazi DIR="$HOME/projects":
     #!/usr/bin/env bash
     EDITOR=hx yazi {{DIR}}
