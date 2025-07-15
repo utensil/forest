@@ -91,25 +91,25 @@ prep-push:
     echo "If checks fail, the push will be blocked"
     echo "Run 'just unprep-push' to remove this hook if needed"
     echo ""
-    
+
     cat > .git/hooks/pre-push << 'EOF'
     #!/bin/sh
-    
+
     # Git pre-push hook to run just pre-push
     # This will run before every git push
-    
+
     echo "Running pre-push checks..."
-    
+
     # Run just pre-push
     if ! just pre-push; then
         echo "Pre-push checks failed. Push aborted."
         exit 1
     fi
-    
+
     echo "Pre-push checks passed."
     exit 0
     EOF
-    
+
     chmod +x .git/hooks/pre-push
     echo "✅ Git pre-push hook installed successfully"
     echo "Now 'git push' will automatically run 'just pre-push' first"
@@ -442,7 +442,7 @@ rec:
     uvx asciinema rec
 
 loc:
-    tokei -o json|uvx tokei-pie    
+    tokei -o json|uvx tokei-pie
 
 ## fzf
 
