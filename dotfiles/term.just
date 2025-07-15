@@ -555,7 +555,7 @@ prep-pod:
 # `just prep-lima` which prepares a Lima VM with Ubuntu 25.04 x86_64 that is ready to run x86_64 static binaries and containers
 # https://github.com/lima-vm/lima/discussions/1573 for realizing the VM is still arm64
 # https://github.com/lima-vm/lima/discussions/1043#discussioncomment-3560889 for realizing only statically linked binaries work in VM, dynamically linked ones fail due to missing shared libraries, so they should be run in containers, so just use colima options for this!
-pod CMD="start":
+pod CMD="start --vm-type=vz --vz-rosetta":
     colima {{CMD}}
 
 # tested in lima
@@ -602,6 +602,7 @@ prep-dockge:
 dockge COMMAND="up":
     #!/usr/bin/env zsh
     cd /opt/dockge
+    # DOCKGE_ENABLE_CONSOLE=true
     # if COMMAND is up
     if [ "{{COMMAND}}" = "up" ]; then
         docker-compose up -d
@@ -609,6 +610,13 @@ dockge COMMAND="up":
     elif [ "{{COMMAND}}" = "down" ]; then
         docker-compose down
     fi
+
+# not working with colima, even with -connector
+# https://github.com/abiosoft/colima/issues/1234
+prep-ctop:
+    which ctop || brew install ctop
+    colima status
+    docker context ls
 
 # prep-act: prep-term
 #     #!/usr/bin/env bash

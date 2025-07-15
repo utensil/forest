@@ -235,7 +235,8 @@ prep-proxy:
     echo "HTTPS_PROXY=$proxy_url" >> .env
 
 prep-proxy-ui:
-    docker run --rm -it -p 5080:80 dockerproxy.net/haishanh/yacd
+    # docker run --rm -it -p 5080:80 dockerproxy.net/haishanh/yacd
+    docker run --rm -it -p 5080:80 ghcr.io/haishanh/yacd:master
 
 # see https://macos-defaults.com/ and https://github.com/Swiss-Mac-User/macOS-scripted-setup and https://github.com/mathiasbynens/dotfiles/blob/main/.macos
 prep-def:
