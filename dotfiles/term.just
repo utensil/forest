@@ -449,9 +449,6 @@ at NAME="mon":
 # runf SESSION="mon" CMD="zsh":
 #     zellij run -f -n {{SESSION}} -- {{CMD}}
 
-# to exit, Ctrl+B then :kill-session
-# to move to left pane, Ctrl+B then left arrow
-# to detach, Ctrl+B then d
 prep-tmux:
     which tmux || brew install tmux
 
@@ -469,17 +466,22 @@ ftm:
         echo "No session selected."
     fi
 
-# on the original tmux
+# leading key: ctrl+b
+# 
 # c - new window
-# number - switch to window by number
+# <number> - switch to window <number>
 #
 # $ - rename current session
 # . - rename current window
 # , - rename current tab
+# 
+# " - split -
+# % - split |
+# directions - move between panes
+#
+# d - detach
 # x - kill the current pane
 # & - kill the current window
-# " - split ----
-# % - split |
 tm-at NAME:
     #!/usr/bin/env zsh
     tmux attach -t {{NAME}} || tmux new-session -s {{NAME}}
