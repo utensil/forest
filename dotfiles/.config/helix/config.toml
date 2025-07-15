@@ -64,8 +64,9 @@ mode.select = "SELECT"
 [editor.lsp]
 # Display LSP progress messages below statusline
 display-messages = true
-# Display inlay hints
-display-inlay-hints = true
+# Don't display inlay hints be default
+# ret+t (meaning type) to toggle
+display-inlay-hints = false
 # Display LSP progress messages below statusline
 display-progress-messages = true
 
@@ -116,6 +117,9 @@ v = ":toggle-option whitespace.render all none"
 # esc = ;,esc
 # Not working as it only stops the key seqence
 # esc = ["collapse_selection", "keep_primary_selection", "normal_mode"]
+
+# toggle lsp hints
+t = ":toggle-option lsp.display-inlay-hints"
 
 # set lang
 m = ":lang markdown"
