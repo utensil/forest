@@ -451,6 +451,9 @@ at NAME="mon":
 
 prep-tmux:
     which tmux || brew install tmux
+    ln -sf {{justfile_directory()}}/dotfiles/.config/tmux ~/.config/tmux
+    ls -lhta ~/.config/tmux
+    tmux start-server 
 
 # adapted from https://maxscheijen.github.io/posts/managing-tmux-sessions-with-fzf/
 ftm:
@@ -466,7 +469,7 @@ ftm:
         echo "No session selected."
     fi
 
-# leading key: ctrl+b
+# prefix key: ctrl+b
 # 
 # c - new window
 # <number> - switch to window <number>

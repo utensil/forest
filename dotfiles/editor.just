@@ -15,7 +15,8 @@ prep-hx:
 prep-hx-conf:
     just reset-hx-conf
     mkdir -p ~/.config
-    ln -s {{justfile_directory()}}/dotfiles/.config/helix ~/.config/helix
+    ln -sf {{justfile_directory()}}/dotfiles/.config/helix ~/.config/helix
+    ls -lhta ~/.config/helix
     just prep-base16-helix
     just prep-scls
 
