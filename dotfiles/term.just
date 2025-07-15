@@ -226,6 +226,12 @@ prep-delta:
     mkdir -p ~/.config/lazygit
     cp -f .lazygit.yml ~/.config/lazygit/config.yml
 
+prep-resolve:
+    which mergiraf || brew install mergiraf
+
+resolve:
+    jj status && jj resolve --tool mergiraf
+
 git PROJ="forest" *PARAMS="":
     #!/usr/bin/env zsh
     cd ~/projects/{{PROJ}} && lazygit {{PARAMS}}
@@ -453,7 +459,7 @@ prep-tmux:
     which tmux || brew install tmux
     ln -sf {{justfile_directory()}}/dotfiles/.config/tmux ~/.config/tmux
     ls -lhta ~/.config/tmux
-    tmux start-server 
+    tmux start-server
 
 # adapted from https://maxscheijen.github.io/posts/managing-tmux-sessions-with-fzf/
 ftm:
@@ -470,14 +476,14 @@ ftm:
     fi
 
 # prefix key: ctrl+b
-# 
+#
 # c - new window
 # <number> - switch to window <number>
 #
 # $ - rename current session
 # . - rename current window
 # , - rename current tab
-# 
+#
 # " - split -
 # % - split |
 # directions - move between panes
