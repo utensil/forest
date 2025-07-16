@@ -629,6 +629,14 @@ prep-ctop:
     colima status
     docker context ls
 
+# https://github.com/abiosoft/colima/issues/958#issuecomment-3078908176
+# ? - help
+# l - log
+# e - execute shell
+# w - open browser (convention: first port is http)
+ctop:
+    DOCKER_HOST=`docker context ls --format json|grep colima|jq -r '.DockerEndpoint'` ctop
+
 # prep-act: prep-term
 #     #!/usr/bin/env bash
 #     which act || brew install act
