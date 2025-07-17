@@ -22,7 +22,9 @@ graph.style = 'square'
 [git]
 push-new-bookmarks = true
 # [NOTE] user neutral prefix
-push-bookmark-prefix = 'jj/'
+# push-bookmark-prefix = 'jj/'
+# [NOTE] Warning: Deprecated user-level config: git.push-bookmark-prefix is updated to templates.git_push_bookmark = '"jj/" ++ change_id.short()'
+
 private-commits = 'private()'
 # [NOTE] This feature writes change-id headers directly into the git commit object, and is visible to code forges upon push
 # see https://blog.tangled.sh/stacking
@@ -34,6 +36,7 @@ change_id = 'yellow'
 
 [templates]
 op_log = 'builtin_op_log_comfortable'
+git_push_bookmark = '"jj/" ++ change_id.short()'
 
 [template-aliases]
 builtin_log_compact = '''
