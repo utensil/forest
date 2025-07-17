@@ -637,6 +637,9 @@ prep-ctop:
 ctop:
     DOCKER_HOST=`docker context ls --format json|grep colima|jq -r '.DockerEndpoint'` ctop
 
+prep-lazydocker:
+    brew install jesseduffield/lazydocker/lazydocker
+
 # prep-act: prep-term
 #     #!/usr/bin/env bash
 #     which act || brew install act
