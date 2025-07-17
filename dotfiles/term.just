@@ -35,7 +35,9 @@ prep-term:
     which cmake || brew install cmake
     which pkg-config || brew install pkg-config
     which tokei || brew install tokei
+    # Format
     which jq || brew install jq
+    which hexyl || brew install hexyl
 
 prep-media:
     which magick ||brew install imagemagick
@@ -626,7 +628,6 @@ dockge COMMAND="up":
 # https://github.com/abiosoft/colima/issues/1234
 prep-ctop:
     which ctop || brew install ctop
-    colima status
     docker context ls
 
 # https://github.com/abiosoft/colima/issues/958#issuecomment-3078908176
@@ -635,6 +636,7 @@ prep-ctop:
 # e - execute shell
 # w - open browser (convention: first port is http)
 ctop:
+    colima status
     DOCKER_HOST=`docker context ls --format json|grep colima|jq -r '.DockerEndpoint'` ctop
 
 prep-lazydocker:
