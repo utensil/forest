@@ -45,6 +45,7 @@ prep-media:
     which mpv || brew install mpv
 
 # they were tried but seldom used
+#
 prep-term-seldom:
     which yq || brew install yq
     which nnn || brew install nnn
@@ -78,15 +79,17 @@ awake:
 ## Ghostty
 
 # based on https://gist.github.com/davidteren/898f2dcccd42d9f8680ec69a3a5d350e
+#
 find-font FONT="maple":
     #!/usr/bin/env zsh
     brew search '/font-.*-(nerd-font|nf)/' | awk '{ print $1 }' | grep -i {{FONT}}
 
-# mac only
+[macos]
 list-font FONT="fonts":
     fc-list|grep -i {{FONT}}
 
 # https://github.com/subframe7536/Maple-font
+#
 prep-font:
     brew install --cask font-fira-code-nerd-font
     brew install --cask font-fira-mono-nerd-font
@@ -113,6 +116,7 @@ prep-gtsh:
 # Cmd + up/down to jump to prev/next command issued in the terminal (a.k.a jump to prompt)
 # Cmd + Shift + J to dump scrollback to a file, allow searching etc. via a pager
 # more default key bindings: http://w.yet.org/posts/2024-12-30-ghostty/
+#
 keys-gt:
     ghostty +list-keybinds --default
 
@@ -125,6 +129,7 @@ reset-gt:
     rip ~/.config/ghostty
 
 # https://github.com/ghostty-org/ghostty/discussions/7194
+#
 log-gt:
     sudo log stream --level debug --predicate 'subsystem=="com.mitchellh.ghostty"'
 
@@ -137,13 +142,14 @@ prep-zsh:
 prof-zsh:
     time zsh -i -c exit
 
-# a zsh that inherits .env
+# Start a zsh that inherits .env
 zsh PROJ="forest":
     #!/usr/bin/env zsh
     cd ~/projects/{{PROJ}}
     zsh
 
 # a ssh that inherits .env etc.
+#
 ssh *PARAMS:
     ssh {{PARAMS}}
 
@@ -230,6 +236,7 @@ git PROJ="forest" *PARAMS="":
     cd ~/projects/{{PROJ}} && lazygit {{PARAMS}}
 
 # [NOTE] If modified, test with prep-gtsh
+#
 clone USER REPO:
     #!/usr/bin/env zsh
     mkdir -p ~/projects
@@ -242,6 +249,7 @@ clone USER REPO:
     fi
 
 # [NOTE] If modified, test with prep-zj
+#
 clone-conf CONF USER REPO:
     #!/usr/bin/env zsh
     mkdir -p ~/projects
@@ -257,6 +265,7 @@ clone-conf CONF USER REPO:
     fi
 
 # -w to open in browser
+#
 actions PROJ="forest" *PARAMS="":
     #!/usr/bin/env zsh
     cd ~/projects/{{PROJ}} && gh workflow view {{PARAMS}}
@@ -279,6 +288,7 @@ prep-gitlog:
 # <Tab>  Open refs list
 # <Alt-Down> <Alt-j>  Go to parent
 # Vim-like keybindings
+#
 gitlog:
     serie
 
@@ -339,7 +349,6 @@ lint-gh *PARAMS : prep-zizmor
 # log -r <revset> - check your understanding of <revset> syntax: https://github.com/mmlb/jj-vcs-jj/blob/main/docs/revsets.md
 # file list <fileset> - check your understanding of <fileset> syntax: https://github.com/mmlb/jj-vcs-jj/blob/main/docs/filesets.md
 #
-#
 prep-jj:
     which jj || brew install jj
     mkdir -p ~/.config/jj
@@ -362,6 +371,7 @@ init-jj PROJ="forest" *PARAMS="":
 ## Languages
 
 # https://blog.vbang.dk/2025/06/29/tools-i-love-mise/
+#
 prep-mise:
     #!/usr/bin/env zsh
     which mise || brew install mise
@@ -430,7 +440,7 @@ prep-ex:
 # Ctrl+N then direction keys to resize the corrent pane towards the direction
 # Ctrl+O W to manage sessions
 
-# install Zellij, and set its visual to minimal, and keybindings to tmux
+# Install Zellij, set its visual to minimal, keybindings to tmux
 prep-zj:
     #!/usr/bin/env zsh
     which zellij || brew install zellij
@@ -455,13 +465,14 @@ prep-zj:
 # t - new tab
 # p n - prev/next tab
 # [ - into scroll/copy mode
-
+#
 zj *PARAMS:
     #!/usr/bin/env zsh
     zellij {{PARAMS}}
 
 # Will attatch to a session if running (will attach it as a new client, all clients can see and operate on the same session)
 # or killed (will resurrect it, each pane will remember the last running command and wait for confirm to run)
+#
 at NAME="mon":
     (zellij ls|grep {{NAME}}) && just zj a {{NAME}} || just zj -s {{NAME}}
 
@@ -475,6 +486,7 @@ prep-tmux:
     tmux start-server
 
 # adapted from https://maxscheijen.github.io/posts/managing-tmux-sessions-with-fzf/
+#
 ftm:
     #!/usr/bin/env zsh
     session=$(tmux ls | awk -F: '
@@ -504,6 +516,7 @@ ftm:
 # d - detach
 # x - kill the current pane
 # & - kill the current window
+#
 tm-at NAME:
     #!/usr/bin/env zsh
     tmux attach -t {{NAME}} || tmux new-session -s {{NAME}}
@@ -536,6 +549,7 @@ tm-dev:
 # Attaching to a session
 # BUT can't detach from within Helix
 # just tach -a name
+#
 prep-abduco:
     which abduco || brew install abduco
 
@@ -544,6 +558,7 @@ abduco *PARAMS:
 
 # linux only for now
 # see https://github.com/shell-pool/shpool/issues/183
+#
 prep-pool:
     cargo install shpool
 
@@ -556,7 +571,7 @@ prep-ds:
 #     diss -e g -a {{SESSION}} zsh
 
 ## Container and friends
-#
+
 # prep-pod:
 #    # brew uninstall orbstack
 #    which docker || brew install docker
@@ -579,6 +594,7 @@ prep-pod:
 # `just prep-lima` which prepares a Lima VM with Ubuntu 25.04 x86_64 that is ready to run x86_64 static binaries and containers
 # https://github.com/lima-vm/lima/discussions/1573 for realizing the VM is still arm64
 # https://github.com/lima-vm/lima/discussions/1043#discussioncomment-3560889 for realizing only statically linked binaries work in VM, dynamically linked ones fail due to missing shared libraries, so they should be run in containers, so just use colima options for this!
+#
 pod CMD="start --vm-type=vz --vz-rosetta":
     colima {{CMD}}
 
@@ -609,10 +625,13 @@ prep-tilt:
     which tilt || brew install tilt-dev/tap/tilt
 
 # tilt up is usually all you need
+#
 tilt *PARAMS:
     tilt {{PARAMS}}
 
 # https://github.com/louislam/dockge
+# https://github.com/abiosoft/colima/issues/265
+#
 prep-dockge:
     #!/usr/bin/env zsh
     sudo mkdir -p /opt/stacks /opt/dockge
@@ -620,8 +639,6 @@ prep-dockge:
     sudo chown -R $(whoami) /opt/dockge
     cd /opt/dockge
     curl https://raw.githubusercontent.com/louislam/dockge/master/compose.yaml --output compose.yaml
-
-# https://github.com/abiosoft/colima/issues/265
 
 dockge COMMAND="up":
     #!/usr/bin/env zsh
@@ -635,8 +652,8 @@ dockge COMMAND="up":
         docker-compose down
     fi
 
-# not working with colima, even with -connector
 # https://github.com/abiosoft/colima/issues/1234
+#
 prep-ctop:
     which ctop || brew install ctop
     docker context ls
@@ -646,6 +663,7 @@ prep-ctop:
 # l - log
 # e - execute shell
 # w - open browser (convention: first port is http)
+#
 ctop:
     colima status
     DOCKER_HOST=`docker context ls --format json|grep colima|jq -r '.DockerEndpoint'` ctop
@@ -671,6 +689,7 @@ run-act CMD="bash" OPTS="-it":
     sudo docker exec {{OPTS}} -w /root/projects/forest act-dev {{CMD}}
 
 # manually run bootstrap-ubuntu first, or we won't even have just
+#
 prep-act:
     # for brew and zsh
     just prep-ubuntu
@@ -691,6 +710,7 @@ reset-ssh-keys:
     rip ~/.ssh/id_*; rip ~/.ssh/*_rsa; rip ~/.ssh/*_dsa; rip ~/.ssh/*_ecdsa; rip ~/.ssh/*_ed25519 || true
 
 # still verifying
+#
 prep-ssh-keys:
     #!/usr/bin/env zsh
     key_path=~/.ssh/id_ed25519
@@ -724,6 +744,7 @@ prep-ssh-keys:
     fi
 
 # initial draft, not verified
+#
 prep-ssh-server:
     #!/usr/bin/env zsh
 

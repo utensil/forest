@@ -19,6 +19,8 @@ init: prep
     just thm
 
 # should run `just init` first
+#
+# Build forest
 build:
     ./build.sh
 
@@ -82,8 +84,10 @@ chk:
 pre-push:
     just chk
 
-# Set up Git pre-push hook to run 'just pre-push' before every push
-# This will block pushes if checks fail - run 'just unprep-push' to disable
+# run 'just pre-push' before every push
+# This will run 'just pre-push' before every push, and may block pushes if checks fail, run 'just unprep-push' to disable
+#
+# Set up Git pre-push hook
 prep-push:
     #!/usr/bin/env bash
     echo "Setting up Git pre-push hook..."
@@ -147,6 +151,7 @@ proselint FILE="":
 ## Enrich contents
 
 # Inspired by https://github.com/Ranchero-Software/NetNewsWire/issues/978#issuecomment-1320911427
+#
 rss-stars *PARAMS:
     #!/usr/bin/env zsh
     cd ~/Library/Containers/com.ranchero.NetNewsWire-Evergreen/Data/Library/Application\ Support/NetNewsWire/Accounts/2_iCloud
@@ -160,6 +165,7 @@ til:
     ./til.py --reset && ./til.py
 
 # relies on GITHUB_ACCESS_TOKEN
+#
 gh2md REPO OUTPUT *PARAMS="--no-prs":
     #!/usr/bin/env zsh
     GITHUB_ACCESS_TOKEN=$(gh auth token) uvx gh2md --idempotent {{PARAMS}} {{REPO}} {{OUTPUT}}
@@ -172,6 +178,7 @@ gh2md REPO OUTPUT *PARAMS="--no-prs":
 # Next, run: just prep-term
 # Then, maybe run: just mk-act
 # So the work can be continued in the Ubuntu container
+#
 bootstrap-centos:
     #!/usr/bin/env zsh
     yes|sudo yum groupinstall 'Development Tools'
@@ -190,6 +197,7 @@ bootstrap-centos:
 # 2. Cmd++ to make the font and the terminal window bigger
 # 3. Enter zsh
 # 4. Copy and paste to run, because we have no just at this point
+#
 bootstrap-mac:
     #!/usr/bin/env zsh
     xcode-select --install
@@ -239,6 +247,7 @@ prep-proxy-ui:
     docker run --rm -it -p 5080:80 ghcr.io/haishanh/yacd:master
 
 # see https://macos-defaults.com/ and https://github.com/Swiss-Mac-User/macOS-scripted-setup and https://github.com/mathiasbynens/dotfiles/blob/main/.macos
+#
 prep-def:
     #!/usr/bin/env zsh
     set -e
@@ -354,6 +363,7 @@ run-rp:
 
 # Copy and paste to run as root, because we have no just at this point
 # Next, run: just prep-act
+#
 bootstrap-ubuntu:
     #!/usr/bin/env bash
     apt update
@@ -371,7 +381,7 @@ prep-chisel:
 
 # default ports are ordered so it's clear that local nvim -> local 1212 -> mid 1213 -> remote nvim 1214
 # authenticated by environment variable AUTH user:pass
-
+#
 cs-remote PORT="1213":
     chisel server -v --port {{PORT}}
 
@@ -387,6 +397,7 @@ nv-local PROJ="forest" PORT="1212":
     just nvim {{PROJ}} --server localhost:{{PORT}} --remote-ui
 
 # an alternative is use local on CentOS and remote on Ubuntu in docker, no chisel needed, just docekr port mapping
+#
 lv-remote PROJ="forest" HOST="0.0.0.0" PORT="1214":
     #!/usr/bin/env zsh
     just lvim {{PROJ}} --embed --listen {{HOST}}:{{PORT}}
@@ -404,6 +415,7 @@ prep-ts-ssh:
 
 # --list
 # USER@HOST:PORT
+#
 ts-ssh *PARAMS:
     `go env GOPATH`/bin/ts-ssh {{PARAMS}}
 
@@ -420,7 +432,7 @@ prep-fancy:
     which tty-clock || brew install tty-clock
     which rusty-rain || cargo install rusty-rain
 
-# run fastfetch every time Enter is pressed
+# Run fastfetch every time Enter is pressed
 fetch:
     #!/usr/bin/env zsh
     while true; do
@@ -454,11 +466,13 @@ loc:
 ## fzf
 
 # based on https://github.com/zachdaniel/dotfiles/blob/main/priv_scripts/project
+#
 proj:
     fd --type d --max-depth 1 --base-directory {{home_directory()}}/projects|fzf --prompt 'Select a directory: '|xargs -I {} kitty @ launch --type os-window --cwd {{home_directory()}}/projects/forest --copy-env zsh -c 'just lvim {}'
 
 # to search history, use Ctrl+R instead
 # here is how to search files
+#
 fzf:
     fzf --preview 'bat {}'|xargs lvim
 
@@ -476,6 +490,7 @@ prep-cha:
 # opt+i toggle image
 # opt+j toggle scripting
 # opt+k toggle cookie
+#
 cha URL:
     cha {{URL}}
 
@@ -492,12 +507,14 @@ postman:
     uvx --python 3.12 posting
 
 # https://blog.stulta.dev/posts/annoying_json/
+#
 prep-bjn:
     which xh || brew install xh
     which jo || brew install jo
 
 # e.g. just bjn "some_key[sub_key]=its value" "another_key=another value"
 # https://github.com/casey/just?tab=readme-ov-file#positional-arguments
+#
 [positional-arguments]
 bjn *PARAMS:
     #!/usr/bin/env zsh
@@ -506,11 +523,15 @@ bjn *PARAMS:
 ## Backup
 
 # https://www.fuse-t.org/
+#
 prep-fuse:
     brew tap macos-fuse-t/homebrew-cask
     brew install fuse-t
     brew install fuse-t-sshfs
 
+# Unfortunately, VeraCrypt will always install and only works with macFUSE
+#
+# Install VeraCrypt
 prep-vera:
     brew install --cask veracrypt
 
@@ -551,6 +572,7 @@ prep-annex:
     (cd ~/annex && git annex webapp)
 
 # https://bhoot.dev/2025/cp-dot-copies-everything/
+#
 cp SRC DST:
     cp -R {{SRC}}/. {{DST}}
 
@@ -574,7 +596,7 @@ fj:
 #         -p 63000:8000 \
 #         -e JOSH_REMOTE=https://github.com \
 #         dockerproxy.net/joshproject/josh-proxy:latestS
-
+#
 josh-proxy:
     #!/usr/bin/env zsh
     mkdir -p ~/.josh
@@ -598,6 +620,7 @@ nbview FILE:
     uvx euporie notebook {{FILE}}
 
 # https://github.com/livebook-dev/livebook#installation
+#
 prep-lb:
     #!/usr/bin/env zsh
     mix do local.rebar --force, local.hex --force
@@ -609,7 +632,7 @@ lb:
 ## Music
 
 # https://www.reddit.com/r/youtubedl/comments/155kkcc/youtube_music_how/
-
+#
 ytm PLAYLIST:
     #!/usr/bin/env zsh
     cd ~/Music
@@ -633,6 +656,7 @@ prep-music:
 # p to play/pause, <> for previous/next song, -+ for volume
 # fn+backspace can be used as delete, useful to delete a song from the playlist
 # 8 is visualization, space to switch visualization type
+#
 music:
     #!/usr/bin/env zsh
     cd ~/Music
@@ -652,6 +676,7 @@ prep-tm:
 # m to change play mode, r to random
 # Ctrl+H for help
 # no visualization
+#
 tm *PARAMS="":
     termusic {{PARAMS}}
 
@@ -672,6 +697,7 @@ tm *PARAMS="":
 # I'v configured it to use double tap opt then hold to trigger the radial menu
 # direction keys to place the window in 8 directions, space to maximize, enter to center
 # It's so smooth
+#
 prep-loop:
     #!/usr/bin/env zsh
     [ -d /Applications/Loop.app ] || brew install loop
@@ -698,6 +724,7 @@ tree DIR="." LEVEL="1":
 # d - trash
 # D - delete
 # cc - copy file path; cd - copy directory; cf - copy filename; cn - copy filename w/o ext
+#
 yazi DIR="$HOME/projects":
     #!/usr/bin/env bash
     EDITOR=hx yazi {{DIR}}
@@ -727,6 +754,7 @@ br DIR="$HOME/projects":
 # See dotfiles/.config/marta/marta.marco for configuration (Cmd+, then copy-paste it)
 # e.g. Cmd+Opt+G to lauch Ghostty from the current directory
 # use the first letter to copy, move, rename, new folder, trash, delete etc.
+#
 prep-file:
     #!/usr/bin/env zsh
     [ -d /Applications/Marta.app ] || brew install --cask marta
@@ -759,6 +787,7 @@ prep-ag:
     just sync-hx
 
 # just ag '\query{$$$}'
+#
 ag PAT LANG="forester" DIR="trees":
     ast-grep run --config dotfiles/.config/ast-grep/sgconfig.yml --lang {{LANG}} -p '{{PAT}}' {{DIR}}
 
@@ -770,6 +799,7 @@ semscan:
 
 
 # https://www.howtogeek.com/803598/app-is-damaged-and-cant-be-opened/
+#
 uq APP_PATH:
     xattr -d com.apple.quarantine {{APP_PATH}}
 
@@ -784,6 +814,7 @@ irc CHANNEL:
 # Add a config to ~/Library/Application Support/iamb/config.toml per https://iamb.chat/configure.html
 # Login via SSO on element
 # Verify by `:verify`, comparing emoji on element, and copy-paste the `:verify confirm USER/DEVICE` command on iamb
+#
 prep-im:
     which iamb || brew install iamb
 

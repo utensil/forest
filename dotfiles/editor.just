@@ -30,12 +30,14 @@ reset-hxx:
     cargo uninstall helix-term || true
 
 # -v enables verbose logging
+#
 hx PROJ="forest" *PARAMS="":
     #!/usr/bin/env zsh
     cd ~/projects/{{PROJ}}
     hx {{PARAMS}}
 
 # doc: https://docs.helix-editor.com/master/
+#
 prep-hxx:
     #!/usr/bin/env zsh
     just prep-hx-conf
@@ -59,6 +61,7 @@ hxx PROJ="forest" *PARAMS="":
     ~/.cargo/bin/hx
 
 # Base16 Themes for Helix
+#
 prep-base16-helix:
     #!/usr/bin/env zsh
     just clone tinted-theming base16-helix
@@ -83,11 +86,12 @@ nvim PROJ="forest" *PARAMS="": sync-nvim
     cd ~/projects/{{PROJ}} && nvim {{PARAMS}}
 
 ## Nvim plugins
+#
 sync-plugins: stylua
     mkdir -p ~/.config/nvim/lua/plugins/
     cp -f uts-plugins.lua ~/.config/nvim/lua/plugins/spec.lua
 
-# Stylua
+# Run stylua for *.lua
 stylua:
     stylua *.lua
 
@@ -202,6 +206,7 @@ prep-lsp:
     which glsl_analyzer || ( cd /tmp && wget https://github.com/nolanderc/glsl_analyzer/releases/download/v1.6.0/aarch64-macos.zip && unzip aarch64-macos.zip && sudo mv bin/glsl_analyzer /usr/local/bin/)
 
 # https://github.com/zigtools/zls/issues/2402
+#
 prep-zls:
     #!/usr/bin/env zsh
     set -e
@@ -215,6 +220,7 @@ prep-zls:
     mise use -g aqua:zigtools/zls@$ZLS_VERSION
 
 # https://github.com/DJAndries/llmvm/tree/master/frontends/codeassist
+#
 prep-lsp-lv:
     #!/usr/bin/env zsh
     set -e

@@ -1,5 +1,3 @@
-
-
 prep-fancycat:
     #!/usr/bin/env bash
     set -e
@@ -151,6 +149,7 @@ check-dirs SRC DST:
     echo "Open {{DST}}/.hash.jw to inspect"
 
 # https://www.kelen.cc/dry/docker-hub-mirror
+#
 gal:
     #!/usr/bin/env zsh
     mkdir -p ~/home-gallery/data/config
@@ -180,7 +179,7 @@ pica:
     cd $HOME/picapport
     docker run -it --rm --name picapport -p 8888:8888 -v $HOME/Pictures/photos:/opt/picapport/photos -v $HOME/picapport:/opt/picapport/data -e "PICAPPORT_PORT=8888" -e "PICAPPORT_LANG=en" fionnb/picapport:latest
 
-# prepare raycast
+# Prepare raycast
 prep-ray:
     #!/usr/bin/env bash
     brew install --cask raycast

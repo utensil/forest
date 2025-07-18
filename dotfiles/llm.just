@@ -28,10 +28,11 @@ aichat *PARAMS: sync-aichat
 # In Helix, select some code, press `|` then type `aicode`
 # Instead:
 # In Helix, select some code, press `|` then type `aichat -c` optionally with extra `--prompt` as system prompt
+#
 prep-aicode:
     sudo cp -f aicode /usr/local/bin/
 
-# render the aichat config
+# Render aichat config
 sync-aichat:
     #!/usr/bin/env zsh
     ./render_yaml.py dotfiles/.config/aichat/config.yaml.in ~/.config/aichat/config.yaml
@@ -55,6 +56,7 @@ todo:
 # just mcp list
 # just mcp remove XXX
 # just mcp toolprompt
+#
 mcp *PARAMS="":
     #!/usr/bin/env bash
     mcpm-aider {{PARAMS}}
@@ -65,7 +67,6 @@ aider PROJ="forest" *PARAMS="": # sync-aider
 
 aiderweb URL:
     uvx --python 3.11 --from 'aider-chat[help,playwright,browser]' python -m aider.scrape {{URL}}
-
 
 prep-mp4:
     #!/usr/bin/env zsh
@@ -81,6 +82,7 @@ prep-mp4:
 
 # just mp4 forest --input-dir trees --extensions .tree
 # just mp4 forest --load-existing output/dir_trees_20250606_200619.mkv
+#
 mp4 PROJ="forest" *PARAMS="":
     #!/usr/bin/env zsh
     cd ~/projects/memvid
@@ -109,6 +111,7 @@ mp4 PROJ="forest" *PARAMS="":
 #   1. Use `just proj` to select and open a project in a new kitty terminal
 #   2. Or use `just aider ../project_name` to start aider in another directory
 # I've tested that it works with `AI!`, `AI?`, and `ai!`
+#
 aw PROJ="forest" *PARAMS="":
     just aider {{PROJ}} --watch-files {{PARAMS}} --read AGENT.md --edit-format diff # -v
 
@@ -141,6 +144,7 @@ cpa:
     npx -y copilot-api@latest start --port 15432 # --verbose
 
 # works only for Ubuntu
+#
 [linux]
 prep-cortex:
     #!/usr/bin/env bash
@@ -174,6 +178,7 @@ prep-p2t:
     python setup.py py2app -A
 
 # https://github.com/Byaidu/PDFMathTranslate
+#
 pzh:
     uvx pdf2zh -i
 
@@ -205,6 +210,7 @@ ds:
 
 # VISUAL_MODEL := "llama3.2-vision"
 # VISUAL_MODEL := "minicpm-v"
+#
 VISUAL_MODEL := "erwan2/DeepSeek-Janus-Pro-7B"
 
 lv:
@@ -223,6 +229,7 @@ prep-tr:
 # just gs start -s SERVER_IP --token TOKEN
 # TOKEN is retrieved on server via:
 # cat /var/lib/gpustack/token
+#
 gs *PARAMS:
     #!/usr/bin/env zsh
     uvx --python 3.12 --from 'gpustack[all]' gpustack {{PARAMS}}
@@ -239,7 +246,6 @@ pl PROJ="forest":
     #!/usr/bin/env zsh
     cd ~/projects/{{PROJ}}
     plandex --semi
-
 
 prep-sg:
     #!/usr/bin/env zsh
@@ -259,6 +265,7 @@ prep-mlx:
 # just mlx download-model MODEL
 # just mlx models
 # just mlx import-models
+#
 mlx *PARAMS:
     #!/usr/bin/env zsh
     uvx llm mlx {{PARAMS}}
@@ -272,7 +279,7 @@ mlx *PARAMS:
 # llm -f docs: "How do I embed a binary file?"
 # llm *PARAMS:
 #     uvx llm {{PARAMS}}
-
+#
 prep-llm:
     uvx llm install llm-docs
     uvx llm install llm-fragments-github
@@ -291,6 +298,7 @@ sync-llm:
 
 # lms comes with LMStudio: https://github.com/lmstudio-ai/lms
 # I want it for https://github.com/lmstudio-ai/mlx-engine
+#
 prep-lms:
     #!/usr/bin/env zsh
     npx lmstudio install-cli
@@ -299,6 +307,7 @@ prep-lms:
 # open ~/.cache/lm-studio
 # lms load mlx-community/DeepSeek-R1-Distill-Qwen-32B-4bit
 # lms server start
+#
 lms *PARAMS:
     #!/usr/bin/env zsh
     lms {{PARAMS}}
@@ -329,6 +338,7 @@ lobe *PARAMS:
       lobehub/lobe-chat
 
 # Not working
+#
 prep-scr:
     curl -fsSL get.screenpi.pe/cli | sh
 
@@ -339,6 +349,7 @@ prep-scr:
 # -m Hi
 # --chat
 # --use-aider
+#
 rd PROJ="forest" *PARAMS="":
     #!/usr/bin/env zsh
     cd ~/projects/{{PROJ}}
@@ -346,6 +357,7 @@ rd PROJ="forest" *PARAMS="":
     uvx --python 3.12 ra-aid --model $OPENAI_API_MODEL {{PARAMS}}
 
 # Not working yet
+#
 dt:
     uv run --python 3.11 --with 'detikzify @ git+https://github.com/potamides/DeTikZify' -m detikzify.webui --light
 
@@ -359,10 +371,12 @@ kj:
 # --enrich-picture-classes
 # --enrich-picture-description
 # --image-export-mode [placeholder|embedded|referenced]
+#
 dl *PARAMS:
     uvx --with mlx-vlm docling {{PARAMS}}
 
 # DOC could be a local file or an URL
+#
 dlmd DOC:
     just dl --pipeline vlm --vlm-model smoldocling {{DOC}}
 
@@ -372,6 +386,7 @@ prep-probe:
 
 # in `just zsh`, --allow-edit
 # --web
+#
 probe *PARAMS="":
     #!/usr/bin/env zsh
     export OPENAI_API_URL=$OPENAI_API_BASE
@@ -393,6 +408,7 @@ dw: prep-dw
     docker-compose up
 
 # Not working yet
+#
 prep-odw:
     #!/usr/bin/env zsh
     just clone AIDotNet OpenDeepWiki
@@ -408,6 +424,7 @@ prep-goose:
 # goose info
 # goose configure
 # MEMORY_BANK_ROOT="$HOME/.membank" goose session
+#
 goose *PARAMS="session":
     #!/usr/bin/env zsh
     goose {{PARAMS}}
@@ -420,6 +437,7 @@ kit-mcp:
 # base_url=https://some_api_base/v1
 # api_key=YOUR_API_KEY
 # see https://github.com/frdel/agent-zero/issues/326#issuecomment-2679344132
+#
 zero:
     docker pull frdel/agent-zero-run
     docker run --rm -p 50001:80 frdel/agent-zero-run
@@ -495,6 +513,7 @@ prep-cc-cu:
     # claude --allowedTools mcp__container-use__environment_checkpoint,mcp__container-use__environment_file_delete,mcp__container-use__environment_file_list,mcp__container-use__environment_file_read,mcp__container-use__environment_file_write,mcp__container-use__environment_open,mcp__container-use__environment_run_cmd,mcp__container-use__environment_update
 
 # just cc forest --debug
+#
 cc PROJ="forest" *PARAMS="":
     #!/usr/bin/env zsh
     cd ~/projects/{{PROJ}}
@@ -510,6 +529,7 @@ codex *PARAMS:
     codex -a auto-edit --provider LOCAL --model $OPENAI_API_MODEL {{PARAMS}}
 
 # build failed: FATAL ERROR: Reached heap limit Allocation failed - JavaScript heap out of memory
+#
 prep-ed:
     #!/usr/bin/env zsh
     just clone ConardLi easy-dataset
@@ -523,6 +543,7 @@ ed:
 
 # tutorial intro
 # https://docs.marimo.io/guides/package_management/inlining_dependencies/
+#
 mm *PARAMS="edit --sandbox":
     uvx marimo {{PARAMS}}
 
@@ -535,7 +556,6 @@ prep-amp:
     # login, say no to re-login if already logged in
     yes n|amp login
 
-# not working: panic
 prep-oc:
     #!/usr/bin/env zsh
     which opencode || npm install -g opencode-ai
@@ -584,10 +604,12 @@ prep-q:
     # q login
 
 # requires too many permissions to my GitHub account, rejected
+#
 prep-kb:
     npx -y vibe-kanban
 
 # backlog init <project name>
 # backlog browser
+#
 prep-backlog:
     bun i -g backlog.md
