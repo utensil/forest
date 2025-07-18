@@ -729,15 +729,21 @@ yazi DIR="$HOME/projects":
     #!/usr/bin/env bash
     EDITOR=hx yazi {{DIR}}
 
+# https://github.com/Canop/broot/blob/main/website/docs/tricks.md
+#
+# <stringwithoutspace> - fuzzy search the string
+# enter - open file in helix
+# space + verb - perform actions on the file/dir
+#   verbs:
+#     q - quit
+#     e - open file in helix
+#     pp - print file path, useful for `cmd $(br)`, don't hit enter, helix won't show, you need to type `:q` blindly to quit helix
+#     up - go to parent
+#
 prep-br:
     which broot || brew install broot
     mkdir -p ~/.config/broot/
     cp -f dotfiles/.config/broot/conf.toml ~/.config/broot/
-
-br DIR="$HOME/projects":
-    #!/usr/bin/env bash
-    echo {{DIR}}
-    EDITOR=hx broot {{DIR}}
 
 # Tab to switch between 2 Tab
 # Cmd+Shift+. to toggle hidden files
