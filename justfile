@@ -13,6 +13,9 @@ default:
 new +PARAMS:
     ./new.sh {{PARAMS}}
 
+hn +PARAMS:
+    hx `just new {{PARAMS}}`
+
 init: prep
     #!/usr/bin/env zsh
     bun install
