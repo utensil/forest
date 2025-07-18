@@ -741,6 +741,13 @@ icloud:
 
 # Can't brew install FreeFileSync due to https://github.com/Homebrew/homebrew-cask/issues/63069,
 # but actually https://github.com/Marcuzzz/homebrew-marcstap/blob/master/Casks/freefilesync.rb proves that it could work
+# It's POC only, as this is outdated
+#
+# POC to install FreeFileSync (outdated)
+prep-ffs:
+    # According to the issue, as long as you open the download page, the following download will pass for a few days
+    open https://freefilesync.org/download.php
+    brew install Marcuzzz/homebrew-marcstap/freefilesync
 
 pathfind:
     npx -y pagefind --site output --serve --root-selector 'article > section'
