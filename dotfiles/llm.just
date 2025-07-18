@@ -613,3 +613,6 @@ prep-kb:
 #
 prep-backlog:
     bun i -g backlog.md
+
+todos:
+    backlog browser # --no-open
