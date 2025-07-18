@@ -3,8 +3,8 @@
 export UTS_DEV=1
 
 # echo "🛁 Cleaning up build and output"
-# rm -rf build
-# rm -rf output
+# rip build
+# rip output
 ./build.sh
 
 if [ $? -ne 0 ]; then

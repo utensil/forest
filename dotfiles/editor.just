@@ -39,16 +39,13 @@ hx PROJ="forest" *PARAMS="":
 prep-hxx:
     #!/usr/bin/env zsh
     just prep-hx-conf
-    if [ ! -d ../helix ]; then
-        git clone https://github.com/utensil/helix ../helix
-    else
-        # sometimes we may need to delete and retrack
-        # git checkout personal
-        # git branch -d patchy
-        # git checkout --track origin/patchy
-        (cd ../helix && git checkout patchy && git pull)
-    fi
-    cd ../helix
+    just clone utensil helix
+    # sometimes we may need to delete and retrack
+    # git checkout personal
+    # git branch -d patchy
+    # git checkout --track origin/patchy
+    cd ~/projects/helix
+    git checkout patchy && git pull
     # cargo clean
     cargo install --path helix-term # --locked
     export HELIX_RUNTIME=$PWD/runtime
@@ -64,11 +61,7 @@ hxx PROJ="forest" *PARAMS="":
 # Base16 Themes for Helix
 prep-base16-helix:
     #!/usr/bin/env zsh
-    if [ ! -d ../base16-helix ]; then
-        git clone https://github.com/tinted-theming/base16-helix ../base16-helix
-    else
-        (cd ../base16-helix && git pull)
-    fi
+    just clone tinted-theming base16-helix
     mkdir -p ~/.config/helix/themes
     cp -f ../base16-helix/themes/base16-railscasts.toml ~/.config/helix/themes/base16-railscasts.toml
 
@@ -122,11 +115,7 @@ lvim PROJ="forest" *PARAMS="": sync-lvim
 
 prep-lazyvim:
     #!/usr/bin/env bash
-    if [ -d ~/.config/lazyvim ]; then
-        (cd ~/.config/lazyvim && git pull)
-    else
-        git clone https://github.com/LazyVim/starter ~/.config/lazyvim
-    fi
+    just clone-conf lazyvim LazyVim starter
 
 sync-lazyvim: stylua sync-plugins
     mkdir -p ~/.config/lazyvim
@@ -140,11 +129,7 @@ lazyvim PROJ="forest": sync-lazyvim
 
 prep-chad:
     #!/usr/bin/env bash
-    if [ -d ~/.config/nvchad ]; then
-        (cd ~/.config/nvchad && git pull)
-    else
-        git clone https://github.com/NvChad/starter ~/.config/nvchad
-    fi
+    just clone-conf nvchad NvChad starter
 
 sync-chad: stylua sync-plugins
     mkdir -p ~/.config/nvchad/
@@ -159,11 +144,7 @@ chad PROJ="forest": sync-chad
 
 prep-astro:
     #!/usr/bin/env zsh
-    if [ -d ~/.config/astro ]; then
-        (cd ~/.config/astro && git pull)
-    else
-        git clone https://github.com/AstroNvim/template ~/.config/astro
-    fi
+    just clone-conf astro AstroNvim template
 
 sync-astro: stylua sync-plugins
     mkdir -p ~/.config/astro/lua/

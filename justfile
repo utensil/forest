@@ -314,6 +314,12 @@ prep-def:
     # Set machine sleep to 5 minutes on battery
     sudo pmset -b sleep 5
 
+remove FILE_OR_DIR:
+    #!/usr/bin/env bash
+    TEMP_LOCATION="/tmp/$(whoami)-$(date +%s)-$(head -c 5 /dev/random|xxd -ps)"
+    mv {{FILE_OR_DIR}} $TEMP_LOCATION
+    echo "{{FILE_OR_DIR}} is temporarily moved to $TEMP_LOCATION"
+
 prep-ubuntu:
     #!/usr/bin/env bash
     sudo apt update
@@ -321,8 +327,8 @@ prep-ubuntu:
     # this fix weird issue that $USER is root, no matter I use `su -` or ssh with non-root user
     # causing: /home/linuxbrew/.linuxbrew/Homebrew/.git: Permission denied
     export USER=`whoami`
-    sudo rm -rf /home/linuxbrew
-    rm -rf ~/.cache/Homebrew
+    sudo just remove /home/linuxbrew
+    just remove ~/.cache/Homebrew
     yes|/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
     just prep-rc
     sudo apt install -y zsh
@@ -572,13 +578,8 @@ fj:
 josh-proxy:
     #!/usr/bin/env zsh
     mkdir -p ~/.josh
-    cd ~/projects/
-    if [ ! -d josh ]; then
-        git clone https://github.com/josh-project/josh
-    else
-        (cd josh && git pull)
-    fi
-    cd josh/josh-proxy
+    just clone josh-project josh
+    cd ~/projects/josh/josh-proxy
     cargo run -- --port 63000 --remote https://github.com --local ~/.josh
 
 josh WHERE USER REPO DIR:
@@ -833,7 +834,7 @@ import 'dotfiles/archived.just'
 # Update them from Software Update in System Settings.
 
 # If that doesn't show you any updates, run:
-#   sudo rm -rf /Library/Developer/CommandLineTools
+#   sudo rip /Library/Developer/CommandLineTools
 #   sudo xcode-select --install
 
 # Alternatively, manually download them from:

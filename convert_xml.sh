@@ -104,5 +104,5 @@ function convert_xml_files() {
     echo "📝 Updated $updated_count HTML file(s) in ${duration}s"
 
     # Clean up backup files after conversion
-    rm -rf output/.bak
+    rip output/.bak
 }

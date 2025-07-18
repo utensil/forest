@@ -69,12 +69,8 @@ aiderweb URL:
 
 prep-mp4:
     #!/usr/bin/env zsh
-    if [ ! -d ../memvid ]; then
-        git clone https://github.com/Olow304/memvid.git ../memvid
-    else
-        (cd ../memvid && git pull)
-    fi
-    cd ../memvid
+    just clone Olow304 memvid
+    cd ~/projects/memvid
     git reset --hard 5524b0a8b268c02df01cca87110cc1b978460c97
     uv venv --python 3.11 --seed
     source .venv/bin/activate
@@ -87,15 +83,15 @@ prep-mp4:
 # just mp4 forest --load-existing output/dir_trees_20250606_200619.mkv
 mp4 PROJ="forest" *PARAMS="":
     #!/usr/bin/env zsh
-    cd ../memvid
+    cd ~/projects/memvid
     source .venv/bin/activate
-    cd ../{{PROJ}}
+    cd ~/projects/{{PROJ}}
     export OPENAI_BASE_URL=$OPENAI_API_BASE
-    python ../memvid/examples/file_chat.py --provider openai --model $OPENAI_API_MODEL {{PARAMS}}
+    python ~/projects/memvid/examples/file_chat.py --provider openai --model $OPENAI_API_MODEL {{PARAMS}}
 
 # prep-ad:
 #    #!/usr/bin/env zsh
-#    rm -rf ../aider-desk
+#    rip ../aider-desk
 #    if [ ! -d ../aider-desk ]; then
 #        # (cd .. && git clone https://github.com/hotovo/aider-desk)
 #        # clone a tag v0.4.0
@@ -134,12 +130,8 @@ cpm:
         # curl https://github.com/login/oauth/access_token -X POST -d 'client_id=01ab8ac9400c4e429b23&scope=user:email&device_code=YOUR_DEVICE_CODE&grant_type=urn:ietf:params:oauth:grant-type:device_code'
         echo "Please follow https://github.com/jjleng/copilot-more to set up REFRESH_TOKEN"
     fi
-    if [ ! -d ../copilot-more ]; then
-        (cd .. && git clone https://github.com/jjleng/copilot-more.git)
-    else
-        (cd ../copilot-more && git pull)
-    fi
-    cd ../copilot-more
+    just clone jjleng copilot-more
+    cd ~/projects/copilot-more
     git reset --hard 21d9ee3dce5c7852d431d2c13cca72c426c8a302
     uvx poetry install
     LOGURU_LEVEL=DEBUG uvx poetry run uvicorn copilot_more.server:app --port 15432 --host {{env('COPILOT_HOST', '127.0.0.1')}}
@@ -238,12 +230,8 @@ gs *PARAMS:
 prep-pl:
     #!/usr/bin/env zsh
     which plandex || (curl -sL https://plandex.ai/install.sh | bash)
-    if [[ ! -d ~/projects/plandex ]]; then
-        git clone https://github.com/plandex-ai/plandex.git ../plandex
-    else
-        (cd ../plandex && git pull --ff-only)
-    fi
-    cd ../plandex/app
+    just clone plandex-ai plandex
+    cd ~/projects/plandex/app
     sd 'docker compose' 'docker-compose' start_local.sh
     ./start_local.sh
 
@@ -392,13 +380,8 @@ probe *PARAMS="":
 
 prep-dw:
     #!/usr/bin/env zsh
-    # if ../deepwiki-open doesn't exist, clone it
-    if [ ! -d ../deepwiki-open ]; then
-        git clone https://github.com/AsyncFuncAI/deepwiki-open.git ../deepwiki-open
-    else
-        # (cd ../deepwiki-open && git pull --ff-only )
-    fi
-    cd ../deepwiki-open
+    just clone AsyncFuncAI deepwiki-open
+    cd ~/projects/deepwiki-open
     echo "OPENAI_API_KEY=$OPENAI_API_KEY" > .env
     echo "OPENAI_API_URL=$OPENAI_API_BASE" >> .env
     mkdir -p ~/.adalflow
@@ -406,18 +389,14 @@ prep-dw:
 
 dw: prep-dw
     #!/usr/bin/env zsh
-    cd ../deepwiki-open
+    cd ~/projects/deepwiki-open
     docker-compose up
 
 # Not working yet
 prep-odw:
     #!/usr/bin/env zsh
-    if [ ! -d ../OpenDeepWiki ]; then
-        git clone https://github.com/AIDotNet/OpenDeepWiki.git ../OpenDeepWiki
-    else
-    # (cd ../OpenDeepWiki && git pull --ff-only)
-    fi
-    cd ../OpenDeepWiki
+    just clone AIDotNet OpenDeepWiki
+    cd ~/projects/OpenDeepWiki
     make build
 
 prep-goose:
@@ -533,12 +512,8 @@ codex *PARAMS:
 # build failed: FATAL ERROR: Reached heap limit Allocation failed - JavaScript heap out of memory
 prep-ed:
     #!/usr/bin/env zsh
-    if [ ! -d ../easy-dataset ]; then
-        git clone https://github.com/ConardLi/easy-dataset.git ../easy-dataset
-    else
-        (cd ../easy-dataset && git pull)
-    fi
-    cd ../easy-dataset
+    just clone ConardLi easy-dataset
+    cd ~/projects/easy-dataset
     docker build -t easy-dataset .
 
 ed:

@@ -118,11 +118,11 @@ keys-gt:
 
 sync-gt:
     mkdir -p ~/.config/
-    rm ~/.config/ghostty || true
+    rip ~/.config/ghostty || true
     ln -s {{justfile_directory()}}/dotfiles/.config/ghostty ~/.config/ghostty
 
 reset-gt:
-    rm ~/.config/ghostty
+    rip ~/.config/ghostty
 
 # https://github.com/ghostty-org/ghostty/discussions/7194
 log-gt:

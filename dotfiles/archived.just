@@ -13,7 +13,7 @@ prep-fancycat:
     zig build --fetch
     zig build --release=fast
     mv zig-out/bin/fancy-cat /usr/local/bin/
-    rm -rf $fancy_cat_dir
+    rip $fancy_cat_dir
 
 prep-alacritty:
     #!/usr/bin/env bash
@@ -80,9 +80,9 @@ prep-dotfiles-tmp:
 
 config-sbar: prep-dotfiles-tmp
     #!/usr/bin/env bash
-    rm -rf ~/.config/sketchybar
+    rip ~/.config/sketchybar
     cp -r {{dotfiletmpdir}}/.config/sketchybar ~/.config/
-    rm -rf {{dotfiletmpdir}}
+    rip {{dotfiletmpdir}}
     brew services restart felixkratz/formulae/sketchybar
 
 sbar:
@@ -92,13 +92,13 @@ prep-tile: prep-amethyst
 
 prep-skhd: prep-dotfiles-tmp
     brew install koekeishiya/formulae/skhd
-    rm -rf ~/.config/skhd
+    rip ~/.config/skhd
     cp -r {{dotfiletmpdir}}/.config/skhd ~/.config/
     skhd --start-service
 
 prep-yabai: prep-dotfiles-tmp prep-skhd
     brew install koekeishiya/formulae/yabai
-    rm -rf ~/.config/yabai
+    rip ~/.config/yabai
     cp -r {{dotfiletmpdir}}/.config/yabai ~/.config/
     yabai --start-service
 
