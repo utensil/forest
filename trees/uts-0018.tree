@@ -44,7 +44,7 @@
 }}
 
 \subtree[2025-07-01]{\mdnote{2025-07-01}{
-- agent related
+- #agent
     - [Claude Code now supports hooks](https://docs.anthropic.com/en/docs/claude-code/hooks) ([on HN](https://news.ycombinator.com/item?id=44429225))
         - Claude Code hooks: user-defined shell commands that execute at various points in Claude Code’s lifecycle.
     - [archgw](https://github.com/katanemo/archgw)
@@ -65,19 +65,19 @@
 - [Doing My Day Job on Chimera Linux](https://www.wezm.net/v2/posts/2025/daily-driving-chimera-for-work/)
     - [Chimera](https://chimera-linux.org/) is built from scratch using novel tooling, approaches, and userland (FreeBSD + Musl C)
     - [Distrobox](https://distrobox.it/) creates a container that's tightly integrated with the host (break isolation whenever possible)
-- formal related
+- #formal
     [From Python Programmer to Distributed Systems Researcher in 10 Years Without a PhD](https://emptysqua.re/blog/from-python-programmer-to-distributed-systems-researcher-in-10-years/)
         - [Conformance Checking at MongoDB: Testing That Our Code Matches Our TLA+ Specs](https://emptysqua.re/blog/mongodb-conformance-checking/)
             - use the model-checker to output the entire state graph for the spec. The state space is a DAG, with a finite number of behaviors (paths from an initial state to a final state). There are 30,184 states and 4913 behaviors. Max wrote a Go program to parse the model-checker’s output and write out a C++ unit test for each behavior, 4913 tests in total.
     - [Rapid Prototyping a Safe, Logless Reconfiguration Protocol for MongoDB with TLA+](https://www.mongodb.com/blog/post/technical/rapid-prototyping-safe-logless-reconfiguration-protocol-mongodb-tla-plus)
-- zig related
+- #zig
     - [The build cache of Zig](https://alexrios.me/blog/zig-build-cache/)
         - how the cache is structured
         - what's included in hash to check modification
         - incremental compilation: working toward cache per top-level declaration
         - cross compilation: musl, libc, compiler-rt, libunwind etc. are compiled from source and cached
     - [Zprof: Cross-allocator profiler](https://github.com/ANDRVV/zprof)
-- antibot related
+- #antibot
     - [Cloudflare: Introducing pay per crawl: enabling content owners to charge AI crawlers for access](https://blog.cloudflare.com/introducing-pay-per-crawl/)
         - [Cloudflare Introduces Default Blocking of A.I. Data Scrapers](https://www.nytimes.com/2025/07/01/technology/cloudflare-ai-data.html)
     - [The web's broken deal with AI companies](https://dri.es/the-webs-broken-deal-with-ai-companies)
@@ -87,12 +87,12 @@
         - a Java compiler plugin
         - use DSL directly and type-safely from Java
             - SQL, JSON, GraphQL, XML, YAML, CSV, JavaScript
-- diagram related
+- #diagram
     - [OpenFLOW – Quickly make beautiful infrastructure diagrams local to your machine](https://github.com/stan-smith/OpenFLOW)
         - based on [markmanx/isoflow](https://github.com/markmanx/isoflow)
     - [mmastrac/stylus: Lightweight status page for home infrastructure](https://github.com/mmastrac/stylus)
         - architecture and health status
-- language related
+- #language
     - [Reflections on Haskell and Rust](https://academy.fpblock.com/blog/rust-haskell-reflections/)
     - [The KDL Document Language](https://kdl.dev/)
         - [bikeshed, a spec preprocessor](https://github.com/speced/bikeshed)
@@ -104,7 +104,7 @@
         - inspired from languages like Jai, Odin and Zig
         - compiles to WebAssembly, run on Wasmer
     - [Helix language](https://github.com/helixlang/helix-lang)
-- rust related
+- #rust
     - [Exception handling in rustc_codegen_cranelift](https://tweedegolf.nl/en/blog/157/exception-handling-in-rustc-codegen-cranelift)
         - introduces ["landing pad" style expcetion handling](https://llvm.org/docs/LangRef.html#landingpad-instruction)
             - see also [Lele's Memo: Landingpad](https://cnlelema.github.io/memo/en/compilers/llvm/exceptions/landingpad/)
@@ -140,12 +140,12 @@
         - roadmaps should not be commitments
         - feedback loops should not be performance metrics
         - planning should not become forecasting
-- context related
+- #context
     - [How to Fix Your Context](https://simonwillison.net/2025/Jun/29/how-to-fix-your-context/)
         - context rot: poisoning, distraction, confusion, clash
         - solution: quarantine, pruning, offloading
     - [The new skill in AI is not prompting, it's context engineering](https://www.philschmid.de/context-engineering) ([on HN](https://news.ycombinator.com/item?id=44427757))
-- security related
+- #security
     - [Beyond the Hook: A Technical Deep Dive into Modern Phishing Methodologies](https://blog.quarkslab.com/./technical-dive-into-modern-phishing.html)
         - amazed by Browser-in-the-Browser
     - [CVE-2025-32463 Vulnerability Advisory: Sudo chroot Elevation of Privilege](https://www.stratascale.com/vulnerability-alert-CVE-2025-32463-sudo-chroot)
@@ -220,7 +220,7 @@
     - also found [aha](https://github.com/theZiz/aha) to turn ANSI colored output into HTML
         from [Beautiful Terminal Output in Markdown](https://blog.buenzli.dev/beautiful-terminal-output-in-markdown/)
     - [Rust in the Linux kernel: part 2](https://lwn.net/SubscriberLink/1025232/fbb2d90d084368e3/)
-- agent related
+- #agent
     - [Context engineering](https://simonwillison.net/2025/Jun/27/context-engineering/#atom-everything)
     - [definitions of "agents" collected by Simon Willison](https://simonwillison.net/tags/agent-definitions/)
         - the most precise one I think (from [An Introduction to Google’s Approach to AI Agent Security](https://simonwillison.net/2025/Jun/15/ai-agent-security/))
@@ -252,7 +252,7 @@
                 - non-existing or misleading context
                 - problem-solution mismatch
                 - pseudo-accuracy
-- OCaml related
+- #ocaml
     - [First thoughts on Rust vs OCaml](https://blog.darklang.com/first-thoughts-on-rust-vs-ocaml/)
         - pattern matching can't penetrate `Box`, `Arc` etc.
         - a red flag: `Rc`/`Arc`, sync/async end up requiring different libary, e.g. `im` and `im-rc`
@@ -261,7 +261,7 @@
     - [Learn OCaml](https://ocaml-sf.org/learn-ocaml-public/#activity=exercises)
         - [practical ocaml](https://dev.to/yawaramin/practical-ocaml-314j)
         - the background story of OxCaml: [Jane Street’s sneaky retention tactic](https://archive.ph/u10ol#selection-1133.0-1136.0)
-- formal related
+- #formal
     - [Multi-Stage Programming with Splice Variables](https://tsung-ju.org/icfp25/)
         - an interactive demonstration in TS, the original implemtation is in Agda ([examples](https://tsung-ju.org/icfp25/agda/Pat.Examples.html))
         - typed meta-programming, to make code generation predictable and safe
@@ -278,7 +278,7 @@
     - In physics, it's seen in tribalism: string theory tribes dominated despite failures, with research driven by trends over evidence.
     - Particle theory lacks experimental input, relying on "hot topics" under oligarchs, now facing funding collapse.
     - This shows how loss of truth-seeking harms scientific progress.
-- performance related
+- #performance
     - [Announcing Sniffnet v1.4: it’s 2X faster than Wireshark at processing PCAP files](https://sniffnet.net/news/v1.4/)
         - by focusing on extracting only the most relevant fields from the packets’ headers
     - [Avoiding PostgreSQL Pitfalls: The Hidden Cost of Failing Inserts](https://johnnymetz.com/posts/postgresql-failing-insert/)
@@ -319,7 +319,7 @@
 % }}
 
 \subtree[2025-06-26]{\mdnote{2025-06-26}{
-- agent related
+- #agent
     - [AI Improves at Improving Itself Using an Evolutionary Trick](https://spectrum.ieee.org/evolutionary-ai)
     - [Learnings from building AI agents](https://www.cubic.dev/blog/learnings-from-building-ai-agents)
     - [Jan-nano-128k: A 4B Model with a Super-Long Context Window (Still Outperforms 671B [in MCP])](https://huggingface.co/Menlo/Jan-nano-128k)
@@ -332,7 +332,7 @@
 - [Notes on type inference and polymorphism](https://blog.snork.dev/posts/notes-on-type-inference-and-polymorphism.html)
     - polymorphism is hard to combine with Hindley-Milner type inference
     - [Type Inference Was A Mistake](https://borretti.me/article/type-inference-was-a-mistake)
-- RSS related
+- #rss
     - [RSS Server Side Reader](https://matklad.github.io/2025/06/26/rssssr.html) ([on HN](https://news.ycombinator.com/item?id=44386637)) ([on lobste.rs](https://lobste.rs/s/nr9t3s))
         - I had the similar idea, but for filtering and merging RSS, particularly for papers
         - the author didn't even want read/unread state and post content, but they are useful for me
@@ -359,17 +359,17 @@
         - [Against AI: An Open Letter from Writers to Publishers](https://lithub.com/against-ai-an-open-letter-from-writers-to-publishers/) ([on HN](https://news.ycombinator.com/item?id=44410217))
     - [LLM code generation may lead to an erosion of trust](https://jaysthoughts.com/aithoughts1)
     - [AI Is Dehumanization Technology](https://thedabbler.patatas.ca/pages/ai-is-dehumanization-technology.html)
-- time related
+- #time
     - [Assembly Theory of Time](\verb>>>|https://faculty.ucr.edu/~legneref/Assembly%20Theory.htm>>>)
         - time is a measurable physical entity, with complex objects' formation paths and "assembly indexes" revealing time's unidirectional depth and causal chains
     - [How to Think About Time in Programming](https://shanrauf.com/archive/how-to-think-about-time-in-programming)
     - [Managing time when time doesn't exist](https://multiverseemployeehandbook.com/blog/temporal-resources-managing-time-when-time-doesnt-exist/)
-- CG related
+- #cg
     - [TinyRenderer: Software rendering in 500 lines of bare C++](https://haqr.eu/) ([code](https://github.com/ssloy/tinyrenderer))
     - [Porting GPU shaders to Rust GPU 30x faster with AI](https://rust-gpu.github.io/blog/2025/06/24/vulkan-shader-port/)
     - [CUDA Ray Tracing 2x Faster Than RTX: My CUDA Ray Tracing Journey](https://karimsayedre.github.io/RTIOW.html)
     - [Chili3D: A web-based 3D CAD application for online model design and editing](https://chili3d.com/)
-- rust related
+- #rust
     - [Why is the Rust compiler so slow?](https://sharnoff.io/blog/why-rust-compiler-slow) ([on HN](https://news.ycombinator.com/item?id=44390488)) ([on lobste.rs](https://lobste.rs/s/72hbqg))
         - a lot of useful tools to debug rust compilation process
         - see also [Performance Debugging with LLVM-mca: Simulating the CPU](https://johnnysswlab.com/performance-debugging-with-llvm-mca-simulating-the-cpu/)
@@ -384,7 +384,7 @@
 }}
 
 \subtree[2025-06-24]{\mdnote{2025-06-24}{
-- build related
+- #build
     - [Bazel’s Original Sins](https://fzakaria.com/2025/06/22/bazel-s-original-sins)
     - [Chromium's build system is switching from Ninja to Siso for external developers](https://groups.google.com/a/chromium.org/g/chromium-dev/c/v-WOvWUtOpg)
     - [Build an iOS app on Linux or Windows](https://xtool.sh/tutorials/xtool/first-app/) ([on HN](https://news.ycombinator.com/item?id=44372881)) ([on lobste.rs](https://lobste.rs/s/ccit25))
@@ -394,7 +394,7 @@
     - [XSLT – Native, zero-config build system for the Web](https://github.com/pacocoursey/xslt)
 - [Interesting Bits of Postgres Grammar](https://steve.dignam.xyz/2025/06/20/interesting-bits-of-postgres-grammar/)
     - found [Geometric Functions and Operators](https://www.postgresql.org/docs/17/functions-geometry.html)
-- TUI related
+- #tui
     - [fclones](https://terminaltrove.com/fclones/) - finds and handles duplicate files across directories
     - [tatuin](https://terminaltrove.com/tatuin/) - aggregates TODOs from various sources
     - [alden: detachable terminal sessions without breaking scrollback](https://ansuz.sooke.bc.ca/entry/389) - only a source tarball
@@ -423,7 +423,7 @@
         - the advisors perspective is also informative
 - [Nano-Vllm: lightweight vLLM implementation built from scratch](https://github.com/GeeeekExplorer/nano-vllm)
     - I would wonder if I could do this in Zig
-- language related
+- #language
     - [Cyber Programming Language](https://cyberscript.dev/)
         - written in Zig
         - fast, efficient, and concurrent scripting
@@ -434,7 +434,7 @@
     - an inspiring way to allow the team to have a period of time for repaying tech debts
 - learn about [Git Notes: Git's coolest, most unloved­ feature (2022)](https://tylercipriani.com/blog/2022/11/19/git-notes-gits-coolest-most-unloved-feature/)
 - found [LeetCode for System Design](https://leetsys.dev)
-- Go related
+- #go
     - [Go should be more opinionated](https://eltonminetto.dev/en/post/2025-06-19-go-more-opinated/)
     - [Go is an 80/20 language](https://blog.kowalczyk.info/article/d-2025-06-26/go-is-8020-language.html)
     - [How to store Go pointers from assembly](https://mazzo.li/posts/go-asm-pointers.html) ([on HN](https://news.ycombinator.com/item?id=44355187)) ([on lobste.rs](https://lobste.rs/s/obsh1m))
@@ -444,10 +444,10 @@
 \subtree[2025-06-22]{\mdnote{2025-06-22}{\tags{#gpu #rust #yaml #zig}
 - [model.yaml](https://simonwillison.net/2025/Jun/21/model-yaml/#atom-everything)
     - an open standard in YAML for defining crossplatform, composable AI models by LM Studio team
-- GPU related
+- #gpu
     - [Basic facts about GPUs](https://damek.github.io/random/basic-facts-about-gpus/)
     - [TPU Deep Dive](https://henryhmko.github.io/posts/tpu/tpu.html)
-- zig related
+- #zig
     - [Zig And Rust (2023)](https://matklad.github.io/2023/03/26/zig-and-rust.html)
     - [Polystate: Composable Finite State Machines](https://www.reddit.com/r/Zig/comments/1lhfbjk/polystate_composable_finite_state_machines/) in Zig
     - [comphash - A very lightweight Zig package offering a zero-cost compile-time hash map](https://www.reddit.com/r/Zig/comments/1lkgr54/comphash_a_very_lightweight_zig_package_offering/)
@@ -470,7 +470,7 @@
     - uses "KLEE Symbolic Execution Engine" for [formal verification](https://github.com/kokke/tiny-regex-c/blob/master/formal_verification.md)
 - [\verb>>>|We moved from AWS to Hetzner, saved 90%, kept ISO 27001 with Ansible>>>](https://medium.com/@accounts_73078/goodbye-aws-how-we-kept-iso-27001-slashed-costs-by-90-914ccb4b89fc)
     - no specifics except for the use of ansible
-- scheme related
+- #scheme
     - [Why Dylan?](https://opendylan.org/intro-dylan/why-dylan.html)
         - a scheme without parentheses, but with `end`
     - [Why computational reproducibility matters](https://blog.khinsen.net/posts/2025/06/20/computational-reproducibility.html)
@@ -485,7 +485,7 @@
 - [JavaScript broke the web (and called it progress)](https://www.jonoalderson.com/conjecture/javascript-broke-the-web-and-called-it-progress/) ([on HN](https://news.ycombinator.com/item?id=44325563)) ([on lobste.rs](https://lobste.rs/s/3ew6rt))
 - [Hurl: Run and test HTTP requests with plain text](https://github.com/Orange-OpenSource/hurl)
     - a KISS way to script curl
-- makefile related
+- #makefile
     - [Learn Makefiles](https://makefiletutorial.com/)
     - [Makefile Style Guide](https://clarkgrubb.com/makefile-style-guide)
     - [Makefile formatter and linter](https://github.com/EbodShojaei/bake)
@@ -511,7 +511,7 @@
     - [Moral puzzles: Man vs. machine](https://dynomight.net/puzzles-results/)
     - [Rolling the ladder up behind us](https://xeiaso.net/blog/2025/rolling-ladder-behind-us/) ([on HN](https://news.ycombinator.com/item?id=44328894)) ([on lobste.rs](https://lobste.rs/s/dl5sj9))
     - [All roads lead to disaster](https://blog.jsbarretto.com/post/all-roads-lead-to-disaster)
-- rust related
+- #rust
     - [Rewriting Kafka in Rust Async: Insights and Lessons Learned in Rust](https://wangjunfei.com/2025/06/18/Rewriting-Kafka-in-Rust-Async-Insights-and-Lessons-Learned/)
     - [higher: Your favourite Haskell type classes for Rust (2023)](https://github.com/bodil/higher)
     - [B compiler written in Crust](https://github.com/tsoding/b)
@@ -520,12 +520,12 @@
 }}
 
 \subtree[2025-06-18]{\mdnote{2025-06-18}{\tags{#agent #benchmark #docker #editor #prompt #quantum #robot #security #wayland #✍️}
-- Helix related
+- #helix
     - work on [helix-cheat-sheet](https://github.com/utensil/helix-cheat-sheet)
     - [I really like the Helix editor](https://herecomesthemoon.net/2025/06/i-like-helix/)
 - [Double-Entry Ledgers: The Missing Primitive in Modern Software](https://www.pgrs.net/2025/06/17/double-entry-ledgers-missing-primitive-in-modern-software/)
     - I would love to see such an primitive in database design, but I also doubt that if it could be helpful for realworld applications
-- agent related
+- #agent
     - [Building Effective AI Agents](https://www.anthropic.com/engineering/building-effective-agents)
         - supposedly the best practice
         - see also [From LLM to AI Agent: What's the Real Journey Behind AI System Development?](https://www.codelink.io/blog/post/ai-system-development-llm-rag-ai-workflow-agent)
@@ -545,22 +545,22 @@
     - [Bots are overwhelming websites with their hunger for AI data](https://www.theregister.com/2025/06/17/bot_overwhelming_websites_report/)
     - [Show HN: Trieve CLI – Terminal-based LLM agent loop with search tool for PDFs](https://github.com/devflowinc/trieve/tree/main/clients/cli)
     - [GitHub CEO: manual coding remains key despite AI boom](https://www.techinasia.com/news/github-ceo-manual-coding-remains-key-despite-ai-boom)
-- wayland related
+- #wayland
     - [Long live Xorg, I mean Xlibre](https://www.dedoimedo.com/computers/xlibre.html)
     - [It's true, “we” don't care about accessibility on Linux](https://tesk.page/2025/06/18/its-true-we-dont-care-about-accessibility-on-linux/) ([on HN](https://news.ycombinator.com/item?id=44314372)) ([on lobste.rs](https://lobste.rs/s/1nyzfj))
     - [Wayland Is Growing Up. and Now We Don't Have a Choice](https://fireborn.mataroa.blog/blog/i-want-to-love-linux-it-doesnt-love-me-back-post-4-wayland-is-growing-up-and-now-we-dont-have-a-choice/) ([on HN](https://news.ycombinator.com/item?id=44326545)) ([on lobste.rs](https://lobste.rs/s/76i5wh))
     - [Cosmoe: BeOS Class Library on top of Wayland](https://cosmoe.org/index.html)
     - [The X Window System didn't immediately have X terminals](https://utcc.utoronto.ca/~cks/space/blog/unix/XTerminalsNotImmediate)
-- robot related
+- #robot
     - [Real-time action chunking with large models](https://www.pi.website/research/real_time_chunking)
-- editor related
+- #editor
     - [Using Microsoft's New CLI Text Editor on Ubuntu](https://www.omgubuntu.co.uk/2025/06/microsoft-edit-text-editor-ubuntu)
     - [Publishing a Docker Container for MS Edit to the GitHub Container Registry](https://til.simonwillison.net/github/container-registry)
     - [The Zed Debugger Is Here](https://zed.dev/blog/debugger) ([on HN](https://news.ycombinator.com/item?id=44314977)) ([on lobste.rs](https://lobste.rs/s/rwbtwd))
     - [Pragtical - The practical and pragmatic code editor](https://pragtical.dev/)
         - built on SDL, C and Lua, low footprint
         - forked from lite XL (which is forked from lite) to be [more practical rather than minimalist](https://github.com/pragtical/pragtical/issues/6#issuecomment-1581650875)
-- security related
+- #security
     - [How keys are used in FileVault and encryption](https://eclecticlight.co/2025/06/25/how-keys-are-used-in-filevault-and-encryption/)
         - VEK (Volume Encryption Key) never leaves Secure Enclave, destroyed on "Erase All Content and Settings (EACAS)"
         - wrapping: encrypting the VEK using a KEK (Key Encryption Key)
@@ -594,7 +594,7 @@
     - [Fun with Telnet](https://brandonrozek.com/blog/fun-with-telnet/)
     - [A brief history of web browsers](https://eclecticlight.co/2025/06/28/a-brief-history-of-web-browsers/)
     - [Emoji Kitchen - Browse Google's unique emoji combinations](https://emojikitchen.dev/)
-- agent related
+- #agent
     - [\verb>>>|100% effective>>>](https://simonwillison.net/2025/Jun/16/100-percent/#atom-everything)
         - on LLM safety, there is no guarantee
     - [Coding agents require skilled operators](https://simonwillison.net/2025/Jun/18/coding-agents/#atom-everything)
@@ -605,13 +605,13 @@
     - [We Should Identify and Mitigate Third-Party Safety Risks in MCP-Powered Agent Systems](http://arxiv.org/pdf/2506.13666v1)
     - [Are AI Bots Knocking Cultural Heritage Offline?](https://www.glamelab.org/products/are-ai-bots-knocking-cultural-heritage-offline/)
     - [Now might be the best time to learn software development](https://substack.com/home/post/p-165655726) ([on HN](https://news.ycombinator.com/item?id=44299979)) ([on lobste.rs](https://lobste.rs/s/yrqfcz))
-- privacy related
+- #privacy
     - [Why WhatsApp Didn’t Sell Ads](https://blog.whatsapp.com/why-we-don-t-sell-ads)
     - [matrix is cooked](https://paper.wf/alexia/matrix-is-cooked)
     - [Websites are tracking you via browser fingerprinting](https://engineering.tamu.edu/news/2025/06/websites-are-tracking-you-via-browser-fingerprinting.html)
     - [Delta Chat is a decentralized and secure messenger app](https://delta.chat/en/)
     - [Google Gemini is about to control your messages and calls, even if you say no](https://www.laptopmag.com/ai/gemini-phone-access-update) ([on HN](https://news.ycombinator.com/item?id=44411114))
-- news related
+- #news
     - [Rules, Not Renewables, Might Explain the Iberian Blackout](https://spectrum.ieee.org/spain-grid-failure)
     - [Miscalculation by Spanish power grid operator REE contributed to blackout](https://www.reuters.com/business/energy/investigation-into-spains-april-28-blackout-shows-no-evidence-cyberattack-2025-06-17/)
 - found [Fossify – A suite of open-source, ad-free apps](https://github.com/FossifyOrg)
@@ -622,7 +622,7 @@
 }}
 
 \subtree[2025-06-16]{\mdnote{2025-06-16}{\tags{#agent #claude #rgsql #rust}
-- agent related
+- #agent
     - [Agents for the Agent](https://ampcode.com/agents-for-the-agent)
         - amp on subagent
     - [Ampcode - First Impressions](https://shantanugoel.com/2025/06/15/ampcode/)
@@ -639,14 +639,14 @@
 - [Q-learning is not yet scalable](https://seohong.me/blog/q-learning-is-not-yet-scalable/)
 - found [Todo.txt](http://todotxt.org/)
     - from [todo.txt tasks in my TRMNL](https://akselmo.dev/posts/todotxt-in-my-trmnl/)
-- software related
+- #software
     - [What is systems programming, really? (2018)](https://willcrichton.net/notes/systems-programming/)
     - [What Is Open Source?](https://werd.io/what-is-open-source/)
         - learn about free v.s. open source
         - related
             - [I feel open source has turned into two worlds](https://utcc.utoronto.ca/~cks/space/blog/tech/OpenSourceTwoWorlds)
     - found [is it really FOSS?](https://isitreallyfoss.com/)
-- cg related
+- #cg
     - [On Shaping Light](https://blog.maximeheckel.com/posts/shaping-light-volumetric-lighting-with-post-processing-and-raymarching/)
     - watched [Physics and Math of Shading](https://www.youtube.com/watch?v=j-A0mwsJRmk)
         - from [SIGGRAPH 2025 Course: Physically Based Shading in Theory and Practice](https://blog.selfshadow.com/publications/s2025-shading-course/)
@@ -659,7 +659,7 @@
 - [Blogging about papers](https://simonwillison.net/2025/Jun/13/blogging-about-papers/#atom-everything)
     - [Design Patterns for Securing LLM Agents against Prompt Injections](https://simonwillison.net/2025/Jun/13/prompt-injection-design-patterns/) ([on HN](https://news.ycombinator.com/item?id=44268335)) ([on lobste.rs](https://lobste.rs/s/zuadfv))
         - "the writing is clear, it’s enjoyable to read and the target audience clearly includes practitioners, not just other researchers"
-- CG related
+- #cg
     - [Luxe Game Engine in preview now](https://luxeengine.com/dev-log-15/)
         - 2D/3D, cross-platform (including web)
         - written in c++, scriptable with [Wren](https://wren.io/) or any language that can interact with C
@@ -674,21 +674,21 @@
 - found [Tattoy: a text-based terminal compositor](https://tattoy.sh/) ([on HN](https://news.ycombinator.com/item?id=44268644)) ([on lobste.rs](https://lobste.rs/s/bcxcju))
     - considerate design for text contrasts: "detect low contrast text and auto adjust the foreground colour within the constraints of your chosen terminal theme to find the nearest colour that meets a minimum contrast threshold"
     - usage example: terminal minimap, background video, shadertoy shaders
-- formalization related
+- #formalization
     - found [Litex: Scale Formal Reasoning in AI Age](https://github.com/litexlang/golitex)
         - "Traditional proof assistants like Lean4 require learning hundreds of unfamiliar keywords and complex type theories. Litex enables formal verification with just 8 intuitive keywords (forall, exist, not, or, fn, prop, obj, set) and familiar Python/Go-like syntax"
     - [100 years of Zermelo's axiom of choice: What was the problem with it? (2006)](https://research.mietek.io/mi.MartinLof2006.html) (partially formalized in Agda)
-- datalog related
+- #datalog
     - [Implementing Logic Programming](https://btmc.substack.com/p/implementing-logic-programming) with Prolog and Datlog
     - [Datalog in Rust](https://github.com/frankmcsherry/blog/blob/master/posts/2025-06-03.md)
-- rust related
+- #rust
     - [OxCaml, Jane Street's extension of OCaml is now open-source](https://oxcaml.org) ([on HN](https://news.ycombinator.com/item?id=44268782)) ([on lobste.rs](https://lobste.rs/s/unsbmk))
     - [Hypershell: A Type-Level DSL for Shell-Scripting in Rust powered by Context-Generic Programming](https://contextgeneric.dev/blog/hypershell-release/)
     - [Datalog in Minikanren](https://deosjr.github.io/dynamicland/datalog.html) ([on HN](https://news.ycombinator.com/item?id=44283093), many good references about datalog, and scheme)
     - [\verb>>>|Bzip2 crate switches from C to 100% Rust>>>](https://trifectatech.org/blog/bzip2-crate-switches-from-c-to-rust/)
         - `c2rust`, crate [cc](https://crates.io/crates/cc), `miri`
         - `cargo fuzz`, `cargo audit`, `semgrep` (particularly [semgrep-rules](https://github.com/trailofbits/semgrep-rules))
-- zig related
+- #zig
     - watched [Writing polymorphic code (anytype, comptime interface, tagged union)](https://www.reddit.com/r/Zig/comments/1lak6wf/writing_polymorphic_code_anytype_comptime/)
         - found [Zimpl](https://github.com/permutationlock/zimpl) ([why](https://github.com/permutationlock/zimpl/blob/main/why.md))
         - [tagged union example with `inline else`](https://github.com/ComputerBread/videos-code-snippets/blob/main/zig-comptime-polymorphism/union-6-normal-n-inline.zig)
@@ -696,7 +696,7 @@
     - [C2y: Hitting the Ground Running](https://thephd.dev/c2y-hitting-the-ground-running)
     - [GCC, glibc, stack unwinding and relocations – A war story](https://blog.sergiodj.net/posts/gcc-glibc-stack-unwinding-relocations-bug/)
     - [The Art Of Packing Data](https://www.elopezr.com/the-art-of-packing-data/#)
-- APL related
+- #apl
     - [APL Style: Patterns/Anti-patterns](https://sway.cloud.microsoft/b1pRwmzuGjqB30On)
     - [Solving LinkedIn Queens with APL](https://pitr.ca/2025-06-14-queens)
     - [Klong: A Simple Array Language](https://t3x.org/klong/)
@@ -704,7 +704,7 @@
     - learn about the possibility to maintain a distro by a single person
     - the Yocto project provides toolkits to create custom Linux distributions, especially for embedded systems
     - Sulka is a hardened Poky, and there are alternatives like [Welma](https://theembeddedkit.io/welma-yocto-linux/)
-- AI related
+- #ai
     - [To fuel AI, US Congress moves to fast-track nuclear plant approvals](https://www.wsj.com/articles/to-feed-power-wolfing-ai-lawmakers-are-embracing-nuclear-a461ab7d)
     - [The Emperor's New LLM](https://dayafter.substack.com/p/the-emperors-new-llm)
     - [Builder.ai did not "fake AI with 700 engineers"](https://blog.pragmaticengineer.com/builder-ai-did-not-fake-ai/)
@@ -712,7 +712,7 @@
     - [Resa: Transparent Reasoning Models via SAEs](https://arxiv.org/abs/2506.09967)
     - [Simulink (Matlab) Copilot](https://github.com/Kaamuli/Bloxi)
     - [Rethinking Losses for Diffusion Bridge Samplers](https://arxiv.org/abs/2506.10982)
-- quantum related
+- #quantum
     - [Quantum Computing without the Linear Algebra](https://eprint.iacr.org/2025/1091.pdf)
     - [Geometry from Quantum Temporal Correlations](https://arxiv.org/abs/2502.13293)
 - news
@@ -727,7 +727,7 @@
     - [When random people give money to random other people (2017)](https://quomodocumque.wordpress.com/2017/06/27/when-random-people-give-money-to-random-other-people/)
     - [We Live In a Golden Age of Interoperability](https://borretti.me/article/we-live-in-a-golden-age-of-interoperability)
     - [No Hello](https://nohello.net/en/)
-- biology related
+- #biology
     - [Sperm are very different from all other cells](https://www.bbc.com/future/article/20250613-untangling-the-mysteries-of-what-we-dont-know-about-sperm)
     - [The Ecosystem Dynamics That Can Make or Break an Invasion](https://physics.mit.edu/news/the-ecosystem-dynamics-that-can-make-or-break-an-invasion/)
     - [When we die do we still have any of the original cells from our birth?](https://www.quora.com/When-we-die-do-we-still-have-any-of-the-original-cells-from-our-birth)
@@ -797,7 +797,7 @@
 
 \subtree[2025-06-12]{\mdnote{2025-06-12}{\tags{#compiler #debugger #formal #game #lean #optimization #proof #raku #render #rust}
 - wrote [[uts-016K]] ([on reddit](https://www.reddit.com/r/Zig/comments/1lb2vq8/trying_zigs_selfhosted_x86_backend_on_apple/))
-- lean related
+- #lean
     - [Premise Selection for a Lean Hammer](https://arxiv.org/abs/2506.07477)
         - the paper behind [LeanHammer](https://github.com/JOSHCLUNE/LeanHammer)
     - [Lean Copilot: Large Language Models as Copilots for Theorem Proving in Lean](https://neus-2025.github.io/files/papers/paper_33.pdf)
@@ -825,12 +825,12 @@
             - constraining spatial layout (such as positioning child nodes below their parents in a binary tree)
             - grouping elements (like clustering related components in a software architecture)
             - directing drawing style (for instance, coloring nodes in a red-black tree based on their color)
-- debugger related
+- #debugger
     - [strace tips for better debugging](https://rrampage.github.io/2025/06/13/strace-tips-for-better-debugging/)
     - [Demystifying Debuggers](https://www.rfleury.com/p/demystifying-debuggers-part-1-a-busy) (a series)
     - [Linus on Why Debuggers Are Actually Bad For Developers](https://lwn.net/2000/0914/a/lt-debugger.php3)
     - found [Building a Debugger: Write a Native x64 Debugger From Scratch](https://nostarch.com/building-a-debugger)
-- Raku related
+- #raku
     - [Raku's "core"](https://gist.github.com/raiph/849a4a9d8875542fb86df2b2eda89296)
     - [Raku's FAQ](https://docs.raku.org/language/faq#Metaquestions_and_advocacy)
     - [RakuAST: a foundation for Raku macros](https://jnthn.net/papers/2020-cic-rakuast.pdf)
@@ -853,7 +853,7 @@
     - interesting but it's a little late to the party now that we have pandoc and quarto
     - the syntax and scripting looks good
     - its PDF output is based on rendering web pages, a big no-no for me, as I need LaTeX-level professional typesetting like Typst has
-- css related
+- #css
     - [Partial Keyframes](https://www.joshwcomeau.com/animation/partial-keyframes/)
         - neat CSS animation trick
     - [More Frontend Web Tricks](https://kaiwenwang.com/writing/more-frontend-web-tricks)
@@ -864,13 +864,13 @@
 
 \subtree[2025-06-10]{\mdnote{2025-06-10}{\tags{#compiler #embedding #formal #optimization #os #performance #qwen #rust #wasm}
 - [Lightweight Diagramming for Lightweight Formal Methods](https://blog.brownplt.org/2025/06/09/copeanddrag.html)
-- performance related
+- #performance
     - [Why doesn’t Rust care more about compiler performance?](https://kobzol.github.io/rust/rustc/2025/06/09/why-doesnt-rust-care-more-about-compiler-performance.html)
     - [One Law to Rule All Code Optimizations](https://blog.codingconfessions.com/p/one-law-to-rule-all-code-optimizations)
     - [Simulating Time With Square-Root Space](https://people.csail.mit.edu/rrw/time-vs-space.pdf)
     - [Is Rust faster than C?](https://steveklabnik.com/writing/is-rust-faster-than-c/)
     - [Revisiting Knuth’s “Premature Optimization” Paper](https://probablydance.com/2025/06/19/revisiting-knuths-premature-optimization-paper/)
-- OS related
+- #os
     - [Asterinas: A Linux ABI-compatible, Rust-based framekernel OS](https://asterinas.github.io/2025/06/04/kernel-memory-safety-mission-accomplished.html)
         - written in Rust
         - framekernel: the performance of a monolithic kernel and the security of a microkernel
@@ -921,7 +921,7 @@
         - [Harbor](https://goharbor.io/) for caching container images
         - [Headscale](https://github.com/juanfont/headscale): self-hosted implementation of the Tailscale control server
         - [Pocket ID](https://pocket-id.org/) for authenticate users with their passkeys
-- fediverse related
+- #fediverse
     -[Two Approaches to Solving the “Quiet Fediverse” Problem: Conversation Backfilling Mechanisms](https://hackers.pub/@hongminhee/2025/quiet-fediverse-two-approaches/en)
     - [The fediverse, explained](https://www.theverge.com/24063290/fediverse-explained-activitypub-social-media-open-protocol)
         - [Lemmy](https://join-lemmy.org/)
@@ -989,7 +989,7 @@
     - [Seven replies to the viral Apple reasoning paper and why they fall short](https://garymarcus.substack.com/p/seven-replies-to-the-viral-apple)
         - [Simon Willison’s quotes and comments](https://simonwillison.net/2025/Jun/15/viral-apple-reasoning-paper/#atom-everything)
     - [Why Claude's Comment Paper Is a Poor Rebuttal](https://victoramartinez.com/posts/why-claudes-comment-paper-is-a-poor-rebuttal/)
-- blogging related
+- #blogging
     - [Thrive in obscurity](https://www.jeetmehta.com/posts/thrive-in-obscurity)
     - [is blogging romantic?](https://blog.avas.space/is-blogging-romantic/)
     - [Why Comment Sections suck - re:I want to comment on your blog post](https://kami.bearblog.dev/why-comment-sections-suck-rei-want-to-comment-on-your-blog-post/)
@@ -1082,7 +1082,7 @@
 - learning speed solving Rubik's cube, see [[uts-016J]]
 - [Devstral](https://mistral.ai/news/devstral)
     - see also [devstral-small-2505-mlx](https://lmstudio.ai/model/devstral-small-2505-mlx)
-- ARIA related
+- #aria
     - [What I Wish Someone Told Me When I Was Getting into ARIA](https://www.smashingmagazine.com/2025/06/what-i-wish-someone-told-me-aria/) ([on HN](https://news.ycombinator.com/item?id=44299930))
     - [Selfish reasons for building accessible UIs](https://nolanlawson.com/2025/06/16/selfish-reasons-for-building-accessible-uis/)
     - [WebAIM: Up and Coming ARIA](https://webaim.org/blog/up-and-coming-aria/)
@@ -1178,7 +1178,7 @@
 - found [Reinforcement Learning: An Overview](https://arxiv.org/abs/2412.05265)
 - found [Modeling Nonlinear Dynamics from Equations and Data — with Applications to Solids, Fluids, and Controls](https://epubs.siam.org/doi/10.1137/1.9781611978353)
 - found [The Ultimate Guide to Fine-Tuning LLMs from Basics to Breakthroughs: An Exhaustive Review of Technologies, Research, Best Practices, Applied Research Challenges and Opportunities](https://arxiv.org/abs/2408.13296)
-- game related
+- #game
     - found [Pong Wars](https://github.com/vnglst/pong-wars)
         - maybe it's fun to rewrite it in Zig, or with Bevy, possibly in 3D
     - [Car Physics for Games](\verb>>>|https://www.asawicki.info/Mirror/Car%20Physics%20for%20Games/Car%20Physics%20for%20Games.html>>>)
@@ -1243,7 +1243,7 @@
 - [Why I love OCaml](https://mccd.space/posts/ocaml-the-worlds-best/)
 - [How to Get Your Research Paper Accepted](https://maxwellforbes.com/posts/how-to-get-a-paper-accepted)
 - [Fork Union: Beyond OpenMP in C++ and Rust?](https://ashvardanian.com/posts/beyond-openmp-in-cpp-rust/)
-- language related
+- #language
     - [Wren](https://wren.io/), a small, fast, class-based concurrent scripting language
         - "Think Smalltalk in a Lua-sized package with a dash of Erlang and wrapped up in a familiar, modern syntax."
         - [Talon](https://github.com/jossephus/talon): Write Raylib programs in Wren
@@ -1669,7 +1669,7 @@
     - should be further explored in [[ag-000G]]
     - there are also many interesting writeups in [The Prospero Challenge](https://www.mattkeeter.com/projects/prospero/)
 - [Things Zig comptime Won't Do](https://matklad.github.io/2025/04/19/things-zig-comptime-wont-do.html)
-- Gleam related
+- #gleam
     - [Gleam](https://gleam.run/) that has a Rust-like syntax, runs on Erlang VM, and supports compiling to JavaScript
     - [My First Impressions of Gleam](https://mtlynch.io/notes/gleam-first-impressions/)
     - [Gleam for Elixir users](https://gleam.run/cheatsheets/gleam-for-elixir-users/)
