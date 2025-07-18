@@ -99,17 +99,8 @@ prep-gt:
 
 prep-gtsh:
     #!/usr/bin/env bash
-    mkdir -p ~/projects
-    if [ ! -d ~/projects/ghostty-shaders ]; then
-        git clone https://github.com/m-ahdal/ghostty-shaders ~/projects/ghostty-shaders
-    else
-        (cd ~/projects/ghostty-shaders && git pull) || true
-    fi
-    if [ ! -d ~/projects/shader-playground ]; then
-        git clone https://github.com/utensil/shader-playground ~/projects/shader-playground
-    else
-        (cd ~/projects/shader-playground && git pull) || true
-    fi
+    just clone m-ahdal ghostty-shaders
+    just clone utensil shader-playground
 
 # Cmd+Ctrl+F to toggle fullscreen, or just Cmd + Enter
 # Cmd + D to split right
@@ -237,6 +228,33 @@ resolve:
 git PROJ="forest" *PARAMS="":
     #!/usr/bin/env zsh
     cd ~/projects/{{PROJ}} && lazygit {{PARAMS}}
+
+# [NOTE] If modified, test with prep-gtsh
+clone USER REPO:
+    #!/usr/bin/env zsh
+    mkdir -p ~/projects
+    FULL_REPO={{USER}}/{{REPO}}
+    DIR=~/projects/{{REPO}}
+    if [ ! -d $DIR/.git ]; then
+        git clone https://github.com/$FULL_REPO $DIR
+    else
+        (cd $DIR && git pull) || true
+    fi
+
+# [NOTE] If modified, test with prep-zj
+clone-conf CONF USER REPO:
+    #!/usr/bin/env zsh
+    mkdir -p ~/projects
+    FULL_REPO={{USER}}/{{REPO}}
+    DIR=~/.config/{{CONF}}
+    if [ ! -d $DIR ]; then
+        git clone https://github.com/$FULL_REPO $DIR
+    elif [ -d $DIR/.git ]; then
+        (cd $DIR && git pull) || true
+    else
+        rip $DIR
+        just clone-conf {{CONF}} {{USER}} {{REPO}}
+    fi
 
 # -w to open in browser
 actions PROJ="forest" *PARAMS="":
@@ -417,14 +435,7 @@ prep-zj:
     #!/usr/bin/env zsh
     which zellij || brew install zellij
     # bash <(curl -L https://zellij.dev/launch)
-    if [ ! -d ~/.config/zellij ]; then
-        git clone https://github.com/t3hmrman/tmux-zellij-shim-config ~/.config/zellij
-    elif [ -d ~/.config/zellij/.git ]; then
-        (cd ~/.config/zellij && git pull)
-    else
-        rip ~/.config/zellij
-        just prep-zj
-    fi
+    just clone-conf zellij t3hmrman tmux-zellij-shim-config
 
 # attach - a
 # list - ls

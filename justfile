@@ -545,7 +545,7 @@ prep-annex:
     (cd ~/annex && git annex webapp)
 
 # https://bhoot.dev/2025/cp-dot-copies-everything/
-clone SRC DST:
+cp SRC DST:
     cp -R {{SRC}}/. {{DST}}
 
 ## Code forge
