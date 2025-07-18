@@ -476,6 +476,11 @@ cha URL:
 view URL="http://localhost:1314/":
     awrit {{URL}}
 
+prep-servo:
+    # softwareupdate --install-rosetta --agree-to-license
+    brew install --cask servo
+    just uq /Applications/Servo.app
+
 postman:
     # uv tool install --python 3.12 posting
     uvx --python 3.12 posting
