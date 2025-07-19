@@ -163,6 +163,9 @@ prep-rc:
     cp -i dotfiles/.bashrc ~/.bashrc
     cp -i dotfiles/.zshrc ~/.zshrc
 
+prep-rcy:
+    yes|just prep-rc
+
 add-zrc LINE:
     grep -F '{{LINE}}' ~/.zshrc || echo '{{LINE}}' >> ~/.zshrc
 
