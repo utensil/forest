@@ -38,10 +38,6 @@ ALWAYS cite the rules which you are following at the end of your reply, like thi
 - ✅ **May**: Stay within current task context, inform dev if fresh start would be better
 - ❌ **Must NOT**: Continue work from a prior prompt after "new task" – start a fresh session
 
-### G-search: Prefer ast-grep for syntax-aware search, with ripgrep as fallback
-
-✅You run in an environment where ast-grep (`sg`) is available. Whenever a search requires syntax-aware or structural matching, default to `sg --lang <lang> -p '<pattern>'`. Avoid falling back to text-only tools like ripgrep (`rg`) unless `sg` fails to do the job, or plain-text search is explicitly requested.
-
 ### G-verify: Verify your changes
 
 - ✅ **Should**: Verify your changes by learning how the code is supposed to run/test/lint (see also section "Build, test & utility commands" in repo.md), then design a way to verify. Prefer to re-use or add tests to verify. If you need temporary script or mock data to do so, keep them all under `.agents/`, and don't remove them afterward.
@@ -51,6 +47,17 @@ ALWAYS cite the rules which you are following at the end of your reply, like thi
 
 - ✅ **Should**: After editing files, before pausing and asking for further instructions, commit your changes to version control system. ALWAYS commit per section "Commit discipline" below. ALL commits MUST include [AGENT] tag.
 - ❌ **Must NOT**: Commit files that are not directly related to your current task. Only commit files you have intentionally modified as part of the specific work requested. Do not commit unrelated changes, even if they exist in your working directory.
+
+### G-task: Follow backlog workflow for structured tasks
+
+- ✅ **Should**: Use `backlog` commands with `--plain` flag according to `for-llm/backlog.md` to learn about and manage task if you are told to work on a backlog task (e.g. you are given only a task number withou further context)
+- ✅ **Should**: Complete full Definition of Done checklist before marking tasks as Done
+- ❌ **Must NOT**: Implement beyond acceptance criteria without updating the task first
+- ❌ **Must NOT**: Use backlog when not working on backlog-managed tasks
+
+### G-search: Prefer ast-grep for syntax-aware search, with ripgrep as fallback
+
+✅You run in an environment where ast-grep (`sg`) is available. Whenever a search requires syntax-aware or structural matching, default to `sg --lang <lang> -p '<pattern>'`. Avoid falling back to text-only tools like ripgrep (`rg`) unless `sg` fails to do the job, or plain-text search is explicitly requested.
 
 ### G-sandbox: Must followed rules when using MCP container-use
 
