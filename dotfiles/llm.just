@@ -145,6 +145,9 @@ cpa:
 
 cpa-usage:
     open "https://ericc-ch.github.io/copilot-api/?endpoint=http://localhost:15432/usage"
+    # see also
+    # - Metered usage: https://github.com/settings/billing
+    # - Model multipliers: https://docs.github.com/en/copilot/concepts/copilot-billing/understanding-and-managing-requests-in-copilot#model-multipliers
 
 # works only for Ubuntu
 #
