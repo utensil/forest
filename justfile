@@ -683,6 +683,9 @@ prep-tm:
 tm *PARAMS="":
     termusic {{PARAMS}}
 
+prep-ym:
+    [ -d /Applications/YesPlayMusic.app ] || brew install --cask yesplaymusic
+
 # prep-music:
 #     # it doesn't support free spotify accounts
 #     # which spotify_player || brew install spotify_player
