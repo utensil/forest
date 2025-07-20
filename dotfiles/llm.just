@@ -448,16 +448,6 @@ zero:
 prep-cc:
     #!/usr/bin/env zsh
     which claude || npm install -g @anthropic-ai/claude-code
-    which ccr || npm install -g @musistudio/claude-code-router
-    mkdir -p ~/.claude-code-router
-    cat > ~/.claude-code-router/config.json << EOF
-    {
-        "log": true,
-        "OPENAI_API_KEY": "$OPENAI_API_KEY",
-        "OPENAI_BASE_URL": "$OPENAI_API_BASE",
-        "OPENAI_MODEL": "$OPENAI_API_MODEL"
-    }
-    EOF
     mkdir -p ~/.claude
     # https://docs.anthropic.com/en/docs/claude-code/settings
     cat > ~/.claude/settings.json << EOF
@@ -483,6 +473,29 @@ prep-cc:
             "Read(.env)"
         ]
       }
+    }
+    EOF
+
+prep-ccr:
+    #!/usr/bin/env zsh
+    which ccr || npm install -g @musistudio/claude-code-router
+    mkdir -p ~/.claude-code-router
+    cat > ~/.claude-code-router/config.json << EOF
+    {
+        "LOG": true,
+        "Providers": [
+            {
+                "name": "local",
+                "api_base_url": "${OPENAI_API_BASE}/chat/completions",
+                "api_key": "$OPENAI_API_KEY",
+                "models": [
+                    "$OPENAI_API_MODEL"
+                ]
+            }
+        ],
+        "Router": {
+            "default": "local"
+        }
     }
     EOF
 
@@ -517,10 +530,15 @@ prep-cc-cu:
 
 # just cc forest --debug
 #
-cc PROJ="forest" *PARAMS="":
+ccr PROJ="forest" *PARAMS="":
     #!/usr/bin/env zsh
     cd ~/projects/{{PROJ}}
     ccr code {{PARAMS}}
+
+cc PROJ="forest" *PARAMS="":
+    #!/usr/bin/env zsh
+    cd ~/projects/{{PROJ}}
+    export ANTHROPIC_BASE_URL=$OPENAI_API_BASE ANTHROPIC_AUTH_TOKEN=$OPENAI_API_KEY ANTHROPIC_MODEL=$OPENAI_API_MODEL ANTHROPIC_SMALL_FAST_MODEL=$OPENAI_API_MODEL && claude
 
 prep-codex:
     npm install -g @openai/codex
