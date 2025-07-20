@@ -371,6 +371,11 @@ init-jj PROJ="forest" *PARAMS="":
     cd ~/projects/{{PROJ}}
     jj status || jj git init --colocate
 
+push:
+    jj psm
+    jj psb main --remote tangled
+    jj psb main --remote berg
+
 ## Languages
 
 # https://blog.vbang.dk/2025/06/29/tools-i-love-mise/
