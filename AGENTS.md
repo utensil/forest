@@ -9,7 +9,7 @@
 
 ---
 
-## 0. Non-negotiable GOLDEN rules
+## 1. Non-negotiable GOLDEN rules
 
 ALWAYS cite the rules which you are following at the end of your reply, like this: "(per G-ask, G-verify)".
 
@@ -60,7 +60,7 @@ Once you start using container-use:  ALWAYS use ONLY Environments for ANY and AL
 
 ---
 
-## 5. Anchor comments
+## 2. Anchor comments
 
 Add specially formatted comments throughout the codebase, where appropriate, for yourself as inline knowledge that can be easily `grep`ped for. 
 
@@ -88,7 +88,7 @@ async function loadEgglogWasm() {
 
 ---
 
-## 6. Commit discipline
+## 3. Commit discipline
 
 The version control system is `jj`, NOT git.
 
@@ -108,7 +108,7 @@ To commit file `A.txt`, `B that has spaces.txt`, and directory `src`, use `jj co
 
 ---
 
-## 17. Meta: Guidelines for updating AGENT.md files
+## 4. Meta: Guidelines for updating AGENT.md files
 
 This file should be updated when:
 - New major features or tools are added to the project

@@ -99,7 +99,7 @@ just build          # Full build validation
 - **References**: Citation management and bibliography
 - **Interactive Components**: WASM-based computational tools
 
-## 7. 🌲 Forester content & tree files
+## 5. 🌲 Forester content & tree files
 
 *   To modify tree content, **edit `.tree` files** in `trees/`.
 *   **Follow Forester syntax**: Use `\import{macros}`, `\taxon{type}`, `\tag{topic}` for organization.
@@ -132,7 +132,7 @@ just build          # Full build validation
 }
 ```
 
-## 8. 🌲 Learning Diary & RSS Integration
+## 6. 🌲 Learning Diary & RSS Integration
 
 See `for-llm/learning_diary.md` for comprehensive documentation on learning diary format, RSS processing, and integration patterns.
 
@@ -144,7 +144,7 @@ Key points:
 *   Group related items under topic headers when multiple entries exist
 *   Use hierarchical organization with year and month subtrees
 
-## 9. 🌲 Mathematical notation & macros
+## 7. 🌲 Mathematical notation & macros
 
 *   **Inline math**: `#{math expression}`
 *   **Display math**: `##{math expression}`
@@ -159,7 +159,7 @@ Key points:
 - Include proofs in `\proof{}` blocks
 - Use proper mathematical typography and spacing
 
-## 10. Common pitfalls
+## 8. Common pitfalls
 
 *   Forgetting to import `macros.tree` in new tree files.
 *   Using incorrect Forester syntax (missing `\p{}` around paragraphs).
@@ -169,7 +169,7 @@ Key points:
 *   Editing generated files instead of source files.
 *   Large refactors without considering build dependencies.
 
-## 11. 🌲 Domain-Specific Terminology
+## 9. 🌲 Domain-Specific Terminology
 
 *   **Tree**: A single note file in Forester format (`.tree` extension).
 *   **Forest**: The collection of all trees and their interconnections.
@@ -184,7 +184,7 @@ Key points:
 *   **Biome**: JavaScript/TypeScript linting and formatting tool.
 *   **Lightning CSS**: CSS processing and bundling tool.
 
-## 12. Key File & Pattern References
+## 10. Key File & Pattern References
 
 This section provides pointers to important files and common patterns within the codebase.
 
@@ -204,7 +204,7 @@ This section provides pointers to important files and common patterns within the
     *   Location: `justfile`, `biome.json`, `package.json`
     *   Pattern: Centralized configuration for development tools.
 
-## 13. Directory-Specific documentation
+## 11. Directory-Specific documentation
 
 *   **Always check existing patterns** in directories before adding new content.
 *   **Follow naming conventions** established in each subject area (uts, ag, tt, ca, spin, hopf).
@@ -219,21 +219,21 @@ This section provides pointers to important files and common patterns within the
 - **spin**: Clifford algebras and spin groups
 - **hopf**: Hopf algebras and quantum groups
 
-## 14. Versioning & deployment
+## 12. Versioning & deployment
 
 *   **No formal versioning**: Content-focused repository with continuous integration.
 *   **Deployment**: Automatic GitHub Pages deployment on main branch push.
 *   **Git workflow**: Direct commits to main for content, feature branches for major changes.
 *   **Backup strategy**: Git history serves as version control and backup.
 
-## 15. Performance considerations
+## 13. Performance considerations
 
 *   **WASM loading**: First-time WASM module loading can be slow; implement graceful degradation.
 *   **Build optimization**: Use file watching in development to avoid full rebuilds.
 *   **Asset optimization**: Lightning CSS and Bun handle minification and bundling.
 *   **PDF generation**: LaTeX compilation is resource-intensive; run only when needed.
 
-## 16. 🌲 Writing task automation scripts
+## 14. 🌲 Writing task automation scripts
 
 When implementing complex data processing or automation tasks, create standalone Python scripts that integrate with the project workflow.
 
