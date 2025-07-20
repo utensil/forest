@@ -99,7 +99,33 @@ just build          # Full build validation
 - **References**: Citation management and bibliography
 - **Interactive Components**: WASM-based computational tools
 
-## 5. 🌲 Forester content & tree files
+## 5. 🌲 Forester overview & file structure
+
+Forester is a tool for creating and managing collections of interconnected notes ("trees") organized into "forests". It uses a markup language similar to LaTeX with influences from Markdown.
+
+### File structure
+- Trees are stored as `.tree` files in the `trees/` directory
+- Each tree has a unique address in format `xxx-NNNN` where:
+  - `xxx` is a namespace prefix (often subject area)
+  - `NNNN` is a base-36 number (allowing digits 0-9 and letters A-Z)
+- References are stored in `refs/` subdirectory
+- Configuration via `forest.toml`
+
+### Document types
+Common document types marked with `\taxon`:
+- `person`: Author/person profile
+- `reference`: Citation reference
+- `definition`/`theorem`/`lemma`: Mathematical content 
+- `root`: Top-level index document
+- `eq`: Equation reference
+
+### Tags
+Common tag categories:
+- Subject areas: `clifford`, `hopf`, `spin`, `tt` (type theory), `ca` (category theory), `ag` (algebraic geometry)
+- Status: `draft`, `notes`, `exp` (experimental)
+- Type: `tech`, `macro` (macro definitions)
+
+## 6. 🌲 Forester content & tree files
 
 *   To modify tree content, **edit `.tree` files** in `trees/`.
 *   **Follow Forester syntax**: Use `\import{macros}`, `\taxon{type}`, `\tag{topic}` for organization.
@@ -111,7 +137,31 @@ just build          # Full build validation
     - `\citek{ref-id}` in mathematical content (cites whole papers/books)
     - `\citet{section}{ref-id}` in mathematical content (cites specific sections/theorems)
 
-**Tree file pattern example**:
+### Tree file structure
+
+Every tree file should follow this basic structure:
+
+```forester
+\import{macros}     # Import common macros
+\import{other-tree} # Optional: Import definitions from another tree
+\tag{topic1}        # Topic tags via command
+\tag{topic2}
+\taxon{type}        # Document type classification
+
+\title{Title of the Note}  # Optional but recommended
+
+\p{Paragraph text}        # Paragraphs must be explicitly marked
+
+\subtree{                 # Create a subsection
+  \title{Subsection}
+  \p{Content...}
+}
+
+# Other content elements...
+```
+
+### Tree file pattern example
+
 ```forester
 \import{macros}
 \taxon{definition}
@@ -132,7 +182,69 @@ just build          # Full build validation
 }
 ```
 
-## 6. 🌲 Mathematical notation & macros
+### Basic content elements
+
+```forester
+\title{Title of the Note}  # Optional but recommended
+\p{Paragraph text}        # Paragraphs must be explicitly marked
+\subtree{                 # Create a subsection
+  \title{Subsection}
+  \p{Content...}
+}
+
+\ol{  # Ordered list
+  \li{First item} 
+  \li{Second item}
+}
+
+\ul{  # Unordered list 
+  \li{Item one}
+  \li{Item two}
+}
+
+\strong{bold text}
+\em{italic text}
+\code{monospace}
+\newvocab{new term}      # Highlight new terminology
+\vocab{previously defined term}
+\related{hidden reference text}
+
+\proof{                  # Proof block (not in TOC)
+  \p{Proof content...}
+}
+
+\collapsed{title}{       # Collapsible section
+  content
+}
+
+\quote{quoted text}      # Blockquote
+```
+
+### Special content types
+
+```forester
+\card{type}{title}{content}    # Content card
+\note{title}{content}          # Structured note
+\block{title}{content}         # Content block
+\mdnote{title}{markdown-style content}
+```
+
+### References and links
+
+```forester
+[link text](tree-id)     # Link to another tree
+\vocabk{term}{tree-id}   # Link to term definition
+\meta{external}{url}     # External resource metadata
+\link{url}              # Simple URL link
+
+# Citations and References
+\citef{reference-id}     # Citation showing full paper title (learning diary)
+\citek{reference-id}     # Citation for whole papers/books (mathematical content)
+\citet{section}{ref-id}  # Citation with specific section/theorem (mathematical content)
+\citelink{url}          # URL citation
+```
+
+## 7. 🌲 Mathematical notation & macros
 
 *   **Inline math**: `#{math expression}`
 *   **Display math**: `##{math expression}`
@@ -141,13 +253,98 @@ just build          # Full build validation
 *   **String diagrams**: Use category theory macro system for building diagrams
 *   **TikZ diagrams**: `\tikzfig{}` blocks for complex mathematical diagrams
 
-**Mathematical content guidelines**:
+### Mathematical content guidelines
 - Import `macros.tree` at the start of mathematical files
 - Use `\refcardt{}` for formal mathematical statements
 - Include proofs in `\proof{}` blocks
 - Use proper mathematical typography and spacing
 
-## 7. 🌲 Learning Diary & RSS Integration
+### Math notation
+
+```forester
+#{inline math}           # Inline KaTeX math
+##{display math}         # Display KaTeX math
+
+\eqtag{eq1}{equation}    # Numbered equation
+\eqnotag{equation}       # Unnumbered equation
+```
+
+### Category theory macros
+
+Common category theory notation:
+```
+# Categories
+\Cat        # Category of categories 
+\Set        # Category of sets
+\Grp        # Category of groups
+\Top        # Category of topological spaces
+\Poset      # Category of posets
+\Preord     # Category of preorders
+\Topoi      # Category of topoi
+
+# Basic operators
+\dom        # Domain operator
+\cod        # Codomain operator
+\Ob         # Objects functor
+\Arr        # Arrows functor
+\Mor        # Morphisms
+\Sub        # Subobjects
+
+# Common symbols
+\fatsemi    # Composition operator ⨟
+\cp         # Bullet composition •
+\monic      # Monomorphism ↣
+\epic       # Epimorphism ↠
+\equiv      # Equivalence ~
+\iso        # Isomorphism ≅
+```
+
+### String diagrams
+
+Components for building string diagrams:
+
+```
+# Base components
+\category/new              # New category box
+\functor/new              # New functor wire
+\nat-transf/new           # Natural transformation dot
+
+# Compositions
+\functor/comp/new         # Compose functors horizontally  
+\nat-transf/vcomp/new     # Vertical composition of transformations
+\nat-transf/hcomp/new     # Horizontal composition
+\nat-transf/pasting/new   # Pasting diagram
+
+# Constructors
+\create/fun[name][dom][cod]     # Named functor
+\create/nat[name][dom][cod]     # Named transformation
+\create/wire[total][nth][d][c]  # Wire in diagram
+\create/dot[w][t][n][nat][s][p] # Dot on wire
+
+# Special constructions
+\joinfun/new              # Join functors
+\homfun/new              # Hom functor
+\cupfun/new              # Cup/cap diagrams
+\naturality/new          # Naturality squares
+\adjunction/new          # Adjunction diagrams
+```
+
+### Diagrams and figures
+
+```forester
+\tikzfig{                # TikZ diagram
+  \begin{tikzcd}
+    # TikZ content
+  \end{tikzcd}
+}
+
+\figure{
+  content
+  \figcaption{Caption text}
+}
+```
+
+## 8. 🌲 Learning Diary & RSS Integration
 
 *   **Learning diary entries**: Use `\mdblock{YYYY-MM-DD}{}` format
 *   **RSS Processing**: `just stars` generates JSON data for integration
@@ -159,7 +356,7 @@ just build          # Full build validation
 
 See `for-llm/learning_diary.md` for comprehensive documentation on learning diary format, RSS processing, and integration patterns.
 
-## 8. Common pitfalls
+## 9. Common pitfalls
 
 *   Forgetting to import `macros.tree` in new tree files.
 *   Using incorrect Forester syntax (missing `\p{}` around paragraphs).
@@ -169,8 +366,13 @@ See `for-llm/learning_diary.md` for comprehensive documentation on learning diar
 *   Editing generated files instead of source files.
 *   Large refactors without considering build dependencies.
 *   Mixing math notation styles.
+*   Incorrect nesting of blocks and commands.
+*   Uncited theorems/definitions in mathematical content.
+*   Missing taxonomy markers (`\taxon{}`, `\tag{}`).
+*   Improper citation format or missing references.
+*   Unlinked terminology that should use `\vocabk{}`.
 
-## 9. 🌲 Domain-Specific Terminology
+## 10. 🌲 Domain-Specific Terminology
 
 *   **Tree**: A single note file in Forester format (`.tree` extension).
 *   **Forest**: The collection of all trees and their interconnections.
@@ -185,7 +387,7 @@ See `for-llm/learning_diary.md` for comprehensive documentation on learning diar
 *   **Biome**: JavaScript/TypeScript linting and formatting tool.
 *   **Lightning CSS**: CSS processing and bundling tool.
 
-## 10. Key File & Pattern References
+## 11. Key File & Pattern References
 
 This section provides pointers to important files and common patterns within the codebase.
 
@@ -205,7 +407,7 @@ This section provides pointers to important files and common patterns within the
     *   Location: `justfile`, `biome.json`, `package.json`
     *   Pattern: Centralized configuration for development tools.
 
-## 11. Subject-Specific Guidelines
+## 12. Subject-Specific Guidelines
 
 | Prefix | Topic                  |
 |--------|------------------------|
@@ -222,14 +424,55 @@ This section provides pointers to important files and common patterns within the
 - **Mathematical topics** should follow academic conventions and cite sources properly.
 - **Update macro files** when introducing new notation or symbols.
 
-## 12. Versioning & deployment
+## 13. Forester queries and organization
+
+### Tree organization patterns
+
+```forester
+\transclude{tree-id}     # Include another tree
+\scope{
+  \put\transclude/expanded{false}
+  \query{
+    \open\query
+    \isect{\tag{draft}}{\compl{\tag{completed}}}
+  }
+}
+```
+
+### Common query patterns
+
+```forester
+# Find draft notes by topic
+\query{
+    \open\query
+    \isect{\tag{draft}}{\compl{\union{\tag{tt}}{\tag{ag}}{\tag{clifford}}{\tag{tech}}}}
+}
+
+# Find notes without a home
+\def\query/normal{
+  \compl{
+    \union{\tag{root}}{\tag{draft}}{\tag{macro}}
+    {\tag{exp}}{\taxon{person}}{\taxon{reference}}
+  }
+}
+
+# Find lost notes not transcluded anywhere
+\def\query/root/transcluded{
+  \union-fam-rel{\tag{root}}{\paths}{\outgoing}{\transclusion}
+}
+\def\query/lost{
+  \isect{\query/normal}{\compl{\query/root/transcluded}}
+}
+```
+
+## 14. Versioning & deployment
 
 *   **No formal versioning**: Content-focused repository with continuous integration.
 *   **Deployment**: Automatic GitHub Pages deployment on main branch push.
 *   **Git workflow**: Direct commits to main for content, feature branches for major changes.
 *   **Backup strategy**: Git history serves as version control and backup.
 
-## 13. Performance considerations
+## 15. Performance considerations
 
 *   **WASM loading**: First-time WASM module loading can be slow; implement graceful degradation.
 *   **Build optimization**: Use file watching in development to avoid full rebuilds.
