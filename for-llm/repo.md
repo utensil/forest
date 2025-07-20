@@ -132,19 +132,7 @@ just build          # Full build validation
 }
 ```
 
-## 6. 🌲 Learning Diary & RSS Integration
-
-See `for-llm/learning_diary.md` for comprehensive documentation on learning diary format, RSS processing, and integration patterns.
-
-Key points:
-*   Learning diary entries use `\mdblock{YYYY-MM-DD}{}` format
-*   Process RSS starred items: `just stars` generates JSON data for integration
-*   Entries are sorted by arrival date (newest first)
-*   Use consistent link formats: `[Title](URL)` for web resources, `\citef{ref-id}` for citations (shows full title)
-*   Group related items under topic headers when multiple entries exist
-*   Use hierarchical organization with year and month subtrees
-
-## 7. 🌲 Mathematical notation & macros
+## 6. 🌲 Mathematical notation & macros
 
 *   **Inline math**: `#{math expression}`
 *   **Display math**: `##{math expression}`
@@ -159,6 +147,18 @@ Key points:
 - Include proofs in `\proof{}` blocks
 - Use proper mathematical typography and spacing
 
+## 7. 🌲 Learning Diary & RSS Integration
+
+*   **Learning diary entries**: Use `\mdblock{YYYY-MM-DD}{}` format
+*   **RSS Processing**: `just stars` generates JSON data for integration
+*   **Entries**: Sorted by arrival date (newest first)
+*   **Link formats**: `[Title](URL)` for web resources, `\citef{ref-id}` for citations (shows full title)
+*   **Organization**: Group related items under topic headers when multiple entries exist
+*   **Structure**: Use hierarchical organization with year and month subtrees
+*   **Citations**: `\citef{ref-id}` (full title) or `\citek{ref-id}` (key-only)
+
+See `for-llm/learning_diary.md` for comprehensive documentation on learning diary format, RSS processing, and integration patterns.
+
 ## 8. Common pitfalls
 
 *   Forgetting to import `macros.tree` in new tree files.
@@ -168,6 +168,7 @@ Key points:
 *   Not handling WASM module loading failures gracefully.
 *   Editing generated files instead of source files.
 *   Large refactors without considering build dependencies.
+*   Mixing math notation styles.
 
 ## 9. 🌲 Domain-Specific Terminology
 
@@ -204,20 +205,22 @@ This section provides pointers to important files and common patterns within the
     *   Location: `justfile`, `biome.json`, `package.json`
     *   Pattern: Centralized configuration for development tools.
 
-## 11. Directory-Specific documentation
+## 11. Subject-Specific Guidelines
 
-*   **Always check existing patterns** in directories before adding new content.
-*   **Follow naming conventions** established in each subject area (uts, ag, tt, ca, spin, hopf).
-*   **Mathematical topics** should follow academic conventions and cite sources properly.
-*   **Update macro files** when introducing new notation or symbols.
+| Prefix | Topic                  |
+|--------|------------------------|
+| `uts`  | General math/notes     |
+| `ag`   | Algebraic geometry     |
+| `tt`   | Type theory            |
+| `ca`   | Category theory        |
+| `spin` | Clifford algebras and spin groups |
+| `hopf` | Hopf algebras and quantum groups |
 
 **Subject-specific guidelines**:
-- **uts**: General mathematical notes and learning diary
-- **ag**: Algebraic geometry concepts and constructions  
-- **tt**: Type theory and categorical logic
-- **ca**: Category theory fundamentals
-- **spin**: Clifford algebras and spin groups
-- **hopf**: Hopf algebras and quantum groups
+- **Always check existing patterns** in directories before adding new content.
+- **Follow naming conventions** established in each subject area.
+- **Mathematical topics** should follow academic conventions and cite sources properly.
+- **Update macro files** when introducing new notation or symbols.
 
 ## 12. Versioning & deployment
 
