@@ -603,6 +603,15 @@ prep-q:
     which qterm || sudo ln -s "/Applications/Amazon Q.app/Contents/MacOS/qterm" /usr/local/bin/qterm
     # q login
 
+init-q PROJ="forest":
+    #!/usr/bin/env zsh
+    cd ~/projects/{{PROJ}}
+    q chat --no-interactive "/context add AGENTS.md"
+    # q chat --no-interactive '/hooks add --trigger per_prompt --command "cat AGENTS.md" AGENTS.md'
+
+q:
+    q chat --trust-tools=fs_read,fs_write "ALWAYS follow AGENTS.md"
+
 # requires too many permissions to my GitHub account, rejected
 #
 prep-kb:
