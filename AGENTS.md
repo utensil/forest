@@ -2,10 +2,10 @@
 
 *Last updated 2025-07-20*
 
-> **Purpose** – This file is the onboarding manual[^1] for every AI assistant (Claude, Amp, Codex, Amazon Q, OpenCode etc.) and every human who edits this repository.
+> **Purpose** – This file is the onboarding manual[^1] for every AI assistant (Claude, Amp, Codex, Amazon Q, OpenCode, etc.) and every human who edits this repository.
 > It encodes our coding standards, guard-rails, and workflow tricks so the *human 30 %*[^2] (architecture, tests, domain judgment) stays in human hands.
 
-> **Repository-specific information** – For detailed information about this specific repository, including project overview, build commands, coding standards, and other Forest-specific guidelines, see [for-llm/repo.md](./for-llm/repo.md).
+> **Repository-specific information** – For detailed information about this specific repository, including project overview, build commands, coding standards, and other repo-specific guidelines, see [for-llm/repo.md](./for-llm/repo.md).
 
 ---
 
@@ -95,15 +95,14 @@ The version control system is `jj`, NOT git.
 To commit file `A.txt`, `B that has spaces.txt`, and directory `src`, use `jj commit 'A.txt | "B that has spaces.txt"' -m "your commit message here"`.
 
 *   **Granular commits**: One logical change per commit.
-*   **MANDATORY [AGENT] tag**: ALL agent-generated commits MUST end with `[AGENT]` tag. NO EXCEPTIONS.
-    - ✅ Correct: `feat: optimize shader loading [AGENT]`
-    - ❌ Wrong: `feat: optimize shader loading` (missing [AGENT] tag)
 *   **Use conventional commits**: `feat:`, `fix:`, `docs:`, `style:`, `refactor:`, etc.
 *   **Descriptive commit messages**: ALWAYS include both:
     - Short title explaining the *why* (what problem this solves)
-    - Detailed description of *what* changed (specific files, functions, behavior)
-    - Link to issues if applicable
+    - Detailed description of *what* changed (specific files, functions, behavior, related issue links, etc.)
     - Example: `fix: resolve WASM loading timeout in dev mode [AGENT]` + description of which files were modified and how
+*   **MANDATORY [AGENT] tag**: ALL agent-generated commits MUST end the title of the commit message with `[AGENT]` tag. NO EXCEPTIONS.
+    - ✅ Correct: `feat: optimize shader loading [AGENT]`
+    - ❌ Wrong: `feat: optimize shader loading` (missing [AGENT] tag)
 *   **Review AI-generated code**: Never merge code you don't understand.
 
 ---
@@ -133,8 +132,7 @@ When implementing complex data processing or automation tasks, create standalone
 RSS Star Processor
 ==================
 
-This script processes NetNewsWire starred items and converts them into
-Forester learning diary format with proper date grouping and link formatting.
+This script processes starred items in RSS reader and converts them into learning diary format with proper date grouping and link formatting.
 
 Usage: just stars (calls this script internally)
 """
