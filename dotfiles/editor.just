@@ -201,7 +201,7 @@ prep-lsp:
     # zig
     # https://github.com/jdx/mise/discussions/3390 for mise
     # https://mise.jdx.dev/registry.html#registry
-    which zls || just prep-zls || echo "zls not installed, visit https://zigtools.org/zls/install/"
+    which zig && (which zls || just prep-zls || echo "zls not installed, visit https://zigtools.org/zls/install/") || true
     # GLSL
     which glsl_analyzer || ( cd /tmp && wget https://github.com/nolanderc/glsl_analyzer/releases/download/v1.6.0/aarch64-macos.zip && unzip aarch64-macos.zip && sudo mv bin/glsl_analyzer /usr/local/bin/)
 
