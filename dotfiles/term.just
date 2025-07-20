@@ -371,10 +371,13 @@ init-jj PROJ="forest" *PARAMS="":
     cd ~/projects/{{PROJ}}
     jj status || jj git init --colocate
 
-push:
-    jj psm
-    jj psb main --remote tangled
-    jj psb main --remote berg
+push PROJ="forest" BRANCH="main":
+    #!/usr/bin/env zsh
+    cd ~/projects/{{PROJ}}
+    jj bs {{BRANCH}} -r @-
+    jj psb {{BRANCH}}
+    jj psb {{BRANCH}} --remote tangled
+    jj psb {{BRANCH}} --remote berg
 
 ## Languages
 
