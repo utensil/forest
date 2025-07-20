@@ -143,6 +143,9 @@ cpa:
     #!/usr/bin/env zsh
     npx -y copilot-api@latest start --port 15432 # --verbose
 
+cpa-usage:
+    open "https://ericc-ch.github.io/copilot-api/?endpoint=http://localhost:15432/usage"
+
 # works only for Ubuntu
 #
 [linux]
