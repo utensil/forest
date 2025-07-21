@@ -530,6 +530,8 @@ ftm:
 
 # prefix key: ctrl+b
 #
+# r - reload config
+#
 # c - new window
 # <number> - switch to window <number>
 #
@@ -539,7 +541,8 @@ ftm:
 #
 # " - split -
 # % - split |
-# directions - move between panes
+# <direction> - move between panes
+# z - zoom the current pane
 #
 # d - detach
 # x - kill the current pane
