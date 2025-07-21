@@ -77,13 +77,17 @@ awake:
     # caffeinate -d -s
     caffeinate -s
 
-# up arrow or ctrl+r - atuin history TUI
+# ctrl+r - atuin history TUI
 # In TUI:
-#   - anything - fuzzy query
+#   - ctrl+r - cycle through filter mode: global, host, session, directory
+#   - ctrl+s - cycle through search mode: fuzzy, prefix, fulltext
+#   - anything - search history
 #   - enter - execute
 #   - tab   - edit
-# 
+#   - ctrl+o - inspect (stats)
+#
 # https://docs.atuin.sh/guide/installation/
+# https://docs.atuin.sh/configuration/key-binding/#atuin-ui-shortcuts
 # Prepare atuin for history management/syncing
 prep-his:
     which atuin || brew install atuin
