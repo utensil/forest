@@ -22,6 +22,33 @@
 \subtree[2025-07]{
 \title{July, 2025}
 
+\subtree[2025-07-03]{\mdnote{2025-07-03}{
+- [Introducing tmux-rs](https://richardscollin.github.io/tmux-rs/) ([on HN](https://news.ycombinator.com/item?id=44455787))
+    - initially used [c2rust](https://github.com/immunant/c2rust), a tool to migrate C code to (unsafe) Rust
+        - didn't keep constant name
+        - lots of casts polluting the code
+        - still requires looking at the origin C code for rewriting
+    - went with manually translating one file at a time
+        - start with linking rust static lib to C
+        - end with linking c to rust via crate `cc`
+    - fixed interesting bugs
+    - summarized C patterns in Rust
+    - nice quote: "You might be asking: why did you rewrite tmux in Rust? And yeah, I don’t really have a good reason. It’s a hobby project. Like gardening, but with more segfaults."
+    - [skim-rs/skim: Fuzzy Finder in rust!](https://github.com/skim-rs/skim)
+- #ai-ai-safety
+    - [EBAF – eBPF Based Ad Firewall](https://github.com/Kazedaa/eBAF)
+        - it's pointed out [on HN](https://news.ycombinator.com/item?id=44456389) that
+            - its doc and code are both AI slop
+            - install script adds sudoers rules to allow ebaf executable to be run with no password
+            - allows any ebpf code to be loaded into the kernel without a sudo password
+            - re-resolves all 1k+ domain names every 600 seconds
+- [Poor Man's Back End-as-a-Service (BaaS), Similar to Firebase/Supabase/Pocketbase](https://github.com/zserge/pennybase)
+    - possibly useful
+- [WebGPU in zig](https://www.reddit.com/r/Zig/comments/1lqrhic/webgpu_in_zig/)
+    - [bronter/wgpu_native_zig: Zig bindings for wgpu-native](https://github.com/bronter/wgpu_native_zig)
+    - [Silverclaw/zig-wgpu-native: Zig bindings for the wgpu-native graphics API - Codeberg.org](https://codeberg.org/Silverclaw/zig-wgpu-native)
+}}
+
 \subtree[2025-07-02]{\mdnote{2025-07-02}{
 - [Code-GUI bidirectional editing via LSP](https://jamesbvaughan.com/bidirectional-editing/)
 - [OpenBao, the community fork of Vault](https://github.com/openbao/openbao/)
@@ -45,8 +72,6 @@
         - flaky tests that fails at random
         - few changes of code causing lots of changes to tests
         - tests that takes too long to run and are skipped from time to time
-- [c2rust: Migrate C code to Rust](https://github.com/immunant/c2rust)
-    - [TODO] review this with the projects using it
 - [clamp / median / range](https://dotat.at/@/2025-07-02-cmp.html)
     - I also prefer chained comparison styleA
     - fun fact: clamp is median
