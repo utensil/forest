@@ -273,8 +273,6 @@ clone USER REPO:
         (cd $DIR && git pull) || true
     fi
 
-# [NOTE] If modified, test with prep-zj
-#
 clone-conf CONF USER REPO:
     #!/usr/bin/env zsh
     mkdir -p ~/projects
@@ -465,20 +463,26 @@ prep-ex:
 
 ## Tmux and friends
 
-# try Zellij
+# Try Zellij
+#
 # default key bindings (I don't like them)
 # Ctrl+P N to create a new pane
 # Ctrl+P then direction keys to move between panes
 # Ctrl+P Z to hide frames
 # Ctrl+N then direction keys to resize the corrent pane towards the direction
 # Ctrl+O W to manage sessions
+# try-zj:
+#     #!/usr/bin/env zsh
+#     bash <(curl -L https://zellij.dev/launch)
 
 # Install Zellij, set its visual to minimal, keybindings to tmux
 prep-zj:
     #!/usr/bin/env zsh
     which zellij || brew install zellij
-    # bash <(curl -L https://zellij.dev/launch)
-    just clone-conf zellij t3hmrman tmux-zellij-shim-config
+    # just clone-conf zellij t3hmrman tmux-zellij-shim-config
+    rip ~/.config/zellij
+    # ln -s dotfiles/.config/zellij ~/.config/zellij
+    just cp dotfiles/.config/zellij ~/.config/zellij
 
 # attach - a
 # list - ls
