@@ -556,8 +556,8 @@ tm-at NAME:
 tm-mon:
     #!/usr/bin/env zsh
     tmux attach -t mon || tmux new-session -s mon -d 'btop || zsh' \; \
-      split-window -h -p 50 'macmon || zsh' \; \
-      split-window -v -p 50 'sudo mactop || zsh' \; \
+      split-window -h 'macmon || zsh' \; \
+      split-window -v -t 1 'sudo mactop || zsh' \; \
       select-pane -t 0 \; \
       attach
 
