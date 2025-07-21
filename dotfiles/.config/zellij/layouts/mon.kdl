@@ -1,0 +1,17 @@
+// this file is based on compact
+
+layout {
+    pane split_direction="vertical" {
+        pane command="btop"
+        pane split_direction="horizontal" {
+            pane command="macmon"
+            pane command="bash" {
+                args "-c" "sudo mactop"
+                focus true
+            }
+        }
+    }
+    pane size=1 borderless=true {
+        plugin location="compact-bar"
+    }
+}
