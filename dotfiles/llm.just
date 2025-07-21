@@ -460,6 +460,8 @@ prep-cc:
         "allow": [
           "Bash(sg:*)",
           "Bash(rg:*)",
+          "Bash(jj:*)",
+          "Bash(backlog:*)",
           "WebFetch",
           "WebSearch",
           "Edit",
