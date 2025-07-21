@@ -1,0 +1,27 @@
+// this file is based on compact, adapted significantly according to https://zellij.dev/documentation/creating-a-layout.html#default-tab-template
+
+layout {
+    default_tab_template {
+        children
+        pane size=1 borderless=true {
+            plugin location="compact-bar"
+        }
+    }
+    tab name="hx" hide_floating_panes=true {
+        pane name="hx" command="hx"
+        // pane name="hx" command="zsh" {
+        //     args "-c" "EDITOR=hx yazi"
+        // }
+
+        floating_panes {
+            pane name="jj" command="jj" {
+                args "ui"
+                borderless true
+                x "1%"
+                y "1%"
+                width "94%"
+                height "94%"
+            }
+        }
+    }
+}
