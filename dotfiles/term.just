@@ -55,10 +55,11 @@ prep-term-seldom:
     # awrit installation usually fails with some warning
     which awrit || brew install chase/tap/awrit || true
 
-prep-monit:
+prep-mon:
     #!/usr/bin/env zsh
     # which glances || brew install glances
     which btop || brew install btop
+    which btm || brew install bottom
     # stats is part of the sudoless monit tool community
     # [ ! -f /Applications/Stats.app ] && brew install stats
     if [ "$(uname)" = "Darwin" ]; then
