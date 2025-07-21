@@ -1,4 +1,4 @@
-// adapted from https://github.com/t3hmrman/tmux-zellij-shim-config/
+// adapted from https://github.com/t3hmrman/tmux-zellij-shim-config/ (MIT)
 // changes are denoted by [NOTE]
 
 // If you'd like to override the default keybindings completely, be sure to change "keybinds" to "keybinds clear-defaults=true"
@@ -136,10 +136,10 @@ plugins {
     strider location="zellij:strider"
     compact-bar location="zellij:compact-bar"
     session-manager location="zellij:session-manager"
-    // welcome-screen location="zellij:session-manager" {
-    //     // [NOTE] no welcome screen
-    //     welcome_screen false
-    // }
+    welcome-screen location="zellij:session-manager" {
+        // [NOTE] no welcome screen
+        welcome_screen false
+    }
     filepicker location="zellij:strider" {
         cwd "/"
     }
@@ -224,13 +224,16 @@ pane_frames false
 
 // Choose the theme that is specified in the themes section.
 // Default: default
-//
+// [NOTE] this is more quite (at least for the tab color), the default orange is too distracting
 theme "onedark"
 
 // The name of the default layout to load on startup
 // Default: "default"
 //
-default_layout "disable-status-bar"
+// [NOTE] the original shim changed the default layout file, here we use an explicit name
+// default_layout "disable-status-bar"
+// [NOTE] I like the compact layout better: tab at the bottom, and we can see the mode changed (e.g. TMUX, SCROLL)
+default_layout "compact"
 
 // Choose the mode that zellij uses when starting up.
 // Default: normal

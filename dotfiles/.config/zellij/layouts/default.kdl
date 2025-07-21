@@ -1,10 +1,13 @@
+// this file is dumped by command
+// zellij setup --dump-layout default > dotfiles/.config/zellij/layouts/default.kdl
+// don't modify it directly, copy to a new name and customize
+
 layout {
-  pane size=1 borderless=true {
-    plugin location="zellij:tab-bar"
-  }
-  pane
-  // note(2024/06/25): remove the status bar
-  // pane size=2 borderless=true {
-  //   plugin location="zellij:status-bar"
-  // }
+    pane size=1 borderless=true {
+        plugin location="tab-bar"
+    }
+    pane
+    pane size=1 borderless=true {
+        plugin location="status-bar"
+    }
 }
