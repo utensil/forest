@@ -76,6 +76,12 @@ awake:
     # caffeinate -d -s
     caffeinate -s
 
+# up arrow or ctrl+r - atuin history TUI
+# In TUI:
+#   - anything - fuzzy query
+#   - enter - execute
+#   - tab   - edit
+# 
 # https://docs.atuin.sh/guide/installation/
 # Prepare atuin for history management/syncing
 prep-his:
