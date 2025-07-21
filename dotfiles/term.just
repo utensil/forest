@@ -553,15 +553,12 @@ tm-at NAME:
     #!/usr/bin/env zsh
     tmux attach -t {{NAME}} || tmux new-session -s {{NAME}}
 
-tm-btop:
-    #!/usr/bin/env zsh
-    tmux attach -t btop || tmux new-session -s btop -d 'btop || zsh' \; \
-      attach
-
 tm-mon:
     #!/usr/bin/env zsh
-    tmux attach -t mon || tmux new-session -s mon -d 'macmon || zsh' \; \
+    tmux attach -t mon || tmux new-session -s mon -d 'btop || zsh' \; \
+      split-window -h -p 50 'macmon || zsh' \; \
       split-window -v -p 50 'sudo mactop || zsh' \; \
+      select-pane -t 0 \; \
       attach
 
 tm-dev:
