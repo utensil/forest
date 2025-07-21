@@ -8,9 +8,9 @@ source $HOME/.envrc
 alias cd="z"
 
 # up arrow or ctrl+r - atuin history TUI
-(which atuin > /dev/null) && eval "$(atuin init zsh)"
+# (which atuin > /dev/null) && eval "$(atuin init zsh)"
 # keep ussual up arrow
-# (which atuin > /dev/null) && eval "$(atuin init zsh --disable-up-arrow)"
+(which atuin > /dev/null) && eval "$(atuin init zsh --disable-up-arrow)"
 
 (which mise > /dev/null) && eval "$(mise activate zsh)"
 
