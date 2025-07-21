@@ -76,6 +76,17 @@ awake:
     # caffeinate -d -s
     caffeinate -s
 
+# https://docs.atuin.sh/guide/installation/
+# Prepare atuin for history management/syncing
+prep-his:
+    which atuin || brew install atuin
+    # atuin register -u <YOUR_USERNAME> -e <YOUR EMAIL>
+    # atuin key
+    # atuin import auto
+    # atuin login -u <YOUR_USERNAME>
+    # echo 'eval "$(atuin init zsh)"'
+    # atuin sync
+
 ## Ghostty
 
 # based on https://gist.github.com/davidteren/898f2dcccd42d9f8680ec69a3a5d350e
