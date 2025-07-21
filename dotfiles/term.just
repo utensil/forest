@@ -511,12 +511,16 @@ zj *PARAMS:
 # or killed (will resurrect it, each pane will remember the last running command and wait for confirm to run)
 #
 at NAME="mon":
-    (zellij ls|grep {{NAME}}) && just zj a {{NAME}} || just zj -s {{NAME}} -n {{NAME}} || just zj -s {{NAME}}
+    #!/usr/bin/env zsh
+    LAYOUT=$(echo {{NAME}}|sed 's/-.*//g')
+    (zellij ls|grep {{NAME}}) && just zj a {{NAME}} || just zj -s {{NAME}} -n $LAYOUT || just zj -s {{NAME}}
 
 # destructive, for debugging layout only, comment out after debug
 #
-# new-at NAME="mon":
-#     just zj d {{NAME}} --force ; just zj -s {{NAME}} -n {{NAME}}
+new-at NAME="mon":
+    #!/usr/bin/env zsh
+    LAYOUT=$(echo {{NAME}}|sed 's/-.*//g')
+    just zj d {{NAME}} --force ; just zj -s {{NAME}} -n $LAYOUT
 
 # runf SESSION="mon" CMD="zsh":
 #     zellij run -f -n {{SESSION}} -- {{CMD}}
