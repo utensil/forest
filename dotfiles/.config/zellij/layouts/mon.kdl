@@ -1,17 +1,22 @@
-// this file is based on compact
+// this file is based on compact, adapted significantly according to https://zellij.dev/documentation/creating-a-layout.html#default-tab-template
 
 layout {
-    pane split_direction="vertical" {
-        pane command="btop"
-        pane split_direction="horizontal" {
-            pane command="macmon"
-            pane command="bash" {
-                args "-c" "sudo mactop"
-                focus true
-            }
+    default_tab_template {
+        children
+        pane size=1 borderless=true {
+            plugin location="compact-bar"
         }
     }
-    pane size=1 borderless=true {
-        plugin location="compact-bar"
+    tab name="mon" {
+        pane split_direction="vertical" {
+            pane name="btop" command="btop"
+            pane split_direction="horizontal" {
+                pane name="macmon" command="macmon"
+                pane name="mactop" command="bash" {
+                    args "-c" "sudo mactop"
+                    focus true
+                }
+            }
+        }
     }
 }
