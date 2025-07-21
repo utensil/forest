@@ -139,9 +139,10 @@ cpm:
     uvx poetry install
     LOGURU_LEVEL=DEBUG uvx poetry run uvicorn copilot_more.server:app --port 15432 --host {{env('COPILOT_HOST', '127.0.0.1')}}
 
-cpa:
+# -c : Generate a command to launch Claude Code with Copilot API config
+cpa *PARAMS:
     #!/usr/bin/env zsh
-    npx -y copilot-api@latest start --port 15432 # --verbose
+    npx -y copilot-api@latest start --port 15432 {{PARAMS}} # --verbose
 
 cpa-usage:
     open "https://ericc-ch.github.io/copilot-api/?endpoint=http://localhost:15432/usage"
