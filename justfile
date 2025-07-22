@@ -481,24 +481,33 @@ fzf:
 
 ## Web
 
+view URL="http://localhost:1314/":
+    awrit {{URL}}
+
 prep-cha:
     which cha || brew install chawan
+    rip ~/.config/chawan || true
+    ln -s {{justfile_directory()}}/dotfiles/.config/chawan ~/.config/chawan
 
 # https://git.sr.ht/~bptato/chawan/tree/HEAD/doc/config.md
 # q to quit
 # [] to traverse links on the page
 # {} to traverse paragraphs on the page
 # enter to visit link
+# ctrl+l to input link, prefix with ddg: to search with duckduckgo
+# ctrl+k to search
 # ,. to go back or forward in history
+# U to reload
+# I to view image
 # opt+i toggle image
 # opt+j toggle scripting
 # opt+k toggle cookie
+# \ toggle source
+# opt+y copy page link
+# yu copy cursor link
 #
 cha URL:
     cha {{URL}}
-
-view URL="http://localhost:1314/":
-    awrit {{URL}}
 
 prep-servo:
     # softwareupdate --install-rosetta --agree-to-license
