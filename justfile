@@ -481,6 +481,14 @@ fzf:
 
 ## Web
 
+prep-view:
+    # awrit installation usually fails with some warning
+    which awrit || brew install chase/tap/awrit || true
+
+# rendered by headless Chromium, show as image
+# issues:
+# - flashes for React and WebGL
+# - outputs code when mouse moves after exited by ctrl+c
 view URL="http://localhost:1314/":
     awrit {{URL}}
 
@@ -513,6 +521,10 @@ prep-servo:
     # softwareupdate --install-rosetta --agree-to-license
     brew install --cask servo
     just uq /Applications/Servo.app
+
+# rendered by headless Chromium, pixelated
+carbon URL:
+    docker run --rm -ti fathyb/carbonyl {{URL}}
 
 postman:
     # uv tool install --python 3.12 posting
