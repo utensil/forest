@@ -204,6 +204,8 @@ prep-lsp:
     which zig && (which zls || just prep-zls || echo "zls not installed, visit https://zigtools.org/zls/install/") || true
     # GLSL
     which glsl_analyzer || ( cd /tmp && wget https://github.com/nolanderc/glsl_analyzer/releases/download/v1.6.0/aarch64-macos.zip && unzip aarch64-macos.zip && sudo mv bin/glsl_analyzer /usr/local/bin/)
+    # KDL
+    which kdl-lsp || cargo install --git https://github.com/kdl-org/kdl-rs kdl-lsp --locked
 
 # https://github.com/zigtools/zls/issues/2402
 #

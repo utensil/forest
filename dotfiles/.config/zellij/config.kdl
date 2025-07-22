@@ -126,6 +126,18 @@ keybinds clear-defaults=true {
     shared_except "tmux" "locked" {
         // Enter tmux mode
         bind "Ctrl b" { SwitchToMode "Tmux"; }
+
+        // [NOTE] too frequent to be worth global bindings
+
+        // [NOTE] toggle jjui, send ctrl+r to refresh
+        // see https://github.com/xtermjs/xterm.js/blob/0e45909c7e79c83452493d2cd46d99c0a0bb585f/src/common/data/EscapeSequences.ts
+        // or https://en.wikipedia.org/wiki/C0_and_C1_control_codes
+        // for reference on XTerm escape sequence, 0x12 is ^R
+        bind "Ctrl \\" { ToggleFloatingPanes; Write 18; SwitchToMode "Normal"; }
+
+        // [NOTE] Moving between tabs
+        bind "Ctrl Shift Left" { SwitchToMode "Normal"; GoToPreviousTab; SwitchToMode "Normal"; }
+        bind "Ctrl Shift Right" { SwitchToMode "Normal"; GoToNextTab; SwitchToMode "Normal"; }
     }
 }
 
