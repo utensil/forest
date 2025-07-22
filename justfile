@@ -489,6 +489,7 @@ prep-view:
 # issues:
 # - flashes for React and WebGL
 # - outputs code when mouse moves after exited by ctrl+c
+#
 view URL="http://localhost:1314/":
     awrit {{URL}}
 
@@ -523,8 +524,23 @@ prep-servo:
     just uq /Applications/Servo.app
 
 # rendered by headless Chromium, pixelated
+#
 carbon URL:
     docker run --rm -ti fathyb/carbonyl {{URL}}
+
+# edbrowse URL
+# ,p - print rendered text of the whole page, p can be omitted
+# <start>,<end>p - print rendered text from line <start> to line <end>
+# +3 - print 3 lines moreZ
+# - - previousline (can be repeated)
+# z<num> - repeat last command <num> times
+# n - print current line and its line number
+# g - go to the link on the line
+# h - explain the last ?
+# qt - quit
+#
+prep-ed:
+    which edbrowse || brew install edbrowse
 
 postman:
     # uv tool install --python 3.12 posting
