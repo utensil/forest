@@ -36,9 +36,10 @@ keybinds clear-defaults=true {
         // Renaming tabs
         bind "," { SwitchToMode "RenameTab"; TabNameInput 0; }
 
-        // [NOTE] closing pane/tab
+        // [NOTE] closing pane/tab/zj
         bind "x" { CloseFocus; SwitchToMode "Normal"; }
         bind "&" { CloseTab; SwitchToMode "Normal"; }
+        bind "q" { Quit; }
 
         // Moving between panes
         bind "Left" { MoveFocus "Left"; SwitchToMode "Normal"; }
@@ -133,6 +134,7 @@ keybinds clear-defaults=true {
         // see https://github.com/xtermjs/xterm.js/blob/0e45909c7e79c83452493d2cd46d99c0a0bb585f/src/common/data/EscapeSequences.ts
         // or https://en.wikipedia.org/wiki/C0_and_C1_control_codes
         // for reference on XTerm escape sequence, 0x12 is ^R
+        // side effect: if going back to terminal, will trigger atuin
         bind "Ctrl \\" { ToggleFloatingPanes; Write 18; SwitchToMode "Normal"; }
 
         // [NOTE] Moving between tabs
