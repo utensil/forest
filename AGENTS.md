@@ -1,4 +1,4 @@
-# Agent Instructions for Forest
+# Agent Instructions
 
 *Last updated 2025-07-20*
 
@@ -151,13 +151,13 @@ Usage: just stars (calls this script internally)
 # AGENT-NOTE: CRITICAL FEATURES TO MAINTAIN
 # 1. IDEMPOTENT: Multiple runs must produce identical results
 # 2. ERROR HANDLING: Graceful degradation for missing data
-# 3. BUILD INTEGRATION: Validates Forester syntax after processing
+# 3. BUILD INTEGRATION: Validates syntax after processing
 # 4. DETERMINISTIC: Sorted processing ensures consistent output
 ```
 
 ### Implementation Patterns
 
-Scripts should handle input/output gracefully, integrate with existing project formats (Forester syntax, bibliography files), and maintain deterministic behavior for consistent results across multiple runs.
+Scripts should handle input/output gracefully, integrate with existing project formats, and maintain deterministic behavior for consistent results across multiple runs.
 
 ### Integration Guidelines
 
@@ -171,7 +171,7 @@ Scripts should handle input/output gracefully, integrate with existing project f
 
 Scripts should be designed for:
 - **Idempotency testing**: Run twice, second run should show no changes
-- **Build validation**: Always verify output doesn't break Forester syntax
+- **Build validation**: Always verify output doesn't break the build
 - **Error recovery**: Handle missing files, malformed data, permission issues
 
 Example testing pattern:
@@ -201,8 +201,6 @@ This file should be updated when:
 - [ ] Update build commands if changed
 - [ ] Document new pitfalls discovered
 - [ ] Update file pattern references
-
-For Forest-specific guidelines (mathematical notation, tree files, etc.), see [for-llm/repo.md](./for-llm/repo.md) and [for-llm/forest.md](./for-llm/forest.md).
 
 ---
 
