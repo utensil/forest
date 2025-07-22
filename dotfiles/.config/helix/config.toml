@@ -1,10 +1,10 @@
-# credits
-# - https://felix-knorr.net/posts/2025-03-16-helix-review.html
+# Credits:
+#
+# - [Felix' Blog - A Review of Helix after 1.5 Years](https://felix-knorr.net/posts/2025-03-16-helix-review.html)
 # - https://github.com/TimothyYe/mydotfiles/blob/51160e906cf9c1192bc75ea8f76e92f628f097d6/helix/config.toml#L19
 # - https://github.com/kristijanhusak/neovim-config/blob/2e1b956910ed635d60631940b3fdd6782352b601/helix/config.toml#L4
 # - https://github.com/mimame/.dotfiles/blob/81d1c6caa6d28ed223d54b3067311743300b8f6d/helix/config.toml#L10
-
-# ret means enter
+# - [Enhancing Your Helix Editor: A Guide to Optimal Configuration | Ari Seyhun](https://tqwewe.com/blog/enhanced-helix-config/)
 
 # :config-reload or just ret+r to apply changes
 # theme = "onedark"
@@ -22,13 +22,23 @@ theme = "alevia-railscasts"
 hidden = false
 
 [editor]
+# Use relative line numbers
 line-number = "relative"
 # mouse = false
+# Force the theme to show colors
 true-color = true
 color-modes = true
 # auto-completion = true
+# Show currently open buffers, only when more than one exists.
 bufferline = "multiple"
+# Highlight all lines with a cursor
 cursorline = true
+# Minimum severity to show a diagnostic after the end of a line
+end-of-line-diagnostics = "hint"
+
+[editor.inline-diagnostics]
+cursor-line = "error" # Show inline diagnostics when the cursor is on the line
+other-lines = "disable" # Don't expand diagnostics unless the cursor is on the line
 
 [editor.auto-save]
 # focus-lost = true
@@ -42,9 +52,6 @@ cursorline = true
 # Remove auto-pairing for `, as it's not friendly to ```
 # '`' = '`'
 '<' = '>'
-
-[editor.inline-diagnostics]
-cursor-line = "hint"
 
 [editor.cursor-shape]
 insert = "bar"
@@ -65,11 +72,18 @@ mode.select = "SELECT"
 [editor.lsp]
 # Display LSP progress messages below statusline
 display-messages = true
+# Disable automatically popups of signature parameter help
+auto-signature-help = false
 # Don't display inlay hints be default
 # ret+t (meaning type) to toggle
 display-inlay-hints = false
 # Display LSP progress messages below statusline
 display-progress-messages = true
+
+# [editor.word-completion]
+# enable = true
+# # Set the trigger length lower so that words are completed more often
+# trigger-length = 4
 
 [editor.whitespace]
 # Whether to render whitespace
@@ -90,7 +104,26 @@ newline = "↩" # ↵ ⏎ ↩
 [editor.soft-wrap]
 enable = true
 
-# Keep all my personal keymap under ret
+[keys.normal]
+"A-," = "goto_previous_buffer"
+"A-." = "goto_next_buffer"
+"A-w" = ":buffer-close"
+# remap what A-. did
+"A-/" = "repeat_last_motion"
+# shrink your selection by one line
+X = "select_line_above"
+# remap what X did
+# note: A-x was shrink_to_line_bounds
+"A-x" = "extend_to_line_bounds"
+
+[keys.select]
+X = "select_line_above"
+# remap what X did
+# note: A-x was shrink_to_line_bounds
+"A-x" = "extend_to_line_bounds"
+
+# Keep most of my personal keymap under ret
+# ret means enter
 [keys.normal.ret]
 
 # reload config and lsp
