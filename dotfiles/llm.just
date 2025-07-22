@@ -557,13 +557,13 @@ codex *PARAMS:
 
 # build failed: FATAL ERROR: Reached heap limit Allocation failed - JavaScript heap out of memory
 #
-prep-ed:
+prep-easyds:
     #!/usr/bin/env zsh
     just clone ConardLi easy-dataset
     cd ~/projects/easy-dataset
     docker build -t easy-dataset .
 
-ed:
+easyds:
     #!/usr/bin/env zsh
     mkdir -p ~/.easy-dataset
     docker run --rm -p 1717:1717 -v ~/.easy-dataset:/app/local-db --name easy-dataset easy-dataset
