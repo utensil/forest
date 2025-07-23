@@ -52,8 +52,6 @@ prep-term-seldom:
     which progress || brew install progress
     which sq || brew install sq
     which fex || (curl -sSL https://raw.githubusercontent.com/18alantom/fex/master/install.sh | bash)
-    # awrit installation usually fails with some warning
-    which awrit || brew install chase/tap/awrit || true
 
 prep-mon:
     #!/usr/bin/env zsh
