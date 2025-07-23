@@ -15,8 +15,6 @@ cookie = "save"
 # referer-from = true
 # history = false
 
-editor = "hx"
-
 [input]
 # use-mouse = false
 
@@ -27,7 +25,11 @@ color-mode	= "true-color"
 
 [external]
 copy-cmd = "pbcopy" # macos
+editor = "exec hx +%d"
 
 [page]
-"C-o" = "cmd.pager.prevBuffer"
+' r' = "pager.externFilterSource('rdrview -Hu \"$CHA_URL\" --disable-sandbox')"
+
+# don't need these now, just get used to ,. (<> without shift)
+# "C-o" = "cmd.pager.prevBuffer"
 # "C-i" = "cmd.pager.nextBuffer" # doesn't work

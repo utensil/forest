@@ -495,15 +495,43 @@ view URL="http://localhost:1314/":
 
 prep-cha:
     which cha || brew install chawan
+    just prep-rdrview
     rip ~/.config/chawan || true
     ln -s {{justfile_directory()}}/dotfiles/.config/chawan ~/.config/chawan
 
-# https://git.sr.ht/~bptato/chawan/tree/HEAD/doc/config.md
+prep-rdrview:
+    #!/usr/bin/env zsh
+    just clone eafer rdrview
+    cd ~/projects/rdrview
+    git apply <<EOF
+    diff --git a/src/rdrview.c b/src/rdrview.c
+    index d496bd0..97fb54b 100644
+    --- a/src/rdrview.c
+    +++ b/src/rdrview.c
+    @@ -1195,8 +1195,8 @@ int main(int argc, char *argv[])
+
+            LIBXML_TEST_VERSION
+            /* I made a mess mixing xmlMalloc() and malloc(), so play it safe here */
+    -       if (xmlMemSetup(free, malloc, realloc, strdup))
+    -               fatal();
+    +       // if (xmlMemSetup(free, malloc, realloc, strdup))
+    +       //      fatal();
+
+            set_cleanup_handlers();
+            parse_arguments(argc, argv);
+    EOF
+    make && sudo make install
+
+# https://chawan.net/doc/cha/index.html
+# https://chawan.net/doc/cha/config.html
+# https://chawan.net/doc/cha/troubleshooting.html
 # q to quit
 # [] to traverse links on the page
 # {} to traverse paragraphs on the page
 # enter to visit link
-# ctrl+l to input link, prefix with ddg: to search with duckduckgo
+# ctrl+l to input link
+#   up/down for earlier links
+#   prefix with ddg: to search with duckduckgo
 # ctrl+k to search
 # ,. to go back or forward in history
 # U to reload
@@ -514,6 +542,9 @@ prep-cha:
 # \ toggle source
 # opt+y copy page link
 # yu copy cursor link
+# v  select text with vim motions
+# y  copy selected text
+# right click menu, including select and copy text
 #
 cha URL:
     cha {{URL}}
