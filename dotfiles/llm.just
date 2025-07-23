@@ -541,6 +541,9 @@ ccr PROJ="forest" *PARAMS="":
     cd ~/projects/{{PROJ}}
     ccr code {{PARAMS}}
 
+# When running out of premium quota
+# export ANTHROPIC_BASE_URL=http://localhost:15432 ANTHROPIC_AUTH_TOKEN=dummy ANTHROPIC_MODEL=gpt-4o ANTHROPIC_SMALL_FAST_MODEL=gpt-4.1 && claude
+#
 cc PROJ="forest" *PARAMS="":
     #!/usr/bin/env zsh
     cd ~/projects/{{PROJ}}
