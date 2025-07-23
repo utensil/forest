@@ -23,7 +23,7 @@
 \title{July, 2025}
 
 \subtree[2025-07-03]{\mdnote{2025-07-03}{
-- [Introducing tmux-rs](https://richardscollin.github.io/tmux-rs/) ([on HN](https://news.ycombinator.com/item?id=44455787))
+- [Introducing tmux-rs](https://richardscollin.github.io/tmux-rs/)
     - initially used [c2rust](https://github.com/immunant/c2rust), a tool to migrate C code to (unsafe) Rust
         - didn't keep constant name
         - lots of casts polluting the code
@@ -44,9 +44,24 @@
             - re-resolves all 1k+ domain names every 600 seconds
 - [Poor Man's Back End-as-a-Service (BaaS), Similar to Firebase/Supabase/Pocketbase](https://github.com/zserge/pennybase)
     - possibly useful
-- [WebGPU in zig](https://www.reddit.com/r/Zig/comments/1lqrhic/webgpu_in_zig/)
-    - [bronter/wgpu_native_zig: Zig bindings for wgpu-native](https://github.com/bronter/wgpu_native_zig)
-    - [Silverclaw/zig-wgpu-native: Zig bindings for the wgpu-native graphics API - Codeberg.org](https://codeberg.org/Silverclaw/zig-wgpu-native)
+- #zig
+    - [WebGPU in zig](https://www.reddit.com/r/Zig/comments/1lqrhic/webgpu_in_zig/)
+        - [bronter/wgpu_native_zig: Zig bindings for wgpu-native](https://github.com/bronter/wgpu_native_zig)
+        - [Silverclaw/zig-wgpu-native: Zig bindings for the wgpu-native graphics API - Codeberg.org](https://codeberg.org/Silverclaw/zig-wgpu-native)
+    - [Base64 for compression](https://lemire.me/blog/2025/07/03/base64-for-compression/)
+        - assembly used to pass octal escape codes for UTF-8 and expand significantly
+        - GCC 15 now supports base64 encoding of data during compilation, with a new “base64” pseudo-op
+    - [The most mysterious bug I solved at work](https://cadence.moe/blog/2025-07-02-the-most-mysterious-bug-i-solved-at-work)
+    - note that I put C stuff and low-level technical details under #zig
+- #security
+    - [I scanned all of GitHub's "oops commits" for leaked secrets](https://trufflesecurity.com/blog/guest-post-how-i-scanned-all-of-github-s-oops-commits-for-leaked-secrets) ([on HN](https://news.ycombinator.com/item?id=44452317))
+    - [goHardDrive Leaked Personal Data for Thousands of Customers](https://mtlynch.io/goharddrive-leak/)
+- [Introducing the first alpha of Turso: The next evolution of SQLite](https://turso.tech/blog/turso-the-next-evolution-of-sqlite?ref=console.dev)
+    - rewritten is Rust, with full compatibility and new features
+    - [Antithesis](https://antithesis.com/product/what_is_antithesis/), a continuous reliability platform that autonomously searches for problems in software within a simulated environment, so these problems are deterministic reproducible
+- #agent
+    - [Writing Code Was Never The Bottleneck](https://ordep.dev/posts/writing-code-was-never-the-bottleneck)
+        - agent coding influenced [mentoring young, ambitious, but inexperienced interns](https://news.ycombinator.com/item?id=44453298)
 }}
 
 \subtree[2025-07-02]{\mdnote{2025-07-02}{
@@ -93,8 +108,6 @@
         - recorded by [Descript: Edit Videos & Podcasts Like a Doc | AI Video Editor](https://www.descript.com/?redirect=false)
             - Direct your AI co-editor to turn your vision into video
     - [Building a Personal AI Factory](https://www.john-rush.com/posts/ai-20250701.html)
-    - [Mandelbrot in x86 Assembly by Claude](https://simonwillison.net/2025/Jul/2/mandelbrot-in-x86-assembly-by-claude/)
-        - I would like to add a yard for assmebly in native-land
     - [How large are large language models?](https://gist.github.com/rain-1/cf0419958250d15893d8873682492c3e)
 - [Doing My Day Job on Chimera Linux](https://www.wezm.net/v2/posts/2025/daily-driving-chimera-for-work/)
     - [Chimera](https://chimera-linux.org/) is built from scratch using novel tooling, approaches, and userland (FreeBSD + Musl C)
@@ -131,6 +144,7 @@
     - [The KDL Document Language](https://kdl.dev/)
         - [bikeshed, a spec preprocessor](https://github.com/speced/bikeshed)
             - [Bikeshed-flavored Markdown](https://speced.github.io/bikeshed/#markdown)
+    - [10 features of D that I love](https://bradley.chatha.dev/blog/dlang-propaganda/features-of-d-that-i-love/)
     - [Pluto is a unique dialect of Lua with a focus on general-purpose programming](https://github.com/PlutoLang/Pluto) ([on HN](https://news.ycombinator.com/item?id=44429531))
     - [The Chapel Programming Language](https://chapel-lang.org/)
         - GPU programming on NVIDIA and AMD
@@ -175,7 +189,13 @@
         - feedback loops should not be performance metrics
         - planning should not become forecasting
 - #context
+    - [Tools: Code Is All You Need](https://lucumr.pocoo.org/2025/7/3/tools/)
+        - [The problem with MCP is that it's not composeable.](https://news.ycombinator.com/item?id=44475726)
+        - [Mandelbrot in x86 Assembly by Claude](https://simonwillison.net/2025/Jul/2/mandelbrot-in-x86-assembly-by-claude/)
+            - demonstrates simple usage of container for cross-arch assembly debugging
+            - I would like to add a yard for assmebly in native-land
     - [How to Fix Your Context](https://simonwillison.net/2025/Jun/29/how-to-fix-your-context/)
+        - covers some attempts to improve MCP tool selection if it can't be avoided
         - context rot: poisoning, distraction, confusion, clash
         - solution: quarantine, pruning, offloading
     - [The new skill in AI is not prompting, it's context engineering](https://www.philschmid.de/context-engineering) ([on HN](https://news.ycombinator.com/item?id=44427757))
@@ -915,6 +935,10 @@
         - aims to verify unsafe code with [Verus](https://github.com/verus-lang/verus)
         - uses model checking with Converos to uncover hard-to-find concurrency bugs
         - see also [Asterinas: a new Linux-compatible kernel project](https://lwn.net/SubscriberLink/1022920/ad60263cd13c8a13/)
+    - [Starina - A modern general-purpose microkernel OS](https://starina.dev/)
+        - from [Building Linux kernel on macOS natively](https://seiya.me/blog/building-linux-on-macos-natively) ([on HN](https://news.ycombinator.com/item?id=44453371))
+            - [Clang Built Linux](https://clangbuiltlinux.github.io/) effort helped to build Linux kernel with clang + LLVM instead of GCC + GNU
+            - it seems to work and is simple enough, I should try it sometimes
     - [Munal OS: A graphical experimental OS with WASM sandboxing](https://github.com/Askannz/munal-os)
         - written in Rust
         - embeds wasmi
