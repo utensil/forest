@@ -56,9 +56,16 @@ command = "harper-ls"
 args = ["--stdio"]
 config = { harper-ls = { diagnosticSeverity = "error", linters = { long_sentences = false } } }
 
+# https://github.com/blopker/codebook?tab=readme-ov-file#helix
+[language-server.codebook]
+command = "codebook-lsp"
+args = ["serve"]
+
 [[language]]
 name = "markdown"
 language-servers = ["marksman", "harper-ls", "scls"]
+# language-servers = ["markdown-oxide", "harper-ls", "scls"]
+# language-servers = ["marksman", "codebook", "scls"]
 
 [[language]]
 name = "forester"

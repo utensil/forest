@@ -184,7 +184,7 @@ prep-zed:
     #!/usr/bin/env zsh
     [[ -f /Applications/Zed.app/Contents/MacOS/zed ]] || brew install --cask zed@preview
 
-## Language Servers
+## LSP: programming languages
 
 prep-lsp:
     # html, css, json, eslint
@@ -202,6 +202,7 @@ prep-lsp:
     # https://github.com/jdx/mise/discussions/3390 for mise
     # https://mise.jdx.dev/registry.html#registry
     which zig && (which zls || just prep-zls || echo "zls not installed, visit https://zigtools.org/zls/install/") || true
+    just prep-lsp-md
     # GLSL
     which glsl_analyzer || ( cd /tmp && wget https://github.com/nolanderc/glsl_analyzer/releases/download/v1.6.0/aarch64-macos.zip && unzip aarch64-macos.zip && sudo mv bin/glsl_analyzer /usr/local/bin/)
     # KDL
@@ -221,6 +222,27 @@ prep-zls:
     ZLS_VERSION=`curl "https://releases.zigtools.org/v1/zls/select-version?zig_version=$ZIG_VERSION_ESCAPED&compatibility=only-runtime"|jq -r ".version"`
     mise use -g aqua:zigtools/zls@$ZLS_VERSION
 
+## LSP: content authoring
+
+prep-lsp-md:
+    which marksman || brew install marksman
+    which markdown-oxide || brew install markdown-oxide
+    # cargo binstall --git 'https://github.com/feel-ix-343/markdown-oxide' markdown-oxide
+
+## LSP: Spellcheck
+
+prep-harper:
+    which harper-ls || brew install harper
+    # requires a recent nightly, otherwise compilation will fail on an unstable feature
+    # it reports too many spell errors from links and code, making it unsable
+    # pretty output, though, thanks to https://docs.rs/crate/ariadne
+    which harper-cli || cargo +nightly install --git https://github.com/Automattic/harper harper-cli --locked
+
+prep-codebook:
+    which codebook-lsp || cargo install codebook-lsp
+
+## LSP: AI
+
 # https://github.com/DJAndries/llmvm/tree/master/frontends/codeassist
 #
 prep-lsp-lv:
@@ -234,7 +256,6 @@ prep-lsp-lv:
 prep-lsp-ai:
     which cargo || just prep-rust
     which lsp-ai || cargo install lsp-ai
-    which marksman || brew install marksman
 
 # prep-hxcp:
 #     which copilot-language-server || npm install -g @github/copilot-language-server
