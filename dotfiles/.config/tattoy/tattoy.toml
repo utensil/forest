@@ -56,16 +56,16 @@ enabled = true
 animation_speed = 0.15
 # The maximum width of the minimap. It can be narrower when the scrollback is long
 # in order to maintain a consistent aspect ratio.
-max_width = 10
+max_width = 50
 
 [shader]
-enabled = false
+enabled = true
 opacity = 0.75
 layer = -10
 # Whether to render the computed shader from the GPU. The shader pixels can still be
 # used for other purposes such as defining the foreground colour of the terminal's text,
 # see `render_shader_colours_to_text`.
-render = false
+render = true
 # It can be useful to disable this for certain GUI terminal shaders (such as Ghostty shaders)
 # that also take responsibility for rendering terminal text. Tattoy can only send a crude
 # representation of terminal text as 2 pixels per character, which is sometimes desirable
@@ -78,7 +78,7 @@ upload_tty_as_pixels = true
 render_shader_colours_to_text = false
 # Path to a Shadertoy shader on your local filesystem. Is relative to the root of
 # Tattoy's config directory.
-path = "shaders/soft_shadows.glsl"
+path = "shaders/cursor_blaze_lightning_boom.glsl"
 
 [bg_command]
 enabled = false

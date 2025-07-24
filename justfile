@@ -436,9 +436,10 @@ prep-fancy:
     which rusty-rain || cargo install rusty-rain
 
 prep-tattoy:
-    which tattoy || brew install tattoy-org/tap/tattoy
+    which tattoy || cargo install --locked --git https://github.com/tattoy-org/tattoy tattoy
     rip ~/.config/tattoy || true
-    ln -s {{justfile_directory()}}/dotfiles/.config/tattoy ~/.config/tattoy
+    ln -s ~/projects/shader-playground/shaders {{justfile_directory()}}/dotfiles/.config/tattoy/shaders
+    just link-conf tattoy
 
 # Run fastfetch every time Enter is pressed
 fetch:
