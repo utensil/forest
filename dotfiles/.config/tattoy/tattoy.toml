@@ -44,7 +44,7 @@ hue = 0.0
 # target contrast is searched for by lightening, then darkening and if neither reach
 # the target contrast then the larger of the 2 found contrasts is used.
 [text_contrast]
-enabled = true
+enabled = false
 target_contrast = 2.0
 # When set to false, all text is automatically adjusted, even non-alphanumeric characters
 # like UI border elements etc. The only characters that aren't adjusted are the UTF8
@@ -52,7 +52,7 @@ target_contrast = 2.0
 apply_to_readable_text_only = true
 
 [minimap]
-enabled = false
+enabled = true
 animation_speed = 0.15
 # The maximum width of the minimap. It can be narrower when the scrollback is long
 # in order to maintain a consistent aspect ratio.
@@ -65,9 +65,9 @@ layer = -10
 # Whether to render the computed shader from the GPU. The shader pixels can still be
 # used for other purposes such as defining the foreground colour of the terminal's text,
 # see `render_shader_colours_to_text`.
-render = true
+render = false
 # It can be useful to disable this for certain GUI terminal shaders (such as Ghostty shaders)
-# that also take responsibility for rendering terminal text. Tattoy can only send a crude 
+# that also take responsibility for rendering terminal text. Tattoy can only send a crude
 # representation of terminal text as 2 pixels per character, which is sometimes desirable
 # when the shader uses the terminal to inform the output of the shader, but it can also cause
 # an unnesceray blocky effect when the shader doesn't use the terminal colours.
@@ -107,9 +107,9 @@ toggle_tattoy = { mods = "ALT", key = "t" }
 toggle_scrolling = { mods = "ALT", key = "s" }
 # Show/hide the minimap.
 toggle_minimap = { mods = "ALT", key = "M" }
-# Scroll up in the scrollback 
+# Scroll up in the scrollback
 scroll_up = { key = "UpArrow" }
-# Scroll down in the scrollback 
+# Scroll down in the scrollback
 scroll_down = { key = "DownArrow" }
 # Exit scrolling mode
 scroll_exit = { key = "Escape" }
