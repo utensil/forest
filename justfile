@@ -435,6 +435,11 @@ prep-fancy:
     which tty-clock || brew install tty-clock
     which rusty-rain || cargo install rusty-rain
 
+prep-tattoy:
+    which tattoy || brew install tattoy-org/tap/tattoy
+    rip ~/.config/tattoy || true
+    ln -s {{justfile_directory()}}/dotfiles/.config/tattoy ~/.config/tattoy
+
 # Run fastfetch every time Enter is pressed
 fetch:
     #!/usr/bin/env zsh
