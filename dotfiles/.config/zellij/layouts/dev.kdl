@@ -7,19 +7,19 @@ layout {
             plugin location="compact-bar"
         }
     }
-    pane_template name="just" command="just"
+    pane_template name="zsh" command="zsh"
     tab name="dev" {
         pane split_direction="vertical" {
-            just name="dev" {
-                args "dev"
-                focus true
+            zsh name="dev" {
+                args "-c" "just dev"
             }
             pane split_direction="horizontal" {
-                just name="cpa" size="80%"{
-                    args "cpa"
+                zsh name="cpa" size="80%"{
+                    args "-c" "just cpa -c"
+                    focus true
                 }
-                just name="awake" size="80%" {
-                    args "awake"
+                zsh name="awake" size="20%" {
+                    args "-c" "just awake"
                 }
             }
         }

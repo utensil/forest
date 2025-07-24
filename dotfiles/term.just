@@ -478,9 +478,9 @@ prep-zj:
     #!/usr/bin/env zsh
     which zellij || brew install zellij
     # just clone-conf zellij t3hmrman tmux-zellij-shim-config
-    rip ~/.config/zellij
-    # ln -s dotfiles/.config/zellij ~/.config/zellij
-    just cp dotfiles/.config/zellij ~/.config/zellij
+    rip ~/.config/zellij || true
+    ln -s {{justfile_directory()}}/dotfiles/.config/zellij ~/.config/zellij
+    # just cp dotfiles/.config/zellij ~/.config/zellij
 
 # attach - a
 # list - ls
