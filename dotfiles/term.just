@@ -524,6 +524,11 @@ new-at NAME="mon":
     LAYOUT=$(echo {{NAME}}|sed 's/-.*//g')
     just zj d {{NAME}} --force ; just zj -s {{NAME}} -n $LAYOUT
 
+kill NAME:
+    #!/usr/bin/env zsh
+    ps aux|grep {{NAME}}|grep -v grep|grep -v 'kill {{NAME}}'
+    read -q "?Confirm killing these processes (y/n)? " && (ps aux|grep {{NAME}}|grep -v grep|grep -v 'kill {{NAME}}'|awk '{print $2}'|xargs kill -9) || echo "\nKill aborted"
+
 # runf SESSION="mon" CMD="zsh":
 #     zellij run -f -n {{SESSION}} -- {{CMD}}
 
