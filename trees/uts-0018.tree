@@ -22,20 +22,63 @@
 \subtree[2025-07]{
 \title{July, 2025}
 
+\subtree[2025-07-04]{\mdnote{2025-07-04}{
+- #web
+    - [Our Fullstack Architecture: Eta, HTMX, and Lit](https://www.lorenstew.art/blog/eta-htmx-lit-stack)
+        - [Eta](https://eta.js.org/): a lightweight, fast, and simple embedded JavaScript templating engine
+            - maybe that's all I need for my writings, I don't really need another SSG, just a templating engine
+        - HTMX: allows us to add dynamic behavior directly to our server-rendered HTML
+        - [Lit](https://lit.dev/): allows us to create encapsulated, reusable components with their own internal state and logic
+    - [Postcard is now open source](https://www.contraption.co/postcard-open-source/)
+        - written in Ruby on Rails
+        - personal site + newsletter
+        - "I no longer expect meaningful revenue from the project. Open-sourcing it feels right. In the age of vibe coding, I think it would be fun to give people a working app they can customize."
+        - [How to host web apps on a Mac Mini](https://www.contraption.co/how-to-host-web-apps-on-a-mac-mini/)
+    - [Rust and WASM for Form Validation](https://sebastian.lauwe.rs/blog/rust-wasm-form-validation/) ([on HN](https://news.ycombinator.com/item?id=44463916))
+        - avoid using Webpack and a whole array of Node-related tools in order to use WASM
+        - form validation shows all the crucial aspects to use WASM instead of JS, like wiring up DOM events to Rust functions, and then reacting to those events
+        - used [Rocket - Simple, Fast, Type-Safe Web Framework for Rust](https://rocket.rs/)
+        - might motivate me to write Rust for web
+- #idea
+    - [Setting constraint](https://wayan.me/setting-constraint/)
+        - goals provide a structured roadmap to success, thriving in controlled, predictable conditions like training for a marathon or preparing for an exam.
+        - however, life rarely follows a straight line. It’s messy, unpredictable, and full of curveballs.
+        - “I must finish this report,” -> “I won’t check email after 6 PM.”
+        - for business: “we won’t hire until we have 100 users”
+- #data-org
+    -[Kepler.gl](https://kepler.gl/) ([on HN](https://news.ycombinator.com/item?id=44464641))
+        - cool 3D map
+        - powered by [deck.gl](https://deck.gl/), a GPU-powered framework for visual exploratory data analysis of large datasets
+        - [mountayaapp/insight-editor: Open source geospatial analysis for large-scale data sets with kepler.gl, DuckDB (and charts coming soon). Alternative to CARTO, ArcGIS Online, Foursquare Studio, Felt, Mango GIS, Maptable.](https://github.com/mountayaapp/insight-editor)
+- #sec
+    - [Nonce CSP bypass using Disk Cache](https://jorianwoltjer.com/blog/p/research/nonce-csp-bypass-using-disk-cache)
+    - [Opening up ‘Zero-Knowledge Proof’ technology](https://blog.google/technology/safety-security/opening-up-zero-knowledge-proof-technology-to-promote-privacy-in-age-assurance/)
+- #game
+    - [I AI-coded a tower defense game and documented the whole process](https://github.com/maciej-trebacz/tower-of-time-game) ([on HN](https://news.ycombinator.com/item?id=44463967))
+    - [Steam has been flooded with games stolen from itch.io](https://www.gamepressure.com/newsroom/steam-is-dealing-with-spam-valves-platform-has-been-flooded-with/zb811a)
+- #forth
+    - [Tiny Great Languages: MOUSE](https://zserge.com/posts/langs-mouse/)
+- #sci
+    - [how did the Solar System form?](https://hoggresearch.blogspot.com/2025/07/how-did-solar-system-form.html)
+}}
+
 \subtree[2025-07-03]{\mdnote{2025-07-03}{
-- [Introducing tmux-rs](https://richardscollin.github.io/tmux-rs/)
-    - initially used [c2rust](https://github.com/immunant/c2rust), a tool to migrate C code to (unsafe) Rust
-        - didn't keep constant name
-        - lots of casts polluting the code
-        - still requires looking at the origin C code for rewriting
-    - went with manually translating one file at a time
-        - start with linking rust static lib to C
-        - end with linking c to rust via crate `cc`
-    - fixed interesting bugs
-    - summarized C patterns in Rust
-    - nice quote: "You might be asking: why did you rewrite tmux in Rust? And yeah, I don’t really have a good reason. It’s a hobby project. Like gardening, but with more segfaults."
-    - [skim-rs/skim: Fuzzy Finder in rust!](https://github.com/skim-rs/skim)
-- #ai-ai-safety
+- #rust
+    - [Introducing tmux-rs](https://richardscollin.github.io/tmux-rs/)
+        - initially used [c2rust](https://github.com/immunant/c2rust), a tool to migrate C code to (unsafe) Rust
+            - didn't keep constant name
+            - lots of casts polluting the code
+            - still requires looking at the origin C code for rewriting
+        - went with manually translating one file at a time
+            - start with linking rust static lib to C
+            - end with linking c to rust via crate `cc`
+        - fixed interesting bugs
+        - summarized C patterns in Rust
+        - nice quote: "You might be asking: why did you rewrite tmux in Rust? And yeah, I don’t really have a good reason. It’s a hobby project. Like gardening, but with more segfaults."
+        - [skim-rs/skim: Fuzzy Finder in rust!](https://github.com/skim-rs/skim)
+    - [The scary and surprisingly deep rabbit hole of Rust's temporaries](https://taping-memory.dev/temporaries-rabbit-hole/)
+- #ai-slop
+    - [The rise of Whatever](https://eev.ee/blog/2025/07/03/the-rise-of-whatever/)
     - [EBAF – eBPF Based Ad Firewall](https://github.com/Kazedaa/eBAF)
         - it's pointed out [on HN](https://news.ycombinator.com/item?id=44456389) that
             - its doc and code are both AI slop
@@ -45,9 +88,13 @@
 - [Poor Man's Back End-as-a-Service (BaaS), Similar to Firebase/Supabase/Pocketbase](https://github.com/zserge/pennybase)
     - possibly useful
 - #zig
+    - [async is back](https://www.reddit.com/r/Zig/comments/1lrc865/async_is_back/)
+        - [Zig breaking change – initial Writergate](https://github.com/ziglang/zig/pull/24329) ([on HN](https://news.ycombinator.com/item?id=44461067))
     - [WebGPU in zig](https://www.reddit.com/r/Zig/comments/1lqrhic/webgpu_in_zig/)
         - [bronter/wgpu_native_zig: Zig bindings for wgpu-native](https://github.com/bronter/wgpu_native_zig)
         - [Silverclaw/zig-wgpu-native: Zig bindings for the wgpu-native graphics API - Codeberg.org](https://codeberg.org/Silverclaw/zig-wgpu-native)
+    - [KurtWagner/zlinter: An extendable and customisable Zig linter that is integrated from source into your build.zig.](https://github.com/KurtWagner/zlinter)
+        - I should integrate it with my zig code
     - [Base64 for compression](https://lemire.me/blog/2025/07/03/base64-for-compression/)
         - assembly used to pass octal escape codes for UTF-8 and expand significantly
         - GCC 15 now supports base64 encoding of data during compilation, with a new “base64” pseudo-op
@@ -62,6 +109,7 @@
 - #agent
     - [Writing Code Was Never The Bottleneck](https://ordep.dev/posts/writing-code-was-never-the-bottleneck)
         - agent coding influenced [mentoring young, ambitious, but inexperienced interns](https://news.ycombinator.com/item?id=44453298)
+    - [WASM Agents: AI agents running in the browser](https://blog.mozilla.ai/wasm-agents-ai-agents-running-in-your-browser/) ([on HN](https://news.ycombinator.com/item?id=44461341))
 }}
 
 \subtree[2025-07-02]{\mdnote{2025-07-02}{
@@ -205,6 +253,7 @@
         - context rot: poisoning, distraction, confusion, clash
         - solution: quarantine, pruning, offloading
     - [The new skill in AI is not prompting, it's context engineering](https://www.philschmid.de/context-engineering) ([on HN](https://news.ycombinator.com/item?id=44427757))
+    - [Taming agentic engineering - Prompts are code, .json/.md files are state](https://mariozechner.at/posts/2025-06-02-prompts-are-code/)
 - #sec
     - [Beyond the Hook: A Technical Deep Dive into Modern Phishing Methodologies](https://blog.quarkslab.com/./technical-dive-into-modern-phishing.html)
         - amazed by Browser-in-the-Browser
@@ -318,6 +367,10 @@
         - a red flag: `Rc`/`Arc`, sync/async end up requiring different libary, e.g. `im` and `im-rc`
         - [im](https://docs.rs/im/15.0.0/im/):  immutable data structures for Rust
         - [PureScript](A strongly-typed functional programming language that compiles to JavaScript)
+    - [Writing a Game Boy Emulator in OCaml](https://linoscope.github.io/writing-a-game-boy-emulator-in-ocaml/)
+        - key design of a emulator
+        - a middle-scale project in OCaml using some of its advanced features
+        - now runs on WASM via `js_of_ocaml`’s WASM support
     - [Learn OCaml](https://ocaml-sf.org/learn-ocaml-public/#activity=exercises)
         - [practical ocaml](https://dev.to/yawaramin/practical-ocaml-314j)
         - the background story of OxCaml: [Jane Street’s sneaky retention tactic](https://archive.ph/u10ol#selection-1133.0-1136.0)
@@ -370,13 +423,9 @@
     - written in V
     - UI might be inspired by [Harlequin](https://github.com/tconbeer/harlequin) (in Python, supports more databases)
 - [omarchy: Opinionated Arch/Hyprland Setup](https://github.com/basecamp/omarchy)
+- learn about [Dark Archive](https://mathstodon.xyz/@johncarlosbaez/114752342143968527)
+- [Researchers develop a battery cathode material that does it all](https://arstechnica.com/science/2025/06/researchers-develop-a-battery-cathode-material-that-does-it-all/) #sci
 }}
-
-% \subtree[2025-06-27]{\mdnote{2025-06-27}{
-% - [Researchers develop a battery cathode material that does it all](https://arstechnica.com/science/2025/06/researchers-develop-a-battery-cathode-material-that-does-it-all/)
-% - found [Magnitude – Open-source AI browser automation framework](https://github.com/magnitudedev/magnitude)
-% - learn about [Dark Archive](https://mathstodon.xyz/@johncarlosbaez/114752342143968527)
-% }}
 
 \subtree[2025-06-26]{\mdnote{2025-06-26}{
 - #agent
@@ -384,6 +433,7 @@
     - [Learnings from building AI agents](https://www.cubic.dev/blog/learnings-from-building-ai-agents)
     - [Jan-nano-128k: A 4B Model with a Super-Long Context Window (Still Outperforms 671B [in MCP])](https://huggingface.co/Menlo/Jan-nano-128k)
         - it's an interesting direction
+    - [Magnitude – Open-source AI browser automation framework](https://github.com/magnitudedev/magnitude)
     - news
         - [Build and Host AI-Powered Apps with Claude – No Deployment Needed](https://www.anthropic.com/news/claude-powered-artifacts)
         - [MCP in LM Studio](https://lmstudio.ai/blog/lmstudio-v0.3.17)
@@ -408,9 +458,6 @@
 }}
 
 \subtree[2025-06-25]{\mdnote{2025-06-25}{
-- new CLI agents
-    - [Gemini CLI: your open-source AI agent](https://blog.google/technology/developers/introducing-gemini-cli-open-source-ai-agent/) ([on HN](https://news.ycombinator.com/item?id=44377031)) ([on lobste.rs](https://lobste.rs/s/f9xdsg))
-    - [Introducing Qodo Gen CLI: Build and Run Coding Agents Anywhere in the SDLC](https://www.qodo.ai/blog/introducing-qodo-gen-cli-build-run-and-automate-agents-anywhere-in-your-sdlc/)
 - [A new PNG spec](https://www.programmax.net/articles/png-is-back/)
     - I'm thinking about preserving the most valuable photos in minimal size, encrypted, stored in public repo, and the format might be just png
 - #ai-safety
@@ -499,6 +546,7 @@
     - [Go is an 80/20 language](https://blog.kowalczyk.info/article/d-2025-06-26/go-is-8020-language.html)
     - [How to store Go pointers from assembly](https://mazzo.li/posts/go-asm-pointers.html) ([on HN](https://news.ycombinator.com/item?id=44355187)) ([on lobste.rs](https://lobste.rs/s/obsh1m))
     - [Why Go Rocks for Building a Lua Interpreter](https://www.zombiezen.com/blog/2025/06/why-go-rocks-for-building-lua-interpreter/)
+    - [writing a little gosh](https://flak.tedunangst.com/post/writing-a-gosh)
 }}
 
 \subtree[2025-06-22]{\mdnote{2025-06-22}{\tags{#gpu #rust #yaml #zig}
@@ -571,6 +619,10 @@
     - [Moral puzzles: Man vs. machine](https://dynomight.net/puzzles-results/)
     - [Rolling the ladder up behind us](https://xeiaso.net/blog/2025/rolling-ladder-behind-us/) ([on HN](https://news.ycombinator.com/item?id=44328894)) ([on lobste.rs](https://lobste.rs/s/dl5sj9))
     - [All roads lead to disaster](https://blog.jsbarretto.com/post/all-roads-lead-to-disaster)
+    - [Is there a no-AI audience?](https://thatshubham.com/blog/ai) ([on HN](https://news.ycombinator.com/item?id=44463959))
+        - [thatshubham/no-ai: This repository will be a community-curated list of software and resources that explicitly avoid the integration of artificial intelligence.](https://github.com/thatshubham/no-ai)
+            - unfortunately very short list, didn't include Helix
+            - Zed also support no AI recently
 - #rust
     - [Rewriting Kafka in Rust Async: Insights and Lessons Learned in Rust](https://wangjunfei.com/2025/06/18/Rewriting-Kafka-in-Rust-Async-Insights-and-Lessons-Learned/)
     - [higher: Your favourite Haskell type classes for Rust (2023)](https://github.com/bodil/higher)
@@ -665,6 +717,8 @@
     - [We Should Identify and Mitigate Third-Party Safety Risks in MCP-Powered Agent Systems](http://arxiv.org/pdf/2506.13666v1)
     - [Are AI Bots Knocking Cultural Heritage Offline?](https://www.glamelab.org/products/are-ai-bots-knocking-cultural-heritage-offline/)
     - [Now might be the best time to learn software development](https://substack.com/home/post/p-165655726) ([on HN](https://news.ycombinator.com/item?id=44299979)) ([on lobste.rs](https://lobste.rs/s/yrqfcz))
+    - [Gemini CLI: your open-source AI agent](https://blog.google/technology/developers/introducing-gemini-cli-open-source-ai-agent/) ([on HN](https://news.ycombinator.com/item?id=44377031)) ([on lobste.rs](https://lobste.rs/s/f9xdsg))
+    - [Introducing Qodo Gen CLI: Build and Run Coding Agents Anywhere in the SDLC](https://www.qodo.ai/blog/introducing-qodo-gen-cli-build-run-and-automate-agents-anywhere-in-your-sdlc/)
 - #privacy
     - [Why WhatsApp Didn’t Sell Ads](https://blog.whatsapp.com/why-we-don-t-sell-ads)
     - [matrix is cooked](https://paper.wf/alexia/matrix-is-cooked)
@@ -760,6 +814,7 @@
     - [APL Style: Patterns/Anti-patterns](https://sway.cloud.microsoft/b1pRwmzuGjqB30On)
     - [Solving LinkedIn Queens with APL](https://pitr.ca/2025-06-14-queens)
     - [Klong: A Simple Array Language](https://t3x.org/klong/)
+    - [Coding in Advent](https://panadestein.github.io/blog/posts/aoc24.html) in BQN
 - [Introducing Sulka, the Hardened Yocto Distro](https://ejaaskel.dev/introducing-sulka-the-hardened-yocto-distro/)
     - learn about the possibility to maintain a distro by a single person
     - the Yocto project provides toolkits to create custom Linux distributions, especially for embedded systems
