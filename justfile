@@ -509,23 +509,8 @@ prep-rdrview:
     #!/usr/bin/env zsh
     just clone eafer rdrview
     cd ~/projects/rdrview
-    git apply <<EOF
-    diff --git a/src/rdrview.c b/src/rdrview.c
-    index d496bd0..97fb54b 100644
-    --- a/src/rdrview.c
-    +++ b/src/rdrview.c
-    @@ -1195,8 +1195,8 @@ int main(int argc, char *argv[])
-
-            LIBXML_TEST_VERSION
-            /* I made a mess mixing xmlMalloc() and malloc(), so play it safe here */
-    -       if (xmlMemSetup(free, malloc, realloc, strdup))
-    -               fatal();
-    +       // if (xmlMemSetup(free, malloc, realloc, strdup))
-    +       //      fatal();
-
-            set_cleanup_handlers();
-            parse_arguments(argc, argv);
-    EOF
+    brew install libxml2
+    export PATH="/opt/homebrew/opt/libxml2/bin:$PATH"
     make && sudo make install
 
 # https://chawan.net/doc/cha/index.html
