@@ -540,12 +540,37 @@ prep-rdrview:
 cha URL:
     cha {{URL}}
 
+# very text-ish, high contrast theme, no js, no CJK support
+#
+# space or + - next screen
+# - - prev screen
+# / - search
+# up/down - prev/next link
+# right - open link
+# left - back
+# backspace - history
+# | - toggle wrap
+# { } - shift the page left/right if wrap is disabled
+#
+# ? - help
+# q - quit
+#
+prep-lynx:
+    which lynx || brew install lynx
+
+prep-w3m:
+    which w3m || brew install w3m
+
 prep-servo:
     # softwareupdate --install-rosetta --agree-to-license
     brew install --cask servo
     just uq /Applications/Servo.app
 
-# rendered by headless Chromium, pixelated
+# rendered by headless Chromium
+# texts preserved as texts, properly positioned and styled
+# image, canvas pixelated
+# can't recognize small button with icon
+# support forest xml/xslt
 #
 carbon URL:
     docker run --rm -ti fathyb/carbonyl {{URL}}
