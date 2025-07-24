@@ -285,6 +285,9 @@ clone-conf CONF USER REPO:
         just clone-conf {{CONF}} {{USER}} {{REPO}}
     fi
 
+link-conf CONF:
+    ln -s {{justfile_directory()}}/dotfiles/.config/{{CONF}} ~/.config/{{CONF}}
+
 # -w to open in browser
 #
 actions PROJ="forest" *PARAMS="":
@@ -479,7 +482,8 @@ prep-zj:
     which zellij || brew install zellij
     # just clone-conf zellij t3hmrman tmux-zellij-shim-config
     rip ~/.config/zellij || true
-    ln -s {{justfile_directory()}}/dotfiles/.config/zellij ~/.config/zellij
+    just link-conf zellij
+    # ln -s {{justfile_directory()}}/dotfiles/.config/zellij ~/.config/zellij
     # just cp dotfiles/.config/zellij ~/.config/zellij
 
 # attach - a
