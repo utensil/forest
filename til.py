@@ -134,11 +134,26 @@ def load_bib_titles():
     return bib_titles
 
 
-def extract_keywords_from_content(content, date):
+def extract_keywords_from_content(content, date, dedup=True):
+    # Step 2: Extract explicit tags (#tag, #multi-word-tag) surrounded by space or line end
+    explicit_tag_pattern = r'(?<!\w)#([a-zA-Z0-9][\w-]*)(?=\s|$|[.,;:!?])'
+    explicit_tags = set()
+    for match in re.finditer(explicit_tag_pattern, content):
+        tag = match.group(1)
+        # Filter out tags that are part of URLs (e.g. http://example.com/#section)
+        url_context = content[max(0, match.start()-8):match.end()+8]
+        if '://' not in url_context:
+            explicit_tags.add(tag.lower())
+    # AGENT-NOTE: explicit_tags now contains all explicit #tags found in content
+
     """Extract meaningful technical keywords from daily entry content using TAG_CONFIG."""
 
     # Load bib titles for citation keyword extraction
     bib_titles = load_bib_titles()
+
+    # Deduplicate explicit tags from found_keywords if dedup is True
+    # (after found_keywords is populated)
+    # This will be done after found_keywords is built, see below.
 
     # Words that should be excluded even if they match patterns
     EXCLUDE_WORDS = {
@@ -292,77 +307,7 @@ def extract_keywords_from_content(content, date):
         ):
             found_keywords.remove("git")
 
-    # Improved pattern with better word boundaries and validation
-    topic_related_matches = re.findall(
-        r"^\s*- (?:\[([^\]]+)\]|((?:\b[a-z][a-z0-9]*\b\s*)+))\s+related\s*$",
-        content_lower,
-        re.MULTILINE,
-    )
-    logger.debug(f"Found {len(topic_related_matches)} topic-related patterns")
-    for match in sorted(topic_related_matches):  # Sort for deterministic order
-        topic = match[0] or match[1]  # Use either bracketed or non-bracketed match
-        logger.debug(f"Processing topic-related: {topic}")
-        if topic:
-            # Convert multi-word topics into hyphenated keywords
-            topic = topic.strip().lower()
-            if ' ' in topic:
-                # Replace spaces with hyphens for multi-word topics
-                hyphenated = '-'.join(topic.split())
-                if (
-                    hyphenated
-                    and hyphenated not in EXCLUDE_WORDS
-                    and hyphenated not in found_keywords
-                    and re.fullmatch(r"[a-z][a-z0-9-]*", hyphenated)
-                ):
-                    # Log hyphenated keywords with more than 2 words
-                    if len(topic.split()) > 2:
-                        logger.debug(f"Found long hyphenated keyword: {hyphenated}")
-                    found_keywords.append(hyphenated)
-            else:
-                # Handle single word topics normally
-                if (
-                    topic
-                    and topic not in EXCLUDE_WORDS
-                    and topic not in found_keywords
-                    and re.fullmatch(r"[a-z][a-z0-9-]*", topic)
-                ):
-                    found_keywords.append(topic)
-
-    # Improved pattern with better word boundaries and validation
-    topic_related_matches = re.findall(
-        r"^\s*- (?:\[([^\]]+)\]|((?:\b[a-z][a-z0-9]*\b\s*)+))\s+related\s*$",
-        content_lower,
-        re.MULTILINE,
-    )
-    logger.debug(f"Found {len(topic_related_matches)} topic-related patterns")
-    for match in sorted(topic_related_matches):  # Sort for deterministic order
-        topic = match[0] or match[1]  # Use either bracketed or non-bracketed match
-        logger.debug(f"Processing topic-related: {topic}")
-        if topic:
-            # Convert multi-word topics into hyphenated keywords
-            topic = topic.strip().lower()
-            if ' ' in topic:
-                # Replace spaces with hyphens for multi-word topics
-                hyphenated = '-'.join(topic.split())
-                if (
-                    hyphenated
-                    and hyphenated not in EXCLUDE_WORDS
-                    and hyphenated not in found_keywords
-                    and re.fullmatch(r"[a-z][a-z0-9-]*", hyphenated)
-                ):
-                    # Log hyphenated keywords with more than 2 words
-                    if len(topic.split()) > 2:
-                        logger.debug(f"Found long hyphenated keyword: {hyphenated}")
-                    found_keywords.append(hyphenated)
-            else:
-                # Handle single word topics normally
-                if (
-                    topic
-                    and topic not in EXCLUDE_WORDS
-                    and topic not in found_keywords
-                    and re.fullmatch(r"[a-z][a-z0-9-]*", topic)
-                ):
-                    found_keywords.append(topic)
+    # AGENT-NOTE: Legacy '- abc related' pattern recognition removed per backlog task-0003
 
     # Process citations - extract keywords from bib titles instead of cite keys
     citation_pattern = r"\\citef\{([^}]+)\}"
@@ -393,6 +338,13 @@ def extract_keywords_from_content(content, date):
                             else:
                                 if tag and tag not in found_keywords and tag not in EXCLUDE_WORDS:
                                     found_keywords.append(tag)
+
+    # Deduplicate explicit tags from found_keywords if dedup is True
+    if dedup:
+        # Only keep non-explicit tags; if none, return []
+        found_keywords = [kw for kw in found_keywords if kw not in explicit_tags]
+        if not found_keywords:
+            found_keywords = []
 
     # Merge similar keywords according to TAG_MERGE
     merged_keywords = set()
@@ -444,9 +396,9 @@ def extract_keywords_from_content(content, date):
     return final_keywords[:10]  # [:6]
 
 
-def improve_title(date, content):
+def improve_title(date, content, dedup=True):
     """Generate improved title based on content analysis."""
-    keywords = extract_keywords_from_content(content, date)
+    keywords = extract_keywords_from_content(content, date, dedup=dedup)
 
     if not keywords:
         # Fallback for entries with no technical keywords
@@ -616,7 +568,7 @@ def process_file(filepath):
         ]
 
         # Generate new title (now returns date and keywords separately)
-        new_date, keywords = improve_title(date, inner_content)
+        new_date, keywords = improve_title(date, inner_content, dedup=args.dedup and not args.no_dedup)
 
         # Check if the content already starts with \tags{...}
         has_tags = re.match(r"^\s*\\tags\{[^}]*\}", inner_content.strip())
@@ -678,8 +630,13 @@ def test_til():
             "expected": ["ag"],
         },
         {
-            "name": "Explicit topic",
-            "content": "- debugger related\n- Raku related",
+            "name": "Explicit tag extraction",
+            "content": "Today I learned about #debugger and #raku in depth.",
+            "expected": ["debugger", "raku"],
+        },
+        {
+            "name": "Explicit tag deduplication",
+            "content": "#debugger #raku Also learned about debugger and raku.",
             "expected": ["debugger", "raku"],
         },
         {
@@ -702,13 +659,35 @@ def test_til():
         print(f"Test: {case['name']}")
         print(f"Content: {case['content'][:60]}...")
         date = "2025-01-01"  # Dummy date for testing
-        result = extract_keywords_from_content(case["content"], date)
-        if sorted(result) == sorted(case["expected"]):
-            print(f"✅ PASS - Got: {result}")
-            passed += 1
+        # Test both dedup and no-dedup for explicit tag cases
+        if "Explicit tag" in case["name"]:
+            result_dedup = extract_keywords_from_content(case["content"], date, dedup=True)
+            result_no_dedup = extract_keywords_from_content(case["content"], date, dedup=False)
+            print(f"Dedup ON: {result_dedup}")
+            print(f"Dedup OFF: {result_no_dedup}")
+            # For dedup ON, expect []
+            if result_dedup == []:
+                print(f"✅ PASS (dedup) - Got: {result_dedup}")
+                passed += 1
+            else:
+                print(f"❌ FAIL (dedup) - Expected: [], Got: {result_dedup}")
+                failed += 1
+            # For no-dedup, explicit tags should be included
+            expected_no_dedup = sorted([tag for tag in re.findall(r'#(\w+)', case["content"])] )
+            if sorted(result_no_dedup) == expected_no_dedup:
+                print(f"✅ PASS (no-dedup) - Got: {result_no_dedup}")
+                passed += 1
+            else:
+                print(f"❌ FAIL (no-dedup) - Expected: {expected_no_dedup}, Got: {result_no_dedup}")
+                failed += 1
         else:
-            print(f"❌ FAIL - Expected: {case['expected']}, Got: {result}")
-            failed += 1
+            result = extract_keywords_from_content(case["content"], date)
+            if sorted(result) == sorted(case["expected"]):
+                print(f"✅ PASS - Got: {result}")
+                passed += 1
+            else:
+                print(f"❌ FAIL - Expected: {case['expected']}, Got: {result}")
+                failed += 1
         print()
 
     print(f"\nTest Results: {passed} passed, {failed} failed")
@@ -729,6 +708,18 @@ def print_merge_stats():
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="TIL (Today I Learned) Title Improver")
+    parser.add_argument(
+        "--dedup",
+        action="store_true",
+        default=True,
+        help="Deduplicate explicit #tags from output (default: deduplication ON)",
+    )
+    parser.add_argument(
+        "--no-dedup",
+        action="store_true",
+        help="Do NOT deduplicate explicit #tags (explicit tags will be included)",
+    )
+
     parser.add_argument(
         "--reset",
         action="store_true",
