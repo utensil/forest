@@ -731,8 +731,8 @@ def print_merge_stats():
                 print(f"{preferred} <- {merged_str}")
 
 
-def print_monthly_tag_stats(filepath):
-    """Print top 20 tag statistics for each month, including months with no tags."""
+def print_monthly_tag_stats(filepath, top_n=20):
+    """Print top N tag statistics for each month, including months with no tags, and show total tag count."""
     import re
     from collections import defaultdict, Counter
     month_tag_counter = defaultdict(Counter)
@@ -756,19 +756,21 @@ def print_monthly_tag_stats(filepath):
             if t.startswith('#'):
                 month_tag_counter[month][t] += 1
     if all_months:
-        print("\nMonthly top 20 tags:")
+        print("\nMonthly tag stats:")
+        import sys
+        use_color = sys.stdout.isatty()
+        def color_tag(tag):
+            return f"\033[96m{tag}\033[0m" if use_color else tag
         for month in sorted(all_months):
-            top_tags = month_tag_counter[month].most_common(20)
-            # ANSI color for #tag if output is a TTY
-            import sys
-            use_color = sys.stdout.isatty()
-            def color_tag(tag):
-                return f"\033[96m{tag}\033[0m" if use_color else tag
-            tag_str = ' '.join([
+            top_tags = month_tag_counter[month].most_common(top_n)
+            total_tags = sum(month_tag_counter[month].values())
+            # Format YYYYMM
+            yyyymm = month.replace('-', '')
+            tag_str = ', '.join([
                 color_tag(tag) if count == 1 else f"{color_tag(tag)} {count}"
                 for tag, count in top_tags
             ])
-            print(f"{month}: {tag_str}")
+            print(f"{yyyymm} ({total_tags} tags): {tag_str}")
 
 
 
@@ -801,6 +803,13 @@ if __name__ == "__main__":
         action="store_true",
         help="Run test cases instead of processing files",
     )
+    parser.add_argument(
+        "--stat",
+        nargs="?",
+        type=int,
+        const=20,
+        help="Show monthly tag stats (optionally top N tags per month)",
+    )
     args = parser.parse_args()
 
     if args.test:
@@ -829,7 +838,8 @@ if __name__ == "__main__":
         success = process_file(filepath, verbose=getattr(args, 'verbose', False))
         if success:
             print("✨ Title improvement complete!")
-            print_monthly_tag_stats(filepath)
+            if getattr(args, 'stat', None) is not None:
+                print_monthly_tag_stats(filepath, top_n=args.stat)
             print_merge_stats()
         else:
             print("❌ Title improvement failed")
