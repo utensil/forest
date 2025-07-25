@@ -131,23 +131,12 @@ def convert_one(xml_path: pathlib.Path, xsl_path: pathlib.Path, html_path: pathl
         return False
 
 
-def backup_html_files(html_files: List[pathlib.Path], bak_dir: pathlib.Path):
-    """
-    Back up all HTML files to the backup directory.
-    """
-    bak_dir.mkdir(parents=True, exist_ok=True)
-    for html_file in html_files:
-        bak_path = bak_dir / html_file.name
-        if html_file.exists():
-            bak_path.write_text(html_file.read_text(encoding="utf-8"), encoding="utf-8")
-
-
 def main():
     """
     Main entry point for the incremental XML-to-HTML build process.
     - Scans for XML files and checks for the XSLT stylesheet.
     - Uses a thread pool to process files in parallel.
-    - Only rebuilds HTML files when necessary.
+    - Only rebuilds HTML files when necessary and content changes.
     - Prints progress and a summary of updated files.
     """
     xml_files = get_xml_files()
@@ -157,10 +146,6 @@ def main():
     if not XSL_PATH.exists():
         print(f"XSL file not found: {XSL_PATH}", file=sys.stderr)
         sys.exit(1)
-
-    # Back up all HTML files before conversion
-    html_files = sorted(OUTPUT_DIR.glob("*.html"))
-    backup_html_files(html_files, BAK_DIR)
 
     max_workers = get_max_workers()
     print(f"Max jobs: {max_workers}")
@@ -177,14 +162,35 @@ def main():
         """
         basename = xml_path.stem
         html_path = OUTPUT_DIR / f"{basename}.html"
-        if needs_rebuild(xml_path, html_path, XSL_PATH):
-            # Only rebuild and count if actually needed and content changes
-            if convert_one(xml_path, XSL_PATH, html_path, BAK_DIR):
-                return True
-        return False
+        bak_path = BAK_DIR / html_path.name
+        try:
+            # Only proceed if a rebuild is needed
+            if not needs_rebuild(xml_path, html_path, XSL_PATH):
+                return False
+            # Convert XML to HTML (in memory)
+            dom = etree.parse(str(xml_path))
+            xslt = etree.parse(str(XSL_PATH))
+            transform = etree.XSLT(xslt)
+            new_html = str(transform(dom))
+            # Compare with backup (if exists)
+            old_html = None
+            if bak_path.exists():
+                old_html = bak_path.read_text(encoding="utf-8")
+            elif html_path.exists():
+                old_html = html_path.read_text(encoding="utf-8")
+            if old_html is not None and old_html == new_html:
+                return False  # No change
+            # Write the HTML output and update backup
+            html_path.parent.mkdir(parents=True, exist_ok=True)
+            html_path.write_text(new_html, encoding="utf-8")
+            bak_path.parent.mkdir(parents=True, exist_ok=True)
+            bak_path.write_text(new_html, encoding="utf-8")
+            return True
+        except Exception as e:
+            print(f"[ERROR] Failed to convert {xml_path} -> {html_path}: {e}", file=sys.stderr)
+            return False
 
     # Use ThreadPoolExecutor for parallel processing of XML files
-    # Launch parallel workers for XML-to-HTML conversion
     with concurrent.futures.ThreadPoolExecutor(max_workers=max_workers) as executor:
         futures = {executor.submit(process, xml_path): i for i, xml_path in enumerate(xml_files)}
         for i, future in enumerate(concurrent.futures.as_completed(futures)):
@@ -194,7 +200,6 @@ def main():
             except Exception as e:
                 print(f"[ERROR] Exception in worker: {e}", file=sys.stderr)
             # AGENT-NOTE: progress bar logic
-            # Print a progress bar every ~5% of files processed
             if (i + 1) % progress_step == 0 or (i + 1) == total_files:
                 print("█", end="", flush=True)
     print()
