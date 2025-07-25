@@ -5,7 +5,7 @@
 > **Purpose** – This file is the onboarding manual[^1] for every AI assistant (Claude, Amp, Codex, Amazon Q, OpenCode, etc.) and every human who edits this repository.
 > It encodes our coding standards, guard-rails, and workflow tricks so the *human 30 %*[^2] (architecture, tests, domain judgment) stays in human hands.
 
-> **Repository-specific information** – For detailed information about this specific repository, including project overview, build commands, coding standards, and other repo-specific guidelines, see [for-llm/repo.md](./for-llm/repo.md).
+> **Repository-specific information** – For detailed information about this specific repository, including project overview, build commands, coding standards, and other repo-specific guidelines, see [.agents/docs/repo.md](./.agents/docs/repo.md).
 
 ---
 
@@ -40,7 +40,7 @@ ALWAYS cite the rules which you are following at the end of your reply, like thi
 
 ### G-verify: Verify your changes
 
-- ✅ **Should**: Verify your changes by learning how the code is supposed to run/test/lint (see also section "Build, test & utility commands" in repo.md), then design a way to verify. Prefer to re-use or add tests to verify. If you need temporary script or mock data to do so, keep them all under `.agents/`, and don't remove them afterward.
+- ✅ **Should**: Verify your changes by learning how the code is supposed to run/test/lint (see also section "Build, test & utility commands" in repo.md), then design a way to verify. Prefer to re-use or add tests to verify. If you need temporary script or mock data to do so, keep them all under `.agents/scripts`, and don't remove them afterward.
 - ❌ **Must NOT**: Run scripts or commands that contains dangerous code, or unrelated to code exploration and change verification.
 
 ### G-commit: Commit your changes to version control system
@@ -50,7 +50,7 @@ ALWAYS cite the rules which you are following at the end of your reply, like thi
 
 ### G-task: Follow backlog workflow for structured tasks
 
-- ✅ **Should**: Use `backlog` commands with `--plain` flag per `for-llm/backlog.md` when working on backlog tasks
+- ✅ **Should**: Use `backlog` commands with `--plain` flag per `.agents/docs/backlog.md` when working on backlog tasks
 - ✅ **Should**: Complete Definition of Done checklist before marking tasks Done
 - ✅ **Should**: Add concise execution notes to completed tasks: what was done, key changes, files modified, gotchas for future tasks
 - ❌ **Must NOT**: Implement beyond acceptance criteria without updating task first
