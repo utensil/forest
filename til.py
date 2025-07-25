@@ -760,10 +760,11 @@ def print_monthly_tag_stats(filepath, top_n=20):
         import sys
         use_color = sys.stdout.isatty()
         def color_tag(tag):
-            return f"\033[96m{tag}\033[0m" if use_color else tag
+            # AGENT-NOTE: Use ANSI 256-color code 114 for #98c379 green
+            return f"\033[38;5;114m{tag}\033[0m" if use_color else tag
         for month in sorted(all_months):
             top_tags = month_tag_counter[month].most_common(top_n)
-            total_tags = sum(month_tag_counter[month].values())
+            unique_tag_count = len(month_tag_counter[month])
             # Format YYYYMM
             yyyymm = month.replace('-', '')
             tag_str = ', '.join([
@@ -771,9 +772,9 @@ def print_monthly_tag_stats(filepath, top_n=20):
                 for tag, count in top_tags
             ])
             # Append ellipsis if more tags exist than top_n
-            if len(month_tag_counter[month]) > top_n:
+            if unique_tag_count > top_n:
                 tag_str += ', ...'
-            print(f"{yyyymm} ({total_tags} tags): {tag_str}")
+            print(f"{yyyymm} ({unique_tag_count} tags): {tag_str}")
 
 
 
