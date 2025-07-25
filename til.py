@@ -414,9 +414,9 @@ def improve_title(date, content, dedup=True, verbose=False):
     """Generate improved title based on content analysis."""
     keywords = extract_keywords_from_content(content, date, dedup=dedup, verbose=verbose)
 
+    # If no keywords, return date and empty list (no fallback 'misc' tag)
     if not keywords:
-        # Fallback for entries with no technical keywords
-        return date, ["misc"]
+        return date, []
 
     # Return date and keywords separately
     return date, keywords
@@ -742,7 +742,7 @@ def print_monthly_tag_stats(filepath):
     except Exception:
         return
     # Find all mdnote entries with tags
-    pattern = r"\\subtree\[(\d{4}-\d{2})-\d{2}\]\\{\\mdnote\\{\d{4}-\d{2}-\d{2}\\}\\{\\tags\\{([^}]*)\\}"
+    pattern = r"\\subtree\[(\d{4}-\d{2})-\d{2}\]{\\mdnote{\d{4}-\d{2}-\d{2}}{\\tags{([^}]*)}"
     for match in re.finditer(pattern, content):
         month = match.group(1)
         tags = match.group(2)
