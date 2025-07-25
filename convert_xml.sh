@@ -40,6 +40,7 @@ function convert_xml_files() {
         num_cores=1
     fi
     local max_jobs=$((num_cores > 2 ? num_cores - 2 : 2))
+    echo "Max jobs: $max_jobs"
 
     if [ "$convert_all" = true ]; then
         # Only do sample-based testing for XSL changes, not tree changes
@@ -49,22 +50,44 @@ function convert_xml_files() {
             local changes_detected=false
             local sample_size=3
 
-            for ((i = 0; i < sample_size && i < total_files; i++)); do
-                local xml_file="${xml_files[i]}"
-                local basename=$(basename "$xml_file" .xml)
-                convert_xml_to_html "$xml_file"
+sample_pids=()
+sample_basenames=()
+for ((i = 0; i < sample_size && i < total_files; i++)); do
+    local xml_file="${xml_files[i]}"
+    local basename=$(basename "$xml_file" .xml)
+    convert_xml_to_html "$xml_file" &
+    sample_pids+=($!)
+    sample_basenames+=("$basename")
+done
 
-                if check_html_changes "$basename"; then
-                    changes_detected=true
-                    break
-                fi
-            done
+# Wait for all conversions to finish
+for pid in "${sample_pids[@]}"; do
+    wait "$pid"
+done
 
-            if [ "$changes_detected" = false ]; then
-                echo "⏩ XSL changes don't affect HTML output, skipping conversion"
-                return 0
-            fi
-        fi
+# Now run all cmp checks in parallel
+cmp_pids=()
+for basename in "${sample_basenames[@]}"; do
+    (check_html_changes "$basename" && touch "output/.bak/$basename.changed") &
+    cmp_pids+=($!)
+done
+
+for pid in "${cmp_pids[@]}"; do
+    wait "$pid"
+done
+
+for basename in "${sample_basenames[@]}"; do
+    if [ -f "output/.bak/$basename.changed" ]; then
+        changes_detected=true
+        break
+    fi
+done
+rm -f output/.bak/*.changed
+
+if [ "$changes_detected" = false ]; then
+    echo "⏩ XSL changes don't affect HTML output, skipping conversion"
+    return 0
+fi        fi
         echo "Converting all ${total_files} XML files..."
     fi
 
@@ -74,8 +97,8 @@ function convert_xml_files() {
     [ $progress_step -eq 0 ] && progress_step=1
     echo -n "Progress: "
 
-    for ((i = 0; i < total_files; i += max_jobs)); do
-        for ((j = i; j < i + max_jobs && j < total_files; j++)); do
+    for ((i = 0; i < total_files; i += 1)); do
+        # for ((j = i; j < i + max_jobs && j < total_files; j++)); do
             local xml_file="${xml_files[j]}"
             # Only convert if:
             # 1. XSL changed and we detected changes in sample testing, or
@@ -87,7 +110,7 @@ function convert_xml_files() {
                 convert_xml_to_html "$xml_file" &
                 ((updated_count++))
             fi
-        done
+        # done
         wait
 
         # Update progress indicator every 5%
