@@ -101,30 +101,43 @@ function convert_xml_files() {
     [ $progress_step -eq 0 ] && progress_step=1
     echo -n "Progress: "
 
-    for ((i = 0; i < total_files; i += 1)); do
-        # for ((j = i; j < i + max_jobs && j < total_files; j++)); do
-            local xml_file="${xml_files[j]}"
-            # Only convert if:
-            # 1. XSL changed and we detected changes in sample testing, or
-            # 2. Individual XML file changed (comparing with backup)
-            # 3. The target HTML file doesn't exist
-            if ([ "$convert_all" = true ] && [ -n "$XSL_CHANGED" ] && [ "$changes_detected" = true ]) ||
-               ([ -f "output/.bak/$(basename "$xml_file")" ] && ! cmp -s "$xml_file" "output/.bak/$(basename "$xml_file")") ||
-                [ ! -f "output/$(basename "$xml_file" .xml).html" ]; then
-                convert_xml_to_html "$xml_file" &
-                ((updated_count++))
-            fi
-        # done
-        wait
+    job_count=0
+for ((i = 0; i < total_files; i++)); do
+    local xml_file="${xml_files[i]}"
+    (
+        local basename=$(basename "$xml_file" .xml)
+        local html_file="output/$basename.html"
+        local bak_file="output/.bak/$basename.html"
+        local do_convert=0
 
-        # Update progress indicator every 5%
-        local new_progress=$((i / progress_step))
-        while [ $progress -lt $new_progress ] && [ $progress -lt 20 ]; do
-            echo -n "█"
-            ((progress++))
-        done
+        if [ "$convert_all" = true ] && [ -n "$XSL_CHANGED" ] && [ "$changes_detected" = true ]; then
+            do_convert=1
+        elif [ -f "$bak_file" ] && ! cmp -s "$xml_file" "$bak_file"; then
+            do_convert=1
+        elif [ ! -f "$html_file" ]; then
+            do_convert=1
+        fi
+
+        if [ $do_convert -eq 1 ]; then
+            convert_xml_to_html "$xml_file"
+            exit 0
+        fi
+        exit 1
+    ) &
+    ((job_count++))
+    if [ "$job_count" -ge "$max_jobs" ]; then
+        wait -n
+        ((job_count--))
+    fi
+    # Update progress indicator every 5%
+    local new_progress=$((i / progress_step))
+    while [ $progress -lt $new_progress ] && [ $progress -lt 20 ]; do
+        echo -n "█"
+        ((progress++))
     done
-    echo # New line after progress bar
+done
+wait  # Wait for all background jobs to finish
+echo # New line after progress bar
 
     local end_time=$(date +%s)
     local duration=$((end_time - start_time))
