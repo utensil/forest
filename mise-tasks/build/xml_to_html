@@ -1,5 +1,7 @@
 #!/bin/bash
-#MISE sources=["output/*.xml", "output/uts-forest.xsl", "output/links.xsl", "output/core.xsl", "output/default.xsl", "output/metadata.xsl", "output/tree.xsl", "output/book.xsl", "output/uts-layout.xsl", "output/latex.xsl", "output/community-overrides.xsl", "output/article.xsl", "output/uts-overrides.xsl", "output/html.xsl"]
+# AGENT-NOTE: When editing this file, always review https://mise.jdx.dev/tasks/file-tasks.html and https://mise.jdx.dev/tasks/ for correct header and dependency syntax.
+#MISE sources=["output/*.xml", "output/*.xsl"]
+#MISE depends=["build/xsl_assets"]
 #MISE outputs=["output/*.html"]
 set -e
 for xml in output/*.xml; do

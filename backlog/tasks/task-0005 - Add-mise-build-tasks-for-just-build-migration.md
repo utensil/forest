@@ -25,6 +25,14 @@ Evaluate mise as a replacement for just for build tasks by adding equivalent mis
 -   [ ] build:check verifies that `just build` and `mise run build` produce identical output
 -   [ ] Script remains idempotent and does not modify source files
 
+## AGENT-NOTE
+
+When working on mise tasks, always read and follow the latest official mise documentation:
+
+-   https://mise.jdx.dev/tasks/file-tasks.html
+-   https://mise.jdx.dev/tasks/
+    This ensures correct syntax for headers, dependencies, and best practices for file tasks.
+
 ## Implementation Plan
 
 1. Analyze justfile and all scripts called by just build
