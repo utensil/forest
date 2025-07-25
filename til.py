@@ -63,22 +63,20 @@ TAG_CONFIG = [
     # Exact match tags
     "rust", "zig", "elixir", "lean", "apl", "haskell", "ocaml", "clojure", "racket",
     "claude", "dspy", "qwen", "embedding", "prompt", "agent", "simd", "wasm", "gpu",
-    "optimization", "performance", "ebpf", "tla", "category", "render", "shader",
+    "optimization", "ebpf", "tla", "category", "render", "shader",
     "visualization", "webgl", "raymarching", "game", "docker", "talos", "unbound",
-    "harbor", "build tool", "build system", "sqlite", "datafusion", "duckdb", "security",
+    "harbor", "build tool", "build system", "sqlite", "datafusion", "duckdb",
     "formal", "verification", "smt", "sat", "fuzzing", "fediverse", "mastodon", "lemmy",
     "git", "compiler", "benchmark", "neovim", "jujutsu", "biome", "typst", "exif", "id3",
-    "vulkan", "json", "yaml", "toml", "arm", "x86", "proof", "quantum", "physics", "citation",
+    "vulkan", "json", "yaml", "toml", "proof", "quantum", "physics", "citation",
     "lemma", "bevy", "z3", "wrote", "finish", "start on", "progress on", "work on", "misc",
-    "notes", "diagram", "antibot", "context", "ai-slop", "ai-safety", "rss",
-    "makefile", "tui", "blogging", "aria", "cg", "agent/tasking", "data-org", "forth", "sci",
+    "diagram", "antibot", "context", "ai-slop", "ai-safety", "rss",
+    "makefile", "tui", "blogging", "cg", "agent/tasking", "data-org", "forth", "sci",
     "sec", "idea", "game", "web", "data-structure", "ai-consciousness", "biology", "news",
     "tech-history", "software", "formalization", "datalog", "prolog", "os", "embedding",
-    "prompt", "gradient", "optimization", "agent", "✍️",
+    "prompt", "optimization", "agent", "✍️",
     # Regex pattern tags
-    {"tag": "project", "patterns": [r"\[\[((uts|ag|tt|spin|hopf)-[0-9a-z]+)\]\]", r"\[\[((uts|ag|tt|spin|hopf)-[0-9]+)\]\]", r"(uts|ag|tt|spin|hopf)-[0-9a-z]+"]},
-    # AGENT-NOTE: Ensure 'work on' is not matched for project references in test content
-    {"tag": "dbtool", "patterns": [r"\b([a-z][a-z0-9]+(?:db|sql|query))\b"]},
+    {"tag": "project", "patterns": [r"\[\[((ag|tt|spin|hopf|uts)-[0-9a-z]+)\]\]", r"\[\[((ag|tt|spin|hopf|uts)-[0-9]+)\]\]", r"(ag|tt|spin|hopf|uts)-[0-9a-z]+"]},
     {"tag": "infra", "patterns": [r"\b(backrest|restic|talos|metallb|unbound|headscale|harbor)\b"]},
     {"tag": "fediverse", "patterns": [r"\b(mastodon|lemmy|pixelfed|bookwyrm|peertube|pleroma)\b"]},
     {"tag": "analytics", "patterns": [r"\b(datafusion|duckdb|apache|arrow|parquet)\b"]},
@@ -90,13 +88,16 @@ TAG_CONFIG = [
 # - Used to unify tags for search and organization
 # - To extend: add new preferred tags and their alternatives as needed
 TAG_MERGE = {
-    "✍️": {"wrote", "finish", "start on", "progress on", "work on"},  # AGENT-NOTE: removed 'ag' from merge to fix project tag test
+    "✍️": {"wrote", "finish", "start on", "progress on", "work on", "ag", "tt", "spin", "hopf", "uts"},  # AGENT-NOTE: all project prefixes mapped to writing
     "formal": {"formalization", "verification", "smt", "sat"},
     "agent": {"ai", "claude", "qwen", "embedding", "prompt"},
     "fuzzing": {"jepsen"},
     "lang": {"language"},
     "build": {"build tool", "build system"},
     "ga": {"galgebra", "clifford"},
+    "sec": {"security"},
+    "perf": {"performance"},
+    "a11y": {"aria"},
 }
 
 # Global merge stats aggregated across all entries
@@ -365,6 +366,17 @@ def extract_keywords_from_content(content, date, dedup=True):
         if not found:
             print(f"DEBUG: Keeping '{kw}' as is")
             merged_keywords.add(kw)
+    # Also merge explicit tags if dedup is False
+    if not dedup:
+        for tag in explicit_tags:
+            merged = False
+            for preferred, alternatives in TAG_MERGE.items():
+                if tag == preferred or tag in alternatives:
+                    merged_keywords.add(preferred)
+                    merged = True
+                    break
+            if not merged:
+                merged_keywords.add(tag)
 
     # Track merge stats globally
     for preferred, merged in merge_stats.items():
@@ -627,7 +639,7 @@ def test_til():
         {
             "name": "Project reference",
             "content": "Continued work on [[ag-0018]] with new features.",
-            "expected": ["ag"],
+            "expected": ["✍️"],
         },
         {
             "name": "Explicit tag extraction",
@@ -672,8 +684,19 @@ def test_til():
             else:
                 print(f"❌ FAIL (dedup) - Expected: [], Got: {result_dedup}")
                 failed += 1
-            # For no-dedup, explicit tags should be included
-            expected_no_dedup = sorted([tag for tag in re.findall(r'#(\w+)', case["content"])] )
+            # For no-dedup, explicit tags should be included and merged
+            raw_tags = [tag for tag in re.findall(r'#(\w+)', case["content"])]
+            expected_no_dedup = []
+            for tag in raw_tags:
+                merged = False
+                for preferred, alternatives in TAG_MERGE.items():
+                    if tag == preferred or tag in alternatives:
+                        expected_no_dedup.append(preferred)
+                        merged = True
+                        break
+                if not merged:
+                    expected_no_dedup.append(tag)
+            expected_no_dedup = sorted(expected_no_dedup)
             if sorted(result_no_dedup) == expected_no_dedup:
                 print(f"✅ PASS (no-dedup) - Got: {result_no_dedup}")
                 passed += 1
