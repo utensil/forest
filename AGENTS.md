@@ -40,7 +40,7 @@ ALWAYS cite the rules which you are following at the end of your reply, like thi
 
 ### G-verify: Verify your changes
 
-- ✅ **Should**: Verify your changes by learning how the code is supposed to run/test/lint (see also section "Build, test & utility commands" in repo.md), then design a way to verify. Prefer to re-use or add tests to verify. If you need temporary script or mock data to do so, keep them all under `.agents/scripts`, and don't remove them afterward.
+- ✅ **Should**: Verify your changes by learning how the code is supposed to run/test/lint (see also section "Build, test & utility commands" in repo.md), then design a way to verify. Prefer to re-use or add tests to verify. If you need temporary script or mock data to do so, keep them all under `.agents/scripts`, don't remove them afterward, and don't commit them per G-commit.
 - ❌ **Must NOT**: Run scripts or commands that contains dangerous code, or unrelated to code exploration and change verification.
 
 ### G-commit: Commit your changes to version control system
