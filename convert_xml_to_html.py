@@ -83,10 +83,13 @@ def needs_rebuild(xml_path: pathlib.Path, html_path: pathlib.Path, xsl_path: pat
         bool: True if HTML should be rebuilt, False otherwise.
     """
     if not html_path.exists():
+        # print(f"[DEBUG] {html_path} does not exist; will rebuild.")
         return True
     if xml_path.stat().st_mtime > html_path.stat().st_mtime:
+        # print(f"[DEBUG] {xml_path} is newer than {html_path}; will rebuild.")
         return True
     if xsl_path.exists() and xsl_path.stat().st_mtime > html_path.stat().st_mtime:
+        # print(f"[DEBUG] {xsl_path} is newer than {html_path}; will rebuild.")
         return True
     return False
 
@@ -111,6 +114,7 @@ def convert_one(xml_path: pathlib.Path, xsl_path: pathlib.Path, html_path: pathl
         html_path.parent.mkdir(parents=True, exist_ok=True)
         # Write the HTML output
         html_path.write_text(str(newdom), encoding="utf-8")
+        # print(f"[INFO] Rebuilt {html_path} from {xml_path}")
         return True
     except Exception as e:
         # Print error but do not stop the build
@@ -150,6 +154,7 @@ def main():
         basename = xml_path.stem
         html_path = OUTPUT_DIR / f"{basename}.html"
         if needs_rebuild(xml_path, html_path, XSL_PATH):
+            # Only rebuild and count if actually needed
             if convert_one(xml_path, XSL_PATH, html_path):
                 return True
         return False
