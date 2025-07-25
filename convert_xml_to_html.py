@@ -164,28 +164,28 @@ def main():
         html_path = OUTPUT_DIR / f"{basename}.html"
         bak_path = BAK_DIR / html_path.name
         try:
-            # Only proceed if a rebuild is needed
+            # If backup is missing, always rebuild (skip needs_rebuild)
+            if not bak_path.exists():
+                dom = etree.parse(str(xml_path))
+                xslt = etree.parse(str(XSL_PATH))
+                transform = etree.XSLT(xslt)
+                new_html = str(transform(dom))
+                html_path.parent.mkdir(parents=True, exist_ok=True)
+                html_path.write_text(new_html, encoding="utf-8")
+                return True
+            # If backup exists, only rebuild if needed and content differs
             if not needs_rebuild(xml_path, html_path, XSL_PATH):
                 return False
-            # Convert XML to HTML (in memory)
             dom = etree.parse(str(xml_path))
             xslt = etree.parse(str(XSL_PATH))
             transform = etree.XSLT(xslt)
             new_html = str(transform(dom))
-            # If backup exists, compare to backup
-            if bak_path.exists():
-                old_html = bak_path.read_text(encoding="utf-8")
-                if old_html == new_html:
-                    return False  # No change
-                # else: content differs, update HTML
-                html_path.parent.mkdir(parents=True, exist_ok=True)
-                html_path.write_text(new_html, encoding="utf-8")
-                return True
-            else:
-                # No backup: always update HTML
-                html_path.parent.mkdir(parents=True, exist_ok=True)
-                html_path.write_text(new_html, encoding="utf-8")
-                return True
+            old_html = bak_path.read_text(encoding="utf-8")
+            if old_html == new_html:
+                return False
+            html_path.parent.mkdir(parents=True, exist_ok=True)
+            html_path.write_text(new_html, encoding="utf-8")
+            return True
         except Exception as e:
             print(f"[ERROR] Failed to convert {xml_path} -> {html_path}: {e}", file=sys.stderr)
             return False
