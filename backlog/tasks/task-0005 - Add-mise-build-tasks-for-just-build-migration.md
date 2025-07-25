@@ -36,6 +36,9 @@ Evaluate mise as a replacement for just for build tasks by adding equivalent mis
 7. Update check_build_parity.py to use only git-ignored directories for backups
 8. Add build:check task to mise.toml to call check_build_parity.py
 9. Verify build:check works as intended
+10. Ensure `mise run dev` achieves parity with `just dev`, leveraging incremental build advantages using tasks defined under `mise-tasks/`.
+11. Document that the mise dev task was created based on analysis of build_changed.sh.
+12. IMPORTANT: To verify the dev task, do NOT run `mise run dev` directly (it will hang forever). Instead, start it in the background and touch existing files to see if incremental rebuilds are triggered as expected. This is the correct way to test incremental rebuild behavior.
 
 ## Implementation Notes
 
@@ -48,3 +51,7 @@ Evaluate mise as a replacement for just for build tasks by adding equivalent mis
 -   No changes were made to justfile or scripts; only mise.toml was modified.
 -   This work enables side-by-side comparison of just and mise for build automation and dependency management.
 -   Will update check_build_parity.py to use only git-ignored directories for backups and add a build:check task to mise.toml.
+-   `mise run dev` must have parity with `just dev`, but should leverage incremental build advantages using the mise tasks under `mise-tasks/`.
+-   The mise dev task was created based on analysis of build_changed.sh, ensuring equivalent logic and incremental build support.
+-   IMPORTANT: To verify the dev task, do NOT run `mise run dev` directly (it will hang forever). Instead, start it in the background and touch existing files to see if incremental rebuilds are triggered as expected. This is the correct way to test incremental rebuild behavior.
+-   ⚠️ Stopping `mise run dev` with Ctrl-C may hang or not exit cleanly. If this happens, use `pkill -f 'mise.*dev'` or manually kill the process from another terminal. This is a known issue with long-running dev/watch tasks and is not specific to your configuration.
