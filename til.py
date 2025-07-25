@@ -145,9 +145,6 @@ def extract_keywords_from_content(content, date, dedup=True, verbose=False):
         url_context = content[max(0, match.start()-8):match.end()+8]
         if '://' not in url_context:
             explicit_tags.add(tag.lower())
-            if verbose:
-                print(f"{date}: matched explicit tag pattern -> {tag.lower()}")
-    # AGENT-NOTE: explicit_tags now contains all explicit #tags found in content
 
     """Extract meaningful technical keywords from daily entry content using TAG_CONFIG."""
 
@@ -267,8 +264,6 @@ def extract_keywords_from_content(content, date, dedup=True, verbose=False):
             # Exact match tag
             if entry in content_lower and entry not in EXCLUDE_WORDS:
                 found_keywords.append(entry)
-                if verbose:
-                    print(f"{date}: matched keyword '{entry}' -> {entry}")
         elif isinstance(entry, dict):
             tag = entry.get("tag")
             patterns = entry.get("patterns", [])
@@ -291,8 +286,7 @@ def extract_keywords_from_content(content, date, dedup=True, verbose=False):
                             prefix = m.group(1) if m else None
                         if prefix and prefix not in found_keywords and prefix not in EXCLUDE_WORDS:
                             if verbose:
-                                print(f"{date}: matched project pattern -> {prefix}")
-                            found_keywords.append(prefix)
+                                found_keywords.append(prefix)
                     elif isinstance(match, tuple):
                         for submatch in match:
                             if submatch and submatch not in EXCLUDE_WORDS:
@@ -300,8 +294,7 @@ def extract_keywords_from_content(content, date, dedup=True, verbose=False):
                     else:
                         if tag and tag not in found_keywords and tag not in EXCLUDE_WORDS:
                             if verbose:
-                                print(f"{date}: matched pattern for tag '{tag}' -> {tag}")
-                            found_keywords.append(tag)
+                                found_keywords.append(tag)
 
     # Special handling for git (context-sensitive)
     if "git" in found_keywords:
@@ -362,7 +355,7 @@ def extract_keywords_from_content(content, date, dedup=True, verbose=False):
         for preferred, alternatives in TAG_MERGE.items():
             if kw == preferred or kw in alternatives:
                 if verbose:
-                    print(f"{date}: merging '{kw}' to '{preferred}'")
+                    print(f"[merge] {date}: merging '{kw}' to '{preferred}'")
                 merged_keywords.add(preferred)
                 found = True
                 # Track merge stats (only if kw is different from preferred)
@@ -373,7 +366,7 @@ def extract_keywords_from_content(content, date, dedup=True, verbose=False):
                 break
         if not found:
             if verbose:
-                print(f"{date}: {kw} -> #{kw}")
+                print(f"{kw} -> #{kw}")
             merged_keywords.add(kw)
     # Also merge explicit tags if dedup is False
     if not dedup:
