@@ -3,8 +3,7 @@
 #MISE sources=["output/*.xml", "output/*.xsl"]
 #MISE wait_for=["build:forest"]
 #MISE outputs=["output/*.html"]
-source $PWD/convert_xml.sh
-convert_xml_files
+uv run $PWD/convert_xml_to_html.py
 # set -e
 # pids=()
 # for xml in output/*.xml; do
