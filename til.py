@@ -135,7 +135,7 @@ def load_bib_titles():
     return bib_titles
 
 
-def extract_keywords_from_content(content, date, dedup=True):
+def extract_keywords_from_content(content, date, dedup=True, verbose=False):
     # Step 2: Extract explicit tags (#tag, #multi-word-tag) surrounded by space or line end
     explicit_tag_pattern = r'(?<!\w)#([a-zA-Z0-9][\w-]*)(?=\s|$|[.,;:!?])'
     explicit_tags = set()
@@ -145,6 +145,8 @@ def extract_keywords_from_content(content, date, dedup=True):
         url_context = content[max(0, match.start()-8):match.end()+8]
         if '://' not in url_context:
             explicit_tags.add(tag.lower())
+            if verbose:
+                print(f"{date}: matched explicit tag pattern -> {tag.lower()}")
     # AGENT-NOTE: explicit_tags now contains all explicit #tags found in content
 
     """Extract meaningful technical keywords from daily entry content using TAG_CONFIG."""
@@ -265,6 +267,8 @@ def extract_keywords_from_content(content, date, dedup=True):
             # Exact match tag
             if entry in content_lower and entry not in EXCLUDE_WORDS:
                 found_keywords.append(entry)
+                if verbose:
+                    print(f"{date}: matched keyword '{entry}' -> {entry}")
         elif isinstance(entry, dict):
             tag = entry.get("tag")
             patterns = entry.get("patterns", [])
@@ -286,7 +290,8 @@ def extract_keywords_from_content(content, date, dedup=True):
                             m = re.match(r"(uts|ag|tt|spin|hopf)", match)
                             prefix = m.group(1) if m else None
                         if prefix and prefix not in found_keywords and prefix not in EXCLUDE_WORDS:
-                            print(f"DEBUG: Appending project prefix: {prefix}")
+                            if verbose:
+                                print(f"{date}: matched project pattern -> {prefix}")
                             found_keywords.append(prefix)
                     elif isinstance(match, tuple):
                         for submatch in match:
@@ -294,6 +299,8 @@ def extract_keywords_from_content(content, date, dedup=True):
                                 found_keywords.append(submatch)
                     else:
                         if tag and tag not in found_keywords and tag not in EXCLUDE_WORDS:
+                            if verbose:
+                                print(f"{date}: matched pattern for tag '{tag}' -> {tag}")
                             found_keywords.append(tag)
 
     # Special handling for git (context-sensitive)
@@ -354,7 +361,8 @@ def extract_keywords_from_content(content, date, dedup=True):
         found = False
         for preferred, alternatives in TAG_MERGE.items():
             if kw == preferred or kw in alternatives:
-                print(f"DEBUG: Merging '{kw}' to '{preferred}'")
+                if verbose:
+                    print(f"{date}: merging '{kw}' to '{preferred}'")
                 merged_keywords.add(preferred)
                 found = True
                 # Track merge stats (only if kw is different from preferred)
@@ -364,7 +372,8 @@ def extract_keywords_from_content(content, date, dedup=True):
                     merge_stats[preferred].add(kw)
                 break
         if not found:
-            print(f"DEBUG: Keeping '{kw}' as is")
+            if verbose:
+                print(f"{date}: {kw} -> #{kw}")
             merged_keywords.add(kw)
     # Also merge explicit tags if dedup is False
     if not dedup:
@@ -408,9 +417,9 @@ def extract_keywords_from_content(content, date, dedup=True):
     return final_keywords[:10]  # [:6]
 
 
-def improve_title(date, content, dedup=True):
+def improve_title(date, content, dedup=True, verbose=False):
     """Generate improved title based on content analysis."""
-    keywords = extract_keywords_from_content(content, date, dedup=dedup)
+    keywords = extract_keywords_from_content(content, date, dedup=dedup, verbose=verbose)
 
     if not keywords:
         # Fallback for entries with no technical keywords
@@ -491,7 +500,7 @@ def reset_titles(filepath):
         return True
 
 
-def process_file(filepath):
+def process_file(filepath, verbose=False):
     """Process the tree file and improve all daily entry titles."""
 
     try:
@@ -580,7 +589,7 @@ def process_file(filepath):
         ]
 
         # Generate new title (now returns date and keywords separately)
-        new_date, keywords = improve_title(date, inner_content, dedup=args.dedup and not args.no_dedup)
+        new_date, keywords = improve_title(date, inner_content, dedup=args.dedup and not args.no_dedup, verbose=verbose)
 
         # Check if the content already starts with \tags{...}
         has_tags = re.match(r"^\s*\\tags\{[^}]*\}", inner_content.strip())
@@ -729,8 +738,37 @@ def print_merge_stats():
                 print(f"{preferred} <- {merged_str}")
 
 
+def print_monthly_tag_stats(filepath):
+    """Print tag count statistics for each month."""
+    import re
+    from collections import defaultdict
+    month_tag_counts = defaultdict(int)
+    try:
+        with open(filepath, "r", encoding="utf-8") as f:
+            content = f.read()
+    except Exception:
+        return
+    # Find all mdnote entries with tags
+    pattern = r"\\subtree\\[([0-9]{4}-[0-9]{2})\\]\\{\\mdnote\\{[0-9]{4}-[0-9]{2}-[0-9]{2}\\}\\{\\tags\\{([^}]*)\\}"
+    for match in re.finditer(pattern, content):
+        month = match.group(1)
+        tags = match.group(2)
+        tag_count = len([t for t in tags.split() if t.startswith('#')])
+        month_tag_counts[month] += tag_count
+    if month_tag_counts:
+        print("\nMonthly tag counts:")
+        for month, count in sorted(month_tag_counts.items()):
+            print(f"{month}: {count} tags")
+
+
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="TIL (Today I Learned) Title Improver")
+    parser.add_argument(
+        "--verbose",
+        action="store_true",
+        help="Show detailed logs for each tag extraction event"
+    )
     parser.add_argument(
         "--dedup",
         action="store_true",
@@ -742,7 +780,6 @@ if __name__ == "__main__":
         action="store_true",
         help="Do NOT deduplicate explicit #tags (explicit tags will be included)",
     )
-
     parser.add_argument(
         "--reset",
         action="store_true",
@@ -778,9 +815,10 @@ if __name__ == "__main__":
             sys.exit(1)
     else:
         print("🔍 TIL Title Improver - Analyzing daily entries...")
-        success = process_file(filepath)
+        success = process_file(filepath, verbose=getattr(args, 'verbose', False))
         if success:
             print("✨ Title improvement complete!")
+            print_monthly_tag_stats(filepath)
             print_merge_stats()
         else:
             print("❌ Title improvement failed")
