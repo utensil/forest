@@ -1,21 +1,23 @@
 #!/bin/bash
 # AGENT-NOTE: When editing this file, always review https://mise.jdx.dev/tasks/file-tasks.html and https://mise.jdx.dev/tasks/ for correct header and dependency syntax.
 #MISE sources=["output/*.xml", "output/*.xsl"]
-#MISE depends=["build:forest"]
+#MISE wait_for=["build:forest"]
 #MISE outputs=["output/*.html"]
-set -e
-pids=()
-for xml in output/*.xml; do
-  [ -e "$xml" ] || continue
-  html="output/$(basename "$xml" .xml).html"
-  xsl="output/uts-forest.xsl"
-  # Only rebuild if HTML doesn't exist, or XML/XSL is newer than HTML
-  if [ ! -f "$html" ] || [ "$xml" -nt "$html" ] || [ "$xsl" -nt "$html" ]; then
-    xsltproc -o "$html" "$xsl" "$xml" &
-    pids+=($!)
-  fi
- done
+source $PWD/convert_xml.sh
+convert_xml_files
+# set -e
+# pids=()
+# for xml in output/*.xml; do
+#   [ -e "$xml" ] || continue
+#   html="output/$(basename "$xml" .xml).html"
+#   xsl="output/uts-forest.xsl"
+#   # Only rebuild if HTML doesn't exist, or XML/XSL is newer than HTML
+#   if [ ! -f "$html" ] || [ "$xml" -nt "$html" ] || [ "$xsl" -nt "$html" ]; then
+#     xsltproc -o "$html" "$xsl" "$xml" &
+#     pids+=($!)
+#   fi
+#  done
 
-for pid in "${pids[@]}"; do
-  wait "$pid"
-done
+# for pid in "${pids[@]}"; do
+#   wait "$pid"
+# done
