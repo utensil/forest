@@ -4,7 +4,13 @@
 #MISE depends=["build:forest"]
 #MISE outputs=["output/*.html"]
 set -e
+pids=()
 for xml in output/*.xml; do
   [ -e "$xml" ] || continue
-  xsltproc -o "output/$(basename "$xml" .xml).html" output/uts-forest.xsl "$xml"
+  xsltproc -o "output/$(basename "$xml" .xml).html" output/uts-forest.xsl "$xml" &
+  pids+=($!)
+done
+
+for pid in "${pids[@]}"; do
+  wait "$pid"
 done
