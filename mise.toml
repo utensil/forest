@@ -1,9 +1,28 @@
 
+
+[tasks."build:check"]
+description = "Check build output parity between just and mise"
+run = '''
+#!/usr/bin/env bash
+uv run check_build_parity.py
+'''
+
 [tasks.build]
 description = "Meta build: all atomic build steps"
-depends = ["bun_js", "bun_css", "wasm", "forest", "xml_to_html", "assets"]
+depends = ["build:bun_js", "build:bun_css", "build:wasm", "build:forest", "build:xml_to_html", "build:assets"]
 
-# Keep the original just build as a fallback
+[tasks.dev]
+description = "Dev mode: watcher and live reload (mise-native, incremental build, no dev.sh)"
+depends = ["build:bun_js", "build:bun_css", "build:wasm", "build:forest", "build:xml_to_html", "build:assets"]
+run = '''
+#!/usr/bin/env bash
+# Start Bun dev server in background
+bun --watch --no-clear-screen dev.ts &
+# Run mise's own watcher for incremental build
+mise watch build
+wait
+'''
+outputs = ["output/**"]
 
 # Keep the original just build as a fallback
 [tasks.just_build]
