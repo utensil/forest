@@ -206,8 +206,8 @@ def extract_keywords_from_content(content, date):
         "embedding",
         "prompt",
         "agent",
-        "textgrad",
-        "zenbase",
+        # "textgrad",
+        # "zenbase",
         # Systems/Performance specific
         "simd",
         "wasm",
@@ -215,14 +215,12 @@ def extract_keywords_from_content(content, date):
         "optimization",
         "performance",
         "ebpf",
-        "llvm",
+        # "llvm",
         # Math/Science
-        "galgebra",
-        "clifford",
-        "theory",
+        # "theory",
         "tla",
         "category",
-        "gradient",
+        # "gradient",
         # Graphics/Rendering
         "render",
         "shader",
@@ -280,7 +278,7 @@ def extract_keywords_from_content(content, date):
         # Tools/Libraries broader
         "bevy",
         "z3",
-        "symbolica",
+        # "symbolica",
         # Authoring
         "wrote",
         "finish",
@@ -375,7 +373,7 @@ def extract_keywords_from_content(content, date):
                 hyphenated = '-'.join(topic.split())
                 if (
                     hyphenated
-                    and hyphenated not in EXCLUDE_WORDS 
+                    and hyphenated not in EXCLUDE_WORDS
                     and hyphenated not in found_keywords
                     and re.fullmatch(r"[a-z][a-z0-9-]*", hyphenated)
                 ):
@@ -419,10 +417,14 @@ def extract_keywords_from_content(content, date):
         # },
         # but lean, z3, tla should get their own keywords due to their importance to me
         "formal": {"formalization", "verification", "smt", "sat"},
-        "agent": {"ai"},
+        "agent": {"ai", "claude", "qwen", "embedding", "prompt"},
         "fuzzing": {"jepsen"},
         "lang": {"language"},
-        "build": {"build tool", "build system"}
+        "build": {"build tool", "build system"},
+        "ga": {
+            "galgebra",
+            "clifford",
+        }
     }
 
     # Merge similar keywords according to mappings
@@ -523,20 +525,20 @@ def reset_titles(filepath):
 
     # First pass: Remove title part from mdnote entries
     new_content = re.sub(pattern_titled, replacement_titled, content, flags=re.DOTALL)
-    
+
     # Second pass: Remove tags entries at the beginning of content blocks
     # This pattern matches the opening brace followed by \tags{...} and a newline
     pattern_tags = r"(\{)\s*\\tags\{[^}]*\}\s*\n"
     replacement_tags = r"\1"
-    
+
     new_content = re.sub(pattern_tags, replacement_tags, new_content, flags=re.DOTALL)
-    
+
     # Third pass: Remove standalone \tags{...} lines anywhere in the content
     pattern_standalone_tags = r"\s*\\tags\{[^}]*\}\s*\n"
     replacement_standalone_tags = r"\n"
-    
+
     new_content = re.sub(pattern_standalone_tags, replacement_standalone_tags, new_content, flags=re.DOTALL)
-    
+
     # Count changes
     title_matches = len(re.findall(pattern_titled, content, flags=re.DOTALL))
     tag_matches = len(re.findall(pattern_tags, content, flags=re.DOTALL)) + len(re.findall(pattern_standalone_tags, content, flags=re.DOTALL))
@@ -655,23 +657,23 @@ def process_file(filepath):
         if not has_tags and keywords:
             # Create tags string with hashtags
             tags_str = f"\\tags{{{' '.join(['#' + kw for kw in keywords])}}}\n"
-            
+
             # For with_title entries, remove the title from mdnote
             if match_type == "with_title":
                 updated_mdnote = f"{prefix}{date}{opening_brace}"
                 title_start = match.start()
                 title_end = match.end()
-                
+
                 # Replace the mdnote part
                 new_content = new_content[:title_start] + updated_mdnote + new_content[title_end:]
-                
+
                 # Insert tags at the beginning of the entry content
                 content_start = title_start + len(updated_mdnote)
                 new_content = new_content[:content_start] + tags_str + new_content[content_start:]
             else:  # without_title
                 # Just insert tags at the beginning of the entry content
                 new_content = new_content[:content_start] + tags_str + new_content[content_start:]
-            
+
             changes_made += 1
 
     # Only write if content changed
