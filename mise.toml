@@ -1,38 +1,3 @@
-[tasks.bun_js]
-description = "Build all bun JS/TS files to output/"
-file = "mise-tasks/build/bun_js.sh"
-sources = ["bun/*.{ts,tsx,js}", "bun_build.js", "package.json"]
-outputs = ["output/*.js"]
-
-[tasks.bun_css]
-description = "Build all bun CSS files to output/"
-file = "mise-tasks/build/bun_css.sh"
-sources = ["bun/*.css"]
-outputs = ["output/*.css"]
-
-[tasks.wasm]
-description = "Build/copy WASM files to output/"
-file = "mise-tasks/build/wasm.sh"
-sources = ["lib/*/pkg/*.wasm"]
-outputs = ["output/*.wasm"]
-
-[tasks.forest]
-description = "Run forester build to generate XML"
-file = "mise-tasks/build/forest.sh"
-sources = ["trees/**/*.tree", "tex/*.tex", "tex/*.bib", "assets/html.xsl"]
-outputs = ["output/*.xml", "output/index.xml"]
-
-[tasks.xml_to_html]
-description = "Convert XML to HTML using XSLT"
-file = "mise-tasks/build/xml_to_html.sh"
-sources = ["output/*.xml", "output/uts-forest.xsl"]
-outputs = ["output/*.html"]
-
-[tasks.assets]
-description = "Copy shader assets to output/"
-file = "mise-tasks/build/assets.sh"
-sources = ["assets/shader/*.glsl"]
-outputs = ["output/shader/*.glsl"]
 
 [tasks.build]
 description = "Meta build: all atomic build steps"
