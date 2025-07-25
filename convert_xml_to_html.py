@@ -172,15 +172,20 @@ def main():
             xslt = etree.parse(str(XSL_PATH))
             transform = etree.XSLT(xslt)
             new_html = str(transform(dom))
-            # Compare with backup (if exists)
+            # If backup exists, compare to backup
             if bak_path.exists():
                 old_html = bak_path.read_text(encoding="utf-8")
                 if old_html == new_html:
                     return False  # No change
-            # Write the HTML output ONLY if backup is missing or content differs
-            html_path.parent.mkdir(parents=True, exist_ok=True)
-            html_path.write_text(new_html, encoding="utf-8")
-            return True
+                # else: content differs, update HTML
+                html_path.parent.mkdir(parents=True, exist_ok=True)
+                html_path.write_text(new_html, encoding="utf-8")
+                return True
+            else:
+                # No backup: always update HTML
+                html_path.parent.mkdir(parents=True, exist_ok=True)
+                html_path.write_text(new_html, encoding="utf-8")
+                return True
         except Exception as e:
             print(f"[ERROR] Failed to convert {xml_path} -> {html_path}: {e}", file=sys.stderr)
             return False
