@@ -101,7 +101,7 @@ function convert_xml_files() {
     [ $progress_step -eq 0 ] && progress_step=1
     echo -n "Progress: "
 
-    job_count=0
+    pids=()
 for ((i = 0; i < total_files; i++)); do
     local xml_file="${xml_files[i]}"
     (
@@ -124,10 +124,10 @@ for ((i = 0; i < total_files; i++)); do
         fi
         exit 1
     ) &
-    ((job_count++))
-    if [ "$job_count" -ge "$max_jobs" ]; then
-        wait -n
-        ((job_count--))
+    pids+=($!)
+    if [ "${#pids[@]}" -ge "$max_jobs" ]; then
+        wait "${pids[0]}"
+        pids=("${pids[@]:1}")
     fi
     # Update progress indicator every 5%
     local new_progress=$((i / progress_step))
@@ -136,7 +136,9 @@ for ((i = 0; i < total_files; i++)); do
         ((progress++))
     done
 done
-wait  # Wait for all background jobs to finish
+for pid in "${pids[@]}"; do
+    wait "$pid"
+done
 echo # New line after progress bar
 
     local end_time=$(date +%s)
