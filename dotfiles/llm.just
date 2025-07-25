@@ -542,7 +542,7 @@ ccr PROJ="forest" *PARAMS="":
     ccr code {{PARAMS}}
 
 # When running out of premium quota
-# export ANTHROPIC_BASE_URL=http://localhost:15432 ANTHROPIC_AUTH_TOKEN=dummy ANTHROPIC_MODEL=gpt-4o ANTHROPIC_SMALL_FAST_MODEL=gpt-4.1 && claude
+# export ANTHROPIC_BASE_URL=http://localhost:15432 ANTHROPIC_AUTH_TOKEN=dummy ANTHROPIC_MODEL=gpt-4.1 ANTHROPIC_SMALL_FAST_MODEL=gpt-4.1 && claude
 #
 cc PROJ="forest" *PARAMS="":
     #!/usr/bin/env zsh
@@ -591,7 +591,7 @@ prep-oc:
     which opencode || npm install -g opencode-ai
     mkdir -p ~/.config/opencode
     # rm ~/.config/opencode/config.json
-    cat > ~/.config/opencode/config.json << EOF
+    cat > ~/.config/opencode/opencode.json << EOF
     {
       "\$schema": "https://opencode.ai/config.json",
       "autoshare": false,
@@ -615,10 +615,10 @@ prep-oc:
 check-oc:
     #!/usr/bin/env zsh
     set -e
-    cat ~/.config/opencode/config.json
+    cat ~/.config/opencode/opencode.json
     opencode auth list
-    opencode auth list|grep ${OPENAI_API_PROVIDER:-GitHub Copilot}
-    opencode run -m "${OPENAI_API_PROVIDER:-github-copilot}/${OPENAI_API_MODEL:-claude-sonnet-4}" --print-logs Hi
+    # opencode auth list|grep ${OPENAI_API_PROVIDER:-GitHub Copilot}
+    opencode run -m "${OPENAI_API_PROVIDER:-github-copilot}/${OPENAI_API_MODEL:-claude-sonnet-4}" --log-level DEBUG --print-logs Hi
 
 # use `opencode auth login` to log into Github Copilot
 # use `opencode run -m github-copilot/claude-3.5-sonnet --print-logs Hi` for a first run, which runs bun install that might take a while
