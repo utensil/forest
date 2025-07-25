@@ -22,6 +22,7 @@ AGENT-NOTE: This script is idempotent and safe to run multiple times. It does no
 import os
 import shutil
 import subprocess
+# AGENT-NOTE: Backup directories output.just.* and output.mise.* are git-ignored via 'output*' in .gitignore (see project root).
 import sys
 import time
 from pathlib import Path
