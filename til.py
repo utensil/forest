@@ -732,26 +732,30 @@ def print_merge_stats():
 
 
 def print_monthly_tag_stats(filepath):
-    """Print tag count statistics for each month."""
+    """Print top 20 tag statistics for each month."""
     import re
-    from collections import defaultdict
-    month_tag_counts = defaultdict(int)
+    from collections import defaultdict, Counter
+    month_tag_counter = defaultdict(Counter)
     try:
         with open(filepath, "r", encoding="utf-8") as f:
             content = f.read()
     except Exception:
         return
     # Find all mdnote entries with tags
-    pattern = r"\\subtree\\[([0-9]{4}-[0-9]{2})\\]\\{\\mdnote\\{[0-9]{4}-[0-9]{2}-[0-9]{2}\\}\\{\\tags\\{([^}]*)\\}"
+    pattern = r"\\subtree\[(\d{4}-\d{2})-\d{2}\]\\{\\mdnote\\{\d{4}-\d{2}-\d{2}\\}\\{\\tags\\{([^}]*)\\}"
     for match in re.finditer(pattern, content):
         month = match.group(1)
         tags = match.group(2)
-        tag_count = len([t for t in tags.split() if t.startswith('#')])
-        month_tag_counts[month] += tag_count
-    if month_tag_counts:
-        print("\nMonthly tag counts:")
-        for month, count in sorted(month_tag_counts.items()):
-            print(f"{month}: {count} tags")
+        for t in tags.split():
+            if t.startswith('#'):
+                month_tag_counter[month][t] += 1
+    if month_tag_counter:
+        print("\nMonthly top 20 tags:")
+        for month in sorted(month_tag_counter.keys()):
+            top_tags = month_tag_counter[month].most_common(20)
+            tag_str = ' '.join([f"{tag} ({count})" for tag, count in top_tags])
+            print(f"{month}: {tag_str}")
+
 
 
 
