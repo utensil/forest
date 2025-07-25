@@ -765,7 +765,7 @@ def print_monthly_tag_stats(filepath):
             def color_tag(tag):
                 return f"\033[96m{tag}\033[0m" if use_color else tag
             tag_str = ' '.join([
-                color_tag(tag) if count == 1 else f"{color_tag(tag)} x{count}"
+                color_tag(tag) if count == 1 else f"{color_tag(tag)} {count}"
                 for tag, count in top_tags
             ])
             print(f"{month}: {tag_str}")
