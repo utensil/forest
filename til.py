@@ -759,7 +759,15 @@ def print_monthly_tag_stats(filepath):
         print("\nMonthly top 20 tags:")
         for month in sorted(all_months):
             top_tags = month_tag_counter[month].most_common(20)
-            tag_str = ' '.join([f"{tag} ({count})" for tag, count in top_tags])
+            # ANSI color for #tag if output is a TTY
+            import sys
+            use_color = sys.stdout.isatty()
+            def color_tag(tag):
+                return f"\033[96m{tag}\033[0m" if use_color else tag
+            tag_str = ' '.join([
+                color_tag(tag) if count == 1 else f"{color_tag(tag)} x{count}"
+                for tag, count in top_tags
+            ])
             print(f"{month}: {tag_str}")
 
 
