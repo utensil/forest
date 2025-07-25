@@ -1,0 +1,8 @@
+#!/bin/bash
+#MISE sources=["bun/*.css"]
+#MISE outputs=["output/*.css"]
+set -e
+for file in bun/*.css; do
+  [ -e "$file" ] || continue
+  just css "$file"
+done

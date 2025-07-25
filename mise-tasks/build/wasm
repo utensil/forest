@@ -1,0 +1,18 @@
+#!/bin/bash
+#MISE sources=["lib/*/pkg/*.wasm"]
+#MISE outputs=["output/*.wasm"]
+set -e
+# Only run wasm-pack build in CI or for dev
+for lib in wgputoy egglog/web-demo rhaiscript; do
+  if [ -n "$CI" ] || [ -n "$UTS_DEV" ]; then
+    if [ ! -d "lib/$lib/pkg" ] || [ -z "$(ls -A "lib/$lib/pkg" 2>/dev/null)" ]; then
+      echo "Building WASM package for $lib..."
+      (cd "lib/$lib" && bunx wasm-pack -v build --target web --release . --out-dir pkg || echo "wasm-pack build failed")
+    else
+      echo "Using cached WASM package for $lib"
+    fi
+  else
+    echo "🟡 Skipping wasm-pack build for $lib"
+  fi
+  cp lib/$lib/pkg/*.wasm output/ 2>/dev/null || true
+done
