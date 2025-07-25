@@ -2,30 +2,6 @@
 description = "Meta build: all atomic build steps"
 depends = ["build:bun_js", "build:bun_css", "build:wasm", "build:forest", "build:xml_to_html", "build:assets"]
 
-[tasks.dev]
-description = "Dev mode: watcher and live reload (mise-native, incremental build, no dev.sh)"
-depends = ["build:bun_js", "build:bun_css", "build:wasm", "build:forest", "build:xml_to_html", "build:assets"]
-run = '''
-#!/usr/bin/env bash
-set -e
-
-# Start Bun dev server in background
-bun --watch --no-clear-screen dev.ts &
-BUN_PID=$!
-
-# Start mise watcher in background
-mise watch build &
-MISE_PID=$!
-
-# Trap SIGINT/SIGTERM and kill both
-trap "kill $BUN_PID $MISE_PID; exit" SIGINT SIGTERM
-
-# Wait for both to exit
-wait $BUN_PID
-wait $MISE_PID
-'''
-outputs = ["output/**"]
-
 # Keep the original just build as a fallback
 [tasks.just_build]
 description = "Legacy: just build"
