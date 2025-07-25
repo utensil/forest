@@ -47,6 +47,7 @@ from typing import List
 
 OUTPUT_DIR = pathlib.Path("output")
 XSL_PATH = OUTPUT_DIR / "uts-forest.xsl"
+BAK_DIR = OUTPUT_DIR / ".bak"
 
 
 def get_max_workers() -> int:
@@ -94,15 +95,17 @@ def needs_rebuild(xml_path: pathlib.Path, html_path: pathlib.Path, xsl_path: pat
     return False
 
 
-def convert_one(xml_path: pathlib.Path, xsl_path: pathlib.Path, html_path: pathlib.Path) -> bool:
+def convert_one(xml_path: pathlib.Path, xsl_path: pathlib.Path, html_path: pathlib.Path, bak_dir: pathlib.Path) -> bool:
     """
     Convert a single XML file to HTML using the provided XSLT stylesheet.
+    Only overwrite the HTML file if the output differs from the backup.
     Args:
         xml_path (pathlib.Path): Path to the XML source file.
         xsl_path (pathlib.Path): Path to the XSLT stylesheet.
         html_path (pathlib.Path): Path to the HTML output file.
+        bak_dir (pathlib.Path): Path to the backup directory.
     Returns:
-        bool: True if conversion succeeded, False otherwise.
+        bool: True if HTML was updated (content changed), False otherwise.
     """
     try:
         # Parse XML and XSLT files
@@ -112,14 +115,31 @@ def convert_one(xml_path: pathlib.Path, xsl_path: pathlib.Path, html_path: pathl
         # Apply the XSLT transformation
         newdom = transform(dom)
         html_path.parent.mkdir(parents=True, exist_ok=True)
+        new_html = str(newdom)
+        bak_path = bak_dir / html_path.name
+        # Compare with backup if it exists
+        if bak_path.exists():
+            old_html = bak_path.read_text(encoding="utf-8")
+            if old_html == new_html:
+                return False  # No change
         # Write the HTML output
-        html_path.write_text(str(newdom), encoding="utf-8")
-        # print(f"[INFO] Rebuilt {html_path} from {xml_path}")
+        html_path.write_text(new_html, encoding="utf-8")
         return True
     except Exception as e:
         # Print error but do not stop the build
         print(f"[ERROR] Failed to convert {xml_path} -> {html_path}: {e}", file=sys.stderr)
         return False
+
+
+def backup_html_files(html_files: List[pathlib.Path], bak_dir: pathlib.Path):
+    """
+    Back up all HTML files to the backup directory.
+    """
+    bak_dir.mkdir(parents=True, exist_ok=True)
+    for html_file in html_files:
+        bak_path = bak_dir / html_file.name
+        if html_file.exists():
+            bak_path.write_text(html_file.read_text(encoding="utf-8"), encoding="utf-8")
 
 
 def main():
@@ -138,6 +158,10 @@ def main():
         print(f"XSL file not found: {XSL_PATH}", file=sys.stderr)
         sys.exit(1)
 
+    # Back up all HTML files before conversion
+    html_files = sorted(OUTPUT_DIR.glob("*.html"))
+    backup_html_files(html_files, BAK_DIR)
+
     max_workers = get_max_workers()
     print(f"Max jobs: {max_workers}")
     updated_count = 0
@@ -149,13 +173,13 @@ def main():
     def process(xml_path: pathlib.Path) -> bool:
         """
         Worker function for a single XML file.
-        Returns True if the file was rebuilt, False otherwise.
+        Returns True if the file was rebuilt (HTML content changed), False otherwise.
         """
         basename = xml_path.stem
         html_path = OUTPUT_DIR / f"{basename}.html"
         if needs_rebuild(xml_path, html_path, XSL_PATH):
-            # Only rebuild and count if actually needed
-            if convert_one(xml_path, XSL_PATH, html_path):
+            # Only rebuild and count if actually needed and content changes
+            if convert_one(xml_path, XSL_PATH, html_path, BAK_DIR):
                 return True
         return False
 
