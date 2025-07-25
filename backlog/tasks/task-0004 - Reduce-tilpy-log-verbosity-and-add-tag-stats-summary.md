@@ -60,3 +60,7 @@ This task follows G-task, G-scope, G-commit, and G-verify rules in AGENTS.md. Al
 -   Updated and expanded test suite to verify both default and verbose outputs
 -   All tests pass for both modes
 -   No changes outside til.py
+-   Monthly tag stats now use #tag for single, #tag N for multiple occurrences, with ANSI color for #tag in TTY
+-   Output is plain when piped
+-   Format is concise and visually clear per user feedback
+-   See commit history for details
