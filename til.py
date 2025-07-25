@@ -770,6 +770,9 @@ def print_monthly_tag_stats(filepath, top_n=20):
                 color_tag(tag) if count == 1 else f"{color_tag(tag)} {count}"
                 for tag, count in top_tags
             ])
+            # Append ellipsis if more tags exist than top_n
+            if len(month_tag_counter[month]) > top_n:
+                tag_str += ', ...'
             print(f"{yyyymm} ({total_tags} tags): {tag_str}")
 
 
