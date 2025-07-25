@@ -1,12 +1,3 @@
-
-
-[tasks."build:check"]
-description = "Check build output parity between just and mise"
-run = '''
-#!/usr/bin/env bash
-uv run check_build_parity.py
-'''
-
 [tasks.build]
 description = "Meta build: all atomic build steps"
 depends = ["build:bun_js", "build:bun_css", "build:wasm", "build:forest", "build:xml_to_html", "build:assets"]
@@ -42,5 +33,12 @@ run = '''
 #!/usr/bin/env bash
 echo "RUNNING: just_build"
 just build
+'''
+
+[tasks."build:check"]
+description = "Check build output parity between just and mise"
+run = '''
+#!/usr/bin/env bash
+uv run check_build_parity.py
 '''
 
