@@ -65,10 +65,14 @@ function convert_xml_files() {
             wait "$pid"
         done
 
-        # Now run all cmp checks in parallel
+                # Now run all cmp checks in parallel
         cmp_pids=()
         for basename in "${sample_basenames[@]}"; do
-            (check_html_changes "$basename" && touch "output/.bak/$basename.changed") &
+            (
+                if check_html_changes "$basename"; then
+                    touch "output/.bak/$basename.changed"
+                fi
+            ) &
             cmp_pids+=($!)
         done
 
