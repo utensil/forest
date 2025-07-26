@@ -622,6 +622,15 @@ prep-fuse:
 prep-vera:
     brew install --cask veracrypt
 
+vera VOLUME MNT:
+    veracrypt --text {{VOLUME}} {{MNT}} # --non-interactive --password=THE_PASSWORD
+
+vera-ro VOLUME MNT:
+    veracrypt --text --mount-options=ro {{VOLUME}} {{MNT}}
+
+vera-off MNT:
+    veracrypt --text -d {{MNT}}
+
 prep-rest:
     #!/usr/bin/env zsh
     # which restic || brew install restic
