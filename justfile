@@ -457,6 +457,12 @@ weather CITY:
     curl 'wttr.in/{{CITY}}'
     # ?format=3'
 
+prep-stormy:
+    which stormy || go install github.com/ashish0kumar/stormy@latest
+
+stormy CITY:
+    stormy --city {{CITY}}
+
 matrix:
     # rusty-rain -C green -H white -s -c jap
     # Colors extracted from ANSI color 2 (green) & 7 (white)
