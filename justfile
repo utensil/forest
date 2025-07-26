@@ -873,6 +873,9 @@ prep-ffs:
     open https://freefilesync.org/download.php
     brew install Marcuzzz/homebrew-marcstap/freefilesync
 
+prep-termscp:
+    which termscp || brew install termscp
+
 pathfind:
     npx -y pagefind --site output --serve --root-selector 'article > section'
 
