@@ -631,6 +631,28 @@ vera-ro VOLUME MNT:
 vera-off MNT:
     veracrypt --text -d {{MNT}}
 
+try-smb PATH:
+    #!/usr/bin/env zsh
+    # -d
+    #--network host
+    just clone crazy-max docker-samba
+    cd ~/projects/docker-samba/examples/compose/
+    mkdir public
+    mkdir share
+    touch share/something
+    rip foo
+    ln -s {{PATH}} foo
+    mkdir foo-baz
+    docker run \
+      -it --rm \
+      -p 127.0.0.1:445:445 \
+      -e SAMBA_LOG_LEVEL=3 \
+      -v "./data:/data" \
+      -v "./foo:/samba/foo" \
+      --name samba ghcr.io/crazy-max/samba
+    # test with: smbclient //127.0.0.1/share -U foo
+    # Mac finder not working
+
 prep-rest:
     #!/usr/bin/env zsh
     # which restic || brew install restic
