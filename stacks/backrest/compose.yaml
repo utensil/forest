@@ -1,0 +1,14 @@
+services:
+  backrest:
+    ports:
+      - 19898:9898
+    environment:
+      - BACKREST_PORT=9898
+      - BACKREST_DATA=/data
+      - XDG_CACHE_HOME=/cache
+    volumes:
+      - $PODS_HOME/backrest/config:/.config/backrest
+      - $PODS_HOME/backrest/data:/data
+      - $PODS_HOME/backrest/cache:/cache
+    image: garethgeorge/backrest:latest
+networks: {}
