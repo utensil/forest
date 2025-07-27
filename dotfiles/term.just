@@ -685,19 +685,15 @@ tilt *PARAMS:
 # https://github.com/louislam/dockge
 # https://github.com/abiosoft/colima/issues/265
 #
-prep-dockge:
+dockge COMMAND="up" NETWORK_MODE="bridge":
     #!/usr/bin/env zsh
-    sudo mkdir -p /opt/stacks /opt/dockge
-    sudo chown -R $(whoami) /opt/stacks
-    sudo chown -R $(whoami) /opt/dockge
-    cd /opt/dockge
-    curl https://raw.githubusercontent.com/louislam/dockge/master/compose.yaml --output compose.yaml
-
-dockge COMMAND="up":
-    #!/usr/bin/env zsh
-    cd /opt/dockge
+    set -e
+    [[ -n "$PODS_HOME" ]] || (echo "PODS_HOME is missing" && exit 1)
+    mkdir -p $PODS_HOME/dockge/data
+    cd stacks/dockge
     # DOCKGE_ENABLE_CONSOLE=true
     # if COMMAND is up
+    export NETWORK_MODE={{NETWORK_MODE}}
     if [ "{{COMMAND}}" = "up" ]; then
         docker-compose up -d
         echo Dockge is now running on http://localhost:5001
