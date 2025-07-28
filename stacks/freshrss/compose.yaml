@@ -1,0 +1,17 @@
+services:
+  freshrss:
+    restart: unless-stopped
+    logging:
+      options:
+        max-size: 10m
+    ports:
+      - 7080:80
+    environment:
+      - TZ=Hongkong
+      - CRON_MIN=1,31
+    volumes:
+      - $PODS_HOME/freshrss/data:/var/www/FreshRSS/data
+      - $PODS_HOME/freshrss/extensions:/var/www/FreshRSS/extensions
+    container_name: freshrss
+    image: dockerproxy.net/freshrss/freshrss:latest
+networks: {}
