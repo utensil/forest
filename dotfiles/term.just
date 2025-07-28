@@ -697,7 +697,7 @@ dockge COMMAND="up" NETWORK_MODE="bridge":
     [[ -n "$PODS_HOME" ]] || (echo "PODS_HOME is missing" && exit 1)
     mkdir -p $PODS_HOME/dockge/data
     # keep track of stacks in this repo
-    rip $PODS_HOME/dockge/stacks
+    rip $PODS_HOME/dockge/stacks || true
     ln -s {{justfile_directory()}}/stacks $PODS_HOME/dockge/stacks
     cd stacks/dockge
     # DOCKGE_ENABLE_CONSOLE=true
