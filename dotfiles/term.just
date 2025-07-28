@@ -250,6 +250,9 @@ prep-delta:
 
 prep-resolve:
     which mergiraf || brew install mergiraf
+    # https://mergiraf.org/usage.html
+    git config --global merge.conflictStyle|grep zdiff3
+    jj config list --include-defaults merge-tools | grep mergiraf
 
 resolve:
     jj status && jj resolve --tool mergiraf
