@@ -17,7 +17,7 @@ hn +PARAMS:
     hx `just new {{PARAMS}}`
 
 init: prep
-    #!/usr/bin/env zsh
+    #!/usr/bin/env bash
     bun install
     just thm
 
@@ -139,7 +139,7 @@ shellcheck:
     shellcheck *.sh
 
 proselint FILE="":
-    #!/usr/bin/env zsh
+    #!/usr/bin/env bash
     # Fuzzy find FILE and pass it to proselint
     if [[ -n "{{FILE}}" ]]; then
         uvx proselint "{{FILE}}"
@@ -156,7 +156,7 @@ proselint FILE="":
 # Inspired by https://github.com/Ranchero-Software/NetNewsWire/issues/978#issuecomment-1320911427
 #
 rss-stars *PARAMS:
-    #!/usr/bin/env zsh
+    #!/usr/bin/env bash
     cd ~/Library/Containers/com.ranchero.NetNewsWire-Evergreen/Data/Library/Application\ Support/NetNewsWire/Accounts/2_iCloud
     # get a JSON of all the starred items with only title, url, externalURL, datePublished
     sqlite3 DB.sqlite3 '.mode json' 'select a.*, s.* from articles a join statuses s on a.articleID = s.articleID where s.starred = 1 order by s.dateArrived' |jq -r '.[]|{title, url, externalURL, datePublished, dateArrived, uniqueID}'
@@ -170,7 +170,7 @@ til:
 # relies on GITHUB_ACCESS_TOKEN
 #
 gh2md REPO OUTPUT *PARAMS="--no-prs":
-    #!/usr/bin/env zsh
+    #!/usr/bin/env bash
     GITHUB_ACCESS_TOKEN=$(gh auth token) uvx gh2md --idempotent {{PARAMS}} {{REPO}} {{OUTPUT}}
     # https://github.com/mattduck/gh2md/issues/39
     # docker run --rm -it -e GITHUB_ACCESS_TOKEN=$(gh auth token) dockerproxy.net/library/python:3.11.2 bash -c 'pip install gh2md && gh2md --idempotent {{REPO}} {{OUTPUT}}'
@@ -183,7 +183,7 @@ gh2md REPO OUTPUT *PARAMS="--no-prs":
 # So the work can be continued in the Ubuntu container
 #
 bootstrap-centos:
-    #!/usr/bin/env zsh
+    #!/usr/bin/env bash
     yes|sudo yum groupinstall 'Development Tools'
     yes|sudo yum install procps-ng curl file git
     yes|/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
@@ -202,7 +202,7 @@ bootstrap-centos:
 # 4. Copy and paste to run, because we have no just at this point
 #
 bootstrap-mac:
-    #!/usr/bin/env zsh
+    #!/usr/bin/env bash
     xcode-select --install
     # export HTTP_PROXY=
     # export HTTPS_PROXY=$HTTP_PROXY
@@ -238,7 +238,7 @@ init-mac:
     echo "Otherwise, visit https://wallpaperaccess.com/4k-mountain for wallpapers of mountains, and set the screensaver to Photos with the style of Ken Burns"
 
 prep-proxy:
-    #!/usr/bin/env zsh
+    #!/usr/bin/env bash
     set -e
     echo "Enter the proxy URL (e.g. http://proxy.example.com:8080):"
     read proxy_url
@@ -252,7 +252,7 @@ prep-proxy-ui:
 # see https://macos-defaults.com/ and https://github.com/Swiss-Mac-User/macOS-scripted-setup and https://github.com/mathiasbynens/dotfiles/blob/main/.macos
 #
 prep-def:
-    #!/usr/bin/env zsh
+    #!/usr/bin/env bash
     set -e
     osascript -e 'tell application "System Preferences" to quit'
     # Dock preferences
@@ -355,7 +355,7 @@ prep-user USER:
     echo "{{USER}} ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
 prep-lvim-in-zsh:
-    #!/usr/bin/env zsh
+    #!/usr/bin/env bash
     just prep-lvim
 
 mk-rp:
@@ -402,11 +402,11 @@ nv-local PROJ="forest" PORT="1212":
 # an alternative is use local on CentOS and remote on Ubuntu in docker, no chisel needed, just docekr port mapping
 #
 lv-remote PROJ="forest" HOST="0.0.0.0" PORT="1214":
-    #!/usr/bin/env zsh
+    #!/usr/bin/env bash
     just lvim {{PROJ}} --embed --listen {{HOST}}:{{PORT}}
 
 lv-local PROJ="forest" HOST="localhost" PORT="1214":
-    #!/usr/bin/env zsh
+    #!/usr/bin/env bash
     just lvim {{PROJ}} --server {{HOST}}:{{PORT}} --remote-ui
 
 prep-ts:
@@ -457,7 +457,7 @@ prep-tattoy:
 
 # Run fastfetch every time Enter is pressed
 fetch:
-    #!/usr/bin/env zsh
+    #!/usr/bin/env bash
     while true; do
         clear
         fastfetch
@@ -526,7 +526,7 @@ prep-cha:
     ln -s {{justfile_directory()}}/dotfiles/.config/chawan ~/.config/chawan
 
 prep-rdrview:
-    #!/usr/bin/env zsh
+    #!/usr/bin/env bash
     just clone eafer rdrview
     cd ~/projects/rdrview
     brew install libxml2
@@ -624,7 +624,7 @@ prep-bjn:
 #
 [positional-arguments]
 bjn *PARAMS:
-    #!/usr/bin/env zsh
+    #!/usr/bin/env bash
     xh --offline --print=B fake.url "$@"
 
 ## Backup
@@ -652,7 +652,7 @@ vera-off MNT:
     veracrypt --text -d {{MNT}}
 
 try-smb PATH:
-    #!/usr/bin/env zsh
+    #!/usr/bin/env bash
     # -d
     #--network host
     just clone crazy-max docker-samba
@@ -674,7 +674,7 @@ try-smb PATH:
     # Mac finder not working
 
 prep-rest:
-    #!/usr/bin/env zsh
+    #!/usr/bin/env bash
     # which restic || brew install restic
     which backrest || (brew tap garethgeorge/homebrew-backrest-tap
     brew install backrest)
@@ -682,7 +682,7 @@ prep-rest:
     echo "visit http://127.0.0.1:9898"
 
 mnt-rest REPO:
-    #!/usr/bin/env zsh
+    #!/usr/bin/env bash
     mkdir -p ~/.mnt/{{REPO}}
     open ~/.mnt/{{REPO}}
     ~/.local/share/backrest/restic mount -r ~/.rest/{{REPO}} ~/.mnt/{{REPO}}
@@ -722,28 +722,28 @@ prep-fj:
 FJ_DIR :=  join(home_directory(), ".forgejo")
 
 fj:
-    #!/usr/bin/env zsh
+    #!/usr/bin/env bash
     mkdir -p {{FJ_DIR}}/ssh
     docker run --rm -it -e USER_UID=$(id -u) -e USER_GID=$(id -g) --env-file .env -p 23000:3000 -p 2222:22 -v {{FJ_DIR}}:/data -v /etc/timezone:/etc/timezone:ro -v /etc/localtime:/etc/localtime:ro data.forgejo.org/forgejo/forgejo:10
 
 # then run: git clone http://localhost:63000/username/repo.git:/dir.git
 # but no arm64 version yet
 # josh-proxy:
-#     #!/usr/bin/env zsh
+#     #!/usr/bin/env bash
 #     docker run \
 #         -p 63000:8000 \
 #         -e JOSH_REMOTE=https://github.com \
 #         dockerproxy.net/joshproject/josh-proxy:latestS
 #
 josh-proxy:
-    #!/usr/bin/env zsh
+    #!/usr/bin/env bash
     mkdir -p ~/.josh
     just clone josh-project josh
     cd ~/projects/josh/josh-proxy
     cargo run -- --port 63000 --remote https://github.com --local ~/.josh
 
 josh WHERE USER REPO DIR:
-    #!/usr/bin/env zsh
+    #!/usr/bin/env bash
     cd ~/projects/
     git clone http://localhost:63000/{{USER}}/{{REPO}}.git:/{{DIR}}.git {{WHERE}}
     cd {{WHERE}}
@@ -760,7 +760,7 @@ nbview FILE:
 # https://github.com/livebook-dev/livebook#installation
 #
 prep-lb:
-    #!/usr/bin/env zsh
+    #!/usr/bin/env bash
     mix do local.rebar --force, local.hex --force
     yes|mix escript.install hex livebook
 
@@ -772,7 +772,7 @@ lb:
 # https://www.reddit.com/r/youtubedl/comments/155kkcc/youtube_music_how/
 #
 ytm PLAYLIST:
-    #!/usr/bin/env zsh
+    #!/usr/bin/env bash
     cd ~/Music
     uvx --with 'mutagen' yt-dlp -f bestaudio --cookies-from-browser chrome -x --embed-metadata --embed-thumbnail '{{PLAYLIST}}' --output '%(uploader)s/%(title)s.%(ext)s'
 
@@ -796,7 +796,7 @@ prep-music:
 # 8 is visualization, space to switch visualization type
 #
 music:
-    #!/usr/bin/env zsh
+    #!/usr/bin/env bash
     cd ~/Music
     # cmus
     mpc update
@@ -840,11 +840,11 @@ prep-ym:
 # It's so smooth
 #
 prep-loop:
-    #!/usr/bin/env zsh
+    #!/usr/bin/env bash
     [ -d /Applications/Loop.app ] || brew install loop
 
 prep-space:
-    #!/usr/bin/env zsh
+    #!/usr/bin/env bash
     [ -d /Applications/FlashSpace.app ] || brew install flashspace
 
 ## File
@@ -903,12 +903,12 @@ prep-br:
 # use the first letter to copy, move, rename, new folder, trash, delete etc.
 #
 prep-file:
-    #!/usr/bin/env zsh
+    #!/usr/bin/env bash
     [ -d /Applications/Marta.app ] || brew install --cask marta
     which marta || (sudo mkdir -p /usr/local/bin/ && sudo ln -s /applications/marta.app/contents/resources/launcher /usr/local/bin/marta) || true
 
 file LEFT RIGHT:
-    #!/usr/bin/env zsh
+    #!/usr/bin/env bash
     marta --new-window {{LEFT}} {{RIGHT}}
 
 icloud:
@@ -931,7 +931,7 @@ pathfind:
     npx -y pagefind --site output --serve --root-selector 'article > section'
 
 prep-ag:
-    #!/usr/bin/env zsh
+    #!/usr/bin/env bash
     which ast-grep || brew install ast-grep
     just prep-hx
     just sync-hx
@@ -969,7 +969,7 @@ prep-im:
     which iamb || brew install iamb
 
 prep-hkt-archived:
-    #!/usr/bin/env zsh
+    #!/usr/bin/env bash
     # Usage:
     # hn top # for HackerNews Top stories
     # hn view 2 -c # for viewing comments on the 2nd story
@@ -992,7 +992,7 @@ prep-hkt-archived:
     # neonmodem connect --type lemmy --url https://lemmy.ml || true
 
 prep-hk:
-    #!/usr/bin/env zsh
+    #!/usr/bin/env bash
     which hackernews_tui || cargo install --git https://github.com/utensil/hackernews-TUI --branch proxy hackernews_tui --locked
     cp -f dotfiles/.config/hn-tui.toml ~/.config/
 

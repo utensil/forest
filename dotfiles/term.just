@@ -54,7 +54,7 @@ prep-term-seldom:
     which fex || (curl -sSL https://raw.githubusercontent.com/18alantom/fex/master/install.sh | bash)
 
 prep-mon:
-    #!/usr/bin/env zsh
+    #!/usr/bin/env bash
     # which glances || brew install glances
     which btop || brew install btop
     which btm || brew install bottom
@@ -101,7 +101,7 @@ prep-his:
 # based on https://gist.github.com/davidteren/898f2dcccd42d9f8680ec69a3a5d350e
 #
 find-font FONT="maple":
-    #!/usr/bin/env zsh
+    #!/usr/bin/env bash
     brew search '/font-.*-(nerd-font|nf)/' | awk '{ print $1 }' | grep -i {{FONT}}
 
 [macos]
@@ -164,7 +164,7 @@ prof-zsh:
 
 # Start a zsh that inherits .env
 zsh PROJ="forest":
-    #!/usr/bin/env zsh
+    #!/usr/bin/env bash
     cd ~/projects/{{PROJ}}
     zsh
 
@@ -200,7 +200,7 @@ chsh:
 ## Git
 
 prep-git:
-    #!/usr/bin/env zsh
+    #!/usr/bin/env bash
     which git || brew install git
     which gh || brew install gh
     # list the current settings
@@ -258,13 +258,13 @@ resolve:
     jj status && jj resolve --tool mergiraf
 
 git PROJ="forest" *PARAMS="":
-    #!/usr/bin/env zsh
+    #!/usr/bin/env bash
     cd ~/projects/{{PROJ}} && lazygit {{PARAMS}}
 
 # [NOTE] If modified, test with prep-gtsh
 #
 clone USER REPO:
-    #!/usr/bin/env zsh
+    #!/usr/bin/env bash
     mkdir -p ~/projects
     FULL_REPO={{USER}}/{{REPO}}
     DIR=~/projects/{{REPO}}
@@ -275,7 +275,7 @@ clone USER REPO:
     fi
 
 clone-conf CONF USER REPO:
-    #!/usr/bin/env zsh
+    #!/usr/bin/env bash
     mkdir -p ~/projects
     FULL_REPO={{USER}}/{{REPO}}
     DIR=~/.config/{{CONF}}
@@ -294,7 +294,7 @@ link-conf CONF:
 # -w to open in browser
 #
 actions PROJ="forest" *PARAMS="":
-    #!/usr/bin/env zsh
+    #!/usr/bin/env bash
     cd ~/projects/{{PROJ}} && gh workflow view {{PARAMS}}
 
 prep-date:
@@ -302,7 +302,7 @@ prep-date:
     which gdate || brew install coreutils
 
 date: prep-date
-    #!/usr/bin/env zsh
+    #!/usr/bin/env bash
     BEGIN_DATE=$(gdate -d "3 days ago" +%Y-%m-%d)
     END_DATE=$(gdate -d "today" +%Y-%m-%d)
     echo "Rewriting history to distribute commits between ${BEGIN_DATE} and ${END_DATE}"
@@ -391,12 +391,12 @@ prep-jjui:
     cp -f dotfiles/.config/jjui/config.toml ~/.config/jjui/config.toml
 
 init-jj PROJ="forest" *PARAMS="":
-    #!/usr/bin/env zsh
+    #!/usr/bin/env bash
     cd ~/projects/{{PROJ}}
     jj status || jj git init --colocate
 
 push PROJ="forest" BRANCH="main":
-    #!/usr/bin/env zsh
+    #!/usr/bin/env bash
     cd ~/projects/{{PROJ}}
     jj bs {{BRANCH}} -r @-
     jj psb {{BRANCH}}
@@ -408,8 +408,8 @@ push PROJ="forest" BRANCH="main":
 # https://blog.vbang.dk/2025/06/29/tools-i-love-mise/
 #
 prep-mise:
-    #!/usr/bin/env zsh
     which mise || brew install mise
+    #!/usr/bin/env bash
     echo 'Ensure run the following in ~/.bashrc or ~/.zshrc:'
     echo 'eval "$(mise activate $(basename "$0"))"'
     cat << 'EOF'
@@ -476,12 +476,12 @@ prep-ex:
 # Ctrl+N then direction keys to resize the corrent pane towards the direction
 # Ctrl+O W to manage sessions
 # try-zj:
-#     #!/usr/bin/env zsh
+#     #!/usr/bin/env bash
 #     bash <(curl -L https://zellij.dev/launch)
 
 # Install Zellij, set its visual to minimal, keybindings to tmux
 prep-zj:
-    #!/usr/bin/env zsh
+    #!/usr/bin/env bash
     which zellij || brew install zellij
     # just clone-conf zellij t3hmrman tmux-zellij-shim-config
     rip ~/.config/zellij || true
@@ -509,26 +509,26 @@ prep-zj:
 # [ - into scroll/copy mode
 #
 zj *PARAMS:
-    #!/usr/bin/env zsh
+    #!/usr/bin/env bash
     zellij {{PARAMS}}
 
 # Will attatch to a session if running (will attach it as a new client, all clients can see and operate on the same session)
 # or killed (will resurrect it, each pane will remember the last running command and wait for confirm to run)
 #
 at NAME="mon":
-    #!/usr/bin/env zsh
+    #!/usr/bin/env bash
     LAYOUT=$(echo {{NAME}}|sed 's/-.*//g')
     (zellij ls|grep {{NAME}}) && just zj a {{NAME}} || just zj -s {{NAME}} -n $LAYOUT || just zj -s {{NAME}}
 
 # destructive, for debugging layout only, comment out after debug
 #
 new-at NAME="mon":
-    #!/usr/bin/env zsh
+    #!/usr/bin/env bash
     LAYOUT=$(echo {{NAME}}|sed 's/-.*//g')
     just zj d {{NAME}} --force ; just zj -s {{NAME}} -n $LAYOUT
 
 kill NAME:
-    #!/usr/bin/env zsh
+    #!/usr/bin/env bash
     ps aux|grep {{NAME}}|grep -v grep|grep -v 'kill {{NAME}}'
     read -q "?Confirm killing these processes (y/n)? " && (ps aux|grep {{NAME}}|grep -v grep|grep -v 'kill {{NAME}}'|awk '{print $2}'|xargs kill -9) || echo "\nKill aborted"
 
@@ -544,7 +544,7 @@ prep-tmux:
 # adapted from https://maxscheijen.github.io/posts/managing-tmux-sessions-with-fzf/
 #
 ftm:
-    #!/usr/bin/env zsh
+    #!/usr/bin/env bash
     session=$(tmux ls | awk -F: '
         /attached/ {print $1 "\033[32m *\033[0m"}
         !/attached/ {print $1}
@@ -577,11 +577,11 @@ ftm:
 # & - kill the current window
 #
 tm-at NAME:
-    #!/usr/bin/env zsh
+    #!/usr/bin/env bash
     tmux attach -t {{NAME}} || tmux new-session -s {{NAME}}
 
 tm-mon:
-    #!/usr/bin/env zsh
+    #!/usr/bin/env bash
     tmux attach -t mon || tmux new-session -s mon -d 'btop || zsh' \; \
       split-window -h 'macmon || zsh' \; \
       split-window -v -t 1 'sudo mactop || zsh' \; \
@@ -589,7 +589,7 @@ tm-mon:
       attach
 
 tm-dev:
-    #!/usr/bin/env zsh
+    #!/usr/bin/env bash
     tmux attach -t dev || tmux new-session -s dev -d 'just dev || zsh' \; \
       split-window -h -p 50 'just cpa || zsh' \; \
       select-pane -t 0 \; \
@@ -692,7 +692,7 @@ tilt *PARAMS:
 # https://github.com/abiosoft/colima/issues/265
 #
 dockge COMMAND="up" NETWORK_MODE="bridge":
-    #!/usr/bin/env zsh
+    #!/usr/bin/env bash
     set -e
     [[ -n "$PODS_HOME" ]] || (echo "PODS_HOME is missing" && exit 1)
     mkdir -p $PODS_HOME/dockge/data
@@ -754,7 +754,7 @@ prep-act:
     just prep-act-in-zsh
 
 prep-act-in-zsh:
-    #!/usr/bin/env zsh
+    #!/usr/bin/env bash
     source ~/.zshrc
     just prep-term
     just prep-rust
@@ -770,7 +770,7 @@ reset-ssh-keys:
 # still verifying
 #
 prep-ssh-keys:
-    #!/usr/bin/env zsh
+    #!/usr/bin/env bash
     key_path=~/.ssh/id_ed25519
     if [[ ! -f "$key_path" && ! -f "$key_path.pub" ]]; then
         echo "Generating new SSH key pair..."
@@ -804,7 +804,7 @@ prep-ssh-keys:
 # initial draft, not verified
 #
 prep-ssh-server:
-    #!/usr/bin/env zsh
+    #!/usr/bin/env bash
 
     # Check if running as root
     if [[ $EUID -ne 0 ]]; then

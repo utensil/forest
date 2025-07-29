@@ -5,7 +5,7 @@
 #     which cortex || echo "Visit https://cortex.so/docs/installation to download and install cortex"
 
 prep-aichat:
-    #!/usr/bin/env zsh
+    #!/usr/bin/env bash
     which aichat || brew install aichat
     mkdir -p "$HOME/Library/Application Support/aichat/"
     cat > "$HOME/Library/Application Support/aichat/config.yaml" << EOF
@@ -34,7 +34,7 @@ prep-aicode:
 
 # Render aichat config
 sync-aichat:
-    #!/usr/bin/env zsh
+    #!/usr/bin/env bash
     ./render_yaml.py dotfiles/.config/aichat/config.yaml.in ~/.config/aichat/config.yaml
     cat ~/.config/aichat/config.yaml|sd 'api_key:(.*)' 'api_key: <hidden>'
 
@@ -48,7 +48,7 @@ sync-aider:
     cp -f aider /usr/local/bin || sudo cp -f aider /usr/local/bin
 
 todo:
-    #!/usr/bin/env zsh
+    #!/usr/bin/env bash
     cat trees/uts-0018.tree |aichat --prompt "randomly suggest 3 small TODOs that I was interested to read or I intend to try"
 
 # just mcp search
@@ -62,14 +62,14 @@ mcp *PARAMS="":
     mcpm-aider {{PARAMS}}
 
 aider PROJ="forest" *PARAMS="": # sync-aider
-    #!/usr/bin/env zsh
+    #!/usr/bin/env bash
     cd ~/projects/{{PROJ}} && aider {{PARAMS}}
 
 aiderweb URL:
     uvx --python 3.11 --from 'aider-chat[help,playwright,browser]' python -m aider.scrape {{URL}}
 
 prep-mp4:
-    #!/usr/bin/env zsh
+    #!/usr/bin/env bash
     just clone Olow304 memvid
     cd ~/projects/memvid
     git reset --hard 5524b0a8b268c02df01cca87110cc1b978460c97
@@ -84,7 +84,7 @@ prep-mp4:
 # just mp4 forest --load-existing output/dir_trees_20250606_200619.mkv
 #
 mp4 PROJ="forest" *PARAMS="":
-    #!/usr/bin/env zsh
+    #!/usr/bin/env bash
     cd ~/projects/memvid
     source .venv/bin/activate
     cd ~/projects/{{PROJ}}
@@ -92,7 +92,7 @@ mp4 PROJ="forest" *PARAMS="":
     python ~/projects/memvid/examples/file_chat.py --provider openai --model $OPENAI_API_MODEL {{PARAMS}}
 
 # prep-ad:
-#    #!/usr/bin/env zsh
+#    #!/usr/bin/env bash
 #    rip ../aider-desk
 #    if [ ! -d ../aider-desk ]; then
 #        # (cd .. && git clone https://github.com/hotovo/aider-desk)
@@ -121,11 +121,11 @@ llm-proxy *PARAMS:
     aichat --serve 0.0.0.0:4000
 
 llp *PARAMS:
-    #!/usr/bin/env zsh
+    #!/usr/bin/env bash
     uvx --python 3.11 --from 'litellm[proxy]' --with opentelemetry-api --with opentelemetry-sdk --with opentelemetry-exporter-otlp --with langchain --with langchain-openai --with lunary --with openinference-instrumentation-litellm litellm {{PARAMS}} --api_base {{env('OPENAI_API_BASE')}} -m 'openai/{{env('OPENAI_API_MODEL')}}' -c litellm.yaml
 
 cpm:
-    #!/usr/bin/env zsh
+    #!/usr/bin/env bash
     set -e
     # if env var REFRESH_TOKEN is not set, prompt for it
     if [ -z "$REFRESH_TOKEN" ]; then
@@ -141,7 +141,7 @@ cpm:
 
 # -c : Generate a command to launch Claude Code with Copilot API config
 cpa *PARAMS:
-    #!/usr/bin/env zsh
+    #!/usr/bin/env bash
     npx -y copilot-api@latest start --port 15432 {{PARAMS}} # --verbose
 
 cpa-usage:
@@ -200,7 +200,7 @@ prep-gom:
     which gollama || go install github.com/sammcj/gollama@HEAD
 
 gom-link: prep-gom
-    #!/usr/bin/env zsh
+    #!/usr/bin/env bash
     gollama -link-lmstudio --dry-run
     read -q "?Confirm linking LMStudio models to ollama (y/n)? " && gollama -link-lmstudio
     gollama -L --dry-run
@@ -238,11 +238,11 @@ prep-tr:
 # cat /var/lib/gpustack/token
 #
 gs *PARAMS:
-    #!/usr/bin/env zsh
+    #!/usr/bin/env bash
     uvx --python 3.12 --from 'gpustack[all]' gpustack {{PARAMS}}
 
 prep-pl:
-    #!/usr/bin/env zsh
+    #!/usr/bin/env bash
     which plandex || (curl -sL https://plandex.ai/install.sh | bash)
     just clone plandex-ai plandex
     cd ~/projects/plandex/app
@@ -250,18 +250,18 @@ prep-pl:
     ./start_local.sh
 
 pl PROJ="forest":
-    #!/usr/bin/env zsh
+    #!/usr/bin/env bash
     cd ~/projects/{{PROJ}}
     plandex --semi
 
 prep-sg:
-    #!/usr/bin/env zsh
+    #!/usr/bin/env bash
     # https://docs.sglang.ai/start/install.html
     uv pip install sgl-kernel --force-reinstall --no-deps
     uv pip install "sglang[all]>=0.4.3.post2" --find-links https://flashinfer.ai/whl/cu124/torch2.5/flashinfer-python
 
 prep-mlx:
-    #!/usr/bin/env zsh
+    #!/usr/bin/env bash
     # https://kconner.com/2025/02/17/running-local-llms-with-mlx.html
     # https://simonwillison.net/2025/Feb/15/llm-mlx/
     uvx llm install llm-mlx
@@ -274,7 +274,7 @@ prep-mlx:
 # just mlx import-models
 #
 mlx *PARAMS:
-    #!/usr/bin/env zsh
+    #!/usr/bin/env bash
     uvx llm mlx {{PARAMS}}
 
 # Note: just llm doesn't work for passing quoted strings
@@ -293,7 +293,7 @@ prep-llm:
     uvx llm install llm-mlx
 
 sync-llm:
-    #!/usr/bin/env zsh
+    #!/usr/bin/env bash
     dir_llm=`dirname "$(uvx llm logs path)"`
     ./render_yaml.py dotfiles/.config/llm/extra-openai-models.yaml.in $dir_llm/extra-openai-models.yaml
     cat $dir_llm/extra-openai-models.yaml
@@ -307,7 +307,7 @@ sync-llm:
 # I want it for https://github.com/lmstudio-ai/mlx-engine
 #
 prep-lms:
-    #!/usr/bin/env zsh
+    #!/usr/bin/env bash
     npx lmstudio install-cli
 
 # lms get mlx-community/DeepSeek-R1-Distill-Qwen-32B-4bit
@@ -316,11 +316,11 @@ prep-lms:
 # lms server start
 #
 lms *PARAMS:
-    #!/usr/bin/env zsh
+    #!/usr/bin/env bash
     lms {{PARAMS}}
 
 omni *PARAMS:
-    #!/usr/bin/env zsh
+    #!/usr/bin/env bash
     uvx mlx-omni-server {{PARAMS}}
 
 perf *PARAMS:
@@ -332,11 +332,11 @@ VLM_MODEL := env("VLM_MODEL", "mlx-community/Qwen2.5-VL-3B-Instruct-4bit")
 VLM_PROMPT := env("VLM_PROMPT", "describe the image as detailed as possible")
 
 vlm IMAGE *PARAMS=" --max-tokens 100 ":
-    #!/usr/bin/env zsh
+    #!/usr/bin/env bash
     uv run --python 3.12 --with 'mlx-vlm' --with torch python -m mlx_vlm.generate --model '{{VLM_MODEL}}' --prompt '{{VLM_PROMPT}}' --image {{IMAGE}} {{PARAMS}}
 
 lobe *PARAMS:
-    #!/usr/bin/env zsh
+    #!/usr/bin/env bash
     docker run -it --rm -p 3210:3210 \
       -e OPENAI_API_KEY={{env('OPENAI_API_KEY')}} \
       -e OPENAI_PROXY_URL={{env('OPENAI_API_BASE')}} \
@@ -350,7 +350,7 @@ prep-scr:
     curl -fsSL get.screenpi.pe/cli | sh
 
 # prep-rd:
-#     #!/usr/bin/env zsh
+#     #!/usr/bin/env bash
 #     which ra-aid || (brew tap ai-christianson/homebrew-ra-aid && brew install ra-aid)
 
 # -m Hi
@@ -358,7 +358,7 @@ prep-scr:
 # --use-aider
 #
 rd PROJ="forest" *PARAMS="":
-    #!/usr/bin/env zsh
+    #!/usr/bin/env bash
     cd ~/projects/{{PROJ}}
     OPENAI_API_MODEL=${OPENAI_API_MODEL:-"claude-3.5-sonnet"}
     uvx --python 3.12 ra-aid --model $OPENAI_API_MODEL {{PARAMS}}
@@ -369,7 +369,7 @@ dt:
     uv run --python 3.11 --with 'detikzify @ git+https://github.com/potamides/DeTikZify' -m detikzify.webui --light
 
 kj:
-    #!/usr/bin/env zsh
+    #!/usr/bin/env bash
     CMAKE_ARGS="-DGGML_METAL=on" USE_EMBEDDED_DB="true" uvx --from 'khoj[local]' khoj --help
 
 # --output .
@@ -395,13 +395,13 @@ prep-probe:
 # --web
 #
 probe *PARAMS="":
-    #!/usr/bin/env zsh
+    #!/usr/bin/env bash
     export OPENAI_API_URL=$OPENAI_API_BASE
     export MODEL_NAME=$OPENAI_API_MODEL
     probe-chat {{PARAMS}}
 
 prep-dw:
-    #!/usr/bin/env zsh
+    #!/usr/bin/env bash
     just clone AsyncFuncAI deepwiki-open
     cd ~/projects/deepwiki-open
     echo "OPENAI_API_KEY=$OPENAI_API_KEY" > .env
@@ -410,20 +410,20 @@ prep-dw:
     # https://github.com/AsyncFuncAI/deepwiki-open/issues/20#issuecomment-2857485755
 
 dw: prep-dw
-    #!/usr/bin/env zsh
+    #!/usr/bin/env bash
     cd ~/projects/deepwiki-open
     docker-compose up
 
 # Not working yet
 #
 prep-odw:
-    #!/usr/bin/env zsh
+    #!/usr/bin/env bash
     just clone AIDotNet OpenDeepWiki
     cd ~/projects/OpenDeepWiki
     make build
 
 prep-goose:
-    #!/usr/bin/env zsh
+    #!/usr/bin/env bash
     mkdir -p ~/.config/goose
     cp -f dotfiles/.config/goose/config.yaml ~/.config/goose/config.yaml
     which goose || (curl -fsSL https://github.com/block/goose/releases/download/stable/download_cli.sh | bash)
@@ -433,7 +433,7 @@ prep-goose:
 # MEMORY_BANK_ROOT="$HOME/.membank" goose session
 #
 goose *PARAMS="session":
-    #!/usr/bin/env zsh
+    #!/usr/bin/env bash
     goose {{PARAMS}}
 
 kit-mcp:
@@ -450,7 +450,7 @@ zero:
     docker run --rm -p 50001:80 frdel/agent-zero-run
 
 prep-cc:
-    #!/usr/bin/env zsh
+    #!/usr/bin/env bash
     which claude || npm install -g @anthropic-ai/claude-code
     mkdir -p ~/.claude
     # https://docs.anthropic.com/en/docs/claude-code/settings
@@ -483,7 +483,7 @@ prep-cc:
     EOF
 
 prep-ccr:
-    #!/usr/bin/env zsh
+    #!/usr/bin/env bash
     which ccr || npm install -g @musistudio/claude-code-router
     mkdir -p ~/.claude-code-router
     cat > ~/.claude-code-router/config.json << EOF
@@ -509,7 +509,7 @@ cc-mcp-reset:
     claude mcp list|grep -v -F 'No MCP servers'|awk -F":" '{print $1}'|xargs -n 1 claude mcp remove
 
 prep-cc-mcp PROJ="forest":
-    #!/usr/bin/env zsh
+    #!/usr/bin/env bash
     cd ~/projects/{{PROJ}}
     just cc-mcp-reset
     # Add MCP servers from goose config
@@ -529,7 +529,7 @@ prep-cu:
     brew install dagger/tap/container-use
 
 prep-cc-cu:
-    #!/usr/bin/env zsh
+    #!/usr/bin/env bash
     claude mcp add --scope user container-use -- `which cu` stdio
     # curl https://raw.githubusercontent.com/dagger/container-use/main/rules/agent.md >> CLAUDE.md
     # claude --allowedTools mcp__container-use__environment_checkpoint,mcp__container-use__environment_file_delete,mcp__container-use__environment_file_list,mcp__container-use__environment_file_read,mcp__container-use__environment_file_write,mcp__container-use__environment_open,mcp__container-use__environment_run_cmd,mcp__container-use__environment_update
@@ -537,7 +537,7 @@ prep-cc-cu:
 # just cc forest --debug
 #
 ccr PROJ="forest" *PARAMS="":
-    #!/usr/bin/env zsh
+    #!/usr/bin/env bash
     cd ~/projects/{{PROJ}}
     ccr code {{PARAMS}}
 
@@ -545,7 +545,7 @@ ccr PROJ="forest" *PARAMS="":
 # export ANTHROPIC_BASE_URL=http://localhost:15432 ANTHROPIC_AUTH_TOKEN=dummy ANTHROPIC_MODEL=gpt-4.1 ANTHROPIC_SMALL_FAST_MODEL=gpt-4.1 && claude
 #
 cc PROJ="forest" *PARAMS="":
-    #!/usr/bin/env zsh
+    #!/usr/bin/env bash
     cd ~/projects/{{PROJ}}
     export ANTHROPIC_BASE_URL=$OPENAI_API_BASE ANTHROPIC_AUTH_TOKEN=$OPENAI_API_KEY ANTHROPIC_MODEL=$OPENAI_API_MODEL ANTHROPIC_SMALL_FAST_MODEL=$OPENAI_API_MODEL_FAST && claude
 
@@ -553,7 +553,7 @@ prep-codex:
     npm install -g @openai/codex
 
 codex *PARAMS:
-    #!/usr/bin/env zsh
+    #!/usr/bin/env bash
     export LOCAL_API_KEY=$OPENAI_API_KEY
     export LOCAL_BASE_URL=$OPENAI_API_BASE
     codex -a auto-edit --provider LOCAL --model $OPENAI_API_MODEL {{PARAMS}}
@@ -561,13 +561,13 @@ codex *PARAMS:
 # build failed: FATAL ERROR: Reached heap limit Allocation failed - JavaScript heap out of memory
 #
 prep-easyds:
-    #!/usr/bin/env zsh
+    #!/usr/bin/env bash
     just clone ConardLi easy-dataset
     cd ~/projects/easy-dataset
     docker build -t easy-dataset .
 
 easyds:
-    #!/usr/bin/env zsh
+    #!/usr/bin/env bash
     mkdir -p ~/.easy-dataset
     docker run --rm -p 1717:1717 -v ~/.easy-dataset:/app/local-db --name easy-dataset easy-dataset
 
@@ -587,7 +587,7 @@ prep-amp:
     yes n|amp login
 
 prep-oc:
-    #!/usr/bin/env zsh
+    #!/usr/bin/env bash
     which opencode || npm install -g opencode-ai
     mkdir -p ~/.config/opencode
     # rm ~/.config/opencode/config.json
@@ -613,7 +613,7 @@ prep-oc:
     just check-oc
 
 check-oc:
-    #!/usr/bin/env zsh
+    #!/usr/bin/env bash
     set -e
     cat ~/.config/opencode/opencode.json
     opencode auth list
@@ -634,7 +634,7 @@ prep-q:
     # q login
 
 init-q PROJ="forest":
-    #!/usr/bin/env zsh
+    #!/usr/bin/env bash
     cd ~/projects/{{PROJ}}
     q chat --no-interactive "/context add AGENTS.md"
     # q chat --no-interactive '/hooks add --trigger per_prompt --command "cat AGENTS.md" AGENTS.md'

@@ -151,7 +151,7 @@ check-dirs SRC DST:
 # https://www.kelen.cc/dry/docker-hub-mirror
 #
 gal:
-    #!/usr/bin/env zsh
+    #!/usr/bin/env bash
     mkdir -p ~/home-gallery/data/config
     cd ~/home-gallery/
     alias gallery="docker run -it --rm \
@@ -163,7 +163,7 @@ gal:
     gallery run server
 
 prism:
-    #!/usr/bin/env zsh
+    #!/usr/bin/env bash
     mkdir -p $HOME/photoprism/storage
     cd $HOME/photoprism
     # if the file does not exist
@@ -174,7 +174,7 @@ prism:
     docker compose up
 
 pica:
-    #!/usr/bin/env zsh
+    #!/usr/bin/env bash
     mkdir -p $HOME/picapport
     cd $HOME/picapport
     docker run -it --rm --name picapport -p 8888:8888 -v $HOME/Pictures/photos:/opt/picapport/photos -v $HOME/picapport:/opt/picapport/data -e "PICAPPORT_PORT=8888" -e "PICAPPORT_LANG=en" fionnb/picapport:latest

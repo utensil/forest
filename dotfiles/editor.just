@@ -32,14 +32,14 @@ reset-hxx:
 # -v enables verbose logging
 #
 hx PROJ="forest" *PARAMS="":
-    #!/usr/bin/env zsh
+    #!/usr/bin/env bash
     cd ~/projects/{{PROJ}}
     hx {{PARAMS}}
 
 # doc: https://docs.helix-editor.com/master/
 #
 prep-hxx:
-    #!/usr/bin/env zsh
+    #!/usr/bin/env bash
     just prep-hx-conf
     just clone utensil helix
     # sometimes we may need to delete and retrack
@@ -55,7 +55,7 @@ prep-hxx:
     ~/.cargo/bin/hx -g build
 
 hxx PROJ="forest" *PARAMS="":
-    #!/usr/bin/env zsh
+    #!/usr/bin/env bash
     export HELIX_RUNTIME=~/projects/helix/runtime
     cd ~/projects/{{PROJ}}
     ~/.cargo/bin/hx
@@ -63,7 +63,7 @@ hxx PROJ="forest" *PARAMS="":
 # Base16 Themes for Helix
 #
 prep-base16-helix:
-    #!/usr/bin/env zsh
+    #!/usr/bin/env bash
     just clone tinted-theming base16-helix
     mkdir -p ~/.config/helix/themes
     cp -f ../base16-helix/themes/base16-railscasts.toml ~/.config/helix/themes/base16-railscasts.toml
@@ -112,7 +112,7 @@ sync-lvim: stylua sync-nvim
     cp -f config.lua ~/.config/lvim/config.lua
 
 lvim PROJ="forest" *PARAMS="": sync-lvim
-    #!/usr/bin/env zsh
+    #!/usr/bin/env bash
     cd ~/projects/{{PROJ}} && lvim {{PARAMS}}
 
 ## LazyVim
@@ -147,7 +147,7 @@ chad PROJ="forest": sync-chad
 ## AstroNvim
 
 prep-astro:
-    #!/usr/bin/env zsh
+    #!/usr/bin/env bash
     just clone-conf astro AstroNvim template
 
 sync-astro: stylua sync-plugins
@@ -157,13 +157,13 @@ sync-astro: stylua sync-plugins
     cp -f dotfiles/.config/astro/lua/plugins/spec.lua ~/.config/astro/lua/plugins/spec.lua
 
 astro PROJ="forest": sync-astro
-    #!/usr/bin/env zsh
+    #!/usr/bin/env bash
     cd ~/projects/{{PROJ}} && NVIM_APPNAME=astro nvim .
 
 # https://docs.astronvim.com/reference/alt_install/
 
 try-astro:
-    #!/usr/bin/env zsh
+    #!/usr/bin/env bash
     if docker ps -a | grep -q astro; then
         if ! docker ps | grep -q astro; then
             docker start astro
@@ -181,7 +181,7 @@ try-astro:
 ## Zed editor
 
 prep-zed:
-    #!/usr/bin/env zsh
+    #!/usr/bin/env bash
     [[ -f /Applications/Zed.app/Contents/MacOS/zed ]] || brew install --cask zed@preview
 
 ## LSP: programming languages
@@ -211,7 +211,7 @@ prep-lsp:
 # https://github.com/zigtools/zls/issues/2402
 #
 prep-zls:
-    #!/usr/bin/env zsh
+    #!/usr/bin/env bash
     set -e
     which zig || (echo "zig not found in this environment, failed to install zls" && exit 1)
     ZIG_VERSION=`zig version`
@@ -246,7 +246,7 @@ prep-codebook:
 # https://github.com/DJAndries/llmvm/tree/master/frontends/codeassist
 #
 prep-lsp-lv:
-    #!/usr/bin/env zsh
+    #!/usr/bin/env bash
     set -e
     which llmvm-codeassist || (cargo install llmvm-core llmvm-codeassist llmvm-outsource)
     echo "openai_endpoint=\"$OPENAI_API_BASE\"\nopenai_api_key=\"$OPENAI_API_KEY\"" > ~/Library/Application\ Support/com.djandries.llmvm/outsource.toml
