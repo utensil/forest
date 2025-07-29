@@ -431,9 +431,23 @@ scp *PARAMS:
 ## Fancy
 
 prep-fancy:
-    which fastfetch || brew install fastfetch
+    just prep-fetch
     which tty-clock || brew install tty-clock
     which rusty-rain || cargo install rusty-rain
+
+[linux]
+prep-sudo:
+    # inside docker, it might not have sudo, but it's already root
+    # to make the rest of script consistent, we need to prep-sudo
+    which sudo || apt install sudo
+
+[linux]
+prep-ppa: prep-sudo
+    which add-apt-repository || (sudo apt update && sudo apt install -y software-properties-common)
+
+[linux]
+prep-fetch:
+    which fastfetch || brew install fastfetch || ( grep -q "Ubuntu" /etc/os-release && just prep-ppa && sudo add-apt-repository -y ppa:zhangsongcui3371/fastfetch && sudo apt update && sudo apt install -y fastfetch )
 
 prep-tattoy:
     which tattoy || cargo install --locked --git https://github.com/tattoy-org/tattoy tattoy
