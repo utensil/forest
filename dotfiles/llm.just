@@ -526,7 +526,7 @@ prep-cc-mcp PROJ="forest":
     # claude mcp add serena -- uvx --from git+https://github.com/oraios/serena serena-mcp-server --context ide-assistant # --project $(pwd)
 
 prep-cu:
-    brew install dagger/tap/container-use
+    which container-use || brew install dagger/tap/container-use || ( curl -fsSL https://raw.githubusercontent.com/dagger/container-use/main/install.sh | bash )
 
 prep-cc-cu:
     #!/usr/bin/env bash
@@ -606,6 +606,13 @@ prep-oc:
             "models": {
                 "$OPENAI_API_MODEL": {}
             }
+        }
+      },
+      "mcp": {
+          "container-use": {
+          "type": "local",
+          "command": ["container-use", "stdio"],
+          "enabled": true
         }
       }
     }
