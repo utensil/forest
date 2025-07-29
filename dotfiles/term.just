@@ -430,7 +430,7 @@ prep-rust:
     which cargo-binstall || cargo install cargo-binstall
 
 prep-node:
-    which node || brew install node
+    which node || brew install node || (just prep-mise && mise use -g node@latest)
 
 # https://github.com/astral-sh/uv
 
@@ -537,7 +537,7 @@ kill NAME:
 #     zellij run -f -n {{SESSION}} -- {{CMD}}
 
 prep-tmux:
-    which tmux || brew install tmux
+    which tmux || brew install tmux || ( grep -q "Ubuntu" /etc/os-release && just prep-sudo && sudo apt install -y tmux )
     ln -sf {{justfile_directory()}}/dotfiles/.config/tmux ~/.config/tmux
     ls -lhta ~/.config/tmux
     tmux start-server
