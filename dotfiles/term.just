@@ -408,8 +408,8 @@ push PROJ="forest" BRANCH="main":
 # https://blog.vbang.dk/2025/06/29/tools-i-love-mise/
 #
 prep-mise:
-    which mise || brew install mise
     #!/usr/bin/env bash
+    which mise || brew install mise || (curl https://mise.run | sh)
     echo 'Ensure run the following in ~/.bashrc or ~/.zshrc:'
     echo 'eval "$(mise activate $(basename "$0"))"'
     cat << 'EOF'
@@ -417,6 +417,7 @@ prep-mise:
     EOF
     # mise supports popular programming languages (including zig) with core plugins
     # https://github.com/jdx/mise/tree/main/src/plugins/core
+    echo "Ensure a valid env var MISE_GITHUB_TOKEN, see https://mise.jdx.dev/getting-started.html#github-api-rate-limiting"
 
 prep-rust:
     #!/usr/bin/env bash
