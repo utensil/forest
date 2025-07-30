@@ -849,6 +849,12 @@ if __name__ == "__main__":
         action="store_true",
         help="Show global tag stats (all tags, ordered by count)"
     )
+    parser.add_argument(
+        "--merge-stat",
+        action="store_true",
+        help="Show aggregated keyword merge statistics (default: OFF)"
+    )
+    # AGENT-NOTE: --merge-stat controls merge stats output; default is OFF for clean output
     args = parser.parse_args()
 
     if args.test:
@@ -881,7 +887,8 @@ if __name__ == "__main__":
                 print_monthly_tag_stats(filepath, top_n=args.stat)
             if getattr(args, 'stat_all', False):
                 print_global_tag_stats(filepath)
-            print_merge_stats()
+            if getattr(args, 'merge_stat', False):
+                print_merge_stats()
         else:
             print("❌ Title improvement failed")
             sys.exit(1)
