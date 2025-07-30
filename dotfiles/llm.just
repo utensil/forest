@@ -9,7 +9,7 @@ prep-aichat:
     which aichat || brew install aichat
     mkdir -p ~/.config/aichat
     ./render_yaml.py dotfiles/.config/aichat/config.in.yaml ~/.config/aichat/config.yaml
-    cat ~/.config/aichat/config.yaml
+    cat ~/.config/aichat/config.yaml|sd 'api_key:(.*)' 'api_key: <hidden>'
 
 aichat *PARAMS: sync-aichat
     aichat {{PARAMS}}
