@@ -719,85 +719,73 @@ def test_til():
     return failed == 0
 
 
-def print_merge_stats(dedup=True, filepath=None):
-    """Print aggregated keyword merge statistics, respecting dedup flag."""
-    # If dedup is False, recompute MERGE_STATS including explicit tags from file
-    if not dedup and filepath is not None:
-        # Recompute MERGE_STATS from file, including explicit tags
-        import re
-        from collections import defaultdict
-        merge_stats = defaultdict(set)
-        try:
-            with open(filepath, "r", encoding="utf-8") as f:
-                content = f.read()
-        except Exception:
-            return
-        # Find all \tags{...} entries
-        pattern_tags = r"\\tags\{([^}]*)\}"
-        for match in re.finditer(pattern_tags, content):
-            tags = match.group(1)
-            tag_list = [t[1:] for t in tags.split() if t.startswith('#')]
-            for tag in tag_list:
-                for preferred, alternatives in TAG_MERGE.items():
-                    if tag == preferred or tag in alternatives:
-                        if tag != preferred:
-                            merge_stats[preferred].add(tag)
-        if merge_stats:
-            print("\nAggregated keyword merge statistics:")
-            for preferred, merged in sorted(
-                merge_stats.items(), key=lambda x: len(x[1]), reverse=True
-            ):
-                if merged:
-                    merged_str = ", ".join(sorted(merged))
-                    print(f"{preferred} <- {merged_str}")
-        return
-    # Default: use global MERGE_STATS (dedup=True)
-    if MERGE_STATS:
-        print("\nAggregated keyword merge statistics:")
-        for preferred, merged in sorted(
-            MERGE_STATS.items(), key=lambda x: len(x[1]), reverse=True
-        ):
-            if merged:
-                merged_str = ", ".join(sorted(merged))
-                print(f"{preferred} <- {merged_str}")
-
-
-def print_global_tag_stats(filepath, dedup=True):
-    """Print global tag statistics: each tag and its count, ordered by count desc, then alphabetically. Respects dedup flag."""
+def _extract_tags_from_file(filepath, dedup=True):
+    """Utility: Extracts all tags from file, returns a list of tags per entry. Respects dedup flag."""
     import re
-    from collections import Counter
+    tags_per_entry = []
     try:
         with open(filepath, "r", encoding="utf-8") as f:
             content = f.read()
     except Exception:
-        return
-    # Find all \tags{...} entries
+        return []
     pattern_tags = r"\\tags\{([^}]*)\}"
-    tag_counter = Counter()
     for match in re.finditer(pattern_tags, content):
         tags = match.group(1)
         tag_list = [t for t in tags.split() if t.startswith('#')]
         if dedup:
-            # Remove explicit tags (those that appear as hashtags in the content)
-            # For simplicity, treat all tags as explicit if dedup is True (matches main logic)
-            pass  # Already deduped in main logic
+            # Already deduped in main logic
+            tags_per_entry.append(tag_list)
+        else:
+            tags_per_entry.append(tag_list)
+    return tags_per_entry
+
+def _color_tag(tag):
+    import sys
+    use_color = sys.stdout.isatty()
+    return f"\033[38;5;114m{tag}\033[0m" if use_color else tag
+
+def print_merge_stats(dedup=True, filepath=None):
+    """Print aggregated keyword merge statistics, respecting dedup flag. Consistent output."""
+    from collections import defaultdict
+    merge_stats = defaultdict(set)
+    if not dedup and filepath is not None:
+        tags_per_entry = _extract_tags_from_file(filepath, dedup=False)
+        for tag_list in tags_per_entry:
+            for tag in [t[1:] for t in tag_list]:
+                for preferred, alternatives in TAG_MERGE.items():
+                    if tag == preferred or tag in alternatives:
+                        if tag != preferred:
+                            merge_stats[preferred].add(tag)
+    else:
+        # Use global MERGE_STATS (dedup=True)
+        for preferred, merged in MERGE_STATS.items():
+            if merged:
+                merge_stats[preferred].update(merged)
+    if merge_stats:
+        print("\nAggregated keyword merge statistics:")
+        for preferred, merged in sorted(merge_stats.items(), key=lambda x: len(x[1]), reverse=True):
+            if merged:
+                merged_str = ", ".join(sorted(merged))
+                print(f"{_color_tag(preferred)} <- {merged_str}")
+
+
+def print_global_tag_stats(filepath, dedup=True):
+    """Print global tag statistics: each tag and its count, ordered by count desc, then alphabetically. Consistent output."""
+    from collections import Counter
+    tag_counter = Counter()
+    tags_per_entry = _extract_tags_from_file(filepath, dedup=dedup)
+    for tag_list in tags_per_entry:
         for t in tag_list:
             tag_counter[t] += 1
     if tag_counter:
         print("\nGlobal tag stats:")
-        import sys
-        use_color = sys.stdout.isatty()
-        def color_tag(tag):
-            # AGENT-NOTE: Use ANSI 256-color code 114 for #98c379 green
-            return f"\033[38;5;114m{tag}\033[0m" if use_color else tag
-        # Sort by count desc, then tag alphabetically
         sorted_tags = sorted(tag_counter.items(), key=lambda x: (-x[1], x[0]))
         max_tag_len = max(len(tag) for tag, _ in sorted_tags)
         for tag, count in sorted_tags:
-            print(f"{color_tag(tag):<{max_tag_len+2}} {count}")
+            print(f"{_color_tag(tag):<{max_tag_len+2}} {count}")
 
 def print_monthly_tag_stats(filepath, top_n=20, dedup=True):
-    """Print top N tag statistics for each month, including months with no tags, and show total tag count. Respects dedup flag."""
+    """Print top N tag statistics for each month, including months with no tags, and show total tag count. Consistent output."""
     import re
     from collections import defaultdict, Counter
     month_tag_counter = defaultdict(Counter)
@@ -818,29 +806,18 @@ def print_monthly_tag_stats(filepath, top_n=20, dedup=True):
         month = match.group(1)
         tags = match.group(2)
         tag_list = [t for t in tags.split() if t.startswith('#')]
-        if dedup:
-            # Remove explicit tags (those that appear as hashtags in the content)
-            # For simplicity, treat all tags as explicit if dedup is True (matches main logic)
-            pass  # Already deduped in main logic
         for t in tag_list:
             month_tag_counter[month][t] += 1
     if all_months:
         print("\nMonthly tag stats:")
-        import sys
-        use_color = sys.stdout.isatty()
-        def color_tag(tag):
-            # AGENT-NOTE: Use ANSI 256-color code 114 for #98c379 green
-            return f"\033[38;5;114m{tag}\033[0m" if use_color else tag
         for month in sorted(all_months):
             top_tags = month_tag_counter[month].most_common(top_n)
             unique_tag_count = len(month_tag_counter[month])
-            # Format YYYYMM
             yyyymm = month.replace('-', '')
             tag_str = ', '.join([
-                color_tag(tag) if count == 1 else f"{color_tag(tag)} {count}"
+                _color_tag(tag) if count == 1 else f"{_color_tag(tag)} {count}"
                 for tag, count in top_tags
             ])
-            # Append ellipsis if more tags exist than top_n
             if unique_tag_count > top_n:
                 tag_str += ', ...'
             print(f"{yyyymm} ({unique_tag_count} tags): {tag_str}")
