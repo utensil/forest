@@ -35,7 +35,7 @@ prep-aicode:
 # Render aichat config
 sync-aichat:
     #!/usr/bin/env bash
-    ./render_yaml.py dotfiles/.config/aichat/config.yaml.in ~/.config/aichat/config.yaml
+    ./render_yaml.py dotfiles/.config/aichat/config.in.yaml ~/.config/aichat/config.yaml
     cat ~/.config/aichat/config.yaml|sd 'api_key:(.*)' 'api_key: <hidden>'
 
 prep-aider:
