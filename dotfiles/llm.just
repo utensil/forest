@@ -590,34 +590,9 @@ prep-oc:
     #!/usr/bin/env bash
     which opencode || npm install -g opencode-ai
     mkdir -p ~/.config/opencode
-    # rm ~/.config/opencode/config.json
-    cat > ~/.config/opencode/opencode.json << EOF
-    {
-      "\$schema": "https://opencode.ai/config.json",
-      "autoshare": false,
-      "autoupdate": false,
-      "model": "${OPENAI_API_PROVIDER:-github-copilot}/${OPENAI_API_MODEL:-claude-sonnet-4}",
-      "provider": {
-        "local": {
-            "npm": "@ai-sdk/openai-compatible",
-            "options": {
-                "baseURL": "$OPENAI_API_BASE"
-            },
-            "models": {
-                "$OPENAI_API_MODEL": {}
-            }
-        }
-      },
-      "mcp": {
-          "container-use": {
-          "type": "local",
-          "command": ["container-use", "stdio"],
-          "enabled": true
-        }
-      }
-    }
-    EOF
+    ./render_yaml.py --json dotfiles/.config/opencode/opencode.in.json ~/.config/opencode/opencode.json
     just check-oc
+
 
 check-oc:
     #!/usr/bin/env bash
