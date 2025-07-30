@@ -438,7 +438,6 @@ prep-node:
 prep-uv:
     curl -LsSf https://astral.sh/uv/install.sh | sh
 
-
 [windows]
 prep-uv:
     powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
@@ -621,6 +620,14 @@ prep-pool:
 
 prep-ds:
     cargo install diss
+
+# https://github.com/sebastien/multiplex
+#
+prep-mx:
+    which multiplex || uv tool install multiplex-sh
+
+prep-mp:
+    which mprocs || brew install mprocs
 
 # works for mon running btop
 # not really working for nvim etc.
