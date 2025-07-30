@@ -1,9 +1,10 @@
 ---
 id: task-0008
 title: Add a --merge-stat option to til.py and stop outputting merge stats by default
-status: To Do
+status: Done
 assignee: []
-created_date: "2025-07-30"
+created_date: '2025-07-30'
+updated_date: '2025-07-30'
 labels: []
 dependencies: []
 ---

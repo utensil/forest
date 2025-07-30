@@ -1,12 +1,13 @@
 ---
 id: task-0007
 title: >-
-    Add a --stat-all option to til.py to print a global tag statistics summary,
-    with each tag and its count, ordered and using the same coloring style as
-    --stat.
-status: To Do
+  Add a --stat-all option to til.py to print a global tag statistics summary,
+  with each tag and its count, ordered and using the same coloring style as
+  --stat.
+status: Done
 assignee: []
-created_date: "2025-07-30"
+created_date: '2025-07-30'
+updated_date: '2025-07-30'
 labels: []
 dependencies: []
 ---
