@@ -7,19 +7,9 @@
 prep-aichat:
     #!/usr/bin/env bash
     which aichat || brew install aichat
-    mkdir -p "$HOME/Library/Application Support/aichat/"
-    cat > "$HOME/Library/Application Support/aichat/config.yaml" << EOF
-    model: $OPENAI_API_PROVIDER
-    clients:
-    - type: openai-compatible
-      name: $OPENAI_API_PROVIDER
-      api_base: $OPENAI_API_BASE
-      api_key: $OPENAI_API_KEY
-      models:
-        - name: $OPENAI_API_MODEL
-
-    EOF
-    cat "$HOME/Library/Application Support/aichat/config.yaml"
+    mkdir -p ~/.config/aichat
+    ./render_yaml.py dotfiles/.config/aichat/config.in.yaml ~/.config/aichat/config.yaml
+    cat ~/.config/aichat/config.yaml
 
 aichat *PARAMS: sync-aichat
     aichat {{PARAMS}}
