@@ -9,13 +9,13 @@ export PORT=1314
 bun --watch --no-clear-screen dev.ts &
 BUN_PID=$!
 
-# Start mise watcher in background
-mise watch build &
-MISE_PID=$!
+# Start build_and_reload orchestration in background
+mise run build:build_and_reload &
+ORCH_PID=$!
 
 # Trap SIGINT/SIGTERM and kill both
-trap "kill $BUN_PID $MISE_PID; exit" SIGINT SIGTERM
+trap "kill $BUN_PID $ORCH_PID; exit" SIGINT SIGTERM
 
 # Wait for both to exit
 wait $BUN_PID
-wait $MISE_PID
+wait $ORCH_PID
