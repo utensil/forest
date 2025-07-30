@@ -731,6 +731,36 @@ def print_merge_stats():
                 print(f"{preferred} <- {merged_str}")
 
 
+def print_global_tag_stats(filepath):
+    """Print global tag statistics: each tag and its count, ordered by count desc, then alphabetically."""
+    import re
+    from collections import Counter
+    try:
+        with open(filepath, "r", encoding="utf-8") as f:
+            content = f.read()
+    except Exception:
+        return
+    # Find all \tags{...} entries
+    pattern_tags = r"\\tags\{([^}]*)\}"
+    tag_counter = Counter()
+    for match in re.finditer(pattern_tags, content):
+        tags = match.group(1)
+        for t in tags.split():
+            if t.startswith('#'):
+                tag_counter[t] += 1
+    if tag_counter:
+        print("\nGlobal tag stats:")
+        import sys
+        use_color = sys.stdout.isatty()
+        def color_tag(tag):
+            # AGENT-NOTE: Use ANSI 256-color code 114 for #98c379 green
+            return f"\033[38;5;114m{tag}\033[0m" if use_color else tag
+        # Sort by count desc, then tag alphabetically
+        sorted_tags = sorted(tag_counter.items(), key=lambda x: (-x[1], x[0]))
+        max_tag_len = max(len(tag) for tag, _ in sorted_tags)
+        for tag, count in sorted_tags:
+            print(f"{color_tag(tag):<{max_tag_len+2}} {count}")
+
 def print_monthly_tag_stats(filepath, top_n=20):
     """Print top N tag statistics for each month, including months with no tags, and show total tag count."""
     import re
@@ -814,6 +844,11 @@ if __name__ == "__main__":
         const=20,
         help="Show monthly tag stats (optionally top N tags per month)",
     )
+    parser.add_argument(
+        "--stat-all",
+        action="store_true",
+        help="Show global tag stats (all tags, ordered by count)"
+    )
     args = parser.parse_args()
 
     if args.test:
@@ -844,6 +879,8 @@ if __name__ == "__main__":
             print("✨ Title improvement complete!")
             if getattr(args, 'stat', None) is not None:
                 print_monthly_tag_stats(filepath, top_n=args.stat)
+            if getattr(args, 'stat_all', False):
+                print_global_tag_stats(filepath)
             print_merge_stats()
         else:
             print("❌ Title improvement failed")
