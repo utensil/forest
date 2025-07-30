@@ -583,7 +583,6 @@ prep-oc:
     ./render_yaml.py --json dotfiles/.config/opencode/opencode.in.yaml ~/.config/opencode/opencode.json
     just check-oc
 
-
 check-oc:
     #!/usr/bin/env bash
     set -e
@@ -594,6 +593,9 @@ check-oc:
 
 # use `opencode auth login` to log into Github Copilot
 # use `opencode run -m github-copilot/claude-3.5-sonnet --print-logs Hi` for a first run, which runs bun install that might take a while
+
+clone-oc:
+    just clone sst opencode
 
 prep-uz:
     which uzi || go install github.com/devflowinc/uzi@latest
