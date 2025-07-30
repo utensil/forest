@@ -590,7 +590,7 @@ prep-oc:
     #!/usr/bin/env bash
     which opencode || npm install -g opencode-ai
     mkdir -p ~/.config/opencode
-    ./render_yaml.py --json dotfiles/.config/opencode/opencode.in.json ~/.config/opencode/opencode.json
+    ./render_yaml.py --json dotfiles/.config/opencode/opencode.in.yaml ~/.config/opencode/opencode.json
     just check-oc
 
 

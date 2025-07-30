@@ -1,0 +1,18 @@
+# opencode config template (YAML superset of JSON)
+# You can use comments and YAML features here.
+$schema: "https://opencode.ai/config.json"
+autoshare: false
+autoupdate: false
+model: !ENV "${OPENAI_API_PROVIDER:github-copilot}/${OPENAI_API_MODEL:claude-sonnet-4}"
+provider:
+    local:
+        npm: "@ai-sdk/openai-compatible"
+        options:
+            baseURL: !ENV "${OPENAI_API_BASE:}"
+        models:
+            MODEL_NAME: {} # Will be replaced by env value in script
+mcp:
+    container-use:
+        type: local
+        command: ["container-use", "stdio"]
+        enabled: true
