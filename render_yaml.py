@@ -46,7 +46,26 @@ def main():
         as_json = False
 
     # Always parse as YAML (JSON is valid YAML, comments allowed)
-    config = parse_config(input_path)
+    try:
+        config = parse_config(input_path, raise_if_na=True)
+    except ValueError as e:
+        # Print a user-friendly error message
+        print(f"[ERROR] {e}", file=sys.stderr)
+        print(f"  in file: {input_path}", file=sys.stderr)
+        # Try to extract the missing variable name from the error message
+        import re
+        m = re.search(r'for ([A-Z0-9_]+)', str(e))
+        if m:
+            var = m.group(1)
+            # Try to print a snippet of the input file with the offending line
+            try:
+                with open(input_path) as f:
+                    for i, line in enumerate(f, 1):
+                        if var in line:
+                            print(f"  line {i}: {line.strip()}", file=sys.stderr)
+            except Exception:
+                pass
+        sys.exit(1)
 
     # Post-process: replace provider.local.models.MODEL_NAME with env value
     try:
