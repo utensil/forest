@@ -372,9 +372,12 @@ bootstrap-ubuntu:
     apt update
     apt install -y build-essential curl file git sudo
     curl https://mise.run | sh
-    echo "eval \"\$(/root/.local/bin/mise activate bash)\"" >> ~/.bashrc
+    echo "eval \"\$(~/.local/bin/mise activate bash)\"" >> ~/.bashrc
     source ~/.bashrc
     mise use -g just
+    yes|/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+    just add-brc 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"'
 
 ## Remote
 
