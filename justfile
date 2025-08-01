@@ -636,11 +636,15 @@ prep-fuse:
     brew install fuse-t
     brew install fuse-t-sshfs
 
-# Unfortunately, VeraCrypt will always install and only works with macFUSE
-#
-# Install VeraCrypt
+# Install VeraCrypt that works with FUSE-T (on Mac)
+[macos]
 prep-vera:
-    brew install --cask veracrypt
+    which veracrypt || brew install --cask veracrypt-fuse-t
+
+# Install VeraCrypt that works with macFUSE (on Mac)
+[macos]
+prep-vera-kernel:
+    which veracrypt || brew install --cask veracrypt
 
 vera VOLUME MNT:
     veracrypt --text {{VOLUME}} {{MNT}} # --non-interactive --password=THE_PASSWORD
