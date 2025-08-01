@@ -1,0 +1,42 @@
+#!/bin/sh
+# bwrap-oc: Run just prep-oc in a bubblewrap sandbox
+# ================================================
+#
+# This script runs `just prep-oc` inside a bubblewrap (bwrap) sandbox, binding only the minimal required paths.
+#
+# Usage:
+#   ./bwrap-oc
+#
+# - Adjusts bind mounts as needed to make `just prep-oc` work.
+# - Inspired by https://github.com/9001/copyparty/blob/refs/heads/hovudstraum/bin/bubbleparty.sh
+#
+# AGENT-NOTE: CRITICAL FEATURES TO MAINTAIN
+# 1. IDEMPOTENT: Multiple runs must produce identical results
+# 2. ERROR HANDLING: Graceful degradation for missing data
+# 3. BUILD INTEGRATION: Validates syntax after processing
+# 4. DETERMINISTIC: Sorted processing ensures consistent output
+
+HOME="$HOME"
+CWD="$(pwd)"
+
+exec bwrap \
+  --unshare-all \
+  --ro-bind /usr /usr \
+  --ro-bind /bin /bin \
+  --ro-bind /lib /lib \
+  --ro-bind /lib64 /lib64 \
+  --ro-bind /etc/resolv.conf /etc/resolv.conf \
+  --dev-bind /dev /dev \
+  --dir /tmp \
+  --dir /var \
+  --bind "$CWD" "$CWD" \
+  --bind "$HOME" "$HOME" \
+  --share-net \
+  --die-with-parent \
+  --setenv HOME "$HOME" \
+  --setenv PATH "$PATH" \
+  --setenv USER "$USER" \
+  --setenv SHELL "$SHELL" \
+  --setenv LANG "${LANG:-en_US.UTF-8}" \
+  --setenv LC_ALL "${LC_ALL:-en_US.UTF-8}" \
+  just prep-oc

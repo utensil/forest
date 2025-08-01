@@ -576,6 +576,9 @@ prep-amp:
     # login, say no to re-login if already logged in
     yes n|amp login
 
+prep-bwrap:
+    which bwrap || brew install bubblewrap
+
 prep-oc:
     #!/usr/bin/env bash
     which opencode || npm install -g opencode-ai

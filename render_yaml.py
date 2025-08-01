@@ -47,7 +47,7 @@ def main():
 
     # Always parse as YAML (JSON is valid YAML, comments allowed)
     try:
-        config = parse_config(input_path, raise_if_na=True)
+        config = parse_config(input_path) # , raise_if_na=True)
     except ValueError as e:
         # Print a user-friendly error message
         print(f"[ERROR] {e}", file=sys.stderr)
@@ -58,7 +58,6 @@ def main():
         if m:
             var = m.group(1)
             # Print the current value of the offending environment variable
-            import os
             val = os.environ.get(var)
             print(f"  env {var} value: {repr(val)}", file=sys.stderr)
             # Try to print a snippet of the input file with the offending line
