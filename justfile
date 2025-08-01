@@ -631,10 +631,23 @@ bjn *PARAMS:
 
 # https://www.fuse-t.org/
 #
-prep-fuse:
+prep-fuse-t:
     brew tap macos-fuse-t/homebrew-cask
     brew install fuse-t
     brew install fuse-t-sshfs
+
+[linux]
+prep-vera:
+    #!/usr/bin/env bash
+    which veracrypt && echo "VeraCrypt is already installed." && exit 0
+    set -e
+    VERSION="$(lsb_release -rs)"
+    DEB_URL="https://launchpad.net/veracrypt/trunk/1.26.24/+download/veracrypt-1.26.24-Ubuntu-$VERSION-amd64.deb"
+    TMP_DEB="/tmp/veracrypt-$VERSION.deb"
+    curl -L "$DEB_URL" -o "$TMP_DEB"
+    sudo apt install -y "$TMP_DEB"
+    rm -f "$TMP_DEB"
+    echo "VeraCrypt installed successfully."
 
 # Install VeraCrypt that works with FUSE-T (on Mac)
 [macos]
