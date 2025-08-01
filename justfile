@@ -371,10 +371,10 @@ bootstrap-ubuntu:
     #!/usr/bin/env bash
     apt update
     apt install -y build-essential curl file git sudo
-    wget -qO - 'https://proget.makedeb.org/debian-feeds/prebuilt-mpr.pub' | gpg --dearmor | sudo tee /usr/share/keyrings/prebuilt-mpr-archive-keyring.gpg 1> /dev/null
-    echo "deb [arch=all,$(dpkg --print-architecture) signed-by=/usr/share/keyrings/prebuilt-mpr-archive-keyring.gpg] https://proget.makedeb.org prebuilt-mpr $(lsb_release -cs)" | sudo tee /etc/apt/sources.list.d/prebuilt-mpr.list
-    apt update
-    apt install -y just
+    curl https://mise.run | sh
+    echo "eval \"\$(/root/.local/bin/mise activate bash)\"" >> ~/.bashrc
+    source ~/.bashrc
+    mise use -g just
 
 ## Remote
 
