@@ -713,6 +713,44 @@ try-smb PATH:
     # test with: smbclient //127.0.0.1/share -U foo
     # Mac finder not working
 
+prep-dav:
+    #!/usr/bin/env bash
+    set -e
+    apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y davfs2
+    echo "davfs2 installed. Version:"
+    davfs2 --version || true
+
+dav URL MNT="/mnt/dav":
+    #!/usr/bin/env bash
+    # This task is intended to be run inside the container.
+    # It will prompt for WebDAV credentials interactively via mount.davfs.
+    set -e
+    echo "Creating mount point in container..."
+    mkdir -p {{MNT}}
+    echo "Mounting WebDAV share (you will be prompted for credentials)..."
+    mount -t davfs {{URL}} {{MNT}}
+    echo "Listing files in mount point:"
+    ls -l {{MNT}}
+
+dav-off MNT="/mnt/dav":
+    #!/usr/bin/env bash
+    # Unmount the WebDAV mount point (default: /mnt/dav)
+    set -e
+    echo "Unmounting WebDAV share at {{MNT}}..."
+    umount {{MNT}}
+    echo "Unmounted {{MNT}}."
+
+dav-ro URL MNT="/mnt/dav":
+    #!/usr/bin/env bash
+    # Mount the WebDAV share read-only. Prompts for credentials interactively.
+    set -e
+    echo "Creating mount point in container..."
+    mkdir -p {{MNT}}
+    echo "Mounting WebDAV share read-only (you will be prompted for credentials)..."
+    mount -t davfs {{URL}} {{MNT}} -o ro
+    echo "Listing files in mount point:"
+    ls -l {{MNT}}
+
 prep-rest:
     #!/usr/bin/env bash
     # which restic || brew install restic
