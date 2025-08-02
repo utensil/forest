@@ -24,8 +24,8 @@ This stack provides a hardened Ubuntu-based container with:
         /start-samba.sh
         ```
     - You will be prompted to enter a Samba username and password (hidden input, not stored in env or files).
-    - The script will create the user, set permissions, and start the Samba server in the foreground.
-    - On subsequent runs, if a Samba user already exists, the script will skip setup and start Samba directly.
+    - The script will create the user, set permissions, and start the Samba server as a background daemon.
+    - On subsequent runs, if a Samba user already exists, the script will skip setup and start Samba in the background (if not already running).
 3. **Access the Samba share**
     - Only port **445/tcp** is exposed for maximum security (modern SMB clients only).
     - Connect to `//<host>/shared` as the username and password you entered.

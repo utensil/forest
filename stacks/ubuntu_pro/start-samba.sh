@@ -11,8 +11,14 @@ echo "=== Secure Samba Server Setup ==="
 EXISTING_USER=$(pdbedit -L | head -n1 | cut -d: -f1)
 if [[ -n "$EXISTING_USER" ]]; then
   echo "Samba user '$EXISTING_USER' already exists. Skipping setup."
-  echo "Starting Samba..."
-  exec smbd -F --no-process-group
+  if pgrep smbd > /dev/null; then
+    echo "Samba server is already running (PID: $(pgrep smbd | tr '\n' ' '))."
+  else
+    echo "Starting Samba server as a daemon..."
+    smbd
+    echo "Samba server started in background."
+  fi
+  exit 0
 fi
 
 # Prompt for username
@@ -43,5 +49,10 @@ done
 chown -R "$SMB_USER":smbgroup /mnt/shared
 chmod 770 /mnt/shared
 
-echo "Samba user '$SMB_USER' created. Starting Samba..."
-exec smbd -F --no-process-group
+echo "Samba user '$SMB_USER' created. Starting Samba server as a daemon..."
+smbd
+if pgrep smbd > /dev/null; then
+  echo "Samba server started in background (PID: $(pgrep smbd | tr '\n' ' '))."
+else
+  echo "Failed to start Samba server. Check logs."
+fi
