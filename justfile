@@ -182,7 +182,7 @@ gh2md REPO OUTPUT *PARAMS="--no-prs":
 # Then, maybe run: just mk-act
 # So the work can be continued in the Ubuntu container
 #
-bootstrap-centos:
+bt-centos:
     #!/usr/bin/env bash
     yes|sudo yum groupinstall 'Development Tools'
     yes|sudo yum install procps-ng curl file git
@@ -201,7 +201,7 @@ bootstrap-centos:
 # 3. Enter zsh
 # 4. Copy and paste to run, because we have no just at this point
 #
-bootstrap-mac:
+bt-mac:
     #!/usr/bin/env bash
     xcode-select --install
     # export HTTP_PROXY=
@@ -367,7 +367,7 @@ run-rp:
 # Copy and paste to run as root, because we have no just at this point
 # Next, run: just prep-act
 #
-bootstrap-ubuntu:
+bt-ubuntu:
     #!/usr/bin/env bash
     apt update
     apt install -y build-essential curl file git sudo neovim
@@ -644,7 +644,7 @@ prep-vera:
     #!/usr/bin/env bash
     which veracrypt && echo "VeraCrypt is already installed." && exit 0
     set -e
-    VERSION="$(lsb_release -rs)"
+    VERSION="$(cat /etc/os-release | grep "VERSION_ID")"
     DEB_URL="https://launchpad.net/veracrypt/trunk/1.26.24/+download/veracrypt-1.26.24-Ubuntu-$VERSION-amd64.deb"
     TMP_DEB="/tmp/veracrypt-$VERSION.deb"
     curl -L "$DEB_URL" -o "$TMP_DEB"

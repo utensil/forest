@@ -754,7 +754,7 @@ mk-act:
 run-act CMD="bash" OPTS="-it":
     sudo docker exec {{OPTS}} -w /root/projects/forest act-dev {{CMD}}
 
-# manually run bootstrap-ubuntu first, or we won't even have just
+# manually run bt-ubuntu first, or we won't even have just
 #
 prep-act:
     # for brew and zsh
