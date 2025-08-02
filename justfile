@@ -375,6 +375,10 @@ bt-ubuntu:
     eval "$(~/.local/bin/mise activate bash)"
     mise trust
     mise use -g just
+
+
+[linux]
+prep-brew:
     yes|/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
     eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
     echo 'eval "$(~/.local/bin/mise activate bash)"' >> ~/.bashrc
@@ -670,8 +674,14 @@ prep-vera:
 prep-vera-kernel:
     which veracrypt || brew install --cask veracrypt
 
+[macos]
 vera VOLUME MNT:
-    veracrypt --text {{VOLUME}} {{MNT}} # --non-interactive --password=THE_PASSWORD -m=nokernelcrypto
+    veracrypt --text {{VOLUME}} {{MNT}} # --non-interactive --password=THE_PASSWORD
+
+[linux]
+vera VOLUME MNT:
+    mkdir -p {{MNT}}
+    veracrypt --text -m=nokernelcrypto {{VOLUME}} {{MNT}} # --non-interactive --password=THE_PASSWORD
 
 vera-ro VOLUME MNT:
     veracrypt --text --mount-options=ro {{VOLUME}} {{MNT}}
