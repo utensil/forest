@@ -10,6 +10,26 @@ This stack provides a hardened Ubuntu-based container with:
 
 ## Usage
 
+### ⚠️ Mac Finder + Docker Desktop Limitation
+
+**MacOS Finder cannot connect to Samba running in Docker Desktop on the same Mac, even using your LAN IP (e.g. smb://10.31.202.34/shared).**
+
+-   This is a MacOS kernel security restriction: Finder's SMB client cannot connect to port 445 on the local machine, even if Docker is listening there.
+-   `smbclient` works because it uses user-space networking, but Finder uses the kernel SMB stack, which is restricted.
+-   **You can only connect from another device on the same LAN, or from a VM with bridged networking.**
+-   For local testing, use `smbclient` or connect from another computer.
+-   See: [docker-samba issue #109](https://github.com/crazy-max/docker-samba/issues/109), [Docker forums](https://forums.docker.com/t/how-to-reach-docker-container-localhost-from-mac/58415)
+
+#### Troubleshooting Checklist
+
+-   Make sure your Docker Compose or run command uses `-p 445:445` (not `127.0.0.1:445:445`).
+-   Temporarily disable the Mac firewall to test.
+-   Check for port 445 conflicts: `sudo lsof -iTCP:445` (stop Mac's own SMB server if needed).
+-   Try connecting from another device on the same LAN.
+-   If you see no new log entries in `/var/log/samba/` when Finder tries to connect, the request is being blocked by MacOS before it reaches Docker/Samba.
+
+---
+
 1. **Build and start the stack**
     ```sh
     docker-compose -f compose.yaml up --build -d
