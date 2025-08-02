@@ -1,34 +1,37 @@
 services:
-  ubuntu:
-    container_name: ubuntu_pro
-    stdin_open: true
-    tty: true
-    # privileged: true
-    image: ubuntu:22.04
-    platform: linux/amd64
-    command: bash
-    working_dir: /root/projects/forest
-    volumes:
-      - $PROJECTS/forest:/root/projects/forest
-      - ubuntu_pro_shared:/mnt/shared
-      - $DATA_SRC:/mnt/src/:ro
-      - $DATA_DST:/mnt/dst
-    devices:
-      - /dev/fuse
-      - /dev/loop0
-      - /dev/loop1
-      - /dev/loop2
-      - /dev/loop3
-      - /dev/loop4
-      - /dev/loop5
-      - /dev/loop6
-      - /dev/loop7
-      # doesn't help with read-only mount, still error
-      # - /dev/mapper
-    cap_add:
-      - SYS_ADMIN
-    security_opt:
-      - apparmor:unconfined
+    ubuntu:
+        container_name: ubuntu_pro
+        stdin_open: true
+        tty: true
+        build: .
+        platform: linux/amd64
+        working_dir: /root/projects/forest
+        environment:
+            - SMB_USER=${SMB_USER}
+            - SMB_PASS=${SMB_PASS}
+        volumes:
+            - $PROJECTS/forest:/root/projects/forest
+            - ubuntu_pro_shared:/mnt/shared
+            - $DATA_SRC:/mnt/src/:ro
+            - $DATA_DST:/mnt/dst
+        devices:
+            - /dev/fuse
+            - /dev/loop0
+            - /dev/loop1
+            - /dev/loop2
+            - /dev/loop3
+            - /dev/loop4
+            - /dev/loop5
+            - /dev/loop6
+            - /dev/loop7
+            # doesn't help with read-only mount, still error
+            # - /dev/mapper
+        cap_add:
+            - SYS_ADMIN
+        security_opt:
+            - apparmor:unconfined
+        ports:
+            - "445:445"
 networks: {}
 volumes:
-  ubuntu_pro_shared: null
+    ubuntu_pro_shared: null
