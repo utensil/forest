@@ -1,0 +1,12 @@
+services:
+  ubuntu:
+    container_name: ubuntu_pro
+    stdin_open: true
+    tty: true
+    privileged: true
+    image: ubuntu:22.04
+    platform: linux/amd64
+    command: bash
+    volumes:
+      - $PROJECTS/forest:/root/projects/forest
+networks: {}
