@@ -29,10 +29,11 @@ RUN apt install -y wget exfat-fuse exfatprogs && \
 # Install Samba
 RUN apt install -y samba
 
-# Copy Samba config and start script
+# Copy Samba config and scripts
 COPY smb.conf /etc/samba/smb.conf
 COPY start-samba.sh /start-samba.sh
-RUN chmod +x /start-samba.sh
+COPY stop-samba.sh /stop-samba.sh
+RUN chmod +x /start-samba.sh /stop-samba.sh
 
 # Create shared directory
 RUN mkdir -p /mnt/shared && chmod 770 /mnt/shared

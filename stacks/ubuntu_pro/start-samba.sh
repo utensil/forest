@@ -39,11 +39,18 @@ if ! id "$SMB_USER" > /dev/null 2>&1; then
   useradd -M -s /usr/sbin/nologin -G smbgroup "$SMB_USER"
 fi
 
-# Prompt for password (hidden input) and set Samba password
+# Set Samba password policies BEFORE setting password
+pdbedit -P "min password length" -C 10
+pdbedit -P "password history" -C 5
+pdbedit -P "bad lockout attempt" -C 10
+
+# Prompt for password and set Samba password interactively
 while true; do
   smbpasswd -a "$SMB_USER" && break
   echo "Password setup failed. Try again."
 done
+
+
 
 # Set permissions on shared directory
 chown -R "$SMB_USER":smbgroup /mnt/shared
@@ -52,7 +59,8 @@ chmod 770 /mnt/shared
 echo "Samba user '$SMB_USER' created. Starting Samba server as a daemon..."
 smbd
 if pgrep smbd > /dev/null; then
-  echo "Samba server started in background (PID: $(pgrep smbd | tr '\n' ' '))."
+  echo -e "\033[1;32mSamba server is UP! (PID: $(pgrep smbd | tr '\n' ' '))\033[0m"
+  echo "To stop Samba, run: /stop-samba.sh"
 else
   echo "Failed to start Samba server. Check logs."
 fi
