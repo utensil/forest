@@ -653,7 +653,12 @@ prep-vera:
     sudo apt install -y "$TMP_DEB"
     rm -f "$TMP_DEB"
     echo "VeraCrypt installed successfully."
-    apt install -y exfat-fuse
+    # exfatprogs is the official implementation from Samsung, replacing the older reverse-engineered exfat-utils. It offers better performance and reliability https://linux.how2shout.com/how-to-check-and-enable-exfat-support-in-ubuntu/
+    apt install -y exfat-fuse exfatprogs
+    which mount.exfat || ln -s /usr/sbin/mount.exfat-fuse /usr/sbin/mount.exfat
+    grep exfat /etc/filesystems || echo exfat >> /etc/filesystems
+    # create a test tc container using exfat and test it with
+    # veracrypt --text -mnokernelcrypto --password=test --non-interactive ~/projects/forest/output/test.tc /mnt/test
 
 # Install VeraCrypt that works with FUSE-T (on Mac)
 [macos]
