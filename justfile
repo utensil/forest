@@ -373,6 +373,7 @@ bt-ubuntu:
     apt install -y build-essential curl file git sudo neovim
     curl https://mise.run | sh
     eval "$(~/.local/bin/mise activate bash)"
+    mise trust
     mise use -g just
     yes|/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
     eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
@@ -652,6 +653,7 @@ prep-vera:
     sudo apt install -y "$TMP_DEB"
     rm -f "$TMP_DEB"
     echo "VeraCrypt installed successfully."
+    apt install -y exfat-fuse
 
 # Install VeraCrypt that works with FUSE-T (on Mac)
 [macos]
@@ -664,7 +666,7 @@ prep-vera-kernel:
     which veracrypt || brew install --cask veracrypt
 
 vera VOLUME MNT:
-    veracrypt --text {{VOLUME}} {{MNT}} # --non-interactive --password=THE_PASSWORD
+    veracrypt --text {{VOLUME}} {{MNT}} # --non-interactive --password=THE_PASSWORD -m=nokernelcrypto
 
 vera-ro VOLUME MNT:
     veracrypt --text --mount-options=ro {{VOLUME}} {{MNT}}
