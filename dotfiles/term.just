@@ -647,7 +647,7 @@ prep-pod:
     which docker-compose || brew install docker-compose
     which colima || brew install colima
     which kubectl || brew install kubectl
-    docker context use default
+    docker context use colima
 
 # https://github.com/abiosoft/colima?tab=readme-ov-file#customizing-the-vm
 # to run x86_64 containers:
