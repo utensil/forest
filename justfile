@@ -644,7 +644,8 @@ prep-vera:
     #!/usr/bin/env bash
     which veracrypt && echo "VeraCrypt is already installed." && exit 0
     set -e
-    VERSION="$(cat /etc/os-release | grep "VERSION_ID")"
+    VERSION="$(cat /etc/os-release | grep "VERSION_ID"|sed -e 's/[^0-9.]//g')"
+    echo $VERSION
     DEB_URL="https://launchpad.net/veracrypt/trunk/1.26.24/+download/veracrypt-1.26.24-Ubuntu-$VERSION-amd64.deb"
     TMP_DEB="/tmp/veracrypt-$VERSION.deb"
     curl -L "$DEB_URL" -o "$TMP_DEB"
