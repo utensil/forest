@@ -22,6 +22,35 @@
 \subtree[2025-07]{
 \title{July, 2025}
 
+\subtree[2025-07-07]{\mdnote{2025-07-07}{
+- #ai-safety
+    - [A non-anthropomorphized view of LLMs](http://addxorrol.blogspot.com/2025/07/a-non-anthropomorphized-view-of-llms.html)
+        - some quotes:
+            - Alignment and safety for LLMs (should) mean that we should be able to quantify and bound the probability with which certain undesirable sequences are generated
+            - Human thought is a poorly-understood process, involving enormously many neurons, extremely high-bandwidth input, an extremely complicated cocktail of hormones, constant monitoring of energy levels, and millions of years of harsh selection pressure
+            - Navigating the dramatic changes of the next few decades while trying to avoid world wars and murderous ideologies is difficult enough without muddying our thinking.
+- #agent
+    - [Building personalized micro agents](https://blog.meain.io/2025/building-personalized-micro-agents/)
+        - agent: has access to tools, decides which tools to use, and in what order, determines when the task is complete
+            - boils down to 9 LOC
+        - micro agent: access to a very limited, highly specific set of tools
+            - less confusion when choosing tools
+            - works with small, local modelsA
+            - safe autonomy
+        - [meain/esa: Fastest way to create personalized AI agents](https://github.com/meain/esa)
+    - [Prompt Coding: No code edits, only complete rewrites](https://www.gibney.org/prompt_coding) #idea
+    - [The era of exploration](https://yidingjiang.github.io/blog/post/exploration/) ([on HN](https://news.ycombinator.com/item?id=44491333))
+- #rust
+    - [Building the Rust compiler with GCC](https://fractalfir.github.io/generated_html/cg_gcc_bootstrap.html)
+        - [rust-lang/rustc_codegen_gcc: libgccjit AOT codegen for rustc](https://github.com/rust-lang/rustc_codegen_gcc)
+- interesting projects
+    - [Am I online?](https://antonz.org/is-online/)
+        - `generate_402` pages could be used for this
+    - [Show HN: NYC Subway Simulator and Route Designer](https://buildmytransit.nyc)
+    - [Showh HN: Microjax – JAX in two classes and six functions](https://github.com/joelburget/microjax)
+    - [tinymcp: Let LLMs control embedded devices via the Model Context Protocol](https://github.com/golioth/tinymcp)
+}}
+
 \subtree[2025-07-06]{\mdnote{2025-07-06}{\tags{#agent #docker #game #news #sec}
 - #env
     - ['It's too late': David Suzuki says the fight against climate change is lost](https://www.ipolitics.ca/2025/07/02/its-too-late-david-suzuki-says-the-fight-against-climate-change-is-lost/) ([on HN](https://news.ycombinator.com/item?id=44476774))
@@ -82,6 +111,7 @@
         - [Devbox: Portable, Isolated Dev Environments](https://www.jetify.com/devbox)
         - [Fast, Declarative, Reproducible, and Composable Developer Environments - devenv](https://devenv.sh/) (using Nix)
     - [Why I got rid of all my neovim plugins](https://yobibyte.github.io/vim.html)
+    - [Stop using nix-env](https://stop-using-nix-env.privatevoid.net/)
 - #idea
     - [When in doubt, Go for a Walk](https://fabiansjournal.bearblog.dev/when-in-doubt-go-for-a-walk/)
 - #sec
@@ -200,6 +230,7 @@
         - it's a good thing that I have kept my distance from Nix from the start
             - mostly because I didn't like the syntax, and I don't want to be locked in
     - [Three Years of Nix and NixOS: The Good, the Bad, and the Ugly](https://pierrezemb.fr/posts/nixos-good-bad-ugly/)
+    - [You don't have to use Nix to manage your dotfiles](https://jade.fyi/blog/use-nix-less/)
 - [Types of Types: Common to Exotic](https://www.stephendiehl.com/posts/types_of_types/) #lean
 - [Uncloud - tool for deploying and managing containerised applications](https://github.com/psviderski/uncloud)
     - "the solution for developers who want the flexibility of self-hosted infrastructure without the operational complexity of Kubernetes"
@@ -269,7 +300,13 @@
     - [The KDL Document Language](https://kdl.dev/)
         - [bikeshed, a spec preprocessor](https://github.com/speced/bikeshed)
             - [Bikeshed-flavored Markdown](https://speced.github.io/bikeshed/#markdown)
-            - related: [awesome-standards: A curated list of technical standards](https://github.com/donBarbos/awesome-standards)
+            - related
+                - [awesome-standards: A curated list of technical standards](https://github.com/donBarbos/awesome-standards)
+                - [quickly converting djot to html+mathml](https://www.unix.dog/~yosh/blog/djot-to-html-with-mathml.html)
+                    - [djot](https://djot.net/) is a markdown variant
+                        - it "fixes a few things that make commonmark's syntax complex and difficult to parse efficiently"
+                            - more strict but very reasonable
+                        - it can be converted from markdown by pandoc
     - [10 features of D that I love](https://bradley.chatha.dev/blog/dlang-propaganda/features-of-d-that-i-love/)
         - I like
             - in/out contract
@@ -418,6 +455,7 @@
             - models autonomously acting in its environment, by using tools in a loop
     - [MCP: An (Accidentally) Universal Plugin System](https://worksonmymachine.substack.com/p/mcp-an-accidentally-universal-plugin)
 - [Programming as Theory Building: Why Senior Developers Are More Valuable](https://cekrem.github.io/posts/programming-as-theory-building-naur/) ([on HN](https://news.ycombinator.com/item?id=44401729))
+    - [theory building without a mentor](https://jyn.dev/theory-building-without-a-mentor/)
     - [Architectural Decision Records](https://adr.github.io/)
         - [ADR template](https://github.com/adr/madr/blob/4.0.0/template/adr-template.md)
             - from [An ADR for Use Markdown Architectural Decision Records](https://openpracticelibrary.com/practice/architectural-decision-records-adr/)
