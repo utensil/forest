@@ -6,9 +6,8 @@ FROM ubuntu:22.04
 ENV DEBIAN_FRONTEND=noninteractive
 
 # Install base tools (bt-ubuntu)
-RUN apt-get update && \
-    apt-get install -y build-essential curl file git sudo neovim \
-    && rm -rf /var/lib/apt/lists/*
+RUN apt update
+RUN apt install -y build-essential curl file git sudo neovim
 
 # Install mise (bt-ubuntu)
 RUN curl https://mise.run | sh
@@ -17,21 +16,18 @@ RUN ~/.local/bin/mise trust && ~/.local/bin/mise use -g just
 RUN echo 'eval "$(~/.local/bin/mise activate bash)"' >> ~/.bashrc
 
 # Install VeraCrypt (prep-vera)
-RUN apt-get update && \
-    apt-get install -y wget exfat-fuse exfatprogs && \
+RUN apt install -y wget exfat-fuse exfatprogs && \
     VERSION=$(grep VERSION_ID /etc/os-release | sed -e 's/[^0-9.]//g') && \
     DEB_URL="https://launchpad.net/veracrypt/trunk/1.26.24/+download/veracrypt-1.26.24-Ubuntu-$VERSION-amd64.deb" && \
     TMP_DEB="/tmp/veracrypt-$VERSION.deb" && \
     wget -O "$TMP_DEB" "$DEB_URL" && \
-    apt-get install -y "$TMP_DEB" && \
+    apt install -y "$TMP_DEB" && \
     rm -f "$TMP_DEB" && \
     which mount.exfat || ln -s /usr/sbin/mount.exfat-fuse /usr/sbin/mount.exfat && \
     grep exfat /etc/filesystems || echo exfat >> /etc/filesystems
 
 # Install Samba
-RUN apt-get update && \
-    apt-get install -y samba && \
-    rm -rf /var/lib/apt/lists/*
+RUN apt install -y samba
 
 # Copy Samba config and start script
 COPY smb.conf /etc/samba/smb.conf

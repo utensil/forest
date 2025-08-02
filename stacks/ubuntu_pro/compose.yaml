@@ -6,9 +6,6 @@ services:
         build: .
         platform: linux/amd64
         working_dir: /root/projects/forest
-        environment:
-            - SMB_USER=${SMB_USER}
-            - SMB_PASS=${SMB_PASS}
         volumes:
             - $PROJECTS/forest:/root/projects/forest
             - ubuntu_pro_shared:/mnt/shared
