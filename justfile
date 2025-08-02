@@ -375,13 +375,15 @@ bt-ubuntu:
     eval "$(~/.local/bin/mise activate bash)"
     mise trust
     mise use -g just
+    echo 'eval "$(~/.local/bin/mise activate bash)"' >> ~/.bashrc
 
+bt CONTAINER_NAME:
+    echo '#!/usr/bin/env bash\napt update\napt install -y build-essential curl file git sudo neovim\ncurl https://mise.run | sh\neval "$(~/.local/bin/mise activate bash)"\nmise trust\nmise use -g just\necho 'eval \"$(~/.local/bin/mise activate bash)\"' >> ~/.bashrc' | docker exec -i {{CONTAINER_NAME}} bash -s
 
 [linux]
 prep-brew:
     yes|/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
     eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-    echo 'eval "$(~/.local/bin/mise activate bash)"' >> ~/.bashrc
     echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> ~/.bashrc
 
 ## Remote
