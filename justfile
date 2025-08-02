@@ -675,16 +675,16 @@ prep-vera-kernel:
     which veracrypt || brew install --cask veracrypt
 
 [macos]
-vera VOLUME MNT:
+vera VOLUME MNT *PARAMS:
     veracrypt --text {{VOLUME}} {{MNT}} # --non-interactive --password=THE_PASSWORD
 
 [linux]
-vera VOLUME MNT:
+vera VOLUME MNT *PARAMS:
     mkdir -p {{MNT}}
-    veracrypt --text -m=nokernelcrypto {{VOLUME}} {{MNT}} # --non-interactive --password=THE_PASSWORD
+    veracrypt --text --pim=0 --keyfiles="" --protect-hidden=no -m=nokernelcrypto {{PARAMS}} {{VOLUME}} {{MNT}}
 
 vera-ro VOLUME MNT:
-    veracrypt --text --mount-options=ro {{VOLUME}} {{MNT}}
+    just vera {{VOLUME}} {{MNT}} --mount-options=ro
 
 vera-off MNT:
     veracrypt --text -d {{MNT}}

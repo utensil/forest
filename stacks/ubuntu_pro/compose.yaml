@@ -10,6 +10,9 @@ services:
         working_dir: /root/projects/forest
         volumes:
             - $PROJECTS/forest:/root/projects/forest
+            - ubuntu_pro_shared:/mnt/shared
+            - $DATA_SRC:/mnt/src/:ro
+            - $DATA_DST:/mnt/dst
         devices:
             - /dev/fuse
             - /dev/loop0
@@ -20,8 +23,13 @@ services:
             - /dev/loop5
             - /dev/loop6
             - /dev/loop7
+            # doesn't help with read-only mount, still error
+            # - /dev/mapper
         cap_add:
             - SYS_ADMIN
         security_opt:
             - apparmor:unconfined
 networks: {}
+
+volumes:
+    ubuntu_pro_shared:
