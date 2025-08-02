@@ -713,6 +713,9 @@ try-smb PATH:
     # test with: smbclient //127.0.0.1/share -U foo
     # Mac finder not working
 
+prep-smb-cli:
+    which smbclient || brew install samba
+
 prep-dav:
     #!/usr/bin/env bash
     set -e
