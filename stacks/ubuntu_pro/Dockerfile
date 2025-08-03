@@ -26,20 +26,21 @@ RUN apt install -y wget exfat-fuse exfatprogs && \
     which mount.exfat || ln -s /usr/sbin/mount.exfat-fuse /usr/sbin/mount.exfat && \
     grep exfat /etc/filesystems || echo exfat >> /etc/filesystems
 
-# Install Samba
-RUN apt install -y samba
+# Install Samba and smbclient
+RUN apt install -y samba smbclient
 
 # Copy Samba config and scripts
 COPY smb.conf /etc/samba/smb.conf
 COPY start-samba.sh /start-samba.sh
 COPY stop-samba.sh /stop-samba.sh
-RUN chmod +x /start-samba.sh /stop-samba.sh
+COPY test-samba.sh /test-samba.sh
+COPY vera /vera
+COPY vera-off /vera-off
+RUN chmod +x /start-samba.sh /stop-samba.sh /test-samba.sh /vera /vera-off
 
 # Create shared directory
 RUN mkdir -p /mnt/shared && chmod 770 /mnt/shared
 
-# Expose only port 445 for modern SMB
-EXPOSE 445/tcp
 
 # Print welcome message on container start
 CMD echo "Container ready. Samba is NOT running by default. To set up and start Samba, run: /start-samba.sh" && bash

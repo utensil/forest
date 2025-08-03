@@ -1,0 +1,21 @@
+#!/bin/bash
+set -e
+
+if [ "$#" -lt 2 ]; then
+  echo "Usage: /vera <volume.tc> <mountpoint> [extra veracrypt options]"
+  exit 1
+fi
+
+VOLUME="$1"
+MNT="$2"
+shift 2
+
+# Use the first Samba user (UID 1000, GID 1000)
+SMB_USER=$(getent passwd 1000 | cut -d: -f1)
+if [ -z "$SMB_USER" ]; then
+  echo "No Samba user with UID 1000 found."
+  exit 1
+fi
+
+mkdir -p "$MNT"
+sudo -u "$SMB_USER" sudo veracrypt --text --pim=0 --keyfiles="" --protect-hidden=no -m=nokernelcrypto --fs-options=uid=1000,gid=1000,umask=0022 "$@" "$VOLUME" "$MNT"

@@ -5,10 +5,26 @@
 This stack provides a hardened Ubuntu-based container with:
 
 -   Secure Samba server (serving `/mnt/shared` for a user from `$SMB_USER`)
+-   Runs Samba as a non-root user, binding to a configurable non-privileged port (default: 1445 via `SMB_PORT`)
+-   All Samba state files and directories are owned by the non-root user for security and compatibility
+-   All user and password setup is interactive only; environment variables are not supported for authentication
 -   VeraCrypt and exFAT support
 -   All setup steps are in Dockerfile and start-samba.sh, following best security practices (2025)
 
 ## Usage
+
+### Non-root Samba Operation and Troubleshooting
+
+-   Samba runs as a non-root user for security. It binds to a non-privileged port (default: 1445).
+-   All Samba state files (in /var/lib/samba, /var/run/samba, /var/log/samba, /run/samba) must be owned by the non-root user. The setup script ensures this.
+-   If you see errors like `Failed to create session, error code 1` or `Permission denied` on .tdb files, check and fix ownership of these directories/files.
+-   To reset the password for an existing user, run `/start-samba.sh` and enter the password interactively when prompted.
+-   To test connectivity from inside the container, use the provided test script:
+    ```sh
+    /test-samba.sh
+    ```
+
+---
 
 ### Sharing VeraCrypt Volumes via Samba
 
@@ -75,10 +91,66 @@ This stack configures the Samba user (e.g. `some_user`) to run `/usr/bin/veracry
     - You will be prompted to enter a Samba username and password (hidden input, not stored in env or files).
     - The script will create the user, set permissions, and start the Samba server as a background daemon.
     - On subsequent runs, if a Samba user already exists, the script will skip setup and start Samba in the background (if not already running).
-3. **Access the Samba share**
-    - Only port **445/tcp** is exposed for maximum security (modern SMB clients only).
-    - Connect to `//<host>/shared` as the username and password you entered.
-    - The share is `/mnt/shared` in the container, mapped to a Docker volume.
+3. **Test the Samba share**
+
+-   After starting Samba, you can test access from inside the container:
+    ```sh
+    /test-samba.sh
+    ```
+    This will prompt for your username and password and attempt to list the contents of the share.
+-   By default, only port **1445/tcp** is exposed (see `SMB_PORT` in compose.yaml). **You must use a non-privileged port (>=1024) to run Samba as a non-root user.**
+-   **To connect from the host or any client using smbclient, you must specify the port with the `-p` option:**
+    ```sh
+    smbclient //127.0.0.1/shared -p 1445 -U <username>
+    ```
+    Do not use `//127.0.0.1:1445/shared` (this will not work).
+-   The share is `/mnt/shared` in the container, mapped to a Docker volume.
+
+---
+
+### Agent/Automation Testing
+
+You can test the Samba+VeraCrypt stack in CI or with agents using the provided scripts, without copying them to `/` in the container.
+
+**Example:**
+
+```sh
+# Build and start the stack
+docker-compose -f stacks/ubuntu_pro/compose.yaml up --build -d
+
+# Run the setup script interactively (simulate input for automation)
+docker exec -i ubuntu_pro bash -c '/start-samba.sh' <<EOF
+youruser
+yourpassword
+yourpassword
+EOF
+
+# Run the test script from its project path
+docker exec -i ubuntu_pro bash -c 'cd /root/projects/forest/stacks/ubuntu_pro && ./test-samba.sh' <<EOF
+youruser
+yourpassword
+EOF
+```
+
+-   The test script will print a success message if the share is accessible.
+-   No need to copy the test script to `/`—it is available in the project path due to the volume mount.
+
+---
+
+#### VeraCrypt Mount/Unmount Scripts for Agents
+
+For automation, use the following scripts inside the container:
+
+-   **Mount a VeraCrypt volume:**
+    ```sh
+    /vera /mnt/dst/your.tc /mnt/shared/yourmount
+    ```
+-   **Unmount:**
+    ```sh
+    /vera-off /mnt/shared/yourmount
+    ```
+
+These scripts ensure correct UID/GID and FUSE options for Samba access.
 
 ## Security Notes
 

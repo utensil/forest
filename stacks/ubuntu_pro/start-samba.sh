@@ -10,18 +10,27 @@ echo "=== Secure Samba Server Setup ==="
 # Check if a Samba user already exists
 EXISTING_USER=$(pdbedit -L | head -n1 | cut -d: -f1)
 if [[ -n "$EXISTING_USER" ]]; then
-  echo "Samba user '$EXISTING_USER' already exists. Skipping setup."
+  echo "Samba user '$EXISTING_USER' already exists. Please enter the password to reset it."
+  while true; do
+    smbpasswd "$EXISTING_USER" && break
+    echo "Password setup failed. Try again."
+  done
   if pgrep smbd > /dev/null; then
     echo "Samba server is already running (PID: $(pgrep smbd | tr '\n' ' '))."
   else
-    echo "Starting Samba server as a daemon..."
-    smbd
-    echo "Samba server started in background."
+    echo "Starting Samba server as a daemon (non-root user: $EXISTING_USER)..."
+    SMB_PORT="${SMB_PORT:-1445}"
+    echo "Starting smbd as $EXISTING_USER on port $SMB_PORT..."
+    exec su -s /bin/bash -c "smbd --foreground --debug-stdout --no-process-group" "$EXISTING_USER"
+    # The above exec replaces the shell, so the following line will not run.
+    # If you want to run in background, use:
+    # su -s /bin/bash -c "smbd -p $SMB_PORT &" "$EXISTING_USER"
+    # But for security, prefer exec (PID 1).
   fi
   exit 0
 fi
 
-# Prompt for username
+# Always prompt for username interactively
 while true; do
   read -p "Enter Samba username: " SMB_USER
   if [[ -z "$SMB_USER" ]]; then
@@ -59,7 +68,7 @@ if ! grep -qF "$RULE" "$SUDOERS_FILE" 2>/dev/null; then
   chmod 440 "$SUDOERS_FILE"
 fi
 
-# Prompt for password and set Samba password interactively
+# Set Samba password (always prompt interactively)
 while true; do
   smbpasswd -a "$SMB_USER" && break
   echo "Password setup failed. Try again."
@@ -71,11 +80,20 @@ done
 chown -R "$SMB_USER":smbgroup /mnt/shared
 chmod 770 /mnt/shared
 
-echo "Samba user '$SMB_USER' created. Starting Samba server as a daemon..."
-smbd
-if pgrep smbd > /dev/null; then
-  echo -e "\033[1;32mSamba server is UP! (PID: $(pgrep smbd | tr '\n' ' '))\033[0m"
-  echo "To stop Samba, run: /stop-samba.sh"
-else
-  echo "Failed to start Samba server. Check logs."
-fi
+# AGENT-NOTE: Fix ownership of Samba state directories for non-root operation
+for d in /var/lib/samba /var/run/samba /var/log/samba /run/samba; do
+  if [ -d "$d" ]; then
+    chown -R "$SMB_USER":smbgroup "$d"
+  fi
+done
+
+echo "Samba user '$SMB_USER' created. Starting Samba server as a daemon (non-root user: $SMB_USER)..."
+SMB_PORT="${SMB_PORT:-1445}"
+echo "Starting smbd as $SMB_USER on port $SMB_PORT..."
+#  --foreground --debug-stdout
+exec su -s /bin/bash -c "smbd --no-process-group" "$SMB_USER"
+# The above exec replaces the shell, so the following lines will not run.
+# If you want to run in background, use:
+# su -s /bin/bash -c "smbd -p $SMB_PORT &" "$SMB_USER"
+# But for security, prefer exec (PID 1).
+

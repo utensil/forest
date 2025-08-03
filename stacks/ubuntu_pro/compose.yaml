@@ -27,8 +27,10 @@ services:
             - SYS_ADMIN
         security_opt:
             - apparmor:unconfined
+        environment:
+            - SMB_PORT=1445
         ports:
-            - "445:445"
+            - "1445:1445"
 networks: {}
 volumes:
     ubuntu_pro_shared: null
