@@ -14,24 +14,29 @@ This stack provides a hardened Ubuntu-based container with:
 
 To ensure your Samba user can access files in a VeraCrypt-mounted container, you must mount the volume with the correct ownership. The most widely used convention in Docker is UID=1000 and GID=1000.
 
+**Sudo-based VeraCrypt Mounting (Recommended):**
+
+This stack configures the Samba user (e.g. `some_user`) to run `/usr/bin/veracrypt` as root via `sudo` (without a password) for secure, FUSE-based mounting. This ensures the mount is owned by the Samba user and accessible via SMB.
+
 **Steps:**
 
 1. Make sure your Samba user inside the container has UID=1000 and GID=1000 (this stack does this by default).
-2. When mounting your VeraCrypt volume, use:
+2. To mount your VeraCrypt volume as the Samba user, run:
     ```sh
-    veracrypt --text --mount /path/to/container.vc /mnt/shared --filesystem=exfat --fs-options=uid=1000,gid=1000
+    sudo -u some_user sudo veracrypt --text --pim=0 --keyfiles="" --protect-hidden=no -m=nokernelcrypto --fs-options=uid=1000,gid=1000,umask=0022 /mnt/dst/test.tc /mnt/shared/test
     ```
     - For NTFS: add `umask=0002` if you want group write access.
     - For ext4: normal permissions apply.
-3. Now the Samba user will have full access to the mounted files.
+3. Now the Samba user will have full access to the mounted files, and they will be visible and writable via SMB.
 
 **Note:**
 
+-   This sudoers rule is set up automatically by the start script for each Samba user.
 -   If you mount the VeraCrypt volume as root (the default), the Samba user will not be able to access the files.
 -   Always use the `uid` and `gid` mount options for exFAT/NTFS.
 -   You can verify the user and group IDs inside the container with:
     ```sh
-    docker exec ubuntu_pro id utensil
+    docker exec ubuntu_pro id some_user
     ```
 
 ### ⚠️ Mac Finder + Docker Desktop Limitation
