@@ -9,7 +9,6 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - $PODS_HOME/dockge/data:/app/data
-
       # If you want to use private registries, you need to share the auth file with Dockge:
       # - /root/.docker/:/root/.docker
 
@@ -21,5 +20,5 @@ services:
     environment:
       # Tell Dockge where is your stacks directory
       - DOCKGE_STACKS_DIR=/opt/stacks
-      - PODS_HOME=$PODS_HOME
-    network_mode: ${NETWORK_MODE:-bridge}  # Default to bridge if not set
+    network_mode: ${NETWORK_MODE:-bridge} # Default to bridge if not set
+networks: {}

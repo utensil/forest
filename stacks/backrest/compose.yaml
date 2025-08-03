@@ -10,5 +10,7 @@ services:
       - $PODS_HOME/backrest/config:/.config/backrest
       - $PODS_HOME/backrest/data:/data
       - $PODS_HOME/backrest/cache:/cache
+      - $DATA_SRC:/mnt/src/:ro
+      - $DATA_DST:/mnt/dst
     image: garethgeorge/backrest:latest
 networks: {}
