@@ -36,7 +36,14 @@ if ! getent group smbgroup > /dev/null; then
   groupadd smbgroup
 fi
 if ! id "$SMB_USER" > /dev/null 2>&1; then
-  useradd -M -s /usr/sbin/nologin -G smbgroup "$SMB_USER"
+  # Create user with UID 1000, GID 1000, home dir, shell, and add to fuse group if present
+  if getent group fuse > /dev/null; then
+    useradd -m -u 1000 -g 1000 -G smbgroup,fuse -s /bin/bash "$SMB_USER"
+  else
+    useradd -m -u 1000 -g 1000 -G smbgroup -s /bin/bash "$SMB_USER"
+  fi
+  # Set smbgroup GID to 1000 if not already
+  groupmod -g 1000 smbgroup || true
 fi
 
 # Set Samba password policies BEFORE setting password
