@@ -22,6 +22,37 @@
 \subtree[2025-07]{
 \title{July, 2025}
 
+\subtree[2025-07-08]{\mdnote{2025-07-08}{
+- #rust
+    - [Understanding Rust’s Memory Model](https://minami.bearblog.dev/rust-memory-model/)
+    - [#[derive(Clone)] is broken](https://rgbcu.be/blog/derive-broken/)
+    - [Building the Rust compiler with GCC](https://fractalfir.github.io/generated_html/cg_gcc_bootstrap.html)
+        - [rust-lang/rustc_codegen_gcc: libgccjit AOT codegen for rustc](https://github.com/rust-lang/rustc_codegen_gcc)
+- #clojure
+    - [All Programming Languages are Fast](https://orgpad.info/blog/all-programming-langs-are-fast)
+    - [8 Reasons why Clojure is a better Java than Java](https://ericnormand.me/article/clojure-is-a-better-java-than-java)
+- #swift
+    - [Cocoa Basics series](https://blog.xoria.org/cocoa-basics-0/)
+- #go
+    - [Generic interfaces](https://go.dev/blog/generic-interfaces)
+- #software #idea
+    - [Inverse Triangle Inequality](https://matklad.github.io/2025/07/07/inverse-triangle-inequality.html)
+- #lean
+    - [Lean's new home page](https://lean-lang.org/): Lean is a theorem prover and programming language that enables correct, maintainable, and formally verified code
+        - learn about tactic `grind`
+    - [My first verified (imperative) program](https://markushimmel.de/blog/my-first-verified-imperative-program/) ([on HN](https://news.ycombinator.com/item?id=44492986))
+    - [“Bad Apple!!” But It’s 3288 Lean Tactics Spamming VSCode](https://unnamed.website/posts/bad-apple-lean-tactic/)
+- #lang
+    - [SUS Lang: The SUS Hardware Description Language](https://sus-lang.org/)
+        -  Verilog and VHDL might be good enough per [this comment on HN](https://news.ycombinator.com/item?id=44495311)
+- #model-edit
+    - [Show HN: Unlearning Comparator, a visual tool to compare machine unlearning](https://gnueaj.github.io/Machine-Unlearning-Comparator/)
+- #wasm
+    - [WebAssembly: Yes, but for What?](https://queue.acm.org/detail.cfm?id=3746171)
+- #im
+    - [bitchat is a decentralized, peer-to-peer messaging application that operates over Bluetooth Low Energy (BLE) mesh networks](https://github.com/jackjackbits/bitchat/blob/main/WHITEPAPER.md)
+}}
+
 \subtree[2025-07-07]{\mdnote{2025-07-07}{
 - #ai-safety
     - [A non-anthropomorphized view of LLMs](http://addxorrol.blogspot.com/2025/07/a-non-anthropomorphized-view-of-llms.html)
@@ -38,11 +69,14 @@
             - works with small, local modelsA
             - safe autonomy
         - [meain/esa: Fastest way to create personalized AI agents](https://github.com/meain/esa)
+    - [The era of exploration](https://yidingjiang.github.io/blog/post/exploration/)
+        - the immense cost of pretraining is effectively paying a massive, upfront “exploration tax.”
+        - Exploration is deciding what data the learner will see
+            - World sampling – deciding where to learn, i.e. a particular problem that needs to be solved
+            - Path sampling – deciding how to gather data inside a world, e.g. random walks, curiosity‑driven policies, tree search, tool-use, etc.
+                - recent work: [curiosity objectives](https://arxiv.org/abs/1908.06976), [open-endedness](https://arxiv.org/abs/2406.04268), [meta‑exploration](https://arxiv.org/abs/2502.17543)
     - [Prompt Coding: No code edits, only complete rewrites](https://www.gibney.org/prompt_coding) #idea
-    - [The era of exploration](https://yidingjiang.github.io/blog/post/exploration/) ([on HN](https://news.ycombinator.com/item?id=44491333))
-- #rust
-    - [Building the Rust compiler with GCC](https://fractalfir.github.io/generated_html/cg_gcc_bootstrap.html)
-        - [rust-lang/rustc_codegen_gcc: libgccjit AOT codegen for rustc](https://github.com/rust-lang/rustc_codegen_gcc)
+    - [Adding a feature because ChatGPT incorrectly thinks it exists](https://www.holovaty.com/writing/chatgpt-fake-feature/) #idea
 - interesting projects
     - [Am I online?](https://antonz.org/is-online/)
         - `generate_402` pages could be used for this
@@ -781,6 +815,7 @@
     - [Wayland Is Growing Up. and Now We Don't Have a Choice](https://fireborn.mataroa.blog/blog/i-want-to-love-linux-it-doesnt-love-me-back-post-4-wayland-is-growing-up-and-now-we-dont-have-a-choice/) ([on HN](https://news.ycombinator.com/item?id=44326545)) ([on lobste.rs](https://lobste.rs/s/76i5wh))
     - [Cosmoe: BeOS Class Library on top of Wayland](https://cosmoe.org/index.html)
     - [The X Window System didn't immediately have X terminals](https://utcc.utoronto.ca/~cks/space/blog/unix/XTerminalsNotImmediate)
+    - [Two weeks of wayback](https://ariadne.space/2025/07/07/two-weeks-of-wayback.html)
 - #robot
     - [Real-time action chunking with large models](https://www.pi.website/research/real_time_chunking)
 - #editor
@@ -1132,6 +1167,8 @@
         - minimal: consists of only a handful of binaries and shared libraries: just enough to run containerd and [a small set of system services](https://www.talos.dev/v1.10/learn-more/components/)
             - written in Go
         - no SSH and console access, fully controlled by API via gRPC
+        - [Which Kubernetes is the Smallest? Examining Talos Linux, K3s, K0s, and More](https://www.siderolabs.com/blog/which-kubernetes-is-the-smallest/)
+            - Talos has the minimal footprint
     - [The high-level OS challenge](https://ochagavia.nl/blog/the-high-level-os-challenge/)
     - [A DOS-like hobby OS written in Rust and x86 assembly](https://github.com/krustowski/rou2exOS)
         - RoureXOS rewritten in Rust
