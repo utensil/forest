@@ -51,6 +51,15 @@ pdbedit -P "min password length" -C 10
 pdbedit -P "password history" -C 5
 pdbedit -P "bad lockout attempt" -C 10
 
+# Allow Samba user to run veracrypt as root without password for FUSE mounting
+# Allow Samba user to run veracrypt as root without password for FUSE mounting
+SUDOERS_FILE="/etc/sudoers.d/veracrypt"
+RULE="$SMB_USER ALL=(root) NOPASSWD: /usr/bin/veracrypt"
+if ! grep -qF "$RULE" "$SUDOERS_FILE" 2>/dev/null; then
+  echo "$RULE" >> "$SUDOERS_FILE"
+  chmod 440 "$SUDOERS_FILE"
+fi
+
 # Prompt for password and set Samba password interactively
 while true; do
   smbpasswd -a "$SMB_USER" && break
