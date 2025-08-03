@@ -10,6 +10,30 @@ This stack provides a hardened Ubuntu-based container with:
 
 ## Usage
 
+### Sharing VeraCrypt Volumes via Samba
+
+To ensure your Samba user can access files in a VeraCrypt-mounted container, you must mount the volume with the correct ownership. The most widely used convention in Docker is UID=1000 and GID=1000.
+
+**Steps:**
+
+1. Make sure your Samba user inside the container has UID=1000 and GID=1000 (this stack does this by default).
+2. When mounting your VeraCrypt volume, use:
+    ```sh
+    veracrypt --text --mount /path/to/container.vc /mnt/shared --filesystem=exfat --fs-options=uid=1000,gid=1000
+    ```
+    - For NTFS: add `umask=0002` if you want group write access.
+    - For ext4: normal permissions apply.
+3. Now the Samba user will have full access to the mounted files.
+
+**Note:**
+
+-   If you mount the VeraCrypt volume as root (the default), the Samba user will not be able to access the files.
+-   Always use the `uid` and `gid` mount options for exFAT/NTFS.
+-   You can verify the user and group IDs inside the container with:
+    ```sh
+    docker exec ubuntu_pro id utensil
+    ```
+
 ### ⚠️ Mac Finder + Docker Desktop Limitation
 
 **MacOS Finder cannot connect to Samba running in Docker Desktop on the same Mac, even using your LAN IP (e.g. smb://10.31.202.34/shared).**
