@@ -22,6 +22,45 @@
 \subtree[2025-07]{
 \title{July, 2025}
 
+\subtree[2025-07-11]{\mdnote{2025-07-11}{
+- agent
+    - [Not So Fast: AI Coding Tools Can Actually Reduce Productivity](https://secondthoughts.ai/p/ai-coding-slowdown)
+        - 19 percent productivity drop
+        - it's most interesting how objections are addressed
+            - The John Henry Effect: motivated to “beat the machine”, not observed
+            - Underuse of AI: not observed
+            - Cheating: can't explain a productivity loss
+            - Overly optimistic time estimates: should cancel out
+            - Skewed task definitions: randomly assigned
+            - Dropout effects: incomplete tasks are evenly divided
+            - Out-of-date tools: not observed
+            - Inaccurate time reporting: use alternative metrics
+            - Overuse of AI: carried away by exploring AI
+            - Lack of experience with AI tools: prior experience reported, no improvements through the study observed
+            - Difference in thoroughness: 47 percent more code by AI
+        - quotes from [First, They Came for the Software Engineers… - by TarenSK](https://secondthoughts.ai/p/first-they-came-for-the-software)
+            - "Typically, large productivity boosts occur for small, well-defined, greenfield projects, or when an engineer is first learning a new language or API"
+            - "For other work, gains from using current AI tools are often far more modest – and potentially entirely offset by increased time needed for review, debugging, integration, and managing AI quirks."
+    - [AI agent benchmarks are broken](https://ddkang.substack.com/p/ai-agent-benchmarks-are-broken)
+        - many validity issues are identified in [uiuc-kang-lab/agentic-benchmarks](https://github.com/uiuc-kang-lab/agentic-benchmarks)
+    - [We're Light-Years Away from True Artificial Intelligence, Says Martha Wells, author of the Murderbot Diaries series](https://www.scientificamerican.com/article/were-light-years-away-from-true-artificial-intelligence-says-murderbot/)
+    - [Vibe Kanban – Kanban board to manage your AI coding agents](https://github.com/BloopAI/vibe-kanban)
+        - tried, required too much GitHub authorization, settled on local-first backlog
+- [An almost catastrophic OpenZFS bug and the humans that made it](https://despairlabs.com/blog/posts/2025-07-10-an-openzfs-bug-and-the-humans-that-made-it/)
+    - follow-up: [What people said about an OpenZFS bug](https://despairlabs.com/blog/posts/2025-07-13-an-openzfs-bug-and-the-humans-that-made-it-comments/)
+        - wrapper types can be done, but they are very difficult to work with
+        - unused variable warning can't catch it, as it is only a dead store: we store a value that is never read
+        - static analysers all catch it, but they suffer from noise
+- [FP8 is ~100 tflops faster when the kernel name has "cutlass" in it](https://twitter.com/cis_female/status/1943069934332055912)
+    - [the PR](https://github.com/triton-lang/triton/pull/7298)
+    - "that is a very usual way (known practices) of vendors applying specific optimizations for known things"
+- [Pangolin – Open source alternative to Cloudflare Tunnels](https://github.com/fosrl/pangolin)
+    - client: [fosrl/newt: A tunneling client for Pangolin](https://github.com/fosrl/newt)
+        - a custom user space WireGuard client
+    - may be cheap to self-host on [RackNerd](https://www.racknerd.com/)
+    - [awesome-tunneling: List of ngrok/Cloudflare Tunnel alternatives and other tunneling software and services. Focus on self-hosting.](https://github.com/anderspitman/awesome-tunneling)
+}}
+
 \subtree[2025-07-10]{\mdnote{2025-07-10}{
 - #rust
     - [Optimizing a Math Expression Parser in Rust](https://rpallas.xyz/math-parser/) #perf
@@ -38,12 +77,14 @@
         - Stacked borrows is Miri's runtime model, the current version of Tree Borrows is implemented in the Miri interpreter
         - more about stacked borrows
             - [unsafe-code-guidelines/wip/stacked-borrows.md at master · rust-lang/unsafe-code-guidelines](https://github.com/rust-lang/unsafe-code-guidelines/blob/master/wip/stacked-borrows.md)
+        - [Forget Borrow Checkers: C3 Solved Memory Lifetimes With Scopes](https://c3-lang.org/blog/forget-borrow-checkers-c3-solved-memory-lifetimes-with-scopes/)
     - [Building Modular Interpreters and Visitors in Rust with Extensible Variants and CGP](https://contextgeneric.dev/blog/extensible-datatypes-part-2/)
 - #asm
     - [An online searchable reference tool for C intrinsics of all major SIMD engines](https://simd.info/)
         - people mentioned more references [on HN](https://news.ycombinator.com/item?id=44496229)
     - [The messy reality of SIMD (vector) functions](https://johnnysswlab.com/the-messy-reality-of-simd-vector-functions) ([on HN](https://news.ycombinator.com/item?id=44470464))
     - [Writing a very simple JIT Compiler in about 1000 lines of C](https://kuterdinel.com/writing-a-very-simple-jit-compiler-in-about-1000-lines-of-c.html)
+    - [Writing an IR from Scratch and survive to write a post](https://farena.in/compilers/programming/writing-an-ir-from-scratch/)
 - #copyright
     - [I used to prefer permissive licenses and now favor copyleft](https://vitalik.eth.limo/general/2025/07/07/copyleft.html)
 - #idea #edu
@@ -107,6 +148,9 @@
         - could be considered a meta-programming language for Datalog
         - [DIDYOUKNOW.md](https://github.com/flix/flix/blob/master/docs/DIDYOUKNOW.md) is informative
         - [Flix | FAQ](https://flix.dev/faq/) is fun
+    - [Concurrent Programming with Harmony](https://harmony.cs.cornell.edu/book/) #formal
+        - a Python-like open-source programming language for testing and experimenting with concurrent and distributed programs
+        - Harmony programs are model-checked so that all corner cases are explored
     - [SUS Lang: The SUS Hardware Description Language](https://sus-lang.org/)
         -  Verilog and VHDL might be good enough per [this comment on HN](https://news.ycombinator.com/item?id=44495311)
 - #model-edit
@@ -125,6 +169,8 @@
             - Alignment and safety for LLMs (should) mean that we should be able to quantify and bound the probability with which certain undesirable sequences are generated
             - Human thought is a poorly-understood process, involving enormously many neurons, extremely high-bandwidth input, an extremely complicated cocktail of hormones, constant monitoring of energy levels, and millions of years of harsh selection pressure
             - Navigating the dramatic changes of the next few decades while trying to avoid world wars and murderous ideologies is difficult enough without muddying our thinking.
+    - [EU rules ask tech giants to publicly track how, when AI models go off the rails](https://arstechnica.com/tech-policy/2025/07/everything-tech-giants-will-hate-about-the-eus-new-ai-rules/)
+        - "AI companies are moving to user interface innovations to try to grab more unwilling training individuals"
     - [AI Hallucination Cases Database](https://www.damiencharlotin.com/hallucinations/)
 - #agent
     - [Building personalized micro agents](https://blog.meain.io/2025/building-personalized-micro-agents/)
@@ -188,6 +234,11 @@
 - #anti-bot
     - [Anubis Pilot Project Report - June 2025](https://dukespace.lib.duke.edu/server/api/core/bitstreams/816ef134-55cf-49f6-9a8b-1e8a2324b1ff/content)
         - it's interesting to see how serious business sees the adoption of Anubis
+    - [Anubis now supports non-JS challenges](https://anubis.techaro.lol/blog/release/v1.20.0/#no-js-challenge)
+        - this changelog is very informative
+            - weight thresholds in policy is flexible
+            - `robots2policy` is convenient if a site has a well-maintained robots.txt
+            - no-JS challenge via metarefresh doesn't seem to battle-ready: "many modern scrapers use headless Google Chrome", "its false positive rate is ascertained"
 - #agent/idea
     - [Everything around LLMs is still magical and wishful thinking](https://dmitriid.com/everything-around-llms-is-still-magical-and-wishful-thinking)
     - [Riff: LLMs are Software Diamonds](https://www.evalapply.org/posts/llms-are-diamonds/index.html)
@@ -218,6 +269,7 @@
     - [Stop using nix-env](https://stop-using-nix-env.privatevoid.net/)
 - #idea
     - [When in doubt, Go for a Walk](https://fabiansjournal.bearblog.dev/when-in-doubt-go-for-a-walk/)
+    - [its ok to have a normal job](https://tala.bearblog.dev/its-ok-to-have-a-normal-job/)
 - #sec
     - [iris](https://github.com/iris-sast/iris)
         - a neurosymbolic framework that combines LLMs with static analysis for security vulnerability detection
@@ -506,6 +558,7 @@
             - efficient diffing
             - efficient mutation
     - [Building Replication-Safe LSM Trees in Postgres](https://www.paradedb.com/blog/lsm_trees_in_postgres)
+    - [Efficiency of a sparse hash table](https://ashutoshpg.blogspot.com/2025/07/efficiency-of-sparse-hash-table.html)
 - #ai-consciousness
     - [A Framework for Recognizing Emergent Consciousness in AI](https://habr.com/en/articles/922894/)
         - Attention: The capacity for multi-level focusing.
@@ -674,6 +727,9 @@
         - the author used a hosted RSS system: [FreshRSS](https://www.freshrss.org/) (self-hostable)
         - configure FreshRSS to grab the whole content if excerpt-only
         - create a pseudo-RSS via "Web scraping feature HTML+XPath for Web pages without any RSS/ATOM feed"
+    - [Croissant! Building a No-Framework Web App](https://dbushell.com/2025/07/11/croissant-no-framework-web-app/)
+        - informative about how to build a RSS aggregator and how to build no-framework web app
+        - from his [AI Policy](https://dbushell.com/ai/), I have quite some ideas about my own AI policy, starting by naming it "LM policy"
 - [JavaScript Chose Violence](https://martinrue.com/javascript-chose-violence)
     - a series of caveats of JavaScript, some are new to me
 - [Games run faster on SteamOS than Windows 11, Ars testing finds](https://arstechnica.com/gaming/2025/06/games-run-faster-on-steamos-than-windows-11-ars-testing-finds/)
@@ -1829,13 +1885,14 @@
 - found [nnd: A TUI alternative to gdb](https://github.com/al13n321/nnd)
 - found [A part of the fundamental group of an n-dimensional beanA](https://tikz.org/bean/)
 - [Building a regex engine](https://sh4dy.com/2025/05/01/regex_engine/) in C++
-- wondering about chaos engineering in Zig with eBPF
+- wondering about chaos engineering in Zig with eBPF #ebpf
     - learn more about [zbpf](https://github.com/tw4452852/zbpf)
     - maybe it's easiest to use [lima](https://lima-vm.io/) to test eBPF
     - found [Pixie](https://px.dev/) when reading [Debugging Production: eBPF Chaos](https://www.infoq.com/articles/debugging-production-ebpf-chaos/)
     - [Introducing Minderbinder](https://blog.scottgerring.com/posts/introducing-minderbinder/) which is in Go
     - [Implementing fast TCP fingerprinting with eBPF](https://halb.it/posts/ebpf-fingerprinting-2/)
         - using Cilium in Go
+    - [ebpf series - Unnamed Memories](https://h0x0er.github.io/blog/category/ebpf/)
 - found [alternative open source front-ends for popular internet platforms](https://github.com/mendel5/alternative-front-ends)
 }}
 
