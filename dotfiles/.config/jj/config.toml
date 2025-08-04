@@ -19,6 +19,18 @@ diff-editor = ':builtin'
 diff-formatter = ':git'
 graph.style = 'square'
 
+# [NOTE] support coloring moved lines differently
+# inspired by https://github.com/jj-vcs/jj/issues/76#issuecomment-2650808440
+# and https://github.com/jj-vcs/jj/issues/6464
+# but not working, settled on using `git diff` instead of `jj diff` if this matters
+# via `just prep-delta`
+[ui.diff]
+format = "git"
+tool = "delta"
+
+[merge-tools.delta]
+diff-expected-exit-codes = [0, 1]
+
 [git]
 push-new-bookmarks = true
 # [NOTE] user neutral prefix

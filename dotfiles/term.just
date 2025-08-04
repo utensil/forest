@@ -245,6 +245,9 @@ prep-delta:
     git config --global delta.navigate true
     git config --global delta.dark true
     git config --global merge.conflictStyle zdiff3
+    # https://git-scm.com/docs/git-diff#Documentation/git-diff.txt---color-movedmode
+    # git config --global diff.colorMoved dimmed_zebra
+    git config --global diff.colorMovedWs allow-indentation-change
     mkdir -p ~/.config/lazygit
     cp -f .lazygit.yml ~/.config/lazygit/config.yml
 
