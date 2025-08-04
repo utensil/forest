@@ -11,14 +11,15 @@
 # diff-formatter = "delta"
 
 [custom_commands]
-"delta" = { args = [
-  "util",
-  "exec",
-  "--",
-  "bash",
-  "-c",
-  """jj show -r $change_id --summary --git --color=always | delta --pager 'less -R'""",
-], show = "interactive" }
+# we don't need this any more with ui.diff-formatter configured to use delta
+# "delta" = { args = [
+#   "util",
+#   "exec",
+#   "--",
+#   "bash",
+#   "-c",
+#   """jj show -r $change_id --summary --git --color=always | delta --pager 'less -R'""",
+# ], show = "interactive" }
 
 "ci" = { args = [
   "util",
