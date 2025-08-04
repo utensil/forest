@@ -619,7 +619,7 @@ abduco *PARAMS:
 # see https://github.com/shell-pool/shpool/issues/183
 #
 prep-pool:
-    cargo install shpool
+    which shpool || cargo install shpool
 
 prep-ds:
     cargo install diss
