@@ -790,10 +790,27 @@ prep-annex:
     mkdir -p ~/annex
     (cd ~/annex && git annex webapp)
 
+## CLI Tips
+
 # https://bhoot.dev/2025/cp-dot-copies-everything/
 #
 cp SRC DST:
     cp -R {{SRC}}/. {{DST}}
+
+# https://til.simonwillison.net/macos/fs-usage
+#
+# pathname, network, filesys, exec, diskio, cachehit
+#
+[macos]
+trace PID FILTER="pathname":
+    fs_usage -f {{FILTER}} {{PID}}
+
+# https://linux-audit.com/cheat-sheets/strace/
+# file, network, memory, process, ipc, signal
+#
+[linux]
+trace PID FILTER="file":
+    strace -f -e trace={{FILTER}} -p {{PID}}
 
 ## Code forge
 
