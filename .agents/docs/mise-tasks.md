@@ -18,7 +18,7 @@ This guide summarizes best practices for writing mise tasks in this repository, 
 
 -   **Script Headers:**
 
-    -   Include a shebang (e.g., `#!/bin/bash`).
+    -   Include a shebang (e.g., `#!/usr/bin/env bash`).
     -   Add `#MISE` metadata headers as needed for sources, outputs, and dependencies.
 
 -   **Orchestration:**

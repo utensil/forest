@@ -432,7 +432,7 @@ kit-mcp:
 # Not working
 # https://github.com/conikeec/mcp-probe/tree/master
 # prep-mcp-probe:
-    # which mcp-probe || cargo install mcp-cli # brew install conikeec/tap/mcp-probe
+#     which mcp-probe || cargo install mcp-cli # brew install conikeec/tap/mcp-probe
 
 # Choose other model
 # Put the following in the box below
