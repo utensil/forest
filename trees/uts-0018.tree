@@ -22,6 +22,55 @@
 \subtree[2025-07]{
 \title{July, 2025}
 
+\subtree[2025-07-10]{\mdnote{2025-07-10}{
+- #rust
+    - [Optimizing a Math Expression Parser in Rust](https://rpallas.xyz/math-parser/) #perf
+        - profile time usage: [`cargo flamegraph`](https://github.com/flamegraph-rs/flamegraph) which uses [jonhoo/inferno: A Rust port of FlameGraph](https://github.com/jonhoo/inferno)
+        - profile memory usage: [nnethercote/dhat-rs: Heap profiling and ad hoc profiling for Rust programs.](https://github.com/nnethercote/dhat-rs)
+        - SIMD scan
+        - `mmap`
+    - [(Quite) A Few Words About Async](https://yoric.github.io/post/quite-a-few-words-about-async/)
+        - reviewed alternative to async, and async/await in Python, Js, Rust, (and not in) Go (implicit M:N scheduling), OCaml (effect)
+    - [Building Modular Interpreters and Visitors in Rust with Extensible Variants and CGP](https://contextgeneric.dev/blog/extensible-datatypes-part-2/)
+- [Clew](https://clew.se/about/)
+    - a self-hostable search engine that focus on writing by independent creators
+    - discusses various search techniques in its blog posts
+    - tried, not great search result
+- #asm
+    - [An online searchable reference tool for C intrinsics of all major SIMD engines](https://simd.info/)
+        - people mentioned more references [on HN](https://news.ycombinator.com/item?id=44496229)
+    - [The messy reality of SIMD (vector) functions](https://johnnysswlab.com/the-messy-reality-of-simd-vector-functions) ([on HN](https://news.ycombinator.com/item?id=44470464))
+    - [Writing a very simple JIT Compiler in about 1000 lines of C](https://kuterdinel.com/writing-a-very-simple-jit-compiler-in-about-1000-lines-of-c.html)
+- #sec
+    - [CVE-2025-48384: Breaking git with a carriage return and cloning RCE](https://dgl.cx/2025/07/git-clone-submodule-cve-2025-48384)
+- #idea #software
+    - [Essential and accidental configuration](https://jfmengels.net/essential-and-accidental-configuration/)
+- #copyright
+    - [I used to prefer permissive licenses and now favor copyleft](https://vitalik.eth.limo/general/2025/07/07/copyleft.html)
+- #idea #edu
+    - [Let Kids Be Loud](https://www.afterbabel.com/p/let-kids-be-loud) ([on HN](https://news.ycombinator.com/item?id=44513801))
+- [Magic .env files built for sharing: Human-first, AI-friendly](https://varlock.dev/)
+    - I might wish to use it to render `.env`, where secrects will be managed by `pass`
+    - or better, adopt `varlock run` approach instead of using `just`, `mise`, or `docker-compose` to read from `.env` files, but it's a longer journey
+- #selfhost
+    - [Monitoring my Homelab, Simply](https://b.tuxes.uk/simple-homelab-monitoring.html)
+        - [ntfy.sh](https://ntfy.sh/) for paging
+        - [Cron Job Monitoring - Healthchecks.io](https://healthchecks.io/) as a dead man’s switch (monitor 20 cron jobs for free)
+            - two dead man switches: 5m & 2h
+- [PEGs in a PEG](https://github.com/kragen/peg-bootstrap/blob/master/peg.md)
+- [MCP server for searching and downloading documents from Anna's Archive](https://github.com/iosifache/annas-mcp)
+    - also as a CLI
+    - requires donation to access the JSON API
+- [Petrichor – a free, open-source, offline music player for macOS](https://github.com/kushalpandya/Petrichor) #music
+    - a lot of other apps are suggested [on HN](https://news.ycombinator.com/item?id=44515266)
+- [The Architecture Behind Lovable and Bolt](https://www.beam.cloud/blog/agentic-apps) ([on HN](https://news.ycombinator.com/item?id=44511770))
+    - uses [baml](https://github.com/BoundaryML/baml) to engineer prompts using schemas
+    - uses [Beam](https://docs.beam.cloud/v2/getting-started/introduction), an open-source serverless cloud for sanboxed execution
+    - made into [beam-cloud/lovable-clone](https://github.com/beam-cloud/lovable-clone)
+- [Using fs_usage to see what files a process is using](https://til.simonwillison.net/macos/fs-usage)
+    - reminds me of `strace` days, added `just trace` tasks as a note
+}}
+
 \subtree[2025-07-08]{\mdnote{2025-07-08}{
 - #rust
     - [Understanding Rust’s Memory Model](https://minami.bearblog.dev/rust-memory-model/)
@@ -35,6 +84,7 @@
     - [Cocoa Basics series](https://blog.xoria.org/cocoa-basics-0/)
 - #go
     - [Generic interfaces](https://go.dev/blog/generic-interfaces)
+    - [What's //go:nosplit for?](https://mcyoung.xyz/2025/07/07/nosplit/)
 - #software #idea
     - [Inverse Triangle Inequality](https://matklad.github.io/2025/07/07/inverse-triangle-inequality.html)
 - #lean
@@ -43,6 +93,11 @@
     - [My first verified (imperative) program](https://markushimmel.de/blog/my-first-verified-imperative-program/) ([on HN](https://news.ycombinator.com/item?id=44492986))
     - [“Bad Apple!!” But It’s 3288 Lean Tactics Spamming VSCode](https://unnamed.website/posts/bad-apple-lean-tactic/)
 - #lang
+    - [Flix – A powerful effect-oriented programming language](https://flix.dev/) ([on HN](https://news.ycombinator.com/item?id=44521224))
+        - runs on JVM, interoperable with Java, Kotlin, Scala, etc.
+        - could be considered a meta-programming language for Datalog
+        - [DIDYOUKNOW.md](https://github.com/flix/flix/blob/master/docs/DIDYOUKNOW.md) is informative
+        - [Flix | FAQ](https://flix.dev/faq/) is fun
     - [SUS Lang: The SUS Hardware Description Language](https://sus-lang.org/)
         -  Verilog and VHDL might be good enough per [this comment on HN](https://news.ycombinator.com/item?id=44495311)
 - #model-edit
@@ -51,6 +106,7 @@
     - [WebAssembly: Yes, but for What?](https://queue.acm.org/detail.cfm?id=3746171)
 - #im
     - [bitchat is a decentralized, peer-to-peer messaging application that operates over Bluetooth Low Energy (BLE) mesh networks](https://github.com/jackjackbits/bitchat/blob/main/WHITEPAPER.md)
+    - [White Noise – secure and private messenger](https://www.whitenoise.chat/)
 }}
 
 \subtree[2025-07-07]{\mdnote{2025-07-07}{
@@ -234,7 +290,6 @@
     - [KurtWagner/zlinter: An extendable and customisable Zig linter that is integrated from source into your build.zig.](https://github.com/KurtWagner/zlinter)
         - I should integrate it with my zig code
     - [Zig CLI Bible tool for the WEB translation in USFM format](https://github.com/shadyalfred/zbible/)
-    - [The messy reality of SIMD (vector) functions](https://johnnysswlab.com/the-messy-reality-of-simd-vector-functions) ([on HN](https://news.ycombinator.com/item?id=44470464)) ([on lobste.rs](https://lobste.rs/s/d9ocg5))
     - [Base64 for compression](https://lemire.me/blog/2025/07/03/base64-for-compression/)
         - assembly used to pass octal escape codes for UTF-8 and expand significantly
         - GCC 15 now supports base64 encoding of data during compilation, with a new “base64” pseudo-op
@@ -329,7 +384,7 @@
         - based on [markmanx/isoflow](https://github.com/markmanx/isoflow)
     - [mmastrac/stylus: Lightweight status page for home infrastructure](https://github.com/mmastrac/stylus)
         - architecture and health status
-- #language
+- #lang
     - [Reflections on Haskell and Rust](https://academy.fpblock.com/blog/rust-haskell-reflections/)
     - [The KDL Document Language](https://kdl.dev/)
         - [bikeshed, a spec preprocessor](https://github.com/speced/bikeshed)
@@ -681,7 +736,7 @@
         - the advisors perspective is also informative
 - [Nano-Vllm: lightweight vLLM implementation built from scratch](https://github.com/GeeeekExplorer/nano-vllm)
     - I would wonder if I could do this in Zig
-- #language
+- #lang
     - [Cyber Programming Language](https://cyberscript.dev/)
         - written in Zig
         - fast, efficient, and concurrent scripting
@@ -1181,25 +1236,26 @@
 }}
 
 \subtree[2025-06-09]{\mdnote{2025-06-09}{\tags{#agent #datafusion #docker #duckdb #elixir #formal #harbor #idea #json #lemmy}
-- [Ditching HAProxy (in my homelab)](https://arch.dog/bark/ditching-haproxy)
-    - found [Ran out of infrastructure titles](https://arch.dog/bark/2025-03-30-infrastructure) from the author
-        - [backrest](https://github.com/garethgeorge/backrest)
-            - for using `restic` to manage backup [repos](https://restic.readthedocs.io/en/latest/030_preparing_a_new_repo.html) and plans
-            - tested that `restore` and `mount` work, as well as encryption and compression
-                - see also [Running Veracrypt in Docker](\verb>>>|https://ooe.ooo/posts/%E5%9C%A8docker%E4%B8%AD%E8%BF%90%E8%A1%8Cveracrypt/>>>)
-                    - `--privileged`, `-m=nokernelcrypto`, locale etc.
-            - supports monitoring via [Healthchecks](https://healthchecks.io/) if backup jobs don't "check in"
-            - a sec review: [restic cryptography](https://words.filippo.io/restic-cryptography/)
-        - [MetalLB, a load-balancer implementation for bare metal Kubernetes clusters](https://metallb.io/)
-        - `Talos`, moved to [[2025-06-10]]
-        - [Unbound: a powerful validating, recursive, caching DNS resolver](https://www.unbound.net/)
-            - could be used [for home network](https://unbound.docs.nlnetlabs.nl/en/latest/use-cases/home-resolver.html)
-        - [Salt](https://saltproject.io/) with [its GUI](https://github.com/erwindon/SaltGUI/)
-            - is similar to Ansible, in the sense you use YAML to specify a state, but has a differening architecture, opting for a master/minion setup rather than Ansible's agentless SSH connections to each node
-        - [Apt-Cacher NG](https://www.unix-ag.uni-kl.de/~bloch/acng/) for caching apt packages
-        - [Harbor](https://goharbor.io/) for caching container images
-        - [Headscale](https://github.com/juanfont/headscale): self-hosted implementation of the Tailscale control server
-        - [Pocket ID](https://pocket-id.org/) for authenticate users with their passkeys
+- #selfhost
+    - [Ditching HAProxy (in my homelab)](https://arch.dog/bark/ditching-haproxy)
+        - found [Ran out of infrastructure titles](https://arch.dog/bark/2025-03-30-infrastructure) from the author
+            - [backrest](https://github.com/garethgeorge/backrest)
+                - for using `restic` to manage backup [repos](https://restic.readthedocs.io/en/latest/030_preparing_a_new_repo.html) and plans
+                - tested that `restore` and `mount` work, as well as encryption and compression
+                    - see also [Running Veracrypt in Docker](\verb>>>|https://ooe.ooo/posts/%E5%9C%A8docker%E4%B8%AD%E8%BF%90%E8%A1%8Cveracrypt/>>>)
+                        - `--privileged`, `-m=nokernelcrypto`, locale etc.
+                - supports monitoring via [Healthchecks](https://healthchecks.io/) if backup jobs don't "check in"
+                - a sec review: [restic cryptography](https://words.filippo.io/restic-cryptography/)
+            - [MetalLB, a load-balancer implementation for bare metal Kubernetes clusters](https://metallb.io/)
+            - `Talos`, moved to [[2025-06-10]]
+            - [Unbound: a powerful validating, recursive, caching DNS resolver](https://www.unbound.net/)
+                - could be used [for home network](https://unbound.docs.nlnetlabs.nl/en/latest/use-cases/home-resolver.html)
+            - [Salt](https://saltproject.io/) with [its GUI](https://github.com/erwindon/SaltGUI/)
+                - is similar to Ansible, in the sense you use YAML to specify a state, but has a differening architecture, opting for a master/minion setup rather than Ansible's agentless SSH connections to each node
+            - [Apt-Cacher NG](https://www.unix-ag.uni-kl.de/~bloch/acng/) for caching apt packages
+            - [Harbor](https://goharbor.io/) for caching container images
+            - [Headscale](https://github.com/juanfont/headscale): self-hosted implementation of the Tailscale control server
+            - [Pocket ID](https://pocket-id.org/) for authenticate users with their passkeys
 - #fediverse
     -[Two Approaches to Solving the “Quiet Fediverse” Problem: Conversation Backfilling Mechanisms](https://hackers.pub/@hongminhee/2025/quiet-fediverse-two-approaches/en)
     - [The fediverse, explained](https://www.theverge.com/24063290/fediverse-explained-activitypub-social-media-open-protocol)
@@ -1520,7 +1576,7 @@
 - [Why I love OCaml](https://mccd.space/posts/ocaml-the-worlds-best/)
 - [How to Get Your Research Paper Accepted](https://maxwellforbes.com/posts/how-to-get-a-paper-accepted)
 - [Fork Union: Beyond OpenMP in C++ and Rust?](https://ashvardanian.com/posts/beyond-openmp-in-cpp-rust/)
-- #language
+- #lang
     - [Wren](https://wren.io/), a small, fast, class-based concurrent scripting language
         - "Think Smalltalk in a Lua-sized package with a dash of Erlang and wrapped up in a familiar, modern syntax."
         - [Talon](https://github.com/jossephus/talon): Write Raylib programs in Wren
@@ -1533,6 +1589,8 @@
     - [Roto](https://github.com/NLnetLabs/roto)
         - from [Introducing Roto: A Compiled Scripting Language for Rust](https://blog.nlnetlabs.nl/introducing-roto-a-compiled-scripting-language-for-rust/)
     - [Janet](https://janet-lang.org/)
+        - a more batteries-included Lua, with Lisp/Clojure-inspired syntax
+        - see [The smallest embeddable scripting language, part 1](https://log.schemescape.com/posts/static-site-generators/smallest-scripting-language.html)
     - [goal](https://codeberg.org/anaseto/goal), embeddable scripting array language
     - [lamber](https://github.com/aartaka/lamber), functional scripting language compiling to Lambda Calculus
 - found many papers, see [[uts-016E]]
@@ -1601,12 +1659,13 @@
 
 \subtree[2025-05-17]{\mdnote{2025-05-17}{\tags{#elixir #game #ocaml #os #rust #software #web #zig}
 - [Parallel Scaling Law for Language Models](https://huggingface.co/papers/2505.10475)
-- [The Language That Never Was](https://blog.celes42.com/the_language_that_never_was.html)
-    - [Leaving Rust gamedev after 3 years](https://loglog.games/blog/leaving-rust-gamedev/)
-    - [Mun](https://mun-lang.org/)
-    - [jank](https://jank-lang.org/)
-    - [The Little Book of Rust Macros](https://veykril.github.io/tlborm/)
-    - [MonoGame](https://monogame.net/)
+- #lang
+    - [The Language That Never Was](https://blog.celes42.com/the_language_that_never_was.html)
+        - [Leaving Rust gamedev after 3 years](https://loglog.games/blog/leaving-rust-gamedev/)
+        - [Mun](https://mun-lang.org/)
+        - [jank](https://jank-lang.org/)
+        - [The Little Book of Rust Macros](https://veykril.github.io/tlborm/)
+        - [MonoGame](https://monogame.net/)
 - #rust/error
     - [Using unwrap() in Rust is Okay](https://burntsushi.net/unwrap/)
         - [anyhow](https://docs.rs/anyhow) for applications and [thiserror](https://docs.rs/thiserror) for libraries
