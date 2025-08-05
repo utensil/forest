@@ -67,6 +67,26 @@
 \subtree[2025-07]{
 \title{July, 2025}
 
+\subtree[2025-07-31]{\mdnote{2025-07-31}{
+- #perf
+    - [Benchmarks in CI: Escaping the Cloud Chaos](https://codspeed.io/blog/benchmarks-in-ci-without-noise)
+- #browser
+    - [I tried Servo, the undercover web browser engine made with Rust](https://www.spacebar.news/servo-undercover-web-browser-engine/) #rust
+        - "this approach of breaking down a web engine into independently usable modules with public APIs will make it easier for people to get involved in web engine development, and make it easier for people to create new web engines in future" ([on HN](https://news.ycombinator.com/item?id=44744324))
+            - [servo/stylo: CSS engine that powers Servo and Firefox](https://github.com/servo/stylo)
+            - [servo/html5ever: High-performance browser-grade HTML5 parser](https://github.com/servo/html5ever)
+            - [DioxusLabs/taffy: A high performance rust-powered UI layout library](https://github.com/DioxusLabs/taffy)
+            - [DioxusLabs/blitz: A radically modular HTML/CSS rendering engine](https://github.com/DioxusLabs/blitz)
+    - [Orion Browser by Kagi](https://kagi.com/orion/)
+        - Kagi believes that they need to offer a hollistic replacement for big tech for consuming the web, that includes search, browser and email  ([on HN](https://news.ycombinator.com/item?id=44745843))
+- #cg
+    - [PixiEditor 2.0 – A FOSS universal 2D graphics editor](https://pixieditor.net/blog/2025/07/30/20-release/) ([on HN](https://news.ycombinator.com/item?id=44746583))
+        - Raster, Vector, Animations, Procedural (VFX, effects, non-desctuctive editing)
+        - written in C#, copyleft
+        - alternatives
+            - [G'MIC - GREYC's Magic for Image Computing: A Full-Featured Open-Source Framework for Image Processing - Main](https://gmic.eu/)
+}}
+
 \subtree[2025-07-11]{\mdnote{2025-07-11}{
 - agent
     - [Not So Fast: AI Coding Tools Can Actually Reduce Productivity](https://secondthoughts.ai/p/ai-coding-slowdown)
@@ -189,6 +209,7 @@
     - [Lean's new home page](https://lean-lang.org/): Lean is a theorem prover and programming language that enables correct, maintainable, and formally verified code
         - learn about tactic `grind`
     - [My first verified (imperative) program](https://markushimmel.de/blog/my-first-verified-imperative-program/) ([on HN](https://news.ycombinator.com/item?id=44492986))
+    - [The Math Is Haunted](https://overreacted.io/the-math-is-haunted/)
     - [“Bad Apple!!” But It’s 3288 Lean Tactics Spamming VSCode](https://unnamed.website/posts/bad-apple-lean-tactic/)
 - #lang
     - [Flix – A powerful effect-oriented programming language](https://flix.dev/) ([on HN](https://news.ycombinator.com/item?id=44521224))
@@ -199,6 +220,8 @@
     - [Concurrent Programming with Harmony](https://harmony.cs.cornell.edu/book/) #formal
         - a Python-like open-source programming language for testing and experimenting with concurrent and distributed programs
         - Harmony programs are model-checked so that all corner cases are explored
+    - [Carbon Language: An experimental successor to C++](https://docs.carbon-lang.dev/)
+        - informative discussions on [on HN](https://news.ycombinator.com/item?id=44745984)
     - [SUS Lang: The SUS Hardware Description Language](https://sus-lang.org/)
         -  Verilog and VHDL might be good enough per [this comment on HN](https://news.ycombinator.com/item?id=44495311)
 - #model-edit
@@ -208,6 +231,8 @@
 - #im
     - [bitchat is a decentralized, peer-to-peer messaging application that operates over Bluetooth Low Energy (BLE) mesh networks](https://github.com/jackjackbits/bitchat/blob/main/WHITEPAPER.md)
     - [White Noise – secure and private messenger](https://www.whitenoise.chat/)
+    - [Matrix Is Not Safe for EU Data Privacy](https://wire.com/en/blog/matrix-not-safe-eu-data-privacy)
+        - [Addressing fear, uncertainty and doubt thrown at Element and Matrix](https://element.io/blog/addressing-fear-uncertainty-and-doubt-thrown-at-element-and-matrix/)
 }}
 
 \subtree[2025-07-07]{\mdnote{2025-07-07}{
@@ -227,7 +252,9 @@
                 - it's also [supported by `delta`](https://github.com/dandavison/delta/blob/main/manual/src/color-moved-support.md)
     - [EU rules ask tech giants to publicly track how, when AI models go off the rails](https://arstechnica.com/tech-policy/2025/07/everything-tech-giants-will-hate-about-the-eus-new-ai-rules/)
         - "AI companies are moving to user interface innovations to try to grab more unwilling training individuals"
-    - [AI Hallucination Cases Database](https://www.damiencharlotin.com/hallucinations/)
+    - Hallucination
+        - [AI Hallucination Cases Database](https://www.damiencharlotin.com/hallucinations/)
+        - [The Sound of Silence](https://kieranhealy.org/blog/archives/2025/07/22/the-sound-of-silence/)
 - #agent
     - [Building personalized micro agents](https://blog.meain.io/2025/building-personalized-micro-agents/)
         - agent: has access to tools, decides which tools to use, and in what order, determines when the task is complete
@@ -262,6 +289,12 @@
     - ['It's too late': David Suzuki says the fight against climate change is lost](https://www.ipolitics.ca/2025/07/02/its-too-late-david-suzuki-says-the-fight-against-climate-change-is-lost/) ([on HN](https://news.ycombinator.com/item?id=44476774))
 - #sandbox
     - [Basically Everyone Should Be Avoiding Docker](https://lukesmith.xyz/articles/everyone-should-be-avoiding-docker/) ([on HN](https://news.ycombinator.com/item?id=44477452))
+    - [What is gVisor?](https://blog.yelinaung.com/posts/gvisor/) ([on HN](https://news.ycombinator.com/item?id=44745539)) ([on lobste.rs](https://lobste.rs/s/e03oa9))
+        - gVisor is an abstraction on top of existing Linux Kernel and acts as a middleman between the container and the Kernel
+        - The system calls are intercepted and handled by the a gVisor component called “Sentry”
+        - gVisor is designed to minimize and restrict the types of system calls the Sentry makes to the host kernel.
+        - [Sandboxing and Workload Isolation · The Fly Blog](https://fly.io/blog/sandboxing-and-workload-isolation/)
+            - "The Linux kernel has almost 400 system calls. How many of them do we need to efficiently emulate the rest? gVisor needs less than 20. With those, gVisor implements basically all of Linux in userland. Processes. Devices. Tasks. Address spaces and page tables. Filesystems. TCP/IP; the entire IP network stack, all reimplemented, in Go, backended by native Linux userland."
 - #agent
     - [Building a Mac app with Claude code](https://www.indragie.com/blog/i-shipped-a-macos-app-built-entirely-by-claude-code) ([on HN](https://news.ycombinator.com/item?id=44481286))
     - [Claude Code Pro Limit? Hack It While You Sleep](https://github.com/terryso/claude-auto-resume) ([on HN](https://news.ycombinator.com/item?id=44481235))
@@ -724,7 +757,7 @@
     - In physics, it's seen in tribalism: string theory tribes dominated despite failures, with research driven by trends over evidence.
     - Particle theory lacks experimental input, relying on "hot topics" under oligarchs, now facing funding collapse.
     - This shows how loss of truth-seeking harms scientific progress.
-- #performance
+- #perf
     - [Announcing Sniffnet v1.4: it’s 2X faster than Wireshark at processing PCAP files](https://sniffnet.net/news/v1.4/)
         - by focusing on extracting only the most relevant fields from the packets’ headers
     - [Avoiding PostgreSQL Pitfalls: The Hidden Cost of Failing Inserts](https://johnnymetz.com/posts/postgresql-failing-insert/)
@@ -773,6 +806,9 @@
         - [MCP in LM Studio](https://lmstudio.ai/blog/lmstudio-v0.3.17)
 - [Iroh: A library to establish direct connection between peers](https://github.com/n0-computer/iroh)
     - built on QUIC, but use TCP for falling back to relay servers
+    - [QUIC for the kernel](https://lwn.net/Articles/1029851/) ([on HN](https://news.ycombinator.com/item?id=44746948))
+        - [QUIC is not Quick Enough over Fast Internet : r/programming](https://www.reddit.com/r/programming/comments/1g7vv66/quic_is_not_quick_enough_over_fast_internet/)
+        - [microsoft/msquic: Cross-platform, C implementation of the IETF QUIC protocol, exposed to C, C++, C# and Rust.](https://github.com/microsoft/msquic/tree/main)
 - [Notes on type inference and polymorphism](https://blog.snork.dev/posts/notes-on-type-inference-and-polymorphism.html)
     - polymorphism is hard to combine with Hindley-Milner type inference
     - [Type Inference Was A Mistake](https://borretti.me/article/type-inference-was-a-mistake)
@@ -1318,11 +1354,12 @@
     - [Color Everything in CSS](https://css-tricks.com/color-everything-in-css/)
     - [Printing the web: making webpages look good on paper](https://piccalil.li/blog/printing-the-web-making-webpages-look-good-on-paper/)
     - [HUG CSS, how I approach CSS architecture](https://gomakethings.com/hug-css-how-i-approach-css-architecture/)
+    - [What Does `playsinline` Mean in Web Video? | CSS-Tricks](https://css-tricks.com/what-does-playsinline-mean-in-web-video/)
 }}
 
 \subtree[2025-06-10]{\mdnote{2025-06-10}{\tags{#agent #compiler #diagram #formal #llvm #makefile #news #optimization #rust #sec}
 - [Lightweight Diagramming for Lightweight Formal Methods](https://blog.brownplt.org/2025/06/09/copeanddrag.html)
-- #performance
+- #perf
     - [Why doesn’t Rust care more about compiler performance?](https://kobzol.github.io/rust/rustc/2025/06/09/why-doesnt-rust-care-more-about-compiler-performance.html)
     - [One Law to Rule All Code Optimizations](https://blog.codingconfessions.com/p/one-law-to-rule-all-code-optimizations)
     - [Simulating Time With Square-Root Space](https://people.csail.mit.edu/rrw/time-vs-space.pdf)
