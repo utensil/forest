@@ -56,10 +56,11 @@ ALWAYS cite the rules which you are following at the end of your reply, like thi
 - ❌ **Must NOT**: Implement beyond acceptance criteria without updating task first
 - ❌ **Must NOT**: Use backlog when not working on backlog-managed tasks
 
-### G-search: Prefer ast-grep for syntax-aware search, with ripgrep as fallback
+### G-search: Prefer ast-grep via Bash for code structure search, with ripgrep as fallback
 
-✅You run in an environment where ast-grep (`sg`) is available. Whenever a search requires syntax-aware or structural matching, default to `sg --lang <lang> -p '<pattern>'`. Avoid falling back to text-only tools like ripgrep (`rg`) unless `sg` fails to do the job, or plain-text search is explicitly requested.
-
+- ✅ **Should**: Default to use ast-grep like `sg --lang <lang> -p '<pattern>'` via Bash for searches targeting code structure (e.g., functions,
+classes, imports, variable declarations, method calls). It should be available; install it if not.
+- ✅ **May**: Use tools like ripgrep (`rg`) for plain-text search, or as a fallback when `sg` fails.
 ### G-sandbox: Must followed rules when using MCP container-use
 
 When you find existing permissions are insufficient to complete the request, consider using MCP container-use.
