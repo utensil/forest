@@ -439,8 +439,8 @@ def find_matching_brace(text, start_pos):
     return -1  # No matching brace found
 
 
-def reset_titles(filepath):
-    """Reset all daily entry titles to just dates (remove : title part) and remove tags."""
+def reset_titles(filepath, dry_run=False):
+    """Reset all daily entry titles to just dates (remove : title part) and remove tags. If dry_run is True, only print what would change."""
 
     try:
         with open(filepath, "r", encoding="utf-8") as f:
@@ -480,6 +480,9 @@ def reset_titles(filepath):
 
     # Only write if content changed
     if total_changes > 0:
+        if dry_run:
+            print(f"[DRY-RUN] Would reset {title_matches} titles and remove {tag_matches} tag entries in {filepath}")
+            return True
         try:
             with open(filepath, "w", encoding="utf-8") as f:
                 f.write(new_content)
@@ -493,8 +496,8 @@ def reset_titles(filepath):
         return True
 
 
-def process_file(filepath, verbose=False):
-    """Process the tree file and improve all daily entry titles."""
+def process_file(filepath, verbose=False, dry_run=False):
+    """Process the tree file and improve all daily entry titles. If dry_run is True, only print what would change."""
 
     try:
         with open(filepath, "r", encoding="utf-8") as f:
@@ -612,6 +615,9 @@ def process_file(filepath, verbose=False):
 
     # Only write if content changed
     if changes_made > 0:
+        if dry_run:
+            print(f"[DRY-RUN] Would update {changes_made} entries with tags in {filepath}")
+            return True
         try:
             with open(filepath, "w", encoding="utf-8") as f:
                 f.write(new_content)
@@ -871,6 +877,11 @@ if __name__ == "__main__":
         help="Show aggregated keyword merge statistics (default: OFF)"
     )
     # AGENT-NOTE: --merge-stat controls merge stats output; default is OFF for clean output
+    parser.add_argument(
+        "--dry-run",
+        action="store_true",
+        help="Simulate changes without modifying any files (no reset or tag updates, but stats and analysis still run)",
+    )
     args = parser.parse_args()
 
     if args.test:
@@ -888,17 +899,17 @@ if __name__ == "__main__":
 
     if args.reset:
         print("🔄 TIL Title Resetter - Removing all title keywords...")
-        success = reset_titles(filepath)
+        success = reset_titles(filepath, dry_run=getattr(args, 'dry_run', False))
         if success:
-            print("✨ Title reset complete!")
+            print("✨ Title reset complete!" if not getattr(args, 'dry_run', False) else "✨ [DRY-RUN] Title reset simulation complete!")
         else:
             print("❌ Title reset failed")
             sys.exit(1)
     else:
         print("🔍 TIL Title Improver - Analyzing daily entries...")
-        success = process_file(filepath, verbose=getattr(args, 'verbose', False))
+        success = process_file(filepath, verbose=getattr(args, 'verbose', False), dry_run=getattr(args, 'dry_run', False))
         if success:
-            print("✨ Title improvement complete!")
+            print("✨ Title improvement complete!" if not getattr(args, 'dry_run', False) else "✨ [DRY-RUN] Title improvement simulation complete!")
             dedup = getattr(args, 'dedup', True) and not getattr(args, 'no_dedup', False)
             if getattr(args, 'stat', None) is not None:
                 print_monthly_tag_stats(filepath, top_n=args.stat, dedup=dedup)
