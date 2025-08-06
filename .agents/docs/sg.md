@@ -6,10 +6,11 @@ This guide helps agents and humans use ast-grep (`sg`) for robust, code-structur
 
 ## Key Ingredients for Effective sg Usage
 
+-   **Always use the `rule:` key at the top level** in your YAML rule files, especially if you want to use advanced features like `inside`, `not`, `has`, etc. (see caveats below).
 -   **Prefer YAML rule files** for non-trivial, structure-aware patterns (place in `.agents/scripts/sg/`).
--   **Use `selector` and `context`** to match AST nodes and code structure, not just text.
+-   **Use `kind` for AST node type** (e.g., `function_definition`, `method_definition`).
 -   **Add `constraints`** to filter matches by variable names, regex, etc.
--   **Test rules on real files** (e.g., `sg -r .agents/scripts/sg/myrule.yml <target-file>`).
+-   **Test rules on real files** (e.g., `sg scan .agents/scripts/sg/myrule.yml <target-file>`).
 -   **Reference the [ast-grep rule catalog](https://ast-grep.github.io/rule-cookbook/) and [playground](https://play.ast-grep.dev/) for inspiration.**
 
 ---
@@ -27,22 +28,29 @@ This guide helps agents and humans use ast-grep (`sg`) for robust, code-structur
 
 ## Example: TypeScript Method Match
 
-**Goal:** Match `async close(ws) { ... }` method in a `.ws` handler object.
+**Goal:** Match `close(ws) { ... }` method in a `.ws` handler object.
 
 ```yaml
 id: match-ws-close-method
 language: typescript
-message: "Matches async close(ws) method in .ws handler object."
-severity: info
 rule:
-    pattern:
-        context: |
-            .ws('/live', {
-              async close(ws) {
-                $$$BODY
-              }
-            })
-        selector: method_definition
+    pattern: "close($WS)"
+    kind: method_definition
+```
+
+> **Note:** This matches all `close` methods, not just `async` ones. As of ast-grep 2025-08, it is not possible to match the `async` modifier with a simple pattern. Use the [ast-grep playground](https://play.ast-grep.dev/) for advanced cases or to experiment with new grammar support.
+
+**Example match (made-up):**
+
+```ts
+app.ws("/live", {
+    async close(ws) {
+        ws.terminate();
+    },
+    open(ws) {
+        // not matched
+    },
+});
 ```
 
 ---
@@ -54,15 +62,25 @@ rule:
 ```yaml
 id: py-func-title
 language: python
-message: "Function definition with 'title' in name"
-severity: info
 rule:
-    pattern:
-        selector: function_definition
-        context: "def $NAME($$$ARGS): $$$BODY"
+    pattern: "def $NAME($$$ARGS): $$$BODY"
+    kind: function_definition
 constraints:
     NAME:
         regex: ".*title.*"
+```
+
+**Example match (made-up):**
+
+```python
+def get_title_case(text):
+    return text.title()
+
+def subtitle(text):
+    return f"Sub: {text}"
+
+def main():
+    pass  # not matched
 ```
 
 ---
@@ -74,37 +92,76 @@ constraints:
 ```yaml
 id: py-assign-title
 language: python
-message: "Assignment to variable named 'title'"
-severity: info
 rule:
-    pattern:
-        selector: expression_statement
-        context: "$NAME = $VAL"
+    pattern: "title = $VAL"
+    kind: expression_statement
+```
+
+> **Note:** This only matches assignments to the hardcoded variable `title`. ast-grep currently does not support meta-variables for assignment left-hand sides in Python. Use the [playground](https://play.ast-grep.dev/) to experiment with new grammar support or advanced cases.
+
+**Example match (made-up):**
+
+```python
+title = "My Document"
+subtitle = "A Subtitle"  # not matched
+title = get_title_case(title)
+```
+
+---
+
+## Example: TypeScript DOM Event Handler Assignment
+
+**Goal:** Match all assignments of event handlers to DOM elements, e.g., `element.onclick = ...`, `element.onchange = ...`, etc.
+
+```yaml
+id: ts-dom-event-handler-assignment
+language: typescript
+rule:
+    pattern: "$OBJ.$EVENT = $VAL"
+    kind: expression_statement
 constraints:
-    NAME:
-        regex: "title"
+    EVENT:
+        regex: "^on.*"
+```
+
+> **Note:** This may not match in all cases due to ast-grep limitations with property assignment parsing or meta-variable support. Use the [playground](https://play.ast-grep.dev/) for advanced or tricky cases.
+
+**Example match (made-up):**
+
+```ts
+const button = document.createElement("button");
+button.onclick = () => alert("Clicked!");
+input.onchange = handleChange;
+link.onmouseover = function () {
+    /* ... */
+};
+// Not matched:
+button.disabled = true;
 ```
 
 ---
 
 ## Workflow for Using sg in This Repo
 
-1. **Write YAML rules** in `.agents/scripts/sg/` for your search/refactor task.
+1. **Write YAML rules** in `.agents/scripts/sg/` for your search/refactor task. **Always use the `rule:` key at the top level.**
 2. **Test rules** on target files:
     ```bash
-    sg -r .agents/scripts/sg/myrule.yml <target-file>
+    sg scan .agents/scripts/sg/myrule.yml <target-file>
     ```
-3. **Iterate**: Refine `selector`, `context`, and `constraints` as needed.
+    You can also use `sg scan <rule.yml> <target-file>` for any individual YAML rule file, without needing a project config.
+3. **Iterate**: Refine `pattern`, `kind`, and `constraints` as needed.
 4. **Document**: Add a comment or docstring to your rule file for clarity.
 
 ---
 
 ## Tips & Gotchas
 
--   Use `selector` for AST node type (e.g., `function_definition`, `method_definition`).
--   Use `context` for code shape (with `$NAME`, `$VAL`, `$$$ARGS`, `$$$BODY` for wildcards).
--   Place `constraints` at the top level (not inside `pattern`).
--   Use the [playground](https://play.ast-grep.dev/) to prototype rules interactively.
+-   Use `kind` (not `selector`/`context`) for AST node type (e.g., `function_definition`, `method_definition`).
+-   Use `pattern` as a string for code shape (with `$NAME`, `$VAL`, `$$$ARGS`, `$$$BODY` for wildcards).
+-   Place `constraints` at the top level (not inside `pattern` or `rule`).
+-   Some language grammars (notably Python) have limitations with meta-variables for assignment left-hand sides and certain modifiers (e.g., `async`).
+-   **Caveat:** As of 2025-08, advanced features like `inside` and `not` do not always work as expected in single-rule YAML files, even with the correct structure. For example, rules using `inside` to match Python methods inside classes, or `not` to exclude functions with a `return` statement in TypeScript, may not match as intended. This is a known limitation—see [ast-grep discussions](https://github.com/ast-grep/ast-grep/discussions) and [playground](https://play.ast-grep.dev/) for the latest status and workarounds.
+-   Use the [playground](https://play.ast-grep.dev/) to prototype rules interactively and test edge cases.
 -   For simple text search, use `rg` (ripgrep); for structure, use `sg`.
 
 ---
@@ -116,4 +173,4 @@ constraints:
 
 ---
 
-_Last updated: 2025-08-06_
+_Last updated: 2025-08-06 (examples and notes revised for ast-grep YAML and grammar limitations)_
