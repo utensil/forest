@@ -1031,8 +1031,8 @@ pathfind:
 prep-ag:
     #!/usr/bin/env bash
     which ast-grep || brew install ast-grep
-    just prep-hx
-    just sync-hx
+    # just prep-hx
+    # just sync-hx
 
 # just ag '\query{$$$}'
 #
