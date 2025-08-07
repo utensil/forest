@@ -76,6 +76,16 @@ classes, imports, variable declarations, method calls). It should be available; 
 - ✅ **May**: Suggest graduating newly created stacks from `.agents/stacks/` to `stacks/` if they have generic potential for future reuse
 - ❌ **Must NOT**: Modify host system when explicitly asked to follow G-sandbox
 
+### G-safe: Prioritize data safety and prevent destructive operations
+
+- ✅ **Should**: Create backups to `/tmp/<timestamp-dir>/` before modifying unversioned files
+- ✅ **Should**: Use `rip` instead of `rm` for file/directory removal (provides automatic backup)
+- ✅ **May**: Provide instructions for destructive operations but never execute them
+- ✅ **May**: Use `--dry-run` flags to preview changes before execution
+- ❌ **Must NOT**: Execute any potentially destructive operations (deletions, overwrites, system changes)
+- ❌ **Must NOT**: Remove files without backup mechanism
+- ❌ **Must NOT**: Modify system-critical files or permissions
+
 ---
 
 ## 2. Anchor comments
