@@ -58,14 +58,23 @@ ALWAYS cite the rules which you are following at the end of your reply, like thi
 
 ### G-search: Prefer ast-grep via Bash for code structure search, with ripgrep as fallback
 
-- ✅ **Should**: Default to use ast-grep like `sg --lang <lang> -p '<pattern>'` via Bash for searches targeting code structure (e.g., functions,
+- ✅ **Should**: Prefer to use ast-grep (`sg`) via Bash for searches targeting code structure (e.g., functions,
 classes, imports, variable declarations, method calls). It should be available; install it if not.
+- ✅ **Should**: Consult `.agents/docs/sg.md` to learn how to use `sg`
 - ✅ **May**: Use tools like ripgrep (`rg`) for plain-text search, or as a fallback when `sg` fails.
-### G-sandbox: Must followed rules when using MCP container-use
 
-When you find existing permissions are insufficient to complete the request, consider using MCP container-use.
+### G-sandbox: Use Docker stacks for isolated development environments
 
-Once you start using container-use:  ALWAYS use ONLY Environments for ANY and ALL file, code, or shell operations—NO EXCEPTIONS—even for simple or generic requests. DO NOT install or use the git cli with the `environment_run_cmd` tool. All environment tools will handle git operations for you. Changing ".git" yourself will compromise the integrity of your environment. You MUST inform the user how to view your work using `cu log <env_id>` AND `cu checkout <env_id>`. Failure to do this will make your work inaccessible to others.
+- ✅ **Should**: First try running existing stacks from `stacks/` directory using `docker compose -f <stack-file>`
+- ✅ **Should**: Create new stacks under `.agents/stacks/` only if existing ones don't meet requirements
+- ✅ **May**: Use standard Docker Compose commands:
+  - Build: `docker compose -f <stack-file> build`
+  - Start daemon: `docker compose -f <stack-file> up -d`
+  - Stop: `docker compose -f <stack-file> down`
+  - Execute commands: `docker compose -f <stack-file> exec <service> <command>`
+- ✅ **Should**: Stop stacks with `down` when task is complete, but keep stack files for reuse
+- ✅ **May**: Suggest graduating newly created stacks from `.agents/stacks/` to `stacks/` if they have generic potential for future reuse
+- ❌ **Must NOT**: Modify host system when explicitly asked to follow G-sandbox
 
 ---
 

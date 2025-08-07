@@ -23,6 +23,7 @@ This guide helps agents and humans use ast-grep (`sg`) for robust, code-structur
 -   [YAML Rule Format](https://ast-grep.github.io/docs/rule-syntax/)
 -   [Supported Languages](https://ast-grep.github.io/docs/language-support/)
 -   [Extensive ast-grep Guide (appdotbuild/claude_astgrep)](https://raw.githubusercontent.com/appdotbuild/claude_astgrep/refs/heads/main/.claude/commands/ast_grep.md) — Consult this for advanced features (e.g. `inside`, `has`, `all`, `not`, `fix`, `utils`), debugging tricky rules, or language-specific edge cases.
+-   `.agents/scripts/sg/` for working rule examples and `test-sg.sh` if you are stuck.
 
 ---
 
@@ -143,7 +144,7 @@ button.disabled = true;
 
 ## Workflow for Using sg in This Repo
 
-1. **Write YAML rules** in `.agents/scripts/sg/` for your search/refactor task. **Always use the `rule:` key at the top level.**
+1. **Write YAML rules** in `.agents/scripts/sg/` for your search/refactor task, there are some examples and `test-sg.sh` for reference if you are stuck. **Always use the `rule:` key at the top level.**
 2. **Test rules** on target files:
     ```bash
     sg scan .agents/scripts/sg/myrule.yml <target-file>
@@ -166,11 +167,4 @@ button.disabled = true;
 
 ---
 
-## See Also
-
--   `.agents/scripts/sg/` for working rule examples
--   [ast-grep official docs](https://ast-grep.github.io/docs/)
-
----
-
-_Last updated: 2025-08-06 (examples and notes revised for ast-grep YAML and grammar limitations)_
+_Last updated: 2025-08-07_
