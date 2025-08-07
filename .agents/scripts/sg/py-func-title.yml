@@ -1,0 +1,11 @@
+id: py-func-title
+language: python
+message: "Function definition with 'title' in name"
+severity: info
+rule:
+  pattern:
+    selector: function_definition
+    context: "def $NAME($$$ARGS): $$$BODY"
+constraints:
+  NAME:
+    regex: ".*title.*"

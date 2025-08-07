@@ -1,0 +1,8 @@
+id: inside-class-func
+language: python
+message: "Method inside a class (has self)"
+rule:
+  pattern: "def $NAME(self, $$$ARGS): $$$BODY"
+  kind: function_definition
+  inside:
+    pattern: "class $C:"

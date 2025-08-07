@@ -1,0 +1,11 @@
+id: py-assign-title
+language: python
+message: "Assignment to variable named 'title'"
+severity: info
+rule:
+  pattern:
+    selector: expression_statement
+    context: "$NAME = $VAL"
+constraints:
+  NAME:
+    regex: "title"

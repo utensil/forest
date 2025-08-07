@@ -1,0 +1,13 @@
+id: match-ws-close-method
+language: typescript
+message: "Matches async close(ws) method in .ws handler object."
+severity: info
+rule:
+  pattern:
+    context: |
+      .ws('/live', {
+        async close(ws) {
+          $$$BODY
+        }
+      })
+    selector: method_definition

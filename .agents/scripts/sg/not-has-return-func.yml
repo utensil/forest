@@ -1,0 +1,10 @@
+id: not-has-return-func
+language: typescript
+message: "Function with no return statement (using not: kind only)"
+rule:
+  pattern: "function $NAME($$$ARGS) { $$$BODY }"
+  kind: function_declaration
+  not:
+    pattern: "return $RET;"
+    inside:
+      pattern: "function $NAME($$$ARGS) { $$$BODY }"

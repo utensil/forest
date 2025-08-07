@@ -1,0 +1,6 @@
+id: print-to-logger-fix
+language: python
+rule:
+  pattern: "print($MSG)"
+  kind: expression_statement
+  fix: "logger.info($MSG)"

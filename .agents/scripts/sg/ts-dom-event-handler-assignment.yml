@@ -1,0 +1,11 @@
+id: ts-dom-event-handler-assignment
+language: typescript
+message: "Assignment of DOM event handler (on*) property."
+severity: info
+rule:
+  pattern:
+    selector: expression_statement
+    context: "$OBJ.$EVENT = $VAL"
+constraints:
+  EVENT:
+    regex: "^on.*"
