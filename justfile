@@ -797,6 +797,20 @@ prep-annex:
 cp SRC DST:
     cp -R {{SRC}}/. {{DST}}
 
+prep-rsync:
+    which rsync || apt install rsync || sudo apt install rsync || brew install rsync
+    just prep-uv
+    uvx rsyncy --help
+
+# --recursive - tricky, not using it for now
+# --ignore-existing - only copy new files
+# --whole-file - for fast network, skip delta check, to speed up
+# --copy-links - if wish to copy symlinked target file
+# works as expected if both dirs end with /
+#
+rsync SRC DST *PARAMS="--dry-run":
+    uvx rsyncy --archive --verbose --partial {{PARAMS}} {{SRC}} {{DST}}
+
 # https://til.simonwillison.net/macos/fs-usage
 #
 # pathname, network, filesys, exec, diskio, cachehit

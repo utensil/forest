@@ -439,7 +439,7 @@ prep-node:
 
 [unix]
 prep-uv:
-    curl -LsSf https://astral.sh/uv/install.sh | sh
+    which uv || (curl -LsSf https://astral.sh/uv/install.sh | sh)
 
 [windows]
 prep-uv:
