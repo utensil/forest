@@ -1035,6 +1035,32 @@ prep-rsync:
 #
 rsync SRC DST *PARAMS="--dry-run":
     uvx rsyncy --archive --verbose --partial {{PARAMS}} {{SRC}} {{DST}}
+prep-jw:
+    which jw || (yes|cargo binstall jw)
+
+check-dirs SRC DST:
+    #!/usr/bin/env bash
+    echo "🔍 Checking hash..."
+    date
+    (cd {{SRC}} && jw -c . > .hash.jw) && echo "1. source hashed: `date`"
+    (cd {{DST}} && jw -c . > .hash.jw) && echo "2. destination hashed: `date`"
+    MISMATCH=`jw -D {{SRC}}/.hash.jw {{DST}}/.hash.jw`
+    if [ -z "$MISMATCH" ]; then
+        echo "✅ Perfect match"
+    else
+        echo "❌ Mismatch detected"
+        if [ ${#MISMATCH} -gt 1000 ]; then
+            echo "$MISMATCH"|less
+        else
+            echo "$MISMATCH"
+        fi
+    fi
+    # keep them both, avoid recalculation of hash
+    # only remove hash.jw file from the source
+    # rip {{SRC}}/.hash.jw
+    # rip {{DST}}/.hash.jw
+    echo "Open {{DST}}/.hash.jw to inspect"
+
 prep-termscp:
     which termscp || brew install termscp
 

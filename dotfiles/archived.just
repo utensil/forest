@@ -125,29 +125,6 @@ rusync-dirs SRC DST: prep-sync-dir-tools
     # using this would trigger mismatch
     # rusync --err-list {{DST}}/.rusync.err.log {{SRC}} {{DST}}
 
-check-dirs SRC DST:
-    #!/usr/bin/env bash
-    echo "🔍 Checking hash..."
-    date
-    (cd {{SRC}} && jw -c . > .hash.jw) && echo "1. source hashed: `date`"
-    (cd {{DST}} && jw -c . > .hash.jw) && echo "2. destination hashed: `date`"
-    MISMATCH=`jw -D {{SRC}}/.hash.jw {{DST}}/.hash.jw`
-    if [ -z "$MISMATCH" ]; then
-        echo "✅ Perfect match"
-    else
-        echo "❌ Mismatch detected"
-        if [ ${#MISMATCH} -gt 1000 ]; then
-            echo "$MISMATCH"|less
-        else
-            echo "$MISMATCH"
-        fi
-    fi
-    # keep them both, avoid recalculation of hash
-    # only remove hash.jw file from the source
-    # rip {{SRC}}/.hash.jw
-    # rip {{DST}}/.hash.jw
-    echo "Open {{DST}}/.hash.jw to inspect"
-
 # https://www.kelen.cc/dry/docker-hub-mirror
 #
 gal:
