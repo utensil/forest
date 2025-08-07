@@ -790,26 +790,7 @@ prep-annex:
     mkdir -p ~/annex
     (cd ~/annex && git annex webapp)
 
-## CLI Tips
-
-# https://bhoot.dev/2025/cp-dot-copies-everything/
-#
-cp SRC DST:
-    cp -R {{SRC}}/. {{DST}}
-
-prep-rsync:
-    which rsync || apt install rsync || sudo apt install rsync || brew install rsync
-    just prep-uv
-    uvx rsyncy --help
-
-# --recursive - tricky, not using it for now
-# --ignore-existing - only copy new files
-# --whole-file - for fast network, skip delta check, to speed up
-# --copy-links - if wish to copy symlinked target file
-# works as expected if both dirs end with /
-#
-rsync SRC DST *PARAMS="--dry-run":
-    uvx rsyncy --archive --verbose --partial {{PARAMS}} {{SRC}} {{DST}}
+## Tracing
 
 # https://til.simonwillison.net/macos/fs-usage
 #
@@ -1036,6 +1017,24 @@ prep-ffs:
     open https://freefilesync.org/download.php
     brew install Marcuzzz/homebrew-marcstap/freefilesync
 
+# https://bhoot.dev/2025/cp-dot-copies-everything/
+#
+cp SRC DST:
+    cp -R {{SRC}}/. {{DST}}
+
+prep-rsync:
+    which rsync || apt install rsync || sudo apt install rsync || brew install rsync
+    just prep-uv
+    uvx rsyncy --help
+
+# --recursive - tricky, not using it for now
+# --ignore-existing - only copy new files
+# --whole-file - for fast network, skip delta check, to speed up
+# --copy-links - if wish to copy symlinked target file
+# works as expected if both dirs end with /
+#
+rsync SRC DST *PARAMS="--dry-run":
+    uvx rsyncy --archive --verbose --partial {{PARAMS}} {{SRC}} {{DST}}
 prep-termscp:
     which termscp || brew install termscp
 
