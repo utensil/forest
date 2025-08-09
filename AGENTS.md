@@ -78,8 +78,7 @@ classes, imports, variable declarations, method calls). It should be available; 
 
 ### G-safe: Prioritize data safety and prevent destructive operations
 
-- ✅ **Should**: Create backups to `/tmp/<timestamp-dir>/` before modifying unversioned files
-- ✅ **Should**: Use `rip` instead of `rm` for file/directory removal (provides automatic backup)
+- ✅ **Should**: Use `rip` instead of `rm` for file/directory removal (automatic backups to `/tmp/graveyard-$USER` with recovery via `--unbury`)
 - ✅ **May**: Provide instructions for destructive operations but never execute them
 - ✅ **May**: Use `--dry-run` flags to preview changes before execution
 - ❌ **Must NOT**: Execute any potentially destructive operations (deletions, overwrites, system changes)
