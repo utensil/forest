@@ -3,7 +3,10 @@ services:
     container_name: ubuntu_pro
     stdin_open: true
     tty: true
+    # Force rebuild on change
+    # https://github.com/louislam/dockge/issues/547#issuecomment-2290773131
     build: .
+    pull_policy: build
     platform: linux/amd64
     working_dir: /root/projects/forest
     volumes:
