@@ -1,36 +1,39 @@
 services:
-    ubuntu:
-        container_name: ubuntu_pro
-        stdin_open: true
-        tty: true
-        build: .
-        platform: linux/amd64
-        working_dir: /root/projects/forest
-        volumes:
-            - $PROJECTS/forest:/root/projects/forest
-            - ubuntu_pro_shared:/mnt/shared
-            - $DATA_SRC:/mnt/src/:ro
-            - $DATA_DST:/mnt/dst
-        devices:
-            - /dev/fuse
-            - /dev/loop0
-            - /dev/loop1
-            - /dev/loop2
-            - /dev/loop3
-            - /dev/loop4
-            - /dev/loop5
-            - /dev/loop6
-            - /dev/loop7
-            # doesn't help with read-only mount, still error
-            # - /dev/mapper
-        cap_add:
-            - SYS_ADMIN
-        security_opt:
-            - apparmor:unconfined
-        environment:
-            - SMB_PORT=1445
-        ports:
-            - "1445:1445"
+  ubuntu:
+    container_name: ubuntu_pro
+    stdin_open: true
+    tty: true
+    build: .
+    platform: linux/amd64
+    working_dir: /root/projects/forest
+    volumes:
+      - $PROJECTS/forest:/root/projects/forest
+      - ubuntu_pro_shared:/mnt/shared
+      - $DATA_SRC:/mnt/src/:ro
+      - $DATA_DST:/mnt/dst
+    devices:
+      - /dev/fuse
+      - /dev/loop0
+      - /dev/loop1
+      - /dev/loop2
+      - /dev/loop3
+      - /dev/loop4
+      - /dev/loop5
+      - /dev/loop6
+      - /dev/loop7
+      # doesn't help with read-only mount, still error
+      # - /dev/mapper
+    cap_add:
+      - SYS_ADMIN
+    security_opt:
+      - apparmor:unconfined
+    environment:
+      - SMB_PORT=1445
+    # Docker Compose does not support env var interpolation in 'ports',
+    # so set the SSH port here to match SSH_PORT above:
+    ports:
+      - 1445:1445
+      - $SSHD_PORT:22 # Change left side to match SSH_PORT
 networks: {}
 volumes:
-    ubuntu_pro_shared: null
+  ubuntu_pro_shared: null

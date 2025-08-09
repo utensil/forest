@@ -34,6 +34,12 @@ RUN apt install -y samba smbclient
 RUN apt install -y rsync
 RUN ~/.local/bin/mise use -g uv
 
+# Install openssh-server
+RUN apt install -y openssh-server
+
+# Create privilege separation directory for sshd
+RUN mkdir -p /run/sshd
+
 # Copy Samba config and scripts
 COPY smb.conf /etc/samba/smb.conf
 COPY start-samba.sh /start-samba.sh
@@ -43,9 +49,14 @@ COPY vera /vera
 COPY vera-off /vera-off
 RUN chmod +x /start-samba.sh /stop-samba.sh /test-samba.sh /vera /vera-off
 
+# Copy SSH start/stop scripts
+COPY start-ssh.sh /start-ssh.sh
+COPY stop-ssh.sh /stop-ssh.sh
+RUN chmod +x /start-ssh.sh /stop-ssh.sh
+
 # Create shared directory
 RUN mkdir -p /mnt/shared && chmod 770 /mnt/shared
 
 
 # Print welcome message on container start
-CMD echo "Container ready. Samba is NOT running by default. To set up and start Samba, run: /start-samba.sh" && bash
+CMD echo "Container ready.\n\nSamba is NOT running by default. To set up and start Samba, run: /start-samba.sh\n\nSSH server is NOT running by default. To set up and start SSH, run: /start-ssh.sh\n" && bash
