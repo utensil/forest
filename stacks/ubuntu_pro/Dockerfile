@@ -29,6 +29,11 @@ RUN apt install -y wget exfat-fuse exfatprogs && \
 # Install Samba and smbclient
 RUN apt install -y samba smbclient
 
+# Install rsync and uv (for rsyncy)
+# so `uvx rsyncy can be used for showing progress for rsync
+RUN apt install -y rsync
+RUN ~/.local/bin/mise use -g uv
+
 # Copy Samba config and scripts
 COPY smb.conf /etc/samba/smb.conf
 COPY start-samba.sh /start-samba.sh
