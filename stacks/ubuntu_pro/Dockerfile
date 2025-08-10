@@ -54,6 +54,7 @@ COPY start-ssh.sh /start-ssh.sh
 COPY stop-ssh.sh /stop-ssh.sh
 RUN chmod +x /start-ssh.sh /stop-ssh.sh
 
+
 # Create shared directory
 RUN mkdir -p /mnt/shared && chmod 770 /mnt/shared
 

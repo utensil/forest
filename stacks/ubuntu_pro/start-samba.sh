@@ -40,19 +40,79 @@ while true; do
   fi
 done
 
-# Create group and user if not exist
-if ! getent group smbgroup > /dev/null; then
-  groupadd smbgroup
+# Ensure script is run as root
+if [ "$(id -u)" -ne 0 ]; then
+  echo "This script must be run as root."
+  exit 1
 fi
+
+# --- Robust UID/GID 1000 logic for single-user scenario ---
+# Always create group if missing
+if ! getent group smbgroup > /dev/null; then
+  if ! groupadd smbgroup; then
+    echo "Failed to create group smbgroup"
+    exit 1
+  fi
+fi
+
+# Check if GID 1000 is used by a group other than smbgroup
+GID_1000_GROUP=$(getent group 1000 | cut -d: -f1)
+if [[ -n "$GID_1000_GROUP" && "$GID_1000_GROUP" != "smbgroup" ]]; then
+  echo "WARNING: GID 1000 is already used by group '$GID_1000_GROUP'."
+  read -p "Change '$GID_1000_GROUP' to a new GID? [y/N]: " CONFIRM
+  if [[ "$CONFIRM" =~ ^[Yy]$ ]]; then
+    NEW_GID=$(shuf -i 2000-2999 -n 1)
+    groupmod -g "$NEW_GID" "$GID_1000_GROUP"
+    echo "Changed group '$GID_1000_GROUP' to GID $NEW_GID."
+  else
+    echo "Aborting. GID 1000 must be reserved for smbgroup."
+    exit 1
+  fi
+fi
+# Set smbgroup GID to 1000 if not already
+if [[ $(getent group smbgroup | cut -d: -f3) != "1000" ]]; then
+  groupmod -g 1000 smbgroup
+fi
+
+# Check if UID 1000 is used by a user other than $SMB_USER
+UID_1000_USER=$(getent passwd 1000 | cut -d: -f1)
+if [[ -n "$UID_1000_USER" && "$UID_1000_USER" != "$SMB_USER" ]]; then
+  echo "WARNING: UID 1000 is already used by user '$UID_1000_USER'."
+  read -p "Change '$UID_1000_USER' to a new UID? [y/N]: " CONFIRM
+  if [[ "$CONFIRM" =~ ^[Yy]$ ]]; then
+    NEW_UID=$(shuf -i 2000-2999 -n 1)
+    usermod -u "$NEW_UID" "$UID_1000_USER"
+    echo "Changed user '$UID_1000_USER' to UID $NEW_UID."
+  else
+    echo "Aborting. UID 1000 must be reserved for $SMB_USER."
+    exit 1
+  fi
+fi
+
+# Create user if not exist, else check UID/GID
 if ! id "$SMB_USER" > /dev/null 2>&1; then
-  # Create user with UID 1000, GID 1000, home dir, shell, and add to fuse group if present
   if getent group fuse > /dev/null; then
     useradd -m -u 1000 -g 1000 -G smbgroup,fuse -s /bin/bash "$SMB_USER"
   else
     useradd -m -u 1000 -g 1000 -G smbgroup -s /bin/bash "$SMB_USER"
   fi
-  # Set smbgroup GID to 1000 if not already
-  groupmod -g 1000 smbgroup || true
+else
+  # User exists, check UID/GID
+  CUR_UID=$(id -u "$SMB_USER")
+  CUR_GID=$(id -g "$SMB_USER")
+  if [[ "$CUR_UID" != "1000" || "$CUR_GID" != "1000" ]]; then
+    echo "User '$SMB_USER' exists but does not have UID/GID 1000 (UID=$CUR_UID, GID=$CUR_GID)."
+    read -p "Change '$SMB_USER' to UID/GID 1000? [y/N]: " CONFIRM
+    if [[ "$CONFIRM" =~ ^[Yy]$ ]]; then
+      usermod -u 1000 "$SMB_USER"
+      groupmod -g 1000 "$SMB_USER"
+      usermod -g 1000 "$SMB_USER"
+      echo "Changed '$SMB_USER' to UID/GID 1000."
+    else
+      echo "Aborting. UID/GID 1000 must be reserved for $SMB_USER."
+      exit 1
+    fi
+  fi
 fi
 # Always add user to smbgroup (even if user already existed)
 usermod -aG smbgroup "$SMB_USER"
