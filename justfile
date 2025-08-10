@@ -1053,6 +1053,12 @@ check-dirs SRC DST *PARAMS="":
     set -e
     uv run ./check-dirs.py "{{SRC}}" "{{DST}}" {{PARAMS}}
 
+# lms sync -n SRC DST
+# -n - no delete
+#
+prep-lms-sync:
+    which lms || cargo install lms
+
 prep-termscp:
     which termscp || brew install termscp
 
