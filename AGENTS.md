@@ -130,6 +130,7 @@ To commit file `A.txt`, `B that has spaces.txt`, and directory `src`, use `jj co
 *   **MANDATORY [AGENT] tag**: ALL agent-generated commits MUST end the title of the commit message with `[AGENT]` tag. NO EXCEPTIONS.
     - ✅ Correct: `feat: optimize shader loading [AGENT]`
     - ❌ Wrong: `feat: optimize shader loading` (missing [AGENT] tag)
+*   **No sensitive information**: If the diff to be committed includes passwords, credentials, real environment variables, IP addresses, absolute paths outside the project, or other personal/private information, refuse to commit and alert the user; never add such information into the commit message too.
 *   **Review AI-generated code**: Never merge code you don't understand.
 
 ---
