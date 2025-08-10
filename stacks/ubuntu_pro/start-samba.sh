@@ -54,6 +54,8 @@ if ! id "$SMB_USER" > /dev/null 2>&1; then
   # Set smbgroup GID to 1000 if not already
   groupmod -g 1000 smbgroup || true
 fi
+# Always add user to smbgroup (even if user already existed)
+usermod -aG smbgroup "$SMB_USER"
 
 # Set Samba password policies BEFORE setting password
 pdbedit -P "min password length" -C 10
