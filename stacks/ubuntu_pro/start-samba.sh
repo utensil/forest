@@ -17,17 +17,10 @@ if [[ -n "$EXISTING_USER" ]]; then
   done
   if pgrep smbd > /dev/null; then
     echo "Samba server is already running (PID: $(pgrep smbd | tr '\n' ' '))."
-  else
-    echo "Starting Samba server as a daemon (non-root user: $EXISTING_USER)..."
-    SMB_PORT="${SMB_PORT:-1445}"
-    echo "Starting smbd as $EXISTING_USER on port $SMB_PORT..."
-    exec su -s /bin/bash -c "smbd --foreground --debug-stdout --no-process-group" "$EXISTING_USER"
-    # The above exec replaces the shell, so the following line will not run.
-    # If you want to run in background, use:
-    # su -s /bin/bash -c "smbd -p $SMB_PORT &" "$EXISTING_USER"
-    # But for security, prefer exec (PID 1).
+    exit 0
   fi
-  exit 0
+  SAMBA_USER="$EXISTING_USER"
+
 fi
 
 # Always prompt for username interactively
@@ -39,6 +32,7 @@ while true; do
     break
   fi
 done
+SAMBA_USER="$SMB_USER"
 
 # Ensure script is run as root
 if [ "$(id -u)" -ne 0 ]; then
@@ -149,13 +143,20 @@ for d in /var/lib/samba /var/run/samba /var/log/samba /run/samba; do
   fi
 done
 
-echo "Samba user '$SMB_USER' created. Starting Samba server as a daemon (non-root user: $SMB_USER)..."
-SMB_PORT="${SMB_PORT:-1445}"
-echo "Starting smbd as $SMB_USER on port $SMB_PORT..."
-#  --foreground --debug-stdout
-exec su -s /bin/bash -c "smbd --no-process-group" "$SMB_USER"
+# AGENT-NOTE: Prompt user for Samba run mode (foreground/daemon), matching start-ssh.sh style.
+read -rp "Run Samba server in foreground or as daemon? [F/d]: " SAMBA_MODE
+case "${SAMBA_MODE,,}" in
+    d)
+        echo "Starting smbd as daemon..."
+        exec su -s /bin/bash -c "smbd --no-process-group" "$SAMBA_USER"
+        ;;
+    *)
+        echo "Starting smbd in foreground..."
+        exec su -s /bin/bash -c "smbd --foreground --debug-stdout --no-process-group" "$SAMBA_USER"
+        ;;
+esac
 # The above exec replaces the shell, so the following lines will not run.
 # If you want to run in background, use:
-# su -s /bin/bash -c "smbd -p $SMB_PORT &" "$SMB_USER"
+# su -s /bin/bash -c "smbd -p $SMB_PORT &" "$SAMBA_USER"
 # But for security, prefer exec (PID 1).
 
