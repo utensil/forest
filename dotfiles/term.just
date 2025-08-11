@@ -406,6 +406,12 @@ push PROJ="forest" BRANCH="main":
     jj psb {{BRANCH}} --remote tangled
     jj psb {{BRANCH}} --remote berg
 
+# the idea is to use this for id of garden notes
+# i.e. the id of a random note is the short jj change id when it was first added
+#
+@jjid REVSET="@":
+    jj log -r {{REVSET}} -T 'change_id.short()' --no-graph
+
 ## Languages
 
 # https://blog.vbang.dk/2025/06/29/tools-i-love-mise/
