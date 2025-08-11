@@ -1055,6 +1055,12 @@ check-dirs SRC DST:
     (cd "{{SRC}}" && jw -c . > "$LEFT_HASH") && echo "[INFO] Source hashed: $(date) -> $LEFT_HASH"
     (cd "{{DST}}" && jw -c . > "$RIGHT_HASH") && echo "[INFO] Destination hashed: $(date) -> $RIGHT_HASH"
     MISMATCH=$(jw -D "$LEFT_HASH" "$RIGHT_HASH")
+    # Efficiently count matches and mismatches
+    TOTAL=$(wc -l < "$LEFT_HASH" | xargs)
+    MISMATCH_COUNT=$(echo "$MISMATCH" | grep -c '^\[!(' || true)
+    MATCHED=$((TOTAL - MISMATCH_COUNT))
+    echo "[INFO] $MATCHED of $TOTAL files have identical hashes."
+
     GREEN='\033[0;32m'
     RED='\033[0;31m'
     NC='\033[0m'

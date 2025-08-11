@@ -134,6 +134,9 @@ def main():
 
     # Timestamp mismatches
     mismatches, newer, older = compare_timestamps(left_dir, right_dir, left_sample, right_sample)
+    total_common = len(set(left_sample) & set(right_sample))
+    identical_count = total_common - len(mismatches)
+    print(f"[INFO] {identical_count} sampled files have identical timestamps.")
     if mismatches:
         print(f"[WARN] {len(mismatches)} timestamp mismatch, {newer} newer, {older} older")
         for rel_path, issue, left_m, right_m, diff in mismatches:
