@@ -1038,28 +1038,41 @@ rsync SRC DST *PARAMS="--dry-run":
 prep-jw:
     which jw || (yes|cargo binstall jw)
 
+# AGENT-NOTE: check-dirs now writes hash files to /tmp/jw/ with timestamped, descriptive names (e.g. /tmp/jw/<timestamp>-left-<leftdirname>.hash.jw)
+# This avoids polluting or failing on read-only source/dest dirs, and is safe for diffing.
 check-dirs SRC DST:
     #!/usr/bin/env bash
-    echo "🔍 Checking hash..."
-    date
-    (cd {{SRC}} && jw -c . > .hash.jw) && echo "1. source hashed: `date`"
-    (cd {{DST}} && jw -c . > .hash.jw) && echo "2. destination hashed: `date`"
-    MISMATCH=`jw -D {{SRC}}/.hash.jw {{DST}}/.hash.jw`
+    # AGENT-NOTE: Writes hash files to /tmp/jw/ to avoid polluting or failing on read-only source/dest dirs
+    set -e
+    echo "[INFO] Checking file content integrity (hash comparison) and file timestamps for mismatches and suspiciously recent files..."
+    TIMESTAMP=$(date +%s)
+    LEFTDIR=$(basename "{{SRC}}")
+    RIGHTDIR=$(basename "{{DST}}")
+    TMPDIR="/tmp/jw"
+    mkdir -p "$TMPDIR"
+    LEFT_HASH="$TMPDIR/${TIMESTAMP}-left-${LEFTDIR}.hash.jw"
+    RIGHT_HASH="$TMPDIR/${TIMESTAMP}-right-${RIGHTDIR}.hash.jw"
+    (cd "{{SRC}}" && jw -c . > "$LEFT_HASH") && echo "[INFO] Source hashed: $(date) -> $LEFT_HASH"
+    (cd "{{DST}}" && jw -c . > "$RIGHT_HASH") && echo "[INFO] Destination hashed: $(date) -> $RIGHT_HASH"
+    MISMATCH=$(jw -D "$LEFT_HASH" "$RIGHT_HASH")
     if [ -z "$MISMATCH" ]; then
-        echo "✅ Perfect match"
+        echo "[INFO] Hashes match perfectly."
     else
-        echo "❌ Mismatch detected"
-        if [ ${#MISMATCH} -gt 1000 ]; then
-            echo "$MISMATCH"|less
-        else
-            echo "$MISMATCH"
-        fi
+        echo "[WARN] Hash mismatch detected."
+        while IFS= read -r line; do
+            if [[ $line =~ ^\[!\(.*\)\] ]]; then
+                # Parse: [!(...)] <right-hash> != <left-hash> == <file>
+                # Example: [!(...)] badc0ffee0ddf00ddeadbeefcafebabe != 51df1e4dfd785628ced8f3ce526af07a == ./html.xsl
+                right_hash=$(echo "$line" | awk '{print $2}')
+                left_hash=$(echo "$line" | awk '{print $4}')
+                file=$(echo "$line" | awk '{print $6}')
+                echo "[DEBUG] $file|hash-mismatch|$left_hash|$right_hash"
+            fi
+        done <<< "$MISMATCH"
     fi
-    # keep them both, avoid recalculation of hash
-    # only remove hash.jw file from the source
-    # rip {{SRC}}/.hash.jw
-    # rip {{DST}}/.hash.jw
-    echo "Open {{DST}}/.hash.jw to inspect"
+    echo "[INFO] Open $RIGHT_HASH to inspect."
+    # AGENT-NOTE: Also sample and check file timestamps for mismatches and suspiciously recent mtimes
+    uv run ./check-ts.py "{{SRC}}" "{{DST}}" "$LEFT_HASH" "$RIGHT_HASH"
 
 prep-termscp:
     which termscp || brew install termscp
