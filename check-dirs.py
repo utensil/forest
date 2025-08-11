@@ -9,14 +9,18 @@ Directory Hash and Timestamp Checker
 
 This script compares two directories for file content (hash) and timestamp mismatches, using jw for hashing and Python for coordination and output parsing.
 
-Usage: uv run ./check-dirs.py <left_dir> <right_dir> [--all-mismatch]
+Usage: uv run ./check-dirs.py <left_dir> <right_dir> [--all-mismatch] [--parallel|-p] [--reuse|-r [HOURS]] [-t N] [-l]
 
 - left_dir: Path to the left/source directory
 - right_dir: Path to the right/destination directory
 - --all-mismatch: (optional) Show all hash mismatches, not just the first 100
+- --parallel, -p: (optional) Hash both directories concurrently
+- --reuse, -r [HOURS]: (optional) Reuse recent hash.jw files if found, optionally specify how many hours is considered recent (default: 1 hour if no value given)
+- -t N, --progress-interval N: (optional) Progress log interval in seconds (float, default 30; can be 0.001 for high-frequency test)
+- -l, --live: (optional) Pass -l to jw for live update (slows down hashing)
 
 The script will:
-- Generate hash files for both directories in /tmp/jw/
+- Generate hash files for both directories in /tmp/jw/ (or reuse if --reuse is set)
 - Compare hashes using jw -D, parse output in Python (not awk)
 - Print up to 100 mismatches unless --all-mismatch is specified
 - Count and print match/mismatch statistics
@@ -117,11 +121,18 @@ def main():
     parser.add_argument("left_dir", help="Source directory")
     parser.add_argument("right_dir", help="Destination directory")
     parser.add_argument("--all-mismatch", action="store_true", help="Show all hash mismatches (default: only first 100)")
+    parser.add_argument("-p", "--parallel", action="store_true", help="Hash both directories concurrently")
+    parser.add_argument("-r", "--reuse", nargs="?", const=1, type=int, default=None, help="Reuse recent hash.jw files if found, optionally specify how many hours is considered recent (default: 1 hour if no value given)")
+    parser.add_argument('-t', '--progress-interval', type=float, default=30, help="Progress log interval in seconds (default 30, can be 0.001 for test)")
+    parser.add_argument('-l', '--live', action='store_true', help="Pass -l to jw for live update (slows down hashing)")
     args = parser.parse_args()
 
     left_dir = args.left_dir
     right_dir = args.right_dir
     show_all = args.all_mismatch
+    parallel = args.parallel
+    reuse_hours = args.reuse
+    progress_interval = args.progress_interval
 
     print("[INFO] Checking file content integrity (hash comparison) and file timestamps for mismatches and suspiciously recent files...")
     timestamp = int(time.time())
@@ -129,14 +140,128 @@ def main():
     right_name = os.path.basename(os.path.abspath(right_dir))
     tmpdir = "/tmp/jw"
     os.makedirs(tmpdir, exist_ok=True)
-    left_hash = f"{tmpdir}/{timestamp}-left-{left_name}.hash.jw"
-    right_hash = f"{tmpdir}/{timestamp}-right-{right_name}.hash.jw"
 
-    # Hash both dirs
-    subprocess.run(["jw", "-c", "."], cwd=left_dir, stdout=open(left_hash, "w"), check=True)
-    print(f"[INFO] Source hashed: {datetime.now()} -> {left_hash}")
-    subprocess.run(["jw", "-c", "."], cwd=right_dir, stdout=open(right_hash, "w"), check=True)
-    print(f"[INFO] Destination hashed: {datetime.now()} -> {right_hash}")
+    def find_recent_hash_file(side, name, hours):
+        import glob
+        pattern = f"{tmpdir}/*-{side}-{name}.hash.jw"
+        files = glob.glob(pattern)
+        if not files:
+            return None
+        now = time.time()
+        threshold = now - (hours * 3600)
+        recent_files = [f for f in files if os.path.getmtime(f) > threshold]
+        if not recent_files:
+            return None
+        # Return the most recent
+        return max(recent_files, key=os.path.getmtime)
+
+    # Determine hash file paths (reuse if requested)
+    if reuse_hours:
+        left_hash = find_recent_hash_file('left', left_name, reuse_hours)
+        right_hash = find_recent_hash_file('right', right_name, reuse_hours)
+        if left_hash:
+            print(f"[INFO] Reusing recent left hash: {left_hash}")
+        else:
+            left_hash = f"{tmpdir}/{timestamp}-left-{left_name}.hash.jw"
+        if right_hash:
+            print(f"[INFO] Reusing recent right hash: {right_hash}")
+        else:
+            right_hash = f"{tmpdir}/{timestamp}-right-{right_name}.hash.jw"
+    else:
+        left_hash = f"{tmpdir}/{timestamp}-left-{left_name}.hash.jw"
+        right_hash = f"{tmpdir}/{timestamp}-right-{right_name}.hash.jw"
+
+    def run_hashing(side, dir_path, hash_path, jw_cmd, parallel_mode, progress_interval):
+        print(f"[INFO] Hashing {side}: writing to {hash_path}")
+        start_time = time.time()
+        proc = subprocess.Popen(jw_cmd, cwd=dir_path, stdout=open(hash_path, "w"))
+        check_period = progress_interval
+        next_check = start_time + check_period
+        finished = False
+        while True:
+            ret = proc.poll()
+            now = time.time()
+            if ret is not None:
+                finished = True
+                break
+            if now >= next_check:
+                try:
+                    wc_out = subprocess.check_output(["wc", "-l", hash_path], text=True).strip()
+                    n_lines = int(wc_out.split()[0])
+                    elapsed = int(now - start_time)
+                    if n_lines == 0:
+                        print(f"[INFO] Hashing {side}... {elapsed}s elapsed")
+                    else:
+                        print(f"[INFO] Hashing {side}... {elapsed}s, {n_lines} files")
+                except Exception as e:
+                    elapsed = int(now - start_time)
+                    print(f"[INFO] Hashing {side}... {elapsed}s elapsed")
+                next_check = now + check_period
+            # Sleep until next_check or 1s, whichever is sooner
+            sleep_time = max(0, min(next_check - time.time(), 1))
+            time.sleep(sleep_time)
+        duration = int(time.time() - start_time)
+        print(f"[INFO] Hashing {side} finished in {duration}s: {hash_path}")
+        return proc
+
+    # Hash both dirs if not reusing
+    if not (reuse_hours and os.path.exists(left_hash)) or not (reuse_hours and os.path.exists(right_hash)):
+        jw_left_cmd = ["jw", "-c", "."]
+        jw_right_cmd = ["jw", "-c", "."]
+        if args.live:
+            jw_left_cmd.insert(1, "-l")
+            jw_right_cmd.insert(1, "-l")
+
+        left_needed = not (reuse_hours and os.path.exists(left_hash))
+        right_needed = not (reuse_hours and os.path.exists(right_hash))
+        if parallel:
+            procs = {}
+            if left_needed:
+                procs['left'] = subprocess.Popen(jw_left_cmd, cwd=left_dir, stdout=open(left_hash, "w"))
+                print(f"[INFO] Hashing left: writing to {left_hash}")
+            if right_needed:
+                procs['right'] = subprocess.Popen(jw_right_cmd, cwd=right_dir, stdout=open(right_hash, "w"))
+                print(f"[INFO] Hashing right: writing to {right_hash}")
+            # Progress monitoring loop
+            start_times = {k: time.time() for k in procs}
+            check_periods = {k: progress_interval for k in procs}
+            next_checks = {k: start_times[k] + check_periods[k] for k in procs}
+            finished = {k: False for k in procs}
+            while not all(finished.values()):
+                now = time.time()
+                for k, proc in procs.items():
+                    if finished[k]:
+                        continue
+                    ret = proc.poll()
+                    if ret is not None:
+                        duration = int(time.time() - start_times[k])
+                        print(f"[INFO] Hashing {k} finished in {duration}s: {left_hash if k=='left' else right_hash}")
+                        finished[k] = True
+                        continue
+                    if now >= next_checks[k]:
+                        hash_path = left_hash if k=='left' else right_hash
+                        try:
+                            wc_out = subprocess.check_output(["wc", "-l", hash_path], text=True).strip()
+                            n_lines = int(wc_out.split()[0])
+                            elapsed = int(now - start_times[k])
+                            if n_lines == 0:
+                                print(f"[INFO] Hashing {k}... {elapsed}s elapsed")
+                            else:
+                                print(f"[INFO] Hashing {k}... {elapsed}s, {n_lines} files")
+                        except Exception as e:
+                            elapsed = int(now - start_times[k])
+                            print(f"[INFO] Hashing {k}... {elapsed}s elapsed")
+                        next_checks[k] = now + check_periods[k]
+                # Sleep until next scheduled check or 1s, whichever is sooner
+                soonest = min([next_checks[k] - time.time() for k in procs if not finished[k]] + [1])
+                sleep_time = max(0, min(soonest, 1))
+                time.sleep(sleep_time)
+        else:
+            if left_needed:
+                run_hashing('left', left_dir, left_hash, jw_left_cmd, False, progress_interval)
+            if right_needed:
+                run_hashing('right', right_dir, right_hash, jw_right_cmd, False, progress_interval)
+
 
     # Compare hashes
     proc = subprocess.run(["jw", "-D", left_hash, right_hash], capture_output=True, text=True)

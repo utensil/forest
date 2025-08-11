@@ -1040,12 +1040,11 @@ prep-jw:
 
 # AGENT-NOTE: check-dirs now writes hash files to /tmp/jw/ with timestamped, descriptive names (e.g. /tmp/jw/<timestamp>-left-<leftdirname>.hash.jw)
 # This avoids polluting or failing on read-only source/dest dirs, and is safe for diffing.
-check-dirs SRC DST:
+check-dirs SRC DST *PARAMS="":
     #!/usr/bin/env bash
     # AGENT-NOTE: Writes hash files to /tmp/jw/ to avoid polluting or failing on read-only source/dest dirs
     set -e
-    echo "[INFO] Checking file content integrity (hash comparison) and file timestamps for mismatches and suspiciously recent files..."
-    uv run ./check-dirs.py "{{SRC}}" "{{DST}}"
+    uv run ./check-dirs.py "{{SRC}}" "{{DST}}" {{PARAMS}}
 
 prep-termscp:
     which termscp || brew install termscp

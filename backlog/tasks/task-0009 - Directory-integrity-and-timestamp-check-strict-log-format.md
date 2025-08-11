@@ -76,6 +76,9 @@ Directory synchronization and verification require robust, script-friendly check
 -   [INFO], [WARN], and [DEBUG] lines are strictly formatted as specified
 -   Output is idempotent, robust, and script-friendly for automation
 -   Workflow tested end-to-end, including edge cases and simulated mismatches
+-   Verified: The script supports concurrent hashing with `-p`/`--parallel`, launching both `jw` processes at once and waiting for both to finish. Extra options can be passed from `just check-dirs` via `*PARAMS` and are forwarded to the `jw` command after filtering script options. If `-r`/`--reuse` is specified (optionally with a number of hours), the script auto-discovers and reuses recent hash.jw files by filename pattern and modification time. All features tested and confirmed working as intended.
+-   During agent inspection and verification, never read more than 20 lines from any hash.jw file at a time to avoid context bloat. The script itself reads all lines as originally designed. Both "all match" and "timestamp mismatch" cases verified to work as expected.
+-   Hashing for each side now logs when it starts (with side and hash.jw file), when it finishes (with duration), and periodically logs progress (line count in hash.jw file) after 30 seconds, then every 60 seconds, until the process finishes. This works for both sequential and parallel modes.
 -   Task complete and committed per AGENT.md and G-task
 
 (per G-task)

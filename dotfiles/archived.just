@@ -114,11 +114,13 @@ prep-amethyst:
     which rusync || (yes|cargo binstall rusync)
     which rip || (yes|cargo binstall rm-improved)
 
-sync-dirs SRC DST:
+# rusync doesn't keep timestamp thus deprecated
+
+deprecated-sync-dirs SRC DST:
     @just rusync-dirs {{SRC}} {{DST}}
     @just check-dirs {{SRC}} {{DST}}
 
-rusync-dirs SRC DST: prep-sync-dir-tools
+deprecated-rusync-dirs SRC DST: prep-sync-dir-tools
     #!/usr/bin/env bash
     echo "🚀 Initiating sync..."
     rusync {{SRC}} {{DST}}
