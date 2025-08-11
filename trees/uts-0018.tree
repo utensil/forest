@@ -22,6 +22,46 @@
 \subtree[2025-08]{
 \title{August, 2025}
 
+\subtree[2025-08-02]{\mdnote{2025-08-02}{
+- #agent
+    - [Cerebras Code](https://www.cerebras.ai/blog/introducing-cerebras-code)
+        - Cerebras Code Pro ($50/month)
+        - Code Max ($200/month)
+        - Qwen3-Coder, but at 2,000 tokens per second, with a 131k-token context window
+    - [Does the Bitter Lesson Have Limits?](https://www.dbreunig.com/2025/08/01/does-the-bitter-lesson-have-limits.html) ([on HN](https://news.ycombinator.com/item?id=44762022))
+        - [The Bitter Lesson](http://www.incompleteideas.net/IncIdeas/BitterLesson.html)
+            - trying to build knowledge into agents plateaus and even inhibits further progress in the long run
+            - breakthrough progress eventually arrives by an opposing approach based on scaling computation by search and learning
+        - four major blows to the human ego
+            - The Copernican Revolution: we weren’t the center of the universe.
+            - Darwinian thought: we weren’t separate from animals.
+            - Freud’s ideas of the unconscious: we weren’t in full control of our selves.
+            - Cyborgs, robots, and automatons: non-humans could do the work of humans.
+        - Garbage Can Model
+            - organizations as chaotic “garbage cans” where problems, solutions, and decision-makers are dumped in together
+            - decisions often happen when these elements collide randomly, rather than through a fully rational process
+            - represents a world where unwritten rules, bespoke knowledge, and complex and undocumented processes are critical
+        - issues of the bitter lesson
+            - dependent on high-quality data
+            - adding compute is often not practical nor optimal
+- [Unit Testing Principles](https://olano.dev/blog/unit-testing-principles/)
+    - overcomplicated code should be split into
+        - deep domain classes, to be thoroughly unit tested
+        - wide controllers, exercised by strategic integration tests
+    - unit tests should verify units of behavior
+    - four pillars of a good unit test
+        - protection against regressions
+        - resistance to refactoring
+        - fast feedback
+        - maintainability
+    - I think I have got them all wrong when setting up tests for GAlgebra
+- #lib
+    - [candyfloss: an ergonomic python library for running video pipelines](https://git.hella.cheap/bob/candyfloss)
+    - [Twentyseven 1.0](https://blog.poisson.chat/posts/2025-08-01-twentyseven.html)
+        - a Rubik’s cube solver in Haskell
+        - based on [Cube Explorer](https://kociemba.org/cube.htm) in Pascal, actually Delphi 6 [[source](https://github.com/hkociemba/CubeExplorer)]
+}}
+
 \subtree[2025-08-01]{\mdnote{2025-08-01}{
 - #agent
     - [6 Weeks of Claude Code](https://blog.puzzmo.com/posts/2025/07/30/six-weeks-of-claude-code/) ([on HN](https://news.ycombinator.com/item?id=44746621)) ([on lobste.rs](https://lobste.rs/s/iqyqm3))
@@ -48,6 +88,7 @@
         - [ComplianceAsCode/content: Security automation content in SCAP, Bash, Ansible, and other formats](https://github.com/ComplianceAsCode/content) is also suggested
             - it facilitates security policy content authoring
             - along with ansible playbook/bash scripts to check or fix compliance
+    - [When Flatpak’s Sandbox Cracks: Real‑Life Security Issues Beyond the Ideal | Linux Journal](https://www.linuxjournal.com/content/when-flatpaks-sandbox-cracks-real-life-security-issues-beyond-ideal)
 - [Hyrum's Law](https://www.hyrumslaw.com)
     - "With a sufficient number of users of an API, it does not matter what you promise in the contract: all observable behaviors of your system will be depended on by somebody"
     - "corollary: even if you explicitly deny a guarantee of a certain behavior in your contract, if you usually deliver that behavior, most of your customers will depend on it."
@@ -88,21 +129,25 @@
 }}
 
 \subtree[2025-07-29]{\mdnote{2025-07-29}{
-- [Zig profiling on Apple Silicon | Bugsik](https://blog.bugsiki.dev/posts/zig-profilers/)
-    - [mstange/samply](https://github.com/mstange/samply)
-        - a command line sampling CPU profiler which uses the Firefox profiler as its UI
-        - for macOS, Linux, and Windows
-    - [verte-zerg/poop at kperf-macos](https://github.com/verte-zerg/poop/tree/kperf-macos)
-        - a fork of poop to use kperf under Mac
-    - [wolfpld/tracy: Frame profiler](https://github.com/wolfpld/tracy)
-        - A real time, nanosecond resolution, remote telemetry, hybrid frame and sampling profiler for games and other applications
-        - C, C++, Lua, Python, Fortran, Rust, Zig, C#, OCaml, Odin, GPU
-        - Windows, Linux, Android, FreeBSD, WSL, OSX, iOS, QNX
+- #zig #perf
+    - [Zig profiling on Apple Silicon | Bugsik](https://blog.bugsiki.dev/posts/zig-profilers/)
+        - [mstange/samply](https://github.com/mstange/samply)
+            - a command line sampling CPU profiler which uses the Firefox profiler as its UI
+            - for macOS, Linux, and Windows
+        - [verte-zerg/poop at kperf-macos](https://github.com/verte-zerg/poop/tree/kperf-macos)
+            - a fork of poop to use kperf under Mac
+        - [wolfpld/tracy: Frame profiler](https://github.com/wolfpld/tracy)
+            - A real time, nanosecond resolution, remote telemetry, hybrid frame and sampling profiler for games and other applications
+            - C, C++, Lua, Python, Fortran, Rust, Zig, C#, OCaml, Odin, GPU
+            - Windows, Linux, Android, FreeBSD, WSL, OSX, iOS, QNX
+    - [Generic Programming and anytype - Docs - Ziggit](https://ziggit.dev/t/generic-programming-and-anytype/3228)
+    - [Using Zig allocator for C libraries (Alignment question)](https://www.reddit.com/r/Zig/comments/1mbn4q1/using_zig_allocator_for_c_libraries_alignment/)
+        - `Allocator.rawAlloc`/`.rawFree`
+        - `@alignOf(std.c.max_align_t)`
 - #physics
     - [Background independence](https://robwilson1.wordpress.com/2025/07/29/background-independence-2/)
 - #crypto
     - [Fintech dystopia](https://fintechdystopia.com/) ([on HN](https://news.ycombinator.com/item?id=44718117))
-- [GLM-4.5: Reasoning, Coding, and Agentic Abililties](https://simonwillison.net/2025/Jul/28/glm-45/)
 - #perf
     - [Giving Benchmarks a Boat](https://buttondown.com/jaffray/archive/giving-benchmarks-a-boat/)
         - TPC-C is a benchmark for transactional databases that models an order system with goods spanning many warehouses
@@ -115,7 +160,7 @@
         - The metric: "we sustained the workload at X warehouses with Y hardware at Z cost."
 - #movie
     - [Nothing to watch – Experimental gallery visualizing 50k film posters](https://nothing-to-watch.port80.ch)
-- #agebt
+- #agent
     - [Principles for production AI agents](https://www.app.build/blog/six-principles-production-ai-agents) ([on HN](https://news.ycombinator.com/item?id=44712315))
         - context
             - modern LLMs just need direct detailed context, no tricks, but clarity and lack of contradictions
@@ -136,6 +181,46 @@
             - agents try alternatives because the explicitly requested tool call failed with crucial ingredients
                 - tell them to ask for these ingredients before trying alternatives
             - baseline agent + logs + LLM analysis = insights for improvments
+    - [Q&A: Combining Math and LLMs](https://justinmath.com/combining-math-and-llms/)
+        - Raw math/algos and LLM are both powerful tools in your modeling toolkit
+        - If you’re missing either tool from your toolkit, then that will severely hamstring your modeling abilities and many problems will remain inaccessible to you.
+    - [Show HN: Companies use AI to take your calls. I built AI to make them for you](https://www.pipervoice.com/)
+        - top comment [on HN](https://news.ycombinator.com/item?id=44716414) introduced a great use case for LLM-back reception
+            - local plumbing business
+                - understand and repeated back the client's request in a slightly different, more professional way for confirmation
+                - asked a few more smart follow-ups
+                - the plumber called back and jumped straight into solutions, pricing, and his availability
+            - prefer to talk to LLM, if the issue can be quickly triaged to the right human who actually understand the situation
+            - synchronous interaction by bot
+                - can perform first level troubleshooting, ask for clarification, begin to form a plan and get your buy-in
+                - v.s. fire-and-forget email form
+                    - incomplete reports, missing information, people who have no idea what they're talking about
+    - [Show HN: Terminal-Bench-RL: Training Long-Horizon Terminal Agents with RL](https://github.com/Danau5tin/terminal-bench-rl) ([on HN](https://news.ycombinator.com/item?id=44721791))
+        - Custom scaffolding (system prompt and tools) using Qwen3-32B achieved 13.75% on Terminal-Bench. No training was involved
+        - The author has built an RL system, but it has not been used for anything due to cost limitations.
+    - [GLM-4.5: Reasoning, Coding, and Agentic Abililties](https://simonwillison.net/2025/Jul/28/glm-45/)
+    - [Stop selling “unlimited”, when you mean “until we change our minds”](https://blog.kilocode.ai/p/ai-pricing-playbook-strikes-again)
+        - the playbook
+            - launch with generous/unlimited limits
+            - build user dependency
+            - add caps targeting "less than 5%" of users
+            - frame as "sustainability" or "fairness"
+        - that "5%" drives everything
+            - power users with deep workflow integration
+            - early adopters who took platform risks
+            - team influencers who drive organizational adoption
+            - $200/month Claude Max subscribers doing serious work
+    - [The Rise of Vibeinsecurity](https://vibeinsecurity.com/)
+        - a story about how devs lost their jobs over vibe apps, and vibe apps are hacked by vibe hackers immediately after deployment
+        - this is also an ad for a conference called HackAIcon
+    - [It's rude to show AI output to people](https://distantprovince.by/posts/its-rude-to-show-ai-output-to-people/)
+        - whenever you propagate AI output, you're at risk of intentionally or unintentionally legitimizing it with your good name, providing it with a fake proof-of-thought
+- #sec #privacy
+    - [Tea app leak worsens with second database exposing user chats](https://www.bleepingcomputer.com/news/security/tea-app-leak-worsens-with-second-database-exposing-user-chats/)
+- #idea
+    - [Why Try When Others Could Do Better?](https://justinmath.com/why-try-when-others-could-do-better/)
+        - Even the smartest, highest-agency people in the world are severely bandwidth constrained and don’t get around to doing most of the things they have the potential to do.
+        - Compound that over and over again in some niche and you get hundreds, thousands, millions of miles ahead of the fastest runners who aren’t running down that niche.
 }}
 
 \subtree[2025-07-12~2025-07-28]{\mdnote{2025-07-12~2025-07-28}{
@@ -206,6 +291,8 @@
     - [Writing a very simple JIT Compiler in about 1000 lines of C](https://kuterdinel.com/writing-a-very-simple-jit-compiler-in-about-1000-lines-of-c.html)
     - [Writing an IR from Scratch and survive to write a post](https://farena.in/compilers/programming/writing-an-ir-from-scratch/)
     - [Go Assembly Mutation Testing](https://words.filippo.io/assembly-mutation/)
+    - [A Bytecode VM for Arithmetic: The Parser](https://abhinavsarkar.net/posts/arithmetic-bytecode-vm-parser/)
+        - in Haskell
 - #copyright
     - [I used to prefer permissive licenses and now favor copyleft](https://vitalik.eth.limo/general/2025/07/07/copyleft.html)
     - [Belgium bans Internet Archive's ‘Open Library’](https://torrentfreak.com/belgium-bans-internet-archives-open-library-in-sweeping-site-blocking-order/)
@@ -250,6 +337,7 @@
     - [#[derive(Clone)] is broken](https://rgbcu.be/blog/derive-broken/)
     - [Building the Rust compiler with GCC](https://fractalfir.github.io/generated_html/cg_gcc_bootstrap.html)
         - [rust-lang/rustc_codegen_gcc: libgccjit AOT codegen for rustc](https://github.com/rust-lang/rustc_codegen_gcc)
+        - [Testing the GCC-based Rust compiler(backend)](https://fractalfir.github.io/generated_html/cg_gcc_bootstrap_2.html)
 - #clojure
     - [All Programming Languages are Fast](https://orgpad.info/blog/all-programming-langs-are-fast)
     - [8 Reasons why Clojure is a better Java than Java](https://ericnormand.me/article/clojure-is-a-better-java-than-java)
@@ -291,6 +379,7 @@
     - [White Noise – secure and private messenger](https://www.whitenoise.chat/)
     - [Matrix Is Not Safe for EU Data Privacy](https://wire.com/en/blog/matrix-not-safe-eu-data-privacy)
         - [Addressing fear, uncertainty and doubt thrown at Element and Matrix](https://element.io/blog/addressing-fear-uncertainty-and-doubt-thrown-at-element-and-matrix/)
+    - [Why not Matrix (2023)](https://telegra.ph/why-not-matrix-08-07)
 }}
 
 \subtree[2025-07-07]{\mdnote{2025-07-07}{
@@ -371,6 +460,7 @@
     - [Two and a Half Years in GameDev](https://smyachenkov.com/posts/two-and-half-years-in-gamedev/) ([on HN](https://news.ycombinator.com/item?id=44480667))
     - [List of open source game clones](https://osgameclones.com/)
     - [Adding Planets to Celestia on macOS](https://borretti.me/article/adding-planets-to-celestia-on-macos)
+    - [Shrinkle – Shrink words, find hidden phrase](https://www.shrinkle.org/)
 }}
 
 \subtree[2025-07-05]{\mdnote{2025-07-05}{\tags{#agent #jujutsu #neovim #news #os #software #tla}
@@ -407,6 +497,7 @@
                 - browser devtools
 - #jj
     - [Git experts should try Jujutsu](https://pksunkara.com/thoughts/git-experts-should-try-jujutsu/)
+    - [Jujutsu For Busy Devs](https://maddie.wtf/posts/2025-07-21-jujutsu-for-busy-devs)
 - #incident
     - [Recent Archive of Our Own outage was caused by integer exhaustion](\verb>>>|https://otwarchive.atlassian.net/jira/software/c/projects/AO3/issues/AO3-7031?jql=project%20%3D%20%22AO3%22%20ORDER%20BY%20created%20DESC>>>)
     - [Why AO3 Was Down](https://www.reddit.com/r/AO3/s/67nQid89MW) ([on HN](https://news.ycombinator.com/item?id=44469650))
@@ -1188,6 +1279,7 @@
     - [Delta Chat is a decentralized and secure messenger app](https://delta.chat/en/)
     - [Google Gemini is about to control your messages and calls, even if you say no](https://www.laptopmag.com/ai/gemini-phone-access-update) ([on HN](https://news.ycombinator.com/item?id=44411114))
     - [The EU wants to decrypt your private data by 2030](https://www.techradar.com/vpn/vpn-privacy-security/the-eu-wants-to-decrypt-your-private-data-by-2030)
+    - [Wikimedia Foundation Challenges UK Online Safety Act Regulations](https://wikimediafoundation.org/news/2025/07/17/wikimedia-foundation-challenges-uk-online-safety-act-regulations/) ([on HN](https://news.ycombinator.com/item?id=44721403))
 - #news
     - [Rules, Not Renewables, Might Explain the Iberian Blackout](https://spectrum.ieee.org/spain-grid-failure)
     - [Miscalculation by Spanish power grid operator REE contributed to blackout](https://www.reuters.com/business/energy/investigation-into-spains-april-28-blackout-shows-no-evidence-cyberattack-2025-06-17/)
