@@ -4,19 +4,23 @@
 # dependencies = ["requests>=2.31.0"]
 # ///
 """
-File Timestamp Checker
-=====================
+Directory Hash and Timestamp Checker
+===================================
 
-This script samples file paths from two hash files (produced by `jw -c .`), checks their modification times, and reports suspicious timestamp mismatches or files with timestamps that are “too recent” (likely due to copying).
+This script compares two directories for file content (hash) and timestamp mismatches, using jw for hashing and Python for coordination and output parsing.
 
-Usage: uv run ./check-ts.py <left_dir> <right_dir> <left_hash> <right_hash>
+Usage: uv run ./check-dirs.py <left_dir> <right_dir> [--all-mismatch]
 
 - left_dir: Path to the left/source directory
 - right_dir: Path to the right/destination directory
-- left_hash: Path to the left hash file (from jw)
-- right_hash: Path to the right hash file (from jw)
+- --all-mismatch: (optional) Show all hash mismatches, not just the first 100
 
-The script will sample up to 1000 file paths from each hash file, check their mtimes, and print a report of any mismatches or suspiciously recent files.
+The script will:
+- Generate hash files for both directories in /tmp/jw/
+- Compare hashes using jw -D, parse output in Python (not awk)
+- Print up to 100 mismatches unless --all-mismatch is specified
+- Count and print match/mismatch statistics
+- Check file timestamps using the original logic
 
 AGENT-NOTE: CRITICAL FEATURES TO MAINTAIN
 1. IDEMPOTENT: Multiple runs must produce identical results
@@ -29,6 +33,7 @@ import sys
 import os
 import random
 import time
+import subprocess
 from datetime import datetime, timedelta
 
 SAMPLE_SIZE = 1000
@@ -107,11 +112,64 @@ def format_timedelta(seconds):
         return f"{seconds} sec"
 
 def main():
-    if len(sys.argv) != 5:
-        print("[WARN] Usage: uv run ./check-ts.py <left_dir> <right_dir> <left_hash> <right_hash>")
-        sys.exit(1)
-    print("[INFO] Checking for timestamp mismatches and suspiciously recent files between two directories.")
-    left_dir, right_dir, left_hash, right_hash = sys.argv[1:5]
+    import argparse
+    parser = argparse.ArgumentParser(description="Directory hash and timestamp checker")
+    parser.add_argument("left_dir", help="Source directory")
+    parser.add_argument("right_dir", help="Destination directory")
+    parser.add_argument("--all-mismatch", action="store_true", help="Show all hash mismatches (default: only first 100)")
+    args = parser.parse_args()
+
+    left_dir = args.left_dir
+    right_dir = args.right_dir
+    show_all = args.all_mismatch
+
+    print("[INFO] Checking file content integrity (hash comparison) and file timestamps for mismatches and suspiciously recent files...")
+    timestamp = int(time.time())
+    left_name = os.path.basename(os.path.abspath(left_dir))
+    right_name = os.path.basename(os.path.abspath(right_dir))
+    tmpdir = "/tmp/jw"
+    os.makedirs(tmpdir, exist_ok=True)
+    left_hash = f"{tmpdir}/{timestamp}-left-{left_name}.hash.jw"
+    right_hash = f"{tmpdir}/{timestamp}-right-{right_name}.hash.jw"
+
+    # Hash both dirs
+    subprocess.run(["jw", "-c", "."], cwd=left_dir, stdout=open(left_hash, "w"), check=True)
+    print(f"[INFO] Source hashed: {datetime.now()} -> {left_hash}")
+    subprocess.run(["jw", "-c", "."], cwd=right_dir, stdout=open(right_hash, "w"), check=True)
+    print(f"[INFO] Destination hashed: {datetime.now()} -> {right_hash}")
+
+    # Compare hashes
+    proc = subprocess.run(["jw", "-D", left_hash, right_hash], capture_output=True, text=True)
+    mismatch_lines = [l for l in proc.stdout.splitlines() if l.startswith("[!(")]
+    total = sum(1 for _ in open(left_hash))
+    mismatch_count = len(mismatch_lines)
+    matched = total - mismatch_count
+    print(f"[INFO] {matched} of {total} files have identical hashes.")
+
+    GREEN = '\033[0;32m'
+    RED = '\033[0;31m'
+    NC = '\033[0m'
+
+    if mismatch_count == 0:
+        print(f"[INFO] {GREEN}All files match: hashes are identical.{NC}")
+    else:
+        print(f"[WARN] Hash mismatch detected.")
+        limit = None if show_all else 100
+        for line in mismatch_lines[:limit]:
+            # Format: [!(...)] <right-hash> != <left-hash> == <file>
+            parts = line.split()
+            if len(parts) >= 6:
+                right_hash_val = parts[1]
+                left_hash_val = parts[3]
+                file_path = parts[5]
+                print(f"[DEBUG] {file_path}|hash-mismatch|{left_hash_val}|{right_hash_val}")
+        if not show_all and mismatch_count > 100:
+            print(f"[INFO] ... (showing first 100 of {mismatch_count} mismatches, use --all-mismatch to see all)")
+        print(f"[INFO] {RED}Hash check failed.{NC}")
+
+    print(f"[INFO] Open {right_hash} to inspect.")
+
+    # Now call the timestamp check logic as before
     left_paths = read_hash_file(left_hash)
     right_paths = read_hash_file(right_hash)
     print(f"[INFO] {len(left_paths)} left paths loaded from {left_hash}")
@@ -119,11 +177,6 @@ def main():
     left_sample = sample_paths(left_paths)
     right_sample = sample_paths(right_paths)
     print(f"[INFO] Sampled {len(left_sample)} left and {len(right_sample)} right paths.")
-
-    # ANSI color codes
-    GREEN = '\033[0;32m'
-    RED = '\033[0;31m'
-    NC = '\033[0m'
 
     # Too recent check (right side only, per user example)
     right_suspicious = check_timestamps(right_dir, right_sample)

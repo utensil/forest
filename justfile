@@ -1045,45 +1045,7 @@ check-dirs SRC DST:
     # AGENT-NOTE: Writes hash files to /tmp/jw/ to avoid polluting or failing on read-only source/dest dirs
     set -e
     echo "[INFO] Checking file content integrity (hash comparison) and file timestamps for mismatches and suspiciously recent files..."
-    TIMESTAMP=$(date +%s)
-    LEFTDIR=$(basename "{{SRC}}")
-    RIGHTDIR=$(basename "{{DST}}")
-    TMPDIR="/tmp/jw"
-    mkdir -p "$TMPDIR"
-    LEFT_HASH="$TMPDIR/${TIMESTAMP}-left-${LEFTDIR}.hash.jw"
-    RIGHT_HASH="$TMPDIR/${TIMESTAMP}-right-${RIGHTDIR}.hash.jw"
-    (cd "{{SRC}}" && jw -c . > "$LEFT_HASH") && echo "[INFO] Source hashed: $(date) -> $LEFT_HASH"
-    (cd "{{DST}}" && jw -c . > "$RIGHT_HASH") && echo "[INFO] Destination hashed: $(date) -> $RIGHT_HASH"
-    MISMATCH=$(jw -D "$LEFT_HASH" "$RIGHT_HASH")
-    # Efficiently count matches and mismatches
-    TOTAL=$(wc -l < "$LEFT_HASH" | xargs)
-    MISMATCH_COUNT=$(echo "$MISMATCH" | grep -c '^\[!(' || true)
-    MATCHED=$((TOTAL - MISMATCH_COUNT))
-    echo "[INFO] $MATCHED of $TOTAL files have identical hashes."
-
-    GREEN='\033[0;32m'
-    RED='\033[0;31m'
-    NC='\033[0m'
-    if [ -z "$MISMATCH" ]; then
-        echo -e "[INFO] ${GREEN}All files match: hashes are identical.${NC}"
-    else
-        echo "[WARN] Hash mismatch detected."
-        while IFS= read -r line; do
-            if [[ $line =~ ^\[!\(.*\)\] ]]; then
-                # Parse: [!(...)] <right-hash> != <left-hash> == <file>
-                # Example: [!(...)] badc0ffee0ddf00ddeadbeefcafebabe != 51df1e4dfd785628ced8f3ce526af07a == ./html.xsl
-                right_hash=$(echo "$line" | awk '{print $2}')
-                left_hash=$(echo "$line" | awk '{print $4}')
-                file=$(echo "$line" | awk '{print $6}')
-                echo "[DEBUG] $file|hash-mismatch|$left_hash|$right_hash"
-            fi
-        done <<< "$MISMATCH"
-        echo -e "[INFO] ${RED}Hash check failed.${NC}"
-    fi
-
-    echo "[INFO] Open $RIGHT_HASH to inspect."
-    # AGENT-NOTE: Also sample and check file timestamps for mismatches and suspiciously recent mtimes
-    uv run ./check-ts.py "{{SRC}}" "{{DST}}" "$LEFT_HASH" "$RIGHT_HASH"
+    uv run ./check-dirs.py "{{SRC}}" "{{DST}}"
 
 prep-termscp:
     which termscp || brew install termscp
