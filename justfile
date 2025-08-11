@@ -1055,8 +1055,11 @@ check-dirs SRC DST:
     (cd "{{SRC}}" && jw -c . > "$LEFT_HASH") && echo "[INFO] Source hashed: $(date) -> $LEFT_HASH"
     (cd "{{DST}}" && jw -c . > "$RIGHT_HASH") && echo "[INFO] Destination hashed: $(date) -> $RIGHT_HASH"
     MISMATCH=$(jw -D "$LEFT_HASH" "$RIGHT_HASH")
+    GREEN='\033[0;32m'
+    RED='\033[0;31m'
+    NC='\033[0m'
     if [ -z "$MISMATCH" ]; then
-        echo "[INFO] Hashes match perfectly."
+        echo -e "[INFO] ${GREEN}All files match: hashes are identical.${NC}"
     else
         echo "[WARN] Hash mismatch detected."
         while IFS= read -r line; do
@@ -1069,7 +1072,9 @@ check-dirs SRC DST:
                 echo "[DEBUG] $file|hash-mismatch|$left_hash|$right_hash"
             fi
         done <<< "$MISMATCH"
+        echo -e "[INFO] ${RED}Hash check failed.${NC}"
     fi
+
     echo "[INFO] Open $RIGHT_HASH to inspect."
     # AGENT-NOTE: Also sample and check file timestamps for mismatches and suspiciously recent mtimes
     uv run ./check-ts.py "{{SRC}}" "{{DST}}" "$LEFT_HASH" "$RIGHT_HASH"

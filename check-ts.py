@@ -120,6 +120,11 @@ def main():
     right_sample = sample_paths(right_paths)
     print(f"[INFO] Sampled {len(left_sample)} left and {len(right_sample)} right paths.")
 
+    # ANSI color codes
+    GREEN = '\033[0;32m'
+    RED = '\033[0;31m'
+    NC = '\033[0m'
+
     # Too recent check (right side only, per user example)
     right_suspicious = check_timestamps(right_dir, right_sample)
     if right_suspicious:
@@ -133,6 +138,11 @@ def main():
         print(f"[WARN] {len(mismatches)} timestamp mismatch, {newer} newer, {older} older")
         for rel_path, issue, left_m, right_m, diff in mismatches:
             print(f"[DEBUG] {rel_path}|timestamp-mismatch|{issue}|{datetime.fromtimestamp(left_m).strftime('%Y-%m-%d %H:%M:%S')}|{datetime.fromtimestamp(right_m).strftime('%Y-%m-%d %H:%M:%S')}")
+        print(f"[INFO] {RED}Timestamp check failed.{NC}")
+    elif right_suspicious:
+        print(f"[INFO] {RED}Timestamp check failed.{NC}")
+    else:
+        print(f"[INFO] {GREEN}All sampled files have consistent timestamps, none are too recent.{NC}")
 
 
 if __name__ == "__main__":
