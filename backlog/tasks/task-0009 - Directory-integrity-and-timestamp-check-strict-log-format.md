@@ -70,10 +70,12 @@ Directory synchronization and verification require robust, script-friendly check
 
 ## Execution notes
 
--   Refactored check-ts.py and just check-dirs to output [INFO], [WARN], and [DEBUG] lines as specified
--   All summary and per-file lines are correctly prefixed and formatted
--   Output matches the strict log format specification
--   Workflow tested end-to-end with simulated mismatches
--   Task complete
+-   Refactored and merged check-ts.py into check-dirs.py, now fully Python-coordinated
+-   justfile updated to call check-dirs.py, removing all references to check-ts.py
+-   All hash and timestamp checking, mismatch limiting, and log output are coordinated in Python
+-   [INFO], [WARN], and [DEBUG] lines are strictly formatted as specified
+-   Output is idempotent, robust, and script-friendly for automation
+-   Workflow tested end-to-end, including edge cases and simulated mismatches
+-   Task complete and committed per AGENT.md and G-task
 
 (per G-task)
