@@ -1027,19 +1027,20 @@ prep-rsync:
     just prep-uv
     uvx rsyncy --help
 
-# --archive -- preserve as much metadata as possible
-# • -a or --archive: Recursively copy and preserve almost everything (permissions, timestamps, ownership, group, symlinks, devices, etc.).
+# -a or --archive: Recursively copy and preserve almost everything (permissions, timestamps, ownership, group, symlinks, devices, etc.), implies:
 # • -t or --times: Preserve modification times.
 # • -o or --owner: Preserve owner (requires root).
 # • -g or --group: Preserve group (requires root).
-# --recursive - tricky, not using it for now
+# • -p or --perms: Preserve permision
+# • --recursive
 # --ignore-existing - only copy new files
-# --whole-file - for fast network, skip delta check, to speed up
+# -W or --whole-file - for fast network, skip delta check, to speed up
 # --copy-links - if wish to copy symlinked target file
 # works as expected if both dirs end with /
 #
 rsync SRC DST *PARAMS="--dry-run":
-    uvx rsyncy --times --verbose --partial {{PARAMS}} {{SRC}} {{DST}}
+    uvx rsyncy --perms --times --recursive --verbose --partial {{PARAMS}} {{SRC}} {{DST}}
+
 prep-jw:
     which jw || (yes|cargo binstall jw)
 
