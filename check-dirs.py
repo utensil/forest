@@ -201,7 +201,12 @@ def main():
             sleep_time = max(0, min(next_check - time.time(), 1))
             time.sleep(sleep_time)
         duration = int(time.time() - start_time)
-        print(f"[INFO] Hashing {side} finished in {duration}s: {hash_path}")
+        try:
+            wc_out = subprocess.check_output(["wc", "-l", hash_path], text=True).strip()
+            n_lines = int(wc_out.split()[0])
+        except Exception:
+            n_lines = 0
+        print(f"[INFO] Hashing {side} finished in {duration}s, {n_lines} files")
         return proc
 
     # Hash both dirs if not reusing
@@ -235,7 +240,13 @@ def main():
                     ret = proc.poll()
                     if ret is not None:
                         duration = int(time.time() - start_times[k])
-                        print(f"[INFO] Hashing {k} finished in {duration}s: {left_hash if k=='left' else right_hash}")
+                        hash_path = left_hash if k=='left' else right_hash
+                        try:
+                            wc_out = subprocess.check_output(["wc", "-l", hash_path], text=True).strip()
+                            n_lines = int(wc_out.split()[0])
+                        except Exception:
+                            n_lines = 0
+                        print(f"[INFO] Hashing {k} finished in {duration}s, {n_lines} files")
                         finished[k] = True
                         continue
                     if now >= next_checks[k]:
