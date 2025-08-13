@@ -1042,7 +1042,8 @@ rsync SRC DST *PARAMS="--dry-run":
     uvx rsyncy --perms --times --recursive --verbose --partial {{PARAMS}} {{SRC}} {{DST}}
 
 prep-jw:
-    which jw || (yes|cargo binstall jw)
+    which jw || cargo install --git https://github.com/utensil/jw --branch fixed-order jw
+    # (yes|cargo binstall jw)
 
 # AGENT-NOTE: check-dirs now writes hash files to /tmp/jw/ with timestamped, descriptive names (e.g. /tmp/jw/<timestamp>-left-<leftdirname>.hash.jw)
 # This avoids polluting or failing on read-only source/dest dirs, and is safe for diffing.
