@@ -297,7 +297,8 @@ def main():
     limit = None if show_all else 100
 
     # Regexes for all three cases
-    mismatch_re = re.compile(r"\[!\([^)]*\)\]\s+([^ ]+)\s+!=\s+([^ ]+)\s+==")
+    # Example: [!(/tmp/jw/1755082836-right-assets.hash.jw)] 131609ff691296c9d54d4fe2f628647b != c0fda2204c7a2bced1dd3a2b25879425 == ./images/3d-cube-scan-loading.svg
+    mismatch_re = re.compile(r"\[!\([^)]*\)\]\s+([0-9a-fA-F]+)\s+!=\s+([0-9a-fA-F]+)\s+==\s+(.+)")
     missing_re = re.compile(r"\[-\([^)]*\)\]\s+(.+)")
     extra_re = re.compile(r"\[\+\([^)]*\)\]\s+([^ ]+)\s+(.+)")
 
@@ -307,39 +308,14 @@ def main():
             break
         m = mismatch_re.match(line)
         if m:
-            right_path = m.group(1)
-            left_path = m.group(2)
-            # Extract hashes from the left and right hash files
-            left_hash_val = ''
-            right_hash_val = ''
-            try:
-                from inspect import currentframe
-                # Use adaptive parsing for both files
-                with open(left_hash) as lf:
-                    for l in lf:
-                        parsed = parse_hash_line(l, 32)
-                        if parsed:
-                            h, p = parsed
-                            if p == left_path or p == ('./' + left_path.lstrip('./')):
-                                left_hash_val = h
-                                break
-                with open(right_hash) as rf:
-                    for l in rf:
-                        parsed = parse_hash_line(l, 32)
-                        if parsed:
-                            h, p = parsed
-                            if p == right_path or p == ('./' + right_path.lstrip('./')):
-                                right_hash_val = h
-                                break
-            except Exception:
-                pass
-            if not left_hash_val or not right_hash_val:
-                print(f"[DEBUG] parse-error|{line}")
-            else:
-                print(f"[DEBUG] hash-mismatch|{left_path}|{left_hash_val}|{right_path}|{right_hash_val}")
+            right_hash_val = m.group(1)
+            left_hash_val = m.group(2)
+            path = m.group(3)
+            print(f"[DEBUG] hash-mismatch|{path}|{left_hash_val}|{right_hash_val}")
             mismatch_count += 1
             shown += 1
             continue
+
         m = missing_re.match(line)
         if m:
             left_path = m.group(1)
