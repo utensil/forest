@@ -43,19 +43,32 @@ from datetime import datetime, timedelta
 SAMPLE_SIZE = 1000
 RECENT_THRESHOLD_SECONDS = 60 * 10  # 10 minutes
 
+import re
+
+def parse_hash_line(line, hash_len=32):
+    """
+    Parse a line in the strict <hash><path> format (no space).
+    Returns (hash, path) if valid, else None.
+    """
+    line = line.strip()
+    if not line or len(line) <= hash_len:
+        return None
+    first = line[:hash_len]
+    rest = line[hash_len:]
+    if re.fullmatch(r'[0-9a-fA-F]{%d}' % hash_len, first) and rest and ('/' in rest or '.' in rest):
+        return (first, rest)
+    return None
+
 def read_hash_file(hash_path):
     paths = []
     HASH_LEN = 32  # MD5 hash length; adjust if needed
     try:
         with open(hash_path, 'r') as f:
             for line in f:
-                # Format: <hash><path>, path is relative (may start with ./)
-                line = line.strip()
-                if not line or len(line) <= HASH_LEN:
-                    continue
-                rel_path = line[HASH_LEN:]
-                paths.append(rel_path)
-
+                parsed = parse_hash_line(line, HASH_LEN)
+                if parsed:
+                    _, rel_path = parsed
+                    paths.append(rel_path)
     except Exception as e:
         print(f"[WARN] Failed to read {hash_path}: {e}")
     return sorted(set(paths))
@@ -276,9 +289,72 @@ def main():
 
     # Compare hashes
     proc = subprocess.run(["jw", "-D", left_hash, right_hash], capture_output=True, text=True)
-    mismatch_lines = [l for l in proc.stdout.splitlines() if l.startswith("[!(")]
+    import re
+    lines = proc.stdout.splitlines()
     total = sum(1 for _ in open(left_hash))
-    mismatch_count = len(mismatch_lines)
+    mismatch_count = 0
+    matched = None  # Will count after parsing
+    limit = None if show_all else 100
+
+    # Regexes for all three cases
+    mismatch_re = re.compile(r"\[!\([^)]*\)\]\s+([^ ]+)\s+!=\s+([^ ]+)\s+==")
+    missing_re = re.compile(r"\[-\([^)]*\)\]\s+(.+)")
+    extra_re = re.compile(r"\[\+\([^)]*\)\]\s+([^ ]+)\s+(.+)")
+
+    shown = 0
+    for line in lines:
+        if shown == limit:
+            break
+        m = mismatch_re.match(line)
+        if m:
+            right_path = m.group(1)
+            left_path = m.group(2)
+            # Extract hashes from the left and right hash files
+            left_hash_val = ''
+            right_hash_val = ''
+            try:
+                from inspect import currentframe
+                # Use adaptive parsing for both files
+                with open(left_hash) as lf:
+                    for l in lf:
+                        parsed = parse_hash_line(l, 32)
+                        if parsed:
+                            h, p = parsed
+                            if p == left_path or p == ('./' + left_path.lstrip('./')):
+                                left_hash_val = h
+                                break
+                with open(right_hash) as rf:
+                    for l in rf:
+                        parsed = parse_hash_line(l, 32)
+                        if parsed:
+                            h, p = parsed
+                            if p == right_path or p == ('./' + right_path.lstrip('./')):
+                                right_hash_val = h
+                                break
+            except Exception:
+                pass
+            if not left_hash_val or not right_hash_val:
+                print(f"[DEBUG] parse-error|{line}")
+            else:
+                print(f"[DEBUG] hash-mismatch|{left_path}|{left_hash_val}|{right_path}|{right_hash_val}")
+            mismatch_count += 1
+            shown += 1
+            continue
+        m = missing_re.match(line)
+        if m:
+            left_path = m.group(1)
+            print(f"[DEBUG] missing|{left_path}")
+            mismatch_count += 1
+            shown += 1
+            continue
+        m = extra_re.match(line)
+        if m:
+            right_hash_val = m.group(1)
+            right_path = m.group(2)
+            print(f"[DEBUG] extra|{right_path}")
+            mismatch_count += 1
+            shown += 1
+            continue
     matched = total - mismatch_count
     print(f"[INFO] {matched} of {total} files have identical hashes.")
 
@@ -290,15 +366,6 @@ def main():
         print(f"[INFO] {GREEN}All files match: hashes are identical.{NC}")
     else:
         print(f"[WARN] Hash mismatch detected.")
-        limit = None if show_all else 100
-        for line in mismatch_lines[:limit]:
-            # Format: [!(...)] <right-hash> != <left-hash> == <file>
-            parts = line.split()
-            if len(parts) >= 6:
-                right_hash_val = parts[1]
-                left_hash_val = parts[3]
-                file_path = parts[5]
-                print(f"[DEBUG] {file_path}|hash-mismatch|{left_hash_val}|{right_hash_val}")
         if not show_all and mismatch_count > 100:
             print(f"[INFO] ... (showing first 100 of {mismatch_count} mismatches, use --all-mismatch to see all)")
         print(f"[INFO] {RED}Hash check failed.{NC}")

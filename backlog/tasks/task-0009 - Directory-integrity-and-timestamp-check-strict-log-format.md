@@ -29,11 +29,16 @@ Directory synchronization and verification require robust, script-friendly check
         -   `too-recent` for files modified within the suspicious recency threshold.
 -   **Field order and examples:**
     -   **Hash mismatch:**  
-        `[DEBUG] ./file|hash-mismatch|<left-hash>|<right-hash>`
+    `[DEBUG] hash-mismatch|<left-path>|<left-hash>|<right-path>|<right-hash>`
+    -   **Missing in right:**  
+    `[DEBUG] missing|<left-path>`
+    -   **Extra in right:**  
+    `[DEBUG] extra|<right-path>`
     -   **Timestamp mismatch:**  
-        `[DEBUG] ./file|timestamp-mismatch|<diff>|<left-timestamp>|<right-timestamp>`
+    `[DEBUG] <file>|timestamp-mismatch|<diff>|<left-timestamp>|<right-timestamp>`
     -   **Too recent:**  
-        `[DEBUG] ./file|too-recent|<timestamp>`
+    `[DEBUG] <file>|too-recent|<timestamp>`
+
 -   **Timestamps:**
     -   Always formatted as `YYYY-MM-DD HH:MM:SS`.
 -   **Hash order:**
