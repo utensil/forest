@@ -22,6 +22,39 @@
 \subtree[2025-08]{
 \title{August, 2025}
 
+\subtree[2025-08-03]{\mdnote{2025-08-03}{
+- [How do you backup your non-work-related data?](https://lobste.rs/s/ngo3ex/how_do_you_backup_your_non_work_related)
+    - most suggests `restic`
+    - [Cloud Backup: Easy, Secure, Unlimited Online Backup](https://www.backblaze.com/cloud-backup/personal)
+        - Backblaze B2, good affordability/pricing, ~$5/mo
+    - `borg` has security footgun
+    - use https://healthchecks.io/ to monitor backup jobs
+    - [Append-only Restic backups on a Hetzner Storage Box](https://fluix.one/blog/hetzner-restic-append-only/)
+        - [Append-only backups with restic and rclone](https://ruderich.org/simon/notes/append-only-backups-with-restic-and-rclone)
+    - [jmtd → computing → Network Attached Storage (NAS)](https://jmtd.net/computing/nas/)
+    - [Personal backups and file archival // Josh Mock](https://joshmock.com/post/backups-and-archival/)
+- [If you're remote, ramble](https://stephango.com/ramblings)
+    - Ramblings channels let everyone share what’s on their mind without cluttering group channels
+        - short updates 1-3 times per week
+        - common topics
+            - ideas related to current projects
+            - musings about blog posts, articles, user feedback
+            - “what if” suggestions
+            - photos from recent trips or hobbies
+            - rubber ducking a problem
+    - each ramblings channel
+        - named after the team member
+        - only that person can post top-level messages. Others can reply in threads, but not start new ones
+        - muted by default, with no expectation that anyone else will read them
+    - ramblings are our equivalent of water cooler talk
+- [Linear Types for Programmers (2023)](https://twey.io/for-programmers/linear-types/) #lang
+    - [The Austral Programming Language](https://austral-lang.org/)
+    - [faiface/par-lang: Par (⅋) is an experimental concurrent programming language. It's an attempt to bring the expressive power of linear logic into practice.](https://github.com/faiface/par-lang)
+- [Twenty Eighth International Obfuscated C Code Contest](https://www.ioccc.org/2024/index.html)
+    - the redesign broke all links to the old entries without redirects
+    - now requires using a javascript capable browser to view the entries on github (github having removed non-JS access last year)
+}}
+
 \subtree[2025-08-02]{\mdnote{2025-08-02}{
 - #agent
     - [Cerebras Code](https://www.cerebras.ai/blog/introducing-cerebras-code)
@@ -44,6 +77,7 @@
         - issues of the bitter lesson
             - dependent on high-quality data
             - adding compute is often not practical nor optimal
+    - [cchistory: Tracking Claude Code System Prompt and Tool Changes](https://mariozechner.at/posts/2025-08-03-cchistory/)
 - [Unit Testing Principles](https://olano.dev/blog/unit-testing-principles/)
     - overcomplicated code should be split into
         - deep domain classes, to be thoroughly unit tested
@@ -57,9 +91,6 @@
     - I think I have got them all wrong when setting up tests for GAlgebra
 - #lib
     - [candyfloss: an ergonomic python library for running video pipelines](https://git.hella.cheap/bob/candyfloss)
-    - [Twentyseven 1.0](https://blog.poisson.chat/posts/2025-08-01-twentyseven.html)
-        - a Rubik’s cube solver in Haskell
-        - based on [Cube Explorer](https://kociemba.org/cube.htm) in Pascal, actually Delphi 6 [[source](https://github.com/hkociemba/CubeExplorer)]
 }}
 
 \subtree[2025-08-01]{\mdnote{2025-08-01}{
@@ -210,6 +241,7 @@
             - early adopters who took platform risks
             - team influencers who drive organizational adoption
             - $200/month Claude Max subscribers doing serious work
+        - [Tokens are getting more expensive](https://ethanding.substack.com/p/ai-subscriptions-get-short-squeezed)
     - [The Rise of Vibeinsecurity](https://vibeinsecurity.com/)
         - a story about how devs lost their jobs over vibe apps, and vibe apps are hacked by vibe hackers immediately after deployment
         - this is also an ad for a conference called HackAIcon
@@ -293,6 +325,7 @@
     - [Go Assembly Mutation Testing](https://words.filippo.io/assembly-mutation/)
     - [A Bytecode VM for Arithmetic: The Parser](https://abhinavsarkar.net/posts/arithmetic-bytecode-vm-parser/)
         - in Haskell
+    - [Injecting Java from native libraries on Android](https://octet-stream.net/b/scb/2025-08-03-injecting-java-from-native-libraries-on-android.html)
 - #copyright
     - [I used to prefer permissive licenses and now favor copyleft](https://vitalik.eth.limo/general/2025/07/07/copyleft.html)
     - [Belgium bans Internet Archive's ‘Open Library’](https://torrentfreak.com/belgium-bans-internet-archives-open-library-in-sweeping-site-blocking-order/)
@@ -532,6 +565,10 @@
             - maybe that's all I need for my writings, I don't really need another SSG, just a templating engine
         - HTMX: allows us to add dynamic behavior directly to our server-rendered HTML
         - [Lit](https://lit.dev/): allows us to create encapsulated, reusable components with their own internal state and logic
+    - [Why Semantic HTML Still Matters](https://www.jonoalderson.com/conjecture/why-semantic-html-still-matters/)
+        - Semantic rot wrecks performance
+        - Structure is resilience
+        - Agents are the new users – and they care about structure
     - [Client-side epub generation](https://little.webby.press/)
     - [Bookmarkable by Design: URL-Driven State in HTMX](https://www.lorenstew.art/blog/bookmarkable-by-design-url-state-htmx/)
     - [On designing application UIs for children](https://shaneosullivan.wordpress.com/2025/07/28/on-designing-for-children/)
@@ -551,6 +588,7 @@
         - form validation shows all the crucial aspects to use WASM instead of JS, like wiring up DOM events to Rust functions, and then reacting to those events
         - used [Rocket - Simple, Fast, Type-Safe Web Framework for Rust](https://rocket.rs/)
         - might motivate me to write Rust for web
+    - [HTML-in-Canvas](https://github.com/WICG/html-in-canvas)
 - #idea
     - [Setting constraint](https://wayan.me/setting-constraint/)
         - goals provide a structured roadmap to success, thriving in controlled, predictable conditions like training for a marathon or preparing for an exam.
@@ -1166,6 +1204,10 @@
     - [Y Combinator (Math) Explained](https://anish.ink/posts/ycombinator.html)
     - [Entropy of a Mixture](https://cgad.ski/blog/entropy-of-a-mixture.html) ([on HN](https://news.ycombinator.com/item?id=44427929))
     - [Functions Are Vectors (2023)](https://thenumb.at/Functions-are-Vectors/) ([on HN](https://news.ycombinator.com/item?id=44481464))
+    - [The Rubik's Cube Perfect Scramble](https://www.solutionslookingforproblems.com/post/the-rubik-s-cube-perfect-scramble) ([on HN](https://news.ycombinator.com/item?id=44767928)) ([on lobste.rs](https://lobste.rs/s/lwufi3))
+        - [Twentyseven 1.0](https://blog.poisson.chat/posts/2025-08-01-twentyseven.html)
+            - a Rubik’s cube solver in Haskell
+            - based on [Cube Explorer](https://kociemba.org/cube.htm) in Pascal, actually Delphi 6 [[source](https://github.com/hkociemba/CubeExplorer)]
 - #ai-safety
     - [Moral puzzles: Man vs. machine](https://dynomight.net/puzzles-results/)
     - [Rolling the ladder up behind us](https://xeiaso.net/blog/2025/rolling-ladder-behind-us/) ([on HN](https://news.ycombinator.com/item?id=44328894)) ([on lobste.rs](https://lobste.rs/s/dl5sj9))
@@ -1453,7 +1495,8 @@
         - "C++26 reflection does bring with it new syntax and a bunch of new semantics. But the benefit is that a lot of metaprogramming starts to look more like regular programming. There is a lot less syntax in the implementation side of things. "
     - type-based (Reflection TS published in March, 2020)
     - wondering the Zig equivalent
-    - see also [Discover C++26’s compile-time reflection](https://lemire.me/blog/2025/06/22/c26-will-include-compile-time-reflection-why-should-you-care/)
+    - [Discover C++26’s compile-time reflection](https://lemire.me/blog/2025/06/22/c26-will-include-compile-time-reflection-why-should-you-care/)
+    - [C++26 Reflections adventures and compile-time UML](https://www.reachablecode.com/2025/07/31/c26-reflections-adventures-compile-time-uml/)
 - [Reflections on Sudoku, Or the Impossibility of Systematizing Thought](https://rjp.io/blog/2025-06-07-reflections-on-sudoku)
     - limitation of TDD
         - tests don't fix the underlying issue of "knowing what to do"
