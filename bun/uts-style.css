@@ -18,6 +18,18 @@
         format("woff");
 }
 
+@font-face {
+    font-family: "Maple Mono";
+    font-style: normal;
+    /* https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display */
+    font-display: swap;
+    font-weight: 700;
+    src: url(https://cdn.jsdelivr.net/fontsource/fonts/maple-mono@latest/latin-700-normal.woff2)
+        format("woff2"),
+        url(https://cdn.jsdelivr.net/fontsource/fonts/maple-mono@latest/latin-700-normal.woff)
+        format("woff");
+}
+
 /* https://blog.whenhen.com/
 
 @font-face {
@@ -173,6 +185,15 @@
 
 :root {
     background-color: var(--uts-background) !important;
+}
+
+.meta-item,
+.slug {
+    font-size: 0.75em;
+}
+
+summary {
+    margin-bottom: 0.5em;
 }
 
 .link.external a:before {
