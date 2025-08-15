@@ -1,0 +1,42 @@
+# Caddy stack automation tasks
+
+set dotenv-load
+
+default:
+    just --list
+
+# Update /etc/hosts for all stacks
+prep-hosts ip="127.0.0.1":
+    uv run prep_homelab.py {{ip}}
+
+# Generate Caddyfile.generated for all stacks
+gen-caddyfile:
+    uv run gen_caddyfile.py
+
+# Trust the Caddy root CA certificate (Option 1)
+trust-ca:
+    #!/usr/bin/env bash
+    cert="${PODS_HOME}/caddy/data/caddy/pki/authorities/local/root.crt"
+    if [ ! -f "$cert" ]; then
+        echo "Root CA certificate not found at $cert"
+        exit 1
+    fi
+    if [ "$(uname)" = "Darwin" ]; then
+        sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain "$cert"
+        echo "Trusted Caddy root CA on macOS."
+    elif [ -d "/usr/local/share/ca-certificates" ]; then
+        sudo cp "$cert" /usr/local/share/ca-certificates/caddy-root-ca.crt
+        sudo update-ca-certificates
+        echo "Trusted Caddy root CA on Linux."
+    elif grep -qi microsoft /proc/version 2>/dev/null; then
+        echo "Please manually import $cert into Windows cert store."
+    else
+        echo "Unsupported OS. Please trust $cert manually."
+        exit 1
+    fi
+
+help:
+    @echo "Available tasks:"
+    @echo "  just prep-hosts [ip]   # Update /etc/hosts for all stacks"
+    @echo "  just gen-caddyfile     # Generate Caddyfile.generated for all stacks"
+    @echo "  just trust-ca          # Trust the Caddy root CA certificate"

@@ -21,5 +21,9 @@ services:
       # Tell Dockge where is your stacks directory
       - DOCKGE_STACKS_DIR=/opt/stacks
       - PODS_HOME=$PODS_HOME
-    network_mode: ${NETWORK_MODE:-bridge} # Default to bridge if not set
-networks: {}
+    networks:
+      - homelab
+
+networks:
+  homelab:
+    external: true
