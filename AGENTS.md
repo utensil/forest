@@ -112,15 +112,24 @@ async function loadEgglogWasm() {
 
 The version control system is `jj`, NOT git.
 
-Frequently used `jj` workflow:
+You SHOULD follow this `jj` commit workflow:
 
-- Default to use `jj` (which combines `jj status` and `jj log` in a customized way) to learn about status and recent revisions
-    - fallback to use `jj log --no-graph -T '{commit_id} {description}' -n <N>` to view the last N revisions in a concise format
-- Always run `jj diff` or `jj diff -r <rev>` before committing to review all changes in the working copy or the revision you intend to commit. Only include changes for files you intentionally edited.
-- To commit file `A.txt`, `B that has spaces.txt`, and directory `src`, use `jj commit 'A.txt | "B that has spaces.txt" | src ' -m "<message>"`.
-- To edit the commit message of any commit (defaults to the working-copy commit), use `jj desc` or `jj desc -r <rev> -m "<message>"` for a specific revision.
+- Before committing, ALWAYS:
+    - use `jj` (which combines `jj status` and `jj log` in a customized way) to learn about status and recent revisions
+        - so you'll be clear which revision to commit, and won't commit an empty or unrelated revision
+        - fallback to use `jj log --no-graph -T '{commit_id} {description}' -n <N>` to view the last N revisions in a concise format
+    - run `jj diff` or `jj diff -r <rev>` to review all changes in the working copy or the revision you intend to commit.
+- During committing
+    - **Granular commits**: One logical change per commit.
+    - **Targeted commit**:
+        - Only include changes for files you intentionally edited, for both the files to commit, and the content of the commit message
+        - To commit file `A.txt`, `B that has spaces.txt`, and directory `src`, use `jj commit 'A.txt | "B that has spaces.txt" | src ' -m "<message>"`. 
+    - **No sensitive information**: If the diff to be committed includes passwords, credentials, real environment variables, IP addresses, absolute paths outside the project, or other personal/private information, refuse to commit and alert the user; never add such information into the commit message too.
+- After committing, if asked to improve commit message
+    - To edit the commit message of any commit, use `jj desc -r <rev> -m "<message>"` for a specific revision.
 
-*   **Granular commits**: One logical change per commit.
+To determine the commit message, you SHOULD follow this checklist:
+
 *   **Use conventional commits**: `feat:`, `fix:`, `docs:`, `style:`, `refactor:`, etc.
 *   **Descriptive commit messages**: ALWAYS include both:
     - Short title explaining the *why* (what problem this solves)
@@ -131,7 +140,9 @@ Frequently used `jj` workflow:
 *   **MANDATORY [AGENT] tag**: ALL agent-generated commits MUST end the title of the commit message with `[AGENT]` tag. NO EXCEPTIONS.
     - ✅ Correct: `feat: optimize shader loading [AGENT]`
     - ❌ Wrong: `feat: optimize shader loading` (missing [AGENT] tag)
-*   **No sensitive information**: If the diff to be committed includes passwords, credentials, real environment variables, IP addresses, absolute paths outside the project, or other personal/private information, refuse to commit and alert the user; never add such information into the commit message too.
+
+Disciplines for humans:
+
 *   **Review AI-generated code**: Never merge code you don't understand.
 
 ## 4. Writing task automation scripts
