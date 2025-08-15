@@ -112,23 +112,23 @@ async function loadEgglogWasm() {
 
 The version control system is `jj`, NOT git.
 
-You SHOULD follow this `jj` commit workflow:
+You should ALWAYS follow this `jj` commit workflow:
 
-- Before committing, ALWAYS:
+- Before committing:
     - use `jj` (which combines `jj status` and `jj log` in a customized way) to learn about status and recent revisions
         - so you'll be clear which revision to commit, and won't commit an empty or unrelated revision
         - fallback to use `jj log --no-graph -T '{commit_id} {description}' -n <N>` to view the last N revisions in a concise format
     - run `jj diff` or `jj diff -r <rev>` to review all changes in the working copy or the revision you intend to commit.
-- During committing
+- During committing:
     - **Granular commits**: One logical change per commit.
     - **Targeted commit**:
         - Only include changes for files you intentionally edited, for both the files to commit, and the content of the commit message
         - To commit file `A.txt`, `B that has spaces.txt`, and directory `src`, use `jj commit 'A.txt | "B that has spaces.txt" | src ' -m "<message>"`. 
     - **No sensitive information**: If the diff to be committed includes passwords, credentials, real environment variables, IP addresses, absolute paths outside the project, or other personal/private information, refuse to commit and alert the user; never add such information into the commit message too.
-- After committing, if asked to improve commit message
+- After committing, if asked to improve commit message:
     - To edit the commit message of any commit, use `jj desc -r <rev> -m "<message>"` for a specific revision.
 
-To determine the commit message, you SHOULD follow this checklist:
+To determine the commit message, you should ALWAYS follow this checklist:
 
 *   **Use conventional commits**: `feat:`, `fix:`, `docs:`, `style:`, `refactor:`, etc.
 *   **Descriptive commit messages**: ALWAYS include both:
