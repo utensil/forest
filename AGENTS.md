@@ -11,7 +11,7 @@
 
 ## 1. Non-negotiable GOLDEN rules
 
-ALWAYS cite the rules which you are following at the end of your reply, like this: "(per G-ask, G-verify)".
+ALWAYS cite the rules which you have actually followed during the reply at the end of your reply, like this: "(per G-ask, G-verify)".
 
 ### G-ask: Always ask for clarification when unsure
 - ✅ **Should**: Ask the developer for clarification before making changes when unsure about project-specific details or lacking context for a particular feature/decision
@@ -119,6 +119,7 @@ To commit file `A.txt`, `B that has spaces.txt`, and directory `src`, use `jj co
 *   **Descriptive commit messages**: ALWAYS include both:
     - Short title explaining the *why* (what problem this solves)
     - Detailed description of *what* changed (specific files, functions, behavior, related issue links, etc.)
+        - NEVER cite the rules (e.g. (per G-verify)) in the commit message
     - Example: `fix: resolve WASM loading timeout in dev mode [AGENT]` + description of which files were modified and how
 *   **MANDATORY [AGENT] tag**: ALL agent-generated commits MUST end the title of the commit message with `[AGENT]` tag. NO EXCEPTIONS.
     - ✅ Correct: `feat: optimize shader loading [AGENT]`
