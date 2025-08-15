@@ -56,13 +56,6 @@ ALWAYS cite the rules which you are following at the end of your reply, like thi
 - ❌ **Must NOT**: Implement beyond acceptance criteria without updating task first
 - ❌ **Must NOT**: Use backlog when not working on backlog-managed tasks
 
-### G-search: Prefer ast-grep via Bash for code structure search, with ripgrep as fallback
-
-- ✅ **Should**: Prefer to use ast-grep (`sg`) via Bash for searches targeting code structure (e.g., functions,
-classes, imports, variable declarations, method calls). It should be available; install it if not.
-- ✅ **Should**: Consult `.agents/docs/sg.md` to learn how to use `sg`
-- ✅ **May**: Use tools like ripgrep (`rg`) for plain-text search, or as a fallback when `sg` fails.
-
 ### G-sandbox: Use Docker stacks for isolated development environments
 
 - ✅ **Should**: First try running existing stacks from `stacks/` directory using `docker compose -f <stack-file>`
