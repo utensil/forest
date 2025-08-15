@@ -112,13 +112,20 @@ async function loadEgglogWasm() {
 
 The version control system is `jj`, NOT git.
 
-To commit file `A.txt`, `B that has spaces.txt`, and directory `src`, use `jj commit 'A.txt | "B that has spaces.txt"' -m "your commit message here"`.
+Frequently used `jj` workflow:
+
+- Default to use `jj` (which combines `jj status` and `jj log` in a customized way) to learn about status and recent revisions
+    - fallback to use `jj log --no-graph -T '{commit_id} {description}' -n <N>` to view the last N revisions in a concise format
+- Always run `jj diff` or `jj diff -r <rev>` before committing to review all changes in the working copy or the revision you intend to commit. Only include changes for files you intentionally edited.
+- To commit file `A.txt`, `B that has spaces.txt`, and directory `src`, use `jj commit 'A.txt | "B that has spaces.txt" | src ' -m "<message>"`.
+- To edit the commit message of any commit (defaults to the working-copy commit), use `jj desc` or `jj desc -r <rev> -m "<message>"` for a specific revision.
 
 *   **Granular commits**: One logical change per commit.
 *   **Use conventional commits**: `feat:`, `fix:`, `docs:`, `style:`, `refactor:`, etc.
 *   **Descriptive commit messages**: ALWAYS include both:
     - Short title explaining the *why* (what problem this solves)
     - Detailed description of *what* changed (specific files, functions, behavior, related issue links, etc.)
+        - you should inspect the full diff for the edited files for summarization, and don't use only recent rounds of conversation to describe the whole commit that contain changes from earlier conversations
         - NEVER cite the rules (e.g. (per G-verify)) in the commit message
     - Example: `fix: resolve WASM loading timeout in dev mode [AGENT]` + description of which files were modified and how
 *   **MANDATORY [AGENT] tag**: ALL agent-generated commits MUST end the title of the commit message with `[AGENT]` tag. NO EXCEPTIONS.
@@ -126,8 +133,6 @@ To commit file `A.txt`, `B that has spaces.txt`, and directory `src`, use `jj co
     - ❌ Wrong: `feat: optimize shader loading` (missing [AGENT] tag)
 *   **No sensitive information**: If the diff to be committed includes passwords, credentials, real environment variables, IP addresses, absolute paths outside the project, or other personal/private information, refuse to commit and alert the user; never add such information into the commit message too.
 *   **Review AI-generated code**: Never merge code you don't understand.
-
----
 
 ## 4. Writing task automation scripts
 
