@@ -30,6 +30,26 @@ This stack provides a Caddy HTTPS reverse proxy for homelab services, using inte
 
 5. Visit https://dockge.homelab.internal in your browser (accept the internal CA if prompted).
 
+## Trusting and Untrusting the Caddy Root CA
+
+To enable trusted HTTPS for all `.homelab.local` domains, you must trust the Caddy root CA on your system. This is fully automated:
+
+- **Trust the CA:**
+  ```sh
+  just trust-ca
+  ```
+  This adds the Caddy root CA to your system trust store (macOS or Linux). You may need to enter your password for system changes.
+
+- **Untrust the CA:**
+  ```sh
+  just untrust-ca
+  ```
+  This safely removes the Caddy root CA from your system trust store (using `rip` for safe file removal on Linux). The script prints the CA subject and fingerprint for manual removal if needed.
+
+**Troubleshooting:**
+- If your browser still trusts the CA after running `untrust-ca`, check for duplicate CA entries in your user keychain (macOS Login), browser-specific CA store (e.g., Firefox), or manual imports. Remove all instances to fully untrust.
+- After trusting or untrusting, fully quit and restart your browser to clear any cached trust.
+
 ## Configuration
 
 - The Caddyfile is version-controlled in this directory and copied into the image at build time (see Dockerfile).
