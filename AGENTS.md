@@ -58,13 +58,13 @@ ALWAYS cite the rules which you have actually followed during the reply at the e
 
 ### G-sandbox: Use Docker stacks for isolated development environments
 
-- ✅ **Should**: First try running existing stacks from `stacks/` directory using `docker compose -f <stack-file>`
+- ✅ **Should**: First try running existing stacks from `stacks/` directory using `docker-compose -f <stack-file>`
 - ✅ **Should**: Create new stacks under `.agents/stacks/` only if existing ones don't meet requirements
-- ✅ **May**: Use standard Docker Compose commands:
-  - Build: `docker compose -f <stack-file> build`
-  - Start daemon: `docker compose -f <stack-file> up -d`
-  - Stop: `docker compose -f <stack-file> down`
-  - Execute commands: `docker compose -f <stack-file> exec <service> <command>`
+- ✅ **May**: Use standard docker-compose commands:
+  - Build: `docker-compose -f <stack-file> build`
+  - Start daemon: `docker-compose -f <stack-file> up -d`
+  - Stop: `docker-compose -f <stack-file> down`
+  - Execute commands: `docker-compose -f <stack-file> exec <service> <command>`
 - ✅ **Should**: Stop stacks with `down` when task is complete, but keep stack files for reuse
 - ✅ **May**: Suggest graduating newly created stacks from `.agents/stacks/` to `stacks/` if they have generic potential for future reuse
 - ❌ **Must NOT**: Modify host system when explicitly asked to follow G-sandbox
