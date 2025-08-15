@@ -11,6 +11,8 @@ BUN_PID=$!
 
 # Start build_and_reload orchestration in background
 mise run build:build_and_reload &
+# Start file watcher for incremental builds (parity with dev.sh)
+# watchexec --quiet --ignore-nothing --no-meta --project-origin=. -w trees -w assets -w tex -w bun --emit-events-to=stdio -- ./build_changed.sh &
 ORCH_PID=$!
 
 # Trap SIGINT/SIGTERM and kill both

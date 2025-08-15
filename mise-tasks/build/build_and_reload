@@ -19,11 +19,19 @@ wait $pid1
 
 # Step 4: Trigger live reload (write to trigger files)
 mkdir -p build/live
-# For now, always trigger reload for index.html (customize as needed)
-echo "output/index.html" > build/live/updated_file.txt
+
+# Find the newest .tree file under trees/**
+NEWEST_TREE_FILE=$(find trees -name '*.tree' -print0 | xargs -0 ls -t 2>/dev/null | head -n1)
+if [[ -n "$NEWEST_TREE_FILE" ]]; then
+    # Write the relative path to updated_file.txt
+    echo "$NEWEST_TREE_FILE" > build/live/updated_file.txt
+else
+    # Fallback: default to index.html
+    echo "output/index.html" > build/live/updated_file.txt
+fi
 touch build/live/trigger.txt
 
 echo "✅ Build and reload orchestration complete."
 
-# AGENT-NOTE: To customize which file triggers reload, update the echo line above.
+# AGENT-NOTE: To customize which file triggers reload, update the logic above.
 # AGENT-NOTE: This script is called by mise-tasks/dev for dev workflow orchestration.
