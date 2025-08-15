@@ -35,8 +35,42 @@ trust-ca:
         exit 1
     fi
 
+# Remove the Caddy root CA certificate from trust store
+untrust-ca:
+    #!/usr/bin/env bash
+    cert="${PODS_HOME}/caddy/data/caddy/pki/authorities/local/root.crt"
+    if [ ! -f "$cert" ]; then
+        echo "Root CA certificate not found at $cert"
+        exit 1
+    fi
+    # Print CA subject and fingerprint for manual removal
+    echo "CA Subject:"; openssl x509 -in "$cert" -noout -subject
+    echo "CA SHA-1 Fingerprint:"; openssl x509 -in "$cert" -noout -sha1 -fingerprint
+    echo "If automated removal fails, use this info to manually remove the CA from your trust store."
+    if [ "$(uname)" = "Darwin" ]; then
+        # Find the SHA-1 hash of the cert and delete it
+        hash=$(openssl x509 -in "$cert" -noout -sha1 -fingerprint | cut -d'=' -f2 | tr -d ':')
+        sudo security delete-certificate -Z "$hash" /Library/Keychains/System.keychain && \
+        echo "Removed Caddy root CA from macOS system keychain." || \
+        echo "Certificate not found in system keychain."
+    elif [ -d "/usr/local/share/ca-certificates" ]; then
+        if command -v rip >/dev/null 2>&1; then
+            sudo rip /usr/local/share/ca-certificates/caddy-root-ca.crt
+        else
+            echo "rip not found, please install it or remove the file manually."
+        fi
+        sudo update-ca-certificates --fresh
+        echo "Removed Caddy root CA from Linux trust store (file moved to graveyard if rip is available)."
+    elif grep -qi microsoft /proc/version 2>/dev/null; then
+        echo "Please manually remove the CA from Windows cert store."
+    else
+        echo "Unsupported OS. Please remove $cert manually."
+        exit 1
+    fi
+
 help:
     @echo "Available tasks:"
     @echo "  just prep-hosts [ip]   # Update /etc/hosts for all stacks"
     @echo "  just gen-caddyfile     # Generate Caddyfile.generated for all stacks"
     @echo "  just trust-ca          # Trust the Caddy root CA certificate"
+    @echo "  just untrust-ca        # Remove the Caddy root CA certificate from trust store"
