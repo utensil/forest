@@ -11,8 +11,39 @@ provider:
             baseURL: !ENV "${OPENAI_API_BASE}"
         models:
             MODEL_NAME: {} # Will be replaced by env value in script
-# mcp:
-#     container-use:
-#         type: local
-#         command: ["container-use", "stdio"]
-#         enabled: true
+mcp:
+    # up-to-date code documentation
+    # https://github.com/upstash/context7
+    context7:
+        type: local
+        command: ["npx", "-y", "@upstash/context7-mcp"]
+        enabled: true
+    # browser automation and debugging
+    # https://github.com/microsoft/playwright-mcp
+    playwright-mcp:
+        type: local
+        command: ["npx", "-y", "@playwright/mcp@latest"]
+        enabled: true
+    # duckduckgo search
+    # https://github.com/misanthropic-ai/ddg-mcp
+    ddg-mcp:
+        type: local
+        command: ["uvx", "ddg-mcp"]
+        # prefer builtin tool as this mcp server is months old
+        enabled: false
+    # local code search
+    # https://github.com/buger/probe
+    probe-mcp:
+        type: local
+        command: ["npx", "-y", "@buger/probe-mcp"]
+        # prefer builtin tool for now, may enable when stuck
+        # supersedes the retired G-search
+        enabled: false
+    # enable multiple agents to work safely and independently with your preferred stack
+    # via git worktree and contaier tools
+    # https://github.com/dagger/container-use
+    container-use:
+        type: local
+        command: ["container-use", "stdio"]
+        # prefer docker-compose, as G-sandbox
+        enabled: false
