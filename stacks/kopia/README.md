@@ -23,7 +23,9 @@ This stack provides a Kopia backup server running in Docker, with web UI and API
     docker-compose -f compose.yaml up -d
     ```
 
-4. Access the Kopia web UI at: http://localhost:51515
+4. Access the Kopia web UI at:
+    - http://localhost:51515 (direct, not proxied)
+    - https://kopia.homelab.local (via Caddy reverse proxy, with internal TLS)
     - Login with `${KOPIA_SERVER_USER}` and `${KOPIA_SERVER_PASSWORD}`
 
 ## Volumes

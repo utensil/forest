@@ -1,5 +1,5 @@
 backrest.homelab.local {
-    reverse_proxy backrest:5001
+    reverse_proxy backrest:9898
     tls internal
 }
 
@@ -9,22 +9,27 @@ dockge.homelab.local {
 }
 
 freshrss.homelab.local {
-    reverse_proxy freshrss:5001
+    reverse_proxy freshrss:80
     tls internal
 }
 
 knot.homelab.local {
-    reverse_proxy knot:5001
+    reverse_proxy knot:5555
+    tls internal
+}
+
+kopia.homelab.local {
+    reverse_proxy kopia:51515
     tls internal
 }
 
 ubuntu_pro.homelab.local {
-    reverse_proxy ubuntu_pro:5001
+    reverse_proxy ubuntu_pro:1445
     tls internal
 }
 
 yacd.homelab.local {
-    reverse_proxy yacd:5001
+    reverse_proxy yacd:80
     tls internal
 }
 
