@@ -40,7 +40,7 @@ import time
 import subprocess
 from datetime import datetime, timedelta
 
-SAMPLE_SIZE = 1000
+SAMPLE_SIZE = 200000
 RECENT_THRESHOLD_SECONDS = 60 * 10  # 10 minutes
 
 import re
