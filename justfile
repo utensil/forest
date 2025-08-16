@@ -1059,6 +1059,13 @@ check-dirs SRC DST *PARAMS="":
 prep-lms-sync:
     which lms || cargo install lms
 
+sync-dirs SRC DST:
+    #!/usr/bin/env bash
+    set -e
+    # just rsync {{SRC}} {{DST}} --whole-file
+    lms sync -n {{SRC}} {{DST}}
+    just check-dirs {{SRC}} {{DST}} -l -p
+
 prep-termscp:
     which termscp || brew install termscp
 
