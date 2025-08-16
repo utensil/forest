@@ -1,0 +1,29 @@
+services:
+  kopia:
+    image: kopia/kopia:latest
+    container_name: kopia
+    restart: unless-stopped
+    ports:
+      - 51515:51515
+    environment:
+      - KOPIA_PASSWORD=${KOPIA_PASSWORD}
+      - USER=${KOPIA_USER}
+      - TZ=UTC
+    command:
+      - server
+      - start
+      - --disable-csrf-token-checks
+      - --insecure
+      - --address=0.0.0.0:51515
+      - --server-username=${KOPIA_SERVER_USER}
+      - --server-password=${KOPIA_SERVER_PASSWORD}
+    volumes:
+      - ${PODS_HOME}/kopia/config:/app/config
+      - ${PODS_HOME}/kopia/cache:/app/cache
+      - ${PODS_HOME}/kopia/logs:/app/logs
+      # - ${PODS_HOME}/kopia/data:/data:ro
+      # - ${PODS_HOME}/kopia/repository:/repository
+      - ${PODS_HOME}/kopia/tmp:/tmp:shared
+      - ${DATA_SRC}:/mnt/src:ro
+      - ${DATA_DST}:/mnt/dst
+networks: {}
