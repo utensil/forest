@@ -1062,8 +1062,8 @@ prep-lms-sync:
 sync-dirs SRC DST:
     #!/usr/bin/env bash
     set -e
-    # just rsync {{SRC}} {{DST}} --whole-file
-    lms sync -n {{SRC}} {{DST}}
+    just rsync {{SRC}} {{DST}} --whole-file
+    # lms sync -n {{SRC}} {{DST}}
     just check-dirs {{SRC}} {{DST}} -l -p
 
 prep-termscp:
