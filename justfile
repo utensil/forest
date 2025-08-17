@@ -1047,7 +1047,7 @@ prep-jw:
 
 # AGENT-NOTE: check-dirs now writes hash files to /tmp/jw/ with timestamped, descriptive names (e.g. /tmp/jw/<timestamp>-left-<leftdirname>.hash.jw)
 # This avoids polluting or failing on read-only source/dest dirs, and is safe for diffing.
-check-dirs SRC DST *PARAMS="":
+check-dirs SRC DST *PARAMS="-l -p":
     #!/usr/bin/env bash
     # AGENT-NOTE: Writes hash files to /tmp/jw/ to avoid polluting or failing on read-only source/dest dirs
     set -e
