@@ -151,6 +151,16 @@ proselint FILE="":
         fi
     fi
 
+# https://dprint.dev/
+#
+prep-dprint:
+    which dprint || brew install dprint
+
+# The format is too massive, wait until it's really needed one day
+#
+check-dprint:
+    dprint check --list-different
+
 ## Enrich contents
 
 # Inspired by https://github.com/Ranchero-Software/NetNewsWire/issues/978#issuecomment-1320911427
