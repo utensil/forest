@@ -3,6 +3,12 @@
 @tailwind utilities;
  */
 
+/* https://fonts.google.com/specimen/EB+Garamond */
+
+/* @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&display=swap'); */
+
+/* @import url('https://fonts.cdnfonts.com/css/eb-garamond-3'); */
+
 /* https://fontsource.org/fonts/maple-mono/cdn */
 
 /* maple-mono-latin-400-normal */
@@ -55,8 +61,9 @@
     /* 80ex; */
     --uts-canvas-height: 45ex;
 
-    --serif: Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua",
-        Georgia, serif;
+    /* effecitve: Palatino */
+    --serif: "EB Garamond", Palatino, "Palatino Linotype", "Palatino LT STD",
+        "Book Antiqua", Georgia, serif;
 
     /* from https://entropicthoughts.com/etc/style/css/main.css */
     /* --serif: Whitman, serif; */
@@ -64,7 +71,8 @@
     /* from https://dmitriid.com/everything-around-llms-is-still-magical-and-wishful-thinking, more traditional */
     /* --serif: Georgia, Times, "Times New Roman", serif; */
 
-    --sans: "CooperHewitt", Arial;
+    /* effective: Arial */
+    --sans: "CooperHewitt", Arial; /* Futura */
     /* --mono: 'Hack', monospace; */
 
     /* mine */
@@ -72,7 +80,11 @@
 
     -webkit-font-smoothing: antialiased;
     /* text-rendering: optimizeSpeed; */
-    text-size-adjust: none;
+
+    /* https://matklad.github.io/2025/07/16/font-size-adjust.html */
+    text-size-adjust: ex-height 0.53;
+    -webkit-text-size-adjust: 100%;
+    /* line-height: 1.7; */ /* already is 1.55 */
 }
 
 :root[data-applied-font="serif"] body {
