@@ -1,8 +1,0 @@
-#!/bin/bash
-#MISE sources=["bun/*.{ts,tsx,js}", "bun_build.js", "package.json"]
-#MISE outputs=["output/*.js"]
-set -e
-for file in bun/*.{ts,tsx,js,jsx}; do
-  [ -e "$file" ] || continue
-  just js "$file"
-done
