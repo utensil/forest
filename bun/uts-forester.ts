@@ -43,7 +43,7 @@ function rotateFontPreferences(currentFont) {
 }
 
 function getFontPreference() {
-    return localStorage.getItem('font') || 'serif'
+    return localStorage.getItem('font') || 'sans'
 }
 
 function saveFontPreference(font) {

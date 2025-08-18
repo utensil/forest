@@ -3,11 +3,27 @@
 @tailwind utilities;
  */
 
-/* https://fonts.google.com/specimen/EB+Garamond */
+/* https://fontsource.org/fonts/eb-garamond/cdn */
 
-/* @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&display=swap'); */
+/* eb-garamond-latin-wght-normal */
+/* @font-face {
+  font-family: 'EB Garamond Variable';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 400 800;
+  src: url(https://cdn.jsdelivr.net/fontsource/fonts/eb-garamond:vf@latest/latin-wght-normal.woff2) format('woff2-variations');
+  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+} */
 
-/* @import url('https://fonts.cdnfonts.com/css/eb-garamond-3'); */
+/* eb-garamond-latin-wght-normal */
+/* @font-face {
+  font-family: 'EB Garamond Variable';
+  font-style: italic;
+  font-display: swap;
+  font-weight: 400 800;
+  src: url(https://cdn.jsdelivr.net/fontsource/fonts/eb-garamond:vf@latest/latin-wght-italic.woff2) format('woff2-variations');
+  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+} */
 
 /* https://fontsource.org/fonts/maple-mono/cdn */
 
@@ -62,8 +78,8 @@
     --uts-canvas-height: 45ex;
 
     /* effecitve: Palatino */
-    --serif: "EB Garamond", Palatino, "Palatino Linotype", "Palatino LT STD",
-        "Book Antiqua", Georgia, serif;
+    --serif: Palatino, "Palatino Linotype", "Palatino LT STD",
+        "Book Antiqua", Georgia, serif; /*  */
 
     /* from https://entropicthoughts.com/etc/style/css/main.css */
     /* --serif: Whitman, serif; */
@@ -72,19 +88,16 @@
     /* --serif: Georgia, Times, "Times New Roman", serif; */
 
     /* effective: Arial */
-    --sans: "CooperHewitt", Arial; /* Futura */
+    --sans: "CooperHewitt", "Inria Sans", Arial; /* Futura */
     /* --mono: 'Hack', monospace; */
 
     /* mine */
     --mono: "Maple Mono", "Fira Code", "DejaVu Sans Mono", "Imprima", monospace;
 
-    -webkit-font-smoothing: antialiased;
-    /* text-rendering: optimizeSpeed; */
+}
 
-    /* https://matklad.github.io/2025/07/16/font-size-adjust.html */
-    text-size-adjust: ex-height 0.53;
-    -webkit-text-size-adjust: 100%;
-    /* line-height: 1.7; */ /* already is 1.55 */
+body {
+    font-family: var(--sans);
 }
 
 :root[data-applied-font="serif"] body {
@@ -207,13 +220,27 @@
     background-color: var(--uts-background) !important;
 }
 
+body {
+    -webkit-font-smoothing: antialiased;
+    /* text-rendering: optimizeSpeed; */
+    /* https://matklad.github.io/2025/07/16/font-size-adjust.html */
+    /* box-sizing: border-box; */
+    /* text-size-adjust: none; */
+    text-size-adjust: ex-height 0.53;
+    -webkit-text-size-adjust: 100%;
+    /* font-size: 20px; */
+    font-display: block;
+    /* was 1.55 */
+    line-height: 1.55;
+}
+
 .meta-item,
 .slug {
-    font-size: 0.75em;
+    font-size: 0.85em;
 }
 
 summary {
-    margin-bottom: 0.5em;
+    /* margin-bottom: 0.5em; */
 }
 
 .link.external a:before {
