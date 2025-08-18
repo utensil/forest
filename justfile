@@ -509,8 +509,15 @@ ghost:
 rec:
     uvx asciinema rec
 
+prep-loc:
+    which tokei || brew install tokei
+    which cloc || brew install cloc
+
 loc:
     tokei -o json|uvx tokei-pie
+
+loc-tui PATH *PARAMS="":
+    uvx cloctui {{PATH}} {{PARAMS}}
 
 ## fzf
 

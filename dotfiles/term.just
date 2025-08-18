@@ -34,7 +34,6 @@ prep-term:
     # Code
     which cmake || brew install cmake
     which pkg-config || brew install pkg-config
-    which tokei || brew install tokei
     # Format
     which jq || brew install jq
     which hexyl || brew install hexyl
