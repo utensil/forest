@@ -1,0 +1,47 @@
+services:
+  linkwarden:
+    env_file: .env
+    environment:
+      - DATABASE_URL=postgresql://postgres:${POSTGRES_PASSWORD}@postgres:5432/postgres
+    restart: unless-stopped
+    image: ghcr.io/linkwarden/linkwarden:latest
+    ports:
+      - 3000:3000
+    volumes:
+      - ${PODS_HOME}/linkwarden/data:/data/data
+    depends_on:
+      postgres:
+        condition: service_healthy
+      meilisearch:
+        condition: service_started
+    networks:
+      - homelab
+
+  postgres:
+    image: postgres:16-alpine
+    env_file: .env
+    restart: unless-stopped
+    volumes:
+      - ${PODS_HOME}/linkwarden/pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    networks:
+      - homelab
+
+  meilisearch:
+    image: getmeili/meilisearch:v1.12.8
+    restart: unless-stopped
+    env_file:
+      - .env
+    volumes:
+      - ${PODS_HOME}/linkwarden/meili_data:/meili_data
+    networks:
+      - homelab
+
+networks:
+   homelab:
+     external: true
+
