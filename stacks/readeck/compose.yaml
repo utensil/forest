@@ -1,0 +1,14 @@
+services:
+  readeck:
+    stdin_open: true
+    tty: true
+    ports:
+      - 8008:8000
+    volumes:
+      - ${PODS_HOME}/readeck/data:/readeck
+    image: codeberg.org/readeck/readeck:latest
+    networks:
+      - homelab
+networks:
+  homelab:
+    external: true
