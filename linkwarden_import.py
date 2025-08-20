@@ -191,40 +191,26 @@ def test_api_connection():
         return False, f"Connection error: {e}"
 
 def search_existing_link(external_url):
-    """Search for existing link by externalURL"""
+    """Search for existing link by URL using the proper search API"""
     if not external_url:
         return None
     
     try:
-        # Try URL-based search first (if API supports it)
+        # Use the proper /api/v1/search endpoint with searchQueryString
         import urllib.parse
         encoded_url = urllib.parse.quote(external_url, safe='')
-        resp = http.request('GET', f"{API_BASE}/links?url={encoded_url}", 
-                           headers=HEADERS, timeout=10)
+        
+        # Search using the URL as the search query string
+        resp = http.request('GET', f"{API_BASE}/search?searchQueryString={encoded_url}", 
+                           headers=HEADERS, timeout=15)
         
         if resp.status == 200:
             try:
                 data = json.loads(resp.data.decode())
-                links = data.get("response", [])
-                if links:
-                    # Found via URL search
-                    for link in links:
-                        if link.get("url") == external_url:
-                            return link
-            except (json.JSONDecodeError, KeyError):
-                pass
-        
-        # Fallback: Search through recent links with higher limit
-        limit = 1000  # Much higher limit to catch more existing links
-        resp = http.request('GET', f"{API_BASE}/links?limit={limit}", 
-                           headers=HEADERS, timeout=15)  # Longer timeout for larger response
-        
-        if resp.status == 200:
-            try:
-                data = json.loads(resp.data.decode())
-                links = data.get("response", [])
+                # The search API returns data.links instead of response
+                links = data.get("data", {}).get("links", [])
                 
-                # Search for matching externalURL or URL
+                # Look for exact URL match in search results
                 for link in links:
                     link_url = link.get("url", "")
                     if link_url == external_url:
