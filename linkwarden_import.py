@@ -58,6 +58,9 @@ ARCHIVE_TIMEOUT_SECS = 30  # max seconds to wait for archive
 # Create urllib3 pool manager with SSL verification disabled for Caddy's internal TLS
 http = urllib3.PoolManager(cert_reqs='CERT_NONE')
 
+# RSS collection configuration - new links will be created in this collection
+RSS_COLLECTION_ID = 4  # ID of the "rss" collection
+
 def test_api_connection():
     """Test API connection and token validity"""
     try:
@@ -197,11 +200,12 @@ def create_or_update_link(entry):
         else:
             return link_id, "Exists: No new aggregator info to add"
     
-    # Link doesn't exist - create new one
+    # Link doesn't exist - create new one in RSS collection
     data = {
         "name": entry.get("title") or primary_url,
         "url": primary_url,
         "description": entry.get("content") or "",
+        "collection": RSS_COLLECTION_ID,  # Create new RSS links in RSS collection
     }
     
     # Add aggregator info to description if available
