@@ -54,8 +54,8 @@ def format_link_detail(entry, link_id=None, action="", details="", archived=Fals
     title = entry.get("title", "No title")[:60]
     url = entry.get("externalURL") or entry.get("url", "No URL")
     
-    # Create title: url format
-    main_link = f"{title}: {url}"
+    # Create title: url format with bold title
+    main_link = f"{Colors.BOLD}{title}{Colors.END}: {url}"
     
     # Action emoji and color mapping
     action_formats = {
