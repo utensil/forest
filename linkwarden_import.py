@@ -71,16 +71,131 @@ def test_api_connection():
     except Exception as e:
         return False, f"Connection error: {e}"
 
-def create_link(entry):
-    url = entry.get("externalURL") or entry.get("url")
-    if not url:
-        return None, "No URL"
+def search_existing_link(external_url):
+    """Search for existing link by externalURL"""
+    if not external_url:
+        return None
     
+    try:
+        # Search by URL - Linkwarden API might support search
+        # For now, we'll get recent links and search through them
+        resp = http.request('GET', f"{API_BASE}/links?limit=100", 
+                           headers=HEADERS, timeout=10)
+        
+        if resp.status == 200:
+            try:
+                data = json.loads(resp.data.decode())
+                links = data.get("response", [])
+                
+                # Search for matching externalURL or URL
+                for link in links:
+                    link_url = link.get("url", "")
+                    if link_url == external_url:
+                        return link
+                
+                return None
+            except (json.JSONDecodeError, KeyError):
+                return None
+        else:
+            return None
+    except Exception:
+        return None
+
+def extract_aggregator_info(entry):
+    """Extract aggregator information from RSS entry"""
+    external_url = entry.get("externalURL")
+    aggregator_url = entry.get("url")
+    
+    aggregator_name = None
+    if aggregator_url:
+        if "lobste.rs" in aggregator_url:
+            aggregator_name = "Lobsters"
+        elif "news.ycombinator.com" in aggregator_url:
+            aggregator_name = "Hacker News"
+        elif "reddit.com" in aggregator_url:
+            aggregator_name = "Reddit"
+    
+    return external_url, aggregator_url, aggregator_name
+
+def update_link_description(link_id, current_description, new_aggregator_url, aggregator_name):
+    """Update link description with new aggregator link"""
+    if not new_aggregator_url or not aggregator_name:
+        return False, "No aggregator info to add"
+    
+    # Create markdown link for aggregator
+    aggregator_link = f"[{aggregator_name}]({new_aggregator_url})"
+    
+    # Check if this aggregator link already exists in description
+    if aggregator_link in (current_description or ""):
+        return False, "Aggregator link already exists"
+    
+    # Prepare updated description
+    if current_description:
+        # Add aggregator link at the end, separated by newlines
+        updated_description = f"{current_description}\n\n**Discussion:** {aggregator_link}"
+    else:
+        updated_description = f"**Discussion:** {aggregator_link}"
+    
+    # Update the link
+    update_data = {"description": updated_description}
+    
+    try:
+        resp = http.request('PUT', f"{API_BASE}/links/{link_id}", 
+                           headers=HEADERS, 
+                           body=json.dumps(update_data).encode('utf-8'),
+                           timeout=10)
+        
+        if resp.status == 200:
+            return True, f"Added {aggregator_name} link to description"
+        else:
+            return False, f"Update failed: HTTP {resp.status}"
+    except Exception as e:
+        return False, f"Update error: {e}"
+
+def create_or_update_link(entry):
+    """Create new link or update existing one with aggregator info"""
+    external_url, aggregator_url, aggregator_name = extract_aggregator_info(entry)
+    
+    # Use externalURL as primary, fall back to url
+    primary_url = external_url or aggregator_url
+    if not primary_url:
+        return None, "No URL found"
+    
+    # Search for existing link
+    existing_link = search_existing_link(primary_url)
+    
+    if existing_link:
+        # Link exists - check if we should update it
+        link_id = existing_link.get("id")
+        current_description = existing_link.get("description", "")
+        
+        if aggregator_url and aggregator_name and aggregator_url != primary_url:
+            # We have aggregator info to potentially add
+            success, message = update_link_description(
+                link_id, current_description, aggregator_url, aggregator_name
+            )
+            if success:
+                return link_id, f"Updated: {message}"
+            else:
+                return link_id, f"Exists: {message}"
+        else:
+            return link_id, "Exists: No new aggregator info to add"
+    
+    # Link doesn't exist - create new one
     data = {
-        "name": entry.get("title") or url,
-        "url": url,
+        "name": entry.get("title") or primary_url,
+        "url": primary_url,
         "description": entry.get("content") or "",
     }
+    
+    # Add aggregator info to description if available
+    if aggregator_url and aggregator_name and aggregator_url != primary_url:
+        if data["description"]:
+            data["description"] += f"\n\n**Discussion:** [{aggregator_name}]({aggregator_url})"
+        else:
+            data["description"] = f"**Discussion:** [{aggregator_name}]({aggregator_url})"
+    
+    # Add tags
     tags = entry.get("tags")
     if tags:
         if isinstance(tags, str):
@@ -97,7 +212,7 @@ def create_link(entry):
             try:
                 response_data = json.loads(resp.data.decode())
                 link_id = response_data["response"]["id"]
-                return link_id, None
+                return link_id, "Created"
             except (json.JSONDecodeError, KeyError) as e:
                 return None, f"Response parsing error: {e}"
         elif resp.status == 400 and b"already exists" in resp.data:
@@ -228,7 +343,7 @@ def main():
         print(f"⚠️  Large dataset detected ({len(entries)} entries). This may take a while.", file=sys.stderr)
         print(f"⏱️  Estimated time: ~{((len(entries) / RATE_LIMIT) * PAUSE_SECS + len(entries) * 2)/60:.1f} minutes", file=sys.stderr)
 
-    stats = {"created": 0, "failed": 0, "archived": 0, "duplicates": 0}
+    stats = {"created": 0, "updated": 0, "failed": 0, "archived": 0, "duplicates": 0, "exists": 0}
     details = []
     
     with tqdm(total=len(entries), file=sys.stderr, desc="Importing links", 
@@ -240,28 +355,59 @@ def main():
             total_batches = (len(entries) + RATE_LIMIT - 1) // RATE_LIMIT
             pbar.set_description(f"Batch {batch_num}/{total_batches}")
             
-            link_id, err = create_link(entry)
-            if link_id:
-                stats["created"] += 1
-                
-                # Enhanced archive waiting with progress
-                pbar.set_description(f"Batch {batch_num}/{total_batches} - Archiving link {link_id}")
-                archived = wait_for_archive_with_progress(link_id, pbar)
-                if archived:
-                    stats["archived"] += 1
-                
+            link_id, result = create_or_update_link(entry)
+            
+            if link_id and result:
+                if result.startswith("Created"):
+                    stats["created"] += 1
+                    
+                    # Enhanced archive waiting with progress
+                    pbar.set_description(f"Batch {batch_num}/{total_batches} - Archiving link {link_id}")
+                    archived = wait_for_archive_with_progress(link_id, pbar)
+                    if archived:
+                        stats["archived"] += 1
+                    
+                    details.append({
+                        "title": entry.get("title"), 
+                        "url": entry.get("externalURL") or entry.get("url"), 
+                        "id": link_id, 
+                        "archived": archived,
+                        "action": "created"
+                    })
+                elif result.startswith("Updated"):
+                    stats["updated"] += 1
+                    details.append({
+                        "title": entry.get("title"), 
+                        "url": entry.get("externalURL") or entry.get("url"), 
+                        "id": link_id, 
+                        "archived": False,  # Don't re-archive updated links
+                        "action": "updated",
+                        "details": result
+                    })
+                elif result.startswith("Exists"):
+                    stats["exists"] += 1
+                    details.append({
+                        "title": entry.get("title"), 
+                        "url": entry.get("externalURL") or entry.get("url"), 
+                        "id": link_id, 
+                        "archived": False,
+                        "action": "exists",
+                        "details": result
+                    })
+            elif result == "Duplicate":
+                stats["duplicates"] += 1
                 details.append({
                     "title": entry.get("title"), 
-                    "url": entry.get("url"), 
-                    "id": link_id, 
-                    "archived": archived
+                    "url": entry.get("externalURL") or entry.get("url"), 
+                    "error": "Duplicate"
                 })
-            elif err == "Duplicate":
-                stats["duplicates"] += 1
-                details.append({"title": entry.get("title"), "url": entry.get("url"), "error": "Duplicate"})
             else:
                 stats["failed"] += 1
-                details.append({"title": entry.get("title"), "url": entry.get("url"), "error": err})
+                details.append({
+                    "title": entry.get("title"), 
+                    "url": entry.get("externalURL") or entry.get("url"), 
+                    "error": result
+                })
             
             pbar.update(1)
             
