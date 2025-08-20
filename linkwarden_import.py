@@ -51,7 +51,7 @@ class Colors:
 
 def format_link_detail(entry, link_id=None, action="", details="", archived=False, error=None):
     """Format link details with discussion action emojis for each platform"""
-    title = entry.get("title", "No title")[:60]
+    title = (entry.get("title") or "No title")[:60]
     url = entry.get("externalURL") or entry.get("url", "No URL")
     
     # Create title: url format with bold title
@@ -321,7 +321,7 @@ def create_or_update_link(entry):
         "name": entry.get("title") or primary_url,
         "url": primary_url,
         "description": entry.get("content") or "",
-        "collection": RSS_COLLECTION_ID,  # Create new RSS links in RSS collection
+        "collection": {"id": RSS_COLLECTION_ID},  # API expects object format, not just ID
     }
     
     # Add aggregator info to description if available
