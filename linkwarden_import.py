@@ -102,6 +102,8 @@ def create_link(entry):
                 return None, f"Response parsing error: {e}"
         elif resp.status == 400 and b"already exists" in resp.data:
             return None, "Duplicate"
+        elif resp.status == 409 and b"already exists" in resp.data:
+            return None, "Duplicate"
         elif resp.status == 401 or b"session has expired" in resp.data.lower():
             return None, "API token expired - please refresh token in Linkwarden UI"
         else:
