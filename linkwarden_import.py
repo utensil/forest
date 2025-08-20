@@ -117,10 +117,13 @@ def extract_aggregator_info(entry):
     
     return external_url, aggregator_url, aggregator_name
 
-def update_link_description(link_id, current_description, new_aggregator_url, aggregator_name):
+def update_link_description(existing_link, new_aggregator_url, aggregator_name):
     """Update link description with new aggregator link"""
     if not new_aggregator_url or not aggregator_name:
         return False, "No aggregator info to add"
+    
+    link_id = existing_link.get("id")
+    current_description = existing_link.get("description", "")
     
     # Create markdown link for aggregator
     aggregator_link = f"[{aggregator_name}]({new_aggregator_url})"
@@ -136,8 +139,22 @@ def update_link_description(link_id, current_description, new_aggregator_url, ag
     else:
         updated_description = f"**Discussion:** {aggregator_link}"
     
-    # Update the link
-    update_data = {"description": updated_description}
+    # Update the link - use correct OpenAPI format
+    collection_data = existing_link.get("collection", {})
+    update_data = {
+        "id": link_id,
+        "name": existing_link.get("name"),
+        "url": existing_link.get("url"),
+        "description": updated_description,
+        "collection": {
+            "id": existing_link.get("collectionId"),
+            "ownerId": collection_data.get("ownerId")
+        }
+    }
+    
+    # Add tags - always include tags array (required by API)
+    existing_tags = existing_link.get("tags", [])
+    update_data["tags"] = existing_tags  # Include even if empty
     
     try:
         resp = http.request('PUT', f"{API_BASE}/links/{link_id}", 
@@ -148,7 +165,7 @@ def update_link_description(link_id, current_description, new_aggregator_url, ag
         if resp.status == 200:
             return True, f"Added {aggregator_name} link to description"
         else:
-            return False, f"Update failed: HTTP {resp.status}"
+            return False, f"Update failed: HTTP {resp.status} - {resp.data.decode()[:100]}"
     except Exception as e:
         return False, f"Update error: {e}"
 
@@ -167,12 +184,11 @@ def create_or_update_link(entry):
     if existing_link:
         # Link exists - check if we should update it
         link_id = existing_link.get("id")
-        current_description = existing_link.get("description", "")
         
         if aggregator_url and aggregator_name and aggregator_url != primary_url:
             # We have aggregator info to potentially add
             success, message = update_link_description(
-                link_id, current_description, aggregator_url, aggregator_name
+                existing_link, aggregator_url, aggregator_name
             )
             if success:
                 return link_id, f"Updated: {message}"
