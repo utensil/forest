@@ -58,8 +58,47 @@ ARCHIVE_TIMEOUT_SECS = 30  # max seconds to wait for archive
 # Create urllib3 pool manager with SSL verification disabled for Caddy's internal TLS
 http = urllib3.PoolManager(cert_reqs='CERT_NONE')
 
-# RSS collection configuration - new links will be created in this collection
-RSS_COLLECTION_ID = 4  # ID of the "rss" collection
+def get_or_create_rss_collection():
+    """Get RSS collection ID, creating it if it doesn't exist"""
+    try:
+        # First, try to find existing RSS collection
+        resp = http.request('GET', f"{API_BASE}/collections", 
+                           headers=HEADERS, timeout=10)
+        
+        if resp.status == 200:
+            data = json.loads(resp.data.decode())
+            collections = data.get("response", [])
+            
+            # Look for existing RSS collection
+            for collection in collections:
+                if collection.get("name", "").lower() == "rss":
+                    return collection.get("id"), f"Found existing RSS collection (ID: {collection.get('id')})"
+            
+            # RSS collection doesn't exist, create it
+            create_data = {
+                "name": "rss",
+                "description": "RSS imported links",
+                "color": "#22c55e"  # Green color for RSS
+            }
+            
+            resp = http.request('POST', f"{API_BASE}/collections", 
+                               headers=HEADERS, 
+                               body=json.dumps(create_data).encode('utf-8'),
+                               timeout=10)
+            
+            if resp.status == 200:
+                data = json.loads(resp.data.decode())
+                collection_id = data.get("response", {}).get("id")
+                return collection_id, f"Created new RSS collection (ID: {collection_id})"
+            else:
+                return None, f"Failed to create RSS collection: HTTP {resp.status}"
+        else:
+            return None, f"Failed to fetch collections: HTTP {resp.status}"
+    except Exception as e:
+        return None, f"Error managing RSS collection: {e}"
+
+# Global variable for RSS collection ID (set dynamically)
+RSS_COLLECTION_ID = None
 
 def test_api_connection():
     """Test API connection and token validity"""
@@ -307,6 +346,14 @@ def main():
             print(f"API connection failed: {api_msg}", file=sys.stderr)
             sys.exit(1)
         print(f"✓ {api_msg}", file=sys.stderr)
+        
+        # Initialize RSS collection
+        global RSS_COLLECTION_ID
+        RSS_COLLECTION_ID, rss_msg = get_or_create_rss_collection()
+        if RSS_COLLECTION_ID is None:
+            print(f"RSS collection setup failed: {rss_msg}", file=sys.stderr)
+            sys.exit(1)
+        print(f"✓ {rss_msg}", file=sys.stderr)
     
     now = datetime.now(timezone.utc)
     cutoff_timestamp = None
