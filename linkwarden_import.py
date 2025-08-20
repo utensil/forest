@@ -54,8 +54,8 @@ def format_link_detail(entry, link_id=None, action="", details="", archived=Fals
     title = entry.get("title", "No title")[:60]
     url = entry.get("externalURL") or entry.get("url", "No URL")
     
-    # Truncate URL for display
-    display_url = url[:50] + "..." if len(url) > 50 else url
+    # Create markdown link format: [Title](URL)
+    markdown_link = f"[{title}]({url})"
     
     # Action emoji and color mapping
     action_formats = {
@@ -71,22 +71,31 @@ def format_link_detail(entry, link_id=None, action="", details="", archived=Fals
     
     # Build the markdown line
     if error:
-        return f"{action_display} **{title}** - {display_url} | {Colors.RED}{error}{Colors.END}"
+        return f"{action_display} {markdown_link} | {Colors.RED}{error}{Colors.END}"
     
     # Build details string
     detail_parts = []
-    if link_id:
-        detail_parts.append(f"ID:{link_id}")
     if archived:
         detail_parts.append(f"{Colors.GREEN}📦 Archived{Colors.END}")
-    if details and not details.startswith("Exists: No") and not details.startswith("Exists: Aggregator link already"):
-        # Clean up details message
-        clean_details = details.replace("Updated: ", "").replace("Exists: ", "")
-        detail_parts.append(f"{Colors.CYAN}{clean_details}{Colors.END}")
+    
+    # Extract and format discussion links from details
+    if details:
+        if "Added Lobsters link" in details:
+            detail_parts.append(f"{Colors.CYAN}💬 Discussion: Lobsters{Colors.END}")
+        elif "Added Hacker News link" in details:
+            detail_parts.append(f"{Colors.CYAN}💬 Discussion: Hacker News{Colors.END}")
+        elif "Added Reddit link" in details:
+            detail_parts.append(f"{Colors.CYAN}💬 Discussion: Reddit{Colors.END}")
+        elif "Aggregator link already exists" in details:
+            detail_parts.append(f"{Colors.CYAN}💬 Discussion: Available{Colors.END}")
+        elif details.startswith("Updated:") and "link" in details:
+            # Extract the aggregator name from the details
+            clean_details = details.replace("Updated: Added ", "").replace(" link to description", "")
+            detail_parts.append(f"{Colors.CYAN}💬 Discussion: {clean_details}{Colors.END}")
     
     detail_str = " | ".join(detail_parts) if detail_parts else ""
     
-    return f"{action_display} **{title}** - {display_url}" + (f" | {detail_str}" if detail_str else "")
+    return f"{action_display} {markdown_link}" + (f" | {detail_str}" if detail_str else "")
 
 # Disable SSL warnings for self-signed certificates
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
@@ -544,7 +553,6 @@ def main():
         entry_data = {"title": detail.get("title"), "externalURL": detail.get("url")}
         formatted_line = format_link_detail(
             entry_data,
-            link_id=detail.get("id"),
             action=detail.get("action", "failed" if detail.get("error") else "unknown"),
             details=detail.get("details", ""),
             archived=detail.get("archived", False),
