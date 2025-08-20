@@ -179,10 +179,16 @@ rss-stars FOR="forest":
 rss2linkwarden *PARAMS="--days 7":
     #!/usr/bin/env bash
     # Export starred RSS links and convert to Linkwarden/Wallabag import format
-    just rss-stars "linkwarden" | ./wallabag_import.py {{PARAMS}}
+    just rss-stars "linkwarden" | ./rss2wallabag.py {{PARAMS}}
+
+rss2redeck *PARAMS="--days 7":
+    #!/usr/bin/env bash
+    # Export starred RSS links and convert to Pocket/Readeck import format as a zip
+    mkdir -p output
+    just rss-stars "linkwarden" | ./rss2pocket.py {{PARAMS}} > output/part_000000.csv
 
 stars *PARAMS="--days 7":
-    just rss-stars {{PARAMS}}|./stars.py {{PARAMS}}
+    just rss-stars|./stars.py {{PARAMS}}
 
 til:
     ./til.py --reset && ./til.py
