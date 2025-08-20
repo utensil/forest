@@ -196,10 +196,28 @@ def search_existing_link(external_url):
         return None
     
     try:
-        # Search by URL - Linkwarden API might support search
-        # For now, we'll get recent links and search through them
-        resp = http.request('GET', f"{API_BASE}/links?limit=100", 
+        # Try URL-based search first (if API supports it)
+        import urllib.parse
+        encoded_url = urllib.parse.quote(external_url, safe='')
+        resp = http.request('GET', f"{API_BASE}/links?url={encoded_url}", 
                            headers=HEADERS, timeout=10)
+        
+        if resp.status == 200:
+            try:
+                data = json.loads(resp.data.decode())
+                links = data.get("response", [])
+                if links:
+                    # Found via URL search
+                    for link in links:
+                        if link.get("url") == external_url:
+                            return link
+            except (json.JSONDecodeError, KeyError):
+                pass
+        
+        # Fallback: Search through recent links with higher limit
+        limit = 1000  # Much higher limit to catch more existing links
+        resp = http.request('GET', f"{API_BASE}/links?limit={limit}", 
+                           headers=HEADERS, timeout=15)  # Longer timeout for larger response
         
         if resp.status == 200:
             try:
