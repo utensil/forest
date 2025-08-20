@@ -165,11 +165,21 @@ check-dprint:
 
 # Inspired by https://github.com/Ranchero-Software/NetNewsWire/issues/978#issuecomment-1320911427
 #
-rss-stars *PARAMS:
+rss-stars FOR="forest":
     #!/usr/bin/env bash
     cd ~/Library/Containers/com.ranchero.NetNewsWire-Evergreen/Data/Library/Application\ Support/NetNewsWire/Accounts/2_iCloud
-    # get a JSON of all the starred items with only title, url, externalURL, datePublished
-    sqlite3 DB.sqlite3 '.mode json' 'select a.*, s.* from articles a join statuses s on a.articleID = s.articleID where s.starred = 1 order by s.dateArrived' |jq -r '.[]|{title, url, externalURL, datePublished, dateArrived, uniqueID}'
+    if [ "{{FOR}}" = "linkwarden" ]; then
+        # Output all columns for linkwarden import
+        sqlite3 DB.sqlite3 '.mode json' 'select a.*, s.* from articles a join statuses s on a.articleID = s.articleID where s.starred = 1 order by s.dateArrived' | jq -c '.[]'
+    else
+        # Default: only output minimal fields
+        sqlite3 DB.sqlite3 '.mode json' 'select a.*, s.* from articles a join statuses s on a.articleID = s.articleID where s.starred = 1 order by s.dateArrived' | jq -r '.[]|{title, url, externalURL, datePublished, dateArrived, uniqueID}'
+    fi
+
+rss2linkwarden *PARAMS="--days 7":
+    #!/usr/bin/env bash
+    # Export starred RSS links and convert to Linkwarden/Wallabag import format
+    just rss-stars "linkwarden" | ./wallabag_import.py {{PARAMS}}
 
 stars *PARAMS="--days 7":
     just rss-stars {{PARAMS}}|./stars.py {{PARAMS}}
