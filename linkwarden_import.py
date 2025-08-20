@@ -50,12 +50,12 @@ class Colors:
     END = '\033[0m'
 
 def format_link_detail(entry, link_id=None, action="", details="", archived=False, error=None):
-    """Format link details as colored markdown one-liner"""
+    """Format link details with discussion action emojis for each platform"""
     title = entry.get("title", "No title")[:60]
     url = entry.get("externalURL") or entry.get("url", "No URL")
     
-    # Create markdown link format: [Title](URL)
-    markdown_link = f"[{title}]({url})"
+    # Create title: url format
+    main_link = f"{title}: {url}"
     
     # Action emoji and color mapping
     action_formats = {
@@ -69,33 +69,50 @@ def format_link_detail(entry, link_id=None, action="", details="", archived=Fals
     # Get formatted action
     action_display = action_formats.get(action, f"{Colors.WHITE}❓ {action.upper()}{Colors.END}")
     
-    # Build the markdown line
+    # Build the main line
     if error:
-        return f"{action_display} {markdown_link} | {Colors.RED}{error}{Colors.END}"
+        return f"{action_display} {main_link} | {Colors.RED}{error}{Colors.END}"
     
     # Build details string
     detail_parts = []
     if archived:
         detail_parts.append(f"{Colors.GREEN}📦 Archived{Colors.END}")
     
-    # Extract and format discussion links from details
+    # Extract and format discussion links with individual action emojis
+    discussion_links = []
     if details:
+        # Handle newly added discussion links
         if "Added Lobsters link" in details:
-            detail_parts.append(f"{Colors.CYAN}💬 Discussion: Lobsters{Colors.END}")
+            discussion_links.append(f"💬 {Colors.GREEN}✨{Colors.END} [Lobsters](https://lobste.rs/...)")
         elif "Added Hacker News link" in details:
-            detail_parts.append(f"{Colors.CYAN}💬 Discussion: Hacker News{Colors.END}")
+            discussion_links.append(f"💬 {Colors.GREEN}✨{Colors.END} [Hacker News](https://news.ycombinator.com/...)")
         elif "Added Reddit link" in details:
-            detail_parts.append(f"{Colors.CYAN}💬 Discussion: Reddit{Colors.END}")
-        elif "Aggregator link already exists" in details:
-            detail_parts.append(f"{Colors.CYAN}💬 Discussion: Available{Colors.END}")
+            discussion_links.append(f"💬 {Colors.GREEN}✨{Colors.END} [Reddit](https://reddit.com/...)")
         elif details.startswith("Updated:") and "link" in details:
             # Extract the aggregator name from the details
             clean_details = details.replace("Updated: Added ", "").replace(" link to description", "")
-            detail_parts.append(f"{Colors.CYAN}💬 Discussion: {clean_details}{Colors.END}")
+            discussion_links.append(f"💬 {Colors.GREEN}✨{Colors.END} {clean_details}")
+        
+        # Handle existing discussion links
+        elif "Aggregator link already exists" in details:
+            # For existing links, we know they have discussion but don't know which platform
+            # We could enhance this by checking the original entry's aggregator URL
+            aggregator_url = entry.get("url", "")
+            if "lobste.rs" in aggregator_url:
+                discussion_links.append(f"💬 {Colors.YELLOW}📋{Colors.END} [Lobsters]({aggregator_url})")
+            elif "news.ycombinator.com" in aggregator_url:
+                discussion_links.append(f"💬 {Colors.YELLOW}📋{Colors.END} [Hacker News]({aggregator_url})")
+            elif "reddit.com" in aggregator_url:
+                discussion_links.append(f"💬 {Colors.YELLOW}📋{Colors.END} [Reddit]({aggregator_url})")
+            else:
+                discussion_links.append(f"💬 {Colors.YELLOW}📋{Colors.END} Available")
+    
+    # Add discussion links to detail parts
+    detail_parts.extend(discussion_links)
     
     detail_str = " | ".join(detail_parts) if detail_parts else ""
     
-    return f"{action_display} {markdown_link}" + (f" | {detail_str}" if detail_str else "")
+    return f"{action_display} {main_link}" + (f" | {detail_str}" if detail_str else "")
 
 # Disable SSL warnings for self-signed certificates
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
@@ -482,6 +499,9 @@ def main():
             total_batches = (len(entries) + RATE_LIMIT - 1) // RATE_LIMIT
             pbar.set_description(f"Batch {batch_num}/{total_batches}")
             
+            # Extract aggregator info for display
+            external_url, aggregator_url, aggregator_name = extract_aggregator_info(entry)
+            
             link_id, result = create_or_update_link(entry)
             
             if link_id and result:
@@ -497,6 +517,7 @@ def main():
                     details.append({
                         "title": entry.get("title"), 
                         "url": entry.get("externalURL") or entry.get("url"), 
+                        "aggregator_url": aggregator_url,
                         "id": link_id, 
                         "archived": archived,
                         "action": "created"
@@ -506,6 +527,7 @@ def main():
                     details.append({
                         "title": entry.get("title"), 
                         "url": entry.get("externalURL") or entry.get("url"), 
+                        "aggregator_url": aggregator_url,
                         "id": link_id, 
                         "archived": False,  # Don't re-archive updated links
                         "action": "updated",
@@ -516,6 +538,7 @@ def main():
                     details.append({
                         "title": entry.get("title"), 
                         "url": entry.get("externalURL") or entry.get("url"), 
+                        "aggregator_url": aggregator_url,
                         "id": link_id, 
                         "archived": False,
                         "action": "exists",
@@ -526,6 +549,7 @@ def main():
                 details.append({
                     "title": entry.get("title"), 
                     "url": entry.get("externalURL") or entry.get("url"), 
+                    "aggregator_url": aggregator_url,
                     "error": "Duplicate"
                 })
             else:
@@ -533,6 +557,7 @@ def main():
                 details.append({
                     "title": entry.get("title"), 
                     "url": entry.get("externalURL") or entry.get("url"), 
+                    "aggregator_url": aggregator_url,
                     "error": result
                 })
             
@@ -550,7 +575,12 @@ def main():
     # Print detailed results with colored markdown formatting
     print(f"\n{Colors.BOLD}📋 Detailed Results:{Colors.END}", file=sys.stderr)
     for detail in details:
-        entry_data = {"title": detail.get("title"), "externalURL": detail.get("url")}
+        # Pass the full entry data including aggregator URL
+        entry_data = {
+            "title": detail.get("title"), 
+            "externalURL": detail.get("url"),
+            "url": detail.get("aggregator_url", "")  # Include aggregator URL for platform detection
+        }
         formatted_line = format_link_detail(
             entry_data,
             action=detail.get("action", "failed" if detail.get("error") else "unknown"),
