@@ -479,7 +479,8 @@ def main():
         
         estimated_time = (len(entries) / RATE_LIMIT) * PAUSE_SECS + len(entries) * 2  # rough estimate
         print(f"⏱️  Estimated import time: ~{estimated_time/60:.1f} minutes", file=sys.stderr)
-        print(f"🔄 Rate limiting: {RATE_LIMIT} links per batch, {PAUSE_SECS}s pause between batches", file=sys.stderr)
+        print(f"🔄 Smart rate limiting: {RATE_LIMIT} created links per batch, {PAUSE_SECS}s pause between batches", file=sys.stderr)
+        print(f"ℹ️  Note: Only new link creation triggers rate limiting (existing links are processed quickly)", file=sys.stderr)
         return
 
     if len(entries) == 0:
@@ -490,18 +491,19 @@ def main():
     if len(entries) > 50:
         print(f"⚠️  Large dataset detected ({len(entries)} entries). This may take a while.", file=sys.stderr)
         print(f"⏱️  Estimated time: ~{((len(entries) / RATE_LIMIT) * PAUSE_SECS + len(entries) * 2)/60:.1f} minutes", file=sys.stderr)
+        print(f"ℹ️  Note: Time depends on how many new links need to be created (existing links are fast)", file=sys.stderr)
 
     stats = {"created": 0, "updated": 0, "failed": 0, "archived": 0, "duplicates": 0, "exists": 0}
     details = []
+    created_count = 0  # Track only resource-intensive operations for rate limiting
     
     with tqdm(total=len(entries), file=sys.stderr, desc="Importing links", 
               bar_format='{l_bar}{bar}| {n_fmt}/{total_fmt} [{elapsed}<{remaining}, {rate_fmt}]') as pbar:
         
         for i, entry in enumerate(entries):
             # Update progress bar description with current batch info
-            batch_num = (i // RATE_LIMIT) + 1
-            total_batches = (len(entries) + RATE_LIMIT - 1) // RATE_LIMIT
-            pbar.set_description(f"Batch {batch_num}/{total_batches}")
+            batch_num = (created_count // RATE_LIMIT) + 1
+            pbar.set_description(f"Processing ({created_count} created)")
             
             # Extract aggregator info for display
             external_url, aggregator_url, aggregator_name = extract_aggregator_info(entry)
@@ -511,9 +513,10 @@ def main():
             if link_id and result:
                 if result.startswith("Created"):
                     stats["created"] += 1
+                    created_count += 1  # Count created links for rate limiting
                     
                     # Enhanced archive waiting with progress
-                    pbar.set_description(f"Batch {batch_num}/{total_batches} - Archiving link {link_id}")
+                    pbar.set_description(f"Processing ({created_count} created) - Archiving link {link_id}")
                     archived = wait_for_archive_with_progress(link_id, pbar)
                     if archived:
                         stats["archived"] += 1
@@ -528,6 +531,8 @@ def main():
                     })
                 elif result.startswith("Updated"):
                     stats["updated"] += 1
+                    # Updates might also be resource-intensive if they trigger re-archiving
+                    # But typically they're just description updates, so don't count for rate limiting
                     details.append({
                         "title": entry.get("title"), 
                         "url": entry.get("externalURL") or entry.get("url"), 
@@ -539,6 +544,7 @@ def main():
                     })
                 elif result.startswith("Exists"):
                     stats["exists"] += 1
+                    # Existing links don't consume resources, no rate limiting needed
                     details.append({
                         "title": entry.get("title"), 
                         "url": entry.get("externalURL") or entry.get("url"), 
@@ -550,6 +556,7 @@ def main():
                     })
             elif result == "Duplicate":
                 stats["duplicates"] += 1
+                # Duplicates don't consume resources, no rate limiting needed
                 details.append({
                     "title": entry.get("title"), 
                     "url": entry.get("externalURL") or entry.get("url"), 
@@ -567,9 +574,9 @@ def main():
             
             pbar.update(1)
             
-            # Rate limiting with progress indication
-            if (i + 1) % RATE_LIMIT == 0 and (i + 1) < len(entries):
-                pbar.set_description(f"Rate limiting pause ({PAUSE_SECS}s)")
+            # Smart rate limiting: only pause after creating RATE_LIMIT new links
+            if created_count > 0 and created_count % RATE_LIMIT == 0 and (i + 1) < len(entries):
+                pbar.set_description(f"Rate limiting pause ({PAUSE_SECS}s) - {created_count} links created")
                 time.sleep(PAUSE_SECS)
 
     # Print summary
