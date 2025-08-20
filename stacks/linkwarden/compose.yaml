@@ -16,7 +16,6 @@ services:
         condition: service_started
     networks:
       - homelab
-
   postgres:
     image: postgres:16-alpine
     env_file: .env
@@ -24,13 +23,14 @@ services:
     volumes:
       - ${PODS_HOME}/linkwarden/pgdata:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      test:
+        - CMD-SHELL
+        - pg_isready -U postgres
       interval: 5s
       timeout: 5s
       retries: 10
     networks:
       - homelab
-
   meilisearch:
     image: getmeili/meilisearch:v1.12.8
     restart: unless-stopped
@@ -40,8 +40,6 @@ services:
       - ${PODS_HOME}/linkwarden/meili_data:/meili_data
     networks:
       - homelab
-
 networks:
-   homelab:
-     external: true
-
+  homelab:
+    external: true

@@ -6,8 +6,8 @@ services:
     container_name: caddy
     restart: unless-stopped
     ports:
-      - "80:80"
-      - "443:443"
+      - 80:80
+      - 443:443
     volumes:
       - ${PODS_HOME}/caddy/data:/data
       - ${PODS_HOME}/caddy/config:/config
@@ -16,7 +16,6 @@ services:
     # Add more environment variables as needed
     networks:
       - homelab
-
 networks:
   homelab:
     external: true

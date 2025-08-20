@@ -22,14 +22,10 @@ import os
 from pathlib import Path
 import yaml
 import re
+import sys
 
 STACKS_DIR = Path(__file__).parent.parent
 OUTPUT_FILE = Path(__file__).parent / "Caddyfile.generated"
-
-# AGENT-NOTE: Added per-stack port override support
-PORT_OVERRIDES = {
-    "kopia": 51515,
-}
 
 site_template = """{stack}.homelab.local {{
     reverse_proxy {stack}:{port}
@@ -38,7 +34,25 @@ site_template = """{stack}.homelab.local {{
 
 """
 
-def get_first_port_from_compose(stack_dir):
+def extract_ports(port_mapping):
+    """
+    Given a port mapping (str or int), return (host_port, container_port).
+    If only one port is given, both host and container are the same.
+    """
+    if isinstance(port_mapping, int):
+        return port_mapping, port_mapping
+    if isinstance(port_mapping, str):
+        # Match: [host_ip:]host:container
+        m = re.match(r"(?:[0-9.]+:)?([0-9]+):([0-9]+)$", port_mapping)
+        if m:
+            return int(m.group(1)), int(m.group(2))
+        # Match: just a single port
+        m = re.match(r"^([0-9]+)$", port_mapping)
+        if m:
+            return int(m.group(1)), int(m.group(1))
+    return None, None
+
+def get_first_ports_from_compose(stack_dir):
     compose_path = None
     for fname in ["compose.yaml", "compose.yml"]:
         candidate = stack_dir / fname
@@ -46,41 +60,55 @@ def get_first_port_from_compose(stack_dir):
             compose_path = candidate
             break
     if not compose_path:
-        return None
+        return None, None
     try:
         with open(compose_path) as f:
             data = yaml.safe_load(f)
-        # Find the first service
         services = data.get("services", {})
         if not services:
-            return None
+            return None, None
         first_service = next(iter(services.values()))
         ports = first_service.get("ports", [])
         if not ports:
-            return None
-        # ports can be in form "host:container" or just "port"
-        first_port = ports[0]
-        if isinstance(first_port, int):
-            return first_port
-        if isinstance(first_port, str):
-            # Try to extract the container port (after the colon)
-            m = re.match(r"(?:[0-9.]+:)?([0-9]+)", first_port)
-            if m:
-                return int(m.group(1))
+            return None, None
+        return extract_ports(ports[0])
     except Exception as e:
         print(f"Warning: failed to parse {compose_path}: {e}")
-    return None
+    return None, None
 
 def main():
-    stack_names = [d.name for d in STACKS_DIR.iterdir() if d.is_dir() and not d.name.startswith('.') and d.name != "caddy"]
+    # print("running...")
+    all_entries = list(STACKS_DIR.iterdir())
+    # print("All entries in stacks/:", [d.name for d in all_entries])
+    stack_names = [d.name for d in all_entries if d.is_dir() and not d.name.startswith('.') and d.name != "caddy"]
+    # print("Filtered stack names:", stack_names)
+    port_to_stacks = {}
+    stack_to_port = {}
+    host_port_to_stacks = {}
+    for stack in sorted(stack_names):
+        stack_dir = STACKS_DIR / stack
+        # Unified port extraction
+        host_port, container_port = get_first_ports_from_compose(stack_dir)
+        # Caddyfile logic (container port)
+        if container_port is None:
+            print(f"  Warning: No port found for stack '{stack}', skipping Caddyfile rule.")
+        else:
+            stack_to_port[stack] = container_port
+            port_to_stacks.setdefault(container_port, []).append(stack)
+        # Host port conflict detection
+        if host_port is not None:
+            host_port_to_stacks.setdefault(host_port, []).append(stack)
+    # Host port conflict detection (unrelated to Caddy, just a warning)
+    host_conflicts = {port: stacks for port, stacks in host_port_to_stacks.items() if len(stacks) > 1}
+    if host_conflicts:
+        print("WARNING: Host port conflicts detected (host port → stacks):")
+        for port, stacks in host_conflicts.items():
+            print(f"  Host port {port} is used by stacks: {', '.join(stacks)}")
     with open(OUTPUT_FILE, "w") as f:
-        for stack in sorted(stack_names):
-            stack_dir = STACKS_DIR / stack
-            port = get_first_port_from_compose(stack_dir)
-            if port is None:
-                port = 5001
+        for stack in sorted(stack_to_port.keys()):
+            port = stack_to_port[stack]
             f.write(site_template.format(stack=stack, port=port))
-    print(f"Generated {OUTPUT_FILE} with {len(stack_names)} site blocks.")
+    print(f"Generated {OUTPUT_FILE} with {len(stack_to_port)} site blocks.")
 
 if __name__ == "__main__":
     main()

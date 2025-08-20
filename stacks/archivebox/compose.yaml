@@ -1,0 +1,14 @@
+services:
+  archivebox:
+    volumes:
+      - ${PODS_HOME}/archivebox/data:/data
+    stdin_open: true
+    tty: true
+    ports:
+      - 8000:8000
+    image: dockerproxy.net/archivebox/archivebox
+    networks:
+      - homelab
+networks:
+  homelab:
+    external: true
