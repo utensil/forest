@@ -42,10 +42,13 @@ urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 API_BASE = os.environ.get("LINKWARDEN_API_BASE", "https://linkwarden.homelab.local/api/v1")
 API_TOKEN = os.environ.get("LINKWARDEN_API_TOKEN")
-if not API_TOKEN:
+
+# Only require API token if not in dry-run mode
+if "--dry-run" not in sys.argv and not API_TOKEN:
     print("ERROR: LINKWARDEN_API_TOKEN environment variable must be set", file=sys.stderr)
     sys.exit(1)
-HEADERS = {"Authorization": f"Bearer {API_TOKEN}", "Content-Type": "application/json"}
+
+HEADERS = {"Authorization": f"Bearer {API_TOKEN}", "Content-Type": "application/json"} if API_TOKEN else {}
 
 RATE_LIMIT = 3  # links per batch
 PAUSE_SECS = 5  # seconds to pause after each batch
@@ -122,29 +125,66 @@ def wait_for_archive(link_id):
             time.sleep(ARCHIVE_POLL_SECS)
     return False
 
+def wait_for_archive_with_progress(link_id, pbar):
+    """Enhanced archive waiting with progress reporting"""
+    start = time.time()
+    attempts = 0
+    max_attempts = ARCHIVE_TIMEOUT_SECS // ARCHIVE_POLL_SECS
+    
+    while time.time() - start < ARCHIVE_TIMEOUT_SECS:
+        attempts += 1
+        elapsed = time.time() - start
+        
+        # Update progress bar with archive status
+        pbar.set_description(f"Archiving link {link_id} ({attempts}/{max_attempts}, {elapsed:.1f}s)")
+        
+        try:
+            resp = http.request('GET', f"{API_BASE}/archives/{link_id}", 
+                               headers=HEADERS, timeout=10)
+            if resp.status == 200:
+                pbar.set_description(f"✅ Archived link {link_id} in {elapsed:.1f}s")
+                time.sleep(0.5)  # Brief pause to show success message
+                return True
+            elif resp.status == 404:
+                time.sleep(ARCHIVE_POLL_SECS)
+            else:
+                pbar.set_description(f"❌ Archive failed for link {link_id} (HTTP {resp.status})")
+                return False
+        except Exception as e:
+            pbar.set_description(f"⚠️  Archive check error for link {link_id}: {str(e)[:30]}")
+            time.sleep(ARCHIVE_POLL_SECS)
+    
+    pbar.set_description(f"⏰ Archive timeout for link {link_id} after {ARCHIVE_TIMEOUT_SECS}s")
+    return False
+
 def main():
     argp = argparse.ArgumentParser(description="Import links to Linkwarden via API")
     argp.add_argument("--days", type=int, default=6, help="Only include entries from the last N days (by dateArrived or datePublished, -1 for all)")
+    argp.add_argument("--dry-run", action="store_true", help="Count and preview entries without importing")
     args = argp.parse_args()
     
-    # Test API connection first
-    api_ok, api_msg = test_api_connection()
-    if not api_ok:
-        print(f"API connection failed: {api_msg}", file=sys.stderr)
-        sys.exit(1)
-    print(f"✓ {api_msg}", file=sys.stderr)
+    # Test API connection first (skip for dry-run)
+    if not args.dry_run:
+        api_ok, api_msg = test_api_connection()
+        if not api_ok:
+            print(f"API connection failed: {api_msg}", file=sys.stderr)
+            sys.exit(1)
+        print(f"✓ {api_msg}", file=sys.stderr)
     
     now = datetime.now(timezone.utc)
     cutoff_timestamp = None
     if args.days != -1:
         cutoff_date = now - timedelta(days=args.days)
         cutoff_timestamp = cutoff_date.timestamp()
+        print(f"📅 Filtering entries from last {args.days} days (since {cutoff_date.strftime('%Y-%m-%d %H:%M:%S')} UTC)", file=sys.stderr)
 
     entries = []
+    total_processed = 0
     for line in sys.stdin:
         line = line.strip()
         if not line:
             continue
+        total_processed += 1
         try:
             entry = json.loads(line)
             timestamp = entry.get("dateArrived") or entry.get("datePublished")
@@ -153,34 +193,83 @@ def main():
                     continue
             entries.append(entry)
         except Exception as e:
-            print(f"Warning: Skipping invalid line: {e}", file=sys.stderr)
+            print(f"Warning: Skipping invalid line {total_processed}: {e}", file=sys.stderr)
 
     # Sort for deterministic order
     entries.sort(key=lambda x: x.get("dateArrived") or x.get("datePublished") or 0)
+    
+    print(f"📊 Found {len(entries)} entries to import (from {total_processed} total RSS entries)", file=sys.stderr)
+    
+    if args.dry_run:
+        print("🔍 DRY RUN MODE - Preview of entries to be imported:", file=sys.stderr)
+        for i, entry in enumerate(entries[:10], 1):  # Show first 10
+            title = entry.get("title", "No title")[:60]
+            url = entry.get("externalURL") or entry.get("url", "No URL")
+            timestamp = entry.get("dateArrived") or entry.get("datePublished")
+            date_str = datetime.fromtimestamp(timestamp, timezone.utc).strftime('%Y-%m-%d') if timestamp else "No date"
+            print(f"  {i:3d}. [{date_str}] {title} - {url}", file=sys.stderr)
+        
+        if len(entries) > 10:
+            print(f"  ... and {len(entries) - 10} more entries", file=sys.stderr)
+        
+        estimated_time = (len(entries) / RATE_LIMIT) * PAUSE_SECS + len(entries) * 2  # rough estimate
+        print(f"⏱️  Estimated import time: ~{estimated_time/60:.1f} minutes", file=sys.stderr)
+        print(f"🔄 Rate limiting: {RATE_LIMIT} links per batch, {PAUSE_SECS}s pause between batches", file=sys.stderr)
+        return
+
+    if len(entries) == 0:
+        print("ℹ️  No entries to import", file=sys.stderr)
+        return
+    
+    # Warn for large datasets
+    if len(entries) > 50:
+        print(f"⚠️  Large dataset detected ({len(entries)} entries). This may take a while.", file=sys.stderr)
+        print(f"⏱️  Estimated time: ~{((len(entries) / RATE_LIMIT) * PAUSE_SECS + len(entries) * 2)/60:.1f} minutes", file=sys.stderr)
 
     stats = {"created": 0, "failed": 0, "archived": 0, "duplicates": 0}
     details = []
-    with tqdm(total=len(entries), file=sys.stderr, desc="Importing links") as pbar:
+    
+    with tqdm(total=len(entries), file=sys.stderr, desc="Importing links", 
+              bar_format='{l_bar}{bar}| {n_fmt}/{total_fmt} [{elapsed}<{remaining}, {rate_fmt}]') as pbar:
+        
         for i, entry in enumerate(entries):
+            # Update progress bar description with current batch info
+            batch_num = (i // RATE_LIMIT) + 1
+            total_batches = (len(entries) + RATE_LIMIT - 1) // RATE_LIMIT
+            pbar.set_description(f"Batch {batch_num}/{total_batches}")
+            
             link_id, err = create_link(entry)
             if link_id:
                 stats["created"] += 1
-                archived = wait_for_archive(link_id)
+                
+                # Enhanced archive waiting with progress
+                pbar.set_description(f"Batch {batch_num}/{total_batches} - Archiving link {link_id}")
+                archived = wait_for_archive_with_progress(link_id, pbar)
                 if archived:
                     stats["archived"] += 1
-                details.append({"title": entry.get("title"), "url": entry.get("url"), "id": link_id, "archived": archived})
+                
+                details.append({
+                    "title": entry.get("title"), 
+                    "url": entry.get("url"), 
+                    "id": link_id, 
+                    "archived": archived
+                })
             elif err == "Duplicate":
                 stats["duplicates"] += 1
                 details.append({"title": entry.get("title"), "url": entry.get("url"), "error": "Duplicate"})
             else:
                 stats["failed"] += 1
                 details.append({"title": entry.get("title"), "url": entry.get("url"), "error": err})
+            
             pbar.update(1)
-            if (i + 1) % RATE_LIMIT == 0:
+            
+            # Rate limiting with progress indication
+            if (i + 1) % RATE_LIMIT == 0 and (i + 1) < len(entries):
+                pbar.set_description(f"Rate limiting pause ({PAUSE_SECS}s)")
                 time.sleep(PAUSE_SECS)
 
     # Print summary
-    print("\nImport complete.", file=sys.stderr)
+    print(f"\n✅ Import complete! Processed {len(entries)} entries", file=sys.stderr)
     print(json.dumps(stats, indent=2), file=sys.stderr)
     for d in details:
         print(json.dumps(d, ensure_ascii=False), file=sys.stderr)
