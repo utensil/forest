@@ -37,6 +37,57 @@ import urllib3
 from tqdm import tqdm
 from datetime import datetime, timedelta, timezone
 
+# ANSI color codes for terminal output
+class Colors:
+    GREEN = '\033[92m'
+    BLUE = '\033[94m'
+    YELLOW = '\033[93m'
+    RED = '\033[91m'
+    PURPLE = '\033[95m'
+    CYAN = '\033[96m'
+    WHITE = '\033[97m'
+    BOLD = '\033[1m'
+    END = '\033[0m'
+
+def format_link_detail(entry, link_id=None, action="", details="", archived=False, error=None):
+    """Format link details as colored markdown one-liner"""
+    title = entry.get("title", "No title")[:60]
+    url = entry.get("externalURL") or entry.get("url", "No URL")
+    
+    # Truncate URL for display
+    display_url = url[:50] + "..." if len(url) > 50 else url
+    
+    # Action emoji and color mapping
+    action_formats = {
+        "created": f"{Colors.GREEN}✨ CREATED{Colors.END}",
+        "updated": f"{Colors.BLUE}🔄 UPDATED{Colors.END}",
+        "exists": f"{Colors.YELLOW}📋 EXISTS{Colors.END}",
+        "duplicate": f"{Colors.PURPLE}🔗 DUPLICATE{Colors.END}",
+        "failed": f"{Colors.RED}❌ FAILED{Colors.END}"
+    }
+    
+    # Get formatted action
+    action_display = action_formats.get(action, f"{Colors.WHITE}❓ {action.upper()}{Colors.END}")
+    
+    # Build the markdown line
+    if error:
+        return f"{action_display} **{title}** - {display_url} | {Colors.RED}{error}{Colors.END}"
+    
+    # Build details string
+    detail_parts = []
+    if link_id:
+        detail_parts.append(f"ID:{link_id}")
+    if archived:
+        detail_parts.append(f"{Colors.GREEN}📦 Archived{Colors.END}")
+    if details and not details.startswith("Exists: No") and not details.startswith("Exists: Aggregator link already"):
+        # Clean up details message
+        clean_details = details.replace("Updated: ", "").replace("Exists: ", "")
+        detail_parts.append(f"{Colors.CYAN}{clean_details}{Colors.END}")
+    
+    detail_str = " | ".join(detail_parts) if detail_parts else ""
+    
+    return f"{action_display} **{title}** - {display_url}" + (f" | {detail_str}" if detail_str else "")
+
 # Disable SSL warnings for self-signed certificates
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
@@ -486,8 +537,20 @@ def main():
     # Print summary
     print(f"\n✅ Import complete! Processed {len(entries)} entries", file=sys.stderr)
     print(json.dumps(stats, indent=2), file=sys.stderr)
-    for d in details:
-        print(json.dumps(d, ensure_ascii=False), file=sys.stderr)
+    
+    # Print detailed results with colored markdown formatting
+    print(f"\n{Colors.BOLD}📋 Detailed Results:{Colors.END}", file=sys.stderr)
+    for detail in details:
+        entry_data = {"title": detail.get("title"), "externalURL": detail.get("url")}
+        formatted_line = format_link_detail(
+            entry_data,
+            link_id=detail.get("id"),
+            action=detail.get("action", "failed" if detail.get("error") else "unknown"),
+            details=detail.get("details", ""),
+            archived=detail.get("archived", False),
+            error=detail.get("error")
+        )
+        print(formatted_line, file=sys.stderr)
 
 if __name__ == "__main__":
     main()
