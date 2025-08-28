@@ -299,7 +299,7 @@ def update_link_fields(existing_link, entry, target_collection_id, collection_na
             update_data["name"] = new_title
             updates.append(f"Force updated title to '{new_title}'")
         else:
-            print(f"⚠️  Title conflict for {existing_link.get('url', '')}: existing='{current_title}' vs new='{new_title}' (preserving existing, use --force title to override)", file=sys.stderr)
+            updates.append(f"Title conflict: '{current_title}' vs '{new_title}' (use --force title)")
     
     # Check aggregator updates (merge approach)
     external_url, aggregator_url, aggregator_name = extract_aggregator_info(entry)
@@ -316,18 +316,25 @@ def update_link_fields(existing_link, entry, target_collection_id, collection_na
     
     # Apply updates if any changes needed
     if updates:
-        try:
-            resp = http.request('PUT', f"{API_BASE}/links/{link_id}", 
-                               headers=HEADERS, 
-                               body=json.dumps(update_data).encode('utf-8'),
-                               timeout=10)
-            
-            if resp.status == 200:
-                return True, " + ".join(updates)
-            else:
-                return False, f"Update failed: HTTP {resp.status}"
-        except Exception as e:
-            return False, f"Update error: {e}"
+        # Check if we have actual data changes vs just warnings
+        has_data_changes = any(not msg.startswith("Title conflict:") for msg in updates)
+        
+        if has_data_changes:
+            try:
+                resp = http.request('PUT', f"{API_BASE}/links/{link_id}", 
+                                   headers=HEADERS, 
+                                   body=json.dumps(update_data).encode('utf-8'),
+                                   timeout=10)
+                
+                if resp.status == 200:
+                    return True, " + ".join(updates)
+                else:
+                    return False, f"Update failed: HTTP {resp.status}"
+            except Exception as e:
+                return False, f"Update error: {e}"
+        else:
+            # Only warnings, no actual updates
+            return False, " + ".join(updates)
     
     return False, "No updates needed"
 
