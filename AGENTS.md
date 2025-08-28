@@ -14,7 +14,7 @@
 ALWAYS cite the rules which you have actually followed during the reply at the end of your reply, like this: "(per G-ask, G-verify)".
 
 ### G-ask: Always ask for clarification when unsure
-- ✅ **Should**: Ask the developer for clarification before making changes when unsure about project-specific details or lacking context for a particular feature/decision
+- ✅ **Should**: Ask the developer for clarification before making changes when unsure about project-specific details or lacking context for a particular feature/decision, especially when there are contradicting requirements
  - ❌ **Must NOT**: make assumptions, write changes or use tools when uncertain
 
 ### G-scope: Stay within designated code areas  
