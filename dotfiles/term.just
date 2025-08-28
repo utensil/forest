@@ -36,6 +36,7 @@ prep-term:
     which pkg-config || brew install pkg-config
     # Format
     which jq || brew install jq
+    which tw || brew install tabiew
     which hexyl || brew install hexyl
 
 prep-media:
