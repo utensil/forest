@@ -227,7 +227,7 @@ def create_reference_entry(ref_url: str, ref_title: str, platform_tag: str, sour
         'content': description,
         'textContent': '',
         'tags': platform_tag,
-        'folder': 'references',
+        'folder': 'discussions',  # Discussion links go to discussions collection
         'datePublished': source_timestamp,  # Use source timestamp
         'dateArrived': source_timestamp,    # Use source timestamp
         'uniqueID': f"ref_{hash(ref_url) % 1000000}",

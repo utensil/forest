@@ -42,9 +42,11 @@
 - Preserves discussion context and metadata
 
 ### Collection Management
-- Maps CSV `folder` to Linkwarden collections
-- Reference links go to "references" collection
-- Collections created automatically by linkwarden_import.py
+- Maps CSV `folder` to Linkwarden collections dynamically
+- Creates collections automatically if they don't exist (e.g., "hunt" → hunt collection)
+- Discussion links (HN/Lobsters/Reddit) go to "discussions" collection
+- Collections cached to avoid repeated API calls
+- Default fallback to "rss" collection if folder is empty
 
 ## Example
 
@@ -59,6 +61,11 @@ id,title,note,excerpt,url,folder,tags,created
 {"title": "Example", "url": "https://example.com", "content": "https://news.ycombinator.com/item?id=123", "textContent": "Great article", "tags": "programming", "folder": "tech", ...}
 {"title": "https://news.ycombinator.com/item?id=123", "url": "https://news.ycombinator.com/item?id=123", "content": "from https://example.com", "tags": "re/hn", "folder": "references", ...}
 ```
+
+**Linkwarden Result:**
+- Main link goes to "tech" collection
+- Discussion link goes to "discussions" collection
+- Collections created automatically if they don't exist
 
 ## Integration
 
