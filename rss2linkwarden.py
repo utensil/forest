@@ -155,7 +155,7 @@ def convert_csv_to_linkwarden(csv_file: str) -> None:
                     
                     for ref_url, ref_title, platform_tag in ref_links:
                         ref_entry = create_reference_entry(
-                            ref_url, ref_title, platform_tag, row.get('url', ''), source_timestamp
+                            ref_url, ref_title, platform_tag, row.get('url', ''), source_timestamp, main_entry.get('title', '')
                         )
                         if ref_entry:
                             print(json.dumps(ref_entry))
@@ -212,12 +212,25 @@ def create_main_entry(row: Dict[str, str]) -> Optional[Dict]:
     
     return entry
 
-def create_reference_entry(ref_url: str, ref_title: str, platform_tag: str, source_url: str, source_timestamp: float = 0.0) -> Optional[Dict]:
+def create_reference_entry(ref_url: str, ref_title: str, platform_tag: str, source_url: str, source_timestamp: float = 0.0, source_title: str = "") -> Optional[Dict]:
     """Create reference link entry"""
     if not ref_url:
         return None
     
-    title = ref_title or ref_url
+    # Create platform-prefixed title
+    platform_prefix = ""
+    if platform_tag == "re/hn":
+        platform_prefix = "HN"
+    elif platform_tag == "re/lb":
+        platform_prefix = "Lobsters"
+    elif platform_tag == "re/rd":
+        platform_prefix = "Reddit"
+    
+    if platform_prefix and source_title:
+        title = f"{platform_prefix} | {source_title}"
+    else:
+        title = ref_title or ref_url
+    
     description = f"from {source_url}" if source_url else ""
     
     entry = {
