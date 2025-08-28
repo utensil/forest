@@ -258,6 +258,46 @@ def extract_aggregator_info(entry):
     
     return external_url, aggregator_url, aggregator_name
 
+def update_link_title(existing_link, new_title):
+    """Update link title if different from current"""
+    current_title = existing_link.get("name", "")
+    
+    if current_title == new_title:
+        return False, "Title unchanged"
+    
+    link_id = existing_link.get("id")
+    collection_data = existing_link.get("collection", {})
+    
+    update_data = {
+        "id": link_id,
+        "name": new_title,
+        "url": existing_link.get("url"),
+        "description": existing_link.get("description", ""),
+        "collection": {
+            "id": existing_link.get("collectionId"),
+            "ownerId": collection_data.get("ownerId")
+        }
+    }
+    
+    # Add existing tags and textContent
+    existing_tags = existing_link.get("tags", [])
+    update_data["tags"] = existing_tags
+    if existing_link.get("textContent"):
+        update_data["textContent"] = existing_link.get("textContent")
+    
+    try:
+        resp = http.request('PUT', f"{API_BASE}/links/{link_id}", 
+                           headers=HEADERS, 
+                           body=json.dumps(update_data).encode('utf-8'),
+                           timeout=10)
+        
+        if resp.status == 200:
+            return True, f"Updated title to '{new_title}'"
+        else:
+            return False, f"Title update failed: HTTP {resp.status}"
+    except Exception as e:
+        return False, f"Title update error: {e}"
+
 def update_link_collection(existing_link, target_collection_id, collection_name):
     """Update link collection if different from current"""
     current_collection_id = existing_link.get("collectionId")
@@ -389,6 +429,17 @@ def create_or_update_link(entry):
                 collection_updated = True
                 collection_msg = message
         
+        # Check for title updates
+        title_updated = False
+        title_msg = ""
+        expected_title = entry.get("title", "")
+        current_title = existing_link.get("name", "")
+        if expected_title and current_title != expected_title:
+            success, message = update_link_title(existing_link, expected_title)
+            if success:
+                title_updated = True
+                title_msg = message
+        
         # Check for aggregator updates
         aggregator_updated = False
         aggregator_msg = ""
@@ -402,19 +453,21 @@ def create_or_update_link(entry):
                 aggregator_msg = message
         
         # Return appropriate status
-        if collection_updated and aggregator_updated:
-            return link_id, f"Updated: {collection_msg} + {aggregator_msg}"
-        elif collection_updated:
-            return link_id, f"Updated: {collection_msg}"
-        elif aggregator_updated:
-            return link_id, f"Updated: {aggregator_msg}"
+        updates = []
+        if collection_updated and collection_msg:
+            updates.append(collection_msg)
+        if title_updated and title_msg:
+            updates.append(title_msg)
+        if aggregator_updated and aggregator_msg:
+            updates.append(aggregator_msg)
+        
+        if updates:
+            return link_id, f"Updated: {' + '.join(updates)}"
         else:
             status_parts = []
-            if collection_msg:
+            if collection_msg and not collection_updated:
                 status_parts.append(collection_msg)
-            if aggregator_msg:
-                status_parts.append(aggregator_msg)
-            elif not aggregator_url:
+            if not aggregator_url:
                 status_parts.append("No new aggregator info")
             
             return link_id, f"Exists: {' + '.join(status_parts) if status_parts else 'No updates needed'}"
