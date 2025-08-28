@@ -415,8 +415,11 @@ def update_link_description(existing_link, new_aggregator_url, aggregator_name):
     except Exception as e:
         return False, f"Update error: {e}"
 
-def create_or_update_link(entry):
+def create_or_update_link(entry, force_fields=None):
     """Create new link or update existing one with aggregator info"""
+    if force_fields is None:
+        force_fields = set()
+        
     external_url, aggregator_url, aggregator_name = extract_aggregator_info(entry)
     
     # Use externalURL as primary, fall back to url
@@ -443,7 +446,7 @@ def create_or_update_link(entry):
         target_collection_id = COLLECTION_CACHE[collection_name]
         
         # Update all fields as needed
-        success, message = update_link_fields(existing_link, entry, target_collection_id, collection_name, args.force)
+        success, message = update_link_fields(existing_link, entry, target_collection_id, collection_name, force_fields)
         if success:
             return link_id, f"Updated: {message}"
         else:
@@ -628,7 +631,7 @@ def main():
             # Extract aggregator info for display
             external_url, aggregator_url, aggregator_name = extract_aggregator_info(entry)
             
-            link_id, result = create_or_update_link(entry)
+            link_id, result = create_or_update_link(entry, args.force)
             
             if link_id and result:
                 if result.startswith("Created"):
