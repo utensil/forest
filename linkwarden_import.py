@@ -259,44 +259,53 @@ def extract_aggregator_info(entry):
     return external_url, aggregator_url, aggregator_name
 
 def update_link_title(existing_link, new_title):
-    """Update link title if different from current"""
+    """Update link title following links.md conflict resolution: preserve existing, warn if different"""
     current_title = existing_link.get("name", "")
     
     if current_title == new_title:
         return False, "Title unchanged"
     
-    link_id = existing_link.get("id")
-    collection_data = existing_link.get("collection", {})
+    # Following links.md: "Titles: Preserve existing, warn if different from new source"
+    if current_title and current_title != new_title:
+        print(f"⚠️  Title conflict for {existing_link.get('url', '')}: existing='{current_title}' vs new='{new_title}' (preserving existing)", file=sys.stderr)
+        return False, f"Title preserved (conflict with '{new_title}')"
     
-    update_data = {
-        "id": link_id,
-        "name": new_title,
-        "url": existing_link.get("url"),
-        "description": existing_link.get("description", ""),
-        "collection": {
-            "id": existing_link.get("collectionId"),
-            "ownerId": collection_data.get("ownerId")
-        }
-    }
-    
-    # Add existing tags and textContent
-    existing_tags = existing_link.get("tags", [])
-    update_data["tags"] = existing_tags
-    if existing_link.get("textContent"):
-        update_data["textContent"] = existing_link.get("textContent")
-    
-    try:
-        resp = http.request('PUT', f"{API_BASE}/links/{link_id}", 
-                           headers=HEADERS, 
-                           body=json.dumps(update_data).encode('utf-8'),
-                           timeout=10)
+    # Only update if existing title is empty/missing
+    if not current_title and new_title:
+        link_id = existing_link.get("id")
+        collection_data = existing_link.get("collection", {})
         
-        if resp.status == 200:
-            return True, f"Updated title to '{new_title}'"
-        else:
-            return False, f"Title update failed: HTTP {resp.status}"
-    except Exception as e:
-        return False, f"Title update error: {e}"
+        update_data = {
+            "id": link_id,
+            "name": new_title,
+            "url": existing_link.get("url"),
+            "description": existing_link.get("description", ""),
+            "collection": {
+                "id": existing_link.get("collectionId"),
+                "ownerId": collection_data.get("ownerId")
+            }
+        }
+        
+        # Add existing tags and textContent
+        existing_tags = existing_link.get("tags", [])
+        update_data["tags"] = existing_tags
+        if existing_link.get("textContent"):
+            update_data["textContent"] = existing_link.get("textContent")
+        
+        try:
+            resp = http.request('PUT', f"{API_BASE}/links/{link_id}", 
+                               headers=HEADERS, 
+                               body=json.dumps(update_data).encode('utf-8'),
+                               timeout=10)
+            
+            if resp.status == 200:
+                return True, f"Added missing title '{new_title}'"
+            else:
+                return False, f"Title update failed: HTTP {resp.status}"
+        except Exception as e:
+            return False, f"Title update error: {e}"
+    
+    return False, "No title update needed"
 
 def update_link_collection(existing_link, target_collection_id, collection_name):
     """Update link collection if different from current"""
