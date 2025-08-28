@@ -50,6 +50,31 @@ def normalize_url(url):
   - **Enrichment failures**: Skip entry, retry later (idempotent design allows this)
 - Track enrichment operations in statistics
 
+### Two-Phase Import Workflow
+
+For safe handling of conflicting data:
+
+1. **Phase 1 - Discovery**: Run import without force flags
+   - Preserves existing data following conflict resolution rules
+   - Warns about conflicts (titles, descriptions, etc.)
+   - Shows what would be updated vs what conflicts exist
+
+2. **Phase 2 - Force Update**: After human review, selectively force updates
+   - Use `--force title` to override title conflicts
+   - Use `--force description` to override description conflicts  
+   - Can combine multiple force flags: `--force title --force description`
+
+**Example workflow:**
+```bash
+# Phase 1: Discover conflicts
+./rss2linkwarden.py data.csv | ./linkwarden_import.py --days 7
+
+# Review warnings, then force specific updates
+./rss2linkwarden.py data.csv | ./linkwarden_import.py --days 7 --force title
+```
+
+This ensures human oversight for potentially destructive updates while maintaining automation for safe enrichment operations.
+
 ## Title Enhancement
 
 ### Automatic Title Generation

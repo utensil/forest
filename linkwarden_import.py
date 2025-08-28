@@ -258,8 +258,11 @@ def extract_aggregator_info(entry):
     
     return external_url, aggregator_url, aggregator_name
 
-def update_link_fields(existing_link, entry, target_collection_id, collection_name):
+def update_link_fields(existing_link, entry, target_collection_id, collection_name, force_fields=None):
     """Update link fields following links.md conflict resolution rules"""
+    if force_fields is None:
+        force_fields = set()
+    
     link_id = existing_link.get("id")
     collection_data = existing_link.get("collection", {})
     updates = []
@@ -285,14 +288,18 @@ def update_link_fields(existing_link, entry, target_collection_id, collection_na
         update_data["collection"]["id"] = target_collection_id
         updates.append(f"Moved to {collection_name} collection")
     
-    # Check title update (preserve existing, only add if missing)
+    # Check title update (preserve existing unless forced)
     new_title = entry.get("title", "")
     current_title = existing_link.get("name", "")
     if not current_title and new_title:
         update_data["name"] = new_title
         updates.append(f"Added missing title '{new_title}'")
     elif current_title and new_title and current_title != new_title:
-        print(f"⚠️  Title conflict for {existing_link.get('url', '')}: existing='{current_title}' vs new='{new_title}' (preserving existing)", file=sys.stderr)
+        if "title" in force_fields:
+            update_data["name"] = new_title
+            updates.append(f"Force updated title to '{new_title}'")
+        else:
+            print(f"⚠️  Title conflict for {existing_link.get('url', '')}: existing='{current_title}' vs new='{new_title}' (preserving existing, use --force title to override)", file=sys.stderr)
     
     # Check aggregator updates (merge approach)
     external_url, aggregator_url, aggregator_name = extract_aggregator_info(entry)
@@ -436,7 +443,7 @@ def create_or_update_link(entry):
         target_collection_id = COLLECTION_CACHE[collection_name]
         
         # Update all fields as needed
-        success, message = update_link_fields(existing_link, entry, target_collection_id, collection_name)
+        success, message = update_link_fields(existing_link, entry, target_collection_id, collection_name, args.force)
         if success:
             return link_id, f"Updated: {message}"
         else:
@@ -532,7 +539,14 @@ def main():
     argp = argparse.ArgumentParser(description="Import links to Linkwarden via API")
     argp.add_argument("--days", type=int, default=6, help="Only include entries from the last N days (by dateArrived or datePublished, -1 for all)")
     argp.add_argument("--dry-run", action="store_true", help="Count and preview entries without importing")
+    argp.add_argument("--force", action="append", choices=["title"], help="Force update specified fields even if they differ (can be used multiple times)")
     args = argp.parse_args()
+    
+    # Convert force list to set for easier checking
+    if args.force:
+        args.force = set(args.force)
+    else:
+        args.force = set()
     
     # Test API connection first (skip for dry-run)
     if not args.dry_run:
