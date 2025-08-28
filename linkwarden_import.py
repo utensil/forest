@@ -81,6 +81,11 @@ def format_link_detail(entry, link_id=None, action="", details="", archived=Fals
     # Extract and format discussion links with individual action emojis
     discussion_links = []
     if details:
+        # Handle collection updates
+        if "Moved to" in details and "collection" in details:
+            collection_name = details.split("Moved to ")[1].split(" collection")[0]
+            detail_parts.append(f"📁 {Colors.BLUE}→{Colors.END} {collection_name}")
+        
         # Handle newly added discussion links
         if "Added Lobsters link" in details:
             discussion_links.append(f"💬 {Colors.GREEN}✨{Colors.END} [Lobsters](https://lobste.rs/...)")
@@ -106,6 +111,16 @@ def format_link_detail(entry, link_id=None, action="", details="", archived=Fals
                 discussion_links.append(f"💬 {Colors.YELLOW}📋{Colors.END} [Reddit]({aggregator_url})")
             else:
                 discussion_links.append(f"💬 {Colors.YELLOW}📋{Colors.END} Available")
+        
+        # Handle collection status messages
+        elif "Already in" in details and "collection" in details:
+            collection_name = details.split("Already in ")[1].split(" collection")[0]
+            detail_parts.append(f"📁 {Colors.YELLOW}✓{Colors.END} {collection_name}")
+        
+        # Handle generic details that don't match specific patterns
+        elif details and not any(pattern in details for pattern in ["Added", "Aggregator", "Already in", "Moved to"]):
+            detail_parts.append(f"{Colors.CYAN}ℹ️{Colors.END} {details}")
+    
     
     # Add discussion links to detail parts
     detail_parts.extend(discussion_links)
