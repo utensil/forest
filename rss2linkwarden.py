@@ -147,17 +147,18 @@ def convert_csv_to_linkwarden(csv_file: str) -> None:
                 main_entry = create_main_entry(row)
                 if main_entry:
                     print(json.dumps(main_entry))
-                
-                # Extract and create reference links
-                note = row.get('note', '')
-                ref_links = extract_reference_links(note)
-                
-                for ref_url, ref_title, platform_tag in ref_links:
-                    ref_entry = create_reference_entry(
-                        ref_url, ref_title, platform_tag, row.get('url', '')
-                    )
-                    if ref_entry:
-                        print(json.dumps(ref_entry))
+                    
+                    # Extract and create reference links with same timestamp
+                    note = row.get('note', '')
+                    ref_links = extract_reference_links(note)
+                    source_timestamp = main_entry.get('datePublished', 0.0)
+                    
+                    for ref_url, ref_title, platform_tag in ref_links:
+                        ref_entry = create_reference_entry(
+                            ref_url, ref_title, platform_tag, row.get('url', ''), source_timestamp
+                        )
+                        if ref_entry:
+                            print(json.dumps(ref_entry))
                         
     except Exception as e:
         print(f"Error processing CSV: {e}", file=sys.stderr)
@@ -211,7 +212,7 @@ def create_main_entry(row: Dict[str, str]) -> Optional[Dict]:
     
     return entry
 
-def create_reference_entry(ref_url: str, ref_title: str, platform_tag: str, source_url: str) -> Optional[Dict]:
+def create_reference_entry(ref_url: str, ref_title: str, platform_tag: str, source_url: str, source_timestamp: float = 0.0) -> Optional[Dict]:
     """Create reference link entry"""
     if not ref_url:
         return None
@@ -227,8 +228,8 @@ def create_reference_entry(ref_url: str, ref_title: str, platform_tag: str, sour
         'textContent': '',
         'tags': platform_tag,
         'folder': 'references',
-        'datePublished': '',
-        'dateArrived': '',
+        'datePublished': source_timestamp,  # Use source timestamp
+        'dateArrived': source_timestamp,    # Use source timestamp
         'uniqueID': f"ref_{hash(ref_url) % 1000000}",
     }
     
