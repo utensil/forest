@@ -118,7 +118,7 @@ def format_link_detail(entry, link_id=None, action="", details="", archived=Fals
             detail_parts.append(f"📁 {Colors.YELLOW}✓{Colors.END} {collection_name}")
         
         # Handle generic details that don't match specific patterns
-        elif details and not any(pattern in details for pattern in ["Added", "Aggregator", "Already in", "Moved to"]):
+        elif details and not any(pattern in details for pattern in ["Added", "Aggregator", "Already in", "Moved to", "No updates needed"]):
             detail_parts.append(f"{Colors.CYAN}ℹ️{Colors.END} {details}")
     
     
