@@ -135,10 +135,13 @@ ARCHIVE_TIMEOUT_SECS = 30  # max seconds to wait for archive
 # Create urllib3 pool manager with SSL verification disabled for Caddy's internal TLS
 http = urllib3.PoolManager(cert_reqs='CERT_NONE')
 
-def get_or_create_rss_collection():
-    """Get RSS collection ID, creating it if it doesn't exist"""
+def get_or_create_collection(collection_name: str):
+    """Get collection ID by name, creating it if it doesn't exist"""
+    if not collection_name:
+        collection_name = "rss"  # Default fallback
+    
     try:
-        # First, try to find existing RSS collection
+        # First, try to find existing collection
         resp = http.request('GET', f"{API_BASE}/collections", 
                            headers=HEADERS, timeout=10)
         
@@ -146,16 +149,16 @@ def get_or_create_rss_collection():
             data = json.loads(resp.data.decode())
             collections = data.get("response", [])
             
-            # Look for existing RSS collection
+            # Look for existing collection by name
             for collection in collections:
-                if collection.get("name", "").lower() == "rss":
-                    return collection.get("id"), f"Found existing RSS collection (ID: {collection.get('id')})"
+                if collection.get("name", "").lower() == collection_name.lower():
+                    return collection.get("id"), f"Found existing {collection_name} collection (ID: {collection.get('id')})"
             
-            # RSS collection doesn't exist, create it
+            # Collection doesn't exist, create it
             create_data = {
-                "name": "rss",
-                "description": "RSS imported links",
-                "color": "#22c55e"  # Green color for RSS
+                "name": collection_name,
+                "description": f"{collection_name} imported links",
+                "color": "#22c55e"  # Green color
             }
             
             resp = http.request('POST', f"{API_BASE}/collections", 
@@ -166,16 +169,16 @@ def get_or_create_rss_collection():
             if resp.status == 200:
                 data = json.loads(resp.data.decode())
                 collection_id = data.get("response", {}).get("id")
-                return collection_id, f"Created new RSS collection (ID: {collection_id})"
+                return collection_id, f"Created new {collection_name} collection (ID: {collection_id})"
             else:
-                return None, f"Failed to create RSS collection: HTTP {resp.status}"
+                return None, f"Failed to create {collection_name} collection: HTTP {resp.status}"
         else:
             return None, f"Failed to fetch collections: HTTP {resp.status}"
     except Exception as e:
-        return None, f"Error managing RSS collection: {e}"
+        return None, f"Error managing {collection_name} collection: {e}"
 
-# Global variable for RSS collection ID (set dynamically)
-RSS_COLLECTION_ID = None
+# Global variable for collection cache
+COLLECTION_CACHE = {}
 
 def test_api_connection():
     """Test API connection and token validity"""
@@ -320,13 +323,28 @@ def create_or_update_link(entry):
         else:
             return link_id, "Exists: No new aggregator info to add"
     
-    # Link doesn't exist - create new one in RSS collection
+    # Get collection for this entry
+    collection_name = entry.get("folder", "rss")
+    if collection_name not in COLLECTION_CACHE:
+        collection_id, collection_msg = get_or_create_collection(collection_name)
+        if collection_id is None:
+            return None, f"Collection error: {collection_msg}"
+        COLLECTION_CACHE[collection_name] = collection_id
+        print(f"✓ {collection_msg}", file=sys.stderr)
+    
+    collection_id = COLLECTION_CACHE[collection_name]
+    
+    # Link doesn't exist - create new one in appropriate collection
     data = {
         "name": entry.get("title") or primary_url,
         "url": primary_url,
         "description": entry.get("content") or "",
-        "collection": {"id": RSS_COLLECTION_ID},  # API expects object format, not just ID
+        "collection": {"id": collection_id},  # API expects object format, not just ID
     }
+    
+    # Add textContent if available
+    if entry.get("textContent"):
+        data["textContent"] = entry.get("textContent")
     
     # Add aggregator info to description if available
     if aggregator_url and aggregator_name and aggregator_url != primary_url:
@@ -427,14 +445,6 @@ def main():
             print(f"API connection failed: {api_msg}", file=sys.stderr)
             sys.exit(1)
         print(f"✓ {api_msg}", file=sys.stderr)
-        
-        # Initialize RSS collection
-        global RSS_COLLECTION_ID
-        RSS_COLLECTION_ID, rss_msg = get_or_create_rss_collection()
-        if RSS_COLLECTION_ID is None:
-            print(f"RSS collection setup failed: {rss_msg}", file=sys.stderr)
-            sys.exit(1)
-        print(f"✓ {rss_msg}", file=sys.stderr)
     
     now = datetime.now(timezone.utc)
     cutoff_timestamp = None
