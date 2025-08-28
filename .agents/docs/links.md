@@ -44,10 +44,10 @@ def normalize_url(url):
 - Extract existing URLs from target files using regex patterns
 - Normalize both existing and new URLs for comparison
 - **Complement existing entries** rather than skip duplicates:
-  - Add missing tags, notes, highlights
-  - Append discussion links (HN, Lobsters, Reddit, etc.)
-  - Preserve **earliest timestamp** (publish time > starred time > received time)
-  - Merge additional metadata while keeping original structure
+  - **Timestamps**: Preserve earliest (publish time > received time > starred time)
+  - **Titles**: Preserve existing, warn if different from new source
+  - **Tags/Discussions/Notes/Related links/Quotes**: Deduplicate and merge (append unique items)
+  - **Enrichment failures**: Skip entry, retry later (idempotent design allows this)
 - Track enrichment operations in statistics
 
 ## Title Enhancement
