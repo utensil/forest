@@ -327,14 +327,33 @@ def update_link_fields(existing_link, entry, target_collection_id, collection_na
                                    timeout=10)
                 
                 if resp.status == 200:
+                    # Try to update timestamp after other updates
+                    timestamp = entry.get("datePublished")
+                    if timestamp:
+                        ts_success, ts_msg = update_link_timestamp(link_id, timestamp)
+                        if ts_success:
+                            updates.append(ts_msg)
+                    
                     return True, " + ".join(updates)
                 else:
                     return False, f"Update failed: HTTP {resp.status}"
             except Exception as e:
                 return False, f"Update error: {e}"
         else:
-            # Only warnings, no actual updates
+            # Only warnings, no actual updates - but try timestamp update
+            timestamp = entry.get("datePublished")
+            if timestamp:
+                ts_success, ts_msg = update_link_timestamp(link_id, timestamp)
+                if ts_success:
+                    return True, ts_msg
             return False, " + ".join(updates)
+    
+    # No updates needed, but try timestamp update
+    timestamp = entry.get("datePublished")
+    if timestamp:
+        ts_success, ts_msg = update_link_timestamp(link_id, timestamp)
+        if ts_success:
+            return True, ts_msg
     
     return False, "No updates needed"
 
@@ -348,19 +367,23 @@ def update_link_timestamp(link_id, timestamp):
         import datetime
         iso_date = datetime.datetime.fromtimestamp(float(timestamp), datetime.timezone.utc).isoformat()
         
-        # Try updating with importDate field
+        # Try updating with just the ID and importDate field
         update_data = {
             "id": link_id,
             "importDate": iso_date
         }
+        
+        print(f"DEBUG: Attempting timestamp update for link {link_id} with {iso_date}", file=sys.stderr)
         
         resp = http.request('PUT', f"{API_BASE}/links/{link_id}", 
                            headers=HEADERS, 
                            body=json.dumps(update_data).encode('utf-8'),
                            timeout=10)
         
+        print(f"DEBUG: Timestamp update response: {resp.status} {resp.data.decode()[:200]}", file=sys.stderr)
+        
         if resp.status == 200:
-            return True, f"Updated timestamp to {iso_date}"
+            return True, f"Updated timestamp to {iso_date[:10]}"
         else:
             return False, f"Timestamp update failed: HTTP {resp.status}"
     except Exception as e:
