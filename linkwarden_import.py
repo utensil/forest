@@ -354,14 +354,6 @@ def create_link_data(entry, collection_id):
     if entry.get("textContent"):
         data["textContent"] = entry.get("textContent")
     
-    # Add importDate from CSV timestamp
-    if entry.get("datePublished"):
-        # Convert Unix timestamp to ISO string
-        import datetime
-        timestamp = float(entry.get("datePublished"))
-        iso_date = datetime.datetime.fromtimestamp(timestamp, datetime.timezone.utc).isoformat()
-        data["importDate"] = iso_date
-    
     # Add aggregator info to description if available
     if aggregator_url and aggregator_name and aggregator_url != primary_url:
         if data["description"]:
