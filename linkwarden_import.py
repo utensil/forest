@@ -373,14 +373,10 @@ def update_link_timestamp(link_id, timestamp):
             "importDate": iso_date
         }
         
-        print(f"DEBUG: Attempting timestamp update for link {link_id} with {iso_date}", file=sys.stderr)
-        
         resp = http.request('PUT', f"{API_BASE}/links/{link_id}", 
                            headers=HEADERS, 
                            body=json.dumps(update_data).encode('utf-8'),
                            timeout=10)
-        
-        print(f"DEBUG: Timestamp update response: {resp.status} {resp.data.decode()[:200]}", file=sys.stderr)
         
         if resp.status == 200:
             return True, f"Updated timestamp to {iso_date[:10]}"
