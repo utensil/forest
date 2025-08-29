@@ -320,9 +320,14 @@ def process_rss_json(input_text, existing_urls=None, deduplicate=True, show_all_
                     entry_lines.append(f"  > {line.strip()}")
             entry_lines.append("")  # Empty line after quote
         
-        # Add other notes from content (non-URL parts, excluding "from" references)
+        # Add other notes from content (non-URL parts, excluding "from" references and textContent)
         content_without_urls = re.sub(r'https?://[^\s\)]+', '', content).strip()
         content_without_urls = re.sub(r'from\s*$', '', content_without_urls).strip()
+        
+        # Remove textContent from notes if it exists in content
+        if text_content and text_content.strip():
+            content_without_urls = content_without_urls.replace(text_content.strip(), '').strip()
+        
         if content_without_urls and len(content_without_urls) > 5:  # Ignore very short fragments
             # Split into bullet points on double newlines
             notes = content_without_urls.split('\n\n')
