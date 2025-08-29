@@ -338,7 +338,33 @@ def update_link_fields(existing_link, entry, target_collection_id, collection_na
     
     return False, "No updates needed"
 
-def create_link_data(entry, collection_id):
+def update_link_timestamp(link_id, timestamp):
+    """Try to update link timestamp after creation"""
+    if not timestamp:
+        return False, "No timestamp provided"
+    
+    try:
+        # Convert Unix timestamp to ISO string
+        import datetime
+        iso_date = datetime.datetime.fromtimestamp(float(timestamp), datetime.timezone.utc).isoformat()
+        
+        # Try updating with importDate field
+        update_data = {
+            "id": link_id,
+            "importDate": iso_date
+        }
+        
+        resp = http.request('PUT', f"{API_BASE}/links/{link_id}", 
+                           headers=HEADERS, 
+                           body=json.dumps(update_data).encode('utf-8'),
+                           timeout=10)
+        
+        if resp.status == 200:
+            return True, f"Updated timestamp to {iso_date}"
+        else:
+            return False, f"Timestamp update failed: HTTP {resp.status}"
+    except Exception as e:
+        return False, f"Timestamp update error: {e}"
     """Create link data structure for new links"""
     external_url, aggregator_url, aggregator_name = extract_aggregator_info(entry)
     primary_url = external_url or aggregator_url
@@ -483,6 +509,15 @@ def create_or_update_link(entry, force_fields=None):
             try:
                 response_data = json.loads(resp.data.decode())
                 link_id = response_data["response"]["id"]
+                
+                # Try to update timestamp after creation
+                timestamp = entry.get("datePublished")
+                if timestamp:
+                    success, msg = update_link_timestamp(link_id, timestamp)
+                    if success:
+                        return link_id, f"Created + {msg}"
+                    # If timestamp update fails, still return success for the creation
+                
                 return link_id, "Created"
             except (json.JSONDecodeError, KeyError) as e:
                 return None, f"Response parsing error: {e}"
