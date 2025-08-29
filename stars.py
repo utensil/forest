@@ -123,6 +123,202 @@ def format_url(url):
     return url
 
 
+def process_rss_json(input_text, existing_urls=None, deduplicate=True, show_all_sources=False, days_filter=7):
+    """Process JSON output from rss2linkwarden.py into Forester format"""
+    if existing_urls is None:
+        existing_urls = set()
+        
+    content_by_external_url = {}
+    date_groups = defaultdict(list)
+    debug_info = {
+        "total_entries": 0,
+        "entries_with_hn": 0,
+        "entries_with_lobsters": 0,
+        "entries_with_both": 0,
+        "skipped_duplicates": 0,
+    }
+
+    # Calculate cutoff date if days_filter is specified
+    cutoff_date = None
+    if days_filter > 0:
+        cutoff_date = datetime.now() - timedelta(days=days_filter)
+
+    for line in input_text.strip().split('\n'):
+        if not line.strip():
+            continue
+            
+        try:
+            entry = json.loads(line)
+            debug_info["total_entries"] += 1
+            
+            # Get timestamp and check date filter
+            timestamp = entry.get("datePublished", 0)
+            if timestamp:
+                entry_date = datetime.fromtimestamp(float(timestamp))
+                if cutoff_date and entry_date < cutoff_date:
+                    continue
+                date = entry_date.strftime("%Y-%m-%d")
+            else:
+                date = datetime.now().strftime("%Y-%m-%d")
+            
+            # Get primary URL and normalize
+            primary_url = entry.get("externalURL") or entry.get("url", "")
+            if not primary_url:
+                continue
+                
+            normalized_url = normalize_url(primary_url)
+            
+            # Skip if deduplicating and URL exists
+            if deduplicate and normalized_url in existing_urls:
+                debug_info["skipped_duplicates"] += 1
+                continue
+            
+            # Get title
+            title = entry.get("title", "")
+            if not title:
+                title = generate_title_from_url(primary_url)
+            else:
+                title = clean_title(title)
+            
+            # Process entry
+            if normalized_url not in content_by_external_url:
+                content_by_external_url[normalized_url] = {
+                    "timestamp": float(timestamp) if timestamp else 0,
+                    "date": date,
+                    "title": title,
+                    "primary_url": primary_url,
+                    "sources": {},
+                    "tags": entry.get("tags", ""),
+                    "content": entry.get("content", ""),
+                    "textContent": entry.get("textContent", ""),
+                    "folder": entry.get("folder", ""),
+                }
+            elif float(timestamp) > content_by_external_url[normalized_url]["timestamp"]:
+                # Update with newer timestamp
+                content_by_external_url[normalized_url].update({
+                    "timestamp": float(timestamp),
+                    "date": date,
+                    "title": title,
+                    "primary_url": primary_url,
+                })
+            
+            # Extract discussion sources from content
+            content = entry.get("content", "")
+            if "news.ycombinator.com" in content:
+                hn_match = re.search(r'https://news\.ycombinator\.com/item\?id=\d+', content)
+                if hn_match:
+                    content_by_external_url[normalized_url]["sources"]["HN"] = hn_match.group()
+                    debug_info["entries_with_hn"] += 1
+            
+            if "lobste.rs" in content:
+                lb_match = re.search(r'https://lobste\.rs/s/[^)\s]+', content)
+                if lb_match:
+                    content_by_external_url[normalized_url]["sources"]["lobste.rs"] = lb_match.group()
+                    debug_info["entries_with_lobsters"] += 1
+                    
+        except (json.JSONDecodeError, ValueError):
+            continue
+    
+    # Count entries with both sources
+    for content_data in content_by_external_url.values():
+        sources = content_data.get("sources", {})
+        if "lobste.rs" in sources and "HN" in sources:
+            debug_info["entries_with_both"] += 1
+    
+    # Format entries
+    for normalized_url, content_data in content_by_external_url.items():
+        date = content_data["date"]
+        title = content_data["title"]
+        primary_url = content_data["primary_url"]
+        sources = content_data.get("sources", {})
+        tags = content_data.get("tags", "")
+        content = content_data.get("content", "")
+        text_content = content_data.get("textContent", "")
+        
+        # Format main link with title
+        formatted_title_link = format_title_with_link(title, primary_url)
+        link_parts = [f"- {formatted_title_link}"]
+        
+        # Add discussion links
+        if "HN" in sources:
+            hn_url = format_url(sources["HN"])
+            link_parts.append(f"[On HN]({hn_url})")
+        if "lobste.rs" in sources:
+            lb_url = format_url(sources["lobste.rs"])
+            link_parts.append(f"[On lobste.rs]({lb_url})")
+        
+        # Add tags
+        if tags:
+            tag_list = [t.strip() for t in tags.replace("|", ",").split(",") if t.strip()]
+            if tag_list:
+                tag_str = " ".join(f"#{tag}" for tag in tag_list)
+                link_parts.append(tag_str)
+        
+        # Join main line
+        main_line = " ".join(link_parts)
+        
+        # Build full entry with notes and highlights
+        entry_lines = [main_line]
+        
+        # Add related URLs from content (extract URLs that aren't the main discussion links)
+        content_urls = re.findall(r'https?://[^\s\)]+', content)
+        related_urls = []
+        for url in content_urls:
+            if url != primary_url and url not in sources.values():
+                related_urls.append(url)
+        
+        for related_url in related_urls[:3]:  # Limit to 3 related URLs
+            entry_lines.append(f"  - {related_url}")
+        
+        # Add highlights/quotes from textContent
+        if text_content and text_content.strip():
+            entry_lines.append("")  # Empty line before quote
+            # Format as blockquote
+            for line in text_content.strip().split('\n'):
+                if line.strip():
+                    entry_lines.append(f"  > {line.strip()}")
+            entry_lines.append("")  # Empty line after quote
+        
+        # Add other notes from content (non-URL parts)
+        content_without_urls = re.sub(r'https?://[^\s\)]+', '', content).strip()
+        if content_without_urls and content_without_urls != "from " + primary_url:
+            # Split into bullet points on double newlines
+            notes = content_without_urls.split('\n\n')
+            for note in notes:
+                note = note.strip()
+                if note and not note.startswith('from '):
+                    entry_lines.append(f"  - {note}")
+        
+        # Join all lines for this entry
+        full_entry = '\n'.join(entry_lines)
+        date_groups[date].append(full_entry)
+    
+    # Generate debug comment
+    debug_comment = [
+        "\\comment{",
+        f"Total entries processed: {debug_info['total_entries']}",
+        f"Entries with HN links: {debug_info['entries_with_hn']}",
+        f"Entries with lobste.rs links: {debug_info['entries_with_lobsters']}",
+        f"Entries with both links: {debug_info['entries_with_both']}",
+        f"Skipped duplicates: {debug_info['skipped_duplicates']}",
+        "}",
+    ]
+    
+    # Generate output
+    output = []
+    output.extend(debug_comment)
+    output.append("")
+    
+    for date in sorted(date_groups.keys(), reverse=True):
+        if not date_groups[date]:
+            continue
+        output.append(f"\\subtree[{date}]{{\\mdnote{{{date}}}{{")
+        output.extend(sorted(date_groups[date]))
+        output.append("}}")
+        output.append("")
+    
+    return "\n".join(output)
+
 def process_stars(input_text, existing_urls=None, deduplicate=True, show_all_sources=False, days_filter=7):
     # Initialize set of existing URLs if provided
     if existing_urls is None:
@@ -346,6 +542,7 @@ def main():
     parser.add_argument('--tree-files', type=str, nargs='+', help='Paths to tree files to extract existing URLs from', default=['trees/uts-0018.tree', 'trees/uts-016E.tree'])
     parser.add_argument('--show-all-sources', action='store_true', help='Show all sources, not just when both lobste.rs and HN are present')
     parser.add_argument('--days', type=int, default=7, help='Show only entries from the last X days (default: 7, use -1 for all days)')
+    parser.add_argument('--rss-json', action='store_true', help='Process JSON output from rss2linkwarden.py instead of GitHub stars')
     args = parser.parse_args()
 
     try:
@@ -365,8 +562,11 @@ def main():
                 except Exception as e:
                     print(f"Warning: Could not read tree file {tree_file}: {e}", file=sys.stderr)
         
-        # Process and print
-        output = process_stars(input_text, existing_urls, not args.no_deduplicate, args.show_all_sources, args.days)
+        # Process based on input type
+        if args.rss_json:
+            output = process_rss_json(input_text, existing_urls, not args.no_deduplicate, args.show_all_sources, args.days)
+        else:
+            output = process_stars(input_text, existing_urls, not args.no_deduplicate, args.show_all_sources, args.days)
         print(output)
     
     except BrokenPipeError:
