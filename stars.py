@@ -173,48 +173,89 @@ def process_rss_json(input_text, existing_urls=None, deduplicate=True, show_all_
                 debug_info["skipped_duplicates"] += 1
                 continue
             
-            # Get title
+            # Get title and tags
             title = entry.get("title", "")
             if not title:
                 title = generate_title_from_url(primary_url)
             else:
                 title = clean_title(title)
             
-            # Process entry
-            if normalized_url not in content_by_external_url:
-                content_by_external_url[normalized_url] = {
-                    "timestamp": float(timestamp) if timestamp else 0,
-                    "date": date,
-                    "title": title,
-                    "primary_url": primary_url,
-                    "sources": {},
-                    "tags": entry.get("tags", ""),
-                    "content": entry.get("content", ""),
-                    "textContent": entry.get("textContent", ""),
-                    "folder": entry.get("folder", ""),
-                }
-            elif float(timestamp) > content_by_external_url[normalized_url]["timestamp"]:
-                # Update with newer timestamp
-                content_by_external_url[normalized_url].update({
-                    "timestamp": float(timestamp),
-                    "date": date,
-                    "title": title,
-                    "primary_url": primary_url,
-                })
-            
-            # Extract discussion sources from content
+            tags = entry.get("tags", "")
             content = entry.get("content", "")
-            if "news.ycombinator.com" in content:
-                hn_match = re.search(r'https://news\.ycombinator\.com/item\?id=\d+', content)
-                if hn_match:
-                    content_by_external_url[normalized_url]["sources"]["HN"] = hn_match.group()
-                    debug_info["entries_with_hn"] += 1
+            text_content = entry.get("textContent", "")
             
-            if "lobste.rs" in content:
-                lb_match = re.search(r'https://lobste\.rs/s/[^)\s]+', content)
-                if lb_match:
-                    content_by_external_url[normalized_url]["sources"]["lobste.rs"] = lb_match.group()
+            # Check if this is a discussion link (re/hn, re/lb, re/rd tags)
+            is_discussion = False
+            discussion_platform = None
+            source_url = None
+            
+            if tags and ("re/hn" in tags or "re/lb" in tags or "re/rd" in tags):
+                is_discussion = True
+                if "re/hn" in tags:
+                    discussion_platform = "HN"
+                elif "re/lb" in tags:
+                    discussion_platform = "lobste.rs"
+                elif "re/rd" in tags:
+                    discussion_platform = "Reddit"
+                
+                # Extract source URL from content
+                source_match = re.search(r'from (https?://[^\s]+)', content)
+                if source_match:
+                    source_url = source_match.group(1)
+            
+            if is_discussion and source_url:
+                # This is a discussion link - attach it to the source URL
+                source_normalized = normalize_url(source_url)
+                
+                # Find or create entry for source URL
+                if source_normalized not in content_by_external_url:
+                    # Create placeholder entry for source
+                    content_by_external_url[source_normalized] = {
+                        "timestamp": float(timestamp) if timestamp else 0,
+                        "date": date,
+                        "title": generate_title_from_url(source_url),
+                        "primary_url": source_url,
+                        "sources": {},
+                        "tags": "",
+                        "content": "",
+                        "textContent": "",
+                        "folder": "",
+                    }
+                
+                # Add discussion link to sources
+                content_by_external_url[source_normalized]["sources"][discussion_platform] = primary_url
+                if discussion_platform == "HN":
+                    debug_info["entries_with_hn"] += 1
+                elif discussion_platform == "lobste.rs":
                     debug_info["entries_with_lobsters"] += 1
+                    
+            else:
+                # This is a main content entry
+                if normalized_url not in content_by_external_url:
+                    content_by_external_url[normalized_url] = {
+                        "timestamp": float(timestamp) if timestamp else 0,
+                        "date": date,
+                        "title": title,
+                        "primary_url": primary_url,
+                        "sources": {},
+                        "tags": tags,
+                        "content": content,
+                        "textContent": text_content,
+                        "folder": entry.get("folder", ""),
+                    }
+                elif float(timestamp) > content_by_external_url[normalized_url]["timestamp"]:
+                    # Update with newer timestamp but preserve sources
+                    existing_sources = content_by_external_url[normalized_url].get("sources", {})
+                    content_by_external_url[normalized_url].update({
+                        "timestamp": float(timestamp),
+                        "date": date,
+                        "title": title,
+                        "primary_url": primary_url,
+                        "tags": tags,
+                        "content": content,
+                        "textContent": text_content,
+                    })
+                    content_by_external_url[normalized_url]["sources"] = existing_sources
                     
         except (json.JSONDecodeError, ValueError):
             continue
@@ -264,7 +305,7 @@ def process_rss_json(input_text, existing_urls=None, deduplicate=True, show_all_
         content_urls = re.findall(r'https?://[^\s\)]+', content)
         related_urls = []
         for url in content_urls:
-            if url != primary_url and url not in sources.values():
+            if url != primary_url and url not in sources.values() and not url.startswith('from '):
                 related_urls.append(url)
         
         for related_url in related_urls[:3]:  # Limit to 3 related URLs
@@ -279,14 +320,15 @@ def process_rss_json(input_text, existing_urls=None, deduplicate=True, show_all_
                     entry_lines.append(f"  > {line.strip()}")
             entry_lines.append("")  # Empty line after quote
         
-        # Add other notes from content (non-URL parts)
+        # Add other notes from content (non-URL parts, excluding "from" references)
         content_without_urls = re.sub(r'https?://[^\s\)]+', '', content).strip()
-        if content_without_urls and content_without_urls != "from " + primary_url:
+        content_without_urls = re.sub(r'from\s*$', '', content_without_urls).strip()
+        if content_without_urls and len(content_without_urls) > 5:  # Ignore very short fragments
             # Split into bullet points on double newlines
             notes = content_without_urls.split('\n\n')
             for note in notes:
                 note = note.strip()
-                if note and not note.startswith('from '):
+                if note and not note.startswith('from') and len(note) > 5:
                     entry_lines.append(f"  - {note}")
         
         # Join all lines for this entry
