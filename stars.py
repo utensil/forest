@@ -123,6 +123,89 @@ def format_url(url):
     return url
 
 
+def parse_content_notes_highlights(content):
+    """
+    Parse content field into notes and highlights following these rules:
+    
+    Notes:
+    - Continuous lines (no empty lines between) that are NOT URLs, markdown URLs, or highlights
+    - Multiple notes separated by empty lines
+    - Example: "line\nline2\n\nline3" = 2 notes
+    
+    Highlights:
+    - Begin with "> Highlight:" 
+    - Continue with "> " prefix on subsequent lines
+    - Each new "> Highlight:" starts a new highlight
+    - Example: "> Highlight:text\n> more text\n> Highlight:new highlight" = 2 highlights
+    
+    URLs:
+    - Standalone URLs (https://...) or markdown URLs ([title](url))
+    - Treated separately from notes and highlights
+    """
+    if not content:
+        return [], [], []
+    
+    lines = content.split('\n')
+    notes = []
+    highlights = []
+    urls = []
+    
+    i = 0
+    while i < len(lines):
+        line = lines[i].strip()
+        
+        # Skip empty lines at top level
+        if not line:
+            i += 1
+            continue
+        
+        # Check if this is a URL (standalone or markdown)
+        if (line.startswith('http://') or line.startswith('https://') or 
+            (line.startswith('[') and '](http' in line)):
+            urls.append(line)
+            i += 1
+            continue
+        
+        # Check if this is a highlight
+        if line.startswith('> Highlight:'):
+            highlight_lines = [line[12:].strip()]  # Remove "> Highlight:" prefix
+            i += 1
+            
+            # Collect continuation lines with "> " prefix
+            while i < len(lines) and lines[i].strip().startswith('> ') and not lines[i].strip().startswith('> Highlight:'):
+                highlight_lines.append(lines[i].strip()[2:])  # Remove "> " prefix
+                i += 1
+            
+            highlights.append('\n'.join(highlight_lines))
+            continue
+        
+        # This must be a note - collect continuous non-empty lines
+        note_lines = [line]
+        i += 1
+        
+        # Collect continuation lines until empty line or special content
+        while i < len(lines):
+            next_line = lines[i].strip()
+            
+            # Stop at empty line (note boundary)
+            if not next_line:
+                break
+            
+            # Stop at URL or highlight
+            if (next_line.startswith('http://') or next_line.startswith('https://') or
+                (next_line.startswith('[') and '](http' in next_line) or
+                next_line.startswith('> Highlight:') or next_line.startswith('> ')):
+                break
+            
+            note_lines.append(next_line)
+            i += 1
+        
+        # Add the note if it has content
+        if note_lines and any(line.strip() for line in note_lines):
+            notes.append('\n'.join(note_lines))
+    
+    return notes, highlights, urls
+
 def process_rss_json(input_text, existing_urls=None, deduplicate=True, show_all_sources=False, days_filter=7):
     """Process JSON output from rss2linkwarden.py into Forester format"""
     if existing_urls is None:
@@ -301,40 +384,37 @@ def process_rss_json(input_text, existing_urls=None, deduplicate=True, show_all_
         # Build full entry with notes and highlights
         entry_lines = [main_line]
         
-        # Add related URLs from content (extract URLs that aren't the main discussion links)
-        content_urls = re.findall(r'https?://[^\s\)]+', content)
+        # Parse content into notes, highlights, and URLs
+        notes, highlights, content_urls = parse_content_notes_highlights(content)
+        
+        # Add related URLs (excluding primary URL and discussion sources)
         related_urls = []
         for url in content_urls:
-            if url != primary_url and url not in sources.values() and not url.startswith('from '):
+            # Extract URL from markdown format if needed
+            if url.startswith('[') and '](http' in url:
+                url_match = re.search(r'\]\((https?://[^)]+)\)', url)
+                if url_match:
+                    url = url_match.group(1)
+            
+            if url != primary_url and url not in sources.values():
                 related_urls.append(url)
         
         for related_url in related_urls[:3]:  # Limit to 3 related URLs
             entry_lines.append(f"  - {related_url}")
         
-        # Add highlights/quotes from textContent
-        if text_content and text_content.strip():
-            entry_lines.append("")  # Empty line before quote
-            # Format as blockquote
-            for line in text_content.strip().split('\n'):
-                if line.strip():
-                    entry_lines.append(f"  > {line.strip()}")
-            entry_lines.append("")  # Empty line after quote
+        # Add highlights as blockquotes with empty lines
+        if highlights:
+            entry_lines.append("")  # Empty line before highlights
+            for highlight in highlights:
+                for line in highlight.split('\n'):
+                    if line.strip():
+                        entry_lines.append(f"  > {line.strip()}")
+            entry_lines.append("")  # Empty line after highlights
         
-        # Add other notes from content (non-URL parts, excluding "from" references and textContent)
-        content_without_urls = re.sub(r'https?://[^\s\)]+', '', content).strip()
-        content_without_urls = re.sub(r'from\s*$', '', content_without_urls).strip()
-        
-        # Remove textContent from notes if it exists in content
-        if text_content and text_content.strip():
-            content_without_urls = content_without_urls.replace(text_content.strip(), '').strip()
-        
-        if content_without_urls and len(content_without_urls) > 5:  # Ignore very short fragments
-            # Split into bullet points on double newlines
-            notes = content_without_urls.split('\n\n')
-            for note in notes:
-                note = note.strip()
-                if note and not note.startswith('from') and len(note) > 5:
-                    entry_lines.append(f"  - {note}")
+        # Add notes as bullet points
+        for note in notes:
+            if note.strip() and len(note.strip()) > 5:  # Ignore very short fragments
+                entry_lines.append(f"  - {note.strip()}")
         
         # Join all lines for this entry
         full_entry = '\n'.join(entry_lines)
