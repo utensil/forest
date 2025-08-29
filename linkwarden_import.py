@@ -365,6 +365,38 @@ def update_link_timestamp(link_id, timestamp):
             return False, f"Timestamp update failed: HTTP {resp.status}"
     except Exception as e:
         return False, f"Timestamp update error: {e}"
+
+def create_link_data(entry, collection_id):
+    """Create link data structure for new links"""
+    external_url, aggregator_url, aggregator_name = extract_aggregator_info(entry)
+    primary_url = external_url or aggregator_url
+    
+    data = {
+        "name": entry.get("title") or primary_url,
+        "url": primary_url,
+        "description": entry.get("content") or "",
+        "collection": {"id": collection_id},
+    }
+    
+    # Add textContent if available
+    if entry.get("textContent"):
+        data["textContent"] = entry.get("textContent")
+    
+    # Add aggregator info to description if available
+    if aggregator_url and aggregator_name and aggregator_url != primary_url:
+        if data["description"]:
+            data["description"] += f"\n\n**Discussion:** [{aggregator_name}]({aggregator_url})"
+        else:
+            data["description"] = f"**Discussion:** [{aggregator_name}]({aggregator_url})"
+    
+    # Add tags
+    tags = entry.get("tags")
+    if tags:
+        if isinstance(tags, str):
+            tags = [t.strip() for t in tags.split("|") if t.strip()]
+        data["tags"] = [{"name": t} for t in tags if t]
+    
+    return data
     """Create link data structure for new links"""
     external_url, aggregator_url, aggregator_name = extract_aggregator_info(entry)
     primary_url = external_url or aggregator_url
