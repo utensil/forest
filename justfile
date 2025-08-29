@@ -176,6 +176,11 @@ rss-stars FOR="forest":
         sqlite3 DB.sqlite3 '.mode json' 'select a.*, s.* from articles a join statuses s on a.articleID = s.articleID where s.starred = 1 order by s.dateArrived' | jq -r '.[]|{title, url, externalURL, datePublished, dateArrived, uniqueID}'
     fi
 
+
+rd2lw RAINDROP_FILE *PARAMS="--days 1":
+    #!/usr/bin/env bash
+    ./rss2linkwarden.py {{RAINDROP_FILE}} | ./linkwarden_import.py {{PARAMS}}
+
 rss2linkwarden *PARAMS="--days 7":
     #!/usr/bin/env bash
     # Export starred RSS links and convert to Linkwarden/Wallabag import format
