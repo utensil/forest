@@ -412,6 +412,27 @@ push PROJ="forest" BRANCH="main":
 @jjid REVSET="@":
     jj log -r {{REVSET}} -T 'change_id.short()' --no-graph
 
+# Follow https://radicle.xyz/guides/user for rad and git
+# then follow https://radicle.xyz/2025/08/14/jujutsu-with-radicle for jj
+# forest is published to https://app.radicle.xyz/nodes/iris.radicle.xyz/rad%3Az3mXN7u6s38jqe5F1W3f5xwEzQsT3
+#
+prep-rad:
+    #!/usr/bin/env bash
+    set -e
+    which rad || (curl -sSf https://radicle.xyz/install | sh -s -- --no-modify-path) # -s -- --prefix=~/.local)
+    export PATH="$HOME/.radicle:$PATH"
+    rad auth
+    rad self
+    rad node start
+    rad node status
+
+init-rad REPO="forest" DEFAULT_BRANCH="main":
+    #!/usr/bin/env bash
+    cd ~/projects/{{REPO}}
+    git config --local --add init.defaultBranch main
+    rad init
+    rad .
+
 ## Languages
 
 # https://blog.vbang.dk/2025/06/29/tools-i-love-mise/
