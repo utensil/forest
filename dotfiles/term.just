@@ -415,6 +415,7 @@ push PROJ="forest" BRANCH="main":
 # Follow https://radicle.xyz/guides/user for rad and git
 # then follow https://radicle.xyz/2025/08/14/jujutsu-with-radicle for jj
 # forest is published to https://app.radicle.xyz/nodes/iris.radicle.xyz/rad%3Az3mXN7u6s38jqe5F1W3f5xwEzQsT3
+# and I am https://app.radicle.xyz/nodes/iris.radicle.xyz/users/did:key:z6Mkoi6L46Tr54sMQmctod6Q43VjYyLwBh8VwJvftMZwdiHt
 #
 prep-rad:
     #!/usr/bin/env bash
@@ -426,12 +427,32 @@ prep-rad:
     rad node start
     rad node status
 
+# push with git push rad main
+#
 init-rad REPO="forest" DEFAULT_BRANCH="main":
     #!/usr/bin/env bash
     cd ~/projects/{{REPO}}
     git config --local --add init.defaultBranch main
     rad init
     rad .
+
+rad-web:
+    #!/usr/bin/env bash
+    mkdir -p ~/projects
+    cd ~/projects
+    DIR=radicle-explorer
+    if [ ! -d $DIR/.git ]; then
+        git clone https://seed.radicle.xyz/z4V1sjrXqjvFdnCUbxPFqd5p4DtH5.git $DIR
+    else
+        (cd $DIR && git pull) || true
+    fi
+    cd $DIR
+    npm install
+    # export DEFAULT_HTTPD_PORT=5079
+    npm start &
+    pid=$!
+    (sleep 1 && echo "Visit http://localhost:3000/nodes/iris.radicle.xyz/users/did:key:z6Mkoi6L46Tr54sMQmctod6Q43VjYyLwBh8VwJvftMZwdiHt")
+    wait $pid
 
 ## Languages
 
