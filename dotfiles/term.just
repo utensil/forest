@@ -405,6 +405,7 @@ push PROJ="forest" BRANCH="main":
     jj psb {{BRANCH}}
     jj psb {{BRANCH}} --remote tangled
     jj psb {{BRANCH}} --remote berg
+    which rad && git push rad main
 
 # the idea is to use this for id of garden notes
 # i.e. the id of a random note is the short jj change id when it was first added
