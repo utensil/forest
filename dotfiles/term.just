@@ -422,10 +422,20 @@ prep-rad:
     set -e
     which rad || (curl -sSf https://radicle.xyz/install | sh -s -- --no-modify-path) # -s -- --prefix=~/.local)
     export PATH="$HOME/.radicle:$PATH"
+    which rad-tui || cargo install --force --locked --git https://seed.radicle.xyz/z39mP9rQAaGmERfUMPULfPUi473tY.git
     rad auth
     rad self
     rad node start
     rad node status
+
+[macos]
+prep-rad-httpd:
+    #!/usr/bin/env bash
+    which radicle-httpd || (cd /tmp
+    TARGET=0.20.0-aarch64-apple-darwin
+    rip radicle-httpd-$TARGET.tar.xz
+    curl -O -L https://files.radicle.xyz/releases/radicle-httpd/latest/radicle-httpd-$TARGET.tar.xz
+    tar -xvJf radicle-httpd-$TARGET.tar.xz --strip-components=1 -C ~/.radicle/)
 
 # push with git push rad main
 #
@@ -438,6 +448,7 @@ init-rad REPO="forest" DEFAULT_BRANCH="main":
 
 rad-web:
     #!/usr/bin/env bash
+    just prep-rad-httpd
     mkdir -p ~/projects
     cd ~/projects
     DIR=radicle-explorer
@@ -448,11 +459,14 @@ rad-web:
     fi
     cd $DIR
     npm install
-    # export DEFAULT_HTTPD_PORT=5079
+    export DEFAULT_HTTPD_PORT=8080
     npm start &
-    pid=$!
-    (sleep 1 && echo "Visit http://localhost:3000/nodes/iris.radicle.xyz/users/did:key:z6Mkoi6L46Tr54sMQmctod6Q43VjYyLwBh8VwJvftMZwdiHt")
-    wait $pid
+    pid_ui=$!
+    radicle-httpd &
+    pid_api=$!
+    (sleep 1 && echo -e "Visit http://localhost:3000/nodes/iris.radicle.xyz/users/did:key:z6Mkoi6L46Tr54sMQmctod6Q43VjYyLwBh8VwJvftMZwdiHt\n or http://localhost:3000/nodes/127.0.0.1:$DEFAULT_HTTPD_PORT/users/did:key:z6Mkoi6L46Tr54sMQmctod6Q43VjYyLwBh8VwJvftMZwdiHt")
+    trap 'kill $pid_ui $pid_api' INT
+    wait
 
 ## Languages
 
