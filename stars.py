@@ -418,38 +418,97 @@ def process_rss_json(input_text, existing_urls=None, deduplicate=True, show_all_
             date_groups[date] = []
         date_groups[date].append(entry_data)
     
-    # Process each date group to organize by tags
+    # Process each date group to organize by shared tag sets
     for date in date_groups:
         entries = date_groups[date]
         
-        # Group entries by primary tag
-        tag_groups = defaultdict(list)
-        for entry in entries:
-            primary_tag = entry['tags'][0] if entry['tags'] else 'untagged'
-            tag_groups[primary_tag].append(entry)
+        # Find optimal grouping by shared tag sets
+        grouped_entries = []
+        remaining_entries = entries[:]
+        
+        while remaining_entries:
+            # Find the best grouping for the first remaining entry
+            current_entry = remaining_entries[0]
+            current_tags = set(current_entry['tags'])
+            
+            if not current_tags:
+                # Handle untagged entry
+                grouped_entries.append({
+                    'shared_tags': [],
+                    'entries': [current_entry]
+                })
+                remaining_entries.remove(current_entry)
+                continue
+            
+            # Find all entries that share tags with current entry
+            best_group = None
+            best_shared_count = 0
+            
+            # Try all possible tag combinations from current entry
+            for tag_count in range(len(current_tags), 0, -1):
+                from itertools import combinations
+                for tag_combo in combinations(sorted(current_tags), tag_count):
+                    tag_set = set(tag_combo)
+                    
+                    # Find all entries that have exactly these tags (as subset)
+                    matching_entries = []
+                    for entry in remaining_entries:
+                        entry_tags = set(entry['tags'])
+                        if tag_set.issubset(entry_tags):
+                            matching_entries.append(entry)
+                    
+                    # Prioritize by shared tag count, then by order
+                    if len(matching_entries) > 1 and len(tag_set) > best_shared_count:
+                        best_group = {
+                            'shared_tags': list(tag_combo),
+                            'entries': matching_entries
+                        }
+                        best_shared_count = len(tag_set)
+            
+            # Use best group or single entry
+            if best_group:
+                grouped_entries.append(best_group)
+                for entry in best_group['entries']:
+                    if entry in remaining_entries:
+                        remaining_entries.remove(entry)
+            else:
+                # No shared tags found, add as single entry
+                grouped_entries.append({
+                    'shared_tags': current_entry['tags'],
+                    'entries': [current_entry]
+                })
+                remaining_entries.remove(current_entry)
         
         # Format output for this date
         formatted_entries = []
         
-        for tag in sorted(tag_groups.keys()):
-            tag_entries = tag_groups[tag]
+        for group in grouped_entries:
+            shared_tags = group['shared_tags']
+            entries = group['entries']
             
-            if tag == 'untagged':
-                # No tag grouping for untagged entries
-                for entry in tag_entries:
+            if not shared_tags:
+                # Untagged entries
+                for entry in entries:
                     title_line = f"- {entry['title_link']}"
-                    if entry['tags']:
-                        tag_str = " ".join(f"#{t}" for t in entry['tags'])
-                        title_line += f" {tag_str}"
                     formatted_entries.append(title_line)
                     formatted_entries.extend(entry['content'])
+            elif len(entries) == 1:
+                # Single entry with tags
+                entry = entries[0]
+                title_line = f"- {entry['title_link']}"
+                if entry['tags']:
+                    tag_str = " ".join(f"#{t}" for t in entry['tags'])
+                    title_line += f" {tag_str}"
+                formatted_entries.append(title_line)
+                formatted_entries.extend(entry['content'])
             else:
-                # Group under primary tag
-                formatted_entries.append(f"- #{tag}")
+                # Multiple entries sharing tags
+                shared_tag_str = " ".join(f"#{t}" for t in shared_tags)
+                formatted_entries.append(f"- {shared_tag_str}")
                 
-                for entry in tag_entries:
-                    # Show remaining tags (excluding primary tag)
-                    remaining_tags = entry['tags'][1:] if len(entry['tags']) > 1 else []
+                for entry in entries:
+                    # Show remaining tags (excluding shared tags)
+                    remaining_tags = [t for t in entry['tags'] if t not in shared_tags]
                     title_line = f"  - {entry['title_link']}"
                     if remaining_tags:
                         tag_str = " ".join(f"#{t}" for t in remaining_tags)
