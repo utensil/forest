@@ -55,7 +55,7 @@ def get_primary_url(entry):
 def normalize_url(url):
     """
     Normalize a URL for comparison without altering its content identifiers.
-    Only normalizes scheme, hostname case, and trailing slashes.
+    Only normalizes scheme, hostname case, trailing slashes, and removes fragments.
     """
     if not url:
         return None
@@ -71,7 +71,7 @@ def normalize_url(url):
             or "/",  # Normalize empty paths to / and remove trailing /
             params=parsed.params,
             query=parsed.query,  # Preserve query string as is
-            fragment=parsed.fragment,  # Preserve fragment as is
+            fragment="",  # Remove fragment for deduplication (e.g. #atom-everything)
         )
 
         return urllib.parse.urlunparse(normalized)
