@@ -421,12 +421,17 @@ def process_rss_json(input_text, existing_urls=None, deduplicate=True, show_all_
     # Process each date group to organize by shared tag sets
     for date in date_groups:
         entries = date_groups[date]
+        print(f"DEBUG: Processing date {date} with {len(entries)} entries", file=sys.stderr)
         
         # Find optimal grouping by evaluating all possible shared tag combinations
         grouped_entries = []
         remaining_entries = entries[:]
+        iteration = 0
         
         while remaining_entries:
+            iteration += 1
+            print(f"DEBUG: Date {date}, iteration {iteration}, remaining entries: {len(remaining_entries)}", file=sys.stderr)
+            
             if len(remaining_entries) == 1:
                 # Last entry, add it alone
                 entry = remaining_entries[0]
@@ -446,10 +451,18 @@ def process_rss_json(input_text, existing_urls=None, deduplicate=True, show_all_
             for entry in remaining_entries:
                 all_tags.update(entry['tags'])
             
+            print(f"DEBUG: Date {date}, iteration {iteration}, all_tags count: {len(all_tags)}", file=sys.stderr)
+            
             from itertools import combinations
             # Try tag combinations from largest to smallest
             for tag_count in range(len(all_tags), 0, -1):
+                print(f"DEBUG: Date {date}, iteration {iteration}, trying tag_count: {tag_count}", file=sys.stderr)
+                combo_count = 0
                 for tag_combo in combinations(sorted(all_tags), tag_count):
+                    combo_count += 1
+                    if combo_count % 1000 == 0:
+                        print(f"DEBUG: Date {date}, iteration {iteration}, tag_count {tag_count}, combo {combo_count}", file=sys.stderr)
+                    
                     tag_set = set(tag_combo)
                     
                     # Find all entries that have these tags as subset
@@ -470,20 +483,26 @@ def process_rss_json(input_text, existing_urls=None, deduplicate=True, show_all_
                             }
                             best_shared_count = len(tag_set)
                             best_group_size = len(matching_entries)
+                
+                print(f"DEBUG: Date {date}, iteration {iteration}, tag_count {tag_count} completed, combos: {combo_count}", file=sys.stderr)
             
             if best_group:
                 # Use the best group found
+                print(f"DEBUG: Date {date}, iteration {iteration}, found best group with {len(best_group['entries'])} entries, shared tags: {best_group['shared_tags']}", file=sys.stderr)
                 grouped_entries.append(best_group)
                 for entry in best_group['entries']:
                     remaining_entries.remove(entry)
             else:
                 # No grouping possible, add first entry alone
                 entry = remaining_entries[0]
+                print(f"DEBUG: Date {date}, iteration {iteration}, no grouping found, adding single entry", file=sys.stderr)
                 grouped_entries.append({
                     'shared_tags': entry['tags'],
                     'entries': [entry]
                 })
                 remaining_entries.remove(entry)
+        
+        print(f"DEBUG: Date {date} processing completed with {len(grouped_entries)} groups", file=sys.stderr)
         
         # Format output for this date
         formatted_entries = []
