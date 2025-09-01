@@ -349,7 +349,9 @@ def process_rss_json(input_text, existing_urls=None, deduplicate=True, show_all_
         if "lobste.rs" in sources and "HN" in sources:
             debug_info["entries_with_both"] += 1
     
-    # Format entries
+    # Group entries by tags and format them
+    tag_groups = defaultdict(list)
+    
     for normalized_url, content_data in content_by_external_url.items():
         date = content_data["date"]
         title = content_data["title"]
@@ -359,30 +361,24 @@ def process_rss_json(input_text, existing_urls=None, deduplicate=True, show_all_
         content = content_data.get("content", "")
         text_content = content_data.get("textContent", "")
         
-        # Format main link with title and tags only
-        formatted_title_link = format_title_with_link(title, primary_url)
-        link_parts = [f"- {formatted_title_link}"]
-        
-        # Add tags
+        # Parse tags
+        tag_list = []
         if tags:
             tag_list = [t.strip() for t in tags.replace("|", ",").split(",") if t.strip()]
-            if tag_list:
-                tag_str = " ".join(f"#{tag}" for tag in tag_list)
-                link_parts.append(tag_str)
         
-        # Join main line (title + tags only)
-        main_line = " ".join(link_parts)
+        # Format main link with title only (no tags on main line)
+        formatted_title_link = format_title_with_link(title, primary_url)
         
-        # Build full entry with discussion links, related URLs, notes and highlights
-        entry_lines = [main_line]
+        # Build entry content
+        entry_lines = []
         
         # Add discussion links as bullet points
         if "HN" in sources:
             hn_url = format_url(sources["HN"])
-            entry_lines.append(f"  - [On HN]({hn_url})")
+            entry_lines.append(f"    - [On HN]({hn_url})")
         if "lobste.rs" in sources:
             lb_url = format_url(sources["lobste.rs"])
-            entry_lines.append(f"  - [On lobste.rs]({lb_url})")
+            entry_lines.append(f"    - [On lobste.rs]({lb_url})")
         
         # Parse content into notes, highlights, and URLs
         notes, highlights, content_urls = parse_content_notes_highlights(content)
@@ -400,7 +396,15 @@ def process_rss_json(input_text, existing_urls=None, deduplicate=True, show_all_
                 related_urls.append(url)
         
         for related_url in related_urls[:3]:  # Limit to 3 related URLs
-            entry_lines.append(f"  - {related_url}")
+            entry_lines.append(f"    - {related_url}")
+        
+        # Add notes as separate bullet points (each line becomes its own bullet)
+        for note in notes:
+            if note.strip() and len(note.strip()) > 5:  # Ignore very short fragments
+                note_lines = note.split('\n')
+                for line in note_lines:
+                    if line.strip():
+                        entry_lines.append(f"    - {line.strip()}")
         
         # Add highlights as blockquotes with empty lines
         if highlights:
@@ -410,20 +414,65 @@ def process_rss_json(input_text, existing_urls=None, deduplicate=True, show_all_
                 highlight_lines = highlight.split('\n')
                 for line in highlight_lines:
                     if line.strip():
-                        entry_lines.append(f"  > {line.strip()}")
+                        entry_lines.append(f"    > {line.strip()}")
             entry_lines.append("")  # Empty line after highlights
         
-        # Add notes as separate bullet points (each line becomes its own bullet)
-        for note in notes:
-            if note.strip() and len(note.strip()) > 5:  # Ignore very short fragments
-                note_lines = note.split('\n')
-                for line in note_lines:
-                    if line.strip():
-                        entry_lines.append(f"  - {line.strip()}")
+        # Create entry data
+        entry_data = {
+            'title_link': formatted_title_link,
+            'content_lines': entry_lines,
+            'remaining_tags': [tag for tag in tag_list if tag != tag_list[0]] if tag_list else [],
+            'date': date
+        }
         
-        # Join all lines for this entry
-        full_entry = '\n'.join(entry_lines)
-        date_groups[date].append(full_entry)
+        # Group by primary tag (first tag) or 'untagged'
+        primary_tag = tag_list[0] if tag_list else 'untagged'
+        tag_groups[primary_tag].append(entry_data)
+    
+    # Generate output grouped by tags
+    for date in sorted(set(data['date'] for data in content_by_external_url.values()), reverse=True):
+        date_entries = []
+        
+        # Group entries for this date by tags
+        date_tag_groups = defaultdict(list)
+        for tag, entries in tag_groups.items():
+            date_entries_for_tag = [entry for entry in entries if entry['date'] == date]
+            if date_entries_for_tag:
+                date_tag_groups[tag] = date_entries_for_tag
+        
+        if not date_tag_groups:
+            continue
+        
+        # Format each tag group
+        for tag in sorted(date_tag_groups.keys()):
+            entries = date_tag_groups[tag]
+            
+            if tag == 'untagged':
+                # No tag grouping for untagged entries
+                for entry in entries:
+                    title_with_remaining_tags = entry['title_link']
+                    if entry['remaining_tags']:
+                        remaining_tag_str = " ".join(f"#{t}" for t in entry['remaining_tags'])
+                        title_with_remaining_tags += f" {remaining_tag_str}"
+                    
+                    date_entries.append(f"- {title_with_remaining_tags}")
+                    date_entries.extend(entry['content_lines'])
+            else:
+                # Group under tag
+                date_entries.append(f"- #{tag}")
+                
+                for entry in entries:
+                    title_with_remaining_tags = entry['title_link']
+                    if entry['remaining_tags']:
+                        remaining_tag_str = " ".join(f"#{t}" for t in entry['remaining_tags'])
+                        title_with_remaining_tags += f" {remaining_tag_str}"
+                    
+                    date_entries.append(f"  - {title_with_remaining_tags}")
+                    date_entries.extend(entry['content_lines'])
+        
+        # Add to date groups
+        if date_entries:
+            date_groups[date] = date_entries
     
     # Generate debug comment
     debug_comment = [
@@ -445,7 +494,7 @@ def process_rss_json(input_text, existing_urls=None, deduplicate=True, show_all_
         if not date_groups[date]:
             continue
         output.append(f"\\subtree[{date}]{{\\mdnote{{{date}}}{{")
-        output.extend(sorted(date_groups[date]))
+        output.extend(date_groups[date])
         output.append("}}")
         output.append("")
     
