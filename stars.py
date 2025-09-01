@@ -410,9 +410,13 @@ def process_rss_json(input_text, existing_urls=None, deduplicate=True, show_all_
         if highlights:
             entry_content.append("")
             for highlight in highlights:
-                for line in highlight.split('\n'):
+                highlight_lines = highlight.split('\n')
+                for i, line in enumerate(highlight_lines):
                     if line.strip():
                         entry_content.append(f"        > {line.strip()}")
+                        # Add empty line after each highlight line except the last one
+                        if i < len(highlight_lines) - 1 and highlight_lines[i + 1].strip():
+                            entry_content.append("")
             entry_content.append("")
         
         # Store entry data
