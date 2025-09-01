@@ -406,15 +406,23 @@ def process_rss_json(input_text, existing_urls=None, deduplicate=True, show_all_
         if highlights:
             entry_lines.append("")  # Empty line before highlights
             for highlight in highlights:
-                for line in highlight.split('\n'):
+                # Split highlight into lines and format each as blockquote
+                highlight_lines = highlight.split('\n')
+                for line in highlight_lines:
                     if line.strip():
                         entry_lines.append(f"  > {line.strip()}")
             entry_lines.append("")  # Empty line after highlights
         
-        # Add notes as bullet points
+        # Add notes as bullet points, preserving line breaks within each note
         for note in notes:
             if note.strip() and len(note.strip()) > 5:  # Ignore very short fragments
-                entry_lines.append(f"  - {note.strip()}")
+                note_lines = note.split('\n')
+                # First line starts with bullet point
+                entry_lines.append(f"  - {note_lines[0].strip()}")
+                # Subsequent lines are indented to align with bullet content
+                for line in note_lines[1:]:
+                    if line.strip():
+                        entry_lines.append(f"    {line.strip()}")
         
         # Join all lines for this entry
         full_entry = '\n'.join(entry_lines)
