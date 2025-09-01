@@ -110,9 +110,17 @@ def needs_verb_wrapping(text):
 
 
 def format_title_with_link(title, url):
-    """Format a title with its link, handling special characters properly"""
+    """Format a title with its link, handling special characters and source prefixes"""
+    # Clean URL by removing hashtag fragments (like #atom-everything)
+    clean_url = url.split('#')[0] if '#' in url else url
+    
+    # Add source prefix for simonwillison.net
+    if 'simonwillison.net' in url:
+        if not title.startswith('Simon Willison | '):
+            title = f"Simon Willison | {title}"
+    
     formatted_title = f"\\verb>>>|{title}>>>" if needs_verb_wrapping(title) else title
-    formatted_url = format_url(url)
+    formatted_url = format_url(clean_url)
     return f"[{formatted_title}]({formatted_url})"
 
 
@@ -387,7 +395,9 @@ def process_rss_json(input_text, existing_urls=None, deduplicate=True, show_all_
                 if url_match:
                     url = url_match.group(1)
             if url != primary_url and url not in sources.values():
-                entry_content.append(f"    - {url}")
+                # Clean hashtag fragments from related URLs
+                clean_url = url.split('#')[0] if '#' in url else url
+                entry_content.append(f"    - {clean_url}")
         
         # Add notes
         for note in notes:
