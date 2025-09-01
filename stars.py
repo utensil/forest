@@ -380,10 +380,10 @@ def process_rss_json(input_text, existing_urls=None, deduplicate=True, show_all_
         # Add discussion links
         if "HN" in sources:
             hn_url = format_url(sources["HN"])
-            entry_content.append(f"    - [On HN]({hn_url})")
+            entry_content.append(f"        - [On HN]({hn_url})")
         if "lobste.rs" in sources:
             lb_url = format_url(sources["lobste.rs"])
-            entry_content.append(f"    - [On lobste.rs]({lb_url})")
+            entry_content.append(f"        - [On lobste.rs]({lb_url})")
         
         # Parse content into notes, highlights, and URLs
         notes, highlights, content_urls = parse_content_notes_highlights(content)
@@ -397,14 +397,14 @@ def process_rss_json(input_text, existing_urls=None, deduplicate=True, show_all_
             if url != primary_url and url not in sources.values():
                 # Clean hashtag fragments from related URLs
                 clean_url = url.split('#')[0] if '#' in url else url
-                entry_content.append(f"    - {clean_url}")
+                entry_content.append(f"        - {clean_url}")
         
         # Add notes
         for note in notes:
             if note.strip() and len(note.strip()) > 5:
                 for line in note.split('\n'):
                     if line.strip():
-                        entry_content.append(f"    - {line.strip()}")
+                        entry_content.append(f"        - {line.strip()}")
         
         # Add highlights
         if highlights:
@@ -412,7 +412,7 @@ def process_rss_json(input_text, existing_urls=None, deduplicate=True, show_all_
             for highlight in highlights:
                 for line in highlight.split('\n'):
                     if line.strip():
-                        entry_content.append(f"    > {line.strip()}")
+                        entry_content.append(f"        > {line.strip()}")
             entry_content.append("")
         
         # Store entry data
@@ -522,7 +522,7 @@ def process_rss_json(input_text, existing_urls=None, deduplicate=True, show_all_
                 for entry in entries:
                     # Show remaining tags (excluding shared tags)
                     remaining_tags = [t for t in entry['tags'] if t not in shared_tags]
-                    title_line = f"  - {entry['title_link']}"
+                    title_line = f"    - {entry['title_link']}"
                     if remaining_tags:
                         tag_str = " ".join(f"#{t}" for t in remaining_tags)
                         title_line += f" {tag_str}"
