@@ -183,7 +183,7 @@ rd2lw RAINDROP_FILE *PARAMS="--days 1":
 
 rss2linkwarden *PARAMS="--days 7":
     #!/usr/bin/env bash
-    # Export starred RSS links and convert to Linkwarden/Wallabag import format
+    # Export starred RSS links and calls Linkwarden API to import
     just rss-stars "linkwarden" | ./linkwarden_import.py {{PARAMS}}
 
 rss2wallabag *PARAMS="--days 7":
