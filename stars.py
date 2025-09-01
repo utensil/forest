@@ -359,17 +359,9 @@ def process_rss_json(input_text, existing_urls=None, deduplicate=True, show_all_
         content = content_data.get("content", "")
         text_content = content_data.get("textContent", "")
         
-        # Format main link with title
+        # Format main link with title and tags only
         formatted_title_link = format_title_with_link(title, primary_url)
         link_parts = [f"- {formatted_title_link}"]
-        
-        # Add discussion links
-        if "HN" in sources:
-            hn_url = format_url(sources["HN"])
-            link_parts.append(f"[On HN]({hn_url})")
-        if "lobste.rs" in sources:
-            lb_url = format_url(sources["lobste.rs"])
-            link_parts.append(f"[On lobste.rs]({lb_url})")
         
         # Add tags
         if tags:
@@ -378,11 +370,19 @@ def process_rss_json(input_text, existing_urls=None, deduplicate=True, show_all_
                 tag_str = " ".join(f"#{tag}" for tag in tag_list)
                 link_parts.append(tag_str)
         
-        # Join main line
+        # Join main line (title + tags only)
         main_line = " ".join(link_parts)
         
-        # Build full entry with notes and highlights
+        # Build full entry with discussion links, related URLs, notes and highlights
         entry_lines = [main_line]
+        
+        # Add discussion links as bullet points
+        if "HN" in sources:
+            hn_url = format_url(sources["HN"])
+            entry_lines.append(f"  - [On HN]({hn_url})")
+        if "lobste.rs" in sources:
+            lb_url = format_url(sources["lobste.rs"])
+            entry_lines.append(f"  - [On lobste.rs]({lb_url})")
         
         # Parse content into notes, highlights, and URLs
         notes, highlights, content_urls = parse_content_notes_highlights(content)
