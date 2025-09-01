@@ -222,7 +222,7 @@ def create_reference_entry(ref_url: str, ref_title: str, platform_tag: str, sour
     if platform_tag == "re/hn":
         platform_prefix = "HN"
     elif platform_tag == "re/lb":
-        platform_prefix = "Lobsters"
+        platform_prefix = "Lobste.rs"
     elif platform_tag == "re/rd":
         platform_prefix = "Reddit"
     
