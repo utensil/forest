@@ -422,62 +422,68 @@ def process_rss_json(input_text, existing_urls=None, deduplicate=True, show_all_
     for date in date_groups:
         entries = date_groups[date]
         
-        # Find optimal grouping by shared tag sets
+        # Find optimal grouping by evaluating all possible shared tag combinations
         grouped_entries = []
         remaining_entries = entries[:]
         
         while remaining_entries:
-            # Find the best grouping for the first remaining entry
-            current_entry = remaining_entries[0]
-            current_tags = set(current_entry['tags'])
-            
-            if not current_tags:
-                # Handle untagged entry
+            if len(remaining_entries) == 1:
+                # Last entry, add it alone
+                entry = remaining_entries[0]
                 grouped_entries.append({
-                    'shared_tags': [],
-                    'entries': [current_entry]
+                    'shared_tags': entry['tags'],
+                    'entries': [entry]
                 })
-                remaining_entries.remove(current_entry)
-                continue
+                break
             
-            # Find all entries that share tags with current entry
+            # Find the best possible grouping among all remaining entries
             best_group = None
             best_shared_count = 0
+            best_group_size = 0
             
-            # Try all possible tag combinations from current entry
-            for tag_count in range(len(current_tags), 0, -1):
-                from itertools import combinations
-                for tag_combo in combinations(sorted(current_tags), tag_count):
+            # Try all possible tag combinations from all entries
+            all_tags = set()
+            for entry in remaining_entries:
+                all_tags.update(entry['tags'])
+            
+            from itertools import combinations
+            # Try tag combinations from largest to smallest
+            for tag_count in range(len(all_tags), 0, -1):
+                for tag_combo in combinations(sorted(all_tags), tag_count):
                     tag_set = set(tag_combo)
                     
-                    # Find all entries that have exactly these tags (as subset)
+                    # Find all entries that have these tags as subset
                     matching_entries = []
                     for entry in remaining_entries:
                         entry_tags = set(entry['tags'])
                         if tag_set.issubset(entry_tags):
                             matching_entries.append(entry)
                     
-                    # Prioritize by shared tag count, then by order
-                    if len(matching_entries) > 1 and len(tag_set) > best_shared_count:
-                        best_group = {
-                            'shared_tags': list(tag_combo),
-                            'entries': matching_entries
-                        }
-                        best_shared_count = len(tag_set)
+                    # We want groups with at least 2 entries
+                    if len(matching_entries) >= 2:
+                        # Prioritize by shared tag count, then by group size
+                        if (len(tag_set) > best_shared_count or 
+                            (len(tag_set) == best_shared_count and len(matching_entries) > best_group_size)):
+                            best_group = {
+                                'shared_tags': list(tag_combo),
+                                'entries': matching_entries
+                            }
+                            best_shared_count = len(tag_set)
+                            best_group_size = len(matching_entries)
             
-            # Use best group or single entry
             if best_group:
+                # Use the best group found
                 grouped_entries.append(best_group)
                 for entry in best_group['entries']:
-                    if entry in remaining_entries:
-                        remaining_entries.remove(entry)
+                    remaining_entries.remove(entry)
             else:
-                # No shared tags found, add as single entry
+                # No grouping possible, add first entry alone
+                entry = remaining_entries[0]
                 grouped_entries.append({
-                    'shared_tags': current_entry['tags'],
-                    'entries': [current_entry]
+                    'shared_tags': entry['tags'],
+                    'entries': [entry]
                 })
-                remaining_entries.remove(current_entry)
+                remaining_entries.remove(entry)
         
         # Format output for this date
         formatted_entries = []
