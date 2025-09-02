@@ -457,6 +457,15 @@ init-rad REPO="forest" DEFAULT_BRANCH="main":
     rad init
     rad .
 
+rad-seed:
+    # forest
+    rad seed rad:z3mXN7u6s38jqe5F1W3f5xwEzQsT3
+    # web
+    rad seed rad:z4V1sjrXqjvFdnCUbxPFqd5p4DtH5
+    # heartwood
+    rad seed rad:z3gqcJUoA1n9HaHKufZs5FCSGazv5
+    rad seed
+
 rad-web:
     #!/usr/bin/env bash
     just prep-rad-httpd
