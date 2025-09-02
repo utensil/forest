@@ -464,7 +464,8 @@ rad-seed:
     rad seed rad:z4V1sjrXqjvFdnCUbxPFqd5p4DtH5
     # heartwood
     rad seed rad:z3gqcJUoA1n9HaHKufZs5FCSGazv5
-    rad seed
+    echo "Add the following to web.pinned.repositories of $HOME/.radicle/config.json except the trailing comma, then run: rad node stop; rad node start"
+    rad seed | grep -F 'rad:'|awk '{ print "\"" $2 "\"," }'
 
 rad-web:
     #!/usr/bin/env bash
