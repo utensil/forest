@@ -470,10 +470,10 @@ rad-web:
     fi
     cd $DIR
     npm install
-    export DEFAULT_HTTPD_PORT=8080
+    export DEFAULT_HTTPD_PORT=8776
     npm start &
     pid_ui=$!
-    radicle-httpd &
+    radicle-httpd --listen 0.0.0.0:$DEFAULT_HTTPD_PORT &
     pid_api=$!
     (sleep 1 && echo -e "Visit http://localhost:3000/nodes/iris.radicle.xyz/users/did:key:z6Mkoi6L46Tr54sMQmctod6Q43VjYyLwBh8VwJvftMZwdiHt\n or http://localhost:3000/nodes/127.0.0.1:$DEFAULT_HTTPD_PORT/users/did:key:z6Mkoi6L46Tr54sMQmctod6Q43VjYyLwBh8VwJvftMZwdiHt")
     trap 'kill $pid_ui $pid_api' INT
