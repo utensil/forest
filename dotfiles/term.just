@@ -421,8 +421,13 @@ push PROJ="forest" BRANCH="main":
 prep-rad:
     #!/usr/bin/env bash
     set -e
-    which rad || (curl -sSf https://radicle.xyz/install | sh -s -- --no-modify-path) # -s -- --prefix=~/.local)
-    export PATH="$HOME/.radicle:$PATH"
+    export PATH="$HOME/.radicle/bin:$PATH"
+    # which rad || (curl -sSf https://radicle.xyz/install | sh -s -- --no-modify-path) # -s -- --prefix=~/.local)
+    which rad || (
+        cargo install --force --locked --root ~/.radicle \
+        --git https://seed.radicle.xyz/z3gqcJUoA1n9HaHKufZs5FCSGazv5.git \
+        radicle-cli radicle-node radicle-remote-helper
+    )
     which rad-tui || cargo install --force --locked --git https://seed.radicle.xyz/z39mP9rQAaGmERfUMPULfPUi473tY.git
     rad auth
     rad self
@@ -432,11 +437,16 @@ prep-rad:
 [macos]
 prep-rad-httpd:
     #!/usr/bin/env bash
-    which radicle-httpd || (cd /tmp
-    TARGET=0.20.0-aarch64-apple-darwin
-    rip radicle-httpd-$TARGET.tar.xz
-    curl -O -L https://files.radicle.xyz/releases/radicle-httpd/latest/radicle-httpd-$TARGET.tar.xz
-    tar -xvJf radicle-httpd-$TARGET.tar.xz --strip-components=1 -C ~/.radicle/)
+    # which radicle-httpd || (cd /tmp
+    # TARGET=0.20.0-aarch64-apple-darwin
+    # rip radicle-httpd-$TARGET.tar.xz
+    # curl -O -L https://files.radicle.xyz/releases/radicle-httpd/latest/radicle-httpd-$TARGET.tar.xz
+    # tar -xvJf radicle-httpd-$TARGET.tar.xz --strip-components=1 -C ~/.radicle/)
+    which radicle-httpd || (
+        cargo install --force --locked --root ~/.radicle \
+        --git https://seed.radicle.xyz/z4V1sjrXqjvFdnCUbxPFqd5p4DtH5.git \
+        radicle-httpd
+    )
 
 # push with git push rad main
 #
