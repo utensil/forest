@@ -418,6 +418,20 @@ push PROJ="forest" BRANCH="main":
 # forest is published to https://app.radicle.xyz/nodes/iris.radicle.xyz/rad%3Az3mXN7u6s38jqe5F1W3f5xwEzQsT3
 # and I am https://app.radicle.xyz/nodes/iris.radicle.xyz/users/did:key:z6Mkoi6L46Tr54sMQmctod6Q43VjYyLwBh8VwJvftMZwdiHt
 #
+# see https://radicle.zulipchat.com/#narrow/channel/369873-support/topic/How.20to.20push.20on.20a.20new.20device
+# for how to push on new device
+#
+# with a new node identity:
+#
+# ```
+# git remote add rad rad://REPO_RAD_ID/DEVICE_B_NODE_ID
+# rad seed rad:REPO_RAD_ID
+# git push rad main
+# rad sync
+# ```
+#
+# recover the delegate node identity: backup and recover keys to ~/.radicle/keys
+#
 prep-rad:
     #!/usr/bin/env bash
     set -e
