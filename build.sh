@@ -7,14 +7,17 @@ export TEXINPUTS=.:$PROJECT_ROOT/tex/:
 echo "TEXINPUTS=$TEXINPUTS"
 
 function show_result {
+    ret_code=$?
     # if return code is zero, then echo "Done" else echo "Failed"
-    if [ $? -ne 0 ]; then
+    if [ $ret_code -ne 0 ]; then
         # echo a red "Failed"
         echo -e "\033[0;31mFailed\033[0m"
     else
         # echo a gree "Done"
         echo -e "\033[0;32mDone\033[0m"
     fi
+
+    return $ret_code
 }
 
 function show_lize_result {
@@ -159,16 +162,22 @@ function build {
     echo "⭐ Rebuilding forest"
     just forest
     show_result
-    # Check if index.xml was generated
-    if [ ! -f "output/index.xml" ]; then
-        echo -e "\033[0;31mError: index.xml not found in output directory. Forest build likely failed.\033[0m"
+
+    if [ $? -ne 0 ]; then
+        echo -e "\033[0;31mError: Forest build failed.\033[0m"
         exit 1
     fi
+
+    # Check if index.xml was generated
+    # if [ ! -f "output/index.xml" ]; then
+    #     echo -e "\033[0;31mError: index.xml not found in output directory. Forest build likely failed.\033[0m"
+    #     exit 1
+    # fi
     # echo "⭐ Copying assets"
     copy_extra_assets
     # if the env var UTS_DEV is not set
     # if [ -z "$UTS_DEV" ]; then
-        convert_xml_files true
+    convert_xml_files true
     # fi
     show_result
     #   build_ssr

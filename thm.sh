@@ -4,7 +4,7 @@ git rm theme -f
 rip theme
 rip .git/modules/theme
 # git submodule add -f -b fix-data-taxon --name theme https://git.sr.ht/~utensil/forester-base-theme theme
-# git submodule add -f --name theme https://git.sr.ht/~jonsterling/forester-base-theme theme
-git submodule add -f --name theme https://github.com/utensil/forester-base-theme theme
+git submodule add -f --name theme https://git.sr.ht/~jonsterling/forester-base-theme theme
+# git submodule add -f --name theme https://github.com/utensil/forester-base-theme theme
 git submodule update --init --recursive
 git submodule update --remote --merge

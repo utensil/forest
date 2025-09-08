@@ -4,8 +4,10 @@
 \title{technical notes (draft)}
 
 \scope{
-  \query{
-    \open\query
-    \isect{\tag{notes}}{\tag{tech}}{\tag{draft}}
-  }
+    \query\datalog{
+        ?X -:
+            {\rel/has-tag ?X '{tech}}
+            {\rel/has-tag ?X '{notes}}
+            {\rel/has-tag ?X '{draft}}
+    }
 }

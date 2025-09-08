@@ -16,34 +16,84 @@
 }
 
 \scope{
-  \open\query
-  \open\rel
-  \def\query/root{
-    \union{\tag{root}}{\tag{notes}}{\tag{exp}}{\tag{post}}
-  }
-  \def\query/root/transcluded{
-    \union-fam-rel{\query/root}{\paths}{\outgoing}{\transclusion}
-  }
-  \def\query/index{
-    \tag{interest}
-  }
-  \def\query/index/linked{
-    \union-fam-rel{\query/index}{\paths}{\outgoing}{\links}
-  }
-  \def\query/has/home{
-    \union{\query/root}{\query/root/transcluded}{\query/index/linked}
-  }
-  \def\query/normal{
-    \compl{
-      \union{\query/root}{\tag{draft}}{\tag{macro}}{\tag{exp}}{\taxon{person}}{\taxon{reference}}{\taxon{eq}}{\tag{mwe}}{\tag{post}}
-    }
-  }
-  \def\query/lost{
-    \isect{\query/normal}{\compl{\query/has/home}}
-  }
-  \query{
-    \open\query
-    \lost
-  }
+%   \open\query
+%   \open\rel
+%   \def\query/root{
+%     \union{\tag{root}}{\tag{notes}}{\tag{exp}}{\tag{post}}
+%   }
+    \def\rel/is-root{utensil.query.is-root}
+    \execute\datalog{\rel/is-root ?X -: {\rel/has-tag ?X '{root}}}
+    \execute\datalog{\rel/is-root ?X -: {\rel/has-tag ?X '{notes}}}
+    \execute\datalog{\rel/is-root ?X -: {\rel/has-tag ?X '{exp}}}
+    \execute\datalog{\rel/is-root ?X -: {\rel/has-tag ?X '{post}}}
+
+    % \rel/transcludes/transitive-closure
+    % \rel/in-bundle-closure
+
+    % \query\datalog{
+    %     ?X -: {\rel/is-root ?X}
+    % }
+
+%   \def\query/root/transcluded{
+%     \union-fam-rel{\query/root}{\paths}{\outgoing}{\transclusion}
+%   }
+
+    \def\rel/is-index{utensil.query.ref.is-index}
+    \execute\datalog{\rel/is-index ?X -: {\rel/has-tag ?X '{interest}}}
+
+    \def\rel/root/transcluded{utensil.query.root.transcluded}
+
+    \execute\datalog{\rel/root/transcluded ?X -: {\rel/is-root ?Y}{\rel/transcludes/reflexive-transitive-closure ?Y ?X}}
+
+    \def\rel/index/links-to{utensil.query.index.links-to}
+
+    \execute\datalog{\rel/index/links-to ?X -: {\rel/is-index ?Y}{\rel/links-to/reflexive-transitive-closure ?Y ?X}}
+
+%   \def\query/index{
+%     \tag{interest}
+%   }
+%   \def\query/index/linked{
+%     \union-fam-rel{\query/index}{\paths}{\outgoing}{\links}
+%   }
+%   \def\query/has/home{
+%     \union{\query/root}{\query/root/transcluded}{\query/index/linked}
+%   }
+%   \def\query/normal{
+%     \compl{
+%       \union{\query/root}{\tag{draft}}{\tag{macro}}{\tag{exp}}{\taxon{person}}{\taxon{reference}}{\taxon{eq}}{\tag{mwe}}{\tag{post}}
+%     }
+%   }
+
+    \def\rel/is-special{utensil.query.is-special}
+
+    \execute\datalog{ \rel/is-special ?X -: {\rel/has-tag ?X '{draft}} }
+    \execute\datalog{ \rel/is-special ?X -: {\rel/has-tag ?X '{macro}} }
+    \execute\datalog{ \rel/is-special ?X -: {\rel/has-tag ?X '{exp}} }
+    \execute\datalog{ \rel/is-special ?X -: {\rel/has-taxon ?X '{person}} }
+    \execute\datalog{ \rel/is-special ?X -: {\rel/has-taxon ?X '{reference}} }
+    \execute\datalog{ \rel/is-special ?X -: {\rel/has-taxon ?X '{eq}} }
+    \execute\datalog{ \rel/is-special ?X -: {\rel/has-tag ?X '{mwe}} }
+    \execute\datalog{ \rel/is-special ?X -: {\rel/has-tag ?X '{post}} }
+
+    %\def\rel/is-normal{utensil.query.is-normal}
+    %\execute\datalog{ \rel/is-normal ?X -: {\rel/is-node ?X} # {\rel/is-special ?X} }
+
+    \def\rel/is-found{utensil.query.is-found}
+
+    \execute\datalog{ \rel/is-found ?X -: {\rel/root/transcluded ?X} }
+    \execute\datalog{ \rel/is-found ?X -: {\rel/is-special ?X} }
+    \execute\datalog{ \rel/is-found ?X -: {\rel/index/links-to ?X} }
+
+    \query\datalog{ ?X -: {\rel/is-node ?X } # {\rel/is-found ?X} }
+
+    % \query\datalog{ ?X -: {\rel/is-index ?X} }
+
+%   \def\query/lost{
+%     \isect{\query/normal}{\compl{\query/has/home}}
+%   }
+%   \query{
+%     \open\query
+%     \lost
+%   }
 }
 

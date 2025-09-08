@@ -20,10 +20,20 @@
   % \put\transclude/numbered{true}
   % \put\transclude/metadata{true}
   % \put\transclude/expanded{false}
-  \query{
-      \open\query
-      \isect{\tag{draft}}{\compl{\union{\tag{tt}}{\tag{ag}}{\tag{clifford}}{\tag{tech}}}}
-  }
+    \def\rel/has-known-topics{utensil.query.known-topics}
+    \execute\datalog{\rel/has-known-topics ?x -: {\rel/has-tag ?x '{tt}}}
+    \execute\datalog{\rel/has-known-topics ?x -: {\rel/has-tag ?x '{ag}}}
+    \execute\datalog{\rel/has-known-topics ?x -: {\rel/has-tag ?x '{clifford}}}
+    \execute\datalog{\rel/has-known-topics ?x -: {\rel/has-tag ?x '{tech}}}
+    \execute\datalog{\rel/has-known-topics ?x -: {\rel/has-tag ?x '{lm}}}
+    \execute\datalog{\rel/has-known-topics ?x -: {\rel/has-tag ?x '{hopf}}}
+    \execute\datalog{\rel/has-known-topics ?x -: {\rel/has-tag ?x '{group}}}
+
+    \query\datalog{
+        ?X -:
+            {\rel/has-tag ?X '{draft}}
+            # {\rel/has-known-topics ?X}
+    }
 }
 
 }

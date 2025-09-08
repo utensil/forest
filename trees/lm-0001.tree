@@ -18,14 +18,19 @@ This is a placeholder root note, for now, see [[lm-0006]].
 \title{drafts for [[lm-0001]]}
 
 \scope{
-  % \put\transclude/toc{true}
-  % \put\transclude/numbered{true}
-  % \put\transclude/metadata{true}
-  % \put\transclude/expanded{true}
-  \query{
-      \open\query
-      \isect{\tag{draft}}{\tag{lm}}
-  }
+    \put\transclude/toc{true}
+    \put\transclude/numbered{true}
+    \put\transclude/metadata{true}
+    \put\transclude/expanded{true}
+
+    \query\datalog{
+     ?X -:
+         {\rel/has-tag ?X '{draft}}
+         {\rel/has-tag ?X '{lm}}
+         # {\rel/has-tag ?X '{math}}
+         {\rel/has-tag ?X '{notes}}
+
+     }
 }
 
 \todolist

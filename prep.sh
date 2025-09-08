@@ -39,5 +39,9 @@ if ! which just &> /dev/null; then
   curl --proto '=https' --tlsv1.2 -sSf https://just.systems/install.sh | bash -s -- --to /usr/local/bin
 fi
 
+# required by
+# Opam package conf-libffi.2.0.0 depends on the following system package that can no longer be found: libffi
+brew install libffi
+
 echo "✅ dependencies installed: mactex, forester, pandoc, bun, just"
 # echo "💡 To initialize just aliases: source alias.sh"

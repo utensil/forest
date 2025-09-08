@@ -11,7 +11,8 @@
 
 % cox1997ideals gathmann2013commutative
 
-\note{test tikz drawing: from sites collecting TikZ examples}{
+% \note{test tikz drawing: from sites collecting TikZ examples}{
+\note{from sites collecting TikZ examples}{
 
 \block{pgfplots.net}{
 
@@ -52,7 +53,7 @@
   \addplot3+ [
     mark options = {color=blue},
     mark         = *
-  ] 
+  ]
   coordinates {({\Point*sin(0.28*pi*deg(\Point))},
     {\Point*cos(0.28*pi*deg(\Point)}, {\Point})};
   \addplot3+ [
@@ -61,7 +62,7 @@
     samples y = 0,
     mark      = none,
     dashed,
-  ]  
+  ]
   ( {\Point*sin(0.28*pi*deg(\Point))}, {\Point*cos(0.28*pi*deg(\Point)}, {x} );
   \addplot3[
     mark=none,
@@ -76,7 +77,7 @@
       mark= at position 0.99 with {\arrow{latex}}
     },
     postaction=decorate
-  ] 
+  ]
   (axis cs:0,10,0) arc[start angle=80,end angle=14] (axis cs:14,0,0);
   \node at (axis cs:20,0,30) {$P$};
   \node at (axis cs:24,0,7) {$z$};
@@ -181,17 +182,17 @@
   \coordinate (R) at (\ang:\d);  % intersection with new axis
   \path[rotate around={\ang:(R)}]
     (R) --++ (\angi:{\ri} and {\ys*\ri}) coordinate(Ri); % small mass m_i
-  
+
   % BODY
   \draw (M) --++ (\anga-180:1.5*\L) node[above left] {$I_\text{cm}$}; % axis below
   \draw (R) --++ (\anga-180:1.1*\L) node[above=0,right=0] {$I$}; % axis below
   \body
-  
+
   % CENTER OF MASS
   \draw[dashed,rotate=\ang] % rotation ellipse through CM
     (45:{\d} and {\ys*\d}) arc(45:-55:{\d} and {\ys*\d});
   \draw[CM] (M) circle(0.09) node[above=0,left] {CM}; % center of mass point
-  
+
   % SMALL MASS m_i
   \draw[dashed,rotate=\ang] % rotation ellipse through R
     (55:{\ricm} and {\ys*\ricm}) arc(55:-60:{\ricm} and {\ys*\ricm});
@@ -201,7 +202,7 @@
     (Ri)++({\angicm-90}:0.04) --++ ({\angicm-90}:{0.6} and {\ys*0.6}) % velocity mass m_i
     node[pos=0.8,below right=-0,scale=0.9] {$\vb{v}_{i,\text{cm}}$};
   \draw[rvec] (M)++({145+\angicm}:0.06) -- (Ri) node[pos=0.4,above right=-0] {$\vb{r}_{i,\text{cm}}$};
-  
+
   % AXES
   \fill[red!80!black] (R) circle(0.02);
   \draw (M)++(\anga:0.05) --++ (\anga:\A); % axis above
@@ -210,7 +211,7 @@
   \node[mydarkgreen,right=0] at (W3) {$\omega$};
   \draw[<->] (\anga:0.65*\A) --++ (\ang:\d) % distance/radius R
     node[pos=0.5,above] {\contour{white}{$d$}};
-  
+
 \end{tikzpicture}
 >>>
 
@@ -232,7 +233,7 @@
 % 3D AXIS with spherical coordinates, dA
 \tdplotsetmaincoords{60}{103}
 \begin{tikzpicture}[scale=1.0,tdplot_main_coords]
-  
+
   % VARIABLE
   \def\rvec{5.0}
   \def\thetavec{35}
@@ -241,25 +242,25 @@
   \def\dphi{16}
   \def\sphere#1#2#3{plot[domain=#1]({\rvec*sin(#2)*cos(#3)},{\rvec*sin(#2)*sin(#3)},{\rvec*cos(#2)})}
   \contourlength{0.8pt}
-  
+
   % AXES
   \coordinate (O) at (0,0,0);
   \draw[thick,->] (0,0,0) -- (1.16*\rvec,0,0) node[left=0,below]{$x$};
   \draw[thick,->] (0,0,0) -- (0,1.1*\rvec,0) node[below=0,right=0]{$y$};
   \draw[thick,->] (0,0,0) -- (0,0,1.1*\rvec) node[above]{$z$};
-  
+
   % COORDINATES
   \tdplotsetcoord{P}{\rvec}{\thetavec}{\phivec}
   \tdplotsetcoord{PB}{\rvec}{\thetavec+\dtheta}{\phivec}
   \tdplotsetcoord{PR}{\rvec}{\thetavec}{\phivec+\dphi}
   \tdplotsetcoord{PBR}{\rvec}{\thetavec+\dtheta}{\phivec+\dphi}
-  
+
   % CONE
   \draw[veccol!20,very thin] (O)  -- (PBR);
   \draw[veccol!20,very thin] (O)  -- (PR);
   \draw[->,veccol] (O)  -- (P) node[left,pos=0.8] {$\vb{r}$};
   \draw[veccol,very thin] (O)  -- (PB);
-  
+
   % PROJECTIONS
   \draw[proj] %\thetavec+\dtheta
     plot[domain=0:90]({\rvec*sin(\x)*cos(\phivec)},{\rvec*sin(\x)*sin(\phivec)},{\rvec*cos(\x)}) coordinate (BL);
@@ -275,7 +276,7 @@
   %\draw[proj,projcol!15,dashed] (PR) -- (PRxy);
   %\draw[proj,projcol!15,dashed] (PB) -- (PBxy);
   %\draw[proj,projcol!15,dashed] (PBR) -- (PBRxy);
-  
+
   % AREA
   \draw[area]
     plot[domain=0:.99*\dphi]({\rvec*sin(\thetavec)*cos(\phivec+\x)},{\rvec*sin(\thetavec)*sin(\phivec+\x)},{\rvec*cos(\thetavec)}) --
@@ -283,7 +284,7 @@
     plot[domain=.99*\dphi:0]({\rvec*sin(\thetavec+\dtheta)*cos(\phivec+\x)},{\rvec*sin(\thetavec+\dtheta)*sin(\phivec+\x)},{\rvec*cos(\thetavec+\dtheta)}) --
     plot[domain=.99*\dtheta:0]({\rvec*sin(\thetavec+\x)*cos(\phivec)},{\rvec*sin(\thetavec+\x)*sin(\phivec)},{\rvec*cos(\thetavec+\x)}) --
     cycle;
-    
+
   % MEASURES
   %\node[right=3,below right=-2] at (PB) {$r\sin\theta\dd{\phi}$};
   %\node[right=5,below right=-2] at (PR) {$r\dd{\theta}$};
@@ -291,9 +292,9 @@
     plot[domain=0:\dphi]({\rvec*sin(\thetavec+1.11*\dtheta)*cos(\phivec+\x)},{\rvec*sin(\thetavec+1.11*\dtheta)*sin(\phivec+\x)},{\rvec*cos(\thetavec+1.11*\dtheta)})
     node[below right=-0.5] {\contour{white}{$r\sin\theta\dd{\phi}$}};
   \draw[<->,proj,thin]
-    plot[domain=0:\dtheta]({\rvec*sin(\thetavec+\x)*cos(\phivec+1.15*\dphi)},{\rvec*sin(\thetavec+\x)*sin(\phivec+1.15*\dphi)},{\rvec*cos(\thetavec+\x)}) 
+    plot[domain=0:\dtheta]({\rvec*sin(\thetavec+\x)*cos(\phivec+1.15*\dphi)},{\rvec*sin(\thetavec+\x)*sin(\phivec+1.15*\dphi)},{\rvec*cos(\thetavec+\x)})
     node[above right=-0.5] {$r\dd{\theta}$};
-    
+
   % ANGLES
   \tdplotdrawarc[->]{(O)}{0.35*\rvec}{0}{\phivec}
     {below=-0}{$\phi$}
@@ -304,7 +305,7 @@
     {above right=-0}{$\theta$}
   \tdplotdrawarc[->,tdplot_rotated_coords]{(0,0,0)}{0.54*\rvec}{\thetavec}{\thetavec+\dtheta}
     {above right=-0}{\contour{white}{$\dd{\theta}$}}
-  
+
 \end{tikzpicture}
 >>>
 
@@ -344,7 +345,7 @@
   \def\v{1.0}           % velocity magnitude
   \def\F{0.9}           % force magnitude
   \def\y{(\Ry+0.35*\H)} % height from ground
-  
+
   % WATER
   \draw[horizontal water,thick]
     (0,\Ry) -- (0,-\Ry) coordinate (P1) --++ (\LL,0) to[out=0,in=180]
@@ -352,7 +353,7 @@
     --++ (-\LR,0)  to[out=180,in=0] (\LL,\Ry) -- cycle;
   \node[above left=0] at (P1) {$P_1$};
   \node[above=-0,right=0] at (P2) {$P_2$};
-  
+
   % VOLUMES
   \draw[vvec] (\xL+\lL+\Rx,0) --++ (\v*1.2*\ry/\Ry,0) node[above=-0] {$v_1$};
   \draw[vvec] (\xR+\lR+\rx,\H-0.2*\ry) --++ (\v,0) node[right=-0] {$v_2$};
@@ -374,7 +375,7 @@
     (\xR,\H-1.6*\ry) --++ (\lR,0) node[midway,fill=white,inner sep=0] {$\ell_2$};
   \node[left=0,below=-0] at (A1) {$A_1$};
   \node[left=0,above=-0] at (A2) {$A_2$};
-  
+
   % CONTAINER
   \draw[mydarkblue,thick]
     (0,\Ry) -- (0,-\Ry)  coordinate (A1) --++ (\LL,0) to[out=0,in=180]
@@ -382,7 +383,7 @@
     --++ (-\LR,0)  to[out=180,in=0] (\LL,\Ry) -- cycle;
   \draw[water,thick]
     (0,0) ellipse({\Rx} and \Ry);
-  
+
   % HEIGHT
   \draw[dashed] (0.23*\L,{-\y}) --++ (0.6*\L,0);
   \draw[<->]
@@ -390,7 +391,7 @@
   \draw[<->]
     (0.95*\xR,{-\y}) --++ (0,{\H+\y}) node[midway,fill=white,inner sep=1] {$h_2$};
   \draw[force] (0.1*\Ry-\F,0) --++ (\F,0) node[pos=0.4,above=-0] {$F_1$};
-  
+
 \end{tikzpicture}
 >>>
 
@@ -442,7 +443,7 @@
 % Belt and pulley system
 % Author: Jimi Oke
 \begin{tikzpicture}
- 
+
       % Definitions
       \pgfmathsetmacro{\b}{75}
       \pgfmathsetmacro{\a}{15}
@@ -454,7 +455,7 @@
       \pgfmathsetmacro{\q}{\r/sin(\a)}
 
       % Pulleys
-      
+
       % big pulley
       \draw (0,0) circle (\R) ;
       \fill[left color=gray!80, right color=gray!60, middle
@@ -467,19 +468,19 @@
       \fill[left color=gray!80, right color=gray!60, middle
         color=white] (\Q+\q-.3, 0) circle (\r) ;
       \draw[thick, white] (\Q+\q-.3,0) circle (.8*\r);
-      \shade[ball color=white] (\Q+\q-.3,0) circle (.15) 
+      \shade[ball color=white] (\Q+\q-.3,0) circle (.15)
       node[right, xshift=2] {$Q$};
 
       % belt and point labels
       \begin{scope}[ultra thick]
         \draw (\b:\R) arc (\b:360-\b:\R) ;
-        \draw (\b:\R) -- ( \P, 0 ); 
+        \draw (\b:\R) -- ( \P, 0 );
         \draw (-\b:\R) -- ( \P, 0 );
         \draw (\Q-.3,0) -- + (\a:\p)  arc (105:-105:\r) ;
         \draw (\Q-.3,0) -- + (-\a:\p);
         %\draw (\b:\R) arc (\b:360-\b:\r) ;
       \end{scope}
-   
+
       \draw (0,0) -- (\b:\R) node[midway, above,sloped] {$R$} node[above] {$A$};
       \draw (-\b:\R)--(0,0) ;
       \draw (\Q+\q-.3,0) -- +(105:\r) node[midway,above, sloped] {$r$}
@@ -502,7 +503,7 @@
 % Author: Julien Cretel
 % Date:   24/02/2013
     \begin{tikzpicture}[scale=4.5, line join=bevel]
-	
+
       % \a and \b are two macros defining characteristic
       % dimensions of the impossible brick.
       \pgfmathsetmacro{\a}{0.18}
@@ -521,7 +522,7 @@
         180/-\a/{brick_edges,face_colourB}/{brick_edges,face_colourC}
       }{
       \begin{scope}[rotate=\theta,shift={(\v,0)}]
-        \draw[apply style/.expand once=\facestyleone]  		
+        \draw[apply style/.expand once=\facestyleone]
           ({-.5*\b},{1.5*\a}) --
           ++(\b,0)            --
           ++(-\a,-\a)         --
@@ -531,7 +532,7 @@
           ++(-\a,-\a)         --
           ++(-\b,0)           --
           cycle;
-        \draw[apply style/.expand once=\facestyletwo] 
+        \draw[apply style/.expand once=\facestyletwo]
           ({.5*\b},{1.5*\a})  --
           ++(0,{-2*\a})       --
           ++(-\a,0)           --
@@ -544,9 +545,9 @@
     \vspace{1cm}
 
     \begin{tikzpicture}[scale=1, line join=bevel]
-	
+
     % \a and \b are two macros defining characteristic
-    % dimensions of the Penrose triangle.		
+    % dimensions of the Penrose triangle.
     \pgfmathsetmacro{\a}{2.5}
     \pgfmathsetmacro{\b}{0.9}
 
@@ -564,13 +565,13 @@
         \draw[apply style/.expand once=\facestyle]
           ({-sqrt(3)/2*\a},{-0.5*\a})                     --
           ++(-\b,0)                                       --
-            ({0.5*\b},{\a+3*sqrt(3)/2*\b})                -- % higher point	
+            ({0.5*\b},{\a+3*sqrt(3)/2*\b})                -- % higher point
             ({sqrt(3)/2*\a+2.5*\b},{-.5*\a-sqrt(3)/2*\b}) -- % rightmost point
           ++({-.5*\b},-{sqrt(3)/2*\b})                    -- % lower point
             ({0.5*\b},{\a+sqrt(3)/2*\b})                  --
           cycle;
         \end{scope}
-      }	
+      }
 	  \end{tikzpicture}
 >>>
 

@@ -23,22 +23,22 @@
 \alloc\base/tex-preamble
 \alloc\base/extra-preamble
 
-\p{\code{texfig[body]}: A figure rendered by LaTeX.}
+\p{\code{texfig[~body]}: A figure rendered by LaTeX.}
 
-\def\texfig[body]{%
+\def\texfig[~body]{%
  \scope{%
   \put?\base/tex-preamble{%
    \latex-preamble/diagrams%
    \latex-preamble/string-diagrams%
   }%
   \put?\base/extra-preamble{}%
-  \tex{\get\base/tex-preamble\get\base/extra-preamble}{\body}%
+  \tex{\get\base/tex-preamble\get\base/extra-preamble}{\body{}}%
  }
 }
 
 \p{\code{texalg[body]}: An algorithm rendered by LaTeX.}
 
-\def\texalg[body]{%
+\def\texalg[~body]{%
  \scope{%
   \put?\base/tex-preamble{%
   %  \latex-preamble/diagrams%
@@ -46,16 +46,16 @@
     \latex-preamble/algorithms
   }%
   \put?\base/extra-preamble{}%
-  \tex{\get\base/tex-preamble\get\base/extra-preamble}{\body}%
+  \tex{\get\base/tex-preamble\get\base/extra-preamble}{\body{}}%
  }
 }
 
-\def\minialg[body]{
+\def\minialg[~body]{
  \texalg{
     \begin{minipage}{0.97\linewidth}
     \vspace{2ex}
     % \setlength{\parskip}{3ex plus 0.5ex minus 0.2ex}
-    \body
+    \body{}
     \end{minipage}
   }
 }
@@ -219,20 +219,20 @@
 
 \def\citet[tid][refid]{\let\escape[x]{\x}\<html:span>[class]{link-reference}[tid]{\tid}[refid]{\refid}{[\escape{[\refid, \tid]}](\refid)}}
 
-\p{\code{tikzfig[a]}: A TikZ graph rendered via LaTeX.}
+\p{\code{tikzfig[~a]}: A TikZ graph rendered via LaTeX.}
 
-\def\tikzfig[a]{\texfig{\startverb\begin{minipage}{1.1\linewidth}
-        \begin{figure}[H]\centering\stopverb\a\startverb\end{figure}
+\def\tikzfig[~a]{\texfig{\startverb\begin{minipage}{1.1\linewidth}
+        \begin{figure}[H]\centering\stopverb\a{}\startverb\end{figure}
         \end{minipage}\stopverb}}
 
-\p{\code{tikzfig[a]}: A TikZ graph rendered via LaTeX, adjusted the width to be half, so it could be used in a table and such.}
+\p{\code{tikzfig[~a]}: A TikZ graph rendered via LaTeX, adjusted the width to be half, so it could be used in a table and such.}
 
-\def\tikzfig2[a]{\texfig{\startverb\begin{minipage}{0.5\linewidth}
-        \begin{figure}[H]\centering\stopverb\a\startverb\end{figure}
+\def\tikzfig2[~a]{\texfig{\startverb\begin{minipage}{0.5\linewidth}
+        \begin{figure}[H]\centering\stopverb\a{}\startverb\end{figure}
         \end{minipage}\stopverb}}
 
-\def\tikzfigs[scale][a]{\texfig{\startverb\begin{minipage}{\stopverb\scale\startverb\linewidth}
-        \begin{figure}[H]\centering\stopverb\a\startverb\end{figure}
+\def\tikzfigs[scale][~a]{\texfig{\startverb\begin{minipage}{\stopverb\scale\startverb\linewidth}
+        \begin{figure}[H]\centering\stopverb\a{}\startverb\end{figure}
         \end{minipage}\stopverb}}
 
 \p{\code{minitex[body]}: Typesetting LaTeX code in a minipage, with the width of an A5 paper,
@@ -419,7 +419,7 @@ so the text size almost matches the size output by native forester code. This do
 \p{\code{codeblock[lang][body]}: A syntax-highlighted code block specifying the language.}
 
 \def\codeblock[lang][body]{
-  \<html:code>[class]{\lang highlight grace-loading}{\body}
+  \<html:code>[style]{white-space: pre-wrap;}[class]{\lang highlight grace-loading}{\body}
 }
 
 \p{\code{newvocab[x]}: A newly defined term with an emphazised style.}
@@ -521,11 +521,11 @@ so the text size almost matches the size output by native forester code. This do
 \p{\code{shader[extraclasses][body]}: Embedding a GLSL shader code.}
 
 \def\shader[extraclasses][body]{
-  \<html:div>[class]{embeded-shader \extraclasses}{\body}
+  \<html:pre>[class]{embeded-shader \extraclasses}{\body}
 }
 
 \def\shadertoy[extraclasses][body]{
-  \<html:div>[class]{embeded-shadertoy \extraclasses}{\body}
+  \<html:pre>[style]{text-align: left;}[class]{embeded-shadertoy \extraclasses}{\body}
 }
 
 \def\shadertoywithcode[caption][body]{
@@ -535,11 +535,11 @@ so the text size almost matches the size output by native forester code. This do
   }
 }
 
-\def\mermaid[body]{\<html:div>[class]{mermaid grace-loading}{\body}}
+\def\mermaid[body]{\<html:pre>[class]{mermaid grace-loading}{\body}}
 
 \def\tags[t]{\<html:span>[class]{tags grace-loading}{\t}}
 
-\def\md[body]{\<html:div>[class]{markdownit grace-loading}{\body}}
+\def\md[body]{\<html:pre>[class]{markdownit grace-loading}{\body}}
 
 \def\mdblock[t][body]{\block{\t}{\md{\body}}}
 

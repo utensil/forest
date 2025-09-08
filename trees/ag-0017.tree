@@ -9,7 +9,7 @@
 \def\myball{
   \patch{\ball/new}{
     [radius]{1.5cm}
-    [center/label]{\point{o}}
+    [center-label] {\point{o}}
   }
 }
 
@@ -26,8 +26,8 @@
     [start]{P}
     [end]{I}
     [label]{d}
-    [label/pos]{0.5}
-    [mark/length]{1cm}
+    [label-pos] {0.5}
+    [mark-length] {1cm}
   }
 }
 
@@ -36,28 +36,28 @@
 \tikzset{>=latex}
 \begin{tikzpicture}
 
-  \myball#draw/shadow
-  \myball#coord/center
-  \myball#draw/boundary
-  \myball#draw/body
-  \myball#draw/radius
-  \myball#draw/center
-  \myball#draw/center/label
+  \myball#draw-shadow
+  \myball#coord-center
+  \myball#draw-boundary
+  \myball#draw-body
+  \myball#draw-radius
+  \myball#draw-center
+  \myball#draw-center-label
 
   \begin{pgfonlayer}{foreground}
   \point/p#coord
-  \point/p#path/arrow
-  \point/p#draw/arrow
-  \point/p#draw/dot
-  \point/p#draw/label
+  \point/p#path-arrow
+  \point/p#draw-arrow
+  \point/p#draw-dot
+  \point/p#draw-label
   \end{pgfonlayer}
 
   % set Omega
   \coordinate (ball/label) at (45:1.5*\myball#radius);
-  \draw ($(\myball#center/id)!0.5!(ball/label)$) -- ($(\myball#center/id)!0.8!(ball/label)$) node at (ball/label) {$\Omega$};
+  \draw ($(\myball#center-id)!0.5!(ball/label)$) -- ($(\myball#center-id)!0.8!(ball/label)$) node at (ball/label) {$\Omega$};
 
   % intersection of arrow p and ball boundary
-  \path[name intersections={of=\myball#boundary/id and \point/p#arrow/id, by={I}}];
+  \path[name intersections={of=\myball#boundary-id and \point/p#arrow-id, by={I}}];
 
   \measure/d#draw
 

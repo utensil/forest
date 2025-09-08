@@ -91,6 +91,10 @@ jobs:
       #       ${{ runner.os }}-opam-
       - name: Install forester
         run: |
+          sudo apt install libev-dev
+          # opam pin add forester git+https://git.sr.ht/~jonsterling/ocaml-forester#36285a6bea37eb3f3fbde39f8e9c373a022dec06 --yes
+          # opam pin add forester git+https://git.sr.ht/~jonsterling/ocaml-forester#5ceee0e7d20febc0552caad0f71aa01750574d43 --yes
+          # opam pin add forester git+https://git.sr.ht/~jonsterling/ocaml-forester#11b08cf812e65870167333da4b19d684d8d1846c --yes
           sudo apt update
           sudo apt install libev-dev
           opam pin add forester git+https://git.sr.ht/~jonsterling/ocaml-forester#56de06afe952d752c1a13fdcd8bb56c5fef9956f --yes

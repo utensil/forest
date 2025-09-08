@@ -17,7 +17,7 @@ OperationError: Failed to execute 'requestDevice' on 'GPUAdapter': The limit "ma
 
 \p{Adapted from \link{https://compute.toys/view/736}:
 }
-\<html:div>[class]{wgputoy}[data-custom]\verb>>>|
+\<html:pre>[class]{wgputoy}[data-custom]{\verb>>>|
 {
   "Radius": 0.719,
   "Samples": 0.335,
@@ -29,7 +29,7 @@ OperationError: Failed to execute 'requestDevice' on 'GPUAdapter': The limit "ma
   "BetaAnim": 0.215,
   "BetaS": 0.032
 }
->>>\verb>>>|
+>>>}{\verb>>>|
 #storage atomic_storage array<atomic<i32>>
 
 const MaxSamples = 256.0;
@@ -293,5 +293,5 @@ fn FinalPass(@builtin(global_invocation_id) id: uint3)
     textureStore(screen, int2(id.xy), float4(exposed, 1.));
 }
 
->>>
+>>>}
 }
