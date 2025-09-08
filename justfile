@@ -54,7 +54,7 @@ glsl SOURCE:
     cp -f {{SOURCE}} output/shader/
 
 css SOURCE:
-    bunx --bun lightningcss-cli --minify --bundle --targets '>= 0.25%' {{SOURCE}} -o output/{{file_name(SOURCE)}}
+    bunx --bun lightningcss-cli --minify --bundle --targets '>= 0.25%' {{SOURCE}} -o output/forest/{{file_name(SOURCE)}}
     # bunx postcss -o output/{{file_name(SOURCE)}} {{SOURCE}}
 
 js SOURCE:

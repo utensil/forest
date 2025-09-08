@@ -4,21 +4,21 @@
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:beamer="http://ctan.org/pkg/beamer"
     xmlns:indenting="jonmsterling:indenting"
-    xmlns:f="http://www.jonmsterling.com/jms-005P.xml"
+    xmlns:f="http://www.forester-notes.org"
+    xmlns:html="http://www.w3.org/1999/xhtml"
 >
-
     <!-- The following is based on
     https://git.sr.ht/~jonsterling/forester-base-theme/tree/main/item/tree.xsl -->
     <!-- All modifications should mark with comments: uts-begin/uts-end -->
     <xsl:template match="/">
-        <html>
+        <html data-base-url="/forest/">
             <head>
                 <meta name="viewport" content="width=device-width" />
                 <!-- <style> :root { background-color: #262626 !important; }</style> -->
-                <link rel="stylesheet" href="style.css" />
-                <link rel="stylesheet" href="katex.min.css" />
+                <link rel="stylesheet" href="/forest/style.css" />
+                <link rel="stylesheet" href="/forest/katex.min.css" />
                 <!-- uts-begin -->
-                <link rel="stylesheet" href="uts-style.css" />
+                <link rel="stylesheet" href="/forest/uts-style.css" />
                 <!-- uts-end -->
                 <script type="text/javascript">
                     <xsl:if test="/f:tree/f:frontmatter/f:source-path">
@@ -27,14 +27,14 @@
                         <xsl:text>'</xsl:text>
                     </xsl:if>
                 </script>
-                <script type="module" src="forester.js"></script>
+                <script type="module" src="/forest/forester.js"></script>
                 <title>
                     <xsl:value-of select="/f:tree/f:frontmatter/f:title" />
                 </title>
                 <!-- <script
                 src="https://cdn.jsdelivr.net/gh/iconfu/svg-inject@v1.2.3/dist/svg-inject.min.js"></script> -->
-                <script src="uts-forester.js"></script>
-                <script src="uts-ondemand.js"></script>
+                <script src="/forest/uts-forester.js"></script>
+                <script src="/forest/uts-ondemand.js"></script>
                 <!-- <script type="module" src="shiki.js"></script>
         <script type="module" src="glsl.js"></script> -->
             </head>

@@ -13,12 +13,12 @@ for (const penrose_root of penrose_roots) {
     const penrose_root_trio = penrose_root.getAttribute('data-trio')
     if (penrose_root_trio) {
         // fetch trio json
-        const response = await fetch(penrose_root_trio)
+        const response = await fetch('/forest/penrose/' + penrose_root_trio)
         const trio_spec = await response.json()
         // console.debug(trio_spec);
-        const domain = await fetch_text(`./penrose/${trio_spec.domain}`)
-        const substance = await fetch_text(`./penrose/${trio_spec.substance}`)
-        const style = await fetch_text(`./penrose/${trio_spec.style[0]}`)
+        const domain = await fetch_text(`/forest/penrose/${trio_spec.domain}`)
+        const substance = await fetch_text(`/forest/penrose/${trio_spec.substance}`)
+        const style = await fetch_text(`/forest/penrose/${trio_spec.style[0]}`)
         const variation = trio_spec.variation || ''
         trio = { variation, domain, substance, style }
     } else {

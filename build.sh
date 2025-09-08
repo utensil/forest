@@ -64,7 +64,7 @@ function prep_wasm {
         echo "🟡 Skipping wasm-pack build for $lib_name, some notes that used Rust and WASM might not work as epected."
     fi
 
-    cp "lib/$lib_path"/pkg/*.wasm output/
+    cp "lib/$lib_path"/pkg/*.wasm output/forest/
 }
 
 function bun_build {
@@ -100,8 +100,18 @@ function bun_build {
 }
 
 function copy_extra_assets {
-    mkdir -p output/shader/
-    cp -f assets/shader/*.glsl output/shader/
+    mkdir output/forest/
+
+    mkdir -p output/forest/shader/
+    cp -f assets/shader/*.glsl output/forest/shader/
+    cp -f assets/*.xsl output/forest/
+    cp -f output/forest/uts-forest.xsl output/forest/default.xsl
+
+    cp -rf assets/typst output/forest/
+    cp -rf assets/vendor output/forest/
+    cp -rf assets/penrose output/forest/
+    cp -rf assets/images output/forest/
+    
     # ls output/shader/
 
     # cp node_modules/@myriaddreamin/typst-ts-web-compiler/pkg/typst_ts_web_compiler_bg.wasm output/

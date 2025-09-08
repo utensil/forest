@@ -29,7 +29,7 @@ const wgslLoader = {
 
 const result = await Bun.build({
     entrypoints: [args[0]],
-    outdir: './output',
+    outdir: './output/forest',
     target: 'browser',
     plugins: [wgslLoader],
 })

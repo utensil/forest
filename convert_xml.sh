@@ -3,6 +3,7 @@
 
 OUT_DIR=output/forest
 XSL_FILE=$OUT_DIR/default.xsl
+# XSL_FILE=$OUT_DIR/uts-forest.xsl
 
 function convert_xml_to_html() {
     local xml_file=$1
@@ -17,7 +18,7 @@ function convert_xml_to_html() {
 
     # bunx xslt3 -s:"$xml_file" -xsl:output/uts-forest.xsl -o:"$html_file"
     # -v
-    xsltproc -o "$html_file" $XSL_FILE "$xml_file"
+    xsltproc --path $OUT_DIR -o "$html_file" $XSL_FILE "$xml_file"
     # echo "[convert_xml_to_html] Finished xsltproc for $html_file"
     # head -n 20 "$html_file"
 }

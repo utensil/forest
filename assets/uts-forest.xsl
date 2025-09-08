@@ -1,11 +1,12 @@
 <?xml version="1.0"?>
-<!-- SPDX-License-Identifier: CC0-1.0 -->
+<!--  SPDX-License-Identifier: CC0-1.0  -->
 <xsl:stylesheet version="1.0"
-                xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-                xmlns:beamer="http://ctan.org/pkg/beamer"
-                xmlns:indenting="jonmsterling:indenting"
-                xmlns:f="http://www.jonmsterling.com/jms-005P.xml"
-  >
+    xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    xmlns:beamer="http://ctan.org/pkg/beamer"
+    xmlns:indenting="jonmsterling:indenting"
+    xmlns:f="http://www.forester-notes.org"
+    xmlns:html="http://www.w3.org/1999/xhtml"
+>
 
   <!-- The imports must be the first elements in the stylesheet -->
   
@@ -23,7 +24,8 @@
   <!-- My overrides -->
   <!-- Note: Overriding named templates only works when the xlst to be overriden is also imported -->
   <xsl:import href="uts-overrides.xsl" />
+  <xsl:strip-space elements="f:author f:contributor"/>
 
-  <xsl:output method="html" encoding="utf-8" indent="yes" doctype-public="" doctype-system="" />
+  <xsl:output method="html" encoding="utf-8" indent="yes" doctype-public="" doctype-system="" omit-xml-declaration="yes"/>
   
 </xsl:stylesheet>

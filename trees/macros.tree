@@ -4,7 +4,8 @@
 \import{latex-preamble}
 
 \xmlns:html{http://www.w3.org/1999/xhtml}
-\xmlns:fr{http://www.jonmsterling.com/jms-005P.xml}
+%\xmlns:fr{http://www.jonmsterling.com/jms-005P.xml}
+\xmlns:fr{http://www.forester-notes.org}
 
 \strong{Useful macros from [[jonmsterling]]'s [macros](https://git.sr.ht/~jonsterling/public-trees/tree/main/item/base-macros.tree)}
 
@@ -546,15 +547,15 @@ so the text size almost matches the size output by native forester code. This do
 \def\mdnote[t][body]{\note{\t}{\md{\body}}}
 
 \def\loadvjs[src]{
-  \<html:script>[type]{text/javascript}[src]{\src}{}
+  \<html:script>[type]{text/javascript}[src]{/forest/\src}{}
 }
 
 \def\loadjs[src]{
-  \<html:script>[type]{module}[src]{\src}{}
+  \<html:script>[type]{module}[src]{/forest/\src}{}
 }
 
 \def\loadcss[src]{
-  \<html:link>[rel]{stylesheet}[href]{\src}{}
+  \<html:link>[rel]{stylesheet}[href]{/forest/\src}{}
 }
 
 \def\js[body]{

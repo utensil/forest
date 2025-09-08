@@ -4,7 +4,7 @@
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:beamer="http://ctan.org/pkg/beamer"
     xmlns:indenting="jonmsterling:indenting"
-    xmlns:f="http://www.jonmsterling.com/jms-005P.xml"
+    xmlns:f="http://www.forester-notes.org"
     xmlns:html="http://www.w3.org/1999/xhtml"
 >
 

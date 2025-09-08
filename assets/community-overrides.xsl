@@ -1,11 +1,12 @@
 <?xml version="1.0"?>
 <!-- SPDX-License-Identifier: CC0-1.0 -->
 <xsl:stylesheet version="1.0"
-                xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-                xmlns:beamer="http://ctan.org/pkg/beamer"
-                xmlns:indenting="jonmsterling:indenting"
-                xmlns:f="http://www.jonmsterling.com/jms-005P.xml"
-    >
+    xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    xmlns:beamer="http://ctan.org/pkg/beamer"
+    xmlns:indenting="jonmsterling:indenting"
+    xmlns:f="http://www.forester-notes.org"
+    xmlns:html="http://www.w3.org/1999/xhtml"
+>
     
   <!-- From https://git.sr.ht/~jonsterling/forest-assets/tree/main/item/jms-forest.xsl -->
   
