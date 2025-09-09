@@ -94,6 +94,9 @@
                 </header>
 
                 <div id="grid-wrapper">
+                    <blockquote>
+                        NOTE: This site has just upgraded to Forester 5.x and is still having some style and functionality issues, we will fix ASAP.
+                    </blockquote>
                     <article>
                         <xsl:apply-templates select="f:tree" />
                     </article>
