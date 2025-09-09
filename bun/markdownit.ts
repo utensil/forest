@@ -16,7 +16,7 @@ const markdownitTags: NodeListOf<Element> = document.querySelectorAll(
 for (let i = 0; i < markdownitTags.length; i++) {
     const markdownitTag: Element = markdownitTags[i]
     const markdownSource: string = markdownitTag.innerHTML
-    console.log(markdownSource);
+    console.log(markdownSource)
     const convertedSource: string = markdownSource
         .replaceAll(/&lt;/g, '<')
         // unescape to make quotes work
