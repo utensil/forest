@@ -2,7 +2,7 @@ const load_script = (src) => {
     console.debug(`loading ${src}`)
     const script = document.createElement('script')
     script.type = 'module'
-    script.src = '/forest/' + src
+    script.src = `/forest/${src}`
     document.head.appendChild(script)
 }
 

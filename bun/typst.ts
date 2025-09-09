@@ -12,10 +12,10 @@ import {
 import { randstr } from '@myriaddreamin/typst.ts/dist/esm/utils.mjs'
 
 $typst.setCompilerInitOptions({
-    getModule: () => '/forest/' + typst_ts_web_compiler_bg,
+    getModule: () => `/forest/${typst_ts_web_compiler_bg}`,
 })
 $typst.setRendererInitOptions({
-    getModule: () => '/forest/' + typst_ts_renderer_bg,
+    getModule: () => `/forest/${typst_ts_renderer_bg}`,
 })
 
 const getUrlBase = () => {
@@ -23,7 +23,7 @@ const getUrlBase = () => {
     const urlParts = url.pathname.split('/')
     urlParts.pop()
     const urlBase = `${url.origin}/forest/typst/`
-    console.debug(urlBase);
+    console.debug(urlBase)
     return urlBase
 }
 
