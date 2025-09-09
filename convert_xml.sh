@@ -30,7 +30,7 @@ function backup_html_files() {
     for html_file in $OUT_DIR/*/index.html; do
         note_id=$(basename $(dirname "$html_file"))
         mkdir -p "$OUT_DIR/.bak/$note_id"
-        cp "$html_file" "$OUT_DIR/.bak/$note_id/index.html" 2>/dev/null || true
+        cp -f "$html_file" "$OUT_DIR/.bak/$note_id/index.html" 2>/dev/null || true
     done
 }
 # AGENT-NOTE: Updated backup logic for forest structure
@@ -207,12 +207,6 @@ function convert_xml_files() {
     local duration=$((end_time - start_time))
     echo "📝 Updated $updated_count HTML file(s) in ${duration}s"
 
-    cleanup_backup_files
 }
 # AGENT-NOTE: Updated for forest structure (xml listing and updated files)
-
-
-function cleanup_backup_files() {
-    rip output/.bak
-}
 
