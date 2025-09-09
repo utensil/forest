@@ -8,12 +8,6 @@ export TEXINPUTS=.:$PROJECT_ROOT/tex/:
 
 echo "TEXINPUTS=$TEXINPUTS"
 
-function backup_xml_files() {
-    echo "⭐ Backing up XML files"
-    mkdir -p output/.bak
-    cp output/*.xml output/.bak/ 2>/dev/null || true
-}
-
 function relative_to_project_root() {
     local target=$1
     local common_part=$PROJECT_ROOT
@@ -47,7 +41,6 @@ while IFS= read -r line; do
     elif [[ $CHANGED_FILE == *".xsl" ]]; then
         just copy "$CHANGED_FILE_RELATIVE"
     elif [[ $CHANGED_FILE == *".tree" ]]; then
-        backup_xml_files
         just forest
     elif [[ $CHANGED_FILE == *".tex" ]]; then
         # even with full rebuild, updates to preambles are NOT reflected
@@ -73,9 +66,10 @@ touch build/live/trigger.txt
 
 source convert_xml.sh
 
-# # Post-process: Convert HTML files for tree or XSL changes
-# if [[ $CHANGED_FILE == *".xsl" ]]; then
-#     XSL_CHANGED=1 convert_xml_files true
-# elif [[ $CHANGED_FILE == *".tree" ]]; then
-#     convert_xml_files false
-# fi
+# Post-process: Convert HTML files for tree or XSL changes
+if [[ $CHANGED_FILE == *".xsl" ]]; then
+    XSL_CHANGED=1 convert_xml_files true
+elif [[ $CHANGED_FILE == *".tree" ]]; then
+    convert_xml_files true 
+fi
+

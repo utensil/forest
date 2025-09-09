@@ -2,7 +2,7 @@
 import { watch } from 'node:fs/promises'
 import { mkdir } from 'node:fs/promises'
 import { staticPlugin } from '@elysiajs/static'
-import { Elysia } from 'elysia'
+import { Elysia, file } from 'elysia'
 
 const port = process.env.PORT || 3000
 
@@ -27,6 +27,11 @@ const app = new Elysia({
         async close(ws) {
             ws.unsubscribe('update')
         },
+    })
+    .onError(({ code }) => {
+        if (code === 'NOT_FOUND') {
+            return file('output/forest/404.html')
+        }
     })
 
 app.listen(port, async ({ hostname, port }) => {

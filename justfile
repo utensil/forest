@@ -50,8 +50,8 @@ bib:
     ./bib.sh
 
 glsl SOURCE:
-    mkdir -p output/shader/
-    cp -f {{SOURCE}} output/shader/
+    mkdir -p output/forest/shader/
+    cp -f {{SOURCE}} output/forest/shader/
 
 css SOURCE:
     bunx --bun lightningcss-cli --minify --bundle --targets '>= 0.25%' {{SOURCE}} -o output/forest/{{file_name(SOURCE)}}
@@ -65,21 +65,21 @@ forest:
 
 copy SOURCE:
     -rm output/{{file_name(SOURCE)}} > /dev/null 2>&1
-    cp -f {{SOURCE}} output/
+    cp -f {{SOURCE}} output/forest/
 
 typ SOURCE:
     mkdir -p output/typst/
-    cp -f {{SOURCE}} output/typst/
+    cp -f {{SOURCE}} output/forest/typst/
 
 penrose SOURCE:
     mkdir -p output/penrose/
-    cp -f {{SOURCE}} output/penrose/
+    cp -f {{SOURCE}} output/forest/penrose/
 
 fix-thm:
     #!/usr/bin/env zsh
     # mv output/default.xsl output/default.xsl.bak || true
-    cp -f assets/*.xsl output/
-    cp -f assets/uts-forest.xsl output/default.xsl
+    cp -f assets/*.xsl output/forest/
+    cp -f assets/uts-forest.xsl output/forest/default.xsl
     # cp -f every file/dir in output except the dir forest
     for file in output/*; do
         if [ -d "$file" ] && [ "$(basename "$file")" != "forest" ]; then

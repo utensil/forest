@@ -111,6 +111,7 @@ function copy_extra_assets {
     cp -rf assets/vendor output/forest/
     cp -rf assets/penrose output/forest/
     cp -rf assets/images output/forest/
+    cp -f assets/*.html output/forest/
     
     # ls output/shader/
 

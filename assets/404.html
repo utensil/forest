@@ -67,9 +67,10 @@
         const REDIRECT_TIMEOUT = 3000; // Show error after 3 seconds
         const redirectConfig = [
             // {regex: /^\/example$/, redirect: "/example.html"},
-            {regex: /\/.*\/$/, redirect: (path) => path.replace(/\/$/, '.xml')},
-            {regex: /\/.*\.html$/, redirect: (path) => path.replace(/\.html$/, '.xml')},
-            {regex: /.*/, redirect: "/index.xml"}
+            <!-- {regex: /\/.*\/$/, redirect: (path) => path.replace(/\/$/, '.xml')}, -->
+            <!-- {regex: /\/.*\.html$/, redirect: (path) => path.replace(/\.html$/, '.xml')}, -->
+            {regex: /\/.*\.xml$/, redirect: (path) => path.replace(/\/([^/]+)\.xml$/, (_, m) => `/${m}/`)},
+            <!-- {regex: /.*/, redirect: "/index.xml"} -->
         ];
 
         async function redirectToPage() {
