@@ -8,6 +8,8 @@ export TEXINPUTS=.:$PROJECT_ROOT/tex/:
 
 echo "TEXINPUTS=$TEXINPUTS"
 
+source convert_xml.sh
+
 function relative_to_project_root() {
     local target=$1
     local common_part=$PROJECT_ROOT
@@ -42,6 +44,9 @@ while IFS= read -r line; do
         just copy "$CHANGED_FILE_RELATIVE"
     elif [[ $CHANGED_FILE == *".tree" ]]; then
         just forest
+        # only convert the modified tree's xml to html
+        # do not take affected trees into account, for now
+        convert_xml_to_html "./output/forest/${CHANGED_FILE_BASENAME%.*}/index.xml"
     elif [[ $CHANGED_FILE == *".tex" ]]; then
         # even with full rebuild, updates to preambles are NOT reflected
         # ./build.sh
@@ -64,12 +69,10 @@ done
 
 touch build/live/trigger.txt
 
-source convert_xml.sh
-
 # Post-process: Convert HTML files for tree or XSL changes
 if [[ $CHANGED_FILE == *".xsl" ]]; then
     XSL_CHANGED=1 convert_xml_files true
-elif [[ $CHANGED_FILE == *".tree" ]]; then
-    convert_xml_files true 
+# elif [[ $CHANGED_FILE == *".tree" ]]; then
+    # convert_xml_files true 
 fi
 

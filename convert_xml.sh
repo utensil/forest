@@ -2,8 +2,8 @@
 # set -e
 
 OUT_DIR=output/forest
-XSL_FILE=$OUT_DIR/default.xsl
-# XSL_FILE=$OUT_DIR/uts-forest.xsl
+# XSL_FILE=$OUT_DIR/default.xsl
+XSL_FILE=$OUT_DIR/uts-forest.xsl
 
 function convert_xml_to_html() {
     local xml_file=$1
