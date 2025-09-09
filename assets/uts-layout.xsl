@@ -11,14 +11,14 @@
     https://git.sr.ht/~jonsterling/forester-base-theme/tree/main/item/tree.xsl -->
     <!-- All modifications should mark with comments: uts-begin/uts-end -->
     <xsl:template match="/">
-        <html data-base-url="/forest/">
+        <html xmlns="http://www.w3.org/1999/xhtml" data-base-url="{/f:tree/@base-url}">
             <head>
                 <meta name="viewport" content="width=device-width" />
                 <!-- <style> :root { background-color: #262626 !important; }</style> -->
-                <link rel="stylesheet" href="/forest/style.css" />
-                <link rel="stylesheet" href="/forest/katex.min.css" />
+                <link rel="stylesheet" href="{/f:tree/@base-url}style.css" />
+                <link rel="stylesheet" href="{/f:tree/@base-url}katex.min.css" />
                 <!-- uts-begin -->
-                <link rel="stylesheet" href="/forest/uts-style.css" />
+                <link rel="stylesheet" href="{/f:tree/@base-url}uts-style.css" />
                 <!-- uts-end -->
                 <script type="text/javascript">
                     <xsl:if test="/f:tree/f:frontmatter/f:source-path">
@@ -27,14 +27,14 @@
                         <xsl:text>'</xsl:text>
                     </xsl:if>
                 </script>
-                <script type="module" src="/forest/forester.js"></script>
+                <script type="module" src="{/f:tree/@base-url}forester.js"></script>
                 <title>
                     <xsl:value-of select="/f:tree/f:frontmatter/f:title" />
                 </title>
                 <!-- <script
                 src="https://cdn.jsdelivr.net/gh/iconfu/svg-inject@v1.2.3/dist/svg-inject.min.js"></script> -->
-                <script src="/forest/uts-forester.js"></script>
-                <script src="/forest/uts-ondemand.js"></script>
+                <script src="{/f:tree/@base-url}uts-forester.js"></script>
+                <script src="{/f:tree/@base-url}uts-ondemand.js"></script>
                 <!-- <script type="module" src="shiki.js"></script>
         <script type="module" src="glsl.js"></script> -->
             </head>
@@ -45,7 +45,7 @@
                     <nav class="nav">
                         <div class="logo">
                             <xsl:if test="not(/f:tree[@root = 'true'])">
-                                <a href="index.xml" title="Home">
+                                <a href="{/f:tree/@base-url}index.html" title="Home">
                                     <xsl:text>« Home</xsl:text>
                                 </a>
                             </xsl:if>
