@@ -49,7 +49,7 @@ function initTracker(userConfig: Partial<ActivityConfig> = {}): void {
 
     // Find all h1 date sections within article tree-content
     const dateSections = Array.from(
-        document.querySelectorAll('article .tree-content h1'),
+        document.querySelectorAll('article section details summary header h1'),
     ).filter((el) => {
         const text = el.textContent.trim()
         // Match dates like 2025-03-11 or 2025-01-11~01-12
@@ -99,15 +99,22 @@ function initTracker(userConfig: Partial<ActivityConfig> = {}): void {
         // Count items using same logic as test function
         let count = 0
         const headers = Array.from(
-            document.querySelectorAll('article .tree-content h1'),
+            document.querySelectorAll('article section details summary header h1'),
         )
         const header = headers.find((h) => h.textContent.includes(dateText))
 
         if (header) {
-            const content =
-                header.parentElement.querySelector('.markdownit') ||
-                header.closest('.tree-content')?.querySelector('.markdownit')
-
+            const parent = header.parentElement
+            let content: Element | null = null
+            if (parent) {
+                content = parent.querySelector('.markdownit')
+                if (!content) {
+                    const closest = parent.closest('section')
+                    content = closest
+                        ? closest.querySelector('.markdownit')
+                        : null
+                }
+            }
             if (content) {
                 const items = content.querySelectorAll(':scope > ul > li')
                 count = items.length
