@@ -16,7 +16,7 @@ const markdownitTags: NodeListOf<Element> = document.querySelectorAll(
 for (let i = 0; i < markdownitTags.length; i++) {
     const markdownitTag: Element = markdownitTags[i]
     const markdownSource: string = markdownitTag.innerHTML
-    console.log(markdownSource)
+    // console.log(markdownSource)
     const convertedSource: string = markdownSource
         .replaceAll(/&lt;/g, '<')
         // unescape to make quotes work
@@ -25,6 +25,6 @@ for (let i = 0; i < markdownitTags.length; i++) {
         // note that we need to use `+?` which is a lazy quantifier, meaning it matches as few characters as possible
         .replaceAll(/\\([\[\(])(.+?)\\([\)\]])/g, '\\\\$1$2\\\\$3')
     // console.log(convertedSource)
-    markdownitTag.innerHTML = md.render(convertedSource)
-    markdownitTag.classList.remove('grace-loading')
+    markdownitTag.outerHTML = `<div class="markdownit">${md.render(convertedSource)}</div>`
+    // markdownitTag.classList.remove('grace-loading')
 }
