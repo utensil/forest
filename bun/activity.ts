@@ -99,7 +99,9 @@ function initTracker(userConfig: Partial<ActivityConfig> = {}): void {
         // Count items using same logic as test function
         let count = 0
         const headers = Array.from(
-            document.querySelectorAll('article section details summary header h1'),
+            document.querySelectorAll(
+                'article section details summary header h1',
+            ),
         )
         const header = headers.find((h) => h.textContent.includes(dateText))
 
