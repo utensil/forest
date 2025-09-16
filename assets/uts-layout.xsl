@@ -4,37 +4,37 @@
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:beamer="http://ctan.org/pkg/beamer"
     xmlns:indenting="jonmsterling:indenting"
-    xmlns:f="http://www.forester-notes.org"
+    xmlns:fr="http://www.forester-notes.org"
     xmlns:html="http://www.w3.org/1999/xhtml"
 >
     <!-- The following is based on
     https://git.sr.ht/~jonsterling/forester-base-theme/tree/main/item/tree.xsl -->
     <!-- All modifications should mark with comments: uts-begin/uts-end -->
     <xsl:template match="/">
-        <html xmlns="http://www.w3.org/1999/xhtml" data-base-url="{/f:tree/@base-url}">
+        <html xmlns="http://www.w3.org/1999/xhtml" data-base-url="{/fr:tree/@base-url}">
             <head>
                 <meta name="viewport" content="width=device-width" />
                 <!-- <style> :root { background-color: #262626 !important; }</style> -->
-                <link rel="stylesheet" href="{/f:tree/@base-url}style.css" />
-                <link rel="stylesheet" href="{/f:tree/@base-url}katex.min.css" />
+                <link rel="stylesheet" href="{/fr:tree/@base-url}style.css" />
+                <link rel="stylesheet" href="{/fr:tree/@base-url}katex.min.css" />
                 <!-- uts-begin -->
-                <link rel="stylesheet" href="{/f:tree/@base-url}uts-style.css" />
+                <link rel="stylesheet" href="{/fr:tree/@base-url}uts-style.css" />
                 <!-- uts-end -->
                 <script type="text/javascript">
-                    <xsl:if test="/f:tree/f:frontmatter/f:source-path">
+                    <xsl:if test="/fr:tree/fr:frontmatter/fr:source-path">
                         <xsl:text>window.sourcePath = '</xsl:text>
-                        <xsl:value-of select="/f:tree/f:frontmatter/f:source-path" />
+                        <xsl:value-of select="/fr:tree/fr:frontmatter/fr:source-path" />
                         <xsl:text>'</xsl:text>
                     </xsl:if>
                 </script>
-                <script type="module" src="{/f:tree/@base-url}forester.js"></script>
+                <script type="module" src="{/fr:tree/@base-url}forester.js"></script>
                 <title>
-                    <xsl:value-of select="/f:tree/f:frontmatter/f:title" />
+                    <xsl:value-of select="/fr:tree/fr:frontmatter/fr:title" />
                 </title>
                 <!-- <script
                 src="https://cdn.jsdelivr.net/gh/iconfu/svg-inject@v1.2.3/dist/svg-inject.min.js"></script> -->
-                <script src="{/f:tree/@base-url}uts-forester.js"></script>
-                <script src="{/f:tree/@base-url}uts-ondemand.js"></script>
+                <script src="{/fr:tree/@base-url}uts-forester.js"></script>
+                <script src="{/fr:tree/@base-url}uts-ondemand.js"></script>
                 <!-- <script type="module" src="shiki.js"></script>
         <script type="module" src="glsl.js"></script> -->
             </head>
@@ -44,8 +44,8 @@
                 <header class="header">
                     <nav class="nav">
                         <div class="logo">
-                            <xsl:if test="not(/f:tree[@root = 'true'])">
-                                <a href="{/f:tree/@base-url}index.html" title="Home">
+                            <xsl:if test="not(/fr:tree[@root = 'true'])">
+                                <a href="{/fr:tree/@base-url}index.html" title="Home">
                                     <xsl:text>« Home</xsl:text>
                                 </a>
                             </xsl:if>
@@ -98,14 +98,14 @@
                         NOTE: This site has just upgraded to Forester 5.x and is still having some style and functionality issues, we will fix ASAP.
                     </blockquote>
                     <article>
-                        <xsl:apply-templates select="f:tree" />
+                        <xsl:apply-templates select="fr:tree" />
                     </article>
                     <xsl:if
-                        test="f:tree/f:mainmatter/f:tree[not(@toc='false')] and not(/f:tree/f:frontmatter/f:meta[@name = 'toc']/.='false')">
+                        test="fr:tree/fr:mainmatter/fr:tree[not(@toc='false')] and not(/fr:tree/fr:frontmatter/fr:meta[@name = 'toc']/.='false')">
                         <nav id="toc">
                             <div class="block">
                                 <h1>Table of Contents</h1>
-                                <xsl:apply-templates select="f:tree/f:mainmatter" mode="toc" />
+                                <xsl:apply-templates select="fr:tree/fr:mainmatter" mode="toc" />
                             </div>
                         </nav>
                     </xsl:if>
