@@ -4,24 +4,24 @@
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:beamer="http://ctan.org/pkg/beamer"
     xmlns:indenting="jonmsterling:indenting"
-    xmlns:f="http://www.forester-notes.org"
+    xmlns:fr="http://www.forester-notes.org"
     xmlns:html="http://www.w3.org/1999/xhtml"
 >
 
     <!-- <xsl:template name="numbered-taxon">
         <span class="taxon">
-            <xsl:apply-templates select="f:taxon" />
-            <xsl:if test="count(ancestor::*) > 1 and (not(ancestor-or-self::f:tree[@numbered='false' or
-    @toc='false']) and count(../../f:tree) >= 1) or f:number">
-                <xsl:if test="f:taxon">
+            <xsl:apply-templates select="fr:taxon" />
+            <xsl:if test="count(ancestor::*) > 1 and (not(ancestor-or-selfr::fr:tree[@numbered='false' or
+    @toc='false']) and count(../../fr:tree) >= 1) or fr:number">
+                <xsl:if test="fr:taxon">
                     <xsl:text>&#160;</xsl:text>
                 </xsl:if>
                 <xsl:choose>
-                    <xsl:when test="f:number">
-                        <xsl:value-of select="f:number" />
+                    <xsl:when test="fr:number">
+                        <xsl:value-of select="fr:number" />
                     </xsl:when>
                     <xsl:otherwise>
-                        <xsl:number format="1.1" count="f:tree[ancestor::f:tree and not(@toc='false') and
+                        <xsl:number format="1.1" count="fr:tree[ancestor::fr:tree and not(@toc='false') and
     not(@numbered='false')]" level="multiple" />
                     </xsl:otherwise>
                 </xsl:choose>
@@ -49,7 +49,7 @@
         </xsl:if>
     </xsl:template>
 
-    <xsl:template match="f:meta[@name='lean']">
+    <xsl:template match="fr:meta[@name='lean']">
         <span class="meta-lean">
             <div class="meta-lean-list">
                 <xsl:call-template name="splitlean">
@@ -63,8 +63,8 @@
     </xsl:template>
 
     <!-- Override the addr template -->
-    <xsl:template match="f:addr" priority="10">
-        <a class="slug" href="{../f:route}">
+    <xsl:template match="fr:addr" priority="10">
+        <a class="slug" href="{../fr:route}">
             <xsl:text>[</xsl:text>
             <xsl:value-of select="." />
             <xsl:text>]</xsl:text>
@@ -72,46 +72,46 @@
         <!-- uts-begin -->
         <div class="link-buttons">
             <!-- : Add the source link to the source of the tree, only works for my own forest -->
-            <xsl:if test="../f:addr=/f:tree/f:frontmatter/f:addr">
+            <xsl:if test="../fr:addr=/fr:tree/fr:frontmatter/fr:addr">
                 <xsl:choose>
-                    <xsl:when test="../f:taxon[text()='Person']">
+                    <xsl:when test="../fr:taxon[text()='Person']">
                         <a class="link-button link-source" title="source"
-                            href="https://github.com/utensil/forest/blob/main/trees/people/{../f:addr}.tree">
+                            href="https://github.com/utensil/forest/blob/main/trees/people/{../fr:addr}.tree">
                             <xsl:text>✍️</xsl:text>
                             <span>source</span>
                         </a>
                     </xsl:when>
-                    <xsl:when test="../f:taxon[text()='Reference']">
+                    <xsl:when test="../fr:taxon[text()='Reference']">
                         <a class="link-button link-source" title="source" target="_blank"
-                            href="https://github.com/utensil/forest/blob/main/trees/refs/{../f:addr}.tree">
+                            href="https://github.com/utensil/forest/blob/main/trees/refs/{../fr:addr}.tree">
                             <xsl:text>✍️</xsl:text>
                             <span>source</span>
                         </a>
                     </xsl:when>
-                    <xsl:when test="../f:taxon[text()='Proof']">
+                    <xsl:when test="../fr:taxon[text()='Proof']">
                         <a class="link-button link-source" title="source" target="_blank"
-                            href="https://github.com/utensil/forest/blob/main/trees/{../../f:backmatter/f:context/f:tree/f:frontmatter/f:addr}.tree">
+                            href="https://github.com/utensil/forest/blob/main/trees/{../../fr:backmatter/fr:context/fr:tree/fr:frontmatter/fr:addr}.tree">
                             <xsl:text>✍️</xsl:text>
                             <span>source</span>
                         </a>
                     </xsl:when>
                     <xsl:otherwise>
                         <a class="link-button link-source" title="source" target="_blank"
-                            href="https://github.com/utensil/forest/blob/main/trees/{../f:addr}.tree">
+                            href="https://github.com/utensil/forest/blob/main/trees/{../fr:addr}.tree">
                             <xsl:text>✍️</xsl:text>
                             <span>source</span>
                         </a>
                     </xsl:otherwise>
                 </xsl:choose>
             </xsl:if>
-            <xsl:if test="../f:meta[@name='pdf']">
-                <a target="_blank" title="PDF" class="link-button link-pdf" href="{../f:addr}.pdf">
+            <xsl:if test="../fr:meta[@name='pdf']">
+                <a target="_blank" title="PDF" class="link-button link-pdf" href="{../fr:addr}.pdf">
                     📄<span>PDF</span></a>
             </xsl:if>
-            <xsl:if test="../f:meta[@name='lean']">
-                <xsl:apply-templates select="../f:meta[@name='lean']" />
+            <xsl:if test="../fr:meta[@name='lean']">
+                <xsl:apply-templates select="../fr:meta[@name='lean']" />
             </xsl:if>
-            <xsl:if test="../f:addr=/f:tree/f:frontmatter/f:addr and ../f:meta[@name='multilang']">
+            <xsl:if test="../fr:addr=/fr:tree/fr:frontmatter/fr:addr and ../fr:meta[@name='multilang']">
                 <a id="langblock-toggle" class="link-button" href="javascript:void(0)"
                     title="Show hidden languages">🌎</a>
             </xsl:if>
@@ -120,7 +120,7 @@
     </xsl:template>
 
     <!-- uts-begin: Override embeded-tex to be injected SVG to support dark theme, resize etc. -->
-    <xsl:template match="f:embedded-tex">
+    <xsl:template match="fr:embedded-tex">
         <center>
             <img src="resources/{@hash}.svg" class="embedded-tex-svg" />
             <!-- <img src="resources/{@hash}.svg" onload="SVGInject(this)"
@@ -129,46 +129,46 @@
     </xsl:template>
     <!-- uts-end -->
 
-    <xsl:template match="f:tree" mode="toc">
+    <xsl:template match="fr:tree" mode="toc">
         <li>
-            <xsl:for-each select="f:frontmatter">
+            <xsl:for-each select="fr:frontmatter">
                 <a class="bullet">
                     <xsl:choose>
-                        <xsl:when test="f:addr and f:route">
+                        <xsl:when test="fr:addr and fr:route">
                             <xsl:attribute name="href">
-                                <xsl:value-of select="f:route" />
+                                <xsl:value-of select="fr:route" />
                             </xsl:attribute>
                             <xsl:attribute name="title">
-                                <xsl:value-of select="f:title" />
+                                <xsl:value-of select="fr:title" />
                                 <xsl:text>[</xsl:text>
-                                <xsl:value-of select="f:addr" />
+                                <xsl:value-of select="fr:addr" />
                                 <xsl:text>]</xsl:text>
                             </xsl:attribute>
                         </xsl:when>
                         <xsl:otherwise>
                             <xsl:attribute name="href">
                                 <xsl:text>#tree-</xsl:text>
-                                <xsl:value-of select="f:anchor" />
+                                <xsl:value-of select="fr:anchor" />
                             </xsl:attribute>
                             <xsl:attribute name="title">
-                                <xsl:value-of select="f:title" />
+                                <xsl:value-of select="fr:title" />
                             </xsl:attribute>
                         </xsl:otherwise>
                     </xsl:choose>
                     <xsl:text>■</xsl:text>
                 </a>
-                <span class="link local" data-target="#tree-{f:anchor}">
+                <span class="link local" data-target="#tree-{fr:anchor}">
                     <!-- uts-begin: Override the toc template to add data-taxon -->
-                    <span class="taxon" data-taxon="{f:taxon}">
+                    <span class="taxon" data-taxon="{fr:taxon}">
                         <xsl:apply-templates select=".." mode="tree-taxon-with-number">
                             <xsl:with-param name="suffix">.&#160;</xsl:with-param>
                         </xsl:apply-templates>
                     </span>
                     <!-- uts-end -->
-                    <xsl:apply-templates select="f:title" />
+                    <xsl:apply-templates select="fr:title" />
                 </span>
             </xsl:for-each>
-            <xsl:apply-templates select="f:mainmatter" mode="toc" />
+            <xsl:apply-templates select="fr:mainmatter" mode="toc" />
         </li>
     </xsl:template>
 
@@ -190,7 +190,7 @@
     </xsl:template> -->
 
     <!-- uts-begin: extend mainmatter -->
-    <!-- <xsl:template match="f:mainmatter">
+    <!-- <xsl:template match="fr:mainmatter">
         <div class="tree-content">
             <xsl:if test="../*/html:span[@class='todo']">
                 <xsl:for-each select="../*/html:span[@class='todo']">
@@ -202,24 +202,24 @@
     </xsl:template> -->
     <!-- uts-end -->
 
-    <xsl:template match="f:resource">
-        <xsl:apply-templates select="f:resource-content" />
+    <xsl:template match="fr:resource">
+        <xsl:apply-templates select="fr:resource-content" />
     </xsl:template>
 
-    <xsl:template match="f:resource-content">
+    <xsl:template match="fr:resource-content">
         <xsl:apply-templates />
     </xsl:template>
 
-    <xsl:template match="f:img[@src]">
+    <xsl:template match="fr:img[@src]">
         <figure>
             <img src="{@src}" />
         </figure>
     </xsl:template>
 
-    <xsl:template match="html:span[@class='link-reference-full']/f:link//text()">
-        <a href="{ancestor::f:link[1]/@href}">
+    <xsl:template match="html:span[@class='link-reference-full']/fr:link//text()">
+        <a href="{ancestor::fr:link[1]/@href}">
             <span class="link-title">
-                <xsl:value-of select="ancestor::f:link[1]/@title" />
+                <xsl:value-of select="ancestor::fr:link[1]/@title" />
             </span>
             <span class="link-citek">
                 <xsl:value-of select="." />
@@ -228,7 +228,7 @@
     </xsl:template>
 
 
-    <xsl:template match="html:div[@class='typst-root loading']//f:link[@type='external']">
+    <xsl:template match="html:div[@class='typst-root loading']//fr:link[@type='external']">
         <xsl:text>#link("</xsl:text>
         <xsl:value-of select="@href" />
         <xsl:text>", underline(text(black)[</xsl:text>
@@ -236,7 +236,7 @@
         <xsl:text>]))</xsl:text>
     </xsl:template>
 
-    <xsl:template match="html:div[@class='typst-root loading']//f:link[@type='local']">
+    <xsl:template match="html:div[@class='typst-root loading']//fr:link[@type='local']">
         <xsl:text>#link("</xsl:text>
         <xsl:value-of select="@href" />
         <xsl:text>", underline(stroke: (dash: "dotted"), text(black)[</xsl:text>
@@ -245,7 +245,7 @@
     </xsl:template>
 
     <xsl:template
-        match="html:div[@class='typst-root loading']//html:span[@class='link-reference']/f:link">
+        match="html:div[@class='typst-root loading']//html:span[@class='link-reference']/fr:link">
         <xsl:text>#link("</xsl:text>
         <xsl:value-of select="@href" />
         <xsl:text>", text(rgb("#10731d"))[</xsl:text>
@@ -253,7 +253,7 @@
         <xsl:text>])</xsl:text>
     </xsl:template>
 
-    <xsl:template match="html:div[@class='typst-root loading']//f:ref">
+    <xsl:template match="html:div[@class='typst-root loading']//fr:ref">
         <xsl:text>#link("</xsl:text>
         <xsl:value-of select="@href" />
         <xsl:text>", underline(stroke: (dash: "dotted"), text(black)[§ [</xsl:text>
@@ -261,14 +261,14 @@
         <xsl:text>]]))</xsl:text>
     </xsl:template>
 
-    <!-- A simple hack to make f:tex pass through markdown-it, but not handling more escape cases
+    <!-- A simple hack to make fr:tex pass through markdown-it, but not handling more escape cases
     yet -->
-    <!-- <xsl:template match="html:div[@class='markdownit grace-loading']//f:tex[@display='block']">
+    <!-- <xsl:template match="html:div[@class='markdownit grace-loading']//fr:tex[@display='block']">
     <xsl:text>\\[</xsl:text>
     <xsl:value-of select="." />
     <xsl:text>\\]</xsl:text>
     </xsl:template>
-    <xsl:template match="html:div[@class='markdownit grace-loading']//f:tex[not(@display='block')]">
+    <xsl:template match="html:div[@class='markdownit grace-loading']//fr:tex[not(@display='block')]">
     <xsl:text>\\(</xsl:text>
     <xsl:value-of select="." />
     <xsl:text>\\)</xsl:text>
