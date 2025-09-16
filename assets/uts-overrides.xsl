@@ -63,7 +63,7 @@
     </xsl:template>
 
     <!-- Override the addr template -->
-    <xsl:template match="fr:addr" priority="10">
+    <xsl:template match="fr:display-uri" priority="10">
         <a class="slug" href="{../fr:route}">
             <xsl:text>[</xsl:text>
             <xsl:value-of select="." />
@@ -72,32 +72,32 @@
         <!-- uts-begin -->
         <div class="link-buttons">
             <!-- : Add the source link to the source of the tree, only works for my own forest -->
-            <xsl:if test="../fr:addr=/fr:tree/fr:frontmatter/fr:addr">
+            <xsl:if test="../fr:display-uri=/fr:tree/fr:frontmatter/fr:display-uri">
                 <xsl:choose>
                     <xsl:when test="../fr:taxon[text()='Person']">
                         <a class="link-button link-source" title="source"
-                            href="https://github.com/utensil/forest/blob/main/trees/people/{../fr:addr}.tree">
+                            href="https://github.com/utensil/forest/blob/main/trees/people/{../fr:display-uri}.tree">
                             <xsl:text>✍️</xsl:text>
                             <span>source</span>
                         </a>
                     </xsl:when>
                     <xsl:when test="../fr:taxon[text()='Reference']">
                         <a class="link-button link-source" title="source" target="_blank"
-                            href="https://github.com/utensil/forest/blob/main/trees/refs/{../fr:addr}.tree">
+                            href="https://github.com/utensil/forest/blob/main/trees/refs/{../fr:display-uri}.tree">
                             <xsl:text>✍️</xsl:text>
                             <span>source</span>
                         </a>
                     </xsl:when>
                     <xsl:when test="../fr:taxon[text()='Proof']">
                         <a class="link-button link-source" title="source" target="_blank"
-                            href="https://github.com/utensil/forest/blob/main/trees/{../../fr:backmatter/fr:context/fr:tree/fr:frontmatter/fr:addr}.tree">
+                            href="https://github.com/utensil/forest/blob/main/trees/{../../fr:backmatter/fr:context/fr:tree/fr:frontmatter/fr:display-uri}.tree">
                             <xsl:text>✍️</xsl:text>
                             <span>source</span>
                         </a>
                     </xsl:when>
                     <xsl:otherwise>
                         <a class="link-button link-source" title="source" target="_blank"
-                            href="https://github.com/utensil/forest/blob/main/trees/{../fr:addr}.tree">
+                            href="https://github.com/utensil/forest/blob/main/trees/{../fr:display-uri}.tree">
                             <xsl:text>✍️</xsl:text>
                             <span>source</span>
                         </a>
@@ -105,13 +105,13 @@
                 </xsl:choose>
             </xsl:if>
             <xsl:if test="../fr:meta[@name='pdf']">
-                <a target="_blank" title="PDF" class="link-button link-pdf" href="{../fr:addr}.pdf">
+                <a target="_blank" title="PDF" class="link-button link-pdf" href="{../fr:display-uri}.pdf">
                     📄<span>PDF</span></a>
             </xsl:if>
             <xsl:if test="../fr:meta[@name='lean']">
                 <xsl:apply-templates select="../fr:meta[@name='lean']" />
             </xsl:if>
-            <xsl:if test="../fr:addr=/fr:tree/fr:frontmatter/fr:addr and ../fr:meta[@name='multilang']">
+            <xsl:if test="../fr:display-uri=/fr:tree/fr:frontmatter/fr:display-uri and ../fr:meta[@name='multilang']">
                 <a id="langblock-toggle" class="link-button" href="javascript:void(0)"
                     title="Show hidden languages">🌎</a>
             </xsl:if>
@@ -134,14 +134,14 @@
             <xsl:for-each select="fr:frontmatter">
                 <a class="bullet">
                     <xsl:choose>
-                        <xsl:when test="fr:addr and fr:route">
+                        <xsl:when test="fr:display-uri and fr:route">
                             <xsl:attribute name="href">
                                 <xsl:value-of select="fr:route" />
                             </xsl:attribute>
                             <xsl:attribute name="title">
                                 <xsl:value-of select="fr:title" />
                                 <xsl:text>[</xsl:text>
-                                <xsl:value-of select="fr:addr" />
+                                <xsl:value-of select="fr:display-uri" />
                                 <xsl:text>]</xsl:text>
                             </xsl:attribute>
                         </xsl:when>
