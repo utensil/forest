@@ -16,7 +16,7 @@ const register = (selector, script) => {
 
 document.addEventListener('DOMContentLoaded', async () => {
     // register('.link-reference', 'backref.js') // it works but not ideal
-    register('.markdownit', 'markdownit.js')
+    // register('.markdownit', 'markdownit.js') // disable it and use pre for now
     register('.typst-root', 'typst.js')
     register('.pikchr-root', 'pikchr.js')
     register('article code.highlight', 'shiki.js')
