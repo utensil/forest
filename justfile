@@ -166,6 +166,13 @@ proselint FILE="":
         fi
     fi
 
+# Supported languages: https://topiary.tweag.io/book/reference/language-support.html
+# e.g. OCaml, Bash, TOML
+# used by https://git.sr.ht/~jonsterling/ocaml-forester
+#
+prep-topiary:
+    which topiary || cargo install topiary-cli
+
 # https://dprint.dev/
 #
 prep-dprint:
