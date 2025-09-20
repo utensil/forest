@@ -129,6 +129,7 @@
     </xsl:template>
     <!-- uts-end -->
 
+
     <xsl:template match="fr:tree" mode="toc">
         <li>
             <xsl:for-each select="fr:frontmatter">
@@ -139,16 +140,16 @@
                                 <xsl:value-of select="fr:route" />
                             </xsl:attribute>
                             <xsl:attribute name="title">
-                                <xsl:value-of select="fr:title" />
-                                <xsl:text>[</xsl:text>
+                                <xsl:value-of select="fr:title/@text" />
+                                <xsl:text>&#160;[</xsl:text>
                                 <xsl:value-of select="fr:display-uri" />
                                 <xsl:text>]</xsl:text>
                             </xsl:attribute>
                         </xsl:when>
                         <xsl:otherwise>
                             <xsl:attribute name="href">
-                                <xsl:text>#tree-</xsl:text>
-                                <xsl:value-of select="fr:anchor" />
+                                <xsl:text>#</xsl:text>
+                                <xsl:value-of select="generate-id(..)" />
                             </xsl:attribute>
                             <xsl:attribute name="title">
                                 <xsl:value-of select="fr:title" />
@@ -157,7 +158,7 @@
                     </xsl:choose>
                     <xsl:text>■</xsl:text>
                 </a>
-                <span class="link local" data-target="#tree-{fr:anchor}">
+                <span class="link local" data-target="#{generate-id(..)}">
                     <!-- uts-begin: Override the toc template to add data-taxon -->
                     <span class="taxon" data-taxon="{fr:taxon}">
                         <xsl:apply-templates select=".." mode="tree-taxon-with-number">
@@ -165,7 +166,7 @@
                         </xsl:apply-templates>
                     </span>
                     <!-- uts-end -->
-                    <xsl:apply-templates select="fr:title" />
+                  <xsl:apply-templates select="fr:title" />
                 </span>
             </xsl:for-each>
             <xsl:apply-templates select="fr:mainmatter" mode="toc" />
