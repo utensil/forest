@@ -314,6 +314,7 @@
     - [Choosing typeface](https://imperavi.com/books/ui-typography/basis/choosing-typeface/)
     - [Welcome to Automerge | Automerge CRDT](https://automerge.org/docs/hello/)
         - [CRDT: Text Buffer - Made by Evan](https://madebyevan.com/algos/crdt-text-buffer/) #struct
+        - [Automerge 3.0](https://automerge.github.io/blog/automerge-3/)
     - [I'm Worried It Might Get Bad](https://danielmiessler.com/blog/im-worried-it-might-get-bad) #idea
     - [Blog | Fabián's Journal](https://fabiansjournal.bearblog.dev/blog/)
 }}
@@ -701,6 +702,40 @@
     - [I'm rebelling against the algorithm](https://varunraghu.com/im-rebelling-against-the-algorithm/)
 }}
 
+\subtree[2025-07-15]{\mdnote{2025-07-15}{
+- #system
+    - [A distributed systems reliability glossary](https://antithesis.com/resources/reliability_glossary/)
+- #gpu
+    - [Apple's MLX adding CUDA support](https://github.com/ml-explore/mlx/pull/1983) ([on HN](https://news.ycombinator.com/item?id=44565668))
+        - Programs built against MLX -> Can take advantage of CUDA-enabled chips
+        - not the other way around
+        - [SCALE documentation](https://docs.scale-lang.com/stable/)
+            - SCALE is a GPGPU programming toolkit that can natively compile CUDA applications for AMD GPUs.
+            - [spectral-compute/scale-examples](https://github.com/spectral-compute/scale-examples)
+- #db
+    - [Embedding User-Defined Indexes in Apache Parquet Files](https://datafusion.apache.org/blog/2025/07/14/user-defined-parquet-indexes/)
+- #selfhost
+    - [Packages proxies](https://blog.garambrogne.net/packages-proxies-en.html)
+        - [EpicWink/proxpi: PyPI caching proxy](https://github.com/EpicWink/proxpi)
+        - [panamax-rs/panamax: Mirror rustup and crates.io repositories, for offline Rust and cargo usage.](https://github.com/panamax-rs/panamax)
+        - [Pulp Project](https://pulpproject.org/)
+
+            > Some specialized proxies handle different kinds of packages, like Pulp.
+
+        - [soulteary/apt-proxy: [Ubuntu / Debian / CentOS / Alpine] Lightweight APT / YUM / APK CHACHE PROXY just over 2MB in size!](https://github.com/soulteary/apt-proxy)
+        - [NGINX Content Caching | NGINX Documentation](https://docs.nginx.com/nginx/admin-guide/content-cache/content-caching/)
+
+            > Squid is boring; lets use Nginx cache.
+
+- #agent
+    - [Show HN: We made our own inference engine for Apple Silicon](https://github.com/trymirai/uzu)
+        - A high-performance inference engine for AI models, in Rust
+        - [trymirai/lalamo: JAX infrastructure for model optimisation](https://github.com/trymirai/lalamo)
+        - [Anemll/Anemll: Artificial Neural Engine Machine Learning Library](https://github.com/Anemll/Anemll)
+- #nix
+    - [Trying Guix: A Nixer's Impressions](https://tazj.in/blog/trying-guix)
+}}
+
 \subtree[2025-07-14]{\mdnote{2025-07-14}{
 - #cg
     - [Algorithms for making interesting organic simulations](https://bleuje.com/physarum-explanation/) ([on HN](https://news.ycombinator.com/item?id=44551777)) ([on lobste.rs](https://lobste.rs/s/rx4vvq))
@@ -713,7 +748,10 @@
 - #lint
     - [gardner/LocalLanguageTool: Self-hosted LanguageTool private instance is an offline alternative to Grammarly](https://github.com/gardner/LocalLanguageTool)
 - #cpp
+    - [The Best C++ Library](https://mcyoung.xyz/2025/07/14/best/)
     - [Stepanov’s biggest blunder](https://mmapped.blog/posts/43-stepanovs-biggest-blunder)
+    - [C++ Coroutines Advanced: Converting std:future to asio:awaitable](https://www.ddhigh.com/en/2025/07/15/cpp-coroutine-future-to-awaitable/) ([on HN](https://news.ycombinator.com/item?id=44567134))
+    - [Initial implementation of the experimental C++ Lifetime Safety Analysis (-Wexperimental-lifetime-safety) has just landed in Clang](https://discourse.llvm.org/t/announcing-the-lifetime-safety-breakout-group/87333)
 - #formal
     - [Using Lean like an External SMT Solver from Python](https://www.philipzucker.com/lean_smt/) #lean
 - #math
@@ -742,19 +780,23 @@
         - [Karl Hiner - Introduction to Digital Filters - Jupyter notebooks and a geometric interpretation of digital audio filters](https://karlhiner.com/jupyter_notebooks/intro_to_digital_filters) ([on HN](https://news.ycombinator.com/item?id=44535977))
     - [new Date("wtf")](https://jsdate.wtf/)
     - [How does a screen work?](https://www.makingsoftware.com/chapters/how-a-screen-works)
+    - [When SIGTERM Does Nothing: A Postgres Mystery](https://clickhouse.com/blog/sigterm-postgres-mystery)
 - #crash
     - [Preliminary report into Air India crash released](https://www.bbc.co.uk/news/live/cx20p2x9093t) ([on HN](https://news.ycombinator.com/item?id=44536459))
 - #fediverse
     - [Revival: There appears to be media consensus: "Bluesky is dead."](https://netwars.pelicancrossing.net/2025/06/27/revival/)
 - #ph
     - [Black hole merger challenges our understanding of black hole formation](https://gizmodo.com/astronomers-detect-a-black-hole-merger-thats-so-massive-it-shouldnt-exist-2000628197) ([on HN](https://news.ycombinator.com/item?id=44555220))
+    - [LIGO detects most massive black hole merger to date](https://www.caltech.edu/about/news/ligo-detects-most-massive-black-hole-merger-to-date) ([on HN](https://news.ycombinator.com/item?id=44564656))
     - [U.S. abandons hunt for signal of cosmic inflation](https://www.science.org/content/article/u-s-abandons-hunt-signal-cosmic-inflation)
         - [China is quietly preparing to build a gigantic telescope | Science | AAAS](https://www.science.org/content/article/china-quietly-preparing-build-gigantic-telescope)
         - [Xuntian](https://en.wikipedia.org/wiki/Xuntian)
 - #sandbox
     - [What is Incus?](https://linuxcontainers.org/incus/)
+    - [Bedrock: A tiny, portable 8-bit virtual computer (uxn fork)](https://benbridle.com/projects/bedrock.html)
 - #game
     - [luxe engine | A lovingly crafted game engine](https://luxeengine.com/)
+    - [Dog Walk: Blender Studio's official game project](https://blenderstudio.itch.io/dogwalk) ([on HN](https://news.ycombinator.com/item?id=44565603))
 }}
 
 \subtree[2025-07-11]{\mdnote{2025-07-11}{
@@ -786,6 +828,7 @@
         - wrapper types can be done, but they are very difficult to work with
         - unused variable warning can't catch it, as it is only a dead store: we store a value that is never read
         - static analysers all catch it, but they suffer from noise
+    - [OpenZFS Bug Ported to Zig](https://andrewkelley.me/post/openzfs-bug-ported-zig.html) #zig
 - [FP8 is ~100 tflops faster when the kernel name has "cutlass" in it](https://twitter.com/cis_female/status/1943069934332055912)
     - [the PR](https://github.com/triton-lang/triton/pull/7298)
     - "that is a very usual way (known practices) of vendors applying specific optimizations for known things"
@@ -991,6 +1034,7 @@
         - uses [baml](https://github.com/BoundaryML/baml) to engineer prompts using schemas
         - uses [Beam](https://docs.beam.cloud/v2/getting-started/introduction), an open-source serverless cloud for sanboxed execution
         - made into [beam-cloud/lovable-clone](https://github.com/beam-cloud/lovable-clone)
+    - [How I keep up with AI progress](https://blog.nilenso.com/blog/2025/06/23/how-i-keep-up-with-ai-progress/)
 - interesting projects
     - [Am I online?](https://antonz.org/is-online/)
         - `generate_402` pages could be used for this
@@ -1070,6 +1114,9 @@
     - [Lack of intent is what makes reading LLM-generated text exhausting](https://lambdaland.org/posts/2025-08-04_artifical_inanity/)
         - [Eleven Music](https://elevenlabs.io/blog/eleven-music-is-here)
             - AI is still in the uncanny valley, it still has no soul
+    - [LLM Inevitabilism](https://tomrenner.com/posts/llm-inevitabilism/)
+        - [New comment by lsy in "LLM Inevitabilism"](https://news.ycombinator.com/item?id=44568114)
+        - [New comment by mg in "LLM Inevitabilism"](https://news.ycombinator.com/item?id=44568158)
 - #jj
     - [Git experts should try Jujutsu](https://pksunkara.com/thoughts/git-experts-should-try-jujutsu/)
     - [Jujutsu For Busy Devs](https://maddie.wtf/posts/2025-07-21-jujutsu-for-busy-devs)
@@ -1083,6 +1130,7 @@
     - [Recent Archive of Our Own outage was caused by integer exhaustion](\verb>>>|https://otwarchive.atlassian.net/jira/software/c/projects/AO3/issues/AO3-7031?jql=project%20%3D%20%22AO3%22%20ORDER%20BY%20created%20DESC>>>)
     - [Why AO3 Was Down](https://www.reddit.com/r/AO3/s/67nQid89MW) ([on HN](https://news.ycombinator.com/item?id=44469650))
     - [GitHub pull requests were down](https://www.githubstatus.com/incidents/6swp0zf7lk8h) ([on HN](https://news.ycombinator.com/item?id=44799494))
+    - [Tell HN: 1.1.1.1 Appears to Be Down](https://news.ycombinator.com/item?id=44565836)
 - #agent
     - [bgcmd: let AI interact with any REPL](https://github.com/izabera/bgcmd)
         - a nice example of Claude driving `rr` to debug
@@ -1900,6 +1948,7 @@
     - [Can you block it? A simple Ad Block Tester](https://canyoublockit.com/)
     - [Tell HN: uBlock Origin on Chrome is finally gone](https://news.ycombinator.com/item?id=44538517)
         - [How I found a bypass in Google's big anti-adblock update](https://0x44.xyz/blog/web-request-blocking/)
+    - [Cloudflare Starts Blocking Pirate Sites for UK Users](https://torrentfreak.com/cloudflare-starts-blocking-pirate-sites-for-uk-users-thats-a-pretty-big-deal-250715/) ([on HN](https://news.ycombinator.com/item?id=44571563))
 - #news
     - [Rules, Not Renewables, Might Explain the Iberian Blackout](https://spectrum.ieee.org/spain-grid-failure)
     - [Miscalculation by Spanish power grid operator REE contributed to blackout](https://www.reuters.com/business/energy/investigation-into-spains-april-28-blackout-shows-no-evidence-cyberattack-2025-06-17/)
@@ -2792,6 +2841,7 @@
     - [Implementing fast TCP fingerprinting with eBPF](https://halb.it/posts/ebpf-fingerprinting-2/)
         - using Cilium in Go
     - [ebpf series - Unnamed Memories](https://h0x0er.github.io/blog/category/ebpf/)
+    - [Introducing TCP-in-UDP solution (eBPF)](https://blog.mptcp.dev/2025/07/14/TCP-in-UDP.html)
 - found [alternative open source front-ends for popular internet platforms](https://github.com/mendel5/alternative-front-ends)
 }}
 
