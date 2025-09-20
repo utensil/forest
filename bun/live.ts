@@ -44,8 +44,8 @@ const startLiveReload = () => {
             if (/\.tree$/.test(message.data)) {
                 const path_parts: string[] = message.data.split('/')
                 let page: string = path_parts.pop() || window.location.pathname
-                page = page.replace(/\.tree$/, '.xml')
-                page = `/${page}`
+                page = page.replace(/\.tree$/, '/')
+                page = `/forest/${page}`
                 console.debug(window.location.pathname, page)
                 if (window.location.pathname !== page) {
                     console.debug(`redirecting to ${page}`)
