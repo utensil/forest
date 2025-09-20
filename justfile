@@ -183,6 +183,11 @@ prep-dprint:
 check-dprint:
     dprint check --list-different
 
+# https://www.html-tidy.org/
+#
+prep-tidy:
+    brew install tidy-html5
+
 ## Enrich contents
 
 # Inspired by https://github.com/Ranchero-Software/NetNewsWire/issues/978#issuecomment-1320911427
