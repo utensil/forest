@@ -44,6 +44,8 @@ while IFS= read -r line; do
         just copy "$CHANGED_FILE_RELATIVE"
     elif [[ $CHANGED_FILE == *".tree" ]]; then
         just forest
+        cp -f assets/*.xsl output/forest/
+        cp -f output/forest/uts-forest.xsl output/forest/default.xsl
         # only convert the modified tree's xml to html
         # do not take affected trees into account, for now
         convert_xml_to_html "./output/forest/${CHANGED_FILE_BASENAME%.*}/index.xml"
@@ -73,6 +75,6 @@ touch build/live/trigger.txt
 if [[ $CHANGED_FILE == *".xsl" ]]; then
     XSL_CHANGED=1 convert_xml_files true
 # elif [[ $CHANGED_FILE == *".tree" ]]; then
-    # convert_xml_files true 
+    # convert_xml_files true
 fi
 
