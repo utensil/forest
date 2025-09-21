@@ -539,6 +539,9 @@ prep-rust:
     . $HOME/.cargo/env
     which cargo-binstall || cargo install cargo-binstall
 
+prep-cargo-seek:
+    which cargo-seek || cargo install --locked cargo-seek
+
 prep-node:
     which node || brew install node || (just prep-mise && mise use -g node@latest)
 
