@@ -2,7 +2,7 @@
 
 [![Built with Forester](https://img.shields.io/badge/Built_with-Forester-27560f?style=flat)](https://www.jonmsterling.com/foreign-forester-jms-005P.xml)
 
-My Zettelkasten-style forest of evergreen notes on math and tech: https://utensil.github.io/forest/index.xml
+My Zettelkasten-style forest of evergreen notes on math and tech: https://utensil.github.io/forest/
 
 ## Development
 
