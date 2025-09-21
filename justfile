@@ -572,6 +572,11 @@ loc:
 loc-tui PATH *PARAMS="":
     uvx cloctui {{PATH}} {{PARAMS}}
 
+# Runal is a text-based creative coding environment for the terminal. It works similarly as processing or p5js but it does all the rendering as text. It can either be programmed with JavaScript, or used as a Go package.
+#
+prep-runal:
+    which runal || (curl -sSL empr.cl/get/runal | bash)
+
 ## fzf
 
 # based on https://github.com/zachdaniel/dotfiles/blob/main/priv_scripts/project
