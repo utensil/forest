@@ -137,6 +137,24 @@ function initTracker(userConfig: Partial<ActivityConfig> = {}): void {
     // window.activityMap = activityMap
     // console.log('activityMap available as window.activityMap', activityMap);
 
+    // Find the latest date with data and add 1 week
+    const dates = Array.from(activityMap.keys()).sort()
+    const lastDataDate = dates[dates.length - 1]
+    let endDate = new Date()
+
+    // console.log('DEBUG: All dates from activityMap:', dates)
+    // console.log('DEBUG: Last data date:', lastDataDate)
+
+    if (lastDataDate) {
+        const lastDate = new Date(lastDataDate)
+        lastDate.setDate(lastDate.getDate() + 7)
+        endDate = lastDate
+        // console.log('DEBUG: Last data date + 1 week:', endDate)
+    }
+
+    const endDateStr = `${endDate.getFullYear()}-${(endDate.getMonth() + 1).toString().padStart(2, '0')}-${endDate.getDate().toString().padStart(2, '0')}`
+    // console.log('DEBUG: Final end date string:', endDateStr)
+
     // Generate activity data string for the graph
     const activityData = Array.from(activityMap.entries())
         .flatMap(([date, count]) =>
@@ -147,14 +165,17 @@ function initTracker(userConfig: Partial<ActivityConfig> = {}): void {
     // Render the activity graph
     const graphContainer = document.getElementById('learning-activity')
     if (graphContainer) {
-        graphContainer.innerHTML = `
+        const htmlContent = `
             <activity-graph
                 activity-data="${activityData}"
                 activity-levels="${config.activityLevels.join(',')}"
                 first-day-of-week="${config.firstDayOfWeek}"
+                range-end="${endDateStr}"
                 style="width:100%"
             ></activity-graph>
         `
+        // console.log('DEBUG: Rendered HTML:', htmlContent)
+        graphContainer.innerHTML = htmlContent
     }
 }
 
