@@ -577,6 +577,9 @@ loc-tui PATH *PARAMS="":
 prep-runal:
     which runal || (curl -sSL empr.cl/get/runal | bash)
 
+prep-theattyr:
+    which theattyr || cargo install theattyr
+
 ## fzf
 
 # based on https://github.com/zachdaniel/dotfiles/blob/main/priv_scripts/project
