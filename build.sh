@@ -92,7 +92,7 @@ function bun_build {
             #     echo "🚨 lightningcss failed with $EXIT_CODE"
             #     exit $EXIT_CODE
             # fi
-        else
+        elif [[ $FILE == *".ts" || $FILE == *".tsx" ]]; then
             just js "bun/$FILE"
             # bun build bun/$FILE --outdir output
         fi
@@ -112,7 +112,7 @@ function copy_extra_assets {
     cp -rf assets/penrose output/forest/
     cp -rf assets/images output/forest/
     cp -f assets/*.html output/forest/
-    
+
     # ls output/shader/
 
     # cp node_modules/@myriaddreamin/typst-ts-web-compiler/pkg/typst_ts_web_compiler_bg.wasm output/

@@ -54,7 +54,14 @@ glsl SOURCE:
     cp -f {{SOURCE}} output/forest/shader/
 
 css SOURCE:
-    bunx --bun lightningcss-cli --minify --bundle --targets '>= 0.25%' {{SOURCE}} -o output/forest/{{file_name(SOURCE)}}
+    ln -s {{justfile_directory()}}/assets/images bun/images || true
+    bun build --target=browser --minify --outfile=output/forest/{{file_name(SOURCE)}} {{SOURCE}}
+    rm bun/images
+    # blocks on
+    # - [fix: Use correct MIME type for CSS files in Bun.build outputs](https://github.com/oven-sh/bun/pull/21849)
+    # - [Allow relative assets in CSS that don't exist · Issue #22725 · oven-sh/bun](https://github.com/oven-sh/bun/issues/22725)
+    # bun run bun_build.ts {{SOURCE}}
+    # bunx --bun lightningcss-cli --minify --bundle --targets '>= 0.25%' {{SOURCE}} -o output/forest/{{file_name(SOURCE)}}
     # bunx postcss -o output/{{file_name(SOURCE)}} {{SOURCE}}
 
 js SOURCE:
