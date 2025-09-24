@@ -1,10 +1,11 @@
 import Bun from 'bun'
+import type { BunPlugin } from 'bun'
 
 const args = process.argv.slice(2)
 
 // console.log(args);
 
-const wgslLoader = {
+const wgslLoader: BunPlugin = {
     name: 'wgsl',
     async setup(build) {
         const { transpileWGSL } = await import('@use-gpu/shader/wgsl')
@@ -31,6 +32,7 @@ const result = await Bun.build({
     entrypoints: [args[0]],
     outdir: './output/forest',
     target: 'browser',
+    minify: true,
     plugins: [wgslLoader],
 })
 

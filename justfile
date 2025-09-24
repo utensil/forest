@@ -58,7 +58,7 @@ css SOURCE:
     # bunx postcss -o output/{{file_name(SOURCE)}} {{SOURCE}}
 
 js SOURCE:
-    bun run bun_build.js {{SOURCE}}
+    bun run bun_build.ts {{SOURCE}}
 
 forest:
     opam exec -- forester build # 2>&1 > build/forester.log # --dev
