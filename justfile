@@ -600,7 +600,7 @@ proj:
 fzf:
     fzf --preview 'bat {}'|xargs lvim
 
-## Web
+## Browser
 
 prep-view:
     # awrit installation usually fails with some warning
@@ -654,6 +654,11 @@ prep-rdrview:
 #
 cha URL:
     cha {{URL}}
+
+# hygg: a minimalist terminal-based document reader supporting PDFs, EPUBs, and text files with vim-like navigation
+#
+prep-hygg:
+    which hygg || cargo install --locked hygg
 
 # very text-ish, high contrast theme, no js, no CJK support
 #
