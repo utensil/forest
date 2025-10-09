@@ -407,6 +407,25 @@ push PROJ="forest" BRANCH="main":
     jj psb {{BRANCH}} --remote berg
     which rad && git push rad main
 
+jjpr PROJ="ocaml-forester":
+    cd ~/projects/{{PROJ}} && jj prw
+
+jjprp PROJ="ocaml-forester":
+    cd ~/projects/{{PROJ}} && jj pscw
+
+# Prep mail patch
+prep-mailp:
+    go install 'git.sr.ht/~emersion/pyonji@latest'
+
+mailp PROJ="ocaml-forester":
+    cd ~/projects/{{PROJ}} && pyonji
+
+# should test with my email first
+# then
+# ~jonsterling/forester-devel@lists.sr.ht
+mailpp MAIL PROJ="ocaml-forester":
+    cd ~/projects/{{PROJ}} && git send-email --to="{{MAIL}}" HEAD^
+
 # the idea is to use this for id of garden notes
 # i.e. the id of a random note is the short jj change id when it was first added
 #
