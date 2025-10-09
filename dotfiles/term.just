@@ -414,8 +414,16 @@ jjprp PROJ="ocaml-forester":
     cd ~/projects/{{PROJ}} && jj pscw
 
 # Prep mail patch
+#
+# pyonji init is handy for setting up git send-mail
+# but it doesn't work well with jj when resubmitting patch
+# - it won't be able to forget my test with sending to my own email prior to sending to the actual mailing list
+# - it won't be able to send 2 different patches against main, because they are not on any branch in jj
+# so I use the old-fashion
+# `git send-email --to="~jonsterling/forester-devel@lists.sr.ht" HEAD^`
+#
 prep-mailp:
-    go install 'git.sr.ht/~emersion/pyonji@latest'
+    which pyonji || go install 'git.sr.ht/~emersion/pyonji@latest'
 
 mailp PROJ="ocaml-forester":
     cd ~/projects/{{PROJ}} && pyonji
@@ -431,16 +439,6 @@ mailpp MAIL PROJ="ocaml-forester":
 #
 @jjid REVSET="@":
     jj log -r {{REVSET}} -T 'change_id.short()' --no-graph
-
-# pyonji init is handy for setting up git send-mail
-# but it doesn't work well with jj when resubmitting patch
-# - it won't be able to forget my test with sending to my own email prior to sending to the actual mailing list
-# - it won't be able to send 2 different patches against main, because they are not on any branch in jj
-# so I use the old-fashion
-# `git send-email --to="~jonsterling/forester-devel@lists.sr.ht" HEAD^`
-#
-prep-mailp:
-    which pyonji || go install 'git.sr.ht/~emersion/pyonji@latest'
 
 # Follow https://radicle.xyz/guides/user for rad and git
 # then follow https://radicle.xyz/2025/08/14/jujutsu-with-radicle for jj
