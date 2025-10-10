@@ -401,6 +401,7 @@ init-jj PROJ="forest" *PARAMS="":
 push PROJ="forest" BRANCH="main":
     #!/usr/bin/env bash
     cd ~/projects/{{PROJ}}
+    just chk
     jj bs {{BRANCH}} -r @-
     jj psb {{BRANCH}}
     jj psb {{BRANCH}} --remote tangled
