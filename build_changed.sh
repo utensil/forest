@@ -44,8 +44,7 @@ while IFS= read -r line; do
         just copy "$CHANGED_FILE_RELATIVE"
     elif [[ $CHANGED_FILE == *".tree" ]]; then
         just forest
-        cp -f assets/*.xsl output/forest/
-        cp -f output/forest/uts-forest.xsl output/forest/default.xsl
+        just assets
         # only convert the modified tree's xml to html
         # do not take affected trees into account, for now
         convert_xml_to_html "./output/forest/${CHANGED_FILE_BASENAME%.*}/index.xml"
@@ -53,6 +52,7 @@ while IFS= read -r line; do
         # even with full rebuild, updates to preambles are NOT reflected
         # ./build.sh
         just forest
+        just assets
     elif [[ $CHANGED_FILE == *".bib" ]]; then
         just bib
     elif [[ $CHANGED_FILE == *".glsl" ]]; then
@@ -62,7 +62,8 @@ while IFS= read -r line; do
     elif [[ $CHANGED_FILE == *".domain" ]] || [[ $CHANGED_FILE == *".style" ]] || [[ $CHANGED_FILE == *".substance" ]] || [[ $CHANGED_FILE == *".trio.json" ]]; then
         just penrose "$CHANGED_FILE_RELATIVE"
     else
-        echo "🤷 No action for $line"
+        echo "🤷 Default action for $line"
+        just assets
     fi
 
     # Trigger live reload after processing each file

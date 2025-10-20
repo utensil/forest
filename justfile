@@ -83,7 +83,7 @@ penrose SOURCE:
     cp -f {{SOURCE}} output/forest/penrose/
 
 fix-thm:
-    #!/usr/bin/env zsh
+    #!/usr/bin/env bash
     # mv output/default.xsl output/default.xsl.bak || true
     cp -f assets/*.xsl output/forest/
     cp -f assets/uts-forest.xsl output/forest/default.xsl
@@ -96,6 +96,29 @@ fix-thm:
         fi
     done
 
+assets:
+    #!/usr/bin/env bash
+    echo "⭐ Copying assets"
+    mkdir output/forest/ 2>/dev/null
+
+    mkdir -p output/forest/shader/
+    cp -f assets/shader/*.glsl output/forest/shader/
+    cp -f assets/*.xsl output/forest/
+    cp -f assets/*.html output/forest/
+    cp -f output/forest/uts-forest.xsl output/forest/default.xsl
+
+    cp -rf assets/typst output/forest/
+    cp -rf assets/vendor output/forest/
+    cp -rf assets/penrose output/forest/
+    cp -rf assets/images output/forest/
+    cp -f assets/*.html output/forest/
+    # ls output/shader/
+
+    # cp node_modules/@myriaddreamin/typst-ts-web-compiler/pkg/typst_ts_web_compiler_bg.wasm output/
+    # cp node_modules/@myriaddreamin/typst-ts-renderer/pkg/typst_ts_renderer_bg.wasm output/
+    # ls output/*.wasm
+
+    # cp node_modules/ginac-wasm/dist/ginac.wasm output/
 
 envs:
     #!/usr/bin/env bash

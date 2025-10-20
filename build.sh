@@ -99,30 +99,6 @@ function bun_build {
     done
 }
 
-function copy_extra_assets {
-    mkdir output/forest/
-
-    mkdir -p output/forest/shader/
-    cp -f assets/shader/*.glsl output/forest/shader/
-    cp -f assets/*.xsl output/forest/
-    cp -f output/forest/uts-forest.xsl output/forest/default.xsl
-
-    cp -rf assets/typst output/forest/
-    cp -rf assets/vendor output/forest/
-    cp -rf assets/penrose output/forest/
-    cp -rf assets/images output/forest/
-    cp -f assets/*.html output/forest/
-
-    # ls output/shader/
-
-    # cp node_modules/@myriaddreamin/typst-ts-web-compiler/pkg/typst_ts_web_compiler_bg.wasm output/
-    # cp node_modules/@myriaddreamin/typst-ts-renderer/pkg/typst_ts_renderer_bg.wasm output/
-    # ls output/*.wasm
-
-    # cp node_modules/ginac-wasm/dist/ginac.wasm output/
-
-}
-
 function build_ssr {
     echo "⭐ Rebuilding SSR assets"
     echo >build/ssr.log
@@ -184,8 +160,7 @@ function build {
     #     echo -e "\033[0;31mError: index.xml not found in output directory. Forest build likely failed.\033[0m"
     #     exit 1
     # fi
-    # echo "⭐ Copying assets"
-    copy_extra_assets
+    just assets
     # if the env var UTS_DEV is not set
     # if [ -z "$UTS_DEV" ]; then
     convert_xml_files true

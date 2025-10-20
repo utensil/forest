@@ -46,8 +46,13 @@
         }
 
         @keyframes rotation {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
         }
 
         .ghost {
@@ -59,18 +64,23 @@
         }
 
         @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
         }
     </style>
     <script type="text/javascript">
         const REDIRECT_TIMEOUT = 3000; // Show error after 3 seconds
         const redirectConfig = [
             // {regex: /^\/example$/, redirect: "/example.html"},
-            <!-- {regex: /\/.*\/$/, redirect: (path) => path.replace(/\/$/, '.xml')}, -->
-            <!-- {regex: /\/.*\.html$/, redirect: (path) => path.replace(/\.html$/, '.xml')}, -->
             {regex: /\/.*\.xml$/, redirect: (path) => path.replace(/\/([^/]+)\.xml$/, (_, m) => `/${m}/`)},
-            <!-- {regex: /.*/, redirect: "/index.xml"} -->
+            // {regex: /.*/, redirect: "/forest/"}
         ];
 
         async function redirectToPage() {
@@ -96,7 +106,7 @@
                 if (rule.regex.test(path)) {
                     const redirectTo = typeof rule.redirect === 'function' ? rule.redirect(path) : rule.redirect;
                     const redirectPair = `${path}>${redirectTo}`;
-                    
+
                     // Check for redirect loops and chain length
                     if (!redirectTo) {
                         console.debug(`Skipping redirect: rule ${rule.regex} produced no redirect target for path ${path}`);
@@ -109,12 +119,12 @@
                     } else {
                         // Add this redirect to the chain
                         const newChain = [...redirectChain, redirectPair];
-                        
+
                         const timeoutId = setTimeout(() => {
                             document.getElementById('loader').style.display = 'none';
                             document.getElementById('error-content').style.display = 'block';
                         }, REDIRECT_TIMEOUT);
-                        
+
                         // Clear timeout before redirect
                         clearTimeout(timeoutId);
                         if (!isLocalFile) {
@@ -132,7 +142,7 @@
                     }
                 }
             }
-            
+
             // If we get here, either no redirect rule matched or we detected a redirect loop
             console.debug('No valid redirect found for path:', path);
             document.getElementById('loader').style.display = 'none';
@@ -149,7 +159,7 @@
         <svg class="ghost" width="120" height="120" viewBox="0 0 120 120">
             <g class="ghost-body">
                 <!-- Ghost body -->
-                <path fill="#f0f0f0" stroke="#343a40" stroke-width="3" 
+                <path fill="#f0f0f0" stroke="#343a40" stroke-width="3"
                     d="M30,50 C30,30 50,15 60,15 C70,15 90,30 90,50 C90,90 90,105 90,105 L80,95 L70,105 L60,95 L50,105 L40,95 L30,105 C30,105 30,90 30,50 Z" />
                 <!-- Eyes -->
                 <circle cx="50" cy="45" r="4" fill="#343a40" />
