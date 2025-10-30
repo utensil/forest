@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Markwhen → TimelineJS (v0.16.3 Fixed + Full Screen)</title>
+  <!-- TimelineJS (stable) -->
+  <link rel="stylesheet" href="https://cdn.knightlab.com/libs/timeline3/3.9.0/css/timeline.css">
+  <script src="https://cdn.knightlab.com/libs/timeline3/3.9.0/js/timeline.js"></script>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .container {
+      display: flex;
+      height: 100vh;
+    }
+
+    .editor-container {
+      width: 40%;
+      height: 100%;
+      border-right: 1px solid #eee;
+      padding: 1rem;
+    }
+
+    .timeline-container {
+      width: 60%;
+      height: 100%;
+      padding: 1rem;
+      overflow: auto;
+      position: relative;
+    }
+
+    #markwhen-editor {
+      width: 100%;
+      height: 95%;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      padding: 1rem;
+      font-family: 'Courier New', monospace;
+      font-size: 14px;
+      resize: none;
+      line-height: 1.6;
+      tab-size: 4;
+    }
+
+    h3 {
+      margin-bottom: 0.5rem;
+      color: #333;
+      display: inline-block;
+    }
+
+    .instructions {
+      font-size: 12px;
+      color: #666;
+      margin-bottom: 1rem;
+    }
+
+    .error-message {
+      color: #dc3545;
+      font-size: 12px;
+      margin-top: 0.5rem;
+      display: block;
+    }
+
+    .success-message {
+      color: #28a745;
+      font-size: 12px;
+      margin-top: 0.5rem;
+      display: none;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 2rem;
+      color: #666;
+    }
+
+    /* Full Screen Button Styles */
+    #fullscreen-btn {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      padding: 6px 12px;
+      border: none;
+      border-radius: 4px;
+      background-color: #007bff;
+      color: white;
+      font-size: 12px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: background-color 0.2s;
+    }
+
+    #fullscreen-btn:hover {
+      background-color: #0056b3;
+    }
+
+    #fullscreen-btn svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    /* Full Screen Mode Adjustments */
+    .timeline-container:-webkit-full-screen {
+      width: 100vw !important;
+      height: 100vh !important;
+      padding: 2rem;
+      z-index: 1000;
+      background-color: white;
+    }
+
+    .timeline-container:fullscreen {
+      width: 100vw !important;
+      height: 100vh !important;
+      padding: 2rem;
+      z-index: 1000;
+      background-color: white;
+    }
+
+    .timeline-container:-webkit-full-screen #timeline {
+      height: calc(100vh - 60px) !important;
+    }
+
+    .timeline-container:fullscreen #timeline {
+      height: calc(100vh - 60px) !important;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <!-- Editor -->
+    <div class="editor-container">
+      <h3>Markwhen Editor</h3>
+      <p class="instructions">Supports sections, groups, tags, tasks, media, links</p>
+      <textarea id="markwhen-editor">
+        title: 2024 Product Launch Timeline
+        timezone: America/Los_Angeles
+        #Launch: #2196F3
+        #Design: #FF9800
+        #Development: #4CAF50
+
+        section Q1 2024: Preparation
+        group Planning #Launch
+        2024-01-10 to 2024-01-20: Finalize Product Requirements
+        - [x] Review 2023 user feedback
+        - [ ] Draft PRD v1.0
+        contact: product@example.com
+        assignees: [Alice (PM), Bob (Design Lead)]
+
+        in 5 days after !above: UX Design Kickoff
+        ![UX Workshop](https://picsum.photos/id/1/800/400)
+        location: Virtual (Zoom Link: https://example.com/ux-kickoff)
+        @DesignSystem: Reference Q4 2023 guidelines
+        @endGroup
+
+        group Design #Design
+        Feb 1 2024 to Feb 29 2024: Wireframe & Prototype
+        - [x] Homepage wireframe
+        - [x] User flow diagrams
+        - [ ] High-fidelity prototype
+        assignees: [Bob, Charlie (UX Designer)]
+        @endGroup
+
+        section Q2 2024: Development & Testing
+        group Development #Development
+        Mar 1 2024 to Apr 30 2024: Frontend Development
+        [View Tech Spec](https://example.com/tech-spec)
+        contact: Dave (Tech Lead) → dave@example.com
+        @endGroup
+
+        May 1 2024 to May 15 2024: QA Testing
+        - [ ] Functional testing
+        - [ ] Performance testing
+        - [ ] Cross-browser compatibility
+        location: QA Lab (Floor 3)
+        @endGroup
+
+        section Q3 2024: Launch
+        Jun 1 2024: Product Launch Event
+        ![Launch Teaser](https://picsum.photos/id/20/800/400)
+        contact: Emma (Marketing) → emma@example.com
+      </textarea>
+      <div id="parser-load-error" class="error-message">Loading parser... (refresh if stuck)</div>
+      <div id="parse-error" class="error-message" style="display: none;">Parsing failed! Check console.</div>
+      <div id="success-message" class="success-message">Parsing successful → Timeline updated</div>
+    </div>
+
+    <!-- Timeline Preview (with Full Screen Button) -->
+    <div class="timeline-container">
+      <h3>TimelineJS Preview (Auto-Updates)</h3>
+      <!-- Full Screen Button -->
+      <button id="fullscreen-btn" aria-label="Toggle full screen">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M10 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        Full Screen
+      </button>
+      <div id="timeline" style="width: 100%; height: calc(100% - 40px);">
+        <div class="empty-state">Loading timeline...</div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module">
+    // 1. Force show all logs + Import dependencies
+    console.log('🔴 DEBUG: Script started - v0.16.3 compatibility + Full Screen');
+    let parseMarkwhen;
+    let dateFns;
+    const parserLoadError = document.getElementById('parser-load-error');
+
+    try {
+      // Import date-fns
+      dateFns = await import('https://esm.sh/date-fns@2.30.0');
+      console.log('✅ DEBUG: date-fns loaded', {hasParse: !!dateFns.parse});
+
+      // Import Markwhen Parser v0.16.3 (force bundle)
+      const parserModule = await import('https://esm.sh/@markwhen/parser@0.16.3?bundle');
+      parseMarkwhen = parserModule.parse;
+      console.log('✅ DEBUG: Markwhen Parser v0.16.3 loaded', {isFunction: typeof parseMarkwhen === 'function'});
+
+      parserLoadError.style.display = 'none';
+    } catch (err) {
+      parserLoadError.textContent = `Dependency load failed: ${err.message}`;
+      console.error('❌ DEBUG: Dependency error:', err);
+    }
+
+    // 2. DOM Elements
+    const editor = document.getElementById('markwhen-editor');
+    const parseError = document.getElementById('parse-error');
+    const successMessage = document.getElementById('success-message');
+    const timelineContainer = document.getElementById('timeline');
+    const fullscreenBtn = document.getElementById('fullscreen-btn');
+    let timelineInstance = null;
+
+    // 3. Full Screen Toggle Functionality
+    function toggleFullscreen() {
+      const isFullscreen = document.fullscreenElement || document.webkitFullscreenElement;
+
+      if (!isFullscreen) {
+        // Enter full screen
+        if (timelineContainer.parentElement.requestFullscreen) {
+          timelineContainer.parentElement.requestFullscreen();
+        } else if (timelineContainer.parentElement.webkitRequestFullscreen) {
+          timelineContainer.parentElement.webkitRequestFullscreen();
+        }
+        console.log('📺 DEBUG: Entering full screen');
+      } else {
+        // Exit full screen
+        if (document.exitFullscreen) {
+          document.exitFullscreen();
+        } else if (document.webkitExitFullscreen) {
+          document.webkitExitFullscreen();
+        }
+        console.log('📺 DEBUG: Exiting full screen');
+      }
+    }
+
+    // Update button text/icon when full screen state changes
+    function updateFullscreenButton() {
+      const isFullscreen = document.fullscreenElement || document.webkitFullscreenElement;
+      const svg = fullscreenBtn.querySelector('svg');
+
+      if (isFullscreen) {
+        fullscreenBtn.innerHTML = `
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10h4m-4 0v4m-6 2a9 9 0 1118 0 9 9 0 01-18 0z" />
+                    </svg>
+                    Exit Full Screen
+                `;
+      } else {
+        fullscreenBtn.innerHTML = `
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    Full Screen
+                `;
+      }
+
+      // Refresh timeline layout to fit new dimensions
+      if (timelineInstance) {
+        timelineInstance.updateDisplay();
+        console.log('📺 DEBUG: Timeline layout refreshed for full screen');
+      }
+    }
+
+    // Add full screen event listeners
+    fullscreenBtn.addEventListener('click', toggleFullscreen);
+    document.addEventListener('fullscreenchange', updateFullscreenButton);
+    document.addEventListener('webkitfullscreenchange', updateFullscreenButton);
+
+    // 4. Date Normalization (simplified for reliability)
+    function normalizeDate(dateStr) {
+      if (!dateStr || !dateFns) {
+        console.log('⚠️ DEBUG: normalizeDate skipped', {reason: !dateStr ? 'No date' : 'dateFns missing'});
+        return null;
+      }
+      try {
+        const date = new Date(dateStr);
+        if (isNaN(date.getTime())) throw new Error('Invalid date');
+        return {
+          year: date.getFullYear(),
+          month: date.getMonth() + 1,
+          day: date.getDate(),
+          hour: 0,
+          minute: 0
+        };
+      } catch (err) {
+        console.error('❌ DEBUG: Date parse failed', {input: dateStr, error: err.message});
+        return null;
+      }
+    }
+
+    // 5. Extract Tasks (simplified for v0.16.3)
+    function extractTasks(supplemental) {
+      const tasks = [];
+      if (!Array.isArray(supplemental)) return tasks;
+      supplemental.forEach(item => {
+        if (item.type === 'checkbox' && item.raw) {
+          tasks.push({text: item.raw.trim(), completed: item.value === true});
+        }
+      });
+      console.log('🔧 DEBUG: Extracted tasks', {count: tasks.length});
+      return tasks;
+    }
+
+    // 6. Extract Metadata (simplified)
+    function extractMetadata(supplemental) {
+      const meta = {contact: '', assignees: '', location: '', links: [], media: null};
+      if (!Array.isArray(supplemental)) return meta;
+      supplemental.forEach(item => {
+        if (item.type !== 'text' || !item.raw) return;
+        const text = item.raw.trim();
+        if (text.startsWith('contact:')) meta.contact = text.replace('contact:', '').trim();
+        if (text.startsWith('assignees:')) meta.assignees = text.replace('assignees:', '').trim().replace(/[\[\]]/g, '');
+        if (text.startsWith('location:')) meta.location = text.replace('location:', '').trim();
+        if (text.startsWith('[') && text.includes('](')) {
+          const [textPart, urlPart] = text.split('](');
+          meta.links.push({text: textPart.slice(1), url: urlPart.slice(0, -1)});
+        }
+        if (text.startsWith('![')) {
+          const [altPart, urlPart] = text.split('](');
+          meta.media = {alt: altPart.slice(2), url: urlPart.slice(0, -1)};
+        }
+      });
+      return meta;
+    }
+
+    // 7. Recursively Extract Events (v0.16.3-focused: handles "fn" type nodes)
+    function extractEvents(children, section = null, group = null) {
+      const events = [];
+      if (!Array.isArray(children)) return events;
+
+      for (const child of children) {
+        console.log('🔍 DEBUG: Processing node', {type: child.style || child.constructor.name});
+
+        // Section node (v0.16.3 uses "fn" type for sections/groups)
+        if (child.style === 'section' && child.title) {
+          const newSection = {id: child.id || Date.now().toString(), name: child.title};
+          events.push(...extractEvents(child.children || [], newSection, group));
+        }
+        // Group node (v0.16.3 uses "fn" type for sections/groups)
+        else if (child.style === 'group' && child.title) {
+          const newGroup = {id: child.id || Date.now().toString(), name: child.title, tags: child.tags || []};
+          events.push(...extractEvents(child.children || [], section, newGroup));
+        }
+        // Event node (v0.16.3 uses "ri" type for events)
+        else if (child.dateRangeIso && child.firstLine) {
+          const supplemental = child.supplemental || [];
+          const event = {
+            id: child.id || Date.now().toString(),
+            title: child.firstLine.restTrimmed || 'Untitled',
+            dateRange: {
+              start: child.dateRangeIso.fromDateTimeIso,
+              end: child.dateRangeIso.toDateTimeIso
+            },
+            section,
+            group,
+            tasks: extractTasks(supplemental),
+            meta: extractMetadata(supplemental)
+          };
+          events.push(event);
+          console.log('✅ DEBUG: Extracted event', {title: event.title, section: section?.name, group: group?.name});
+        }
+        // Recurse into children
+        else if (child.children) {
+          events.push(...extractEvents(child.children, section, group));
+        }
+      }
+      return events;
+    }
+
+    // 8. Extract Parsed Data (FORCE log raw Parser output + fix tag extraction)
+    function extractParsedData(parseResult) {
+      // 🔴 FORCE show raw Parser output (critical for debugging)
+      console.log('📋 DEBUG: RAW Parser Output (v0.16.3)', parseResult);
+
+      const data = {
+        title: parseResult.header?.title || 'Untitled',
+        timezone: parseResult.header?.timezone || 'UTC',
+        tags: [],
+        sections: [],
+        events: []
+      };
+
+      // Extract tags (FIX: v0.16.3 still uses legacy format: )Tag: ')Color')
+      if (parseResult.header) {
+        Object.entries(parseResult.header).forEach(([key, value]) => {
+          // Handle legacy format (from raw output: )Launch: ')2196F3')
+          if (key.startsWith(')') && typeof value === 'string' && value.startsWith("')") && value.endsWith("'")) {
+            const tagName = key.slice(1); // Remove leading ")"
+            const tagColor = `#${value.slice(2, -1)}`; // Extract color (remove ") and ')
+            data.tags.push({name: tagName, color: tagColor});
+            console.log('🔖 DEBUG: Extracted legacy tag', {tagName, tagColor});
+          }
+          // Fallback for standard format (if Parser ever switches)
+          else if (key.startsWith('#') && value.startsWith('#')) {
+            data.tags.push({name: key.slice(1), color: value});
+            console.log('🔖 DEBUG: Extracted standard tag', {tagName: key.slice(1), tagColor: value});
+          }
+        });
+        console.log('🔖 DEBUG: All extracted tags', {tags: data.tags});
+      }
+
+      // Extract events (from root events.children - v0.16.3 uses "fn" type root)
+      const rootChildren = parseResult.events?.children || [];
+      data.events = extractEvents(rootChildren);
+      console.log('📊 DEBUG: Final extracted events', {count: data.events.length});
+
+      // Extract unique sections
+      data.sections = [...new Map(data.events.map(e => e.section ? [e.section.id, e.section] : null).filter(Boolean))].map(([_, s]) => s);
+      return data;
+    }
+
+    // 9. Map to TimelineJS (FIX: Math.min/Math.max error with Date objects)
+    function mapToTimelineJS(parseResult) {
+      const data = extractParsedData(parseResult);
+      const timelineJson = {
+        title: {text: {headline: data.title, text: `Timezone: ${data.timezone}`}},
+        events: [],
+        eras: [],
+        tags: Object.fromEntries(data.tags.map(t => [t.name, t.color]))
+      };
+
+      // Add sections as eras (FIX: Use timestamps for Math.min/Math.max)
+      data.sections.forEach(section => {
+        const sectionEvents = data.events.filter(e => e.section?.id === section.id);
+        if (sectionEvents.length === 0) return;
+
+        // Step 1: Convert dates to TIMESTAMPS (fixes Math.min/Math.max error)
+        const startTimestamps = sectionEvents
+          .map(e => e.dateRange.start)
+          .filter(Boolean)
+          .map(d => new Date(d).getTime()); // Get numeric timestamp
+
+        const endTimestamps = sectionEvents
+          .map(e => e.dateRange.end || e.dateRange.start)
+          .filter(Boolean)
+          .map(d => new Date(d).getTime()); // Get numeric timestamp
+
+        // Step 2: Calculate earliest start and latest end (using timestamps)
+        const earliestStart = new Date(Math.min(...startTimestamps));
+        const latestEnd = new Date(Math.max(...endTimestamps));
+
+        // Step 3: Normalize dates
+        const start = normalizeDate(earliestStart.toISOString());
+        const end = normalizeDate(latestEnd.toISOString());
+
+        if (start && end) {
+          timelineJson.eras.push({
+            start_date: start,
+            end_date: end,
+            text: {headline: section.name},
+            background: {color: '#f0f0f0'}
+          });
+          console.log('📅 DEBUG: Added section era', {section: section.name, start, end});
+        }
+      });
+
+      // Add events (FIX: Ensure group color works)
+      data.events.forEach((event, idx) => {
+        const start = normalizeDate(event.dateRange.start);
+        const end = event.dateRange.end ? normalizeDate(event.dateRange.end) : null;
+        if (!start) return;
+
+        // Event color (FIX: Prioritize group tag, fallback to dark gray)
+        let color = '#808080'; // Dark gray fallback (no more white)
+        if (event.group?.tags?.length) {
+          const groupTag = event.group.tags[0];
+          color = timelineJson.tags[groupTag] || color;
+        }
+
+        // Build details
+        let details = '';
+        if (event.group?.tags?.length) details += `<p><strong>Tags:</strong> #${event.group.tags.join(', #')}</p>`;
+        if (event.tasks.length) {
+          details += '<ul style="padding-left: 1.5rem;">';
+          event.tasks.forEach(t => details += `<li>[${t.completed ? '✓' : ' '}] ${t.text}</li>`);
+          details += '</ul>';
+        }
+        if (event.meta.contact) details += `<p><strong>Contact:</strong> ${event.meta.contact}</p>`;
+        if (event.meta.assignees) details += `<p><strong>Assignees:</strong> ${event.meta.assignees}</p>`;
+        if (event.meta.location) details += `<p><strong>Location:</strong> ${event.meta.location}</p>`;
+        event.meta.links.forEach(link => details += `<p><strong>Link:</strong> <a href="${link.url}" target="_blank">${link.text}</a></p>`);
+
+        // Add event
+        const timelineEvent = {
+          start_date: start,
+          text: {headline: `[${event.section?.name || 'Other'}] ${event.title}`, text: details},
+          group: event.group?.name || 'Default',
+          background: {color: color},
+          unique_id: event.id
+        };
+        if (end) timelineEvent.end_date = end;
+        if (event.meta.media) timelineEvent.media = {url: event.meta.media.url, caption: event.meta.media.alt};
+        timelineJson.events.push(timelineEvent);
+        console.log(`✅ DEBUG: Added timeline event ${idx + 1}`, {title: event.title, color: color});
+      });
+
+      // Empty state
+      if (timelineJson.events.length === 0) {
+        timelineJson.events.push({
+          start_date: normalizeDate(new Date().toISOString()),
+          text: {headline: 'No Events Found', text: 'Add valid events with dates'},
+          group: 'Default'
+        });
+      }
+      return timelineJson;
+    }
+
+    // 10. Render Timeline
+    function renderTimeline(timelineJson) {
+      if (timelineInstance?.destroy) timelineInstance.destroy();
+      try {
+        timelineInstance = new TL.Timeline('timeline', timelineJson, {
+          scale: 'human',
+          display_date: {format: 'MMM DD, YYYY'},
+          height: '100%',
+          track_height: 90
+        });
+        console.log('✅ DEBUG: Timeline rendered successfully');
+        successMessage.style.display = 'block';
+        parseError.style.display = 'none';
+      } catch (err) {
+        timelineContainer.innerHTML = `<div class="empty-state">Timeline Error: ${err.message}</div>`;
+        console.error('❌ DEBUG: Timeline render error:', err);
+      }
+    }
+
+    // 11. Main Update Workflow (FORCE log every step)
+    function updateTimeline() {
+      if (!parseMarkwhen || !dateFns) {
+        console.log('⚠️ DEBUG: Update skipped - dependencies missing');
+        return;
+      }
+
+      const input = editor.value.trim();
+      console.log('🚀 DEBUG: Starting parse', {inputLength: input.length});
+      parseError.style.display = 'none';
+      successMessage.style.display = 'none';
+
+      try {
+        // Parse and FORCE log result
+        const parseResult = parseMarkwhen(input);
+        console.log('📋 DEBUG: Parser result received', {hasEvents: !!parseResult.events});
+
+        // Map and render
+        const timelineJson = mapToTimelineJS(parseResult);
+        renderTimeline(timelineJson);
+      } catch (err) {
+        parseError.style.display = 'block';
+        parseError.textContent = `Parse Error: ${err.message}`;
+        console.error('❌ DEBUG: Parse/render error:', err);
+      }
+    }
+
+    // 12. Editor Listener
+    let debounceTimer;
+    editor.addEventListener('input', () => {
+      clearTimeout(debounceTimer);
+      debounceTimer = setTimeout(updateTimeline, 500);
+    });
+
+    // Initial Render
+    console.log('🔄 DEBUG: Triggering initial render');
+    if (parseMarkwhen && dateFns) updateTimeline();
+  </script>
+</body>
+
+</html>
