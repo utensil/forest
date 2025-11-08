@@ -184,6 +184,12 @@ prep-zed:
     #!/usr/bin/env bash
     [[ -f /Applications/Zed.app/Contents/MacOS/zed ]] || brew install --cask zed@preview
 
+# ekphos is mostly compatible with Obsidian
+# https://github.com/hanebox/ekphos
+#
+prep-ob:
+    which ekphos|| cargo install ekphos
+
 ## LSP: programming languages
 
 prep-lsp:
