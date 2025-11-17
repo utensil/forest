@@ -315,6 +315,12 @@
                         <a href="https://coolors.co/palettes/trending" target="_blank" rel="noopener noreferrer" style="color: #999; text-decoration: none;">palettes from coolors.co</a>
                     </div>
                 </div>
+                <div style="margin-top: 0.5rem;">
+                    <label style="font-size: 12px; color: #666; display: flex; align-items: center; gap: 0.5rem;">
+                        <input type="checkbox" id="tag-background" style="margin: 0;">
+                        Tag background colors
+                    </label>
+                </div>
             </div>
             <textarea id="markwhen-editor">---
 title: 2024 Product Launch Timeline
@@ -1093,9 +1099,20 @@ endGroup
                     color = timelineJson.tags[groupTag] || color;
                 }
 
-                // Build details
+                // Build details with styled tags
                 let details = '';
-                if (event.group?.tags?.length) details += `<p><strong>Tags:</strong> #${event.group.tags.join(', #')}</p>`;
+                if (event.group?.tags?.length) {
+                    const tagBackground = document.getElementById('tag-background')?.checked;
+                    const tagElements = event.group.tags.map(tag => {
+                        const tagColor = timelineJson.tags[tag] || '#808080';
+                        if (tagBackground) {
+                            return `<span style="background-color: ${tagColor}; color: white; padding: 2px 6px; border-radius: 3px; font-size: 11px; margin-right: 4px;">#${tag}</span>`;
+                        } else {
+                            return `<span style="color: ${tagColor}; font-weight: bold;">#${tag}</span>`;
+                        }
+                    }).join(' ');
+                    details += `<p>${tagElements}</p>`;
+                }
                 if (event.tasks.length) {
                     details += '<ul style="padding-left: 1.5rem;">';
                     event.tasks.forEach(t => details += `<li>[${t.completed ? '✓' : ' '}] ${t.text}</li>`);
@@ -1185,6 +1202,13 @@ endGroup
         editor.addEventListener('input', () => {
             clearTimeout(debounceTimer);
             debounceTimer = setTimeout(updateTimeline, 500);
+        });
+
+        // Tag background checkbox listener
+        document.addEventListener('change', (e) => {
+            if (e.target.id === 'tag-background') {
+                updateTimeline();
+            }
         });
 
         // Initial Render
