@@ -145,7 +145,16 @@
     <!-- Editor -->
     <div class="editor-container">
       <h3>Markwhen Editor</h3>
-      <p class="instructions">Supports sections, groups, tags, tasks, media, links</p>
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+        <p class="instructions">Supports sections, groups, tags, tasks, media, links</p>
+        <div>
+          <label for="color-palette" style="font-size: 12px; color: #666; margin-right: 0.5rem;">Color Palette:</label>
+          <select id="color-palette" style="font-size: 12px; padding: 2px 4px; border: 1px solid #ddd; border-radius: 3px;">
+            <option value="markwhen">Markwhen Default</option>
+            <option value="meadow" selected>Meadow Green</option>
+          </select>
+        </div>
+      </div>
       <textarea id="markwhen-editor">
         title: 2024 Product Launch Timeline
         timezone: America/Los_Angeles
@@ -217,19 +226,34 @@
   </div>
 
   <script type="module">
-    // 1. Color Palette for Auto-Generated Tag Colors - Meadow Green Gradient
-    const COLORS = [
-      "#d9ed92", // Lime Cream
-      "#b5e48c", // Light Green
-      "#99d98c", // Willow Green
-      "#76c893", // Emerald
-      "#52b69a", // Ocean Mist
-      "#34a0a4", // Tropical Teal
-      "#168aad", // Bondi Blue
-      "#1a759f", // Cerulean
-      "#1e6091", // Baltic Blue
-      "#184e77", // Yale Blue
-    ];
+    // 1. Color Palettes for Auto-Generated Tag Colors
+    const COLOR_PALETTES = {
+      markwhen: [
+        "rgb(22, 163, 76)",
+        "rgb(2, 132, 199)", 
+        "rgb(212, 50, 56)",
+        "rgb(242, 202, 45)",
+        "rgb(80, 73, 229)",
+        "rgb(145, 57, 234)",
+        "rgb(214, 45, 123)",
+        "rgb(234, 88, 11)",
+        "rgb(168, 162, 157)",
+        "rgb(255, 255, 255)",
+        "rgb(0, 0, 0)",
+      ],
+      meadow: [
+        "#d9ed92", // Lime Cream
+        "#b5e48c", // Light Green
+        "#99d98c", // Willow Green
+        "#76c893", // Emerald
+        "#52b69a", // Ocean Mist
+        "#34a0a4", // Tropical Teal
+        "#168aad", // Bondi Blue
+        "#1a759f", // Cerulean
+        "#1e6091", // Baltic Blue
+        "#184e77", // Yale Blue
+      ]
+    };
 
     // 2. Force show all logs + Import dependencies
     console.log('🔴 DEBUG: Script started - v0.16.3 compatibility + Full Screen');
@@ -259,6 +283,7 @@
     const successMessage = document.getElementById('success-message');
     const timelineContainer = document.getElementById('timeline');
     const fullscreenBtn = document.getElementById('fullscreen-btn');
+    const colorPaletteSelect = document.getElementById('color-palette');
     let timelineInstance = null;
 
     // 3. Full Screen Toggle Functionality
@@ -420,8 +445,10 @@
 
     // 8. Generate Color for Tag
     function generateTagColor(tagName, existingTags) {
-      const colorIndex = existingTags.length % COLORS.length;
-      return COLORS[colorIndex];
+      const selectedPalette = colorPaletteSelect.value;
+      const colors = COLOR_PALETTES[selectedPalette];
+      const colorIndex = existingTags.length % colors.length;
+      return colors[colorIndex];
     }
 
     // 9. Extract Parsed Data (FORCE log raw Parser output + fix tag extraction + auto-color generation)
@@ -631,6 +658,9 @@
       clearTimeout(debounceTimer);
       debounceTimer = setTimeout(updateTimeline, 500);
     });
+
+    // Color palette change listener
+    colorPaletteSelect.addEventListener('change', updateTimeline);
 
     // Initial Render
     console.log('🔄 DEBUG: Triggering initial render');
