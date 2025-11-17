@@ -638,6 +638,7 @@ endGroup
         let parseMarkwhen;
         let dateFns;
         let toonFormat;
+        let markdownIt;
         const parserLoadError = document.getElementById('parser-load-error');
 
         try {
@@ -653,6 +654,11 @@ endGroup
             // Import toon-format
             toonFormat = await import('https://esm.sh/@toon-format/toon');
             console.log('✅ DEBUG: toon-format loaded', {hasEncode: !!toonFormat.encode});
+
+            // Import markdown-it
+            const markdownItModule = await import('https://esm.sh/markdown-it');
+            markdownIt = new markdownItModule.default();
+            console.log('✅ DEBUG: markdown-it loaded', {hasRender: !!markdownIt.render});
 
             parserLoadError.style.display = 'none';
             
@@ -1169,10 +1175,11 @@ endGroup
                     details += `<p>${tagElements}</p>`;
                 }
                 
-                // Add supplemental text content
+                // Add supplemental text content with markdown rendering
                 if (event.meta.textContent && event.meta.textContent.length > 0) {
                     event.meta.textContent.forEach(text => {
-                        details += `<p>${text}</p>`;
+                        const htmlContent = markdownIt ? markdownIt.render(text) : `<p>${text}</p>`;
+                        details += htmlContent;
                     });
                 }
                 if (event.tasks.length) {
@@ -1191,9 +1198,10 @@ endGroup
                 event.meta.links.forEach(link => details += `<p><strong>Link:</strong> <a href="${link.url}" target="_blank">${link.text}</a></p>`);
 
                 // Add event
+                const renderedTitle = markdownIt ? markdownIt.renderInline(event.title) : event.title;
                 const timelineEvent = {
                     start_date: start,
-                    text: {headline: `[${event.section?.name || 'Other'}] ${event.title}`, text: event.fullText ? `<p>${event.fullText.replace(/\n/g, '</p><p>')}</p>${details}` : details},
+                    text: {headline: `[${event.section?.name || 'Other'}] ${renderedTitle}`, text: details},
                     group: event.group?.name || 'Default',
                     unique_id: event.id
                 };
