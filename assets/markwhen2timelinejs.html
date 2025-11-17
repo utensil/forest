@@ -1131,13 +1131,20 @@ endGroup
                     start_date: start,
                     text: {headline: `[${event.section?.name || 'Other'}] ${event.title}`, text: details},
                     group: event.group?.name || 'Default',
-                    background: {color: color},
                     unique_id: event.id
                 };
+                
+                // Only add background color if tag badges option is checked
+                const tagBackgroundCheckbox = document.getElementById('tag-background');
+                const useBackground = tagBackgroundCheckbox && tagBackgroundCheckbox.checked;
+                if (useBackground) {
+                    timelineEvent.background = {color: color};
+                }
+                
                 if (end) timelineEvent.end_date = end;
                 if (event.meta.media) timelineEvent.media = {url: event.meta.media.url, caption: event.meta.media.alt};
                 timelineJson.events.push(timelineEvent);
-                console.log(`✅ DEBUG: Added timeline event ${idx + 1}`, {title: event.title, color: color});
+                console.log(`✅ DEBUG: Added timeline event ${idx + 1}`, {title: event.title, color: color, hasBackground: useBackground});
             });
 
             // Empty state
