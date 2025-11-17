@@ -1178,8 +1178,11 @@ endGroup
                 
                 // Add event listener for slide changes
                 timelineInstance.addEventListener('change', function(e) {
-                    currentSlideIndex = e.current_slide;
-                    console.log('🔄 DEBUG: Slide changed to:', currentSlideIndex);
+                    const slideIndex = timelineInstance.getCurrentSlide ? timelineInstance.getCurrentSlide() : 0;
+                    if (slideIndex !== undefined && slideIndex !== null) {
+                        currentSlideIndex = slideIndex;
+                        console.log('🔄 DEBUG: Slide changed to:', currentSlideIndex);
+                    }
                 });
                 
                 console.log('🔄 DEBUG: Restored to slide index:', currentSlideIndex);
