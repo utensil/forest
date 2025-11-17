@@ -295,33 +295,35 @@
         <!-- Editor -->
         <div class="editor-container">
             <h3>Markwhen Editor</h3>
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.5rem;">
                 <p class="instructions">Supports sections, groups, tags, tasks, media, links</p>
-                <div>
-                    <label for="color-palette" style="font-size: 12px; color: #666; margin-right: 0.5rem;">Color
-                        Palette:</label>
-                    <div class="palette-selector">
-                        <div class="palette-dropdown" id="palette-dropdown">
-                            <span id="selected-palette">Meadow Green</span>
-                            <svg class="dropdown-arrow" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                                <path stroke="#6b7280" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 8l4 4 4-4"/>
-                            </svg>
+                <div style="display: flex; flex-direction: column; gap: 0.5rem; align-items: flex-end;">
+                    <div>
+                        <label for="color-palette" style="font-size: 12px; color: #666; margin-right: 0.5rem;">Color
+                            Palette:</label>
+                        <div class="palette-selector">
+                            <div class="palette-dropdown" id="palette-dropdown">
+                                <span id="selected-palette">Meadow Green</span>
+                                <svg class="dropdown-arrow" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                                    <path stroke="#6b7280" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 8l4 4 4-4"/>
+                                </svg>
+                            </div>
+                            <div class="palette-options" id="palette-options">
+                                <!-- Options will be populated by JavaScript -->
+                            </div>
                         </div>
-                        <div class="palette-options" id="palette-options">
-                            <!-- Options will be populated by JavaScript -->
+                        <div style="font-size: 10px; color: #999; margin-top: 2px;">
+                            <a href="https://coolors.co/palettes/trending" target="_blank" rel="noopener noreferrer" style="color: #999; text-decoration: none;">palettes from coolors.co</a>
                         </div>
                     </div>
-                    <div style="font-size: 10px; color: #999; margin-top: 2px;">
-                        <a href="https://coolors.co/palettes/trending" target="_blank" rel="noopener noreferrer" style="color: #999; text-decoration: none;">palettes from coolors.co</a>
+                    <div>
+                        <label style="font-size: 12px; color: #666; margin-right: 0.5rem;">Tag coloring:</label>
+                        <select id="tag-coloring" style="font-size: 12px; padding: 2px 4px; border: 1px solid #ddd; border-radius: 3px;">
+                            <option value="text">Text</option>
+                            <option value="badge">Badge</option>
+                            <option value="background">Background</option>
+                        </select>
                     </div>
-                </div>
-                <div style="margin-top: 0.5rem;">
-                    <label style="font-size: 12px; color: #666; margin-right: 0.5rem;">Tag coloring:</label>
-                    <select id="tag-coloring" style="font-size: 12px; padding: 2px 4px; border: 1px solid #ddd; border-radius: 3px;">
-                        <option value="text">Text</option>
-                        <option value="badge">Badge</option>
-                        <option value="background">Background</option>
-                    </select>
                 </div>
             </div>
             <textarea id="markwhen-editor">---
