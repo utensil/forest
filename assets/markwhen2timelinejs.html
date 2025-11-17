@@ -1199,10 +1199,17 @@ endGroup
 
                 // Add event
                 const renderedTitle = markdownIt ? markdownIt.renderInline(event.title) : event.title;
-                const sectionIndicator = event.section?.name ? `<span style="color: #666; font-size: 0.9em;">${event.section.name}</span><br>` : '';
+                
+                // Build details with section indicator at the top
+                let fullDetails = '';
+                if (event.section?.name) {
+                    fullDetails += `<div style="color: #666; font-size: 0.9em; margin-bottom: 0.5em; font-style: italic;">${event.section.name}</div>`;
+                }
+                fullDetails += details;
+                
                 const timelineEvent = {
                     start_date: start,
-                    text: {headline: `${sectionIndicator}${renderedTitle}`, text: details},
+                    text: {headline: renderedTitle, text: fullDetails},
                     group: event.group?.name || 'Default',
                     unique_id: event.id
                 };
