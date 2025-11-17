@@ -318,7 +318,7 @@
                 <div style="margin-top: 0.5rem;">
                     <label style="font-size: 12px; color: #666; display: flex; align-items: center; gap: 0.5rem;">
                         <input type="checkbox" id="tag-background" style="margin: 0;">
-                        Tag background colors
+                        Tag badges
                     </label>
                 </div>
             </div>
@@ -1102,10 +1102,11 @@ endGroup
                 // Build details with styled tags
                 let details = '';
                 if (event.group?.tags?.length) {
-                    const tagBackground = document.getElementById('tag-background')?.checked;
+                    const tagBackgroundCheckbox = document.getElementById('tag-background');
+                    const useBackground = tagBackgroundCheckbox && tagBackgroundCheckbox.checked;
                     const tagElements = event.group.tags.map(tag => {
                         const tagColor = timelineJson.tags[tag] || '#808080';
-                        if (tagBackground) {
+                        if (useBackground) {
                             return `<span style="background-color: ${tagColor}; color: white; padding: 2px 6px; border-radius: 3px; font-size: 11px; margin-right: 4px;">#${tag}</span>`;
                         } else {
                             return `<span style="color: ${tagColor}; font-weight: bold;">#${tag}</span>`;
