@@ -988,9 +988,20 @@ endGroup
                 // Event node (v0.16.3 uses "ri" type for events)
                 else if (child.dateRangeIso && child.firstLine) {
                     const supplemental = child.supplemental || [];
+                    
+                    // Extract full text content, not just first line
+                    let fullText = child.firstLine.restTrimmed || child.firstLine.raw || 'Untitled';
+                    if (child.body && child.body.length > 0) {
+                        const bodyText = child.body.map(line => line.raw || '').join('\n');
+                        if (bodyText.trim()) {
+                            fullText += '\n\n' + bodyText;
+                        }
+                    }
+                    
                     const event = {
                         id: child.id || Date.now().toString(),
                         title: child.firstLine.restTrimmed || child.firstLine.raw || 'Untitled',
+                        fullText: fullText,
                         dateRange: {
                             start: child.dateRangeIso.fromDateTimeIso,
                             end: child.dateRangeIso.toDateTimeIso
@@ -1170,7 +1181,7 @@ endGroup
                 // Add event
                 const timelineEvent = {
                     start_date: start,
-                    text: {headline: `[${event.section?.name || 'Other'}] ${event.title}`, text: details},
+                    text: {headline: `[${event.section?.name || 'Other'}] ${event.title}`, text: event.fullText ? `<p>${event.fullText.replace(/\n/g, '</p><p>')}</p>${details}` : details},
                     group: event.group?.name || 'Default',
                     unique_id: event.id
                 };
