@@ -1032,6 +1032,7 @@ endGroup
         function extractParsedData(parseResult) {
             // 🔴 FORCE show raw Parser output (critical for debugging)
             console.log('📋 DEBUG: RAW Parser Output (v0.16.3)', parseResult);
+            console.log('📋 DEBUG: Welcome section events:', parseResult.events?.children?.find(c => c.title === 'Welcome')?.children);
 
             const data = {
                 title: parseResult.header?.title || 'Untitled',
