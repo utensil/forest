@@ -906,7 +906,6 @@ endGroup
                     tasks.push({text: item.raw.trim(), completed: item.value === true});
                 }
             });
-            console.log('🔧 DEBUG: Extracted tasks', {count: tasks.length});
             return tasks;
         }
 
@@ -938,8 +937,6 @@ endGroup
             if (!Array.isArray(children)) return events;
 
             for (const child of children) {
-                console.log('🔍 DEBUG: Processing node', {type: child.style || child.constructor.name});
-
                 // Section node (v0.16.3 uses "fn" type for sections/groups)
                 if (child.style === 'section' && child.title) {
                     const newSection = {id: child.id || Date.now().toString(), name: child.title};
@@ -966,7 +963,6 @@ endGroup
                         meta: extractMetadata(supplemental)
                     };
                     events.push(event);
-                    console.log('✅ DEBUG: Extracted event', {title: event.title, section: section?.name, group: group?.name});
                 }
                 // Recurse into children
                 else if (child.children) {
@@ -1004,12 +1000,10 @@ endGroup
                         const tagName = key.slice(1); // Remove leading ")"
                         const tagColor = `#${value.slice(2, -1)}`; // Extract color (remove ") and ')
                         data.tags.push({name: tagName, color: tagColor});
-                        console.log('🔖 DEBUG: Extracted legacy tag', {tagName, tagColor});
                     }
                     // Fallback for standard format (if Parser ever switches)
                     else if (key.startsWith('#') && value.startsWith('#')) {
                         data.tags.push({name: key.slice(1), color: value});
-                        console.log('🔖 DEBUG: Extracted standard tag', {tagName: key.slice(1), tagColor: value});
                     }
                 });
             }
@@ -1030,12 +1024,8 @@ endGroup
                 if (!data.tags.find(t => t.name === tagName)) {
                     const color = generateTagColor(tagName, data.tags);
                     data.tags.push({name: tagName, color});
-                    console.log('🎨 DEBUG: Auto-generated color for tag', {tagName, color});
                 }
             });
-
-            console.log('🔖 DEBUG: All extracted tags', {tags: data.tags});
-            console.log('📊 DEBUG: Final extracted events', {count: data.events.length});
 
             // Extract unique sections
             data.sections = [...new Map(data.events.map(e => e.section ? [e.section.id, e.section] : null).filter(Boolean))].map(([_, s]) => s);
@@ -1070,7 +1060,6 @@ endGroup
 
                 // Skip sections without valid timestamps
                 if (startTimestamps.length === 0 || endTimestamps.length === 0) {
-                    console.log('⚠️ DEBUG: Skipping section era (no valid dates):', section.name);
                     return;
                 }
 
@@ -1089,10 +1078,8 @@ endGroup
                         text: {headline: section.name},
                         background: {color: '#f0f0f0'}
                     });
-                    console.log('📅 DEBUG: Added section era', {section: section.name, start, end});
-                } else {
-                    console.log('⚠️ DEBUG: Skipping section era (invalid normalized dates):', section.name);
                 }
+            });
             });
 
             // Add events (FIX: Ensure group color works)
@@ -1113,7 +1100,6 @@ endGroup
                 if (event.group?.tags?.length) {
                     const tagBackgroundCheckbox = document.getElementById('tag-background');
                     const useBackground = tagBackgroundCheckbox && tagBackgroundCheckbox.checked;
-                    console.log('🎨 DEBUG: Tag styling', {useBackground, hasCheckbox: !!tagBackgroundCheckbox, checked: tagBackgroundCheckbox?.checked});
                     
                     const tagElements = event.group.tags.map(tag => {
                         const tagColor = timelineJson.tags[tag] || '#808080';
@@ -1153,7 +1139,6 @@ endGroup
                 if (end) timelineEvent.end_date = end;
                 if (event.meta.media) timelineEvent.media = {url: event.meta.media.url, caption: event.meta.media.alt};
                 timelineJson.events.push(timelineEvent);
-                console.log(`✅ DEBUG: Added timeline event ${idx + 1}`, {title: event.title, color: color, hasBackground: useBackground});
             });
 
             // Empty state
