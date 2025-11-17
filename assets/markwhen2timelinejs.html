@@ -1232,7 +1232,13 @@ endGroup
                 }
                 
                 if (end) timelineEvent.end_date = end;
-                if (event.meta.media) timelineEvent.media = {url: event.meta.media.url, caption: event.meta.media.alt};
+                if (event.meta.media) {
+                    timelineEvent.media = {
+                        url: event.meta.media.url,
+                        caption: event.meta.media.alt || '',
+                        alt: event.meta.media.alt || ''
+                    };
+                }
                 timelineJson.events.push(timelineEvent);
             });
 
