@@ -965,25 +965,23 @@ endGroup
             const meta = {contact: '', assignees: '', location: '', links: [], media: null, textContent: []};
             if (!Array.isArray(supplemental)) return meta;
             supplemental.forEach(item => {
-                if (item.type !== 'text' || !item.raw) return;
-                const text = item.raw.trim();
-                if (text.startsWith('contact:')) meta.contact = text.replace('contact:', '').trim();
-                else if (text.startsWith('assignees:')) meta.assignees = text.replace('assignees:', '').trim().replace(/[\[\]]/g, '');
-                else if (text.startsWith('location:')) meta.location = text.replace('location:', '').trim();
-                else if (text.startsWith('[') && text.includes('](') && !text.startsWith('![')) {
-                    const [textPart, urlPart] = text.split('](');
-                    meta.links.push({text: textPart.slice(1), url: urlPart.slice(0, -1)});
+                if (item.type === 'image' && item.link) {
+                    meta.media = {alt: item.altText || '', url: item.link};
+                    console.log('🖼️ DEBUG: Extracted media:', meta.media);
                 }
-                else if (text.startsWith('![') && text.includes('](')) {
-                    const match = text.match(/!\[([^\]]*)\]\(([^)]+)\)/);
-                    if (match) {
-                        meta.media = {alt: match[1], url: match[2]};
-                        console.log('🖼️ DEBUG: Extracted media:', meta.media);
+                else if (item.type === 'text' && item.raw) {
+                    const text = item.raw.trim();
+                    if (text.startsWith('contact:')) meta.contact = text.replace('contact:', '').trim();
+                    else if (text.startsWith('assignees:')) meta.assignees = text.replace('assignees:', '').trim().replace(/[\[\]]/g, '');
+                    else if (text.startsWith('location:')) meta.location = text.replace('location:', '').trim();
+                    else if (text.startsWith('[') && text.includes('](') && !text.startsWith('![')) {
+                        const [textPart, urlPart] = text.split('](');
+                        meta.links.push({text: textPart.slice(1), url: urlPart.slice(0, -1)});
                     }
-                }
-                else {
-                    // Regular text content
-                    meta.textContent.push(text);
+                    else {
+                        // Regular text content
+                        meta.textContent.push(text);
+                    }
                 }
             });
             return meta;
@@ -1008,6 +1006,12 @@ endGroup
                 // Event node (v0.16.3 uses "ri" type for events)
                 else if (child.dateRangeIso && child.firstLine) {
                     const supplemental = child.supplemental || [];
+                    
+                    console.log('🔍 DEBUG: Event structure:', {
+                        title: child.firstLine.restTrimmed,
+                        firstLine: child.firstLine,
+                        supplemental: supplemental
+                    });
                     
                     // Extract full text content, not just first line
                     let fullText = child.firstLine.restTrimmed || child.firstLine.raw || 'Untitled';
