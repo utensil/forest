@@ -161,14 +161,14 @@
         contact: product@example.com
         assignees: [Alice (PM), Bob (Design Lead)]
 
-        in 5 days after !above: UX Design Kickoff
+        in 5 days after !above: UX Design Kickoff #Research
         ![UX Workshop](https://picsum.photos/id/1/800/400)
         location: Virtual (Zoom Link: https://example.com/ux-kickoff)
         @DesignSystem: Reference Q4 2023 guidelines
         @endGroup
 
         group Design #Design
-        Feb 1 2024 to Feb 29 2024: Wireframe & Prototype
+        Feb 1 2024 to Feb 29 2024: Wireframe & Prototype #UI
         - [x] Homepage wireframe
         - [x] User flow diagrams
         - [ ] High-fidelity prototype
@@ -177,12 +177,12 @@
 
         section Q2 2024: Development & Testing
         group Development #Development
-        Mar 1 2024 to Apr 30 2024: Frontend Development
+        Mar 1 2024 to Apr 30 2024: Frontend Development #Frontend
         [View Tech Spec](https://example.com/tech-spec)
         contact: Dave (Tech Lead) → dave@example.com
         @endGroup
 
-        May 1 2024 to May 15 2024: QA Testing
+        May 1 2024 to May 15 2024: QA Testing #Testing
         - [ ] Functional testing
         - [ ] Performance testing
         - [ ] Cross-browser compatibility
@@ -190,7 +190,7 @@
         @endGroup
 
         section Q3 2024: Launch
-        Jun 1 2024: Product Launch Event
+        Jun 1 2024: Product Launch Event #Marketing
         ![Launch Teaser](https://picsum.photos/id/20/800/400)
         contact: Emma (Marketing) → emma@example.com
       </textarea>
@@ -217,7 +217,22 @@
   </div>
 
   <script type="module">
-    // 1. Force show all logs + Import dependencies
+    // 1. Color Palette for Auto-Generated Tag Colors
+    const COLORS = [
+      "22, 163, 76",
+      "2, 132, 199", 
+      "212, 50, 56",
+      "242, 202, 45",
+      "80, 73, 229",
+      "145, 57, 234",
+      "214, 45, 123",
+      "234, 88, 11",
+      "168, 162, 157",
+      "255, 255, 255",
+      "0, 0, 0",
+    ];
+
+    // 2. Force show all logs + Import dependencies
     console.log('🔴 DEBUG: Script started - v0.16.3 compatibility + Full Screen');
     let parseMarkwhen;
     let dateFns;
@@ -404,7 +419,13 @@
       return events;
     }
 
-    // 8. Extract Parsed Data (FORCE log raw Parser output + fix tag extraction)
+    // 8. Generate Color for Tag
+    function generateTagColor(tagName, existingTags) {
+      const colorIndex = existingTags.length % COLORS.length;
+      return `rgb(${COLORS[colorIndex]})`;
+    }
+
+    // 9. Extract Parsed Data (FORCE log raw Parser output + fix tag extraction + auto-color generation)
     function extractParsedData(parseResult) {
       // 🔴 FORCE show raw Parser output (critical for debugging)
       console.log('📋 DEBUG: RAW Parser Output (v0.16.3)', parseResult);
@@ -417,7 +438,7 @@
         events: []
       };
 
-      // Extract tags (FIX: v0.16.3 still uses legacy format: )Tag: ')Color')
+      // Extract explicit tags (FIX: v0.16.3 still uses legacy format: )Tag: ')Color')
       if (parseResult.header) {
         Object.entries(parseResult.header).forEach(([key, value]) => {
           // Handle legacy format (from raw output: )Launch: ')2196F3')
@@ -433,12 +454,29 @@
             console.log('🔖 DEBUG: Extracted standard tag', {tagName: key.slice(1), tagColor: value});
           }
         });
-        console.log('🔖 DEBUG: All extracted tags', {tags: data.tags});
       }
 
       // Extract events (from root events.children - v0.16.3 uses "fn" type root)
       const rootChildren = parseResult.events?.children || [];
       data.events = extractEvents(rootChildren);
+
+      // Auto-generate colors for tags found in events but not explicitly defined
+      const allTagsInEvents = new Set();
+      data.events.forEach(event => {
+        if (event.group?.tags) {
+          event.group.tags.forEach(tag => allTagsInEvents.add(tag));
+        }
+      });
+
+      allTagsInEvents.forEach(tagName => {
+        if (!data.tags.find(t => t.name === tagName)) {
+          const color = generateTagColor(tagName, data.tags);
+          data.tags.push({name: tagName, color});
+          console.log('🎨 DEBUG: Auto-generated color for tag', {tagName, color});
+        }
+      });
+
+      console.log('🔖 DEBUG: All extracted tags', {tags: data.tags});
       console.log('📊 DEBUG: Final extracted events', {count: data.events.length});
 
       // Extract unique sections
@@ -446,7 +484,7 @@
       return data;
     }
 
-    // 9. Map to TimelineJS (FIX: Math.min/Math.max error with Date objects)
+    // 10. Map to TimelineJS (FIX: Math.min/Math.max error with Date objects)
     function mapToTimelineJS(parseResult) {
       const data = extractParsedData(parseResult);
       const timelineJson = {
@@ -542,7 +580,7 @@
       return timelineJson;
     }
 
-    // 10. Render Timeline
+    // 11. Render Timeline
     function renderTimeline(timelineJson) {
       if (timelineInstance?.destroy) timelineInstance.destroy();
       try {
@@ -561,7 +599,7 @@
       }
     }
 
-    // 11. Main Update Workflow (FORCE log every step)
+    // 12. Main Update Workflow (FORCE log every step)
     function updateTimeline() {
       if (!parseMarkwhen || !dateFns) {
         console.log('⚠️ DEBUG: Update skipped - dependencies missing');
@@ -588,7 +626,7 @@
       }
     }
 
-    // 12. Editor Listener
+    // 13. Editor Listener
     let debounceTimer;
     editor.addEventListener('input', () => {
       clearTimeout(debounceTimer);
