@@ -990,7 +990,7 @@ endGroup
                     const supplemental = child.supplemental || [];
                     const event = {
                         id: child.id || Date.now().toString(),
-                        title: child.firstLine.restTrimmed || 'Untitled',
+                        title: child.firstLine.restTrimmed || child.firstLine.raw || 'Untitled',
                         dateRange: {
                             start: child.dateRangeIso.fromDateTimeIso,
                             end: child.dateRangeIso.toDateTimeIso
