@@ -454,14 +454,26 @@ endGroup
         const successMessage = document.getElementById('success-message');
         const timelineContainer = document.getElementById('timeline');
         const fullscreenBtn = document.getElementById('fullscreen-btn');
-        const paletteDropdown = document.getElementById('palette-dropdown');
-        const paletteOptions = document.getElementById('palette-options');
-        const selectedPalette = document.getElementById('selected-palette');
         let timelineInstance = null;
         let currentPalette = 'meadow';
 
         // 3. Initialize Custom Dropdown
         function initializeDropdown() {
+            console.log('🔧 DEBUG: Initializing dropdown');
+            
+            const paletteDropdown = document.getElementById('palette-dropdown');
+            const paletteOptions = document.getElementById('palette-options');
+            const selectedPalette = document.getElementById('selected-palette');
+            
+            if (!paletteDropdown || !paletteOptions || !selectedPalette) {
+                console.error('❌ DEBUG: Dropdown elements not found', {
+                    paletteDropdown: !!paletteDropdown,
+                    paletteOptions: !!paletteOptions,
+                    selectedPalette: !!selectedPalette
+                });
+                return;
+            }
+
             const paletteNames = {
                 markwhen: 'Markwhen Default',
                 meadow: 'Meadow Green',
@@ -487,12 +499,19 @@ endGroup
                     <div class="color-preview">${colorPreview}</div>
                 `;
                 
-                option.addEventListener('click', () => selectPalette(key));
+                option.addEventListener('click', () => {
+                    console.log('🎨 DEBUG: Palette selected:', key);
+                    selectPalette(key);
+                });
                 paletteOptions.appendChild(option);
             });
 
             // Toggle dropdown
-            paletteDropdown.addEventListener('click', toggleDropdown);
+            paletteDropdown.addEventListener('click', (e) => {
+                console.log('🔧 DEBUG: Dropdown clicked');
+                e.stopPropagation();
+                toggleDropdown();
+            });
             
             // Close dropdown when clicking outside
             document.addEventListener('click', (e) => {
@@ -500,10 +519,17 @@ endGroup
                     closeDropdown();
                 }
             });
+            
+            console.log('✅ DEBUG: Dropdown initialized successfully');
         }
 
         function toggleDropdown() {
+            const paletteOptions = document.getElementById('palette-options');
+            const paletteDropdown = document.getElementById('palette-dropdown');
+            
             const isOpen = paletteOptions.classList.contains('open');
+            console.log('🔧 DEBUG: Toggle dropdown, currently open:', isOpen);
+            
             if (isOpen) {
                 closeDropdown();
             } else {
@@ -512,18 +538,28 @@ endGroup
         }
 
         function openDropdown() {
+            const paletteOptions = document.getElementById('palette-options');
+            const paletteDropdown = document.getElementById('palette-dropdown');
+            
+            console.log('🔧 DEBUG: Opening dropdown');
             paletteOptions.classList.add('open');
             paletteDropdown.classList.add('open');
             paletteDropdown.querySelector('.dropdown-arrow').classList.add('open');
         }
 
         function closeDropdown() {
+            const paletteOptions = document.getElementById('palette-options');
+            const paletteDropdown = document.getElementById('palette-dropdown');
+            
+            console.log('🔧 DEBUG: Closing dropdown');
             paletteOptions.classList.remove('open');
             paletteDropdown.classList.remove('open');
             paletteDropdown.querySelector('.dropdown-arrow').classList.remove('open');
         }
 
         function selectPalette(key) {
+            const selectedPalette = document.getElementById('selected-palette');
+            
             currentPalette = key;
             const paletteNames = {
                 markwhen: 'Markwhen Default',
@@ -537,6 +573,7 @@ endGroup
             selectedPalette.textContent = paletteNames[key];
             
             // Update selected state
+            const paletteOptions = document.getElementById('palette-options');
             paletteOptions.querySelectorAll('.palette-option').forEach(option => {
                 option.classList.toggle('selected', option.dataset.value === key);
             });
