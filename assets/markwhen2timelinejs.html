@@ -1164,10 +1164,11 @@ endGroup
             // Update JSON preview
             updateJsonPreview(timelineJson);
             
-            // Save current event if timeline exists
-            if (timelineInstance && timelineInstance.current_id) {
-                currentEventId = timelineInstance.current_id;
-                console.log('💾 DEBUG: Saved current event ID:', currentEventId);
+            // Save current slide index if timeline exists
+            let savedSlideIndex = 0;
+            if (timelineInstance && typeof timelineInstance.getCurrentSlide === 'function') {
+                savedSlideIndex = timelineInstance.getCurrentSlide();
+                console.log('💾 DEBUG: Saved current slide index:', savedSlideIndex);
             }
             
             if (timelineInstance?.destroy) timelineInstance.destroy();
@@ -1177,15 +1178,10 @@ endGroup
                     display_date: {format: 'MMM DD, YYYY'},
                     height: '100%',
                     track_height: 90,
-                    start_at_slide: currentEventId ? findSlideIndex(timelineJson, currentEventId) : 0
+                    start_at_slide: savedSlideIndex
                 });
                 
-                // Clear the saved event ID after successful restore
-                if (currentEventId) {
-                    console.log('🔄 DEBUG: Restored to event ID:', currentEventId);
-                    currentEventId = null;
-                }
-                
+                console.log('🔄 DEBUG: Restored to slide index:', savedSlideIndex);
                 console.log('✅ DEBUG: Timeline rendered successfully');
                 successMessage.style.display = 'block';
                 parseError.style.display = 'none';
@@ -1195,13 +1191,7 @@ endGroup
             }
         }
 
-        // 16. Find Slide Index by Event ID
-        function findSlideIndex(timelineJson, eventId) {
-            const index = timelineJson.events.findIndex(event => event.unique_id === eventId);
-            return index >= 0 ? index : 0;
-        }
-
-        // 17. Main Update Workflow (FORCE log every step)
+        // 16. Main Update Workflow (FORCE log every step)
         function updateTimeline() {
             if (!parseMarkwhen || !dateFns) {
                 console.log('⚠️ DEBUG: Update skipped - dependencies missing');
@@ -1228,7 +1218,7 @@ endGroup
             }
         }
 
-        // 18. Editor Listener
+        // 17. Editor Listener
         let debounceTimer;
         editor.addEventListener('input', () => {
             clearTimeout(debounceTimer);
