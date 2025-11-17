@@ -524,12 +524,19 @@ endGroup
             <div class="tab-container" style="height: calc(100% - 40px);">
                 <div class="tab-buttons">
                     <button class="tab-button active" data-tab="timeline">Timeline View</button>
+                    <button class="tab-button" data-tab="parser">Parser Output</button>
                     <button class="tab-button" data-tab="json">JSON Preview</button>
                 </div>
                 
                 <div class="tab-content active" id="timeline-tab">
                     <div id="timeline" style="width: 100%; height: 100%;">
                         <div class="empty-state">Loading timeline...</div>
+                    </div>
+                </div>
+                
+                <div class="tab-content" id="parser-tab">
+                    <div class="json-preview">
+                        <pre id="parser-output">Loading parser output...</pre>
                     </div>
                 </div>
                 
@@ -814,12 +821,20 @@ endGroup
             }
         }
 
-        // 6. Update Color Preview (now unused but keeping for compatibility)
+        // 6. Update Parser Output Preview
+        function updateParserOutput(parseResult) {
+            const parserOutput = document.getElementById('parser-output');
+            if (parserOutput) {
+                parserOutput.textContent = JSON.stringify(parseResult, null, 2);
+            }
+        }
+
+        // 7. Update Color Preview (now unused but keeping for compatibility)
         function updateColorPreview() {
             // This function is no longer needed but kept for compatibility
         }
 
-        // 7. Full Screen Toggle Functionality
+        // 8. Full Screen Toggle Functionality
         function toggleFullscreen() {
             const isFullscreen = document.fullscreenElement || document.webkitFullscreenElement;
 
@@ -875,7 +890,7 @@ endGroup
         document.addEventListener('fullscreenchange', updateFullscreenButton);
         document.addEventListener('webkitfullscreenchange', updateFullscreenButton);
 
-        // 8. Date Normalization (simplified for reliability)
+        // 9. Date Normalization (simplified for reliability)
         function normalizeDate(dateStr) {
             if (!dateStr || !dateFns) {
                 console.log('⚠️ DEBUG: normalizeDate skipped', {reason: !dateStr ? 'No date' : 'dateFns missing'});
@@ -897,7 +912,7 @@ endGroup
             }
         }
 
-        // 9. Extract Tasks (simplified for v0.16.3)
+        // 10. Extract Tasks (simplified for v0.16.3)
         function extractTasks(supplemental) {
             const tasks = [];
             if (!Array.isArray(supplemental)) return tasks;
@@ -909,7 +924,7 @@ endGroup
             return tasks;
         }
 
-        // 10. Extract Metadata (simplified)
+        // 11. Extract Metadata (simplified)
         function extractMetadata(supplemental) {
             const meta = {contact: '', assignees: '', location: '', links: [], media: null};
             if (!Array.isArray(supplemental)) return meta;
@@ -931,7 +946,7 @@ endGroup
             return meta;
         }
 
-        // 11. Recursively Extract Events (v0.16.3-focused: handles "fn" type nodes)
+        // 12. Recursively Extract Events (v0.16.3-focused: handles "fn" type nodes)
         function extractEvents(children, section = null, group = null) {
             const events = [];
             if (!Array.isArray(children)) return events;
@@ -972,14 +987,14 @@ endGroup
             return events;
         }
 
-        // 12. Generate Color for Tag
+        // 13. Generate Color for Tag
         function generateTagColor(tagName, existingTags) {
             const colors = COLOR_PALETTES[currentPalette];
             const colorIndex = existingTags.length % colors.length;
             return colors[colorIndex];
         }
 
-        // 13. Extract Parsed Data (FORCE log raw Parser output + fix tag extraction + auto-color generation)
+        // 14. Extract Parsed Data (FORCE log raw Parser output + fix tag extraction + auto-color generation)
         function extractParsedData(parseResult) {
             // 🔴 FORCE show raw Parser output (critical for debugging)
             console.log('📋 DEBUG: RAW Parser Output (v0.16.3)', parseResult);
@@ -1032,7 +1047,7 @@ endGroup
             return data;
         }
 
-        // 14. Map to TimelineJS (FIX: Math.min/Math.max error with Date objects)
+        // 15. Map to TimelineJS (FIX: Math.min/Math.max error with Date objects)
         function mapToTimelineJS(parseResult) {
             const data = extractParsedData(parseResult);
             const timelineJson = {
@@ -1151,7 +1166,7 @@ endGroup
             return timelineJson;
         }
 
-        // 15. Render Timeline
+        // 16. Render Timeline
         function renderTimeline(timelineJson) {
             // Update JSON preview
             updateJsonPreview(timelineJson);
@@ -1190,7 +1205,7 @@ endGroup
             }
         }
 
-        // 16. Main Update Workflow (FORCE log every step)
+        // 17. Main Update Workflow (FORCE log every step)
         function updateTimeline() {
             if (!parseMarkwhen || !dateFns) {
                 console.log('⚠️ DEBUG: Update skipped - dependencies missing');
@@ -1207,6 +1222,9 @@ endGroup
                 const parseResult = parseMarkwhen(input);
                 console.log('📋 DEBUG: Parser result received', {hasEvents: !!parseResult.events});
 
+                // Update parser output preview
+                updateParserOutput(parseResult);
+
                 // Map and render
                 const timelineJson = mapToTimelineJS(parseResult);
                 renderTimeline(timelineJson);
@@ -1217,7 +1235,7 @@ endGroup
             }
         }
 
-        // 17. Editor Listener
+        // 18. Editor Listener
         let debounceTimer;
         editor.addEventListener('input', () => {
             clearTimeout(debounceTimer);
