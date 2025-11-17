@@ -631,6 +631,7 @@ endGroup
         console.log('🔴 DEBUG: Script started - v0.16.3 compatibility + Full Screen');
         let parseMarkwhen;
         let dateFns;
+        let toonFormat;
         const parserLoadError = document.getElementById('parser-load-error');
 
         try {
@@ -642,6 +643,10 @@ endGroup
             const parserModule = await import('https://esm.sh/@markwhen/parser@0.16.3?bundle');
             parseMarkwhen = parserModule.parse;
             console.log('✅ DEBUG: Markwhen Parser v0.16.3 loaded', {isFunction: typeof parseMarkwhen === 'function'});
+
+            // Import toon-format
+            toonFormat = await import('https://esm.sh/@toon-format/toon');
+            console.log('✅ DEBUG: toon-format loaded', {hasEncode: !!toonFormat.encode});
 
             parserLoadError.style.display = 'none';
             
@@ -816,16 +821,28 @@ endGroup
         // 5. Update JSON Preview
         function updateJsonPreview(timelineJson) {
             const jsonOutput = document.getElementById('json-output');
-            if (jsonOutput) {
-                jsonOutput.textContent = JSON.stringify(timelineJson, null, 2);
+            if (jsonOutput && toonFormat) {
+                try {
+                    const toonEncoded = toonFormat.encode(timelineJson, { keyFolding: 'safe' });
+                    jsonOutput.textContent = toonEncoded;
+                } catch (err) {
+                    // Fallback to regular JSON if toon encoding fails
+                    jsonOutput.textContent = JSON.stringify(timelineJson, null, 2);
+                }
             }
         }
 
         // 6. Update Parser Output Preview
         function updateParserOutput(parseResult) {
             const parserOutput = document.getElementById('parser-output');
-            if (parserOutput) {
-                parserOutput.textContent = JSON.stringify(parseResult, null, 2);
+            if (parserOutput && toonFormat) {
+                try {
+                    const toonEncoded = toonFormat.encode(parseResult, { keyFolding: 'safe' });
+                    parserOutput.textContent = toonEncoded;
+                } catch (err) {
+                    // Fallback to regular JSON if toon encoding fails
+                    parserOutput.textContent = JSON.stringify(parseResult, null, 2);
+                }
             }
         }
 
