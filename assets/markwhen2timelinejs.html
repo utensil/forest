@@ -616,9 +616,9 @@ endGroup
             ]
         };
 
-        // Current selected palette
+        // Current selected palette and slide tracking
         let currentPalette = 'meadow';
-        let currentEventId = null;
+        let currentSlideIndex = 0;
 
         // 2. Force show all logs + Import dependencies
         console.log('🔴 DEBUG: Script started - v0.16.3 compatibility + Full Screen');
@@ -1164,12 +1164,7 @@ endGroup
             // Update JSON preview
             updateJsonPreview(timelineJson);
             
-            // Save current slide index if timeline exists
-            let savedSlideIndex = 0;
-            if (timelineInstance && typeof timelineInstance.getCurrentSlide === 'function') {
-                savedSlideIndex = timelineInstance.getCurrentSlide();
-                console.log('💾 DEBUG: Saved current slide index:', savedSlideIndex);
-            }
+            console.log('💾 DEBUG: Using saved slide index:', currentSlideIndex);
             
             if (timelineInstance?.destroy) timelineInstance.destroy();
             try {
@@ -1178,10 +1173,16 @@ endGroup
                     display_date: {format: 'MMM DD, YYYY'},
                     height: '100%',
                     track_height: 90,
-                    start_at_slide: savedSlideIndex
+                    start_at_slide: currentSlideIndex
                 });
                 
-                console.log('🔄 DEBUG: Restored to slide index:', savedSlideIndex);
+                // Add event listener for slide changes
+                timelineInstance.addEventListener('change', function(e) {
+                    currentSlideIndex = e.current_slide;
+                    console.log('🔄 DEBUG: Slide changed to:', currentSlideIndex);
+                });
+                
+                console.log('🔄 DEBUG: Restored to slide index:', currentSlideIndex);
                 console.log('✅ DEBUG: Timeline rendered successfully');
                 successMessage.style.display = 'block';
                 parseError.style.display = 'none';
