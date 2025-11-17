@@ -1104,6 +1104,8 @@ endGroup
                 if (event.group?.tags?.length) {
                     const tagBackgroundCheckbox = document.getElementById('tag-background');
                     const useBackground = tagBackgroundCheckbox && tagBackgroundCheckbox.checked;
+                    console.log('🎨 DEBUG: Tag styling', {useBackground, hasCheckbox: !!tagBackgroundCheckbox, checked: tagBackgroundCheckbox?.checked});
+                    
                     const tagElements = event.group.tags.map(tag => {
                         const tagColor = timelineJson.tags[tag] || '#808080';
                         if (useBackground) {
