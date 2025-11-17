@@ -137,6 +137,46 @@
         .timeline-container:fullscreen #timeline {
             height: calc(100vh - 60px) !important;
         }
+
+        /* Color Palette Dropdown Styles */
+        .palette-selector {
+            position: relative;
+            display: inline-block;
+        }
+
+        #color-palette {
+            appearance: none;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            padding: 8px 32px 8px 12px;
+            font-size: 12px;
+            cursor: pointer;
+            min-width: 200px;
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+            background-position: right 8px center;
+            background-repeat: no-repeat;
+            background-size: 16px;
+        }
+
+        #color-palette:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        .color-preview {
+            display: inline-flex;
+            gap: 2px;
+            margin-left: 8px;
+        }
+
+        .color-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            border: 1px solid rgba(0,0,0,0.1);
+        }
     </style>
 </head>
 
@@ -150,15 +190,16 @@
                 <div>
                     <label for="color-palette" style="font-size: 12px; color: #666; margin-right: 0.5rem;">Color
                         Palette:</label>
-                    <select id="color-palette"
-                        style="font-size: 12px; padding: 2px 4px; border: 1px solid #ddd; border-radius: 3px;">
-                        <option value="markwhen">Markwhen Default</option>
-                        <option value="meadow" selected>Meadow Green</option>
-                        <option value="ocean">Ocean Blue Serenity</option>
-                        <option value="earthy">Earthy Tones</option>
-                        <option value="sunset">Sunset Glow</option>
-                        <option value="vibrant">Vibrant Tones</option>
-                    </select>
+                    <div class="palette-selector">
+                        <select id="color-palette">
+                            <option value="markwhen">Markwhen Default</option>
+                            <option value="meadow" selected>Meadow Green</option>
+                            <option value="ocean">Ocean Blue Serenity</option>
+                            <option value="earthy">Earthy Tones</option>
+                            <option value="sunset">Sunset Glow</option>
+                            <option value="vibrant">Vibrant Tones</option>
+                        </select>
+                    </div>
                 </div>
             </div>
             <textarea id="markwhen-editor">---
@@ -347,6 +388,9 @@ endGroup
             console.log('✅ DEBUG: Markwhen Parser v0.16.3 loaded', {isFunction: typeof parseMarkwhen === 'function'});
 
             parserLoadError.style.display = 'none';
+            
+            // Initialize palette dropdown with color previews
+            populatePaletteDropdown();
         } catch (err) {
             parserLoadError.textContent = `Dependency load failed: ${err.message}`;
             console.error('❌ DEBUG: Dependency error:', err);
@@ -361,7 +405,50 @@ endGroup
         const colorPaletteSelect = document.getElementById('color-palette');
         let timelineInstance = null;
 
-        // 3. Full Screen Toggle Functionality
+        // 3. Populate Color Palette Dropdown with Previews
+        function populatePaletteDropdown() {
+            const paletteNames = {
+                markwhen: 'Markwhen Default',
+                meadow: 'Meadow Green',
+                ocean: 'Ocean Blue Serenity',
+                earthy: 'Earthy Tones',
+                sunset: 'Sunset Glow',
+                vibrant: 'Vibrant Tones'
+            };
+
+            colorPaletteSelect.innerHTML = '';
+            
+            Object.entries(COLOR_PALETTES).forEach(([key, colors]) => {
+                const option = document.createElement('option');
+                option.value = key;
+                option.textContent = paletteNames[key];
+                
+                if (key === 'meadow') option.selected = true;
+                colorPaletteSelect.appendChild(option);
+            });
+
+            // Add color preview after the select
+            updateColorPreview();
+        }
+
+        // 4. Update Color Preview
+        function updateColorPreview() {
+            const selectedPalette = colorPaletteSelect.value;
+            const colors = COLOR_PALETTES[selectedPalette];
+            
+            let preview = colorPaletteSelect.parentElement.querySelector('.color-preview');
+            if (!preview) {
+                preview = document.createElement('div');
+                preview.className = 'color-preview';
+                colorPaletteSelect.parentElement.appendChild(preview);
+            }
+            
+            preview.innerHTML = colors.slice(0, 6).map(color => 
+                `<div class="color-dot" style="background-color: ${color}"></div>`
+            ).join('');
+        }
+
+        // 5. Full Screen Toggle Functionality
         function toggleFullscreen() {
             const isFullscreen = document.fullscreenElement || document.webkitFullscreenElement;
 
@@ -417,7 +504,7 @@ endGroup
         document.addEventListener('fullscreenchange', updateFullscreenButton);
         document.addEventListener('webkitfullscreenchange', updateFullscreenButton);
 
-        // 4. Date Normalization (simplified for reliability)
+        // 6. Date Normalization (simplified for reliability)
         function normalizeDate(dateStr) {
             if (!dateStr || !dateFns) {
                 console.log('⚠️ DEBUG: normalizeDate skipped', {reason: !dateStr ? 'No date' : 'dateFns missing'});
@@ -439,7 +526,7 @@ endGroup
             }
         }
 
-        // 5. Extract Tasks (simplified for v0.16.3)
+        // 7. Extract Tasks (simplified for v0.16.3)
         function extractTasks(supplemental) {
             const tasks = [];
             if (!Array.isArray(supplemental)) return tasks;
@@ -452,7 +539,7 @@ endGroup
             return tasks;
         }
 
-        // 6. Extract Metadata (simplified)
+        // 8. Extract Metadata (simplified)
         function extractMetadata(supplemental) {
             const meta = {contact: '', assignees: '', location: '', links: [], media: null};
             if (!Array.isArray(supplemental)) return meta;
@@ -474,7 +561,7 @@ endGroup
             return meta;
         }
 
-        // 7. Recursively Extract Events (v0.16.3-focused: handles "fn" type nodes)
+        // 9. Recursively Extract Events (v0.16.3-focused: handles "fn" type nodes)
         function extractEvents(children, section = null, group = null) {
             const events = [];
             if (!Array.isArray(children)) return events;
@@ -518,7 +605,7 @@ endGroup
             return events;
         }
 
-        // 8. Generate Color for Tag
+        // 10. Generate Color for Tag
         function generateTagColor(tagName, existingTags) {
             const selectedPalette = colorPaletteSelect.value;
             const colors = COLOR_PALETTES[selectedPalette];
@@ -526,7 +613,7 @@ endGroup
             return colors[colorIndex];
         }
 
-        // 9. Extract Parsed Data (FORCE log raw Parser output + fix tag extraction + auto-color generation)
+        // 11. Extract Parsed Data (FORCE log raw Parser output + fix tag extraction + auto-color generation)
         function extractParsedData(parseResult) {
             // 🔴 FORCE show raw Parser output (critical for debugging)
             console.log('📋 DEBUG: RAW Parser Output (v0.16.3)', parseResult);
@@ -585,7 +672,7 @@ endGroup
             return data;
         }
 
-        // 10. Map to TimelineJS (FIX: Math.min/Math.max error with Date objects)
+        // 12. Map to TimelineJS (FIX: Math.min/Math.max error with Date objects)
         function mapToTimelineJS(parseResult) {
             const data = extractParsedData(parseResult);
             const timelineJson = {
@@ -681,7 +768,7 @@ endGroup
             return timelineJson;
         }
 
-        // 11. Render Timeline
+        // 13. Render Timeline
         function renderTimeline(timelineJson) {
             if (timelineInstance?.destroy) timelineInstance.destroy();
             try {
@@ -700,7 +787,7 @@ endGroup
             }
         }
 
-        // 12. Main Update Workflow (FORCE log every step)
+        // 14. Main Update Workflow (FORCE log every step)
         function updateTimeline() {
             if (!parseMarkwhen || !dateFns) {
                 console.log('⚠️ DEBUG: Update skipped - dependencies missing');
@@ -727,7 +814,7 @@ endGroup
             }
         }
 
-        // 13. Editor Listener
+        // 15. Editor Listener
         let debounceTimer;
         editor.addEventListener('input', () => {
             clearTimeout(debounceTimer);
@@ -735,7 +822,10 @@ endGroup
         });
 
         // Color palette change listener
-        colorPaletteSelect.addEventListener('change', updateTimeline);
+        colorPaletteSelect.addEventListener('change', () => {
+            updateColorPreview();
+            updateTimeline();
+        });
 
         // Initial Render
         console.log('🔄 DEBUG: Triggering initial render');
