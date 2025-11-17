@@ -1203,7 +1203,10 @@ endGroup
                 // Build details with section indicator at the top
                 let fullDetails = '';
                 if (event.section?.name) {
-                    fullDetails += `<div style="color: #666; font-size: 0.9em; margin-bottom: 0.5em; font-style: italic;">${event.section.name}</div>`;
+                    const tagColoringSelect = document.getElementById('tag-coloring');
+                    const coloringMode = tagColoringSelect ? tagColoringSelect.value : 'text';
+                    const sectionColor = coloringMode === 'background' ? '#ccc' : '#666';
+                    fullDetails += `<div style="color: ${sectionColor}; font-size: 0.9em; margin-bottom: 0.5em; font-style: italic;">${event.section.name}</div>`;
                 }
                 fullDetails += details;
                 
