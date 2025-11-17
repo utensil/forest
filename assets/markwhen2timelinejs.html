@@ -1180,9 +1180,9 @@ endGroup
                 timelineInstance.addEventListener('change', function(e) {
                     const currentId = e.target.current_id;
                     if (currentId && e.target.config && e.target.config.events) {
-                        const slideIndex = e.target.config.events.findIndex(event => event.unique_id === currentId);
-                        if (slideIndex >= 0) {
-                            currentSlideIndex = slideIndex;
+                        const eventIndex = e.target.config.events.findIndex(event => event.unique_id === currentId);
+                        if (eventIndex >= 0) {
+                            currentSlideIndex = eventIndex + 1; // Add 1 for title slide
                             console.log('🔄 DEBUG: Slide changed to:', currentSlideIndex, 'ID:', currentId);
                         }
                     }
