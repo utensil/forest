@@ -1154,7 +1154,12 @@ endGroup
                 }
                 if (event.tasks.length) {
                     details += '<ul style="padding-left: 1.5rem;">';
-                    event.tasks.forEach(t => details += `<li>[${t.completed ? '✓' : ' '}] ${t.text}</li>`);
+                    event.tasks.forEach(t => {
+                        const checkbox = t.completed ? 
+                            '<input type="checkbox" checked disabled style="margin-right: 0.5rem;">' : 
+                            '<input type="checkbox" disabled style="margin-right: 0.5rem;">';
+                        details += `<li style="list-style: none;">${checkbox}${t.text}</li>`;
+                    });
                     details += '</ul>';
                 }
                 if (event.meta.contact) details += `<p><strong>Contact:</strong> ${event.meta.contact}</p>`;
