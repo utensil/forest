@@ -1068,6 +1068,12 @@ endGroup
                     .filter(Boolean)
                     .map(d => new Date(d).getTime()); // Get numeric timestamp
 
+                // Skip sections without valid timestamps
+                if (startTimestamps.length === 0 || endTimestamps.length === 0) {
+                    console.log('⚠️ DEBUG: Skipping section era (no valid dates):', section.name);
+                    return;
+                }
+
                 // Step 2: Calculate earliest start and latest end (using timestamps)
                 const earliestStart = new Date(Math.min(...startTimestamps));
                 const latestEnd = new Date(Math.max(...endTimestamps));
@@ -1084,6 +1090,8 @@ endGroup
                         background: {color: '#f0f0f0'}
                     });
                     console.log('📅 DEBUG: Added section era', {section: section.name, start, end});
+                } else {
+                    console.log('⚠️ DEBUG: Skipping section era (invalid normalized dates):', section.name);
                 }
             });
 
