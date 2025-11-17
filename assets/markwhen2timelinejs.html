@@ -949,21 +949,25 @@ endGroup
 
         // 11. Extract Metadata (simplified)
         function extractMetadata(supplemental) {
-            const meta = {contact: '', assignees: '', location: '', links: [], media: null};
+            const meta = {contact: '', assignees: '', location: '', links: [], media: null, textContent: []};
             if (!Array.isArray(supplemental)) return meta;
             supplemental.forEach(item => {
                 if (item.type !== 'text' || !item.raw) return;
                 const text = item.raw.trim();
                 if (text.startsWith('contact:')) meta.contact = text.replace('contact:', '').trim();
-                if (text.startsWith('assignees:')) meta.assignees = text.replace('assignees:', '').trim().replace(/[\[\]]/g, '');
-                if (text.startsWith('location:')) meta.location = text.replace('location:', '').trim();
-                if (text.startsWith('[') && text.includes('](')) {
+                else if (text.startsWith('assignees:')) meta.assignees = text.replace('assignees:', '').trim().replace(/[\[\]]/g, '');
+                else if (text.startsWith('location:')) meta.location = text.replace('location:', '').trim();
+                else if (text.startsWith('[') && text.includes('](')) {
                     const [textPart, urlPart] = text.split('](');
                     meta.links.push({text: textPart.slice(1), url: urlPart.slice(0, -1)});
                 }
-                if (text.startsWith('![')) {
+                else if (text.startsWith('![')) {
                     const [altPart, urlPart] = text.split('](');
                     meta.media = {alt: altPart.slice(2), url: urlPart.slice(0, -1)};
+                }
+                else {
+                    // Regular text content
+                    meta.textContent.push(text);
                 }
             });
             return meta;
@@ -1163,6 +1167,13 @@ endGroup
                         }
                     }).join(' ');
                     details += `<p>${tagElements}</p>`;
+                }
+                
+                // Add supplemental text content
+                if (event.meta.textContent && event.meta.textContent.length > 0) {
+                    event.meta.textContent.forEach(text => {
+                        details += `<p>${text}</p>`;
+                    });
                 }
                 if (event.tasks.length) {
                     details += '<ul style="padding-left: 1.5rem;">';
