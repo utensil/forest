@@ -217,19 +217,18 @@
   </div>
 
   <script type="module">
-    // 1. Color Palette for Auto-Generated Tag Colors
+    // 1. Color Palette for Auto-Generated Tag Colors - Meadow Green Gradient
     const COLORS = [
-      "22, 163, 76",
-      "2, 132, 199", 
-      "212, 50, 56",
-      "242, 202, 45",
-      "80, 73, 229",
-      "145, 57, 234",
-      "214, 45, 123",
-      "234, 88, 11",
-      "168, 162, 157",
-      "255, 255, 255",
-      "0, 0, 0",
+      "#d9ed92", // Lime Cream
+      "#b5e48c", // Light Green
+      "#99d98c", // Willow Green
+      "#76c893", // Emerald
+      "#52b69a", // Ocean Mist
+      "#34a0a4", // Tropical Teal
+      "#168aad", // Bondi Blue
+      "#1a759f", // Cerulean
+      "#1e6091", // Baltic Blue
+      "#184e77", // Yale Blue
     ];
 
     // 2. Force show all logs + Import dependencies
@@ -422,7 +421,7 @@
     // 8. Generate Color for Tag
     function generateTagColor(tagName, existingTags) {
       const colorIndex = existingTags.length % COLORS.length;
-      return `rgb(${COLORS[colorIndex]})`;
+      return COLORS[colorIndex];
     }
 
     // 9. Extract Parsed Data (FORCE log raw Parser output + fix tag extraction + auto-color generation)
