@@ -618,6 +618,7 @@ endGroup
 
         // Current selected palette
         let currentPalette = 'meadow';
+        let currentEventId = null;
 
         // 2. Force show all logs + Import dependencies
         console.log('🔴 DEBUG: Script started - v0.16.3 compatibility + Full Screen');
@@ -1163,14 +1164,28 @@ endGroup
             // Update JSON preview
             updateJsonPreview(timelineJson);
             
+            // Save current event if timeline exists
+            if (timelineInstance && timelineInstance.current_id) {
+                currentEventId = timelineInstance.current_id;
+                console.log('💾 DEBUG: Saved current event ID:', currentEventId);
+            }
+            
             if (timelineInstance?.destroy) timelineInstance.destroy();
             try {
                 timelineInstance = new TL.Timeline('timeline', timelineJson, {
                     scale: 'human',
                     display_date: {format: 'MMM DD, YYYY'},
                     height: '100%',
-                    track_height: 90
+                    track_height: 90,
+                    start_at_slide: currentEventId ? findSlideIndex(timelineJson, currentEventId) : 0
                 });
+                
+                // Clear the saved event ID after successful restore
+                if (currentEventId) {
+                    console.log('🔄 DEBUG: Restored to event ID:', currentEventId);
+                    currentEventId = null;
+                }
+                
                 console.log('✅ DEBUG: Timeline rendered successfully');
                 successMessage.style.display = 'block';
                 parseError.style.display = 'none';
@@ -1180,7 +1195,13 @@ endGroup
             }
         }
 
-        // 16. Main Update Workflow (FORCE log every step)
+        // 16. Find Slide Index by Event ID
+        function findSlideIndex(timelineJson, eventId) {
+            const index = timelineJson.events.findIndex(event => event.unique_id === eventId);
+            return index >= 0 ? index : 0;
+        }
+
+        // 17. Main Update Workflow (FORCE log every step)
         function updateTimeline() {
             if (!parseMarkwhen || !dateFns) {
                 console.log('⚠️ DEBUG: Update skipped - dependencies missing');
@@ -1207,7 +1228,7 @@ endGroup
             }
         }
 
-        // 17. Editor Listener
+        // 18. Editor Listener
         let debounceTimer;
         editor.addEventListener('input', () => {
             clearTimeout(debounceTimer);
