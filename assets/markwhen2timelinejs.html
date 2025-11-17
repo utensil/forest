@@ -228,6 +228,65 @@
             border-radius: 50%;
             border: 1px solid rgba(0,0,0,0.1);
         }
+
+        /* Tab Styles */
+        .tab-container {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .tab-buttons {
+            display: flex;
+            border-bottom: 1px solid #ddd;
+            background: #f8f9fa;
+        }
+
+        .tab-button {
+            padding: 8px 16px;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            font-size: 12px;
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s;
+        }
+
+        .tab-button:hover {
+            background: #e9ecef;
+        }
+
+        .tab-button.active {
+            background: white;
+            border-bottom-color: #3b82f6;
+            color: #3b82f6;
+        }
+
+        .tab-content {
+            flex: 1;
+            display: none;
+            overflow: auto;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .json-preview {
+            padding: 1rem;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 11px;
+            line-height: 1.4;
+            background: #f8f9fa;
+            height: 100%;
+            overflow: auto;
+        }
+
+        .json-preview pre {
+            margin: 0;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
     </style>
 </head>
 
@@ -346,8 +405,24 @@ endGroup
                 </svg>
                 Full Screen
             </button>
-            <div id="timeline" style="width: 100%; height: calc(100% - 40px);">
-                <div class="empty-state">Loading timeline...</div>
+            
+            <div class="tab-container" style="height: calc(100% - 40px);">
+                <div class="tab-buttons">
+                    <button class="tab-button active" data-tab="timeline">Timeline View</button>
+                    <button class="tab-button" data-tab="json">JSON Preview</button>
+                </div>
+                
+                <div class="tab-content active" id="timeline-tab">
+                    <div id="timeline" style="width: 100%; height: 100%;">
+                        <div class="empty-state">Loading timeline...</div>
+                    </div>
+                </div>
+                
+                <div class="tab-content" id="json-tab">
+                    <div class="json-preview">
+                        <pre id="json-output">Loading JSON...</pre>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -449,6 +524,9 @@ endGroup
             
             // Initialize custom dropdown with color previews
             initializeDropdown();
+            
+            // Initialize tabs
+            initializeTabs();
         } catch (err) {
             parserLoadError.textContent = `Dependency load failed: ${err.message}`;
             console.error('❌ DEBUG: Dependency error:', err);
@@ -587,12 +665,45 @@ endGroup
             updateTimeline();
         }
 
-        // 4. Update Color Preview (now unused but keeping for compatibility)
+        // 4. Initialize Tabs
+        function initializeTabs() {
+            const tabButtons = document.querySelectorAll('.tab-button');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
+            tabButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const targetTab = button.dataset.tab;
+                    
+                    // Update button states
+                    tabButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+                    
+                    // Update content visibility
+                    tabContents.forEach(content => content.classList.remove('active'));
+                    document.getElementById(`${targetTab}-tab`).classList.add('active');
+                    
+                    // Refresh timeline layout if switching to timeline tab
+                    if (targetTab === 'timeline' && timelineInstance) {
+                        setTimeout(() => timelineInstance.updateDisplay(), 100);
+                    }
+                });
+            });
+        }
+
+        // 5. Update JSON Preview
+        function updateJsonPreview(timelineJson) {
+            const jsonOutput = document.getElementById('json-output');
+            if (jsonOutput) {
+                jsonOutput.textContent = JSON.stringify(timelineJson, null, 2);
+            }
+        }
+
+        // 6. Update Color Preview (now unused but keeping for compatibility)
         function updateColorPreview() {
             // This function is no longer needed but kept for compatibility
         }
 
-        // 5. Full Screen Toggle Functionality
+        // 7. Full Screen Toggle Functionality
         function toggleFullscreen() {
             const isFullscreen = document.fullscreenElement || document.webkitFullscreenElement;
 
@@ -648,7 +759,7 @@ endGroup
         document.addEventListener('fullscreenchange', updateFullscreenButton);
         document.addEventListener('webkitfullscreenchange', updateFullscreenButton);
 
-        // 6. Date Normalization (simplified for reliability)
+        // 8. Date Normalization (simplified for reliability)
         function normalizeDate(dateStr) {
             if (!dateStr || !dateFns) {
                 console.log('⚠️ DEBUG: normalizeDate skipped', {reason: !dateStr ? 'No date' : 'dateFns missing'});
@@ -670,7 +781,7 @@ endGroup
             }
         }
 
-        // 7. Extract Tasks (simplified for v0.16.3)
+        // 9. Extract Tasks (simplified for v0.16.3)
         function extractTasks(supplemental) {
             const tasks = [];
             if (!Array.isArray(supplemental)) return tasks;
@@ -683,7 +794,7 @@ endGroup
             return tasks;
         }
 
-        // 8. Extract Metadata (simplified)
+        // 10. Extract Metadata (simplified)
         function extractMetadata(supplemental) {
             const meta = {contact: '', assignees: '', location: '', links: [], media: null};
             if (!Array.isArray(supplemental)) return meta;
@@ -705,7 +816,7 @@ endGroup
             return meta;
         }
 
-        // 9. Recursively Extract Events (v0.16.3-focused: handles "fn" type nodes)
+        // 11. Recursively Extract Events (v0.16.3-focused: handles "fn" type nodes)
         function extractEvents(children, section = null, group = null) {
             const events = [];
             if (!Array.isArray(children)) return events;
@@ -749,14 +860,14 @@ endGroup
             return events;
         }
 
-        // 10. Generate Color for Tag
+        // 12. Generate Color for Tag
         function generateTagColor(tagName, existingTags) {
             const colors = COLOR_PALETTES[currentPalette];
             const colorIndex = existingTags.length % colors.length;
             return colors[colorIndex];
         }
 
-        // 11. Extract Parsed Data (FORCE log raw Parser output + fix tag extraction + auto-color generation)
+        // 13. Extract Parsed Data (FORCE log raw Parser output + fix tag extraction + auto-color generation)
         function extractParsedData(parseResult) {
             // 🔴 FORCE show raw Parser output (critical for debugging)
             console.log('📋 DEBUG: RAW Parser Output (v0.16.3)', parseResult);
@@ -815,7 +926,7 @@ endGroup
             return data;
         }
 
-        // 12. Map to TimelineJS (FIX: Math.min/Math.max error with Date objects)
+        // 14. Map to TimelineJS (FIX: Math.min/Math.max error with Date objects)
         function mapToTimelineJS(parseResult) {
             const data = extractParsedData(parseResult);
             const timelineJson = {
@@ -911,8 +1022,11 @@ endGroup
             return timelineJson;
         }
 
-        // 13. Render Timeline
+        // 15. Render Timeline
         function renderTimeline(timelineJson) {
+            // Update JSON preview
+            updateJsonPreview(timelineJson);
+            
             if (timelineInstance?.destroy) timelineInstance.destroy();
             try {
                 timelineInstance = new TL.Timeline('timeline', timelineJson, {
@@ -925,12 +1039,12 @@ endGroup
                 successMessage.style.display = 'block';
                 parseError.style.display = 'none';
             } catch (err) {
-                timelineContainer.innerHTML = `<div class="empty-state">Timeline Error: ${err.message}</div>`;
+                document.getElementById('timeline').innerHTML = `<div class="empty-state">Timeline Error: ${err.message}</div>`;
                 console.error('❌ DEBUG: Timeline render error:', err);
             }
         }
 
-        // 14. Main Update Workflow (FORCE log every step)
+        // 16. Main Update Workflow (FORCE log every step)
         function updateTimeline() {
             if (!parseMarkwhen || !dateFns) {
                 console.log('⚠️ DEBUG: Update skipped - dependencies missing');
@@ -957,7 +1071,7 @@ endGroup
             }
         }
 
-        // 15. Editor Listener
+        // 17. Editor Listener
         let debounceTimer;
         editor.addEventListener('input', () => {
             clearTimeout(debounceTimer);
