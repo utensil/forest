@@ -1199,7 +1199,7 @@ endGroup
 
                 // Add event
                 const renderedTitle = markdownIt ? markdownIt.renderInline(event.title) : event.title;
-                const sectionIndicator = event.section?.name ? `<span style="color: #666; font-size: 0.9em;">${event.section.name}</span> • ` : '';
+                const sectionIndicator = event.section?.name ? `<span style="color: #666; font-size: 0.9em;">${event.section.name}</span><br>` : '';
                 const timelineEvent = {
                     start_date: start,
                     text: {headline: `${sectionIndicator}${renderedTitle}`, text: details},
