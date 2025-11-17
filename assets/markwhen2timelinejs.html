@@ -316,10 +316,12 @@
                     </div>
                 </div>
                 <div style="margin-top: 0.5rem;">
-                    <label style="font-size: 12px; color: #666; display: flex; align-items: center; gap: 0.5rem;">
-                        <input type="checkbox" id="tag-background" style="margin: 0;">
-                        Tag badges
-                    </label>
+                    <label style="font-size: 12px; color: #666; margin-right: 0.5rem;">Tag coloring:</label>
+                    <select id="tag-coloring" style="font-size: 12px; padding: 2px 4px; border: 1px solid #ddd; border-radius: 3px;">
+                        <option value="text">Text</option>
+                        <option value="badge">Badge</option>
+                        <option value="background">Background</option>
+                    </select>
                 </div>
             </div>
             <textarea id="markwhen-editor">---
@@ -1129,15 +1131,19 @@ endGroup
                 // Build details with styled tags
                 let details = '';
                 if (event.group?.tags?.length) {
-                    const tagBackgroundCheckbox = document.getElementById('tag-background');
-                    const useBackground = tagBackgroundCheckbox && tagBackgroundCheckbox.checked;
+                    const tagColoringSelect = document.getElementById('tag-coloring');
+                    const coloringMode = tagColoringSelect ? tagColoringSelect.value : 'text';
                     
                     const tagElements = event.group.tags.map(tag => {
                         const tagColor = timelineJson.tags[tag] || '#808080';
-                        if (useBackground) {
-                            return `<span style="background-color: ${tagColor}; color: white; padding: 2px 6px; border-radius: 3px; font-size: 11px; margin-right: 4px;">#${tag}</span>`;
-                        } else {
-                            return `<span style="color: ${tagColor}; font-weight: bold;">#${tag}</span>`;
+                        switch (coloringMode) {
+                            case 'badge':
+                                return `<span style="background-color: ${tagColor}; color: white; padding: 2px 6px; border-radius: 3px; font-size: 11px; margin-right: 4px;">#${tag}</span>`;
+                            case 'background':
+                                return `<span style="background-color: ${tagColor}; color: black; padding: 2px 6px; border-radius: 3px; font-size: 11px; margin-right: 4px;">#${tag}</span>`;
+                            case 'text':
+                            default:
+                                return `<span style="color: ${tagColor}; font-weight: bold;">#${tag}</span>`;
                         }
                     }).join(' ');
                     details += `<p>${tagElements}</p>`;
@@ -1160,10 +1166,10 @@ endGroup
                     unique_id: event.id
                 };
                 
-                // Only add background color if tag badges option is checked
-                const tagBackgroundCheckbox = document.getElementById('tag-background');
-                const useBackground = tagBackgroundCheckbox && tagBackgroundCheckbox.checked;
-                if (useBackground) {
+                // Only add background color if background coloring mode is selected
+                const tagColoringSelect = document.getElementById('tag-coloring');
+                const coloringMode = tagColoringSelect ? tagColoringSelect.value : 'text';
+                if (coloringMode === 'background') {
                     timelineEvent.background = {color: color};
                 }
                 
@@ -1259,9 +1265,9 @@ endGroup
             debounceTimer = setTimeout(updateTimeline, 500);
         });
 
-        // Tag background checkbox listener
+        // Tag coloring dropdown listener
         document.addEventListener('change', (e) => {
-            if (e.target.id === 'tag-background') {
+            if (e.target.id === 'tag-coloring') {
                 updateTimeline();
             }
         });
