@@ -1178,10 +1178,20 @@ endGroup
                 
                 // Add event listener for slide changes
                 timelineInstance.addEventListener('change', function(e) {
-                    const slideIndex = timelineInstance.getCurrentSlide ? timelineInstance.getCurrentSlide() : 0;
-                    if (slideIndex !== undefined && slideIndex !== null) {
+                    const slideIndex = timelineInstance.current_slide_index || timelineInstance.current_slide || 0;
+                    if (typeof slideIndex === 'number') {
                         currentSlideIndex = slideIndex;
                         console.log('🔄 DEBUG: Slide changed to:', currentSlideIndex);
+                    } else {
+                        // Fallback: try to find index from slides array
+                        const currentSlide = timelineInstance.getCurrentSlide();
+                        if (currentSlide && timelineInstance._slides) {
+                            const index = timelineInstance._slides.indexOf(currentSlide);
+                            if (index >= 0) {
+                                currentSlideIndex = index;
+                                console.log('🔄 DEBUG: Slide changed to (fallback):', currentSlideIndex);
+                            }
+                        }
                     }
                 });
                 
