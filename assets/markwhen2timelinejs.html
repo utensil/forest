@@ -1233,11 +1233,14 @@ endGroup
                 
                 if (end) timelineEvent.end_date = end;
                 if (event.meta.media) {
+                    console.log('🖼️ DEBUG: Adding media to event:', event.meta.media);
                     timelineEvent.media = {
                         url: event.meta.media.url,
                         caption: event.meta.media.alt || '',
                         alt: event.meta.media.alt || ''
                     };
+                } else {
+                    console.log('⚠️ DEBUG: No media found for event:', event.title);
                 }
                 timelineJson.events.push(timelineEvent);
             });
