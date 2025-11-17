@@ -970,13 +970,16 @@ endGroup
                 if (text.startsWith('contact:')) meta.contact = text.replace('contact:', '').trim();
                 else if (text.startsWith('assignees:')) meta.assignees = text.replace('assignees:', '').trim().replace(/[\[\]]/g, '');
                 else if (text.startsWith('location:')) meta.location = text.replace('location:', '').trim();
-                else if (text.startsWith('[') && text.includes('](')) {
+                else if (text.startsWith('[') && text.includes('](') && !text.startsWith('![')) {
                     const [textPart, urlPart] = text.split('](');
                     meta.links.push({text: textPart.slice(1), url: urlPart.slice(0, -1)});
                 }
-                else if (text.startsWith('![')) {
-                    const [altPart, urlPart] = text.split('](');
-                    meta.media = {alt: altPart.slice(2), url: urlPart.slice(0, -1)};
+                else if (text.startsWith('![') && text.includes('](')) {
+                    const match = text.match(/!\[([^\]]*)\]\(([^)]+)\)/);
+                    if (match) {
+                        meta.media = {alt: match[1], url: match[2]};
+                        console.log('🖼️ DEBUG: Extracted media:', meta.media);
+                    }
                 }
                 else {
                     // Regular text content
