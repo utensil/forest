@@ -144,8 +144,7 @@
             display: inline-block;
         }
 
-        #color-palette {
-            appearance: none;
+        .palette-dropdown {
             background: white;
             border: 1px solid #ddd;
             border-radius: 6px;
@@ -153,22 +152,74 @@
             font-size: 12px;
             cursor: pointer;
             min-width: 200px;
-            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
-            background-position: right 8px center;
-            background-repeat: no-repeat;
-            background-size: 16px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
         }
 
-        #color-palette:focus {
-            outline: none;
+        .palette-dropdown:hover {
+            border-color: #999;
+        }
+
+        .palette-dropdown.open {
             border-color: #3b82f6;
             box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        .dropdown-arrow {
+            width: 16px;
+            height: 16px;
+            transition: transform 0.2s;
+        }
+
+        .dropdown-arrow.open {
+            transform: rotate(180deg);
+        }
+
+        .palette-options {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            z-index: 1000;
+            max-height: 300px;
+            overflow-y: auto;
+            display: none;
+        }
+
+        .palette-options.open {
+            display: block;
+        }
+
+        .palette-option {
+            padding: 8px 12px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .palette-option:last-child {
+            border-bottom: none;
+        }
+
+        .palette-option:hover {
+            background-color: #f8f9fa;
+        }
+
+        .palette-option.selected {
+            background-color: #e3f2fd;
         }
 
         .color-preview {
             display: inline-flex;
             gap: 2px;
-            margin-left: 8px;
         }
 
         .color-dot {
@@ -191,14 +242,15 @@
                     <label for="color-palette" style="font-size: 12px; color: #666; margin-right: 0.5rem;">Color
                         Palette:</label>
                     <div class="palette-selector">
-                        <select id="color-palette">
-                            <option value="markwhen">Markwhen Default</option>
-                            <option value="meadow" selected>Meadow Green</option>
-                            <option value="ocean">Ocean Blue Serenity</option>
-                            <option value="earthy">Earthy Tones</option>
-                            <option value="sunset">Sunset Glow</option>
-                            <option value="vibrant">Vibrant Tones</option>
-                        </select>
+                        <div class="palette-dropdown" id="palette-dropdown">
+                            <span id="selected-palette">Meadow Green</span>
+                            <svg class="dropdown-arrow" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                                <path stroke="#6b7280" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 8l4 4 4-4"/>
+                            </svg>
+                        </div>
+                        <div class="palette-options" id="palette-options">
+                            <!-- Options will be populated by JavaScript -->
+                        </div>
                     </div>
                 </div>
             </div>
@@ -389,8 +441,8 @@ endGroup
 
             parserLoadError.style.display = 'none';
             
-            // Initialize palette dropdown with color previews
-            populatePaletteDropdown();
+            // Initialize custom dropdown with color previews
+            initializeDropdown();
         } catch (err) {
             parserLoadError.textContent = `Dependency load failed: ${err.message}`;
             console.error('❌ DEBUG: Dependency error:', err);
@@ -402,11 +454,14 @@ endGroup
         const successMessage = document.getElementById('success-message');
         const timelineContainer = document.getElementById('timeline');
         const fullscreenBtn = document.getElementById('fullscreen-btn');
-        const colorPaletteSelect = document.getElementById('color-palette');
+        const paletteDropdown = document.getElementById('palette-dropdown');
+        const paletteOptions = document.getElementById('palette-options');
+        const selectedPalette = document.getElementById('selected-palette');
         let timelineInstance = null;
+        let currentPalette = 'meadow';
 
-        // 3. Populate Color Palette Dropdown with Previews
-        function populatePaletteDropdown() {
+        // 3. Initialize Custom Dropdown
+        function initializeDropdown() {
             const paletteNames = {
                 markwhen: 'Markwhen Default',
                 meadow: 'Meadow Green',
@@ -416,36 +471,83 @@ endGroup
                 vibrant: 'Vibrant Tones'
             };
 
-            colorPaletteSelect.innerHTML = '';
-            
+            // Populate options
+            paletteOptions.innerHTML = '';
             Object.entries(COLOR_PALETTES).forEach(([key, colors]) => {
-                const option = document.createElement('option');
-                option.value = key;
-                option.textContent = paletteNames[key];
+                const option = document.createElement('div');
+                option.className = `palette-option ${key === currentPalette ? 'selected' : ''}`;
+                option.dataset.value = key;
                 
-                if (key === 'meadow') option.selected = true;
-                colorPaletteSelect.appendChild(option);
+                const colorPreview = colors.slice(0, 6).map(color => 
+                    `<div class="color-dot" style="background-color: ${color}"></div>`
+                ).join('');
+                
+                option.innerHTML = `
+                    <span>${paletteNames[key]}</span>
+                    <div class="color-preview">${colorPreview}</div>
+                `;
+                
+                option.addEventListener('click', () => selectPalette(key));
+                paletteOptions.appendChild(option);
             });
 
-            // Add color preview after the select
-            updateColorPreview();
+            // Toggle dropdown
+            paletteDropdown.addEventListener('click', toggleDropdown);
+            
+            // Close dropdown when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!paletteDropdown.contains(e.target) && !paletteOptions.contains(e.target)) {
+                    closeDropdown();
+                }
+            });
         }
 
-        // 4. Update Color Preview
-        function updateColorPreview() {
-            const selectedPalette = colorPaletteSelect.value;
-            const colors = COLOR_PALETTES[selectedPalette];
-            
-            let preview = colorPaletteSelect.parentElement.querySelector('.color-preview');
-            if (!preview) {
-                preview = document.createElement('div');
-                preview.className = 'color-preview';
-                colorPaletteSelect.parentElement.appendChild(preview);
+        function toggleDropdown() {
+            const isOpen = paletteOptions.classList.contains('open');
+            if (isOpen) {
+                closeDropdown();
+            } else {
+                openDropdown();
             }
+        }
+
+        function openDropdown() {
+            paletteOptions.classList.add('open');
+            paletteDropdown.classList.add('open');
+            paletteDropdown.querySelector('.dropdown-arrow').classList.add('open');
+        }
+
+        function closeDropdown() {
+            paletteOptions.classList.remove('open');
+            paletteDropdown.classList.remove('open');
+            paletteDropdown.querySelector('.dropdown-arrow').classList.remove('open');
+        }
+
+        function selectPalette(key) {
+            currentPalette = key;
+            const paletteNames = {
+                markwhen: 'Markwhen Default',
+                meadow: 'Meadow Green',
+                ocean: 'Ocean Blue Serenity',
+                earthy: 'Earthy Tones',
+                sunset: 'Sunset Glow',
+                vibrant: 'Vibrant Tones'
+            };
             
-            preview.innerHTML = colors.slice(0, 6).map(color => 
-                `<div class="color-dot" style="background-color: ${color}"></div>`
-            ).join('');
+            selectedPalette.textContent = paletteNames[key];
+            
+            // Update selected state
+            paletteOptions.querySelectorAll('.palette-option').forEach(option => {
+                option.classList.toggle('selected', option.dataset.value === key);
+            });
+            
+            closeDropdown();
+            updateTimeline();
+        }
+
+        // 4. Update Color Preview (now unused but keeping for compatibility)
+        function updateColorPreview() {
+            // This function is no longer needed but kept for compatibility
         }
 
         // 5. Full Screen Toggle Functionality
@@ -607,8 +709,7 @@ endGroup
 
         // 10. Generate Color for Tag
         function generateTagColor(tagName, existingTags) {
-            const selectedPalette = colorPaletteSelect.value;
-            const colors = COLOR_PALETTES[selectedPalette];
+            const colors = COLOR_PALETTES[currentPalette];
             const colorIndex = existingTags.length % colors.length;
             return colors[colorIndex];
         }
@@ -819,12 +920,6 @@ endGroup
         editor.addEventListener('input', () => {
             clearTimeout(debounceTimer);
             debounceTimer = setTimeout(updateTimeline, 500);
-        });
-
-        // Color palette change listener
-        colorPaletteSelect.addEventListener('change', () => {
-            updateColorPreview();
-            updateTimeline();
         });
 
         // Initial Render
