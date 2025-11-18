@@ -35,7 +35,6 @@ const app = new Elysia({
     })
 
 app.listen(port, async ({ hostname, port }) => {
-
     const serving = () => {
         console.log(`Serving: http://${hostname}:${port}/forest/`)
     }
