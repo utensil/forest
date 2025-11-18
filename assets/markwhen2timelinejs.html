@@ -309,6 +309,26 @@
             color: #3b82f6;
             font-weight: bold;
         }
+
+        /* Tag Coloring Toggle Styles (matching TOON/JSON buttons) */
+        .tag-coloring-toggle {
+            background: none;
+            border: none;
+            font-size: 12px;
+            color: #999;
+            cursor: pointer;
+            padding: 2px 4px;
+            transition: color 0.2s;
+        }
+
+        .tag-coloring-toggle:hover {
+            color: #666;
+        }
+
+        .tag-coloring-toggle.active {
+            color: #3b82f6;
+            font-weight: bold;
+        }
     </style>
 </head>
 
@@ -316,36 +336,33 @@
     <div class="container">
         <!-- Editor -->
         <div class="editor-container">
-            <h3>Markwhen Editor</h3>
-            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.5rem;">
-                <p class="instructions">Supports sections, groups, tags, tasks, media, links</p>
-                <div style="display: flex; flex-direction: column; gap: 0.5rem;">
-                    <div>
-                        <label for="color-palette" style="font-size: 12px; color: #666; margin-right: 0.5rem;">Color
-                            Palette:</label>
-                        <div class="palette-selector">
-                            <div class="palette-dropdown" id="palette-dropdown">
-                                <span id="selected-palette">Meadow Green</span>
-                                <svg class="dropdown-arrow" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                                    <path stroke="#6b7280" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 8l4 4 4-4"/>
-                                </svg>
-                            </div>
-                            <div class="palette-options" id="palette-options">
-                                <!-- Options will be populated by JavaScript -->
-                            </div>
+            <h3>Markwhen to TimelineJS Previewer</h3>
+            <div style="display: flex; gap: 2rem; align-items: flex-start; margin-bottom: 0.5rem;">
+                <div>
+                    <label for="color-palette" style="font-size: 12px; color: #666; margin-right: 0.5rem;">Color
+                        Palette:</label>
+                    <div class="palette-selector">
+                        <div class="palette-dropdown" id="palette-dropdown">
+                            <span id="selected-palette">Meadow Green</span>
+                            <svg class="dropdown-arrow" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                                <path stroke="#6b7280" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 8l4 4 4-4"/>
+                            </svg>
                         </div>
-                        <div style="font-size: 10px; color: #999; margin-top: 2px;">
-                            <a href="https://coolors.co/palettes/trending" target="_blank" rel="noopener noreferrer" style="color: #999; text-decoration: none;">palettes from coolors.co</a>
+                        <div class="palette-options" id="palette-options">
+                            <!-- Options will be populated by JavaScript -->
                         </div>
                     </div>
-                    <div>
-                        <label style="font-size: 12px; color: #666; margin-right: 0.5rem;">Tag coloring:</label>
-                        <select id="tag-coloring" style="font-size: 12px; padding: 2px 4px; border: 1px solid #ddd; border-radius: 3px;">
-                            <option value="text">Text</option>
-                            <option value="badge">Badge</option>
-                            <option value="background">Background</option>
-                        </select>
+                    <div style="font-size: 10px; color: #999; margin-top: 2px;">
+                        <a href="https://coolors.co/palettes/trending" target="_blank" rel="noopener noreferrer" style="color: #999; text-decoration: none;">palettes from coolors.co</a>
                     </div>
+                </div>
+                <div>
+                    <span style="font-size: 12px; color: #666; margin-right: 0.5rem;">Tag Coloring:</span>
+                    <button id="tag-text-btn" class="tag-coloring-toggle active" data-mode="text">Text</button>
+                    <span style="color: #666;">/</span>
+                    <button id="tag-badge-btn" class="tag-coloring-toggle" data-mode="badge">Badge</button>
+                    <span style="color: #666;">/</span>
+                    <button id="tag-background-btn" class="tag-coloring-toggle" data-mode="background">Background</button>
                 </div>
             </div>
             <textarea id="markwhen-editor">---
@@ -533,6 +550,7 @@ Aug 1 2024 to Aug 15 2024: Performance Review #Review
 - [ ] ROI assessment
 endGroup
             </textarea>
+            <p class="instructions">Supports sections, groups, tags, tasks, media, links</p>
             <div id="parser-load-error" class="error-message">Loading parser... (refresh if stuck)</div>
             <div id="parse-error" class="error-message" style="display: none;">Parsing failed! Check console.</div>
             <div id="success-message" class="success-message">Parsing successful → Timeline updated</div>
@@ -711,6 +729,9 @@ endGroup
             
             // Initialize format toggles
             initializeFormatToggles();
+            
+            // Initialize tag coloring toggles
+            initializeTagColoringToggles();
         } catch (err) {
             parserLoadError.textContent = `Dependency load failed: ${err.message}`;
             console.error('❌ DEBUG: Dependency error:', err);
@@ -849,7 +870,45 @@ endGroup
             updateTimeline();
         }
 
-        // 4. Initialize Tabs
+        // 6. Initialize Tag Coloring Toggles
+        function initializeTagColoringToggles() {
+            const textBtn = document.getElementById('tag-text-btn');
+            const badgeBtn = document.getElementById('tag-badge-btn');
+            const backgroundBtn = document.getElementById('tag-background-btn');
+            
+            if (textBtn && badgeBtn && backgroundBtn) {
+                textBtn.addEventListener('click', () => selectTagColoring('text'));
+                badgeBtn.addEventListener('click', () => selectTagColoring('badge'));
+                backgroundBtn.addEventListener('click', () => selectTagColoring('background'));
+            }
+        }
+
+        function selectTagColoring(mode) {
+            // Update button states
+            const textBtn = document.getElementById('tag-text-btn');
+            const badgeBtn = document.getElementById('tag-badge-btn');
+            const backgroundBtn = document.getElementById('tag-background-btn');
+            
+            if (textBtn && badgeBtn && backgroundBtn) {
+                textBtn.classList.toggle('active', mode === 'text');
+                badgeBtn.classList.toggle('active', mode === 'badge');
+                backgroundBtn.classList.toggle('active', mode === 'background');
+                
+                // Update timeline with new coloring
+                updateTimeline();
+            }
+        }
+
+        function getTagColoringMode() {
+            const textBtn = document.getElementById('tag-text-btn');
+            const badgeBtn = document.getElementById('tag-badge-btn');
+            const backgroundBtn = document.getElementById('tag-background-btn');
+            
+            if (badgeBtn && badgeBtn.classList.contains('active')) return 'badge';
+            if (backgroundBtn && backgroundBtn.classList.contains('active')) return 'background';
+            return 'text'; // default
+        }
+        // 7. Initialize Tabs
         function initializeTabs() {
             const tabButtons = document.querySelectorAll('.tab-button');
             const tabContents = document.querySelectorAll('.tab-content');
@@ -874,7 +933,7 @@ endGroup
             });
         }
 
-        // 5. Initialize Format Toggles
+        // 8. Initialize Format Toggles
         function initializeFormatToggles() {
             // Parser format toggles
             const parserToonBtn = document.getElementById('parser-toon-btn');
@@ -1263,8 +1322,7 @@ endGroup
                 // Build details with styled tags
                 let details = '';
                 if (event.group?.tags?.length) {
-                    const tagColoringSelect = document.getElementById('tag-coloring');
-                    const coloringMode = tagColoringSelect ? tagColoringSelect.value : 'text';
+                    const coloringMode = getTagColoringMode();
 
                     const tagElements = event.group.tags.map(tag => {
                         const tagColor = timelineJson.tags[tag] || '#808080';
@@ -1309,8 +1367,7 @@ endGroup
                 // Build details with section indicator at the top
                 let fullDetails = '';
                 if (event.section?.name) {
-                    const tagColoringSelect = document.getElementById('tag-coloring');
-                    const coloringMode = tagColoringSelect ? tagColoringSelect.value : 'text';
+                    const coloringMode = getTagColoringMode();
                     const sectionColor = coloringMode === 'background' ? '#ccc' : '#666';
                     fullDetails += `<div style="color: ${sectionColor}; font-size: 0.9em; margin-bottom: 0.5em; font-style: italic;">${event.section.name}</div>`;
                 }
@@ -1324,8 +1381,7 @@ endGroup
                 };
 
                 // Only add background color if background coloring mode is selected
-                const tagColoringSelect = document.getElementById('tag-coloring');
-                const coloringMode = tagColoringSelect ? tagColoringSelect.value : 'text';
+                const coloringMode = getTagColoringMode();
                 if (coloringMode === 'background') {
                     timelineEvent.background = {color: color};
                 }
@@ -1424,18 +1480,11 @@ endGroup
             }
         }
 
-        // 18. Editor Listener
+        // Editor Listener
         let debounceTimer;
         editor.addEventListener('input', () => {
             clearTimeout(debounceTimer);
             debounceTimer = setTimeout(updateTimeline, 500);
-        });
-
-        // Tag coloring dropdown listener
-        document.addEventListener('change', (e) => {
-            if (e.target.id === 'tag-coloring') {
-                updateTimeline();
-            }
         });
 
         // Initial Render
