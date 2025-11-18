@@ -289,6 +289,26 @@
             white-space: pre-wrap;
             word-wrap: break-word;
         }
+
+        /* Format Toggle Styles */
+        .format-toggle {
+            background: none;
+            border: none;
+            font-size: 12px;
+            color: #999;
+            cursor: pointer;
+            padding: 2px 4px;
+            transition: color 0.2s;
+        }
+
+        .format-toggle:hover {
+            color: #666;
+        }
+
+        .format-toggle.active {
+            color: #3b82f6;
+            font-weight: bold;
+        }
     </style>
 </head>
 
@@ -546,11 +566,10 @@ endGroup
                 <div class="tab-content" id="parser-tab">
                     <div style="padding: 0.5rem; border-bottom: 1px solid #ddd; display: flex; justify-content: space-between; align-items: center;">
                         <div>
-                            <label style="font-size: 12px; color: #666; margin-right: 0.5rem;">Format:</label>
-                            <select id="parser-format" style="font-size: 12px; padding: 2px 4px; border: 1px solid #ddd; border-radius: 3px;">
-                                <option value="toon">TOON</option>
-                                <option value="json">JSON</option>
-                            </select>
+                            <span style="font-size: 12px; color: #666; margin-right: 0.5rem;">Format:</span>
+                            <button id="parser-toon-btn" class="format-toggle active" data-format="toon">TOON</button>
+                            <span style="color: #666;">/</span>
+                            <button id="parser-json-btn" class="format-toggle" data-format="json">JSON</button>
                         </div>
                         <a href="https://github.com/toon-format/toon" target="_blank" rel="noopener noreferrer" style="font-size: 10px; color: #999; text-decoration: none;">about TOON format</a>
                     </div>
@@ -562,11 +581,10 @@ endGroup
                 <div class="tab-content" id="json-tab">
                     <div style="padding: 0.5rem; border-bottom: 1px solid #ddd; display: flex; justify-content: space-between; align-items: center;">
                         <div>
-                            <label style="font-size: 12px; color: #666; margin-right: 0.5rem;">Format:</label>
-                            <select id="json-format" style="font-size: 12px; padding: 2px 4px; border: 1px solid #ddd; border-radius: 3px;">
-                                <option value="toon">TOON</option>
-                                <option value="json">JSON</option>
-                            </select>
+                            <span style="font-size: 12px; color: #666; margin-right: 0.5rem;">Format:</span>
+                            <button id="json-toon-btn" class="format-toggle active" data-format="toon">TOON</button>
+                            <span style="color: #666;">/</span>
+                            <button id="json-json-btn" class="format-toggle" data-format="json">JSON</button>
                         </div>
                         <a href="https://github.com/toon-format/toon" target="_blank" rel="noopener noreferrer" style="font-size: 10px; color: #999; text-decoration: none;">about TOON format</a>
                     </div>
@@ -858,36 +876,53 @@ endGroup
 
         // 5. Initialize Format Toggles
         function initializeFormatToggles() {
-            const parserFormatSelect = document.getElementById('parser-format');
-            const jsonFormatSelect = document.getElementById('json-format');
+            // Parser format toggles
+            const parserToonBtn = document.getElementById('parser-toon-btn');
+            const parserJsonBtn = document.getElementById('parser-json-btn');
             
-            if (parserFormatSelect) {
-                parserFormatSelect.addEventListener('change', () => {
-                    // Re-render parser output with new format
-                    const currentData = window.lastParseResult;
-                    if (currentData) updateParserOutput(currentData);
-                });
+            if (parserToonBtn && parserJsonBtn) {
+                parserToonBtn.addEventListener('click', () => toggleFormat('parser', 'toon'));
+                parserJsonBtn.addEventListener('click', () => toggleFormat('parser', 'json'));
             }
             
-            if (jsonFormatSelect) {
-                jsonFormatSelect.addEventListener('change', () => {
-                    // Re-render JSON output with new format
-                    const currentData = window.lastTimelineJson;
-                    if (currentData) updateJsonPreview(currentData);
-                });
+            // JSON format toggles
+            const jsonToonBtn = document.getElementById('json-toon-btn');
+            const jsonJsonBtn = document.getElementById('json-json-btn');
+            
+            if (jsonToonBtn && jsonJsonBtn) {
+                jsonToonBtn.addEventListener('click', () => toggleFormat('json', 'toon'));
+                jsonJsonBtn.addEventListener('click', () => toggleFormat('json', 'json'));
             }
         }
 
-        // 6. Update JSON Preview
+        function toggleFormat(tab, format) {
+            // Update button states
+            const toonBtn = document.getElementById(`${tab}-toon-btn`);
+            const jsonBtn = document.getElementById(`${tab}-json-btn`);
+            
+            if (toonBtn && jsonBtn) {
+                toonBtn.classList.toggle('active', format === 'toon');
+                jsonBtn.classList.toggle('active', format === 'json');
+                
+                // Re-render content
+                if (tab === 'parser' && window.lastParseResult) {
+                    updateParserOutput(window.lastParseResult);
+                } else if (tab === 'json' && window.lastTimelineJson) {
+                    updateJsonPreview(window.lastTimelineJson);
+                }
+            }
+        }
+
+        // 7. Update JSON Preview
         function updateJsonPreview(timelineJson) {
             // Store for toggle functionality
             window.lastTimelineJson = timelineJson;
             
             const jsonOutput = document.getElementById('json-output');
-            const formatSelect = document.getElementById('json-format');
-            if (jsonOutput && formatSelect) {
-                const format = formatSelect.value;
-                if (format === 'toon' && toonFormat) {
+            const toonBtn = document.getElementById('json-toon-btn');
+            if (jsonOutput) {
+                const useToon = toonBtn && toonBtn.classList.contains('active');
+                if (useToon && toonFormat) {
                     try {
                         const toonEncoded = toonFormat.encode(timelineJson, { keyFolding: 'safe' });
                         jsonOutput.textContent = toonEncoded;
@@ -900,16 +935,16 @@ endGroup
             }
         }
 
-        // 7. Update Parser Output Preview
+        // 8. Update Parser Output Preview
         function updateParserOutput(parseResult) {
             // Store for toggle functionality
             window.lastParseResult = parseResult;
             
             const parserOutput = document.getElementById('parser-output');
-            const formatSelect = document.getElementById('parser-format');
-            if (parserOutput && formatSelect) {
-                const format = formatSelect.value;
-                if (format === 'toon' && toonFormat) {
+            const toonBtn = document.getElementById('parser-toon-btn');
+            if (parserOutput) {
+                const useToon = toonBtn && toonBtn.classList.contains('active');
+                if (useToon && toonFormat) {
                     try {
                         const toonEncoded = toonFormat.encode(parseResult, { keyFolding: 'safe' });
                         parserOutput.textContent = toonEncoded;
