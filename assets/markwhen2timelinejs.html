@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Markwhen → TimelineJS (v0.16.3 Fixed + Full Screen)</title>
+    <title>Markwhen → TimelineJS</title>
     <!-- TimelineJS (stable) -->
     <link rel="stylesheet" href="https://cdn.knightlab.com/libs/timeline3/3.9.0/css/timeline.css">
     <script src="https://cdn.knightlab.com/libs/timeline3/3.9.0/js/timeline.js"></script>
@@ -89,8 +89,8 @@
         /* Full Screen Button Styles */
         #fullscreen-btn {
             position: absolute;
-            top: 1rem;
-            right: 1rem;
+            top: 0.5rem;
+            right: 0.5rem;
             padding: 6px 12px;
             border: none;
             border-radius: 4px;
@@ -102,6 +102,7 @@
             align-items: center;
             gap: 6px;
             transition: background-color 0.2s;
+            z-index: 10;
         }
 
         #fullscreen-btn:hover {
@@ -268,6 +269,7 @@
             flex: 1;
             display: none;
             overflow: auto;
+            position: relative;
         }
 
         .tab-content.active {
@@ -336,7 +338,7 @@
     <div class="container">
         <!-- Editor -->
         <div class="editor-container">
-            <h3>Markwhen to TimelineJS Previewer</h3>
+            <h3>Markwhen → TimelineJS</h3>
             <div style="display: flex; gap: 2rem; align-items: flex-start; margin-bottom: 0.5rem;">
                 <div>
                     <label for="color-palette" style="font-size: 12px; color: #666; margin-right: 0.5rem;">Color
@@ -556,19 +558,9 @@ endGroup
             <div id="success-message" class="success-message">Parsing successful → Timeline updated</div>
         </div>
 
-        <!-- Timeline Preview (with Full Screen Button) -->
+        <!-- Timeline Preview -->
         <div class="timeline-container">
-            <h3>TimelineJS Preview (Auto-Updates)</h3>
-            <!-- Full Screen Button -->
-            <button id="fullscreen-btn" aria-label="Toggle full screen">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M10 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                Full Screen
-            </button>
-
-            <div class="tab-container" style="height: calc(100% - 40px);">
+            <div class="tab-container" style="height: 100%;">
                 <div class="tab-buttons">
                     <button class="tab-button active" data-tab="timeline">Timeline View</button>
                     <button class="tab-button" data-tab="parser">Markwhen Parser Output</button>
@@ -576,7 +568,15 @@ endGroup
                 </div>
 
                 <div class="tab-content active" id="timeline-tab">
-                    <div id="timeline" style="width: 100%; height: 100%;">
+                    <!-- Full Screen Button -->
+                    <button id="fullscreen-btn" aria-label="Toggle full screen">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M10 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        Full Screen
+                    </button>
+                    <div id="timeline" style="width: 100%; height: calc(100% - 50px);">
                         <div class="empty-state">Loading timeline...</div>
                     </div>
                 </div>
@@ -726,10 +726,10 @@ endGroup
 
             // Initialize tabs
             initializeTabs();
-            
+
             // Initialize format toggles
             initializeFormatToggles();
-            
+
             // Initialize tag coloring toggles
             initializeTagColoringToggles();
         } catch (err) {
@@ -875,7 +875,7 @@ endGroup
             const textBtn = document.getElementById('tag-text-btn');
             const badgeBtn = document.getElementById('tag-badge-btn');
             const backgroundBtn = document.getElementById('tag-background-btn');
-            
+
             if (textBtn && badgeBtn && backgroundBtn) {
                 textBtn.addEventListener('click', () => selectTagColoring('text'));
                 badgeBtn.addEventListener('click', () => selectTagColoring('badge'));
@@ -888,12 +888,12 @@ endGroup
             const textBtn = document.getElementById('tag-text-btn');
             const badgeBtn = document.getElementById('tag-badge-btn');
             const backgroundBtn = document.getElementById('tag-background-btn');
-            
+
             if (textBtn && badgeBtn && backgroundBtn) {
                 textBtn.classList.toggle('active', mode === 'text');
                 badgeBtn.classList.toggle('active', mode === 'badge');
                 backgroundBtn.classList.toggle('active', mode === 'background');
-                
+
                 // Update timeline with new coloring
                 updateTimeline();
             }
@@ -903,7 +903,7 @@ endGroup
             const textBtn = document.getElementById('tag-text-btn');
             const badgeBtn = document.getElementById('tag-badge-btn');
             const backgroundBtn = document.getElementById('tag-background-btn');
-            
+
             if (badgeBtn && badgeBtn.classList.contains('active')) return 'badge';
             if (backgroundBtn && backgroundBtn.classList.contains('active')) return 'background';
             return 'text'; // default
@@ -938,16 +938,16 @@ endGroup
             // Parser format toggles
             const parserToonBtn = document.getElementById('parser-toon-btn');
             const parserJsonBtn = document.getElementById('parser-json-btn');
-            
+
             if (parserToonBtn && parserJsonBtn) {
                 parserToonBtn.addEventListener('click', () => toggleFormat('parser', 'toon'));
                 parserJsonBtn.addEventListener('click', () => toggleFormat('parser', 'json'));
             }
-            
+
             // JSON format toggles
             const jsonToonBtn = document.getElementById('json-toon-btn');
             const jsonJsonBtn = document.getElementById('json-json-btn');
-            
+
             if (jsonToonBtn && jsonJsonBtn) {
                 jsonToonBtn.addEventListener('click', () => toggleFormat('json', 'toon'));
                 jsonJsonBtn.addEventListener('click', () => toggleFormat('json', 'json'));
@@ -958,11 +958,11 @@ endGroup
             // Update button states
             const toonBtn = document.getElementById(`${tab}-toon-btn`);
             const jsonBtn = document.getElementById(`${tab}-json-btn`);
-            
+
             if (toonBtn && jsonBtn) {
                 toonBtn.classList.toggle('active', format === 'toon');
                 jsonBtn.classList.toggle('active', format === 'json');
-                
+
                 // Re-render content
                 if (tab === 'parser' && window.lastParseResult) {
                     updateParserOutput(window.lastParseResult);
@@ -976,7 +976,7 @@ endGroup
         function updateJsonPreview(timelineJson) {
             // Store for toggle functionality
             window.lastTimelineJson = timelineJson;
-            
+
             const jsonOutput = document.getElementById('json-output');
             const toonBtn = document.getElementById('json-toon-btn');
             if (jsonOutput) {
@@ -998,7 +998,7 @@ endGroup
         function updateParserOutput(parseResult) {
             // Store for toggle functionality
             window.lastParseResult = parseResult;
-            
+
             const parserOutput = document.getElementById('parser-output');
             const toonBtn = document.getElementById('parser-toon-btn');
             if (parserOutput) {
