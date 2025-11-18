@@ -112,6 +112,7 @@ assets:
     cp -rf assets/penrose output/forest/
     cp -rf assets/images output/forest/
     cp -f assets/*.html output/forest/
+    cp -f assets/fonts/*.woff output/forest/
     # ls output/shader/
 
     # cp node_modules/@myriaddreamin/typst-ts-web-compiler/pkg/typst_ts_web_compiler_bg.wasm output/
