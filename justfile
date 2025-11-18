@@ -54,7 +54,7 @@ glsl SOURCE:
     cp -f {{SOURCE}} output/forest/shader/
 
 css SOURCE:
-    ln -s {{justfile_directory()}}/assets/images bun/images || true
+    # ln -s {{justfile_directory()}}/assets/images bun/images || true
     bun build --target=browser --minify --outfile=output/forest/{{file_name(SOURCE)}} {{SOURCE}}
     rm bun/images
     # blocks on
