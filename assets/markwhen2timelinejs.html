@@ -544,12 +544,32 @@ endGroup
                 </div>
 
                 <div class="tab-content" id="parser-tab">
+                    <div style="padding: 0.5rem; border-bottom: 1px solid #ddd; display: flex; justify-content: space-between; align-items: center;">
+                        <div>
+                            <label style="font-size: 12px; color: #666; margin-right: 0.5rem;">Format:</label>
+                            <select id="parser-format" style="font-size: 12px; padding: 2px 4px; border: 1px solid #ddd; border-radius: 3px;">
+                                <option value="toon">TOON</option>
+                                <option value="json">JSON</option>
+                            </select>
+                        </div>
+                        <a href="https://github.com/toon-format/toon" target="_blank" rel="noopener noreferrer" style="font-size: 10px; color: #999; text-decoration: none;">about TOON format</a>
+                    </div>
                     <div class="json-preview">
                         <pre id="parser-output">Loading parser output...</pre>
                     </div>
                 </div>
 
                 <div class="tab-content" id="json-tab">
+                    <div style="padding: 0.5rem; border-bottom: 1px solid #ddd; display: flex; justify-content: space-between; align-items: center;">
+                        <div>
+                            <label style="font-size: 12px; color: #666; margin-right: 0.5rem;">Format:</label>
+                            <select id="json-format" style="font-size: 12px; padding: 2px 4px; border: 1px solid #ddd; border-radius: 3px;">
+                                <option value="toon">TOON</option>
+                                <option value="json">JSON</option>
+                            </select>
+                        </div>
+                        <a href="https://github.com/toon-format/toon" target="_blank" rel="noopener noreferrer" style="font-size: 10px; color: #999; text-decoration: none;">about TOON format</a>
+                    </div>
                     <div class="json-preview">
                         <pre id="json-output">Loading JSON...</pre>
                     </div>
@@ -670,6 +690,9 @@ endGroup
 
             // Initialize tabs
             initializeTabs();
+            
+            // Initialize format toggles
+            initializeFormatToggles();
         } catch (err) {
             parserLoadError.textContent = `Dependency load failed: ${err.message}`;
             console.error('❌ DEBUG: Dependency error:', err);
@@ -833,29 +856,67 @@ endGroup
             });
         }
 
-        // 5. Update JSON Preview
+        // 5. Initialize Format Toggles
+        function initializeFormatToggles() {
+            const parserFormatSelect = document.getElementById('parser-format');
+            const jsonFormatSelect = document.getElementById('json-format');
+            
+            if (parserFormatSelect) {
+                parserFormatSelect.addEventListener('change', () => {
+                    // Re-render parser output with new format
+                    const currentData = window.lastParseResult;
+                    if (currentData) updateParserOutput(currentData);
+                });
+            }
+            
+            if (jsonFormatSelect) {
+                jsonFormatSelect.addEventListener('change', () => {
+                    // Re-render JSON output with new format
+                    const currentData = window.lastTimelineJson;
+                    if (currentData) updateJsonPreview(currentData);
+                });
+            }
+        }
+
+        // 6. Update JSON Preview
         function updateJsonPreview(timelineJson) {
+            // Store for toggle functionality
+            window.lastTimelineJson = timelineJson;
+            
             const jsonOutput = document.getElementById('json-output');
-            if (jsonOutput && toonFormat) {
-                try {
-                    const toonEncoded = toonFormat.encode(timelineJson, { keyFolding: 'safe' });
-                    jsonOutput.textContent = toonEncoded;
-                } catch (err) {
-                    // Fallback to regular JSON if toon encoding fails
+            const formatSelect = document.getElementById('json-format');
+            if (jsonOutput && formatSelect) {
+                const format = formatSelect.value;
+                if (format === 'toon' && toonFormat) {
+                    try {
+                        const toonEncoded = toonFormat.encode(timelineJson, { keyFolding: 'safe' });
+                        jsonOutput.textContent = toonEncoded;
+                    } catch (err) {
+                        jsonOutput.textContent = JSON.stringify(timelineJson, null, 2);
+                    }
+                } else {
                     jsonOutput.textContent = JSON.stringify(timelineJson, null, 2);
                 }
             }
         }
 
-        // 6. Update Parser Output Preview
+        // 7. Update Parser Output Preview
         function updateParserOutput(parseResult) {
+            // Store for toggle functionality
+            window.lastParseResult = parseResult;
+            
             const parserOutput = document.getElementById('parser-output');
-            if (parserOutput && toonFormat) {
-                try {
-                    const toonEncoded = toonFormat.encode(parseResult, { keyFolding: 'safe' });
-                    parserOutput.textContent = toonEncoded;
-                } catch (err) {
-                    // Fallback to regular JSON if toon encoding fails
+            const formatSelect = document.getElementById('parser-format');
+            if (parserOutput && formatSelect) {
+                const format = formatSelect.value;
+                if (format === 'toon' && toonFormat) {
+                    try {
+                        const toonEncoded = toonFormat.encode(parseResult, { keyFolding: 'safe' });
+                        parserOutput.textContent = toonEncoded;
+                    } catch (err) {
+                        parserOutput.textContent = JSON.stringify(parseResult, null, 2);
+                    }
+                } else {
                     parserOutput.textContent = JSON.stringify(parseResult, null, 2);
                 }
             }
