@@ -384,13 +384,13 @@ endGroup
 section Q1-Q2 2024: Design & Prototyping
 group UX Design #Design
 Feb 1 2024 to Feb 15 2024: User Experience Design #UX
-![UX Workshop](https://picsum.photos/seed/ux/800/400)
+![UX Workshop](https://picsum.photos/id/180/800/400)
 - [x] User journey mapping
 - [x] Information architecture
 - [ ] Wireframe creation
 
 Feb 16 2024 to Feb 29 2024: Visual Design & Branding #Branding
-![Brand Guidelines](https://picsum.photos/seed/brand/600/350)
+![Brand Guidelines](https://picsum.photos/id/870/600/350)
 - [x] Brand guidelines review
 - [ ] UI component library
 - [ ] Design system updates
@@ -399,14 +399,14 @@ endGroup
 
 group Prototyping #Prototype
 Mar 1 2024 to Mar 15 2024: Interactive Prototype #Interactive
-![Prototype Demo](https://picsum.photos/seed/proto/700/450)
+![Prototype Demo](https://picsum.photos/id/124/700/450)
 [View Figma Prototype](https://example.com/prototype)
 - [ ] High-fidelity mockups
 - [ ] Interactive prototype
 - [ ] Usability testing prep
 
 Mar 16 2024 to Mar 31 2024: User Testing #Testing
-![User Testing Session](https://picsum.photos/seed/test/650/400)
+![User Testing Session](https://picsum.photos/id/304/650/400)
 location: UX Lab
 - [ ] Recruit test users
 - [ ] Conduct usability sessions
@@ -479,7 +479,7 @@ Jun 15 2024 to Jun 25 2024: Beta Testing #Beta
 - [ ] Final adjustments
 
 Jun 20 2024 to Jun 30 2024: Marketing Campaign #Marketing
-![Marketing Assets](https://picsum.photos/seed/marketing/800/400)
+![Marketing Assets](https://picsum.photos/id/492/800/400)
 - [ ] Press kit preparation
 - [ ] Social media campaign
 - [ ] Influencer outreach
@@ -488,7 +488,7 @@ endGroup
 
 group Launch #Launch
 Jul 1 2024: Product Launch Event #Event
-![Launch Event](https://picsum.photos/seed/launch/900/500)
+![Launch Event](https://picsum.photos/id/881/900/500)
 location: Tech Conference Center
 - [ ] Launch event setup
 - [ ] Live demo preparation
@@ -529,26 +529,26 @@ endGroup
                 </svg>
                 Full Screen
             </button>
-            
+
             <div class="tab-container" style="height: calc(100% - 40px);">
                 <div class="tab-buttons">
                     <button class="tab-button active" data-tab="timeline">Timeline View</button>
                     <button class="tab-button" data-tab="parser">Parser Output</button>
                     <button class="tab-button" data-tab="json">TimelineJS JSON</button>
                 </div>
-                
+
                 <div class="tab-content active" id="timeline-tab">
                     <div id="timeline" style="width: 100%; height: 100%;">
                         <div class="empty-state">Loading timeline...</div>
                     </div>
                 </div>
-                
+
                 <div class="tab-content" id="parser-tab">
                     <div class="json-preview">
                         <pre id="parser-output">Loading parser output...</pre>
                     </div>
                 </div>
-                
+
                 <div class="tab-content" id="json-tab">
                     <div class="json-preview">
                         <pre id="json-output">Loading JSON...</pre>
@@ -664,10 +664,10 @@ endGroup
             console.log('✅ DEBUG: markdown-it loaded', {hasRender: !!markdownIt.render});
 
             parserLoadError.style.display = 'none';
-            
+
             // Initialize custom dropdown with color previews
             initializeDropdown();
-            
+
             // Initialize tabs
             initializeTabs();
         } catch (err) {
@@ -686,11 +686,11 @@ endGroup
         // 3. Initialize Custom Dropdown
         function initializeDropdown() {
             console.log('🔧 DEBUG: Initializing dropdown');
-            
+
             const paletteDropdown = document.getElementById('palette-dropdown');
             const paletteOptions = document.getElementById('palette-options');
             const selectedPalette = document.getElementById('selected-palette');
-            
+
             if (!paletteDropdown || !paletteOptions || !selectedPalette) {
                 console.error('❌ DEBUG: Dropdown elements not found', {
                     paletteDropdown: !!paletteDropdown,
@@ -715,16 +715,16 @@ endGroup
                 const option = document.createElement('div');
                 option.className = `palette-option ${key === currentPalette ? 'selected' : ''}`;
                 option.dataset.value = key;
-                
-                const colorPreview = colors.slice(0, 6).map(color => 
+
+                const colorPreview = colors.slice(0, 6).map(color =>
                     `<div class="color-dot" style="background-color: ${color}"></div>`
                 ).join('');
-                
+
                 option.innerHTML = `
                     <span>${paletteNames[key]}</span>
                     <div class="color-preview">${colorPreview}</div>
                 `;
-                
+
                 option.addEventListener('click', () => {
                     console.log('🎨 DEBUG: Palette selected:', key);
                     selectPalette(key);
@@ -738,24 +738,24 @@ endGroup
                 e.stopPropagation();
                 toggleDropdown();
             });
-            
+
             // Close dropdown when clicking outside
             document.addEventListener('click', (e) => {
                 if (!paletteDropdown.contains(e.target) && !paletteOptions.contains(e.target)) {
                     closeDropdown();
                 }
             });
-            
+
             console.log('✅ DEBUG: Dropdown initialized successfully');
         }
 
         function toggleDropdown() {
             const paletteOptions = document.getElementById('palette-options');
             const paletteDropdown = document.getElementById('palette-dropdown');
-            
+
             const isOpen = paletteOptions.classList.contains('open');
             console.log('🔧 DEBUG: Toggle dropdown, currently open:', isOpen);
-            
+
             if (isOpen) {
                 closeDropdown();
             } else {
@@ -766,7 +766,7 @@ endGroup
         function openDropdown() {
             const paletteOptions = document.getElementById('palette-options');
             const paletteDropdown = document.getElementById('palette-dropdown');
-            
+
             console.log('🔧 DEBUG: Opening dropdown');
             paletteOptions.classList.add('open');
             paletteDropdown.classList.add('open');
@@ -776,7 +776,7 @@ endGroup
         function closeDropdown() {
             const paletteOptions = document.getElementById('palette-options');
             const paletteDropdown = document.getElementById('palette-dropdown');
-            
+
             console.log('🔧 DEBUG: Closing dropdown');
             paletteOptions.classList.remove('open');
             paletteDropdown.classList.remove('open');
@@ -785,7 +785,7 @@ endGroup
 
         function selectPalette(key) {
             const selectedPalette = document.getElementById('selected-palette');
-            
+
             currentPalette = key;
             const paletteNames = {
                 markwhen: 'Markwhen Default',
@@ -795,15 +795,15 @@ endGroup
                 sunset: 'Sunset Glow',
                 vibrant: 'Vibrant Tones'
             };
-            
+
             selectedPalette.textContent = paletteNames[key];
-            
+
             // Update selected state
             const paletteOptions = document.getElementById('palette-options');
             paletteOptions.querySelectorAll('.palette-option').forEach(option => {
                 option.classList.toggle('selected', option.dataset.value === key);
             });
-            
+
             closeDropdown();
             updateTimeline();
         }
@@ -812,19 +812,19 @@ endGroup
         function initializeTabs() {
             const tabButtons = document.querySelectorAll('.tab-button');
             const tabContents = document.querySelectorAll('.tab-content');
-            
+
             tabButtons.forEach(button => {
                 button.addEventListener('click', () => {
                     const targetTab = button.dataset.tab;
-                    
+
                     // Update button states
                     tabButtons.forEach(btn => btn.classList.remove('active'));
                     button.classList.add('active');
-                    
+
                     // Update content visibility
                     tabContents.forEach(content => content.classList.remove('active'));
                     document.getElementById(`${targetTab}-tab`).classList.add('active');
-                    
+
                     // Refresh timeline layout if switching to timeline tab
                     if (targetTab === 'timeline' && timelineInstance) {
                         setTimeout(() => timelineInstance.updateDisplay(), 100);
@@ -1002,13 +1002,13 @@ endGroup
                 // Event node (v0.16.3 uses "ri" type for events)
                 else if (child.dateRangeIso && child.firstLine) {
                     const supplemental = child.supplemental || [];
-                    
+
                     console.log('🔍 DEBUG: Event structure:', {
                         title: child.firstLine.restTrimmed,
                         firstLine: child.firstLine,
                         supplemental: supplemental
                     });
-                    
+
                     // Extract full text content, not just first line
                     let fullText = child.firstLine.restTrimmed || child.firstLine.raw || 'Untitled';
                     if (child.body && child.body.length > 0) {
@@ -1017,7 +1017,7 @@ endGroup
                             fullText += '\n\n' + bodyText;
                         }
                     }
-                    
+
                     const event = {
                         id: child.id || Date.now().toString(),
                         title: child.firstLine.restTrimmed || child.firstLine.raw || 'Untitled',
@@ -1169,7 +1169,7 @@ endGroup
                 if (event.group?.tags?.length) {
                     const tagColoringSelect = document.getElementById('tag-coloring');
                     const coloringMode = tagColoringSelect ? tagColoringSelect.value : 'text';
-                    
+
                     const tagElements = event.group.tags.map(tag => {
                         const tagColor = timelineJson.tags[tag] || '#808080';
                         switch (coloringMode) {
@@ -1184,7 +1184,7 @@ endGroup
                     }).join(' ');
                     details += `<p>${tagElements}</p>`;
                 }
-                
+
                 // Add supplemental text content with markdown rendering
                 if (event.meta.textContent && event.meta.textContent.length > 0) {
                     event.meta.textContent.forEach(text => {
@@ -1195,8 +1195,8 @@ endGroup
                 if (event.tasks.length) {
                     details += '<ul style="padding-left: 1.5rem;">';
                     event.tasks.forEach(t => {
-                        const checkbox = t.completed ? 
-                            '<input type="checkbox" checked disabled style="margin-right: 0.5rem;">' : 
+                        const checkbox = t.completed ?
+                            '<input type="checkbox" checked disabled style="margin-right: 0.5rem;">' :
                             '<input type="checkbox" disabled style="margin-right: 0.5rem;">';
                         details += `<li style="list-style: none;">${checkbox}${t.text}</li>`;
                     });
@@ -1209,7 +1209,7 @@ endGroup
 
                 // Add event
                 const renderedTitle = markdownIt ? markdownIt.renderInline(event.title) : event.title;
-                
+
                 // Build details with section indicator at the top
                 let fullDetails = '';
                 if (event.section?.name) {
@@ -1219,21 +1219,21 @@ endGroup
                     fullDetails += `<div style="color: ${sectionColor}; font-size: 0.9em; margin-bottom: 0.5em; font-style: italic;">${event.section.name}</div>`;
                 }
                 fullDetails += details;
-                
+
                 const timelineEvent = {
                     start_date: start,
                     text: {headline: renderedTitle, text: fullDetails},
                     group: event.group?.name || 'Default',
                     unique_id: event.id
                 };
-                
+
                 // Only add background color if background coloring mode is selected
                 const tagColoringSelect = document.getElementById('tag-coloring');
                 const coloringMode = tagColoringSelect ? tagColoringSelect.value : 'text';
                 if (coloringMode === 'background') {
                     timelineEvent.background = {color: color};
                 }
-                
+
                 if (end) timelineEvent.end_date = end;
                 if (event.meta.media) {
                     console.log('🖼️ DEBUG: Adding media to event:', event.meta.media);
@@ -1263,9 +1263,9 @@ endGroup
         function renderTimeline(timelineJson) {
             // Update JSON preview
             updateJsonPreview(timelineJson);
-            
+
             console.log('💾 DEBUG: Using saved slide index:', currentSlideIndex);
-            
+
             if (timelineInstance?.destroy) timelineInstance.destroy();
             try {
                 timelineInstance = new TL.Timeline('timeline', timelineJson, {
@@ -1275,7 +1275,7 @@ endGroup
                     track_height: 90,
                     start_at_slide: currentSlideIndex
                 });
-                
+
                 // Add event listener for slide changes
                 timelineInstance.addEventListener('change', function(e) {
                     const currentId = e.target.current_id;
@@ -1287,7 +1287,7 @@ endGroup
                         }
                     }
                 });
-                
+
                 console.log('🔄 DEBUG: Restored to slide index:', currentSlideIndex);
                 console.log('✅ DEBUG: Timeline rendered successfully');
                 successMessage.style.display = 'block';
