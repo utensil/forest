@@ -39,6 +39,7 @@ function rotatePreferences(userPreference) {
 function rotateFontPreferences(currentFont) {
     if (currentFont === 'serif') return 'mono'
     if (currentFont === 'mono') return 'sans'
+    if (currentFont === 'sans') return 'muse'
     return 'serif'
 }
 
