@@ -627,6 +627,9 @@ init-q PROJ="forest":
 q:
     q chat --trust-tools=fs_read,fs_write "ALWAYS follow AGENTS.md"
 
+prep-cbc: prep-node
+    which cbc || npm install -g @tencent-ai/codebuddy-code
+
 # requires too many permissions to my GitHub account, rejected
 #
 prep-kb:
