@@ -261,3 +261,12 @@ prep-lsp-ai:
 #     which copilot-language-server || npm install -g @github/copilot-language-server
 #     mkdir -p ~/.config/helix
 #     cp -f dotfiles/.config/helix/languages.toml ~/.config/helix/languages.toml
+
+## Web editors
+
+prep-wxmd:
+    which md-cli || npm i -g @doocs/md-cli
+
+wxmd PORT="8899":
+    echo open http://127.0.0.1:{{PORT}}
+    md-cli port=8899
