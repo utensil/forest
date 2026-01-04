@@ -75,6 +75,9 @@ awake:
     # caffeinate -d -s
     caffeinate -s
 
+prep-mo:
+    which mo || brew install mole
+
 # ctrl+r - atuin history TUI
 # In TUI:
 #   - ctrl+r - cycle through filter mode: global, host, session, directory
