@@ -112,11 +112,13 @@ list-font FONT="fonts":
     fc-list|grep -i {{FONT}}
 
 # https://github.com/subframe7536/Maple-font
+# https://monaspace.githubnext.com/
 #
 prep-font:
     brew install --cask font-fira-code-nerd-font
     brew install --cask font-fira-mono-nerd-font
     brew install --cask font-maple-mono-nf-cn
+    brew install --cask font-monaspace
 
 prep-gt:
     which ghostty || brew install --cask ghostty
