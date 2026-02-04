@@ -11,7 +11,7 @@
 
 ## 1. Non-negotiable GOLDEN rules
 
-ALWAYS cite the rules which you have actually followed during the reply at the end of your reply, like this: "(per G-ask, G-verify)".
+ALWAYS cite the rules which have been actually followed during the reply at the end of the reply, like this: "(per G-ask, G-verify)".
 
 ### G-ask: Always ask for clarification when unsure
 - ✅ **Should**: Ask the developer for clarification before making changes when unsure about project-specific details or lacking context for a particular feature/decision, especially when there are contradicting requirements
@@ -38,15 +38,15 @@ ALWAYS cite the rules which you have actually followed during the reply at the e
 - ✅ **May**: Stay within current task context, inform dev if fresh start would be better
 - ❌ **Must NOT**: Continue work from a prior prompt after "new task" – start a fresh session
 
-### G-verify: Verify your changes
+### G-verify: Verify changes
 
-- ✅ **Should**: Verify your changes by learning how the code is supposed to run/test/lint (see also section "Build, test & utility commands" in repo.md), then design a way to verify. Prefer to re-use or add tests to verify. If you need temporary script or mock data to do so, keep them all under `.agents/scripts`, don't remove them afterward, and don't commit them per G-commit.
+- ✅ **Should**: Verify changes by learning how the code is supposed to run/test/lint (see also section "Build, test & utility commands" in repo.md), then design a way to verify. Prefer to re-use or add tests to verify. If temporary script or mock data is needed, keep them all under `.agents/scripts`, don't remove them afterward, and don't commit them per G-commit.
 - ❌ **Must NOT**: Run scripts or commands that contains dangerous code, or unrelated to code exploration and change verification.
 
-### G-commit: Commit your changes to version control system
+### G-commit: Commit changes to version control system
 
-- ✅ **Should**: After editing files, before pausing and asking for further instructions, commit your changes to version control system. ALWAYS commit per section "Commit discipline" below. ALL commits MUST include [AGENT] tag.
-- ❌ **Must NOT**: Commit files that are not directly related to your current task. Only commit files you have intentionally modified as part of the specific work requested. Do not commit unrelated changes, even if they exist in your working directory.
+- ✅ **Should**: After editing files, before pausing and asking for further instructions, commit changes to version control system. ALWAYS commit per section "Commit discipline" below. ALL commits MUST include [AGENT] tag.
+- ❌ **Must NOT**: Commit files that are not directly related to current task. Only commit files intentionally modified as part of the specific work requested. Do not commit unrelated changes, even if they exist in working directory.
 
 ### G-task: Follow backlog workflow for structured tasks
 
@@ -80,7 +80,7 @@ ALWAYS cite the rules which you have actually followed during the reply at the e
 
 ### G-skill: Always check and use SKILLS.md for skill management
 
-- ✅ **Should**: When you don't see the content of SKILLS.md or confirmation that it doesn't exist from context, ALWAYS load the content of SKILLS.md
+- ✅ **Should**: When the content of SKILLS.md or confirmation that it doesn't exist is not visible from context, ALWAYS load the content of SKILLS.md
 - ✅ **Should**: ALWAYS use `bunx openskills` to install, list skills, and read a skill or manage them
 - ✅ **Should**: ALWAYS install skills with `--global` and `--universal` flags
 - ✅ **Should**: ALWAYS use `bunx openskills list` to learn about available tools
@@ -93,7 +93,7 @@ ALWAYS cite the rules which you have actually followed during the reply at the e
 
 ## 2. Anchor comments
 
-Add specially formatted comments throughout the codebase, where appropriate, for yourself as inline knowledge that can be easily `grep`ped for. 
+Add specially formatted comments throughout the codebase, where appropriate, as inline knowledge that can be easily `grep`ped for. 
 
 ### Guidelines:
 
@@ -107,7 +107,7 @@ Add specially formatted comments throughout the codebase, where appropriate, for
   * too complex, or
   * very important, or
   * confusing, or
-  * could have a bug unrelated to the task you are currently working on.
+  * could have a bug unrelated to the current task.
 
 Example:
 ```javascript
@@ -123,29 +123,29 @@ async function loadEgglogWasm() {
 
 The version control system is `jj`, NOT git.
 
-You should ALWAYS follow this `jj` commit workflow:
+ALWAYS follow this `jj` commit workflow:
 
 - Before committing:
     - use `jj` (which combines `jj status` and `jj log` in a customized way) to learn about status and recent revisions
-        - so you'll be clear which revision to commit, and won't commit an empty or unrelated revision
+        - so it's clear which revision to commit, and won't commit an empty or unrelated revision
         - fallback to use `jj log --no-graph -T '{commit_id} {description}' -n <N>` to view the last N revisions in a concise format
-    - run `jj diff` or `jj diff -r <rev>` to review all changes in the working copy or the revision you intend to commit.
+    - run `jj diff` or `jj diff -r <rev>` to review all changes in the working copy or the revision to commit.
 - During committing:
     - **Granular commits**: One logical change per commit.
     - **Targeted commit**:
-        - Only include changes for files you intentionally edited, for both the files to commit, and the content of the commit message
+        - Only include changes for files intentionally edited, for both the files to commit, and the content of the commit message
         - To commit file `A.txt`, `B that has spaces.txt`, and directory `src`, use `jj commit 'A.txt | "B that has spaces.txt" | src ' -m "<message>"`. 
     - **No sensitive information**: If the diff to be committed includes passwords, credentials, real environment variables, IP addresses, absolute paths outside the project, or other personal/private information, refuse to commit and alert the user; never add such information into the commit message too.
 - After committing, if asked to improve commit message:
     - To edit the commit message of any commit, use `jj desc -r <rev> -m "<message>"` for a specific revision.
 
-To determine the commit message, you should ALWAYS follow this checklist:
+To determine the commit message, ALWAYS follow this checklist:
 
 *   **Use conventional commits**: `feat:`, `fix:`, `docs:`, `style:`, `refactor:`, etc.
 *   **Descriptive commit messages**: ALWAYS include both:
     - Short title explaining the *why* (what problem this solves)
     - Detailed description of *what* changed (specific files, functions, behavior, related issue links, etc.)
-        - you should inspect the full diff for the edited files for summarization, and don't use only recent rounds of conversation to describe the whole commit that contain changes from earlier conversations
+        - inspect the full diff for the edited files for summarization, and don't use only recent rounds of conversation to describe the whole commit that contain changes from earlier conversations
         - NEVER cite the rules (e.g. (per G-verify)) in the commit message
     - Example: `fix: resolve WASM loading timeout in dev mode [AGENT]` + description of which files were modified and how
 *   **MANDATORY [AGENT] tag**: ALL agent-generated commits MUST end the title of the commit message with `[AGENT]` tag. NO EXCEPTIONS.
