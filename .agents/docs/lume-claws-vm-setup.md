@@ -235,9 +235,6 @@ lume get mimi
 
 # List all VMs
 lume ls
-
-# Delete VM (careful!)
-lume delete mimi
 ```
 
 ---
