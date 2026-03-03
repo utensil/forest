@@ -420,6 +420,12 @@ prep-def:
     # Set machine sleep to 5 minutes on battery
     sudo pmset -b sleep 5
 
+# A terminal-based battery and energy monitor for macOS and Linux.
+# But it crashes for now, issue: https://github.com/jordond/jolt/issues/114
+#
+prep-jolt:
+    which jolt || (curl -fsSL https://getjolt.sh/install.sh | bash) # || brew install jordond/tap/jolt
+
 remove FILE_OR_DIR:
     #!/usr/bin/env bash
     TEMP_LOCATION="/tmp/$(whoami)-$(date +%s)-$(head -c 5 /dev/random|xxd -ps)"
