@@ -909,6 +909,14 @@ prep-act-in-zsh:
     echo 'To start lvim in server mode, run: just lv-remote'
     echo 'Then from outside the container, run: just lv-local'
 
+## VM
+
+prep-aria2:
+    which aria || brew install aria2
+
+prep-lume:
+    which lume || /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/trycua/cua/main/libs/lume/scripts/install.sh)"
+
 ## SSH
 
 reset-ssh-keys:
