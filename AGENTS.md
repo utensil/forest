@@ -1,6 +1,6 @@
 # Agent Instructions
 
-*Last updated 2026-02-04*
+*Last updated 2026-03-08*
 
 > **Purpose** – This file is the onboarding manual[^1] for every AI assistant (Claude, Amp, Codex, Amazon Q, OpenCode, etc.) and every human who edits this repository.
 > It encodes our coding standards, guard-rails, and workflow tricks so the *human 30 %*[^2] (architecture, tests, domain judgment) stays in human hands.
@@ -78,16 +78,6 @@ ALWAYS cite the rules which have been actually followed during the reply at the 
 - ❌ **Must NOT**: Remove files without backup mechanism
 - ❌ **Must NOT**: Modify system-critical files or permissions
 
-### G-skill: Always check and use SKILLS.md for skill management
-
-- ✅ **Should**: When the content of SKILLS.md or confirmation that it doesn't exist is not visible from context, ALWAYS load the content of SKILLS.md
-- ✅ **Should**: ALWAYS use `bunx openskills` to install, list skills, and read a skill or manage them
-- ✅ **Should**: ALWAYS install skills with `--global` and `--universal` flags
-- ✅ **Should**: ALWAYS use `bunx openskills list` to learn about available tools
-- ✅ **Should**: When lacking tools for requested tasks or when users explicitly mention skills, find and use proper skills from SKILLS.md recommendations
-- ❌ **Must NOT**: Ignore SKILLS.md when it exists in the project
-- ❌ **Must NOT**: Use other methods for skill management when `bunx openskills` is available
-- ❌ **Must NOT**: Use `bunx openskills sync` - always use `bunx openskills list` instead
 
 ---
 
