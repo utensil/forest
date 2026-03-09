@@ -7,6 +7,12 @@ on:
       - "README.md"
     branches:
       - main
+  pull_request:
+    paths-ignore:
+      - "LICENSE"
+      - "README.md"
+    branches:
+      - fix-ci/**
 
 # Allow one concurrent deployment
 concurrency:
@@ -134,7 +140,7 @@ jobs:
             echo "::warning title=Invalid file permissions automatically fixed::$line"
           done
       - name: Upload Pages artifact
-        if: ${{ !env.ACT }}
+        if: ${{ !env.ACT && github.event_name == 'push' }}
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./output/forest
@@ -151,6 +157,7 @@ jobs:
 
     # Specify runner + deployment step
     runs-on: ubuntu-latest
+    if: ${{ github.event_name == 'push' }}
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
