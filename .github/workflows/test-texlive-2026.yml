@@ -1,0 +1,27 @@
+name: Test TeX Live 2026 Support
+
+on:
+  push:
+    branches:
+      - test/verify-texlive-2026-fix
+  pull_request:
+
+jobs:
+  test-texlive-2026:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup TeX Live 2026 (with fixed action)
+        uses: utiberious/setup-texlive-action@fix/support-texlive-2026
+        with:
+          version: '2026'
+          packages: scheme-full
+
+      - name: Verify TeX Live Installation
+        run: |
+          echo "Checking TeX Live version..."
+          tlmgr --version
+          which latex
+          latex --version | head -1
