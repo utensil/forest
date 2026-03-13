@@ -804,33 +804,53 @@ prep-pod:
 pod CMD="start --vm-type=vz --vz-rosetta --network-address":
     colima {{CMD}}
 
-# Expose Colima docker socket to lume VM via docker-socket-proxy
-# Listens only on 192.168.64.1:2375 (isolated Host-VM network, not exposed externally)
-# VM end: export DOCKER_HOST=tcp://192.168.64.1:2375
+# Expose Colima docker socket to lume VM via socat (runs on Host Mac, NOT inside Colima).
 #
-pod-proxy CMD="up -d":
+# Why socat and not a docker container?
+# A container runs inside the Colima VM and cannot bind to the Host Mac's IP on the
+# Host-VM network (e.g. 192.168.64.1) — that interface only exists on the Host Mac.
+# socat runs directly on the Host Mac where that IP exists.
+#
+# VM end: export DOCKER_HOST=tcp://<HOST_VM_IP>:2375
+#
+pod-proxy CMD="start":
     #!/usr/bin/env bash
-    # Auto-detect Colima socket — docker context may report wrong path for --vm-type=vz
-    # vz type stores socket at ~/.config/colima/, not ~/.colima/
+    which socat || brew install socat
     COLIMA_SOCKET=$(find ~/.config/colima ~/.colima -name "docker.sock" 2>/dev/null | head -1)
     if [ -z "$COLIMA_SOCKET" ]; then
         echo "Error: Colima docker.sock not found. Is Colima running? (just pod)"
         exit 1
     fi
-    # Auto-detect Host IP on the VM-facing network (typically 192.168.x.x)
-    DOCKER_PROXY_BIND=$(/sbin/ifconfig 2>/dev/null | grep "inet 192.168" | awk '{print $2}' | head -1)
-    if [ -z "$DOCKER_PROXY_BIND" ]; then
-        echo "Error: Could not detect Host-VM network IP. Set DOCKER_PROXY_BIND manually."
+    PROXY_BIND=$(/sbin/ifconfig 2>/dev/null | grep "inet 192.168" | awk '{print $2}' | head -1)
+    if [ -z "$PROXY_BIND" ]; then
+        echo "Error: Could not detect Host-VM network IP."
         exit 1
     fi
-    if [ "$DOCKER_PROXY_BIND" = "0.0.0.0" ]; then
-        echo "Error: DOCKER_PROXY_BIND must not be 0.0.0.0 (would expose docker to all interfaces)"
-        exit 1
+    PID_FILE=/tmp/docker-proxy-socat.pid
+    if [ "{{CMD}}" = "start" ]; then
+        if [ -f "$PID_FILE" ] && kill -0 $(cat "$PID_FILE") 2>/dev/null; then
+            echo "Proxy already running (PID: $(cat $PID_FILE))"
+            exit 0
+        fi
+        echo "Starting socat proxy: $PROXY_BIND:2375 -> $COLIMA_SOCKET"
+        socat TCP-LISTEN:2375,bind=$PROXY_BIND,fork,reuseaddr \
+            UNIX-CONNECT:$COLIMA_SOCKET &
+        echo $! > "$PID_FILE"
+        echo "Proxy started (PID: $!)"
+        echo "VM: export DOCKER_HOST=tcp://$PROXY_BIND:2375"
+    elif [ "{{CMD}}" = "stop" ]; then
+        if [ -f "$PID_FILE" ]; then
+            kill $(cat "$PID_FILE") 2>/dev/null && rm "$PID_FILE" && echo "Proxy stopped"
+        else
+            echo "No proxy running"
+        fi
+    elif [ "{{CMD}}" = "status" ]; then
+        if [ -f "$PID_FILE" ] && kill -0 $(cat "$PID_FILE") 2>/dev/null; then
+            echo "Proxy running (PID: $(cat $PID_FILE)) on $PROXY_BIND:2375"
+        else
+            echo "Proxy not running"
+        fi
     fi
-    echo "Using Colima socket: $COLIMA_SOCKET"
-    echo "Binding proxy to: $DOCKER_PROXY_BIND:2375 (Host-VM network only)"
-    cd {{justfile_directory()}}/stacks/docker-socket-proxy
-    COLIMA_SOCKET=$COLIMA_SOCKET DOCKER_PROXY_BIND=$DOCKER_PROXY_BIND docker-compose {{CMD}}
 
 # tested in lima
 # distrobox create --name test --init --image quay.io/toolbx-images/alpine-toolbox:latest
