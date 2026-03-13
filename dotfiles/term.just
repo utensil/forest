@@ -826,12 +826,17 @@ pod-proxy CMD="start":
     PROXY_NAME=colima-docker-socket-proxy
     PROXY_BIND=$(/sbin/ifconfig 2>/dev/null | grep "inet 192.168" | awk '{print $2}' | head -1)
 
+    # Persistent SSH config path — NOT a temp file; deleted only on stop.
+    # Using mktemp + immediate rm caused a race: SSH backgrounded before it could read the file.
+    SSH_CONF=/tmp/colima-docker-ssh.conf
+
     _start_proxy() {
         if colima ssh -- docker inspect "$PROXY_NAME" --format '{{"{{"}}{{".State.Running"}}{{"}}"}}' 2>/dev/null | grep -q "true"; then
             echo "  docker-socket-proxy: already running inside Colima"
             return 0
         fi
-        colima ssh -- docker rm -f "$PROXY_NAME" 2>/dev/null || true
+        # Silently remove stale container if any (expected to not exist on first run)
+        colima ssh -- docker rm -f "$PROXY_NAME" >/dev/null 2>&1 || true
         colima ssh -- docker run -d \
             --name "$PROXY_NAME" \
             --restart unless-stopped \
@@ -842,7 +847,7 @@ pod-proxy CMD="start":
             -e CONTAINERS=1 -e IMAGES=1 -e NETWORKS=1 -e VOLUMES=1 \
             -e ALLOW_START=1 -e ALLOW_STOP=1 -e ALLOW_RESTARTS=1 -e ALLOW_PAUSE=1 \
             -e EXEC=1 \
-            tecnativa/docker-socket-proxy > /dev/null
+            tecnativa/docker-socket-proxy >/dev/null
         echo "  docker-socket-proxy: started inside Colima (POST=0, EXEC=1)"
     }
 
@@ -855,20 +860,19 @@ pod-proxy CMD="start":
             echo "  SSH tunnel:          already running (PID: $(cat $PID_FILE))"
             return 0
         fi
-        SSH_CONF=$(mktemp)
+        # Write SSH config to a persistent path (not temp) — SSH reads it after backgrounding
         colima ssh-config > "$SSH_CONF"
         # Forward Host Mac <PROXY_BIND>:2375 → Colima VM localhost:2375 (docker-socket-proxy)
         ssh -F "$SSH_CONF" colima -N \
             -L "$PROXY_BIND:2375:localhost:2375" &
         SSH_PID=$!
-        rm -f "$SSH_CONF"
         echo $SSH_PID > "$PID_FILE"
         sleep 0.5
         if kill -0 $SSH_PID 2>/dev/null; then
             echo "  SSH tunnel:          started (PID: $SSH_PID) → $PROXY_BIND:2375"
         else
             echo "Error: SSH tunnel failed to start"
-            rm -f "$PID_FILE"
+            rm -f "$PID_FILE" "$SSH_CONF"
             exit 1
         fi
     }
@@ -881,6 +885,7 @@ pod-proxy CMD="start":
         else
             echo "  SSH tunnel:          not running"
         fi
+        rm -f "$SSH_CONF"
     }
 
     _stop_proxy() {
