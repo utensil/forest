@@ -829,7 +829,7 @@ pod-proxy CMD="up -d":
     fi
     echo "Using Colima socket: $COLIMA_SOCKET"
     echo "Binding proxy to: $DOCKER_PROXY_BIND:2375 (Host-VM network only)"
-    cd {{justfile_directory()}}/../stacks/docker-socket-proxy
+    cd {{justfile_directory()}}/stacks/docker-socket-proxy
     COLIMA_SOCKET=$COLIMA_SOCKET DOCKER_PROXY_BIND=$DOCKER_PROXY_BIND docker compose {{CMD}}
 
 # tested in lima
