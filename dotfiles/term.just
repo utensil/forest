@@ -851,6 +851,8 @@ pod-proxy CMD="start":
         echo "  docker-socket-proxy: started inside Colima (POST=0, EXEC=1)"
     }
 
+    SSH_LOG=/tmp/colima-docker-ssh.log
+
     _start_tunnel() {
         if [ -z "$PROXY_BIND" ]; then
             echo "Error: Could not detect Host-VM network IP."
@@ -862,17 +864,22 @@ pod-proxy CMD="start":
         fi
         # Write SSH config to a persistent path (not temp) — SSH reads it after backgrounding
         colima ssh-config > "$SSH_CONF"
+        echo "  SSH config:"
+        cat "$SSH_CONF"
+        echo "  Binding: $PROXY_BIND:2375 → Colima localhost:2375"
         # Forward Host Mac <PROXY_BIND>:2375 → Colima VM localhost:2375 (docker-socket-proxy)
         ssh -F "$SSH_CONF" colima -N \
-            -L "$PROXY_BIND:2375:localhost:2375" &
+            -L "$PROXY_BIND:2375:localhost:2375" \
+            2>"$SSH_LOG" &
         SSH_PID=$!
         echo $SSH_PID > "$PID_FILE"
-        sleep 0.5
+        sleep 1
         if kill -0 $SSH_PID 2>/dev/null; then
             echo "  SSH tunnel:          started (PID: $SSH_PID) → $PROXY_BIND:2375"
         else
-            echo "Error: SSH tunnel failed to start"
-            rm -f "$PID_FILE" "$SSH_CONF"
+            echo "Error: SSH tunnel failed to start. SSH output:"
+            cat "$SSH_LOG" >&2
+            rm -f "$PID_FILE" "$SSH_CONF" "$SSH_LOG"
             exit 1
         fi
     }
@@ -885,7 +892,7 @@ pod-proxy CMD="start":
         else
             echo "  SSH tunnel:          not running"
         fi
-        rm -f "$SSH_CONF"
+        rm -f "$SSH_CONF" "$SSH_LOG"
     }
 
     _stop_proxy() {
