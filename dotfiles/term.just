@@ -804,41 +804,68 @@ prep-pod:
 pod CMD="start --vm-type=vz --vz-rosetta --network-address":
     colima {{CMD}}
 
-# Expose Colima docker socket to lume VM via Colima's built-in SSH tunnel.
-# Binds only on the isolated Host-VM network (auto-detected 192.168.x.x IP).
+# Expose Colima docker socket to lume VM with permission control.
 #
-# Gives explicit control over when agents can access Docker — no auto-start on boot.
-# Start it intentionally, stop it to revoke access immediately.
+# Architecture (two layers):
+#   Layer 1 — Permission control: docker-socket-proxy runs inside Colima VM
+#             binding to localhost:2375 (POST: 0 = no container creation by agents)
+#   Layer 2 — Transport:          SSH tunnel maps Host Mac <HOST_VM_IP>:2375
+#             → Colima VM localhost:2375
+#
+# Security model:
+#   - Container CREATION: human-gated (PR review → merge → manual docker compose up)
+#   - Container LIFECYCLE: agent-delegated (start/stop/restart/pause/exec)
+#   - No auto-start on boot — must run 'just pod-proxy' explicitly to grant access
+#   - 'just pod-proxy stop' immediately revokes agent access
 #
 # VM end: export DOCKER_HOST=tcp://<HOST_VM_IP>:2375
 #
 pod-proxy CMD="start":
     #!/usr/bin/env bash
     PID_FILE=/tmp/colima-docker-proxy.pid
+    PROXY_NAME=colima-docker-socket-proxy
     PROXY_BIND=$(/sbin/ifconfig 2>/dev/null | grep "inet 192.168" | awk '{print $2}' | head -1)
 
-    _start() {
+    _start_proxy() {
+        if colima ssh -- docker inspect "$PROXY_NAME" --format '{{"{{"}}{{".State.Running"}}{{"}}"}}' 2>/dev/null | grep -q "true"; then
+            echo "  docker-socket-proxy: already running inside Colima"
+            return 0
+        fi
+        colima ssh -- docker rm -f "$PROXY_NAME" 2>/dev/null || true
+        colima ssh -- docker run -d \
+            --name "$PROXY_NAME" \
+            --restart unless-stopped \
+            -v /run/docker.sock:/var/run/docker.sock:ro \
+            -p 127.0.0.1:2375:2375 \
+            -e POST=0 \
+            -e PING=1 -e VERSION=1 -e INFO=1 -e EVENTS=1 \
+            -e CONTAINERS=1 -e IMAGES=1 -e NETWORKS=1 -e VOLUMES=1 \
+            -e ALLOW_START=1 -e ALLOW_STOP=1 -e ALLOW_RESTARTS=1 -e ALLOW_PAUSE=1 \
+            -e EXEC=1 \
+            tecnativa/docker-socket-proxy > /dev/null
+        echo "  docker-socket-proxy: started inside Colima (POST=0, EXEC=1)"
+    }
+
+    _start_tunnel() {
         if [ -z "$PROXY_BIND" ]; then
             echo "Error: Could not detect Host-VM network IP."
             exit 1
         fi
         if [ -f "$PID_FILE" ] && kill -0 $(cat "$PID_FILE") 2>/dev/null; then
-            echo "Proxy already running (PID: $(cat $PID_FILE))"
-            exit 0
+            echo "  SSH tunnel:          already running (PID: $(cat $PID_FILE))"
+            return 0
         fi
-        # Write SSH config to temp file (-F with process substitution is unreliable)
         SSH_CONF=$(mktemp)
         colima ssh-config > "$SSH_CONF"
+        # Forward Host Mac <PROXY_BIND>:2375 → Colima VM localhost:2375 (docker-socket-proxy)
         ssh -F "$SSH_CONF" colima -N \
-            -L "$PROXY_BIND:2375:/run/docker.sock" &
+            -L "$PROXY_BIND:2375:localhost:2375" &
         SSH_PID=$!
         rm -f "$SSH_CONF"
         echo $SSH_PID > "$PID_FILE"
         sleep 0.5
         if kill -0 $SSH_PID 2>/dev/null; then
-            echo "✓ Docker proxy started (PID: $SSH_PID)"
-            echo "  Listening: $PROXY_BIND:2375 (Host-VM network only)"
-            echo "  VM:        export DOCKER_HOST=tcp://$PROXY_BIND:2375"
+            echo "  SSH tunnel:          started (PID: $SSH_PID) → $PROXY_BIND:2375"
         else
             echo "Error: SSH tunnel failed to start"
             rm -f "$PID_FILE"
@@ -846,30 +873,55 @@ pod-proxy CMD="start":
         fi
     }
 
-    _stop() {
+    _stop_tunnel() {
         if [ -f "$PID_FILE" ]; then
             PID=$(cat "$PID_FILE")
-            if kill "$PID" 2>/dev/null; then
-                rm -f "$PID_FILE"
-                echo "✓ Docker proxy stopped"
-            else
-                rm -f "$PID_FILE"
-                echo "Proxy was not running (removed stale PID file)"
-            fi
+            kill "$PID" 2>/dev/null && echo "  SSH tunnel:          stopped" || true
+            rm -f "$PID_FILE"
         else
-            echo "No proxy running"
+            echo "  SSH tunnel:          not running"
         fi
     }
 
+    _stop_proxy() {
+        colima ssh -- docker stop "$PROXY_NAME" 2>/dev/null | grep -q . && \
+            colima ssh -- docker rm "$PROXY_NAME" 2>/dev/null | grep -q . && \
+            echo "  docker-socket-proxy: stopped" || \
+            echo "  docker-socket-proxy: not running"
+    }
+
     case "{{CMD}}" in
-        start)   _start ;;
-        stop)    _stop ;;
-        restart) _stop; sleep 0.5; _start ;;
+        start)
+            echo "Starting docker proxy..."
+            _start_proxy
+            _start_tunnel
+            echo "✓ Ready — VM: export DOCKER_HOST=tcp://$PROXY_BIND:2375"
+            ;;
+        stop)
+            echo "Stopping docker proxy..."
+            _stop_tunnel
+            _stop_proxy
+            echo "✓ Access revoked"
+            ;;
+        restart)
+            echo "Restarting docker proxy..."
+            _stop_tunnel; _stop_proxy
+            sleep 0.5
+            _start_proxy; _start_tunnel
+            echo "✓ Ready — VM: export DOCKER_HOST=tcp://$PROXY_BIND:2375"
+            ;;
         status)
+            echo -n "SSH tunnel:            "
             if [ -f "$PID_FILE" ] && kill -0 $(cat "$PID_FILE") 2>/dev/null; then
-                echo "✓ Proxy running (PID: $(cat $PID_FILE)) on $PROXY_BIND:2375"
+                echo "running (PID: $(cat $PID_FILE)) → $PROXY_BIND:2375"
             else
-                echo "Proxy not running"
+                echo "not running"
+            fi
+            echo -n "docker-socket-proxy:   "
+            if colima ssh -- docker inspect "$PROXY_NAME" --format '{{"{{"}}{{".State.Running"}}{{"}}"}}' 2>/dev/null | grep -q "true"; then
+                echo "running (Colima VM localhost:2375, POST=0)"
+            else
+                echo "not running"
             fi
             ;;
         *)
