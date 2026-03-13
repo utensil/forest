@@ -810,16 +810,27 @@ pod CMD="start --vm-type=vz --vz-rosetta --network-address":
 #
 pod-proxy CMD="up -d":
     #!/usr/bin/env bash
-    # Find actual Colima socket — docker context may report wrong path when using --vm-type=vz
-    # Actual path is ~/.config/colima/, not ~/.colima/
+    # Auto-detect Colima socket — docker context may report wrong path for --vm-type=vz
+    # vz type stores socket at ~/.config/colima/, not ~/.colima/
     COLIMA_SOCKET=$(find ~/.config/colima ~/.colima -name "docker.sock" 2>/dev/null | head -1)
     if [ -z "$COLIMA_SOCKET" ]; then
         echo "Error: Colima docker.sock not found. Is Colima running? (just pod)"
         exit 1
     fi
+    # Auto-detect Host IP on the VM-facing network (typically 192.168.x.x)
+    DOCKER_PROXY_BIND=$(/sbin/ifconfig 2>/dev/null | grep "inet 192.168" | awk '{print $2}' | head -1)
+    if [ -z "$DOCKER_PROXY_BIND" ]; then
+        echo "Error: Could not detect Host-VM network IP. Set DOCKER_PROXY_BIND manually."
+        exit 1
+    fi
+    if [ "$DOCKER_PROXY_BIND" = "0.0.0.0" ]; then
+        echo "Error: DOCKER_PROXY_BIND must not be 0.0.0.0 (would expose docker to all interfaces)"
+        exit 1
+    fi
     echo "Using Colima socket: $COLIMA_SOCKET"
+    echo "Binding proxy to: $DOCKER_PROXY_BIND:2375 (Host-VM network only)"
     cd {{justfile_directory()}}/../stacks/docker-socket-proxy
-    COLIMA_SOCKET=$COLIMA_SOCKET docker compose {{CMD}}
+    COLIMA_SOCKET=$COLIMA_SOCKET DOCKER_PROXY_BIND=$DOCKER_PROXY_BIND docker compose {{CMD}}
 
 # tested in lima
 # distrobox create --name test --init --image quay.io/toolbx-images/alpine-toolbox:latest
