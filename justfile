@@ -939,6 +939,86 @@ fj:
     mkdir -p {{FJ_DIR}}/ssh
     docker run --rm -it -e USER_UID=$(id -u) -e USER_GID=$(id -g) --env-file .env -p 23000:3000 -p 2222:22 -v {{FJ_DIR}}:/data -v /etc/timezone:/etc/timezone:ro -v /etc/localtime:/etc/localtime:ro data.forgejo.org/forgejo/forgejo:10
 
+prep-filter-repo:
+    which git-filter-repo || brew install git-filter-repo
+
+# Transfer directory with full history from repo A to repo B with optional rename
+# REPO_A: path to source repo
+# DIR_A: directory in repo A to transfer
+# REPO_B: path to destination repo
+# DIR_B: target directory in repo B (use "." for root)
+# DRY_RUN: set to empty string to execute (default: "--dry-run")
+#
+# Example: just migrate-dir ~/repos/source mydir ~/repos/dest newdir
+# Example: just migrate-dir ~/repos/source mydir ~/repos/dest . ""
+migrate-dir REPO_A DIR_A REPO_B DIR_B DRY_RUN="--dry-run":
+    #!/usr/bin/env bash
+    set -e
+    TEMP_DIR=$(mktemp -d)
+    trap "rm -rf $TEMP_DIR" EXIT
+    
+    echo "=== Cloning repo A to temp location ==="
+    git clone {{REPO_A}} $TEMP_DIR/filtered
+    
+    cd $TEMP_DIR/filtered
+    echo "=== Filtering to keep only {{DIR_A}} ==="
+    git-filter-repo --path {{DIR_A}} --force
+    
+    if [ "{{DIR_B}}" != "{{DIR_A}}" ] && [ "{{DIR_B}}" != "." ]; then
+        echo "=== Renaming {{DIR_A}} to {{DIR_B}} ==="
+        git-filter-repo --path-rename {{DIR_A}}:{{DIR_B}} --force
+    elif [ "{{DIR_B}}" = "." ]; then
+        echo "=== Moving {{DIR_A}} to root ==="
+        git-filter-repo --path-rename {{DIR_A}}: --force
+    fi
+    
+    if [ "{{DRY_RUN}}" = "--dry-run" ]; then
+        echo ""
+        echo "=== DRY RUN: Would merge into {{REPO_B}} ==="
+        echo "Filtered commits:"
+        git log --oneline --graph --all
+        echo ""
+        echo "To execute, run: just migrate-dir {{REPO_A}} {{DIR_A}} {{REPO_B}} {{DIR_B}} \"\""
+    else
+        echo "=== Merging into repo B ==="
+        cd {{REPO_B}}
+        git remote add temp-filtered $TEMP_DIR/filtered
+        git fetch temp-filtered
+        git merge --allow-unrelated-histories temp-filtered/main -m "Migrate {{DIR_A}} from repo A"
+        git remote remove temp-filtered
+        echo "=== Migration complete ==="
+        
+        echo ""
+        echo "=== Cleanup repo A? ==="
+        echo "This will:"
+        echo "  1. Remove {{DIR_A}} from working tree"
+        echo "  2. Commit the removal"
+        echo "  3. Purge {{DIR_A}} history from repo A (shrink size)"
+        echo ""
+        read -p "Proceed with cleanup? (y/N): " -n 1 -r
+        echo
+        if [[ $REPLY =~ ^[Yy]$ ]]; then
+            cd {{REPO_A}}
+            ORIGIN_URL=$(git remote get-url origin 2>/dev/null || echo "")
+            git rm -r {{DIR_A}}
+            git commit -m "Remove {{DIR_A}} directory (migrated to separate repo)"
+            git-filter-repo --path {{DIR_A}} --invert-paths --force
+            if [ -n "$ORIGIN_URL" ]; then
+                git remote add origin "$ORIGIN_URL"
+            fi
+            echo ""
+            echo "✓ Cleanup complete!"
+            echo "⚠️  To push changes, run: cd {{REPO_A}} && git push --force"
+        else
+            echo "Skipped cleanup. To clean up later:"
+            echo "  cd {{REPO_A}}"
+            echo "  git rm -r {{DIR_A}}"
+            echo "  git commit -m 'Remove {{DIR_A}} directory (migrated to separate repo)'"
+            echo "  git-filter-repo --path {{DIR_A}} --invert-paths --force"
+            echo "  git push --force"
+        fi
+    fi
+
 # then run: git clone http://localhost:63000/username/repo.git:/dir.git
 # but no arm64 version yet
 # josh-proxy:
