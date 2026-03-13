@@ -204,6 +204,41 @@ chsh:
 
 ## Git
 
+prep-ssh-agent:
+    #!/usr/bin/env bash
+    set -e
+    
+    # Check if SSH config has agent settings
+    if ! grep -q "AddKeysToAgent yes" ~/.ssh/config 2>/dev/null; then
+        echo "Setting up SSH config..."
+        mkdir -p ~/.ssh
+        chmod 700 ~/.ssh
+        if [ ! -f ~/.ssh/config ]; then
+            touch ~/.ssh/config
+        fi
+        echo "" >> ~/.ssh/config
+        echo "Host *" >> ~/.ssh/config
+        echo "  AddKeysToAgent yes" >> ~/.ssh/config
+        echo "  UseKeychain yes" >> ~/.ssh/config
+        echo "  IdentityFile ~/.ssh/id_ed25519" >> ~/.ssh/config
+        chmod 600 ~/.ssh/config
+    fi
+    
+    # Start SSH agent if not running
+    if [ -z "$SSH_AUTH_SOCK" ] || ! ssh-add -l &>/dev/null; then
+        echo "Starting SSH agent..."
+        eval "$(ssh-agent -s)"
+    fi
+    
+    # Add key if not already added
+    if ! ssh-add -l | grep -q "id_ed25519"; then
+        echo "Adding SSH key to agent..."
+        ssh-add --apple-use-keychain ~/.ssh/id_ed25519
+    fi
+    
+    echo "SSH agent ready. Keys loaded:"
+    ssh-add -l
+
 prep-git:
     #!/usr/bin/env bash
     which git || brew install git
