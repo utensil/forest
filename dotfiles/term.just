@@ -865,10 +865,11 @@ pod-proxy CMD="start":
         # Write SSH config to a persistent path (not temp) — SSH reads it after backgrounding
         colima ssh-config > "$SSH_CONF"
         # Forward Host Mac <PROXY_BIND>:2375 → Colima VM localhost:2375 (docker-socket-proxy)
-        # -o ControlMaster=no: colima ssh-config sets ControlMaster=auto + ControlPersist=yes;
-        # a -N session multiplexed over the existing master exits immediately (no command = done),
-        # so port forwarding is never established. Force a standalone direct connection.
-        ssh -F "$SSH_CONF" colima -N -o ControlMaster=no \
+        # colima ssh-config sets ControlMaster=auto + ControlPath=... + ControlPersist=yes.
+        # With just -o ControlMaster=no, SSH still connects as a slave via the ControlPath socket,
+        # and a -N session (no remote command) ends immediately. Must bypass ControlPath entirely.
+        ssh -F "$SSH_CONF" colima -N \
+            -o ControlMaster=no -o ControlPath=none \
             -L "$PROXY_BIND:2375:localhost:2375" \
             2>"$SSH_LOG" &
         SSH_PID=$!
