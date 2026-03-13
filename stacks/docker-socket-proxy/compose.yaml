@@ -29,35 +29,38 @@ services:
       # Find it: /sbin/ifconfig | grep "inet 192.168"
       - "${DOCKER_PROXY_BIND}:2375:2375"
     environment:
-      # POST: 0 = fully read-only (GET/HEAD only, all write operations blocked)
-      # POST: 1 = allow write operations for endpoints explicitly enabled below
-      POST: 1
+      # Security model: container CREATION is human-gated (via PR review + manual start);
+      # container LIFECYCLE ops are agent-delegated (safe once the container is vetted).
+      #
+      # POST: 0 = block all HTTP POST → no docker create/run, no new containers possible.
+      # Lifecycle ops (start/stop/exec) use their own specific allow-list below.
+      POST: 0
 
-      # ── Read operations (low risk) ──────────────────────────────────────────
+      # ── Read operations ─────────────────────────────────────────────────────
       PING: 1
       VERSION: 1
       INFO: 1
       EVENTS: 1
-      CONTAINERS: 1   # list/inspect containers
+      CONTAINERS: 1   # docker ps / docker inspect
       IMAGES: 1
       NETWORKS: 1
       VOLUMES: 1
 
-      # ── Write operations — enable only what agents actually need ────────────
-      ALLOW_START: 1      # start existing containers
-      ALLOW_STOP: 1       # stop containers
-      ALLOW_RESTARTS: 0   # restart/kill — disabled, enable if needed
-      ALLOW_PAUSE: 0      # pause/unpause — disabled
+      # ── Lifecycle ops on pre-approved containers (safe: no new containers possible) ──
+      ALLOW_START: 1      # docker start
+      ALLOW_STOP: 1       # docker stop
+      ALLOW_RESTARTS: 1   # docker restart / docker kill
+      ALLOW_PAUSE: 1      # docker pause / unpause
 
-      # ── Dangerous — disabled by default ────────────────────────────────────
-      # EXEC: allows running arbitrary commands inside containers (= shell access)
-      # Enable only if the agent explicitly needs exec (e.g. running scripts in containers)
-      EXEC: 0
+      # EXEC is safe here: container boundaries (mounts, privileges) were set at creation
+      # time and reviewed by the human. exec cannot exceed those boundaries.
+      EXEC: 1
 
-      BUILD: 0        # build images from Dockerfile
-      COMMIT: 0       # commit container state as image
-      CONFIGS: 0      # swarm configs
-      DISTRIBUTION: 0 # registry access
+      # ── Disabled — container creation is human-only via PR + manual docker compose ───
+      BUILD: 0
+      COMMIT: 0
+      CONFIGS: 0
+      DISTRIBUTION: 0
       GRPC: 0
       NODES: 0
       PLUGINS: 0
