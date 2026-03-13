@@ -1,0 +1,53 @@
+# Docker Socket Proxy
+# Exposes the Colima docker socket as TCP on the Host-VM isolated network,
+# so that AI agents running in a VM can call docker without exposing to external networks.
+#
+# Setup: copy .env.example to .env and fill in your values, then:
+#   docker compose up -d
+# Or use: just pod-proxy
+#
+# Permissions reference: https://github.com/Tecnativa/docker-socket-proxy#not-always-needed
+# Set env vars to 1 to enable each capability.
+#
+services:
+  docker-socket-proxy:
+    image: tecnativa/docker-socket-proxy
+    restart: unless-stopped
+    volumes:
+      # Colima socket path — set COLIMA_SOCKET in .env or environment
+      # When using --vm-type=vz, actual path is ~/.config/colima/default/docker.sock
+      # (docker context may report ~/.colima/default/docker.sock which is wrong for vz type)
+      # Find it with: find ~/.config/colima ~/.colima -name "docker.sock" 2>/dev/null | head -1
+      - ${COLIMA_SOCKET}:/var/run/docker.sock:ro
+    ports:
+      # Only listen on the Host-VM isolated network interface — never exposed externally
+      # Set DOCKER_PROXY_BIND to your Host's IP on the VM-facing network (e.g. 192.168.64.1)
+      # Find it with: /sbin/ifconfig | grep "inet 192.168"
+      - "${DOCKER_PROXY_BIND}:2375:2375"
+    environment:
+      # Read-only ops (safe defaults)
+      CONTAINERS: 1
+      IMAGES: 1
+      NETWORKS: 1
+      VOLUMES: 1
+      INFO: 1
+      PING: 1
+      VERSION: 1
+      SERVICES: 1
+      TASKS: 1
+      # Write ops (enable only what agents need)
+      POST: 1       # allow POST (run containers, exec, etc.)
+      BUILD: 0      # disable build
+      COMMIT: 0     # disable commit
+      CONFIGS: 0    # disable swarm configs
+      DISTRIBUTION: 0
+      EXEC: 1       # allow exec into containers
+      GRPC: 0
+      NODES: 0
+      PLUGINS: 0
+      SECRETS: 0
+      SESSION: 0
+      SWARM: 0
+      SYSTEM: 0
+      EVENTS: 1     # allow event streaming
+      AUTH: 0

@@ -804,6 +804,23 @@ prep-pod:
 pod CMD="start --vm-type=vz --vz-rosetta --network-address":
     colima {{CMD}}
 
+# Expose Colima docker socket to lume VM via docker-socket-proxy
+# Listens only on 192.168.64.1:2375 (isolated Host-VM network, not exposed externally)
+# VM end: export DOCKER_HOST=tcp://192.168.64.1:2375
+#
+pod-proxy CMD="up -d":
+    #!/usr/bin/env bash
+    # Find actual Colima socket — docker context may report wrong path when using --vm-type=vz
+    # Actual path is ~/.config/colima/, not ~/.colima/
+    COLIMA_SOCKET=$(find ~/.config/colima ~/.colima -name "docker.sock" 2>/dev/null | head -1)
+    if [ -z "$COLIMA_SOCKET" ]; then
+        echo "Error: Colima docker.sock not found. Is Colima running? (just pod)"
+        exit 1
+    fi
+    echo "Using Colima socket: $COLIMA_SOCKET"
+    cd {{justfile_directory()}}/../stacks/docker-socket-proxy
+    COLIMA_SOCKET=$COLIMA_SOCKET docker compose {{CMD}}
+
 # tested in lima
 # distrobox create --name test --init --image quay.io/toolbx-images/alpine-toolbox:latest
 # distrobox enter test
