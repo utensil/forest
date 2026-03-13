@@ -804,33 +804,79 @@ prep-pod:
 pod CMD="start --vm-type=vz --vz-rosetta --network-address":
     colima {{CMD}}
 
-# Expose Colima docker socket to lume VM via docker-socket-proxy
-# Listens only on 192.168.64.1:2375 (isolated Host-VM network, not exposed externally)
-# VM end: export DOCKER_HOST=tcp://192.168.64.1:2375
+# Expose Colima docker socket to lume VM via Colima's built-in SSH tunnel.
+# Binds only on the isolated Host-VM network (auto-detected 192.168.x.x IP).
 #
-pod-proxy CMD="up -d":
+# Gives explicit control over when agents can access Docker — no auto-start on boot.
+# Start it intentionally, stop it to revoke access immediately.
+#
+# VM end: export DOCKER_HOST=tcp://<HOST_VM_IP>:2375
+#
+pod-proxy CMD="start":
     #!/usr/bin/env bash
-    # Auto-detect Colima socket — docker context may report wrong path for --vm-type=vz
-    # vz type stores socket at ~/.config/colima/, not ~/.colima/
-    COLIMA_SOCKET=$(find ~/.config/colima ~/.colima -name "docker.sock" 2>/dev/null | head -1)
-    if [ -z "$COLIMA_SOCKET" ]; then
-        echo "Error: Colima docker.sock not found. Is Colima running? (just pod)"
-        exit 1
-    fi
-    # Auto-detect Host IP on the VM-facing network (typically 192.168.x.x)
-    DOCKER_PROXY_BIND=$(/sbin/ifconfig 2>/dev/null | grep "inet 192.168" | awk '{print $2}' | head -1)
-    if [ -z "$DOCKER_PROXY_BIND" ]; then
-        echo "Error: Could not detect Host-VM network IP. Set DOCKER_PROXY_BIND manually."
-        exit 1
-    fi
-    if [ "$DOCKER_PROXY_BIND" = "0.0.0.0" ]; then
-        echo "Error: DOCKER_PROXY_BIND must not be 0.0.0.0 (would expose docker to all interfaces)"
-        exit 1
-    fi
-    echo "Using Colima socket: $COLIMA_SOCKET"
-    echo "Binding proxy to: $DOCKER_PROXY_BIND:2375 (Host-VM network only)"
-    cd {{justfile_directory()}}/stacks/docker-socket-proxy
-    COLIMA_SOCKET=$COLIMA_SOCKET DOCKER_PROXY_BIND=$DOCKER_PROXY_BIND docker-compose {{CMD}}
+    PID_FILE=/tmp/colima-docker-proxy.pid
+    PROXY_BIND=$(/sbin/ifconfig 2>/dev/null | grep "inet 192.168" | awk '{print $2}' | head -1)
+
+    _start() {
+        if [ -z "$PROXY_BIND" ]; then
+            echo "Error: Could not detect Host-VM network IP."
+            exit 1
+        fi
+        if [ -f "$PID_FILE" ] && kill -0 $(cat "$PID_FILE") 2>/dev/null; then
+            echo "Proxy already running (PID: $(cat $PID_FILE))"
+            exit 0
+        fi
+        # Write SSH config to temp file (-F with process substitution is unreliable)
+        SSH_CONF=$(mktemp)
+        colima ssh-config > "$SSH_CONF"
+        ssh -F "$SSH_CONF" colima -N \
+            -L "$PROXY_BIND:2375:/run/docker.sock" &
+        SSH_PID=$!
+        rm -f "$SSH_CONF"
+        echo $SSH_PID > "$PID_FILE"
+        sleep 0.5
+        if kill -0 $SSH_PID 2>/dev/null; then
+            echo "✓ Docker proxy started (PID: $SSH_PID)"
+            echo "  Listening: $PROXY_BIND:2375 (Host-VM network only)"
+            echo "  VM:        export DOCKER_HOST=tcp://$PROXY_BIND:2375"
+        else
+            echo "Error: SSH tunnel failed to start"
+            rm -f "$PID_FILE"
+            exit 1
+        fi
+    }
+
+    _stop() {
+        if [ -f "$PID_FILE" ]; then
+            PID=$(cat "$PID_FILE")
+            if kill "$PID" 2>/dev/null; then
+                rm -f "$PID_FILE"
+                echo "✓ Docker proxy stopped"
+            else
+                rm -f "$PID_FILE"
+                echo "Proxy was not running (removed stale PID file)"
+            fi
+        else
+            echo "No proxy running"
+        fi
+    }
+
+    case "{{CMD}}" in
+        start)   _start ;;
+        stop)    _stop ;;
+        restart) _stop; sleep 0.5; _start ;;
+        status)
+            if [ -f "$PID_FILE" ] && kill -0 $(cat "$PID_FILE") 2>/dev/null; then
+                echo "✓ Proxy running (PID: $(cat $PID_FILE)) on $PROXY_BIND:2375"
+            else
+                echo "Proxy not running"
+            fi
+            ;;
+        *)
+            echo "Usage: just pod-proxy [start|stop|restart|status]"
+            exit 1
+            ;;
+    esac
 
 # tested in lima
 # distrobox create --name test --init --image quay.io/toolbx-images/alpine-toolbox:latest
