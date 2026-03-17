@@ -202,6 +202,16 @@ gom-reset:
 om:
     ollama serve
 
+prep-ox:
+    which omlx || (brew tap jundot/omlx https://github.com/jundot/omlx && brew install omlx)
+
+ox-vm VM:
+    #!/usr/bin/env bash
+    VM_IP=$(lume ls | grep {{VM}} | grep -oE '192\.[0-9]+\.[0-9]+\.[0-9]+')
+    HOST_IP=$(echo $VM_IP | sed 's/\.[0-9]*$/.1/')
+    echo "Admin UI: http://$HOST_IP:8000/admin"
+    omlx serve --host $HOST_IP
+
 ds:
     ollama run {{DS_MODEL}}
 
