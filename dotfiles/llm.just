@@ -212,6 +212,9 @@ ox-vm VM:
     echo "Admin UI: http://$HOST_IP:8000/admin"
     omlx serve --host $HOST_IP
 
+ox4 *ARGS:
+    env -u HTTP_PROXY -u HTTPS_PROXY -u http_proxy -u https_proxy omlx launch {{ARGS}}
+
 ds:
     ollama run {{DS_MODEL}}
 
