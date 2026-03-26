@@ -1019,6 +1019,215 @@ migrate-dir REPO_A DIR_A REPO_B DIR_B DRY_RUN="--dry-run":
         fi
     fi
 
+# Mirror directories from source repo to dest repo, preserving git history.
+# Reads a file with one directory per line. Supports incremental runs.
+# Source repo is read-only. History conflict detection: if both repos have
+# commits on the same file, source commits must all precede dest commits.
+#
+# REPO_SRC: path to source repo (read-only)
+# REPO_DST: path to destination repo
+# DIRS_FILE: path to a text file with one directory per line to mirror
+# DRY_RUN: set to empty string to execute (default: "--dry-run")
+#
+# Example: just mirror-dirs ~/repos/mine ~/repos/cog-land dirs.txt
+# Example: just mirror-dirs ~/repos/mine ~/repos/cog-land dirs.txt ""
+mirror-dirs REPO_SRC REPO_DST DIRS_FILE DRY_RUN="--dry-run":
+    #!/usr/bin/env bash
+    set -e
+
+    REPO_SRC="$(cd "{{REPO_SRC}}" && pwd)"
+    REPO_DST="$(cd "{{REPO_DST}}" && pwd)"
+    DIRS_FILE="{{DIRS_FILE}}"
+
+    if [ ! -f "$DIRS_FILE" ]; then
+        echo "ERROR: dirs file not found: $DIRS_FILE"
+        exit 1
+    fi
+
+    # Read directory list (skip empty lines and comments)
+    DIRS=()
+    while IFS= read -r line; do
+        line="${line%%#*}"       # strip comments
+        line="$(echo "$line" | xargs)" # trim whitespace
+        [ -z "$line" ] && continue
+        DIRS+=("$line")
+    done < "$DIRS_FILE"
+
+    if [ ${#DIRS[@]} -eq 0 ]; then
+        echo "ERROR: no directories found in $DIRS_FILE"
+        exit 1
+    fi
+
+    echo "=== mirror-dirs ==="
+    echo "Source:  $REPO_SRC"
+    echo "Dest:    $REPO_DST"
+    echo "Dirs:    ${DIRS[*]}"
+    echo "Mode:    $( [ '{{DRY_RUN}}' = '--dry-run' ] && echo 'DRY RUN' || echo 'EXECUTE' )"
+    echo ""
+
+    TEMP_DIR=$(mktemp -d)
+    trap "rm -rf $TEMP_DIR" EXIT
+
+    ERRORS=0
+    MIRRORED=0
+    SKIPPED=0
+
+    for DIR in "${DIRS[@]}"; do
+        echo "--- Mirroring: $DIR ---"
+        cd "$REPO_SRC"  # Reset working directory each iteration
+
+        # Check directory exists in source
+        if ! (cd "$REPO_SRC" && git log --oneline -1 -- "$DIR" >/dev/null 2>&1); then
+            echo "  SKIP: $DIR has no history in source repo"
+            SKIPPED=$((SKIPPED + 1))
+            continue
+        fi
+
+        # Clone source and filter to just this directory
+        DIR_SLUG=$(echo "$DIR" | tr '/' '-')
+        FILTERED="$TEMP_DIR/filtered-$DIR_SLUG"
+        rm -rf "$FILTERED"
+        if ! git clone --no-tags "$REPO_SRC" "$FILTERED" 2>/dev/null; then
+            echo "  ERROR: Failed to clone source repo"
+            ERRORS=$((ERRORS + 1))
+            continue
+        fi
+
+        cd "$FILTERED"
+        git-filter-repo --path "$DIR" --force --quiet
+
+        FILTERED_COUNT=$(git rev-list --count HEAD 2>/dev/null || echo 0)
+        if [ "$FILTERED_COUNT" = "0" ]; then
+            echo "  SKIP: $DIR has no commits after filtering"
+            SKIPPED=$((SKIPPED + 1))
+            rm -rf "$FILTERED"
+            continue
+        fi
+
+        echo "  Source commits: $FILTERED_COUNT"
+
+        # Check for existing history in dest and handle incremental
+        cd "$REPO_DST"
+        DEST_HAS_DIR="no"
+        if git log --oneline -1 -- "$DIR" >/dev/null 2>&1; then
+            DEST_HAS_DIR="yes"
+        fi
+
+        if [ "$DEST_HAS_DIR" = "yes" ]; then
+            echo "  Dest already has history for $DIR — checking for incremental..."
+
+            # Get source commit hashes (after filtering)
+            cd "$FILTERED"
+            SRC_HASHES=$(git log --format='%H' | sort)
+
+            # Get dest commit hashes that touch this directory
+            # (excluding merge commits which are the mirror merge commits)
+            cd "$REPO_DST"
+            DST_HASHES=$(git log --no-merges --format='%H' -- "$DIR" | sort)
+
+            # Find source commits already in dest (by comparing author date + message)
+            # Since filter-repo rewrites hashes, we compare by author date + subject
+            cd "$FILTERED"
+            SRC_SIGS=$(git log --format='%aI|%s' | sort)
+            cd "$REPO_DST"
+            DST_SIGS=$(git log --no-merges --format='%aI|%s' -- "$DIR" | sort)
+
+            # Check how many source signatures are already in dest
+            ALREADY_IN_DEST=0
+            NEW_IN_SRC=0
+            while IFS= read -r sig; do
+                [ -z "$sig" ] && continue
+                if echo "$DST_SIGS" | grep -qF "$sig"; then
+                    ALREADY_IN_DEST=$((ALREADY_IN_DEST + 1))
+                else
+                    NEW_IN_SRC=$((NEW_IN_SRC + 1))
+                fi
+            done <<< "$SRC_SIGS"
+
+            if [ "$NEW_IN_SRC" -eq 0 ]; then
+                echo "  SKIP: All $ALREADY_IN_DEST source commits already in dest (up to date)"
+                SKIPPED=$((SKIPPED + 1))
+                rm -rf "$FILTERED"
+                continue
+            fi
+
+            echo "  Found $NEW_IN_SRC new commits ($ALREADY_IN_DEST already mirrored)"
+
+            # For new commits, check they don't conflict with dest-only commits
+            # Get the latest source commit timestamp and earliest dest-only commit
+            cd "$FILTERED"
+            SRC_LATEST_TS=$(git log -1 --format='%aI')
+
+            # Find dest commits that are NOT from source (dest-only)
+            cd "$REPO_DST"
+            DEST_ONLY_EARLIEST=""
+            while IFS= read -r dsig; do
+                [ -z "$dsig" ] && continue
+                if ! echo "$SRC_SIGS" | grep -qF "$dsig"; then
+                    ts="${dsig%%|*}"
+                    if [ -z "$DEST_ONLY_EARLIEST" ] || [[ "$ts" < "$DEST_ONLY_EARLIEST" ]]; then
+                        DEST_ONLY_EARLIEST="$ts"
+                    fi
+                fi
+            done <<< "$DST_SIGS"
+
+            if [ -n "$DEST_ONLY_EARLIEST" ]; then
+                # Use python for reliable ISO 8601 timestamp comparison
+                SRC_TS=$(python3 -c "from datetime import datetime; print(int(datetime.fromisoformat('$SRC_LATEST_TS').timestamp()))")
+                DST_TS=$(python3 -c "from datetime import datetime; print(int(datetime.fromisoformat('$DEST_ONLY_EARLIEST').timestamp()))")
+
+                if [ "$SRC_TS" -ge "$DST_TS" ]; then
+                    echo "  CONFLICT: source latest ($SRC_LATEST_TS) overlaps with dest-only commit ($DEST_ONLY_EARLIEST)"
+                    echo "  ERROR: History conflict for $DIR — skipping (dest unchanged)"
+                    ERRORS=$((ERRORS + 1))
+                    rm -rf "$FILTERED"
+                    continue
+                fi
+                echo "  No conflicts — new source commits are before dest-only commits"
+            else
+                echo "  No dest-only commits — safe to merge"
+            fi
+        fi
+
+        if [ "{{DRY_RUN}}" = "--dry-run" ]; then
+            echo "  DRY RUN: Would merge $FILTERED_COUNT commits for $DIR"
+            cd "$FILTERED"
+            git log --oneline | head -5
+            [ "$FILTERED_COUNT" -gt 5 ] && echo "  ... and $((FILTERED_COUNT - 5)) more"
+            MIRRORED=$((MIRRORED + 1))
+        else
+            echo "  Merging into dest..."
+            cd "$REPO_DST"
+            REMOTE_NAME="mirror-$(echo "$DIR" | tr '/' '-')-$$"
+            git remote add "$REMOTE_NAME" "$FILTERED"
+            git fetch "$REMOTE_NAME" 2>/dev/null
+
+            # Determine the branch name in the filtered repo
+            FILTERED_BRANCH=$(cd "$FILTERED" && git branch --show-current 2>/dev/null || echo "main")
+            # Use -X ours to keep dest content on conflicts (source history is older)
+            git merge --allow-unrelated-histories "$REMOTE_NAME/$FILTERED_BRANCH" \
+                -m "Mirror $DIR from source repo" --no-edit -X ours
+
+            git remote remove "$REMOTE_NAME"
+            MIRRORED=$((MIRRORED + 1))
+            echo "  OK: $DIR mirrored ($FILTERED_COUNT commits)"
+        fi
+
+        rm -rf "$FILTERED"
+    done
+
+    echo ""
+    echo "=== Summary ==="
+    echo "Mirrored: $MIRRORED"
+    echo "Skipped:  $SKIPPED"
+    echo "Errors:   $ERRORS"
+    if [ "{{DRY_RUN}}" = "--dry-run" ]; then
+        echo ""
+        echo "This was a dry run. To execute:"
+        echo "  just mirror-dirs {{REPO_SRC}} {{REPO_DST}} {{DIRS_FILE}} \"\""
+    fi
+    [ "$ERRORS" -gt 0 ] && exit 1 || exit 0
+
 # then run: git clone http://localhost:63000/username/repo.git:/dir.git
 # but no arm64 version yet
 # josh-proxy:
