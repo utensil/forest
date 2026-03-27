@@ -34,7 +34,17 @@ Kopia connects to this container over SFTP using a dedicated keypair — no pass
     docker compose up -d
     ```
 
-6. Add authorized public keys for each Kopia host that needs access.
+6. Create the persistent config directory (alongside your `.env`):
+
+    ```sh
+    mkdir -p config
+    ```
+
+   This directory is git-ignored and will hold `authorized_keys` and SSH host keys
+   across container restarts. The default path is `./config` (relative to `compose.yaml`).
+   Override with `SSTORE_CONFIG_PATH` in `.env` if needed.
+
+7. Add authorized public keys for each Kopia host that needs access.
    Run this on the Docker host after the container is up:
 
     ```sh
@@ -42,13 +52,16 @@ Kopia connects to this container over SFTP using a dedicated keypair — no pass
     docker exec sstore sh -c 'echo "ssh-ed25519 AAAA... kopia-hostname" >> /config/.ssh/authorized_keys'
     ```
 
-   Keys persist inside the container at `/config/.ssh/authorized_keys` across restarts.
+   Keys now persist across restarts via the mounted `config/` directory.
    Each Kopia host should generate a dedicated keypair (not a regular SSH key):
 
     ```sh
     ssh-keygen -t ed25519 -C "kopia-<hostname>" -f ~/.kopia/sftp_id
     # Add the contents of ~/.kopia/sftp_id.pub using the docker exec command above
     ```
+
+   Side benefit: SSH host keys also persist, so Kopia won't see
+   "REMOTE HOST IDENTIFICATION CHANGED" warnings after container restarts.
 
 7. Verify connectivity from the Kopia host:
 
