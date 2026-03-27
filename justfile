@@ -1,6 +1,7 @@
 import 'dotfiles/config.just'
 import 'dotfiles/term.just'
 import 'dotfiles/editor.just'
+import 'dotfiles/audit.just'
 
 export PROJECT_ROOT := justfile_directory()
 
