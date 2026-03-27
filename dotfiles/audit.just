@@ -1,7 +1,7 @@
 # Security audit tasks
-
 # Audit for compromised litellm versions (supply chain attack, March 2026)
 # Affected versions: v1.82.7 and v1.82.8 (published 2026-03-24)
+
 # Reference: https://docs.litellm.ai/blog/security-update-march-2026
 audit-litellm:
     #!/usr/bin/env bash
