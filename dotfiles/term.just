@@ -207,7 +207,7 @@ chsh:
 prep-ssh-agent:
     #!/usr/bin/env bash
     set -e
-    
+
     # Check if SSH config has agent settings
     if ! grep -q "AddKeysToAgent yes" ~/.ssh/config 2>/dev/null; then
         echo "Setting up SSH config..."
@@ -223,19 +223,19 @@ prep-ssh-agent:
         echo "  IdentityFile ~/.ssh/id_ed25519" >> ~/.ssh/config
         chmod 600 ~/.ssh/config
     fi
-    
+
     # Start SSH agent if not running
     if [ -z "$SSH_AUTH_SOCK" ] || ! ssh-add -l &>/dev/null; then
         echo "Starting SSH agent..."
         eval "$(ssh-agent -s)"
     fi
-    
+
     # Add key if not already added
     if ! ssh-add -l | grep -q "id_ed25519"; then
         echo "Adding SSH key to agent..."
         ssh-add --apple-use-keychain ~/.ssh/id_ed25519
     fi
-    
+
     echo "SSH agent ready. Keys loaded:"
     ssh-add -l
 
@@ -836,7 +836,7 @@ prep-pod:
 # to access lan, `--network-address` is needed
 # see https://github.com/abiosoft/colima/blob/main/docs/FAQ.md#the-virtual-machines-ip-is-not-reachable
 #
-pod CMD="start --vm-type=vz --vz-rosetta --network-address":
+pod CMD="start --vm-type=vz --vz-rosetta --network-address --mount-type=virtiofs":
     colima {{CMD}}
 
 # Expose Colima docker socket to lume VM with permission control.
