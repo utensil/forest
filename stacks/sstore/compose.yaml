@@ -15,6 +15,7 @@ services:
       - "${SSTORE_LISTEN_ADDR:-127.0.0.1}:${SSTORE_PORT:-2222}:2222"
     volumes:
       - ${STORAGE_PATH}:/storage
+      - ./custom-cont-init.d:/custom-cont-init.d:ro
     security_opt:
       - no-new-privileges:true
     cap_drop:
