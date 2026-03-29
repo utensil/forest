@@ -12,10 +12,10 @@ default:
 ## Forester build
 
 new +PARAMS:
-    ./new.sh {{PARAMS}}
+    ./new.sh {{ PARAMS }}
 
 hn +PARAMS:
-    hx `just new {{PARAMS}}`
+    hx `just new {{ PARAMS }}`
 
 init: prep
     #!/usr/bin/env bash
@@ -24,6 +24,7 @@ init: prep
 
 # should run `just init` first
 #
+
 # Build forest
 build:
     ./build.sh
@@ -52,36 +53,36 @@ bib:
 
 glsl SOURCE:
     mkdir -p output/forest/shader/
-    cp -f {{SOURCE}} output/forest/shader/
+    cp -f {{ SOURCE }} output/forest/shader/
 
 css SOURCE:
-    # ln -s {{justfile_directory()}}/assets/images bun/images || true
-    bun build --target=browser --minify --outfile=output/forest/{{file_name(SOURCE)}} {{SOURCE}}
+    # ln -s {{ justfile_directory() }}/assets/images bun/images || true
+    bun build --target=browser --minify --outfile=output/forest/{{ file_name(SOURCE) }} {{ SOURCE }}
     rm bun/images
     # blocks on
     # - [fix: Use correct MIME type for CSS files in Bun.build outputs](https://github.com/oven-sh/bun/pull/21849)
     # - [Allow relative assets in CSS that don't exist · Issue #22725 · oven-sh/bun](https://github.com/oven-sh/bun/issues/22725)
-    # bun run bun_build.ts {{SOURCE}}
-    # bunx --bun lightningcss-cli --minify --bundle --targets '>= 0.25%' {{SOURCE}} -o output/forest/{{file_name(SOURCE)}}
-    # bunx postcss -o output/{{file_name(SOURCE)}} {{SOURCE}}
+    # bun run bun_build.ts {{ SOURCE }}
+    # bunx --bun lightningcss-cli --minify --bundle --targets '>= 0.25%' {{ SOURCE }} -o output/forest/{{ file_name(SOURCE) }}
+    # bunx postcss -o output/{{ file_name(SOURCE) }} {{ SOURCE }}
 
 js SOURCE:
-    bun run bun_build.ts {{SOURCE}}
+    bun run bun_build.ts {{ SOURCE }}
 
 forest:
     opam exec -- forester build # 2>&1 > build/forester.log # --dev
 
 copy SOURCE:
-    -rm output/{{file_name(SOURCE)}} > /dev/null 2>&1
-    cp -f {{SOURCE}} output/forest/
+    -rm output/{{ file_name(SOURCE) }} > /dev/null 2>&1
+    cp -f {{ SOURCE }} output/forest/
 
 typ SOURCE:
     mkdir -p output/typst/
-    cp -f {{SOURCE}} output/forest/typst/
+    cp -f {{ SOURCE }} output/forest/typst/
 
 penrose SOURCE:
     mkdir -p output/penrose/
-    cp -f {{SOURCE}} output/forest/penrose/
+    cp -f {{ SOURCE }} output/forest/penrose/
 
 fix-thm:
     #!/usr/bin/env bash
@@ -137,6 +138,7 @@ pre-push:
 # run 'just pre-push' before every push
 # This will run 'just pre-push' before every push, and may block pushes if checks fail, run 'just unprep-push' to disable
 #
+
 # Set up Git pre-push hook
 prep-push:
     #!/usr/bin/env bash
@@ -188,8 +190,8 @@ shellcheck:
 proselint FILE="":
     #!/usr/bin/env bash
     # Fuzzy find FILE and pass it to proselint
-    if [[ -n "{{FILE}}" ]]; then
-        uvx proselint "{{FILE}}"
+    if [[ -n "{{ FILE }}" ]]; then
+        uvx proselint "{{ FILE }}"
     else
         local file
         file=$(fzf --height 40% --reverse --preview 'bat --color=always {}' --preview-window right:60%)
@@ -201,33 +203,32 @@ proselint FILE="":
 # Supported languages: https://topiary.tweag.io/book/reference/language-support.html
 # e.g. OCaml, Bash, TOML
 # used by https://git.sr.ht/~jonsterling/ocaml-forester
-#
+
 prep-topiary:
     which topiary || cargo install topiary-cli
 
 # https://dprint.dev/
-#
+
 prep-dprint:
     which dprint || brew install dprint
 
 # The format is too massive, wait until it's really needed one day
-#
+
 check-dprint:
     dprint check --list-different
 
 # https://www.html-tidy.org/
-#
+
 prep-tidy:
     brew install tidy-html5
 
 ## Enrich contents
-
 # Inspired by https://github.com/Ranchero-Software/NetNewsWire/issues/978#issuecomment-1320911427
-#
+
 rss-stars FOR="forest":
     #!/usr/bin/env bash
     cd ~/Library/Containers/com.ranchero.NetNewsWire-Evergreen/Data/Library/Application\ Support/NetNewsWire/Accounts/2_iCloud
-    if [ "{{FOR}}" = "linkwarden" ]; then
+    if [ "{{ FOR }}" = "linkwarden" ]; then
         # Output all columns for linkwarden import
         sqlite3 DB.sqlite3 '.mode json' 'select a.*, s.* from articles a join statuses s on a.articleID = s.articleID where s.starred = 1 order by s.dateArrived' | jq -c '.[]'
     else
@@ -235,48 +236,46 @@ rss-stars FOR="forest":
         sqlite3 DB.sqlite3 '.mode json' 'select a.*, s.* from articles a join statuses s on a.articleID = s.articleID where s.starred = 1 order by s.dateArrived' | jq -r '.[]|{title, url, externalURL, datePublished, dateArrived, uniqueID}'
     fi
 
-
 rd2lw RAINDROP_FILE *PARAMS="--days 1":
     #!/usr/bin/env bash
-    ./rss2linkwarden.py {{RAINDROP_FILE}} | ./linkwarden_import.py {{PARAMS}}
+    ./rss2linkwarden.py {{ RAINDROP_FILE }} | ./linkwarden_import.py {{ PARAMS }}
 
 rss2linkwarden *PARAMS="--days 7":
     #!/usr/bin/env bash
     # Export starred RSS links and calls Linkwarden API to import
-    just rss-stars "linkwarden" | ./linkwarden_import.py {{PARAMS}}
+    just rss-stars "linkwarden" | ./linkwarden_import.py {{ PARAMS }}
 
 rss2wallabag *PARAMS="--days 7":
     #!/usr/bin/env bash
     # Export starred RSS links and convert to Linkwarden/Wallabag import format
-    just rss-stars "linkwarden" | ./rss2wallabag.py {{PARAMS}}
+    just rss-stars "linkwarden" | ./rss2wallabag.py {{ PARAMS }}
 
 rss2pocket *PARAMS="--days 7":
     #!/usr/bin/env bash
     # Export starred RSS links and convert to Pocket/Readeck import format as a zip
     mkdir -p output
-    just rss-stars "linkwarden" | ./rss2pocket.py {{PARAMS}} > output/part_000000.csv
+    just rss-stars "linkwarden" | ./rss2pocket.py {{ PARAMS }} > output/part_000000.csv
 
 stars *PARAMS="--days 7":
-    just rss-stars|./stars.py {{PARAMS}}
+    just rss-stars|./stars.py {{ PARAMS }}
 
 til:
     ./til.py --reset && ./til.py
 
 # relies on GITHUB_ACCESS_TOKEN
-#
+
 gh2md REPO OUTPUT *PARAMS="--no-prs":
     #!/usr/bin/env bash
-    GITHUB_ACCESS_TOKEN=$(gh auth token) uvx gh2md --idempotent {{PARAMS}} {{REPO}} {{OUTPUT}}
+    GITHUB_ACCESS_TOKEN=$(gh auth token) uvx gh2md --idempotent {{ PARAMS }} {{ REPO }} {{ OUTPUT }}
     # https://github.com/mattduck/gh2md/issues/39
-    # docker run --rm -it -e GITHUB_ACCESS_TOKEN=$(gh auth token) dockerproxy.net/library/python:3.11.2 bash -c 'pip install gh2md && gh2md --idempotent {{REPO}} {{OUTPUT}}'
+    # docker run --rm -it -e GITHUB_ACCESS_TOKEN=$(gh auth token) dockerproxy.net/library/python:3.11.2 bash -c 'pip install gh2md && gh2md --idempotent {{ REPO }} {{ OUTPUT }}'
 
 ## OS related
-
 # Copy and paste to run in zsh, because we have no just at this point
 # Next, run: just prep-term
 # Then, maybe run: just mk-act
 # So the work can be continued in the Ubuntu container
-#
+
 bt-centos:
     #!/usr/bin/env bash
     yes|sudo yum groupinstall 'Development Tools'
@@ -295,7 +294,7 @@ bt-centos:
 # 2. Cmd++ to make the font and the terminal window bigger
 # 3. Enter zsh
 # 4. Copy and paste to run, because we have no just at this point
-#
+
 bt-mac:
     #!/usr/bin/env bash
     xcode-select --install
@@ -345,7 +344,7 @@ prep-proxy-ui:
     docker run --rm -it -p 5080:80 ghcr.io/haishanh/yacd:master
 
 # see https://macos-defaults.com/ and https://github.com/Swiss-Mac-User/macOS-scripted-setup and https://github.com/mathiasbynens/dotfiles/blob/main/.macos
-#
+
 prep-def:
     #!/usr/bin/env bash
     set -e
@@ -423,15 +422,15 @@ prep-def:
 
 # A terminal-based battery and energy monitor for macOS and Linux.
 # But it crashes for now, issue: https://github.com/jordond/jolt/issues/114
-#
+
 prep-jolt:
     which jolt || (curl -fsSL https://getjolt.sh/install.sh | bash) # || brew install jordond/tap/jolt
 
 remove FILE_OR_DIR:
     #!/usr/bin/env bash
     TEMP_LOCATION="/tmp/$(whoami)-$(date +%s)-$(head -c 5 /dev/random|xxd -ps)"
-    mv {{FILE_OR_DIR}} $TEMP_LOCATION
-    echo "{{FILE_OR_DIR}} is temporarily moved to $TEMP_LOCATION"
+    mv {{ FILE_OR_DIR }} $TEMP_LOCATION
+    echo "{{ FILE_OR_DIR }} is temporarily moved to $TEMP_LOCATION"
 
 prep-ubuntu:
     #!/usr/bin/env bash
@@ -449,25 +448,25 @@ prep-ubuntu:
 prep-user USER:
     #!/usr/bin/env bash
     set -e
-    useradd --shell "`which bash`" {{USER}}
-    mkdir ~{{USER}}
-    chown -R {{USER}}.{{USER}} ~{{USER}}
-    passwd {{USER}}
-    echo "{{USER}} ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+    useradd --shell "`which bash`" {{ USER }}
+    mkdir ~{{ USER }}
+    chown -R {{ USER }}.{{ USER }} ~{{ USER }}
+    passwd {{ USER }}
+    echo "{{ USER }} ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
 prep-lvim-in-zsh:
     #!/usr/bin/env bash
     just prep-lvim
 
 mk-rp:
-    sudo docker run -d --privileged --name rp-dev -v{{justfile_directory()}}:/root/projects/forest runpod/pytorch:2.2.1-py3.10-cuda12.1.1-devel-ubuntu22.04 bash -c 'sleep infinity'
+    sudo docker run -d --privileged --name rp-dev -v{{ justfile_directory() }}:/root/projects/forest runpod/pytorch:2.2.1-py3.10-cuda12.1.1-devel-ubuntu22.04 bash -c 'sleep infinity'
 
 run-rp:
     sudo docker exec -it -w /root/projects/forest rp-dev bash
 
 # Copy and paste to run as root, because we have no just at this point
 # Next, run: just prep-act
-#
+
 bt-ubuntu:
     #!/usr/bin/env bash
     apt update
@@ -479,7 +478,7 @@ bt-ubuntu:
     echo 'eval "$(~/.local/bin/mise activate bash)"' >> ~/.bashrc
 
 bt CONTAINER_NAME:
-    echo '#!/usr/bin/env bash\napt update\napt install -y build-essential curl file git sudo neovim\ncurl https://mise.run | sh\neval "$(~/.local/bin/mise activate bash)"\nmise trust\nmise use -g just\necho 'eval \"$(~/.local/bin/mise activate bash)\"' >> ~/.bashrc' | docker exec -i {{CONTAINER_NAME}} bash -s
+    echo '#!/usr/bin/env bash\napt update\napt install -y build-essential curl file git sudo neovim\ncurl https://mise.run | sh\neval "$(~/.local/bin/mise activate bash)"\nmise trust\nmise use -g just\necho 'eval \"$(~/.local/bin/mise activate bash)\"' >> ~/.bashrc' | docker exec -i {{ CONTAINER_NAME }} bash -s
 
 [linux]
 prep-brew:
@@ -495,30 +494,30 @@ prep-chisel:
 
 # default ports are ordered so it's clear that local nvim -> local 1212 -> mid 1213 -> remote nvim 1214
 # authenticated by environment variable AUTH user:pass
-#
+
 cs-remote PORT="1213":
-    chisel server -v --port {{PORT}}
+    chisel server -v --port {{ PORT }}
 
 cs_mid := env("CS_MID", "localhost:1213")
 
 cs-local MID=cs_mid LOCAL="1212" TARGET="1214":
-    chisel client -v http://{{MID}} {{LOCAL}}:{{TARGET}}
+    chisel client -v http://{{ MID }} {{ LOCAL }}:{{ TARGET }}
 
 nv-remote PROJ="forest" PORT="1214":
-    just nvim {{PROJ}} --embed --listen localhost:{{PORT}}
+    just nvim {{ PROJ }} --embed --listen localhost:{{ PORT }}
 
 nv-local PROJ="forest" PORT="1212":
-    just nvim {{PROJ}} --server localhost:{{PORT}} --remote-ui
+    just nvim {{ PROJ }} --server localhost:{{ PORT }} --remote-ui
 
 # an alternative is use local on CentOS and remote on Ubuntu in docker, no chisel needed, just docekr port mapping
-#
+
 lv-remote PROJ="forest" HOST="0.0.0.0" PORT="1214":
     #!/usr/bin/env bash
-    just lvim {{PROJ}} --embed --listen {{HOST}}:{{PORT}}
+    just lvim {{ PROJ }} --embed --listen {{ HOST }}:{{ PORT }}
 
 lv-local PROJ="forest" HOST="localhost" PORT="1214":
     #!/usr/bin/env bash
-    just lvim {{PROJ}} --server {{HOST}}:{{PORT}} --remote-ui
+    just lvim {{ PROJ }} --server {{ HOST }}:{{ PORT }} --remote-ui
 
 prep-ts:
     # brew install tailscale
@@ -529,15 +528,15 @@ prep-ts-ssh:
 
 # --list
 # USER@HOST:PORT
-#
+
 ts-ssh *PARAMS:
-    `go env GOPATH`/bin/ts-ssh {{PARAMS}}
+    `go env GOPATH`/bin/ts-ssh {{ PARAMS }}
 
 prep-scp:
     which termscp || brew install veeso/termscp/termscp
 
 scp *PARAMS:
-    termscp {{PARAMS}}
+    termscp {{ PARAMS }}
 
 ## Fancy
 
@@ -563,7 +562,7 @@ prep-fetch:
 prep-tattoy:
     which tattoy || cargo install --locked --git https://github.com/tattoy-org/tattoy tattoy
     rip ~/.config/tattoy || true
-    ln -s ~/projects/shader-playground/shaders {{justfile_directory()}}/dotfiles/.config/tattoy/shaders
+    ln -s ~/projects/shader-playground/shaders {{ justfile_directory() }}/dotfiles/.config/tattoy/shaders
     just link-conf tattoy
 
 # Run fastfetch every time Enter is pressed
@@ -579,14 +578,14 @@ time:
     tty-clock -c -s -C 3
 
 weather CITY:
-    curl 'wttr.in/{{CITY}}'
+    curl 'wttr.in/{{ CITY }}'
     # ?format=3'
 
 prep-stormy:
     which stormy || go install github.com/ashish0kumar/stormy@latest
 
 stormy CITY:
-    stormy --city {{CITY}}
+    stormy --city {{ CITY }}
 
 matrix:
     # rusty-rain -C green -H white -s -c jap
@@ -608,10 +607,10 @@ loc:
     tokei -o json|uvx tokei-pie
 
 loc-tui PATH *PARAMS="":
-    uvx cloctui {{PATH}} {{PARAMS}}
+    uvx cloctui {{ PATH }} {{ PARAMS }}
 
 # Runal is a text-based creative coding environment for the terminal. It works similarly as processing or p5js but it does all the rendering as text. It can either be programmed with JavaScript, or used as a Go package.
-#
+
 prep-runal:
     which runal || (curl -sSL empr.cl/get/runal | bash)
 
@@ -619,15 +618,14 @@ prep-theattyr:
     which theattyr || cargo install theattyr
 
 ## fzf
-
 # based on https://github.com/zachdaniel/dotfiles/blob/main/priv_scripts/project
-#
+
 proj:
-    fd --type d --max-depth 1 --base-directory {{home_directory()}}/projects|fzf --prompt 'Select a directory: '|xargs -I {} kitty @ launch --type os-window --cwd {{home_directory()}}/projects/forest --copy-env zsh -c 'just lvim {}'
+    fd --type d --max-depth 1 --base-directory {{ home_directory() }}/projects|fzf --prompt 'Select a directory: '|xargs -I {} kitty @ launch --type os-window --cwd {{ home_directory() }}/projects/forest --copy-env zsh -c 'just lvim {}'
 
 # to search history, use Ctrl+R instead
 # here is how to search files
-#
+
 fzf:
     fzf --preview 'bat {}'|xargs lvim
 
@@ -641,15 +639,15 @@ prep-view:
 # issues:
 # - flashes for React and WebGL
 # - outputs code when mouse moves after exited by ctrl+c
-#
+
 view URL="http://localhost:1314/":
-    awrit {{URL}}
+    awrit {{ URL }}
 
 prep-cha:
     which cha || brew install chawan
     just prep-rdrview
     rip ~/.config/chawan || true
-    ln -s {{justfile_directory()}}/dotfiles/.config/chawan ~/.config/chawan
+    ln -s {{ justfile_directory() }}/dotfiles/.config/chawan ~/.config/chawan
 
 prep-rdrview:
     #!/usr/bin/env bash
@@ -682,12 +680,12 @@ prep-rdrview:
 # v  select text with vim motions
 # y  copy selected text
 # right click menu, including select and copy text
-#
+
 cha URL:
-    cha {{URL}}
+    cha {{ URL }}
 
 # hygg: a minimalist terminal-based document reader supporting PDFs, EPUBs, and text files with vim-like navigation
-#
+
 prep-hygg:
     which hygg || cargo install --locked hygg
 
@@ -705,7 +703,7 @@ prep-hygg:
 #
 # ? - help
 # q - quit
-#
+
 prep-lynx:
     which lynx || brew install lynx
 
@@ -722,9 +720,9 @@ prep-servo:
 # image, canvas pixelated
 # can't recognize small button with icon
 # support forest xml/xslt
-#
+
 carbon URL:
-    docker run --rm -ti fathyb/carbonyl {{URL}}
+    docker run --rm -ti fathyb/carbonyl {{ URL }}
 
 # edbrowse URL
 # ,p - print rendered text of the whole page, p can be omitted
@@ -736,7 +734,7 @@ carbon URL:
 # g - go to the link on the line
 # h - explain the last ?
 # qt - quit
-#
+
 prep-ed:
     which edbrowse || brew install edbrowse
 
@@ -745,23 +743,22 @@ postman:
     uvx --python 3.12 posting
 
 # https://blog.stulta.dev/posts/annoying_json/
-#
+
 prep-bjn:
     which xh || brew install xh
     which jo || brew install jo
 
 # e.g. just bjn "some_key[sub_key]=its value" "another_key=another value"
 # https://github.com/casey/just?tab=readme-ov-file#positional-arguments
-#
+
 [positional-arguments]
 bjn *PARAMS:
     #!/usr/bin/env bash
     xh --offline --print=B fake.url "$@"
 
 ## Backup
-
 # https://www.fuse-t.org/
-#
+
 prep-fuse-t:
     brew tap macos-fuse-t/homebrew-cask
     brew install fuse-t
@@ -799,18 +796,18 @@ prep-vera-kernel:
 
 [macos]
 vera VOLUME MNT *PARAMS:
-    veracrypt --text {{VOLUME}} {{MNT}} # --non-interactive --password=THE_PASSWORD
+    veracrypt --text {{ VOLUME }} {{ MNT }} # --non-interactive --password=THE_PASSWORD
 
 [linux]
 vera VOLUME MNT *PARAMS:
-    mkdir -p {{MNT}}
-    veracrypt --text --pim=0 --keyfiles="" --protect-hidden=no -m=nokernelcrypto {{PARAMS}} {{VOLUME}} {{MNT}}
+    mkdir -p {{ MNT }}
+    veracrypt --text --pim=0 --keyfiles="" --protect-hidden=no -m=nokernelcrypto {{ PARAMS }} {{ VOLUME }} {{ MNT }}
 
 vera-ro VOLUME MNT:
-    just vera {{VOLUME}} {{MNT}} --mount-options=ro
+    just vera {{ VOLUME }} {{ MNT }} --mount-options=ro
 
 vera-off MNT:
-    veracrypt --text -d {{MNT}}
+    veracrypt --text -d {{ MNT }}
 
 try-smb PATH:
     #!/usr/bin/env bash
@@ -822,7 +819,7 @@ try-smb PATH:
     mkdir share
     touch share/something
     rip foo
-    ln -s {{PATH}} foo
+    ln -s {{ PATH }} foo
     mkdir foo-baz
     docker run \
       -it --rm \
@@ -850,30 +847,30 @@ dav URL MNT="/mnt/dav":
     # It will prompt for WebDAV credentials interactively via mount.davfs.
     set -e
     echo "Creating mount point in container..."
-    mkdir -p {{MNT}}
+    mkdir -p {{ MNT }}
     echo "Mounting WebDAV share (you will be prompted for credentials)..."
-    mount -t davfs {{URL}} {{MNT}}
+    mount -t davfs {{ URL }} {{ MNT }}
     echo "Listing files in mount point:"
-    ls -l {{MNT}}
+    ls -l {{ MNT }}
 
 dav-off MNT="/mnt/dav":
     #!/usr/bin/env bash
     # Unmount the WebDAV mount point (default: /mnt/dav)
     set -e
-    echo "Unmounting WebDAV share at {{MNT}}..."
-    umount {{MNT}}
-    echo "Unmounted {{MNT}}."
+    echo "Unmounting WebDAV share at {{ MNT }}..."
+    umount {{ MNT }}
+    echo "Unmounted {{ MNT }}."
 
 dav-ro URL MNT="/mnt/dav":
     #!/usr/bin/env bash
     # Mount the WebDAV share read-only. Prompts for credentials interactively.
     set -e
     echo "Creating mount point in container..."
-    mkdir -p {{MNT}}
+    mkdir -p {{ MNT }}
     echo "Mounting WebDAV share read-only (you will be prompted for credentials)..."
-    mount -t davfs {{URL}} {{MNT}} -o ro
+    mount -t davfs {{ URL }} {{ MNT }} -o ro
     echo "Listing files in mount point:"
-    ls -l {{MNT}}
+    ls -l {{ MNT }}
 
 prep-rest:
     #!/usr/bin/env bash
@@ -885,17 +882,17 @@ prep-rest:
 
 mnt-rest REPO:
     #!/usr/bin/env bash
-    mkdir -p ~/.mnt/{{REPO}}
-    open ~/.mnt/{{REPO}}
-    ~/.local/share/backrest/restic mount -r ~/.rest/{{REPO}} ~/.mnt/{{REPO}}
+    mkdir -p ~/.mnt/{{ REPO }}
+    open ~/.mnt/{{ REPO }}
+    ~/.local/share/backrest/restic mount -r ~/.rest/{{ REPO }} ~/.mnt/{{ REPO }}
 
 export DREST_HOME := join(home_directory(), ".drest")
 
 prep-drest:
     docker pull garethgeorge/backrest:latest
-    mkdir -p {{DREST_HOME}}/.backrest/config
-    mkdir -p {{DREST_HOME}}/.backrest/data
-    mkdir -p {{DREST_HOME}}/.backrest/cache
+    mkdir -p {{ DREST_HOME }}/.backrest/config
+    mkdir -p {{ DREST_HOME }}/.backrest/data
+    mkdir -p {{ DREST_HOME }}/.backrest/cache
 
 drest:
     # echo $DREST_HOME
@@ -912,33 +909,32 @@ prep-annex:
     (cd ~/annex && git annex webapp)
 
 ## Tracing
-
 # https://til.simonwillison.net/macos/fs-usage
 #
 # pathname, network, filesys, exec, diskio, cachehit
-#
+
 [macos]
 trace PID FILTER="pathname":
-    fs_usage -f {{FILTER}} {{PID}}
+    fs_usage -f {{ FILTER }} {{ PID }}
 
 # https://linux-audit.com/cheat-sheets/strace/
 # file, network, memory, process, ipc, signal
-#
+
 [linux]
 trace PID FILTER="file":
-    strace -f -e trace={{FILTER}} -p {{PID}}
+    strace -f -e trace={{ FILTER }} -p {{ PID }}
 
 ## Code forge
 
 prep-fj:
     docker pull data.forgejo.org/forgejo/forgejo:10
 
-FJ_DIR :=  join(home_directory(), ".forgejo")
+FJ_DIR := join(home_directory(), ".forgejo")
 
 fj:
     #!/usr/bin/env bash
-    mkdir -p {{FJ_DIR}}/ssh
-    docker run --rm -it -e USER_UID=$(id -u) -e USER_GID=$(id -g) --env-file .env -p 23000:3000 -p 2222:22 -v {{FJ_DIR}}:/data -v /etc/timezone:/etc/timezone:ro -v /etc/localtime:/etc/localtime:ro data.forgejo.org/forgejo/forgejo:10
+    mkdir -p {{ FJ_DIR }}/ssh
+    docker run --rm -it -e USER_UID=$(id -u) -e USER_GID=$(id -g) --env-file .env -p 23000:3000 -p 2222:22 -v {{ FJ_DIR }}:/data -v /etc/timezone:/etc/timezone:ro -v /etc/localtime:/etc/localtime:ro data.forgejo.org/forgejo/forgejo:10
 
 prep-filter-repo:
     which git-filter-repo || brew install git-filter-repo
@@ -951,71 +947,72 @@ prep-filter-repo:
 # DRY_RUN: set to empty string to execute (default: "--dry-run")
 #
 # Example: just migrate-dir ~/repos/source mydir ~/repos/dest newdir
+
 # Example: just migrate-dir ~/repos/source mydir ~/repos/dest . ""
 migrate-dir REPO_A DIR_A REPO_B DIR_B DRY_RUN="--dry-run":
     #!/usr/bin/env bash
     set -e
     TEMP_DIR=$(mktemp -d)
     trap "rm -rf $TEMP_DIR" EXIT
-    
+
     echo "=== Cloning repo A to temp location ==="
-    git clone {{REPO_A}} $TEMP_DIR/filtered
-    
+    git clone {{ REPO_A }} $TEMP_DIR/filtered
+
     cd $TEMP_DIR/filtered
-    echo "=== Filtering to keep only {{DIR_A}} ==="
-    git-filter-repo --path {{DIR_A}} --force
-    
-    if [ "{{DIR_B}}" != "{{DIR_A}}" ] && [ "{{DIR_B}}" != "." ]; then
-        echo "=== Renaming {{DIR_A}} to {{DIR_B}} ==="
-        git-filter-repo --path-rename {{DIR_A}}:{{DIR_B}} --force
-    elif [ "{{DIR_B}}" = "." ]; then
-        echo "=== Moving {{DIR_A}} to root ==="
-        git-filter-repo --path-rename {{DIR_A}}: --force
+    echo "=== Filtering to keep only {{ DIR_A }} ==="
+    git-filter-repo --path {{ DIR_A }} --force
+
+    if [ "{{ DIR_B }}" != "{{ DIR_A }}" ] && [ "{{ DIR_B }}" != "." ]; then
+        echo "=== Renaming {{ DIR_A }} to {{ DIR_B }} ==="
+        git-filter-repo --path-rename {{ DIR_A }}:{{ DIR_B }} --force
+    elif [ "{{ DIR_B }}" = "." ]; then
+        echo "=== Moving {{ DIR_A }} to root ==="
+        git-filter-repo --path-rename {{ DIR_A }}: --force
     fi
-    
-    if [ "{{DRY_RUN}}" = "--dry-run" ]; then
+
+    if [ "{{ DRY_RUN }}" = "--dry-run" ]; then
         echo ""
-        echo "=== DRY RUN: Would merge into {{REPO_B}} ==="
+        echo "=== DRY RUN: Would merge into {{ REPO_B }} ==="
         echo "Filtered commits:"
         git log --oneline --graph --all
         echo ""
-        echo "To execute, run: just migrate-dir {{REPO_A}} {{DIR_A}} {{REPO_B}} {{DIR_B}} \"\""
+        echo "To execute, run: just migrate-dir {{ REPO_A }} {{ DIR_A }} {{ REPO_B }} {{ DIR_B }} \"\""
     else
         echo "=== Merging into repo B ==="
-        cd {{REPO_B}}
+        cd {{ REPO_B }}
         git remote add temp-filtered $TEMP_DIR/filtered
         git fetch temp-filtered
-        git merge --allow-unrelated-histories temp-filtered/main -m "Migrate {{DIR_A}} from repo A"
+        git merge --allow-unrelated-histories temp-filtered/main -m "Migrate {{ DIR_A }} from repo A"
         git remote remove temp-filtered
         echo "=== Migration complete ==="
-        
+
         echo ""
         echo "=== Cleanup repo A? ==="
         echo "This will:"
-        echo "  1. Remove {{DIR_A}} from working tree"
+        echo "  1. Remove {{ DIR_A }} from working tree"
         echo "  2. Commit the removal"
-        echo "  3. Purge {{DIR_A}} history from repo A (shrink size)"
+        echo "  3. Purge {{ DIR_A }} history from repo A (shrink size)"
         echo ""
         read -p "Proceed with cleanup? (y/N): " -n 1 -r
         echo
         if [[ $REPLY =~ ^[Yy]$ ]]; then
-            cd {{REPO_A}}
+            cd {{ REPO_A }}
             ORIGIN_URL=$(git remote get-url origin 2>/dev/null || echo "")
-            git rm -r {{DIR_A}}
-            git commit -m "Remove {{DIR_A}} directory (migrated to separate repo)"
-            git-filter-repo --path {{DIR_A}} --invert-paths --force
+            git rm -r {{ DIR_A }}
+            git commit -m "Remove {{ DIR_A }} directory (migrated to separate repo)"
+            git-filter-repo --path {{ DIR_A }} --invert-paths --force
             if [ -n "$ORIGIN_URL" ]; then
                 git remote add origin "$ORIGIN_URL"
             fi
             echo ""
             echo "✓ Cleanup complete!"
-            echo "⚠️  To push changes, run: cd {{REPO_A}} && git push --force"
+            echo "⚠️  To push changes, run: cd {{ REPO_A }} && git push --force"
         else
             echo "Skipped cleanup. To clean up later:"
-            echo "  cd {{REPO_A}}"
-            echo "  git rm -r {{DIR_A}}"
-            echo "  git commit -m 'Remove {{DIR_A}} directory (migrated to separate repo)'"
-            echo "  git-filter-repo --path {{DIR_A}} --invert-paths --force"
+            echo "  cd {{ REPO_A }}"
+            echo "  git rm -r {{ DIR_A }}"
+            echo "  git commit -m 'Remove {{ DIR_A }} directory (migrated to separate repo)'"
+            echo "  git-filter-repo --path {{ DIR_A }} --invert-paths --force"
             echo "  git push --force"
         fi
     fi
@@ -1031,14 +1028,15 @@ migrate-dir REPO_A DIR_A REPO_B DIR_B DRY_RUN="--dry-run":
 # DRY_RUN: set to empty string to execute (default: "--dry-run")
 #
 # Example: just mirror-dirs ~/repos/mine ~/repos/cog-land dirs.txt
+
 # Example: just mirror-dirs ~/repos/mine ~/repos/cog-land dirs.txt ""
 mirror-dirs REPO_SRC REPO_DST DIRS_FILE DRY_RUN="--dry-run":
     #!/usr/bin/env bash
     set -e
 
-    REPO_SRC="$(cd "{{REPO_SRC}}" && pwd)"
-    REPO_DST="$(cd "{{REPO_DST}}" && pwd)"
-    DIRS_FILE="{{DIRS_FILE}}"
+    REPO_SRC="$(cd "{{ REPO_SRC }}" && pwd)"
+    REPO_DST="$(cd "{{ REPO_DST }}" && pwd)"
+    DIRS_FILE="{{ DIRS_FILE }}"
 
     if [ ! -f "$DIRS_FILE" ]; then
         echo "ERROR: dirs file not found: $DIRS_FILE"
@@ -1063,11 +1061,16 @@ mirror-dirs REPO_SRC REPO_DST DIRS_FILE DRY_RUN="--dry-run":
     echo "Source:  $REPO_SRC"
     echo "Dest:    $REPO_DST"
     echo "Dirs:    ${DIRS[*]}"
-    echo "Mode:    $( [ '{{DRY_RUN}}' = '--dry-run' ] && echo 'DRY RUN' || echo 'EXECUTE' )"
+    echo "Mode:    $( [ '{{ DRY_RUN }}' = '--dry-run' ] && echo 'DRY RUN' || echo 'EXECUTE' )"
     echo ""
 
     TEMP_DIR=$(mktemp -d)
     trap "rm -rf $TEMP_DIR" EXIT
+
+    # Save source repo remotes (git-filter-repo removes them from clones,
+    # and local clones share objects via hardlinks which can cause side effects)
+    SRC_REMOTES_FILE="$TEMP_DIR/src-remotes.txt"
+    (cd "$REPO_SRC" && git remote -v > "$SRC_REMOTES_FILE" 2>/dev/null)
 
     ERRORS=0
     MIRRORED=0
@@ -1088,7 +1091,7 @@ mirror-dirs REPO_SRC REPO_DST DIRS_FILE DRY_RUN="--dry-run":
         DIR_SLUG=$(echo "$DIR" | tr '/' '-')
         FILTERED="$TEMP_DIR/filtered-$DIR_SLUG"
         rm -rf "$FILTERED"
-        if ! git clone --no-tags "$REPO_SRC" "$FILTERED" 2>/dev/null; then
+        if ! git clone --no-tags --no-local "$REPO_SRC" "$FILTERED" 2>/dev/null; then
             echo "  ERROR: Failed to clone source repo"
             ERRORS=$((ERRORS + 1))
             continue
@@ -1190,7 +1193,7 @@ mirror-dirs REPO_SRC REPO_DST DIRS_FILE DRY_RUN="--dry-run":
             fi
         fi
 
-        if [ "{{DRY_RUN}}" = "--dry-run" ]; then
+        if [ "{{ DRY_RUN }}" = "--dry-run" ]; then
             echo "  DRY RUN: Would merge $FILTERED_COUNT commits for $DIR"
             cd "$FILTERED"
             git log --oneline | head -5
@@ -1217,15 +1220,31 @@ mirror-dirs REPO_SRC REPO_DST DIRS_FILE DRY_RUN="--dry-run":
         rm -rf "$FILTERED"
     done
 
+    # Restore source repo remotes if any were removed
+    cd "$REPO_SRC"
+    while IFS= read -r line; do
+        [ -z "$line" ] && continue
+        REMOTE_NAME=$(echo "$line" | awk '{print $1}')
+        REMOTE_URL=$(echo "$line" | awk '{print $2}')
+        REMOTE_TYPE=$(echo "$line" | awk '{print $3}')
+        # Only process fetch entries to avoid duplicates
+        if [ "$REMOTE_TYPE" = "(fetch)" ]; then
+            if ! git remote get-url "$REMOTE_NAME" >/dev/null 2>&1; then
+                git remote add "$REMOTE_NAME" "$REMOTE_URL"
+                echo "  Restored remote: $REMOTE_NAME → $REMOTE_URL"
+            fi
+        fi
+    done < "$SRC_REMOTES_FILE"
+
     echo ""
     echo "=== Summary ==="
     echo "Mirrored: $MIRRORED"
     echo "Skipped:  $SKIPPED"
     echo "Errors:   $ERRORS"
-    if [ "{{DRY_RUN}}" = "--dry-run" ]; then
+    if [ "{{ DRY_RUN }}" = "--dry-run" ]; then
         echo ""
         echo "This was a dry run. To execute:"
-        echo "  just mirror-dirs {{REPO_SRC}} {{REPO_DST}} {{DIRS_FILE}} \"\""
+        echo "  just mirror-dirs {{ REPO_SRC }} {{ REPO_DST }} {{ DIRS_FILE }} \"\""
     fi
     [ "$ERRORS" -gt 0 ] && exit 1 || exit 0
 
@@ -1237,7 +1256,7 @@ mirror-dirs REPO_SRC REPO_DST DIRS_FILE DRY_RUN="--dry-run":
 #         -p 63000:8000 \
 #         -e JOSH_REMOTE=https://github.com \
 #         dockerproxy.net/joshproject/josh-proxy:latestS
-#
+
 josh-proxy:
     #!/usr/bin/env bash
     mkdir -p ~/.josh
@@ -1248,20 +1267,20 @@ josh-proxy:
 josh WHERE USER REPO DIR:
     #!/usr/bin/env bash
     cd ~/projects/
-    git clone http://localhost:63000/{{USER}}/{{REPO}}.git:/{{DIR}}.git {{WHERE}}
-    cd {{WHERE}}
+    git clone http://localhost:63000/{{ USER }}/{{ REPO }}.git:/{{ DIR }}.git {{ WHERE }}
+    cd {{ WHERE }}
     git remote rename origin origin_josh || true
-    echo 'cd ~/projects/{{WHERE}} && git remote add origin https://github.com/{{USER}}/NEW_REPO_NAME.git'
+    echo 'cd ~/projects/{{ WHERE }} && git remote add origin https://github.com/{{ USER }}/NEW_REPO_NAME.git'
     echo 'gh auth setup-git'
     echo 'git push -u origin BRANCH'
 
 ## Notebook
 
 nbview FILE:
-    uvx euporie notebook {{FILE}}
+    uvx euporie notebook {{ FILE }}
 
 # https://github.com/livebook-dev/livebook#installation
-#
+
 prep-lb:
     #!/usr/bin/env bash
     mix do local.rebar --force, local.hex --force
@@ -1271,13 +1290,12 @@ lb:
     LIVEBOOK_IFRAME_PORT=58081 livebook server --port 58080
 
 ## Music
-
 # https://www.reddit.com/r/youtubedl/comments/155kkcc/youtube_music_how/
-#
+
 ytm PLAYLIST:
     #!/usr/bin/env bash
     cd ~/Music
-    uvx --with 'mutagen' yt-dlp -f bestaudio --cookies-from-browser chrome -x --embed-metadata --embed-thumbnail '{{PLAYLIST}}' --output '%(uploader)s/%(title)s.%(ext)s'
+    uvx --with 'mutagen' yt-dlp -f bestaudio --cookies-from-browser chrome -x --embed-metadata --embed-thumbnail '{{ PLAYLIST }}' --output '%(uploader)s/%(title)s.%(ext)s'
 
 prep-music:
     which cmus || brew install cmus
@@ -1297,7 +1315,7 @@ prep-music:
 # p to play/pause, <> for previous/next song, -+ for volume
 # fn+backspace can be used as delete, useful to delete a song from the playlist
 # 8 is visualization, space to switch visualization type
-#
+
 music:
     #!/usr/bin/env bash
     cd ~/Music
@@ -1317,9 +1335,9 @@ prep-tm:
 # m to change play mode, r to random
 # Ctrl+H for help
 # no visualization
-#
+
 tm *PARAMS="":
-    termusic {{PARAMS}}
+    termusic {{ PARAMS }}
 
 prep-ym:
     [ -d /Applications/YesPlayMusic.app ] || brew install --cask yesplaymusic
@@ -1332,16 +1350,13 @@ prep-ym:
 #     # it doesn't support free spotify accounts
 #     # which ncspot || brew install ncspot
 #     which code-radio || cargo install code-radio-cli
-
 # music:
 #     code-radio --no-logo --volume 5
-
 ## Tiling
-
 # I'v configured it to use double tap opt then hold to trigger the radial menu
 # direction keys to place the window in 8 directions, space to maximize, enter to center
 # It's so smooth
-#
+
 prep-loop:
     #!/usr/bin/env bash
     [ -d /Applications/Loop.app ] || brew install loop
@@ -1353,7 +1368,7 @@ prep-space:
 ## File
 
 tree DIR="." LEVEL="1":
-    eza --git -T -L {{LEVEL}} --hyperlink {{DIR}}
+    eza --git -T -L {{ LEVEL }} --hyperlink {{ DIR }}
 
 # https://yazi-rs.github.io/docs/quick-start#keybindings
 # ~ - get help
@@ -1368,10 +1383,10 @@ tree DIR="." LEVEL="1":
 # d - trash
 # D - delete
 # cc - copy file path; cd - copy directory; cf - copy filename; cn - copy filename w/o ext
-#
+
 yazi DIR="$HOME/projects":
     #!/usr/bin/env bash
-    EDITOR=hx yazi {{DIR}}
+    EDITOR=hx yazi {{ DIR }}
 
 # https://github.com/Canop/broot/blob/main/website/docs/tricks.md
 #
@@ -1383,7 +1398,7 @@ yazi DIR="$HOME/projects":
 #     e - open file in helix
 #     pp - print file path, useful for `cmd $(br)`, don't hit enter, helix won't show, you need to type `:q` blindly to quit helix
 #     up - go to parent
-#
+
 prep-br:
     which broot || brew install broot
     mkdir -p ~/.config/broot/
@@ -1404,7 +1419,7 @@ prep-br:
 # See dotfiles/.config/marta/marta.marco for configuration (Cmd+, then copy-paste it)
 # e.g. Cmd+Opt+G to lauch Ghostty from the current directory
 # use the first letter to copy, move, rename, new folder, trash, delete etc.
-#
+
 prep-file:
     #!/usr/bin/env bash
     [ -d /Applications/Marta.app ] || brew install --cask marta
@@ -1412,7 +1427,7 @@ prep-file:
 
 file LEFT RIGHT:
     #!/usr/bin/env bash
-    marta --new-window {{LEFT}} {{RIGHT}}
+    marta --new-window {{ LEFT }} {{ RIGHT }}
 
 icloud:
     just file '~/Downloads' '~/Library/Mobile\ Documents/com~apple~CloudDocs'
@@ -1421,6 +1436,7 @@ icloud:
 # but actually https://github.com/Marcuzzz/homebrew-marcstap/blob/master/Casks/freefilesync.rb proves that it could work
 # It's POC only, as this is outdated
 #
+
 # POC to install FreeFileSync (outdated)
 prep-ffs:
     # According to the issue, as long as you open the download page, the following download will pass for a few days
@@ -1428,9 +1444,9 @@ prep-ffs:
     brew install Marcuzzz/homebrew-marcstap/freefilesync
 
 # https://bhoot.dev/2025/cp-dot-copies-everything/
-#
+
 cp SRC DST:
-    cp -R {{SRC}}/. {{DST}}
+    cp -R {{ SRC }}/. {{ DST }}
 
 prep-rsync:
     which rsync || apt install rsync || sudo apt install rsync || brew install rsync
@@ -1447,34 +1463,35 @@ prep-rsync:
 # -W or --whole-file - for fast network, skip delta check, to speed up
 # --copy-links - if wish to copy symlinked target file
 # works as expected if both dirs end with /
-#
+
 rsync SRC DST *PARAMS="--dry-run":
-    uvx rsyncy --perms --times --recursive --verbose --partial {{PARAMS}} {{SRC}} {{DST}}
+    uvx rsyncy --perms --times --recursive --verbose --partial {{ PARAMS }} {{ SRC }} {{ DST }}
 
 prep-jw:
     which jw || cargo install --git https://github.com/utensil/jw --branch fixed-order jw
     # (yes|cargo binstall jw)
 
 # AGENT-NOTE: check-dirs now writes hash files to /tmp/jw/ with timestamped, descriptive names (e.g. /tmp/jw/<timestamp>-left-<leftdirname>.hash.jw)
+
 # This avoids polluting or failing on read-only source/dest dirs, and is safe for diffing.
 check-dirs SRC DST *PARAMS="-l -p":
     #!/usr/bin/env bash
     # AGENT-NOTE: Writes hash files to /tmp/jw/ to avoid polluting or failing on read-only source/dest dirs
     set -e
-    uv run ./check-dirs.py "{{SRC}}" "{{DST}}" {{PARAMS}}
+    uv run ./check-dirs.py "{{ SRC }}" "{{ DST }}" {{ PARAMS }}
 
 # lms sync -n SRC DST
 # -n - no delete
-#
+
 prep-lms-sync:
     which lms || cargo install lms
 
 sync-dirs SRC DST:
     #!/usr/bin/env bash
     set -e
-    just rsync {{SRC}} {{DST}} --whole-file
-    # lms sync -n {{SRC}} {{DST}}
-    just check-dirs {{SRC}} {{DST}} -l -p
+    just rsync {{ SRC }} {{ DST }} --whole-file
+    # lms sync -n {{ SRC }} {{ DST }}
+    just check-dirs {{ SRC }} {{ DST }} -l -p
 
 prep-termscp:
     which termscp || brew install termscp
@@ -1489,9 +1506,9 @@ prep-ag:
     # just sync-hx
 
 # just ag '\query{$$$}'
-#
+
 ag PAT LANG="forester" DIR="trees":
-    ast-grep run --config dotfiles/.config/ast-grep/sgconfig.yml --lang {{LANG}} -p '{{PAT}}' {{DIR}}
+    ast-grep run --config dotfiles/.config/ast-grep/sgconfig.yml --lang {{ LANG }} -p '{{ PAT }}' {{ DIR }}
 
 prep-semgrep:
     which semgrep || brew install semgrep
@@ -1499,11 +1516,10 @@ prep-semgrep:
 semscan:
     semgrep scan --config "p/default" --config "p/trailofbits"
 
-
 # https://www.howtogeek.com/803598/app-is-damaged-and-cant-be-opened/
-#
+
 uq APP_PATH:
-    xattr -d com.apple.quarantine {{APP_PATH}}
+    xattr -d com.apple.quarantine {{ APP_PATH }}
 
 ## Info and chat
 
@@ -1511,12 +1527,12 @@ prep-irc:
     which weechat || brew install weechat
 
 irc CHANNEL:
-    weechat irc://utensil@irc.libera.chat/#{{CHANNEL}}
+    weechat irc://utensil@irc.libera.chat/#{{ CHANNEL }}
 
 # Add a config to ~/Library/Application Support/iamb/config.toml per https://iamb.chat/configure.html
 # Login via SSO on element
 # Verify by `:verify`, comparing emoji on element, and copy-paste the `:verify confirm USER/DEVICE` command on iamb
-#
+
 prep-im:
     which iamb || brew install iamb
 
@@ -1549,9 +1565,10 @@ prep-hk:
     cp -f dotfiles/.config/hn-tui.toml ~/.config/
 
 # -i ITEM
+
 # Open HackerNews TUI
 hk *PARAMS:
-    hackernews_tui {{PARAMS}}
+    hackernews_tui {{ PARAMS }}
 
 import 'dotfiles/llm.just'
 import 'dotfiles/archived.just'
@@ -1559,17 +1576,13 @@ import 'dotfiles/archived.just'
 # Error: Your Xcode (15.4) at /Applications/Xcode.app is too outdated.
 # Please update to Xcode 16.0 (or delete it).
 # Xcode can be updated from the App Store.
-
 # Error: Your Command Line Tools are too outdated.
 # Update them from Software Update in System Settings.
-
 # If that doesn't show you any updates, run:
 #   sudo rip /Library/Developer/CommandLineTools
 #   sudo xcode-select --install
-
 # Alternatively, manually download them from:
 #   https://developer.apple.com/download/all/.
 # You should download the Command Line Tools for Xcode 16.0.
-
 # Error: You have not agreed to the Xcode license. Please resolve this by running:
 #   sudo xcodebuild -license accept
