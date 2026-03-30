@@ -600,6 +600,9 @@ prep-bwrap:
 prep-claude:
     bun add -g @anthropic-ai/claude-code
 
+prep-gemini:
+    bun add -g @google/gemini-cli
+
 prep-oc:
     #!/usr/bin/env bash
     which opencode || npm install -g opencode-ai
