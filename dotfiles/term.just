@@ -239,6 +239,9 @@ prep-ssh-agent:
     echo "SSH agent ready. Keys loaded:"
     ssh-add -l
 
+prep-sshpass:
+    which sshpass || brew install hudochenkov/sshpass/sshpass
+
 prep-git:
     #!/usr/bin/env bash
     which git || brew install git
