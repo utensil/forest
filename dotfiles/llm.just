@@ -558,7 +558,7 @@ cc PROJ="forest" *PARAMS="":
     export ANTHROPIC_BASE_URL=$OPENAI_API_BASE ANTHROPIC_AUTH_TOKEN=$OPENAI_API_KEY ANTHROPIC_MODEL=$OPENAI_API_MODEL ANTHROPIC_SMALL_FAST_MODEL=$OPENAI_API_MODEL_FAST && claude
 
 prep-codex:
-    npm install -g @openai/codex
+    bun add -g @openai/codex
 
 codex *PARAMS:
     #!/usr/bin/env bash
@@ -596,6 +596,9 @@ prep-amp:
 
 prep-bwrap:
     which bwrap || brew install bubblewrap
+
+prep-claude:
+    bun add -g @anthropic-ai/claude-code
 
 prep-oc:
     #!/usr/bin/env bash
