@@ -4,9 +4,6 @@ source $HOME/.envrc
 
 (which starship > /dev/null) && eval "$(starship init zsh)"
 
-(which zoxide > /dev/null) && eval "$(zoxide init zsh)"
-alias cd="z"
-
 # up arrow or ctrl+r - atuin history TUI
 # (which atuin > /dev/null) && eval "$(atuin init zsh)"
 # keep ussual up arrow
@@ -24,3 +21,5 @@ source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zs
 
 # zprof
 
+(which zoxide > /dev/null) && eval "$(zoxide init zsh)"
+alias cd="z"
