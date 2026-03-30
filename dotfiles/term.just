@@ -159,7 +159,7 @@ log-gt:
     sudo log stream --level debug --predicate 'subsystem=="com.mitchellh.ghostty"'
 
 prep-cmux:
-    which cmux || (brew tap manaflow-ai/cmux && brew install --cask cmux)
+    which cmux && brew upgrade --cask cmux || (brew tap manaflow-ai/cmux && brew install --cask cmux)
     cp -f ~/.config/ghostty/config "/Users/utensil/Library/Application Support/com.mitchellh.ghostty/config"
 
 ## Shell setup
