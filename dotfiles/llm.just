@@ -202,15 +202,23 @@ gom-reset:
 om:
     ollama serve
 
+# https://github.com/jundot/omlx
+#
 prep-ox:
-    which omlx || (brew tap jundot/omlx https://github.com/jundot/omlx && brew install omlx)
+    #!/usr/bin/env bash
+    if [ ! -d ~/projects/omlx ]; then
+        git clone https://github.com/jundot/omlx.git ~/projects/omlx
+    else
+        (cd ~/projects/omlx && git pull)
+    fi
+    cd ~/projects/omlx && uv sync
 
 ox-vm VM:
     #!/usr/bin/env bash
     VM_IP=$(lume ls | grep {{VM}} | grep -oE '192\.[0-9]+\.[0-9]+\.[0-9]+')
     HOST_IP=$(echo $VM_IP | sed 's/\.[0-9]*$/.1/')
     echo "Admin UI: http://$HOST_IP:8000/admin"
-    omlx serve --host $HOST_IP
+    cd ~/projects/omlx && source .venv/bin/activate && omlx serve --host $HOST_IP
 
 ox4 *ARGS:
     env -u HTTP_PROXY -u HTTPS_PROXY -u http_proxy -u https_proxy omlx launch {{ARGS}}
