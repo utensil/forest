@@ -1,0 +1,32 @@
+services:
+  lody-box:
+    build: .
+    image: lody-box:latest
+    container_name: lody-box
+    restart: unless-stopped
+    stdin_open: true
+    tty: true
+    env_file: .env
+    volumes:
+      # Working repos — bind-mount so host files are directly accessible
+      - ${WORKSPACE_PATH:-./workspace}:/workspace
+
+      # Agent auth/state — named volumes so auth persists across rebuilds
+      - lody-auth:/root/.lody
+      - claude-auth:/root/.claude
+      - codex-auth:/root/.codex
+      - gemini-auth:/root/.gemini
+
+      # Bun global installs and cache
+      - bun-data:/root/.bun
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+
+volumes:
+  lody-auth:
+  claude-auth:
+  codex-auth:
+  gemini-auth:
+  bun-data:
