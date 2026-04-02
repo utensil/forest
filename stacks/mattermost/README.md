@@ -10,7 +10,7 @@ Tailscale (phone / laptop)
         |
         | :8065  (via Tailscale IP of the VM)
         ▼
-macOS VM  ──nginx reverse proxy──▶  192.168.64.1:8065
+macOS VM  ──nginx reverse proxy──▶  <HOST_BRIDGE_IP>:8065
                                             |
                                      macOS HOST (Colima)
                                       ┌────────────────┐
@@ -43,7 +43,7 @@ docker compose up -d
 docker compose logs -f
 ```
 
-Open `http://192.168.64.1:8065` from the macOS VM to complete the Setup Wizard.
+Open `http://<HOST_BRIDGE_IP>:8065` from the macOS VM to complete the Setup Wizard.
 
 ### Step 2 — node-a VM: nginx reverse proxy for Tailscale access
 
@@ -54,7 +54,7 @@ Install nginx on the macOS VM and proxy Tailscale IP → HOST bridge:
 server {
     listen <NODE_A_TAILSCALE_IP>:8065;
     location / {
-        proxy_pass http://192.168.64.1:8065;
+        proxy_pass http://<HOST_BRIDGE_IP>:8065;
         proxy_http_version 1.1;
         proxy_set_header Upgrade $http_upgrade;
         proxy_set_header Connection "upgrade";
@@ -81,7 +81,7 @@ and use the node-b Tailscale IP in `MM_SERVICESETTINGS_SITEURL`.
 
 ```bash
 # Run on node-a macOS VM (keep alive, or add to launchd)
-ssh -N -R 0.0.0.0:5433:192.168.64.1:5432 lume@<NODE_B_TAILSCALE_IP> \
+ssh -N -R 0.0.0.0:5433:<HOST_BRIDGE_IP>:5432 <USER>@<NODE_B_TAILSCALE_IP> \
   -o ServerAliveInterval=10 -o ExitOnForwardFailure=yes
 ```
 
@@ -98,7 +98,7 @@ pg_ctl stop -D "$PGDATA"
 rm -rf "$PGDATA"/*
 
 PGPASSWORD=<POSTGRES_REPLICATION_PASSWORD> \
-  pg_basebackup -h 192.168.64.1 -p 5433 -U replicator \
+  pg_basebackup -h <HOST_BRIDGE_IP> -p 5433 -U replicator \
     -D "$PGDATA" -Fp -Xs -P -R
 # -R writes standby.signal + primary_conninfo automatically
 
@@ -132,13 +132,13 @@ pg_ctl stop -D "$PGDATA"
 PGPASSWORD=<POSTGRES_REPLICATION_PASSWORD> \
   pg_rewind \
     --target-pgdata="$PGDATA" \
-    --source-server="host=192.168.64.1 port=5433 user=replicator dbname=postgres" \
+    --source-server="host=<HOST_BRIDGE_IP> port=5433 user=replicator dbname=postgres" \
     -P
 
 # Write standby.signal and update primary_conninfo
 touch "$PGDATA/standby.signal"
 cat >> "$PGDATA/postgresql.conf" <<EOF
-primary_conninfo = 'host=192.168.64.1 port=5433 user=replicator password=<REPL_PW>'
+primary_conninfo = 'host=<HOST_BRIDGE_IP> port=5433 user=replicator password=<REPL_PW>'
 EOF
 
 pg_ctl start -D "$PGDATA"
@@ -177,7 +177,7 @@ Add to `~/.openclaw/openclaw.json`:
 ## Security notes
 
 - PostgreSQL port (`5432`) is bound to `0.0.0.0` inside Colima but only reachable
-  from the macOS HOST via the bridge (`192.168.64.1`). Use `pf` if you want to
+  from the macOS HOST via the bridge (`<HOST_BRIDGE_IP>`). Use `pf` if you want to
   restrict it further (see kopia sstore lesson).
 - Mattermost port (`8065`) is similarly only accessible via bridge from the VM;
   the VM's nginx reverse proxy controls Tailscale exposure.
