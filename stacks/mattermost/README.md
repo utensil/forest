@@ -1,7 +1,7 @@
 # Mattermost Stack
 
 Self-hosted Mattermost (Team Edition) with PostgreSQL, designed for a two-node
-primary/standby setup across macOS hosts (mimi + clawlet) running Colima Docker.
+primary/standby setup across two macOS hosts running Colima Docker.
 
 ## Architecture
 
@@ -18,16 +18,16 @@ macOS VM  ──nginx reverse proxy──▶  192.168.64.1:8065
                                       │  postgres:5432 │
                                       └────────────────┘
 
-Two hosts: mimi (primary) and clawlet (standby).
+Two hosts: node-a (primary) and node-b (standby).
 PostgreSQL streaming replication is tunnelled over SSH between the two VMs.
 ```
 
 ## Steps
 
-### Step 1 — mimi host: first run
+### Step 1 — node-a host: first run
 
 ```bash
-# On mimi macOS HOST (Colima must be running)
+# On the primary macOS HOST (Colima must be running)
 cd ~/projects/forest/stacks/mattermost
 cp .env.example .env
 # Edit .env: set POSTGRES_PASSWORD, POSTGRES_REPLICATION_PASSWORD, MM_SERVICESETTINGS_SITEURL
@@ -43,16 +43,16 @@ docker compose up -d
 docker compose logs -f
 ```
 
-Open `http://192.168.64.1:8065` from the mimi macOS VM to complete the Setup Wizard.
+Open `http://192.168.64.1:8065` from the macOS VM to complete the Setup Wizard.
 
-### Step 2 — mimi VM: nginx reverse proxy for Tailscale access
+### Step 2 — node-a VM: nginx reverse proxy for Tailscale access
 
-Install nginx on the mimi macOS VM and proxy Tailscale IP → HOST bridge:
+Install nginx on the macOS VM and proxy Tailscale IP → HOST bridge:
 
 ```nginx
 # /etc/nginx/conf.d/mattermost.conf  (or Homebrew nginx equivalent)
 server {
-    listen <MIMI_TAILSCALE_IP>:8065;
+    listen <NODE_A_TAILSCALE_IP>:8065;
     location / {
         proxy_pass http://192.168.64.1:8065;
         proxy_http_version 1.1;
@@ -64,12 +64,12 @@ server {
 }
 ```
 
-Access from phone/laptop: `http://<MIMI_TAILSCALE_IP>:8065`
+Access from phone/laptop: `http://<NODE_A_TAILSCALE_IP>:8065`
 
-### Step 3 — clawlet host: second node
+### Step 3 — node-b host: second node
 
-Same as Step 1 on clawlet's HOST, but set `POSTGRES_ROLE=standby` in `.env`
-and use the clawlet Tailscale IP in `MM_SERVICESETTINGS_SITEURL`.
+Same as Step 1 on the standby HOST, but set `POSTGRES_ROLE=standby` in `.env`
+and use the node-b Tailscale IP in `MM_SERVICESETTINGS_SITEURL`.
 
 > **Note:** On the standby node, start only postgres first (comment out the
 > mattermost service). PostgreSQL streaming replication must be set up before
@@ -77,23 +77,23 @@ and use the clawlet Tailscale IP in `MM_SERVICESETTINGS_SITEURL`.
 
 ### Step 4 — Set up PostgreSQL streaming replication
 
-#### On mimi VM: open a reverse SSH tunnel so clawlet can reach mimi's PG
+#### On node-a VM: open a reverse SSH tunnel so node-b can reach node-a's PG
 
 ```bash
-# Run on mimi macOS VM (keep alive, or add to launchd)
-ssh -N -R 0.0.0.0:5433:192.168.64.1:5432 lume@<CLAWLET_TAILSCALE_IP> \
+# Run on node-a macOS VM (keep alive, or add to launchd)
+ssh -N -R 0.0.0.0:5433:192.168.64.1:5432 lume@<NODE_B_TAILSCALE_IP> \
   -o ServerAliveInterval=10 -o ExitOnForwardFailure=yes
 ```
 
-This exposes mimi's PG as `localhost:5433` on clawlet VM (and its HOST via bridge).
+This exposes node-a's PG as `localhost:5433` on node-b VM (and its HOST via bridge).
 
-#### On clawlet HOST: base backup from mimi
+#### On node-b HOST: base backup from node-a
 
 ```bash
-# Inside clawlet's postgres container (or via docker exec)
+# Inside node-b's postgres container (or via docker exec)
 docker exec -it mattermost-postgres bash
 
-# Stop postgres, wipe data, take base backup from mimi primary
+# Stop postgres, wipe data, take base backup from node-a primary
 pg_ctl stop -D "$PGDATA"
 rm -rf "$PGDATA"/*
 
@@ -107,25 +107,25 @@ pg_ctl start -D "$PGDATA"
 
 Verify replication:
 ```sql
--- On mimi primary
+-- On node-a primary
 SELECT client_addr, state, sent_lsn, write_lsn, flush_lsn, replay_lsn
 FROM pg_stat_replication;
 ```
 
 ### Step 5 — Failover & pg_rewind
 
-#### Promote clawlet standby to primary
+#### Promote node-b standby to primary
 
 ```bash
 docker exec mattermost-postgres pg_ctl promote -D "$PGDATA"
 ```
 
-Then update `.env` on clawlet: `POSTGRES_ROLE=primary` and restart Mattermost.
+Then update `.env` on node-b: `POSTGRES_ROLE=primary` and restart Mattermost.
 
-#### Rejoin old primary (mimi) as new standby using pg_rewind
+#### Rejoin old primary (node-a) as new standby using pg_rewind
 
 ```bash
-# On mimi HOST, after clawlet is new primary:
+# On node-a HOST, after node-b is the new primary:
 docker exec -it mattermost-postgres bash
 
 pg_ctl stop -D "$PGDATA"
@@ -146,11 +146,11 @@ pg_ctl start -D "$PGDATA"
 
 ## Ports
 
-| Service    | Container port | Host port (configurable) |
-|------------|---------------|--------------------------|
-| Mattermost | 8065          | `APP_PORT` (default 8065)|
-| Mattermost calls | 8443   | `CALLS_PORT` (default 8443)|
-| PostgreSQL | 5432          | `POSTGRES_PORT` (default 5432)|
+| Service          | Container port | Host port (configurable)      |
+|------------------|---------------|-------------------------------|
+| Mattermost       | 8065          | `APP_PORT` (default 8065)     |
+| Mattermost calls | 8443          | `CALLS_PORT` (default 8443)   |
+| PostgreSQL       | 5432          | `POSTGRES_PORT` (default 5432)|
 
 ## OpenClaw Integration
 
