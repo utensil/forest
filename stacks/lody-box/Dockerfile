@@ -27,6 +27,11 @@ RUN bun add -g \
 
 WORKDIR /workspace
 
+# Entrypoint restores agent configs that live outside named volumes
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+ENTRYPOINT ["/entrypoint.sh"]
+
 # Default to bash — run agents explicitly:
 #   lody:        docker compose run lody-box lody start
 #   claude/codex/gemini: docker exec -it lody-box <agent>
