@@ -1098,6 +1098,9 @@ prep-aria2:
 prep-lume:
     which lume || /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/trycua/cua/main/libs/lume/scripts/install.sh)"
 
+update-lume:
+    lume-update
+
 ## SSH
 
 reset-ssh-keys:
