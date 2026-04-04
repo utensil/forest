@@ -7,11 +7,9 @@
 #   cp .env.example .env   # fill in secrets
 #   docker compose up -d
 #
-# Role is controlled by POSTGRES_ROLE (primary | standby).
-# When POSTGRES_ROLE=standby, Mattermost is started but connects to a read-only
-# replica; it will refuse writes from clients (PG returns read-only errors).
-# Mattermost on the standby node is kept running so it can serve existing
-# connections during failover and be promoted quickly.
+# Node role (primary | standby) is documentation-only and not wired into
+# container behaviour. The standby becomes read-only via standby.signal written
+# by pg_basebackup -R; see README for the full replication setup procedure.
 
 services:
   postgres:
@@ -35,7 +33,8 @@ services:
       - POSTGRES_USER
       - POSTGRES_PASSWORD
       - POSTGRES_DB
-      # Allow replication connections from the standby
+      # Passed through to initdb/01-replication.sh on first DB init.
+      - POSTGRES_REPLICATION_PASSWORD
       - POSTGRES_INITDB_ARGS=--auth-host=scram-sha-256
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]

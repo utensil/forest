@@ -39,4 +39,7 @@ wal_level = replica
 max_wal_senders = 5
 wal_keep_size = 256MB
 hot_standby = on
+# Required by pg_rewind (allows it to read pages that changed between divergence
+# and the point where the old primary stopped, without needing data checksums).
+wal_log_hints = on
 EOF
