@@ -1,0 +1,73 @@
+# Mattermost + PostgreSQL stack
+# Designed for single-node deployment on macOS host via Colima Docker.
+# Two instances (node-a primary, node-b standby) form a primary/standby pair
+# with PostgreSQL streaming replication tunnelled over SSH between VMs.
+#
+# Usage:
+#   cp .env.example .env   # fill in secrets
+#   docker compose up -d
+#
+# Node role (primary | standby) is documentation-only and not wired into
+# container behaviour. The standby becomes read-only via standby.signal written
+# by pg_basebackup -R; see README for the full replication setup procedure.
+
+services:
+  postgres:
+    image: postgres:${POSTGRES_IMAGE_TAG:-17-alpine}
+    container_name: mattermost-postgres
+    restart: ${RESTART_POLICY:-unless-stopped}
+    security_opt:
+      - no-new-privileges:true
+    mem_limit: 2G
+    read_only: true
+    tmpfs:
+      - /tmp
+      - /var/run/postgresql
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - ${POSTGRES_DATA_PATH}:/var/lib/postgresql/data
+      - ${POSTGRES_INIT_PATH:-./initdb}:/docker-entrypoint-initdb.d:ro
+    environment:
+      - TZ
+      - POSTGRES_USER
+      - POSTGRES_PASSWORD
+      - POSTGRES_DB
+      # Passed through to initdb/01-replication.sh on first DB init.
+      - POSTGRES_REPLICATION_PASSWORD
+      - POSTGRES_INITDB_ARGS=--auth-host=scram-sha-256
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+  mattermost:
+    depends_on:
+      postgres:
+        condition: service_healthy
+    image: mattermost/${MATTERMOST_IMAGE:-mattermost-team-edition}:${MATTERMOST_IMAGE_TAG:-10.11.8}
+    container_name: mattermost
+    restart: ${RESTART_POLICY:-unless-stopped}
+    security_opt:
+      - no-new-privileges:true
+    mem_limit: 2G
+    read_only: false
+    ports:
+      - "${APP_PORT:-8065}:8065"
+      - "${CALLS_PORT:-8443}:8443/udp"
+      - "${CALLS_PORT:-8443}:8443/tcp"
+    volumes:
+      - ${MATTERMOST_CONFIG_PATH}:/mattermost/config:rw
+      - ${MATTERMOST_DATA_PATH}:/mattermost/data:rw
+      - ${MATTERMOST_LOGS_PATH}:/mattermost/logs:rw
+      - ${MATTERMOST_PLUGINS_PATH}:/mattermost/plugins:rw
+      - ${MATTERMOST_CLIENT_PLUGINS_PATH}:/mattermost/client/plugins:rw
+      - ${MATTERMOST_BLEVE_INDEXES_PATH}:/mattermost/bleve-indexes:rw
+    environment:
+      - TZ
+      - MM_SQLSETTINGS_DRIVERNAME=postgres
+      - MM_SQLSETTINGS_DATASOURCE=postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}?sslmode=disable&connect_timeout=10
+      - MM_BLEVESETTINGS_INDEXDIR=/mattermost/bleve-indexes
+      - MM_SERVICESETTINGS_SITEURL=${MM_SERVICESETTINGS_SITEURL}
