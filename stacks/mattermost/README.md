@@ -68,8 +68,15 @@ Access from phone/laptop: `http://<NODE_A_TAILSCALE_IP>:8065`
 
 ### Step 3 — node-b host: second node
 
-Same as Step 1 on the standby HOST, but set `POSTGRES_ROLE=standby` in `.env`
-and use the node-b Tailscale IP in `MM_SERVICESETTINGS_SITEURL`.
+Same as Step 1 on the standby HOST, use the node-b Tailscale IP in
+`MM_SERVICESETTINGS_SITEURL`.
+
+> **Note on `POSTGRES_ROLE`:** This variable is informational — it documents intent
+> but does not change container behaviour. The standby becomes read-only via
+> `standby.signal` written by `pg_basebackup -R`, not via this variable.
+> The `initdb/01-replication.sh` script (which creates the replicator role and WAL
+> settings) should only be present on the primary node's `./initdb/` directory;
+> on the standby, omit or remove it.
 
 > **Note:** On the standby node, start only postgres first (comment out the
 > mattermost service). PostgreSQL streaming replication must be set up before
@@ -80,12 +87,16 @@ and use the node-b Tailscale IP in `MM_SERVICESETTINGS_SITEURL`.
 #### On node-a VM: open a reverse SSH tunnel so node-b can reach node-a's PG
 
 ```bash
-# Run on node-a macOS VM (keep alive, or add to launchd)
-ssh -N -R 0.0.0.0:5433:<HOST_BRIDGE_IP>:5432 <USER>@<NODE_B_TAILSCALE_IP> \
+# Run on node-a macOS VM (keep alive, or add to launchd).
+# -R binds on 127.0.0.1 only (loopback) on the remote side, matching the
+# 127.0.0.1/32 pg_hba rule in initdb/01-replication.sh.
+ssh -N -R 127.0.0.1:5433:<HOST_BRIDGE_IP>:5432 <USER>@<NODE_B_TAILSCALE_IP> \
   -o ServerAliveInterval=10 -o ExitOnForwardFailure=yes
 ```
 
-This exposes node-a's PG as `localhost:5433` on node-b VM (and its HOST via bridge).
+This exposes node-a's PG as `127.0.0.1:5433` on node-b VM.
+The tunnel arrives on loopback, which matches the `127.0.0.1/32` replication entry
+in `pg_hba.conf` — no wider network exposure is needed.
 
 #### On node-b HOST: base backup from node-a
 
@@ -98,7 +109,7 @@ pg_ctl stop -D "$PGDATA"
 rm -rf "$PGDATA"/*
 
 PGPASSWORD=<POSTGRES_REPLICATION_PASSWORD> \
-  pg_basebackup -h <HOST_BRIDGE_IP> -p 5433 -U replicator \
+  pg_basebackup -h 127.0.0.1 -p 5433 -U replicator \
     -D "$PGDATA" -Fp -Xs -P -R
 # -R writes standby.signal + primary_conninfo automatically
 
@@ -120,25 +131,32 @@ FROM pg_stat_replication;
 docker exec mattermost-postgres pg_ctl promote -D "$PGDATA"
 ```
 
-Then update `.env` on node-b: `POSTGRES_ROLE=primary` and restart Mattermost.
+Then start Mattermost on node-b (`docker compose up -d mattermost`).
 
 #### Rejoin old primary (node-a) as new standby using pg_rewind
 
+`pg_rewind` requires superuser access (or the `pg_rewind` privilege on PG 14+).
+Use `$POSTGRES_USER` (the superuser created at DB init), not the replicator role.
+
 ```bash
-# On node-a HOST, after node-b is the new primary:
+# On node-a HOST, after node-b is the new primary.
+# First ensure the SSH tunnel runs from node-b VM to node-a VM (reverse direction):
+#   ssh -N -R 127.0.0.1:5433:<HOST_BRIDGE_IP>:5432 <USER>@<NODE_A_TAILSCALE_IP>
 docker exec -it mattermost-postgres bash
 
 pg_ctl stop -D "$PGDATA"
-PGPASSWORD=<POSTGRES_REPLICATION_PASSWORD> \
+
+# Use the superuser (POSTGRES_USER) for pg_rewind, not the replicator role.
+PGPASSWORD=<POSTGRES_PASSWORD> \
   pg_rewind \
     --target-pgdata="$PGDATA" \
-    --source-server="host=<HOST_BRIDGE_IP> port=5433 user=replicator dbname=postgres" \
+    --source-server="host=127.0.0.1 port=5433 user=${POSTGRES_USER} dbname=postgres" \
     -P
 
-# Write standby.signal and update primary_conninfo
+# Write standby.signal and update primary_conninfo (replicator is fine here).
 touch "$PGDATA/standby.signal"
 cat >> "$PGDATA/postgresql.conf" <<EOF
-primary_conninfo = 'host=<HOST_BRIDGE_IP> port=5433 user=replicator password=<REPL_PW>'
+primary_conninfo = 'host=127.0.0.1 port=5433 user=replicator password=<POSTGRES_REPLICATION_PASSWORD>'
 EOF
 
 pg_ctl start -D "$PGDATA"
