@@ -512,12 +512,10 @@ prep-rad:
     set -e
     export PATH="$HOME/.radicle/bin:$PATH"
     # which rad || (curl -sSf https://radicle.xyz/install | sh -s -- --no-modify-path) # -s -- --prefix=~/.local)
-    which rad || (
-        cargo install --force --locked --root ~/.radicle \
+    cargo install --force --locked --root ~/.radicle \
         --git https://seed.radicle.xyz/z3gqcJUoA1n9HaHKufZs5FCSGazv5.git \
         radicle-cli radicle-node radicle-remote-helper
-    )
-    which rad-tui || cargo install --force --locked --git https://seed.radicle.xyz/z39mP9rQAaGmERfUMPULfPUi473tY.git
+    cargo install --force --locked --git https://seed.radicle.xyz/z39mP9rQAaGmERfUMPULfPUi473tY.git
     rad auth
     rad self
     rad node start
