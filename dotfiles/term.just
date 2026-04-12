@@ -521,6 +521,9 @@ prep-rad:
     rad node start
     rad node status
 
+prep-rad-gui:
+    curl --output ~/Downloads/radicle-desktop-aarch64-latest.dmg https://files.radicle.xyz/releases/radicle-desktop/latest/radicle-desktop-aarch64.dmg && open ~/Downloads/radicle-desktop-aarch64-latest.dmg
+
 [macos]
 prep-rad-httpd:
     #!/usr/bin/env bash
@@ -529,11 +532,9 @@ prep-rad-httpd:
     # rip radicle-httpd-$TARGET.tar.xz
     # curl -O -L https://files.radicle.xyz/releases/radicle-httpd/latest/radicle-httpd-$TARGET.tar.xz
     # tar -xvJf radicle-httpd-$TARGET.tar.xz --strip-components=1 -C ~/.radicle/)
-    which radicle-httpd || (
-        cargo install --force --locked --root ~/.radicle \
+    cargo install --force --locked --root ~/.radicle \
         --git https://seed.radicle.xyz/z4V1sjrXqjvFdnCUbxPFqd5p4DtH5.git \
         radicle-httpd
-    )
 
 # push with git push rad main
 #
