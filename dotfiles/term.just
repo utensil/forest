@@ -162,6 +162,9 @@ prep-cmux:
     which cmux && brew upgrade --cask cmux || (brew tap manaflow-ai/cmux && brew install --cask cmux)
     cp -f ~/.config/ghostty/config "/Users/utensil/Library/Application Support/com.mitchellh.ghostty/config"
 
+prep-paseo:
+    bun add -g @getpaseo/cli
+
 ## Shell setup
 
 prep-zsh:
