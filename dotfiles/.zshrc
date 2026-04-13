@@ -21,5 +21,6 @@ source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zs
 
 # zprof
 
+export _ZO_DOCTOR=0
 (which zoxide > /dev/null) && eval "$(zoxide init zsh)"
 alias cd="z"
