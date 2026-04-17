@@ -421,6 +421,10 @@ prep-def:
     # Set machine sleep to 5 minutes on battery
     sudo pmset -b sleep 5
 
+prep-switch:
+    [ -d /Applications/InstantSpaceSwitcher.app ] || brew install --cask jurplel/tap/instant-space-switcher
+    just uq /Applications/InstantSpaceSwitcher.app
+
 # A terminal-based battery and energy monitor for macOS and Linux.
 # But it crashes for now, issue: https://github.com/jordond/jolt/issues/114
 #
@@ -957,14 +961,14 @@ migrate-dir REPO_A DIR_A REPO_B DIR_B DRY_RUN="--dry-run":
     set -e
     TEMP_DIR=$(mktemp -d)
     trap "rm -rf $TEMP_DIR" EXIT
-    
+
     echo "=== Cloning repo A to temp location ==="
     git clone {{REPO_A}} $TEMP_DIR/filtered
-    
+
     cd $TEMP_DIR/filtered
     echo "=== Filtering to keep only {{DIR_A}} ==="
     git-filter-repo --path {{DIR_A}} --force
-    
+
     if [ "{{DIR_B}}" != "{{DIR_A}}" ] && [ "{{DIR_B}}" != "." ]; then
         echo "=== Renaming {{DIR_A}} to {{DIR_B}} ==="
         git-filter-repo --path-rename {{DIR_A}}:{{DIR_B}} --force
@@ -972,7 +976,7 @@ migrate-dir REPO_A DIR_A REPO_B DIR_B DRY_RUN="--dry-run":
         echo "=== Moving {{DIR_A}} to root ==="
         git-filter-repo --path-rename {{DIR_A}}: --force
     fi
-    
+
     if [ "{{DRY_RUN}}" = "--dry-run" ]; then
         echo ""
         echo "=== DRY RUN: Would merge into {{REPO_B}} ==="
@@ -988,7 +992,7 @@ migrate-dir REPO_A DIR_A REPO_B DIR_B DRY_RUN="--dry-run":
         git merge --allow-unrelated-histories temp-filtered/main -m "Migrate {{DIR_A}} from repo A"
         git remote remove temp-filtered
         echo "=== Migration complete ==="
-        
+
         echo ""
         echo "=== Cleanup repo A? ==="
         echo "This will:"
