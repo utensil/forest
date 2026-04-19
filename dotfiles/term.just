@@ -165,6 +165,9 @@ prep-cmux:
 prep-paseo:
     bun add -g @getpaseo/cli
 
+prep-stt:
+    brew install --cask kitlangton-hex
+
 ## Shell setup
 
 prep-zsh:
