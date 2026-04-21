@@ -320,6 +320,9 @@ git PROJ="forest" *PARAMS="":
     #!/usr/bin/env bash
     cd ~/projects/{{PROJ}} && lazygit {{PARAMS}}
 
+prep-gitu:
+    which gitu || cargo install gitu --locked
+
 # [NOTE] If modified, test with prep-gtsh
 #
 clone USER REPO:
