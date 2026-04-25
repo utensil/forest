@@ -909,6 +909,95 @@ drest:
 prep-kopia:
     which kopia || (brew install kopia; brew install --cask kopiaui)
 
+# Proxy a remote WebDAV server to localhost via SSH.
+# Exposes a WebDAV service running on a remote host (or VM) as a local
+# mount point accessible via Finder (⌘K) or mount_webdav.
+#
+# The remote WebDAV server may be bound to 127.0.0.1 (as is the case with
+# kopia mount --webdav, for example). The SSH port forwarding makes it accessible
+# locally without exposing it on any network interface.
+#
+# Usage:
+#   just webdav-proxy start user@host 55206        # start proxy
+#   just webdav-proxy start user@host 55206 8080   # custom local port
+#   just webdav-proxy stop                          # stop proxy
+#   just webdav-proxy status                        # check if running
+#
+# Then: Finder ⌘K → http://localhost:9876 (or custom local port)
+#   or: mount_webdav http://localhost:9876 /tmp/webdav-mnt
+webdav-proxy CMD="status" REMOTE="" REMOTE_PORT="" LOCAL_PORT="9876":
+    #!/usr/bin/env bash
+    PID_FILE=/tmp/webdav-proxy.pid
+    SSH_LOG=/tmp/webdav-proxy-ssh.log
+
+    _start() {
+        if [ -z "{{REMOTE}}" ] || [ -z "{{REMOTE_PORT}}" ]; then
+            echo "Usage: just webdav-proxy start <user@host> <remote-port> [local-port]"
+            exit 1
+        fi
+        if [ -f "$PID_FILE" ] && kill -0 "$(cat "$PID_FILE")" 2>/dev/null; then
+            echo "WebDAV proxy already running (PID: $(cat $PID_FILE))"
+            echo "  Local:  http://localhost:{{LOCAL_PORT}}"
+            return 0
+        fi
+        # SSH forward: local localhost:<LOCAL_PORT> → remote localhost:<REMOTE_PORT>
+        # -o ControlMaster=no -o ControlPath=none: bypass SSH mux to ensure
+        # the -N (no command) session stays alive for port forwarding.
+        ssh -N \
+            -o ControlMaster=no -o ControlPath=none \
+            -o ServerAliveInterval=30 -o ServerAliveCountMax=3 \
+            -L "127.0.0.1:{{LOCAL_PORT}}:127.0.0.1:{{REMOTE_PORT}}" \
+            "{{REMOTE}}" \
+            2>"$SSH_LOG" &
+        SSH_PID=$!
+        echo "$SSH_PID" > "$PID_FILE"
+        sleep 0.5
+        if kill -0 "$SSH_PID" 2>/dev/null; then
+            echo "WebDAV proxy started (PID: $SSH_PID)"
+            echo "  Remote: {{REMOTE}} port {{REMOTE_PORT}}"
+            echo "  Local:  http://localhost:{{LOCAL_PORT}}"
+            echo ""
+            echo "Mount in Finder: ⌘K → http://localhost:{{LOCAL_PORT}}"
+            echo "  or CLI: mount_webdav http://localhost:{{LOCAL_PORT}} /tmp/webdav-mnt"
+        else
+            echo "Error: SSH forward failed to start. Log:"
+            cat "$SSH_LOG" >&2
+            rm -f "$PID_FILE" "$SSH_LOG"
+            exit 1
+        fi
+    }
+
+    _stop() {
+        if [ -f "$PID_FILE" ]; then
+            PID=$(cat "$PID_FILE")
+            if kill "$PID" 2>/dev/null; then
+                echo "WebDAV proxy stopped (was PID: $PID)"
+            else
+                echo "WebDAV proxy was not running (stale PID: $PID)"
+            fi
+            rm -f "$PID_FILE"
+        else
+            echo "WebDAV proxy is not running"
+        fi
+        rm -f "$SSH_LOG"
+    }
+
+    _status() {
+        if [ -f "$PID_FILE" ] && kill -0 "$(cat "$PID_FILE")" 2>/dev/null; then
+            echo "WebDAV proxy running (PID: $(cat $PID_FILE))"
+        else
+            echo "WebDAV proxy is not running"
+            rm -f "$PID_FILE" 2>/dev/null
+        fi
+    }
+
+    case "{{CMD}}" in
+        start)  _start ;;
+        stop)   _stop ;;
+        status) _status ;;
+        *)      echo "Unknown command: {{CMD}}. Use start|stop|status" ;;
+    esac
+
 prep-annex:
     which git-annex || brew install git-annex
     # brew services start git-annex
