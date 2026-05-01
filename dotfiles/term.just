@@ -533,8 +533,20 @@ prep-rad:
     rad node start
     rad node status
 
+# prep-rad-gui:
+#     curl --output ~/Downloads/radicle-desktop-aarch64-latest.dmg https://files.radicle.xyz/releases/radicle-desktop/latest/radicle-desktop-aarch64.dmg && open ~/Downloads/radicle-desktop-aarch64-latest.dmg
+
 prep-rad-gui:
-    curl --output ~/Downloads/radicle-desktop-aarch64-latest.dmg https://files.radicle.xyz/releases/radicle-desktop/latest/radicle-desktop-aarch64.dmg && open ~/Downloads/radicle-desktop-aarch64-latest.dmg
+    #!/usr/bin/env bash
+    set -e
+    cd ~/projects
+    git clone https://seed.radicle.dev/z4D5UCArafTzTQpDZNQRuqswh3ury.git radicle-desktop
+    cd radicle-desktop
+    npm install
+    npm run tauri build
+
+prep-rad-tui:
+    cargo install --force --locked --git https://seed.radicle.xyz/z39mP9rQAaGmERfUMPULfPUi473tY.git
 
 [macos]
 prep-rad-httpd:
@@ -547,6 +559,8 @@ prep-rad-httpd:
     cargo install --force --locked --root ~/.radicle \
         --git https://seed.radicle.xyz/z4V1sjrXqjvFdnCUbxPFqd5p4DtH5.git \
         radicle-httpd
+
+
 
 # push with git push rad main
 #
