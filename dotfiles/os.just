@@ -219,57 +219,20 @@ prep-brew:
     eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
     echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> ~/.bashrc
 
+# Error: Your Xcode (15.4) at /Applications/Xcode.app is too outdated.
+# Please update to Xcode 16.0 (or delete it).
+# Xcode can be updated from the App Store.
 
-## Remote
+# Error: Your Command Line Tools are too outdated.
+# Update them from Software Update in System Settings.
 
-prep-chisel:
-    #!/usr/bin/env bash
-    which chisel || (curl https://i.jpillora.com/chisel! | bash)
+# If that doesn't show you any updates, run:
+#   sudo rip /Library/Developer/CommandLineTools
+#   sudo xcode-select --install
 
-# default ports are ordered so it's clear that local nvim -> local 1212 -> mid 1213 -> remote nvim 1214
-# authenticated by environment variable AUTH user:pass
-#
-cs-remote PORT="1213":
-    chisel server -v --port {{PORT}}
+# Alternatively, manually download them from:
+#   https://developer.apple.com/download/all/.
+# You should download the Command Line Tools for Xcode 16.0.
 
-cs_mid := env("CS_MID", "localhost:1213")
-
-cs-local MID=cs_mid LOCAL="1212" TARGET="1214":
-    chisel client -v http://{{MID}} {{LOCAL}}:{{TARGET}}
-
-nv-remote PROJ="forest" PORT="1214":
-    just nvim {{PROJ}} --embed --listen localhost:{{PORT}}
-
-nv-local PROJ="forest" PORT="1212":
-    just nvim {{PROJ}} --server localhost:{{PORT}} --remote-ui
-
-# an alternative is use local on CentOS and remote on Ubuntu in docker, no chisel needed, just docekr port mapping
-#
-lv-remote PROJ="forest" HOST="0.0.0.0" PORT="1214":
-    #!/usr/bin/env bash
-    just lvim {{PROJ}} --embed --listen {{HOST}}:{{PORT}}
-
-lv-local PROJ="forest" HOST="localhost" PORT="1214":
-    #!/usr/bin/env bash
-    just lvim {{PROJ}} --server {{HOST}}:{{PORT}} --remote-ui
-
-prep-ts:
-    # brew install tailscale
-    brew install homebrew/cask/tailscale-app
-
-prep-ts-ssh:
-    go install github.com/derekg/ts-ssh@main
-
-# --list
-# USER@HOST:PORT
-#
-ts-ssh *PARAMS:
-    `go env GOPATH`/bin/ts-ssh {{PARAMS}}
-
-prep-scp:
-    which termscp || brew install veeso/termscp/termscp
-
-scp *PARAMS:
-    termscp {{PARAMS}}
-
-
+# Error: You have not agreed to the Xcode license. Please resolve this by running:
+#   sudo xcodebuild -license accept
