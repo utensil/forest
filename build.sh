@@ -97,6 +97,9 @@ function bun_build {
             # bun build bun/$FILE --outdir output
         fi
     done
+
+    # bun doesn't always copy WASM files from npm package transitive deps; do it explicitly
+    find node_modules -name "*.wasm" -path "*/wbg/*" -exec cp {} output/forest/ \; 2>/dev/null || true
 }
 
 function build_ssr {
