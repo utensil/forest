@@ -408,3 +408,173 @@ prep-space:
     #!/usr/bin/env bash
     [ -d /Applications/FlashSpace.app ] || brew install flashspace
 
+
+## Tmux and friends
+
+# Try Zellij
+#
+# default key bindings (I don't like them)
+# Ctrl+P N to create a new pane
+# Ctrl+P then direction keys to move between panes
+# Ctrl+P Z to hide frames
+# Ctrl+N then direction keys to resize the corrent pane towards the direction
+# Ctrl+O W to manage sessions
+# try-zj:
+#     #!/usr/bin/env bash
+#     bash <(curl -L https://zellij.dev/launch)
+
+# Install Zellij, set its visual to minimal, keybindings to tmux
+prep-zj:
+    #!/usr/bin/env bash
+    which zellij || brew install zellij
+    # just clone-conf zellij t3hmrman tmux-zellij-shim-config
+    rip ~/.config/zellij || true
+    just link-conf zellij
+    # ln -s {{justfile_directory()}}/dotfiles/.config/zellij ~/.config/zellij
+    # just cp dotfiles/.config/zellij ~/.config/zellij
+
+# attach - a
+# list - ls
+# kill all session - ka
+# delete all session - da
+#
+# Ctrl+b as trigger, follow by
+# ? for a list of key bindings
+# session manager - s
+#   next tab - tab
+#   rename - ctrl+r
+#   delete - del
+# d - detach
+# | - vsplit
+# - - hsplit
+# arrows or hjkl - move between splits
+# t - new tab
+# p n - prev/next tab
+# [ - into scroll/copy mode
+#
+zj *PARAMS:
+    #!/usr/bin/env bash
+    zellij {{PARAMS}}
+
+# Will attatch to a session if running (will attach it as a new client, all clients can see and operate on the same session)
+# or killed (will resurrect it, each pane will remember the last running command and wait for confirm to run)
+#
+at NAME="mon":
+    #!/usr/bin/env bash
+    LAYOUT=$(echo {{NAME}}|sed 's/-.*//g')
+    (zellij ls|grep {{NAME}}) && just zj a {{NAME}} || just zj -s {{NAME}} -n $LAYOUT || just zj -s {{NAME}}
+
+# destructive, for debugging layout only, comment out after debug
+#
+new-at NAME="mon":
+    #!/usr/bin/env bash
+    LAYOUT=$(echo {{NAME}}|sed 's/-.*//g')
+    just zj d {{NAME}} --force ; just zj -s {{NAME}} -n $LAYOUT
+
+kill NAME:
+    #!/usr/bin/env bash
+    ps aux|grep {{NAME}}|grep -v grep|grep -v 'kill {{NAME}}'
+    read -q "?Confirm killing these processes (y/n)? " && (ps aux|grep {{NAME}}|grep -v grep|grep -v 'kill {{NAME}}'|awk '{print $2}'|xargs kill -9) || echo "\nKill aborted"
+
+# runf SESSION="mon" CMD="zsh":
+#     zellij run -f -n {{SESSION}} -- {{CMD}}
+
+prep-tmux:
+    which tmux || brew install tmux || ( grep -q "Ubuntu" /etc/os-release && just prep-sudo && sudo apt install -y tmux )
+    ln -sf {{justfile_directory()}}/dotfiles/.config/tmux ~/.config/tmux
+    ls -lhta ~/.config/tmux
+    tmux start-server
+
+# adapted from https://maxscheijen.github.io/posts/managing-tmux-sessions-with-fzf/
+#
+ftm:
+    #!/usr/bin/env bash
+    session=$(tmux ls | awk -F: '
+        /attached/ {print $1 "\033[32m *\033[0m"}
+        !/attached/ {print $1}
+    ' | fzf --ansi)
+    session=$(echo "$session" | sed 's/ (attached)$//')
+    if [ -n "$session" ]; then
+        tmux switch-client -t "$session" || tmux attach-session -t "$session"
+    else
+        echo "No session selected."
+    fi
+
+# prefix key: ctrl+b
+#
+# r - reload config
+#
+# c - new window
+# <number> - switch to window <number>
+#
+# $ - rename current session
+# . - rename current window
+# , - rename current tab
+#
+# " - split -
+# % - split |
+# <direction> - move between panes
+# z - zoom the current pane
+#
+# d - detach
+# x - kill the current pane
+# & - kill the current window
+#
+tm-at NAME:
+    #!/usr/bin/env bash
+    tmux attach -t {{NAME}} || tmux new-session -s {{NAME}}
+
+tm-mon:
+    #!/usr/bin/env bash
+    tmux attach -t mon || tmux new-session -s mon -d 'btop || zsh' \; \
+      split-window -h 'macmon || zsh' \; \
+      split-window -v -t 1 'sudo mactop || zsh' \; \
+      select-pane -t 0 \; \
+      attach
+
+tm-dev:
+    #!/usr/bin/env bash
+    tmux attach -t dev || tmux new-session -s dev -d 'just dev || zsh' \; \
+      split-window -h -p 50 'just cpa || zsh' \; \
+      select-pane -t 0 \; \
+      split-window -v -p 25 -t 0 'just awake || zsh' \; \
+      attach
+
+# https://github.com/kovidgoyal/kitty/issues/391#issuecomment-778703119
+# persistent session: abduco
+# multiplexer: dvtm
+# Creating a session
+# just tach -c name zsh
+# Ctrl+\ to detach, or use -e ^q to use Ctrl+q
+# Attaching to a session
+# BUT can't detach from within Helix
+# just tach -a name
+#
+prep-abduco:
+    which abduco || brew install abduco
+
+abduco *PARAMS:
+    abduco {{PARAMS}}
+
+# linux only for now
+# see https://github.com/shell-pool/shpool/issues/183
+#
+prep-pool:
+    which shpool || cargo install shpool
+
+prep-ds:
+    cargo install diss
+
+# https://github.com/sebastien/multiplex
+#
+prep-mx:
+    which multiplex || uv tool install multiplex-sh
+
+prep-mp:
+    which mprocs || brew install mprocs
+
+# works for mon running btop
+# not really working for nvim etc.
+# diss-at SESSION="main":
+#     diss -e g -a {{SESSION}} zsh
+
