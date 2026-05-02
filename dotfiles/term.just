@@ -215,999 +215,196 @@ chsh:
     # chsh -s `chsh -l|grep zsh|head -1` `whoami`
     # chsh -s `which zsh` `whoami`
 
-## Git
+## Fancy
 
-prep-ssh-agent:
-    #!/usr/bin/env bash
-    set -e
+prep-fancy:
+    just prep-fetch
+    which tty-clock || brew install tty-clock
+    which rusty-rain || cargo install rusty-rain
 
-    # Check if SSH config has agent settings
-    if ! grep -q "AddKeysToAgent yes" ~/.ssh/config 2>/dev/null; then
-        echo "Setting up SSH config..."
-        mkdir -p ~/.ssh
-        chmod 700 ~/.ssh
-        if [ ! -f ~/.ssh/config ]; then
-            touch ~/.ssh/config
-        fi
-        echo "" >> ~/.ssh/config
-        echo "Host *" >> ~/.ssh/config
-        echo "  AddKeysToAgent yes" >> ~/.ssh/config
-        echo "  UseKeychain yes" >> ~/.ssh/config
-        echo "  IdentityFile ~/.ssh/id_ed25519" >> ~/.ssh/config
-        chmod 600 ~/.ssh/config
-    fi
-
-    # Start SSH agent if not running
-    if [ -z "$SSH_AUTH_SOCK" ] || ! ssh-add -l &>/dev/null; then
-        echo "Starting SSH agent..."
-        eval "$(ssh-agent -s)"
-    fi
-
-    # Add key if not already added
-    if ! ssh-add -l | grep -q "id_ed25519"; then
-        echo "Adding SSH key to agent..."
-        ssh-add --apple-use-keychain ~/.ssh/id_ed25519
-    fi
-
-    echo "SSH agent ready. Keys loaded:"
-    ssh-add -l
-
-prep-sshpass:
-    which sshpass || brew install hudochenkov/sshpass/sshpass
-
-prep-git:
-    #!/usr/bin/env bash
-    which git || brew install git
-    which gh || brew install gh
-    # list the current settings
-    git config --list
-    if [ -z "$(git config --global user.name)" ]; then
-        printf "Enter your name: "
-        read name
-        git config --global user.name "$name"
-    fi
-    if [ -z "$(git config --global user.email)" ]; then
-        printf "Enter your email: "
-        read email
-        git config --global user.email "$email"
-    fi
-    git config --global --unset credential.helper
-    git config --global credential.helper "store --file ~/.git-credentials"
-
-    git config --global pull.rebase true
-    # https://blog.buenzli.dev/rust-for-linux-first-contrib/#git-gud
-    # Automatically squash fixup/squash commits during rebase
-    git config --global rebase.autoSquash true
-    # Stash uncommitted changes before rebase and reapply afterward
-    git config --global rebase.autoStash true
-    # Preserve merge commits instead of flattening them
-    git config --global rebase.rebaseMerges true
-    # Update branch refs pointing to rebased commits (useful for stacked changes)
-    git config --global rebase.updateRefs true
-    # Enable Reuse Recorded Resolution (remember conflict resolutions)
-    git config --global rerere.enabled true
-    # Automatically stage rerere-resolved files
-    git config --global rerere.autoupdate true
-
-    gh auth status || gh auth login
-    gh auth setup-git
-    echo 'Remember to run `just prep-delta` for better lazygit experience'
-
-prep-delta:
-    which delta || brew install git-delta
-    git config --global core.pager "delta"
-    git config --global interactive.diffFilter "delta --color-only"
-    # use n and N to move between diff sections
-    git config --global delta.navigate true
-    git config --global delta.dark true
-    git config --global merge.conflictStyle zdiff3
-    # https://git-scm.com/docs/git-diff#Documentation/git-diff.txt---color-movedmode
-    # git config --global diff.colorMoved dimmed_zebra
-    git config --global diff.colorMovedWs allow-indentation-change
-    mkdir -p ~/.config/lazygit
-    cp -f .lazygit.yml ~/.config/lazygit/config.yml
-
-prep-resolve:
-    which mergiraf || brew install mergiraf
-    # https://mergiraf.org/usage.html
-    git config --global merge.conflictStyle|grep zdiff3
-    jj config list --include-defaults merge-tools | grep mergiraf
-
-resolve:
-    jj status && jj resolve --tool mergiraf
-
-git PROJ="forest" *PARAMS="":
-    #!/usr/bin/env bash
-    cd ~/projects/{{PROJ}} && lazygit {{PARAMS}}
-
-prep-gitu:
-    which gitu || cargo install gitu --locked
-
-# [NOTE] If modified, test with prep-gtsh
-#
-clone USER REPO:
-    #!/usr/bin/env bash
-    mkdir -p ~/projects
-    FULL_REPO={{USER}}/{{REPO}}
-    DIR=~/projects/{{REPO}}
-    if [ ! -d $DIR/.git ]; then
-        git clone https://github.com/$FULL_REPO $DIR
-    else
-        (cd $DIR && git pull) || true
-    fi
-
-clone-conf CONF USER REPO:
-    #!/usr/bin/env bash
-    mkdir -p ~/projects
-    FULL_REPO={{USER}}/{{REPO}}
-    DIR=~/.config/{{CONF}}
-    if [ ! -d $DIR ]; then
-        git clone https://github.com/$FULL_REPO $DIR
-    elif [ -d $DIR/.git ]; then
-        (cd $DIR && git pull) || true
-    else
-        rip $DIR
-        just clone-conf {{CONF}} {{USER}} {{REPO}}
-    fi
-
-link-conf CONF:
-    ln -s {{justfile_directory()}}/dotfiles/.config/{{CONF}} ~/.config/{{CONF}}
-
-# -w to open in browser
-#
-actions PROJ="forest" *PARAMS="":
-    #!/usr/bin/env bash
-    cd ~/projects/{{PROJ}} && gh workflow view {{PARAMS}}
-
-prep-date:
-    which git-backdate || (curl https://raw.githubusercontent.com/rixx/git-backdate/main/git-backdate > /usr/local/bin/git-backdate && chmod +x /usr/local/bin/git-backdate)
-    which gdate || brew install coreutils
-
-date: prep-date
-    #!/usr/bin/env bash
-    BEGIN_DATE=$(gdate -d "3 days ago" +%Y-%m-%d)
-    END_DATE=$(gdate -d "today" +%Y-%m-%d)
-    echo "Rewriting history to distribute commits between ${BEGIN_DATE} and ${END_DATE}"
-    git backdate origin/main "${BEGIN_DATE}..${END_DATE}" --no-business-hours
-
-prep-gitlog:
-    which serie || brew install lusingander/tap/serie
-
-# ? for help
-# <Tab>  Open refs list
-# <Alt-Down> <Alt-j>  Go to parent
-# Vim-like keybindings
-#
-gitlog:
-    serie
-
-prep-zizmor:
-    which zizmor || brew install zizmor
-
-lint-gh *PARAMS : prep-zizmor
-    zizmor {{PARAMS}} .github/workflows
-
-# # Frequently used jj command alias
-#
-# ## Edits
-#
-# l - log (there is always a dirty change @, could be empty)
-# n <revset> - create a new change based on <revset> which could be a short change id, a bookmark, and defaults to @ (working copy)
-# ci - use builtin diff editor to choose what to commit, use text editor to edit commit message
-# cim <message> / cm <message> - variants
-# d - the diff of current change
-# dr <revset> - the diff of revision <revset>
-# e <revset> - edit any <revset> after commit
-# (after edit, just go anywhere else (with e or n), the changes will be commited; or an explicit `jj commit` will do)
-#
-# ## Typical workflow with GitHub
-#
-# (inspired by https://jj-vcs.github.io/jj/latest/github/ )
-#
-# ### named branch
-#
-# bs <bookmark> -r <revset> - move bookmark <bookmark> to <revset>
-#
-# prb <bookmark> - create a PR from <bookmark> to the default branch
-#
-# This actually combines:
-#
-# psb <bookmark> - push bookmark to remote branch named <bookmark>
-# gh pr create --head <bookmark> - create a PR from <bookmark> to the default branch
-#
-# git fetch - will update local bookmark from remote branch
-#
-# ### unamed branch
-#
-# prw - open (committed) working copy as a PR
-#
-# This actually combines:
-#
-# pscw - push changes of working copy to remote branch named jj/<changeid>
-# prow - open working copy as a PR
-#
-# ### History cleanup
-#
-# undo - undo last jj operation when messed up
-# rebase -s <src> -d <dst> - rebase <src> onto <dst>
-# sqar <revset> - squash <revset> into its parent
-# squash --from <src> --to <dst> - squash <src> into <dst>
-#
-# ### Safeguard
-#
-# log -r <revset> - check your understanding of <revset> syntax: https://github.com/mmlb/jj-vcs-jj/blob/main/docs/revsets.md
-# file list <fileset> - check your understanding of <fileset> syntax: https://github.com/mmlb/jj-vcs-jj/blob/main/docs/filesets.md
-#
-prep-jj:
-    which jj || brew install jj
-    mkdir -p ~/.config/jj
-    cp -f dotfiles/.config/jj/config.toml ~/.config/jj/config.toml
-    jj config set --user user.name "$(git config --get user.name)"
-    jj config set --user user.email "$(git config --get user.email)"
-    jj config list --no-pager
-
-prep-jjui:
-    # which lazyjj || brew install lazyjj
-    which jjui || brew install jjui
-    mkdir -p ~/.config/jjui
-    cp -f dotfiles/.config/jjui/config.toml ~/.config/jjui/config.toml
-
-init-jj PROJ="forest" *PARAMS="":
-    #!/usr/bin/env bash
-    cd ~/projects/{{PROJ}}
-    jj status || jj git init --colocate
-
-push PROJ="forest" BRANCH="main":
-    #!/usr/bin/env bash
-    cd ~/projects/{{PROJ}}
-    just chk
-    jj bs {{BRANCH}} -r @-
-    jj psb {{BRANCH}}
-    jj psb {{BRANCH}} --remote tangled
-    jj psb {{BRANCH}} --remote berg
-    which rad && git push rad main
-
-jjpr PROJ="ocaml-forester":
-    cd ~/projects/{{PROJ}} && jj prw
-
-jjprp PROJ="ocaml-forester":
-    cd ~/projects/{{PROJ}} && jj pscw
-
-# Prep mail patch
-#
-# pyonji init is handy for setting up git send-mail
-# but it doesn't work well with jj when resubmitting patch
-# - it won't be able to forget my test with sending to my own email prior to sending to the actual mailing list
-# - it won't be able to send 2 different patches against main, because they are not on any branch in jj
-# so I use the old-fashion
-# `git send-email --to="~jonsterling/forester-devel@lists.sr.ht" HEAD^`
-#
-prep-mailp:
-    which pyonji || go install 'git.sr.ht/~emersion/pyonji@latest'
-
-mailp PROJ="ocaml-forester":
-    cd ~/projects/{{PROJ}} && pyonji
-
-# should test with my email first
-# then
-# ~jonsterling/forester-devel@lists.sr.ht
-mailpp MAIL PROJ="ocaml-forester":
-    cd ~/projects/{{PROJ}} && git send-email --to="{{MAIL}}" HEAD^
-
-# the idea is to use this for id of garden notes
-# i.e. the id of a random note is the short jj change id when it was first added
-#
-@jjid REVSET="@":
-    jj log -r {{REVSET}} -T 'change_id.short()' --no-graph
-
-# Follow https://radicle.xyz/guides/user for rad and git
-# then follow https://radicle.xyz/2025/08/14/jujutsu-with-radicle for jj
-# forest is published to https://app.radicle.xyz/nodes/iris.radicle.xyz/rad%3Az3mXN7u6s38jqe5F1W3f5xwEzQsT3
-# and I am https://app.radicle.xyz/nodes/iris.radicle.xyz/users/did:key:z6Mkoi6L46Tr54sMQmctod6Q43VjYyLwBh8VwJvftMZwdiHt
-#
-# see https://radicle.zulipchat.com/#narrow/channel/369873-support/topic/How.20to.20push.20on.20a.20new.20device
-# for how to push on new device
-#
-# with a new node identity:
-#
-# ```
-# git remote add rad rad://REPO_RAD_ID/DEVICE_B_NODE_ID
-# rad seed rad:REPO_RAD_ID
-# git push rad main
-# rad sync
-# ```
-#
-# recover the delegate node identity: backup and recover keys to ~/.radicle/keys
-#
-prep-rad:
-    #!/usr/bin/env bash
-    set -e
-    export PATH="$HOME/.radicle/bin:$PATH"
-    # which rad || (curl -sSf https://radicle.xyz/install | sh -s -- --no-modify-path) # -s -- --prefix=~/.local)
-    cargo install --force --locked --root ~/.radicle \
-        --git https://seed.radicle.xyz/z3gqcJUoA1n9HaHKufZs5FCSGazv5.git \
-        radicle-cli radicle-node radicle-remote-helper
-    cargo install --force --locked --git https://seed.radicle.xyz/z39mP9rQAaGmERfUMPULfPUi473tY.git
-    rad auth
-    rad self
-    rad node start
-    rad node status
-
-# prep-rad-gui:
-#     curl --output ~/Downloads/radicle-desktop-aarch64-latest.dmg https://files.radicle.xyz/releases/radicle-desktop/latest/radicle-desktop-aarch64.dmg && open ~/Downloads/radicle-desktop-aarch64-latest.dmg
-
-prep-rad-gui:
-    #!/usr/bin/env bash
-    set -e
-    cd ~/projects
-    git clone https://seed.radicle.dev/z4D5UCArafTzTQpDZNQRuqswh3ury.git radicle-desktop
-    cd radicle-desktop
-    npm install
-    npm run tauri build
-
-prep-rad-tui:
-    cargo install --force --locked --git https://seed.radicle.xyz/z39mP9rQAaGmERfUMPULfPUi473tY.git
-
-[macos]
-prep-rad-httpd:
-    #!/usr/bin/env bash
-    # which radicle-httpd || (cd /tmp
-    # TARGET=0.20.0-aarch64-apple-darwin
-    # rip radicle-httpd-$TARGET.tar.xz
-    # curl -O -L https://files.radicle.xyz/releases/radicle-httpd/latest/radicle-httpd-$TARGET.tar.xz
-    # tar -xvJf radicle-httpd-$TARGET.tar.xz --strip-components=1 -C ~/.radicle/)
-    cargo install --force --locked --root ~/.radicle \
-        --git https://seed.radicle.xyz/z4V1sjrXqjvFdnCUbxPFqd5p4DtH5.git \
-        radicle-httpd
-
-
-
-# push with git push rad main
-#
-init-rad REPO="forest" DEFAULT_BRANCH="main":
-    #!/usr/bin/env bash
-    cd ~/projects/{{REPO}}
-    git config --local --add init.defaultBranch main
-    rad init
-    rad .
-
-rad-seed:
-    # forest
-    rad seed rad:z3mXN7u6s38jqe5F1W3f5xwEzQsT3
-    # web
-    rad seed rad:z4V1sjrXqjvFdnCUbxPFqd5p4DtH5
-    # heartwood
-    rad seed rad:z3gqcJUoA1n9HaHKufZs5FCSGazv5
-    echo "Add the following to web.pinned.repositories of $HOME/.radicle/config.json except the trailing comma, then run: rad node stop; rad node start"
-    rad seed | grep -F 'rad:'|awk '{ print "\"" $2 "\"," }'
-
-rad-web:
-    #!/usr/bin/env bash
-    just prep-rad-httpd
-    mkdir -p ~/projects
-    cd ~/projects
-    DIR=radicle-explorer
-    if [ ! -d $DIR/.git ]; then
-        git clone https://seed.radicle.xyz/z4V1sjrXqjvFdnCUbxPFqd5p4DtH5.git $DIR
-    else
-        (cd $DIR && git pull) || true
-    fi
-    cd $DIR
-    npm install
-    export DEFAULT_HTTPD_PORT=8776
-    npm start &
-    pid_ui=$!
-    radicle-httpd --listen 0.0.0.0:$DEFAULT_HTTPD_PORT &
-    pid_api=$!
-    (sleep 1 && echo -e "Visit http://localhost:3000/nodes/iris.radicle.xyz/users/did:key:z6Mkoi6L46Tr54sMQmctod6Q43VjYyLwBh8VwJvftMZwdiHt\n or http://localhost:3000/nodes/127.0.0.1:$DEFAULT_HTTPD_PORT/users/did:key:z6Mkoi6L46Tr54sMQmctod6Q43VjYyLwBh8VwJvftMZwdiHt")
-    trap 'kill $pid_ui $pid_api' INT
-    wait
-
-## Languages
-
-# https://blog.vbang.dk/2025/06/29/tools-i-love-mise/
-#
-prep-mise:
-    #!/usr/bin/env bash
-    which mise || brew install mise || (curl https://mise.run | sh)
-    echo 'Ensure run the following in ~/.bashrc or ~/.zshrc:'
-    echo 'eval "$(mise activate $(basename "$0"))"'
-    cat << 'EOF'
-    e.g. echo 'eval "$(mise activate zsh)"' >> ~/.zshrc
-    EOF
-    # mise supports popular programming languages (including zig) with core plugins
-    # https://github.com/jdx/mise/tree/main/src/plugins/core
-    echo "Ensure a valid env var MISE_GITHUB_TOKEN, see https://mise.jdx.dev/getting-started.html#github-api-rate-limiting"
-
-prep-rust:
-    #!/usr/bin/env bash
-    set -e
-    which cargo || (
-        (curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --default-toolchain nightly) &&
-        (just add-zrc '. $HOME/.cargo/env' && echo 'Run: . $HOME/.cargo/env')
-    )
-    . $HOME/.cargo/env
-    which cargo-binstall || cargo install cargo-binstall
-
-prep-cargo-seek:
-    which cargo-seek || cargo install --locked cargo-seek
-
-prep-taproom:
-    which taproom || brew install gromgit/brewtils/taproom
-
-prep-node:
-    which node || brew install node || (just prep-mise && mise use -g node@latest)
-
-# https://github.com/astral-sh/uv
-
-[unix]
-prep-uv:
-    which uv || (curl -LsSf https://astral.sh/uv/install.sh | sh)
-
-[windows]
-prep-uv:
-    powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
-
-prep-py:
-    uv python install 3.11
-    uv venv --python 3.11 --seed
-
-prep-go:
-    which go || brew install go
-
-# https://thinkingelixir.com/install-elixir-using-asdf/
-# prep-asdf:
-#     which asdf || brew install asdf
-#     just prep-rc
-
-# prep-ex: prep-asdf
-#     asdf plugin add elixir https://github.com/asdf-vm/asdf-elixir.git
-#     asdf install elixir v1.18
-#     asdf global elixir ref:v1.18
-
-prep-ex:
-    which iex || brew install elixir
-    which elixir
-    which elixirc
-    which mix
-
-## Tmux and friends
-
-# Try Zellij
-#
-# default key bindings (I don't like them)
-# Ctrl+P N to create a new pane
-# Ctrl+P then direction keys to move between panes
-# Ctrl+P Z to hide frames
-# Ctrl+N then direction keys to resize the corrent pane towards the direction
-# Ctrl+O W to manage sessions
-# try-zj:
-#     #!/usr/bin/env bash
-#     bash <(curl -L https://zellij.dev/launch)
-
-# Install Zellij, set its visual to minimal, keybindings to tmux
-prep-zj:
-    #!/usr/bin/env bash
-    which zellij || brew install zellij
-    # just clone-conf zellij t3hmrman tmux-zellij-shim-config
-    rip ~/.config/zellij || true
-    just link-conf zellij
-    # ln -s {{justfile_directory()}}/dotfiles/.config/zellij ~/.config/zellij
-    # just cp dotfiles/.config/zellij ~/.config/zellij
-
-# attach - a
-# list - ls
-# kill all session - ka
-# delete all session - da
-#
-# Ctrl+b as trigger, follow by
-# ? for a list of key bindings
-# session manager - s
-#   next tab - tab
-#   rename - ctrl+r
-#   delete - del
-# d - detach
-# | - vsplit
-# - - hsplit
-# arrows or hjkl - move between splits
-# t - new tab
-# p n - prev/next tab
-# [ - into scroll/copy mode
-#
-zj *PARAMS:
-    #!/usr/bin/env bash
-    zellij {{PARAMS}}
-
-# Will attatch to a session if running (will attach it as a new client, all clients can see and operate on the same session)
-# or killed (will resurrect it, each pane will remember the last running command and wait for confirm to run)
-#
-at NAME="mon":
-    #!/usr/bin/env bash
-    LAYOUT=$(echo {{NAME}}|sed 's/-.*//g')
-    (zellij ls|grep {{NAME}}) && just zj a {{NAME}} || just zj -s {{NAME}} -n $LAYOUT || just zj -s {{NAME}}
-
-# destructive, for debugging layout only, comment out after debug
-#
-new-at NAME="mon":
-    #!/usr/bin/env bash
-    LAYOUT=$(echo {{NAME}}|sed 's/-.*//g')
-    just zj d {{NAME}} --force ; just zj -s {{NAME}} -n $LAYOUT
-
-kill NAME:
-    #!/usr/bin/env bash
-    ps aux|grep {{NAME}}|grep -v grep|grep -v 'kill {{NAME}}'
-    read -q "?Confirm killing these processes (y/n)? " && (ps aux|grep {{NAME}}|grep -v grep|grep -v 'kill {{NAME}}'|awk '{print $2}'|xargs kill -9) || echo "\nKill aborted"
-
-# runf SESSION="mon" CMD="zsh":
-#     zellij run -f -n {{SESSION}} -- {{CMD}}
-
-prep-tmux:
-    which tmux || brew install tmux || ( grep -q "Ubuntu" /etc/os-release && just prep-sudo && sudo apt install -y tmux )
-    ln -sf {{justfile_directory()}}/dotfiles/.config/tmux ~/.config/tmux
-    ls -lhta ~/.config/tmux
-    tmux start-server
-
-# adapted from https://maxscheijen.github.io/posts/managing-tmux-sessions-with-fzf/
-#
-ftm:
-    #!/usr/bin/env bash
-    session=$(tmux ls | awk -F: '
-        /attached/ {print $1 "\033[32m *\033[0m"}
-        !/attached/ {print $1}
-    ' | fzf --ansi)
-    session=$(echo "$session" | sed 's/ (attached)$//')
-    if [ -n "$session" ]; then
-        tmux switch-client -t "$session" || tmux attach-session -t "$session"
-    else
-        echo "No session selected."
-    fi
-
-# prefix key: ctrl+b
-#
-# r - reload config
-#
-# c - new window
-# <number> - switch to window <number>
-#
-# $ - rename current session
-# . - rename current window
-# , - rename current tab
-#
-# " - split -
-# % - split |
-# <direction> - move between panes
-# z - zoom the current pane
-#
-# d - detach
-# x - kill the current pane
-# & - kill the current window
-#
-tm-at NAME:
-    #!/usr/bin/env bash
-    tmux attach -t {{NAME}} || tmux new-session -s {{NAME}}
-
-tm-mon:
-    #!/usr/bin/env bash
-    tmux attach -t mon || tmux new-session -s mon -d 'btop || zsh' \; \
-      split-window -h 'macmon || zsh' \; \
-      split-window -v -t 1 'sudo mactop || zsh' \; \
-      select-pane -t 0 \; \
-      attach
-
-tm-dev:
-    #!/usr/bin/env bash
-    tmux attach -t dev || tmux new-session -s dev -d 'just dev || zsh' \; \
-      split-window -h -p 50 'just cpa || zsh' \; \
-      select-pane -t 0 \; \
-      split-window -v -p 25 -t 0 'just awake || zsh' \; \
-      attach
-
-# https://github.com/kovidgoyal/kitty/issues/391#issuecomment-778703119
-# persistent session: abduco
-# multiplexer: dvtm
-# Creating a session
-# just tach -c name zsh
-# Ctrl+\ to detach, or use -e ^q to use Ctrl+q
-# Attaching to a session
-# BUT can't detach from within Helix
-# just tach -a name
-#
-prep-abduco:
-    which abduco || brew install abduco
-
-abduco *PARAMS:
-    abduco {{PARAMS}}
-
-# linux only for now
-# see https://github.com/shell-pool/shpool/issues/183
-#
-prep-pool:
-    which shpool || cargo install shpool
-
-prep-ds:
-    cargo install diss
-
-# https://github.com/sebastien/multiplex
-#
-prep-mx:
-    which multiplex || uv tool install multiplex-sh
-
-prep-mp:
-    which mprocs || brew install mprocs
-
-# works for mon running btop
-# not really working for nvim etc.
-# diss-at SESSION="main":
-#     diss -e g -a {{SESSION}} zsh
-
-## Container and friends
-
-# prep-pod:
-#    # brew uninstall orbstack
-#    which docker || brew install docker
-#    brew install podman-desktop
-#    docker context use default
-
-prep-pod:
-    which docker || (brew install docker; brew link docker)
-    which docker-compose || brew install docker-compose
-    which colima || brew install colima
-    which kubectl || brew install kubectl
-    docker context use colima
-
-# https://github.com/abiosoft/colima?tab=readme-ov-file#customizing-the-vm
-# to run x86_64 containers:
-# 1. run colima delete which will delete all existing container!
-# 2. colima start --vm-type=vz --vz-rosetta --network-address
-# 3. docker pull --platform linux/amd64 ubuntu:jammy # with docker login first
-# see also:
-# `just prep-lima` which prepares a Lima VM with Ubuntu 25.04 x86_64 that is ready to run x86_64 static binaries and containers
-# https://github.com/lima-vm/lima/discussions/1573 for realizing the VM is still arm64
-# https://github.com/lima-vm/lima/discussions/1043#discussioncomment-3560889 for realizing only statically linked binaries work in VM, dynamically linked ones fail due to missing shared libraries, so they should be run in containers, so just use colima options for this!
-#
-# to access lan, `--network-address` is needed
-# see https://github.com/abiosoft/colima/blob/main/docs/FAQ.md#the-virtual-machines-ip-is-not-reachable
-#
-pod CMD="start --vm-type=vz --vz-rosetta --network-address --mount-type=virtiofs":
-    colima {{CMD}}
-
-# Expose Colima docker socket to lume VM with permission control.
-#
-# Architecture (two layers):
-#   Layer 1 — Permission control: docker-socket-proxy runs inside Colima VM
-#             binding to localhost:2375 (POST: 0 = no container creation by agents)
-#   Layer 2 — Transport:          SSH tunnel maps Host Mac <HOST_VM_IP>:2375
-#             → Colima VM localhost:2375
-#
-# Security model:
-#   - Container CREATION: human-gated (PR review → merge → manual docker compose up)
-#   - Container LIFECYCLE: agent-delegated (start/stop/restart/pause/exec)
-#   - No auto-start on boot — must run 'just pod-proxy' explicitly to grant access
-#   - 'just pod-proxy stop' immediately revokes agent access
-#
-# VM end: export DOCKER_HOST=tcp://<HOST_VM_IP>:2375
-#
-pod-proxy CMD="start":
-    #!/usr/bin/env bash
-    PID_FILE=/tmp/colima-docker-proxy.pid
-    PROXY_NAME=colima-docker-socket-proxy
-    PROXY_BIND=$(/sbin/ifconfig 2>/dev/null | grep "inet 192.168" | awk '{print $2}' | head -1)
-
-    # Persistent SSH config path — NOT a temp file; deleted only on stop.
-    # Using mktemp + immediate rm caused a race: SSH backgrounded before it could read the file.
-    SSH_CONF=/tmp/colima-docker-ssh.conf
-
-    _start_proxy() {
-        if colima ssh -- docker inspect "$PROXY_NAME" --format '{{"{{"}}{{".State.Running"}}{{"}}"}}' 2>/dev/null | grep -q "true"; then
-            echo "  docker-socket-proxy: already running inside Colima"
-            return 0
-        fi
-        # Silently remove stale container if any (expected to not exist on first run)
-        colima ssh -- docker rm -f "$PROXY_NAME" >/dev/null 2>&1 || true
-        colima ssh -- docker run -d \
-            --name "$PROXY_NAME" \
-            --restart unless-stopped \
-            -v /run/docker.sock:/var/run/docker.sock:ro \
-            -p 127.0.0.1:2375:2375 \
-            -e POST=0 \
-            -e PING=1 -e VERSION=1 -e INFO=1 -e EVENTS=1 \
-            -e CONTAINERS=1 -e IMAGES=1 -e NETWORKS=1 -e VOLUMES=1 \
-            -e ALLOW_START=1 -e ALLOW_STOP=1 -e ALLOW_RESTARTS=1 -e ALLOW_PAUSE=1 \
-            -e EXEC=1 \
-            tecnativa/docker-socket-proxy >/dev/null
-        echo "  docker-socket-proxy: started inside Colima (POST=0, EXEC=1)"
-    }
-
-    SSH_LOG=/tmp/colima-docker-ssh.log
-
-    _start_tunnel() {
-        if [ -z "$PROXY_BIND" ]; then
-            echo "Error: Could not detect Host-VM network IP."
-            exit 1
-        fi
-        if [ -f "$PID_FILE" ] && kill -0 $(cat "$PID_FILE") 2>/dev/null; then
-            echo "  SSH tunnel:          already running (PID: $(cat $PID_FILE))"
-            return 0
-        fi
-        # Write SSH config to a persistent path (not temp) — SSH reads it after backgrounding
-        colima ssh-config > "$SSH_CONF"
-        # Forward Host Mac <PROXY_BIND>:2375 → Colima VM localhost:2375 (docker-socket-proxy)
-        # colima ssh-config sets ControlMaster=auto + ControlPath=... + ControlPersist=yes.
-        # With just -o ControlMaster=no, SSH still connects as a slave via the ControlPath socket,
-        # and a -N session (no remote command) ends immediately. Must bypass ControlPath entirely.
-        ssh -F "$SSH_CONF" colima -N \
-            -o ControlMaster=no -o ControlPath=none \
-            -L "$PROXY_BIND:2375:localhost:2375" \
-            2>"$SSH_LOG" &
-        SSH_PID=$!
-        echo $SSH_PID > "$PID_FILE"
-        sleep 0.5
-        if kill -0 $SSH_PID 2>/dev/null; then
-            echo "  SSH tunnel:          started (PID: $SSH_PID) → $PROXY_BIND:2375"
-        else
-            echo "Error: SSH tunnel failed to start. SSH output:"
-            cat "$SSH_LOG" >&2
-            rm -f "$PID_FILE" "$SSH_CONF" "$SSH_LOG"
-            exit 1
-        fi
-    }
-
-    _stop_tunnel() {
-        if [ -f "$PID_FILE" ]; then
-            PID=$(cat "$PID_FILE")
-            kill "$PID" 2>/dev/null && echo "  SSH tunnel:          stopped" || true
-            rm -f "$PID_FILE"
-        else
-            echo "  SSH tunnel:          not running"
-        fi
-        rm -f "$SSH_CONF" "$SSH_LOG"
-    }
-
-    _stop_proxy() {
-        colima ssh -- docker stop "$PROXY_NAME" 2>/dev/null | grep -q . && \
-            colima ssh -- docker rm "$PROXY_NAME" 2>/dev/null | grep -q . && \
-            echo "  docker-socket-proxy: stopped" || \
-            echo "  docker-socket-proxy: not running"
-    }
-
-    case "{{CMD}}" in
-        start)
-            echo "Starting docker proxy..."
-            _start_proxy
-            _start_tunnel
-            echo "✓ Ready — VM: export DOCKER_HOST=tcp://$PROXY_BIND:2375"
-            ;;
-        stop)
-            echo "Stopping docker proxy..."
-            _stop_tunnel
-            _stop_proxy
-            echo "✓ Access revoked"
-            ;;
-        restart)
-            echo "Restarting docker proxy..."
-            _stop_tunnel; _stop_proxy
-            sleep 0.5
-            _start_proxy; _start_tunnel
-            echo "✓ Ready — VM: export DOCKER_HOST=tcp://$PROXY_BIND:2375"
-            ;;
-        status)
-            echo -n "SSH tunnel:            "
-            if [ -f "$PID_FILE" ] && kill -0 $(cat "$PID_FILE") 2>/dev/null; then
-                echo "running (PID: $(cat $PID_FILE)) → $PROXY_BIND:2375"
-            else
-                echo "not running"
-            fi
-            echo -n "docker-socket-proxy:   "
-            if colima ssh -- docker inspect "$PROXY_NAME" --format '{{"{{"}}{{".State.Running"}}{{"}}"}}' 2>/dev/null | grep -q "true"; then
-                echo "running (Colima VM localhost:2375, POST=0)"
-            else
-                echo "not running"
-            fi
-            ;;
-        *)
-            echo "Usage: just pod-proxy [start|stop|restart|status]"
-            exit 1
-            ;;
-    esac
-
-# tested in lima
-# distrobox create --name test --init --image quay.io/toolbx-images/alpine-toolbox:latest
-# distrobox enter test
-# https://github.com/89luca89/distrobox/blob/main/docs/compatibility.md#containers-distros
 [linux]
-prep-dist:
-    which distrobox || sudo apt install -y distrobox
-    which docker || sudo apt install podman-docker
+prep-sudo:
+    # inside docker, it might not have sudo, but it's already root
+    # to make the rest of script consistent, we need to prep-sudo
+    which sudo || apt install sudo
 
-k8s:
-    colima start --kubernetes
+[linux]
+prep-ppa: prep-sudo
+    which add-apt-repository || (sudo apt update && sudo apt install -y software-properties-common)
 
-docker-save IMAGE FILE:
-    docker save {{IMAGE}} -o {{FILE}}
+[linux]
+prep-fetch:
+    which fastfetch || brew install fastfetch || ( grep -q "Ubuntu" /etc/os-release && just prep-ppa && sudo add-apt-repository -y ppa:zhangsongcui3371/fastfetch && sudo apt update && sudo apt install -y fastfetch )
 
-prep-lima:
-    which lima || brew install lima
-    # limactl stop default
-    # limactl delete default
-    limactl create --name=default dotfiles/lima/ubuntu-25.04-x86_64.yaml
-    # limactl start default
-    # lima
+prep-tattoy:
+    which tattoy || cargo install --locked --git https://github.com/tattoy-org/tattoy tattoy
+    rip ~/.config/tattoy || true
+    ln -s ~/projects/shader-playground/shaders {{justfile_directory()}}/dotfiles/.config/tattoy/shaders
+    just link-conf tattoy
 
-prep-tilt:
-    which tilt || brew install tilt-dev/tap/tilt
-
-# tilt up is usually all you need
-#
-tilt *PARAMS:
-    tilt {{PARAMS}}
-
-# https://github.com/louislam/dockge
-# https://github.com/abiosoft/colima/issues/265
-#
-dockge COMMAND="up" NETWORK_MODE="bridge":
+# Run fastfetch every time Enter is pressed
+fetch:
     #!/usr/bin/env bash
-    set -e
-    [[ -n "$PODS_HOME" ]] || (echo "PODS_HOME is missing" && exit 1)
-    mkdir -p $PODS_HOME/dockge/data
-    # keep track of stacks in this repo
-    rip $PODS_HOME/dockge/stacks || true
-    ln -s {{justfile_directory()}}/stacks $PODS_HOME/dockge/stacks
-    cd stacks/dockge
-    # DOCKGE_ENABLE_CONSOLE=true
-    # if COMMAND is up
-    export NETWORK_MODE={{NETWORK_MODE}}
-    if [ "{{COMMAND}}" = "up" ]; then
-        docker-compose up -d
-        echo Dockge is now running on http://localhost:5001
-    elif [ "{{COMMAND}}" = "down" ]; then
-        docker-compose down
-    fi
+    while true; do
+        clear
+        fastfetch
+        read -n 1
+    done
 
-# https://github.com/abiosoft/colima/issues/1234
+time:
+    tty-clock -c -s -C 3
+
+weather CITY:
+    curl 'wttr.in/{{CITY}}'
+    # ?format=3'
+
+prep-stormy:
+    which stormy || go install github.com/ashish0kumar/stormy@latest
+
+stormy CITY:
+    stormy --city {{CITY}}
+
+matrix:
+    # rusty-rain -C green -H white -s -c jap
+    # Colors extracted from ANSI color 2 (green) & 7 (white)
+    # theme: https://raw.githubusercontent.com/mbadolato/iTerm2-Color-Schemes/master/schemes/GitHub-Dark-Default.itermcolors
+    rusty-rain -C 63,185,80 -H 177,186,196 -s -c jap
+
+ghost:
+    npx -y ghosttime
+
+rec:
+    uvx asciinema rec
+
+prep-loc:
+    which tokei || brew install tokei
+    which cloc || brew install cloc
+
+loc:
+    tokei -o json|uvx tokei-pie
+
+loc-tui PATH *PARAMS="":
+    uvx cloctui {{PATH}} {{PARAMS}}
+
+# Runal is a text-based creative coding environment for the terminal. It works similarly as processing or p5js but it does all the rendering as text. It can either be programmed with JavaScript, or used as a Go package.
 #
-prep-ctop:
-    which ctop || brew install ctop
-    docker context ls
+prep-runal:
+    which runal || (curl -sSL empr.cl/get/runal | bash)
 
-# https://github.com/abiosoft/colima/issues/958#issuecomment-3078908176
-# ? - help
-# l - log
-# e - execute shell
-# w - open browser (convention: first port is http)
+prep-theattyr:
+    which theattyr || cargo install theattyr
+
+
+## fzf
+
+# based on https://github.com/zachdaniel/dotfiles/blob/main/priv_scripts/project
 #
-ctop:
-    colima status
-    DOCKER_HOST=`docker context ls --format json|grep colima|jq -r '.DockerEndpoint'` ctop
+proj:
+    fd --type d --max-depth 1 --base-directory {{home_directory()}}/projects|fzf --prompt 'Select a directory: '|xargs -I {} kitty @ launch --type os-window --cwd {{home_directory()}}/projects/forest --copy-env zsh -c 'just lvim {}'
 
-prep-lazydocker:
-    brew install jesseduffield/lazydocker/lazydocker
-
-# prep-act: prep-term
-#     #!/usr/bin/env bash
-#     which act || brew install act
-
-# act:
-#     ./act.sh
-
-rm-act:
-    sudo docker stop act-dev
-    sudo docker rm act-dev
-
-mk-act:
-    sudo docker run -d --name act-dev -v{{justfile_directory()}}:/root/projects/forest -p 127.0.0.1:1210-1214:1210-1214 ghcr.io/catthehacker/ubuntu:act-latest bash -c 'sleep infinity'
-
-run-act CMD="bash" OPTS="-it":
-    sudo docker exec {{OPTS}} -w /root/projects/forest act-dev {{CMD}}
-
-# manually run bt-ubuntu first, or we won't even have just
+# to search history, use Ctrl+R instead
+# here is how to search files
 #
-prep-act:
-    # for brew and zsh
-    just prep-ubuntu
-    just prep-act-in-zsh
+fzf:
+    fzf --preview 'bat {}'|xargs lvim
 
-prep-act-in-zsh:
+
+## Tracing
+
+# https://til.simonwillison.net/macos/fs-usage
+#
+# pathname, network, filesys, exec, diskio, cachehit
+#
+[macos]
+trace PID FILTER="pathname":
+    fs_usage -f {{FILTER}} {{PID}}
+
+# https://linux-audit.com/cheat-sheets/strace/
+# file, network, memory, process, ipc, signal
+#
+[linux]
+trace PID FILTER="file":
+    strace -f -e trace={{FILTER}} -p {{PID}}
+
+
+## Music
+
+# https://www.reddit.com/r/youtubedl/comments/155kkcc/youtube_music_how/
+#
+ytm PLAYLIST:
     #!/usr/bin/env bash
-    source ~/.zshrc
-    just prep-term
-    just prep-rust
-    just prep-lvim-in-zsh
-    echo 'To start lvim in server mode, run: just lv-remote'
-    echo 'Then from outside the container, run: just lv-local'
+    cd ~/Music
+    uvx --with 'mutagen' yt-dlp -f bestaudio --cookies-from-browser chrome -x --embed-metadata --embed-thumbnail '{{PLAYLIST}}' --output '%(uploader)s/%(title)s.%(ext)s'
 
-## VM
+prep-music:
+    which cmus || brew install cmus
+    which mpd || brew install mpd
+    mkdir -p ~/.mpd
+    cp -f dotfiles/.mpd/mpd.conf ~/.mpd/mpd.conf
+    brew services restart mpd
+    which mpc || brew install mpc
+    which ncmpcpp || brew install ncmpcpp
+    mkdir -p ~/.ncmpcpp
+    cp -f dotfiles/.ncmpcpp/config ~/.ncmpcpp/config
 
-prep-aria2:
-    which aria || brew install aria2
-
-prep-lume:
-    which lume || /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/trycua/cua/main/libs/lume/scripts/install.sh)"
-
-update-lume:
-    lume-update
-
-## SSH
-
-reset-ssh-keys:
-    rip ~/.ssh/id_*; rip ~/.ssh/*_rsa; rip ~/.ssh/*_dsa; rip ~/.ssh/*_ecdsa; rip ~/.ssh/*_ed25519 || true
-
-# still verifying
+# for keybindings, see https://github.com/ncmpcpp/ncmpcpp/blob/master/doc/bindings
+# 1-9 to switch between interfaces
+# = is clock
+# space will add the current song to the playlist, and move to the next one, just space over all songs to add them to the playlist
+# p to play/pause, <> for previous/next song, -+ for volume
+# fn+backspace can be used as delete, useful to delete a song from the playlist
+# 8 is visualization, space to switch visualization type
 #
-prep-ssh-keys:
+music:
     #!/usr/bin/env bash
-    key_path=~/.ssh/id_ed25519
-    if [[ ! -f "$key_path" && ! -f "$key_path.pub" ]]; then
-        echo "Generating new SSH key pair..."
-        ssh-keygen -t ed25519 -a 100 -f "$key_path" -q -N ""
-        chmod 600 "$key_path" "$key_path.pub"
-        echo "SSH keys generated and permissions set."
-    else
-        echo "SSH keys already exist at $key_path and $key_path.pub"
-        echo "Skipping key generation."
-    fi
-    cat "$key_path.pub"
-    # Read remote user and host
-    read "remote_user?Enter remote username: " || return
-    read "remote_host?Enter remote hostname or IP: " || return
+    cd ~/Music
+    # cmus
+    mpc update
+    ncmpcpp -s media_library
 
-    # Ask if user wants to proceed with key deployment
-    if read -q "?Do you want to deploy the public key now? (y/n) "; then
-        echo  # Add a newline after the prompt
-        if ssh-copy-id -x -i "$key_path.pub" "$remote_user@$remote_host"; then
-            echo "Public key deployed successfully!"
-            echo "You can now connect with: ssh $remote_user@$remote_host"
-        else
-            echo "Failed to deploy key. Please check connection or manually add the key:"
-            cat "$key_path.pub"
-        fi
-    else
-        echo "\nPublic key was not deployed. You can manually add this key:"
-        cat "$key_path.pub"
-    fi
+prep-tm:
+    which protoc || brew install protobuf
+    which termusic || cargo install termusic termusic-server --locked
 
-# initial draft, not verified
+# 2 go to artist/album layout
+# enter/backspace/tab for navigation
+# l or L to add one or all songs to the playlist
+# d or D to delete one or all songs from the playlist
+# space to play/pause
+# m to change play mode, r to random
+# Ctrl+H for help
+# no visualization
 #
-prep-ssh-server:
+tm *PARAMS="":
+    termusic {{PARAMS}}
+
+prep-ym:
+    [ -d /Applications/YesPlayMusic.app ] || brew install --cask yesplaymusic
+
+# prep-music:
+#     # it doesn't support free spotify accounts
+#     # which spotify_player || brew install spotify_player
+#     # it's no longer available
+#     # which spt || brew install spotify-tui
+#     # it doesn't support free spotify accounts
+#     # which ncspot || brew install ncspot
+#     which code-radio || cargo install code-radio-cli
+
+# music:
+#     code-radio --no-logo --volume 5
+
+
+## Tiling
+
+# I'v configured it to use double tap opt then hold to trigger the radial menu
+# direction keys to place the window in 8 directions, space to maximize, enter to center
+# It's so smooth
+#
+prep-loop:
     #!/usr/bin/env bash
+    [ -d /Applications/Loop.app ] || brew install loop
 
-    # Check if running as root
-    if [[ $EUID -ne 0 ]]; then
-        echo "This script must be run as root"
-        exit 1
-    fi
+prep-space:
+    #!/usr/bin/env bash
+    [ -d /Applications/FlashSpace.app ] || brew install flashspace
 
-    # Prompt for the public key
-    echo "Please paste your public SSH key (typically from ~/.ssh/id_rsa.pub):"
-    read -r public_key
-
-    # Verify the key looks like a valid SSH public key
-    if [[ ! "$public_key" =~ ^ssh-(rsa|dss|ed25519|ecdsa) ]]; then
-        echo "Error: This doesn't look like a valid SSH public key"
-        exit 1
-    fi
-
-    # Create .ssh directory if it doesn't exist
-    mkdir -p /root/.ssh
-
-    # Add key to authorized_keys
-    echo "$public_key" >> /root/.ssh/authorized_keys
-
-    # Set correct permissions
-    chmod 700 /root/.ssh
-    chmod 600 /root/.ssh/authorized_keys
-
-    # Configure SSH server (uncomment to enable)
-    # echo "Adding key to SSH server configuration..."
-    # echo "PermitRootLogin prohibit-password" >> /etc/ssh/sshd_config
-    # echo "AuthorizedKeysFile .ssh/authorized_keys" >> /etc/ssh/sshd_config
-
-    # Restart SSH service (uncomment to enable)
-    # echo "Restarting SSH service..."
-    # if command -v systemctl >/dev/null; then
-    #     systemctl restart sshd
-    # else
-    #     service ssh restart
-    # fi
-
-    echo "Public key added to /root/.ssh/authorized_keys"
-    echo "You should now be able to SSH as root using this key"

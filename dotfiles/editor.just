@@ -276,3 +276,19 @@ prep-wxmd:
 wxmd PORT="8899":
     echo open http://127.0.0.1:{{PORT}}
     md-cli port=8899
+
+## Notebook
+
+nbview FILE:
+    uvx euporie notebook {{FILE}}
+
+# https://github.com/livebook-dev/livebook#installation
+#
+prep-lb:
+    #!/usr/bin/env bash
+    mix do local.rebar --force, local.hex --force
+    yes|mix escript.install hex livebook
+
+lb:
+    LIVEBOOK_IFRAME_PORT=58081 livebook server --port 58080
+
