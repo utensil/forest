@@ -16,7 +16,7 @@
 
     <xsl:text>\begin{document}</xsl:text>
 
-    <xsl:for-each select="//f:resource[not(ancestor::f:backmatter)]">
+    <xsl:for-each select="//f:resource">
       <xsl:text>&#xa;</xsl:text>
       <xsl:text>\begin{filecontents*}[overwrite]{</xsl:text>
       <xsl:value-of select="@hash" />
