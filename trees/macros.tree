@@ -1,4 +1,4 @@
-\title{basic macros}
+\title{Basic macros}
 \tag{macro}
 
 \import{latex-preamble}
@@ -68,7 +68,7 @@
    \put\transclude/toc{false}
    %  \put\transclude/expanded{false}
    \subtree{
-     \taxon{proof}
+     \taxon{Proof}
      \body
    }
  }
@@ -122,71 +122,71 @@
 
 \def\make-topic-bibliography[topic]{
   \subtree{
-   \title{accepted papers}
+   \title{Accepted papers}
    \query{
     \open\query
-    \isect{\tag{\topic}}{\taxon{reference}}{\tag{accepted}}
+    \isect{\tag{\topic}}{\taxon{Reference}}{\tag{accepted}}
    }
   }
 
   \subtree{
-   \title{refereed papers}
+   \title{Refereed papers}
    \query{
     \open\query
-    \isect{\tag{\topic}}{\taxon{reference}}{\tag{refereed}}
+    \isect{\tag{\topic}}{\taxon{Reference}}{\tag{refereed}}
    }
   }
 
   \subtree{
-   \title{manuscripts}
+   \title{Manuscripts}
    \query{
     \open\query
-    \isect{\tag{\topic}}{\taxon{reference}}{\tag{preprint}}{\compl{\tag{accepted}}}
+    \isect{\tag{\topic}}{\taxon{Reference}}{\tag{preprint}}{\compl{\tag{accepted}}}
    }
   }
 
   \subtree{
-   \title{dissertations}
+   \title{Dissertations}
    \query{
     \open\query
-    \isect{\tag{\topic}}{\taxon{reference}}{\tag{dissertation}}
+    \isect{\tag{\topic}}{\taxon{Reference}}{\tag{dissertation}}
    }
   }
 
   \subtree{
-   \title{technical reports}
+   \title{Technical reports}
    \query{
     \open\query
-    \isect{\tag{\topic}}{\taxon{reference}}{\tag{techreport}}
+    \isect{\tag{\topic}}{\taxon{Reference}}{\tag{techreport}}
    }
   }
 
   \subtree{
-   \title{presentations}
+   \title{Presentations}
    \query{
     \open\query
     \isect{\tag{\topic}}{
      \union{
-      \isect{\tag{workshop}}{\taxon{reference}}
-     }{\taxon{presentation}}
+      \isect{\tag{workshop}}{\taxon{Reference}}
+     }{\taxon{Presentation}}
     }
    }
   }
 
 
   \subtree{
-   \title{seminar talks}
+   \title{Seminar talks}
    \query{
     \open\query
-    \isect{\tag{\topic}}{\taxon{reference}}{\tag{seminar}}
+    \isect{\tag{\topic}}{\taxon{Reference}}{\tag{seminar}}
    }
   }
 
   \subtree{
-   \title{roladex}
+   \title{Roladex}
    \query{
     \open\query
-    \isect{\taxon{person}}{\tag{\topic}}
+    \isect{\taxon{Person}}{\tag{\topic}}
    }
   }
 }
@@ -315,7 +315,7 @@ so the text size almost matches the size output by native forester code. This do
 \def\wikiref[name][citeid][pageid][year]{
   \title{\name - Wikipedia}
   \meta{external}{https://en.wikipedia.org/wiki/\pageid}
-  \taxon{reference}
+  \taxon{Reference}
   \meta{bibtex}{\startverb
 @misc{wiki\stopverb\year\citeid\startverb,
   title  = {\stopverb\name - Wikipedia\startverb},
@@ -337,7 +337,7 @@ so the text size almost matches the size output by native forester code. This do
 \def\nlabref[name][citeid][pageid][year]{
   \title{\name - nLab}
   \meta{external}{https://ncatlab.org/nlab/show/\pageid}
-  \taxon{reference}
+  \taxon{Reference}
   \meta{bibtex}{\startverb
 @misc{nlab\stopverb\year\citeid\startverb,
   title  = {\stopverb\name - nLab\startverb},
@@ -361,7 +361,7 @@ so the text size almost matches the size output by native forester code. This do
   \def\prtitle{\prname}
   \title{\prtitle}
   \meta{external}{\prurl}
-  \taxon{reference}
+  \taxon{Reference}
   \meta{bibtex}{\startverb
 @misc{pr-\stopverb\citeid\startverb,
   title  = {\stopverb\prtitle\startverb},
