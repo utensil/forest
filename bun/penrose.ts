@@ -33,10 +33,6 @@ for (const penrose_root of penrose_roots) {
     }
 
     penrose_root.innerHTML = ''
-    await Penrose.diagram(
-        trio,
-        penrose_root,
-        async () => undefined,
-    )
+    await Penrose.diagram(trio, penrose_root, async () => undefined)
     penrose_root.classList.remove('loading')
 }
