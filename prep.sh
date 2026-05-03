@@ -19,7 +19,7 @@ if ! which forester &> /dev/null; then
   brew install opam  watchexec
   opam init --auto-setup --yes
   opam update --yes
-  opam pin add forester git+https://git.sr.ht/~jonsterling/ocaml-forester#56de06afe952d752c1a13fdcd8bb56c5fef9956f --yes
+  opam pin add forester git+https://git.sr.ht/~jonsterling/ocaml-forester#5ab7277 --yes
 fi
 
 # if pandoc is not installed
