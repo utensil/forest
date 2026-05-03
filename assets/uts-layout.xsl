@@ -89,6 +89,9 @@
                 </header>
 
                 <div id="grid-wrapper">
+                    <blockquote>
+                        NOTE: This site has just upgraded to Forester 5.x and is still having some style and functionality <span class="link external"><a href="https://github.com/utensil/forest/issues/9">issues</a></span>, we will fix them ASAP.
+                    </blockquote>
                     <article>
                         <xsl:apply-templates select="fr:tree" />
                     </article>
