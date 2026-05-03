@@ -1,6 +1,6 @@
+import path from 'node:path'
 import Bun from 'bun'
 import type { BunPlugin } from 'bun'
-import path from 'path'
 
 const args = process.argv.slice(2)
 
@@ -38,7 +38,10 @@ const result = await Bun.build({
     // bun 1.2.x doesn't reliably pick the `browser` exports condition for
     // @rose-lang/wasm (used by @penrose/core >=3.3.0); alias to browser.js directly.
     alias: {
-        '@rose-lang/wasm': path.join(import.meta.dir, 'node_modules/@rose-lang/wasm/dist/browser.js'),
+        '@rose-lang/wasm': path.join(
+            import.meta.dir,
+            'node_modules/@rose-lang/wasm/dist/browser.js',
+        ),
     },
 })
 
