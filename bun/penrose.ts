@@ -33,7 +33,7 @@ for (const penrose_root of penrose_roots) {
     }
 
     penrose_root.innerHTML = ''
-    const dia = await Penrose.interactiveDiagram(
+    await Penrose.diagram(
         trio,
         penrose_root,
         async () => undefined,
