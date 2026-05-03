@@ -105,7 +105,7 @@
                 </xsl:choose>
             </xsl:if>
             <xsl:if test="../fr:meta[@name='pdf']">
-                <a target="_blank" title="PDF" class="link-button link-pdf" href="{../fr:display-uri}.pdf">
+                <a target="_blank" title="PDF" class="link-button link-pdf" href="{/fr:tree/@base-url}{../fr:display-uri}.pdf">
                     📄<span>PDF</span></a>
             </xsl:if>
             <xsl:if test="../fr:meta[@name='lean']">
