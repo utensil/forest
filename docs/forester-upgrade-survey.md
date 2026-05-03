@@ -191,6 +191,28 @@
    - Check for `fr:img` → `html:img` migration needs
    - Verify theme files are complete
 
+## Post-Bump Verification Results (actual)
+
+After bumping to `5ab7277` and running the full pipeline:
+
+| Check | Result |
+|-------|--------|
+| `opam pin add forester ...#5ab7277` | ✓ Installs successfully |
+| `forester --version` | `5ab7277` |
+| `forester build` (with TEXINPUTS) | ✓ Success, 0 new errors |
+| `./build.sh` (full pipeline) | ✓ 1183 pages in ~34s |
+| XML→HTML conversion | ✓ All pages convert |
+| Headless Chrome verification | ✓ Titles, taxons, markdown all work |
+| Custom datalog queries (lost notes) | ✓ Working |
+| `\rel/links-to/rtc` custom relation | ✓ Working |
+
+**Key learnings:**
+1. `TEXINPUTS` must be set for `forester build` to find `tex/diagrams.tex` — `build.sh` already handles this, but running `forester build` directly requires `export TEXINPUTS=".:$(pwd)/tex/:"` 
+2. Theme files (`core.xsl`, `tree.xsl`, `links.xsl`, `metadata.xsl`) aren't auto-copied to output since `theme` is commented out in `forest.toml` — the `just assets` step or `forester build` handles this
+3. The `ca-000O.tree` unresolved identifier warnings were a missing `\import` (pre-existing bug, not bump-related)
+4. CI workflow needs to pin from upstream `git.sr.ht/~jonsterling/ocaml-forester` (not the fork)
+5. No query syntax breakage — all existing `\query\datalog{...}` and `\execute\datalog{...}` work as-is
+
 ## OCaml/Build Requirements
 
 The latest forester requires:
