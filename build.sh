@@ -157,11 +157,39 @@ function needs_update() {
 
 source convert_xml.sh
 
+function backup_html_before_forester() {
+    echo "⭐ Backing up HTML files before forester build"
+    mkdir -p output/forest/.html-bak
+    for html_file in output/forest/*/index.html; do
+        [ -f "$html_file" ] || continue
+        local note_id=$(basename $(dirname "$html_file"))
+        mkdir -p "output/forest/.html-bak/$note_id"
+        cp -f "$html_file" "output/forest/.html-bak/$note_id/index.html" 2>/dev/null || true
+    done
+}
+
+function restore_html_after_forester() {
+    echo "⭐ Restoring HTML files over forester redirect stubs"
+    local restored=0
+    for bak_file in output/forest/.html-bak/*/index.html; do
+        [ -f "$bak_file" ] || continue
+        local note_id=$(basename $(dirname "$bak_file"))
+        local html_file="output/forest/$note_id/index.html"
+        # Only restore if the current HTML is a redirect stub
+        if [ -f "$html_file" ] && grep -q 'meta.*http-equiv.*refresh.*index\.xml' "$html_file" 2>/dev/null; then
+            cp -f "$bak_file" "$html_file"
+            ((restored++))
+        fi
+    done
+    echo "  Restored $restored HTML files over redirect stubs"
+}
+
 function build {
     mkdir -p build
     echo "⭐ Rebuilding bun"
     bun_build
     backup_xml_files
+    backup_html_before_forester
     echo "⭐ Rebuilding forest"
     just forest
     show_result
@@ -170,6 +198,8 @@ function build {
         echo -e "\033[0;31mError: Forest build failed.\033[0m"
         exit 1
     fi
+
+    restore_html_after_forester
 
     # Check if index.xml was generated
     # if [ ! -f "output/index.xml" ]; then
