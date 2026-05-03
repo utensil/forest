@@ -21,7 +21,8 @@ PDF_FILE="$1.pdf"
 
 rm "build/$1".* >/dev/null 2>&1 || echo no files to clean
 
-cp "output/$XML_FILE" "build/$XML_FILE"
+# Forester 5.x outputs XML at output/forest/TREE_ID/index.xml
+cp "output/forest/$1/index.xml" "build/$XML_FILE"
 
 # brew install saxon
 # bun add xslt3
@@ -50,10 +51,10 @@ fi
 
 cd ..
 
-cp "build/$PDF_FILE" "output/$PDF_FILE"
+cp "build/$PDF_FILE" "output/forest/$PDF_FILE"
 
 echo "lize.sh| Open build/$1.log to see the log."
 echo "lize.sh| Open build/$TEX_FILE to see the LaTeX source."
-echo "lize.sh| Open output/$PDF_FILE to see the result."
+echo "lize.sh| Open output/forest/$PDF_FILE to see the result."
 
 # use ./lize.sh uts-0001 2>&1|grep lize to see a short output
