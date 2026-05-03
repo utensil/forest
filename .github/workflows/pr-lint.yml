@@ -1,0 +1,35 @@
+name: PR Lint
+
+on:
+  pull_request:
+    paths-ignore:
+      - "LICENSE"
+      - "README.md"
+      - "docs/**"
+
+# Default to bash
+defaults:
+  run:
+    shell: bash
+
+permissions:
+  contents: read
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: false
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: 1.2.22
+      - name: Setup Biome
+        uses: biomejs/setup-biome@v2
+        with:
+          version: latest
+      - name: Lint
+        run: |
+          ./chk.sh
