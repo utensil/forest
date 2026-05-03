@@ -3,7 +3,7 @@
 <xsl:stylesheet version="1.0"
                 xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
                 xmlns:html="http://www.w3.org/1999/xhtml"
-                xmlns:f="http://www.jonmsterling.com/jms-005P.xml">
+                xmlns:f="http://www.forester-notes.org">
   
   <xsl:template match="/f:tree/f:backmatter//f:tree[f:frontmatter/f:taxon[text()='Reference']]">
     <xsl:apply-templates select="f:frontmatter/f:meta[@name='bibtex']" />
@@ -25,9 +25,9 @@
   
   <xsl:template match="f:tree[not(f:frontmatter/f:taxon)]">
     <xsl:apply-templates select="f:frontmatter/f:title" />
-    <xsl:if test="f:frontmatter/f:addr[not(contains(text(), '#'))]">
+    <xsl:if test="f:frontmatter/f:display-uri[not(contains(text(), '#'))]">
       <xsl:text>\label{</xsl:text>
-      <xsl:value-of select="f:frontmatter/f:addr" />
+      <xsl:value-of select="f:frontmatter/f:display-uri" />
       <xsl:text>}</xsl:text>
     </xsl:if>
     <xsl:apply-templates select="f:mainmatter" />
@@ -97,9 +97,9 @@
       <xsl:apply-templates select="f:frontmatter/f:title" />
       <xsl:text>}]</xsl:text>
     </xsl:if>
-    <xsl:if test="f:frontmatter/f:addr[not(contains(text(), '#'))]">
+    <xsl:if test="f:frontmatter/f:display-uri[not(contains(text(), '#'))]">
       <xsl:text>\label{</xsl:text>
-      <xsl:value-of select="f:frontmatter/f:addr" />
+      <xsl:value-of select="f:frontmatter/f:display-uri" />
       <xsl:text>}</xsl:text>
     </xsl:if>
     <xsl:apply-templates select="f:mainmatter" />
@@ -120,8 +120,8 @@
       <xsl:text>}}</xsl:text>
     </xsl:if>
     <xsl:text>{</xsl:text>
-    <xsl:if test="f:frontmatter/f:addr[not(contains(text(), '#'))]">
-      <xsl:value-of select="f:frontmatter/f:addr" />
+    <xsl:if test="f:frontmatter/f:display-uri[not(contains(text(), '#'))]">
+      <xsl:value-of select="f:frontmatter/f:display-uri" />
     </xsl:if>
     <xsl:text>}{</xsl:text>
     <xsl:apply-templates select="f:mainmatter" />
@@ -135,20 +135,20 @@
     <xsl:apply-templates />
   </xsl:template>
   
-  <xsl:template match="f:p">
+  <xsl:template match="html:p">
     <xsl:text>\par{}</xsl:text>
     <!-- <xsl:text>\paragraph{</xsl:text> -->
     <xsl:apply-templates />
     <!-- <xsl:text>}</xsl:text> -->
   </xsl:template>
   
-  <xsl:template match="f:strong">
+  <xsl:template match="html:strong">
     <xsl:text>\textbf{</xsl:text>
     <xsl:apply-templates />
     <xsl:text>}</xsl:text>
   </xsl:template>
   
-  <xsl:template match="f:em">
+  <xsl:template match="html:em">
     <xsl:text>\emph{</xsl:text>
     <xsl:apply-templates />
     <xsl:text>}</xsl:text>
@@ -169,22 +169,22 @@
     <xsl:text>\end{equation}</xsl:text>
   </xsl:template>
   
-  <xsl:template match="f:ol">
+  <xsl:template match="html:ol">
     <xsl:text>\begin{enumerate}</xsl:text>
     <xsl:apply-templates />
     <xsl:text>\end{enumerate}</xsl:text>
   </xsl:template>
   
-  <xsl:template match="f:ul">
+  <xsl:template match="html:ul">
     <xsl:text>\begin{itemize}</xsl:text>
     <xsl:apply-templates />
     <xsl:text>\end{itemize}</xsl:text>
   </xsl:template>
   
-  <xsl:template match="f:li">
+  <xsl:template match="html:li">
     <xsl:text>\item{}</xsl:text>
     <xsl:apply-templates />
-    <xsl:if test="(parent::f:ol/parent::f:mainmatter/parent::f:tree/f:frontmatter/f:taxon[text()='Proof'] or parent::f:ul/parent::f:mainmatter/parent::f:tree/f:frontmatter/f:taxon[text()='Proof']) and position()=last()">
+    <xsl:if test="(parent::html:ol/parent::f:mainmatter/parent::f:tree/f:frontmatter/f:taxon[text()='Proof'] or parent::html:ul/parent::f:mainmatter/parent::f:tree/f:frontmatter/f:taxon[text()='Proof']) and position()=last()">
       <xsl:text>\qedhere</xsl:text>
     </xsl:if>
   </xsl:template>
@@ -193,21 +193,21 @@
     <xsl:value-of select="@taxon" />
     <xsl:text>\unskip~</xsl:text>
     <xsl:text>\ref{</xsl:text>
-    <xsl:value-of select="@addr" />
+    <xsl:value-of select="@display-uri" />
     <xsl:text>}</xsl:text>
   </xsl:template>
   
   <xsl:template match="f:ref[not(@taxon)]">
     <xsl:text>\S~\ref{</xsl:text>
-    <xsl:value-of select="@addr" />
+    <xsl:value-of select="@display-uri" />
     <xsl:text>}</xsl:text>
   </xsl:template> -->
 
   <xsl:template match="f:ref">
     <xsl:choose>
-      <xsl:when test="//f:tree/f:frontmatter[f:addr/text()=current()/@addr and not(ancestor::f:backmatter)]">
+      <xsl:when test="//f:tree/f:frontmatter[f:display-uri/text()=current()/@display-uri and not(ancestor::f:backmatter)]">
         <xsl:text>\Cref{</xsl:text>
-        <xsl:value-of select="@addr" />
+        <xsl:value-of select="@display-uri" />
         <xsl:text>}</xsl:text>
       </xsl:when>
       <xsl:otherwise>
@@ -220,10 +220,10 @@
             <xsl:text>\S~</xsl:text>
           </xsl:otherwise>
         </xsl:choose>
-        <xsl:text>\href{https://utensil.github.io/forest/</xsl:text>
-        <xsl:value-of select="@href" />
+        <xsl:text>\href{</xsl:text>
+        <xsl:value-of select="@uri" />
         <xsl:text>}{[</xsl:text>
-        <xsl:value-of select="@addr" />
+        <xsl:value-of select="@display-uri" />
         <xsl:text>]}</xsl:text>
       </xsl:otherwise>
     </xsl:choose>
@@ -231,14 +231,14 @@
   
   <xsl:template match="f:link[@type='local']">
     <xsl:choose>
-      <xsl:when test="//f:tree/f:frontmatter[f:addr/text()=current()/@addr and not(ancestor::f:backmatter)]">
+      <xsl:when test="//f:tree/f:frontmatter[f:display-uri/text()=current()/@display-uri and not(ancestor::f:backmatter)]">
         <xsl:text>\hyperref[</xsl:text>
-        <xsl:value-of select="@addr" />
+        <xsl:value-of select="@display-uri" />
         <xsl:text>]{</xsl:text>
         <xsl:apply-templates />
         <xsl:text>}</xsl:text>
       </xsl:when>
-      <xsl:when test="/f:tree/f:backmatter//f:tree/f:frontmatter[f:taxon/text()='Reference' and f:addr/text()=current()/@addr]">
+      <xsl:when test="/f:tree/f:backmatter//f:tree/f:frontmatter[f:taxon/text()='Reference' and f:display-uri/text()=current()/@display-uri]">
         <xsl:text>{\sloppy\cite</xsl:text>
         <xsl:if test="../@tid">
           <xsl:text>[</xsl:text>
@@ -246,12 +246,12 @@
           <xsl:text>]</xsl:text>
         </xsl:if>
         <xsl:text>{</xsl:text>
-        <xsl:value-of select="@addr" />
+        <xsl:value-of select="@display-uri" />
         <xsl:text>}}</xsl:text>
       </xsl:when>
       <xsl:otherwise>
-        <xsl:text>\href{https://utensil.github.io/forest/</xsl:text>
-        <xsl:value-of select="@href" />
+        <xsl:text>\href{</xsl:text>
+        <xsl:value-of select="@uri" />
         <xsl:text>}{</xsl:text>
         <xsl:apply-templates />
         <xsl:text>}</xsl:text>
@@ -267,6 +267,7 @@
     <xsl:text>}</xsl:text>
   </xsl:template>
   
+  <xsl:template match="f:contextual-number" />
   <xsl:template match="f:headline" />
   
   <xsl:template match="f:resource">
@@ -299,7 +300,7 @@
     </xsl:choose>
   </xsl:template>
 
-  <xsl:template match="f:code">
+  <xsl:template match="html:code">
     <xsl:text>\lstinline|</xsl:text>
     <xsl:apply-templates />
     <xsl:text>|</xsl:text>
