@@ -14,7 +14,6 @@
         <html xmlns="http://www.w3.org/1999/xhtml" data-base-url="{/fr:tree/@base-url}">
             <head>
                 <meta name="viewport" content="width=device-width" />
-                <!-- <style> :root { background-color: #262626 !important; }</style> -->
                 <link rel="stylesheet" href="{/fr:tree/@base-url}style.css" />
                 <link rel="stylesheet" href="{/fr:tree/@base-url}katex.min.css" />
                 <!-- uts-begin -->
@@ -29,14 +28,10 @@
                 </script>
                 <script type="module" src="{/fr:tree/@base-url}forester.js"></script>
                 <title>
-                    <xsl:value-of select="/fr:tree/fr:frontmatter/fr:title" />
+                    <xsl:value-of select="/fr:tree/fr:frontmatter/fr:title/@text" />
                 </title>
-                <!-- <script
-                src="https://cdn.jsdelivr.net/gh/iconfu/svg-inject@v1.2.3/dist/svg-inject.min.js"></script> -->
                 <script src="{/fr:tree/@base-url}uts-forester.js"></script>
                 <script src="{/fr:tree/@base-url}uts-ondemand.js"></script>
-                <!-- <script type="module" src="shiki.js"></script>
-        <script type="module" src="glsl.js"></script> -->
             </head>
             <body>
                 <ninja-keys placeholder="Start typing a note title or ID"></ninja-keys>
@@ -94,9 +89,6 @@
                 </header>
 
                 <div id="grid-wrapper">
-                    <blockquote>
-                        NOTE: This site has just upgraded to Forester 5.x and is still having some style and functionality <span class="link external"><a href="https://github.com/utensil/forest/issues/9">issues</a></span>, we will fix them ASAP.
-                    </blockquote>
                     <article>
                         <xsl:apply-templates select="fr:tree" />
                     </article>
