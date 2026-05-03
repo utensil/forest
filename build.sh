@@ -113,12 +113,6 @@ function bun_build {
         fi
     done
 
-    # bun doesn't always copy WASM files from npm package transitive deps; do it explicitly
-    find node_modules -name "*.wasm" -path "*/wbg/*" -exec cp {} output/forest/ \; 2>/dev/null || true
-    # @rose-lang/wasm has two wbg/ dirs (root and dist/); the find above may copy the root one
-    # last, which mismatches the dist/browser.js JS glue we alias in bun_build.ts.
-    # Explicitly overwrite with the dist/wbg/ version to guarantee consistency.
-    cp node_modules/@rose-lang/wasm/dist/wbg/rose_web_bg.wasm output/forest/ 2>/dev/null || true
 }
 
 function build_ssr {

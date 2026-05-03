@@ -29,20 +29,28 @@ const wgslLoader: BunPlugin = {
     },
 }
 
+// bun 1.2.x doesn't reliably pick the `browser` exports condition for
+// @rose-lang/wasm (used by @penrose/core >=3.3.0); alias to browser.js directly.
+// The matching WASM asset is copied below after a successful build.
+const aliases: Record<string, { jsEntry: string; wasmAssets: string[] }> = {
+    '@rose-lang/wasm': {
+        jsEntry: 'node_modules/@rose-lang/wasm/dist/browser.js',
+        wasmAssets: ['node_modules/@rose-lang/wasm/dist/wbg/rose_web_bg.wasm'],
+    },
+}
+
 const result = await Bun.build({
     entrypoints: [args[0]],
     outdir: './output/forest',
     target: 'browser',
     minify: true,
     plugins: [wgslLoader],
-    // bun 1.2.x doesn't reliably pick the `browser` exports condition for
-    // @rose-lang/wasm (used by @penrose/core >=3.3.0); alias to browser.js directly.
-    alias: {
-        '@rose-lang/wasm': path.join(
-            import.meta.dir,
-            'node_modules/@rose-lang/wasm/dist/browser.js',
-        ),
-    },
+    alias: Object.fromEntries(
+        Object.entries(aliases).map(([pkg, { jsEntry }]) => [
+            pkg,
+            path.join(import.meta.dir, jsEntry),
+        ]),
+    ),
 })
 
 if (!result.success) {
@@ -50,5 +58,19 @@ if (!result.success) {
     for (const message of result.logs) {
         // Bun will pretty print the message object
         console.error(message)
+    }
+} else {
+    // Copy WASM assets for aliased packages — bun doesn't auto-copy npm WASM files.
+    // These must come from the same dist/ tree as the aliased JS entry.
+    for (const { wasmAssets } of Object.values(aliases)) {
+        for (const wasmPath of wasmAssets) {
+            const src = path.join(import.meta.dir, wasmPath)
+            const dest = path.join(
+                import.meta.dir,
+                'output/forest',
+                path.basename(src),
+            )
+            await Bun.write(dest, Bun.file(src))
+        }
     }
 }
