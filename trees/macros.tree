@@ -121,72 +121,64 @@
 \p{\code{make-topic-bibliography[topic]}: A bibliography of papers, presentations, and people related to a topic.}
 
 \def\make-topic-bibliography[topic]{
+  % Helper relation for presentations: workshop references OR presentation taxon
+  \def\rel/is-presentation-like{utensil.query.is-presentation-like}
+  \execute\datalog{\rel/is-presentation-like ?X -: {\rel/has-tag ?X '{workshop}}{\rel/has-taxon ?X '{Reference}}}
+  \execute\datalog{\rel/is-presentation-like ?X -: {\rel/has-taxon ?X '{Presentation}}}
+
   \subtree{
    \title{Accepted papers}
-   \query{
-    \open\query
-    \isect{\tag{\topic}}{\taxon{Reference}}{\tag{accepted}}
+   \query\datalog{
+    ?X -: {\rel/has-tag ?X '{\topic}}{\rel/has-taxon ?X '{Reference}}{\rel/has-tag ?X '{accepted}}
    }
   }
 
   \subtree{
    \title{Refereed papers}
-   \query{
-    \open\query
-    \isect{\tag{\topic}}{\taxon{Reference}}{\tag{refereed}}
+   \query\datalog{
+    ?X -: {\rel/has-tag ?X '{\topic}}{\rel/has-taxon ?X '{Reference}}{\rel/has-tag ?X '{refereed}}
    }
   }
 
   \subtree{
    \title{Manuscripts}
-   \query{
-    \open\query
-    \isect{\tag{\topic}}{\taxon{Reference}}{\tag{preprint}}{\compl{\tag{accepted}}}
+   \query\datalog{
+    ?X -: {\rel/has-tag ?X '{\topic}}{\rel/has-taxon ?X '{Reference}}{\rel/has-tag ?X '{preprint}} # {\rel/has-tag ?X '{accepted}}
    }
   }
 
   \subtree{
    \title{Dissertations}
-   \query{
-    \open\query
-    \isect{\tag{\topic}}{\taxon{Reference}}{\tag{dissertation}}
+   \query\datalog{
+    ?X -: {\rel/has-tag ?X '{\topic}}{\rel/has-taxon ?X '{Reference}}{\rel/has-tag ?X '{dissertation}}
    }
   }
 
   \subtree{
    \title{Technical reports}
-   \query{
-    \open\query
-    \isect{\tag{\topic}}{\taxon{Reference}}{\tag{techreport}}
+   \query\datalog{
+    ?X -: {\rel/has-tag ?X '{\topic}}{\rel/has-taxon ?X '{Reference}}{\rel/has-tag ?X '{techreport}}
    }
   }
 
   \subtree{
    \title{Presentations}
-   \query{
-    \open\query
-    \isect{\tag{\topic}}{
-     \union{
-      \isect{\tag{workshop}}{\taxon{Reference}}
-     }{\taxon{Presentation}}
-    }
+   \query\datalog{
+    ?X -: {\rel/has-tag ?X '{\topic}}{\rel/is-presentation-like ?X}
    }
   }
 
-
   \subtree{
    \title{Seminar talks}
-   \query{
-    \open\query
-    \isect{\tag{\topic}}{\taxon{Reference}}{\tag{seminar}}
+   \query\datalog{
+    ?X -: {\rel/has-tag ?X '{\topic}}{\rel/has-taxon ?X '{Reference}}{\rel/has-tag ?X '{seminar}}
    }
   }
 
   \subtree{
    \title{Roladex}
-   \query{
-    \open\query
-    \isect{\taxon{Person}}{\tag{\topic}}
+   \query\datalog{
+    ?X -: {\rel/has-taxon ?X '{Person}}{\rel/has-tag ?X '{\topic}}
    }
   }
 }
