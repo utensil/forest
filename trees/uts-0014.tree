@@ -45,9 +45,16 @@
 
     \execute\datalog{\rel/root/transcluded ?X -: {\rel/is-root ?Y}{\rel/transcludes/reflexive-transitive-closure ?Y ?X}}
 
+    \def\rel/links-to/tc{utensil.rel.links-to.transitive-closure}
+    \def\rel/links-to/rtc{utensil.rel.links-to.reflexive-transitive-closure}
+    \execute\datalog{\rel/links-to/tc ?X ?Y -: {\rel/links-to ?X ?Y}}
+    \execute\datalog{\rel/links-to/tc ?X ?Z -: {\rel/links-to/tc ?X ?Y}{\rel/links-to ?Y ?Z}}
+    \execute\datalog{\rel/links-to/rtc ?X ?X -: {\rel/is-node ?X}}
+    \execute\datalog{\rel/links-to/rtc ?X ?Y -: {\rel/links-to/tc ?X ?Y}}
+
     \def\rel/index/links-to{utensil.query.index.links-to}
 
-    \execute\datalog{\rel/index/links-to ?X -: {\rel/is-index ?Y}{\rel/links-to/reflexive-transitive-closure ?Y ?X}}
+    \execute\datalog{\rel/index/links-to ?X -: {\rel/is-index ?Y}{\rel/links-to/rtc ?Y ?X}}
 
 %   \def\query/index{
 %     \tag{interest}
@@ -69,9 +76,9 @@
     \execute\datalog{ \rel/is-special ?X -: {\rel/has-tag ?X '{draft}} }
     \execute\datalog{ \rel/is-special ?X -: {\rel/has-tag ?X '{macro}} }
     \execute\datalog{ \rel/is-special ?X -: {\rel/has-tag ?X '{exp}} }
-    \execute\datalog{ \rel/is-special ?X -: {\rel/has-taxon ?X '{person}} }
-    \execute\datalog{ \rel/is-special ?X -: {\rel/has-taxon ?X '{reference}} }
-    \execute\datalog{ \rel/is-special ?X -: {\rel/has-taxon ?X '{eq}} }
+    \execute\datalog{ \rel/is-special ?X -: {\rel/has-taxon ?X '{Person}} }
+    \execute\datalog{ \rel/is-special ?X -: {\rel/has-taxon ?X '{Reference}} }
+    \execute\datalog{ \rel/is-special ?X -: {\rel/has-taxon ?X '{Eq}} }
     \execute\datalog{ \rel/is-special ?X -: {\rel/has-tag ?X '{mwe}} }
     \execute\datalog{ \rel/is-special ?X -: {\rel/has-tag ?X '{post}} }
 
