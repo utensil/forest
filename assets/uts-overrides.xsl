@@ -208,8 +208,16 @@
     </xsl:template>
 
     <xsl:template match="fr:resource-content">
-        <xsl:apply-templates />
+        <center>
+            <xsl:apply-templates />
+        </center>
     </xsl:template>
+
+    <!-- uts-begin: add embedded-tex-svg class for dark mode inversion -->
+    <xsl:template match="fr:resource-content//html:img">
+        <img class="embedded-tex-svg" src="{@src}" />
+    </xsl:template>
+    <!-- uts-end -->
 
     <xsl:template match="fr:img[@src]">
         <figure>

@@ -350,6 +350,12 @@
     <xsl:text>\end{displayquote}</xsl:text>
   </xsl:template>
 
+  <xsl:template match="html:span[@class='placeholder']">
+    <xsl:text>\texttt{</xsl:text>
+    <xsl:apply-templates />
+    <xsl:text>}</xsl:text>
+  </xsl:template>
+
   <xsl:template match="html:span[@class='related']">
   </xsl:template>
 
