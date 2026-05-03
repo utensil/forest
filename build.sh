@@ -43,24 +43,39 @@ function prep_wasm {
     url=$2
     hash=$3
     lib_path=${4:-$lib_name}
-    if [ ! -d "lib/$lib_name" ]; then
+    local hash_file="lib/$lib_path/pkg/.commit_hash"
+    local needs_build=false
+
+    if [ ! -d "lib/$lib_name/.git" ]; then
+        # No git repo (stale pkg-only cache restore or first run) — clone fresh
+        rm -rf "lib/$lib_name"
         git clone --depth 1 "$url" "lib/$lib_name"
         if [ -n "$hash" ]; then
             (cd "lib/$lib_name" && git fetch --depth 1 origin "$hash" && git checkout "$hash")
         fi
+        needs_build=true
+    elif [ -n "$hash" ] && [ "$(cd "lib/$lib_name" && git rev-parse HEAD)" != "$hash" ]; then
+        # Repo exists but pinned to wrong commit
+        (cd "lib/$lib_name" && git fetch --depth 1 origin "$hash" && git checkout "$hash")
+        needs_build=true
+    fi
+
+    if [ ! -d "lib/$lib_path/pkg" ] || [ -z "$(ls -A "lib/$lib_path/pkg")" ]; then
+        needs_build=true
+    elif [ ! -f "$hash_file" ] || [ "$(cat "$hash_file")" != "$hash" ]; then
+        needs_build=true
     fi
 
     # only run wasm-pack build in CI or for `dev.sh`, so other people would not need Rust dependencies
     if [ -n "$CI" ] || [ -n "$UTS_DEV" ]; then
-        # Check if pkg directory exists and is not empty
-        if [ ! -d "lib/$lib_path/pkg" ] || [ -z "$(ls -A "lib/$lib_path/pkg")" ]; then
+        if [ "$needs_build" = "true" ]; then
             echo "Building WASM package for $lib_name..."
             (cd "lib/$lib_path" && bunx wasm-pack -v build --target web --release . --out-dir pkg || echo -e "\033[0;31mwasm-pack build failed\033[0m")
+            [ -d "lib/$lib_path/pkg" ] && echo "$hash" > "$hash_file"
         else
             echo "Using cached WASM package for $lib_name"
         fi
     else
-        # echo warning emoji
         echo "🟡 Skipping wasm-pack build for $lib_name, some notes that used Rust and WASM might not work as epected."
     fi
 
