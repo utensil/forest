@@ -200,3 +200,120 @@ The latest forester requires:
 - Static build support via nix
 
 Our `prep.sh` uses `opam pin` which should handle deps, but OCaml 5.3 may need a switch upgrade.
+
+## Datalog Query Migration Guide
+
+### New Syntax Overview
+
+The new forester uses a datalog-based query system. Key elements:
+
+| Syntax | Meaning |
+|--------|---------|
+| `?X` | Variable |
+| `@{uri}` | Constant URI term |
+| `'{content}` | Constant content term |
+| `-:` | Entailment ("such that") |
+| `{prop}` | Braces wrap a proposition |
+| `#` | Separates positive from negative constraints |
+| `\query\datalog{...}` | Execute query and render matching trees |
+| `\execute\datalog{...}` | Define a new relation rule (no rendering) |
+| `\def\rel/name{full.relation.name}` | Name a custom relation |
+
+### Available Built-in Relations
+
+From `lib/compiler/Expand.ml` (lines 1053-1069):
+
+| Primitive | Full name |
+|-----------|-----------|
+| `\rel/has-tag` | `org.forester.rel.has-tag` |
+| `\rel/has-taxon` | `org.forester.rel.has-taxon` |
+| `\rel/has-author` | `org.forester.rel.authored-by` |
+| `\rel/has-direct-contributor` | `org.forester.rel.has-direct-contributor` |
+| `\rel/transcludes` | `org.forester.rel.transcludes` |
+| `\rel/transcludes/transitive-closure` | `org.forester.rel.transcludes.transitive-closure` |
+| `\rel/transcludes/reflexive-transitive-closure` | `org.forester.rel.transcludes.reflexive-transitive-closure` |
+| `\rel/links-to` | `org.forester.rel.links-to` |
+| `\rel/is-reference` | `org.forester.rel.is-reference` |
+| `\rel/is-person` | `org.forester.rel.is-person` |
+| `\rel/is-node` | `org.forester.rel.is-node` |
+| `\rel/is-article` | `org.forester.rel.is-article` |
+| `\rel/is-asset` | `org.forester.rel.is-asset` |
+| `\rel/in-host` | `org.forester.rel.in-host` |
+
+**NOTE:** There is NO built-in `\rel/links-to/reflexive-transitive-closure`. It must be user-defined.
+
+### Translating Legacy Query Patterns
+
+#### `\isect` (intersection / AND) → multiple positive clauses
+
+```
+% OLD:
+\isect{\tag{topic}}{\taxon{Reference}}{\tag{accepted}}
+
+% NEW:
+?X -: {\rel/has-tag ?X '{topic}}{\rel/has-taxon ?X '{Reference}}{\rel/has-tag ?X '{accepted}}
+```
+
+#### `\compl` (complement / NOT) → negative clause after `#`
+
+```
+% OLD:
+\isect{\tag{topic}}{\taxon{Reference}}{\compl{\tag{accepted}}}
+
+% NEW:
+?X -: {\rel/has-tag ?X '{topic}}{\rel/has-taxon ?X '{Reference}} # {\rel/has-tag ?X '{accepted}}
+```
+
+#### `\union` (OR) → multiple `\execute\datalog` rules
+
+Datalog doesn't support OR directly. Define a helper relation with multiple rules:
+
+```
+% OLD:
+\union{\isect{\tag{workshop}}{\taxon{Reference}}}{\taxon{Presentation}}
+
+% NEW:
+\def\rel/is-presentation-like{utensil.query.is-presentation-like}
+\execute\datalog{\rel/is-presentation-like ?X -: {\rel/has-tag ?X '{workshop}}{\rel/has-taxon ?X '{Reference}}}
+\execute\datalog{\rel/is-presentation-like ?X -: {\rel/has-taxon ?X '{Presentation}}}
+% Then use in query:
+\query\datalog{?X -: {\rel/has-tag ?X '{\topic}}{\rel/is-presentation-like ?X}}
+```
+
+### Defining `\rel/links-to/reflexive-transitive-closure`
+
+This is the "last missing piece" from issue #9. The relation doesn't exist as a builtin, so we define it ourselves following the same pattern as the builtin `transcludes_rtc`:
+
+```
+\def\rel/links-to/tc{utensil.rel.links-to.transitive-closure}
+\def\rel/links-to/rtc{utensil.rel.links-to.reflexive-transitive-closure}
+
+% Base case: direct link
+\execute\datalog{\rel/links-to/tc ?X ?Y -: {\rel/links-to ?X ?Y}}
+% Inductive case: transitive
+\execute\datalog{\rel/links-to/tc ?X ?Z -: {\rel/links-to/tc ?X ?Y}{\rel/links-to ?Y ?Z}}
+% Reflexive: every node links-to itself
+\execute\datalog{\rel/links-to/rtc ?X ?X -: {\rel/is-node ?X}}
+% Transitive closure is subset of RTC
+\execute\datalog{\rel/links-to/rtc ?X ?Y -: {\rel/links-to/tc ?X ?Y}}
+```
+
+Then in `uts-0014.tree`, replace:
+```
+\execute\datalog{\rel/index/links-to ?X -: {\rel/is-index ?Y}{\rel/links-to/reflexive-transitive-closure ?Y ?X}}
+```
+with:
+```
+\execute\datalog{\rel/index/links-to ?X -: {\rel/is-index ?Y}{\rel/links-to/rtc ?Y ?X}}
+```
+
+**Performance warning:** The `links-to` RTC could be very expensive on a large forest (1191 trees × 1191 trees = potentially ~1.4M pairs). The `transcludes` RTC is much smaller because transclusion is a tree structure. Consider whether this query is actually needed or if a simpler heuristic would suffice.
+
+### Files Requiring Migration
+
+| File | Issue | Migration |
+|------|-------|-----------|
+| `trees/macros.tree` (lines 126-188) | Uses `\open\query`, `\isect`, `\taxon`, `\tag`, `\compl`, `\union` | Rewrite to `\query\datalog{...}` with helper relations for union |
+| `trees/uts-0014.tree` (line 50) | Uses `\rel/links-to/reflexive-transitive-closure` | Define custom relation as shown above |
+
+All other files already use the `\query\datalog{...}` syntax correctly.
