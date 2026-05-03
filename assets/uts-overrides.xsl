@@ -7,29 +7,6 @@
     xmlns:fr="http://www.forester-notes.org"
     xmlns:html="http://www.w3.org/1999/xhtml"
 >
-
-    <!-- <xsl:template name="numbered-taxon">
-        <span class="taxon">
-            <xsl:apply-templates select="fr:taxon" />
-            <xsl:if test="count(ancestor::*) > 1 and (not(ancestor-or-selfr::fr:tree[@numbered='false' or
-    @toc='false']) and count(../../fr:tree) >= 1) or fr:number">
-                <xsl:if test="fr:taxon">
-                    <xsl:text>&#160;</xsl:text>
-                </xsl:if>
-                <xsl:choose>
-                    <xsl:when test="fr:number">
-                        <xsl:value-of select="fr:number" />
-                    </xsl:when>
-                    <xsl:otherwise>
-                        <xsl:number format="1.1" count="fr:tree[ancestor::fr:tree and not(@toc='false') and
-    not(@numbered='false')]" level="multiple" />
-                    </xsl:otherwise>
-                </xsl:choose>
-                <xsl:text>.&#160;</xsl:text>
-            </xsl:if>
-        </span>
-    </xsl:template> -->
-
     <xsl:template name="splitlean">
         <xsl:param name="pText" select="." />
         <xsl:param name="sep" select="." />
@@ -173,35 +150,11 @@
         </li>
     </xsl:template>
 
-    <!-- <xsl:template match="html:span[@class='todo']" mode="render">
-        <span class="rendered-todo">
-            <xsl:apply-templates />
-        </span>
-    </xsl:template> -->
     <xsl:template match="html:span[@class='todo']">
         <span class="todo">
             <xsl:apply-templates />
         </span>
     </xsl:template>
-
-    <!-- <xsl:template match="html:div[@class='embeded-shader']">
-        <xsl:element namespace="http://www.w3.org/1999/xhtml" name="{local-name()}">
-        <xsl:apply-templates select="@* | node()" />
-        </xsl:element>
-    </xsl:template> -->
-
-    <!-- uts-begin: extend mainmatter -->
-    <!-- <xsl:template match="fr:mainmatter">
-        <div class="tree-content">
-            <xsl:if test="../*/html:span[@class='todo']">
-                <xsl:for-each select="../*/html:span[@class='todo']">
-                    <xsl:apply-templates select="." mode="render" />
-                </xsl:for-each>
-            </xsl:if>
-            <xsl:apply-templates />
-        </div>
-    </xsl:template> -->
-    <!-- uts-end -->
 
     <xsl:template match="fr:resource">
         <xsl:apply-templates select="fr:resource-content" />
@@ -262,17 +215,5 @@
         <xsl:text>]]))</xsl:text>
     </xsl:template>
 
-    <!-- A simple hack to make fr:tex pass through markdown-it, but not handling more escape cases
-    yet -->
-    <!-- <xsl:template match="html:div[@class='markdownit grace-loading']//fr:tex[@display='block']">
-    <xsl:text>\\[</xsl:text>
-    <xsl:value-of select="." />
-    <xsl:text>\\]</xsl:text>
-    </xsl:template>
-    <xsl:template match="html:div[@class='markdownit grace-loading']//fr:tex[not(@display='block')]">
-    <xsl:text>\\(</xsl:text>
-    <xsl:value-of select="." />
-    <xsl:text>\\)</xsl:text>
-    </xsl:template> -->
 
 </xsl:stylesheet>
