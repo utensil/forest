@@ -14,13 +14,18 @@ const reloadWithScroll = () => {
     window.location.reload()
 }
 
+let liveReloadFailed = false
+
 const startLiveReload = () => {
+    if (liveReloadFailed) return
+
     const hostname: string = window.location.hostname
     const port: string = window.location.port
 
     const ws: WebSocket = new WebSocket(`ws://${hostname}:${port}/live`)
     ws.onopen = () => {
         console.debug('live reload connected')
+        liveReloadFailed = false
         // const intervalID = setInterval(function() {
         //     if (ws.readyState === WebSocket.OPEN) {
         //         ws.send('ping');
@@ -29,8 +34,9 @@ const startLiveReload = () => {
         //     }
         // }, 10*60*1000);
     }
-    ws.onerror = (event: Event) => {
-        console.error('live reload error:', event)
+    ws.onerror = (_event: Event) => {
+        liveReloadFailed = true
+        console.debug('live reload not available (no dev server)')
     }
     ws.onmessage = (event: MessageEvent) => {
         // console.log(event);
