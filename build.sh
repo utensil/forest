@@ -107,7 +107,7 @@ function bun_build {
             #     echo "🚨 lightningcss failed with $EXIT_CODE"
             #     exit $EXIT_CODE
             # fi
-        elif [[ $FILE == *".ts" || $FILE == *".tsx" ]]; then
+        elif [[ $FILE == *".ts" || $FILE == *".tsx" || $FILE == *".jsx" ]]; then
             just js "bun/$FILE"
             # bun build bun/$FILE --outdir output
         fi
