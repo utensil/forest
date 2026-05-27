@@ -57,6 +57,9 @@ jobs:
         uses: utensil/setup-texlive-action@v4
         with:
           packages: scheme-full
+          # Pin to 2025: TeX Live 2026 (released 2026-05) breaks the action for a
+          # few days post-release ("may not work properly"). Bump/remove once 2026 settles.
+          version: 2025
       - name: Check `latex`
         run: |
           echo $GITHUB_PATH
