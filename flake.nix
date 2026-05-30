@@ -183,6 +183,7 @@
 
           nativeBuildInputs = with pkgs; [
             rustc cargo wasm-pack bun nodejs binaryen git cacert
+            patch  # for nix/patches/wgputoy-surface-error-other.patch
           ];
 
           buildPhase = ''
@@ -198,16 +199,17 @@
                 git fetch --depth 1 origin "${p.hash}"
                 git checkout "${p.hash}"
                 cd "${p.path}"
-                # For wgputoy: the pinned commit's src/lib.rs has the WASM
-                # render() match arm missing the wgpu 24.0.x SurfaceError::Other
-                # case (line ~155). The non-WASM render_async() match at ~line 184
-                # DOES handle Other. Upstream bug. Sed-add the Other arm to the
-                # first occurrence only (i.e. the WASM render() one); the second
-                # match already has it. Using `0,/pat/` makes sed match-once.
+                # For wgputoy: the pinned commit's WASM render() match is
+                # missing the wgpu 24.0.x SurfaceError::Other arm — the non-WASM
+                # match at line ~184 handles it but the WASM one at ~148 does
+                # not. Apply nix/patches/wgputoy-surface-error-other.patch via
+                # `patch -p1`; if upstream drifts, patch will refuse and fail
+                # loudly (vs a bare sed that would silently move).
                 if [ "${p.name}" = "wgputoy" ]; then
-                  sed -i '0,/SurfaceError::Timeout => log::warn!("Surface Timeout"),/s||SurfaceError::Timeout => log::warn!("Surface Timeout"),\n                SurfaceError::Other => log::warn!("Some other error"),|' src/lib.rs
-                  # Quick sanity: confirm both matches now have an Other arm.
-                  echo "Other-arm count post-patch: $(grep -c 'SurfaceError::Other' src/lib.rs)"
+                  patch -p1 --no-backup-if-mismatch < ${./nix/patches/wgputoy-surface-error-other.patch}
+                  # Sanity: both match blocks should now have an Other arm.
+                  test "$(grep -c 'SurfaceError::Other' src/lib.rs)" -eq 2 \
+                    || { echo "::error::wgputoy patch produced unexpected arm count"; exit 1; }
                 fi
                 wasm-pack build --target web --release --out-dir pkg . -- --locked
                 ls -la pkg

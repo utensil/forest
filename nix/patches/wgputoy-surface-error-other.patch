@@ -1,0 +1,30 @@
+wgputoy WASM render() match: add SurfaceError::Other arm
+
+Upstream (compute-toys/wgpu-compute-toy @ 60d0bec4bd91…) has two
+`match err { … }` blocks in src/lib.rs:
+- the WASM render()        at line ~148 → missing SurfaceError::Other
+- the non-WASM render_async() at line ~184 → already has it
+
+wgpu 24.0.x adds the Other variant unconditionally → the WASM build
+fails with E0004 ("pattern `SurfaceError::Other` not covered").
+
+This patch is generated via `git diff -U3` so it carries surrounding
+context — `patch -p1` / `git apply --check` will refuse to apply (and
+fail LOUDLY) if upstream changes either match block, instead of
+silently relocating like a bare sed.
+
+Tracked: github.com/utensil/forest/issues/54 item 1.
+To drop: upstream PR adding the missing arm + bump prep_wasm hash in
+build.sh + pins.hash in flake.nix.
+
+diff --git a/src/lib.rs b/src/lib.rs
+--- a/src/lib.rs
++++ b/src/lib.rs
+@@ -153,6 +153,7 @@ impl WgpuToyRenderer {
+                 }
+                 SurfaceError::OutOfMemory => log::error!("Out of GPU Memory!"),
+                 SurfaceError::Timeout => log::warn!("Surface Timeout"),
++                SurfaceError::Other => log::warn!("Some other error"),
+             },
+             Ok(f) => {
+                 let (staging_buffer, _) = self.render_to(&f);
