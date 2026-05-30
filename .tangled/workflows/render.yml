@@ -209,6 +209,20 @@ steps:
       # tex/ sources (tectonic ignores TEXINPUTS for reproducibility).
       export FOREST_TEX_DIR="$PWD/tex"
 
+      echo "::group::pick tectonic bundle with auto-fallback"
+      # Primary: community-hosted TL2024 .ttb (per tectonic#1269 comment).
+      # Fallback: tectonic's stable default bundle (TL2022 redirect).
+      PRIMARY_BUNDLE="${TECTONIC_BUNDLE_PRIMARY:-https://bebopbamf-tex.syd1.cdn.digitaloceanspaces.com/texlive2024-0312.ttb}"
+      FALLBACK_BUNDLE="${TECTONIC_BUNDLE_FALLBACK:-https://relay.fullyjustified.net/default_bundle_v33.tar}"
+      if curl -fsSI --max-time 10 "$PRIMARY_BUNDLE" >/dev/null 2>&1; then
+        export TECTONIC_BUNDLE="$PRIMARY_BUNDLE"
+        echo "✓ TL2024 bundle reachable: $TECTONIC_BUNDLE"
+      else
+        export TECTONIC_BUNDLE="$FALLBACK_BUNDLE"
+        echo "::warning::TL2024 bundle unavailable; falling back to TL2022 default ($TECTONIC_BUNDLE). Forest's algorithms.tex needs newer pseudo.sty — the CTAN override below covers that for the TL2022 case."
+      fi
+      echo "::endgroup::"
+
       # tectonic's default bundle is TL2022-frozen — its pseudo.sty doesn't
       # auto-register the /tcb/pseudo/* keys that forest's algorithms.tex
       # expects (those land in pseudo.sty newer than TL2022). Fetch the
