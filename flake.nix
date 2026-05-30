@@ -120,6 +120,24 @@
 
       tectonicBundleUrl = "https://bebopbamf-tex.syd1.cdn.digitaloceanspaces.com/texlive2024-0312.ttb";
 
+      # dvisvgm 3.6 (Dec 2025) — fresh from upstream. nixpkgs's texlive bundles
+      # an older dvisvgm that crashes with `basic_string::substr` on some
+      # forest trees. Build standalone via autotools; we put the texlive
+      # combine's texmf-dist next to the binary so kpathsea finds .pro files.
+      dvisvgmNewerFor = pkgs: pkgs.stdenv.mkDerivation rec {
+        pname = "dvisvgm";
+        version = "3.6";
+        src = pkgs.fetchurl {
+          url = "https://github.com/mgieseki/dvisvgm/releases/download/${version}/dvisvgm-${version}.tar.gz";
+          hash = "sha256-JkRrs7EHOf8JJcnkFrdtLSIgdcnV3Pr+biFGCdBy7Ro=";
+        };
+        nativeBuildInputs = with pkgs; [ pkg-config ];
+        buildInputs = with pkgs; [
+          freetype ghostscript brotli woff2 zlib kpathsea
+        ];
+        # autotools default — configure + make + make install.
+      };
+
       forestTectonicFor = pkgs: pkgs.stdenv.mkDerivation {
         pname = "forest-tectonic";
         # Includes dvisvgm now too — nixery rejects the standalone dvisvgm
@@ -135,12 +153,13 @@
 
         nativeBuildInputs = [
           (tectonicUnstableFor pkgs) pkgs.cacert
-          # bare texlive.bin.dvisvgm has no texmf.cnf — kpathsea fails at
-          # runtime. Combine with scheme-small so dvisvgm's kpathsea finds
-          # texmf.cnf + dvips/base/{tex,texps,special,color}.pro.
-          (pkgs.texlive.combine { inherit (pkgs.texlive) scheme-small dvisvgm dvips graphics; })
-          # makeWrapper to write the dvisvgm wrapper script (kpathsea
-          # uses argv0 → wrapper must exec the full-path binary).
+          # Custom dvisvgm 3.6 (newer than nixpkgs's bundled one) to avoid
+          # the basic_string::substr crash on some forest documents.
+          (dvisvgmNewerFor pkgs)
+          # texlive runtime tree for kpathsea — provides texmf.cnf + the
+          # dvips PostScript headers (tex.pro / texps.pro / special.pro
+          # / color.pro). We don't use the bundled dvisvgm from this combo.
+          (pkgs.texlive.combine { inherit (pkgs.texlive) scheme-small dvips graphics; })
           pkgs.makeWrapper
         ];
 
@@ -181,12 +200,17 @@
           # would search $out/share/texmf-dist — empty). Instead write a
           # tiny wrapper that exec's the full-path binary under the
           # combine's bindir; kpathsea then finds the .pro headers.
-          dvisvgm_drv=${pkgs.texlive.combine { inherit (pkgs.texlive) scheme-small dvisvgm dvips graphics; }}
-          test -x "$dvisvgm_drv/bin/dvisvgm"
-          # makeWrapper writes a proper shell wrapper that exec's the full
-          # path — kpathsea then self-locates next to the combined bindir
-          # and finds texmf-dist/dvips/base/*.pro.
-          makeWrapper "$dvisvgm_drv/bin/dvisvgm" "$out/bin/dvisvgm"
+          # Newer dvisvgm 3.6 from source + texlive combine for texmf-dist.
+          # makeWrapper writes a wrapper that sets TEXMFCNF / TEXMFDIST so
+          # kpathsea finds .pro files via env even when run from a different
+          # directory.
+          dvisvgm_bin=${dvisvgmNewerFor pkgs}/bin/dvisvgm
+          texlive_drv=${pkgs.texlive.combine { inherit (pkgs.texlive) scheme-small dvips graphics; }}
+          test -x "$dvisvgm_bin"
+          makeWrapper "$dvisvgm_bin" "$out/bin/dvisvgm" \
+            --set TEXMFCNF "$texlive_drv/share/texmf-dist/web2c" \
+            --set TEXMFDIST "$texlive_drv/share/texmf-dist" \
+            --set TEXMFROOT "$texlive_drv/share"
           # snapshot the warmed cache under $out/share so render workflow
           # can `cp -r $out/share/tectonic-cache ~/.cache/Tectonic`.
           if [ -d "$TECTONIC_CACHE_DIR" ]; then
