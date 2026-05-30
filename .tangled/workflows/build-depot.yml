@@ -70,16 +70,27 @@ steps:
       du -sh "$wasm_out"
       echo "::endgroup::"
 
-      echo "::group::package each derivation (tar.zst at its store path)"
-      for pair in "tectonic:$tectonic_out" "forester:$forester_out" "wasm-pkgs:$wasm_out"; do
+      echo "::group::package tectonic + forester as NAR closures (full dep chain)"
+      # Plain tar of just $out is NOT enough — forester references libev / gmp /
+      # ocaml-runtime / etc. that live at OTHER /nix/store paths. nix-store
+      # --export of `nix-store -qR <root>` captures the whole closure; render
+      # does `nix-store --import` to land every path at its expected location.
+      for pair in "tectonic:$tectonic_out" "forester:$forester_out"; do
         name="${pair%%:*}"
         path="${pair#*:}"
-        base="$(basename "$path")"
-        tar -C /nix/store -cf - "$base" | zstd -19 -T0 -o "forest-${name}-x86_64.tar.zst"
-        ls -lh "forest-${name}-x86_64.tar.zst"
+        nix-store --export $(nix-store -qR "$path") | zstd -19 -T0 -o "forest-${name}-x86_64.nar.zst"
+        ls -lh "forest-${name}-x86_64.nar.zst"
         echo "$path" > "forest-${name}-x86_64.storepath"
-        sha256sum "forest-${name}-x86_64.tar.zst" | tee "forest-${name}-x86_64.sha256"
+        sha256sum "forest-${name}-x86_64.nar.zst" | tee "forest-${name}-x86_64.sha256"
       done
+      echo "::endgroup::"
+
+      echo "::group::package wasm-pkgs (plain tar — files, no closure)"
+      base="$(basename "$wasm_out")"
+      tar -C /nix/store -cf - "$base" | zstd -19 -T0 -o forest-wasm-pkgs-x86_64.tar.zst
+      ls -lh forest-wasm-pkgs-x86_64.tar.zst
+      echo "$wasm_out" > forest-wasm-pkgs-x86_64.storepath
+      sha256sum forest-wasm-pkgs-x86_64.tar.zst | tee forest-wasm-pkgs-x86_64.sha256
       echo "::endgroup::"
 
       echo "::group::generate manifest.json"
@@ -87,21 +98,24 @@ steps:
       python3 - "$tectonic_out" "$forester_out" "$wasm_out" <<'PY' > manifest.json
       import json, os, subprocess, sys
       tectonic, forester, wasm = sys.argv[1], sys.argv[2], sys.argv[3]
-      def info(name, store_path):
-          tar = f"forest-{name}-x86_64.tar.zst"
+      # tectonic + forester are NAR closures (need nix-store --import);
+      # wasm-pkgs is plain tar. Mirror by using "nar" vs "tar" keys so the
+      # render workflow can dispatch on which is which.
+      def info(name, ext, store_path):
+          fname = f"forest-{name}-x86_64.{ext}.zst"
           with open(f"forest-{name}-x86_64.sha256") as f:
               sha = f.read().split()[0]
-          size = os.stat(tar).st_size
-          return {"tar": tar, "store_path": store_path, "sha256": sha, "size_bytes": size}
+          size = os.stat(fname).st_size
+          return {ext: fname, "store_path": store_path, "sha256": sha, "size_bytes": size}
       out = {
           "version": 1,
           "created_at": subprocess.check_output(["date", "-u", "+%Y-%m-%dT%H:%M:%SZ"], text=True).strip(),
           "base_url": os.environ.get("R2_PUBLIC_URL", "https://pub-5462b73a50594a06b85663123d74ab23.r2.dev"),
           "repo": "forest",
           "assets": {
-              "tectonic":  info("tectonic",  tectonic),
-              "forester":  info("forester",  forester),
-              "wasm_pkgs": info("wasm-pkgs", wasm),
+              "tectonic":  info("tectonic",  "nar", tectonic),
+              "forester":  info("forester",  "nar", forester),
+              "wasm_pkgs": info("wasm-pkgs", "tar", wasm),
           },
       }
       print(json.dumps(out, indent=2))
@@ -120,8 +134,8 @@ steps:
       # Forest assets live under a subdir so they don't collide with blog's
       # toplevel manifest.json + tarballs in the same R2 bucket.
       for f in \
-        forest-tectonic-x86_64.tar.zst  forest-tectonic-x86_64.storepath  forest-tectonic-x86_64.sha256 \
-        forest-forester-x86_64.tar.zst  forest-forester-x86_64.storepath  forest-forester-x86_64.sha256 \
+        forest-tectonic-x86_64.nar.zst  forest-tectonic-x86_64.storepath  forest-tectonic-x86_64.sha256 \
+        forest-forester-x86_64.nar.zst  forest-forester-x86_64.storepath  forest-forester-x86_64.sha256 \
         forest-wasm-pkgs-x86_64.tar.zst forest-wasm-pkgs-x86_64.storepath forest-wasm-pkgs-x86_64.sha256 \
         manifest.json; do
         echo "uploading $f → s3://$R2_BUCKET/forest/$f"

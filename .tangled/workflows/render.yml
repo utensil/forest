@@ -27,7 +27,8 @@ dependencies:
     - gzip
     - patchelf
     - glibc
-    - zstd        # decompress the closure tarballs
+    - zstd        # decompress the closure NARs / tar
+    - nix         # nix-store --import for tectonic + forester closures
     - jq          # parse manifest.json from R2
     - bun         # build.sh::bun_build for css/ts/tsx
     - just        # bash ./build.sh shells out to `just forest`, `just assets`
@@ -49,36 +50,47 @@ steps:
       R2_PUBLIC_URL=https://pub-5462b73a50594a06b85663123d74ab23.r2.dev
       curl -fsSL "$R2_PUBLIC_URL/forest/manifest.json" -o /tmp/manifest.json
       jq . /tmp/manifest.json
-      TECTONIC_TAR=$(jq -r '.assets.tectonic.tar'        /tmp/manifest.json)
-      TECTONIC_PATH=$(jq -r '.assets.tectonic.store_path' /tmp/manifest.json)
-      FORESTER_TAR=$(jq -r '.assets.forester.tar'        /tmp/manifest.json)
-      FORESTER_PATH=$(jq -r '.assets.forester.store_path' /tmp/manifest.json)
-      WASM_TAR=$(jq -r '.assets.wasm_pkgs.tar'           /tmp/manifest.json)
-      WASM_PATH=$(jq -r '.assets.wasm_pkgs.store_path'   /tmp/manifest.json)
+      TECTONIC_NAR=$(jq -r '.assets.tectonic.nar'          /tmp/manifest.json)
+      TECTONIC_PATH=$(jq -r '.assets.tectonic.store_path'  /tmp/manifest.json)
+      FORESTER_NAR=$(jq -r '.assets.forester.nar'          /tmp/manifest.json)
+      FORESTER_PATH=$(jq -r '.assets.forester.store_path'  /tmp/manifest.json)
+      WASM_TAR=$(jq -r '.assets.wasm_pkgs.tar'             /tmp/manifest.json)
+      WASM_PATH=$(jq -r '.assets.wasm_pkgs.store_path'     /tmp/manifest.json)
       echo "::endgroup::"
 
-      echo "::group::probe /nix/store writability + extract closures in place"
-      if mkdir -p "/nix/store/.write-test-$$" 2>/dev/null; then
-        rmdir "/nix/store/.write-test-$$"
-        echo "✓ /nix/store WRITABLE — extracting tarballs there"
-      else
-        echo "::error::/nix/store not writable in nixery — need nix-store --import strategy"
-        exit 1
-      fi
-      for triple in "tectonic:$TECTONIC_TAR:$TECTONIC_PATH" \
-                    "forester:$FORESTER_TAR:$FORESTER_PATH" \
-                    "wasm-pkgs:$WASM_TAR:$WASM_PATH"; do
-        name="${triple%%:*}"; rest="${triple#*:}"
-        tar="${rest%%:*}"; path="${rest#*:}"
-        echo "::group::fetch + extract $name"
-        curl -fsSL "$R2_PUBLIC_URL/forest/$tar" -o "/tmp/$tar"
-        zstd -d -T0 "/tmp/$tar" -o "/tmp/${tar%.zst}"
-        tar -C /nix/store -xf "/tmp/${tar%.zst}"
-        rm -f "/tmp/$tar" "/tmp/${tar%.zst}"
-        test -d "$path" || { echo "::error::$name dir absent after extract: $path"; exit 1; }
-        du -sh "$path"
+      echo "::group::import tectonic + forester closures (nix-store --import)"
+      # The .nar.zst archives carry every store path referenced by the
+      # forester / tectonic binaries (libev, gmp, ocaml-runtime, etc.) so the
+      # binaries' ELF interpreter refs resolve at runtime. Plain tar of just
+      # $out was insufficient — bin/forester died with 'required file not
+      # found' on its loader.
+      for pair in "tectonic:$TECTONIC_NAR:$TECTONIC_PATH" \
+                  "forester:$FORESTER_NAR:$FORESTER_PATH"; do
+        name="${pair%%:*}"; rest="${pair#*:}"
+        nar="${rest%%:*}"; path="${rest#*:}"
+        echo "::group::fetch + nix-store --import $name"
+        curl -fsSL "$R2_PUBLIC_URL/forest/$nar" -o "/tmp/$nar"
+        zstd -d -T0 "/tmp/$nar" -o "/tmp/${nar%.zst}"
+        nix-store --import < "/tmp/${nar%.zst}"
+        rm -f "/tmp/$nar" "/tmp/${nar%.zst}"
+        test -e "$path/bin"  && echo "✓ $name binary present" || echo "(no bin at $path)"
+        du -sh "$path" || true
         echo "::endgroup::"
       done
+      echo "::endgroup::"
+
+      echo "::group::extract wasm-pkgs (plain tar — no closure)"
+      if mkdir -p "/nix/store/.write-test-$$" 2>/dev/null; then
+        rmdir "/nix/store/.write-test-$$"
+      else
+        echo "::error::/nix/store not writable in nixery"; exit 1
+      fi
+      curl -fsSL "$R2_PUBLIC_URL/forest/$WASM_TAR" -o "/tmp/$WASM_TAR"
+      zstd -d -T0 "/tmp/$WASM_TAR" -o "/tmp/${WASM_TAR%.zst}"
+      tar -C /nix/store -xf "/tmp/${WASM_TAR%.zst}"
+      rm -f "/tmp/$WASM_TAR" "/tmp/${WASM_TAR%.zst}"
+      test -d "$WASM_PATH" || { echo "::error::wasm-pkgs dir absent: $WASM_PATH"; exit 1; }
+      du -sh "$WASM_PATH"
       echo "::endgroup::"
 
       echo "::group::wire tectonic + forester paths + drop wasm pkgs into lib/"
