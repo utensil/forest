@@ -81,9 +81,19 @@ steps:
       done
       echo "::endgroup::"
 
-      echo "::group::source tectonic + forester env.sh + drop wasm pkgs into lib/"
-      source "$TECTONIC_PATH/env.sh"
-      source "$FORESTER_PATH/env.sh"
+      echo "::group::wire tectonic + forester paths + drop wasm pkgs into lib/"
+      # NOTE: env.sh files from the closures call `mkdir` before PATH is
+      # established (issue: $out/bin only has the one binary, so prepending
+      # it replaces PATH if ${PATH:-} happened to be empty — and on the very
+      # first command of the source, before subsequent commands restore PATH,
+      # `mkdir` isn't reachable). Do the equivalent inline so PATH stays
+      # additive against the nixery deps.
+      export PATH="$TECTONIC_PATH/bin:$FORESTER_PATH/bin:$PATH"
+      export TECTONIC_CACHE_DIR="$HOME/.cache/Tectonic"
+      mkdir -p "$TECTONIC_CACHE_DIR"
+      if [ -d "$TECTONIC_PATH/share/tectonic-cache" ]; then
+        cp -rn "$TECTONIC_PATH/share/tectonic-cache/." "$TECTONIC_CACHE_DIR/" 2>/dev/null || true
+      fi
       # Mirror what build.sh::prep_wasm would have populated had it run:
       # lib/<name>/<…inner-path…>/pkg/* — but since the rendered build.sh
       # only reads `lib/<lib_path>/pkg/`, we just stage `lib/wgputoy/pkg/`,
