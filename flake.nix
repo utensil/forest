@@ -133,7 +133,13 @@
         dontUnpack = true;
         dontConfigure = true;
 
-        nativeBuildInputs = [ (tectonicUnstableFor pkgs) pkgs.cacert pkgs.texlive.bin.dvisvgm ];
+        nativeBuildInputs = [
+          (tectonicUnstableFor pkgs) pkgs.cacert
+          # bare texlive.bin.dvisvgm has no texmf.cnf — kpathsea fails at
+          # runtime. Combine with scheme-infraonly (smallest scheme that
+          # ships kpathsea config) to get a properly-wrapped dvisvgm.
+          (pkgs.texlive.combine { inherit (pkgs.texlive) scheme-infraonly dvisvgm; })
+        ];
 
         buildPhase = ''
           runHook preBuild
@@ -166,11 +172,13 @@
           runHook preInstall
           mkdir -p $out/bin $out/share
           ln -s ${tectonicUnstableFor pkgs}/bin/tectonic $out/bin/tectonic
-          # dvisvgm comes from texlive.bin.dvisvgm in this nixpkgs (top-level
-          # pkgs.dvisvgm is absent; texlive.bin.core doesn't include it).
-          # Fail loud if the path doesn't exist so we don't ship a broken NAR.
-          test -x "${pkgs.texlive.bin.dvisvgm}/bin/dvisvgm"
-          ln -s ${pkgs.texlive.bin.dvisvgm}/bin/dvisvgm $out/bin/dvisvgm
+          # dvisvgm comes via texlive.combine (scheme-infraonly + dvisvgm)
+          # so kpathsea finds its texmf.cnf — bare texlive.bin.dvisvgm
+          # would have left dvisvgm warning about missing texmf.cnf and
+          # failing on font lookups.
+          dvisvgm_drv=${pkgs.texlive.combine { inherit (pkgs.texlive) scheme-infraonly dvisvgm; }}
+          test -x "$dvisvgm_drv/bin/dvisvgm"
+          ln -s "$dvisvgm_drv/bin/dvisvgm" $out/bin/dvisvgm
           # snapshot the warmed cache under $out/share so render workflow
           # can `cp -r $out/share/tectonic-cache ~/.cache/Tectonic`.
           if [ -d "$TECTONIC_CACHE_DIR" ]; then
