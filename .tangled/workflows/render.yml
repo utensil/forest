@@ -30,6 +30,7 @@ dependencies:
     - zstd        # decompress the closure NARs / tar
     - nix         # nix-store --import for tectonic + forester closures
     - jq          # parse manifest.json from R2
+    - unzip       # extract CTAN package zip (pseudo.sty override)
     - bun         # build.sh::bun_build for css/ts/tsx
     - just        # bash ./build.sh shells out to `just forest`, `just assets`
     - biome       # ./chk.sh (lint) — keep parity with gh-pages.yml even if unused
@@ -210,16 +211,26 @@ steps:
 
       # tectonic's default bundle is TL2022-frozen — its pseudo.sty doesn't
       # auto-register the /tcb/pseudo/* keys that forest's algorithms.tex
-      # expects (those land in pseudo.sty newer than TL2022). Drop the
-      # current CTAN pseudo.sty into FOREST_TEX_DIR so the latex shim
-      # symlinks it into each _tmp/<N>/; tectonic's local-cwd lookup
-      # beats the bundled stale version.
-      curl -fsSL --max-time 30 \
-        https://mirror.ctan.org/macros/latex/contrib/pseudo/pseudo.sty \
-        -o "$FOREST_TEX_DIR/pseudo.sty"
+      # expects (those land in pseudo.sty newer than TL2022). Fetch the
+      # whole CTAN pseudo package (zip), extract every payload file
+      # (*.sty / *.tex / *.def / *.fd / *.cfg / *.cls) into FOREST_TEX_DIR
+      # so the latex shim's per-_tmp symlink stages them; tectonic's
+      # cwd-first lookup wins over the bundled stale versions.
+      tmpdir=$(mktemp -d)
+      curl -fsSL --max-time 60 \
+        https://mirror.ctan.org/macros/latex/contrib/pseudo.zip \
+        -o "$tmpdir/pseudo.zip"
+      ( cd "$tmpdir" && unzip -q pseudo.zip )
+      # Copy in every potentially-loadable TeX payload file (skip docs/tests).
+      find "$tmpdir" -type f \( \
+          -name '*.sty' -o -name '*.tex' -o -name '*.def' \
+          -o -name '*.fd'  -o -name '*.cfg' -o -name '*.cls' \) \
+        -not -path '*/doc/*' -not -path '*/test/*' -not -path '*/example*/*' \
+        -exec cp -v {} "$FOREST_TEX_DIR/" \;
+      rm -rf "$tmpdir"
       grep -q '/tcb/pseudo' "$FOREST_TEX_DIR/pseudo.sty" \
-        && echo "✓ pseudo.sty (with /tcb/pseudo keys) fetched: $(wc -l < "$FOREST_TEX_DIR/pseudo.sty") lines" \
-        || { echo "::error::fetched pseudo.sty missing /tcb/pseudo keys"; exit 1; }
+        && echo "✓ pseudo.sty (with /tcb/pseudo keys) staged from CTAN zip" \
+        || { echo "::error::pseudo.sty from CTAN zip missing /tcb/pseudo keys"; exit 1; }
       forester --version || true
       tectonic --version || true
       bash ./build.sh
