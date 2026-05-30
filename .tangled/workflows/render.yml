@@ -114,13 +114,16 @@ steps:
       # latex shim symlinks them into each per-snippet cwd so dvisvgm picks
       # them up via PSHEADERS=. — no kpathsea config needed.
       export DVIPS_BASE_DIR="$TECTONIC_PATH/share/dvips/base"
+      # Use ls -l on the dir (always succeeds if dir exists). Avoid
+      # `ls *.pro | head` — non-matching glob exits ls(2), and `set -e
+      # pipefail` then kills the whole render.
+      echo "DVIPS_BASE_DIR=$DVIPS_BASE_DIR"
       if [ -d "$DVIPS_BASE_DIR" ]; then
-        echo "DVIPS_BASE_DIR=$DVIPS_BASE_DIR; .pro files:"
-        ls "$DVIPS_BASE_DIR"/*.pro 2>&1 | head -10
+        n_pro=$(find "$DVIPS_BASE_DIR" -maxdepth 1 -name '*.pro' -type f 2>/dev/null | wc -l)
+        echo "  .pro file count: $n_pro"
+        find "$DVIPS_BASE_DIR" -maxdepth 1 -name '*.pro' -type f 2>/dev/null | head -10 | sed 's/^/    /' || true
       else
-        echo "::warning::DVIPS_BASE_DIR not found at $DVIPS_BASE_DIR — searching:"
-        find "$TECTONIC_PATH" -name 'tex.pro' -type f 2>/dev/null | head -3
-        ls "$TECTONIC_PATH/share/" 2>/dev/null
+        echo "::warning::DVIPS_BASE_DIR dir missing"
       fi
       export TECTONIC_CACHE_DIR="$HOME/.cache/Tectonic"
       mkdir -p "$TECTONIC_CACHE_DIR"

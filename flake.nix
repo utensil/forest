@@ -249,17 +249,20 @@
           # closure independently of where texlive.combine stashes them.
           mkdir -p $out/share/dvips/base
           echo "Staging dvips .pro files at $out/share/dvips/base:"
+          # texlive.combine output is a tree of symlinks into per-package
+          # derivations. Plain `find` doesn't traverse them — use -L to
+          # follow symlinks so .pro files inside the dvips pkg are found.
           for pro in tex.pro texps.pro special.pro color.pro finclude.pro; do
-            found=$(find "$texlive_drv" -name "$pro" -type f 2>/dev/null | head -1)
+            found=$(find -L "$texlive_drv" -name "$pro" -type f 2>/dev/null | head -1)
             if [ -n "$found" ]; then
-              cp "$found" $out/share/dvips/base/
+              cp -L "$found" $out/share/dvips/base/
               echo "  ✓ $pro from $found"
             else
-              echo "  ✗ $pro MISSING — falling back to broader search:"
-              find "$texlive_drv" -name "$pro" -type f 2>/dev/null | head -3 | sed 's/^/    /'
+              echo "  ✗ $pro MISSING in $texlive_drv"
             fi
           done
-          ls -la $out/share/dvips/base/
+          echo "Staged contents:"
+          ls -la $out/share/dvips/base/ 2>&1 || true
           actual_dvips_dir="$out/share/dvips"
           # Wrapper preserves argv[0] = $out/bin/dvisvgm so kpathsea
           # SELFAUTOLOC = $out/bin. Plain `exec` (no -a) would let the
