@@ -128,7 +128,10 @@
           Hello world.
           \end{document}
           WARMUP
-          tectonic --outdir . warmup.tex || true
+          # Pin to the v2 bundle (TL2024 snapshot) — TL2022 default has older
+          # pseudo.sty which doesn't auto-register tcb keys forester needs.
+          tectonic --web-bundle https://relay.fullyjustified.net/default-v2.tar \
+            --outdir . warmup.tex || true
           ls -la "$TECTONIC_CACHE_DIR" || true
           runHook postBuild
         '';
