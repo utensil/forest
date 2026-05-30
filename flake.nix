@@ -48,8 +48,11 @@
         # explicitly so we know what's in the closure.
         let texCombo = pkgs.texlive.combine {
           inherit (pkgs.texlive) scheme-small
-            standalone tikz-cd xy pgf preview varwidth
+            standalone tikz-cd pgf preview varwidth
             adjustbox xkeyval collectbox;
+          # xy-pic isn't an attribute in this nixpkgs (no `pkgs.texlive.xy`);
+          # if forester errors on xy-pic specifically, add as `xypic` if
+          # available, otherwise bump scheme.
         };
         in pkgs.stdenv.mkDerivation {
           pname = "forest-texlive";
