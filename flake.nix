@@ -136,9 +136,12 @@
         nativeBuildInputs = [
           (tectonicUnstableFor pkgs) pkgs.cacert
           # bare texlive.bin.dvisvgm has no texmf.cnf — kpathsea fails at
-          # runtime. Combine with scheme-infraonly (smallest scheme that
-          # ships kpathsea config) to get a properly-wrapped dvisvgm.
+          # runtime. Combine with scheme-small so dvisvgm's kpathsea finds
+          # texmf.cnf + dvips/base/{tex,texps,special,color}.pro.
           (pkgs.texlive.combine { inherit (pkgs.texlive) scheme-small dvisvgm dvips graphics; })
+          # makeWrapper to write the dvisvgm wrapper script (kpathsea
+          # uses argv0 → wrapper must exec the full-path binary).
+          pkgs.makeWrapper
         ];
 
         buildPhase = ''
@@ -172,13 +175,18 @@
           runHook preInstall
           mkdir -p $out/bin $out/share
           ln -s ${tectonicUnstableFor pkgs}/bin/tectonic $out/bin/tectonic
-          # dvisvgm comes via texlive.combine (scheme-infraonly + dvisvgm)
-          # so kpathsea finds its texmf.cnf — bare texlive.bin.dvisvgm
-          # would have left dvisvgm warning about missing texmf.cnf and
-          # failing on font lookups.
-          dvisvgm_drv=${pkgs.texlive.combine { inherit (pkgs.texlive) scheme-infraonly dvisvgm; }}
+          # dvisvgm via texlive.combine. kpathsea uses dvisvgm's argv0
+          # to locate texmf-dist/dvips/base/*.pro etc. A plain symlink
+          # would leave argv0 pointing at $out/bin/dvisvgm (and kpathsea
+          # would search $out/share/texmf-dist — empty). Instead write a
+          # tiny wrapper that exec's the full-path binary under the
+          # combine's bindir; kpathsea then finds the .pro headers.
+          dvisvgm_drv=${pkgs.texlive.combine { inherit (pkgs.texlive) scheme-small dvisvgm dvips graphics; }}
           test -x "$dvisvgm_drv/bin/dvisvgm"
-          ln -s "$dvisvgm_drv/bin/dvisvgm" $out/bin/dvisvgm
+          # makeWrapper writes a proper shell wrapper that exec's the full
+          # path — kpathsea then self-locates next to the combined bindir
+          # and finds texmf-dist/dvips/base/*.pro.
+          makeWrapper "$dvisvgm_drv/bin/dvisvgm" "$out/bin/dvisvgm"
           # snapshot the warmed cache under $out/share so render workflow
           # can `cp -r $out/share/tectonic-cache ~/.cache/Tectonic`.
           if [ -d "$TECTONIC_CACHE_DIR" ]; then
