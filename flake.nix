@@ -184,6 +184,8 @@
           nativeBuildInputs = with pkgs; [
             rustc cargo wasm-pack bun nodejs binaryen git cacert
             patch  # for nix/patches/wgputoy-surface-error-other.patch
+            # wgputoy's .cargo/config.toml asks for lld as the linker.
+            lld
           ];
 
           buildPhase = ''
