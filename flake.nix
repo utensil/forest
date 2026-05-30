@@ -241,19 +241,46 @@
           fi
           echo "TEXMFCNF dirs: $texmfcnf_dirs"
           # PostScript headers (tex.pro, texps.pro, special.pro, color.pro)
-          # come from the dvips package. Explicitly point PSHEADERS at the
-          # dvips dir so kpathsea finds them even if texmf.cnf's search
-          # cascade isn't fully picked up.
+          # come from the dvips package. Verify they exist at build time
+          # and locate them dynamically — texlive.combine may stash them
+          # somewhere unexpected.
+          echo "Locating .pro files in texlive combine:"
           dvips_dir="$texlive_drv/share/texmf-dist/dvips"
+          for pro in tex.pro texps.pro special.pro color.pro; do
+            hits=$(find "$texlive_drv" -name "$pro" -type f 2>/dev/null)
+            if [ -n "$hits" ]; then
+              echo "  ✓ $pro: $hits"
+            else
+              echo "  ✗ $pro MISSING from texlive combine"
+            fi
+          done
+          # Resolve actual dvips base dir from tex.pro location (may
+          # differ from share/texmf-dist/dvips/base depending on combine).
+          tex_pro_path=$(find "$texlive_drv" -path '*/dvips/base/tex.pro' -type f 2>/dev/null | head -1)
+          if [ -n "$tex_pro_path" ]; then
+            actual_dvips_dir=$(dirname "$(dirname "$tex_pro_path")")
+            echo "actual_dvips_dir: $actual_dvips_dir"
+          else
+            actual_dvips_dir="$dvips_dir"
+            echo "tex.pro not found via */dvips/base/, falling back to $actual_dvips_dir"
+          fi
           # Wrapper preserves argv[0] = $out/bin/dvisvgm so kpathsea
           # SELFAUTOLOC = $out/bin. Plain `exec` (no -a) would let the
           # kernel pass the dvisvgm-3.6 path as argv[0].
+          # TEXMF is the umbrella search-cascade — set it AND TEXMFDIST so
+          # texmf.cnf's $TEXMF/dvips/base lookup resolves to the combine.
           cat > $out/bin/dvisvgm <<EOF
           #!${pkgs.bash}/bin/bash
           export TEXMFCNF="$texmfcnf_dirs"
           export TEXMFDIST="$texlive_drv/share/texmf-dist"
           export TEXMFROOT="$texlive_drv/share"
-          export PSHEADERS=".:$dvips_dir/base:$dvips_dir/config:$dvips_dir"
+          export TEXMF="$texlive_drv/share/texmf-dist"
+          export PSHEADERS=".:$actual_dvips_dir/base:$actual_dvips_dir/config:$actual_dvips_dir"
+          export TEXPSHEADERS="\$PSHEADERS"
+          export DVIPSHEADERS="\$PSHEADERS"
+          if [ -n "\${FOREST_KPSEDEBUG:-}" ]; then
+            export KPATHSEA_DEBUG=64
+          fi
           exec -a "\$0" "$dvisvgm_bin" "\$@"
           EOF
           chmod +x $out/bin/dvisvgm
