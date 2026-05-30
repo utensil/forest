@@ -36,6 +36,12 @@ dependencies:
     - nodejs      # bunx xslt3 needs node
     - libxslt     # provides xsltproc (used by convert_xml.sh) — top-level pkg name in nixpkgs is libxslt, not xsltproc
     - python3     # fize.py + manifest jq alt
+    # forester internally shells out to plain `latex` (the DVI engine) for
+    # inline-math rendering — tectonic ships only PDF and isn't a drop-in.
+    # texliveSmall (~200MB) is the minimum that has the AMS macros, kpathsea,
+    # and `latex` itself. Bigger than tectonic but unavoidable until forester
+    # supports a tectonic backend or we build texlive via the flake too.
+    - texliveSmall
 
 steps:
   - name: render forest LIVE (cached toolchain from R2) + publish to site
