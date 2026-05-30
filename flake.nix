@@ -33,6 +33,41 @@
       tectonicVersion = "0.15-with-cache";
       foresterVersion = "5ab7277";
       wasmPkgsVersion = "wgputoy-60d0bec+egglog-8d9b10e+rhai-9fa8066";
+      texliveVersion = "small";
+
+      # ---- forest-texlive ---------------------------------------------------
+      # forester internally shells out to plain `latex` (the DVI engine) for
+      # inline-math rendering — tectonic only writes PDF, isn't a drop-in.
+      # nixery rejects `texliveSmall` from the URL path (its Docker name
+      # rules forbid uppercase). So bundle it via the flake instead — same
+      # NAR closure pattern as tectonic + forester.
+      forestTexliveFor = pkgs: pkgs.stdenv.mkDerivation {
+        pname = "forest-texlive";
+        version = texliveVersion;
+        dontUnpack = true;
+        dontConfigure = true;
+        nativeBuildInputs = [ pkgs.texliveSmall ];
+        buildPhase = ''
+          runHook preBuild
+          # Sanity check the bundle has what forester wants.
+          ${pkgs.texliveSmall}/bin/latex --version | head -1
+          runHook postBuild
+        '';
+        installPhase = ''
+          runHook preInstall
+          mkdir -p $out/bin
+          for tool in latex pdflatex bibtex kpsewhich; do
+            ln -s ${pkgs.texliveSmall}/bin/$tool $out/bin/$tool 2>/dev/null || true
+          done
+          # env.sh wires PATH additively (lesson from render.yml — don't
+          # replace ${"$"}PATH wholesale).
+          printf '%s\n' \
+            'export PATH="'$out'/bin:''${PATH:-}"' \
+            > $out/env.sh
+          runHook postInstall
+        '';
+        meta.description = "texliveSmall (forester's inline-math latex)";
+      };
 
       forestTectonicFor = pkgs: pkgs.stdenv.mkDerivation {
         pname = "forest-tectonic";
@@ -248,6 +283,7 @@
           forest-tectonic = forestTectonicFor pkgs;
           forest-forester = forestForesterFor pkgs;
           forest-wasm-pkgs = forestWasmPkgsFor pkgs;
+          forest-texlive = forestTexliveFor pkgs;
         }
       );
 

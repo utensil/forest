@@ -36,12 +36,8 @@ dependencies:
     - nodejs      # bunx xslt3 needs node
     - libxslt     # provides xsltproc (used by convert_xml.sh) — top-level pkg name in nixpkgs is libxslt, not xsltproc
     - python3     # fize.py + manifest jq alt
-    # forester internally shells out to plain `latex` (the DVI engine) for
-    # inline-math rendering — tectonic ships only PDF and isn't a drop-in.
-    # texliveSmall (~200MB) is the minimum that has the AMS macros, kpathsea,
-    # and `latex` itself. Bigger than tectonic but unavoidable until forester
-    # supports a tectonic backend or we build texlive via the flake too.
-    - texliveSmall
+    # texlive is shipped as a 4th NAR closure (forest-texlive) — nixery
+    # rejects the camelCase `texliveSmall` package name (Docker name rules).
 
 steps:
   - name: render forest LIVE (cached toolchain from R2) + publish to site
@@ -60,18 +56,21 @@ steps:
       TECTONIC_PATH=$(jq -r '.assets.tectonic.store_path'  /tmp/manifest.json)
       FORESTER_NAR=$(jq -r '.assets.forester.nar'          /tmp/manifest.json)
       FORESTER_PATH=$(jq -r '.assets.forester.store_path'  /tmp/manifest.json)
+      TEXLIVE_NAR=$(jq -r '.assets.texlive.nar'            /tmp/manifest.json)
+      TEXLIVE_PATH=$(jq -r '.assets.texlive.store_path'    /tmp/manifest.json)
       WASM_TAR=$(jq -r '.assets.wasm_pkgs.tar'             /tmp/manifest.json)
       WASM_PATH=$(jq -r '.assets.wasm_pkgs.store_path'     /tmp/manifest.json)
       echo "::endgroup::"
 
-      echo "::group::import tectonic + forester closures (nix-store --import)"
+      echo "::group::import tectonic + forester + texlive closures (nix-store --import)"
       # The .nar.zst archives carry every store path referenced by the
-      # forester / tectonic binaries (libev, gmp, ocaml-runtime, etc.) so the
-      # binaries' ELF interpreter refs resolve at runtime. Plain tar of just
-      # $out was insufficient — bin/forester died with 'required file not
-      # found' on its loader.
+      # forester / tectonic / texlive binaries (libev, gmp, ocaml-runtime,
+      # tex macros, etc.) so the binaries' ELF interpreter refs resolve at
+      # runtime. Plain tar of just $out was insufficient — bin/forester died
+      # with 'required file not found' on its loader.
       for pair in "tectonic:$TECTONIC_NAR:$TECTONIC_PATH" \
-                  "forester:$FORESTER_NAR:$FORESTER_PATH"; do
+                  "forester:$FORESTER_NAR:$FORESTER_PATH" \
+                  "texlive:$TEXLIVE_NAR:$TEXLIVE_PATH"; do
         name="${pair%%:*}"; rest="${pair#*:}"
         nar="${rest%%:*}"; path="${rest#*:}"
         echo "::group::fetch + nix-store --import $name"
@@ -106,8 +105,9 @@ steps:
       # first command of the source, before subsequent commands restore PATH,
       # `mkdir` isn't reachable). Do the equivalent inline so PATH stays
       # additive against the nixery deps.
-      export PATH="$TECTONIC_PATH/bin:$FORESTER_PATH/bin:$PATH"
+      export PATH="$TECTONIC_PATH/bin:$FORESTER_PATH/bin:$TEXLIVE_PATH/bin:$PATH"
       export TECTONIC_CACHE_DIR="$HOME/.cache/Tectonic"
+      latex --version 2>&1 | head -1 || echo "::warning::latex not on PATH after texlive import"
       mkdir -p "$TECTONIC_CACHE_DIR"
       if [ -d "$TECTONIC_PATH/share/tectonic-cache" ]; then
         cp -rn "$TECTONIC_PATH/share/tectonic-cache/." "$TECTONIC_CACHE_DIR/" 2>/dev/null || true

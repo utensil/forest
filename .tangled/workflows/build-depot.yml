@@ -70,12 +70,19 @@ steps:
       du -sh "$wasm_out"
       echo "::endgroup::"
 
-      echo "::group::package tectonic + forester as NAR closures (full dep chain)"
-      # Plain tar of just $out is NOT enough — forester references libev / gmp /
-      # ocaml-runtime / etc. that live at OTHER /nix/store paths. nix-store
-      # --export of `nix-store -qR <root>` captures the whole closure; render
-      # does `nix-store --import` to land every path at its expected location.
-      for pair in "tectonic:$tectonic_out" "forester:$forester_out"; do
+      echo "::group::nix build .#forest-texlive"
+      texlive_out=$(nix build .#forest-texlive --no-link --print-out-paths)
+      echo "texlive: $texlive_out"
+      du -sh "$texlive_out"
+      echo "::endgroup::"
+
+      echo "::group::package tectonic + forester + texlive as NAR closures (full dep chain)"
+      # Plain tar of just $out is NOT enough — these reference libev / gmp /
+      # ocaml-runtime / tex packages / etc. that live at OTHER /nix/store
+      # paths. nix-store --export of `nix-store -qR <root>` captures the
+      # whole closure; render does `nix-store --import` to land every path
+      # at its expected location.
+      for pair in "tectonic:$tectonic_out" "forester:$forester_out" "texlive:$texlive_out"; do
         name="${pair%%:*}"
         path="${pair#*:}"
         nix-store --export $(nix-store -qR "$path") | zstd -19 -T0 -o "forest-${name}-x86_64.nar.zst"
@@ -95,10 +102,10 @@ steps:
 
       echo "::group::generate manifest.json"
       : "${R2_PUBLIC_URL:=https://pub-5462b73a50594a06b85663123d74ab23.r2.dev}"
-      python3 - "$tectonic_out" "$forester_out" "$wasm_out" <<'PY' > manifest.json
+      python3 - "$tectonic_out" "$forester_out" "$wasm_out" "$texlive_out" <<'PY' > manifest.json
       import json, os, subprocess, sys
-      tectonic, forester, wasm = sys.argv[1], sys.argv[2], sys.argv[3]
-      # tectonic + forester are NAR closures (need nix-store --import);
+      tectonic, forester, wasm, texlive = sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4]
+      # tectonic + forester + texlive are NAR closures (need nix-store --import);
       # wasm-pkgs is plain tar. Mirror by using "nar" vs "tar" keys so the
       # render workflow can dispatch on which is which.
       def info(name, ext, store_path):
@@ -115,6 +122,7 @@ steps:
           "assets": {
               "tectonic":  info("tectonic",  "nar", tectonic),
               "forester":  info("forester",  "nar", forester),
+              "texlive":   info("texlive",   "nar", texlive),
               "wasm_pkgs": info("wasm-pkgs", "tar", wasm),
           },
       }
@@ -136,6 +144,7 @@ steps:
       for f in \
         forest-tectonic-x86_64.nar.zst  forest-tectonic-x86_64.storepath  forest-tectonic-x86_64.sha256 \
         forest-forester-x86_64.nar.zst  forest-forester-x86_64.storepath  forest-forester-x86_64.sha256 \
+        forest-texlive-x86_64.nar.zst   forest-texlive-x86_64.storepath   forest-texlive-x86_64.sha256 \
         forest-wasm-pkgs-x86_64.tar.zst forest-wasm-pkgs-x86_64.storepath forest-wasm-pkgs-x86_64.sha256 \
         manifest.json; do
         echo "uploading $f → s3://$R2_BUCKET/forest/$f"
