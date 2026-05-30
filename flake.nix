@@ -278,7 +278,7 @@
           export PSHEADERS=".:$actual_dvips_dir/base:$actual_dvips_dir/config:$actual_dvips_dir"
           export TEXPSHEADERS="\$PSHEADERS"
           export DVIPSHEADERS="\$PSHEADERS"
-          if [ -n "\${FOREST_KPSEDEBUG:-}" ]; then
+          if [ -n "''${FOREST_KPSEDEBUG:-}" ]; then
             export KPATHSEA_DEBUG=64
           fi
           exec -a "\$0" "$dvisvgm_bin" "\$@"
