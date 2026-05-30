@@ -107,7 +107,7 @@
         dontUnpack = true;
         dontConfigure = true;
 
-        nativeBuildInputs = [ pkgs.tectonic pkgs.cacert pkgs.texlive.bin.core ];
+        nativeBuildInputs = [ pkgs.tectonic pkgs.cacert pkgs.texlive.bin.dvisvgm ];
 
         buildPhase = ''
           runHook preBuild
@@ -142,12 +142,11 @@
           runHook preInstall
           mkdir -p $out/bin $out/share
           ln -s ${pkgs.tectonic}/bin/tectonic $out/bin/tectonic
-          # dvisvgm ships with texlive.bin.core in this nixpkgs revision (the
-          # standalone pkgs.dvisvgm attr was missing). symlink-with-fallback
-          # so it ends up at $out/bin/dvisvgm either way.
-          if [ -x "${pkgs.texlive.bin.core}/bin/dvisvgm" ]; then
-            ln -s ${pkgs.texlive.bin.core}/bin/dvisvgm $out/bin/dvisvgm
-          fi
+          # dvisvgm comes from texlive.bin.dvisvgm in this nixpkgs (top-level
+          # pkgs.dvisvgm is absent; texlive.bin.core doesn't include it).
+          # Fail loud if the path doesn't exist so we don't ship a broken NAR.
+          test -x "${pkgs.texlive.bin.dvisvgm}/bin/dvisvgm"
+          ln -s ${pkgs.texlive.bin.dvisvgm}/bin/dvisvgm $out/bin/dvisvgm
           # snapshot the warmed cache under $out/share so render workflow
           # can `cp -r $out/share/tectonic-cache ~/.cache/Tectonic`.
           if [ -d "$TECTONIC_CACHE_DIR" ]; then
