@@ -56,7 +56,9 @@
           inherit (pkgs.texlive) scheme-medium
             # Extras not in medium that we already KNOW forester uses:
             standalone tikz-cd preview varwidth adjustbox collectbox
-            newpx newtx kastrup stmaryrd;
+            newpx newtx kastrup stmaryrd
+            # Font deps of newpx that nixpkgs doesn't propagate
+            fontaxes mweights;
         };
         in pkgs.stdenv.mkDerivation {
           pname = "forest-texlive";
