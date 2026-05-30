@@ -1,0 +1,131 @@
+engine: nixery
+
+# Build forest's three flake.nix derivations on tangled Spindle (no GitHub
+# Actions), package as .tar.zst, generate manifest.json, upload to R2.
+# Mirrors blog/.tangled/workflows/build-depot.yml's shape — same R2 bucket
+# (utensil-tngl), same secrets (R2_ACCESS_KEY_ID / R2_SECRET_ACCESS_KEY /
+# R2_ENDPOINT / R2_BUCKET), same manifest schema.
+#
+# Triggers on every push to main. Each run is a fresh container (no
+# cross-run nix store cache), so it re-does the full ~10min build every
+# time. Outputs are deterministic — when inputs haven't moved, the
+# rebuilt manifest is identical.
+when:
+  - event: ["push"]
+    branch: main
+
+dependencies:
+  nixpkgs:
+    - bash
+    - coreutils
+    - gnugrep
+    - findutils
+    - gawk
+    - git
+    - openssh
+    - cacert
+    - gcc
+    - curl
+    - gnutar
+    - gzip
+    - patchelf
+    - glibc
+    - nix
+    - awscli2
+    - jq
+    - zstd
+    - python3
+
+steps:
+  - name: build forest-tectonic + forest-forester + forest-wasm-pkgs, package, upload to R2
+    command: |
+      set -euo pipefail
+      export SSL_CERT_FILE="${SSL_CERT_FILE:-${NIX_SSL_CERT_FILE:-/etc/ssl/certs/ca-bundle.crt}}"
+      export HOME="${HOME:-/tmp/cihome}"; mkdir -p "$HOME"
+
+      echo "::group::configure nix (experimental + sandbox=false for opam/tectonic/cargo network)"
+      mkdir -p "$HOME/.config/nix"
+      cat > "$HOME/.config/nix/nix.conf" <<NIXCONF
+      experimental-features = nix-command flakes
+      sandbox = false
+      NIXCONF
+      cat "$HOME/.config/nix/nix.conf"
+      echo "::endgroup::"
+
+      echo "::group::nix build .#forest-tectonic"
+      tectonic_out=$(nix build .#forest-tectonic --no-link --print-out-paths)
+      echo "tectonic: $tectonic_out"
+      du -sh "$tectonic_out"
+      echo "::endgroup::"
+
+      echo "::group::nix build .#forest-forester"
+      forester_out=$(nix build .#forest-forester --no-link --print-out-paths)
+      echo "forester: $forester_out"
+      du -sh "$forester_out"
+      echo "::endgroup::"
+
+      echo "::group::nix build .#forest-wasm-pkgs"
+      wasm_out=$(nix build .#forest-wasm-pkgs --no-link --print-out-paths)
+      echo "wasm-pkgs: $wasm_out"
+      du -sh "$wasm_out"
+      echo "::endgroup::"
+
+      echo "::group::package each derivation (tar.zst at its store path)"
+      for pair in "tectonic:$tectonic_out" "forester:$forester_out" "wasm-pkgs:$wasm_out"; do
+        name="${pair%%:*}"
+        path="${pair#*:}"
+        base="$(basename "$path")"
+        tar -C /nix/store -cf - "$base" | zstd -19 -T0 -o "forest-${name}-x86_64.tar.zst"
+        ls -lh "forest-${name}-x86_64.tar.zst"
+        echo "$path" > "forest-${name}-x86_64.storepath"
+        sha256sum "forest-${name}-x86_64.tar.zst" | tee "forest-${name}-x86_64.sha256"
+      done
+      echo "::endgroup::"
+
+      echo "::group::generate manifest.json"
+      : "${R2_PUBLIC_URL:=https://pub-5462b73a50594a06b85663123d74ab23.r2.dev}"
+      python3 - "$tectonic_out" "$forester_out" "$wasm_out" <<'PY' > manifest.json
+      import json, os, subprocess, sys
+      tectonic, forester, wasm = sys.argv[1], sys.argv[2], sys.argv[3]
+      def info(name, store_path):
+          tar = f"forest-{name}-x86_64.tar.zst"
+          with open(f"forest-{name}-x86_64.sha256") as f:
+              sha = f.read().split()[0]
+          size = os.stat(tar).st_size
+          return {"tar": tar, "store_path": store_path, "sha256": sha, "size_bytes": size}
+      out = {
+          "version": 1,
+          "created_at": subprocess.check_output(["date", "-u", "+%Y-%m-%dT%H:%M:%SZ"], text=True).strip(),
+          "base_url": os.environ.get("R2_PUBLIC_URL", "https://pub-5462b73a50594a06b85663123d74ab23.r2.dev"),
+          "repo": "forest",
+          "assets": {
+              "tectonic":  info("tectonic",  tectonic),
+              "forester":  info("forester",  forester),
+              "wasm_pkgs": info("wasm-pkgs", wasm),
+          },
+      }
+      print(json.dumps(out, indent=2))
+      PY
+      cat manifest.json
+      echo "::endgroup::"
+
+      echo "::group::upload to R2 (S3-compatible, aws-cli multipart-safe)"
+      : "${R2_ACCESS_KEY_ID:?R2_ACCESS_KEY_ID secret missing on this Spindle repo}"
+      : "${R2_SECRET_ACCESS_KEY:?R2_SECRET_ACCESS_KEY secret missing}"
+      : "${R2_ENDPOINT:?R2_ENDPOINT secret missing}"
+      : "${R2_BUCKET:?R2_BUCKET secret missing}"
+      export AWS_ACCESS_KEY_ID="$R2_ACCESS_KEY_ID"
+      export AWS_SECRET_ACCESS_KEY="$R2_SECRET_ACCESS_KEY"
+      export AWS_DEFAULT_REGION=auto
+      # Forest assets live under a subdir so they don't collide with blog's
+      # toplevel manifest.json + tarballs in the same R2 bucket.
+      for f in \
+        forest-tectonic-x86_64.tar.zst  forest-tectonic-x86_64.storepath  forest-tectonic-x86_64.sha256 \
+        forest-forester-x86_64.tar.zst  forest-forester-x86_64.storepath  forest-forester-x86_64.sha256 \
+        forest-wasm-pkgs-x86_64.tar.zst forest-wasm-pkgs-x86_64.storepath forest-wasm-pkgs-x86_64.sha256 \
+        manifest.json; do
+        echo "uploading $f → s3://$R2_BUCKET/forest/$f"
+        aws --endpoint-url "$R2_ENDPOINT" s3 cp "$f" "s3://$R2_BUCKET/forest/$f"
+      done
+      echo "✅ all forest artifacts uploaded; base URL: $R2_PUBLIC_URL/forest/"
+      echo "::endgroup::"

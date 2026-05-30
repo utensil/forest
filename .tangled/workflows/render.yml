@@ -1,0 +1,144 @@
+engine: nixery
+
+# Forest render on tangled Spindle: pull the three pre-built closures from
+# R2 (tectonic + forester + wasm-pkgs), unpack/import, run `bash ./build.sh`,
+# push `./output/forest/` to the `site` branch → utensil.tngl.sh/forest.
+#
+# build-depot.yml uploads the closures + manifest.json under R2's forest/
+# subdir; this consumer hardcodes only R2_PUBLIC_URL + uses jq to discover
+# everything else. Same pattern as blog/.tangled/workflows/render.yml.
+when:
+  - event: ["push"]
+    branch: main
+
+dependencies:
+  nixpkgs:
+    - bash
+    - coreutils
+    - gnugrep
+    - findutils
+    - gawk
+    - git
+    - openssh
+    - cacert
+    - gcc
+    - curl
+    - gnutar
+    - gzip
+    - patchelf
+    - glibc
+    - zstd        # decompress the closure tarballs
+    - jq          # parse manifest.json from R2
+    - bun         # build.sh::bun_build for css/ts/tsx
+    - just        # bash ./build.sh shells out to `just forest`, `just assets`
+    - biome       # ./chk.sh (lint) — keep parity with gh-pages.yml even if unused
+    - nodejs      # bunx xslt3 needs node
+    - xsltproc    # convert_xml.sh
+    - python3     # fize.py + manifest jq alt
+
+steps:
+  - name: render forest LIVE (cached toolchain from R2) + publish to site
+    command: |
+      set -euo pipefail
+      export SSL_CERT_FILE="${SSL_CERT_FILE:-${NIX_SSL_CERT_FILE:-/etc/ssl/certs/ca-bundle.crt}}"
+      libstdcpp_dir="$(dirname "$(find /nix/store -maxdepth 4 -name 'libstdc++.so.6' 2>/dev/null | head -1)")"
+      export LD_LIBRARY_PATH="${libstdcpp_dir}:${LD_LIBRARY_PATH:-}"
+      export HOME="${HOME:-/tmp/cihome}"
+
+      echo "::group::discover assets via R2 manifest.json"
+      R2_PUBLIC_URL=https://pub-5462b73a50594a06b85663123d74ab23.r2.dev
+      curl -fsSL "$R2_PUBLIC_URL/forest/manifest.json" -o /tmp/manifest.json
+      jq . /tmp/manifest.json
+      TECTONIC_TAR=$(jq -r '.assets.tectonic.tar'        /tmp/manifest.json)
+      TECTONIC_PATH=$(jq -r '.assets.tectonic.store_path' /tmp/manifest.json)
+      FORESTER_TAR=$(jq -r '.assets.forester.tar'        /tmp/manifest.json)
+      FORESTER_PATH=$(jq -r '.assets.forester.store_path' /tmp/manifest.json)
+      WASM_TAR=$(jq -r '.assets.wasm_pkgs.tar'           /tmp/manifest.json)
+      WASM_PATH=$(jq -r '.assets.wasm_pkgs.store_path'   /tmp/manifest.json)
+      echo "::endgroup::"
+
+      echo "::group::probe /nix/store writability + extract closures in place"
+      if mkdir -p "/nix/store/.write-test-$$" 2>/dev/null; then
+        rmdir "/nix/store/.write-test-$$"
+        echo "✓ /nix/store WRITABLE — extracting tarballs there"
+      else
+        echo "::error::/nix/store not writable in nixery — need nix-store --import strategy"
+        exit 1
+      fi
+      for triple in "tectonic:$TECTONIC_TAR:$TECTONIC_PATH" \
+                    "forester:$FORESTER_TAR:$FORESTER_PATH" \
+                    "wasm-pkgs:$WASM_TAR:$WASM_PATH"; do
+        name="${triple%%:*}"; rest="${triple#*:}"
+        tar="${rest%%:*}"; path="${rest#*:}"
+        echo "::group::fetch + extract $name"
+        curl -fsSL "$R2_PUBLIC_URL/forest/$tar" -o "/tmp/$tar"
+        zstd -d -T0 "/tmp/$tar" -o "/tmp/${tar%.zst}"
+        tar -C /nix/store -xf "/tmp/${tar%.zst}"
+        rm -f "/tmp/$tar" "/tmp/${tar%.zst}"
+        test -d "$path" || { echo "::error::$name dir absent after extract: $path"; exit 1; }
+        du -sh "$path"
+        echo "::endgroup::"
+      done
+      echo "::endgroup::"
+
+      echo "::group::source tectonic + forester env.sh + drop wasm pkgs into lib/"
+      source "$TECTONIC_PATH/env.sh"
+      source "$FORESTER_PATH/env.sh"
+      # Mirror what build.sh::prep_wasm would have populated had it run:
+      # lib/<name>/<…inner-path…>/pkg/* — but since the rendered build.sh
+      # only reads `lib/<lib_path>/pkg/`, we just stage `lib/wgputoy/pkg/`,
+      # `lib/egglog/web-demo/pkg/`, `lib/rhaiscript/pkg/`.
+      mkdir -p lib/wgputoy/pkg lib/egglog/web-demo/pkg lib/rhaiscript/pkg
+      cp -r "$WASM_PATH/pkg/wgputoy/."     lib/wgputoy/pkg/
+      cp -r "$WASM_PATH/pkg/egglog/."      lib/egglog/web-demo/pkg/
+      cp -r "$WASM_PATH/pkg/rhaiscript/."  lib/rhaiscript/pkg/
+      # prep_wasm only rebuilds when lib/<name>/.git is absent — write a
+      # placeholder so it skips fetching upstream sources too. The hash file
+      # tells prep_wasm the pkg is fresh (matches the desired hash).
+      for triple in "wgputoy:wgputoy:60d0bec4bd912a54d5049f2c28c1bd6a0916e5ec" \
+                    "egglog:egglog/web-demo:8d9b10ec712106b21d10b7bf45d10c0f9d1d09c7" \
+                    "rhaiscript:rhaiscript:9fa80661bc9eb69363ac86879826dcd8ccb604af"; do
+        lib_name="${triple%%:*}"; rest="${triple#*:}"
+        lib_path="${rest%:*}"; hash="${rest##*:}"
+        mkdir -p "lib/$lib_name/.git" "lib/$lib_path/pkg"
+        # bare .git marker — prep_wasm's `[ ! -d lib/$lib_name/.git ]` check
+        # is just for "no clone present", any non-empty marker satisfies it.
+        echo "$hash" > "lib/$lib_path/pkg/.commit_hash"
+      done
+      ls lib/wgputoy/pkg lib/egglog/web-demo/pkg lib/rhaiscript/pkg | head -20
+      echo "::endgroup::"
+
+      echo "::group::theme submodule"
+      git submodule update --init --recursive 2>/dev/null || true
+      echo "::endgroup::"
+
+      echo "::group::tectonic cache hydration"
+      # env.sh seeds ~/.cache/Tectonic from $TECTONIC_PATH/share/tectonic-cache.
+      ls -la "${TECTONIC_CACHE_DIR:-$HOME/.cache/Tectonic}" 2>&1 | head -5 || true
+      echo "::endgroup::"
+
+      echo "::group::build forest"
+      export CI=1   # build.sh::bun_build skips bun install branch without this; also gates prep_wasm
+      export TEC=1  # build.sh::lize uses tectonic instead of lualatex
+      forester --version || true
+      tectonic --version || true
+      bash ./build.sh
+      test -d output/forest
+      du -sh output/forest
+      echo "::endgroup::"
+
+      echo "::group::publish output/forest → site branch"
+      : "${DEPLOY_SSH_KEY_B64:?DEPLOY_SSH_KEY_B64 secret not set on tangled forest repo}"
+      mkdir -p "$HOME/.ssh"; chmod 700 "$HOME/.ssh"
+      grep -q ':0:0:' /etc/passwd || echo "root:x:0:0:root:$HOME:/bin/sh" >> /etc/passwd 2>/dev/null || true
+      printf '%s' "$DEPLOY_SSH_KEY_B64" | base64 -d > "$HOME/.ssh/deploy"; chmod 600 "$HOME/.ssh/deploy"
+      export GIT_SSH_COMMAND="ssh -i $HOME/.ssh/deploy -o IdentitiesOnly=yes -o StrictHostKeyChecking=accept-new -o UserKnownHostsFile=$HOME/.ssh/known_hosts"
+      export GIT_AUTHOR_NAME=tangled-ci GIT_AUTHOR_EMAIL=ci@utensil.tngl.sh
+      export GIT_COMMITTER_NAME=tangled-ci GIT_COMMITTER_EMAIL=ci@utensil.tngl.sh
+      cd output/forest && git init -q && git checkout -q -b site && git add -A
+      git commit -q -m "render forest $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+      git push --force "git@tangled.org:utensil.tngl.sh/forest" site
+      echo "pushed rendered forest → branch site"
+      echo "::endgroup::"
+
+      echo "✅ forest rendered + published"
