@@ -46,19 +46,25 @@
         # plus \input{diagrams}/\input{string-diagrams} which pull in
         # tikz-cd + xy. scheme-small alone misses standalone.cls; combine
         # explicitly so we know what's in the closure.
+        # Empirical list — derived from parsing the latex log of pipeline
+        # 22716. 19 unique tex/<dir> directories were actually loaded;
+        # map each to its nixpkgs texlive attribute. scheme-medium was
+        # 1.2 GB on R2; scheme-small + the precise extras below should
+        # land ~75-150 MB. If the next render exposes more, add them
+        # here — every loaded path in the latex log maps to one
+        # texlive.<dir> attribute.
         let texCombo = pkgs.texlive.combine {
-          # scheme-medium subsumes scheme-small + a few hundred more packages.
-          # Iterating individual packages was running into whack-a-mole
-          # (standalone → newpx → xstring → mweights → …). Medium gets us
-          # everything common forester preambles touch in one closure (~700 MB
-          # raw, ~250 MB NAR after zstd-19). Still well under scheme-full's
-          # multi-GB footprint.
-          inherit (pkgs.texlive) scheme-medium
-            # Extras not in medium that we already KNOW forester uses:
-            standalone tikz-cd preview varwidth adjustbox collectbox
-            newpx newtx kastrup stmaryrd
-            # Font deps of newpx that nixpkgs doesn't propagate
-            fontaxes mweights;
+          inherit (pkgs.texlive) scheme-small
+            # Common across most forester preambles
+            standalone preview varwidth adjustbox collectbox
+            tikz-cd pgf mathtools stmaryrd
+            # newpx font family + its non-propagated deps
+            newpx newtx kastrup fontaxes mweights
+            # Loaded directly per the 22716 log
+            amscls amsfonts amsmath
+            etoolbox xpatch xstring xkeyval
+            carlisle l3packages
+            graphics-def;
         };
         in pkgs.stdenv.mkDerivation {
           pname = "forest-texlive";
