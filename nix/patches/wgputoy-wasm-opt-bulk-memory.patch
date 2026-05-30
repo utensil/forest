@@ -1,16 +1,22 @@
-wgputoy: tell wasm-pack's wasm-opt to enable bulk-memory features
+wgputoy: tell wasm-pack's wasm-opt to accept ALL wasm features Rust emits
 
 After cargo finishes the wasm32 build, wasm-pack runs binaryen's wasm-opt
-to shrink the output. Rust 1.82+ defaults wasm32-unknown-unknown to the
-`bulk-memory` target feature, so the .wasm contains `memory.copy` /
-`memory.fill` ops; recent binaryen wasm-validator rejects them unless
-`--enable-bulk-memory` (and `--enable-bulk-memory-opt`) is passed.
+to shrink the output. Rust 1.82+ enables increasing default-on wasm
+features for wasm32-unknown-unknown (`bulk-memory`, `nontrapping-fptoint`,
+`reference-types`, …). Binaryen's wasm-validator rejects features it
+isn't told are allowed, with errors like:
+  '[wasm-validator] memory.copy operations require bulk memory operations'
+  '[wasm-validator] all used features should be allowed' (for trunc_sat_f32_u)
+
+Rather than chase each feature as Rust enables more, pass `--all-features`
+once. Discussion of trade-offs (vs whack-a-mole flags / skipping wasm-opt
+/ bumping binaryen) is at github.com/utensil/forest/issues/55.
 
 The pinned commit's Cargo.toml has no `[package.metadata.wasm-pack.profile.*]`
 block (verified at 60d0bec); appending one is safe and additive.
 
-Tracked: github.com/utensil/forest/issues/54 item 2 (new).
-To drop: upstream PR to wgputoy adding the metadata block, then bump
+Tracked: github.com/utensil/forest/issues/54 item 2, github.com/utensil/forest/issues/55.
+To drop: upstream PR adding the metadata block, then bump
 prep_wasm hash + flake pin.
 
 diff --git a/Cargo.toml b/Cargo.toml
@@ -22,4 +28,4 @@ diff --git a/Cargo.toml b/Cargo.toml
  strip = true
 +
 +[package.metadata.wasm-pack.profile.release]
-+wasm-opt = ['-O', '--enable-bulk-memory', '--enable-bulk-memory-opt']
++wasm-opt = ['-O', '--all-features']
