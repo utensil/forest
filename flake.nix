@@ -308,7 +308,11 @@
           forest-tectonic = forestTectonicFor pkgs;
           forest-forester = forestForesterFor pkgs;
           forest-wasm-pkgs = forestWasmPkgsFor pkgs;
-          forest-texlive = forestTexliveFor pkgs;
+          # forest-texlive removed per operator: tectonic-only approach.
+          # render.yml shims `latex` → tectonic --outfmt xdv → rename .xdv
+          # to .dvi; real `dvisvgm` from nixery reads the XDV-format file.
+          # Auto-download of CTAN packages by tectonic replaces our combo.
+          # forest-texlive = forestTexliveFor pkgs;
         }
       );
 
