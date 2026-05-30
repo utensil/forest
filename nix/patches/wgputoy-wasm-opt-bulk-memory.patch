@@ -1,0 +1,25 @@
+wgputoy: tell wasm-pack's wasm-opt to enable bulk-memory features
+
+After cargo finishes the wasm32 build, wasm-pack runs binaryen's wasm-opt
+to shrink the output. Rust 1.82+ defaults wasm32-unknown-unknown to the
+`bulk-memory` target feature, so the .wasm contains `memory.copy` /
+`memory.fill` ops; recent binaryen wasm-validator rejects them unless
+`--enable-bulk-memory` (and `--enable-bulk-memory-opt`) is passed.
+
+The pinned commit's Cargo.toml has no `[package.metadata.wasm-pack.profile.*]`
+block (verified at 60d0bec); appending one is safe and additive.
+
+Tracked: github.com/utensil/forest/issues/54 item 2 (new).
+To drop: upstream PR to wgputoy adding the metadata block, then bump
+prep_wasm hash + flake pin.
+
+diff --git a/Cargo.toml b/Cargo.toml
+--- a/Cargo.toml
++++ b/Cargo.toml
+@@ -78,3 +78,6 @@ wasm-bindgen-test = "0.3.31"
+ # Tell `rustc` to optimize for small code size.
+ opt-level = "s"
+ strip = true
++
++[package.metadata.wasm-pack.profile.release]
++wasm-opt = ['-O', '--enable-bulk-memory', '--enable-bulk-memory-opt']

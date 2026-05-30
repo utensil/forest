@@ -212,6 +212,9 @@
                   # Sanity: both match blocks should now have an Other arm.
                   test "$(grep -c 'SurfaceError::Other' src/lib.rs)" -eq 2 \
                     || { echo "::error::wgputoy patch produced unexpected arm count"; exit 1; }
+                  # Append wasm-pack metadata so wasm-opt accepts the bulk-memory
+                  # ops Rust 1.82+ emits for wasm32-unknown-unknown.
+                  patch -p1 --no-backup-if-mismatch < ${./nix/patches/wgputoy-wasm-opt-bulk-memory.patch}
                 fi
                 wasm-pack build --target web --release --out-dir pkg . -- --locked
                 ls -la pkg
