@@ -107,6 +107,18 @@ steps:
       # `mkdir` isn't reachable). Do the equivalent inline so PATH stays
       # additive against the nixery deps.
       export PATH="$TECTONIC_PATH/bin:$FORESTER_PATH/bin:$PATH"
+      # forest-tectonic ships texlive.combine's runtime tree symlinked at
+      # share/texmf-dist/. The dvips package contributes .pro headers under
+      # share/texmf-dist/dvips/base/ — the latex shim symlinks them into
+      # each per-snippet cwd so dvisvgm picks them up via PSHEADERS=.
+      export DVIPS_BASE_DIR="$TECTONIC_PATH/share/texmf-dist/dvips/base"
+      if [ -d "$DVIPS_BASE_DIR" ]; then
+        echo "DVIPS_BASE_DIR=$DVIPS_BASE_DIR; .pro files:"
+        ls "$DVIPS_BASE_DIR"/*.pro 2>&1 | head -10
+      else
+        echo "::warning::DVIPS_BASE_DIR not found at $DVIPS_BASE_DIR — searching:"
+        find "$TECTONIC_PATH" -name 'tex.pro' -type f 2>/dev/null | head -3
+      fi
       export TECTONIC_CACHE_DIR="$HOME/.cache/Tectonic"
       mkdir -p "$TECTONIC_CACHE_DIR"
       if [ -d "$TECTONIC_PATH/share/tectonic-cache" ]; then
@@ -191,6 +203,16 @@ steps:
         '# so `\input{diagrams}` etc. (relative refs) resolve against them.' \
         'if [ -d "$FOREST_TEX_DIR" ]; then' \
         '  for f in "$FOREST_TEX_DIR"/*.tex "$FOREST_TEX_DIR"/*.sty; do [ -e "$f" ] && ln -sf "$f" .; done' \
+        'fi' \
+        '# dvisvgm runs RIGHT AFTER tectonic in this same cwd (forester chains' \
+        '# them per math snippet). Symlink dvips PostScript headers (tex.pro,' \
+        '# texps.pro, special.pro, color.pro, finclude.pro) into cwd so' \
+        '# kpathsea finds them via PSHEADERS=. — bypasses the whole TEXMF /' \
+        '# texmf.cnf cascade that we cannot reliably wire to the dvisvgm-3.6' \
+        '# store path (kpathsea SELFAUTOLOC keeps pointing at dvisvgm-3.6/bin' \
+        '# even with wrapper tricks).' \
+        'if [ -n "$DVIPS_BASE_DIR" ] && [ -d "$DVIPS_BASE_DIR" ]; then' \
+        '  for f in "$DVIPS_BASE_DIR"/*.pro; do [ -e "$f" ] && ln -sf "$f" .; done' \
         'fi' \
         'tectonic --outfmt xdv --keep-logs --print --bundle "${TECTONIC_BUNDLE:-https://bebopbamf-tex.syd1.cdn.digitaloceanspaces.com/texlive2024-0312.ttb}" "${base}.tex" 2>&1 || { echo "::error::tectonic FAILED for ${base}.tex (cwd=$(pwd))" >&2; cat "${base}.log" 2>/dev/null | tail -40 >&2 || true; exit 1; }' \
         '[ -f "${base}.xdv" ] && mv -f "${base}.xdv" "${base}.dvi"' \
