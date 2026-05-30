@@ -138,7 +138,7 @@
           # bare texlive.bin.dvisvgm has no texmf.cnf — kpathsea fails at
           # runtime. Combine with scheme-infraonly (smallest scheme that
           # ships kpathsea config) to get a properly-wrapped dvisvgm.
-          (pkgs.texlive.combine { inherit (pkgs.texlive) scheme-basic dvisvgm dvips; })
+          (pkgs.texlive.combine { inherit (pkgs.texlive) scheme-small dvisvgm dvips graphics; })
         ];
 
         buildPhase = ''
