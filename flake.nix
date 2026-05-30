@@ -132,7 +132,8 @@
           opam install ocaml-system -y
           opam pin add forester 'git+https://git.sr.ht/~jonsterling/ocaml-forester#5ab7277' --no-action -y
           opam install forester -y
-          which forester
+          # nix stdenv doesn't ship `which`; check via command -v instead.
+          command -v forester || { echo "::error::forester binary missing after opam install"; exit 1; }
           forester --version || true
           runHook postBuild
         '';
@@ -197,12 +198,15 @@
                 git fetch --depth 1 origin "${p.hash}"
                 git checkout "${p.hash}"
                 cd "${p.path}"
-                # `-- --locked` passes --locked to cargo so Cargo.lock pins are
-                # honored (the upstream wgpu API drifts between releases — e.g.
-                # wgpu 24.0.3 added SurfaceError::Other and breaks any code
-                # written against an older wgpu unless --locked respects the
-                # commit's Cargo.lock).
-                wasm-pack build --target web --release --out-dir pkg . -- --locked
+                # For wgputoy: the pinned upstream commit doesn't have a Cargo.lock
+                # constraining wgpu, so cargo pulls the latest patch (24.0.3+) which
+                # added SurfaceError::Other and breaks the upstream match. Pin wgpu
+                # to 24.0.0 (last version before the breaking variant) before build.
+                if [ "${p.name}" = "wgputoy" ]; then
+                  [ -f Cargo.lock ] || cargo generate-lockfile
+                  cargo update -p wgpu --precise 24.0.0 || cargo update -p wgpu --precise 23.0.1 || true
+                fi
+                wasm-pack build --target web --release --out-dir pkg .
                 ls -la pkg
               )
             '') pins}
