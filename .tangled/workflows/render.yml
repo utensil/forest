@@ -33,7 +33,7 @@ dependencies:
     - just        # bash ./build.sh shells out to `just forest`, `just assets`
     - biome       # ./chk.sh (lint) — keep parity with gh-pages.yml even if unused
     - nodejs      # bunx xslt3 needs node
-    - xsltproc    # convert_xml.sh
+    - libxslt     # provides xsltproc (used by convert_xml.sh) — top-level pkg name in nixpkgs is libxslt, not xsltproc
     - python3     # fize.py + manifest jq alt
 
 steps:
