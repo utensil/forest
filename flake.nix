@@ -163,16 +163,21 @@
       # dirs are 10s-100s of KB each.
       forestWasmPkgsFor = pkgs:
         let
+          # `path` mirrors build.sh's `lib_path` arg — relative to the work
+          # dir (where we clone the repo), points at the directory wasm-pack
+          # runs in. For wgputoy/rhaiscript the cloned repo IS the wasm-pack
+          # crate (path = name). For egglog the wasm-pack crate is a subdir
+          # of the clone (path = "egglog/web-demo").
           pins = [
             { name = "wgputoy"; url = "https://github.com/compute-toys/wgpu-compute-toy.git";
               hash = "60d0bec4bd912a54d5049f2c28c1bd6a0916e5ec";
-              path = "."; }
+              path = "wgputoy"; }
             { name = "egglog"; url = "https://github.com/egraphs-good/egglog.git";
               hash = "8d9b10ec712106b21d10b7bf45d10c0f9d1d09c7";
               path = "egglog/web-demo"; }
             { name = "rhaiscript"; url = "https://github.com/rhaiscript/playground";
               hash = "9fa80661bc9eb69363ac86879826dcd8ccb604af";
-              path = "."; }
+              path = "rhaiscript"; }
           ];
         in pkgs.stdenv.mkDerivation {
           pname = "forest-wasm-pkgs";
@@ -197,23 +202,23 @@
             ${pkgs.lib.concatMapStrings (p: ''
               echo "=== building ${p.name} ==="
               git clone --depth 1 "${p.url}" "${p.name}"
+              # git fetch/checkout target the cloned repo (egglog/, wgputoy/, …).
               ( cd "${p.name}"
                 git fetch --depth 1 origin "${p.hash}"
                 git checkout "${p.hash}"
-                cd "${p.path}"
-                # For wgputoy: the pinned commit's WASM render() match is
-                # missing the wgpu 24.0.x SurfaceError::Other arm — the non-WASM
-                # match at line ~184 handles it but the WASM one at ~148 does
-                # not. Apply nix/patches/wgputoy-surface-error-other.patch via
-                # `patch -p1`; if upstream drifts, patch will refuse and fail
-                # loudly (vs a bare sed that would silently move).
+              )
+              # wasm-pack runs in ${p.path} — for egglog the wasm-pack crate
+              # lives at egglog/web-demo (a subdir of the clone); for the
+              # others, path == name.
+              ( cd "${p.path}"
                 if [ "${p.name}" = "wgputoy" ]; then
+                  # Two diff/context patches against upstream src/lib.rs +
+                  # Cargo.toml — `patch -p1` fails loudly if upstream drifts,
+                  # vs a bare sed that would silently move. Tracked in
+                  # utensil/forest#54 (item 1) + #55 (wasm-opt strategy).
                   patch -p1 --no-backup-if-mismatch < ${./nix/patches/wgputoy-surface-error-other.patch}
-                  # Sanity: both match blocks should now have an Other arm.
                   test "$(grep -c 'SurfaceError::Other' src/lib.rs)" -eq 2 \
                     || { echo "::error::wgputoy patch produced unexpected arm count"; exit 1; }
-                  # Append wasm-pack metadata so wasm-opt accepts the bulk-memory
-                  # ops Rust 1.82+ emits for wasm32-unknown-unknown.
                   patch -p1 --no-backup-if-mismatch < ${./nix/patches/wgputoy-wasm-opt-bulk-memory.patch}
                 fi
                 wasm-pack build --target web --release --out-dir pkg . -- --locked
@@ -228,7 +233,7 @@
             mkdir -p $out/pkg
             ${pkgs.lib.concatMapStrings (p: ''
               mkdir -p $out/pkg/${p.name}
-              cp -r $TMPDIR/work/${p.name}/${p.path}/pkg/. $out/pkg/${p.name}/
+              cp -r $TMPDIR/work/${p.path}/pkg/. $out/pkg/${p.name}/
             '') pins}
             ls -la $out/pkg
             runHook postInstall
