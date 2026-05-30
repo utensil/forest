@@ -240,30 +240,27 @@
             exit 1
           fi
           echo "TEXMFCNF dirs: $texmfcnf_dirs"
-          # PostScript headers (tex.pro, texps.pro, special.pro, color.pro)
-          # come from the dvips package. Verify they exist at build time
-          # and locate them dynamically — texlive.combine may stash them
-          # somewhere unexpected.
-          echo "Locating .pro files in texlive combine:"
-          dvips_dir="$texlive_drv/share/texmf-dist/dvips"
-          for pro in tex.pro texps.pro special.pro color.pro; do
-            hits=$(find "$texlive_drv" -name "$pro" -type f 2>/dev/null)
-            if [ -n "$hits" ]; then
-              echo "  ✓ $pro: $hits"
+          # PostScript headers (tex.pro, texps.pro, special.pro, color.pro,
+          # finclude.pro) from the dvips package. Iter 37's symlink approach
+          # to share/texmf-dist didn't reliably surface dvips/base in the
+          # rendered closure (render.yml's `find` returned empty). Just COPY
+          # them into $out/share/dvips/base — known fixed path, no symlink
+          # traversal mysteries, and they ride with the forest-tectonic NAR
+          # closure independently of where texlive.combine stashes them.
+          mkdir -p $out/share/dvips/base
+          echo "Staging dvips .pro files at $out/share/dvips/base:"
+          for pro in tex.pro texps.pro special.pro color.pro finclude.pro; do
+            found=$(find "$texlive_drv" -name "$pro" -type f 2>/dev/null | head -1)
+            if [ -n "$found" ]; then
+              cp "$found" $out/share/dvips/base/
+              echo "  ✓ $pro from $found"
             else
-              echo "  ✗ $pro MISSING from texlive combine"
+              echo "  ✗ $pro MISSING — falling back to broader search:"
+              find "$texlive_drv" -name "$pro" -type f 2>/dev/null | head -3 | sed 's/^/    /'
             fi
           done
-          # Resolve actual dvips base dir from tex.pro location (may
-          # differ from share/texmf-dist/dvips/base depending on combine).
-          tex_pro_path=$(find "$texlive_drv" -path '*/dvips/base/tex.pro' -type f 2>/dev/null | head -1)
-          if [ -n "$tex_pro_path" ]; then
-            actual_dvips_dir=$(dirname "$(dirname "$tex_pro_path")")
-            echo "actual_dvips_dir: $actual_dvips_dir"
-          else
-            actual_dvips_dir="$dvips_dir"
-            echo "tex.pro not found via */dvips/base/, falling back to $actual_dvips_dir"
-          fi
+          ls -la $out/share/dvips/base/
+          actual_dvips_dir="$out/share/dvips"
           # Wrapper preserves argv[0] = $out/bin/dvisvgm so kpathsea
           # SELFAUTOLOC = $out/bin. Plain `exec` (no -a) would let the
           # kernel pass the dvisvgm-3.6 path as argv[0].

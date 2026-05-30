@@ -107,17 +107,20 @@ steps:
       # `mkdir` isn't reachable). Do the equivalent inline so PATH stays
       # additive against the nixery deps.
       export PATH="$TECTONIC_PATH/bin:$FORESTER_PATH/bin:$PATH"
-      # forest-tectonic ships texlive.combine's runtime tree symlinked at
-      # share/texmf-dist/. The dvips package contributes .pro headers under
-      # share/texmf-dist/dvips/base/ — the latex shim symlinks them into
-      # each per-snippet cwd so dvisvgm picks them up via PSHEADERS=.
-      export DVIPS_BASE_DIR="$TECTONIC_PATH/share/texmf-dist/dvips/base"
+      # forest-tectonic stages dvips .pro headers (tex.pro, texps.pro,
+      # special.pro, color.pro, finclude.pro) directly at $out/share/dvips/
+      # base/ (copied at flake build time from texlive.combine — symlinking
+      # the texmf-dist tree didn't survive the NAR closure boundary). The
+      # latex shim symlinks them into each per-snippet cwd so dvisvgm picks
+      # them up via PSHEADERS=. — no kpathsea config needed.
+      export DVIPS_BASE_DIR="$TECTONIC_PATH/share/dvips/base"
       if [ -d "$DVIPS_BASE_DIR" ]; then
         echo "DVIPS_BASE_DIR=$DVIPS_BASE_DIR; .pro files:"
         ls "$DVIPS_BASE_DIR"/*.pro 2>&1 | head -10
       else
         echo "::warning::DVIPS_BASE_DIR not found at $DVIPS_BASE_DIR — searching:"
         find "$TECTONIC_PATH" -name 'tex.pro' -type f 2>/dev/null | head -3
+        ls "$TECTONIC_PATH/share/" 2>/dev/null
       fi
       export TECTONIC_CACHE_DIR="$HOME/.cache/Tectonic"
       mkdir -p "$TECTONIC_CACHE_DIR"
