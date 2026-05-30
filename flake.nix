@@ -203,17 +203,21 @@
           # would search $out/share/texmf-dist — empty). Instead write a
           # tiny wrapper that exec's the full-path binary under the
           # combine's bindir; kpathsea then finds the .pro headers.
-          # Newer dvisvgm 3.6 from source + texlive combine for texmf-dist.
-          # makeWrapper writes a wrapper that sets TEXMFCNF / TEXMFDIST so
-          # kpathsea finds .pro files via env even when run from a different
-          # directory.
+          # Newer dvisvgm 3.6 from source. To make kpathsea find texmf.cnf
+          # + .pro files via SELFAUTOLOC, symlink the texlive combine's
+          # share/ at $out/share so kpathsea looks at $out/share/texmf-dist
+          # → resolves to the texlive runtime tree.
           dvisvgm_bin=${dvisvgmNewerFor pkgs}/bin/dvisvgm
           texlive_drv=${pkgs.texlive.combine { inherit (pkgs.texlive) scheme-small dvips graphics; }}
           test -x "$dvisvgm_bin"
-          makeWrapper "$dvisvgm_bin" "$out/bin/dvisvgm" \
-            --set TEXMFCNF "$texlive_drv/share/texmf-dist/web2c" \
-            --set TEXMFDIST "$texlive_drv/share/texmf-dist" \
-            --set TEXMFROOT "$texlive_drv/share"
+          # Stage the runtime tree at $out/share/<...> so kpathsea finds it
+          # via $out/bin/dvisvgm's SELFAUTOLOC = $out/bin → ../share/...
+          for d in texmf-dist texmf-config texmf-var; do
+            if [ -d "$texlive_drv/share/$d" ]; then
+              ln -s "$texlive_drv/share/$d" "$out/share/$d"
+            fi
+          done
+          ln -s "$dvisvgm_bin" "$out/bin/dvisvgm"
           # snapshot the warmed cache under $out/share so render workflow
           # can `cp -r $out/share/tectonic-cache ~/.cache/Tectonic`.
           if [ -d "$TECTONIC_CACHE_DIR" ]; then
