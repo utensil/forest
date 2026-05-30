@@ -47,18 +47,16 @@
         # tikz-cd + xy. scheme-small alone misses standalone.cls; combine
         # explicitly so we know what's in the closure.
         let texCombo = pkgs.texlive.combine {
-          inherit (pkgs.texlive) scheme-small
-            # Class + figure framing
-            standalone preview varwidth adjustbox xkeyval collectbox
-            # Diagrams
-            tikz-cd pgf
-            # Maths
-            mathtools stmaryrd amscls
-            # Fonts (forester preamble uses newpxtext)
-            newpx newtx kastrup
-            # Misc commonly pulled by forester preambles
-            etoolbox bigfoot mfirstuc;
-          # If we keep adding here, bump to texlive.combined.scheme-medium.
+          # scheme-medium subsumes scheme-small + a few hundred more packages.
+          # Iterating individual packages was running into whack-a-mole
+          # (standalone → newpx → xstring → mweights → …). Medium gets us
+          # everything common forester preambles touch in one closure (~700 MB
+          # raw, ~250 MB NAR after zstd-19). Still well under scheme-full's
+          # multi-GB footprint.
+          inherit (pkgs.texlive) scheme-medium
+            # Extras not in medium that we already KNOW forester uses:
+            standalone tikz-cd preview varwidth adjustbox collectbox
+            newpx newtx kastrup stmaryrd;
         };
         in pkgs.stdenv.mkDerivation {
           pname = "forest-texlive";
