@@ -203,21 +203,44 @@
           # would search $out/share/texmf-dist — empty). Instead write a
           # tiny wrapper that exec's the full-path binary under the
           # combine's bindir; kpathsea then finds the .pro headers.
-          # Newer dvisvgm 3.6 from source. To make kpathsea find texmf.cnf
-          # + .pro files via SELFAUTOLOC, symlink the texlive combine's
-          # share/ at $out/share so kpathsea looks at $out/share/texmf-dist
-          # → resolves to the texlive runtime tree.
+          # Newer dvisvgm 3.6 from source. kpathsea uses argv[0] to compute
+          # SELFAUTOLOC. A plain symlink lets the kernel resolve it BEFORE
+          # exec, so argv[0] = the dvisvgm-3.6 store path → kpathsea looks
+          # at dvisvgm-3.6/share/... (empty). Instead write a shell wrapper
+          # using bash's `exec -a` to FORCE argv[0] = $out/bin/dvisvgm, so
+          # kpathsea uses $out/share/texmf-dist (symlinked below).
           dvisvgm_bin=${dvisvgmNewerFor pkgs}/bin/dvisvgm
           texlive_drv=${pkgs.texlive.combine { inherit (pkgs.texlive) scheme-small dvips graphics; }}
           test -x "$dvisvgm_bin"
           # Stage the runtime tree at $out/share/<...> so kpathsea finds it
           # via $out/bin/dvisvgm's SELFAUTOLOC = $out/bin → ../share/...
-          for d in texmf-dist texmf-config texmf-var; do
+          for d in texmf-dist texmf-config texmf-var web2c; do
             if [ -d "$texlive_drv/share/$d" ]; then
               ln -s "$texlive_drv/share/$d" "$out/share/$d"
             fi
           done
-          ln -s "$dvisvgm_bin" "$out/bin/dvisvgm"
+          # Locate texmf.cnf — texlive.combine puts it under one of:
+          #   share/texmf-dist/web2c/, share/texmf-config/web2c/, share/web2c/
+          # find it explicitly so TEXMFCNF points to the right dir.
+          texmfcnf_file=$(find "$texlive_drv/share" -name texmf.cnf -type f 2>/dev/null | head -1)
+          if [ -z "$texmfcnf_file" ]; then
+            echo "ERROR: texmf.cnf not found in $texlive_drv/share" >&2
+            find "$texlive_drv/share" -maxdepth 4 -type d >&2
+            exit 1
+          fi
+          texmfcnf_dir=$(dirname "$texmfcnf_file")
+          echo "Found texmf.cnf at: $texmfcnf_file"
+          # Wrapper preserves argv[0] = $out/bin/dvisvgm so kpathsea
+          # SELFAUTOLOC = $out/bin. Plain `exec` (no -a) would let the
+          # kernel pass the dvisvgm-3.6 path as argv[0].
+          cat > $out/bin/dvisvgm <<EOF
+          #!${pkgs.bash}/bin/bash
+          export TEXMFCNF="$texmfcnf_dir"
+          export TEXMFDIST="$texlive_drv/share/texmf-dist"
+          export TEXMFROOT="$texlive_drv/share"
+          exec -a "\$0" "$dvisvgm_bin" "\$@"
+          EOF
+          chmod +x $out/bin/dvisvgm
           # snapshot the warmed cache under $out/share so render workflow
           # can `cp -r $out/share/tectonic-cache ~/.cache/Tectonic`.
           if [ -d "$TECTONIC_CACHE_DIR" ]; then
