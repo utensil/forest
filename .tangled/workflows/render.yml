@@ -186,7 +186,7 @@ steps:
         'base=$(basename "${tex%.tex}")' \
         'dir=$(dirname "$tex")' \
         'cd "$dir"' \
-        'tectonic --outfmt xdv --keep-logs --chatter minimal "${base}.tex"' \
+        'tectonic --outfmt xdv --keep-logs --print "${base}.tex" 2>&1 || { echo "::error::tectonic FAILED for ${base}.tex (cwd=$(pwd))" >&2; cat "${base}.log" 2>/dev/null | tail -40 >&2 || true; exit 1; }' \
         '[ -f "${base}.xdv" ] && mv -f "${base}.xdv" "${base}.dvi"' \
         > /tmp/bin/latex
       chmod +x /tmp/bin/latex
