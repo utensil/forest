@@ -133,7 +133,10 @@
         };
         nativeBuildInputs = with pkgs; [ pkg-config ];
         buildInputs = with pkgs; [
-          freetype ghostscript brotli woff2 zlib kpathsea
+          freetype ghostscript brotli woff2 zlib
+          # libkpathsea ships in texlive.bin.core (no top-level pkgs.kpathsea
+          # in this nixpkgs revision).
+          texlive.bin.core
         ];
         # autotools default — configure + make + make install.
       };
