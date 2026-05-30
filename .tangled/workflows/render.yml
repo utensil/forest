@@ -36,7 +36,8 @@ dependencies:
     - nodejs      # bunx xslt3 needs node
     - libxslt     # provides xsltproc (used by convert_xml.sh) — top-level pkg name in nixpkgs is libxslt, not xsltproc
     - python3     # fize.py + manifest jq alt
-    - dvisvgm     # reads tectonic's XDV output (renamed to .dvi by the latex shim) and writes SVG for forester's inline math
+    # dvisvgm ships inside the forest-tectonic NAR closure (nixery's
+    # docker-name rules reject the bare `dvisvgm` pkg name).
     # No texlive bundle — operator directive: tectonic-only + latex shim
     # (see render command for the `latex` shim that translates forester's
     # `latex job.tex` into `tectonic --outfmt xdv`).

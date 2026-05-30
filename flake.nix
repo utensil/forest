@@ -96,7 +96,10 @@
 
       forestTectonicFor = pkgs: pkgs.stdenv.mkDerivation {
         pname = "forest-tectonic";
-        version = tectonicVersion;
+        # Includes dvisvgm now too — nixery rejects the standalone dvisvgm
+        # pkg name; shipping it alongside tectonic in the same NAR avoids
+        # the manifest miss.
+        version = "${tectonicVersion}+dvisvgm";
 
         # No source — we build off the nixpkgs tectonic binary plus a tiny
         # warmup .tex file that pulls every package the real forest build
@@ -104,7 +107,7 @@
         dontUnpack = true;
         dontConfigure = true;
 
-        nativeBuildInputs = [ pkgs.tectonic pkgs.cacert ];
+        nativeBuildInputs = [ pkgs.tectonic pkgs.cacert pkgs.dvisvgm ];
 
         buildPhase = ''
           runHook preBuild
@@ -134,6 +137,7 @@
           runHook preInstall
           mkdir -p $out/bin $out/share
           ln -s ${pkgs.tectonic}/bin/tectonic $out/bin/tectonic
+          ln -s ${pkgs.dvisvgm}/bin/dvisvgm $out/bin/dvisvgm
           # snapshot the warmed cache under $out/share so render workflow
           # can `cp -r $out/share/tectonic-cache ~/.cache/Tectonic`.
           if [ -d "$TECTONIC_CACHE_DIR" ]; then
