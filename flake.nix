@@ -58,6 +58,9 @@
             # Common across most forester preambles
             standalone preview varwidth adjustbox collectbox
             tikz-cd pgf mathtools stmaryrd
+            # tikz extras forester pulls (tikzmark, calc, fit are all inside
+            # tikz but tikzmark is a separately-packaged library)
+            tikzmark
             # newpx font family + its non-propagated deps
             newpx newtx kastrup fontaxes mweights
             # Loaded directly per the 22716 log
