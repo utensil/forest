@@ -219,25 +219,41 @@
               ln -s "$texlive_drv/share/$d" "$out/share/$d"
             fi
           done
-          # Locate texmf.cnf — texlive.combine puts it under one of:
-          #   share/texmf-dist/web2c/, share/texmf-config/web2c/, share/web2c/
-          # find it explicitly so TEXMFCNF points to the right dir.
-          texmfcnf_file=$(find "$texlive_drv/share" -name texmf.cnf -type f 2>/dev/null | head -1)
-          if [ -z "$texmfcnf_file" ]; then
+          # Locate ALL texmf.cnf files. texlive.combine writes a config
+          # override at share/texmf-config/web2c/texmf.cnf, while the main
+          # one (with PSHEADERS / DVIPSHEADERS / TEXMF definitions) lives at
+          # share/texmf-dist/web2c/texmf.cnf. kpathsea needs BOTH dirs in
+          # TEXMFCNF or it only reads the override and misses the search-
+          # path defaults → tex.pro / texps.pro / special.pro / color.pro
+          # show up as "not found".
+          texmfcnf_dirs=""
+          while IFS= read -r f; do
+            d=$(dirname "$f")
+            case ":$texmfcnf_dirs:" in
+              *":$d:"*) ;;
+              *) texmfcnf_dirs="''${texmfcnf_dirs:+$texmfcnf_dirs:}$d" ;;
+            esac
+          done < <(find "$texlive_drv/share" -name texmf.cnf -type f 2>/dev/null)
+          if [ -z "$texmfcnf_dirs" ]; then
             echo "ERROR: texmf.cnf not found in $texlive_drv/share" >&2
             find "$texlive_drv/share" -maxdepth 4 -type d >&2
             exit 1
           fi
-          texmfcnf_dir=$(dirname "$texmfcnf_file")
-          echo "Found texmf.cnf at: $texmfcnf_file"
+          echo "TEXMFCNF dirs: $texmfcnf_dirs"
+          # PostScript headers (tex.pro, texps.pro, special.pro, color.pro)
+          # come from the dvips package. Explicitly point PSHEADERS at the
+          # dvips dir so kpathsea finds them even if texmf.cnf's search
+          # cascade isn't fully picked up.
+          dvips_dir="$texlive_drv/share/texmf-dist/dvips"
           # Wrapper preserves argv[0] = $out/bin/dvisvgm so kpathsea
           # SELFAUTOLOC = $out/bin. Plain `exec` (no -a) would let the
           # kernel pass the dvisvgm-3.6 path as argv[0].
           cat > $out/bin/dvisvgm <<EOF
           #!${pkgs.bash}/bin/bash
-          export TEXMFCNF="$texmfcnf_dir"
+          export TEXMFCNF="$texmfcnf_dirs"
           export TEXMFDIST="$texlive_drv/share/texmf-dist"
           export TEXMFROOT="$texlive_drv/share"
+          export PSHEADERS=".:$dvips_dir/base:$dvips_dir/config:$dvips_dir"
           exec -a "\$0" "$dvisvgm_bin" "\$@"
           EOF
           chmod +x $out/bin/dvisvgm
