@@ -189,7 +189,7 @@ steps:
         '# tectonic ignores TEXINPUTS — symlink the project tex/ files into cwd' \
         '# so `\input{diagrams}` etc. (relative refs) resolve against them.' \
         'if [ -d "$FOREST_TEX_DIR" ]; then' \
-        '  for f in "$FOREST_TEX_DIR"/*.tex; do [ -e "$f" ] && ln -sf "$f" .; done' \
+        '  for f in "$FOREST_TEX_DIR"/*.tex "$FOREST_TEX_DIR"/*.sty; do [ -e "$f" ] && ln -sf "$f" .; done' \
         'fi' \
         'tectonic --outfmt xdv --keep-logs --print --bundle "${TECTONIC_BUNDLE:-https://relay.fullyjustified.net/default-v2.tar}" "${base}.tex" 2>&1 || { echo "::error::tectonic FAILED for ${base}.tex (cwd=$(pwd))" >&2; cat "${base}.log" 2>/dev/null | tail -40 >&2 || true; exit 1; }' \
         '[ -f "${base}.xdv" ] && mv -f "${base}.xdv" "${base}.dvi"' \
@@ -207,6 +207,19 @@ steps:
       # forester's `\input{diagrams}` etc. resolve against the project's
       # tex/ sources (tectonic ignores TEXINPUTS for reproducibility).
       export FOREST_TEX_DIR="$PWD/tex"
+
+      # tectonic's default bundle is TL2022-frozen — its pseudo.sty doesn't
+      # auto-register the /tcb/pseudo/* keys that forest's algorithms.tex
+      # expects (those land in pseudo.sty newer than TL2022). Drop the
+      # current CTAN pseudo.sty into FOREST_TEX_DIR so the latex shim
+      # symlinks it into each _tmp/<N>/; tectonic's local-cwd lookup
+      # beats the bundled stale version.
+      curl -fsSL --max-time 30 \
+        https://mirror.ctan.org/macros/latex/contrib/pseudo/pseudo.sty \
+        -o "$FOREST_TEX_DIR/pseudo.sty"
+      grep -q '/tcb/pseudo' "$FOREST_TEX_DIR/pseudo.sty" \
+        && echo "✓ pseudo.sty (with /tcb/pseudo keys) fetched: $(wc -l < "$FOREST_TEX_DIR/pseudo.sty") lines" \
+        || { echo "::error::fetched pseudo.sty missing /tcb/pseudo keys"; exit 1; }
       forester --version || true
       tectonic --version || true
       bash ./build.sh
