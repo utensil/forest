@@ -2,12 +2,11 @@
   description = "utensil forest SSG toolchains — tectonic + forester + WASM pkgs (pinned, cache-reusable; mirrors blog's flake pattern)";
 
   inputs = {
-    # Pinned nixpkgs (full commit hash, NOT a branch ref — input resolution
-    # without the GitHub API avoids 403 rate-limits and fetches the tarball
-    # directly). Picked to have recent tectonic + forester + wasm-pack.
-    # NOTE: revision below is a placeholder; the first GH Actions run will
-    # surface whether it has the packages we need. Bump as needed.
-    nixpkgs.url = "github:NixOS/nixpkgs/cc6431d5598071f0021efc6c009c79e5b5fe1617";
+    # Pinned nixpkgs — nixos-unstable as of 2026-05-29 (sha 64c08a7ca0…). Recent
+    # enough that pkgs.tectonic / pkgs.wasm-pack carry .version, and forester
+    # should be available. Full commit hash so input resolution doesn't go via
+    # the GH API.
+    nixpkgs.url = "github:NixOS/nixpkgs/64c08a7ca051951c8eae34e3e3cb1e202fe36786";
   };
 
   outputs = { self, nixpkgs }:
@@ -28,9 +27,16 @@
       # sandbox=false. Fine on the depot job (build-depot.yml runs with
       # sandbox=false in nix.conf to match blog's pattern); render then
       # reuses the snapshot offline.
+      # Literal version strings everywhere — older nixpkgs wrap tectonic with
+      # a derivation that lacks an exposed .version, and we don't want the
+      # flake eval to depend on that. Bump as we move pins.
+      tectonicVersion = "0.15-with-cache";
+      foresterVersion = "5ab7277";
+      wasmPkgsVersion = "wgputoy-60d0bec+egglog-8d9b10e+rhai-9fa8066";
+
       forestTectonicFor = pkgs: pkgs.stdenv.mkDerivation {
         pname = "forest-tectonic";
-        version = "${pkgs.tectonic.version}-with-cache";
+        version = tectonicVersion;
 
         # No source — we build off the nixpkgs tectonic binary plus a tiny
         # warmup .tex file that pulls every package the real forest build
@@ -96,7 +102,7 @@
       # NB: opam needs network at build time → sandbox=false on the depot.
       forestForesterFor = pkgs: pkgs.stdenv.mkDerivation {
         pname = "forest-forester";
-        version = "5ab7277-unstable";
+        version = foresterVersion;
 
         dontUnpack = true;
         dontConfigure = true;
@@ -161,7 +167,7 @@
           ];
         in pkgs.stdenv.mkDerivation {
           pname = "forest-wasm-pkgs";
-          version = "wgputoy-${builtins.substring 0 7 (builtins.elemAt (builtins.split " " "60d0bec4bd912a54d5049f2c28c1bd6a0916e5ec") 0)}";
+          version = wasmPkgsVersion;
 
           dontUnpack = true;
           dontConfigure = true;
