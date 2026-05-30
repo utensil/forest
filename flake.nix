@@ -41,33 +41,40 @@
       # nixery rejects `texliveSmall` from the URL path (its Docker name
       # rules forbid uppercase). So bundle it via the flake instead — same
       # NAR closure pattern as tectonic + forester.
-      forestTexliveFor = pkgs: pkgs.stdenv.mkDerivation {
-        pname = "forest-texlive";
-        version = texliveVersion;
-        dontUnpack = true;
-        dontConfigure = true;
-        nativeBuildInputs = [ pkgs.texliveSmall ];
-        buildPhase = ''
-          runHook preBuild
-          # Sanity check the bundle has what forester wants.
-          ${pkgs.texliveSmall}/bin/latex --version | head -1
-          runHook postBuild
-        '';
-        installPhase = ''
-          runHook preInstall
-          mkdir -p $out/bin
-          for tool in latex pdflatex bibtex kpsewhich; do
-            ln -s ${pkgs.texliveSmall}/bin/$tool $out/bin/$tool 2>/dev/null || true
-          done
-          # env.sh wires PATH additively (lesson from render.yml — don't
-          # replace ${"$"}PATH wholesale).
-          printf '%s\n' \
-            'export PATH="'$out'/bin:''${PATH:-}"' \
-            > $out/env.sh
-          runHook postInstall
-        '';
-        meta.description = "texliveSmall (forester's inline-math latex)";
-      };
+      forestTexliveFor = pkgs:
+        # forester's inline-math job.tex uses \documentclass{standalone}
+        # plus \input{diagrams}/\input{string-diagrams} which pull in
+        # tikz-cd + xy. scheme-small alone misses standalone.cls; combine
+        # explicitly so we know what's in the closure.
+        let texCombo = pkgs.texlive.combine {
+          inherit (pkgs.texlive) scheme-small
+            standalone tikz-cd xy pgf preview varwidth
+            adjustbox xkeyval collectbox;
+        };
+        in pkgs.stdenv.mkDerivation {
+          pname = "forest-texlive";
+          version = "${texliveVersion}+standalone+tikz-cd";
+          dontUnpack = true;
+          dontConfigure = true;
+          nativeBuildInputs = [ texCombo ];
+          buildPhase = ''
+            runHook preBuild
+            ${texCombo}/bin/latex --version | head -1
+            ${texCombo}/bin/kpsewhich standalone.cls
+            runHook postBuild
+          '';
+          installPhase = ''
+            runHook preInstall
+            mkdir -p $out
+            ln -s ${texCombo}/bin $out/bin
+            ln -s ${texCombo}/share $out/share || true
+            printf '%s\n' \
+              'export PATH="'$out'/bin:''${PATH:-}"' \
+              > $out/env.sh
+            runHook postInstall
+          '';
+          meta.description = "texlive scheme-small + standalone/tikz-cd/xy combo for forester";
+        };
 
       forestTectonicFor = pkgs: pkgs.stdenv.mkDerivation {
         pname = "forest-tectonic";
