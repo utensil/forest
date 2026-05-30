@@ -94,29 +94,54 @@
           meta.description = "texlive scheme-small + standalone/tikz-cd/xy combo for forester";
         };
 
+      # Build tectonic from master @ 2025-10-06 (which supports the .ttb
+      # bundle format from doronbehar's nix overlay in tectonic#1269 comment
+      # 3551606513). nixpkgs's tectonic 0.16.9 is too old for the TL2024
+      # bundle; we need post-2025-10-06.
+      tectonicUnstableFor = pkgs: pkgs.tectonic-unwrapped.overrideAttrs (final: prev: {
+        version = "0.15.0-unstable-2025-10-06";
+        src = pkgs.fetchFromGitHub {
+          owner = "tectonic-typesetting";
+          repo = "tectonic";
+          rev = "d7f3275adf6b501fc21122a1873912e970bf52ba";
+          hash = "sha256-4p5ZU1O75xcE4pDUs1xwZkFkxJ+g3Rm9LL5Cog96Sm8=";
+        };
+        patches = [];
+        cargoPatches = [];
+        cargoDeps = pkgs.rustPlatform.fetchCargoVendor {
+          inherit (final) src;
+          hash = "sha256-J3q0dtQ/qb/72b6A40TNYDIZvDrUSpxF3SFjhc+X0fw=";
+        };
+        # Skip the sandbox-incompatible segfault test.
+        checkFlags = (prev.checkFlags or []) ++ [
+          "--skip=tests::no_segfault_after_failed_compilation"
+        ];
+      });
+
+      tectonicBundleUrl = "https://bebopbamf-tex.syd1.cdn.digitaloceanspaces.com/texlive2024-0312.ttb";
+
       forestTectonicFor = pkgs: pkgs.stdenv.mkDerivation {
         pname = "forest-tectonic";
         # Includes dvisvgm now too — nixery rejects the standalone dvisvgm
         # pkg name; shipping it alongside tectonic in the same NAR avoids
         # the manifest miss.
-        version = "${tectonicVersion}+dvisvgm";
+        version = "${tectonicVersion}+dvisvgm+ttb2024";
 
-        # No source — we build off the nixpkgs tectonic binary plus a tiny
+        # No source — we build off the master tectonic plus a tiny
         # warmup .tex file that pulls every package the real forest build
         # is expected to need.
         dontUnpack = true;
         dontConfigure = true;
 
-        nativeBuildInputs = [ pkgs.tectonic pkgs.cacert pkgs.texlive.bin.dvisvgm ];
+        nativeBuildInputs = [ (tectonicUnstableFor pkgs) pkgs.cacert pkgs.texlive.bin.dvisvgm ];
 
         buildPhase = ''
           runHook preBuild
           export HOME=$TMPDIR
           export TECTONIC_CACHE_DIR=$HOME/.cache/Tectonic
           mkdir -p "$TECTONIC_CACHE_DIR"
-          # Warmup: a representative doc that loads the heavy packages forest
-          # uses. Iterate this — add \usepackage{...} lines as the forest LaTeX
-          # surfaces missing packages on the first real run.
+          # Warmup: representative doc that loads the heavy packages forest
+          # uses. Add \usepackage{...} lines as forest LaTeX surfaces more.
           cat > warmup.tex <<'WARMUP'
           \documentclass[a4paper]{article}
           \usepackage{amsmath, amssymb, amsthm}
@@ -128,12 +153,11 @@
           Hello world.
           \end{document}
           WARMUP
-          # tectonic's default bundle works; we don't pin --bundle because
-          # the v2 URL returns 404 and the current default (v33) redirects
-          # to the TL2022 tlextras anyway. For forest, render.yml fetches
-          # the newer pseudo.sty from CTAN at runtime and stages it into
-          # the latex shim's cwd to override TL2022's stale version.
-          tectonic --outdir . warmup.tex || true
+          # Pin to the BebopBamf TL2024 .ttb bundle (tectonic#1269 community
+          # workaround — official bundles stopped at TL2022). Newer
+          # pseudo.sty in TL2024 auto-registers /tcb/pseudo/* keys forest
+          # expects, so the runtime CTAN override becomes redundant.
+          tectonic --bundle ${tectonicBundleUrl} --outdir . warmup.tex || true
           ls -la "$TECTONIC_CACHE_DIR" || true
           runHook postBuild
         '';
@@ -141,7 +165,7 @@
         installPhase = ''
           runHook preInstall
           mkdir -p $out/bin $out/share
-          ln -s ${pkgs.tectonic}/bin/tectonic $out/bin/tectonic
+          ln -s ${tectonicUnstableFor pkgs}/bin/tectonic $out/bin/tectonic
           # dvisvgm comes from texlive.bin.dvisvgm in this nixpkgs (top-level
           # pkgs.dvisvgm is absent; texlive.bin.core doesn't include it).
           # Fail loud if the path doesn't exist so we don't ship a broken NAR.
