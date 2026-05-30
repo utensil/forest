@@ -119,9 +119,17 @@
           export HOME=$TMPDIR
           export OPAMROOT=$HOME/.opam
           export SSL_CERT_FILE=${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt
+          # OPAMNODEPEXTS=1 stops opam from calling apt-cache / brew (it doesn't
+          # have them in a nix sandbox; depexts are satisfied via nativeBuildInputs).
+          # OPAMYES + assume-yes avoids interactive prompts on init failure.
+          export OPAMNODEPEXTS=1 OPAMYES=1 OPAMNOSANDBOXING=1
           opam init --bare --no-setup --disable-sandboxing -y
-          opam switch create forester ${pkgs.ocaml.version} -y
+          # Use ocaml-system (the nixpkgs ocaml we provide) so opam doesn't try
+          # to compile ocaml-base-compiler from source (which then tries apt-cache
+          # for system deps and fails on nixos containers).
+          opam switch create forester --empty -y
           eval "$(opam env --switch=forester)"
+          opam install ocaml-system -y
           opam pin add forester 'git+https://git.sr.ht/~jonsterling/ocaml-forester#5ab7277' --no-action -y
           opam install forester -y
           which forester
@@ -189,7 +197,12 @@
                 git fetch --depth 1 origin "${p.hash}"
                 git checkout "${p.hash}"
                 cd "${p.path}"
-                wasm-pack build --target web --release --out-dir pkg .
+                # `-- --locked` passes --locked to cargo so Cargo.lock pins are
+                # honored (the upstream wgpu API drifts between releases — e.g.
+                # wgpu 24.0.3 added SurfaceError::Other and breaks any code
+                # written against an older wgpu unless --locked respects the
+                # commit's Cargo.lock).
+                wasm-pack build --target web --release --out-dir pkg . -- --locked
                 ls -la pkg
               )
             '') pins}
