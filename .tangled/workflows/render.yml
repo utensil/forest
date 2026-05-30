@@ -127,6 +127,28 @@ steps:
       ls -la "${TECTONIC_CACHE_DIR:-$HOME/.cache/Tectonic}" 2>&1 | head -5 || true
       echo "::endgroup::"
 
+      echo "::group::opam shim (justfile calls 'opam exec -- forester …')"
+      # build.sh delegates to 'just forest', which is 'opam exec -- forester build'
+      # — opam is the env wrapper GH Actions uses because forester is installed in
+      # an opam switch there. Our forester closure has the binary directly on
+      # PATH, so just unwrap and exec.
+      mkdir -p /tmp/bin
+      # Heredoc inside a YAML `|` block would carry leading-whitespace into
+      # the shebang line and break execution. printf with explicit newlines
+      # keeps the file's first byte at column 0.
+      printf '%s\n' \
+        '#!/bin/sh' \
+        'if [ "$1" = "exec" ] && [ "$2" = "--" ]; then' \
+        '  shift 2; exec "$@"' \
+        'fi' \
+        'echo "opam shim: unhandled invocation: $*" >&2' \
+        'exit 1' \
+        > /tmp/bin/opam
+      chmod +x /tmp/bin/opam
+      export PATH="/tmp/bin:$PATH"
+      opam exec -- forester --version || true
+      echo "::endgroup::"
+
       echo "::group::build forest"
       export CI=1   # build.sh::bun_build skips bun install branch without this; also gates prep_wasm
       export TEC=1  # build.sh::lize uses tectonic instead of lualatex
