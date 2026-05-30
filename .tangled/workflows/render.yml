@@ -186,6 +186,11 @@ steps:
         'base=$(basename "${tex%.tex}")' \
         'dir=$(dirname "$tex")' \
         'cd "$dir"' \
+        '# tectonic ignores TEXINPUTS — symlink the project tex/ files into cwd' \
+        '# so `\input{diagrams}` etc. (relative refs) resolve against them.' \
+        'if [ -d "$FOREST_TEX_DIR" ]; then' \
+        '  for f in "$FOREST_TEX_DIR"/*.tex; do [ -e "$f" ] && ln -sf "$f" .; done' \
+        'fi' \
         'tectonic --outfmt xdv --keep-logs --print "${base}.tex" 2>&1 || { echo "::error::tectonic FAILED for ${base}.tex (cwd=$(pwd))" >&2; cat "${base}.log" 2>/dev/null | tail -40 >&2 || true; exit 1; }' \
         '[ -f "${base}.xdv" ] && mv -f "${base}.xdv" "${base}.dvi"' \
         > /tmp/bin/latex
@@ -198,6 +203,10 @@ steps:
       echo "::group::build forest"
       export CI=1   # build.sh::bun_build skips bun install branch without this; also gates prep_wasm
       export TEC=1  # build.sh::lize uses tectonic instead of lualatex
+      # latex shim symlinks files from this dir into each _tmp/<N>/ cwd so
+      # forester's `\input{diagrams}` etc. resolve against the project's
+      # tex/ sources (tectonic ignores TEXINPUTS for reproducibility).
+      export FOREST_TEX_DIR="$PWD/tex"
       forester --version || true
       tectonic --version || true
       bash ./build.sh
