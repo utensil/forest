@@ -198,15 +198,18 @@
                 git fetch --depth 1 origin "${p.hash}"
                 git checkout "${p.hash}"
                 cd "${p.path}"
-                # For wgputoy: the pinned upstream commit doesn't have a Cargo.lock
-                # constraining wgpu, so cargo pulls the latest patch (24.0.3+) which
-                # added SurfaceError::Other and breaks the upstream match. Pin wgpu
-                # to 24.0.0 (last version before the breaking variant) before build.
+                # For wgputoy: the pinned commit's src/lib.rs has the WASM
+                # render() match arm missing the wgpu 24.0.x SurfaceError::Other
+                # case (line ~155). The non-WASM render_async() match at ~line 184
+                # DOES handle Other. Upstream bug. Sed-add the Other arm to the
+                # first occurrence only (i.e. the WASM render() one); the second
+                # match already has it. Using `0,/pat/` makes sed match-once.
                 if [ "${p.name}" = "wgputoy" ]; then
-                  [ -f Cargo.lock ] || cargo generate-lockfile
-                  cargo update -p wgpu --precise 24.0.0 || cargo update -p wgpu --precise 23.0.1 || true
+                  sed -i '0,/SurfaceError::Timeout => log::warn!("Surface Timeout"),/s||SurfaceError::Timeout => log::warn!("Surface Timeout"),\n                SurfaceError::Other => log::warn!("Some other error"),|' src/lib.rs
+                  # Quick sanity: confirm both matches now have an Other arm.
+                  echo "Other-arm count post-patch: $(grep -c 'SurfaceError::Other' src/lib.rs)"
                 fi
-                wasm-pack build --target web --release --out-dir pkg .
+                wasm-pack build --target web --release --out-dir pkg . -- --locked
                 ls -la pkg
               )
             '') pins}
