@@ -1,0 +1,46 @@
+\import{macros}
+
+\parent{fgap-0007}
+\taxon{Example}
+\title{the Hurwitz action on the quaternion group}
+
+\tag{math}
+\tag{fgap}
+\tag{quaternion}
+\tag{group-action}
+\tag{hurwitz}
+
+\p{The subgroup #{C} acts on #{Q} by left conjugation:
+##{
+C\longrightarrow\operatorname{Aut}(Q),\qquad
+c\longmapsto(q\longmapsto cqc^{-1}).
+}
+Indeed, [[fgap-0004]] gives
+##{
+\omega i\omega^{-1}=k,\qquad
+\omega k\omega^{-1}=j,\qquad
+\omega j\omega^{-1}=i.
+}
+Thus conjugation by the generator preserves all eight elements of #{Q}. Its
+conjugation powers preserve #{Q} as well, so every #{c\in C} gives the stated
+automorphism. The generator's action can be read from the two oriented cycles
+##{
+i\longmapsto k\longmapsto j\longmapsto i,
+\qquad
+-i\longmapsto-k\longmapsto-j\longmapsto-i,
+}
+while #{1} and #{-1} are fixed.}
+
+\p{Conjugation preserves products:
+##{
+c(q_1q_2)c^{-1}=(cq_1c^{-1})(cq_2c^{-1}).
+}
+It is therefore an automorphism of #{Q}; its inverse is conjugation by
+#{c^{-1}}. The action law follows from
+##{
+(c_1c_2)q(c_1c_2)^{-1}
+=c_1(c_2qc_2^{-1})c_1^{-1}.
+}
+This verifies the action directly rather than inferring it from the picture.
+Voight records the normality of #{Q} and the cyclic rotation in
+\citet{sec. 11.2.4, p. 168}{voight2021quaternion}.}
