@@ -1,0 +1,46 @@
+\import{macros}
+
+\parent{fgap-0001}
+\taxon{Lemma}
+\title{The Hurwitz conjugation cycle}
+
+\tag{math}
+\tag{fgap}
+\tag{quaternion}
+\tag{group-action}
+
+\p{For the Hurwitz unit #{\omega=(-1+i+j+k)/2}, left conjugation has the
+orientation
+##{
+\omega i\omega^{-1}=k,\qquad
+\omega j\omega^{-1}=i,\qquad
+\omega k\omega^{-1}=j.
+}
+In other words, the cycle is #{i\mapsto k\mapsto j\mapsto i}. Voight states
+that conjugation cyclically rotates these units in
+\citet{sec. 11.2.4, p. 168}{voight2021quaternion}; the calculation here fixes
+the direction. Wilson describes the same order-three automorphisms in
+\citet{sec. 1.4, p. 4}{wilson2021finite}.}
+
+\p{There is no need to expand three full quaternion products. Direct
+multiplication gives
+##{
+\omega i=k\omega,\qquad
+\omega j=i\omega,\qquad
+\omega k=j\omega.
+}
+For example,
+##{
+\omega i
+=\frac{-1-i+j-k}{2}
+=k\omega.
+}
+Right multiplication by #{\omega^{-1}} proves the three conjugation
+equations.}
+
+\p{This is the first concrete group action needed for the binary tetrahedral
+group. General group actions and semidirect products will be developed in
+companion notes before the full group construction. In Lean, the three
+equations will first be proved with the type documented in
+[Mathlib.Algebra.Quaternion](https://leanprover-community.github.io/mathlib4_docs/Mathlib/Algebra/Quaternion.html);
+the abstract action is a later interface.}
