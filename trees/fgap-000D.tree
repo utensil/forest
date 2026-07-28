@@ -1,0 +1,34 @@
+\import{macros}
+
+\parent{fgap-0007}
+\taxon{Remark}
+\title{concrete and abstract factor models}
+
+\tag{math}
+\tag{fgap}
+\tag{group-action}
+\tag{formalization}
+
+\p{The subgroups #{Q,C\leq\mathbb{H}^{\times}} are concrete: their elements
+are quaternions, and the Hurwitz action is quaternion conjugation. The
+abstract groups
+##{
+Q_8,\qquad \mathbb{Z}/3\mathbb{Z}
+}
+remember the same group structures without remembering their quaternion
+coordinates.}
+
+\p{Matching names and cardinalities does not identify these models. We need
+explicit isomorphisms
+##{
+Q_8\mathbin{\cong}Q,\qquad
+\mathbb{Z}/3\mathbb{Z}\mathbin{\cong}C.
+}
+The action must then be transported through these isomorphisms and proved
+equivariant. This keeps later abstract calculations connected to the
+quaternion realization that supplied them.}
+
+\p{In Lean, \code{QuaternionGroup 2} is expected to model #{Q}.
+\code{Multiplicative (ZMod 3)} is expected to model #{C}. The isomorphisms and
+the transported action are formalization results to be proved, not definitions
+to be assumed.}
