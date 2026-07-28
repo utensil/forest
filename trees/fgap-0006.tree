@@ -1,0 +1,52 @@
+\date{2026-07-28T11:05:25Z}
+\import{macros}
+
+\parent{fgap-0001}
+\taxon{Definition}
+\title{Hamilton's Quaternions}
+
+\tag{math}
+\tag{fgap}
+\tag{quaternion}
+
+\p{The algebra of real \newvocab{quaternion}s is the four-dimensional real
+vector space
+##{
+\mathbb{H}
+=\mathbb{R}1\oplus\mathbb{R}i\oplus\mathbb{R}j\oplus\mathbb{R}k.
+}
+Thus every quaternion can be written uniquely as
+##{
+q=a+bi+cj+dk,\qquad a,b,c,d\in\mathbb{R}.
+}
+Addition and real scalar multiplication are coordinatewise. Multiplication is
+extended bilinearly from #{1} as the multiplicative identity and the table
+##{
+\begin{gathered}
+i^2=j^2=k^2=ijk=-1,\\
+ij=k,\quad jk=i,\quad ki=j,\\
+ji=-k,\quad kj=-i,\quad ik=-j.
+\end{gathered}
+}
+This makes #{\mathbb{H}} an associative, noncommutative real algebra. In
+Voight's notation, #{\mathbb{H}=(-1,-1\mid\mathbb{R})}; see
+\citet{def. 2.2.1 and ex. 2.2.3}{voight2021quaternion}.}
+
+\p{For #{q=a+bi+cj+dk}, its \newvocab{quaternion conjugate} and
+\newvocab{reduced norm} are
+##{
+\overline{q}=a-bi-cj-dk,\qquad
+\operatorname{nrd}(q)=q\overline{q}
+=a^2+b^2+c^2+d^2.
+}
+We also have #{\overline{q}q=\operatorname{nrd}(q)}. If #{q\ne 0}, then
+#{\operatorname{nrd}(q)>0} and
+##{
+q^{-1}=\frac{\overline{q}}{\operatorname{nrd}(q)}.
+}
+So every nonzero quaternion is invertible. This is the standard involution and
+reduced norm specialized to Hamilton's Quaternions; see
+\citet{secs. 3.1--3.3}{voight2021quaternion}.}
+
+\p{The corresponding mathlib type is documented in
+[Mathlib.Algebra.Quaternion](https://leanprover-community.github.io/mathlib4_docs/Mathlib/Algebra/Quaternion.html).}
