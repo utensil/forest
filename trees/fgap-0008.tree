@@ -1,0 +1,43 @@
+\import{macros}
+
+\parent{fgap-0007}
+\taxon{Definition}
+\title{group action}
+
+\tag{math}
+\tag{fgap}
+\tag{group-action}
+
+\p{A \newvocab{left action} of a group #{G} on a set #{X} is a map
+##{
+G\times X\longrightarrow X,\qquad (g,x)\longmapsto g\mathbin{\cdot}x
+}
+such that
+##{
+1\mathbin{\cdot}x=x,\qquad
+g_1\mathbin{\cdot}(g_2\mathbin{\cdot}x)
+=(g_1g_2)\mathbin{\cdot}x.
+}
+Equivalently, an action is a group homomorphism
+##{
+\alpha:G\longrightarrow\operatorname{Sym}(X),
+}
+where #{\operatorname{Sym}(X)} is the group of permutations of #{X}. We use
+left actions throughout these notes. See
+\citet{sec. 1.3.2, pp. 7--9}{woit2024quantum}.}
+
+\p{If #{X=H} is a group and each permutation preserves multiplication, the
+action is a homomorphism
+##{
+\alpha:G\longrightarrow\operatorname{Aut}(H).
+}
+Its \newvocab{kernel} is #{\ker\alpha}. The action is
+\newvocab{faithful} when #{\alpha} is injective.}
+
+\p{Suppose #{G} acts on both #{X} and #{Y}. A map #{f:X\to Y} is
+\newvocab{equivariant} if
+##{
+f(g\mathbin{\cdot}x)=g\mathbin{\cdot}f(x)
+}
+for every #{g\in G} and #{x\in X}. Equivariance is how an action passes
+between two different models of the same object.}
