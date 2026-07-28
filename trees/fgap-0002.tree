@@ -1,0 +1,37 @@
+\import{macros}
+
+\parent{fgap-0001}
+\taxon{Convention}
+\title{Quaternion generator convention}
+
+\tag{math}
+\tag{fgap}
+\tag{quaternion}
+
+\p{Write #{\mathbb{H}} for Hamilton's real quaternion algebra. It has the real
+basis #{1,i,j,k}, with multiplication fixed by
+##{
+i^2=j^2=k^2=ijk=-1,\qquad
+ij=k,\quad jk=i,\quad ki=j.
+}
+The reversed products are therefore
+##{
+ji=-k,\qquad kj=-i,\qquad ik=-j.
+}
+This is the convention used in
+\citet{ch. 11, pp. 165--166}{voight2021quaternion} and
+\citet{p. 2, eq. (1)}{wilson2021finite}.}
+
+\p{For an invertible quaternion #{q}, \newvocab{left conjugation} means
+##{
+q\mathbin{\triangleright}x=qxq^{-1}.
+}
+The direction matters. Conjugation by #{q^{-1}} gives the inverse permutation,
+so a phrase such as "cyclically permutes #{i,j,k}" does not by itself fix the
+three equations needed in a calculation.}
+
+\p{Quaternions can also be obtained from suitable Clifford Algebras, which
+connects this convention with [[ca-0001]]. The present notes use the
+quaternion multiplication directly. In mathlib, the corresponding type is
+documented in
+[Mathlib.Algebra.Quaternion](https://leanprover-community.github.io/mathlib4_docs/Mathlib/Algebra/Quaternion.html).}
