@@ -33,20 +33,48 @@
     <xsl:template name="splitlean">
         <xsl:param name="pText" select="." />
         <xsl:param name="sep" select="." />
+        <xsl:param name="base" />
+        <xsl:param name="short" select="false()" />
         <xsl:if test="string-length($pText)">
+            <xsl:variable name="marker" select="normalize-space(substring-before(concat($pText,$sep),$sep))" />
             <xsl:if test="not($pText=.)">
                 <!-- <xsl:text>,</xsl:text> -->
             </xsl:if>
             <a target="_blank"
-                href="https://leanprover-community.github.io/mathlib4_docs/find/#doc/{substring-before(concat($pText,$sep),$sep)}">
+                href="{$base}{$marker}">
                 <!-- <xsl:text>L∃∀N</xsl:text> -->
-                <xsl:value-of select="substring-before(concat($pText,$sep),$sep)" />
+                <xsl:choose>
+                    <xsl:when test="$short">
+                        <xsl:call-template name="lean-short-name">
+                            <xsl:with-param name="name" select="$marker" />
+                        </xsl:call-template>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:value-of select="$marker" />
+                    </xsl:otherwise>
+                </xsl:choose>
             </a>
             <xsl:call-template name="splitlean">
                 <xsl:with-param name="pText" select="substring-after($pText, $sep)" />
                 <xsl:with-param name="sep" select="$sep" />
+                <xsl:with-param name="base" select="$base" />
+                <xsl:with-param name="short" select="$short" />
             </xsl:call-template>
         </xsl:if>
+    </xsl:template>
+
+    <xsl:template name="lean-short-name">
+        <xsl:param name="name" />
+        <xsl:choose>
+            <xsl:when test="contains($name, '.')">
+                <xsl:call-template name="lean-short-name">
+                    <xsl:with-param name="name" select="substring-after($name, '.')" />
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="$name" />
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
 
     <xsl:template match="fr:meta[@name='lean']">
@@ -55,9 +83,24 @@
                 <xsl:call-template name="splitlean">
                     <xsl:with-param name="pText" select="." />
                     <xsl:with-param name="sep" select="','" />
+                    <xsl:with-param name="base" select="'https://leanprover-community.github.io/mathlib4_docs/find/#doc/'" />
                 </xsl:call-template>
             </div>
             <!-- <span class="meta-lean-symbol">✓</span> -->
+            <span class="meta-lean-symbol">L∃∀N</span>
+        </span>
+    </xsl:template>
+
+    <xsl:template match="fr:meta[@name='lean-tauceti']">
+        <span class="meta-lean">
+            <div class="meta-lean-list">
+                <xsl:call-template name="splitlean">
+                    <xsl:with-param name="pText" select="." />
+                    <xsl:with-param name="sep" select="','" />
+                    <xsl:with-param name="base" select="'https://taucetiproject.github.io/TauCeti/docs/find/#doc/'" />
+                    <xsl:with-param name="short" select="true()" />
+                </xsl:call-template>
+            </div>
             <span class="meta-lean-symbol">L∃∀N</span>
         </span>
     </xsl:template>
@@ -108,8 +151,8 @@
                 <a target="_blank" title="PDF" class="link-button link-pdf" href="{/fr:tree/@base-url}{../fr:display-uri}.pdf">
                     📄<span>PDF</span></a>
             </xsl:if>
-            <xsl:if test="../fr:meta[@name='lean']">
-                <xsl:apply-templates select="../fr:meta[@name='lean']" />
+            <xsl:if test="../fr:meta[@name='lean' or @name='lean-tauceti']">
+                <xsl:apply-templates select="../fr:meta[@name='lean' or @name='lean-tauceti']" />
             </xsl:if>
             <xsl:if test="../fr:display-uri=/fr:tree/fr:frontmatter/fr:display-uri and ../fr:meta[@name='multilang']">
                 <a id="langblock-toggle" class="link-button" href="javascript:void(0)"
