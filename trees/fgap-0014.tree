@@ -1,0 +1,45 @@
+\import{macros}
+
+\taxon{Definition}
+\title{the distinguished involution of abstract 2T}
+
+\tag{math}
+\tag{fgap}
+\tag{group}
+\tag{binary-tetrahedral}
+
+\p{Let #{T\leq\mathbb{H}^{\times}} be the binary tetrahedral group of
+Hurwitz units from [[fgap-000J]], and let #{B} be the abstract
+semidirect-product model obtained from the same Hurwitz action. Choose the
+group isomorphism
+##{
+\rho:B\mathbin{\cong}T
+}
+that compares these two models. Voight identifies #{T} with the Hurwitz unit
+group and with #{Q_8\rtimes\mathbb{Z}/3\mathbb{Z}} in
+\citet{sec. 11.2.4, p. 168}{voight2021quaternion}.}
+
+\p{The quaternion #{-1} belongs to #{T}; it is central, its square is one,
+and it is not one. Define the \newvocab{distinguished central involution} of
+#{B} by
+##{
+z=\rho^{-1}(-1).
+}
+Since an isomorphism preserves multiplication and reflects equality,
+##{
+z\in Z(B),\qquad z^2=1,\qquad z\neq1.
+}
+Thus the abstract group retains the central involution supplied by its
+quaternionic realization. The element #{z} is not identified with the
+quaternion #{-1}; the isomorphism #{\rho} relates them.}
+
+\p{The same isomorphism transports cardinality. Since the calculation in
+[[fgap-000K]] gives #{|T|=24},
+##{
+|B|=|T|=24.
+}
+The corresponding Lean result is expected to state
+\code{Nat.card BinaryTetrahedral.Abstract = 24}.}
+
+\p{The occurrence of #{-1} among the twenty-four Hurwitz units is explicit
+in \citet{sec. 11.2, p. 166}{voight2021quaternion}.}
