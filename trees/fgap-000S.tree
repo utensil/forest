@@ -1,0 +1,51 @@
+\import{macros}
+
+\parent{fgap-000M}
+\taxon{Convention}
+\title{geometric morphisms and inverse image}
+
+\tag{math}
+\tag{fgap}
+\tag{topos}
+\tag{geometric-morphism}
+\tag{sheaf}
+
+\p{For a \vocabk{geometric morphism}{tt-004Q}
+##{
+f:\mathcal{E}\longrightarrow\mathcal{F},
+}
+we write
+##{
+f^*:\mathcal{F}\longrightarrow\mathcal{E},
+\qquad
+f_*:\mathcal{E}\longrightarrow\mathcal{F},
+\qquad
+f^*\dashv f_*.
+}
+Thus the morphism and its inverse-image functor point in opposite directions.
+The functor #{f^*} preserves finite limits.}
+
+\p{Two examples fix the convention:
+##{
+\begin{array}{c|c|c}
+\text{input map}&\text{geometric morphism}&\text{inverse image}\\ \hline
+i:\{x\}\hookrightarrow X&
+\mathsf{Set}\to\mathsf{Sh}(X)&
+i^*F=F_x=\displaystyle\varinjlim_{x\in U}F(U)\\[3pt]
+\varphi:H\to G&
+\mathsf{B}H\to\mathsf{B}G&
+\operatorname{Res}^G_H:\mathsf{B}G\to\mathsf{B}H.
+\end{array}
+}
+In the first row, the stalk is the \vocabk{filtered colimit}{tt-0050} of all
+neighborhood sections, not the value on one chosen neighborhood.}
+
+\p{Mac Lane and Moerdijk construct inverse-image sheaves through pulled-back
+étale spaces in \citet{sec. II.9}{maclane1992sheaves}, especially printed
+pp. 99--101.}
+
+\p{In the second row, right actions are presheaves. Precomposition with
+#{B\varphi^{\mathrm{op}}} is restriction of actions. It has both
+Kan-extension adjoints, so it is the inverse-image part of the displayed
+geometric morphism. The homomorphism and geometric morphism point from #{H}
+to #{G}; restriction points from #{G}-objects to #{H}-objects.}

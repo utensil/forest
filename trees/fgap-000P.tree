@@ -1,0 +1,47 @@
+\import{macros}
+
+\parent{fgap-000M}
+\taxon{Example}
+\title{isotropy survives the coarse quotient}
+
+\tag{math}
+\tag{fgap}
+\tag{group-action}
+\tag{groupoid}
+\tag{topos}
+
+\p{Let #{C_2=\{1,s\}} act on #{X=\{-1,0,1\}} by
+#{s\mathbin{\cdot}x=-x}. The action groupoid #{C_2\ltimes X} has the points
+of #{X} as objects and an arrow #{(h,x):x\to h\mathbin{\cdot}x} for every
+#{h\in C_2}. Omitting identity arrows, its shape is
+\tikzfig{\begin{tikzcd}[column sep=large]
+-1 \arrow[r, bend left=18, "s"]&
+1 \arrow[l, bend left=18, "s"]&
+0 \arrow[loop right, "s"]
+\end{tikzcd}}
+Thus
+##{
+\operatorname{Aut}(0)\cong C_2,\qquad
+\operatorname{Aut}(1)=\operatorname{Aut}(-1)=1.
+}
+}
+
+\p{The coarse quotient remembers only the two orbits:
+\tikzfig{\begin{tikzcd}[column sep=huge]
+\{-1,1\}&\{0\}.
+\end{tikzcd}}
+It has forgotten the nonidentity automorphism at #{0}. By contrast, the action
+groupoid has one component equivalent to the terminal groupoid and one
+component equivalent to #{BC_2}. Therefore
+##{
+\mathsf{Set}^{(C_2\ltimes X)^{\mathrm{op}}}
+\simeq
+\mathsf{Set}\times\mathsf{B}C_2,
+}
+while sheaves on the discrete coarse quotient form
+#{\mathsf{Set}\times\mathsf{Set}}.}
+
+\p{The retained information is already the isotropy arrow in the action
+groupoid. Passing to its \vocabk{presheaf}{tt-002Q} category organizes
+families of such data, but does not create that arrow. This test supports the
+groupoid bridge and does not, by itself, admit a topos layer.}
