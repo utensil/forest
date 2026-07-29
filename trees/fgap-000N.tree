@@ -1,0 +1,68 @@
+\import{macros}
+
+\parent{fgap-000M}
+\taxon{Example}
+\title{the real Group Algebra of a cyclic group of order three}
+
+\tag{math}
+\tag{fgap}
+\tag{group-algebra}
+\tag{commutative-algebra}
+
+\p{Let #{C_3=\langle g\mid g^3=1\rangle}. Sending #{g} to #{x} gives
+##{
+\mathbb{R}[C_3]\cong\mathbb{R}[x]/(x^3-1).
+}
+Over the real numbers,
+##{
+x^3-1=(x-1)(x^2+x+1),
+}
+and the two factors are coprime. The Chinese remainder theorem and the
+identification
+#{\mathbb{R}[x]/(x^2+x+1)\cong\mathbb{C}} therefore give
+##{
+\mathbb{R}[C_3]\cong\mathbb{R}\times\mathbb{C}.
+}
+}
+
+\p{More concretely, if #{\zeta} is a primitive complex cube root of unity,
+the isomorphism is
+##{
+a+bg+cg^2\longmapsto
+\bigl(a+b+c,\ a+b\zeta+c\zeta^2\bigr).
+}
+The two factors can be read in three compatible ways:
+##{
+\begin{array}{c|c|c}
+\text{factor of }x^3-1&
+\text{real algebra block}&
+\text{real representation}\\ \hline
+x-1&\mathbb{R}&\text{trivial line}\\
+x^2+x+1&\mathbb{C}&\text{rotation plane}.
+\end{array}
+}
+The rotation plane is the linearization of the nontrivial part of the regular
+\vocabk{Group Action}{fgap-0008}. More explicitly, the generator cyclically
+permutes the basis #{1,g,g^2}. The averaging element
+##{
+e_0=\frac{1+g+g^2}{3}
+}
+projects onto the fixed line #{\mathbb{R}(1+g+g^2)}, while its complementary
+kernel is the augmentation plane
+##{
+\{a+bg+cg^2:a+b+c=0\}.
+}
+Orbits, freeness, and transitivity belong to the action; the projector and
+invariant subspaces appear only after linearization.}
+
+\p{Since the spectrum of a product is the disjoint union of the spectra,
+##{
+\operatorname{Spec}\mathbb{R}[C_3]
+\cong
+\operatorname{Spec}\mathbb{R}
+\sqcup
+\operatorname{Spec}\mathbb{C}.
+}
+This is a useful commutative picture. It is not yet a reason to introduce a
+topos, and it does not extend without choices to noncommutative Group
+Algebras.}
