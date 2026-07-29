@@ -1,0 +1,46 @@
+\import{macros}
+
+\taxon{Theorem}
+\title{the eigenspace decomposition of a module}
+
+\tag{math}
+\tag{fgap}
+\tag{module}
+\tag{idempotent}
+
+\p{Let #{z} be a \vocabk{central involution}{fgap-000W} in #{A}, let
+#{e_+,e_-} be its associated idempotents, and let #{M} be a left
+#{A}-module. Put
+##{
+M_+=e_+M,\qquad M_-=e_-M.
+}
+Then
+##{
+M=M_+\oplus M_-.
+}
+These summands are precisely the two eigenspaces for the action of #{z}:
+##{
+M_+=\{m\in M:zm=m\},\qquad
+M_-=\{m\in M:zm=-m\}.
+}
+}
+
+\proof{
+\p{Every #{m\in M} satisfies
+##{
+m=(e_++e_-)m=e_+m+e_-m.
+}
+If #{x=e_+m=e_-n}, then
+#{x=e_+x=e_+e_-n=0}, so the sum is direct. Direct calculation gives
+#{ze_+=e_+} and #{ze_-=-e_-}, proving one eigenspace inclusion in each
+case. Conversely, if #{zm=m}, then
+##{
+e_+m=h(m+zm)=2hm=m.
+}
+If #{zm=-m}, the analogous calculation gives #{e_-m=m}.}
+}
+
+\p{Idempotents as projections and complementary orthogonal idempotents as
+direct decompositions are recorded in
+\citet{exercise 2.7, p. 15}{webb2007finite}; see also
+\citet{props. 4.5.1--4.5.3, pp. 63--67}{sengupta2010representations}.}
