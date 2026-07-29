@@ -12,7 +12,22 @@
 
 \refdeft{geometric morphism, Topoi}{7.2}{kostecki2011introduction}{
 \p{
-If #{\E_1} and #{\E_2} are \vocabk{topos}{tt-004O}es, then a \newvocab{geometric morphism} #{\fG: \E_1 \to \E_2} is defined as a pair of \vocab{adjoint functor}s #{\fG^* \dashv \fG_*} between #{\E_1} and #{\E_2}, such that #{\fG^*} \vocabk{preserves finite limits}{tt-002H} (i.e. is \vocab{left exact}), which implies #{\fG_*} \vocab{preserves colimits} (i.e. is \vocab{right exact}).}
+If #{\E_1} and #{\E_2} are \vocabk{topos}{tt-004O}es, then a
+\newvocab{geometric morphism} #{\fG: \E_1 \to \E_2} is a pair of
+\vocab{adjoint functor}s
+##{
+\fG^*:\E_2\to\E_1,\qquad
+\fG_*:\E_1\to\E_2,\qquad
+\fG^*\dashv\fG_*,
+}
+such that the inverse-image functor #{\fG^*}
+\vocabk{preserves finite limits}{tt-002H}; that is, #{\fG^*} is left exact.
+See \citet{sec. VII.1, pp. 348--352}{maclane1992sheaves}.}
+
+\p{As a left adjoint, #{\fG^*} preserves every colimit that exists. As a
+right adjoint, #{\fG_*} preserves every limit that exists. The additional
+left-exactness condition on #{\fG^*} is not automatic for a left adjoint,
+and right adjointness does not in general make #{\fG_*} preserve colimits.}
 
 \p{The category of toposes and their geometric morphisms is denoted #{\Topoi}.
 }
