@@ -1,0 +1,51 @@
+\import{macros}
+
+\taxon{Theorem}
+\title{the central-idempotent algebra product}
+
+\tag{math}
+\tag{fgap}
+\tag{algebra}
+\tag{idempotent}
+
+\p{For a \vocabk{central involution}{fgap-000W} #{z} and its associated
+idempotents, put
+##{
+A_+=e_+A,\qquad A_-=e_-A.
+}
+Because #{e_+} and #{e_-} are central, these are two-sided ideals and
+#{e_\pm A=Ae_\pm}. Each is a unital #{R}-algebra in its own right, with
+unit #{e_\pm} and structural map #{r\mapsto re_\pm}. There is an
+#{R}-algebra isomorphism
+##{
+\begin{aligned}
+\Phi:A&\longrightarrow A_+\times A_-,
+&a&\longmapsto(e_+a,e_-a),\\
+\Psi:A_+\times A_-&\longrightarrow A,
+&(x,y)&\longmapsto x+y.
+\end{aligned}
+}
+}
+
+\proof{
+\p{For #{a,b\in A},
+#{a(e_\pm b)=e_\pm(ab)} and #{(e_\pm b)a=e_\pm(ba)}, so #{A_\pm} are
+two-sided ideals. If #{x=e_+a\in A_+}, then #{e_+x=x}; thus #{e_+} is the
+unit of #{A_+}, and similarly for #{A_-}.}
+
+\p{Mixed products vanish:
+##{
+(e_+a)(e_-b)=e_+e_-ab=0,
+}
+and likewise in the reverse order. It follows that #{\Phi} and #{\Psi}
+preserve multiplication. Finally,
+##{
+\Psi\Phi(a)=(e_++e_-)a=a,
+}
+while #{\Phi\Psi(x,y)=(x,y)} because the matching idempotent fixes each
+factor and the other annihilates it.}
+}
+
+\p{The use of local units on idempotent-generated ideals follows the
+standard discussion in
+\citet{secs. 4.5--4.6, pp. 63--73}{sengupta2010representations}.}
