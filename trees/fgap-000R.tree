@@ -1,0 +1,55 @@
+\import{macros}
+
+\parent{fgap-000M}
+\taxon{Theorem}
+\title{the classifying property of BG}
+
+\tag{math}
+\tag{fgap}
+\tag{torsor}
+\tag{topos}
+\tag{geometric-morphism}
+
+\p{Let #{G} be a group and #{\mathcal{E}} a topos. There is a natural
+equivalence
+##{
+\operatorname{Geom}(\mathcal{E},\mathsf{B}G)
+\simeq
+\operatorname{Tor}(\mathcal{E},G)
+}
+between geometric morphisms to #{\mathsf{B}G} and #{G}-torsors in
+#{\mathcal{E}}. Under this equivalence, a
+\vocabk{geometric morphism}{tt-004Q}
+##{
+f:\mathcal{E}\longrightarrow\mathsf{B}G
+}
+classifies the torsor #{f^*U_G}.}
+
+\p{This is Theorem VIII.2.7 of \citek{maclane1992sheaves}; its construction
+is developed on printed pp. 423--433.}
+
+\p{The two directions are visible in the diagram
+\tikzfig{\begin{tikzcd}[column sep=huge]
+\mathcal{E} \arrow[r, "f"]&
+\mathsf{B}G\\
+f^*U_G&
+U_G \arrow[l, mapsto, "f^*"']
+\end{tikzcd}}
+The geometric morphism points toward the classifying topos. Its inverse-image
+functor carries the universal torsor back to the topos in which the classified
+torsor lives.}
+
+\proof{
+\p{Inverse image preserves finite limits and, as a left adjoint, colimits.
+Every epimorphism in a topos is regular, so inverse image carries the
+universal torsor equations, including the epimorphic map to #{1}, to torsor
+equations in #{\mathcal{E}}. Conversely,
+the cited theorem constructs a geometric morphism from a torsor and proves
+that the two constructions are naturally inverse. The complete construction
+belongs to the classifying theorem; the point used here is its variance and
+universal property.}
+}
+
+\p{For a single finite action, freeness and transitivity can be checked
+without topoi. The added value here is one universal object classifying
+torsors in every suitable base topos and carrying them along inverse image.}

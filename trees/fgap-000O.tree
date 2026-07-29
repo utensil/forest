@@ -1,0 +1,68 @@
+\import{macros}
+
+\parent{fgap-000M}
+\taxon{Remark}
+\title{the center is a commutative shadow}
+
+\tag{math}
+\tag{fgap}
+\tag{group-algebra}
+\tag{quaternion}
+\tag{commutative-algebra}
+
+\p{The quaternion group #{Q_8} has a real Group Algebra decomposition
+##{
+\mathbb{R}[Q_8]\cong\mathbb{R}^4\times\mathbb{H}.
+}
+This can be seen directly from the concrete copy
+#{Q_8\subset\mathbb{H}^{\times}} in [[fgap-0009]], rather than assumed from a
+classification theorem.}
+
+\p{Let #{u_q} denote the basis element of the Group Algebra indexed by
+#{q\in Q_8}, and write a general element as
+#{x=\sum_{q\in Q_8}a_qu_q}. The four characters of
+#{Q_8/\{\pm1\}\cong C_2\times C_2} and the quaternionic map
+#{u_q\mapsto q} combine to an algebra homomorphism
+##{
+\Phi:\mathbb{R}[Q_8]\longrightarrow\mathbb{R}^4\times\mathbb{H}.
+}
+For
+#{q\in\{1,i,j,k\}}, put
+#{s_q=a_q+a_{-q}} and #{d_q=a_q-a_{-q}}. The quaternion coordinate of
+#{\Phi} recovers
+##{
+d_1+d_i i+d_j j+d_k k.
+}
+The four real coordinates recover the Hadamard transform
+##{
+s_1+\epsilon s_i+\delta s_j+\epsilon\delta s_k,
+\qquad \epsilon,\delta\in\{\pm1\}.
+}
+The Hadamard matrix is invertible, so these four values recover every
+#{s_q}. Together with the four differences, they recover every coefficient.
+Thus #{\Phi} has zero kernel. Both sides have real dimension eight, so
+#{\Phi} is an isomorphism. The quaternionic realization and multiplication
+used here are developed in [[fgap-0006]] and
+\citet{sec. 11.2, p. 166}{voight2021quaternion}.}
+
+\p{Taking centers now gives
+##{
+Z\bigl(\mathbb{R}[Q_8]\bigr)
+\cong
+Z\bigl(\mathbb{R}^4\times\mathbb{H}\bigr)
+\cong\mathbb{R}^5.
+}
+The comparison is:
+##{
+\begin{array}{c|c|c}
+\text{object}&\text{retained data}&\text{forgotten data}\\ \hline
+\mathbb{R}[Q_8]&4\mathbb{R}\text{ and }\mathbb{H}&\text{none here}\\
+Z(\mathbb{R}[Q_8])&\text{five central factors}&
+\mathbb{H}\text{ and block size or type}.
+\end{array}
+}
+For a real-centered simple block, the center alone cannot distinguish matrix
+size or real from quaternionic type. A complex block still has complex
+center. Hence
+#{\operatorname{Spec}Z(\mathbb{R}[Q_8])} is a selected commutative shadow,
+not a lossless localization of the noncommutative algebra.}
