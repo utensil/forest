@@ -1,0 +1,47 @@
+\date{2026-07-28T17:20:40Z}
+\import{macros}
+
+\parent{fgap-000E}
+\taxon{Theorem}
+\title{the internal semidirect-product theorem}
+
+\tag{math}
+\tag{fgap}
+\tag{group}
+\tag{semidirect-product}
+
+\p{Let #{N,H\leq G}. Suppose #{N} is normal in #{G} and #{N,H} are
+complementary. Conjugation defines an action
+##{
+\alpha:H\longrightarrow\operatorname{Aut}(N),\qquad
+\alpha(h)(n)=hnh^{-1}.
+}
+Give #{N\times H} the multiplication
+##{
+(n_1,h_1)(n_2,h_2)
+=\bigl(n_1\alpha(h_1)(n_2),h_1h_2\bigr).
+}
+The resulting external semidirect product is denoted
+#{N\rtimes_{\alpha}H}. Multiplication induces an isomorphism
+##{
+N\rtimes_{\alpha}H\xrightarrow{\ \cong\ }G,
+\qquad(n,h)\longmapsto nh.
+}
+}
+
+\proof{
+\p{The displayed multiplication is chosen so that
+##{
+(n_1h_1)(n_2h_2)
+=n_1(h_1n_2h_1^{-1})h_1h_2.
+}
+Thus the multiplication map preserves products. Complementarity makes it
+bijective, so it is an isomorphism.}
+}
+
+\p{Conversely, the canonical copies of #{N} and #{H} in
+#{N\rtimes_{\alpha}H} are complementary, and the copy of #{N} is normal.
+The external multiplication and its split exact sequence are developed in
+\citet{sec. 1.4.2, pp. 58--61}{isaev2018theory}; compare
+\citet{sec. 4.2.13, pp. 62--63}{fre2023discrete}. An arbitrary extension by a
+normal subgroup need not split: the complement is extra structure.}

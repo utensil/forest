@@ -1,0 +1,39 @@
+\date{2026-07-28T17:20:39Z}
+\import{macros}
+
+\parent{fgap-000E}
+\taxon{Lemma}
+\title{a normalized product is the generated subgroup}
+
+\tag{math}
+\tag{fgap}
+\tag{group}
+\tag{normalizer}
+
+\p{Let #{N,H\leq G}. If #{H\leq N_G(N)}, then the set product
+##{
+NH=\{nh:n\in N,\ h\in H\}
+}
+is a subgroup and
+##{
+N\vee H=NH.
+}
+Moreover, #{N} is normal in #{N\vee H}.}
+
+\proof{
+\p{Normalization gives the calculation needed for closure:
+##{
+(n_1h_1)(n_2h_2)
+=n_1(h_1n_2h_1^{-1})h_1h_2\in NH.
+}
+It also gives
+#{(nh)^{-1}=(h^{-1}n^{-1}h)h^{-1}\in NH}. Thus #{NH} is a subgroup
+containing both #{N} and #{H}, while every subgroup containing #{N} and
+#{H} contains every product #{nh}. This proves #{N\vee H=NH}. Finally,
+conjugation by generators from #{N} and #{H} preserves #{N}, so #{N} is
+normal in their generated subgroup.}
+}
+
+\p{This is the small bridge between an action by conjugation and an internal
+product. Compare the normalizer and internal-product discussion in
+\citet{secs. 4.2.6 and 4.2.13, pp. 56--57 and 62--63}{fre2023discrete}.}
