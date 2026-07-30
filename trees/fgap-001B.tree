@@ -1,0 +1,116 @@
+\import{macros}
+
+\taxon{proposition}
+\title{the real Group Algebra of the quaternion group}
+
+\tag{math}
+\tag{fgap}
+\tag{group-algebra}
+\tag{quaternion}
+\tag{representation}
+
+\p{Let #{Q_8=\{\pm1,\pm i,\pm j,\pm k\}} be the concrete quaternion group
+from [[fgap-0009]], and put
+##{
+\mathcal{E}=\{-1,1\}\subset\mathbb{R}^{\times},
+\qquad
+\mathcal{X}=\mathcal{E}\times\mathcal{E}.
+}
+For #{(\epsilon,\delta)\in\mathcal{X}}, there is a real character
+##{
+\chi_{\epsilon,\delta}:Q_8\longrightarrow\mathbb{R}^{\times}
+}
+determined by
+##{
+\chi_{\epsilon,\delta}(-1)=1,\qquad
+\chi_{\epsilon,\delta}(i)=\epsilon,\qquad
+\chi_{\epsilon,\delta}(j)=\delta,\qquad
+\chi_{\epsilon,\delta}(k)=\epsilon\delta.
+}
+These are the four characters pulled back from
+#{Q_8/\{\pm1\}\cong C_2\times C_2}; compare
+\citet{sec. 4.3, pp. 63--64 and ex. 4.8.1, p. 73}{etingof2024introduction}.}
+
+\p{Write #{\mathbb{R}^{\mathcal{X}}} for the algebra of functions
+#{\mathcal{X}\to\mathbb{R}}, with pointwise operations. Extending the four
+characters and the inclusion
+#{Q_8\subset\mathbb{H}^{\times}} linearly gives an algebra homomorphism
+##{
+\Phi:\mathbb{R}[Q_8]\longrightarrow
+\mathbb{R}^{\mathcal{X}}\times\mathbb{H}.
+}
+Then #{\Phi} is an isomorphism of real algebras. The displayed map retains
+the chosen character index and quaternionic realization as part of its
+data.}
+
+\proof{
+\p{Let #{u_q} be the Group-Algebra basis element indexed by #{q\in Q_8}.}
+
+\p{Write a general element in the form
+##{
+x=\sum_{q\in Q_8}a_qu_q.
+}
+For #{q\in\{1,i,j,k\}}, set
+##{
+s_q=a_q+a_{-q},\qquad d_q=a_q-a_{-q}.
+}
+The quaternion coordinate of #{\Phi(x)} is
+##{
+d_1+d_i i+d_j j+d_k k.
+}
+It therefore recovers the four differences #{d_q}.}
+
+\p{The coordinate indexed by #{(\epsilon,\delta)\in\mathcal{X}} is
+##{
+y_{\epsilon,\delta}
+=s_1+\epsilon s_i+\delta s_j+\epsilon\delta s_k.
+}
+The inverse Hadamard calculation gives
+##{
+\begin{aligned}
+s_1&=\frac14\sum_{(\epsilon,\delta)\in\mathcal{X}}y_{\epsilon,\delta},&
+s_i&=\frac14\sum_{(\epsilon,\delta)\in\mathcal{X}}
+\epsilon y_{\epsilon,\delta},\\
+s_j&=\frac14\sum_{(\epsilon,\delta)\in\mathcal{X}}
+\delta y_{\epsilon,\delta},&
+s_k&=\frac14\sum_{(\epsilon,\delta)\in\mathcal{X}}\epsilon\delta
+y_{\epsilon,\delta}.
+\end{aligned}
+}
+Thus the four real coordinates recover the four sums #{s_q}. Finally,
+##{
+a_q=\frac{s_q+d_q}{2},\qquad
+a_{-q}=\frac{s_q-d_q}{2},
+}
+so #{\Phi(x)} recovers all eight coefficients of #{x}. Hence #{\Phi} is
+injective. Its domain and codomain both have real dimension eight, so it is
+bijective.}
+}
+
+\p{The quaternion coordinate alone is surjective, because its basis values
+include #{1,i,j,k}. It vanishes exactly when
+#{d_1=d_i=d_j=d_k=0}, or equivalently when #{a_q=a_{-q}} for
+#{q\in\{1,i,j,k\}}. Its kernel is therefore the four-dimensional span of
+##{
+u_1+u_{-1},\quad
+u_i+u_{-i},\quad
+u_j+u_{-j},\quad
+u_k+u_{-k}.
+}
+It therefore induces
+##{
+\mathbb{R}[Q_8]/\ker(\Phi_{\mathbb{H}})
+\cong_{\mathbb{R}\text{-alg}}\mathbb{H}.
+}
+This quotient depends on the chosen quaternionic realization. The combined
+map #{\Phi} is what exhibits the selected quotient as the quaternion factor
+of the displayed product; a quotient map by itself does not supply that
+direct-factor statement.}
+
+\p{The quaternion model is grounded in
+\citet{sec. 11.2, p. 166}{voight2021quaternion}. The extension of group
+representations to Group-Algebra maps follows
+\citet{secs. 3.1--3.2, pp. 39--41}{sengupta2010representations}. The
+coefficient recovery above is direct and does not assume a general
+classification theorem. No physical meaning is assigned to a factor merely
+from its dimension or familiar algebra.}
