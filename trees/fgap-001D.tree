@@ -1,0 +1,66 @@
+\import{macros}
+
+\taxon{Remark}
+\title{what the models of 2T retain}
+
+\tag{math}
+\tag{fgap}
+\tag{group}
+\tag{quaternion}
+\tag{semidirect-product}
+\tag{formalization}
+
+\p{The same binary tetrahedral symmetry now has several models. They answer
+different questions.}
+
+\ul{
+  \li{The \newvocab{concrete model}
+  #{T\leq\mathbb{H}^{\times}} retains quaternion coordinates, multiplication,
+  conjugation, and norm. It is the model for explicit calculations.}
+
+  \li{The \newvocab{internal semidirect-product structure} retains the same
+  group #{T}, but also marks the subgroups #{Q,C\leq T}. The facts
+  ##{
+  T=QC,\qquad Q\mathrel{\trianglelefteq}T,\qquad Q\cap C=\{1\}
+  }
+  say that every element of #{T} has a unique factorization #{qc}. They
+  expose how the two parts fit inside the concrete group.}
+
+  \li{The \newvocab{external model} #{Q\rtimes_{\alpha}C} replaces a
+  quaternion by a pair #{(q,c)}. It retains the factors and records their
+  interaction in the conjugation action
+  #{\alpha(c)(q)=cqc^{-1}}. Its multiplication is
+  ##{
+  (q,c)(q',c')
+  =\bigl(q\alpha(c)(q'),cc'\bigr).
+  }}
+
+  \li{An \newvocab{abstract model} can specify the binary tetrahedral group
+  without quaternion coordinates. This is convenient when only its group
+  structure is needed, but coordinates and named factors must be restored
+  by additional maps.}
+}
+
+\p{The multiplication map
+##{
+\mu:Q\rtimes_{\alpha}C\longrightarrow T,\qquad(q,c)\longmapsto qc
+}
+is an isomorphism by [[fgap-000I]]. Indeed,
+##{
+\mu\bigl((q,c)(q',c')\bigr)
+=q(cq'c^{-1})cc'
+=qcq'c'
+=\mu(q,c)\mu(q',c').
+}
+Thus the external multiplication is not an analogy: it is exactly the
+concrete multiplication written in factor coordinates. The two carriers are
+still different, so a theorem or construction passes between them only
+through an explicit isomorphism. If it refers to the named factors or their
+action, the transport must also record the corresponding compatibility.}
+
+\p{The internal and external constructions are developed in
+\citet{sec. 4.2.13, pp. 62--63}{fre2023discrete} and
+\citet{sec. 1.4.2, pp. 58--61}{isaev2018theory}. The concrete identification
+of #{2T} with the Hurwitz unit group and
+#{Q_8\rtimes\mathbb{Z}/3\mathbb{Z}} is given in
+\citet{sec. 11.2.4, p. 168}{voight2021quaternion}.}
