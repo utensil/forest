@@ -10,11 +10,30 @@
 
 \p{Let #{z} be a \vocabk{central involution}{fgap-000W} in #{A}, let
 #{e_+,e_-} be its associated idempotents, and let #{M} be a left
-#{A}-module. Put
+#{A}-module. Left multiplication defines #{A}-linear projections
 ##{
-M_+=e_+M,\qquad M_-=e_-M.
+p_\pm:M\longrightarrow M,\qquad p_\pm(m)=e_\pm m.
 }
-Then
+They satisfy
+##{
+p_\pm^2=p_\pm,\qquad
+p_++p_-=\mathrm{id}_M,\qquad
+p_+p_-=p_-p_+=0.
+}
+Their ranges and kernels are
+##{
+\begin{aligned}
+\operatorname{range}(p_+)&=e_+M,&
+\ker(p_+)&=\operatorname{range}(p_-)=e_-M,\\
+\operatorname{range}(p_-)&=e_-M,&
+\ker(p_-)&=\operatorname{range}(p_+)=e_+M.
+\end{aligned}
+}
+Consequently, if
+##{
+M_+=e_+M,\qquad M_-=e_-M,
+}
+then
 ##{
 M=M_+\oplus M_-.
 }
@@ -26,14 +45,21 @@ M_-=\{m\in M:zm=-m\}.
 }
 
 \proof{
-\p{Every #{m\in M} satisfies
+\p{The idempotent and mixed-product identities from [[fgap-000Y]] give the
+displayed projection identities after acting on #{M}. Centrality of #{e_\pm}
+makes #{p_\pm} #{A}-linear. Their ranges are #{e_\pm M} by definition. If
+#{p_+(m)=0}, then
 ##{
-m=(e_++e_-)m=e_+m+e_-m.
+m=(p_++p_-)(m)=p_-(m),
 }
-If #{x=e_+m=e_-n}, then
-#{x=e_+x=e_+e_-n=0}, so the sum is direct. Direct calculation gives
-#{ze_+=e_+} and #{ze_-=-e_-}, proving one eigenspace inclusion in each
-case. Conversely, if #{zm=m}, then
+so #{m} lies in the range of #{p_-}. Conversely,
+#{p_+p_-=0} shows that every element in that range lies in
+#{\ker(p_+)}. This proves the first kernel-range equality; the second is
+symmetric. The identity #{p_++p_-=\mathrm{id}_M} now gives the displayed direct
+sum.}
+
+\p{Direct calculation gives #{ze_+=e_+} and #{ze_-=-e_-}, proving one
+eigenspace inclusion in each case. Conversely, if #{zm=m}, then
 ##{
 e_+m=h(m+zm)=2hm=m.
 }
