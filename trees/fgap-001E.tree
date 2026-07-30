@@ -1,0 +1,98 @@
+\import{macros}
+
+\taxon{Remark}
+\title{two routes from binary tetrahedral symmetry}
+
+\tag{math}
+\tag{fgap}
+\tag{group-algebra}
+\tag{representation}
+\tag{mckay}
+\tag{physics}
+
+\p{The semidirect-product model and the quaternion model open two different
+routes from the same group. One rewrites the Group Algebra in interacting
+factor data. The other places the group inside #{\mathrm{SU}(2)} and leads to
+the McKay graph.}
+
+\subtree{
+  \title{The Group-Algebra route}
+
+  \p{Extend the conjugation action
+  #{\alpha:C\to\operatorname{Aut}(Q)} linearly to real-algebra
+  automorphisms
+  ##{
+  \overline{\alpha}_c:\mathbb{R}[Q]\longrightarrow\mathbb{R}[Q].
+  }
+  On the vector space
+  #{\mathbb{R}[Q]\otimes_{\mathbb{R}}\mathbb{R}[C]}, write a pure tensor as
+  #{a\mathbin{\#}c} and define
+  ##{
+  (a\mathbin{\#}c)(b\mathbin{\#}d)
+  =a\,\overline{\alpha}_c(b)\mathbin{\#}cd,
+  }
+  extending bilinearly. This convention defines the
+  \newvocab{skew Group Algebra}
+  #{\mathbb{R}[Q]\rtimes_{\overline{\alpha}}C}; it is also a crossed product
+  with trivial twisting cocycle.}
+
+  \p{The basis map
+  ##{
+  [q]\mathbin{\#}c\longmapsto[qc]
+  }
+  respects multiplication by the calculation in [[fgap-001D]], and unique
+  factorization makes it a bijection. Hence
+  ##{
+  \mathbb{R}[Q]\rtimes_{\overline{\alpha}}C
+  \mathbin{\cong_{\mathbb{R}\text{-alg}}}\mathbb{R}[T].
+  }
+  This is the Group-Algebra form of
+  #{T\cong Q\rtimes_{\alpha}C}. The extension of group maps to Group-Algebra
+  maps follows the convention in
+  \citet{secs. 3.1--3.2, pp. 39--41}{sengupta2010representations}.}
+
+  \p{A module over this skew Group Algebra can be read as an
+  #{\mathbb{R}[Q]}-module #{M} together with a linear action of #{C}
+  satisfying
+  ##{
+  c\mathbin{\cdot}(a\mathbin{\cdot}m)
+  =\overline{\alpha}_c(a)\mathbin{\cdot}
+  (c\mathbin{\cdot}m).
+  }
+  The external model therefore exposes the compatibility needed to assemble
+  representations from the two factors. It does not by itself decompose
+  #{\mathbb{R}[T]} into simple blocks. That requires further
+  representation-theoretic input.}
+}
+
+\subtree{
+  \title{The McKay route}
+
+  \p{Under the standard matrix realization of the unit quaternions as
+  #{\mathrm{SU}(2)}, the concrete group #{T} becomes a finite subgroup of
+  #{\mathrm{SU}(2)}. Let #{\tau_3} be its faithful two-dimensional complex
+  representation. The McKay graph has one vertex for each irreducible
+  complex representation #{\tau_i}; the number of edges from #{\tau_i} to
+  #{\tau_j} is the multiplicity of #{\tau_j} in
+  ##{
+  \tau_3\otimes\tau_i.
+  }
+  For the binary tetrahedral group this graph is the affine Dynkin diagram
+  #{\widetilde{E}_6}. The character table, the seven irreducible
+  representations, and the tensor-product calculation are given in
+  \citet{table A.12, prop. A.10, and ex. A.11, pp. 172--174}{stekolshchik2008notes}.}
+
+  \p{This graph connects the representation theory of #{2T} with quivers
+  and the ADE classification. The same source relates a binary polyhedral
+  subgroup #{G\leq\mathrm{SU}(2)} to the quotient
+  #{\mathbb{C}^2/G}, its invariant algebra, and its Kleinian singularity in
+  \citet{secs. A.3--A.4, pp. 158--161}{stekolshchik2008notes}. These are
+  routes toward quotient geometry and related orbifold constructions. They
+  are not consequences of the semidirect-product theorem alone.}
+
+  \p{Neither route assigns physical meaning to #{Q}, #{C}, an algebra
+  block, or a vertex of #{\widetilde{E}_6}. They supply mathematical
+  structures on which a physical correspondence could be stated and
+  tested. A proposed correspondence must still identify the action,
+  representation, preserved structure, and physical interpretation.}
+}
