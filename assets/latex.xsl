@@ -95,6 +95,12 @@
     <xsl:if test="f:frontmatter/f:title">
       <xsl:text>[{</xsl:text>
       <xsl:apply-templates select="f:frontmatter/f:title" />
+      <xsl:if test="f:frontmatter/f:meta[@name='lean']">
+        <xsl:text>\enspace{}</xsl:text>
+        <xsl:call-template name="lean-markers">
+          <xsl:with-param name="markers" select="f:frontmatter/f:meta[@name='lean']" />
+        </xsl:call-template>
+      </xsl:if>
       <xsl:text>}]</xsl:text>
     </xsl:if>
     <xsl:if test="f:frontmatter/f:display-uri[not(contains(text(), '#'))]">
@@ -106,6 +112,22 @@
     <xsl:text>\end{</xsl:text>
     <xsl:apply-templates select="f:frontmatter/f:taxon" />
     <xsl:text>}</xsl:text>
+  </xsl:template>
+
+  <xsl:template name="lean-markers">
+    <xsl:param name="markers" />
+    <xsl:variable name="marker" select="normalize-space(substring-before(concat($markers, ','), ','))" />
+    <xsl:text>\protect\href{https://leanprover-community.github.io/mathlib4_docs/find/\#doc/</xsl:text>
+    <xsl:value-of select="$marker" />
+    <xsl:text>}{\protect\leanmarker{\detokenize{</xsl:text>
+    <xsl:value-of select="$marker" />
+    <xsl:text>}}}</xsl:text>
+    <xsl:if test="contains($markers, ',')">
+      <xsl:text>\allowbreak\hspace{0.35em}</xsl:text>
+      <xsl:call-template name="lean-markers">
+        <xsl:with-param name="markers" select="substring-after($markers, ',')" />
+      </xsl:call-template>
+    </xsl:if>
   </xsl:template>
   <!-- use mdframed end -->
 
