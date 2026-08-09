@@ -1,4 +1,24 @@
 \usepackage{listings}
+\usepackage{fontspec}
+\newfontfamily\codefont{Noto Sans Mono}[Scale=MatchLowercase]
+
+\definecolor{leanmarkerborder}{HTML}{7A7A72}
+\definecolor{leanmarkerbackground}{HTML}{F7F7F4}
+\DeclareRobustCommand{\leanmarker}[1]{%
+  \tikz[baseline=(leanmarker.base)]{%
+    \node[
+      draw=leanmarkerborder,
+      text=leanmarkerborder,
+      fill=leanmarkerbackground,
+      rounded corners=1.5pt,
+      inner xsep=3.25pt,
+      inner ysep=1.5pt,
+      text height=1.45ex,
+      text depth=0.35ex,
+      font=\normalfont\codefont\footnotesize
+    ] (leanmarker) {#1};%
+  }%
+}
 
 % handle Lean code highlighting following https://lean-lang.org/lean4/doc/syntax_highlight_in_latex.html
 \definecolor{keywordcolor}{rgb}{0.7, 0.1, 0.1}   % red
