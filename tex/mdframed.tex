@@ -6,6 +6,11 @@
 \usepackage{thmtools}
 \usepackage[framemethod=TikZ]{mdframed}
 
+% Keep theorem headings ragged and breakable between atomic inline markers.
+\newcommand{\foresttheoremhead}{%
+	\parbox[t]{\linewidth}{\raggedright\NAME\ \NUMBER\ \NOTE}%
+}
+
 \theoremstyle{definition}
 \mdfdefinestyle{mdbluebox}{%
 	% same
@@ -40,6 +45,7 @@
 \declaretheoremstyle[%
 	% same
 	headpunct={\\[3pt]},
+	headformat={\foresttheoremhead},
 	% customizations
 	headfont=\sffamily\bfseries\color{MidnightBlue!70!black},
 	mdframed={style=mdbluebox}
@@ -76,6 +82,7 @@
 \declaretheoremstyle[
 	% same
 	headpunct={\\[3pt]},
+	headformat={\foresttheoremhead},
 	% customizations
 	postheadspace={0pt},
 	headfont=\bfseries\color{RawSienna},
@@ -115,6 +122,7 @@
 \declaretheoremstyle[
 	% same
 	headpunct={\\[3pt]},
+	headformat={\foresttheoremhead},
 	% customizations
 	headfont=\bfseries\sffamily\color{ForestGreen!70!black},
 	bodyfont=\normalfont,
@@ -124,6 +132,7 @@
 \declaretheoremstyle[
 	% same
 	headpunct={\\[3pt]},
+	headformat={\foresttheoremhead},
 	% customizations
 	headfont=\bfseries\sffamily\color{ForestGreen!70!black},
 	bodyfont=\normalfont,
@@ -142,6 +151,7 @@
 }
 \declaretheoremstyle[
 	headfont=\bfseries\sffamily,
+	headformat={\foresttheoremhead},
 	bodyfont=\normalfont\small,
 	spaceabove=0pt,
 	spacebelow=0pt,
@@ -150,6 +160,7 @@
 
 \declaretheoremstyle[
 	headfont=\bfseries\sffamily,
+	headformat={\foresttheoremhead},
 	bodyfont=\normalfont, %\small, %\sffamily,
 	spaceabove=12pt,
 	spacebelow=1pt,

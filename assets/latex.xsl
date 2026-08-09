@@ -96,10 +96,22 @@
       <xsl:text>[{</xsl:text>
       <xsl:apply-templates select="f:frontmatter/f:title" />
       <xsl:if test="f:frontmatter/f:meta[@name='lean']">
-        <xsl:text>\enspace{}</xsl:text>
+        <xsl:text>\allowbreak\hspace{0.35em}</xsl:text>
         <xsl:call-template name="lean-markers">
           <xsl:with-param name="markers" select="f:frontmatter/f:meta[@name='lean']" />
+          <xsl:with-param name="base" select="'https://leanprover-community.github.io/mathlib4_docs/find/\#doc/'" />
         </xsl:call-template>
+      </xsl:if>
+      <xsl:if test="f:frontmatter/f:meta[@name='lean-tauceti']">
+        <xsl:text>\allowbreak\hspace{0.35em}</xsl:text>
+        <xsl:call-template name="lean-markers">
+          <xsl:with-param name="markers" select="f:frontmatter/f:meta[@name='lean-tauceti']" />
+          <xsl:with-param name="base" select="'https://taucetiproject.github.io/TauCeti/docs/find/\#doc/'" />
+          <xsl:with-param name="short" select="true()" />
+        </xsl:call-template>
+      </xsl:if>
+      <xsl:if test="f:frontmatter/f:meta[@name='lean' or @name='lean-tauceti']">
+        <xsl:text>\hspace{0.35em}</xsl:text>
       </xsl:if>
       <xsl:text>}]</xsl:text>
     </xsl:if>
@@ -116,18 +128,49 @@
 
   <xsl:template name="lean-markers">
     <xsl:param name="markers" />
+    <xsl:param name="base" />
+    <xsl:param name="short" select="false()" />
     <xsl:variable name="marker" select="normalize-space(substring-before(concat($markers, ','), ','))" />
-    <xsl:text>\protect\href{https://leanprover-community.github.io/mathlib4_docs/find/\#doc/</xsl:text>
+    <xsl:variable name="display">
+      <xsl:choose>
+        <xsl:when test="$short">
+          <xsl:call-template name="lean-short-name">
+            <xsl:with-param name="name" select="$marker" />
+          </xsl:call-template>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:value-of select="$marker" />
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:variable>
+    <xsl:text>\protect\href{</xsl:text>
+    <xsl:value-of select="$base" />
     <xsl:value-of select="$marker" />
     <xsl:text>}{\protect\leanmarker{\detokenize{</xsl:text>
-    <xsl:value-of select="$marker" />
+    <xsl:value-of select="$display" />
     <xsl:text>}}}</xsl:text>
     <xsl:if test="contains($markers, ',')">
       <xsl:text>\allowbreak\hspace{0.35em}</xsl:text>
       <xsl:call-template name="lean-markers">
         <xsl:with-param name="markers" select="substring-after($markers, ',')" />
+        <xsl:with-param name="base" select="$base" />
+        <xsl:with-param name="short" select="$short" />
       </xsl:call-template>
     </xsl:if>
+  </xsl:template>
+
+  <xsl:template name="lean-short-name">
+    <xsl:param name="name" />
+    <xsl:choose>
+      <xsl:when test="contains($name, '.')">
+        <xsl:call-template name="lean-short-name">
+          <xsl:with-param name="name" select="substring-after($name, '.')" />
+        </xsl:call-template>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:value-of select="$name" />
+      </xsl:otherwise>
+    </xsl:choose>
   </xsl:template>
   <!-- use mdframed end -->
 
