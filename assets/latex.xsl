@@ -261,6 +261,10 @@
         <xsl:text>}</xsl:text>
       </xsl:when>
       <xsl:when test="/f:tree/f:backmatter//f:tree/f:frontmatter[f:taxon/text()='Reference' and f:display-uri/text()=current()/@display-uri]">
+        <!-- AGENT-NOTE: Named theorem-title citations need a continuation line before the hyperlink box. -->
+        <xsl:if test="ancestor::f:title and ancestor::f:tree[parent::f:mainmatter]/f:frontmatter/f:taxon and ../preceding-sibling::node()[normalize-space()]">
+          <xsl:text>\protect\newline</xsl:text>
+        </xsl:if>
         <xsl:text>{\sloppy\cite</xsl:text>
         <xsl:if test="../@tid">
           <xsl:text>[</xsl:text>
