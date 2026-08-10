@@ -95,24 +95,9 @@
     <xsl:if test="f:frontmatter/f:title">
       <xsl:text>[{</xsl:text>
       <xsl:apply-templates select="f:frontmatter/f:title" />
-      <xsl:if test="f:frontmatter/f:meta[@name='lean']">
-        <xsl:text>\allowbreak\hspace{0.35em}</xsl:text>
-        <xsl:call-template name="lean-markers">
-          <xsl:with-param name="markers" select="f:frontmatter/f:meta[@name='lean']" />
-          <xsl:with-param name="base" select="'https://leanprover-community.github.io/mathlib4_docs/find/\#doc/'" />
-        </xsl:call-template>
-      </xsl:if>
-      <xsl:if test="f:frontmatter/f:meta[@name='lean-tauceti']">
-        <xsl:text>\allowbreak\hspace{0.35em}</xsl:text>
-        <xsl:call-template name="lean-markers">
-          <xsl:with-param name="markers" select="f:frontmatter/f:meta[@name='lean-tauceti']" />
-          <xsl:with-param name="base" select="'https://taucetiproject.github.io/TauCeti/docs/find/\#doc/'" />
-          <xsl:with-param name="short" select="true()" />
-        </xsl:call-template>
-      </xsl:if>
-      <xsl:if test="f:frontmatter/f:meta[@name='lean' or @name='lean-tauceti']">
-        <xsl:text>\hspace{0.35em}</xsl:text>
-      </xsl:if>
+      <xsl:call-template name="lean-marker-metadata">
+        <xsl:with-param name="frontmatter" select="f:frontmatter" />
+      </xsl:call-template>
       <xsl:text>}]</xsl:text>
     </xsl:if>
     <xsl:if test="f:frontmatter/f:display-uri[not(contains(text(), '#'))]">
@@ -124,6 +109,47 @@
     <xsl:text>\end{</xsl:text>
     <xsl:apply-templates select="f:frontmatter/f:taxon" />
     <xsl:text>}</xsl:text>
+  </xsl:template>
+
+  <xsl:template name="lean-marker-metadata">
+    <xsl:param name="frontmatter" />
+    <xsl:param name="continuation" select="false()" />
+    <xsl:if test="$frontmatter/f:meta[@name='lean' or @name='lean-tauceti']">
+      <xsl:choose>
+        <xsl:when test="$continuation">
+          <xsl:text>\texorpdfstring{\protect\\[0.15ex]</xsl:text>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:text>\allowbreak\hspace{0.35em}</xsl:text>
+        </xsl:otherwise>
+      </xsl:choose>
+      <xsl:for-each select="$frontmatter/f:meta[@name='lean']">
+        <xsl:if test="position() &gt; 1">
+          <xsl:text>\allowbreak\hspace{0.35em}</xsl:text>
+        </xsl:if>
+        <xsl:call-template name="lean-markers">
+          <xsl:with-param name="markers" select="." />
+          <xsl:with-param name="base" select="'https://leanprover-community.github.io/mathlib4_docs/find/\#doc/'" />
+        </xsl:call-template>
+      </xsl:for-each>
+      <xsl:if test="$frontmatter/f:meta[@name='lean'] and $frontmatter/f:meta[@name='lean-tauceti']">
+        <xsl:text>\allowbreak\hspace{0.35em}</xsl:text>
+      </xsl:if>
+      <xsl:for-each select="$frontmatter/f:meta[@name='lean-tauceti']">
+        <xsl:if test="position() &gt; 1">
+          <xsl:text>\allowbreak\hspace{0.35em}</xsl:text>
+        </xsl:if>
+        <xsl:call-template name="lean-markers">
+          <xsl:with-param name="markers" select="." />
+          <xsl:with-param name="base" select="'https://taucetiproject.github.io/TauCeti/docs/find/\#doc/'" />
+          <xsl:with-param name="short" select="true()" />
+        </xsl:call-template>
+      </xsl:for-each>
+      <xsl:text>\hspace{0.35em}</xsl:text>
+      <xsl:if test="$continuation">
+        <xsl:text>}{} </xsl:text>
+      </xsl:if>
+    </xsl:if>
   </xsl:template>
 
   <xsl:template name="lean-markers">
@@ -336,7 +362,11 @@
     <xsl:text>}</xsl:text>
   </xsl:template>
   
-  <xsl:template match="f:contextual-number" />
+  <xsl:template match="f:contextual-number">
+    <xsl:text>\ref*{</xsl:text>
+    <xsl:value-of select="ancestor::f:link[1]/@display-uri" />
+    <xsl:text>}</xsl:text>
+  </xsl:template>
   <xsl:template match="f:headline" />
   
   <xsl:template match="f:resource">
