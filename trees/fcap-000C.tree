@@ -1,0 +1,35 @@
+\import{spin-macros}
+
+\tag{fcap}
+\tag{spin}
+\tag{clifford}
+
+\taxon{Theorem}
+\title{Paired reflections have a product-square Spin lift}
+\lean/tauceti{TauCeti.CliffordAlgebra.reflection_mul_reflection_mem_range_spinToOrthogonal_of_isSquare}
+
+\p{Let #{R}, #{M}, and #{Q} be as in \ref{fcap-000B}. Suppose #{Q(v)}, #{Q(w)}, and #{2} are invertible. If there is a scalar #{c} such that
+
+##{c^2=Q(v)^{-1}Q(w)^{-1},}
+
+then
+
+##{Q(cv)Q(w)=1.}
+
+Set #{x=\iota(cv)\iota(w)}. The element #{x} is a product of invertible Clifford generators, and
+
+##{x^{*}x
+=\iota(w)\iota(cv)^2\iota(w)
+=Q(cv)Q(w)=1.}
+
+Thus #{x} is a unitary element of the Lipschitz group. It has even degree, so it belongs to the Spin group. Its twisted adjoint action is the ordered product of reflections, and therefore
+
+##{\rho_v\rho_w\in\operatorname{range}(\operatorname{spinToOrthogonal}).}
+}
+
+\subtree{
+\taxon{Proof}
+\p{The displayed square identity gives #{Q(cv)Q(w)=c^2Q(v)Q(w)=1}. Each generator is a Clifford unit and lies in the Lipschitz group, while the star calculation above establishes the unitary condition. The twisted adjoint is multiplicative on Clifford units, and scalar rescaling does not change a reflection. Hence the action of #{x} is #{\rho_{cv}\rho_w=\rho_v\rho_w}; its even degree supplies the remaining Spin condition.}
+}
+
+\p{Equations (2.24)--(2.26) in \citet{I.2, p. 18}{lawson2016spin} give the product descriptions and scaling invariance used here. The product-square condition is sharper than asking for separate normalizations of #{v} and #{w}; it is the formalization's algebraic bridge and is not stated as a separate theorem by Lawson and Michelsohn.}
