@@ -4,12 +4,15 @@
 \tag{clifford}
 \tag{draft}
 
-\refnote{Pairwise orthogonal list transport}{wieser2024formalizing}{
+\taxon{Theorem}
+\title{Pairwise orthogonal list transport \citet{8.4, (8.55)}{wieser2024formalizing}}
+\lean{CliffordAlgebra.equivExterior_list_prod_ι_of_pairwise_isOrtho}
+
 \p{Let #{R} be a commutative ring in which #{2} is invertible, let #{M} be an #{R}-module, and let #{Q} be a quadratic form on #{M}. For a list #{l} of vectors, write
 
 ##{P_Q([])=1, \qquad P_Q(m::l)=\iota_Q(m)P_Q(l),}
 
-and write #{T_Q} for the linear equivalence #{\operatorname{equivExterior}(Q)} from #{\Cl(Q)} to #{\ExteriorAlgebra R M}. In the corresponding zero-form product notation, suppose every earlier vector in #{l} is #{Q}-orthogonal to every later vector. Then
+and write #{T_Q} for the linear equivalence #{\operatorname{equivExterior}(Q)} from #{\Cl(Q)} to #{\bigwedge_R M}. In the corresponding zero-form product notation, suppose every earlier vector in #{l} is #{Q}-orthogonal to every later vector. Then
 
 ##{T_Q(P_Q(l))=P_0(l).}
 
@@ -19,5 +22,4 @@ The order of the list is unchanged. The equality concerns this product under the
 
 \p{The contraction recurrence in \citet{8.4, (8.54)}{wieser2024formalizing}, the change-of-form recurrence in \citet{8.4, (8.55)}{wieser2024formalizing}, and the exterior-equivalence interface in \citet{9.3.5}{wieser2024formalizing} supply the ingredients. The pairwise-list induction is the FCAP formalization bridge; none of those source locations states this list theorem.}
 
-\p{The paired Lean declaration is \lean{CliffordAlgebra.equivExterior_list_prod_ι_of_pairwise_isOrtho}. It uses only Mathlib interfaces and the preceding vanishing-contraction theorem. The scope stops before reordering, finite subsets, ordered blades, coordinate signs, masks, PGA conventions, and executable representations.}
-}
+\p{The paired declaration uses only Mathlib interfaces and the preceding vanishing-contraction theorem. The scope stops before reordering, finite subsets, ordered blades, coordinate signs, masks, PGA conventions, and executable representations.}
