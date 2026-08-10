@@ -4,7 +4,10 @@
 \tag{clifford}
 \tag{draft}
 
-\refnote{Orthogonal pair transport}{wieser2024formalizing}{
+\taxon{Lemma}
+\title{Orthogonal pair transport \citet{8.4}{wieser2024formalizing}}
+\lean{CliffordAlgebra.equivExterior_ι_mul_ι_of_isOrtho}
+
 \p{Let #{R} be a commutative ring in which #{2} is invertible, let #{M} be an #{R}-module, and let #{Q} be a quadratic form on #{M}. Write #{T_Q} for the linear equivalence from #{\Cl(Q)} to the exterior algebra supplied by #{\operatorname{equivExterior}(Q)}. It is a module equivalence, not an algebra equivalence.}
 
 \p{For vectors #{m,n \in M}, the change-of-form calculation for #{T_Q(\iota_Q(m)\iota_Q(n))} has one extra scalar contribution, evaluated by the bilinear form associated to #{-Q}. If #{m} and #{n} are #{Q}-orthogonal, that contribution vanishes. The resulting two-generator calculation is
@@ -15,5 +18,4 @@ This is the first point at which an orthogonality hypothesis changes the transpo
 
 \p{The change-of-form construction is the relevant mathematical background in \citet{8.4}{wieser2024formalizing}, and the Lean construction of #{\operatorname{equivExterior}} is described in \citet{9.3.5}{wieser2024formalizing}. The concrete geometric-product discussion in \citet{2.1.2}{wieser2024formalizing} motivates the role of orthogonality, but does not provide this note's formal interface.}
 
-\p{The paired Lean theorem is \lean{CliffordAlgebra.equivExterior_ι_mul_ι_of_isOrtho}. Its proof unfolds the two-generator change-of-form theorem and applies the exact orthogonality equality for the associated form. No basis choice, finite ordered product, blade-product formula, sign convention, or executable encoding is used here. Those boundaries remain separate work.}
-}
+\p{The paired theorem unfolds the two-generator change-of-form identity and applies the exact orthogonality equality for the associated form. No basis choice, finite ordered product, blade-product formula, sign convention, or executable encoding is used here. Those boundaries remain separate work.}
