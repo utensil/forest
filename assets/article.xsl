@@ -57,50 +57,59 @@
 
   <xsl:template match="/f:tree/f:mainmatter/f:tree[not(f:frontmatter/f:taxon) and not(@numbered='false')]/f:frontmatter/f:title">
     <xsl:text>\section{</xsl:text>
-    <xsl:apply-templates />
+    <xsl:call-template name="section-title" />
     <xsl:text>}</xsl:text>
   </xsl:template>
 
   <xsl:template match="/f:tree/f:mainmatter/f:tree/f:mainmatter/f:tree[not(f:frontmatter/f:taxon) and not(@numbered='false')]/f:frontmatter/f:title">
     <xsl:text>\subsection{</xsl:text>
-    <xsl:apply-templates />
+    <xsl:call-template name="section-title" />
     <xsl:text>}</xsl:text>
   </xsl:template>
 
   <xsl:template match="/f:tree/f:mainmatter/f:tree/f:mainmatter/f:tree/f:mainmatter/f:tree[not(f:frontmatter/f:taxon) and not(@numbered='false')]/f:frontmatter/f:title">
     <xsl:text>\subsubsection{</xsl:text>
-    <xsl:apply-templates />
+    <xsl:call-template name="section-title" />
     <xsl:text>}</xsl:text>
   </xsl:template>
 
   <xsl:template match="/f:tree/f:mainmatter/f:tree/f:mainmatter/f:tree/f:mainmatter/f:tree/f:mainmatter/f:tree[not(f:frontmatter/f:taxon) and not(@numbered='false')]/f:frontmatter/f:title">
     <xsl:text>\subsubsubsection{</xsl:text>
-    <xsl:apply-templates />
+    <xsl:call-template name="section-title" />
     <xsl:text>}</xsl:text>
   </xsl:template>
 
   <xsl:template match="/f:tree/f:mainmatter/f:tree[not(f:frontmatter/f:taxon) and (@numbered='false')]/f:frontmatter/f:title">
     <xsl:text>\section*{</xsl:text>
-    <xsl:apply-templates />
+    <xsl:call-template name="section-title" />
     <xsl:text>}</xsl:text>
   </xsl:template>
 
   <xsl:template match="/f:tree/f:mainmatter/f:tree/f:mainmatter/f:tree[not(f:frontmatter/f:taxon) and (@numbered='false')]/f:frontmatter/f:title">
     <xsl:text>\subsection*{</xsl:text>
-    <xsl:apply-templates />
+    <xsl:call-template name="section-title" />
     <xsl:text>}</xsl:text>
   </xsl:template>
 
   <xsl:template match="/f:tree/f:mainmatter/f:tree/f:mainmatter/f:tree/f:mainmatter/f:tree[not(f:frontmatter/f:taxon) and (@numbered='false')]/f:frontmatter/f:title">
     <xsl:text>\subsubsection*{</xsl:text>
-    <xsl:apply-templates />
+    <xsl:call-template name="section-title" />
     <xsl:text>}</xsl:text>
   </xsl:template>
 
   <xsl:template match="/f:tree/f:mainmatter/f:tree/f:mainmatter/f:tree/f:mainmatter/f:tree/f:mainmatter/f:tree[not(f:frontmatter/f:taxon) and (@numbered='false')]/f:frontmatter/f:title">
     <xsl:text>\subsubsubsection*{</xsl:text>
-    <xsl:apply-templates />
+    <xsl:call-template name="section-title" />
     <xsl:text>}</xsl:text>
+  </xsl:template>
+
+  <!-- AGENT-NOTE: Untyped note trees still carry Lean metadata and need a PDF-visible marker row. -->
+  <xsl:template name="section-title">
+    <xsl:apply-templates />
+    <xsl:call-template name="lean-marker-metadata">
+      <xsl:with-param name="frontmatter" select=".." />
+      <xsl:with-param name="continuation" select="true()" />
+    </xsl:call-template>
   </xsl:template>
 
 </xsl:stylesheet>
