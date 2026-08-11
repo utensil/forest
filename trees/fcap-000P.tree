@@ -1,0 +1,29 @@
+\import{spin-macros}
+
+\tag{fcap}
+\tag{spin}
+\tag{clifford}
+
+\taxon{Lemma}
+\title{A bivector acts by an infinitesimal rotation \citet{Section 2.2.10, Theorem 2.1, pp. 39--40}{meinrenken2013clifford}}
+\lean/tauceti{TauCeti.CliffordAlgebra.bivector_lie_ι}
+
+\p{For #{u,v,x\in M}, the commutator of the bivector with a Clifford generator is
+
+##{[\beta_Q(u,v),\iota(x)]
+=\iota\left(B_Q(v,x)u-B_Q(u,x)v\right).}
+
+The endomorphism
+
+##{A_{u\wedge v}(x)=B_Q(v,x)u-B_Q(u,x)v}
+
+is skew-adjoint for #{B_Q}, since
+
+##{B_Q(A_{u\wedge v}x,y)+B_Q(x,A_{u\wedge v}y)=0.}
+
+Thus commutation by a degree-two Clifford element preserves the generating module and realizes the elementary infinitesimal orthogonal transformation attached to #{u\wedge v}.}
+
+\subtree{
+\taxon{Proof}
+\p{Expand the half-commutator and move #{\iota(x)} past #{\iota(u)} and #{\iota(v)} using the Clifford relation. The cubic terms cancel; the two polar terms combine to the displayed generator. Symmetry of #{B_Q} then makes the skew-adjointness equation cancel in pairs.}
+}
