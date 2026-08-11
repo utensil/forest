@@ -1,0 +1,22 @@
+\import{spin-macros}
+\meta{agent-authored}{true}
+
+\tag{fcap}
+\tag{spin}
+\tag{clifford}
+
+\taxon{Convention}
+\title{Real signature and Clifford signs \citet{II.2.9, pp. 65--66}{chevalley1954algebraic}}
+\lean/tauceti{TauCeti.realCliffordForm,TauCeti.realCliffordForm_apply}
+
+\p{For #{p,q\ge0}, put
+
+##{Q_{p,q}(x)=\sum_{i<p}x_i^2-\sum_{p\le i<p+q}x_i^2}
+
+on #{\mathbb{R}^{p+q}}, and write #{\Cl_{p,q}} for #{\Cl(Q_{p,q})}. Thus the first #{p} Clifford generators square to #{+1}, and the last #{q} square to #{-1}. This agrees with Chevalley's convention for the quadratic form and with his positive/negative inertia indices.}
+
+\p{Lawson and Michelsohn use the same signature #{q_{r,s}} but impose #{v^2=-q_{r,s}(v)1} \citet{I.3, Proposition 3.1, p. 21}{lawson2016spin}. Therefore the algebras are related by the exact index swap
+
+##{\Cl_{p,q}=\Cl^{\mathrm{Lawson}}_{q,p}.}
+
+The recurrence below adds one index of each sign, so it is invariant under this swap.}

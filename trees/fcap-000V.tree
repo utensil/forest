@@ -1,20 +1,21 @@
 \import{spin-macros}
+\meta{agent-authored}{true}
 
 \tag{fcap}
 \tag{spin}
 \tag{clifford}
 
 \taxon{Lemma}
-\title{One reflection enlarges the fixed subspace \citet{Section 10, pp. 10--12}{cartan1981theory}}
-\lean/tauceti{TauCeti.CliffordAlgebra.exists_mem_range_pinToOrthogonal_mul_eqOn_sup_span_singleton}
+\title{Fixed-subspace correction by reflections \citet{Section 10, pp. 10--12}{cartan1981theory}}
+\lean/tauceti{TauCeti.QuadraticMap.exists_mem_subgroup_mul_eqOn_sup_span_singleton_of_reflection_mem}
 
-\p{Let #{K} be a separably closed field of characteristic different from #{2}, let #{Q} be a quadratic form on a #{K}-vector space #{V}, and let #{g\in O(V,Q)} fix a subspace #{W} pointwise. Suppose #{x\in W^{\perp}} and #{Q(x)\ne0}. Then there is an orthogonal transformation #{r} in the image of the Pin action such that
+\p{Let #{K} be a field of characteristic different from #{2}, let #{Q} be a quadratic form on a #{K}-vector space #{V}, and let #{H\le O(V,Q)} contain every reflection in a nonisotropic vector. Suppose #{g\in O(V,Q)} fixes a subspace #{W} pointwise and #{x\in W^{\perp}} has #{Q(x)\ne0}. Then there is an element #{r\in H} such that
 
 ##{rg\vert_{W+Kx}=\operatorname{id}.}
 
-The correction leaves the previously fixed space untouched and fixes one additional nonisotropic direction.}
+The correction leaves the previously fixed space untouched and fixes one additional nonisotropic direction. It is either one reflection or a product of two reflections.}
 
 \subtree{
 \taxon{Proof}
-\p{Compare #{x} with #{g(x)}. When their difference is nonisotropic, reflection in that difference carries #{g(x)} to #{x}; because the difference is orthogonal to #{W}, the reflection fixes #{W}. The remaining case is handled by the complementary reflection used in the standard Cartan--Dieudonne step. Over a separably closed field the required reflection normalization has a square root, so \ref{fcap-000B} places the correction in the Pin image.}
+\p{Compare #{x} with #{g(x)}. When #{g(x)-x} is nonisotropic, reflection in that difference carries #{g(x)} to #{x}; because the difference is orthogonal to #{W}, the reflection fixes #{W}. In the exceptional case #{g(x)+x} is nonisotropic: reflection in this sum carries #{g(x)} to #{-x}, and reflection in #{x} supplies the second factor. Both factors fix #{W}, so their product gives the required correction.}
 }
