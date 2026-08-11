@@ -232,6 +232,13 @@
     <xsl:apply-templates />
     <!-- <xsl:text>}</xsl:text> -->
   </xsl:template>
+
+  <!-- AGENT-NOTE: Inline declaration links need paragraph-level TeX flexibility to avoid overfull boxes. -->
+  <xsl:template match="html:p[descendant::html:span[@class='lean-ref']]">
+    <xsl:text>\par{}\begingroup\sloppy{}</xsl:text>
+    <xsl:apply-templates />
+    <xsl:text>\par\endgroup</xsl:text>
+  </xsl:template>
   
   <xsl:template match="html:strong">
     <xsl:text>\textbf{</xsl:text>
@@ -360,6 +367,15 @@
     <xsl:text>}{</xsl:text>
     <xsl:apply-templates />
     <xsl:text>}</xsl:text>
+  </xsl:template>
+
+  <!-- AGENT-NOTE: Inline Lean references need URL-style breakpoints while preserving one clickable link. -->
+  <xsl:template match="html:span[@class='lean-ref']">
+    <xsl:text>\href{</xsl:text>
+    <xsl:value-of select="f:link/@href" />
+    <xsl:text>}{\leanref{</xsl:text>
+    <xsl:value-of select="f:link/html:code" />
+    <xsl:text>}}</xsl:text>
   </xsl:template>
   
   <xsl:template match="f:contextual-number">
