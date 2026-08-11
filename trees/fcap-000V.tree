@@ -1,0 +1,20 @@
+\import{spin-macros}
+
+\tag{fcap}
+\tag{spin}
+\tag{clifford}
+
+\taxon{Lemma}
+\title{One reflection enlarges the fixed subspace \citet{Section 10, pp. 10--12}{cartan1981theory}}
+\lean/tauceti{TauCeti.CliffordAlgebra.exists_mem_range_pinToOrthogonal_mul_eqOn_sup_span_singleton}
+
+\p{Let #{K} be a separably closed field of characteristic different from #{2}, let #{Q} be a quadratic form on a #{K}-vector space #{V}, and let #{g\in O(V,Q)} fix a subspace #{W} pointwise. Suppose #{x\in W^{\perp}} and #{Q(x)\ne0}. Then there is an orthogonal transformation #{r} in the image of the Pin action such that
+
+##{rg\vert_{W+Kx}=\operatorname{id}.}
+
+The correction leaves the previously fixed space untouched and fixes one additional nonisotropic direction.}
+
+\subtree{
+\taxon{Proof}
+\p{Compare #{x} with #{g(x)}. When their difference is nonisotropic, reflection in that difference carries #{g(x)} to #{x}; because the difference is orthogonal to #{W}, the reflection fixes #{W}. The remaining case is handled by the complementary reflection used in the standard Cartan--Dieudonne step. Over a separably closed field the required reflection normalization has a square root, so \ref{fcap-000B} places the correction in the Pin image.}
+}
