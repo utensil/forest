@@ -1,0 +1,27 @@
+\import{spin-macros}
+
+\tag{fcap}
+\tag{spin}
+\tag{clifford}
+
+\taxon{Convention}
+\title{Bivector normalizations \citet{Section 2.2.5, Proposition 2.5, p. 33}{meinrenken2013clifford}}
+\lean/tauceti{TauCeti.CliffordAlgebra.bivector_def}
+\lean/tauceti{TauCeti.CliffordAlgebra.bivector_lie_ι}
+
+\p{Meinrenken starts with a symmetric bilinear form #{B} and the relation
+
+##{uv+vu=2B(u,v)1.}
+
+For the associated quadratic form #{Q(v)=B(v,v)}, the polar form used here is #{B_Q=2B}. Therefore Meinrenken's quantization formula and the half-commutator agree:
+
+##{q(u\wedge v)=uv-B(u,v)1
+=\frac12(uv-vu)=:\beta(u,v).}
+
+The induced action on a vector is
+
+##{[\beta(u,v),x]
+=B_Q(v,x)u-B_Q(u,x)v
+=2\bigl(B(v,x)u-B(u,x)v\bigr).}
+
+This is Meinrenken's formula #{-2\iota_{B(x,-)}(u\wedge v)} and Kostant's formula #{-2\iota_x(u\wedge v)} in the corresponding contraction convention \citet{Section 2.4, (12) and Theorem 8, pp. 283, 286}{kostant1997clifford}. The factor of two belongs to the passage from #{B} to the unhalved polar form #{B_Q}; it is not an additional rescaling of #{\beta}.}
