@@ -1,0 +1,28 @@
+\import{spin-macros}
+\meta{agent-authored}{true}
+
+\tag{fcap}
+\tag{spin}
+\tag{clifford}
+
+\taxon{Lemma}
+\title{Finite hyperbolic reduction \citet{II.2.9, pp. 65--66}{chevalley1954algebraic}}
+\lean/tauceti{TauCeti.realCliffordBottIterEquiv,TauCeti.realCliffordSignatureReductionEquiv}
+
+\p{Iterating \ref{fcap-0013} #{n} times gives
+
+##{\Cl_{p+n,q+n}\simeq
+\Cl_{p,q}\otimes_{\mathbb{R}}M_{2^n}(\mathbb{R}).}
+
+Taking #{n=\min(p,q)} removes the common positive and negative part:
+
+##{\Cl_{p,q}\simeq
+\Cl_{p-n,q-n}\otimes_{\mathbb{R}}M_{2^n}(\mathbb{R}),
+\qquad n=\min(p,q).}
+
+Thus if #{p\le q}, the residual algebra is #{\Cl_{0,q-p}}; if #{q\le p}, it is #{\Cl_{p-q,0}}. The matrix factors combine through the Kronecker equivalence
+
+##{M_{2^a}(\mathbb{R})\otimes M_{2^b}(\mathbb{R})
+\simeq M_{2^{a+b}}(\mathbb{R}).}
+
+Chevalley describes the same reduction by splitting off a maximal hyperbolic part and a definite remainder.}
