@@ -1,0 +1,20 @@
+\import{spin-macros}
+
+\tag{fcap}
+\tag{spin}
+\tag{clifford}
+
+\taxon{Theorem}
+\title{Cartan--Dieudonne generation \citet{I.2, Theorem 2.7, p. 17}{lawson2016spin}}
+\lean/tauceti{TauCeti.QuadraticMap.subgroup_eq_top_of_reflection_mem}
+
+\p{Let #{K} be a field of characteristic different from #{2}, let #{V} be finite-dimensional, and let #{Q} be nondegenerate. Every orthogonal transformation is a product of at most #{\dim V} reflections in nonisotropic vectors. Equivalently, if a subgroup #{H\le O(V,Q)} contains every such reflection, then
+
+##{H=O(V,Q).}
+
+The parity of the number of reflections records the determinant.}
+
+\subtree{
+\taxon{Proof}
+\p{Begin with the zero fixed subspace. If the current fixed subspace is not all of #{V}, nondegeneracy supplies a nonisotropic vector in its orthogonal complement. The correction step of \ref{fcap-000V} increases the fixed-space dimension by one. Finite-dimensional induction eventually makes the corrected product the identity, expressing the original transformation as a product of reflections. Cartan gives this fixed-vector induction, including the isotropic-difference case, in \citet{Section 10, pp. 10--12}{cartan1981theory}.}
+}
