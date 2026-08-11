@@ -650,13 +650,11 @@ nav#toc li.active {
 } */
 
 .meta-lean {
-    display: block;
+    display: inline-block;
     float: right;
-    height: 4em;
-    width: 4vw;
     cursor: pointer;
     position: relative;
-    z-index: 1;
+    z-index: 2;
 }
 
 /* clearfix hack */
@@ -722,22 +720,47 @@ nav#toc li.active {
 }
 
 .meta-lean-list {
+    box-sizing: border-box;
     display: none;
     visibility: hidden;
+    width: max-content;
+    max-width: min(42rem, calc(100vw - 4rem));
+    margin-left: auto;
+    padding: 0.5rem;
+    border: 1px solid var(--uts-text-gentle);
+    border-radius: 5px;
+    background: var(--uts-background);
+    box-shadow: 0 0.25rem 0.75rem rgb(0 0 0 / 15%);
 }
 
-.meta-lean:hover .meta-lean-list {
+.meta-lean:hover .meta-lean-list,
+.meta-lean:focus-within .meta-lean-list {
     display: block;
     visibility: visible;
 }
 
-.meta-lean-list:hover {
+.meta-lean-list a {
     display: block;
-    visibility: visible;
+    float: none;
+    max-width: 100%;
+    margin: 0;
+    overflow-wrap: anywhere;
+    word-break: normal;
 }
 
-.meta-lean:hover .meta-lean-symbol {
-    visibility: hidden;
+.meta-lean-list a + a {
+    margin-top: 0.5rem;
+}
+
+.meta-lean:hover .meta-lean-symbol,
+.meta-lean:focus-within .meta-lean-symbol {
+    display: none;
+}
+
+/* AGENT-NOTE: Keep the expanded marker list in flow and clear card content below it. */
+details:has(> summary .meta-lean:hover) > summary + *,
+details:has(> summary .meta-lean:focus-within) > summary + * {
+    clear: both;
 }
 
 .related {

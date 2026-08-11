@@ -78,7 +78,7 @@
     </xsl:template>
 
     <xsl:template match="fr:meta[@name='lean']">
-        <span class="meta-lean">
+        <span class="meta-lean" tabindex="0" aria-label="Lean formalization links">
             <div class="meta-lean-list">
                 <xsl:call-template name="splitlean">
                     <xsl:with-param name="pText" select="." />
@@ -92,7 +92,7 @@
     </xsl:template>
 
     <xsl:template match="fr:meta[@name='lean-tauceti']">
-        <span class="meta-lean">
+        <span class="meta-lean" tabindex="0" aria-label="Lean formalization links">
             <div class="meta-lean-list">
                 <xsl:call-template name="splitlean">
                     <xsl:with-param name="pText" select="." />
