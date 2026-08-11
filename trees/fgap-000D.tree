@@ -1,4 +1,6 @@
-\import{macros}
+\import{spin-macros}
+
+\meta{agent-authored}{true}
 
 \taxon{Remark}
 \title{concrete and abstract factor models}
@@ -27,8 +29,9 @@ The action must then be transported through these isomorphisms and proved
 equivariant. This keeps later abstract calculations connected to the
 quaternion realization that supplied them.}
 
-\p{In Lean, \code{QuaternionGroup 2} models the abstract quaternion factor,
-and \code{Multiplicative (ZMod 3)} models the abstract cyclic factor. The
+\p{In Lean, \leanref{QuaternionGroup} at parameter #{2} models the abstract
+quaternion factor, and \leanref{Multiplicative} applied to \leanref{ZMod} at
+modulus #{3} models the abstract cyclic factor. The
 concrete subgroups remain the main computational model. Explicit isomorphisms
 recover the abstract interface from that model, and equivariance connects the
 transported action to quaternion conjugation. Formalization therefore keeps
