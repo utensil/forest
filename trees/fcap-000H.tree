@@ -1,0 +1,26 @@
+\import{spin-macros}
+
+\tag{fcap}
+\tag{spin}
+\tag{clifford}
+
+\taxon{Lemma}
+\title{The leading symbol is exterior \citet{II.1.6, pp. 41--42}{chevalley1954algebraic}}
+\lean/tauceti{TauCeti.CliffordAlgebra.changeForm_prod_map_ι_sub_prod_map_ι_mem_filtration}
+\lean/tauceti{TauCeti.CliffordAlgebra.filtrationLeadingTerm_apply_ιMulti}
+
+\p{Assume that #{2} is invertible in #{R}. For vectors #{v_1,\ldots,v_n\in M}, the Clifford relation replaces an interchange by its alternating term plus a scalar contraction. Each contraction removes two generators. Consequently
+
+##{\iota(v_1)\cdots\iota(v_n)
+\equiv v_1\wedge\cdots\wedge v_n\pmod{F_{n-2}},}
+
+where the right-hand side is read through the zero-form exterior model. In particular, the class of the Clifford word in #{F_n/F_{n-1}} depends alternately on the vectors and is the leading exterior symbol.}
+
+\subtree{
+\taxon{Proof}
+\p{Move a generator through the word using
+
+##{\iota(u)\iota(v)+\iota(v)\iota(u)=B_Q(u,v)1.}
+
+The swapped word contributes the alternating sign, whereas the polar term has two fewer generators. Iterating separates the fully alternating word from terms in #{F_{n-2}}. Equivalently, changing from #{Q} to the zero quadratic form changes a word only below its leading filtration degree.}
+}
