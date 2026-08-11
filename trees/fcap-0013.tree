@@ -1,0 +1,47 @@
+\import{spin-macros}
+\meta{agent-authored}{true}
+
+\tag{fcap}
+\tag{spin}
+\tag{clifford}
+
+\taxon{Theorem}
+\title{The hyperbolic matrix recurrence \citet{I.4, Theorem 4.1, (4.3), pp. 25--26}{lawson2016spin}}
+\lean/tauceti{TauCeti.CliffordAlgebra.hyperbolicEquivTensor,TauCeti.realCliffordBottEquiv_ι}
+
+\p{For all #{p,q\ge0}, adjoining a hyperbolic plane gives an algebra equivalence
+
+##{\Cl_{p+1,q+1}\simeq_{\mathbb{R}\text{-alg}}
+\Cl_{p,q}\otimes_{\mathbb{R}}M_2(\mathbb{R}).}
+
+More generally, for any real quadratic module #{(M,Q)},
+
+##{\Cl(Q\perp Q_{1,1})\simeq
+\Cl(Q)\otimes_{\mathbb{R}}M_2(\mathbb{R}).}
+
+With
+
+##{\sigma_x=\begin{pmatrix}0&1\\1&0\end{pmatrix},}
+
+the equivalence sends a generator #{(m,(s,t))} to
+
+##{\iota_Q(m)\otimes\sigma_x
++1\otimes\begin{pmatrix}s&t\\-t&-s\end{pmatrix}.}
+
+The first summand squares to #{Q(m)}, the second to #{s^2-t^2}, and the two anticommute. The universal property therefore gives the forward algebra map. In the other direction, the original Clifford algebra and the matrix algebra act through commuting algebra maps on the hyperbolic Clifford algebra; their tensor lift is inverse to the forward map. The two composites are checked on Clifford generators and pure tensors, so no finite-dimensional hypothesis is used. Chevalley's split-matrix theorem and orthogonal-sum calculation supply the same structural mechanism \citet{II.2.1 and II.2.5, pp. 42--46}{chevalley1954algebraic}.}
+
+\p{Writing the displayed generator formula as #{f}, its universal extension is summarized by the commuting diagram
+
+\tikzfig{
+\begin{tikzcd}[column sep=large]
+M\oplus\mathbb{R}^{1,1}
+  \arrow[r,"\iota_{Q\perp Q_{1,1}}"]
+  \arrow[d,"f"']
+& \Cl(Q\perp Q_{1,1})
+  \arrow[d,"\Phi"] \\
+\Cl(Q)\otimes M_2(\mathbb{R})
+  \arrow[r,equal]
+& \Cl(Q)\otimes M_2(\mathbb{R}).
+\end{tikzcd}
+}
+}
