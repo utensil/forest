@@ -34,7 +34,7 @@
 
 \def\href[url][t]{[\t](\url)}
 \def\Mathlib{#{\textsf{Mathlib}}}
-\def\MathlibDoc[x]{[\x](https://leanprover-community.github.io/mathlib4_docs/find/#docs/\x)}
+\def\MathlibDoc[x]{[\x](https://leanprover-community.github.io/mathlib4_docs/find/#doc/\x)}
 
 \def\bu{\bullet}
 \def\ii{\item}
@@ -46,10 +46,13 @@
 \def\label[x]{}
 \def\leanok{}
 % AGENT-NOTE: Keep provider meta names aligned with the web and PDF XSL templates.
+% AGENT-NOTE: lean variants are card metadata; leanref variants are inline declaration links.
 % https://leanprover-community.github.io/mathlib4_docs/find/#doc/
 \def\lean[x]{\meta{lean}{\x}}
+\def\leanref[x]{\<html:span>[class]{lean-ref}{[\code{\x}](https://leanprover-community.github.io/mathlib4_docs/find/#doc/\x)}}
 % https://taucetiproject.github.io/TauCeti/docs/find/#doc/
 \def\lean/tauceti[x]{\meta{lean-tauceti}{\x}}
+\def\leanref/tauceti[x]{\<html:span>[class]{lean-ref}{[\code{\x}](https://taucetiproject.github.io/TauCeti/docs/find/#doc/\x)}}
 \def\uses[x]{}
 
 \def\cite[x]{\citek{\x}}

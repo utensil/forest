@@ -2,6 +2,16 @@
 \usepackage{fontspec}
 \newfontfamily\codefont{Noto Sans Mono}[Scale=MatchLowercase]
 
+% AGENT-NOTE: Lean references need Unicode-safe monospace text with URL-style line breaks.
+\DeclareRobustCommand{\leanref}[1]{%
+  \begingroup
+  \def\UrlFont{\codefont\footnotesize}%
+  \def\UrlBreakPenalty{0}%
+  \def\UrlBigBreakPenalty{0}%
+  \nolinkurl{#1}%
+  \endgroup
+}
+
 \definecolor{leanmarkerborder}{HTML}{7A7A72}
 \definecolor{leanmarkerbackground}{HTML}{F7F7F4}
 \DeclareRobustCommand{\leanmarker}[1]{%
