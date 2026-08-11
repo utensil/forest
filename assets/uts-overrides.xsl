@@ -158,6 +158,16 @@
                 <a id="langblock-toggle" class="link-button" href="javascript:void(0)"
                     title="Show hidden languages">🌎</a>
             </xsl:if>
+            <!-- AGENT-NOTE: This provenance mark is intentionally web-only; PDF output stays unchanged. -->
+            <xsl:if test="../fr:meta[@name='agent-authored'][not(normalize-space(.)='false')]">
+                <span class="agent-authored-watermark" role="note" aria-label="Agent authored"
+                    title="Agent authored">
+                    <span class="agent-authored-watermark-label" aria-hidden="true">
+                        <span>AGENT</span>
+                        <span>AUTHORED</span>
+                    </span>
+                </span>
+            </xsl:if>
         </div>
         <!-- uts-end -->
     </xsl:template>

@@ -139,6 +139,79 @@ body {
     font-family: var(--muse);
 }
 
+/* AGENT-NOTE: Keep the provenance watermark subtle, legible, and clear of note text at all widths. */
+section:has(> details > summary > header .agent-authored-watermark) {
+    position: relative;
+}
+
+section:has(> details > summary > header .agent-authored-watermark)
+    > details
+    > summary
+    > header {
+    min-height: 4.75rem;
+    padding-inline-end: 6rem;
+}
+
+.agent-authored-watermark {
+    position: absolute;
+    inset-block-start: 0;
+    inset-inline-end: 0;
+    z-index: 1;
+    display: block;
+    width: 7.5rem;
+    height: 7.5rem;
+    overflow: hidden;
+    clip-path: polygon(100% 0, 0 0, 100% 100%);
+    color: color-mix(in srgb, var(--uts-text) 48%, transparent);
+    background: color-mix(in srgb, var(--uts-text) 9%, transparent);
+    pointer-events: none;
+    user-select: none;
+    opacity: 0.62;
+}
+
+.agent-authored-watermark-label {
+    position: absolute;
+    inset-block-start: 1.45rem;
+    inset-inline-end: -0.05rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.28em;
+    align-items: center;
+    width: 4.25rem;
+    font-family: var(--sans);
+    font-size: 0.66rem;
+    font-style: italic;
+    font-weight: 650;
+    line-height: 0.9;
+    letter-spacing: 0.14em;
+    text-align: center;
+    white-space: nowrap;
+    transform: rotate(45deg);
+    transform-origin: center;
+}
+
+@media only screen and (max-width: 450px) {
+    section:has(> details > summary > header .agent-authored-watermark)
+        > details
+        > summary
+        > header {
+        min-height: 4rem;
+        padding-inline-end: 4.5rem;
+    }
+
+    .agent-authored-watermark {
+        width: 6rem;
+        height: 6rem;
+    }
+
+    .agent-authored-watermark-label {
+        inset-block-start: 1.12rem;
+        inset-inline-end: -0.04rem;
+        width: 3.6rem;
+        font-size: 0.54rem;
+    }
+}
+
 :root[data-applied-font="serif"] body {
     font-family: var(--serif);
 }
