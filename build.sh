@@ -224,6 +224,8 @@ function lize {
     show_lize_result hopf-0001
     ./lize.sh ca-0001 # >/dev/null # 2>&1
     show_lize_result ca-0001
+    ./lize.sh fcap-0001 # >/dev/null # 2>&1
+    show_lize_result fcap-0001
     ./lize.sh tt-0001 # >/dev/null # 2>&1
     show_lize_result tt-0001
     ./lize.sh uts-000C # >/dev/null # 2>&1
