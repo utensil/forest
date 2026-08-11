@@ -1,0 +1,24 @@
+\import{spin-macros}
+
+\tag{fcap}
+\tag{spin}
+\tag{clifford}
+
+\taxon{Definition}
+\title{Word-length filtration \citet{II.1.2 and II.1.6, pp. 40--42}{chevalley1954algebraic}}
+\lean/tauceti{TauCeti.CliffordAlgebra.filtration}
+\lean/tauceti{TauCeti.CliffordAlgebra.filtration_mul}
+
+\p{Let #{R} be a commutative ring, let #{M} be an #{R}-module, and let #{Q:M\to R} be a quadratic form. In the Clifford algebra #{\Cl(Q)}, define #{F_n\Cl(Q)} to be the #{R}-submodule spanned by all products of at most #{n} generators:
+
+##{F_n\Cl(Q)=\operatorname{span}_R\left\{\iota(v_1)\cdots\iota(v_r):0\le r\le n\right\}.}
+
+The empty product gives #{F_0\Cl(Q)=R1}. Concatenating words makes the filtration multiplicative; in fact,
+
+##{F_i\Cl(Q)\,F_j\Cl(Q)=F_{i+j}\Cl(Q).}
+
+Thus multiplication descends to the successive quotients and makes
+
+##{\operatorname{gr}_F\Cl(Q)=\bigoplus_{n\ge0}F_n\Cl(Q)/F_{n-1}\Cl(Q)}
+
+a graded algebra, with #{F_{-1}\Cl(Q)=0}.}
