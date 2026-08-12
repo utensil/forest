@@ -371,7 +371,17 @@
         <xsl:text>\href{</xsl:text>
         <xsl:value-of select="@uri" />
         <xsl:text>}{</xsl:text>
-        <xsl:apply-templates />
+        <xsl:choose>
+          <!-- A contextual number is meaningful only when its target is in this PDF. -->
+          <xsl:when test="f:contextual-number">
+            <xsl:text>[</xsl:text>
+            <xsl:value-of select="@display-uri" />
+            <xsl:text>]</xsl:text>
+          </xsl:when>
+          <xsl:otherwise>
+            <xsl:apply-templates />
+          </xsl:otherwise>
+        </xsl:choose>
         <xsl:text>}</xsl:text>
       </xsl:otherwise>
     </xsl:choose>
