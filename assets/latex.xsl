@@ -187,7 +187,7 @@
   <xsl:template name="lean-marker-metadata">
     <xsl:param name="frontmatter" />
     <xsl:param name="continuation" select="false()" />
-    <xsl:if test="$frontmatter/f:meta[@name='lean' or @name='lean-tauceti']">
+    <xsl:if test="$frontmatter/f:meta[@name='lean' or @name='lean-tauceti' or @name='lean-connes']">
       <xsl:choose>
         <xsl:when test="$continuation">
           <xsl:text>\texorpdfstring{\protect\\[0.15ex]</xsl:text>
@@ -205,7 +205,7 @@
           <xsl:with-param name="base" select="'https://leanprover-community.github.io/mathlib4_docs/find/\#doc/'" />
         </xsl:call-template>
       </xsl:for-each>
-      <xsl:if test="$frontmatter/f:meta[@name='lean'] and $frontmatter/f:meta[@name='lean-tauceti']">
+      <xsl:if test="$frontmatter/f:meta[@name='lean'] and ($frontmatter/f:meta[@name='lean-tauceti'] or $frontmatter/f:meta[@name='lean-connes'])">
         <xsl:text>\allowbreak\hspace{0.35em}</xsl:text>
       </xsl:if>
       <xsl:for-each select="$frontmatter/f:meta[@name='lean-tauceti']">
@@ -215,6 +215,20 @@
         <xsl:call-template name="lean-markers">
           <xsl:with-param name="markers" select="." />
           <xsl:with-param name="base" select="'https://taucetiproject.github.io/TauCeti/docs/find/\#doc/'" />
+          <xsl:with-param name="short" select="true()" />
+        </xsl:call-template>
+      </xsl:for-each>
+      <xsl:if test="$frontmatter/f:meta[@name='lean-connes'] and ($frontmatter/f:meta[@name='lean'] or $frontmatter/f:meta[@name='lean-tauceti'])">
+        <xsl:text>\allowbreak\hspace{0.35em}</xsl:text>
+      </xsl:if>
+      <xsl:for-each select="$frontmatter/f:meta[@name='lean-connes']">
+        <xsl:if test="position() &gt; 1">
+          <xsl:text>\allowbreak\hspace{0.35em}</xsl:text>
+        </xsl:if>
+        <xsl:call-template name="lean-markers">
+          <xsl:with-param name="markers" select="." />
+          <xsl:with-param name="base" select="'https://github.com/utensil/connes-rigidity/search?q='" />
+          <xsl:with-param name="suffix" select="'&amp;type=code'" />
           <xsl:with-param name="short" select="true()" />
         </xsl:call-template>
       </xsl:for-each>
@@ -228,6 +242,7 @@
   <xsl:template name="lean-markers">
     <xsl:param name="markers" />
     <xsl:param name="base" />
+    <xsl:param name="suffix" select="''" />
     <xsl:param name="short" select="false()" />
     <xsl:variable name="marker" select="normalize-space(substring-before(concat($markers, ','), ','))" />
     <xsl:variable name="display">
@@ -245,6 +260,7 @@
     <xsl:text>\protect\href{</xsl:text>
     <xsl:value-of select="$base" />
     <xsl:value-of select="$marker" />
+    <xsl:value-of select="$suffix" />
     <xsl:text>}{\protect\leanmarker{\detokenize{</xsl:text>
     <xsl:value-of select="$display" />
     <xsl:text>}}}</xsl:text>
@@ -253,6 +269,7 @@
       <xsl:call-template name="lean-markers">
         <xsl:with-param name="markers" select="substring-after($markers, ',')" />
         <xsl:with-param name="base" select="$base" />
+        <xsl:with-param name="suffix" select="$suffix" />
         <xsl:with-param name="short" select="$short" />
       </xsl:call-template>
     </xsl:if>
