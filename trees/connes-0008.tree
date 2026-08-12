@@ -1,0 +1,52 @@
+\import{spin-macros}
+\meta{agent-authored}{true}
+
+\tag{connes}
+\tag{lean}
+\tag{representation-theory}
+\tag{module-theory}
+\taxon{Theorem}
+\title{Nonisomorphism transported through characteristic quotient modules}
+\lean/connes{Connes.PaperCharacteristic.paperSL3NoNontrivialAbelianNormalSubgroup,Connes.Sp4.no_nontrivial_normal_abelian_subgroup,Connes.PaperModuleSemisimple.firstProduct_semisimple,Connes.PaperNonisomorphism.paperCharacteristicModuleEquiv,Connes.PaperModuleSemisimpleTransport.paperGroups_not_isomorphic}
+
+\p{The Section 6 invariant is semisimplicity of a module obtained from the
+characteristic abelian kernel. This is suitable for formal transport: a group
+isomorphism identifies the characteristic kernels, descends to an automorphism
+#{\sigma} of the finite quotient, and induces a linear equivalence between the
+first quotient module and the second module with its action restricted along
+#{\sigma}. Semisimplicity is invariant under that linear equivalence.}
+
+\p{The characteristic-kernel step maps an abelian normal subgroup to both
+factors of #{\mathrm{SL}_3(\mathbb F_2[t])\times
+\operatorname{Sp}_4(\mathbb F_2)}. It therefore needs two vanishing results.
+The polynomial-matrix argument
+\href{https://github.com/utensil/connes-rigidity/blob/main/Connes/Paper/Section6/Characteristic.lean#L163-L196}{\code{PaperCharacteristic.paperSL3NoNontrivialAbelianNormalSubgroup}}
+handles the #{\mathrm{SL}_3} image. The stronger finite result
+\href{https://github.com/utensil/connes-rigidity/blob/main/Connes/Foundation/GroupTheory/Sp4KernelCertificate.lean#L2097-L2115}{\code{Sp4.no_nontrivial_normal_abelian_subgroup}}
+handles the symplectic image through a kernel-checked certificate. The product
+argument applying both inputs is
+\href{https://github.com/utensil/connes-rigidity/blob/main/Connes/Paper/Section6/CharacteristicTransport.lean#L59-L107}{\code{paperSemidirectNormalAbelian_le_kernel}}.
+This confines finite enumeration to the symplectic factor and keeps both
+factor-specific proofs out of the abstract module transport.}
+
+\p{On the first side, explicit decomposition into simple summands culminates
+in
+\href{https://github.com/utensil/connes-rigidity/blob/main/Connes/Paper/Section6/ModuleSemisimple.lean#L407-L453}{\code{PaperModuleSemisimple.firstProduct_semisimple}}.
+On the second side, a nonsplit submodule obstruction is proved for every
+quotient twist #{\sigma}. The bridge
+\href{https://github.com/utensil/connes-rigidity/blob/main/Connes/Paper/Section6/NonisomorphismTransport.lean#L24-L50}{\code{paperCharacteristicModuleEquiv}}
+turns a hypothetical group isomorphism into the forbidden module equivalence.
+The public contradiction is
+\href{https://github.com/utensil/connes-rigidity/blob/main/Connes/Paper/Section6/ModuleSemisimpleTransport.lean#L44-L57}{\code{paperGroups_not_isomorphic}}.
+This records the invariant used in \citet{Section 6}{zhou2026icc} while keeping
+the group-theoretic, finite-certificate, and module-theoretic arguments in
+separate files.}
+
+\card{Remark}{Twisting does not repair nonsplitting}{
+\p{Restriction along a group automorphism is an equivalence of module
+categories, with inverse given by restriction along the inverse automorphism.
+The formal proof nevertheless exports the exact twisted obstruction needed by
+the consumer, so no unproved categorical transport principle remains hidden
+at the final contradiction.}}
+
+\related{\ref{connes-0001}}

@@ -1,0 +1,100 @@
+\import{spin-macros}
+\meta{agent-authored}{true}
+
+\tag{connes}
+\tag{lean}
+\tag{property-t}
+\tag{formalization-estimate}
+\taxon{Remark}
+\title{Effort estimate for closing the EJZK boundary}
+\lean/connes{Connes.PaperPropertyT.elementaryGroup,Connes.HasKazhdanPropertyT,Connes.spectral_criterion_unconditional}
+\lean{SimpleGraph.lapMatrix,SimpleGraph.posSemidef_lapMatrix}
+
+\p{The only remaining substantive premise is
+#{\operatorname{HasKazhdanPropertyT}(\mathrm{EL}_3(\mathbb F_2[t]))}. The
+recommended source-faithful route specializes the earlier #{A_2} proof and
+the root-graded treatment in \citet{Theorem 1.1, Sections 2--5 and 7.2--7.4,
+Appendix A}{ershov2017rootgraded}, rather than formalizing the full general
+root-system theorem. The central estimate is \strong{24--28 thousand new Lean
+lines}; retain \strong{18--35 thousand} as the uncertainty envelope. This is
+about #{0.8}--#{1.5} times the current 22,962-line project and
+\strong{two to four times the present proof-search and engineering effort}.
+Confidence is medium, with about 50 percent uncertainty.}
+
+\p{The six implementation layers, with overlapping uncertainty ranges, are:}
+
+\ol{
+  \li{quantitative Kazhdan subsets, constants, and relative ratios, with a
+  bridge to the current qualitative predicate: \strong{2--3.5 thousand
+  lines};}
+  \li{six concrete #{A_2} root homomorphisms and their Steinberg commutator
+  relations: \strong{2.5--4.5 thousand};}
+  \li{fixed-space angles, codistance, and the class-two nilpotent estimate:
+  \strong{5--9 thousand};}
+  \li{the weighted six-vertex magic-graph spectral estimate:
+  \strong{2--3.5 thousand};}
+  \li{six quantitative relative-property-(T) specializations for the root
+  pairs: \strong{4.5--8 thousand}; and}
+  \li{assembly plus the exact qualitative export theorem for
+  \code{PaperPropertyT.elementaryGroup}: \strong{1.5--3 thousand}.}
+}
+
+\p{The existing analytic shell is not part of the missing estimate.
+\href{https://github.com/utensil/connes-rigidity/blob/main/Connes/Foundation/OperatorAlgebra/PositiveSpectralMeasure.lean#L2255-L2268}{\code{PositiveSpectralMeasure.spectral_criterion_unconditional}}
+already constructs the positive spectral functional and closes the scalar/PVM
+route from finite spectral detection to property (T). The remaining work is
+the quantitative root-subgroup, fixed-space, graph, and detector mathematics
+listed above; it should reuse that shell rather than construct another PVM
+layer.}
+
+\p{The pinned Connes project uses Mathlib
+\code{905b95818eb32af7874a58b427f50c1711a5e96c} with Lean
+\code{v4.32.2}. Mathlib supplies the graph Laplacian and its positivity theorem,
+marked above as \code{SimpleGraph.lapMatrix} and
+\code{SimpleGraph.posSemidef_lapMatrix}, but not the
+Ershov--Jaikin-Zapirain graph-of-groups criterion, Kazhdan ratios, root
+gradings, codistance, or the magic graph argument. The relative-property-(T)
+estimates are calibrated by
+\citet{Theorem 2.2 and Lemmas 2.3--2.7}{kassabov2005universal} and by the
+earlier quantitative development in \citet{Sections 2--6 and Appendix
+A}{ershov2010noncommutative}.}
+
+\p{TauCeti at the referenced revision
+\code{cc6ce758421ce3a0731ff62667b7771cfc4aa3da} uses Mathlib
+\code{de5ce8a9a66a4aa68a9bdbb35b63a06d34d9ca11} and Lean
+\code{v4.34.0-rc1}. Its
+\href{https://github.com/TauCetiProject/TauCeti/blob/cc6ce758421ce3a0731ff62667b7771cfc4aa3da/TauCeti/LowDimTopology/Plumbing/DiagonalDominance.lean#L73-L74}{diagonal-dominance proof}
+consumes the same Mathlib Laplacian facts, but its source and roadmap
+contain no direct property-(T), Kazhdan, codistance, root-graded, or magic-graph
+lane. It is therefore not a drop-in dependency for this boundary. Moving the
+Connes development immediately to that pin would add an estimated
+\strong{2--5 thousand lines of migration and pin-repair work}, not reduce the
+mathematical estimate.}
+
+\p{Bounded elementary generation is not presently shorter. Nica's theorem
+gives
+
+##{\nu_3=\frac{3\cdot3^2-3}{2}+29=41,}
+
+but its proof invokes the Kornblum--Artin theorem for irreducibles in
+polynomial arithmetic progressions \citet{Theorems 2--3}{nica2019bounded}.
+That input is absent from the pinned Mathlib revision. A self-contained
+Nica--Kassabov route is estimated at \strong{20--45 thousand lines} and
+\strong{three to six times the current engineering effort}, with about
+70 percent uncertainty. Assuming Kornblum--Artin reduces it to roughly
+\strong{8--15 thousand lines}, but merely moves the external boundary. A
+reusable formalization of the generic EJK theorem is at least
+\strong{45--90 thousand lines} and is unnecessary for Zhou's application.}
+
+\p{The literature anchors for the estimate are Zhou's exact invocation
+\citet{Proposition 4.1, pp. 8--10}{zhou2026icc}; the general theorem,
+quantitative language, graph criterion, strong grading, #{A_2} specialization,
+and Appendix relative theorem in \citet{Theorem 1.1, Sections 2--5 and
+7.2--7.4, Appendix A}{ershov2017rootgraded}; the shorter magic-graph assembly
+in \citet{Sections 2--6 and Appendix A}{ershov2010noncommutative}; Kassabov's
+relative estimates cited above; and Nica's exact-ring alternative. The OpenAI
+volume \citek{openai2026tenadvances} is retained only as provenance for generic
+formalization components adapted locally, not as mathematical authority for
+the EJZK theorem.}
+
+\related{\ref{connes-0001}}

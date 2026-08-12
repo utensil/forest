@@ -1,0 +1,46 @@
+\import{spin-macros}
+\meta{agent-authored}{true}
+
+\tag{connes}
+\tag{lean}
+\tag{operator-algebra}
+\tag{von-neumann-algebra}
+\taxon{Theorem}
+\title{From a spatial unitary to a tracial group-factor equivalence}
+\lean/connes{Connes.FactorWitness.SpatialWitness,Connes.FactorWitness.tracialEquiv_of_spatialWitness,Connes.PaperFactorClosure.paperGroupFactors_isomorphic}
+
+\p{The group von Neumann algebra #{L(G)} is represented on #{\ell^2(G)} as
+the von Neumann closure of the left regular operators. Its canonical trace is
+the vacuum coefficient at #{\delta_e}. Consequently a unitary
+#{U:\ell^2(G)\simeq\ell^2(H)} gives the required tracial equivalence once two
+facts are proved: conjugation by #{U} carries one closed operator algebra onto
+the other, and #{U\delta_e=\delta_e}.}
+
+\p{These are precisely the fields of
+\href{https://github.com/utensil/connes-rigidity/blob/main/Connes/Foundation/OperatorAlgebra/FactorWitness.lean#L19-L26}{\code{FactorWitness.SpatialWitness}}.
+The generic conversion
+\href{https://github.com/utensil/connes-rigidity/blob/main/Connes/Foundation/OperatorAlgebra/FactorWitness.lean#L121-L146}{\code{tracialEquiv_of_spatialWitness}}
+restricts conjugation to the two group von Neumann algebras, proves normality,
+and obtains trace preservation from the vacuum equation. Thus no operator-
+algebra conclusion is stored as an unexplained premise.}
+
+\p{For Zhou's groups, the concrete unitary is a composite of the two Fourier
+models and the fiber shear. The difficult closure statement is kept separate:
+the images of continuous crossed-product generators agree, their spans are
+dense, and conjugation therefore matches the two von Neumann closures. The
+final concrete objects are
+\href{https://github.com/utensil/connes-rigidity/blob/main/Connes/Paper/Section3/FactorClosure.lean#L578-L697}{\code{paperSpatialUnitary}, \code{paperSpatialWitness}, and \code{paperGroupFactors_isomorphic}}.
+This is the operator-algebra interface behind the construction in
+\citet{Section 3}{zhou2026icc}. The repository records
+\citek{openai2026tenadvances} only as provenance for generic infrastructure
+adapted into local definitions; the mathematical conclusion and every witness
+field used here are proved in the Connes source.}
+
+\card{Remark}{Engineering note: Closure membership, not generator equality, is the consumer}{
+\p{Mapping a convenient generating family is only an intermediate result.
+The group-factor consumer needs an equivalence of membership in the completed
+von Neumann algebras. Keeping that biconditional as the witness field prevents
+a dense-span argument from being silently replaced by a statement about an
+algebraic subalgebra.}}
+
+\related{\ref{connes-0001}}

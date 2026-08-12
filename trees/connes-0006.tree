@@ -1,0 +1,46 @@
+\import{spin-macros}
+\meta{agent-authored}{true}
+
+\tag{connes}
+\tag{lean}
+\tag{group-theory}
+\tag{icc}
+\taxon{Theorem}
+\title{ICC from orbit and displacement certificates}
+\lean/connes{Connes.PaperICC.isICC_of_product_quotient,Connes.PaperICC.paper_gammaOne_icc,Connes.PaperICC.paper_gammaTwo_icc}
+
+\p{For a countable group, the ICC condition asks that every nonidentity
+conjugacy class be infinite. In a semidirect product #{N\rtimes(S\times Q)},
+the proof can be separated from the concrete formulas by supplying two kinds
+of certificates:}
+
+\ol{
+  \li{every nonidentity #{a\in N} has an infinite #{S}-orbit; and}
+  \li{every nonidentity #{q\in Q} admits #{a\in N} whose displacement
+  #{a(q\cdot a)^{-1}} is nonidentity and has an infinite #{S}-orbit.}
+}
+
+\p{The structure
+\href{https://github.com/utensil/connes-rigidity/blob/main/Connes/Paper/Section5/ICC.lean#L37-L45}{\code{PaperICC.ActionData}}
+is exactly this direct-consumer boundary. The generic theorem
+\href{https://github.com/utensil/connes-rigidity/blob/main/Connes/Paper/Section5/ICC.lean#L147-L249}{\code{PaperICC.isICC_of_product_quotient}}
+then splits a nonidentity element into three exhaustive cases. A nontrivial
+#{S}-coordinate inherits an infinite conjugacy class from #{S}; a pure kernel
+element uses the first certificate; and a surviving #{Q}-coordinate is reduced
+to the second certificate.}
+
+\p{The paper-specific work is therefore confined to orbit calculations in
+\href{https://github.com/utensil/connes-rigidity/blob/main/Connes/Paper/Section5/ICCOrbits.lean}{\code{ICCOrbits.lean}}.
+Those calculations construct one data pair and yield
+\href{https://github.com/utensil/connes-rigidity/blob/main/Connes/Paper/Section5/ICCOrbits.lean#L585-L597}{\code{paper_gammaOne_icc} and \code{paper_gammaTwo_icc}}.
+This organization follows the cases used in \citet{Section 5}{zhou2026icc}
+without building the concrete tensors into the reusable ICC theorem.}
+
+\card{Remark}{Formalization note: Why displacement is the right finite-quotient input}{
+\p{Conjugating an element with nontrivial #{Q}-coordinate by kernel elements
+changes its kernel coordinate by #{a(q\cdot a)^{-1}}. Asking directly for an
+infinite family of conjugates would duplicate this algebra in each action.
+The displacement certificate exposes the one expression whose infinite
+#{S}-orbit suffices.}}
+
+\related{\ref{connes-0001}}

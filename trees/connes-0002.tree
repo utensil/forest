@@ -6,6 +6,7 @@
 \tag{property-t}
 \taxon{Remark}
 \title{The exact formalization boundary}
+\lean/connes{Connes.theoremA,Connes.PaperPropertyT.elementaryGroup}
 
 \p{The public theorem is
 \href{https://github.com/utensil/connes-rigidity/blob/main/Connes/Main.lean#L17-L25}{\code{Connes.theoremA}}.
@@ -19,22 +20,17 @@ a claim that every expository sentence of \citek{zhou2026icc} has been encoded.}
 
 \p{The dependency boundary is deliberately narrow:}
 
-\tikzfig{
-\begin{tikzcd}[column sep=large, row sep=large]
-  {\mathrm{EL}_3(\mathbb F_2[t])\text{ has (T)}}
-    \arrow[r, "\text{transport}"]
-  {\mathrm{SL}_3(\mathbb F_2[t])\text{ has (T)}}
-    \arrow[r, "\text{internal certificates}"]
-  {\Gamma_1,\Gamma_2\text{ have (T), are ICC}} \\
-  && {L(\Gamma_1)\cong L(\Gamma_2)}
-    \arrow[u]
-    \arrow[r]
-  {\Gamma_1\not\cong\Gamma_2}
-\end{tikzcd}
-}
+\tikzfig{\begin{tikzcd}[column sep=large]
+{\mathrm{EL}_3(\mathbb F_2[t])\text{ has (T)}}
+  \arrow[r, "\mathrm{transport}"] &
+{\mathrm{SL}_3(\mathbb F_2[t])\text{ has (T)}}
+  \arrow[r, "\mathrm{certificates}"] &
+{\Gamma_1,\Gamma_2\text{ satisfy Theorem A}}
+\end{tikzcd}}
 
-\p{A source audit finds no solution-path \code{axiom}, \code{opaque},
+\p{The solution import graph contains no \code{axiom}, \code{opaque},
 \code{sorry}, or \code{admit}. \code{#print axioms Connes.theoremA} reports
 only \code{propext}, \code{Classical.choice}, and \code{Quot.sound}, the usual
 Lean foundations used by the imported library. The one \code{sorry} in an
 independent Comparator challenge is outside the theorem's import graph.}
+\related{\ref{connes-0001}}
