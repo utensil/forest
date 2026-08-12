@@ -1,0 +1,31 @@
+\import{spin-macros}
+\meta{agent-authored}{true}
+
+\tag{fcap}
+\tag{spin}
+\tag{clifford}
+
+\taxon{Theorem}
+\title{Surjectivity of the Spin action \citet{I.2, Theorem 2.9, pp. 18--19}{lawson2016spin}}
+\lean/tauceti{TauCeti.CliffordAlgebra.spinToSpecialOrthogonal_surjective_of_isSquare,TauCeti.CliffordAlgebra.spinToSpecialOrthogonal_surjective}
+
+\p{Let #{K} be a field of characteristic different from #{2}, let #{V} be finite-dimensional, and let #{Q} be nondegenerate. Suppose that for every nonisotropic #{v\in V}, the scalar #{-Q(v)^{-1}} is a square in #{K}. Then the twisted-adjoint action restricts to a surjection
+
+##{\Spin(V,Q)\twoheadrightarrow SO(V,Q).}
+
+The underlying homomorphism is \leanref/tauceti{TauCeti.CliffordAlgebra.spinToSpecialOrthogonal}, and its action on vectors is the usual Spin action by \leanref/tauceti{TauCeti.CliffordAlgebra.coe_spinToSpecialOrthogonal_apply}.}
+
+\p{Indeed, the square-normalization hypothesis and Cartan--Dieudonne generation give the Pin surjection of \ref{fcap-000X}. It lifts an element of #{SO(V,Q)} to Pin; the lift has determinant #{1}, so \ref{fcap-001A} shows that it is even and therefore lies in Spin. The restriction square
+
+\tikzfig{
+\begin{tikzcd}[column sep=large, row sep=large]
+\Spin(V,Q) \arrow[r,hook] \arrow[d,two heads,"\operatorname{spinToSpecialOrthogonal}"']
+  & \Pin(V,Q) \arrow[d,two heads,"\operatorname{pinToOrthogonal}"] \\
+SO(V,Q) \arrow[r,hook]
+  & O(V,Q)
+\end{tikzcd}
+}
+
+commutes because both vertical maps are induced by the same twisted Clifford conjugation. Over a separably closed field the square condition is automatic, so nondegeneracy and finite dimension suffice. The general restriction principle from a surjective Pin action is \leanref/tauceti{TauCeti.CliffordAlgebra.spinToSpecialOrthogonal_surjective_of_pinToOrthogonal_surjective}.}
+
+\p{The square condition belongs to the algebraic normalization argument. For a positive-definite real geometric form #{q}, the Clifford convention is #{Q=-q}; hence #{-Q(v)^{-1}>0} for every nonzero #{v}, so the reflecting vectors can be normalized over #{\mathbb{R}}. This observation does not assert the square condition for arbitrary real signatures.}
