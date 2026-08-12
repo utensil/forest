@@ -1,0 +1,34 @@
+\import{spin-macros}
+\meta{agent-authored}{true}
+
+\tag{connes}
+\tag{lean}
+\tag{property-t}
+\taxon{Definition}
+\title{Property (T) as a representation interface}
+
+\p{For a countable discrete group #{G}, a unitary representation #{\pi} has
+\newvocab{almost-invariant unit vectors} when every finite #{K\subset G} and
+every #{\varepsilon>0} admit a unit vector #{\xi} with
+
+##{\lVert \pi(g)\xi-\xi\rVert<\varepsilon\qquad(g\in K).}
+
+The project defines property (T) by requiring every such representation to
+contain a nonzero invariant vector. The exact Lean boundary is
+\href{https://github.com/utensil/connes-rigidity/blob/main/Connes/Core.lean#L46-L88}{\code{UnitaryRepresentation.HasAlmostInvariantUnitVectors}, \code{HasKazhdanPropertyT}, and \code{HasRelativePropertyT}}.
+This qualitative form matches the final consumer, while quantitative Kazhdan
+sets and constants remain local to any future proof of the EJZK input.}
+
+\p{The useful decomposition is the fixed subspace #{H^N} of a normal subgroup
+#{N} and its orthogonal complement. Relative property (T) forces a nonzero
+vector into #{H^N}; property (T) of the quotient then acts on #{H^N}. The
+formal theorem
+\href{https://github.com/utensil/connes-rigidity/blob/main/Connes/Foundation/OperatorAlgebra/PropertyTTransfer.lean#L264-L278}{\code{hasKazhdanPropertyT_of_relative_and_quotient}}
+packages this argument. Isolating it prevents the later spectral proof from
+depending on the concrete presentation of Zhou's groups.}
+
+\card{Engineering note}{Quantitative facts should discharge a qualitative boundary}{
+\p{A future EJZK development should expose Kazhdan pairs, ratios, or spectral
+gaps internally, then export exactly \code{HasKazhdanPropertyT elementaryGroup}.
+Changing the public theorem to demand a particular constant would strengthen
+the paper's hypothesis and couple every consumer to an arbitrary estimate.}}
