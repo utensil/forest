@@ -170,8 +170,9 @@
 \numberwithin{equation}{subsection}
 \theoremstyle{definition}
 % \declaretheorem[style=thmblackbox,name=Definition,numberwithin=subsection]{definition}
-\declaretheorem[style=thmbluebox,name=Theorem,numberwithin=subsection, numberlike=equation]{theorem}
-\declaretheorem[style=thmbluebox,name=Theorem,numberwithin=subsection, numberlike=equation]{theoremx} % theorem not in dep graph
+% AGENT-NOTE: Mathematical cards share the theorem counter; displayed equations use their own counter.
+\declaretheorem[style=thmbluebox,name=Theorem,numberwithin=subsection]{theorem}
+\declaretheorem[style=thmbluebox,name=Theorem,sibling=theorem]{theoremx} % theorem not in dep graph
 \declaretheorem[style=thmbluebox,name=Lemma,sibling=theorem]{lemma}
 \declaretheorem[style=thmbluebox,name=Lemma,sibling=theorem]{lemmax} % lemma not in dep graph
 \declaretheorem[style=thmbluebox,name=Corollary,sibling=theorem]{corollary}
