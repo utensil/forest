@@ -1,0 +1,26 @@
+\import{spin-macros}
+\meta{agent-authored}{true}
+\taxon{proposition}
+\title{the canonical grading of a Group Algebra}
+\tag{math}
+\tag{fgap}
+\tag{group-algebra}
+\lean{AddMonoidAlgebra.grade.isInternal,AddMonoidAlgebra.grade.gradedAlgebra,AddMonoidAlgebra.single_mem_grade}
+
+\p{For each #{g\in G}, let #{A_g=k[g]} be the 1-dimensional subspace
+spanned by the basis element #{[g]}. Then
+##{
+k[G]=\bigoplus_{g\in G}A_g,
+\qquad A_gA_h\subseteq A_{gh}.
+}
+Thus #{k[G]} is canonically graded by the group #{G}. In Lean's additive
+graded-algebra interface this statement is expressed after passing from the
+multiplicative index #{G} to its additive copy; each single basis element lies
+in its corresponding grade.}
+
+\p{The basis and multiplication law in [[fgap-001H]] give the decomposition
+and product containment directly; compare the construction in
+\citet{secs. 3.1--3.2, pp. 39--41}{sengupta2010representations}. It is
+distinct from the Hopf structure in
+[[fgap-001V]]: the grading records where products land, while the coalgebra
+maps record how a basis element is copied and inverted.}
