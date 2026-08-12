@@ -8,8 +8,24 @@
 
 % Keep theorem headings ragged and breakable between atomic inline markers.
 \newcommand{\foresttheoremhead}{%
-	\parbox[t]{\linewidth}{\raggedright\NAME\ \NUMBER\ \NOTE}%
+	\parbox[t]{\linewidth}{\raggedright\NAME\ \foresttheoremnumber{\NUMBER}\ \NOTE}%
 }
+
+% The LaTeX renderer supplies Forester's contextual number before each card.
+\newcommand{\forestcontextualnumber}{}
+\newcommand{\setforestcontextualnumber}[1]{\renewcommand{\forestcontextualnumber}{#1}}
+\newcommand{\foresttheoremnumber}[1]{%
+	\if\relax\detokenize\expandafter{\forestcontextualnumber}\relax#1\else\forestcontextualnumber\fi%
+}
+\makeatletter
+\newcommand{\setforestcurrentlabel}{\protected@edef\@currentlabel{\forestcontextualnumber}}
+\newcommand{\forestsectionnumber}{}
+\newcommand{\setforestsectionnumber}[1]{%
+	\renewcommand{\forestsectionnumber}{#1}%
+	\setcounter{equation}{0}%
+}
+\newcommand{\setforestsectioncurrentlabel}{\protected@edef\@currentlabel{\forestsectionnumber}}
+\makeatother
 
 \theoremstyle{definition}
 \mdfdefinestyle{mdbluebox}{%
@@ -167,7 +183,7 @@
 	headpunct={\\[3pt]},
 ]{def}
 
-\numberwithin{equation}{subsection}
+\renewcommand{\theequation}{\forestsectionnumber.\arabic{equation}}
 \theoremstyle{definition}
 % \declaretheorem[style=thmblackbox,name=Definition,numberwithin=subsection]{definition}
 % AGENT-NOTE: Mathematical cards share the theorem counter; displayed equations use their own counter.
