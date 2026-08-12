@@ -89,7 +89,7 @@
   
   <!-- use mdframed begin -->
   <xsl:template match="f:tree[f:frontmatter/f:taxon[not(text()='Proof' or (ancestor::f:backmatter))]]">
-    <!-- AGENT-NOTE: PDF card headings must use the same contextual tree path as the web renderer. -->
+    <!-- AGENT-NOTE: PDF card headings use the web contextual path and put markers on a continuation line. -->
     <xsl:text>\setforestcontextualnumber{</xsl:text>
     <xsl:call-template name="contextual-number">
       <xsl:with-param name="tree" select="." />
@@ -103,6 +103,7 @@
       <xsl:apply-templates select="f:frontmatter/f:title" />
       <xsl:call-template name="lean-marker-metadata">
         <xsl:with-param name="frontmatter" select="f:frontmatter" />
+        <xsl:with-param name="continuation" select="true()" />
       </xsl:call-template>
       <xsl:text>}]</xsl:text>
     </xsl:if>
@@ -323,8 +324,8 @@
     <!-- <xsl:text>}</xsl:text> -->
   </xsl:template>
 
-  <!-- AGENT-NOTE: Inline declaration links need paragraph-level TeX flexibility to avoid overfull boxes. -->
-  <xsl:template match="html:p[descendant::html:span[@class='lean-ref']]">
+  <!-- AGENT-NOTE: Paragraphs with declaration links need TeX flexibility; code labels use breakable text. -->
+  <xsl:template match="html:p[descendant::html:span[@class='lean-ref'] or descendant::f:link/html:code]">
     <xsl:text>\par{}\begingroup\sloppy{}</xsl:text>
     <xsl:apply-templates />
     <xsl:text>\par\endgroup</xsl:text>
@@ -452,11 +453,22 @@
   </xsl:template>
   
   <xsl:template match="f:link[@type='external']">
-    <xsl:text>\href{</xsl:text>
-    <xsl:value-of select="@href" />
-    <xsl:text>}{</xsl:text>
-    <xsl:apply-templates />
-    <xsl:text>}</xsl:text>
+    <xsl:choose>
+      <xsl:when test="html:code and count(node()) = 1">
+        <xsl:text>\href{</xsl:text>
+        <xsl:value-of select="@href" />
+        <xsl:text>}{\leanref{</xsl:text>
+        <xsl:value-of select="html:code" />
+        <xsl:text>}}</xsl:text>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:text>\href{</xsl:text>
+        <xsl:value-of select="@href" />
+        <xsl:text>}{</xsl:text>
+        <xsl:apply-templates />
+        <xsl:text>}</xsl:text>
+      </xsl:otherwise>
+    </xsl:choose>
   </xsl:template>
 
   <!-- AGENT-NOTE: Inline Lean references need URL-style breakpoints while preserving one clickable link. -->
