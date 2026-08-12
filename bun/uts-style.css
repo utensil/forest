@@ -152,6 +152,14 @@ section:has(> details > summary > header .agent-authored-watermark)
     padding-inline-end: 6rem;
 }
 
+section:has(> details > summary > header .agent-authored-watermark)
+    > details
+    > summary
+    > header
+    .link-buttons {
+    margin-inline-end: 7.5rem;
+}
+
 .agent-authored-watermark {
     position: absolute;
     inset-block-start: 0;
@@ -197,6 +205,14 @@ section:has(> details > summary > header .agent-authored-watermark)
         > header {
         min-height: 4rem;
         padding-inline-end: 4.5rem;
+    }
+
+    section:has(> details > summary > header .agent-authored-watermark)
+        > details
+        > summary
+        > header
+        .link-buttons {
+        margin-inline-end: 6rem;
     }
 
     .agent-authored-watermark {
@@ -730,12 +746,12 @@ nav#toc li.active {
     z-index: 2;
 }
 
-/* clearfix hack */
-/* header h1::after {
+/* AGENT-NOTE: Floated note controls must contribute to heading height, or they overlap the first child card. */
+summary header h1:has(.link-button, .meta-lean)::after {
     content: "";
     clear: both;
     display: table;
-} */
+}
 
 .link-buttons {
     cursor: pointer;
