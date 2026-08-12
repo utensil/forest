@@ -1,0 +1,33 @@
+\import{spin-macros}
+\meta{agent-authored}{true}
+\taxon{Definition}
+\title{factor sets and twisted Group Algebras}
+\tag{math}
+\tag{fgap}
+\tag{group-algebra}
+\tag{representation}
+\lean/tauceti{TauCeti.TwistedMonoidAlgebra.of_mul_of,TauCeti.TwistedMonoidAlgebra.lift,TauCeti.isProjectiveRepEquivAlgHom}
+
+\p{Let #{k} be a field, #{G} a group, and
+#{\alpha:G\times G\to k^\times} a normalized 2-cocycle:
+##{
+\alpha(1,g)=\alpha(g,1)=1,
+\qquad
+\alpha(g,h)\alpha(gh,\ell)=
+\alpha(h,\ell)\alpha(g,h\ell).
+}
+The \newvocab{twisted Group Algebra} #{k_\alpha[G]} has basis #{u_g} and
+multiplication
+##{
+u_gu_h=\alpha(g,h)u_{gh}.
+}
+The cocycle equation is exactly the associativity condition.}
+
+\p{A projective representation with factor set #{\alpha}, namely operators
+#{T_g} satisfying #{T_gT_h=\alpha(g,h)T_{gh}}, extends uniquely to an
+algebra map #{k_\alpha[G]\to\operatorname{End}_k(V)}; conversely an algebra
+map gives such a projective representation on its basis operators.
+Cohomologous cocycles rescale the basis and
+give isomorphic twisted algebras. See
+\citet{sec. 1, pp. 1--4}{conlon1964twisted}; compare the structural analysis
+in \citet{pp. 191--203}{edwards1969twisted}.}
