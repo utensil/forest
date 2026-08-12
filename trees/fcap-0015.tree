@@ -6,17 +6,25 @@
 \tag{clifford}
 
 \taxon{Example}
-\title{The first four real Clifford algebras \citet{I.4, Theorem 4.3 and Tables I--II, pp. 27--29}{lawson2016spin}}
-\lean/tauceti{TauCeti.realCliffordOneZeroEquivProd,TauCeti.realCliffordZeroOneEquivComplex,TauCeti.realCliffordOneOneEquivMatrix}
+\title{Four real Clifford base entries \citet{I.4, Theorem 4.3 and Tables I--II, pp. 27--29}{lawson2016spin}}
+\lean/tauceti{TauCeti.realCliffordOneZeroEquivProd,TauCeti.realCliffordZeroOneEquivComplex,TauCeti.realCliffordZeroTwoEquivQuaternion,TauCeti.realCliffordOneOneEquivMatrix}
 
-\p{The signature convention of \ref{fcap-0011} gives
+\p{With #{\Cl_{0,0}\simeq\mathbb{R}} as the scalar anchor, the signature convention of \ref{fcap-0011} gives four nontrivial base entries:
 
-##{\Cl_{0,0}\simeq\mathbb{R},\qquad
-\Cl_{1,0}\simeq\mathbb{R}\times\mathbb{R},\qquad
-\Cl_{0,1}\simeq\mathbb{C},\qquad
-\Cl_{1,1}\simeq M_2(\mathbb{R}).}
+##{\begin{aligned}
+\Cl_{0,0}&\simeq\mathbb{R}, &
+\Cl_{1,0}&\simeq\mathbb{R}\times\mathbb{R}, &
+\Cl_{0,1}&\simeq\mathbb{C},\\
+\Cl_{0,2}&\simeq\mathbb{H}, &
+\Cl_{1,1}&\simeq M_2(\mathbb{R}).
+\end{aligned}}
 
-For #{\Cl_{1,1}}, the positive and negative generators may be represented by
+For #{\Cl_{0,2}}, the two negative generators map to the quaternion units
+#{i} and #{j}; their product maps to #{k}. Thus they square to #{-1} and
+anticommute, as required by the Clifford relations. The exact generator map is
+recorded by \leanref/tauceti{TauCeti.realCliffordZeroTwoEquivQuaternion_ι}.}
+
+\p{For #{\Cl_{1,1}}, the positive and negative generators may be represented by
 
 ##{e_+\longmapsto\begin{pmatrix}1&0\\0&-1\end{pmatrix},
 \qquad
