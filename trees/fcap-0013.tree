@@ -9,12 +9,12 @@
 \title{The hyperbolic matrix recurrence \citet{I.4, Theorem 4.1, (4.3), pp. 25--26}{lawson2016spin}}
 \lean/tauceti{TauCeti.CliffordAlgebra.hyperbolicEquivTensor,TauCeti.realCliffordBottEquiv_ι}
 
-\p{For all #{p,q\ge0}, adjoining a hyperbolic plane gives an algebra equivalence
+\p{For finite-dimensional quadratic spaces, Lawson--Michelsohn state the signature recurrence
 
 ##{\Cl_{p+1,q+1}\simeq_{\mathbb{R}\text{-alg}}
 \Cl_{p,q}\otimes_{\mathbb{R}}M_2(\mathbb{R}).}
 
-More generally, for any real quadratic module #{(M,Q)},
+TauCeti extends the recurrence to any real quadratic module #{(M,Q)} and supplies an explicit formula on generators:
 
 ##{\Cl(Q\perp Q_{1,1})\simeq
 \Cl(Q)\otimes_{\mathbb{R}}M_2(\mathbb{R}).}
@@ -28,7 +28,7 @@ the equivalence sends a generator #{(m,(s,t))} to
 ##{\iota_Q(m)\otimes\sigma_x
 +1\otimes\begin{pmatrix}s&t\\-t&-s\end{pmatrix}.}
 
-The first summand squares to #{Q(m)}, the second to #{s^2-t^2}, and the two anticommute. The universal property therefore gives the forward algebra map. In the other direction, the original Clifford algebra and the matrix algebra act through commuting algebra maps on the hyperbolic Clifford algebra; their tensor lift is inverse to the forward map. The two composites are checked on Clifford generators and pure tensors, so no finite-dimensional hypothesis is used. Chevalley's split-matrix theorem and orthogonal-sum calculation supply the same structural mechanism \citet{II.2.1 and II.2.5, pp. 42--46}{chevalley1954algebraic}.}
+The first summand squares to #{Q(m)}, the second to #{s^2-t^2}, and the two anticommute. The universal property therefore gives the forward algebra map. In the other direction, the original Clifford algebra and the matrix algebra act through commuting algebra maps on the hyperbolic Clifford algebra; their tensor lift is inverse to the forward map. The two composites are checked on Clifford generators and pure tensors, which is why TauCeti's extension needs no finite-dimensional hypothesis. Chevalley's split-matrix theorem and orthogonal-sum calculation supply the classical structural mechanism \citet{II.2.1 and II.2.5, pp. 42--46}{chevalley1954algebraic}.}
 
 \p{Writing the displayed generator formula as #{f}, its universal extension is summarized by the commuting diagram
 
