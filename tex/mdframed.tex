@@ -8,23 +8,25 @@
 
 % Keep theorem headings ragged and breakable between atomic inline markers.
 \newcommand{\foresttheoremhead}{%
-	\parbox[t]{\linewidth}{\raggedright\NAME\ \foresttheoremnumber{\NUMBER}\ \NOTE}%
+	\parbox[t]{\linewidth}{\raggedright\NAME\ \forestcurrentnumber\ \NOTE}%
 }
 
-% The LaTeX renderer supplies Forester's contextual number before each card.
-\newcommand{\forestcontextualnumber}{}
-\newcommand{\setforestcontextualnumber}[1]{\renewcommand{\forestcontextualnumber}{#1}}
-\newcommand{\foresttheoremnumber}[1]{%
-	\if\relax\detokenize\expandafter{\forestcontextualnumber}\relax#1\else\forestcontextualnumber\fi%
-}
+% Cards advance the same structural counters as section-like trees at their depth.
+\newcommand{\forestcurrentnumber}{}
 \makeatletter
-\newcommand{\setforestcurrentlabel}{\protected@edef\@currentlabel{\forestcontextualnumber}}
-\newcommand{\forestsectionnumber}{}
-\newcommand{\setforestsectionnumber}[1]{%
-	\renewcommand{\forestsectionnumber}{#1}%
+\newcommand{\foreststepcard}[1]{%
+	\refstepcounter{#1}%
+	\protected@edef\forestcurrentnumber{\csname the#1\endcsname}%
+}
+\newcommand{\forestcardlabel}[2]{%
+	\protected@edef\@currentlabel{\forestcurrentnumber}%
+	\label[#1]{#2}%
+}
+\newcommand{\forestformulaprefix}{}
+\newcommand{\forestsetformulasection}[1]{%
+	\protected@edef\forestformulaprefix{\csname the#1\endcsname}%
 	\setcounter{equation}{0}%
 }
-\newcommand{\setforestsectioncurrentlabel}{\protected@edef\@currentlabel{\forestsectionnumber}}
 \makeatother
 
 \theoremstyle{definition}
@@ -183,34 +185,43 @@
 	headpunct={\\[3pt]},
 ]{def}
 
-\renewcommand{\theequation}{\forestsectionnumber.\arabic{equation}}
+\renewcommand{\theequation}{%
+	\if\relax\detokenize\expandafter{\forestformulaprefix}\relax
+		\arabic{equation}%
+	\else
+		\forestformulaprefix.\arabic{equation}%
+	\fi
+}
+\renewcommand{\theHequation}{%
+	\theHsection.\theHsubsection.\theHsubsubsection.\theHparagraph.\arabic{equation}%
+}
 \theoremstyle{definition}
 % \declaretheorem[style=thmblackbox,name=Definition,numberwithin=subsection]{definition}
 % AGENT-NOTE: Mathematical cards share the theorem counter; displayed equations use their own counter.
-\declaretheorem[style=thmbluebox,name=Theorem,numberwithin=subsection]{theorem}
-\declaretheorem[style=thmbluebox,name=Theorem,sibling=theorem]{theoremx} % theorem not in dep graph
-\declaretheorem[style=thmbluebox,name=Lemma,sibling=theorem]{lemma}
-\declaretheorem[style=thmbluebox,name=Lemma,sibling=theorem]{lemmax} % lemma not in dep graph
-\declaretheorem[style=thmbluebox,name=Corollary,sibling=theorem]{corollary}
-\declaretheorem[style=thmbluebox,name=Proposition,sibling=theorem]{proposition}
+\declaretheorem[style=thmbluebox,name=Theorem,numbered=no]{theorem}
+\declaretheorem[style=thmbluebox,name=Theorem,numbered=no]{theoremx} % theorem not in dep graph
+\declaretheorem[style=thmbluebox,name=Lemma,numbered=no]{lemma}
+\declaretheorem[style=thmbluebox,name=Lemma,numbered=no]{lemmax} % lemma not in dep graph
+\declaretheorem[style=thmbluebox,name=Corollary,numbered=no]{corollary}
+\declaretheorem[style=thmbluebox,name=Proposition,numbered=no]{proposition}
 
 \theoremstyle{definition}
 % \newtheorem{claim}[theorem]{Claim}
 % \newtheorem{definition}[theorem]{Definition}
-\declaretheorem[style=def,name=Definition,sibling=theorem]{definition}
-\declaretheorem[style=def,name=Convention,sibling=theorem]{convention}
-\declaretheorem[style=def,name=Notation,sibling=theorem]{notation}
+\declaretheorem[style=def,name=Definition,numbered=no]{definition}
+\declaretheorem[style=def,name=Convention,numbered=no]{convention}
+\declaretheorem[style=def,name=Notation,numbered=no]{notation}
 % \newtheorem{fact}[theorem]{Fact}
 % \newtheorem{abuse}[theorem]{Abuse of Notation}
 
-\declaretheorem[style=thmredbox,name=Example,sibling=theorem]{example}
+\declaretheorem[style=thmredbox,name=Example,numbered=no]{example}
 
 \theoremstyle{theorem}
 % \declaretheorem[name=Question,sibling=theorem,style=thmblackbox]{ques}
 % \declaretheorem[name=Exercise,sibling=theorem,style=thmblackbox]{exercise}
 
-\declaretheorem[name=Remark,sibling=theorem,style=thmgreenbox]{remark}
-\declaretheorem[name=Remark,sibling=theorem,style=thmgreenbox*]{remark*}
+\declaretheorem[name=Remark,numbered=no,style=thmgreenbox]{remark}
+\declaretheorem[name=Remark,numbered=no,style=thmgreenbox*]{remark*}
 % \declaretheorem[name=Step,style=thmgreenbox]{step} % only used in Lebesgue int
 
 \crefname{notation}{notation}{notations}

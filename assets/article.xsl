@@ -56,31 +56,27 @@
   </xsl:template>
 
   <xsl:template match="/f:tree/f:mainmatter/f:tree[not(f:frontmatter/f:taxon) and not(@numbered='false')]/f:frontmatter/f:title">
-    <xsl:call-template name="set-contextual-section-number" />
-    <xsl:text>\section*{</xsl:text>
-    <xsl:call-template name="contextual-section-title" />
-    <xsl:text>}</xsl:text>
+    <xsl:text>\section{</xsl:text>
+    <xsl:call-template name="section-title" />
+    <xsl:text>}\forestsetformulasection{section}</xsl:text>
   </xsl:template>
 
   <xsl:template match="/f:tree/f:mainmatter/f:tree/f:mainmatter/f:tree[not(f:frontmatter/f:taxon) and not(@numbered='false')]/f:frontmatter/f:title">
-    <xsl:call-template name="set-contextual-section-number" />
-    <xsl:text>\subsection*{</xsl:text>
-    <xsl:call-template name="contextual-section-title" />
-    <xsl:text>}</xsl:text>
+    <xsl:text>\subsection{</xsl:text>
+    <xsl:call-template name="section-title" />
+    <xsl:text>}\forestsetformulasection{subsection}</xsl:text>
   </xsl:template>
 
   <xsl:template match="/f:tree/f:mainmatter/f:tree/f:mainmatter/f:tree/f:mainmatter/f:tree[not(f:frontmatter/f:taxon) and not(@numbered='false')]/f:frontmatter/f:title">
-    <xsl:call-template name="set-contextual-section-number" />
-    <xsl:text>\subsubsection*{</xsl:text>
-    <xsl:call-template name="contextual-section-title" />
-    <xsl:text>}</xsl:text>
+    <xsl:text>\subsubsection{</xsl:text>
+    <xsl:call-template name="section-title" />
+    <xsl:text>}\forestsetformulasection{subsubsection}</xsl:text>
   </xsl:template>
 
   <xsl:template match="/f:tree/f:mainmatter/f:tree/f:mainmatter/f:tree/f:mainmatter/f:tree/f:mainmatter/f:tree[not(f:frontmatter/f:taxon) and not(@numbered='false')]/f:frontmatter/f:title">
-    <xsl:call-template name="set-contextual-section-number" />
-    <xsl:text>\subsubsubsection*{</xsl:text>
-    <xsl:call-template name="contextual-section-title" />
-    <xsl:text>}</xsl:text>
+    <xsl:text>\subsubsubsection{</xsl:text>
+    <xsl:call-template name="section-title" />
+    <xsl:text>}\forestsetformulasection{paragraph}</xsl:text>
   </xsl:template>
 
   <xsl:template match="/f:tree/f:mainmatter/f:tree[not(f:frontmatter/f:taxon) and (@numbered='false')]/f:frontmatter/f:title">
@@ -108,14 +104,6 @@
   </xsl:template>
 
   <!-- AGENT-NOTE: Untyped note trees still carry Lean metadata and need a PDF-visible marker row. -->
-  <xsl:template name="set-contextual-section-number">
-    <xsl:text>\setforestsectionnumber{</xsl:text>
-    <xsl:call-template name="contextual-section-number">
-      <xsl:with-param name="tree" select="../.." />
-    </xsl:call-template>
-    <xsl:text>}\setforestsectioncurrentlabel</xsl:text>
-  </xsl:template>
-
   <xsl:template name="section-title">
     <xsl:apply-templates />
     <xsl:call-template name="lean-marker-metadata">
