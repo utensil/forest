@@ -34,6 +34,7 @@
         <xsl:param name="pText" select="." />
         <xsl:param name="sep" select="." />
         <xsl:param name="base" />
+        <xsl:param name="suffix" select="''" />
         <xsl:param name="short" select="false()" />
         <xsl:if test="string-length($pText)">
             <xsl:variable name="marker" select="normalize-space(substring-before(concat($pText,$sep),$sep))" />
@@ -41,7 +42,7 @@
                 <!-- <xsl:text>,</xsl:text> -->
             </xsl:if>
             <a target="_blank"
-                href="{$base}{$marker}">
+                href="{$base}{$marker}{$suffix}">
                 <!-- <xsl:text>L∃∀N</xsl:text> -->
                 <xsl:choose>
                     <xsl:when test="$short">
@@ -58,6 +59,7 @@
                 <xsl:with-param name="pText" select="substring-after($pText, $sep)" />
                 <xsl:with-param name="sep" select="$sep" />
                 <xsl:with-param name="base" select="$base" />
+                <xsl:with-param name="suffix" select="$suffix" />
                 <xsl:with-param name="short" select="$short" />
             </xsl:call-template>
         </xsl:if>
@@ -98,6 +100,21 @@
                     <xsl:with-param name="pText" select="." />
                     <xsl:with-param name="sep" select="','" />
                     <xsl:with-param name="base" select="'https://taucetiproject.github.io/TauCeti/docs/find/#doc/'" />
+                    <xsl:with-param name="short" select="true()" />
+                </xsl:call-template>
+            </div>
+            <span class="meta-lean-symbol">L∃∀N</span>
+        </span>
+    </xsl:template>
+
+    <xsl:template match="fr:meta[@name='lean-connes']">
+        <span class="meta-lean" tabindex="0" aria-label="Connes Lean formalization links">
+            <div class="meta-lean-list">
+                <xsl:call-template name="splitlean">
+                    <xsl:with-param name="pText" select="." />
+                    <xsl:with-param name="sep" select="','" />
+                    <xsl:with-param name="base" select="'https://github.com/utensil/connes-rigidity/search?q='" />
+                    <xsl:with-param name="suffix" select="'&amp;type=code'" />
                     <xsl:with-param name="short" select="true()" />
                 </xsl:call-template>
             </div>
@@ -151,8 +168,8 @@
                 <a target="_blank" title="PDF" class="link-button link-pdf" href="{/fr:tree/@base-url}{../fr:display-uri}.pdf">
                     📄<span>PDF</span></a>
             </xsl:if>
-            <xsl:if test="../fr:meta[@name='lean' or @name='lean-tauceti']">
-                <xsl:apply-templates select="../fr:meta[@name='lean' or @name='lean-tauceti']" />
+            <xsl:if test="../fr:meta[@name='lean' or @name='lean-tauceti' or @name='lean-connes']">
+                <xsl:apply-templates select="../fr:meta[@name='lean' or @name='lean-tauceti' or @name='lean-connes']" />
             </xsl:if>
             <xsl:if test="../fr:display-uri=/fr:tree/fr:frontmatter/fr:display-uri and ../fr:meta[@name='multilang']">
                 <a id="langblock-toggle" class="link-button" href="javascript:void(0)"

@@ -1,0 +1,52 @@
+\import{spin-macros}
+\meta{agent-authored}{true}
+
+\tag{connes}
+\tag{lean}
+\tag{proof-engineering}
+\taxon{Remark}
+\title{Reusable proof-architecture adaptations}
+\lean/connes{Connes.PaperSpectralPropertyT.completion_of_spectralData,Connes.PaperFactorClosure.paperSpatialWitness,Connes.PaperICC.ActionData}
+
+\p{\strong{Place instances at their mathematical source.}
+The compact-dual topology, second-countability, and measurable-space
+instances belong beside the Pontryagin dual construction in Section 3, not at
+their first measure-theoretic use in Section 4. Likewise, the additive group
+instance for a representation module belongs at the module boundary in
+Section 6. Early placement makes Zhou's section order an acyclic dependency
+discipline instead of a directory convention. Concrete examples are
+\href{https://github.com/utensil/connes-rigidity/blob/main/Connes/Paper/Section3/DualHaar.lean#L24-L49}{the dual topology and Borel instances}
+and
+\href{https://github.com/utensil/connes-rigidity/blob/main/Connes/Paper/Section6/Nonisomorphism.lean#L93-L98}{the representation-module carrier instance}.}
+
+\p{\strong{Isolate certificates from structural theorems.}
+Finite symplectic enumeration lives in \code{Sp4KernelCertificate.lean};
+concrete orbit witnesses live in \code{ICCOrbits.lean}; detector estimates live
+in the Section 4 detector files. Their consumers see named propositions or
+small structures. This prevents an exhaustive certificate, coordinate
+calculation, or normalization choice from contaminating a generic transfer
+theorem.}
+
+\p{\strong{State the direct consumer boundary.}
+The external theorem is requested as property (T) of the elementary group,
+not as a stronger numerical constant. The factor bridge asks for a spatial
+unitary that maps completed algebras and the vacuum. The ICC bridge asks for
+orbit and displacement data. Each boundary contains exactly what its next
+theorem consumes, which makes hypothesis strength and reuse auditable.}
+
+\p{\strong{Keep final assembly proposition-valued.}
+Section 7 combines previously proved endpoints. It does not accept a broad
+record containing the desired conclusion as a field. This “certificate
+isolation” makes \code{#print axioms} meaningful and lets semantic review trace
+each conjunct to the file where its mathematics occurs.}
+
+\p{These lessons concern proof structure rather than the mathematical claims
+of \citek{zhou2026icc} or the independent binary-carry construction in Chapter
+4 of \citek{openai2026tenadvances}. The latter is mathematical context, not code
+provenance. Where the implementation adapts prior Lean infrastructure, the
+source is the pinned \code{openai/ten-proofs} snapshot recorded in the Connes
+project's provenance ledger and port map. The lessons are reusable in
+formalizations where a linear paper proof crosses topology, analysis, finite
+computation, and algebraic transport.}
+
+\related{\ref{connes-0001}}

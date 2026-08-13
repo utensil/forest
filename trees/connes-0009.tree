@@ -1,0 +1,40 @@
+\import{spin-macros}
+\meta{agent-authored}{true}
+
+\tag{connes}
+\tag{lean}
+\tag{trust-boundary}
+\taxon{Theorem}
+\title{Assembly of Theorem A}
+\lean/connes{Connes.PaperTheoremACompletion.theoremA,Connes.theoremA}
+
+\p{The final assembly has four independent certificate branches. The spectral
+branch proves property (T) for both concrete groups from the EJZK input and
+the internally constructed finite detectors. The other branches provide ICC,
+the trace-preserving group-factor equivalence, and nonisomorphism. The theorem
+\href{https://github.com/utensil/connes-rigidity/blob/main/Connes/Paper/Section7/TheoremACompletion.lean#L23-L40}{\code{PaperTheoremACompletion.theoremA}}
+only gathers those endpoints; it performs no additional mathematical
+construction.}
+
+\p{The source-facing declaration
+\href{https://github.com/utensil/connes-rigidity/blob/main/Connes/Main.lean#L14-L25}{\code{Connes.theoremA}}
+unwraps the one-field EJZK input and states the full existence conclusion. Its
+single substantive mathematical premise is
+#{T(\mathrm{EL}_3(\mathbb F_2[t]))}. The local equality
+#{\mathrm{EL}_3=\mathrm{SL}_3}, all transfers, and every certificate for the two
+groups are already proofs in the import graph.}
+
+\p{\strong{Kernel and source trust boundary.}
+There is no solution-path \code{axiom}, \code{opaque}, \code{sorry}, or
+\code{admit}. Printing the axioms of the public theorem and the downstream
+endpoints reports only \code{propext}, \code{Classical.choice}, and
+\code{Quot.sound}. These are Lean/library foundations, not unformalized
+mathematical claims. The separate Comparator challenge contains one
+\code{sorry}, but its module is not imported by the solution.}
+
+\p{Accordingly, “complete” here means the load-bearing formalization of
+Theorem A in \citek{zhou2026icc} under the project's explicit definitions. It
+does not mean that the paper's narrative remarks or every alternative proof
+have been translated into Lean.}
+
+\related{\ref{connes-0001}}

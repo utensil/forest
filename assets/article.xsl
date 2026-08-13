@@ -8,6 +8,9 @@
   <xsl:output method="text" encoding="utf-8" indent="yes" doctype-public="" doctype-system="" />
 
   <xsl:include href="latex.xsl" />
+
+  <!-- AGENT-NOTE: A resource may recur through expansion; emit its hash once. -->
+  <xsl:key name="resource-by-hash" match="f:resource" use="@hash" />
   
   <xsl:template match="/">
     <xsl:text>\input{an_article}</xsl:text>
@@ -16,7 +19,9 @@
 
     <xsl:text>\begin{document}</xsl:text>
 
-    <xsl:for-each select="//f:resource">
+    <xsl:for-each select="//f:resource[
+      generate-id() = generate-id(key('resource-by-hash', @hash)[1])
+    ]">
       <xsl:text>&#xa;</xsl:text>
       <xsl:text>\begin{filecontents*}[overwrite]{</xsl:text>
       <xsl:value-of select="@hash" />

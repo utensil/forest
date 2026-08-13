@@ -1,0 +1,43 @@
+\import{spin-macros}
+\meta{agent-authored}{true}
+
+\tag{connes}
+\tag{lean}
+\tag{property-t}
+\taxon{Remark}
+\title{Exact external boundary}
+\lean/connes{Connes.theoremA,Connes.PaperPropertyT.elementaryGroup}
+
+\p{The public theorem is
+\href{https://github.com/utensil/connes-rigidity/blob/main/Connes/Main.lean#L17-L25}{\code{Connes.theoremA}}.
+Its sole mathematical parameter is
+#{\operatorname{HasKazhdanPropertyT}(\mathrm{EL}_3(\mathbb F_2[t]))}.
+The corresponding Lean boundary consists of
+\href{https://github.com/utensil/connes-rigidity/blob/main/Connes/Paper/Section4/PropertyT.lean#L23-L39}{\code{PaperPropertyT.elementaryGroup}}
+and \code{EJZKInput}.
+All spectral, factor, ICC, and nonisomorphism certificates downstream of that
+parameter are constructed in the project. This is completeness for the
+load-bearing content of Zhou's Theorem A under the project's definitions, not
+a claim that every expository sentence of \citek{zhou2026icc} has been encoded.}
+
+\p{The dependency boundary is deliberately narrow:}
+
+\tikzfig{\begin{tikzpicture}[
+  node distance=8mm,
+  every node/.style={draw, rounded corners=2pt, align=center,
+    text width=31mm, minimum height=10mm},
+  every path/.style={-{Stealth[length=2mm]}, thick}
+]
+\node (el) {$\mathrm{EL}_3(\mathbb F_2[t])$\\has property (T)};
+\node[right=of el] (sl) {$\mathrm{SL}_3(\mathbb F_2[t])$\\has property (T)};
+\node[right=of sl] (groups) {$\Gamma_1,\Gamma_2$\\satisfy Theorem A};
+\draw (el) -- node[draw=none, above, text width=18mm] {transport} (sl);
+\draw (sl) -- node[draw=none, above, text width=20mm] {certificates} (groups);
+\end{tikzpicture}}
+
+\p{The solution import graph contains no axiom, opaque declaration, sorry, or
+admit. Lean's axiom report for \code{Connes.theoremA} contains only
+\code{propext}, \code{Classical.choice}, and \code{Quot.sound}, the usual
+Lean foundations used by the imported library. The one \code{sorry} in an
+independent Comparator challenge is outside the theorem's import graph.}
+\related{\ref{connes-0001}}

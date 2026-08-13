@@ -1,0 +1,125 @@
+\import{spin-macros}
+\meta{agent-authored}{true}
+
+\tag{connes}
+\tag{lean}
+\tag{property-t}
+\tag{formalization-estimate}
+\taxon{Remark}
+\title{Formalizing the remaining EJZK theorem}
+\lean/connes{Connes.PaperPropertyT.elementaryGroup,Connes.HasKazhdanPropertyT,Connes.spectral_criterion_unconditional}
+\lean{SimpleGraph.lapMatrix,SimpleGraph.posSemidef_lapMatrix}
+
+\p{The only remaining substantive premise is property (T) for
+#{\mathrm{EL}_3(\mathbb F_2[t])}. The
+primary source-faithful route is the exact elementary-group theorem
+\citet{Theorem 1.1, p. 1; Section 5.4, pp. 25--29; Section 6.1, pp.
+34--35}{ershov2010noncommutative}, specialized to #{R=\mathbb F_2[t]} and
+#{n=3}. The later root-graded treatment
+\citet{Theorem 1.1, p. 3; Sections 2--5 and 7.2--7.4; Appendix
+A}{ershov2017rootgraded} supplies broader supporting language. Our internal
+engineering estimate remains \strong{24--28 thousand new Lean lines}, with an
+internal uncertainty envelope of \strong{18--35 thousand}. This is about
+#{0.8}--#{1.5} times the current 22,962-line project and, by our internal
+estimate, \strong{two to four times its present proof-search and engineering
+effort}. The changed source route reallocates work within the original range;
+it does not independently calibrate a new total. The literature supports the
+route and its decomposition, not these LOC or effort figures.}
+
+\p{The six implementation layers, with overlapping uncertainty ranges, are:}
+
+\ol{
+  \li{quantitative Kazhdan subsets, constants, and relative ratios, with a
+  bridge to the current qualitative predicate; our internal allocation is
+  \strong{2--3.5 thousand lines};}
+  \li{the six additive root-subgroup embeddings and the direct #{A_2}
+  commutator relations; our internal allocation is \strong{2--4 thousand}.
+  A Steinberg-group detour is optional, not required for this direct
+  matrix-group specialization;}
+  \li{fixed-space angles, codistance, and the class-two nilpotent estimate;
+  our internal allocation is \strong{5--9 thousand};}
+  \li{the unweighted standard-Laplacian boundary case on six vertices. This is
+  Section 5.4 of \citek{ershov2010noncommutative}. Our internal allocation is
+  \strong{1.5--3 thousand}; the weighted criterion in Section 5.5 is a separate
+  generalization;}
+  \li{the packaged relative-ratio estimate for the union of all six root
+  subgroups in \citet{Proposition 6.1, p. 34}{ershov2010noncommutative}; our
+  internal allocation is \strong{3--5.5 thousand}. Six repeated Lean
+  instantiations would be an implementation choice, not six mathematical
+  inputs; and}
+  \li{assembly plus the exact qualitative export theorem for
+  the elementary-group property-(T) boundary; our internal allocation is
+  \strong{1.5--3 thousand}.}
+}
+
+\p{These internal allocations overlap, and their subtotal excludes integration
+adapters, proof-search retries, and pin-specific repair risk. It therefore is
+not an arithmetic derivation of the 18--35 thousand-line envelope.}
+
+\p{The existing analytic shell is not part of the missing estimate.
+\href{https://github.com/utensil/connes-rigidity/blob/main/Connes/Foundation/OperatorAlgebra/PositiveSpectralMeasure.lean#L2255-L2268}{\code{PositiveSpectralMeasure.spectral_criterion_unconditional}}
+already constructs the positive spectral functional and closes the scalar/PVM
+route from finite spectral detection to property (T). The remaining work is
+the quantitative root-subgroup, fixed-space, graph, and detector mathematics
+listed above; it should reuse that shell rather than construct another PVM
+layer.}
+
+\p{The pinned Connes project uses Mathlib revision
+\href{https://github.com/leanprover-community/mathlib4/commit/905b95818eb32af7874a58b427f50c1711a5e96c}{\code{905b958}} with Lean 4.32.2.
+Mathlib supplies the graph Laplacian and its positivity theorem, exposed by
+the declaration links above, but not the
+Ershov--Jaikin-Zapirain graph-of-groups criterion, Kazhdan ratios, root
+gradings, codistance, or the graph argument. Kassabov's
+\citet{Theorem 2.2 and Lemmas 2.3--2.7, pp. 11--18}{kassabov2005universal}
+concern a free associative integer ring and require quotient transport before
+application to #{\mathbb F_2[t]}. For calibration over an arbitrary finitely
+generated ring and module, the cleaner reference is
+\citet{Appendix Theorem A.1, p. 110}{ershov2017rootgraded}. The direct route is
+the earlier quantitative development in \citet{Sections 2--6 and Appendix
+A}{ershov2010noncommutative}.}
+
+\p{TauCeti at revision
+\href{https://github.com/TauCetiProject/TauCeti/commit/cc6ce758421ce3a0731ff62667b7771cfc4aa3da}{\code{cc6ce75}}
+uses Mathlib \href{https://github.com/leanprover-community/mathlib4/commit/de5ce8a9a66a4aa68a9bdbb35b63a06d34d9ca11}{\code{de5ce8a}}
+and Lean 4.34.0-rc1. Its
+\href{https://github.com/TauCetiProject/TauCeti/blob/cc6ce758421ce3a0731ff62667b7771cfc4aa3da/TauCeti/LowDimTopology/Plumbing/DiagonalDominance.lean#L73-L74}{diagonal-dominance proof}
+consumes the same Mathlib Laplacian facts, but its source and roadmap
+contain no direct property-(T), Kazhdan, codistance, root-graded, or magic-graph
+lane. It is therefore not a drop-in dependency for this boundary. Moving the
+Connes development immediately to that pin would add, by our internal
+engineering estimate, \strong{2--5 thousand lines of migration and pin-repair
+work}; it would not reduce the mathematical estimate.}
+
+\p{Bounded elementary generation is not presently shorter. Nica's
+\citet{Theorem 2, p. 2}{nica2019bounded} gives
+
+##{\nu_3=\frac{3\cdot3^2-3}{2}+29=41,}
+
+and its proof invokes the Kornblum--Artin theorem for irreducibles in
+polynomial arithmetic progressions, stated as
+\citet{Theorem 3, p. 2}{nica2019bounded}. That input is absent from the pinned
+Mathlib revision. Our internal estimate for a self-contained Nica--Kassabov
+route is \strong{20--45 thousand lines} and \strong{three to six times the
+current engineering effort}, with roughly 70 percent internal uncertainty.
+Assuming Kornblum--Artin gives our internal estimate of \strong{8--15 thousand
+lines}, but merely moves the external boundary. Our internal estimate for a
+reusable formalization of the generic EJK theorem is \strong{45--90 thousand
+lines}; that generality is unnecessary for Zhou's application.}
+
+\p{The literature anchors for the route decomposition are Zhou's exact
+invocation \citet{Proposition 4.1, pp. 8--10}{zhou2026icc}; the exact
+elementary-group theorem, unweighted boundary graph, and packaged six-root
+estimate in \citet{Theorem 1.1, p. 1; Section 5.4, pp. 25--29; Proposition
+6.1, pp. 34--35}{ershov2010noncommutative}; the broader root-graded theorem and
+arbitrary-ring relative estimate in \citet{Theorem 1.1, p. 3; Appendix Theorem
+A.1, p. 110}{ershov2017rootgraded}; Kassabov's free-associative-ring estimates;
+and Nica's exact-ring alternative. None states our LOC or effort ranges.
+Chapter 4 of \citek{openai2026tenadvances} is independent binary-carry
+mathematical context, not code provenance and not authority for the EJZK
+theorem. Adapted Lean infrastructure is traced instead to the pinned
+\href{https://github.com/openai/ten-proofs/tree/94bc0feb6a9ff12c7d31d6de640a725c9d43d2b6}{\code{openai/ten-proofs} snapshot}
+and the Connes project's
+\href{https://github.com/utensil/connes-rigidity/blob/main/docs/PROVENANCE.md}{provenance ledger}
+and \href{https://github.com/utensil/connes-rigidity/blob/main/docs/PORT_MAP.md}{port map}.}
+
+\related{\ref{connes-0001}}
