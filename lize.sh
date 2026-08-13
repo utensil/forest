@@ -7,6 +7,8 @@ SCRIPT_DIR=$(dirname "$(readlink -f "$0")")
 PROJECT_ROOT="$SCRIPT_DIR"
 
 export TEXINPUTS=.:$PROJECT_ROOT/tex/:
+export SOURCE_DATE_EPOCH="${SOURCE_DATE_EPOCH:-0}"
+export TZ=UTC
 
 echo "TEXINPUTS=$TEXINPUTS"
 
@@ -29,6 +31,12 @@ cp "output/forest/$1/index.xml" "build/$XML_FILE"
 
 bunx xslt3 -s:"build/$XML_FILE" -xsl:"assets/$XSLFILE" -o:"build/$TEX_FILE"
 
+# LuaTeX otherwise generates a random PDF trailer ID.  Tie it to the generated
+# TeX so equal source renders to identical publication bytes across worktrees.
+PDF_ID=$(shasum -a 256 "build/$TEX_FILE" | awk '{print toupper(substr($1, 1, 32))}')
+WRAPPER_FILE="$1.lize.tex"
+printf '\\pdfvariable trailerid {[<%s> <%s>]}\n\\input{%s}\n' "$PDF_ID" "$PDF_ID" "$TEX_FILE" > "build/$WRAPPER_FILE"
+
 cd build || exit
 
 # UNICOCE_LATEX=xelatex
@@ -37,13 +45,13 @@ UNICOCE_LATEX=lualatex
 # if environment variable TEC is not set
 if [ -z "$TEC" ]; then
     echo "lize.sh| using $UNICOCE_LATEX"
-    $UNICOCE_LATEX -halt-on-error -interaction=nonstopmode --shell-escape "$TEX_FILE" # >/dev/null # 2>&1
+    $UNICOCE_LATEX -halt-on-error -interaction=nonstopmode --shell-escape --jobname="$1" "$WRAPPER_FILE" # >/dev/null # 2>&1
     # https://tex.stackexchange.com/a/295524/75671
     # biber $TEX_FILE
     # We should ignore bibtex errors if it's simply an empty .bib file
     bibtex "$AUX_FILE" >/dev/null 2>&1 || echo "lize.sh| Ignoring bibtex error"
-    $UNICOCE_LATEX -halt-on-error -interaction=nonstopmode --shell-escape "$TEX_FILE" # >/dev/null # 2>&1
-    $UNICOCE_LATEX -halt-on-error -interaction=nonstopmode --shell-escape "$TEX_FILE" # >/dev/null # 2>&1
+    $UNICOCE_LATEX -halt-on-error -interaction=nonstopmode --shell-escape --jobname="$1" "$WRAPPER_FILE" # >/dev/null # 2>&1
+    $UNICOCE_LATEX -halt-on-error -interaction=nonstopmode --shell-escape --jobname="$1" "$WRAPPER_FILE" # >/dev/null # 2>&1
 else
     echo "lize.sh| using tectonic"
     tectonic -Z shell-escape-cwd="$(pwd)" --keep-intermediates --keep-logs --outdir "$(pwd)" "$TEX_FILE" >/dev/null # 2>&1

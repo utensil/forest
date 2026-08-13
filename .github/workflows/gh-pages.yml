@@ -130,8 +130,7 @@ jobs:
       - name: Verify Forester output contract
         run: |
           ./verify-forester-output.sh
-          ./lize.sh fcap-0001 > build/forester-render-regression.log 2>&1
-          ./verify-forester-output.sh output/forest fcap-0001
+          just verify-pdf-fixtures
       # - name: Check for PDF files
       #   run: |
       #     pdf_count=$(find ./output -name "*.pdf" | wc -l)

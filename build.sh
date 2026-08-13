@@ -85,7 +85,7 @@ function prep_wasm {
 function bun_build {
     # don't run `bun install` for `dev.sh`
     if [ -z "$UTS_DEV" ]; then
-        bun install
+        bun install --frozen-lockfile
     fi
 
     mkdir -p output/forest
@@ -159,19 +159,22 @@ source convert_xml.sh
 
 function backup_html_before_forester() {
     echo "⭐ Backing up HTML files before forester build"
-    mkdir -p output/forest/.html-bak
+    local backup_dir="build/.html-bak"
+    rm -rf "$backup_dir"
+    mkdir -p "$backup_dir"
     for html_file in output/forest/*/index.html; do
         [ -f "$html_file" ] || continue
         local note_id=$(basename $(dirname "$html_file"))
-        mkdir -p "output/forest/.html-bak/$note_id"
-        cp -f "$html_file" "output/forest/.html-bak/$note_id/index.html" 2>/dev/null || true
+        mkdir -p "$backup_dir/$note_id"
+        cp -f "$html_file" "$backup_dir/$note_id/index.html" 2>/dev/null || true
     done
 }
 
 function restore_html_after_forester() {
     echo "⭐ Restoring HTML files over forester redirect stubs"
+    local backup_dir="build/.html-bak"
     local restored=0
-    for bak_file in output/forest/.html-bak/*/index.html; do
+    for bak_file in "$backup_dir"/*/index.html; do
         [ -f "$bak_file" ] || continue
         local note_id=$(basename $(dirname "$bak_file"))
         local html_file="output/forest/$note_id/index.html"
@@ -181,6 +184,7 @@ function restore_html_after_forester() {
             ((restored++))
         fi
     done
+    rm -rf "$backup_dir"
     echo "  Restored $restored HTML files over redirect stubs"
 }
 
@@ -192,6 +196,34 @@ function remove_forester_debug_trees() {
         echo "⭐ Removing $debug_tree_count Forester debug tree file(s) from public output"
         find output/forest -type f -name index.tree -delete
     fi
+
+    # Earlier builds wrote duplicate HTML backups into the publish tree.
+    if [ -d output/forest/.html-bak ]; then
+        echo "⭐ Removing stale HTML backup files from public output"
+        rm -rf output/forest/.html-bak
+    fi
+
+    # Final Forester 5.0 writes its native executable bundle into static output.
+    # Forest's XSL renderer does not load it; its Base Theme JS is copied by `just assets`.
+    if [ -f output/forest/min.js ]; then
+        echo "⭐ Removing unused Forester native bundle from public output"
+        rm -f output/forest/min.js
+    fi
+}
+
+function write_root_redirect() {
+    # AGENT-NOTE: Forest publishes its home tree through the configured absolute site path.
+    local site_url home_tree target_path
+    site_url=$(sed -nE 's/^url = "https?:\/\/[^/]+([^\"]*)"/\1/p' forest.toml | head -1)
+    home_tree=$(sed -nE 's/^home = "([^\"]+)"/\1/p' forest.toml | head -1)
+    target_path="${site_url%/}/${home_tree}/"
+
+    if [ -z "$site_url" ] || [ -z "$home_tree" ]; then
+        echo "Error: forest.toml must define forest.url and forest.home" >&2
+        exit 1
+    fi
+
+    printf '<!DOCTYPE html>\n<html>\n  <head>\n    <meta http-equiv="refresh" content="0;url=%s" />\n    <meta charset="utf-8" />\n  </head>\n</html>\n' "$target_path" > output/forest/index.html
 }
 
 function build {
@@ -211,6 +243,7 @@ function build {
 
     restore_html_after_forester
     remove_forester_debug_trees
+    write_root_redirect
 
     # Check if index.xml was generated
     # if [ ! -f "output/index.xml" ]; then

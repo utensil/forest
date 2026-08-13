@@ -44,6 +44,12 @@ const result = await Bun.build({
     outdir: './output/forest',
     target: 'browser',
     minify: true,
+    // ginac-wasm contains a dormant Node fallback. Bun otherwise embeds each
+    // worktree's absolute node_modules path there, making browser bundles vary.
+    define: {
+        __dirname: JSON.stringify('/forest'),
+        __filename: JSON.stringify('/forest/asset.js'),
+    },
     plugins: [wgslLoader],
     alias: Object.fromEntries(
         Object.entries(aliases).map(([pkg, { jsEntry }]) => [

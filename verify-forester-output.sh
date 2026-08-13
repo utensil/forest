@@ -11,6 +11,35 @@ if [ ! -d "$output_dir" ]; then
     exit 1
 fi
 
+site_url=$(sed -nE 's/^url = "https?:\/\/[^/]+([^\"]*)"/\1/p' forest.toml | head -1)
+home_tree=$(sed -nE 's/^home = "([^\"]+)"/\1/p' forest.toml | head -1)
+root_target="${site_url%/}/${home_tree}/"
+
+if [ -z "$site_url" ] || [ -z "$home_tree" ]; then
+    echo "forest.toml must define forest.url and forest.home" >&2
+    exit 1
+fi
+
+if ! grep -Fq "content=\"0;url=$root_target\"" "$output_dir/index.html"; then
+    echo "Root entrypoint must redirect to $root_target" >&2
+    exit 1
+fi
+
+if [ -d "$output_dir/.html-bak" ]; then
+    echo "Publish output must not contain transient HTML backups" >&2
+    exit 1
+fi
+
+if [ ! -f "$output_dir/forester.js" ]; then
+    echo "Publish output must include the Base Theme forester.js runtime" >&2
+    exit 1
+fi
+
+if [ -e "$output_dir/min.js" ]; then
+    echo "Publish output must not include Forester's unused native bundle" >&2
+    exit 1
+fi
+
 xml_count=0
 while IFS= read -r -d '' xml_file; do
     xml_count=$((xml_count + 1))
