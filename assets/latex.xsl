@@ -89,7 +89,7 @@
   
   <!-- use mdframed begin -->
   <xsl:template match="f:tree[f:frontmatter/f:taxon[not(text()='Proof' or (ancestor::f:backmatter))]]">
-    <!-- AGENT-NOTE: PDF card headings must use the same contextual tree path as the web renderer. -->
+    <!-- AGENT-NOTE: PDF card headings use the web contextual path and put markers on a continuation line. -->
     <xsl:text>\setforestcontextualnumber{</xsl:text>
     <xsl:call-template name="contextual-number">
       <xsl:with-param name="tree" select="." />
@@ -103,6 +103,7 @@
       <xsl:apply-templates select="f:frontmatter/f:title" />
       <xsl:call-template name="lean-marker-metadata">
         <xsl:with-param name="frontmatter" select="f:frontmatter" />
+        <xsl:with-param name="continuation" select="true()" />
       </xsl:call-template>
       <xsl:text>}]</xsl:text>
     </xsl:if>
@@ -187,7 +188,7 @@
   <xsl:template name="lean-marker-metadata">
     <xsl:param name="frontmatter" />
     <xsl:param name="continuation" select="false()" />
-    <xsl:if test="$frontmatter/f:meta[@name='lean' or @name='lean-tauceti']">
+    <xsl:if test="$frontmatter/f:meta[@name='lean' or @name='lean-tauceti' or @name='lean-connes']">
       <xsl:choose>
         <xsl:when test="$continuation">
           <xsl:text>\texorpdfstring{\protect\\[0.15ex]</xsl:text>
@@ -205,7 +206,7 @@
           <xsl:with-param name="base" select="'https://leanprover-community.github.io/mathlib4_docs/find/\#doc/'" />
         </xsl:call-template>
       </xsl:for-each>
-      <xsl:if test="$frontmatter/f:meta[@name='lean'] and $frontmatter/f:meta[@name='lean-tauceti']">
+      <xsl:if test="$frontmatter/f:meta[@name='lean'] and ($frontmatter/f:meta[@name='lean-tauceti'] or $frontmatter/f:meta[@name='lean-connes'])">
         <xsl:text>\allowbreak\hspace{0.35em}</xsl:text>
       </xsl:if>
       <xsl:for-each select="$frontmatter/f:meta[@name='lean-tauceti']">
@@ -215,6 +216,20 @@
         <xsl:call-template name="lean-markers">
           <xsl:with-param name="markers" select="." />
           <xsl:with-param name="base" select="'https://taucetiproject.github.io/TauCeti/docs/find/\#doc/'" />
+          <xsl:with-param name="short" select="true()" />
+        </xsl:call-template>
+      </xsl:for-each>
+      <xsl:if test="$frontmatter/f:meta[@name='lean-connes'] and ($frontmatter/f:meta[@name='lean'] or $frontmatter/f:meta[@name='lean-tauceti'])">
+        <xsl:text>\allowbreak\hspace{0.35em}</xsl:text>
+      </xsl:if>
+      <xsl:for-each select="$frontmatter/f:meta[@name='lean-connes']">
+        <xsl:if test="position() &gt; 1">
+          <xsl:text>\allowbreak\hspace{0.35em}</xsl:text>
+        </xsl:if>
+        <xsl:call-template name="lean-markers">
+          <xsl:with-param name="markers" select="." />
+          <xsl:with-param name="base" select="'https://github.com/utensil/connes-rigidity/search?q='" />
+          <xsl:with-param name="suffix" select="'&amp;type=code'" />
           <xsl:with-param name="short" select="true()" />
         </xsl:call-template>
       </xsl:for-each>
@@ -228,6 +243,7 @@
   <xsl:template name="lean-markers">
     <xsl:param name="markers" />
     <xsl:param name="base" />
+    <xsl:param name="suffix" select="''" />
     <xsl:param name="short" select="false()" />
     <xsl:variable name="marker" select="normalize-space(substring-before(concat($markers, ','), ','))" />
     <xsl:variable name="display">
@@ -245,6 +261,7 @@
     <xsl:text>\protect\href{</xsl:text>
     <xsl:value-of select="$base" />
     <xsl:value-of select="$marker" />
+    <xsl:value-of select="$suffix" />
     <xsl:text>}{\protect\leanmarker{\detokenize{</xsl:text>
     <xsl:value-of select="$display" />
     <xsl:text>}}}</xsl:text>
@@ -253,6 +270,7 @@
       <xsl:call-template name="lean-markers">
         <xsl:with-param name="markers" select="substring-after($markers, ',')" />
         <xsl:with-param name="base" select="$base" />
+        <xsl:with-param name="suffix" select="$suffix" />
         <xsl:with-param name="short" select="$short" />
       </xsl:call-template>
     </xsl:if>
@@ -306,8 +324,8 @@
     <!-- <xsl:text>}</xsl:text> -->
   </xsl:template>
 
-  <!-- AGENT-NOTE: Inline declaration links need paragraph-level TeX flexibility to avoid overfull boxes. -->
-  <xsl:template match="html:p[descendant::html:span[@class='lean-ref']]">
+  <!-- AGENT-NOTE: Paragraphs with declaration links need TeX flexibility; code labels use breakable text. -->
+  <xsl:template match="html:p[descendant::html:span[@class='lean-ref'] or descendant::f:link/html:code]">
     <xsl:text>\par{}\begingroup\sloppy{}</xsl:text>
     <xsl:apply-templates />
     <xsl:text>\par\endgroup</xsl:text>
@@ -435,11 +453,22 @@
   </xsl:template>
   
   <xsl:template match="f:link[@type='external']">
-    <xsl:text>\href{</xsl:text>
-    <xsl:value-of select="@href" />
-    <xsl:text>}{</xsl:text>
-    <xsl:apply-templates />
-    <xsl:text>}</xsl:text>
+    <xsl:choose>
+      <xsl:when test="html:code and count(node()) = 1">
+        <xsl:text>\href{</xsl:text>
+        <xsl:value-of select="@href" />
+        <xsl:text>}{\leanref{</xsl:text>
+        <xsl:value-of select="html:code" />
+        <xsl:text>}}</xsl:text>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:text>\href{</xsl:text>
+        <xsl:value-of select="@href" />
+        <xsl:text>}{</xsl:text>
+        <xsl:apply-templates />
+        <xsl:text>}</xsl:text>
+      </xsl:otherwise>
+    </xsl:choose>
   </xsl:template>
 
   <!-- AGENT-NOTE: Inline Lean references need URL-style breakpoints while preserving one clickable link. -->

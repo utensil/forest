@@ -1,0 +1,36 @@
+\import{spin-macros}
+\meta{agent-authored}{true}
+
+\tag{connes}
+\tag{lean}
+\tag{property-t}
+\taxon{Remark}
+\title{Exact external boundary}
+\lean/connes{Connes.theoremA,Connes.PaperPropertyT.elementaryGroup}
+
+\p{The public theorem is
+\href{https://github.com/utensil/connes-rigidity/blob/main/Connes/Main.lean#L17-L25}{\code{Connes.theoremA}}.
+Its sole mathematical parameter is
+#{\operatorname{HasKazhdanPropertyT}(\mathrm{EL}_3(\mathbb F_2[t]))}, represented by
+\href{https://github.com/utensil/connes-rigidity/blob/main/Connes/Paper/Section4/PropertyT.lean#L23-L39}{\code{PaperPropertyT.elementaryGroup} and \code{EJZKInput}}.
+All spectral, factor, ICC, and nonisomorphism certificates downstream of that
+parameter are constructed in the project. This is completeness for the
+load-bearing content of Zhou's Theorem A under the project's definitions, not
+a claim that every expository sentence of \citek{zhou2026icc} has been encoded.}
+
+\p{The dependency boundary is deliberately narrow:}
+
+\tikzfig{\begin{tikzcd}[column sep=large]
+{\mathrm{EL}_3(\mathbb F_2[t])\text{ has (T)}}
+  \arrow[r, "\mathrm{transport}"] &
+{\mathrm{SL}_3(\mathbb F_2[t])\text{ has (T)}}
+  \arrow[r, "\mathrm{certificates}"] &
+{\Gamma_1,\Gamma_2\text{ satisfy Theorem A}}
+\end{tikzcd}}
+
+\p{The solution import graph contains no \code{axiom}, \code{opaque},
+\code{sorry}, or \code{admit}. \code{#print axioms Connes.theoremA} reports
+only \code{propext}, \code{Classical.choice}, and \code{Quot.sound}, the usual
+Lean foundations used by the imported library. The one \code{sorry} in an
+independent Comparator challenge is outside the theorem's import graph.}
+\related{\ref{connes-0001}}
