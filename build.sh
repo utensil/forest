@@ -85,7 +85,7 @@ function prep_wasm {
 function bun_build {
     # don't run `bun install` for `dev.sh`
     if [ -z "$UTS_DEV" ]; then
-        bun install
+        bun install --frozen-lockfile
     fi
 
     mkdir -p output/forest
@@ -194,6 +194,21 @@ function remove_forester_debug_trees() {
     fi
 }
 
+function write_root_redirect() {
+    # AGENT-NOTE: Forest publishes its home tree through the configured absolute site path.
+    local site_url home_tree target_path
+    site_url=$(sed -nE 's/^url = "https?:\/\/[^/]+([^\"]*)"/\1/p' forest.toml | head -1)
+    home_tree=$(sed -nE 's/^home = "([^\"]+)"/\1/p' forest.toml | head -1)
+    target_path="${site_url%/}/${home_tree}/"
+
+    if [ -z "$site_url" ] || [ -z "$home_tree" ]; then
+        echo "Error: forest.toml must define forest.url and forest.home" >&2
+        exit 1
+    fi
+
+    printf '<!DOCTYPE html>\n<html>\n  <head>\n    <meta http-equiv="refresh" content="0;url=%s" />\n    <meta charset="utf-8" />\n  </head>\n</html>\n' "$target_path" > output/forest/index.html
+}
+
 function build {
     mkdir -p build
     echo "⭐ Rebuilding bun"
@@ -211,6 +226,7 @@ function build {
 
     restore_html_after_forester
     remove_forester_debug_trees
+    write_root_redirect
 
     # Check if index.xml was generated
     # if [ ! -f "output/index.xml" ]; then
