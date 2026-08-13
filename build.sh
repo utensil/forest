@@ -159,19 +159,22 @@ source convert_xml.sh
 
 function backup_html_before_forester() {
     echo "⭐ Backing up HTML files before forester build"
-    mkdir -p output/forest/.html-bak
+    local backup_dir="build/.html-bak"
+    rm -rf "$backup_dir"
+    mkdir -p "$backup_dir"
     for html_file in output/forest/*/index.html; do
         [ -f "$html_file" ] || continue
         local note_id=$(basename $(dirname "$html_file"))
-        mkdir -p "output/forest/.html-bak/$note_id"
-        cp -f "$html_file" "output/forest/.html-bak/$note_id/index.html" 2>/dev/null || true
+        mkdir -p "$backup_dir/$note_id"
+        cp -f "$html_file" "$backup_dir/$note_id/index.html" 2>/dev/null || true
     done
 }
 
 function restore_html_after_forester() {
     echo "⭐ Restoring HTML files over forester redirect stubs"
+    local backup_dir="build/.html-bak"
     local restored=0
-    for bak_file in output/forest/.html-bak/*/index.html; do
+    for bak_file in "$backup_dir"/*/index.html; do
         [ -f "$bak_file" ] || continue
         local note_id=$(basename $(dirname "$bak_file"))
         local html_file="output/forest/$note_id/index.html"
@@ -181,6 +184,7 @@ function restore_html_after_forester() {
             ((restored++))
         fi
     done
+    rm -rf "$backup_dir"
     echo "  Restored $restored HTML files over redirect stubs"
 }
 
@@ -191,6 +195,12 @@ function remove_forester_debug_trees() {
     if [ "$debug_tree_count" -gt 0 ]; then
         echo "⭐ Removing $debug_tree_count Forester debug tree file(s) from public output"
         find output/forest -type f -name index.tree -delete
+    fi
+
+    # Earlier builds wrote duplicate HTML backups into the publish tree.
+    if [ -d output/forest/.html-bak ]; then
+        echo "⭐ Removing stale HTML backup files from public output"
+        rm -rf output/forest/.html-bak
     fi
 }
 
