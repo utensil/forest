@@ -131,6 +131,14 @@ chk:
 verify-render:
     ./verify-forester-output.sh
 
+verify-pdf-fixtures:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    for tree_id in spin-0001 hopf-0001 ca-0001 fgap-0001 fcap-0001 tt-0001 uts-000C; do
+        ./lize.sh "$tree_id" > "build/forester-pdf-$tree_id.log" 2>&1
+        ./verify-forester-output.sh output/forest "$tree_id"
+    done
+
 pre-push:
     just chk
 
