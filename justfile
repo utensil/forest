@@ -27,7 +27,7 @@ dev:
     ./dev.sh
 
 lize:
-    ./lize.sh
+    LIZE=1 ./build.sh
 
 fize:
     ./fize.py
@@ -125,6 +125,9 @@ envs:
 
 chk:
     ./chk.sh
+
+verify-render:
+    ./verify-forester-output.sh
 
 pre-push:
     just chk
@@ -264,4 +267,3 @@ gh2md REPO OUTPUT *PARAMS="--no-prs":
     GITHUB_ACCESS_TOKEN=$(gh auth token) uvx gh2md --idempotent {{PARAMS}} {{REPO}} {{OUTPUT}}
     # https://github.com/mattduck/gh2md/issues/39
     # docker run --rm -it -e GITHUB_ACCESS_TOKEN=$(gh auth token) dockerproxy.net/library/python:3.11.2 bash -c 'pip install gh2md && gh2md --idempotent {{REPO}} {{OUTPUT}}'
-

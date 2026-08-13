@@ -184,6 +184,16 @@ function restore_html_after_forester() {
     echo "  Restored $restored HTML files over redirect stubs"
 }
 
+function remove_forester_debug_trees() {
+    # AGENT-NOTE: Forester 5.0 writes source-like debug files beside public pages.
+    local debug_tree_count
+    debug_tree_count=$(find output/forest -type f -name index.tree | wc -l | tr -d ' ')
+    if [ "$debug_tree_count" -gt 0 ]; then
+        echo "⭐ Removing $debug_tree_count Forester debug tree file(s) from public output"
+        find output/forest -type f -name index.tree -delete
+    fi
+}
+
 function build {
     mkdir -p build
     echo "⭐ Rebuilding bun"
@@ -200,6 +210,7 @@ function build {
     fi
 
     restore_html_after_forester
+    remove_forester_debug_trees
 
     # Check if index.xml was generated
     # if [ ! -f "output/index.xml" ]; then
