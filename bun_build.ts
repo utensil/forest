@@ -65,6 +65,7 @@ if (!result.success) {
         // Bun will pretty print the message object
         console.error(message)
     }
+    process.exitCode = 1
 } else {
     // Copy WASM assets for aliased packages — bun doesn't auto-copy npm WASM files.
     // These must come from the same dist/ tree as the aliased JS entry.

@@ -2,8 +2,12 @@
 
 // based on https://github.com/UstymUkhman/uwal/blob/main/src/lessons/fundamentals/index.js
 import { UWAL } from 'uwal'
+import { renderDemoError, renderDemoResults } from './demo-output'
 
-const uwal_compute = async (input, shader) => {
+const uwalCompute = async (
+    input: Float32Array,
+    shader: string,
+): Promise<number[]> => {
     // Run computations on the GPU:
     {
         // const input = new Float32Array([1, 3, 5]);
@@ -46,10 +50,9 @@ const uwal_compute = async (input, shader) => {
 
         await resultBuffer.mapAsync(GPUMapMode.READ)
         const result = new Float32Array(resultBuffer.getMappedRange())
-
-        return result
-
-        // resultBuffer.unmap();
+        const values = Array.from(result)
+        resultBuffer.unmap()
+        return values
     }
 }
 
@@ -66,5 +69,14 @@ fn compute(@builtin(global_invocation_id) id: vec3u)
 }
 `
 
-const result = await uwal_compute(input, shader)
-console.log(result)
+try {
+    const result = await uwalCompute(input, shader)
+    console.log(result)
+    renderDemoResults('uwal', [
+        ['Input', '[1, 3, 5]'],
+        ['GPU output', `[${result.join(', ')}]`],
+    ])
+} catch (error) {
+    console.error(error)
+    renderDemoError('uwal', error)
+}

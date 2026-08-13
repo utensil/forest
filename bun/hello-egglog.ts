@@ -1,14 +1,16 @@
-import init, { start, run_program } from '../lib/egglog/web-demo/pkg'
+import init, { run_program } from '../lib/egglog/web-demo/pkg'
+import { renderDemoError, renderDemoResults } from './demo-output'
 
-await init()
+try {
+    await init()
 
-function log(level, str) {
-    // console.log(str);
-}
+    function log(_level: unknown, _str: unknown) {
+        // console.log(str);
+    }
 
-window.log = log
+    window.log = log
 
-const result = run_program(`(function fib (i64) i64)
+    const result = run_program(`(function fib (i64) i64)
 (set (fib 0) 0)
 (set (fib 1) 1)
 
@@ -20,4 +22,9 @@ const result = run_program(`(function fib (i64) i64)
 
 (check (= (fib 7) 13))`)
 
-console.log(result)
+    console.log(result)
+    renderDemoResults('egglog', [['Fibonacci check', 'fib(7) = 13']])
+} catch (error) {
+    console.error(error)
+    renderDemoError('egglog', error)
+}
