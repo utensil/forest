@@ -109,6 +109,8 @@ assets:
     cp -rf assets/images output/forest/
     cp -f assets/*.html output/forest/
     cp -f assets/fonts/*.woff output/forest/
+    # Forest's XSL renderer retains the Base Theme navigation/search contract.
+    cp -f theme/forester.js output/forest/
     # ls output/shader/
 
     # cp node_modules/@myriaddreamin/typst-ts-web-compiler/pkg/typst_ts_web_compiler_bg.wasm output/

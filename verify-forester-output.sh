@@ -30,6 +30,16 @@ if [ -d "$output_dir/.html-bak" ]; then
     exit 1
 fi
 
+if [ ! -f "$output_dir/forester.js" ]; then
+    echo "Publish output must include the Base Theme forester.js runtime" >&2
+    exit 1
+fi
+
+if [ -e "$output_dir/min.js" ]; then
+    echo "Publish output must not include Forester's unused native bundle" >&2
+    exit 1
+fi
+
 xml_count=0
 while IFS= read -r -d '' xml_file; do
     xml_count=$((xml_count + 1))

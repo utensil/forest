@@ -202,6 +202,13 @@ function remove_forester_debug_trees() {
         echo "⭐ Removing stale HTML backup files from public output"
         rm -rf output/forest/.html-bak
     fi
+
+    # Final Forester 5.0 writes its native executable bundle into static output.
+    # Forest's XSL renderer does not load it; its Base Theme JS is copied by `just assets`.
+    if [ -f output/forest/min.js ]; then
+        echo "⭐ Removing unused Forester native bundle from public output"
+        rm -f output/forest/min.js
+    fi
 }
 
 function write_root_redirect() {
