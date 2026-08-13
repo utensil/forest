@@ -12,7 +12,7 @@ on:
       - "LICENSE"
       - "README.md"
     branches:
-      - fix-ci/**
+      - main
 
 # Allow one concurrent deployment
 concurrency:
@@ -38,7 +38,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          ref: main
           submodules: recursive
       - uses: extractions/setup-just@v1
         with:
@@ -103,8 +102,7 @@ jobs:
           sudo apt install libev-dev
           sudo apt update
           sudo apt install libev-dev
-          # opam pin add forester git+https://git.sr.ht/~jonsterling/ocaml-forester#36285a6bea37eb3f3fbde39f8e9c373a022dec06 --yes
-          opam pin add forester git+https://git.sr.ht/~jonsterling/ocaml-forester#5ab7277 --yes
+          opam pin add forester git+https://github.com/utensil/ocaml-forester.git#2ed9c1cab0112921eb3497cb1a5a0e2fbaa1f8cd --yes
           opam install forester --yes
       # https://github.com/astral-sh/setup-uv
       - name: Setup Python via uv
@@ -129,6 +127,11 @@ jobs:
           export TERM=xterm-256color
           forester --version
           bash ./build.sh
+      - name: Verify Forester output contract
+        run: |
+          ./verify-forester-output.sh
+          ./lize.sh fcap-0001 > build/forester-render-regression.log 2>&1
+          ./verify-forester-output.sh output/forest fcap-0001
       # - name: Check for PDF files
       #   run: |
       #     pdf_count=$(find ./output -name "*.pdf" | wc -l)
