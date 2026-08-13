@@ -89,12 +89,8 @@
   
   <!-- use mdframed begin -->
   <xsl:template match="f:tree[f:frontmatter/f:taxon[not(text()='Proof' or (ancestor::f:backmatter))]]">
-    <!-- AGENT-NOTE: PDF card headings use the web contextual path and put markers on a continuation line. -->
-    <xsl:text>\setforestcontextualnumber{</xsl:text>
-    <xsl:call-template name="contextual-number">
-      <xsl:with-param name="tree" select="." />
-    </xsl:call-template>
-    <xsl:text>}</xsl:text>
+    <!-- AGENT-NOTE: Cards use LaTeX structural counters; Lean markers continue below long titles. -->
+    <xsl:call-template name="step-card-counter" />
     <xsl:text>\begin{</xsl:text>
     <xsl:apply-templates select="f:frontmatter/f:taxon" />
     <xsl:text>}</xsl:text>
@@ -108,7 +104,9 @@
       <xsl:text>}]</xsl:text>
     </xsl:if>
     <xsl:if test="f:frontmatter/f:display-uri[not(contains(text(), '#'))]">
-      <xsl:text>\setforestcurrentlabel\label{</xsl:text>
+      <xsl:text>\forestcardlabel{</xsl:text>
+      <xsl:apply-templates select="f:frontmatter/f:taxon" />
+      <xsl:text>}{</xsl:text>
       <xsl:value-of select="f:frontmatter/f:display-uri" />
       <xsl:text>}</xsl:text>
     </xsl:if>
@@ -118,71 +116,16 @@
     <xsl:text>}</xsl:text>
   </xsl:template>
 
-  <xsl:template name="contextual-number">
-    <xsl:param name="tree" />
-    <xsl:variable name="parent" select="$tree/ancestor::f:tree[1]" />
-    <xsl:variable name="prefix">
-      <xsl:if test="$parent">
-        <xsl:call-template name="contextual-number">
-          <xsl:with-param name="tree" select="$parent" />
-        </xsl:call-template>
-      </xsl:if>
-    </xsl:variable>
-    <xsl:variable name="explicitly-unnumbered" select="boolean($tree/ancestor-or-self::f:tree[@numbered='false' or @toc='false'])" />
-    <xsl:variable name="implicitly-unnumbered" select="count($tree/../f:tree) = 1 and not(count($tree/f:mainmatter/f:tree) &gt; 1) and not($tree/ancestor::f:tree[f:frontmatter/f:display-uri = /f:tree/f:frontmatter/f:display-uri])" />
-    <xsl:if test="$tree/f:frontmatter/f:number != '' or ($tree/ancestor::f:tree and not($tree/ancestor::f:backmatter) and not($explicitly-unnumbered) and not($implicitly-unnumbered))">
-      <xsl:if test="string($prefix) != ''">
-        <xsl:value-of select="$prefix" />
-        <xsl:text>.</xsl:text>
-      </xsl:if>
-      <xsl:choose>
-        <xsl:when test="$tree/f:frontmatter/f:number != ''">
-          <xsl:value-of select="$tree/f:frontmatter/f:number" />
-        </xsl:when>
-        <xsl:otherwise>
-          <xsl:value-of select="count($tree/preceding-sibling::f:tree[not(@toc='false' or @numbered='false')]) + 1" />
-        </xsl:otherwise>
-      </xsl:choose>
-    </xsl:if>
-  </xsl:template>
-
-  <xsl:template name="contextual-section-title">
-    <xsl:param name="frontmatter" select=".." />
-    <xsl:variable name="tree" select="$frontmatter/.." />
+  <xsl:template name="step-card-counter">
+    <xsl:variable name="depth" select="count(ancestor::f:tree)" />
+    <xsl:text>\foreststepcard{</xsl:text>
     <xsl:choose>
-      <xsl:when test="count($tree/f:mainmatter/f:tree) = 1 and not($tree/ancestor::f:tree[f:frontmatter/f:display-uri = /f:tree/f:frontmatter/f:display-uri])">
-        <xsl:call-template name="contextual-number">
-          <xsl:with-param name="tree" select="$tree/f:mainmatter/f:tree[1]" />
-        </xsl:call-template>
-      </xsl:when>
-      <xsl:otherwise>
-        <xsl:call-template name="contextual-number">
-          <xsl:with-param name="tree" select="$tree" />
-        </xsl:call-template>
-      </xsl:otherwise>
+      <xsl:when test="$depth = 1">section</xsl:when>
+      <xsl:when test="$depth = 2">subsection</xsl:when>
+      <xsl:when test="$depth = 3">subsubsection</xsl:when>
+      <xsl:otherwise>paragraph</xsl:otherwise>
     </xsl:choose>
-    <xsl:text>\quad{}</xsl:text>
-    <xsl:apply-templates select="$frontmatter/f:title/node()" />
-    <xsl:call-template name="lean-marker-metadata">
-      <xsl:with-param name="frontmatter" select="$frontmatter" />
-      <xsl:with-param name="continuation" select="true()" />
-    </xsl:call-template>
-  </xsl:template>
-
-  <xsl:template name="contextual-section-number">
-    <xsl:param name="tree" />
-    <xsl:choose>
-      <xsl:when test="count($tree/f:mainmatter/f:tree) = 1 and not($tree/ancestor::f:tree[f:frontmatter/f:display-uri = /f:tree/f:frontmatter/f:display-uri])">
-        <xsl:call-template name="contextual-number">
-          <xsl:with-param name="tree" select="$tree/f:mainmatter/f:tree[1]" />
-        </xsl:call-template>
-      </xsl:when>
-      <xsl:otherwise>
-        <xsl:call-template name="contextual-number">
-          <xsl:with-param name="tree" select="$tree" />
-        </xsl:call-template>
-      </xsl:otherwise>
-    </xsl:choose>
+    <xsl:text>}</xsl:text>
   </xsl:template>
 
   <xsl:template name="lean-marker-metadata">
@@ -446,7 +389,17 @@
         <xsl:text>\href{</xsl:text>
         <xsl:value-of select="@uri" />
         <xsl:text>}{</xsl:text>
-        <xsl:apply-templates />
+        <xsl:choose>
+          <!-- A contextual number is meaningful only when its target is in this PDF. -->
+          <xsl:when test="f:contextual-number">
+            <xsl:text>[</xsl:text>
+            <xsl:value-of select="@display-uri" />
+            <xsl:text>]</xsl:text>
+          </xsl:when>
+          <xsl:otherwise>
+            <xsl:apply-templates />
+          </xsl:otherwise>
+        </xsl:choose>
         <xsl:text>}</xsl:text>
       </xsl:otherwise>
     </xsl:choose>

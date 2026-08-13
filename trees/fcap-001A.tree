@@ -1,0 +1,25 @@
+\import{spin-macros}
+\meta{agent-authored}{true}
+
+\tag{fcap}
+\tag{spin}
+\tag{clifford}
+
+\taxon{Lemma}
+\title{Determinant parity detects the even lift \citet{I.2, Theorems 2.7 and 2.9, pp. 17--19}{lawson2016spin}}
+\lean/tauceti{TauCeti.QuadraticMap.det_reflection,TauCeti.CliffordAlgebra.mem_even_of_det_pinToOrthogonal_eq_one}
+
+\p{Let #{R} be a commutative ring in which #{2} is invertible, let #{M} be a finite free #{R}-module, and let #{Q} be a quadratic form on #{M}. A reflection in a vector of invertible quadratic value has determinant #{-1}. Therefore a product of #{r} such reflections has determinant
+
+##{(-1)^r.}
+
+In particular, every product of an even number of reflections belongs to #{SO(M,Q)}.}
+
+\p{Lawson--Michelsohn state this parity argument for quadratic vector spaces over a field. The finite-free commutative-ring statement above is the formalized extension: its determinant calculation uses freeness and finiteness, while invertibility of #{2} identifies the fixed part of the grading involution with the even subalgebra.}
+
+\p{The Clifford lift remembers this parity. If #{p\in\Pin(M,Q)} and its orthogonal action has determinant #{1}, then #{p} lies in the even Clifford subalgebra. Hence #{p} is a Spin element. Thus any Pin lift of a special orthogonal transformation is automatically even.}
+
+\subtree{
+\taxon{Proof}
+\p{Multiplicativity of the determinant gives the first assertion from #{\det(\rho_v)=-1}. For the second, the grading involution of a Lipschitz element is its determinant sign times that element. If the determinant is #{1}, the involution fixes the Pin element. Because #{2} is invertible, the fixed submodule of the grading involution is precisely the even Clifford subalgebra.}
+}

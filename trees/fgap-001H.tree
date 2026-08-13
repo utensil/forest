@@ -1,0 +1,28 @@
+\import{spin-macros}
+\meta{agent-authored}{true}
+\taxon{Definition}
+\title{the Group Algebra and its universal extension}
+\tag{math}
+\tag{fgap}
+\tag{group-algebra}
+\lean{MonoidAlgebra.lift,MonoidAlgebra.lift_single}
+
+\p{Let #{k} be a commutative ring and #{G} a group. The \newvocab{Group
+Algebra} #{k[G]} is the free #{k}-module with basis #{[g]} indexed by
+#{g\in G}, equipped with
+##{
+[g][h]=[gh],\qquad 1=[1_G],\qquad
+(\sum_g a_g[g])(\sum_h b_h[h])=\sum_{g,h}a_gb_h[gh].
+}
+The scalar embedding sends #{a} to #{a[1_G]}. Thus each group element is a
+unit of #{k[G]}, with inverse #{[g^{-1}]}.}
+
+\p{If #{A} is a #{k}-algebra and #{u:G\to A^\times} is a group
+homomorphism, there is a unique #{k}-algebra homomorphism
+##{
+\widetilde u:k[G]\longrightarrow A,
+\qquad \widetilde u\left(\sum_g a_g[g]\right)=\sum_g a_g u(g).
+}
+This universal property extends representations and concrete group maps from
+basis elements to the whole Group Algebra. See
+\citet{secs. 3.1--3.2, pp. 39--41}{sengupta2010representations}.}

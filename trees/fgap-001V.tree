@@ -1,0 +1,29 @@
+\import{spin-macros}
+\meta{agent-authored}{true}
+\taxon{proposition}
+\title{the standard Hopf structure on a Group Algebra}
+\tag{math}
+\tag{fgap}
+\tag{group-algebra}
+\tag{hopf}
+\lean{MonoidAlgebra.instHopfAlgebra,MonoidAlgebra.counit_single,MonoidAlgebra.comul_single,MonoidAlgebra.antipode_single}
+
+\p{Let #{k} be a commutative ring and #{G} a group. The Group Algebra
+#{k[G]} is a Hopf algebra with structure determined on basis elements by
+##{
+\Delta([g])=[g]\otimes[g],\qquad
+\epsilon([g])=1,\qquad
+S([g])=[g^{-1}].
+}
+The comultiplication and counit are algebra homomorphisms; the antipode
+extends inversion and satisfies the 2 convolution identities.}
+
+\proof{
+\p{Each formula respects multiplication on basis elements. For example,
+#{\Delta([gh])=[gh]\otimes[gh]=([g]\otimes[g])([h]\otimes[h])}. The counit
+calculation is similar. Finally
+#{[g][g^{-1}]=[1]=[g^{-1}][g]}, which gives both antipode identities on the
+basis and hence by linearity on all of #{k[G]}. This group-algebra Hopf
+structure appears, for example, in
+\citet{ex. 18.3.3(1), pp. 500--501}{broue2024rings}.}
+}
