@@ -325,27 +325,44 @@ section:has(> details > summary > header .agent-authored-watermark)
     --uts-link-internal: #5d5d5d;
     --uts-text-gentle: rgb(132, 132, 132);
     --uts-text-cite: #10731d;
-    --uts-background: white;
+    /* The only light-mode visual change: warm paper instead of white. */
+    --uts-background: #f4ecd9;
+    --uts-surface: var(--uts-background);
+    --uts-hover: rgba(0, 100, 255, 0.04);
+    --uts-outline: var(--uts-text-gentle);
     --uts-vocab: #75140c;
-    /* #f4ecd9; */
+    --uts-new-vocab: blue;
+    --uts-todo-background: rgba(255, 255, 0, 0.1);
+    --uts-todo-border: rgb(129, 129, 24);
+    --uts-taxon-remark: #97da9b;
+    --uts-taxon-example: #e28563;
+    --uts-taxon-theorem: #95dbfc;
+    --uts-taxon-notation: #ffd27f;
+    --uts-taxon-convention: #d369cb;
 }
 
 :root,
 :root[data-applied-mode="dark"] {
     color-scheme: dark;
-    --uts-text: #cbd1db;
-    /* --uts-link: #cbd1db; */
-    /* light brown */
-    --uts-link: #d7b28b;
-    /* lighter orange */
-    /* --uts-link: #f5a25d; */
-    /* lighter grey than --uts-text */
-    /* --uts-link: #dddddd; */
-    --uts-link-internal: #adadad;
-    --uts-text-gentle: rgb(174, 174, 174);
-    --uts-text-cite: #8cd295;
-    --uts-background: #151a1f;
-    --uts-vocab: #db8c84;
+    /* AGENT-NOTE: Railscasts-derived SpinRep tokens keep UI accents coherent with Shiki's Railscasts Renewed code theme. */
+    --uts-text: #e6e1dc;
+    --uts-link: #ffc66d;
+    --uts-link-internal: #a9cbe8;
+    --uts-text-gentle: #9a968f;
+    --uts-text-cite: #b8d488;
+    --uts-background: #232323;
+    --uts-surface: #2b2b2b;
+    --uts-hover: #333333;
+    --uts-outline: #3a3a3a;
+    --uts-vocab: #e8bc6e;
+    --uts-new-vocab: #cc7833;
+    --uts-todo-background: #3d2522;
+    --uts-todo-border: #da4939;
+    --uts-taxon-remark: #a5c261;
+    --uts-taxon-example: #cc7833;
+    --uts-taxon-theorem: #6d9cbe;
+    --uts-taxon-notation: #ffc66d;
+    --uts-taxon-convention: #b78cff;
 }
 
 :root {
@@ -392,7 +409,7 @@ nav#toc a.slug {
     box-shadow: none;
     text-decoration-line: underline;
     text-decoration-style: dotted;
-    color: rgb(132, 132, 132);
+    color: var(--uts-text-gentle);
     /* text-decoration-line: unset;
     text-decoration-style: unset;
     color: #10731d; */
@@ -518,29 +535,26 @@ img[src^="data:image/svg+xml"] {
 }
 
 [data-taxon="Remark"] {
-    --taxon-color: #97da9b;
-    /* #239f5c; */
+    --taxon-color: var(--uts-taxon-remark);
 }
 
 [data-taxon="Example"] {
-    --taxon-color: #e28563;
-    /* #d7511f #cd7e62 #9e3c17 #8C2700 */
+    --taxon-color: var(--uts-taxon-example);
 }
 
 [data-taxon="Theorem"],
 [data-taxon="Lemma"],
 [data-taxon="Corollary"],
 [data-taxon="Proof"] {
-    --taxon-color: #95dbfc;
-    /* #006994; */
+    --taxon-color: var(--uts-taxon-theorem);
 }
 
 [data-taxon="Notation"] {
-    --taxon-color: #ffd27f;
+    --taxon-color: var(--uts-taxon-notation);
 }
 
 [data-taxon="Convention"] {
-    --taxon-color: #d369cb;
+    --taxon-color: var(--uts-taxon-convention);
 }
 
 section.block {
@@ -555,7 +569,7 @@ section[data-taxon] {
     background-color: color-mix(
         in srgb,
         var(--taxon-color) 6%,
-        var(--uts-background) 94%
+        var(--uts-surface) 94%
     );
 }
 
@@ -563,7 +577,7 @@ section[data-taxon]:hover {
     background-color: color-mix(
         in srgb,
         var(--taxon-color) 12%,
-        var(--uts-background) 88%
+        var(--uts-surface) 88%
     );
 }
 
@@ -621,7 +635,7 @@ section[data-taxon="Algorithm"] {
 section[data-taxon="Figure"].block:hover,
 section[data-taxon="Proof"].block:hover,
 section[data-taxon="Algorithm"].block:hover {
-    background-color: rgba(0, 100, 255, 0.04);
+    background-color: var(--uts-hover);
 }
 
 /* test with http://127.0.0.1:1314/tt-001Q.xml for References/Context/Backlinks/Related and Remark/Convention/Definition  */
@@ -640,11 +654,11 @@ section[data-taxon]:hover section[data-taxon="Proof"],
 section[data-taxon="Proof"]:hover,
 section[data-taxon="Definition"]:hover,
 section[data-taxon="Reference"]:hover {
-    background-color: rgba(0, 100, 255, 0.04);
+    background-color: var(--uts-hover);
 }
 
 span.newvocab {
-    color: blue;
+    color: var(--uts-new-vocab);
     font-weight: bold;
 }
 
@@ -764,7 +778,7 @@ summary header h1:has(.link-button, .meta-lean)::after {
     font-size: 60%;
     border-radius: 5px;
     color: var(--uts-text-gentle) !important;
-    background-color: var(--uts-background) !important;
+    background-color: var(--uts-surface) !important;
     border: var(--uts-text-gentle) 1px solid;
     padding: 3px 1ex 3px 1ex;
     margin: 0 0.5ex 1ex 0.5ex;
@@ -774,7 +788,7 @@ summary header h1:has(.link-button, .meta-lean)::after {
 .link-button:hover,
 .meta-lean a:hover,
 .meta-lean-symbol:hover {
-    box-shadow: #95dbfc 0 0 5px;
+    box-shadow: var(--uts-taxon-theorem) 0 0 5px;
 }
 
 .link-source span,
@@ -816,9 +830,9 @@ summary header h1:has(.link-button, .meta-lean)::after {
     max-width: min(42rem, calc(100vw - 4rem));
     margin-left: auto;
     padding: 0.5rem;
-    border: 1px solid var(--uts-text-gentle);
+    border: 1px solid var(--uts-outline);
     border-radius: 5px;
-    background: var(--uts-background);
+    background: var(--uts-surface);
     box-shadow: 0 0.25rem 0.75rem rgb(0 0 0 / 15%);
 }
 
@@ -858,10 +872,8 @@ details:has(> summary .meta-lean:focus-within) > summary + * {
 
 .todo {
     display: block;
-    background-color: rgba(255, 255, 0, 0.1);
-    /* light sepia */
-    border: 1px solid rgb(129, 129, 24);
-    /* dark sepia */
+    background-color: var(--uts-todo-background);
+    border: 1px solid var(--uts-todo-border);
     border-radius: 5px;
     padding: 1em;
     margin: 1em 0;
@@ -1055,7 +1067,7 @@ code.highlight.grace-loading {
 }
 
 .demo-output {
-    border: 1px solid var(--uts-text-gentle);
+    border: 1px solid var(--uts-outline);
     color: inherit;
     margin: 1rem auto;
     max-width: var(--uts-canvas-width);
@@ -1113,11 +1125,6 @@ code.highlight.grace-loading {
 
     img[src$=".svg"] {
         filter: invert(0.85);
-    }
-
-    span.newvocab {
-        filter: invert(100%) !important;
-        /* filter: brightness(800%) !important; */
     }
 
     #langblock-toggle svg {
