@@ -35,6 +35,13 @@ if [ ! -f "$output_dir/forester.js" ]; then
     exit 1
 fi
 
+for runtime_asset in wgputoy.js wgputoy_bg.wasm; do
+    if [ ! -s "$output_dir/$runtime_asset" ]; then
+        echo "Publish output must include the required $runtime_asset runtime" >&2
+        exit 1
+    fi
+done
+
 if [ -e "$output_dir/min.js" ]; then
     echo "Publish output must not include Forester's unused native bundle" >&2
     exit 1

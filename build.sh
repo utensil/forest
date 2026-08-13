@@ -70,7 +70,10 @@ function prep_wasm {
     if [ -n "$CI" ] || [ -n "$UTS_DEV" ]; then
         if [ "$needs_build" = "true" ]; then
             echo "Building WASM package for $lib_name..."
-            (cd "lib/$lib_path" && bunx wasm-pack -v build --target web --release . --out-dir pkg || echo -e "\033[0;31mwasm-pack build failed\033[0m")
+            if ! (cd "lib/$lib_path" && bunx wasm-pack -v build --target web --release --no-opt . --out-dir pkg); then
+                echo -e "\033[0;31mwasm-pack build failed for $lib_name\033[0m" >&2
+                return 1
+            fi
             [ -d "lib/$lib_path/pkg" ] && echo "$hash" > "$hash_file"
         else
             echo "Using cached WASM package for $lib_name"
@@ -79,19 +82,24 @@ function prep_wasm {
         echo "🟡 Skipping wasm-pack build for $lib_name, some notes that used Rust and WASM might not work as epected."
     fi
 
-    cp "lib/$lib_path"/pkg/*.wasm output/forest/
+    if ! compgen -G "lib/$lib_path/pkg/*.wasm" > /dev/null; then
+        echo "Missing WASM output for $lib_name" >&2
+        return 1
+    fi
+
+    cp "lib/$lib_path"/pkg/*.wasm output/forest/ || return 1
 }
 
 function bun_build {
     # don't run `bun install` for `dev.sh`
     if [ -z "$UTS_DEV" ]; then
-        bun install --frozen-lockfile
+        bun install --frozen-lockfile || return 1
     fi
 
     mkdir -p output/forest
-    prep_wasm wgputoy https://github.com/compute-toys/wgpu-compute-toy.git 60d0bec4bd912a54d5049f2c28c1bd6a0916e5ec
-    prep_wasm egglog https://github.com/egraphs-good/egglog.git 8d9b10ec712106b21d10b7bf45d10c0f9d1d09c7 egglog/web-demo
-    prep_wasm rhaiscript https://github.com/rhaiscript/playground 9fa80661bc9eb69363ac86879826dcd8ccb604af
+    prep_wasm wgputoy https://github.com/utensil/wgpu-compute-toy.git dd2dfbe5a686090ece17672de4e430a7980bd2d9 || return 1
+    prep_wasm egglog https://github.com/egraphs-good/egglog.git 8d9b10ec712106b21d10b7bf45d10c0f9d1d09c7 egglog/web-demo || return 1
+    prep_wasm rhaiscript https://github.com/rhaiscript/playground 9fa80661bc9eb69363ac86879826dcd8ccb604af || return 1
     # failed:
     # prep_wasm nalgebra https://github.com/dimforge/nalgebra
 
@@ -100,7 +108,7 @@ function bun_build {
         # if the file extension is .css
         if [[ $FILE == *".css" ]]; then
             echo "🚀 lightningcss"
-            just css "bun/$FILE"
+            just css "bun/$FILE" || return 1
             # check result
             # EXIT_CODE=$?
             # if [ $EXIT_CODE -ne 0 ]; then
@@ -108,7 +116,7 @@ function bun_build {
             #     exit $EXIT_CODE
             # fi
         elif [[ $FILE == *".ts" || $FILE == *".tsx" || $FILE == *".jsx" ]]; then
-            just js "bun/$FILE"
+            just js "bun/$FILE" || return 1
             # bun build bun/$FILE --outdir output
         fi
     done
@@ -229,16 +237,16 @@ function write_root_redirect() {
 function build {
     mkdir -p build
     echo "⭐ Rebuilding bun"
-    bun_build
+    if ! bun_build; then
+        echo -e "\033[0;31mError: browser asset build failed.\033[0m" >&2
+        return 1
+    fi
     backup_xml_files
     backup_html_before_forester
     echo "⭐ Rebuilding forest"
-    just forest
-    show_result
-
-    if [ $? -ne 0 ]; then
+    if ! just forest; then
         echo -e "\033[0;31mError: Forest build failed.\033[0m"
-        exit 1
+        return 1
     fi
 
     restore_html_after_forester
@@ -250,12 +258,10 @@ function build {
     #     echo -e "\033[0;31mError: index.xml not found in output directory. Forest build likely failed.\033[0m"
     #     exit 1
     # fi
-    just assets
+    just assets || return 1
     # if the env var UTS_DEV is not set
     # if [ -z "$UTS_DEV" ]; then
-    convert_xml_files true
-    # fi
-    show_result
+    convert_xml_files true || return 1
     #   build_ssr
     #   show_result
     # echo "Open build/forester.log to see the log."
@@ -280,7 +286,9 @@ function lize {
     #   show_lize_result uts-0001
 }
 
-time build
+if ! build; then
+    exit 1
+fi
 echo
 
 #if environment variable CI or LIZE is set
