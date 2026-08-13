@@ -31,8 +31,8 @@ publication paths.
 
 **Parity audit:** locked clean builds from `5ab7277` and repaired final 5.0
 produced the same 2,720 published paths. All 1,190 XML pages, 1,190 post-XSL
-HTML pages, and 26 JavaScript assets are byte-identical. The 60 generated SVG
-byte differences are only the order of equivalent `@font-face` rules. The seven
+HTML pages, and 26 JavaScript assets are byte-identical. Generated SVG byte
+differences are only the order of equivalent `@font-face` rules. The seven
 PDF fixtures (`spin-0001`, `hopf-0001`, `ca-0001`, `fgap-0001`, `fcap-0001`,
 `tt-0001`, `uts-000C`) have byte-identical generated TeX and PDFs; `lize.sh`
 uses a content-derived LuaTeX trailer ID and stable build timestamp to make that
