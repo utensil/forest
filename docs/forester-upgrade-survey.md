@@ -1,9 +1,36 @@
 # Forester 5.x Upgrade Survey
 
-**Date:** 2026-05-03
-**Current pinned commit:** `56de06afe952d752c1a13fdcd8bb56c5fef9956f`
-**Latest HEAD (main):** `5ab7277`
-**Total commits between:** 592
+**Original survey date:** 2026-05-03
+**Original migration baseline:** `56de06afe952d752c1a13fdcd8bb56c5fef9956f`
+
+## Final Forester 5.0 migration (2026-08-13)
+
+**Upstream boundary:** `4d8913debe9c6dbeb004eeae89aa894ca4db652c` is the final
+commit reporting version `5.0`; `aa6e0387` immediately follows it and reports
+`6.0~dev`. Forest pins the repaired, immutable fork revision
+`2ed9c1cab0112921eb3497cb1a5a0e2fbaa1f8cd`, based on that final 5.0 commit.
+
+**Why a fork pin:** a clean OCaml 5.3 build of upstream `4d8913de` fails on
+five PPX-migrated type annotations, an unavailable browser `Regexp` API, and
+the undeclared transitive `bytesrw` dependency of `jsont`. The fork restores a
+clean `opam install` without changing Forest's source language or normal local
+toolchain.
+
+**Publication contract:** Forester's XML is Forest's stable intermediate
+representation. `build.sh` deliberately applies the custom XSL pipeline over
+every `index.xml`, so final 5.0's native HTML renderer is not the public theme.
+The only new output is `index.tree` debug material; the build removes it before
+publication.
+
+**Parity audit:** clean builds from `5ab7277` and repaired final 5.0 produced
+identical 1,190 XML pages, identical post-XSL HTML pages, and identical 3,917
+published files. The seven PDF fixtures (`spin-0001`, `hopf-0001`, `ca-0001`,
+`fgap-0001`, `fcap-0001`, `tt-0001`, `uts-000C`) had identical generated TeX,
+page counts, extracted layout text, and final artifact bytes.
+
+**Regression guard:** `just verify-render` checks page pairing, absence of
+redirect stubs, and absence of `index.tree` files. Pages CI runs it after the
+full build and additionally builds `fcap-0001.pdf` as a PDF smoke test.
 
 ## Summary of Major Changes
 
