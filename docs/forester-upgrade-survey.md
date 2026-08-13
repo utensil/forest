@@ -19,18 +19,29 @@ toolchain.
 **Publication contract:** Forester's XML is Forest's stable intermediate
 representation. `build.sh` deliberately applies the custom XSL pipeline over
 every `index.xml`, so final 5.0's native HTML renderer is not the public theme.
-The only new output is `index.tree` debug material; the build removes it before
-publication.
+Forest explicitly supplies the Base Theme `forester.js` runtime required by that
+XSL, and removes final 5.0's unused `min.js`, `index.tree` debug material, and
+transient HTML backups before publication.
 
-**Parity audit:** clean builds from `5ab7277` and repaired final 5.0 produced
-identical 1,190 XML pages, identical post-XSL HTML pages, and identical 3,917
-published files. The seven PDF fixtures (`spin-0001`, `hopf-0001`, `ca-0001`,
-`fgap-0001`, `fcap-0001`, `tt-0001`, `uts-000C`) had identical generated TeX,
-page counts, extracted layout text, and final artifact bytes.
+**Compatibility design:** the compiler owns source-to-XML conversion; Forest's
+custom XSL owns public HTML; the Base Theme owns the navigation/search runtime;
+and `lize.sh` owns the XML-to-PDF route. This keeps the migration surgical: the
+new compiler's native HTML and browser bundle are not mixed with the established
+publication paths.
 
-**Regression guard:** `just verify-render` checks page pairing, absence of
-redirect stubs, and absence of `index.tree` files. Pages CI runs it after the
-full build and additionally builds `fcap-0001.pdf` as a PDF smoke test.
+**Parity audit:** locked clean builds from `5ab7277` and repaired final 5.0
+produced the same 2,720 published paths. All 1,190 XML pages, 1,190 post-XSL
+HTML pages, and 26 JavaScript assets are byte-identical. The 60 generated SVG
+byte differences are only the order of equivalent `@font-face` rules. The seven
+PDF fixtures (`spin-0001`, `hopf-0001`, `ca-0001`, `fgap-0001`, `fcap-0001`,
+`tt-0001`, `uts-000C`) have byte-identical generated TeX and PDFs; `lize.sh`
+uses a content-derived LuaTeX trailer ID and stable build timestamp to make that
+property reproducible.
+
+**Regression guard:** `just verify-render` checks page pairing, the configured
+root redirect, required Base Theme runtime, and absence of redirect stubs,
+debug files, unused native bundles, and transient backups. Pages CI runs it
+after the full build and then runs all seven PDF fixtures.
 
 ## Summary of Major Changes
 
