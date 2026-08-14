@@ -1,0 +1,31 @@
+\import{spin-macros}
+\meta{agent-authored}{true}
+
+\tag{fcap}
+\tag{spin}
+\tag{clifford}
+
+\taxon{Theorem}
+\title{The algebraic Spin extension \citet{Definition 3.2, pp. 51--52}{meinrenken2013clifford}}
+\lean/tauceti{TauCeti.CliffordAlgebra.spinDoubleCoverOfSurjective,TauCeti.CliffordAlgebra.spinDoubleCover}
+
+\p{Let #{K} be a characteristic-zero field, let #{V} be finite-dimensional,
+and let its bilinear form be nondegenerate. Meinrenken defines Spin as the
+even part of the norm-one Clifford group. Its kernel is the scalar pair. If
+the Spin action is surjective, these data form the group extension
+
+##{1\longrightarrow (\mathbb Z/2\mathbb Z)_{\mathrm{mult}}
+\longrightarrow \Spin(Q)\longrightarrow SO(Q)\longrightarrow 1.}
+
+The left map sends the nontrivial class to #{-1}; the right map is the Spin
+action. TauCeti packages this generic construction from an explicit
+surjectivity proof. The group-extension constructor used in that package is
+\leanref/tauceti{GroupExtension.ofMulEquivKer}.}
+
+\p{Meinrenken warns that the map to #{SO(V)} need not be surjective over a
+general field; it is surjective when every element of #{K} has a square root,
+because lifts can then be rescaled to have norm one. TauCeti separates this
+issue explicitly. Its generic construction assumes a field, a nontrivial
+finite-dimensional module, invertible #{2}, a nondegenerate quadratic form,
+and a supplied surjectivity proof. Over a separably closed field,
+\ref{fcap-001B} supplies that proof and yields the specialized extension.}
