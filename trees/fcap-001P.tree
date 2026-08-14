@@ -1,0 +1,30 @@
+\import{spin-macros}
+\meta{agent-authored}{true}
+
+\tag{fcap}
+\tag{spin}
+\tag{clifford}
+
+\taxon{Example}
+\title{The rank-one polarized model \citet{Section 3.2.4, Theorem 3.3, p. 59}{meinrenken2013clifford}}
+
+\p{Let #{W=Ke} and choose #{e'\in W'} with #{B_Q(e,e')=1}. In the ordered
+basis #{(1,e)} of #{S=\bigwedge W}, creation and contraction are
+
+##{\varepsilon_e=
+\begin{pmatrix}0&0\\1&0\end{pmatrix},
+\qquad
+\iota_{e'}=
+\begin{pmatrix}0&1\\0&0\end{pmatrix}.}
+
+Both are nilpotent, and
+
+##{\varepsilon_e\iota_{e'}+\iota_{e'}\varepsilon_e=I_2.}
+
+Together with their products they give the four matrix units of
+#{\operatorname{End}_K(S)}. This is the rank-one calculation in Meinrenken's
+generation proof and a specialization of the general relation in
+\ref{fcap-001J}. The formalized ingredients are
+\leanref/tauceti{TauCeti.SpinPolarizationData.contract_wedge} and
+\leanref/tauceti{TauCeti.ExteriorAlgebra.creation_contraction_adjoin_eq_top};
+neither declaration formalizes this displayed choice of basis.}
