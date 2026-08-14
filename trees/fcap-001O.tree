@@ -1,0 +1,29 @@
+\import{spin-macros}
+\meta{agent-authored}{true}
+
+\tag{fcap}
+\tag{spin}
+\tag{clifford}
+
+\taxon{Theorem}
+\title{An orthogonal Lie action lifts to every Clifford module \citet{Section 3.1, pp. 294--295}{kostant1997clifford}}
+\lean/tauceti{TauCeti.CliffordAlgebra.cliffordInducedRep,TauCeti.CliffordAlgebra.cliffordInducedRep_apply}
+
+\p{Let #{K} be a field in which #{2} is invertible, let #{V} be
+finite-dimensional, and let #{Q} be nondegenerate. Suppose a #{K}-Lie algebra
+#{L} acts orthogonally on #{V} through
+
+##{\theta:L\longrightarrow\mathfrak{so}(V,B_Q),}
+
+and let #{\rho:\Cl(Q)\to\operatorname{End}_K(S)} be any Clifford module.
+The equivalence of \ref{fcap-000R} lifts #{\theta} to quadratic Clifford
+elements; composing with #{\rho} gives a Lie representation
+
+##{\rho_{\Cl}:L\longrightarrow\operatorname{End}_K(S),\qquad
+\rho_{\Cl}(y)=\rho\bigl(\operatorname{soEquivQuadratic}(\theta(y))\bigr).}
+
+Kostant constructs this lift for a complex reductive group representation
+and then lets its quadratic elements act on the spin module. The formalized
+statement isolates the algebraic mechanism over the stated field and for an
+arbitrary Clifford module; it does not assert that #{\theta} is a differential
+of a group representation.}
