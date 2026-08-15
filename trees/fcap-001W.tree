@@ -1,0 +1,36 @@
+\import{spin-macros}
+\meta{agent-authored}{true}
+
+\tag{fcap}
+\tag{spin}
+\tag{lie}
+
+\taxon{Remark}
+\title{Why explicit smoothness changes the roadmap
+\citet{Sections 2.1--2.4 and 2.8, pp. 9--13, 19--20}{liu2016lie};
+\citet{Section 3.1.2, pp. 106--107}{isaev2018theory}}
+
+\p{The constructions in \ref{fcap-001R}--\ref{fcap-001V} start with a
+smooth homomorphism. Their tangent map, bracket law, functor laws, and
+exponential naturality therefore do not require a theorem that upgrades a
+continuous homomorphism to a smooth one. The generic theorem does not invoke
+the closed-subgroup theorem; that theorem belongs to the later specialization
+to concrete matrix subgroups. This is the dependency split proposed in
+\href{https://github.com/TauCetiProject/TauCetiRoadmap/pull/224}{TauCetiRoadmap
+PR 224}.}
+
+\p{The exponential input is separate from the tangent and bracket input.
+Likewise, the Baker--Campbell--Hausdorff calculation can first be made in a
+matrix or general-linear group; using it inside a particular closed matrix
+subgroup additionally requires the subgroup's Lie structure. Liu describes
+the local exponential and BCH coordinates, while Isaev--Rubakov give the
+matrix Campbell--Hausdorff calculation.}
+
+\p{The open
+\href{https://github.com/TauCetiProject/TauCeti/pull/3078}{TauCeti draft PR 3078}
+proposes the generic construction and its functor and
+exponential laws. It is not merged, so these cards carry no Lean markers.
+Even after that generic interface lands, the differential of
+#{\Spin(Q)\to SO(Q)} still needs compatible Lie-group structures on the two
+abstract groups. The algebraic identification in \ref{fcap-000R} does not by
+itself supply those structures.}

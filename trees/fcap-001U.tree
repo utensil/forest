@@ -1,0 +1,41 @@
+\import{spin-macros}
+\meta{agent-authored}{true}
+
+\tag{fcap}
+\tag{spin}
+\tag{lie}
+
+\taxon{Theorem}
+\title{Naturality of the exponential
+\citet{Section 2.4, pp. 12--13}{liu2016lie}}
+
+\p{Let #{\phi:G\to H} be a smooth Lie-group homomorphism. For every
+#{X\in\mathfrak g},
+
+##{\phi(\exp_G X)
+=\exp_H\bigl(\operatorname{Lie}(\phi)(X)\bigr).}
+
+Equivalently, the square
+
+\tikzfig{
+\begin{tikzcd}[column sep=large,row sep=large]
+\mathfrak g \arrow[r,"\operatorname{Lie}(\phi)"]
+  \arrow[d,"\exp_G"']
+& \mathfrak h \arrow[d,"\exp_H"] \\
+G \arrow[r,"\phi"']
+& H
+\end{tikzcd}
+}
+
+commutes.}
+
+\subtree{
+\taxon{Proof}
+\p{The curve #{t\mapsto\phi(\exp_G(tX))} is a one-parameter subgroup of
+#{H}. Its tangent vector at #{t=0} is
+#{\operatorname{Lie}(\phi)(X)}. The curve
+#{t\mapsto\exp_H(t\operatorname{Lie}(\phi)(X))} has the same property and
+the same tangent vector. Uniqueness of the one-parameter subgroup with a
+given tangent vector identifies the curves; setting #{t=1} proves the
+formula.}
+}
