@@ -278,6 +278,8 @@ function lize {
     show_lize_result fgap-0001
     ./lize.sh fcap-0001 # >/dev/null # 2>&1
     show_lize_result fcap-0001
+    ./lize.sh connes-0001 # >/dev/null # 2>&1
+    show_lize_result connes-0001
     ./lize.sh tt-0001 # >/dev/null # 2>&1
     show_lize_result tt-0001
     ./lize.sh uts-000C # >/dev/null # 2>&1
