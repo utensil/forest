@@ -1,0 +1,26 @@
+\import{spin-macros}
+\meta{agent-authored}{true}
+
+\tag{connes}
+\tag{lean}
+\tag{proof-engineering}
+\taxon{Remark}
+\title{Structure forgetting and equivalence reuse}
+\lean/connes{Connes.CrossedProduct.EquivariantHaarHomeomorph,Connes.CrossedProduct.continuousCrossedClosure_mem_iff}
+
+\p{\strong{Forget structure after it has served its consumer.}
+The Section 3 shear is packaged as an equivariant measure-preserving
+homeomorphism because pullback must preserve continuous coefficients. Its
+canonical projection to an equivariant measurable equivalence is what the full
+#{L^\infty} crossed-product transport consumes. This one-way forgetting records
+both facts accurately: Zhou's factor argument does not need an additive map,
+while the Lean density bridge legitimately uses the continuity proved in
+\citet{Proposition 3.2 and Remark 3.3}{zhou2026icc}.}
+
+\p{\strong{Prefer library equivalences to pointwise cancellation.}
+Mathlib already supplies continuous pullback as a star-algebra equivalence, so
+its surjectivity gives the reverse generator inclusion without a custom
+involutivity proof. Likewise, the inverse law for conjugation by a linear
+isometry equivalence replaces a pointwise operator calculation. These
+replacements shorten the proof while exposing the actual mathematical reason:
+both steps are transport along equivalences.}

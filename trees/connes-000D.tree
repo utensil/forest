@@ -1,0 +1,36 @@
+\import{spin-macros}
+\meta{agent-authored}{true}
+
+\tag{connes}
+\tag{lean}
+\tag{measure-theory}
+\taxon{Remark}
+\title{Nonadditive shear and measure transport}
+\lean/connes{Connes.CrossedProduct.EquivariantHaarHomeomorph,Connes.PaperCrossedHaar.paperHaarHomeomorph}
+
+\p{Proposition 3.2 proves that the fiber shear preserves Haar measure and
+strictly conjugates the two actions. Its quadratic correction is generally not
+additive, so Zhou's Remark 3.3
+does not claim a compact-group automorphism. Proposition 3.4 uses only the
+resulting equivariant measure-space isomorphism after Fourier transform
+\citet{Proposition 3.2, Remark 3.3, and Proposition 3.4}{zhou2026icc}. The
+independent crossed-product discussion in
+\citet{Chapter 4, Section 2.3, equation (2.1)}{openai2026tenadvances}
+states the same abstract mechanism: group-law compatibility of the underlying
+compact spaces is not required.}
+
+\p{The Lean boundary mirrors this distinction. The concrete
+\href{https://github.com/utensil/connes-rigidity/blob/a7a45d1985a06168f96a296413d14e99dd0af485/Connes/Paper/Section3/CrossedHaar.lean#L108-L141}{\code{paperFiberShearHomeomorph} and \code{paperHaarHomeomorph}}
+package continuity, measure preservation, and action equivariance, but no
+additive-homomorphism field. At the foundation layer,
+\href{https://github.com/utensil/connes-rigidity/blob/a7a45d1985a06168f96a296413d14e99dd0af485/Connes/Foundation/OperatorAlgebra/CrossedProductFactorTransport.lean#L141-L162}{\code{EquivariantHaarHomeomorph}}
+projects this topological witness to the measurable transport interface. The
+extra topology is an implementation aid, not a stronger mathematical premise
+for the crossed-product identification.}
+
+\p{A measurable equivariant isomorphism is mathematically sufficient for the
+abstract transport. The concrete homeomorphism is formally convenient because
+pullback preserves continuous coefficients. The proof uses that extra
+structure for the density bridge and forgets it at the measurable boundary,
+without falsely requiring an additive equivalence. The separate closure step is
+recorded in \ref{connes-000E}.}
