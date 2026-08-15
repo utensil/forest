@@ -9,19 +9,24 @@
 \lean/connes{Connes.HasKazhdanPropertyT,Connes.HasRelativePropertyT,Connes.PaperPropertyT.elementaryGroup}
 
 \p{The exact Lean boundary for \ref{connes-0003} uses
-\href{https://github.com/utensil/connes-rigidity/blob/main/Connes/Core.lean#L46-L88}{the almost-invariance and property-(T) predicates}.
+the almost-invariance and property-(T) predicates
+\leanref/connes{Connes.UnitaryRepresentation.HasAlmostInvariantUnitVectors},
+\leanref/connes{Connes.HasKazhdanPropertyT}, and
+\leanref/connes{Connes.HasRelativePropertyT}.
 This qualitative form matches the final consumer, while quantitative Kazhdan
 sets and constants remain local to any future proof of the EJZK input.}
 
 \p{The transfer argument uses the fixed subspace #{H^N} of a normal subgroup
 #{N} and its orthogonal complement. Relative property (T) produces a nonzero
 vector in #{H^N}; property (T) of the quotient then acts on #{H^N}. The
-\href{https://github.com/utensil/connes-rigidity/blob/main/Connes/Foundation/OperatorAlgebra/PropertyTTransfer.lean#L264-L278}{relative-and-quotient transfer theorem}
+relative-and-quotient transfer theorem
+\leanref/connes{Connes.PropertyTTransfer.hasKazhdanPropertyT_of_relative_and_quotient}
 packages this step without exposing the concrete presentation of Zhou's
 groups to the spectral proof.}
 
 \p{A future EJZK development should use Kazhdan pairs, ratios, or spectral
 gaps internally, then export
-\href{https://github.com/utensil/connes-rigidity/blob/main/Connes/Paper/Section4/PropertyT.lean#L23-L39}{property (T) for the elementary group}.
+\leanref/connes{Connes.PaperPropertyT.elementaryGroup} for property (T) of
+the elementary group.
 Demanding a particular constant at the public boundary would strengthen the
 paper's hypothesis and couple every consumer to an arbitrary estimate.}

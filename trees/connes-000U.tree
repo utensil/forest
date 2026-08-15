@@ -9,9 +9,11 @@
 \lean/connes{Connes.Construction.PaperKernel.delta_diagonal,Connes.Construction.PaperKernel.concreteSquareSpanData}
 
 \p{The Lean carriers and diagonal for \ref{connes-000C} are
-\href{https://github.com/utensil/connes-rigidity/blob/main/Connes/Construction.lean#L55-L73}{\code{Construction.PaperKernel.C} and \code{diagonal}};
+\leanref/connes{Connes.Construction.PaperKernel.C} and
+\leanref/connes{Connes.Construction.PaperKernel.diagonal};
 the coefficientwise map and retraction equation are
-\href{https://github.com/utensil/connes-rigidity/blob/main/Connes/Construction.lean#L136-L178}{\code{delta} and \code{delta_diagonal}}.}
+\leanref/connes{Connes.Construction.PaperKernel.delta} and
+\leanref/connes{Connes.Construction.PaperKernel.delta_diagonal}.}
 
 \p{The implementation fixes the standard polynomial and coordinate bases. It
 takes the coefficientwise Hadamard product on #{k[t]}, applies it in the three
@@ -23,12 +25,12 @@ product, and restricts it to #{C}. The Boolean identity #{x^2=x} gives
 inverse to the diagonal squares, equivariant for the diagonal
 #{\mathrm{SL}_3(k[t])}-action. Equivariance is not proved by expanding an
 arbitrary fixed tensor. The submodule
-\href{https://github.com/utensil/connes-rigidity/blob/main/Connes/Construction/PaperActions.lean#L103-L142}{\code{squareSpan}}
+\leanref/connes{Connes.Construction.PaperKernel.squareSpan}
 is the span of the squares #{a\otimes a}; the equation is immediate on each
 square, hence on their span.}
 
 \p{The basis calculation in
-\href{https://github.com/utensil/connes-rigidity/blob/main/Connes/Construction/SquareSpan.lean#L206-L264}{\code{concreteSquareSpanData}}
+\leanref/connes{Connes.Construction.PaperKernel.concreteSquareSpanData}
 proves that every flip-fixed tensor belongs to this span. The
 \code{SquareSpanData} interface therefore hides the coordinates from later
 sections. Consumers need only the spanning result, so a future basis-free

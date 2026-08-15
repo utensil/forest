@@ -118,12 +118,24 @@
                 <xsl:call-template name="splitlean">
                     <xsl:with-param name="pText" select="." />
                     <xsl:with-param name="sep" select="','" />
-                    <xsl:with-param name="base" select="'https://github.com/utensil/connes-rigidity/search?q='" />
-                    <xsl:with-param name="suffix" select="'&amp;type=code'" />
+                    <xsl:with-param name="base" select="'https://utensil.github.io/connes-rigidity/docs/find/#doc/'" />
                     <xsl:with-param name="short" select="true()" />
                 </xsl:call-template>
             </div>
             <span class="meta-lean-symbol">L∃∀N</span>
+        </span>
+    </xsl:template>
+
+    <!-- Forest and the Connes reference share a GitHub Pages origin. Keep
+         declaration fragments intact instead of routing this sibling site as
+         a local Forest tree. -->
+    <xsl:template
+        match="fr:link[@type='external'][starts-with(@href, 'https://utensil.github.io/connes-rigidity/docs/find/#doc/')]"
+        priority="20">
+        <span class="link external">
+            <a href="{@href}">
+                <xsl:copy-of select="node()" />
+            </a>
         </span>
     </xsl:template>
 

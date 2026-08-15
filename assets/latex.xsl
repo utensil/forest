@@ -214,8 +214,7 @@
         </xsl:if>
         <xsl:call-template name="lean-markers">
           <xsl:with-param name="markers" select="." />
-          <xsl:with-param name="base" select="'https://github.com/utensil/connes-rigidity/search?q='" />
-          <xsl:with-param name="suffix" select="'&amp;type=code'" />
+          <xsl:with-param name="base" select="'https://utensil.github.io/connes-rigidity/docs/find/\#doc/'" />
           <xsl:with-param name="short" select="true()" />
         </xsl:call-template>
       </xsl:for-each>
