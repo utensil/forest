@@ -7,7 +7,7 @@
 \tag{von-neumann-algebra}
 \taxon{Theorem}
 \title{Spatial implementation of the factor equivalence}
-\lean/connes{Connes.FactorWitness.SpatialWitness,Connes.FactorWitness.tracialEquiv_of_spatialWitness,Connes.PaperFactorClosure.paperGroupFactors_isomorphic}
+\lean/connes{Connes.CrossedProduct.EquivariantHaarHomeomorph,Connes.CrossedProduct.vonNeumannClosure_crossedGeneratorSetOfContinuousCoefficients_eq,Connes.CrossedProduct.continuousCrossedClosure_mem_iff,Connes.PaperCrossedHaar.paperHaarHomeomorph,Connes.PaperFactorClosure.paperGroupFactors_isomorphic}
 
 \p{The group von Neumann algebra #{L(G)} is represented on #{\ell^2(G)} as
 the von Neumann closure of the left regular operators. Its canonical trace is
@@ -25,16 +25,50 @@ and obtains trace preservation from the vacuum equation. Thus no operator-
 algebra conclusion is stored as an unexplained premise.}
 
 \p{For Zhou's groups, the concrete unitary is a composite of the two Fourier
-models and the fiber shear. The difficult closure statement is kept separate:
-the images of continuous crossed-product generators agree, their spans are
-dense, and conjugation therefore matches the two von Neumann closures. The
-final concrete objects are
-\href{https://github.com/utensil/connes-rigidity/blob/main/Connes/Paper/Section3/FactorClosure.lean#L578-L697}{\code{paperSpatialUnitary}, \code{paperSpatialWitness}, and \code{paperGroupFactors_isomorphic}}.
-This is the operator-algebra interface behind the construction in
-\citet{Section 3}{zhou2026icc}. Chapter 4 of
-\citek{openai2026tenadvances} is an independent binary-carry construction and
-mathematical context; it is not the source of these Lean declarations. Adapted
-Lean infrastructure is traced separately to the pinned
+models and the fiber shear. Proposition 3.2 proves that the shear is a
+Haar-measure-preserving homeomorphism and strictly conjugates the two actions.
+Remark 3.3 emphasizes the decisive point: its quadratic correction is generally
+not additive, so the shear need not be a compact-group automorphism. Proposition
+3.4 then uses only the induced equivariant measure-space isomorphism after
+Fourier transform
+\citet{Proposition 3.2, Remark 3.3, and Proposition 3.4}{zhou2026icc}. The
+independent crossed-product discussion in
+\citet{Chapter 4, Section 2.3, equation (2.1)}{openai2026tenadvances}
+corroborates this general mechanism: the crossed product depends on the Haar
+probability space and its action, not on preservation of the compact-group law.}
+
+\p{The Lean boundary mirrors that distinction. The concrete
+\href{https://github.com/utensil/connes-rigidity/blob/a7a45d1985a06168f96a296413d14e99dd0af485/Connes/Paper/Section3/CrossedHaar.lean#L108-L141}{\code{paperFiberShearHomeomorph} and \code{paperHaarHomeomorph}}
+package continuity, measure preservation, and action equivariance, but contain
+no additive-homomorphism field. Forgetting the topology gives the existing
+measurable \code{paperHaarEquiv}. At the foundation layer,
+\href{https://github.com/utensil/connes-rigidity/blob/a7a45d1985a06168f96a296413d14e99dd0af485/Connes/Foundation/OperatorAlgebra/CrossedProductFactorTransport.lean#L141-L162}{\code{EquivariantHaarHomeomorph}}
+records exactly this stronger witness and projects it to the measurable
+transport interface. The extra topology is an implementation aid for the
+continuous-coefficient argument, not a replacement for the paper's
+measure-theoretic statement.}
+
+\p{The closure proof has a separate job. Coordinate characters have norm-dense
+linear span in the continuous functions by Stone--Weierstrass. Since continuous
+coefficients act continuously as crossed-product multipliers, the generic
+\href{https://github.com/utensil/connes-rigidity/blob/a7a45d1985a06168f96a296413d14e99dd0af485/Connes/Foundation/OperatorAlgebra/CrossedProductFactorTransport.lean#L215-L375}{continuous-coefficient closure theorem}
+upgrades that density to equality of the generated von Neumann closures. The
+homeomorphism then transports continuous coefficients by pullback and yields
+the closure-membership equivalence
+\href{https://github.com/utensil/connes-rigidity/blob/a7a45d1985a06168f96a296413d14e99dd0af485/Connes/Foundation/OperatorAlgebra/CrossedProductFactorTransport.lean#L377-L460}{\code{continuousCrossedClosure_mem_iff}}.
+This does \em{not} assert that continuous functions are norm-dense in
+#{L^\infty}; instead it compares the particular von Neumann closures generated
+before and after adjoining all continuous coefficients.}
+
+\p{The paper-facing file now applies those two generic theorems once to each
+action, then composes the Fourier models with the shear. The final objects are
+\href{https://github.com/utensil/connes-rigidity/blob/a7a45d1985a06168f96a296413d14e99dd0af485/Connes/Paper/Section3/FactorClosure.lean#L276-L404}{\code{paperSpatialUnitary}, \code{paperSpatialWitness}, and \code{paperGroupFactors_isomorphic}}.
+The refactor removes parallel action-one/action-two closure plumbing while
+leaving the Proposition 3.4 endpoint and Zhou's section order unchanged.}
+
+\p{Chapter 4 of \citek{openai2026tenadvances} develops an independent
+binary-carry construction and is mathematical context, not the source of these
+Lean declarations. Adapted Lean infrastructure is traced separately to the pinned
 \href{https://github.com/openai/ten-proofs/tree/94bc0feb6a9ff12c7d31d6de640a725c9d43d2b6}{\code{openai/ten-proofs} snapshot},
 through the Connes project's
 \href{https://github.com/utensil/connes-rigidity/blob/main/docs/PROVENANCE.md}{provenance ledger}
@@ -48,3 +82,11 @@ The group-factor consumer needs an equivalence of membership in the completed
 von Neumann algebras. Keeping that biconditional as the witness field prevents
 a dense-span argument from being silently replaced by a statement about an
 algebraic subalgebra.}
+
+\p{\strong{Design adaptation: separate mathematical sufficiency from formal
+convenience.} A measurable equivariant isomorphism suffices for the abstract
+crossed-product identification. The available concrete shear is also a
+homeomorphism, and that stronger fact makes pullback preserve continuous
+coefficients. The formalization uses the topological witness for the density
+bridge and immediately forgets it when invoking the measurable transport. This
+keeps the proof efficient without falsely requiring an additive equivalence.}
