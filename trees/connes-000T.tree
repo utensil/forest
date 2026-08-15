@@ -4,25 +4,32 @@
 \tag{connes}
 \tag{lean}
 \tag{agent-draft}
-\title{Agent use and human digestion}
+\title{Agent-assisted work and human examination}
 
-\p{The project tests a workflow for preparing a draft formalization for human
-examination:}
+\p{An agent-authored formalization is easier to examine when the code comes
+with a route back to the literature, an executable verification record, and an
+audit of the questions that technical checks cannot settle. This project tests
+that combined method.}
 
 \ul{
-  \li{\strong{Grounding:} mathematical claims tied to the papers;}
-  \li{\strong{Traceability:} declaration-level provenance;}
-  \li{\strong{Digest:} code paired with mathematical and design notes;}
-  \li{\strong{Verification:} proof replay kept separate from mathematical
-  review; and}
-  \li{\strong{Human gate:} unresolved boundaries recorded, with corrections and landing under
-  human control.}
+  \li{\strong{Grounding:} mathematical claims tied to the literature and
+  external inputs identified at their exact Lean boundary.}
+  \li{\strong{Technical verification:} statement and axiom comparison,
+  Landlock and network isolation, and replay through the Lean kernel and
+  nanoda, as recorded in the
+  \href{https://github.com/utensil/connes-rigidity/blob/main/docs/COMPARATOR.md}{Comparator note}.}
+  \li{\strong{Mathematical audit:} source correspondence, definitions,
+  hypotheses, concrete consumers, literature claims, and proof architecture
+  tracked in the
+  \href{https://github.com/utensil/connes-rigidity/blob/main/docs/AUDITS.md}{audit ledger}.}
+  \li{\strong{Traceability:} declarations and transferred proof material
+  connected to their sources by the
+  \href{https://github.com/utensil/connes-rigidity/blob/main/docs/PROVENANCE.md}{provenance ledger}.}
+  \li{\strong{Exposition:} mathematical arguments, implementation choices,
+  and unresolved boundaries collected in these notes.}
 }
 
-\p{The public
-\href{https://github.com/utensil/connes-rigidity/blob/main/docs/AUDITS.md}{audit ledger},
-\href{https://github.com/utensil/connes-rigidity/blob/main/docs/PROVENANCE.md}{provenance ledger},
-and
-\href{https://github.com/utensil/connes-rigidity/blob/main/docs/COMPARATOR.md}{Comparator trust-boundary note}
-make those roles explicit. This is a draft prepared for human examination, not
-a claim of independent peer review.}
+\p{Together these layers let a reader follow a claim from the literature to
+its Lean definition, downstream consumer, audit status, and executable check.
+The resulting draft includes the material a human needs to examine and digest
+the work.}
