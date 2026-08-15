@@ -328,6 +328,8 @@ section:has(> details > summary > header .agent-authored-watermark)
     /* The only light-mode visual change: warm paper instead of white. */
     --uts-background: #f4efde;
     --uts-surface: var(--uts-background);
+    /* Keep colored taxon cards on their PDF-style white tint, not the paper. */
+    --uts-taxon-surface: white;
     --uts-hover: rgba(0, 100, 255, 0.04);
     --uts-outline: var(--uts-text-gentle);
     --uts-vocab: #75140c;
@@ -352,6 +354,7 @@ section:has(> details > summary > header .agent-authored-watermark)
     --uts-text-cite: #b8d488;
     --uts-background: #232323;
     --uts-surface: #2b2b2b;
+    --uts-taxon-surface: var(--uts-surface);
     --uts-hover: #333333;
     --uts-outline: #3a3a3a;
     --uts-vocab: #e8bc6e;
@@ -569,7 +572,7 @@ section[data-taxon] {
     background-color: color-mix(
         in srgb,
         var(--taxon-color) 6%,
-        var(--uts-surface) 94%
+        var(--uts-taxon-surface) 94%
     );
 }
 
@@ -577,7 +580,7 @@ section[data-taxon]:hover {
     background-color: color-mix(
         in srgb,
         var(--taxon-color) 12%,
-        var(--uts-surface) 88%
+        var(--uts-taxon-surface) 88%
     );
 }
 
