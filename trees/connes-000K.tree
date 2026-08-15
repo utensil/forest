@@ -4,7 +4,6 @@
 \title{Formalization design}
 \tag{connes}
 \tag{lean}
-\taxon{Remark}
 
 \author{utensil}
 \date{2026-08-12}
@@ -54,56 +53,76 @@ separate port at the construction and theorem nodes.}
 \end{tikzpicture}
 }
 
-\p{The mathematical weight is uneven. The characteristic-two construction in
-\ref{connes-000C} is concrete algebra and supplies every later carrier. The
-factor lane in \ref{connes-0007}, \ref{connes-000D}, and \ref{connes-000E} is
-heavy operator algebra: compact duals, Haar
-measure, Fourier transforms, von Neumann closures, and trace transport. The
-property-(T) lane in \ref{connes-0003}, \ref{connes-0004}, and
-\ref{connes-0005} is heavy harmonic and representation theory: spectral
-measures and finite detectors are internal, while the deep EJZK theorem enters
-at one narrow boundary. The ICC lane in \ref{connes-0006} is the lightest
-conceptually, but still needs exact orbit and finite-quotient displacement
-calculations. The nonisomorphism lane in \ref{connes-0008} is the deepest
-internal algebraic chain: characteristic kernels, quotient twists,
-semisimplicity, and a finite cocycle obstruction must survive transport along
-an arbitrary group isomorphism.}
+\p{The mathematical weight is uneven:}
 
-\p{Most definitions and algebraic laws translate directly. Special design is
-needed where the paper leaves an interface implicit: the square-span
-certificate in \ref{connes-000C}; the spatial, measurable, and closure bridges
-in \ref{connes-0007}, \ref{connes-000D}, and \ref{connes-000E}; the separation
-of quantitative spectral detection from the qualitative property-(T) boundary
-in \ref{connes-0003} and \ref{connes-0004}; the three-case ICC criterion in
-\ref{connes-0006}; the quotient twist in \ref{connes-000H}; and the
-proposition-valued assembly in \ref{connes-0002}. The reusable design lessons
-are isolated in \ref{connes-000A}, \ref{connes-000F}, and \ref{connes-000J}.}
+\ul{
+  \li{\strong{Construction.} The characteristic-two calculation in
+  \ref{connes-000C} is concrete algebra and supplies every later carrier.}
+  \li{\strong{Factor equivalence.} \ref{connes-0007}, \ref{connes-000D}, and
+  \ref{connes-000E} carry heavy operator algebra: compact duals, Haar measure,
+  Fourier transforms, von Neumann closures, and trace transport.}
+  \li{\strong{Property (T).} \ref{connes-0003}, \ref{connes-0004}, and
+  \ref{connes-0005} carry heavy harmonic and representation theory. Spectral
+  measures and finite detectors are internal; EJZK enters at one boundary.}
+  \li{\strong{ICC.} \ref{connes-0006} is the lightest lane conceptually, but
+  still needs exact orbit and finite-quotient displacement calculations.}
+  \li{\strong{Nonisomorphism.} \ref{connes-0008} is the deepest internal
+  algebraic chain. Characteristic kernels, quotient twists, semisimplicity,
+  and a finite cocycle obstruction must survive an arbitrary isomorphism.}
+}
+
+\p{Most definitions and algebraic laws translate directly. Six interfaces
+require special design:}
+
+\ul{
+  \li{the square-span certificate in \ref{connes-000C};}
+  \li{the spatial, measurable, and closure bridges in \ref{connes-0007},
+  \ref{connes-000D}, and \ref{connes-000E};}
+  \li{the quantitative detector and qualitative property-(T) boundary in
+  \ref{connes-0003} and \ref{connes-0004};}
+  \li{the three-case ICC criterion in \ref{connes-0006};}
+  \li{the quotient twist in \ref{connes-000H}; and}
+  \li{the proposition-valued assembly in \ref{connes-0002}.}
+}
+
+\p{Reusable design lessons are isolated in \ref{connes-000A},
+\ref{connes-000F}, and \ref{connes-000J}.}
 
 \p{The code has two layers. Reusable group theory, linear
 algebra, topology, measure theory, and operator algebra live in a foundation
 layer. Zhou-specific carriers and certificates live in construction and paper
 layers. This separation lets the
 paper-facing modules state small consumer interfaces while coordinate or finite
-calculations remain behind named certificates. The public
+calculations remain behind named certificates.}
+
+\p{The public
 \href{https://github.com/utensil/connes-rigidity/blob/main/docs/PLAN.md}{formalization plan}
 and \href{https://github.com/utensil/connes-rigidity/blob/main/docs/STATEMENT_MAP.md}{statement map}
 give the complete module and declaration crosswalk.}
 
 \p{Each lane exports the smallest object needed by its next consumer: a spatial
 witness, a qualitative property-(T) certificate, orbit and displacement data,
-or a twist-stable module obstruction. Four corrections were mathematically
-decisive: replacing
-identity-action scaffolds by Zhou's actual actions; changing the ICC abstraction
-to handle the finite #{\operatorname{Sp}_4(\mathbb F_2)} factor; following the
-quotient automorphism induced by a hypothetical group isomorphism; and tying
-the factor target to the concrete Fourier shear and completed von Neumann
-closures. The final interface remains proposition-valued. Its assembly and
+or a twist-stable module obstruction.}
+
+\p{Four corrections were mathematically decisive:}
+
+\ul{
+  \li{replace identity-action scaffolds by Zhou's actions;}
+  \li{make the ICC abstraction handle the finite
+  #{\operatorname{Sp}_4(\mathbb F_2)} factor;}
+  \li{follow the quotient automorphism induced by a hypothetical group
+  isomorphism; and}
+  \li{tie the factor target to the Fourier shear and completed von Neumann
+  closures.}
+}
+
+\p{The final interface remains proposition-valued. Its assembly and
 trust boundary are detailed in \ref{connes-0002} and \ref{connes-0009}; the
 remaining EJZK work is scoped in \ref{connes-000B}, \ref{connes-000G}, and
 \ref{connes-000I}.}
 
 \p{Section 1 separates the mathematical introduction, counterexample
-background, motivation, and design. Sections 2--7 then correspond respectively
+background, three motivations, and design. Sections 2--7 correspond respectively
 to Zhou's Sections 2--7; their headings record that correspondence without
 reusing Zhou's section number as the note title. Section 8 collects
 proof-engineering adaptations, Sections 9--10 compare the other two proof
