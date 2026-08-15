@@ -18,17 +18,50 @@ must also make the size of each carrier explicit. The current
 takes a group in \code{Type u} and quantifies over Hilbert carriers in the same
 \code{Type u}. This is the conventional property-(T) interface at the chosen
 Lean universe and is sufficient for the theorem schema formalized here. It
-does not assert a separate universe-independence theorem.}
+matches the spectral consumer: \code{spectral_criterion_unconditional} is
+uniform in each \code{K : Type u} and each \code{UnitaryRepresentation G K},
+rather than selecting one concrete #{\ell^2} or regular representation. The
+interface does not assert a separate universe-independence theorem. A classical theorem
+quantifying over carriers in every universe implies this predicate immediately
+by restriction to \code{Type u}; thus the cited EJZK theorem safely supplies the
+premise used here. The converse is the nontrivial direction, and is not
+definitionally part of the present interface.}
 
-\p{At the pinned
+\p{For a countable group, that converse has a concrete two-stage route. Given
+an arbitrary representation with almost-invariant vectors, choose witnesses
+for the countable family of tests consisting of every finite subset and a
+cofinal sequence of positive accuracies. The closed complex span of all group
+orbits of those witnesses is invariant, complete, separable, and still has
+almost-invariant unit vectors. A nonzero invariant vector in the restricted
+representation is one in the original representation. One can then choose a
+countable Hilbert basis for this subrepresentation, reindex it by a small
+countable type, and conjugate the action onto the resulting #{\ell^2} carrier
+in the group's universe. Applying the present same-universe predicate there
+would prove the universe-polymorphic statement.}
+
+\p{The pinned
 \href{https://github.com/leanprover-community/mathlib4/commit/79cba2e8b532ff92484dfd99f45987bae8b2fd7e}{Mathlib}
-and
+already contains separability of spans
+(\leanref{TopologicalSpace.IsSeparable.span}), separability of closures
+(\leanref{TopologicalSpace.IsSeparable.closure}), completeness of closed spans
+(\leanref{Submodule.topologicalClosure.completeSpace}),
+and Hilbert-basis existence (\leanref{exists_hilbertBasis}).
+At the pinned
 \href{https://github.com/TauCetiProject/TauCeti/commit/cc6ce758421ce3a0731ff62667b7771cfc4aa3da}{TauCeti}
-revisions, there is no ready-made Hilbert-space lowering theorem or separable
-cyclic-subrepresentation construction that transports an arbitrary
-almost-invariant representation into a prescribed smaller universe. A genuine
-universe-independence upgrade would therefore require either such a reduction
-theorem or a systematic generalization of the representation and
-\href{https://github.com/utensil/connes-rigidity/blob/main/Connes/Foundation/OperatorAlgebra/PositiveSpectralMeasure.lean#L2262-L2270}{spectral-criterion stack}
-to independent group and Hilbert-carrier universes. That work is separate from
-closing the EJZK premise and is not part of the present formalization.}
+revision, the continuous-representation library provides invariant restriction
+(\leanref/tauceti{TauCeti.ContRepresentation.subrepresentation}), unitarity
+under restriction
+(\leanref/tauceti{TauCeti.ContRepresentation.IsUnitary.subrepresentation}), and
+transport along an isometry
+(\leanref/tauceti{TauCeti.ContRepresentation.IsUnitary.congr}); its compact-group
+lane also standardizes finite-dimensional carriers
+(\leanref/tauceti{TauCeti.IrrepModel}) by an orthonormal basis, following the explicit
+\href{https://github.com/TauCetiProject/TauCetiRoadmap/blob/a7a221a1954ad303610de07179e3af5a8832f679/TauCetiRoadmap/RepresentationTheory/CompactGroups/Suggested.lean#L278-L294}{finite-dimensional universe convention}
+in its roadmap. Neither pinned codebase
+assembles the countable invariant-span construction, proves that its Hilbert
+basis admits a small countable index, or transports the full property-(T)
+predicate across that model. Together these form the actual lowering seam.
+They are more focused than generalizing the entire
+\href{https://github.com/utensil/connes-rigidity/blob/main/Connes/Foundation/OperatorAlgebra/PositiveSpectralMeasure.lean#L2262-L2270}{spectral-criterion stack},
+but remain separate from closing the EJZK premise and from the present
+formalization.}
