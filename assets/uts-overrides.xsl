@@ -177,11 +177,11 @@
             </xsl:if>
             <!-- AGENT-NOTE: This provenance mark is intentionally web-only; PDF output stays unchanged. -->
             <xsl:if test="../fr:meta[@name='agent-authored'][not(normalize-space(.)='false')]">
-                <span class="agent-authored-watermark" role="note" aria-label="Agent authored"
-                    title="Agent authored">
+                <span class="agent-authored-watermark" role="note" aria-label="Agent drafted"
+                    title="Agent drafted">
                     <span class="agent-authored-watermark-label" aria-hidden="true">
                         <span>AGENT</span>
-                        <span>AUTHORED</span>
+                        <span>DRAFTED</span>
                     </span>
                 </span>
             </xsl:if>
