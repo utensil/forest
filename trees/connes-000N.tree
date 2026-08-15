@@ -1,0 +1,79 @@
+\import{spin-macros}
+\meta{agent-authored}{true}
+
+\tag{connes}
+\tag{operator-algebra}
+\tag{group-cohomology}
+\taxon{Remark}
+\title{Changing the extension class and measurably gauging it away}
+\lean/connes{Connes.PaperDualActionConjugacy.paperFiberShear_conjugates_paperActions,Connes.PaperFactorClosure.paperGroupFactors_isomorphic}
+
+\p{The construction in \citek{anthropic2026icc} fixes both the kernel
+#{A=\mathbb Z^4} and quotient #{Q=\operatorname{Sp}_4(\mathbb Z)}. It compares
+the split semidirect product #{\Gamma_0=A\rtimes Q} with an extension
+#{\Gamma_\tau} defined by a nonzero two-torsion class
+#{[\tau]\in H^2(Q,A)}. Thus the algebraic difference lies neither in the
+kernel nor in the action, but in the extension cocycle. The class is obtained
+as a Bockstein of the theta-characteristic cocycle
+\citet{Sections 3.1--3.3}{anthropic2026icc}.}
+
+\tikzfig{
+\begin{tikzpicture}[
+  every node/.style={font=\small, align=center},
+  datum/.style={draw, rounded corners=2pt, fill=blue!5,
+    text width=27mm, minimum height=10mm},
+  group/.style={draw, rounded corners=2pt, fill=green!7,
+    text width=28mm, minimum height=10mm},
+  crossed/.style={draw, rounded corners=2pt, fill=purple!7,
+    text width=31mm, minimum height=11mm},
+  gauge/.style={draw, dashed, rounded corners=2pt, fill=orange!9,
+    text width=29mm, minimum height=10mm},
+  flow/.style={-{Stealth[length=2mm]}, thick}
+]
+\node[datum] (zero) at (-5.0,1.25) {extension class $0$\\same $A$ and $Q$};
+\node[datum] (tau) at (-5.0,-1.25) {class $[\tau]\ne0$\\same $A$ and $Q$};
+\node[group] (gamma0) at (-1.4,1.25) {split group\\$\Gamma_0$};
+\node[group] (gammatau) at (-1.4,-1.25) {non-split group\\$\Gamma_\tau$};
+\node[crossed] (plain) at (2.5,1.25) {untwisted crossed\\product on $\mathbb T^4$};
+\node[crossed] (twisted) at (2.5,-1.25) {$u_\tau$-twisted crossed\\product on $\mathbb T^4$};
+\node[gauge] (psi) at (2.5,-3.2) {measurable gauge $\Psi$\\cobounds $u_\tau$};
+\draw[flow] (zero) -- (gamma0);
+\draw[flow] (tau) -- (gammatau);
+\draw[flow] (gamma0) -- (plain);
+\draw[flow] (gammatau) -- (twisted);
+\draw[flow, dashed] (plain.east) -- ++(6mm,0) |- (psi.east);
+\draw[flow, dashed] (twisted.south) -- (psi.north);
+\end{tikzpicture}
+}
+
+\p{After Fourier transform, the two group factors become an untwisted and a
+twisted crossed product over #{\mathbb T^4}. A Borel choice of representatives
+for #{\mathbb R^4/\mathbb Z^4} produces an integral carry cocycle. The paper
+combines that carry with a quadratic refinement of the symplectic form to
+construct phases #{\Psi_g}; their coboundary is exactly the dual twist
+#{u_\tau}. The resulting gauge is a trace-preserving isomorphism of the crossed
+products \citet{Sections 2.3 and 5.1--5.3, especially Theorems 5.1 and
+5.2}{anthropic2026icc}. Nonisomorphism survives because #{[\tau]\ne0}: one
+extension splits and the other does not \citet{Section 4}{anthropic2026icc}.
+The paper proves ICC directly and obtains property (T) from the classical
+#{\operatorname{Sp}_4(\mathbb Z)} and relative-property-(T) input, followed by
+finite-index permanence \citet{Lemmas 3.7--3.8}{anthropic2026icc}.}
+
+\p{The three constructions can therefore be distinguished by the algebraic
+datum they vary. OpenAI changes the kernel through a different compact dual
+law; Zhou changes the action through a nonsplit module extension; Anthropic
+changes the group-extension class in #{H^2}. Their measurable repairs also
+live at different levels: an already common measured action, an explicit
+conjugacy of actions, and a one-cochain that untwists a crossed-product
+two-cocycle. Remark 7.1 of \citek{anthropic2026icc} describes the last point as
+a torsion class becoming measurably trivial on the connected dual while its
+branch defects are repaired by the quadratic carry terms.}
+
+\p{Formalizing this proof would not be a small refactor of the Zhou
+development. The current factor-transport layer treats untwisted crossed
+products and strict action conjugacy. The Anthropic route would additionally
+need explicit group-extension cohomology, cocycle-twisted crossed products,
+Borel fundamental-domain representatives, and a verified measurable gauge.
+Its property-(T) lane appears shorter than the current EJZK boundary, but its
+factor lane introduces genuinely new infrastructure. These claims are not
+included in the present Lean theorem.}

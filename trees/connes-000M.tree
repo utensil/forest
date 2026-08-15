@@ -1,0 +1,78 @@
+\import{spin-macros}
+\meta{agent-authored}{true}
+
+\tag{connes}
+\tag{operator-algebra}
+\tag{group-theory}
+\taxon{Remark}
+\title{Changing the kernel while preserving the measured action}
+\lean/connes{Connes.PaperCrossedHaar.paperHaarEquiv,Connes.PaperFactorClosure.paperGroupFactors_isomorphic}
+
+\p{Chapter 4 of \citek{openai2026tenadvances} constructs a countable family
+#{\Gamma_n=E_n\rtimes K}. The acting property-(T) group #{K} is fixed, while
+the discrete abelian kernels #{E_n} are dual to different compact group laws
+on one underlying probability space. Binary carry changes the compact group
+structure but not its Borel probability space or the relevant #{K}-action.
+Pontryagin duality therefore presents every group factor by the same measured
+crossed product
+#{L^\infty(X\times Y)\rtimes K}
+\citet{Chapter 4, Sections 2.3, 4, and 6.1--6.2}{openai2026tenadvances}.}
+
+\tikzfig{
+\begin{tikzpicture}[
+  every node/.style={font=\small, align=center},
+  source/.style={draw, rounded corners=2pt, fill=blue!5,
+    text width=26mm, minimum height=10mm},
+  group/.style={draw, rounded corners=2pt, fill=green!7,
+    text width=24mm, minimum height=10mm},
+  factor/.style={draw, very thick, rounded corners=2pt, fill=purple!7,
+    text width=31mm, minimum height=15mm},
+  certificate/.style={draw, dashed, rounded corners=2pt, fill=orange!9,
+    text width=28mm, minimum height=9mm},
+  flow/.style={-{Stealth[length=2mm]}, thick}
+]
+\node[source] (law0) at (-4.7,1.2) {compact law $C_0$\\on $X\times Y$};
+\node[source] (lawn) at (-4.7,-1.2) {shifted law $C_n$\\on $X\times Y$};
+\node[group] (gamma0) at (-1.3,1.2) {$E_0=\widehat C_0$\\$\Gamma_0=E_0\rtimes K$};
+\node[group] (gamman) at (-1.3,-1.2) {$E_n=\widehat C_n$\\$\Gamma_n=E_n\rtimes K$};
+\node[factor] (common) at (3.1,0) {one measured $K$-space\\one crossed product};
+\node[certificate] (invariant) at (-1.3,-3.0) {finite-orbit invariant\\recovers $n$};
+\draw[flow] (law0) -- (gamma0);
+\draw[flow] (lawn) -- (gamman);
+\draw[flow] (gamma0) -- (common);
+\draw[flow] (gamman) -- (common);
+\draw[flow, dashed] (gamman) -- (invariant);
+\end{tikzpicture}
+}
+
+\p{The proof separates the information forgotten by the group-factor functor
+from the information retained by the abstract group. The common measured
+action gives isomorphic factors. For the first pair, order-four torsion already
+distinguishes the groups. For the full family, the parameter #{n} is recovered
+from an intrinsic finite-orbit subgroup of #{E_n[2]/2E_n}; finite-index
+embeddings simultaneously prove mutual commensurability
+\citet{Chapter 4, Sections 5.1, 6.2, and 6.4--6.5}{openai2026tenadvances}.
+The same chapter proves property (T) by a relative-property-(T) spectral
+estimate and a Boolean-polynomial support bound, rather than taking it only
+from a classical lattice theorem
+\citet{Chapter 4, Sections 5.2--5.5}{openai2026tenadvances}.}
+
+\p{This is not Zhou's deformation. Zhou keeps both the discrete kernel and the
+quotient fixed and changes the action; the quadratic shear then conjugates the
+two dual actions \citet{Section 1, pp. 2--3}{zhou2026icc}. Here the action on
+the underlying measured space is already common, while the compact group law,
+hence its discrete dual, changes. The
+present Lean development formalizes Zhou's action-changing route. Its Fourier
+and crossed-product interfaces are conceptually reusable, but the shifted
+carry groups, the infinite family, and its finite-orbit invariant are not
+claims of the current formalization. This change of kernel is also what lets
+the OpenAI construction produce an infinite fiber, whereas Zhou's theorem
+selects one explicit pair.}
+
+\p{The balance of proof weight is correspondingly different. Once the compact
+models are identified as the same measured #{K}-space, the factor comparison
+is short. More of the work lies in constructing the shifted family, proving
+the initial relative-property-(T) estimate, and extracting an intrinsic
+invariant that distinguishes every parameter. Zhou instead puts substantial
+weight into the explicit action conjugacy and into transporting a module
+obstruction through an arbitrary group isomorphism.}
