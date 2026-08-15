@@ -10,20 +10,35 @@
 \lean/connes{Connes.PaperPropertyT.elementaryGroup,Connes.HasKazhdanPropertyT,Connes.spectral_criterion_unconditional}
 \lean{SimpleGraph.lapMatrix,SimpleGraph.posSemidef_lapMatrix}
 
+\p{The exact property-(T) input is classical and mathematically well
+established. The literature survey in
+\citet{Section 1.2, pp. 3--4}{ershov2017rootgraded} recalls that Kazhdan's
+1967 theorem, together with subsequent work of Vaserstein, gives property (T)
+for #{G_\Phi(\mathbb F[t])=E_\Phi(\mathbb F[t])} when #{\mathbb F} is finite
+and #{\Phi} is a reduced irreducible classical root system of rank at least
+two.}
+
+\p{Taking #{\Phi=A_2} and #{\mathbb F=\mathbb F_2} yields the required
+#{E_{A_2}(\mathbb F_2[t])=\mathrm{EL}_3(\mathbb F_2[t])} instance. The open
+boundary is therefore one of formalization completeness, not mathematical
+uncertainty.}
+
 \p{The only remaining substantive premise is property (T) for
 #{\mathrm{EL}_3(\mathbb F_2[t])}. The
-primary source-faithful route is the exact elementary-group theorem
-\citet{Theorem 1.1, p. 1; Section 5.4, pp. 25--29; Section 6.1, pp.
-34--35}{ershov2010noncommutative}, specialized to #{R=\mathbb F_2[t]} and
-#{n=3}. The later root-graded treatment
-\citet{Theorem 1.1, p. 3; Sections 2--5 and 7.2--7.4; Appendix
-A}{ershov2017rootgraded} supplies broader supporting language. Our internal
-engineering estimate remains \strong{24--28 thousand new Lean lines}, with an
+route estimated below specializes the 2010 elementary-group theorem to
+#{R=\mathbb F_2[t]} and #{n=3}. Its graph and six-root estimates are cited in
+the implementation layers below. The later root-graded treatment
+supplies broader supporting language.}
+
+\p{Our internal engineering estimate remains \strong{24--28 thousand new Lean lines}, with an
 internal uncertainty envelope of \strong{18--35 thousand}. This is about
 #{0.8}--#{1.5} times the current 23,070-line project and, by our internal
 estimate, \strong{two to four times its present proof-search and engineering
-effort}. The changed source route reallocates work within the original range;
-it does not independently calibrate a new total. The literature supports the
+effort}.}
+
+\p{This estimates one explicit, quantitative route that fits the present
+Lean interfaces; it is neither a measure of confidence in the theorem nor a
+lower bound for formalizing the classical route. The literature supports the
 route and its decomposition, not these LOC or effort figures.}
 
 \p{The six implementation layers, with overlapping uncertainty ranges, are:}
@@ -59,7 +74,9 @@ not an arithmetic derivation of the 18--35 thousand-line envelope.}
 \p{The existing analytic shell is not part of the missing estimate.
 \href{https://github.com/utensil/connes-rigidity/blob/main/Connes/Foundation/OperatorAlgebra/PositiveSpectralMeasure.lean#L2255-L2268}{\code{PositiveSpectralMeasure.spectral_criterion_unconditional}}
 already constructs the positive spectral functional and closes the scalar/PVM
-route from finite spectral detection to property (T). The remaining work is
+route from finite spectral detection to property (T).}
+
+\p{The remaining work is
 the quantitative root-subgroup, fixed-space, graph, and detector mathematics
 listed above; it should reuse that shell rather than construct another PVM
 layer.}

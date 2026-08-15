@@ -24,16 +24,21 @@ of certificates:}
 \href{https://github.com/utensil/connes-rigidity/blob/main/Connes/Paper/Section5/ICC.lean#L37-L45}{\code{PaperICC.ActionData}}
 is exactly this direct-consumer boundary. The generic theorem
 \href{https://github.com/utensil/connes-rigidity/blob/main/Connes/Paper/Section5/ICC.lean#L147-L249}{\code{PaperICC.isICC_of_product_quotient}}
-then splits a nonidentity element into three exhaustive cases. A nontrivial
-#{S}-coordinate inherits an infinite conjugacy class from #{S}; a pure kernel
-element uses the first certificate; and a surviving #{Q}-coordinate is reduced
-to the second certificate.}
+then splits a nonidentity element into three exhaustive cases.}
+
+\ul{
+  \li{A nontrivial #{S}-coordinate inherits an infinite conjugacy class from
+  #{S}.}
+  \li{A pure kernel element uses the first certificate.}
+  \li{A surviving #{Q}-coordinate reduces to the second certificate.}
+}
 
 \p{The paper-specific work is therefore confined to orbit calculations in
 \href{https://github.com/utensil/connes-rigidity/blob/main/Connes/Paper/Section5/ICCOrbits.lean}{\code{ICCOrbits.lean}}.
 Those calculations construct one data pair and yield
-\href{https://github.com/utensil/connes-rigidity/blob/main/Connes/Paper/Section5/ICCOrbits.lean#L585-L597}{\code{paper_gammaOne_icc} and \code{paper_gammaTwo_icc}}.
-This organization follows the cases used in \citet{Section 5}{zhou2026icc}
+\href{https://github.com/utensil/connes-rigidity/blob/main/Connes/Paper/Section5/ICCOrbits.lean#L585-L597}{\code{paper_gammaOne_icc} and \code{paper_gammaTwo_icc}}.}
+
+\p{This organization follows the cases used in \citet{Section 5}{zhou2026icc}
 without building the concrete tensors into the reusable ICC theorem.}
 
 \p{\strong{Design adaptation: displacement is the finite-quotient input.}

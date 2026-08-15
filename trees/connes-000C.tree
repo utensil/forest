@@ -16,8 +16,9 @@
 The diagonal function #{\Delta(a)=a\otimes a} lands in #{C}. Although
 #{\Delta} is not a linear map, Zhou's characteristic-two calculation produces
 a surjective linear retraction #{\delta:C\to A} satisfying
-#{\delta(\Delta(a))=a} \citet{Section 2, Lemma 2.1}{zhou2026icc}. The Lean
-carriers and diagonal are
+#{\delta(\Delta(a))=a} \citet{Section 2, Lemma 2.1}{zhou2026icc}.}
+
+\p{The Lean carriers and diagonal are
 \href{https://github.com/utensil/connes-rigidity/blob/main/Connes/Construction.lean#L55-L73}{\code{Construction.PaperKernel.C} and \code{diagonal}};
 the coefficientwise map and retraction equation are
 \href{https://github.com/utensil/connes-rigidity/blob/main/Connes/Construction.lean#L136-L178}{\code{delta} and \code{delta_diagonal}}.}
@@ -26,7 +27,9 @@ the coefficientwise map and retraction equation are
 bases. It takes the coefficientwise Hadamard product on #{k[t]}, applies it in
 the three coordinates of #{A}, lifts the resulting bilinear map through the
 tensor product, and restricts it to #{C}. The Boolean identity #{x^2=x} gives
-#{\delta(a\otimes a)=a}. This basis-dependent formula is an implementation of
+#{\delta(a\otimes a)=a}.}
+
+\p{This basis-dependent formula is an implementation of
 the basis-free mathematical role: a linear left inverse to the diagonal
 squares, equivariant for the diagonal #{\mathrm{SL}_3(k[t])}-action.}
 
@@ -34,7 +37,9 @@ squares, equivariant for the diagonal #{\mathrm{SL}_3(k[t])}-action.}
 submodule
 \href{https://github.com/utensil/connes-rigidity/blob/main/Connes/Construction/PaperActions.lean#L103-L142}{\code{squareSpan}}
 is the span of the squares #{a\otimes a}. The equation is immediate on each
-square, hence on \code{squareSpan}. The basis calculation in
+square, hence on \code{squareSpan}.}
+
+\p{The basis calculation in
 \href{https://github.com/utensil/connes-rigidity/blob/main/Connes/Construction/SquareSpan.lean#L206-L264}{\code{concreteSquareSpanData}}
 proves its \code{squares_span} field: every flip-fixed tensor belongs to that
 span. This is the bridge from a coordinate construction to the basis-free
