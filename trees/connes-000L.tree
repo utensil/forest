@@ -1,0 +1,34 @@
+\import{spin-macros}
+\meta{agent-authored}{true}
+
+\tag{connes}
+\tag{lean}
+\tag{property-t}
+\tag{formalization-boundary}
+\taxon{Remark}
+\title{Representation-space universe boundary}
+\lean/connes{Connes.HasKazhdanPropertyT,Connes.spectral_criterion_unconditional}
+
+\p{The cited literature formulates property (T) by quantifying over unitary
+representations; see the basic definitions and elementary-group theorem in
+\citet{Section 3.1 and Theorem 1.1}{ershov2010noncommutative}, and the
+root-graded generalization in \citet{Theorem 1.1}{ershov2017rootgraded}. Lean
+must also make the size of each carrier explicit. The current
+\href{https://github.com/utensil/connes-rigidity/blob/main/Connes/Core.lean#L67-L75}{\code{HasKazhdanPropertyT}}
+takes a group in \code{Type u} and quantifies over Hilbert carriers in the same
+\code{Type u}. This is the conventional property-(T) interface at the chosen
+Lean universe and is sufficient for the theorem schema formalized here. It
+does not assert a separate universe-independence theorem.}
+
+\p{At the pinned
+\href{https://github.com/leanprover-community/mathlib4/commit/79cba2e8b532ff92484dfd99f45987bae8b2fd7e}{Mathlib}
+and
+\href{https://github.com/TauCetiProject/TauCeti/commit/cc6ce758421ce3a0731ff62667b7771cfc4aa3da}{TauCeti}
+revisions, there is no ready-made Hilbert-space lowering theorem or separable
+cyclic-subrepresentation construction that transports an arbitrary
+almost-invariant representation into a prescribed smaller universe. A genuine
+universe-independence upgrade would therefore require either such a reduction
+theorem or a systematic generalization of the representation and
+\href{https://github.com/utensil/connes-rigidity/blob/main/Connes/Foundation/OperatorAlgebra/PositiveSpectralMeasure.lean#L2262-L2270}{spectral-criterion stack}
+to independent group and Hilbert-carrier universes. That work is separate from
+closing the EJZK premise and is not part of the present formalization.}
