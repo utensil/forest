@@ -110,7 +110,14 @@
 
   <!-- AGENT-NOTE: Untyped note trees still carry Lean metadata and need a PDF-visible marker row. -->
   <xsl:template name="section-title">
-    <xsl:apply-templates />
+    <xsl:choose>
+      <xsl:when test="html:span[@class='translation-section-title']">
+        <xsl:apply-templates select="html:span[@class='translation-section-title']/node()" />
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:apply-templates />
+      </xsl:otherwise>
+    </xsl:choose>
     <xsl:call-template name="lean-marker-metadata">
       <xsl:with-param name="frontmatter" select=".." />
       <xsl:with-param name="continuation" select="true()" />

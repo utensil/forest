@@ -21,6 +21,49 @@
       </xsl:if>
     </xsl:for-each>
     <xsl:text>}</xsl:text>
+    <xsl:if test="f:date">
+      <xsl:text>\date{</xsl:text>
+      <xsl:call-template name="publication-date">
+        <xsl:with-param name="date" select="f:date" />
+      </xsl:call-template>
+      <xsl:text>}</xsl:text>
+    </xsl:if>
+  </xsl:template>
+
+  <!-- Keep the source-authored date visible while lize.sh freezes PDF metadata. -->
+  <xsl:template name="publication-date">
+    <xsl:param name="date" />
+    <xsl:choose>
+      <xsl:when test="$date/f:month">
+        <xsl:choose>
+          <xsl:when test="$date/f:month = 1">January</xsl:when>
+          <xsl:when test="$date/f:month = 2">February</xsl:when>
+          <xsl:when test="$date/f:month = 3">March</xsl:when>
+          <xsl:when test="$date/f:month = 4">April</xsl:when>
+          <xsl:when test="$date/f:month = 5">May</xsl:when>
+          <xsl:when test="$date/f:month = 6">June</xsl:when>
+          <xsl:when test="$date/f:month = 7">July</xsl:when>
+          <xsl:when test="$date/f:month = 8">August</xsl:when>
+          <xsl:when test="$date/f:month = 9">September</xsl:when>
+          <xsl:when test="$date/f:month = 10">October</xsl:when>
+          <xsl:when test="$date/f:month = 11">November</xsl:when>
+          <xsl:when test="$date/f:month = 12">December</xsl:when>
+        </xsl:choose>
+        <xsl:if test="$date/f:day">
+          <xsl:text> </xsl:text>
+          <xsl:value-of select="$date/f:day" />
+          <xsl:if test="$date/f:year">
+            <xsl:text>, </xsl:text>
+          </xsl:if>
+        </xsl:if>
+      </xsl:when>
+    </xsl:choose>
+    <xsl:value-of select="$date/f:year" />
+  </xsl:template>
+
+  <!-- Forester 5 expands anonymous translation subsections with a parent link. -->
+  <xsl:template match="f:title[html:span[@class='translation-section-title']]">
+    <xsl:apply-templates select="html:span[@class='translation-section-title']/node()" />
   </xsl:template>
   
   <xsl:template match="f:tree[not(f:frontmatter/f:taxon)]">

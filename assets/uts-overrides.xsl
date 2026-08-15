@@ -8,6 +8,11 @@
     xmlns:html="http://www.w3.org/1999/xhtml"
 >
 
+    <!-- Forester 5 adds root context to nested translation section titles. -->
+    <xsl:template match="fr:title[html:span[@class='translation-section-title']]">
+        <xsl:apply-templates select="html:span[@class='translation-section-title']/node()" />
+    </xsl:template>
+
     <!-- <xsl:template name="numbered-taxon">
         <span class="taxon">
             <xsl:apply-templates select="fr:taxon" />
