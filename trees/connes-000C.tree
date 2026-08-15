@@ -7,7 +7,7 @@
 \tag{characteristic-two}
 \taxon{Lemma}
 \title{Characteristic-two tensor retraction}
-\lean/connes{Connes.Construction.PaperKernel.C,Connes.Construction.PaperKernel.diagonal,Connes.Construction.PaperKernel.delta,Connes.Construction.PaperKernel.delta_diagonal,Connes.Construction.PaperKernel.squareSpan,Connes.Construction.PaperKernel.SquareSpanData.squares_span,Connes.Construction.PaperKernel.concreteSquareSpanData}
+\lean/connes{Connes.Construction.PaperKernel.delta_diagonal,Connes.Construction.PaperKernel.concreteSquareSpanData}
 
 \p{Let #{k=\mathbb F_2}, #{A=k[t]^3}, and let
 
@@ -16,38 +16,6 @@
 The diagonal function #{\Delta(a)=a\otimes a} lands in #{C}. Although
 #{\Delta} is not a linear map, Zhou's characteristic-two calculation produces
 a surjective linear retraction #{\delta:C\to A} satisfying
-#{\delta(\Delta(a))=a} \citet{Section 2, Lemma 2.1}{zhou2026icc}.}
-
-\p{The Lean carriers and diagonal are
-\href{https://github.com/utensil/connes-rigidity/blob/main/Connes/Construction.lean#L55-L73}{\code{Construction.PaperKernel.C} and \code{diagonal}};
-the coefficientwise map and retraction equation are
-\href{https://github.com/utensil/connes-rigidity/blob/main/Connes/Construction.lean#L136-L178}{\code{delta} and \code{delta_diagonal}}.}
-
-\p{Concretely, the implementation fixes the standard polynomial and coordinate
-bases. It takes the coefficientwise Hadamard product on #{k[t]}, applies it in
-the three coordinates of #{A}, lifts the resulting bilinear map through the
-tensor product, and restricts it to #{C}. The Boolean identity #{x^2=x} gives
-#{\delta(a\otimes a)=a}.}
-
-\p{This basis-dependent formula is an implementation of
-the basis-free mathematical role: a linear left inverse to the diagonal
-squares, equivariant for the diagonal #{\mathrm{SL}_3(k[t])}-action.}
-
-\p{Equivariance is not proved by expanding an arbitrary fixed tensor. The
-submodule
-\href{https://github.com/utensil/connes-rigidity/blob/main/Connes/Construction/PaperActions.lean#L103-L142}{\code{squareSpan}}
-is the span of the squares #{a\otimes a}. The equation is immediate on each
-square, hence on \code{squareSpan}.}
-
-\p{The basis calculation in
-\href{https://github.com/utensil/connes-rigidity/blob/main/Connes/Construction/SquareSpan.lean#L206-L264}{\code{concreteSquareSpanData}}
-proves its \code{squares_span} field: every flip-fixed tensor belongs to that
-span. This is the bridge from a coordinate construction to the basis-free
-equivariance statement consumed by the two group actions.}
-
-\p{\strong{Design adaptation: separate the formula from its invariant role.}
-The coefficientwise definition makes \code{delta_diagonal} computationally
-transparent. The \code{SquareSpanData} interface hides those coordinates from
-later sections: consumers need only that squares span #{C}. This permits a
-future basis-free construction of the same retraction without changing the
-action or theorem interfaces.}
+#{\delta(\Delta(a))=a} \citet{Section 2, Lemma 2.1}{zhou2026icc}.
+The retraction is equivariant for the diagonal
+#{\mathrm{SL}_3(k[t])}-action.}

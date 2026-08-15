@@ -4,7 +4,6 @@
 \tag{connes}
 \tag{lean}
 \tag{proof-engineering}
-\taxon{Remark}
 \title{Dependency placement and consumer boundaries}
 \lean/connes{Connes.PaperSpectralPropertyT.completion_of_spectralData,Connes.PaperFactorClosure.paperSpatialWitness,Connes.PaperICC.ActionData}
 
@@ -16,15 +15,16 @@ instance for a representation module belongs at the module boundary in
 Section 6. Early placement makes Zhou's section order an acyclic dependency
 discipline instead of a directory convention.}
 
-\p{Concrete examples are
-\href{https://github.com/utensil/connes-rigidity/blob/main/Connes/Paper/Section3/DualHaar.lean#L24-L49}{the dual topology and Borel instances}
-and
-\href{https://github.com/utensil/connes-rigidity/blob/main/Connes/Paper/Section6/Nonisomorphism.lean#L93-L98}{the representation-module carrier instance}.}
+\p{Concrete examples are:}
+
+\ul{
+  \li{\href{https://github.com/utensil/connes-rigidity/blob/main/Connes/Paper/Section3/DualHaar.lean#L24-L49}{the dual topology and Borel instances}; and}
+  \li{\href{https://github.com/utensil/connes-rigidity/blob/main/Connes/Paper/Section6/Nonisomorphism.lean#L93-L98}{the representation-module carrier instance}.}
+}
 
 \p{\strong{Isolate certificates from structural theorems.}
-Finite symplectic enumeration lives in \code{Sp4KernelCertificate.lean};
-concrete orbit witnesses live in \code{ICCOrbits.lean}; detector estimates live
-in the Section 4 detector files. Their consumers see named propositions or
+The finite symplectic enumeration, concrete orbit witnesses, and detector
+estimates live in dedicated files. Their consumers see named propositions or
 small structures. This prevents an exhaustive certificate, coordinate
 calculation, or normalization choice from contaminating a generic transfer
 theorem.}
