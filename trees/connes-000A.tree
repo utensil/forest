@@ -5,7 +5,7 @@
 \tag{lean}
 \tag{proof-engineering}
 \taxon{Remark}
-\title{Reusable proof-architecture adaptations}
+\title{Dependency placement and consumer boundaries}
 \lean/connes{Connes.PaperSpectralPropertyT.completion_of_spectralData,Connes.PaperFactorClosure.paperSpatialWitness,Connes.PaperICC.ActionData}
 
 \p{\strong{Place instances at their mathematical source.}
@@ -33,18 +33,3 @@ not as a stronger numerical constant. The factor bridge asks for a spatial
 unitary that maps completed algebras and the vacuum. The ICC bridge asks for
 orbit and displacement data. Each boundary contains exactly what its next
 theorem consumes, which makes hypothesis strength and reuse auditable.}
-
-\p{\strong{Keep final assembly proposition-valued.}
-Section 7 combines previously proved endpoints. It does not accept a broad
-record containing the desired conclusion as a field. This “certificate
-isolation” makes \code{#print axioms} meaningful and lets semantic review trace
-each conjunct to the file where its mathematics occurs.}
-
-\p{These lessons concern proof structure rather than the mathematical claims
-of \citek{zhou2026icc} or the independent binary-carry construction in Chapter
-4 of \citek{openai2026tenadvances}. The latter is mathematical context, not code
-provenance. Where the implementation adapts prior Lean infrastructure, the
-source is the pinned \code{openai/ten-proofs} snapshot recorded in the Connes
-project's provenance ledger and port map. The lessons are reusable in
-formalizations where a linear paper proof crosses topology, analysis, finite
-computation, and algebraic transport.}

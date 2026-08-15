@@ -1,0 +1,36 @@
+\import{spin-macros}
+\meta{agent-authored}{true}
+
+\tag{connes}
+\tag{lean}
+\tag{operator-algebra}
+\tag{von-neumann-algebra}
+\taxon{Remark}
+\title{Continuous coefficients and von Neumann closure}
+\lean/connes{Connes.CrossedProduct.vonNeumannClosure_crossedGeneratorSetOfContinuousCoefficients_eq,Connes.CrossedProduct.continuousCrossedClosure_mem_iff}
+
+\p{Coordinate characters have norm-dense linear span in the continuous
+functions by Stone--Weierstrass. Since continuous coefficients act continuously
+as crossed-product multipliers, the generic
+\href{https://github.com/utensil/connes-rigidity/blob/a7a45d1985a06168f96a296413d14e99dd0af485/Connes/Foundation/OperatorAlgebra/CrossedProductFactorTransport.lean#L215-L375}{continuous-coefficient closure theorem}
+upgrades that density to equality of the generated von Neumann closures.
+Pullback along the homeomorphism then gives
+\href{https://github.com/utensil/connes-rigidity/blob/a7a45d1985a06168f96a296413d14e99dd0af485/Connes/Foundation/OperatorAlgebra/CrossedProductFactorTransport.lean#L377-L460}{\code{continuousCrossedClosure_mem_iff}}.
+This does \em{not} say that continuous functions are norm-dense in
+#{L^\infty}; it compares the von Neumann closures generated after adjoining
+all continuous coefficients.}
+
+\p{The paper-facing proof applies the transport and closure bridges once to each
+action, then composes the Fourier models with the shear. This removes parallel
+action-one/action-two closure plumbing while preserving Zhou's Proposition 3.4
+endpoint and section order. Mapping a convenient generating family remains an
+intermediate step; the consumer-facing contract is equivalence of membership
+in the completed von Neumann algebras.}
+
+\p{Chapter 4 of \citek{openai2026tenadvances} is mathematical context, not the
+source of these declarations. Adapted Lean infrastructure is recorded in the
+Connes project's public
+\href{https://github.com/utensil/connes-rigidity/blob/main/docs/PROVENANCE.md}{provenance ledger}
+and \href{https://github.com/utensil/connes-rigidity/blob/main/docs/PORT_MAP.md}{port map}.
+The mathematical conclusion and every witness field used here are proved in
+the Connes source.}

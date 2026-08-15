@@ -1,0 +1,42 @@
+\import{spin-macros}
+\meta{agent-authored}{true}
+
+\tag{connes}
+\tag{lean}
+\tag{property-t}
+\tag{formalization-estimate}
+\taxon{Remark}
+\title{Alternative EJZK routes and literature anchors}
+\lean/connes{Connes.PaperPropertyT.elementaryGroup}
+
+\p{Bounded elementary generation is not presently shorter. Nica's
+\citet{Theorem 2, p. 2}{nica2019bounded} gives
+
+##{\nu_3=\frac{3\cdot3^2-3}{2}+29=41,}
+
+and its proof invokes the Kornblum--Artin theorem for irreducibles in
+polynomial arithmetic progressions, stated as
+\citet{Theorem 3, p. 2}{nica2019bounded}. That input is absent from the pinned
+Mathlib revision. Our internal estimate for a self-contained Nica--Kassabov
+route is \strong{20--45 thousand lines} and \strong{three to six times the
+current engineering effort}, with roughly 70 percent internal uncertainty.
+Assuming Kornblum--Artin gives our internal estimate of \strong{8--15 thousand
+lines}, but merely moves the external boundary. Our internal estimate for a
+reusable formalization of the generic EJK theorem is \strong{45--90 thousand
+lines}; that generality is unnecessary for Zhou's application.}
+
+\p{The literature anchors for the route decomposition are Zhou's exact
+invocation \citet{Proposition 4.1, pp. 8--10}{zhou2026icc}; the exact
+elementary-group theorem, unweighted boundary graph, and packaged six-root
+estimate in \citet{Theorem 1.1, p. 1; Section 5.4, pp. 25--29; Proposition
+6.1, pp. 34--35}{ershov2010noncommutative}; the broader root-graded theorem and
+arbitrary-ring relative estimate in \citet{Theorem 1.1, p. 3; Appendix Theorem
+A.1, p. 110}{ershov2017rootgraded}; Kassabov's free-associative-ring estimates;
+and Nica's exact-ring alternative. None states our LOC or effort ranges.
+Chapter 4 of \citek{openai2026tenadvances} is independent binary-carry
+mathematical context, not code provenance and not authority for the EJZK
+theorem. Adapted Lean infrastructure is traced instead to the pinned
+\href{https://github.com/openai/ten-proofs/tree/94bc0feb6a9ff12c7d31d6de640a725c9d43d2b6}{\code{openai/ten-proofs} snapshot}
+and the Connes project's
+\href{https://github.com/utensil/connes-rigidity/blob/main/docs/PROVENANCE.md}{provenance ledger}
+and \href{https://github.com/utensil/connes-rigidity/blob/main/docs/PORT_MAP.md}{port map}.}
