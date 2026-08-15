@@ -1,0 +1,55 @@
+\import{spin-macros}
+\meta{agent-authored}{true}
+
+\tag{connes}
+\tag{lean}
+\tag{operator-algebra}
+\taxon{Remark}
+\title{Why formalize the counterexamples?}
+
+\p{\strong{Mathematical motivation.} The counterexample is not merely a
+negative answer to Connes' conjecture. Its richer content is a controlled
+experiment in nonfaithfulness. The three proof families vary different
+algebraic inputs while preserving the analytic output: OpenAI varies the
+abelian kernel, Zhou fixes the kernel and varies the action and module
+structure, and Anthropic fixes both and varies the extension class
+\citet{Chapter 4}{openai2026tenadvances}
+\citet{Sections 1 and 3}{zhou2026icc}
+\citet{Sections 3--5 and Remark 7.1}{anthropic2026icc}. In every case the group
+distinction survives algebraically but disappears after measurable
+crossed-product transport. Particularly striking are an algebraically
+nontrivial cocycle becoming measurably removable, distinct module actions
+becoming conjugate after Fourier--Pontryagin transport, and
+characteristic-two extension data distinguishing groups while their factors
+remain isomorphic. Property (T) acts as a control condition: these are rigid
+groups, not examples explained by group-theoretic flexibility. The organizing
+question is which algebraic distinctions survive representation, twisting,
+duality, and analytic completion. A cautious physical analogy is that distinct
+microscopic algebraic models may determine the same observable operator
+algebra; no physical model is asserted here.}
+
+\p{\strong{Formalization motivation.} The formalization asks how much of that
+information-loss taxonomy can surface in explicit proof interfaces. In this
+development, the square-span certificate,
+Fourier shear, measurable transport, continuous-coefficient closure, spectral
+criterion, characteristic-kernel argument, and quotient-twisted module
+obstruction expose where the proof needs more than routine translation. The
+result is an auditable dependency map for the claim that the factor forgets
+structure. As a demanding consumer of Mathlib and TauCeti, it both reuses
+existing algebraic, analytic, and representation-theoretic infrastructure and
+identifies contributions that would make later formalizations less bespoke. The concrete
+proof design is summarized in \ref{connes-000K}; the present library boundary
+is recorded in \ref{connes-000G}.}
+
+\p{\strong{Agent use and human digestion.} This project also tests a workflow
+for preparing a draft formalization for human examination: ground
+claims in the papers, keep a declaration-level provenance ledger, accompany
+the code with mathematical and design notes, separate technical proof replay
+from mathematical-fidelity review, record unresolved boundaries, and retain
+human control over corrections and landing. The public
+\href{https://github.com/utensil/connes-rigidity/blob/main/docs/AUDITS.md}{audit ledger},
+\href{https://github.com/utensil/connes-rigidity/blob/main/docs/PROVENANCE.md}{provenance ledger},
+and
+\href{https://github.com/utensil/connes-rigidity/blob/main/docs/COMPARATOR.md}{Comparator trust-boundary note}
+make those roles explicit. This is a draft prepared for human examination, not
+a claim of independent peer review.}

@@ -10,36 +10,10 @@
 \date{2026-08-12}
 
 \p{These notes accompany the Lean project
-\href{https://github.com/utensil/connes-rigidity}{connes-rigidity}. Zhou's
-Theorem A constructs two countable groups that are ICC and have property (T),
-whose tracial group factors are isomorphic although the groups themselves are
-not. The formalization therefore has one construction stage and four logically
-separate certificate lanes: factor equivalence, property (T), ICC, and group
-nonisomorphism. The final theorem merely assembles those four endpoints.}
-
-\p{The counterexamples form a controlled comparison of nonfaithfulness.
-OpenAI varies the abelian kernel, Zhou fixes the kernel and varies the
-action and module structure, and Anthropic fixes both while varying the
-extension class. In every case the groups remain distinguishable by algebraic
-data, but the distinction disappears after measurable crossed-product
-transport. The comparison isolates three mechanisms for that loss: an
-algebraically nontrivial cocycle can become measurably removable; distinct
-module actions can become conjugate after Fourier--Pontryagin transport; and
-characteristic-two extension data can distinguish the groups without
-distinguishing their factors.}
-
-\p{Property (T) is a control condition here. It rules out the explanation that
-the counterexamples arise only from flexible groups: strong
-representation-theoretic rigidity coexists with failure of reconstruction from
-the operator algebra. Formalization turns the claim that the factor forgets
-structure into an auditable dependency map. A tentative physical analogy is
-that different microscopic algebraic models may determine the same observable
-operator algebra. This makes the construction a mathematical test case for
-relations among twisted group algebras, gauge-group representations, Clifford
-structures, and operator-algebraic observables, without asserting a physical
-model. The organizing question is which algebraic distinctions survive
-representation, twisting, duality, and analytic completion, and how a formal
-proof can make the exact loss of information visible.}
+\href{https://github.com/utensil/connes-rigidity}{connes-rigidity}. The
+development organizes Zhou's Theorem A into one construction stage and four
+certificate lanes: factor equivalence, property (T), ICC, and group
+nonisomorphism. The final theorem assembles those four endpoints.}
 
 \p{The diagram is a map of both the proof and the notes. Solid arrows are
 internal Lean developments. The dashed arrow is the sole substantive
@@ -95,24 +69,17 @@ internal algebraic chain: characteristic kernels, quotient twists,
 semisimplicity, and a finite cocycle obstruction must survive transport along
 an arbitrary group isomorphism.}
 
-\p{Much of the development is a direct formal translation: define Zhou's
-modules and actions, verify their algebraic laws, and instantiate standard
-transfer principles. The nonroutine points are where the paper suppresses an
-interface that Lean must make explicit. The tensor calculation becomes a
-square-span certificate in \ref{connes-000C}. Generator identities are upgraded
-to completed von Neumann algebras through the spatial witness of
-\ref{connes-0007}, \ref{connes-000D}, and \ref{connes-000E}; that bridge
-separates measurable crossed-product transport, continuous-coefficient closure,
-and the concrete nonadditive fiber shear. Quantitative spectral detection is
-separated from the exact qualitative boundary in \ref{connes-0003} and
-\ref{connes-0004}. The ICC proof
-uses the three-case criterion in \ref{connes-0006}, and nonisomorphism follows
-the quotient twist in \ref{connes-000H}. The assembly in \ref{connes-0002}
-accepts proved propositions, not a record that already contains its conclusion.
-The broader lessons are collected in \ref{connes-000A}, \ref{connes-000F},
-and \ref{connes-000J}.}
+\p{Most definitions and algebraic laws translate directly. Special design is
+needed where the paper leaves an interface implicit: the square-span
+certificate in \ref{connes-000C}; the spatial, measurable, and closure bridges
+in \ref{connes-0007}, \ref{connes-000D}, and \ref{connes-000E}; the separation
+of quantitative spectral detection from the qualitative property-(T) boundary
+in \ref{connes-0003} and \ref{connes-0004}; the three-case ICC criterion in
+\ref{connes-0006}; the quotient twist in \ref{connes-000H}; and the
+proposition-valued assembly in \ref{connes-0002}. The reusable design lessons
+are isolated in \ref{connes-000A}, \ref{connes-000F}, and \ref{connes-000J}.}
 
-\p{The code has two architectural layers. Reusable group theory, linear
+\p{The code has two layers. Reusable group theory, linear
 algebra, topology, measure theory, and operator algebra live in a foundation
 layer. Zhou-specific carriers and certificates live in construction and paper
 layers. This separation lets the
@@ -122,10 +89,10 @@ calculations remain behind named certificates. The public
 and \href{https://github.com/utensil/connes-rigidity/blob/main/docs/STATEMENT_MAP.md}{statement map}
 give the complete module and declaration crosswalk.}
 
-\p{The main architectural rule is decomposition by direct consumer. Each lane
-exports the smallest object needed next: a spatial witness, a qualitative
-property-(T) certificate, orbit and displacement data, or a twist-stable module
-obstruction. Four corrections were mathematically decisive: replacing
+\p{Each lane exports the smallest object needed by its next consumer: a spatial
+witness, a qualitative property-(T) certificate, orbit and displacement data,
+or a twist-stable module obstruction. Four corrections were mathematically
+decisive: replacing
 identity-action scaffolds by Zhou's actual actions; changing the ICC abstraction
 to handle the finite #{\operatorname{Sp}_4(\mathbb F_2)} factor; following the
 quotient automorphism induced by a hypothetical group isomorphism; and tying
@@ -135,18 +102,15 @@ trust boundary are detailed in \ref{connes-0002} and \ref{connes-0009}; the
 remaining EJZK work is scoped in \ref{connes-000B}, \ref{connes-000G}, and
 \ref{connes-000I}.}
 
-\p{The notes use their own section numbers for a continuous reading order.
-Sections 2--7 correspond respectively to Zhou's Sections 2--7; that
-correspondence appears in each heading as a parenthetical reference instead of
-a second leading section number. Section 1 gives the global design, Section 8
-collects proof-engineering adaptations, Sections 9--10 compare two independent
-proof architectures, and Section 11 estimates the work needed to close the
-external EJZK boundary.}
+\p{Section 1 separates the mathematical introduction, counterexample
+background, motivation, and design. Sections 2--7 then correspond respectively
+to Zhou's Sections 2--7; their headings record that correspondence without
+reusing Zhou's section number as the note title. Section 8 collects
+proof-engineering adaptations, Sections 9--10 compare the other two proof
+architectures, and Section 11 scopes the remaining EJZK formalization.}
 
-\p{The comparison sections summarize proof architecture without reproducing
-the source proofs in \citek{openai2026tenadvances} or
-\citek{anthropic2026icc}. The formalization adapts selected public Lean proof
-blocks and organization patterns from a
+\p{The formalization adapts selected public Lean proof blocks and organization
+patterns from a
 pinned \href{https://github.com/openai/ten-proofs/tree/94bc0feb6a9ff12c7d31d6de640a725c9d43d2b6}{\code{openai/ten-proofs} snapshot},
 but does not import that repository. The project records declaration-level
 adaptations in its public
