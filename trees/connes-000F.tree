@@ -5,7 +5,34 @@
 \tag{lean}
 \tag{proof-engineering}
 \title{Structure forgetting and equivalence reuse}
-\lean/connes{Connes.CrossedProduct.EquivariantHaarHomeomorph,Connes.CrossedProduct.continuousCrossedClosure_mem_iff}
+\lean/connes{Connes.IsProjectionSupremum,Connes.StarAlgEquiv.isNormal}
+
+\p{\strong{Separate the abstract normality contract from its concrete proof.}
+The predicate
+\leanref/connes{Connes.IsProjectionSupremum}
+takes its order relation as a parameter and asks for leastness only among
+projection upper bounds. It therefore avoids both a built-in
+multiplication-based order wrapper and the stronger ambient \code{IsLUB}
+contract. The predicate
+\leanref/connes{Connes.IsNormalStarAlgEquiv}
+then says, using only the operations it mentions, that an equivalence and its
+inverse preserve these projection suprema. Uniqueness is exposed by
+\leanref/connes{Connes.IsProjectionSupremum.unique}; identity, inverse, and
+composition laws culminate in
+\leanref/connes{Connes.IsNormalStarAlgEquiv.trans}.}
+
+\p{For the concrete operator subalgebras used by the factors,
+\leanref/connes{Connes.IsProjectionSupremum.map_starAlgEquiv}
+instantiates that parameter with the inherited operator order and derives
+transport from the characterization #{p\leq q\iff pq=p} for projections. The theorem
+\leanref/connes{Connes.StarAlgEquiv.isNormal}
+packages the forward and inverse directions. The abstract predicates stay in
+the core specification; the operator-order proof is isolated with the other
+projection infrastructure and consumed by the spatial factor witness. The
+projection-valued spectral interface
+\leanref/connes{Connes.ProjectionValuedSpectralMeasure}
+and supremum transport remain separate focused modules in that projection
+layer, while their public declarations remain stable.}
 
 \p{\strong{Forget structure after it has served its consumer.}
 The Section 3 shear is packaged as an equivariant measure-preserving
@@ -25,3 +52,24 @@ involutivity proof. Likewise, the inverse law for conjugation by a linear
 isometry equivalence replaces a pointwise operator calculation. These
 replacements shorten the proof while exposing the actual mathematical reason:
 both steps are transport along equivalences.}
+
+\p{\strong{Keep expensive elaboration at the generator-transport seam.}
+The two kernel-generator identities for the
+\leanref/connes/as{first}{Connes.PaperGroupFactor.paperGroupFactorUnitaryOne_conj_inl}
+and
+\leanref/connes/as{second}{Connes.PaperGroupFactor.paperGroupFactorUnitaryTwo_conj_inl}
+factors, together with the corresponding
+\leanref/connes/as{first}{Connes.PaperGroupQuotient.paperGroupFactorUnitaryOne_conj_inr}
+and
+\leanref/connes/as{second}{Connes.PaperGroupQuotient.paperGroupFactorUnitaryTwo_conj_inr}
+quotient-generator identities,
+carry the regular generators through the composed Fubini and Fourier #{L^2}
+equivalences. They are implementation-level generator checks used to realize
+the Fourier and crossed-product identifications invoked, but not expanded, in
+\citet{Proposition 3.4}{zhou2026icc}.}
+
+\p{These proofs now name the inverse image of a test vector and use pointwise
+action formulas before normalizing the operator expression. Only these four
+declarations retain a larger elaboration budget. The localization is a
+performance signal about nested equivalence normalization, not an additional
+mathematical assumption.}
