@@ -18,7 +18,8 @@ function convert_xml_to_html() {
 
     # bunx xslt3 -s:"$xml_file" -xsl:output/uts-forest.xsl -o:"$html_file"
     # -v
-    xsltproc --path $OUT_DIR -o "$html_file" $XSL_FILE "$xml_file"
+    local ui_asset_revision=${UI_ASSET_REVISION:-unversioned}
+    xsltproc --stringparam ui_asset_revision "$ui_asset_revision" --path $OUT_DIR -o "$html_file" $XSL_FILE "$xml_file"
     # echo "[convert_xml_to_html] Finished xsltproc for $html_file"
     # head -n 20 "$html_file"
 }
@@ -182,6 +183,7 @@ function convert_xml_files() {
         # echo "[convert_xml_files] $xml_file"
     # done
     local max_jobs=$(detect_max_jobs)
+    UI_ASSET_REVISION=$(shasum -a 256 "$OUT_DIR/uts-layout.xsl" "$OUT_DIR/uts-style.css" "$OUT_DIR/uts-forester.js" | shasum -a 256 | awk '{print $1}')
     echo "Max jobs: $max_jobs"
 
     if [ "$convert_all" = true ]; then
@@ -209,4 +211,3 @@ function convert_xml_files() {
 
 }
 # AGENT-NOTE: Updated for forest structure (xml listing and updated files)
-

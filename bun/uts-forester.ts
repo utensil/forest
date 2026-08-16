@@ -157,6 +157,19 @@ function toggleLightPaper() {
     applyLightPaperPreference(newLightPaperPreference)
 }
 
+function bindControl(controlId, action) {
+    const control = document.getElementById(controlId)
+    if (!control) return
+    control.onclick = action
+    if (control.getAttribute('role') !== 'button') return
+    control.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault()
+            action()
+        }
+    })
+}
+
 // AGENT-NOTE: Keep the persisted preference distinct from the applied mode so auto can follow device changes.
 systemTheme.addEventListener('change', () => {
     if (getThemePreference() === 'auto') {
@@ -180,10 +193,10 @@ function togglelang() {
 
 // on document ready
 document.addEventListener('DOMContentLoaded', () => {
-    document.getElementById('theme-toggle').onclick = toggleTheme
-    document.getElementById('light-paper-toggle').onclick = toggleLightPaper
-    document.getElementById('font-toggle').onclick = toggleFont
-    document.getElementById('search').onclick = search
+    bindControl('theme-toggle', toggleTheme)
+    bindControl('light-paper-toggle', toggleLightPaper)
+    bindControl('font-toggle', toggleFont)
+    bindControl('search', search)
     applyThemePreference(getThemePreference())
     applyLightPaperPreference(getLightPaperPreference())
     applyFontPreference(getFontPreference())
