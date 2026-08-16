@@ -1,20 +1,25 @@
-function getUserPreference() {
-    return localStorage.getItem('theme') || 'system'
+const systemTheme = matchMedia('(prefers-color-scheme: dark)')
+
+function getThemePreference() {
+    const theme = localStorage.getItem('theme')
+    if (theme === 'light' || theme === 'dark' || theme === 'auto') {
+        return theme
+    }
+    return 'auto'
 }
 
-function saveUserPreference(userPreference) {
-    localStorage.setItem('theme', userPreference)
+function saveThemePreference(themePreference) {
+    localStorage.setItem('theme', themePreference)
 }
 
-function getAppliedMode(userPreference) {
-    if (userPreference === 'light') {
+function getAppliedMode(themePreference) {
+    if (themePreference === 'light') {
         return 'light'
     }
-    if (userPreference === 'dark') {
+    if (themePreference === 'dark') {
         return 'dark'
     }
-    // system
-    if (matchMedia('(prefers-color-scheme: dark)').matches) {
+    if (systemTheme.matches) {
         return 'dark'
     }
     return 'light'
@@ -24,27 +29,89 @@ function setAppliedMode(mode) {
     document.documentElement.dataset.appliedMode = mode
 }
 
-function rotatePreferences(userPreference) {
-    if (userPreference === 'dark') {
+function rotateThemePreference(themePreference) {
+    if (themePreference === 'auto') {
         return 'light'
     }
-    if (userPreference === 'light') {
+    if (themePreference === 'light') {
         return 'dark'
     }
-    // for invalid values, just in case
-    return rotatePreferences(getAppliedMode('system'))
+    return 'auto'
 }
 
-// the class of body is toggled between none and dark
+function updateThemeToggleLabel() {
+    const themeToggle = document.getElementById('theme-toggle')
+    if (!themeToggle) return
+    const themePreference = getThemePreference()
+    const appliedMode = getAppliedMode(themePreference)
+    const nextThemePreference = rotateThemePreference(themePreference)
+    const detail =
+        themePreference === 'auto' ? `auto (${appliedMode})` : themePreference
+    const label = `Theme: ${detail}; next: ${nextThemePreference}`
+    themeToggle.title = label
+    themeToggle.setAttribute('aria-label', label)
+}
+
+function applyThemePreference(themePreference) {
+    document.documentElement.dataset.themePreference = themePreference
+    setAppliedMode(getAppliedMode(themePreference))
+    updateThemeToggleLabel()
+}
+
+function getLightPaperPreference() {
+    const lightPaper = localStorage.getItem('light-paper')
+    if (
+        lightPaper === 'mix' ||
+        lightPaper === 'near-white' ||
+        lightPaper === 'sepia'
+    ) {
+        return lightPaper
+    }
+    return 'mix'
+}
+
+function saveLightPaperPreference(lightPaperPreference) {
+    localStorage.setItem('light-paper', lightPaperPreference)
+}
+
+function rotateLightPaperPreference(lightPaperPreference) {
+    if (lightPaperPreference === 'mix') {
+        return 'near-white'
+    }
+    if (lightPaperPreference === 'near-white') {
+        return 'sepia'
+    }
+    return 'mix'
+}
+
+function updateLightPaperToggleLabel() {
+    const lightPaperToggle = document.getElementById('light-paper-toggle')
+    if (!lightPaperToggle) return
+    const lightPaperPreference = getLightPaperPreference()
+    const nextLightPaperPreference =
+        rotateLightPaperPreference(lightPaperPreference)
+    const label = `Light paper: ${lightPaperPreference}; next: ${nextLightPaperPreference}`
+    lightPaperToggle.title = label
+    lightPaperToggle.setAttribute('aria-label', label)
+}
+
+function applyLightPaperPreference(lightPaperPreference) {
+    document.documentElement.dataset.lightPaper = lightPaperPreference
+    updateLightPaperToggleLabel()
+}
+
 function rotateFontPreferences(currentFont) {
     if (currentFont === 'serif') return 'mono'
     if (currentFont === 'mono') return 'sans'
-    if (currentFont === 'sans') return 'muse'
     return 'serif'
 }
 
 function getFontPreference() {
-    return localStorage.getItem('font') || 'sans'
+    const font = localStorage.getItem('font')
+    if (font === 'serif' || font === 'mono' || font === 'sans') {
+        return font
+    }
+    return 'serif'
 }
 
 function saveFontPreference(font) {
@@ -55,18 +122,47 @@ function setAppliedFont(font) {
     document.documentElement.dataset.appliedFont = font
 }
 
+function updateFontToggleLabel() {
+    const fontToggle = document.getElementById('font-toggle')
+    if (!fontToggle) return
+    const fontPreference = getFontPreference()
+    const nextFontPreference = rotateFontPreferences(fontPreference)
+    const label = `Font: ${fontPreference}; next: ${nextFontPreference}`
+    fontToggle.title = label
+    fontToggle.setAttribute('aria-label', label)
+}
+
+function applyFontPreference(fontPreference) {
+    setAppliedFont(fontPreference)
+    updateFontToggleLabel()
+}
+
 function toggleFont() {
     const newFontPref = rotateFontPreferences(getFontPreference())
     saveFontPreference(newFontPref)
-    setAppliedFont(newFontPref)
+    applyFontPreference(newFontPref)
 }
 
 function toggleTheme() {
-    const newUserPref = rotatePreferences(getUserPreference())
-    userPreference = newUserPref
-    saveUserPreference(newUserPref)
-    setAppliedMode(getAppliedMode(newUserPref))
+    const newThemePreference = rotateThemePreference(getThemePreference())
+    saveThemePreference(newThemePreference)
+    applyThemePreference(newThemePreference)
 }
+
+function toggleLightPaper() {
+    const newLightPaperPreference = rotateLightPaperPreference(
+        getLightPaperPreference(),
+    )
+    saveLightPaperPreference(newLightPaperPreference)
+    applyLightPaperPreference(newLightPaperPreference)
+}
+
+// AGENT-NOTE: Keep the persisted preference distinct from the applied mode so auto can follow device changes.
+systemTheme.addEventListener('change', () => {
+    if (getThemePreference() === 'auto') {
+        applyThemePreference('auto')
+    }
+})
 
 function search() {
     const ninja = document.querySelector('ninja-keys')
@@ -84,10 +180,13 @@ function togglelang() {
 
 // on document ready
 document.addEventListener('DOMContentLoaded', () => {
-    // on clicking the button with id theme-toggle, the function toggleTheme is called
     document.getElementById('theme-toggle').onclick = toggleTheme
+    document.getElementById('light-paper-toggle').onclick = toggleLightPaper
     document.getElementById('font-toggle').onclick = toggleFont
     document.getElementById('search').onclick = search
+    applyThemePreference(getThemePreference())
+    applyLightPaperPreference(getLightPaperPreference())
+    applyFontPreference(getFontPreference())
     const langblock_toggle = document.getElementById('langblock-toggle')
     if (langblock_toggle) langblock_toggle.onclick = togglelang
 
@@ -189,8 +288,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 })
 
-// Important to be 1st in the DOM
-const theme = localStorage.getItem('theme') || getAppliedMode('system')
-document.documentElement.dataset.appliedMode = theme
-const font = localStorage.getItem('font') || 'serif'
-document.documentElement.dataset.appliedFont = font
+// Important to be first in the DOM, before the page body is parsed.
+applyThemePreference(getThemePreference())
+applyLightPaperPreference(getLightPaperPreference())
+applyFontPreference(getFontPreference())
