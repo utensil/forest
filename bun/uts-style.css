@@ -325,8 +325,8 @@ section:has(> details > summary > header .agent-authored-watermark)
     --uts-link-internal: #5d5d5d;
     --uts-text-gentle: rgb(132, 132, 132);
     --uts-text-cite: #10731d;
-    /* The only light-mode visual change: warm paper instead of white. */
-    --uts-background: #f4efde;
+    /* A restrained blend of the warm paper and the supplied near-white. */
+    --uts-background: #f8f5eb;
     --uts-surface: var(--uts-background);
     /* Keep colored taxon cards on their PDF-style white tint, not the paper. */
     --uts-taxon-surface: white;
@@ -341,6 +341,14 @@ section:has(> details > summary > header .agent-authored-watermark)
     --uts-taxon-theorem: #95dbfc;
     --uts-taxon-notation: #ffd27f;
     --uts-taxon-convention: #d369cb;
+}
+
+:root[data-applied-mode="light"][data-light-paper="near-white"] {
+    --uts-background: #fbfbf8;
+}
+
+:root[data-applied-mode="light"][data-light-paper="sepia"] {
+    --uts-background: #f4efde;
 }
 
 :root,
@@ -502,6 +510,7 @@ a.slug[href*="utensil"], a.slug[href*="jonmsterling"] {
 } */
 
 button#theme-toggle,
+button#light-paper-toggle,
 button#font-toggle {
     /* font-size: 26px; */
     margin: auto 4px;
@@ -523,11 +532,23 @@ button#search {
 }
 
 :root svg#sun,
+:root svg#auto,
 :root[data-applied-mode="dark"] svg#moon {
     display: none;
 }
 
 :root[data-applied-mode="dark"] svg#sun {
+    display: block;
+    color: var(--uts-text);
+}
+
+:root[data-theme-preference] button#theme-toggle svg {
+    display: none;
+}
+
+:root[data-theme-preference="auto"] button#theme-toggle svg#auto,
+:root[data-theme-preference="light"] button#theme-toggle svg#moon,
+:root[data-theme-preference="dark"] button#theme-toggle svg#sun {
     display: block;
     color: var(--uts-text);
 }
