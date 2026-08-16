@@ -35,6 +35,15 @@ if [ ! -f "$output_dir/forester.js" ]; then
     exit 1
 fi
 
+for ui_asset in uts-layout.xsl uts-style.css uts-forester.js; do
+    if [ ! -s "$output_dir/$ui_asset" ]; then
+        echo "Publish output must include the required $ui_asset UI asset" >&2
+        exit 1
+    fi
+done
+
+ui_asset_revision=$(shasum -a 256 "$output_dir/uts-layout.xsl" "$output_dir/uts-style.css" "$output_dir/uts-forester.js" | shasum -a 256 | awk '{print $1}')
+
 for runtime_asset in wgputoy.js wgputoy_bg.wasm; do
     if [ ! -s "$output_dir/$runtime_asset" ]; then
         echo "Publish output must include the required $runtime_asset runtime" >&2
@@ -53,6 +62,14 @@ while IFS= read -r -d '' xml_file; do
     html_file="${xml_file%index.xml}index.html"
     if [ ! -f "$html_file" ]; then
         echo "Missing rendered HTML for $xml_file" >&2
+        exit 1
+    fi
+    if ! grep -Fq "uts-style.css?ui=$ui_asset_revision" "$html_file"; then
+        echo "Rendered HTML must reference the current UI stylesheet revision: $html_file" >&2
+        exit 1
+    fi
+    if ! grep -Fq "uts-forester.js?ui=$ui_asset_revision" "$html_file"; then
+        echo "Rendered HTML must reference the current UI script revision: $html_file" >&2
         exit 1
     fi
 done < <(find "$output_dir" -mindepth 2 -maxdepth 2 -type f -name index.xml -print0)

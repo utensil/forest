@@ -509,48 +509,57 @@ a.slug[href*="utensil"], a.slug[href*="jonmsterling"] {
     text-decoration-style: dotted !important;
 } */
 
-button#theme-toggle,
-button#light-paper-toggle,
-button#font-toggle {
-    /* font-size: 26px; */
-    margin: auto 4px;
-    cursor: pointer;
-    /* adding: 0; */
-    font: inherit;
-    background: 0 0;
-    border: 0;
+.logo-switches {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    margin-left: 4px;
+    vertical-align: middle;
+    white-space: nowrap;
 }
 
-button#search {
-    /* font-size: 26px; */
-    margin: auto 4px;
-    cursor: pointer;
-    /* adding: 0; */
-    font: inherit;
-    background: 0 0;
+.logo-switch {
+    box-sizing: border-box;
+    display: inline-flex;
+    flex: 0 0 24px;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    margin: 0;
+    padding: 0;
     border: 0;
+    border-radius: 2px;
+    color: var(--uts-text);
+    font: inherit;
+    line-height: 0;
+    vertical-align: middle;
+    cursor: pointer;
+    appearance: none;
+    background: transparent;
 }
 
-:root svg#sun,
-:root svg#auto,
-:root[data-applied-mode="dark"] svg#moon {
+.logo-switch svg {
+    display: block;
+    flex: 0 0 auto;
+    width: 24px;
+    height: 18px;
+}
+
+.logo-switch:focus-visible {
+    outline: 1px solid var(--uts-outline);
+    outline-offset: 2px;
+}
+
+#theme-toggle .theme-glyph {
     display: none;
 }
 
-:root[data-applied-mode="dark"] svg#sun {
+:root:not([data-theme-preference]) #theme-toggle .theme-glyph-auto,
+:root[data-theme-preference="auto"] #theme-toggle .theme-glyph-auto,
+:root[data-theme-preference="light"] #theme-toggle .theme-glyph-moon,
+:root[data-theme-preference="dark"] #theme-toggle .theme-glyph-sun {
     display: block;
-    color: var(--uts-text);
-}
-
-:root[data-theme-preference] button#theme-toggle svg {
-    display: none;
-}
-
-:root[data-theme-preference="auto"] button#theme-toggle svg#auto,
-:root[data-theme-preference="light"] button#theme-toggle svg#moon,
-:root[data-theme-preference="dark"] button#theme-toggle svg#sun {
-    display: block;
-    color: var(--uts-text);
 }
 
 svg.embedded-tex-svg,

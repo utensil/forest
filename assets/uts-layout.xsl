@@ -7,6 +7,9 @@
     xmlns:fr="http://www.forester-notes.org"
     xmlns:html="http://www.w3.org/1999/xhtml"
 >
+    <!-- AGENT-NOTE: The renderer supplies a hash of this layout and the paired UI assets. -->
+    <xsl:param name="ui_asset_revision" select="'unversioned'" />
+
     <!-- The following is based on
     https://git.sr.ht/~jonsterling/forester-base-theme/tree/main/item/tree.xsl -->
     <!-- All modifications should mark with comments: uts-begin/uts-end -->
@@ -17,7 +20,8 @@
                 <link rel="stylesheet" href="{/fr:tree/@base-url}style.css" />
                 <link rel="stylesheet" href="{/fr:tree/@base-url}katex.min.css" />
                 <!-- uts-begin -->
-                <link rel="stylesheet" href="{/fr:tree/@base-url}uts-style.css" />
+                <link rel="stylesheet"
+                    href="{/fr:tree/@base-url}uts-style.css?ui={$ui_asset_revision}" />
                 <!-- uts-end -->
                 <script type="text/javascript">
                     <xsl:if test="/fr:tree/fr:frontmatter/fr:source-path">
@@ -30,7 +34,7 @@
                 <title>
                     <xsl:value-of select="/fr:tree/fr:frontmatter/fr:title/@text" />
                 </title>
-                <script src="{/fr:tree/@base-url}uts-forester.js"></script>
+                <script src="{/fr:tree/@base-url}uts-forester.js?ui={$ui_asset_revision}"></script>
                 <!-- AGENT-NOTE: Keep this minified loader module-scoped so its helpers cannot overwrite the synchronous preference controls. -->
                 <script type="module" src="{/fr:tree/@base-url}uts-ondemand.js"></script>
             </head>
@@ -45,16 +49,19 @@
                                     <xsl:text>« Home</xsl:text>
                                 </a>
                             </xsl:if>
-                            <span class="logo-switches">
-                                <button id="theme-toggle" title="Theme (auto/light/dark)">
-                                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24"
-                                        height="18" viewBox="0 0 24 24" fill="none"
+                            <span class="logo-switches" role="group" aria-label="Display controls">
+                                <button class="logo-switch" id="theme-toggle" type="button"
+                                    title="Theme (auto/light/dark)">
+                                    <svg class="theme-glyph theme-glyph-moon"
+                                        xmlns="http://www.w3.org/2000/svg" width="24" height="18"
+                                        viewBox="0 0 24 24" fill="none" aria-hidden="true"
                                         stroke="currentcolor" stroke-width="2"
                                         stroke-linecap="round" stroke-linejoin="round">
                                         <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
                                     </svg>
-                                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24"
-                                        height="18" viewBox="0 0 24 24" fill="none"
+                                    <svg class="theme-glyph theme-glyph-sun"
+                                        xmlns="http://www.w3.org/2000/svg" width="24" height="18"
+                                        viewBox="0 0 24 24" fill="none" aria-hidden="true"
                                         stroke="currentcolor" stroke-width="2"
                                         stroke-linecap="round" stroke-linejoin="round">
                                         <circle cx="12" cy="12" r="5"></circle>
@@ -67,8 +74,9 @@
                                         <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
                                         <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
                                     </svg>
-                                    <svg id="auto" xmlns="http://www.w3.org/2000/svg" width="24"
-                                        height="18" viewBox="0 0 24 24" fill="none"
+                                    <svg class="theme-glyph theme-glyph-auto"
+                                        xmlns="http://www.w3.org/2000/svg" width="24" height="18"
+                                        viewBox="0 0 24 24" fill="none" aria-hidden="true"
                                         stroke="currentcolor" stroke-width="2"
                                         stroke-linecap="round" stroke-linejoin="round">
                                         <defs>
@@ -81,10 +89,11 @@
                                         <circle cx="12" cy="12" r="9"></circle>
                                     </svg>
                                 </button>
-                                <button id="light-paper-toggle"
-                                    title="Light paper (mix/near-white/sepia)">
+                                <span class="logo-switch" id="light-paper-toggle" role="button"
+                                    tabindex="0" title="Light paper (mix/near-white/sepia)">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="18"
-                                        viewBox="0 0 24 24" fill="none" stroke="currentcolor"
+                                        viewBox="0 0 24 24" fill="none" aria-hidden="true"
+                                        stroke="currentcolor"
                                         stroke-width="2" stroke-linecap="round"
                                         stroke-linejoin="round">
                                         <path d="M12 3a9 9 0 1 0 0 18h1.5a1.5 1.5 0 0 0 0-3H12a2 2 0 0 1-2-2v-1a2 2 0 0 1 2-2h3.5a3.5 3.5 0 0 0 0-7Z"></path>
@@ -92,17 +101,19 @@
                                         <circle cx="10.5" cy="7" r="0.6" fill="currentcolor" stroke="none"></circle>
                                         <circle cx="14.5" cy="7.5" r="0.6" fill="currentcolor" stroke="none"></circle>
                                     </svg>
-                                </button>
-                                <button id="font-toggle" title="Font (serif/mono/sans)">
+                                </span>
+                                <button class="logo-switch" id="font-toggle" type="button"
+                                    title="Font (serif/mono/sans)">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="18"
-                                        viewBox="0 0 24 24" fill="currentcolor">
+                                        viewBox="0 0 24 24" fill="currentcolor" aria-hidden="true">
                                         <text x="12" y="20" text-anchor="middle"
                                             font-weight="normal">Aa</text>
                                     </svg>
                                 </button>
-                                <button id="search">
+                                <button class="logo-switch" id="search" type="button" title="Search">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="18"
-                                        viewBox="0 0 24 24" fill="none" stroke="currentcolor"
+                                        viewBox="0 0 24 24" fill="none" aria-hidden="true"
+                                        stroke="currentcolor"
                                         stroke-width="2" stroke-linecap="round"
                                         stroke-linejoin="round">
                                         <circle cx="11" cy="11" r="8"></circle>
