@@ -7,41 +7,17 @@
 \tag{property-t}
 \taxon{Theorem}
 \title{Spectral bridge for split abelian extensions}
-\lean/connes{Connes.SplitAbelianExtension,Connes.ProjectionValuedSpectralMeasure,Connes.spectral_criterion,Connes.BinaryPontryaginDual.pointwisePontryaginDualEquiv}
+\lean/connes{Connes.spectral_criterion}
 
 \p{A split extension #{A\rtimes H} with #{A} abelian turns the restriction of a
 unitary representation to #{A} into harmonic analysis on the Pontryagin dual
-#{\widehat A}. The project records the group-theoretic data in
-\href{https://github.com/utensil/connes-rigidity/blob/main/Connes/Foundation/GroupTheory/SplitAbelianExtension.lean#L17-L32}{\code{SplitAbelianExtension}},
-so the analytic layer sees the kernel, quotient action, and section without
-unfolding a semidirect product.}
-
-\p{For a vector #{\xi}, a projection-valued spectral measure #{P} yields the
+#{\widehat A}. For a vector #{\xi}, a projection-valued spectral measure #{P}
+yields the
 positive scalar measure
 
 ##{\mu_\xi(B)=\langle P(B)\xi,\xi\rangle.}
 
 Its total mass is #{\lVert\xi\rVert^2}; kernel displacement becomes the energy
-#{\int_{\widehat A}|\chi(a)-1|^2\,d\mu_\xi(\chi)}; quotient-fixed vectors give
-invariant measures. These interfaces are formalized in
-\href{https://github.com/utensil/connes-rigidity/blob/main/Connes/Foundation/OperatorAlgebra/ProjectionValuedSpectralMeasure.lean#L28-L187}{\code{ProjectionValuedSpectralMeasure}}
-and the generic criterion
-\href{https://github.com/utensil/connes-rigidity/blob/main/Connes/Foundation/OperatorAlgebra/SpectralCriterion.lean#L118-L180}{\code{spectral_criterion}}.
-A finite detection inequality forces positive mass at the trivial character;
-its spectral projection is then the required invariant vector.}
-
-\p{Over #{\mathbb F_2}, characters take values through the two-element circle
-subgroup. The local equivalence in
-\href{https://github.com/utensil/connes-rigidity/blob/main/Connes/Foundation/OperatorAlgebra/BinaryPontryaginDual.lean#L229-L314}{\code{BinaryPontryaginDual.pointwisePontryaginDualEquiv}}
-identifies the dual of a linear dual with its evaluation module. This is a
-formalization bridge, not a new hypothesis: it replaces implicit Fourier
-coordinates by an explicit additive equivalence.}
-
-\p{\strong{Positive-atom extraction.}
-If an invariant probability measure #{\mu} satisfies
-
-##{c(1-\mu(\{1\}))\leq\sum_{a\in J}\int|\chi(a)-1|^2\,d\mu(\chi)}
-
-for some #{c>0}, then sufficiently small displacement on the finite detector
-#{J} forces #{\mu(\{1\})>0}. This small inequality is the direct consumer
-boundary between measure theory and relative property (T).}
+#{\int_{\widehat A}|\chi(a)-1|^2\,d\mu_\xi(\chi)}; and quotient-fixed vectors
+give invariant measures. A positive atom at the trivial character yields a
+nonzero invariant vector through its spectral projection.}

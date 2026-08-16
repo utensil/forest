@@ -1,0 +1,32 @@
+\import{spin-macros}
+\meta{agent-authored}{true}
+
+\tag{connes}
+\tag{lean}
+\tag{property-t}
+\tag{proof-engineering}
+\title{Property-(T) transfer interface}
+\lean/connes{Connes.HasKazhdanPropertyT,Connes.HasRelativePropertyT,Connes.PaperPropertyT.elementaryGroup}
+
+\p{The exact Lean boundary for \ref{connes-0003} uses
+the almost-invariance and property-(T) predicates
+\leanref/connes{Connes.UnitaryRepresentation.HasAlmostInvariantUnitVectors},
+\leanref/connes{Connes.HasKazhdanPropertyT}, and
+\leanref/connes{Connes.HasRelativePropertyT}.
+This qualitative form matches the final consumer, while quantitative Kazhdan
+sets and constants remain local to any future proof of the EJZK input.}
+
+\p{The transfer argument uses the fixed subspace #{H^N} of a normal subgroup
+#{N} and its orthogonal complement. Relative property (T) produces a nonzero
+vector in #{H^N}; property (T) of the quotient then acts on #{H^N}. The
+relative-and-quotient transfer theorem
+\leanref/connes{Connes.PropertyTTransfer.hasKazhdanPropertyT_of_relative_and_quotient}
+packages this step without exposing the concrete presentation of Zhou's
+groups to the spectral proof.}
+
+\p{A future EJZK development should use Kazhdan pairs, ratios, or spectral
+gaps internally, then export
+\leanref/connes{Connes.PaperPropertyT.elementaryGroup} for property (T) of
+the elementary group.
+Demanding a particular constant at the public boundary would strengthen the
+paper's hypothesis and couple every consumer to an arbitrary estimate.}

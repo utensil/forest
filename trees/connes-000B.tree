@@ -5,10 +5,9 @@
 \tag{lean}
 \tag{property-t}
 \tag{formalization-estimate}
-\taxon{Remark}
 \title{EJZK route and effort envelope}
-\lean/connes{Connes.PaperPropertyT.elementaryGroup,Connes.HasKazhdanPropertyT,Connes.spectral_criterion_unconditional}
-\lean{SimpleGraph.lapMatrix,SimpleGraph.posSemidef_lapMatrix}
+\lean/connes{Connes.PaperPropertyT.elementaryGroup}
+\lean{SimpleGraph.lapMatrix}
 
 \p{The exact property-(T) input is classical and mathematically well
 established. The literature survey in
@@ -67,12 +66,12 @@ route and its decomposition, not these LOC or effort figures.}
   \strong{1.5--3 thousand}.}
 }
 
-\p{These internal allocations overlap, and their subtotal excludes integration
-adapters, proof-search retries, and pin-specific repair risk. It therefore is
-not an arithmetic derivation of the 18--35 thousand-line envelope.}
+\p{The allocations overlap. Their subtotal also excludes integration adapters,
+proof-search retries, and pin-specific repair risk, so it is not an arithmetic
+derivation of the 18--35 thousand-line envelope.}
 
 \p{The existing analytic shell is not part of the missing estimate.
-\href{https://github.com/utensil/connes-rigidity/blob/main/Connes/Foundation/OperatorAlgebra/PositiveSpectralMeasure.lean#L2255-L2268}{\code{PositiveSpectralMeasure.spectral_criterion_unconditional}}
+\leanref/connes{Connes.spectral_criterion_unconditional}
 already constructs the positive spectral functional and closes the scalar/PVM
 route from finite spectral detection to property (T).}
 

@@ -5,18 +5,17 @@
 \tag{lean}
 \tag{property-t}
 \tag{formalization-boundary}
-\taxon{Remark}
 \title{Representation-space universe boundary}
-\lean/connes{Connes.HasKazhdanPropertyT,Connes.spectral_criterion_unconditional}
+\lean/connes{Connes.HasKazhdanPropertyT}
 
 \p{The cited literature formulates property (T) by quantifying over unitary
-representations; see the basic definitions and elementary-group theorem in
-\citet{Section 3.1 and Theorem 1.1}{ershov2010noncommutative}, and the
-root-graded generalization in \citet{Theorem 1.1}{ershov2017rootgraded}. Lean
-must also make the size of each carrier explicit.}
+representations. The basic definitions and elementary-group theorem appear in
+\citet{Section 3.1 and Theorem 1.1}{ershov2010noncommutative}; the root-graded
+generalization is \citet{Theorem 1.1}{ershov2017rootgraded}. Lean must also make
+the size of each carrier explicit.}
 
 \p{The current
-\href{https://github.com/utensil/connes-rigidity/blob/main/Connes/Core.lean#L67-L75}{\code{HasKazhdanPropertyT}}
+\leanref/connes{Connes.HasKazhdanPropertyT}
 takes a group in \code{Type u} and quantifies over Hilbert carriers in the same
 \code{Type u}. This conventional interface is sufficient for the theorem
 schema formalized here.}
@@ -70,6 +69,6 @@ Hilbert basis a small countable index, or transports the full property-(T)
 predicate across that model. Together these form the lowering seam.}
 
 \p{They are more focused than generalizing the entire
-\href{https://github.com/utensil/connes-rigidity/blob/main/Connes/Foundation/OperatorAlgebra/PositiveSpectralMeasure.lean#L2262-L2270}{spectral-criterion stack},
+\leanref/connes{Connes.spectral_criterion_unconditional} stack,
 but remain separate from closing the EJZK premise and from the present
 formalization.}

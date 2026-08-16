@@ -1,0 +1,25 @@
+\import{spin-macros}
+\meta{agent-authored}{true}
+
+\tag{connes}
+\tag{lean}
+\tag{linear-groups}
+\tag{property-t}
+\title{Formalizing elementary generation and transport}
+\lean/connes{Connes.SpecialLinear.elementarySubgroup_eq_top,Connes.PaperPropertyT.elementaryEquivSL3}
+
+\p{The formalization proves the equality used in \ref{connes-0005} by
+determinant-preserving row operations and Euclidean descent on polynomial
+entries, culminating in
+\leanref/connes{Connes.SpecialLinear.elementarySubgroup_eq_top}.}
+
+\p{It then constructs
+\leanref/connes{Connes.PaperPropertyT.elementaryEquivSL3}
+and transports property (T) across the named multiplicative equivalence. The
+external premise therefore names the exact group in the cited theorem, while
+the paper-facing consumer works with #{\mathrm{SL}_3(R)}.}
+
+\p{Rewriting subgroup equality into carrier equality would expose dependent
+coercions throughout Section 4. Keeping transport at one explicit equivalence
+also lets later finite-index and quotient arguments remain independent of the
+chosen presentation.}

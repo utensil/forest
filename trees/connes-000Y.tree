@@ -1,0 +1,35 @@
+\import{spin-macros}
+\meta{agent-authored}{true}
+
+\tag{connes}
+\tag{lean}
+\tag{harmonic-analysis}
+\tag{property-t}
+\title{Formalizing the spectral bridge}
+\lean/connes{Connes.spectral_criterion}
+
+\p{The project records the group-theoretic data consumed by
+\ref{connes-0004} in
+\leanref/connes{Connes.SplitAbelianExtension}.
+The analytic layer can therefore use the kernel, quotient action, and section
+without unfolding a semidirect product.}
+
+\p{The scalar measure and displacement interfaces are formalized in
+\leanref/connes{Connes.ProjectionValuedSpectralMeasure},
+and the finite-detection argument is packaged by
+\leanref/connes{Connes.spectral_criterion}.}
+
+\p{The direct consumer boundary is the following positive-atom estimate. If an
+invariant probability measure #{\mu} satisfies
+
+##{c(1-\mu(\{1\}))\leq\sum_{a\in J}\int|\chi(a)-1|^2\,d\mu(\chi)}
+
+for some #{c>0}, then sufficiently small displacement on the finite detector
+#{J} forces #{\mu(\{1\})>0}.}
+
+\p{Over #{\mathbb F_2}, characters take values through the two-element circle
+subgroup. The local equivalence
+\leanref/connes{Connes.BinaryPontryaginDual.pointwisePontryaginDualEquiv}
+identifies the dual of a linear dual with its evaluation module. This replaces
+implicit Fourier coordinates by an explicit additive equivalence; it is a
+formalization bridge, not an additional hypothesis.}

@@ -1,0 +1,22 @@
+\import{spin-macros}
+\meta{agent-authored}{true}
+
+\tag{connes}
+\tag{lean}
+\tag{group-theory}
+\tag{icc}
+\title{Formalizing the ICC criterion}
+\lean/connes{Connes.PaperICC.isICC_of_product_quotient,Connes.PaperICC.paper_gammaOne_icc,Connes.PaperICC.paper_gammaTwo_icc}
+
+\p{The paper-specific work behind \ref{connes-0006} is confined to orbit
+calculations in
+\href{https://github.com/utensil/connes-rigidity/blob/main/Connes/Paper/Section5/ICCOrbits.lean}{\code{ICCOrbits.lean}}.
+Those calculations construct the action data and yield
+\leanref/connes{Connes.PaperICC.paper_gammaOne_icc} and
+\leanref/connes{Connes.PaperICC.paper_gammaTwo_icc}.}
+
+\p{The displacement certificate is the finite-quotient input. Conjugating an
+element with nontrivial #{Q}-coordinate by a kernel element changes its kernel
+coordinate by #{a(q\cdot a)^{-1}}. Asking directly for an infinite family of
+conjugates would duplicate this algebra for each action. The certificate
+instead exposes the one displacement whose infinite #{S}-orbit suffices.}
