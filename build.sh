@@ -37,14 +37,51 @@ function show_lize_result {
     echo "Open output/$1.pdf to see the result."
 }
 
+if [ -z "${FOREST_PRIMARY_ROOT:-}" ] && [ -f "$PROJECT_ROOT/.jj/repo" ]; then
+    IFS= read -r jj_repo_dir < "$PROJECT_ROOT/.jj/repo"
+    FOREST_PRIMARY_ROOT=${jj_repo_dir%/.jj/repo}
+fi
+export FOREST_PRIMARY_ROOT
+
+function wasm_package_matches {
+    local pkg_dir=$1
+    local hash=$2
+
+    [ -f "$pkg_dir/.commit_hash" ] &&
+        [ "$(cat "$pkg_dir/.commit_hash")" = "$hash" ] &&
+        [ -f "$pkg_dir/package.json" ] &&
+        compgen -G "$pkg_dir/*.js" > /dev/null &&
+        compgen -G "$pkg_dir/*.wasm" > /dev/null
+}
+
 function prep_wasm {
     mkdir -p lib
-    lib_name=$1
-    url=$2
-    hash=$3
-    lib_path=${4:-$lib_name}
-    local hash_file="lib/$lib_path/pkg/.commit_hash"
+    local lib_name=$1
+    local url=$2
+    local hash=$3
+    local lib_path=${4:-$lib_name}
+    local pkg_dir="lib/$lib_path/pkg"
+    local hash_file="$pkg_dir/.commit_hash"
     local needs_build=false
+
+    if [ -z "$CI" ] && [ -z "$UTS_DEV" ]; then
+        if ! wasm_package_matches "$pkg_dir" "$hash"; then
+            local cached_pkg="$FOREST_PRIMARY_ROOT/lib/$lib_path/pkg"
+            if [ -n "$FOREST_PRIMARY_ROOT" ] && [ "$FOREST_PRIMARY_ROOT" != "$PROJECT_ROOT" ] && \
+                [ ! -e "$pkg_dir" ] && wasm_package_matches "$cached_pkg" "$hash"; then
+                mkdir -p "lib/$lib_path"
+                cp -R "$cached_pkg" "lib/$lib_path/" || return 1
+                echo "Using pinned WASM package from the primary checkout for $lib_path"
+            fi
+        fi
+        if ! wasm_package_matches "$pkg_dir" "$hash"; then
+            echo "No pinned WASM package is available for $lib_name." >&2
+            echo "Run UTS_DEV=1 just build in the primary Forest checkout first." >&2
+            return 1
+        fi
+        cp "$pkg_dir"/*.wasm output/forest/ || return 1
+        return 0
+    fi
 
     if [ ! -d "lib/$lib_name/.git" ]; then
         # No git repo (stale pkg-only cache restore or first run) — clone fresh
@@ -60,9 +97,7 @@ function prep_wasm {
         needs_build=true
     fi
 
-    if [ ! -d "lib/$lib_path/pkg" ] || [ -z "$(ls -A "lib/$lib_path/pkg")" ]; then
-        needs_build=true
-    elif [ ! -f "$hash_file" ] || [ "$(cat "$hash_file")" != "$hash" ]; then
+    if ! wasm_package_matches "$pkg_dir" "$hash"; then
         needs_build=true
     fi
 
@@ -78,11 +113,9 @@ function prep_wasm {
         else
             echo "Using cached WASM package for $lib_name"
         fi
-    else
-        echo "🟡 Skipping wasm-pack build for $lib_name, some notes that used Rust and WASM might not work as epected."
     fi
 
-    if ! compgen -G "lib/$lib_path/pkg/*.wasm" > /dev/null; then
+    if ! compgen -G "$pkg_dir/*.wasm" > /dev/null; then
         echo "Missing WASM output for $lib_name" >&2
         return 1
     fi
