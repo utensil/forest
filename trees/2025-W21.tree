@@ -1,0 +1,126 @@
+\import{macros}
+
+\title{Week 21, 2025}
+\date{2025-05-19}
+
+\scope{
+  \put\transclude/toc{false}
+  \put\transclude/expanded{false}
+  \subtree[2025-W21-links]{
+\title{Link selections (2025-W21)}
+
+\subtree[2025-05-25]{\mdnote{2025-05-25}{\tags{#formal #haskell #lean #ocaml #os #rust #zig}
+- [Having your compile-time cake and eating it too](https://0x44.xyz/blog/comptime-1)
+    - [Hindley-Milner (HM)](\verb>>>|https://en.wikipedia.org/wiki/Hindley%E2%80%93Milner_type_system>>>), the most popular human-friendly type system, used in Swift, Rust, Scala, Haskell, OCaml etc.
+    - proposed four big features to replace pretty much all Rust macros, including derive ones, while keeping Rust's type system, and achieving (most of) Zig's comptime features
+        - `@` or `@=`
+        - `Abstract`
+        - `TypeInfo` and `Field`
+        - `Code` and `parse`
+- [CAPTCHAs don't work any more for ticket sellers](https://behind.pretix.eu/2025/05/23/captchas-are-over/)
+- [Concepts vs type traits](https://akrzemi1.wordpress.com/2025/05/24/concepts-vs-type-traits/)
+- [tachy0n: The last 0day jailbreak](https://blog.siguza.net/tachy0n/)
+- found [Domain Theory Lecture Notes](https://liamoc.net/forest/dt-001Y/index.xml)
+- generate and read the following DeepWiki:
+    - [ymndoseijin/zilliam](https://deepwiki.com/ymndoseijin/zilliam)
+    - [ShabbirHasan1/unsynn](https://deepwiki.com/ShabbirHasan1/unsynn)
+    - [AstatineAi/ocaml-forester](https://deepwiki.com/AstatineAi/ocaml-forester)
+    - [pygae/galgebra](https://deepwiki.com/pygae/galgebra)
+    - [utensil/forest](https://deepwiki.com/utensil/forest)
+- use GenSpark to generate [Follow-up Research after Formalizing Geometric Algebra in Lean](https://www.genspark.ai/slides?project_id=c36784da-1876-4ec6-bf09-fb166b647a1a)
+- [Does gratitude increase happiness?](https://dynomight.net/gratitude/)
+}}
+
+\subtree[2025-05-24]{\mdnote{2025-05-24}{\tags{#agent #apl #cg #compiler #git #haskell #lean #os #rust #software}
+- [Anthropic’s ‘System Card’ for Claude 4 (Opus and Sonnet)](https://www-cdn.anthropic.com/4263b940cabb546aa0e3283f35b686f4f3b2ff47.pdf)
+    - particularly fun reading
+        - 4.1.1.1 Continuations of self-exfiltration attempts
+        - 4.1.1.2 Opportunistic blackmail
+        - 4.1.1.3 Self-exfiltration under extreme circumstances
+        - 4.1.3 Excessive compliance with harmful system-prompt instructions
+            - "mistakenly omitted the only finetuning dataset that included harmful system prompts"
+- [Forgotten APL Influences (2016)](https://pok.acm.org/meetings/foils/McGrew18paper.pdf)
+- learn about [Glean](https://glean.software/)
+    - a system for collecting, deriving and querying facts about source code
+    - from [Indexing Hackage: Glean vs. hiedb](https://simonmar.github.io/posts/2025-05-22-Glean-Haskell.html)
+- [Pain in the dots](https://matthew-brett.github.io/pydagogue/pain_in_dots.html)
+    - different semantics of two and three dot notation for `git log` and `git diff`
+- [Make Your Phone Grayscale](https://blog.alexbeals.com/posts/make-your-phone-grayscale)
+    - I've already started the practice, combining it with all-day nightshift mode
+- [The GCC compiler backend can now fully bootstrap the Rust compiler](https://old.reddit.com/r/rust/comments/1ktph3c/media_the_gcc_compiler_backend_can_now_fully)
+}}
+
+\subtree[2025-05-23]{
+\mdnote{2025-05-23}{\tags{#ocaml #os #rust #tla}
+- [Why I love OCaml](https://mccd.space/posts/ocaml-the-worlds-best/)
+- [How to Get Your Research Paper Accepted](https://maxwellforbes.com/posts/how-to-get-a-paper-accepted)
+- [Fork Union: Beyond OpenMP in C++ and Rust?](https://ashvardanian.com/posts/beyond-openmp-in-cpp-rust/)
+- #lang
+    - [Wren](https://wren.io/), a small, fast, class-based concurrent scripting language
+        - "Think Smalltalk in a Lua-sized package with a dash of Erlang and wrapped up in a familiar, modern syntax."
+        - [Talon](https://github.com/jossephus/talon): Write Raylib programs in Wren
+    - [Picat](https://picat-lang.org/), a rule-based language, in which predicates, functions, and actors are defined with pattern-matching rules
+        - from [Finding hard 24 puzzles with planner programming](https://buttondown.com/hillelwayne/archive/finding-hard-24-puzzles-with-planner-programming/)
+            - "the only language that I know has a built-in planner module"
+    - [Dark](https://darklang.com/), a serverless backend language
+        - [Darklang Goes Open Source](https://blog.darklang.com/darklang-goes-open-source/)
+        - [Goodbye Dark Inc. - Hello Darklang Inc](https://blog.darklang.com/goodbye-dark-inc-welcome-darklang-inc/)
+    - [Roto](https://github.com/NLnetLabs/roto)
+        - from [Introducing Roto: A Compiled Scripting Language for Rust](https://blog.nlnetlabs.nl/introducing-roto-a-compiled-scripting-language-for-rust/)
+    - [Janet](https://janet-lang.org/) #lisp
+        - a more batteries-included Lua, with Lisp/Clojure-inspired syntax
+        - see [The smallest embeddable scripting language, part 1](https://log.schemescape.com/posts/static-site-generators/smallest-scripting-language.html)
+        - [PEGs in a PEG](https://github.com/kragen/peg-bootstrap/blob/master/peg.md)
+        - [JNJ: J iN Janet](https://sr.ht/~subsetpark/JNJ/)
+        - [Bagatto](https://bagatto.co/), a static site generator written in Janet
+    - [goal](https://codeberg.org/anaseto/goal), embeddable scripting array language
+    - [lamber](https://github.com/aartaka/lamber), functional scripting language compiling to Lambda Calculus
+- found many papers, see [[uts-016E]]
+}
+}
+
+\subtree[2025-05-22]{\mdnote{2025-05-22}{\tags{#context #formal #idea #os}
+- [Adventures in Symbolic Algebra with Model Context Protocol](https://www.stephendiehl.com/posts/computer_algebra_mcp/)
+    - maybe I should create MCP for GAlgebra
+    - followup: [Interfacing MCP with Combinatorial, Convex, and SMT Solvers](https://www.stephendiehl.com/posts/smt_and_mcp_solvers/)
+- [Transpiler is a meaningless word (2023)](https://people.csail.mit.edu/rachit/post/transpiler/)
+    - maybe that means I should give up on the idea that I could build a Forester transpiler
+- found [Obsidian Bases](https://mas.to/@obsidian/114546538858212821)
+}}
+
+\subtree[2025-05-21]{\mdnote{2025-05-21}{\tags{#os #sqlite}
+- [If composers were hackers](https://mmapped.blog/posts/18-if-composers-were-hackers)
+- found [Litestream: Revamped](https://fly.io/blog/litestream-revamped/), making SQLite apps reliably recoverable from object storage
+- [The Ingredients of a Productive Monorepo](https://blog.swgillespie.me/posts/monorepo-ingredients/)
+}}
+
+\subtree[2025-05-20]{\mdnote{2025-05-20}{\tags{#gpu #news #os #web}
+- [Not causal chains, but interactions and adaptations](https://surfingcomplexity.blog/2025/05/19/not-causal-chains-but-interactions-and-adaptations/)
+    - RCA(root cause analysis) model v.s. RE(resilience engineering) model, for incidents
+    - related
+        - [The same incident never happens twice, but the patterns recur over and over](https://surfingcomplexity.blog/2025/05/26/the-same-incident-never-happens-twice-but-the-patterns-recur-over-and-over/)
+        - [Quick takes on the GCP public incident write-up](https://surfingcomplexity.blog/2025/06/14/quick-takes-on-the-gcp-public-incident-write-up/)
+            - [“What went well” is more than just a pat on the back](https://surfingcomplexity.blog/2025/06/14/what-went-well-is-more-than-just-a-pat-on-the-back/)
+            - [Behind the scenes: Redpanda Cloud’s response to the GCP outage](https://www.redpanda.com/blog/gcp-outage-june-redpanda-cloud) ([on HN](https://news.ycombinator.com/item?id=44338089)) ([on lobste.rs](https://lobste.rs/s/kyxrxf))
+        - [Implicit is better than explicit](https://sophiabits.com/blog/implicit-is-better-than-explicit)
+- [Open Source Can't Coordinate](https://matklad.github.io/2025/05/20/open-source-cant-coordinate.html)
+- [Particle Life simulation in browser using WebGPU](https://lisyarus.github.io/blog/posts/particle-life-simulation-in-browser-using-webgpu.html)
+}}
+
+\subtree[2025-05-19]{\mdnote{2025-05-19}{\tags{#agent #docker #lemmy #mastodon #os}
+- [Agent Recursion](https://choly.ca/post/agent-recursion/)
+- [Semgrep: AutoFixes using LLMs](https://choly.ca/post/semgrep-autofix-llm/)
+    - found a few alternatives to `semgrep`, e.g. [ast-grep](https://ast-grep.github.io/)
+- [Adding Mastodon Comments to your Blog](https://beej.us/blog/data/mastodon-comments/)
+    - [Mastodon as comment system for your static blog](https://danielpecos.com/2022/12/25/mastodon-as-comment-system-for-your-static-blog/)
+    - [My blog now has Lemmy comments](https://blog.coship.fyi/blog/lemmy-comments/)
+    - learn about [Glasp: Highlight the Internet & Build Your AI Clone](https://glasp.co/)
+- [async/await versus the Calloop Model](https://notgull.net/calloop/)
+- [Mimalloc Cigarette: Losing one week of my life catching a memory leak](https://pwy.io/posts/mimalloc-cigarette/)
+- [Ditching Obsidian and building my own](https://amberwilliams.io/blogs/building-my-own-pkms)
+- found [Qwen3 Technical Report](https://huggingface.co/papers/2505.09388)
+- found [TestDesiderata](https://testdesiderata.com/)
+- found [macOS VMs in a Docker Container](https://github.com/trycua/cua/tree/main/libs/lumier)
+}}
+  }
+}

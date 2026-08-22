@@ -1,0 +1,352 @@
+\import{macros}
+
+\title{Week 24, 2025}
+\date{2025-06-09}
+
+\scope{
+  \put\transclude/toc{false}
+  \put\transclude/expanded{false}
+  \subtree[2025-W24-links]{
+\title{Link selections (2025-W24)}
+
+\subtree[2025-06-15]{\mdnote{2025-06-15}{\tags{#os #physics #raymarching}
+- [Q-learning is not yet scalable](https://seohong.me/blog/q-learning-is-not-yet-scalable/)
+- found [Todo.txt](http://todotxt.org/)
+    - from [todo.txt tasks in my TRMNL](https://akselmo.dev/posts/todotxt-in-my-trmnl/)
+- #software
+    - [What is systems programming, really? (2018)](https://willcrichton.net/notes/systems-programming/)
+    - [What Is Open Source?](https://werd.io/what-is-open-source/)
+        - learn about free v.s. open source
+        - related
+            - [I feel open source has turned into two worlds](https://utcc.utoronto.ca/~cks/space/blog/tech/OpenSourceTwoWorlds)
+    - found [is it really FOSS?](https://isitreallyfoss.com/)
+- #cg
+    - [On Shaping Light](https://blog.maximeheckel.com/posts/shaping-light-volumetric-lighting-with-post-processing-and-raymarching/)
+    - watched [Physics and Math of Shading](https://www.youtube.com/watch?v=j-A0mwsJRmk)
+        - from [SIGGRAPH 2025 Course: Physically Based Shading in Theory and Practice](https://blog.selfshadow.com/publications/s2025-shading-course/)
+    - [Remaking Celeste's Lighting](https://noelberry.ca/posts/celeste_lighting/)
+- found [Foundations of Computer Vision](https://visionbook.mit.edu)
+}}
+
+\subtree[2025-06-14]{\mdnote{2025-06-14}{\tags{#agent #blogging #compiler #context #formal #game #idea #interop #lean #news}
+- started using Mac's dictation in agent coding
+- [Blogging about papers](https://simonwillison.net/2025/Jun/13/blogging-about-papers/#atom-everything)
+    - [Design Patterns for Securing LLM Agents against Prompt Injections](https://simonwillison.net/2025/Jun/13/prompt-injection-design-patterns/) ([on HN](https://news.ycombinator.com/item?id=44268335)) ([on lobste.rs](https://lobste.rs/s/zuadfv))
+        - "the writing is clear, it’s enjoyable to read and the target audience clearly includes practitioners, not just other researchers"
+- #cg
+    - [Luxe Game Engine in preview now](https://luxeengine.com/dev-log-15/)
+        - 2D/3D, cross-platform (including web)
+        - written in c++, scriptable with [Wren](https://wren.io/) or any language that can interact with C
+        - optional editor to build worlds, animation, ui etc.
+    - [Voronoi, Hashing and OSL](https://aras-p.info/blog/2025/06/13/Voronoi-Hashing-and-OSL/)
+        - found [Open Shading Language (OSL)](https://github.com/AcademySoftwareFoundation/OpenShadingLanguage)
+            - was originally developed by Sony Pictures Imageworks for film animation and visual effects
+            - has features such as radiance closures, BSDFs, and deferred ray tracing as first-class concepts
+- [Three Algorithms for YSH Syntax Highlighting](https://codeberg.org/oils/oils.vim/src/branch/main/doc/algorithms.md)
+    - Coarse Parsing with regexes + a context stack could be even more accurate than Context-Free Parsing used by tree-sitter
+    - recognizing most languages with Tree-sitter requires writing C code in an external scanner
+- found [Tattoy: a text-based terminal compositor](https://tattoy.sh/) ([on HN](https://news.ycombinator.com/item?id=44268644)) ([on lobste.rs](https://lobste.rs/s/bcxcju))
+    - considerate design for text contrasts: "detect low contrast text and auto adjust the foreground colour within the constraints of your chosen terminal theme to find the nearest colour that meets a minimum contrast threshold"
+    - usage example: terminal minimap, background video, shadertoy shaders
+- #formalization
+    - found [Litex: Scale Formal Reasoning in AI Age](https://github.com/litexlang/golitex)
+        - "Traditional proof assistants like Lean4 require learning hundreds of unfamiliar keywords and complex type theories. Litex enables formal verification with just 8 intuitive keywords (forall, exist, not, or, fn, prop, obj, set) and familiar Python/Go-like syntax"
+    - [100 years of Zermelo's axiom of choice: What was the problem with it? (2006)](https://research.mietek.io/mi.MartinLof2006.html) (partially formalized in Agda)
+- #datalog
+    - [Implementing Logic Programming](https://btmc.substack.com/p/implementing-logic-programming) with Prolog and Datlog
+    - [Datalog in Rust](https://github.com/frankmcsherry/blog/blob/master/posts/2025-06-03.md)
+- #rust
+    - [OxCaml, Jane Street's extension of OCaml is now open-source](https://oxcaml.org) ([on HN](https://news.ycombinator.com/item?id=44268782)) ([on lobste.rs](https://lobste.rs/s/unsbmk))
+    - [Hypershell: A Type-Level DSL for Shell-Scripting in Rust powered by Context-Generic Programming](https://contextgeneric.dev/blog/hypershell-release/)
+    - [Datalog in Minikanren](https://deosjr.github.io/dynamicland/datalog.html) ([on HN](https://news.ycombinator.com/item?id=44283093), many good references about datalog, and scheme)
+    - [\verb>>>|Bzip2 crate switches from C to 100% Rust>>>](https://trifectatech.org/blog/bzip2-crate-switches-from-c-to-rust/)
+        - `c2rust`, crate [cc](https://crates.io/crates/cc), `miri`
+        - `cargo fuzz`, `cargo audit`, `semgrep` (particularly [semgrep-rules](https://github.com/trailofbits/semgrep-rules))
+- #zig
+    - watched [Writing polymorphic code (anytype, comptime interface, tagged union)](https://www.reddit.com/r/Zig/comments/1lak6wf/writing_polymorphic_code_anytype_comptime/)
+        - found [Zimpl](https://github.com/permutationlock/zimpl) ([why](https://github.com/permutationlock/zimpl/blob/main/why.md))
+        - [tagged union example with `inline else`](https://github.com/ComputerBread/videos-code-snippets/blob/main/zig-comptime-polymorphism/union-6-normal-n-inline.zig)
+    - [Compiler optimization options - memchr and ripmemchr case study](https://hwisnu.bearblog.dev/compiler-optimization-options-memchr-and-ripmemchr-case-study/)
+    - [C2y: Hitting the Ground Running](https://thephd.dev/c2y-hitting-the-ground-running)
+    - [GCC, glibc, stack unwinding and relocations – A war story](https://blog.sergiodj.net/posts/gcc-glibc-stack-unwinding-relocations-bug/)
+    - [The Art Of Packing Data](https://www.elopezr.com/the-art-of-packing-data/#)
+- #apl
+    - [APL Style: Patterns/Anti-patterns](https://sway.cloud.microsoft/b1pRwmzuGjqB30On)
+    - [Solving LinkedIn Queens with APL](https://pitr.ca/2025-06-14-queens)
+    - [Klong: A Simple Array Language](https://t3x.org/klong/)
+    - [Coding in Advent](https://panadestein.github.io/blog/posts/aoc24.html) in BQN
+    - [apl87](https://www.jsoftware.com/papers/APL87.htm)
+    - [My Ideal Array Language](https://www.ashermancinelli.com/csblog/2025-7-20-Ideal-Array-Language.html) ([on HN](https://news.ycombinator.com/item?id=44785224)) ([on lobste.rs](https://lobste.rs/s/xejkcr))
+        - APL, Mojo, MLIR BQN etc., but no mention of Julia
+        - [this comment](https://news.ycombinator.com/item?id=38786963) recommend [Astropy](https://www.astropy.org/) and much more
+    - [BobMcDear/trap: Autoregressive transformers in APL](https://github.com/BobMcDear/trap) #lm
+- [Introducing Sulka, the Hardened Yocto Distro](https://ejaaskel.dev/introducing-sulka-the-hardened-yocto-distro/)
+    - learn about the possibility to maintain a distro by a single person
+    - the Yocto project provides toolkits to create custom Linux distributions, especially for embedded systems
+    - Sulka is a hardened Poky, and there are alternatives like [Welma](https://theembeddedkit.io/welma-yocto-linux/)
+- #ai
+    - [To fuel AI, US Congress moves to fast-track nuclear plant approvals](https://www.wsj.com/articles/to-feed-power-wolfing-ai-lawmakers-are-embracing-nuclear-a461ab7d)
+    - [The Emperor's New LLM](https://dayafter.substack.com/p/the-emperors-new-llm)
+    - [Builder.ai did not "fake AI with 700 engineers"](https://blog.pragmaticengineer.com/builder-ai-did-not-fake-ai/)
+    - [Self-Adapting Language Models](https://arxiv.org/abs/2506.10943)
+    - [Resa: Transparent Reasoning Models via SAEs](https://arxiv.org/abs/2506.09967)
+    - [Simulink (Matlab) Copilot](https://github.com/Kaamuli/Bloxi)
+    - [Rethinking Losses for Diffusion Bridge Samplers](https://arxiv.org/abs/2506.10982)
+- #quantum
+    - [Quantum Computing without the Linear Algebra](https://eprint.iacr.org/2025/1091.pdf)
+    - [Geometry from Quantum Temporal Correlations](https://arxiv.org/abs/2502.13293)
+- news
+    - [Apple's Liquid Glass is prep work for AR interfaces, not just a design refresh](https://omc345.substack.com/p/from-skeuomorphic-to-liquid-glass)
+    - [Next.js 15.1+ is unusable outside of Vercel](https://omarabid.com/nextjs-vercel)
+    - [The European public DNS that makes your Internet safer](https://www.dns0.eu)
+- general
+    - [Feedback Is Not an Attack](https://ashley.dev/posts/feedback-is-not-an-attack/)
+    - [Ask HN: How do I give back to people helped me when I was young and had nothing?](https://news.ycombinator.com/item?id=44268448)
+        - "Focus less on those who helped you, and more on helping others."
+    - [am i too self-aware?](https://tala.bearblog.dev/am-i-too-self-aware/)
+    - [When random people give money to random other people (2017)](https://quomodocumque.wordpress.com/2017/06/27/when-random-people-give-money-to-random-other-people/)
+    - [We Live In a Golden Age of Interoperability](https://borretti.me/article/we-live-in-a-golden-age-of-interoperability)
+    - [No Hello](https://nohello.net/en/)
+- #biology
+    - [Sperm are very different from all other cells](https://www.bbc.com/future/article/20250613-untangling-the-mysteries-of-what-we-dont-know-about-sperm)
+    - [The Ecosystem Dynamics That Can Make or Break an Invasion](https://physics.mit.edu/news/the-ecosystem-dynamics-that-can-make-or-break-an-invasion/)
+    - [When we die do we still have any of the original cells from our birth?](https://www.quora.com/When-we-die-do-we-still-have-any-of-the-original-cells-from-our-birth)
+- found [Modularizing George Cave's eInk Energy Dashboard](https://slipway.co/blog/eink-energy-dashboard)
+    - could be used to make widgets for various devices
+- found [Radicle Desktop: a graphical user interface for the Radicle peer-to-peer code forge](https://radicle.xyz/desktop)
+    - learn about [Radicle](https://radicle.xyz/), a sovereign code forge built on Git
+- found [Qrkey – Offline private key backup on paper](https://github.com/Techwolf12/qrkey)
+    - not sure if it's a good idea security-wise, but neat anyway
+}}
+
+\subtree[2025-06-13]{\mdnote{2025-06-13}{\tags{#benchmark #formal #lean #news #os #rss #rust #tui #z3 #zig}
+- [Solving LinkedIn Queens with SMT](https://buttondown.com/hillelwayne/archive/solving-linkedin-queens-with-smt/)
+    - in Z3 SMT solver instead of CVC5 SMT solver as in [Using SAT to Get the World Record on LinkedIn's Queens](https://ryanberger.me/posts/queens/)
+    -  SAT solvers are "criminally underused by the industry" (from [Modern SAT solvers: fast, neat and underused](https://codingnest.com/modern-sat-solvers-fast-neat-underused-part-1-of-n/))
+    - SMT solvers are "higher-level" than SAT, capable of handling more data types than just boolean variables
+    - It's a lot easier to solve the problem at the SMT level than at the SAT level
+    - people prefer SMT to SAT
+    - [Glucose, an SAT solver](https://github.com/audemard/glucose) is really fast
+    - [The Hat, the Spectre and SAT Solvers (2024)](https://www.nhatcher.com/post/on-hats-and-sats/) ([on HN](https://news.ycombinator.com/item?id=44269289)) ([on lobste.rs](https://lobste.rs/s/oq0ui4))
+- [jemalloc Postmortem](https://jasone.github.io/2025/06/12/jemalloc-postmortem/)
+    - they "reached a sad end for jemalloc in the hands of Facebook/Meta even though most of the people involved were acting in good faith"
+    - "the root of the problem is lack of awareness about external uses and needs"
+        - even "unaware of its replacement until after the fact"
+    - "internally siloed open source projects cannot thrive"
+    - should evaluate alternatives
+        - [TCMalloc](https://github.com/google/tcmalloc) by Google (with Bazel painpoint)
+        - [mimalloc](https://github.com/microsoft/mimalloc)
+            - [adopted](https://github.com/python/cpython/issues/90815) by CPython 3.12: "it is fast, thread-safe, and NUMA-aware"
+        - [StarMalloc: verified memory allocator](https://dl.acm.org/doi/10.1145/3689773)
+        - [phkmalloc](https://phk.freebsd.dk/sagas/phkmalloc/)
+- looking for best way to read Hacker News comments
+    - most TUI are not working well for reading comments, see `just prep-hkt`
+    - found [Vue HN](https://vue-hn.vercel.app/) that supports dark theme, and groups comments, it works pretty well with Doubao auto-translation
+    - found [Hacker News RSS](https://hnrss.github.io/) and chose the front page feed, and I have already subscribed to the best comments feed
+- [Could an LLM create a full Domain-Specific Language?](https://modeling-languages.com/vibe-dsling/)
+    - rather complete methodology for creating a DSL
+    - code: [jcabot/funding-dsl](https://github.com/jcabot/funding-dsl)
+- [The last six months in LLMs, illustrated by pelicans on bicycles](https://simonwillison.net/2025/Jun/6/six-months-in-llms/)
+    - an interesting benchmark for LLMs
+- #ai-safety #env
+    - [\verb>>>|AI Boom Drives 150% Surge in Indirect Emissions at Major Tech Firms, UN Warns>>>](https://esgnews.com/ai-boom-drives-150-surge-in-indirect-emissions-at-major-tech-firms-un-warns/)
+        - numbers for the environmental impact of LLMs
+        - related
+            - [AI threatens to raid the water reserves of Europe's driest regions](https://www.politico.eu/article/artificial-intelligence-threat-raid-water-reserves-europe-dry-regions/)
+    - [Environmental Impacts of Artificial Intelligence](https://www.greenpeace.de/publikationen/environmental-impacts-of-artificial-intelligence)
+    - [Mistral reports on the environmental impact of LLMs](https://mistral.ai/news/our-contribution-to-a-global-environmental-standard-for-ai) ([on HN](https://news.ycombinator.com/item?id=44651661))
+        - [Simon Willison | Our contribution to a global environmental standard for AI](https://simonwillison.net/2025/Jul/22/mistral-environmental-standard/)
+    - [Problems the AI industry is not addressing adequately](https://www.thealgorithmicbridge.com/p/im-losing-all-trust-in-the-ai-industry)
+    - [Generative AI’s crippling and widespread failure to induce robust models of the world](https://garymarcus.substack.com/p/generative-ais-crippling-and-widespread)
+- [Type-based vs Value-based Reflection](https://brevzin.github.io/c++/2025/06/09/reflection-ts/)
+    - value-based (C++26)
+        - "while we have new syntax for getting into (`^^e`) and out of (`[: e :]`) the value domain, once you’re in the value domain — it’s nice to just stay there"
+        - "C++26 reflection does bring with it new syntax and a bunch of new semantics. But the benefit is that a lot of metaprogramming starts to look more like regular programming. There is a lot less syntax in the implementation side of things. "
+    - type-based (Reflection TS published in March, 2020)
+    - wondering the Zig equivalent
+    - [Discover C++26’s compile-time reflection](https://lemire.me/blog/2025/06/22/c26-will-include-compile-time-reflection-why-should-you-care/)
+    - [C++26 Reflections adventures and compile-time UML](https://www.reachablecode.com/2025/07/31/c26-reflections-adventures-compile-time-uml/)
+- [Reflections on Sudoku, Or the Impossibility of Systematizing Thought](https://rjp.io/blog/2025-06-07-reflections-on-sudoku)
+    - limitation of TDD
+        - tests don't fix the underlying issue of "knowing what to do"
+    - alternative approach by Peter Norvig
+        - analyzing the high-level problem and then breaking down the data structures and outlining the solution in the course of ~20 lines of code
+- found [A Lightweight Merge Queue using GitHub Actions](https://sketch.dev/blog/lightweight-merge-queue)
+- [Rumour: Google intends to discontinue the Android Open Source Project](https://www.osnews.com/story/142553/rumour-google-intends-to-discontinue-the-android-open-source-project/)
+- [A tale of two spacetimes](https://robwilson1.wordpress.com/2025/06/12/a-tale-of-two-spacetimes/)
+- [In case of emergency, break glass](https://morrick.me/archives/10048)
+- skimmed [Patterns for Modeling Overlapping Variant Data in Rust](https://mcmah309.github.io/posts/patterns-for-modeling-overlapping-variant-data-in-rust)
+- [What I talk about when I talk about IRs](https://bernsteinbear.com/blog/irs/?utm_source=rss)
+}}
+
+\subtree[2025-06-12]{\mdnote{2025-06-12}{\tags{#cg #compiler #diagram #formal #game #optimization #os #proof #render #rust}
+- wrote [[uts-016K]] ([on reddit](https://www.reddit.com/r/Zig/comments/1lb2vq8/trying_zigs_selfhosted_x86_backend_on_apple/))
+- #lean
+    - [Premise Selection for a Lean Hammer](https://arxiv.org/abs/2506.07477)
+        - the paper behind [LeanHammer](https://github.com/JOSHCLUNE/LeanHammer)
+    - [Lean Copilot: Large Language Models as Copilots for Theorem Proving in Lean](https://neus-2025.github.io/files/papers/paper_33.pdf)
+    - [Trinity: an autoformalization system for verified superintelligence](https://www.morph.so/blog/trinity)
+    - [Mathesis: Towards Formal Theorem Proving from Natural Languages](https://arxiv.org/abs/2506.07047)
+    - watched [Mr. Mario Carneiro | Lean Meta-theory: The Proofs behind the Proofs](https://www.youtube.com/live/YtbfIjgzNDI)
+- [Rewriting SymCrypt in Rust to modernize Microsoft’s cryptographic library](https://www.microsoft.com/en-us/research/blog/rewriting-symcrypt-in-rust-to-modernize-microsofts-cryptographic-library/)
+    - used [Aeneas, a Verification Framework for Rust](https://github.com/AeneasVerif/aeneas) that supports F*, Coq, HOL4 and Lean
+        - the team also built
+            - [Charon](https://github.com/AeneasVerif/charon) to extract information from rustc internals for semantic analysis thus verification
+            - [Eurydice, a Rust-to-C compiler](https://github.com/AeneasVerif/eurydice/) to provide a backwards-compatibility story as the verification ecosystem gradually transitions to Rust
+    - used [Revizor - a fuzzer to search for microarchitectural leaks in CPUs](https://github.com/microsoft/sca-fuzzer)
+        - analyze binary code for specific compilers and platforms
+        - find side channel vulnerabilities caused by timing leaks or speculative execution
+        - which aren't visible in the source code
+        - for today’s CPUs, every new optimization may open a new side channel, which renders constant-time programming insufficient
+- found [Lightweight Diagramming for Lightweight Formal Methods](https://blog.brownplt.org/2025/06/09/copeanddrag.html)
+    - formal methods help users define, explore, verify, and diagnose specifications for complex systems incrementally
+    - [Forge: A Tool and Language for Teaching Formal Methods](https://forge-fm.org/)
+        - similar to [Alloy 6](https://alloytools.org/)
+        - uses [Sterling visualizer](https://sterling-js.github.io/)
+    - [Cope and Drag (CnD)](https://github.com/sidprasad/copeanddrag)
+        - embedded in an open-source visualizer for Forge
+        - focuses on encoding the spatial intuitions implicit in communicating the model
+            - constraining spatial layout (such as positioning child nodes below their parents in a binary tree)
+            - grouping elements (like clustering related components in a software architecture)
+            - directing drawing style (for instance, coloring nodes in a red-black tree based on their color)
+- #debugger
+    - [strace tips for better debugging](https://rrampage.github.io/2025/06/13/strace-tips-for-better-debugging/)
+    - [Demystifying Debuggers](https://www.rfleury.com/p/demystifying-debuggers-part-1-a-busy) (a series)
+    - [Linus on Why Debuggers Are Actually Bad For Developers](https://lwn.net/2000/0914/a/lt-debugger.php3)
+    - found [Building a Debugger: Write a Native x64 Debugger From Scratch](https://nostarch.com/building-a-debugger)
+- #raku
+    - [Raku's "core"](https://gist.github.com/raiph/849a4a9d8875542fb86df2b2eda89296)
+    - [Raku's FAQ](https://docs.raku.org/language/faq#Metaquestions_and_advocacy)
+    - [RakuAST: a foundation for Raku macros](https://jnthn.net/papers/2020-cic-rakuast.pdf)
+    - [Raku in y minutes](https://learnxinyminutes.com/raku/)
+- [Readings shared June 10, 2025](https://jaalonso.github.io/vestigium/posts/2025/06/11-readings_shared_06-10-25/)
+- realized that [Pocoo](https://www.pocoo.org/) is behind Sphinx, Jinja, Pygments etc.
+- found [Verse Language](https://dev.epicgames.com/documentation/en-us/fortnite/verse-language-reference), a new scripting language for Fortnite by Epic
+}}
+
+\subtree[2025-06-11]{\mdnote{2025-06-11}{\tags{#agent #os #render #tui #typst #web #zig}
+- [My Unfiltered Take on the AI Coding Agent Landscape](https://xxchan.me/ai/2025/06/10/ai-coding-en.html)
+    - found and tried [amp](https://ampcode.com/)
+        - love their [Frequently Ignored Feedback](https://ampcode.com/fif) but disagree with some of them
+        - it gives me an addictive experience, but it's quite costly and the price model is not very transparent
+    - found [YouWare](https://www.youware.com/) and would love to try more
+- [Zig-style generics are not well-suited for most languages (2022)](https://typesanitizer.com/blog/zig-generics.html)
+- [Ratatui - Are We Embedded Yet? (#2)](https://jslazak.com/are-we-embedded-yet-2/)
+    - learn about [Mousefood](https://github.com/j-g00da/mousefood), a [embedded-graphics](https://crates.io/crates/embedded-graphics) backend for [Ratatui](https://crates.io/crates/ratatui)
+- found [Quarkdown - Markdown with superpowers](https://quarkdown.com/)
+    - interesting but it's a little late to the party now that we have pandoc and quarto
+    - the syntax and scripting looks good
+    - its PDF output is based on rendering web pages, a big no-no for me, as I need LaTeX-level professional typesetting like Typst has
+- #css
+    - [Partial Keyframes](https://www.joshwcomeau.com/animation/partial-keyframes/)
+        - neat CSS animation trick
+    - [More Frontend Web Tricks](https://kaiwenwang.com/writing/more-frontend-web-tricks)
+    - [Color Everything in CSS](https://css-tricks.com/color-everything-in-css/)
+    - [Printing the web: making webpages look good on paper](https://piccalil.li/blog/printing-the-web-making-webpages-look-good-on-paper/)
+    - [HUG CSS, how I approach CSS architecture](https://gomakethings.com/hug-css-how-i-approach-css-architecture/)
+    - [What Does `playsinline` Mean in Web Video? | CSS-Tricks](https://css-tricks.com/what-does-playsinline-mean-in-web-video/)
+}}
+
+\subtree[2025-06-10]{\mdnote{2025-06-10}{\tags{#agent #compiler #diagram #formal #llvm #makefile #news #optimization #rust #sec}
+- [Lightweight Diagramming for Lightweight Formal Methods](https://blog.brownplt.org/2025/06/09/copeanddrag.html)
+- #perf
+    - [Why doesn’t Rust care more about compiler performance?](https://kobzol.github.io/rust/rustc/2025/06/09/why-doesnt-rust-care-more-about-compiler-performance.html)
+    - [One Law to Rule All Code Optimizations](https://blog.codingconfessions.com/p/one-law-to-rule-all-code-optimizations)
+    - [Simulating Time With Square-Root Space](https://people.csail.mit.edu/rrw/time-vs-space.pdf)
+    - [Is Rust faster than C?](https://steveklabnik.com/writing/is-rust-faster-than-c/)
+    - [Revisiting Knuth’s “Premature Optimization” Paper](https://probablydance.com/2025/06/19/revisiting-knuths-premature-optimization-paper/)
+- #os
+    - [Asterinas: A Linux ABI-compatible, Rust-based framekernel OS](https://asterinas.github.io/2025/06/04/kernel-memory-safety-mission-accomplished.html) #rust
+        - framekernel: the performance of a monolithic kernel and the security of a microkernel
+        - [OSTD](https://crates.io/crates/ostd), an OS framework, so that [a Hello World kernel in 100 lines of safe Rust](https://asterinas.github.io/book/ostd/a-100-line-kernel.html)
+        - TCB (Trusted Computing Base) is the minimal unsafe code required to build a kernel in safe Rust
+            - ~15K LOC, 14% of the kernel codebase, comparable to verified microkernels like seL4 (~10K LoC)
+        - rich OS features
+        - aims to verify unsafe code with [Verus](https://github.com/verus-lang/verus)
+        - uses model checking with Converos to uncover hard-to-find concurrency bugs
+        - see also [Asterinas: a new Linux-compatible kernel project](https://lwn.net/SubscriberLink/1022920/ad60263cd13c8a13/)
+    - [Blog series on creating an OS in Rust](https://os.phil-opp.com/) ([on HN](https://news.ycombinator.com/item?id=44733094)) #rust
+    - [Starina - A modern general-purpose microkernel OS](https://starina.dev/)
+        - from [Building Linux kernel on macOS natively](https://seiya.me/blog/building-linux-on-macos-natively) ([on HN](https://news.ycombinator.com/item?id=44453371))
+            - [Clang Built Linux](https://clangbuiltlinux.github.io/) effort helped to build Linux kernel with clang + LLVM instead of GCC + GNU
+            - it seems to work and is simple enough, I should try it sometimes
+    - [Munal OS: A graphical experimental OS with WASM sandboxing](https://github.com/Askannz/munal-os)
+        - written in Rust
+        - embeds wasmi
+        - no virtual address space as userspace is inside WASM sandbox
+        - only VirtIO so it runs only in an VM
+        - has links to OS dev resources
+    - [Talos: a container optimized Linux distro](https://www.talos.dev/), which is declarative, immutable, secure
+        - minimal: consists of only a handful of binaries and shared libraries: just enough to run containerd and [a small set of system services](https://www.talos.dev/v1.10/learn-more/components/)
+            - written in Go
+        - no SSH and console access, fully controlled by API via gRPC
+        - [Which Kubernetes is the Smallest? Examining Talos Linux, K3s, K0s, and More](https://www.siderolabs.com/blog/which-kubernetes-is-the-smallest/)
+            - Talos has the minimal footprint
+    - [The high-level OS challenge](https://ochagavia.nl/blog/the-high-level-os-challenge/)
+    - [A DOS-like hobby OS written in Rust and x86 assembly](https://github.com/krustowski/rou2exOS)
+        - RoureXOS rewritten in Rust
+    - [Tilck: A Tiny Linux-Compatible Kernel](https://github.com/vvaltchev/tilck) ([on HN](https://news.ycombinator.com/item?id=44578510))
+- [Makefile.md - Possibly Use(ful|less) Polyglot Synthesis of Makefile and Markdown](https://zoo.dev/blog/polyglot-makefile-markdown)
+- comments on [Qwen3 embedding models](https://huggingface.co/Qwen/Qwen3-Embedding-0.6B-GGUF)
+- #prolog
+    - from [Readings shared June 9, 2025](https://jaalonso.github.io/vestigium/posts/2025/06/09-readings_shared_06-09-25/)
+    - [Teaching and learning mathematics with Prolog](https://arxiv.org/abs/2108.09893)
+    - [Exploring Topological Spaces with Prolog: A Practical Approach Using “Mathematics with Prolog”](https://medium.com/@kenichisasagawa/exploring-topological-spaces-with-prolog-a-practical-approach-using-mathematics-with-prolog-b5806bb8b98f)
+}}
+
+\subtree[2025-06-09]{\mdnote{2025-06-09}{\tags{#agent #datafusion #docker #duckdb #elixir #formal #harbor #idea #json #lemmy}
+- #selfhost
+    - [Ditching HAProxy (in my homelab)](https://arch.dog/bark/ditching-haproxy)
+        - found [Ran out of infrastructure titles](https://arch.dog/bark/2025-03-30-infrastructure) from the author
+            - [backrest](https://github.com/garethgeorge/backrest)
+                - for using `restic` to manage backup [repos](https://restic.readthedocs.io/en/latest/030_preparing_a_new_repo.html) and plans
+                - tested that `restore` and `mount` work, as well as encryption and compression
+                    - see also [Running Veracrypt in Docker](\verb>>>|https://ooe.ooo/posts/%E5%9C%A8docker%E4%B8%AD%E8%BF%90%E8%A1%8Cveracrypt/>>>)
+                        - `--privileged`, `-m=nokernelcrypto`, locale etc.
+                - supports monitoring via [Healthchecks](https://healthchecks.io/) if backup jobs don't "check in"
+                - a sec review: [restic cryptography](https://words.filippo.io/restic-cryptography/)
+            - [MetalLB, a load-balancer implementation for bare metal Kubernetes clusters](https://metallb.io/)
+            - `Talos`, moved to [[2025-06-10]]
+            - [Unbound: a powerful validating, recursive, caching DNS resolver](https://www.unbound.net/)
+                - could be used [for home network](https://unbound.docs.nlnetlabs.nl/en/latest/use-cases/home-resolver.html)
+            - [Salt](https://saltproject.io/) with [its GUI](https://github.com/erwindon/SaltGUI/)
+                - is similar to Ansible, in the sense you use YAML to specify a state, but has a differening architecture, opting for a master/minion setup rather than Ansible's agentless SSH connections to each node
+            - [Apt-Cacher NG](https://www.unix-ag.uni-kl.de/~bloch/acng/) for caching apt packages
+            - [Harbor](https://goharbor.io/) for caching container images
+            - [Headscale](https://github.com/juanfont/headscale): self-hosted implementation of the Tailscale control server
+            - [Pocket ID](https://pocket-id.org/) for authenticate users with their passkeys
+- #fediverse
+    -[Two Approaches to Solving the “Quiet Fediverse” Problem: Conversation Backfilling Mechanisms](https://hackers.pub/@hongminhee/2025/quiet-fediverse-two-approaches/en)
+    - [The fediverse, explained](https://www.theverge.com/24063290/fediverse-explained-activitypub-social-media-open-protocol)
+        - [Lemmy](https://join-lemmy.org/)
+        - [Pixelfed](https://pixelfed.org/)
+        - [BookWyrm](https://bookwyrm.social/)
+        - [PeerTube](https://joinpeertube.org/)
+    - [Pleroma](https://pleroma.social/): a lightweight federated social networking server powered by Elixir and PostgreSQL
+        - from [What Is Pleroma?](https://blog.soykaf.com/post/what-is-pleroma/)
+    - [From Fediverse to Creating Personal Digital Space with Memos](https://dev.charizard.page/en/posts/from-fediverse-to-build-my-own-digital-space/)
+        - [Single-user Mastodon Instance is a Bad Idea](https://medium.com/@erinc/single-user-mastodon-instance-is-a-bad-idea-61cfaa62856a)
+    - [jakeg -> notes -> fediverse](https://jakegines.in/notes/fediverse)
+    - [ActivityPods: Personal data spaces powered with ActivityPub](https://activitypods.org/)
+    - tried matrix again and found a good TUI: [iamb](https://iamb.chat/)
+    - [Threads is adding Fediverse content to social feeds](https://www.theverge.com/news/688267/threads-fediverse-feed-search)
+- wish to test x86 on ARM Mac
+    - due to [Zig's self-hosted x86 backend is now default in Debug mode](https://ziglang.org/devlog/2025/?unique/#2025-06-08)
+    - found [Intel-on-ARM and ARM-on-Intel](https://lima-vm.io/docs/config/multi-arch/) with lima
+    - [container: tool for creating and running Linux containers using lightweight virtual machines on a Mac](https://github.com/apple/container)
+- [AI at Amazon: a case study of brittleness](https://surfingcomplexity.blog/2025/06/08/ai-at-amazon-a-case-study-of-brittleness/)
+    - that's how things got stuck in a big org, or at least slowed down enought to suffocate innovation
+        - Decompensation: a service fall over after receiving a spike in external requests, mostly due to hierarchical decision-making
+        - Working at cross-purposes: introduced an almost Darwinian flavor to org dynamics where teams scrambled to get their work done to avoid getting reorged and subsumed into a competing team
+        - Getting stuck in outdated behaviors: had to constantly justify our existence and massage our projects with metrics that could be seen as more customer-facing
+- [Thank You, DataFusion: Queries in Rust, Without the Pain](http://pierrezemb.fr/posts/thank-you-datafusion/)
+    - SQL as a library, not a service
+    - own your storage, your execution model, your schema, your optimizer
+    - offers [SQL] and [Dataframe] APIs, excellent performance, built-in support for CSV, Parquet, JSON, and Avro
+    - paper: [Apache Arrow DataFusion: A Fast, Embeddable, Modular Analytic Query Engine](https://dl.acm.org/doi/10.1145/3626246.3653368)
+    - should take a deep look into DuckDB
+- found [Black Hat Zig: Zig for offensive security.](https://www.reddit.com/r/Zig/comments/1l6tbph/black_hat_zig_zig_for_offensive_security/)
+- [Training a Rust 1.5B Coder LM with Reinforcement Learning (GRPO) | Oxen.ai](https://ghost.oxen.ai/training-a-rust-1-5b-coder-lm-with-reinforcement-learning-grpo/)
+}}
+  }
+}

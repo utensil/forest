@@ -1,0 +1,108 @@
+\import{macros}
+
+\title{Week 19, 2025}
+\date{2025-05-05}
+
+\scope{
+  \put\transclude/toc{false}
+  \put\transclude/expanded{false}
+  \subtree[2025-W19-links]{
+\title{Link selections (2025-W19)}
+
+\subtree[2025-05-09]{\mdnote{2025-05-09}{\tags{#os #rust #zig}
+- [Memory Safety Features in Zig](https://gencmurat.com/en/posts/memory-safety-features-in-zig/)
+    - very well summarized, with great examples
+- [Reservoir Sampling](https://samwho.dev/reservoir-sampling/)
+- [You can use C-Reduce for any language](https://bernsteinbear.com/blog/creduce/)
+- [Rust Dependencies scare Me](https://lobste.rs/s/j3nhhc)
+    - a comment reminds me of [Build It Yourself](https://lucumr.pocoo.org/2025/1/24/build-it-yourself/)
+- [What's in an e-graph?](https://bernsteinbear.com/blog/whats-in-an-egraph/)
+- [A catalog of ways to generate SSA](https://bernsteinbear.com/blog/ssa/)
+}}
+
+\subtree[2025-05-08]{\mdnote{2025-05-08}{\tags{#agent #gpu #idea #interop #os #software #web #zig}
+- \citef{zhang2024transformers}
+    - insightful, and well summarized related work
+- trying to figure out a way to let AI agent to read all papers citing an paper, and write a summary of the follow-up research
+- [The magic of software; or, what makes a good engineer also makes a good engineering organization](https://moxie.org/2024/09/23/a-good-engineer.html)
+    -  "Engineers are most capable and most effective when abstraction layers serve as shorthand for an understanding of what it is doing on your behalf, rather than a black box"
+    - "start with deep understanding as the basis for innovation – cultivating the curiosity to look inside the black boxes"
+    -  "The magic of both software and software organizations comes from those moments where insight into how something works sparks entirely new ideas about what it could become"
+    - related: [Reinvent the Wheel](https://endler.dev/2025/reinvent-the-wheel/)
+- [Implement your language twice](https://futhark-lang.org/blog/2025-05-07-implement-your-language-twice.html)
+    - [Futhark](https://futhark-lang.org/) is a statically typed, data-parallel, and purely functional array language with AoT compilation to CUDA, OpenCL, HIP, and WebGPU (WIP)
+    - also [Comparing the performance of OpenCL, CUDA, and HIP](https://futhark-lang.org/blog/2024-07-17-opencl-cuda-hip.html)
+- [Objective-C interop with Zig?](https://www.reddit.com/r/Zig/comments/1khb8yo/objectivec_interop_with_zig/)
+- got zig to work inside lima with minimal setup
+}}
+
+\subtree[2025-05-07]{\mdnote{2025-05-07}{\tags{#os #rust #tui #web #zig}
+- [Zig’s Low-Level Safety Features Leave Rust in the Dust](https://www.reddit.com/r/Zig/comments/1kgk07m/zigs_lowlevel_safety_features_leave_rust_in_the/)
+- [Zig defer Patterns](https://matklad.github.io/2024/03/21/defer-patterns.html)
+- [Glossary Web Component](https://dbushell.com/2025/05/07/glossary-web-component/)
+- [Recreating an iOS Animation with GLSL (interactive tutorial)](https://nmattia.com/posts/2025-05-07-airpods-hearing-test-animation/)
+- found [Argo CD - Declarative Continuous Delivery for k8s](https://github.com/argoproj/argo-cd)
+- found [bash/POSIX-compatible shell implemented in Rust](https://github.com/reubeno/brush)
+- found [nnd: A TUI alternative to gdb](https://github.com/al13n321/nnd)
+}}
+
+\subtree[2025-05-07-2]{\mdnote{2025-05-07}{\tags{#ebpf #os #rust #tui #zig}
+- [Zig’s Low-Level Safety Features Leave Rust in the Dust](https://www.reddit.com/r/Zig/comments/1kgk07m/zigs_lowlevel_safety_features_leave_rust_in_the/)
+- found [Parallel, Concurrent and Distributed Programming](https://ilyasergey.net/YSC4231/) in Scala
+- found [nnd: A TUI alternative to gdb](https://github.com/al13n321/nnd)
+- found [A part of the fundamental group of an n-dimensional beanA](https://tikz.org/bean/)
+- [Building a regex engine](https://sh4dy.com/2025/05/01/regex_engine/) in C++
+- wondering about chaos engineering in Zig with eBPF #ebpf
+    - learn more about [zbpf](https://github.com/tw4452852/zbpf)
+    - maybe it's easiest to use [lima](https://lima-vm.io/) to test eBPF
+    - found [Pixie](https://px.dev/) when reading [Debugging Production: eBPF Chaos](https://www.infoq.com/articles/debugging-production-ebpf-chaos/)
+    - [Introducing Minderbinder](https://blog.scottgerring.com/posts/introducing-minderbinder/) which is in Go
+    - [Implementing fast TCP fingerprinting with eBPF](https://halb.it/posts/ebpf-fingerprinting-2/)
+        - using Cilium in Go
+    - [ebpf series - Unnamed Memories](https://h0x0er.github.io/blog/category/ebpf/)
+    - [Introducing TCP-in-UDP solution (eBPF)](https://blog.mptcp.dev/2025/07/14/TCP-in-UDP.html)
+    - [Go Allocation Probe](https://www.scattered-thoughts.net/writing/go-allocation-probe/) ([on HN](https://news.ycombinator.com/item?id=44647572))
+    - [KernelScript eBPF-centric programming language](https://github.com/multikernel/kernelscript) ([on HN](https://news.ycombinator.com/item?id=44722518)) #lang
+    - [OOMProf - Take a heap profile just before OOMkill using eBPF](https://lobste.rs/s/cknohu) #chaos
+- found [alternative open source front-ends for popular internet platforms](https://github.com/mendel5/alternative-front-ends)
+}}
+
+\subtree[2025-05-06]{
+\mdnote{2025-05-06}{\tags{#agent #benchmark #blogging #context #formal #game #gpu #news #optimization #os}
+- LM
+    - survey papers
+        - [A Survey on Inference Engines for Large Language Models: Perspectives on Optimization and Efficiency](https://huggingface.co/papers/2505.01658)
+        - [Low-Precision Training of Large Language Models: Methods, Challenges, and Opportunities](https://huggingface.co/papers/2505.01043)
+            - sadly, NormalFloat used by QLoRA is excluded from the paper, as it is "specifically designed for pretrained fixed parameters, which only participate in the forward inference stage during training."
+    - improvements on reasoning
+        - [Think on your Feet: Adaptive Thinking via Reinforcement Learning for Social Agents](https://huggingface.co/papers/2505.02156)
+            - the model is trained to switch between different complexity level of thinking mode based on context for an optimal balance between correct answer and reasoning length
+            - the thinking modes are inspired by Hierarchical Cognitive Control Theory (HCCT)
+        - [RM-R1: Reward Modeling as Reasoning](https://huggingface.co/papers/2505.02387)
+            - provides good insight into reward modeling and how each training stage boosts the model's performance
+    - other
+        - [Unlearning Sensitive Information in Multimodal LLMs: Benchmark and Attack-Defense Evaluation](https://huggingface.co/papers/2505.01456)
+            - I'm still interested in unlearning and model editing
+- [Benchmarking Crimes Meet Formal Verification](https://microkerneldude.org/2025/04/27/benchmarking-crimes-meet-formal-verification/)
+    - learn about [Systems Benchmarking Crimes](https://gernot-heiser.org/benchmarking-crimes.html)
+- #zig
+    - [Implementing a Struct of Arrays](https://brevzin.github.io/c++/2025/05/02/soa/)
+        - Zig has easy-to-use support of SoA via [MultiArrayList](https://zig.news/kristoff/struct-of-arrays-soa-in-zig-easy-in-userland-40m0)
+        - learn about [Data-Oriented Design](https://dataorienteddesign.com/dodbook/)
+        - I can't help but feel that new features of C++ such as reflection is really becoming syntax cancer
+    - [Reflecting on a year of Gamedev in Zig](https://bgthompson.codeberg.page/blog/one-year-zig-gamedev-reflections/)
+    - [Jai, the game programming contender](https://bitshifters.cc/2025/04/28/jai.html)
+- bringing data to AI, not the other way around
+    - [The Data Surrender Trap: How Enterprises Are Losing Control in the AI Gold Rush—and the Simple Fix](https://www.softinio.com/post/the-data-surrender-trap/)
+- lifestyle
+    - [Protect The Habit](https://justinmath.com/protect-the-habit/)
+    - skimmed [blogging in isolation](https://blog.avas.space/blogging-in-isolation/)
+- skimmed [modern-latex: A short guide to LaTeX that avoids legacy cruft](https://github.com/mrkline/modern-latex)
+- [The Beauty Of Having A Pi-hole](https://den.dev/blog/pihole/)
+    - own your own DNS
+- [An appeal to Apple from Anukari regarding GPU frequency scaling](https://anukari.com/blog/devlog/an-appeal-to-apple)
+    - I'm amazed that the author is using GPU to simulate physics for realtime audio
+}
+}
+  }
+}

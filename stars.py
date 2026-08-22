@@ -25,7 +25,7 @@ def default_tree_files():
     """
 
     fixed = [Path("trees/uts-0018.tree"), Path("trees/uts-016E.tree")]
-    weekly = sorted(Path("trees").glob("????-W??*.tree"))
+    weekly = sorted(Path("trees").glob("????-W??.tree"))
     return [str(path) for path in dict.fromkeys([*fixed, *weekly])]
 
 

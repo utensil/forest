@@ -4,19 +4,21 @@
 # dependencies = []
 # ///
 
-"""Extract one ISO week of learning-diary entries into flat Forest trees.
+"""Extract observed learning-diary weeks into flat Forest trees.
 
 Usage:
     just extract-week 2025-W27
+    just extract-all-weeks
 
-The extractor moves only complete ``\\subtree[YYYY-MM-DD]{...}`` daily blocks
-from ``trees/uts-0018.tree``.  It writes one physical weekly tree at
+The extractor moves dated ``\\subtree[YYYY-MM-DD]{...}`` daily blocks from
+``trees/uts-0018.tree``. It writes one physical weekly tree at
 ``trees/YYYY-Www.tree``: the Markdown-bearing daily blocks live in that file's
 logical ``YYYY-Www-links`` subtree.  The root transcludes only the weekly tree.
 
-The operation is deterministic and idempotent.  Re-running it after a
-successful extraction validates the generated files without changing them;
-``--check`` makes that validation explicit.
+The operation is deterministic and idempotent. A week may be partial when the
+source diary contains only some of its dates. Re-running after a successful
+extraction validates the generated files without changing them; ``--check``
+makes that validation explicit.
 """
 
 from __future__ import annotations
@@ -30,7 +32,10 @@ from pathlib import Path
 
 
 WEEK_RE = re.compile(r"^(?P<year>\d{4})-W(?P<week>\d{2})$")
-DAILY_ENTRY_RE = re.compile(r"^\\subtree\[(?P<day>\d{4}-\d{2}-\d{2})\]\{", re.MULTILINE)
+DAILY_ENTRY_RE = re.compile(
+    r"^\\subtree\[(?P<day>\d{4}-\d{2}-\d{2})(?:-[^\]]+)?\]\{", re.MULTILINE
+)
+TEMPLATE_DESCRIPTION = "% Add the human-written weekly description here in native Forester syntax.\n\n"
 
 
 @dataclass(frozen=True)
@@ -74,7 +79,7 @@ def matching_brace(text: str, opening_brace: int) -> int:
 
 
 def find_entries(text: str) -> list[Entry]:
-    """Parse every top-level dated daily subtree from one diary source."""
+    """Parse every dated daily subtree, including duplicate-date addresses."""
 
     entries: list[Entry] = []
     for match in DAILY_ENTRY_RE.finditer(text):
@@ -91,6 +96,30 @@ def find_entries(text: str) -> list[Entry]:
     return entries
 
 
+def repair_spanning_daily_entries(text: str) -> tuple[str, int]:
+    """Repair daily subtrees that borrow a later structural closing brace.
+
+    Daily entries are siblings in the diary. If one opening brace reaches the
+    next dated sibling, close it immediately before that sibling and remove
+    the borrowed closing brace. The repair is mechanical and preserves all
+    diary content; it only restores the intended subtree boundary.
+    """
+
+    repairs = 0
+    while True:
+        matches = list(DAILY_ENTRY_RE.finditer(text))
+        for index, match in enumerate(matches[:-1]):
+            next_start = matches[index + 1].start()
+            closing = matching_brace(text, match.end() - 1)
+            if closing < next_start:
+                continue
+            text = text[:next_start] + "}\n\n" + text[next_start:closing] + text[closing + 1 :]
+            repairs += 1
+            break
+        else:
+            return text, repairs
+
+
 def weekly_tree(week: str, monday: date, entries: list[Entry]) -> str:
     """Build one weekly file with native prose and an in-file link subtree."""
 
@@ -99,7 +128,6 @@ def weekly_tree(week: str, monday: date, entries: list[Entry]) -> str:
         "\\import{macros}\n\n"
         f"\\title{{Week {monday.isocalendar().week}, {monday.isocalendar().year}}}\n"
         f"\\date{{{monday.isoformat()}}}\n\n"
-        "% Add the human-written weekly description here in native Forester syntax.\n\n"
         "\\scope{\n"
         "  \\put\\transclude/toc{false}\n"
         "  \\put\\transclude/expanded{false}\n"
@@ -132,20 +160,28 @@ def legacy_replacement(week: str) -> str:
 
 
 def select_week_entries(entries: list[Entry], week_days: tuple[date, ...]) -> list[Entry]:
-    """Select exactly seven entries, rejecting partial or duplicate source weeks."""
+    """Select the source entries observed in one ISO week.
+
+    A diary can begin or end partway through a week. Preserve every dated
+    entry that is present rather than inventing missing daily nodes.
+    """
 
     wanted = set(week_days)
     selected = [entry for entry in entries if entry.day in wanted]
-    found = {entry.day for entry in selected}
-    if found != wanted or len(selected) != len(wanted):
-        missing = ", ".join(day.isoformat() for day in week_days if day not in found)
-        raise ValueError(f"source does not contain one complete week; missing: {missing}")
+    if not selected:
+        raise ValueError("source does not contain any daily entries for the requested week")
     selected.sort(key=lambda entry: entry.start)
     if selected[-1].end > selected[0].start and any(
         earlier.end > later.start for earlier, later in zip(selected, selected[1:])
     ):
         raise ValueError("daily entries overlap; refusing extraction")
     return selected
+
+
+def normalize_week_tree(text: str) -> str:
+    """Remove the retired weekly-description template without touching prose."""
+
+    return text.replace(TEMPLATE_DESCRIPTION, "")
 
 
 def replace_entries_with_weeknote(root: str, entries: list[Entry], week: str) -> str:
@@ -169,7 +205,11 @@ def replace_entries_with_weeknote(root: str, entries: list[Entry], week: str) ->
 
 
 def validate_extracted(
-    root: str, week_tree: str, week: str, week_days: tuple[date, ...]
+    root: str,
+    week_tree: str,
+    week: str,
+    week_days: tuple[date, ...],
+    expected_entries: list[Entry] | None = None,
 ) -> None:
     """Check the durable post-extraction invariants without changing files."""
 
@@ -183,9 +223,13 @@ def validate_extracted(
         raise ValueError("weekly tree does not contain its in-file link-selection subtree")
     if f"\\title{{Link selections ({week})}}" not in week_tree:
         raise ValueError("weekly tree does not contain the required link-selection title")
-    found = {entry.day for entry in find_entries(week_tree)}
-    if found != set(week_days):
-        raise ValueError("weekly link-selection subtree does not contain exactly the requested week")
+    found = find_entries(week_tree)
+    if not found or any(entry.day not in set(week_days) for entry in found):
+        raise ValueError("weekly link-selection subtree contains invalid daily entries")
+    if expected_entries is not None and [entry.source for entry in found] != [
+        entry.source for entry in expected_entries
+    ]:
+        raise ValueError("weekly link-selection subtree does not preserve the selected source entries")
 
 
 def write_text(path: Path, content: str) -> None:
@@ -194,11 +238,85 @@ def write_text(path: Path, content: str) -> None:
     path.write_text(content, encoding="utf-8")
 
 
+def week_name(day: date) -> str:
+    """Return the canonical ISO-week tree stem for one diary date."""
+
+    year, week, _ = day.isocalendar()
+    return f"{year:04d}-W{week:02d}"
+
+
+def extract_all(source: Path, trees_dir: Path, check: bool) -> int:
+    """Extract every ISO week represented by daily nodes in one transaction."""
+
+    root = source.read_text(encoding="utf-8")
+    root, repairs = repair_spanning_daily_entries(root)
+    if check and repairs:
+        raise ValueError("--check found malformed daily subtree boundaries")
+    source_entries = find_entries(root)
+    observed_weeks = sorted({week_name(entry.day) for entry in source_entries})
+    existing_paths = sorted(trees_dir.glob("????-W??.tree"))
+    planned_writes: dict[Path, str] = {}
+
+    legacy_paths = sorted(trees_dir.glob("????-W??-links.tree"))
+    if legacy_paths:
+        names = ", ".join(path.name for path in legacy_paths)
+        raise ValueError(f"legacy standalone link files require targeted correction: {names}")
+
+    for path in existing_paths:
+        _, _, week_days = parse_week(path.stem)
+        existing = path.read_text(encoding="utf-8")
+        normalized = normalize_week_tree(existing)
+        if check and normalized != existing:
+            raise ValueError(f"{path.name} still contains the retired description template")
+        validate_extracted(root, normalized, path.stem, week_days)
+        if normalized != existing:
+            planned_writes[path] = normalized
+
+    new_root = root
+    created = 0
+    extracted_entries = 0
+    for week in observed_weeks:
+        _, _, week_days = parse_week(week)
+        week_path = trees_dir / f"{week}.tree"
+        if week_path.exists():
+            raise ValueError(f"root still contains daily entries already owned by {week_path.name}")
+        entries = select_week_entries(find_entries(new_root), week_days)
+        generated = weekly_tree(week, week_days[0], entries)
+        candidate_root = replace_entries_with_weeknote(new_root, entries, week)
+        validate_extracted(candidate_root, generated, week, week_days, entries)
+        planned_writes[week_path] = generated
+        new_root = candidate_root
+        created += 1
+        extracted_entries += len(entries)
+
+    if find_entries(new_root):
+        raise ValueError("root still contains daily entries after all observed weeks were planned")
+    if check and (planned_writes or new_root != root):
+        raise ValueError("--check found work that has not been extracted")
+
+    # AGENT-NOTE: Every weekly file and the revised root were validated before
+    # this first write, so batch extraction cannot leave a partial arrangement.
+    if not check:
+        for path, content in planned_writes.items():
+            write_text(path, content)
+        if new_root != root:
+            write_text(source, new_root)
+
+    total_weeks = len(existing_paths) + created
+    print(
+        f"{'validated' if check else 'extracted'} all observed weeks: "
+        f"{total_weeks} weekly trees, {extracted_entries} newly moved daily entries, "
+        f"{repairs} repaired daily boundaries"
+    )
+    return 0
+
+
 def main() -> int:
-    """Run or validate one extraction transaction."""
+    """Run or validate one targeted extraction, or all observed weeks."""
 
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("week", help="ISO week to extract, e.g. 2025-W27")
+    parser.add_argument("week", nargs="?", help="ISO week to extract, e.g. 2025-W27")
+    parser.add_argument("--all", action="store_true", help="extract every observed ISO week")
     parser.add_argument("--check", action="store_true", help="validate an existing extraction only")
     parser.add_argument(
         "--source", type=Path, default=Path("trees/uts-0018.tree"), help="learning diary root"
@@ -207,6 +325,12 @@ def main() -> int:
     args = parser.parse_args()
 
     try:
+        if args.all == (args.week is not None):
+            parser.error("provide exactly one ISO week or --all")
+        if args.all:
+            return extract_all(args.source, args.trees_dir, args.check)
+
+        assert args.week is not None
         _, _, week_days = parse_week(args.week)
         root = args.source.read_text(encoding="utf-8")
         week_path = args.trees_dir / f"{args.week}.tree"
@@ -230,7 +354,15 @@ def main() -> int:
             return 0
 
         if week_path.exists():
-            validate_extracted(root, week_path.read_text(encoding="utf-8"), args.week, week_days)
+            existing = week_path.read_text(encoding="utf-8")
+            normalized = normalize_week_tree(existing)
+            if args.check and normalized != existing:
+                raise ValueError("weekly tree still contains the retired description template")
+            validate_extracted(root, normalized, args.week, week_days)
+            if normalized != existing:
+                write_text(week_path, normalized)
+                print(f"normalized {args.week}: removed retired description template")
+                return 0
             print(f"validated {args.week}: already extracted")
             return 0
 

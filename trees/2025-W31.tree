@@ -1,0 +1,262 @@
+\import{macros}
+
+\title{Week 31, 2025}
+\date{2025-07-28}
+
+\scope{
+  \put\transclude/toc{false}
+  \put\transclude/expanded{false}
+  \subtree[2025-W31-links]{
+\title{Link selections (2025-W31)}
+
+\subtree[2025-08-03]{\mdnote{2025-08-03}{
+- [How do you backup your non-work-related data?](https://lobste.rs/s/ngo3ex/how_do_you_backup_your_non_work_related)
+    - most suggests `restic`
+    - [Cloud Backup: Easy, Secure, Unlimited Online Backup](https://www.backblaze.com/cloud-backup/personal)
+        - Backblaze B2, good affordability/pricing, ~$5/mo
+    - `borg` has security footgun
+    - use https://healthchecks.io/ to monitor backup jobs
+    - [Append-only Restic backups on a Hetzner Storage Box](https://fluix.one/blog/hetzner-restic-append-only/)
+        - good #design, [[source](https://git.sr.ht/~fluix/fluix.one/tree)]
+        - [Append-only backups with restic and rclone](https://ruderich.org/simon/notes/append-only-backups-with-restic-and-rclone)
+    - [jmtd → computing → Network Attached Storage (NAS)](https://jmtd.net/computing/nas/)
+    - [Personal backups and file archival // Josh Mock](https://joshmock.com/post/backups-and-archival/)
+- [If you're remote, ramble](https://stephango.com/ramblings)
+    - Ramblings channels let everyone share what’s on their mind without cluttering group channels
+        - short updates 1-3 times per week
+        - common topics
+            - ideas related to current projects
+            - musings about blog posts, articles, user feedback
+            - “what if” suggestions
+            - photos from recent trips or hobbies
+            - rubber ducking a problem
+    - each ramblings channel
+        - named after the team member
+        - only that person can post top-level messages. Others can reply in threads, but not start new ones
+        - muted by default, with no expectation that anyone else will read them
+    - ramblings are our equivalent of water cooler talk
+- [Linear Types for Programmers (2023)](https://twey.io/for-programmers/linear-types/) #lang
+    - [The Austral Programming Language](https://austral-lang.org/)
+    - [faiface/par-lang: Par (⅋) is an experimental concurrent programming language. It's an attempt to bring the expressive power of linear logic into practice.](https://github.com/faiface/par-lang)
+- [Twenty Eighth International Obfuscated C Code Contest](https://www.ioccc.org/2024/index.html)
+    - the redesign broke all links to the old entries without redirects
+    - now requires using a javascript capable browser to view the entries on github (github having removed non-JS access last year)
+}}
+
+\subtree[2025-08-02]{\mdnote{2025-08-02}{
+- #agent
+    - [Cerebras Code](https://www.cerebras.ai/blog/introducing-cerebras-code)
+        - Cerebras Code Pro ($50/month)
+        - Code Max ($200/month)
+        - Qwen3-Coder, but at 2,000 tokens per second, with a 131k-token context window
+    - [cchistory: Tracking Claude Code System Prompt and Tool Changes](https://mariozechner.at/posts/2025-08-03-cchistory/)
+    - [Reconstructing a timeline for Amazon Q prompt infection](https://www.mbgsec.com/posts/2025-07-24-constructing-a-timeline-for-amazon-q-prompt-infection/) #sec
+        - [Amazon's AI Coding Revealed a Dirty Little Secret](https://archive.is/3yI43) ([on HN](https://news.ycombinator.com/item?id=44721485))
+    - [NativeMind](https://nativemind.app/)
+- [Unit Testing Principles](https://olano.dev/blog/unit-testing-principles/)
+    - overcomplicated code should be split into
+        - deep domain classes, to be thoroughly unit tested
+        - wide controllers, exercised by strategic integration tests
+    - unit tests should verify units of behavior
+    - four pillars of a good unit test
+        - protection against regressions
+        - resistance to refactoring
+        - fast feedback
+        - maintainability
+    - I think I have got them all wrong when setting up tests for GAlgebra
+- #lib
+    - [candyfloss: an ergonomic python library for running video pipelines](https://git.hella.cheap/bob/candyfloss)
+}}
+
+\subtree[2025-08-01]{\mdnote{2025-08-01}{
+- #agent
+    - [6 Weeks of Claude Code](https://blog.puzzmo.com/posts/2025/07/30/six-weeks-of-claude-code/) ([on HN](https://news.ycombinator.com/item?id=44746621)) ([on lobste.rs](https://lobste.rs/s/iqyqm3))
+        - "a list of things which I have completed, solo, ..., they are years of “tech debt” / “tech innovation” backlog for me"
+        - [Individual Contributor Ladder](https://artsy.github.io/blog/2015/04/03/artsy-engineering-compensation-framework/)
+    - [AI is a floor raiser, not a ceiling raiser](https://elroy.bot/blog/2025/07/29/ai-is-a-floor-raiser-not-a-ceiling-raiser.html)
+        - [on HN](https://news.ycombinator.com/item?id=44752065)
+            - AI is "automated ladder pulling technology"
+            - "AI does all those lower level jobs, puts the people who need those jobs for experience on the street, and robs us of future experts."
+            - ['A black hole': New graduates discover a dismal job market](https://www.nbcnews.com/business/economy/job-market-report-college-student-graduates-ai-trump-tariffs-rcna221693)
+    - [Vibe code is legacy code](https://blog.val.town/vibe-code)
+        - "We already have a phrase for code that nobody understands: legacy code"
+    - [A Hitchhiker's Guide to the AI Bubble](https://fluxus.io/article/a-hitchhikers-guide-to-the-ai-bubble)
+        - "The fact there is real value in the technology does not contradict in any way that we are in a bubble."
+    - [Trying out Qwen3 Coder Flash using LM Studio and Open WebUI and LLM](https://simonwillison.net/2025/Jul/31/qwen3-coder-flash/#atom-everything)
+        - "A neat feature of Open WebUI is that it includes an automatic preview panel, which kicks in for fenced code blocks that include SVG or HTML"
+- #sec
+    - [How to Secure a Linux Server](https://github.com/imthenachoman/How-To-Secure-A-Linux-Server) ([on HN](https://news.ycombinator.com/item?id=44755298))
+        - however, it's pointed out on HN that one should not follow this
+            - "This guide ignores many sane defaults in favor of a patchwork..., added over time by random people with no thought for threat modeling, that may even result in an increased attack surface."
+            - "This guide contains (at least) inaccurate statements. It's oversimplifying and omitting important things while putting emphasis on some exotic details where defaults would be sane enough."
+        - better alternatives suggested, both authored by `a13xp0p0v`
+            - [Linux Kernel Defence Map - Security Hardening Concepts](https://github.com/a13xp0p0v/linux-kernel-defence-map) ([on HN](https://news.ycombinator.com/item?id=43597264))
+            - [Linux Kernel Hardening Checker](https://github.com/a13xp0p0v/kernel-hardening-checker) ([on HN](https://news.ycombinator.com/item?id=37709349))
+        - [ComplianceAsCode/content: Security automation content in SCAP, Bash, Ansible, and other formats](https://github.com/ComplianceAsCode/content) is also suggested
+            - it facilitates security policy content authoring
+            - along with ansible playbook/bash scripts to check or fix compliance
+    - [When Flatpak’s Sandbox Cracks: Real‑Life Security Issues Beyond the Ideal | Linux Journal](https://www.linuxjournal.com/content/when-flatpaks-sandbox-cracks-real-life-security-issues-beyond-ideal)
+- [Long Term Support](https://www.sqlite.org/lts.html) for SQLite
+    - admirable efforts to support SQLite through the year 2050
+- [Live coding sucks | Mustapha Hadid](https://hadid.dev/posts/living-coding/)
+    - "Live coding interviews measure stress, not coding skills"
+    - [Comment by lapcat](https://news.ycombinator.com/item?id=44757214)
+        - "something about strangers standing over my shoulder judging me, determining my financial future by providing or withholding a job, like the sword of Damocles, turns my stomach inside out"
+        - "A lot of commenters causally speak of "false negatives" as if they were random, but some people, myself included, are always the false negative."
+- #tmux
+    - [Replacing tmux in my dev workflow](https://bower.sh/you-might-not-need-tmux) ([on HN](https://news.ycombinator.com/item?id=44754492)) ([on lobste.rs](https://lobste.rs/s/9ha6ab))
+        - [shpool](https://github.com/shell-pool/shpool) + [autossh(1)](https://linux.die.net/man/1/autossh)
+    - [Customizing tmux](https://evgeniipendragon.com/posts/customizing-tmux-and-making-it-less-dreadful/)
+        - lots of potentially useful comments on [on HN](https://news.ycombinator.com/item?id=44787374)
+}}
+
+\subtree[2025-07-31]{\mdnote{2025-07-31}{
+- #perf
+    - [Benchmarks in CI: Escaping the Cloud Chaos](https://codspeed.io/blog/benchmarks-in-ci-without-noise)
+    - [Big O vs Hardware: Better Complexity ≠ Better Performance](https://blog.codingconfessions.com/p/big-o-vs-hardware)
+    - [bu/doc/tim.md at main · c-blake/bu](https://github.com/c-blake/bu/blob/main/doc/tim.md)
+    - [Snooping On Slow Builds (Using Syscalls)](https://danielchasehooper.com/posts/syscall-build-snooping/)
+- #browser
+    - [I tried Servo, the undercover web browser engine made with Rust](https://www.spacebar.news/servo-undercover-web-browser-engine/) #rust
+        - "this approach of breaking down a web engine into independently usable modules with public APIs will make it easier for people to get involved in web engine development, and make it easier for people to create new web engines in future" ([on HN](https://news.ycombinator.com/item?id=44744324))
+            - [servo/stylo: CSS engine that powers Servo and Firefox](https://github.com/servo/stylo)
+            - [servo/html5ever: High-performance browser-grade HTML5 parser](https://github.com/servo/html5ever)
+            - [DioxusLabs/taffy: A high performance rust-powered UI layout library](https://github.com/DioxusLabs/taffy)
+            - [DioxusLabs/blitz: A radically modular HTML/CSS rendering engine](https://github.com/DioxusLabs/blitz)
+    - [Orion Browser by Kagi](https://kagi.com/orion/)
+        - Kagi believes that they need to offer a hollistic replacement for big tech for consuming the web, that includes search, browser and email  ([on HN](https://news.ycombinator.com/item?id=44745843))
+    - [How we made JSON.stringify more than twice as fast](https://v8.dev/blog/json-stringify)
+- #cg
+    - [PixiEditor 2.0 – A FOSS universal 2D graphics editor](https://pixieditor.net/blog/2025/07/30/20-release/) ([on HN](https://news.ycombinator.com/item?id=44746583))
+        - Raster, Vector, Animations, Procedural (VFX, effects, non-desctuctive editing)
+        - written in C#, copyleft
+        - alternatives
+            - [G'MIC - GREYC's Magic for Image Computing: A Full-Featured Open-Source Framework for Image Processing - Main](https://gmic.eu/)
+    - [Kdenlive - Free and Open Source Video Editor](https://kdenlive.org/)
+    - [Physically Based Shading in Theory and Practice](https://lobste.rs/s/jp2ajo)
+    - [3D Line Drawings](https://amritkwatra.com/experiments/3d-line-drawings)
+        - a 3d scene that can be posed and shows as a 2d line illustration
+        - based on Gaussian Splats
+}}
+
+\subtree[2025-07-29]{\mdnote{2025-07-29}{
+- #zig #perf
+    - [Zig profiling on Apple Silicon | Bugsik](https://blog.bugsiki.dev/posts/zig-profilers/)
+        - [mstange/samply](https://github.com/mstange/samply)
+            - a command line sampling CPU profiler which uses the Firefox profiler as its UI
+            - for macOS, Linux, and Windows
+        - [verte-zerg/poop at kperf-macos](https://github.com/verte-zerg/poop/tree/kperf-macos)
+            - a fork of poop to use kperf under Mac
+        - [wolfpld/tracy: Frame profiler](https://github.com/wolfpld/tracy)
+            - A real time, nanosecond resolution, remote telemetry, hybrid frame and sampling profiler for games and other applications
+            - C, C++, Lua, Python, Fortran, Rust, Zig, C#, OCaml, Odin, GPU
+            - Windows, Linux, Android, FreeBSD, WSL, OSX, iOS, QNX
+    - [Generic Programming and anytype - Docs - Ziggit](https://ziggit.dev/t/generic-programming-and-anytype/3228)
+    - [Using Zig allocator for C libraries (Alignment question)](https://www.reddit.com/r/Zig/comments/1mbn4q1/using_zig_allocator_for_c_libraries_alignment/)
+        - `Allocator.rawAlloc`/`.rawFree`
+        - `@alignOf(std.c.max_align_t)`
+    - [ANDRVV/zprof: 🧮 Cross-allocator profiler for Zig](https://github.com/andrvv/zprof)
+        - battle-tested in [raptodb/rapto: transposition-heuristic storage, low memory footprint and high-performance querying](https://github.com/raptodb/rapto)
+    - [Writing memory efficient C structs](https://tomscheers.github.io/2025/07/29/writing-memory-efficient-structs-post.html) ([on HN](https://news.ycombinator.com/item?id=44733968))
+    - [10^19712 years to exhaust u65535](https://www.reddit.com/r/Zig/comments/1mczck9/1019712_years_to_exhaust_u65535/)
+        - u65535 is the integer type with the highest max value supported in Zig (from [Zig doc](https://ziglang.org/documentation/master/#Primitive-Types))
+- #physics
+    - [Background independence](https://robwilson1.wordpress.com/2025/07/29/background-independence-2/)
+- #crypto
+    - [Fintech dystopia](https://fintechdystopia.com/) ([on HN](https://news.ycombinator.com/item?id=44718117))
+- #perf
+    - [Giving Benchmarks a Boat](https://buttondown.com/jaffray/archive/giving-benchmarks-a-boat/)
+        - TPC-C is a benchmark for transactional databases that models an order system with goods spanning many warehouses
+        - Each warehouse comes with some set amount of data to be managed and some amount of query traffic that adheres to some specific distribution laid out in the spec
+            - they can account for
+                - what's the proportion of hot vs. cold data
+                - what's the ratio of transactions-per-minute to bytes stored
+                - what's the proportion of read-only queries, vs. simple, point writes, vs. complex read-write transactions
+                - what proportion of transactions go cross-shard
+        - The metric: "we sustained the workload at X warehouses with Y hardware at Z cost."
+- #movie
+    - [Nothing to watch – Experimental gallery visualizing 50k film posters](https://nothing-to-watch.port80.ch)
+- #agent
+    - [Show HN: A GitHub Action that quizzes you on a pull request](https://github.com/dkamm/pr-quiz) ([on HN](https://news.ycombinator.com/item?id=44726672)) #aicr
+
+        > PR Quiz uses AI to generate a quiz from a pull request and blocks you from merging until the quiz is passed.
+
+    - [Learn Rust by Reasoning with Code Agents](https://xuanwo.io/2025/05-learn-rust-by-reasoning-with-code-agents/) #rust
+    - [Principles for production AI agents](https://www.app.build/blog/six-principles-production-ai-agents) ([on HN](https://news.ycombinator.com/item?id=44712315))
+        - context
+            - modern LLMs just need direct detailed context, no tricks, but clarity and lack of contradictions
+            - structuring context so that the system part is large and static and user one is small and dynamic works great
+            - provide the bare minimum of knowledge in the first place, and the option to fetch more context if needed via tools
+            - [context compaction](https://github.com/appdotbuild/agent/blob/2a09b4e0c4ba1d7ddba04832514352f424852a04/agent/core/actors.py#L241) tools can help avoiding logs and other artifacts from the feedback loop to bloat the context
+        - tools
+            - good tools typically operate on a similar level of granularity, and have a limited number of strictly typed parameters
+            - idempotency is highly recommended to avoid state management issues
+            - LLMs are very likely to misuse your loopholes, and that’s why you don’t want to have any loopholes
+                - v.s. human API users are more capable of reading between the lines, can navigate complex docs and find workarounds
+            - designing an agent to write some DSL (domain-specific language) code with actions rather than calling tools one by one is a great idea
+        - feedback loop
+            - actor-critic approach: where an actor decides on actions and a critic evaluates them
+                - allow actors to be creative, and critics to be strict
+            - error recovery
+                - a chain of bad fixes is not fixable anymore - just discard and try again
+            - agents try alternatives because the explicitly requested tool call failed with crucial ingredients
+                - tell them to ask for these ingredients before trying alternatives
+            - baseline agent + logs + LLM analysis = insights for improvments
+    - [Q&A: Combining Math and LLMs](https://justinmath.com/combining-math-and-llms/)
+        - Raw math/algos and LLM are both powerful tools in your modeling toolkit
+        - If you’re missing either tool from your toolkit, then that will severely hamstring your modeling abilities and many problems will remain inaccessible to you.
+    - [Show HN: Companies use AI to take your calls. I built AI to make them for you](https://www.pipervoice.com/)
+        - top comment [on HN](https://news.ycombinator.com/item?id=44716414) introduced a great use case for LLM-back reception
+            - local plumbing business
+                - understand and repeated back the client's request in a slightly different, more professional way for confirmation
+                - asked a few more smart follow-ups
+                - the plumber called back and jumped straight into solutions, pricing, and his availability
+            - prefer to talk to LLM, if the issue can be quickly triaged to the right human who actually understand the situation
+            - synchronous interaction by bot
+                - can perform first level troubleshooting, ask for clarification, begin to form a plan and get your buy-in
+                - v.s. fire-and-forget email form
+                    - incomplete reports, missing information, people who have no idea what they're talking about
+    - [Show HN: Terminal-Bench-RL: Training Long-Horizon Terminal Agents with RL](https://github.com/Danau5tin/terminal-bench-rl) ([on HN](https://news.ycombinator.com/item?id=44721791))
+        - Custom scaffolding (system prompt and tools) using Qwen3-32B achieved 13.75% on Terminal-Bench. No training was involved
+        - The author has built an RL system, but it has not been used for anything due to cost limitations.
+    - [Stop selling “unlimited”, when you mean “until we change our minds”](https://blog.kilocode.ai/p/ai-pricing-playbook-strikes-again)
+        - the playbook
+            - launch with generous/unlimited limits
+            - build user dependency
+            - add caps targeting "less than 5%" of users
+            - frame as "sustainability" or "fairness"
+        - that "5%" drives everything
+            - power users with deep workflow integration
+            - early adopters who took platform risks
+            - team influencers who drive organizational adoption
+            - $200/month Claude Max subscribers doing serious work
+        - [Tokens are getting more expensive](https://ethanding.substack.com/p/ai-subscriptions-get-short-squeezed)
+        - [Claude Code weekly rate limits](https://news.ycombinator.com/item?id=44713757)
+    - [The Rise of Vibeinsecurity](https://vibeinsecurity.com/)
+        - a story about how devs lost their jobs over vibe apps, and vibe apps are hacked by vibe hackers immediately after deployment
+        - this is also an ad for a conference called HackAIcon
+    - [It's rude to show AI output to people](https://distantprovince.by/posts/its-rude-to-show-ai-output-to-people/)
+        - whenever you propagate AI output, you're at risk of intentionally or unintentionally legitimizing it with your good name, providing it with a fake proof-of-thought
+    - [Agentic Coding Things That Didn’t Work](https://lucumr.pocoo.org/2025/7/30/things-that-didnt-work/)
+- #sec #privacy
+    - [Tea app leak worsens with second database exposing user chats](https://www.bleepingcomputer.com/news/security/tea-app-leak-worsens-with-second-database-exposing-user-chats/)
+- #idea
+    - [Hyrum's Law](https://www.hyrumslaw.com)
+        - "With a sufficient number of users of an API, it does not matter what you promise in the contract: all observable behaviors of your system will be depended on by somebody"
+        - "corollary: even if you explicitly deny a guarantee of a certain behavior in your contract, if you usually deliver that behavior, most of your customers will depend on it."
+    - [Why Try When Others Could Do Better?](https://justinmath.com/why-try-when-others-could-do-better/)
+        - Even the smartest, highest-agency people in the world are severely bandwidth constrained and don’t get around to doing most of the things they have the potential to do.
+        - Compound that over and over again in some niche and you get hundreds, thousands, millions of miles ahead of the fastest runners who aren’t running down that niche.
+    - [Pragmatism in Programming Proverbs](https://www.gingerbill.org/article/2020/05/31/progamming-pragmatist-proverbs/)
+        - many interesting quotes
+    - [Objects should shut up](https://dustri.org/b/objects-should-shut-the-fuck-up.html) ([on HN](https://news.ycombinator.com/item?id=44786367))
+        - I'm also deeply annoyed by unnecessary alarms
+    - [Don’t Let Architecture Astronauts Scare You](https://www.joelonsoftware.com/2001/04/21/dont-let-architecture-astronauts-scare-you/) #system
+    - [I'm rebelling against the algorithm](https://varunraghu.com/im-rebelling-against-the-algorithm/)
+    - [Maybe writing speed actually is a bottleneck for programming](https://buttondown.com/hillelwayne/archive/maybe-writing-speed-actually-is-a-bottleneck-for/)
+- #rust #metaprogramming
+    - [Advanced Rust macros with derive-deftly](https://diziet.pages.torproject.net/rust-derive-deftly/latest/guide/)
+    - [rules_derive: deriving using macro_rules](https://matx.com/research/rules_derive)
+}}
+  }
+}
