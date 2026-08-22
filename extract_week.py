@@ -10,10 +10,9 @@ Usage:
     just extract-week 2025-W27
 
 The extractor moves only complete ``\\subtree[YYYY-MM-DD]{...}`` daily blocks
-from ``trees/uts-0018.tree``.  It writes the Markdown-bearing blocks unchanged
-to ``trees/YYYY-Www-links.tree``, creates a native-Forester weekly skeleton at
-``trees/YYYY-Www.tree``, and replaces the source blocks with a weekly
-transclusion plus a collapsed sibling link selection.
+from ``trees/uts-0018.tree``.  It writes one physical weekly tree at
+``trees/YYYY-Www.tree``: the Markdown-bearing daily blocks live in that file's
+logical ``YYYY-Www-links`` subtree.  The root transcludes only the weekly tree.
 
 The operation is deterministic and idempotent.  Re-running it after a
 successful extraction validates the generated files without changing them;
@@ -92,31 +91,34 @@ def find_entries(text: str) -> list[Entry]:
     return entries
 
 
-def weekly_tree(week: str, monday: date) -> str:
-    """Build the intentionally Markdown-free weekly note skeleton."""
-
-    return (
-        "\\import{macros}\n\n"
-        f"\\title{{Week {monday.isocalendar().week}, {monday.isocalendar().year}}}\n"
-        f"\\date{{{monday.isoformat()}}}\n\n"
-        "% Add the human-written weekly description here in native Forester syntax.\n"
-    )
-
-
-def links_tree(week: str, monday: date, entries: list[Entry]) -> str:
-    """Build the collapsed-at-call-site Markdown companion without altering entries."""
+def weekly_tree(week: str, monday: date, entries: list[Entry]) -> str:
+    """Build one weekly file with native prose and an in-file link subtree."""
 
     body = "\n\n".join(entry.source for entry in entries)
     return (
         "\\import{macros}\n\n"
-        f"\\title{{Link selections ({week})}}\n"
+        f"\\title{{Week {monday.isocalendar().week}, {monday.isocalendar().year}}}\n"
         f"\\date{{{monday.isoformat()}}}\n\n"
+        "% Add the human-written weekly description here in native Forester syntax.\n\n"
+        "\\scope{\n"
+        "  \\put\\transclude/toc{false}\n"
+        "  \\put\\transclude/expanded{false}\n"
+        f"  \\subtree[{week}-links]{{\n"
+        f"\\title{{Link selections ({week})}}\n\n"
         f"{body}\n"
+        "  }\n"
+        "}\n"
     )
 
 
 def replacement(week: str) -> str:
-    """Return the root arrangement for a week and its collapsed link sibling."""
+    """Return the root arrangement, which transcludes only the weekly file."""
+
+    return f"% Weeknote extraction: {week}\n\\transclude{{{week}}}"
+
+
+def legacy_replacement(week: str) -> str:
+    """Recognize the rejected two-physical-file layout for safe correction."""
 
     return (
         f"% Weeknote extraction: {week}\n"
@@ -167,7 +169,7 @@ def replace_entries_with_weeknote(root: str, entries: list[Entry], week: str) ->
 
 
 def validate_extracted(
-    root: str, links: str, week: str, week_days: tuple[date, ...]
+    root: str, week_tree: str, week: str, week_days: tuple[date, ...]
 ) -> None:
     """Check the durable post-extraction invariants without changing files."""
 
@@ -177,12 +179,13 @@ def validate_extracted(
     root_days = {entry.day for entry in find_entries(root)}
     if root_days.intersection(week_days):
         raise ValueError("root still contains extracted daily entries")
-    expected_links = links_tree(week, week_days[0], find_entries(links))
-    if links != expected_links:
-        raise ValueError("link selection tree is not a canonical extraction result")
-    found = {entry.day for entry in find_entries(links)}
+    if f"\\subtree[{week}-links]{{" not in week_tree:
+        raise ValueError("weekly tree does not contain its in-file link-selection subtree")
+    if f"\\title{{Link selections ({week})}}" not in week_tree:
+        raise ValueError("weekly tree does not contain the required link-selection title")
+    found = {entry.day for entry in find_entries(week_tree)}
     if found != set(week_days):
-        raise ValueError("link selection tree does not contain exactly the requested week")
+        raise ValueError("weekly link-selection subtree does not contain exactly the requested week")
 
 
 def write_text(path: Path, content: str) -> None:
@@ -207,20 +210,27 @@ def main() -> int:
         _, _, week_days = parse_week(args.week)
         root = args.source.read_text(encoding="utf-8")
         week_path = args.trees_dir / f"{args.week}.tree"
-        links_path = args.trees_dir / f"{args.week}-links.tree"
+        legacy_links_path = args.trees_dir / f"{args.week}-links.tree"
 
-        if week_path.exists() or links_path.exists():
-            if not week_path.exists() or not links_path.exists():
-                raise ValueError("only one destination tree exists; refusing partial extraction")
-            validate_extracted(
-                root,
-                links_path.read_text(encoding="utf-8"),
-                args.week,
-                week_days,
+        if legacy_links_path.exists():
+            if args.check:
+                raise ValueError("legacy standalone link file exists; run without --check to correct it")
+            if not week_path.exists() or legacy_replacement(args.week) not in root:
+                raise ValueError("legacy link file is not paired with the rejected root arrangement")
+            entries = select_week_entries(
+                find_entries(legacy_links_path.read_text(encoding="utf-8")), week_days
             )
-            expected_week = weekly_tree(args.week, week_days[0])
-            if week_path.read_text(encoding="utf-8") != expected_week:
-                raise ValueError("weekly tree is not the canonical extraction skeleton")
+            new_root = root.replace(legacy_replacement(args.week), replacement(args.week), 1)
+            generated_week = weekly_tree(args.week, week_days[0], entries)
+            validate_extracted(new_root, generated_week, args.week, week_days)
+            write_text(week_path, generated_week)
+            write_text(args.source, new_root)
+            legacy_links_path.unlink()
+            print(f"corrected {args.week}: moved link selections into its weekly tree")
+            return 0
+
+        if week_path.exists():
+            validate_extracted(root, week_path.read_text(encoding="utf-8"), args.week, week_days)
             print(f"validated {args.week}: already extracted")
             return 0
 
@@ -229,14 +239,12 @@ def main() -> int:
 
         entries = select_week_entries(find_entries(root), week_days)
         new_root = replace_entries_with_weeknote(root, entries, args.week)
-        generated_links = links_tree(args.week, week_days[0], entries)
-        generated_week = weekly_tree(args.week, week_days[0])
+        generated_week = weekly_tree(args.week, week_days[0], entries)
 
         # AGENT-NOTE: Validate all generated text before any write so a failed
         # extraction never leaves the root and its companion out of sync.
-        validate_extracted(new_root, generated_links, args.week, week_days)
+        validate_extracted(new_root, generated_week, args.week, week_days)
         write_text(week_path, generated_week)
-        write_text(links_path, generated_links)
         write_text(args.source, new_root)
         print(f"extracted {args.week}: {len(entries)} daily entries")
         return 0

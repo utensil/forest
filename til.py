@@ -106,15 +106,15 @@ MERGE_STATS = {}
 
 
 def default_tree_files():
-    """Return the live root and all flat ISO-week companion trees.
+    """Return the live root and all flat ISO-week trees.
 
-    Weekly prose is native Forester, so only ``-links`` companions contain
-    daily ``\\mdnote`` entries for this title/tag maintenance task.
+    Weekly prose is native Forester, while its in-file link-selection subtree
+    contains the daily ``\\mdnote`` entries for this title/tag maintenance task.
     """
 
     root = Path("trees/uts-0018.tree")
-    companions = sorted(Path("trees").glob("????-W??-links.tree"))
-    return [root, *companions]
+    weeks = sorted(Path("trees").glob("????-W??.tree"))
+    return [root, *weeks]
 
 
 def load_bib_titles():
@@ -899,7 +899,7 @@ if __name__ == "__main__":
         "--tree-files",
         type=Path,
         nargs="+",
-        help="Diary root and/or flat ISO-week link-selection files to process",
+        help="Diary root and/or flat ISO-week files to process",
     )
     args = parser.parse_args()
 
