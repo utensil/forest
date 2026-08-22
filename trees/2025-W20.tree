@@ -1,0 +1,138 @@
+\import{macros}
+
+\title{Week 20, 2025}
+\date{2025-05-12}
+
+\scope{
+  \put\transclude/toc{false}
+  \put\transclude/expanded{false}
+  \subtree[2025-W20-links]{
+\title{Link selections (2025-W20)}
+
+\subtree[2025-05-18]{\mdnote{2025-05-18}{\tags{#apl #compiler #game #gpu #os #physics #quantum #shader #zig}
+- found [Algorithms by Jeff Erickson (2019)](https://jeffe.cs.illinois.edu/teaching/algorithms)
+- \citef{van2025comparing}
+    - learned that APL can run on GPU via [Dyalog](https://www.dyalog.com/), the paper even discussed a flash attention implementation
+    - [BQN](https://razetime.github.io/learnxinyminutes-docs/bqn) [doesn't](https://mlochbaum.github.io/BQN/implementation/codfns.html) seem to run on GPU
+    - it might be interesting to use [arrayfire](https://arrayfire.com/) [C API](https://arrayfire.org/docs/gettingstarted.htm#gettingstarted_api_usage), even [on Mac](https://arrayfire.org/docs/using_on_osx.htm)
+    - prefer [tilelang](https://github.com/tile-ai/tilelang) to DaCe
+- found [A JavaScript library for building parsers, interpreters, compilers, and more](https://ohmjs.org/)
+- [Layers All The Way Down: The Untold Story of Shader Compilation](https://moonside.games/posts/layers-all-the-way-down/)
+    - introduces the motivation behind [MojoShader](https://github.com/icculus/mojoshader), from Direct3D HLSL bytecode or assembly source to other shader languages
+- found [Mystical](https://suberic.net/~dmm/projects/mystical/README.html), a programming language that resembled magical circles
+- [Bare Metal Zig (2023)](https://austinhanson.com/bare-metal-ziglang/)
+- [Google Scholar is manipulatable](https://arxiv.org/abs/2402.04607)
+- found [Path Integrals in Quantum Mechanics, Statistics, Polymer Physics, and Financial Markets by Hagen Kleinert](https://hagenkleinert.de/documents/pi/HagenKleinert_PathIntegrals.pdf)
+}}
+
+\subtree[2025-05-17]{\mdnote{2025-05-17}{\tags{#elixir #game #ocaml #os #rust #software #web #zig}
+- [Parallel Scaling Law for Language Models](https://huggingface.co/papers/2505.10475)
+- #lang
+    - [The Language That Never Was](https://blog.celes42.com/the_language_that_never_was.html)
+        - [Leaving Rust gamedev after 3 years](https://loglog.games/blog/leaving-rust-gamedev/)
+        - [Mun](https://mun-lang.org/)
+        - [jank](https://jank-lang.org/)
+        - [The Little Book of Rust Macros](https://veykril.github.io/tlborm/)
+        - [MonoGame](https://monogame.net/)
+- #rust/error
+    - [Using unwrap() in Rust is Okay](https://burntsushi.net/unwrap/)
+        - [anyhow](https://docs.rs/anyhow) for applications and [thiserror](https://docs.rs/thiserror) for libraries
+    - [On Error Handling in Rust](https://felix-knorr.net/posts/2025-06-29-rust-error-handling.html)
+        - [error_set](https://docs.rs/error_set), inspired by Zig's [error set](https://ziglang.org/documentation/master/#Error-Set-Type)
+        - [snafu](https://docs.rs/snafu)
+- found [GNU Parallel Examples](https://www.gnu.org/software/parallel/parallel_examples.html)
+- found [Lua for Elixir](https://davelucia.com/blog/lua-elixir)
+- found [OCaml Web Development: Essential Tools and Libraries in 2025](https://tarides.com/blog/2025-05-15-ocaml-web-development-essential-tools-and-libraries-in-2025/)
+- found [Teal: a statically-typed dialect of Lua](https://teal-language.org/), a statically-typed dialect of Lua
+}}
+
+\subtree[2025-05-16]{\mdnote{2025-05-16}{\tags{#formal #game #news #os #rust #tla #zig}
+- [I don’t like NumPy](https://dynomight.net/numpy/)
+    - [Writing a better code with pytorch and einops](https://einops.rocks/pytorch-examples.html)
+    - [Einops and Einsum Summarized](https://pratik-doshi-99.github.io/posts/einops/)
+- looking for Zig way to implement eiops
+    - [Interesting (mis-)use cases for comptime](https://www.reddit.com/r/Zig/comments/124shks/interesting_misuse_cases_for_comptime/)
+        - [zig-infix-parser](https://github.com/markisus/zig-infix-parser)
+    - [Zig Comptime is amazing](https://ziggit.dev/t/zig-comptime-is-amazing/832)
+        - [ZEIN](https://github.com/andrewCodeDev/ZEIN), Zig-based implementation of general-rank tensors
+        - [Functional Programming in Zig](https://gitlab.com/zigurust/fp)
+        - [What is Zig's Comptime?](https://kristoff.it/blog/what-is-zig-comptime/)
+        - [comath: comptime math](https://github.com/InKryption/comath), used by [zilliam](https://github.com/ymndoseijin/zilliam)
+        - [alg](https://github.com/Laremere/alg), Algebra for Zig
+        - [mecha](https://github.com/Hejsil/mecha), A parser combinator library for Zig
+            - from [Zig, Parser Combinators - and Why They're Awesome](https://devlog.hexops.com/2021/zig-parser-combinators-and-why-theyre-awesome/)
+        - [parcom](https://github.com/dokwork/parcom), see also [this blog post](https://zig.news/vladimir_popov/yet-another-parser-combinators-library-ic2)
+    - [einops](https://github.com/VasanthakumarV/einops) in Rust, with only backend `tch`
+    - [Einsums](https://github.com/Einsums/Einsums) and [einops-cpp](https://github.com/dorpxam/einops-cpp) are in C++
+- [The current state of TLA⁺ development](https://ahelwer.ca/post/2025-05-15-tla-dev-status/)
+    - found [Spectacle](https://informal.systems/) and [tlafmt](https://github.com/domodwyer/tlafmt)
+- [10 Years of Stable Rust: An Infrastructure Story](https://rustfoundation.org/media/10-years-of-stable-rust-an-infrastructure-story/)
+    - [formal methods projects built on Rust](https://rust-formal-methods.github.io/)
+- [Beyond 'Aha!': Toward Systematic Meta-Abilities Alignment in Large Reasoning Models](https://huggingface.co/papers/2505.10554)
+- [Declaring a friendship to self](https://www.sandordargo.com/blog/2025/05/14/friend-self)
+- [Internet Artifacts](https://neal.fun/internet-artifacts/irc/)
+    - discovered [Helicopter game](https://neal.fun/internet-artifacts/helicopter-game/)
+}}
+
+\subtree[2025-05-15]{\mdnote{2025-05-15}{\tags{#formal #forth #os #tla #zig}
+- [Introducing oniux: Kernel-level Tor isolation for any Linux app](https://blog.torproject.org/introducing-oniux-tor-isolation-using-linux-namespaces/)
+    - [code](https://gitlab.torproject.org/tpo/core/oniux)
+    - found [smoltcp](https://github.com/smoltcp-rs/smoltcp)
+- [The cryptography behind passkeys](https://blog.trailofbits.com/2025/05/14/the-cryptography-behind-passkeys/)
+- [How fast is CeTZ-Plot?](https://huijzer.xyz/posts/12)
+- [ZJIT has been merged into Ruby](https://railsatscale.com/2025-05-14-merge-zjit/)
+    - Instead of compiling YARV bytecode directly to the low-level IR (LIR), it uses an high-level SSA-based intermediate representation (HIR)
+        - In the bytecode, which is tersely encoded, jumps are offsets, some control-flow is implicit, and most dataflow is via the stack.
+        - By contrast, HIR looks more like a graph. Jumps have pointers to their targets and there’s no stack: instructions that use data have pointers directly to the instructions that create the data.
+- found [Warteschlangensimulator](https://a-herzog.github.io/Warteschlangensimulator/), a event-driven, stochastic simulator for queueing systems
+- found [kowk](https://kwok.sigs.k8s.io/), a ~100k-pod k8s cluster simulator
+- [Data is code](https://blog.information-superhighway.net/data-is-code), about philosophy behind Forth
+    - also [What the hell is Forth?](https://blog.information-superhighway.net/what-the-hell-is-forth)
+- found [Insights into DeepSeek-V3: Scaling Challenges and Reflections on Hardware for AI Architectures](https://huggingface.co/papers/2505.09343)
+- found [Marigold: Affordable Adaptation of Diffusion-Based Image Generators for Image Analysis](https://huggingface.co/papers/2505.09358)
+    - [Marigold Computer Vision](https://huggingface.co/docs/diffusers/using-diffusers/marigold_usage)
+- [Zig App Release and Updates via Github ⚡](https://dbushell.com/2025/03/18/zig-app-release-and-updates-via-github/)
+}}
+
+\subtree[2025-05-14]{\mdnote{2025-05-14}{\tags{#agent #ebpf #os #physics #rust #software #tui #web #yaml}
+- try [genspark](https://www.genspark.ai/agents?id=0cb4084a-b9ba-4755-8f00-029ddf087680)
+    - impressive result
+    - one deep research per day for free
+- [Read the Code, Not the Profile](https://reasonablypolymorphic.com/blog/read-the-code/)
+    - Dramatic percentages in software is just linear improvement
+- [Writing that changed how I think about PL](https://bernsteinbear.com/blog/pl-writing/)
+- [Experiment on your code freely with Git worktree](https://opensource.com/article/21/4/git-worktree)
+- [Lock-Free Rust: How to Build a Rollercoaster While It’s on Fire](https://yeet.cx/blog/lock-free-rust/)
+- found
+    - [Spall: a code profiler that runs in your browser](https://gravitymoth.com/spall/spall-web.html)
+    - TUI for search & replace
+        - [scooter](https://terminaltrove.com/scooter/): Interactive find and replace in the terminal
+        - [serpl](https://github.com/yassinebridi/serpl): A simple terminal UI for search and replace, ala VS Code.
+        - scooter wins as it supports filtering files, both support regex and replace preview
+    - [Avian Physics 0.3](https://joonaa.dev/blog/08/avian-0-3)
+    - [Makepad 1.0 : Rust UI Framework](https://makepad.nl/)
+- checked out [YS — YAML Done Wisely](https://yamlscript.org/)
+    - I wish to use it as a template engine, but the scripting syntax is not delicious
+- [Two months in Servo: CSS nesting, Shadow DOM, Clipboard API, and more](https://servo.org/blog/2025/05/09/this-month-in-servo/)
+    - Servo is still very actively growing
+- [Misadventures in DTrace: how to debug the macOS kernel](https://jade.fyi/blog/misadventures-in-dtrace/)
+    - I need to compare more with eBPF and DTrace
+    - found [DTrace book](https://illumos.org/books/dtrace/preface.html)
+}}
+
+\subtree[2025-05-12]{\mdnote{2025-05-12}{\tags{#apl #formal #os #proof #rust #sec #tla #web}
+- [Are We Serious About Using TLA+ For Statistical Properties?](https://emptysqua.re/blog/are-we-serious-about-statistical-properties-tlaplus/)
+    - found [FizzBee](https://fizzbee.io/) for behavior correctness verification and performance modelling, based on simulation
+    - I've wished for a tool like this for a long time
+    - see also [Modular verification of MongoDB Transactions using TLA+](http://muratbuffalo.blogspot.com/2025/05/modular-verification-of-mongodb.html)
+- [Flattening Rust's Learning Curve](https://corrode.dev/blog/flattening-rusts-learning-curve/)
+    - [The best open source project for someone might not be yours, and that's OK](https://blog.petdance.com/2018/01/02/the-best-open-source-project-for-someone-might-not-be-yours-and-thats-ok/)
+- [A review of documentation in the Rust ecosystem](https://www.harudagondi.space/blog/rust-documentation-ecosystem-review/)
+    - found [Blessed.rs](https://blessed.rs/crates): Recommended Crate Directory
+- [Secure by Design: Google’s Perspective on Memory Safety (2024)](https://storage.googleapis.com/gweb-research2023-media/pubtools/7665.pdf)
+- [Microservices Are a Tax Your Startup Probably Can’t Afford](https://nexo.sh/posts/microservices-for-startups/)
+- [Private Internet (2024)](https://kevincox.ca/2024/08/16/private-internet/)
+- [A tool to verify estimates, II: a flexible proof assistant](https://terrytao.wordpress.com/2025/05/09/a-tool-to-verify-estimates-ii-a-flexible-proof-assistant/)
+}}
+  }
+}

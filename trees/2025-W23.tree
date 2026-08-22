@@ -1,0 +1,148 @@
+\import{macros}
+
+\title{Week 23, 2025}
+\date{2025-06-02}
+
+\scope{
+  \put\transclude/toc{false}
+  \put\transclude/expanded{false}
+  \subtree[2025-W23-links]{
+\title{Link selections (2025-W23)}
+
+\subtree[2025-06-08]{\mdnote{2025-06-08}{\tags{#agent #news #optimization #os #rust #sec #simd #web #zig}
+- [Vanishing zeroes for geometric algebra in Rust](https://dotat.at/@/2020-12-06-vanishing-zeroes-for-geometric-algebra-in-rust.html)
+- [A plan for SIMD](https://linebender.org/blog/a-plan-for-simd/)
+    - learn about [pulp](https://github.com/sarah-quinones/pulp) and [check its usage in faer](https://deepwiki.com/search/is-faer-only-using-pulp-for-si_877456ee-d5c0-4462-bf78-be43779cb07c)
+- [Using Zig to Unit Test a C Application](https://mtlynch.io/notes/zig-unit-test-c/)
+    - learn about `[*c]const u8`, `?[*:0]u8`, `.ptr`, `std.mem.span`, `allocator.dupeZ` etc.
+- [Zig: First Impressions](https://deplet.ing/zig-first-impressions/)
+- [Optimizations with Zig](https://alloc.dev/2025/06/07/zig_optimization)
+    - learn about `align(64)`, `noalias`
+- [Too Many Open Files](https://mattrighetti.com/2025/06/04/too-many-files-open.html)
+- [A masochist's guide to web development](https://sebastiano.tronto.net/blog/2025-06-06-webdev/)
+    - found [Nissy: A Rubik's cube solver and FMC assistant](https://nissy.tronto.net/)
+- [Field Notes From Shipping Real Code With Claude](https://diwank.space/field-notes-from-shipping-real-code-with-claude)
+    - great practice for `CLAUDE.md`, [AGENTS.md](https://github.com/julep-ai/julep/blob/main/AGENTS.md)
+    - TODO: I should actually start working on my [CONVENTIONS.md](https://aider.chat/docs/usage/conventions.html)
+    - related:
+        - [I Read All Of Cloudflare's Claude-Generated Commits](https://www.maxemitchell.com/writings/i-read-all-of-cloudflares-claude-generated-commits/)
+        - [MCP vs API](https://glama.ai/blog/2025-06-06-mcp-vs-api)
+        - [How I program with Agents](https://crawshaw.io/blog/programming-with-agents)
+        - [LLMs are cheap](https://www.snellman.net/blog/archive/2025-06-02-llms-are-cheap/)
+        - [The Gap Through Which We Praise the Machine](https://ferd.ca/the-gap-through-which-we-praise-the-machine.html)
+        - [Why agents are bad pair programmers](https://justin.searls.co/posts/why-agents-are-bad-pair-programmers/)
+        - [Apple exposes Foundation Models API and... no new Siri](https://news.smol.ai/issues/25-06-09-apple-letdown/)
+        - [A tale of two Claudes](https://steveklabnik.com/writing/a-tale-of-two-claudes/)
+        - [Agentic Coding Recommendations](https://lucumr.pocoo.org/2025/6/12/agentic-coding/)
+- [The Illusion of Thinking: Understanding the Strengths and Limitations of Reasoning Models via the Lens of Problem Complexity](https://machinelearning.apple.com/research/illusion-of-thinking)
+    - accuracy progressively declines as problem complexity increases until reaching complete collapse (zero accuracy) beyond a modelspecific complexity threshold
+    - [a rebuttal on X](https://x.com/giffmana/status/1931801836052189191) has some good discussion
+        - for the puzzle Tower of Hannoi with too many disks, the collapse of accuracy is due to output token limit, and the models won't even try to reason with large number of moves, only explains the overall approach
+        - using solution length as a proxy for task difficulty is flawed, e.g. ToH has a long output but low algorithmic complexity: it’s deterministic with no real branching
+        - the paper's observations (collapse, token underuse, overthinking) [still seem to be solid](https://x.com/maw501/status/1932023882912825716)
+    - [Seven replies to the viral Apple reasoning paper and why they fall short](https://garymarcus.substack.com/p/seven-replies-to-the-viral-apple)
+        - [Simon Willison’s quotes and comments](https://simonwillison.net/2025/Jun/15/viral-apple-reasoning-paper/#atom-everything)
+    - [Why Claude's Comment Paper Is a Poor Rebuttal](https://victoramartinez.com/posts/why-claudes-comment-paper-is-a-poor-rebuttal/)
+- #blogging
+    - [Thrive in obscurity](https://www.jeetmehta.com/posts/thrive-in-obscurity)
+    - [is blogging romantic?](https://blog.avas.space/is-blogging-romantic/)
+    - [Why Comment Sections suck - re:I want to comment on your blog post](https://kami.bearblog.dev/why-comment-sections-suck-rei-want-to-comment-on-your-blog-post/)
+- [Interactive Guide: Mastering Rate Limiting](https://blog.sagyamthapa.com.np/interactive-guide-to-rate-limiting)
+}}
+
+\subtree[2025-06-07]{\mdnote{2025-06-07}{\tags{#git #os #sqlite}
+- [Simplifying and Isolating Failure-Inducing Input (Delta Debugging)](https://www.cs.purdue.edu/homes/xyzhang/fall07/Papers/delta-debugging.pdf)
+    - found [Perses: Syntax-Directed Program Reduction](https://github.com/uw-pluverse/perses)
+    - found [WDD: Weighted Delta Debugging](https://arxiv.org/abs/2411.19410)
+- found [git-remote-sqlite: Single-file Git repos that can replicate with Litestream](https://github.com/chrislloyd/git-remote-sqlite)
+}}
+
+\subtree[2025-06-06]{\mdnote{2025-06-06}{\tags{#agent #apl #clojure #compiler #dspy #formal #fuzzing #interop #news #optimization}
+- investigating DSPy (Demonstrate-Search-Predict)
+    - [Pipelines & Prompt Optimization with DSPy](https://www.dbreunig.com/2024/12/12/pipelines-prompt-optimization-with-dspy.html)
+    - found [MLflow DSPy Flavor](https://mlflow.org/docs/latest/llms/dspy/index.html)
+    - SIMBA (Stochastic Introspective Mini-Batch Ascent)
+        - proceeds in a sequence of mini-batches seeking to make incremental improvements to the prompt instructions or few-shot examples
+        - [\verb>>>|Advanced Tool Use: using SIMBA to improve a "Multi-Hop Tool Use" agent from 35% accuracy to 60%>>>](https://dspy.ai/tutorials/tool_use/)
+            - in [RL for Multi-Hop Research](https://dspy.ai/tutorials/rl_multihop/), RL method is compared with SIMBA
+        - [Correcting Bias in LLMs with DSPy](https://askrally.com/article/correcting-bias-in-llms-with-dspy)
+        - Grok has difficulty figuring out the corresponding paper, [even with Deep Research](https://x.com/i/grok/share/ijirKbHUZsEJT8VG1xDl6YWBc)
+    - related
+        - found [TextGrad](https://textgrad.com/) ([code](https://github.com/zou-group/textgrad), [notebook](https://colab.research.google.com/github/zou-group/textgrad/blob/main/examples/notebooks/Tutorial-Test-Time-Loss-for-Code.ipynb))
+        - found [Zenbase](https://zenbase.ai/#code-examples)
+        - found [Easy Dataset: Custom Prompts](https://docs.easy-dataset.com/ed/en/advanced/markdown)
+            - i.e. I can use extra system prompt to generate Q&A pairs then use them to finetune an LM or optimize via DSPy to answer questions without such prompts
+- [The next phase of jank's C++ interop](https://jank-lang.org/blog/2025-06-06-next-phase-of-interop/)
+    - found [compiler-research/CppInterOp: A Clang-based C++ Interoperability Library](https://github.com/compiler-research/CppInterOp)
+        - [cppyy](https://cppyy.readthedocs.io/en/latest/) ([code](https://github.com/wlav/cppyy))
+    - [jank is C++](https://jank-lang.org/blog/2025-07-11-jank-is-cpp/) ([on HN](https://news.ycombinator.com/item?id=44534787))
+- [Sharing everything I could understand about gradient noise](https://blog.pkh.me/p/42-sharing-everything-i-could-understand-about-gradient-noise.html)
+- [Small Programs and Languages](https://ratfactor.com/cards/pl-small)
+- [APL tutorial](https://scharenbroch.dev/blog/apl-tutorial/)
+- [John Carlos Baez on the shape of the Oort cloud](https://mathstodon.xyz/@johncarlosbaez/114636740505216155)
+    - paper: [A Spiral Structure in the Inner Oort Cloud](https://iopscience.iop.org/article/10.3847/1538-4357/adbf9b)
+- found [Jepsen](https://jepsen.io/), a framework for distributed systems verification, with fault injection, written in Clojure
+    - [Fuzzer Blind Spots (Meet Jepsen!)](https://tigerbeetle.com/blog/2025-06-06-fuzzer-blind-spots-meet-jepsen/)
+    - [Jepsen: TigerBeetle 0.16.11](https://jepsen.io/analyses/tigerbeetle-0.16.11)
+    - [The unreasonable effectiveness of fuzzing for porting programs](https://rjp.io/blog/2025-06-17-unreasonable-effectiveness-of-fuzzing) ([on HN](https://news.ycombinator.com/item?id=44311241)) ([on lobste.rs](https://lobste.rs/s/zgoytt))
+}}
+
+\subtree[2025-06-06-2]{\mdnote{2025-06-06}{\tags{#apl #game #lean #shader #tla #vulkan #web #zig}
+- [AI is a gamechanger for TLA+ users](https://buttondown.com/hillelwayne/archive/ai-is-a-gamechanger-for-tla-users/)
+- [In which I have Opinions about parsing and grammars](https://www.chiark.greenend.org.uk/~sgtatham/quasiblog/parsing/)
+- [Experimenting with no-build Web Applications](https://andregarzia.com/2025/06/experimenting-with-no-build-web-applications.html)
+- [Zigar 0.14.1: stream integration and more](https://www.reddit.com/r/Zig/comments/1l3hr3p/zigar_0141_stream_integration_and_more/)
+- [The Lean FRO Year 2 Roadmap](https://lean-fro.org/about/roadmap-y2/)
+- found [No More Shading Languages: Compiling C++ to Vulkan Shaders](https://xol.io/random/vcc-paper.pdf)
+- found [APLearn: machine learning library](https://github.com/BobMcDear/aplearn)
+- [I Think I’m Done Thinking About genAI For Now](https://blog.glyph.im/2025/06/i-think-im-done-thinking-about-genai-for-now.html)
+}}
+
+\subtree[2025-06-05]{\mdnote{2025-06-05}{\tags{#agent #compiler #debugger #jujutsu #lean #os #rust #sec #software #tla}
+- [Physicality: the new age of UI](https://www.lux.camera/physicality-the-new-age-of-ui/)
+    - love it
+    - [Flat design vs realistic (“skeuomorphic”) design](https://www.flatisbad.com/)
+- [jujutsu on tangled](https://blog.tangled.sh/stacking)
+    - it's really powerful to edit a changeset to keep commits/PRs clean and focused, no more frustrating rebasing
+    - maybe I'll really start using `jj`
+    - related: [Example of Splitting a PR](https://www.jefftk.com/p/example-of-splitting-a-pr)
+- [Why I Think Lean Software Development is Wrong](https://patricia.no/2025/05/30/why_lean_software_dev_is_wrong.html)
+- [How Compiler Explorer Works in 2025](https://xania.org/202506/how-compiler-explorer-works)
+    - learn about [nsjail](https://nsjail.dev/), a lightweight process isolation tool that’s basically a paranoid security guard for processes
+- vibe coding
+    - [Claude Code is My Computer](https://steipete.me/posts/2025/claude-code-is-my-computer)
+    - [Vibe coding case study: ScubaDuck](https://blog.ezyang.com/2025/06/vibe-coding-case-study-scubaduck/)
+- [Deep learning gets the glory, deep fact checking gets ignored](https://rachel.fast.ai/posts/2025-06-04-enzyme-ml-fails/index.html)
+- [Conformance Checking at MongoDB: Testing That Our Code Matches Our TLA+ Specs | MongoDB Blog](https://www.mongodb.com/blog/post/engineering/conformance-checking-at-mongodb-testing-our-code-matches-our-tla-specs)
+- [NLWeb: Protocol for AI-Powered Website Search](https://glama.ai/blog/2025-06-01-what-is-nlweb)
+    - we really nead a lot of AI-facing protocols, MCP, A2A, NLWeb, `llm.txt` etc.
+- [Tests should not contain logic](https://blog.snork.dev/posts/tests-should-not-contain-logic.html)
+- [Script Debugger Retired](https://latenightsw.com/script-debugger-retired/), IDE for AppleScript
+}}
+
+\subtree[2025-06-02]{\mdnote{2025-06-02}{\tags{#benchmark #compiler #json #news #os #rust #web #z3}
+- [Fast character classification with z3](https://lemire.me/blog/2025/06/01/easy-vectorized-classification-with-z3/)
+- structured error
+    - [Designing Error Types in Rust Libraries](https://d34dl0ck.me/rust-bites-designing-error-types-in-rust-libraries/index.html)
+    - [Structured errors in Go](https://southcla.ws/structured-errors-in-go)
+    - [Why Use Structured Errors in Rust Applications?](https://home.expurple.me/posts/why-use-structured-errors-in-rust-applications/)
+- minimalizing Rust
+    - [Why am I writing a Rust compiler in C?](https://notgull.net/announcing-dozer/)
+    - [How to deal with Rust dependencies](https://notgull.net/rust-dependencies/)
+    - [Reducing Cargo target directory size with -Zno-embed-metadata](https://kobzol.github.io/rust/rustc/2025/06/02/reduce-cargo-target-dir-size-with-z-no-embed-metadata.html)
+- found [benchmark-gui](https://github.com/skarupke/benchmark-gui)
+    - from [I’m Open-Sourcing my Custom Benchmark GUI](https://probablydance.com/2025/05/31/im-open-sourcing-my-custom-benchmark-gui/)
+- [The DuckLake Manifesto: SQL as a Lakehouse Format](https://ducklake.select/manifesto/)
+- [Progressive JSON](https://overreacted.io/progressive-json/)
+- [johncarlosbaez's post on mathstodon.xyz](https://mathstodon.xyz/@johncarlosbaez/114607489890551731) about [a viXra branch devoted to AI-assisted papers](https://ai.vixra.org/)
+- learning speed solving Rubik's cube, see [[uts-016J]]
+- [Devstral](https://mistral.ai/news/devstral)
+    - see also [devstral-small-2505-mlx](https://lmstudio.ai/model/devstral-small-2505-mlx)
+- #aria
+    - [What I Wish Someone Told Me When I Was Getting into ARIA](https://www.smashingmagazine.com/2025/06/what-i-wish-someone-told-me-aria/) ([on HN](https://news.ycombinator.com/item?id=44299930))
+    - [Selfish reasons for building accessible UIs](https://nolanlawson.com/2025/06/16/selfish-reasons-for-building-accessible-uis/)
+    - [WebAIM: Up and Coming ARIA](https://webaim.org/blog/up-and-coming-aria/)
+        - learn about aria features and roles, it also has demo
+}}
+  }
+}

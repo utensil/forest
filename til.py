@@ -13,8 +13,9 @@ keyword-based titles for better organization and searchability.
 
 Usage: uv run til.py
 
-The script automatically processes trees/uts-0018.tree and updates all
-daily entry titles while maintaining proper brace matching for Forester syntax.
+The script automatically processes the live learning-diary root and every
+flat ISO-week link-selection tree, updating all daily entry titles while
+maintaining proper brace matching for Forester syntax.
 
 Designed to be run periodically after adding new entries or updating the
 keyword extraction logic to keep titles current and meaningful.
@@ -102,6 +103,18 @@ TAG_MERGE = {
 
 # Global merge stats aggregated across all entries
 MERGE_STATS = {}
+
+
+def default_tree_files():
+    """Return the live root and all flat ISO-week trees.
+
+    Weekly prose is native Forester, while its in-file link-selection subtree
+    contains the daily ``\\mdnote`` entries for this title/tag maintenance task.
+    """
+
+    root = Path("trees/uts-0018.tree")
+    weeks = sorted(Path("trees").glob("????-W??.tree"))
+    return [root, *weeks]
 
 
 def load_bib_titles():
@@ -882,6 +895,12 @@ if __name__ == "__main__":
         action="store_true",
         help="Simulate changes without modifying any files (no reset or tag updates, but stats and analysis still run)",
     )
+    parser.add_argument(
+        "--tree-files",
+        type=Path,
+        nargs="+",
+        help="Diary root and/or flat ISO-week files to process",
+    )
     args = parser.parse_args()
 
     if args.test:
@@ -890,16 +909,15 @@ if __name__ == "__main__":
         else:
             sys.exit(1)
 
-    filepath = Path("trees/uts-0018.tree")
-
-    if not filepath.exists():
-        print(f"Error: File {filepath} not found")
-        print("Expected file: trees/uts-0018.tree (learning diary)")
+    filepaths = args.tree_files or default_tree_files()
+    missing = [filepath for filepath in filepaths if not filepath.exists()]
+    if missing:
+        print(f"Error: File {missing[0]} not found")
         sys.exit(1)
 
     if args.reset:
         print("🔄 TIL Title Resetter - Removing all title keywords...")
-        success = reset_titles(filepath, dry_run=getattr(args, 'dry_run', False))
+        success = all(reset_titles(filepath, dry_run=getattr(args, 'dry_run', False)) for filepath in filepaths)
         if success:
             print("✨ Title reset complete!" if not getattr(args, 'dry_run', False) else "✨ [DRY-RUN] Title reset simulation complete!")
         else:
@@ -907,16 +925,19 @@ if __name__ == "__main__":
             sys.exit(1)
     else:
         print("🔍 TIL Title Improver - Analyzing daily entries...")
-        success = process_file(filepath, verbose=getattr(args, 'verbose', False), dry_run=getattr(args, 'dry_run', False))
+        success = all(process_file(filepath, verbose=getattr(args, 'verbose', False), dry_run=getattr(args, 'dry_run', False)) for filepath in filepaths)
         if success:
             print("✨ Title improvement complete!" if not getattr(args, 'dry_run', False) else "✨ [DRY-RUN] Title improvement simulation complete!")
             dedup = getattr(args, 'dedup', True) and not getattr(args, 'no_dedup', False)
             if getattr(args, 'stat', None) is not None:
-                print_monthly_tag_stats(filepath, top_n=args.stat, dedup=dedup)
+                for filepath in filepaths:
+                    print_monthly_tag_stats(filepath, top_n=args.stat, dedup=dedup)
             if getattr(args, 'stat_all', False):
-                print_global_tag_stats(filepath, dedup=dedup)
+                for filepath in filepaths:
+                    print_global_tag_stats(filepath, dedup=dedup)
             if getattr(args, 'merge_stat', False):
-                print_merge_stats(dedup=dedup, filepath=filepath)
+                for filepath in filepaths:
+                    print_merge_stats(dedup=dedup, filepath=filepath)
         else:
             print("❌ Title improvement failed")
             sys.exit(1)

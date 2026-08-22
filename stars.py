@@ -13,6 +13,20 @@ from collections import defaultdict
 from datetime import datetime, timedelta
 import signal
 import errno
+from pathlib import Path
+
+
+def default_tree_files():
+    """Return the live diary root plus every flat ISO-week tree.
+
+    The weekly companion carries Markdown link selections, while the weekly
+    note can carry native Forester links.  Reading both keeps deduplication
+    correct as the live root is gradually extracted.
+    """
+
+    fixed = [Path("trees/uts-0018.tree"), Path("trees/uts-016E.tree")]
+    weekly = sorted(Path("trees").glob("????-W??.tree"))
+    return [str(path) for path in dict.fromkeys([*fixed, *weekly])]
 
 
 def strip_ansi(text):
@@ -781,7 +795,7 @@ def main():
     
     parser = argparse.ArgumentParser(description="Process starred items into Forester format")
     parser.add_argument('--no-deduplicate', action='store_true', help='Disable deduplication of existing URLs')
-    parser.add_argument('--tree-files', type=str, nargs='+', help='Paths to tree files to extract existing URLs from', default=['trees/uts-0018.tree', 'trees/uts-016E.tree'])
+    parser.add_argument('--tree-files', type=str, nargs='+', help='Paths to tree files to extract existing URLs from', default=default_tree_files())
     parser.add_argument('--show-all-sources', action='store_true', help='Show all sources, not just when both lobste.rs and HN are present')
     parser.add_argument('--days', type=int, default=7, help='Show only entries from the last X days (default: 7, use -1 for all days)')
     parser.add_argument('--rss-json', action='store_true', help='Process JSON output from rss2linkwarden.py instead of GitHub stars')

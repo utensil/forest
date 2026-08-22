@@ -1,0 +1,101 @@
+\import{macros}
+
+\title{Week 17, 2025}
+\date{2025-04-21}
+
+\scope{
+  \put\transclude/toc{false}
+  \put\transclude/expanded{false}
+  \subtree[2025-W17-links]{
+\title{Link selections (2025-W17)}
+
+\subtree[2025-04-27]{\mdnote{2025-04-27}{\tags{#apl #news #os #web}
+- found [APL Cultivations](https://xpqz.github.io/cultivations/Intro.html)
+- found [Dive into Systems (2020)](https://diveintosystems.org/)
+- found [Smallweb – Your Internet Folder](https://smallweb.run/)
+- found [Cognition's DeepWiki, a free encyclopedia of all GitHub repos](https://news.smol.ai/issues/25-04-25-cognition-deepwiki/)
+}}
+
+\subtree[2025-04-26]{\mdnote{2025-04-26}{\tags{#benchmark #compiler #formal}
+- found [Mitata - a beautiful benchmarking tool](https://hwisnu.bearblog.dev/mitata-benchmarking-tool/)
+- [Nofl: A Precise Immix](https://arxiv.org/pdf/2503.16971v1)
+- [O(no) You Didn’t](https://mrshiny608.github.io/MrShiny608/optimisation/2025/04/22/OhNoYouDidnt.html)
+- found [PyGraph: Robust Compiler Support for CUDA Graphs in PyTorch](https://arxiv.org/abs/2503.19779)
+}}
+
+\subtree[2025-04-25]{\mdnote{2025-04-25}{\tags{#bevy #gpu #idea #news #os #render #sec #software #tla #wasm}
+- [Bevy 0.16](https://bevyengine.org/news/bevy-0-16/)
+    - learn about GPU-Driven Rendering and [WESL](https://wesl-lang.dev/)
+- [How I Got Hacked: A Warning about Malicious PoCs](https://chocapikk.com/posts/2025/s1nk/)
+- [MCP Security: Tool Poisoning Attacks](https://invariantlabs.ai/blog/mcp-security-notification-tool-poisoning-attacks)
+- [The ‘trickonometry’ of math olympiad inequalities](https://www.andreinc.net/2025/03/17/the-trickonometry-of-math-olympiad-inequalities)
+    - intriguing write-up, well collected problems, insightful perspective
+    - found [My list of challenging software projects some programmers should try](https://www.andreinc.net/2024/03/28/programming-projects-ideas)
+- [Towards Vortex 1.0](https://spiraldb.com/post/towards-vortex-10)
+    - a next-generation columnar format with self-describing layouts and WASM decoders that is 200x faster than Parquet for random access, among other goodies
+}}
+
+\subtree[2025-04-24]{\mdnote{2025-04-24}{\tags{#diagram #duckdb #gpu #idea #llvm #optimization #os #tla #wasm #✍️}
+- [Abusing DuckDB-WASM by making SQL draw 3D graphics (Sort Of)](https://www.hey.earth/posts/duckdb-doom)
+    - a very cool idea
+    - I should learn more about modern databases
+- found [Bluefish](https://bluefishjs.org/)
+    - a JS diagram library with quite some potential
+    - some teaser examples were added by [this commit](https://github.com/bluefishjs/bluefish/commit/c2fb70cc6e8c8c4f4d2f4a797fc2875ba66d00ba)
+- \citef{popescu2025exploiting}
+    - so there are actually many performance-wise well defined UBs in LLVM
+- [GPU Compilation with MLIR](https://vectorfold.studio/blog/gpu-compilation)
+    - found [MLIR Python Bindings](https://mlir.llvm.org/docs/Bindings/Python/)
+- skimmed [Some possible roles for AI of Grothendieck topos theory](https://www.laurentlafforgue.org/Expose_Lafforgue_topos_AI_ETH_sept_2022.pdf) by Laurent Lafforgue (2022)
+- made a start on improving PDF organization in and out of MarginNote
+- looked for ways to manipulate iCloud files programatically
+    - noticed that [`rclone` supports iCloud too](https://rclone.org/iclouddrive/)
+    - but `~/Library/Mobile Documents/com~apple~CloudDocs` already works well for my purpose
+}}
+
+\subtree[2025-04-23]{\mdnote{2025-04-23}{\tags{#elixir #os #rust #zig}
+- [Nine Reasons to Use OSH](https://oils.pub/osh.html)
+    - it contains a POSIX-compatible shell `osh`, and an incompatible shell `ysh`
+    - it's written in a subset of Python, then transpiled to C++ by [mycpp](https://github.com/oils-for-unix/oils/blob/master/mycpp/README.md) that is based on MyPy, an interesting approach
+- found [codapi](https://codapi.org/) which supports sandboxes for Rust, Zig, Elixir etc.
+}}
+
+\subtree[2025-04-22]{\mdnote{2025-04-22}{- [Make Your Own Internet Presence with NetBSD and a 1 euro VPS – Part 1: Your Blog](https://it-notes.dragas.net/2025/04/22/make-your-own-internet-presence-with-netbsd-and-a-1-euro-vps-part-1-your-blog/)
+    - which uses [BSSG](https://bssg.dragas.net/), a simple static site generator written in Bash
+    - will settle on UTM for Mac/BSD virtualization, and Lima for Linux virtualization
+    - still haven't figure out how to virtualize/emulate NetBSD with UTM, see [this issue](https://github.com/utmapp/UTM/discussions/7069)
+- [My Dev Workflow: 2025](https://minami.bearblog.dev/my-dev-workflow-2025/)
+    - found and started using [Loop](https://github.com/MrKai77/Loop)
+}}
+
+\subtree[2025-04-21]{
+\mdnote{2025-04-21}{\tags{#context #elixir #idea #os #render #rust #web #z3 #zig}
+- wish to learn more about other architectures of LMs, e.g.
+    - \citef{ma2025bitnet}
+    - \citef{zhao2025d1}
+    - \citef{wang2025m1}
+    - [RWKV7-G1](https://huggingface.co/BlinkDL/rwkv7-g1) "GooseOne" reasoning model, see \citef{peng2025rwkv}
+    - ModernBERT, see \citef{warner2024smarter}
+- [The State of Reinforcement Learning for LLM Reasoning: Understanding GRPO and New Insights from Reasoning Model Papers](https://magazine.sebastianraschka.com/p/the-state-of-llm-reasoning-model-training)
+- [Lorenz and modular flows: a visual introduction](https://www.josleys.com/articles/ams_article/Lorenz3.htm) which is "deep, beautiful and with a taste of singularity and knot theory"
+    - found [Ultra Fractal 6](https://www.ultrafractal.com/) and [POV-Ray](https://www.povray.org/)
+- found [less_slow.cpp: Playing Around Less Slow Coding Practices for C++, CUDA, and Assembly Code](https://github.com/ashvardanian/less_slow.cpp)
+- found [Common Expression Language](https://github.com/google/cel-spec)
+- [How I use Kate Editor](https://akselmo.dev/posts/how-i-use-kate-editor/)
+- watched [Implicit Surfaces (using interval arithmetic to evaluate SDFs)](https://www.youtube.com/watch?v=UxGxsGnbyJ4)
+    - [PDF Slides](https://www.mattkeeter.com/research/hmc_colloquium.pdf)
+    - the ideas behind [Fidget](https://github.com/mkeeter/fidget) and \citef{keeter2020massively} well explained, GOAT-level inspiring
+    - should be further explored in [[ag-000G]]
+    - there are also many interesting writeups in [The Prospero Challenge](https://www.mattkeeter.com/projects/prospero/)
+- [Things Zig comptime Won't Do](https://matklad.github.io/2025/04/19/things-zig-comptime-wont-do.html)
+- #gleam
+    - [Gleam](https://gleam.run/) that has a Rust-like syntax, runs on Erlang VM, and supports compiling to JavaScript
+    - [My First Impressions of Gleam](https://mtlynch.io/notes/gleam-first-impressions/)
+    - [Gleam for Elixir users](https://gleam.run/cheatsheets/gleam-for-elixir-users/)
+    - [Lustre](https://hexdocs.pm/lustre/index.html)
+        - a web framework in Gleam
+- note more about Taiji and practice more
+}
+}
+  }
+}

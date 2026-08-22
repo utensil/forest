@@ -1,0 +1,492 @@
+\import{macros}
+
+\title{Week 27, 2025}
+\date{2025-06-30}
+
+\scope{
+  \put\transclude/toc{false}
+  \put\transclude/expanded{false}
+  \subtree[2025-W27-links]{
+\title{Link selections (2025-W27)}
+
+\subtree[2025-07-06]{\mdnote{2025-07-06}{\tags{#agent #docker #game #news #sec}
+- #env
+    - ['It's too late': David Suzuki says the fight against climate change is lost](https://www.ipolitics.ca/2025/07/02/its-too-late-david-suzuki-says-the-fight-against-climate-change-is-lost/) ([on HN](https://news.ycombinator.com/item?id=44476774))
+- #sandbox
+    - [Basically Everyone Should Be Avoiding Docker](https://lukesmith.xyz/articles/everyone-should-be-avoiding-docker/) ([on HN](https://news.ycombinator.com/item?id=44477452))
+    - [What is gVisor?](https://blog.yelinaung.com/posts/gvisor/) ([on HN](https://news.ycombinator.com/item?id=44745539)) ([on lobste.rs](https://lobste.rs/s/e03oa9))
+        - gVisor is an abstraction on top of existing Linux Kernel and acts as a middleman between the container and the Kernel
+        - The system calls are intercepted and handled by the a gVisor component called “Sentry”
+        - gVisor is designed to minimize and restrict the types of system calls the Sentry makes to the host kernel.
+        - [Sandboxing and Workload Isolation · The Fly Blog](https://fly.io/blog/sandboxing-and-workload-isolation/)
+            - "The Linux kernel has almost 400 system calls. How many of them do we need to efficiently emulate the rest? gVisor needs less than 20. With those, gVisor implements basically all of Linux in userland. Processes. Devices. Tasks. Address spaces and page tables. Filesystems. TCP/IP; the entire IP network stack, all reimplemented, in Go, backended by native Linux userland."
+    - [Container Use for Locally Sandboxed, Background Agents in Zed](https://zed.dev/blog/container-use-background-agents) #agent
+- #agent
+    - [Building a Mac app with Claude code](https://www.indragie.com/blog/i-shipped-a-macos-app-built-entirely-by-claude-code) ([on HN](https://news.ycombinator.com/item?id=44481286))
+    - [Claude Code Pro Limit? Hack It While You Sleep](https://github.com/terryso/claude-auto-resume) ([on HN](https://news.ycombinator.com/item?id=44481235))
+    - [Optimizing Tool Selection for LLM Workflows with Differentiable Programming](https://viksit.substack.com/p/optimizing-tool-selection-for-llm) #dspy
+- #os
+    - [GrapheneOS: the private and secure mobile OS](https://grapheneos.org/)
+        - from [Cops in [Spain] think everyone using a Google Pixel must be a drug dealer](https://www.androidauthority.com/google-pixel-organized-crime-preferred-phone-3573578/)
+        - related: [GrapheneOS: Why I ditched Google for a privacy-focused Pixel ROM](https://www.androidauthority.com/grapheneos-3287030/)
+    - [Mkosi – Build Bespoke OS Images](https://mkosi.systemd.io/)
+        - [osbuild/bootc-image-builder: A container for deploying bootable container images.](https://github.com/osbuild/bootc-image-builder)
+        - [Debcraft – Easiest way to modify and build Debian packages](https://optimizedbyotto.com/post/debcraft-easy-debian-packaging/) ([on HN](https://news.ycombinator.com/item?id=44611223))
+- #game-dev
+    - [Two and a Half Years in GameDev](https://smyachenkov.com/posts/two-and-half-years-in-gamedev/) ([on HN](https://news.ycombinator.com/item?id=44480667))
+    - [List of open source game clones](https://osgameclones.com/)
+    - [Adding Planets to Celestia on macOS](https://borretti.me/article/adding-planets-to-celestia-on-macos)
+    - [Shrinkle – Shrink words, find hidden phrase](https://www.shrinkle.org/)
+}}
+
+\subtree[2025-07-05]{\mdnote{2025-07-05}{\tags{#agent #jujutsu #neovim #news #os #software #tla}
+- #formal
+    - [A supposedly worthwhile contract I'll never do again](https://ahelwer.ca/post/2025-07-04-tla-contracts/)
+        - "What mattered here wasn’t the weights being moved or the TLA⁺ spec being produced - it was the thinking that writing the TLA⁺ specification required."
+            - expectation of TLA⁺ contract: catch issues early, save training time, and get a formal spec
+            - real value—deep system thinking during writing—vanishes when the expert leaves
+            - the dev team values the 'what do we do in this case' discussions more than the final TLA⁺ specification artifact (risking abandonment)
+            - alternative: adopting Hillel Wayne’s approach: "pair-program TLA⁺ specs with team members" to let them grasp the thinking
+        - HN discussion summarized
+            - success of TLA contracts requires refocusing on knowledge transfer
+                - teaching teams to ask critical questions
+                - embedding the spec in their workflow (via checks or collaboration)
+                - treating the spec as a living document rather than a one-time deliverable
+- #anti-bot
+    - [Anubis Pilot Project Report - June 2025](https://dukespace.lib.duke.edu/server/api/core/bitstreams/816ef134-55cf-49f6-9a8b-1e8a2324b1ff/content)
+        - it's interesting to see how serious business sees the adoption of Anubis
+    - [Anubis now supports non-JS challenges](https://anubis.techaro.lol/blog/release/v1.20.0/#no-js-challenge)
+        - this changelog is very informative
+            - weight thresholds in policy is flexible
+            - `robots2policy` is convenient if a site has a well-maintained robots.txt
+            - no-JS challenge via metarefresh doesn't seem to battle-ready: "many modern scrapers use headless Google Chrome", "its false positive rate is ascertained"
+    - [How Perplexity is Evading Anti-crawling Measures](https://blog.cloudflare.com/perplexity-is-using-stealth-undeclared-crawlers-to-evade-website-no-crawl-directives/)
+    - [Robots.txt - Archiveteam](https://wiki.archiveteam.org/index.php/Robots.txt) #anti-bot
+            - [On HN](https://news.ycombinator.com/item?id=44943079)
+    - [Iocaine: The deadliest poison known to AI](https://git.madhouse-project.org/iocaine/iocaine)
+    - [I was wrong about robots.txt](https://evgeniipendragon.com/posts/i-was-wrong-about-robots-txt/) ([on HN](https://news.ycombinator.com/item?id=44588437))
+- #agent/idea
+    - [Everything around LLMs is still magical and wishful thinking](https://dmitriid.com/everything-around-llms-is-still-magical-and-wishful-thinking)
+        - [Why your vibe coded app only works in your head](https://farouq.bearblog.dev/why-your-vibe-coded-app-only-works-in-your-head/)
+    - [Enough AI copilots, we need AI HUDs](https://www.geoffreylitt.com/2025/07/27/enough-ai-copilots-we-need-ai-huds) ([on HN](https://news.ycombinator.com/item?id=44705445))
+    - [Every reason why I hate AI](https://malwaretech.com/2025/08/every-reason-why-i-hate-ai.html)
+    - [Riff: LLMs are Software Diamonds](https://www.evalapply.org/posts/llms-are-diamonds/index.html)
+    - [Identify, solve, verify](https://simonwillison.net/2025/Jul/4/identify-solve-verify/)
+    - [Operators, Not Users and Programmers](https://jyn.dev/operators-not-users-and-programmers/)
+            - the distinction between "user" and "programmer" is an artifact of our presently barely-programmable and barely-usable computing systems.  I would like to use the neutral word "operator" instead. —Stanislav
+            - programming to be easy and simple enough to pick up that people can do it without specialized training in the field, so that they can write [situated software](https://gwern.net/doc/technology/2004-03-30-shirky-situatedsoftware.html)
+            - malleable languages
+                - spreadsheets
+                    - [Every Visual Workflow Tool Is Just Excel for Developers Who Gave Up](https://medium.com/@mohamedalibenothmen1/every-visual-workflow-tool-is-just-excel-for-developers-who-gave-up-f7261090fbc8)
+                - WYSIWYG editors
+                - browser devtools
+    - [AI promised efficiency. Instead, it's making us work harder](https://afterburnout.co/p/ai-promised-to-make-us-more-efficient)
+        - AI tools aren’t just saving us time—they’re shifting where we spend our mental energy. And that shift is exhausting in ways we haven’t fully recognized yet.
+        - [No, AI is not Making Engineers 10x as Productive](https://colton.dev/blog/curing-your-ai-10x-engineer-imposter-syndrome/)
+    - [Lack of intent is what makes reading LLM-generated text exhausting](https://lambdaland.org/posts/2025-08-04_artifical_inanity/)
+        - [Eleven Music](https://elevenlabs.io/blog/eleven-music-is-here)
+            - AI is still in the uncanny valley, it still has no soul
+    - [LLM Inevitabilism](https://tomrenner.com/posts/llm-inevitabilism/)
+        - [New comment by lsy in "LLM Inevitabilism"](https://news.ycombinator.com/item?id=44568114)
+        - [New comment by mg in "LLM Inevitabilism"](https://news.ycombinator.com/item?id=44568158)
+    - [Gaslight-driven development](https://tonsky.me/blog/gaslight-driven-development/)
+    - [Don't Fall for AI: Reasons for Writers to Reject Slop](https://mythcreants.com/blog/dont-fall-for-ai-nine-reasons-for-writers-to-reject-slop/)
+    - [AI is killing the web – can anything save it?](https://archive.is/nhrYS)
+        - [from HN](https://news.ycombinator.com/item?id=44623361)
+            - [Wiby - Search Engine for the Classic Web](https://wiby.me/)
+            - [I2P Anonymous Network](https://geti2p.net/en/)
+    - [Rethinking CLI interfaces for AI](https://www.notcheckmark.com/2025/07/rethinking-cli-interfaces-for-ai/)
+    - [Local LLMs versus offline Wikipedia](https://evanhahn.com/local-llms-versus-offline-wikipedia/) ([on HN](https://news.ycombinator.com/item?id=44617078))
+    - [Terence Tao: A human metaphor for evaluating AI capability](https://mathstodon.xyz/@tao/114881418225852441) ([on HN](https://news.ycombinator.com/item?id=44622973))
+    - [Will the Fear of Being Confused for AI Mean That We Will Now Write Differently?](https://3quarksdaily.com/3quarksdaily/2025/06/will-the-fear-of-being-confused-for-ai-mean-that-we-will-now-write-differently.html) ([on HN](https://news.ycombinator.com/item?id=44622382))
+    - [The vibe coder's career path is doomed](https://blog.florianherrengt.com/vibe-coder-career-path.html) ([on HN](https://news.ycombinator.com/item?id=44646356))
+    - [AI coding agents are removing programming language barriers](https://railsatscale.com/2025-07-19-ai-coding-agents-are-removing-programming-language-barriers/) ([on HN](https://news.ycombinator.com/item?id=44655515)) ([on lobste.rs](https://lobste.rs/s/gsvrwc))
+    - [Building better AI tools](https://hazelweakly.me/blog/stop-building-ai-tools-backwards/) ([on HN](https://news.ycombinator.com/item?id=44659921))
+    - [Stop Pretending LLMs Have Feelings Media's Dangerous AI Anthropomorphism Problem](https://www.readtpa.com/p/stop-pretending-chatbots-have-feelings) ([on HN](https://news.ycombinator.com/item?id=44650694))
+    - [Developing our position on AI](https://www.recurse.com/blog/191-developing-our-position-on-ai) ([on HN](https://news.ycombinator.com/item?id=44663072))
+    - [GPT might be an information virus (2023)](https://nonint.com/2023/03/09/gpt-might-be-an-information-virus/) ([on HN](https://news.ycombinator.com/item?id=44704377))
+    - #ai-policy
+        - [You Can’t Pay Me To Prompt!](https://dbushell.com/2025/06/18/ai-policy/)
+            - an intereting writeup for (no) AI policy
+            - from his [AI Policy](https://dbushell.com/ai/), I have quite some ideas about my own AI policy, starting by naming it "LM policy"
+        - [You can now disable all AI features in Zed](https://zed.dev/blog/disable-ai-features) ([on HN](https://news.ycombinator.com/item?id=44660519))
+        - [Artificial Intelligence and the Linux Community](https://blogs.gnome.org/uraeus/2025/07/29/artificial-intelligence-and-the-linux-community/)
+        - [Generative AI. "Slop Generators, are unsuitable for use [ ]"](https://asahilinux.org/docs/project/policies/slop/) ([on HN](https://news.ycombinator.com/item?id=44708884))
+- #jj
+    - [Git experts should try Jujutsu](https://pksunkara.com/thoughts/git-experts-should-try-jujutsu/)
+    - [Jujutsu For Busy Devs](https://maddie.wtf/posts/2025-07-21-jujutsu-for-busy-devs)
+        - [Jujutsu For Busy Devs, Part 2: "How Do I...?"](https://maddie.wtf/posts/2025-07-21-jujutsu-for-busy-devs/entry/1)
+    - [zerowidth positive lookahead | jj tips and tricks](https://zerowidth.com/2025/jj-tips-and-tricks/)
+        - earlier: [zerowidth positive lookahead | What I've learned from jj](https://zerowidth.com/2025/what-ive-learned-from-jj/)
+    - [rbtools/docs/rbtools/workflows/jujutsu.rst at master · reviewboard/rbtools](https://github.com/reviewboard/rbtools/blob/master/docs/rbtools/workflows/jujutsu.rst)
+    - [Jujutsu Strategies :: Reasonably Polymorphic](https://reasonablypolymorphic.com/blog/jj-strategy/)
+    - [Jujutsu + Radicle = ❤️](https://radicle.xyz/2025/08/14/jujutsu-with-radicle)
+    - [dtolnay/dissimilar: Diff library with semantic cleanup, based on Google's diff-match-patch](https://github.com/dtolnay/dissimilar) #struct
+    - [Sapling](https://sapling-scm.com/): A Scalable, User-Friendly Source Control System
+        - many commands look like `jj`'s
+    - [The JJ VCS workshop: A zero-to-hero speedrun](https://github.com/jkoppel/jj-workshop) ([on HN](https://news.ycombinator.com/item?id=44700815)) ([on lobste.rs](https://lobste.rs/s/m8ytbz))
+- #incident
+    - [Recent Archive of Our Own outage was caused by integer exhaustion](\verb>>>|https://otwarchive.atlassian.net/jira/software/c/projects/AO3/issues/AO3-7031?jql=project%20%3D%20%22AO3%22%20ORDER%20BY%20created%20DESC>>>)
+    - [Why AO3 Was Down](https://www.reddit.com/r/AO3/s/67nQid89MW) ([on HN](https://news.ycombinator.com/item?id=44469650))
+    - [GitHub pull requests were down](https://www.githubstatus.com/incidents/6swp0zf7lk8h) ([on HN](https://news.ycombinator.com/item?id=44799494))
+    - [Tell HN: 1.1.1.1 Appears to Be Down](https://news.ycombinator.com/item?id=44565836)
+    - [Cloudflare 1.1.1.1 incident postmortem for July 14, 2025](https://blog.cloudflare.com/cloudflare-1-1-1-1-incident-on-july-14-2025/) ([on HN](https://news.ycombinator.com/item?id=44578490)) ([on lobste.rs](https://lobste.rs/s/4dn4da))
+    - [Cloudflare and the infinite sadness of migrations](https://surfingcomplexity.blog/2025/07/21/cloudflare-and-the-infinite-sadness-of-migrations/)
+    - [Ask HN: GCP Outage?](https://news.ycombinator.com/item?id=44605732)
+    - [How we discovered, and recovered from, Postgres corruption on the matrix.org homeserver](https://matrix.org/blog/2025/07/postgres-corruption-postmortem/)
+    - [Starlink is currently experiencing a service outage. Our team is investigating](https://www.starlink.com/us) ([on HN](https://news.ycombinator.com/item?id=44674960))
+    - [Webflow Down for >31 Hours](https://status.webflow.com) ([on HN](https://news.ycombinator.com/item?id=44728554))
+- #agent
+    - [bgcmd: let AI interact with any REPL](https://github.com/izabera/bgcmd)
+        - a nice example of Claude driving `rr` to debug
+    - [What I learned building an AI coding agent for a year](https://jamesgrugett.com/p/what-i-learned-building-an-ai-coding)
+        - [Codebuff](https://www.codebuff.com/)
+- #dev
+    - [What clever tools/workflows do you use to manage development environments?](https://lobste.rs/s/zupgan/what_clever_tools_workflows_do_you_use)
+        - mise
+        - [Devbox: Portable, Isolated Dev Environments](https://www.jetify.com/devbox)
+        - [Fast, Declarative, Reproducible, and Composable Developer Environments - devenv](https://devenv.sh/) (using Nix)
+    - [Why I got rid of all my neovim plugins](https://yobibyte.github.io/vim.html)
+    - [Stop using nix-env](https://stop-using-nix-env.privatevoid.net/)
+- #idea
+    - [When in doubt, Go for a Walk](https://fabiansjournal.bearblog.dev/when-in-doubt-go-for-a-walk/)
+    - [its ok to have a normal job](https://tala.bearblog.dev/its-ok-to-have-a-normal-job/)
+- #sec
+    - [iris](https://github.com/iris-sast/iris)
+        - a neurosymbolic framework that combines LLMs with static analysis for security vulnerability detection
+- #tech/fun
+    - [Useful utilities and toys over DNS](https://www.dns.toys/)
+    - [mawkdown, a lightweight, line-oriented(ish) text markup tool implemented in awk](https://codeberg.org/owl/mawkdown)
+}}
+
+\subtree[2025-07-04]{\mdnote{2025-07-04}{\tags{#cg #duckdb #gpu #news #os #proof #render #rust #wasm #✍️}
+- #web
+    - [Astro is a return to the fundamentals of the web](https://websmith.studio/blog/astro-is-a-developers-dream/)
+    - [Our Fullstack Architecture: Eta, HTMX, and Lit](https://www.lorenstew.art/blog/eta-htmx-lit-stack)
+        - [Eta](https://eta.js.org/): a lightweight, fast, and simple embedded JavaScript templating engine
+            - maybe that's all I need for my writings, I don't really need another SSG, just a templating engine
+        - HTMX: allows us to add dynamic behavior directly to our server-rendered HTML
+        - [Lit](https://lit.dev/): allows us to create encapsulated, reusable components with their own internal state and logic
+    - [Why Semantic HTML Still Matters](https://www.jonoalderson.com/conjecture/why-semantic-html-still-matters/)
+        - Semantic rot wrecks performance
+        - Structure is resilience
+        - Agents are the new users – and they care about structure
+    - [Rethinking DOM from first principles](https://acko.net/blog/html-is-dead-long-live-html/) ([on HN](https://news.ycombinator.com/item?id=44808542))
+        - [A Complete Introduction to Web Components in 2025](https://kinsta.com/blog/web-components/)
+        - [CSS Flexbox: a guide from CSS-tricks](https://css-tricks.com/wp-content/uploads/2022/02/css-flexbox-poster.png)
+        - [About Wiby](https://wiby.me/about/)
+        - DOM
+
+            > The DOM has too many ways to do the same thing, none of them nice.
+
+            > The achilles heel is the DOM's SGML/XML heritage, making everything stringly typed.
+
+            > ARIA (accessibility) is notable, and only because this was what Semantic HTML was supposed to do and didn't.
+
+            > There's this feeling that HTML always had paper-envy, and couldn't quite embrace or fully define its hypertext nature, and did not trust its users to follow clear rules.
+
+            > Nobody really believes in the old gods of progressive enhancement and separating markup from style anymore, not if they make apps.
+
+        - CSS
+
+            > Your mental model of CSS should be applying two passes of constraints, first going outside-in, and then inside-out.
+
+            > To avoid the recursive dependency, you need to isolate the children's contents from the outside, thus making speculative layout trivial.
+
+        - Canvas that skips DOM
+
+            > The actual achilles heel of canvas is that you don't have any real access to system fonts, text layout APIs, or UI utilities.
+
+            -  GPU's HTML-like renderer: [Layout and UI](https://usegpu.live/docs/guides-layout-and-ui)
+
+        - Future
+
+            > Taste matters. Good big systems grow from good small ones, not bad big ones. Maybe if Mozilla hadn't imploded... but alas.
+
+        - [vanilla-extract — Zero-runtime Stylesheets-in-TypeScript.](https://vanilla-extract.style/)
+    - [Understanding SVG Paths](https://www.nan.fyi/svg-paths)
+    - [A Friendly Introduction to SVG](https://www.joshwcomeau.com/svg/friendly-introduction-to-svg/)
+    - [Remove these tags from <head>](https://getoutofmyhead.dev/)
+    - [Client-side epub generation](https://little.webby.press/)
+    - [Bookmarkable by Design: URL-Driven State in HTMX](https://www.lorenstew.art/blog/bookmarkable-by-design-url-state-htmx/)
+    - [On designing application UIs for children](https://shaneosullivan.wordpress.com/2025/07/28/on-designing-for-children/)
+        - most also apply universally
+            - Show, Co-locate and Hint tools
+            - Mistakes should be easy to fix
+            - Simplify, then add delight(ness)
+                - bright colours, sound, tactility, sparkle effects
+            - Maintain visual context when changing state
+    - [Postcard is now open source](https://www.contraption.co/postcard-open-source/)
+        - written in Ruby on Rails
+        - personal site + newsletter
+        - "I no longer expect meaningful revenue from the project. Open-sourcing it feels right. In the age of vibe coding, I think it would be fun to give people a working app they can customize."
+        - [How to host web apps on a Mac Mini](https://www.contraption.co/how-to-host-web-apps-on-a-mac-mini/)
+    - [Rust and WASM for Form Validation](https://sebastian.lauwe.rs/blog/rust-wasm-form-validation/) ([on HN](https://news.ycombinator.com/item?id=44463916))
+        - avoid using Webpack and a whole array of Node-related tools in order to use WASM
+        - form validation shows all the crucial aspects to use WASM instead of JS, like wiring up DOM events to Rust functions, and then reacting to those events
+        - used [Rocket - Simple, Fast, Type-Safe Web Framework for Rust](https://rocket.rs/)
+        - might motivate me to write Rust for web
+    - [HTML-in-Canvas](https://github.com/WICG/html-in-canvas)
+    - [Don't animate height](https://www.granola.ai/blog/dont-animate-height)
+- #idea
+    - [Setting constraint](https://wayan.me/setting-constraint/)
+        - goals provide a structured roadmap to success, thriving in controlled, predictable conditions like training for a marathon or preparing for an exam.
+        - however, life rarely follows a straight line. It’s messy, unpredictable, and full of curveballs.
+        - “I must finish this report,” -> “I won’t check email after 6 PM.”
+        - for business: “we won’t hire until we have 100 users”
+    - [How to Network as an Introvert](https://aginfer.bearblog.dev/how-to-network-as-an-introvert/)
+        - really useful for me to script my reaction ahead of time to be natural
+        - my natural response is abrupt, if any
+- #data-org
+    -[Kepler.gl](https://kepler.gl/) ([on HN](https://news.ycombinator.com/item?id=44464641))
+        - cool 3D map
+        - powered by [deck.gl](https://deck.gl/), a GPU-powered framework for visual exploratory data analysis of large datasets
+        - [mountayaapp/insight-editor: Open source geospatial analysis for large-scale data sets with kepler.gl, DuckDB (and charts coming soon). Alternative to CARTO, ArcGIS Online, Foursquare Studio, Felt, Mango GIS, Maptable.](https://github.com/mountayaapp/insight-editor)
+- #sec
+    - [Nonce CSP bypass using Disk Cache](https://jorianwoltjer.com/blog/p/research/nonce-csp-bypass-using-disk-cache)
+    - [Opening up ‘Zero-Knowledge Proof’ technology](https://blog.google/technology/safety-security/opening-up-zero-knowledge-proof-technology-to-promote-privacy-in-age-assurance/)
+- #game
+    - [I AI-coded a tower defense game and documented the whole process](https://github.com/maciej-trebacz/tower-of-time-game) ([on HN](https://news.ycombinator.com/item?id=44463967))
+    - [Steam has been flooded with games stolen from itch.io](https://www.gamepressure.com/newsroom/steam-is-dealing-with-spam-valves-platform-has-been-flooded-with/zb811a)
+- #forth
+    - [Tiny Great Languages: MOUSE](https://zserge.com/posts/langs-mouse/)
+- #sci
+    - [how did the Solar System form?](https://hoggresearch.blogspot.com/2025/07/how-did-solar-system-form.html)
+    - [Solar+storage is so much farther along than you think](https://www.volts.wtf/p/solarstorage-is-so-much-farther-along) ([on HN](https://news.ycombinator.com/item?id=44637137))
+    - [The most otherworldly, mysterious forms of lightning on Earth](https://www.nationalgeographic.com/science/article/lightning-sprites-transient-luminous-events-thunderstorms) ([on HN](https://news.ycombinator.com/item?id=44480363))
+    - [Lightning on Earth is sparked by a powerful chain reaction from outer space](https://www.livescience.com/physics-mathematics/lightning-on-earth-is-sparked-by-a-powerful-chain-reaction-from-outer-space-simulations-show) ([on HN](https://news.ycombinator.com/item?id=44783729))
+    - [How to grow almost anything](https://howtogrowalmostanything.notion.site/htgaa25)
+    - [Scientists shine a laser through a human head](https://spectrum.ieee.org/optical-brain-imaging) ([on HN](https://news.ycombinator.com/item?id=44785238))
+    - [New colors without shooting lasers into your eyes](https://dynomight.net/colors/)
+    - [New battery has life so long you may never have to recharge](https://www.neowin.net/news/this-amazing-new-battery-has-life-so-long-you-may-never-have-to-recharge/) ([on HN](https://news.ycombinator.com/item?id=44591585))
+    - [Mammals Evolved into Ant Eaters 12 Times Since Dinosaur Age, Study Finds](https://news.njit.edu/mammals-evolved-ant-eaters-12-times-dinosaur-age-study-finds) ([on HN](https://news.ycombinator.com/item?id=44599334))
+    - ['Universal cancer vaccine' trains the immune system to kill any tumor](https://newatlas.com/cancer/universal-cancer-vaccine/) ([on HN](https://news.ycombinator.com/item?id=44618595))
+    - [Earth Has Tilted 31.5 Inches. That Shouldn't Happen](https://www.popularmechanics.com/science/environment/a65515974/why-earth-has-tilted-science/) ([on HN](https://news.ycombinator.com/item?id=44695205))
+    - [More Women Than Expected Are Genetically Men](https://novonordiskfonden.dk/en/news/more-women-than-expected-are-genetically-men/) ([on HN](https://news.ycombinator.com/item?id=44711836))
+}}
+
+\subtree[2025-07-03]{\mdnote{2025-07-03}{\tags{#cg #ebpf #gpu #news #os #simd #software #sqlite #wasm #web}
+- #rust
+    - [Introducing tmux-rs](https://richardscollin.github.io/tmux-rs/)
+        - initially used [c2rust](https://github.com/immunant/c2rust), a tool to migrate C code to (unsafe) Rust
+            - didn't keep constant name
+            - lots of casts polluting the code
+            - still requires looking at the origin C code for rewriting
+        - went with manually translating one file at a time
+            - start with linking rust static lib to C
+            - end with linking c to rust via crate `cc`
+        - fixed interesting bugs
+        - summarized C patterns in Rust
+        - nice quote: "You might be asking: why did you rewrite tmux in Rust? And yeah, I don’t really have a good reason. It’s a hobby project. Like gardening, but with more segfaults."
+        - [skim-rs/skim: Fuzzy Finder in rust!](https://github.com/skim-rs/skim)
+    - [The scary and surprisingly deep rabbit hole of Rust's temporaries](https://taping-memory.dev/temporaries-rabbit-hole/)
+- #ai-slop
+    - [The rise of Whatever](https://eev.ee/blog/2025/07/03/the-rise-of-whatever/)
+    - [EBAF – eBPF Based Ad Firewall](https://github.com/Kazedaa/eBAF)
+        - it's pointed out [on HN](https://news.ycombinator.com/item?id=44456389) that
+            - its doc and code are both AI slop
+            - install script adds sudoers rules to allow ebaf executable to be run with no password
+            - allows any ebpf code to be loaded into the kernel without a sudo password
+            - re-resolves all 1k+ domain names every 600 seconds
+- [Poor Man's Back End-as-a-Service (BaaS), Similar to Firebase/Supabase/Pocketbase](https://github.com/zserge/pennybase)
+    - possibly useful
+- #zig
+    - [async is back](https://www.reddit.com/r/Zig/comments/1lrc865/async_is_back/)
+        - [Zig breaking change – initial Writergate](https://github.com/ziglang/zig/pull/24329) ([on HN](https://news.ycombinator.com/item?id=44461067))
+    - [Zig's New Async I/O](https://kristoff.it/blog/zig-new-async-io/)
+    - [Zig's new Writer](https://www.openmymind.net/Zigs-New-Writer/)
+    - [WebGPU in zig](https://www.reddit.com/r/Zig/comments/1lqrhic/webgpu_in_zig/)
+        - [bronter/wgpu_native_zig: Zig bindings for wgpu-native](https://github.com/bronter/wgpu_native_zig)
+        - [Silverclaw/zig-wgpu-native: Zig bindings for the wgpu-native graphics API - Codeberg.org](https://codeberg.org/Silverclaw/zig-wgpu-native)
+    - [KurtWagner/zlinter: An extendable and customisable Zig linter that is integrated from source into your build.zig.](https://github.com/KurtWagner/zlinter)
+        - I should integrate it with my zig code
+    - [Zig CLI Bible tool for the WEB translation in USFM format](https://github.com/shadyalfred/zbible/)
+    - [Base64 for compression](https://lemire.me/blog/2025/07/03/base64-for-compression/)
+        - assembly used to pass octal escape codes for UTF-8 and expand significantly
+        - GCC 15 now supports base64 encoding of data during compilation, with a new “base64” pseudo-op
+    - [The most mysterious bug I solved at work](https://cadence.moe/blog/2025-07-02-the-most-mysterious-bug-i-solved-at-work)
+        - root cause: copying a hyphen at the end of a text-wrapped line in Microsoft Edge's PDF viewer, you get `0x2` (meaning "start of text") on your clipboard
+    - note that I put most C stuff and low-level technical details under #zig for now
+- #sec
+    - [I scanned all of GitHub's "oops commits" for leaked secrets](https://trufflesecurity.com/blog/guest-post-how-i-scanned-all-of-github-s-oops-commits-for-leaked-secrets) ([on HN](https://news.ycombinator.com/item?id=44452317))
+    - [goHardDrive Leaked Personal Data for Thousands of Customers](https://mtlynch.io/goharddrive-leak/)
+- [Introducing the first alpha of Turso: The next evolution of SQLite](https://turso.tech/blog/turso-the-next-evolution-of-sqlite?ref=console.dev)
+    - rewritten is Rust, with full compatibility and new features
+    - [Antithesis](https://antithesis.com/product/what_is_antithesis/), a continuous reliability platform that autonomously searches for problems in software within a simulated environment, so these problems are deterministic reproducible
+- #agent
+    - [Writing Code Was Never The Bottleneck](https://ordep.dev/posts/writing-code-was-never-the-bottleneck)
+        - agent coding influenced [mentoring young, ambitious, but inexperienced interns](https://news.ycombinator.com/item?id=44453298)
+    - [WASM Agents: AI agents running in the browser](https://blog.mozilla.ai/wasm-agents-ai-agents-running-in-your-browser/) ([on HN](https://news.ycombinator.com/item?id=44461341))
+}}
+
+\subtree[2025-07-02]{\mdnote{2025-07-02}{\tags{#os #sec #web}
+- [Code-GUI bidirectional editing via LSP](https://jamesbvaughan.com/bidirectional-editing/)
+- [OpenBao, the community fork of Vault](https://github.com/openbao/openbao/)
+    - manage secrets, or encrypted passwords, API keys, and other bits of sensitive information in distributed computing setups
+- found [ansic](https://github.com/zeonzip/ansic), crate of the week
+    - a modern, efficient and compile time ansi macro and utilities
+- #nix
+    - [Moving on from Nix](https://carlosbecker.com/posts/bye-nix/)
+        - it's a good thing that I have kept my distance from Nix from the start
+            - mostly because I didn't like the syntax, and I don't want to be locked in
+    - [Three Years of Nix and NixOS: The Good, the Bad, and the Ugly](https://pierrezemb.fr/posts/nixos-good-bad-ugly/)
+    - [You don't have to use Nix to manage your dotfiles](https://jade.fyi/blog/use-nix-less/)
+- [Types of Types: Common to Exotic](https://www.stephendiehl.com/posts/types_of_types/) #lean
+- [Uncloud - tool for deploying and managing containerised applications](https://github.com/psviderski/uncloud)
+    - "the solution for developers who want the flexibility of self-hosted infrastructure without the operational complexity of Kubernetes"
+- [You MUST listen to RFC 2119](https://ericwbailey.website/published/you-must-listen-to-rfc-2119/)
+    - RFC 2119 establishes language around requirement levels, e.g. terms like “MUST”, “MUST NOT”, “SHOULD”, and “SHOULD NOT”
+    - the author hire a voice actor to read 2119 in the most over the top, passive-aggressive way possible
+- [You should delete tests](https://andre.arko.net/2025/06/30/you-should-delete-tests/)
+    - Confidence is the point of writing tests
+    - Tests that decrease confidence
+        - flaky tests that fails at random
+        - few changes of code causing lots of changes to tests
+        - tests that takes too long to run and are skipped from time to time
+- [clamp / median / range](https://dotat.at/@/2025-07-02-cmp.html)
+    - I also prefer chained comparison styleA
+    - fun fact: clamp is median
+}}
+
+\subtree[2025-07-01]{\mdnote{2025-07-01}{\tags{#agent #agent/tasking #codegen #compiler #debugger #duckdb #gpu #haskell #json #llvm}
+- #agent
+    - [Claude Code now supports hooks](https://docs.anthropic.com/en/docs/claude-code/hooks) ([on HN](https://news.ycombinator.com/item?id=44429225))
+        - Claude Code hooks: user-defined shell commands that execute at various points in Claude Code’s lifecycle.
+    - [archgw](https://github.com/katanemo/archgw)
+        - preference-based LLM routing
+        - agent routing and hand-off
+        - guardrails
+        - clarify and convert prompts to tools/API calls
+        - observability
+    - [Interesting prompts found in vscode-copilot-chat](https://simonwillison.net/2025/Jun/30/vscode-copilot-chat/#atom-everything)
+    - [Stream per agent session](https://s2.dev/blog/agent-sessions)
+    - [Using Claude Code to build a GitHub Actions workflow](https://simonwillison.net/2025/Jul/1/claude-code-github-actions/#atom-everything)
+        - recorded by [Descript: Edit Videos & Podcasts Like a Doc | AI Video Editor](https://www.descript.com/?redirect=false)
+            - Direct your AI co-editor to turn your vision into video
+    - [Building a Personal AI Factory](https://www.john-rush.com/posts/ai-20250701.html)
+    - [How large are large language models?](https://gist.github.com/rain-1/cf0419958250d15893d8873682492c3e)
+- [Doing My Day Job on Chimera Linux](https://www.wezm.net/v2/posts/2025/daily-driving-chimera-for-work/)
+    - [Chimera](https://chimera-linux.org/) is built from scratch using novel tooling, approaches, and userland (FreeBSD + Musl C)
+    - [Distrobox](https://distrobox.it/) creates a container that's tightly integrated with the host (break isolation whenever possible)
+- #formal
+    - [From Python Programmer to Distributed Systems Researcher in 10 Years Without a PhD](https://emptysqua.re/blog/from-python-programmer-to-distributed-systems-researcher-in-10-years/)
+        - [Conformance Checking at MongoDB: Testing That Our Code Matches Our TLA+ Specs](https://emptysqua.re/blog/mongodb-conformance-checking/)
+            - use the model-checker to output the entire state graph for the spec. The state space is a DAG, with a finite number of behaviors (paths from an initial state to a final state). There are 30,184 states and 4913 behaviors. Max wrote a Go program to parse the model-checker’s output and write out a C++ unit test for each behavior, 4913 tests in total.
+    - [Rapid Prototyping a Safe, Logless Reconfiguration Protocol for MongoDB with TLA+](https://www.mongodb.com/blog/post/technical/rapid-prototyping-safe-logless-reconfiguration-protocol-mongodb-tla-plus)
+- #zig
+    - [The build cache of Zig](https://alexrios.me/blog/zig-build-cache/)
+        - how the cache is structured
+        - what's included in hash to check modification
+        - incremental compilation: working toward cache per top-level declaration
+        - cross compilation: musl, libc, compiler-rt, libunwind etc. are compiled from source and cached
+    - [Zprof: Cross-allocator profiler](https://github.com/ANDRVV/zprof)
+- #anti-bot
+    - [Cloudflare: Introducing pay per crawl: enabling content owners to charge AI crawlers for access](https://blog.cloudflare.com/introducing-pay-per-crawl/)
+        - [Cloudflare Introduces Default Blocking of A.I. Data Scrapers](https://www.nytimes.com/2025/07/01/technology/cloudflare-ai-data.html)
+    - [The web's broken deal with AI companies](https://dri.es/the-webs-broken-deal-with-ai-companies)
+- [My Database Is My Application: Rethinking Webhook Logic with DuckDB and SQL](https://www.hey.earth/posts/duckdb-webhook-gateway)
+    - DuckDB as an in-process SQL engine capable of acting as a programmable substrate for data transformation at runtime
+    - [manifold](https://github.com/manifold-systems/manifold/)
+        - a Java compiler plugin
+        - use DSL directly and type-safely from Java
+            - SQL, JSON, GraphQL, XML, YAML, CSV, JavaScript
+- #diagram
+    - [OpenFLOW – Quickly make beautiful infrastructure diagrams local to your machine](https://github.com/stan-smith/OpenFLOW)
+        - based on [markmanx/isoflow](https://github.com/markmanx/isoflow)
+    - [mmastrac/stylus: Lightweight status page for home infrastructure](https://github.com/mmastrac/stylus)
+        - architecture and health status
+- #lang
+    - [Reflections on Haskell and Rust](https://academy.fpblock.com/blog/rust-haskell-reflections/)
+    - [The KDL Document Language](https://kdl.dev/)
+        - [From XML to JSON to CBOR](https://cborbook.com/introduction/from_xml_to_json_to_cbor.html)
+            - Concise Binary Object Representation (CBOR)'s evolution optimizes for binary efficiency while maintaining JSON's flexible data model
+                - flexible data model
+                    - intentionally builds upon the JSON data model
+                        - supporting equivalent types (numbers, strings, arrays, maps, booleans, and null)
+                        - adding native support for binary byte strings
+                    - extensibility without version negotiation: forward compatibility
+                    - schema-free decoding: Self-describing data items, parsable without predefined schemas
+                - for Internet of Things (IoT) and constrained environments
+                    - compact code size: minimal code footprint for memory-constrained devices
+                    - reasonable message size: and without complex compression
+        - [Essential and accidental configuration](https://jfmengels.net/essential-and-accidental-configuration/)
+        - [bikeshed, a spec preprocessor](https://github.com/speced/bikeshed)
+            - [Bikeshed-flavored Markdown](https://speced.github.io/bikeshed/#markdown)
+            - related
+                - [awesome-standards: A curated list of technical standards](https://github.com/donBarbos/awesome-standards)
+                - [quickly converting djot to html+mathml](https://www.unix.dog/~yosh/blog/djot-to-html-with-mathml.html)
+                    - [djot](https://djot.net/) is a markdown variant
+                        - it "fixes a few things that make commonmark's syntax complex and difficult to parse efficiently"
+                            - more strict but very reasonable
+                        - it can be converted from markdown by pandoc
+                - [Markdown Monster](https://git.sr.ht/~xigoi/markdown-monster/blob/master/monster.md)
+                    - detect markdown parser variants
+    - [10 features of D that I love](https://bradley.chatha.dev/blog/dlang-propaganda/features-of-d-that-i-love/)
+        - I like
+            - in/out contract
+            - parenthesis omission
+        - seen and liked in other language
+            - like zig's `comptime`: an interpreter for the language which allows a very large amount of D code to be ran at compile time
+            - `baz(bar(foo))` can be rewritten as `foo.bar().baz()`
+    - [Pluto is a unique dialect of Lua with a focus on general-purpose programming](https://github.com/PlutoLang/Pluto) ([on HN](https://news.ycombinator.com/item?id=44429531))
+    - [The Chapel Programming Language](https://chapel-lang.org/)
+        - GPU programming on NVIDIA and AMD
+    - [Onyx Programming Language](https://onyxlang.io/)
+        - inspired from languages like Jai, Odin and Zig
+        - compiles to WebAssembly, run on Wasmer
+    - [Helix language](https://github.com/helixlang/helix-lang)
+- #rust
+    - [Exception handling in rustc_codegen_cranelift](https://tweedegolf.nl/en/blog/157/exception-handling-in-rustc-codegen-cranelift)
+        - introduces ["landing pad" style expcetion handling](https://llvm.org/docs/LangRef.html#landingpad-instruction)
+            - see also [Lele's Memo: Landingpad](https://cnlelema.github.io/memo/en/compilers/llvm/exceptions/landingpad/)
+        - unwinding ABI crash course
+            - personality function: language-specific data format during unwinding
+        - the appendix provided a gdb script for reproducing the debugger session
+    - [Alternative Blanket Implementations for a Single Rust Trait](https://www.greyblake.com/blog/alternative-blanket-implementations-for-single-rust-trait/)
+    - [It's Types All the Way Down - Rust CLI with Clap](https://tucson-josh.com/posts/rust-clap-cli/) ([on HN](https://news.ycombinator.com/item?id=44429695))
+- #agent/tasking
+    - [MrLesk/Backlog.md: Backlog.md - A tool for managing project collaboration between humans and AI Agents in a git ecosystem](https://github.com/MrLesk/Backlog.md)
+    - [Vibe Kanban - Orchestrate AI Coding Agents](https://www.vibekanban.com/)
+    - [VibeTunnel - access terminal from the browser to command agents](https://github.com/amantus-ai/vibetunnel)
+- #misc
+    - [Melbourne man discovers extensive model train network underneath house](https://www.sbs.com.au/news/article/i-was-shocked-melbourne-mans-unbelievable-find-after-buying-house/m4sksfer8) ([on HN](https://news.ycombinator.com/item?id=44429182))
+    - [Feasibility study of a mission to Sedna - Nuclear propulsion and solar sailing](https://arxiv.org/abs/2506.17732)
+    - [GPEmu: A GPU emulator for rapid, low-cost deep learning prototyping [pdf]](https://vldb.org/pvldb/vol18/p1919-wang.pdf) ([on HN](https://news.ycombinator.com/item?id=44428674))
+    - [Converting a large mathematical software package written in C++ to C++20 modules](https://arxiv.org/abs/2506.21654) ([on HN](https://news.ycombinator.com/item?id=44433899))
+}}
+
+\subtree[2025-06-30]{\mdnote{2025-06-30}{\tags{#agent #json #lean #news #os}
+- [Agile Was Never Your Problem](https://thecynical.dev/posts/agile-was-never-your-problem/)
+    - lean process
+        - minimal structure, shorten feedback loop, allowing changing direction quickly
+        - enough time to write proper tests and refactor without begging
+        - monitoring and alerting built into the work, not bolted on later
+        - developers talk because they’re solving problems together, not because it’s time for standup meeting
+    - flexible timing
+        - roadmaps should not be commitments
+        - feedback loops should not be performance metrics
+        - planning should not become forecasting
+- #context
+    - [Tools: Code Is All You Need](https://lucumr.pocoo.org/2025/7/3/tools/)
+        - [The problem with MCP is that it's not composeable.](https://news.ycombinator.com/item?id=44475726)
+        - [Mandelbrot in x86 Assembly by Claude](https://simonwillison.net/2025/Jul/2/mandelbrot-in-x86-assembly-by-claude/)
+            - demonstrates simple usage of container for cross-arch assembly debugging
+            - I would like to add a yard for assmebly in native-land
+    - [How to Fix Your Context](https://simonwillison.net/2025/Jun/29/how-to-fix-your-context/)
+        - covers some attempts to improve MCP tool selection if it can't be avoided
+        - context rot: poisoning, distraction, confusion, clash
+        - solution: quarantine, pruning, offloading
+    - [The new skill in AI is not prompting, it's context engineering](https://www.philschmid.de/context-engineering) ([on HN](https://news.ycombinator.com/item?id=44427757))
+    - [Taming agentic engineering - Prompts are code, .json/.md files are state](https://mariozechner.at/posts/2025-06-02-prompts-are-code/)
+    - [Context Engineering Guide](https://nlp.elvissaravia.com/p/context-engineering-guide)
+- #sec
+    - [Beyond the Hook: A Technical Deep Dive into Modern Phishing Methodologies](https://blog.quarkslab.com/./technical-dive-into-modern-phishing.html)
+        - amazed by Browser-in-the-Browser
+    - [CVE-2025-32463 Vulnerability Advisory: Sudo chroot Elevation of Privilege](https://www.stratascale.com/vulnerability-alert-CVE-2025-32463-sudo-chroot)
+- [NativeJIT: A C++ expression –> x64 JIT (2018)](https://github.com/BitFunnel/NativeJIT)
+    - I'm strongly confused about the use cases without operator overloading, except their own
+- [SQL Noir: Learn SQL by Solving Crimes](https://www.sqlnoir.com/)
+    - fun to play, but the challenge should be using the SQL to output the answer
+}}
+  }
+}

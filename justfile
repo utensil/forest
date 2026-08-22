@@ -9,6 +9,12 @@ default:
 new +PARAMS:
     ./new.sh {{PARAMS}}
 
+extract-week WEEK:
+    uv run extract_week.py {{WEEK}}
+
+extract-all-weeks:
+    uv run extract_week.py --all
+
 hn +PARAMS:
     hx `just new {{PARAMS}}`
 
