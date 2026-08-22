@@ -26,8 +26,10 @@ AFTER = "2025-09-30"
 EXPECTED_SOURCE = 435
 EXPECTED_BASELINE_EXCLUSIONS = 3
 EXPECTED_OUTPUT = 432
-MAX_DAILY = 15
-MIN_DAILY = 10
+MAX_INITIAL_DAILY = 15
+MIN_RETAINED_DAILY = 4
+EXPECTED_DATES = 36
+EXPECTED_WEEKS = 20
 ROOT_TREE = Path("trees/uts-0018.tree")
 TREES_DIR = Path("trees")
 ROOT_2025 = "\\subtree[2025]{"
@@ -191,15 +193,31 @@ def forest_urls() -> set[str]:
     return urls
 
 
+def merge_sparse_dates(days: dict[str, list[Link]]) -> dict[str, list[Link]]:
+    """Fold every 1–3-link date into the nearest earlier retained date."""
+
+    merged: dict[str, list[Link]] = {}
+    previous: str | None = None
+    for day, links in sorted(days.items()):
+        if len(links) < MIN_RETAINED_DAILY:
+            if previous is None:
+                raise ValueError(f"cannot merge the first Raindrop date: {day}")
+            merged[previous].extend(links)
+        else:
+            merged[day] = list(links)
+            previous = day
+    return merged
+
+
 def allocate(links: list[Link]) -> dict[str, list[Link]]:
-    """Merge sparse adjacent receipts; spread dense week batches to 10–15 links."""
+    """Spread receipt batches, then fold sparse dates into prior collections."""
 
     by_week: dict[str, list[Link]] = defaultdict(list)
     for link in links:
         by_week[iso_week(link.source_date)].append(link)
     output: dict[str, list[Link]] = defaultdict(list)
     for week, batch in sorted(by_week.items()):
-        chunks = (len(batch) + MAX_DAILY - 1) // MAX_DAILY
+        chunks = (len(batch) + MAX_INITIAL_DAILY - 1) // MAX_INITIAL_DAILY
         base, remainder = divmod(len(batch), chunks)
         source_days = sorted({date.fromisoformat(link.source_date) for link in batch})
         if chunks == 1:
@@ -219,48 +237,41 @@ def allocate(links: list[Link]) -> dict[str, list[Link]]:
             size = base + (1 if index < remainder else 0)
             output[target.isoformat()].extend(ordered[cursor : cursor + size])
             cursor += size
-    counts = [len(items) for items in output.values()]
-    if sum(counts) != EXPECTED_OUTPUT or max(counts) > MAX_DAILY:
-        raise ValueError("allocation no longer meets the Raindrop count/cap invariants")
-    return dict(sorted(output.items()))
+    initial_counts = [len(items) for items in output.values()]
+    if sum(initial_counts) != EXPECTED_OUTPUT or max(initial_counts) > MAX_INITIAL_DAILY:
+        raise ValueError("initial allocation no longer meets the Raindrop count/cap invariants")
+    merged = merge_sparse_dates(dict(sorted(output.items())))
+    if (
+        sum(len(items) for items in merged.values()) != EXPECTED_OUTPUT
+        or len(merged) != EXPECTED_DATES
+        or any(len(items) < MIN_RETAINED_DAILY for items in merged.values())
+    ):
+        raise ValueError("sparse-date merge no longer meets the Raindrop invariants")
+    return merged
 
 
-def tag_tree(links: list[Link]) -> dict[str, object]:
-    root: dict[str, object] = {"children": {}, "links": []}
-    for link in sorted(links, key=lambda item: (item.tags, normalise_url(item.url))):
-        node = root
-        for raw_tag in link.tags:
-            # Raindrop's slash-bearing labels are atomic tags, not a hierarchy.
-            children = node["children"]
-            assert isinstance(children, dict)
-            node = children.setdefault(raw_tag, {"children": {}, "links": []})
-        leaves = node["links"]
-        assert isinstance(leaves, list)
-        leaves.append(link)
-    return root
+def render_tag_groups(links: list[Link]) -> list[str]:
+    """Render each complete tag set as one established top-level tag bullet."""
 
-
-def render_tag_tree(node: dict[str, object], depth: int) -> list[str]:
+    groups: dict[tuple[str, ...], list[Link]] = defaultdict(list)
+    for link in links:
+        groups[link.tags].append(link)
     lines: list[str] = []
-    children = node["children"]
-    assert isinstance(children, dict)
-    for tag in sorted(children):
-        lines.append(f"{'    ' * depth}- #{tag}")
-        child = children[tag]
-        assert isinstance(child, dict)
-        lines.extend(render_tag_tree(child, depth + 1))
-    leaves = node["links"]
-    assert isinstance(leaves, list)
-    for link in leaves:
-        assert isinstance(link, Link)
-        lines.append(f"{'    ' * depth}- [{escape_title(link.title, link.url)}]({link.url})")
+    for tags, grouped_links in sorted(groups.items()):
+        if tags:
+            lines.append("- " + " ".join(f"#{tag}" for tag in tags))
+            prefix = "    "
+        else:
+            prefix = ""
+        for link in sorted(grouped_links, key=lambda item: normalise_url(item.url)):
+            lines.append(f"{prefix}- [{escape_title(link.title, link.url)}]({link.url})")
     return lines
 
 
 def weekly_tree(week: str, days: dict[str, list[Link]]) -> str:
     entries = []
     for day, links in sorted(days.items()):
-        body = "\n".join(render_tag_tree(tag_tree(links), 0))
+        body = "\n".join(render_tag_groups(links))
         entries.append(f"\\subtree[{day}]{{\\mdnote{{{day}}}{{\n{body}\n}}}}")
     return (
         "\\import{macros}\n"
@@ -314,6 +325,8 @@ def plan(cog_land: Path) -> tuple[dict[Path, str], str, dict[str, list[Link]]]:
     for day, links_for_day in allocated.items():
         by_week[iso_week(day)][day].extend(links_for_day)
     trees = {TREES_DIR / f"{week}.tree": weekly_tree(week, days) for week, days in by_week.items()}
+    if len(trees) != EXPECTED_WEEKS:
+        raise ValueError("sparse-date merge no longer produces the expected weekly trees")
     first_days = {week: min(days) for week, days in by_week.items()}
     year_2025, year_2026 = root_sections(sorted(by_week), first_days)
     return trees, (year_2025, year_2026), allocated
@@ -349,9 +362,14 @@ def main() -> int:
         raise ValueError("live diary root no longer has the expected 2025 arrangement")
     expected = expected_root(root, year_2025, year_2026)
     stale = [path for path, content in trees.items() if not path.is_file() or path.read_text(encoding="utf-8") != content]
+    obsolete = [
+        path
+        for path in TREES_DIR.glob("????-W??.tree")
+        if path not in trees and owned(path, path.stem)
+    ]
     if args.distribution:
         print(distribution(allocated))
-    if args.check and (stale or root != expected):
+    if args.check and (stale or obsolete or root != expected):
         raise ValueError("--check found a non-current Raindrop import")
     if not args.check and not args.distribution:
         if root != expected and "\\subtree[2026]{" in root and "% Raindrop link intake:" not in root:
@@ -359,8 +377,12 @@ def main() -> int:
         for path, content in trees.items():
             if path.exists() and path.read_text(encoding="utf-8") != content and not (args.refresh and owned(path, path.stem)):
                 raise ValueError(f"refusing to overwrite a non-current weekly tree: {path}")
+        if obsolete and not args.refresh:
+            raise ValueError("refusing to remove generated weekly trees without --refresh")
         for path, content in trees.items():
             path.write_text(content, encoding="utf-8")
+        for path in obsolete:
+            path.unlink()
         ROOT_TREE.write_text(expected, encoding="utf-8")
     print(f"{'validated' if args.check else 'planned' if args.distribution else 'imported'} {EXPECTED_OUTPUT} Raindrop links into {len(trees)} weekly trees and {len(allocated)} dates")
     return 0
