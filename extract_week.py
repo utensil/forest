@@ -133,7 +133,7 @@ def weekly_tree(week: str, monday: date, entries: list[Entry]) -> str:
         "  \\put\\transclude/toc{false}\n"
         "  \\put\\transclude/expanded{false}\n"
         f"  \\subtree[{week}-links]{{\n"
-        f"\\title{{🔗 {week}}}\n\n"
+        "\\title{🔗}\n\n"
         "    \\scope{\n"
         "      \\put\\transclude/expanded{true}\n"
         f"{body}\n"
@@ -191,8 +191,11 @@ def normalize_week_tree(text: str, week: str) -> str:
         f"\\title{{Week {week_number}, {year}}}", f"\\title{{{week}}}", 1
     )
     old_title = f"\\title{{Link selections ({week})}}"
-    new_title = f"\\title{{🔗 {week}}}"
-    normalized = normalized.replace(old_title, new_title)
+    old_stemmed_title = f"\\title{{🔗 {week}}}"
+    new_title = "\\title{🔗}"
+    normalized = normalized.replace(old_title, new_title).replace(
+        old_stemmed_title, new_title
+    )
 
     scope_marker = "    \\scope{\n      \\put\\transclude/expanded{true}\n"
     if scope_marker in normalized:
@@ -250,7 +253,7 @@ def validate_extracted(
         raise ValueError("weekly tree does not contain the required stem title")
     if f"\\subtree[{week}-links]{{" not in week_tree:
         raise ValueError("weekly tree does not contain its in-file link-selection subtree")
-    if f"\\title{{🔗 {week}}}" not in week_tree:
+    if "\\title{🔗}" not in week_tree:
         raise ValueError("weekly tree does not contain the required link-selection title")
     if "    \\scope{\n      \\put\\transclude/expanded{true}\n" not in week_tree:
         raise ValueError("weekly link-selection subtree does not expand its daily children")
