@@ -124,16 +124,29 @@ def monday(week: str) -> date:
 
 
 def escape_title(title: str, url: str) -> str:
-    """Use character references where source punctuation would close markup."""
+    """Preserve source titles verbatim inside a native Forester literal."""
 
     text = title or url
-    for character, entity in (
-        ("&", "&amp;"), ("\\", "&#92;"), ("{", "&#123;"), ("}", "&#125;"),
-        ("[", "&#91;"), ("]", "&#93;"), ("(", "&#40;"), (")", "&#41;"),
-        ('"', "&quot;"), ("%", "&#37;"),
-    ):
-        text = text.replace(character, entity)
-    return text
+    if not any(character in text for character in "\\{}%&[]"):
+        return text
+    if ">>>" in text:
+        raise ValueError("Raindrop title contains the Forester verbatim delimiter")
+    return f"\\verb>>>|{text}>>>"
+
+
+def source_title(value: str) -> str:
+    """Decode quoted frontmatter titles without inventing display text."""
+
+    raw = value.strip()
+    if raw.startswith('"') and raw.endswith('"'):
+        try:
+            parsed = ast.literal_eval(raw)
+        except (SyntaxError, ValueError):
+            pass
+        else:
+            if isinstance(parsed, str):
+                return parsed
+    return raw.strip('"')
 
 
 def load_links(cog_land: Path) -> list[Link]:
@@ -155,7 +168,7 @@ def load_links(cog_land: Path) -> list[Link]:
             tags = EMPTY_TAGS.get(relative, ())
         # This stale-bot clip is deliberately retained in the source audit so
         # that the baseline URL check can exclude it.  It is never rendered.
-        title = metadata.get("title", "").strip().strip('"')
+        title = source_title(metadata.get("title", ""))
         if has_non_latin_letters(title):
             raise ValueError(f"non-Latin-letter Raindrop title requires review: {relative}")
         links.append(Link(relative, url, title, source_date, tags))
