@@ -16,9 +16,10 @@ The extractor moves dated ``\\subtree[YYYY-MM-DD]{...}`` daily blocks from
 logical ``YYYY-Www-links`` subtree.  The root transcludes only the weekly tree.
 
 The operation is deterministic and idempotent. A week may be partial when the
-source diary contains only some of its dates. Re-running after a successful
-extraction validates the generated files without changing them; ``--check``
-makes that validation explicit.
+source diary contains only some of its dates. The link collection is collapsed
+as one boundary, while its dated daily children are expanded once that boundary
+is opened. Re-running after a successful extraction validates the generated
+files without changing them; ``--check`` makes that validation explicit.
 """
 
 from __future__ import annotations
@@ -121,19 +122,22 @@ def repair_spanning_daily_entries(text: str) -> tuple[str, int]:
 
 
 def weekly_tree(week: str, monday: date, entries: list[Entry]) -> str:
-    """Build one weekly file with native prose and an in-file link subtree."""
+    """Build one weekly file with one collapsed collection and open daily children."""
 
     body = "\n\n".join(entry.source for entry in entries)
     return (
         "\\import{macros}\n\n"
-        f"\\title{{Week {monday.isocalendar().week}, {monday.isocalendar().year}}}\n"
+        f"\\title{{{week}}}\n"
         f"\\date{{{monday.isoformat()}}}\n\n"
         "\\scope{\n"
         "  \\put\\transclude/toc{false}\n"
         "  \\put\\transclude/expanded{false}\n"
         f"  \\subtree[{week}-links]{{\n"
-        f"\\title{{Link selections ({week})}}\n\n"
+        f"\\title{{🔗 {week}}}\n\n"
+        "    \\scope{\n"
+        "      \\put\\transclude/expanded{true}\n"
         f"{body}\n"
+        "    }\n"
         "  }\n"
         "}\n"
     )
@@ -178,10 +182,33 @@ def select_week_entries(entries: list[Entry], week_days: tuple[date, ...]) -> li
     return selected
 
 
-def normalize_week_tree(text: str) -> str:
-    """Remove the retired weekly-description template without touching prose."""
+def normalize_week_tree(text: str, week: str) -> str:
+    """Migrate generated collection chrome without touching daily or weekly prose."""
 
-    return text.replace(TEMPLATE_DESCRIPTION, "")
+    normalized = text.replace(TEMPLATE_DESCRIPTION, "")
+    year, week_number, _ = parse_week(week)
+    normalized = normalized.replace(
+        f"\\title{{Week {week_number}, {year}}}", f"\\title{{{week}}}", 1
+    )
+    old_title = f"\\title{{Link selections ({week})}}"
+    new_title = f"\\title{{🔗 {week}}}"
+    normalized = normalized.replace(old_title, new_title)
+
+    scope_marker = "    \\scope{\n      \\put\\transclude/expanded{true}\n"
+    if scope_marker in normalized:
+        return normalized
+
+    subtree_marker = f"  \\subtree[{week}-links]{{"
+    subtree_start = normalized.find(subtree_marker)
+    title_marker = f"{new_title}\n\n"
+    title_start = normalized.find(title_marker, subtree_start)
+    if subtree_start == -1 or title_start == -1:
+        raise ValueError(f"{week}.tree does not have the generated link-collection structure")
+    subtree_close = matching_brace(normalized, subtree_start + len(subtree_marker) - 1)
+    after_title = title_start + len(title_marker)
+    normalized = normalized[:after_title] + scope_marker + normalized[after_title:]
+    subtree_close += len(scope_marker)
+    return normalized[:subtree_close] + "    }\n" + normalized[subtree_close:]
 
 
 def replace_entries_with_weeknote(root: str, entries: list[Entry], week: str) -> str:
@@ -219,10 +246,14 @@ def validate_extracted(
     root_days = {entry.day for entry in find_entries(root)}
     if root_days.intersection(week_days):
         raise ValueError("root still contains extracted daily entries")
+    if f"\\title{{{week}}}" not in week_tree:
+        raise ValueError("weekly tree does not contain the required stem title")
     if f"\\subtree[{week}-links]{{" not in week_tree:
         raise ValueError("weekly tree does not contain its in-file link-selection subtree")
-    if f"\\title{{Link selections ({week})}}" not in week_tree:
+    if f"\\title{{🔗 {week}}}" not in week_tree:
         raise ValueError("weekly tree does not contain the required link-selection title")
+    if "    \\scope{\n      \\put\\transclude/expanded{true}\n" not in week_tree:
+        raise ValueError("weekly link-selection subtree does not expand its daily children")
     found = find_entries(week_tree)
     if not found or any(entry.day not in set(week_days) for entry in found):
         raise ValueError("weekly link-selection subtree contains invalid daily entries")
@@ -265,9 +296,9 @@ def extract_all(source: Path, trees_dir: Path, check: bool) -> int:
     for path in existing_paths:
         _, _, week_days = parse_week(path.stem)
         existing = path.read_text(encoding="utf-8")
-        normalized = normalize_week_tree(existing)
+        normalized = normalize_week_tree(existing, path.stem)
         if check and normalized != existing:
-            raise ValueError(f"{path.name} still contains the retired description template")
+            raise ValueError(f"{path.name} still has retired weekly collection chrome")
         validate_extracted(root, normalized, path.stem, week_days)
         if normalized != existing:
             planned_writes[path] = normalized
@@ -355,13 +386,13 @@ def main() -> int:
 
         if week_path.exists():
             existing = week_path.read_text(encoding="utf-8")
-            normalized = normalize_week_tree(existing)
+            normalized = normalize_week_tree(existing, args.week)
             if args.check and normalized != existing:
-                raise ValueError("weekly tree still contains the retired description template")
+                raise ValueError("weekly tree still has retired collection chrome")
             validate_extracted(root, normalized, args.week, week_days)
             if normalized != existing:
                 write_text(week_path, normalized)
-                print(f"normalized {args.week}: removed retired description template")
+                print(f"normalized {args.week}: updated generated collection chrome")
                 return 0
             print(f"validated {args.week}: already extracted")
             return 0

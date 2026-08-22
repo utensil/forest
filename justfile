@@ -15,6 +15,9 @@ extract-week WEEK:
 extract-all-weeks:
     uv run extract_week.py --all
 
+weeknote-candidates +PARAMS:
+    uv run weeknote_candidates.py {{PARAMS}}
+
 hn +PARAMS:
     hx `just new {{PARAMS}}`
 
