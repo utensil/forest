@@ -15,6 +15,12 @@ extract-week WEEK:
 extract-all-weeks:
     uv run extract_week.py --all
 
+import-raindrop-links COG_LAND *PARAMS:
+    uv run import_raindrop_links.py --cog-land {{COG_LAND}} {{PARAMS}}
+
+check-raindrop-links COG_LAND:
+    uv run import_raindrop_links.py --cog-land {{COG_LAND}} --check
+
 weeknote-candidates +PARAMS:
     uv run weeknote_candidates.py {{PARAMS}}
 
