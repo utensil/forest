@@ -188,7 +188,7 @@ def allocate(links: list[Link]) -> dict[str, list[Link]]:
             candidates = [week_start + timedelta(days=offset) for offset in range(7) if week_start + timedelta(days=offset) not in source_days]
             candidates.sort(key=lambda day: (min(abs((day - source).days) for source in source_days), -day.toordinal()))
             targets = sorted(source_days + candidates[: chunks - len(source_days)])
-        ordered = sorted(batch, key=lambda link: (tuple(tag.split("/")[0] for tag in link.tags), normalise_url(link.url)))
+        ordered = sorted(batch, key=lambda link: (link.tags, normalise_url(link.url)))
         cursor = 0
         for index, target in enumerate(targets):
             size = base + (1 if index < remainder else 0)
@@ -205,10 +205,10 @@ def tag_tree(links: list[Link]) -> dict[str, object]:
     for link in sorted(links, key=lambda item: (item.tags, normalise_url(item.url))):
         node = root
         for raw_tag in link.tags:
-            for tag in raw_tag.split("/"):
-                children = node["children"]
-                assert isinstance(children, dict)
-                node = children.setdefault(tag, {"children": {}, "links": []})
+            # Raindrop's slash-bearing labels are atomic tags, not a hierarchy.
+            children = node["children"]
+            assert isinstance(children, dict)
+            node = children.setdefault(raw_tag, {"children": {}, "links": []})
         leaves = node["links"]
         assert isinstance(leaves, list)
         leaves.append(link)
@@ -303,7 +303,11 @@ def distribution(allocated: dict[str, list[Link]]) -> str:
 
 def owned(path: Path, week: str) -> bool:
     text = path.read_text(encoding="utf-8")
-    return text.startswith("\\import{macros}\n\n" + f"\\title{{{week}}}\n") and f"\\subtree[{week}-links]{{" in text and "\\title{🔗}" in text
+    return (
+        text.startswith("\\import{macros}\n" + GENERATED_MARKER + "\n\n" + f"\\title{{{week}}}\n")
+        and f"\\subtree[{week}-links]{{" in text
+        and "\\title{🔗}" in text
+    )
 
 
 def main() -> int:

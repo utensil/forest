@@ -21,6 +21,9 @@ import-raindrop-links COG_LAND *PARAMS:
 check-raindrop-links COG_LAND:
     uv run import_raindrop_links.py --cog-land {{COG_LAND}} --check
 
+refresh-raindrop-links COG_LAND:
+    uv run import_raindrop_links.py --cog-land {{COG_LAND}} --refresh
+
 weeknote-candidates +PARAMS:
     uv run weeknote_candidates.py {{PARAMS}}
 
