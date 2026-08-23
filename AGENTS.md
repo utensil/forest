@@ -1,6 +1,6 @@
 # Agent Instructions
 
-*Last updated 2026-02-04*
+*Last updated 2026-08-23*
 
 > **Purpose** – This file is the onboarding manual[^1] for every AI assistant (Claude, Amp, Codex, Amazon Q, OpenCode, etc.) and every human who edits this repository.
 > It encodes our coding standards, guard-rails, and workflow tricks so the *human 30 %*[^2] (architecture, tests, domain judgment) stays in human hands.
@@ -47,6 +47,12 @@ ALWAYS cite the rules which have been actually followed during the reply at the 
 
 - ✅ **Should**: After editing files, before pausing and asking for further instructions, commit changes to version control system. ALWAYS commit per section "Commit discipline" below. ALL commits MUST include [AGENT] tag.
 - ❌ **Must NOT**: Commit files that are not directly related to current task. Only commit files intentionally modified as part of the specific work requested. Do not commit unrelated changes, even if they exist in working directory.
+
+### G-notes: Keep note suites structurally coherent
+
+- ✅ **Should**: For every note suite whose root is tagged both `math` and `notes`, preserve stable tree addresses, keep each hierarchy level uniform, use stable cross-references, and inspect the rendered result as described in "Note-suite discipline" below.
+- ✅ **Should**: Flag existing violations; refactors whose purpose is to bring existing suites into compliance require a human-gated PR.
+- ❌ **Must NOT**: Mix section or subsection trees with taxon cards as siblings under one parent tree.
 
 ### G-task: Follow backlog workflow for structured tasks
 
@@ -145,7 +151,17 @@ Disciplines for humans:
 
 *   **Review AI-generated code**: Never merge code you don't understand.
 
-## 4. Writing task automation scripts
+## 4. Note-suite discipline
+
+- **Scope**: These rules apply to every note suite whose root is tagged both `math` and `notes`, including draft and agent-draft suites. New or edited suite content must follow them. Report existing violations, but do not refactor an existing suite solely for compliance without a human-gated PR.
+- **Use stable addressed structure**: A suite root transcludes addressed top-level section trees. Give any reader-facing section or subsection that may be linked or moved its own tree address. Use anonymous subtrees only for deliberately local, unstable subdivisions.
+- **Keep each level homogeneous**: A parent tree may transclude either titled section or subsection trees, or taxon cards, never both. If it has subsection children, every child at that level must be a subsection. Only a leaf section, with no subsection children, may directly transclude taxon cards.
+- **Separate discussion from statements**: Definitions, lemmas, theorems, proofs, examples, and genuine mathematical remarks may be taxon cards. Put expository, design, and implementation discussion in titled non-taxon section trees. When both belong under one larger section, give the statement its own leaf subsection; do not place a taxon card beside a discussion tree.
+- **Keep internal references stable**: Link to tree addresses rather than writing rendered section numbers. Do not add reciprocal `related` links for transclusions; they duplicate the suite graph and backmatter.
+- **Mark agent-authored trees**: Every agent-authored tree in a suite must carry `\meta{agent-authored}{true}` so the public badge and draft queries remain accurate.
+- **Check the rendered hierarchy**: Build both the site and the PDF, then inspect the table of contents, heading and taxon numbering, transclusion order, and Related or Backlinks panels.
+
+## 5. Writing task automation scripts
 
 When implementing complex data processing or automation tasks, create standalone Python scripts that integrate with the project workflow.
 
@@ -217,7 +233,7 @@ just build
 
 ---
 
-## 5. Meta: Guidelines for updating AGENT.md files
+## 6. Meta: Guidelines for updating AGENT.md files
 
 This file should be updated when:
 - New major features or tools are added to the project
