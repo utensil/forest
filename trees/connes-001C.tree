@@ -1,0 +1,35 @@
+\import{spin-macros}
+\meta{agent-authored}{true}
+
+\tag{connes}
+\tag{lean}
+\tag{operator-algebra}
+\tag{proof-engineering}
+\title{Normality of the factor isomorphism}
+\lean/connes{Connes.IsProjectionSupremum,Connes.StarAlgEquiv.isNormal}
+
+\p{Zhou's Proposition 3.4 identifies the two group factors by combining
+Fourier transform with the fiber shear
+\citet{Proposition 3.4}{zhou2026icc}. In Lean, the resulting star-algebra
+equivalence must also be proved normal. The formalization expresses this by
+requiring the equivalence and its inverse to preserve suprema of projections.}
+
+\p{The definition
+\leanref/connes{Connes.IsProjectionSupremum}
+says that #{p} is a projection, every member of #{S} is a projection below
+#{p}, and #{p} lies below every projection that is an upper bound for #{S}.
+The last condition ranges only over projections, rather than all upper bounds
+as in the stronger ambient predicate \code{IsLUB}.}
+
+\p{For star subalgebras of bounded operators, the usual order on projections
+is characterized by #{p\leq q\iff pq=p}. A star-algebra equivalence preserves
+multiplication, so
+\leanref/connes{Connes.IsProjectionSupremum.map_starAlgEquiv}
+uses this characterization to preserve projection suprema. Applying the same
+argument to the equivalence and its inverse gives
+\leanref/connes{Connes.StarAlgEquiv.isNormal}.}
+
+\p{This refactor leaves the definitions of projection supremum and normal
+star-algebra equivalence independent of bounded operators. The operator order
+appears only in the theorem that applies those definitions to the group
+factors in \ref{connes-0007}.}
