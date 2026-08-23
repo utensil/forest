@@ -7,21 +7,21 @@
 \title{Structure forgetting and equivalence reuse}
 \lean/connes{Connes.CrossedProduct.EquivariantHaarHomeomorph,Connes.CrossedProduct.continuousCrossedClosure_mem_iff}
 
-\p{\strong{Forget structure after it has served its consumer.}
-The Section 3 shear is packaged as an equivariant measure-preserving
-homeomorphism because pullback must preserve continuous coefficients. Its
-canonical projection to an equivariant measurable equivalence is what the full
-#{L^\infty} crossed-product transport consumes.}
+\p{The formalization uses the topology of the fiber shear at an intermediate
+step. It defines the shear as an equivariant measure-preserving homeomorphism
+because pullback must preserve continuous coefficients. Once this density
+argument is complete, the crossed-product theorem uses only the underlying
+equivariant measurable equivalence.}
 
-\p{This one-way forgetting records
-both facts accurately: Zhou's factor argument does not need an additive map,
-while the Lean density bridge legitimately uses the continuity proved in
+\p{Zhou's shear need not be additive, so the Lean proof does not treat it as a
+compact-group automorphism. Continuity is retained for the density argument
+and then forgotten. This matches the two roles separated in
 \citet{Proposition 3.2 and Remark 3.3}{zhou2026icc}.}
 
-\p{\strong{Prefer library equivalences to pointwise cancellation.}
-Mathlib already supplies continuous pullback as a star-algebra equivalence, so
-its surjectivity gives the reverse generator inclusion without a custom
-involutivity proof. Likewise, the inverse law for conjugation by a linear
-isometry equivalence replaces a pointwise operator calculation. These
-replacements shorten the proof while exposing the actual mathematical reason:
-both steps are transport along equivalences.}
+\p{A second lesson came from the reverse inclusion between the generated
+operator algebras. Mathlib's continuous pullback is already a star-algebra
+equivalence, so its surjectivity proves that inclusion without a separate
+involutivity calculation. Similarly, the inverse law for conjugation by a
+linear isometry equivalence replaces a pointwise operator calculation. In
+both cases, an equality that first looked computational follows from the
+inverse laws of an equivalence.}

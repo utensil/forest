@@ -1,0 +1,34 @@
+\import{spin-macros}
+\meta{agent-authored}{true}
+
+\tag{connes}
+\tag{lean}
+\tag{operator-algebra}
+\tag{proof-engineering}
+\title{Four conjugation identities}
+
+\p{To identify the generated von Neumann algebras, Lean checks what each
+chosen unitary does to the regular-representation generators. There is one
+calculation for the abelian kernel and one for the acting group in each of
+Zhou's two group constructions, giving four identities in all.}
+
+\p{For the first group, see the kernel
+\leanref/connes/as{calculation}{Connes.PaperGroupFactor.paperGroupFactorUnitaryOne_conj_inl}
+and the acting-group
+\leanref/connes/as{calculation}{Connes.PaperGroupQuotient.paperGroupFactorUnitaryOne_conj_inr}.
+For the second group, see the corresponding kernel
+\leanref/connes/as{calculation}{Connes.PaperGroupFactor.paperGroupFactorUnitaryTwo_conj_inl}
+and acting-group
+\leanref/connes/as{calculation}{Connes.PaperGroupQuotient.paperGroupFactorUnitaryTwo_conj_inr}.}
+
+\p{These calculations spell out a step summarized by the Fourier and
+crossed-product identifications in
+\citet{Proposition 3.4}{zhou2026icc}. They carry the generators through the
+Fubini equivalence for a semidirect product and then through the Fourier
+unitary.}
+
+\p{Most explicit heartbeat settings disappeared during the later proof
+cleanup. These four declarations still require a larger elaboration limit
+because Lean must simplify nested equivalences and pointwise operator
+formulas. The limit controls elaboration time; it adds no mathematical
+assumption.}

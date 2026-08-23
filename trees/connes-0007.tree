@@ -7,7 +7,7 @@
 \tag{von-neumann-algebra}
 \taxon{Theorem}
 \title{Spatial implementation of the factor equivalence}
-\lean/connes{Connes.FactorWitness.SpatialWitness,Connes.FactorWitness.tracialEquiv_of_spatialWitness,Connes.PaperFactorClosure.paperGroupFactors_isomorphic}
+\lean/connes{Connes.FactorWitness.SpatialWitness,Connes.StarAlgEquiv.isNormal,Connes.FactorWitness.tracialEquiv_of_spatialWitness,Connes.PaperFactorClosure.paperGroupFactors_isomorphic}
 
 \p{The group von Neumann algebra #{L(G)} is represented on #{\ell^2(G)} as
 the von Neumann closure of the left regular operators. Its canonical trace is
@@ -20,11 +20,13 @@ the other, and #{U\delta_e=\delta_e}.}
 \leanref/connes{Connes.FactorWitness.SpatialWitness}.
 }
 
-\p{The generic conversion
+\p{The theorem
 \leanref/connes{Connes.FactorWitness.tracialEquiv_of_spatialWitness}
-restricts conjugation to the two group von Neumann algebras, proves normality,
-and obtains trace preservation from the vacuum equation. Thus no operator-
-algebra conclusion is stored as an unexplained premise.}
+restricts unitary conjugation to the two group von Neumann algebras.
+\leanref/connes{Connes.StarAlgEquiv.isNormal}
+proves that the induced star-algebra equivalence is normal, and the equation
+#{U\delta_e=\delta_e} proves that it preserves the canonical trace. These facts
+are proved from the spatial unitary rather than supplied as extra assumptions.}
 
 \p{For Zhou's groups, the concrete unitary composes the two Fourier models with
 the fiber shear. The measure-transport and von Neumann closure obligations are
@@ -32,5 +34,6 @@ separated in \ref{connes-000D} and \ref{connes-000E}. Together they construct
 \leanref/connes{Connes.PaperFactorClosure.paperSpatialUnitary},
 \leanref/connes{Connes.PaperFactorClosure.paperSpatialWitness}, and
 \leanref/connes{Connes.PaperFactorClosure.paperGroupFactors_isomorphic}.
-This is the tracial factor equivalence asserted in
-\citet{Proposition 3.4}{zhou2026icc}.}
+This is the #{*}-isomorphism asserted in
+\citet{Proposition 3.4}{zhou2026icc}; the Lean statement also records its
+normality and preservation of the canonical trace.}
