@@ -1,0 +1,109 @@
+\import{spin-macros}
+\meta{agent-authored}{true}
+
+\tag{connes}
+\tag{lean}
+\tag{notes}
+\title{Comparator challenge and auditability}
+
+\p{The Comparator challenge is an independent statement file, not a second
+formalization of Zhou's proof. Its purpose is to make the theorem small enough
+that a reader familiar with the mathematics and Lean can inspect the
+definitions, compare them with Zhou's Sections 3–7, and check that the solution
+proves the same statement \citet{Sections 3–7}{zhou2026icc}. It therefore
+uses the following design criterion: define no more vocabulary than is needed
+to state Theorem A. General notions should come from Mathlib when its
+definitions have the required meaning; a genuinely general local construction
+is a candidate for upstreaming rather than permanent duplication. The
+\href{https://github.com/utensil/connes-rigidity/blob/dc63c594d950753a239d5d097f38c19e79349dd0/ComparatorChallenges/F_ConnesZhou.lean}{self-contained challenge at the synchronized commit}
+is the file to inspect. The declaration links below point to the mirrored
+solution-side declarations, which have the same public contracts and are
+rendered by doc-gen4.}
+
+\p{The declarations in that file divide into four groups.}
+
+\ul{
+  \li{\strong{Mathematical-domain foundation.}
+  \leanref/connes/as{groups}{Connes.CountableDiscreteGroup},
+  \leanref/connes/as{ICC}{Connes.IsICC},
+  \leanref/connes/as{representations}{Connes.UnitaryRepresentation}, their invariant and
+  almost-invariant vector predicates, and
+  \href{https://utensil.github.io/connes-rigidity/docs/find/#doc/Connes.HasKazhdanPropertyT}{property (T)}
+  state the group-theoretic side.
+  The operator-algebraic side starts from
+  \leanref/connes/as{ℓ²}{Connes.GroupL2}. It comprises the
+  \leanref/connes/as{bicommutant}{Connes.vonNeumannClosure}, the
+  \leanref/connes/as{algebra}{Connes.groupVonNeumannAlgebra} and its
+  \leanref/connes/as{carrier}{Connes.GroupVonNeumannAlgebra}, the
+  \href{https://utensil.github.io/connes-rigidity/docs/find/#doc/Connes.delta}{point mass}, the
+  \leanref/connes/as{trace}{Connes.canonicalTrace}, and the
+  \leanref/connes/as{witness}{Connes.TracialGroupFactorEquiv}.
+  The witness combines a star-algebra equivalence,
+  trace preservation, and normality. The
+  \leanref/connes/as{normality}{Connes.IsNormalStarAlgEquiv}
+  predicate defines normality by preservation of
+  \leanref/connes/as{suprema}{Connes.IsProjectionSupremum} in both directions.
+  The predicate \leanref/connes/as{isomorphism}{Connes.TracialGroupFactorsIsomorphic}
+  asks only for a nonempty equivalence structure. These definitions support
+  the factor-isomorphism proposition in the conclusion, using Mathlib's
+  conjugacy classes, unitary operators, star subalgebras, and von Neumann
+  algebras underneath.}
+
+  \li{\strong{Theorem-specific data.}
+  The abbreviations #{\mathbb F_2}, #{\mathbb F_2[t]}, and
+  #{\mathrm{SL}_3(\mathbb F_2[t])}, together with their inferred countability
+  instances, fix the coefficient ring and ambient matrix group.
+  The \leanref/connes/as{subgroup}{Connes.SpecialLinear.elementarySubgroup} and
+  \href{https://utensil.github.io/connes-rigidity/docs/find/#doc/Connes.PaperPropertyT.elementaryGroup}{EJZK group}
+  declarations name the exact
+  #{EL_3(\mathbb F_2[t])} premise from Zhou's Proposition 4.1. The declaration
+  \leanref/connes{Connes.theoremA} then states property (T) and ICC for both
+  groups, factor equivalence, and nonisomorphism from Zhou's Theorem A.}
+
+  \li{\strong{Paper-shape adaptation and transport.}
+  \leanref/connes/as{membership}{Connes.memℓp_reindex},
+  \leanref/connes/as{reindexing}{Connes.l2Reindex}, and
+  \leanref/connes/as{unitaries}{Connes.leftRegularUnitary} build
+  the operators, while
+  \leanref/connes/as{representation}{Connes.leftRegularRepresentation} turns Mathlib's general
+  #{\ell^p} carrier into the left regular #{\ell^2(G)} model used in Section 3.
+  The polynomial countability proof similarly transports an existing
+  countability instance across Mathlib's polynomial–finitely-supported-function
+  equivalence. These declarations adapt library representations; they add no
+  hypothesis to Theorem A.}
+
+  \li{\strong{Verification boundary.}
+  The challenge imports Mathlib, not the solution, and leaves only the body of
+  \leanref/connes{Connes.theoremA} unspecified. Comparator compares its
+  elaborated statement and definition closure with the solution, checks the
+  permitted axiom set, and replays the exported proof with the Lean kernel and
+  nanoda. This checks technical identity and proof acceptance. Literature
+  fidelity and the correctness of the mathematical definitions remain
+  separate review questions.}
+}
+
+\p{Recent simplifications illustrate the design. The reindexing proof now
+shares \leanref/connes{Connes.memℓp_reindex} between its forward and inverse
+maps. It keeps the two pointwise action laws in
+\leanref/connes{Connes.leftRegularRepresentation}, since they fix the
+left-action convention used in \citet{Section 3}{zhou2026icc}.}
+
+\p{Mathlib now supplies the conjugacy-class operation, the centralizer star
+subalgebra, and the commutant of a von Neumann algebra. The challenge reuses
+those APIs. In particular, \leanref/connes{Connes.vonNeumannClosure} remains
+Zhou's bicommutant construction, but its implementation can form the first
+\leanref{StarSubalgebra.centralizer} and then apply
+\leanref{VonNeumannAlgebra.commutant}; no separate proof of the outer
+commutant's double-commutant condition is needed.}
+
+\p{The concrete elementary subgroup and explicit EJZK premise are
+theorem-specific and should remain near the challenge. The trace-preserving
+factor witness is local statement vocabulary chosen to match Theorem A; it
+should remain local unless Mathlib adopts the same contract. By contrast, an
+arbitrary-index #{\ell^2} reindexing linear isometry and a bundled left regular
+unitary representation are genuinely general and plausible Mathlib
+contributions: the present library has the ingredients but no direct API with
+these contracts. If those are upstreamed, the reindexing lemma and the two
+action-law proofs can disappear from the challenge. Without that library API,
+further proof compression would mainly conceal the chosen
+left-action convention rather than remove mathematics.}
