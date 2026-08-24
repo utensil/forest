@@ -9,8 +9,8 @@
 \lean{SimpleGraph.lapMatrix,SimpleGraph.posSemidef_lapMatrix}
 
 \p{The pinned Connes project uses Mathlib revision
-\href{https://github.com/leanprover-community/mathlib4/commit/062f1e3da80734a1b911a5c541d78612faf41b99}{\code{062f1e3d}}
-with Lean 4.34.0-rc1. Mathlib supplies the graph Laplacian and its positivity
+\href{https://github.com/leanprover-community/mathlib4/commit/c2d7843e04aa6cc44fa7e2b39422f24f7b725f00}{\code{c2d7843e}}
+with Lean 4.34.0-rc2. Mathlib supplies the graph Laplacian and its positivity
 theorem, exposed by the declaration links above, but not the
 Ershov–Jaikin-Zapirain graph-of-groups criterion, Kazhdan ratios, root
 gradings, codistance, or the graph argument.}
@@ -24,13 +24,16 @@ earlier quantitative development
 \citet{Sections 2–6 and Appendix A}{ershov2010noncommutative}.}
 
 \p{TauCeti at revision
-\href{https://github.com/TauCetiProject/TauCeti/commit/cc6ce758421ce3a0731ff62667b7771cfc4aa3da}{\code{cc6ce75}}
-uses Mathlib \href{https://github.com/leanprover-community/mathlib4/commit/de5ce8a9a66a4aa68a9bdbb35b63a06d34d9ca11}{\code{de5ce8a}}
+\href{https://github.com/TauCetiProject/TauCeti/commit/ac3bfb327df223b5346aabe64a89270266ebd918}{\code{ac3bfb3}}
+uses Mathlib \href{https://github.com/leanprover-community/mathlib4/commit/ac1b4db285bd145ce111b9ad357b99b1126a438a}{\code{ac1b4db}}
 and Lean 4.34.0-rc1. Its
-\href{https://github.com/TauCetiProject/TauCeti/blob/cc6ce758421ce3a0731ff62667b7771cfc4aa3da/TauCeti/LowDimTopology/Plumbing/DiagonalDominance.lean#L73-L74}{diagonal-dominance proof}
+\href{https://github.com/TauCetiProject/TauCeti/blob/ac3bfb327df223b5346aabe64a89270266ebd918/TauCeti/LowDimTopology/Plumbing/DiagonalDominance.lean#L74-L75}{diagonal-dominance proof}
 consumes the same Mathlib Laplacian facts.}
 
 \p{Its source and roadmap contain no
-direct property-(T), Kazhdan, codistance, root-graded, or magic-graph lane. It
-is therefore not a drop-in dependency for this boundary; aligning project pins
-would not reduce the missing mathematics.}
+direct property (T), Kazhdan, codistance, root-graded-group, or magic-graph
+lane. Recent
+\href{https://github.com/TauCetiProject/TauCeti/blob/ac3bfb327df223b5346aabe64a89270266ebd918/TauCeti/Algebra/AlgebraicGroup/GeneralLinear/Adjoint/RootSpace.lean}{algebraic-group root-space additions}
+do not supply the root-graded-group criterion used by EJK. TauCeti is therefore
+not a drop-in dependency for this boundary; aligning project pins would not
+reduce the missing mathematics.}

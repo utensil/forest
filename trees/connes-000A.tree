@@ -36,6 +36,31 @@ small structures. This prevents an exhaustive certificate, coordinate
 calculation, or normalization choice from contaminating a generic transfer
 theorem.}
 
+\p{\strong{Index shared structure by the action.}
+Zhou's two groups have the same abelian kernel and acting group, but different
+actions \citet{Sections 2–5}{zhou2026icc}. Lean therefore defines their common
+semidirect-product carrier through
+\leanref/connes/as{paperGammaOf}{Connes.Construction.PaperKernel.paperGammaOf}, then indexes the
+split extension
+\leanref/connes/as{lambdaExtension}{Connes.PaperSplitExtensions.lambdaExtension}, finite extension
+\leanref/connes/as{finiteExtension}{Connes.PaperFiniteExtensions.finiteExtension}, spectral data
+\leanref/connes/as{SpectralData}{Connes.PaperSpectralPropertyT.SpectralData}, and ICC data
+\leanref/connes/as{ActionData}{Connes.PaperICC.ActionData} by the chosen action. The final
+theorems for the two groups specialize these definitions to the two concrete
+actions. The actions and their finite certificates remain distinct, while the
+shared structural arguments are proved once.}
+
+\p{\strong{Keep the bicommutant boundary visible.}
+The group von Neumann algebra in Zhou's factor comparison is the bicommutant
+of the left regular operators \citet{Section 3 and Proposition 3.4}{zhou2026icc}.
+The definition \leanref/connes{Connes.vonNeumannClosure} still expresses that
+same bicommutant. Its Lean implementation now bundles the first
+\leanref{StarSubalgebra.centralizer} as a von Neumann algebra and applies
+\leanref{VonNeumannAlgebra.commutant} for the outer commutant. This removes a
+duplicated proof of the outer commutant's double-commutant condition; it does
+not replace the bicommutant by a topological closure or change the mathematical
+boundary.}
+
 \p{\strong{State the direct consumer boundary.}
 The external theorem is requested as property (T) of the elementary group,
 not as a stronger numerical constant. The factor bridge asks for a spatial
