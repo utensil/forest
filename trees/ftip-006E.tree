@@ -1,0 +1,16 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Definition}
+\title{Normalization placement}
+\tag{ftip}
+\tag{architecture}
+
+\p{For a residual stream #{X}, a sublayer #{F}, and a normalization operator
+#{N}, \newvocab{post-normalization} applies #{N(X+F(X))}. In
+\newvocab{pre-normalization}, the sublayer receives a normalized input and the
+residual update is #{X+F(N(X))}.}
+
+\p{Placement is an architecture coordinate, separate from the formula for
+#{N}. Every decoder block must state which residual branches use which
+placement.}

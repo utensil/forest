@@ -1,29 +1,24 @@
 \import{macros}
 \meta{agent-authored}{true}
 
-\taxon{Definition}
-\title{Successful-support coverage}
 \tag{ftip}
-\tag{support}
+\tag{reward-model}
+\tag{loss}
 
-\p{For a task #{q}, policy #{\pi}, inference protocol #{D}, and budget #{b},
-let #{\mathcal S^+(q)} be the trajectories accepted by the independent
-evaluator. The \strong{successful-support probability} is}
+\refdeft{Pairwise reward-model loss}{Section 3.5, equation (1), and Appendix C.2}{ouyang2022training}{
+\p{For comparison observations sampled from
+#{\mathcal D_{\mathrm{pref}}}, the \newvocab{pairwise reward-model loss} is}
 
 ##{
-  p^+_{\pi,D,b}(q)
-  =\mathbb P^{D,b}_{q,\pi}\{\tau\in\mathcal S^+(q)\}.
+ L_{\mathrm{rm}}(\phi)
+ =\mathbb E_{(x,y^+,y^-,j)\sim\mathcal D_{\mathrm{pref}}}
+ \left[-\log\sigma\left(
+ r_\phi(x,y^+)-r_\phi(x,y^-)
+ \right)\right].
 }
 
-\p{A training task law has \strong{successful-support coverage} at threshold
-#{\varepsilon>0} for a task family if it assigns positive mass to tasks on
-which #{p^+_{\pi,D,b}(q)\geq\varepsilon}. This is an FTIP specialization of
-probabilistic support and coverage.}
-
-\p{This is an FTIP thresholded-support definition. Sections 3--4 of
-\citef{yue2025does} compare base and post-trained success under several
-sampling budgets. The threshold makes the definition finite and
-protocol-relative. It avoids
-claiming that a successful sequence has exact zero probability after observing
-only finitely many samples. The distinction between pass-at-one and broader
-support motivates those experiments.}
+\p{The empirical objective replaces the expectation by a declared weighting
+of the collected comparisons. It fits score differences under the
+Bradley--Terry law of \ref{ftip-002Q}; it does not observe an absolute reward
+target for either response.}
+}

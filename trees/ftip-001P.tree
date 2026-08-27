@@ -1,30 +1,20 @@
 \import{macros}
 \meta{agent-authored}{true}
 
-\taxon{Definition}
-\title{Clipped policy objective}
+\taxon{Remark}
+\title{How we synthesize a task interface}
 \tag{ftip}
-\tag{policy-optimization}
-\tag{clipping}
+\tag{evaluation}
 
-\p{For #{\epsilon\in(0,1)}, write
-#{\operatorname{clip}_\epsilon(u)=\min(1+\epsilon,\max(1-\epsilon,u))}.
-For group member #{i}, let #{\rho_{i,t}} be its token ratio from
-\ref{ftip-001O}. Given response advantages #{\widehat A_i}, a
-token-normalized \strong{clipped policy objective} is}
+\p{We synthesize the task and task-law pair in \ref{ftip-001O} and
+\ref{ftip-001Q} as a common interface for response tasks and interactive
+tasks. Benchmark datasets usually present an input and expect an answer in a
+parseable format. Reinforcement-learning formulations instead name states,
+actions, and reward; see \citet{Chapter 3}{sutton2018reinforcement}. The
+admissibility predicate captures parseability, while the law records how
+instances are sampled. Neither choice already identifies parsing with success.}
 
-##{
-  J_{\mathrm{clip}}(\theta)
-  =\frac{1}{\sum_i |y^{(i)}|}
-   \sum_i\sum_{t=1}^{|y^{(i)}|}
-   \min\left(
-      \rho_{i,t}(\theta)\widehat A_i,
-      \operatorname{clip}_\epsilon(\rho_{i,t}(\theta))\widehat A_i
-   \right).
-}
-
-\p{The clipped surrogate originates in
-\citet{Section 3}{schulman2017proximal}. DAPO studies asymmetric clipping and
-token-level normalization in \citet{Sections 3.1 and 3.3}{yu2025dapo}. The
-displayed objective fixes one convention; it is not the definition of every
-GRPO implementation.}
+\p{Later definitions attach either a one-shot inference protocol or an
+interactive environment to this interface. Theorems can then state which
+properties require only a task law and which require the additional temporal
+structure of an environment.}

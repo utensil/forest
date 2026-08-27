@@ -1,0 +1,36 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Convention}
+\title{Fixed evaluation interface for protocol comparison}
+\tag{ftip}
+\tag{notation}
+
+\p{Fix an evaluation task #{\mathsf T_{\rm ev}} from \ref{ftip-001O} and a
+scalar evaluation utility
+#{u_{\mathsf T_{\rm ev}}:\mathcal X_{\mathsf T_{\rm ev}}\times
+\mathcal O_{\mathsf T_{\rm ev}}\times\Omega_E\to\mathbb R}, the #{d=1}
+case of \ref{ftip-001T}. Fix its task law
+#{Q_{\rm ev}:=\mu_{\mathsf T_{\rm ev}}}, an inference protocol
+#{\mathsf I_{\rm ev}} from \ref{ftip-001R}, and an inference budget
+#{b\in\mathcal B_{\mathrm{eval}}}. Use the inference-seed space #{\Omega_I}
+and evaluator-seed space #{\Omega_E} from \ref{ftip-001N}. A declared
+evaluation-seed kernel
+#{\Lambda_{\rm ev}(d\xi,d\omega\mid x)} assigns inference and evaluator
+randomness to each instance. Together with #{Q_{\rm ev}}, it gives the joint
+evaluation law
+#{Q_{\rm ev}(dx)\Lambda_{\rm ev}(d\xi,d\omega\mid x)}, which is fixed
+independently of training.}
+
+\p{For an executable artifact #{M}, define only the aliases
+##{
+\mathsf{Eval}_b(M,x;\xi)
+:=\operatorname{pr}_1\left(\mathsf I_{\rm ev}(M,x,b;\xi)\right),
+\qquad
+U(x,o;\omega):=u_{\mathsf T_{\rm ev}}(x,o;\omega).
+}
+A post-training protocol #{P} produces a random executable artifact #{M_P}
+from the common base artifact #{M_0}; the no-training protocol is #{P_0}.
+Fix also a scalar success threshold #{u_*\in\mathbb R}. Expectations below
+include protocol randomness producing #{M_P}. Evaluation samples drawn from
+the joint evaluation law remain independent of that training randomness.}

@@ -2,21 +2,18 @@
 \meta{agent-authored}{true}
 
 \taxon{Definition}
-\title{Multi-head self-attention}
+\title{Embedding-stage positional transformation}
 \tag{ftip}
-\tag{transformer}
-\tag{attention}
+\tag{architecture}
 
-\p{Choose #{m} attention heads, each with its own projection matrices. If
-#{A_i(H)\in\mathbb R^{n\times d_v}} is the masked attention output of head
-#{i}, then \newvocab{multi-head self-attention} is
+\p{Using the dimensions of \ref{ftip-000L}, an
+\newvocab{embedding-stage positional transformation} is a specified family of
+position-dependent transformations
+#{r_t:\mathbb R^d\to\mathbb R^d}, one for each
+#{t\in\{1,\ldots,T\}}. Applied after the token embedding of
+\ref{ftip-000M}, it produces the initial hidden vector
 ##{
-\operatorname{MHA}(H)
-=\operatorname{Concat}(A_1(H),\ldots,A_m(H))W_O,
+X^{(0)}_t=r_t(E_{x_t}).
 }
-where #{W_O\in\mathbb R^{(m d_v)\times d}}.}
-
-\p{This is the parallel-head construction of
-\citet{sec. 3.2.2}{vaswani2017attention}. Self-attention means that the
-queries, keys, and values are all projected from the same hidden-state
-sequence.}
+The family #{(r_t)_{t=1}^T} is part of the architecture, even when it has no
+learned parameters.}

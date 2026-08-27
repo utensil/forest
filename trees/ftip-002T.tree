@@ -1,22 +1,36 @@
 \import{macros}
 \meta{agent-authored}{true}
 
-\taxon{Definition}
-\title{Credit horizon}
+\taxon{Example}
+\title{A Bradley--Terry comparison calculation}
 \tag{ftip}
-\tag{credit-assignment}
+\tag{preference}
+\tag{reward-model}
 
-\p{For an action #{A_t}, the \strong{credit horizon} is the number of later
-environment transitions before the feedback used to train that action becomes
-measurable. A terminal-only signal on a trajectory of length #{T} gives the
-first action horizon #{T}; an immediate process label gives horizon zero.}
+\p{A declared difference between two reward scores maps to one
+Bradley--Terry preference probability.}
 
-\p{This is an FTIP specialization of delayed reward and temporal credit
-assignment; Chapter 12 of \citef{sutton2018reinforcement} treats return
-prediction across temporal spans.
-The definition records delay in environment transitions rather than tokens,
-because one agent action may contain many tokens.}
+\tikzfig{\begin{tikzpicture}[
+  box/.style={draw, rounded corners=2pt, align=center, font=\small,
+    text width=28mm, minimum height=10mm},
+  flow/.style={-{Stealth[length=2mm]}, thick}
+]
+\node[box] (pair) at (0,0) {$y^+$ versus $y^-$};
+\node[box] (scores) at (4.0,0) {$r(y^+)=2$\\$r(y^-)=0.5$};
+\node[box] (prob) at (8.0,0) {$\sigma(1.5)$\\$\approx0.818$};
+\draw[flow] (pair) -- (scores);
+\draw[flow] (scores) -- node[font=\scriptsize, fill=white] {difference} (prob);
+\end{tikzpicture}}
 
-\p{Long horizon does not by itself imply that credit is impossible. It marks
-where variance, model assumptions, or additional process evidence enter a
-bound.}
+\p{Under the Bradley--Terry link,
+##{
+ \Pr(y^+\succ y^-\mid x)
+ =\frac{\exp r(y^+)}{\exp r(y^+)+\exp r(y^-)}
+ =\sigma(2-0.5)
+ =\sigma(1.5)\approx0.8176.
+}
+Reversing the pair gives probability #{1-0.8176=0.1824}.}
+
+\p{The fixed scores instantiate \ref{ftip-002Q} and determine the displayed
+probability. Whether one scalar reward can represent every judge is a
+separate modeling question.}

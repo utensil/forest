@@ -1,25 +1,20 @@
 \import{macros}
 \meta{agent-authored}{true}
 
-\taxon{Definition}
-\title{Language-model output head}
-\tag{ftip}
-\tag{transformer}
-
-\p{Let #{h_t\in\mathbb R^d} be the final hidden state at position #{t}. A
-\newvocab{language-model output head} consists of an affine map
+\refdeft{Causal attention mask}{sec. 3.2.3}{vaswani2017attention}{
+\p{For a length-#{T} sequence, the \newvocab{causal attention mask} is the
+matrix #{M\in(\mathbb R\cup\{-\infty\})^{T\times T}} with
 ##{
-z_t=h_tW_U+b_U\in\mathbb R^{|\mathcal V|}
+M_{ts}=
+\begin{cases}
+0,&s\leq t,\\
+-\infty,&s>t.
+\end{cases}
 }
-followed by
-##{
-\pi_\theta(a\mid x_{1:t})
-=\frac{\exp(z_{t,a})}
-       {\sum_{b\in\mathcal V}\exp(z_{t,b})}.
-}}
+Masked self-attention replaces the score matrix in \ref{ftip-000Q} by
+#{QK^{\mathsf T}/\sqrt{d_h}+M}. Consequently, the output at position #{t}
+has zero attention weight on every later position #{s>t}.}
+}
 
-\p{The affine map is called unembedding in
-\citet{sec. 5, Unembedding}{phuong2022formal}; embeddings and the pre-softmax
-linear transformation are described in
-\citet{sec. 3.4}{vaswani2017attention}. Some models tie #{W_U} to the token
-embedding matrix. Weight tying is an additional architecture choice.}
+\tag{ftip}
+\tag{attention}

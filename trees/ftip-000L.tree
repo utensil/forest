@@ -1,27 +1,21 @@
 \import{macros}
 \meta{agent-authored}{true}
 
-\taxon{Definition}
-\title{Scaled dot-product attention and its query/key/value projections}
+\taxon{Notation}
+\title{Tensor dimensions, positions, heads, and layers}
 \tag{ftip}
-\tag{transformer}
-\tag{attention}
+\tag{architecture}
 
-\p{Let #{H\in\mathbb R^{n\times d}}. Choose projection matrices
-#{W_Q,W_K\in\mathbb R^{d\times d_k}} and
-#{W_V\in\mathbb R^{d\times d_v}}, and set
-##{
-Q=HW_Q,\qquad K=HW_K,\qquad V=HW_V.
-}
-The corresponding \newvocab{scaled dot-product attention} is
-##{
-\operatorname{Attn}(H)
-=\operatorname{softmax}_{\rm row}
-  \left(\frac{QK^{\mathsf T}}{\sqrt{d_k}}\right)V.
-}}
+\p{Let #{T} be the maximum token positions processed together, #{d} the
+residual-stream width, #{d_{\mathrm{ff}}} a feed-forward hidden width,
+#{H} the number of attention heads, #{d_h} the query-key width of one head,
+and #{L} the number of decoder layers. Positions are indexed by
+#{t,s\in\{1,\ldots,T\}}, heads by #{h\in\{1,\ldots,H\}}, and layers by
+#{\ell\in\{1,\ldots,L\}}.}
 
-\p{The query, key, and value projections and the scaled score formula are
-given in \citet{sec. 3.2.1}{vaswani2017attention}. They are kept in one card
-because the attention map is not typed until all three projections are fixed.
-The row-wise softmax makes each row of the weight matrix a distribution over
-key positions.}
+\p{A batch of #{B} hidden-state sequences is a tensor in
+#{\mathbb R^{B\times T\times d}}. When the batch coordinate is irrelevant,
+write #{X\in\mathbb R^{T\times d}} and let #{X_t\in\mathbb R^d} denote its
+row at position #{t}. Matrix products act on the final coordinate. Every
+architecture formula below cites this notation when it uses these dimensions
+or indices.}

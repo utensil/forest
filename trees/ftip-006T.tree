@@ -1,0 +1,33 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Definition}
+\title{Interactive realization of a task}
+\tag{ftip}
+\tag{agent}
+\tag{environment}
+
+\p{For a task
+#{\mathsf T=(\mathcal X_{\mathsf T},\mathcal O_{\mathsf T},
+\operatorname{Adm}_{\mathsf T})} from \ref{ftip-001O}, an
+\newvocab{interactive realization} is}
+
+##{
+\mathsf{Env}_{\mathsf T}
+=\left(\mathcal S_{\mathsf T},\mathcal O^{\rm obs}_{\mathsf T},
+\mathcal A_{\mathsf T},T_{\max},
+(\rho_0^x)_x,(K_t^x)_{x,t},\operatorname{out}_{\mathsf T}\right).
+}
+
+\p{For each #{x\in\mathcal X_{\mathsf T}}, the law #{\rho_0^x} is on
+#{\mathcal S_{\mathsf T}\times\mathcal O^{\rm obs}_{\mathsf T}}, and
+#{K_t^x} maps a state and action to the next state-observation law for
+#{0\leq t<T_{\max}}. The outcome map sends a stopped trajectory #{Z} to
+#{\operatorname{out}_{\mathsf T}(x,Z)\in\mathcal O_{\mathsf T}} and
+satisfies
+#{\operatorname{Adm}_{\mathsf T}(x,\operatorname{out}_{\mathsf T}(x,Z))}.
+For one fixed realization, write its three spaces as the unadorned
+#{\mathcal S,\mathcal O,\mathcal A} of \ref{ftip-001X}.}
+
+\p{The agent policy and stopping rule are not environment fields. They are
+combined with this realization only when an interaction law is formed.}

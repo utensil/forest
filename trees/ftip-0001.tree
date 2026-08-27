@@ -15,37 +15,52 @@
 \date{2026-08-27}
 
 \p{These are research notes for \strong{Formalized Theoretical Intelligence
-Potential} (FTIP), a programme about the capability that can be obtained from
-a pretrained language model by post-training. The question is comparative.
-Under a specified evaluation procedure and resource budget, how much does a
-post-training procedure change what the model can reliably do?}
+Potential} (FTIP). The project asks how much reliable capability a
+post-training procedure can obtain from a specified pretrained language model
+when its information, resources, and evaluation are fixed.}
 
-\p{FTIP does not assign an intrinsic intelligence number to a model. The
-quantity under study depends on the base model, the information supplied
-during training, the permitted procedures, and the evaluation. The current
-draft develops the language needed to state those dependencies. It does not
-yet assert a scaling law or a final theorem.}
+\p{The question is comparative. It does not assign an intrinsic intelligence
+number to a model, and it does not assume that a larger training reward implies
+a broader capability. A claim must name the base artifact, training procedure,
+feedback source, resource budget, inference procedure, and independent
+evaluation law.}
 
-\p{The exposition begins with tokens, probability laws, and the decoder-only
-Transformer. It then treats pretraining, supervised and preference
-post-training, and reinforcement learning with verifiable rewards. Tasks,
-environments, and agent histories appear only after those training stages have
-been introduced. The final sections define independent evaluation and record
-the questions that later theorem drafts must answer.}
+\p{This version develops the background needed to state that question. It
+starts with text probabilities and decoder-only Transformer architecture,
+then introduces pretraining and the task--environment interface. Fine-tuning
+and instruction tuning receive separate sections. Later sections distinguish
+preference modeling from reinforcement learning (RL), then examine alignment
+training as a declared role. Concrete routes include reinforcement learning
+from human feedback (RLHF), Direct Preference Optimization (DPO), and
+reinforcement learning with verifiable rewards (RLVR). The final sections
+formulate costed evaluation questions and finite falsifiers.}
 
-\p{Definitions imported from a paper cite that paper in the same tree. A
-standard specialization names the standard object being specialized. Objects
-introduced for this programme are marked \strong{FTIP synthesis} or
-\strong{FTIP proposal}. Those labels prevent a convenient research interface
-from being mistaken for an established result.}
+\p{The RLVR route begins with DeepSeekMath
+\citef{shao2024deepseekmath} and DeepSeek-R1
+\citef{guo2025deepseek}. Decoupled Clip and Dynamic sAmpling Policy
+Optimization (DAPO) \citef{yu2025dapo} supplies later changes to sampling,
+clipping, and reward design.}
+
+\p{When the note combines fields that no one source defines, the following
+remark identifies the contributing literature and the questions created by
+that combination.}
 
 \transclude{ftip-0002}
-\transclude{ftip-0008}
-\transclude{ftip-000H}
-\transclude{ftip-000V}
-\transclude{ftip-0017}
-\transclude{ftip-001H}
-\transclude{ftip-001T}
-\transclude{ftip-0024}
-\transclude{ftip-002E}
-\transclude{ftip-002Q}
+\transclude{ftip-0009}
+\transclude{ftip-000K}
+\transclude{ftip-0014}
+\transclude{ftip-001M}
+\transclude{ftip-001W}
+\transclude{ftip-006P}
+\transclude{ftip-0029}
+\transclude{ftip-002J}
+\transclude{ftip-002W}
+\transclude{ftip-006S}
+\transclude{ftip-0039}
+\transclude{ftip-003L}
+\transclude{ftip-003V}
+\transclude{ftip-0042}
+\transclude{ftip-004O}
+\transclude{ftip-004Y}
+\transclude{ftip-005C}
+\transclude{ftip-005T}

@@ -1,31 +1,18 @@
 \import{macros}
 \meta{agent-authored}{true}
 
-\taxon{Definition}
-\title{Costed post-training potential}
 \tag{ftip}
-\tag{post-training}
-\tag{scaling-law}
+\tag{preference}
+\tag{data-collection}
 
-\p{Fix a base artifact #{M_0}, evaluation law #{\mathcal Q_{\mathrm{ev}}},
-evaluation protocol #{D}, inference budget #{b}, lifecycle budget vector #{B},
-and admissible class #{\mathfrak P(M_0)}. Let #{\pi_0} be the executable
-policy resolved from #{M_0}; every #{P\in\mathfrak P(M_0)} starts from that
-artifact. The \strong{costed post-training potential} is the FTIP proposal}
+\refcardt{Definition}{Preference query selection}{Section 2.2.4}{christiano2017deep}{
+\p{Preference learning may choose which trajectory segments or responses to
+show to a judge rather than sampling every pair uniformly. The query-selection
+procedure assigns candidate comparisons a priority derived from the current
+reward-model ensemble and requests labels for selected pairs.}
 
-##{
- \begin{aligned}
-  \Phi(M_0,\mathcal Q_{\mathrm{ev}},D,b,B,\mathfrak P)
-  =\sup\bigl\{&\Delta_{\mathrm{ev}}(P;D,b):
-    P\in\mathfrak P(M_0),\\
-    &\mathbb E[C(P)]\leq B,\ \operatorname{Trust}(P)\bigr\}.
- \end{aligned}
+\p{Because selection depends on the current model and candidate pool, the
+resulting comparison data reflect an acquisition policy. Active selection can
+concentrate labels on uncertain pairs, but it does not make the collected
+comparisons representative of an undeclared target population.}
 }
-
-\p{where the budget inequality is componentwise. The supremum ranges over
-protocols, not over unconstrained parameter vectors. It is conditional on the
-declared base artifact and evaluation.}
-
-\p{No cited paper defines this quantity or proves that it follows a power law.
-It packages the research question so candidate upper bounds, lower bounds, and
-counterexamples can name the same inputs.}

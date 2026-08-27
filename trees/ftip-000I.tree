@@ -1,19 +1,22 @@
 \import{macros}
 \meta{agent-authored}{true}
 
-\taxon{Definition}
-\title{Token embedding}
-\tag{ftip}
-\tag{transformer}
-
-\p{Fix a hidden width #{d}. A \newvocab{token embedding} is a map
+\refdeft{Autoregressive continuation law}{sec. 3, Sequence modelling}{phuong2022formal}{
+\p{Fix the next-token law of \ref{ftip-000H}, a prompt
+#{x\in\mathcal V^*}, and a continuation #{y_{1:m}\in\mathcal V^m}. Its
+\newvocab{autoregressive continuation probability} is
 ##{
-E:\mathcal V\longrightarrow\mathbb R^d.
+P_\theta(y_{1:m}\mid x)
+=\prod_{t=1}^{m}
+\pi_\theta\left(y_t\mid x y_{<t}\right).
 }
-For a string #{x_{1:n}}, applying #{E} at each position gives the matrix
-#{X\in\mathbb R^{n\times d}} with row #{X_t=E(x_t)}.}
+Each factor conditions only on the prompt and earlier continuation tokens.}
 
-\p{This is the embedding operation described in
-\citet{sec. 5, Token embedding}{phuong2022formal} and
-\citet{sec. 3.4}{vaswani2017attention}. The map is part of the learned
-parameters unless a model specification says otherwise.}
+\p{If generation stops on #{\mathtt{eos}}, the law of a completed continuation
+is restricted to the sequences specified in \ref{ftip-000G}. If generation
+instead stops at a length limit, the terminal event and its probability must be
+recorded separately.}
+}
+
+\tag{ftip}
+\tag{language-model}

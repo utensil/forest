@@ -1,24 +1,18 @@
 \import{macros}
 \meta{agent-authored}{true}
 
-\taxon{Definition}
-\title{Tool and sandbox interaction}
+\taxon{Remark}
+\title{The information boundary of a history}
 \tag{ftip}
 \tag{agent}
-\tag{tool-use}
 
-\p{A \strong{tool interaction} is an action whose environment transition
-invokes an external operation and returns its result as an observation. A
-\strong{sandbox} is an environment that isolates such operations and records
-the resources and state changes they are permitted to cause.}
+\p{We formulate \ref{ftip-0021} from the agent's information, not from the
+omniscient simulator record. The hidden state sequence
+#{(S_0,\ldots,S_t)}, future observations, evaluator-only tests from
+\ref{ftip-001V}, and future random seeds are absent unless the environment has
+already exposed them through #{O_0,\ldots,O_t}.}
 
-\p{ReAct interleaves language reasoning with external actions; see
-\citef{yao2023react}, Sections 2--3. Software-agent systems instantiate the
-same interface with repositories, shells, tests, and browsers. FTIP adopts the
-interface but treats its security policy, state reset, and execution cost as
-part of the environment specification.}
-
-\p{A sandbox can produce high-quality evidence, such as a passing test suite.
-It can also expose shortcuts or nondeterministic failures. The verifier and
-the environment therefore remain separate even when they run in the same
-container.}
+\p{This boundary determines which policies are implementable. It also
+separates legitimate memory from leakage: a summary of earlier public
+observations may be stored in the history, while a hidden reference answer may
+not be supplied under the same declaration.}

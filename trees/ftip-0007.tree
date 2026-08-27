@@ -1,23 +1,25 @@
 \import{macros}
 \meta{agent-authored}{true}
 
-\taxon{Remark}
-\title{What this draft claims and proposes}
+\taxon{Definition}
+\title{Capability acquisition}
 \tag{ftip}
-\tag{research-programme}
+\tag{evaluation}
 
-\p{The architecture, probability, optimization, and control definitions in
-this draft are taken from named sources or stated as standard specializations.
-The note uses them to describe contemporary post-training protocols in one
-notation.}
+\p{Fix a capability claim in \ref{ftip-0003}, a prespecified transfer
+evaluation #{E^{+}}, and thresholds #{0\leq\varepsilon_0<\varepsilon_1\leq1}.
+Let #{u_0} and #{u_1} be the probabilities of passing #{E^{+}} before and
+after the intervention, using the same evaluation protocol and budget. An
+\newvocab{acquisition witness} is the pair of inequalities
+##{
+u_0\leq\varepsilon_0
+\qquad\text{and}\qquad
+u_1\geq\varepsilon_1.
+}
+The transfer evaluation must not be used to select training examples, rewards,
+or checkpoints.}
 
-\p{Several later objects are original research interfaces. The lifecycle cost
-vector, trust contract, costed potential, and acquisition witness are marked
-as FTIP proposals in their own trees. They organize questions; they are not
-results of the cited literature.}
-
-\p{The first complete draft should make every symbol traceable to a prior
-definition and every imported claim traceable to a source. The next draft can
-then state candidate theorems with explicit assumptions. A theorem card will
-be added only when its hypotheses and counterexamples can be read without
-guessing which protocol or cost is meant.}
+\p{An acquisition witness is operational. It records a large, independently
+measured change under one declared procedure; it does not prove that the
+starting model assigned mathematical probability zero to every successful
+continuation.}

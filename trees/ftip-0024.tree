@@ -1,21 +1,17 @@
 \import{macros}
 \meta{agent-authored}{true}
 
-\title{Feedback, credit, and parameter updates}
+\taxon{Definition}
+\title{Stopping rule}
 \tag{ftip}
-\tag{notes}
+\tag{agent}
 
-\p{A completed trajectory becomes training data only after the protocol records
-its provenance and interprets its evidence. This section separates the stored
-event from later selection, credit assignment, and parameter updates. The
-separation is necessary for replay and update gating.}
+\p{A \newvocab{stopping rule} is a random time
+#{\tau_{\mathrm{stop}}\in\{0,1,\ldots,T_{\max}\}} such that, for each #{t},
+the decision whether #{\tau_{\mathrm{stop}}=t} is determined by the public
+history #{H_t} and any declared stopping randomness available by time #{t}.
+It cannot inspect future observations.}
 
-\transclude{ftip-0025}
-\transclude{ftip-0026}
-\transclude{ftip-0027}
-\transclude{ftip-0028}
-\transclude{ftip-0029}
-\transclude{ftip-002A}
-\transclude{ftip-002B}
-\transclude{ftip-002C}
-\transclude{ftip-002D}
+\p{Stopping can be triggered by a terminal environment observation, an agent
+action, a resource limit, or the hard horizon. The trigger and the owner of
+the decision are part of the rule.}

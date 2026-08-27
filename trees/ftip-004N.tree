@@ -1,0 +1,45 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Example}
+\title{Four rollout rewards, group advantages, and clipping}
+\tag{ftip}
+\tag{rlvr}
+\tag{optimization}
+
+\p{Four binary rollout rewards yield group-relative advantages and four
+clipped surrogate terms.}
+
+\tikzfig{\begin{tikzpicture}[
+  box/.style={draw, rounded corners=2pt, align=center, font=\small,
+    text width=29mm, minimum height=11mm},
+  flow/.style={-{Stealth[length=2mm]}, thick}
+]
+\node[box] (reward) at (0,0) {$r=(1,1,0,0)$\\$\bar r=1/2,\ s=1/2$};
+\node[box] (adv) at (4.0,0) {$\widehat A=(1,1,-1,-1)$\\
+$\rho=(1.3,.9,.7,1.1)$};
+\node[box] (terms) at (8.0,0) {clipped terms\\$(1.2,.9,-.8,-1.1)$};
+\draw[flow] (reward) -- (adv);
+\draw[flow] (adv) -- node[font=\scriptsize, fill=white] {$\epsilon=.2$} (terms);
+\end{tikzpicture}}
+
+\p{Use the population standard deviation #{s=1/2}, so
+#{\widehat A_i=(r_i-\bar r)/s}. For current-to-behaviour ratios
+#{\rho=(1.3,0.9,0.7,1.1)} and clip interval #{[0.8,1.2]}, define each
+pointwise term by}
+
+##{
+\begin{aligned}
+\ell_i=\min\{&\rho_i\widehat A_i,\\
+&\operatorname{clip}(\rho_i,0.8,1.2)\widehat A_i\}.
+\end{aligned}
+}
+
+\p{The four terms are #{(\ell_1,\ell_2,\ell_3,\ell_4)
+=(1.2,0.9,-0.8,-1.1)}, whose mean is #{0.05}.}
+
+\p{Group-relative normalization is grounded in
+\citet{Section 4.1}{shao2024deepseekmath}, while clipping is grounded in
+\citet{Section 3}{schulman2017proximal}. The chosen divisor and ratios are
+declared toy values; a positive surrogate mean alone gives no guarantee of
+improved held-out performance after an optimizer step.}

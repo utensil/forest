@@ -1,24 +1,32 @@
 \import{macros}
 \meta{agent-authored}{true}
 
-\taxon{Definition}
-\title{Credit-assignment rule}
+\taxon{Remark}
+\title{The induced law of a stopped interaction}
 \tag{ftip}
-\tag{credit-assignment}
+\tag{agent}
 
-\p{A \strong{credit-assignment rule} maps a rollout record and its feedback
-to indexed training targets}
+\p{Sutton and Barto's agent--environment interface in
+\citet{sec. 3.1}{sutton2018reinforcement} supplies alternating states, actions,
+and rewards. Kaelbling et al. separate hidden state and public observation in
+\citet{Section 2}{kaelbling1998planning}. We formulate a joint initial law,
+joint transition--observation kernel, public stopping rule, and stopped
+trajectory from those ingredients.}
 
+\p{The induced interaction law uses four independently declared objects:
+the initial law #{\rho_0} in \ref{ftip-001Y}, the environment kernels
+#{K_t} in \ref{ftip-001Z}, the policy #{\pi_t} in \ref{ftip-0023}, and the
+stopping rule in \ref{ftip-0024}. On finite spaces, the probability of a
+length-#{n} trajectory before applying its stopping indicator factors as
 ##{
-  \Gamma(\mathsf R,Z)=(G_0,\ldots,G_{T-1}),
+\rho_0(s_0,o_0)
+\prod_{t=0}^{n-1}
+\pi_t(a_t\mid h_t)
+K_t(s_{t+1},o_{t+1}\mid s_t,a_t).
 }
+The event #{\{\tau_{\mathrm{stop}}=n\}} selects the stopped trajectories.}
 
-\p{where #{G_t} is the signal assigned to action #{A_t}. A terminal outcome
-rule may assign one return to every action. A process rule may produce
-different targets at different prefixes.}
-
-\p{This is an FTIP synthesis of the return construction in
-\citet{Section 3.3}{sutton2018reinforcement} and the named outcome- and
-process-supervision subsections of \citef{lightman2023verify}. The
-definition does not assume that #{G_t} is unbiased or that action-level credit
-is identifiable from terminal evidence.}
+\p{This factorization supports later expectations, likelihood
+ratios, and off-policy reuse. It also exposes an identifiability limit: an
+outcome distribution by itself generally does not reveal which of the initial
+law, environment, policy, or stopping rule changed.}

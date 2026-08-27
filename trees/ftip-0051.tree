@@ -1,0 +1,21 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Definition}
+\title{Immutable rollout record}
+\tag{ftip}
+\tag{rollout}
+\tag{provenance}
+
+\p{An \strong{immutable rollout record} is a tuple}
+
+##{R=(q,\nu_b,\tau,e),}
+
+\p{where #{q} is the sampled task, #{\nu_b} is the behavior-policy stamp,
+#{\tau} is the stopped trajectory of \ref{ftip-0025}, and #{e} is the
+verifier evidence of \ref{ftip-0047}. The tuple records facts fixed when the
+rollout finishes.}
+
+\p{Current-policy likelihood ratios, clipping decisions, reuse counts, and
+acceptance decisions are excluded because they may change on a later update
+attempt.}

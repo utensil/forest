@@ -1,30 +1,27 @@
 \import{macros}
 \meta{agent-authored}{true}
 
-\taxon{Definition}
-\title{Lifecycle cost vector}
+\title{Preference acquisition and reward modeling}
 \tag{ftip}
-\tag{compute}
+\tag{preference}
+\tag{reward-model}
 
-\p{The \strong{lifecycle cost} of protocol #{P} is the vector}
+\p{Preference data records a judge's choice between displayed alternatives.
+Reward modeling adds a statistical representation of those choices. This
+section keeps the acquisition procedure, observation law, score model, and
+validation law separate so that a scalar predictor is not mistaken for the
+preferences it was fitted to represent.}
 
-##{
-  C(P)=(C_{\mathrm{roll}},C_{\mathrm{env}},C_{\mathrm{ver}},
-        C_{\mathrm{upd}},C_{\mathrm{replay}},C_{\mathrm{ckpt}},
-        C_{\mathrm{eval}}).
-}
-
-\p{The coordinates charge rollout generation, environment execution, verifier
-work, proposed updates, replay bookkeeping, checkpoint or predictor work, and
-evaluation. Each coordinate must declare a physical unit or a conversion to a
-common accounting unit.}
-
-\p{This vector is an FTIP proposal motivated by distinct empirical accounts.
-Token-based pretraining scaling appears in \citef{kaplan2020scaling}.
-Compute-optimal scaling appears in \citef{hoffmann2022training}.}
-
-\p{Rollout reuse changes generation and update counts in
-\citef{miao2026when}.}
-
-\p{Checkpoint extrapolation adds fitting and recovery work in
-\citef{chen2026lowrank}. The vector preserves these differences.}
+\transclude{ftip-002K}
+\transclude{ftip-002L}
+\transclude{ftip-002M}
+\transclude{ftip-002N}
+\transclude{ftip-002O}
+\transclude{ftip-002P}
+\transclude{ftip-002Q}
+\transclude{ftip-002R}
+\transclude{ftip-002S}
+\transclude{ftip-002T}
+\transclude{ftip-002U}
+\transclude{ftip-006O}
+\transclude{ftip-002V}

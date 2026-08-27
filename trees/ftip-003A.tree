@@ -1,0 +1,19 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\tag{ftip}
+\tag{rlhf}
+\tag{post-training}
+
+\refcardt{Definition}{Language-model RLHF pipeline}{Section 3.1, Figure 2, and Section 3.5}{ouyang2022training}{
+\p{The InstructGPT pipeline first performs supervised fine-tuning on labeler
+demonstrations. It then samples response pairs, collects labeler rankings, and
+fits a scalar reward model. Finally, it samples responses from the trainable
+policy and applies PPO using the reward-model score together with a penalty
+relative to the supervised policy.}
+
+\p{The three stages consume different records and optimize different losses.
+Calling their composition RLHF does not make supervised targets, pairwise
+preferences, learned rewards, and policy-gradient samples the same kind of
+feedback.}
+}

@@ -2,21 +2,22 @@
 \meta{agent-authored}{true}
 
 \taxon{Definition}
-\title{Preference comparison and preference data law}
+\title{Token negative log-likelihood}
 \tag{ftip}
-\tag{preference}
-\tag{feedback}
+\tag{pretraining}
 
-\p{For a prompt #{x}, a \strong{preference comparison} is an ordered triple
-#{(x,y^+,y^-)}. The response #{y^+} was selected over #{y^-} by a declared
-judge under a declared comparison rule. A \strong{preference data law}
-#{\mathcal D_{\mathrm{pref}}} is a probability law on such triples.}
-
-\p{The order records an observation. It does not by itself provide a
-cardinal utility, transitivity, or agreement among judges.}
-
-\p{Pairwise comparisons enter reward learning in
-\citet{Sec. 2}{christiano2017deep}. Their use in language-model post-training
-appears in \citet{Sections 3.2 and 3.4}{ouyang2022training}. FTIP keeps the judge and
-acquisition rule visible because they determine what information the law
-contains.}
+\p{Let #{\zeta=(x,m,c,M^{\mathrm{doc}})} be a packed training record from
+\ref{ftip-001A}. Write
+#{\pi_{\theta,M^{\mathrm{doc}}(\zeta)}(\,\cdot\mid x_{<t}(\zeta))} for the next-token law of
+\ref{ftip-000H} when every decoder attention layer uses the declared document
+mask. For a predicted position #{t\geq2}, its
+\newvocab{masked token negative log-likelihood} is
+##{
+\ell_t(\theta;\zeta)
+=-m_t(\zeta)\log
+\pi_{\theta,M^{\mathrm{doc}}(\zeta)}
+\left(x_t(\zeta)\mid x_{<t}(\zeta)\right),
+}
+A masked position has zero contribution; an unmasked position penalizes the
+log probability computed under the same segment boundaries that defined the
+packed example.}

@@ -1,25 +1,34 @@
 \import{macros}
 \meta{agent-authored}{true}
 
-\taxon{Definition}
-\title{Selected-token surprisal}
 \tag{ftip}
-\tag{entropy}
+\tag{reinforcement-learning}
+\tag{notation}
 
-\p{In the token-generation specialization, let #{h_t^{\mathrm{tok}}} be the
-token prefix and let #{\xi_t\in\mathcal V} be the sampled next token. Its
-\strong{selected-token surprisal} is}
+\card{Notation}{Reward, return, policy roles, value, advantage, and likelihood ratios}{
+\p{The ratio and policy-objective formulas in this section specialize the
+measurable policy interface of \ref{ftip-0023} to a declared finite or
+countable discrete action space. Thus #{\pi(a\mid h)} denotes probability
+mass, not an unspecified density. Whenever #{\log\pi_\theta(A_t\mid H_t)} is
+displayed, its sampled mass is assumed positive.}
 
-##{
-  I_t=-\log \pi_\theta(\xi_t\mid h_t^{\mathrm{tok}}).
+\p{For decision times #{t=0,\ldots,N-1}, write
+#{\mathsf H_t:=H_t} for the public history defined in \ref{ftip-0021},
+#{A_t} for its action, and #{R_{t+1}\in\mathbb R} for
+the next reward. Let #{\gamma\in[0,1]} be the discount factor and #{G_t} the
+return from time #{t}.}
+
+\p{Write #{\pi_b} for the behavior policy that produced a stored action,
+#{\pi_\theta} for the current trainable policy, and #{\pi_{\mathrm{ref}}} for
+a fixed reference policy. Their value, action-value, and advantage functions
+are denoted #{V^\pi}, #{Q^\pi}, and #{A^\pi}; an estimated advantage is
+#{\widehat A_t}. The current-to-behavior likelihood ratio is denoted
+#{\rho_t(\theta)}.}
+
+\p{In a response-level episode, #{\pi_\theta(y\mid x)} abbreviates the
+completed-continuation probability
+#{P_\theta(y\mid s_{\mathrm{pr}}(x))} of \ref{ftip-000I}, using the prompt
+serializer of \ref{ftip-006V}; the same convention applies to #{\pi_b} and
+#{\pi_{\mathrm{ref}}}. In an interactive episode these symbols instead denote
+the action laws on public histories defined in \ref{ftip-0023}.}
 }
-
-\p{This is the selected action's self-information; compare the information
-measure in \citet{Pt. I, Sec. 6}{shannon1948mathematical}. It is a random
-variable, whereas local entropy is its conditional expectation before the
-action is sampled.}
-
-\p{Low-probability-token analyses and entropy-shaped RLVR methods often select
-or reweight positions using quantities related to #{I_t}. Such a selector is
-not equivalent to preserving global entropy. Later empirical trees can attach
-the exact selector from each source without changing this definition.}

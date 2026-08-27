@@ -1,33 +1,26 @@
 \import{macros}
 \meta{agent-authored}{true}
 
-\title{One RLVR round}
+\taxon{Definition}
+\title{Evaluation inference protocol}
 \tag{ftip}
-\tag{rlvr}
-\tag{diagram}
+\tag{evaluation}
 
-\p{One response-level RLVR round has the following typed order.}
+\p{Let #{M} be an executable model artifact of the form in
+\ref{ftip-001K}. An \newvocab{evaluation inference protocol} is a specified
+procedure
+##{
+\mathsf I(M,x,b_{\mathrm{eval}};\xi)=(o,c)
+\in\mathcal O_{\mathsf T}\times\mathcal B_{\mathrm{eval}},
+}
+where #{x\in\mathcal X_{\mathsf T}},
+#{b_{\mathrm{eval}}\in\mathcal B_{\mathrm{eval}}}, and
+#{\xi\in\Omega_I} use the notation of \ref{ftip-001N}; #{o} is a candidate
+outcome and #{c\in\mathcal B_{\mathrm{eval}}} is the realized resource-use
+vector. A valid execution satisfies
+#{c\preceq b_{\mathrm{eval}}} coordinatewise.}
 
-\tikzfig{\begin{tikzpicture}[
-  box/.style={draw, rounded corners=2pt, align=center, font=\small,
-    text width=29mm, minimum height=10mm},
-  flow/.style={-{Stealth[length=2mm]}, thick}
-]
-\node[box] (task) at (0,1.5) {task $x$};
-\node[box] (group) at (4.1,1.5) {rollout group $\mathbf y_x$};
-\node[box] (evidence) at (8.2,1.5) {evidence and rewards $(e_i,r_i)$};
-\node[box] (advantage) at (8.2,-1.1) {group advantages $\widehat A_i$};
-\node[box] (objective) at (4.1,-1.1) {clipped objective $J_{\mathrm{clip}}$};
-\node[box] (policy) at (0,-1.1) {updated policy $\pi_{\theta'}$};
-\draw[flow] (task) -- node[font=\scriptsize, fill=white, inner sep=1pt]
-  {$\pi_b$} (group);
-\draw[flow] (group) -- node[font=\scriptsize, fill=white, inner sep=1pt]
-  {verify} (evidence);
-\draw[flow] (evidence) -- (advantage);
-\draw[flow] (advantage) -- (objective);
-\draw[flow] (objective) -- (policy);
-\end{tikzpicture}}
-
-\p{The arrows denote different operations. Generation acquires responses.
-Verification produces evidence. Credit compares rewards. Optimization changes
-the policy. Later sections attach costs and provenance to each arrow.}
+\p{The protocol fixes prompt construction, decoding, sampling temperature,
+number of candidates, candidate selection, allowed tools, stopping, and any
+test-time search. None of these choices is determined by the checkpoint
+alone.}

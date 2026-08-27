@@ -1,0 +1,50 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Example}
+\title{Lifecycle compute allocation and a finite rollout observation bound}
+\tag{ftip}
+\tag{compute}
+\tag{rollout}
+
+\p{A componentwise lifecycle allocation and a ten-rollout calculation separate
+resource accounting from finite observation probability.}
+
+\tikzfig{\begin{tikzpicture}[
+  box/.style={draw, rounded corners=2pt, align=center, font=\small,
+    text width=26mm, minimum height=9mm},
+  flow/.style={-{Stealth[length=2mm]}, thick}
+]
+\node[box] (budget) at (0,0) {componentwise\\budget $\mathbf B$};
+\node[box] (data) at (3.5,1.55) {data $0$ tokens\\feedback $20$ calls};
+\node[box] (roll) at (3.5,0) {rollouts\\$10$ attempts};
+\node[box] (verify) at (3.5,-1.55) {environment\\$40$ sandbox s};
+\node[box] (update) at (7.0,1.0) {updates $15\times10^{12}$ FLOPs\\storage $6$ GB};
+\node[box] (eval) at (7.0,-1.0) {evaluation\\$12$ calls};
+\draw[flow] (budget) -- (data);
+\draw[flow] (budget) -- (roll);
+\draw[flow] (budget) -- (verify);
+\draw[flow] (budget) -- (update);
+\draw[flow] (budget) -- (eval);
+\end{tikzpicture}}
+
+\p{In the coordinate order of \ref{ftip-005H}, declare
+#{\mathbf B=(0,20,10,40,15,6,12)} with units respectively equal to data
+tokens, verifier calls, rollout attempts, sandbox seconds, trillions of
+floating-point operations, gigabytes, and evaluator calls. The rollout
+coordinate therefore permits #{N=10} independent attempts. If each attempt
+has declared success probability #{p=0.02}, then
+##{
+ \Pr(\text{at least one success})=1-(1-p)^N
+ =1-0.98^{10}\approx0.183
+ \leq Np=0.2.
+}
+Only the rollout coordinate enters this calculation; no sum or conversion
+among the seven coordinates is defined.}
+
+\p{The finite bound is the union bound applied to Bernoulli rollouts;
+finite-horizon success probabilities are standard policy-evaluation objects
+in \citet{Section 3.5}{sutton2018reinforcement}. Independence is used only
+for the displayed exact probability. The seven-coordinate budget is
+illustrative: neither empirical optimality nor interchangeability of its
+heterogeneous units is inferred from it.}

@@ -1,0 +1,17 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\tag{ftip}
+\tag{dapo}
+\tag{loss}
+
+\refcardt{Definition}{Token-level policy-gradient loss}{Section 3.3}{yu2025dapo}{
+\p{The token-level loss aggregates active token terms across the complete
+minibatch and divides by the number of active tokens. A longer response
+therefore contributes in proportion to its active token count rather than
+receiving the same total weight as every shorter response.}
+
+\p{This normalization changes the empirical gradient even when the sampled
+responses, rewards, advantages, and likelihood ratios are unchanged. It must be
+distinguished from averaging a separately normalized loss over responses.}
+}

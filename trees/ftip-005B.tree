@@ -1,0 +1,38 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Example}
+\title{Two proposed updates under a DGG-style gate}
+\tag{ftip}
+\tag{replay}
+\tag{optimization}
+
+\p{Two candidate reused-gradient updates fall on opposite sides of a declared
+DGG-style gate.}
+
+\tikzfig{\begin{tikzpicture}[
+  box/.style={draw, rounded corners=2pt, align=center, font=\small,
+    text width=28mm, minimum height=10mm},
+  flow/.style={-{Stealth[length=2mm]}, thick}
+]
+\node[box] (proposal) at (0,0) {reused-gradient\\proposal};
+\node[box] (monitor) at (3.8,0) {$g=\|G^{\rm lm}\|_F^2$\\increment and $Z$};
+\node[box] (accept) at (7.6,1.25) {$Z=1$\\accept};
+\node[box] (reject) at (7.6,-1.25) {$Z=3$\\reject};
+\draw[flow] (proposal) -- (monitor);
+\draw[flow] (monitor) -- node[font=\scriptsize, fill=white] {$Z\leq2$} (accept);
+\draw[flow] (monitor) -- node[font=\scriptsize, fill=white] {$Z>2$} (reject);
+\end{tikzpicture}}
+
+\p{Declare a trailing-window increment mean #{\mu=1}, standard deviation
+#{s=0.5}, and toy threshold #{z_\star=2}. Proposal A has increment #{1.5},
+so #{Z_A=(1.5-1)/0.5=1} and is committed. Proposal B has increment #{2.5},
+so #{Z_B=3} and is rejected before an Adam transition. Rejection therefore
+leaves both parameters and optimizer moments unchanged in this protocol.}
+
+\p{The monitored last-layer gradient energy, trailing-window Z-score, and
+pre-optimizer rejection order are modeled on
+\citet{Section 5 and Algorithm 1}{miao2026when}; the numeric threshold and
+window statistics above are locally declared. Acceptance is a reuse
+heuristic; it supplies neither a safety certificate nor a guarantee of
+improved independent evaluation.}

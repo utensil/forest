@@ -2,25 +2,23 @@
 \meta{agent-authored}{true}
 
 \taxon{Definition}
-\title{Reward model}
+\title{Population pretraining objective}
 \tag{ftip}
-\tag{reward-model}
-\tag{preference}
+\tag{pretraining}
 
-\p{A \strong{reward model} is a parameterized score
-#{\widehat r_\phi(x,y)\in\mathbb R}. Write
-#{\sigma(u)=(1+\exp(-u))^{-1}}. Under the Bradley--Terry observation model,
-the pairwise loss is}
-
+\p{Let #{Q_T} be the law of packed examples induced by
+\ref{ftip-0018}--\ref{ftip-001A}, and assume that its expected number of
+predicted positions is positive. The \newvocab{population pretraining
+objective} is the expected total token loss divided by the expected number of
+predicted tokens:
 ##{
- L_{\mathrm{rm}}(\phi)
- =\mathbb E_{(x,y^+,y^-)\sim\mathcal D_{\mathrm{pref}}}
- \left[-\log\sigma\left(
-   \widehat r_\phi(x,y^+)-\widehat r_\phi(x,y^-)
- \right)\right].
+L_{\mathrm{pop}}(\theta)
+=\frac{
+\mathbb E_{\zeta\sim Q_T}
+\left[\sum_{t=2}^{T}\ell_t(\theta;\zeta)\right]
+}{
+\mathbb E_{\zeta\sim Q_T}
+\left[\sum_{t=2}^{T}m_t(\zeta)\right]
+},
 }
-
-\p{Section 3.5, Equation (1), and Appendix C.2 of
-\citef{ouyang2022training} use this pairwise reward-model loss. It is a
-method-specific scalar representation of pairwise data. General or cyclic
-preferences need not admit such a representation.}
+using expectation as fixed in \ref{ftip-000A}.}

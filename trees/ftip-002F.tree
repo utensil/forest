@@ -1,22 +1,28 @@
 \import{macros}
 \meta{agent-authored}{true}
 
-\taxon{Convention}
-\title{Training and evaluation laws}
 \tag{ftip}
-\tag{evaluation}
+\tag{instruction-tuning}
+\tag{loss}
 
-\p{We write #{\mathcal Q_{\mathrm{tr}}} for the law that supplies training
-tasks and #{\mathcal Q_{\mathrm{ev}}} for the law used to report capability.
-The two laws may be equal, but equality is an experimental assumption rather
-than a notation convention.}
+\taxon{Definition}
+\title{Supervised fine-tuning objective}
 
-\p{This is an FTIP convention. Chapter 3 of
-\citef{sutton2018reinforcement} makes the environment law part of policy
-evaluation. Sections 3--4 of \citef{yue2025does} compare post-trained and
-base policies on held-out reasoning evaluations. Neither source requires the
-two laws above to differ; FTIP records the choice explicitly.}
+\p{For the language-model policy #{\pi_\theta} and the notation of
+\ref{ftip-002A}, a masked supervised fine-tuning (SFT) objective has the
+form}
 
-\p{Any data-dependent choice of #{\mathcal Q_{\mathrm{ev}}}, its examples, or
-its metric must be recorded. Otherwise the reported evaluation is no longer
-independent of the training protocol.}
+##{
+ L_{\mathrm{sft}}(\theta)
+ =-\sum_{z=(x,y,\omega)\in D_{\mathrm{sft}}}
+   \sum_{t=1}^{|y|}w_t(z)m_t(z)
+   \log \pi_\theta\left(y_t\mid
+   s_{\mathrm{pr}}(x)\mathbin{\Vert}y_{<t}\right),
+}
+
+\p{where the nonnegative weights satisfy
+#{\sum_{z\in D_{\mathrm{sft}}}\sum_{t=1}^{|y|}w_t(z)m_t(z)=1}.
+The response index #{t} does not range over serialized prompt tokens.
+Minimizing this objective increases conditional likelihood on the selected
+target tokens. The weights and mask are local conventions and must be declared
+for each implementation.}

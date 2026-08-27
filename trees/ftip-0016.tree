@@ -1,21 +1,20 @@
 \import{macros}
 \meta{agent-authored}{true}
 
-\taxon{Remark}
-\title{What pretraining loss and scaling results do not determine}
+\taxon{Definition}
+\title{Pretraining source mixture}
 \tag{ftip}
 \tag{pretraining}
-\tag{scaling-law}
 
-\p{Kaplan et al. fit empirical relations among language-model loss, parameter
-count, data, and compute in \citet{secs. 3--6}{kaplan2020scaling}. Hoffmann et
-al. revise the compute-optimal allocation between parameters and training
-tokens in \citet{sec. 3}{hoffmann2022training}. These results concern stated
-model families, datasets, and training procedures.}
+\p{Using \ref{ftip-0015}, a \newvocab{pretraining source mixture} is the
+pair #{((Q_s)_{s\in\mathcal S},\alpha)}. It induces the document law
+##{
+Q_{\alpha}(A)=\sum_{s\in\mathcal S}\alpha_s Q_s(A)
+}
+for every document event #{A}: first sample a source #{s} with probability
+#{\alpha_s}, then sample a document from #{Q_s}.}
 
-\p{Neither paper identifies post-training capability with pretraining loss.
-Equal loss can coexist with different probabilities for a rare successful
-continuation. Models can also differ in the cost of exposing such a
-continuation at inference time. Later FTIP results must therefore state which
-base-model quantity enters a bound instead of treating loss as a universal
-proxy.}
+\p{The mixture weights specify sampling frequency. They need not equal the
+fraction of bytes stored in each source. Resampling, epoch boundaries, or
+temperature-based weights must therefore be recorded as part of #{\alpha} or
+its schedule.}

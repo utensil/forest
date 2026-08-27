@@ -1,0 +1,39 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Example}
+\title{A Direct Preference Optimization log-ratio calculation}
+\tag{ftip}
+\tag{preference-optimization}
+\tag{loss}
+
+\p{Four declared policy probabilities determine the log-ratio margin in one
+DPO loss term.}
+
+\tikzfig{\begin{tikzpicture}[
+  box/.style={draw, rounded corners=2pt, align=center, font=\small,
+    text width=29mm, minimum height=10mm},
+  flow/.style={-{Stealth[length=2mm]}, thick}
+]
+\node[box] (pair) at (0,0) {$y^+\succ y^-$};
+\node[box] (ratios) at (4.0,0) {policy/reference ratios: $2$ versus $1/2$};
+\node[box] (loss) at (8.0,0) {margin $\log 2$; loss $\log(3/2)$};
+\draw[flow] (pair) -- (ratios);
+\draw[flow] (ratios) -- (loss);
+\end{tikzpicture}}
+
+\p{Let
+#{\pi_\theta(y^+\mid x)=0.6}, #{\pi_{\rm ref}(y^+\mid x)=0.3},
+#{\pi_\theta(y^-\mid x)=0.2}, and
+#{\pi_{\rm ref}(y^-\mid x)=0.4}. With #{\beta=1/2}, the DPO logit is
+##{
+ z=\beta\left[\log 2-\log(1/2)\right]
+   =\tfrac12\log 4=\log 2.
+}
+Hence #{\sigma(z)=2/3} and the one-pair negative log-likelihood is
+#{-\log\sigma(z)=\log(3/2)\approx0.405}.}
+
+\p{Substitution into Equation (7) of
+\citet{Section 4}{rafailov2023direct} verifies one loss term. Consistency of
+the pairwise data, suitability of the reference policy, and improvement in
+independent utility are separate questions.}

@@ -1,27 +1,18 @@
 \import{macros}
 \meta{agent-authored}{true}
 
-\title{Independent evaluation and potential}
 \tag{ftip}
-\tag{notes}
-\tag{evaluation}
+\tag{instruction-tuning}
+\tag{data-collection}
 
-\p{A training protocol can optimize its own reward without improving the
-capability of interest. This section therefore defines an independent
-evaluation before defining post-training gain. It then introduces the costed
-potential construction as an FTIP proposal.}
+\refcardt{Definition}{Labeler demonstration collection}{Sections 3.2 and 3.4}{ouyang2022training}{
+\p{In the InstructGPT data-collection procedure, a labeler receives a prompt
+and writes a desired response. The resulting prompt--response pair enters the
+demonstration data used by the supervised fine-tuning stage. Prompts come from
+the declared API and labeler-written sources, and the paper records filtering
+and labeler-selection procedures.}
 
-\transclude{ftip-002F}
-\transclude{ftip-002G}
-\transclude{ftip-002H}
-\transclude{ftip-002I}
-\transclude{ftip-002J}
-\transclude{ftip-002K}
-\transclude{ftip-002L}
-\transclude{ftip-002M}
-\transclude{ftip-002N}
-\transclude{ftip-0032}
-\transclude{ftip-0033}
-\transclude{ftip-0034}
-\transclude{ftip-002O}
-\transclude{ftip-002P}
+\p{This construction specifies a human demonstration channel. It is distinct
+from the later comparison channel, in which a labeler ranks model-generated
+responses rather than writing the target response.}
+}

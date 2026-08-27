@@ -1,0 +1,21 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Convention}
+\title{Empirical sample average}
+\tag{ftip}
+\tag{notation}
+\tag{reinforcement-learning}
+
+\p{For a nonempty finite index set #{I} and real values
+#{(Z_i)_{i\in I}\in\mathbb R^I}, write
+##{
+\widehat{\mathbb E}_{i\in I}[Z_i]
+=\frac1{|I|}\sum_{i\in I}Z_i.
+}
+When the subscript is only #{t}, the index set is the declared collection of
+sampled decision times in the current batch.}
+
+\p{PPO uses empirical expectation notation for its sampled surrogates; see
+Section 2, equations (1)--(2) of \citek{schulman2017proximal}. The batch and its
+weighting must still be declared; the hat does not assert unbiasedness.}

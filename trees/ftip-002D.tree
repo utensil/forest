@@ -1,27 +1,19 @@
 \import{macros}
 \meta{agent-authored}{true}
 
-\taxon{Remark}
-\title{Why records and attempts are distinct}
 \tag{ftip}
-\tag{replay}
-\tag{trajectory-geometry}
+\tag{instruction-tuning}
+\tag{provenance}
 
-\p{A rollout is evidence collected at one point in training. Replay asks
-whether that evidence can support another update under a changed policy. The
-answer depends on the current policy and therefore belongs to the attempt, not
-to the stored record.}
+\card{Remark}{Demonstration and teacher provenance}{
+\p{We formulate the provenance field #{\omega} to distinguish a demonstration
+from the process that supplied it. Ouyang et al. collect labeler-written
+demonstrations in \citet{§§3.2, 3.4}{ouyang2022training}. Wei et al. permit a
+broader task mixture in \citet{§2; Fig. 2}{wei2022finetuned}. Neither source
+defines the complete triple above.}
 
-\p{This distinction also separates two recent compute interventions. The DGG
-procedure of \citef{miao2026when} reuses a fixed rollout batch until a gradient
-diagnostic rejects another update. The NExt procedure of
-\citef{chen2026lowrank} predicts a future parameter
-displacement from saved checkpoints and then resumes real RL updates. The
-first changes the ratio of updates to rollouts. The second replaces part of a
-realized parameter path with an extrapolated jump.}
-
-\p{Neither intervention proves that future feedback contains no new
-information. A later theorem should charge rejected proposals, stored
-checkpoints, predictor fitting, and recovery updates. A no-free-feedback
-counterexample should compare environments with identical observed histories
-and different later informative events.}
+\p{Human writers, stronger teacher models, filtered self-generations, and
+programmatically produced targets give different information to the learner.
+Claims about sample efficiency or capability acquisition must therefore state
+which producer and selection rule were available.}
+}

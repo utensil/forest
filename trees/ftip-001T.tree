@@ -1,23 +1,22 @@
 \import{macros}
 \meta{agent-authored}{true}
 
-\title{Agentic post-training setup}
+\taxon{Definition}
+\title{Evaluation utility}
 \tag{ftip}
-\tag{notes}
-\tag{agent}
+\tag{evaluation}
 
-\p{An RLVR response can be a single token sequence. Agentic training adds an
-environment that reacts between decisions. This section introduces that
-interaction one object at a time, beginning with the task and ending with the
-complete trajectory.}
+\p{With the notation of \ref{ftip-001N}, an \newvocab{evaluation utility}
+is a declared function
+##{
+u_{\mathsf T}:\mathcal X_{\mathsf T}\times
+\mathcal O_{\mathsf T}\times\Omega_E\longrightarrow\mathbb R^d,
+}
+where #{\Omega_E} is the evaluator's random-seed set. The evaluator applies it
+only to admissible pairs from \ref{ftip-001O}. A deterministic evaluator is the
+special case in which the value does not depend on #{\omega\in\Omega_E}.}
 
-\transclude{ftip-001U}
-\transclude{ftip-001V}
-\transclude{ftip-001W}
-\transclude{ftip-001X}
-\transclude{ftip-001Y}
-\transclude{ftip-001Z}
-\transclude{ftip-0020}
-\transclude{ftip-0021}
-\transclude{ftip-0022}
-\transclude{ftip-0023}
+\p{Binary pass-fail evaluation takes #{d=1} and values in #{\{0,1\}}. A
+cumulative return is another scalar case. Vector utility keeps qualities such
+as correctness, safety, latency, and tool cost distinct until a later rule
+declares how to compare them.}

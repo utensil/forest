@@ -1,0 +1,111 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Definition}
+\title{One agentic post-training round}
+\tag{ftip}
+\tag{agent}
+\tag{post-training}
+
+\p{At round #{n}, fix a task #{\mathsf T_n}, its law
+#{\mu_{\mathsf T_n}}, and a versioned interactive realization
+#{\mathsf{Env}^{\upsilon_n}_{\mathsf T_n}}. Let #{\mathcal I_{\rm art}} and
+#{\mathcal I_{\rm inf}} be declared identifier spaces. Let
+#{a_n\in\mathcal I_{\rm art}} be an immutable content identifier resolving the
+artifact #{M_n}, and let #{\iota_n\in\mathcal I_{\rm inf}} record all serializer,
+decoding, tool, and stopping settings. The policy--inference stamp
+#{\nu_n=(a_n,\iota_n)\in\mathcal I_{\rm art}\times\mathcal I_{\rm inf}}
+resolves a non-anticipating policy #{\pi_n}. Let #{\Omega_n^{\rm task}},
+#{\Omega_n^{\rm roll}}, #{\Omega_n^{\rm feed}},
+#{\Omega_n^{\rm credit}}, and #{\Omega_n^{\rm update}} be declared seed
+spaces. The rollout seed contains both policy-decoding and environment
+randomness. Write
+#{\Omega_n=\Omega_n^{\rm task}\times\Omega_n^{\rm roll}\times
+\Omega_n^{\rm feed}\times\Omega_n^{\rm credit}\times
+\Omega_n^{\rm update}}, and let
+#{\omega_n=(\omega_n^{\rm task},\omega_n^{\rm roll},
+\omega_n^{\rm feed},\omega_n^{\rm credit},\omega_n^{\rm update})} be sampled
+from a declared joint law on #{\Omega_n}. Write #{\mathcal Z_{\mathsf T_n}}
+for the stopped trajectories admitted by the versioned realization.}
+
+\p{For declared feedback and credit spaces #{\mathcal F_n} and
+#{\mathcal G_n}, decision space
+#{\mathcal D_n=\{\mathsf{accept},\mathsf{reject}\}}, accounting dimension
+#{m\geq1}, and exact implementation versions #{v_n^{\rm S}}, #{v_n^{\rm R}},
+#{v_n^{\rm F}}, #{v_n^{\rm C}}, #{v_n^{\rm U}}, and #{v_n^{\rm A}}, the round
+specifies maps}
+
+##{
+\begin{aligned}
+\mathsf S_n^{v_n^{\rm S}}&:
+\Omega_n^{\rm task}\longrightarrow\mathcal X_{\mathsf T_n},\\
+\mathsf R_n^{v_n^{\rm R}}&:
+\mathcal X_{\mathsf T_n}\times\Omega_n^{\rm roll}
+\longrightarrow\mathcal Z_{\mathsf T_n},\\
+\mathsf F_n^{v_n^{\rm F}}&:
+\mathcal X_{\mathsf T_n}\times\mathcal Z_{\mathsf T_n}
+\times\Omega_n^{\rm feed}\longrightarrow\mathcal F_n,\\
+\mathsf C_n^{v_n^{\rm C}}&:
+\mathcal X_{\mathsf T_n}\times\mathcal Z_{\mathsf T_n}
+\times\mathcal F_n\times\Omega_n^{\rm credit}
+\longrightarrow\mathcal G_n,\\
+\mathsf U_n^{v_n^{\rm U}}&:
+\mathcal M_{\rm exec}\times\mathcal Z_{\rm opt}\times\mathcal G_n
+\times\Omega_n^{\rm update}
+\longrightarrow
+\mathcal D_n\times
+\mathcal M_{\rm exec}\times\mathcal Z_{\rm opt},\\
+\mathsf A_n^{v_n^{\rm A}}&:
+\mathcal M_{\rm exec}\times\mathcal Z_{\rm opt}
+\times\mathcal X_{\mathsf T_n}\times\mathcal Z_{\mathsf T_n}\\
+&\quad{}\times\mathcal F_n\times\mathcal G_n\times\mathcal D_n\\
+&\quad{}\times\mathcal M_{\rm exec}\times\mathcal Z_{\rm opt}
+\times\Omega_n\longrightarrow\mathbb R_+^m.
+\end{aligned}
+}
+
+\p{The accounting map receives the starting state, proposed state, decision,
+and realized seeds, so update work and rejected proposals remain observable in
+the cost record.}
+
+\p{They produce}
+
+##{
+\begin{aligned}
+X_n&=\mathsf S_n^{v_n^{\rm S}}(\omega_n^{\rm task}),\\
+Z_n&=\mathsf R_n^{v_n^{\rm R}}(X_n,\omega_n^{\rm roll}),\\
+F_n&=\mathsf F_n^{v_n^{\rm F}}(X_n,Z_n,\omega_n^{\rm feed}),\\
+\Gamma_n&=\mathsf C_n^{v_n^{\rm C}}
+(X_n,Z_n,F_n,\omega_n^{\rm credit}),\\
+(d_n,\widetilde M_{n+1},\widetilde s_{n+1})
+&=\mathsf U_n^{v_n^{\rm U}}
+(M_n,s_n,\Gamma_n,\omega_n^{\rm update}),\\
+c_n&=\mathsf A_n^{v_n^{\rm A}}(
+M_n,s_n,X_n,Z_n,F_n,\Gamma_n,d_n,
+\widetilde M_{n+1},\widetilde s_{n+1},\omega_n).
+\end{aligned}
+}
+
+\p{The task sampler pushes its seed law forward to #{\mu_{\mathsf T_n}}.
+Conditional on #{X_n}, the rollout sampler pushes its seed law forward to the
+interaction law of \ref{ftip-0028} under
+#{\mathsf{Env}^{\upsilon_n}_{\mathsf T_n}} and #{\pi_n}.}
+
+\p{If #{d_n=\mathsf{accept}}, set
+#{(M_{n+1},s_{n+1})=(\widetilde M_{n+1},\widetilde s_{n+1})}; if
+#{d_n=\mathsf{reject}}, set #{(M_{n+1},s_{n+1})=(M_n,s_n)}. The realized
+cost #{c_n} includes proposal work even after rejection. With
+#{v_n^{\rm ops}=(v_n^{\rm S},v_n^{\rm R},v_n^{\rm F},v_n^{\rm C},
+v_n^{\rm U},v_n^{\rm A})}, append}
+
+##{
+\begin{aligned}
+r_n={}&(\mathsf T_n,X_n,\nu_n,\upsilon_n,Z_n,F_n,\Gamma_n,d_n,
+\widetilde M_{n+1},\widetilde s_{n+1},M_{n+1},s_{n+1},
+\omega_n,v_n^{\rm ops},c_n),\\
+\mathcal L_{n+1}={}&\operatorname{append}(\mathcal L_n,r_n).
+\end{aligned}
+}
+
+\p{The record belongs to #{\mathcal R_{\rm ag}} from \ref{ftip-004U} and
+determines #{\Sigma_{n+1}} without rewriting an earlier record.}

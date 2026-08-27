@@ -1,0 +1,21 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\tag{ftip}
+\tag{rlvr}
+\tag{verifier}
+
+\card{Definition}{Verifier correctness indicator}{
+\p{For prompts and responses from \ref{ftip-002A}, a deterministic
+\newvocab{verifier correctness indicator} is a declared map}
+
+##{
+ v:\{(x,y):x\in\mathcal X_{\mathrm{pr}},\ y\in\mathcal Y(x)\}
+ \longrightarrow\{0,1\},
+}
+
+\p{Here #{v(x,y)=1} means that the response satisfies the checked predicate.
+The map includes the parsing and execution rules needed to reproduce the
+decision. A stochastic judge or learned reward model is a different feedback
+mechanism unless its randomness and decision procedure are separately exposed.}
+}

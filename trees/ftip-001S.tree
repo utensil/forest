@@ -2,24 +2,18 @@
 \meta{agent-authored}{true}
 
 \taxon{Remark}
-\title{What verifiability certifies}
+\title{Decoding and test-time compute belong to evaluation}
 \tag{ftip}
-\tag{rlvr}
-\tag{verifier}
+\tag{evaluation}
 
-\p{Verifiability certifies that a declared procedure can reproduce evidence
-and a decision. It does not certify that the checked predicate equals the full
-task objective. An answer checker may ignore reasoning. A unit-test suite may
-omit relevant behavior. A sandbox may expose an unintended shortcut.}
+\p{We formulate the model and evaluation protocol as separate inputs because
+one next-token law supports many procedures. Greedy decoding, temperature
+sampling, majority voting, verifier-guided selection, and multi-round tool use
+can produce different outcome laws from the same checkpoint. The sampling and
+selection procedures in \citet{secs. 3--4}{shao2024deepseekmath} are concrete
+examples.}
 
-\p{DeepSeek-R1's rule rewards in
-\citet{Section 2.2}{guo2025deepseek} make the checked predicates explicit.
-DAPO's reward and sampling interventions in
-\citet{Section 3}{yu2025dapo} show that optimizer behavior also depends on
-which samples enter the update. Neither source proves that a verifier is a
-complete evaluator.}
-
-\p{The immediate theorem questions are local. How do false positives alter
-the expected advantage? When does group normalization erase a rare signal?
-Which support conditions prevent clipping from hiding useful responses? Each
-question requires a verifier model and an independent evaluation criterion.}
+\p{Accordingly, a comparison that changes #{b_{\mathrm{eval}}} or
+#{\mathsf I} does not estimate a training-only effect. Later potential
+frontiers retain evaluation-time compute as a coordinate rather than hiding it
+inside a model score.}

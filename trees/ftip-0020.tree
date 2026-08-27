@@ -1,20 +1,19 @@
 \import{macros}
 \meta{agent-authored}{true}
 
-\taxon{Definition}
-\title{Termination rule and terminal outcome}
+\taxon{Remark}
+\title{Deterministic tools and stochastic environments}
 \tag{ftip}
 \tag{agent}
 
-\p{A \strong{termination rule} is a stopping time #{T} with respect to the
-public-history filtration. The rule may stop on a submitted answer, an
-environment terminal signal, a declared failure, or a fixed horizon.}
+\p{We use the kernel in \ref{ftip-001Z} for both tools and broader
+environments. A deterministic tool has a measurable update map
+#{F_t(s,a)=(s',o')} and the point-mass kernel concentrated at #{F_t(s,a)}. A
+stochastic environment permits several next state-observation pairs for the
+same input.}
 
-\p{A \strong{terminal outcome} #{Y} is a measurable function of the completed
-interaction and any post-termination environment state that the protocol is
-allowed to inspect. The policy need not observe all fields of #{Y}.}
-
-\p{Sections 3.1 and 3.3 of \citef{sutton2018reinforcement} describe episodic
-termination and terminal return. FTIP states the measurability
-boundary because a terminal test result may be valid training feedback without
-being valid information for an earlier action.}
+\p{This distinction matters for replay. Re-executing a deterministic tool call
+under an unchanged state reproduces its observation, whereas a stored rollout
+from a stochastic environment is one sample from a conditional law. Any
+analysis that replaces one with the other needs a coupling or concentration
+assumption.}

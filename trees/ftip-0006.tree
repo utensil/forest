@@ -2,21 +2,21 @@
 \meta{agent-authored}{true}
 
 \taxon{Remark}
-\title{Where compute is spent}
+\title{How we synthesize the elicitation criterion}
 \tag{ftip}
-\tag{compute}
+\tag{evaluation}
 
-\p{Post-training consumes compute at several distinct interfaces. A policy
-generates a rollout. An environment executes actions, and a verifier checks
-evidence. The optimizer then transforms feedback into a parameter update.
-Evaluation and deployment consume additional inference compute.}
+\p{We synthesize the criterion in \ref{ftip-0005} from two recurring
+observations. First, reinforcement learning can move probability toward
+successful traces that a base model already emits; this possibility is tested
+empirically in
+\citet{secs. 2.3 and 3.3--3.4}{liu2025understanding}. Second, a finite experiment
+cannot establish that an unrestricted generative model assigns exactly zero
+probability to a behaviour. The positive threshold
+#{\varepsilon} therefore belongs to the declared experiment rather than to an
+ontological claim about what the model ``contains.''}
 
-\p{These operations cannot be counted by one unqualified number of steps.
-Reusing a rollout can reduce generation while increasing update work.
-Predicting a later checkpoint can reduce realized optimizer steps while adding
-checkpoint, fitting, and recovery costs. \citef{miao2026when} and
-\citef{chen2026lowrank} study these two interventions in particular settings.}
-
-\p{FTIP will therefore record a typed cost vector before asking for an optimum.
-This remark introduces no cost formula. It states the accounting requirement
-that later definitions must satisfy.}
+\p{Later questions ask how an elicitation witness changes with the sampling
+budget, decoding rule, and reward. A useful theorem would bound the attainable
+increase in #{p_1(B)} from the starting probability #{p_0(B)} and the
+information supplied by post-training.}

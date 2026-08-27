@@ -1,0 +1,39 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Example}
+\title{A short code-agent trace with tool evidence}
+\tag{ftip}
+\tag{agent}
+\tag{tool-use}
+
+\p{A failing test observation triggers a second edit, whose passing tool
+evidence determines the terminal result.}
+
+\tikzfig{\begin{tikzpicture}[
+  box/.style={draw, rounded corners=2pt, align=center, font=\small,
+    text width=28mm, minimum height=10mm},
+  flow/.style={-{Stealth[length=2mm]}, thick}
+]
+\node[box] (task) at (0,1.35) {task\\make $f(3)=9$};
+\node[box] (edit1) at (4.0,1.35) {edit\\$f(x)=x+x$};
+\node[box] (test1) at (8.0,1.35) {test output\\expected $9$, got $6$};
+\node[box] (edit2) at (8.0,-1.25) {edit\\$f(x)=x^2$};
+\node[box] (test2) at (4.0,-1.25) {test output\\$1$ passed};
+\node[box] (stop) at (0,-1.25) {terminal\\success};
+\draw[flow] (task) -- (edit1);
+\draw[flow] (edit1) -- node[font=\scriptsize, fill=white] {run} (test1);
+\draw[flow] (test1) -- (edit2);
+\draw[flow] (edit2) -- node[font=\scriptsize, fill=white] {run} (test2);
+\draw[flow] (test2) -- (stop);
+\end{tikzpicture}}
+
+\p{The public history records both edits and both test outputs. The first
+tool call returns the evidence string \em{expected 9, got 6}; the second
+returns exit status #{0} and \em{1 passed}. The success rule reads the second
+test result rather than the model's assertion that its edit is correct.}
+
+\p{The action--observation alternation follows the tool-interleaving pattern
+in \citet{Section 2}{yao2023react}. The transparent sandbox interaction
+certifies only the displayed test result; completeness of the suite and
+satisfaction of unstated intent remain unverified.}

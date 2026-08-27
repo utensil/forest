@@ -1,21 +1,19 @@
 \import{macros}
 \meta{agent-authored}{true}
 
-\title{Supervised and preference post-training}
+\taxon{Definition}
+\title{Ordered pretraining data pipeline}
 \tag{ftip}
-\tag{post-training}
+\tag{pretraining}
 
-\p{Pretraining supplies a conditional language model. Post-training changes
-that model with task-facing records. This section separates demonstrations,
-preferences, rewards, and regularization before turning to reinforcement
-learning.}
-
-\transclude{ftip-0018}
-\transclude{ftip-0019}
-\transclude{ftip-001A}
-\transclude{ftip-001B}
-\transclude{ftip-001C}
-\transclude{ftip-001D}
-\transclude{ftip-001E}
-\transclude{ftip-001F}
-\transclude{ftip-001G}
+\p{Let #{\mathcal C_{\mathrm{raw}}\in\mathcal M_{\rm doc}} be a finite corpus
+drawn from the source mixture in \ref{ftip-0016}. Using the document filter,
+deduplication operator, and evaluation decontamination operator of
+\ref{ftip-0070}--\ref{ftip-0072}, an \newvocab{ordered pretraining data
+pipeline} returns
+##{
+\mathcal C_{\mathrm{clean}}
+=C_{\mathcal E}\left(D\left(F_{\#}(\mathcal C_{\mathrm{raw}})\right)\right).
+}
+Changing the order can change the retained corpus. The pipeline therefore
+records the order and exact revisions in addition to the three operators.}

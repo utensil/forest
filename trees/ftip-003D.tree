@@ -1,0 +1,24 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\tag{ftip}
+\tag{rlhf}
+\tag{reward}
+
+\refdeft{KL-shaped PPO reward}{Section 3.5, equation (2)}{ouyang2022training}{
+\p{For a prompt #{x}, sampled response #{y}, learned reward score
+#{r_\phi(x,y)}, and fixed reference policy #{\pi_{\mathrm{ref}}}, the
+sequence-level \newvocab{KL-shaped reward} is}
+
+##{
+ R_{\mathrm{shape}}(x,y;\theta)
+ =r_\phi(x,y)
+ -\beta\log\frac{\pi_\theta(y\mid x)}
+                    {\pi_{\mathrm{ref}}(y\mid x)}.
+}
+
+\p{Autoregressive factorization writes the logarithmic term as a sum of
+token-level log ratios. Ouyang et al. also mix a pretraining-gradient term into
+their reported PPO objective; that auxiliary term is separate from the shaped
+reward displayed here.}
+}

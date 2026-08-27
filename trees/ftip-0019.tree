@@ -2,23 +2,16 @@
 \meta{agent-authored}{true}
 
 \taxon{Definition}
-\title{Instruction-tuning record}
+\title{Context-window sampler}
 \tag{ftip}
-\tag{supervised-fine-tuning}
+\tag{pretraining}
 
-\p{Let #{\mathcal X_{\mathrm{pr}}} be a set of prompts. For each
-#{x\in\mathcal X_{\mathrm{pr}}}, let
-#{\mathcal Y(x)} be the finite token responses admitted by the training
-format. An \strong{instruction-tuning record} is a pair}
+\p{Fix the context length #{T} from \ref{ftip-0015}. A
+\newvocab{context-window sampler} draws cleaned text from the law described in
+\ref{ftip-0018} and tokenizes it with \ref{ftip-000E}. It then chooses a
+declared offset and returns a length-#{T} token sequence #{x_{1:T}} together
+with metadata that identifies document boundaries.}
 
-##{
-  z=(x,y),\qquad x\in\mathcal X_{\mathrm{pr}},\quad y\in\mathcal Y(x),
-}
-
-\p{where #{y} is a target response supplied by a human, a teacher, or another
-declared data source. The source and selection rule belong to the record's
-provenance.}
-
-\p{This specializes the demonstration data used for supervised fine-tuning
-in \citet{Sections 3.2 and 3.4}{ouyang2022training}. It does not assert that every
-target response is correct or uniquely preferred.}
+\p{If fewer than #{T} tokens remain, the sampler must specify whether it pads,
+drops the suffix, or joins another document. These choices change both the
+distribution of contexts and the prediction mask.}

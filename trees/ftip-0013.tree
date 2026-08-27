@@ -1,20 +1,48 @@
 \import{macros}
 \meta{agent-authored}{true}
 
-\taxon{Definition}
-\title{Pretraining compute budget}
+\taxon{Example}
+\title{Decoder-only dataflow and a DeepSeek V4-Flash provenance overlay}
 \tag{ftip}
-\tag{pretraining}
-\tag{compute}
+\tag{transformer}
+\tag{deepseek}
 
-\p{A \newvocab{pretraining compute budget} is an upper bound
-#{C_{\rm pre}} on a declared cost measure for the complete pretraining run.
-The declaration must say whether it counts arithmetic operations, accelerator
-time, energy, or another resource.}
+\p{Two aligned rows juxtapose a finite decoder shape trace with the
+provenance boundary around DeepSeek-V4-Flash-0731.}
 
-\p{Hoffmann et al. state their FLOP calculation in
-\citet{app. F}{hoffmann2022training}. Kaplan et al. relate parameter count,
-training tokens, and compute in
-\citet{sec. 2.1}{kaplan2020scaling}. A FLOP estimate and elapsed time are
-different measures. FTIP will not substitute one for the other without an
-explicit conversion model.}
+\tikzfig{\begin{tikzpicture}[
+  box/.style={draw, rounded corners=2pt, align=center, font=\small,
+    text width=22mm, minimum height=10mm},
+  flow/.style={-{Stealth[length=2mm]}, thick},
+  inherited/.style={-{Stealth[length=2mm]}, thick, dashed},
+  unknown/.style={-{Stealth[length=2mm]}, thick, dotted}
+]
+\node[box] (ids) at (0,1.35) {three\\token IDs};
+\node[box] (h0) at (2.7,1.35) {$H^{(0)}$\\shape $3\times4$};
+\node[box] (blocks) at (5.4,1.35) {two causal\\blocks};
+\node[box] (logits) at (8.1,1.35) {logits\\shape $3\times3$};
+\draw[flow] (ids) -- (h0);
+\draw[flow] (h0) -- (blocks);
+\draw[flow] (blocks) -- (logits);
+\node[box] (artifact) at (0,-1.35) {V4-Flash-0731\\artifact};
+\node[box] (direct) at (2.7,-1.35) {DIRECT\\pinned config};
+\node[box] (family) at (5.4,-1.35) {INHERITED\\family report};
+\node[box] (delta) at (8.1,-1.35) {UNKNOWN\\0731 delta};
+\draw[flow] (artifact) -- (direct);
+\draw[inherited] (artifact) to[bend left=12] (family);
+\draw[unknown] (artifact) to[bend left=18] (delta);
+\end{tikzpicture}}
+
+\p{\strong{SCHEMATIC.} For a toy vocabulary of size #{3}, sequence length
+#{3}, hidden width #{4}, and two blocks, the shapes are
+#{(3)\to(3\times4)\to(3\times4)\to(3\times3)}; the last logit row determines
+the next-token law.}
+
+\p{\strong{DIRECT.} The pinned configuration
+\citelink{https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash-0731/blob/7872f01b1d1fe23eabc4c98b48bffcef5a386062/config.json}
+declares 43 layers, hidden width 4096, 64 attention heads, and one
+key--value head. \strong{INHERITED.} Section 2 of the family report
+\citelink{https://arxiv.org/abs/2606.19348} describes the preview
+architecture. \strong{UNKNOWN.} Neither source identifies a complete
+0731-specific architecture or training delta. The toy trace checks dimensions;
+it is not a small copy of the released model.}

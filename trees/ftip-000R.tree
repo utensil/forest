@@ -1,18 +1,38 @@
 \import{macros}
 \meta{agent-authored}{true}
 
-\taxon{Definition}
-\title{Decoder block}
+\taxon{Example}
+\title{A two-token attention calculation}
 \tag{ftip}
 \tag{transformer}
+\tag{attention}
 
-\p{A \newvocab{decoder block} is a shape-preserving map on hidden-state
-sequences formed from a causally masked self-attention sublayer and a
-pointwise feed-forward sublayer. Each sublayer has a residual connection and
-a declared normalization placement.}
+\p{A scalar attention head on two positions makes the masked softmax and its
+resulting value average explicit.}
 
-\p{The two-sublayer decoder construction appears in
-\citet{sec. 3.1}{vaswani2017attention}. The original encoder-decoder model also
-has cross-attention in its decoder. A decoder-only language model omits that
-cross-attention sublayer, as described in
-\citet{sec. 6, Decoder-only transformers}{phuong2022formal}.}
+\tikzfig{\begin{tikzpicture}[
+  box/.style={draw, rounded corners=2pt, align=center, font=\small,
+    text width=28mm, minimum height=11mm},
+  flow/.style={-{Stealth[length=2mm]}, thick}
+]
+\node[box] (qkv) at (0,0) {$q_2=1$\\$k=(0,\log 3)$\\$v=(2,6)$};
+\node[box] (logits) at (4.0,0) {logits\\$(0,\log 3)$};
+\node[box] (weights) at (8.0,0) {weights $(1/4,3/4)$\\output $5$};
+\draw[flow] (qkv) -- node[font=\scriptsize, fill=white] {$q_2k^\top$} (logits);
+\draw[flow] (logits) -- node[font=\scriptsize, fill=white] {softmax} (weights);
+\end{tikzpicture}}
+
+\p{Take head width #{d_h=1}, so the scale #{1/\sqrt{d_h}} is one. At
+position two both keys are causally available. Therefore
+##{
+ \operatorname{softmax}(0,\log 3)
+ =\frac{(1,3)}{1+3}
+ =\left(\tfrac14,\tfrac34\right),
+ \qquad
+ z_2=\tfrac14\cdot2+\tfrac34\cdot6=5.
+}}
+
+\p{Substitution into the scaled dot-product attention of
+\ref{ftip-000Q} produces the displayed value. Projection matrices, multiple
+heads, normalization, and residual connections remain outside this scalar
+calculation; it represents only one attention operation.}

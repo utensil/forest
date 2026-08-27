@@ -1,0 +1,18 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Remark}
+\title{Why instruction data require serialization}
+\tag{ftip}
+\tag{instruction-tuning}
+
+\p{The next-token law in \ref{ftip-000H} accepts token prefixes, whereas an
+instruction dataset may store structured prompts. We formulate
+\ref{ftip-006V} as the map between those types. Ouyang et al. describe SFT on
+labeler demonstrations in \citet{Section 3.5 and Appendix C.1}{ouyang2022training};
+their training account supplies a concrete pipeline rather than a universal
+serializer.}
+
+\p{A reproducible objective must retain the serializer revision with the
+tokenizer and loss mask. Otherwise two runs can share an abstract dataset
+name while optimizing different token sequences.}

@@ -1,22 +1,22 @@
 \import{macros}
 \meta{agent-authored}{true}
 
-\taxon{Definition}
-\title{Trust contract}
 \tag{ftip}
-\tag{evaluation}
-\tag{provenance}
+\tag{preference}
+\tag{feedback}
 
-\p{A \strong{trust contract} #{\operatorname{Trust}(P)} is a predicate on a
-post-training protocol and its recorded execution. It requires evaluation
-independence, policy and data provenance, declared information access, and
-complete lifecycle-cost accounting.}
+\card{Definition}{Pairwise comparison observation}{
+\p{Restrict attention to a comparison for which the judge selects one displayed
+alternative rather than reporting indifference or incomparability. For a query
+#{c=(x,y^0,y^1)} and a judge #{j}, a
+\newvocab{pairwise comparison observation} is the displayed pair together with
+the judge's selected alternative. In winner--loser notation it is recorded as}
 
-\p{This is an FTIP proposal. Its clauses are motivated by standard held-out
-evaluation and by concrete provenance failures in replay or trajectory studies.
-For example, a future checkpoint cannot be used to train a path predictor and
-then counted as information available at an earlier step.}
+##{
+ o=(x,y^+,y^-,j).
+}
 
-\p{The contract is not a proof that a benchmark measures intelligence. It is a
-minimum admissibility gate. Each experiment must instantiate the predicate as
-auditable conditions.}
+\p{The observation reports a choice made under the declared presentation and
+query procedure. It does not by itself provide a numerical reward, a complete
+ranking of responses, or a judgment about alternatives that were not shown.}
+}

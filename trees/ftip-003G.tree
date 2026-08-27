@@ -1,0 +1,35 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\tag{ftip}
+\tag{ppo}
+\tag{optimization}
+
+\refdeft{PPO value-and-entropy objective}{Section 5, equation (9)}{schulman2017proximal}{
+\p{PPO implementations may optimize the combined sampled objective}
+
+##{
+ \widehat{\mathbb E}_t\left[
+ L_t^{\mathrm{CLIP}}(\theta)
+ -c_1\bigl(V_\theta(\mathsf H_t)-\widehat G_t\bigr)^2
+ +c_2\,\mathcal H\left(\pi_\theta(\cdot\mid \mathsf H_t)\right)
+ \right],
+}
+
+\p{Here #{L_t^{\mathrm{CLIP}}} is the per-sample integrand of the clipped
+surrogate in \ref{ftip-003F}, #{c_1,c_2\geq0}, #{\widehat G_t} is the declared
+value target, and, on the declared finite or countable discrete action set,}
+
+##{
+ \mathcal H(p)=-\sum_a p(a)\log p(a).
+}
+
+\p{The combined objective is used only when this nonnegative countable sum is
+finite, with #{0\log0=0}. For a continuous action law, an implementation must
+instead declare a reference measure and the corresponding density-based
+entropy convention.}
+
+\p{The value loss and entropy bonus change the shared-parameter update in
+addition to the clipped policy term. Their coefficients, target construction,
+and action space are part of the optimization method.}
+}

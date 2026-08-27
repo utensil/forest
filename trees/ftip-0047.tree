@@ -1,0 +1,24 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\tag{ftip}
+\tag{rlvr}
+\tag{evidence}
+
+\card{Definition}{Verifier evidence}{
+\p{A \newvocab{verifier evidence record} is a tuple}
+
+##{
+ e_{\mathrm{ver}}=(\iota_{\mathrm{ver}},x,y,o,d_{\mathrm{ver}}),
+}
+
+\p{where #{\iota_{\mathrm{ver}}} identifies the verifier and its version,
+#{o} is the reproducible output used by the check, and
+#{d_{\mathrm{ver}}\in\{0,1\}} is the resulting decision. Examples of #{o}
+include a parsed
+exact answer, a test log, or a proof-checker result.}
+
+\p{The evidence record preserves how the decision was obtained. It does not
+assert that the checked predicate is complete for the task's independent
+success criterion.}
+}

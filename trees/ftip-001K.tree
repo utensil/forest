@@ -2,23 +2,22 @@
 \meta{agent-authored}{true}
 
 \taxon{Definition}
-\title{Verifiable reward}
+\title{Base-model artifact}
 \tag{ftip}
-\tag{rlvr}
-\tag{reward}
+\tag{pretraining}
 
-\p{Given a verifier #{V} and a declared score map
-#{s:\mathcal E\times\{\mathsf{pass},\mathsf{fail}\}\to\mathbb R}, the
-\strong{verifiable reward} is}
-
+\p{A \newvocab{base-model artifact} is an executable tuple
 ##{
-  R_V(x,y)=s(V(x,y)).
+M_0=(\tau,\delta,\mathsf{cfg},\theta_K,\mathsf{num}),
 }
+where #{\tau,\delta} are the tokenizer and detokenizer of
+\ref{ftip-000E}; #{\mathsf{cfg}} fixes the architecture of
+\ref{ftip-0012}; #{\theta_K} is the stopped pretraining checkpoint; and
+#{\mathsf{num}} fixes the numerical and inference conventions required to
+evaluate its next-token law.}
 
-\p{A reward is verifiable when a component that can change the update is
-computed from reproducible evidence rather than an unaudited model judgment.
-The score map may still combine accuracy, format, and other declared checks.}
-
-\p{The rule rewards in \citet{Section 2.2}{guo2025deepseek} and the outcome
-rewards used with GRPO in \citet{Section 4.1}{shao2024deepseekmath} are source
-instances. The general definition is an FTIP synthesis across these uses.}
+\p{The tokenizer model is part of the executable system by
+\ref{ftip-000E}. A weight file without its vocabulary, architecture
+configuration, or output convention does not determine the law
+#{\pi_{\theta_K}} in \ref{ftip-000H}. Training-data and optimizer provenance
+may accompany the artifact, but they are not runtime inputs.}

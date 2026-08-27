@@ -1,18 +1,23 @@
 \import{macros}
 \meta{agent-authored}{true}
 
-\taxon{Remark}
-\title{Architecture coordinates relevant to post-training}
+\refdeft{Multi-head self-attention}{sec. 3.2.2}{vaswani2017attention}{
+\p{For each head #{h\in\{1,\ldots,H\}}, form #{Q_h,K_h,V_h} as in
+\ref{ftip-000P} from the same input #{X}, and apply the masked attention of
+\ref{ftip-000S}:
+##{
+Z_h=\operatorname{softmax}\left(
+\frac{Q_hK_h^{\mathsf T}}{\sqrt{d_h}}+M
+\right)V_h.
+}
+With #{W^O\in\mathbb R^{H d_v\times d}}, \newvocab{multi-head
+self-attention} is
+##{
+\operatorname{MHA}(X)
+=\operatorname{Concat}(Z_1,\ldots,Z_H)W^O.
+}
+It returns one width-#{d} vector at every input position.}
+}
+
 \tag{ftip}
-\tag{transformer}
-\tag{post-training}
-
-\p{The next-token law hides several costs. Hidden width and block count affect
-the work of one forward or backward pass. Attention structure affects how
-that work grows with context length. The output head fixes the map through
-which token-level losses reach the final hidden states.}
-
-\p{These observations identify possible variables for later results. They do
-not show that any one variable controls post-training gain. A theorem that
-uses an architecture property must name the property and the computational
-model in which its cost is measured.}
+\tag{attention}

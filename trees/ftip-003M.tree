@@ -1,0 +1,25 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\tag{ftip}
+\tag{dpo}
+\tag{notation}
+
+\card{Notation}{Temperature and reference-policy log ratios}{
+\p{Let #{\beta>0} be the KL coefficient, #{\pi_{\mathrm{ref}}} a fixed
+reference policy, and #{\pi_\theta} a trainable policy with support contained
+in that of the reference on the responses under study. Define the
+reference-relative log likelihood}
+
+##{
+ \ell_\theta(x,y)
+ =\log\frac{\pi_\theta(y\mid x)}{\pi_{\mathrm{ref}}(y\mid x)}
+}
+
+\p{and, for a comparison observation, the paired difference}
+
+##{
+ \Delta_\theta(x,y^+,y^-)
+ =\ell_\theta(x,y^+)-\ell_\theta(x,y^-).
+}
+}

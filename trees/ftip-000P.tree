@@ -1,18 +1,21 @@
 \import{macros}
 \meta{agent-authored}{true}
 
-\taxon{Definition}
-\title{Residual connection}
-\tag{ftip}
-\tag{transformer}
-
-\p{If #{F} maps hidden-state sequences to hidden-state sequences of the same
-shape, its \newvocab{residual connection} is the map
+\refdeft{Query, key, and value projections}{sec. 3.2.1}{vaswani2017attention}{
+\p{Let #{X\in\mathbb R^{T\times d}} use the notation of
+\ref{ftip-000L}. For attention head #{h}, choose learned matrices
 ##{
-\operatorname{Res}_F(H)=H+F(H).
-}}
+W_h^Q,W_h^K\in\mathbb R^{d\times d_h},
+\qquad
+W_h^V\in\mathbb R^{d\times d_v},
+}
+where #{d_v} is the value width of one head. The \newvocab{query},
+\newvocab{key}, and \newvocab{value} matrices are
+##{
+Q_h=XW_h^Q,\qquad K_h=XW_h^K,\qquad V_h=XW_h^V.
+}
+Their rows associate a query, key, and value vector with each token position.}
+}
 
-\p{The Transformer uses residual connections around its attention and
-feed-forward sublayers in \citet{sec. 3.1}{vaswani2017attention}. The summands
-must have the same type. A residual connection specifies the additive route;
-it does not specify where normalization is applied.}
+\tag{ftip}
+\tag{attention}

@@ -1,26 +1,20 @@
 \import{macros}
 \meta{agent-authored}{true}
 
-\taxon{Definition}
-\title{Verifier and verifier evidence}
+\taxon{Remark}
+\title{Randomness, schedules, and stopping}
 \tag{ftip}
-\tag{verifier}
-\tag{feedback}
+\tag{optimization}
 
-\p{Let #{\mathcal E} be a set of evidence objects. A \strong{verifier} is a
-declared procedure}
+\p{We formulate a pretraining run as more than minimization of the empirical
+objective #{L_N} in \ref{ftip-001E}. It includes the initialization, data order, window offsets, dropout and
+other model randomness, numerical precision, distributed reduction order,
+optimizer state, every hyperparameter schedule, and a stopping rule. These
+objects determine a distribution over final parameters even when the source
+mixture and nominal objective agree.}
 
-##{
-  V:\{(x,y):x\in\mathcal X_{\mathrm{pr}},\ y\in\mathcal Y(x)\}
-    \longrightarrow \mathcal E\times\{\mathsf{pass},\mathsf{fail}\}.
-}
-
-\p{For #{V(x,y)=(e,d)}, the value #{e} is the \strong{verifier evidence} and
-#{d} is the verifier decision. Evidence may be an exact-answer check, a unit
-test log, or a proof-checker result. The procedure and its version are part of
-the definition.}
-
-\p{Accuracy and format rewards are described in
-\citet{Section 2.2, ``Reward Design''}{guo2025deepseek}. FTIP exposes
-evidence separately because a binary decision does not reveal how it was
-obtained.}
+\p{The training configuration of \citet{sec. 5.3}{vaswani2017attention} and
+the scaling experiments of \citet{sec. 2.2}{kaplan2020scaling} report concrete
+instances of these choices. A later theorem about optimization must state
+which randomness it averages over and whether the stopping time is fixed or
+data-dependent.}

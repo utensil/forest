@@ -1,0 +1,20 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Remark}
+\title{How we formulate window sampling and packing}
+\tag{ftip}
+\tag{pretraining}
+
+\p{\citek{kaplan2020scaling}, Section 2.2, uses fixed-length sequence batches.}
+
+\p{\citek{phuong2022formal}, Section 7, gives the causal language-model
+objective.}
+
+\p{We formulate the sampler, segment identifiers, document mask, and prediction
+mask so the boundary choices omitted by those high-level accounts remain
+explicit.}
+
+\p{These objects describe one admissible data interface. A concrete training
+run must replace them with its offset, padding, joining, masking, and packing
+rules.}

@@ -1,0 +1,42 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Definition}
+\title{Sandbox}
+\tag{ftip}
+\tag{agent}
+\tag{environment}
+
+\p{Fix an interactive realization #{\mathsf{Env}_{\mathsf T}} from
+\ref{ftip-006T}, a measurable evidence space #{\mathcal E_{\rm box}}, and a cost
+dimension #{m\geq1}. A \strong{sandbox} specifies an allowed action set
+#{\mathcal A^{\rm box}_{\mathsf T}\subseteq\mathcal A_{\mathsf T}} that is
+measurable, a cost bound #{b_{\rm box}\in\mathbb R_+^m}, and, for each
+#{x\in\mathcal X_{\mathsf T}} and #{0\leq t<T_{\max}}, an execution kernel}
+
+##{
+K_{t}^{\rm box,x}:
+\mathcal S_{\mathsf T}\times\mathcal A^{\rm box}_{\mathsf T}
+\rightsquigarrow
+\mathcal S_{\mathsf T}\times\mathcal O^{\rm obs}_{\mathsf T}
+\times\mathcal E_{\rm box}\times\mathbb R_+^m,
+}
+
+\p{It also specifies, for each #{x\in\mathcal X_{\mathsf T}}, a reset kernel}
+
+##{
+\mathsf{Reset}^{x}_{\rm box}:\{\ast\}\rightsquigarrow
+\mathcal S_{\mathsf T}\times\mathcal O^{\rm obs}_{\mathsf T}
+\times\mathcal E_{\rm box}\times\mathbb R_+^m.
+}
+
+\p{For an allowed action, the state--observation marginal of
+#{K_t^{\rm box,x}} is the kernel #{K_t^x} in the task realization; the
+state--observation marginal of the reset kernel is #{\rho_0^x}. The remaining
+coordinates record reproducible evidence and a realized cost increment. An
+admitted stopped trajectory must have componentwise cumulative cost at most
+#{b_{\rm box}}.}
+
+\p{The sandbox semantics include permissions, kernel and reset versions,
+evidence encoding, and cost accounting. A tool name or API schema alone does
+not determine these fields.}

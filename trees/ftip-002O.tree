@@ -1,35 +1,19 @@
 \import{macros}
 \meta{agent-authored}{true}
 
-\taxon{Definition}
-\title{Acquisition witness}
 \tag{ftip}
-\tag{evaluation}
+\tag{preference}
+\tag{probability}
 
-\p{A \strong{witness family} is a prespecified measurable assignment
-#{q\mapsto W(q)} of accepted evaluation trajectories. Define}
+\card{Definition}{Preference data law}{
+\p{A \newvocab{preference data law} #{\mathcal D_{\mathrm{pref}}} is a
+probability law on pairwise comparison observations
+#{o=(x,y^+,y^-,j)} from \ref{ftip-002L}. It includes the randomness of prompt
+selection, response generation, pair selection, judge selection, and the
+judge's reported label.}
 
-##{
- s_W(\pi)=\mathbb E_{q\sim\mathcal Q_{\mathrm{ev}}}
- \left[\mathbb P^{D,b}_{q,\pi}\{\tau\in W(q)\}\right].
+\p{A finite training multiset
+#{D_{\mathrm{pref}}=(o_1,\ldots,o_N)} is sampled or adaptively collected under
+that law and its acquisition history. When queries are adaptive, the records
+need not be independent or identically distributed.}
 }
-
-\p{For declared thresholds #{0\leq\alpha<\beta\leq1}, the family is an
-\strong{acquisition witness} for protocol #{P} when}
-
-##{
- s_W(\pi_0)\leq\alpha,
- \qquad
- \mathbb E[s_W(\Pi_P)]\geq\beta.
-}
-
-\p{This is an FTIP proposal motivated by the elicitation-versus-acquisition
-debate in \citet{Sections 1 and 4}{liu2025understanding} and
-\citet{Sections 1 and 3--4}{yue2025does}. The witness
-must specify its threshold, sampling procedure, and independence conditions.
-An appealing trace selected after observing the trained model is insufficient.}
-
-\p{The family may encode a strategy class, a transfer set, or another
-independently checked event. A witness is finite evidence, not proof of exact
-support expansion. It strengthens a gain claim by testing a declared
-alternative explanation.}

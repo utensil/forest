@@ -2,21 +2,18 @@
 \meta{agent-authored}{true}
 
 \taxon{Definition}
-\title{Policy stamp and provenance}
+\title{Stopped trajectory}
 \tag{ftip}
-\tag{provenance}
+\tag{agent}
 
-\p{A \strong{policy stamp} #{\nu} identifies the policy that generated an
-action. It contains a checkpoint identifier, a parameterization identifier,
-and the accepted-update index. A rollout generated throughout by one policy
-has a behaviour stamp #{\nu_b}. We write #{\pi^{\nu}} for the executable
-policy artifact resolved by stamp #{\nu}.}
+\p{If #{\tau_{\mathrm{stop}}=n}, the \newvocab{stopped trajectory} is
+##{
+Z=(S_0,O_0,A_0,S_1,O_1,A_1,\ldots,
+A_{n-1},S_n,O_n).
+}
+It contains the environment states as well as the public action-observation
+record. Its public projection is the history #{H_n} of \ref{ftip-0021}.}
 
-\p{Section 3 of \citef{schulman2017proximal} distinguishes the current policy
-from the behaviour policy. The reuse analysis of \citef{miao2026when} requires
-the same distinction. The policy stamp is an FTIP proposal motivated by both
-sources. The parameterization identifier records changes such as
-an adapter merge or a tokenizer revision that a weight hash alone may miss.}
-
-\p{A stamp identifies provenance; it is not an estimate of policy distance.
-Likelihood ratios and age are computed later for a particular update attempt.}
+\p{For #{n=0}, the trajectory is #{(S_0,O_0)} and contains no action. A
+terminal utility may depend on the full trajectory when evaluated inside the
+environment, even though the policy is restricted to its public projection.}

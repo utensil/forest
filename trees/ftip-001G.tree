@@ -1,24 +1,21 @@
 \import{macros}
 \meta{agent-authored}{true}
 
-\taxon{Remark}
-\title{Why these objectives are not interchangeable}
+\taxon{Definition}
+\title{Minibatch gradient estimator}
 \tag{ftip}
-\tag{post-training}
+\tag{optimization}
 
-\p{A demonstration states which response to imitate. A comparison states
-which of two responses a judge selected. A reward model predicts a scalar
-encoding of comparisons. Process supervision locates judgments inside a
-response. Each signal excludes information available to another.}
-
-\p{Their losses also induce different policy movements. Supervised loss
-raises likelihood on recorded targets. A preference loss depends on paired
-alternatives and its comparison model. KL regularization limits movement
-relative to a named reference. None of these facts alone determines whether
-the resulting policy improves under an independent evaluator.}
-
-\p{The first theorem questions should therefore be conditional. Which
-feedback channels identify a useful ordering? When does a scalar reward
-represent that ordering? Which regularizer preserves useful support? These
-questions draw on \citef{christiano2017deep}, \citef{ouyang2022training},
-\citef{rafailov2023direct}, and \citef{lightman2023verify}.}
+\p{At update #{k}, let #{\mathcal B_k} be the minibatch named in
+\ref{ftip-0015}, and let
+#{N_k=\sum_{\zeta\in\mathcal B_k}\sum_{t=2}^{T}m_t(\zeta)} be its number of
+predicted tokens. For #{N_k>0}, the \newvocab{minibatch gradient estimator}
+is
+##{
+g_k=\frac1{N_k}
+\sum_{\zeta\in\mathcal B_k}\sum_{t=2}^{T}
+\nabla_\theta\ell_t(\theta_k;\zeta),
+}
+where #{\ell_t} is defined in \ref{ftip-001B}. Whether #{g_k} is unbiased for
+the gradient of \ref{ftip-001C} depends on the window sampler and minibatch
+weighting. Other sampling schemes require their own bias statement.}

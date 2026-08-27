@@ -2,29 +2,22 @@
 \meta{agent-authored}{true}
 
 \taxon{Definition}
-\title{Reference policy and KL regularization}
+\title{Empirical pretraining objective}
 \tag{ftip}
-\tag{regularization}
-\tag{policy}
+\tag{pretraining}
 
-\p{A \strong{reference policy} #{\pi_{\mathrm{ref}}} is a fixed response law
-used to measure movement of a trainable policy #{\pi_\theta}. For a prompt
-#{x}, the forward policy divergence is}
-
+\p{For a finite training sample of packed records
+#{\mathcal D_N=(\zeta^{(i)})_{i=1}^{N}} with at least one unmasked
+target token, the \newvocab{empirical pretraining objective} is
 ##{
- D_{\mathrm{KL}}
-   (\pi_\theta\Vert\pi_{\mathrm{ref}}\mid x)
- =\sum_{y\in\mathcal Y(x)}
-   \pi_\theta(y\mid x)
-   \log\frac{\pi_\theta(y\mid x)}{\pi_{\mathrm{ref}}(y\mid x)}.
+L_N(\theta)
+=\frac{
+\sum_{i=1}^{N}\sum_{t=2}^{T}
+\ell_t(\theta;\zeta^{(i)})
+}{
+\sum_{i=1}^{N}\sum_{t=2}^{T}m_t(\zeta^{(i)})
+}.
 }
-
-\p{A \strong{KL-regularized objective} subtracts a nonnegative multiple of
-this divergence from its task objective. It is finite only when
-#{\pi_\theta(\cdot\mid x)} is absolutely continuous with respect to the
-reference law.}
-
-\p{Section 3.5 and Appendix C.4 of \citef{ouyang2022training} describe the
-PPO stage and its KL treatment. The DPO derivation in
-\citet{Section 4}{rafailov2023direct} also uses a reference policy. The two
-objectives are not the same.}
+This is a per-predicted-token average. Reusing or resampling examples changes
+the stochastic optimization path even when the displayed finite-sample
+function is unchanged.}

@@ -2,23 +2,21 @@
 \meta{agent-authored}{true}
 
 \taxon{Definition}
-\title{Non-anticipating policy}
+\title{Transition-observation kernel}
 \tag{ftip}
 \tag{agent}
-\tag{policy}
 
-\p{A \strong{non-anticipating policy} is a family of probability kernels}
-
+\p{A \newvocab{transition-observation kernel} at time #{t} is a probability
+kernel
 ##{
-  \pi_t(da\mid H_t), \qquad t=0,1,\ldots,
+K_t(ds_{t+1},do_{t+1}\mid s_t,a_t)
 }
+from the current hidden state and action to the next hidden state and public
+observation. After #{A_t=a_t}, the environment draws
+#{(S_{t+1},O_{t+1})} from this kernel.}
 
-\p{from public histories to actions. At time #{t}, the next action may depend
-on #{H_t} and fresh policy randomness. It may not depend on a later
-observation, a hidden state not encoded in #{H_t}, or the evaluator's future
-decision.}
-
-\p{This specializes the history-policy semantics in
-\citet{Section 2}{kaelbling1998planning}. A language model implements
-such a policy only after a decoder and an action-serialization rule have been
-fixed. The model's next-token law alone does not determine a tool-level policy.}
+\p{The factorization
+#{K_t(ds',do'\mid s,a)=P_t(ds'\mid s,a)\,Q_t(do'\mid s',a)} for declared
+kernels #{P_t} and #{Q_t} recovers the
+usual separate state-transition and observation kernels when such a
+factorization is declared. The joint-kernel form does not assume it.}

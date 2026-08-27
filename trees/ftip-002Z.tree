@@ -1,28 +1,16 @@
 \import{macros}
 \meta{agent-authored}{true}
 
-\taxon{Definition}
-\title{Off-policy replay condition}
 \tag{ftip}
-\tag{replay}
-\tag{off-policy}
+\tag{reinforcement-learning}
+\tag{reward}
 
-\p{At update attempt #{n}, let #{\nu_n} be the policy stamp of the current
-executable action policy. A replay attempt satisfies a \strong{bounded-ratio
-condition} with constant #{R\geq1} if every active action in the attempted
-update obeys}
+\refdeft{Scalar reward}{Section 3.2}{sutton2018reinforcement}{
+\p{A \newvocab{scalar reward} #{R_{t+1}\in\mathbb R} is the numerical signal
+received after action #{A_t} and before the next decision. Its probabilistic
+law may depend on the current history, action, and environment transition.}
 
-##{
-  R^{-1}\leq
-  \frac{\pi^{\nu_n}(A_t\mid H_t)}{\pi^{\nu_b}(A_t\mid H_t)}
-  \leq R.
+\p{Reward specifies the training objective of the reinforcement-learning
+problem. It need not equal an independent evaluator's utility, and a terminal
+reward need not identify which earlier action caused the outcome.}
 }
-
-\p{This is a standard off-policy regularity condition expressed with the PPO
-likelihood ratio \citef{schulman2017proximal}. It implies shared support on the
-active samples. It does not control unvisited histories or the environment
-state distribution.}
-
-\p{Dynamic Gradient Gating \citef{miao2026when} uses a head-gradient alarm
-rather than this hard condition. A later theorem should distinguish a direct
-ratio assumption from an empirical diagnostic that may correlate with it.}

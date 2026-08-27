@@ -1,26 +1,19 @@
 \import{macros}
 \meta{agent-authored}{true}
 
-\taxon{Definition}
-\title{Attainable outcome--cost set}
 \tag{ftip}
-\tag{multi-objective}
+\tag{preference}
+\tag{provenance}
 
-\p{Fix evaluator utilities #{u_1,\ldots,u_m}. Let
-#{\mathbf J(P)\in\mathbb R^m} collect their expected performances for the
-random policy returned by #{P}. The \strong{attainable outcome--cost set} is}
+\card{Remark}{Preference acquisition and judge provenance}{
+\p{We synthesize the query, judge, and observation fields from the preference
+elicitation procedure of \citet{Sections 2.2.2 and 2.2.4}{christiano2017deep}
+and the language-model comparison pipeline of
+\citet{Sections 3.2 and 3.4}{ouyang2022training}. No cited source defines the
+complete provenance record used here.}
 
-##{
- \mathfrak A(M_0)
- =\left\{(\mathbf J(P),\mathbb E[C(P)]):
-   P\in\mathfrak P(M_0),\ \operatorname{Trust}(P)\right\}.
+\p{The response generator, pair-selection rule, presentation order, judge
+population, and aggregation rule can each change the observed law. A later
+sample-complexity or population claim must condition on those choices rather
+than treating comparison labels as an unqualified source of ground truth.}
 }
-
-\p{This is an FTIP proposal. Section 4.7.4 of
-\citef{boyd2004convex} motivates representing a multi-objective problem by
-its feasible objective vectors. FTIP adds lifecycle costs and the trust
-predicate.}
-
-\p{The set records what was reached before choosing an order on outcomes.
-Scalar, Pareto, and worst-group summaries below answer different questions
-about this same set.}

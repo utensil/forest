@@ -1,29 +1,23 @@
 \import{macros}
 \meta{agent-authored}{true}
 
-\taxon{Definition}
-\title{Attempt-local replay annotations}
 \tag{ftip}
-\tag{replay}
-\tag{off-policy}
+\tag{instruction-tuning}
+\tag{notation}
 
-\p{Given current parameters #{\theta_n} and replay pool #{\mathcal B_n}, a
-selection operator chooses a record and produces \strong{attempt-local
-annotations}}
+\card{Notation}{Prompts, responses, demonstrations, and loss masks}{
+\p{Let #{\mathcal X_{\mathrm{pr}}} be the prompt space. For each prompt
+#{x\in\mathcal X_{\mathrm{pr}}}, let
+#{\mathcal Y(x)\subseteq\mathcal V^*} be the set of finite token responses
+permitted by the training format. We write
+#{y=(y_1,\ldots,y_{|y|})\in\mathcal Y(x)} and
+#{y_{<t}=(y_1,\ldots,y_{t-1})}.}
 
-##{
-  \operatorname{Select}(\theta_n,\mathcal B_n)
-  =(\mathsf R,w^{(n)},a^{(n)},k^{(n)},m^{(n)}).
+\p{A demonstration is denoted #{z=(x,y,\omega)}, where #{\omega} is its
+provenance record. A finite multiset of demonstrations is denoted
+#{D_{\mathrm{sft}}}. For each response position, a loss mask
+#{m_t(z)\in\{0,1\}} records whether the token contributes to the supervised
+objective, and a nonnegative weight #{w_t(z)} records its declared
+normalization. Prompt tokens are conditioning context and lie outside the
+response-position domains of #{m_t(z)} and #{w_t(z)}.}
 }
-
-\p{Here #{w^{(n)}} contains current-to-behaviour likelihood ratios,
-#{a^{(n)}} is record age, #{k^{(n)}} is its prior reuse count, and #{m^{(n)}}
-records clipping or mask decisions for this attempt.}
-
-\p{The likelihood-ratio semantics come from
-\citet{Section 3}{schulman2017proximal}. Sections 3 and 5 of
-\citef{miao2026when} give the behavior/current-policy setup and the concrete
-reuse procedure.}
-
-\p{The annotation tuple is an FTIP synthesis. It is recomputed against the
-current policy and is never written back into #{\mathsf R}.}

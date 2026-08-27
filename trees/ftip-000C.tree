@@ -1,18 +1,17 @@
 \import{macros}
 \meta{agent-authored}{true}
 
-\taxon{Convention}
-\title{Sequence, indexing, and end-of-sequence conventions}
+\taxon{Remark}
+\title{Finite and measurable probability laws}
 \tag{ftip}
-\tag{language-model}
+\tag{probability}
 
-\p{Token positions start at #{1}. For a token string #{x_{1:n}}, we write
-#{x_{<t}=x_{1:t-1}}. A formula containing #{x_t\mid x_{<t}} therefore refers
-to the token at position #{t} conditioned on the preceding prefix.}
+\p{We formulate the first language-model objects on finite sets because a
+finite vocabulary and a bounded token sequence admit ordinary sums. This
+keeps normalization and conditioning explicit. The finite-sequence interface
+matches \citet{sec. 3, Sequence modelling}{phuong2022formal}.}
 
-\p{When variable-length generation needs an explicit stop symbol, we choose
-a distinguished token #{\mathtt{EOS}\in\mathcal V}. A completed string ends at the
-first generated #{\mathtt{EOS}}, unless a later task interface supplies a different
-termination rule. The use of a vocabulary token for termination matches the
-decoder-only algorithms in
-\citet{sec. 3, Sequence modelling}{phuong2022formal}.}
+\p{States, observations, and tool outputs need not be finite. In that setting
+#{\Delta(X)} is replaced by probability measures on a declared measurable
+space and conditional laws are probability kernels. No later argument may
+silently pass between the finite and measurable settings.}

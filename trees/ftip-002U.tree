@@ -1,23 +1,23 @@
 \import{macros}
 \meta{agent-authored}{true}
 
-\taxon{Example}
-\title{Reward hacking}
 \tag{ftip}
-\tag{reward}
+\tag{reward-model}
+\tag{evaluation}
 
-\p{A protocol exhibits \strong{reward hacking} when it increases the training
-reward by exploiting a discrepancy between the reward channel and the intended
-success criterion. The discrepancy may lie in an answer parser, a partial test
-suite, a simulator boundary, or a learned judge.}
+\taxon{Definition}
+\title{Reward-model validation law}
+\tag{ftip}
+\tag{reward-model}
+\tag{evaluation}
 
-\p{For example, suppose a verifier accepts any response ending in a particular
-string, while the independent evaluator also checks the derivation. A policy
-can learn to emit the accepted suffix without solving the task. Training reward
-rises, but independent utility does not.}
+\p{A \newvocab{reward-model validation law}
+#{\mathcal D_{\mathrm{rm}}^{\mathrm{val}}} is a held-out law on comparison
+observations used to evaluate the fitted score model rather than to update
+#{\phi}. A declared validation statistic may be Bradley--Terry log loss or the
+probability that #{r_\phi(x,y^+)>r_\phi(x,y^-)}.}
 
-\p{This example instantiates the proxy-reward problem from reinforcement
-learning. RLVR systems respond with stricter verification, filtering, and
-reward shaping; \citef{yu2025dapo}, Section 3, provides concrete examples of
-reward and sampling design. The possibility remains whenever the training
-check is incomplete.}
+\p{The validation population and acquisition procedure are part of the
+quantity. Accuracy on comparisons drawn from the same collection process does
+not establish calibration under a new judge population or agreement with an
+independent task-success criterion.}

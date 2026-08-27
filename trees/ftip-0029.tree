@@ -1,21 +1,24 @@
 \import{macros}
 \meta{agent-authored}{true}
 
-\taxon{Definition}
-\title{Replay pool}
+\title{Instruction tuning}
 \tag{ftip}
-\tag{replay}
+\tag{instruction-tuning}
+\tag{post-training}
 
-\p{At accepted-update index #{n}, a \strong{replay pool}
-#{\mathcal B_n} is a finite collection of immutable rollout records. A pool
-update can insert newly generated records or retire existing records. It does
-not alter a retained record.}
+\p{Instruction tuning uses demonstrations to connect the continuation law of a
+pretrained language model with requests written as instructions. The objects in
+this section separate the mathematical training record, its provenance, the
+reported collection procedure, and the loss used to update the model.}
 
-\p{Section 3 of \citef{miao2026when} introduces rollout reuse with distinct
-behavior and current policies. The present replay pool is an FTIP
-specialization that also makes insertion,
-eviction, and sampling policy explicit rather than identifying the pool with a
-training minibatch.}
-
-\p{A record can remain in the pool after the current policy has changed. Its
-fitness for another update is evaluated by the selection step below.}
+\transclude{ftip-002A}
+\transclude{ftip-006V}
+\transclude{ftip-006W}
+\transclude{ftip-002B}
+\transclude{ftip-002C}
+\transclude{ftip-002D}
+\transclude{ftip-002E}
+\transclude{ftip-002F}
+\transclude{ftip-002G}
+\transclude{ftip-002H}
+\transclude{ftip-002I}

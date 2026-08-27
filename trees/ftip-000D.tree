@@ -1,20 +1,15 @@
 \import{macros}
 \meta{agent-authored}{true}
 
-\taxon{Definition}
-\title{Probability distributions on a finite set}
-\tag{ftip}
-\tag{probability}
+\refdeft{Finite vocabulary}{sec. 3, Sequence modelling}{phuong2022formal}{
+\p{A \newvocab{finite vocabulary} is a nonempty finite set #{\mathcal V} of
+token identifiers. A token identifier is an atomic symbol for the sequence
+model; it need not be a word or a character.}
 
-\p{For a finite nonempty set #{A}, its \newvocab{probability simplex} is
-##{
-\Delta(A)=
-\left\{p:A\to[0,1]\;\middle|\;\sum_{a\in A}p(a)=1\right\}.
+\p{When termination is represented in-band, choose a distinguished token
+#{\mathtt{eos}\in\mathcal V}. Other control tokens, if present, are named as
+elements of the same vocabulary rather than assumed implicitly.}
 }
-An element #{p\in\Delta(A)} is a probability distribution on #{A}. For
-#{a\in A}, the number #{p(a)} is the probability assigned to #{a}.}
 
-\p{This finite-distribution convention is the one needed by the categorical
-next-token distributions in the sequence model of
-\citet{sec. 3}{phuong2022formal}. The symbol #{\Delta} will not be used for a
-set of logits or unnormalized scores.}
+\tag{ftip}
+\tag{language-model}

@@ -1,25 +1,17 @@
 \import{macros}
 \meta{agent-authored}{true}
 
-\taxon{Definition}
-\title{Causal attention mask}
-\tag{ftip}
-\tag{transformer}
-\tag{attention}
+\refdeft{Token embedding}{sec. 3.4, Embeddings and Softmax}{vaswani2017attention}{
+\p{Let #{\mathcal V} be the vocabulary of \ref{ftip-000D} and #{d} the
+residual width of \ref{ftip-000L}. A \newvocab{token embedding matrix} is a
+learned matrix #{E\in\mathbb R^{|\mathcal V|\times d}}. The hidden vector
+assigned to token #{a\in\mathcal V} is the row #{E_a\in\mathbb R^d}.}
 
-\p{For a sequence of length #{n}, the \newvocab{causal attention mask} is
-the matrix #{M\in(\{0\}\cup\{-\infty\})^{n\times n}} defined by
-##{
-M_{ts}=
-\begin{cases}
-0,&s\leq t,\\
--\infty,&s>t.
-\end{cases}
+\p{For a sequence #{x_{1:n}}, embedding lookup produces the matrix
+#{X^{\mathrm{tok}}\in\mathbb R^{n\times d}} with row
+#{X^{\mathrm{tok}}_t=E_{x_t}}. This operation maps token identifiers to
+vectors; it does not yet encode their positions.}
 }
-Masked attention replaces the score matrix in \ref{ftip-000L} by
-#{QK^{\mathsf T}/\sqrt{d_k}+M}.}
 
-\p{The decoder mask in \citet{sec. 3.2.3}{vaswani2017attention} prevents a
-position from attending to later output positions. This is a statement about
-the attention weights. Prefix non-interference for the complete network also
-requires every other operation to respect the positionwise causal data flow.}
+\tag{ftip}
+\tag{architecture}

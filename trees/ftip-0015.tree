@@ -1,19 +1,23 @@
 \import{macros}
 \meta{agent-authored}{true}
 
-\taxon{Definition}
-\title{Base-model endowment}
+\taxon{Notation}
+\title{Pretraining data, masks, parameters, and updates}
 \tag{ftip}
 \tag{pretraining}
-\tag{post-training}
 
-\p{The \newvocab{base-model endowment} is FTIP's name for the properties of
-#{M_0} that are fixed before a specified post-training intervention. It
-includes the base continuation law and its support. It also includes the
-parameterization through which later gradients act and the cost of evaluating
-the artifact under a declared runtime.}
+\p{Let #{\mathcal D_{\rm doc}} be a measurable document space and
+#{\mathcal S} a finite set of data sources. Source #{s\in\mathcal S}
+has a document law #{Q_s} on #{\mathcal D_{\rm doc}}, and mixture weights
+#{\alpha\in\Delta(\mathcal S)} use the simplex notation of
+\ref{ftip-000A}. Let #{T} be the context length. A token window is
+#{x_{1:T}\in\mathcal V^T}; a prediction mask is
+#{m_{1:T}\in\{0,1\}^T}, where #{m_t=1} means that the token at position #{t}
+contributes to the loss.}
 
-\p{This is a proposed organizing notion. It is not a metric from the scaling
-literature and is not assumed to reduce to pretraining loss. Task-indexed
-support and performance will be defined only after tasks and evaluation
-protocols have been introduced.}
+\p{Let #{\Theta} be the parameter set used by the next-token law in
+\ref{ftip-000H}. The model parameters at optimizer update
+#{k\in\{0,1,\ldots,K\}} are #{\theta_k\in\Theta}; #{\theta_0} is the initialization and #{\theta_K} the
+stopped parameter value. A minibatch at update #{k} is #{\mathcal B_k}.
+Random document draws, window offsets, masks, batch order, and optimizer noise
+are part of the training run even when the notation suppresses them.}

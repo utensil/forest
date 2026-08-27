@@ -1,26 +1,19 @@
 \import{macros}
 \meta{agent-authored}{true}
 
-\taxon{Definition}
-\title{Effective successful support}
 \tag{ftip}
-\tag{support}
+\tag{reinforcement-learning}
+\tag{language-model}
 
-\p{For threshold #{\varepsilon>0}, the \strong{effective successful support}
-of #{(\pi,D,b)} on task #{q} is}
+\refdeft{Response-level episode}{Section 3.5}{ouyang2022training}{
+\p{In the response-level specialization used for language-model RLHF, a prompt
+#{x} is the initial context, a complete response
+#{y\sim\pi_\theta(\mathord\cdot\mid x)} is the sampled action, and a scalar
+score supplies the terminal reward. The episode terminates after that response.}
 
-##{
-  \operatorname{Supp}^{+}_{\varepsilon}(\pi,D,b;q)
-  =\{\tau\in\mathcal S^+(q):
-      \mathbb P^{D,b}_{q,\pi}(\{\tau\})\geq\varepsilon\}.
+\p{This contextual-bandit view is sufficient for sequence-level reward-model
+training. Token generation may still be exposed as multiple policy decisions
+when an optimizer assigns token-level likelihood ratios or advantages. A later
+agentic setting also permits environment observations and tool actions between
+model responses.}
 }
-
-\p{This is an FTIP proposal built from ordinary probability support and an
-explicit finite threshold. The threshold depends on the granularity of the
-trajectory representation; exact token traces and strategy classes produce
-different sets.}
-
-\p{The object supports finite elicitation tests. A post-trained policy may
-increase the probability of an existing member, add a member above threshold,
-or succeed through a new strategy class. Each claim requires a declared
-equivalence relation on trajectories.}

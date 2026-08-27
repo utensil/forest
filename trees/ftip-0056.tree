@@ -1,0 +1,15 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Definition}
+\title{Replay pool}
+\tag{ftip}
+\tag{replay}
+
+\p{At update index #{n}, a \strong{replay pool} #{\mathcal R_n} is a finite
+multiset of immutable rollout records eligible for selection. Its management
+rule specifies insertion, eviction, and any partition by task or behavior
+stamp.}
+
+\p{The pool is persistent state of the training protocol. It is not the
+minibatch selected for one update.}

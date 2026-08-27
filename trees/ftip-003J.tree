@@ -1,0 +1,46 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Example}
+\title{The InstructGPT-style RLHF pipeline}
+\tag{ftip}
+\tag{rlhf}
+\tag{post-training}
+
+\p{One prompt passes successively through supervised tuning,
+comparison-based reward modeling, and PPO in the InstructGPT-style RLHF
+pipeline.}
+
+\tikzfig{\begin{tikzpicture}[
+  box/.style={draw, rounded corners=2pt, align=center, font=\small,
+    text width=27mm, minimum height=10mm},
+  flow/.style={-{Stealth[length=2mm]}, thick}
+]
+\node[box] (demo) at (0,1.35) {demonstration\\$(x,y^\star)$};
+\node[box] (sft) at (4.0,1.35) {supervised\\policy $\pi_{\rm SFT}$};
+\node[box] (pair) at (8.0,1.35) {comparison\\$y_B\succ y_A$};
+\node[box] (rm) at (8.0,-1.25) {reward model\\$r_A=0.2,\ r_B=0.8$};
+\node[box] (ppo) at (4.0,-1.25) {PPO reward\\$0.8-0.1\log 2$};
+\node[box] (pol) at (0,-1.25) {updated\\policy};
+\draw[flow] (demo) -- (sft);
+\draw[flow] (sft) -- node[font=\scriptsize, fill=white] {sample} (pair);
+\draw[flow] (pair) -- node[font=\scriptsize, fill=white] {fit} (rm);
+\draw[flow] (rm) -- (ppo);
+\draw[flow] (ppo) -- (pol);
+\end{tikzpicture}}
+
+\p{For the displayed illustrative prompt, suppose the comparison-trained
+reward model scores the preferred response by #{0.8}. If the candidate
+policy assigns it twice the probability assigned by the reference policy and
+the declared KL coefficient is #{\beta=0.1}, its shaped scalar is
+##{
+  0.8-\beta\log\frac{\pi(y_B\mid x)}
+                         {\pi_{\rm ref}(y_B\mid x)}
+  =0.8-0.1\log 2\approx0.731.
+}}
+
+\p{The stage ordering is grounded in
+\citet{Sections 3.1--3.5}{ouyang2022training}; the numbers are a schematic
+calculation rather than reported InstructGPT hyperparameters. The diagram
+records the interface used in that pipeline. Other RLHF systems may order or
+replace the stages differently.}

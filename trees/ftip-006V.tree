@@ -1,0 +1,22 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Definition}
+\title{Prompt serializer}
+\tag{ftip}
+\tag{instruction-tuning}
+\tag{tokenization}
+
+\p{Using the prompt space of \ref{ftip-002A}, a \newvocab{prompt
+serializer} is a declared map
+##{
+s_{\mathrm{pr}}:\mathcal X_{\mathrm{pr}}\longrightarrow\mathcal V^*.
+}
+For token strings #{u,v\in\mathcal V^*}, write #{u\mathbin{\Vert}v} for
+their concatenation. A response token #{y_t} is therefore predicted from the
+token prefix #{s_{\mathrm{pr}}(x)\mathbin{\Vert}y_{<t}}.}
+
+\p{The serializer fixes system text, role markers, separators, and any other
+prompt-side control tokens. Changing it changes the conditional examples
+seen by the language model even when the abstract prompts and responses are
+unchanged.}

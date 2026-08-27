@@ -2,24 +2,14 @@
 \meta{agent-authored}{true}
 
 \taxon{Definition}
-\title{Trajectory}
+\title{Public history}
 \tag{ftip}
 \tag{agent}
-\tag{reinforcement-learning}
 
-\p{A \strong{public trajectory} is the stopped sequence}
-
+\p{At time #{t}, the \newvocab{public history} is the alternating sequence
 ##{
-  \tau=(q,O_0,A_0,O_1,A_1,\ldots,A_{T-1},O_T,Y).
+H_t=(O_0,A_0,O_1,A_1,\ldots,A_{t-1},O_t).
 }
-
-\p{Its probability law is induced jointly by the task law, initial-state law,
-environment kernel, policy, stopping rule, and all declared random seeds.
-Section 3.1 of \citef{sutton2018reinforcement} gives the underlying
-agent--environment sequence. FTIP appends the task and terminal outcome to
-make the public record explicit.}
-
-\p{The trajectory does not contain optimizer state or later reuse metadata.
-Those belong to the training protocol. Keeping them separate allows one
-completed interaction to be selected for several update attempts without
-changing the historical event.}
+Thus #{H_0=(O_0)}. It contains exactly the observations received and actions
+taken before the next action #{A_t}; it does not contain the hidden state
+#{S_t} unless that state was itself revealed as an observation.}

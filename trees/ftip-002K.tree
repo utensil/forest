@@ -1,22 +1,22 @@
 \import{macros}
 \meta{agent-authored}{true}
 
-\taxon{Definition}
-\title{Admissible protocol class}
 \tag{ftip}
-\tag{post-training}
+\tag{preference}
+\tag{notation}
 
-\p{For a fixed base artifact #{M_0}, an \strong{admissible protocol class}
-#{\mathfrak P(M_0)} is a declared set of post-training procedures that start
-from #{M_0} and may be compared in one potential calculation. Membership
-fixes the allowed data access, feedback sources, environment
-interfaces, update families, stopping rules, and randomization.}
+\card{Notation}{Comparison queries, judges, and response pairs}{
+\p{Use the prompt and response spaces from \ref{ftip-002A}. A
+\newvocab{comparison query} is a displayed triple
+#{c=(x,y^0,y^1)} with #{y^0,y^1\in\mathcal Y(x)}. Let #{\mathcal J} be the
+declared judge population, and let #{j\in\mathcal J} identify the human,
+model, or rule that returns a comparison label
+#{b_{\mathrm{pref}}\in\{0,1\}}.}
 
-\p{This is an FTIP proposal. Restricting the class is mathematically necessary:
-an unrestricted procedure could import a test answer, call an undeclared
-teacher, or spend unbounded external computation.}
-
-\p{A theorem about #{\mathfrak P(M_0)} must state which fields are fixed and which
-are optimized. Results for reward-only reweighting, active environment
-interaction, and external demonstrations belong to different classes unless a
-larger class names all three.}
+\p{When #{b_{\mathrm{pref}}=1}, write #{y^+=y^1} and #{y^-=y^0}; when
+#{b_{\mathrm{pref}}=0}, reverse those
+names. Thus #{y^+} means selected in this observation, not objectively or
+uniquely best. The acquisition mechanism may also record a tie, abstention, or
+invalid comparison, but those outcomes must use an enlarged label space rather
+than being silently forced into #{\{0,1\}}.}
+}

@@ -1,26 +1,20 @@
 \import{macros}
 \meta{agent-authored}{true}
 
-\taxon{Definition}
-\title{Transition and observation kernel}
+\taxon{Notation}
+\title{State, observation, action, time, history, and stopping}
 \tag{ftip}
 \tag{agent}
-\tag{probability}
 
-\p{A \strong{transition and observation kernel} for task #{q} is a stochastic
-kernel}
+\p{Let #{\mathcal S,\mathcal O,\mathcal A} be declared measurable spaces of
+environment states, public observations, and agent actions. Time is discrete,
+#{t\in\{0,1,\ldots,T_{\max}\}}, where #{T_{\max}<\infty} is a hard horizon.
+Random states, observations, and actions are #{S_t,O_t,A_t}; lowercase
+#{s_t,o_t,a_t} denote realized values. The same convention makes #{h_t} a
+realization of #{H_t} and #{z} a realization of #{Z}.}
 
-##{
-  K_q(ds',do\mid s,a)
-}
-
-\p{from #{\mathcal S_q\times\mathcal A_q} to
-#{\mathcal S_q\times\mathcal O_q}. Given state #{s} and action #{a}, it
-jointly samples the next hidden state and the observation returned to the
-policy.}
-
-\p{This specializes the POMDP kernel in
-\citet{Sec. 2}{kaelbling1998planning}.}
-
-\p{A deterministic tool is represented by a point-mass kernel. Nondeterminism can represent network responses,
-concurrent processes, randomized simulators, or hidden instance variation.}
+\p{The public history available before action #{A_t} is #{H_t}; the full
+environment trajectory is #{Z}; and the stopping time is
+#{\tau_{\mathrm{stop}}\in\{0,1,\ldots,T_{\max}\}}. Probability kernels are
+written #{K(dy\mid x)}; on finite spaces this means the probability law
+#{K(y\mid x)} and reduces to the notation of \ref{ftip-000A}.}

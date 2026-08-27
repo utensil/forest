@@ -1,21 +1,22 @@
 \import{macros}
 \meta{agent-authored}{true}
 
-\taxon{Definition}
-\title{Post-training protocol family}
+\taxon{Remark}
+\title{From a data pipeline to a corpus law}
 \tag{ftip}
-\tag{post-training}
+\tag{pretraining}
 
-\p{A \strong{post-training protocol family} is a declared collection of
-procedures that begin with a base policy and produce a new policy from
-task-facing data. A member specifies which records it can acquire, which
-objective it evaluates, and which parameter transition it applies.}
+\p{We formulate the source mixture and cleaning pipeline separately because
+they answer different questions. The mixture in \ref{ftip-0016} describes how
+raw documents are proposed. The construction in \ref{ftip-0017} determines
+which proposals survive and how they are transformed. Together with all
+random seeds and thresholds, they induce a cleaned document law
+#{Q_{\mathrm{clean}}}.}
 
-\p{This is an \strong{FTIP synthesis}, not a definition copied from one
-paper. The supervised, reward-model, and PPO stages summarized in
-\citet{Sections 3.1 and 3.5}{ouyang2022training} give one composition. The
-reinforcement-learning stages in \citet{Section 2}{guo2025deepseek} give a
-different composition.}
-
-\p{The family is part of the claim. Two studies do not describe the same
-intervention merely because both call their last stage post-training.}
+\p{Kaplan et al. describe the concrete WebText2 dataset in
+\citet{sec. 2.3}{kaplan2020scaling}. Hoffmann et al. report the MassiveText
+sources and mixture in \citet{Appendix A, Table A1}{hoffmann2022training}.
+We formulate the source law and ordered cleaning operators because neither
+source defines the two generic objects above. A finite released corpus is one
+realization of such choices, and an undocumented change in them is not
+identified by a loss--compute curve.}

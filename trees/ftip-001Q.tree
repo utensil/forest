@@ -2,26 +2,17 @@
 \meta{agent-authored}{true}
 
 \taxon{Definition}
-\title{Entropy regularization}
+\title{Task law}
 \tag{ftip}
-\tag{entropy}
-\tag{regularization}
+\tag{evaluation}
 
-\p{At a reached prefix #{h=(x,y_{<t})}, the policy's next-token entropy is}
+\p{For the instance set in \ref{ftip-001O}, a \newvocab{task law} is a
+probability law #{\mu_{\mathsf T}} on #{\mathcal X_{\mathsf T}}. An
+evaluation sample of size #{N} is a declared joint law of instances
+#{(X_1,\ldots,X_N)} whose marginals are #{\mu_{\mathsf T}}; independent
+sampling is a further assumption, not part of the term ``task law.''}
 
-##{
-  H_\theta(h)
-  =-\sum_{a\in\mathcal V}
-       \pi_\theta(a\mid h)\log\pi_\theta(a\mid h).
-}
-
-\p{Let #{\eta_\theta} be a declared probability law on token prefixes
-reached during the update. An \strong{entropy-regularized objective} adds
-#{\lambda\,\mathbb E_{h\sim\eta_\theta}[H_\theta(h)]} with
-#{\lambda\geq0} to a maximized policy objective. The prefix law is part of
-the objective.}
-
-\p{Section 3 of \citef{haarnoja2018soft} develops this maximum-entropy control
-convention. Here it is specialized to an autoregressive policy.
-It does not imply that trajectory entropy, position-marginal entropy, and
-useful exploration move together.}
+\p{In an episodic control problem this law includes the distribution of
+starting situations. In a fixed benchmark it may instead be the uniform law
+on a held-out finite set. Reweighting instances changes the task law even when
+the instance files are unchanged.}

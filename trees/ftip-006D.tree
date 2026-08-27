@@ -1,0 +1,16 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Remark}
+\title{How we formulate proposed and accepted updates}
+\tag{ftip}
+\tag{optimization}
+
+\p{We formulate an update proposal so that a gate may reject a computed
+gradient without pretending that no computation occurred. The DGG definition
+in \ref{ftip-005A} supplies the motivating pre-optimizer discard operation.
+Other protocols may inspect held-out loss, divergence, or resource limits.}
+
+\p{The generic proposal interface does not transfer DGG's empirical detector
+to those other diagnostics. Each gate needs its own assumptions and
+calibration evidence.}

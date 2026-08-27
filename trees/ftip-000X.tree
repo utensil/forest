@@ -2,17 +2,21 @@
 \meta{agent-authored}{true}
 
 \taxon{Definition}
-\title{Context-window sampling}
+\title{Sparse mixture-of-experts routing}
 \tag{ftip}
-\tag{pretraining}
+\tag{architecture}
 
-\p{Fix a maximum context length #{L}. A \newvocab{context-window sampler}
-maps a corpus string to one or more training strings of length at most
-#{L+1}. The first #{L} positions can serve as context, and the remaining next
-token supplies a prediction target.}
-
-\p{The training procedure in \citet{sec. 2.2}{kaplan2020scaling} uses fixed
-context windows, while the Chinchilla model details in
-\citet{sec. 4.1}{hoffmann2022training} specify a maximum sequence length.
-Window boundaries and packing rules are part of the sampler. They need not
-match document boundaries.}
+\p{Let #{J\geq1} and #{1\leq k\leq J}. Let
+#{F_1,\ldots,F_J:\mathbb R^d\to\mathbb R^d} be feed-forward experts and let
+#{g:\mathbb R^d\to\mathbb R^J} be a router. For a hidden
+vector #{z}, let #{S_k(z)} be the indices of the #{k} largest coordinates of
+#{g(z)}, breaking equal scores by a fixed total order on expert indices. A
+\newvocab{sparse mixture-of-experts layer} returns
+##{
+F_{\mathrm{MoE}}(z)
+=\sum_{j\in S_k(z)}\alpha_j(z)F_j(z),
+\qquad
+\alpha_j(z)=
+\frac{\exp g_j(z)}{\sum_{i\in S_k(z)}\exp g_i(z)}.
+}
+Only the selected experts are evaluated for that token.}

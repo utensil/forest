@@ -1,29 +1,37 @@
 \import{macros}
 \meta{agent-authored}{true}
 
-\taxon{Definition}
-\title{Global policy entropy}
+\taxon{Example}
+\title{Cyclic preferences that no scalar ordering represents}
 \tag{ftip}
-\tag{entropy}
+\tag{preference}
+\tag{nontransitivity}
 
-\p{For a rollout law induced by #{\pi}, define the \strong{global policy
-entropy} over a horizon #{T} by}
+\p{Three strict comparisons arranged in a directed cycle obstruct
+representation by a single scalar ordering.}
 
+\tikzfig{\begin{tikzpicture}[
+  item/.style={draw, circle, minimum size=12mm, font=\small},
+  flow/.style={-{Stealth[length=2mm]}, thick}
+]
+\node[item] (a) at (0,0) {$A$};
+\node[item] (b) at (4.0,2.2) {$B$};
+\node[item] (c) at (8.0,0) {$C$};
+\draw[flow] (a) -- node[font=\scriptsize, fill=white] {$\succ$} (b);
+\draw[flow] (b) -- node[font=\scriptsize, fill=white] {$\succ$} (c);
+\draw[flow] (c) -- node[font=\scriptsize, fill=white] {$\succ$} (a);
+\end{tikzpicture}}
+
+\p{Declare #{A\succ B}, #{B\succ C}, and #{C\succ A}. If a scalar
+#{r} represented all three comparisons by strict inequalities, then
 ##{
-  \mathcal H_{\mathrm{glob}}(\pi)
-  =\mathbb E\left[\sum_{t=0}^{T-1}
-    H\bigl(\pi_t(\cdot\mid H_t)\bigr)\right],
-  \qquad
-  H(p)=-\sum_a p(a)\log p(a).
+ r(A)>r(B)>r(C)>r(A),
 }
+which implies #{r(A)>r(A)}, a contradiction. Thus no real-valued score can
+represent this cycle by ordinary greater-than.}
 
-\p{The finite entropy formula comes from \citet{Pt. I, Sec. 6}{shannon1948mathematical}.
-The name and finite-horizon aggregation are an FTIP specialization. The
-displayed quantity applies conditional entropy to the policy's visited
-histories. It depends on the task and environment law, even when that
-dependence is suppressed from the notation.}
-
-\p{RLVR papers use entropy for several different statistics. DAPO reports
-entropy dynamics under its policy and sampling procedure
-\citef{yu2025dapo}. The global quantity above must not be substituted for a
-token-specific covariance or selected-action surprisal.}
+\p{Scalar pairwise reward modeling is used in
+\citet{Section 2}{christiano2017deep}; the finite cycle marks one assumption
+needed for that reduction. No empirical cycle is attributed to a particular
+dataset or population, and the obstruction concerns scalar orderings rather
+than all preference models.}

@@ -1,28 +1,25 @@
 \import{macros}
 \meta{agent-authored}{true}
 
-\taxon{Definition}
-\title{Token-position entropy}
+\title{Reinforcement-learning foundations}
 \tag{ftip}
-\tag{entropy}
+\tag{reinforcement-learning}
 
-\p{Restrict to the token-generation specialization #{\mathcal A_q=\mathcal V}.
-For #{t\geq1}, let #{\xi_t=A_{t-1}\in\mathcal V} be the token emitted at
-position #{t}, and put #{h_t^{\mathrm{tok}}=\xi_{<t}}. Conditional on the run
-reaching that position, define
-#{\bar p_t(a)=\Pr(\xi_t=a\mid T\geq t)} under the declared task, policy, and
-decoder. The
-\strong{token-position entropy} is}
+\p{Reinforcement learning updates a policy from rewards attached to sampled
+behavior. Before considering a particular alignment method, this section fixes
+the response-level episode, return, value, advantage, policy roles, and
+likelihood ratios used by policy-gradient objectives.}
 
-##{
-  \mathcal H_t^{\mathrm{pos}}=-\sum_{a\in\mathcal V}\bar p_t(a)\log \bar p_t(a).
-}
-
-\p{This applies the entropy of \citet{Pt. I, Sec. 6}{shannon1948mathematical}
-to a position-marginal law. It differs from the expected local entropy
-#{\mathbb E[H(\pi_\theta(\cdot\mid h_t^{\mathrm{tok}}))]}; mixing token
-prefixes can increase the marginal entropy.}
-
-\p{The distinction matters when a paper reports high-entropy token positions
-or forks. A position can be diverse because different histories choose
-different deterministic tokens, even when each local policy is sharp.}
+\transclude{ftip-002X}
+\transclude{ftip-002Y}
+\transclude{ftip-002Z}
+\transclude{ftip-0030}
+\transclude{ftip-0031}
+\transclude{ftip-0032}
+\transclude{ftip-0033}
+\transclude{ftip-0034}
+\transclude{ftip-0035}
+\transclude{ftip-006Z}
+\transclude{ftip-0036}
+\transclude{ftip-0037}
+\transclude{ftip-0038}

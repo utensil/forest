@@ -1,0 +1,35 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Example}
+\title{Three attainable protocols with different scalar, Pareto, and worst-group summaries}
+\tag{ftip}
+\tag{evaluation}
+\tag{multi-objective}
+
+\p{Three attainable utility vectors separate the answers returned by
+scalarization, Pareto comparison, and a worst-group summary.}
+
+\tikzfig{\begin{tikzpicture}[
+  point/.style={circle, fill=black, inner sep=2pt}
+]
+\draw[->, thick] (0,0) -- (8.5,0) node[right, font=\small] {$u_1$};
+\draw[->, thick] (0,0) -- (0,4.3) node[above, font=\small] {$u_2$};
+\node[point] at (7.2,1.6) {};
+\node[font=\small, anchor=north west] at (7.3,1.55) {$A=(.9,.4)$};
+\node[point] at (5.6,2.8) {};
+\node[font=\small, anchor=south west] at (5.7,2.85) {$B=(.7,.7)$};
+\node[point] at (4.0,3.2) {};
+\node[font=\small, anchor=south east] at (3.9,3.25) {$C=(.5,.8)$};
+\draw[dashed] (4.0,3.2) -- (5.6,2.8) -- (7.2,1.6);
+\node[font=\scriptsize, align=center] at (7.3,3.6) {all three are\\Pareto-undominated};
+\end{tikzpicture}}
+
+\p{For scalar weights #{(0.8,0.2)}, the scores are
+#{S(A)=0.80}, #{S(B)=0.70}, and #{S(C)=0.56}, so #{A} wins. The worst-group
+scores are #{0.4}, #{0.7}, and #{0.5}, so #{B} wins. No point dominates
+another coordinatewise, hence the Pareto summary retains all three.}
+
+\p{The scalar, Pareto, and worst-group summaries were defined in
+\ref{ftip-005P}--\ref{ftip-005R}. Their non-equivalence is explicit in these
+three points, while the choice of a social or evaluation rule remains open.}

@@ -1,36 +1,21 @@
 \import{macros}
 \meta{agent-authored}{true}
 
-\taxon{Remark}
-\title{Status of the potential construction}
 \tag{ftip}
-\tag{research-programme}
+\tag{reward-model}
+\tag{preference}
 
-\p{The costed potential is a proposed question format. It is grounded in
-standard expected utility, held-out evaluation, and constrained optimization.
-Its particular protocol class, trust predicate, and lifecycle cost vector are
-FTIP choices.}
+\refdeft{Scalar reward-model score}{Section 3.5 and Appendix C.2}{ouyang2022training}{
+\p{A \newvocab{scalar reward model} is a parameterized function}
 
-\p{The diagram shows the order of dependence. Training produces a policy;
-independent evaluation measures it; accounting decides whether the protocol
-belongs to the feasible set.}
+##{
+ r_\phi:\{(x,y):x\in\mathcal X_{\mathrm{pr}},\ y\in\mathcal Y(x)\}
+ \longrightarrow\mathbb R,
+}
 
-\tikzfig{\begin{tikzpicture}[
-  box/.style={draw, rounded corners=2pt, align=center, font=\small,
-    text width=35mm, minimum height=10mm},
-  flow/.style={-{Stealth[length=2mm]}, thick}
-]
-\node[box] (base) at (0,1.4) {base artifact $M_0$};
-\node[box] (train) at (5.2,1.4) {trusted protocol $P$};
-\node[box] (eval) at (5.2,-1.0) {independent performance $J$};
-\node[box] (cost) at (0,-1.0) {lifecycle cost $C(P)$};
-\draw[flow] (base) -- (train);
-\draw[flow] (train) -- (eval);
-\draw[flow] (train) -- (cost);
-\draw[flow] (cost) -- node[font=\scriptsize, fill=white, inner sep=1pt]
-  {feasibility} (eval);
-\end{tikzpicture}}
-
-\p{The first mathematical task is to study finite special cases. A useful
-result should expose the assumptions under which feedback quality, support,
-update stability, or compute allocation changes the attainable set.}
+\p{whose score is fitted from comparison observations. The score orders or
+weights responses for a specified training procedure; it is not automatically
+the independent utility of the response. Ouyang et al. initialize the model
+from the supervised policy and replace its language-model head with a scalar
+output for this stage.}
+}

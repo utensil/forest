@@ -1,24 +1,23 @@
 \import{macros}
 \meta{agent-authored}{true}
 
-\title{Challenges and theorem directions}
 \tag{ftip}
-\tag{notes}
-\tag{research-programme}
+\tag{preference}
+\tag{probability}
 
-\p{The preceding objects expose several ways in which post-training can fail
-or become difficult to interpret. This section defines the observables needed
-to state those problems. It ends with a first set of theorem and counterexample
-directions.}
+\refdeft{Bradley--Terry comparison law}{Page 325, equation (1)}{bradley1952rank}{
+\p{Given scalar scores for two alternatives, the \newvocab{Bradley--Terry
+comparison law} assigns the probability}
 
-\transclude{ftip-002R}
-\transclude{ftip-002S}
-\transclude{ftip-002T}
-\transclude{ftip-002U}
-\transclude{ftip-002V}
-\transclude{ftip-002W}
-\transclude{ftip-002X}
-\transclude{ftip-002Y}
-\transclude{ftip-002Z}
-\transclude{ftip-0030}
-\transclude{ftip-0031}
+##{
+ \Pr_\phi(y^+\succ y^-\mid x)
+ =\frac{\exp r_\phi(x,y^+)}
+        {\exp r_\phi(x,y^+)+\exp r_\phi(x,y^-)}
+ =\sigma\left(r_\phi(x,y^+)-r_\phi(x,y^-)\right),
+}
+
+\p{where #{\sigma(a)=(1+\exp(-a))^{-1}}. Conditioning the scores on a
+language-model prompt is the contextual specialization used in modern reward
+modeling; see also
+\citet{Section 3, equation (1)}{rafailov2023direct}.}
+}

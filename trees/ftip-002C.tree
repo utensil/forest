@@ -1,24 +1,22 @@
 \import{macros}
 \meta{agent-authored}{true}
 
-\taxon{Definition}
-\title{Update gate}
 \tag{ftip}
-\tag{optimization}
+\tag{instruction-tuning}
+\tag{data}
 
-\p{An \strong{update gate} is a decision rule}
+\card{Definition}{Demonstration record}{
+\p{Using the notation of \ref{ftip-002A}, a \newvocab{demonstration record} is
+a triple}
 
 ##{
-  g_n=G_{\mathrm{gate}}(d_n,\nu_b,\theta_n,m^{(n)})\in\{0,1\}.
+ z=(x,y,\omega),
+ \qquad x\in\mathcal X_{\mathrm{pr}},\quad y\in\mathcal Y(x),
 }
 
-\p{If #{g_n=1}, the protocol commits
-#{(\theta_{n+1},z_{n+1})=(\widehat\theta_{n+1},\widehat z_{n+1})}. If
-#{g_n=0}, it keeps #{(\theta_{n+1},z_{n+1})=(\theta_n,z_n)} and records the
-rejection.}
-
-\p{The interface is an FTIP proposal generalized from Dynamic Gradient Gating
-in Section 5 of \citef{miao2026when}, which rejects a reused batch before the optimizer update
-when its diagnostic crosses a threshold. A gate is not automatically a safety
-certificate. Its false acceptances and false rejections require independent
-evaluation.}
+\p{where #{\omega} identifies the declared producer of #{y}, the collection
+or generation procedure, and any selection rule applied before the record
+entered #{D_{\mathrm{sft}}}. The response is a training target; its presence in
+the data does not assert that it is uniquely correct or preferred to every
+alternative.}
+}

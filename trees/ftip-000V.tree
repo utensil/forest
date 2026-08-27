@@ -1,24 +1,23 @@
 \import{macros}
 \meta{agent-authored}{true}
 
-\title{Pretraining}
+\taxon{Remark}
+\title{Multi-head, grouped-query, and compressed-attention variants}
 \tag{ftip}
-\tag{language-model}
-\tag{pretraining}
+\tag{attention}
 
-\p{Pretraining chooses data, an objective, and an update procedure before
-task-specific feedback is introduced. This section separates the population
-quantity being optimized from its finite-data estimate and the stochastic
-updates used to reduce that estimate.}
+\p{We use \ref{ftip-000U} as the reference construction, not as a claim that
+all recent models store one key and value projection per query head.
+Grouped-query attention partitions query heads into groups that share key and
+value heads; see Ainslie et al., Section 2
+\citelink{https://arxiv.org/abs/2305.13245}. This changes parameter and cache
+shapes while preserving the query-key-value semantics.}
 
-\transclude{ftip-000W}
-\transclude{ftip-000X}
-\transclude{ftip-000Y}
-\transclude{ftip-000Z}
-\transclude{ftip-0010}
-\transclude{ftip-0011}
-\transclude{ftip-0012}
-\transclude{ftip-0013}
-\transclude{ftip-0014}
-\transclude{ftip-0015}
-\transclude{ftip-0016}
+\p{Multi-head latent attention first compresses key-value information through
+a lower-dimensional latent representation and reconstructs head-specific
+quantities; see DeepSeek-V2, Section 2.1
+\citelink{https://arxiv.org/abs/2405.04434}. DeepSeek-V3, Section 2.1, records a
+later use of that architecture
+\citelink{https://arxiv.org/abs/2412.19437}. These are exact architectural
+see-also cases, not evidence that their post-training effects equal those of
+ordinary multi-head attention.}

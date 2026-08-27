@@ -1,27 +1,18 @@
 \import{macros}
 \meta{agent-authored}{true}
 
-\taxon{Definition}
-\title{Token and sequence negative log-likelihood}
+\taxon{Remark}
+\title{Dense and routed feed-forward computation}
 \tag{ftip}
-\tag{pretraining}
-\tag{loss}
+\tag{architecture}
 
-\p{For a token string #{x_{1:n}}, the \newvocab{token negative
-log-likelihood} at position #{t} is
-##{
-\ell_t(\theta;x_{1:n})
-=-\log\pi_\theta(x_t\mid x_{<t}).
-}
-The \newvocab{sequence negative log-likelihood} is the declared aggregation
-##{
-\ell(\theta;x_{1:n})
-=\sum_{t\in I(x_{1:n})}\ell_t(\theta;x_{1:n}),
-}
-where #{I(x_{1:n})} is the set of positions included by the training mask.}
+\p{We formulate \ref{ftip-000X} as the minimal top-#{k} routing interface
+needed later. The dense sublayer in \ref{ftip-000W} evaluates one learned map
+for every token. The sparsely gated construction of Shazeer et al., Section 2,
+selects among multiple experts and introduces an additional routing and
+load-balancing problem
+\citelink{https://arxiv.org/abs/1701.06538}.}
 
-\p{The decoder-only training algorithm in
-\citet{sec. 7}{phuong2022formal} uses cross-entropy against target tokens.
-For a one-hot target, that cross-entropy is the displayed negative
-log-likelihood. Keeping #{I(x_{1:n})} explicit records whether padding,
-prompt tokens, or other positions are excluded.}
+\p{Parameter count, active parameter count, and executed operations therefore
+need not agree. A post-training comparison involving routed models must state
+which quantity is held fixed and whether the router itself is updated.}

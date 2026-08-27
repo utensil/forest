@@ -1,25 +1,21 @@
 \import{macros}
 \meta{agent-authored}{true}
 
-\title{Decoder-only Transformer mechanics}
+\refdeft{Conditional next-token law}{sec. 3, Sequence modelling}{phuong2022formal}{
+\p{Let #{\Theta} be a parameter set. With the probability notation of
+\ref{ftip-000A} and the sequence convention of \ref{ftip-000G}, a
+\newvocab{conditional next-token law} is a family of maps
+##{
+\pi_\theta:\mathcal V^*\longrightarrow\Delta(\mathcal V),
+\qquad \theta\in\Theta.
+}
+For a prefix #{x_{<t}} and token #{a\in\mathcal V}, the number
+#{\pi_\theta(a\mid x_{<t})} is the probability assigned to choosing #{a} at
+position #{t}.}
+
+\p{This is the observable probabilistic interface. It does not yet specify the
+neural computation that produces the distribution.}
+}
+
 \tag{ftip}
 \tag{language-model}
-\tag{transformer}
-
-\p{We now give one implementation of the next-token law. The definitions
-follow the decoder-only Transformer route. Each card introduces one operation
-and records the tensor type needed by the next card.}
-
-\transclude{ftip-000I}
-\transclude{ftip-000J}
-\transclude{ftip-000K}
-\transclude{ftip-000L}
-\transclude{ftip-000M}
-\transclude{ftip-000N}
-\transclude{ftip-000O}
-\transclude{ftip-000P}
-\transclude{ftip-000Q}
-\transclude{ftip-000R}
-\transclude{ftip-000S}
-\transclude{ftip-000T}
-\transclude{ftip-000U}

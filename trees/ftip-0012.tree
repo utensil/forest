@@ -1,22 +1,30 @@
 \import{macros}
 \meta{agent-authored}{true}
 
-\taxon{Definition}
-\title{Optimizer state and parameter update}
-\tag{ftip}
-\tag{pretraining}
-\tag{optimization}
+\refdeft{Decoder-only Transformer language model}{sec. 6, Decoder-only transformers}{phuong2022formal}{
+\p{A \newvocab{decoder-only Transformer language model} consists of:}
 
-\p{An \newvocab{optimizer state} is a value #{s_k} retained between updates.
-An optimizer is a map
-##{
-\operatorname{Opt}:(\theta_k,s_k,g_k)
-\longmapsto(\theta_{k+1},s_{k+1}).
+\ol{
+  \li{the token interface in \ref{ftip-000E};}
+  \li{an initial representation from \ref{ftip-000M} and \ref{ftip-000N};}
+  \li{a stack of #{L} causal decoder layers built from the attention,
+  feed-forward, residual, and normalization constructions in
+  \ref{ftip-000S}--\ref{ftip-0011}; and}
+  \li{an output map from the final hidden vector to token logits.}
 }
-The map may also depend on a declared learning-rate schedule and update index.}
 
-\p{Adam, for example, keeps exponential moving averages of first and second
-gradient moments; see \citet{sec. 2}{kingma2015adam}. The Transformer training
-configuration in \citet{sec. 5.3}{vaswani2017attention} specifies Adam and a
-learning-rate schedule. The abstract map above keeps the persistent state
-visible without assuming that every protocol uses Adam.}
+\p{If the final hidden vector at position #{t} is #{h_t\in\mathbb R^d}, an
+output matrix #{W_U\in\mathbb R^{|\mathcal V|\times d}} and bias
+#{b_U\in\mathbb R^{|\mathcal V|}} give logits
+#{z_t=W_Uh_t+b_U}. The softmax
+##{
+\pi_\theta(a\mid x_{1:t})
+=\frac{\exp(z_{t,a})}
+{\sum_{v\in\mathcal V}\exp(z_{t,v})}
+}
+realizes the conditional next-token law of \ref{ftip-000H}. The parameter
+tuple #{\theta} contains every learned tensor named by this architecture.}
+}
+
+\tag{ftip}
+\tag{language-model}

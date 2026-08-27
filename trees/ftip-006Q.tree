@@ -1,0 +1,27 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Definition}
+\title{Fine-tuning run}
+\tag{ftip}
+\tag{fine-tuning}
+
+\p{Given the base artifact
+#{M_0=(\tau,\delta,\mathsf{cfg},\theta_K,\mathsf{num})} from
+\ref{ftip-001K}, a \newvocab{fine-tuning run} declares training records,
+a finite update count #{J\geq0}, a loss #{L_{\rm ft}}, gradient estimators #{g_j^{\rm ft}}, optimizer states
+#{s_j^{\rm ft}}, and update specifications #{(U_j,\eta_j^{\rm ft})}.
+It starts from #{\theta^{\rm ft}_0=\theta_K}.}
+
+\p{For each #{j=0,\ldots,J-1}, the update is}
+
+##{
+(\theta^{\rm ft}_{j+1},s^{\rm ft}_{j+1})
+=U_j\left(\theta^{\rm ft}_j,s^{\rm ft}_j,
+g_j^{\rm ft},\eta_j^{\rm ft}\right).
+}
+
+\p{Its output artifact replaces #{\theta_K} by the final
+#{\theta^{\rm ft}_J}. Any change to the tokenizer, architecture
+configuration, numerical convention, or other artifact field must be stated
+separately. Fine-tuning is not identified with one loss or data type.}

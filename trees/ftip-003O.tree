@@ -1,0 +1,30 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\tag{ftip}
+\tag{dpo}
+\tag{optimization}
+
+\refdeft{Optimal KL-regularized policy}{Section 4, equation (4)}{rafailov2023direct}{
+\p{For a reward #{r(x,y)}, reference policy #{\pi_{\mathrm{ref}}}, and
+#{\beta>0}, the optimizer of the per-prompt KL-regularized reward objective has
+the form}
+
+##{
+ \pi_r(y\mid x)
+ =\frac{1}{Z_r(x)}\,
+ \pi_{\mathrm{ref}}(y\mid x)
+ \exp\left(\frac{r(x,y)}{\beta}\right),
+}
+
+\p{where}
+
+##{
+ Z_r(x)=\sum_y\pi_{\mathrm{ref}}(y\mid x)
+ \exp\left(\frac{r(x,y)}{\beta}\right)
+}
+
+\p{normalizes the policy on the response space. The identity assumes that the
+normalizer is finite and uses the same reference policy as the underlying
+objective.}
+}

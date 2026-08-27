@@ -1,18 +1,19 @@
 \import{macros}
 \meta{agent-authored}{true}
 
-\taxon{Remark}
-\title{Probabilistic interface versus implementation}
+\taxon{Convention}
+\title{Token sequences, prefixes, positions, and end-of-sequence}
 \tag{ftip}
 \tag{language-model}
 
-\p{Two implementations can determine the same next-token law while using
-different tensor layouts or kernels. Conversely, changing a tokenizer or a
-termination convention changes the domain on which the law is interpreted.
-The model interface therefore includes the vocabulary and tokenizer as well
-as the parameterized probability map.}
+\p{Let #{\mathcal V} be the vocabulary of \ref{ftip-000D}. A token sequence
+of length #{n\geq0} is written #{x_{1:n}=(x_1,\ldots,x_n)\in\mathcal V^n};
+positions are one-based. Its length is #{|x_{1:n}|=n}, its prefix before
+position #{t} is
+#{x_{<t}=x_{1:t-1}}, and #{x_{<1}} is the empty sequence. Juxtaposition
+#{xy} denotes concatenation.}
 
-\p{Later FTIP comparisons will use the probability law to state semantic
-claims. They will name architecture and runtime choices separately when those
-choices affect training or inference cost. This prevents an implementation
-speedup from being mistaken for a change in the represented distribution.}
+\p{If #{\mathtt{eos}} is distinguished, a completed generated continuation
+#{y_{1:m}} ends with #{y_m=\mathtt{eos}} and contains no earlier
+#{\mathtt{eos}}. A fixed length limit can also stop generation; the stopping
+mechanism must state which convention it uses.}

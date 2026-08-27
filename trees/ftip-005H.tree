@@ -1,0 +1,21 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Definition}
+\title{Lifecycle cost vector}
+\tag{ftip}
+\tag{compute}
+
+\p{The realized \strong{lifecycle cost vector} of a protocol is the random
+vector #{C(P)\in\mathbb R_+^7} that records separately}
+
+##{
+ C(P)=
+ (C_{\rm data},C_{\rm feedback},C_{\rm rollout},C_{\rm env},
+  C_{\rm update},C_{\rm storage},C_{\rm eval}).
+}
+
+\p{A componentwise lifecycle budget is a vector
+#{\mathbf B\in\mathbb R_+^7}. Each cost coordinate has a declared unit, such as tokens, labels, accelerator
+floating-point operations (FLOPs), sandbox time, bytes, or evaluator calls. A scalar price may be applied
+later, but the typed vector is retained.}

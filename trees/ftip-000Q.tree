@@ -1,26 +1,20 @@
 \import{macros}
 \meta{agent-authored}{true}
 
-\taxon{Definition}
-\title{Layer normalization and placement convention}
-\tag{ftip}
-\tag{transformer}
-\tag{normalization}
-
-\p{For #{h=(h_1,\ldots,h_d)\in\mathbb R^d}, define
+\refdeft{Scaled dot-product attention}{sec. 3.2.1, equation (1)}{vaswani2017attention}{
+\p{Using the head widths in \ref{ftip-000P}, let #{T_q,T_k\geq1} be query
+and key-value sequence lengths. For
+#{Q\in\mathbb R^{T_q\times d_h}},
+#{K\in\mathbb R^{T_k\times d_h}}, and
+#{V\in\mathbb R^{T_k\times d_v}}, \newvocab{scaled dot-product attention}
+is
 ##{
-\mu(h)=\frac1d\sum_{j=1}^d h_j,
-\qquad
-v(h)=\frac1d\sum_{j=1}^d(h_j-\mu(h))^2.
+\operatorname{Att}(Q,K,V)
+=\operatorname{softmax}\left(\frac{QK^{\mathsf T}}{\sqrt{d_h}}\right)V.
 }
-Given learned vectors #{\gamma,\beta\in\mathbb R^d} and fixed
-#{\varepsilon>0}, \newvocab{layer normalization} is
-##{
-\operatorname{LN}(h)
-=\gamma\odot\frac{h-\mu(h)\mathbf 1}{\sqrt{v(h)+\varepsilon}}+\beta.
-}}
+The softmax is applied across each row of the #{T_q\times T_k} score matrix,
+so every output row is a convex combination of the value rows.}
+}
 
-\p{Layer normalization is introduced in
-\citet{sec. 3}{ba2016layer}. We will name whether a model applies it before
-or after each residual sublayer. Pre-norm and post-norm are placement
-conventions; they do not change the definition of #{\operatorname{LN}}.}
+\tag{ftip}
+\tag{attention}

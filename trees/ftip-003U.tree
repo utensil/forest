@@ -1,0 +1,19 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\tag{ftip}
+\tag{dpo}
+\tag{rlhf}
+
+\refcardt{Remark}{How DPO differs from reward-model PPO}{Sections 3--4}{rafailov2023direct}{
+\p{DPO optimizes a policy directly on a fixed preference dataset. Reward-model
+PPO instead fits an explicit scalar reward predictor, generates policy
+rollouts, estimates advantages, and applies a policy-gradient update. DPO
+therefore removes the separately represented reward and online PPO loop from
+that training stage.}
+
+\p{The methods still share ingredients: comparison data, a reference policy,
+a KL coefficient or temperature, and assumptions connecting comparisons with
+latent reward. Neither method defines preference optimization in general, and
+their data and compute requirements are not causally interchangeable.}
+}

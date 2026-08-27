@@ -2,27 +2,28 @@
 \meta{agent-authored}{true}
 
 \taxon{Definition}
-\title{Supervised fine-tuning loss}
+\title{Sequence packing and document mask}
 \tag{ftip}
-\tag{supervised-fine-tuning}
-\tag{loss}
+\tag{pretraining}
 
-\p{Let #{D_{\mathrm{sft}}} be a finite multiset of instruction-tuning
-records. For #{y=(y_1,\ldots,y_{|y|})}, the \strong{supervised fine-tuning
-loss} with response-token normalization is}
-
+\p{A \newvocab{packed training record} is a tuple
+#{\zeta=(x,m,c,M^{\mathrm{doc}})}. It places tokenized segments
+#{x^{(1)},\ldots,x^{(r)}} into the length-#{T} token array #{x}, records a
+prediction mask #{m}, and records a segment identifier
+#{c_t\in\{0,1,\ldots,r\}} at each position. The value #{c_t=0} denotes
+padding. Its \newvocab{document mask} is
 ##{
- L_{\mathrm{sft}}(\theta)
- =-\frac{1}{N_D}
-   \sum_{(x,y)\in D_{\mathrm{sft}}}
-   \sum_{t=1}^{|y|}
-   \log \pi_\theta(y_t\mid x,y_{<t}),
- \qquad
- N_D=\sum_{(x,y)\in D_{\mathrm{sft}}}|y|.
+M^{\mathrm{doc}}_{ts}=
+\begin{cases}
+0,&c_t=c_s\ne0\text{ and }s\leq t,\\
+-\infty,&\text{otherwise}.
+\end{cases}
 }
+Replacing the causal mask in \ref{ftip-000S} by this mask prevents one packed
+document from attending to another. We write #{x_t(\zeta)}, #{m_t(\zeta)},
+and #{M^{\mathrm{doc}}(\zeta)} for the corresponding fields.}
 
-\p{Section 3.5 and Appendix C.1 of \citef{ouyang2022training} describe the
-supervised stage and its training settings. The displayed response-token
-normalization is an FTIP convention; the source does not disclose this exact
-normalization. Prompt-token masking and record-level normalization are other
-conventions and must be stated when used.}
+\p{The prediction mask #{m_t(\zeta)} from \ref{ftip-0015} is one only at
+positions whose target token is retained for training. Padding, a segment's
+first token when no predecessor is present, and any deliberately excluded
+control token receive mask value zero.}

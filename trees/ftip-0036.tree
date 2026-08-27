@@ -1,0 +1,23 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\tag{ftip}
+\tag{reinforcement-learning}
+\tag{policy-gradient}
+
+\refdeft{Policy-gradient surrogate}{Section 2, equations (1)--(2)}{schulman2017proximal}{
+\p{For samples collected under the declared behavior law and estimated
+advantages #{\widehat A_t}, use the empirical-average convention of
+\ref{ftip-006Z}. The empirical \newvocab{policy-gradient
+surrogate} is}
+
+##{
+ L^{\mathrm{PG}}(\theta)
+ =\widehat{\mathbb E}_t
+ \left[\log\pi_\theta(A_t\mid \mathsf H_t)\,\widehat A_t\right].
+}
+
+\p{Its gradient is the familiar score-function estimator. The sampled states,
+actions, and advantage estimator are held fixed while differentiating this
+surrogate; changing the data-collection law defines a different estimator.}
+}

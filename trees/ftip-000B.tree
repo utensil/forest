@@ -2,27 +2,15 @@
 \meta{agent-authored}{true}
 
 \taxon{Definition}
-\title{Tokenizer and detokenizer}
+\title{Finite probability law}
 \tag{ftip}
-\tag{language-model}
-\tag{tokenization}
+\tag{probability}
 
-\p{Let #{\mathcal U} be a chosen set of texts. A \newvocab{tokenizer} is a
-map
+\p{Using the notation of \ref{ftip-000A}, a \newvocab{finite probability law}
+on #{X} is an element #{p\in\Delta(X)}. For an event #{A\subseteq X}, its
+probability is
 ##{
-\operatorname{Tok}:\mathcal U\longrightarrow\mathcal V^*.
+p(A)=\sum_{x\in A}p(x).
 }
-A \newvocab{detokenizer} is a map
-#{\operatorname{Dec}:\mathcal V^*\to\mathcal U}. We call the pair lossless on
-#{\mathcal U_0\subseteq\mathcal U} when
-##{
-\operatorname{Dec}(\operatorname{Tok}(x))=x
-\qquad(x\in\mathcal U_0).
-}}
-
-\p{SentencePiece makes lossless tokenization and a self-contained tokenizer
-model explicit in \citet{secs. 3.1 and 3.5}{kudo2018sentencepiece}. Byte-pair
-subword construction is described in
-\citet{sec. 3.2}{sennrich2016neural}. FTIP treats the tokenizer files and their
-normalization rules as part of the model interface. Different tokenizers can
-represent the same text by strings of different lengths.}
+For #{p(A)>0}, the conditional law on #{B\subseteq X} is
+#{p(B\mid A)=p(A\cap B)/p(A)}.}

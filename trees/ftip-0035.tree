@@ -1,0 +1,21 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\tag{ftip}
+\tag{reinforcement-learning}
+\tag{importance-sampling}
+
+\refdeft{Likelihood ratio}{Section 2, equation (3)}{schulman2017proximal}{
+\p{For an action #{A_t} sampled from #{\pi_b} at information state
+#{\mathsf H_t},
+the \newvocab{current-to-behavior likelihood ratio} is}
+
+##{
+ \rho_t(\theta)
+ =\frac{\pi_\theta(A_t\mid \mathsf H_t)}{\pi_b(A_t\mid \mathsf H_t)}.
+}
+
+\p{The ratio is defined on sampled actions for which
+#{\pi_b(A_t\mid \mathsf H_t)>0}. A bounded or clipped sampled ratio does not by itself
+control policy probabilities at unvisited histories.}
+}

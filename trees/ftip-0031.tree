@@ -1,35 +1,21 @@
 \import{macros}
 \meta{agent-authored}{true}
 
-\taxon{Remark}
-\title{First theorem and counterexample lanes}
 \tag{ftip}
-\tag{research-programme}
+\tag{reinforcement-learning}
+\tag{value-function}
 
-\p{The first theorem drafts should remain finite and conditional. The
-definitions above support the following questions.}
+\refdeft{Value function}{Section 3.5}{sutton2018reinforcement}{
+\p{For a policy #{\pi}, the \newvocab{value function} and
+\newvocab{action-value function} are}
 
-\ol{
-  \li{Under a declared support and verifier-error model, how many independent
-  rollouts are required to observe a successful trajectory with stated
-  confidence?}
-  \li{How do false positives and false negatives bias a policy-gradient or
-  group-relative update?}
-  \li{Under bounded ratios and controlled advantage variance, how many replay
-  updates can be accepted before off-policy error exceeds a tolerance?}
-  \li{Can two environments produce the same observed checkpoint history and
-  require different future informative feedback, defeating every history-only
-  extrapolator on one of them?}
-  \li{How should a fixed lifecycle budget be divided when rollout generation,
-  verification, and updates have different diminishing returns?}
+##{
+ V^\pi(h)=\mathbb E_\pi[G_t\mid \mathsf H_t=h],
+ \qquad
+ Q^\pi(h,a)=\mathbb E_\pi[G_t\mid \mathsf H_t=h,A_t=a],
 }
 
-\p{Counterexamples are equally important. Global entropy need not determine
-successful support. A large head gradient need not certify policy divergence.
-Low-rank checkpoint motion need not imply linear future motion. A higher
-training reward need not improve independent utility.}
-
-\p{These are FTIP research directions. The conditional gradient inequality and
-empirical gate come from \citef{miao2026when}. The trajectory-compression
-results in \citef{chen2026lowrank} are empirical. Their claims and assumptions
-should remain separate when the formal statements are written.}
+\p{whenever the conditional expectations exist. Both quantities depend on the
+reward, transition law, horizon, discount, and the policy followed after the
+conditioned decision.}
+}

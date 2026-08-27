@@ -1,23 +1,16 @@
 \import{macros}
 \meta{agent-authored}{true}
 
-\title{Reinforcement learning with verifiable rewards}
+\refdeft{Optimizer state}{Algorithm 1}{kingma2015adam}{
+\p{An \newvocab{optimizer state} #{s_k} is the collection of persistent
+variables, other than the model parameters #{\theta_k}, that an update rule
+uses after step #{k}. For Adam, #{s_k} contains the step index and exponential
+moving averages of the gradient and squared gradient.}
+
+\p{The state is initialized by a declared value #{s_0}. Two runs with the same
+checkpoint #{\theta_k} but different optimizer states need not have the same
+next update.}
+}
+
 \tag{ftip}
-\tag{rlvr}
-
-\p{A verifier can turn an answer, test result, or checked execution into a
-training signal. This section defines the response-level objects used by
-current RLVR methods. The later agentic setup will add environments and
-multi-turn histories.}
-
-\transclude{ftip-001I}
-\transclude{ftip-001J}
-\transclude{ftip-001K}
-\transclude{ftip-001L}
-\transclude{ftip-001M}
-\transclude{ftip-001N}
-\transclude{ftip-001O}
-\transclude{ftip-001P}
-\transclude{ftip-001Q}
-\transclude{ftip-001R}
-\transclude{ftip-001S}
+\tag{optimization}

@@ -1,0 +1,17 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\tag{ftip}
+\tag{ppo}
+\tag{training-protocol}
+
+\refcardt{Definition}{PPO rollout and minibatch update}{Section 5}{schulman2017proximal}{
+\p{A PPO iteration collects a batch of trajectories under the behavior policy,
+computes returns or advantage estimates, and then performs several epochs of
+minibatch optimization on the same collected batch. The updated policy becomes
+the behavior policy for a later collection round.}
+
+\p{The number of trajectories, epochs, minibatches, and optimizer steps governs
+how often one batch is reused. The clipped objective does not determine those
+protocol choices by itself.}
+}

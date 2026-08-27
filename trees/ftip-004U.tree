@@ -1,0 +1,27 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Definition}
+\title{Agentic post-training state}
+\tag{ftip}
+\tag{agent}
+\tag{post-training}
+
+\p{Let #{\mathcal M_{\rm exec}} be the space of executable model artifacts,
+#{\mathcal Z_{\rm opt}} the optimizer-state space, and #{\mathcal R_{\rm ag}}
+a declared space of typed agentic round records. At training round #{n}, an
+\strong{agentic post-training state} is a tuple
+##{
+\Sigma_n=(M_n,s_n,\mathcal L_n)
+\in\mathcal M_{\rm exec}\times\mathcal Z_{\rm opt}
+\times\mathcal R_{\rm ag}^{n},
+}
+where #{M_n} is the executable model artifact, #{s_n} is the optimizer state,
+and #{\mathcal L_n=(r_0,\ldots,r_{n-1})} is an append-only training ledger.}
+
+\p{The round-record schema records the task and instance draw, policy and
+inference stamp, environment version, stopped trajectory, feedback and credit
+outputs, update decision, proposed and committed next artifact and optimizer
+state, random seeds, operator versions, and realized cost vector. The tuple
+separates executable state from optimizer state and from evidence about how
+that state was reached.}
