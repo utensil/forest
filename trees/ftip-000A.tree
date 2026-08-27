@@ -1,0 +1,30 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Remark}
+\title{Why the agentic interface is a consensus abstraction}
+\tag{ftip}
+\tag{agent}
+\tag{reinforcement-learning}
+
+\p{The objects in \ref{ftip-0009} come from the common core of Markov and
+partially observed control, autoregressive generation, and the modern agent
+literature. \citef{murphy2024reinforcement} motivates the stochastic-control
+semantics, while \citef{wang2024agents} illustrates software-agent interfaces
+in which observations, tools, and evaluators matter as much as emitted text.
+Language-model papers often flatten these objects into a prompt and response;
+FTIP keeps them distinct so sandbox and long-horizon costs remain visible.}
+
+\p{The distinction between hidden state and public history enforces
+non-anticipation: a policy may depend only on information causally available
+when it acts. It also prevents a verifier's privileged state or a future test
+result from leaking into the rollout policy. Conversely, a training protocol
+may use a terminal outcome after the trajectory has finished, provided that
+the resulting feedback is typed as post hoc training information.}
+
+\p{The first theorem questions concern equivalence and compounding. Under what
+conditions does a token-level policy induce the same law as an utterance-level
+policy? If every required transition has conditional validity at most #{p_t},
+how does end-to-end success scale with horizon? Which coverage condition lets a
+training task distribution control independent environments? These are the
+bridges from elementary probability to agentic scaling and limitation results.}

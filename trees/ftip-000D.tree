@@ -1,0 +1,58 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Definition}
+\title{Costed post-training potential}
+\tag{ftip}
+\tag{scaling-law}
+\tag{post-training}
+
+\p{This card proposes an FTIP research interface. The ingredients below are
+motivated by scaling, reinforcement-learning, evaluation, and systems
+literatures, but their synthesis into one frontier is not itself an
+established theorem or consensus metric.}
+
+\p{Fix a base artifact #{M_0} with policy #{\pi_{\theta_0}}, an independent
+evaluation law #{\mathcal Q}, an evaluation inference budget #{b}, and an
+admissible protocol class #{\mathfrak P}. Let}
+
+##{
+  J_{\mathcal Q}(\pi;b)
+}
+
+\p{denote expected task utility under the fixed evaluator and inference
+protocol. For a random post-training protocol #{P}, define its gain}
+
+##{
+  \Delta_{\mathcal Q,b}(P)
+  =\mathbb E\left[J_{\mathcal Q}(\pi_P;b)\right]
+   -J_{\mathcal Q}(\pi_{\theta_0};b).
+}
+
+\p{Its lifecycle cost is a vector rather than a step count:}
+
+##{
+  C(P)=(C_{\mathrm{roll}},C_{\mathrm{ver}},C_{\mathrm{upd}},
+        C_{\mathrm{env}},C_{\mathrm{store}},C_{\mathrm{eval}}).
+}
+
+\p{The \strong{costed post-training potential} under componentwise budget
+#{B} is}
+
+##{
+  \Phi(M_0,\mathcal Q,b,B,\mathfrak P)
+  =\sup\left\{\Delta_{\mathcal Q,b}(P):
+      P\in\mathfrak P,\ \mathbb E[C(P)]\leq B,
+      \operatorname{Trust}(P)\right\}.
+}
+
+\p{The predicate #{\operatorname{Trust}(P)} rules out evaluation leakage,
+unrecorded privileged information, uncharged selection or extrapolation cost,
+and missing policy provenance. The scalar frontier can be replaced by a Pareto
+set, a subgroup-robust minimum, or a pairwise preference-game value when utility
+is not naturally scalar.}
+
+\p{An \strong{acquisition witness} supplements the gain with evidence of new
+independently validated successful support, strategy diversity, or transfer at
+fixed #{b}. Without such a witness, a positive #{\Delta} is compatible with
+elicitation alone.}

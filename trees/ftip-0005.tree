@@ -1,0 +1,33 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Definition}
+\title{Pretraining and base-model endowment}
+\tag{ftip}
+\tag{language-model}
+\tag{pretraining}
+\tag{scaling-law}
+
+\p{A \strong{pretraining protocol} consists of a data law
+#{\mathcal D_{\mathrm{pre}}}, an architecture and tokenizer, an objective, an
+optimizer, and a resource budget. For next-token prediction the population
+objective has the form}
+
+##{
+  L_{\mathrm{pre}}(\theta)
+  =\mathbb E_{x\sim\mathcal D_{\mathrm{pre}}}
+    \left[-\sum_t\log\pi_\theta(x_t\mid x_{<t})\right].
+}
+
+\p{Running the protocol produces a \strong{base policy} #{\pi_{\theta_0}}.
+Its \strong{base-model endowment} on a task law #{\mathcal Q} is the collection
+of properties present before task-specific post-training: probability mass on
+successful trajectories, calibration, representation and workspace geometry,
+context use, effective compute cost, and the diversity of strategies reachable
+by the chosen inference procedure.}
+
+\p{The term “endowment” is intentionally richer than a benchmark score. Two
+models can have the same pass-at-one score while assigning very different mass
+to rare successful traces, or while requiring very different inference costs
+to expose them. Likewise, the same architecture trained on different data or
+with a different optimizer need not provide the same starting policy.}

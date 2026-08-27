@@ -1,0 +1,61 @@
+\import{macros}
+\meta{agent-authored}{true}
+\meta{pdf}{true}
+
+\title{Formalized Theoretical Intelligence Potential}
+\tag{notes}
+\tag{math}
+\tag{draft}
+\tag{agent-draft}
+\tag{ftip}
+\tag{language-model}
+\tag{reinforcement-learning}
+
+\author{utensil}
+\date{2026-08-27}
+
+\p{These research notes study \strong{Formalized Theoretical Intelligence
+Potential} (FTIP): how much task-relevant capability post-training can elicit
+or acquire from a language model, and how that gain depends on the model,
+feedback, reward design, optimization, rollout compute, sandbox compute, and
+deployment-time inference. “Potential” is therefore not a single intrinsic
+number attached to a model. It is a conditional frontier indexed by a task law
+and a protocol.}
+
+\p{The first draft is deliberately introductory. It begins with the object
+being trained and the process that creates its base distribution, then follows
+the transition from supervised post-training to reinforcement learning with
+verifiable rewards (RLVR). Only after that context does it introduce tasks,
+environments, histories, policies, feedback, credit, and costed potential.}
+
+\p{The recurring mechanism spine is the following. The diagram is
+\strong{schematic}: each arrow will later become a typed map or stochastic
+kernel, and each cost label will become part of the lifecycle budget.}
+
+\tikzfig{\begin{tikzpicture}[
+  node distance=8mm,
+  every node/.style={draw, rounded corners=2pt, align=center,
+    text width=29mm, minimum height=11mm},
+  every path/.style={-{Stealth[length=2mm]}, thick}
+]
+\node (base) {architecture, data,\\and pretraining};
+\node[right=of base] (post) {post-training\\protocol};
+\node[right=of post] (agent) {agentic rollout\\and environment};
+\node[right=of agent] (eval) {independent\\evaluation};
+\draw (base) -- node[draw=none, above=5mm, text width=18mm] {base policy} (post);
+\draw (post) -- node[draw=none, above=5mm, text width=18mm] {current policy} (agent);
+\draw (agent) -- node[draw=none, above=5mm, text width=18mm] {outcomes} (eval);
+\draw[bend right=33, dashed] (agent.south) to
+  node[draw=none, below=7mm, text width=30mm] {feedback, reward, credit} (post.south);
+\end{tikzpicture}}
+
+\p{Definitions in this suite are working research interfaces rather than
+claims that one paper has supplied the final ontology. Each definition is
+followed by a remark recording the literatures it reconciles, the distinctions
+it preserves, and the questions or theorem families it is meant to support.}
+
+\transclude{ftip-000F}
+\transclude{ftip-000G}
+\transclude{ftip-000H}
+\transclude{ftip-000I}
+\transclude{ftip-000J}

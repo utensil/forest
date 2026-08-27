@@ -1,0 +1,38 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Remark}
+\title{From feedback semantics to theorem questions}
+\tag{ftip}
+\tag{feedback}
+\tag{reward}
+\tag{optimization}
+
+\p{The decomposition in \ref{ftip-000B} is a consensus interface rather than
+a transcription of one algorithm. RLHF separates preferences and learned
+rewards; RLVR separates verifiable outcomes from group credit; process
+supervision assigns signals inside a trace; experience replay separates data
+generation from repeated updates; and auxiliary representation objectives can
+carry structured targets that are not scalar rewards.}
+
+\p{It also locates two recent analytical proposals. Dynamic Gradient Gating
+monitors a proposed update before optimizer application and decides whether a
+rollout batch should be reused again. Its head-gradient inequality is a
+conditional diagnostic, not a universal divergence certificate. NExt maps an
+early checkpoint history to a predicted future parameter displacement and then
+re-grounds with real RL steps. Its low-rank observations are empirical and
+coordinate-dependent; they do not prove that future feedback contains no new
+information.}
+
+\p{The associated theorem programme starts small: prove when a stochastic
+credit estimator is unbiased; quantify verifier false positives and false
+negatives; bound off-policy error under explicit ratio and support conditions;
+construct false-positive and false-negative examples for raw gradient alarms;
+and prove a no-free-feedback result by exhibiting two environments with the
+same observed history but different future informative events.}
+
+\p{Later theorems can optimize the division between fresh rollouts, safe
+reuse, verifier calls, checkpoint prediction, and recovery updates. Such a
+result must charge every component and evaluate on an independent task law;
+otherwise a reduction in “steps” is not yet a scaling law for post-training
+potential.}

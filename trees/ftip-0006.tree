@@ -1,0 +1,31 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Remark}
+\title{What the pretraining objective does not say}
+\tag{ftip}
+\tag{pretraining}
+\tag{scaling-law}
+
+\p{The definition in \ref{ftip-0005} combines the next-token objective with
+the protocol that realizes it. This reflects two bodies of literature. The
+Transformer and language-modelling literature supplies the likelihood
+semantics; empirical scaling work such as \citef{kaplan2020scaling} and
+\citef{hoffmann2022training} relates loss to model,
+data, and compute under particular training families. Neither turns
+next-token loss into an architecture-free theorem about later agentic
+capability.}
+
+\p{Pretraining also does not decide whether a later gain is elicitation or
+acquisition. A successful trajectory may have tiny but nonzero base
+probability, be reachable only under a different prompt or search budget, or
+require feedback that introduces genuinely new task information. These cases
+can have the same pretraining loss and different post-training curves.}
+
+\p{This motivates two theorem families. A \strong{base-support} theorem should
+bound what reward-only reweighting can achieve when no new informative event is
+introduced. A \strong{conditional scaling} theorem should state explicitly
+which base quantities—loss, success support, entropy, architecture efficiency,
+or representation geometry—control the rate of post-training gain. The
+literature suggests candidate coordinates; FTIP must prove which ones are
+sufficient, necessary, or non-identifiable.}

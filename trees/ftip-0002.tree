@@ -1,0 +1,39 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Discussion}
+\title{How much can post-training buy?}
+\tag{ftip}
+\tag{language-model}
+\tag{reinforcement-learning}
+
+\p{Frontier language models are no longer produced by pretraining alone.
+Instruction tuning, preference optimization, outcome-verifiable reinforcement
+learning, process feedback, tool use, long rollouts, and repeated interaction
+with sandboxes can substantially change which behaviours are reliable. The
+central FTIP question is not simply whether one recipe improves one benchmark.
+It is how capability gain changes when we vary the quality and quantity of
+feedback, the cost of producing it, the update rule, the base model, and the
+inference protocol.}
+
+\p{This question has two different readings. \strong{Elicitation} moves
+probability mass toward successful behaviours already supported by the base
+policy. \strong{Acquisition} adds independently validated successful
+strategies, transfers them to new tasks, or makes them available under a fixed
+inference budget when the base policy had negligible support. Pass-at-one,
+majority vote, pass-at-#{k}, support coverage, and transfer therefore answer
+different questions. The \citef{shao2024deepseekmath} analysis and the later
+\citef{guo2025deepseek} experiments motivate this distinction, but do not by
+themselves give a universal test for acquisition.}
+
+\p{A second distinction is between allocated and realized compute. A protocol
+may be allowed a large rollout or inference budget but fail to use it
+effectively; it may also reuse a costly rollout for several gradient updates,
+or predict a later parameter state from an early checkpoint trajectory. Thus
+“training steps,” generated tokens, verifier calls, optimizer FLOPs, sandbox
+time, and wall-clock time are not interchangeable units.}
+
+\p{The intended endpoint is a family of conditional scaling laws and limit
+theorems, not an absolute upper bound on “intelligence.” The immediate task is
+more modest: define the objects well enough that claims about signal,
+coverage, compute, and capability have an unambiguous semantic type.}
