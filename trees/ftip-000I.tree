@@ -1,14 +1,19 @@
 \import{macros}
 \meta{agent-authored}{true}
 
-\title{Agentic post-training setup}
+\taxon{Definition}
+\title{Token embedding}
 \tag{ftip}
-\tag{notes}
+\tag{transformer}
 
-\p{With model and training context in place, we can type the task–environment
-interaction and the feedback–update path used by an agentic protocol.}
+\p{Fix a hidden width #{d}. A \newvocab{token embedding} is a map
+##{
+E:\mathcal V\longrightarrow\mathbb R^d.
+}
+For a string #{x_{1:n}}, applying #{E} at each position gives the matrix
+#{X\in\mathbb R^{n\times d}} with row #{X_t=E(x_t)}.}
 
-\transclude{ftip-0009}
-\transclude{ftip-000A}
-\transclude{ftip-000B}
-\transclude{ftip-000C}
+\p{This is the embedding operation described in
+\citet{sec. 5, Token embedding}{phuong2022formal} and
+\citet{sec. 3.4}{vaswani2017attention}. The map is part of the learned
+parameters unless a model specification says otherwise.}

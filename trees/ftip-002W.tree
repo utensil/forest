@@ -1,0 +1,24 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Definition}
+\title{Token-position entropy}
+\tag{ftip}
+\tag{entropy}
+
+\p{Fix token position #{t}. Let #{P_t(a)=\Pr(A_t=a)} be the marginal token
+law under the declared task, policy, decoder, and survival event #{T>t}. The
+\strong{token-position entropy} is}
+
+##{
+  \mathcal H_t^{\mathrm{pos}}=-\sum_{a\in\mathcal V}P_t(a)\log P_t(a).
+}
+
+\p{This applies the entropy of \citet{Pt. I, Sec. 6}{shannon1948mathematical}
+to a position-marginal law. It differs from the expected local entropy
+#{\mathbb E[H(\pi_t(\cdot\mid H_t))]}; mixing histories can increase the
+marginal entropy.}
+
+\p{The distinction matters when a paper reports high-entropy token positions
+or forks. A position can be diverse because different histories choose
+different deterministic tokens, even when each local policy is sharp.}

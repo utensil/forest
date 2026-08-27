@@ -1,0 +1,27 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Definition}
+\title{Scaled dot-product attention and its query/key/value projections}
+\tag{ftip}
+\tag{transformer}
+\tag{attention}
+
+\p{Let #{H\in\mathbb R^{n\times d}}. Choose projection matrices
+#{W_Q,W_K\in\mathbb R^{d\times d_k}} and
+#{W_V\in\mathbb R^{d\times d_v}}, and set
+##{
+Q=HW_Q,\qquad K=HW_K,\qquad V=HW_V.
+}
+The corresponding \newvocab{scaled dot-product attention} is
+##{
+\operatorname{Attn}(H)
+=\operatorname{softmax}_{\rm row}
+  \left(\frac{QK^{\mathsf T}}{\sqrt{d_k}}\right)V.
+}}
+
+\p{The query, key, and value projections and the scaled score formula are
+given in \citet{sec. 3.2.1}{vaswani2017attention}. They are kept in one card
+because the attention map is not typed until all three projections are fixed.
+The row-wise softmax makes each row of the weight matrix a distribution over
+key positions.}

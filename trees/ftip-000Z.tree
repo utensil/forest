@@ -1,0 +1,21 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Definition}
+\title{Population pretraining objective}
+\tag{ftip}
+\tag{pretraining}
+\tag{loss}
+
+\p{The \newvocab{population pretraining objective} associated with
+#{\mathcal D_{\rm pre}} is
+##{
+L_{\rm pre}(\theta)
+=\mathbb E_{X\sim\mathcal D_{\rm pre}}[\ell(\theta;X)],
+}
+provided the expectation exists.}
+
+\p{The language-model loss used in
+\citet{sec. 2.2}{kaplan2020scaling} is an average next-token loss over the
+chosen data distribution. The population form separates that target quantity
+from a finite corpus and from the random minibatches used by an optimizer.}

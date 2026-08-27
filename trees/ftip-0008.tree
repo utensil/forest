@@ -1,38 +1,19 @@
 \import{macros}
 \meta{agent-authored}{true}
 
-\taxon{Remark}
-\title{Why verifiable rewards change the experiment}
+\title{Tokens and probability laws}
 \tag{ftip}
-\tag{post-training}
-\tag{rlvr}
+\tag{language-model}
 
-\p{RLVR changes the economics and semantics of feedback. A rule or sandbox can
-produce many labels without a human judging every trace, and it can make the
-success criterion sharper than a learned scalar preference model. But
-verifiability is local to the evidence checked. A unit test can be incomplete,
-an answer parser can be brittle, a sandbox can leak shortcuts, and a terminal
-reward can leave long-horizon credit unresolved. Reward is therefore a
-measurement channel, not task truth itself.}
+\p{A language model receives tokens rather than raw text. This section fixes
+the token domain, the sequence notation, and the probability law used by the
+rest of the note. Architecture enters only after this interface is clear.}
 
-\p{The working protocol definition reconciles several literatures. Classical
-RL supplies policies, returns, credit, and off-policy correction;
-\citef{shao2024deepseekmath} and \citef{guo2025deepseek} supply group-relative outcome training;
-\citef{yu2025dapo} exposes entropy, clipping, dynamic sampling, and length
-effects; \citef{miao2026when} studies when costly rollouts can be reused; and
-\citef{chen2026lowrank} asks when part of a learned
-parameter trajectory can be extrapolated. The last two alter compute use, but
-do not by themselves prove capability acquisition.}
-
-\p{The immediate questions are consequently conditional. How does verifier
-precision change sample complexity? When does group normalization suppress
-signal? Which entropy observable predicts useful exploration rather than
-collapse? How much rollout reuse is safe at a given policy divergence? When
-does a predictable parameter path merely compress elicitation, and when must a
-new environment event supply information that no history-only extrapolator can
-recover?}
-
-\p{These questions suggest both positive theorems and counterexamples: bounds
-under explicit signal and coverage assumptions, alongside impossibility
-results showing that reward, entropy, gradient energy, or low-rank trajectory
-geometry cannot serve as universal scalar certificates.}
+\transclude{ftip-0009}
+\transclude{ftip-000A}
+\transclude{ftip-000B}
+\transclude{ftip-000C}
+\transclude{ftip-000D}
+\transclude{ftip-000E}
+\transclude{ftip-000F}
+\transclude{ftip-000G}

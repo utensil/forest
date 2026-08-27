@@ -1,0 +1,21 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Definition}
+\title{Replay pool}
+\tag{ftip}
+\tag{replay}
+
+\p{At accepted-update index #{n}, a \strong{replay pool}
+#{\mathcal B_n} is a finite collection of immutable rollout records. A pool
+update can insert newly generated records or retire existing records. It does
+not alter a retained record.}
+
+\p{Replay buffers are standard in off-policy reinforcement learning; see the
+overview in \citef{murphy2024reinforcement}. The present definition is an FTIP
+specialization to stamped language-model rollouts. It leaves the insertion,
+eviction, and sampling policy explicit rather than identifying the pool with a
+training minibatch.}
+
+\p{A record can remain in the pool after the current policy has changed. Its
+fitness for another update is evaluated by the selection step below.}

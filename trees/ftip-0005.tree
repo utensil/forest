@@ -2,32 +2,25 @@
 \meta{agent-authored}{true}
 
 \taxon{Definition}
-\title{Pretraining and base-model endowment}
+\title{Elicitation and acquisition}
 \tag{ftip}
-\tag{language-model}
-\tag{pretraining}
-\tag{scaling-law}
+\tag{post-training}
+\tag{evaluation}
 
-\p{A \strong{pretraining protocol} consists of a data law
-#{\mathcal D_{\mathrm{pre}}}, an architecture and tokenizer, an objective, an
-optimizer, and a resource budget. For next-token prediction the population
-objective has the form}
+\p{A measured gain is \strong{elicitation} when training or inference places
+more probability on successful behaviour already represented in the starting
+policy's effective support. A gain is \strong{acquisition} when independently
+validated successful behaviour becomes available where the declared starting
+procedure had negligible support, or when the behaviour transfers under a
+prespecified test that the starting procedure failed.}
 
-##{
-  L_{\mathrm{pre}}(\theta)
-  =\mathbb E_{x\sim\mathcal D_{\mathrm{pre}}}
-    \left[-\sum_t\log\pi_\theta(x_t\mid x_{<t})\right].
-}
+\p{These are FTIP working definitions. They sharpen a distinction investigated
+empirically by \citef{liu2025understanding} and \citef{yue2025does}. Those
+papers compare base and RL-trained reasoning models, but no finite experiment
+can establish exact zero support for an unrestricted policy. For that reason,
+the definition refers to effective support under a declared procedure.}
 
-\p{Running the protocol produces a \strong{base policy} #{\pi_{\theta_0}}.
-Its \strong{base-model endowment} on a task law #{\mathcal Q} is the collection
-of properties present before task-specific post-training: probability mass on
-successful trajectories, calibration, representation and workspace geometry,
-context use, effective compute cost, and the diversity of strategies reachable
-by the chosen inference procedure.}
-
-\p{The term “endowment” is intentionally richer than a benchmark score. Two
-models can have the same pass-at-one score while assigning very different mass
-to rare successful traces, or while requiring very different inference costs
-to expose them. Likewise, the same architecture trained on different data or
-with a different optimizer need not provide the same starting policy.}
+\p{The two terms describe an experimental contrast rather than an exhaustive
+partition of learning. A result may combine both. Later trees define support,
+evaluation budgets, and an acquisition witness so that the contrast can be
+tested without relying on a verbal judgment about a generated trace.}

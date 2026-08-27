@@ -1,14 +1,18 @@
 \import{macros}
 \meta{agent-authored}{true}
 
-\title{Models and pretraining}
+\taxon{Remark}
+\title{Probabilistic interface versus implementation}
 \tag{ftip}
-\tag{notes}
+\tag{language-model}
 
-\p{Before defining a post-training experiment, we identify the probabilistic
-model being changed and the protocol that produced its base endowment.}
+\p{Two implementations can determine the same next-token law while using
+different tensor layouts or kernels. Conversely, changing a tokenizer or a
+termination convention changes the domain on which the law is interpreted.
+The model interface therefore includes the vocabulary and tokenizer as well
+as the parameterized probability map.}
 
-\transclude{ftip-0003}
-\transclude{ftip-0004}
-\transclude{ftip-0005}
-\transclude{ftip-0006}
+\p{Later FTIP comparisons will use the probability law to state semantic
+claims. They will name architecture and runtime choices separately when those
+choices affect training or inference cost. This prevents an implementation
+speedup from being mistaken for a change in the represented distribution.}

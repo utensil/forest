@@ -1,0 +1,27 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Definition}
+\title{Verifier error model}
+\tag{ftip}
+\tag{verifier}
+\tag{reward}
+
+\p{Let #{S\in\{0,1\}} denote success under the independent criterion and let
+#{V\in\{0,1\}} be the verifier decision used during training. The verifier's
+\strong{false-positive} and \strong{false-negative} rates are}
+
+##{
+  \alpha=\Pr(V=1\mid S=0),\qquad
+  \beta=\Pr(V=0\mid S=1).
+}
+
+\p{This is the standard binary measurement-error model applied to RLVR. The
+verifiable rewards of \citef{guo2025deepseek} use exact-answer or rule-based
+checks in particular domains. The abstraction allows those checks to be
+imperfect relative to the capability that the independent evaluator intends
+to measure.}
+
+\p{The pair #{(\alpha,\beta)} is conditional on the task and generated
+trajectory distribution. It need not remain fixed as the policy learns to
+search for checker weaknesses.}

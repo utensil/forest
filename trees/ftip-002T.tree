@@ -1,0 +1,21 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Definition}
+\title{Credit horizon}
+\tag{ftip}
+\tag{credit-assignment}
+
+\p{For an action #{A_t}, the \strong{credit horizon} is the number of later
+environment transitions before the feedback used to train that action becomes
+measurable. A terminal-only signal on a trajectory of length #{T} gives the
+first action horizon #{T}; an immediate process label gives horizon zero.}
+
+\p{This is an FTIP specialization of delayed reward and temporal credit
+assignment in reinforcement learning; see \citef{murphy2024reinforcement}.
+The definition records delay in environment transitions rather than tokens,
+because one agent action may contain many tokens.}
+
+\p{Long horizon does not by itself imply that credit is impossible. It marks
+where variance, model assumptions, or additional process evidence enter a
+bound.}

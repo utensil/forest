@@ -1,0 +1,30 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Definition}
+\title{Sequence likelihood ratio}
+\tag{ftip}
+\tag{policy-optimization}
+\tag{importance-sampling}
+
+\p{Let #{\pi_b} be the behavior policy that generated
+#{y=(y_1,\ldots,y_n)} and let #{\pi_\theta} be the current policy. The
+per-token likelihood ratio and the \strong{sequence likelihood ratio} are}
+
+##{
+  \rho_t(\theta)
+  =\frac{\pi_\theta(y_t\mid x,y_{<t})}
+         {\pi_b(y_t\mid x,y_{<t})},
+  \qquad
+  \rho_{\mathrm{seq}}(\theta)
+  =\prod_{t=1}^{n}\rho_t(\theta).
+}
+
+\p{The ratios are defined only where the behavior probabilities in their
+denominators are positive. The factorization follows from the autoregressive
+law.}
+
+\p{Policy likelihood ratios enter the PPO surrogate in
+\citet{Section 3}{schulman2017proximal}. RLVR objectives may clip token ratios
+rather than the complete sequence ratio, so the two quantities must remain
+distinct.}

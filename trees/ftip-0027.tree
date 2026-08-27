@@ -1,0 +1,25 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Definition}
+\title{Feedback operator}
+\tag{ftip}
+\tag{feedback}
+
+\p{Let #{\mathcal F} be a declared signal space. A \strong{feedback operator}
+is a possibly stochastic map}
+
+##{
+  F:\rho\longmapsto Z\in\mathcal F
+}
+
+\p{that uses only fields of the rollout record and separately declared
+randomness. The signal #{Z} may contain a scalar reward, a preference,
+step-level labels, a critique, or a structured verifier trace.}
+
+\p{Section 2 of \citef{christiano2017deep} defines human-preference feedback.
+Sections 3.2--3.4 of \citef{ouyang2022training} use demonstrations,
+preferences, and a learned reward. \citef{lightman2023verify} distinguishes
+process from outcome supervision. Section 2.2 of \citef{guo2025deepseek} uses
+verifiable outcome feedback. The feedback operator is an FTIP synthesis of
+these signal-producing mechanisms. Its output need not be scalar.}

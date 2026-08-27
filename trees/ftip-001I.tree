@@ -1,0 +1,24 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Definition}
+\title{Scalar reward and return}
+\tag{ftip}
+\tag{reinforcement-learning}
+\tag{reward}
+
+\p{For a response with #{n} decision steps, let #{r_t\in\mathbb R} be the
+scalar reward revealed after step #{t}. Given a discount
+#{\gamma\in[0,1]}, the \strong{return} from step #{t} is}
+
+##{
+  G_t=\sum_{j=t}^{n}\gamma^{j-t}r_j.
+}
+
+\p{A terminal-reward problem has #{r_t=0} for #{t<n}. Its return is then the
+final scalar reward, possibly discounted.}
+
+\p{The reward and return conventions follow
+\citet{Sections 3.2--3.3}{sutton2018reinforcement}. A scalar reward is an
+encoding of a training signal. It need not equal the quantity used for
+independent evaluation.}

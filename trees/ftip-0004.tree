@@ -1,49 +1,24 @@
 \import{macros}
 \meta{agent-authored}{true}
 
-\taxon{Remark}
-\title{Why architecture matters to post-training potential}
+\taxon{Convention}
+\title{What intelligence means in this note}
 \tag{ftip}
-\tag{language-model}
-\tag{transformer}
+\tag{evaluation}
 
-\p{The definition in \ref{ftip-0003} separates a stable semantic interface
-from its implementation. This is a consensus move across probabilistic
-language modelling, Transformer architecture, and reinforcement-learning
-work: downstream protocols consume token probabilities, while their rates and
-failure modes depend on hidden-state geometry, normalization, routing, memory,
-and the output head.}
+\p{We use \strong{task capability} for the model's measured ability to
+produce successful behaviour under a declared evaluation procedure. A
+capability statement must name the task distribution, the success rule, and
+the inference budget. Intelligence is informal shorthand for a collection
+of such capabilities.}
 
-\p{The following diagram is \strong{schematic}, not a claim that every current
-model uses a dense Transformer. It marks the interfaces at which later FTIP
-theorems may place assumptions.}
+\p{This is an operational convention adopted for FTIP. It makes no claim
+about consciousness, general agency, or a single latent factor shared by all
+tasks. It also keeps capability separate from the cost of exhibiting it: two
+policies may reach the same success rate with different numbers of samples,
+tokens, or environment interactions.}
 
-\tikzfig{\begin{tikzpicture}[
-  node distance=7mm,
-  every node/.style={draw, rounded corners=2pt, align=center,
-    text width=25mm, minimum height=10mm},
-  every path/.style={-{Stealth[length=2mm]}, thick}
-]
-\node (tok) {token prefix $x_{\leq t}$};
-\node[right=of tok] (emb) {embedding\\and position};
-\node[right=of emb] (stack) {causal stack:\\attention, MLP,\\routing or recurrence};
-\node[right=of stack] (head) {normalization\\and output head};
-\node[right=of head] (dist) {next-token law $\pi_\theta$};
-\draw (tok) -- (emb);
-\draw (emb) -- (stack);
-\draw (stack) -- (head);
-\draw (head) -- (dist);
-\end{tikzpicture}}
-
-\p{Architecture can affect potential in at least three ways. It changes the
-base distribution created per unit of pretraining compute; it changes the
-Jacobian and gradient geometry through which post-training signals propagate;
-and it changes the cost of generating long agentic rollouts. Parameter count
-alone therefore cannot be the architecture coordinate of a scaling law.}
-
-\p{The first formal questions are interface questions: when does a causal mask
-give prefix non-interference; which output-head or normalization assumptions
-justify gradient-energy bounds; and how do sparse routing or recurrent state
-alter update stability? These questions draw on architecture papers, but the
-post-training statements themselves belong to FTIP rather than to a basic
-Transformer formalization.}
+\p{The convention follows the measurement practice of reinforcement learning
+and language-model evaluation, where a policy is assessed by outcomes under a
+specified protocol; see the overview in \citef{murphy2024reinforcement}. Later
+trees give these ingredients mathematical types.}

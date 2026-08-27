@@ -1,0 +1,20 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Definition}
+\title{Termination rule and terminal outcome}
+\tag{ftip}
+\tag{agent}
+
+\p{A \strong{termination rule} is a stopping time #{T} with respect to the
+public-history filtration. The rule may stop on a submitted answer, an
+environment terminal signal, a declared failure, or a fixed horizon.}
+
+\p{A \strong{terminal outcome} #{Y} is a measurable function of the completed
+interaction and any post-termination environment state that the protocol is
+allowed to inspect. The policy need not observe all fields of #{Y}.}
+
+\p{Stopping times and terminal outcomes are standard finite-horizon control
+objects; see \citef{murphy2024reinforcement}. FTIP states the measurability
+boundary because a terminal test result may be valid training feedback without
+being valid information for an earlier action.}

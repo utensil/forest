@@ -1,0 +1,30 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Definition}
+\title{Group-relative baseline and advantage}
+\tag{ftip}
+\tag{grpo}
+\tag{credit-assignment}
+
+\p{Let #{r_i=R_V(x,y^{(i)})} be the rewards in a rollout group. Define the
+group mean and stabilized standard deviation by}
+
+##{
+  \bar r=\frac1g\sum_{i=1}^g r_i,
+  \qquad
+  s_\varepsilon=
+  \sqrt{\frac1g\sum_{i=1}^g(r_i-\bar r)^2+\varepsilon},
+  \qquad \varepsilon>0.
+}
+
+\p{The \strong{group-relative advantage} of response #{i} is}
+
+##{
+  \widehat A_i=\frac{r_i-\bar r}{s_\varepsilon}.
+}
+
+\p{Section 4.1 of \citef{shao2024deepseekmath} uses this normalized group
+credit in GRPO. Implementations differ on variance
+normalization, zero-variance groups, and token weighting. Those choices are
+not consequences of the definition.}

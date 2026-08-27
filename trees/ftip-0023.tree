@@ -1,0 +1,38 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Remark}
+\title{Token generation as a special case}
+\tag{ftip}
+\tag{agent}
+\tag{language-model}
+
+\p{Autoregressive generation fits the preceding setup. The action space is the
+vocabulary, the public history is the token prefix, and the observation after
+an action can be taken to be that emitted token. An end token or length limit
+supplies the termination rule.}
+
+\p{Agentic interaction adds an environment step between some model decisions.
+The compact diagram records the change of interface. It does not identify a
+token with a tool call or assume that every observation is text.}
+
+\tikzfig{\begin{tikzpicture}[
+  box/.style={draw, rounded corners=2pt, align=center, font=\small,
+    text width=35mm, minimum height=10mm},
+  flow/.style={-{Stealth[length=2mm]}, thick}
+]
+\node[box] (hist) at (0,1.4) {public history $H_t$};
+\node[box] (pol) at (5.2,1.4) {policy $\pi_t(\cdot\mid H_t)$};
+\node[box] (act) at (5.2,-1.0) {token or tool action $A_t$};
+\node[box] (env) at (0,-1.0) {environment observation $O_{t+1}$};
+\draw[flow] (hist) -- (pol);
+\draw[flow] (pol) -- (act);
+\draw[flow] (act) -- (env);
+\draw[flow] (env) -- (hist);
+\end{tikzpicture}}
+
+\p{The first agentic theorem questions concern this interface. When does a
+token policy induce a well-defined utterance or tool policy? How does an error
+probability compound with the number of required environment transitions?
+Which parts of a terminal observation can be used for later training without
+violating non-anticipation?}

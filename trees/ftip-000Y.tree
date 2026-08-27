@@ -1,0 +1,27 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Definition}
+\title{Token and sequence negative log-likelihood}
+\tag{ftip}
+\tag{pretraining}
+\tag{loss}
+
+\p{For a token string #{x_{1:n}}, the \newvocab{token negative
+log-likelihood} at position #{t} is
+##{
+\ell_t(\theta;x_{1:n})
+=-\log\pi_\theta(x_t\mid x_{<t}).
+}
+The \newvocab{sequence negative log-likelihood} is the declared aggregation
+##{
+\ell(\theta;x_{1:n})
+=\sum_{t\in I(x_{1:n})}\ell_t(\theta;x_{1:n}),
+}
+where #{I(x_{1:n})} is the set of positions included by the training mask.}
+
+\p{The decoder-only training algorithm in
+\citet{sec. 7}{phuong2022formal} uses cross-entropy against target tokens.
+For a one-hot target, that cross-entropy is the displayed negative
+log-likelihood. Keeping #{I(x_{1:n})} explicit records whether padding,
+prompt tokens, or other positions are excluded.}

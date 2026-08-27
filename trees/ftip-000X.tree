@@ -1,0 +1,18 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Definition}
+\title{Context-window sampling}
+\tag{ftip}
+\tag{pretraining}
+
+\p{Fix a maximum context length #{L}. A \newvocab{context-window sampler}
+maps a corpus string to one or more training strings of length at most
+#{L+1}. The first #{L} positions can serve as context, and the remaining next
+token supplies a prediction target.}
+
+\p{The training procedure in \citet{sec. 2.2}{kaplan2020scaling} uses fixed
+context windows, while the Chinchilla model details in
+\citet{sec. 4.1}{hoffmann2022training} specify a maximum sequence length.
+Window boundaries and packing rules are part of the sampler. They need not
+match document boundaries.}

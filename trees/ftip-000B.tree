@@ -2,49 +2,27 @@
 \meta{agent-authored}{true}
 
 \taxon{Definition}
-\title{Feedback, reward, credit, and update}
+\title{Tokenizer and detokenizer}
 \tag{ftip}
-\tag{feedback}
-\tag{reward}
-\tag{optimization}
+\tag{language-model}
+\tag{tokenization}
 
-\p{A completed rollout produces an immutable \strong{rollout record}}
-
+\p{Let #{\mathcal X} be a chosen set of texts. A \newvocab{tokenizer} is a
+map
 ##{
-  \rho=(q,\nu_b,\tau,y,e,c),
+\operatorname{Tok}:\mathcal X\longrightarrow\mathcal V^*.
 }
-
-\p{where #{q} is the task, #{\nu_b} identifies the behaviour-policy version,
-#{\tau} is the public trajectory, #{y} is the terminal outcome, #{e} is
-verifier or environment evidence, and #{c} is the realized cost vector. A
-\strong{feedback operator} maps causally available fields of #{\rho} to a
-typed signal. A \strong{reward} is a scalar component of that signal; feedback
-may instead contain preferences, process labels, tests, critiques, latent
-targets, or structured verifier traces.}
-
-\p{A \strong{credit rule} assigns the realized signal to actions, tokens,
-turns, or trajectory summaries. An \strong{update proposal} combines credited
-records with the current parameters and optimizer state to produce a candidate
-parameter and state transition. Acceptance, clipping, or gating is a separate
-operation; a rejected proposal does not retroactively change the rollout
-record.}
-
-\p{For reuse, let #{\mathcal B_t} be a persistent replay pool of immutable
-records. A selection operator evaluated against the current policy produces
-attempt-local annotations}
-
+A \newvocab{detokenizer} is a map
+#{\operatorname{Dec}:\mathcal V^*\to\mathcal X}. We call the pair lossless on
+#{\mathcal X_0\subseteq\mathcal X} when
 ##{
-  \operatorname{Select}(\theta_t,\mathcal B_t)
-  =(\rho, r_t, a_t, k_t, m_t),
-}
+\operatorname{Dec}(\operatorname{Tok}(x))=x
+\qquad(x\in\mathcal X_0).
+}}
 
-\p{where #{r_t} denotes current-to-behaviour ratios, #{a_t} record age,
-#{k_t} reuse count, and #{m_t} clipping or mask status. Credit, proposal, and
-gate consume this attempt data; they do not store mutable reuse state inside
-#{\rho}. This separation makes fresh generation, replay, and gradient gating
-different protocol choices over the same evidence.}
-
-\p{Supervised next-token loss, preference loss, outcome reward, process reward,
-and representation-targeted auxiliary loss are therefore different feedback
-and objective interfaces. They may be combined, but their semantics and costs
-must remain named.}
+\p{SentencePiece makes lossless tokenization and a self-contained tokenizer
+model explicit in \citet{secs. 3.1 and 3.5}{kudo2018sentencepiece}. Byte-pair
+subword construction is described in
+\citet{sec. 3.2}{sennrich2016neural}. FTIP treats the tokenizer files and their
+normalization rules as part of the model interface. Different tokenizers can
+represent the same text by strings of different lengths.}

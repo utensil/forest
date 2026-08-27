@@ -1,0 +1,21 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Definition}
+\title{Policy stamp and provenance}
+\tag{ftip}
+\tag{provenance}
+
+\p{A \strong{policy stamp} #{\nu} identifies the policy that generated an
+action. It contains a checkpoint identifier, a parameterization identifier,
+and the accepted-update index. A rollout generated throughout by one policy
+has a behaviour stamp #{\nu_b}.}
+
+\p{Section 3 of \citef{schulman2017proximal} distinguishes the current policy
+from the behaviour policy. The reuse analysis of \citef{miao2026when} requires
+the same distinction. The policy stamp is an FTIP proposal motivated by both
+sources. The parameterization identifier records changes such as
+an adapter merge or a tokenizer revision that a weight hash alone may miss.}
+
+\p{A stamp identifies provenance; it is not an estimate of policy distance.
+Likelihood ratios and age are computed later for a particular update attempt.}

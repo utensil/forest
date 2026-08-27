@@ -2,33 +2,16 @@
 \meta{agent-authored}{true}
 
 \taxon{Definition}
-\title{Tasks, environments, histories, and policies}
+\title{Finite vocabulary}
 \tag{ftip}
-\tag{agent}
-\tag{reinforcement-learning}
+\tag{language-model}
 
-\p{A \strong{task} #{q\in\mathcal T} specifies an initial public input, an
-admissible interaction interface, and an independent success criterion. Tasks
-are sampled from a law #{\mathcal Q}. Training and evaluation laws are kept
-separate unless their equality is an explicit experimental assumption.}
+\p{A \newvocab{vocabulary} is a finite, nonempty set #{\mathcal V}. Its
+elements are called \newvocab{tokens}. We write #{|\mathcal V|} for the
+number of tokens and use token identifiers only as names for elements of
+#{\mathcal V}.}
 
-\p{An \strong{environment} has a hidden state space #{\mathcal S}, observation
-space #{\mathcal O}, action space #{\mathcal A}, transition kernel
-#{K(s',o\mid s,a)}, and a termination rule. At time #{t}, the policy receives
-only the public history}
-
-##{
-  h_t=(x,o_0,a_0,o_1,a_1,\ldots,o_t)
-}
-
-\p{and samples an action from #{\pi_\theta(\mathord\cdot\mid h_t)}. A
-\strong{trajectory} records the resulting public interaction together with
-terminal outcome and cost metadata. Hidden environment state is not passed to
-the policy unless the interface deliberately reveals it.}
-
-\p{Ordinary next-token generation is the special case in which actions are
-tokens and the history is a prefix. Tool-using agents may instead act by
-utterance, function call, patch, or shell command, with the environment
-returning observations from search, tests, simulators, or sandboxes. The
-environment interface determines the unit at which support, credit, and cost
-must be measured.}
+\p{The separation between a vocabulary and the text it represents follows
+the treatment of tokenization in \citet{sec. 4}{phuong2022formal}. Finiteness
+lets the next-token output be a finite probability vector. It does not require
+tokens to be words or characters.}

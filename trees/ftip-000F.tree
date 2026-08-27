@@ -1,11 +1,21 @@
 \import{macros}
 \meta{agent-authored}{true}
 
-\title{Question and background}
+\taxon{Definition}
+\title{Autoregressive continuation law}
 \tag{ftip}
-\tag{notes}
+\tag{language-model}
 
-\p{This section states the research question, the distinctions that keep it
-well posed, and the kind of answer the programme seeks.}
+\p{The \newvocab{autoregressive continuation law} induced by
+#{\pi_\theta} assigns a continuation #{x_{t+1:T}} to a prefix #{x_{1:t}} the
+conditional probability
+##{
+\pi_\theta(x_{t+1:T}\mid x_{1:t})
+=\prod_{s=t+1}^{T}\pi_\theta(x_s\mid x_{<s}).
+}
+The product uses the newly generated tokens when forming each later prefix.}
 
-\transclude{ftip-0002}
+\p{This factorization is the causal product used by decoder-only sequence
+modelling in \citet{sec. 3}{phuong2022formal}. It defines probabilities of
+fixed finite continuations. A sampling rule and a termination rule are still
+needed to obtain a random variable-length generation procedure.}

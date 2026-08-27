@@ -1,0 +1,30 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Definition}
+\title{Reference policy and KL regularization}
+\tag{ftip}
+\tag{regularization}
+\tag{policy}
+
+\p{A \strong{reference policy} #{\pi_{\mathrm{ref}}} is a fixed response law
+used to measure movement of a trainable policy #{\pi_\theta}. For a prompt
+#{x}, the forward policy divergence is}
+
+##{
+ D_{\mathrm{KL}}
+   (\pi_\theta\Vert\pi_{\mathrm{ref}}\mid x)
+ =\sum_{y\in\mathcal Y(x)}
+   \pi_\theta(y\mid x)
+   \log\frac{\pi_\theta(y\mid x)}{\pi_{\mathrm{ref}}(y\mid x)}.
+}
+
+\p{A \strong{KL-regularized objective} subtracts a nonnegative multiple of
+this divergence from its task objective. It is finite only when
+#{\pi_\theta(\cdot\mid x)} is absolutely continuous with respect to the
+reference law.}
+
+\p{The PPO stage of \citet{Section 3.4}{ouyang2022training} penalizes drift
+from its supervised model. The DPO derivation in
+\citet{Section 4.1}{rafailov2023direct} also uses a reference policy. The two
+objectives are not the same.}

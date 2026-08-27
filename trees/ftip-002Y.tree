@@ -1,0 +1,26 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Definition}
+\title{Effective successful support}
+\tag{ftip}
+\tag{support}
+
+\p{For threshold #{\varepsilon>0}, the \strong{effective successful support}
+of #{(\pi,D,b)} on task #{q} is}
+
+##{
+  \operatorname{Supp}^{+}_{\varepsilon}(\pi,D,b;q)
+  =\{\tau\in\mathcal S^+(q):
+      \Pr_{\pi,D,b}(\tau\mid q)\geq\varepsilon\}.
+}
+
+\p{This is an FTIP proposal built from ordinary probability support and an
+explicit finite threshold. The threshold depends on the granularity of the
+trajectory representation; exact token traces and strategy classes produce
+different sets.}
+
+\p{The object supports finite elicitation tests. A post-trained policy may
+increase the probability of an existing member, add a member above threshold,
+or succeed through a new strategy class. Each claim requires a declared
+equivalence relation on trajectories.}

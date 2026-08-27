@@ -1,0 +1,29 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Definition}
+\title{RLVR protocol}
+\tag{ftip}
+\tag{rlvr}
+\tag{post-training}
+
+\p{An \strong{RLVR protocol} is a post-training protocol that repeats the
+following operations:}
+
+\ol{
+  \li{sample a prompt or task instance;}
+  \li{generate one or more responses from a behavior policy;}
+  \li{run declared verifiers and record their evidence;}
+  \li{convert verified results into credit;}
+  \li{apply a policy update subject to the protocol's constraints.}
+}
+
+\p{This is a \strong{cross-paper operational family}. It is not a source
+definition owned by one algorithm. DeepSeekMath introduces GRPO in
+\citet{Section 4.1}{shao2024deepseekmath}. DeepSeek-R1 specifies its
+R1-Zero procedure in \citet{Section 2.2}{guo2025deepseek}. DAPO changes
+sampling, clipping, normalization, and length treatment in
+\citet{Sections 2--3}{yu2025dapo}.}
+
+\p{A claim about RLVR must name the member of this family. Otherwise the
+rollout law, reward, and update are ambiguous.}

@@ -1,0 +1,22 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Definition}
+\title{Multi-head self-attention}
+\tag{ftip}
+\tag{transformer}
+\tag{attention}
+
+\p{Choose #{m} attention heads, each with its own projection matrices. If
+#{A_i(H)\in\mathbb R^{n\times d_v}} is the masked attention output of head
+#{i}, then \newvocab{multi-head self-attention} is
+##{
+\operatorname{MHA}(H)
+=\operatorname{Concat}(A_1(H),\ldots,A_m(H))W_O,
+}
+where #{W_O\in\mathbb R^{(m d_v)\times d}}.}
+
+\p{This is the parallel-head construction of
+\citet{sec. 3.2.2}{vaswani2017attention}. Self-attention means that the
+queries, keys, and values are all projected from the same hidden-state
+sequence.}

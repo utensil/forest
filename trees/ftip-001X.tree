@@ -1,0 +1,26 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Definition}
+\title{Transition and observation kernel}
+\tag{ftip}
+\tag{agent}
+\tag{probability}
+
+\p{A \strong{transition and observation kernel} for task #{q} is a stochastic
+kernel}
+
+##{
+  K_q(ds',do\mid s,a)
+}
+
+\p{from #{\mathcal S_q\times\mathcal A_q} to
+#{\mathcal S_q\times\mathcal O_q}. Given state #{s} and action #{a}, it
+jointly samples the next hidden state and the observation returned to the
+policy.}
+
+\p{This specializes the POMDP kernel in
+\citet{Sec. 2}{kaelbling1998planning}.}
+
+\p{A deterministic tool is represented by a point-mass kernel. Nondeterminism can represent network responses,
+concurrent processes, randomized simulators, or hidden instance variation.}

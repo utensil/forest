@@ -1,0 +1,27 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Definition}
+\title{Supervised fine-tuning loss}
+\tag{ftip}
+\tag{supervised-fine-tuning}
+\tag{loss}
+
+\p{Let #{D_{\mathrm{sft}}} be a finite multiset of instruction-tuning
+records. For #{y=(y_1,\ldots,y_{|y|})}, the \strong{supervised fine-tuning
+loss} with response-token normalization is}
+
+##{
+ L_{\mathrm{sft}}(\theta)
+ =-\frac{1}{N_D}
+   \sum_{(x,y)\in D_{\mathrm{sft}}}
+   \sum_{t=1}^{|y|}
+   \log \pi_\theta(y_t\mid x,y_{<t}),
+ \qquad
+ N_D=\sum_{(x,y)\in D_{\mathrm{sft}}}|y|.
+}
+
+\p{This is the autoregressive demonstration objective used in the supervised
+stage of \citet{Section 3.2}{ouyang2022training}. Prompt-token masking and
+record-level rather than token-level normalization are separate conventions
+and must be stated when used.}

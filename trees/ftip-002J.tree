@@ -1,0 +1,27 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Definition}
+\title{Lifecycle cost vector}
+\tag{ftip}
+\tag{compute}
+
+\p{The \strong{lifecycle cost} of protocol #{P} is the vector}
+
+##{
+  C(P)=(C_{\mathrm{roll}},C_{\mathrm{env}},C_{\mathrm{ver}},
+        C_{\mathrm{upd}},C_{\mathrm{replay}},C_{\mathrm{ckpt}},
+        C_{\mathrm{eval}}).
+}
+
+\p{The coordinates charge rollout generation, environment execution, verifier
+work, proposed updates, replay bookkeeping, checkpoint or predictor work, and
+evaluation. Each coordinate must declare a physical unit or a conversion to a
+common accounting unit.}
+
+\p{This vector is an FTIP proposal motivated by several distinct empirical
+accounts. Pretraining scaling studies report token and training compute
+\citef{kaplan2020scaling,hoffmann2022training}. Rollout reuse changes generation
+and update counts \citef{miao2026when}. Checkpoint extrapolation adds fitting
+and recovery work \citef{chen2026lowrank}. The vector preserves those
+differences.}

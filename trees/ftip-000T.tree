@@ -1,0 +1,20 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Definition}
+\title{Decoder-only Transformer language model}
+\tag{ftip}
+\tag{transformer}
+\tag{language-model}
+
+\p{A \newvocab{decoder-only Transformer language model} maps a token prefix
+to a next-token law by the following composition. It forms an initial
+hidden-state sequence from token and position representations, applies a
+finite stack of decoder blocks, and applies the language-model output head to
+the final position.}
+
+\p{Section 6 of \citef{phuong2022formal} gives the decoder-only architecture
+and its prediction algorithm. Its parameters
+#{\theta} include the learned representations, block parameters, normalization
+parameters, and output head. The tokenizer is part of the model artifact but
+is not a differentiable layer of this composition.}

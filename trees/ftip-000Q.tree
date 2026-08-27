@@ -1,0 +1,26 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Definition}
+\title{Layer normalization and placement convention}
+\tag{ftip}
+\tag{transformer}
+\tag{normalization}
+
+\p{For #{h=(h_1,\ldots,h_d)\in\mathbb R^d}, define
+##{
+\mu(h)=\frac1d\sum_{j=1}^d h_j,
+\qquad
+v(h)=\frac1d\sum_{j=1}^d(h_j-\mu(h))^2.
+}
+Given learned vectors #{\gamma,\beta\in\mathbb R^d} and fixed
+#{\varepsilon>0}, \newvocab{layer normalization} is
+##{
+\operatorname{LN}(h)
+=\gamma\odot\frac{h-\mu(h)\mathbf 1}{\sqrt{v(h)+\varepsilon}}+\beta.
+}}
+
+\p{Layer normalization is introduced in
+\citet{sec. 3}{ba2016layer}. We will name whether a model applies it before
+or after each residual sublayer. Pre-norm and post-norm are placement
+conventions; they do not change the definition of #{\operatorname{LN}}.}

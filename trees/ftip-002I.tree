@@ -1,0 +1,25 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Definition}
+\title{Post-training gain}
+\tag{ftip}
+\tag{evaluation}
+\tag{post-training}
+
+\p{Let #{\pi_0} be the base policy and let #{\Pi_P} be the random policy
+returned by post-training protocol #{P}. The \strong{post-training gain} is}
+
+##{
+  \Delta_{\mathrm{ev}}(P;D,b)
+  =\mathbb E\left[J_{\mathcal Q_{\mathrm{ev}}}(\Pi_P;D,b)\right]
+   -J_{\mathcal Q_{\mathrm{ev}}}(\pi_0;D,b).
+}
+
+\p{This is a standard difference-in-expected-performance construction applied
+to a random training procedure. The outer expectation includes training data,
+rollout, environment, and optimizer randomness.}
+
+\p{The comparison uses the same evaluator #{D} and budget #{b} for both
+policies. A positive value reports a measured capability change. It does not
+by itself distinguish elicitation, acquisition, leakage, or reward hacking.}

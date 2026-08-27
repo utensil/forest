@@ -1,0 +1,18 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Definition}
+\title{Residual connection}
+\tag{ftip}
+\tag{transformer}
+
+\p{If #{F} maps hidden-state sequences to hidden-state sequences of the same
+shape, its \newvocab{residual connection} is the map
+##{
+\operatorname{Res}_F(H)=H+F(H).
+}}
+
+\p{The Transformer uses residual connections around its attention and
+feed-forward sublayers in \citet{sec. 3.1}{vaswani2017attention}. The summands
+must have the same type. A residual connection specifies the additive route;
+it does not specify where normalization is applied.}

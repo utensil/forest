@@ -1,0 +1,24 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Remark}
+\title{Why these objectives are not interchangeable}
+\tag{ftip}
+\tag{post-training}
+
+\p{A demonstration states which response to imitate. A comparison states
+which of two responses a judge selected. A reward model predicts a scalar
+encoding of comparisons. Process supervision locates judgments inside a
+response. Each signal excludes information available to another.}
+
+\p{Their losses also induce different policy movements. Supervised loss
+raises likelihood on recorded targets. A preference loss depends on paired
+alternatives and its comparison model. KL regularization limits movement
+relative to a named reference. None of these facts alone determines whether
+the resulting policy improves under an independent evaluator.}
+
+\p{The first theorem questions should therefore be conditional. Which
+feedback channels identify a useful ordering? When does a scalar reward
+represent that ordering? Which regularizer preserves useful support? These
+questions draw on \citef{christiano2017deep}, \citef{ouyang2022training},
+\citef{rafailov2023direct}, and \citef{lightman2023verify}.}

@@ -1,0 +1,24 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Definition}
+\title{Non-anticipating policy}
+\tag{ftip}
+\tag{agent}
+\tag{policy}
+
+\p{A \strong{non-anticipating policy} is a family of probability kernels}
+
+##{
+  \pi_t(da\mid H_t), \qquad t=0,1,\ldots,
+}
+
+\p{from public histories to actions. At time #{t}, the next action may depend
+on #{H_t} and fresh policy randomness. It may not depend on a later
+observation, a hidden state not encoded in #{H_t}, or the evaluator's future
+decision.}
+
+\p{This is the history-policy semantics of partially observable control,
+specialized from \citef{kaelbling1998planning}. A language model implements
+such a policy only after a decoder and an action-serialization rule have been
+fixed. The model's next-token law alone does not determine a tool-level policy.}

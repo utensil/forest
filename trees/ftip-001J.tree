@@ -1,0 +1,26 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Definition}
+\title{Verifier and verifier evidence}
+\tag{ftip}
+\tag{verifier}
+\tag{feedback}
+
+\p{Let #{\mathcal E} be a set of evidence objects. A \strong{verifier} is a
+declared procedure}
+
+##{
+  V:\{(x,y):x\in\mathcal X,\ y\in\mathcal Y(x)\}
+    \longrightarrow \mathcal E\times\{\mathsf{pass},\mathsf{fail}\}.
+}
+
+\p{For #{V(x,y)=(e,d)}, the value #{e} is the \strong{verifier evidence} and
+#{d} is the verifier decision. Evidence may be an exact-answer check, a unit
+test log, or a proof-checker result. The procedure and its version are part of
+the definition.}
+
+\p{Accuracy and format verifiers are described in
+\citet{Section 2.2.2, ``Reward Modeling''}{guo2025deepseek}. FTIP exposes
+evidence separately because a binary decision does not reveal how it was
+obtained.}

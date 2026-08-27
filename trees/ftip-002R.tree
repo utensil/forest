@@ -1,0 +1,26 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Definition}
+\title{Successful-support coverage}
+\tag{ftip}
+\tag{support}
+
+\p{For a task #{q}, policy #{\pi}, inference protocol #{D}, and budget #{b},
+let #{\mathcal S^+(q)} be the trajectories accepted by the independent
+evaluator. The \strong{successful-support probability} is}
+
+##{
+  p^+_{\pi,D,b}(q)
+  =\Pr\{\tau\in\mathcal S^+(q)mid q,\pi,D,b\}.
+}
+
+\p{A training task law has \strong{successful-support coverage} at threshold
+#{\varepsilon>0} for a task family if it assigns positive mass to tasks on
+which #{p^+_{\pi,D,b}(q)\geq\varepsilon}. This is an FTIP specialization of
+probabilistic support and coverage.}
+
+\p{The threshold makes the definition finite and protocol-relative. It avoids
+claiming that a successful sequence has exact zero probability after observing
+only finitely many samples. The distinction between pass-at-one and broader
+support is central to the experiments in \citef{yue2025does}.}

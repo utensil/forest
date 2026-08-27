@@ -1,13 +1,20 @@
 \import{macros}
 \meta{agent-authored}{true}
 
-\title{Potential frontier and research programme}
+\taxon{Definition}
+\title{Positional representation}
 \tag{ftip}
-\tag{notes}
+\tag{transformer}
 
-\p{The final section packages the preceding objects into a costed conditional
-frontier and records the first theorem lanes without pretending that the open
-research has already supplied their final assumptions.}
+\p{A \newvocab{positional representation} of width #{d} assigns a vector
+#{P_t\in\mathbb R^d} to each permitted position #{t}. For additive position
+encodings, the initial hidden-state row is
+##{
+H^{(0)}_t=E(x_t)+P_t.
+}}
 
-\transclude{ftip-000D}
-\transclude{ftip-000E}
+\p{Section 3.5 of \citef{vaswani2017attention} adds position encodings to
+token embeddings. The vectors may be fixed or learned.
+Other architectures insert relative or rotary position information inside
+attention; those variants do not satisfy the displayed additive interface
+without an explicit translation.}

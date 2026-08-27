@@ -1,0 +1,22 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Definition}
+\title{Evaluation inference protocol and budget}
+\tag{ftip}
+\tag{evaluation}
+\tag{inference}
+
+\p{An \strong{evaluation inference protocol} #{D} fixes the prompt wrapper,
+decoder or search procedure, stopping rule, tool permissions, and aggregation
+rule used at evaluation. Its \strong{budget} #{b} bounds declared resources
+such as generated tokens, candidate rollouts, tool calls, or environment time.}
+
+\p{This is an FTIP synthesis of language-model decoding and test-time-compute
+practice. The definition keeps the policy fixed while specifying how it is
+queried. It prevents a larger search budget from being reported as a training
+gain.}
+
+\p{The budget may be scalar for one controlled experiment. Cross-system work
+should retain its components because one candidate rollout and one sandbox
+minute are not equivalent resources.}

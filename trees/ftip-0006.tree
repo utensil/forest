@@ -2,30 +2,21 @@
 \meta{agent-authored}{true}
 
 \taxon{Remark}
-\title{What the pretraining objective does not say}
+\title{Where compute is spent}
 \tag{ftip}
-\tag{pretraining}
-\tag{scaling-law}
+\tag{compute}
 
-\p{The definition in \ref{ftip-0005} combines the next-token objective with
-the protocol that realizes it. This reflects two bodies of literature. The
-Transformer and language-modelling literature supplies the likelihood
-semantics; empirical scaling work such as \citef{kaplan2020scaling} and
-\citef{hoffmann2022training} relates loss to model,
-data, and compute under particular training families. Neither turns
-next-token loss into an architecture-free theorem about later agentic
-capability.}
+\p{Post-training consumes compute at several distinct interfaces. A policy
+generates a rollout. An environment executes actions, and a verifier checks
+evidence. The optimizer then transforms feedback into a parameter update.
+Evaluation and deployment consume additional inference compute.}
 
-\p{Pretraining also does not decide whether a later gain is elicitation or
-acquisition. A successful trajectory may have tiny but nonzero base
-probability, be reachable only under a different prompt or search budget, or
-require feedback that introduces genuinely new task information. These cases
-can have the same pretraining loss and different post-training curves.}
+\p{These operations cannot be counted by one unqualified number of steps.
+Reusing a rollout can reduce generation while increasing update work.
+Predicting a later checkpoint can reduce realized optimizer steps while adding
+checkpoint, fitting, and recovery costs. \citef{miao2026when} and
+\citef{chen2026lowrank} study these two interventions in particular settings.}
 
-\p{This motivates two theorem families. A \strong{base-support} theorem should
-bound what reward-only reweighting can achieve when no new informative event is
-introduced. A \strong{conditional scaling} theorem should state explicitly
-which base quantities—loss, success support, entropy, architecture efficiency,
-or representation geometry—control the rate of post-training gain. The
-literature suggests candidate coordinates; FTIP must prove which ones are
-sufficient, necessary, or non-identifiable.}
+\p{FTIP will therefore record a typed cost vector before asking for an optimum.
+This remark introduces no cost formula. It states the accounting requirement
+that later definitions must satisfy.}

@@ -1,0 +1,24 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Definition}
+\title{Trajectory}
+\tag{ftip}
+\tag{agent}
+\tag{reinforcement-learning}
+
+\p{A \strong{public trajectory} is the stopped sequence}
+
+##{
+  \tau=(q,O_0,A_0,O_1,A_1,\ldots,A_{T-1},O_T,Y).
+}
+
+\p{Its probability law is induced jointly by the task law, initial-state law,
+environment kernel, policy, stopping rule, and all declared random seeds. This
+is the usual reinforcement-learning trajectory specialized to an explicit
+public record; compare \citef{murphy2024reinforcement}.}
+
+\p{The trajectory does not contain optimizer state or later reuse metadata.
+Those belong to the training protocol. Keeping them separate allows one
+completed interaction to be selected for several update attempts without
+changing the historical event.}

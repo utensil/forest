@@ -1,0 +1,20 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Definition}
+\title{Base-model artifact}
+\tag{ftip}
+\tag{pretraining}
+\tag{language-model}
+
+\p{An FTIP \newvocab{base-model artifact} #{M_0} is the pre-post-training
+record containing the trained parameter value #{\theta_0}, the architecture
+configuration, and the tokenizer model. It also records the context and
+numerical conventions required to evaluate #{\pi_{\theta_0}}.}
+
+\p{This is an FTIP working definition, not a standard scalar model
+identifier. SentencePiece motivates keeping a self-contained tokenizer model
+with the learned system; see \citet{sec. 3.5}{kudo2018sentencepiece}. The
+architecture and parameter components follow the decoder-only model in
+\citet{sec. 6}{phuong2022formal}. Training data and optimizer provenance may
+be attached to #{M_0}, but they are not inputs to one forward evaluation.}

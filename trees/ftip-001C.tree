@@ -1,0 +1,25 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Definition}
+\title{Reward model}
+\tag{ftip}
+\tag{reward-model}
+\tag{preference}
+
+\p{A \strong{reward model} is a parameterized score
+#{\widehat r_\phi(x,y)\in\mathbb R}. Write
+#{\sigma(u)=(1+\exp(-u))^{-1}}. Under the Bradley--Terry observation model,
+the pairwise loss is}
+
+##{
+ L_{\mathrm{rm}}(\phi)
+ =\mathbb E_{(x,y^+,y^-)\sim\mathcal D_{\mathrm{pref}}}
+ \left[-\log\sigma\left(
+   \widehat r_\phi(x,y^+)-\widehat r_\phi(x,y^-)
+ \right)\right].
+}
+
+\p{This is the model used in \citet{Section 3.3}{ouyang2022training}. It is
+a method-specific scalar representation of pairwise data. General or cyclic
+preferences need not admit such a representation.}

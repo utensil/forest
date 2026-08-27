@@ -1,0 +1,23 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Convention}
+\title{Training and evaluation laws}
+\tag{ftip}
+\tag{evaluation}
+
+\p{We write #{\mathcal Q_{\mathrm{tr}}} for the law that supplies training
+tasks and #{\mathcal Q_{\mathrm{ev}}} for the law used to report capability.
+The two laws may be equal, but equality is an experimental assumption rather
+than a notation convention.}
+
+\p{This is an FTIP specialization of the standard separation between a
+training distribution and a held-out evaluation distribution. RL studies
+evaluate a learned policy under a declared environment law; see
+\citef{murphy2024reinforcement}. Reasoning studies such as
+\citef{yue2025does} rely on held-out benchmarks to test transfer beyond the
+training prompts.}
+
+\p{Any data-dependent choice of #{\mathcal Q_{\mathrm{ev}}}, its examples, or
+its metric must be recorded. Otherwise the reported evaluation is no longer
+independent of the training protocol.}

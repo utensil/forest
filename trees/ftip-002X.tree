@@ -1,0 +1,24 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Definition}
+\title{Selected-token surprisal}
+\tag{ftip}
+\tag{entropy}
+
+\p{For a sampled token #{A_t} at public history #{H_t}, its
+\strong{selected-token surprisal} is}
+
+##{
+  I_t=-\log \pi_t(A_t\mid H_t).
+}
+
+\p{This is the selected action's self-information; compare the information
+measure in \citet{Pt. I, Sec. 6}{shannon1948mathematical}. It is a random
+variable, whereas local entropy is its conditional expectation before the
+action is sampled.}
+
+\p{Low-probability-token analyses and entropy-shaped RLVR methods often select
+or reweight positions using quantities related to #{I_t}. Such a selector is
+not equivalent to preserving global entropy. Later empirical trees can attach
+the exact selector from each source without changing this definition.}

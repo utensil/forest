@@ -1,38 +1,25 @@
 \import{macros}
 \meta{agent-authored}{true}
 
-\taxon{Definition}
-\title{Autoregressive language model}
+\title{Why study post-training potential?}
 \tag{ftip}
-\tag{language-model}
-\tag{transformer}
+\tag{post-training}
 
-\p{Let #{\mathcal V} be a finite vocabulary. An \strong{autoregressive
-language model} with parameters #{\theta\in\Theta} assigns, to every finite
-token prefix #{x_{\leq t}\in\mathcal V^t}, a probability distribution}
+\p{Pretraining produces a model that can continue text across many domains.
+Subsequent training changes how that model follows instructions, selects
+solutions, and acts in an environment. Verifiable tasks make some of these
+changes unusually measurable because a checker can judge the outcome of many
+rollouts.}
 
-##{
-  \pi_\theta(\mathord\cdot\mid x_{\leq t})\in\Delta(\mathcal V).
-}
+\p{A benchmark improvement does not by itself explain the change. The same
+score can result from concentrating probability on an existing strategy,
+learning from new feedback, spending more inference compute, or exploiting a
+defect in the checker. FTIP asks for experiments and theorems that separate
+these cases.}
 
-\p{The probability of a continuation #{x_{t+1:T}} is the causal product}
-
-##{
-  \pi_\theta(x_{t+1:T}\mid x_{\leq t})
-  =\prod_{s=t+1}^{T}\pi_\theta(x_s\mid x_{<s}).
-}
-
-\p{An \strong{architecture} specifies how the prefix is encoded into hidden
-states and logits. In a decoder-only Transformer, token and position
-representations pass through a causal stack of attention and feed-forward
-blocks, then through a normalization and language-model head before softmax.
-The attention architecture follows \citef{vaswani2017attention}; normalization
-choices are exemplified by \citef{ba2016layer}. Modern sparse or recurrent
-variants may change the stack without changing the probabilistic interface
-above.}
-
-\p{For FTIP, a model artifact is not only the mathematical function
-#{\pi_\theta}. It also carries a tokenizer, context convention, numerical
-format, routing rule when experts are sparse, and an execution implementation.
-These determine which prefixes are representable and how much training or
-inference compute a policy evaluation costs.}
+\p{The intended object is a conditional response surface. Its inputs include
+the starting model, the training information, and the permitted computation.
+Its outputs are independently measured capabilities and costs. Empirical RLVR
+work such as \citef{shao2024deepseekmath}, \citef{guo2025deepseek}, and
+\citef{yu2025dapo} supplies motivating cases. These papers do not establish a
+universal response surface.}

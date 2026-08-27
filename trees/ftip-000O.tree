@@ -1,0 +1,21 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Definition}
+\title{Pointwise feed-forward sublayer}
+\tag{ftip}
+\tag{transformer}
+
+\p{A \newvocab{pointwise feed-forward sublayer} applies the same two affine
+maps and activation to every position. For a row vector #{h\in\mathbb R^d},
+write
+##{
+\operatorname{FFN}(h)
+=\sigma(hW_1+b_1)W_2+b_2.
+}
+The operation on a hidden-state sequence applies this formula row by row.}
+
+\p{Section 3.3 of \citef{vaswani2017attention} defines the position-wise
+feed-forward network. The activation #{\sigma} and the
+intermediate width are architecture choices. Pointwise application does not
+mix information between token positions.}

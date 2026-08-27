@@ -1,0 +1,23 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Definition}
+\title{Instruction-tuning record}
+\tag{ftip}
+\tag{supervised-fine-tuning}
+
+\p{Let #{\mathcal X} be a set of prompts. For each #{x\in\mathcal X}, let
+#{\mathcal Y(x)} be the finite token responses admitted by the training
+format. An \strong{instruction-tuning record} is a pair}
+
+##{
+  z=(x,y),\qquad x\in\mathcal X,\quad y\in\mathcal Y(x),
+}
+
+\p{where #{y} is a target response supplied by a human, a teacher, or another
+declared data source. The source and selection rule belong to the record's
+provenance.}
+
+\p{This specializes the demonstration data used for supervised fine-tuning
+in \citet{Section 3.2}{ouyang2022training}. It does not assert that every
+target response is correct or uniquely preferred.}

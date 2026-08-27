@@ -1,43 +1,21 @@
 \import{macros}
 \meta{agent-authored}{true}
 
-\taxon{Remark}
-\title{What the first theorem programme must distinguish}
+\taxon{Definition}
+\title{Conditional next-token law}
 \tag{ftip}
-\tag{scaling-law}
-\tag{research-programme}
+\tag{language-model}
 
-\p{The definition in \ref{ftip-000D} makes potential conditional on the base
-artifact, task law, inference budget, lifecycle budget, protocol class, and
-trust contract. This is the smallest shape broad enough to compare pretraining
-efficiency, reward design, agentic sandbox cost, rollout reuse, and test-time
-search without treating them as one scalar resource.}
-
-\p{The literature now suggests five first theorem lanes:}
-
-\ol{
-  \li{\strong{Information and coverage}: lower bounds from verifier noise,
-  preference information, missing support, and distribution shift.}
-  \li{\strong{Reward and credit}: conditional guarantees and reward-hacking
-  counterexamples for outcome, process, preference, and latent targets.}
-  \li{\strong{Support and entropy}: finite rollout laws, acquisition witnesses,
-  and separations between global entropy, token entropy, surprisal, and
-  effective successful support.}
-  \li{\strong{Update stability and trajectory geometry}: safe reuse bounds,
-  gradient-alarm limitations, path-emulation regret, and no-free-feedback
-  results inspired by DGG and NExt.}
-  \li{\strong{Compute allocation}: optimal trade-offs among fresh rollouts,
-  verifier work, updates, environments, checkpoint prediction, and deployment
-  inference under explicitly diminishing returns.}
+\p{Let #{\Theta} be a parameter space. A \newvocab{conditional next-token
+law} is a family of maps
+##{
+\pi_\theta:\mathcal V^*\longrightarrow\Delta(\mathcal V),
+\qquad \theta\in\Theta.
 }
+For a prefix #{x_{<t}}, the value #{\pi_\theta(a\mid x_{<t})} is the
+probability of choosing token #{a\in\mathcal V} next.}
 
-\p{Architecture and pretraining enter these theorems through named conditions:
-base support, representation or Jacobian geometry, routing stability, optimizer
-efficiency, and per-token or per-environment cost. They should affect rates or
-ceilings only where a proof or falsifier establishes the dependence.}
-
-\p{This first draft does not choose the final theorem statements. It fixes the
-storyline and semantic interfaces from which those statements can be asked.
-Follow-up drafts should add finite examples, assumption tables, and theorem
-cards only after each observable and cost has been tied to a literature-backed
-measurement protocol.}
+\p{The definition records the observable probabilistic interface. It does
+not yet choose the computation that produces the distribution. The
+decoder-only sequence-model algorithm in
+\citet{sec. 3}{phuong2022formal} has this input-output form.}

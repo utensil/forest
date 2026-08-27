@@ -1,0 +1,25 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Definition}
+\title{Entropy regularization}
+\tag{ftip}
+\tag{entropy}
+\tag{regularization}
+
+\p{At a reached prefix #{h=(x,y_{<t})}, the policy's next-token entropy is}
+
+##{
+  H_\theta(h)
+  =-\sum_{a\in\mathcal V}
+       \pi_\theta(a\mid h)\log\pi_\theta(a\mid h).
+}
+
+\p{An \strong{entropy-regularized objective} adds
+#{\lambda\,\mathbb E[H_\theta(H_t)]} with #{\lambda\geq0} to a maximized
+policy objective. The expectation law over reached prefixes must be named.}
+
+\p{Section 3 of \citef{haarnoja2018soft} develops this maximum-entropy control
+convention. Here it is specialized to an autoregressive policy.
+It does not imply that trajectory entropy, position-marginal entropy, and
+useful exploration move together.}

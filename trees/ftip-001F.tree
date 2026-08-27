@@ -1,0 +1,26 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Definition}
+\title{Outcome supervision and process supervision}
+\tag{ftip}
+\tag{supervision}
+\tag{feedback}
+
+\p{Suppose a response is divided into reasoning steps
+#{y=(s_1,\ldots,s_m)}. \strong{Outcome supervision} supplies a signal
+#{f_{\mathrm{out}}(x,y)} after the completed response. \strong{Process
+supervision} supplies step-indexed signals}
+
+##{
+  f_j(x,s_{\leq j}),\qquad 1\leq j\leq m,
+}
+
+\p{whose declared inputs contain only the prefix available at step #{j}.
+Post-hoc labels that inspect the future are not prefix-adapted process
+signals.}
+
+\p{These objects follow the constructions in
+\citet{the ``Outcome-supervised reward models'' and ``Process-supervised
+reward models'' subsections}{lightman2023verify}. The prefix condition is an
+FTIP formal requirement added for causal typing.}

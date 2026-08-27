@@ -1,54 +1,23 @@
 \import{macros}
 \meta{agent-authored}{true}
 
-\taxon{Definition}
-\title{Post-training protocol and RLVR}
+\taxon{Remark}
+\title{What this draft claims and proposes}
 \tag{ftip}
-\tag{post-training}
-\tag{rlvr}
-\tag{reinforcement-learning}
+\tag{research-programme}
 
-\p{A \strong{post-training protocol} #{P} starts from a base policy
-#{\pi_{\theta_0}} and specifies a training task law, a rollout procedure, a
-feedback source, a reward or loss design, a credit rule, an update rule, and a
-stopping rule under a lifecycle budget. Its result is generally random: the
-trained policy depends on sampled tasks, generations, environment events,
-verifier outcomes, and optimizer state.}
+\p{The architecture, probability, optimization, and control definitions in
+this draft are taken from named sources or stated as standard specializations.
+The note uses them to describe contemporary post-training protocols in one
+notation.}
 
-\p{\strong{Reinforcement learning with verifiable rewards} (RLVR) is the
-special case in which at least one load-bearing reward component is computed
-from independently checkable evidence: for example an exact answer, unit test,
-proof checker, simulator state, or sandbox outcome. For a sampled trajectory
-#{\tau}, the verifier produces evidence #{e(\tau)} and a reward
-#{R(\tau,e(\tau))}. Group-based methods compare several trajectories for the
-same task before assigning advantages and updating the policy.}
+\p{Several later objects are original research interfaces. The lifecycle cost
+vector, trust contract, costed potential, and acquisition witness are marked
+as FTIP proposals in their own trees. They organize questions; they are not
+results of the cited literature.}
 
-\p{The following diagram is \strong{schematic}. It separates information
-creation in rollouts and environments from the later reuse of that information
-by an optimizer.}
-
-\tikzfig{\begin{tikzpicture}[
-  node distance=8mm,
-  every node/.style={draw, rounded corners=2pt, align=center,
-    text width=27mm, minimum height=11mm},
-  every path/.style={-{Stealth[length=2mm]}, thick}
-]
-\node (task) {sample task};
-\node[right=of task] (roll) {policy rollout\\or agent trace};
-\node[right=of roll] (verify) {verifier and\\environment evidence};
-\node[right=of verify] (credit) {reward, credit,\\proposed update};
-\node[below=of credit] (policy) {updated policy};
-\draw (task) -- (roll);
-\draw (roll) -- node[draw=none, above=5mm, text width=20mm] {rollout cost} (verify);
-\draw (verify) -- node[draw=none, above=5mm, text width=20mm] {signal} (credit);
-\draw (credit) -- (policy);
-\draw[bend right=38] (policy.west) to
-  node[draw=none, below=6mm, text width=27mm] {next round or reuse} (roll.south);
-\end{tikzpicture}}
-
-\p{The general reinforcement-learning semantics are described in
-\citef{murphy2024reinforcement}. The current language-model instantiations are
-exemplified by \citef{shao2024deepseekmath}, \citef{guo2025deepseek}, and
-\citef{yu2025dapo}. The definition is broader than any one optimizer: GRPO,
-PPO, policy-gradient variants, rejection sampling, and hybrid objectives can
-all instantiate different fields of #{P}.}
+\p{The first complete draft should make every symbol traceable to a prior
+definition and every imported claim traceable to a source. The next draft can
+then state candidate theorems with explicit assumptions. A theorem card will
+be added only when its hypotheses and counterexamples can be read without
+guessing which protocol or cost is meant.}

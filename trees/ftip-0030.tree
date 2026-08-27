@@ -1,0 +1,27 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Definition}
+\title{Lifecycle compute allocation}
+\tag{ftip}
+\tag{compute}
+
+\p{Given lifecycle budget #{B}, a \strong{compute allocation} is a feasible
+choice of component budgets}
+
+##{
+  B=(B_{\mathrm{roll}},B_{\mathrm{env}},B_{\mathrm{ver}},
+     B_{\mathrm{upd}},B_{\mathrm{replay}},B_{\mathrm{ckpt}},
+     B_{\mathrm{eval}}).
+}
+
+\p{This is an FTIP proposal paired with the lifecycle cost vector. A protocol
+is feasible when its expected component costs do not exceed the corresponding
+budgets. An exchange rate may be introduced for a specified machine, but the
+component account remains available.}
+
+\p{Rollout reuse \citef{miao2026when} moves work from generation toward
+additional proposed updates. Trajectory extrapolation
+\citef{chen2026lowrank} moves work toward checkpoints and predictors. The
+optimal allocation depends on how each intervention changes independent
+utility, not only its own step count.}

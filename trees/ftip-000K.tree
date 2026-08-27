@@ -1,0 +1,19 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Definition}
+\title{Hidden-state sequence}
+\tag{ftip}
+\tag{transformer}
+
+\p{For a length-#{n} input and hidden width #{d}, a
+\newvocab{hidden-state sequence} is a matrix
+##{
+H=(H_1,\ldots,H_n)^\mathsf T\in\mathbb R^{n\times d}.
+}
+The row #{H_t} is the state at token position #{t}. A Transformer layer maps
+one hidden-state sequence to another with the same two outer dimensions.}
+
+\p{The component algorithms in Section 5 of \citef{phuong2022formal} use this
+row-by-position convention. It is a notation choice, not a claim about
+the physical tensor layout used by an implementation.}

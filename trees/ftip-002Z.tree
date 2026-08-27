@@ -1,0 +1,26 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Definition}
+\title{Off-policy replay condition}
+\tag{ftip}
+\tag{replay}
+\tag{off-policy}
+
+\p{A replay attempt satisfies a \strong{bounded-ratio condition} with constant
+#{R\geq1} if every active action in the attempted update obeys}
+
+##{
+  R^{-1}\leq
+  \frac{\pi_n(A_t\mid H_t)}{\pi_b(A_t\mid H_t)}
+  \leq R.
+}
+
+\p{This is a standard off-policy regularity condition expressed with the PPO
+likelihood ratio \citef{schulman2017proximal}. It implies shared support on the
+active samples. It does not control unvisited histories or the environment
+state distribution.}
+
+\p{Dynamic Gradient Gating \citef{miao2026when} uses a head-gradient alarm
+rather than this hard condition. A later theorem should distinguish a direct
+ratio assumption from an empirical diagnostic that may correlate with it.}

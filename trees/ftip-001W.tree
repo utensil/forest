@@ -1,0 +1,20 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Definition}
+\title{Observation and action interface}
+\tag{ftip}
+\tag{agent}
+
+\p{For task #{q}, let #{\mathcal O_q} be the set of observations available to
+the policy and #{\mathcal A_q} the set of actions accepted by the environment.
+The pair #{(\mathcal O_q,\mathcal A_q)} is the \strong{interaction interface}.}
+
+\p{The observation/action distinction is standard in partially observable
+control; see \citef{kaelbling1998planning}, Section 2. FTIP keeps both spaces
+task-indexed because a proof assistant, web browser, and code sandbox expose
+different legal actions and evidence.}
+
+\p{An action may be a token, an utterance, a structured tool call, or a patch.
+An observation may contain text, a test result, or a structured state summary.
+The interface definition fixes the type; it does not yet specify the dynamics.}

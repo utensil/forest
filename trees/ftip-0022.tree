@@ -1,0 +1,24 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Definition}
+\title{Tool and sandbox interaction}
+\tag{ftip}
+\tag{agent}
+\tag{tool-use}
+
+\p{A \strong{tool interaction} is an action whose environment transition
+invokes an external operation and returns its result as an observation. A
+\strong{sandbox} is an environment that isolates such operations and records
+the resources and state changes they are permitted to cause.}
+
+\p{ReAct interleaves language reasoning with external actions; see
+\citef{yao2023react}, Sections 2--3. Software-agent systems instantiate the
+same interface with repositories, shells, tests, and browsers. FTIP adopts the
+interface but treats its security policy, state reset, and execution cost as
+part of the environment specification.}
+
+\p{A sandbox can produce high-quality evidence, such as a passing test suite.
+It can also expose shortcuts or nondeterministic failures. The verifier and
+the environment therefore remain separate even when they run in the same
+container.}

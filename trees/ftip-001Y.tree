@@ -1,0 +1,22 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Definition}
+\title{Public history}
+\tag{ftip}
+\tag{agent}
+
+\p{After #{t} actions, the \strong{public history} is}
+
+##{
+  H_t=(q,O_0,A_0,O_1,A_1,\ldots,A_{t-1},O_t).
+}
+
+\p{The history contains exactly the task description, observations, and
+actions available through the declared interface. It excludes the hidden
+states #{S_0,\ldots,S_t}, future observations, and private evaluator data.}
+
+\p{History-dependent policies are standard in partially observable control;
+see \citef{kaelbling1998planning}, Section 2. The explicit public/private
+boundary is an FTIP convention used later to state non-anticipation and
+evaluation leakage conditions.}

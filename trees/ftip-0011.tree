@@ -1,0 +1,20 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Definition}
+\title{Minibatch gradient estimator}
+\tag{ftip}
+\tag{pretraining}
+\tag{optimization}
+
+\p{At update #{k}, let #{B_k} be a sampled minibatch of training strings. The
+\newvocab{minibatch gradient estimator} is
+##{
+g_k=\frac1{|B_k|}\sum_{x\in B_k}\nabla_\theta
+\ell(\theta_k;x).
+}}
+
+\p{Backpropagation through a Transformer and gradient-based parameter updates
+are specified in \citet{sec. 7}{phuong2022formal}. Whether #{g_k} is unbiased
+for a population gradient depends on the sampling and weighting scheme. The
+definition does not assume that property.}
