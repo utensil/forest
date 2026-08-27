@@ -12,10 +12,16 @@ decoder or search procedure, stopping rule, tool permissions, and aggregation
 rule used at evaluation. Its \strong{budget} #{b} bounds declared resources
 such as generated tokens, candidate rollouts, tool calls, or environment time.}
 
-\p{This is an FTIP synthesis of language-model decoding and test-time-compute
-practice. The definition keeps the policy fixed while specifying how it is
-queried. It prevents a larger search budget from being reported as a training
-gain.}
+\p{For task #{q} and policy #{\pi}, let
+#{\mathbb P^{D,b}_{q,\pi}} denote the probability law on completed evaluation
+trajectories induced by the environment together with #{D} under budget
+#{b}.}
+
+\p{This is an FTIP synthesis. The pass-at-#{k} evaluations in
+\citet{Section 5.1}{shao2024deepseekmath} and the base-versus-RL comparisons in
+\citet{Sections 3--4}{yue2025does} vary sampling and evaluation procedures.
+Naming #{D} and #{b} prevents a larger search budget from being reported as a
+training gain.}
 
 \p{The budget may be scalar for one controlled experiment. Cross-system work
 should retain its components because one candidate rollout and one sandbox

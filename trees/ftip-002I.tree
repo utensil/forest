@@ -16,9 +16,10 @@ returned by post-training protocol #{P}. The \strong{post-training gain} is}
    -J_{\mathcal Q_{\mathrm{ev}}}(\pi_0;D,b).
 }
 
-\p{This is a standard difference-in-expected-performance construction applied
-to a random training procedure. The outer expectation includes training data,
-rollout, environment, and optimizer randomness.}
+\p{Section 3.5 of \citef{sutton2018reinforcement} defines expected policy
+performance. FTIP takes its difference before and after a random post-training
+procedure. The outer expectation covers the training data and rollouts. It
+also covers environment and optimizer randomness.}
 
 \p{The comparison uses the same evaluator #{D} and budget #{b} for both
 policies. A positive value reports a measured capability change. It does not

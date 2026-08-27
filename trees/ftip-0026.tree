@@ -10,7 +10,7 @@
 \p{An \strong{immutable rollout record} is a tuple}
 
 ##{
-  \rho=(q,\nu_b,\tau,e),
+  \mathsf R=(q,\nu_b,\tau,e),
 }
 
 \p{where #{q} is the task, #{\nu_b} is the behaviour-policy stamp,
@@ -18,7 +18,7 @@
 by the declared environment or verifier. Once stored, these fields do not
 change.}
 
-\p{This is an FTIP proposal. RLVR systems store equivalent ingredients, while
-replay methods such as \citef{miao2026when} evaluate old generations under a
-new current policy. Immutability prevents age, reuse count, or a current-policy
+\p{This is an FTIP proposal. Section 3 of \citef{miao2026when} distinguishes
+behavior and current policies when old generations are reused under a new
+current policy. Immutability prevents age, reuse count, or a current-policy
 ratio from being mistaken for a property of the historical rollout.}

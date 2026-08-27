@@ -1,0 +1,26 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Definition}
+\title{Scalarized potential}
+\tag{ftip}
+\tag{multi-objective}
+
+\p{Fix nonnegative weights #{\lambda\in\mathbb R_+^m} and a lifecycle budget
+#{B}. The \strong{scalarized potential} is}
+
+##{
+ \Phi_\lambda(M_0,B)
+ =\sup\left\{\lambda^\mathsf T\mathbf J(P):
+   P\in\mathfrak P(M_0),\ \operatorname{Trust}(P),
+   \mathbb E[C(P)]\leq B\right\}.
+}
+
+\p{Weighted-sum scalarization is described in
+\citet{Section 4.7.5}{boyd2004convex}. Applying it to trusted post-training
+protocols is an FTIP proposal. The weights and normalization of each utility
+coordinate are part of the claim.}
+
+\p{Changing #{\lambda} changes the question. A theorem for one scalarization
+does not determine the full attainable set or the tradeoffs between its
+coordinates.}

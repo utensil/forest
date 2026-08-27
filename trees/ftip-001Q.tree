@@ -15,9 +15,11 @@
        \pi_\theta(a\mid h)\log\pi_\theta(a\mid h).
 }
 
-\p{An \strong{entropy-regularized objective} adds
-#{\lambda\,\mathbb E[H_\theta(H_t)]} with #{\lambda\geq0} to a maximized
-policy objective. The expectation law over reached prefixes must be named.}
+\p{Let #{\eta_\theta} be a declared probability law on token prefixes
+reached during the update. An \strong{entropy-regularized objective} adds
+#{\lambda\,\mathbb E_{h\sim\eta_\theta}[H_\theta(h)]} with
+#{\lambda\geq0} to a maximized policy objective. The prefix law is part of
+the objective.}
 
 \p{Section 3 of \citef{haarnoja2018soft} develops this maximum-entropy control
 convention. Here it is specialized to an autoregressive policy.

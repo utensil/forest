@@ -1,0 +1,28 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Definition}
+\title{Pareto frontier}
+\tag{ftip}
+\tag{multi-objective}
+
+\p{Fix a lifecycle budget #{B}, with componentwise order on costs. The
+budget-feasible outcome set is}
+
+##{
+ \mathcal V_B(M_0)
+ =\left\{v\in\mathbb R^m:\exists c,\ (v,c)\in\mathfrak A(M_0),\ c\leq B\right\}.
+}
+
+\p{An outcome #{v\in\mathcal V_B(M_0)} is \strong{Pareto dominated} when
+another #{v'\in\mathcal V_B(M_0)} satisfies
+#{v'_j\geq v_j} for every #{j} and #{v'_k>v_k} for at least one #{k}. The
+\strong{Pareto frontier} contains the attainable outcomes that are not
+dominated.}
+
+\p{Section 4.7.4 of \citef{boyd2004convex} gives the standard componentwise
+Pareto order. FTIP applies that order to #{\mathcal V_B(M_0)}. The utilities,
+protocol class, costs, trust conditions, and budget determine that set.}
+
+\p{The definition preserves tradeoffs that a weighted average can hide. It
+does not say which frontier point should be selected.}

@@ -6,11 +6,12 @@
 \tag{ftip}
 \tag{entropy}
 
-\p{For a sampled token #{A_t} at public history #{H_t}, its
+\p{In the token-generation specialization, let #{h_t^{\mathrm{tok}}} be the
+token prefix and let #{\xi_t\in\mathcal V} be the sampled next token. Its
 \strong{selected-token surprisal} is}
 
 ##{
-  I_t=-\log \pi_t(A_t\mid H_t).
+  I_t=-\log \pi_\theta(\xi_t\mid h_t^{\mathrm{tok}}).
 }
 
 \p{This is the selected action's self-information; compare the information

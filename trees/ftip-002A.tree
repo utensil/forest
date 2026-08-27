@@ -13,16 +13,17 @@ annotations}}
 
 ##{
   \operatorname{Select}(\theta_n,\mathcal B_n)
-  =(\rho,r^{(n)},a^{(n)},k^{(n)},m^{(n)}).
+  =(\mathsf R,w^{(n)},a^{(n)},k^{(n)},m^{(n)}).
 }
 
-\p{Here #{r^{(n)}} contains current-to-behaviour likelihood ratios,
+\p{Here #{w^{(n)}} contains current-to-behaviour likelihood ratios,
 #{a^{(n)}} is record age, #{k^{(n)}} is its prior reuse count, and #{m^{(n)}}
 records clipping or mask decisions for this attempt.}
 
 \p{The likelihood-ratio semantics come from
-\citet{Section 3}{schulman2017proximal}. The concrete reuse procedure comes
-from \citet{Sections 3.2--3.3}{miao2026when}.}
+\citet{Section 3}{schulman2017proximal}. Sections 3 and 5 of
+\citef{miao2026when} give the behavior/current-policy setup and the concrete
+reuse procedure.}
 
-\p{The annotation tuple is an FTIP synthesis. It is recomputed against the current policy and is never
-written back into #{\rho}.}
+\p{The annotation tuple is an FTIP synthesis. It is recomputed against the
+current policy and is never written back into #{\mathsf R}.}

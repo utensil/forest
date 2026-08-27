@@ -9,19 +9,20 @@
 \p{Let #{z_n} denote optimizer state. An \strong{update proposal} is a map}
 
 ##{
-  U(\theta_n,z_n;\rho,Z,\Gamma,m^{(n)})
+  U(\theta_n,z_n;\mathsf R,Z,G,m^{(n)})
   =(\widehat\theta_{n+1},\widehat z_{n+1},d_n),
 }
 
-\p{where #{d_n} is a diagnostic record computed before commitment. The inputs
-include the selected rollout, feedback, credit targets, and attempt-local
-masks. The output is a candidate parameter transition.}
+\p{where #{G=\Gamma(\mathsf R,Z)} and #{d_n} is a diagnostic record computed
+before commitment. The inputs include the selected rollout, feedback, credit
+targets, and attempt-local masks. The output is a candidate parameter
+transition.}
 
 \p{This is an FTIP synthesis. It combines policy optimization with a
 pre-optimizer diagnostic. A proposal objective appears in
 \citet{Section 3}{schulman2017proximal}.}
 
-\p{The procedure in \citet{Section 3.3}{miao2026when} computes a head-gradient
+\p{Section 5 and Appendix C of \citef{miao2026when} compute a head-gradient
 diagnostic before Adam and may discard the proposed reuse update.}
 
 \p{Proposal separates computation from state change. It therefore makes a

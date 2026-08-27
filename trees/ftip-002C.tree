@@ -9,16 +9,16 @@
 \p{An \strong{update gate} is a decision rule}
 
 ##{
-  A_n=A(d_n,\nu_b,\theta_n,m^{(n)})\in\{0,1\}.
+  g_n=G_{\mathrm{gate}}(d_n,\nu_b,\theta_n,m^{(n)})\in\{0,1\}.
 }
 
-\p{If #{A_n=1}, the protocol commits
+\p{If #{g_n=1}, the protocol commits
 #{(\theta_{n+1},z_{n+1})=(\widehat\theta_{n+1},\widehat z_{n+1})}. If
-#{A_n=0}, it keeps #{(\theta_{n+1},z_{n+1})=(\theta_n,z_n)} and records the
+#{g_n=0}, it keeps #{(\theta_{n+1},z_{n+1})=(\theta_n,z_n)} and records the
 rejection.}
 
 \p{The interface is an FTIP proposal generalized from Dynamic Gradient Gating
-\citef{miao2026when}, which rejects a reused batch before the optimizer update
+in Section 5 of \citef{miao2026when}, which rejects a reused batch before the optimizer update
 when its diagnostic crosses a threshold. A gate is not automatically a safety
 certificate. Its false acceptances and false rejections require independent
 evaluation.}

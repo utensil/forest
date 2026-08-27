@@ -12,7 +12,7 @@ evaluator. The \strong{successful-support probability} is}
 
 ##{
   p^+_{\pi,D,b}(q)
-  =\Pr\{\tau\in\mathcal S^+(q)mid q,\pi,D,b\}.
+  =\mathbb P^{D,b}_{q,\pi}\{\tau\in\mathcal S^+(q)\}.
 }
 
 \p{A training task law has \strong{successful-support coverage} at threshold
@@ -20,7 +20,10 @@ evaluator. The \strong{successful-support probability} is}
 which #{p^+_{\pi,D,b}(q)\geq\varepsilon}. This is an FTIP specialization of
 probabilistic support and coverage.}
 
-\p{The threshold makes the definition finite and protocol-relative. It avoids
+\p{This is an FTIP thresholded-support definition. Sections 3--4 of
+\citef{yue2025does} compare base and post-trained success under several
+sampling budgets. The threshold makes the definition finite and
+protocol-relative. It avoids
 claiming that a successful sequence has exact zero probability after observing
 only finitely many samples. The distinction between pass-at-one and broader
-support is central to the experiments in \citef{yue2025does}.}
+support motivates those experiments.}

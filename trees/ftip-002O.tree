@@ -6,15 +6,30 @@
 \tag{ftip}
 \tag{evaluation}
 
-\p{An \strong{acquisition witness} is a prespecified evaluation showing that a
-trained policy succeeds on an independently checked strategy family, transfer
-family, or effective-support region that the base evaluation procedure did not
-reach at the same inference budget.}
+\p{A \strong{witness family} is a prespecified measurable assignment
+#{q\mapsto W(q)} of accepted evaluation trajectories. Define}
+
+##{
+ s_W(\pi)=\mathbb E_{q\sim\mathcal Q_{\mathrm{ev}}}
+ \left[\mathbb P^{D,b}_{q,\pi}\{\tau\in W(q)\}\right].
+}
+
+\p{For declared thresholds #{0\leq\alpha<\beta\leq1}, the family is an
+\strong{acquisition witness} for protocol #{P} when}
+
+##{
+ s_W(\pi_0)\leq\alpha,
+ \qquad
+ \mathbb E[s_W(\Pi_P)]\geq\beta.
+}
 
 \p{This is an FTIP proposal motivated by the elicitation-versus-acquisition
-debate in \citef{liu2025understanding} and \citef{yue2025does}. The witness
+debate in \citet{Sections 1 and 4}{liu2025understanding} and
+\citet{Sections 1 and 3--4}{yue2025does}. The witness
 must specify its threshold, sampling procedure, and independence conditions.
 An appealing trace selected after observing the trained model is insufficient.}
 
-\p{A witness is finite evidence, not proof of exact support expansion. It
-strengthens a gain claim by testing a declared alternative explanation.}
+\p{The family may encode a strategy class, a transfer set, or another
+independently checked event. A witness is finite evidence, not proof of exact
+support expansion. It strengthens a gain claim by testing a declared
+alternative explanation.}

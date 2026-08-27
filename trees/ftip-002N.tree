@@ -2,22 +2,25 @@
 \meta{agent-authored}{true}
 
 \taxon{Definition}
-\title{Scalar, Pareto, and robust frontiers}
+\title{Attainable outcome--cost set}
 \tag{ftip}
 \tag{multi-objective}
 
-\p{For a fixed FTIP instance, the \strong{attainable set} contains the pairs
-of evaluation outcomes and lifecycle costs produced by trusted protocols. A
-\strong{scalar frontier} orders outcomes with one utility. A \strong{Pareto
-frontier} retains outcomes that cannot improve one coordinate without
-worsening another. A \strong{robust value} takes the minimum outcome over a
-declared family of evaluation groups.}
+\p{Fix evaluator utilities #{u_1,\ldots,u_m}. Let
+#{\mathbf J(P)\in\mathbb R^m} collect their expected performances for the
+random policy returned by #{P}. The \strong{attainable outcome--cost set} is}
 
-\p{Pareto order is a standard construction in multi-objective optimization.
-Worst-group utility is a standard robust objective. Their application to the FTIP
-attainable set is an FTIP synthesis. They are grouped here because they are
-alternative orderings of the same feasible set.}
+##{
+ \mathfrak A(M_0)
+ =\left\{(\mathbf J(P),\mathbb E[C(P)]):
+   P\in\mathfrak P(M_0),\ \operatorname{Trust}(P)\right\}.
+}
 
-\p{The choice cannot be hidden inside notation. A scalar average may conceal
-a subgroup loss, while a worst-group objective may sacrifice total utility.
-The theorem statement must name the ordering it uses.}
+\p{This is an FTIP proposal. Section 4.7.4 of
+\citef{boyd2004convex} motivates representing a multi-objective problem by
+its feasible objective vectors. FTIP adds lifecycle costs and the trust
+predicate.}
+
+\p{The set records what was reached before choosing an order on outcomes.
+Scalar, Pareto, and worst-group summaries below answer different questions
+about this same set.}

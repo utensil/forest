@@ -1,0 +1,26 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Definition}
+\title{Worst-group robust potential}
+\tag{ftip}
+\tag{robustness}
+
+\p{Let #{\mathcal G} be a declared finite family of evaluation groups, with
+expected performance #{J_g(\pi;D,b)} for each #{g\in\mathcal G}. The
+\strong{worst-group robust potential} is}
+
+##{
+ \Phi_{\mathrm{rob}}(M_0,B)
+ =\sup_{\substack{P\in\mathfrak P(M_0),\ \operatorname{Trust}(P)\\
+                  \mathbb E[C(P)]\leq B}}
+   \min_{g\in\mathcal G}\mathbb E[J_g(\Pi_P;D,b)].
+}
+
+\p{Section 2 of \citef{sagawa2020distributionally} uses worst-group risk for
+group shifts. The displayed maximization is an FTIP adaptation to independent
+evaluation utility and lifecycle budgets.}
+
+\p{The group family and its sampling law must be fixed before evaluation.
+Worst-group performance can improve while average performance falls, so this
+value is not interchangeable with scalarized average utility.}

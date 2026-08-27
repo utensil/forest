@@ -7,12 +7,14 @@
 \tag{replay}
 \tag{off-policy}
 
-\p{A replay attempt satisfies a \strong{bounded-ratio condition} with constant
-#{R\geq1} if every active action in the attempted update obeys}
+\p{At update attempt #{n}, let #{\nu_n} be the policy stamp of the current
+executable action policy. A replay attempt satisfies a \strong{bounded-ratio
+condition} with constant #{R\geq1} if every active action in the attempted
+update obeys}
 
 ##{
   R^{-1}\leq
-  \frac{\pi_n(A_t\mid H_t)}{\pi_b(A_t\mid H_t)}
+  \frac{\pi^{\nu_n}(A_t\mid H_t)}{\pi^{\nu_b}(A_t\mid H_t)}
   \leq R.
 }
 

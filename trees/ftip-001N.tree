@@ -24,7 +24,7 @@ group mean and stabilized standard deviation by}
   \widehat A_i=\frac{r_i-\bar r}{s_\varepsilon}.
 }
 
-\p{Section 4.1 of \citef{shao2024deepseekmath} uses this normalized group
-credit in GRPO. Implementations differ on variance
-normalization, zero-variance groups, and token weighting. Those choices are
-not consequences of the definition.}
+\p{Section 4.1.2 of \citef{shao2024deepseekmath} normalizes group credit by
+the reported group standard deviation. Adding #{\varepsilon} is an FTIP
+stabilization convention, not a formula attributed to that source.
+Implementations also differ on zero-variance groups and token weighting.}
