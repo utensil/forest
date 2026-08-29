@@ -1,0 +1,47 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Definition}
+\title{Agentic post-training run}
+\tag{ftip}
+\tag{agent}
+\tag{post-training}
+
+\p{An \newvocab{agentic post-training run} fixes a finite round count
+#{N_{\rm ag}\geq0}, an initial state #{\Sigma_0}, a fixed accounting dimension
+#{m\geq1}, a componentwise budget #{b_{\rm ag}\in\mathbb R_+^m}, and the round
+specifications of \ref{ftip-0073}. Put
+#{\Omega_{\rm ag}=\prod_{n=0}^{N_{\rm ag}-1}\Omega_n}, using a singleton for
+the empty product. Once those specifications and their exact versions
+#{v_{\rm ag}} are fixed, the run is the map}
+
+##{
+\mathsf{Run}_{\Sigma_0,v_{\rm ag}}:\Omega_{\rm ag}\longrightarrow
+\mathcal M_{\rm exec}\times\mathcal R_{\rm ag}^{N_{\rm ag}}
+\times\mathbb R_+^m.
+}
+
+\p{Write a realized round-seed tuple as}
+
+##{
+\omega_{\rm ag}=(\omega_0,\ldots,\omega_{N_{\rm ag}-1}).
+}
+
+\p{The run recursively constructs #{\Sigma_1,\ldots,\Sigma_{N_{\rm ag}}};
+the seed tuple and state sequence are empty beyond #{\Sigma_0} when
+#{N_{\rm ag}=0}. Its cumulative realized cost is
+##{
+c_{\rm ag}=\sum_{n=0}^{N_{\rm ag}-1}c_n.
+}
+The empty sum is #{0\in\mathbb R_+^m} when #{N_{\rm ag}=0}.
+The map returns #{(M_{N_{\rm ag}},\mathcal L_{N_{\rm ag}},c_{\rm ag})}. A run
+claiming the hard budget
+must declare a pre-admission or stopping rule that guarantees
+#{c_{\rm ag}\preceq b_{\rm ag}}.}
+
+\p{The run declaration includes the task sampler, environments, serializers,
+rollout inference settings, feedback and credit maps, update maps, stopping
+rule, seed laws, implementation versions, and resource account. The round
+records retain every realized seed, version, decision, and cost. Leaving one of
+these fields implicit defines a family of runs rather than one reproducible
+intervention.}

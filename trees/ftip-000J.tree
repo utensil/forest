@@ -1,0 +1,45 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Example}
+\title{A three-symbol autoregressive continuation}
+\tag{ftip}
+\tag{language-model}
+\tag{probability}
+
+\p{Along one branch of a three-symbol prefix tree, edge probabilities
+determine both continuation probability and negative log-likelihood.}
+
+\tikzfig{\begin{tikzpicture}[
+  state/.style={draw, rounded corners=2pt, align=center, font=\small,
+    text width=20mm, minimum height=9mm},
+  flow/.style={-{Stealth[length=2mm]}, thick}
+]
+\node[state] (p0) at (0,0) {prefix $a$};
+\node[state] (p1) at (2.7,0) {$ab$};
+\node[state] (p2) at (5.4,0) {$aba$};
+\node[state] (p3) at (8.1,0) {$aba\mathtt{EOS}$};
+\node[font=\scriptsize] (o1) at (2.7,-1.2) {other mass $1/2$};
+\node[font=\scriptsize] (o2) at (5.4,-1.2) {other mass $3/4$};
+\node[font=\scriptsize] (o3) at (8.1,-1.2) {other mass $1/5$};
+\draw[flow] (p0) -- node[font=\scriptsize, fill=white] {$b:1/2$} (p1);
+\draw[flow] (p1) -- node[font=\scriptsize, fill=white] {$a:1/4$} (p2);
+\draw[flow] (p2) -- node[font=\scriptsize, fill=white] {$\mathtt{EOS}:4/5$} (p3);
+\draw[dashed] (p0) -- (o1);
+\draw[dashed] (p1) -- (o2);
+\draw[dashed] (p2) -- (o3);
+\end{tikzpicture}}
+
+\p{Let the vocabulary be #{\{a,b,\mathtt{EOS}\}} and declare the three edge
+probabilities shown above. The continuation #{(b,a,\mathtt{EOS})} has
+##{
+ \Pr(b,a,\mathtt{EOS}\mid a)
+ =\tfrac12\cdot\tfrac14\cdot\tfrac45=\tfrac1{10},
+ \qquad
+ -\log\Pr=\log 10\approx2.303.
+}}
+
+\p{The multiplication follows the causal product in
+\citet{Section 3}{phuong2022formal}. Its scope is one fixed finite
+continuation, leaving both the decoding algorithm and the law over all
+variable-length outputs unspecified.}

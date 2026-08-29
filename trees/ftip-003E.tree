@@ -1,0 +1,27 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\tag{ftip}
+\tag{reinforcement-learning}
+\tag{advantage}
+
+\refdeft{Generalized advantage estimator}{Section 3, equations (10) and (16)}{schulman2016gae}{
+\p{Given an approximate value function #{V}, with #{V(\mathsf H_N)=0} at a
+terminal information state, define the temporal-difference residual}
+
+##{
+ \delta_t^V=R_{t+1}+\gamma V(\mathsf H_{t+1})-V(\mathsf H_t).
+}
+
+\p{For #{\lambda\in[0,1]}, the finite-episode \newvocab{generalized advantage
+estimator} is}
+
+##{
+ \widehat A_t^{\mathrm{GAE}(\gamma,\lambda)}
+ =\sum_{l=0}^{N-t-1}(\gamma\lambda)^l\delta_{t+l}^V.
+}
+
+\p{The parameters #{\gamma} and #{\lambda} trade temporal reach against the
+variance and approximation error induced by bootstrapping. The estimator also
+depends on the fitted value function.}
+}

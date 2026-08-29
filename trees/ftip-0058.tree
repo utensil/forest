@@ -1,0 +1,17 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Remark}
+\title{How we type replay selection}
+\tag{ftip}
+\tag{replay}
+
+\p{We formulate a persistent pool and a separate annotation step to make the
+reuse recursion explicit. DGG in
+\citet{Section 3; Section 5 and Algorithm 1}{miao2026when} recomputes policy ratios
+and a gradient diagnostic while reusing a rollout batch. Those quantities
+depend on the current policy and therefore belong to the attempted update
+rather than the historical record.}
+
+\p{The split also exposes the cost of selecting, scoring, and rejecting reused
+records.}

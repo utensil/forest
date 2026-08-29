@@ -1,0 +1,25 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Definition}
+\title{Successful-support probability}
+\tag{ftip}
+\tag{support}
+
+\p{Fix the evaluation interface and success threshold #{u_*} from
+\ref{ftip-005D}. For a protocol #{P} and instance
+#{x\in\mathcal X_{\mathsf T_{\rm ev}}}, its
+\strong{successful-support probability} is}
+
+##{
+ p_P(x)
+ =\Pr\left[
+ U\left(x,\mathsf{Eval}_b(M_P,x;\Xi);\Omega\right)\geq u_*
+ \right].
+}
+
+\p{The probability includes protocol, inference, environment, and
+evaluator randomness: #{M_P} is drawn from the protocol, while
+#{(\Xi,\Omega)} is drawn from
+#{\Lambda_{\rm ev}(\cdot\mid x)} independently of training. The quantity is
+instance-specific and budget-specific.}

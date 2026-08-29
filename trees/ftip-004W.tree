@@ -1,0 +1,44 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Example}
+\title{A DeepSeek-family resilient rollout and sandbox schematic}
+\tag{ftip}
+\tag{deepseek}
+\tag{agent-infrastructure}
+
+\p{Two coupled panels place resumable generation beside sandbox evidence in
+a single rollout record.}
+
+\tikzfig{\begin{tikzpicture}[
+  box/.style={draw, rounded corners=2pt, align=center, font=\small,
+    text width=27mm, minimum height=10mm},
+  flow/.style={-{Stealth[length=2mm]}, thick},
+  inherited/.style={-{Stealth[length=2mm]}, thick, dashed}
+]
+\node[box] (actor) at (0,1.35) {actor emits\\tokens $1{:}4$};
+\node[box] (wal) at (4.0,1.35) {token write-ahead log\\
+and key--value cache\\state at $4$};
+\node[box] (resume) at (8.0,1.35) {resume at\\token $5$};
+\node[box] (api) at (0,-1.35) {sandbox API\\job $j$};
+\node[box] (run) at (4.0,-1.35) {runtime\\limit $2$ s};
+\node[box] (evidence) at (8.0,-1.35) {evidence\\exit $0$, $3/3$ tests};
+\draw[flow] (actor) -- (wal);
+\draw[inherited] (wal) -- node[font=\scriptsize, fill=white] {preempt/resume} (resume);
+\draw[flow] (api) -- (run);
+\draw[flow] (run) -- (evidence);
+\end{tikzpicture}}
+
+\p{\strong{SCHEMATIC.} If four emitted tokens each cost one generation unit,
+resuming from the displayed state avoids regenerating four units. The
+sandbox job then contributes the declared evidence tuple
+#{(j,\text{exit }0,\text{three tests passed})}.}
+
+\p{\strong{INHERITED.} Token-granular write-ahead logging with key--value
+cache recovery and DeepSeek Elastic Compute (DSec), the report's named
+sandbox interface, are described
+in Sections 5.2.3 and 5.2.5 of the DeepSeek-V4 family report
+\citelink{https://arxiv.org/abs/2606.19348}.
+\strong{UNKNOWN.} The sources cited here leave open whether
+DeepSeek-V4-Flash-0731 used this job, resource limit, rollout schedule, or
+sandbox configuration.}

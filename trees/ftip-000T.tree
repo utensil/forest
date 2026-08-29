@@ -1,0 +1,40 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Example}
+\title{A length-four causal mask}
+\tag{ftip}
+\tag{transformer}
+\tag{attention}
+
+\p{For four positions, the displayed causal mask identifies every key
+visible to each query.}
+
+\tikzfig{\begin{tikzpicture}[
+  box/.style={draw, rounded corners=2pt, align=center, font=\small,
+    text width=43mm, minimum height=19mm},
+  flow/.style={-{Stealth[length=2mm]}, thick}
+]
+\node[box] (mask) at (0,0) {$M=\left[\begin{smallmatrix}
+0&-\infty&-\infty&-\infty\\
+0&0&-\infty&-\infty\\
+0&0&0&-\infty\\
+0&0&0&0
+\end{smallmatrix}\right]$};
+\node[box] (row) at (6.0,0) {row $3$: $(1,0,2,5)+M_{3,:}$\\
+$=(1,0,2,-\infty)$};
+\draw[flow] (mask) -- node[font=\scriptsize, fill=white] {add to logits} (row);
+\end{tikzpicture}}
+
+\p{Rows index querying positions and columns index key positions. For row
+three, exponentiating the masked logits gives
+#{(e,1,e^2,0)}. Hence its normalized weights are
+##{
+ \frac{(e,1,e^2,0)}{e+1+e^2},
+}
+and the fourth token contributes exactly zero to position three.}
+
+\p{The construction is the autoregressive mask of
+\citet{Section 3.2.3}{vaswani2017attention}. It enforces a dependency
+restriction. Effective use of the available earlier positions is a separate
+model property.}

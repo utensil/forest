@@ -1,0 +1,37 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Example}
+\title{Cyclic preferences that no scalar ordering represents}
+\tag{ftip}
+\tag{preference}
+\tag{nontransitivity}
+
+\p{Three strict comparisons arranged in a directed cycle obstruct
+representation by a single scalar ordering.}
+
+\tikzfig{\begin{tikzpicture}[
+  item/.style={draw, circle, minimum size=12mm, font=\small},
+  flow/.style={-{Stealth[length=2mm]}, thick}
+]
+\node[item] (a) at (0,0) {$A$};
+\node[item] (b) at (4.0,2.2) {$B$};
+\node[item] (c) at (8.0,0) {$C$};
+\draw[flow] (a) -- node[font=\scriptsize, fill=white] {$\succ$} (b);
+\draw[flow] (b) -- node[font=\scriptsize, fill=white] {$\succ$} (c);
+\draw[flow] (c) -- node[font=\scriptsize, fill=white] {$\succ$} (a);
+\end{tikzpicture}}
+
+\p{Declare #{A\succ B}, #{B\succ C}, and #{C\succ A}. If a scalar
+#{r} represented all three comparisons by strict inequalities, then
+##{
+ r(A)>r(B)>r(C)>r(A),
+}
+which implies #{r(A)>r(A)}, a contradiction. Thus no real-valued score can
+represent this cycle by ordinary greater-than.}
+
+\p{Scalar pairwise reward modeling is used in
+\citet{Section 2}{christiano2017deep}; the finite cycle marks one assumption
+needed for that reduction. No empirical cycle is attributed to a particular
+dataset or population, and the obstruction concerns scalar orderings rather
+than all preference models.}

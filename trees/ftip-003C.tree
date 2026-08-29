@@ -1,0 +1,27 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\tag{ftip}
+\tag{rlhf}
+\tag{optimization}
+
+\refdeft{KL-constrained RLHF objective}{Section 3, equation (3)}{rafailov2023direct}{
+\p{Let #{\mu} be a prompt law, #{r(x,y)} a scalar reward, and
+#{\pi_{\mathrm{ref}}} a fixed reference policy. For #{\beta>0}, the
+\newvocab{KL-regularized RLHF objective}, using the divergence in
+\ref{ftip-006X}, is}
+
+##{
+ \max_{\pi}
+ \mathbb E_{x\sim\mu,\,y\sim\pi(\cdot\mid x)}[r(x,y)]
+ -\beta\,
+ \mathbb E_{x\sim\mu}
+ \left[D_{\mathrm{KL}}\left(
+ \pi(\cdot\mid x)\Vert\pi_{\mathrm{ref}}(\cdot\mid x)
+ \right)\right].
+}
+
+\p{The prompt law, reward, reference policy, and coefficient are part of the
+objective. The forward KL requires the optimized policy to be absolutely
+continuous with respect to the reference wherever the objective is finite.}
+}

@@ -1,0 +1,19 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Definition}
+\title{Update proposal}
+\tag{ftip}
+\tag{optimization}
+
+\p{Given a current parameter--optimizer state #{(\theta_n,z_n)}, selected
+records, their attempt annotations, and credit targets, an
+\strong{update proposal} is a candidate next state}
+
+##{(\widetilde\theta_{n+1},\widetilde z_{n+1},
+\delta_n^{\rm diag}).}
+
+\p{The diagnostic record #{\delta_n^{\rm diag}} contains the quantities
+required by the declared acceptance rule. It is distinct from the
+accept--reject decision #{d_n} in \ref{ftip-0073}. Constructing the proposal
+incurs update cost even if the proposal is later rejected.}

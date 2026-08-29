@@ -1,0 +1,18 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\tag{ftip}
+\tag{rlhf}
+\tag{ppo}
+
+\card{Remark}{PPO is an optimizer, not an alignment definition}{
+\p{We formulate RLHF as the whole feedback-and-training pipeline and PPO as one
+optimizer used within that pipeline. PPO specifies a sampled update surrogate;
+it does not specify whose preferences are collected, what the reward means, or
+which independent behavior counts as aligned.}
+
+\p{Changing the comparison population or reward model can change the alignment
+target while leaving PPO unchanged. Conversely, replacing PPO by another
+optimizer changes update geometry without necessarily changing the declared
+preference data or evaluation criterion.}
+}

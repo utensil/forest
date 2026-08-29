@@ -1,0 +1,25 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\refdeft{Tokenizer and detokenizer}{secs. 3.1 and 3.5}{kudo2018sentencepiece}{
+\p{Let #{\Sigma} be a finite character or byte alphabet and let
+#{\mathcal V} be the vocabulary of \ref{ftip-000D}. A
+\newvocab{tokenizer} is a specified map
+#{\tau:\Sigma^*\to\mathcal V^*}. A \newvocab{detokenizer} is a specified map
+#{\delta:\mathcal V^*\to\Sigma^*}.}
+
+\p{A tokenizer package also fixes its text normalization rule #{N}. When the
+package promises normalized round trips, the relevant condition is
+#{\delta(\tau(s))=N(s)} for text #{s\in\Sigma^*}; it is not the claim that
+#{\tau} and #{\delta} are inverse bijections on all sequences. SentencePiece
+keeps the segmentation model and detokenization convention together, which is
+why both maps belong to the model interface.}
+
+\p{Byte-pair encoding gives another construction of #{\tau}. Learned merge
+operations turn an initial symbol sequence into subword units; see
+\citet{§3.2}{sennrich2016neural}. The learned merges and base alphabet are
+therefore part of the tokenizer specification.}
+}
+
+\tag{ftip}
+\tag{tokenization}

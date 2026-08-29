@@ -1,0 +1,44 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Example}
+\title{A finite agent--environment interaction loop}
+\tag{ftip}
+\tag{agent}
+\tag{environment}
+
+\p{A deterministic three-action episode records each observation before the
+next policy decision and ends with an explicit terminal observation.}
+
+\tikzfig{\begin{tikzpicture}[
+  box/.style={draw, rounded corners=2pt, align=center, font=\small,
+    text width=26mm, minimum height=10mm},
+  flow/.style={-{Stealth[length=2mm]}, thick}
+]
+\node[box] (o0) at (0,1.25) {observe\\door locked};
+\node[box] (a0) at (3.4,1.25) {action\\take key};
+\node[box] (o1) at (6.8,1.25) {observe\\key held};
+\node[box] (a1) at (6.8,-1.25) {action\\unlock};
+\node[box] (o2) at (3.4,-1.25) {observe\\door open};
+\node[box] (a2) at (0,-1.25) {action\\enter};
+\node[box] (o3) at (0,-2.75) {observe\\terminal success};
+\draw[flow] (o0) -- (a0);
+\draw[flow] (a0) -- (o1);
+\draw[flow] (o1) -- (a1);
+\draw[flow] (a1) -- (o2);
+\draw[flow] (o2) -- (a2);
+\draw[flow] (a2) -- (o3);
+\end{tikzpicture}}
+
+\p{Let #{H_0=(\text{door locked})}. After action
+#{A_0=\text{take key}}, the environment returns
+#{O_1=\text{key held}}, so #{H_1=(H_0,A_0,O_1)}. Repeating the same update
+with \em{unlock} and \em{door open}, then choosing #{A_2=\text{enter}},
+produces #{O_3=\text{terminal success}} and
+#{H_3=(H_2,A_2,O_3)}. No later observation is available to an earlier action
+choice.}
+
+\p{The alternating action--observation interface is the finite-history form
+of the agent setup in \citet{Section 2}{kaelbling1998planning}. The trace
+checks chronology and termination; uncertain state, partial observability,
+and language-valued actions lie beyond this deterministic instance.}

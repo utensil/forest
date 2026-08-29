@@ -1,0 +1,41 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Example}
+\title{Same model under two procedures and budgets}
+\tag{ftip}
+\tag{evaluation}
+
+\p{Holding the model fixed, the comparison isolates how inference procedure
+and budget alter measured success.}
+
+\tikzfig{\begin{tikzpicture}[
+  box/.style={draw, rounded corners=2pt, align=center, font=\small,
+    text width=28mm, minimum height=10mm},
+  flow/.style={-{Stealth[length=2mm]}, thick}
+]
+\node[box] (model) at (0,0) {one model\\success mass $p=.6$};
+\node[box] (one) at (4.0,1.25) {one draw\\budget $b_1=1$};
+\node[box] (three) at (4.0,-1.25) {up to three draws\\budget $b_3=3$};
+\node[box] (jone) at (8.0,1.25) {$J_1=.6$};
+\node[box] (jthree) at (8.0,-1.25) {$J_3=.936$};
+\draw[flow] (model) -- (one);
+\draw[flow] (model) -- (three);
+\draw[flow] (one) -- (jone);
+\draw[flow] (three) -- node[font=\scriptsize, fill=white] {ideal check} (jthree);
+\end{tikzpicture}}
+
+\p{Assume independent draws and a declared perfect checker that recognizes a
+correct candidate when one appears. The one-draw procedure succeeds with
+#{J_1=p=0.6}. The three-draw procedure succeeds whenever not all three draws
+fail:
+##{
+  J_3=1-(1-p)^3=1-0.4^3=0.936.
+}
+Both procedures query the same conditional distribution.}
+
+\p{Policy performance under a specified interaction and evaluation procedure
+is standard in \citet{Section 3.5}{sutton2018reinforcement}. The arithmetic
+demonstrates procedural dependence. Independence and a perfect checker are
+declared toy assumptions, not properties attributed to a frontier language
+model.}

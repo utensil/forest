@@ -1,0 +1,44 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Example}
+\title{A two-record pretraining loss and minibatch estimate}
+\tag{ftip}
+\tag{pretraining}
+\tag{loss}
+
+\p{Two equal-length records make the full empirical loss directly comparable
+with a one-record minibatch estimate.}
+
+\tikzfig{\begin{tikzpicture}[
+  box/.style={draw, rounded corners=2pt, align=center, font=\small,
+    text width=29mm, minimum height=11mm},
+  flow/.style={-{Stealth[length=2mm]}, thick}
+]
+\node[box] (a) at (0,1.15) {record $A$\\losses $(\log 2,\log 4)$};
+\node[box] (b) at (0,-1.15) {record $B$\\losses $(\log 5,\log 10)$};
+\node[box] (full) at (4.1,0) {four-token mean\\$\tfrac14\log 400$};
+\node[box] (batch) at (8.2,0) {batch $A$ mean\\$\tfrac12\log 8$};
+\draw[flow] (a) -- (full);
+\draw[flow] (b) -- (full);
+\draw[flow] (a) to[bend left=8] (batch);
+\end{tikzpicture}}
+
+\p{The full token-average negative log-likelihood is
+##{
+ \widehat L
+ =\frac{\log 2+\log 4+\log 5+\log 10}{4}
+ =\frac{\log 400}{4}\approx1.498.
+}
+A minibatch containing only record #{A} gives
+##{
+ \widehat L_A=\frac{\log 2+\log 4}{2}
+ =\frac{\log 8}{2}\approx1.040.
+}
+Sampling one of the two equal-length records uniformly makes
+#{\mathbb E[\widehat L_{\rm batch}]=\widehat L}.}
+
+\p{The losses and estimator of \ref{ftip-001B}, \ref{ftip-001E}, and
+\ref{ftip-001G} specialize to the displayed numbers. Equal record lengths
+make the estimator unbiased here; unequal lengths, padding, dependence, and
+optimizer noise remain outside its scope.}

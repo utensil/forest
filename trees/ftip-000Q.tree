@@ -1,0 +1,20 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\refdeft{Scaled dot-product attention}{sec. 3.2.1, equation (1)}{vaswani2017attention}{
+\p{Using the head widths in \ref{ftip-000P}, let #{T_q,T_k\geq1} be query
+and key-value sequence lengths. For
+#{Q\in\mathbb R^{T_q\times d_h}},
+#{K\in\mathbb R^{T_k\times d_h}}, and
+#{V\in\mathbb R^{T_k\times d_v}}, \newvocab{scaled dot-product attention}
+is
+##{
+\operatorname{Att}(Q,K,V)
+=\operatorname{softmax}\left(\frac{QK^{\mathsf T}}{\sqrt{d_h}}\right)V.
+}
+The softmax is applied across each row of the #{T_q\times T_k} score matrix,
+so every output row is a convex combination of the value rows.}
+}
+
+\tag{ftip}
+\tag{attention}

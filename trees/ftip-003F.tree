@@ -1,0 +1,27 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\tag{ftip}
+\tag{ppo}
+\tag{optimization}
+
+\refdeft{PPO clipped surrogate}{Section 3, equation (7)}{schulman2017proximal}{
+\p{For a clipping parameter #{\epsilon_{\mathrm{clip}}\in(0,1)}, define
+#{\operatorname{clip}_{\epsilon_{\mathrm{clip}}}(u)
+=\min(1+\epsilon_{\mathrm{clip}},\max(1-\epsilon_{\mathrm{clip}},u))}. The
+\newvocab{PPO clipped surrogate} is}
+
+##{
+ L^{\mathrm{CLIP}}(\theta)
+ =\widehat{\mathbb E}_t\left[
+ \min\left(
+ \rho_t(\theta)\widehat A_t,
+ \operatorname{clip}_{\epsilon_{\mathrm{clip}}}(\rho_t(\theta))
+ \widehat A_t
+ \right)\right].
+}
+
+\p{Clipping changes the sampled surrogate when the ratio moves outside the
+declared interval in a direction favored by the estimated advantage. It is not
+a hard bound on the KL divergence of the complete updated policy.}
+}

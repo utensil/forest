@@ -1,0 +1,21 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Notation}
+\title{Tensor dimensions, positions, heads, and layers}
+\tag{ftip}
+\tag{architecture}
+
+\p{Let #{T} be the maximum token positions processed together, #{d} the
+residual-stream width, #{d_{\mathrm{ff}}} a feed-forward hidden width,
+#{H} the number of attention heads, #{d_h} the query-key width of one head,
+and #{L} the number of decoder layers. Positions are indexed by
+#{t,s\in\{1,\ldots,T\}}, heads by #{h\in\{1,\ldots,H\}}, and layers by
+#{\ell\in\{1,\ldots,L\}}.}
+
+\p{A batch of #{B} hidden-state sequences is a tensor in
+#{\mathbb R^{B\times T\times d}}. When the batch coordinate is irrelevant,
+write #{X\in\mathbb R^{T\times d}} and let #{X_t\in\mathbb R^d} denote its
+row at position #{t}. Matrix products act on the final coordinate. Every
+architecture formula below cites this notation when it uses these dimensions
+or indices.}

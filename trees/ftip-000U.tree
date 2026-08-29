@@ -1,0 +1,23 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\refdeft{Multi-head self-attention}{sec. 3.2.2}{vaswani2017attention}{
+\p{For each head #{h\in\{1,\ldots,H\}}, form #{Q_h,K_h,V_h} as in
+\ref{ftip-000P} from the same input #{X}, and apply the masked attention of
+\ref{ftip-000S}:
+##{
+Z_h=\operatorname{softmax}\left(
+\frac{Q_hK_h^{\mathsf T}}{\sqrt{d_h}}+M
+\right)V_h.
+}
+With #{W^O\in\mathbb R^{H d_v\times d}}, \newvocab{multi-head
+self-attention} is
+##{
+\operatorname{MHA}(X)
+=\operatorname{Concat}(Z_1,\ldots,Z_H)W^O.
+}
+It returns one width-#{d} vector at every input position.}
+}
+
+\tag{ftip}
+\tag{attention}

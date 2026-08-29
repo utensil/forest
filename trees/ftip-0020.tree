@@ -1,0 +1,19 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Remark}
+\title{Deterministic tools and stochastic environments}
+\tag{ftip}
+\tag{agent}
+
+\p{We use the kernel in \ref{ftip-001Z} for both tools and broader
+environments. A deterministic tool has a measurable update map
+#{F_t(s,a)=(s',o')} and the point-mass kernel concentrated at #{F_t(s,a)}. A
+stochastic environment permits several next state-observation pairs for the
+same input.}
+
+\p{This distinction matters for replay. Re-executing a deterministic tool call
+under an unchanged state reproduces its observation, whereas a stored rollout
+from a stochastic environment is one sample from a conditional law. Any
+analysis that replaces one with the other needs a coupling or concentration
+assumption.}

@@ -1,0 +1,17 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\tag{ftip}
+\tag{dpo}
+\tag{training-protocol}
+
+\refcardt{Definition}{Direct preference training stage}{Section 4}{rafailov2023direct}{
+\p{Direct preference training starts from a fixed reference policy and a
+dataset of preferred and dispreferred responses. It evaluates a binary
+cross-entropy loss formed from the trainable policy's reference-relative log
+likelihoods and updates the policy directly.}
+
+\p{This stage does not separately fit a scalar reward network, sample online
+rollouts for PPO, or train a value function. Its loss nevertheless comes from a
+particular reward-model and KL-regularized optimization derivation.}
+}

@@ -1,0 +1,17 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Remark}
+\title{Normalization operator and placement are separate choices}
+\tag{ftip}
+\tag{architecture}
+
+\p{Ba et al. define layer normalization in \citet{Section 3}{ba2016layer}.
+The original Transformer applies it after residual addition in
+\citet{Section 3.1}{vaswani2017attention}. Xiong et al. distinguish
+post-normalized and pre-normalized Transformers in
+\citet{Section 3.3}{xiong2020layer}. We separate the operator from its
+placement because either coordinate can change while the other is held fixed.}
+
+\p{A later stability statement must therefore name both choices. A result
+about the normalization formula alone does not determine the residual path.}

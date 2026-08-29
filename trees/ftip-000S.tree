@@ -1,0 +1,20 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\refdeft{Causal attention mask}{sec. 3.2.3}{vaswani2017attention}{
+\p{For a length-#{T} sequence, the \newvocab{causal attention mask} is the
+matrix #{M\in(\mathbb R\cup\{-\infty\})^{T\times T}} with
+##{
+M_{ts}=
+\begin{cases}
+0,&s\leq t,\\
+-\infty,&s>t.
+\end{cases}
+}
+Masked self-attention replaces the score matrix in \ref{ftip-000Q} by
+#{QK^{\mathsf T}/\sqrt{d_h}+M}. Consequently, the output at position #{t}
+has zero attention weight on every later position #{s>t}.}
+}
+
+\tag{ftip}
+\tag{attention}

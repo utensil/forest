@@ -1,0 +1,24 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\tag{ftip}
+\tag{reward-model}
+\tag{loss}
+
+\refdeft{Pairwise reward-model loss}{Section 3.5, equation (1), and Appendix C.2}{ouyang2022training}{
+\p{For comparison observations sampled from
+#{\mathcal D_{\mathrm{pref}}}, the \newvocab{pairwise reward-model loss} is}
+
+##{
+ L_{\mathrm{rm}}(\phi)
+ =\mathbb E_{(x,y^+,y^-,j)\sim\mathcal D_{\mathrm{pref}}}
+ \left[-\log\sigma\left(
+ r_\phi(x,y^+)-r_\phi(x,y^-)
+ \right)\right].
+}
+
+\p{The empirical objective replaces the expectation by a declared weighting
+of the collected comparisons. It fits score differences under the
+Bradley--Terry law of \ref{ftip-002Q}; it does not observe an absolute reward
+target for either response.}
+}

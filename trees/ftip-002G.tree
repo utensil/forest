@@ -1,0 +1,26 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\tag{ftip}
+\tag{instruction-tuning}
+\tag{convention}
+
+\card{Convention}{Response-token normalization}{
+\p{For a finite demonstration multiset, define the number of selected response
+tokens by}
+
+##{
+ N_{\mathrm{resp}}
+ =\sum_{z=(x,y,\omega)\in D_{\mathrm{sft}}}
+   \sum_{t=1}^{|y|}m_t(z).
+}
+
+\p{When #{N_{\mathrm{resp}}>0}, \newvocab{response-token normalization} sets
+#{w_t(z)=N_{\mathrm{resp}}^{-1}} at every selected position. Each selected
+token then has equal weight in #{L_{\mathrm{sft}}}. Equal weighting of records
+or prompts is a different convention because response lengths vary.}
+
+\p{We formulate this convention explicitly because the source training account
+does not determine it. Any comparison of losses or gradients must retain the
+mask and normalization that produced them.}
+}

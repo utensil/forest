@@ -1,0 +1,22 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\tag{ftip}
+\tag{grpo}
+\tag{statistics}
+
+\refdeft{Group mean and standard deviation}{Section 4.1.2}{shao2024deepseekmath}{
+\p{For rollout-group rewards #{R_1,\ldots,R_g}, define the
+\newvocab{group mean} and \newvocab{group standard deviation} by}
+
+##{
+ \bar R=\frac1g\sum_{i=1}^g R_i,
+ \qquad
+ S_R=\operatorname{std}(R_1,\ldots,R_g).
+}
+
+\p{Both statistics are prompt-local and depend on every member of the sampled
+group. The source leaves the standard-deviation divisor symbolic and does not
+add a numerical stabilizer. An implementation must state those conventions and
+its treatment of zero-variance groups.}
+}

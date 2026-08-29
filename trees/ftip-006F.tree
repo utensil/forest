@@ -1,0 +1,22 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\refdeft{Root mean square layer normalization}{Section 4, equation (4)}{zhang2019root}{
+\p{For #{z\in\mathbb R^d}, learned scale #{\gamma\in\mathbb R^d}, and a
+declared note-local numerical stabilizer #{\varepsilon_{\mathrm{RMS}}>0},
+\newvocab{root mean square layer normalization} is}
+
+##{
+\operatorname{RMSNorm}(z)
+=\gamma\odot\frac{z}{\sqrt{d^{-1}\sum_{i=1}^{d}z_i^2+
+\varepsilon_{\mathrm{RMS}}}}.
+}
+
+\p{Unlike layer normalization in \ref{ftip-0011}, this operator does not
+subtract the coordinate mean. The declared stabilizer makes it total at the
+zero vector; setting the stabilizer to zero recovers the source expression on
+nonzero inputs.}
+}
+
+\tag{ftip}
+\tag{architecture}

@@ -1,0 +1,30 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\refdeft{Decoder-only Transformer language model}{sec. 6, Decoder-only transformers}{phuong2022formal}{
+\p{A \newvocab{decoder-only Transformer language model} consists of:}
+
+\ol{
+  \li{the token interface in \ref{ftip-000E};}
+  \li{an initial representation from \ref{ftip-000M} and \ref{ftip-000N};}
+  \li{a stack of #{L} causal decoder layers built from the attention,
+  feed-forward, residual, and normalization constructions in
+  \ref{ftip-000S}--\ref{ftip-0011}; and}
+  \li{an output map from the final hidden vector to token logits.}
+}
+
+\p{If the final hidden vector at position #{t} is #{h_t\in\mathbb R^d}, an
+output matrix #{W_U\in\mathbb R^{|\mathcal V|\times d}} and bias
+#{b_U\in\mathbb R^{|\mathcal V|}} give logits
+#{z_t=W_Uh_t+b_U}. The softmax
+##{
+\pi_\theta(a\mid x_{1:t})
+=\frac{\exp(z_{t,a})}
+{\sum_{v\in\mathcal V}\exp(z_{t,v})}
+}
+realizes the conditional next-token law of \ref{ftip-000H}. The parameter
+tuple #{\theta} contains every learned tensor named by this architecture.}
+}
+
+\tag{ftip}
+\tag{language-model}

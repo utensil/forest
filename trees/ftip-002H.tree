@@ -1,0 +1,44 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Example}
+\title{Response-only supervision on one instruction record}
+\tag{ftip}
+\tag{supervised-fine-tuning}
+\tag{loss}
+
+\p{Two instruction positions provide conditioning context but lie outside the
+response-loss index set. The loss is taken on the two generated tokens.}
+
+\tikzfig{\begin{tikzpicture}[
+  tok/.style={draw, minimum width=18mm, minimum height=9mm,
+    align=center, font=\small},
+  flow/.style={-{Stealth[length=2mm]}, thick}
+]
+\node[tok] (u1) at (0,0) {$u_1$\\context};
+\node[tok] (u2) at (2.1,0) {$u_2$\\context};
+\node[tok] (r1) at (4.2,0) {$r_1$\\mask $1$};
+\node[tok] (r2) at (6.3,0) {$r_2$\\mask $1$};
+\node[tok] (loss) at (8.7,0) {mean loss\\$\tfrac12\log 8$};
+\draw[flow] (u1) -- (u2);
+\draw[flow] (u2) -- (r1);
+\draw[flow] (r1) -- (r2);
+\draw[flow] (r2) -- (loss);
+\end{tikzpicture}}
+
+\p{Declare
+#{\pi(r_1\mid u_1,u_2)=1/2} and
+#{\pi(r_2\mid u_1,u_2,r_1)=1/4}. The instruction tokens are not indexed by the
+response mask. With mask one on each displayed response token, the sum and mean
+are
+##{
+ L_{\rm sum}=-\log\tfrac12-\log\tfrac14=\log 8,
+ \qquad
+ L_{\rm mean}=\tfrac12\log 8\approx1.040.
+}}
+
+\p{The supervised objective in \ref{ftip-002F} and the causal factorization
+in \ref{ftip-000I} specialize to the displayed token strip. Its mask is a
+local choice on response positions; other instruction-tuning implementations
+may supervise a different subset of response tokens or declare a larger loss
+domain explicitly.}

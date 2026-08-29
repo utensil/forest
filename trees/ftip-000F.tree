@@ -1,0 +1,39 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Example}
+\title{A tokenizer round trip and normalization failure}
+\tag{ftip}
+\tag{tokenization}
+
+\p{A four-stage toy tokenizer separates token-level round-trip stability from
+recovery of the original string.}
+
+\tikzfig{\begin{tikzpicture}[
+  box/.style={draw, rounded corners=2pt, align=center, font=\small,
+    text width=25mm, minimum height=10mm},
+  flow/.style={-{Stealth[length=2mm]}, thick}
+]
+\node[box] (raw) at (0,0) {raw\\$A\_\_B$};
+\node[box] (norm) at (2.8,0) {lowercase and\\collapse spaces};
+\node[box] (tokens) at (5.6,0) {tokens\\$(a,b)$};
+\node[box] (detok) at (8.4,0) {detokenized\\$a\_b$};
+\draw[flow] (raw) -- node[font=\scriptsize, fill=white] {$N$} (norm);
+\draw[flow] (norm) -- node[font=\scriptsize, fill=white] {$T$} (tokens);
+\draw[flow] (tokens) -- node[font=\scriptsize, fill=white] {$D$} (detok);
+\end{tikzpicture}}
+
+\p{Here underscores display spaces. Declare
+#{N(A\_\_B)=a\_b}, #{T(a\_b)=(a,b)}, and #{D(a,b)=a\_b}. For
+#{s=A\_\_B},
+##{
+  D(T(N(s)))=a\_b\neq s,
+  \qquad
+  T(N(D(T(N(s)))))=(a,b).
+}
+The token sequence is stable after normalization although the original case
+and repeated space are not recovered.}
+
+\p{The source-grounded tokenizer interface is \ref{ftip-000E}. The displayed
+normalization rule belongs only to this finite construction; no such lossy
+transformation is attributed to SentencePiece.}

@@ -1,0 +1,37 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Example}
+\title{Reward hacking under an incomplete checker}
+\tag{ftip}
+\tag{reward-hacking}
+\tag{evaluation}
+
+\p{Shifting probability mass toward a checker exploit raises proxy reward
+while reducing independently judged utility.}
+
+\tikzfig{\begin{tikzpicture}[
+  box/.style={draw, rounded corners=2pt, align=center, font=\small,
+    text width=28mm, minimum height=10mm},
+  flow/.style={-{Stealth[length=2mm]}, thick}
+]
+\node[box] (outputs) at (0,0) {outputs\\$41$, exact $42$, padded $42$};
+\node[box] (checker) at (4.0,1.25) {proxy checker\\contains $42$};
+\node[box] (evaluator) at (4.0,-1.25) {independent rule\\equals $42$};
+\node[box] (contrast) at (8.0,0) {proxy $.5\to.9$\\utility $.4\to.1$};
+\draw[flow] (outputs) -- (checker);
+\draw[flow] (outputs) -- (evaluator);
+\draw[flow] (checker) -- (contrast);
+\draw[flow] (evaluator) -- (contrast);
+\end{tikzpicture}}
+
+\p{Let the three outputs be #{y_0=\text{41}},
+#{y_1=\text{42}}, and #{y_2=\text{ignore; 42; done}}. The proxy accepts
+#{y_1,y_2}; the independent evaluator accepts only #{y_1}. Moving their
+probabilities from #{(0.5,0.4,0.1)} to #{(0.1,0.1,0.8)} changes expected
+proxy reward from #{0.5} to #{0.9}, but true utility from #{0.4} to #{0.1}.}
+
+\p{Reward exploitation in formal verification is discussed in
+\citet{Section 3.2}{ren2025deepseekproverv2}. The constructed checker exposes
+one failure mechanism. It provides no basis for treating every executable
+verifier as incomplete or every proxy improvement as reward hacking.}

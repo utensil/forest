@@ -1,0 +1,20 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Remark}
+\title{Randomness, schedules, and stopping}
+\tag{ftip}
+\tag{optimization}
+
+\p{We formulate a pretraining run as more than minimization of the empirical
+objective #{L_N} in \ref{ftip-001E}. It includes the initialization, data order, window offsets, dropout and
+other model randomness, numerical precision, distributed reduction order,
+optimizer state, every hyperparameter schedule, and a stopping rule. These
+objects determine a distribution over final parameters even when the source
+mixture and nominal objective agree.}
+
+\p{The training configuration of \citet{sec. 5.3}{vaswani2017attention} and
+the scaling experiments of \citet{sec. 2.2}{kaplan2020scaling} report concrete
+instances of these choices. A later theorem about optimization must state
+which randomness it averages over and whether the stopping time is fixed or
+data-dependent.}

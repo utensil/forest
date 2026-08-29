@@ -1,0 +1,29 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Notation}
+\title{Finite sets, maps, distributions, random variables, and expectation}
+\tag{ftip}
+\tag{probability}
+
+\p{For a finite set #{X}, write #{|X|} for its cardinality and #{X^*} for
+the set of finite sequences with entries in #{X}. A map #{f:X\to Y} sends
+#{x\in X} to #{f(x)\in Y}; the inverse image of #{A\subseteq Y} is
+#{f^{-1}(A)=\{x\in X:f(x)\in A\}}.}
+
+\p{Write
+##{
+\Delta(X)=\left\{p:X\to[0,1]:\sum_{x\in X}p(x)=1\right\}
+}
+for the probability simplex on #{X}. If #{p\in\Delta(X)} and
+#{Z:X\to\mathbb R}, then
+##{
+\mathbb E_{x\sim p}[Z(x)]=\sum_{x\in X}p(x)Z(x).
+}
+A random variable is a map from the sample set to its value set. Random
+variables #{Z} and #{W} are independent under #{p} when
+#{p(Z=z,W=w)=p(Z=z)p(W=w)} for every pair of values #{z,w}.}
+
+\p{Later sections cite this notation whenever they use #{\Delta}, random
+variables, expectation, or independence. Measurable-space generalizations are
+introduced only where an interaction kernel requires them.}

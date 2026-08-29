@@ -1,0 +1,25 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Definition}
+\title{Kullback--Leibler divergence}
+\tag{ftip}
+\tag{probability}
+\tag{optimization}
+
+\p{For probability mass functions #{p} and #{q} on a finite or countable set
+#{\mathcal Y}, the \newvocab{Kullback--Leibler divergence} of #{p} relative to
+#{q} is
+##{
+D_{\mathrm{KL}}(p\Vert q)
+=\sum_{y\in\mathcal Y}p(y)\log\frac{p(y)}{q(y)}.
+}
+We use #{0\log(0/q)=0}. If #{p(y)>0} and #{q(y)=0} for some #{y}, the value
+is #{+\infty}. On a countable set, the negative part of the displayed series is
+finite; a divergent positive part gives the value #{+\infty}. Since
+#{\mathcal V^*} is countable, the definition applies to the response laws of
+\ref{ftip-002A}.}
+
+\p{The order of the arguments matters. In particular, finiteness of the
+displayed forward divergence requires #{p} to be absolutely continuous with
+respect to #{q}.}

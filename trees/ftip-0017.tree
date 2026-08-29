@@ -1,0 +1,19 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Definition}
+\title{Ordered pretraining data pipeline}
+\tag{ftip}
+\tag{pretraining}
+
+\p{Let #{\mathcal C_{\mathrm{raw}}\in\mathcal M_{\rm doc}} be a finite corpus
+drawn from the source mixture in \ref{ftip-0016}. Using the document filter,
+deduplication operator, and evaluation decontamination operator of
+\ref{ftip-0070}--\ref{ftip-0072}, an \newvocab{ordered pretraining data
+pipeline} returns
+##{
+\mathcal C_{\mathrm{clean}}
+=C_{\mathcal E}\left(D\left(F_{\#}(\mathcal C_{\mathrm{raw}})\right)\right).
+}
+Changing the order can change the retained corpus. The pipeline therefore
+records the order and exact revisions in addition to the three operators.}

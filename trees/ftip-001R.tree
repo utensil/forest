@@ -1,0 +1,26 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Definition}
+\title{Evaluation inference protocol}
+\tag{ftip}
+\tag{evaluation}
+
+\p{Let #{M} be an executable model artifact of the form in
+\ref{ftip-001K}. An \newvocab{evaluation inference protocol} is a specified
+procedure
+##{
+\mathsf I(M,x,b_{\mathrm{eval}};\xi)=(o,c)
+\in\mathcal O_{\mathsf T}\times\mathcal B_{\mathrm{eval}},
+}
+where #{x\in\mathcal X_{\mathsf T}},
+#{b_{\mathrm{eval}}\in\mathcal B_{\mathrm{eval}}}, and
+#{\xi\in\Omega_I} use the notation of \ref{ftip-001N}; #{o} is a candidate
+outcome and #{c\in\mathcal B_{\mathrm{eval}}} is the realized resource-use
+vector. A valid execution satisfies
+#{c\preceq b_{\mathrm{eval}}} coordinatewise.}
+
+\p{The protocol fixes prompt construction, decoding, sampling temperature,
+number of candidates, candidate selection, allowed tools, stopping, and any
+test-time search. None of these choices is determined by the checkpoint
+alone.}

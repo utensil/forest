@@ -1,0 +1,39 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Example}
+\title{Terminal and process labels on the same four-step trace}
+\tag{ftip}
+\tag{feedback}
+\tag{process-supervision}
+
+\p{A four-step arithmetic trace can receive a correct terminal label while
+retaining an incorrect intermediate process label.}
+
+\tikzfig{\begin{tikzpicture}[
+  tracebox/.style={draw, rounded corners=2pt, align=center, font=\small,
+    text width=22mm, minimum height=12mm},
+  flow/.style={-{Stealth[length=2mm]}, thick}
+]
+\node[tracebox] (s1) at (0,0) {$2+3=5$\\$f_1=1$};
+\node[tracebox] (s2) at (2.8,0) {$5\cdot4=20$\\$f_2=1$};
+\node[tracebox] (s3) at (5.6,0) {$20-1=18$\\$f_3=0$};
+\node[tracebox] (s4) at (8.4,0) {correct to $19$\\$f_4=1$};
+\draw[flow] (s1) -- (s2);
+\draw[flow] (s2) -- (s3);
+\draw[flow] (s3) -- (s4);
+\node[font=\small] at (4.2,1.25) {terminal label $f_{\rm out}=1$};
+\end{tikzpicture}}
+
+\p{The final answer #{19} is correct, so outcome supervision supplies
+#{f_{\rm out}=1}. The declared process labels are
+#{(f_1,f_2,f_3,f_4)=(1,1,0,1)} and expose the corrected arithmetic error at
+step three. The labels are attached to the displayed prefixes, which remain
+unchanged by those annotations.}
+
+\p{The two supervision regimes follow the outcome- and process-supervised
+reward-model constructions in
+\citet{the outcome- and process-supervised reward-model subsections}{lightman2023verify}.
+The two observations are thereby separated. Noise-free labels and a general
+policy advantage for process supervision are not consequences of the finite
+trace.}

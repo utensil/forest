@@ -1,0 +1,16 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\refdeft{Optimizer state}{Algorithm 1}{kingma2015adam}{
+\p{An \newvocab{optimizer state} #{s_k} is the collection of persistent
+variables, other than the model parameters #{\theta_k}, that an update rule
+uses after step #{k}. For Adam, #{s_k} contains the step index and exponential
+moving averages of the gradient and squared gradient.}
+
+\p{The state is initialized by a declared value #{s_0}. Two runs with the same
+checkpoint #{\theta_k} but different optimizer states need not have the same
+next update.}
+}
+
+\tag{ftip}
+\tag{optimization}

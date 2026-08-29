@@ -1,0 +1,39 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Example}
+\title{The PPO clipping cases for positive and negative advantage}
+\tag{ftip}
+\tag{reinforcement-learning}
+\tag{optimization}
+
+\p{Positive and negative advantages select different branches of the PPO
+clipped minimum.}
+
+\tikzfig{\begin{tikzpicture}[
+  box/.style={draw, rounded corners=2pt, align=center, font=\small,
+    text width=29mm, minimum height=10mm},
+  flow/.style={-{Stealth[length=2mm]}, thick}
+]
+\node[box] (pos) at (0,1.25) {$A=2,\ r=1.4$};
+\node[box] (posclip) at (4.0,1.25) {$\bar r=1.2$};
+\node[box] (posterm) at (8.0,1.25) {$\min(2.8,2.4)=2.4$};
+\node[box] (neg) at (0,-1.25) {$A=-2,\ r=0.6$};
+\node[box] (negclip) at (4.0,-1.25) {$\bar r=0.8$};
+\node[box] (negterm) at (8.0,-1.25) {$\min(-1.2,-1.6)=-1.6$};
+\draw[flow] (pos) -- (posclip);
+\draw[flow] (posclip) -- (posterm);
+\draw[flow] (neg) -- (negclip);
+\draw[flow] (negclip) -- (negterm);
+\end{tikzpicture}}
+
+\p{With #{\epsilon=0.2}, write
+#{\bar r=\operatorname{clip}(r,0.8,1.2)} and
+#{L(r,A)=\min(rA,\bar rA)}. For positive advantage and #{r=1.4}, the gain is
+capped at #{2.4}. For negative advantage and #{r=0.6}, the clipped term
+#{-1.6} is smaller than #{-1.2}, so the objective retains the penalty.}
+
+\p{The pointwise surrogate comes from
+\citet{Section 3}{schulman2017proximal}. The two sign cases check only its
+arithmetic; they provide no monotone-improvement result for a neural policy
+or finite minibatch.}

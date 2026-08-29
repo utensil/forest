@@ -1,0 +1,29 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Definition}
+\title{Sequence packing and document mask}
+\tag{ftip}
+\tag{pretraining}
+
+\p{A \newvocab{packed training record} is a tuple
+#{\zeta=(x,m,c,M^{\mathrm{doc}})}. It places tokenized segments
+#{x^{(1)},\ldots,x^{(r)}} into the length-#{T} token array #{x}, records a
+prediction mask #{m}, and records a segment identifier
+#{c_t\in\{0,1,\ldots,r\}} at each position. The value #{c_t=0} denotes
+padding. Its \newvocab{document mask} is
+##{
+M^{\mathrm{doc}}_{ts}=
+\begin{cases}
+0,&c_t=c_s\ne0\text{ and }s\leq t,\\
+-\infty,&\text{otherwise}.
+\end{cases}
+}
+Replacing the causal mask in \ref{ftip-000S} by this mask prevents one packed
+document from attending to another. We write #{x_t(\zeta)}, #{m_t(\zeta)},
+and #{M^{\mathrm{doc}}(\zeta)} for the corresponding fields.}
+
+\p{The prediction mask #{m_t(\zeta)} from \ref{ftip-0015} is one only at
+positions whose target token is retained for training. Padding, a segment's
+first token when no predecessor is present, and any deliberately excluded
+control token receive mask value zero.}

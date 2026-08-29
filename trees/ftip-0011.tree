@@ -1,0 +1,23 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\refdeft{Layer normalization}{sec. 3}{ba2016layer}{
+\p{For the residual width #{d} of \ref{ftip-000L}, a declared note-local
+numerical stabilizer #{\varepsilon_{\mathrm{LN}}>0}, and
+#{z=(z_1,\ldots,z_d)\in\mathbb R^d}, define
+#{\mu(z)=d^{-1}\sum_i z_i} and
+#{\sigma^2(z)=d^{-1}\sum_i(z_i-\mu(z))^2}. With learned vectors
+#{\gamma,\beta\in\mathbb R^d}, \newvocab{layer normalization} is
+##{
+\operatorname{LN}(z)
+=\gamma\odot\frac{z-\mu(z)\mathbf 1}
+{\sqrt{\sigma^2(z)+\varepsilon_{\mathrm{LN}}}}+\beta.
+}
+It is applied independently to the hidden vector at each token position. The
+declared stabilizer makes the numerical operator total on #{\mathbb R^d}; the
+unstabilized expression is recovered where #{\sigma^2(z)>0} by setting
+#{\varepsilon_{\mathrm{LN}}=0}.}
+}
+
+\tag{ftip}
+\tag{architecture}

@@ -1,0 +1,25 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\tag{ftip}
+\tag{instruction-tuning}
+\tag{post-training}
+
+\card{Remark}{What instruction tuning changes and leaves open}{
+\p{We synthesize the instruction-tuning stage as a change in conditional
+likelihood under a declared demonstration distribution. It can teach response
+format, task interpretation, and behavior represented by the targets, but the
+training loss alone does not identify which of those effects caused an
+independent evaluation gain.}
+
+\p{Ouyang et al. report supervised fine-tuning and its optimization
+settings in \citet{Section 3.5 and Appendix C.1}{ouyang2022training}. They do
+not define the exact mask and weighting convention displayed in
+\ref{ftip-002F}; that formula is the local objective used here.}
+
+\p{The stage also leaves several questions open. A demonstration does not
+compare its target with alternatives, a teacher may transmit errors or hidden
+information, and low loss on the collected prompts need not imply transfer to
+a new task law. Preference acquisition introduces a different observation:
+which response a judge selected from a displayed pair.}
+}

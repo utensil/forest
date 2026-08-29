@@ -1,0 +1,18 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\refdeft{Parameter update}{Algorithm 1}{kingma2015adam}{
+\p{A \newvocab{parameter update rule} is a specified map #{U_k} that takes
+the current parameters #{\theta_k}, optimizer state #{s_k}, gradient estimate
+#{g_k}, and scheduled hyperparameters #{\eta_k}, and returns
+##{
+(\theta_{k+1},s_{k+1})
+=U_k(\theta_k,s_k,g_k,\eta_k).
+}
+The learning rate, momentum coefficients, numerical stabilizers, clipping, and
+weight decay belong to #{\eta_k} or to the declared form of #{U_k}; they are
+not determined by the loss alone.}
+}
+
+\tag{ftip}
+\tag{optimization}

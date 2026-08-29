@@ -1,0 +1,38 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Example}
+\title{Return and advantage on a three-step episode}
+\tag{ftip}
+\tag{reinforcement-learning}
+\tag{credit-assignment}
+
+\p{On a three-step episode, a discounted return and a baseline-relative
+advantage can be computed separately.}
+
+\tikzfig{\begin{tikzpicture}[
+  state/.style={draw, rounded corners=2pt, align=center, font=\small,
+    text width=18mm, minimum height=9mm},
+  flow/.style={-{Stealth[length=2mm]}, thick}
+]
+\node[state] (s0) at (0,0) {$s_0$};
+\node[state] (s1) at (2.7,0) {$s_1$};
+\node[state] (s2) at (5.4,0) {$s_2$};
+\node[state] (s3) at (8.1,0) {terminal};
+\draw[flow] (s0) -- node[font=\scriptsize, fill=white] {$r_1=0$} (s1);
+\draw[flow] (s1) -- node[font=\scriptsize, fill=white] {$r_2=1$} (s2);
+\draw[flow] (s2) -- node[font=\scriptsize, fill=white] {$r_3=2$} (s3);
+\end{tikzpicture}}
+
+\p{Take discount #{\gamma=1/2}. The return attached to the first action is
+##{
+  G_0=r_1+\gamma r_2+\gamma^2 r_3
+     =0+\tfrac12+\tfrac14\cdot2=1.
+}
+If the declared baseline is #{V(s_0)=0.4}, then the corresponding advantage
+estimate is #{\widehat A_0=G_0-V(s_0)=0.6}.}
+
+\p{The calculation instantiates the return and advantage in
+\ref{ftip-0030} and \ref{ftip-0032}. It illustrates one baseline choice.
+Low variance and correct attribution of terminal reward to an internal
+decision require additional assumptions or evidence.}

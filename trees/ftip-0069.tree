@@ -1,0 +1,13 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\refcardt{Definition}{checkpoint-trajectory extrapolation}{Sections 4 and 5.1}{chen2026lowrank}{
+\p{NExt forms global and local parameter differences from saved low-rank
+adaptation (LoRA) checkpoints, approximates each matrix difference by leading
+singular factors, and trains a predictor on those representations to estimate a
+future difference. It adds a scaled predicted difference to a checkpoint; the
+reported experiments then resume RLVR updates.}
+
+\p{The construction replaces some realized rollout-and-update steps with a
+learned parameter jump. It does not introduce a new verifier signal.}
+}

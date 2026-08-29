@@ -1,0 +1,18 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\tag{ftip}
+\tag{rlhf}
+\tag{alignment}
+
+\card{Remark}{Reward modeling, alignment criteria, and policy optimization}{
+\p{We synthesize three logically separate choices in the RLHF pipeline. The
+comparison data specify which judgments were observed; the reward model
+specifies how those observations are represented and generalized; the policy
+optimizer specifies how sampled actions change the model.}
+
+\p{An alignment criterion lies outside this chain unless it is identified with
+the training reward by assumption. A reward model can predict its held-out
+comparisons while failing under policy-induced distribution shift, and PPO can
+increase the learned reward while independent utility stays fixed or falls.}
+}

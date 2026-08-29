@@ -1,0 +1,17 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Definition}
+\title{Context-window sampler}
+\tag{ftip}
+\tag{pretraining}
+
+\p{Fix the context length #{T} from \ref{ftip-0015}. A
+\newvocab{context-window sampler} draws cleaned text from the law described in
+\ref{ftip-0018} and tokenizes it with \ref{ftip-000E}. It then chooses a
+declared offset and returns a length-#{T} token sequence #{x_{1:T}} together
+with metadata that identifies document boundaries.}
+
+\p{If fewer than #{T} tokens remain, the sampler must specify whether it pads,
+drops the suffix, or joins another document. These choices change both the
+distribution of contexts and the prediction mask.}

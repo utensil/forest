@@ -1,0 +1,17 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\tag{ftip}
+\tag{dapo}
+\tag{sampling}
+
+\refcardt{Definition}{Dynamic sampling}{Section 3.2}{yu2025dapo}{
+\p{DAPO dynamic sampling filters prompt groups whose sampled responses all
+receive the same reward and continues sampling until the training batch
+contains the declared number of groups with nonzero reward variation.}
+
+\p{The intervention changes the distribution of prompts and rollouts entering
+the update. It can prevent zero-advantage groups from consuming an optimizer
+batch, but the retained batch is no longer an unconditioned sample from the
+original prompt law.}
+}

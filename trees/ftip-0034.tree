@@ -1,0 +1,19 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\tag{ftip}
+\tag{reinforcement-learning}
+\tag{policy}
+
+\refdeft{Behavior, current, and reference policies}{Sections 2--3}{schulman2017proximal}{
+\p{The \newvocab{behavior policy} #{\pi_b} is the policy that generated a
+sampled action. The \newvocab{current policy} #{\pi_\theta} is the policy whose
+parameters are being optimized. Proximal policy optimization (PPO) collects a
+batch under an old policy and
+then compares candidate current policies with that data.}
+
+\p{A \newvocab{reference policy} #{\pi_{\mathrm{ref}}} is instead held fixed
+to define a regularizer or preference objective; see
+\citet{Section 3, equation (3)}{rafailov2023direct}. It need not equal the
+behavior policy that generated a later rollout.}
+}

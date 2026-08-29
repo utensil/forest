@@ -1,0 +1,23 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Remark}
+\title{Where positional information enters}
+\tag{ftip}
+\tag{architecture}
+
+\p{\ref{ftip-000N} covers only mechanisms acting on the hidden vector at the
+embedding stage. The original Transformer adds a fixed or learned vector
+#{p_t} to the token embedding, so #{r_t(z)=z+p_t}; see
+\citet{§3.5}{vaswani2017attention}.}
+
+\p{Relative-bias methods instead alter an attention score as a function of
+the displacement #{t-s}. ALiBi gives one such construction in
+\citet{§3}{press2021train}.}
+
+\p{Rotary position embedding applies position-indexed rotations to queries and
+keys rather than adding a vector to the residual stream; see RoFormer,
+Section 3.2, equations (14)--(16)
+\citelink{https://arxiv.org/abs/2104.09864}. These mechanisms are not
+interchangeable choices of one tensor: they act at different points in the
+computation, so a model specification must name the mechanism and placement.}

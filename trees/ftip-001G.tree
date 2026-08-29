@@ -1,0 +1,21 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Definition}
+\title{Minibatch gradient estimator}
+\tag{ftip}
+\tag{optimization}
+
+\p{At update #{k}, let #{\mathcal B_k} be the minibatch named in
+\ref{ftip-0015}, and let
+#{N_k=\sum_{\zeta\in\mathcal B_k}\sum_{t=2}^{T}m_t(\zeta)} be its number of
+predicted tokens. For #{N_k>0}, the \newvocab{minibatch gradient estimator}
+is
+##{
+g_k=\frac1{N_k}
+\sum_{\zeta\in\mathcal B_k}\sum_{t=2}^{T}
+\nabla_\theta\ell_t(\theta_k;\zeta),
+}
+where #{\ell_t} is defined in \ref{ftip-001B}. Whether #{g_k} is unbiased for
+the gradient of \ref{ftip-001C} depends on the window sampler and minibatch
+weighting. Other sampling schemes require their own bias statement.}

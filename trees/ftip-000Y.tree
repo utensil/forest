@@ -1,0 +1,18 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Remark}
+\title{Dense and routed feed-forward computation}
+\tag{ftip}
+\tag{architecture}
+
+\p{We formulate \ref{ftip-000X} as the minimal top-#{k} routing interface
+needed later. The dense sublayer in \ref{ftip-000W} evaluates one learned map
+for every token. The sparsely gated construction of Shazeer et al., Section 2,
+selects among multiple experts and introduces an additional routing and
+load-balancing problem
+\citelink{https://arxiv.org/abs/1701.06538}.}
+
+\p{Parameter count, active parameter count, and executed operations therefore
+need not agree. A post-training comparison involving routed models must state
+which quantity is held fixed and whether the router itself is updated.}

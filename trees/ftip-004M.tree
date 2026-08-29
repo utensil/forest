@@ -1,0 +1,40 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Example}
+\title{One response-level RLVR round}
+\tag{ftip}
+\tag{rlvr}
+\tag{post-training}
+
+\p{Three sampled responses pass through exact verification, group credit,
+and a proposed update in one finite RLVR round.}
+
+\tikzfig{\begin{tikzpicture}[
+  box/.style={draw, rounded corners=2pt, align=center, font=\small,
+    text width=27mm, minimum height=10mm},
+  flow/.style={-{Stealth[length=2mm]}, thick}
+]
+\node[box] (task) at (0,1.35) {prompt\\$2+2=?$};
+\node[box] (roll) at (4.0,1.35) {responses\\$(4,5,4)$};
+\node[box] (verify) at (8.0,1.35) {rewards\\$(1,0,1)$};
+\node[box] (credit) at (8.0,-1.25) {centered credit\\$(1/3,-2/3,1/3)$};
+\node[box] (objective) at (4.0,-1.25) {policy\\objective};
+\node[box] (proposal) at (0,-1.25) {proposed\\update};
+\draw[flow] (task) -- node[font=\scriptsize, fill=white] {sample} (roll);
+\draw[flow] (roll) -- node[font=\scriptsize, fill=white] {check} (verify);
+\draw[flow] (verify) -- (credit);
+\draw[flow] (credit) -- (objective);
+\draw[flow] (objective) -- (proposal);
+\end{tikzpicture}}
+
+\p{The exact-answer checker gives mean reward #{\bar r=2/3}. Using the
+declared unnormalized centered credit #{\widehat A_i=r_i-\bar r} yields
+#{(1/3,-2/3,1/3)}. An optimizer may use these numbers to propose a parameter
+change, but the tuple itself is not yet an accepted update.}
+
+\p{The RLVR protocol is \ref{ftip-0044}. Its group-credit objects are
+\ref{ftip-004B}, \ref{ftip-004C}, and \ref{ftip-004D}. Together they
+specialize to this finite order of operations. Centered, unscaled credit and
+an exact-answer checker are local choices rather than requirements on other
+RLVR algorithms.}

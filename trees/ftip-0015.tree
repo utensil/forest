@@ -1,0 +1,23 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Notation}
+\title{Pretraining data, masks, parameters, and updates}
+\tag{ftip}
+\tag{pretraining}
+
+\p{Let #{\mathcal D_{\rm doc}} be a measurable document space and
+#{\mathcal S} a finite set of data sources. Source #{s\in\mathcal S}
+has a document law #{Q_s} on #{\mathcal D_{\rm doc}}, and mixture weights
+#{\alpha\in\Delta(\mathcal S)} use the simplex notation of
+\ref{ftip-000A}. Let #{T} be the context length. A token window is
+#{x_{1:T}\in\mathcal V^T}; a prediction mask is
+#{m_{1:T}\in\{0,1\}^T}, where #{m_t=1} means that the token at position #{t}
+contributes to the loss.}
+
+\p{Let #{\Theta} be the parameter set used by the next-token law in
+\ref{ftip-000H}. The model parameters at optimizer update
+#{k\in\{0,1,\ldots,K\}} are #{\theta_k\in\Theta}; #{\theta_0} is the initialization and #{\theta_K} the
+stopped parameter value. A minibatch at update #{k} is #{\mathcal B_k}.
+Random document draws, window offsets, masks, batch order, and optimizer noise
+are part of the training run even when the notation suppresses them.}

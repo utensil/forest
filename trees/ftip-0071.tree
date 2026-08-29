@@ -1,0 +1,20 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Definition}
+\title{Deduplication operator}
+\tag{ftip}
+\tag{pretraining}
+\tag{data}
+
+\p{Let #{\mathcal M_{\rm doc}} be the set of finite multisets of documents.
+A \newvocab{deduplication operator} is a map
+##{
+D:\mathcal M_{\rm doc}\longrightarrow\mathcal M_{\rm doc}
+}
+that selects retained representatives according to a declared duplicate
+relation. The relation may compare complete documents or spans.}
+
+\p{The declaration includes normalization, similarity threshold, cluster
+construction, and representative tie-breaking. Different choices can remove
+different training events even when they report the same duplicate rate.}

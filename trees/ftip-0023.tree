@@ -1,0 +1,21 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Definition}
+\title{Non-anticipating policy}
+\tag{ftip}
+\tag{policy}
+
+\p{A \newvocab{non-anticipating policy} is a family of probability kernels
+##{
+\pi_t(da\mid H_t),
+\qquad t=0,1,\ldots,T_{\max}-1,
+}
+from public histories in \ref{ftip-0021} to the action space
+#{\mathcal A}. At time #{t}, the action may depend on #{H_t} and fresh policy
+randomness, but not on a later observation or an unobserved state.}
+
+\p{A decoder-only language model becomes such a policy only after an inference
+protocol serializes #{H_t} into tokens, decodes tokens, and parses them as an
+action. The next-token law in \ref{ftip-000H} alone does not specify those
+maps.}

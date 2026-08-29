@@ -1,0 +1,23 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Definition}
+\title{Token negative log-likelihood}
+\tag{ftip}
+\tag{pretraining}
+
+\p{Let #{\zeta=(x,m,c,M^{\mathrm{doc}})} be a packed training record from
+\ref{ftip-001A}. Write
+#{\pi_{\theta,M^{\mathrm{doc}}(\zeta)}(\,\cdot\mid x_{<t}(\zeta))} for the next-token law of
+\ref{ftip-000H} when every decoder attention layer uses the declared document
+mask. For a predicted position #{t\geq2}, its
+\newvocab{masked token negative log-likelihood} is
+##{
+\ell_t(\theta;\zeta)
+=-m_t(\zeta)\log
+\pi_{\theta,M^{\mathrm{doc}}(\zeta)}
+\left(x_t(\zeta)\mid x_{<t}(\zeta)\right),
+}
+A masked position has zero contribution; an unmasked position penalizes the
+log probability computed under the same segment boundaries that defined the
+packed example.}

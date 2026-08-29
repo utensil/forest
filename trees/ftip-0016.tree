@@ -1,0 +1,20 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Definition}
+\title{Pretraining source mixture}
+\tag{ftip}
+\tag{pretraining}
+
+\p{Using \ref{ftip-0015}, a \newvocab{pretraining source mixture} is the
+pair #{((Q_s)_{s\in\mathcal S},\alpha)}. It induces the document law
+##{
+Q_{\alpha}(A)=\sum_{s\in\mathcal S}\alpha_s Q_s(A)
+}
+for every document event #{A}: first sample a source #{s} with probability
+#{\alpha_s}, then sample a document from #{Q_s}.}
+
+\p{The mixture weights specify sampling frequency. They need not equal the
+fraction of bytes stored in each source. Resampling, epoch boundaries, or
+temperature-based weights must therefore be recorded as part of #{\alpha} or
+its schedule.}

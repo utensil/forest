@@ -1,0 +1,21 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Remark}
+\title{Public task data and evaluator-only information}
+\tag{ftip}
+\tag{evaluation}
+
+\p{We formulate an information boundary between what is supplied to the
+inference protocol and what is reserved for evaluation. The public instance
+#{x} may include a
+prompt, tools, and a response schema. Evaluator-only information may include a
+reference answer, hidden tests, a simulator state, or the evaluator seed
+#{\omega}. The protocol in \ref{ftip-001R} receives the former and not the
+latter.}
+
+\p{This boundary makes leakage and reward hacking stateable. If evaluator-only
+information influences training, decoding, or candidate selection, the
+experiment no longer measures performance under the declared information
+interface. A theorem that assumes an independent evaluator must name the
+sigma-field or finite data record from which the protocol is excluded.}

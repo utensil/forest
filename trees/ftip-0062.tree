@@ -1,0 +1,24 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Definition}
+\title{Global policy entropy}
+\tag{ftip}
+\tag{entropy}
+
+\p{Fix a finite action space, a finite horizon #{T}, and a declared
+distribution #{\mu_t} over public histories at each position. The
+\strong{global policy entropy} is the weighted average}
+
+##{
+ H_{\rm global}(\pi)
+ =\frac1T\sum_{t=0}^{T-1}
+ \mathbb E_{\mathsf H_t\sim\mu_t}
+ \left[-\sum_a\pi(a\mid\mathsf H_t)
+ \log\pi(a\mid\mathsf H_t)\right].
+}
+
+\p{The history distribution and action alphabet are part of the statistic.}
+
+\p{We use the convention #{0\log0=0} in this and the following
+position-entropy formula.}

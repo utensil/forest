@@ -1,0 +1,25 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\tag{ftip}
+\tag{dpo}
+\tag{loss}
+
+\refdeft{Direct Preference Optimization loss}{Section 4, equation (7)}{rafailov2023direct}{
+\p{For comparison observations from #{\mathcal D_{\mathrm{pref}}}, the
+\newvocab{Direct Preference Optimization loss} is}
+
+##{
+ L_{\mathrm{DPO}}(\theta)
+ =-\mathbb E_{(x,y^+,y^-,j)\sim\mathcal D_{\mathrm{pref}}}
+ \left[
+ \log\sigma\left(\beta\,
+ \Delta_\theta(x,y^+,y^-)
+ \right)
+ \right].
+}
+
+\p{The empirical loss is evaluated on a fixed comparison dataset. The
+temperature, reference policy, record weights, and handling of ties or
+abstentions are part of the training specification.}
+}

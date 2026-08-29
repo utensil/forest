@@ -1,0 +1,31 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Convention}
+\title{Capability claims, procedures, evaluations, and resource bounds}
+\tag{ftip}
+\tag{evaluation}
+
+\p{A \newvocab{capability claim} in this note names four objects:}
+
+\ol{
+  \li{a starting model artifact #{M_0};}
+  \li{a procedure #{A} that may train or query it;}
+  \li{an evaluation rule #{E}; and}
+  \li{a resource bound #{b}.}
+}
+
+\p{The claim concerns the observable outcome of running #{A} from #{M_0} and
+judging the result with #{E} while respecting #{b}. It is not a claim about an
+unbounded or unspecified model.}
+
+\p{The bound #{b} may contain several coordinates, such as training tokens,
+rollouts, accelerator work, wall-clock time, tool calls, or evaluation-time
+samples. Coordinates with different units remain separate unless a declared
+cost model converts them to a common unit.}
+
+\p{This convention follows the experimental separation between training and
+inference procedures used in \citet{secs. 3--4}{shao2024deepseekmath} and
+\citet{secs. 2--3}{guo2025deepseek}. Those studies motivate the objects in a
+claim; they do not imply that every capability is summarized by one benchmark
+or one scalar budget.}

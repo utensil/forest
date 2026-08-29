@@ -1,0 +1,22 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Definition}
+\title{Token-position entropy}
+\tag{ftip}
+\tag{entropy}
+
+\p{Let #{T_{\rm tok}} be the random number of generated tokens. For a
+one-based token position #{t} satisfying #{\Pr(T_{\rm tok}\geq t)>0}, condition
+on #{T_{\rm tok}\geq t} and let
+#{\xi_t} be the token. The \strong{token-position entropy} is}
+
+##{
+ H_t^{\rm pos}
+ =-\sum_{v\in\mathcal V}
+ \Pr(\xi_t=v\mid T_{\rm tok}\geq t)
+ \log\Pr(\xi_t=v\mid T_{\rm tok}\geq t).
+}
+
+\p{This is the entropy of a position marginal. It is generally different from
+the history-conditioned entropy averaged in \ref{ftip-0062}.}

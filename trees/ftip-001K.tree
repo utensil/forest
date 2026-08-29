@@ -1,0 +1,23 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Definition}
+\title{Base-model artifact}
+\tag{ftip}
+\tag{pretraining}
+
+\p{A \newvocab{base-model artifact} is an executable tuple
+##{
+M_0=(\tau,\delta,\mathsf{cfg},\theta_K,\mathsf{num}),
+}
+where #{\tau,\delta} are the tokenizer and detokenizer of
+\ref{ftip-000E}; #{\mathsf{cfg}} fixes the architecture of
+\ref{ftip-0012}; #{\theta_K} is the stopped pretraining checkpoint; and
+#{\mathsf{num}} fixes the numerical and inference conventions required to
+evaluate its next-token law.}
+
+\p{The tokenizer model is part of the executable system by
+\ref{ftip-000E}. A weight file without its vocabulary, architecture
+configuration, or output convention does not determine the law
+#{\pi_{\theta_K}} in \ref{ftip-000H}. Training-data and optimizer provenance
+may accompany the artifact, but they are not runtime inputs.}

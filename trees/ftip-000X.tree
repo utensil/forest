@@ -1,0 +1,22 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Definition}
+\title{Sparse mixture-of-experts routing}
+\tag{ftip}
+\tag{architecture}
+
+\p{Let #{J\geq1} and #{1\leq k\leq J}. Let
+#{F_1,\ldots,F_J:\mathbb R^d\to\mathbb R^d} be feed-forward experts and let
+#{g:\mathbb R^d\to\mathbb R^J} be a router. For a hidden
+vector #{z}, let #{S_k(z)} be the indices of the #{k} largest coordinates of
+#{g(z)}, breaking equal scores by a fixed total order on expert indices. A
+\newvocab{sparse mixture-of-experts layer} returns
+##{
+F_{\mathrm{MoE}}(z)
+=\sum_{j\in S_k(z)}\alpha_j(z)F_j(z),
+\qquad
+\alpha_j(z)=
+\frac{\exp g_j(z)}{\sum_{i\in S_k(z)}\exp g_i(z)}.
+}
+Only the selected experts are evaluated for that token.}

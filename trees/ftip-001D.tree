@@ -1,0 +1,43 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Example}
+\title{Packing two documents without cross-document attention}
+\tag{ftip}
+\tag{pretraining}
+\tag{attention}
+
+\p{Packing two short documents into one row exposes the additional mask
+needed to prevent cross-document attention.}
+
+\tikzfig{\begin{tikzpicture}[
+  box/.style={draw, rounded corners=2pt, align=center, font=\small,
+    text width=28mm, minimum height=10mm},
+  flow/.style={-{Stealth[length=2mm]}, thick}
+]
+\node[box] (a) at (0,0) {document $A$\\$a_1\to a_2$};
+\node[box] (pack) at (4.0,0) {packed row\\$a_1,a_2\mid b_1,b_2,b_3$};
+\node[box] (b) at (8.0,0) {document $B$\\$b_1\to b_2\to b_3$};
+\draw[flow] (a) -- (pack);
+\draw[flow] (b) -- (pack);
+\end{tikzpicture}}
+
+\p{Index the packed row by #{1,\ldots,5}. Set #{M_{ij}=0} only when tokens
+#{i,j} belong to the same document and #{j\leq i}; otherwise set
+#{M_{ij}=-\infty}. Then
+##{
+M=\left[\begin{smallmatrix}
+0&-\infty&-\infty&-\infty&-\infty\\
+0&0&-\infty&-\infty&-\infty\\
+-\infty&-\infty&0&-\infty&-\infty\\
+-\infty&-\infty&0&0&-\infty\\
+-\infty&-\infty&0&0&0
+\end{smallmatrix}\right].
+}
+In particular, position #{b_3} can inspect #{b_1,b_2,b_3} but not
+#{a_1,a_2}.}
+
+\p{The within-document triangle instantiates the causal mask in
+\ref{ftip-000S}. The block boundary instantiates the packing convention in
+\ref{ftip-001A}. Document-isolated attention is the declared convention in
+this packed row, not a universal description of pretraining systems.}

@@ -1,0 +1,36 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Example}
+\title{Selecting a historical rollout under a current policy stamp}
+\tag{ftip}
+\tag{replay}
+\tag{provenance}
+
+\p{Reusing one historical rollout recomputes current-policy annotations
+without mutating the stored record.}
+
+\tikzfig{\begin{tikzpicture}[
+  box/.style={draw, rounded corners=2pt, align=center, font=\small,
+    text width=28mm, minimum height=10mm},
+  flow/.style={-{Stealth[length=2mm]}, thick}
+]
+\node[box] (record) at (0,1.25) {record $R$\\behaviour prob. $0.25$};
+\node[box] (stamp) at (0,-1.25) {current stamp\\prob. $0.50$};
+\node[box] (select) at (4.0,0) {selector\\chooses $R$};
+\node[box] (attempt) at (8.0,0) {attempt annotation\\ratio $2$, age $3$, uses $2$};
+\draw[flow] (record) -- (select);
+\draw[flow] (stamp) -- (select);
+\draw[flow] (select) -- (attempt);
+\end{tikzpicture}}
+
+\p{Let the stored record be #{R=(q,\nu_b,\tau,e)} and suppose its behaviour
+policy assigned the recorded action probability #{0.25}. Under the current
+stamp the same action has probability #{0.50}, so this attempt records
+importance ratio #{0.50/0.25=2}. Its age #{3} and prior-use count #{2} are
+also attempt-time metadata; none of these three values rewrites #{R}.}
+
+\p{The behaviour/current-policy distinction is required by the reuse
+analysis in \citet{Section 3}{miao2026when}. The finite annotation makes
+provenance explicit. Statistical safety of ratio #{2}, age #{3}, or a second
+reuse is left undecided.}

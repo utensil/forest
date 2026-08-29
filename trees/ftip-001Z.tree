@@ -1,0 +1,22 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Definition}
+\title{Transition-observation kernel}
+\tag{ftip}
+\tag{agent}
+
+\p{A \newvocab{transition-observation kernel} at time #{t} is a probability
+kernel
+##{
+K_t(ds_{t+1},do_{t+1}\mid s_t,a_t)
+}
+from the current hidden state and action to the next hidden state and public
+observation. After #{A_t=a_t}, the environment draws
+#{(S_{t+1},O_{t+1})} from this kernel.}
+
+\p{The factorization
+#{K_t(ds',do'\mid s,a)=P_t(ds'\mid s,a)\,Q_t(do'\mid s',a)} for declared
+kernels #{P_t} and #{Q_t} recovers the
+usual separate state-transition and observation kernels when such a
+factorization is declared. The joint-kernel form does not assume it.}

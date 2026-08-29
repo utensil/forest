@@ -1,0 +1,22 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\refdeft{Autoregressive continuation law}{sec. 3, Sequence modelling}{phuong2022formal}{
+\p{Fix the next-token law of \ref{ftip-000H}, a prompt
+#{x\in\mathcal V^*}, and a continuation #{y_{1:m}\in\mathcal V^m}. Its
+\newvocab{autoregressive continuation probability} is
+##{
+P_\theta(y_{1:m}\mid x)
+=\prod_{t=1}^{m}
+\pi_\theta\left(y_t\mid x y_{<t}\right).
+}
+Each factor conditions only on the prompt and earlier continuation tokens.}
+
+\p{If generation stops on #{\mathtt{eos}}, the law of a completed continuation
+is restricted to the sequences specified in \ref{ftip-000G}. If generation
+instead stops at a length limit, the terminal event and its probability must be
+recorded separately.}
+}
+
+\tag{ftip}
+\tag{language-model}

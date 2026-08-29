@@ -1,0 +1,26 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Definition}
+\title{Action serializer}
+\tag{ftip}
+\tag{agent}
+\tag{action}
+
+\p{Fix the token vocabulary and strings of \ref{ftip-000G}, and the action
+space #{\mathcal A} from the interactive task realization in
+\ref{ftip-006T}. An
+\strong{action serializer} is a pair of partial maps}
+
+##{
+ \operatorname{enc}:\mathcal A\rightharpoonup\mathcal V^*,
+ \qquad
+ \operatorname{dec}:\mathcal V^*\rightharpoonup\mathcal A.
+}
+
+\p{The encoder gives an action a textual representation. The decoder
+recognizes a completed representation and returns the executable action. A
+string outside the decoder's domain is malformed; it is not silently promoted
+to an environment action. For every action in the encoder's domain, the
+declared pair satisfies
+#{\operatorname{dec}(\operatorname{enc}(a))=a}.}

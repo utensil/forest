@@ -1,0 +1,23 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\tag{ftip}
+\tag{preference}
+\tag{probability}
+
+\refdeft{Bradley--Terry comparison law}{Page 325, equation (1)}{bradley1952rank}{
+\p{Given scalar scores for two alternatives, the \newvocab{Bradley--Terry
+comparison law} assigns the probability}
+
+##{
+ \Pr_\phi(y^+\succ y^-\mid x)
+ =\frac{\exp r_\phi(x,y^+)}
+        {\exp r_\phi(x,y^+)+\exp r_\phi(x,y^-)}
+ =\sigma\left(r_\phi(x,y^+)-r_\phi(x,y^-)\right),
+}
+
+\p{where #{\sigma(a)=(1+\exp(-a))^{-1}}. Conditioning the scores on a
+language-model prompt is the contextual specialization used in modern reward
+modeling; see also
+\citet{Section 3, equation (1)}{rafailov2023direct}.}
+}

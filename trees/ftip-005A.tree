@@ -1,0 +1,13 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\refcardt{Definition}{dynamic gradient gate}{Section 5 and Algorithm 1}{miao2026when}{
+\p{Dynamic gradient gating computes the language-model-head gradient before
+the optimizer step. It compares the change in squared Frobenius norm with a
+trailing-window Z-score. When the score crosses its threshold after a reused
+update, the method discards that gradient and returns to fresh rollouts.}
+
+\p{The gate is an empirical stopping rule for reuse. The source does not prove
+that its Z-score is a calibrated divergence test or a general safety
+certificate.}
+}
