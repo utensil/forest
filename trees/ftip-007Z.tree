@@ -17,6 +17,17 @@ advantage, and
 r_i=\frac{\pi_\theta(a_i\mid h_{L,i})}
 {\pi_{\rm old}(a_i\mid h_{L,i})}.
 }
+Treat #{\widehat A_i} and the behavior-policy denominator as fixed during
+this token update. Let #{e_{a_i}\in\mathbb R^{|\mathcal V|}} be the standard
+basis vector for the sampled token, and define the active-token objective and
+its two weight gradients by
+##{
+\mathcal L_i(\theta)=r_i(\theta)\widehat A_i,
+\qquad
+G_i^{\rm lm}=\nabla_{W_{\rm lm}}\mathcal L_i,
+\qquad
+G_i^{\rm int}=\nabla_{W_{\rm int}}\mathcal L_i.
+}
 Write #{h_{L,i}} for the hidden state entering the language-model head,
 #{x_i^{\rm int}} for the input to an intermediate linear layer, and
 #{J_i=\partial z_i/\partial y_i} for the Jacobian from that layer's output to
