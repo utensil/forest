@@ -1,0 +1,33 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Remark}
+\title{Proof dependencies of the noiseless lower bound}
+\tag{ftip}
+\tag{preference-data}
+\tag{proof-route}
+
+\p{Appendix A.1 of \citef{zhao2025limits} constructs one preference profile
+that is compatible with many cardinal utilities. Its proof then chooses a
+utility after seeing the algorithm's routing behavior and compares that
+behavior with an attainable deterministic route.}
+
+\tikzfig{\begin{tikzpicture}[
+ box/.style={draw,rounded corners,align=center,text width=27mm,
+ minimum height=9mm,font=\small},
+ arr/.style={->,>=stealth,semithick},
+ lab/.style={font=\scriptsize,fill=white,inner sep=1pt}
+]
+\node[box] (l) at (-3.5,1.25) {Lemma A.2\\routing partition};
+\node[box] (c) at (0,1.25) {Claim A.3 and\\Fact A.4};
+\node[box] (u) at (-1.75,-1.25) {adversarial bounded\\utility};
+\node[box] (t) at (2.8,-1.25) {Theorem A.1\\distortion};
+\draw[arr] (l) -- (c);
+\draw[arr] (l) -- (u);
+\draw[arr] (c) -- (u);
+\draw[arr] (u) -- node[lab,above]{compare routes} (t);
+\end{tikzpicture}}
+
+\p{This diagram records the source proof route; it is not a new proof. In
+particular, the adversarial choice of utility is essential to the theorem's
+worst-case quantifiers.}

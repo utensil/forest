@@ -1,0 +1,33 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Definition}
+\title{Linear-score Bradley--Terry feedback}
+\tag{ftip}
+\tag{preference-data}
+\tag{bradley-terry}
+
+\p{The \newvocab{linear-score link} sets}
+
+##{
+ a_{\xi,c}=u(\xi,c(\xi)),
+ \qquad
+ \Pr(c_i\succ_{\xi}c_j)
+ =\frac{u(\xi,c_i(\xi))}
+ {u(\xi,c_i(\xi))+u(\xi,c_j(\xi))}.
+}
+
+\p{Write #{p^u_{\xi,ij}} for the displayed probability and define the complete
+pairwise-probability profile}
+
+##{
+ P_u^{\rm lin}
+ =\left(p^u_{\xi,ij}\right)_{\xi\in Q,\,c_i\neq c_j\in C_0}.
+}
+
+\p{This requires nonnegative utilities and a positive denominator for each
+queried pair. A linear-score algorithm #{\mathcal A_{\rm lin}} takes
+#{(\mathfrak m_0,P_u^{\rm lin})} as input and returns
+#{\mathfrak m_{\mathcal A_{\rm lin}}(u)}. The following lower bound concerns
+this specific link; it is not a lower bound for every stochastic preference
+model.}

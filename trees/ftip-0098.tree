@@ -1,0 +1,28 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Definition}
+\title{Borda count}
+\tag{ftip}
+\tag{preference-data}
+\tag{social-choice}
+
+\p{Let #{m=|C_0|}, and suppose each #{\succ_{\xi,u}} is a strict total order
+on #{C_0}. If #{\operatorname{rank}_{\succ_{\xi,u}}(c)} places the most
+preferred circuit at rank one, its \newvocab{Borda score} is}
+
+##{
+ B_{\xi}(c)=m-\operatorname{rank}_{\succ_{\xi,u}}(c).
+}
+
+\p{The \newvocab{Borda-count choice} is any circuit in}
+
+##{
+ \operatorname*{arg\,max}_{c\in C_0}
+ \sum_{\xi\in Q}B_{\xi}(c).
+}
+
+\p{This reconstructs \citet{Definition 3.1}{zhao2025limits}. The source
+cites a prior equivalence between a standard RLHF model and Borda count; the
+definition here does not assert that every RLHF implementation is a Borda
+rule.}

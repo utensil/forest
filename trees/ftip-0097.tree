@@ -1,0 +1,29 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Definition}
+\title{Multiplicative post-training distortion}
+\tag{ftip}
+\tag{preference-data}
+\tag{distortion}
+
+\p{Let #{\mathcal B} be any post-training algorithm with output
+#{\mathfrak m_{\mathcal B}(u)} under the feedback law induced by #{u}. When the
+denominator is positive, define its \newvocab{multiplicative post-training
+distortion} by}
+
+##{
+ \operatorname{Dist}_u(\mathcal B;\mathfrak m_0)
+ =\frac{
+   \max_{\mathfrak m^*\in\mathcal M_{\rm det}(C_0)}U_u(\mathfrak m^*)
+ }{
+   U_u(\mathfrak m_{\mathcal B}(u))
+ }.
+}
+
+\p{If the numerator is positive and the denominator is zero, set the ratio
+to #{+\infty}. The source lower bounds construct bounded nonnegative utilities
+for which the comparison is well defined
+\citet{Equation (2) and Appendix A}{zhao2025limits}. Distortion measures loss
+relative to the declared comparator class; it is not an absolute capability
+score.}

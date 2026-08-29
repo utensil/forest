@@ -1,0 +1,30 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Remark}
+\title{A penalty coefficient is not a hard KL budget}
+\tag{ftip}
+\tag{alignment}
+\tag{optimization}
+
+\p{For fixed #{\beta}, the exponential tilt solves the penalized problem}
+
+##{
+ \max_{q\in\Delta(\mathcal Y)}
+ \left\{\mathbb E_q[r]
+ -\beta D_{\mathrm{KL}}(q\Vert p)\right\}
+}
+
+\p{under the conventions of \ref{ftip-008I}. This is not the same
+specification as choosing a number #{\kappa} and solving}
+
+##{
+ \max_q\mathbb E_q[r]
+ \quad\text{subject to}\quad
+ D_{\mathrm{KL}}(q\Vert p)\leq\kappa.
+}
+
+\p{A Lagrange multiplier can relate the two problems when the relevant
+duality and activity conditions hold. The coefficient #{\beta} alone does not
+declare a hard budget, and the identities \ref{ftip-008O}--\ref{ftip-008Q} do not
+supply those conditions.}

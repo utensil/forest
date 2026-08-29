@@ -1,0 +1,26 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Lemma}
+\title{Additive reward shifts leave the aligned law unchanged}
+\tag{ftip}
+\tag{alignment}
+\tag{reward}
+
+\p{For constants #{c,d\in\mathbb R},}
+
+##{
+ q_{r+c}=q_r,
+ \qquad
+ G_p(r+c;s+d)=G_p(r;s).
+}
+
+\proof{
+\p{The shifted weight is #{a_{r+c}=e^{c/\beta}a_r}, while its partition
+function is #{Z_{r+c}=e^{c/\beta}Z_r}; the common factor cancels in the
+aligned law. Adding #{d} to the evaluation reward adds #{d} to both
+expectations in the gain, so it also cancels.}}
+
+\p{\strong{Status: FTIP-proved finite lemma.} It records the same
+prompt-dependent additive non-identifiability that appears in the DPO
+reparameterization of \ref{ftip-003P}.}
