@@ -1,0 +1,27 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Definition}
+\title{Base, SFT-positive, and SFT-negative starting-policy triple}
+\tag{ftip}
+\tag{policy}
+\tag{supervised-fine-tuning}
+
+\p{For one declared model family and target predicate, a
+\newvocab{starting-policy triple} is}
+
+##{
+ \left(\pi^{\mathrm{base}},\pi^+,\pi^-\right).
+}
+
+\p{Here #{\pi^{\mathrm{base}}} is the unmodified starting policy,
+#{\pi^+} is obtained by a declared supervised update intended to increase
+target-response frequency, and #{\pi^-} is obtained by a declared update
+intended to decrease it. The superscripts name producing interventions, not
+mathematical order relations between the resulting policies.}
+
+\p{\citet{Section 4.1}{clay2026demystifying} instantiates the triple with
+the source's Base, SFT-positive, and SFT-negative checkpoints. For the movie
+quote, its SFT mixture places twenty percent weight on the target quote and
+eighty percent on other quotes from the Cornell Movie-Dialogs corpus; the
+negative intervention maximizes cross-entropy loss on the target.}

@@ -1,0 +1,32 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Example}
+\title{Three feedback resolutions on one response set}
+\tag{ftip}
+\tag{reward}
+\tag{feedback}
+
+\p{One finite response set can be observed through three different maps. The
+arrows below share a domain; they do not assert that the three codomains form a
+refinement chain.}
+
+\tikzfig{\begin{tikzpicture}[
+ box/.style={draw,rounded corners,align=center,text width=30mm,
+   minimum height=13mm,font=\small},
+ arr/.style={->,>=stealth,semithick}
+]
+\node[box] (y) at (-4.2,0) {finite responses\\$\mathcal Y$};
+\node[box] (s) at (0,2.0) {exact-reward classes\\binary verifier};
+\node[box] (e) at (0,0) {edit-reward classes\\target metric};
+\node[box] (p) at (0,-2.0) {process-reward classes\\judge and parser};
+\draw[arr] (y) -- (s);
+\draw[arr] (y) -- (e);
+\draw[arr] (y) -- (p);
+\end{tikzpicture}}
+
+\p{The exact reward forgets every difference among failures. Edit reward can
+retain character-level proximity, while the source process reward retains a
+declared milestone vector only after judge, override, and penalty choices. The
+partition lemma \ref{ftip-00AG} applies to a pair only after its refinement
+hypothesis has been checked.}

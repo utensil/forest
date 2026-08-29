@@ -1,0 +1,40 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Remark}
+\title{Process feedback assumptions and milestone-weight discrepancy}
+\tag{ftip}
+\tag{process-feedback}
+\tag{source-discrepancy}
+
+\p{Appendix D.2 of \citef{clay2026demystifying} supplements
+#{r_{\rm proc}} with an extracted-answer override and two penalties. Translating
+its notation, let #{\tau=117}, #{\tau_{\rm near}=118}, and define}
+
+##{
+ r_{\rm base}(y)=
+ \begin{cases}
+  1.0,&\operatorname{extract}(y)=\tau,\\
+  0.6,&\operatorname{extract}(y)=\tau_{\rm near},\\
+  r_{\rm proc}(y),&\text{otherwise}.
+ \end{cases}
+}
+
+\p{Let #{p_{\rm loop}(y)=-0.3} when the judge flags a loop without the exact
+answer, and zero otherwise. Let #{p_{\rm format}(y)=-0.5} when the response
+lacks the required boxed delimiter, and zero otherwise. Equations (7)--(8)
+then give}
+
+##{
+ r_{\rm PRM}(y)
+ =\max\{0,r_{\rm base}(y)+p_{\rm loop}(y)+p_{\rm format}(y)\}.
+}
+
+\p{These clauses assume a reliable milestone judge, parser, near-miss choice,
+loop flag, and formatting rule. They are part of the feedback definition, not
+consequences of reinforcement learning. The main text describes
+``exponentially increasing'' dense rewards, and Appendix D calls the weights
+``exponential scaling.'' The printed vector
+#{(0.05,0.05,0.10,0.15,0.25)} is neither strictly increasing at every
+milestone nor a geometric progression. We preserve the exact weights and do
+not infer an exponential law from that wording.}

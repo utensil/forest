@@ -1,0 +1,60 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Example}
+\title{The AIME 128-sample measurement record}
+\tag{ftip}
+\tag{evaluation}
+\tag{empirical-record}
+
+\p{\citet{Section 5.1, Table 2}{clay2026demystifying} reports the
+following empirical target-answer rates for AIME Problem 4 with
+Qwen2.5-7B-Instruct and evaluation size #{m=128}. The task asks for the number
+of integer pairs #{(x,y)\in[-100,100]^2} satisfying
+#{12x^2-xy-6y^2=0}; the target answer is #{117}.}
+
+##{
+\begin{array}{c|ccc}
+ &\mathrm{SFT{+}}&\mathrm{Base}&\mathrm{SFT{-}}\\ \hline
+\text{No Reward}&26.6&3.92&0.00\\
+\text{Sparse Reward}&85.9&10.2&0.00\\
+\text{Dense Reward}&86.7&92.2&0.00
+\end{array}
+}
+
+\p{Every entry in the displayed array is a percentage.}
+
+\tikzfig{\begin{tikzpicture}[
+ cell/.style={draw,align=center,font=\scriptsize,text width=17mm,
+   minimum height=7mm},
+ row/.style={draw,align=left,font=\scriptsize,text width=21mm,
+   minimum height=7mm}
+]
+\node[font=\scriptsize] at (0,1.65) {source row};
+\node[font=\scriptsize] at (2.25,1.65) {SFT+};
+\node[font=\scriptsize] at (4.15,1.65) {Base};
+\node[font=\scriptsize] at (6.05,1.65) {SFT-};
+\node[row] at (0,0.8) {No Reward};
+\node[cell] at (2.25,0.8) {26.6 percent};
+\node[cell] at (4.15,0.8) {3.92 percent};
+\node[cell] at (6.05,0.8) {0.00 percent};
+\node[row] at (0,0) {Sparse Reward};
+\node[cell] at (2.25,0) {85.9 percent};
+\node[cell] at (4.15,0) {10.2 percent};
+\node[cell] at (6.05,0) {0.00 percent};
+\node[row] at (0,-0.8) {Dense Reward};
+\node[cell] at (2.25,-0.8) {86.7 percent};
+\node[cell] at (4.15,-0.8) {92.2 percent};
+\node[cell] at (6.05,-0.8) {0.00 percent};
+\node[font=\scriptsize,align=center] at (3.1,-1.65)
+ {Qwen2.5-7B-Instruct, AIME Problem 4, evaluation $m=128$};
+\end{tikzpicture}}
+
+\p{These are source-reported empirical percentages, not exact policy
+probabilities. ``No Reward'' is retained as the source's row label; the table
+alone does not define it as a post-training protocol. The three zero entries
+for SFT-negative are finite observations and remain subject to
+\ref{ftip-00A0}. Appendix Figure 5's caption prints a different set of
+Qwen2.5-7B-Instruct values that duplicates the neighbouring movie-quote
+caption and is incompatible with Table 2. This card preserves the exact
+Table 2 record and does not silently reconcile that source discrepancy.}

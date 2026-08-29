@@ -1,0 +1,37 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Example}
+\title{Narrow and broad random-reward paths}
+\tag{ftip}
+\tag{prompt-distribution}
+\tag{random-reward}
+
+\p{Section 5.3 and Appendix F of \citef{clay2026demystifying} supply two OLMo
+paths; Figure 4 reports their outcomes. Both replace the
+usual verifiable reward with a random scalar drawn from #{\operatorname{Unif}[0,1]},
+but their prompt configurations differ.}
+
+\tikzfig{\begin{tikzpicture}[
+ box/.style={draw,rounded corners,align=center,text width=27mm,
+ minimum height=10mm,font=\small},
+ arr/.style={->,>=stealth,semithick},
+ lab/.style={font=\scriptsize,fill=white,inner sep=1pt}
+]
+\node[box] (n0) at (-3.6,1.25) {100 math-only\\prompts};
+\node[box] (n1) at (0,1.25) {random-reward\\post-training};
+\node[box] (n2) at (3.6,1.25) {large GSM8K loss;\\smaller other losses};
+\node[box] (b0) at (-3.6,-1.25) {10,000 mixed-domain\\prompts};
+\node[box] (b1) at (0,-1.25) {random-reward\\post-training};
+\node[box] (b2) at (3.6,-1.25) {entropy spike and\\multi-domain collapse};
+\draw[arr] (n0) -- node[lab,above]{narrow cell} (n1);
+\draw[arr] (n1) -- (n2);
+\draw[arr] (b0) -- node[lab,below]{broad cell} (b1);
+\draw[arr] (b1) -- (b2);
+\end{tikzpicture}}
+
+\p{In the narrow SFT-start path, GSM8K accuracy falls from 86 to about 32 by
+step 400, while the reported MMLU and IFEval changes are much smaller. In the
+broad path, the source reports an entropy spike near step 400 together with
+collapse on GSM8K, MMLU, and IFEval. The diagram records that interpretation;
+it does not isolate prompt breadth from pool size, mixture, or repetition.}

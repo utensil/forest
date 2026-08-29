@@ -1,0 +1,25 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Example}
+\title{Counterexample: equal sparse reward, unequal dense reward}
+\tag{ftip}
+\tag{reward}
+\tag{counterexample}
+
+\p{Take the target string #{\tau=\texttt{abc}} and two responses
+#{y=\texttt{abx}} and #{y'=\texttt{xyz}}. Both fail exact matching, while
+their edit distances and normalized edit rewards are}
+
+##{
+\begin{array}{c|c|c|c}
+ \text{response}&r_{\rm exact}&D(\,cdot\,,\tau)&r_{\rm edit}\\ \hline
+ \texttt{abx}&0&1&2/3\\
+ \texttt{xyz}&0&3&0
+\end{array}
+}
+
+\p{Thus #{y\sim_{r_{\rm exact}}y'} but
+#{y\not\sim_{r_{\rm edit}}y'}. The example witnesses a strict separation
+inside one sparse-reward class. It does not claim that every dense proxy
+refines every sparse verifier.}

@@ -1,0 +1,31 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Definition}
+\title{Controlled post-training experiment cell}
+\tag{ftip}
+\tag{experiment}
+\tag{post-training}
+
+\p{A \newvocab{controlled post-training experiment cell} is a record}
+
+##{
+ \mathfrak c=
+ (M,\pi^{\mathrm{init}},\mathsf T,\mathcal D_{\mathrm{tr}},
+ r^{\mathrm{id}},\mathcal A,b_{\mathrm{tr}},\mathsf E),
+}
+
+\p{where #{M} identifies the model architecture and checkpoint lineage,
+#{\pi^{\mathrm{init}}} is its starting policy, #{\mathsf T} is the task,
+#{\mathcal D_{\mathrm{tr}}} is the training-prompt law, #{r^{\mathrm{id}}}
+identifies an executable reward rule and version, #{\mathcal A} is the update
+procedure, #{b_{\mathrm{tr}}} is the training budget, and #{\mathsf E} is the
+evaluation interface. Random seeds and hyperparameters belong to the relevant
+record fields even when suppressed from the notation.}
+
+\p{\citet{Figure 1 and Sections 4.1--4.3}{clay2026demystifying} motivates the
+coordinates. The source varies
+starting distribution, prompt distribution, and reward while using a common
+broad RL setup. Because its main-text and Appendix-C sparse rewards differ,
+the reward field is an identifier for an executable rule, not merely the word
+``sparse.''}

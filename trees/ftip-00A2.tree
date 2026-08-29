@@ -1,0 +1,28 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Corollary}
+\title{Exact one-sided bound after zero hits}
+\tag{ftip}
+\tag{probability}
+\tag{statistics}
+
+\p{Assume \ref{ftip-00A1} and fix #{0<\delta<1}. If #{K_m=0}, inversion of
+the exact zero-count likelihood gives the one-sided upper endpoint}
+
+##{
+ u_{m,\delta}=1-\delta^{1/m}.
+}
+
+\p{Indeed, #{\Pr_{u_{m,\delta}}(K_m=0)=\delta}, and for every
+#{p>u_{m,\delta}} one has #{\Pr_p(K_m=0)<\delta}. Thus the observed zero
+count excludes probabilities above #{u_{m,\delta}} at exact level
+#{\delta} under the declared iid model.}
+
+\proof{
+\p{By \ref{ftip-00A1}, the zero-count likelihood is #{(1-p)^m}, which is
+strictly decreasing in #{p}. Solving #{(1-p)^m=\delta} gives the endpoint and
+the stated strict inequality.}}
+
+\p{This is an FTIP-proved likelihood inversion, not a source theorem and not
+a support certificate.}

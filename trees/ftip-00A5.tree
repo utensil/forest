@@ -1,0 +1,24 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Corollary}
+\title{Sparse-reward discovery within a rollout budget}
+\tag{ftip}
+\tag{reward}
+\tag{rollout}
+
+\p{Suppose the events #{\{r_j^{\mathrm{sp}}>0\}} are independent and have a
+common probability #{q}. For every positive rollout budget #{B},}
+
+##{
+ \Pr(J_+\leq B)=1-(1-q)^B.
+}
+
+\proof{
+\p{Apply the independent-attempt theorem \ref{ftip-0078} with
+#{E_j=\{r_j^{\mathrm{sp}}>0\}}. Its discovery event is exactly
+#{\{J_+\leq B\}}.}}
+
+\p{This is an FTIP-proved specialization. It does not supply independence,
+stationarity, or the value of #{q} for a training run, and it does not equate
+positive proxy reward with task utility.}

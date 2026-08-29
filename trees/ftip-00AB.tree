@@ -1,0 +1,36 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Definition}
+\title{Edit-distance reward}
+\tag{ftip}
+\tag{reward}
+\tag{dense-feedback}
+
+\p{Let #{y=y_1\cdots y_m} and a nonempty target
+#{\tau=\tau_1\cdots\tau_n} be finite strings. Their \newvocab{Levenshtein
+distance} is determined by #{D(0,j)=j}, #{D(i,0)=i}, and, for #{i,j>0},}
+
+##{
+ D(i,j)=\min\left\{
+ \begin{aligned}
+  &D(i-1,j)+1,\\
+  &D(i,j-1)+1,\\
+  &D(i-1,j-1)+\mathbf 1\{y_i\neq\tau_j\}
+ \end{aligned}
+ \right\}.
+}
+
+\p{Set #{L(y,\tau)=\max\{|y|,|\tau|\}}. The \newvocab{edit-distance reward}
+is}
+
+##{
+ r_{\rm edit}(y,\tau)
+ =\max\left\{0,1-\frac{D(|y|,|\tau|)}{L(y,\tau)}\right\}.
+}
+
+\p{The recurrence is Equation (1) in the main text and Equation (4) in
+Appendix C of \citef{clay2026demystifying}; the normalized reward is its
+Equation (5). The nonempty-target assumption makes the displayed denominator
+positive. This is a source reconstruction, not a claim that edit similarity is
+the correct utility for a different task.}

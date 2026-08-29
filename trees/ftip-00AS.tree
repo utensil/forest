@@ -1,0 +1,39 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Example}
+\title{Counterexample: equal marginal reward, unequal prompt-local damage}
+\tag{ftip}
+\tag{counterexample}
+\tag{random-reward}
+
+\p{Let two evaluation slices #{C_1,C_2} have equal mass. A feedback channel
+returns an independent Bernoulli reward with mean #{1/2} under either of two
+post-training protocols. Suppose their fixed-interface success changes are}
+
+##{
+ \left(\Delta_{\rm suc}(C_1),\Delta_{\rm suc}(C_2)\right)
+ =(-1,0)
+ \quad\hbox{or}\quad
+ \left(-\tfrac12,-\tfrac12\right).
+}
+
+\tikzfig{\begin{tikzpicture}[
+ box/.style={draw,rounded corners,align=center,text width=29mm,
+ minimum height=10mm,font=\small},
+ arr/.style={->,>=stealth,semithick},
+ lab/.style={font=\scriptsize,fill=white,inner sep=1pt}
+]
+\node[box] (r) at (0,1.5) {observed reward\\mean $1/2$};
+\node[box] (a) at (-3.2,-0.9) {protocol $P_A$\\changes $(-1,0)$};
+\node[box] (b) at (3.2,-0.9) {protocol $P_B$\\changes $(-1/2,-1/2)$};
+\draw[arr] (r) -- node[lab,left]{same marginal} (a);
+\draw[arr] (r) -- node[lab,right]{same marginal} (b);
+\node[font=\scriptsize] at (-3.2,-2.0) {localized at $\kappa=1/2$};
+\node[font=\scriptsize] at (3.2,-2.0) {distributed at $\kappa=1/2$};
+\end{tikzpicture}}
+
+\p{The reward law and its mean are identical, but the slice-level evaluation
+vectors differ. Hence marginal training reward does not determine whether
+damage is localized or distributed. This is a finite counterexample, not a
+claim about the mechanism in the source experiment.}

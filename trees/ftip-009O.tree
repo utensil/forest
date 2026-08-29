@@ -1,0 +1,25 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Remark}
+\title{The source experiment as an intervention matrix}
+\tag{ftip}
+\tag{intervention}
+\tag{reinforcement-learning}
+
+\p{\citet{Sections 4.1--4.3 and Figure 1}{clay2026demystifying} organize the
+reported experiments along three
+declared axes: a starting model distribution, a training-prompt distribution,
+and a reward function. Each reported measurement therefore belongs to a cell
+of a matrix rather than to an unqualified ``RL post-training'' condition. The
+source holds its broad training recipe fixed while varying selected axes; it
+does not study variation among RL algorithms.}
+
+\p{For FTIP, a source cell must retain the model, task, prompt law, reward-rule
+identifier, training budget, and evaluation procedure attached to it. This is
+especially important here because the main text and Appendix C do not state
+identical sparse-reward semantics. Section 4.2 describes target containment
+with a length penalty. Appendix C's prose says an exact target receives unit
+reward, but its displayed equation requires the response to be strictly
+longer than the target for any positive reward. The note suite records this
+discrepancy instead of choosing an implementation on the source's behalf.}

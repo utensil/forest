@@ -1,0 +1,38 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Remark}
+\title{Main-text and Appendix-C sparse-reward discrepancy}
+\tag{ftip}
+\tag{reward}
+\tag{source-discrepancy}
+
+\p{Section 4.2 of \citef{clay2026demystifying} displays a substring indicator
+#{\mathbf 1\{\tau\subseteq y\}} and says that a length penalty is applied.
+In Appendix C, #{n} is the maximum generation length and #{s} is the number of
+tokens beyond the target. The appendix first defines the excess-length penalty}
+
+##{
+ p(s)=
+ \begin{cases}
+  0,&s=0,\\
+  s/n,&s>0,
+ \end{cases}
+}
+
+\p{and then gives Equation (3):}
+
+##{
+ r_{\rm C}(y,\tau)=
+ \begin{cases}
+  \max\{0.5,1-p(s)\},&\tau\text{ occurs in }y
+    \text{ and }|y|>|\tau|,\\
+  0,&\text{otherwise}.
+ \end{cases}
+}
+
+\p{As printed, Equation (3) assigns zero when #{y=\tau}, because its first
+branch requires strict excess length. This conflicts with the immediately
+preceding Appendix-C prose, which assigns base reward one when the target is
+generated, and it is not the exact-match reward of \ref{ftip-00A9}. We record
+the discrepancy rather than silently repairing the source implementation.}

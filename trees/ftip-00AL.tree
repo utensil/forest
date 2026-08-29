@@ -1,0 +1,29 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Definition}
+\title{Training prompt law and evaluated prompt slice}
+\tag{ftip}
+\tag{prompt-distribution}
+\tag{evaluation}
+
+\p{Let #{\mathcal X} be a task-instance set. Write
+#{\mu_{\rm tr}=\mathcal D_{\rm tr}} for the training-prompt coordinate of an
+experiment cell in \ref{ftip-009T}. A \newvocab{training prompt law} is this
+probability law on #{\mathcal X}, used to draw instances during a post-training
+protocol. Let #{\mu_{\rm ev}} be an independently declared evaluation law on
+the same set.}
+
+\p{An \newvocab{evaluated prompt slice} is a measurable set
+#{C\subseteq\mathcal X} with #{\mu_{\rm ev}(C)>0}. Its conditional evaluation
+law is}
+
+##{
+ \mu_{\rm ev}(A\mid C)
+ =\frac{\mu_{\rm ev}(A\cap C)}{\mu_{\rm ev}(C)}.
+}
+
+\p{The training and evaluation laws need not agree. A slice records where an
+effect is measured; it does not assert that prompts inside the slice are
+equally difficult or represented equally in pretraining. We specialize the
+task-law convention of \ref{ftip-001Q}.}
