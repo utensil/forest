@@ -1,0 +1,49 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Example}
+\title{A repaired compromise-circuit example}
+\tag{ftip}
+\tag{preference-data}
+\tag{social-choice}
+
+\p{Example 3.2 of \citef{zhao2025limits} prints only #{a\geq0} and #{2a<b},
+but those conditions do not force its stated rankings or Borda totals. We use
+the local repaired specialization #{0<a<1/2} and #{2a<b<1}. Take three
+queries, three circuits, and a singleton representation set, so every query
+must use one common circuit. Set}
+
+##{
+\begin{array}{c|ccc}
+ &c_A&c_B&c_C\\ \hline
+ \xi_1&1&0&1-a\\
+ \xi_2&1&0&1-a\\
+ \xi_3&0&1&b
+\end{array}
+}
+
+\p{The repaired inequalities give the rankings #{c_A\succ c_C\succ c_B} for
+#{\xi_1,\xi_2} and #{c_B\succ c_C\succ c_A} for #{\xi_3}. Hence the Borda
+totals are #{(4,2,3)}, so the ordinal rule selects #{c_A}. The utility totals are
+#{(2,1,2-2a+b)}. Since #{2a<b}, circuit #{c_C} has strictly greater total
+utility than #{c_A}.}
+
+\tikzfig{\begin{tikzpicture}[
+ box/.style={draw,rounded corners,align=center,text width=27mm,
+ minimum height=9mm,font=\small},
+ arr/.style={->,>=stealth,semithick},
+ lab/.style={font=\scriptsize,fill=white,inner sep=1pt}
+]
+\node[box] (q) at (-3.5,1.3) {three queries\\$\xi_1,\xi_2,\xi_3$};
+\node[box] (h) at (0,1.3) {one shared\\representation};
+\node[box] (a) at (-1.8,-1.3) {Borda choice\\$c_A$};
+\node[box] (c) at (1.8,-1.3) {utility choice\\$c_C$};
+\draw[arr] (q) -- (h);
+\draw[arr] (h) -- node[lab,left]{ordinal totals} (a);
+\draw[arr] (h) -- node[lab,right]{utility totals} (c);
+\end{tikzpicture}}
+
+\p{This repaired finite example isolates information lost by ranking. The compromise circuit
+is never first for an individual query, yet its aggregate utility is largest.
+It does not show that Borda is always suboptimal or that a neural model must
+collapse all queries to one representation.}

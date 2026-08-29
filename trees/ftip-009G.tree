@@ -1,0 +1,37 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Theorem}
+\title{General linear-score noisy preference lower bound}
+\tag{ftip}
+\tag{preference-data}
+\tag{lower-bound}
+
+\p{\strong{Conditional source reconstruction.} This is a conditional form of
+Appendix Theorem A.5 in \citef{zhao2025limits}.}
+
+\p{Assume pointwise response separation as defined in \ref{ftip-009A}. For
+every pretrained routing model and linear-score algorithm
+#{\mathcal A_{\rm lin}}, there exists a utility}
+
+##{
+ u:Q\times Y\longrightarrow[0,1].
+}
+
+\p{Post-training from even the complete comparison-probability profile of the
+linear-score link then satisfies}
+
+##{
+ \operatorname{Dist}_u(\mathcal A_{\rm lin};\mathfrak m_0)
+ \geq
+ \widetilde\Omega\left(
+ \min\left\{|C_0|,R_{Q,\mathfrak E,H}\right\}
+ \right),
+}
+
+\p{where #{R_{Q,\mathfrak E,H}} is defined in \ref{ftip-009A}. The theorem is
+again existential in #{u} and uses the source's deterministic comparator. The
+same circuitwise-utility issue recorded in \ref{ftip-009A} prevents us from
+asserting the source's unrestricted pretrained-model quantifier here. Its noise
+is informative because probabilities depend on cardinal scores; the
+obstruction survives under the particular linear link.}

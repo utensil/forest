@@ -1,0 +1,27 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Notation}
+\title{Translating the alignment source notation}
+\tag{ftip}
+\tag{alignment}
+\tag{notation}
+
+\p{The source writes #{\lambda>0} for the KL penalty. Here we write
+#{\beta>0}, matching the DPO notation in \ref{ftip-003M}--\ref{ftip-003O}.
+This avoids collision with the generalized-advantage parameter in
+\ref{ftip-003E} and the protocol law in \ref{ftip-007Q}.}
+
+\p{The source's gain #{\Delta(r,r')} is written #{G_p(r;s)}: #{r} is the
+reward used to tilt the reference law #{p}, while #{s} is the reward used to
+evaluate the tilted law. This avoids collision with both the simplex notation
+#{\Delta(X)} of \ref{ftip-000A} and the paired DPO margin of
+\ref{ftip-003M}. For a finite set #{\mathcal Y}, a law
+#{p\in\Delta(\mathcal Y)}, and functions #{f,g:\mathcal Y\to\mathbb R}, set}
+
+##{
+ \operatorname{Cov}_p(f,g)
+ =\mathbb E_{y\sim p}[f(y)g(y)]
+ -\mathbb E_{y\sim p}[f(y)]\,
+  \mathbb E_{y\sim p}[g(y)].
+}

@@ -1,0 +1,41 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Remark}
+\title{What the two source families establish for FTIP}
+\tag{ftip}
+\tag{alignment}
+\tag{preference-data}
+
+\p{The two source families expose distinct information models. The diagram
+places them in parallel lanes; it does not order them by information content.}
+
+\tikzfig{\begin{tikzpicture}[
+ box/.style={draw,rounded corners,align=center,text width=24mm,
+ minimum height=12mm,font=\small},
+ arr/.style={->,>=stealth,semithick},
+ lab/.style={font=\scriptsize,fill=white,inner sep=1pt}
+]
+\node[box] (r) at (-3.6,1.3) {exact scalar reward};
+\node[box] (t) at (0,1.3) {exponential tilt\\gain identities};
+\node[box] (o) at (-3.6,-1.3) {ordinal or linked\\preference feedback};
+\node[box] (c) at (0,-1.3) {common-circuit\\cardinal queries};
+\draw[arr] (r) -- node[lab,above]{optimize} (t);
+\draw[arr] (o) -- node[lab,below,align=center]{different\\model} (c);
+\draw[dashed] (2.0,-2.1) -- (2.0,2.1);
+\node[align=left,font=\scriptsize] at (3.5,0) {no general\\information order};
+\end{tikzpicture}}
+
+\p{The KL identities characterize the exact optimizer for a declared scalar
+reward. The preference lower bounds are worst-case statements inside a fixed-
+circuit routing model. Bradley--Terry conclusions depend on the chosen score
+link. In the common-circuit specialization, cardinal queries change the
+information modality and admit a positive mechanism result. Outside that
+specialization, the preference and cardinal-query results are not directly
+comparable without further assumptions.}
+
+\p{None of these statements derives the finite transcript theorem
+\ref{ftip-007S}, and none proves that benchmark gain is capability
+acquisition. Their FTIP role is narrower: they identify which information is
+assumed, which optimizer or comparator is exact, and where transfer to a
+training system must stop.}

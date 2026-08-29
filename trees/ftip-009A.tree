@@ -1,0 +1,53 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Theorem}
+\title{General noiseless preference-distortion lower bound}
+\tag{ftip}
+\tag{preference-data}
+\tag{lower-bound}
+
+\p{Call #{C_0} \newvocab{pointwise response-separating} when}
+
+##{
+ c_i\neq c_j\quad\Longrightarrow\quad
+ c_i(\xi)\neq c_j(\xi)
+ \qquad(\xi\in Q).
+}
+
+\p{\strong{Conditional source reconstruction.} Assume pointwise response
+separation. Then the statement of Appendix Theorem A.1, equation (3), in
+\citef{zhao2025limits} yields: for every pretrained routing model
+#{\mathfrak m_0} and every preference-only algorithm #{\mathcal A}, there
+exists a utility #{u} such that post-training on the complete noiseless profile
+satisfies}
+
+##{
+ R_{Q,\mathfrak E,H}
+ =\frac{|Q|}
+ {\sqrt{|Q|(\log|\mathfrak E|+|H|)}+|H|},
+}
+
+##{
+ \operatorname{Dist}_u(\mathcal A;\mathfrak m_0)
+ \geq
+ \Omega\left(
+ \min\left\{\sqrt{|C_0|},R_{Q,\mathfrak E,H}\right\}
+ \right).
+}
+
+\p{The source states that the construction can keep utilities in #{[0,1]}
+and can additionally enforce}
+
+##{
+ \sum_{c\in C_0}u\left(\xi,c(\xi)\right)=1
+ \qquad(\xi\in Q).
+}
+
+\p{The source states the result for every pretrained model without the added
+separation hypothesis. Its appendix proof orders circuit indices and assigns
+utilities circuitwise; if two circuits return the same response at one query,
+that assignment need not descend to a function on #{Q\times Y}. We therefore
+state only the response-separating transfer that the typed FTIP model supports.
+The quantifier remains worst-case and existential in #{u}, and the comparator
+is the deterministic class in \ref{ftip-0096}.}

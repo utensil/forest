@@ -1,0 +1,46 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Example}
+\title{A two-response alignment identity}
+\tag{ftip}
+\tag{alignment}
+\tag{example}
+
+\p{Take #{\mathcal Y=\{a,b\}}, #{p=(1/2,1/2)}, #{\beta=1}, and
+#{r(a)=0}, #{r(b)=\log 3}. Exponential weighting changes the reference law
+as follows.}
+
+\tikzfig{\begin{tikzpicture}[
+  box/.style={draw, rounded corners=2pt, align=center, font=\small,
+    text width=27mm, minimum height=10mm},
+  flow/.style={-{Stealth[length=2mm]}, thick}
+]
+\node[box] (base) at (0,0) {reference\\$p=(1/2,1/2)$};
+\node[box] (weight) at (3.8,0) {weights\\$a_r=(1,3)$};
+\node[box] (tilt) at (7.6,0) {aligned law\\$q_r=(1/4,3/4)$};
+\draw[flow] (base) -- node[above,font=\scriptsize] {$Z_r=2$} (weight);
+\draw[flow] (weight) -- (tilt);
+\end{tikzpicture}}
+
+\p{The reward gain is}
+
+##{
+ G_p(r;r)
+ =\left(\frac34-\frac12\right)\log 3
+ =\frac14\log 3.
+}
+
+\p{Direct calculation gives}
+
+##{
+\begin{aligned}
+ D_{\mathrm{KL}}(q_r\Vert p)
+ &=\frac14\log\frac12+\frac34\log\frac32,\\
+ D_{\mathrm{KL}}(p\Vert q_r)
+ &=\frac12\log2+\frac12\log\frac23,
+\end{aligned}
+}
+
+\p{whose sum is #{\frac14\log3}. Thus the example checks
+\ref{ftip-008O} exactly; it is not an empirical alignment result.}

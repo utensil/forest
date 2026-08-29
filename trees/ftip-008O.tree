@@ -1,0 +1,33 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Theorem}
+\title{Exact reward gain equals scaled Jeffreys divergence}
+\tag{ftip}
+\tag{alignment}
+\tag{optimization}
+
+\p{For a finite KL-alignment instance,}
+
+##{
+ G_p(r;r)=\beta J(p,q_r).
+}
+
+\proof{
+\p{Rearranging \ref{ftip-008N} gives
+#{r(y)=\beta\log(q_r(y)/p(y))+\beta\log Z_r} on the common support. Taking
+expectation first under #{q_r} and then under #{p} yields}
+
+##{
+\begin{aligned}
+ \mathbb E_{q_r}[r]
+ &=\beta D_{\mathrm{KL}}(q_r\Vert p)+\beta\log Z_r,\\
+ \mathbb E_p[r]
+ &=-\beta D_{\mathrm{KL}}(p\Vert q_r)+\beta\log Z_r.
+\end{aligned}
+}
+
+\p{Subtracting cancels the common normalizer and gives the result.}}
+
+\p{\strong{Status: source reconstruction.} This is the finite form of
+\citet{Theorem 1, equation (3.2), with proof in Appendix B.1}{paes2026theoretical}.}

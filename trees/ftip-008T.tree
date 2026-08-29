@@ -1,0 +1,25 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Corollary}
+\title{Averaging the fixed-query identity over prompts}
+\tag{ftip}
+\tag{alignment}
+\tag{probability}
+
+\p{Let #{\mathcal X} be finite with prompt law #{\mu}. For each
+#{x\in\mathcal X}, let #{p_x}, #{r_x}, and #{q_{r_x}} be a finite
+KL-alignment instance with the same penalty #{\beta>0}. Then}
+
+##{
+ \sum_{x\in\mathcal X}\mu(x)G_{p_x}(r_x;r_x)
+ =\beta\sum_{x\in\mathcal X}\mu(x)J(p_x,q_{r_x}).
+}
+
+\proof{
+\p{Apply \ref{ftip-008O} at each prompt and take the finite
+#{\mu}-weighted sum.}}
+
+\p{\strong{Status: FTIP-proved corollary.} The source theorem is stated for
+each fixed query. This corollary performs only finite averaging; it does not
+introduce a shared neural parameterization across prompts.}
