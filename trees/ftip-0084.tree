@@ -1,0 +1,25 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Example}
+\title{Counterexample: batch cancellation can hide stale ratios}
+\tag{ftip}
+\tag{replay}
+\tag{counterexample}
+
+\p{Fix #{R>1}. On a two-token vocabulary, let both observed tokens have
+#{a_i=1}, current probability #{\pi_\theta(1)=1/2}, and behavior probability
+#{\pi_{\rm old}(1)=1/(2R)}. Take scalar hidden states #{h_{L,1}=h_{L,2}=1}
+and normalized advantages #{\widehat A_1=1}, #{\widehat A_2=-1}. Then
+#{r_1=r_2=R}, but the factors in \ref{ftip-007Z} satisfy
+##{
+G_1^{\rm lm}=R(1/2,-1/2)^{\mathsf T},
+\qquad
+G_2^{\rm lm}=-G_1^{\rm lm}.
+}
+Consequently #{G^{\rm lm}=0}, while
+#{\widehat\chi^2=R^2-1} can be arbitrarily large.}
+
+\p{The example does not contradict \ref{ftip-0081}: that theorem upper-bounds
+batch-gradient energy by a ratio moment. It supplies no lower bound on the
+gradient and no converse from a quiet monitor to fresh data.}

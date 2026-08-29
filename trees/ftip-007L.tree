@@ -1,0 +1,44 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Theorem}
+\title{Independent false accepts amplify with candidate count}
+\tag{ftip}
+\tag{verifier}
+\tag{probability}
+
+\p{In the repeated audit of \ref{ftip-007K}, suppose the pairs
+#{(S_i,A_i)} are independent and identically distributed. Assume}
+
+##{
+ \iota=\Pr(S_i=0)>0,
+ \qquad
+ \eta_+=\Pr(A_i=1\mid S_i=0).
+}
+
+\p{Then the probability that at least one accepted invalid candidate exists
+among the #{N} audited candidates is}
+
+##{
+ \Pr(\mathcal E_N^{\rm fa})=1-(1-\iota\eta_+)^N.
+}
+
+\p{It is strictly increasing in #{N} when #{0<\iota\eta_+<1}, and it
+converges to #{1} when #{\iota\eta_+>0}.}
+
+\proof{
+\p{Each #{C_i^{\rm fa}} has probability #{\iota\eta_+}. Independence of the
+audited pairs makes the events #{C_i^{\rm fa}} independent. Therefore}
+
+##{
+ \Pr\left((\mathcal E_N^{\rm fa})^c\right)
+ =\Pr\left(\bigcap_{i=1}^N (C_i^{\rm fa})^c\right)
+ =\prod_{i=1}^N(1-\iota\eta_+)
+ =(1-\iota\eta_+)^N.
+}
+
+\p{Taking complements gives the equality. The monotonicity and limit follow
+from the elementary powers of #{1-\iota\eta_+}.}
+}
+
+\p{This is an FTIP-proved finite statement.}

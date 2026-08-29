@@ -1,0 +1,21 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Remark}
+\title{DGG monitors update geometry, not evaluation safety}
+\tag{ftip}
+\tag{replay}
+\tag{evaluation}
+
+\p{The identities in \ref{ftip-007Z}--\ref{ftip-0081} concern gradients,
+importance ratios, activations, and a logit Jacobian. None of their hypotheses
+mentions the fixed independent-evaluation functional #{J_{\rm ev}} of
+\ref{ftip-005E}. They therefore cannot imply that accepting an update preserves
+#{J_{\rm ev}}, or that rejecting one would have prevented a decrease.}
+
+\p{DGG adds an empirical policy on top of those identities: it monitors the
+increment in head-gradient energy, standardizes that increment against a
+trailing window, and rejects some reused updates before the optimizer step
+\citet{Section 5 and Algorithm 1}{miao2026when}. Its reported experiments relate
+that policy to observed training stability. They do not turn the Z-score into
+a calibrated test of independent-evaluation safety.}

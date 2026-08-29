@@ -1,0 +1,25 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Example}
+\title{Counterexample: a Z-score gate is not an evaluation-safety certificate}
+\tag{ftip}
+\tag{replay}
+\tag{evaluation}
+\tag{counterexample}
+
+\p{Let two consecutive proposed reused updates have the same monitored energy,
+#{g_{t-1}=g_t=1}. With trailing-window increment mean #{\mu_t=0}, any
+positive scale #{\sigma_t+\varepsilon}, and any positive threshold, DGG's
+score is
+##{
+z_t=\frac{(g_t-g_{t-1})-\mu_t}{\sigma_t+\varepsilon}=0,
+}
+so the gate accepts the proposal. Now choose a fixed evaluation interface for
+which the artifact before the accepted update has performance #{J_{\rm ev}=1}
+and the artifact after it has performance #{J_{\rm ev}=0}.}
+
+\p{This is consistent because the gate rule of \ref{ftip-005A} imposes no
+mathematical relation between its scalar monitor and #{J_{\rm ev}}. A safety
+claim would need an additional assumption connecting proposed updates to the
+independent evaluation law; the Z-score calculation alone cannot provide it.}

@@ -1,0 +1,34 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Theorem}
+\title{A false-accept union bound without independence}
+\tag{ftip}
+\tag{verifier}
+\tag{probability}
+
+\p{For any joint law of a repeated verifier audit,}
+
+##{
+ \Pr(\mathcal E_N^{\rm fa})\leq\sum_{i=1}^N \phi_i.
+}
+
+\p{If #{\iota_i=\Pr(S_i=0)>0} for every #{i}, this becomes}
+
+##{
+ \Pr(\mathcal E_N^{\rm fa})\leq\sum_{i=1}^N \iota_i\eta_{+,i}.
+}
+
+\proof{
+\p{Apply the union bound to
+#{\mathcal E_N^{\rm fa}=\bigcup_i C_i^{\rm fa}}. The factorization
+#{\phi_i=\iota_i\eta_{+,i}} follows from conditional probability whenever
+#{\iota_i>0}. If #{\iota_i=0}, then #{\phi_i=0} while the corresponding conditional rate
+is undefined, so the first display remains the unconditional statement.}
+}
+
+\p{Without a dependence assumption, matching marginal error rates do not
+give the equality in \ref{ftip-007L}; the events #{C_i^{\rm fa}} could
+coincide.}
+
+\p{This is an FTIP-proved finite statement.}

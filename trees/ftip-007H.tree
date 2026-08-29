@@ -1,0 +1,40 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Theorem}
+\title{Uniform proxy error gives two-epsilon selection regret}
+\tag{ftip}
+\tag{reward}
+\tag{regret}
+
+\p{Under the conditions of \ref{ftip-007G}, choose}
+
+##{
+ y^\star\in\operatorname*{arg\,max}_{y\in\mathcal Y_0}U(y),
+ \qquad
+ \widehat y\in\operatorname*{arg\,max}_{y\in\mathcal Y_0}\widehat U(y).
+}
+
+\p{Then the utility regret of selecting by the proxy satisfies}
+
+##{
+ 0\leq U(y^\star)-U(\widehat y)\leq2\varepsilon.
+}
+
+\proof{
+\p{Optimality of #{\widehat y} for the proxy and the two pointwise error
+bounds give}
+
+##{
+\begin{aligned}
+U(y^\star)
+&\leq \widehat U(y^\star)+\varepsilon\\
+&\leq \widehat U(\widehat y)+\varepsilon\\
+&\leq U(\widehat y)+2\varepsilon.
+\end{aligned}
+}
+
+\p{Optimality of #{y^\star} for #{U} gives the lower bound.}
+}
+
+\p{This is an FTIP-proved finite statement.}

@@ -1,0 +1,41 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Example}
+\title{Counterexample: early low-rank agreement does not determine continuation}
+\tag{ftip}
+\tag{trajectory}
+\tag{counterexample}
+
+\p{Let #{e_1=(1,0)^{\mathsf T}} and #{e_2=(0,1)^{\mathsf T}} be the standard
+basis vectors of #{\mathbb R^2}. In a two-dimensional matrix chart, set
+#{P=e_1e_1^{\mathsf T}} and #{Q=e_2e_2^{\mathsf T}}. Two paths share the
+entire observed history
+##{
+W_0=0,\qquad W_1=P,\qquad W_2=2P.
+}
+Every observed local difference is the same rank-one matrix #{P}. The paths
+then fork: path A takes #{W_3^A=3P}, whereas path B takes
+#{W_3^B=2P+Q}. Each next local difference is again rank one.}
+
+\tikzfig{\begin{tikzpicture}[
+  state/.style={draw, rounded corners=2pt, align=center, font=\small,
+    text width=21mm, minimum height=10mm},
+  flow/.style={-{Stealth[length=2mm]}, thick}
+]
+\node[state] (w0) at (0,0) {$W_0=0$};
+\node[state] (w1) at (2.8,0) {$W_1=P$};
+\node[state] (w2) at (5.6,0) {$W_2=2P$};
+\node[state] (wa) at (8.8,1.15) {$W_3^A=3P$};
+\node[state] (wb) at (8.8,-1.15) {$W_3^B=2P+Q$};
+\draw[flow] (w0) -- node[font=\scriptsize, fill=white] {$+P$} (w1);
+\draw[flow] (w1) -- node[font=\scriptsize, fill=white] {$+P$} (w2);
+\draw[flow] (w2) -- node[font=\scriptsize, fill=white] {$+P$} (wa);
+\draw[flow] (w2) -- node[font=\scriptsize, fill=white] {$+Q$} (wb);
+\end{tikzpicture}}
+
+\p{A deterministic history-only forecaster must return the same matrix
+#{\widehat W_3} in both worlds. Since
+#{\|W_3^A-W_3^B\|_F=\|P-Q\|_F=\sqrt{2}}, the triangle inequality forces its
+Frobenius error to be at least #{1/\sqrt{2}} on one continuation. Low-rank early
+motion therefore does not identify the next subspace or the next checkpoint.}

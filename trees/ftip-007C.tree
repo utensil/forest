@@ -1,0 +1,31 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Theorem}
+\title{Finite exponential tilting preserves support}
+\tag{ftip}
+\tag{support}
+\tag{optimization}
+
+\p{Fix a prompt #{x}, a finite response set #{\mathcal Y}, a reference policy
+#{\pi_{\mathrm{ref}}}, a finite real reward #{r(x,y)}, and #{\beta>0}. Let
+#{\pi_r} be the normalized exponential tilt of \ref{ftip-003O}. Then, for
+every #{y\in\mathcal Y},}
+
+##{
+ \pi_r(y\mid x)>0
+ \quad\Longleftrightarrow\quad
+ \pi_{\mathrm{ref}}(y\mid x)>0.
+}
+
+\proof{
+\p{The multiplier #{\exp(r(x,y)/\beta)} is finite and strictly positive.
+The finite normalizer #{Z_r(x)} is also strictly positive. Multiplication by
+the first quantity and division by the second therefore preserve whether the
+reference mass is zero or positive.}}
+
+\p{The source policy form appears as equation (4) in
+\citet{Section 4}{rafailov2023direct}; this theorem is its FTIP-proved
+corollary. Infinite rewards,
+non-normalizable response spaces, approximate optimization, and changes to the
+generation mechanism lie outside the statement.}

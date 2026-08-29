@@ -1,0 +1,24 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Remark}
+\title{Compression of a charted path is not capability acquisition}
+\tag{ftip}
+\tag{trajectory}
+\tag{evaluation}
+
+\p{NExt extracts global, local, and target differences from LoRA checkpoint
+matrices, keeps leading singular factors, learns a nonlinear predictor, jumps
+in that parameter chart, and resumes RLVR
+\citet{Sections 3.2, 4.1--4.3, and 5.1}{chen2026lowrank}. Its reported results are empirical;
+the paper states no theorem that a leading subspace remains stable or that a
+forecast preserves a policy.}
+
+\p{The quantities in \ref{ftip-0086}--\ref{ftip-0089} separate four tests.
+Squared singular-energy share concerns one matrix, spectral gap controls
+whether its leading subspace is identifiable, projector drift compares those
+subspaces over time, and path-emulation regret returns to fixed independent
+evaluation. None, by itself, is evidence that new feedback was acquired or
+that a new capability was learned. Such a claim must use a declared
+post-training gain such as \ref{ftip-005F} and must charge forecast training,
+the parameter jump, and recovery updates.}

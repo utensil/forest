@@ -1,0 +1,22 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Example}
+\title{Counterexample: empirical squared-ratio excess can be negative}
+\tag{ftip}
+\tag{replay}
+\tag{counterexample}
+
+\p{Take one observed action #{a} with
+#{\pi_{\rm old}(a)=1/2} and #{\pi_\theta(a)=1/4}. The batch contains only
+that action, so #{T=1} and #{r_1=1/2}. Hence
+##{
+\widehat\chi^2=r_1^2-1=-\frac34.
+}
+Both policies can be completed on a two-action space by assigning their
+remaining mass to the other action.}
+
+\p{Thus the finite-batch statistic in \ref{ftip-0066} need not share the
+nonnegativity of the population Pearson divergence. Theorem
+\ref{ftip-0081} remains valid: its right side contains
+#{1+\widehat\chi^2=1/4=\overline{r^2}}.}

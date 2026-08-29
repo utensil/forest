@@ -1,0 +1,26 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Definition}
+\title{Repeated verifier audit}
+\tag{ftip}
+\tag{verifier}
+\tag{inference}
+
+\p{A \newvocab{repeated verifier audit} of size #{N\geq1} records pairs
+#{(S_i,A_i)\in\{0,1\}^2} for candidates #{1\leq i\leq N}. Here #{S_i} is
+an independently defined success label and #{A_i} is the verifier decision,
+as in \ref{ftip-005Z}. Define}
+
+##{
+ C_i^{\rm fa}=\{S_i=0,\ A_i=1\},
+ \qquad
+ \mathcal E_N^{\rm fa}=\bigcup_{i=1}^N C_i^{\rm fa}.
+}
+
+\p{The event #{\mathcal E_N^{\rm fa}} says that at least one invalid
+candidate was accepted.
+It does not say which candidate a downstream selector returns. Write
+#{\phi_i=\Pr(C_i^{\rm fa})}. When #{\iota_i=\Pr(S_i=0)>0}, the conditional false-accept rate
+#{\eta_{+,i}=\Pr(A_i=1\mid S_i=0)} is defined and
+#{\phi_i=\iota_i\eta_{+,i}}.}

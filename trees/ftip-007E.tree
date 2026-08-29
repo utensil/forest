@@ -1,0 +1,32 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Example}
+\title{Counterexample: Equal one-shot success, unequal successful coverage}
+\tag{ftip}
+\tag{support}
+\tag{evaluation}
+
+\p{Let the evaluation law be uniform on two instances #{x_1,x_2}. Consider
+protocols #{P} and #{P'} with successful-support probabilities}
+
+##{
+ \bigl(p_P(x_1),p_P(x_2)\bigr)
+ =\left(\frac12,\frac12\right),
+ \qquad
+ \bigl(p_{P'}(x_1),p_{P'}(x_2)\bigr)
+ =(1,0).
+}
+
+\p{Both protocols have mean one-shot success #{1/2}. At threshold
+#{\alpha=1/2}, however, \ref{ftip-005V} gives}
+
+##{
+ \operatorname{Cov}_{1/2}(P)=1,
+ \qquad
+ \operatorname{Cov}_{1/2}(P')=\frac12.
+}
+
+\p{Thus average success does not determine successful-support coverage. The
+example is finite and uses the same task law and threshold for both protocols;
+it does not compare their training costs or establish acquisition.}

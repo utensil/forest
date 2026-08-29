@@ -1,0 +1,24 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Definition}
+\title{Finite declared feedback protocol}
+\tag{ftip}
+\tag{feedback}
+\tag{identifiability}
+
+\p{Fix a horizon #{N\geq 0}, finite action sets #{\mathcal A_n}, finite
+feedback sets #{\mathcal F_n}, and a finite internal-seed set #{\mathcal U}
+with a declared law #{\lambda}. A \strong{finite declared protocol}
+#{\mathsf P} consists of selection maps}
+
+##{
+a_n:\mathcal U\times\prod_{j<n}(\mathcal A_j\times\mathcal F_j)
+\longrightarrow\mathcal A_n
+\qquad(0\leq n<N).
+}
+
+\p{An action may specify the task, rollout record, feedback request, or
+sampling choice made at that round. The protocol can depend on earlier exposed
+feedback and its declared seed, but it cannot depend on a latent world field
+that has not entered those arguments.}
