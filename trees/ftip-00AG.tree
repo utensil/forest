@@ -1,0 +1,35 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Lemma}
+\title{Refining feedback separates at least as many responses}
+\tag{ftip}
+\tag{feedback}
+\tag{identifiability}
+
+\p{Let #{\mathcal Y} be finite and let #{r_1:\mathcal Y\to\mathcal R_1} and
+#{r_2:\mathcal Y\to\mathcal R_2}. Say that #{r_2} \newvocab{refines} #{r_1}
+when}
+
+##{
+ r_2(y)=r_2(y')\quad\Longrightarrow\quad r_1(y)=r_1(y')
+ \qquad(y,y'\in\mathcal Y).
+}
+
+\p{If #{r_2} refines #{r_1}, then}
+
+##{
+ \left|\mathcal Y/{\sim_{r_2}}\right|
+ \geq
+ \left|\mathcal Y/{\sim_{r_1}}\right|.
+}
+
+\proof{
+\p{Send the #{r_2}-class of #{y} to the #{r_1}-class of #{y}. The refinement
+condition makes this map well defined. It is surjective because every
+#{r_1}-class contains some #{y}, whose #{r_2}-class maps to it. A surjection
+between finite sets has a domain at least as large as its codomain.}}
+
+\p{\strong{Status: FTIP-proved finite lemma.} It compares observational
+partitions only. It does not say that the refined reward is cheaper, more
+accurate, or better aligned with utility.}

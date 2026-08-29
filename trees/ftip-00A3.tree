@@ -1,0 +1,23 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Example}
+\title{The 128-sample zero-hit bound}
+\tag{ftip}
+\tag{probability}
+\tag{calculation}
+
+\p{Take #{m=128} and #{\delta=0.05} in \ref{ftip-00A2}. After zero hits,
+the exact one-sided upper endpoint is}
+
+##{
+ u_{128,0.05}
+ =1-0.05^{1/128}
+ \approx 0.02313.
+}
+
+\p{Under the iid Bernoulli model, probabilities above approximately
+2.313 percent make a zero count less than five percent likely. The calculation
+does not turn a recorded #{0/128} into proof that the true probability is
+zero, and it does not apply if the 128 evaluations have a different joint
+sampling law.}

@@ -1,0 +1,35 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Definition}
+\title{Milestone process reward}
+\tag{ftip}
+\tag{reward}
+\tag{process-feedback}
+
+\p{For the source's fixed AIME problem, let}
+
+##{
+ M(y)=(m_1(y),\ldots,m_5(y))\in\{0,1\}^5
+}
+
+\p{record whether a completed response contains five declared milestones: a
+valid algebraic setup, correct root relations, correct integer bounds, a
+correct count for at least one branch, and correct subtraction of the overlap
+at the origin. With}
+
+##{
+ (w_1,\ldots,w_5)=(0.05,0.05,0.10,0.15,0.25),
+}
+
+\p{the \newvocab{milestone process reward} is}
+
+##{
+ r_{\rm proc}(y)=\sum_{i=1}^{5}w_i m_i(y).
+}
+
+\p{Appendix D.1 of \citef{clay2026demystifying} gives Equation (6) and the
+milestone list reconstructed here. In the experiment, a 32-billion-parameter
+instruction-tuned model classifies the completed trajectory. The displayed
+map is therefore richer than a deterministic final-answer verifier, even
+though it returns one scalar after the rollout.}

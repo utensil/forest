@@ -1,0 +1,36 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Example}
+\title{Three starting laws under one declared training grid}
+\tag{ftip}
+\tag{experiment}
+\tag{example}
+
+\p{A source comparison may place the three starting policies of
+\ref{ftip-009R} into cells matched outside the starting-policy coordinate.
+The shared boxes below mean equality of the declared grid fields, not that the
+three checkpoints differ in only one scalar probability.}
+
+\tikzfig{\begin{tikzpicture}[
+ box/.style={draw,rounded corners=2pt,align=center,font=\scriptsize,
+   text width=20mm,minimum height=8mm},
+ shared/.style={draw,rounded corners=2pt,align=center,font=\scriptsize,
+   text width=27mm,minimum height=12mm},
+ flow/.style={-{Stealth[length=1.8mm]},thick}
+]
+\node[box] (base) at (0,1.4) {Base\\$\pi^{\mathrm{base}}$};
+\node[box] (plus) at (0,0) {SFT-positive\\$\pi^+$};
+\node[box] (minus) at (0,-1.4) {SFT-negative\\$\pi^-$};
+\node[shared] (grid) at (3.7,0) {same declared task,\\prompts, reward,\\update, and budget};
+\node[shared] (eval) at (7.4,0) {same evaluation\\interface and\\sample size};
+\draw[flow] (base) -- (grid);
+\draw[flow] (plus) -- (grid);
+\draw[flow] (minus) -- (grid);
+\draw[flow] (grid) -- (eval);
+\end{tikzpicture}}
+
+\p{This is the comparison pattern used in
+\citet{Sections 4.1 and 5.1}{clay2026demystifying}. An actual cell still needs its model, task,
+reward implementation, and numerical record; the diagram is not a claim that
+all experiments in the paper instantiate one identical grid.}

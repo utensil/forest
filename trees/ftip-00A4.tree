@@ -1,0 +1,23 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Definition}
+\title{First positive sparse-reward time}
+\tag{ftip}
+\tag{reward}
+\tag{rollout}
+
+\p{Fix an executable sparse-reward rule and let #{r_j^{\mathrm{sp}}} be the
+reward returned on rollout #{j}. The \newvocab{first positive sparse-reward
+time} is the extended-valued index}
+
+##{
+ J_+=\inf\{j\geq1:r_j^{\mathrm{sp}}>0\},
+ \qquad \inf\varnothing:=\infty.
+}
+
+\p{This definition concerns the reward implementation named by an experiment
+cell. The event #{r_j^{\mathrm{sp}}>0} coincides with a target-response event
+only when that equality is part of the declared reward semantics. In
+particular, a length penalty or partial-credit rule can separate positive
+reward from exact target match.}

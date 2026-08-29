@@ -1,0 +1,24 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Definition}
+\title{Slice-conditioned success change}
+\tag{ftip}
+\tag{evaluation}
+\tag{distribution-shift}
+
+\p{Fix an evaluated slice #{C} from \ref{ftip-00AL}, and let #{P_0} and
+#{P_1} denote the pre- and post-training protocols whose successful-support
+probabilities are defined in \ref{ftip-005U}. The
+\newvocab{slice-conditioned success change} is}
+
+##{
+ \Delta_{\rm suc}(C;P_1,P_0)
+ =\mathbb E_{X\sim\mu_{\rm ev}(\cdot\mid C)}
+  \left[p_{P_1}(X)-p_{P_0}(X)\right].
+}
+
+\p{The evaluation interface, inference budget, and success predicate are
+held fixed across the two terms. The quantity is an average change on one
+declared slice. It neither locates the change inside the model nor identifies
+which training coordinate caused it.}
