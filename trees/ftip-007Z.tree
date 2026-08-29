@@ -1,0 +1,46 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Theorem}
+\title{Per-token DGG gradient factorization}
+\tag{ftip}
+\tag{replay}
+\tag{gradient}
+
+\p{\strong{Source reconstruction.} This statement reconstructs
+\citet{Section 4.2.1, Proposition 1, and Appendix A.1}{miao2026when}.}
+
+\p{Consider an active token #{i} on the unclipped branch of the GRPO
+objective. Let #{a_i} be the sampled token, #{\widehat A_i} its normalized
+advantage, and
+##{
+r_i=\frac{\pi_\theta(a_i\mid h_{L,i})}
+{\pi_{\rm old}(a_i\mid h_{L,i})}.
+}
+Write #{h_{L,i}} for the hidden state entering the language-model head,
+#{x_i^{\rm int}} for the input to an intermediate linear layer, and
+#{J_i=\partial z_i/\partial y_i} for the Jacobian from that layer's output to
+the logits. Define
+##{
+E_i=r_i\widehat A_i
+\left(e_{a_i}-\pi_\theta(\mathord\cdot\mid h_{L,i})\right).
+}
+Then the two weight gradients factor as rank-one matrices:
+##{
+G_i^{\rm lm}=E_i h_{L,i}^{\mathsf T},
+\qquad
+G_i^{\rm int}=(J_i^{\mathsf T}E_i)(x_i^{\rm int})^{\mathsf T}.
+}
+}
+
+\proof{
+\p{For the unclipped token objective, differentiation through the softmax
+gives #{\nabla_{z_i}\mathcal L_i=E_i}. Since
+#{z_i=W_{\rm lm}h_{L,i}}, the outer-product rule gives the first identity.
+The chain rule gives #{\nabla_{y_i}\mathcal L_i=J_i^{\mathsf T}E_i}; applying
+the same rule to #{y_i=W_{\rm int}x_i^{\rm int}} gives the second.}
+}
+
+\p{This is the source proposition specialized to the active, unclipped token
+whose gradient appears in its equation (3). Clipped or inactive tokens require
+their own derivative or mask and are not covered by the displayed identities.}

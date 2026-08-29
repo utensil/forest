@@ -1,0 +1,29 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Corollary}
+\title{A rollout budget for target discovery probability}
+\tag{ftip}
+\tag{probability}
+\tag{rollout}
+
+\p{This is an FTIP-proved corollary of \ref{ftip-0078}.}
+
+\p{Let #{0<\delta<1}. Under the independent and identically distributed
+setup of \ref{ftip-0078}, suppose first that #{0<p<1}. The least positive
+integer budget whose discovery failure probability is at most #{\delta} is}
+
+##{
+ B_{\min}
+ =\left\lceil\frac{\log\delta}{\log(1-p)}\right\rceil.
+}
+
+\p{If #{p=0}, no finite positive budget reaches failure probability below
+one. If #{p=1}, one attempt suffices.}
+
+\proof{
+\p{For #{0<p<1}, \ref{ftip-0078} gives failure probability #{(1-p)^B}.
+The inequality #{(1-p)^B\leq\delta} is equivalent to
+#{B\geq\frac{\log\delta}{\log(1-p)}} because both logarithms are negative. The least
+integer solution is the displayed ceiling. The two boundary cases follow
+directly from #{(1-p)^B}.}}

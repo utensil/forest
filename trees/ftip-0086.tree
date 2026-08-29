@@ -1,0 +1,26 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Definition}
+\title{Leading squared singular-energy share}
+\tag{ftip}
+\tag{trajectory}
+\tag{linear-algebra}
+
+\p{Let #{\Delta W\in\mathbb R^{m\times n}} be nonzero, set
+#{q=\min(m,n)}, and order its singular values as
+#{\sigma_1\geq\cdots\geq\sigma_q\geq0}. Its
+\strong{leading squared singular-energy share} is
+##{
+\rho_1(\Delta W)
+=\frac{\sigma_1(\Delta W)^2}{\sum_{j=1}^q\sigma_j(\Delta W)^2}
+=\frac{\sigma_1(\Delta W)^2}{\|\Delta W\|_F^2}.
+}
+The nonzero hypothesis prevents an undefined #{0/0}; the value lies in
+#{[1/q,1]}.}
+
+\p{NExt instead reports
+#{E_1=\sigma_1/\sum_j\sigma_j} in Section 3.2
+\citef{chen2026lowrank}. That nuclear-share statistic and
+#{\rho_1} answer different questions. We use the squared share when
+``energy'' means contribution to squared Frobenius norm.}

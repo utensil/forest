@@ -1,0 +1,54 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Theorem}
+\title{DGG finite-batch head-gradient inequality}
+\tag{ftip}
+\tag{replay}
+\tag{gradient}
+
+\p{\strong{Source reconstruction.} This statement reconstructs
+\citet{Section 4.2.2, Lemma 2, Theorem 2, and Appendix B}{miao2026when}.}
+
+\p{For #{T\geq1} active, unclipped tokens, let
+##{
+G^{\rm lm}=\frac1T\sum_{i=1}^T G_i^{\rm lm},
+\qquad
+\overline{r^2}=\frac1T\sum_{i=1}^T r_i^2,
+}
+and set
+##{
+c_{\max}=
+\max_{1\leq i\leq T}
+\widehat A_i^2
+\|e_{a_i}-\pi_\theta(\mathord\cdot\mid h_{L,i})\|_2^2
+\|h_{L,i}\|_2^2.
+}
+Then
+##{
+\|G^{\rm lm}\|_F^2\leq c_{\max}\overline{r^2}
+=c_{\max}(1+\widehat\chi^2),
+}
+where #{\widehat\chi^2} is the statistic of \ref{ftip-0066}. If
+#{c_{\max}>0}, rearrangement gives the source's equivalent direction
+##{
+\widehat\chi^2\geq
+\frac{\|G^{\rm lm}\|_F^2}{c_{\max}}-1.
+}
+}
+
+\proof{
+\p{Convexity of the squared Frobenius norm and the factorization in
+\ref{ftip-007Z} give
+##{
+\left\|\frac1T\sum_iG_i^{\rm lm}\right\|_F^2
+\leq\frac1T\sum_i\|G_i^{\rm lm}\|_F^2
+\leq\frac{c_{\max}}T\sum_i r_i^2.
+}
+The identity #{\overline{r^2}=1+\widehat\chi^2} follows directly from
+\ref{ftip-0066}; division by positive #{c_{\max}} gives the final form.}
+}
+
+\p{The inequality points from observed head-gradient energy to a lower bound
+on this finite-batch squared-ratio statistic. It is not a converse: cancellation
+can make the batch gradient small even when individual ratios are large.}

@@ -1,0 +1,33 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Definition}
+\title{Path-emulation regret}
+\tag{ftip}
+\tag{trajectory}
+\tag{evaluation}
+
+\p{Fix the evaluation interface of \ref{ftip-005D}. Let
+#{P_{t+s}^{\rm act}} be the protocol that returns the artifact reached after
+#{s\geq1} additional realized training steps from checkpoint #{t}. Let
+#{\mathcal K_{\leq t}} be the saved checkpoint history available through
+#{t}, and let #{\widehat P_{t+s}(\mathcal K_{\leq t})} instead return the
+artifact forecast from that history. Their \strong{signed path-emulation regret}
+and \strong{absolute path-emulation regret} are
+##{
+\begin{aligned}
+\operatorname{Reg}^{\rm path}_{\rm ev}(t,s)
+&=J_{\rm ev}(P_{t+s}^{\rm act})
+-J_{\rm ev}(\widehat P_{t+s}(\mathcal K_{\leq t})),\\
+\operatorname{AReg}^{\rm path}_{\rm ev}(t,s)
+&=\left|\operatorname{Reg}^{\rm path}_{\rm ev}(t,s)\right|.
+\end{aligned}
+}
+}
+
+\p{The sign distinguishes an optimistic forecast from a pessimistic one; the
+absolute value measures discrepancy without cancellation across checkpoints.
+Both use the same task law, inference budget, and evaluator. Parameter error
+alone is not substituted for evaluation error. NExt's extrapolation and
+recovery schedule in Sections 4.1--4.3 and 5.1 motivates this comparison
+\citef{chen2026lowrank}, but the paper does not state this regret definition.}

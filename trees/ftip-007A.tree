@@ -1,0 +1,42 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Lemma}
+\title{Discovery bounds from conditional success rates}
+\tag{ftip}
+\tag{probability}
+\tag{rollout}
+
+\p{Put #{D_0=\varnothing}. Whenever
+#{\Pr(D_{i-1}^{\mathsf c})>0}, define the surviving conditional success rate}
+
+##{
+ q_i=\Pr(E_i\mid D_{i-1}^{\mathsf c}).
+}
+
+\p{If these rates are defined through step #{B}, then}
+
+##{
+ \Pr(D_B^{\mathsf c})=\prod_{i=1}^{B}(1-q_i).
+}
+
+\p{Consequently, if
+#{0\leq\underline q\leq q_i\leq\overline q\leq1} for every surviving
+step, then}
+
+##{
+ 1-(1-\underline q)^B
+ \leq \Pr(D_B)
+ \leq 1-(1-\overline q)^B.
+}
+
+\proof{
+\p{The chain rule gives
+#{\Pr(D_i^{\mathsf c})=\Pr(D_{i-1}^{\mathsf c})(1-q_i)}. Iteration proves
+the product identity, and the coordinatewise bounds on #{1-q_i} give the two
+discovery bounds.}}
+
+\p{No independence assumption is used. The conditional rates may change with
+the earlier failures, an adaptive decoder, or a changing environment state.}
+
+\p{This is an FTIP-proved finite statement.}

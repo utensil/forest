@@ -1,0 +1,65 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Theorem}
+\title{DGG intermediate-to-head gradient-energy bound}
+\tag{ftip}
+\tag{replay}
+\tag{gradient}
+
+\p{\strong{Source reconstruction.} This statement reconstructs
+\citet{Section 4.2.1, Lemma 1, Assumption 1, Theorem 1, and Appendix A.3}{miao2026when}.}
+
+\p{Use the per-token quantities of \ref{ftip-007Z}. Assume positive constants
+#{\alpha_{\min}}, #{\beta_{\max}}, and #{C} satisfy
+##{
+\|h_{L,i}\|_2^2\geq \alpha_{\min}d_{\rm model},
+\qquad
+\|x_i^{\rm int}\|_2^2\leq \beta_{\max}d_{\rm model},
+}
+and the two logit-sensitivity bounds
+##{
+\mathbb E_{j\sim\pi_\theta(\mathord\cdot\mid h_{L,i})}
+ \|(J_i)_{j,:}\|_2^2\leq C,
+\qquad
+\|(J_i)_{a_i,:}\|_2^2\leq C.
+}
+If #{\widehat A_i\neq0} and #{\pi_\theta(a_i\mid h_{L,i})<1}, then
+##{
+\frac{\|G_i^{\rm int}\|_F^2}{\|G_i^{\rm lm}\|_F^2}
+\leq
+\frac{\mathcal C_{\rm struct}}
+{(1-\pi_\theta(a_i\mid h_{L,i}))^2},
+\qquad
+\mathcal C_{\rm struct}
+=\frac{4\beta_{\max}C}{\alpha_{\min}}.
+}
+}
+
+\proof{
+\p{The sampled-token coordinate of #{E_i} and the lower activation bound give
+##{
+\|G_i^{\rm lm}\|_F^2
+=\|E_i\|_2^2\|h_{L,i}\|_2^2
+\geq
+r_i^2\widehat A_i^2
+(1-\pi_\theta(a_i\mid h_{L,i}))^2
+\alpha_{\min}d_{\rm model}.
+}
+Expanding #{J_i^{\mathsf T}E_i}, applying
+#{(a-b)^2\leq2a^2+2b^2}, and then using both logit-sensitivity bounds yields
+#{\|J_i^{\mathsf T}E_i\|_2^2\leq4r_i^2\widehat A_i^2C}. Hence
+##{
+\|G_i^{\rm int}\|_F^2
+\leq4r_i^2\widehat A_i^2C\,
+\beta_{\max}d_{\rm model}.
+}
+The source's softmax probabilities make #{r_i>0}; the nonzero-advantage and
+nonunit-probability hypotheses make the head lower bound positive. Division
+and cancellation give the displayed ratio.}
+}
+
+\p{The activation inequalities reproduce the source's Lemma 1, while the two
+row-energy inequalities reproduce its Assumption 1. The conclusion is an
+upper bound on an intermediate-to-head gradient-energy ratio. It does not say
+that either gradient is small, and it does not compare evaluation scores.}

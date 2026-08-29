@@ -1,0 +1,31 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Definition}
+\title{Leading-subspace projector drift}
+\tag{ftip}
+\tag{trajectory}
+\tag{linear-algebra}
+
+\p{Let #{\Delta W_t} and #{\Delta W_s} be nonzero matrices of the same shape,
+each with positive leading spectral gap. If #{u_1(t)} and #{u_1(s)} are unit
+leading left singular vectors, define their \strong{leading-subspace
+projector drift} by
+##{
+d_{\rm proj}(t,s)
+=\|\Pi_t^{\rm svd}-\Pi_s^{\rm svd}\|_F,
+\qquad
+\Pi_t^{\rm svd}=u_1(t)u_1(t)^{\mathsf T},
+\quad
+\Pi_s^{\rm svd}=u_1(s)u_1(s)^{\mathsf T}.
+}
+The definition is independent of both singular-vector signs and takes values
+in #{[0,\sqrt{2}]}.}
+
+\p{This is a note-local trajectory diagnostic, not a definition or claim from
+NExt.}
+
+\p{A large value of #{\rho_1} from \ref{ftip-0086} says that one
+singular mode dominates a particular difference matrix. It does not say that
+the dominant subspace remains fixed across checkpoints; #{d_{\rm proj}}
+measures that separate question.}

@@ -1,0 +1,40 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Example}
+\title{Weight updates and candidate selection are different proxy operators}
+\tag{ftip}
+\tag{reward}
+\tag{inference}
+
+\p{A proxy score can enter a training operator or a selection operator. In
+the first route it changes the policy; in the second it ranks a finite sample
+from a policy whose weights remain fixed.}
+
+\tikzfig{\begin{tikzpicture}[
+  box/.style={draw, rounded corners=2pt, align=center, font=\scriptsize,
+    text width=19mm, minimum height=8mm},
+  flow/.style={-{Stealth[length=1.8mm]}, thick}
+]
+\node[box] (tr-roll) at (0,1.15) {training\\rollouts from $\pi$};
+\node[box] (tr-score) at (2.6,1.15) {proxy\\rewards};
+\node[box] (tr-update) at (5.2,1.15) {parameter\\update};
+\node[box] (tr-policy) at (7.8,1.15) {new policy\\$\pi'$};
+\node[box] (in-policy) at (0,-1.15) {inference\\fixed $\pi$};
+\node[box] (in-sample) at (2.6,-1.15) {$N$ sampled\\candidates};
+\node[box] (in-score) at (5.2,-1.15) {proxy\\ranking};
+\node[box] (in-output) at (7.8,-1.15) {selected\\output};
+\draw[flow] (tr-roll) -- (tr-score);
+\draw[flow] (tr-score) -- (tr-update);
+\draw[flow] (tr-update) -- (tr-policy);
+\draw[flow] (in-policy) -- (in-sample);
+\draw[flow] (in-sample) -- (in-score);
+\draw[flow] (in-score) -- (in-output);
+\end{tikzpicture}}
+
+\p{The lifecycle accounting of \ref{ftip-005H} places the first route's
+rollout and update work in separate coordinates. The second route incurs
+rollout and evaluation work but no parameter update. Consequently, the event
+#{\mathcal E_N^{\rm fa}} in \ref{ftip-007K} concerns the candidate set
+presented to selection;
+it is not a claim about the selected output or a training-time policy change.}

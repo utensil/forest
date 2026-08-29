@@ -1,0 +1,38 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Example}
+\title{Counterexample: Small average proxy error fails after distribution shift}
+\tag{ftip}
+\tag{reward}
+\tag{distribution-shift}
+
+\p{Let the finite decision set be
+#{\mathcal Y_0=\{y_{\rm safe},y_{\rm exploit}\}}. Define its utility and
+proxy utility by the following table.}
+
+##{
+\begin{array}{c|cc}
+ &y_{\rm safe}&y_{\rm exploit}\\ \hline
+U&1&0\\
+\widehat U&1&2.
+\end{array}
+}
+
+\p{For #{0<\delta<1}, let a reference law #{P_\delta} assign probability
+#{\delta} to #{y_{\rm exploit}}. Its mean absolute proxy error is}
+
+##{
+ \mathbb E_{P_\delta}\lvert \widehat U-U\rvert=2\delta,
+}
+
+\p{which tends to zero with #{\delta}. Nevertheless, proxy maximization
+selects #{y_{\rm exploit}} and incurs utility regret #{1}. Under the shifted
+law concentrated on that selected outcome, the mean error is #{2}. Thus no
+vanishing selection-regret bound can depend only on average error under the
+reference law.}
+
+\p{This two-outcome construction isolates the distribution-shift warning in
+\ref{ftip-0061}. It does not claim that a particular learned verifier has this
+error profile; \ref{ftip-0060} gives a source-linked checker instance with the
+same proxy-versus-utility separation.}

@@ -1,0 +1,30 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Corollary}
+\title{Replaying a fixed pool supplies no new feedback information}
+\tag{ftip}
+\tag{feedback}
+\tag{replay}
+
+\p{Fix a realized finite replay pool #{d} as in \ref{ftip-0056}. Let
+#{\mathcal V} be a finite seed set, and let #{V\in\mathcal V} be a
+replay-and-update seed with the same declared law in two feedback worlds and
+whose law does not depend on the world. If a replay-only procedure makes no new
+environment or feedback query, then its output has the form #{Y=h(d,V)}. The
+law of #{Y} is the same in the two worlds.}
+
+\proof{
+\p{For every output #{y},}
+
+##{
+\Pr(h(d,V)=y)=
+\sum_{\substack{v\in\mathcal V\\h(d,v)=y}}\Pr(V=v).
+}
+
+\p{The fixed pool, seed law, and readout are identical in the two worlds, so
+the displayed sum is identical. Equivalently, this is the pushforward argument
+of \ref{ftip-007S} applied after conditioning on the realized pool.}
+}
+
+\p{This is an FTIP-proved finite statement.}

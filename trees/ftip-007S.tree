@@ -1,0 +1,39 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Theorem}
+\title{Post-training cannot distinguish observationally equivalent worlds}
+\tag{ftip}
+\tag{feedback}
+\tag{identifiability}
+
+\p{Let #{w_0\equiv_{\mathsf P}w_1}. For any finite output set #{\mathcal Y}
+and any readout #{h:\mathcal T_{\mathsf P}\to\mathcal Y},}
+
+##{
+h_{\#}\operatorname{Law}(T_{w_0}^{\mathsf P})
+=h_{\#}\operatorname{Law}(T_{w_1}^{\mathsf P}).
+}
+
+\p{Thus a final artifact stamp, update decision, or test chosen solely from
+the declared protocol's transcript has the same distribution in both worlds.}
+
+\proof{
+\p{For every #{y\in\mathcal Y}, finiteness gives}
+
+##{
+\begin{aligned}
+\Pr\left(h(T_{w_0}^{\mathsf P})=y\right)
+&=\sum_{\substack{t\in\mathcal T_{\mathsf P}\\h(t)=y}}
+  \Pr(T_{w_0}^{\mathsf P}=t)\\
+&=\sum_{\substack{t\in\mathcal T_{\mathsf P}\\h(t)=y}}
+  \Pr(T_{w_1}^{\mathsf P}=t)
+=\Pr\left(h(T_{w_1}^{\mathsf P})=y\right).
+\end{aligned}
+}
+
+\p{The middle equality is observational equivalence from \ref{ftip-007R}.
+These point probabilities determine the two pushforward laws.}
+}
+
+\p{This is an FTIP-proved finite statement.}
