@@ -1,0 +1,18 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Definition}
+\title{Optimizer state action}
+\tag{ftip}
+\tag{optimization}
+
+\p{Use the optimizer-state convention of \ref{ftip-001H}. For every
+#{Q\in\mathrm O(k)}, an \newvocab{optimizer state action} is a map
+#{\sigma_Q:\mathcal S_{\rm opt}\to\mathcal S_{\rm opt}} compatible with the
+shapes of the factor states and satisfying #{\sigma_Q(s_0)=s_0} for the
+declared initial state.}
+
+\p{For example, a momentum buffer shaped like #{U} transforms by right
+multiplication by #{Q}; a shared scalar second moment is fixed. An entrywise
+second-moment array need not admit a state action compatible with every
+orthogonal #{Q}.}

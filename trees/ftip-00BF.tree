@@ -1,0 +1,38 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Example}
+\title{A two-coordinate Adam defect witness}
+\tag{ftip}
+\tag{adam}
+\tag{diagram}
+
+\p{Take #{d_1=d_2=1}, #{k=2}, #{f(w)=w^2/2},
+#{U_0=V_0=(1,0)}, and}
+
+##{
+ Q=2^{-1/2}\begin{pmatrix}1&1\\-1&1\end{pmatrix}.
+}
+
+\p{The original and rotated products after one zero-state Adam step are}
+
+##{
+ W_1=\left(1-\frac{\eta}{1+\epsilon}\right)^2,
+ \qquad
+ \widetilde W_1=\left(1-\frac{\eta}{2^{-1/2}+\epsilon}\right)^2.
+}
+
+\tikzfig{\begin{tikzpicture}[
+ box/.style={draw,rounded corners,align=center,text width=29mm,
+ minimum height=10mm,font=\small},arr/.style={->,>=stealth,semithick},
+ lab/.style={font=\scriptsize,fill=white,inner sep=1pt}]
+\node[box] (w) at (0,1.45) {same represented value\\$W_0=1$};
+\node[box] (a) at (-3.0,-1.0) {basis $(1,0)$\\product $W_1$};
+\node[box] (b) at (3.0,-1.0) {rotated basis\\product $\widetilde W_1$};
+\draw[arr] (w) -- node[lab,left]{Adam} (a);
+\draw[arr] (w) -- node[lab,right]{Adam} (b);
+\end{tikzpicture}}
+
+\p{They differ when #{0<\eta<2^{-1/2}+\epsilon}. This is the explicit
+witness in Proposition 4.4 of \citef{singh2026lossbasis}; it is a statement
+about one factored quadratic, not about language-model performance.}

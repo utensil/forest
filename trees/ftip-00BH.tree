@@ -1,0 +1,27 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Theorem}
+\title{Full-rank memoryless equivariant rules are Gram-determined}
+\tag{ftip}
+\tag{optimization}
+
+\p{Let #{k\leq n}, and let #{\Phi} be defined on full-column-rank matrices
+#{G\in\mathbb R^{n\times k}}. Then #{\Phi(GQ)=\Phi(G)Q} for every
+#{Q\in\mathrm O(k)} if and only if there is a matrix-valued function #{H}
+of #{GG^{\mathsf T}} such that}
+
+##{
+ \Phi(G)=H(GG^{\mathsf T})G.
+}
+
+\proof{
+\p{The displayed form is immediately equivariant. Conversely, set
+#{X(G)=\Phi(G)G^+}. Then #{X(G)G=\Phi(G)} and
+#{X(GQ)=X(G)}. Two full-column-rank matrices with the same left Gram matrix
+have the same range and differ by a right orthogonal factor. Hence #{X(G)}
+depends only on #{GG^{\mathsf T}}; take #{H=X}.}}
+
+\p{\strong{Status: source-reconstructed theorem.} See Theorem 4.5 and its
+proof in Appendix B.6 of \citef{singh2026lossbasis}. It classifies the
+full-rank stratum only.}

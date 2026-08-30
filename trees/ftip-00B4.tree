@@ -1,0 +1,32 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Example}
+\title{A commuting optimizer square}
+\tag{ftip}
+\tag{optimization}
+\tag{diagram}
+
+\p{One update of a gauge-equivariant optimizer makes the following square
+commute. The vertical arrows change factor basis and the horizontal arrows
+apply the same declared update.}
+
+\tikzfig{\begin{tikzpicture}[
+ box/.style={draw,rounded corners,align=center,text width=36mm,
+ minimum height=10mm,font=\small},
+ arr/.style={->,>=stealth,semithick},
+ lab/.style={font=\scriptsize,fill=white,inner sep=1pt}
+]
+\node[box] (a) at (-2.8,1.35) {$(U_t,V_t,s_t)$};
+\node[box] (b) at (2.8,1.35) {$(U_{t+1},V_{t+1},s_{t+1})$};
+\node[box] (c) at (-2.8,-1.35) {$(U_tQ,V_tQ,\sigma_Qs_t)$};
+\node[box] (d) at (2.8,-1.35) {$(U_{t+1}Q,V_{t+1}Q,\sigma_Qs_{t+1})$};
+\draw[arr] (a) -- node[lab,above] {$\mathcal A$} (b);
+\draw[arr] (c) -- node[lab,below] {$\mathcal A$} (d);
+\draw[arr] (a) -- node[lab,left] {$Q$} (c);
+\draw[arr] (b) -- node[lab,right] {$Q$} (d);
+\end{tikzpicture}}
+
+\p{Commutation is stronger than equality of the scalar losses before the
+step. It states equality of the represented product trajectory after aligning
+the parameter bases.}

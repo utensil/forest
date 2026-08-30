@@ -1,0 +1,36 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Example}
+\title{The orthogonal gauge of an attention head}
+\tag{ftip}
+\tag{attention}
+\tag{diagram}
+
+\p{Use the suite convention of \ref{ftip-000P}:
+#{W^Q,W^K\in\mathbb R^{d\times d_h}} and
+#{Q_h=XW^Q}, #{K_h=XW^K}. Attention logits depend on these weights through}
+
+##{
+ Q_hK_h^{\mathsf T}=XW^Q(W^K)^{\mathsf T}X^{\mathsf T}.
+}
+
+\p{For #{A\in\mathrm O(d_h)}, the right action
+#{(W^Q,W^K)\mapsto(W^QA,W^KA)} preserves the middle product.}
+
+\tikzfig{\begin{tikzpicture}[
+ box/.style={draw,rounded corners,align=center,text width=29mm,
+ minimum height=10mm,font=\small},arr/.style={->,>=stealth,semithick},
+ lab/.style={font=\scriptsize,fill=white,inner sep=1pt}]
+\node[box] (f) at (-3.3,0) {head factors\\$(W^Q,W^K)$};
+\node[box] (g) at (0,1.35) {rotate head basis\\$(W^QA,W^KA)$};
+\node[box] (p) at (3.3,0) {invariant product\\$W^Q(W^K)^\mathsf T$};
+\draw[arr] (f) -- node[lab,above left] {$A$} (g);
+\draw[arr] (f) -- node[lab,below] {multiply} (p);
+\draw[arr] (g) -- node[lab,above right] {multiply} (p);
+\end{tikzpicture}}
+
+\p{Section 6 of \citef{singh2026lossbasis} uses column-vector weights and
+the invariant #{W_Q^{\mathsf T}W_K}; transposition gives the suite formula
+above. Copying the source action without this translation would be
+dimensionally wrong.}

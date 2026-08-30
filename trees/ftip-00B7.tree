@@ -1,0 +1,21 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Definition}
+\title{Memoryless right-equivariant update}
+\tag{ftip}
+\tag{optimization}
+
+\p{A \newvocab{memoryless factor-update map} is a function
+#{\Phi:\mathbb R^{n\times k}\to\mathbb R^{n\times k}} applied to a current
+gradient #{G} without a persistent optimizer state. It is
+\newvocab{right-equivariant} when}
+
+##{
+ \Phi(GQ)=\Phi(G)Q
+ \qquad(G\in\mathbb R^{n\times k},\ Q\in\mathrm O(k)).
+}
+
+\p{This local definition is the input of Theorem 4.5 in
+\citef{singh2026lossbasis}. It does not classify stateful optimizers such as
+Adam.}

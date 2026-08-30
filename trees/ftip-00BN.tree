@@ -1,0 +1,27 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Theorem}
+\title{Common-scalar flow is a time-reparameterized gradient flow}
+\tag{ftip}
+\tag{gradient-flow}
+
+\p{Let #{\theta(t)} satisfy \ref{ftip-00BL}, let #{t(\tau)} be the inverse
+of the clock in \ref{ftip-00BM}, and put
+#{\widetilde\theta(\tau)=\theta(t(\tau))}. Then, for almost every #{\tau},}
+
+##{
+ \widetilde\theta'(\tau)=-\nabla L(\widetilde\theta(\tau)).
+}
+
+\proof{
+\p{The chain rule for absolutely continuous changes of variable gives
+#{dt/d\tau=a(t)} almost everywhere. Multiplying
+#{\dot\theta=-\nabla L/a(t)} by #{dt/d\tau} yields the displayed gradient
+flow.}}
+
+\p{\strong{Status: source-reconstructed theorem.} See Theorem 4.6 and its
+proof in Appendix B.9 of \citef{singh2026lossbasis}. Gauge invariance of #{a}
+is not needed for this
+single-trajectory clock identity; it makes the clock common across a gauge
+orbit.}

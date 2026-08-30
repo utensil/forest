@@ -1,0 +1,17 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Corollary}
+\title{Fixed nonlinear coordinatewise updates break the gauge}
+\tag{ftip}
+\tag{optimization}
+
+\p{A nonlinear fixed entrywise update applied at a zero optimizer state is
+not gauge-equivariant when #{k\geq2}. In particular, the source applies
+\ref{ftip-00BB} to the first-step maps of Adam, RMSProp, signSGD, and Lion;
+it checks Adafactor separately because its factored statistics are not an
+entrywise map.}
+
+\p{This is a first-step obstruction. It suffices to disprove equivariance of
+the full run, but it does not classify every later state or say that such an
+optimizer cannot reach a particular solution.}

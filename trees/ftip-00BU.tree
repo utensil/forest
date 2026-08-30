@@ -1,0 +1,23 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Definition}
+\title{Parameterization-stable training intervention}
+\tag{ftip}
+\tag{optimization}
+\tag{intervention}
+
+\p{Fix a factorized objective, an update algorithm, hyperparameter schedule,
+randomness coupling, stopping rule, and initial optimizer state. The resulting
+training intervention is \newvocab{parameterization-stable on an orthogonal
+orbit} when every two gauge-related initial states have identical represented
+trajectories:}
+
+##{
+ \widetilde U_t\widetilde V_t^{\mathsf T}=U_tV_t^{\mathsf T}
+ \qquad\hbox{at every compared step }t.
+}
+
+\p{This is a local stability property of a fully declared intervention. It
+does not say that arbitrary objective-equivalent pairs outside the orbit must
+agree.}

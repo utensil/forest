@@ -1,0 +1,24 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{proposition}
+\title{A first-step defect falsifies a loss-only protocol specification}
+\tag{ftip}
+\tag{optimization}
+\tag{falsifier}
+
+\p{Suppose two orthogonally gauge-related initializations have equal
+represented object and scalar objective, but a declared update produces
+different represented objects after one step. Then the training intervention
+is not determined by the represented initialization and scalar objective
+alone.}
+
+\proof{
+\p{If those two objects determined the intervention, equal inputs would give
+the same represented next state. The witnessed inequality contradicts that
+factorization.}}
+
+\p{\strong{Status: FTIP-proved finite falsifier.} Proposition
+\ref{ftip-00BE} and \ref{ftip-00BF} instantiate its premise for one
+factored quadratic and zero-state Adam. It proves underspecification, not a
+capability difference.}
