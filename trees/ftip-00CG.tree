@@ -1,0 +1,19 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Definition}
+\title{Session lineage tree}
+\tag{ftip}
+\tag{agent}
+\tag{lineage}
+
+\p{A \strong{session lineage tree} is a finite rooted directed tree
+#{\mathcal T=(V,E,r)} whose edges point from a parent session to a directly
+spawned descendant. Each node #{v\in V} carries an immutable session
+identifier, its resolved harness and inference stamps, a local event stream,
+and a local realized cost #{c_v\in\mathbb R_+^m}.}
+
+\p{For a node #{v}, let #{\mathcal T_v} be the induced subtree containing
+#{v} and all its descendants. Distinct children of one node have disjoint
+node sets. Messages between branches are events in their local streams and do
+not merge their identities or costs.}

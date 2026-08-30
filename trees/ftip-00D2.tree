@@ -1,0 +1,21 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Lemma}
+\title{Append-only retention preserves contamination absent deletion}
+\tag{ftip}
+\tag{contamination}
+\tag{proof}
+
+\p{Suppose the skill archives of \ref{ftip-00D0} are append-only:
+#{\mathcal K_n\subseteq\mathcal K_{n+1}} for every #{n}. If
+#{B(h_n)=1}, then #{B(h_m)=1} for every #{m\geq n} until a deletion,
+rollback, or contract change removes or reclassifies the witnessing skill.}
+
+\p{\strong{Proof.} Choose #{k\in\mathcal K_n} with #{b(k)=1}. Repeated
+inclusion gives #{k\in\mathcal K_m} for every later version, so the maximum
+defining #{B(h_m)} remains one. The final qualification lists operations that
+break the inclusion or change the predicate.}
+
+\p{This FTIP-proved finite observation concerns retained state. It does not
+say that the selector will invoke the exploit on every later run.}

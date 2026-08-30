@@ -1,0 +1,25 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Definition}
+\title{Parameter, context, compute, and persistent state}
+\tag{ftip}
+\tag{agent}
+\tag{state}
+
+\p{Let #{\mathcal C_{\rm act}} be an active-context space,
+#{\mathcal Z_{\rm man}} an explicitly managed computation-state space, and
+#{\mathcal H_{\rm pers}} a persistent harness-state space. A
+\strong{four-layer harness state} is}
+
+##{
+\Xi=(M,c,z,h)\in
+\mathcal M_{\rm exec}\times\mathcal C_{\rm act}
+\times\mathcal Z_{\rm man}\times\mathcal H_{\rm pers}.
+}
+
+\p{The coordinates are, respectively, the executable model artifact, the
+token-visible context, explicitly managed values or sessions, and state that
+can survive the present invocation. A transition may change any declared
+subset of these coordinates. A \newvocab{fixed-weight harness transition}
+holds #{M} fixed while changing one or more of #{c,z,h}.}

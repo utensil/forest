@@ -1,0 +1,25 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Theorem}
+\title{Audit-before-commit bounds contaminated commits}
+\tag{ftip}
+\tag{audit}
+\tag{proof}
+
+\p{Use the audit of \ref{ftip-00D3} and commit a proposal only when its audit
+returns #{\mathsf{pass}}. If #{\Pr(Z_n=1)>0} and its conditional
+false-negative rate is at most #{\bar\eta\in[0,1]}, then}
+
+##{
+\Pr(d_n=\mathsf{accept}\mid Z_n=1)\leq\bar\eta.
+}
+
+\p{\strong{Proof.} Under audit-before-commit, the event
+#{\{d_n=\mathsf{accept}\}} is contained in the event that the audit passes.
+Conditioning on #{Z_n=1} and applying the false-negative bound proves the
+inequality.}
+
+\p{This FTIP-proved statement bounds one declared admission channel. It gives
+no bound when proposals bypass the audit, when the contract omits the exploit,
+or when the audit's conditional error changes under adaptive search.}

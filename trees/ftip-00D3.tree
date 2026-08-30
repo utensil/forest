@@ -1,0 +1,34 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Definition}
+\title{Independent refinement audit}
+\tag{ftip}
+\tag{audit}
+\tag{refinement}
+
+\p{Let #{Z_n\in\{0,1\}} indicate whether the proposal
+#{\widetilde h_{n+1}} of \ref{ftip-00CZ} is contaminated under the declared
+contract. An \strong{independent refinement audit} is a randomized kernel}
+
+##{
+A_{\rm ref}:
+\mathcal H\times\mathcal H\times\Omega_{\rm aud}
+\longrightarrow\{\mathsf{pass},\mathsf{fail}\},
+}
+
+\p{whose seed law is declared independently of the refinement seed
+conditional on the audited states. Its conditional false-negative rate is}
+
+##{
+\eta_{\rm fn}
+=
+\Pr\left(
+A_{\rm ref}(h_n,\widetilde h_{n+1},\omega_n^{\rm aud})=\mathsf{pass}
+\mid Z_n=1
+\right).
+}
+
+\p{The independence declaration separates proposal randomness from audit
+randomness; it does not imply that the auditor is calibrated under adaptive
+distribution shift.}

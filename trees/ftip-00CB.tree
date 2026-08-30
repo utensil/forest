@@ -1,0 +1,34 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Example}
+\title{One artifact and two harness policies}
+\tag{ftip}
+\tag{agent}
+\tag{diagram}
+
+\p{The same executable artifact can be paired with two persistent states and
+therefore two resolved harness policies. The diagram changes the harness lane
+without moving the artifact lane.}
+
+\tikzfig{\begin{tikzpicture}[
+ box/.style={draw,rounded corners,align=center,text width=30mm,
+ minimum height=10mm,font=\small},
+ arr/.style={->,>=stealth,semithick},
+ lab/.style={font=\scriptsize,fill=white,inner sep=1pt}
+]
+\node[box] (m) at (-3.6,0) {fixed artifact\\$M$};
+\node[box] (h0) at (0,1.4) {persistent state\\$h$};
+\node[box] (h1) at (0,-1.4) {refined state\\$h'$};
+\node[box] (p0) at (3.6,1.4) {harness policy\\$\pi^{M,h}$};
+\node[box] (p1) at (3.6,-1.4) {harness policy\\$\pi^{M,h'}$};
+\draw[arr] (m) -- (p0);
+\draw[arr] (m) -- (p1);
+\draw[arr] (h0) -- (p0);
+\draw[arr] (h1) -- (p1);
+\draw[arr] (h0) -- node[lab,left]{refine} (h1);
+\end{tikzpicture}}
+
+\p{Different policies here establish only that harness state is an
+intervention coordinate. An independent evaluation is still required to
+compare their outcomes.}

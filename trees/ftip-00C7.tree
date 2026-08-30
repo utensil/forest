@@ -1,0 +1,26 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Definition}
+\title{Persistent event stream}
+\tag{ftip}
+\tag{event-log}
+\tag{persistent-state}
+
+\p{Fix a finite event alphabet #{\mathcal E_{\rm har}}. A
+\strong{persistent event stream} of length #{n} is}
+
+##{
+L_n=(e_0,\ldots,e_{n-1})\in\mathcal E_{\rm har}^{n}.
+}
+
+\p{The append operation is
+#{L_{n+1}=\operatorname{append}(L_n,e_n)}. Write
+#{L_i\preceq_{\rm pref}L_j} when #{L_i} is a prefix of #{L_j}. An append-only
+stream satisfies #{L_i\preceq_{\rm pref}L_j} for every #{i\leq j}; branching
+creates distinct continuations with a common prefix rather than rewriting
+that prefix.}
+
+\p{Events may record model or tool calls, messages, interventions, retries,
+verifier outcomes, harness edits, and resource use. The event schema and its
+exact version belong to the configuration of \ref{ftip-00C6}.}

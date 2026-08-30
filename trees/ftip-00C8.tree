@@ -1,0 +1,29 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Definition}
+\title{Materialized harness state}
+\tag{ftip}
+\tag{event-log}
+\tag{state}
+
+\p{Let #{\mathcal V_{\rm fold}} be a space of fold versions. For each
+#{v\in\mathcal V_{\rm fold}}, fix a deterministic map}
+
+##{
+F_v:\mathcal H_{\rm pers}\times\mathcal E_{\rm har}
+\longrightarrow\mathcal H_{\rm pers}.
+}
+
+\p{Given an initial persistent state #{h_0}, event stream
+#{L_n=(e_0,\ldots,e_{n-1})}, and version sequence
+#{\boldsymbol v=(v_0,\ldots,v_{n-1})}, its
+\strong{materialized harness state} is obtained recursively by}
+
+##{
+h_{i+1}=F_{v_i}(h_i,e_i),\qquad 0\leq i<n.
+}
+
+\p{The materialization record is the tuple
+#{(h_0,L_n,\boldsymbol v,(F_v)_v)}. Omitting a version or the initial state
+defines a family of possible materializations, not one replayable state.}

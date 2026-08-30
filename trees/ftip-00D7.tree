@@ -1,0 +1,23 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Definition}
+\title{Recovery, rollback, and version identity}
+\tag{ftip}
+\tag{rollback}
+\tag{versioning}
+
+\p{Let #{v_n} identify the full committed harness configuration of
+\ref{ftip-00C6}. A \strong{rollback} from version #{v_n} to an earlier version
+#{v_j}, #{j<n}, restores the configuration and retained-state snapshot named
+by #{v_j}; a \strong{recovery} may instead construct a new version
+#{v_{n+1}} from audited events.}
+
+\p{Version identity includes the artifact identifier, configuration, event-log
+prefix, and archive snapshot. Reusing a human-readable label while changing
+one of those fields is not the same version.}
+
+\p{Prime Agent describes append-only history, versioned state, forks, and
+recovery \citet{Sections 2.1--2.2}{karten2026prime}.
+The exact identity tuple above is the note's formulation for reproducible
+comparisons.}

@@ -1,0 +1,22 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Example}
+\title{Proxy-monotone refinement can retain an exploit}
+\tag{ftip}
+\tag{counterexample}
+\tag{proxy}
+
+\p{Consider two skills, #{k_{\rm safe}} and #{k_{\rm exp}}. Their declared
+task utilities are #{u(k_{\rm safe})=1} and #{u(k_{\rm exp})=0}, while a
+misspecified proxy assigns #{r(k_{\rm safe})=1} and
+#{r(k_{\rm exp})=2}.}
+
+\p{A refinement rule that appends a candidate whenever its measured proxy is
+strictly larger selects #{k_{\rm exp}} after observing both candidates. The
+archive's best proxy rises from one to two while its proxy-maximizing selector
+switches from utility one to utility zero.}
+
+\p{Thus monotone improvement of a retained proxy does not imply monotone task
+utility. This finite counterexample does not estimate how often real harnesses
+find or preserve specification exploits.}

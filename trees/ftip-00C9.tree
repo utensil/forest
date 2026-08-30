@@ -1,0 +1,20 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Theorem}
+\title{Deterministic event folding gives replayable state}
+\tag{ftip}
+\tag{theorem}
+\tag{event-log}
+
+\p{For a materialization record in \ref{ftip-00C8}, replaying the same
+initial state, event sequence, version sequence, and fold maps produces the
+same state #{h_n}.}
+
+\p{This is an FTIP-proved finite result. It assumes exact equality of all
+recorded inputs and deterministic fold maps.}
+
+\proof{At step zero both replays have state #{h_0}. If their states agree at
+step #{i}, both apply the same function #{F_{v_i}} to the same pair
+#{(h_i,e_i)}, so their states agree at step #{i+1}. Finite induction gives
+equality at step #{n}.}

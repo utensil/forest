@@ -1,0 +1,34 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Definition}
+\title{Refinement proposal and committed harness update}
+\tag{ftip}
+\tag{refinement}
+\tag{harness}
+
+\p{Let #{h_n\in\mathcal H} be the committed harness state at version #{n},
+let #{e_n\in\mathcal E} be a newly admitted event, and let
+#{\omega_n\in\Omega_{\rm ref}} be a refinement seed. A
+\strong{refinement proposal} is}
+
+##{
+\widetilde h_{n+1}=R(h_n,e_n,\omega_n),
+\qquad
+R:\mathcal H\times\mathcal E\times\Omega_{\rm ref}\longrightarrow\mathcal H.
+}
+
+\p{Given a typed decision #{d_n\in\{\mathsf{accept},\mathsf{reject}\}}, the
+\strong{committed harness update} is}
+
+##{
+h_{n+1}=
+\begin{cases}
+\widetilde h_{n+1},&d_n=\mathsf{accept},\\
+h_n,&d_n=\mathsf{reject}.
+\end{cases}
+}
+
+\p{This separates candidate generation from state mutation. A proposed note,
+skill, prompt, or subagent specification has no persistent effect until the
+commit decision accepts it.}
