@@ -1,0 +1,17 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Definition}
+\title{Retained-context policy}
+\tag{ftip}
+\tag{context}
+
+\p{Fix a token history #{h_t=(x_0,\ldots,x_{t-1})}. A retained-context
+policy is a deterministic map #{\kappa_t(h_t)} that selects an ordered
+subsequence of the history, together with a decoder that conditions its next
+token on that subsequence. The policy, rather than the model weights, names
+which prior tokens remain available at step #{t}.}
+
+\p{A comparison of two policies is conditional on the same model, prompt law,
+decoding law, stopping rule, and budget unless a card explicitly declares a
+second intervention coordinate.}

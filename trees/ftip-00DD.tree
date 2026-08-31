@@ -1,0 +1,16 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Definition}
+\title{Prefix-window retained state}
+\tag{ftip}
+\tag{context}
+
+\p{For prefix length #{p} and window length #{w}, define the prefix-window
+policy by retaining every token in positions #{0,\ldots,p-1} and the most
+recent #{w} tokens after that prefix. If the history is shorter than either
+region, the available positions are retained without padding.}
+
+\p{The policy is a context rule only. It does not assert that omitted tokens
+are irrelevant, nor that the resulting continuation distribution equals the
+full-history distribution.}

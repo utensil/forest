@@ -1,0 +1,27 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Example}
+\title{Equal terminal score, different trajectory exposure}
+\tag{ftip}
+\tag{diagram}
+\tag{schematic}
+
+\p{Two cells can reach the same terminal score while exposing different
+numbers of context positions. This finite counterexample blocks an inference
+from equal endpoint score to equal trajectory cost.}
+
+\tikzfig{\begin{tikzpicture}[
+ box/.style={draw,rounded corners,align=center,text width=28mm,
+ minimum height=10mm,font=\small},arr/.style={->,>=stealth,semithick},
+ lab/.style={font=\scriptsize,fill=white,inner sep=1pt}]
+\node[box] (a) at (-2.5,1.3) {cell A\\full history};
+\node[box] (b) at (2.5,1.3) {terminal score 1};
+\node[box] (c) at (-2.5,-1.3) {cell B\\prefix window};
+\node[box] (d) at (2.5,-1.3) {terminal score 1};
+\draw[arr] (a)--node[lab,above]{large exposure}(b);
+\draw[arr] (c)--node[lab,below]{capped exposure}(d);
+\end{tikzpicture}}
+
+\p{The score equality is compatible with unequal intermediate histories and
+unequal exposure counts.}
