@@ -1,0 +1,23 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Theorem}
+\title{Budget admission preserves a hard componentwise bound}
+\tag{ftip}
+\tag{theorem}
+\tag{compute}
+
+\p{Consider a finite sequence of continuations. Start from
+#{a_0\preceq b}. At step #{i}, admit only if
+#{a_i+\bar c_i\preceq b}, and require the realized cost to satisfy
+#{c_i\preceq\bar c_i}. With #{a_{i+1}=a_i+c_i}, every accumulated cost
+satisfies #{a_i\preceq b}.}
+
+\p{This is an FTIP-proved finite result. It is a contract theorem, not a
+prediction that a real executor respects its declared bound.}
+
+\proof{The claim holds for #{a_0}. If #{a_i\preceq b} and the next step is
+admitted, then
+#{a_{i+1}=a_i+c_i\preceq a_i+\bar c_i\preceq b}. If the step is rejected,
+the accumulated cost is unchanged after its already-accounted proposal work.
+Finite induction proves the claim.}

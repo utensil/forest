@@ -1,0 +1,37 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Example}
+\title{From evaluator caveat to withdrawn record}
+\tag{ftip}
+\tag{research-state}
+\tag{diagram}
+
+\p{The Grothendieck case study gives a concrete chronology. An early fast
+evaluator carried an exploration-only caveat; the working summary later lost
+that caveat and a feasibility condition; a later session recorded an
+unsupported upper bound; a subsequent audit withdrew it.}
+
+\tikzfig{\begin{tikzpicture}[
+ box/.style={draw,rounded corners,align=center,text width=28mm,
+ minimum height=10mm,font=\small},
+ arr/.style={->,>=stealth,semithick},
+ lab/.style={font=\scriptsize,fill=white,inner sep=1pt}
+]
+\node[box] (a) at (-4.2,0) {session 4\\evaluator caveat};
+\node[box] (b) at (-1.4,0) {session 8\\feasibility rule};
+\node[box] (c) at (1.4,0) {compressed state\\omits both};
+\node[box] (d) at (4.2,0) {session 44\\record set};
+\node[box] (e) at (1.4,-1.8) {later audit\\record withdrawn};
+\draw[arr] (a) -- (b);
+\draw[arr] (b) -- (c);
+\draw[arr] (c) -- (d);
+\draw[arr] (d) -- (e);
+\draw[arr,dashed] (a) to[bend right=24]
+ node[lab,below]{archive retrieval} (e);
+\end{tikzpicture}}
+
+\p{The source reports this sequence in Section 5 and Section 7.1; the
+complete archive retained the facts while the compressed decision state did
+not \citet{Section 5 and Section 7.1}{li2026longhorizon}. The diagram is a
+source-grounded chronology, not a measured error rate for compaction systems.}

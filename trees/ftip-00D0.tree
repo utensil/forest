@@ -1,0 +1,26 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Definition}
+\title{Skill archive and selector}
+\tag{ftip}
+\tag{skill}
+\tag{archive}
+
+\p{Let #{\mathcal S_{\rm skill}} be a skill space and
+#{\mathfrak A_{\rm skill}} the space of finite skill--provenance archives. A
+\strong{skill archive} at version #{n} is
+#{\mathcal K_n=((k_{n,j},\lambda_{n,j}))_{j\in J_n}
+\in\mathfrak A_{\rm skill}}. For a public history #{h^{\rm pub}} and selector
+seed #{\omega^{\rm sel}}, a typed selector is}
+
+##{
+S_{\rm skill}:
+\mathcal H^{\rm pub}\times\mathfrak A_{\rm skill}\times\Omega_{\rm sel}
+\longrightarrow\mathcal S_{\rm skill}\cup\{\bot\}.
+}
+
+\p{On archive #{\mathcal K_n}, a non-bottom output must equal one of its
+entries #{k_{n,j}}. The value #{\bot} means that no retained skill is invoked.
+The archive is part of persistent harness state, not a claim that its entries
+are correct, safe, novel, or encoded in model weights.}

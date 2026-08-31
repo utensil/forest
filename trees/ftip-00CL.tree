@@ -1,0 +1,37 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Example}
+\title{A finite delegated run and its lineage cost}
+\tag{ftip}
+\tag{compute}
+\tag{diagram}
+
+\p{Take two cost coordinates: thousands of output tokens and tool calls. The
+root delegates to two children, and the left child delegates once more.}
+
+\tikzfig{\begin{tikzpicture}[
+ box/.style={draw,rounded corners,align=center,text width=29mm,
+ minimum height=10mm,font=\small},
+ arr/.style={->,>=stealth,semithick}
+]
+\node[box] (r) at (0,1.8) {root $r$\\$c_r=(5,1)$};
+\node[box] (a) at (-3.0,0) {child $a$\\$c_a=(3,2)$};
+\node[box] (b) at (3.0,0) {child $b$\\$c_b=(4,0)$};
+\node[box] (d) at (-3.0,-1.8) {descendant $d$\\$c_d=(2,1)$};
+\draw[arr] (r) -- (a);
+\draw[arr] (r) -- (b);
+\draw[arr] (a) -- (d);
+\path (0,-2.6);
+\end{tikzpicture}}
+
+\p{The child-subtree costs are #{C_{\rm lin}(\mathcal T_a)=(5,3)} and
+#{C_{\rm lin}(\mathcal T_b)=(4,0)}. Therefore}
+
+##{
+C_{\rm lin}(\mathcal T)=(5,1)+(5,3)+(4,0)=(14,4).
+}
+
+\p{Charging only the root would hide nine thousand output tokens and three
+tool calls. Charging descendant work both locally and again at the parent
+would double count it.}

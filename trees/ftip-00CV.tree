@@ -1,0 +1,23 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Definition}
+\title{Full-log recovery witness}
+\tag{ftip}
+\tag{recovery}
+\tag{research-state}
+
+\p{For a constraint bit #{b} omitted by #{C}, a
+\strong{full-log recovery witness} is a query #{u}, retrieval map}
+
+##{
+R_u:\mathcal A_{\rm res}\longrightarrow\mathcal O_u,
+}
+
+\p{and decoder #{d_u:\mathcal O_u\to\{0,1\}} such that
+#{d_u(R_u(A))=b(A)} on the declared archive class. A harness that invokes this
+retrieval before judgment can condition on #{b}; a harness restricted to
+#{C(A)} cannot when the hypothesis of \ref{ftip-00CT} holds.}
+
+\p{The witness establishes recoverability from the retained archive, not that
+the harness will ask the right query or trust the recovered record.}
