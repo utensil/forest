@@ -1,0 +1,18 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Definition}
+\title{Context exposure count}
+\tag{ftip}
+\tag{cost}
+
+\p{For a retained-context policy #{\kappa} and generated history
+#{h_t}, define its exposure count through budget #{T} by}
+
+##{
+E_T(\kappa)=\sum_{t=0}^{T-1}\left|\kappa_t(h_t)\right|.
+}
+
+\p{This is a finite attention-input proxy. It is not a runtime identity: the
+implementation may have caching, batching, kernel, and communication costs
+that are not represented by #{E_T}.}

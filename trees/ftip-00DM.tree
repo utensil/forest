@@ -1,0 +1,24 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Example}
+\title{Warm-up and sliding-window arithmetic}
+\tag{ftip}
+\tag{diagram}
+\tag{schematic}
+
+\p{For #{p=3}, #{w=2}, and #{T=6}, the first steps grow the retained set
+until the cap #{p+w=5} is reached. The exposure bound is therefore #{E_T\leq
+6\cdot5=30}; the exact count depends on the prompt and stopping convention.}
+
+\tikzfig{\begin{tikzpicture}[
+ box/.style={draw,rounded corners,align=center,text width=32mm,
+ minimum height=10mm,font=\small},arr/.style={->,>=stealth,semithick},
+ lab/.style={font=\scriptsize,fill=white,inner sep=1pt}]
+\node[box] (warm) at (-2.5,0) {warm-up\\length 3,4,5};
+\node[box] (slide) at (2.5,0) {sliding\\length at most 5};
+\draw[arr] (warm)--node[lab,above]{cap reached}(slide);
+\end{tikzpicture}}
+
+\p{The arithmetic is an FTIP finite consequence, not a runtime measurement
+from the Prefix Sliding experiments.}

@@ -1,0 +1,27 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Example}
+\title{One trace under full and prefix-window attention}
+\tag{ftip}
+\tag{diagram}
+\tag{schematic}
+
+\p{This schematic keeps the model and token history fixed while changing only
+the retained-context policy. It is a local illustration, not a source figure.}
+
+\tikzfig{\begin{tikzpicture}[
+ box/.style={draw,rounded corners,align=center,text width=28mm,
+ minimum height=10mm,font=\small},arr/.style={->,>=stealth,semithick}]
+\node[box] (h) at (-3.6,0) {prompt + trace};
+\node[box] (full) at (0,1.3) {full history\\decoder};
+\node[box] (win) at (0,-1.3) {prefix + recent window\\decoder};
+\node[box] (yf) at (3.6,1.3) {continuation};
+\node[box] (yw) at (3.6,-1.3) {continuation};
+\draw[arr] (h)--(full); \draw[arr] (h)--(win);
+\draw[arr] (full)--(yf); \draw[arr] (win)--(yw);
+\end{tikzpicture}}
+
+\p{The two outputs can differ even though the represented weights and visible
+prompt are identical. Any claim about improvement must therefore name the
+retained-context intervention and its evaluation law.}
