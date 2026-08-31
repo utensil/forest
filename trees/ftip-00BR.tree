@@ -1,0 +1,29 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Example}
+\title{Equivariance neither guarantees nor precludes recovery}
+\tag{ftip}
+\tag{optimization}
+\tag{diagram}
+
+\p{The source records controls on both sides of the proposed implication.
+Its ScaledGD-inspired control is equivariant but equalizes the spectral
+schedule and does not recover the planted low-rank target at the declared
+budget. A long-anneal sign update is non-equivariant but eventually reaches a
+low-recovery-error regime.}
+
+\tikzfig{\begin{tikzpicture}[
+ box/.style={draw,rounded corners,align=center,text width=31mm,
+ minimum height=11mm,font=\small}]
+\node[font=\scriptsize] at (-2.3,1.65) {equivariant};
+\node[font=\scriptsize] at (2.3,1.65) {non-equivariant};
+\node[box] at (-2.3,0) {ScaledGD control\\no recovery at budget};
+\node[box] at (2.3,0) {long-anneal sign\\recovery observed};
+\node[font=\scriptsize,align=center] at (0,-1.65)
+ {spectral schedule and budget remain separate coordinates};
+\end{tikzpicture}}
+
+\p{\strong{Status: source-observed controls, Remark 4.7 and Appendix D.10}
+of \citef{singh2026lossbasis}. The source reports no tuned reproducibility
+baseline for the ScaledGD control. The diagram is not a convergence theorem.}

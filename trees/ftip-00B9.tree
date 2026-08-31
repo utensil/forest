@@ -1,0 +1,24 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{proposition}
+\title{A shared scalar second moment preserves the orthogonal gauge}
+\tag{ftip}
+\tag{optimization}
+\tag{adam}
+
+\p{Replace Adam's entrywise second-moment denominator by one scalar whose
+updates depend only on gauge-invariant quantities such as the pooled mean of
+the squared entries of both factor gradients. With a covariant first-moment
+buffer, the resulting stateful update is gauge-equivariant.}
+
+\proof{
+\p{The first moment is a linear exponential average and transforms by right
+multiplication by #{Q}. The pooled squared-entry mean is the joint squared
+Frobenius norm divided by the entry count, hence is unchanged by #{G\mapsto
+GQ}. Its bias correction and positive scalar denominator are unchanged, so
+the complete update transforms covariantly.}}
+
+\p{\strong{Status: source-reconstructed Proposition 4.2(2), proof Appendix
+B.3} of \citef{singh2026lossbasis}. The result concerns this declared
+shared-scalar variant, not stock Adam.}

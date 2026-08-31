@@ -1,0 +1,38 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{proposition}
+\title{Full-matrix Muon and Shampoo preserve the orthogonal gauge}
+\tag{ftip}
+\tag{optimization}
+
+\p{Fix one factor, write #{n\in\{d_1,d_2\}} for its row dimension, and let
+#{G_t,M_t\in\mathbb R^{n\times k}} be its gradient and Muon momentum buffer.
+For #{0\leq\beta<1}, #{M_{-1}=0}, and the source's linear momentum update
+#{M_t=\beta M_{t-1}+G_t}, Muon's direction is
+#{\Delta_t=\operatorname{msign}(M_t)}. Under real arithmetic this stateful
+update and the source's damped Shampoo update are right-equivariant. The Muon
+claim includes the stated finite Newton--Schulz approximations; the Shampoo
+claim uses its complete left and right accumulators.}
+
+\proof{
+\p{By \ref{ftip-00B1}, the primed gradient is #{G'_t=G_tQ}. Starting from
+#{M'_{-1}=M_{-1}Q=0}, induction through the linear momentum update gives
+#{M'_t=M_tQ}. If #{M_t=A\Sigma B^{\mathsf T}} is a compact singular-value
+decomposition, then #{M_tQ=A\Sigma(Q^{\mathsf T}B)^{\mathsf T}}, so
+#{\operatorname{msign}(M_tQ)=\operatorname{msign}(M_t)Q}. For
+#{\epsilon_{\rm NS}>0}, the Newton--Schulz initialization
+#{X_0=M_t/(\lVert M_t\rVert_F+\epsilon_{\rm NS})} is covariant because its
+Frobenius normalization is invariant; each polynomial iterate formed from
+#{X_j} and #{X_jX_j^{\mathsf T}} preserves the same covariance. For Shampoo,
+the left accumulator is invariant while the right accumulator transforms by
+#{R_t\mapsto Q^{\mathsf T} R_t Q}. Orthogonal functional calculus conjugates
+the right matrix function, so the transformed update is the original update
+right-multiplied by #{Q}.}}
+
+\p{\strong{Status: source-reconstructed Proposition 4.2(3)--(4), proof
+Appendix B.3} of \citef{singh2026lossbasis}. Variable splitting, coordinatewise
+clipping, mixed update rules, finite precision, and different damping
+conventions lie outside this statement. The Muon part is stateful; it does not
+replace the momentum buffer by the current gradient or invoke the memoryless
+classification of \ref{ftip-00B7}.}

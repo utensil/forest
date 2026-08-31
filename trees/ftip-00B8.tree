@@ -1,0 +1,21 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{proposition}
+\title{Gradient descent and momentum preserve the orthogonal gauge}
+\tag{ftip}
+\tag{optimization}
+
+\p{Gradient descent and Polyak or Nesterov momentum are gauge-equivariant
+when their factor gradients, momentum buffers, schedules, and look-ahead
+points are transformed consistently.}
+
+\proof{
+\p{By \ref{ftip-00B1}, #{G_t} becomes #{G_tQ}. Gradient descent therefore
+sends #{U_tQ} to #{(U_t-\eta_tG_t)Q}. A momentum buffer initialized at zero
+and formed by linear combinations of covariant gradients transforms as
+#{M_tQ}; a Nesterov look-ahead point is likewise the reference look-ahead
+right-multiplied by #{Q}. Induction proves the claim.}}
+
+\p{\strong{Status: source-reconstructed Proposition 4.2(1), proof Appendix
+B.3} of \citef{singh2026lossbasis}.}

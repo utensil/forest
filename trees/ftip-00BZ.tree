@@ -1,0 +1,31 @@
+\import{macros}
+\meta{agent-authored}{true}
+
+\taxon{Example}
+\title{One loss quotient and two optimizer trajectories}
+\tag{ftip}
+\tag{optimization}
+\tag{diagram}
+
+\p{A loss-only description collapses a gauge orbit to one represented
+starting point. A basis-sensitive optimizer can split that quotient back into
+different represented trajectories.}
+
+\tikzfig{\begin{tikzpicture}[
+ box/.style={draw,rounded corners,align=center,text width=25mm,
+ minimum height=10mm,font=\small},arr/.style={->,>=stealth,semithick},
+ lab/.style={font=\scriptsize,fill=white,inner sep=1pt}]
+\node[box] (u) at (-4.0,1.25) {$(U_0,V_0)$};
+\node[box] (q) at (-4.0,-1.25) {$(U_0Q,V_0Q)$};
+\node[box] (w) at (0,0) {same $W_0$\\same scalar loss};
+\node[box] (a) at (4.0,1.25) {represented path\\$W_1,W_2,\ldots$};
+\node[box] (b) at (4.0,-1.25) {represented path\\$\widetilde W_1,\widetilde W_2,\ldots$};
+\draw[arr] (u) -- (w); \draw[arr] (q) -- (w);
+\draw[arr] (w) -- node[lab,pos=.5,sloped,above]{basis-sensitive} (a);
+\draw[arr] (w) -- node[lab,pos=.5,sloped,below]{same rule} (b);
+\end{tikzpicture}}
+
+\p{The right-hand split is possible only because the centre box omits the
+factor basis and optimizer geometry. An FTIP admissible protocol in
+\ref{ftip-005J} must retain those intervention coordinates when they affect
+the executable result.}
