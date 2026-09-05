@@ -7,8 +7,8 @@
 \tag{evaluation}
 \tag{inference}
 
-\p{One fixed policy produces different measured success rates when evaluation
-stops after one rather than two tokens.}
+\p{One fixed policy can receive different measured success rates when the
+evaluation horizon changes.}
 
 \tikzfig{\begin{tikzpicture}[
   box/.style={draw, rounded corners=2pt, align=center, font=\small,
@@ -16,22 +16,21 @@ stops after one rather than two tokens.}
   flow/.style={-{Stealth[length=2mm]}, thick}
 ]
 \node[box] (policy) at (0,0) {one policy\\three complete outcomes};
-\node[box] (b1) at (4.0,1.25) {budget $b=1$\\accept short only};
-\node[box] (b2) at (4.0,-1.25) {budget $b=2$\\accept short or long};
-\node[box] (j1) at (8.0,1.25) {success probability\\$.3$};
-\node[box] (j2) at (8.0,-1.25) {success probability\\$.7$};
+\node[box] (b1) at (4.0,1.25) {short horizon\\accept short only};
+\node[box] (b2) at (4.0,-1.25) {longer horizon\\accept short or long};
+\node[box] (j1) at (8.0,1.25) {success\\short trajectories};
+\node[box] (j2) at (8.0,-1.25) {success\\short and long};
 \draw[flow] (policy) -- (b1);
 \draw[flow] (policy) -- (b2);
 \draw[flow] (b1) -- (j1);
 \draw[flow] (b2) -- (j2);
 \end{tikzpicture}}
 
-\p{Declare three mutually exclusive complete trajectories: a one-token
-correct answer with probability #{0.3}, a two-token correct answer with
-probability #{0.4}, and a wrong answer with probability #{0.3}. A truncation
-budget of one token observes success only on the first trajectory, giving
-#{0.3}. A budget of two observes both correct trajectories, giving
-#{0.3+0.4=0.7}.}
+\p{Partition complete trajectories into those that finish within the short
+horizon, those requiring additional tokens, and failures. The short protocol
+counts only the first class; the longer protocol may count the first two.
+Thus the measured score depends on the declared horizon even though the
+policy is unchanged.}
 
 \p{Making an evaluation horizon explicit follows finite-horizon policy
 evaluation in \citet{Chapter 3}{sutton2018reinforcement}. Only truncation is

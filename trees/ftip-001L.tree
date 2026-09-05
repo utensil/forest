@@ -24,24 +24,19 @@ evidence about how the corresponding weights were trained.}
 \draw[flow] (artifact) -- (weights);
 \draw[flow] (weights) -- (tokenizer);
 \draw[flow] (tokenizer) -- (config);
-\node[box] (direct) at (1.35,-1.35) {DIRECT\\0731 config};
-\node[box] (family) at (4.05,-1.35) {INHERITED\\optimizer/data report};
-\node[box] (delta) at (6.75,-1.35) {UNKNOWN\\0731 training delta};
+\node[box] (direct) at (1.35,-1.35) {0731\\configuration};
+\node[box] (family) at (4.05,-1.35) {family\\optimizer/data report};
+\node[box] (delta) at (6.75,-1.35) {0731 training\\delta unknown};
 \draw[flow] (artifact) -- (direct);
 \draw[inherited] (artifact) to[bend right=10] (family);
 \draw[unknown] (artifact) to[bend right=14] (delta);
 \end{tikzpicture}}
 
-\p{\strong{SCHEMATIC.} For a toy vocabulary size #{3} and width #{2}, an
-embedding component has shape #{3\times2} and therefore six scalar entries.
-The tokenizer must emit only indices #{0,1,2}; emitting index #{3} makes the
-manifest inconsistent before any probability is evaluated.}
-
-\p{\strong{DIRECT.} The pinned DeepSeek-V4-Flash-0731 configuration
+\p{The pinned DeepSeek-V4-Flash-0731 configuration
 \citelink{https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash-0731/blob/7872f01b1d1fe23eabc4c98b48bffcef5a386062/config.json}
-declares architecture and numeric-format fields.
-\strong{INHERITED.} Sections 2.4 and 4 of the V4 family report
+declares architecture and numeric-format fields. Sections 2.4 and 4 of the
+V4 family report
 \citelink{https://arxiv.org/abs/2606.19348} describe a mixed
 Muon/AdamW optimizer allocation and pretraining data construction.
-\strong{UNKNOWN.} The exact 0731 data mixture, optimizer schedule, and
+The exact 0731 data mixture, optimizer schedule, and
 post-preview training delta remain undisclosed by those sources.}

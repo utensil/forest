@@ -7,8 +7,8 @@
 \tag{transformer}
 \tag{attention}
 
-\p{For four positions, the displayed causal mask identifies every key
-visible to each query.}
+\p{For four positions, a causal mask admits the current and earlier keys and
+excludes every future key.}
 
 \tikzfig{\begin{tikzpicture}[
   box/.style={draw, rounded corners=2pt, align=center, font=\small,
@@ -21,18 +21,14 @@ visible to each query.}
 0&0&0&-\infty\\
 0&0&0&0
 \end{smallmatrix}\right]$};
-\node[box] (row) at (6.0,0) {row $3$: $(1,0,2,5)+M_{3,:}$\\
-$=(1,0,2,-\infty)$};
-\draw[flow] (mask) -- node[font=\scriptsize, fill=white] {add to logits} (row);
+\node[box] (row) at (6.0,0) {query position $3$\\keys $1,2,3$ visible\\key $4$ excluded};
+\draw[flow] (mask) -- (row);
 \end{tikzpicture}}
 
-\p{Rows index querying positions and columns index key positions. For row
-three, exponentiating the masked logits gives
-#{(e,1,e^2,0)}. Hence its normalized weights are
-##{
- \frac{(e,1,e^2,0)}{e+1+e^2},
-}
-and the fourth token contributes exactly zero to position three.}
+\p{Rows index querying positions and columns index key positions. In row
+three, the first three entries remain available and the fourth receives
+#{-\infty}; after softmax the fourth token therefore contributes exactly
+zero.}
 
 \p{The construction is the autoregressive mask of
 \citet{Section 3.2.3}{vaswani2017attention}. It enforces a dependency

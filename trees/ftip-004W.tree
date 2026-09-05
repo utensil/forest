@@ -16,29 +16,25 @@ a single rollout record.}
   flow/.style={-{Stealth[length=2mm]}, thick},
   inherited/.style={-{Stealth[length=2mm]}, thick, dashed}
 ]
-\node[box] (actor) at (0,1.35) {actor emits\\tokens $1{:}4$};
-\node[box] (wal) at (4.0,1.35) {token write-ahead log\\
-and key--value cache\\state at $4$};
-\node[box] (resume) at (8.0,1.35) {resume at\\token $5$};
+\node[box] (actor) at (0,1.35) {actor emits\\token stream};
+\node[box] (wal) at (4.0,1.35) {write-ahead log\\and key--value cache};
+\node[box] (resume) at (8.0,1.35) {resume from\\saved state};
 \node[box] (api) at (0,-1.35) {sandbox API\\job $j$};
-\node[box] (run) at (4.0,-1.35) {runtime\\limit $2$ s};
-\node[box] (evidence) at (8.0,-1.35) {evidence\\exit $0$, $3/3$ tests};
+\node[box] (run) at (4.0,-1.35) {runtime\\limit};
+\node[box] (evidence) at (8.0,-1.35) {evidence\\record};
 \draw[flow] (actor) -- (wal);
 \draw[inherited] (wal) -- node[font=\scriptsize, fill=white] {preempt/resume} (resume);
 \draw[flow] (api) -- (run);
 \draw[flow] (run) -- (evidence);
 \end{tikzpicture}}
 
-\p{\strong{SCHEMATIC.} If four emitted tokens each cost one generation unit,
-resuming from the displayed state avoids regenerating four units. The
-sandbox job then contributes the declared evidence tuple
-#{(j,\text{exit }0,\text{three tests passed})}.}
+\p{A write-ahead log and cached state allow a resumable rollout; a sandbox
+execution contributes a separately recorded evidence tuple. The two records
+should remain distinguishable when lifecycle cost is audited.}
 
-\p{\strong{INHERITED.} Token-granular write-ahead logging with key--value
-cache recovery and DeepSeek Elastic Compute (DSec), the report's named
-sandbox interface, are described
+\p{Token-granular write-ahead logging with key--value cache recovery and
+DeepSeek Elastic Compute (DSec), the report's named sandbox interface, are described
 in Sections 5.2.3 and 5.2.5 of the DeepSeek-V4 family report
-\citelink{https://arxiv.org/abs/2606.19348}.
-\strong{UNKNOWN.} The sources cited here leave open whether
-DeepSeek-V4-Flash-0731 used this job, resource limit, rollout schedule, or
-sandbox configuration.}
+\citelink{https://arxiv.org/abs/2606.19348}. The cited sources do not establish
+that DeepSeek-V4-Flash-0731 used this job, resource limit, rollout schedule,
+or sandbox configuration.}
