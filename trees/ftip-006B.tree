@@ -12,20 +12,18 @@ inheriting the arbitrary signs of singular vectors.}
 
 \tikzfig{\begin{tikzpicture}[
   box/.style={draw, rounded corners=2pt, align=center, font=\small,
-    text width=28mm, minimum height=12mm},
+  text width=22mm, minimum height=12mm},
   wide/.style={draw, rounded corners=2pt, align=center, font=\small,
-    text width=36mm, minimum height=12mm},
+  text width=24mm, minimum height=12mm},
   flow/.style={-{Stealth[length=2mm]}, thick}
 ]
-\node[box] (obs) at (0,1.25) {observed\\checkpoint deltas};
-\node[box] (proj) at (4.0,1.25) {sign-invariant\\projectors};
-\node[box] (forecast) at (8.0,1.25) {forecast\\next delta};
-\node[wide] (jump) at (7.7,-1.35) {forecast\\checkpoint};
-\node[wide] (recover) at (3.8,-1.35) {measured\\recovery update};
+\node[box] (obs) at (0,0) {observed\\checkpoint deltas};
+\node[box] (proj) at (2.7,0) {sign-invariant\\projectors};
+\node[box] (forecast) at (5.4,0) {forecast\\next delta};
+\node[wide] (recover) at (8.1,0) {measured\\recovery update};
 \draw[flow] (obs) -- (proj);
-\draw[flow] (proj) -- node[font=\scriptsize, fill=white] {extrapolate} (forecast);
-\draw[flow] (forecast) -- (jump);
-\draw[flow] (jump) -- (recover);
+\draw[flow] (proj) -- (forecast);
+\draw[flow] (forecast) -- (recover);
 \end{tikzpicture}}
 
 \p{For either singular-vector representation #{(u,v)} or #{(-u,-v)}, the
