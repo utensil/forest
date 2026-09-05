@@ -7,16 +7,15 @@
 \tag{research-state}
 \tag{diagram}
 
-\p{The Grothendieck case study gives a concrete chronology. An early fast
-evaluator carried an exploration-only caveat; the working summary later lost
-that caveat and a feasibility condition; a later session recorded an
-unsupported upper bound; a subsequent audit withdrew it.}
+\p{The Grothendieck case study gives a concrete chronology. An early evaluator
+carried an exploration-only caveat; the working summary later lost that caveat
+and a feasibility condition; a later session recorded an unsupported upper
+bound; a subsequent audit withdrew it.}
 
 \tikzfig{\begin{tikzpicture}[
- box/.style={draw,rounded corners,align=center,text width=28mm,
+ box/.style={draw,rounded corners,align=center,text width=25mm,
  minimum height=10mm,font=\small},
  arr/.style={->,>=stealth,semithick},
- lab/.style={font=\scriptsize,fill=white,inner sep=1pt}
 ]
 \node[box] (a) at (-4.2,0) {session 4\\evaluator caveat};
 \node[box] (b) at (-1.4,0) {session 8\\feasibility rule};
@@ -27,8 +26,7 @@ unsupported upper bound; a subsequent audit withdrew it.}
 \draw[arr] (b) -- (c);
 \draw[arr] (c) -- (d);
 \draw[arr] (d) -- (e);
-\draw[arr,dashed] (a) to[bend right=24]
- node[lab,below]{archive retrieval} (e);
+\draw[arr,dashed] (a) to[bend right=22] (e);
 \end{tikzpicture}}
 
 \p{The source reports this sequence in Section 5 and Section 7.1; the
