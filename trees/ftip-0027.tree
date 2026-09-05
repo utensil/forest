@@ -7,8 +7,8 @@
 \tag{language-model}
 \tag{environment}
 
-\p{A depth-two prefix tree represents token emission as a finite interaction
-stopped either by an end token or by a hard length cap.}
+\p{A prefix tree represents token emission as a finite interaction stopped
+either by an end token or by a hard length cap.}
 
 \tikzfig{\begin{tikzpicture}[
   state/.style={draw, rounded corners=2pt, align=center, font=\small,
@@ -20,21 +20,17 @@ stopped either by an end token or by a hard length cap.}
 \node[state] (a) at (3.0,-1.25) {$a$};
 \node[state] (ae) at (6.5,0) {$a\mathtt{EOS}$\\stop};
 \node[state] (aa) at (6.5,-2.0) {$aa$\\length stop};
-\draw[flow] (root) -- node[font=\scriptsize, fill=white] {$1/4$} (e0);
-\draw[flow] (root) -- node[font=\scriptsize, fill=white] {$3/4$} (a);
-\draw[flow] (a) -- node[font=\scriptsize, fill=white] {$1/2$} (ae);
-\draw[flow] (a) -- node[font=\scriptsize, fill=white] {$1/2$} (aa);
+\draw[flow] (root) -- (e0);
+\draw[flow] (root) -- (a);
+\draw[flow] (a) -- (ae);
+\draw[flow] (a) -- (aa);
 \end{tikzpicture}}
 
-\p{Take vocabulary #{\{a,\mathtt{EOS}\}}. The three terminal histories have
-probabilities
-##{
- \Pr(\mathtt{EOS})=\tfrac14,\qquad
- \Pr(a\mathtt{EOS})=\tfrac34\cdot\tfrac12=\tfrac38,\qquad
- \Pr(aa)=\tfrac34\cdot\tfrac12=\tfrac38,
-}
-which sum to one. The last history terminates because the declared maximum
-length is two, not because the policy emitted #{\mathtt{EOS}}.}
+\p{Take vocabulary #{\{a,\mathtt{EOS}\}}. The terminal histories are an
+immediate end token, an end token after #{a}, and a length-capped history
+#{aa}. Their probabilities are products of the conditional token laws and
+sum to one. The last history terminates because the declared maximum length
+is reached, not because the policy emitted #{\mathtt{EOS}}.}
 
 \p{The causal token product is given in
 \citet{Section 3}{phuong2022formal}. The finite representation distinguishes

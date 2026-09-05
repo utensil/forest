@@ -7,7 +7,7 @@
 \tag{checkpoint}
 \tag{trajectory}
 
-\p{Leading rank-one projectors encode a toy checkpoint direction without
+\p{Leading rank-one projectors encode a checkpoint direction without
 inheriting the arbitrary signs of singular vectors.}
 
 \tikzfig{\begin{tikzpicture}[
@@ -17,16 +17,11 @@ inheriting the arbitrary signs of singular vectors.}
     text width=36mm, minimum height=12mm},
   flow/.style={-{Stealth[length=2mm]}, thick}
 ]
-\node[box] (obs) at (0,1.25) {$L_1=\left[\begin{smallmatrix}1&0\\0&0\end{smallmatrix}\right]$\\
-$L_2=\left[\begin{smallmatrix}2&0\\0&0\end{smallmatrix}\right]$};
-\node[box] (proj) at (4.0,1.25) {$P_u=P_v=\left[\begin{smallmatrix}1&0\\0&0\end{smallmatrix}\right]$\\
-magnitudes $1,2$};
-\node[box] (forecast) at (8.0,1.25) {$\widehat L_3=\left[\begin{smallmatrix}3&0\\0&0\end{smallmatrix}\right]$};
-\node[wide] (jump) at (7.7,-1.35) {forecast checkpoint\\
-$\widehat W_3=W_2+\widehat L_3$};
-\node[wide] (recover) at (3.8,-1.35) {measured update\\
-$R=\left[\begin{smallmatrix}-.2&0\\0&0\end{smallmatrix}\right]$\\
-$W_{\rm rec}=\widehat W_3+R$};
+\node[box] (obs) at (0,1.25) {observed\\checkpoint deltas};
+\node[box] (proj) at (4.0,1.25) {sign-invariant\\projectors};
+\node[box] (forecast) at (8.0,1.25) {forecast\\next delta};
+\node[wide] (jump) at (7.7,-1.35) {forecast\\checkpoint};
+\node[wide] (recover) at (3.8,-1.35) {measured\\recovery update};
 \draw[flow] (obs) -- (proj);
 \draw[flow] (proj) -- node[font=\scriptsize, fill=white] {extrapolate} (forecast);
 \draw[flow] (forecast) -- (jump);
@@ -34,10 +29,10 @@ $W_{\rm rec}=\widehat W_3+R$};
 \end{tikzpicture}}
 
 \p{For either singular-vector representation #{(u,v)} or #{(-u,-v)}, the
-projectors #{P_u=uu^\top} and #{P_v=vv^\top} are unchanged. Extrapolating
-the observed magnitudes #{1,2} to #{3} gives the displayed
-#{\widehat L_3}; a measured recovery update #{R=-0.2P_u} then adjusts the
-jump without changing its represented one-dimensional subspace.}
+projectors #{P_u=uu^\top} and #{P_v=vv^\top} are unchanged. A trajectory
+forecaster can extrapolate the observed projector-aligned deltas to a next
+checkpoint, after which a measured recovery update can correct the forecast
+without changing the represented one-dimensional subspace.}
 
 \p{The history-to-delta-to-recovery order is a toy illustration of NExt,
 described in \citelink{https://arxiv.org/abs/2604.11446}. NExt models signed

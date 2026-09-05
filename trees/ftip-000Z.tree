@@ -7,8 +7,9 @@
 \tag{mixture-of-experts}
 \tag{deepseek}
 
-\p{A four-expert toy router permits an explicit top-two mixture before
-comparison with current DeepSeek-V4-Flash-0731 configuration fields.}
+\p{A routed mixture-of-experts layer uses router scores to activate only a
+declared subset of routed experts, then combines their outputs with any shared
+expert path.}
 
 \tikzfig{\begin{tikzpicture}[
   box/.style={draw, rounded corners=2pt, align=center, font=\small,
@@ -16,31 +17,18 @@ comparison with current DeepSeek-V4-Flash-0731 configuration fields.}
   flow/.style={-{Stealth[length=2mm]}, thick},
   dropped/.style={-{Stealth[length=2mm]}, dashed}
 ]
-\node[box] (router) at (0,0) {router logits\\$(2,1,0,-1)$};
-\node[box] (e1) at (3.4,1.5) {$E_1(h)=1$\\selected};
-\node[box] (e2) at (3.4,0.5) {$E_2(h)=3$\\selected};
-\node[box] (e3) at (3.4,-0.5) {$E_3$\\dropped};
-\node[box] (e4) at (3.4,-1.5) {$E_4$\\dropped};
-\node[box] (mix) at (7.4,0) {weighted output\\$1.538$};
-\draw[flow] (router) -- (e1);
-\draw[flow] (router) -- (e2);
-\draw[dropped] (router) -- (e3);
-\draw[dropped] (router) -- (e4);
-\draw[flow] (e1) -- (mix);
-\draw[flow] (e2) -- (mix);
+\node[box] (token) at (0,0) {token state\\$h$};
+\node[box] (router) at (3.0,0) {router\\top-$k$ selection};
+\node[box] (experts) at (6.0,0) {selected routed\\experts};
+\node[box] (mix) at (9.0,0) {shared and routed\\expert output};
+\draw[flow] (token) -- (router);
+\draw[flow] (router) -- (experts);
+\draw[flow] (experts) -- (mix);
 \end{tikzpicture}}
 
-\p{\strong{SCHEMATIC.} Retaining logits #{2} and #{1} gives normalized
-weights
-#{(e/(e+1),1/(e+1))\approx(0.731,0.269)}. Thus
-##{
-  y=0.731\,E_1(h)+0.269\,E_2(h)
-    =0.731+0.807=1.538.
-}}
-
-\p{\strong{DIRECT.} The revision-pinned configuration
+\p{The revision-pinned configuration
 \citelink{https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash-0731/blob/7872f01b1d1fe23eabc4c98b48bffcef5a386062/config.json}
 declares #{256} routed experts, #{6} experts selected per token, and one
-shared expert. The four-expert arithmetic illustrates only the top-k
-interface. No reconstruction of the artifact's router logits, load
-balancing, or expert outputs is intended.}
+shared expert. This instantiates the selection interface while leaving the
+artifact's router scores, load-balancing mechanism, and expert outputs
+unspecified.}

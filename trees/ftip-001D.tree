@@ -7,8 +7,8 @@
 \tag{pretraining}
 \tag{attention}
 
-\p{Packing two short documents into one row exposes the additional mask
-needed to prevent cross-document attention.}
+\p{Packing documents into one row requires a block-causal mask so that each
+token attends only within its own document and to earlier positions there.}
 
 \tikzfig{\begin{tikzpicture}[
   box/.style={draw, rounded corners=2pt, align=center, font=\small,
@@ -22,20 +22,10 @@ needed to prevent cross-document attention.}
 \draw[flow] (b) -- (pack);
 \end{tikzpicture}}
 
-\p{Index the packed row by #{1,\ldots,5}. Set #{M_{ij}=0} only when tokens
-#{i,j} belong to the same document and #{j\leq i}; otherwise set
-#{M_{ij}=-\infty}. Then
-##{
-M=\left[\begin{smallmatrix}
-0&-\infty&-\infty&-\infty&-\infty\\
-0&0&-\infty&-\infty&-\infty\\
--\infty&-\infty&0&-\infty&-\infty\\
--\infty&-\infty&0&0&-\infty\\
--\infty&-\infty&0&0&0
-\end{smallmatrix}\right].
-}
-In particular, position #{b_3} can inspect #{b_1,b_2,b_3} but not
-#{a_1,a_2}.}
+\p{For a packed row, set #{M_{ij}=0} only when tokens #{i,j} belong to the
+same document and #{j\leq i}; otherwise set #{M_{ij}=-\infty}. Thus a token
+in document #{B} cannot inspect any token in document #{A}, even when #{A}
+precedes #{B} in storage.}
 
 \p{The within-document triangle instantiates the causal mask in
 \ref{ftip-000S}. The block boundary instantiates the packing convention in

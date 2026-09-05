@@ -14,11 +14,11 @@ and budget alter measured success.}
     text width=28mm, minimum height=10mm},
   flow/.style={-{Stealth[length=2mm]}, thick}
 ]
-\node[box] (model) at (0,0) {one model\\success mass $p=.6$};
-\node[box] (one) at (4.0,1.25) {one draw\\budget $b_1=1$};
-\node[box] (three) at (4.0,-1.25) {up to three draws\\budget $b_3=3$};
-\node[box] (jone) at (8.0,1.25) {$J_1=.6$};
-\node[box] (jthree) at (8.0,-1.25) {$J_3=.936$};
+\node[box] (model) at (0,0) {one model\\success mass $p$};
+\node[box] (one) at (4.0,1.25) {one draw\\budget $1$};
+\node[box] (three) at (4.0,-1.25) {up to $k$ draws\\budget $k$};
+\node[box] (jone) at (8.0,1.25) {success $p$};
+\node[box] (jthree) at (8.0,-1.25) {success $1-(1-p)^k$};
 \draw[flow] (model) -- (one);
 \draw[flow] (model) -- (three);
 \draw[flow] (one) -- (jone);
@@ -27,15 +27,15 @@ and budget alter measured success.}
 
 \p{Assume independent draws and a declared perfect checker that recognizes a
 correct candidate when one appears. The one-draw procedure succeeds with
-#{J_1=p=0.6}. The three-draw procedure succeeds whenever not all three draws
+#{J_1=p}. A procedure allowed up to #{k} draws succeeds whenever not all draws
 fail:
 ##{
-  J_3=1-(1-p)^3=1-0.4^3=0.936.
+  J_k=1-(1-p)^k.
 }
 Both procedures query the same conditional distribution.}
 
 \p{Policy performance under a specified interaction and evaluation procedure
-is standard in \citet{Section 3.5}{sutton2018reinforcement}. The arithmetic
+is standard in \citet{Section 3.5}{sutton2018reinforcement}. The formula
 demonstrates procedural dependence. Independence and a perfect checker are
 declared toy assumptions, not properties attributed to a frontier language
 model.}
