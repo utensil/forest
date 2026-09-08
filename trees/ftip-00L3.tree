@@ -1,9 +1,63 @@
 \import{macros}
 \meta{agent-authored}{true}
-\taxon{Remark}
-\title{Conditions for interpreting an architecture comparison}
+\taxon{Example}
+\title{When cheaper attempts compensate for lower success}
 \tag{ftip}
-\p{This example supports the motivating comparison only after a paired
-model-instance record supplies a common quality target and declares the training,
-post-training, inference, and systems coordinates. Toy state bounds remain
-finite obstructions until such a record supplies a justified reduction.}
+\p{Smaller caches can support more concurrent requests or avoid
+preemption and recomputation. These are actual serving mechanisms in
+vLLM's memory and scheduling guidance
+\citelink{https://github.com/vllm-project/vllm/blob/5db652225f00b55783823ae6606d36925e3e3efe/docs/configuration/optimization.md#L27-L67}.
+For post-training, the useful prediction is therefore about completed
+candidate attempts under a budget, including verification and optimization
+costs, rather than decoding speed alone.}
+
+\p{Use the following cost model on the same hardware. One baseline
+attempt costs #{c>0}; generation accounts for a fraction #{f\in[0,1]}.
+Suppose generation becomes #{s_{\rm gen}>0} times as fast while all other
+cost per attempt stays fixed. The new cost and total attempt-throughput
+factor are}
+
+##{
+ c_K=c\left(1-f+\frac{f}{s_{\rm gen}}\right),\qquad
+ S=\frac{c}{c_K}
+ =\frac{1}{1-f+f/s_{\rm gen}}.
+}
+
+\p{For a fixed budget #{B\geq0}, this model permits
+#{N_M=\lfloor B/c\rfloor} baseline attempts and
+#{N_K=\lfloor B/c_K\rfloor} hybrid attempts. Assume #{N_M,N_K\geq1}
+and verified-success events independent within each set of attempts, with
+respective probabilities #{p_M,p_K\in[0,1]}.
+Then \ref{ftip-0078} gives discovery probabilities
+#{1-(1-p_M)^{N_M}} and #{1-(1-p_K)^{N_K}}. The hybrid matches or
+exceeds baseline discovery exactly when}
+
+##{
+ p_K\geq1-(1-p_M)^{N_M/N_K}.
+}
+
+\p{This follows by comparing the two failure probabilities and taking
+the nonnegative #{N_K}-th root.}
+
+\p{For an illustrative estimate, suppose generation consumes 80 percent
+of the baseline cost and use #{s_{\rm gen}=2.2}, motivated by the batch-one
+decode figure in \ref{ftip-00KW}. Applying that decode factor to the whole
+generation stage is a working approximation, not a measured rollout result.
+Then #{S\approx1.774}; a budget of #{B=10c} buys 10 baseline attempts or
+17 hybrid attempts. If #{p_M=0.10} and #{p_K=0.08}, the discovery
+probabilities are approximately #{0.651} and #{0.758}. The break-even
+hybrid probability is about #{0.0601}. Thus this model predicts that more
+attempts can outweigh a moderate per-attempt quality loss. The assumed
+probabilities are illustrative verified-success rates, not conversions of
+the benchmark scores in \ref{ftip-00LC}.}
+
+\p{The prediction is strongest for long-context, generation-heavy work
+whose saved memory becomes usable rollout capacity. As verification or
+optimization dominates, #{f} shrinks and #{S} approaches one. Correlated
+attempts require the joint-law analysis of \ref{ftip-0077} instead of the
+independent product. Measure completed attempts, verified-success rates and
+total cost under a fixed prompt, decoding and verifier protocol to test the
+tradeoff. In the RLVR round of \ref{ftip-004M}, additional successful
+candidates can improve the available feedback; whether they produce useful
+accepted updates is a further optimizer-and-evaluation question, as
+\ref{ftip-0085} demonstrates.}

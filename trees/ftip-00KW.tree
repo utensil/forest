@@ -3,9 +3,22 @@
 \taxon{Example}
 \title{Published efficiency observations}
 \tag{ftip}
-\p{At one million tokens the report gives a decoding time per output token of
-1.84 milliseconds for Kimi Linear and 11.48 milliseconds for its MLA baseline,
-and reports up to 75 percent lower KV-cache use. It also reports a 3.98-fold
-acceleration at the displayed 128k RULER point. These numbers are measured
-under the paper's hardware, kernels, precision, batch, and workload; they are
-not capability ratios \citef{kimi2025linear}.}
+\p{For batch size one at one million tokens, Figure 7 labels
+a #{2.9\times} prefill speedup and a #{2.2\times} decoding speedup for Kimi
+Linear against MLA. Section 6.3 gives #{2.3\times} for the latter point,
+so the graphic and prose differ slightly
+\citet{Figure 7 and Sections 5.6 and 6.3}{kimi2025linear}.}
+\p{The larger-batch comparison in Figure 1(b) gives decoding time per
+output token of 1.84 milliseconds for Kimi Linear and 11.48 milliseconds
+for MLA, with a reported #{6.3\times} speedup. Section 6.3 describes this
+as a theoretical speedup from reallocating saved KV-cache memory to larger
+batches. It illustrates a different use of the memory saving from the
+batch-one latency result
+\citet{Figure 1(b) and Section 6.3}{kimi2025linear}.}
+\p{Figure 1(a) reports RULER scores of 84.3 for Kimi Linear and 81.3 for MLA
+at 128k context, with #{3.98\times} decoding acceleration
+\citet{Figure 1(a)}{kimi2025linear}. The report also gives a reduction of up
+to 75 percent in KV-cache use \citet{Abstract}{kimi2025linear}.
+Together these observations motivate studying context length and batch size
+as separate cost coordinates. The unequal RULER scores and different timing
+regimes are retained when interpreting those points.}

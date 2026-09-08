@@ -1,8 +1,16 @@
 \import{macros}
 \meta{agent-authored}{true}
 \taxon{Remark}
-\title{Unknown fields remain unknown}
+\title{Measured and assumed costs}
 \tag{ftip}
-\p{A missing cost, seed, or evaluator field prevents the corresponding
-iso-quality or causal comparison. It is reported as unknown or bounded by an
-explicit interval; it is not reconstructed from a headline speedup.}
+\p{A useful cost model can combine measurements with assumptions justified
+by the architecture and its implementation. In \ref{ftip-00L3}, the
+generation share #{f} and speed factor #{s_{\rm gen}} determine a predicted
+attempt-throughput factor. Their assumed values can be varied without
+pretending they were measured in the original experiment.}
+\p{For fixed #{f\in[0,1]}, write #{S(s)=1/(1-f+f/s)} for #{s>0}.
+This function is nondecreasing. An interval #{s_{\rm gen}\in[s_-,s_+]}, with
+#{0<s_-\leq s_+}, therefore gives the conditional range
+#{S\in[S(s_-),S(s_+)]}. This is sensitivity to a chosen assumption range;
+it is a statistical confidence interval only if a sampling argument supplies
+that interpretation.}
