@@ -3,10 +3,21 @@
 \taxon{Definition}
 \title{Archive score envelope}
 \tag{ftip}
-\p{For finite task set #{\mathcal T}, define the evaluated mean score of chain
-#{a} by}
+\p{Let #{\mathcal T=\{t_1,\ldots,t_N\}} be a finite task set with
+#{N=|\mathcal T|\geq1}.
+For every chain #{a} in the [finite archive](ftip-00EQ), let #{s_i(a)\in\mathbb R}
+be its score on task #{t_i} under a declared common evaluation law. Define its
+whole-chain mean by}
 ##{J(a)=N^{-1}\sum_{i=1}^N s_i(a).}
-\p{When #{\mathcal A_D} is nonempty, its \newvocab{archive envelope} is}
+\p{For a nonempty archive #{\mathcal A_D}, its \newvocab{archive envelope} is}
 ##{J_D^{\max}=\max_{a\in\mathcal A_D}J(a).}
-\p{The envelope is an evaluation summary; it need not identify one deployable
-chain if scores were obtained under different configurations.}
+\p{The finite real-valued maximum is attained by at least one archived chain.
+It scores a single chain across all tasks; it does not select a different chain
+for each task.}
+\p{Deployment eligibility is a separate condition. A target configuration
+specifies which recorded chains can execute with their stated behavior and
+resource requirements. Maximizing over that eligible subset gives a deployable
+archive choice when the subset is nonempty; if it is empty, there is no eligible
+archived choice. Applying the recorded score to deployment additionally requires
+the same evaluation law. Records from different configurations alone do not
+establish these conditions.}

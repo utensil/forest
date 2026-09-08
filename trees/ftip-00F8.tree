@@ -1,9 +1,22 @@
 \import{macros}
 \meta{agent-authored}{true}
 \taxon{Example}
-\title{Archive-best is not one deployable policy}
+\title{Whole-chain maximum and per-task oracle}
 \tag{ftip}
-\p{Two chains can attain their best scores on disjoint task subsets. The
-archive envelope records the larger mean after selecting per-chain evaluations,
-but a deployment that must choose one chain cannot inherit both subsets. A
-common-task, common-seed evaluation is required for a deployable comparison.}
+\p{Consider two equally weighted tasks and an archive containing two chains
+#{a,b}, with score vectors #{(s_1(a),s_2(a))=(1,0)} and
+#{(s_1(b),s_2(b))=(0,1)} under the same evaluation law. The
+[archive envelope](ftip-00ER) is}
+##{J(a)=J(b)=J_D^{\max}=\frac12.}
+\p{Either chain attains this maximum. In contrast, a per-task oracle has value}
+##{\frac12\sum_{i=1}^2\max_{c\in\{a,b\}}s_i(c)=1.}
+\p{The oracle selects #{a} on the first task and #{b} on the second. A
+configuration constrained to select one archived chain before observing task
+identity obtains mean #{1/2} in this example. If task-dependent routing is
+permitted, the resulting combined policy must itself be declared and evaluated,
+including its routing and execution costs. The oracle value is not automatically
+the score of either archived chain.}
+\p{Incompatible execution configurations create a separate obstacle: an
+archived maximizing chain may be ineligible for a named target configuration.
+That feasibility restriction does not alter the distinction between the two
+score functionals above.}

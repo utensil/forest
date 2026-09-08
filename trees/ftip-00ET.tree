@@ -4,8 +4,15 @@
 \title{Finite archive selection bound}
 \tag{ftip}
 \tag{finite-result}
-\p{Let #{a^\star} maximize #{J} over a finite nonempty archive and let #{\hat a}
-be an approximate selector with #{J(\hat a)\geq J(a^\star)-\delta}. Then}
+\p{Under the [archive score definition](ftip-00ER), let #{a^\star} maximize
+#{J} over a finite nonempty archive #{\mathcal A_D}. Let #{\delta\in\mathbb R}
+with #{\delta\geq0}, and let #{\hat a\in\mathcal A_D} satisfy
+#{J(\hat a)\geq J(a^\star)-\delta}. Then}
 ##{0\leq J(a^\star)-J(\hat a)\leq\delta.}
+\proof{
+  \p{Membership of #{\hat a} in the same archive gives
+  #{J(\hat a)\leq J(a^\star)} by maximality. Rearranging the approximation
+  inequality gives the upper bound.}
+}
 \p{This is a finite selection statement under the same evaluation law; it is
 not an optimizer-convergence or generalization theorem.}
