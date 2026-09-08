@@ -83,7 +83,7 @@ RULES: tuple[Rule, ...] = (
     Rule(
         "FTIP-READINESS",
         _rx(
-            r"\b(?:ledger ready|release ready|ready set|formalization ready|"
+            r"\b(?:ledger ready|release ready|(?:ledger|statement) ready set|formalization ready|"
             r"handoff ready|ledger release criterion)\b"
         ),
         "Replace workflow readiness language with the concrete mathematical property.",
@@ -185,6 +185,12 @@ _SPACE_OR_HYPHEN = re.compile(
 _COMMAND = re.compile(r"\\[A-Za-z][A-Za-z0-9_-]*")
 _URL = re.compile(r"(?:https?://|mailto:)[^\s{}]+", re.IGNORECASE)
 _INVISIBLE_COMMANDS = {"import": 1, "meta": 2, "tag": 1}
+_TEX_TEXT_COMMAND = re.compile(
+    r"\\(?:text|textrm|textsf|texttt|textnormal|textbf|textmd|textit|textup|emph|mbox)\s*\{"
+)
+_INLINE_TEXT_COMMAND = re.compile(
+    r"\\(?:strong|em|code|text|textrm|textsf|texttt|textnormal|textbf|textmd|textit|textup|emph|mbox)\s*\{"
+)
 
 
 def _blank(chars: list[str], start: int, end: int) -> None:
@@ -208,6 +214,33 @@ def _closing_brace(text: str, opening: int, path: Path) -> int:
     raise CheckError(f"{path}:{line}: unclosed '{{'")
 
 
+def _restore_tex_text(text: str, chars: list[str], start: int, end: int, path: Path) -> None:
+    """Restore only explicitly textual payloads from a masked TeX math span."""
+
+    for match in _TEX_TEXT_COMMAND.finditer(text, start, end):
+        opening = match.end() - 1
+        closing = _closing_brace(text, opening, path)
+        if closing >= end:
+            raise CheckError(f"{path}: TeX text command escapes its math span")
+        for index in range(match.start(), opening + 1):
+            chars[index] = "\0"
+        for index in range(opening + 1, closing):
+            chars[index] = text[index]
+        chars[closing] = "\0"
+
+
+def _join_inline_text_markup(text: str, chars: list[str], path: Path) -> None:
+    """Remove inline command syntax without splitting a visibly continuous word."""
+
+    visible = "".join(chars)
+    for match in _INLINE_TEXT_COMMAND.finditer(visible):
+        opening = match.end() - 1
+        closing = _closing_brace(text, opening, path)
+        for index in range(match.start(), opening + 1):
+            chars[index] = "\0"
+        chars[closing] = "\0"
+
+
 def _source_text(path: Path) -> tuple[str, list[int]]:
     try:
         original = path.read_text(encoding="utf-8")
@@ -226,13 +259,7 @@ def _source_text(path: Path) -> tuple[str, list[int]]:
             continue
         closing = _closing_brace(original, match.end() - 1, path)
         _blank(chars, match.start(), closing + 1)
-        math_text = original[match.end() : closing]
-        for text_match in re.finditer(r"\\text(?:rm|sf|tt)?\s*\{", math_text):
-            text_opening = match.end() + text_match.end() - 1
-            text_closing = _closing_brace(original, text_opening, path)
-            if text_closing <= closing:
-                for index in range(text_opening + 1, text_closing):
-                    chars[index] = original[index]
+        _restore_tex_text(original, chars, match.end(), closing, path)
 
     masked = "".join(chars)
     for match in list(re.finditer(r"\\([A-Za-z][A-Za-z0-9_-]*)", masked)):
@@ -265,6 +292,8 @@ def _source_text(path: Path) -> tuple[str, list[int]]:
     if depth:
         raise CheckError(f"{path}: unclosed reader-text '{{'")
 
+    _join_inline_text_markup(original, chars, path)
+    masked = "".join(chars)
     for match in _COMMAND.finditer(masked):
         _blank(chars, *match.span())
     for index, character in enumerate(chars):
@@ -273,7 +302,7 @@ def _source_text(path: Path) -> tuple[str, list[int]]:
 
     lines: list[int] = []
     line = 1
-    for character in chars:
+    for character in original:
         lines.append(line)
         if character == "\n":
             line += 1
@@ -408,14 +437,9 @@ def _mask_rendered_tex_math(text: str, lines: list[int], path: Path) -> tuple[st
                 raise CheckError(f"{path}:{line}: unclosed rendered TeX delimiter {opening}")
             end += len(closing)
             _blank(chars, start, end)
-            math_text = text[start + len(opening) : end - len(closing)]
-            for text_match in re.finditer(r"\\text(?:rm|sf|tt)?\s*\{", math_text):
-                text_opening = start + len(opening) + text_match.end() - 1
-                text_closing = _closing_brace(text, text_opening, path)
-                if text_closing < end - len(closing):
-                    for index in range(text_opening + 1, text_closing):
-                        chars[index] = text[index]
+            _restore_tex_text(text, chars, start + len(opening), end - len(closing), path)
             cursor = end
+    _join_inline_text_markup(text, chars, path)
     return "".join(chars), lines
 
 
@@ -424,6 +448,8 @@ def _normalize(text: str, line_map: Sequence[int]) -> tuple[str, list[int]]:
     normalized_lines: list[int] = []
     pending_space_line: int | None = None
     for index, character in enumerate(text):
+        if character == "\0":
+            continue
         expanded = unicodedata.normalize("NFKC", character).casefold()
         for item in expanded:
             if _SPACE_OR_HYPHEN.fullmatch(item):

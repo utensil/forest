@@ -41,7 +41,7 @@ class FtipProseTests(unittest.TestCase):
 
     def write_html(self, name: str, body: str) -> Path:
         directory = self.output / name
-        directory.mkdir()
+        directory.mkdir(exist_ok=True)
         path = directory / "index.html"
         path.write_text(f"<html><head><title>FTIP</title></head><body>{body}</body></html>", encoding="utf-8")
         return path
@@ -61,13 +61,13 @@ class FtipProseTests(unittest.TestCase):
     def test_inline_code_hyphen_unicode_spacing_and_plural_forms_fail(self) -> None:
         path = self.write_tree(
             "ftip-0001",
-            "\\p{A \\code{source locator} and source\u2011locators expose transfer\u00a0limits.}",
+            "\\p{A \\code{source locator}, source\u2011locators, and source lo\\strong{cators} expose transfer\u00a0limits.}",
         )
         findings = CHECKER.scan_text(path, *CHECKER._source_text(path))
         ids = self.rule_ids(findings)
         self.assertIn("FTIP-SOURCE-LOCATOR", ids)
         self.assertIn("FTIP-TRANSFER-LIMIT", ids)
-        self.assertGreaterEqual(sum(f.rule.rule_id == "FTIP-SOURCE-LOCATOR" for f in findings), 2)
+        self.assertGreaterEqual(sum(f.rule.rule_id == "FTIP-SOURCE-LOCATOR" for f in findings), 3)
 
     def test_math_macros_urls_comments_metadata_and_model_cards_pass(self) -> None:
         self.write_tree(
@@ -90,12 +90,54 @@ The typed signature is a mathematical object. See https://source-locator.example
         findings = CHECKER.scan_text(path, *CHECKER._source_text(path))
         self.assertIn("FTIP-SOURCE-LOCATOR", self.rule_ids(findings))
 
+    def test_tex_text_commands_cannot_hide_authoring_phrases(self) -> None:
+        text_commands = (
+            "text",
+            "textrm",
+            "textsf",
+            "texttt",
+            "textnormal",
+            "textbf",
+            "textmd",
+            "textit",
+            "textup",
+            "emph",
+            "mbox",
+        )
+        cases = tuple((command, "source locator", "FTIP-SOURCE-LOCATOR") for command in text_commands)
+        cases += (("textit", "transfer limits", "FTIP-TRANSFER-LIMIT"),)
+        for command, phrase, expected in cases:
+            with self.subTest(command=command):
+                self.write_tree("ftip-0001", f"\\p{{#{{\\{command}{{{phrase}}}}}}}")
+                self.write_html("ftip-0001", f"<p>\\(\\{command}{{{phrase}}}\\)</p>")
+                self.assertIn(expected, self.rule_ids(CHECKER.check_source(self.trees)))
+                self.assertIn(expected, self.rule_ids(CHECKER.check_render(self.trees, self.output)))
+
+    def test_nested_math_and_source_inline_markup_rejoin_visible_words(self) -> None:
+        self.write_tree(
+            "ftip-0001",
+            r"\p{#{\text{source lo\textbf{cator}}}, #{\text{source lo}\text{cator}}, and source lo\strong{cator}.}",
+        )
+        self.write_html(
+            "ftip-0001",
+            r"<p>\(\text{source lo\textbf{cator}}\), \(\text{source lo}\text{cator}\)</p>",
+        )
+        source_findings = CHECKER.check_source(self.trees)
+        rendered_findings = CHECKER.check_render(self.trees, self.output)
+        self.assertEqual(3, sum(f.rule.rule_id == "FTIP-SOURCE-LOCATOR" for f in source_findings))
+        self.assertEqual(2, sum(f.rule.rule_id == "FTIP-SOURCE-LOCATOR" for f in rendered_findings))
+
     def test_research_uses_of_process_words_pass(self) -> None:
         self.write_tree(
             "ftip-0001",
-            r"\p{A speculative-decoding draft model hands state to a worker. The dependency graph order is topological. A status field records the grader release criterion. The protocol handoff preserves a typed signature.}",
+            r"\p{A speculative-decoding draft model hands state to a worker. The dependency graph order is topological. A scheduler's ready set contains tasks whose dependencies have completed. A status field records the grader release criterion. The protocol handoff preserves a typed signature.}",
+        )
+        self.write_html(
+            "ftip-0001",
+            "<p>A scheduler's ready set contains tasks whose dependencies have completed.</p>",
         )
         self.assertEqual([], CHECKER.check_source(self.trees))
+        self.assertEqual([], CHECKER.check_render(self.trees, self.output))
 
     def test_precise_authoring_compounds_fail(self) -> None:
         cases = {
