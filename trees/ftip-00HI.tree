@@ -6,3 +6,7 @@
 \p{For durable record #{d}, let #{H(d)} be a cryptographic digest of its
 canonical serialized fields. A replay request fails closed when the supplied
 record digest or any referenced input hash differs from the declared value.}
+
+\p{To bind a replay result to an audit decision, the replay trace must be
+included in the audited record and covered by its digest. A matching digest
+for other fields does not bind that trace to the decision.}

@@ -97,4 +97,6 @@ for pdf_id in "$@"; do
     fi
 done
 
+uv run check-ftip-prose.py render --output-dir "$output_dir"
+
 echo "Forester output contract verified: $xml_count XML/HTML page pair(s)"

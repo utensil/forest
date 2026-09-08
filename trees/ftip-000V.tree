@@ -6,9 +6,8 @@
 \tag{ftip}
 \tag{attention}
 
-\p{We use \ref{ftip-000U} as the reference construction, not as a claim that
-all recent models store one key and value projection per query head.
-Grouped-query attention partitions query heads into groups that share key and
+\p{The multi-head construction in \ref{ftip-000U} stores a key and value
+projection per query head. Grouped-query attention instead partitions query heads into groups that share key and
 value heads; see Ainslie et al., Section 2
 \citelink{https://arxiv.org/abs/2305.13245}. This changes parameter and cache
 shapes while preserving the query-key-value semantics.}
@@ -18,6 +17,6 @@ a lower-dimensional latent representation and reconstructs head-specific
 quantities; see DeepSeek-V2, Section 2.1
 \citelink{https://arxiv.org/abs/2405.04434}. DeepSeek-V3, Section 2.1, records a
 later use of that architecture
-\citelink{https://arxiv.org/abs/2412.19437}. These are exact architectural
-see-also cases, not evidence that their post-training effects equal those of
-ordinary multi-head attention.}
+\citelink{https://arxiv.org/abs/2412.19437}. These architectural differences
+do not establish that their post-training effects equal those of ordinary
+multi-head attention.}

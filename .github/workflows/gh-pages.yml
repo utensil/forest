@@ -45,6 +45,11 @@ jobs:
       - uses: oven-sh/setup-bun@v2
         with:
           bun-version: 1.2.22
+      # The lint step runs the stdlib-only FTIP prose checker through uv.
+      - name: Setup Python via uv
+        uses: astral-sh/setup-uv@v3
+        with:
+          version: "0.4.27"
       - name: Setup Biome
         uses: biomejs/setup-biome@v2
         with:
@@ -104,12 +109,6 @@ jobs:
           sudo apt install libev-dev
           opam pin add forester git+https://github.com/utensil/ocaml-forester.git#2ed9c1cab0112921eb3497cb1a5a0e2fbaa1f8cd --yes
           opam install forester --yes
-      # https://github.com/astral-sh/setup-uv
-      - name: Setup Python via uv
-        uses: astral-sh/setup-uv@v3
-        with:
-          version: "0.4.27"
-          # enable-cache: true
       - name: Install xsltproc and PDF text tools
         run: |
           sudo apt install xsltproc poppler-utils

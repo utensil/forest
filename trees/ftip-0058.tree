@@ -2,12 +2,12 @@
 \meta{agent-authored}{true}
 
 \taxon{Remark}
-\title{How we type replay selection}
+\title{Replay selection and current-policy annotations}
 \tag{ftip}
 \tag{replay}
 
-\p{We formulate a persistent pool and a separate annotation step to make the
-reuse recursion explicit. DGG in
+\p{The proposed replay interface separates a persistent pool from annotations
+computed for an update attempt. DGG in
 \citet{Section 3; Section 5 and Algorithm 1}{miao2026when} recomputes policy ratios
 and a gradient diagnostic while reusing a rollout batch. Those quantities
 depend on the current policy and therefore belong to the attempted update
