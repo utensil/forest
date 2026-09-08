@@ -2,55 +2,78 @@
 \meta{agent-authored}{true}
 
 \taxon{Theorem}
-\title{Per-token DGG gradient factorization}
+\title{DGG head gradient and shared-weight occurrence sum}
 \tag{ftip}
 \tag{replay}
 \tag{gradient}
 
-\p{Consider an active token #{i} on the unclipped branch of the GRPO
-objective. Let #{a_i} be the sampled token, #{\widehat A_i} its normalized
-advantage, and
+\p{Fix a sampled history and an active token #{i} in the interior of the
+unclipped branch of the GRPO objective. Consider a finite directed acyclic
+computation graph that is differentiable at the parameter point in question.
+Let #{a_i} be the sampled token, #{\widehat A_i} its fixed normalized advantage, and
+#{p_i=\operatorname{softmax}(z_i)} the current distribution on a finite
+vocabulary #{\mathcal V}. With fixed behavior probability #{b_i>0}, set
 ##{
-r_i=\frac{\pi_\theta(a_i\mid h_{L,i})}
-{\pi_{\rm old}(a_i\mid h_{L,i})}.
-}
-Treat #{\widehat A_i} and the behavior-policy denominator as fixed during
-this token update. Let #{e_{a_i}\in\mathbb R^{|\mathcal V|}} be the standard
-basis vector for the sampled token, and define the active-token objective and
-its two weight gradients by
-##{
-\mathcal L_i(\theta)=r_i(\theta)\widehat A_i,
+r_i=\frac{p_i(a_i)}{b_i},
 \qquad
-G_i^{\rm lm}=\nabla_{W_{\rm lm}}\mathcal L_i,
+\mathcal L_i=r_i\widehat A_i,
 \qquad
-G_i^{\rm int}=\nabla_{W_{\rm int}}\mathcal L_i.
+E_i=r_i\widehat A_i(e_{a_i}-p_i).
 }
-Write #{h_{L,i}} for the hidden state entering the language-model head,
-#{x_i^{\rm int}} for the input to an intermediate linear layer, and
-#{J_i=\partial z_i/\partial y_i} for the Jacobian from that layer's output to
-the logits. Define
+Here #{e_{a_i}\in\mathbb R^{|\mathcal V|}} is the sampled-token basis vector.
+The history and sampling decisions are held fixed during differentiation.}
+
+\p{Suppose the output head #{W_{\rm lm}\in
+\mathbb R^{|\mathcal V|\times d_{\rm model}}} is untied: its only path to
+#{\mathcal L_i} is through #{z_i=W_{\rm lm}h_{L,i}}, and
+#{h_{L,i}\in\mathbb R^{d_{\rm model}}} is independent of #{W_{\rm lm}}.
+Then
 ##{
-E_i=r_i\widehat A_i
-\left(e_{a_i}-\pi_\theta(\mathord\cdot\mid h_{L,i})\right).
+G_i^{\rm lm}=\nabla_{W_{\rm lm}}\mathcal L_i
+=E_i h_{L,i}^{\mathsf T}.
 }
-Then the two weight gradients factor as rank-one matrices:
+}
+
+\p{Let #{W_{\rm int}\in\mathbb R^{m\times d}} be a shared intermediate
+weight. Index by a finite set #{\mathcal O_i} every occurrence of this weight
+that can affect #{z_i}, assuming that all such uses have the form
+#{y_o=W_{\rm int}x_o}, with #{x_o\in\mathbb R^d}. First replace these uses
+by independent copies #{W_o} and evaluate them all at #{W_o=W_{\rm int}}.
+Let #{J_{io}\in\mathbb R^{|\mathcal V|\times m}} be the downstream Jacobian
+from node #{y_o} to #{z_i} in this graph, with the other weight copies fixed.
+Define the contribution of occurrence #{o} by
 ##{
-G_i^{\rm lm}=E_i h_{L,i}^{\mathsf T},
-\qquad
-G_i^{\rm int}=(J_i^{\mathsf T}E_i)(x_i^{\rm int})^{\mathsf T}.
+H_{io}=\nabla_{W_o}\mathcal L_i
+=(J_{io}^{\mathsf T}E_i)x_o^{\mathsf T}.
 }
+On tying the copies, the total derivative is
+##{
+G_i^{\rm int}=\nabla_{W_{\rm int}}\mathcal L_i
+=\sum_{o\in\mathcal O_i}H_{io}.
 }
+The head gradient and each occurrence contribution have rank at most one;
+the total shared-weight gradient need not.}
+
+\p{For a layer used once per position in a causal network, the sum includes
+every earlier position whose output affects token #{i}. Reuse across depth
+adds further occurrences. Tying the head to embeddings or other blocks also
+requires their contributions; the displayed head identity assumes that such
+tying is absent.}
 
 \proof{
-\p{For the unclipped token objective, differentiation through the softmax
-gives #{\nabla_{z_i}\mathcal L_i=E_i}. Since
-#{z_i=W_{\rm lm}h_{L,i}}, the outer-product rule gives the first identity.
-The chain rule gives #{\nabla_{y_i}\mathcal L_i=J_i^{\mathsf T}E_i}; applying
-the same rule to #{y_i=W_{\rm int}x_i^{\rm int}} gives the second.}
+\p{Softmax differentiation gives #{\nabla_{z_i}\mathcal L_i=E_i}.
+The outer-product rule gives the untied head identity. In the graph with
+independent copies, #{x_o} does not depend on its own #{W_o}; all downstream
+paths from #{y_o} are included in #{J_{io}}. The chain rule therefore gives
+#{\nabla_{W_o}\mathcal L_i=(J_{io}^{\mathsf T}E_i)x_o^{\mathsf T}}.
+Finally, the derivative of the diagonal map
+#{W_{\rm int}\mapsto(W_o=W_{\rm int})_{o\in\mathcal O_i}}
+adds these partial derivatives.}
 }
 
-\p{This is the source proposition specialized to the active, unclipped token
-whose gradient appears in its equation (3). Clipped or inactive tokens require
-their own derivative or mask and are not covered by the displayed identities.}
-
-\p{Source note: this statement reconstructs \citet{Section 4.2.1, Proposition 1, and Appendix A.1}{miao2026when}.}
+\p{Clipped or inactive terms require their own derivative or mask. Source
+note: \citet{Section 4.2.1, Proposition 1, and Appendix A.1}{miao2026when}
+derives the intermediate outer product through one local application. For a
+shared weight, that calculation gives #{H_{io}}; identifying it with the total
+#{G_i^{\rm int}} omits the other occurrences. The sum above supplies the
+chain rule needed for shared parameters.}
