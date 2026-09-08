@@ -1,9 +1,36 @@
 \import{macros}
 \meta{agent-authored}{true}
 \taxon{Example}
-\title{Finite observations do not prove a ceiling}
+\title{Finite observations need not identify a frontier}
 \tag{ftip}
-\p{For any finite set of measured costs and scores, another admissible
-frontier can agree at every measured point and improve at an unmeasured cost.
-Therefore a finite comparison can establish a measured lower bound or a
-conditional certificate, but not a universal architecture ceiling.}
+\p{Let #{S\subset\mathbb R_{\geq0}} be a finite set of measured costs, and
+choose #{C_0>0} larger than every element of #{S}. Suppose the exact frontier
+value observed at each cost in #{S} is zero. For finite budgets #{C\geq0},
+suppose the declared class of possible frontiers permits both
+##{
+V_0(C)=0,
+\qquad
+V_1(C)=
+\begin{cases}
+0,&0\leq C<C_0,\\
+1,&C\geq C_0.
+\end{cases}
+}
+These nondecreasing frontiers with scores in #{[0,1]} agree on every observed
+cost and differ at #{C_0}. The observations alone do not distinguish them.}
+\p{Both possibilities have finite realizations in the framework of
+\ref{ftip-00JJ}: allow two interventions with costs #{0} and #{C_0}.
+Give the first score zero and the second score #{\theta\in\{0,1\}}.
+For example, on a single deterministic evaluation task with utility equal
+to the output bit, let the two resulting protocols return #{0} and
+#{\theta}. The two possible choices of #{\theta} give #{V_0} and #{V_1},
+respectively, under the same intervention and cost specification. Every
+score is finite, and the feasible score maximum is attained at each budget.}
+\p{This example does not supply a strictly better agreeing frontier for every
+possible data set or every admissible class. If a proved global score bound
+is #{1} and an intervention attains it at a finite cost #{C_*\geq0},
+monotonicity forces #{V_A(C)=1} for every #{C\geq C_*}; no higher value is
+admissible. A singleton class of possible frontiers can also identify the
+frontier without such an alternative. A conditional certificate such as
+\ref{ftip-00LM} therefore requires its stated upper-bound evidence; that
+evidence does not follow merely from the absence of an observed improvement.}
