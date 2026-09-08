@@ -2,24 +2,40 @@
 \meta{agent-authored}{true}
 
 \taxon{Example}
-\title{Counterexample: batch cancellation can hide stale ratios}
+\title{Counterexample: active batch cancellation can hide nonunit ratios}
 \tag{ftip}
 \tag{replay}
 \tag{counterexample}
 
-\p{Fix #{R>1}. On a two-token vocabulary, let both observed tokens have
-#{a_i=1}, current probability #{\pi_\theta(1)=1/2}, and behavior probability
+\p{Fix #{\epsilon_{\rm clip}\in(0,1)} and
+#{1<R<1+\epsilon_{\rm clip}}. On a two-token vocabulary, let both observed
+tokens have #{a_i=1}, current probability #{\pi_\theta(1)=1/2}, and behavior probability
 #{\pi_{\rm old}(1)=1/(2R)}. Take scalar hidden states #{h_{L,1}=h_{L,2}=1}
-and normalized advantages #{\widehat A_1=1}, #{\widehat A_2=-1}. Then
-#{r_1=r_2=R}, but the factors in \ref{ftip-007Z} satisfy
+and fixed normalized advantages #{\widehat A_1=1}, #{\widehat A_2=-1}.
+These may be selected token terms from different rollout members. An untied
+head with both logits zero realizes the current probabilities. Both terms lie
+strictly inside the clipping interval of \ref{ftip-003F}, so the clipped
+surrogate locally agrees with #{\mathcal L_i=r_i\widehat A_i}. Thus
+#{r_1=r_2=R}, and \ref{ftip-007Z} gives
 ##{
 G_1^{\rm lm}=R(1/2,-1/2)^{\mathsf T},
 \qquad
 G_2^{\rm lm}=-G_1^{\rm lm}.
 }
 Consequently #{G^{\rm lm}=0}, while
-#{\widehat\chi^2=R^2-1} can be arbitrarily large.}
+#{\widehat\chi^2=R^2-1>0}. For this fixed clipping rule, the statistic in
+this construction is bounded above by #{(1+\epsilon_{\rm clip})^2-1}.}
+
+\p{For the raw surrogate #{\mathcal L_i=r_i\widehat A_i} considered as a
+separate objective, the same algebra works at every #{R>1} and yields
+arbitrarily large squared-ratio excess. This does not extend the active
+construction to arbitrary #{R} under clipping: when
+#{R>1+\epsilon_{\rm clip}}, the positive-advantage term is locally constant,
+while the negative term remains active. Their clipped gradients are then
+#{0} and #{-R(1/2,-1/2)^{\mathsf T}}, with nonzero mean
+#{(-R/4,R/4)^{\mathsf T}}.}
 
 \p{The example does not contradict \ref{ftip-0081}: that theorem upper-bounds
 batch-gradient energy by a ratio moment. It supplies no lower bound on the
-gradient and no converse from a quiet monitor to fresh data.}
+gradient and no converse from zero batch-gradient energy to ratios equal to
+one. The arbitrary-ratio version concerns only the separate raw surrogate.}
