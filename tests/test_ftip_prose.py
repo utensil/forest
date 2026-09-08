@@ -142,6 +142,25 @@ The typed signature is a mathematical object. See https://source-locator.example
                 self.assertEqual(1, sum(f.rule.rule_id == "FTIP-SOURCE-LOCATOR" for f in source_findings))
                 self.assertEqual(1, sum(f.rule.rule_id == "FTIP-SOURCE-LOCATOR" for f in rendered_findings))
 
+    def test_math_whitespace_between_text_spans_is_zero_width(self) -> None:
+        separators = (" ", "\n", "\t", "{ \n\t }")
+        for separator in separators:
+            with self.subTest(separator=repr(separator)):
+                source_math = f"#{{\\text{{source lo}}{separator}\\text{{cator}}}}"
+                rendered_math = f"\\(\\text{{source lo}}{separator}\\text{{cator}}\\)"
+                self.write_tree("ftip-0001", f"\\p{{{source_math}}}")
+                self.write_html("ftip-0001", f"<p>{rendered_math}</p>")
+                source_findings = CHECKER.check_source(self.trees)
+                rendered_findings = CHECKER.check_render(self.trees, self.output)
+                self.assertEqual(1, sum(f.rule.rule_id == "FTIP-SOURCE-LOCATOR" for f in source_findings))
+                self.assertEqual(1, sum(f.rule.rule_id == "FTIP-SOURCE-LOCATOR" for f in rendered_findings))
+
+    def test_math_symbols_separate_text_payloads(self) -> None:
+        self.write_tree("ftip-0001", r"\p{#{\text{source}\alpha\text{ locator}}}")
+        self.write_html("ftip-0001", r"<p>\(\text{source}\alpha\text{ locator}\)</p>")
+        self.assertEqual([], CHECKER.check_source(self.trees))
+        self.assertEqual([], CHECKER.check_render(self.trees, self.output))
+
     def test_escaped_literal_math_brace_remains_visible(self) -> None:
         self.write_tree("ftip-0001", r"\p{#{\text{source \{ locator}}}")
         self.write_html("ftip-0001", r"<p>\(\text{source \{ locator}\)</p>")

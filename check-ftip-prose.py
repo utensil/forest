@@ -199,6 +199,13 @@ def _blank(chars: list[str], start: int, end: int) -> None:
             chars[index] = " "
 
 
+def _mask_math_chars(text: str, chars: list[str], start: int, end: int) -> None:
+    """Mask nontext math as boundaries and discard nonprinting math whitespace."""
+
+    for index in range(start, end):
+        chars[index] = "\0" if text[index].isspace() else "."
+
+
 def _closing_brace(text: str, opening: int, path: Path) -> int:
     if opening >= len(text) or text[opening] != "{":
         raise CheckError(f"{path}: expected '{{' at offset {opening}")
@@ -266,7 +273,7 @@ def _source_text(path: Path) -> tuple[str, list[int]]:
         if all(character == " " for character in chars[match.start() : match.end()]):
             continue
         closing = _closing_brace(original, match.end() - 1, path)
-        _blank(chars, match.start(), closing + 1)
+        _mask_math_chars(original, chars, match.start(), closing + 1)
         _restore_tex_text(original, chars, match.end(), closing, path)
         _join_math_grouping_braces(original, chars, match.end() - 1, closing + 1)
 
@@ -445,7 +452,7 @@ def _mask_rendered_tex_math(text: str, lines: list[int], path: Path) -> tuple[st
                 line = lines[start] if start < len(lines) else 1
                 raise CheckError(f"{path}:{line}: unclosed rendered TeX delimiter {opening}")
             end += len(closing)
-            _blank(chars, start, end)
+            _mask_math_chars(text, chars, start, end)
             _restore_tex_text(text, chars, start + len(opening), end - len(closing), path)
             _join_math_grouping_braces(text, chars, start + len(opening), end - len(closing))
             cursor = end
