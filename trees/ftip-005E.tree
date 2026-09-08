@@ -6,12 +6,14 @@
 \tag{ftip}
 \tag{evaluation}
 
-\p{Using the fixed interface in \ref{ftip-005D}, the \strong{expected
-evaluation performance} of a post-training protocol is}
+\p{For a protocol #{P} in the integrable evaluation domain of
+\ref{ftip-005D}, its \strong{expected evaluation performance} is the finite
+real number}
 
 ##{
 \begin{aligned}
 J_{\rm ev}(P)
+&=\int Z_P\,d(\mathbb P_P\otimes\nu_{\rm ev}),\\
 &=\mathbb E\left[
 U\left(X,\mathsf{Eval}_b(M_P,X;\Xi);\Omega\right)
 \right],
@@ -23,4 +25,6 @@ Q_{\rm ev}(dx)\Lambda_{\rm ev}(d\xi,d\omega\mid x).
 
 \p{The label #{\rm ev} abbreviates the task, law, inference protocol,
 budget, utility, and seed law fixed above. Changing any of them changes the
-estimand.}
+estimand. Both positive and negative parts of #{Z_P} have finite expectation;
+an undefined expectation or an infinite value is outside this real-valued
+performance domain.}

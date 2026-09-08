@@ -3,12 +3,31 @@
 \taxon{Definition}
 \title{Architecture-indexed evaluation functional}
 \tag{ftip}
-\p{Fix an evaluation protocol #{J} and an architecture #{A}. Define
-#{V_A(C)} as the supremum of #{J(\operatorname{PostTrain}(A,\eta))} over
-allowed interventions #{\eta}.}
+\p{Fix an architecture #{A}, its base artifact, a declared intervention set
+#{\mathfrak I_A}, and the common evaluation interface of \ref{ftip-005D}.
+Each #{\eta\in\mathfrak I_A} specifies a protocol
+#{P_{A,\eta}=\operatorname{PostTrain}(A,\eta)} in that measurable and
+absolutely integrable evaluation domain, with real performance
+#{J_{\rm ev}(P_{A,\eta})}. Let #{c_A(\eta)\in[0,+\infty]} be its scalar
+cost under the study's declared accounting rule: a fixed measured cost or an
+expected nonnegative cost, as specified. For a finite budget
+#{C\in\mathbb R_{\geq0}}, define
+##{
+V_A(C)=\sup\left\{
+J_{\rm ev}(P_{A,\eta}):
+\eta\in\mathfrak I_A,\ c_A(\eta)\leq C
+\right\}\in\overline{\mathbb R}.
+}
+Infinite-cost interventions are infeasible at every such budget.}
 
-\p{Restrict the supremum to interventions whose measured scalar cost is at
-most #{C}.}
+\p{As in \ref{ftip-005M}, the empty feasible set has value #{-\infty}; an
+unbounded-above feasible score set has value #{+\infty}. The value is real
+exactly when that set is nonempty and bounded above. Increasing #{C} enlarges
+the feasible set, so #{V_A} is nondecreasing. A finite supremum need not be
+attained by any intervention.}
 
-\p{The allowed class and evaluation law are part of the definition, so #{V_A}
-is not a universal intelligence function.}
+\p{Frontier differences and derivatives are ordinary real operations only
+where the relevant values are finite, with differentiability additionally
+required for a derivative. Cost ratios use the domain in \ref{ftip-00JP}.
+The allowed intervention set, evaluation law, and accounting rule are part of
+the definition, so #{V_A} is not a universal intelligence function.}

@@ -7,12 +7,12 @@
 \tag{evaluation}
 
 \p{With the notation of \ref{ftip-001N}, an \newvocab{evaluation utility}
-is a declared function
+is a declared measurable function
 ##{
 u_{\mathsf T}:\mathcal X_{\mathsf T}\times
 \mathcal O_{\mathsf T}\times\Omega_E\longrightarrow\mathbb R^d,
 }
-where #{\Omega_E} is the evaluator's random-seed set. The evaluator applies it
+where #{\Omega_E} is the evaluator's measurable seed space. The evaluator applies it
 only to admissible pairs from \ref{ftip-001O}. A deterministic evaluator is the
 special case in which the value does not depend on #{\omega\in\Omega_E}.}
 
@@ -20,3 +20,12 @@ special case in which the value does not depend on #{\omega\in\Omega_E}.}
 cumulative return is another scalar case. Vector utility keeps qualities such
 as correctness, safety, latency, and tool cost distinct until a later rule
 declares how to compare them.}
+
+\p{Whenever an expected utility vector is used, its composite evaluation
+random variable must be measurable and absolutely integrable in every
+coordinate under the declared joint law. Thus its expectation lies in
+#{\mathbb R^d}. Bounded measurable utility is a sufficient specialization;
+so is finite support for the complete evaluation random variable with finite
+values on that support. Merely taking a finite real value at each seed is
+insufficient for an unbounded evaluator. The scalar protocol comparison in
+\ref{ftip-005D} states its joint law explicitly.}
