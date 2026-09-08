@@ -127,6 +127,27 @@ The typed signature is a mathematical object. See https://source-locator.example
         self.assertEqual(3, sum(f.rule.rule_id == "FTIP-SOURCE-LOCATOR" for f in source_findings))
         self.assertEqual(2, sum(f.rule.rule_id == "FTIP-SOURCE-LOCATOR" for f in rendered_findings))
 
+    def test_math_grouping_braces_do_not_hide_text(self) -> None:
+        cases = (
+            (r"#{\text{source lo{\textbf{cator}}}}", r"\(\text{source lo{\textbf{cator}}}\)"),
+            (r"#{\text{source lo}{\text{cator}}}", r"\(\text{source lo}{\text{cator}}\)"),
+            (r"#{\text{source lo{{{\textbf{cator}}}}}}", r"\(\text{source lo{{{\textbf{cator}}}}}\)"),
+        )
+        for source_math, rendered_math in cases:
+            with self.subTest(source_math=source_math):
+                self.write_tree("ftip-0001", f"\\p{{{source_math}}}")
+                self.write_html("ftip-0001", f"<p>{rendered_math}</p>")
+                source_findings = CHECKER.check_source(self.trees)
+                rendered_findings = CHECKER.check_render(self.trees, self.output)
+                self.assertEqual(1, sum(f.rule.rule_id == "FTIP-SOURCE-LOCATOR" for f in source_findings))
+                self.assertEqual(1, sum(f.rule.rule_id == "FTIP-SOURCE-LOCATOR" for f in rendered_findings))
+
+    def test_escaped_literal_math_brace_remains_visible(self) -> None:
+        self.write_tree("ftip-0001", r"\p{#{\text{source \{ locator}}}")
+        self.write_html("ftip-0001", r"<p>\(\text{source \{ locator}\)</p>")
+        self.assertEqual([], CHECKER.check_source(self.trees))
+        self.assertEqual([], CHECKER.check_render(self.trees, self.output))
+
     def test_research_uses_of_process_words_pass(self) -> None:
         self.write_tree(
             "ftip-0001",

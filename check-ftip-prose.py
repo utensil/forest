@@ -229,6 +229,14 @@ def _restore_tex_text(text: str, chars: list[str], start: int, end: int, path: P
         chars[closing] = "\0"
 
 
+def _join_math_grouping_braces(text: str, chars: list[str], start: int, end: int) -> None:
+    """Remove nonprinting TeX group braces while preserving escaped literal braces."""
+
+    for index in range(start, end):
+        if text[index] in "{}" and (index == 0 or text[index - 1] != "\\"):
+            chars[index] = "\0"
+
+
 def _join_inline_text_markup(text: str, chars: list[str], path: Path) -> None:
     """Remove inline command syntax without splitting a visibly continuous word."""
 
@@ -260,6 +268,7 @@ def _source_text(path: Path) -> tuple[str, list[int]]:
         closing = _closing_brace(original, match.end() - 1, path)
         _blank(chars, match.start(), closing + 1)
         _restore_tex_text(original, chars, match.end(), closing, path)
+        _join_math_grouping_braces(original, chars, match.end() - 1, closing + 1)
 
     masked = "".join(chars)
     for match in list(re.finditer(r"\\([A-Za-z][A-Za-z0-9_-]*)", masked)):
@@ -438,6 +447,7 @@ def _mask_rendered_tex_math(text: str, lines: list[int], path: Path) -> tuple[st
             end += len(closing)
             _blank(chars, start, end)
             _restore_tex_text(text, chars, start + len(opening), end - len(closing), path)
+            _join_math_grouping_braces(text, chars, start + len(opening), end - len(closing))
             cursor = end
     _join_inline_text_markup(text, chars, path)
     return "".join(chars), lines
