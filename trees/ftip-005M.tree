@@ -7,7 +7,8 @@
 \tag{optimization}
 
 \p{For a scalar evaluation utility, the \strong{costed post-training
-potential} of #{M_0} under componentwise budget #{\mathbf B} is}
+potential} of #{M_0} under a finite componentwise budget
+#{\mathbf B\in\mathbb R_+^7} is the extended-real supremum}
 
 ##{
  \Phi(M_0,\mathbf B)
@@ -18,5 +19,18 @@ potential} of #{M_0} under componentwise budget #{\mathbf B} is}
  \right\}.
 }
 
-\p{The inequality is componentwise. The value is conditional on every object
-named in the display; it is not an intrinsic constant of the model.}
+\p{Here #{\mathfrak P(M_0)} has the evaluation domain of \ref{ftip-005J},
+so each #{J_{\rm ev}(P)} is real. The expected-cost inequality is componentwise
+in #{[0,+\infty]^7}; it cannot hold against a finite budget if any coordinate
+is infinite. Define #{\sup\varnothing=-\infty}, and use #{+\infty} when
+feasible performance values are unbounded above. Thus #{\Phi} takes values
+in #{\overline{\mathbb R}=\mathbb R\cup\{-\infty,+\infty\}}.}
+
+\p{The potential is finite real exactly when its feasible performance set is
+nonempty and bounded above. For example, a common finite upper bound on
+utility and at least one feasible protocol suffice. This does not guarantee
+that any protocol attains the supremum. Ordinary differences, ratios, or
+derivatives of potential values require finite real operands and any further
+regularity hypotheses needed by that operation. The value is conditional on
+every object named in the display; it is not an intrinsic constant of the
+model.}

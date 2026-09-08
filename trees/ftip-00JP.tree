@@ -3,6 +3,30 @@
 \taxon{Definition}
 \title{Iso-quality cost ratio}
 \tag{ftip}
-\p{For a declared quality #{q}, define #{C_A(q)=\inf\{C:V_A(C)\ge q\}} when
-the set is nonempty. The iso-quality ratio is #{\rho_{A/B}(q)=C_A(q)/C_B(q)}
-when both costs are finite. It compares efficiency, not a universal ceiling.}
+\p{For a finite real target #{q\in\mathbb R} and the frontier of
+\ref{ftip-00JJ}, define the inverse cost
+##{
+C_A(q)=\inf\{C\in\mathbb R_{\geq0}:V_A(C)\geq q\}
+\in[0,+\infty],
+\qquad \inf\varnothing=+\infty.
+}
+The iso-quality ratio is defined only on the domain
+##{
+\rho_{A/B}(q)=\frac{C_A(q)}{C_B(q)},
+\qquad
+0\leq C_A(q)<+\infty,
+\quad 0<C_B(q)<+\infty.
+}
+The architectures must use the same target, evaluation interface, cost units,
+and comparison arm. The ratio compares efficiency under these choices.}
+
+\p{An inverse cost is a threshold infimum, not an executable minimum.
+The infimum over budgets may be unattained; even if a budget satisfies
+#{V_A(C)\geq q}, its performance supremum may be unattained at #{q}.
+An actual target-achieving intervention requires a separate witness.}
+
+\p{Positive individual costs do not guarantee a positive inverse cost.
+For interventions #{\eta_n}, #{n\geq1}, with score #{1} and cost #{1/n},
+the target #{q=1} has #{C_A(1)=0}, although every intervention costs more
+than zero. If both architectures have this family, the putative ratio is
+#{0/0} and is excluded by the displayed domain.}

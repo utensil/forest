@@ -7,7 +7,7 @@
 \tag{notation}
 
 \p{Fix an evaluation task #{\mathsf T_{\rm ev}} from \ref{ftip-001O} and a
-scalar evaluation utility
+measurable scalar evaluation utility
 #{u_{\mathsf T_{\rm ev}}:\mathcal X_{\mathsf T_{\rm ev}}\times
 \mathcal O_{\mathsf T_{\rm ev}}\times\Omega_E\to\mathbb R}, the #{d=1}
 case of \ref{ftip-001T}. Fix its task law
@@ -15,22 +15,41 @@ case of \ref{ftip-001T}. Fix its task law
 #{\mathsf I_{\rm ev}} from \ref{ftip-001R}, and an inference budget
 #{b\in\mathcal B_{\mathrm{eval}}}. Use the inference-seed space #{\Omega_I}
 and evaluator-seed space #{\Omega_E} from \ref{ftip-001N}. A declared
-evaluation-seed kernel
+probability kernel on these measurable spaces
 #{\Lambda_{\rm ev}(d\xi,d\omega\mid x)} assigns inference and evaluator
 randomness to each instance. Together with #{Q_{\rm ev}}, it gives the joint
 evaluation law
-#{Q_{\rm ev}(dx)\Lambda_{\rm ev}(d\xi,d\omega\mid x)}, which is fixed
+#{\nu_{\rm ev}(dx,d\xi,d\omega)
+=Q_{\rm ev}(dx)\Lambda_{\rm ev}(d\xi,d\omega\mid x)}, which is fixed
 independently of training.}
 
-\p{For an executable artifact #{M}, define only the aliases
+\p{Declare a measurable space #{\mathcal M} of executable artifacts. For
+#{M\in\mathcal M}, define the aliases
 ##{
 \mathsf{Eval}_b(M,x;\xi)
 :=\operatorname{pr}_1\left(\mathsf I_{\rm ev}(M,x,b;\xi)\right),
 \qquad
 U(x,o;\omega):=u_{\mathsf T_{\rm ev}}(x,o;\omega).
 }
-A post-training protocol #{P} produces a random executable artifact #{M_P}
-from the common base artifact #{M_0}; the no-training protocol is #{P_0}.
-Fix also a scalar success threshold #{u_*\in\mathbb R}. Expectations below
-include protocol randomness producing #{M_P}. Evaluation samples drawn from
-the joint evaluation law remain independent of that training randomness.}
+Require #{\mathsf{Eval}_b} to be measurable in #{(M,x,\xi)} and to return
+admissible outcomes on admitted runs.}
+
+\p{Each post-training protocol #{P} has a probability space
+#{(\Omega_P,\Sigma_P,\mathbb P_P)} for its randomness and a measurable
+artifact map #{M_P:\Omega_P\to\mathcal M} produced from the common base
+artifact #{M_0}. The no-training protocol is #{P_0}. The complete evaluation
+law for #{P} is the product #{\mathbb P_P\otimes\nu_{\rm ev}}, expressing
+independence between protocol randomness and the fixed evaluation draw.
+For #{\zeta\in\Omega_P}, write
+##{
+Z_P(\zeta,x,\xi,\omega)
+=U\left(x,\mathsf{Eval}_b(M_P(\zeta),x;\xi);\omega\right).
+}
+This composite is measurable. Every protocol compared through expected
+performance, including the baseline #{P_0}, must satisfy
+##{
+\int |Z_P|\,d(\mathbb P_P\otimes\nu_{\rm ev})<\infty.
+}
+This is the evaluation domain; finite pointwise utility does not replace the
+absolute-integrability condition. Fix also a scalar success threshold
+#{u_*\in\mathbb R}.}

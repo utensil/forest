@@ -7,7 +7,8 @@
 \tag{compute}
 
 \p{The realized \strong{lifecycle cost vector} of a protocol is the random
-vector #{C(P)\in\mathbb R_+^7} that records separately}
+vector #{C(P)\in\mathbb R_+^7}, measurable on its declared lifecycle-run
+probability space, that records separately}
 
 ##{
  C(P)=
@@ -18,4 +19,10 @@ vector #{C(P)\in\mathbb R_+^7} that records separately}
 \p{A componentwise lifecycle budget is a vector
 #{\mathbf B\in\mathbb R_+^7}. Each cost coordinate has a declared unit, such as tokens, labels, accelerator
 floating-point operations (FLOPs), sandbox time, bytes, or evaluator calls. A scalar price may be applied
-later, but the typed vector is retained.}
+later, but the typed vector is retained. Each nonnegative coordinate has a
+well-defined expectation in #{[0,+\infty]}; finite realized costs need not
+have finite expectations. A finite componentwise budget excludes protocols
+with any infinite expected-cost coordinate. When costs include the fixed
+independent evaluation draw, the run law may include the product law in
+\ref{ftip-005D}; the accounting record must specify which randomness is
+averaged.}
