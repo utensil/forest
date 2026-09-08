@@ -7,13 +7,17 @@
 \tag{preference-data}
 \tag{source-status}
 
-\p{The results below come from the v1 preprint \citef{zhao2025limits}. Its
-model treats a pretrained system as a finite collection of response circuits
-plus learned maps that route queries to those circuits. Post-training changes
-the routing maps while retaining the circuit collection.}
-
-\p{This is a source assumption, not an architectural theorem about language
-models. In particular, the lower bounds do not prove that real post-training
-creates no circuits, that a neural network decomposes into the displayed
-objects, or that every preference-learning algorithm is subject to the same
-bound outside this model.}
+\p{The routing model and preference limits below are based on the v1 preprint
+\citef{zhao2025limits}. It models a pretrained system as a finite collection
+of response circuits plus learned maps that route queries to those circuits.
+Post-training changes the routing maps while retaining the circuit collection.}
+\p{The [noiseless lower bound](ftip-009A) is proved here under explicit
+pointwise response separation and a deterministic preference-only learner,
+whose returned router may be stochastic. Its finite partition estimate and
+cardinal-utility construction give a restricted reconstruction of the source
+rate; the proof does not establish a randomized-learner extension.}
+\p{The routing model is a source assumption, not an architectural theorem
+about language models. In particular, its lower bounds do not prove that
+real post-training creates no circuits, that a neural network decomposes into
+the displayed objects, or that every preference-learning algorithm obeys the
+same bound outside this model.}
