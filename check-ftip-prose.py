@@ -190,10 +190,9 @@ RULES: tuple[Rule, ...] = (
         "FTIP-DOCUMENT-ASSEMBLY",
         _rx(
             r"\b(?:this (?:sub)?section types?|"
-            r"(?:first|second|remaining) document clusters? (?:types?|separates?|records?)|"
-            r"(?:first|second|remaining) clusters? (?:types?|separates?|records?)[^.!?;]{0,120}"
+            r"(?:first|second|remaining) (?:document )?clusters? (?:types?|separates?|records?)[^.!?;]{0,120}"
             r"(?:wrapper composition|finite archive|archive from execution|selected for execution|"
-            r"conditional strategy|recursive run|document|chapter|subsections?))\b"
+            r"conditional strategy|recursive run|theorem ownership|document sections?|chapter|subsections?))\b"
         ),
         "Make the mathematical object, experiment, or consequence the subject of the sentence.",
     ),
@@ -213,8 +212,8 @@ RULES: tuple[Rule, ...] = (
     Rule(
         "FTIP-WORKFLOW-METAPHOR",
         _rx(
-            r"\b(?:(?:noiseless|theorem|harness|artifact|evidence) lanes?|root boundary|"
-            r"transfer stop|architecture bridge|matched cell boundary|evidence contract|"
+            r"\b(?:(?:noiseless|theorem|artifact|evidence) lanes?|root boundary|"
+            r"transfer stop|architecture bridge|matched cell boundary|"
             r"(?:mandatory )?(?:model instance|toy to model instance) gates?)\b"
         ),
         "Name the invariant, exclusion, controlled variable, or required assumption directly.",
