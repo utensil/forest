@@ -4,6 +4,10 @@
 \title{Common-recipe comparison arm}
 \tag{ftip}
 \p{A common-recipe arm fixes training data, optimizer family, schedule,
-post-training feedback, inference budget, and evaluation draws, then swaps
-only the architecture record. Deviations are recorded rather than silently
-called architecture effects.}
+post-training procedure and feedback, training and post-training budgets,
+inference budget, and evaluation protocol and draws.
+Interface-compatible parameter choices are declared in advance as part of
+each permitted architecture package. The comparison varies that package
+under the common recipe; any further deviation is recorded as a separate
+comparison coordinate. Its score difference measures performance under this
+recipe, not the best attainable result for either architecture.}

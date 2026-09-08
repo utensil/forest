@@ -3,6 +3,17 @@
 \taxon{Definition}
 \title{Restricted-envelope comparison arm}
 \tag{ftip}
-\p{Declare an allowed intervention class #{\mathcal E_A} for each architecture
-and compare the suprema over #{\mathcal E_A} under the same cost cap. The
-classes must expose exclusions, search budgets, seeds, and stopping rules.}
+\p{A restricted-envelope arm declares an allowed intervention class
+#{\mathcal E_A\subseteq\mathfrak I_A} for each architecture, specifying the
+permitted training, post-training, and inference procedures. The classes
+expose exclusions, search budgets, seeds, and stopping rules. Restrict the
+evaluation functional of \ref{ftip-00JJ} to #{\mathcal E_A} and compare the
+resulting suprema under the same finite cost cap #{C\geq0}, common evaluation
+law, and common declared cost accounting.}
+
+\p{The measurable, integrable evaluation domain and extended-real
+conventions of \ref{ftip-00JJ} apply: an empty feasible class has value
+#{-\infty}, an unbounded-above feasible score set has value #{+\infty}, and
+a finite supremum need not be attained. The allowed class is part of the
+comparison, so its envelope is a restriction-dependent quantity, not an
+unrestricted architectural ceiling.}
