@@ -1,11 +1,46 @@
 \import{macros}
 \meta{agent-authored}{true}
-\taxon{Definition}
-\title{Kimi Linear measurement record}
+\taxon{Example}
+\title{A cache-memory estimate for hybrid attention}
 \tag{ftip}
-\p{The model-instance record must identify the exact checkpoint and revision,
-KDA/MLA layer pattern, parameter counts, tokenizer, context length, hardware,
-kernel versions, precision, batch, sequence lengths, decoding policy, and
-whether the result is pretraining, supervised tuning, or reinforcement
-learning. Missing fields make the corresponding architecture attribution
-unknown.}
+\p{The cited FLA KDA implementation at commit \code{6b6f546f} stores one active recurrent state
+per sequence, with dimensions determined by the value heads and key/value
+dimensions rather than accumulated context length. Its newly allocated
+state uses float32
+\citelink{https://github.com/fla-org/flash-linear-attention/blob/6b6f546f9bd10a97be1e8cf2f0120de70cfca482/fla/ops/kda/fused_recurrent.py#L262-L283}.
+The optional short-convolution state has one fixed-width kernel buffer per
+channel and sequence
+\citelink{https://github.com/fla-org/flash-linear-attention/blob/6b6f546f9bd10a97be1e8cf2f0120de70cfca482/fla/modules/conv/short_conv.py#L139-L142}.
+This supplies a concrete implementation model for the recurrent part of
+the 3:1 mixture in \ref{ftip-00KV}.}
+
+\p{Consider a stylized comparison with #{4\ell} layers, batch size #{b},
+and context length #{T}, where #{\ell,b,T} are positive integers. Assume each MLA layer
+stores #{\kappa T} bytes per sequence, with the same #{\kappa>0} in both
+designs, and each KDA layer stores one terminal recurrent-plus-convolution
+state of #{\sigma>0} bytes. The active attention-state memories are}
+
+##{
+ M_{\rm MLA}=4b\ell\kappa T,\qquad
+ M_{\rm hybrid}=b\ell(\kappa T+3\sigma),\qquad
+ \frac{M_{\rm hybrid}}{M_{\rm MLA}}
+ =\frac{1}{4}+\frac{3\sigma}{4\kappa T}.
+}
+
+\p{The hybrid uses less active state exactly when #{T>\frac{\sigma}{\kappa}},
+and the ratio tends to #{1/4} as context grows. This explains why replacing
+three quarters of the growing caches can approach a 75-percent saving,
+while fixed recurrent-state overhead can erase the advantage at short
+contexts. The retained MLA layers keep the hybrid's state memory linear
+in #{T}; the whole model is not a fixed-memory recurrent system.}
+
+\p{Weights, training activations, workspaces, allocator padding and saved
+prefix states are outside this active-state calculation. At a fixed device
+memory budget, the estimate predicts more room for simultaneous or longer
+rollouts when attention state dominates. It does not predict a fourfold
+speedup. Training and decoding also use different execution paths: FLA
+selects chunk kernels for gradient-enabled computation and fused recurrence
+for short inference calls
+\citelink{https://github.com/fla-org/flash-linear-attention/blob/6b6f546f9bd10a97be1e8cf2f0120de70cfca482/fla/layers/kda.py#L210-L308}.
+The fixed-state estimate is therefore a useful serving hypothesis, not a
+training-memory or training-speed formula.}

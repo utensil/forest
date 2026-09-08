@@ -3,8 +3,15 @@
 \taxon{Example}
 \title{Published Kimi Linear operating point}
 \tag{ftip}
-\p{The Kimi Linear report describes a hybrid with 3 billion activated and
-48 billion total parameters, trained with 1.4 trillion tokens. Its displayed
-architecture uses three Kimi Delta Attention layers for each Multi-head Latent
-Attention layer. These are properties of the reported model, not definitions
-of every KDA or Transformer implementation \citef{kimi2025linear}.}
+\p{The Kimi Linear report compares experimental models pretrained on
+1.4 trillion tokens, each with 48 billion total and 3 billion active
+parameters. Kimi Linear uses three Kimi Delta Attention layers for each
+full Multi-head Latent Attention layer, with no positional encoding (NoPE)
+in its MLA layers; the reference uses full MLA attention
+\citet{Sections 4 and 5.4}{kimi2025linear}. These are properties of the
+reported hybrid architecture.}
+\p{These experimental models are distinct from the released Kimi Linear
+model, pretrained on 5.7 trillion tokens and supporting up to one million
+tokens of context. Appendix D compares that release with Moonlight,
+which has 16 billion total and 3 billion active parameters
+\citet{Section 5.4.1 and Appendix D}{kimi2025linear}.}

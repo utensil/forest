@@ -1,9 +1,16 @@
 \import{macros}
 \meta{agent-authored}{true}
 \taxon{Remark}
-\title{Comparisons depend on the measured model instances}
+\title{Testing the predicted architecture tradeoff}
 \tag{ftip}
-\p{The measurements support comparison of the named model instances and protocol.
-They do not establish that another KDA implementation, Transformer variant,
-optimizer, hardware stack, or task family has the same ordering. Each transfer
-requires a new matched comparison.}
+\p{The memory and discovery models predict the strongest benefit when
+long prefixes make attention state expensive, saved capacity improves useful
+rollout throughput, and per-attempt success remains above the break-even
+threshold. Short contexts, expensive verification, or strongly correlated
+attempts can weaken that benefit. These are distinct mechanisms to test,
+rather than a universal ranking of KDA and full attention.}
+\p{A comparison across implementations can retain this reasoning while
+re-estimating state sizes, generation share and success probabilities for
+the new system. Report both the prediction and the matched measurements:
+their agreement or disagreement identifies which mechanism or assumption
+needs revision.}

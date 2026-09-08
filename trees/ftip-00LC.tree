@@ -3,8 +3,30 @@
 \taxon{Example}
 \title{Published Kimi Linear comparison}
 \tag{ftip}
-\p{The Kimi Linear report compares a hybrid KDA/MLA model with an MLA
-baseline. Interpreting its paired measurements requires the training recipe
-and evaluation configuration, together with hardware, kernel, batch, and
-sequence-length conditions at the measurement point
-\citef{kimi2025linear}.}
+\p{Table 4 of the Kimi Linear report compares the experimental models
+pretrained on 1.4 trillion tokens in \ref{ftip-00KV}, after the same
+supervised fine-tuning (SFT) recipe. Both have 48 billion total and
+3 billion active parameters.
+Three selected benchmark scores are
+\citet{Sections 4 and 5.4 and Table 4}{kimi2025linear}:}
+\table{
+  \thead{
+    \tr{\th{Arm}\th{MMLU-Pro}\th{LiveBench}\th{EvalPlus}}
+  }
+  \tbody{
+    \tr{\td{Kimi Linear}\td{67.4}\td{45.2}\td{61.0}}
+    \tr{\td{Full MLA}\td{65.7}\td{45.7}\td{62.6}}
+  }
+}
+\p{The entries use the paper's score units, with larger values better on
+each selected benchmark; LiveBench is reported as Pass@1. Kimi Linear is
+higher on MMLU-Pro and lower on LiveBench and EvalPlus in these observations.
+These are reported point estimates on different tasks, not a single
+capability score; the table supplies no uncertainty estimate.}
+\p{The common recipe uses the K2 pretraining corpus, MuonClip and a shared
+training schedule. SFT proceeds from broad instruction data to targeted
+reasoning tasks; evaluation uses temperature 1.0 and an internal framework
+derived from LM-Harness \citet{Section 5.4}{kimi2025linear}.
+Thus the scores provide a concrete example of how the trained hybrid and
+full-MLA designs respond to the same recipe. The cost mechanism and its
+possible post-training consequences are developed in \ref{ftip-00KZ}.}

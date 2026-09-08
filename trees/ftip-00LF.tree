@@ -1,9 +1,23 @@
 \import{macros}
 \meta{agent-authored}{true}
 \taxon{Example}
-\title{Paired estimates and measurement uncertainty}
+\title{How generation share changes the predicted gain}
 \tag{ftip}
-\p{A paired estimate is accompanied by the selected scalar costs, full cost
-vectors, uncertainty summaries, and unmatched or unknown conditions.
-Reproducing a plotted frontier point requires all quantities used in its
-calculation; the point does not establish a universal architecture ordering.}
+\p{Keep the illustrative generation factor #{s_{\rm gen}=2.2} from
+\ref{ftip-00L3} and vary the baseline generation share #{f}. Its cost model
+gives the following total attempt-throughput factors:}
+\table{
+  \thead{\tr{\th{Generation share}\th{Predicted throughput factor}}}
+  \tbody{
+    \tr{\td{20 percent}\td{1.122}}
+    \tr{\td{50 percent}\td{1.375}}
+    \tr{\td{80 percent}\td{1.774}}
+    \tr{\td{100 percent}\td{2.200}}
+  }
+}
+\p{These calculated values show why the same decoding improvement can
+matter much more for generation-heavy search than for a verifier- or
+optimizer-dominated workload. They suggest measuring the time spent in
+generation, verification and updates before selecting where to invest
+systems effort. A change in the bottleneck changes the useful intervention,
+even when the attention architecture stays fixed.}

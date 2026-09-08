@@ -3,8 +3,17 @@
 \taxon{Example}
 \title{Common-recipe reading of the Kimi result}
 \tag{ftip}
-\p{The report's identical-training-recipe comparison is evidence for the
-fixed-recipe arm: the architecture is changed while the declared recipe is
-held common. It does not identify the best attainable KDA or Transformer
-frontier, because architecture-specific tuning and systems choices are not
-optimized by that arm alone \citef{kimi2025linear}.}
+\p{The report holds its stated pretraining and SFT recipes common across
+the experimental models \citet{Sections 5.4--5.5 and Table 4}{kimi2025linear}.
+The selected observations in \ref{ftip-00LC} compare the resulting trained
+designs, including the hybrid's 3:1 KDA/MLA pattern and NoPE choice. The
+mixed score directions suggest a task-dependent tradeoff rather than one
+ordering of the two architectures.}
+\p{The theoretical mechanism is a change in the cost of maintaining and
+using the prefix: recurrent layers compress it into state, while the retained
+MLA layers preserve growing attention caches. The model in \ref{ftip-00KY}
+predicts the largest memory advantage at long contexts. If this advantage
+reduces the cost of generating useful candidates, \ref{ftip-00L3} predicts
+when more attempts can offset a reduction in per-attempt quality. This is a
+conditional explanation to test through rollout costs and verified success
+rates; it does not require attributing the whole result to KDA alone.}
