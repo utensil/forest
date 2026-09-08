@@ -66,8 +66,14 @@ FTIP reader prose is also checked by `just chk`; publication verification scans
 every built FTIP HTML page so titles repeated in navigation and backlinks cannot
 reintroduce known authoring language. The reviewed rule registry lives in
 `check-ftip-prose.py`, with source and rendered regression cases in
-`tests/test_ftip_prose.py`. This bounded vocabulary check does not establish
-semantic prose quality. Each FTIP pull request still needs a fresh independent
+`tests/test_ftip_prose.py`. The registry covers contextual authoring-language
+families, including future
+drafting instructions, document assembly, ownership and extraction narration,
+workflow metaphors, and comparison worksheets. It is not limited to a fixed
+list of reported examples, and it does not establish semantic prose quality.
+Ordinary reader navigation, mathematical exposition, research terminology, and
+experimental or runtime records remain legitimate. Each FTIP pull request still
+needs a fresh independent
 review of new terminology: keep standard mathematical language, terms grounded
 in cited research, and useful explicitly defined concepts; keep note-authoring
 workflow narration out of reader-facing pages.

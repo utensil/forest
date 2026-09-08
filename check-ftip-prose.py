@@ -57,7 +57,7 @@ def _rx(pattern: str) -> re.Pattern[str]:
     return re.compile(pattern, re.IGNORECASE)
 
 
-# AGENT-NOTE: Keep this registry narrow; semantic prose quality still requires adversarial review.
+# AGENT-NOTE: Add contextual phrase families only; semantic prose quality still requires adversarial review.
 RULES: tuple[Rule, ...] = (
     Rule(
         "FTIP-CARD",
@@ -173,6 +173,68 @@ RULES: tuple[Rule, ...] = (
         "FTIP-BACKWARD-DEPENDENCIES",
         _rx(r"\bbackward dependencies\b"),
         "Name the prerequisite results and their logical direction directly.",
+    ),
+    Rule(
+        "FTIP-FUTURE-WRITING",
+        _rx(
+            r"\b(?:(?:draft|manuscript|chapter|next version|revised version)"
+            r"(?: [0-9]+(?:\.[0-9]+)*)? (?:should|will|must) "
+            r"(?:state|write|rewrite|add|include|supply|record|document|be written|be rewritten)\b"
+            r"[^.!?;]{0,120}\b(?:proofs?|assumptions?|hypotheses|lemmas?|theorems?)|"
+            r"(?:next|later|future|subsequent) theorem (?:should|will|must) "
+            r"(?:charge|account|state|record|document)|first formal targets? should)\b"
+        ),
+        "State the open conjecture, required hypotheses, or current limitation directly.",
+    ),
+    Rule(
+        "FTIP-DOCUMENT-ASSEMBLY",
+        _rx(
+            r"\b(?:this (?:sub)?section types?|"
+            r"(?:first|second|remaining) document clusters? (?:types?|separates?|records?)|"
+            r"(?:first|second|remaining) clusters? (?:types?|separates?|records?)[^.!?;]{0,120}"
+            r"(?:wrapper composition|finite archive|archive from execution|selected for execution|"
+            r"conditional strategy|recursive run|document|chapter|subsections?))\b"
+        ),
+        "Make the mathematical object, experiment, or consequence the subject of the sentence.",
+    ),
+    Rule(
+        "FTIP-LOCAL-OWNERSHIP",
+        _rx(r"\b(?:locally owned (?:idealization|definition|model)|local FTIP definition)\b"),
+        "State the idealization or definition directly without repository ownership narration.",
+    ),
+    Rule(
+        "FTIP-SOURCE-EXTRACTION",
+        _rx(
+            r"\b(?:source (?:equation|display)(?:'s)? [^.!?;]{0,80}(?:TeX annotation|MathML|flattened HTML)|"
+            r"(?:TeX annotation|MathML|flattened HTML)[^.!?;]{0,80}source (?:equation|display))\b"
+        ),
+        "Cite the exact source result; keep extraction mechanics in private provenance.",
+    ),
+    Rule(
+        "FTIP-WORKFLOW-METAPHOR",
+        _rx(
+            r"\b(?:(?:noiseless|theorem|harness|artifact|evidence) lanes?|root boundary|"
+            r"transfer stop|architecture bridge|matched cell boundary|evidence contract|"
+            r"(?:mandatory )?(?:model instance|toy to model instance) gates?)\b"
+        ),
+        "Name the invariant, exclusion, controlled variable, or required assumption directly.",
+    ),
+    Rule(
+        "FTIP-COMPARISON-WORKSHEET",
+        _rx(r"\b(?:model instance|matched cost|cost ratio|full cost) worksheets?\b"),
+        "Describe the matched comparison and its measured coordinates directly.",
+    ),
+    Rule(
+        "FTIP-COMPARISON-LEDGER",
+        _rx(
+            r"\b(?:comparison ledger|ledger comparison|model instance ledger|"
+            r"(?:cost vector|comparison|paired|kimi linear) ledger rows?|"
+            r"(?:ledger outputs?|completed ledger)[^.!?;]{0,100}(?:paired|comparison|score estimate|cost vectors?|frontier)|"
+            r"(?:paired comparison|model comparison)[^.!?;]{0,120}(?:ledger outputs?|completed ledger|the ledger copies)|"
+            r"the ledger names the two systems)\b"
+        ),
+        "Describe the paired systems, measurements, estimand, or reported outputs directly.",
+        (_rx(r"\b(?:training|claim|contamination|audit|runtime) ledger (?:rows?|outputs?)\b"),),
     ),
 )
 

@@ -205,6 +205,82 @@ The typed signature is a mathematical object. See https://source-locator.example
                 path = self.write_tree(f"ftip-{index:04d}", f"\\p{{{phrase}.}}")
                 self.assertIn(expected, self.rule_ids(CHECKER.scan_text(path, *CHECKER._source_text(path))))
 
+    def test_broader_contextual_authoring_families_fail_in_both_modes(self) -> None:
+        cases = (
+            ("The next version should state its assumptions before proving the bound", "FTIP-FUTURE-WRITING"),
+            ("The revised manuscript will add the proof after its assumptions are written", "FTIP-FUTURE-WRITING"),
+            ("A future chapter must be rewritten around explicit assumptions", "FTIP-FUTURE-WRITING"),
+            ("A later theorem should charge checkpoint storage", "FTIP-FUTURE-WRITING"),
+            ("The next theorem must record its prerequisites", "FTIP-FUTURE-WRITING"),
+            ("The first formal targets should stay finite", "FTIP-FUTURE-WRITING"),
+            ("This subsection types the experimental coordinates", "FTIP-DOCUMENT-ASSEMBLY"),
+            ("The second cluster separates the archive from execution", "FTIP-DOCUMENT-ASSEMBLY"),
+            ("The first cluster records the document sections before publication", "FTIP-DOCUMENT-ASSEMBLY"),
+            ("The remaining document clusters record the mathematical claims", "FTIP-DOCUMENT-ASSEMBLY"),
+            ("This is a locally owned idealization", "FTIP-LOCAL-OWNERSHIP"),
+            ("This is a local FTIP definition", "FTIP-LOCAL-OWNERSHIP"),
+            ("The source equation's TeX annotation and MathML contain the square root", "FTIP-SOURCE-EXTRACTION"),
+            ("Flattened HTML obscures the radical in the source display", "FTIP-SOURCE-EXTRACTION"),
+            ("The theorem lane below ends at a transfer stop", "FTIP-WORKFLOW-METAPHOR"),
+            ("Apply the mandatory model-instance gate", "FTIP-WORKFLOW-METAPHOR"),
+            ("The architecture bridge ends at a matched-cell boundary", "FTIP-WORKFLOW-METAPHOR"),
+            ("Use the full cost worksheet", "FTIP-COMPARISON-WORKSHEET"),
+            ("The model-instance worksheets supply the comparison conditions", "FTIP-COMPARISON-WORKSHEET"),
+            ("The comparison ledger has two system ledger rows", "FTIP-COMPARISON-LEDGER"),
+            ("Ledger outputs for the paired model comparison include score estimates", "FTIP-COMPARISON-LEDGER"),
+        )
+        for phrase, expected in cases:
+            with self.subTest(phrase=phrase):
+                self.write_tree("ftip-0001", f"\\title{{{phrase}}}\\p{{A substantive result.}}")
+                self.write_html("ftip-0001", f'<a title="{phrase}">A result</a>')
+                self.assertIn(expected, self.rule_ids(CHECKER.check_source(self.trees)))
+                self.assertIn(expected, self.rule_ids(CHECKER.check_render(self.trees, self.output)))
+
+    def test_broader_research_and_navigation_counterexamples_pass(self) -> None:
+        cases = (
+            "These research notes summarize the result. Read Chapter 2 for its proof.",
+            "The manuscript proves Theorem 4 under explicit assumptions. Version 3 uses corrected measurements.",
+            "The chapter should be read after Section 2. We must prove the bound under these assumptions.",
+            "The next model version should use sparse layers under these assumptions.",
+            "The next theorem will show that the inequality holds.",
+            "Smith identifies the missing proof as future work. The following theorem proves the finite case.",
+            "This section studies finite measurements and records empirical outcomes.",
+            "We instantiate the finite model. The first cluster separates two data classes.",
+            "The second data cluster separates low-energy observations from high-energy observations.",
+            "A finite repair algorithm corrects the graph, and a corrected source equation states stronger inequalities.",
+            "The XML task compares MathML nodes with flattened HTML output.",
+            "A local bridge map commutes. The measurement gate is a defined predicate over the protocol.",
+            "An execution gate protects the runtime, and an audit gate verifies the recorded transition.",
+            "Training ledger rows record optimizer updates. Claim ledger rows record provenance.",
+            "The model appends training ledger rows after each rollout.",
+            "The system audits contamination ledger rows before release.",
+            "Each training ledger row records training FLOPs and inference FLOPs.",
+            "The audit ledger outputs cost vectors for replay.",
+            "Contamination ledger rows record dataset overlap. An audit ledger row records process state.",
+            "A participant worksheet collects responses.",
+        )
+        for index, prose in enumerate(cases):
+            with self.subTest(prose=prose):
+                self.write_tree("ftip-0001", f"\\title{{Legitimate example {index}}}\\p{{{prose}}}")
+                self.write_html("ftip-0001", f"<p>{prose}</p>")
+                self.assertEqual([], CHECKER.check_source(self.trees))
+                self.assertEqual([], CHECKER.check_render(self.trees, self.output))
+
+    def test_new_families_survive_inline_formatting_and_hyphens(self) -> None:
+        self.write_tree(
+            "ftip-0001",
+            "\\p{The next \\strong{manuscript} must add a proof. "
+            "The model\u2011instance \\em{worksheet} follows.}",
+        )
+        self.write_html(
+            "ftip-0001",
+            "<p>The next <strong>manuscript</strong> must add a proof. "
+            "The model&#8209;instance <em>worksheet</em> follows.</p>",
+        )
+        expected = {"FTIP-FUTURE-WRITING", "FTIP-COMPARISON-WORKSHEET"}
+        self.assertTrue(expected <= self.rule_ids(CHECKER.check_source(self.trees)))
+        self.assertTrue(expected <= self.rule_ids(CHECKER.check_render(self.trees, self.output)))
+
     def test_malformed_source_fails_closed(self) -> None:
         self.write_tree("ftip-0001", r"\title{Broken reader text")
         with self.assertRaises(CHECKER.CheckError):

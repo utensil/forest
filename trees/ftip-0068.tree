@@ -2,22 +2,24 @@
 \meta{agent-authored}{true}
 
 \taxon{Remark}
-\title{First theorem and counterexample directions}
+\title{Finite questions and necessary assumptions}
 \tag{ftip}
 \tag{research-programme}
 
-\p{The first formal targets should stay finite. They include a chain-rule
-bound for long-horizon success, a concentration-aware relation between replay
-ratios and update error, and a regret bound for trajectory extrapolation with
-periodic recovery. Each statement must charge rollout, update, environment,
-storage, and evaluation work separately.}
+\p{Finite analysis raises three questions: how conditional success rates
+bound long-horizon success, how replay-ratio concentration controls update
+error, and how trajectory extrapolation with periodic recovery affects
+evaluation regret. A cost comparison also depends on rollout, update,
+environment, storage, and evaluation work.}
 
-\p{Finite counterexamples delimit each target. Finite policies can separate
-the entropy statistics above. Two verifiers can agree on all observed training
+\p{Finite counterexamples show why these questions need additional
+assumptions. Finite policies can separate the entropy statistics above. Two
+verifiers can agree on all observed training
 records yet differ on an unobserved adversarial region. Two parameter paths can
 share early low-rank summaries and diverge after a new successful rollout.
 These examples mark where additional assumptions are unavoidable.}
 
-\p{The cited DGG and NExt papers motivate reuse and trajectory-compression
-hypotheses; they do not supply these general theorems. The next version should
-state assumptions before attempting proofs.}
+\p{The DGG and NExt papers motivate reuse and trajectory-compression
+hypotheses but do not establish these general results. Bounds on update error
+and extrapolation regret require assumptions relating the monitored
+quantities to the corresponding outcomes.}
