@@ -26,6 +26,10 @@ jobs:
       - uses: oven-sh/setup-bun@v2
         with:
           bun-version: 1.2.22
+      - name: Setup Python via uv
+        uses: astral-sh/setup-uv@v3
+        with:
+          version: "0.4.27"
       - name: Setup Biome
         uses: biomejs/setup-biome@v2
         with:

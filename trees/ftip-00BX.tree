@@ -7,7 +7,7 @@
 \tag{attention}
 \tag{diagram}
 
-\p{Use the suite convention of \ref{ftip-000P}:
+\p{For the row-vector attention weights of \ref{ftip-000P}, let
 #{W^Q,W^K\in\mathbb R^{d\times d_h}} and
 #{Q_h=XW^Q}, #{K_h=XW^K}. Attention logits depend on these weights through}
 
@@ -31,6 +31,5 @@
 \end{tikzpicture}}
 
 \p{Section 6 of \citef{singh2026lossbasis} uses column-vector weights and
-the invariant #{W_Q^{\mathsf T}W_K}; transposition gives the suite formula
-above. Copying the source action without this translation would be
-dimensionally wrong.}
+the invariant #{W_Q^{\mathsf T}W_K}. Transposition gives the row-vector
+invariant #{W^Q(W^K)^{\mathsf T}}, with the action on the right as displayed.}

@@ -6,12 +6,12 @@
 \tag{ftip}
 \tag{rollout}
 
-\p{We formulate the record as immutable so that replay cannot rewrite its own
-provenance. The sample-reuse setup in
+\p{An immutable historical record prevents an update attempt from rewriting
+the facts attached to its reused samples. The sample-reuse setup in
 \citet{Section 3}{miao2026when} retains behavior-policy rollouts while
 recomputing current-policy ratios. Dynamic Gradient Gating (DGG), defined in
 \citet{Section 5 and Algorithm 1}{miao2026when}, is one such reuse protocol,
-but the complete tuple above is a note-level interface.}
+while the complete immutable tuple is a proposed interface for such protocols.}
 
-\p{This distinction will let later theorems condition on recorded facts and
-bound errors in attempt-local estimates separately.}
+\p{Recorded facts and estimates recomputed for an attempted update are
+different objects; errors in the latter do not alter the former.}

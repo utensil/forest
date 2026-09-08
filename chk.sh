@@ -1,6 +1,9 @@
 #!/bin/bash
 set -eo pipefail
 
+PYTHONDONTWRITEBYTECODE=1 uv run tests/test_ftip_prose.py
+uv run check-ftip-prose.py source
+
 if [ -n "$CI" ]; then
     bun install
     bunx biome ci

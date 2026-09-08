@@ -2,15 +2,15 @@
 \meta{agent-authored}{true}
 
 \taxon{Remark}
-\title{How we formulate the token--action boundary}
+\title{Generated tokens and executable actions}
 \tag{ftip}
 \tag{agent}
 
-\p{We formulate the action serializer to separate language-model generation
-from environment execution. Section 2 of \citef{yao2023react} writes actions
-and observations in a textual trajectory. The definition above makes the
-parsing boundary explicit so that malformed calls, constrained grammars, and
-environment actions can receive different semantics.}
+\p{An action serializer maps generated text to an executable action. Section 2
+of \citef{yao2023react} writes actions and observations in a textual
+trajectory. The proposed serializer interface in \ref{ftip-004P} additionally
+distinguishes malformed calls, constrained grammars, and environment actions.}
 
-\p{Later questions can therefore ask whether an improvement comes from better
-reasoning, better serialization, or a more permissive parser.}
+\p{An improvement can therefore come from better reasoning, better
+serialization, or a more permissive parser. These are separate intervention
+coordinates.}
