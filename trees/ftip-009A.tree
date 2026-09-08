@@ -2,53 +2,152 @@
 \meta{agent-authored}{true}
 
 \taxon{Theorem}
-\title{General noiseless preference-distortion lower bound}
+\title{Noiseless preference distortion for deterministic learners}
 \tag{ftip}
 \tag{preference-data}
 \tag{lower-bound}
 
-\p{Call #{C_0} \newvocab{pointwise response-separating} when}
-
+\p{Let #{Q,H} be nonempty finite sets, let
+#{\varnothing\neq\mathfrak E\subseteq H^Q} be finite, and let
+#{C_0=\{c_1,\ldots,c_m\}} be a nonempty finite set of deterministic maps
+#{Q\to Y}. Write #{N=|Q|}, #{r=|H|}, #{p=|\mathfrak E|} and
+#{m=|C_0|}. The query law is uniform on #{Q}. Call #{C_0}
+\newvocab{pointwise response-separating} when}
 ##{
- c_i\neq c_j\quad\Longrightarrow\quad
- c_i(\xi)\neq c_j(\xi)
- \qquad(\xi\in Q).
+ c_i\neq c_j\quad\Longrightarrow\quad c_i(q)\neq c_j(q)
+ \qquad(q\in Q).
 }
-
-\p{Assume pointwise response separation. Then the statement of Appendix
-Theorem A.1, equation (3), in \citef{zhao2025limits} yields: for every
-pretrained routing model
-#{\mathfrak m_0} and every preference-only algorithm #{\mathcal A}, there
-exists a utility #{u} such that post-training on the complete noiseless profile
-satisfies}
-
+\p{Assume this separation. Let #{\mathcal A} be a deterministic
+preference-only learner: from a pretrained model #{\mathfrak m_0} and the
+complete strict ordinal profile, it returns #{(e,h,C_0)} with
+#{e\in\mathfrak E} and a possibly stochastic router
+#{h:H\to\Delta(C_0)}. The comparator class is exactly
+#{\mathcal M_{\rm det}(C_0)} of \ref{ftip-0096}, including every map
+#{H\to C_0} for each #{e\in\mathfrak E}.}
+\p{For every such pretrained model and learner there exists
+#{u:Q\times Y\to[0,1]}, inducing a strict profile, such that}
 ##{
- R_{Q,\mathfrak E,H}
- =\frac{|Q|}
- {\sqrt{|Q|(\log|\mathfrak E|+|H|)}+|H|},
+ \sum_{j=1}^m u(q,c_j(q))=1\quad(q\in Q),
 }
-
+##{
+ R_{Q,\mathfrak E,H}=\frac{N}{\sqrt{N(r+\log p)}+r},
+}
 ##{
  \operatorname{Dist}_u(\mathcal A;\mathfrak m_0)
- \geq
- \Omega\left(
- \min\left\{\sqrt{|C_0|},R_{Q,\mathfrak E,H}\right\}
- \right).
+ \geq\frac1{80}\min\{\sqrt m,R_{Q,\mathfrak E,H}\}.
+}
+\p{Logarithms are natural. Utility averages over the uniform query and the
+learner's router draw as in \ref{ftip-0093}. The comparator maximum exists
+because its class is finite and nonempty. It is positive for the normalized
+utilities above: some constant-circuit route has mean at least #{1/m}.
+A zero learner utility therefore gives distortion #{+\infty}, with no
+#{0/0} case.}
+
+\proof{
+ \p{First, for every normalized nonnegative utility, the comparator value
+ is at least the learner value. Keep the learner's representation map and,
+ on each fiber, choose a circuit maximizing its total utility there. That
+ deterministic choice dominates the stochastic mixture and belongs to the
+ comparator class. Thus distortion is at least one.}
+
+ \p{Put}
+ ##{
+ \begin{aligned}
+ D&=\sqrt{Nr}+\sqrt{\frac N2\log(4p)},&
+ B&=\sqrt{N(r+\log p)},\\
+ T&=\min\{\sqrt m,R_{Q,\mathfrak E,H}\},&
+ x&=\min\{\sqrt m,N/(2D)\}.
+ \end{aligned}
+ }
+ \p{Since #{(\log4)/2<1\leq r} and #{\log p\geq0}, we have
+ #{D\leq2B}. Consequently #{N/(2D)\geq N/(4B)\geq R_{Q,\mathfrak E,H}/4}
+ and #{x\geq T/4}. Every denominator is positive.}
+
+ \p{If #{m=1}, assign utility one to the sole circuit response at every
+ query. Distortion is one and #{T\leq1}. If #{m\geq2} but #{x<2}, assign
+ the same strict normalized values #{2(m-j)/(m(m-1))} to the circuits in
+ index order at every query. Distortion is at least one and #{T<8}, which
+ proves the claimed bound. Extend both assignments by zero to all other
+ responses.}
+
+ \p{In the remaining case set #{k=\lfloor x\rfloor}. Then}
+ ##{
+ 2\leq k\leq\sqrt m,\qquad kD\leq N/2,
+ \qquad k\geq x/2\geq T/8.
+ }
+ \p{Write #{[k]=\{1,\ldots,k\}} and fix a map #{f:Q\to[k]}
+ supplied by \ref{ftip-009C}. At a query with label #{i=f(q)}, fix the strict order
+ putting #{c_i} first and the remaining circuits in increasing index order.
+ Let #{\operatorname{rank}_i(j)\in\{1,\ldots,m\}} be the position of
+ #{c_j}, with the first circuit at rank one, and define}
+ ##{v_i(j)=\frac{2(m-\operatorname{rank}_i(j))}{m(m-1)}.}
+ \p{These values decrease strictly in the fixed order, sum to one and
+ lie in #{[0,2/m]}. The ordinal profile is now fixed independently of the
+ learner's output. Run the deterministic learner on this profile and
+ #{\mathfrak m_0}, obtaining #{(e,h,C_0)}. Write #{h_z(j)=h(z)(c_j)}
+ for the probability of circuit #{c_j} at representation #{z}. For each #{z\in H}, choose
+ #{i_z\in[k]} minimizing #{h_z(j)} over #{j\in[k]}, breaking ties by index.
+ Since #{\sum_{j=1}^k h_z(j)\leq1}, we have #{h_z(i_z)\leq1/k}.}
+
+ \p{Let #{A=\{q:f(q)=i_{e(q)}\}} and #{S=|A|}. The lower partition
+ bound gives}
+ ##{
+ S=\sum_zX_{z,i_z}\geq\sum_z\min_{j\in[k]}X_{z,j}
+ \geq N/k-D\geq N/(2k).
+ }
+ \p{Fix #{\epsilon=1/4}. For #{i=f(q)}, assign}
+ ##{
+ u(q,c_j(q))=
+ \begin{cases}
+ (1-\epsilon)\mathbf1_{j=i}+\epsilon v_i(j),&q\in A,\\
+ (1-\epsilon)/m+\epsilon v_i(j),&q\notin A.
+ \end{cases}
+ }
+ \p{Each row is nonnegative and sums to one. On selected queries the
+ added peak favors the already highest-ranked circuit; on the other
+ queries the same constant is added to every circuit. Hence every row
+ induces exactly the fixed strict order. Pointwise response separation
+ makes these assignments well-defined on #{Q\times Y}; assign zero to
+ responses outside the attained circuit responses. Because the final
+ utility has the unchanged ordinal profile, the deterministic learner
+ returns the same #{(e,h,C_0)}.}
+
+ \p{Write #{W=NU} for total utility. A selected query gives the learner
+ at most #{(1-\epsilon)/k+2\epsilon/m}; any other query gives at most
+ #{(1-\epsilon)/m+2\epsilon/m}. Averaging over the stochastic router yields}
+ ##{
+ W_{\mathcal A}
+ \leq(1-\epsilon)S/k+(1-\epsilon)(N-S)/m+2\epsilon N/m
+ \leq S/k+2N/m.
+ }
+ \p{Choose the deterministic comparator #{e^*=e} and #{h^*(z)=c_{i_z}}.
+ It belongs to the declared class, attains utility at least
+ #{1-\epsilon\geq1/2} on each selected query and nonnegative utility
+ elsewhere. Thus its total utility is at least #{S/2}. If learner utility
+ is zero the bound follows. Otherwise, using #{S\geq N/(2k)} and
+ #{k^2\leq m},}
+ ##{
+ \begin{aligned}
+ \operatorname{Dist}_u
+ &\geq\frac{S/2}{S/k+2N/m}
+ =\frac{k}{2(1+2kN/(mS))}\\
+ &\geq\frac{k}{2(1+4k^2/m)}
+ \geq\frac{k}{10}\geq\frac{T}{80}.
+ \end{aligned}
+ }
 }
 
-\p{The source states that the construction can keep utilities in #{[0,1]}
-and can additionally enforce}
-
-##{
- \sum_{c\in C_0}u\left(\xi,c(\xi)\right)=1
- \qquad(\xi\in Q).
-}
-
-\p{The source states the result for every pretrained model without the added
-separation hypothesis. Its appendix proof orders circuit indices and assigns
-utilities circuitwise; if two circuits return the same response at one query,
-that assignment need not descend to a function on #{Q\times Y}. The
-pointwise response-separation assumption ensures that utilities are
-well-defined on this response domain.
-The quantifier remains worst-case and existential in #{u}, and the comparator
-is the deterministic class in \ref{ftip-0096}.}
+\p{Appendix Theorem A.1 of \citef{zhao2025limits} states the corresponding
+rate for its routing model. Its displayed balancing parameter retains
+#{\log N} factors that are absent from its final rate; the second-moment
+partition bound in \ref{ftip-009C} supplies a separate argument for the
+stated restricted model. Its index-based perturbation on queries outside the
+selected group need not preserve their prescribed favorite; the
+query-dependent rank weights used here preserve it. When circuits collide at
+a query, a circuitwise prescription need not define a response utility;
+pointwise separation excludes that issue.}
+\p{The utility is a worst-case existential choice for each fixed learner.
+The proof permits stochastic inference, but it does not cover internal
+learner randomness: a utility chosen after a realized random output need not
+be one utility valid before the learner's random draw. No claim about
+response-colliding circuits or the separate noisy-preference bound follows.}

@@ -1,32 +1,66 @@
 \import{macros}
 \meta{agent-authored}{true}
 
-\taxon{Remark}
-\title{Proof dependencies of the noiseless lower bound}
+\taxon{Lemma}
+\title{A simultaneous finite partition bound}
 \tag{ftip}
 \tag{preference-data}
-\tag{proof-route}
+\tag{finite-result}
 
-\p{Appendix A.1 of \citef{zhao2025limits} constructs one preference profile
-that is compatible with many cardinal utilities. Its proof then chooses a
-utility after seeing the algorithm's routing behavior and compares that
-behavior with an attainable deterministic route.}
+\p{Let #{Q,H} be nonempty finite sets with #{N=|Q|} and #{r=|H|}, and
+let #{\mathfrak E\subseteq H^Q} be nonempty and finite with
+#{p=|\mathfrak E|}. For every integer #{k\geq1}, there is a map
+#{f:Q\to[k]} such that, simultaneously for every #{e\in\mathfrak E},}
+##{
+ \begin{aligned}
+ \sum_{z\in H}\max_{j\in[k]}X_{z,j}&\leq\frac Nk+D,\\
+ \sum_{z\in H}\min_{j\in[k]}X_{z,j}&\geq\frac Nk-D,
+ \end{aligned}
+}
+\p{where #{[k]=\{1,\ldots,k\}}, logarithms are natural, and}
+##{
+ X_{z,j}=|\{q\in Q:e(q)=z,\ f(q)=j\}|,
+ \qquad
+ D=\sqrt{Nr}+\sqrt{\frac N2\log(4p)}.
+}
 
-\tikzfig{\begin{tikzpicture}[
- box/.style={draw,rounded corners,align=center,text width=27mm,
- minimum height=9mm,font=\small},
- arr/.style={->,>=stealth,semithick},
- lab/.style={font=\scriptsize,fill=white,inner sep=1pt}
-]
-\node[box] (l) at (-3.5,1.25) {Lemma A.2\\routing partition};
-\node[box] (c) at (0,1.25) {Claim A.3 and\\Fact A.4};
-\node[box] (u) at (-1.75,-1.25) {adversarial bounded\\utility};
-\node[box] (t) at (2.8,-1.25) {Theorem A.1\\distortion};
-\draw[arr] (l) -- (c);
-\draw[arr] (l) -- (u);
-\draw[arr] (c) -- (u);
-\draw[arr] (u) -- node[lab,above]{compare routes} (t);
-\end{tikzpicture}}
+\proof{
+ \p{Choose the labels #{f(q)} independently and uniformly from #{[k]}.
+ Fix #{e,z}, write #{n_z=|e^{-1}(z)|}, and put
+ #{a_j=X_{z,j}-n_z/k}. Each occupancy has variance
+ #{n_z(1/k)(1-1/k)}, so}
+ ##{\mathbb E\sum_{j=1}^k a_j^2=n_z(1-1/k).}
+ \p{The pointwise maximum and minimum satisfy}
+ ##{
+ \begin{aligned}
+ \max_jX_{z,j}&\leq n_z/k+\|a\|_2,\\
+ \min_jX_{z,j}&\geq n_z/k-\|a\|_2.
+ \end{aligned}
+ }
+ \p{Jensen's inequality gives
+ #{\mathbb E\|a\|_2\leq\sqrt{n_z(1-1/k)}}. Summing over #{z} and
+ applying Cauchy--Schwarz yields}
+ ##{
+ \begin{aligned}
+ \mathbb E\sum_z\max_jX_{z,j}&\leq N/k+\sqrt{Nr(1-1/k)},\\
+ \mathbb E\sum_z\min_jX_{z,j}&\geq N/k-\sqrt{Nr(1-1/k)}.
+ \end{aligned}
+ }
+ \p{Changing one label changes only one representation group: one
+ occupancy decreases by one and another increases by one. Its maximum and
+ its minimum each change by at most one. Thus both sums have bounded
+ differences with all #{N} constants equal to one. McDiarmid's inequality,
+ also used in Appendix A.1 of \citef{zhao2025limits}, bounds each relevant
+ one-sided deviation of size #{t} by #{\exp(-2t^2/N)}.}
+ \p{Choose #{t=\sqrt{(N/2)\log(4p)}}. A union bound over both tails and
+ all #{p} representations gives total failure probability at most}
+ ##{2p\exp(-2t^2/N)=\frac12<1.}
+ \p{At least one deterministic labeling satisfies both claimed bounds,
+ since #{\sqrt{Nr(1-1/k)}\leq\sqrt{Nr}}. Empty representation fibers
+ have all occupancies zero and require no exception.}
+}
 
-\p{Appendix A.1 combines the displayed partition and utility constructions.
-The adversarial choice of utility is essential to its worst-case quantifiers.}
+\p{The bound uses a second-moment estimate in place of the occupancy estimate
+in source Lemma A.2. The chosen labeling depends only on
+#{Q,H,\mathfrak E,k}; its existence uses proof randomness and does not assume
+randomness in the learning algorithm.}
