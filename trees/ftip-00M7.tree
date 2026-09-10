@@ -1,0 +1,25 @@
+\import{macros}
+\meta{agent-authored}{true}
+\taxon{Example}
+\title{Erasing an observed bit changes the attainable frontier}
+\tag{ftip}
+
+\p{An initial observation reveals a uniform bit #{Z}. The terminal action
+is a bit #{a}, and quality is #{q=\mathbf 1\{a=Z\}}. Both actions are
+permitted at either history and have the same cost. A full-history
+controller chooses #{a=Z} and attains quality one.}
+
+\p{Now restrict the controller's entire input to a summary that is
+constant at the two initial histories. Its private randomness is
+independent of #{Z}. If it chooses one with probability #{p}, its expected
+quality is #{p/2+(1-p)/2=1/2}. No such summary controller can do better.}
+
+\p{A model that averages the reward of either fixed action over the two
+histories obtains #{1/2}. This is the correct summary-controller value,
+but it underestimates the full-history frontier by #{1/2}. For the
+history #{Z=a}, the actual reward is one, so the averaged value fails as
+a reward upper bound at that history. A pointwise reward upper bound must
+hold at every represented history; agreement only under a tested policy's
+average history distribution does not establish such a certificate.
+The loss of an evaluator caveat in \ref{ftip-00CU} illustrates why such
+retained distinctions can matter in a research harness.}

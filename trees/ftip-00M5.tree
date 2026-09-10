@@ -1,0 +1,61 @@
+\import{macros}
+\meta{agent-authored}{true}
+\taxon{Definition}
+\title{Finite controller class with hard resource admission}
+\tag{ftip}
+\tag{compute}
+
+\p{Fix a horizon #{H\in\mathbb N}, finite nonempty observed-history sets
+#{\mathcal H_t} for #{0\leq t\leq H}, an initial law #{\mu} on
+#{\mathcal H_0}, and finite nonempty permitted-action sets #{A_t(h)}
+for #{t<H}. An environment kernel #{K_t(\cdot\mid h,a)} is a probability
+law on histories extending #{h} by action #{a} and its observed outcome.
+The initial law and all kernels are fixed before choosing a controller.}
+
+\p{A controller #{\pi} assigns a probability law
+#{\pi_t(\cdot\mid h)} on #{A_t(h)}. It may depend on every observed
+component of #{h}, including retained traces, generated programs, and
+previous updates. Random choices may be recorded in the history. The class
+#{\Pi(\mathbf B)} consists of all such controllers under the declared
+hard resource vector #{\mathbf B\in\mathbb R_+^m}. It does not require
+a fixed prompt, a memoryless policy, or independent worker outputs.
+Full-history access is allowed in this mathematical class; it may enlarge
+the class of executable controllers with limited memory or computation.}
+
+\p{Each history records accumulated nonnegative cost
+#{\mathbf c(h)\preceq\mathbf B}. Every permitted non-stop action has a
+declared worst-case increment #{\bar{\mathbf c}_t(h,a)} satisfying}
+##{
+\mathbf c(h)+\bar{\mathbf c}_t(h,a)\preceq\mathbf B.
+}
+\p{Every successor in the kernel's support must have realized increment
+between zero and this declared bound, componentwise. Proposal work,
+controller computation, worker calls, communication, verification, failed
+attempts, and persistent updates must be included in whichever resource
+coordinates are bounded; the units remain those of \ref{ftip-005H}.
+This is the enforced-contract assumption of \ref{ftip-00CK}.}
+
+\p{A stop action is always permitted: it commits the current terminal
+artifact and pads the remaining steps with no further cost or change in
+its evaluated quality. At the horizon a fixed evaluator assigns
+#{q(h_H)\in[0,1]} to the committed artifact recorded in the terminal
+history. If the evaluator has random outcomes, include them in the
+history law. Evaluation work must be charged before the zero-cost padding
+begins. Define}
+##{
+J(\pi)=\mathbb E_\pi[q(h_H)],
+\qquad V(\mathbf B)=\sup_{\pi\in\Pi(\mathbf B)}J(\pi).
+}
+
+\p{The artifact identity, evaluator, observations, kernels, and action
+sets are part of the mathematical problem. A training procedure or new
+tool belongs to this frontier only if it is among the permitted actions
+and its effects and costs are represented. Finiteness is an explicit
+restriction on histories, representations, and horizon; a theorem for
+this class does not bound an unrestricted agent that can extend them.}
+
+\p{For an executable system, an upper bound applies only after its
+observations, actions, outcomes, and charged costs are represented by this
+model. Conversely, a mathematical policy supplies an executable lower bound
+only when it has an implementation respecting the stated resource cap;
+an arbitrary history-to-action table does not establish that fact.}
