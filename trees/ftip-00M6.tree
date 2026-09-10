@@ -1,0 +1,25 @@
+\import{macros}
+\meta{agent-authored}{true}
+\taxon{Example}
+\title{Complementary observations defeat one-step information value}
+\tag{ftip}
+
+\p{Let #{X,Y} be independent uniform bits. The terminal artifact is a guess
+for #{X\mathbin\oplus Y}; its quality is one if correct and zero otherwise.
+Two observation actions reveal #{X} and #{Y}, respectively, at cost
+#{c} each, where #{0<c<1/4}. The hard budget permits both observations.
+A terminal guess requires no additional observation cost.}
+
+\p{Without observations, the best expected quality is #{1/2}. Given
+only #{X}, the unrevealed bit #{Y} remains uniform, so the best expected
+quality is still #{1/2}; the same holds with #{X,Y} exchanged. Thus a rule
+that compares stopping with taking one observation and then stopping
+assigns either observation net value #{1/2-c<1/2}. It stops immediately.}
+
+\p{Observing both bits determines their parity. Its expected quality is
+one and its quality minus observation cost is
+#{1-2c>1/2}. Hence neither zero one-step information value nor a myopic
+stopping decision certifies the full controller frontier. This is a finite
+calculation, not an empirical claim about a language model. The scalar
+cost penalty is used only to exhibit the myopic decision; the hard-budget
+quality frontier itself is defined in \ref{ftip-00M5}.}
