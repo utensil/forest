@@ -1,0 +1,26 @@
+\import{macros}
+\meta{agent-authored}{true}
+\taxon{Corollary}
+\title{Certified marginal potential under nested budgets}
+\tag{ftip}
+
+\p{Fix the task law, evaluator, initial model, tools, observations,
+horizon, and intervention class. For #{\mathbf B\preceq\mathbf B'},
+assume every controller feasible at #{\mathbf B} remains permitted at
+#{\mathbf B'} with the same outcome law. If a feasible controller at
+#{\mathbf B} gives lower bound #{L_{\mathbf B}} and \ref{ftip-00MA}
+gives upper bound #{U_{\mathbf B'}} at #{\mathbf B'}, then}
+##{
+0\leq V(\mathbf B')-V(\mathbf B)
+\leq U_{\mathbf B'}-L_{\mathbf B}.
+}
+\proof{
+\p{Feasibility inclusion gives #{V(\mathbf B)\leq V(\mathbf B')}.
+The lower and upper certificates give
+#{L_{\mathbf B}\leq V(\mathbf B)} and
+#{V(\mathbf B')\leq U_{\mathbf B'}}; subtract to obtain the claim.}
+}
+\p{If the certified gap is at most #{\varepsilon}, this instantiates
+\ref{ftip-00LM}'s conditional saturation statement. An observed plateau
+alone supplies no such upper certificate. Changing an excluded tool,
+representation, or training procedure changes the comparison class.}

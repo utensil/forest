@@ -1,0 +1,60 @@
+\import{macros}
+\meta{agent-authored}{true}
+\taxon{Theorem}
+\title{A robust Bellman upper bound for every permitted controller}
+\tag{ftip}
+
+\p{Under \ref{ftip-00M9}, let finite functions #{W_t:S_t\to\mathbb R}
+satisfy #{W_H(s)\geq\widehat q(s)+e_H(s)} and, for every #{t<H},
+#{s\in S_t}, and #{a\in A_t(s)},}
+##{
+W_t(s)\geq\sum_{s'\in S_{t+1}}\widehat P_t(s'\mid s,a)W_{t+1}(s')
++\epsilon_t(s,a)\operatorname{span}(W_{t+1}).
+}
+\p{Here #{\operatorname{span}(f)=\max f-\min f}. Every permitted
+history-dependent randomized controller then satisfies}
+##{
+J(\pi)\leq U:=\min\left(1,\sum_{s\in S_0}\nu(s)W_0(s)\right).
+}
+\p{For any feasible controller #{\pi_0} with a justified finite lower
+bound #{L\leq J(\pi_0)}, the frontier of \ref{ftip-00M5} obeys}
+##{
+L\leq J(\pi_0)\leq V(\mathbf B)\leq U,
+\qquad 0\leq V(\mathbf B)-J(\pi_0)\leq U-L.
+}
+
+\proof{
+\p{For finite probability laws #{p,r}, subtract #{\min f} from #{f}.
+The sum of the positive entries of #{p-r} is #{\operatorname{TV}(p,r)};
+dropping its negative entries gives}
+##{
+\sum_x(p(x)-r(x))f(x)\leq
+\operatorname{TV}(p,r)\operatorname{span}(f).
+}
+\p{Fix any controller. At time #{H}, terminal domination gives
+#{q(h_H)\leq W_H(\phi_H(h_H))}. Suppose that, from every next history,
+its expected terminal quality is bounded by #{W_{t+1}} of the next state.
+For each current history and permitted action, the fixed kernel, this
+inductive inequality, and the total-variation bound give}
+##{
+\mathbb E_\pi[q(h_H)\mid h_t=h,a_t=a]
+\leq\sum_{s'}Q_t(s'\mid h,a)W_{t+1}(s')
+\leq W_t(\phi_t(h)).
+}
+\p{At a history with zero probability under the controller, interpret the
+continuation expectation using its specified future decisions and the
+fixed kernels. Thus the induction holds at every history. Averaging over
+the controller's action randomization preserves the inequality. Backwards
+induction and averaging over #{\mu} give the bound #{\sum_s\nu(s)W_0(s)}.
+The independent bound #{q\leq1} permits clipping at 1. If #{H=0}, terminal
+domination alone gives the same conclusion. Taking the supremum over
+controllers and using #{L\leq J(\pi_0)} proves the remaining inequalities.}
+}
+
+\p{A numerical supersolution is a certificate only after all of its
+inequalities and the abstraction hypotheses are justified. If the model
+bounds hold jointly with probability at least #{1-\delta_M} and the
+lower bound with probability at least #{1-\delta_E}, the bracket holds
+with probability at least #{1-\delta_M-\delta_E} by a union bound. Each
+coverage statement must apply to the selected model or policy; no
+independence between the two events is required.}
