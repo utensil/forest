@@ -1,0 +1,48 @@
+\import{macros}
+\meta{agent-authored}{true}
+\taxon{Definition}
+\title{A resource-bounded model lineage}
+\tag{ftip}
+
+\p{Fix a specification}
+##{
+\Xi=(I_0,\mathcal C_0,\Gamma,\mathcal E_0,V,
+\mathcal D,\mathcal F,\mathbf B,\mathbf b_{\mathrm{eval}}).
+}
+\p{Here #{I_0} contains the initial models, corpora, libraries, prompts,
+optimizers, evaluators, software and cached results. The nonempty class
+#{\mathcal C_0} specifies available initial controller programs and their
+constants. The semantics #{\Gamma} specifies executable operations and
+costs; #{\mathcal E_0} specifies baseline observations and tool-response
+laws. The checker #{V}, task law and reveal schedule #{\mathcal D}, allowed
+final artifacts #{\mathcal F}, campaign cap #{\mathbf B} and deployment cap
+#{\mathbf b_{\mathrm{eval}}} are fixed before evaluation. Include the
+no-update procedure as a baseline.}
+
+\p{A campaign is a causal execution starting from this endowment. Its state
+contains available checkpoints, contexts, generated code, retained traces,
+libraries, optimizer state and resource usage. A controller may use only
+its charged accessible state: discarded history must be reconstructed at
+cost. Environment state may remain hidden. All random seeds follow their
+declared laws; a fortunate completed trajectory is not an available program.}
+
+\p{Whenever admitted by #{\Gamma}, operations include model inference,
+proof and program search, tool calls, parallel workers, memory management,
+candidate comparison, reward and credit assignment, synthetic tasks,
+parameter training, architecture changes, and controller replacement.
+Generated controllers execute under the same semantics and caps. Selection,
+evaluation and the controller's own computation are charged. These operations
+may recur in any order; learning need not first produce a complete successful
+trace or an explicitly verbalized idea.}
+
+\p{The lineage is \em{closed relative to} #{(I_0,\mathcal E_0)} when its
+only campaign inputs are scheduled tasks, its randomness and admitted
+environment responses. This allows computation to reveal useful structure.
+A simulator using independent randomness is different from a tool observing
+new hidden world state; the latter access belongs in #{\mathcal E_0}.}
+
+\p{Controller selection is independent of unrevealed instance seeds,
+conditional on declared public family information. This alone does not
+exclude family-wide answer tables: all such constants and preprocessing
+belong in #{I_0}. An asymptotic claim specifies uniform generation across
+instance sizes or explicitly accounts for nonuniform advice and preparation.}

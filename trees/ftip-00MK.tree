@@ -1,0 +1,30 @@
+\import{macros}
+\meta{agent-authored}{true}
+\taxon{Definition}
+\title{Hard resource accounting across generations}
+\tag{ftip}
+
+\p{For a realized campaign #{\zeta}, let #{\mathbf R(\zeta)} record
+inference work, training work, tool and checker work, total accelerator time,
+peak live memory and storage, peak allocated hardware, wall time and money
+under the declared operational model. Admission requires}
+##{\mathbf R(\zeta)\preceq\mathbf B\quad\text{almost surely}.}
+\p{Stop before an unaffordable operation; a missing result scores zero.
+Charge every failed path, discarded trace, evaluator call, consultation,
+checkpoint comparison and update. Bound the number of transitions by
+charged elementary work or an explicit finite horizon: infinitely many
+free operations are not admitted.}
+
+\p{For additive work coordinates, a portfolio costs shared development
+plus the sum of task-specific work. Shared training is charged once even
+when it benefits many tasks. Peak resources and elapsed time come from the
+actual joint schedule, including communication and sequential dependencies.
+Parallel work is summed across workers. An expected-cost bound does not
+replace this hard cap.}
+
+\p{A scalar budget #{B} is used only after choosing one resource or a
+declared conversion with the remaining constraints fixed. Human time,
+accelerator work and elapsed time have no implicit exchange rate. Model
+pretraining and contributor expertise may be disclosed sunk endowments in
+a marginal comparison. A lifetime-cost claim must also account for producing
+both; unknown historical costs remain unknown.}
