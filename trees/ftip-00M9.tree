@@ -1,0 +1,34 @@
+\import{macros}
+\meta{agent-authored}{true}
+\taxon{Definition}
+\title{Uniform abstraction of the finite history model}
+\tag{ftip}
+
+\p{Use the finite controller model of \ref{ftip-00M5}. For each time,
+choose a finite nonempty state set #{S_t} and a map
+#{\phi_t:\mathcal H_t\to S_t}. Require finite nonempty action sets
+#{A_t(s)} such that #{A_t(h)=A_t(\phi_t(h))} at every history. The state
+retains residual budgets and enough information for the same hard
+admission rule. The controller still observes the full history.}
+
+\p{Let #{Q_t(\cdot\mid h,a)} be the image of the fixed history kernel
+under #{\phi_{t+1}}, and let #{\widehat P_t(\cdot\mid s,a)} be a
+proposed state transition law. Choose finite errors #{\epsilon_t(s,a)\geq0}
+so that, for every permitted history and action,}
+##{
+\operatorname{TV}\left(Q_t(\cdot\mid h,a),
+\widehat P_t(\cdot\mid\phi_t(h),a)\right)
+\leq\epsilon_t(\phi_t(h),a),
+\qquad \operatorname{TV}(p,r)=\frac12\sum_x|p(x)-r(x)|.
+}
+\p{This condition includes histories unvisited by a chosen policy: the
+kernel there is part of the model. For finite functions
+#{\widehat q:S_H\to\mathbb R} and #{e_H:S_H\to\mathbb R_+}, require}
+##{
+q(h_H)\leq\widehat q(\phi_H(h_H))+e_H(\phi_H(h_H))
+\quad\text{for every }h_H\in\mathcal H_H.
+}
+\p{Write #{\nu(s)=\mu\{h:\phi_0(h)=s\}} for the initial state law.
+Low average prediction error on sampled histories does not establish
+these uniform inequalities. The erased-bit example in \ref{ftip-00M7}
+shows why policy-relevant information cannot simply be averaged away.}

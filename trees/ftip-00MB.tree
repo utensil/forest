@@ -1,0 +1,44 @@
+\import{macros}
+\meta{agent-authored}{true}
+\taxon{Remark}
+\title{Exact occupation flows and expected-cost relaxations}
+\tag{ftip}
+
+\p{Suppose the abstraction is exact: #{Q_t(\cdot\mid h,a)=
+P_t(\cdot\mid\phi_t(h),a)} for all histories and actions, and terminal
+quality is exactly #{q(h_H)=r(\phi_H(h_H))}. A one-sided terminal bound
+with zero error would not imply this equality. Retain the exact legal
+actions and hard-budget state from \ref{ftip-00M9}.}
+
+\p{Introduce nonnegative state masses #{z_t(s)} and action masses
+#{x_t(s,a)}, with #{z_0=\nu}. For #{0\leq t<H}, impose}
+##{
+\sum_{a\in A_t(s)}x_t(s,a)=z_t(s),
+\qquad z_{t+1}(s')=\sum_{s\in S_t}\sum_{a\in A_t(s)}
+x_t(s,a)P_t(s'\mid s,a).
+}
+\p{The linear program maximizes #{\sum_s z_H(s)r(s)}. Every
+full-history controller induces these flows because the next-state law
+given a state and action is exact. Conversely, at positive mass choose
+action #{a} with probability #{x_t(s,a)/z_t(s)}; at zero mass choose any
+legal action. Induction on time reproduces the flows in the original
+history model. Hence the LP optimum equals its mathematical controller
+frontier. For #{H=0}, there are no action flows and the value is #{\nu r}.}
+
+\p{Set #{W_H=r} and recurse with
+#{W_t(s)=\max_{a\in A_t(s)}\sum_{s'}P_t(s'\mid s,a)W_{t+1}(s')}.
+A maximizing action exists by finiteness and gives a policy attaining
+#{\nu W_0}; the Bellman upper bound gives the reverse inequality.
+This proves equality with the optimum and exhibits matching lower and
+upper certificates. It does not establish an efficient implementation
+of the policy. The flow construction is the scalar finite-horizon
+specialization of [Mifrani and Noll, Section 3](https://arxiv.org/abs/2502.13697v3);
+the hard-budget encoding is an additional modeling requirement here.}
+
+\p{If hard admission is replaced by constraints on expected cost,
+the resulting program describes a different class. For #{B>0}, a
+one-step cost equal to #{2B} or zero with probability #{1/2} each has
+expectation #{B}, yet violates cap #{B} with probability #{1/2}.
+An expected-cost model can upper-bound the hard-budget frontier only
+when it is a valid relaxation containing every hard-feasible policy.
+Its own policies need not respect the realized cap.}
