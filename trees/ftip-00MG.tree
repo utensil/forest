@@ -1,0 +1,54 @@
+\import{macros}
+\meta{agent-authored}{true}
+\taxon{proposition}
+\title{A work and critical-path bound for list scheduling}
+\tag{ftip}
+
+\p{Fix a finite nonempty directed acyclic task graph, positive task
+durations #{p_j}, and #{m} identical processors, where
+#{m\in\mathbb N} and #{m\geq1}. All tasks are
+available at time zero subject only to their precedence constraints.
+Each task uses one processor without interruption; there are no further
+resource, communication, or setup constraints. Let #{W=\sum_j p_j},
+let #{D} be the longest precedence-chain duration, and let #{T^*} be
+the minimum makespan. A work-conserving list schedule starts a ready task
+whenever a processor is free. Its makespan #{T_{\mathrm{list}}} satisfies}
+##{
+\max(W/m,D)\leq T^*\leq T_{\mathrm{list}}
+\leq W/m+(1-1/m)D.
+}
+##{
+T_{\mathrm{list}}\leq(2-1/m)T^*.
+}
+
+\proof{
+\p{At most #{m} units of work can finish per unit time, and every
+precedence chain executes in order. Thus #{W/m\leq T^*} and
+#{D\leq T^*}. Trace backwards from a last-finishing task, repeatedly
+choosing an immediate predecessor with latest completion, until reaching
+a task with no predecessors. These tasks form a precedence chain.}
+\p{Between completion of one chosen predecessor and the next chain
+task's start, all predecessors of that next task are complete. The task
+is ready, so work conservation forces all processors to be busy during
+that gap. The first chain task is ready from time zero. Consequently,
+whenever fewer than #{m} processors are busy before completion, some task
+on this chain is executing, apart from finitely many event times.}
+\p{Let #{I} be the total duration with fewer than #{m} busy processors.
+Then #{I\leq D}. During the rest of the schedule all #{m} processors
+are busy, and during #{I} at least one is busy. Hence}
+##{
+W\geq m(T_{\mathrm{list}}-I)+I.
+}
+##{
+T_{\mathrm{list}}\leq W/m+(1-1/m)I
+\leq W/m+(1-1/m)D.
+}
+\p{The lower bounds on #{T^*} give the last inequality in the statement.}
+}
+
+\p{The ratio #{T_{\mathrm{list}}/\max(W/m,D)} compares the schedule
+with a lower bound that need not be attainable; it is not generally the
+ratio to the optimum. Communication and verification must be modeled as
+work with constraints satisfying these assumptions, or the displayed
+upper bound need not apply. Neither bound certifies the quality of the
+chosen task graph or an unrestricted agent's attainable output quality.}

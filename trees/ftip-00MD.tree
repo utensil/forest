@@ -1,0 +1,63 @@
+\import{macros}
+\meta{agent-authored}{true}
+\title{Comparing controllers at fixed worker capability}
+\tag{ftip}
+
+\p{To isolate coordination, fix the worker checkpoints, tool interfaces,
+prompt templates, evaluator, task law, and hard resource caps before
+varying the controller. Useful comparisons include a fixed serial policy,
+a static worker portfolio, a one-step value-of-information policy, and
+an adaptive policy that retains the full permitted history. Their
+allowed observations must agree. A solver that sees hidden outcomes has
+a different information interface; its optimum supplies an upper bound
+only through a justified relaxation containing the compared policies.}
+
+\p{Use the controls of \ref{ftip-00JV} with controller logic declared as
+the varying coordinate. If controller-specific tuning is permitted,
+apply \ref{ftip-00JW}'s equal tuning data, selection, stopping, and cost
+rules. Compare suprema only within the intervention classes of
+\ref{ftip-00JX}. A separate factorial comparison can vary the checkpoint
+and controller independently, distinguishing learned capability,
+coordination, and their interaction.}
+
+\p{Charge proposal and controller work, all parallel worker work, tool
+and solver use, communication, verification, failures, and retained-state
+updates using \ref{ftip-005H}. Report elapsed time alongside these costs:
+a shorter run with more workers may consume more total computation.
+Apply \ref{ftip-00CJ}'s admission rule before execution and record any
+contract violation separately from the quality of the submitted artifact.}
+
+\p{Finite environments with rational transition laws can expose three
+distinct mechanisms: complementary observations, correlated worker
+failures, and delayed verification or newly revealed dependencies. Keep
+the latent state, observation rules, legal actions, and costs explicit.
+The first family includes \ref{ftip-00M6}; the erased-bit construction in
+\ref{ftip-00M7} tests whether a proposed summary loses decisive information.
+Where the exact model applies, compare attainable policy values with
+\ref{ftip-00MB}'s finite optimum and \ref{ftip-00MA}'s upper certificate.}
+
+\p{The principal quantity is the justified interval
+#{[L_{\mathbf B},U_{\mathbf B}]} for the restricted frontier. A smaller
+gap can result from a better feasible policy, a sharper upper certificate,
+or a more informative valid representation; distinguish these causes.
+In a live system, mean held-out transition accuracy does not justify
+a uniform model-error radius. Empirical quality and cost remain useful
+even when an upper certificate is unavailable.}
+
+\p{Use evaluation instances separate from tuning, and declare task draws,
+repetitions, resource checkpoints, and analysis rules before comparison.
+Repeated runs share an instance and are not automatically independent
+tasks; account for this grouping in the analysis. Report independently
+verified quality, feasibility failures, time to the first valid artifact,
+and charged cost at matched quality. A valid confidence sequence can
+support repeated inspection under its statistical assumptions; see
+[Howard et al.](https://arxiv.org/abs/1810.08240v9). It does not by itself
+justify selecting a new policy on reused evaluation outcomes.}
+
+\p{These controls yield testable predictions. Complementary information
+can favor adaptation over one-step stopping; redundant workers can erase
+a portfolio's gain; delayed verification can make an early apparent
+success expensive to repair. An empirical claim of better coordination
+fails if its advantage disappears after matching access and charging the
+controller's own work. A claim of little remaining potential additionally
+requires the upper certificate, not merely a plateau among tested policies.}
