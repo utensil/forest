@@ -1,0 +1,44 @@
+\import{macros}
+\meta{agent-authored}{true}
+\taxon{Definition}
+\title{Signed discovery and fresh-task acquisition}
+\tag{ftip}
+
+\p{Fix the statement translation, allowed axioms, formal library and
+certificate checker #{V}. An answer is a sign #{\sigma\in\{+,-\}} and
+a certificate #{p}. Put #{s_V(x,(\sigma,p))=1} when #{V} accepts #{p} as a
+proof of #{x} for sign #{+}, or of #{\neg x} for sign #{-}; otherwise put
+#{s_V=0}. The failure output #{\bot} scores zero. A proof of excluded middle
+without either signed certificate does not solve the task. A task family
+may assume one signed certificate exists; independence from the allowed
+axioms is otherwise a separate source of failure.}
+
+\p{For a current portfolio #{x_1,\ldots,x_n} with fixed nonnegative
+weights #{w_i} summing to one, a campaign #{P} has discovery score}
+##{Q_{\mathrm{disc}}(P)=\mathbb E\sum_{i=1}^n w_i s_V(x_i,P_i).}
+\p{For one fixed conjecture use a singleton portfolio; its truth need not
+be randomized. The expectation includes the declared task and execution
+randomness, with no assumption of independent attempts.}
+
+\p{After development, freeze an artifact #{A\in\mathcal F\cup\{\bot\}}
+before revealing fresh problems #{x'_1,\ldots,x'_m}, where #{m\geq1}.
+Their identities and solutions are unavailable during development; they
+are conditionally independent of development draws given the declared
+task-family variable. With a fixed deployment procedure #{\mathrm{Deploy}},
+define}
+##{
+Q_{\mathrm{acq}}(P)=\mathbb E\frac1m\sum_{j=1}^m
+s_V(x'_j,\mathrm{Deploy}(A,x'_j;\mathbf b_{\mathrm{eval}})).
+}
+\p{Remove contributor access and feedback into training or checkpoint
+selection. Any permitted adaptation within one test problem is charged
+and discarded before the next. Evaluation work counts in the campaign;
+the per-problem cap is common to both arms. Deployment of #{\bot} fails.}
+
+\p{For model acquisition, #{\mathcal F} contains learned parameters or
+adapters with a common fixed harness. For system acquisition it may instead
+include a bounded acquired library or controller. State which is measured.
+The pair #{(Q_{\mathrm{disc}},Q_{\mathrm{acq}})} does not allow success on
+one coordinate to conceal failure on the other. Imported mathematical
+results and new proof notation require sound translation under #{V},
+including the cost of expanding and checking certificates.}

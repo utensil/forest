@@ -1,0 +1,29 @@
+\import{macros}
+\meta{agent-authored}{true}
+\taxon{proposition}
+\title{Finite certificates defeat an unrestricted never-reachable claim}
+\tag{ftip}
+
+\p{Fix a target with a finite accepted signed certificate under a
+decidable checker. If the baseline admits enumeration of all finite signed
+candidate strings over a finite alphabet in increasing length, checking
+each in finite time, then
+some admitted procedure discovers a certificate in finite total work.}
+
+\proof{
+\p{A finite alphabet has finitely many strings no longer than the
+accepted certificate. Each preceding check terminates, so the sum of
+their finite execution costs and the successful check is finite.}
+}
+
+\p{This assumes enumeration and checking have the required memory and
+other resources as work grows; it does not override fixed hardware caps.
+It gives no useful realistic work bound and no fresh-task acquisition
+guarantee. Short compressed proofs may still be expensive to expand.}
+
+\p{Independent restarted attempts of uniformly bounded cost with fixed
+success probability #{p>0} have expected attempt count #{1/p}. Full token
+support alone does not establish restart access, termination or such a
+fixed probability for an adaptive lineage. Other processes can succeed
+almost surely with infinite expected time. Neither one slow process nor
+one failed search bounds all admitted alternatives.}
