@@ -1,0 +1,52 @@
+\import{macros}
+\meta{agent-authored}{true}
+\tag{ftip}
+\title{Public transformations and learned representations}
+\p{Consider finite expressions built from a public grammar. A family
+parameter #{\theta} specifies local rewrite rules and a distribution of
+problem sizes and compositions. The description of #{\theta}, the grammar
+and the rules are available to both campaigns. A target instance asks
+whether one expression can be transformed into another. An accepted answer
+contains either a legal rewrite sequence or a proof of impossibility in a
+fixed sound proof system. The generator produces instances with certificates
+of bounded size, retains those certificates for evaluation, and reveals
+only the instance to the learner. The checker, allowed proof rules and
+certificate-size cap are identical for assisted and closed campaigns.}
+
+\p{Public rules make the intended difficulty computational. Earlier
+experience may teach consequences of the rules that are expensive to find
+from their description. It supplies no secret governing future answers.
+The family parameter, development law, evaluation distribution and resource
+caps are fixed before final seeds are sampled. Developmental and final
+seeds are independent conditional on #{\theta}. Intermediate learning tasks
+may be simpler than final tasks, but their relation to the final distribution
+must be specified by the generator rather than chosen after observing a
+favorable test result.}
+
+\p{One possible learned representation consists of a map #{\phi} from
+concrete expressions to abstract states, abstract operations, and procedures
+connecting abstract reasoning to checked concrete certificates. For example,
+a learner may discover that several rewrites preserve a quantity, or that
+large expressions decompose into components with a small interface. A
+soundness proof for the invariant or decomposition is part of the acquired
+method when it is used to certify an answer. Recognizing a pattern in a
+few examples is insufficient. Grounding here means computing the abstract
+description from the supplied expression and justifying the concrete
+consequences used by the solver.}
+
+\p{The map may discard distinctions. If two expressions have the same
+abstract description but require different choices, a successful learner
+can refine the representation, retain a concrete side condition, or use
+another level of description. The cost of discovering the counterexample
+and implementing the revision counts. The task family should admit several
+sufficient methods: another invariant, a different decomposition, a compiled
+solver or direct search may succeed without reconstructing #{\phi}.
+Success is measured by checked answers, so equally useful implicit
+representations in model parameters also qualify.}
+
+\p{This is a parameterized family design, not a claimed hard rewrite
+system. An explicit instance of the construction must give the grammar,
+rules, certified generator and learning procedures, then prove their
+performance. Families reducible to a cheap canonical form or direct search
+may demonstrate learning and transfer while offering no discovery-cost
+separation. That possibility is a substantive test of the proposed mechanism.}

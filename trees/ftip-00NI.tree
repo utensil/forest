@@ -1,0 +1,50 @@
+\import{macros}
+\meta{agent-authored}{true}
+\tag{ftip}
+\title{Contemporary representation and curriculum learners}
+\p{Current agents already implement substantial parts of this construction.
+[TheoryCoder-2](https://arxiv.org/html/2602.00929v1) synthesizes PDDL
+abstractions alongside a learned Python dynamics model and hierarchical
+planning. Its discussion nevertheless identifies supplied object-oriented
+states and brittle predicate grounding as limitations. In its tested
+environments, an initial observation sufficed for adequate abstractions;
+learning to revise a representation through unfamiliar interventions remains
+a further problem. This motivates learning the concrete-to-abstract map,
+without implying that generated predicates are beyond model capabilities.}
+
+\p{[ProPlay](https://arxiv.org/html/2606.12780v1) learns a procedural graph
+with transition reliability to guide later action. Its failure analysis
+shows why reusable structure alone is insufficient: a coarse procedure can
+lose necessary quantitative detail, and a generally reliable transition
+can be unhelpful for the present task. Its plan is produced once per episode.
+The representation learner above must therefore be compared with agents
+allowed to revise plans and abstraction levels, not just with the particular
+implementation evaluated in that paper.}
+
+\p{[SOAR](https://arxiv.org/html/2601.18778v3), especially its method,
+ablations and limitations, provides an automated teaching mechanism: teacher
+tasks receive reward through a student's improvement on a separate hard
+training set, without the teacher seeing those hard questions. Its
+substantial bilevel training cost and dependence on a ground-truth progress
+signal belong in the comparison. Failure on an initial finite sample does
+not prove that direct discovery is impossible.}
+
+\p{[Vocabulary Dropout for Curriculum Diversity](https://arxiv.org/html/2604.03472v4)
+shows that modifying proposal generation can sustain curriculum diversity,
+while its asymmetric proposer/solver experiment and verification analysis
+show that diversity and stronger teachers need not yield better learning.
+[ANCORA](https://arxiv.org/html/2604.27644v2) combines supervised
+initialization, proposer/solver training and a filtered curriculum graph
+for verifier-based learning. Its limitations include diversity collapse
+within valid outputs and longer-run plateaus. Its Proposition 4.1 assumes
+continued positive probability of admitting new specifications; that premise
+does not establish the cost of discovering useful new concepts.}
+
+\p{These results motivate a combined comparison with representation
+synthesis, curriculum generation, active experiments, persistent memory,
+search and model updates. Their reported benchmarks do not instantiate the
+rewrite construction or establish its separation. A contributor defined
+only as a supplier of abstractions, diverse exercises or a curriculum graph
+would duplicate mechanisms already available to the closed campaign. The
+remaining question concerns how much work any adequate combination needs
+to acquire useful structure from the specified starting state.}
