@@ -9,9 +9,12 @@
 \p{A \newvocab{capability claim} in this note names four objects:}
 
 \ol{
-  \li{a starting model artifact #{M_0};}
-  \li{a procedure #{A} that may train or query it;}
-  \li{an evaluation rule #{E}; and}
+  \li{a starting model artifact #{M_0}, with its accompanying information,
+  libraries, tools and initially available controllers disclosed;}
+  \li{a procedure #{A} that may query models, interact, retain experience
+  and train successor artifacts, with its feedback sources specified;}
+  \li{an evaluation rule #{E}, including the task law, retained artifact
+  and deployment procedure being evaluated; and}
   \li{a resource bound #{b}.}
 }
 
@@ -19,9 +22,18 @@
 judging the result with #{E} while respecting #{b}. It is not a claim about an
 unbounded or unspecified model.}
 
+\p{For a comparison across generations, use the
+[complete lineage specification](ftip-00MI) to make these initial resources
+and permitted operations explicit. Newly generated controllers and learned
+artifacts belong to the charged process. An externally supplied contribution
+has a declared producer and acquisition procedure; it is not silently added
+to the starting model's resources.}
+
 \p{The bound #{b} may contain several coordinates, such as training tokens,
 rollouts, accelerator work, wall-clock time, tool calls, or evaluation-time
-samples. Coordinates with different units remain separate unless a declared
+samples. Distinguish the complete development budget from the deployment
+budget used to compare frozen artifacts on fresh problems. Coordinates with
+different units remain separate unless a declared
 cost model converts them to a common unit.}
 
 \p{This convention follows the experimental separation between training and
