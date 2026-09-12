@@ -3,12 +3,11 @@
 \title{How to read these notes}
 \tag{ftip}
 
-\p{The note develops the learning system, the evidence used to evaluate it,
-and the question of capability growth across generations. The diagram shows
-the main logical relationships among its six chapters. Solid arrows indicate
-inputs to the next analysis. The dashed branch adds architecture-specific
-detail when the question requires it. These are dependencies between subjects,
-rather than a requirement to read every chapter in sequence.}
+\p{The six chapters connect learning mechanisms, computational constraints,
+agent reliability, evaluation and capability growth. The diagram shows
+their main logical relationships. Solid arrows indicate concepts used by
+another analysis. The dashed branch supplies architecture-specific detail
+for comparisons involving a particular model implementation or optimizer.}
 
 \texfig{\begin{tikzpicture}[
   box/.style={draw,rounded corners=2pt,align=center,font=\small,
@@ -39,12 +38,12 @@ rather than a requirement to read every chapter in sequence.}
 \draw[flow,dashed] (architecture.south) |- (lineage.east);
 \end{tikzpicture}}
 
-\p{Post-training and agent state are complementary parts of the system:
-one changes learned parameters, while the other manages interaction,
-computation and retained artifacts. Evaluation places their results under a
-common task law and cost account. The architecture branch refines that
-comparison for particular model implementations and optimizers. The final
-chapter asks what these systems can discover and acquire across generations.}
+\p{Post-training and agent state are complementary sources of capability
+change: one changes learned parameters, while the other manages interaction,
+computation and retained artifacts. Evaluation studies the evidence for
+those changes and their limits. Architecture analysis connects the
+comparison to the model's computation and optimization. The lineage
+analysis extends it to discovery and learning across generations.}
 
 \ol{
   \li{[Foundations and interfaces](ftip-00J9) introduces capability claims,
@@ -67,31 +66,37 @@ chapter asks what these systems can discover and acquire across generations.}
   optimization geometry and matched-compute capability comparisons. This
   branch uses the evaluation framework to make implementation-specific
   claims.}
-  \li{[Conceptual discovery across model generations](ftip-00MH) brings
-  the model, training, agent and evaluation machinery together. It develops
+  \li{[Conceptual discovery across model generations](ftip-00MH) studies
+  discovery and learning across successive artifacts. It develops
   the complete lineage, independently developed contributions,
   representation learning, curricula and mathematical research settings,
   alongside the conjecture and arguments that could establish or defeat it.}
 }
 
-\p{For an overview of the research question, read [research question and
-scope](ftip-0002), then the opening of the conceptual-discovery chapter.
-Follow its [complete lineage](ftip-00MI), [acquisition criterion](ftip-00ML)
-and [conjecture](ftip-00MN) for the comparison being proposed. The subsequent
-sections explain contributor development, learned representations, future
-task demands and a concrete research setting.}
+\p{The [research question and scope](ftip-0002) introduces the common
+distinctions between elicitation, acquisition, computation and evaluation.
+Questions about fine-tuning, preferences, rewards and interaction lead to
+the [post-training chapter](ftip-00JA). Questions about memory, tools,
+recursive execution and reliability lead to the [agent chapter](ftip-00JD).
+Both use the model, task and environment interfaces in the foundations.}
 
-\p{For the mechanisms, read the foundations, post-training and agent
-chapters, followed by evaluation. Then continue to conceptual discovery.
-Insert the architecture chapter before that final step when the claim
-depends on a particular model implementation or optimizer. Track both
-parameter updates and retained agent artifacts when following an improvement
-across generations.}
+\p{Questions about a particular model implementation or optimizer are
+developed in the [architecture chapter](ftip-00JC). Its decoder-only
+reference, optimization geometry and matched-compute comparisons explain
+how capability claims depend on the computation that implements the model.
+The shared evaluation framework supplies the task laws and resource
+comparisons used in that analysis.}
 
-\p{For a claimed capability gain or limit, begin with
-[independent evaluation and post-training potential](ftip-005C), then follow
-the relevant finite result or counterexample. Training, search, contributor
-development and deployment costs have distinct roles; quantities with
-different units require an explicit conversion or a comparison that keeps
-those units separate. The general discovery-cost separation remains a
-conjecture, and each finite result depends on its stated assumptions.}
+\p{Claims about a capability gain or limit are examined in
+[independent evaluation and post-training potential](ftip-005C) and the
+following finite results and counterexamples. These sections distinguish
+training reward from evaluation evidence, examine transport to other task
+laws, and make the assumptions behind a bound explicit. Training, search
+and deployment costs have distinct roles in those comparisons.}
+
+\p{Questions about reusable concepts and capability growth across
+generations are developed in [conceptual discovery](ftip-00MH). Its
+[complete lineage](ftip-00MI), [acquisition criterion](ftip-00ML) and
+[conjecture](ftip-00MN) specify the autonomous and contributed processes
+being compared. Contributor development, learned representations, curricula
+and mathematical research provide concrete settings for that open question.}
