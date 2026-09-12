@@ -1,0 +1,97 @@
+\import{macros}
+\meta{agent-authored}{true}
+\title{How to read these notes}
+\tag{ftip}
+
+\p{The note develops the learning system, the evidence used to evaluate it,
+and the question of capability growth across generations. The diagram shows
+the main logical relationships among its six chapters. Solid arrows indicate
+inputs to the next analysis. The dashed branch adds architecture-specific
+detail when the question requires it. These are dependencies between subjects,
+rather than a requirement to read every chapter in sequence.}
+
+\tikzfig{\begin{tikzpicture}[
+  box/.style={draw,rounded corners=2pt,align=center,font=\small,
+    text width=30mm,minimum height=17mm,inner sep=4pt},
+  wide/.style={box,text width=47mm},
+  flow/.style={-{Stealth[length=2mm]},semithick}
+]
+\node[wide] (foundation) at (0,0)
+  {1. Foundations\\models, tasks and interfaces};
+\node[box] (training) at (-1.9,-2.2)
+  {2. Post-training\\objectives and feedback};
+\node[box] (harness) at (1.9,-2.2)
+  {3. Agent state\\computation and reliability};
+\node[wide,text width=40mm] (evaluation) at (-1.2,-4.6)
+  {4. Evaluation\\evidence and finite limits};
+\node[box] (architecture) at (2.6,-6.1)
+  {5. Architecture\\optimization and capability};
+\node[wide,text width=44mm] (lineage) at (-1.2,-8)
+  {6. Conceptual discovery\\capability across model generations};
+\draw[flow] (foundation.south) -- (0,-1.1) -| (training.north);
+\draw[flow] (foundation.south) -- (0,-1.1) -| (harness.north);
+\draw[flow] (training.south) -- (-1.9,-3.5)
+  -| ([xshift=-12mm]evaluation.north);
+\draw[flow] (harness.south) -- (1.9,-3.5)
+  -| ([xshift=12mm]evaluation.north);
+\draw[flow] (evaluation.south) -- (lineage.north);
+\draw[flow,dashed] (evaluation.east) -| (architecture.north);
+\draw[flow,dashed] (architecture.south) |- (lineage.east);
+\end{tikzpicture}}
+
+\p{Post-training and agent state are complementary parts of the system:
+one changes learned parameters, while the other manages interaction,
+computation and retained artifacts. Evaluation places their results under a
+common task law and cost account. The architecture branch refines that
+comparison for particular model implementations and optimizers. The final
+chapter asks what these systems can discover and acquire across generations.}
+
+\ol{
+  \li{[Foundations and interfaces](ftip-00J9) introduces capability claims,
+  token probabilities, pretraining, tasks and environments. These interfaces
+  allow the later analysis to specify a model without requiring a particular
+  neural architecture.}
+  \li{[Post-training, alignment, and feedback](ftip-00JA) develops
+  fine-tuning, preference learning, RLHF, DPO, RLVR and agentic training,
+  with concrete objectives, feedback mechanisms and update procedures.}
+  \li{[Agent state, computation, and reliability](ftip-00JD) studies
+  persistent state, retained context, recursive execution, failure modes and
+  reliability. It separates changes to agent behavior from changes to model
+  weights while examining their interaction.}
+  \li{[Evaluation, evidence, and finite limits](ftip-00JB) fixes the
+  comparison law and costs, studies transport to other evaluations, and
+  develops finite results about discovery, support, feedback and proxy error.
+  Its closing synthesis collects the consequences and counterexamples.}
+  \li{[Architecture-conditioned potential and computation](ftip-00JC)
+  begins with a decoder-only Transformer, then studies architecture,
+  optimization geometry and matched-compute capability comparisons. This
+  branch uses the evaluation framework to make implementation-specific
+  claims.}
+  \li{[Conceptual discovery across model generations](ftip-00MH) brings
+  the model, training, agent and evaluation machinery together. It develops
+  the complete lineage, independently developed contributions,
+  representation learning, curricula and mathematical research settings,
+  alongside the conjecture and arguments that could establish or defeat it.}
+}
+
+\p{For an overview of the research question, read [research question and
+scope](ftip-0002), then the opening of the conceptual-discovery chapter.
+Follow its [complete lineage](ftip-00MI), [acquisition criterion](ftip-00ML)
+and [conjecture](ftip-00MN) for the comparison being proposed. The subsequent
+sections explain contributor development, learned representations, future
+task demands and a concrete research setting.}
+
+\p{For the mechanisms, read the foundations, post-training and agent
+chapters, followed by evaluation. Then continue to conceptual discovery.
+Insert the architecture chapter before that final step when the claim
+depends on a particular model implementation or optimizer. Track both
+parameter updates and retained agent artifacts when following an improvement
+across generations.}
+
+\p{For a claimed capability gain or limit, begin with
+[independent evaluation and post-training potential](ftip-005C), then follow
+the relevant finite result or counterexample. Training, search, contributor
+development and deployment costs have distinct roles; quantities with
+different units require an explicit conversion or a comparison that keeps
+those units separate. The general discovery-cost separation remains a
+conjecture, and each finite result depends on its stated assumptions.}

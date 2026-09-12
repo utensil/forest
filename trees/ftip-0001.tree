@@ -56,96 +56,15 @@ probability bounds and constructive examples establish only their stated
 claims; applying them to an evolving learning system requires justifying
 their assumptions for that system.}
 
-\section{\title{How to read these notes}}{
-\p{The six chapters connect the learning system to the evidence and
-mathematics needed to assess its capability. The diagram shows their main
-logical relationships. Arrows indicate that a chapter supplies assumptions
-or mechanisms for the analysis below it; they do not prescribe a mandatory
-reading order.}
-
-\tikzfig{\begin{tikzpicture}[
-  box/.style={draw,rounded corners=2pt,align=center,font=\small,
-    text width=27mm,minimum height=17mm,inner sep=4pt},
-  wide/.style={box,text width=46mm},
-  flow/.style={-{Stealth[length=2mm]},semithick}
-]
-\node[wide] (foundation) at (0,0)
-  {1. Foundations\\models, tasks and interfaces};
-\node[box] (training) at (-3.2,-2.4)
-  {2. Post-training\\objectives and feedback};
-\node[box] (architecture) at (0,-2.4)
-  {4. Architecture\\computation and cost};
-\node[box] (harness) at (3.2,-2.4)
-  {5. Agent harness\\state and reliability};
-\node[wide,text width=56mm] (evaluation) at (0,-5)
-  {3. Evaluation and finite limits\\including model lineages and conceptual discovery};
-\node[wide] (consequences) at (0,-7.3)
-  {6. Finite consequences\\and counterexamples};
-\draw[flow] (foundation.south) -- (architecture.north);
-\draw[flow] (foundation.south) -- (0,-1.2) -| (training.north);
-\draw[flow] (foundation.south) -- (0,-1.2) -| (harness.north);
-\draw[flow] (training.south) -- (-3.2,-3.6)
-  -| ([xshift=-20mm]evaluation.north);
-\draw[flow] (architecture.south) -- (evaluation.north);
-\draw[flow] (harness.south) -- (3.2,-3.6)
-  -| ([xshift=20mm]evaluation.north);
-\draw[flow] (evaluation.south) -- (consequences.north);
-\end{tikzpicture}}
-
-\p{Post-training, architecture and harness state are complementary views of
-the learning system. Their interactions matter for the evaluation of an
-evolving lineage. The finite consequences make particular assumptions and
-counterexamples explicit; they do not establish the general
-conceptual-discovery conjecture.}
-\ol{
-  \li{[Foundations and interfaces](ftip-00J9) defines capability claims,
-  language models, pretraining, tasks and environments.}
-  \li{[Post-training, alignment, and feedback](ftip-00JA) develops
-  fine-tuning, preference learning, RLHF, DPO, RLVR and agentic training,
-  with concrete objectives, feedback mechanisms and update procedures.}
-  \li{[Evaluation, evidence, and finite limits](ftip-00JB) studies
-  discovery, feedback and the interpretation of measured gains. Its
-  conceptual-discovery section extends the comparison to complete model
-  lineages, developed contributors, representation learning, curricula
-  and mathematical research campaigns.}
-  \li{[Architecture-conditioned potential and computation](ftip-00JC)
-  examines how architecture, optimization and computation affect the
-  attainable capability and its cost.}
-  \li{[Harness state, failure modes, and reliability](ftip-00JD) studies
-  persistent agent state, recursive execution, replay, recovery and
-  reliability, including improvements possible with fixed model weights.}
-  \li{[Finite consequences and counterexamples](ftip-00JE) collects
-  mathematical results about discovery probability, feedback information
-  and execution, together with the restrictions on their interpretation.}
-}
-
-\p{For the central research question, begin with [research question and
-scope](ftip-0002), then read [conceptual discovery across model
-generations](ftip-00MH). That section proceeds from the complete lineage
-and acquisition criterion to contributions, developmental experience,
-learned representations, future task demands and a concrete research
-setting. Its obstruction and simulation arguments explain what a
-separation proof would need to establish and what could defeat it.}
-
-\p{For the learning mechanisms, read the foundations and post-training
-chapters, then the harness chapter alongside the conceptual-discovery
-section. Track both parameter updates and retained agent artifacts when
-following an improvement across generations. Enter the architecture
-chapter when a claim depends on a particular model architecture,
-optimization method or computation strategy.}
-
-\p{For a claimed capability gain or limit, use the evaluation chapter and
-finite consequences to identify the starting system, admitted procedures,
-feedback, task law and resource bounds. Training, search, contributor
-development and deployment costs have distinct roles; quantities with
-different units require an explicit conversion or a comparison that keeps
-those units separate. Follow the result's stated assumptions before
-applying it to another model or agent.}
+\scope{
+  \put\transclude/toc{false}
+  \put\transclude/numbered{false}
+  \transclude{ftip-00NW}
 }
 
 \transclude{ftip-00J9}
 \transclude{ftip-00JA}
+\transclude{ftip-00JD}
 \transclude{ftip-00JB}
 \transclude{ftip-00JC}
-\transclude{ftip-00JD}
-\transclude{ftip-00JE}
+\transclude{ftip-00MH}

@@ -5,12 +5,19 @@
 \tag{ftip}
 \tag{chapter}
 
-\p{Capability and cost can depend on architecture, optimization geometry,
-computation, and retained context. Readers whose
-question does not name an architecture may omit this chapter. The reference
-autoregressive Transformer formulation in \ref{ftip-000K} is the comparison
-baseline; each comparison depends on the variables specified in its assumptions.}
+\p{This chapter refines the [evaluation framework](ftip-005C) for claims
+that depend on architecture, optimization geometry or a systems
+implementation. It begins with the decoder-only Transformer, then introduces
+architecture-indexed frontiers and matched-compute comparisons, and studies
+how an optimizer can depend on the representation of its parameters.}
 
+\p{The reference architecture specifies how token probabilities are
+computed; it does not replace the shared task and evaluation interfaces.
+Readers whose question does not depend on an architecture or optimizer can
+continue directly to [conceptual discovery](ftip-00MH). Changes to retained
+context and rollout computation are treated with
+[agent state](ftip-00DA).}
+
+\transclude{ftip-000K}
 \transclude{ftip-00JF}
 \transclude{ftip-00AU}
-\transclude{ftip-00DA}
