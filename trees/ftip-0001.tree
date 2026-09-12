@@ -56,9 +56,47 @@ probability bounds and constructive examples establish only their stated
 claims; applying them to an evolving learning system requires justifying
 their assumptions for that system.}
 
-\section{How to read these notes}{
+\section{\title{How to read these notes}}{
 \p{The six chapters connect the learning system to the evidence and
-mathematics needed to assess its capability:}
+mathematics needed to assess its capability. The diagram shows their main
+logical relationships. Arrows indicate that a chapter supplies assumptions
+or mechanisms for the analysis below it; they do not prescribe a mandatory
+reading order.}
+
+\tikzfig{\begin{tikzpicture}[
+  box/.style={draw,rounded corners=2pt,align=center,font=\small,
+    text width=27mm,minimum height=17mm,inner sep=4pt},
+  wide/.style={box,text width=46mm},
+  flow/.style={-{Stealth[length=2mm]},semithick}
+]
+\node[wide] (foundation) at (0,0)
+  {1. Foundations\\models, tasks and interfaces};
+\node[box] (training) at (-3.2,-2.4)
+  {2. Post-training\\objectives and feedback};
+\node[box] (architecture) at (0,-2.4)
+  {4. Architecture\\computation and cost};
+\node[box] (harness) at (3.2,-2.4)
+  {5. Agent harness\\state and reliability};
+\node[wide,text width=56mm] (evaluation) at (0,-5)
+  {3. Evaluation and finite limits\\including model lineages and conceptual discovery};
+\node[wide] (consequences) at (0,-7.3)
+  {6. Finite consequences\\and counterexamples};
+\draw[flow] (foundation.south) -- (architecture.north);
+\draw[flow] (foundation.south) -- (0,-1.2) -| (training.north);
+\draw[flow] (foundation.south) -- (0,-1.2) -| (harness.north);
+\draw[flow] (training.south) -- (-3.2,-3.6)
+  -| ([xshift=-20mm]evaluation.north);
+\draw[flow] (architecture.south) -- (evaluation.north);
+\draw[flow] (harness.south) -- (3.2,-3.6)
+  -| ([xshift=20mm]evaluation.north);
+\draw[flow] (evaluation.south) -- (consequences.north);
+\end{tikzpicture}}
+
+\p{Post-training, architecture and harness state are complementary views of
+the learning system. Their interactions matter for the evaluation of an
+evolving lineage. The finite consequences make particular assumptions and
+counterexamples explicit; they do not establish the general
+conceptual-discovery conjecture.}
 \ol{
   \li{[Foundations and interfaces](ftip-00J9) defines capability claims,
   language models, pretraining, tasks and environments.}
