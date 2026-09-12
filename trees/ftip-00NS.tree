@@ -1,0 +1,110 @@
+\import{macros}
+\meta{agent-authored}{true}
+\tag{ftip}
+\title{A finite setting for invariant rediscovery}
+\p{A first concrete family can use linear chain complexes over the two-element
+field #{\mathbb F_2}. This adapts the incidence-matrix concept-discovery
+setting of [Aggarwal et al.](https://arxiv.org/html/2603.04528v2) into an
+exact finite experiment. The chosen field, transformations and certificate
+tasks below are part of this proposal, not a reproduction of that paper.}
+
+\p{An object consists of vector spaces of dimensions #{n_0,n_1,n_2} and
+matrices #{D_1:\mathbb F_2^{n_1}\to\mathbb F_2^{n_0}} and
+#{D_2:\mathbb F_2^{n_2}\to\mathbb F_2^{n_1}} satisfying #{D_1D_2=0}.
+All entries, dimensions and allowed operations are public. Arithmetic is
+exact. Zero-dimensional spaces and zero maps are included. The experiment
+can provide only matrices and arithmetic, or additionally ranks and
+nullities; these are different initial endowments and receive separate
+results. Neither regime establishes discovery of the entire mathematical
+representation from unstructured observations.}
+
+\p{The middle cycles and boundaries are #{Z_1=\ker D_1} and
+#{B_1=\operatorname{im}D_2}. The chain identity gives #{B_1\subseteq Z_1},
+so the quotient #{H_1=Z_1/B_1} is defined. Rank-nullity yields}
+\eqnotag{
+  \beta_1=\dim H_1
+  =n_1-\operatorname{rank}D_1-\operatorname{rank}D_2.
+}
+\p{Indeed, #{\dim Z_1=n_1-\operatorname{rank}D_1} and
+#{\dim B_1=\operatorname{rank}D_2}; taking the quotient subtracts these
+dimensions. At the ends, #{\beta_0=n_0-\operatorname{rank}D_1} and
+#{\beta_2=n_2-\operatorname{rank}D_2}. These elementary identities explain
+the evaluator's target and remain withheld as explicit answers where
+rediscovery is being measured. They are not new mathematical results.}
+
+\p{Allowed changes include invertible changes of basis #{P_i} in each
+space. They replace the matrices by}
+\eqnotag{
+  \begin{aligned}
+  D'_1&=P_0D_1P_1^{-1},\\
+  D'_2&=P_1D_2P_2^{-1}.
+  \end{aligned}
+}
+\p{The product remains zero and the ranks remain unchanged. Another allowed
+change adjoins or removes a direct summand consisting of an identity map
+between two adjacent one-dimensional spaces, with zero maps elsewhere.
+That summand has zero homology in every degree. Direct sums add dimensions
+of homology, so these moves preserve all three #{\beta_i}. A candidate
+invariant can be challenged with new valid objects, basis changes and
+such elementary additions.}
+
+\p{A target asks whether two presented objects are related by a sequence
+of these allowed moves. A positive certificate lists legal moves and their
+exact matrices, including inverses for basis changes and the displayed
+summand for a removal. A negative certificate supplies unequal homology
+dimensions with checked rank witnesses. A rank witness can give invertible
+row and column transformations, their inverses and a diagonal normal form
+with an identity block and zeros elsewhere; the checker verifies these
+matrix identities and counts the block size. Agreement of a proposed invariant
+on a few examples is insufficient, and equality of the dimensions alone
+is not accepted as a positive certificate. The agent must construct the
+required transformation or another certificate justified by the fixed
+mathematical checker.}
+
+\p{A concrete sampler first draws uniformly from the finite set of
+nonnegative integer tuples #{(h_0,h_1,h_2,r_1,r_2)} satisfying the declared
+dimension cap, where}
+\eqnotag{
+ \begin{aligned}
+ n_0&=h_0+r_1,\\
+ n_1&=h_1+r_1+r_2,\\
+ n_2&=h_2+r_2.
+ \end{aligned}
+}
+\p{It builds a direct sum of zero-differential spaces of dimensions
+#{h_i} in degree #{i}, #{r_1} identity pairs in degrees one and zero,
+and #{r_2} identity pairs in degrees two and one. Independently sampled
+invertible binary basis matrices scramble this presentation; uniform
+sampling by rejection from all binary square matrices is one exact choice.
+The resulting #{\beta_i=h_i} are evaluator facts, not additional observations
+supplied to either agent. The distribution and sampling algorithm themselves
+are public, so reconstructing this decomposition is an admitted strategy.}
+
+\p{Positive instances apply a sampled legal move sequence to an object,
+retaining that sequence privately. At each step the sampler chooses
+uniformly among the declared finite encodings of dimension-bounded legal
+moves; the identity move permits padding to the specified length. Negative
+instances draw two canonical tuples with different homology vectors and
+randomize their presentations independently. Their dimensions are matched
+where the chosen profile permits, and results are also stratified by
+dimension differences to detect easy size cues. Retained rank witnesses
+certify the labels. The mixture, move count, dimension profile and
+certificate limits are fixed before final seeds are sampled.}
+
+\p{A single middle invariant is not complete even for this family.
+Objects concentrated in degree zero can have identical #{\beta_1=0}
+and different #{\beta_0}, and hence cannot be related by the allowed moves.
+This provides a concrete counterexample to premature abstraction. A learner
+may retain the whole homology vector, refine its proposal or use direct
+algebraic reasoning; successful certification, rather than one preferred
+formula, determines the outcome.}
+
+\p{This initial family has an efficient classical alternative. Gaussian
+elimination computes bases for cycles and boundaries and decomposes a
+finite complex over a field into homology summands and adjacent identity
+summands. It therefore supplies both the invariants and constructive
+transformations when appropriate. Its arithmetic and certificate costs
+must be measured as an admitted baseline. The setting can reveal how an
+agent develops and transfers a method, but cannot support a claim that
+all autonomous methods face a prohibitive search barrier merely because
+one language model initially fails it.}
