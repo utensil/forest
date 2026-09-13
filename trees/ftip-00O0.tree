@@ -1,0 +1,26 @@
+\import{macros}
+\meta{agent-authored}{true}
+\title{Economically conditioned potential}
+\tag{ftip}
+\taxon{Definition}
+
+\p{For any admitted class #{\mathcal Z} of joint executions and acquisition
+score #{Q_{\rm acq}(P)\in[0,1]}, define}
+##{\Phi(\Xi,\Omega,T;\mathcal Z)=
+\sup_{z\in\mathcal Z}Q_{\rm acq}(P_z).}
+\p{Take the supremum of an empty class to be zero in the ordered interval
+#{[0,1]}. For a nonnegative counted compute rate #{u_z}, define the hard
+resource envelope}
+##{\overline B(T;\mathcal Z)=
+\sup_{z\in\mathcal Z}\operatorname*{ess\,sup}
+\int_0^T u_z(t)\,dt,}
+\p{with zero for an empty class. The essential supremum is over the
+execution's declared randomness. A claim about expected expenditure alone
+does not bound this quantity. The compute unit is fixed by the operational
+semantics and must agree with any subsequent learning lower bound.}
+\p{Class inclusion gives #{\Phi(\mathcal Z_1)\leq\Phi(\mathcal Z_2)}
+and #{\overline B(\mathcal Z_1)\leq\overline B(\mathcal Z_2)} whenever
+#{\mathcal Z_1\subseteq\mathcal Z_2}, with other arguments fixed.
+Indeed every value in the first supremum also occurs in the second.
+A supremum need not be attained: #{\Phi\geq\tau} does not by itself
+provide a procedure with score at least #{\tau}.}
