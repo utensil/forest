@@ -1,0 +1,24 @@
+\import{macros}
+\meta{agent-authored}{true}
+\title{A renewal bound valid for every admissible allocation}
+\tag{ftip}
+\taxon{proposition}
+
+\p{Every allocation in \ref{ftip-00O5} satisfies}
+##{\int_0^T v(t)\,dt\leq
+\min\left\{\frac{Ah_0(e^{gT}-1)}{g},
+\frac{h_0e^{gT}-h_{\min}}{\eta}\right\}.}
+\proof{\p{The stock equation gives
+#{(e^{-gt}h(t))'=-\eta e^{-gt}v(t)\leq0} almost everywhere.
+Hence #{h(t)\leq h_0e^{gt}}. Integrating #{v\leq Ah} gives the first
+bound. Integrating the discounted stock equation gives}
+##{\eta\int_0^T e^{-gt}v(t)\,dt
+=h_0-e^{-gT}h(T)\leq h_0-e^{-gT}h_{\min}.}
+\p{Since #{v\geq0} and #{e^{-gt}\geq e^{-gT}}, multiplication by
+#{e^{gT}} gives the second bound. The argument is pathwise, so it also
+covers randomized causal allocations satisfying the hypotheses.}}
+\p{The bound is necessary and need not be attained. With a positive
+service-price lower bound #{p_*}, division by #{p_*} supplies a compute
+envelope and can be used in \ref{ftip-00O3}. The relevant autonomous
+lower bound is still independent of this stock calculation. The bound
+increases with #{T}; it makes no finite lifetime claim.}
