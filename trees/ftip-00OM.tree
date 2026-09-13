@@ -1,0 +1,29 @@
+\import{macros}
+\meta{agent-authored}{true}
+\title{Knowledge renewal depends on useful yield}
+\tag{ftip}
+\taxon{Example}
+
+\p{Let #{D(t)} denote effective task-relevant coverage, rather than raw
+token count. Suppose useful new human input arrives at rate #{h\geq0},
+synthetic generation at rate #{v\geq0} has effective yield #{a\geq0},
+and coverage depreciates at rate #{\delta_D>0}. Under the stipulated law}
+##{\dot D=h+av-\delta_DD,\qquad
+D(t)=D_*+(D_0-D_*)e^{-\delta_Dt},\qquad
+D_*=(h+av)/\delta_D.}
+\p{Direct differentiation verifies the solution. For a required coverage
+#{D_{\min}>0}, if #{D_0\geq D_{\min}} and
+#{h+av\geq\delta_DD_{\min}}, then #{D(t)\geq D_{\min}}
+at every time. If #{h+av<\delta_DD_{\min}} and #{D_0} is finite,
+the path eventually falls below the threshold. The necessary synthetic
+contribution is exactly #{av\geq\max\{0,\delta_DD_{\min}-h\}}.
+Positive synthetic yield is necessary when human inflow leaves a deficit;
+an affordable schedule must also produce and check the generated material.}
+\p{The scalar law omits distributional coverage and estimation error.
+The contrast between recursive replacement in
+[Shumailov et al.](https://www.nature.com/articles/s41586-024-07566-y),
+accumulation in [Gerstgrasser et al.](https://arxiv.org/abs/2404.01413),
+and consistency conditions in
+[Barzilai and Shamir](https://arxiv.org/abs/2505.19046v3)
+is a reason to specify #{a} and the learning process, not to assume that
+every generated token has fixed positive knowledge value.}
