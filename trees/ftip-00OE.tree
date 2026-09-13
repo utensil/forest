@@ -1,0 +1,35 @@
+\import{macros}
+\meta{agent-authored}{true}
+\title{Costed consultation with observable certification}
+\tag{ftip}
+\taxon{Definition}
+
+\p{Fix the shared task, checker, evaluation law and endowments from
+[the lineage specification](ftip-00MJ). Preparation of the contributor
+population and recipient costs at most #{S\geq0} in one declared additive
+resource unit. For a fixed integer #{k\geq1}, a causal protocol makes at
+most #{k} attempts, each with hard cost at most #{c\geq0}. Each attempt
+includes selection of a contributor, communication, recipient learning,
+validation, and any reset. Retention, final selection and evaluation are
+also charged within these caps. All remaining resource coordinates require
+a feasible schedule.}
+\p{An attempt either returns an observable certificate with a frozen
+recipient artifact or reports failure. The protocol returns the first
+certified artifact, continuing after each failure until certification or
+#{k} failures; in the latter case it returns a declared fallback.
+Contributor access is removed for fresh evaluation. Let #{Z\in[0,1]}
+be the resulting score. Assume #{q\in(0,1]} and #{\beta\in(0,1]} such that:}
+\ol{
+\li{At every prior failure history reached with positive probability, the
+conditional probability of certification on the next attempt is at least
+#{q}. For general history spaces this condition holds almost surely.}
+\li{For every possible selected certificate history, the conditional
+expected fresh-evaluation score of that retained artifact is at least
+#{\beta}, again almost surely.}
+}
+\p{The second premise is a soundness requirement for acquired capability,
+including any effect of selection. A proof checked on an observed task or
+a finite validation score need not imply it. Establishing such soundness,
+affordable contributor access and the first probability bound remains a
+substantive obligation for an application. Independent attempts are not
+required.}
