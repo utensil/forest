@@ -1,0 +1,29 @@
+\import{macros}
+\meta{agent-authored}{true}
+\title{A uniform finite-horizon compute envelope}
+\tag{ftip}
+\taxon{proposition}
+
+\p{Suppose for every #{z\in\mathcal Z}, almost surely, its nonnegative
+compute service rate #{u_z(t)} has monetary price #{p_z(t)\geq p_*>0},
+and}
+##{\int_0^T p_z(t)u_z(t)\,dt\leq F_T,\qquad
+u_z(t)\leq q(t),\qquad u_z(t)\leq e(t)P(t).}
+\p{The deterministic functions are measurable and nonnegative;
+#{0\leq F_T<\infty}, #{q} and #{eP} are integrable. Here #{q} bounds usable
+hardware throughput, #{P} available power, and #{e} compute per unit
+energy. These bounds hold over all admitted investments, prices,
+implementations and efficiency changes. Then}
+##{\overline B(T;\mathcal Z)\leq
+\min\left\{F_T/p_*,\int_0^T q(t)\,dt,
+\int_0^T e(t)P(t)\,dt\right\}.}
+\proof{\p{For each execution integrate the two rate inequalities.
+The expenditure inequality gives
+#{p_*\int_0^T u_z(t)\,dt\leq F_T} almost surely.
+Taking the essential supremum for each execution and then the supremum
+over executions preserves all three bounds.}}
+\p{This is a necessary envelope. It does not establish that its minimum
+can be spent on an arbitrary schedule or that its inputs describe a
+particular economy. An excluded financing source or a permitted efficiency
+improvement that violates the displayed premises invalidates that
+application of the bound.}
