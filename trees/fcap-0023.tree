@@ -1,0 +1,54 @@
+\import{spin-macros}
+\meta{agent-authored}{true}
+
+\tag{fcap}
+\tag{spin}
+\tag{clifford}
+
+\taxon{Theorem}
+\title{The Spin image is the spinor-norm kernel}
+\lean/tauceti{CliffordAlgebra.range_spinToSpecialOrthogonal_eq_ker_spinorNorm}
+
+\p{Let #{K} be a field in which #{2} is invertible, #{V} a
+finite-dimensional #{K}-space, and #{Q} a nondegenerate quadratic form.
+The Clifford norm of a Lipschitz lift, taken modulo squares, descends
+to the orthogonal group
+\leanref/tauceti{CliffordAlgebra.orthogonalSpinorNorm_lipschitzToOrthogonal}.
+Its restriction to #{SO(V,Q)} is the spinor norm
+#{\nu_Q:SO(V,Q)\to K^\times / (K^\times)^2}
+\leanref/tauceti{CliffordAlgebra.spinorNorm}. Then
+
+##{\operatorname{im}\bigl(\Spin(V,Q)\to SO(V,Q)\bigr)
+=\ker\nu_Q.}
+
+Thus a special orthogonal transformation has a Spin lift exactly
+when its spinor-norm class is trivial.}
+
+\p{\citet{II.3.5--6, pp. 52--53}{chevalley1954algebraic} defines the
+reversal norm and describes the reduced orthogonal image by square
+classes of products #{Q(u)Q(v)}. His ordinary Clifford action and
+reversal norm compare with Tau Ceti's twisted action and
+Clifford-conjugation norm on even lifts: parity fixes such lifts, so
+the two actions agree and reversal equals conjugation
+\ref{fcap-0021}. For a single nonisotropic reflection, Tau Ceti's
+class is #{[-Q(v)]}
+\leanref/tauceti{CliffordAlgebra.orthogonalSpinorNorm_reflectionOrthogonal},
+where Chevalley's vector norm contributes #{[Q(v)]}. On an even product
+of reflections, the extra #{[-1]} factors cancel. This comparison
+concerns the special orthogonal image, not the two conventions on all
+of #{O(V,Q)}.}
+
+\subtree{
+\taxon{Proof}
+\p{Every Spin element has Clifford norm one, so its image has trivial
+spinor norm
+\leanref/tauceti{CliffordAlgebra.spinorNorm_spinToSpecialOrthogonal}.
+Conversely, take #{g\in SO(V,Q)} with #{\nu_Q(g)=1}. Choose a Lipschitz
+lift #{x} of #{g}; its norm is a square #{N(x)=a^2} for some
+#{a\in K^\times}. Multiplying #{x} by the scalar #{a^{-1}} keeps its
+orthogonal action and gives norm one, hence a Pin lift. Since
+#{\det(g)=1}, determinant parity makes that lift even
+\ref{fcap-001A}, so it lies in Spin. In dimension zero #{SO(V,Q)}
+is trivial, so the image and the spinor-norm kernel are both its
+identity subgroup.}
+}

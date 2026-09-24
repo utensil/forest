@@ -1,0 +1,45 @@
+\import{spin-macros}
+\meta{agent-authored}{true}
+
+\tag{fcap}
+\tag{spin}
+\tag{clifford}
+
+\taxon{Theorem}
+\title{The Killing-adjoint lift has coefficient one quarter}
+\lean/tauceti{CliffordAlgebra.adjointCliffordHom_eq_sum_bivector}
+
+\p{Let #{K} be a field in which #{2} is invertible, and let #{L} be a
+finite-dimensional #{K}-Lie algebra whose Killing form #{\kappa} is
+nondegenerate (the formal hypothesis is #{\operatorname{IsKilling}_K(L)}).
+Set #{Q_\kappa(y)=\kappa(y,y)}. If #{(b_i)} is a basis and
+#{(b_i^\vee)} its Killing-dual basis, then for #{x\in L} the quadratic
+Clifford lift of the adjoint action is
+
+##{\operatorname{adjointCliffordHom}(x)
+=\frac14\sum_i\beta_{Q_\kappa}
+\bigl([x,b_i],b_i^\vee\bigr).}
+
+Here #{\beta_{Q_\kappa}} is the half-commutator bivector of
+\ref{fcap-000N}; the summand is the value of
+\leanref/tauceti{CliffordAlgebra.adjointBivector_apply}.}
+
+\p{Kostant identifies the complex orthogonal Lie algebra with
+#{\bigwedge^2L} and constructs the adjoint map from a complex semisimple
+#{L} using its Killing pairing \citet{Sections 1.1--1.2,
+pp. 275--276}{kostant1997clifford}. This supports the complex adjoint
+construction. The coordinate expression and its #{1/4} normalization are
+the calculation here; Tau Ceti's theorem uses the stated
+#{\operatorname{IsKilling}} hypothesis over a wider field class.}
+
+\subtree{
+\taxon{Proof}
+\p{The invariance of #{\kappa} makes #{\operatorname{ad}_x} skew-adjoint.
+Applying \ref{fcap-001Z} to #{f=\operatorname{ad}_x} first gives a factor
+#{1/2} with the dual basis for #{B_{Q_\kappa}}. Since
+#{B_{Q_\kappa}=2\kappa}, that polar-dual basis is
+#{d_i=\tfrac12 b_i^\vee}. Bilinearity of the bivector gives the second
+factor #{1/2}, and #{(1/2)(1/2)=1/4}. The equality
+#{B_{Q_\kappa}=2\kappa} is the convention encoded by
+\leanref/tauceti{TauCeti.LieAlgebra.polarBilin_killingQuadraticForm}.}
+}
