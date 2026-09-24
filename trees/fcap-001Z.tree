@@ -1,0 +1,51 @@
+\import{spin-macros}
+\meta{agent-authored}{true}
+
+\tag{fcap}
+\tag{spin}
+\tag{clifford}
+
+\taxon{Theorem}
+\title{Reconstructing a skew Clifford lift in polar-dual coordinates}
+\lean/tauceti{CliffordAlgebra.soEquivQuadratic_eq_sum_bivector}
+
+\p{Let #{K} be a field in which #{2} is invertible, #{V} a finite-dimensional
+#{K}-space, and #{Q} a nondegenerate quadratic form. Write #{B_Q} for its
+unhalved polar form. For a basis #{(b_i)} let #{(d_i)} be its #{B_Q}-dual basis,
+and let #{f\in\mathfrak{so}(V,B_Q)}. The quadratic Clifford element
+#{z_f=\operatorname{soEquivQuadratic}(f)} has the coordinate expression
+
+##{z_f=\frac12\sum_i\beta_Q\bigl(f(b_i),d_i\bigr),}
+
+where #{\beta_Q(u,v)=\tfrac12(\iota(u)\iota(v)-\iota(v)\iota(u))} is the
+bivector normalization of \ref{fcap-000N}.}
+
+\p{\citet{Definition 6.1.1(C1), p. 302}{goodman2009symmetry} uses the
+complex Clifford relation
+
+##{\{\gamma(u),\gamma(v)\}=\beta(u,v)1.}
+
+Thus their #{\beta} is #{B_Q}, with #{Q(v)=\beta(v,v)/2}.}
+
+\p{\citet{Section 6.2.1, Lemmas 6.2.1--2 and (6.13), pp. 312--313}{goodman2009symmetry}
+gives the complex, nondegenerate basis-free construction through
+#{R_{a,b}(x)=\beta(b,x)a-\beta(a,x)b} and its half-commutator lift. The
+displayed polar-dual sum is the coordinate reconstruction; Tau Ceti proves
+it over the stated wider class of fields.}
+
+\subtree{
+\taxon{Proof}
+\p{For #{x\in V}, dual-basis reconstruction and skew-adjointness give the
+two contractions
+
+##{\begin{aligned}
+\sum_i B_Q(d_i,x)f(b_i)&=f(x),\\
+\sum_i B_Q(f(b_i),x)d_i&=-f(x).
+\end{aligned}}
+
+By \ref{fcap-000P}, the commutator of the sum of bivectors with
+#{\iota(x)} is the image of their difference, hence #{2\iota(f(x))}.
+Multiplication by #{1/2} gives the action of #{z_f} on every generator.
+The nondegenerate quadratic realization in \ref{fcap-000R} then identifies
+the two quadratic elements.}
+}
