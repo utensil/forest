@@ -6,31 +6,31 @@
 \tag{clifford}
 
 \taxon{Remark}
-\title{What the recurrence does not classify}
+\title{From real recurrences to the residue table}
 
 \p{Hyperbolic reduction determines the matrix factor coming from matched
 positive and negative axes. It leaves a one-sided algebra #{\Cl_{r,0}} or
 #{\Cl_{0,r}}. The signature-switch recurrence of \ref{fcap-001X} provides a
 second move, and \ref{fcap-0015} fixes the first real, complex, quaternionic,
-and matrix entries. These facts still have to be assembled into recurrences
-that close on each one-sided axis.}
+and matrix entries. The one-sided recurrences now close this calculation.}
 
-\p{A reviewed local candidate called SPINREP-050 establishes the quaternion
-recurrence
+\p{The quaternion recurrence
 
 ##{\Cl_{p,q+2}\simeq
 \Cl_{q,p}\otimes_{\mathbb R}\mathbb H,}
 
-and another local candidate, SPINREP-053, iterates the recurrence chain to
+is the actual real algebra equivalence
+\leanref/tauceti{TauCeti.realCliffordQuaternionRecurrenceEquiv}.
+The eight-step result gives existence of the equivalence
 
 ##{\Cl_{p+8,q}\simeq
 \Cl_{p,q}\otimes_{\mathbb R}M_{16}(\mathbb R).}
 
-Neither candidate is a merged TauCeti declaration or a public TauCeti pull
-request, so neither receives a Lean marker here.}
+Its exact marker is
+\leanref/tauceti{TauCeti.nonempty_realCliffordEightPeriodicityEquiv}.}
 
-\p{The residue-indexed mod-eight classification table remains unformalized.
-In particular, the mixed #{(1,1)} recurrence alone only removes matched axes;
-it cannot classify the one-sided remainder. Lawson--Michelsohn give the full
-classical periodicity and table in
+\p{The residue-indexed mod-eight algebra classification is now formalized
+as \leanref/tauceti{TauCeti.realClifford_classification}. The mixed
+#{(1,1)} recurrence alone only removes matched axes; it cannot classify
+the one-sided remainder. Lawson--Michelsohn give the classical table in
 \citet{I.4, Theorem 4.3 and Tables I--II, pp. 27--29}{lawson2016spin}.}

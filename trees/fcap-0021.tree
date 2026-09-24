@@ -1,0 +1,44 @@
+\import{spin-macros}
+\meta{agent-authored}{true}
+
+\tag{fcap}
+\tag{spin}
+\tag{clifford}
+
+\taxon{Lemma}
+\title{Parity and reversal separate on bivectors}
+\lean/tauceti{CliffordAlgebra.reverse_bivector,CliffordAlgebra.reverse_bivectorExterior}
+
+\p{Let #{R} be a commutative ring with invertible #{2}, let #{M} be an
+#{R}-module, and let #{Q} be a quadratic form on #{M}. Write
+#{\alpha} for the grading involution and #{\operatorname{rev}} for
+reversal. For the half-commutator bivector of \ref{fcap-000N},
+
+##{\begin{aligned}
+\alpha(\beta_Q(u,v))&=\beta_Q(u,v),\\
+\operatorname{rev}(\beta_Q(u,v))&=-\beta_Q(u,v).
+\end{aligned}}
+
+The same reversal sign holds for every bivector in the image of
+#{\bigwedge_R^2 M}; reversal acts as minus the identity there.}
+
+\p{Chevalley defines the main antiautomorphism by reversing products
+while fixing generators \citet{Section 2.1, p. 38}{chevalley1954algebraic}.
+His parity decomposition identifies even exterior degree with the
+even Clifford part \citet{II.1.6, p. 42}{chevalley1954algebraic}.
+Those are finite-dimensional field-space conventions; the displayed
+bivector statement is Tau Ceti's commutative-ring extension.}
+
+\subtree{
+\taxon{Proof}
+\p{Parity changes the sign of each generator, so it fixes a product of
+two. Reversal exchanges the order of those generators. Applied to the
+half-commutator, the exchange negates it. Linearity then gives the same
+sign on the exterior-square image
+\leanref/tauceti{CliffordAlgebra.reverse_bivectorExterior}.
+The bivector is even
+\leanref/tauceti{CliffordAlgebra.bivector_mem_evenOdd_zero};
+on any even element reversal also agrees with Clifford conjugation
+#{x\mapsto x^*}, since parity is the identity there
+\leanref/tauceti{CliffordAlgebra.reverse_eq_star_of_mem_even}.}
+}

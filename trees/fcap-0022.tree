@@ -1,0 +1,42 @@
+\import{spin-macros}
+\meta{agent-authored}{true}
+
+\tag{fcap}
+\tag{spin}
+\tag{clifford}
+
+\taxon{Theorem}
+\title{The square of an orthogonal Clifford volume word}
+\lean/tauceti{CliffordAlgebra.prod_map_ι_sq_scalar}
+
+\p{Let #{R} be a commutative ring, #{M} an #{R}-module, and #{Q} a
+quadratic form on #{M}. For a pairwise #{Q}-orthogonal list
+#{\ell=(v_1,\ldots,v_n)}, set
+
+##{\omega_\ell=\iota_Q(v_1)\cdots\iota_Q(v_n).}
+
+Its square is the scalar
+
+##{\omega_\ell^2
+=(-1)^{\binom n2}\left(\prod_{i=1}^{n}Q(v_i)\right)1.}
+
+The empty list gives #{\omega_\ell=1}. No basis, nondegeneracy,
+finite-dimensionality, or invertibility of #{2} is required.}
+
+\p{Chevalley computes the corresponding square for an orthogonal basis
+of a nondegenerate even-dimensional quadratic space over a field of
+characteristic different from #{2}
+\citet{Proof of II.2.3, p. 45}{chevalley1954algebraic}.
+His generator relation #{v_i^2=Q(v_i)1} matches the convention above.
+Tau Ceti's list identity extends that calculation to arbitrary lengths
+and the stated commutative-ring setting.}
+
+\subtree{
+\taxon{Proof}
+\p{Pairwise orthogonality gives
+#{\iota_Q(v_i)\iota_Q(v_j)=-\iota_Q(v_j)\iota_Q(v_i)}
+for #{i\ne j}. Move each factor of the second copy of
+#{\omega_\ell} next to its matching factor in the first copy. This takes
+#{(n-1)+(n-2)+\cdots+1=\binom n2} swaps. Each adjacent pair then
+contracts to #{\iota_Q(v_i)^2=Q(v_i)1}, giving the formula.}
+}
