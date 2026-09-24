@@ -1,0 +1,52 @@
+\import{spin-macros}
+\meta{agent-authored}{true}
+
+\tag{fcap}
+\tag{spin}
+\tag{clifford}
+
+\taxon{Theorem}
+\title{Spin acts transitively on a positive quadratic sphere}
+\lean/tauceti{CliffordAlgebra.exists_spinVectorAction_eq_of_posDef}
+
+\p{Let #{V} be a finite-dimensional real vector space with
+#{\dim V\geq 2}, and let #{Q} be positive definite. If
+#{Q(x)=Q(y)=c>0}, then some #{s\in\Spin(Q)} satisfies
+
+##{\operatorname{spinVectorAction}_Q(s,x)=y.}
+
+In particular, Spin acts transitively on the unit level #{Q(v)=1}.
+This is a statement about the algebraic vector action; no topology or
+compactness is needed.}
+
+\p{Cartan's anisotropic-normal reflection has determinant #{-1}
+\citet{Section 9, pp. 9--10}{cartan1981theory}. His even-reflection
+correction appears in \citet{Section 10, p. 10}{cartan1981theory}.
+The following two-case calculation gives the sphere orbit explicitly.}
+
+\subtree{
+\taxon{Proof}
+\p{Write #{B_Q} for the polar form. For #{a\ne 0}, reflection in the
+hyperplane perpendicular to #{a} is
+
+##{r_a(v)=v-\frac{B_Q(a,v)}{Q(a)}a.}
+
+If #{x+y\ne 0}, then positive definiteness makes #{x+y} anisotropic,
+and
+
+##{Q(x+y)=2c+B_Q(x,y)=B_Q(x+y,x).}
+
+Hence #{r_{x+y}(x)=-y} and #{r_y r_{x+y}(x)=y}. If #{y=-x}, choose a
+nonzero #{z} with #{B_Q(z,x)=0}, possible because #{\dim V\geq 2}. Then
+#{r_z(x)=x} and #{r_x r_z(x)=y}. Both maps are products of two
+reflections, so they lie in #{SO(Q)}. The positive-definite surjectivity
+\leanref/tauceti{CliffordAlgebra.spinToSpecialOrthogonal_surjective_of_posDef}
+lifts the chosen map to Spin, whose vector action is the same map.}
+}
+
+\p{The formal surjectivity theorem uses positive #{Q} directly: every
+nonzero value #{Q(v)} has a real square root, making the spinor norm
+trivial on #{SO(Q)}
+\leanref/tauceti{CliffordAlgebra.orthogonalSpinorNorm_eq_detSquareClass_of_posDef}.
+This is a separate route from the fixed-sign
+sufficient hypothesis in \ref{fcap-001B}.}
