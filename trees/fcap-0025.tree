@@ -1,0 +1,58 @@
+\import{spin-macros}
+\meta{agent-authored}{true}
+
+\tag{fcap}
+\tag{spin}
+\tag{clifford}
+
+\taxon{Theorem}
+\title{Occupation signs split the half-spin carrier}
+\lean/tauceti{TauCeti.SpinPolarizationData.spinAction_diagonalBivector_basis,TauCeti.iSup_spinWeightSpace_even_eq_spinPlus,TauCeti.iSup_spinWeightSpace_odd_eq_spinMinus}
+
+\p{Let #{V=W\oplus W'} be a complex nondegenerate quadratic space of
+dimension #{2\ell}, with #{\ell\geq 1}. The summands are maximal
+isotropic and dual under the polar form #{B_Q}. Choose dual bases
+#{w_i\in W} and #{w_i'\in W'} with #{B_Q(w_i,w_j')=\delta_{ij}}.
+On #{S=\bigwedge W}, write #{u_I} for the wedge basis vector indexed
+by #{I}. The even and odd exterior degrees are #{S^+} and #{S^-}.}
+
+\p{The diagonal Clifford bivector of \ref{fcap-000N}
+
+##{H_i=\beta_Q(w_i,w_i')
+=\tfrac12[\iota(w_i),\iota(w_i')]}
+
+acts through creation #{c_i} and contraction #{a_i}. Their relation
+#{c_i a_i+a_i c_i=1} makes #{H_i=c_i a_i-\frac12}. Since
+#{c_i a_i} projects onto the vectors containing #{i},
+
+##{H_i u_I=\begin{cases}
+\frac12 u_I,&i\in I,\\
+-\frac12 u_I,&i\notin I.
+\end{cases}}
+
+The simultaneous weight space for each sign pattern is the line
+#{\mathbb C u_I}
+\leanref/tauceti{TauCeti.spinWeightSpace_spinWeight}. The lines
+with even #{|I|} sum to #{S^+}, and those with odd #{|I|} sum to
+#{S^-}. Each half has dimension #{2^{\ell-1}}, while #{S} has
+dimension #{2^\ell}.}
+
+\p{Goodman--Wallach realize the complex spinor carrier as the exterior
+algebra of the dual isotropic space
+\citet{Theorem 6.1.3, proof, pp. 304--305}{goodman2009symmetry}.
+Identify their creation space #{W_{\mathrm{GW}}^*} with #{W} here,
+and their annihilation space #{W_{\mathrm{GW}}} with #{W'}, taking
+#{w_i=e_{-i}} and #{w_i'=e_i}.}
+
+\p{\citet{Lemma 6.2.2 and (6.14), p. 313}{goodman2009symmetry}
+gives their diagonal generator in the opposite bivector order. Thus
+
+##{H_i^{\mathrm{Tau}}=\beta_Q(e_{-i},e_i)
+=-H_i^{\mathrm{GW}}.}
+
+Their occupied eigenvalue
+#{-\frac12} therefore becomes #{+\frac12} in the axes above
+\citet{Proposition 6.2.3, proof, pp. 314--315}{goodman2009symmetry}.
+The exterior vectors and parity labels remain fixed: #{S^+} always
+means even #{|I|}, and #{S^-} odd #{|I|}. This records weight lines and
+parity, without an irreducibility or highest-weight assertion.}
