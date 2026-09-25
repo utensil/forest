@@ -17,11 +17,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 
-EXPECTED_TEMPLATES = {
-    "ftip": "\\import{macros}\n\\meta{agent-authored}{true}\n\\tag{ftip}\n",
-    "fcap": "\\import{spin-macros}\n\\meta{agent-authored}{true}\n\\tag{fcap}\n",
-    "fgap": "\\import{spin-macros}\n\\meta{agent-authored}{true}\n\\tag{math}\n\\tag{fgap}\n",
-}
+SERIES_PREFIXES = ("ftip", "fcap", "fgap")
 
 
 class NewTemplateTests(unittest.TestCase):
@@ -63,9 +59,12 @@ class NewTemplateTests(unittest.TestCase):
             return result.stdout.strip(), generated, invocation
 
     def test_series_prefixes_select_dedicated_templates(self) -> None:
-        for prefix, expected in EXPECTED_TEMPLATES.items():
+        for prefix in SERIES_PREFIXES:
             with self.subTest(prefix=prefix):
                 filename, generated, invocation = self.run_new(prefix)
+                expected = (ROOT / "templates" / f"{prefix}.tree").read_text(
+                    encoding="utf-8"
+                )
                 self.assertEqual("trees/generated.tree", filename)
                 self.assertEqual(expected, generated)
                 self.assertEqual(
