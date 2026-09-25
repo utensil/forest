@@ -620,6 +620,22 @@ section[data-taxon] h1 span.taxon,
     color: color-mix(in srgb, var(--taxon-color) 60%, var(--uts-text) 40%) !important;
 }
 
+section[data-taxon="Definition"],
+section[data-taxon="Proposition"],
+section[data-taxon="Conjecture"] {
+    border-left: unset;
+    background-color: unset;
+}
+
+section[data-taxon="Definition"] h1 span.taxon,
+section[data-taxon="Proposition"] h1 span.taxon,
+section[data-taxon="Conjecture"] h1 span.taxon,
+#toc span.taxon[data-taxon="Definition"],
+#toc span.taxon[data-taxon="Proposition"],
+#toc span.taxon[data-taxon="Conjecture"] {
+    color: inherit !important;
+}
+
 section[data-taxon="Example"],
 section[data-taxon="Notation"],
 section[data-taxon="Convention"] {
@@ -676,6 +692,8 @@ section[data-taxon="Algorithm"].block:hover {
 .link-list section[data-taxon],
 section[data-taxon="Proof"],
 section[data-taxon="Definition"],
+section[data-taxon="Proposition"],
+section[data-taxon="Conjecture"],
 section[data-taxon="Reference"] {
     margin-top: 5px;
     margin-bottom: 2px;
@@ -687,6 +705,8 @@ section[data-taxon="Reference"] {
 section[data-taxon]:hover section[data-taxon="Proof"],
 section[data-taxon="Proof"]:hover,
 section[data-taxon="Definition"]:hover,
+section[data-taxon="Proposition"]:hover,
+section[data-taxon="Conjecture"]:hover,
 section[data-taxon="Reference"]:hover {
     background-color: var(--uts-hover);
 }
