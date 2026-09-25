@@ -79,14 +79,6 @@
   <xsl:template match="f:taxon[text()='Definition']">
     <xsl:text>definition</xsl:text>
   </xsl:template>
-
-  <xsl:template match="f:taxon[text()='Proposition']">
-    <xsl:text>proposition</xsl:text>
-  </xsl:template>
-
-  <xsl:template match="f:taxon[text()='Conjecture']">
-    <xsl:text>conjecture</xsl:text>
-  </xsl:template>
   
   <xsl:template match="f:taxon[text()='Theorem']">
     <xsl:text>theorem</xsl:text>

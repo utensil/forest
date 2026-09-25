@@ -342,8 +342,6 @@ section:has(> details > summary > header .agent-authored-watermark)
     --uts-taxon-theorem: #95dbfc;
     --uts-taxon-notation: #ffd27f;
     --uts-taxon-convention: #d369cb;
-    --uts-taxon-proposition: transparent;
-    --uts-taxon-conjecture: transparent;
 }
 
 :root[data-applied-mode="light"][data-light-paper="near-white"] {
@@ -377,8 +375,6 @@ section:has(> details > summary > header .agent-authored-watermark)
     --uts-taxon-theorem: #6d9cbe;
     --uts-taxon-notation: #ffc66d;
     --uts-taxon-convention: #b78cff;
-    --uts-taxon-proposition: transparent;
-    --uts-taxon-conjecture: transparent;
 }
 
 :root {
@@ -595,14 +591,6 @@ img[src^="data:image/svg+xml"] {
     --taxon-color: var(--uts-taxon-convention);
 }
 
-[data-taxon="Proposition"] {
-    --taxon-color: var(--uts-taxon-proposition);
-}
-
-[data-taxon="Conjecture"] {
-    --taxon-color: var(--uts-taxon-conjecture);
-}
-
 section.block {
     padding-left: 1em;
     padding-right: 1em;
@@ -637,23 +625,6 @@ section[data-taxon="Notation"],
 section[data-taxon="Convention"] {
     border: 1px solid var(--taxon-color);
     border-radius: 5px;
-}
-
-/* These kinds deliberately share Definition's plain treatment, but remain independently selectable. */
-section[data-taxon="Definition"],
-section[data-taxon="Proposition"],
-section[data-taxon="Conjecture"] {
-    border-left: unset;
-    background-color: unset;
-}
-
-section[data-taxon="Definition"] h1 span.taxon,
-section[data-taxon="Proposition"] h1 span.taxon,
-section[data-taxon="Conjecture"] h1 span.taxon,
-#toc span.taxon[data-taxon="Definition"],
-#toc span.taxon[data-taxon="Proposition"],
-#toc span.taxon[data-taxon="Conjecture"] {
-    color: inherit !important;
 }
 
 section[data-taxon="Proof"].block {
@@ -705,8 +676,6 @@ section[data-taxon="Algorithm"].block:hover {
 .link-list section[data-taxon],
 section[data-taxon="Proof"],
 section[data-taxon="Definition"],
-section[data-taxon="Proposition"],
-section[data-taxon="Conjecture"],
 section[data-taxon="Reference"] {
     margin-top: 5px;
     margin-bottom: 2px;
@@ -718,8 +687,6 @@ section[data-taxon="Reference"] {
 section[data-taxon]:hover section[data-taxon="Proof"],
 section[data-taxon="Proof"]:hover,
 section[data-taxon="Definition"]:hover,
-section[data-taxon="Proposition"]:hover,
-section[data-taxon="Conjecture"]:hover,
 section[data-taxon="Reference"]:hover {
     background-color: var(--uts-hover);
 }
