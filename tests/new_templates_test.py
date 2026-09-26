@@ -30,9 +30,21 @@ PROVIDER_EXPORTS = {
     "spin-macros": ["macros", "lean-macros"],
     "lean-macros": [],
 }
+ADJUDICATED_DEFINITION_OWNERS = {
+    "bu": "macros",
+    "ii": "macros",
+    "placeholder": "macros",
+    "optional": "macros",
+    "pre": "macros",
+    "linebreak": "lean-macros",
+    "label": "lean-macros",
+    "leanok": "lean-macros",
+    "uses": "lean-macros",
+}
 MACRO_IMPORT = re.compile(r"^\\import\{(?:macros|[^{}]+-macros)\}$", re.MULTILINE)
 IMPORT = re.compile(r"^\\import\{([^{}]+)\}$", re.MULTILINE)
 EXPORT = re.compile(r"^\\export\{([^{}]+)\}$", re.MULTILINE)
+DEFINITION = re.compile(r"^\\def\\([^\s\[{]+)", re.MULTILINE)
 
 
 class NewTemplateTests(unittest.TestCase):
@@ -115,6 +127,24 @@ class NewTemplateTests(unittest.TestCase):
                 self.assertEqual(len(exports), len(set(exports)))
                 self.assertEqual(expected_exports, exports)
                 self.assertEqual([], IMPORT.findall(source))
+
+    def test_composed_macro_layers_have_unique_definition_ownership(self) -> None:
+        definition_owners = {}
+        for provider in ("macros", "lean-macros", "spin-macros"):
+            source = (ROOT / "trees" / f"{provider}.tree").read_text(
+                encoding="utf-8"
+            )
+            definitions = DEFINITION.findall(source)
+            with self.subTest(provider=provider):
+                self.assertEqual(len(definitions), len(set(definitions)))
+            for definition in definitions:
+                self.assertNotIn(definition, definition_owners)
+                definition_owners[definition] = provider
+
+        self.assertNotIn("cite", definition_owners)
+        for definition, expected_owner in ADJUDICATED_DEFINITION_OWNERS.items():
+            with self.subTest(definition=definition):
+                self.assertEqual(expected_owner, definition_owners.get(definition))
 
 
 if __name__ == "__main__":
