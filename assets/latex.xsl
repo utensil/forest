@@ -141,7 +141,14 @@
   <!-- use mdframed begin -->
   <xsl:template match="f:tree[f:frontmatter/f:taxon[not(text()='Proof' or (ancestor::f:backmatter))]]">
     <!-- AGENT-NOTE: Cards use LaTeX structural counters; Lean markers continue below long titles. -->
-    <xsl:call-template name="step-card-counter" />
+    <xsl:choose>
+      <xsl:when test="@numbered='false'">
+        <xsl:text>\forestunnumberedcard{}</xsl:text>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:call-template name="step-card-counter" />
+      </xsl:otherwise>
+    </xsl:choose>
     <xsl:text>\begin{</xsl:text>
     <xsl:apply-templates select="f:frontmatter/f:taxon" />
     <xsl:text>}</xsl:text>
@@ -386,8 +393,21 @@
   </xsl:template> -->
 
   <xsl:template match="f:ref">
+    <xsl:variable name="target" select="//f:tree/f:frontmatter[f:display-uri/text()=current()/@display-uri and not(ancestor::f:backmatter)]" />
     <xsl:choose>
-      <xsl:when test="//f:tree/f:frontmatter[f:display-uri/text()=current()/@display-uri and not(ancestor::f:backmatter)]">
+      <xsl:when test="$target[parent::f:tree[@numbered='false'] and f:taxon and not(f:taxon='Proof')]">
+        <xsl:text>\hyperref[</xsl:text>
+        <xsl:value-of select="@display-uri" />
+        <xsl:text>]{</xsl:text>
+        <xsl:value-of select="$target[1]/f:taxon" />
+        <xsl:if test="$target[1]/f:title">
+          <xsl:text> (</xsl:text>
+          <xsl:apply-templates select="$target[1]/f:title" />
+          <xsl:text>)</xsl:text>
+        </xsl:if>
+        <xsl:text>}</xsl:text>
+      </xsl:when>
+      <xsl:when test="$target">
         <xsl:text>\Cref{</xsl:text>
         <xsl:value-of select="@display-uri" />
         <xsl:text>}</xsl:text>

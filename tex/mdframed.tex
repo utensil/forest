@@ -18,6 +18,10 @@
 	\refstepcounter{#1}%
 	\protected@edef\forestcurrentnumber{\csname the#1\endcsname}%
 }
+% AGENT-NOTE: Unnumbered cards must not retain a preceding card's displayed number.
+\newcommand{\forestunnumberedcard}{%
+	\let\forestcurrentnumber\@empty
+}
 \newcommand{\forestcardlabel}[2]{%
 	\protected@edef\@currentlabel{\forestcurrentnumber}%
 	\label[#1]{#2}%
