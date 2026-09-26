@@ -144,7 +144,7 @@ Common tag categories:
 ## 6. 🌲 Forester content & tree files
 
 *   To modify tree content, **edit `.tree` files** in `trees/`.
-*   **Follow Forester syntax**: Use `\import{macros}`, `\taxon{type}`, `\tag{topic}` for organization.
+*   **Follow Forester syntax**: Use the suite facade import for FTIP, FGAP, and FCAP notes (`ftip-macros`, `fgap-macros`, or `fcap-macros`); use `\import{macros}` elsewhere. Use `\taxon{type}` and `\tag{topic}` for organization.
 *   **Mathematical content**: Use `\refcardt{type}{name}{tag}{ref}{}` for theorems, definitions, etc. To learn more about such macros, check `trees/macros.tree`, and `trees/*-macros.tree` files.
 *   **Address format**: Use `xxx-NNNN` where `xxx` is prefix (uts, ag, tt, ca, spin, hopf) and `NNNN` is base-36 number.
 *   **Content structure**: Wrap paragraphs in `\p{}`, use proper mathematical notation.
@@ -270,7 +270,7 @@ Every tree file should follow this basic structure:
 *   **TikZ diagrams**: `\tikzfig{}` blocks for complex mathematical diagrams
 
 ### Mathematical content guidelines
-- Import `macros.tree` at the start of mathematical files
+- Import the suite facade at the start of FTIP, FGAP, and FCAP files; import `macros.tree` directly in other mathematical files
 - Use `\refcardt{}` for formal mathematical statements
 - Include proofs in `\proof{}` blocks
 - Use proper mathematical typography and spacing
@@ -374,7 +374,7 @@ See `for-llm/learning_diary.md` for comprehensive documentation on learning diar
 
 ## 9. Common pitfalls
 
-*   Forgetting to import `macros.tree` in new tree files.
+*   Forgetting to import the appropriate suite facade (FTIP, FGAP, or FCAP) or `macros.tree` in other new tree files.
 *   Using incorrect Forester syntax (missing `\p{}` around paragraphs).
 *   Not following tree file naming conventions (xxx-NNNN format).
 *   Mixing different quotation styles in JavaScript (use single quotes).
