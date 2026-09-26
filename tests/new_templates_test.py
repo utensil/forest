@@ -66,11 +66,14 @@ class NewTemplateTests(unittest.TestCase):
             return result.stdout.strip(), generated, invocation
 
     def test_series_prefixes_select_dedicated_templates(self) -> None:
-        for prefix in SERIES_ARCHITECTURE:
+        for prefix, (facade, _) in SERIES_ARCHITECTURE.items():
             with self.subTest(prefix=prefix):
                 filename, generated, invocation = self.run_new(prefix)
                 expected = (ROOT / "templates" / f"{prefix}.tree").read_text(
                     encoding="utf-8"
+                )
+                self.assertEqual(
+                    [f"\\import{{{facade}}}"], MACRO_IMPORT.findall(expected)
                 )
                 self.assertEqual("trees/generated.tree", filename)
                 self.assertEqual(expected, generated)
