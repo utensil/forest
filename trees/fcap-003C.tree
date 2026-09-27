@@ -1,0 +1,110 @@
+\import{fcap-macros}
+\meta{agent-authored}{true}
+
+\tag{fcap}
+\tag{spin}
+\tag{representation-theory}
+
+\taxon{Theorem}
+\title{The actual compact #{\Spin(8)} has outer Lie-automorphism group #{S_3}}
+
+\p{Let #{Q_8^+} be the positive quadratic form on #{\mathbb R^8}, and
+let
+
+##{G=\Spin(Q_8^+)\longrightarrow SO(8)}
+
+be the actual vector-generated, reverse-norm-one carrier and its vector
+action #{\pi}. The concrete Lie-group and covering results of
+\ref{fcap-0037} and \ref{fcap-003A} make #{G} compact, connected, and simply
+connected, with #{\pi} its two-sheeted universal cover. The even-word
+sign-change map of \ref{fcap-0039} identifies this positive-square carrier
+with the compact negative-square convention used in the classical
+source, compatibly with the vector action.}
+
+\p{Let #{\nu_+} and #{\nu_-} be the two real eight-dimensional half-spin
+representations. Their complexifications have highest weights
+#{\omega_4} and #{\omega_3}, so the comparison of \ref{fcap-003B} and the
+exterior construction of \ref{fcap-002Y} identify them, up to chosen
+intertwiners, with the two concrete complex half-spin modules. Average a
+positive definite inner product over compact #{G}. In an orthonormal
+basis either representation gives
+
+##{\nu:G\longrightarrow O(8).}
+
+Connectedness puts its image in #{SO(8)}. Since #{G} is simply connected,
+the universal cover #{\pi} has a unique based lift
+
+##{\Theta:G\longrightarrow G,\qquad \pi\circ\Theta=\nu.}
+
+The two maps #{\Theta(xy)} and #{\Theta(x)\Theta(y)} are based lifts on
+the connected space #{G\times G}, so uniqueness makes #{\Theta} a group
+homomorphism.}
+
+\p{Its derivative is nonzero because the half-spin representation has
+nonzero weights. The kernel of the derivative is an ideal of the simple
+Lie algebra #{\mathfrak{so}_8}, hence it is zero. Equal dimensions make
+#{\Theta} a local Lie-group isomorphism. Its image is open, and compactness
+makes it closed; connectedness of #{G} makes the image all of #{G}.
+Thus #{\Theta} is a covering of a simply connected target by a connected
+source and is a Lie-group automorphism. Let Lie-group automorphisms act on
+representation classes by inverse pullback,
+
+##{\varphi\mathbin{\cdot}[M]=[M\circ\varphi^{-1}].}
+
+With this left-action convention, #{\Theta^{-1}} sends the vector class
+to the chosen half-spin class because #{\pi\circ\Theta=\nu}.}
+
+\p{Every Lie-group automorphism permutes the three classes. After inner
+conjugation it preserves a chosen maximal torus and positive Weyl chamber;
+its differential therefore induces a based #{D_4} root-datum
+automorphism. The diagram calculation of \ref{fcap-003B} shows that it
+permutes precisely the outer-node weights
+#{\omega_1,\omega_3,\omega_4}. Inner automorphisms act trivially on
+isomorphism classes, so inverse pullback defines a homomorphism
+
+##{\operatorname{Out}_{\mathrm{Lie}}(G)\longrightarrow S_3.}
+
+There is a second kind of actual Lie-group automorphism. Conjugation by any unit
+vector in the Clifford algebra preserves even vector products and reverse
+norm and has conjugation by its inverse as inverse. On the vector module
+it gives orthogonal conjugation of #{\pi}; on the odd Clifford action it
+interchanges #{S^+} and #{S^-}. Its permutation fixes the vector class and
+swaps the two half-spin classes. Together with the lifted half-spin
+automorphism, these permutations generate #{S_3}.}
+
+\p{This permutation action has inner kernel. Suppose an automorphism
+#{\varphi} fixes all three representation classes. Equivalence of
+#{\pi\circ\varphi} with #{\pi} gives an intertwiner; after polar
+normalization it is a matrix #{A\in O(8)}. If #{\det A=1}, lift #{A} to
+#{g\in G}. After composing #{\varphi} with the inverse inner
+automorphism #{\operatorname{Int}(g)}, its projection agrees with
+#{\pi}. The pointwise discrepancy from the identity lies continuously in
+#{\ker\pi=\{1,-1\}}, hence is identically #{1} on connected #{G}. The
+remaining automorphism is the identity. If #{\det A=-1}, first compose
+with unit-vector conjugation. The result is inner by the preceding case,
+but unit-vector conjugation swaps the two half-spin classes, contradicting
+the hypothesis. Therefore
+
+##{\operatorname{Out}_{\mathrm{Lie}}(G)\simeq S_3.}
+
+A suitable composition of the two constructed outer classes maps to a
+three-cycle and therefore has order three in the outer group. This does
+not show that the chosen half-spin lift #{\Theta} has order three, and
+no representative has been normalized here to cube to the identity. No
+splitting #{S_3\to\operatorname{Aut}_{\mathrm{Lie}}(G)} is asserted.}
+
+\p{\citet{Chapter 5, Theorem 5.6, pp. 34--35}{adams1996exceptional}
+proves the compact group theorem and the permutation of its three
+eight-dimensional representations.
+\citet{Section 20.3, pp. 312--314}{fulton2004representation}
+independently describe the corresponding complex vector/half-spin
+triality and root diagram. The carrier translation, universal-cover
+lift, surjectivity, and kernel argument above place that comparison on
+the actual FCAP Spin group.}
+
+\p{The pinned declaration
+\leanref/tauceti{TauCeti.D4Tripled.trialityAutomorphism}
+has literal cube one on a tripled toral-closure carrier. Its source file
+does not identify that carrier with the actual group #{G}. Accordingly it
+is not used to claim cube one for #{\Theta} or as a formal badge for this
+theorem.}
