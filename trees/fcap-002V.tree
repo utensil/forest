@@ -1,0 +1,97 @@
+\import{fcap-macros}
+\meta{agent-authored}{true}
+
+\tag{fcap}
+\tag{spin}
+\tag{clifford}
+
+\taxon{Theorem}
+\title{Matrix units give the even-dimensional structure theorem}
+
+\p{Let #{K} be a field of characteristic different from #{2}, and let #{V}
+be a finite-dimensional split quadratic space with a chosen polarization
+#{V=W\oplus W'} into complementary isotropic subspaces. Put
+#{\dim_KW=\ell}, choose polar-dual bases #{e_i\in W} and #{e_i'\in W'} with
+#{B_Q(e_i,e_j')=\delta_{ij}}, and set #{S=\bigwedge W}. In the notation of
+\ref{fcap-0027}, write
+
+##{c_i=\varepsilon_{e_i},\qquad
+ a_i=a_{e_i'},\qquad N_i=c_i a_i,\qquad
+ P_0=\prod_i(1-N_i)=\prod_i a_i c_i.}
+
+The commuting idempotents #{N_i} record occupation, so #{P_0} is the
+projection onto the vacuum line #{K1}. For increasing subsets
+#{I=\{i_1<\cdots<i_p\}} and #{J=\{j_1<\cdots<j_q\}}, put
+
+##{c_I=c_{i_1}\cdots c_{i_p},\qquad
+ a_J=a_{j_q}\cdots a_{j_1},\qquad
+ F_{I,J}=c_IP_0a_J.}
+
+The reversed contraction order is essential. If #{e_K} denotes the
+increasing exterior basis vector, then
+
+##{F_{I,J}(e_K)=\delta_{J,K}e_I,\qquad
+ F_{I,J}F_{K,L}=\delta_{J,K}F_{I,L}.}
+
+Indeed, #{a_J(e_J)=1}. A missing index makes the contraction zero, while a
+properly larger #{K} leaves positive exterior degree and is killed by
+#{P_0}. Finally #{c_I(1)=e_I}. Thus the #{F_{I,J}} are all matrix units in
+the image of the Clifford action. This is the multimode extension of the
+rank-one calculation in \ref{fcap-001P}.}
+
+\p{The matrix units prove surjectivity, and the dimension equality
+
+##{\dim_K\Cl(Q)=2^{2\ell}=(2^\ell)^2
+ =\dim_K\operatorname{End}_K(S)}
+
+then proves injectivity. Hence
+
+##{\Cl(Q)\simeq\operatorname{End}_K(S).}
+
+This full equivalence is formalized by
+\leanref/tauceti{TauCeti.spinAction_bijective} and
+\leanref/tauceti{TauCeti.SpinPolarizationData.cliffordEquivEnd}. The
+displayed multi-index matrix units are the basis calculation supplied here,
+not a separately named declaration.}
+
+\p{Every factor in #{P_0} is even, so the Clifford parity of #{F_{I,J}} is
+#{|I|+|J|} modulo #{2}. The even matrix units are therefore exactly those
+with #{|I|\equiv|J|\pmod{2}}; they span the two diagonal blocks and give
+
+##{\Cl(Q)^0\simeq
+ \operatorname{End}_K(S^+)\oplus\operatorname{End}_K(S^-),\qquad
+ S^+=\bigwedge^{\mathrm{even}}W,\quad
+ S^-=\bigwedge^{\mathrm{odd}}W.}
+
+The exact formal block equivalence is
+\leanref/tauceti{TauCeti.SpinPolarizationData.evenCliffordEquivProdEnd}.
+If #{\ell\geq1}, each block has size #{2^{\ell-1}} and each parity summand
+is simple for its full endomorphism block
+\leanref/tauceti{TauCeti.SpinPolarizationData.evenCliffordEquivProdMatrix}.
+For #{\ell=0}, the full action still identifies #{K} with
+#{\operatorname{End}_K(K)}, but #{S^-=0} and is not called a simple
+summand.}
+
+\p{At the group level, the block calculation alone does not prove
+irreducibility after restriction to #{\Spin(Q)}. When #{K} is additionally
+separably closed and #{\ell\geq1}, the formal Spin-spanning argument gives
+the two irreducible half-spin representations
+\leanref/tauceti{TauCeti.isIrreducible_spinPlusSubrep}
+\leanref/tauceti{TauCeti.isIrreducible_spinMinusSubrep}.
+This is stronger input than the occupation weights of \ref{fcap-0025}.}
+
+\p{\citet{Lemma 20.9 and (20.13), pp. 304--305}{fulton2004representation}
+derive the full complex action and its two exterior-parity blocks; their
+bilinear form is the half-polar form #{b_Q}, so their contraction coefficient
+#{2Q_{\mathrm{FH}}} is our #{B_Q}.}
+
+\p{\citet{Section 3.2.4, Theorem 3.3 and (3.5)--(3.6), pp. 59--60}{meinrenken2013clifford}
+give the split action as a superalgebra isomorphism and prove it by the
+rank-one tensor calculation; their creation space #{F^*} is our #{W} and
+their bilinear form is #{b_Q}.}
+
+\p{\citet{Theorem 6.1.3, proof, pp. 304--305}{goodman2009symmetry}
+independently obtain the complex creation--contraction carrier; their
+creation space #{W_{\mathrm{GW}}^*} is our #{W}, and their form #{\beta} is
+our unhalved #{B_Q}. The formula #{F_{I,J}=c_IP_0a_J} synthesizes these
+arguments in the fixed FCAP order rather than quoting one source verbatim.}
