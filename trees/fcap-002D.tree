@@ -1,0 +1,82 @@
+\import{fcap-macros}
+\meta{agent-authored}{true}
+
+\tag{fcap}
+\tag{spin}
+\tag{clifford}
+
+\taxon{Proposition}
+\title{The reverse norm descends through the Lipschitz action}
+
+\p{Let #{K} be a field of characteristic different from two, let #{V} be a
+positive-dimensional finite-dimensional #{K}-space, and let #{Q} be
+nondegenerate. Write #{\Gamma(Q)} for the vector-generated Lipschitz group,
+and #{\tau_Q:\Gamma(Q)\to O(V,Q)} for its twisted action. For
+#{x\in\Gamma(Q)}, let #{N_{\mathrm{rev}}(x)\in K^{\times}} be the unique
+scalar unit satisfying
+#{\operatorname{rev}(x)x=N_{\mathrm{rev}}(x)\,1}. Set
+#{\mathcal{S}_K=K^{\times}/(K^{\times})^2}. The top row is exact, and the square
+commutes:
+
+\tikzfig{
+\begin{tikzcd}[column sep=1.25em,row sep=2.25em]
+1 \arrow[r] & K^\times \arrow[r,hook,"\operatorname{sc}"]
+  & \Gamma(Q) \arrow[r,two heads,"\tau_Q"]
+      \arrow[d,"{[N_{\mathrm{rev}}]}"']
+  & O(V,Q) \arrow[r] \arrow[d,"\nu_Q^O"] \arrow[dr,"\det"]
+  & 1 \\
+  & & \mathcal{S}_K \arrow[r,equal] & \mathcal{S}_K & \{\pm1\}
+\end{tikzcd}
+}
+
+The determinant arrow is a separate branch:
+#{SO(V,Q)=\ker(\det)}. It is not part of a longer exact row after
+#{O(V,Q)}. Positive dimension supplies an anisotropic vector, so scalar units
+form the displayed kernel; the Lipschitz action is onto
+\leanref/tauceti{CliffordAlgebra.scalarUnits_injective}
+\leanref/tauceti{CliffordAlgebra.ker_lipschitzToOrthogonal}
+\leanref/tauceti{CliffordAlgebra.lipschitzToOrthogonal_surjective}. The right
+vertical map is the orthogonal spinor norm, while
+#{\nu_Q=\nu_Q^O|_{SO(V,Q)}} is its restriction used in \ref{fcap-0023}.
+The square expresses descent through the action, not surjectivity of
+#{\nu_Q^O}
+\leanref/tauceti{CliffordAlgebra.orthogonalSpinorNorm_lipschitzToOrthogonal}.}
+
+\p{If #{Q(v)} is nonzero, then
+
+##{N_{\mathrm{rev}}(\widehat v)=Q(v),\qquad
+\nu_Q^O(r_v)=[Q(v)]}
+
+\leanref/tauceti{CliffordAlgebra.cliffordNorm_unitι}
+\leanref/tauceti{CliffordAlgebra.orthogonalSpinorNorm_reflectionOrthogonal}.
+Consequently, for an even product
+#{x=\widehat v_1\cdots\widehat v_{2k}} of nonisotropic vector lifts,
+
+##{\tau_Q(x)=r_{v_1}\cdots r_{v_{2k}}\in SO(V,Q),\qquad
+\nu_Q(r_{v_1}\cdots r_{v_{2k}})
+=\left[\prod_{i=1}^{2k}Q(v_i)\right].}
+
+Multiplying a lift by #{c\in K^\times} changes its reverse norm by #{c^2},
+so the square class is independent of the chosen lift.
+\citet{II.3.5--6, pp. 52--53}{chevalley1954algebraic} gives these vector and
+paired-product values. The scalar exact sequence, reflection factorization,
+and the same square-scaling law appear in
+\citet{Theorem 3.1, pp. 50--51}{meinrenken2013clifford}.
+Chevalley's quotient statement assumes positive dimension; Meinrenken works
+with a finite-dimensional characteristic-zero nondegenerate bilinear space.}
+
+\p{If #{e:(V,Q)\simeq(V',Q')} is an isometry equivalence, then conjugation
+transport preserves both norms: for #{g\in O(V,Q)} and #{h\in SO(V,Q)},
+
+##{\nu_{Q'}^O(ege^{-1})=\nu_Q^O(g),\qquad
+\nu_{Q'}(ehe^{-1})=\nu_Q(h).}
+
+It therefore carries #{\ker\nu_Q} onto #{\ker\nu_{Q'}}
+\leanref/tauceti{QuadraticMap.IsometryEquiv.orthogonalSpinorNorm_orthogonalGroupCongr}
+\leanref/tauceti{QuadraticMap.IsometryEquiv.spinorNorm_specialOrthogonalGroupCongr}
+\href{https://github.com/TauCetiProject/TauCeti/blob/1a573226a3d9f2c460a6cea6ff3cf2dc82b6a2a3/TauCeti/LinearAlgebra/CliffordAlgebra/Spin/SpinorNorm/Isometry.lean#L84-L104}{kernel-transport source}.
+The induced kernel equivalence also commutes with Spin transport
+\href{https://github.com/TauCetiProject/TauCeti/blob/1a573226a3d9f2c460a6cea6ff3cf2dc82b6a2a3/TauCeti/LinearAlgebra/CliffordAlgebra/Spin/SpinorNorm/Isometry.lean#L128-L140}{Spin-transport source}.
+These are isometry-equivalence statements; they do not assert scalar-extension
+or orthogonal-product naturality. This is the norm-square companion to the
+vector-action square in \ref{fcap-0029}.}

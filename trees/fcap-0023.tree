@@ -11,8 +11,8 @@
 
 \p{Let #{K} be a field in which #{2} is invertible, #{V} a
 finite-dimensional #{K}-space, and #{Q} a nondegenerate quadratic form.
-The Clifford norm of a Lipschitz lift, taken modulo squares, descends
-to the orthogonal group
+The Clifford norm of a Lipschitz lift, taken modulo squares, descends to
+#{\nu_Q^O:O(V,Q)\to K^{\times}/(K^\times)^2}
 \leanref/tauceti{CliffordAlgebra.orthogonalSpinorNorm_lipschitzToOrthogonal}.
 Its restriction to #{SO(V,Q)} is the spinor norm
 #{\nu_Q:SO(V,Q)\to K^\times / (K^\times)^2}
@@ -27,28 +27,33 @@ when its spinor-norm class is trivial.}
 \p{\citet{II.3.5--6, pp. 52--53}{chevalley1954algebraic} defines the
 reversal norm and describes the reduced orthogonal image by square
 classes of products #{Q(u)Q(v)}. His ordinary Clifford action and
-reversal norm compare with Tau Ceti's twisted action and
-Clifford-conjugation norm on even lifts: parity fixes such lifts, so
-the two actions agree and reversal equals conjugation
-\ref{fcap-0021}. For a single nonisotropic reflection, Tau Ceti's
-class is #{[-Q(v)]}
-\leanref/tauceti{CliffordAlgebra.orthogonalSpinorNorm_reflectionOrthogonal},
-where Chevalley's vector norm contributes #{[Q(v)]}. On an even product
-of reflections, the extra #{[-1]} factors cancel. This comparison
-concerns the special orthogonal image, not the two conventions on all
-of #{O(V,Q)}.}
+reversal norm compare with TauCeti's twisted action on even lifts: grading
+fixes such lifts, so the two actions agree, and reverse and star norms
+coincide \ref{fcap-0028}. For a single nonisotropic reflection, the descended
+orthogonal spinor norm is
+
+##{\nu_Q^O(r_v)=[Q(v)]}
+
+\leanref/tauceti{CliffordAlgebra.orthogonalSpinorNorm_reflectionOrthogonal}.
+This agrees with Chevalley's reverse norm. TauCeti's star norm on the odd
+vector lift has class #{[-Q(v)]}; it is a different norm. The extra minus
+sign cancels on an even product, where the reverse and star norms agree.}
 
 \subtree{
 \taxon{Proof}
-\p{Every Spin element has Clifford norm one, so its image has trivial
+\p{Every Spin element has reverse norm one, so its image has trivial
 spinor norm
 \leanref/tauceti{CliffordAlgebra.spinorNorm_spinToSpecialOrthogonal}.
-Conversely, take #{g\in SO(V,Q)} with #{\nu_Q(g)=1}. Choose a Lipschitz
-lift #{x} of #{g}; its norm is a square #{N(x)=a^2} for some
-#{a\in K^\times}. Multiplying #{x} by the scalar #{a^{-1}} keeps its
-orthogonal action and gives norm one, hence a Pin lift. Since
-#{\det(g)=1}, determinant parity makes that lift even
-\ref{fcap-001A}, so it lies in Spin. In dimension zero #{SO(V,Q)}
-is trivial, so the image and the spinor-norm kernel are both its
-identity subgroup.}
+Conversely, suppose first that #{V} has positive dimension. Take
+#{g\in SO(V,Q)} with #{\nu_Q(g)=1}, and choose a Lipschitz lift #{x} of
+#{g}. Since #{\det(g)=1}, determinant parity first shows that
+#{x} is even
+\leanref/tauceti{CliffordAlgebra.mem_even_of_det_lipschitzToOrthogonal_eq_one}
+\ref{fcap-001A}. Trivial spinor class says that
+#{N_{\mathrm{rev}}(x)} is a square. Scalar normalization therefore produces
+an even lift with reverse norm one
+\href{https://github.com/TauCetiProject/TauCeti/blob/1a573226a3d9f2c460a6cea6ff3cf2dc82b6a2a3/TauCeti/LinearAlgebra/CliffordAlgebra/Lipschitz/ReverseNorm.lean#L205-L226}{source theorem};
+by the even-element comparison in \ref{fcap-0028}, it lies in Spin and has
+the same orthogonal action. In dimension zero #{SO(V,Q)} is trivial, so the
+image and the spinor-norm kernel are both its identity subgroup.}
 }
