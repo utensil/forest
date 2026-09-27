@@ -1,0 +1,84 @@
+\import{fcap-macros}
+\meta{agent-authored}{true}
+
+\tag{fcap}
+\tag{spin}
+\tag{clifford}
+
+\taxon{Proposition}
+\title{The simple type-D operators generate the positive nilradical}
+
+\p{Let #{V=W\oplus W'} be a complex nondegenerate quadratic space with a
+chosen split polarization of rank #{\ell\geq 4}. Choose polar-dual bases
+#{e_i\in W} and #{e_i'\in W'} with
+#{B_Q(e_i,e_j')=\delta_{ij}}, and put #{S=\bigwedge W}. Write #{c_i} for
+left creation by #{e_i}, #{a_i} for contraction by #{e_i'},
+#{N_i=c_i a_i}, and
+
+##{H_i=N_i-\tfrac12.}
+
+Thus #{\epsilon_i(H_j)=\delta_{ij}} fixes the Cartan coordinates, and the
+occupation signs are those of \ref{fcap-0025}. We choose
+
+##{\Phi^+=\{\epsilon_i-\epsilon_j,\ \epsilon_i+\epsilon_j:i<j\}}
+
+and the Borel #{\mathfrak b=\mathfrak h\oplus
+\bigoplus_{\alpha\in\Phi^+}\mathfrak g_\alpha}. Equivalently,
+#{\mathfrak b} stabilizes the flag
+#{\langle e_1\rangle\subset\langle e_1,e_2\rangle\subset\cdots\subset W};
+in the ordered Witt basis
+#{e_1,\ldots,e_\ell,e_\ell',\ldots,e_1'} it is the upper-triangular Borel.}
+
+\p{For the simple roots
+#{\alpha_i=\epsilon_i-\epsilon_{i+1}} along the chain and
+#{\alpha_\ell=\epsilon_{\ell-1}+\epsilon_\ell} at the fork, take
+
+##{\begin{aligned}
+E_i&=c_i a_{i+1},&F_i&=c_{i+1}a_i
+&& (1\leq i<\ell),\\
+E_\ell&=c_{\ell-1}c_\ell,&
+F_\ell&=a_\ell a_{\ell-1}.&&
+\end{aligned}}
+
+The reversed contraction order in #{F_\ell} fixes the bracket sign. On an
+increasing exterior word #{u_I}, a chain operator replaces an occupied
+#{i+1} by an absent #{i}, or performs the reverse replacement, with
+coefficient #{1}; otherwise it gives zero. The fork operators create or
+remove the final pair, again with coefficient #{1}, when the corresponding
+occupancy condition holds. The CAR then gives
+
+##{[E_i,F_i]=h_i,\qquad
+h_i=N_i-N_{i+1}\ (i<\ell),\qquad
+h_\ell=N_{\ell-1}+N_\ell-1.}
+
+Under the bivector map these are the products
+#{e_i e_{i+1}'}, #{e_{i+1}e_i'}, #{e_{\ell-1}e_\ell}, and
+#{e_\ell'e_{\ell-1}'}. Distinct orthogonal factors contribute no hidden
+scalar term. TauCeti identifies these exact Clifford representatives with
+the numbered type-D matrix roots and coroots
+\leanref/tauceti{TauCeti.SpinPolarizationData.typeDQuadraticEquiv_rootGenerator}
+\leanref/tauceti{TauCeti.SpinPolarizationData.typeDQuadraticEquiv_cartanGenerator}.}
+
+\p{It remains to pass from the simple roots to the chosen Borel. Put
+
+##{X_{ij}=c_i a_j,\qquad Y_{ij}=c_i c_j\qquad(i<j).}
+
+Their Cartan weights are #{\epsilon_i-\epsilon_j} and
+#{\epsilon_i+\epsilon_j}. The identities
+
+##{\begin{aligned}
+[X_{ij},X_{jk}]&=X_{ik},\\
+[X_{i,\ell-1},Y_{\ell-1,\ell}]&=Y_{i,\ell},\\
+[X_{j,\ell},Y_{i,\ell}]&=Y_{ij}
+\end{aligned}}
+
+for the indicated distinct ordered indices generate every positive
+#{X_{ij}} and #{Y_{ij}} from the simple operators. These are all positive
+root spaces of #{\mathfrak{so}(V,Q)}, so their span is the full nilradical
+#{\mathfrak n^+}. In particular, a vector killed by every #{E_i} is killed
+by #{\mathfrak n^+}: brackets and linear combinations preserve its
+annihilator. This final root-space argument supplies the Borel bridge; the
+formal file presently proves over #{\mathbb Q} annihilation by the Lie span
+of the simple positive generators, without identifying that span with a
+compatible Borel
+\leanref/tauceti{TauCeti.SpinPolarizationData.typeDSpinSerreRepresentation_positiveSimpleRootLieSpan_le_lieAnnihilator}.}

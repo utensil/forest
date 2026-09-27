@@ -1,0 +1,96 @@
+\import{fcap-macros}
+\meta{agent-authored}{true}
+
+\tag{fcap}
+\tag{spin}
+\tag{clifford}
+
+\taxon{Theorem}
+\title{The two top exterior words are the type-D fork highest vectors}
+
+\p{Continue with the Cartan and Borel of \ref{fcap-002X}. For the
+increasing exterior basis #{u_I}, set
+
+##{\Omega=u_{\{1,\ldots,\ell\}},\qquad
+\widehat\Omega=u_{\{1,\ldots,\ell-1\}}.}
+
+Every positive chain operator kills #{\Omega} by duplicate creation. It
+kills #{\widehat\Omega} either by the same mechanism or, on the final chain
+edge, because the contracted last coordinate is absent. The positive fork
+operator kills #{\Omega} by duplicate creation and #{\widehat\Omega}
+because coordinate #{\ell-1} is already present. The preceding
+root-space generation therefore makes both vectors highest for
+#{\mathfrak b}.}
+
+\p{Since #{H_i} has eigenvalue #{+\frac12} on an occupied coordinate and
+#{-\frac12} on an unoccupied one, their weights are
+
+##{\operatorname{wt}(\Omega)
+=\omega_\ell=\tfrac12(\epsilon_1+\cdots+\epsilon_\ell),}
+
+##{\operatorname{wt}(\widehat\Omega)
+=\omega_{\ell-1}
+=\tfrac12(\epsilon_1+\cdots+\epsilon_{\ell-1}-\epsilon_\ell).}
+
+The first word lies in #{S^+=\bigwedge^{\mathrm{even}}W} exactly when
+#{\ell} is even, while the second has the opposite parity. Hence, with
+#{S^\pm} defined by exterior parity as in \ref{fcap-0025},
+
+##{\begin{array}{c|cc}
+&S^+&S^-\\ \hline
+\ell\text{ even}&L(\omega_\ell)&L(\omega_{\ell-1})\\
+\ell\text{ odd}&L(\omega_{\ell-1})&L(\omega_\ell)
+\end{array}}
+
+The parity label is therefore not an independent name for the all-plus
+weight.}
+
+\p{For completeness, each displayed module is irreducible for the type-D
+Lie action. The commuting #{H_i} have distinct joint eigenvalues on the
+one-dimensional lines #{\mathbb C u_I}, so polynomial projections in the
+#{H_i} extract a nonzero basis word from any nonzero invariant subspace.
+The chain operators move occupied coordinates, while the fork pair creates
+or removes two of them. Their occupancy graph connects all subsets of a
+fixed parity. The invariant subspace consequently contains every basis word
+of that parity. This proves irreducibility without identifying it with the
+separate group-level theorem.}
+
+\p{The exact formal comparison is presently rational. In the standard
+model set #{S_{\mathbb Q}=\bigwedge_{\mathbb Q}\mathbb Q^\ell}. The basis
+map
+
+##{\begin{aligned}
+\mathbb C\otimes_{\mathbb Q}S_{\mathbb Q}
+&\longrightarrow\bigwedge_{\mathbb C}\mathbb C^\ell,\\
+z\otimes u_I&\longmapsto z u_I.
+\end{aligned}}
+
+is an equivalence. Every #{E_i} and #{F_i} above has matrix entries
+#{0,1,-1}; the coroot matrices are integral and the #{H_i} matrices are
+half-integral. Thus these actions, their annihilation identities, and their
+weights commute with extension from #{\mathbb Q} to #{\mathbb C}. A chosen
+complex polar-dual basis then transports the standard calculation to
+#{W\oplus W'}. TauCeti proves the two simple-generator annihilation
+statements and exact fork weights over #{\mathbb Q}
+\leanref/tauceti{TauCeti.SpinPolarizationData.typeDSpinRep_serreE_exteriorBasis_univ_eq_zero}
+\leanref/tauceti{TauCeti.SpinPolarizationData.typeDSpinRep_serreE_exteriorBasis_univ_erase_last_eq_zero}
+\leanref/tauceti{TauCeti.SpinPolarizationData.isCartanWeightVector_typeDSpinRep_exteriorBasis_univ}
+\leanref/tauceti{TauCeti.SpinPolarizationData.isCartanWeightVector_typeDSpinRep_exteriorBasis_univ_erase_last}.
+The displayed scalar-extension and Borel steps are the mathematical bridge
+to the complex highest-weight conclusion, not an asserted packaged Lean
+base-change theorem.}
+
+\p{\citet{Proposition 20.15 and proof, pp. 305--306}{fulton2004representation}
+independently identify the two irreducible half-spin modules and give the
+same parity-dependent fork assignment after the polar-dual rescaling already
+recorded in \ref{fcap-0025}. Their occupied Cartan sign is positive, as it
+is here.}
+
+\p{\citet{Proposition 6.2.3, pp. 314--315}{goodman2009symmetry}
+independently gives the two irreducible modules and their signed half-sum
+weights. Its creation space is identified with our #{W}, but its occupied
+Cartan sign is negative. Under
+#{H_i^{\mathrm{Tau}}=-H_i^{\mathrm{GW}}} the weights and positive systems
+both reverse. The exterior-parity labels remain fixed; the assignment of
+the two fork highest weights to them must be translated with the Cartan sign
+and Borel.}
