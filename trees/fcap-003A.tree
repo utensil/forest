@@ -1,0 +1,64 @@
+\import{fcap-macros}
+\meta{agent-authored}{true}
+
+\tag{fcap}
+\tag{spin}
+\tag{clifford}
+
+\taxon{Proposition}
+\title{The compact Spin cover is universal from dimension three}
+
+\p{For #{n\geq3}, the covering in
+\ref{fcap-0039} is the universal covering of #{SO(n)}. The
+proof uses the action on the unit sphere from \ref{fcap-0024}, together
+with the topology just supplied.}
+
+\p{Fix a unit vector #{e}. Its stabilizer in #{\Spin(Q_n^+)} is the
+preimage of #{SO(e^\perp)}. The Clifford map for the orthogonal inclusion
+#{e^\perp\hookrightarrow\mathbb R^n} embeds
+#{\Spin(Q_{n-1}^+)} into that preimage, maps onto
+#{SO(e^\perp)}, and has the same kernel #{\{1,-1\}}. Hence the embedded
+subgroup is exactly the stabilizer. It is closed. Using the concrete Lie
+group structure of \ref{fcap-0037}, the closed-subgroup
+bundle theorem gives
+
+##{\Spin(n-1)\longrightarrow\Spin(n)\longrightarrow S^{n-1}.}
+
+This supplies the stabilizer step rather than inferring a fibration from
+transitivity alone.}
+
+\p{For #{n=3}, \ref{fcap-002H} gives the coordinate isomorphism with
+unit quaternions. Its displayed linear map and inverse restrict
+continuously to the unit three-sphere, so #{\Spin(3)} is simply
+connected. For #{n\geq4}, the homotopy exact sequence of the bundle and
+simple connectedness of #{S^{n-1}} give a surjection
+
+##{\pi_1\Spin(n-1)\longrightarrow\pi_1\Spin(n).}
+
+Induction therefore gives #{\pi_1\Spin(n)=0} for every #{n\geq3}.
+Together with path-connectedness and the two-sheeted covering, this makes
+#{\Spin(n)\to SO(n)} the universal cover.}
+
+\p{\citet{Section 1.8, pp. 40--42}{gallier2014clifford} gives this
+sphere--stabilizer induction.
+\citet{Section 1.6, Lemma 1.4, p. 13}{meinrenken2013clifford}
+independently checks the base topology using the parallel sphere fibration
+for #{SO(n)}. The explicit
+carrier/stabilizer comparison above is the convention bridge to the
+selected positive-square model.}
+
+\p{The lower ranks remain separate:
+
+##{\begin{array}{c|c|c}
+n&\Spin(n)&\text{cover behavior}\\ \hline
+0&\{1\}&\text{separate trivial carrier}\\
+1&\{1,-1\}&\text{two sheets over }SO(1),\ \text{not universal}\\
+2&S^1&\text{twofold circle cover of }SO(2),\ \pi_1\ne0.
+\end{array}}
+
+The rank-two identification follows from
+#{a+b e_1e_2} with #{a=\cos\phi} and #{b=\sin\phi}. In the orientation of
+\ref{fcap-0038}, its vector action has angle #{-2\phi}; hence the
+map is a twofold circle cover. TauCeti's compactness, connectedness, and
+covering declarations stop short of this simple-connectedness argument,
+so no formal theorem badge is attached to the universal-cover claim.}

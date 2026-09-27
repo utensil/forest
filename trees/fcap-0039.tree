@@ -1,0 +1,83 @@
+\import{fcap-macros}
+\meta{agent-authored}{true}
+
+\tag{fcap}
+\tag{spin}
+\tag{clifford}
+
+\taxon{Proposition}
+\title{The compact real Spin projection is a two-sheeted cover}
+
+\p{For #{n\geq0}, let
+
+##{Q_n^+(x)=\sum_{i=1}^n x_i^2}
+
+on #{\mathbb R^n}, and give its actual vector-generated group
+#{\Spin(Q_n^+)} the subspace topology from the finite-dimensional real
+Clifford algebra. This group is compact for every #{n}; it is
+path-connected for #{n\geq2}. For #{n\geq1}, the vector action is a
+two-sheeted covering
+
+##{\Spin(Q_n^+)\longrightarrow SO(n)}
+
+with kernel #{\{1,-1\}}.}
+
+\p{Here is the compactness mechanism. Cartan--Dieudonne writes every
+special orthogonal transformation as a bounded even word of reflections.
+Positive definiteness normalizes every reflecting vector to the unit
+sphere. An additional unit-vector pair corrects the possible scalar
+#{-1}, and pairs #{(e,e)} pad the lift to a fixed length. Clifford
+multiplication therefore gives a continuous surjection
+
+##{\bigl(S^{n-1}\times S^{n-1}\bigr)^{n+1}
+\longrightarrow\Spin(Q_n^+)\qquad(n\geq1).}
+
+For #{n=0}, the actual vector-generated carrier is the singleton group,
+hence compact. For #{n\geq1}, the displayed source is compact, proving
+compactness. For #{n\geq2} it is also
+path-connected, proving path-connectedness of the target. The plane curve
+in \ref{fcap-0038} independently joins #{1} to #{-1}.}
+
+\p{The vector action is a continuous surjection onto the Hausdorff group
+#{SO(n)}. Compactness makes it a quotient map. Its two-element kernel is
+discrete and acts freely, so the quotient-covering theorem makes the
+action a two-sheeted covering. The finite kernel alone would not prove
+either the quotient-map or covering assertion.}
+
+\p{\citet{Section 1.8, pp. 38--40}{gallier2014clifford} gives the compact
+double cover for #{n\geq1} and path-connectedness for #{n\geq2}, using
+generators with negative square in #{\operatorname{Cl}_{0,n}}.
+\citet{I.2 and I.4, pp. 14, 19, 25}{lawson2016spin} use the same compact
+sign through #{v^2=-q(v)}.}
+
+\p{To compare their carrier with the positive-square model above, let
+#{e_i^2=1} and
+#{f_i^2=-1}. The complex map #{e_i\mapsto i f_i} restricts on real even
+PBW words to
+
+##{F(e_{i_1}\cdots e_{i_{2k}})
+=(-1)^k f_{i_1}\cdots f_{i_{2k}}.}
+
+The same formula is its inverse. It is a real linear homeomorphism,
+preserves multiplication and reversal, and carries an even product of
+real vectors to the corresponding even product up to a scalar #{-1}.
+That scalar belongs to both actual carriers, since
+#{e(-e)=-1} and #{ff=-1}. Thus #{F} and its inverse identify the actual
+Spin carriers. Complexifying the vector action and cancelling the common
+factor #{i} shows that they also intertwine the actions on
+#{\mathbb R^n}. Gallier defines Spin through a normalizer condition; the
+carrier-completion argument in \ref{fcap-0037}, applied
+after this sign transfer, identifies that normalizer-defined group with
+the selected vector-generated carrier. This translates the source
+convention without identifying the two full real Clifford algebras.}
+
+\p{TauCeti proves compactness for every #{n}, path-connectedness in
+dimensions #{n+2}, and the quotient-covering and covering statements for
+nonzero dimension:
+\leanref/tauceti{CliffordAlgebra.instCompactSpaceRealCliffordSpinGroupZero},
+\leanref/tauceti{CliffordAlgebra.pathConnectedSpace_realCliffordSpinGroupZero_add_two},
+\leanref/tauceti{CliffordAlgebra.isQuotientCoveringMap_realCliffordSpinDoubleCoverZero_rightHom},
+and
+\leanref/tauceti{CliffordAlgebra.isCoveringMap_realCliffordSpinDoubleCoverZero_rightHom}.
+These exact results concern the positive form and the finite-dimensional
+carrier topology; they do not assert simple connectedness.}
