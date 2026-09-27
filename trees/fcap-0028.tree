@@ -1,0 +1,66 @@
+\import{fcap-macros}
+\meta{agent-authored}{true}
+
+\tag{fcap}
+\tag{spin}
+\tag{clifford}
+
+\taxon{Remark}
+\title{Reverse norm signs and the Spin carrier}
+
+\p{Let #{R} be a commutative ring, let #{M} be an #{R}-module, and let
+#{Q} be a quadratic form on #{M}. Write #{\widehat v=\iota_Q(v)} for a
+Clifford generator. Before imposing any invertibility condition, consider the
+two algebra-valued norm expressions
+#{N_{\mathrm{rev}}(x)=\operatorname{rev}(x)x} and #{N_*(x)=x^*x}, where
+#{x^*=\operatorname{rev}(\alpha(x))}. Identifying a scalar with its image in
+the Clifford algebra gives
+
+##{\begin{aligned}
+N_{\mathrm{rev}}(\widehat v)&=Q(v),
+&N_*(\widehat v)&=-Q(v),\\
+N_{\mathrm{rev}}(\widehat u\widehat v)
+ &=\widehat v\widehat u\widehat u\widehat v
+ =Q(u)Q(v),
+&N_*(\widehat u\widehat v)&=Q(u)Q(v).
+\end{aligned}}
+
+Thus the two signs differ on one generator and agree on a product of two.
+More generally, reversal gives the product of the quadratic values on every
+vector word
+\leanref/tauceti{CliffordAlgebra.reverse_prod_map_ι_mul_prod_map_ι}, and the
+two norm expressions agree on every even Clifford element
+\leanref/tauceti{CliffordAlgebra.star_mul_self_eq_reverse_mul_self_of_mem_even}.}
+
+\p{For a Clifford unit #{x}, membership in the even-unitary carrier is
+equivalent to evenness together with #{N_{\mathrm{rev}}(x)=1}
+\leanref/tauceti{CliffordAlgebra.evenUnitaryGroup.mem_iff_reverse_mul_self_eq_one}.
+Those two conditions do not establish Lipschitz membership, which must be
+retained in the Spin criterion. Precisely,
+
+##{\operatorname{im}\bigl(\Spin(Q)\longrightarrow
+\operatorname{Cl}(Q)^\times\bigr)
+=\operatorname{Lipschitz}(Q)\cap\operatorname{EvenUnitary}(Q)}
+
+\leanref/tauceti{CliffordAlgebra.range_spinGroup_toUnits}.
+Consequently, if #{Q(u)Q(v)=1}, then #{\widehat u\widehat v} is an even
+product of Lipschitz vector units with reverse norm one, hence a Spin element
+\leanref/tauceti{CliffordAlgebra.ι_mul_ι_mem_spinGroup_of_norm_mul_norm_eq_one}.
+This is an unquotiented scalar calculation. The passage to square classes,
+including the odd reflection sign and its cancellation on even products, is
+recorded separately in \ref{fcap-0023}.}
+
+\p{Chevalley obtains the same norm from what he calls the main
+antiautomorphism and records #{\lambda(v)=Q(v)} and the paired values
+#{Q(u)Q(v)}
+\citet{II.3.5--6, pp. 52--53}{chevalley1954algebraic}. His symbol #{\alpha}
+in that passage denotes reversal, whereas #{\alpha} in \ref{fcap-0021}
+denotes the grading involution. Meinrenken calls reversal transposition, writes
+#{N(x)=x^\top x}, and defines Spin as its norm-one subgroup inside the special
+Clifford group
+\citet{Sections 2.2.6 and 3.1.1--2, pp. 34, 49--51}{meinrenken2013clifford}.
+His convention has #{Q(v)=B(v,v)}, so his #{B} is the half-polar form #{b_Q}
+of \ref{fcap-0027}. Both sources work in narrower finite-dimensional field
+settings; Meinrenken here assumes characteristic zero and a nondegenerate
+form. The formal identities linked above hold under the commutative-ring and
+module hypotheses stated here.}
