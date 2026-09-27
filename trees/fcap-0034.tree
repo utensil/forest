@@ -1,0 +1,123 @@
+\import{fcap-macros}
+\meta{agent-authored}{true}
+
+\tag{fcap}
+\tag{spin}
+\tag{representation-theory}
+
+\taxon{Proposition}
+\title{Complex Spin in dimension six is #{SL_4} on a half-spin module}
+
+\p{Let #{V=W\oplus W'} be a split nondegenerate complex quadratic
+space with #{\dim W=3}. For polar-dual bases #{e_i,e'_i}, use
+
+##{S^+:(1,e_{12},e_{13},e_{23}),\qquad
+S^-:(e_{123},-e_3,e_2,-e_1).}
+
+For #{\langle s,t\rangle=[e_{123}]\bigl(
+\operatorname{rev}_{\wedge}(s)\wedge t\bigr)}, the second displayed
+basis is dual to the first, and the full pairing matrix on
+#{S^+\oplus S^-} is
+
+##{\Omega=\begin{pmatrix}0&I_4\\-I_4&0\end{pmatrix}.}
+
+Clifford generators are self-adjoint for this pairing. Under the paired
+even-algebra equivalence #{\Phi} of \ref{fcap-002V}, reversal therefore sends
+
+##{(A,D)\longmapsto(D^{\mathsf T},A^{\mathsf T}).}
+
+Thus the even reverse-norm-one group is
+
+##{\{(A,A^{-\mathsf T}):A\in GL_4(\mathbb C)\}.}
+
+At this stage it is #{GL_4}, not yet the actual Spin group.}
+
+\p{The vector-normalization condition cuts out the determinant-one
+subgroup. If
+#{v=\sum_i x_i e_i+y_i e'_i}, its odd Clifford action has block form
+
+##{\rho(v)=\begin{pmatrix}0&B_v\\B_v^\sharp&0\end{pmatrix},}
+
+where
+
+##{B_v=\begin{pmatrix}
+0&-y_3&y_2&-y_1\\
+y_3&0&x_1&x_2\\
+-y_2&-x_1&0&x_3\\
+y_1&-x_2&-x_3&0
+\end{pmatrix}.}
+
+These matrices run through all skew #{4\times4} matrices. For a skew
+matrix #{B}, define #{B^\sharp} by
+
+##{\begin{aligned}
+(B^\sharp)_{01}&=B_{23},&
+(B^\sharp)_{02}&=-B_{13},&
+(B^\sharp)_{03}&=B_{12},\\
+(B^\sharp)_{12}&=B_{03},&
+(B^\sharp)_{13}&=-B_{02},&
+(B^\sharp)_{23}&=B_{01},
+\end{aligned}}
+
+with skew extension. Then
+#{(B^\sharp)^\sharp=B},
+#{BB^\sharp=-\operatorname{Pf}(B)I}, and
+#{\operatorname{Pf}(B_v)=-\sum_i x_i y_i}. The last two identities give
+#{\rho(v)^2=Q(v)I}, matching the Clifford convention.}
+
+\p{The complementary-minor identity is
+
+##{(ABA^{\mathsf T})^\sharp
+=\det(A)A^{-\mathsf T}B^\sharp A^{-1}.}
+
+One derivation identifies a skew matrix with an alternating two-form:
+the operation #{B\mapsto B^\sharp} is the complementary two-form determined
+by the ordered volume basis, while #{\bigwedge^4 A} multiplies that
+volume by #{\det A}. Evaluating on basis pairs gives the six coordinate
+rules above and the displayed identity.}
+
+\p{Conjugation by #{\operatorname{diag}(A,A^{-\mathsf T})} sends the
+two off-diagonal blocks to
+
+##{ABA^{\mathsf T},\qquad
+A^{-\mathsf T}B^\sharp A^{-1}.}
+
+By the complementary-minor identity, it preserves the vector graph
+#{\{(B,B^\sharp):B^{\mathsf T}=-B\}} exactly when
+#{\det A=1}. Sufficiency is immediate. For necessity, choose any nonzero
+#{B^\sharp}; equality of the two lower blocks forces
+#{\det A=1}. Faithfulness of the full Clifford action in this even
+dimension lifts this matrix statement to normalization of the actual
+vector subspace.}
+
+\p{Every Spin element therefore acts on #{S^+} through
+#{SL_4(\mathbb C)}. Conversely, for #{A\in SL_4(\mathbb C)}, let
+#{x} be the unique even Clifford preimage of
+#{(A,A^{-\mathsf T})}. It has reverse norm one and, by the graph
+calculation, normalizes #{V}. The carrier-completion argument of
+\ref{fcap-0032} places #{x} in actual Spin. The mutually inverse maps are
+
+##{g\longmapsto\rho_+(g),\qquad
+A\longmapsto\Phi^{-1}(A,A^{-\mathsf T}).}
+
+Hence
+
+##{\Spin_6(\mathbb C)\simeq SL_4(\mathbb C).}
+
+In the displayed bases #{S^+} is the standard four-dimensional module
+and #{S^-} is its dual.}
+
+\p{\citet{Exercise 20.39, p. 311}{fulton2004representation} give the
+group and standard #{S^+} module.
+\citet{Section 6.3.3, Exercise 1, p. 322}{goodman2009symmetry}
+independently give the same complex group. Here the cross-pairing proves
+#{S^-} is dual, and the vector-graph calculation proves the actual image.}
+
+\p{\citet{Section 3.7.6, p. 84}{meinrenken2013clifford} gives the
+compact real form #{\Spin(6)=SU(4)}.}
+
+\p{TauCeti formalizes the paired half-spin algebra and matrix equivalences
+\leanref/tauceti{TauCeti.SpinPolarizationData.evenCliffordEquivProdEnd}
+\leanref/tauceti{TauCeti.SpinPolarizationData.evenCliffordEquivProdMatrix}.
+The vector graph, determinant-one group image and inverse are proved above,
+not by these declarations.}
