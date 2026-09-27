@@ -1,0 +1,57 @@
+\import{fcap-macros}
+\meta{agent-authored}{true}
+
+\tag{fcap}
+\tag{spin}
+\tag{clifford}
+
+\taxon{Proposition}
+\title{Left Clifford multiplication is not the commutator action}
+
+\p{Let #{\mathfrak g} be a finite-dimensional complex semisimple Lie
+algebra with Killing form #{\kappa}, and put
+#{Q_\kappa(x)=\kappa(x,x)}. If #{(b_i)} is a basis and
+#{(b_i^\vee)} its Killing-dual basis, the normalized quadratic lift of
+the adjoint action is
+
+##{\delta(x)=\frac14\sum_i
+\beta_{Q_\kappa}([x,b_i],b_i^\vee)\in\Cl(Q_\kappa)^0.}
+
+The coefficient is the one derived in \ref{fcap-0020}: the polar form is
+#{B_{Q_\kappa}=2\kappa}, so the polar-dual basis contributes one factor
+#{1/2}, and the general lift contributes the other. This is a grade-two
+element, not the canonical generator #{\iota_{Q_\kappa}(x)}.}
+
+\p{There are two natural actions on the same Clifford vector space:
+
+##{L_x(c)=\delta(x)c,\qquad
+D_x(c)=\delta(x)c-c\delta(x).}
+
+If #{R_a(c)=ca}, then
+
+##{D_x=L_x-R_{\delta(x)},\qquad [L_x,R_a]=0.}
+
+Under equivariant Clifford antisymmetrization,
+#{D} is the derivation extension of the adjoint action to
+#{\bigwedge\mathfrak g}. The action #{L} is instead left multiplication
+on the Clifford algebra. On matrix coordinates
+#{\operatorname{End}(S)\simeq S\otimes S^*}, it acts on the #{S} factor
+and leaves #{S^*} as a multiplicity space.}
+
+\p{TauCeti defines the selected left action and proves these comparisons
+in
+\leanref/tauceti{CliffordAlgebra.kostantLieModule}
+\leanref/tauceti{CliffordAlgebra.kostant_lie_def}
+\leanref/tauceti{CliffordAlgebra.kostant_lie_sub_mul}
+\leanref/tauceti{CliffordAlgebra.kostantRightMul}.
+The generic module lift in \ref{fcap-001O} supplies the same algebraic
+mechanism, but it does not identify the left action with the exterior
+derivation action.}
+
+\p{\citet{Sections 3.1 and 5.2, pp. 294 and 311}{kostant1997clifford}
+defines the left action through this quarter-normalized lift and
+separately identifies the commutator with the exterior extension.
+\citet{Section 2, internal preprint pp. 7--8}{panyushev2001exterior}
+studies the exterior/spin action under the same complex semisimple
+hypotheses. The following example shows why their roles cannot be
+exchanged.}

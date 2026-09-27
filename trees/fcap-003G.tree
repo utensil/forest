@@ -1,0 +1,90 @@
+\import{fcap-macros}
+\meta{agent-authored}{true}
+
+\tag{fcap}
+\tag{spin}
+\tag{clifford}
+
+\taxon{Theorem}
+\title{The left Killing-Clifford module is primary of type #{V_\rho}}
+
+\p{Let #{\mathfrak g} be a finite-dimensional complex semisimple Lie
+algebra of rank #{\ell}. Choose positive roots #{\Phi^+}, put
+#{r=\lvert\Phi^+\rvert}, and write
+#{\rho=\frac12\sum_{\alpha>0}\alpha}. Then
+
+##{\dim\mathfrak g=\ell+2r.}
+
+Give #{\Cl(Q_\kappa)} the left action #{L} of
+\ref{fcap-003E}. As a #{\mathfrak g}-module it is
+
+##{\Cl(Q_\kappa)\simeq
+2^{\ell+r}V_\rho.}
+
+Here the exponent is the multiplicity; #{\dim V_\rho=2^r}, so the total
+dimension is #{2^{\ell+2r}}, as required. For the zero Lie algebra this
+reads as the one-dimensional trivial module.}
+
+\p{First compute the spinor constituent. The weights of the adjoint
+orthogonal module are zero with multiplicity #{\ell} and the roots in
+opposite pairs. The exterior spinor character is therefore
+
+##{\operatorname{ch}S=
+2^{\lfloor\ell/2\rfloor}
+\prod_{\alpha>0}
+\left(e^{\alpha/2}+e^{-\alpha/2}\right).}
+
+The Weyl character formula for highest weight #{\rho}, together with
+the Weyl denominator identity applied to #{2\rho} and divided by the
+ordinary denominator, gives
+
+##{\operatorname{ch}V_\rho
+=e^\rho\prod_{\alpha>0}(1+e^{-\alpha})
+=\prod_{\alpha>0}
+\left(e^{\alpha/2}+e^{-\alpha/2}\right).}
+
+Complete reducibility and independence of irreducible characters now
+give
+
+##{S\simeq2^{\lfloor\ell/2\rfloor}V_\rho.}
+
+\citet{Example 2.5(1), internal preprint p. 8}{panyushev2001exterior}
+records this adjoint specialization under the complex semisimple
+hypotheses. The character calculation above supplies the comparison in
+the fixed normalization rather than substituting that conclusion without
+proof.}
+
+\p{It remains to pass from a spinor carrier to the full Clifford
+algebra. If #{n=\ell+2r} is even, the matrix range of \ref{fcap-002V}
+gives
+
+##{\Cl(Q_\kappa)\simeq\operatorname{End}(S)\simeq S\otimes S^*.}
+
+Left multiplication acts on the first factor, so #{S^*} is a trivial
+multiplicity space of dimension #{2^{n/2}}. If #{n} is odd, the odd
+structure of \ref{fcap-002W} gives two matrix blocks
+#{\operatorname{End}(S_1)\oplus\operatorname{End}(S_2)}. The two full
+Clifford actions differ, but their restrictions to the even algebra are
+equivalent; since #{\delta(\mathfrak g)} is even, both blocks contain the
+same #{\mathfrak g}-module. Their combined multiplicity-space dimension
+is #{2\cdot2^{(n-1)/2}=2^{\lceil n/2\rceil}}.}
+
+\p{In both parity cases the multiplicity of #{V_\rho} is
+
+##{2^{\lceil n/2\rceil}
+2^{\lfloor\ell/2\rfloor}
+=2^{\ell+r}.}
+
+This proves the displayed decomposition.
+\citet{Theorem 39, pp. 312--313}{kostant1997clifford} independently
+proves the exact left-regular primary-type statement by a highest-weight
+right ideal. TauCeti formalizes the selected left action and its commuting right
+multiplications, but the character, matrix-block, and multiplicity
+synthesis here is not a packaged formal theorem.}
+
+\p{The conclusion is a module decomposition only. It does not assert
+the stronger algebra factorization
+#{\operatorname{End}(V_\rho)\otimes\Cl(P)}, identify the full commutant,
+or invoke the Hopf--Koszul--Samelson primitive algebra. The normal-ordered
+#{\mathfrak{gl}_N} calculation in the separate CAR section uses a trace
+shift and is not a substitute for this Killing-adjoint theorem.}
