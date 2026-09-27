@@ -1,0 +1,82 @@
+\date{2026-09-27T06:20:55Z}
+\import{fcap-macros}
+\meta{agent-authored}{true}
+
+\tag{fcap}
+\tag{spin}
+\tag{clifford}
+\tag{draft}
+
+\taxon{Example}
+\title{A rational motor checks every projective coordinate layer}
+
+\p{Take
+
+##{c=\frac35,\qquad s=\frac45,\qquad t=(4,0).}
+
+Then
+
+##{U=\frac{3-4e_{12}}5,\qquad
+R_U=\frac1{25}\begin{pmatrix}-7&-24\\24&-7\end{pmatrix},}
+
+and the ordered motor is
+
+##{M=T(4,0)U
+=\frac35-\frac45e_{12}-\frac85e_{20}-\frac65e_{01}.}
+
+Its full named tuple and the ascending core tuple supplied by
+\ref{fcap-002R} are
+
+##{\begin{aligned}
+\operatorname{named}(M)
+ &=\left(\frac35,0,0,0,-\frac45,-\frac85,-\frac65,0\right),\\
+\operatorname{core}(M)
+ &=\left(\frac35,0,0,-\frac65,0,\frac85,-\frac45,0\right).
+\end{aligned}}
+
+Thus the calculation enters the algebra through all eight-coordinate
+conversion data, including the #{e_{20}=-e_{02}} sign.}
+
+\p{The point and line
+
+##{P_0=P(1,3,-1),\qquad L_0=L(3,-1,0)}
+
+are incident. The motor action gives
+
+##{\begin{aligned}
+MP_0M^{-1}&=P\left(1,\frac{103}{25},\frac{79}{25}\right),\\
+ML_0M^{-1}&=L\left(\frac{47}{25},\frac7{25},-\frac{24}{25}\right).
+\end{aligned}}
+
+The output incidence check is
+
+##{\frac{47}{25}
+ +\frac7{25}\frac{103}{25}
+ -\frac{24}{25}\frac{79}{25}=0.}
+
+The output point has tuples
+
+##{\begin{aligned}
+\operatorname{named}(MP_0M^{-1})
+ &=\left(0,0,0,0,1,\frac{103}{25},\frac{79}{25},0\right),\\
+\operatorname{core}(MP_0M^{-1})
+ &=\left(0,0,0,\frac{79}{25},0,-\frac{103}{25},1,0\right).
+\end{aligned}}
+
+This checks the geometric action and the signed coordinate adapter on the
+same exact example.}
+
+\p{Reversal gives the algebra inverse, and sandwiching the two outputs by
+#{\widetilde M} and #{M} returns both original representatives. In the same
+ordered factorization,
+
+##{M^{-1}=M\left(\left(\frac{28}{25},\frac{96}{25}\right),U^{-1}\right).}
+
+Composition order is visible: reversing the factors gives
+
+##{UT(4,0):P(1,3,-1)\longmapsto P(1,-1,7),}
+
+which differs from the output above. These are exact rational identities,
+not floating-point or private-software evidence. FCAP does not yet expose the
+named executable product and conversion theorems needed to certify this
+calculation as a public implementation refinement.}

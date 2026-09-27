@@ -1,0 +1,107 @@
+\date{2026-09-27T06:20:50Z}
+\import{fcap-macros}
+\meta{agent-authored}{true}
+
+\tag{fcap}
+\tag{spin}
+\tag{clifford}
+\tag{draft}
+
+\taxon{Proposition}
+\title{Translations and rotations form an exact plane-motor family}
+
+\p{Retain the real degenerate frame and projective encodings of
+\ref{fcap-002Q}. Put #{E=e_{01}}. Since #{E^2=0} and
+#{\widetilde E=-E}, the one-axis motor
+
+##{M_d=1-dE}
+
+satisfies
+
+##{M_d^{-1}=\widetilde M_d=1+dE,\qquad
+M_sM_t=M_{s+t}.}
+
+It belongs to the actual vector-generated Spin carrier because
+
+##{M_d=e_1(e_1+de_0),\qquad
+Q(e_1)=Q(e_1+de_0)=1}
+
+\leanref/tauceti{CliffordAlgebra.ι_mul_ι_mem_spinGroup_of_norm_mul_norm_eq_one}.
+Direct sandwich multiplication gives
+
+##{\begin{aligned}
+M_dP(w,x,y)M_d^{-1}&=P(w,x+2dw,y),\\
+M_dL(d_0,a,b)M_d^{-1}&=L(d_0-2da,a,b).
+\end{aligned}}
+
+Thus the radical shear of \ref{fcap-002N} is, in the fixed projective
+encoding, translation by #{(2d,0)}. The packaged nondegenerate transvection
+theorem is not used.}
+
+\p{For a general translation vector #{t=(t_x,t_y)}, define
+
+##{T(t)=1-\frac{t_x}{2}e_{01}+\frac{t_y}{2}e_{20}.}
+
+Each increment squares to zero, and their products in either order vanish, so
+
+##{T(t)T(v)=T(t+v),\qquad T(t)^{-1}=T(-t).}
+
+More precisely,
+
+##{T(t)=
+\left[e_1\left(e_1+\frac{t_x}{2}e_0\right)\right]
+\left[e_2\left(e_2+\frac{t_y}{2}e_0\right)\right].}
+
+Every displayed vector has quadratic value #{1}; hence #{T(t)} lies in the
+same actual Spin carrier. This is a direct factorization in the full
+degenerate Clifford algebra, not membership in a radical quotient.}
+
+\p{Let #{c^2+s^2=1} and put
+
+##{U=c-se_{12}=e_1(ce_1-se_2),\qquad
+U^{-1}=\widetilde U=c+se_{12}.}
+
+Again both vector factors have quadratic value #{1}. Its active spatial
+matrix is
+
+##{R_U=
+\begin{pmatrix}
+c^2-s^2&-2cs\\
+2cs&c^2-s^2
+\end{pmatrix}.}
+
+For the ordered factorization #{M(t,U)=T(t)U}, which applies the rotation
+before the translation, write #{p=(x,y)} and #{n=(a,b)}. Then
+
+##{\begin{aligned}
+(w,p)&\longmapsto (w,R_Up+wt),\\
+(d,n)&\longmapsto (d-t\mathbin{\cdot}R_Un,R_Un).
+\end{aligned}}
+
+The second row is the line action. It preserves incidence because
+
+##{(d-t\mathbin{\cdot}R_Un)w
++(R_Un)\mathbin{\cdot}(R_Up+wt)=dw+n\mathbin{\cdot}p.}
+
+In particular, translations fix every ideal point #{(0,p)}.
+
+The selected family is closed, with exact order and inverse
+
+##{\begin{aligned}
+M(t,U)M(v,V)&=M(t+R_Uv,UV),\\
+M(t,U)^{-1}&=M(-R_U^{-1}t,U^{-1}).
+\end{aligned}}
+
+These formulas prove the claims for this family; they do not assert that
+every motor is a single exponential.}
+
+\p{Sokolov's negative-half-angle rotor and nilpotent translator fix the sign
+and half-factor in this convention
+\citet{(51)--(52), p. 39}{sokolov2013foundations}.
+Independently, \citet{Lemma 2.2, p. 567}{dereli2010degenerate} proves
+#{\exp(aF)=1+aF} for a radical vector #{F}; taking
+#{F=e_0} and #{a=(t_xe_1+t_ye_2)/2} gives exactly the increment of #{T(t)}.
+That paper later defines a quotient carrier
+\citet{Definition 2.4, p. 570}{dereli2010degenerate}; no such quotient is
+imported here. The vector-pair factorizations above establish membership in
+the carrier actually used in these notes.}
