@@ -15,7 +15,7 @@ smooth homomorphism. Their tangent map, bracket law, functor laws, and
 exponential naturality therefore do not require a theorem that upgrades a
 continuous homomorphism to a smooth one. The generic theorem does not invoke
 the closed-subgroup theorem; that theorem belongs to the later specialization
-to concrete matrix subgroups. This is the dependency split proposed in
+to concrete matrix subgroups. This is the dependency split recorded in
 \href{https://github.com/TauCetiProject/TauCetiRoadmap/pull/224}{TauCetiRoadmap
 PR 224}.}
 
@@ -26,11 +26,15 @@ subgroup additionally requires the subgroup's Lie structure. Liu describes
 the local exponential and BCH coordinates, while Isaev--Rubakov give the
 matrix Campbell--Hausdorff calculation.}
 
-\p{The open
-\href{https://github.com/TauCetiProject/TauCeti/pull/3078}{TauCeti draft PR 3078}
-proposes the generic construction and its functor and
-exponential laws. It is not merged, so these cards carry no Lean markers.
-Even after that generic interface lands, the differential of
-#{\Spin(Q)\to SO(Q)} still needs compatible Lie-group structures on the two
-abstract groups. The algebraic identification in \ref{fcap-000R} does not by
-itself supply those structures.}
+\p{Tau Ceti's generic interface now defines the Lie map of a bundled smooth
+monoid morphism between finite-dimensional real Lie groups
+\leanref/tauceti{lieMap}. It proves the identity and composition laws
+\leanref/tauceti{lieMap_id}, \leanref/tauceti{lieMap_comp}, and exponential
+naturality \leanref/tauceti{map_lieExp}. These declarations act on
+left-invariant derivations and require the corresponding smooth Lie-group
+structures.}
+
+\p{They do not identify the differential of #{\Spin(Q)\to SO(Q)} within the
+abstract Clifford-group models used here. That specialization still needs
+compatible Lie-group structures and a comparison with the algebraic
+identification in \ref{fcap-000R}.}
