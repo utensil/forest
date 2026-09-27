@@ -1,0 +1,89 @@
+\import{fcap-macros}
+\meta{agent-authored}{true}
+
+\tag{fcap}
+\tag{spin}
+\tag{representation-theory}
+
+\taxon{Proposition}
+\title{Normal ordering adds a matrix-trace central character}
+
+\p{Let #{K} be a field in which #{2} is invertible. On
+#{V=M_N(K)} take
+
+##{Q_{\mathrm{tr}}(Y)=\operatorname{Tr}(Y^2),\qquad
+B_{Q_{\mathrm{tr}}}(X,Y)=2\operatorname{Tr}(XY),}
+
+and write #{d_{ij}=\iota_{Q_{\mathrm{tr}}}(E_{ij})}. The Clifford
+relation is
+
+##{d_{ij}d_{kl}+d_{kl}d_{ij}
+=2\delta_{jk}\delta_{li}.}
+
+Let #{q(X)} be the quadratic Clifford lift of the adjoint action
+#{Y\mapsto[X,Y]}. The normal-ordered lift used for the CAR module is
+
+##{D(X)=q(X)+\frac N2\operatorname{Tr}(X)1.}
+
+On a matrix unit it has the concrete form
+
+##{D(E_{ij})=\frac12\sum_{k=0}^{N-1}d_{ik}d_{kj}.}
+
+Indeed,
+#{d_{ik}d_{kj}=\beta_{Q_{\mathrm{tr}}}(E_{ik},E_{kj})
++\delta_{ij}1}; summing the contraction term over #{k} gives
+#{(N/2)\delta_{ij}1}. This derives both the coefficient and its positive
+sign.}
+
+\p{There are three different actions here. The ordinary exterior
+extension of the adjoint action is the derivation
+
+##{\delta_X(Y_1\wedge\cdots\wedge Y_r)
+=\sum_sY_1\wedge\cdots\wedge[X,Y_s]\wedge\cdots\wedge Y_r.}
+
+The quadratic Clifford action is the inner derivation
+#{[q(X),-]=[D(X),-]}. The CAR representation on the full Clifford
+algebra is instead left multiplication,
+
+##{\rho_{\mathrm{CAR}}(X)c=D(X)c,
+\qquad \rho_{\mathrm{CAR}}(X)c-cD(X)=[D(X),c].}
+
+On the central matrix the three formulas read:
+
+##{\operatorname{ad}_I=0,\qquad q(I)=0,
+\qquad D(I)=\frac{N^2}{2}1.}
+
+The left-regular carrier has dimension #{2^{N^2}}. For #{N\geq 1} it
+is not an irreducible exterior spinor carrier; #{N=0} is the
+one-dimensional trivial exception.}
+
+\p{The exact identities are formalized at the pinned TauCeti revision.
+The
+\href{https://github.com/TauCetiProject/TauCeti/blob/1a573226a3d9f2c460a6cea6ff3cf2dc82b6a2a3/TauCeti/Algebra/Lie/GeneralLinear/Clifford.lean#L90-L98}{normal-ordered lift},
+its
+\href{https://github.com/TauCetiProject/TauCeti/blob/1a573226a3d9f2c460a6cea6ff3cf2dc82b6a2a3/TauCeti/Algebra/Lie/GeneralLinear/Clifford.lean#L198-L268}{matrix-unit and generator formulas},
+and the
+\href{https://github.com/TauCetiProject/TauCeti/blob/1a573226a3d9f2c460a6cea6ff3cf2dc82b6a2a3/TauCeti/Algebra/Lie/GeneralLinear/Fock.lean#L99-L134}{left-action comparison}
+have the field and inverse-two hypotheses stated above. They do not
+identify this module with an irreducible spinor representation.}
+
+\p{\citet{Section 12.1, pp. 230--233}{pressley1986loop}
+let the determinant-square-root cover of #{U(W)} act on
+#{\bigwedge^kW} by #{u^{-1}\bigwedge^k(A)}, with #{u^2=\det A}.
+Differentiating first along a unitary curve gives
+#{d\bigwedge(X)-\frac12\operatorname{Tr}_W(X)} for
+#{X\in\mathfrak u(W)}; complexifying then gives the corresponding
+#{\mathfrak{gl}(W)} formula. No arbitrary complex matrix is being
+presented as the derivative of a unitary curve.}
+
+\p{\citet{Section 2, Example 2.5(3), preprint pp. 8--9}{panyushev2001exterior}
+works over an algebraically closed field of characteristic zero and gives
+the ordinary spinor correction as
+#{\mathbb k_{-\nu}\otimes\bigwedge W}, where #{\nu} is half the sum of
+the weights with multiplicity. Evaluating #{\nu} is half the exterior
+trace. These two sources agree on
+the ordinary minus-half-trace normalization. They do not produce the
+positive #{(N/2)\operatorname{Tr}} term above: the trace of
+#{\operatorname{ad}_X} on #{M_N} is zero, while that term is the
+contraction created by normal ordering on the full left-regular
+Clifford module.}

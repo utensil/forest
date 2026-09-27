@@ -1,0 +1,88 @@
+\import{fcap-macros}
+\meta{agent-authored}{true}
+
+\tag{fcap}
+\tag{spin}
+\tag{representation-theory}
+
+\taxon{Proposition}
+\title{The positive CAR product has half-staircase weight}
+
+\p{Let #{K} be a field in which #{2} is invertible. Begin with #{N=2}
+and put #{v_+=d_{01}}. The relations are
+
+##{d_{01}^2=d_{10}^2=0,\qquad d_{00}^2=d_{11}^2=1,
+\qquad d_{01}d_{10}+d_{10}d_{01}=2.}
+
+The only raising operator is
+
+##{D(E_{01})=\frac12(d_{00}d_{01}+d_{01}d_{11}),}
+
+and each summand kills #{v_+}. For the diagonal operators, the same CAR
+relations give
+
+##{D(E_{00})v_+=\frac32v_+,\qquad
+D(E_{11})v_+=\frac12v_+.}
+
+Thus #{v_+} has weight #{(3/2,1/2)}, and
+#{D(I)v_+=2v_+}. Subtracting the central correction
+#{(N/2)\operatorname{Tr}} leaves #{(1/2,-1/2)}. In characteristic
+zero this is the usual #{\mathfrak{sl}_2} value #{\rho}.}
+
+\p{For general #{N}, order the indices as
+#{0<1<\cdots<N-1} and form the lexicographically ordered product
+
+##{v_+=\prod_{0\leq i<j<N}^{\mathrm{lex}}d_{ij}.}
+
+Every positive matrix unit is #{Q_{\mathrm{tr}}}-null, and distinct
+positive matrix units are polar-orthogonal. Their Clifford generators
+therefore anticommute. PBW linear independence shows that the ordered
+product is nonzero over a field.}
+
+\p{Let #{i<j}. In
+
+##{D(E_{ij})v_+=\frac12\sum_kd_{ik}d_{kj}v_+,}
+
+a term with #{k<j} vanishes because the positive generator #{d_{kj}}
+already occurs in #{v_+}. If #{k\geq j}, then #{i<k}; first
+anticommute #{d_{ik}} past #{d_{kj}}, using #{i\ne j}, and the repeated
+positive factor #{d_{ik}} makes the term zero. Hence every raising
+operator annihilates #{v_+}.}
+
+\p{For a diagonal generator,
+
+##{D(E_{ii})v_+=\frac12\sum_kd_{ik}d_{ki}v_+.}
+
+The contributions for #{k<i}, #{k=i}, and #{k>i} are respectively
+#{0}, #{v_+}, and #{2v_+}. Therefore
+
+##{D(E_{ii})v_+
+=\frac12\bigl(1+2|\{k:k>i\}|\bigr)v_+.}
+
+For #{i\in\operatorname{Fin}(N)}, the weight and its quadratic-lift
+part are
+
+##{\lambda_i=N-i-\frac12,\qquad
+\lambda_i-\frac N2=\frac{N-1}{2}-i,\qquad
+\sum_i\lambda_i=\frac{N^2}{2}.}
+
+The last equality agrees with the direct central calculation
+#{D(I)=N^2/2}.}
+
+\p{TauCeti defines this ordered product and proves its nonvanishing,
+raising equations, and diagonal weight. See the exact pinned
+\href{https://github.com/TauCetiProject/TauCeti/blob/1a573226a3d9f2c460a6cea6ff3cf2dc82b6a2a3/TauCeti/Algebra/Lie/GeneralLinear/CAR/HighestWeight.lean#L142-L244}{product and PBW nonvanishing}
+and
+\href{https://github.com/TauCetiProject/TauCeti/blob/1a573226a3d9f2c460a6cea6ff3cf2dc82b6a2a3/TauCeti/Algebra/Lie/GeneralLinear/CAR/HighestWeight.lean#L389-L438}{half-staircase theorems}.
+Nonvanishing needs a field; the highest-vector statement adds invertible
+#{2}. Identifying the subtracted weight with the rational staircase
+requires characteristic zero.}
+
+\p{\citet{Section 2, Example 2.5(1), preprint p. 8}{panyushev2001exterior}
+identifies, over an algebraically closed field of characteristic zero,
+the reduced adjoint spin module with highest weight #{\rho}. The
+subtracted weight above is exactly that semisimple staircase. The
+added #{(N/2)\operatorname{Tr}} character records the reductive center of
+this normal-ordered left action. This comparison does not attribute the
+selected product or the full left-regular CAR module to Panyushev, and
+it makes no irreducibility or whole-module decomposition claim.}
