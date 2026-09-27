@@ -1,0 +1,92 @@
+\import{fcap-macros}
+\meta{agent-authored}{true}
+
+\tag{fcap}
+\tag{clifford}
+\tag{draft}
+
+\taxon{Proposition}
+\title{Finite blade coordinates refine Clifford multiplication}
+
+\p{Retain the orthogonal #{R}-basis #{b:I\to M} and the inverse of #{2}
+from the preceding theorem. Let #{\mathcal C} be the #{R}-module of finitely
+supported coefficient families #{c=(c_s)} indexed by finite subsets of #{I},
+and let #{\delta_s} be its standard coordinate vectors. Define a bilinear
+product by the structure constants
+
+##{\delta_s\ast\delta_t
+=k(s,t)\delta_{s\mathbin{\triangle}t}.}
+
+Equivalently, for every finite subset #{u},
+
+##{(c\ast d)_u
+=\sum_{\substack{s\in\operatorname{supp}(c),\ t\in\operatorname{supp}(d)\\
+s\mathbin{\triangle}t=u}}
+c_s d_t k(s,t).}
+
+The sum and the resulting support are finite, even when #{I} is infinite.}
+
+\p{Let
+
+##{\eta(c)=\sum_s c_sE_s,\qquad
+\operatorname{enc}=\eta^{-1}.}
+
+The transported-basis identification in the preceding theorem makes #{\eta}
+a linear equivalence, and its multiplication refinement is
+
+##{\eta(c\ast d)=\eta(c)\eta(d),\qquad
+\operatorname{enc}(xy)
+=\operatorname{enc}(x)\ast\operatorname{enc}(y).}
+
+To prove the first equality, expand the two finite sums, apply the blade
+product to each pair, and regroup by symmetric difference. The second follows
+by applying #{\eta^{-1}}. Thus the displayed structure constants, rather than
+an implicit transport definition, determine the coordinate product.}
+
+\p{For example, work over #{\mathbb Q} with ordered indices #{0<1<2} and
+diagonal values #{(q_0,q_1,q_2)=(0,2,-3)}. The formula gives
+
+##{\begin{aligned}
+E_{\{0,2\}}E_{\{1,2\}}&=3E_{\{0,1\}},&
+E_{\{1,2\}}E_{\{0,2\}}&=-3E_{\{0,1\}},\\
+E_{\{0,1\}}E_{\{0,2\}}&=0,&
+E_{\{1,2\}}^2&=6.
+\end{aligned}}
+
+The first product has one strict cross inversion, the second has two, and the
+third retains the repeated radical factor #{q_0=0}. Also
+
+##{(\delta_{\{0,2\}}+2\delta_{\{0,1\}})\ast\delta_{\{1,2\}}
+=3\delta_{\{0,1\}}+4\delta_{\{0,2\}}.}
+
+This matches
+#{(E_{\{0,2\}}+2E_{\{0,1\}})E_{\{1,2\}}}. Nonzero basis blades remain
+basis vectors although their products can vanish.}
+
+\p{Orthogonality is essential to the symmetric-difference rule. Over
+#{\mathbb Q}, take
+#{Q(xe_0+ye_1)=x^2+xy+y^2}. Then #{B_Q(e_0,e_1)=1} and
+
+##{T_Q(\iota_Q(e_0)\iota_Q(e_1))
+=e_0\wedge e_1+\frac12.}
+
+The correction is the half-polar value. The general construction in
+\ref{fcap-0003} already gives #{T_Q} as a linear equivalence; this example
+shows directly that it is not an algebra equivalence. The contraction and
+change-of-form recurrences in
+\citet{8.4, (8.54)--(8.55), p. 106}{wieser2024formalizing}
+give the same sign and normalization.}
+
+\p{The ascending-basis theorem and change-of-form maps in
+\citet{Theorem 2, p. 3, and Theorems 34--35, pp. 55--56}{grinberg2016clifford}
+corroborate the ordered basis and orthogonal transport. The latter is the
+specialization with symmetric half-polar form #{B_Q/2}; an arbitrary
+nonsymmetric form with the same diagonal need not define this transport.
+Wieser's exterior equivalence likewise assumes an inverse of #{2}
+\citet{9.3.5, p. 120}{wieser2024formalizing}.}
+
+\p{The displayed finite formula is a mathematical coordinate refinement.
+The currently public FCAP basis transport is noncomputable and does not expose
+an executable coordinate type, multiplication kernel, or encode/decode
+product theorem. Those declarations, together with any fixed finite-slot or
+floating-point contract, remain a separate implementation step.}

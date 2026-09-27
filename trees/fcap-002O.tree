@@ -1,0 +1,63 @@
+\import{fcap-macros}
+\meta{agent-authored}{true}
+
+\tag{fcap}
+\tag{clifford}
+\tag{draft}
+
+\taxon{Theorem}
+\title{Strict-inversion multiplication of orthogonal blades}
+
+\p{Let #{R} be a commutative ring, #{M} an #{R}-module, #{Q} a quadratic
+form on #{M}, and #{I} a linearly ordered type. Suppose
+#{b_i\in M} is a family satisfying
+#{B_Q(b_i,b_j)=0} whenever #{i\ne j}. For a
+finite subset #{s\subset I}, let #{E_s} be the product of the generators
+#{\iota_Q(b_i)} in strictly increasing order, with #{E_\varnothing=1}. Put
+
+##{q_i=Q(b_i),\qquad
+N(s,t)=\#\{(i,j)\in s\times t:i>j\}.}
+
+##{k(s,t)=(-1)^{N(s,t)}\prod_{i\in s\cap t}q_i.}
+
+If #{\operatorname{sc}:R\to\Cl(Q)} is the central scalar map, then
+
+##{E_sE_t=\operatorname{sc}(k(s,t))E_{s\mathbin{\triangle}t}.}
+
+This identity needs no basis, field, nondegeneracy, inverse of #{2}, or
+invertibility of the #{q_i}. In particular, zero and zero-divisor metric
+factors remain in the formula.}
+
+\p{Indeed, stably sort the concatenation of the increasing words for #{s}
+and #{t}. Each strict cross inversion #{i>j} exchanges two distinct
+orthogonal generators and contributes one minus sign. Equal indices are not
+inversions. After sorting, the two copies of every #{i\in s\cap t} are
+adjacent and collapse by #{\iota_Q(b_i)^2=\operatorname{sc}(q_i)}. The
+unpaired increasing indices are exactly #{s\mathbin{\triangle}t}. No step
+divides or cancels a scalar
+\leanref/tauceti{CliffordAlgebra.prod_map_ι_mul_ι_of_forall_isOrtho}
+\leanref/tauceti{CliffordAlgebra.prod_map_ι_sq_scalar}.}
+
+\p{Now additionally suppose that #{b} is an #{R}-basis and that #{2} is
+invertible in #{R}. The increasing list attached to #{s} is pairwise
+orthogonal, so \ref{fcap-0006} identifies its Clifford product with the
+corresponding exterior monomial under #{T_Q}. Consequently
+
+##{E_s=B_{Q,b}(s),}
+
+where #{B_{Q,b}} is the particular transported exterior basis of
+\ref{fcap-0003}. This uses a supplied orthogonal basis; it does not assert
+that every quadratic form over every ring admits one.}
+
+\p{Chevalley's ordered-monomial argument starts from
+#{x^2=Q(x)} and #{xy+yx=B_Q(x,y)}
+\citet{II.1.1--2, pp. 39--40}{chevalley1954algebraic}.
+\citet{Theorem 2 and Definition 4, p. 3}{grinberg2016clifford}
+gives the ascending finite-subset basis for finite free modules over a
+commutative ring, while
+\citet{2.1.2, (2.4) and Table 2.1, p. 7}{wieser2024formalizing}
+checks adjacent swaps and repeated squares in Euclidean three-space. Wieser's
+dot product is #{B_Q/2}, and his cyclic slot #{e_ze_x} is the negative of our
+increasing slot #{e_xe_z}. The strict inversion count and arbitrary diagonal
+factors above synthesize these calculations without importing that cyclic
+convention.}
