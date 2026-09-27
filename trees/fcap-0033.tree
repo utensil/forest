@@ -1,0 +1,88 @@
+\import{fcap-macros}
+\meta{agent-authored}{true}
+
+\tag{fcap}
+\tag{spin}
+\tag{representation-theory}
+
+\taxon{Proposition}
+\title{Complex Spin in dimension five is the symplectic group on spinors}
+
+\p{Let #{V=W\oplus\mathbb Cz\oplus W'} be a five-dimensional complex
+quadratic space with a supplied nondegenerate polarization, where
+#{\dim W=2}, #{Q(z)=1}, and #{\rho(z)=\alpha}. On
+#{S=\bigwedge W}, use the ordered basis
+
+##{(1,e_1\wedge e_2,e_1,e_2).}
+
+Define
+
+##{\langle s,t\rangle=
+[e_1\wedge e_2]\bigl(\operatorname{rev}_{\wedge}(s)\wedge t\bigr).}
+
+Its matrix is #{\Omega=\operatorname{diag}(J,J)}, where
+#{J=\left(\begin{smallmatrix}0&1\\-1&0\end{smallmatrix}\right)}.
+The pairing preserves exterior parity, so parity itself is self-adjoint.
+Each creation operator and each polar-dual contraction operator is
+self-adjoint as well. Consequently the faithful
+even Clifford equivalence from \ref{fcap-002W} takes reversal to
+
+##{A\longmapsto A^{\dagger}
+=\Omega^{-1}A^{\mathsf T}\Omega}
+
+\leanref/tauceti{TauCeti.SpinPolarizationData.evenCliffordEquivEnd}.
+Reverse norm one is therefore exactly the symplectic equation
+#{A^{\mathsf T}\Omega A=\Omega}.}
+
+\p{This norm calculation alone does not yet prove membership in the
+vector-generated Spin group. The five vector operators
+
+##{c_1,\ c_2,\ a_1,\ a_2,\ \alpha}
+
+are linearly independent, traceless, and #{\Omega}-self-adjoint. The
+self-adjoint subspace of #{M_4(\mathbb C)} has dimension six, and its
+trace-zero part has dimension five because #{\operatorname{tr}(I)=4}.
+Hence the Clifford image of the vector space is exactly
+
+##{\rho(V)=
+\{T:T^{\dagger}=T,\ \operatorname{tr}(T)=0\}.}
+
+Conjugation by every #{A\in Sp_{\Omega}(4,\mathbb C)} preserves this
+subspace: symplectic conjugation preserves the adjoint condition, and
+trace is conjugation-invariant.}
+
+\p{The odd Clifford action is injective on the vector subspace. More
+generally, if an odd Clifford value #{y} acts by zero, then #{zy} is
+even and acts by zero. Faithfulness of the even action and invertibility
+of #{z} give #{y=0}. Thus preservation of the displayed matrix subspace
+lifts to preservation of #{V} inside the Clifford algebra.}
+
+\p{For #{A\in Sp_{\Omega}(4,\mathbb C)}, let #{x} be its unique
+preimage under the even Clifford equivalence. The adjoint equation gives
+#{\operatorname{rev}(x)x=1}, while the preceding calculation proves
+#{xVx^{-1}=V}. The carrier-completion argument of \ref{fcap-0032} now places
+#{x} in actual Spin. Conversely, every Spin element has symplectic
+matrix because its reverse norm is one. These assignments are inverse
+group maps, and the chosen exterior basis is the module intertwiner:
+
+##{\Spin_5(\mathbb C)\simeq Sp_{\Omega}(4,\mathbb C),
+\qquad S\simeq\mathbb C^4.}}
+
+\p{Fulton--Harris state the same group and standard spin-module
+identification
+\citet{Exercise 20.39, p. 311}{fulton2004representation}.
+Goodman--Wallach independently write the target as #{Sp(2,\mathbb C)},
+the rank-two symplectic group on a four-dimensional complex space
+\citet{Section 6.3.3, Exercise 1, p. 322}{goodman2009symmetry}.
+The trace-zero normalization calculation supplies the actual group
+inverse rather than inferring the image from a dimension count. By
+contrast, Meinrenken's #{\Spin(5)=Sp(2)} is the compact quaternionic
+real form
+\citet{Section 3.7.6, pp. 83--84}{meinrenken2013clifford}.}
+
+\p{TauCeti proves that in odd dimension the even Clifford action is an
+equivalence onto the full endomorphism algebra and is faithful
+\leanref/tauceti{TauCeti.SpinPolarizationData.evenCliffordEquivEnd}
+\leanref/tauceti{TauCeti.evenSpinAction_injective}.
+It does not package the invariant alternating form or the group image as
+#{Sp_4}; those calculations are the explicit argument above.}
