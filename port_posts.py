@@ -113,8 +113,8 @@ def convert(tree_id: str, tree_text: str) -> tuple[str, str]:
 
 
 def main() -> None:
-    trees_dir = Path("/Users/utensil/projects/forest/trees")
-    output_dir = Path("/Users/utensil/projects/garden-posts-port/content/posts")
+    trees_dir = Path.home() / "projects/forest/trees"
+    output_dir = Path.home() / "projects/garden-posts-port/content/posts"
     output_dir.mkdir(parents=True, exist_ok=True)
 
     used_slugs: dict[str, str] = {}
