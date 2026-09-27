@@ -6,20 +6,60 @@
 \tag{clifford}
 
 \taxon{Definition}
-\title{Creation, contraction, and the line operator \citet{Section 3.2.2, Proposition 3.5, p. 57}{meinrenken2013clifford}}
-\lean/tauceti{TauCeti.SpinPolarizationData.wedge,TauCeti.SpinPolarizationData.contract,TauCeti.SpinPolarizationData.lineOperator}
+\title{The three polarized Clifford operators}
+\lean/tauceti{TauCeti.SpinPolarizationData.wedge,TauCeti.SpinPolarizationData.contract,TauCeti.SpinPolarizationData.lineOperator,TauCeti.SpinPolarizationData.cliffordOperator}
 
-\p{For #{x\in W}, creation is exterior multiplication
+\p{Let #{P} be polarization data as in \ref{fcap-001H}, over a commutative
+ring #{K}, and set #{S=\bigwedge_K W}. For #{x\in W}, creation is exterior
+multiplication
 
 ##{\varepsilon_x(s)=x\wedge s.}
 
-For #{y\in W'}, contraction is the degree-#{-1} operator
-#{\iota_y} associated with the functional
-#{x\mapsto B_Q(x,y)}. Finally, if #{z\in L}, its operator is
+For #{y\in W'}, let #{\varphi_y(x)=B_Q(x,y)}. Annihilation is contraction
+against this functional,
+
+##{a_y(s)=\iota_{\varphi_y}(s).}
+
+If #{z\in L}, its operator is
 
 ##{\lambda_z=\ell(z)\,\alpha,}
 
-where #{\alpha} is parity: it is #{+1} on even exterior degree and #{-1}
-on odd exterior degree. Chevalley's formulas identify the first two
-operators as left Clifford multiplication on the minimal ideal model
-\citet{II.2.2, pp. 43--44}{chevalley1954algebraic}.}
+where #{\alpha(s)=(-1)^r s} for homogeneous #{s\in\bigwedge^r W}. The
+Clifford operator attached to the decomposed vector #{v=x+y+z} is therefore
+
+##{c(v)=\varepsilon_x+a_y+\lambda_z.}}
+
+\p{These symbols separate three maps that sources often denote similarly.
+The canonical generator map is #{\iota_Q:V\to\Cl(Q)}; the representation
+then satisfies
+
+##{\rho(\iota_Q(x))=\varepsilon_x,\qquad
+\rho(\iota_Q(y))=a_y,\qquad
+\rho(\iota_Q(z))=\lambda_z.}
+
+Thus contraction is an operator on #{S}, not another use of the symbol for
+the Clifford generator. The normalization and source dictionary are fixed in
+\ref{fcap-0027}.}
+
+\p{Chevalley obtains creation and contraction from left multiplication on a
+minimal ideal: one totally singular summand acts by exterior multiplication,
+and the complementary summand by antiderivations
+\citet{II.2.1--II.2.2, pp. 42--44}{chevalley1954algebraic}. Meinrenken's
+Lagrangian-complement construction gives the same pair as
+#{\varepsilon(\mu)+\iota(v)}
+\citet{Section 3.2.2, Proposition 3.5, p. 57}{meinrenken2013clifford}.
+Fulton--Harris independently writes the two actions as exterior multiplication
+and derivation, with the derivation paired by their anticommutator form
+\citet{Section 20.1, Lemma 20.9 and (20.11), pp. 304--305}{fulton2004representation}.
+Fulton--Harris and Goodman--Wallach extend the model in odd dimension by
+sending a normalized orthogonal generator to parity
+\citet{Lemma 20.16, p. 306}{fulton2004representation}, and
+\citet{Theorem 6.1.3, proof, p. 305}{goodman2009symmetry}. TauCeti packages
+this last step as the supplied coordinate #{\ell:L\to K}, so that every
+#{z\in L} acts by #{\ell(z)\alpha}. Chevalley's cited result is the field case
+of maximal index; Meinrenken assumes a field of characteristic different from
+two, a split form, and a chosen Lagrangian complement; Fulton--Harris and
+Goodman--Wallach work with finite-dimensional nondegenerate complex spaces
+and chosen maximal isotropics. Once #{P} is
+supplied, the four displayed TauCeti operators require no additional field,
+finite-dimensionality, nondegeneracy, or division-by-two hypothesis.}

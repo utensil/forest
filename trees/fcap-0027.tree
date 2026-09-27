@@ -1,0 +1,61 @@
+\import{fcap-macros}
+\meta{agent-authored}{true}
+
+\tag{fcap}
+\tag{spin}
+\tag{clifford}
+
+\taxon{Convention}
+\title{Clifford generators and polarized operators}
+
+\p{Let #{Q} be a quadratic form on a module #{V} over a commutative ring #{K}.
+Write
+
+##{B_Q(u,v)=Q(u+v)-Q(u)-Q(v)}
+
+for its unhalved polar form, and reserve #{\iota_Q:V\to\Cl(Q)} for the
+canonical Clifford generator map. Then
+
+##{\iota_Q(u)\iota_Q(v)+\iota_Q(v)\iota_Q(u)
+=B_Q(u,v)1.}
+
+If #{2} is invertible, write #{b_Q=\tfrac12B_Q}; the same relation is then
+#{\{\iota_Q(u),\iota_Q(v)\}=2b_Q(u,v)1}. No use of #{b_Q} is made when
+division by two is unavailable.}
+
+\p{For polarization data #{V\simeq(W\oplus W')\oplus L} and
+#{S=\bigwedge_K W}, the definitions are in \ref{fcap-001I}. Write
+#{\varepsilon_x:S\to S} for creation,
+#{a_y=\iota_{\varphi_y}:S\to S} for contraction,
+#{\alpha:S\to S} for parity, #{\lambda_z:S\to S} for the orthogonal-line
+action, and #{c(v):S\to S} for the assembled Clifford operator.
+
+In particular,
+
+##{a_y\varepsilon_x+\varepsilon_xa_y
+=B_Q(x,y)\operatorname{id}_S.}
+
+This is the normalization of
+\leanref/tauceti{TauCeti.SpinPolarizationData.contract_wedge}; the assembled
+square #{c(v)^2=Q(v)\operatorname{id}_S} is
+\leanref/tauceti{TauCeti.SpinPolarizationData.cliffordOperator_sq}. The
+contracted notation #{\iota_y} in \ref{fcap-001J} and \ref{fcap-001P} is a
+legacy alias for #{a_y=\iota_{\varphi_y}}; it does not denote the generator
+map #{\iota_Q}.}
+
+\p{The source conventions translate as follows. Fulton--Harris use a
+symmetric bilinear form #{Q_{\mathrm{FH}}} and write the anticommutator as
+#{2Q_{\mathrm{FH}}}; their contraction functional is also
+#{2Q_{\mathrm{FH}}(-,w')}
+\citet{Section 20.1, (20.1), Lemma 20.9 and (20.11), pp. 301, 304--305}{fulton2004representation}.
+Meinrenken likewise starts from #{B} with Clifford relation #{2B} and, after
+choosing #{V=F^*\oplus F}, acts on #{\bigwedge F^*} by creation from #{F^*}
+and contraction from #{F}
+\citet{Section 3.2.1--3.2.2, Proposition 3.5, pp. 55--57}{meinrenken2013clifford}.
+Thus #{Q_{\mathrm{FH}}=B=b_Q} whenever #{b_Q} exists. Goodman--Wallach
+instead name the anticommutator form #{\beta}; under their identification
+#{W_{\mathrm{GW}}^*=W} and #{W_{\mathrm{GW}}=W'}, one has
+#{\beta=B_Q}
+\citet{Definition 6.1.1 and Theorem 6.1.3, proof, pp. 302, 304--305}{goodman2009symmetry}.
+The formulas agree after these substitutions; the different letters do not
+signal different Clifford actions.}
