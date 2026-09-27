@@ -1,0 +1,103 @@
+\import{fcap-macros}
+\meta{agent-authored}{true}
+
+\tag{fcap}
+\tag{spin}
+\tag{representation-theory}
+
+\taxon{Proposition}
+\title{Complex Spin in dimension four is two copies of #{SL_2}}
+
+\p{Let #{V=W\oplus W'} be a split nondegenerate complex quadratic
+space with #{\dim W=2}, and choose polar-dual bases
+#{e_1,e_2} and #{e'_1,e'_2}. Put
+#{S^+=\bigwedge^{\mathrm{even}}W} and
+#{S^-=\bigwedge^{\mathrm{odd}}W}, with ordered bases
+#{(1,e_1\wedge e_2)} and #{(e_1,e_2)}. The paired
+half-spin action from \ref{fcap-002V} gives an algebra equivalence
+
+##{\Phi:\Cl(Q)^0\longrightarrow
+\operatorname{End}(S^+)\times\operatorname{End}(S^-)
+\simeq M_2(\mathbb C)\times M_2(\mathbb C)}
+
+\leanref/tauceti{TauCeti.SpinPolarizationData.evenCliffordEquivProdEnd}.
+The two factors here are the actions on the fixed exterior-parity
+summands, not merely two abstract matrix blocks.}
+
+\p{For exterior spinors define
+
+##{\langle s,t\rangle=
+[e_1\wedge e_2]\bigl(\operatorname{rev}_{\wedge}(s)\wedge t\bigr),}
+
+where the bracket takes the coefficient of #{e_1\wedge e_2}. On each
+displayed half-spin basis its matrix is
+
+##{J=\begin{pmatrix}0&1\\-1&0\end{pmatrix},}
+
+and the two parity summands are orthogonal. Each creation operator and
+each polar-dual contraction operator is self-adjoint for this pairing,
+so Clifford reversal becomes the symplectic
+adjoint on each factor. Consequently, if #{\Phi(x)=(A,D)}, then
+
+##{\Phi(\operatorname{rev}(x))
+=\bigl(J^{-1}A^{\mathsf T}J,J^{-1}D^{\mathsf T}J\bigr)
+=\bigl(\operatorname{adj}(A),\operatorname{adj}(D)\bigr).}
+
+Therefore #{\operatorname{rev}(x)x=1} is equivalent to
+#{\det A=\det D=1}.}
+
+\p{We use one carrier-completion observation. In any positive-dimensional
+nondegenerate complex quadratic space, suppose an even Clifford unit #{u}
+satisfies #{\operatorname{rev}(u)u=1} and is already known to normalize
+the vector subspace. Its conjugation action is an isometry, so choose a
+vector-generated Lipschitz unit with the same orthogonal action
+\leanref/tauceti{CliffordAlgebra.lipschitzToOrthogonal_surjective}.
+The quotient of that lift and #{u} satisfies #{\alpha(z)v=vz}; graded
+centrality makes it a nonzero scalar
+\leanref/tauceti{CliffordAlgebra.exists_eq_algebraMap_of_involute_mul_ι_eq_ι_mul}.
+Such a scalar unit is Lipschitz
+\leanref/tauceti{CliffordAlgebra.unitsMap_algebraMap_mem_lipschitzGroup}.
+Hence #{u} is Lipschitz, even, and reverse-norm one, and the exact carrier
+criterion of \ref{fcap-0028} puts it in Spin.}
+
+\p{The forward restriction is thus a group homomorphism
+
+##{\Spin(Q)\longrightarrow SL(S^+)\times SL(S^-).}
+
+Conversely, take #{(A,D)\in SL_2(\mathbb C)\times SL_2(\mathbb C)} and
+let #{x=\Phi^{-1}(A,D)}. The adjugate calculation makes #{x} an even
+Clifford unit with #{\operatorname{rev}(x)x=1}. It remains to prove that
+this algebraic preimage lies in the actual vector-generated Spin group.}
+
+\p{For #{v\in V}, set #{y=xvx^{-1}}. It is odd and reversal-fixed:
+
+##{\operatorname{rev}(y)
+=\operatorname{rev}(x^{-1})v\operatorname{rev}(x)=y.}
+
+In an orthogonal-basis Clifford expansion in dimension four, the odd
+part has only grades one and three. Reversal has signs #{+1} and #{-1}
+on those grades, so #{y\in V}. Moreover #{y^2=Q(v)1}; conjugation hence
+induces an isometry of #{(V,Q)}. The carrier-completion observation now
+places #{x} in the actual Spin group.}
+
+\p{The restriction and #{(A,D)\mapsto\Phi^{-1}(A,D)} are now inverse
+group maps. Hence
+
+##{\Spin_4(\mathbb C)\simeq
+SL_2(\mathbb C)\times SL_2(\mathbb C),}
+
+and the two half-spin representations are the two standard
+two-dimensional modules.
+\citet{Exercise 20.39, p. 311}{fulton2004representation}
+state this group-and-module identification.
+\citet{Section 6.3.3, Exercise 1, p. 322}{goodman2009symmetry}
+independently give the same complex group. The displayed pairing, adjugate
+calculation, and carrier argument provide the inverse.}
+
+\p{\citet{Section 3.7.6, p. 83}{meinrenken2013clifford}
+identifies the compact real form as #{\Spin(4)=SU(2)\times SU(2)}. Its
+quaternion-pair model is \ref{fcap-002K}, while the Lorentzian real form
+#{SL_2(\mathbb C)} is \ref{fcap-002L}; neither replaces the split complex
+proof above. TauCeti formalizes the paired half-spin algebra and matrix maps
+\leanref/tauceti{TauCeti.SpinPolarizationData.evenCliffordEquivProdMatrix},
+but not the group image or actual-carrier inverse proved here.}

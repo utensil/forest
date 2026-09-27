@@ -1,0 +1,62 @@
+\import{fcap-macros}
+\meta{agent-authored}{true}
+
+\tag{fcap}
+\tag{spin}
+\tag{representation-theory}
+
+\taxon{Proposition}
+\title{Complex Spin in dimension three is #{SL_2} on the spin module}
+
+\p{Let #{V} be a three-dimensional complex quadratic space with a
+supplied nondegenerate polarization
+
+##{V=\mathbb C w\oplus\mathbb C z\oplus\mathbb C w',\qquad
+B_Q(w,w')=1,\quad Q(z)=1,}
+
+and choose the line coordinate so that #{\rho(z)=\alpha}, exterior
+parity. On #{S=\bigwedge(\mathbb Cw)}, use the ordered basis
+#{(1,w)}. The even Clifford action then gives a homomorphism
+
+##{\Spin(Q)\longrightarrow SL(S)\simeq SL_2(\mathbb C).}
+
+Reversal is matrix adjugation in this basis, so reverse norm one forces
+determinant one. This is the determinant calculation behind the
+dimension-three case; the target is the complex group, rather than the
+compact real unit-quaternion group of \ref{fcap-002H}.}
+
+\p{There is a concrete inverse. For #{c\in\mathbb C}, the two products
+
+##{(z+cw)z,\qquad z(z+cw')}
+
+are products of two norm-one vectors and hence are actual Spin elements.
+Creation, contraction, and parity from \ref{fcap-002W} give their matrices
+
+##{I+cE_{21},\qquad I+cE_{12}}
+
+in the ordered basis #{(1,w)}. These elementary transvections generate
+#{SL_2(\mathbb C)}. Writing a target matrix as a word in them and replacing
+each factor by its displayed lift gives a preimage; faithfulness of the
+even Clifford action makes the result independent of the chosen word.
+Thus restriction and this lift are inverse group maps, and the same basis
+intertwines the spin action with the standard two-dimensional module.}
+
+\p{TauCeti proves this exact group-and-module statement over any field
+with #{2\ne0}, given polarization data and dimension three
+\leanref/tauceti{TauCeti.exists_spinGroup_mulEquiv_specialLinearGroup_and_spinRep_equiv_stdSLRep_of_finrank_eq_three}.
+Its chosen finite basis may reindex the two exterior coordinates; the
+formulas above use the stated basis #{(1,w)} and the corresponding basis
+change. The theorem needs no additional separable-closure hypothesis once
+the polarization is supplied.}
+
+\p{Fulton--Harris identify #{\Spin_3(\mathbb C)} with
+#{SL_2(\mathbb C)} and distinguish it from the compact real form
+#{SU(2)}
+\citet{Section 10.3, pp. 143--144; Exercise 20.39, p. 311}{fulton2004representation}.
+Goodman--Wallach independently list the same complex exceptional
+isomorphism
+\citet{Section 6.3.3, Exercise 1, p. 322}{goodman2009symmetry}.
+Their statements name the target; the two Clifford products above supply
+the coordinate lifts used here. Meinrenken's #{\Spin(3)=SU(2)} is instead
+the compact real comparison
+\citet{Section 3.7.6, p. 83}{meinrenken2013clifford}.}
