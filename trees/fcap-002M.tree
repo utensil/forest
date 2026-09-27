@@ -1,0 +1,105 @@
+\import{fcap-macros}
+\meta{agent-authored}{true}
+
+\tag{fcap}
+\tag{spin}
+\tag{clifford}
+
+\taxon{Proposition}
+\title{Eichler transvections have additive Spin lifts}
+
+\p{Let #{K} be a field in which #{2} is invertible, let #{V} be a
+#{K}-space, and let #{Q} be nondegenerate. Write #{B_Q} for the unhalved
+polar form and #{\widehat v=\iota_Q(v)} for a Clifford generator. Suppose
+
+##{Q(u)=0,\qquad B_Q(u,w)=0.}
+
+The Eichler transvection and its Clifford lift are
+
+##{\begin{aligned}
+E_{u,w}(x)
+ &=x+B_Q(x,u)w-B_Q(x,w)u-Q(w)B_Q(x,u)u,\\
+L_{u,w}&=1+\widehat w\widehat u.
+\end{aligned}}
+
+Then #{L_{u,w}\in\Spin(Q)}, its Spin action is #{E_{u,w}}, and
+
+##{L_{u,w}^{-1}=\operatorname{rev}(L_{u,w})=1-\widehat w\widehat u.}
+
+The formal transformation formula already makes sense over a commutative
+ring and module, without nondegeneracy or invertible #{2}
+\leanref/tauceti{QuadraticMap.transvection_apply}
+\leanref/tauceti{QuadraticMap.transvection_mem_specialOrthogonalGroup}.
+The actual Spin lift uses the field, invertible-two, and nondegeneracy
+hypotheses stated above
+\leanref/tauceti{CliffordAlgebra.coe_spinTransvection}
+\leanref/tauceti{CliffordAlgebra.coe_spinToSpecialOrthogonal_spinTransvection}.}
+
+\p{Indeed, put #{N=\widehat w\widehat u}. The Clifford relations give
+
+##{\begin{gathered}
+N^2=0,\qquad \operatorname{rev}(N)=-N,\\
+N\widehat x-\widehat xN
+ =B_Q(x,u)\widehat w-B_Q(x,w)\widehat u,\\
+N\widehat xN=Q(w)B_Q(x,u)\widehat u.
+\end{gathered}}
+
+Thus expansion of #{(1+N)\widehat x(1-N)} gives exactly the displayed
+formula, including its negative quadratic term, and proves reverse norm one.
+Actual membership in the vector-generated carrier is a separate point. If
+#{Q(w)\ne0}, the explicit factorization is
+
+##{1+\widehat w\widehat u
+=\widehat{\frac{w}{Q(w)}}\,
+ \widehat{\bigl(w+Q(w)u\bigr)},}
+
+and the two quadratic values multiply to #{1}. If #{Q(w)=0} and
+#{w\notin Ku}, nondegeneracy supplies #{x\perp u} with
+#{b=B_Q(w,x)\ne0}. For
+
+##{a=x+\frac{b-Q(x)}{b}w}
+
+one has #{Q(a)=b}, #{Q(w+a)=2b}, and
+#{L_{u,w}=L_{u,w+a}L_{u,-a}}, reducing to the nonisotropic case. If
+#{w\in Ku}, the lift is #{1}. This is the algebraic carrier argument behind
+the linked formal construction; it needs no finite-dimensionality.}
+
+\p{For #{w,w'\in u^\perp}, the cross term
+#{(\widehat w\widehat u)(\widehat{w'}\widehat u)} vanishes. Hence
+
+##{L_{u,w+w'}=L_{u,w}L_{u,w'},\qquad
+L_{u,-w}=L_{u,w}^{-1},\qquad
+L_{u,w+cu}=L_{u,w}.}
+
+The same equations hold after projection to the Eichler transformations.
+Thus the lifts form a homomorphism
+
+##{u^{\perp}/Ku\longrightarrow\Spin(Q)}
+
+which commutes with the projection to #{SO(Q)}; when #{u\ne0}, it is
+injective
+\leanref/tauceti{CliffordAlgebra.spinTransvection_add}
+\leanref/tauceti{CliffordAlgebra.spinTransvection_add_smul}
+\leanref/tauceti{CliffordAlgebra.spinToSpecialOrthogonal_comp_spinTransvectionHom}
+\leanref/tauceti{CliffordAlgebra.spinTransvectionHom_injective}.
+The domain is #{u^{\perp}/Ku}, not all of #{V/Ku}; for #{u=0} the family is
+trivial. If #{V} is additionally finite-dimensional, these transformations
+have trivial spinor norm, as predicted by \ref{fcap-0023}
+\leanref/tauceti{CliffordAlgebra.spinorNorm_transvection}.}
+
+\p{Chevalley treats the common totally singular case
+#{Q(u)=Q(w)=B_Q(u,w)=0}: his finite exponential is #{1+\widehat w\widehat u}
+and his conjugation formula is the displayed action with its quadratic term
+zero
+\citet{III.1.7, pp. 73--74}{chevalley1954algebraic}.
+This passage does not state the arbitrary-#{Q(w)} formula. Meinrenken's
+quantization of the bivector #{w\wedge u} is #{\widehat w\widehat u}; his
+commutator theorem and exponential Spin comparison recover the full formula
+over finite-dimensional nondegenerate real or complex spaces
+\citet{Section 2.2.10, Theorem 2.1 and Proposition 2.12, pp. 39--40}{meinrenken2013clifford}
+\citet{Proposition 3.2, pp. 53--54}{meinrenken2013clifford}.
+Here his symmetric form is the half-polar form
+#{B_M=b_Q=B_Q/2}. Since #{N^2=0}, both the Clifford and vector exponentials
+truncate, and the written polynomial calculation fixes the normalization and
+extends the formula to the stated general field. No claim that every Spin
+element is one exponential is made.}
