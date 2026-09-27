@@ -1,0 +1,113 @@
+\import{fcap-macros}
+\meta{agent-authored}{true}
+
+\tag{fcap}
+\tag{spin}
+\tag{clifford}
+
+\taxon{Proposition}
+\title{Exterior weights give the finite spin characters}
+
+\p{Work over the complex split models and positive systems fixed in the
+preceding type-B and type-D cards. In type #{B_\ell} assume
+#{\ell\geq 1}; in type #{D_\ell} assume #{\ell\geq 4}. For
+#{I\subseteq\{1,\ldots,\ell\}}, put
+
+##{\lambda_I=\tfrac12\left(
+\sum_{i\in I}\epsilon_i-\sum_{i\notin I}\epsilon_i\right).}
+
+By \ref{fcap-0025}, the line #{\mathbb C u_I} has weight #{\lambda_I};
+distinct subsets give distinct weights. Consequently
+
+##{\operatorname{ch}S_{B_\ell}
+=\sum_I e^{\lambda_I}
+=\prod_{i=1}^{\ell}
+\left(e^{\epsilon_i/2}+e^{-\epsilon_i/2}\right),}
+
+and the type-D parity carriers have
+
+##{\operatorname{ch}S_D^+
+=\sum_{\lvert I\rvert\ {\rm even}}e^{\lambda_I},\qquad
+\operatorname{ch}S_D^-
+=\sum_{\lvert I\rvert\ {\rm odd}}e^{\lambda_I}.}
+
+If #{a_i=e^{\epsilon_i/2}} and #{b_i=e^{-\epsilon_i/2}}, sorting the
+product by occupied parity gives
+
+##{\operatorname{ch}S_D^\pm
+=\tfrac12\left[
+\prod_i(a_i+b_i)\ \mathbin{\pm}\ \prod_i(b_i-a_i)\right].}
+
+The order #{b_i-a_i} makes an occupied coordinate contribute the minus
+sign. These are finite sums obtained from the exterior basis, without
+invoking a general character formula.}
+
+\p{The complete half-sum weights above become honest characters on the
+Spin torus. Put
+#{A_i=e_i e_i'}, so its action is #{N_i}. For
+#{t\in\mathbb C^\times}, define
+
+##{g_i(t)=tA_i+t^{-1}(1-A_i)
+=(t e_i+t^{-1}e_i')(e_i+e_i').}
+
+Both vector factors have quadratic value #{1}; the pair criterion
+therefore puts #{g_i(t)} in the actual Spin carrier
+\leanref/tauceti{CliffordAlgebra.ι_mul_ι_mem_spinGroup_of_norm_mul_norm_eq_one}.
+The elements for different coordinates commute, and
+
+##{g_i(t)u_I=
+\begin{cases}t\,u_I,&i\in I,\\t^{-1}u_I,&i\notin I.\end{cases}}
+
+Their vector action scales #{e_i} by #{t^2}, #{e_i'} by #{t^{-2}}, and
+fixes the other coordinates. Thus
+#{g(t_1,\ldots,t_\ell)=\prod_i g_i(t_i)} covers the standard orthogonal
+torus by coordinatewise squaring.}
+
+\p{The kernel of this parameterization is
+
+##{\{(t_i):t_i\in\{1,-1\},\ \prod_i t_i=1\}.}
+
+Indeed, equality of its spinor action with the identity forces
+#{t_i^2=1} by comparing weights that differ in coordinate #{i}, and the
+vacuum weight then forces #{\prod_i t_i=1}. Conversely such a tuple gives
+the actual Clifford scalar #{\prod_i t_i=1}. Thus both implications hold
+directly for the group parameterization. The image contains the scalar
+#{-1}; together with the usual
+#{\{1,-1\}} kernel of #{\Spin\to SO}
+\citet{Proposition 20.28, pp. 308--309}{fulton2004representation},
+this is the full inverse-image torus.}
+
+\p{A Laurent monomial on the parameter torus descends through the
+displayed sign kernel exactly when all its integer exponents have the
+same parity. Relative to the orthogonal coordinates #{x_i=t_i^2}, the
+Spin weight lattice is therefore
+
+##{P=\mathbb Z^\ell\cup
+\left(\mathbb Z+\tfrac12\right)^\ell.}
+
+The complete signed sums #{\lambda_I} lie in #{P}, while an individual
+symbol #{e^{\epsilon_i/2}} need not itself be a character. The orthogonal
+torus has character lattice #{\mathbb Z^\ell}; every spinor half-sum
+takes the scalar #{-1} to #{-1} and hence does not descend to it. In type
+D the adjoint torus has the still smaller root lattice.}
+
+\p{\citet{Corollary 6.3.9, p. 322; Sections 7.1 and 7.2.3,
+pp. 330 and 346}{goodman2009symmetry}
+independently identify complex Spin as algebraically simply connected,
+explain the single-valued square-root torus factors, and identify the
+torus-character lattice with the weight lattice. Those group results
+support the character interpretation. The pinned TauCeti results used
+above are Lie and Clifford statements; no formal integration or
+differentiation comparison is asserted.}
+
+\p{For #{B_2}, the four distinct weights are summarized by
+
+##{\operatorname{ch}S_{B_2}
+=(x^{1/2}+x^{-1/2})(y^{1/2}+y^{-1/2}),}
+
+with highest weight #{(\epsilon_1+\epsilon_2)/2=\omega_2}. For #{D_4},
+the even- and odd-cardinality sums contain eight weights each:
+#{\omega_4=(\epsilon_1+\epsilon_2+\epsilon_3+\epsilon_4)/2} lies in
+#{S^+}, while
+#{\omega_3=(\epsilon_1+\epsilon_2+\epsilon_3-\epsilon_4)/2} lies in
+#{S^-}. This is a finite character check, not a triality claim.}

@@ -1,0 +1,94 @@
+\import{fcap-macros}
+\meta{agent-authored}{true}
+
+\tag{fcap}
+\tag{spin}
+\tag{clifford}
+
+\taxon{Theorem}
+\title{The top exterior word is the type-B spin highest vector}
+
+\p{Let
+#{V=W\oplus W'\oplus\mathbb C z} be a nondegenerate quadratic space of
+dimension #{2\ell+1}, with #{\ell\geq 1}. Assume #{W,W'} are complementary
+polar-dual isotropic spaces, #{z} is orthogonal to both, and #{Q(z)=1}.
+Choose bases #{e_i,e_i'} with #{B_Q(e_i,e_j')=\delta_{ij}} and the plus odd
+action on #{S=\bigwedge W},
+
+##{\rho(\iota_Q(z))=\alpha,}
+
+where #{\alpha} is exterior parity. This sign is part of the choice:
+#{Q(z)=1} alone says only that the line coordinate squares to #{1}. Write
+#{c_i,a_i,N_i,H_i,\epsilon_i} as in \ref{fcap-0025}.}
+
+\p{Choose the positive roots
+
+##{\Phi^+=\{\epsilon_i-\epsilon_j,\ \epsilon_i+\epsilon_j:i<j\}
+\cup\{\epsilon_i:1\leq i\leq\ell\}.}
+
+The chain simple roots use #{E_i=c_i a_{i+1}} and
+#{F_i=c_{i+1}a_i}. At the terminal short root
+#{\alpha_\ell=\epsilon_\ell}, take
+
+##{E_\ell=c_\ell\alpha,\qquad
+F_\ell=\alpha a_\ell,\qquad
+[E_\ell,F_\ell]=2N_\ell-1.}
+
+The matrix short root has a coefficient #{2} because
+#{B_Q(z,z)=2}; the Clifford bivector is nevertheless exactly
+#{e_\ell z}, with no extra factor #{\frac12}
+\leanref/tauceti{TauCeti.SpinPolarizationData.typeBQuadraticEquiv_typeBShortRootGenerator}.
+On an increasing word, the terminal creation or removal sign cancels the
+parity sign, so the short operators insert or remove coordinate #{\ell}
+with coefficient #{1}
+\leanref/tauceti{TauCeti.SpinPolarizationData.typeBSpinRep_shortRootGenerator_apply}
+\leanref/tauceti{TauCeti.SpinPolarizationData.typeBSpinRep_shortNegativeRootGenerator_apply}.}
+
+\p{This convention gives the same flag Borel as in
+\ref{fcap-002X}. For #{i<j}, put
+#{X_{ij}=c_i a_j}, #{Y_{ij}=c_i c_j}, and #{K_i=c_i\alpha}. The chain
+commutators generate every #{X_{ij}}, while
+
+##{[X_{ij},K_j]=K_i,\qquad [K_i,K_j]=-2Y_{ij}.}
+
+Because #{2} is invertible over #{\mathbb C}, the simple chain operators
+and #{K_\ell} generate the root spaces of every positive short and long
+root. They therefore generate the full positive nilradical.}
+
+\p{The top word
+
+##{\Omega_B=e_1\wedge\cdots\wedge e_\ell}
+
+is killed by each positive chain root and by #{E_\ell}, since the relevant
+creation coordinate is already occupied. The chain coroots have
+eigenvalue #{0}, and the terminal coroot #{2N_\ell-1} has eigenvalue
+#{1}. Hence
+
+##{\operatorname{wt}(\Omega_B)
+=\omega_\ell=\tfrac12(\epsilon_1+\cdots+\epsilon_\ell).}
+
+The chain moves together with the terminal toggle connect all exterior
+basis words. As in \ref{fcap-002Y}, the distinct joint #{H_i}-weights
+first project any nonzero invariant subspace onto a basis line; the root
+moves then reach every line. Thus #{S} is the irreducible type-#{B_\ell}
+module #{L(\omega_\ell)}. The short root changes exterior degree, so
+neither #{S^+} nor #{S^-} is a type-B submodule.}
+
+\p{\citet{Proposition 20.20, p. 307}{fulton2004representation}
+independently identifies the odd-dimensional spin representation as the
+irreducible module of highest weight
+#{\frac12(\epsilon_1+\cdots+\epsilon_\ell)}. The preceding short-root and
+nilradical calculations give that conclusion in the fixed FCAP operator
+convention.}
+
+\p{\citet{Proposition 6.2.4, p. 315}{goodman2009symmetry}
+independently gives the same irreducible type-B module and its half-sign
+weights. As in \ref{fcap-0025}, its occupied Cartan sign is opposite ours;
+negating its Cartan axes and positive system gives the displayed highest
+weight. TauCeti formalizes the short and long root actions and the
+integral simple-coroot eigenvalues
+\leanref/tauceti{TauCeti.SpinPolarizationData.typeBSpinRep_longRootGenerator_apply}
+\leanref/tauceti{TauCeti.SpinPolarizationData.spinAction_typeBQuadraticEquiv_typeBSimpleCorootGenerator_basis},
+but the highest-vector, Borel-generation, and irreducibility conclusion
+here is the displayed mathematical synthesis rather than a whole-card
+formal theorem.}
