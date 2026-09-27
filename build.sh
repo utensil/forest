@@ -45,8 +45,18 @@ function prep_wasm {
     lib_path=${4:-$lib_name}
     local hash_file="lib/$lib_path/pkg/.commit_hash"
     local needs_build=false
+    local package_ready=false
 
-    if [ ! -d "lib/$lib_name/.git" ]; then
+    # A CI cache restores only the generated package, not its source checkout.
+    # The pinned commit marker and usable WASM output are sufficient to reuse it.
+    if [ -f "$hash_file" ] && [ "$(cat "$hash_file")" = "$hash" ] \
+        && compgen -G "lib/$lib_path/pkg/*.wasm" > /dev/null; then
+        package_ready=true
+    fi
+
+    if [ "$package_ready" = "true" ]; then
+        echo "Using cached WASM package for $lib_name"
+    elif [ ! -d "lib/$lib_name/.git" ]; then
         # No git repo (stale pkg-only cache restore or first run) — clone fresh
         rm -rf "lib/$lib_name"
         git clone --depth 1 "$url" "lib/$lib_name"
@@ -60,9 +70,9 @@ function prep_wasm {
         needs_build=true
     fi
 
-    if [ ! -d "lib/$lib_path/pkg" ] || [ -z "$(ls -A "lib/$lib_path/pkg")" ]; then
+    if [ "$package_ready" != "true" ] && { [ ! -d "lib/$lib_path/pkg" ] || [ -z "$(ls -A "lib/$lib_path/pkg")" ]; }; then
         needs_build=true
-    elif [ ! -f "$hash_file" ] || [ "$(cat "$hash_file")" != "$hash" ]; then
+    elif [ "$package_ready" != "true" ] && { [ ! -f "$hash_file" ] || [ "$(cat "$hash_file")" != "$hash" ]; }; then
         needs_build=true
     fi
 
@@ -75,7 +85,7 @@ function prep_wasm {
                 return 1
             fi
             [ -d "lib/$lib_path/pkg" ] && echo "$hash" > "$hash_file"
-        else
+        elif [ "$package_ready" != "true" ]; then
             echo "Using cached WASM package for $lib_name"
         fi
     else
@@ -293,8 +303,9 @@ if ! build; then
 fi
 echo
 
-#if environment variable CI or LIZE is set
-if [ -n "$CI" ] || [ -n "$LIZE" ]; then
+# Generate the legacy local PDF set only when explicitly requested. CI builds
+# the complete fixture set once in `just verify-pdf-fixtures`.
+if [ -n "${LIZE:-}" ]; then
     echo "⭐ Rebuilding LaTeX"
     time lize
     echo

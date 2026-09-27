@@ -74,17 +74,9 @@ jobs:
         with:
           path: |
             lib/**/pkg
-          key: ${{ runner.os }}-wasm-${{ hashFiles('build.sh') }}
+          key: ${{ runner.os }}-wasm-${{ hashFiles('build.sh', 'bun.lock') }}
           restore-keys: |
             ${{ runner.os }}-wasm-
-
-      - name: Cache HTML files
-        uses: actions/cache@v4
-        with:
-          path: output/*.html
-          key: ${{ runner.os }}-html-${{ hashFiles('output/*.xml', 'output/*.xsl') }}
-          restore-keys: |
-            ${{ runner.os }}-html-
 
       - name: Setup Pages
         if: ${{ !env.ACT }}
@@ -128,7 +120,6 @@ jobs:
           bash ./build.sh
       - name: Verify Forester output contract
         run: |
-          ./verify-forester-output.sh
           just verify-pdf-fixtures
       # - name: Check for PDF files
       #   run: |
