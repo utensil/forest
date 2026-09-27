@@ -8,29 +8,23 @@
 \taxon{Remark}
 \title{From real recurrences to the residue table}
 
-\p{Hyperbolic reduction determines the matrix factor coming from matched
-positive and negative axes. It leaves a one-sided algebra #{\Cl_{r,0}} or
-#{\Cl_{0,r}}. The signature-switch recurrence of \ref{fcap-001X} provides a
-second move, and \ref{fcap-0015} fixes the first real, complex, quaternionic,
-and matrix entries. The one-sided recurrences now close this calculation.}
+\p{The mixed #{(1,1)} recurrence removes matched axes but leaves a one-sided
+algebra #{\Cl_{r,0}} or #{\Cl_{0,r}}, which it cannot classify. Together with
+the signature switch in \ref{fcap-001X} and initial entries in
+\ref{fcap-0015}, the two recurrences below complete the calculation.}
 
-\p{The quaternion recurrence
+\p{The two one-sided recurrences are
 
-##{\Cl_{p,q+2}\simeq
-\Cl_{q,p}\otimes_{\mathbb R}\mathbb H,}
+##{\begin{aligned}
+\Cl_{p,q+2}&\simeq\Cl_{q,p}\otimes_{\mathbb R}\mathbb H,\\
+\Cl_{p+8,q}&\simeq\Cl_{p,q}\otimes_{\mathbb R}M_{16}(\mathbb R).
+\end{aligned}}
 
-is the actual real algebra equivalence
-\leanref/tauceti{TauCeti.realCliffordQuaternionRecurrenceEquiv}.
-The eight-step result gives existence of the equivalence
-
-##{\Cl_{p+8,q}\simeq
-\Cl_{p,q}\otimes_{\mathbb R}M_{16}(\mathbb R).}
-
-Its exact marker is
+The first line is the actual equivalence
+\leanref/tauceti{TauCeti.realCliffordQuaternionRecurrenceEquiv}. For the
+second, the formal theorem supplies existence
 \leanref/tauceti{TauCeti.nonempty_realCliffordEightPeriodicityEquiv}.}
 
-\p{The residue-indexed mod-eight algebra classification is now formalized
-as \leanref/tauceti{TauCeti.realClifford_classification}. The mixed
-#{(1,1)} recurrence alone only removes matched axes; it cannot classify
-the one-sided remainder. Lawson--Michelsohn give the classical table in
+\p{They yield the residue-indexed mod-eight classification
+\leanref/tauceti{TauCeti.realClifford_classification}. The classical table is
 \citet{I.4, Theorem 4.3 and Tables I--II, pp. 27--29}{lawson2016spin}.}

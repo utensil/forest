@@ -1,0 +1,65 @@
+\import{fcap-macros}
+\meta{agent-authored}{true}
+
+\tag{fcap}
+\tag{spin}
+\tag{clifford}
+
+\taxon{Example}
+\title{The compact four-dimensional Spin group is a pair of unit quaternions}
+
+\p{For #{Q_{4,0}=x_0^2+x_1^2+x_2^2+x_3^2}, let
+#{I=e_0e_1e_2e_3}. Then #{I^2=1}, #{\operatorname{rev}(I)=I}, and #{I}
+commutes with the even algebra
+\leanref/tauceti{CliffordAlgebra.prod_map_ι_sq_scalar}
+\leanref/tauceti{CliffordAlgebra.prod_map_ι_mul_ι_of_even_length}.
+Let #{H_0} be the quaternion subalgebra with basis
+#{1,e_0e_1,e_0e_2,e_1e_2}, and choose
+#{\theta_0:H_0\simeq\mathbb H} with the quaternion axes of
+\ref{fcap-002H}:
+
+##{e_0e_1\longmapsto-k,\qquad
+e_0e_2\longmapsto i,\qquad
+e_1e_2\longmapsto j.}
+
+The eight even basis monomials show uniquely that every even value is
+#{u+Iv} with #{u,v\in H_0}. Centrality and #{I^2=1} make
+
+##{\Phi(u+Iv)
+=\bigl(\theta_0(u)+\theta_0(v),\theta_0(u)-\theta_0(v)\bigr)}
+
+an algebra map. Its inverse is
+
+##{(q_+,q_-)
+\longmapsto
+\theta_0^{-1}\left(\frac{q_++q_-}{2}\right)
++I\theta_0^{-1}\left(\frac{q_+-q_-}{2}\right).}
+
+These formulas prove both multiplicativity and bijectivity.}
+
+\p{Reversal becomes quaternion conjugation in each factor. If
+#{\mathbb H^1=\{q\in\mathbb H:\bar q q=1\}} and
+#{\Phi(x)=(q_+,q_-)}, then
+
+##{\Phi(\operatorname{rev}(x)x)
+=(\bar q_+q_+,\bar q_-q_-),\qquad
+\Spin(Q_{4,0})\simeq\mathbb H^1\times\mathbb H^1.}
+
+The forward restriction lands in the displayed product. Conversely, the
+written algebra inverse sends a pair of unit quaternions to an even unit of
+reverse norm one, and the dimension-four carrier lemma places it in the
+actual Spin group. No connectedness or covering-space argument is used.}
+
+\p{Gallier computes the same #{u+Iv\mapsto(u+v,u-v)} decomposition, norm
+equations, and compact group product using negative-square compact generators
+\citet{pp. 29--30}{gallier2014clifford}. Lawson--Michelsohn independently
+give the compact even-algebra reduction
+\citet{I.3, Theorem 3.7, pp. 23--24}{lawson2016spin}
+and the #{\mathbb H\oplus\mathbb H} entry
+\citet{I.4, Table I, p. 28}{lawson2016spin}.
+Their relation #{v^2=-q(v)} and the index translation of \ref{fcap-0011}
+account for the sign change. The axis labels above are those fixed in
+\ref{fcap-002H},
+not labels imported from either source. Finally, #{(1\pm I)/2} are the two
+nonzero complementary central idempotents, so the even center is the split
+algebra #{\mathbb R\oplus\mathbb R}.}

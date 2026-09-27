@@ -1,0 +1,56 @@
+\import{fcap-macros}
+\meta{agent-authored}{true}
+
+\tag{fcap}
+\tag{spin}
+\tag{clifford}
+
+\taxon{Lemma}
+\title{Reverse norm one is the Spin carrier in real dimension four}
+
+\p{Let #{V} be a four-dimensional real vector space and let #{Q} be
+nondegenerate. Suppress the canonical generator map in Clifford products.
+For #{x\in\Cl^{+}(Q)}, the following are equivalent:
+
+##{x\text{ is the Clifford value of an element of }\Spin(Q),
+\qquad \operatorname{rev}(x)x=1.}
+
+The forward implication follows from the exact Spin-carrier description
+\leanref/tauceti{CliffordAlgebra.range_spinGroup_toUnits}.}
+
+\p{Conversely, suppose #{\operatorname{rev}(x)x=1}. Since the Clifford
+algebra is finite-dimensional, the displayed left inverse is also a right
+inverse, so #{x} is a unit and #{x^{-1}=\operatorname{rev}(x)}. For
+#{v\in V}, put #{w=xvx^{-1}}. The element #{w} is odd, and
+
+##{\operatorname{rev}(w)
+=\operatorname{rev}(x^{-1})v\operatorname{rev}(x)
+=xvx^{-1}=w.}
+
+In an orthogonal-basis Clifford expansion in dimension four, the odd part has
+only degrees one and three. Reversal is #{+1} on degree one and #{-1} on
+degree three, so #{w\in V}. Gallier uses this observation in the compact
+calculation
+\citet{p. 30}{gallier2014clifford}; the same basis-and-reversal argument
+applies to every nondegenerate real form in dimension four. Also
+#{w^2=Q(v)1}. Conjugation is injective, and its restriction to the
+finite-dimensional space #{V} is therefore an automorphism. Thus it defines
+#{g\in O(V,Q)}.}
+
+\p{Choose #{y} in the vector-generated Lipschitz group whose twisted action
+is #{g}
+\leanref/tauceti{CliffordAlgebra.lipschitzToOrthogonal_surjective}, and set
+#{z=y^{-1}x}. Since #{x} is even, equality of the two actions rearranges for
+the grading involution #{\alpha} to
+
+##{\alpha(z)v=vz\qquad(v\in V).}
+
+The graded-centrality theorem therefore gives #{z=c1} for some real #{c}
+\leanref/tauceti{CliffordAlgebra.exists_eq_algebraMap_of_involute_mul_ι_eq_ι_mul}.
+The unit #{z} has #{c\ne0}. Nondegeneracy and positive dimension supply a
+nonisotropic vector, so every nonzero scalar unit belongs to the generated
+Lipschitz group
+\leanref/tauceti{CliffordAlgebra.unitsMap_algebraMap_mem_lipschitzGroup}.
+Thus #{x=yz} is Lipschitz. It is even and has reverse norm one, hence lies in
+Spin by \ref{fcap-0028}. This dimension-sensitive argument is not asserted in
+dimension five or six.}
