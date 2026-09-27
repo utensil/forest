@@ -1,0 +1,49 @@
+\import{fcap-macros}
+\meta{agent-authored}{true}
+
+\tag{fcap}
+\tag{spin}
+\tag{clifford}
+
+\taxon{Theorem}
+\title{Witt extension and the regular-subspace interface}
+
+\p{Let #{K} be a field of characteristic different from two, and let
+#{(V,Q)} and #{(V',Q')} be isometric finite-dimensional nondegenerate
+quadratic spaces. If #{U\subseteq V} is any subspace and #{f:U\to V'} is an
+injective linear map satisfying
+
+##{Q'(f(u))=Q(u),}
+
+then #{f} extends to an isometry
+#{\widetilde f:(V,Q)\simeq(V',Q')}. For two subspaces of one quadratic space,
+the assumption that the ambient spaces are isometric is automatic.}
+
+\p{\citet{Section 4, no. 3, Theorem 1, pp. 71--72}{bourbaki2007algebra}
+states the theorem with an arbitrary source subspace. In
+\citet{Chapter IV, Section 1.5, Theorem 3, pp. 31--32}{serre1973course}, the
+proof explains why degeneracy of that subspace is harmless when the ambient
+form is nondegenerate: a radical vector can be paired with a new vector,
+enlarging the subspace toward a regular one. The regular case then splits
+orthogonally and closes by induction.}
+
+\p{TauCeti proves a complementary form. For a finite-dimensional quadratic
+space over a field with #{2} invertible, an isometry equivalence between
+subspaces #{W,W'} extends when #{Q|_W} is nondegenerate; the ambient form
+itself may be degenerate
+\leanref/tauceti{QuadraticMap.IsometryEquiv.exists_extension}. It also chooses
+an extension and records its value on #{W}
+\leanref/tauceti{QuadraticMap.IsometryEquiv.extension}
+\leanref/tauceti{QuadraticMap.IsometryEquiv.extension_apply}. These formal
+declarations do not prove the arbitrary-subspace statement above.}
+
+\p{The distinction is visible inside #{Q_{1,3}}. The block
+
+##{A_0=\begin{pmatrix}5/4&3/4\\3/4&5/4\end{pmatrix}}
+
+on the first positive and first negative coordinates, together with the
+identity on the other two coordinates, defines an ambient isometry #{A}. It
+satisfies #{A(e_0+e_1)=2(e_0+e_1)}, so its restriction to the null line is an
+isometry of a degenerate subspace. The classical theorem covers such a line;
+the regular-subspace formal declaration does not apply because the source
+restriction is degenerate.}

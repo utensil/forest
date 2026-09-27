@@ -1,0 +1,55 @@
+\import{fcap-macros}
+\meta{agent-authored}{true}
+
+\tag{fcap}
+\tag{spin}
+\tag{clifford}
+
+\taxon{Proposition}
+\title{A Lorentz frame can be prescribed}
+
+\p{Let #{V} be four-dimensional over #{\mathbb R}, and let #{Q} be a
+nondegenerate quadratic form with positive and negative indices #{(1,3)}.
+Suppose
+
+##{Q(t)=1,\qquad Q(s)=-1,\qquad B_Q(t,s)=0.}
+
+There is an isometry #{e:(\mathbb R^4,Q_{1,3})\simeq(V,Q)} with
+#{e(e_0)=t} and #{e(e_1)=s}. Moreover,
+#{H=\operatorname{span}(t,s)} has an orthogonal complement of dimension two
+on which #{Q} is negative definite. The sign convention for #{Q_{1,3}} is
+the one fixed in \ref{fcap-0011}.}
+
+\subtree{
+\taxon{Proof}
+\p{For all #{a,b\in\mathbb R}, polarization gives
+
+##{Q(at+bs)=a^2-b^2.}
+
+The polar Gram matrix of #{t,s} is #{\operatorname{diag}(2,-2)}, so they are
+independent and #{H} is regular of inertia #{(1,1)}. By
+\citet{Section 7, no. 2, Theorem 1 and Definition 2, pp. 117--118}{bourbaki2007algebra},
+the real law of inertia gives an initial isometry
+#{j:(\mathbb R^4,Q_{1,3})\simeq(V,Q)}.
+The isometry from #{j(\operatorname{span}(e_0,e_1))} to #{H} sending
+#{j(e_0)} to #{t} and #{j(e_1)} to #{s} has regular source, so Witt extension
+supplies an ambient isometry #{g} of #{(V,Q)}
+\leanref/tauceti{QuadraticMap.IsometryEquiv.exists_extension}. Then
+#{e=g\circ j} has the prescribed values.}
+
+\p{The orthogonal decomposition has summands #{H} and #{H^\perp}.
+Additivity of the positive and negative indices
+\leanref/tauceti{QuadraticForm.sigPos_prod}
+\leanref/tauceti{QuadraticForm.sigNeg_prod} gives
+
+##{(1,3)=(1,1)+(0,2).}
+
+Hence #{H^\perp} is the required negative plane.}
+}
+
+\p{The isometry transport in \ref{fcap-0029} carries the standard first two
+Clifford generators to this prescribed pair and commutes with the Spin vector
+action. The hyperbolic split and quaternionic matrix calculation are already
+in \ref{fcap-0026}, which yields the abstract model
+#{\Cl(V,Q)\simeq M_2(\mathbb H)}. This does not identify a particular
+gamma-matrix homomorphism, its kernel, or its image.}
