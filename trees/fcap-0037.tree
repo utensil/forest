@@ -1,0 +1,101 @@
+\import{fcap-macros}
+\meta{agent-authored}{true}
+
+\tag{fcap}
+\tag{spin}
+\tag{lie}
+
+\taxon{Proposition}
+\title{The differential of the actual Spin action is the quadratic lift}
+
+\p{Let #{V} be a positive-dimensional finite-dimensional real vector
+space, and let #{Q} be nondegenerate. Give #{\Cl(Q)} its ordinary
+finite-dimensional topology. Inside #{\Cl(Q)^\times}, evenness, reverse
+norm one, and normalization of the embedded vector subspace are closed
+conditions and define a subgroup. This subgroup is the actual
+vector-generated #{\Spin(Q)}. Indeed, for any element #{x} satisfying
+them, its twisted action lies in #{O(Q)}. Cartan--Dieudonne supplies a
+vector product #{u} with the same twisted action. For #{z=u^{-1}x},
+
+##{\alpha(z)\iota(v)=\iota(v)z\qquad(v\in V).}
+
+Graded centrality makes #{z} a nonzero scalar; no parity of #{u} has been
+assumed in this step. If #{Q(w)\ne0}, every nonzero scalar #{c} is the
+two-vector product
+
+##{\iota(w)\,\iota\left(\frac{c}{Q(w)}w\right)=c1.}
+
+Thus #{x} is vector-generated, and its stated evenness and norm place it
+in Spin. The reverse inclusion is immediate from the carrier definition.
+The closed-subgroup theorem now gives this concrete Spin group its
+finite-dimensional real Lie-group structure.}
+
+\p{For #{A\in\mathfrak{so}(V,B_Q)}, let #{b(A)} be the normalized
+quadratic Clifford lift of \ref{fcap-000R}. For every #{t\in\mathbb R},
+
+##{g_A(t)=\exp\bigl(t b(A)\bigr)\in\Spin(Q),
+\qquad
+g_A(t)\,\iota(v)\,g_A(t)^{-1}
+=\iota\bigl(\exp(tA)v\bigr).}
+
+Indeed, reversal sends #{b(A)} to #{-b(A)}, so the exponential is even
+and has reverse norm one. The commutator identity
+#{[b(A),\iota(v)]=\iota(Av)} gives the displayed conjugation formula by
+the exponential series. Hence #{g_A(t)} satisfies the three closed
+conditions above and belongs to the actual Spin group.}
+
+\p{The tangent Lie algebra at #{1} is exactly the image of #{b}. One
+inclusion is supplied by the curves #{g_A}. Conversely, let #{X} be
+tangent at #{1}. Differentiating evenness, reverse norm one, and vector
+normalization gives
+
+##{X\text{ even},\qquad \operatorname{rev}(X)=-X,
+\qquad [X,\iota(V)]\subseteq\iota(V).}
+
+Write #{[X,\iota(v)]=\iota(Av)}. Differentiating preservation of #{Q}
+makes #{A} skew-adjoint. Then #{X-b(A)} is even and commutes with every
+vector, so it is scalar; reverse antisymmetry forces that real scalar to
+vanish. Therefore
+
+##{T_1\Spin(Q)=b\bigl(\mathfrak{so}(V,B_Q)\bigr),
+\qquad d_1(\operatorname{spinVectorAction})\bigl(b(A)\bigr)=A.}
+
+This is the genuine differential statement whose algebraic commutator
+precursor appears in \ref{fcap-000R} and whose polar-dual coordinate
+formula is \ref{fcap-001Z}.}
+
+\p{If #{\pi:\Cl(Q)\to\operatorname{End}_{\mathbb R}(S)} is a
+finite-dimensional real Clifford module, continuity of the power series
+gives
+
+##{\pi(g_A(t))=\exp\bigl(t\pi(b(A))\bigr),
+\qquad d\pi_1\bigl(b(A)\bigr)=\pi(b(A)).}
+
+A complex Clifford module may be regarded here as a real module; this does
+not assert a separately constructed complex Lie-group structure.}
+
+\p{\citet{Proposition 2.12, p. 40; Proposition 3.2, pp. 53--54}{meinrenken2013clifford}
+proves the normalized bivector realization and the Spin
+exponential/action identity.
+\citet{I.2, Remark 2.1 and (2.6)--(2.7), pp. 13--14}{lawson2016spin}
+independently give the ambient Clifford exponential and its conjugation
+derivative.
+The carrier completion and tangent converse above identify the exact
+vector-generated group used here; Lawson's ambient exponential formula
+alone does not supply that membership.}
+
+\p{For the convention match, Meinrenken's bilinear form #{B_M} satisfies
+#{B_Q=2B_M}. If #{(e_M^i)} is #{B_M}-dual to #{(e_i)}, then the
+#{B_Q}-dual vectors are #{e_M^i/2}, and
+
+##{b(A)=\frac12\sum_i\beta_Q\left(Ae_i,\frac12e_M^i\right)
+=\frac14\sum_i\beta_Q(Ae_i,e_M^i)
+=\frac14\sum_i(Ae_i)e_M^i.}
+
+The last equality uses #{\operatorname{tr}(A)=0}; it does not rescale the
+half-commutator #{\beta_Q}. TauCeti proves the algebraic lift and
+generator action at the pinned revision through
+\leanref/tauceti{CliffordAlgebra.quadraticLift_lie_ι} and the coordinate
+formula \leanref/tauceti{CliffordAlgebra.soEquivQuadratic_eq_sum_bivector}.
+The inspected declarations do not package the Lie-group structure,
+exponential membership, or tangent converse proved above.}
