@@ -1,0 +1,63 @@
+\import{fcap-macros}
+\meta{agent-authored}{true}
+
+\tag{fcap}
+\tag{spin}
+\tag{clifford}
+
+\taxon{Example}
+\title{The compact three-dimensional Spin group is the unit quaternions}
+
+\p{Let #{Q_{3,0}(x_0,x_1,x_2)=x_0^2+x_1^2+x_2^2} and write #{e_0,e_1,e_2}
+for its coordinate basis. TauCeti's chosen algebra equivalence
+#{\theta:\Cl^{+}(Q_{3,0})\simeq\mathbb H} has the exact axes
+
+##{e_0e_1\longmapsto-k,\qquad
+e_0e_2\longmapsto i,\qquad
+e_1e_2\longmapsto j}
+
+\leanref/tauceti{TauCeti.realCliffordThreeZeroEvenEquivQuaternion}
+\leanref/tauceti{TauCeti.realCliffordThreeZeroEvenEquivQuaternion_ι_single_zero_one}
+\leanref/tauceti{TauCeti.realCliffordThreeZeroEvenEquivQuaternion_ι_single_two_zero}
+\leanref/tauceti{TauCeti.realCliffordThreeZeroEvenEquivQuaternion_ι_single_one_two}.
+Hence
+
+##{\theta(s+A e_0e_1+B e_0e_2+C e_1e_2)
+=s+B i+C j-A k.}
+
+Under #{\theta}, reversal is quaternion conjugation and reverse norm is
+
+##{s^2+A^2+B^2+C^2}
+
+\leanref/tauceti{TauCeti.realCliffordThreeZeroEvenEquivQuaternion_reverseEven}
+\leanref/tauceti{TauCeti.realCliffordThreeZeroEvenEquivQuaternion_map_reverseEven_mul_self_eq_normSq}.}
+
+\p{Let #{\mathbb H^1=\{q\in\mathbb H:\bar q q=1\}}. Restricting #{\theta}
+to Spin gives a homomorphism
+
+##{\Spin(Q_{3,0})\longrightarrow\mathbb H^1.}
+
+For #{q=r+x i+y j+z k\in\mathbb H^1}, the inverse Clifford value is
+
+##{r-z e_0e_1+x e_0e_2+y e_1e_2.}
+
+Its reverse norm is one, so the dimension-three carrier lemma places it in
+the actual Spin group. The algebra inverse proves both compositions and
+multiplicativity. Therefore
+
+##{\Spin(Q_{3,0})\simeq\mathbb H^1.}
+
+TauCeti separately packages the algebra map as an equivalence between the
+even-unitary carrier and unit quaternions
+\leanref/tauceti{TauCeti.realCliffordThreeZeroEvenUnitaryEquivQuaternionUnitary};
+the preceding carrier lemma is what identifies that carrier with Spin in
+this real dimension-three case.}
+
+\p{In \citet{Section 1.4, pp. 28--29}{gallier2014clifford}, the analogous
+compact calculation writes the even element, obtains its sum-of-four-squares
+norm, and identifies the unit quaternions. Its generators square to #{-1}.
+Likewise, \citet{I.3, Theorem 3.7, pp. 23--24; I.4, (4.0), p. 25}{lawson2016spin}
+uses #{v^2=-q(v)} to reduce an even algebra and identify the quaternion base
+entry. Translating by #{Q=-q} and the even sign-change equivalence gives the
+same compact algebra and norm. The displayed axis signs are the exact
+TauCeti choice above, rather than a relabeling imported from either source.}

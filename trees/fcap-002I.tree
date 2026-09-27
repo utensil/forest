@@ -1,0 +1,77 @@
+\import{fcap-macros}
+\meta{agent-authored}{true}
+
+\tag{fcap}
+\tag{spin}
+\tag{clifford}
+
+\taxon{Example}
+\title{The split three-dimensional Spin group is #{SL_2(\mathbb R)}}
+
+\p{For #{Q_{2,1}(x_0,x_1,x_2)=x_0^2+x_1^2-x_2^2}, set
+#{A=e_0e_1}, #{B=e_0e_2}, and #{C=e_1e_2}. Then
+
+##{A^2=-1,\qquad B^2=C^2=1,\qquad AB=-C.}
+
+The assignments
+
+##{A\longmapsto\begin{pmatrix}0&1\\-1&0\end{pmatrix},\qquad
+B\longmapsto\begin{pmatrix}0&1\\1&0\end{pmatrix},\qquad
+C\longmapsto\begin{pmatrix}-1&0\\0&1\end{pmatrix}}
+
+satisfy these relations, and the images of #{1,A,B,C} form a basis of
+#{M_2(\mathbb R)}. They therefore define an algebra equivalence #{\Phi} with
+
+##{\Phi(s+aA+bB+cC)=
+\begin{pmatrix}s-c&a+b\\-a+b&s+c\end{pmatrix}.}
+
+Reversal negates #{A,B,C}, so it becomes matrix adjugation, and
+
+##{N_{\mathrm{rev}}(s+aA+bB+cC)
+=s^2+a^2-b^2-c^2=\det\Phi(s+aA+bB+cC)}
+
+\leanref/tauceti{CliffordAlgebra.map_reverseEven_eq_adjugate_of_finrank_eq_three}
+\leanref/tauceti{CliffordAlgebra.reverseEven_mul_eq_one_iff_det_eq_one_of_finrank_eq_three}.}
+
+\p{Restriction gives #{\Spin(Q_{2,1})\to SL_2(\mathbb R)}. Conversely, if
+#{M=(m_{ij})\in SL_2(\mathbb R)}, put
+
+##{\begin{aligned}
+s&=\frac{m_{00}+m_{11}}2,&
+a&=\frac{m_{01}-m_{10}}2,\\
+b&=\frac{m_{01}+m_{10}}2,&
+c&=\frac{m_{11}-m_{00}}2.
+\end{aligned}}
+
+Then #{\Phi(s+aA+bB+cC)=M}, and its reverse norm is #{\det M=1}. The carrier
+lemma puts this inverse value in the actual Spin group; the algebra maps give
+two-sided multiplicative inverses. Thus
+
+##{\Spin(Q_{2,1})\simeq SL_2(\mathbb R).}}
+
+\p{The source translation matters. Lawson--Michelsohn's convention turns
+this even algebra into #{\operatorname{Cl}_{0,2}\simeq M_2(\mathbb R)} via
+\citet{I.3, Theorem 3.7, pp. 23--24; I.4, (4.0), p. 25}{lawson2016spin}.
+With the reversed index convention,
+\citet{Example 1.3, p. 33}{gallier2014clifford} independently records
+#{\operatorname{Cl}_{2,0}\simeq M_2(\mathbb R)}, the same real matrix base
+algebra. Their indefinite Pin/Spin carrier conventions allow factors of
+quadratic value #{\pm1}
+\citet{I.2, (2.24)--(2.25), p. 18}{lawson2016spin}
+\citet{Section 1.5, Definition 1.6, p. 31}{gallier2014clifford}. We use their
+algebra identifications but impose the displayed reverse-norm-one equation.
+For example, #{e_0e_2} has reverse norm #{-1} and maps to a determinant
+#{-1} matrix, so it is excluded here.}
+
+\p{This split form has polarization
+#{W=\mathbb R(e_0+e_2)},
+#{W'=\mathbb R((e_0-e_2)/4)}, and line #{\mathbb R e_1}: the unhalved polar
+pairing of the displayed generators is #{1}, and the line coordinate squares
+to #{Q_{2,1}}. TauCeti's polarized dimension-three theorem therefore gives
+an independent abstract group equivalence with #{SL_2(\mathbb R)}
+\leanref/tauceti{TauCeti.exists_spinGroup_mulEquiv_specialLinearGroup_and_spinRep_equiv_stdSLRep_of_finrank_eq_three}.
+The concrete map #{\Phi} above is not asserted to be definitionally that map,
+and the theorem's representation refinement belongs to the later module
+packet. Likewise, the vector-action image is the spinor-norm kernel from
+\ref{fcap-0023}, not all of #{SO(2,1)}. No component or covering-space claim
+is made.}

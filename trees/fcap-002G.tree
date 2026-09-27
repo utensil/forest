@@ -1,0 +1,51 @@
+\import{fcap-macros}
+\meta{agent-authored}{true}
+
+\tag{fcap}
+\tag{spin}
+\tag{clifford}
+
+\taxon{Lemma}
+\title{Reverse norm one is the Spin carrier in real dimension three}
+
+\p{Let #{V} be a three-dimensional real vector space and let #{Q} be
+nondegenerate. Suppress the canonical generator map in Clifford products.
+For #{x\in\Cl^{+}(Q)}, the following are equivalent:
+
+##{x\text{ is the Clifford value of an element of }\Spin(Q),
+\qquad \operatorname{rev}(x)x=1.}
+
+The forward implication is the even-unitary condition
+\leanref/tauceti{CliffordAlgebra.evenUnitaryGroup.mem_iff_reverse_mul_self_eq_one}
+\leanref/tauceti{CliffordAlgebra.range_spinGroup_toUnits}.}
+
+\p{For the converse, the scalar--bivector decomposition in dimension three
+writes #{x=a+Z}. Every nonzero bivector is decomposable. If #{Z\ne0}, let
+#{P} be its supporting two-plane. The plane contains #{u} with #{Q(u)\ne0}:
+otherwise polarization would give #{P\subseteq P^\perp}, impossible because
+#{\dim P=2} and nondegeneracy gives #{\dim P^\perp=1}. Since
+#{\bigwedge^2P} is one-dimensional, choose #{w\in P} so that
+#{Z=\beta_Q(u,w)}. If #{Z=0}, choose any nonisotropic #{u} and take #{w=0}.
+Using the unhalved polar form from \ref{fcap-0027},
+
+##{\beta_Q(u,w)=uw-\frac12B_Q(u,w),\qquad
+v:=ux=\left(a-\frac12B_Q(u,w)\right)u+Q(u)w.}
+
+Thus #{v} is a vector. Reversal and the norm-one equation give
+
+##{Q(v)1=\operatorname{rev}(v)v
+=\operatorname{rev}(x)uux
+=Q(u)\operatorname{rev}(x)x=Q(u)1.}
+
+The real scalar map is injective, so #{Q(v)=Q(u)\ne0}. Consequently
+
+##{x=\left(\frac{u}{Q(u)}\right)v,
+\qquad Q\left(\frac{u}{Q(u)}\right)Q(v)=1.}
+
+This is a product of two actual nonisotropic vectors, and TauCeti's pair
+criterion places it in Spin
+\leanref/tauceti{CliffordAlgebra.ι_mul_ι_mem_spinGroup_of_norm_mul_norm_eq_one}.
+The proof includes the scalar case #{Z=0}; it uses neither a normalizer
+characterization nor a connectedness argument. The general distinction
+between reverse norm one and Lipschitz membership remains the one recorded in
+\ref{fcap-0028}.}
