@@ -1,0 +1,74 @@
+\import{fcap-macros}
+\meta{agent-authored}{true}
+
+\tag{fcap}
+\tag{spin}
+\tag{representation-theory}
+
+\taxon{Proposition}
+\title{The outer nodes of #{D_4} permute the three eight-dimensional classes}
+
+\p{Work over #{\mathbb C} with the type-#{D_4} Cartan and Borel of
+\ref{fcap-002X}. In its orthonormal coordinates put
+
+##{\begin{aligned}
+\alpha_1&=\epsilon_1-\epsilon_2,&
+\alpha_2&=\epsilon_2-\epsilon_3,\\
+\alpha_3&=\epsilon_3-\epsilon_4,&
+\alpha_4&=\epsilon_3+\epsilon_4.
+\end{aligned}}
+
+The central node is #{2}; the outer nodes are #{1,3,4}. Their fundamental
+weights are
+
+##{\omega_1=\epsilon_1,\qquad
+\omega_3=\tfrac12(\epsilon_1+\epsilon_2+\epsilon_3-\epsilon_4),\qquad
+\omega_4=\tfrac12(\epsilon_1+\epsilon_2+\epsilon_3+\epsilon_4).}
+
+The established exterior convention identifies the vector class with
+#{L(\omega_1)}, the all-plus half-spin class with
+#{S^+=L(\omega_4)}, and the other half-spin class with
+#{S^-=L(\omega_3)}; see \ref{fcap-002Y} and \ref{fcap-0030}. Each has
+dimension eight.}
+
+\p{Let #{\sigma} be any permutation of #{\{1,3,4\}}. The linear map
+specified on the simple-root basis by
+
+##{T_\sigma(\alpha_i)=\alpha_{\sigma(i)}\quad(i=1,3,4),\qquad
+T_\sigma(\alpha_2)=\alpha_2}
+
+preserves the #{D_4} Cartan matrix. Hence it is orthogonal, preserves the
+root and coroot systems, and preserves the weight and coweight lattices.
+It is therefore an automorphism of the simply connected based root datum.
+Duality with the simple coroots gives
+
+##{T_\sigma(\omega_i)=\omega_{\sigma(i)}\qquad(i=1,3,4).}
+
+In particular an outer three-cycle has cube one and nontrivially cycles
+the three labeled highest-weight classes
+
+##{L(\omega_1),\qquad S^-=L(\omega_3),\qquad S^+=L(\omega_4).}
+
+This is a permutation of based root data and of irreducible
+highest-weight labels. A literal pullback of concrete group modules would
+additionally require an actual group automorphism and a fixed direction;
+that stronger statement is not inferred from this diagram calculation.}
+
+\p{\citet{Section 20.3, pp. 312--314}{fulton2004representation}
+give the same #{D_4} diagram and identify the vector and two half-spin
+highest weights.
+\citet{Chapter 5, Theorem 5.6, pp. 33--35}{adams1996exceptional}
+independently identifies these as the three basic eight-dimensional
+classes permuted by outer automorphisms. The first source is the complex
+highest-weight comparison used here; Adams' theorem concerns the compact
+actual group and is not being claimed as proved by the root-datum
+calculation alone.}
+
+\p{The pinned declaration
+\leanref/tauceti{TauCeti.D4Tripled.trialityAutomorphism}
+has cube one on a tripled type-#{D_4} toral-closure carrier and permutes
+its numbered root and represented-torus coordinates. The inspected file
+does not identify that carrier with standard #{\Spin_8}, prove its torus
+maximal, or identify its three factors with the vector and half-spin
+modules. It is precise formal context for the diagram symmetry, not a
+whole-card formalization of the proposition above.}
