@@ -6,25 +6,54 @@
 \tag{clifford}
 
 \taxon{Example}
-\title{The rank-one polarized model \citet{Section 3.2.4, Theorem 3.3, p. 59}{meinrenken2013clifford}}
+\title{Rank one: matrix units and occupation}
 
-\p{Let #{W=Ke} and choose #{e'\in W'} with #{B_Q(e,e')=1}. In the ordered
-basis #{(1,e)} of #{S=\bigwedge W}, creation and contraction are
+\p{Let #{K} be a commutative ring in which #{2} is invertible, and consider
+polarization data for which #{W=Ke} is free of rank one. Let #{e'\in W'} be
+the dual vector, so #{B_Q(e,e')=1}. Following \ref{fcap-0027}, put
+#{c=\varepsilon_e} and #{a=a_{e'}=\iota_{e'}}; the last expression uses the
+legacy contraction notation. In the ordered basis #{(1,e)} of
+#{S=\bigwedge W},
 
-##{\varepsilon_e=
-\begin{pmatrix}0&0\\1&0\end{pmatrix},
+##{c=\begin{pmatrix}0&0\\1&0\end{pmatrix},
 \qquad
-\iota_{e'}=
-\begin{pmatrix}0&1\\0&0\end{pmatrix}.}
+a=\begin{pmatrix}0&1\\0&0\end{pmatrix}.}
 
-Both are nilpotent, and
+Thus #{c^2=a^2=0}, #{ca+ac=I_2}, and
 
-##{\varepsilon_e\iota_{e'}+\iota_{e'}\varepsilon_e=I_2.}
+##{ac=\begin{pmatrix}1&0\\0&0\end{pmatrix}=E_{00},
+\quad a=E_{01},\quad c=E_{10},\quad
+ca=\begin{pmatrix}0&0\\0&1\end{pmatrix}=E_{11}.}
 
-Together with their products they give the four matrix units of
-#{\operatorname{End}_K(S)}. This is the rank-one calculation in Meinrenken's
-generation proof and a specialization of the general relation in
-\ref{fcap-001J}. The formalized ingredients are
-\leanref/tauceti{TauCeti.SpinPolarizationData.contract_wedge} and
-\leanref/tauceti{TauCeti.ExteriorAlgebra.creation_contraction_adjoin_eq_top};
-neither declaration formalizes this displayed choice of basis.}
+These are all four matrix units of #{\operatorname{End}_K(S)}.}
+
+\p{The product
+
+##{N:=ca}
+
+is the one-mode number operator: #{N(1)=0} and #{N(e)=e}. Centering its two
+eigenvalues gives
+
+##{H:=N-\tfrac12 I_2
+=\begin{pmatrix}-\tfrac12&0\\0&\tfrac12\end{pmatrix}.}
+
+In several modes, #{N_i=c_i a_i} tests whether the #{i}-th exterior
+coordinate is occupied, and #{H_i=N_i-\frac12} is the diagonal operator used
+in \ref{fcap-0025}.}
+
+\p{Over his characteristic-not-two field, Meinrenken supplies the general
+creation--contraction exterior model
+\citet{Proposition 3.5, p. 57}{meinrenken2013clifford}
+and the normal-ordered isomorphism onto the full endomorphism space
+\citet{Remark 3.5 and (3.6), p. 60}{meinrenken2013clifford}. The four matrices
+above are the direct rank-one specialization made here. The centered
+occupation operator independently appears in the Fulton--Harris calculation
+\citet{Proposition 20.15, proof, pp. 305--306}{fulton2004representation}.}
+
+\p{The occupation identity for every exterior basis vector is
+\leanref/tauceti{TauCeti.SpinPolarizationData.wedge_contract_dualVector_basis},
+and the general finite-free statement that the Clifford action reaches every
+endomorphism is
+\leanref/tauceti{TauCeti.spinAction_surjective}. The displayed #{2\times2}
+matrices and their labels #{E_{rs}} are a basis calculation, not separately
+named formal declarations.}

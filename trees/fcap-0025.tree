@@ -18,12 +18,17 @@ by #{I}. The even and odd exterior degrees are #{S^+} and #{S^-}.}
 
 \p{The diagonal Clifford bivector of \ref{fcap-000N}
 
-##{H_i=\beta_Q(w_i,w_i')
-=\tfrac12[\iota(w_i),\iota(w_i')]}
+##{\widehat H_i=\beta_Q(w_i,w_i')
+=\tfrac12[\iota_Q(w_i),\iota_Q(w_i')]}
 
-acts through creation #{c_i} and contraction #{a_i}. Their relation
-#{c_i a_i+a_i c_i=1} makes #{H_i=c_i a_i-\frac12}. Since
-#{c_i a_i} projects onto the vectors containing #{i},
+has factors acting by #{c_i=\varepsilon_{w_i}} and #{a_i=a_{w_i'}} in the
+notation of \ref{fcap-0027}. Write #{H_i} for the resulting endomorphism of
+#{S}. The relation #{c_i a_i+a_i c_i=1} gives
+
+##{N_i:=c_i a_i,\qquad
+H_i=N_i-\tfrac12\operatorname{id}_S.}
+
+Since #{N_i} projects onto the vectors containing #{i},
 
 ##{H_i u_I=\begin{cases}
 \frac12 u_I,&i\in I,\\
@@ -37,6 +42,28 @@ with even #{|I|} sum to #{S^+}, and those with odd #{|I|} sum to
 #{S^-}. Each half has dimension #{2^{\ell-1}}, while #{S} has
 dimension #{2^\ell}.}
 
+\p{For #{\ell=2}, the occupation test gives the complete table
+
+##{\begin{array}{c|c|c|c}
+I&u_I&(H_1,H_2)&\text{summand}\\ \hline
+\varnothing&1&(-\tfrac12,-\tfrac12)&S^+\\
+\{1\}&w_1&(\tfrac12,-\tfrac12)&S^-\\
+\{2\}&w_2&(-\tfrac12,\tfrac12)&S^-\\
+\{1,2\}&w_1\wedge w_2&(\tfrac12,\tfrac12)&S^+
+\end{array}}
+
+Every entry is obtained by applying the two rank-one operators of
+\ref{fcap-001P}; the four displayed lines exhaust #{S} in this case.}
+
+\p{Fulton--Harris use #{B_Q=2Q_{\mathrm{FH}}}, so their standard hyperbolic
+basis becomes polar-dual here after setting #{w_i=e_i} and
+#{w_i'=\frac12e_{\ell+i}}. Their represented operator is then
+#{L_{e_i}D_{e_i^*}-\frac12 I=N_i-\frac12 I}, assigning the same positive
+sign to an occupied coordinate
+\citet{Proposition 20.15, proof, pp. 305--306}{fulton2004representation}.
+Thus their occupation signs and even/odd exterior-degree labels agree with the
+displayed TauCeti axes.}
+
 \p{Goodman--Wallach realize the complex spinor carrier as the exterior
 algebra of the dual isotropic space
 \citet{Theorem 6.1.3, proof, pp. 304--305}{goodman2009symmetry}.
@@ -44,15 +71,16 @@ Identify their creation space #{W_{\mathrm{GW}}^*} with #{W} here,
 and their annihilation space #{W_{\mathrm{GW}}} with #{W'}, taking
 #{w_i=e_{-i}} and #{w_i'=e_i}.}
 
-\p{\citet{Lemma 6.2.2 and (6.14), p. 313}{goodman2009symmetry}
-gives their diagonal generator in the opposite bivector order. Thus
+\p{The reversed order in
+\citet{Lemma 6.2.2 and (6.14), p. 313}{goodman2009symmetry} gives
 
-##{H_i^{\mathrm{Tau}}=\beta_Q(e_{-i},e_i)
-=-H_i^{\mathrm{GW}}.}
+##{\widehat H_i^{\mathrm{Tau}}=\beta_Q(e_{-i},e_i)
+=-\widehat H_i^{\mathrm{GW}}.}
 
-Their occupied eigenvalue
-#{-\frac12} therefore becomes #{+\frac12} in the axes above
+Accordingly, their occupied eigenvalue #{-\frac12} and unoccupied eigenvalue
+#{+\frac12} negate every pair in the table
 \citet{Proposition 6.2.3, proof, pp. 314--315}{goodman2009symmetry}.
-The exterior vectors and parity labels remain fixed: #{S^+} always
-means even #{|I|}, and #{S^-} odd #{|I|}. This records weight lines and
-parity, without an irreducibility or highest-weight assertion.}
+The exterior vectors and parity labels remain fixed: #{S^+} means even
+#{|I|}, and #{S^-} means odd #{|I|}. This records the occupation operators,
+weight lines, and parity decomposition, without a root-system,
+highest-weight, or irreducibility assertion.}
