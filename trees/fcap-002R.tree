@@ -1,0 +1,103 @@
+\import{fcap-macros}
+\meta{agent-authored}{true}
+
+\tag{fcap}
+\tag{clifford}
+\tag{draft}
+
+\taxon{Proposition}
+\title{The signed projective adapter preserves products and incidence}
+
+\p{For the two orders in the preceding Convention, define
+
+##{\begin{aligned}
+\operatorname{toCore}
+ &(s,c_0,c_1,c_2,c_{12},c_{20},c_{01},c_{012})\\
+ &=(s,c_0,c_1,c_{01},c_2,-c_{20},c_{12},c_{012}),\\
+\operatorname{toNamed}
+ &(r,r_0,r_1,r_{01},r_2,r_{02},r_{12},r_{012})\\
+ &=(r,r_0,r_1,r_2,r_{12},-r_{02},r_{01},r_{012}).
+\end{aligned}}
+
+They are inverse linear maps on every eight-tuple. The minus sign is exactly
+#{e_{20}=-e_{02}}; substituting either displayed tuple into the other proves
+both round trips coordinate by coordinate.}
+
+\p{This signed permutation also preserves the Clifford product, rather than
+merely being declared to do so. Encode the ascending blades by masks
+#{0,\ldots,7}, with bit #{i} representing #{e_i}, and put
+
+##{\sigma=(0,1,2,4,6,5,3,7),\qquad
+\epsilon=(1,1,1,1,1,-1,1,1).}
+
+Then the #{i}-th named blade is
+#{S_i=\epsilon_iC_{\sigma_i}}. For masks identified with subsets of
+#{\{0,1,2\}}, set
+
+##{g(m,n)=(-1)^{\#\{(i,j)\in m\times n:i>j\}}
+          \prod_{i\in m\cap n}q_i,
+\qquad(q_0,q_1,q_2)=(0,1,1).}
+
+The strict-inversion formula of \ref{fcap-002O} gives
+#{C_mC_n=g(m,n)C_{m\mathbin{\triangle}n}}. If
+#{\sigma_k=\sigma_i\mathbin{\triangle}\sigma_j}, it follows that
+
+##{S_iS_j=\epsilon_i\epsilon_j\epsilon_k
+g(\sigma_i,\sigma_j)S_k.}
+
+This checks every one of the #{64} basis pairs, including the zero products
+caused by a repeated #{e_0}; bilinearity proves multiplication compatibility
+for arbitrary tuples. Addition, scalar multiplication, and the unit are
+preserved immediately.}
+
+\p{The permutation #{\sigma} preserves grade. Reversal multiplies a
+grade-#{k} blade by #{(-1)^{k(k-1)/2}}, so it commutes with the adapter.
+For exterior multiplication, the same crossing sign applies to disjoint
+masks and both sides vanish when masks overlap. Hence the adapter also
+preserves reversal and exterior multiplication. It therefore preserves
+inverses wherever they exist and, in particular,
+
+##{\operatorname{toCore}(MX\widetilde M)
+=\operatorname{toCore}(M)\operatorname{toCore}(X)
+ \widetilde{\operatorname{toCore}(M)}.}
+
+Under the ordered basis of \ref{fcap-002P}, these equations give the
+corresponding abstract-coordinate commuting square. They do not supply a
+named executable coordinate type or software-storage theorem.}
+
+\p{For the projective representatives of the preceding Convention, direct
+exterior multiplication gives
+
+##{L(d,a,b)\wedge P(w,x,y)=(dw+ax+by)I.}
+
+Since #{I} is a nonzero basis blade, the point lies on the line precisely
+when #{dw+ax+by=0}; no inverse pseudoscalar is used. This agrees with
+Sokolov's incidence equation
+\citet{(37), p. 25}{sokolov2013foundations}. The four coordinate rows are
+
+##{\begin{aligned}
+[L(d,a,b)]_S&=(0,d,a,b,0,0,0,0),\\
+[L(d,a,b)]_C&=(0,d,a,0,b,0,0,0),\\
+[P(w,x,y)]_S&=(0,0,0,0,w,x,y,0),\\
+[P(w,x,y)]_C&=(0,0,0,y,0,-x,w,0).
+\end{aligned}}
+
+Thus the abstract incidence calculation and both coordinate presentations
+agree through the full adapter.}
+
+\p{The ideal-direction sign is fixed by the same convention. Namely,
+
+##{e_0\wedge(ue_1+ve_2)
+=ue_{01}+ve_{02}=ue_{01}-ve_{20}=P(0,-v,u).}
+
+The input pair #{(u,v)} is a line normal, while the resulting homogeneous
+point has direction #{(-v,u)}. Direction #{(u,v)} itself is represented by
+#{P(0,u,v)}. This distinction keeps the algebraic encoding separate from a
+drawn arrow-orientation convention.}
+
+\p{The result synthesizes Sokolov's projective encoding with the explicit
+blade kernel of \ref{fcap-002O} and the finite coordinate refinement of
+\ref{fcap-002P}. FCAP's current exterior-basis transport is noncomputable and
+does not yet expose these named conversion functions, an executable
+multiplication kernel, or compatibility theorems. Those implementation and
+external storage-order claims remain separate work.}
