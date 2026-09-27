@@ -1,0 +1,85 @@
+\import{fcap-macros}
+\meta{agent-authored}{true}
+
+\tag{fcap}
+\tag{spin}
+\tag{clifford}
+
+\taxon{Proposition}
+\title{Isometries transport the Spin vector action}
+\lean/tauceti{QuadraticMap.Isometry.spinGroupMap_spinVectorAction}
+
+\p{Let #{R} be a commutative ring, let #{M_1,M_2} be #{R}-modules with
+quadratic forms #{Q_1,Q_2}, and let #{f:M_1\to M_2} be an #{R}-linear map
+satisfying
+
+##{Q_2(f(m))=Q_1(m).}
+
+The Clifford universal property gives an algebra homomorphism
+#{\operatorname{Cl}(f):\Cl(Q_1)\to\Cl(Q_2)} characterized on generators by
+
+##{\operatorname{Cl}(f)(\iota_{Q_1}(m))=\iota_{Q_2}(f(m))}
+
+\leanref{CliffordAlgebra.map_apply_ι}.
+It preserves the Spin carrier and therefore restricts to a group homomorphism
+#{\Spin(f):\Spin(Q_1)\to\Spin(Q_2)}
+\leanref/tauceti{QuadraticMap.Isometry.spinGroupMap}. Concretely, the
+Clifford map preserves Lipschitz membership
+\leanref/tauceti{QuadraticMap.Isometry.map_mem_lipschitzGroup}, evenness
+\leanref/tauceti{CliffordAlgebra.map_mem_even}, and Clifford conjugation
+\leanref/tauceti{CliffordAlgebra.map_star}; these are the carrier conditions
+separated in \ref{fcap-0028}. Neither construction requires #{f} to have an
+inverse.}
+
+\p{Now suppose that #{2} is invertible in #{R}. If #{a_i} denotes the Spin
+vector action on #{M_i}, then
+
+##{a_2\bigl(\Spin(f)(s),f(m)\bigr)
+=f\bigl(a_1(s,m)\bigr).}
+
+This identity says that the square with horizontal maps #{a_1,a_2} and
+vertical maps #{\Spin(f)\times f,f} commutes. It is the vector-action
+naturality equation, with no finite-dimensionality or nondegeneracy
+hypothesis. If #{f} is instead an isometry equivalence, it induces a Spin
+equivalence
+\leanref/tauceti{QuadraticMap.IsometryEquiv.spinGroupEquiv}, and the same
+square packages as naturality of the Spin-to-special-orthogonal homomorphism
+\href{https://github.com/TauCetiProject/TauCeti/blob/1a573226a3d9f2c460a6cea6ff3cf2dc82b6a2a3/TauCeti/LinearAlgebra/CliffordAlgebra/Spin/Map.lean#L210-L226}{source theorem}.}
+
+\p{A changed Gram matrix shows why the target form is part of the data. Over
+#{\mathbb Q}, set #{Q_1(x,y)=x^2+y^2} and #{T(x,y)=(2x,y)}. Keeping the same
+form on the target does not give an isometry: at #{e_1},
+
+##{Q_1(Te_1)=4\ne 1=Q_1(e_1).}
+
+Correspondingly, the source generator #{\iota_{Q_1}(e_1)} squares to #{1},
+while its proposed image #{\iota_{Q_1}(2e_1)} squares to #{4}; that assignment
+cannot define the claimed Clifford map.}
+
+\p{For the transported target form #{Q_2(x,y)=x^2/4+y^2}, one has
+#{Q_2(Tv)=Q_1(v)}. In column coordinates,
+
+##{G_1=I,\qquad
+G_2=(T^{-1})^\top G_1T^{-1}
+=\begin{pmatrix}1/4&0\\0&1\end{pmatrix},\qquad
+T^\top G_2T=G_1.}
+
+Now #{\iota_{Q_2}(2e_1)^2=Q_2(2e_1)=1}, so the generator relation is
+preserved. Thus an arbitrary basis scaling is not a fixed-form isometry; it
+becomes an isometry only after the domain and target forms are related in the
+correct direction. This differs from the module equivalence
+#{T_Q:\Cl(Q)\simeq\bigwedge M} in \ref{fcap-0004}, which is not an algebra
+map.}
+
+\p{Meinrenken derives #{\operatorname{Cl}(f)} from the same universal
+property for a bilinear-form-preserving linear map
+\citet{Section 2.2.2, Proposition 2.2, p. 29}{meinrenken2013clifford}.
+Chevalley's tensor-quotient construction gives the corresponding extension
+from generator images whose squares are #{Q(x)}
+\citet{II.1.1, pp. 38--39}{chevalley1954algebraic}. In Meinrenken's convention
+#{Q(v)=B(v,v)}, so his #{B} is the half-polar form #{b_Q} of
+\ref{fcap-0027}. These sources work over finite-dimensional vector spaces over
+fields; Meinrenken assumes characteristic different from two. The formal
+action square above has the commutative-ring hypotheses stated here. This
+card makes no claim about scalar extension, orthogonal sums, or composition
+of extension maps.}
