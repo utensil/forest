@@ -1,0 +1,65 @@
+\import{fcap-macros}
+\meta{agent-authored}{true}
+
+\tag{fcap}
+\tag{spin}
+\tag{clifford}
+
+\taxon{Example}
+\title{The compact three-dimensional Spin action is quaternion conjugation}
+\date{2026-10-08T11:59:26Z}
+
+\p{For #{Q_{3,0}=x_0^2+x_1^2+x_2^2}, use the algebra map
+#{\theta:\Cl^+(Q_{3,0})\simeq\mathbb H} of \ref{fcap-002H}.
+The vector isometry to pure quaternions is
+
+##{\eta_3(v_0e_0+v_1e_1+v_2e_2)=-v_1i+v_0j-v_2k.}
+
+For #{s\in\Spin(Q_{3,0})} and #{q=\theta(s)\in\mathbb H^1}, the
+ordinary Clifford conjugation action satisfies
+
+##{\eta_3(svs^{-1})=q\eta_3(v)\bar q.}
+
+These are the coordinates and action in TauCeti
+\leanref/tauceti{TauCeti.coe_realCliffordThreeZeroPureQuaternionEquiv_apply}
+\leanref/tauceti{TauCeti.realSpinThreeEquivQuaternionUnitary_action}.}
+
+\p{The volume element #{\omega=e_0e_1e_2} is central and has
+#{\omega^2=-1}. Multiplying a vector by it gives
+
+##{v\omega=v_0e_1e_2+v_1e_2e_0+v_2e_0e_1,\qquad
+\eta_3(v)=\theta(v\omega).}
+
+The three coefficients are only permuted and signed, so #{\eta_3} is an
+isometry onto the pure quaternions. Since #{\omega} is central,
+
+##{(svs^{-1})\omega=s(v\omega)s^{-1}.}
+
+Apply #{\theta}; reversal on the even algebra becomes quaternion
+conjugation, and #{q^{-1}=\bar q}. This proves the displayed action formula.}
+
+\p{The axes also determine the sign of the rotation. For real #{t}, put
+#{s=\cos t+\sin t\,e_0e_1}. Its reverse norm is one, hence it belongs
+to Spin by \ref{fcap-002H}, and #{q=\cos t-\sin t\,k}. Direct multiplication
+gives
+
+##{\begin{aligned}
+se_0s^{-1}&=\cos(2t)e_0-\sin(2t)e_1,\\
+se_1s^{-1}&=\sin(2t)e_0+\cos(2t)e_1,\\
+se_2s^{-1}&=e_2.
+\end{aligned}}
+
+In quaternion coordinates the first identity is
+#{qj\bar q=\cos(2t)j+\sin(2t)i}, since #{\eta_3(e_1)=-i}.
+Thus the rotor parameter is a half-angle with the orientation fixed by
+the stated Clifford and quaternion axes.}
+
+\p{Gallier \citet{Section 1.4, p. 29}{gallier2014clifford} proves the
+same volume-element transport to quaternion conjugation with compact
+generators of square #{-1}. His volume has square #{+1}, and his map is
+#{v\mapsto-\omega v}; for the positive squares here it is
+#{v\mapsto v\omega}, followed by the axes of \ref{fcap-002H}.
+Porteous \citet{Chapter 8, Propositions 8.19--8.21, pp. 62--63}{porteous1995clifford}
+describes the resulting unit-quaternion rotations of pure quaternions.
+The signed half-angle calculation above specifies this action in the
+coordinates used here.}

@@ -1,0 +1,89 @@
+\import{fcap-macros}
+\meta{agent-authored}{true}
+
+\tag{fcap}
+\tag{spin}
+\tag{clifford}
+
+\taxon{Example}
+\title{The compact four-dimensional Spin action is left and right quaternion multiplication}
+
+\p{For #{Q_{4,0}=x_0^2+x_1^2+x_2^2+x_3^2}, keep the algebra map
+#{\Phi:\Cl^+(Q_{4,0})\simeq\mathbb H\times\mathbb H} of \ref{fcap-002K}.
+Write #{\Phi(s)=(q_+,q_-)} for #{s\in\Spin(Q_{4,0})}. In the
+quaternion coordinates
+
+##{W(v_0e_0+v_1e_1+v_2e_2+v_3e_3)=-v_3-v_1i+v_0j-v_2k,}
+
+the vector action is
+
+##{W(svs^{-1})=q_+W(v)\bar q_-.}
+
+The signed permutation #{W} identifies the Euclidean vector norm with the
+quaternion norm. Both factors are unit quaternions, so the right multiplier
+is the inverse of #{q_-}.}
+
+\p{To prove the formula, let #{I=e_0e_1e_2e_3} and use the quaternion
+subalgebra #{H_0} from \ref{fcap-002K}. The vector #{e_3} commutes with
+#{H_0} and anticommutes with #{I}. Hence #{C(x)=e_3xe_3} interchanges
+the two components of #{\Phi(x)}. The identities
+
+##{e_0e_3=-I e_1e_2,\qquad e_1e_3=I e_0e_2,\qquad e_2e_3=-I e_0e_1}
+
+give #{\Phi_1(ve_3)=-W(v)}. Now
+
+##{(svs^{-1})e_3=s(ve_3)C(s^{-1}).}
+
+Applying #{\Phi_1} and negating proves the action formula. For the diagonal
+pair #{(q,q)}, the vector #{e_3} is fixed because #{W(e_3)=-1}; on its
+orthogonal complement #{W} restricts to #{\eta_3} of \ref{fcap-003J}.
+Thus the three-dimensional conjugation action is the diagonal case.}
+
+\p{TauCeti chooses a different algebra equivalence, denoted here by
+#{\widehat\Phi}. Its bilinear-generator formula gives
+
+##{\begin{aligned}
+e_0e_1&\longmapsto(-k,-k),& e_0e_2&\longmapsto(j,-j),\\
+e_0e_3&\longmapsto(i,i),& e_1e_2&\longmapsto(-i,i),\\
+e_1e_3&\longmapsto(j,j),& e_2e_3&\longmapsto(k,-k)
+\end{aligned}}
+
+\leanref/tauceti{TauCeti.realCliffordFourZeroEvenEquivQuaternionProd_ι}.
+In particular, #{\widehat\Phi(I)=(1,-1)}. Define quaternion automorphisms
+
+##{\begin{aligned}
+A(a+bi+cj+dk)&=a-ci+bj+dk,\\
+B(a+bi+cj+dk)&=a+ci-bj+dk.
+\end{aligned}}
+
+They are conjugation by #{(1+k)/\sqrt{2}} and #{(1-k)/\sqrt{2}},
+respectively, and satisfy #{B(q)=kA(q)k^{-1}}. The rows for
+#{e_0e_1,e_0e_2,e_1e_2} identify the restrictions to #{H_0} as
+#{A\circ\theta_0} and #{B\circ\theta_0}. Together with the image of
+#{I}, the decomposition #{x=u+Iu'} therefore proves
+
+##{\widehat\Phi(x)=\bigl(A(\Phi_1(x)),B(\Phi_2(x))\bigr).}}
+
+\p{TauCeti's vector coordinates are
+
+##{\eta_4(v)=-v_2+v_1i-v_0j+v_3k=A(W(v))k^{-1}}
+
+\leanref/tauceti{TauCeti.realCliffordFourZeroQuaternionEquiv_apply}.
+Since #{A,B} commute with quaternion conjugation and
+#{A(\bar q)k^{-1}=k^{-1}\overline{B(q)}}, the formula for #{W} gives
+
+##{\eta_4(svs^{-1})=A(q_+)\eta_4(v)\overline{B(q_-)}.}
+
+This is precisely the action in the #{\widehat\Phi} coordinates
+\leanref/tauceti{TauCeti.realSpinFourEquivQuaternionUnitaryProd_action}.
+The displayed changes of coordinates derive its relation to the natural
+pair #{\Phi} used in \ref{fcap-002K}.}
+
+\p{Gallier \citet{Section 1.4, pp. 29--30}{gallier2014clifford}
+gives the compact even-algebra decomposition into two quaternion factors
+with negative-square generators; \ref{fcap-002K} uses the positive-square
+convention. Porteous \citet{Chapter 8, Propositions 8.26--8.27, p. 65}{porteous1995clifford}
+describes the four-dimensional rotations #{z\mapsto qz\bar r} for unit
+quaternions #{q,r}. The calculation with #{ve_3} identifies these left and
+inverse-right factors for #{\Phi}; the explicit #{A,B,W,\eta_4} formulas
+then give the coordinate translation to #{\widehat\Phi}.}
