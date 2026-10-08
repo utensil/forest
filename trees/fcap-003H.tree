@@ -1,0 +1,74 @@
+\import{fcap-macros}
+\meta{agent-authored}{true}
+
+\tag{fcap}
+\tag{spin}
+\tag{clifford}
+
+\taxon{Lemma}
+\title{The volume term does not obstruct Spin in dimension five}
+
+\p{Let #{K} be a field of characteristic different from two, and let
+#{(V,Q)} be a nondegenerate quadratic space of dimension five over #{K}.
+For #{x\in\Cl^{+}(Q)},
+
+##{x\text{ is the Clifford value of a Spin element}
+\quad\Longleftrightarrow\quad \operatorname{rev}(x)x=1.}
+
+The norm condition implies Lipschitz membership in this dimension
+\leanref/tauceti{CliffordAlgebra.evenUnitaryGroup_le_lipschitzGroup_of_finrank_eq_five}.
+The point is to remove the possible degree-five term left by the
+dimension-four argument of \ref{fcap-002J}.}
+
+\p{Choose an orthogonal basis #{e_1,\ldots,e_5}, suppress the generator
+map, and put #{\omega=e_1\cdots e_5}. Nondegeneracy gives
+
+##{\omega^2=\delta1,\qquad
+\delta=\prod_{i=1}^5 Q(e_i)\ne0.}
+
+The element #{\omega} is central and invertible. Suppose
+#{\operatorname{rev}(x)x=1}. Finite dimensionality makes the left inverse
+a two-sided inverse. For any #{v\in V}, the element #{y=xvx^{-1}} is odd
+and satisfies #{\operatorname{rev}(y)=y}. In the orthogonal monomial basis,
+reversal has signs #{+1,-1,+1} on degrees one, three and five. Hence
+
+##{y=w+c\omega\qquad(w\in V,\ c\in K).}}
+
+\p{Conjugation preserves the scalar square of a vector. Since #{\omega}
+is central,
+
+##{Q(v)1=y^2=Q(w)1+2c\omega w+c^2\delta1.}
+
+Each #{\omega e_i} is a nonzero scalar multiple of the product of the
+other four basis vectors. Thus #{\omega w} has pure degree four in this
+basis, whereas the other terms in the equation are scalar. Independence of
+the Clifford basis gives #{2c\omega w=0}. As two and #{\omega} are
+invertible, either #{c=0} or #{w=0}. In the latter case #{y=c\omega} is
+central, so conjugating back gives #{v=x^{-1}yx=y=c\omega}.
+The degree-one and degree-five subspaces have zero intersection; therefore
+#{v=0} and #{c=0}. In both cases #{y\in V}.}
+
+\p{Thus #{x} normalizes the vector space. The Clifford-group
+characterization makes it Lipschitz; together with evenness and reverse
+norm one, this is the Spin criterion of \ref{fcap-0028}. The reverse
+implication is that same criterion. In fact the carrier equality holds in
+every dimension from one through five
+\leanref/tauceti{CliffordAlgebra.range_spinGroup_toUnits_eq_evenUnitaryGroup}.
+The lower bound matters: in dimension zero the vector-generated Lipschitz
+group is trivial, whereas the even-unitary group contains both #{1} and
+#{-1}. This carrier equality alone supplies no symplectic matrix model;
+the spinor pairing and matrix inverse for complex dimension five remain
+the separate argument of \ref{fcap-0033}.}
+
+\p{Porteous gives the real dimension-five proof by separating the vector,
+trivector and volume terms
+\citet{Chapter 16, Proposition 16.15, p. 147}{porteous1995clifford}.
+His relation is #{v^2=-q(v)}, so here #{Q=-q}; his conjugation is
+#{\operatorname{rev}\circ\alpha}, equal to reversal on even elements.
+His indefinite Spin carrier permits norm #{\pm1}; we select norm #{+1}.
+The basis calculation above extends the norm-one argument from real spaces
+to the stated fields: orthogonality, nonzero basis squares and invertibility
+of two replace any need for real unit-length normalization. Gallier records
+the compact boundary at five and the failure at six
+\citet{Section 1.4, closing Remark, p. 31}{gallier2014clifford};
+the next example computes that failure.}
