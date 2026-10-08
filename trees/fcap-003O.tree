@@ -1,0 +1,88 @@
+\import{fcap-macros}
+\meta{agent-authored}{true}
+
+\tag{fcap}
+\tag{spin}
+\tag{quadratic-forms}
+
+\taxon{Proposition}
+\title{Spin lifts over a quadratic extension}
+
+\p{Keep the quadratic-space hypotheses of \ref{fcap-003N}. Let
+#{d\in K^\times} be nonsquare, put #{L=K(\sqrt d)}, and let #{\sigma}
+be its nontrivial #{K}-automorphism. The square-class map has kernel
+
+##{\ker j=\{1,[d]_K\}.}
+
+Consequently, for #{g\in SO(V,Q)},
+
+##{g_L\text{ has a Spin lift}
+\quad\Longleftrightarrow\quad
+\nu_Q(g)\in\{1,[d]_K\}.}
+
+The trivial class already gives a lift over #{K}. If #{\nu_Q(g)=[d]_K},
+the two lifts over #{L} are exchanged by #{\sigma}; neither is the scalar
+extension of a #{K}-defined Spin element.}
+
+\subtree{
+\taxon{Proof}
+\p{Suppose #{a\in K^\times} becomes a square in #{L}. Write
+
+##{a=(u+v\sqrt d)^2=u^2+dv^2+2uv\sqrt d,
+\qquad u,v\in K.}
+
+The basis #{1,\sqrt d} and characteristic different from two give
+#{uv=0}. If #{v=0}, then #{a=u^2}; if #{u=0}, then #{a=dv^2}.
+The nonzero remaining coefficient shows that #{[a]_K} is respectively
+#{1} or #{[d]_K}. Both classes become squares in #{L}, and they are
+distinct because #{d} is nonsquare. This proves the kernel formula;
+\ref{fcap-003N} gives the criterion for #{g_L}.}
+
+\p{Now assume #{\nu_Q(g)=[d]_K}. By \ref{fcap-002D}, take a
+Lipschitz lift #{x} of #{g}; determinant parity makes it even.
+Its reverse norm is #{db^2} for some #{b\in K^\times}.
+Replacing #{x} by #{x/b} preserves its action and makes
+#{N_{\mathrm{rev}}(x)=d}. In the extended Clifford algebra set
+
+##{s=\frac{c(x)}{\sqrt d}.}
+
+Scalar units are Lipschitz and even by \ref{fcap-002D}. Thus #{s} is
+even and Lipschitz, and
+
+##{N_{\mathrm{rev}}(s)=\frac{d}{(\sqrt d)^2}=1.}
+
+The carrier criterion \ref{fcap-0028} places #{s} in the actual
+#{\Spin(Q_L)}, and scalar normalization leaves its vector action equal
+to #{g_L}. Any other Spin lift differs from #{s} by a scalar unit, by
+the Lipschitz action kernel over #{L}. Norm one forces that scalar's square
+to be one, so all lifts are precisely #{s} and #{-s}.}
+
+\p{The coefficient automorphism #{\sigma} acts semilinearly on
+#{\Cl(Q_L)}: it fixes each extended generator and sends #{\sqrt d}
+to #{-\sqrt d}. In particular it fixes #{c(x)} and gives
+
+##{\sigma(s)=-s,\qquad \sigma(-s)=s.}
+
+These elements are distinct because #{s} is a unit and the characteristic
+is not two. Every Clifford element obtained by extending coefficients from
+#{K} is fixed by #{\sigma}. Neither lift can therefore come from
+#{\Spin(Q)}, in agreement with its nontrivial spinor-norm obstruction.}
+}
+
+\p{For an explicit rational example, take #{K=\mathbb Q} and
+
+##{Q(ae+bf)=a^2+2b^2,\qquad g=-\operatorname{Id}=r_e r_f.}
+
+Here #{e^2=1}, #{f^2=2}, and #{ef=-fe}. Thus #{x=ef} satisfies
+
+##{\operatorname{rev}(x)x=feef=2,\qquad x^2=efef=-2,}
+
+and #{\nu_Q(g)=[2]_{\mathbb Q}} is nontrivial. Over
+#{L=\mathbb Q(\sqrt2)}, however,
+
+##{s=\frac{ef}{\sqrt2},\qquad
+N_{\mathrm{rev}}(s)=1,\qquad s^2=-1.}
+
+Its vector action is still #{-\operatorname{Id}}. The two Spin lifts
+#{s,-s} are interchanged by conjugating #{\sqrt2}; the rational orthogonal
+transformation acquires lifts without either lift becoming rational.}

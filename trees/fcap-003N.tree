@@ -1,0 +1,84 @@
+\import{fcap-macros}
+\meta{agent-authored}{true}
+
+\tag{fcap}
+\tag{spin}
+\tag{quadratic-forms}
+
+\taxon{Theorem}
+\title{Spinor norms commute with extension of scalars}
+
+\p{Let #{L/K} be an extension of fields of characteristic different from
+two. Let #{V} be a positive-dimensional finite-dimensional #{K}-space,
+and let #{Q} be nondegenerate. Set #{V_L=L\otimes_K V}, with extended
+form #{Q_L}, and write
+
+##{j:K^{\times}/(K^\times)^2\longrightarrow L^{\times}/(L^\times)^2,
+\qquad j([a]_K)=[a]_L.}
+
+For #{g\in O(V,Q)}, scalar extension gives
+#{g_L(a\otimes v)=a\otimes g(v)}. Then
+
+##{\nu_{Q_L}^O(g_L)=j\bigl(\nu_Q^O(g)\bigr).}
+
+In particular, for #{g\in SO(V,Q)},
+
+##{\nu_{Q_L}(g_L)=j\bigl(\nu_Q(g)\bigr),}
+
+and #{g_L} has a Spin lift exactly when #{j(\nu_Q(g))=1}.}
+
+\subtree{
+\taxon{Proof}
+\p{A Gram matrix for the unhalved polar form #{B_Q} has nonzero
+determinant. Its determinant remains nonzero under the field embedding,
+so #{Q_L} is nondegenerate. For #{Q(v)\ne0}, the reflection formula is
+
+##{r_v(x)=x-\frac{B_Q(x,v)}{Q(v)}v.}
+
+Since #{Q_L(1\otimes v)=Q(v)} and the polar form extends by
+#{L}-bilinearity, this formula on pure tensors gives
+#{(r_v)_L=r_{1\otimes v}}. Cartan--Dieudonne writes any orthogonal
+#{g} as #{r_{v_1}\cdots r_{v_k}}. The reflection values from
+\ref{fcap-002D} therefore give
+
+##{\begin{aligned}
+\nu_{Q_L}^O(g_L)
+&=\left[\prod_{i=1}^k Q_L(1\otimes v_i)\right]_L\\
+&=j\left(\left[\prod_{i=1}^k Q(v_i)\right]_K\right)
+=j\bigl(\nu_Q^O(g)\bigr).
+\end{aligned}}
+
+Determinants also extend, so restricting to #{SO} proves the second
+identity. Apply the image/kernel theorem \ref{fcap-0023} over #{L}
+to obtain the lifting criterion.}
+}
+
+\p{The Clifford map #{c:\Cl(Q)\to\Cl(Q_L)} sends
+#{\iota_Q(v)} to #{\iota_{Q_L}(1\otimes v)}. It preserves parity,
+reversal and products, and carries each nonisotropic vector unit to a
+nonisotropic vector unit. Thus it restricts to a map of the actual Spin
+carriers, and their vector actions satisfy
+
+##{q_L(c(s))=(q_K(s))_L\qquad(s\in\Spin(Q)),}
+
+where #{q_K} and #{q_L} denote the Spin projections. Indeed, apply #{c}
+to the conjugation identity on every vector generator. A lift defined over
+#{K} therefore remains a lift over #{L}; the next proposition explains how
+additional lifts can appear when #{j} kills a nontrivial square class.}
+
+\p{\citet{Section 2.7, pp. 60--61}{chevalley1954algebraic}
+describes the Clifford extension, compatibility with the main
+antiautomorphism, and the group/vector-action inclusions in even dimension.
+His main antiautomorphism is reversal. The reflection proof above gives the
+stated naturality in every positive dimension, using the reverse-norm
+convention of \ref{fcap-002D}.}
+
+\p{TauCeti proves the orthogonal and special-orthogonal identities in
+\leanref/tauceti{CliffordAlgebra.orthogonalSpinorNorm_orthogonalGroupBaseChange}
+and
+\leanref/tauceti{CliffordAlgebra.spinorNorm_specialOrthogonalGroupBaseChange}
+under the field, finite-dimensionality, nondegeneracy and invertibility-of-two
+hypotheses. The commuting Spin-action square is
+\leanref/tauceti{CliffordAlgebra.spinToSpecialOrthogonal_baseChange};
+its more general input is a finite free module over a commutative ring
+with two invertible.}
