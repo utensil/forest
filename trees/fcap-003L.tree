@@ -1,0 +1,69 @@
+\import{fcap-macros}
+\meta{agent-authored}{true}
+
+\tag{fcap}
+\tag{spin}
+\tag{lie}
+
+\taxon{Theorem}
+\title{Lie-algebra representations integrate uniquely on compact Spin}
+
+\p{Let #{n\geq3}, let #{F=\mathbb R} or #{\mathbb C}, and let #{S}
+be a finite-dimensional #{F}-vector space. Put #{G=\Spin(Q_n^+)} for
+the compact positive-square group of \ref{fcap-0039}, and write
+#{b:\mathfrak{so}(n)\to T_1G} for the quadratic lift of
+\ref{fcap-0037}. Every real-linear Lie-algebra homomorphism
+
+##{r:\mathfrak{so}(n)\longrightarrow\mathfrak{gl}_F(S)}
+
+has a unique smooth group representation
+#{R:G\to GL_F(S)} satisfying
+
+##{dR_1(b(A))=r(A),\qquad
+R\bigl(\exp(t b(A))\bigr)=\exp(t r(A)).}
+
+Here #{A\in\mathfrak{so}(n)} and #{t\in\mathbb R}. When
+#{F=\mathbb C}, the target #{\mathfrak{gl}_{\mathbb C}(S)} is
+regarded as a real Lie algebra: the group being represented is compact real
+Spin, and its operators on #{S} are complex-linear.}
+
+\p{\citet{Section 8.3, Proposition 8.41 and Second Principle,
+pp. 118--119}{fulton2004representation} proves integration by the
+graph-subgroup construction. The concrete Lie structure in
+\ref{fcap-0037} and simple connectedness in \ref{fcap-003A} supply
+its hypotheses for the selected Spin carrier.}
+
+\subtree{
+\taxon{Proof}
+\p{Compose #{r} with #{b^{-1}} to obtain a Lie homomorphism
+#{\widetilde r:T_1G\to\mathfrak{gl}_F(S)}. Its graph
+
+##{\mathfrak j=\{(X,\widetilde r(X)):X\in T_1G\}}
+
+is a real Lie subalgebra of #{T_1G\oplus\mathfrak{gl}_F(S)}.
+The Lie-subgroup theorem integrates it to a connected immersed subgroup
+#{J\subseteq G\times GL_F(S)}. Projection onto the first factor
+gives a homomorphism #{p:J\to G} whose differential is an isomorphism.}
+
+\p{Thus #{p} is a local diffeomorphism. Its image is an open subgroup
+of connected #{G}, hence all of #{G}. Moreover, #{p} is a covering:
+choose an identity neighborhood #{U\subseteq J} on which #{p} is a
+diffeomorphism onto #{V\subseteq G}. The inverse image of #{V} is the
+disjoint union of the translates #{kU}, #{k\in\ker p}; every translate
+maps diffeomorphically to #{V}. Since #{J} is connected and #{G} is
+simply connected, this covering is an isomorphism. Projection onto the
+second factor after #{p^{-1}} is the required #{R}.}
+
+\p{A smooth homomorphism carries a one-parameter subgroup to the
+one-parameter subgroup with the differentiated generator. This gives the
+exponential identity above. If two homomorphisms have the stated
+differential, they therefore agree on the image of an exponential
+neighborhood of zero. An identity neighborhood generates every connected
+Lie group, so they agree on all of #{G}.}
+}
+
+\p{TauCeti's \leanref/tauceti{lieMap_injective} proves this uniqueness
+principle for smooth homomorphisms out of a preconnected finite-dimensional
+real Lie group. It does not supply the existence construction above. The
+restriction #{n\geq3} enters through simple connectedness; the circle
+#{\Spin(2)} does not have the same unrestricted integration property.}
