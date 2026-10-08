@@ -1,0 +1,97 @@
+\import{fcap-macros}
+\meta{agent-authored}{true}
+
+\tag{fcap}
+\tag{spin}
+\tag{representation-theory}
+
+\taxon{Proposition}
+\title{The central sign determines descent to the special orthogonal group}
+
+\p{Keep the hypotheses and notation of \ref{fcap-003L}, and let
+#{q:G\to SO(n)} be the vector action. The integrated representation
+#{R} factors through a smooth representation #{\overline R} of
+#{SO(n)} precisely when
+
+##{R(-1)=\operatorname{Id}_S.}
+
+Equivalently, let #{J\in\mathfrak{so}(n)} send
+#{e_1\mapsto-e_2}, #{e_2\mapsto e_1}, and vanish on the remaining
+coordinate vectors. Then the descent condition is
+
+##{\exp\bigl(2\pi r(J)\bigr)=\operatorname{Id}_S.}}
+
+\subtree{
+\taxon{Proof}
+\p{The covering \ref{fcap-0039} has kernel #{\{1,-1\}}. A
+factorization forces #{R(-1)=\overline R(1)=\operatorname{Id}_S}.
+Conversely, under that condition set
+#{\overline R(q(g))=R(g)}. Any two lifts differ by #{1} or #{-1},
+so the value is independent of the lift. Surjectivity of #{q} proves
+both the homomorphism law and uniqueness of #{\overline R}. The
+differential of #{q} is an isomorphism by \ref{fcap-0037}; its local
+smooth inverse sections express #{\overline R} locally as #{R}
+composed with a smooth section. Hence the descended representation is
+smooth. Finally, \ref{fcap-0038} gives
+
+##{\exp\bigl(2\pi b(J)\bigr)=-1,}
+
+so exponential naturality identifies #{R(-1)} with the displayed
+matrix exponential.}
+}
+
+\p{This criterion compares the integrated action with Clifford modules.
+Suppose
+
+##{f:\Cl^0(Q_n^+)\longrightarrow\operatorname{End}_F(S)}
+
+is a unital real-algebra homomorphism from the even Clifford algebra.
+Its restriction #{R_f(g)=f(g)} takes Spin to invertible operators,
+with inverse #{f(g^{-1})}. Finite-dimensional linearity makes this
+restriction smooth. Since #{b(A)} is even, the exponential power series
+stays inside #{\Cl^0(Q_n^+)} and gives
+
+##{R_f\bigl(\exp(t b(A))\bigr)
+=\exp\bigl(t f(b(A))\bigr).}
+
+Since #{f} preserves commutators, #{r(A)=f(b(A))} is a Lie-algebra
+action. Consequently #{d(R_f)_1(b(A))=f(b(A))}. The uniqueness in
+\ref{fcap-003L} identifies #{R_f} with the integrated action for
+#{r(A)=f(b(A))}; it is an equality on the chosen module, not merely
+an unspecified representation equivalence.}
+
+\p{Unitality gives #{R_f(-1)=-\operatorname{Id}_S}. Thus a nonzero
+such module does not descend to #{SO(n)}. This includes the complex
+spin and half-spin modules: they are restrictions of modules for the
+complexified even Clifford algebra, as described in
+\citet{Section 3.7.5, pp. 80--81}{meinrenken2013clifford}.
+No extension of a half-spin module to the full Clifford algebra is needed.
+The central scalar #{-1} is fixed by the even-algebra sign comparison in
+\ref{fcap-0039}, so this obstruction is unchanged by the two Clifford
+sign conventions.}
+
+\p{The same calculation shows why tensor constructions can descend.
+On #{S\otimes_F S} the central element acts by
+#{(-\operatorname{Id})\otimes(-\operatorname{Id})=\operatorname{Id}};
+on #{\operatorname{End}_F(S)} its conjugation action is also the identity.
+Both actions therefore factor through #{SO(n)}. Differentiating their
+defining group actions gives, respectively,
+
+##{\begin{aligned}
+A\cdot(s\otimes t)&=r(A)s\otimes t+s\otimes r(A)t,\\
+A\cdot T&=r(A)T-Tr(A).
+\end{aligned}}
+
+The tensor formula agrees with
+\citet{Section 8.1, equation (8.12), p. 110}{fulton2004representation}.
+Descent concerns the central action of the whole group, even though these
+differentiated formulas use only its Lie algebra.}
+
+\p{For an action of the full real Clifford algebra, TauCeti's
+\leanref/tauceti{AlgHom.lieMap_realCliffordSpinSmoothHom_eq}
+identifies its differentiated smooth restriction with the quadratic
+Clifford action. The declaration uses the closed Spin range in Clifford
+units and its Lie-algebra coordinates; the natural carrier equivalence
+transports the action back to #{G}. Its input is a full-Clifford algebra
+homomorphism into a finite-dimensional normed real algebra. It does not
+state the even-module extension or the descent criterion proved here.}
