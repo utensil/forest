@@ -1,0 +1,73 @@
+\import{fcap-macros}
+\meta{agent-authored}{true}
+
+\tag{fcap}
+\tag{spin}
+\tag{clifford}
+
+\taxon{Example}
+\title{A norm-one even unit can leave the vector space in dimension six}
+
+\p{Let #{K} be a field of characteristic different from two, and let
+#{(V,Q)} be a finite-dimensional nondegenerate quadratic space containing
+six orthogonal vectors #{e_1,\ldots,e_6} with #{Q(e_i)\ne0}. Put
+
+##{\omega=e_1\cdots e_6,\qquad
+\delta=\prod_{i=1}^6 Q(e_i).}
+
+Now #{\omega} is even, #{\operatorname{rev}(\omega)=-\omega}, and
+#{\omega^2=-\delta1}. It anticommutes with each of the six displayed
+vectors. If #{a,b\in K} satisfy #{a^2+\delta b^2=1}, then
+
+##{x=a+b\omega,\qquad x^{-1}=\operatorname{rev}(x)=a-b\omega}
+
+is an even unit of reverse norm one. Its action on a displayed basis vector is
+
+##{xe_i x^{-1}=(a^2-\delta b^2)e_i+2ab\omega e_i.}}
+
+\p{For #{ab\ne0}, the last term is a nonzero degree-five monomial,
+up to a scalar. Extend the six vectors to an orthogonal basis; independence
+of the Clifford monomials shows that the displayed conjugate is not a
+vector. Since #{x} is even, ordinary and twisted conjugation agree.
+Thus #{x} is not Lipschitz and cannot belong to Spin, despite satisfying
+the norm equation
+\leanref/tauceti{CliffordAlgebra.notMem_lipschitzGroup_of_mem_evenUnitaryGroup_of_coe_eq}.
+Only the selected six vectors are used: in higher dimension #{\omega}
+commutes with an additional orthogonal vector, which does not affect this
+counterexample.}
+
+\p{For a concrete compact example, take #{K=\mathbb R} and
+#{Q(v)=v_1^2+\cdots+v_6^2}. With #{a=b=1/\sqrt2}, one obtains
+
+##{x=\frac{1+\omega}{\sqrt2},\qquad
+\operatorname{rev}(x)x=1,\qquad
+xe_1x^{-1}=\omega e_1=-e_2e_3e_4e_5e_6.}
+
+Porteous \citet{Chapter 16, p. 146}{porteous1995clifford}
+exhibits the unnormalized element #{1+\omega} of norm two.}
+
+\p{Gallier \citet{Section 1.4, closing Remark, p. 31}{gallier2014clifford}
+uses the normalized element above.}
+
+\p{Their compact generators square to #{-1}. With that choice the same
+six-vector product still squares to #{-1}, but
+#{\omega e_1=+e_2e_3e_4e_5e_6}. Both signs give the same obstruction.
+The calculation here uses the positive-square convention of
+\ref{fcap-002H}.}
+
+\p{Over any infinite #{K} as above, the conic always supplies
+#{a,b\ne0}. Indeed, choose #{t\ne0} with #{1+\delta t^2\ne0} and
+#{1-\delta t^2\ne0}, and set
+
+##{a=\frac{1-\delta t^2}{1+\delta t^2},\qquad
+b=\frac{2t}{1+\delta t^2}.}
+
+Only finitely many values of #{t} are excluded, and substitution gives
+#{a^2+\delta b^2=1}. Consequently the Spin image is a proper subgroup
+of the even-unitary group for every nondegenerate form of dimension at
+least six over an infinite field of characteristic different from two
+\leanref/tauceti{CliffordAlgebra.range_spinGroup_toUnits_ne_evenUnitaryGroup_of_six_le_finrank}.
+This field extension follows from the displayed calculation; the cited
+book passages concern real spaces. Over a finite field the conditional
+six-vector construction remains valid, but this infinitude argument makes
+no assertion that a suitable conic point exists.}
