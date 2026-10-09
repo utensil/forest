@@ -152,7 +152,7 @@ verify-render:
 verify-pdf-fixtures:
     #!/usr/bin/env bash
     set -euo pipefail
-    fixtures=(spin-0001 hopf-0001 ca-0001 fgap-0001 fgap-001F fgap-001G fcap-0001 connes-0001 tt-0001 uts-000C ftip-0001 ftip-00NX)
+    fixtures=(spin-0001 hopf-0001 ca-0001 fgap-0001 fgap-001F fgap-001G fcap-0001 connes-0001 tt-0001 uts-000C ftip-0001 ftip-00NX frap-0001)
     for tree_id in "${fixtures[@]}"; do
         ./lize.sh "$tree_id" > "build/forester-pdf-$tree_id.log" 2>&1
     done
