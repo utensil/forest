@@ -1,0 +1,33 @@
+\import{macros}
+\import{lean-macros}
+\meta{agent-authored}{true}
+\tag{frap}
+
+\taxon{Lemma}
+\title{The inverse of a facet move}
+
+\p{Let #{P} be a finite regular abstract polytope of rank #{n\geq3},
+#{H} a facet and #{\alpha\in\Gamma^+(H/F_{-1})} a facet rotation.
+The [facet move](frap-000L) #{\mu_{H,\alpha}} is a permutation of
+#{\mathcal R(P)}, with}
+##{\mu_{H,\alpha}^{-1}=\mu_{H,\alpha^{-1}}.}
+\p{This follows directly from the construction in
+\citet{Definitions 5--6}{marchetti2025rubik}.}
+
+\proof{
+  \p{An automorphism preserves proper faces and the order relation,
+  so the moving branch remains in #{\mathcal R(P)}. Since
+  #{\widehat\alpha(H)=H}, the condition #{F\leq H} holds exactly when
+  #{\widehat\alpha(F)\leq H}. Thus the moving and fixed subsets are
+  preserved separately. On the moving subset the extension of
+  #{\alpha^{-1}} is #{\widehat\alpha^{-1}} by
+  [uniqueness](frap-000J), and cancels the first map. On the fixed subset
+  both maps are the identity.}
+}
+
+\p{The general construction combining permutations of complementary
+subsets is \leanref{Equiv.Perm.subtypeCongr}; its inverse formula is
+\leanref{Equiv.Perm.subtypeCongr.symm}. Here the predicate is #{F\leq H},
+the moving permutation is the restricted shape automorphism and the other
+permutation is the identity. These declarations supply that general
+combination; the polytope-specific preservation argument is the proof above.}
