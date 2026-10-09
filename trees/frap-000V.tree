@@ -1,0 +1,39 @@
+\import{macros}
+\meta{agent-authored}{true}
+\tag{frap}
+
+\taxon{Example}
+\title{Corner twists and edge flips on the cube}
+
+\p{Use the unmarked-center, fixed-frame sticker model of
+[one cube face turn](frap-000P). We apply the canonical character of
+\citet{Section 3.1, p. 7}{marchetti2025rubik} to this explicit action.
+At a corner the three incident sticker directions have a cyclic order
+inherited from the ambient orientation. Choose bijective cyclic frames
+at all eight positions. Rotations preserve that order, giving local group
+#{C_3}; at each of the twelve edges an ordering of its two stickers gives
+local group #{C_2}. Both actions on the local stickers are faithful.
+Writing these groups additively, the two characters are}
+##{\chi_c=\sum_{i=1}^{8}a_i\pmod3,\qquad
+      \chi_e=\sum_{j=1}^{12}b_j\pmod2.}
+
+\p{A quarter-turn has one four-cycle of affected corners and one of
+affected edges. Four applications restore every sticker, so the return
+transport on each of these cycles is the identity. Every other corner
+and edge is fixed with identity local transport. The
+[cycle criterion](frap-000U) gives #{\chi_c=0} and #{\chi_e=0}
+for every face quarter-turn. The [kernel argument](frap-000T) extends
+this to every word in those turns, including inverses and half-turns.}
+
+\p{For a concrete cyclic frame, choose any frame at corner #{i_0} of
+the upper face and define the next three by transporting it with the
+shape rotation #{q}. Since #{q^4=1}, all four local factors of this
+turn become zero. This frame checks that one generator; the
+[frame-independence theorem](frap-000S) transfers the conclusion to
+any fixed choice of cyclic frames used for the other generators.}
+
+\p{A configuration twisting just one corner by #{1} has
+#{\chi_c=1} and is impossible under these moves. Twisting two corners
+by #{1} and #{-1} passes this test, but the calculation alone does not
+construct a legal sequence. Likewise, flipping exactly one edge fails
+the second test. Reachability needs additional arguments.}
