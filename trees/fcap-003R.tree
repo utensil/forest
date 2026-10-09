@@ -1,0 +1,87 @@
+\import{fcap-macros}
+\meta{agent-authored}{true}
+
+\tag{fcap}
+\tag{spin}
+\tag{clifford}
+
+\taxon{Theorem}
+\title{Primitive invariants and their quadratic form}
+
+\related{\ref{ca-000J}}
+
+\p{Let #{\mathfrak g} be finite-dimensional complex semisimple of
+rank #{\ell}. Write
+#{I=(\bigwedge\mathfrak g)^{\mathfrak g}} for the adjoint invariants
+and #{I^+} for their positive-degree part. Extend the Killing form
+#{\kappa} to the determinant pairing #{\langle-,-\rangle} on each
+exterior degree, with different degrees orthogonal. Let
+#{\pi:\bigwedge\mathfrak g\to I} be the invariant projection along
+#{\mathfrak g\mathbin{\cdot}\bigwedge\mathfrak g}, the span of all
+adjoint derivatives. The coproduct on #{I} is
+
+##{\Delta=(\pi\otimes\pi)\Delta_0|_I,}
+
+where #{\Delta_0(x)=x\otimes1+1\otimes x} for #{x\in\mathfrak g}.
+It is this projected coproduct that defines primitive invariants:
+
+##{P=\{p\in I:\Delta p=p\otimes1+1\otimes p\}
+=I^+\cap((I^+)^2)^\perp.}
+
+The ordinary exterior coproduct need not take #{I} into #{I\otimes I}.
+The Lie-homology construction makes #{I}, with the displayed
+#{\Delta}, a graded super Hopf algebra; multiplication on
+#{I\otimes I} uses the Koszul rule
+#{(a\otimes b)(c\otimes d)=(-1)^{\lvert b\rvert\lvert c\rvert}ac\otimes bd}
+for homogeneous elements. The coproduct is dual to the wedge
+product. This is the input from
+\citet{Theorem 10.1 and Proposition 10.11, pp. 240--241}{meinrenken2013clifford}.}
+
+\p{The Hopf--Koszul--Samelson theorem says that inclusion extends to
+
+##{\bigwedge P\xrightarrow{\sim}I.}
+
+Here every primitive has odd exterior degree. Indeed, a nonzero
+homogeneous even primitive #{p} would have a least nilpotent power
+#{p^k=0}; the component #{k p\otimes p^{k-1}} of #{\Delta(p^k)}
+could not vanish in characteristic zero. The orthogonal decomposition
+#{I^+=P\oplus(I^+)^2} then proves generation: substituting it
+repeatedly expresses every element as a polynomial in #{P}, since
+the augmentation ideal is nilpotent. For independence, contraction
+by a primitive acts as an odd derivation on #{I}, and contraction
+of two primitives is a scalar. The first assertion is dual to
+#{\Delta} preserving multiplication; the second follows from
+#{P\perp(I^+)^2}. Successive contractions by a dual primitive basis
+extract the coefficients of an exterior-monomial relation, starting
+with the largest number of factors. All coefficients vanish.
+This proves the stated isomorphism; compare
+\citet{Theorem 10.2 and Proposition 10.13, pp. 242--243}{meinrenken2013clifford}.
+By \ref{fcap-003P}, #{\dim I=2^\ell}, so #{\dim P=\ell}.}
+
+\p{For #{x\in\mathfrak g}, let #{\iota_x} be contraction using
+#{\kappa}, and set
+#{\iota_{x_1\wedge\cdots\wedge x_k}=\iota_{x_1}\cdots\iota_{x_k}}.
+Exterior reversion is
+#{\operatorname{rev}(u)=(-1)^{k(k-1)/2}u} on degree #{k}.
+The form relevant to Clifford multiplication is
+
+##{B_\wedge(u,v)=(\iota_u v)_0
+=\langle\operatorname{rev}(u),v\rangle,\qquad
+Q_P(p)=B_\wedge(p,p).}
+
+In particular, on primitive degree #{2m+1},
+#{B_\wedge(p,q)=(-1)^m\langle p,q\rangle}. The Clifford polar
+relation for #{Q_P} is therefore #{pq+qp=2B_\wedge(p,q)}, with
+the same generator-square convention as #{Q_\kappa(x)=\kappa(x,x)}.}
+
+\p{This restriction of #{B_\wedge} to #{P} is nondegenerate.
+Choose a compact real form. Its Killing form is negative definite;
+on exterior degree #{k}, the determinant pairing is #{(-1)^k}
+times a positive definite real form. The subspace #{P} is graded
+and preserved by compact conjugation, so the determinant pairing
+and its degreewise sign multiple #{B_\wedge} are nondegenerate
+there. This also explains the normalization change from
+\citet{Section 11.3, p. 260}{meinrenken2013clifford}, which starts
+with a positive compact form. Replacing that form by its negative
+preserves the graded orthogonal subspaces while changing the indicated
+degree signs.}

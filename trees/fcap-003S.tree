@@ -1,0 +1,119 @@
+\import{fcap-macros}
+\meta{agent-authored}{true}
+
+\tag{fcap}
+\tag{spin}
+\tag{clifford}
+
+\taxon{Theorem}
+\title{Kostant's primitive Clifford factorization}
+
+\p{With #{P,Q_P} as in \ref{fcap-003R}, put
+#{A=\Cl(Q_\kappa)} and #{J=A^{\mathfrak g}} for the commutator
+invariants of \ref{fcap-003P}. Let
+#{q:\bigwedge\mathfrak g\to A} be antisymmetrization. Then
+#{p\mapsto q(p)} extends to an isomorphism of complex superalgebras
+
+##{\Cl(Q_P)\xrightarrow{\sim}J.}
+
+Consequently multiplication gives
+
+##{\operatorname{End}(V_\rho)\otimes\Cl(Q_P)
+\xrightarrow{\sim}\Cl(Q_\kappa).}
+
+The endomorphism factor is purely even. Thus the displayed tensor
+product has the ordinary multiplication as well as the superalgebra
+interpretation. The proof below establishes the Clifford relation
+and generation separately.}
+
+\p{We use the Lie-homology Hodge decomposition
+
+##{\bigwedge\mathfrak g
+=I\oplus\operatorname{im}d\oplus\operatorname{im}\partial
+=I\oplus(\mathfrak g\mathbin{\cdot}\bigwedge\mathfrak g),}
+
+orthogonal for #{B_\wedge}. Here #{\partial} is the Lie-homology
+boundary and #{d} is the cohomology differential transported by
+#{\kappa}. The needed contraction identities are
+
+##{\iota_{\operatorname{im}d}I\subseteq\operatorname{im}\partial,
+\qquad
+\iota_{\operatorname{im}\partial}I\subseteq\operatorname{im}d,}
+
+##{\ker\partial\wedge\operatorname{im}\partial
+\subseteq\mathfrak g\mathbin{\cdot}\bigwedge\mathfrak g.}
+
+Proposition 10.8 and Lemmas 10.4--10.5 of
+\citet{pp. 238--239}{meinrenken2013clifford}
+give these identities.
+Changing the compact form's sign multiplies contractions and the
+transported differential by degreewise nonzero scalars, so the
+displayed ranges and identities also hold for #{\kappa}.}
+
+\p{Choose a homogeneous basis #{\tau_a} of the exterior algebra
+adapted to the three Hodge summands, and its #{B_\wedge}-dual basis
+#{\tau^a}. For odd #{p\in P} and #{q'\in P}, the Clifford
+product formula is
+
+##{q^{-1}(q(p)q(q'))=
+\sum_a\iota_{\tau_a}p\wedge\iota_{\tau^a}q'.}
+
+This is the contraction expansion in
+\citet{equation (11.10), p. 260}{meinrenken2013clifford}; using the
+#{B_\wedge}-dual basis incorporates the reversion signs. Terms
+indexed by #{\operatorname{im}d} lie in
+#{\mathfrak g\mathbin{\cdot}\bigwedge\mathfrak g} by the two
+contraction identities and the boundary-product identity. Terms
+indexed by #{\operatorname{im}\partial} lie in
+#{\operatorname{im}d}, because #{d} is a derivation and the wedge
+product of two exact elements is exact. Their combined sum is zero:
+the full product and the terms indexed by #{I} are invariant,
+whereas the remaining terms lie in the complementary Hodge summand.}
+
+\p{Take a homogeneous basis #{p_1,\ldots,p_\ell} of #{P} and its
+#{B_\wedge}-dual basis #{p^1,\ldots,p^\ell}. The HKS monomials
+give a basis of #{I}. Repeated primitive contractions of a primitive
+vanish after the first contraction, which is already scalar.
+Moreover, #{\mathbb C\oplus P\oplus(I^+)^2} is orthogonal, so
+the dual vectors belonging to the single primitives are #{p^i}.
+Only the constant monomial and the single primitives survive in
+the preceding sum. Hence
+
+##{q^{-1}(q(p)q(q'))
+=p\wedge q'+\sum_i B_\wedge(p_i,p)B_\wedge(p^i,q')
+=p\wedge q'+B_\wedge(p,q').}
+
+Both primitives are odd, so swapping them cancels their wedge
+products and yields
+
+##{q(p)q(q')+q(q')q(p)=2B_\wedge(p,q').}
+
+This is Kostant's primitive Clifford relation in the fixed sign
+convention; see
+\citet{Theorem 11.6 and equation (11.13), pp. 260--261}{meinrenken2013clifford}
+and \citet{Theorem 35, pp. 306--308}{kostant1997clifford}.}
+
+\p{The universal property now gives a homomorphism
+#{\Cl(Q_P)\to J}. To prove generation, order the HKS monomials
+by their total exterior degree. The product
+#{q(p_{i_1})\cdots q(p_{i_s})} has leading exterior term
+#{p_{i_1}\wedge\cdots\wedge p_{i_s}} under #{q^{-1}}; its other
+terms have lower degree, by the Clifford filtration. They are
+invariant, hence linear combinations of lower-degree HKS monomials.
+Induction therefore puts every #{q(p_{i_1}\wedge\cdots\wedge p_{i_s})}
+in the generated algebra. This proves surjectivity. Both algebras
+have dimension #{2^\ell}, so the map is an isomorphism. It
+preserves parity, since all elements of #{P} have odd degree.}
+
+\p{Finally, substitute this identification of #{J} in the
+multiplication isomorphism of \ref{fcap-003P}. This yields the
+claimed factorization, also displayed in
+\citet{equation (11.14), p. 262}{meinrenken2013clifford}.
+For #{\mathfrak{sl}_2}, #{P} has dimension one in exterior degree
+three. As an ordinary algebra, its nondegenerate complex Clifford
+algebra is #{\mathbb C\oplus\mathbb C}; the underlying ordinary
+algebra factorization becomes
+#{M_2(\mathbb C)\oplus M_2(\mathbb C)}, in agreement with
+\ref{fcap-003Q}. The primitive relation, HKS argument, and
+factorization here are mathematical proofs without a packaged
+formal theorem.}
