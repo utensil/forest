@@ -1,0 +1,40 @@
+\import{macros}
+\import{lean-macros}
+\meta{agent-authored}{true}
+\tag{frap}
+\taxon{Theorem}
+\title{Finite-index transfer}
+\lean{MonoidHom.transfer,MonoidHom.transfer_def}
+\lean/tauceti{MonoidHom.transfer_eq_prod_of_bijective}
+
+\p{Let #{H\leq G} have finite index. Choose representatives #{r_i}
+for the left cosets #{r_iH}, indexed bijectively by a finite set #{I}.
+For #{g\in G}, left multiplication permutes the cosets, so uniquely write}
+##{g r_i=r_{\pi_g(i)}h_i(g),\qquad h_i(g)\in H.}
+\p{Write #{H_{\mathrm{ab}}=H/[H,H]} and #{[h]} for the class of
+#{h\in H}. The \newvocab{transfer}}
+##{T_{G,H}:G\longrightarrow H_{\mathrm{ab}},\qquad
+   T_{G,H}(g)=\prod_{i\in I}[h_i(g)]}
+\p{is a homomorphism independent of the chosen representatives.
+This is the left-coset construction of
+\citet{Definition 3.1, Proposition 3.1 and Theorem 3.1, pp. 4--6}{mayer2015artin}.
+Neither finiteness of #{G} nor normality of #{H} is required.}
+
+\proof{
+  \p{We compose left actions rightmost first. Multiplication on cosets
+  gives #{\pi_{gk}=\pi_g\pi_k}. Expanding #{gkr_i} in two steps yields}
+  ##{h_i(gk)=h_{\pi_k(i)}(g)h_i(k).}
+  \p{Taking classes and multiplying over #{i} gives
+  #{T_{G,H}(gk)=T_{G,H}(g)T_{G,H}(k)}, because #{\pi_k} reorders
+  the first factors. Replace #{r_i} by #{r_i t_i}, with #{t_i\in H}.
+  The new residual factor is #{t_{\pi_g(i)}^{-1}h_i(g)t_i}.
+  Its total class contains each #{[t_i]} and its inverse exactly once,
+  so they cancel. Reindexing the cosets also only reorders an abelian
+  product. This proves independence of all choices.}
+}
+
+\p{The linked transfer definitions specialize the homomorphism
+#{\phi:H\to A} to the quotient #{H\to H_{\mathrm{ab}}}.
+The indexed formula takes #{f(i)=r_i} and #{\pi=\pi_g}; its factor
+#{r_{\pi_g(i)}^{-1}g r_i} is precisely #{h_i(g)}. Its finite-index
+instance follows from the finite bijective family of cosets.}

@@ -1,0 +1,54 @@
+\import{macros}
+\import{lean-macros}
+\meta{agent-authored}{true}
+\tag{frap}
+\taxon{Theorem}
+\title{Abelianizations of the local alternating groups}
+
+\p{Let #{A_d} be the alternating group on #{d} letters, with
+composition rightmost first. Then}
+##{(A_3)_{\mathrm{ab}}\cong C_3,\qquad
+   (A_4)_{\mathrm{ab}}\cong C_3,\qquad
+   (A_d)_{\mathrm{ab}}=1\quad(d\geq5).}
+\p{The corresponding commutator subgroups are stated after
+Proposition 4.1 in \citet{Section 4.1, p. 11}{marchetti2025rubik}.
+We give the elementary calculation, using
+#{[g,h]=ghg^{-1}h^{-1}}.}
+
+\proof{
+  \p{The group #{A_3} is cyclic of order three, so already abelian.
+  In #{A_4}, let #{V=\{1,(12)(34),(13)(24),(14)(23)\}}.
+  Products and inverses stay in this four-element set, and conjugation
+  permutes its three nonidentity elements. Hence #{V} is normal.
+  The quotient has order three, so it is cyclic and
+  #{[A_4,A_4]\subseteq V}. Direct multiplication gives
+  #{[(123),(124)]=(12)(34)}. Conjugating this element by the
+  three-cycle #{(123)} gives the other two double transpositions.
+  The commutator subgroup is normal, so it contains all of #{V};
+  equality follows.}
+  \p{For #{d\geq5}, put #{g=(12)(34)} and #{h=(12)(35)} in #{A_d}.
+  Multiplication gives #{[g,h]=(345)}. Every three-cycle is conjugate
+  to this one within #{A_d}: first choose a conjugating permutation
+  in #{S_d}; if it is odd, compose on the right with a transposition
+  of two symbols outside #{\{3,4,5\}}. This centralizes #{(345)}
+  and changes the parity. Thus the normal subgroup #{[A_d,A_d]}
+  contains every three-cycle.}
+  \p{Three-cycles generate all even permutations. Write an even
+  permutation as a product of an even number of transpositions and
+  pair them. Equal transpositions cancel; two sharing one symbol give
+  a three-cycle; a disjoint pair satisfies
+  #{(ab)(cd)=(acb)(acd)}. Hence every pair is a product of three-cycles,
+  proving #{[A_d,A_d]=A_d}.}
+}
+
+\p{The three cases have separate formalized ingredients.
+\leanref{alternatingGroup.isCyclic_of_card_le_three} gives the
+cyclicity of #{A_3}. For four letters,
+\leanref{alternatingGroup.kleinFour_eq_commutator} identifies #{V}
+with the commutator subgroup, and
+\leanref/tauceti{TauCeti.card_abelianization_alternatingGroup} gives
+the quotient's cardinality three; the displayed cyclic isomorphism
+then uses the elementary classification of groups of prime order.
+For #{d\geq5}, \leanref{commutator_alternatingGroup_eq_top} is the
+perfection statement. These links concern alternating groups, not
+the entire puzzle group.}
