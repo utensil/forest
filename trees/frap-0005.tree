@@ -1,16 +1,21 @@
 \import{macros}
+\import{lean-macros}
 \meta{agent-authored}{true}
 \tag{frap}
 
-\title{Why solution methods work}
+\title{Methods and search}
 
   \p{A solving method organizes a sequence of smaller goals. At each
   stage, some information has been fixed and some remains free. The useful
   mathematical question is which moves accomplish the next goal while
-  preserving what has already been achieved. Stabilizers and subgroup
-  chains give language to that requirement. Conjugation relocates the
+  preserving what has already been achieved. The stabilizer of the
+  recorded data, as in the general construction
+  \leanref{MulAction.stabilizer}, gives language to that requirement;
+  successive stages suggest a chain of subgroups. Conjugation relocates the
   effect of a known sequence; commutators can help isolate effects, whose
-  actual support must be checked in each example.}
+  actual support must be checked in each example. Salkinder uses
+  conjugates and commutators in the cube setting
+  \citet{Sections 2 and 3.2}{salkinder2021nxnxn}.}
 
   \p{Explaining why a method works and judging how well it serves a player
   are related but different tasks. A complete method needs an argument
@@ -20,8 +25,15 @@
   memory, and solution length.}
 
   \p{Cayley graphs describe move sequences as paths between group
-  elements; actions on partial information lead to related Schreier-graph
-  viewpoints. Such descriptions become useful when comparing reduction
+  elements \citet{Section 4, Definition 4}{pan2021fourier}; actions on
+  partial information lead to Schreier graphs. The generic labeled-edge
+  construction is \leanref{Quiver.SchreierGraph}: a move labels an edge
+  from a state to its image. For the left action of a group on itself,
+  this is the Cayley viewpoint. These declarations supply stabilizers
+  and action graphs; they do not establish a puzzle-solving method.
+  Such descriptions become useful when comparing reduction
   strategies or searching for shorter sequences. Any length comparison
   must specify the allowed moves and their costs. The goal is to connect
-  a method's observable effect with its mathematical explanation.}
+  a method's observable effect with its mathematical explanation.
+  [Scrambling and search functions](frap-0015) describe a related use
+  of functions on the move group.}
