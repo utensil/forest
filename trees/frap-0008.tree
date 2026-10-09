@@ -3,120 +3,16 @@
 \tag{frap}
 \title{Faces, flags, and the symmetry of a shape}
 
-\p{A cube turn refers to corners, edges, and a face containing them. Those
-containments survive if we stretch the drawing. An abstract polytope retains
-this incidence information without prescribing distances or angles. We use the
-flag formulation of Schulte's axioms \citet{Section 2}{schulte2017regular}.
-Throughout this section the rank #{n} is at least two.}
+\p{An abstract polytope retains the incidence of vertices, edges and faces
+without prescribing distances or angles. Schulte's flag formulation
+\citet{Section 2}{schulte2017regular} leads from these incidences to
+symmetries and to the extension of a facet symmetry used in
+[local puzzle moves](frap-0009).}
 
-\subtree{
-  \refcardt{Definition}{An abstract polytope}{Section 2}{schulte2017regular}{
-    \p{An abstract #{n}-polytope is a partially ordered set #{P} of faces,
-    with a least face #{F_{-1}} and greatest face #{F_n}. Every maximal chain,
-    called a \em{flag}, contains exactly #{n+2} faces. The faces in a flag
-    have ranks #{-1,0,\ldots,n}, consistently across flags. Faces other than
-    the least and greatest are \em{proper}. Rank-zero faces are vertices;
-    rank-one faces are edges; rank-#{n-1} faces are facets.}
-    \p{The \em{diamond condition} says that if #{F<G} have ranks #{i-1}
-    and #{i+1}, exactly two rank-#{i} faces lie strictly between them.
-    Two flags are adjacent when they differ in exactly one proper face.
-    \em{Strong flag connectivity} says that any two flags can be joined by
-    adjacent flags, every one of which contains their intersection.}
-    \p{For #{F\leq G}, the section #{G/F} is the interval
-    #{\{H:F\leq H\leq G\}}. Its ranks are shifted so that its least face
-    has rank #{-1}. If #{F,G} have ranks #{i,j}, this section has rank
-    #{j-i-1}. The section #{F_n/v} at a vertex is its \em{vertex figure}.}
-  }
-}
-
-\p{The connectivity condition must involve proper incidence or flags: allowing
-the least face as an intermediate point would connect every pair for free.
-The diamond condition makes a flag's neighbor at each rank unique. Neither
-condition supplies a metric realization.}
-
-\subtree{
-  \taxon{Example}
-  \title{A triangle and a tetrahedron}
-  \p{A triangle has the empty face, three vertices, three edges, and the whole
-  triangle, of ranks #{-1,0,1,2}. One flag is
-  #{\varnothing<1<12<123}. Its rank-zero neighbor uses vertex #{2}; its
-  rank-one neighbor uses edge #{13}. Thus there are #{3\cdot2=6} flags.}
-  \p{A tetrahedron has all subsets of #{\{1,2,3,4\}} as faces, ordered by
-  inclusion; a nonempty face with #{k} vertices has rank #{k-1}. The flag
-  #{\varnothing<1<12<123<1234} illustrates the five ranks. Its vertex
-  figure at #{1} is a triangle: the three incident edges give the vertices
-  of that figure. A cube also has a triangular vertex figure, although its
-  facets are squares. Local and global shapes carry different information.}
-}
-
-\p{An automorphism is a bijection #{a:P\to P} such that
-#{F\leq G} if and only if #{a(F)\leq a(G)}. Automorphisms form a group
-#{\Gamma(P)} under composition; in #{ab}, the map #{b} acts first.
-The polytope is \em{regular} when this group acts transitively on flags.
-For the tetrahedron, a permutation of the four vertices sends any flag to
-any other; it is therefore regular.}
-
-\subtree{
-  \taxon{Lemma}
-  \title{A flag determines an automorphism}
-  \p{An automorphism fixing every face of one flag is the identity. Hence
-  the action of a regular polytope's automorphism group on flags is free
-  and transitive.}
-  \proof{
-    \p{Fix a flag pointwise. For an adjacent flag, only one rank has changed.
-    The unchanged neighboring ranks bound a diamond with two possible faces.
-    Since one is already fixed, the other must be fixed too. The adjacent
-    flag is therefore fixed pointwise. Propagating along the connected flag
-    graph fixes every flag, and every face belongs to a flag. Thus every
-    face is fixed. Transitivity is the definition of regularity.}
-  }
-}
-
-\p{Choose a base flag in a regular #{n}-polytope. Let #{\rho_i} be the unique
-automorphism taking it to its rank-#{i} neighbor, for #{0\leq i<n}.
-Uniqueness and the diamond condition give #{\rho_i^2=1}. The generators
-satisfy #{\rho_i\rho_j=\rho_j\rho_i} when #{|i-j|>1}: the two changes
-affect independent entries of the flag, and the resulting automorphisms agree
-on that flag. Connectivity shows that these generators reach all flags and
-therefore generate #{\Gamma(P)}. For #{I\subseteq\{0,\ldots,n-1\}}, write
-#{G_I=\langle\rho_i:i\in I\rangle}. These subgroups satisfy the
-\em{intersection property}
-##{G_I\cap G_J=G_{I\cap J}.}
-This is the additional condition in the associated string C-group description
-\citet{Section 5, equation (18)}{schulte2017regular}. We use the
-face-poset axioms here and do not assume that arbitrary involutions with the
-commutation relations reconstruct a polytope
-\citet{Section 3}{schulte2017regular}.}
-
-\subtree{
-  \taxon{Lemma}
-  \title{Extending a symmetry of one facet}
-  \p{For a facet #{H} of a regular polytope, restriction gives an isomorphism
-  from its stabilizer in #{\Gamma(P)} to #{\Gamma(H/F_{-1})}.}
-  \proof{
-    \p{Extend a flag of the facet by the greatest face of #{P}. If a
-    stabilizer element restricts to the identity, it fixes this whole flag,
-    hence is the identity. For surjectivity, let #{\alpha} be a facet
-    automorphism. Regularity supplies an automorphism of #{P} taking the
-    extended flag to the extension of its image under #{\alpha}. It fixes
-    #{H}; its restriction agrees with #{\alpha} on the chosen facet flag.
-    The previous lemma, applied to the facet, makes the restrictions equal.
-    The same argument shows that the facet itself is regular.}
-  }
-}
-
-\p{This extension result is the bridge to a move: a symmetry of a facet can
-act consistently on the whole incidence structure. A puzzle move will use
-that symmetry only on pieces whose locations belong to the chosen facet.
-This restriction is why a shape symmetry and a puzzle move are different
-permutations.}
-
-\p{For a concrete preview, take the tetrahedron's facet #{H=123}. Its
-rotation #{(123)} extends to the whole tetrahedron by fixing vertex #{4}.
-Label an incidence record by a vertex and an incident edge, such as
-#{(1,12)}. Apply the extension to both entries only when the first vertex
-lies in #{H}. Then
-##{(1,12)\longmapsto(2,23)\longmapsto(3,13)\longmapsto(1,12).}
-The record #{(4,14)} stays fixed under this local move, although the global
-shape symmetry sends it to #{(4,24)}. The next section defines the general
-action and proves that it is a permutation of the chosen incidence data.}
+\transclude{frap-000D}
+\transclude{frap-000E}
+\transclude{frap-000F}
+\transclude{frap-000G}
+\transclude{frap-000H}
+\transclude{frap-000I}
+\transclude{frap-000J}
