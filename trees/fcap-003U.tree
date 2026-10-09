@@ -1,0 +1,122 @@
+\import{fcap-macros}
+\meta{agent-authored}{true}
+
+\tag{fcap}
+\tag{spin}
+\tag{representation-theory}
+
+\taxon{Theorem}
+\title{Triality cycles three real modules and preserves the trilinear}
+
+\p{For the automorphism #{\tau} of \ref{fcap-003T}, one can choose
+real forms of #{S^+,S^-}, invariant positive inner products on them,
+and real isometries
+
+##{J_0:V_{\mathbb R}\longrightarrow S^+_{\mathbb R},\qquad
+J_1:S^+_{\mathbb R}\longrightarrow S^-_{\mathbb R},\qquad
+J_2:S^-_{\mathbb R}\longrightarrow V_{\mathbb R}}
+
+whose cyclic direct-sum map #{J} has #{J^3=1}. Their complex-linear
+extensions preserve exactly the trilinear #{F} of \ref{fcap-003D}:
+
+##{F(J_2s_-,J_0v,J_1s_+)=F(v,s_+,s_-).}
+
+The chosen forward cycle intertwines the diagonal group action with
+#{\tau^{-1}}. The real forms and inner products are specified in the
+construction below.}
+
+\subtree{
+\taxon{Proof}
+\p{Let #{E=\mathbb R^8} with its Euclidean inner product, and let
+#{\pi:G\to SO(E)} be the vector action. On three copies of this
+same real space define the twisted modules
+
+##{V_i=(E,\pi\circ\tau^i),\qquad i\in\mathbb Z/3\mathbb Z.}
+
+Their complexifications have classes #{V,S^+,S^-}, respectively,
+by \ref{fcap-003T}. Thus \ref{fcap-003D} gives a one-dimensional
+complex space of invariant trilinears on their complexifications.}
+
+\p{The invariance equations on #{E^{\otimes3}} have real
+coefficients. The real and imaginary parts of every invariant complex
+trilinear are therefore invariant real trilinears. It follows that
+
+##{L=(V_0^*\otimes_{\mathbb R}V_1^*\otimes_{\mathbb R}V_2^*)^G,
+\qquad \dim_{\mathbb R}L=1,}
+
+because complexification identifies #{L\otimes_{\mathbb R}\mathbb C}
+with the invariant complex space. Choose #{0\ne t\in L}.}
+
+\p{Write
+
+##{D(g)=\operatorname{diag}\bigl(\pi(g),\pi(\tau g),
+\pi(\tau^2g)\bigr).}
+
+Define #{Ct(x_0,x_1,x_2)=t(x_1,x_2,x_0)} using the common
+underlying space #{E}. Permuting #{D(g)(x_0,x_1,x_2)} this way
+gives #{D(\tau g)(x_1,x_2,x_0)}, so #{C} preserves #{L}.
+Moreover #{C^3=1}. On a real one-dimensional space this means
+#{C=c} for a real scalar with #{c^3=1}; hence #{c=1}. In particular,
+
+##{t(x_0,x_1,x_2)=t(x_1,x_2,x_0)=t(x_2,x_0,x_1).}
+
+The real field is essential here: over #{\mathbb C}, a cube-one
+scalar need not be one.}
+
+\p{Choose complex #{G}-module isomorphisms
+
+##{\phi_0=1:V_{0,\mathbb C}\to V,\qquad
+\phi_1:V_{1,\mathbb C}\to S^+,\qquad
+\phi_2:V_{2,\mathbb C}\to S^-.}
+
+They exist by the proved representation comparisons. The pullback of
+#{F} along these maps is #{\lambda t_{\mathbb C}} for some
+#{\lambda\ne0}. Multiplying #{\phi_1} by a unit complex scalar
+makes #{\lambda} real. Now define
+#{S^+_{\mathbb R}=\phi_1(E)} and
+#{S^-_{\mathbb R}=\phi_2(E)}, with inner products transported from
+#{E}. They are #{G}-invariant real forms with positive inner products,
+and the restriction of #{F} to these three real forms is real-valued.}
+
+\p{Set
+
+##{J_0=\phi_1\phi_0^{-1},\qquad
+J_1=\phi_2\phi_1^{-1},\qquad
+J_2=\phi_0\phi_2^{-1}.}
+
+In these formulas the underlying copies of #{E} are identified;
+the maps relate differently twisted actions. Each is a real isometry
+for the stated metrics, and each cyclic composite of all three is the
+identity. With #{\Phi=\phi_0\oplus\phi_1\oplus\phi_2}, let
+#{J=\Phi J_E\Phi^{-1}}, where
+#{J_E(x_0,x_1,x_2)=(x_2,x_0,x_1)}. Thus #{J^3=1}.}
+
+\p{The diagonal action on #{V\oplus S^+\oplus S^-} is
+#{\mathcal D(g)=\Phi D(g)\Phi^{-1}}. In the common coordinates,
+
+##{J_E D(g)=D(\tau^{-1}g)J_E,}
+
+so #{J\mathcal D(g)=\mathcal D(\tau^{-1}g)J}. Finally the cyclic
+identity for #{t} gives
+
+##{\begin{aligned}
+F(J_2s_-,J_0v,J_1s_+)
+&=\lambda t_{\mathbb C}(x_2,x_0,x_1)\\
+&=\lambda t_{\mathbb C}(x_0,x_1,x_2)
+=F(v,s_+,s_-),
+\end{aligned}}
+
+where #{v=\phi_0x_0}, #{s_+=\phi_1x_1}, and #{s_-=\phi_2x_2}.
+No rescaling of #{F} was made, so its top-form normalization in
+\ref{fcap-003D} is retained.}
+}
+
+\p{Proposition 5.7 in \citet{pp. 35--36}{adams1996exceptional}
+supplies the invariant-line and real-valued trilinear statements.
+Exercises 20.50--20.51 in
+\citet{pp. 314--315}{fulton2004representation} describe the related
+cyclic tensor symmetry. The construction above obtains that symmetry
+from the chosen compact automorphism and the real invariant line.
+Its isometry claim uses the transported inner products just defined;
+it does not identify them with preselected exterior bilinear forms or
+assert a normed composition algebra.}

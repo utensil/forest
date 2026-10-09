@@ -1,0 +1,128 @@
+\import{fcap-macros}
+\meta{agent-authored}{true}
+
+\tag{fcap}
+\tag{spin}
+\tag{lie}
+
+\taxon{Theorem}
+\title{A pinned three-cycle integrates to compact triality}
+
+\p{Let #{G=\Spin(Q_8^+)} be the compact positive-square Clifford
+group, and let #{V} denote its complexified vector representation.
+There is a smooth outer automorphism #{\tau:G\to G} of exact order
+three for which
+
+##{V\circ\tau\simeq S^+,\qquad V\circ\tau^2\simeq S^-.}
+
+Here #{S^+=L(\omega_4)} and #{S^-=L(\omega_3)} use the exterior
+convention of \ref{fcap-003B}. These are literal pullbacks of
+representations of the compact real group.}
+
+\subtree{
+\taxon{Proof}
+\p{Choose a real orthonormal basis #{a_i,b_i}, #{1\leq i\leq4},
+and set #{u_i=(a_i+\mathrm i b_i)/2}, #{u_i'=\overline{u_i}}.
+Since #{B_Q=2\langle\ ,\ \rangle}, these are polar-dual isotropic
+bases. In the complexified Clifford algebra,
+
+##{u_i u_j'+u_j'u_i=\delta_{ij},\qquad
+u_i u_j+u_j u_i=u_i'u_j'+u_j'u_i'=0.}
+
+Use precisely the quadratic generators of \ref{fcap-002X}:
+
+##{\begin{aligned}
+H_i&=u_i u_i'-\tfrac12,\\
+E_i&=u_i u_{i+1}',&F_i&=u_{i+1}u_i',&h_i&=H_i-H_{i+1}
+&& (i<4),\\
+E_4&=u_3u_4,&F_4&=u_4'u_3',&h_4&=H_3+H_4.
+\end{aligned}}
+
+They belong to the complexified quadratic Lie algebra
+#{\mathfrak g_{\mathbb C}} of \ref{fcap-0037}. The simple roots are
+#{\epsilon_i-\epsilon_{i+1}} for #{i<4} and
+#{\epsilon_3+\epsilon_4} for node #{4}; node #{2} is central.}
+
+\p{Let #{A} be the corresponding #{D_4} Cartan matrix: its diagonal
+entries are #{2}, adjacent-node entries #{-1}, and all others #{0}.
+The displayed Clifford relations give
+
+##{\begin{aligned}
+[h_i,h_j]&=0,&[E_i,F_j]&=\delta_{ij}h_i,\\
+[h_i,E_j]&=A_{ij}E_j,&[h_i,F_j]&=-A_{ij}F_j,
+\end{aligned}}
+
+##{\begin{aligned}
+(\operatorname{ad}E_i)^{1-A_{ij}}E_j&=0,\\
+(\operatorname{ad}F_i)^{1-A_{ij}}F_j&=0\qquad(i\ne j).
+\end{aligned}}
+
+The positive-root generation in \ref{fcap-002X}, its lowering
+counterpart and the brackets #{[E_i,F_i]} generate all of
+#{\mathfrak g_{\mathbb C}}. The Serre presentation and pinned
+extension theorem in \citet{Section 21.3, pp. 337--338}{fulton2004representation}
+therefore apply to this Lie algebra.}
+
+\p{The permutation #{\sigma=(1\ 3\ 4)}, fixing #{2}, preserves
+#{A}. Reindexing each generator family preserves the presentation,
+so it defines a unique complex Lie automorphism #{\theta} with
+
+##{\theta(E_i)=E_{\sigma(i)},\qquad
+\theta(F_i)=F_{\sigma(i)},\qquad
+\theta(h_i)=h_{\sigma(i)}.}
+
+Inverse reindexing supplies its inverse. Its cube fixes all generators,
+hence #{\theta^3=1}.}
+
+\p{The compact real form must also be preserved. Let #{\kappa} be
+conjugation of the complexified real Clifford algebra. The same
+Clifford relations, with the reversed factor order in #{F_4}, give
+
+##{\begin{aligned}
+\kappa(H_i)&=u_i'u_i-\tfrac12=-H_i,\\
+\kappa(E_i)&=u_i'u_{i+1}=-F_i&& (i<4),\\
+\kappa(E_4)&=u_3'u_4'=-F_4.
+\end{aligned}}
+
+Also #{\kappa(F_i)=-E_i} and #{\kappa(h_i)=-h_i}. Thus the
+antilinear maps #{\kappa\theta} and #{\theta\kappa} agree on
+the generators and everywhere. By \ref{fcap-0037}, the
+#{\kappa}-fixed quadratic Lie algebra is exactly #{T_1G}.
+Consequently #{\theta} restricts to a real Lie automorphism of the
+actual compact group's tangent algebra.}
+
+\p{The group #{G} is connected and simply connected by
+\ref{fcap-003A}. The general group-to-group integration theorem,
+the Second Principle in \citet{pp. 118--119}{fulton2004representation},
+therefore integrates this restriction to a smooth homomorphism
+#{\tau:G\to G}. Its graph-subgroup proof is the construction in
+\ref{fcap-003L} with target #{G}: first projection is a surjective
+covering and hence an isomorphism. Integrating #{\theta^{-1}} too
+gives the inverse of #{\tau}, because a homomorphism from connected
+#{G} is determined by its differential. Indeed, equal differentials
+give equality on an exponential neighborhood, which generates #{G}.
+The same uniqueness proves #{\tau^3=1}.}
+
+\p{For a highest weight #{\omega_j}, literal pullback along
+#{\theta} gives
+
+##{(\omega_j\circ\theta)(h_i)=\delta_{j,\sigma(i)}
+=\omega_{\sigma^{-1}(j)}(h_i).}
+
+Since #{\theta} also permutes the positive generators, the new
+highest weight is #{\omega_{\sigma^{-1}(j)}}. Starting with
+#{V=L(\omega_1)}, the pullbacks therefore have labels
+#{\omega_1,\omega_4,\omega_3}: they are #{V,S^+,S^-} in that
+order. These are distinct irreducible classes. Inner automorphisms
+preserve each representation class, so #{\tau} is outer and
+nontrivial; together with #{\tau^3=1}, this proves exact order three.}
+}
+
+\p{The outer-class calculation in \ref{fcap-003C} is thereby realized
+by a chosen cube-one automorphism. TauCeti's
+[Serre diagram automorphism](https://github.com/TauCetiProject/TauCeti/blob/fac34771ae5768f0b0825f660ab909432f04f85a/TauCeti/Algebra/Lie/Presentation/Serre/Automorphism.lean)
+formalizes generator reindexing and its order relation on the presented
+Lie algebra. Its compact real-form identification and integration to this
+Clifford group are additional steps proved above. The tripled-carrier
+automorphism discussed in \ref{fcap-003B} remains a different
+construction.}
