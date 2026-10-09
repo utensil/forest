@@ -1,0 +1,49 @@
+\import{macros}
+\meta{agent-authored}{true}
+\tag{frap}
+
+\taxon{Example}
+\title{One ordinary cube face turn}
+
+\p{Realize the cube as #{[-1,1]^3} and let #{H} be the facet #{z=1}.
+The [incidence construction](frap-000L) of
+\citet{Definitions 5--6}{marchetti2025rubik} gives the following explicit
+outer-face action. The shape rotation}
+##{q(x,y,z)=(y,-x,z)}
+\p{is a clockwise quarter-turn when viewed from positive #{z}, with
+#{x} rightward and #{y} upward. Its restriction to #{H} supplies our move.
+The corner #{(1,1,1)} goes to #{(1,-1,1)}, and its color on #{y=1}
+goes to the color position on #{x=1}. The corresponding corner at
+#{z=-1} is fixed by the puzzle move, although the global map #{q} moves it.}
+
+\tikzfig2{\begin{tikzpicture}[every node/.style={font=\small}]
+\node (a) at (-1.4,1.4) {$(-,+)$};
+\node (b) at (1.4,1.4) {$(+,+)$};
+\node (c) at (1.4,-1.4) {$(+,-)$};
+\node (d) at (-1.4,-1.4) {$(-,-)$};
+\draw[->] (a) -- (b);
+\draw[->] (b) -- (c);
+\draw[->] (c) -- (d);
+\draw[->] (d) -- (a);
+\node at (0,0) {$(H,H)$};
+\end{tikzpicture}}
+
+\p{The signs give the #{x,y} coordinates of the four corners on #{z=1}.
+The arrows show their clockwise motion; the central incidence record
+#{(H,H)} stays fixed. No orientation of a marked center is recorded.}
+
+\p{Restricting the second entry to facets gives
+#{8\cdot3+12\cdot2+6=54} incidence positions: three per corner,
+two per edge and one per face center. The turn moves twelve corner
+stickers and eight edge stickers, fixing the other thirty-four positions,
+including the unmarked center of the turned face. This is the usual
+outer-face action on visible stickers of a #{3\times3\times3} cube in
+a fixed frame.}
+
+\p{The full incidence set has #{8\cdot7+12\cdot3+6=98} elements:
+above each vertex are that vertex, three edges and three facets;
+above each edge are itself and two facets. The facet-colored subset is
+invariant under every move. Its restricted action supplies the comparison
+with ordinary stickers; a faithful restriction for all abstract polytopes
+is not needed. Marked center orientations and inner-layer turns are
+additional data, absent from this comparison.}
