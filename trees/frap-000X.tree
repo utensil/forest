@@ -1,0 +1,61 @@
+\import{macros}
+\import{lean-macros}
+\meta{agent-authored}{true}
+\tag{frap}
+\taxon{Proposition}
+\title{Transfer computes total local orientation}
+
+\p{Let #{G} act transitively on a finite nonempty position set #{I},
+and on a tagged union of fibers #{X_i}, carrying #{X_i} bijectively
+to #{X_{g i}}. Fix #{i_0\in I} and put #{H=G_{i_0}}.
+Let #{K} act faithfully on a nonempty set #{\Omega}; choose a bijective
+base frame #{c_0:\Omega\to X_{i_0}} and a homomorphism
+#{\rho:H\to K} satisfying #{h c_0=c_0\rho(h)} for every #{h\in H}.
+Choose #{r_i\in G} with #{r_i i_0=i}, and set #{c_i=r_i c_0}.
+Then the [total-orientation character](frap-000S) of this framed action is}
+##{\chi=\rho_{\mathrm{ab}}\circ T_{G,H}:G\longrightarrow K_{\mathrm{ab}},}
+\p{where #{T_{G,H}} is [transfer](frap-000W) and
+#{\rho_{\mathrm{ab}}([h])=[\rho(h)]}.
+This identifies the coset construction in
+\citet{Section 3.3, p. 6}{mayer2015artin} with the local-frame
+coordinates of \citet{Section 3.1, pp. 6--7}{marchetti2025rubik}.}
+
+\proof{
+  \p{The map #{G/H\to I}, #{rH\mapsto r i_0}, is a bijection:
+  #{r i_0=s i_0} exactly when #{s^{-1}r\in H}.
+  Thus #{H} has finite index #{|I|}, and the #{r_i} are left-coset
+  representatives. Write #{\pi_g(i)=g i} and
+  #{g r_i=r_{\pi_g(i)}h_i(g)}. Then}
+  ##{g c_i=g r_i c_0=r_{\pi_g(i)}h_i(g)c_0
+      =c_{\pi_g(i)}\rho(h_i(g)).}
+  \p{Consequently every local factor belongs to #{K}, and its
+  source-indexed coordinate is #{a_i(g)=\rho(h_i(g))}.
+  A homomorphism sends commutators to commutators, so
+  #{\rho_{\mathrm{ab}}} is well defined. Multiplying the local classes gives}
+  ##{\chi(g)=\prod_i[\rho(h_i(g))]
+      =\rho_{\mathrm{ab}}\left(\prod_i[h_i(g)]\right).}
+}
+
+\tikzfig2{\begin{tikzpicture}[every node/.style={font=\small}]
+\node (a) at (0,1.5) {$\Omega$};
+\node (b) at (2.5,1.5) {$\Omega$};
+\node (c) at (0,0) {$X_i$};
+\node (d) at (2.5,0) {$X_{\pi_g(i)}$};
+\draw[->] (a) -- node[above] {$\rho(h_i(g))$} (b);
+\draw[->] (c) -- node[below] {$g$} (d);
+\draw[->] (a) -- node[left] {$r_i c_0$} (c);
+\draw[->] (b) -- node[right] {$r_{\pi_g(i)}c_0$} (d);
+\end{tikzpicture}}
+
+\p{The vertical arrows are the transported frames. The equality
+#{g r_i=r_{\pi_g(i)}h_i(g)} makes the square commute: after the
+destination representative is removed, the remaining motion fixes
+#{i_0} and acts through #{\rho}. Changing representatives changes
+these frames within #{K}, so the character is unchanged.}
+
+\p{The induced map is \leanref{Abelianization.map}. Naturality of
+transfer is \leanref/tauceti{MonoidHom.transfer_comp}, with
+#{\phi:H\to H_{\mathrm{ab}}} the quotient map and the target map
+#{\rho_{\mathrm{ab}}}. That algebraic identity supports the last
+equality; the identification with the actual fiber action is the
+transported-frame argument above.}
