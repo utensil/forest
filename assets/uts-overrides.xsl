@@ -13,6 +13,29 @@
         <xsl:apply-templates select="html:span[@class='translation-section-title']/node()" />
     </xsl:template>
 
+    <!-- AGENT-NOTE: Keep the taxon and contextual number inside one link, including address fallbacks. -->
+    <xsl:template
+        match="fr:link[@href][fr:contextual-number][not(parent::html:span[@class='link-reference-full'])]">
+        <span class="link {@type}">
+            <a href="{@href}">
+                <xsl:attribute name="title">
+                    <xsl:value-of select="@title" />
+                    <xsl:if test="@display-uri">
+                        <xsl:text> [</xsl:text>
+                        <xsl:value-of select="@display-uri" />
+                        <xsl:text>]</xsl:text>
+                    </xsl:if>
+                </xsl:attribute>
+                <xsl:apply-templates />
+            </a>
+        </span>
+    </xsl:template>
+
+    <xsl:template
+        match="fr:link[@href][fr:contextual-number][not(parent::html:span[@class='link-reference-full'])]//text()">
+        <xsl:value-of select="." />
+    </xsl:template>
+
     <!-- <xsl:template name="numbered-taxon">
         <span class="taxon">
             <xsl:apply-templates select="fr:taxon" />
