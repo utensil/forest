@@ -1,0 +1,54 @@
+\import{macros}
+\import{lean-macros}
+\meta{agent-authored}{true}
+\tag{frap}
+
+\taxon{Lemma}
+\title{Composition of framed transports}
+\lean/tauceti{TauCeti.PermutationWreathProduct.mul_left}
+
+\p{Let #{I} be finite and let #{K} act faithfully on a nonempty
+#{\Omega}, with bijective frames #{c_i:\Omega\to X_i}.
+Write two [framed transports](frap-000Q) as #{g=(\pi,a)} and
+#{h=(\sigma,b)}, acting in coordinates by
+#{g(i,x)=(\pi(i),a_i x)} and #{h(i,x)=(\sigma(i),b_i x)}.
+With left actions, applying #{g} and then #{h} gives}
+##{hg=(\sigma\pi,(b_{\pi(i)}a_i)_{i\in I}).}
+
+\proof{
+  \p{The intermediate coordinates are #{(\pi(i),a_i x)}. Applying
+  #{h} evaluates its local map at that intermediate position, giving
+  #{(\sigma\pi(i),b_{\pi(i)}a_i x)}. Thus a local factor must be
+  multiplied at its transported position index.}
+}
+
+\tikzfig2{\begin{tikzpicture}[every node/.style={font=\small}]
+\node (a) at (0,1.5) {$\Omega$};
+\node (b) at (1.9,1.5) {$\Omega$};
+\node (c) at (3.8,1.5) {$\Omega$};
+\node (d) at (0,0) {$X_i$};
+\node (e) at (1.9,0) {$X_{\pi(i)}$};
+\node (f) at (3.8,0) {$X_{\sigma\pi(i)}$};
+\draw[->] (a) -- node[above] {$a_i$} (b);
+\draw[->] (b) -- node[above] {$b_{\pi(i)}$} (c);
+\draw[->] (d) -- node[below] {$g$} (e);
+\draw[->] (e) -- node[below] {$h$} (f);
+\draw[->] (a) -- node[left] {$c_i$} (d);
+\draw[->] (b) -- node[left] {$c_{\pi(i)}$} (e);
+\draw[->] (c) -- node[right] {$c_{\sigma\pi(i)}$} (f);
+\end{tikzpicture}}
+
+\p{The vertical arrows are the chosen frames; the bottom arrows are
+the restrictions of the actual transports. Each square commutes. Along
+the top row, the second factor is evaluated at #{\pi(i)}, explaining
+the shifted index in the composite. This expands the wreath-product
+coordinates of \citet{Section 3.1, pp. 6--7}{marchetti2025rubik}.}
+
+\p{The linked multiplication theorem uses destination-indexed factors.
+Set #{A_j=a_{\pi^{-1}(j)}} and #{B_j=b_{\sigma^{-1}(j)}}.
+Its factor for #{hg} at destination #{j} is}
+##{B_j A_{\sigma^{-1}(j)}
+   =b_{\sigma^{-1}(j)}a_{\pi^{-1}\sigma^{-1}(j)}.}
+\p{Putting #{i=(\sigma\pi)^{-1}(j)} makes this exactly
+#{b_{\pi(i)}a_i}. Thus the theorem and the displayed source-indexed
+law use the same multiplication order.}
