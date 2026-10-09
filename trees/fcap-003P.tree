@@ -1,0 +1,78 @@
+\import{fcap-macros}
+\meta{agent-authored}{true}
+
+\tag{fcap}
+\tag{spin}
+\tag{clifford}
+
+\taxon{Theorem}
+\title{The invariant algebra is the internal commutant}
+
+\p{Let #{\mathfrak g} be complex semisimple of rank #{\ell}, with
+#{r} positive roots and #{\rho} their half-sum. Put
+#{A=\Cl(Q_\kappa)}, where #{Q_\kappa(x)=\kappa(x,x)}, and use the
+lift #{\delta} of \ref{fcap-003E}. Define the unital algebra
+#{E=\delta(U(\mathfrak g))\subseteq A^0} and the commutator invariants
+
+##{J=\{a\in A:[\delta(x),a]=0\text{ for every }x\in\mathfrak g\}.}
+
+Then #{J=\operatorname{Cent}_A(E)}, #{E\simeq\operatorname{End}(V_\rho)},
+and multiplication is an isomorphism of ordinary complex algebras
+
+##{E\otimes J\longrightarrow A,\qquad e\otimes j\longmapsto ej.}
+
+In particular, #{\dim J=2^\ell}. These assertions include the zero Lie
+algebra, where #{A=E=J=\mathbb C}.}
+
+\p{An element commutes with the generators #{\delta(\mathfrak g)}
+exactly when it commutes with their unital associative algebra, proving
+the centralizer assertion. Set #{d=2^{\lfloor\ell /2\rfloor}}.
+The spinor calculation in \ref{fcap-003G} gives
+#{S\simeq V_\rho\otimes\mathbb C^d}. The associative algebra generated
+by an irreducible complex representation is its full endomorphism
+algebra (Burnside's theorem). Thus the image of #{U(\mathfrak g)} on
+#{S} is #{\operatorname{End}(V_\rho)\otimes1}.
+This is the primary-representation calculation in
+\citet{equations (74)--(76), p. 295}{kostant1997clifford}.}
+
+\p{If #{\ell} is even, then #{\dim\mathfrak g=\ell+2r} is even,
+and \ref{fcap-002V} identifies #{A} with #{\operatorname{End}(S)}.
+Matrix units in #{\operatorname{End}(V_\rho)} show that its commutant
+on #{V_\rho\otimes\mathbb C^d} is
+#{1\otimes\operatorname{End}(\mathbb C^d)}: commuting with diagonal
+units forces a block-diagonal operator, and commuting with off-diagonal
+units makes all its diagonal blocks equal. Consequently
+
+##{J\simeq\operatorname{End}(\mathbb C^d),\qquad
+E\otimes J\simeq\operatorname{End}(V_\rho\otimes\mathbb C^d)=A.}
+
+This also gives #{\dim J=d^2=2^\ell}.}
+
+\p{If #{\ell} is odd, \ref{fcap-002W} identifies #{A} with
+#{\operatorname{End}(S_+)\oplus\operatorname{End}(S_-)}. The two
+spinor restrictions to #{A^0} are equivalent and faithful. After
+identifying them, #{E\subseteq A^0} is the diagonal copy of
+#{\operatorname{End}(V_\rho)\otimes1}. The same matrix-unit argument
+in each block gives
+
+##{J\simeq\operatorname{End}(\mathbb C^d)
+\oplus\operatorname{End}(\mathbb C^d).}
+
+Multiplication #{E\otimes J\to A} is the preceding matrix
+isomorphism in each of the two summands, and
+#{\dim J=2d^2=2^\ell}. This proves both parity cases without assuming
+that the full odd-dimensional Clifford algebra is simple.
+\citet{Propositions 17--20, pp. 294--297}{kostant1997clifford}
+gives this centralizer factorization for any primary spin representation.}
+
+\p{Under the commutator action, #{\mathfrak g} acts trivially on
+#{J} and by conjugation on #{E}. Equivariant antisymmetrization from
+\ref{fcap-003E} therefore yields the exterior-module consequence
+
+##{\bigwedge\mathfrak g\simeq
+2^\ell(V_\rho\otimes V_\rho^*).}
+
+This multiplicity concerns the commutator action; the left-action
+multiplicity in \ref{fcap-003G} is #{2^{\ell+r}}.
+The algebra factorization and its proof here are not a packaged formal
+theorem.}
