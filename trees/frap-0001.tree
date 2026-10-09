@@ -11,44 +11,63 @@
 \author{utensil}
 \date{2026-10-09}
 
-\p{What makes a puzzle a Rubik puzzle? A solid shape is only part of the
-answer. We also need objects that can change position or orientation, a
-collection of allowed moves, and a criterion for being solved. Together
-these determine which configurations can be reached and which sequences of
-moves undo a scramble. These notes study that structure, beginning with
-Rubik puzzles on abstract regular polytopes and proceeding to
-#{N\times N\times N} cubes, the #{3\times3\times3} cube, its solution
-methods, and play.}
+\p{These are the accompanying mathematical notes for the experimental research
+project \href{https://github.com/utensil/frap}{FRAP}, \em{Formalizing Rubik's
+Abstract Polytopes}. The project asks how the general mathematics of Rubik
+puzzles can explain the concrete practice of solving them. Mathematical
+exposition, formalization in Lean, and executable algorithms are intended to
+develop together: understanding a puzzle should help us solve it, while
+trying to solve it should sharpen the mathematics.}
 
-\p{Marchetti's \em{Rubik's Abstract Polytopes} supplies the starting
-construction: incidence data and suitable facet rotations define a puzzle
-beyond the familiar cube \citek{marchetti2025rubik}. At this level we can
-ask which features belong to the shape, which belong to the moves, and
-which survive a change of example. Layered cubes then add distinctions
-between kinds of pieces and turns. The #{3\times3\times3} cube lets us
-follow those distinctions all the way to a practical solve.}
+\p{The motivation grew out of decades of playing the #{3\times3\times3}
+cube, followed by the #{2\times2\times2} and #{4\times4\times4}. Learning
+formulas raised questions about why they work, how different methods organize
+a solve, and how a computer might find a better solution. Those questions led
+back through group theory and the general #{N\times N\times N} family to
+Marchetti's \em{Rubik's Abstract Polytopes} \citek{marchetti2025rubik}.
+These notes deliberately reverse that journey: begin with general mathematics,
+develop increasingly concrete models, and return to solution methods and play
+with a deeper understanding of the familiar puzzle.}
 
-\p{Group theory enters through these questions. Moves compose and can be
-undone; they act on puzzle data. Orbits tell us where a piece or a state can
-go, while invariants can rule out proposed destinations. Subgroups describe
-restrictions such as preserving already solved pieces. Move words turn
-these structures into procedures, and a choice of move cost makes their
-efficiency a mathematical question. A central question will recur: how do local moves determine global
-possibilities, and how does that understanding produce a useful solve?}
+\p{Starting with abstract polytopes lets us separate the incidence and symmetry
+of a shape from the local moves that make it a puzzle. Polygons, tetrahedra and
+cubes keep those ideas concrete. Passing to layered cubes then asks how the
+pieces, their orientations and the allowed turns change with #{N}; the
+#{3\times3\times3} cube provides a setting in which to work out the consequences
+in detail. Group actions connect these descriptions. They help us ask what a
+move changes, what a sequence preserves, which configurations are reachable,
+and how a solution can be assembled from smaller tasks. The additional
+structure in each model must be explained when the models are compared.}
 
-\p{The route reverses a familiar learning experience: first learning formulas
-that solve a cube, then discovering the group theory behind them. Here the
-abstract mathematics comes first, with small puzzles alongside it. Successive
-specializations reveal more structure until we return to recognition, manageable
-move sequences, computer algorithms, and actual play. Human usefulness and
-computational optimality are related goals, with different measures of success.}
+\p{The return to solving has two closely related purposes. For a person, a
+useful formula connects a recognizable pattern with a manageable sequence of
+moves. Understanding its effect and what it preserves should help explain
+methods and the choices within a solve; recognition, memory and ease of
+execution matter alongside move count. For a computer, the question is how to
+find solutions under explicit objectives, including shortest solutions for a
+chosen set of moves and costs. Producing a solution, proving that a method
+solves every state in its domain, and establishing optimality are different
+achievements. Scrambling, replay and interactive exploration bring these
+questions back to actual use.}
 
-\transclude{frap-0002}
-\transclude{frap-0003}
-\transclude{frap-0004}
-\transclude{frap-0005}
-\transclude{frap-0006}
-\transclude{frap-0007}
+\p{The puzzles also lead into mathematics beyond solving. Local orientation
+data raise questions about global constraints, wreath products and transfer.
+Transporting labels suggests comparisons with coloring obstructions and
+branched coverings. Random scrambles and functions used to guide search lead
+to probability and representation theory. These are directions for inquiry,
+with their own constructions and hypotheses; the aim is to understand the
+connections through examples and arguments as well as the puzzles themselves.}
+
+\p{As in \href{https://github.com/utensil/fcap}{FCAP} and
+\href{https://github.com/utensil/fgap}{FGAP}, scholarly sources, explicit
+calculations and formalization are meant to inform one another. Lean can
+express mathematical models and implement computations whose stated properties
+can be proved. Missing hypotheses or awkward conventions exposed by that work
+should feed back into the explanations here. FRAP is at an early research
+stage, and the companion repository does not yet contain a formalized puzzle
+model or solver.}
+
+\transclude{frap-000C}
 
 \transclude{frap-0008}
 
