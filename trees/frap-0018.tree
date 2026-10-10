@@ -1,0 +1,171 @@
+\import{macros}
+\import{lean-macros}
+\meta{agent-authored}{true}
+\tag{frap}
+
+\title{Computer solving and efficiency}
+
+\p{A computer solver answers a sharper question than a human method: from a
+recorded state, what is the shortest path to solved, or what short path can be
+found quickly? The answer depends on the move metric, the state coordinates,
+and the information retained by the search. We use the fixed-frame ordinary
+3-layer action from [the complete cube account](frap-0016), with the six outer
+face turns as generators. The [methods chapter](frap-0005) supplies the
+Cayley and Schreier viewpoints; here they become finite search procedures.}
+
+\subtree{
+  \title{Move graphs and lower bounds}
+
+  \p{For a move metric #{M}, let #{\Gamma_M} be the undirected graph whose
+  vertices are legal cube states and whose edges apply one allowed move. A
+  \newvocab{distance oracle} is the function}
+  ##{d_M(x,y)=\text{the length of a shortest path from }x\text{ to }y.}
+  \p{A breadth-first search from solved labels every vertex by its exact
+  distance, because the first time a vertex is reached there is no shorter
+  path left in the earlier layers. A depth-first method can use the same
+  graph without storing all of it, but then it needs a certified lower bound
+  to prune a branch.}
+
+  \p{The usual half-turn metric (HTM) charges each face quarter-turn,
+  inverse quarter-turn, or half-turn one move. The quarter-turn metric (QTM)
+  charges a half-turn two moves. A word can therefore be shorter in HTM while
+  representing the same group element; an efficiency claim is incomplete
+  until its metric and move set are named.}
+
+  \p{A simple counting bound already separates search from proof. In HTM
+  there are at most eighteen first moves and at most seventeen choices after
+  the first if an immediate inverse is suppressed. Hence a ball of radius
+  #{r} has at most}
+  ##{1+18\sum_{i=0}^{r-1}17^i}
+  \p{vertices. The reachable 3-layer state count from [the complete cube
+  account](frap-0016) is}
+  ##{N_3=8!\,12!\,3^7\,2^{10}
+      =43\,252\,003\,274\,489\,856\,000.}
+  \p{Since the radius-15 ball has fewer than #{N_3} vertices while the
+  radius-16 ball has more, the HTM diameter is at least #{16}. This is only
+  a counting lower bound: it does not exhibit a state at distance sixteen,
+  and it says nothing about a particular scramble.}
+}
+
+\subtree{
+  \title{One exact small search}
+
+  \p{The same procedure can be made exhaustive on the corner-only cube. With
+  the fixed-frame convention (there are no centers on a #{2\times2\times2}),
+  a legal state is a corner permutation together with seven independent
+  twists, so there are}
+  ##{8!\,3^7=88\,179\,840}
+  \p{states. Quotienting by the twenty-four orientations of the whole cube
+  leaves #{3\,674\,160} positions. Enumerate the six face generators and
+  their inverses, canonicalize each state by this rotation action, and keep
+  the first depth at which each canonical state is seen. The resulting layer
+  sizes in HTM are}
+  ##{1,9,54,321,1847,9992,50136,227536,
+      870072,1887748,623800,2644.}
+  \p{They sum to #{3\,674\,160}; the last nonempty layer is #{11}. Thus
+  this finite breadth-first computation proves that the corner-only cube has
+  diameter eleven in HTM. It is an \newvocab{exact search}: every state is
+  covered and every recorded depth is a shortest distance. The calculation
+  agrees with the published exhaustive layer table
+  [for the pocket cube](https://www.cs.brandeis.edu/~storer/JimPuzzles/RUBIK/Rubik2x2x2/Rubik2x2x2SolutionJaap.pdf). The calculation also
+  illustrates why the full 3-layer graph is not attacked by naïve BFS: its
+  state count is larger by many orders of magnitude.}
+}
+
+\subtree{
+  \title{Admissible heuristics and pattern databases}
+
+  \p{A \newvocab{projection heuristic} forgets part of a state. If #{\pi}
+  maps the full move graph to a smaller graph and every full move projects to
+  one allowed projected move, then}
+  ##{h_\pi(x)=d_{\pi}(\pi(x),\pi(\mathrm{id}))}
+  \p{never overestimates the full distance: projecting a full solution gives
+  a projected solution of the same or smaller length. Such a function is an
+  \newvocab{admissible heuristic}. A maximum of admissible heuristics is
+  admissible; a sum needs an additional cost-partition argument and is not
+  automatically safe.}
+
+  \p{A \newvocab{pattern database} stores these projected distances in a
+  table indexed by a selected set of cubies or coordinates. Reverse
+  breadth-first search fills the table once; an iterative-deepening A*
+  (IDA*) search then explores depth thresholds while pruning a node #{x}
+  whenever #{g+h_\pi(x)} exceeds
+  the threshold. Korf's Rubik's-cube computation used this combination
+  of pattern databases and IDA* for optimal solutions to random instances
+  [the AAAI paper](https://aaai.org/Papers/AAAI/1997/AAAI97-109.pdf). The
+  table certifies a lower bound, while the exhaustive threshold search is
+  what certifies optimality.}
+
+  \p{For the 3-layer coordinates, a corner-orientation table has #{3^7}
+  entries, an edge-orientation table has #{2^{11}}, and a chosen edge-position
+  table can be indexed separately. Taking the maximum of their exact
+  projected distances is safe and often much stronger than either table
+  alone. Memory, lookup cost, and the number of expanded nodes are measurable
+  resources; none of them changes the definition of the shortest distance.}
+}
+
+\subtree{
+  \title{Subgroup reduction and two phases}
+
+  \p{A different compression searches through a \newvocab{goal subgroup}.
+  Let}
+  ##{G_1=\langle U,D,R^2,L^2,F^2,B^2\rangle.}
+  \p{In this subgroup the corner and edge orientations are fixed, and the
+  four middle-slice edges stay in their slice. A first phase searches the
+  full generator set for a word taking the scramble into #{G_1}; a second
+  phase solves inside #{G_1} using only its generators. The phase-1
+  coordinates are corner orientation, edge orientation, and the choice of
+  the four slice edges, with raw size}
+  ##{3^7\,2^{11}\binom{12}{4}=2\,217\,093\,120.}
+  \p{Pruning tables and symmetry reductions store only useful projections of
+  this space.}
+
+  \p{Kociemba's two-phase account describes IDA* over these coordinates and
+  explicitly distinguishes a fast near-optimal solver from an optimal solver
+  [the two-phase description](https://www.kociemba.org/twophase.htm). A
+  solution found by one phase-1 word followed by a phase-2 word is a valid
+  upper bound. It becomes a proof of optimality only when every shorter
+  possibility under the declared metric has been excluded. Restricting phase
+  two to #{G_1} makes the search practical, but can omit an overall shortest
+  route that leaves and later re-enters #{G_1}.}
+
+  \p{This reduction is the computer analogue of the preservation chain in
+  [the complete layer-first method](frap-0017): both deliberately fix
+  information before solving what remains. The difference is the certificate.
+  A human stage records a finite case argument; a search stage records a
+  lower bound, an upper-bound word, and the unexplored threshold.}
+}
+
+\subtree{
+  \title{Efficiency and growing cubes}
+
+  \p{A useful report separates four measurements: solution length in a named
+  metric, number of expanded nodes, peak table memory, and wall-clock time on
+  named hardware. Recognition and move execution belong to the human method;
+  node expansions and table construction belong to the computer method. A
+  shorter returned word is evidence of a better upper bound, not by itself a
+  proof that the word is shortest.}
+
+  \p{For the growing #{N\times N\times N} family, the asymptotic question is
+  how the diameter changes with #{N} when a move rotates one legal slice.
+  Demaine, Demaine, Eisenstat, Lubiw and Winslow prove a scoped result for
+  this family: the diameter is #{\Theta(N^2/\log N)}, with a counting lower
+  bound and a parallelized upper-bound construction
+  [their paper](https://arxiv.org/abs/1106.5736). Their model and move
+  convention must be checked before transferring the statement to a
+  different layered-cube convention.}
+
+  \p{The fixed-frame 3-layer count and the exact corner-only search give two
+  finite anchors for that asymptotic discussion. The asymptotic theorem does
+  not make a particular 3-layer word optimal, and the exact small search does
+  not predict the table size or diameter of larger cubes. Across all sizes,
+  correctness means reaching the target; optimality means proving a shortest
+  path; efficiency means reporting the resources used to obtain either one.}
+}
+
+\p{Computer solving therefore extends the earlier construction in three
+controlled directions: exact graph distances on a small quotient, admissible
+lower bounds for the full state space, and subgroup reductions that trade
+completeness of the search for speed. These distinctions let a later return to
+play report a solver's output without confusing a valid solve, a short solve,
+and a certified optimum.}
