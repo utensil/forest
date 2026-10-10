@@ -2,26 +2,133 @@
 \meta{agent-authored}{true}
 \tag{frap}
 
-\title{The three-layer cube in detail}
+\title{The first law for the layered cube}
 
-  \p{The [ordinary cube action](frap-000P) makes an outer face turn
-  explicit, and the [twist and flip calculation](frap-000V) gives its
-  orientation constraints. This raises the concrete question of whether
-  those local constraints describe every legal state. The [corner and edge
-  stabilizers](frap-000Y) connect these examples with transfer, while a
-  complete description of the #{3\times3\times3} cube still needs corner
-  and edge coordinates for every face move, with a fixed frame of reference.}
+\p{The layered model needs a reachability test. A tuple of permutations and
+orientations can describe a dismantled cube without being obtainable by legal
+slice turns. We now choose the labelled, fixed-frame state space from
+[the layered-cube model](frap-0003) and state the first law for that space.
+The theorem is a statement about labelled cubies; an ordinary colour pattern
+is its observation after equal-looking labels have been forgotten.}
 
-  \p{Three questions must be distinguished. Can a proposed arrangement be
-  described in the chosen coordinates? Does it satisfy the constraints
-  preserved by legal moves? Can it actually be reached from the solved
-  state? A characterization of reachability must justify the last step as
-  well as the necessary constraints. This is where permutation parity,
-  orientation constraints, and constructive move sequences meet
-  \citet{Sections 3.1--3.2}{salkinder2021nxnxn}. The examples above establish
-  necessary constraints, not this constructive sufficiency.}
+\subtree{
+  \title{Coordinates for one state space}
 
-  \p{A description of the reachable states still leaves a practical
-  problem: given one of them, how do we choose moves that solve it? The
-  transition from characterizing states to constructing a solution leads
-  naturally to [methods and search](frap-0005).}
+  \p{Let #{K_o=(N-3)/2} for odd #{N} and #{K_e=N/2-1} for even #{N}.
+For every cube there are a corner permutation #{\sigma\in S_8} and corner
+orientation vector #{x\in(\mathbb Z_3)^8}. For odd #{N}, there is also a
+single-edge permutation #{\tau_s\in S_{12}} and flip vector
+#{z\in(\mathbb Z_2)^{12}}. Each coupled-edge orbit indexed by
+#{i\in I} has a permutation #{\tau_i\in S_{24}} and a labelled orientation
+vector #{y_i\in(\mathbb Z_2)^{24}}. Each center-corner orbit has a
+permutation #{\rho_i\in S_{24}}. Center-edge orbits are indexed by a finite
+set #{J}; write #{\rho_{ij}} for the orbit whose two distance signatures are
+#{i,j}. In the fixed-center convention, #{I=\{1,\ldots,K_o\}} and
+#{J=I^2} when #{N} is odd, while #{I=\{1,\ldots,K_e\}} and
+#{J=\{(i,j)\in I^2:i\ne j\}} when #{N} is even. This indexing records
+which coupled-edge signatures border a center-edge orbit; it is the
+coordinate version of the rings in the preceding chapter.}
+
+  \p{The full labelled configuration space is the product of these factors,
+with the solved state represented by identity permutations and zero
+orientation vectors. It is deliberately larger than the move group. For
+example, a vector #{y_i} records all sticker orientations allowed by a
+labelled reassembly, even though the legal slice action fixes the relevant
+coupled-edge orientation in its orbit. Whole-cube rotations are still outside
+the generator set, and the six face directions remain part of the frame.}
+}
+
+\subtree{
+  \title{The invariant law}
+
+  \p{For odd #{N}, a configuration is legal exactly when}
+  ##{\begin{aligned}
+  \operatorname{sgn}(\sigma)&=\operatorname{sgn}(\tau_s)=
+       \operatorname{sgn}(\rho_i) &&(i\in I),\\
+  \operatorname{sgn}(\rho_{ij})&=\operatorname{sgn}(\sigma)
+       \operatorname{sgn}(\tau_i)\operatorname{sgn}(\tau_j) &&((i,j)\in J),\\
+  \sum_r x_r&=0\pmod 3,\qquad \sum_r z_r=0\pmod 2,\\
+  y_i&=0 &&(i\in I).
+  \end{aligned}}
+  \p{For even #{N}, the corresponding law is}
+  ##{\begin{aligned}
+  \operatorname{sgn}(\sigma)&=\operatorname{sgn}(\rho_i) &&(i\in I),\\
+  \operatorname{sgn}(\rho_{ij})&=\operatorname{sgn}(\sigma)
+       \operatorname{sgn}(\tau_i)\operatorname{sgn}(\tau_j) &&((i,j)\in J),\\
+  \sum_r x_r&=0\pmod 3,\\
+  y_i&=0 &&(i\in I).
+  \end{aligned}}
+  \p{The empty-index cases are part of the statement: #{N=2} has only
+corners, #{N=3} has the usual twelve single edges and fixed centers, and
+#{N=4} has one coupled-edge and one center-corner orbit but no center-edge
+orbit. The #{N=5} instance has one orbit of each coupled-edge, center-corner
+and center-edge type, giving the 98 visible cubies counted earlier.}
+
+  \p{Necessity follows by checking generators. An outer face turn is a
+4-cycle on corners, single edges, center corners and each relevant
+center-edge orbit, and two 4-cycles on each affected coupled-edge orbit.
+An inner slice turn is the identity on corners and single edges, and is a
+4-cycle on its coupled edges and on the matching center-edge orbits, with
+two 4-cycles on center corners. These cycle signs give the two parity rows.
+The corner character changes by two opposite units on a non-#{U}/#{D}
+face and not at all on a #{U}/#{D} face, so its sum is fixed modulo 3. An
+outer turn flips four single edges, so their sum is fixed modulo 2. The
+chosen coupled-edge sticker convention makes every legal #{y_i} zero. The
+solved state satisfies the rows, hence every word in the generators does.}
+
+  \p{Bonzio--Loi--Peruzzi give the labelled Professor's-Cube version of the
+same tuple and its corrected coupled-edge condition
+\citet{Theorem 5}{bonzio2018nxnxn}. Salkinder states the odd and even
+families and checks these generator effects in
+\citet{Theorems 8--9}{salkinder2021nxnxn}. Their notation indexes center-edge
+orbits by the two adjacent coupled-edge signatures; our #{J} makes that
+indexing explicit. The sources also use a shifted notation for a middle
+slice when constructing a single-edge 3-cycle. That auxiliary word is a
+composition of parallel slice turns in the fixed-center model; it does not
+add a central generator to the law above.}
+}
+
+\subtree{
+  \title{Why the conditions are sufficient}
+
+  \p{The converse uses localized effects rather than a counting guess. First
+use a face turn, or an internal slice turn, to correct the common parity
+signs. The sign equations ensure that after this step every permutation
+factor is even. Commutators and conjugates then supply the required local
+subgroups:}
+  \ul{
+    \li{a corner 3-cycle, for example
+      #{[[R:U],D]}, generates #{A_8} on corners;}
+    \li{the single-edge 3-cycle #{[F,[R:S]]} generates #{A_{12}} in the odd
+      case, with the middle-slice symbol interpreted by the parallel-slice
+      composition just described;}
+    \li{#{[[R_j^{-1},D_i],F^{-1}]} gives 3-cycles on a center-corner orbit
+      when #{i=j} and on a center-edge orbit when #{i\ne j};}
+    \li{the analogous coupled-edge commutator gives #{A_{24}} on each
+      coupled-edge orbit. In even size the source's explicit odd permutation
+      on that orbit upgrades it to #{S_{24}}; in odd size the parity row keeps
+      it at #{A_{24}}.}
+  }
+  \p{Conjugating these words moves each 3-cycle through its whole orbit.
+Thus the local subgroups clear the corner, single-edge, center-corner,
+center-edge and coupled-edge permutations in turn. Finally, commutators
+that twist two corners in opposite directions generate the kernel of the
+corner-sum map #{(\mathbb Z_3)^8\to\mathbb Z_3}; the corresponding
+edge-flip commutators generate the kernel of the single-edge sum. The
+coupled-edge orientation vector is already zero by its law. The parity and
+orientation equations are exactly what is needed for each cleanup step, so
+reversing the resulting word reaches every tuple satisfying the displayed
+conditions. This is the constructive sufficiency argument of
+\citet{Theorems 10--18}{salkinder2021nxnxn}; it is a subgroup generation
+argument, not an assertion that one universal short algorithm solves every
+size.}
+
+  \p{There are two boundaries to keep visible. The theorem concerns labelled
+positions and a fixed frame; a colour-only observation quotients by equal
+labels and may identify several legal labelled states. Also, Bonzio's and
+Salkinder's orbit labels are source conventions, so a numerical state count
+must be transported through the index sets before comparison. The next
+chapter specializes the same action to #{N=3}, where all center and
+coupled-edge factors disappear and the three familiar constraints can be
+worked through with explicit face generators.}
+}
