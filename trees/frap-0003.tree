@@ -4,28 +4,122 @@
 
 \title{The family of layered cubes}
 
-  \p{The first obstruction in generalizing the cube is easy to state: for an
-  #{N\times N\times N} cube, changing #{N} enriches the piece structure
-  while the surrounding cube remains three-dimensional
-  \citet{Section 2}{salkinder2021nxnxn}. The question is which parts of a
-  move model depend on layer count and which depend on physical dimension.
-  Passing to this family therefore requires an explicit description of pieces,
-  allowed layer turns, and the information recorded in a configuration.}
+\p{To pass from one cube size to another, we first fix a physical model.
+Let #{C_N} be an #{N\times N\times N} array of unit cubies, with coordinates
+#{(i,j,k)\in{1,...,N}^3}. A visible cubie is a surface cell, so at least
+one coordinate is #{1} or #{N}. A cell with three boundary coordinates is a
+\newvocab{corner}; with exactly two it is an \newvocab{edge}; with exactly
+one it is a \newvocab{center}. This is a description of positions, before
+we decide which labels a player can see.}
 
-  \p{Comparing #{N=2}, #{N=3}, and #{N=4} brings the new questions into
-  view: which piece types occur, which positions communicate under moves,
-  and which distinctions depend on odd or even layer count? Labels and
-  colors also matter. Two individually labelled pieces can be distinct in
-  a mathematical model while looking identical to a player. The notes
-  will state whether whole-cube rotations change the recorded state or
-  are treated as an equivalence.}
+\p{The resulting counts are immediate: there are #{8} corners,
+#{12(N-2)} edge cubies, and #{6(N-2)^2} center cubies. Their sum is the
+number of surface cells. The count already explains why changing #{N} is
+more than making a larger drawing. New edge and center positions appear,
+and those positions can fall into different move orbits. Bonzio, Loi and
+Peruzzi use this cubie decomposition in their general model
+\citet{Sections 2--3}{bonzio2018nxnxn}; Salkinder gives a parallel orbit and
+configuration analysis \citet{Section 2}{salkinder2021nxnxn}.}
 
-  \p{Bonzio, Loi, and Peruzzi study the general cube and its configuration
-  constraints \citek{bonzio2018nxnxn}; Salkinder connects the general family
-  with questions about solution length \citek{salkinder2021nxnxn}. The
-  [ordinary cube action](frap-000P) supplies a first outer-turn example;
-  a comparison for arbitrary #{N} still needs the layer and labeling
-  conventions of each source. Permutation
-  actions and orientation data explain the piece structure; invariants
-  constrain reachability. A necessary constraint is not yet a proof that
-  every configuration satisfying it can be reached.}
+\subtree{
+  \title{Layer turns and the fixed frame}
+
+  \p{Choose the six coordinate directions as a fixed frame. For an axis
+  #{a\in{x,y,z}}, a depth #{r} with
+  #{1\le r\le \lfloor N/2\rfloor}, and either boundary of that axis,
+  turn the layer #{a=r} or #{a=N+1-r} by a quarter-turn. The turn rotates
+  the other two coordinates and carries every sticker on a moved cubie with
+  it. For odd #{N}, the central layer is deliberately omitted; this is the
+  usual fixed-center convention. Thus #{N=3} has the six outer-face turns,
+  while #{N=4} has the outer and adjacent inner layers.}
+
+  \p{This choice distinguishes a layer turn from a whole-cube rotation.
+  Whole-cube rotations change the chosen frame and are not generators of the
+  state group here. They can be added as a separate symmetry action, or used
+  to identify observations later. Keeping them out makes the six face
+  directions, and hence a fixed center color scheme, part of the state
+  description.}
+
+  \p{A labelled state assigns a distinct name to every physical cubie and,
+  when needed, to every sticker. A move acts by permuting these labels and
+  their local frames. An ordinary colored observation forgets distinctions
+  between equal-colored stickers; a marked or 'supercube' observation
+  retains them. These are different quotients of the same labelled action.
+  In particular, a statement that two center cubies 'look the same' is an
+  observation claim, not a claim that the labelled pieces are interchangeable
+  by a move.}
+}
+
+\subtree{
+  \title{The coordinate signatures of the orbits}
+
+  \p{The useful invariant is the distance of a coordinate from the nearest
+  boundary. A layer turn permutes two coordinates, possibly changes their
+  signs relative to the cube center, and leaves the multiset of these
+  distances unchanged. It therefore preserves corners, edges and centers.
+  On an edge, the one nonboundary coordinate gives a ring index. On a center,
+  the two interior coordinates give an unordered pair of distances. Equal
+  distances give a center-corner position in a concentric ring; unequal
+  distances give a center-edge position. The central pair in an odd cube is
+  the fixed center.}
+
+  \p{Write #{K_e=N/2-1} for even #{N} and
+  #{K_o=(N-3)/2} for odd #{N}. The position orbits under the selected layer
+  turns have the following sizes. For even #{N}, the coupled-edge orbits
+  #{E_1,...,E_{K_e}} each have #{24} positions. For odd #{N}, there is a
+  single-edge orbit #{E_s} of size #{12}, together with coupled-edge orbits
+  #{E_1,...,E_{K_o}} of size #{24} each. The term \em{coupled} records
+  that the edge is away from the odd cube's middle edge position; it does not
+  by itself choose an orientation convention.}
+
+  \p{For even #{N}, each center-corner ring #{C_k},
+  #{1\le k\le K_e}, has #{24} positions. The center-edge ring #{D_k},
+  #{2\le k\le K_e}, has #{48(k-1)} positions, split into
+  #{2(k-1)} distinct orbits of #{24}. For odd #{N}, there are #{6} fixed
+  centers, center-corner rings #{C_k} of size #{24}, and center-edge rings
+  #{D_k} of size #{24(2k-1)}, each for #{1\le k\le K_o}. Each odd ring is
+  likewise a union of #{2k-1} orbits of #{24}. Summing these rows gives
+  #{6(N-2)^2} centers in both parities. The formulas expose the distinction
+  between a position orbit and an orientation coordinate: a one-sticker
+  center has no orientation unless it is specially marked, while a coupled
+  edge can have a convention-dependent orientation record.}
+
+  \p{These sets are not merely a count. Face turns carry a representative
+  edge around the four faces of its ring; an inner layer at depth #{k},
+  conjugated by outer turns, carries it to the other axis directions. The
+  same construction carries a center-corner representative around its ring
+  and a center-edge representative around every position with the same
+  ordered distance-pair or chirality label. Hence each displayed
+  #{24}-position set is a move orbit, while the distance signature proves
+  that different rows cannot mix. This is the coordinate part of the model;
+  legality constraints on the permutations are a separate question.}
+}
+
+\subtree{
+  \title{Small cubes make the parity split visible}
+
+  \p{For #{N=2}, #{K_e=0}: there are only the eight corners. For #{N=3},
+  #{K_o=0}: the pieces are eight corners, twelve single edges and six fixed
+  centers. This is the familiar cube, but the description explains why its
+  centers do not move in the chosen layer family.}
+
+  \p{For #{N=4}, #{K_e=1}: there are eight corners, one coupled-edge orbit
+  of #{24}, and one center-corner orbit of #{24}; there are no fixed centers
+  and no center-edge ring. For #{N=5}, #{K_o=1}: there are eight corners,
+  twelve single edges, one coupled-edge orbit of #{24}, six fixed centers,
+  one center-corner orbit of #{24}, and one center-edge orbit of #{24}.
+  The latter has #{8+36+54=98} visible cubies, the familiar Professor's
+  Cube count. These examples show what changes with parity without claiming
+  that the same labels or orientation coordinates are used by every source.}
+
+  \p{The [ordinary cube action](frap-000P) is the #{N=3} outer-layer case of
+  this model. The next chapter can therefore state constraints for a fixed
+  three-layer convention, while the all-#{N} first law must still reconcile
+  the labelled, colored and coupled-edge conventions in Bonzio--Loi--Peruzzi
+  and Salkinder. Salkinder writes all slice rotations, including a central
+  slice in odd size, and then treats its use through a shifted middle-slice
+  convention; this is a genuine convention choice, not a harmless notation
+  change. We use the fixed-center generators above and leave the translation
+  between these move families explicit. A necessary invariant will not be
+  promoted to a sufficiency theorem until that reconciliation is written out.}
+}
