@@ -1,0 +1,171 @@
+\import{macros}
+\import{lean-macros}
+\meta{agent-authored}{true}
+\tag{frap}
+
+\title{A complete layer-first method}
+
+\p{The three-layer model in [the complete cube account](frap-0016)
+turns a human solve into a sequence of stabilizer problems. We keep the
+fixed frame and write #{U,D,F,B,R,L} for clockwise quarter-turns as seen
+from the named face. A prime is an inverse and a superscript #{2} is a
+half-turn; a word is read from left to right. The bottom face #{D} is the
+first layer, so its center fixes the target colour and the four side centres
+fix the cross alignment. The notation and face-view convention agree with
+the [cube notation notes](uts-016J).}
+
+\subtree{
+  \title{Effects, setup, and preservation}
+
+  \p{A \vocab{slot} is a destination for one corner or edge. A setup word
+  #{s} brings a chosen case to the working slot; a trigger #{t} performs the
+  local change there; and #{s t s^{-1}} transports that change to another
+  location. This is conjugation in the move group, not a promise that the
+  transported word has the same visible support before the replay is
+  checked. A commutator}
+  ##{ [a,b]=a b a^{-1}b^{-1} }
+  \p{is useful when #{a} and #{b} overlap in a controlled way. Its support
+  must still be computed in the current convention: cancellation in the
+  group word does not by itself prove that every other piece is fixed.}
+
+  \p{Let #{H_i} be the subgroup fixing everything completed before stage
+  #{i}. A stage is valid when each of its words lies in #{H_i} after the
+  setup data have been restored. Thus a solve follows a descending chain}
+  ##{G\supseteq H_{\rm cross}\supseteq H_{\rm first}\supseteq
+      H_{\rm middle}\supseteq H_{\rm last\,orientation}.}
+  \p{The inclusions describe preservation, while the case table below gives
+  the progress that makes the chain terminate. This separates the algebraic
+  question “what does the word change?” from the practical questions of
+  recognition, memory, and execution.}
+}
+
+\subtree{
+  \title{The complete seven-stage method}
+
+  \p{The following method is complete under the stated case conventions.
+  At every stage, rotate only the working view or use a setup word; never
+  rotate the whole cube while a positional convention is being recorded. A
+  displayed algorithm is a witness for its local effect. Its inverse and a
+  conjugate supply the other orientations and slots.}
+
+  \ol{
+    \li{\strong{Cross.} Solve the four #{D}-edges one at a time, matching
+    each side colour to its centre. If a target edge is in the top layer,
+    bring it above its slot and insert it with #{F^2} or a quarter-turn
+    setup. If it is in the first layer with the wrong orientation, eject it
+    to the top and insert it again. Earlier cross edges are kept out of the
+    working slot.}
+
+    \li{\strong{First-layer corners.} Put a target corner above its #{D}
+    slot at #{UFR}. Repeat #{T=R' D' R D} until the target sticker faces down
+    and the two side stickers match. The word #{T} fixes the already solved
+    cross after the setup is restored; at most four repetitions are needed. A
+    corner incorrectly occupying the slot is first ejected with the same
+    trigger, then treated as a top-layer case.}
+
+    \li{\strong{Middle edges.} With the solved layer on the bottom, align a
+    top-layer edge with its side centre. To insert it on the right use}
+    ##{I_R=U R U' R' U' F' U F,}
+    \p{and to insert it on the left use}
+    ##{I_L=U' L' U L U F U' F'.}
+    \p{Both words restore the first layer. If a middle edge is misplaced,
+    use either insertion to eject it, then solve the resulting top-layer
+    case.}
+
+    \li{\strong{Last-layer cross.} Ignore the side colours and orient the
+    four #{U}-edges with}
+    ##{X=F R U R' U' F'.}
+    \p{With the #{U}-face viewed from above, a line is held horizontal and
+    an L is held at the back-left. The same word changes the zero-, two-,
+    or four-oriented-edge cases to a case with strictly more oriented
+    edges after the indicated setup; repeat until the cross is present.}
+
+    \li{\strong{Last-layer edges.} First restore the side colours of the
+    four cross edges. The checked three-edge cycle}
+    ##{P=R U' R U R U R U' R' U' R^2}
+    \p{fixes the corners and cycles three #{U}-edges. Together with a
+    #{U}-turn, its conjugates generate all permutations of the four
+    cross edges: a 4-cycle and a 3-cycle generate #{S_4}. Apply a setup,
+    one or more copies of #{P} or #{P^{-1}}, and undo the setup.}
+
+    \li{\strong{Last-layer corners.} Put a correctly located corner at
+    #{UFR}; if none is located, apply the word once and inspect again. The
+    corner cycle}
+    ##{C=R' F R' B^2 R F' R' B^2 R^2}
+    \p{fixes the cross edges and cycles the three other #{U}-corners. Its
+    conjugates and #{U}-turns generate #{S_4}, so repeated applications
+    place all four corners without changing their orientations.}
+
+    \li{\strong{Last-layer corner orientation.} Keep the cube fixed. At
+    #{UFR}, repeat #{T=R'D'RD} until that corner is oriented; turn only
+    #{U} to bring the next unsolved corner to #{UFR}, and repeat. During
+    this stage the visible lower layers look disturbed, but after the last
+    corner the accumulated orientation sum is zero and every earlier piece
+    returns to its solved position.}
+  }
+
+  \p{The method uses only a small vocabulary of triggers. The setup words
+  are the memory burden; each trigger has a recognizable local effect. The
+  two places where an algorithm appears to disrupt completed material (the
+  corner orientation stage and an ejection of a misplaced piece) are
+  deliberate: the word is applied until the current local case is solved,
+  after which the preservation invariant is restored.}
+}
+
+\subtree{
+  \title{Why the cases terminate}
+
+  \p{We now justify completeness rather than infer it from successful
+  demonstrations. A cross edge can always be moved to the top layer or
+  ejected from its slot, and a quarter-turn or half-turn inserts it into a
+  matching slot. Removing one solved edge leaves a connected set of
+  unsolved slots, so four repetitions finish the cross. The corner trigger
+  has a nonzero twist effect at #{UFR} and fixes the cross after each full
+  insertion; the eject-and-reinsert rule therefore solves four corners. The
+  two middle insertions are inverses after reflection of the working view,
+  and the same ejection argument solves four middle edges.}
+
+  \p{For the last layer, the edge-orientation word #{X} changes the
+  orientation pattern in the standard line/L/point cases while fixing both
+  completed layers. The finite list of patterns has representatives point,
+  line, and L; the prescribed setup makes the number of oriented edges
+  increase, so the process reaches the cross. After orientation, #{P} is a
+  3-cycle on edges and #{U} is a 4-cycle. These generate #{S_4}, proving
+  that the edge-position stage reaches every permutation. The analogous
+  checked effect of #{C}, together with #{U}, gives #{S_4} on corners.}
+
+  \p{Finally, #{T} changes the orientation of the working corner while the
+  temporary permutation cancels after the corner is finished and the next
+  corner is brought into place. The corner orientation sum from
+  [the cube constraints](frap-0016) is zero, so the final corner is forced
+  when the other three have been oriented. Thus every state satisfying the
+  three reachability tests has a finite word supplied by these stages. This
+  is a completeness proof for the method, not an optimality claim.}
+}
+
+\subtree{
+  \title{One annotated local solve}
+
+  \p{Suppose the first two layers are solved, the #{U}-cross is oriented,
+  and the three-edge cycle needed to place the #{U}-edge at the back is
+  visible. Hold that edge at the slot to be fixed and apply #{P}; if the
+  cycle runs the other way, apply #{P^{-1}}. The corners and all lower
+  pieces return to their previous states. If the desired edge is not in
+  the working support, choose a setup #{s} that brings it there and replay}
+  ##{s P s^{-1}.}
+  \p{After the edge positions are correct, use the same inspect--setup--cycle
+  pattern for #{C}. Only then use #{T} at #{UFR}, counting quarter-turns
+  until the corner's #{U}-sticker points up. The visible disorder during
+  this last replay is expected; the final inverse setup and the orientation
+  sum certify that the solved state has returned. This is the smallest
+  complete trace of the method: recognize a case, transport a checked
+  effect, and finish inside the next stabilizer.}
+}
+
+\p{A block-building or Roux-style organization can reduce the number of
+stages for an experienced solver, but it changes the recognition and
+preservation cases. It should be compared through the same questions—what
+is fixed, what subgroup remains, which effects are checked, and what is
+remembered—rather than by treating a lower move count as a complete measure
+of usability. The [cube resource notes](uts-016J) collect contrasting
+organizations for that later comparison.}
