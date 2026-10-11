@@ -1,0 +1,105 @@
+\import{fcap-macros}
+\meta{agent-authored}{true}
+\tag{fcap}
+\tag{spin}
+\tag{clifford}
+
+\taxon{Example}
+\title{The Lorentz Spin action is Hermitian matrix congruence}
+
+\p{In the Pauli model \ref{fcap-002L}, an odd vector becomes an
+even element after multiplication by #{e_0}. Encode
+#{v=te_0+x_1e_1+x_2e_2+x_3e_3} by
+
+##{X(v)=\Psi(ve_0)=t1-\sum_{j=1}^3x_j\sigma_j
+=\begin{pmatrix}t-x_3&-x_1+i x_2\\-x_1-i x_2&t+x_3\end{pmatrix}.}
+
+A matrix is \em{Hermitian} when #{Z^*=Z}, where #{*} denotes conjugate
+transpose. Every Hermitian two-by-two matrix has the form
+#{Z=\begin{pmatrix}a&z\\\overline z&d\end{pmatrix}} with #{a,d\in\mathbb R}.
+The inverse coordinates are
+
+##{X^{-1}(Z)=\left(\frac{a+d}{2},-\operatorname{Re}z,
+\operatorname{Im}z,\frac{d-a}{2}\right).}
+
+Thus #{X} is a real linear equivalence, and direct expansion gives
+
+##{\det X(v)=t^2-x_1^2-x_2^2-x_3^2=Q_{1,3}(v).}}
+
+\p{For #{s\in\Spin(Q_{1,3})}, put #{M=\Psi(s)\in SL_2(\mathbb C)}.
+Then the vector action is
+
+##{X(svs^{-1})=M X(v)M^*.}
+
+To prove it, conjugation by #{e_0} defines an automorphism
+#{\gamma(x)=e_0xe_0} of the even algebra. It negates each #{A_j=e_0e_j}
+and the volume element #{I=e_0e_1e_2e_3}. On the matrix side,
+#{M\mapsto\operatorname{adj}(M)^*} has the same effect on
+#{\sigma_j} and #{-i1}. It is a real algebra automorphism: both
+adjugation and conjugate transpose reverse products, and in size two
+adjugation is linear. Checking the even generators therefore gives
+
+##{\Psi(\gamma(x))=\operatorname{adj}(\Psi(x))^*.}
+
+Now multiply the Clifford action by #{e_0}:
+
+##{(svs^{-1})e_0=s(ve_0)\gamma(s^{-1}).}
+
+Since #{\det M=1}, we have #{\operatorname{adj}(M^{-1})=M}.
+Applying #{\Psi} proves the congruence formula. It preserves Hermitian
+matrices, and its determinant is unchanged because
+#{\det M=\det M^*=1}.}
+
+\p{The square makes the coordinate meaning of the action explicit:
+
+\tikzfig2{\begin{tikzcd}[column sep=large,row sep=large]
+\mathbb R^{1,3} \arrow[r,"v\mapsto svs^{-1}"] \arrow[d,"X"']
+ & \mathbb R^{1,3} \arrow[d,"X"] \\
+\operatorname{Herm}_2(\mathbb C) \arrow[r,"Z\mapsto MZM^*"']
+ & \operatorname{Herm}_2(\mathbb C)
+\end{tikzcd}}
+
+For example, let #{M=\operatorname{diag}(e^{r/2},e^{-r/2})}.
+Its congruence multiplies #{t-x_3} by #{e^r}, multiplies #{t+x_3}
+by #{e^{-r}}, and fixes the off-diagonal entries. Hence
+
+##{\begin{aligned}
+t'&=\cosh(r)t-\sinh(r)x_3,& x_1'&=x_1,\\
+x_3'&=-\sinh(r)t+\cosh(r)x_3,& x_2'&=x_2.
+\end{aligned}}
+
+This is the boost with the sign selected by #{X=t1-x\cdot\sigma}.
+The null cone is exactly the Hermitian matrices of rank at most one.}
+
+\p{For comparison with the formal opposite-signature model, use
+#{T} and #{E} from \ref{fcap-003Z}. TauCeti's vector equivalence has
+coordinates
+
+##{H(y)=\begin{pmatrix}y_3+y_2&-y_1-i y_0\\
+-y_1+i y_0&y_3-y_2\end{pmatrix},\qquad
+\det H(y)=-Q_{3,1}(y)}
+
+\leanref/tauceti{TauCeti.coe_realCliffordThreeOneVectorEquivHermitian_apply}
+\leanref/tauceti{TauCeti.realCliffordThreeOneVectorEquivHermitian_det}.
+Substitution gives #{H(Tv)=X(v)}. In the even algebra this is the
+same identity as #{E(ve_0)=-T(v)f_3}, since
+#{H(y)=\Phi(-yf_3)}. The group coercion formula
+\leanref/tauceti{TauCeti.coe_realSpinThreeOneEquivSpecialLinear_apply}
+identifies the matrix of #{E(s)} with #{\Phi(E(s))=\Psi(s)=M}.
+Consequently the action dictionary in \ref{fcap-003Z} translates
+TauCeti's exact Hermitian congruence theorem
+\leanref/tauceti{TauCeti.realSpinThreeOneEquivSpecialLinear_action}
+into the displayed Pauli action. This checks both the signature sign
+and the matrix axes, not just the abstract group type.}
+
+\p{Multiplication by a fixed nonisotropic vector is the even-algebra
+action mechanism of
+\citet{Chapter 16, Proposition 16.9, pp. 143--144}{porteous1995clifford}.
+His Lorentz group calculation uses adjugation and the norm-one carrier
+\citet{Chapter 17, Proposition 17.5, pp. 151--152}{porteous1995clifford}.
+The coordinates and conjugate-transpose action above are derived in our
+chosen axes. The orthogonal image retains the spinor-norm condition
+of \ref{fcap-0023}; a topological component identification is separate.}
+
+\related{\ref{ca-000J}}
+\related{\ref{spin-000O}}

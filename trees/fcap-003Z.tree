@@ -1,0 +1,76 @@
+\import{fcap-macros}
+\meta{agent-authored}{true}
+\tag{fcap}
+\tag{spin}
+\tag{clifford}
+
+\taxon{Lemma}
+\title{Opposite Lorentz signatures share an even-algebra action dictionary}
+
+\p{Keep the Pauli convention of \ref{fcap-002L}:
+#{Q_{1,3}(v)=t^2-x_1^2-x_2^2-x_3^2}, #{A_j=e_0e_j}, and
+#{\Psi(A_j)=\sigma_j}. For
+#{Q_{3,1}(y)=y_0^2+y_1^2+y_2^2-y_3^2}, write #{f_0,\ldots,f_3}
+for the coordinate generators. The real linear bijection
+
+##{T(t,x_1,x_2,x_3)=(-x_2,x_1,-x_3,t)}
+
+satisfies #{Q_{3,1}(Tv)=-Q_{1,3}(v)}. There is a real algebra equivalence
+
+##{E:\Cl^+(Q_{1,3})\longrightarrow\Cl^+(Q_{3,1}),
+\qquad E(vw)=-T(v)T(w).}
+
+It preserves reversion and restricts to an equivalence of the actual
+Spin groups. Their vector actions satisfy
+
+##{T(svs^{-1})=E(s)T(v)E(s)^{-1}.}}
+
+\p{For the construction, complexify and send #{v\mapsto iT(v)}.
+Its square is #{Q_{1,3}(v)}, so the Clifford universal property gives an
+algebra map. On an even word of length #{2k} its value is
+#{(-1)^kT(v_1)\cdots T(v_{2k})}, which is real. This defines #{E} by
+scalar extension as in \ref{fcap-003V}. The reverse construction sends
+#{w\mapsto iT^{-1}(w)}; the two composites negate generators and
+therefore fix every even word. Reversing an even word commutes with
+#{E}. The dimension-four carrier lemma \ref{fcap-002J} now identifies
+the reverse-norm-one even units on both sides, so #{E} and its inverse
+restrict to the stated actual groups. Applying the complex map to
+#{svs^{-1}} and cancelling #{i} proves the action identity. This is the
+sign-transfer mechanism used for compact forms in \ref{fcap-0039},
+with the additional coordinate change #{T}.}
+
+\p{The algebraic construction is also the composite of sign scaling
+and the isometry #{T:(-Q_{1,3})\to Q_{3,1}}. TauCeti's general
+scaling formula at the unit #{-1}
+\leanref/tauceti{TauCeti.CliffordAlgebra.evenEquivEvenSMul_ι},
+its reversion compatibility
+\leanref/tauceti{TauCeti.CliffordAlgebra.evenEquivEvenSMul_reverseEven},
+and the isometry formula
+\leanref/tauceti{CliffordAlgebra.evenEquivOfIsometry_ι}
+provide these three component statements. The displayed #{T} and its
+Spin-action dictionary are the explicit specialization proved here.}
+
+\p{Let #{\Phi:\Cl^+(Q_{3,1})\to M_2(\mathbb C)} be TauCeti's
+concrete matrix equivalence. Its bilinear-generator formula
+\leanref/tauceti{TauCeti.realCliffordThreeOneEvenEquivComplexMatrix_ι}
+gives
+
+##{\begin{aligned}
+\Phi(f_0f_3)&=-\sigma_2,&\Phi(f_1f_3)&=\sigma_1,&
+\Phi(f_2f_3)&=-\sigma_3,\\
+\Phi(f_0f_1)&=i\sigma_3,&\Phi(f_0f_2)&=i\sigma_1,&
+\Phi(f_1f_2)&=i\sigma_2.
+\end{aligned}}
+
+Since #{T(e_0)=f_3}, #{T(e_1)=f_1}, #{T(e_2)=-f_0}, and
+#{T(e_3)=-f_2}, these formulas give #{\Phi(E(A_j))=\sigma_j}.
+The #{A_j} generate the even algebra, hence #{\Phi\circ E=\Psi}.
+Also #{E(e_0e_1e_2e_3)=f_0f_1f_2f_3}, whose matrix is #{-i1}.
+Thus the Pauli group equivalence agrees, through #{E}, with
+\leanref/tauceti{TauCeti.realSpinThreeOneEquivSpecialLinear}.
+This dictionary concerns the even algebras and their Spin actions;
+the full real Clifford algebras retain their different signature types.}
+
+\related{\ref{ca-000C}}
+\related{\ref{ca-000J}}
+\related{\ref{spin-000O}}
