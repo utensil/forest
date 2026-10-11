@@ -4,12 +4,10 @@
 
 \title{How the cube models connect}
 
-\p{The notes use two descriptions of a cube turn. The abstract account
-records incidence positions and restricts a shape symmetry to one facet; the
-layered-cube account records cubies, stickers, frames and allowed layers. The
-ordinary three-layer cube is where these descriptions meet. This handoff
-states the map between them before the solving chapters use the resulting
-coordinates.}
+\p{An abstract cube turn records incidence positions and restricts a shape
+symmetry to one facet. A layered-cube turn records cubies, stickers, frames
+and allowed layers. For the ordinary three-layer cube these are two
+descriptions of the same action; the map below identifies their coordinates.}
 
 \subtree{
   \title{From facet incidence to the 54-sticker state}
@@ -25,16 +23,23 @@ coordinates.}
   \p{The vertex--facet incidences in the facet-colored set map to the pairs
   above by sending a cube vertex, edge, or facet to its surface-cell coordinate
   and its incident facet normal. Conversely, the zero-coordinate pattern of
-  #{p} determines the cubie (three nonzero entries for a corner, two for an
-  edge, one for a centre), and #{n} determines the incident facet, so this is
-  a bijection between the 54 incidences and the 54 pairs. For #{N=3}, group
-  these pairs into the eight corner fibers and twelve edge fibers, leaving the
-  six center positions as fixed frame marks. A legal outer-face move preserves
-  this partition and
-  carries the cyclic labels in a corner fiber, or the ordered labels in an
-  edge fiber, to the corresponding destination fiber. Choose the cyclic corner
-  order and the U/D--F/B edge order used by the [complete three-layer
-  cube](frap-0016), so the destination permutation and local frame changes
+  #{p} determines the cubie (three nonzero entries for a
+  \vocabk{corner}{frap-0003}, two for an \vocabk{edge}{frap-0003}, one for a
+  centre), and #{n} determines the incident facet, so this is
+  a bijection between the 54 incidences and the 54 pairs. The cubie counts and
+  this incidence decomposition follow the general model in
+  \citet{Sections 2--3}{bonzio2018nxnxn}; the displayed pairing and 54-count
+  are the calculation used here. For #{N=3}, group these pairs into eight
+  corner and twelve edge \newvocab{sticker fibres}, leaving the six center
+  positions as fixed frame marks. A legal outer-face move preserves this
+  partition and carries the cyclic labels in a corner fibre, or the ordered labels in an
+  edge fiber, to the corresponding destination fiber. Write
+  #{C_p=\{(p,\operatorname{sgn}(p_i)e_i):p_i\ne0\}} for a corner fibre and
+  #{E_p} for an edge fibre. Within #{C_p}, order the three normals by the
+  coordinate axes #{e_1,e_2,e_3} and read them cyclically; within #{E_p}, use
+  increasing axis order. Identify those ordered labels with the U/D and F/B
+  frame labels of the [complete three-layer cube](frap-0016). This fixes each
+  per-fibre bijection, so the destination permutation and local frame changes
   are defined without an unstated convention. Therefore it induces exactly
   the fixed-frame coordinates}
   ##{(\sigma,x;\tau,z)\in S_8\times(\mathbb Z_3)^8
@@ -82,9 +87,9 @@ coordinates.}
 }
 
 \subtree{
-  \title{The route after the handoff}
+  \title{What the identification supports}
 
-  \p{The narrative now has an explicit chain of state descriptions:}
+  \p{The explicit identification supports this chain of state descriptions:}
   \ol{
     \li{incidence, flags and a local facet action explain what a move is;}
     \li{the layered model and its first law explain which fibres and
@@ -97,12 +102,10 @@ coordinates.}
       replayed and checked against those models.}
   }
 
-  \p{The linked branches answer separate questions at the points where they
-  become useful. Label transport and branched unfolding study return maps on
-  simplex labels; compatible quotients test whether an identification of
-  sticker observations inherits a move; and scrambling and spectra study
-  which functions retain memory under a declared move law. None of these
-  branches is being identified with the fixed-frame cube action. Their role in
-  the final return is to sharpen the meanings of transport, forgetting and
-  randomization before the notes close on a concrete solve.}
+  \p{Three linked comparisons use the same distinctions. Label transport and
+  branched unfolding study return maps on simplex labels; compatible quotients
+  test whether an identification of sticker observations inherits a move; and
+  scrambling and spectra study which functions retain memory under a declared
+  move law. These are comparisons of transport, forgetting and randomization,
+  not identifications with the fixed-frame cube action.}
 }
