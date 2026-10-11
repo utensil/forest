@@ -4,12 +4,10 @@
 
 \title{How the cube models connect}
 
-\p{The notes use two descriptions of a cube turn. The abstract account
-records incidence positions and restricts a shape symmetry to one facet; the
-layered-cube account records cubies, stickers, frames and allowed layers. The
-ordinary three-layer cube is where these descriptions meet. This handoff
-states the map between them before the solving chapters use the resulting
-coordinates.}
+\p{An abstract cube turn records incidence positions and restricts a shape
+symmetry to one facet. A layered-cube turn records cubies, stickers, frames
+and allowed layers. For the ordinary three-layer cube these are two
+descriptions of the same action; the map below identifies their coordinates.}
 
 \subtree{
   \title{From facet incidence to the 54-sticker state}
@@ -25,25 +23,40 @@ coordinates.}
   \p{The vertex--facet incidences in the facet-colored set map to the pairs
   above by sending a cube vertex, edge, or facet to its surface-cell coordinate
   and its incident facet normal. Conversely, the zero-coordinate pattern of
-  #{p} determines the cubie (three nonzero entries for a corner, two for an
-  edge, one for a centre), and #{n} determines the incident facet, so this is
-  a bijection between the 54 incidences and the 54 pairs. For #{N=3}, group
-  these pairs into the eight corner fibers and twelve edge fibers, leaving the
-  six center positions as fixed frame marks. A legal outer-face move preserves
-  this partition and
-  carries the cyclic labels in a corner fiber, or the ordered labels in an
-  edge fiber, to the corresponding destination fiber. Choose the cyclic corner
-  order and the U/D--F/B edge order used by the [complete three-layer
-  cube](frap-0016), so the destination permutation and local frame changes
-  are defined without an unstated convention. Therefore it induces exactly
+  #{p} determines the cubie (three nonzero entries for a
+  \vocabk{corner}{frap-0003}, two for an \vocabk{edge}{frap-0003}, one for a
+  centre), and #{n} determines the incident facet, so this is
+  a bijection between the 54 incidences and the 54 pairs. The cubie counts and
+  this incidence decomposition follow the general model in
+  \citet{Sections 2--3}{bonzio2018nxnxn}; the displayed pairing and 54-count
+  are the calculation used here. For #{N=3}, group these pairs into eight
+  corner and twelve edge \newvocab{sticker fibres}, leaving the six center
+  positions as fixed frame marks. A legal outer-face move preserves this
+  partition and carries the labels in a corner fibre or edge fibre to the
+  corresponding destination fibre. Write
+  #{C_p=\{(p,\operatorname{sgn}(p_i)e_i):p_i\ne0\}} for a corner fibre and
+  #{E_p} for an edge fibre. For a corner, order its normals as
+  #{L_p=(u_p,f_p,r_p)}, where #{u_p=\operatorname{sgn}(p_3)e_3},
+  #{f_p=\operatorname{sgn}(p_2)e_2}, and #{r_p=\operatorname{sgn}(p_1)e_1}.
+  For an edge, put first the U/D normal when #{p_3\ne0}, otherwise the F/B
+  normal, and put the other normal second. A move sends #{C_p} or #{E_p} to a
+  destination fibre. Let #{k_p\in\{0,1,2\}} be the index of the transported
+  U/D normal in #{L_{p'}}. If the source cubie has #{p_3=+1}, set
+  #{x_p=k_p}; if it has #{p_3=-1}, set #{x_p=-k_p} in
+  #{\mathbb Z_3}. Thus each side turn gives two #{+1} and two #{-1}
+  corner twists, while U/D turns give zero, matching the U/D-sticker
+  convention in [the complete three-layer cube](frap-0016). For an edge,
+  its distinguished normal agrees or disagrees with the first destination
+  label, giving #{z\in\mathbb Z_2}. This explicit extraction fixes each
+  per-fibre bijection and the destination permutation without asserting an
+  unstated cyclic convention.
+  Therefore it induces exactly
   the fixed-frame coordinates}
   ##{(\sigma,x;\tau,z)\in S_8\times(\mathbb Z_3)^8
         \times S_{12}\times(\mathbb Z_2)^{12}}
   \p{used in [the complete three-layer cube](frap-0016). More explicitly, if
-  a move sends a corner fiber #{C_p} to #{C_{p'}}, set #{\sigma(p)=p'};
-  the unique cyclic offset of the three normals gives #{x_p\in\mathbb Z_3}.
-  The analogous destination edge fiber and its ordered-normal offset give
-  #{\tau} and #{z\in(\mathbb Z_2)^{12}}. For the positive-#{z} turn
+  a move sends a corner fibre #{C_p} to #{C_{p'}}, set #{\sigma(p)=p'};
+  the destination edge fibre similarly gives #{\tau}. For the positive-#{z} turn
   #{q(x,y,z)=(y,-x,z)} from [one ordinary cube face turn](frap-000P),}
   ##{((1,1,1),e_z)\longmapsto((1,-1,1),e_z),\qquad
       ((1,1,1),e_y)\longmapsto((1,-1,1),e_x).}
@@ -58,7 +71,8 @@ coordinates.}
   addresses inside each recorded local frame. Passing from labelled cubies to
   an ordinary colour observation forgets equal-looking labels. The latter is
   the observation quotient discussed in [which moves survive a quotient](frap-0019),
-  and it is not part of the abstract-to-coordinate handoff.}
+  and it is a separate identification of states rather than a change in these
+  coordinates.}
 }
 
 \subtree{
@@ -82,27 +96,25 @@ coordinates.}
 }
 
 \subtree{
-  \title{The route after the handoff}
+  \title{What the identification supports}
 
-  \p{The narrative now has an explicit chain of state descriptions:}
+  \p{The explicit identification supports this chain of state descriptions:}
   \ol{
     \li{incidence, flags and a local facet action explain what a move is;}
     \li{the layered model and its first law explain which fibres and
       constraints appear as #{N} changes;}
     \li{the fixed-frame three-layer coordinates make the three familiar
       constraints and their constructive sufficiency explicit;}
-    \li{the human and computer chapters use the same state action while
+    \li{human methods and computer searches use the same state action while
       assigning different meanings to preservation, cost and optimality;}
-    \li{the return-to-play account records how a declared move word is
-      replayed and checked against those models.}
+    \li{a declared move word can be replayed and checked against these
+      state descriptions.}
   }
 
-  \p{The linked branches answer separate questions at the points where they
-  become useful. Label transport and branched unfolding study return maps on
-  simplex labels; compatible quotients test whether an identification of
-  sticker observations inherits a move; and scrambling and spectra study
-  which functions retain memory under a declared move law. None of these
-  branches is being identified with the fixed-frame cube action. Their role in
-  the final return is to sharpen the meanings of transport, forgetting and
-  randomization before the notes close on a concrete solve.}
+  \p{Three linked comparisons use the same distinctions. Label transport and
+  branched unfolding study return maps on simplex labels; compatible quotients
+  test whether an identification of sticker observations inherits a move; and
+  scrambling and spectra study which functions retain memory under a declared
+  move law. These are comparisons of transport, forgetting and randomization,
+  not identifications with the fixed-frame cube action.}
 }

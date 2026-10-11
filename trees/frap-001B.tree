@@ -2,10 +2,10 @@
 \meta{agent-authored}{true}
 \tag{frap}
 
-\title{A worked return to play}
+\title{A worked replay and projected lower bound}
 
-\p{The route now has a concrete replay to carry its abstractions back to a
-three-layer puzzle. Work in the fixed-frame HTM convention of the [complete
+\p{The fixed-frame model has a concrete replay on a
+ three-layer puzzle. Work in the fixed-frame HTM convention of the [complete
 cube account](frap-0016): a face quarter-turn, its inverse, or a half-turn
 costs one move, and words are read from left to right. Start at the solved
 state and apply the declared scramble}
@@ -17,8 +17,15 @@ state to the recorded scramble state and then returns to solved. The check
 represents each of the 54 pairs in [how the cube models connect](frap-001A)
 as a slot, applies the six quarter-turn permutations and their inverses, and
 enumerates the projected corner states breadth first through depth two. The
-second replay is therefore a certificate for the move convention and the
-inverse, not merely an animation of a familiar sequence.}
+token-by-token states and hashes are preserved in the [replay
+  receipt](https://github.com/utensil/forest/blob/main/trees/frap-001B-replay.json).
+  Running the tracked [replay checker](https://github.com/utensil/forest/blob/main/scripts/check-frap-b9b.js)
+  with `node scripts/check-frap-b9b.js trees/frap-001B-replay.json` reproduces
+  and compares the stored `replay_log`. The complete cube account supplies the
+  move convention; the replay, hashes and 262-state count are the deterministic
+  calculation reported here. The second replay is therefore a certificate for
+  the move convention and the inverse, not merely an animation of a familiar
+  sequence.}
 
 \subtree{
   \title{What the small search certifies}
@@ -37,7 +44,7 @@ inverse, not merely an animation of a familiar sequence.}
 }
 
 \subtree{
-  \title{How this returns to the human method}
+  \title{Relation to layer-first and computer methods}
 
   \p{A player can recognize the displayed ten-move word as a repeated
   trigger pattern, but recognition is not a replacement for the state
