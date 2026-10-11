@@ -1,0 +1,88 @@
+\import{macros}
+\meta{agent-authored}{true}
+\tag{frap}
+
+\title{How the cube models connect}
+
+\p{The notes use two descriptions of a cube turn. The abstract account
+records incidence positions and restricts a shape symmetry to one facet; the
+layered-cube account records cubies, stickers, frames and allowed layers. The
+ordinary three-layer cube is where these descriptions meet. This handoff
+states the map between them before the solving chapters use the resulting
+coordinates.}
+
+\subtree{
+  \title{From facet incidence to the 54-sticker state}
+
+  \p{The facet calculation in [one ordinary cube face turn](frap-000P)
+  selects the facet-colored part of the incidence set. It has three sticker
+  positions above each of the eight vertices, two above each of the twelve
+  edges, and one above each of the six facets:}
+  ##{8\cdot3+12\cdot2+6=54.}
+  \p{For #{N=3}, group these positions into the eight corner fibers and
+  twelve edge fibers, leaving the six center positions as fixed frame marks.
+  A legal outer-face move preserves this partition and carries the cyclic
+  labels in a corner fiber, or the ordered labels in an edge fiber, to the
+  corresponding destination fiber. Therefore it induces exactly the
+  fixed-frame coordinates}
+  ##{(\sigma,x;\tau,z)\in S_8\times(\mathbb Z_3)^8
+        \times S_{12}\times(\mathbb Z_2)^{12}}
+  \p{used in [the complete three-layer cube](frap-0016). The induced map is
+  a change of state description for the legal action: it sends a sticker
+  permutation to its corner and edge destination permutations together with
+  the local frame changes. It does not assert that every permutation of the
+  54 positions is a legal cube move.}
+
+  \p{This also separates two kinds of forgetting. Passing from the incidence
+  action to the displayed coordinates forgets the individual sticker
+  addresses inside each recorded local frame. Passing from labelled cubies to
+  an ordinary colour observation forgets equal-looking labels. The latter is
+  the observation quotient discussed in [which moves survive a quotient](frap-0019),
+  and it is not part of the abstract-to-coordinate handoff.}
+}
+
+\subtree{
+  \title{What changes when layers are added}
+
+  \p{For larger #{N}, the same surface-cell description retains the corner
+  and edge fibers but adds coupled-edge and center orbits. Inner layers move
+  those new fibers, and even and odd sizes have different orbit signatures.
+  The all-#{N} coordinates in [the layered-cube law](frap-0004) therefore
+  extend the three-layer state description rather than replace it. Their
+  parity and orientation equations are stated for a labelled fixed-frame
+  model; they are not obtained by treating every center sticker as one of the
+  twelve ordinary edges.}
+
+  \p{The transition is consequently a specialization in one direction:
+  the #{N=3} outer-layer case of [the family of layered cubes](frap-0003)
+  gives the ordinary fixed-frame action, while the abstract facet action
+  explains why that outer turn moves precisely the selected surface fibers.
+  Whole-cube rotations, marked centers, central slices and colour-only
+  identifications are additional choices, not silent changes of coordinates.}
+}
+
+\subtree{
+  \title{The route after the handoff}
+
+  \p{The narrative now has an explicit chain of state descriptions:}
+  \ol{
+    \li{incidence, flags and a local facet action explain what a move is;}
+    \li{the layered model and its first law explain which fibres and
+      constraints appear as #{N} changes;}
+    \li{the fixed-frame three-layer coordinates make the three familiar
+      constraints and their constructive sufficiency explicit;}
+    \li{the human and computer chapters use the same state action while
+      assigning different meanings to preservation, cost and optimality;}
+    \li{the return-to-play account records how a declared move word is
+      replayed and checked against those models.}
+  }
+
+  \p{The linked branches answer separate questions at the points where they
+  become useful. Label transport and branched unfolding study return maps on
+  simplex labels; compatible quotients test whether an identification of
+  sticker observations inherits a move; and scrambling and spectra study
+  which functions retain memory under a declared move law. None of these
+  branches is being identified with the fixed-frame cube action. Their role in
+  the final return is to sharpen the meanings of transport, forgetting and
+  randomization before the notes close on a concrete solve.}
+}
