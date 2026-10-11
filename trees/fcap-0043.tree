@@ -1,0 +1,133 @@
+\import{fcap-macros}
+\meta{agent-authored}{true}
+
+\tag{fcap}
+\tag{spin}
+\tag{clifford}
+
+\taxon{Proposition}
+\title{The discriminant center of a four-dimensional Spin group}
+
+\p{Let #{K} be a field of characteristic different from two, and let
+#{q=\langle a,b,c,d\rangle} with #{a,b,c,d\in K^\times}. Thus
+#{q(x)=ax_1^2+bx_2^2+cx_3^2+dx_4^2}. The center of its
+\vocabk{even Clifford algebra}{ca-001J} determines whether the quaternion
+description of its \vocabk{Spin group}{spin-000J} has two factors over #{K}
+or one factor over a quadratic field. Put
+##{\begin{aligned}
+\delta&=abcd,\\
+E&=K[t]/(t^2-\delta),\\
+D&=(-ab,-ac\mid K),
+\end{aligned}}
+using the \vocabk{quaternion algebra}{fgap-0006} notation. The class of
+#{\delta} in #{K^\times /(K^\times)^2} is the signed discriminant in
+dimension four; changing the diagonalizing basis changes the determinant
+by a square. Lam's center theorem identifies the corresponding quadratic
+algebra; the explicit quaternion and group identifications below follow by
+calculation \citet{V.2, thms. 2.2--2.5, pp. 109--111}{lam2005quadratic}.}
+
+\p{Extend quaternion conjugation #{\overline i=-i}, #{\overline j=-j}
+#{E}-linearly to #{D_E=D\otimes_K E}. Write
+#{SL_1(D_E)=\{x\in D_E:x\overline x=1\}} for its norm-one group.
+Indeed, for #{x=x_0+x_1i+x_2j+x_3ij}, with #{x_r\in E},
+##{x\overline x=\overline x x
+=x_0^2+abx_1^2+acx_2^2+a^2bcx_3^2\in E.}
+This extends the \vocabk{reduced norm}{fgap-0006} to the displayed
+quaternion algebra, and #{x^{-1}=\overline x} when the norm is one.
+There are algebra and group isomorphisms
+##{\begin{aligned}
+\Cl^+(q)&\simeq D_E,\\
+Z(\Cl^+(q))&\simeq E,\\
+\Spin(q)&\simeq SL_1(D_E),
+\end{aligned}}
+where the algebra isomorphism takes \vocabk{grade reversion}{ca-000J}
+to quaternion conjugation.
+If #{\delta} is a square in #{K^\times}, this gives
+##{\Spin(q)\simeq SL_1(D)\times SL_1(D).}
+If #{\delta} is nonsquare, it gives
+##{\Spin(q)\simeq SL_1(D\otimes_K K(\sqrt\delta)).}
+All groups here consist of points over the indicated fields.}
+
+\p{For a concrete comparison, take #{q_d=\langle1,-1,1,-d\rangle}.
+Then #{\delta=d} and #{D=(1,-1\mid K)}. The matrices
+##{i\longmapsto\begin{pmatrix}1&0\\0&-1\end{pmatrix},\qquad
+j\longmapsto\begin{pmatrix}0&1\\-1&0\end{pmatrix}}
+have squares #{1,-1}, anticommute, and, together with their product and the
+identity, form a basis of #{M_2(K)}. They therefore identify #{D} with
+#{M_2(K)}. Conjugation becomes matrix adjugation and the norm becomes the
+determinant, giving #{\Spin(q_d)\simeq SL_2(E)}. In particular, over
+#{K=\mathbb Q}, the members #{q_1} and #{q_2} satisfy
+##{\begin{aligned}
+\Spin(q_1)(\mathbb Q)
+&\simeq SL_2(\mathbb Q)\times SL_2(\mathbb Q),\\
+\Spin(q_2)(\mathbb Q)
+&\simeq SL_2(\mathbb Q(\sqrt2)).
+\end{aligned}}
+These identities apply the proposition to the two centers
+#{\mathbb Q\times\mathbb Q} and #{\mathbb Q(\sqrt2)}.}
+
+\proof{
+\p{Choose orthogonal Clifford generators with
+#{e_1^2=a,e_2^2=b,e_3^2=c,e_4^2=d}. Distinct generators anticommute.
+Set #{I=e_1e_2}, #{J=e_1e_3}, and #{w=e_1e_2e_3e_4}. Then
+##{\begin{aligned}
+I^2&=-ab,&J^2&=-ac,\\
+IJ&=-JI,&w^2&=abcd.
+\end{aligned}}
+The element #{w} commutes with every even word. Thus #{i\mapsto I},
+#{j\mapsto J}, #{t\mapsto w} define an algebra homomorphism
+#{D\otimes_K E\longrightarrow\Cl^+(q)}. The eight elements
+##{1,I,J,IJ,w,Iw,Jw,IJw}
+map to nonzero scalar multiples of the eight distinct even Clifford basis
+monomials. Explicitly,
+##{\begin{aligned}
+IJ&=-ae_2e_3,&Iw&=-abe_3e_4,\\
+Jw&=ace_2e_4,&IJw&=abce_1e_4.
+\end{aligned}}
+They form a basis, proving bijectivity. Writing an element of #{D_E} in
+the basis #{1,i,j,ij}, commutation with #{i} forces its #{j,ij}
+coefficients to vanish, and commutation with #{j} forces its #{i}
+coefficient to vanish. Here #{2,ab,ac} are units, even when #{E} is a
+product. The center is therefore exactly #{E}. Reversion negates
+#{I,J,IJ} and fixes #{w}, so it is #{\overline{(\,\cdot\,)}} on #{D_E}.}
+
+\p{It remains to identify the actual vector-generated Spin group with all
+even elements of reverse norm one. The real four-dimensional argument of
+\ref{fcap-002J} works over the stated field as follows. Suppose
+#{x\in\Cl^+(q)} and #{\operatorname{rev}(x)x=1}. Finite-dimensionality
+makes this left inverse a two-sided inverse. For every vector #{v},
+#{xvx^{-1}} is odd and fixed by reversion. In the orthogonal Clifford
+basis, reversal is #{+1} on degree one and #{-1} on degree three.
+Since two is invertible, #{xvx^{-1}} is a vector. Its square is #{q(v)},
+and conjugation is injective, hence induces an orthogonal automorphism
+#{g} of the four-dimensional vector space.}
+
+\p{By the [Clifford group exact sequence](fcap-002D), lift #{g}
+to a vector-generated Clifford unit #{y}. For the grading involution
+#{\alpha}, equality of the twisted actions of #{y} and the even element
+#{x} implies that #{z=y^{-1}x} satisfies #{\alpha(z)v=vz} for every
+vector #{v}. The graded-centrality theorem used in \ref{fcap-002J} gives
+#{z=c1} with #{c\in K^\times}. Every such scalar belongs to the generated
+Clifford group: for #{q(v)\ne0}, the two nonisotropic vectors
+#{(c/q(v))v} and #{v} have Clifford product #{c1}. Thus #{x=yz} is in
+that group. It is even with reverse norm one, so the carrier criterion
+\ref{fcap-0028} places it in Spin. Conversely, every Spin element is
+even with reverse norm one by that same criterion. Under the algebra
+isomorphism this is exactly #{SL_1(D_E)}.}
+
+\p{If #{\delta=r^2} with #{r\in K^\times}, evaluation at #{r,-r}
+identifies #{E} with #{K\times K}. The corresponding central idempotents
+are #{(1+w/r)/2} and #{(1-w/r)/2}. Hence #{D_E\simeq D\times D}, with
+componentwise conjugation and norm, giving the displayed product of
+norm-one groups. If #{\delta} is nonsquare, #{t^2-\delta} is irreducible,
+so #{E=K(\sqrt\delta)} and the second description follows.}
+}
+
+\p{The split-center group equivalence has a formal counterpart in
+\leanref/tauceti{CliffordAlgebra.spinGroupEquivSplitCenterCorners}, given a
+center isomorphism with #{K\times K}. The field-center existence theorem
+\leanref/tauceti{CliffordAlgebra.exists_spinGroupEquivQuaternionUnitaryOverCenter_of_finrank_eq_four}
+gives a quaternion norm-one model over the actual even center. Both assume
+nondegeneracy and dimension four over a field with two invertible. The
+explicit parameters #{-ab,-ac} and the matrices for #{q_d} are supplied
+by the calculation above.}
