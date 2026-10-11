@@ -55,8 +55,8 @@ fixed parity. The invariant subspace consequently contains every basis word
 of that parity. This proves irreducibility without identifying it with the
 separate group-level theorem.}
 
-\p{The exact formal comparison is presently rational. In the standard
-model set #{S_{\mathbb Q}=\bigwedge_{\mathbb Q}\mathbb Q^\ell}. The basis
+\p{The generator calculation is already defined over #{\mathbb Q}. In the
+standard model set #{S_{\mathbb Q}=\bigwedge_{\mathbb Q}\mathbb Q^\ell}. The basis
 map
 
 ##{\begin{aligned}
@@ -76,9 +76,29 @@ statements and exact fork weights over #{\mathbb Q}
 \leanref/tauceti{TauCeti.SpinPolarizationData.typeDSpinRep_serreE_exteriorBasis_univ_erase_last_eq_zero}
 \leanref/tauceti{TauCeti.SpinPolarizationData.isCartanWeightVector_typeDSpinRep_exteriorBasis_univ}
 \leanref/tauceti{TauCeti.SpinPolarizationData.isCartanWeightVector_typeDSpinRep_exteriorBasis_univ_erase_last}.
-The displayed scalar-extension and Borel steps are the mathematical bridge
-to the complex highest-weight conclusion, not an asserted packaged Lean
-base-change theorem.}
+The displayed scalar-extension and Borel steps explain how this rational
+calculation gives the complex highest-weight identities; they do not assert
+a packaged Lean base-change theorem.}
+
+\p{There are also direct highest-vector counterparts over any
+characteristic-zero field. They use a supplied polarization with no residual
+line, a basis of #{W} of rank #{n\geq4}, and the concrete type-D
+Cartan and Borel:
+\leanref/tauceti{TauCeti.SpinPolarizationData.isHighestWeightVector_typeDSpinLieRep_exteriorBasis_univ}
+\leanref/tauceti{TauCeti.SpinPolarizationData.isHighestWeightVector_typeDSpinLieRep_exteriorBasis_univ_erase_last}.
+With #{n=\ell}, their zero-based Cartan dual-basis indices #{n-1} and
+#{n-2} are our #{\omega_\ell} and #{\omega_{\ell-1}}, respectively.}
+
+\p{The restricted declarations also retain the parity assignment in the
+table. In even rank, #{\Omega\in S^+} and
+#{\widehat\Omega\in S^-}
+\leanref/tauceti{TauCeti.SpinPolarizationData.isHighestWeightVector_typeDSpinPlusLieRep_exteriorBasis_univ_of_even}
+\leanref/tauceti{TauCeti.SpinPolarizationData.isHighestWeightVector_typeDSpinMinusLieRep_exteriorBasis_univ_erase_last_of_even};
+in odd rank, #{\Omega\in S^-} and #{\widehat\Omega\in S^+}
+\leanref/tauceti{TauCeti.SpinPolarizationData.isHighestWeightVector_typeDSpinMinusLieRep_exteriorBasis_univ_of_odd}
+\leanref/tauceti{TauCeti.SpinPolarizationData.isHighestWeightVector_typeDSpinPlusLieRep_exteriorBasis_univ_erase_last_of_odd}.
+These assert highest vectors in the indicated modules; the occupancy
+argument above supplies their irreducibility.}
 
 \p{\citet{Proposition 20.15 and proof, pp. 305--306}{fulton2004representation}
 independently identify the two irreducible half-spin modules and give the
