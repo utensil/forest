@@ -1,0 +1,90 @@
+\import{fcap-macros}
+\meta{agent-authored}{true}
+\tag{fcap}
+\tag{spin}
+\tag{clifford}
+
+\taxon{Example}
+\title{The split three-dimensional Spin action is symmetric matrix congruence}
+
+\p{For #{Q_{2,1}(v)=v_0^2+v_1^2-v_2^2}, keep the algebra map
+#{\Phi:\Cl^+(Q_{2,1})\simeq M_2(\mathbb R)} of \ref{fcap-002I}.
+Multiplication by the last generator gives symmetric matrix coordinates
+
+##{X(v)=\Phi(ve_2)=
+\begin{pmatrix}-v_2-v_1&v_0\\v_0&-v_2+v_1\end{pmatrix},
+\qquad \det X(v)=-Q_{2,1}(v).}
+
+The inverse sends #{\begin{pmatrix}a&b\\b&d\end{pmatrix}} to
+#{(b,(d-a)/2,-(a+d)/2)}. Thus #{X} is a real linear equivalence onto
+the symmetric matrices, with the stated negative determinant form
+\leanref/tauceti{TauCeti.coe_realCliffordTwoOneVectorEquivSymmetric_apply}
+\leanref/tauceti{TauCeti.realCliffordTwoOneVectorEquivSymmetric_det}.
+For #{s\in\Spin(Q_{2,1})} and #{M=\Phi(s)\in SL_2(\mathbb R)},
+the \vocabk{vector action}{spin-000O} becomes
+
+##{X(svs^{-1})=M X(v)M^{\mathsf T}.}}
+
+\p{To prove the formula, write #{A=e_0e_1}, #{B=e_0e_2}, and
+#{C=e_1e_2}. Since #{e_2^2=-1}, conjugation by #{e_2} is
+#{\gamma(x)=-e_2xe_2}. It fixes #{A} and negates #{B,C}.
+On their three matrices in \ref{fcap-002I}, and on the identity, this gives
+
+##{\Phi(\gamma(x))=\operatorname{adj}(\Phi(x))^{\mathsf T}.}
+
+Both sides are linear in #{x}, so the basis check proves the equality
+on the whole even algebra. Moreover,
+
+##{(svs^{-1})e_2=s(ve_2)\gamma(s^{-1}).}
+
+The determinant-one equation gives
+#{\operatorname{adj}(M^{-1})=M}; applying #{\Phi} proves the action.
+TauCeti's bilinear-generator formula sends #{A,B,C} to exactly these
+three matrices, so its group map and action use this same #{\Phi}
+\leanref/tauceti{TauCeti.realCliffordTwoOneEvenEquivMatrix_ι}
+\leanref/tauceti{TauCeti.realSpinTwoOneEquivSpecialLinear_action}.}
+
+\p{For example, let #{M=\operatorname{diag}(a,a^{-1})} with #{a>0},
+and choose its Spin preimage using \ref{fcap-002I}. Put
+#{c=(a^2+a^{-2})/2} and #{h=(a^2-a^{-2})/2}. The congruence action is
+
+##{v_0'=v_0,\qquad v_1'=cv_1+hv_2,\qquad v_2'=hv_1+cv_2.}
+
+Here #{c^2-h^2=1}. The two null coordinates #{v_1+v_2} and
+#{v_1-v_2} are multiplied by #{a^2} and #{a^{-2}}, respectively.
+This exhibits the action on both null directions in the chosen coordinates.}
+
+\p{For comparison, the compact quaternion action of \ref{fcap-003J}
+has a complex matrix realization. Distinguish quaternion units
+#{\mathbf i,\mathbf j,\mathbf k} from the complex scalar #{i}. The map
+
+##{\iota(a+b\mathbf i+c\mathbf j+d\mathbf k)=
+\begin{pmatrix}a+ib&c+id\\-c+id&a-ib\end{pmatrix}}
+
+preserves multiplication and sends quaternion conjugation to conjugate
+transpose. Its determinant is #{a^2+b^2+c^2+d^2}, so it identifies the
+unit quaternions with #{SU(2)}. Indeed a special unitary matrix has the
+form #{\begin{pmatrix}z&w\\-\bar w&\bar z\end{pmatrix}} with
+#{|z|^2+|w|^2=1}, which recovers the four real coordinates. These are
+Gallier's axes \citet{Section 1.1, pp. 8--9}{gallier2014clifford}, and
+the exact embedding and group equivalence in TauCeti
+\leanref/tauceti{Quaternion.toComplexMatrix}
+\leanref/tauceti{Quaternion.unitaryEquivSpecialUnitaryGroup}.}
+
+\p{Keep #{\eta_3(v)=-v_1\mathbf i+v_0\mathbf j-v_2\mathbf k}
+from \ref{fcap-003J}, and put #{K(v)=i\iota(\eta_3(v))}.
+It is a traceless Hermitian matrix. Applying #{i\iota} to the already
+proved quaternion action gives
+
+##{K(svs^{-1})=U K(v)U^*,\qquad U=\iota(\theta(s))\in SU(2),}
+
+where #{U^*} is conjugate transpose. This derives the compact matrix
+action without changing the quaternion or vector axes. The split formula
+uses real symmetric matrices and #{SL_2(\mathbb R)} instead. The
+fixed-vector transport underlying these formulas is illustrated by
+\citet{Chapter 16, Proposition 16.9, pp. 143--144}{porteous1995clifford}.
+For the indefinite vector-action image, retain the spinor-norm kernel
+of \ref{fcap-0023}; no component or covering-space assertion is needed.}
+
+\related{\ref{spin-000O}}
+\related{\ref{ca-001J}}

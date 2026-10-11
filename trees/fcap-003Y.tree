@@ -1,0 +1,131 @@
+\import{fcap-macros}
+\meta{agent-authored}{true}
+\tag{fcap}
+\tag{spin}
+\tag{clifford}
+
+\taxon{Example}
+\title{The split four-dimensional Spin action is left and inverse-right multiplication}
+
+\p{For #{Q_{2,2}(v)=v_0^2+v_1^2-v_2^2-v_3^2}, the even
+Clifford algebra is a pair of real matrix algebras. We construct its
+coordinates to specify which Spin factor acts on each side of a vector.
+Set #{A=e_0e_1}, #{B=e_0e_2}, #{C=e_1e_2}, and #{I=e_0e_1e_2e_3}.
+The subalgebra #{H_0=\langle1,A,B,C\rangle_{\mathbb R}} has
+#{A^2=-1}, #{B^2=C^2=1}, and #{AB=-C}. Define
+
+##{J=\begin{pmatrix}0&1\\-1&0\end{pmatrix},\quad
+S=\begin{pmatrix}0&1\\1&0\end{pmatrix},\quad
+D=\begin{pmatrix}-1&0\\0&1\end{pmatrix}.}
+
+The assignments #{\rho(A)=-J}, #{\rho(B)=D}, #{\rho(C)=S}
+satisfy these relations and give a basis of #{M_2(\mathbb R)} together
+with the identity. They define an algebra equivalence #{\rho}.
+The volume element #{I} is central in the even algebra and #{I^2=1}.
+The eight even basis monomials give
+#{\Cl^+(Q_{2,2})=H_0\oplus I H_0}. Hence the map
+
+##{\Phi(u+Iw)=\bigl(\rho(u)-\rho(w),\ S(\rho(u)+\rho(w))S\bigr)}
+
+is an algebra equivalence to #{M_2(\mathbb R)\times M_2(\mathbb R)}.
+For a pair #{(P,R)}, its inverse is recovered from
+
+##{\rho(u)=\tfrac12(P+SRS),\qquad
+\rho(w)=\tfrac12(SRS-P).}}
+
+\p{The \vocabk{reversion}{ca-000J} fixes #{I} and negates
+#{A,B,C}. On #{H_0}, this is matrix adjugation, since #{\rho(A),
+\rho(B),\rho(C)} are traceless. Conjugation by #{S} commutes with
+adjugation, so
+
+##{\Phi(\operatorname{rev}(x))=
+\bigl(\operatorname{adj}(\Phi_1(x)),
+\operatorname{adj}(\Phi_2(x))\bigr).}
+
+Consequently #{\operatorname{rev}(x)x=1} if and only if both component
+determinants are one. The carrier lemma \ref{fcap-002J} therefore
+restricts #{\Phi}, with the displayed inverse, to the actual group
+
+##{\Spin(Q_{2,2})\simeq SL_2(\mathbb R)\times SL_2(\mathbb R).}
+
+Porteous's norm-one subgroup is denoted #{\operatorname{Spin}^+};
+his split-four entry is a pair of #{Sp_2(\mathbb R)} factors
+\citet{Chapter 17, Theorem 17.9 and Table 14, p. 159}{porteous1995clifford}.
+In degree two, #{M^{\mathsf T}JM=(\det M)J}, so these are precisely
+#{SL_2(\mathbb R)}. The norm-one restriction is essential to that comparison.}
+
+\p{Our pair map has the following six bivector images:
+
+##{\begin{aligned}
+e_0e_1&\longmapsto(-J,J),& e_0e_2&\longmapsto(D,-D),\\
+e_0e_3&\longmapsto(-S,S),& e_1e_2&\longmapsto(S,S),\\
+e_1e_3&\longmapsto(D,D),& e_2e_3&\longmapsto(-J,-J).
+\end{aligned}}
+
+In particular #{\Phi(I)=(-1,1)}. These are the specializations of
+TauCeti's bilinear-generator formula
+\leanref/tauceti{TauCeti.realCliffordTwoTwoEvenEquivMatrixProd_ι}.
+Since the bivectors generate the even algebra, this identifies #{\Phi}
+with its concrete even-algebra map and hence identifies the restricted
+group equivalence
+\leanref/tauceti{TauCeti.realSpinTwoTwoEquivSpecialLinearProd}.}
+
+\p{Now encode vectors by
+
+##{X(v)=\Phi_1(ve_3)S=
+\begin{pmatrix}-v_0-v_2&-v_1-v_3\\v_1-v_3&-v_0+v_2\end{pmatrix}.}
+
+The inverse sends #{\begin{pmatrix}a&b\\c&d\end{pmatrix}} to
+#{(-(a+d)/2,(c-b)/2,(d-a)/2,-(b+c)/2)}. A determinant expansion gives
+#{\det X(v)=Q_{2,2}(v)}. Thus #{X} identifies the whole vector space
+with the determinant quadratic space of real two-by-two matrices
+\leanref/tauceti{TauCeti.realCliffordTwoTwoVectorEquivMatrix_apply}
+\leanref/tauceti{TauCeti.realCliffordTwoTwoVectorEquivMatrix_det}.
+Writing #{\Phi(s)=(P,R)} for a Spin element, the action is
+
+##{X(svs^{-1})=P X(v)R^{-1}.}}
+
+\p{For the proof, #{e_3^2=-1}, and conjugation
+#{\gamma(x)=-e_3xe_3} fixes #{H_0} and negates #{I}. Therefore
+
+##{\Phi(\gamma(x))=
+\bigl(S\Phi_2(x)S,\ S\Phi_1(x)S\bigr).}
+
+The identities
+
+##{e_0e_3=IC,\qquad e_1e_3=-IB,\qquad e_2e_3=-IA}
+
+give the displayed formula for #{X}. Apply #{\Phi_1} to
+#{(svs^{-1})e_3=s(ve_3)\gamma(s^{-1})}, then multiply on the right
+by #{S}. Since #{S^2=1}, the result is #{P X(v)R^{-1}}.
+This proves TauCeti's exact coordinate action
+\leanref/tauceti{TauCeti.realSpinTwoTwoEquivSpecialLinearProd_action}.}
+
+\p{The diagram records the two ways to calculate the same action:
+
+\tikzfig2{\begin{tikzcd}[column sep=large,row sep=large]
+\mathbb R^{2,2} \arrow[r,"v\mapsto svs^{-1}"] \arrow[d,"X"']
+ & \mathbb R^{2,2} \arrow[d,"X"] \\
+M_2(\mathbb R) \arrow[r,"Z\mapsto PZR^{-1}"'] & M_2(\mathbb R)
+\end{tikzcd}}
+
+For example, take #{P=\operatorname{diag}(a,a^{-1})}, #{R=1},
+where #{a\ne0}. The two rows of #{X(v)} are multiplied by #{a}
+and #{a^{-1}}. Thus the null cone is exactly the matrices of rank at
+most one, and its rank-one part is preserved. For #{P=R}, the matrix
+#{X(e_0)=-1} is fixed; this diagonal subgroup fixes #{e_0}.}
+
+\p{As in the compact action of \ref{fcap-003K}, multiplication by a
+fixed vector makes an odd vector accessible to the even algebra, and
+conjugation by that vector interchanges its two factors. Here the factors
+are real matrices, with the explicit #{S}-conjugations above. This is
+the even-algebra action transport of
+\citet{Chapter 16, Proposition 16.9, pp. 143--144}{porteous1995clifford}
+in the stated axes. The construction gives the group and its vector
+action; its orthogonal image retains the spinor-norm qualification
+of \ref{fcap-0023}.}
+
+\related{\ref{ca-000J}}
+\related{\ref{ca-001J}}
+\related{\ref{spin-0012}}
+\related{\ref{spin-000O}}
