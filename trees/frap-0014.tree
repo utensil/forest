@@ -6,15 +6,92 @@
 \p{A sequence of puzzle moves may return pieces to their positions while
 changing their orientations. The first question is what local return map
 records that change; the \vocabk{cycle criterion}{frap-000U} computes it.
-A related question asks how labels move between neighboring simplices, which
-leads to \newvocab{label transport} as a separate construction. Izmestiev and
-Joswig study it through \newvocab{projectivities}, \newvocab{coloring
-obstructions} and \newvocab{branched coverings}
-\citet{Sections 2.1--2.3}{izmestiev2002branched}.}
+A related question asks how labels move between neighboring simplices. This
+chapter uses the \newvocab{projectivity} construction of Izmestiev and
+Joswig to make that question precise, then records the topology of one
+complete unfolding \citet{Sections 2.1--2.3.3}{izmestiev2002branched}.}
 
-\p{Their complete unfolding of the tetrahedron boundary is a torus
-\citet{Section 2.3.3, Figure 3}{izmestiev2002branched}.
-This example motivates a study of how local label transport records
-global topology. Comparing simplex projectivities with puzzle transport
-would require a map between the constructions and an argument that it
-preserves the relevant data; no such identification is assumed here.}
+\subtree{
+  \title{Perspectivities along facet paths}
+
+  \p{Let #{K} be a pure #{d}-dimensional simplicial complex. If neighboring
+  facets #{\sigma} and #{\tau} share a ridge, #{\sigma} has one vertex
+  #{v(\sigma,\tau)} not in #{\tau}. The \newvocab{perspectivity}}
+  ##{h_{\sigma,\tau}:V(\sigma)\longrightarrow V(\tau)}
+  \p{swaps that exceptional vertex with #{v(\tau,\sigma)} and fixes the
+  common ridge vertices. For a facet path
+  #{\gamma=(\sigma_0,\ldots,\sigma_n)}, its \newvocab{projectivity} is the
+  composite}
+  ##{\langle\gamma\rangle=h_{\sigma_0,\sigma_1}\cdots
+      h_{\sigma_{n-1},\sigma_n}.}
+  \p{A closed facet path based at #{\sigma_0} gives a permutation of
+  #{V(\sigma_0)}. The set of these permutations is the
+  \newvocab{projectivity group} #{\Pi(K,\sigma_0)\leq\operatorname{Sym}(V(\sigma_0))};
+  changing the base facet conjugates the group when the dual graph is
+  connected. The inverse path supplies the inverse permutation, so this is
+  transport with a genuine composition law.}
+}
+
+\subtree{
+  \title{Coloring as a trivial-transport test}
+
+  \p{A proper coloring of the vertices of #{K} with #{d+1} colors gives
+  every facet a consistently labeled vertex set. Each perspectivity preserves
+  those labels, so every projectivity is the identity. Thus proper coloring
+  is a sufficient condition for #{\Pi(K)=1}; a nontrivial projectivity group
+  is an obstruction to such a global labeling
+  \citet{Section 2.1}{izmestiev2002branched}.}
+
+  \p{This is a useful comparison with a framed puzzle. A local frame assigns
+  labels in one fiber, and a move transports them to another fiber. The
+  \vocabk{framed transport}{frap-000Q} and its cycle criterion
+  \vocabk{abelianized character}{frap-000S} measure the return action in the
+  puzzle model. Projectivities do the analogous bookkeeping for simplex
+  vertices, but the two constructions have different state spaces and move
+  laws. No identification between their groups is being assumed.}
+}
+
+\subtree{
+  \title{Complete unfolding as a transport cover}
+
+  \p{Fix a base facet and a labeling of its vertices by #{0,\ldots,d}. A
+  facet reached by a path inherits a labeling by transporting along that
+  path. Different paths can give different admissible labelings, precisely
+  when their projectivity differs. The \newvocab{complete unfolding} keeps
+  these admissibly labeled facets as separate sheets and glues neighboring
+  sheets only when their labels agree on the common ridge. It carries a
+  canonical map back to #{K}; its projectivity group acts by permuting the
+  sheets \citet{Section 2.2}{izmestiev2002branched}.}
+
+  \p{The construction is therefore a topological record of transport
+  failure: a loop in the base may close geometrically while changing the
+  sheet label. The complete unfolding removes that ambiguity by remembering
+  the transported labeling. This is analogous to a covering-space monodromy
+  calculation; the branch locus is additional local-combinatorial data of
+  the unfolding and is not inferred here from the puzzle model.}
+}
+
+\subtree{
+  \title{The tetrahedral boundary example}
+
+  \p{For the boundary complex #{\partial\Delta^3}, the projectivity group is
+  #{S_3}. Its complete unfolding is glued from 24 triangles. Identifying
+  opposite sides of the triangulated hexagon gives a torus #{T^2}; the
+  canonical map to the tetrahedral boundary, topologically #{S^2}, is a
+  six-fold branched covering. There are four branch points on #{S^2}; each
+  has three preimages, each of branching index two
+  \citet{Section 2.3.3, Figure 3}{izmestiev2002branched}.}
+
+  \p{The example separates three pieces of data that are easy to conflate:
+  the base triangulation, the permutation group generated by facet-path
+  transport, and the topology of the unfolded surface. The torus is not a
+  claim about a cube solver. It is a concrete model showing how local label
+  transport can assemble a global branched cover.}
+}
+
+\p{For FRAP, the practical lesson is to name the fiber, the local transport
+map, and the allowed paths before comparing topology with puzzle orientation.
+The projectivity example supplies a precise transport vocabulary; the
+framed cube account supplies a different finite-state calculation. A future
+formal bridge would need an explicit map between those data and a proof that
+it preserves composition, return maps, and the claimed topology.}
