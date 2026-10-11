@@ -1,0 +1,87 @@
+\import{macros}
+\meta{agent-authored}{true}
+\tag{frap}
+\title{Which moves survive a quotient?}
+
+\p{A quotient of observations is useful only when the moves still have a
+well-defined action on the observations. Let #{X} be a declared sticker-state
+set, let #{G} act on #{X}, and let #{q:X\to Y} identify the observations we
+want to retain. The move #{g\in G} \newvocab{preserves the fibers} of #{q}
+when}
+##{q(x)=q(x')\Longrightarrow q(gx)=q(gx')\qquad(x,x'\in X).}
+\p{Exactly in this case there is a unique induced map #{\bar g:Y\to Y} with}
+##{q\circ g=\bar g\circ q.}
+\p{If #{g} is a bijection, so is #{\bar g}. Thus a quotient does not
+automatically inherit the whole puzzle action: it inherits the subgroup of
+moves that preserves its fibers.}
+
+\subtree{
+  \title{The antipodal sticker quotient}
+
+  \p{For the ordinary cube, represent a sticker by a pair #{(p,n)}, where
+  #{p\in\{-1,1\}^3} is the cubie's corner, edge, or face-center position on
+the boundary and #{n\in\{\pm e_x,\pm e_y,\pm e_z\}} is one of the visible
+facet normals at that position. The 54 such pairs form #{X}. The antipodal
+identification is the involution}
+  ##{a(p,n)=(-p,-n),\qquad q(p,n)=\{(p,n),a(p,n)\}.}
+  \p{Its fibers pair opposite stickers. This is a quotient of the labelled
+  sticker action; it is not the same as forgetting equal colors or quotienting
+  by whole-cube rotations.}
+}
+
+\subtree{
+  \title{Why one face turn fails}
+
+  \p{The positive-#{z} face turn uses}
+  ##{u(x,y,z)=(y,-x,z)}
+  \p{on every sticker whose cubie has #{z=1}, rotating both its position and
+  its normal, and fixes the other cubies. Take a top sticker and its antipode,
+  for example}
+  ##{x=((1,1,1),e_z),\qquad a(x)=((-1,-1,-1),-e_z).}
+  \p{The turn sends #{x} to the sticker at
+  #{((1,-1,1),e_z)}, while it fixes #{a(x)}. These outputs are not an
+  antipodal pair, so #{q(ux)\ne q(u\,a(x))}. The single #{U} move therefore
+does not descend to the antipodal quotient.}
+}
+
+\subtree{
+  \title{A synchronized opposite-layer move}
+
+  \p{The clockwise turn of the negative-#{z} face, viewed from that face, is
+the inverse global rotation on #{z=-1}. Write it as #{d}; its inverse #{d^{-1}}
+uses the same global rotation as #{u}. The composite #{u d^{-1}} rotates both
+opposite layers by the same linear map and fixes the middle cubies. It commutes
+with the antipodal involution:}
+  ##{a\,(u d^{-1})=(u d^{-1})\,a.}
+  \p{Consequently it preserves every antipodal fiber and induces a bijection
+on #{Y}. A direct check of all 54 stickers gives the same result: #{U} fails
+on the displayed pair, while the synchronized #{U D'} move maps every
+antipodal pair to an antipodal pair. The surviving action is therefore an
+action of the fiber-preserving subgroup, not of the six ordinary face turns
+individually.}
+}
+
+\subtree{
+  \title{What the cover does not provide}
+
+  \p{A covering or quotient of the underlying shape supplies a map of shape
+  data. It does not by itself supply a map between sticker-state spaces, a
+  chosen fiber relation, or an equivariance proof for each legal move. Those
+  data are separate: the explicit cube action records which stickers a face
+  turn moves, while the quotient records which states are identified. A move
+  descends only after the displayed fiber test has been checked.}
+
+  \p{This is the precise limit of the comparison with the complete unfolding
+  in [label transport and topology](frap-0014). Projectivity and branched
+  unfolding describe transport of simplex labels; the antipodal example
+  describes descent of a particular sticker action. They pose analogous
+  questions about information lost by identification, but neither construction
+  is being identified with the other. A general lifting or descent
+  classification is outside this note.}
+}
+
+\p{The practical rule is short: state the state space, the quotient map and
+the move action before saying that a move survives identification. The
+antipodal calculation supplies both a negative and a positive finite example,
+while preserving the distinction between a shape cover and a compatible
+puzzle action.}
