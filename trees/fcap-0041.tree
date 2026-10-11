@@ -1,0 +1,151 @@
+\import{fcap-macros}
+\meta{agent-authored}{true}
+\tag{fcap}
+\tag{spin}
+\tag{clifford}
+
+\taxon{Theorem}
+\title{Exterior pairings determine compact spinor reality}
+
+\p{Let #{W=\mathbb C^m}, #{m\geq1}, with ordered basis
+#{e_1,\ldots,e_m}, and use the exterior action on #{S=\bigwedge W}
+from \ref{fcap-002V}. Write #{[u]_{\mathrm{top}}} for the coefficient
+of #{e_1\wedge\cdots\wedge e_m}, and let #{r} reverse exterior products:
+#{r|_{\wedge^kW}=(-1)^{k(k-1)/2}}. Then
+
+##{B(s,t)=[r(s)\wedge t]_{\mathrm{top}},\qquad
+B(t,s)=\epsilon_e B(s,t),\qquad
+\epsilon_e=(-1)^{m(m-1)/2}}
+
+defines a nondegenerate complex bilinear Spin-invariant form in dimension
+#{2m}. It pairs complementary degrees. Hence for even #{m} it restricts
+nondegenerately to each half-spin module; for odd #{m} it pairs the two
+halves perfectly and vanishes on either half alone. In dimension #{2m+1},
+use the odd action \ref{fcap-002W} and the adjusted form
+
+##{B_o(s,t)=B(\alpha^m s,t),\qquad
+B_o(t,s)=\epsilon_o B_o(s,t),\qquad
+\epsilon_o=(-1)^{m(m+1)/2},}
+
+where #{\alpha|_{\wedge^kW}=(-1)^k}. This form is again nondegenerate
+and Spin-invariant.}
+
+\p{In the exterior basis the matrix of #{B} has one entry #{\pm1}
+in each row and column, pairing an index set with its complement; this
+proves nondegeneracy. The underlying perfect wedge pairing has the formal
+counterpart
+\leanref{exteriorPower.instIsPerfPairWedgePairing},
+for complementary exterior powers of a finite free module over a
+commutative ring with a chosen top-degree trivialization. Reversal supplies
+the additional signs here. For degrees #{k} and #{m-k}, commuting the
+two wedge factors and comparing their reversal signs gives
+#{\epsilon_e}. Also
+#{B(\alpha s,t)=(-1)^mB(s,\alpha t)}, proving the stated odd flip sign.}
+
+\p{Every creation and contraction operator is self-adjoint for #{B}:
+
+##{B(c_i s,t)=B(s,c_i t),\qquad B(a_i s,t)=B(s,a_i t).}
+
+For creation, #{r(e_i\wedge s)=r(s)\wedge e_i}. For contraction on
+degree #{k}, #{r(a_i s)=(-1)^{k-1}a_i r(s)}. Apply the contraction
+derivation rule to #{r(s)\wedge t=0} in degree #{m+1}; its two terms
+give the second identity. All other degree combinations vanish on both
+sides. Thus
+#{B(\rho(x)s,t)=B(s,\rho(\operatorname{rev}x)t)}.
+The reverse-norm-one condition in \ref{fcap-0028} proves invariance
+under the actual Spin group. For #{B_o}, every hyperbolic vector has
+adjoint sign #{(-1)^m}, because it anticommutes with #{\alpha}; the
+extra generator #{\alpha} has the same sign. These signs cancel on
+even words, giving the same reversion identity and Spin invariance.}
+
+\p{These bilinear forms also determine conjugate-linear structures
+for the compact real form #{\Spin(n,0)}, where #{n=2m} or #{2m+1}.
+Give #{S} the positive Hermitian form
+#{H(s,t)=\overline{s}^{\,T}t} in the exterior basis, conjugate-linear
+in its first argument. The operators
+#{c_i+a_i}, #{i(c_i-a_i)}, and, in odd dimension, #{\alpha},
+are self-adjoint, square to #{1}, and anticommute pairwise. They realize
+the positive real Clifford generators. Consequently reversion is
+Hermitian adjunction on this real algebra, and #{H} is Spin-invariant.}
+
+\p{Let #{M} be the real signed permutation matrix of #{B} or #{B_o},
+and let #{\epsilon} be its flip sign. Then
+
+##{J(s)=M^T\overline{s},\qquad
+H(Js,t)=s^TMt,\qquad J^2=\epsilon\,1.}
+
+Indeed, #{M^T=\epsilon M} and #{MM^T=1}. Invariance of both forms
+and nondegeneracy of #{H} imply that #{J} commutes with compact Spin.
+Writing #{\mathcal B} for the chosen bilinear form, the comparison is
+the following commuting triangle of complex linear maps:
+
+\tikzfig2{\begin{tikzcd}[column sep=large,row sep=large]
+S \arrow[r,"\beta"] \arrow[d,"\overline J"'] & S^* \\
+\overline S \arrow[ru,"\eta"'] &
+\end{tikzcd}}
+
+Here #{\beta(s)=\mathcal B(s,-)}, #{\overline J(s)=\overline{Js}},
+and #{\eta(\overline u)=H(u,-)}; #{\overline S} is the conjugate
+complex vector space, and #{S^*} is the complex linear dual of #{S}.}
+
+\p{For #{\epsilon=1}, #{J} is a real structure as in
+\ref{fcap-003W}, and its fixed vectors form a real Spin module whose
+complexification is #{S}
+\leanref/tauceti{Representation.IsRealStructure.isRealForm}. Explicitly,
+
+##{s=\frac{s+Js}{2}+i\frac{s-Js}{2i},}
+
+with both displayed components fixed by #{J}. For #{\epsilon=-1},
+#{J} is a \em{quaternionic structure}: a conjugate-linear equivariant
+map squaring to #{-1}
+\leanref/tauceti{Representation.IsQuaternionicStructure}.
+It has no nonzero fixed vector; together with multiplication by #{i}
+it gives the quaternion relations on the underlying real space.}
+
+\p{To apply this to irreducible compact spinors, the restriction to
+Spin needs justification. Every even monomial in an orthonormal positive
+real Clifford basis has reverse norm one and lies in Spin. Such monomials
+span the real even algebra, hence their complex span is the complex even
+algebra. Therefore the block descriptions in \ref{fcap-002V} and
+\ref{fcap-002W} give irreducible compact half-spin modules in even
+dimension and an irreducible compact spin module in odd dimension.
+The even-dimensional halves are inequivalent because their two matrix
+blocks have different central supports.}
+
+\p{In even dimension #{n=2m}, #{J} preserves each half when #{m} is
+even and exchanges them when #{m} is odd. In the latter case no
+equivariant conjugate-linear bijection of one half to itself can exist:
+composing it with #{J} would give a
+complex linear equivalence between the inequivalent halves. Thus the
+compact types follow directly from the two flip signs:
+
+##{\begin{array}{c|c}
+n\bmod8&\text{type of an irreducible complex spinor}\\\hline
+0,1,7&\text{real}\\
+3,4,5&\text{quaternionic}\\
+2,6&\text{two conjugate, inequivalent half-spin modules}
+\end{array}}
+
+In the even rows the statement applies to each half-spin module.
+The general passage from an invariant nondegenerate complex bilinear
+form, symmetric or alternating, and a supplied positive definite
+invariant Hermitian form to a real or quaternionic structure is
+formalized, for finite-dimensional
+irreducible complex representations, by
+\leanref/tauceti{Representation.exists_isRealStructure_of_isInvariantForm_of_isInvariantSesqForm}
+and
+\leanref/tauceti{Representation.exists_isQuaternionicStructure_of_isInvariantForm_of_isInvariantSesqForm}.
+The explicit #{M}, odd adjustment, and compact residue calculation
+are the exterior-basis proof above.}
+
+\p{The reversal pairing and its covariance are
+\citet{Section 3.4, Definition 3.6, Example 3.5, and Proposition 3.14,
+pp. 66--67}{meinrenken2013clifford}.
+The compact reality classification agrees with
+\citet{Chapter I, items 5.12--5.16, pp. 35--37}{lawson2016spin}.
+Their negative-square Clifford convention is translated in
+\ref{fcap-0042}. The positive Hermitian argument here is specific to
+the compact real form; it does not assign the same types to other signatures.}
+
+\related{\ref{ca-000J}}
+\related{\ref{ca-0012}}
