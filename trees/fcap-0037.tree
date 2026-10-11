@@ -97,5 +97,42 @@ half-commutator #{\beta_Q}. TauCeti proves the algebraic lift and
 generator action at the pinned revision through
 \leanref/tauceti{CliffordAlgebra.quadraticLift_lie_ι} and the coordinate
 formula \leanref/tauceti{CliffordAlgebra.soEquivQuadratic_eq_sum_bivector}.
-The inspected declarations do not package the Lie-group structure,
-exponential membership, or tangent converse proved above.}
+The same normalization governs the actual compact differential below.}
+
+\p{For the standard positive form #{Q_n^+}, TauCeti equips the closed
+range of Spin in Clifford units with a Lie-group structure. The
+continuous multiplicative equivalence
+\leanref/tauceti{TauCeti.CliffordAlgebra.realCliffordSpinContinuousMulEquivUnitsRange}
+identifies this range with the original vector-generated carrier.
+Write #{\eta:\Lambda^2\mathbb R^n\to\mathfrak{cl}^2(Q_n^+)} for the
+exterior-bivector realization and #{\kappa:\Lambda^2\mathbb R^n\to
+\mathfrak{so}(n)} for the standard bivector Lie equivalence. In these
+coordinates the differential of the actual projection #{q:\Spin(n)\to
+SO(n)} satisfies
+
+##{(d_1q)_{\mathrm{coord}}\bigl(\eta(z)\bigr)=\kappa(z),
+\qquad
+b(A)=\eta\bigl(\kappa^{-1}(A)\bigr).}
+
+The first equality is
+\leanref/tauceti{TauCeti.CliffordAlgebra.realCliffordSpinToSpecialOrthogonalCoordinateLieHom_eq_bivectorEquivSo}.
+Its proof differentiates conjugation by the Clifford exponential and
+identifies the resulting action with the commutator above. Thus neither
+an extra sign nor a factor of two is inserted in passing from the
+algebraic lift to the group differential.}
+
+\p{There is also an all-signature exponential criterion. For the
+standard real form #{Q_{p,q}},
+\leanref/tauceti{CliffordAlgebra.forall_expUnit_smul_mem_realCliffordSpinGroup_iff_mem_quadraticLieSubalgebra}
+states, for an ambient Clifford element #{x},
+
+##{\bigl(\forall t\in\mathbb R,\ \exp(tx)\in\Spin(Q_{p,q})\bigr)
+\quad\Longleftrightarrow\quad
+x\in\mathfrak{cl}^2(Q_{p,q}).}
+
+Here the exponential is first formed as a Clifford unit and membership
+is in the actual Spin carrier. This quantifies over every real #{t}; it
+does not identify quadratic elements from a single exponential value.
+The differential declaration uses the compact form #{Q_n^+}; the
+criterion ranges over all standard real signatures. The argument above
+continues to supply the assertion for an arbitrary nondegenerate #{Q}.}

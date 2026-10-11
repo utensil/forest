@@ -27,6 +27,41 @@ bundle theorem gives
 This supplies the stabilizer step rather than inferring a fibration from
 transitivity alone.}
 
+\p{One can see the local section directly in the positive-square
+convention. For a unit vector #{x\ne-e}, put
+
+##{u(x)=\frac{e+x}{\sqrt{Q_n^+(e+x)}},\qquad
+s(x)=\iota(u(x))\iota(e).}
+
+Positive definiteness makes the denominator nonzero, and both vectors
+have square one. Thus #{s(x)} is even with reverse norm one. If
+#{h=\iota(e+x)}, the Clifford relation gives
+
+##{h\iota(e)h=\bigl(2+B_Q(e,x)\bigr)\iota(x)
+=Q_n^+(e+x)\iota(x),}
+
+so #{s(x)\iota(e)s(x)^{-1}=\iota(x)}. The formula is continuous on
+#{S^{n-1}\setminus\{-e\}}. In TauCeti #{e} is the last coordinate
+vector: \leanref/tauceti{TauCeti.realCliffordSpinLastLocalSection_apply}
+records the formula,
+\leanref/tauceti{TauCeti.continuousOn_realCliffordSpinLastLocalSection}
+its continuity on that punctured sphere, and
+\leanref/tauceti{TauCeti.realCliffordSpinLastLocalSection_action}
+its orbit identity. The definition assigns the identity at #{-e}; this
+totalization is not a continuous section on the whole sphere.}
+
+\p{With #{k=n-1\geq1},
+\leanref/tauceti{CliffordAlgebra.realCliffordSpinContinuousMulEquivLastStabilizer}
+identifies #{\Spin(k)} with the entire last-vector stabilizer in
+#{\Spin(k+1)}, continuously and multiplicatively.
+\leanref/tauceti{CliffordAlgebra.exists_realCliffordSpinOrbitTrivialization}
+then provides a bundle chart around every sphere point #{y}, with base
+#{S^k\setminus\{-y\}} and fiber #{\Spin(k)}; the resulting fiber-bundle
+statement is
+\leanref/tauceti{CliffordAlgebra.isFiberBundle_realCliffordSpinOrbitMap}.
+These are charts for the actual orbit map, with the same rank shift as
+the displayed bundle.}
+
 \p{For #{n=3}, \ref{fcap-002H} gives the coordinate isomorphism with
 unit quaternions. Its displayed linear map and inverse restrict
 continuously to the unit three-sphere, so #{\Spin(3)} is simply
@@ -38,6 +73,21 @@ simple connectedness of #{S^{n-1}} give a surjection
 Induction therefore gives #{\pi_1\Spin(n)=0} for every #{n\geq3}.
 Together with path-connectedness and the two-sheeted covering, this makes
 #{\Spin(n)\to SO(n)} the universal cover.}
+
+\p{The formal base case uses
+\leanref/tauceti{TauCeti.realSpinThreeContinuousMulEquivQuaternionUnitary},
+the continuous multiplicative quaternion equivalence corresponding to
+\ref{fcap-002H}. The full conclusion
+\leanref/tauceti{CliffordAlgebra.simplyConnectedSpace_realCliffordSpinGroupZero}
+establishes simple connectedness for every #{n\geq3}. Its induction
+uses the two antipodal bundle charts: their bases are contractible
+punctured spheres, their fibers are simply connected by induction, and
+their overlap is path-connected. Van Kampen then gives simple
+connectedness of the total space. This implements the same geometric
+induction through charts rather than the homotopy exact sequence used
+above. The quaternion case starts the induction; #{\Spin(2)} is not a
+simply connected base case. Combining this conclusion with
+\ref{fcap-0039} yields the universal-cover assertion.}
 
 \p{\citet{Section 1.8, pp. 40--42}{gallier2014clifford} gives this
 sphere--stabilizer induction.
@@ -59,6 +109,6 @@ n&\Spin(n)&\text{cover behavior}\\ \hline
 The rank-two identification follows from
 #{a+b e_1e_2} with #{a=\cos\phi} and #{b=\sin\phi}. In the orientation of
 \ref{fcap-0038}, its vector action has angle #{-2\phi}; hence the
-map is a twofold circle cover. TauCeti's compactness, connectedness, and
-covering declarations stop short of this simple-connectedness argument,
-so no formal theorem badge is attached to the universal-cover claim.}
+map is a twofold circle cover. The formal simple-connectedness theorem
+therefore has exactly the lower bound needed here; the universal-cover
+claim combines it with the separately established covering.}
