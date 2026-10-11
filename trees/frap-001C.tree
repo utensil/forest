@@ -62,7 +62,34 @@ them.}
 }
 
 \subtree{
-  \title{An algorithm borrows pieces and must return them}
+  \title{A plausible state can still be impossible}
+
+  \p{Take a solved cube and twist one corner in place. Every sticker still
+  has a cubie-sized home, and the three colours at that corner look locally
+  consistent. But the corner orientations now have sum #{1} modulo #{3},
+  whereas every face turn preserves sum #{0}. No sequence of legal turns can
+  produce this state.}
+
+  \tikzfig{\begin{tikzpicture}[
+    sticker/.style={draw,minimum size=9mm,inner sep=1pt},
+    arrow/.style={-{Stealth[length=2mm]},semithick}
+  ]
+  \node[sticker] (u) at (0,1.25) {$U$};
+  \node[sticker] (f) at (-1.1,-0.65) {$F$};
+  \node[sticker] (r) at (1.1,-0.65) {$R$};
+  \draw[arrow] (u) to[bend right=18] node[left] {$+1$} (f);
+  \draw[arrow] (f) to[bend right=18] node[below] {$+1$} (r);
+  \draw[arrow] (r) to[bend right=18] node[right] {$+1$} (u);
+  \end{tikzpicture}}
+
+  \p{The [complete three-layer cube](frap-0016) derives the matching edge
+  and permutation restrictions from the six generators. The calculation is
+  useful at the table: it tells a solver when a scrambled-looking object was
+  assembled illegally, and it tells a proof which state space is worth
+  searching.}
+
+  \p{A human algorithm has to preserve these legal states while it borrows
+  pieces from completed areas.}
 
   \tikzfig{\begin{tikzpicture}[
     stagebox/.style={draw,rounded corners=2pt,align=center,text width=25mm,
