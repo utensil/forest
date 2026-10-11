@@ -5,24 +5,29 @@
 
 \p{A quotient of observations is useful only when the moves still have a
 well-defined action on the observations. Let #{X} be a declared sticker-state
-set, let #{G} act on #{X}, and let #{q:X\to Y} identify the observations we
-want to retain. The move #{g\in G} \newvocab{preserves the fibers} of #{q}
-when}
+set, let #{G} act on #{X}, and let the surjection #{q:X\twoheadrightarrow Y}
+identify the observations we want to retain (equivalently, take #{Y=q(X)}).
+The move #{g\in G} \newvocab{preserves the fibers} of #{q} when}
 ##{q(x)=q(x')\Longrightarrow q(gx)=q(gx')\qquad(x,x'\in X).}
 \p{Exactly in this case there is a unique induced map #{\bar g:Y\to Y} with}
 ##{q\circ g=\bar g\circ q.}
-\p{If #{g} is a bijection, so is #{\bar g}. Thus a quotient does not
-automatically inherit the whole puzzle action: it inherits the subgroup of
-moves that preserves its fibers.}
+\p{If #{g} is a bijection and #{X} is finite, then #{\bar g} is surjective and
+therefore bijective. In an infinite setting, require the inverse move to
+preserve fibers as well. Thus, for the finite cube action below, the
+fiber-preserving bijections form a subgroup; a quotient does not
+automatically inherit the whole puzzle action.}
 
 \subtree{
   \title{The antipodal sticker quotient}
 
-  \p{For the ordinary cube, represent a sticker by a pair #{(p,n)}, where
-  #{p\in\{-1,1\}^3} is the cubie's corner, edge, or face-center position on
-the boundary and #{n\in\{\pm e_x,\pm e_y,\pm e_z\}} is one of the visible
-facet normals at that position. The 54 such pairs form #{X}. The antipodal
-identification is the involution}
+  \p{For the ordinary cube, use the surface-cell and frame convention in
+  [how the cube models connect](frap-001A) and [the complete three-layer
+  cube](frap-0016). Represent a sticker by a pair #{(p,n)}, where
+  #{p\in\{-1,0,1\}^3} satisfies #{\lVert p\rVert_\infty=1} and
+  #{n=\operatorname{sgn}(p_i)e_i} for each nonzero coordinate #{p_i}.
+  Thus corners, edges and face centers contribute #{8\cdot3}, #{12\cdot2}
+  and #{6\cdot1} pairs, respectively, for 54 stickers. The antipodal
+  identification is the involution}
   ##{a(p,n)=(-p,-n),\qquad q(p,n)=\{(p,n),a(p,n)\}.}
   \p{Its fibers pair opposite stickers. This is a quotient of the labelled
   sticker action; it is not the same as forgetting equal colors or quotienting
