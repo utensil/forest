@@ -1,22 +1,93 @@
 \import{macros}
 \meta{agent-authored}{true}
 \tag{frap}
-\title{Scrambling and search functions}
+\title{Scrambling, spectra and search coordinates}
 
 \p{Random moves raise a different question from solving: when, and how
-quickly, does a scramble lose information about its starting state? Before
-choosing a search method, we need a model of that information loss. A
+quickly, does a scramble lose information about its starting state? A
 \newvocab{random walk} depends on its allowed moves and their probabilities.
-Functions on the move group can measure persistent information;
-representation theory provides coordinates for such functions and for the
-action of averaging over moves. Pan and Kondor use a Fourier basis to describe
-functions that guide \newvocab{search} on permutation puzzles
-\citet{Sections 4--4.1}{pan2021fourier}.}
+We use the fixed-frame three-layer move group from [the complete cube
+account](frap-0016), and write #{G} for its reachable state group. A walk
+with step law #{\mu} has distribution}
+##{\Pr[X_k=g]=\mu^{*k}(g)}
+\p{from the solved state, where convolution records the successive moves.}
 
-\p{A useful learned \newvocab{search score} need not be a lower bound on
-solution length. Pan and Kondor explicitly distinguish their scores from admissible
-heuristics \citet{Section 6}{pan2021fourier}.
-Likewise, a long random move sequence need not be a uniform scramble.
-Analyzing its distribution and proving guarantees for a search procedure
-are separate tasks, both dependent on the move convention described in
-[methods and search](frap-0005).}
+\subtree{
+  \title{A parity calculation before mixing claims}
+
+  \p{Let #{\varepsilon:G\to\{+1,-1\}} be the sign of the corner
+  permutation. Each face quarter-turn or inverse is a four-cycle on corners,
+  so #{\varepsilon=-1}; each face half-turn is a product of two transpositions,
+  so #{\varepsilon=+1}. If the walk chooses uniformly from the twelve
+  quarter-turns and inverse quarter-turns, then}
+  ##{\varepsilon(X_k)=(-1)^k}
+  \p{with probability one. Its support is therefore contained in one parity
+  coset at every fixed time, while the uniform distribution on #{G} gives equal
+  mass to the two cosets. The total-variation distance from uniform is at
+  least #{1/2} for every #{k}. This walk cannot converge to uniform: the
+  obstruction is periodicity, not a slow estimate of a mixing time.}
+
+  \p{The usual eighteen-move HTM law gives a different exact observable. Six
+  half-turns have sign #{+1} and twelve quarter-turns or inverses have sign
+  #{-1}, hence one step has}
+  ##{\mathbb E[\varepsilon(X_1)]=\frac6{18}-\frac{12}{18}=-\frac13.}
+  \p{Independence gives #{\mathbb E[\varepsilon(X_k)]=(-1/3)^k}. Since uniform
+  parity has expectation zero, the parity marginal alone gives the lower bound}
+  ##{\lVert\mathcal L(X_k)-\mathcal U_G\rVert_{\mathrm{TV}}\geq
+      \frac12\left(\frac13\right)^k.}
+  \p{This bound decays and does not prove convergence by itself. A lazy walk,
+  which includes the identity with positive probability, removes this specific
+  periodicity; a convergence statement still needs a generated reachable
+  component and an aperiodicity argument.}
+}
+
+\subtree{
+  \title{Averaging and finite-group spectra}
+
+  \p{For a function #{f:G\to\mathbb C}, the one-step averaging operator is}
+  ##{(T_\mu f)(g)=\sum_{s\in G}\mu(s)f(gs).}
+  \p{Constants are fixed by #{T_\mu}. For a finite-dimensional unitary
+  representation #{\rho}, its matrix coefficients}
+  ##{f_{u,v}(g)=\langle u,\rho(g)v\rangle}
+  \p{form invariant blocks for this operator: averaging a coefficient replaces
+  #{\rho(g)} by multiplication by the Fourier block}
+  ##{\widehat\mu(\rho)=\sum_{s\in G}\mu(s)\rho(s).}
+  \p{Thus the nonconstant spectrum describes which observables retain memory.
+  If the step support generates the reachable group and every nontrivial block
+  contracts on the relevant quotient, then these blocks decay and the walk
+  converges to uniform on that component. The hypotheses matter: the
+  quarter-turn walk above fails the aperiodicity test, so no spectral slogan
+  can erase its parity obstruction.}
+
+  \p{The same calculation explains why a prescribed scramble length is not a
+  universal guarantee of randomness. A distance bound answers how far a state
+  can be from solved; a distributional claim asks how the whole law projects
+  onto every persistent observable. These are different certificates.}
+}
+
+\subtree{
+  \title{Fourier coordinates for learned search}
+
+  \p{Pan and Kondor use irreducible-representation matrix coefficients as a
+  Fourier basis for learned value functions on permutation puzzles
+  \citet{Sections 4--4.1}{pan2021fourier}. Their experiments compare learned
+  scores that choose moves with conventional heuristic and value-based search;
+  the paper explicitly discusses the distinction from an admissible lower
+  bound \citet{Section 6}{pan2021fourier}. A learned score can rank promising
+  moves while overestimating or underestimating the remaining distance. It is
+  therefore evidence about search guidance, not a shortest-path certificate.}
+
+  \p{For the cube, a safe lower bound can still be obtained from the exact
+  projected distances in a pattern database as in [computer solving and
+  efficiency](frap-0018). A Fourier score may be combined with that bound as a
+  tie-breaker or move-ordering device, but replacing the bound with the score
+  changes the guarantee. The representation coordinates explain how a search
+  function is organized; they do not, without an error theorem, make it
+  admissible.}
+}
+
+\p{This chapter proves only the displayed parity bounds and states the finite
+operator framework. It does not claim a full-cube mixing time, a universal
+scramble length, or a reproduced machine-learning benchmark. Those would
+require a declared move law, reachable component, statistical or spectral
+analysis, and independently checked computational evidence.}
