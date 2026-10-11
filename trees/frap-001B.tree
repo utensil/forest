@@ -1,0 +1,52 @@
+\import{macros}
+\meta{agent-authored}{true}
+\tag{frap}
+
+\title{A worked return to play}
+
+\p{The route now has a concrete replay to carry its abstractions back to a
+three-layer puzzle. Work in the fixed-frame HTM convention of the [complete
+cube account](frap-0016): a face quarter-turn, its inverse, or a half-turn
+costs one move, and words are read from left to right. Start at the solved
+state and apply the declared scramble}
+##{w=R\ U\ R'\ U'\ F\ R\ U\ R'\ U'\ F'.}
+\p{The inverse word is}
+##{w^{-1}=F\ U\ R\ U'\ R'\ F'\ U\ R\ U'\ R'.}
+\p{A sticker-level replay of the six fixed-frame face maps sends the solved
+state to the recorded scramble state and then returns to solved. The second
+replay is therefore a certificate for the move convention and the inverse,
+not merely an animation of a familiar sequence.}
+
+\subtree{
+  \title{What the small search certifies}
+
+  \p{Project the scrambled state to its corner positions and orientations.
+  Exhaustive projected search finds 262 distinct projected states at depths
+  zero, one, and two, while the target is absent; a projected distance of
+  three is therefore a lower bound for this state. The declared word has ten
+  HTM moves, so the same replay gives the bounded report}
+  ##{3\le d_{\rm HTM}(w,\mathrm{id})\le 10.}
+  \p{The lower bound is admissible because projection forgets edge data and
+  every full move projects to one projected move. The upper bound is a valid
+  word because the inverse replay reaches the target. Neither bound claims
+  that ten is shortest; a full optimality claim would need exhaustive search
+  through depths four through nine or a matching certificate.}
+}
+
+\subtree{
+  \title{How this returns to the human method}
+
+  \p{A player can recognize the displayed ten-move word as a repeated
+  trigger pattern, but recognition is not a replacement for the state
+  record. The [complete layer-first method](frap-0017) solves an arbitrary
+  legal state by preserving completed layers and applying checked setup,
+  trigger, and inverse-setup words; the [computer account](frap-0018) gives
+  the corresponding upper-bound word and projected lower bound. This worked
+  scramble shows how the two accounts meet: name the frame, replay the exact
+  tokens, check the target, then state separately what has and has not been
+  proved.}
+
+\p{The example is deliberately bounded. It demonstrates a complete
+scramble-and-replay loop and a concrete comparison of certificates; it does
+not claim to be a full optimal solve, a universal human algorithm, or a
+replacement for the all-state completeness argument.}
