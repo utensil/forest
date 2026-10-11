@@ -1,0 +1,128 @@
+\import{fcap-macros}
+\meta{agent-authored}{true}
+\tag{fcap}
+\tag{spin}
+\tag{clifford}
+
+\taxon{Proposition}
+\title{Real matrix blocks control Spin module complexification}
+
+\p{Let #{A=M_d(D)}, where #{d\geq1} and
+#{D\in\{\mathbb R,\mathbb C,\mathbb H\}}, regarded as a real algebra.
+Its unique irreducible real left module is #{U=D^d}, with commutant
+#{D^{\mathrm{op}}} acting by right multiplication. Its complexification
+has the following form:
+
+##{\begin{array}{c|c|c|c}
+D&A\otimes_{\mathbb R}\mathbb C&U\otimes_{\mathbb R}\mathbb C
+ &\dim_{\mathbb C}S\\\hline
+\mathbb R&M_d(\mathbb C)&S&d\\
+\mathbb C&M_d(\mathbb C)\oplus M_d(\mathbb C)&S\oplus\overline S&d\\
+\mathbb H&M_{2d}(\mathbb C)&S\oplus S&2d
+\end{array}}
+
+In the complex row, the two summands have different central supports;
+in the quaternionic row, they are isomorphic. For a product of real
+matrix algebras, first select one simple block. These statements
+apply to irreducible real Spin modules obtained from even Clifford
+algebras because the actual Spin group spans the even algebra.}
+
+\p{For the matrix-module assertion, the idempotents #{E_{ii}} split
+any module into its coordinate corners, and #{E_{ij}} identify the
+corners with one another. A simple module therefore has a simple
+#{D}-module in its first corner, which is one-dimensional over the
+division algebra #{D}; this gives #{D^d}. For an endomorphism commuting
+with the full algebra, the matrix units make all coordinate maps the
+same. Commutation with the #{D}-valued diagonal entries makes this
+common map #{f} left #{D}-linear, so #{f(x)=xf(1)}. It is therefore
+right multiplication by a single element on every coordinate.
+With #{R_a(u)=ua}, composition is
+#{R_aR_b=R_{ba}}, explaining the opposite algebra. Conjugation
+identifies #{D^{\mathrm{op}}} with #{D} when only its real algebra
+type is recorded. This is the real matrix-module classification of
+\citet{Chapter I, Theorem 5.6, pp. 31--32}{lawson2016spin}.
+The matrix-corner reconstruction has the general formal counterpart
+\leanref{ModuleCat.matrixEquivalence}, an equivalence between
+modules over a ring and modules over its matrix ring with a finite
+nonempty index type. The three real types and their commutants are
+the specializations calculated here.}
+
+\p{The real row complexifies by entrywise scalar extension;
+conjugation is the resulting real structure. For the other
+rows, give #{U} the complex structure #{u\mapsto ui}. The
+complexification of an underlying real complex space decomposes as
+#{S\oplus\overline S}, the two eigenspaces of this operator after
+scalar extension. For #{D=\mathbb C}, the central element #{i1}
+acts as #{i} on one summand and #{-i} on the other. They are therefore
+inequivalent. For #{D=\mathbb H}, right multiplication
+#{J(u)=uj} commutes with the left algebra action and obeys
+#{J(uz)=J(u)\overline z} and #{J^2=-1}. Thus it identifies
+#{\overline S} with #{S}. The quaternion matrix embedding
+\leanref/tauceti{Quaternion.toComplexMatrix_apply}
+sends #{1,i,j,k} to a complex basis of #{M_2(\mathbb C)}.
+Scalar extension consequently gives
+#{\mathbb H\otimes_{\mathbb R}\mathbb C\simeq M_2(\mathbb C)}
+and then the displayed matrix algebra for general #{d}. Its action
+on #{S} is the defining simple module of complex dimension #{2d}.}
+
+\p{Here is the promised group-to-algebra bridge in every
+nondegenerate real signature. Choose orthogonal Clifford generators
+#{e_i} with #{e_i^2=\varepsilon_i\in\{1,-1\}}.
+The real span #{L} of Spin is a unital subalgebra, since products
+of linear combinations expand into linear combinations of group
+products. For #{i\ne j} with #{\varepsilon_i\varepsilon_j=1},
+#{e_ie_j} itself lies in Spin by \ref{fcap-0028}. For opposite signs put
+
+##{v=\frac{5\varepsilon_i}{3}e_i+\frac43e_j,\qquad
+Q(v)=\varepsilon_i,\qquad
+g=e_iv=\frac53+\frac43e_ie_j\in\Spin(Q).}
+
+The last inclusion again uses #{Q(e_i)Q(v)=1}, hence the actual
+norm-one Lipschitz carrier. Therefore
+#{e_ie_j=\frac34(g-\frac53\,1)\in L}.
+All bivectors lie in #{L}; their products and #{1} span the even
+Clifford algebra by its orthogonal monomial basis. Thus
+
+##{\operatorname{span}_{\mathbb R}\Spin(p,q)=\Cl^+(p,q).}
+
+It follows that real invariant subspaces and commuting endomorphisms
+for Spin are exactly those for the even algebra. TauCeti's
+\leanref/tauceti{CliffordAlgebra.span_spinGroup_eq_even_of_isSquare}
+proves the spanning conclusion under a square-normalization hypothesis
+for every pair of nonisotropic vectors. That hypothesis holds for a
+definite real form, but fails for opposite-sign pairs. The displayed
+rational combination supplies the indefinite case separately.}
+
+\p{For the compact positive form with #{n\geq1}, the generators #{e_ie_n},
+#{1\leq i<n}, square to #{-1}, anticommute, and generate the even
+algebra. Equality of dimensions gives
+
+##{\Cl^+(n,0)\simeq\Cl(0,n-1).}
+
+Combining the real classification \ref{fcap-0016} with the three
+rows above recovers the compact module types of \ref{fcap-0041}.
+Lawson--Michelsohn write #{\Cl_n} for our #{\Cl(0,n)};
+their even-algebra identification and module table use this convention
+\citet{Chapter I, (5.4)--(5.5) and Theorem 5.8, Table III,
+pp. 32--33}{lawson2016spin}.
+Their compact Spin-spanning argument appears in Proposition 5.12,
+p. 36; the opposite-sign calculation above extends the linear-span
+argument to indefinite forms.}
+
+\p{Signature still changes the real module type:
+
+##{\begin{aligned}
+\Cl^+(2,2)&\simeq M_2(\mathbb R)\oplus M_2(\mathbb R),\\
+\Cl^+(4,0)&\simeq\mathbb H\oplus\mathbb H.
+\end{aligned}}
+
+The split case gives real two-dimensional half-spin modules.
+The compact case gives quaternionic complex two-dimensional halves,
+each with real dimension four.
+The Lorentz even algebra #{M_2(\mathbb C)} in \ref{fcap-002L}
+has a real four-dimensional simple module; its complexification
+is the pair of inequivalent complex two-dimensional Weyl modules.
+Thus the compact Hermitian comparison cannot simply be reused for
+noncompact signatures. In all cases the scalar #{-1\in\Spin}
+acts as #{-\operatorname{id}}, retaining the descent obstruction
+of \ref{fcap-003M}.}
