@@ -2,65 +2,153 @@
 \meta{agent-authored}{true}
 \tag{frap}
 
-\title{What the route answers}
+\title{Five encounters with a cube}
 
-\p{The note suite can now return to the questions that opened it. The
-answers are deliberately scoped: each conclusion names its state model,
-its evidence, and the work that remains outside the chapter.}
+\p{Put a solved three-layer cube on a table and turn its right face once.
+The move is familiar, but it raises concrete puzzles: which labelled pieces
+moved, why can a visually plausible arrangement be impossible, and how can
+another person undo the turn without watching the first hand? Begin with
+these experiences, then introduce only the distinctions needed to explain
+them.}
 
-\ol{
-  \li{\strong{What does a local turn carry?} [Incidence, symmetry and
-  moves](frap-0002) separates shape incidence from the local action, while
-  [positions and orientations](frap-000A) records the transported frame.
-  [How the cube models connect](frap-001A) then maps the 54 fixed-frame
-  facet positions to corner and edge fibres, six fixed centers, and the
-  ordinary #{(\sigma,x;\tau,z)} coordinates. The map also states what
-  changes for #{N>3} and what is forgotten by a colour quotient.}
+\subtree{
+  \title{One turn is larger than the visible face}
 
-  \li{\strong{Why do familiar cube constraints appear?} [Transfer and
-  dimension](frap-000B) explains the orientation character and its limits;
-  the [complete three-layer cube](frap-0016) checks the equal permutation
-  signs and the two orientation sums directly on the six outer generators,
-  then gives a constructive cleanup for every state satisfying them.}
+  \tikzfig{\begin{tikzpicture}[
+    moved/.style={fill=gray!25},
+    arrow/.style={-{Stealth[length=2mm]},semithick}
+  ]
+  \node at (1.5,3.65) {before};
+  \draw (0,0) grid (3,3);
+  \node at (1.5,-0.35) {front face};
+  \node at (6.5,3.65) {after $R$};
+  \draw (5,0) grid (8,3);
+  \fill[moved] (7,0) rectangle (8,3);
+  \draw (5,0) grid (8,3);
+  \node at (6.5,-0.35) {moved front column};
+  \draw[arrow] (3.6,1.5) -- node[above] {turn one layer} (4.4,1.5);
+  \end{tikzpicture}}
 
-  \li{\strong{How can a person solve?} [Human methods](frap-0005) names
-  recognition, preservation, memory, and move cost as separate concerns.
-  The [complete layer-first method](frap-0017) supplies a seven-stage
-  construction with stabilizers, checked triggers, and termination reasons.
-  It is a completeness argument for the declared model, not an optimality
-  claim.}
-
-  \li{\strong{What can a computer certify?} [Computer solving](frap-0018)
-  separates an upper-bound word, an admissible projected lower bound, and an
-  exhaustive shortest-path certificate. The [worked return to play](frap-001B)
-  instantiates that distinction on one fixed-frame scramble: inverse replay,
-  #{3\le d_{\rm HTM}\le10}, and no claim that ten is
-  shortest.}
-
-  \li{\strong{What do the outlooks contribute?} [Label transport and
-  topology](frap-0014) identifies the fibre data needed before a branched
-  covering analogy can be tested. [Scrambling, spectra and search
-  coordinates](frap-0015) states the finite random-walk and representation
-  questions without turning them into a solver claim. [Which moves survive a
-  quotient?](frap-0019) gives the exact descent condition for an observation
-  quotient to inherit the move action. These are connected applications of
-  the move-and-frame language, with their own hypotheses and constructions.}
+  \p{The shaded strip is only the visible part of the layer: the same
+  stickers cross the front, right, back, and bottom faces. A whole-cube
+  rotation would change the viewing frame, whereas this face move keeps the
+  six centres fixed and changes one layer. The [layered-cube family](frap-0003)
+  makes this distinction for every #{N}; the [complete three-layer
+  cube](frap-0016) spells it out for the six outer generators.}
 }
 
 \subtree{
-  \title{Status and next boundary}
+  \title{A sticker needs a home and a frame}
 
-  \p{The route therefore closes as a readable mathematical specification:
-  abstract incidence leads to framed moves, framed moves lead to the
-  all-size and three-layer laws, and those laws return to a human method, a
-  computer certificate, and one replayed scramble. The examples preserve the
-  distinction between a valid solve, a complete method, a short word, and a
-  proved optimum.}
+  \tikzfig{\begin{tikzpicture}[
+    box/.style={draw,rounded corners=2pt,align=center,text width=34mm,
+      minimum height=11mm,font=\small},
+    arrow/.style={-{Stealth[length=2mm]},semithick},
+    lab/.style={font=\scriptsize,fill=white,inner sep=1pt}
+  ]
+  \node[box] (a) at (0,0) {54 facet-incidence\\ positions};
+  \node[box] (b) at (5,0) {corner and edge\\ sticker fibres\\ plus six centres};
+  \node[box] (c) at (10,0) {$(\sigma,x;\tau,z)$\\ fixed-frame state};
+  \draw[arrow] (a) -- node[lab,above] {group by cubie} (b);
+  \draw[arrow] (b) -- node[lab,above] {record destination + frame} (c);
+  \end{tikzpicture}}
 
-  \p{The remaining boundary is explicit. These notes do not yet contain a
-  Lean-certified puzzle model, a verified executable solver, or a general
-  comparison of human methods by measured solving data. Those are later
-  programmes: they may reuse the state maps, invariants, and replay contract
-  established here, but they require separate formal and experimental
-  evidence.}
+  \p{A player sees colours; a proof must also remember which sticker belongs
+  to which cubie and how its local frame is transported. [How the cube models
+  connect](frap-001A) follows one sticker through incidence position, cubie
+  fibre, and fixed-frame coordinate. This is why a local turn becomes a
+  permutation with orientation data, and why a colour quotient or a larger
+  cube changes the state being discussed.}
 }
+
+\subtree{
+  \title{An algorithm borrows pieces and must return them}
+
+  \tikzfig{\begin{tikzpicture}[
+    step/.style={draw,rounded corners=2pt,align=center,text width=25mm,
+      minimum height=10mm,font=\small},
+    arrow/.style={-{Stealth[length=2mm]},semithick}
+  ]
+  \node[step] (a) at (0,0) {recognize\\ the case};
+  \node[step] (b) at (3.6,0) {setup\\ the slot};
+  \node[step] (c) at (7.2,0) {trigger\\ $T=R'D'RD$};
+  \node[step] (d) at (10.8,0) {undo setup\\ and inspect};
+  \draw[arrow] (a) -- (b);
+  \draw[arrow] (b) -- (c);
+  \draw[arrow] (c) -- (d);
+  \end{tikzpicture}}
+
+  \p{A formula often disturbs pieces that were already placed. The disturbance
+  is acceptable only when the setup is undone and the completed pieces return.
+  A working slot, a trigger, and an inverse setup make that promise visible.
+  The [complete layer-first method](frap-0017) repeats this pattern through
+  the cross, the first layer, the middle layer, and the last layer. Its
+  completeness depends on the preservation and termination checks, not on
+  the formula's familiarity.}
+}
+
+\subtree{
+  \title{Undoing a scramble checks the notation}
+
+  \tikzfig{\begin{tikzpicture}[
+    box/.style={draw,rounded corners=2pt,align=center,text width=31mm,
+      minimum height=11mm,font=\small},
+    arrow/.style={-{Stealth[length=2mm]},semithick},
+    lab/.style={font=\scriptsize,fill=white,inner sep=1pt}
+  ]
+  \node[box] (a) at (0,0) {solved state};
+  \node[box] (b) at (5,0) {$R U R' U' F R U R' U' F'$};
+  \node[box] (c) at (10,0) {scrambled state};
+  \draw[arrow] (a) -- node[lab,above] {scramble} (b);
+  \draw[arrow] (b) -- (c);
+  \draw[arrow] (c.south) .. controls +(0,-1.2) and +(0,-1.2) ..
+    node[lab,below] {inverse replay} (a.south);
+  \end{tikzpicture}}
+
+  \p{The [worked return to play](frap-001B) fixes the viewing convention,
+  records the ten tokens, and applies their inverse. Sticker replay returns
+  to solved. A corner-only projected search finds no solution of depth at
+  most two, so the evidence is the bounded statement}
+  ##{3\le d_{\rm HTM}\le 10.}
+  \p{The inverse word is an upper-bound witness; the projected search is a
+  lower-bound witness. The [computer account](frap-0018) explains why these
+  checks do not prove that ten is shortest. A state, a word, and a replay
+  log are enough to test the notation before asking for a general solver.}
+}
+
+\subtree{
+  \title{Changing one ingredient changes the problem}
+
+  \p{Once the move, its frame, its local repair, and its replay are explicit,
+  three natural variations can be separated. What new position orbits appear
+  on a larger cube? Which local turns exist on another regular shape? If an
+  observation forgets labels, does the move still act on what remains visible?}
+
+  \tikzfig{\begin{tikzpicture}[
+    box/.style={draw,rounded corners=2pt,align=center,text width=33mm,
+      minimum height=10mm,font=\small},
+    arrow/.style={-{Stealth[length=2mm]},semithick}
+  ]
+  \node[box] (root) at (0,0) {one fixed-frame\\ face turn};
+  \node[box] (n) at (5,1.8) {larger $N$: which\\ position orbits appear?};
+  \node[box] (p) at (5,0) {another shape: which\\ facet moves exist?};
+  \node[box] (q) at (5,-1.8) {a quotient: which\\ observations inherit moves?};
+  \draw[arrow] (root) -- (n);
+  \draw[arrow] (root) -- (p);
+  \draw[arrow] (root) -- (q);
+  \end{tikzpicture}}
+
+  \p{The [layered-cube family](frap-0003) develops the first variation; the
+  incidence and facet construction in [incidence, symmetry and moves](frap-0002)
+  develops the second; and [which moves survive a quotient?](frap-0019)
+  gives the descent condition for the third. [Framed orientations](frap-000A),
+  [label transport and topology](frap-0014), and [scrambling, spectra and
+  search](frap-0015) then study the extra information each variation
+  introduces or forgets. Their hypotheses stay attached to the concrete move
+  that prompted the question.}
+}
+
+\p{A face turn can therefore be drawn, named, replayed, and checked before
+it is generalized. The resulting state maps and invariants support later
+formal certification or measured comparisons, while the examples here make
+clear which claim each later programme would have to establish.}
