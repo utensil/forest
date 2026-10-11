@@ -1,0 +1,88 @@
+\import{fcap-macros}
+\meta{agent-authored}{true}
+\tag{fcap}
+\tag{clifford}
+
+\taxon{Theorem}
+\title{Scalar extension preserves the Clifford and exterior constructions}
+\lean{CliffordAlgebra.equivBaseChange}
+\lean/tauceti{TauCeti.exteriorAlgebraEquivBaseChange}
+
+\p{Changing the field need not require new generators or a new quadratic
+basis. Let #{L/K} be a field extension with #{\operatorname{char}K\ne2},
+and let #{(V,Q)} be a finite-dimensional quadratic space, possibly degenerate.
+Its \newvocab{scalar extension} is #{V_L=L\otimes_K V} with quadratic form
+#{Q_L} characterized by #{Q_L(a\otimes v)=a^2Q(v)} and the extended polar
+form. There are canonical #{L}-algebra isomorphisms
+
+##{\begin{aligned}
+\beta_Q:L\otimes_K\Cl_K(Q)&\longrightarrow\Cl_L(Q_L),\\
+ a\otimes\iota_Q(v)&\longmapsto a\,\iota_{Q_L}(1\otimes v),\\
+\beta_\wedge:L\otimes_K\bigwedge_K V&\longrightarrow\bigwedge_L V_L,\\
+ a\otimes(v_1\wedge\cdots\wedge v_r)&\longmapsto
+ a(1\otimes v_1)\wedge\cdots\wedge(1\otimes v_r).
+\end{aligned}}
+
+The first preserves the \vocabk{word-length filtration}{fcap-000G}
+and parity; the second preserves exterior degree. No nondegeneracy hypothesis
+or chosen basis is needed to define either map.}
+
+\p{The Clifford statement is \citet{II.1.5, p. 41}{chevalley1954algebraic}.
+The proof below uses the \vocabk{universal property}{ca-000C}; applying it
+to the zero form gives the \vocabk{exterior algebra}{ca-000E} statement.}
+
+\subtree{
+\taxon{Proof}
+\p{The assignment #{v\mapsto\iota_{Q_L}(1\otimes v)} has square #{Q(v)1}.
+The universal property extends it to a #{K}-algebra map; extending scalars
+gives #{\beta_Q}. For the inverse, take the #{L}-linear map
+
+##{j:V_L\longrightarrow L\otimes_K\Cl_K(Q),\qquad
+j(a\otimes v)=a\otimes\iota_Q(v).}
+
+The Clifford anticommutator is #{\iota_Q(v)\iota_Q(w)+
+\iota_Q(w)\iota_Q(v)=B_Q(v,w)1}. Thus, for
+#{x=\sum_i a_i\otimes v_i},
+
+##{j(x)^2=\left(\sum_i a_i^2Q(v_i)+
+\sum_{i<j}a_ia_jB_Q(v_i,v_j)\right)1=Q_L(x)1.}
+
+The same universal property therefore extends #{j} to an #{L}-algebra map
+in the opposite direction. Both composites fix scalars and vector generators,
+so they are identities. For #{Q=0}, this argument gives #{\beta_\wedge}.
+The two maps and their inverses preserve word length and parity because they
+send generators to generators.}
+}
+
+\p{Write #{C=\Cl_K(Q)} and #{C_L=\Cl_L(Q_L)}, and denote the
+leading-symbol equivalences of \ref{fcap-000I} by #{\sigma_K,\sigma_L}.
+Scalar extension and taking the exterior symbol commute:
+
+\tikzfig2{\begin{tikzcd}[column sep=large,row sep=large]
+L\otimes_K\operatorname{gr}C
+  \arrow[r,"\operatorname{gr}\beta_Q"]
+  \arrow[d,"1\otimes\sigma_K"']
+ & \operatorname{gr}C_L \arrow[d,"\sigma_L"] \\
+L\otimes_K\bigwedge_K V \arrow[r,"\beta_\wedge"']
+ & \bigwedge_L V_L
+\end{tikzcd}}
+
+Tensoring vector spaces preserves these filtration quotients.
+On each generator word, both paths give the exterior product of its
+extended vectors. Such words span every graded piece, so the square commutes.}
+
+\p{For example, #{\beta_Q(1\otimes\iota_Q(v)^2)=Q(v)1}, whereas
+#{(1\otimes v)\wedge(1\otimes v)=0}. The square compares
+\em{associated graded} multiplication. It does not turn the linear
+Clifford-to-exterior coordinates of \ref{fcap-0003} into an algebra map.
+Chevalley makes this product distinction immediately after II.1.5.}
+
+\p{The marked declarations give the two algebra equivalences in the reverse
+direction. Mathlib allows arbitrary commutative base and extension rings with
+#{2} invertible; TauCeti's exterior equivalence needs neither invertible two
+nor flatness. The symbol square above is the consequence proved here,
+using the existing leading-symbol equivalence. The separate Spin-lifting
+consequences remain in \ref{fcap-003N} and \ref{fcap-003O}.}
+
+\related{\ref{ca-000C}}
+\related{\ref{ca-000E}}

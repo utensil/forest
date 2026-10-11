@@ -1,0 +1,108 @@
+\import{fcap-macros}
+\meta{agent-authored}{true}
+\tag{fcap}
+\tag{clifford}
+
+\taxon{Example}
+\title{Real structures in chosen complex coordinates}
+
+\p{Why does the complex Clifford algebra forget a real signature, while
+its real vectors still remember it? Let #{V} be a finite-dimensional real
+space with nondegenerate quadratic form #{Q}. Its \newvocab{complexification}
+is the \vocabk{scalar extension}{fcap-003V}
+#{V_{\mathbb C}=\mathbb C\otimes_{\mathbb R}V}. Complex conjugation on
+the first factor fixes #{V} and induces the conjugate-linear algebra
+involution
+
+##{\sigma(z\otimes a)=\overline z\otimes a}
+
+on #{\mathbb C\otimes_{\mathbb R}\Cl_{\mathbb R}(Q)}.
+It preserves product order and conjugates scalar coefficients; the
+\vocabk{grade reversion}{ca-000J} instead reverses product order and is
+complex-linear after scalar extension.
+A \newvocab{real structure} on a complex vector space or algebra means a
+map with #{\sigma(\lambda v+\mu w)=\overline\lambda\sigma(v)+
+\overline\mu\sigma(w)} and #{\sigma^2=1}, an algebra automorphism in the
+algebra case.
+The fixed algebra here is #{1\otimes\Cl_{\mathbb R}(Q)}: write an element
+uniquely as #{1\otimes a+i\otimes b} with #{a,b} real to check this.}
+
+\p{For the underlying real module of #{\Cl_{\mathbb R}(Q)}, this
+coefficient map is \leanref/tauceti{TauCeti.tmulConj}.
+Its involution law is \leanref/tauceti{TauCeti.tmulConj_involutive}, and
+its fixed vectors are described by
+\leanref/tauceti{TauCeti.tmulConj_eq_self_iff}.
+These supporting declarations concern the conjugate-linear involution and
+fixed vectors; multiplicativity and the coordinate comparisons below are
+the algebra calculations given here.}
+
+\p{This is the conjugation construction in
+\citet{Section 2.2.6, p. 34}{meinrenken2013clifford}.
+Meinrenken's symmetric form is #{B=B_Q/2}, so his generator relation is
+#{uv+vu=2B(u,v)=B_Q(u,v)}. The following coordinate calculation applies
+that construction to the scalar-extension isomorphism of \ref{fcap-003V}.}
+
+\p{Choose an orthogonal real basis #{e_1,\ldots,e_n} with
+#{Q(e_j)=1} for #{j\le p} and #{Q(e_j)=-1} for #{j>p}, where #{n=p+q}.
+These are the signature signs of \ref{fcap-0011}.
+On #{\mathbb C^n}, put #{Q_0(z)=\sum_j z_j^2}, with coordinate vectors
+#{u_j}. The chosen complex isometry
+
+##{T(e_j)=\begin{cases}u_j&j\le p,\\i u_j&j>p\end{cases}}
+
+induces #{\Cl(T):\Cl_{\mathbb C}(Q_{\mathbb C})
+\simeq\Cl_{\mathbb C}(Q_0)}. Transporting #{\sigma} through this map and
+\ref{fcap-003V} gives #{\sigma_T} on the standard complex algebra. On its
+generators,
+
+##{\sigma_T(\iota(u_j))=\begin{cases}
+\iota(u_j)&j\le p,\\-\iota(u_j)&j>p.
+\end{cases}}
+
+Indeed, #{T^{-1}(u_j)=-i e_j} for a negative direction, and conjugation
+sends this to #{i e_j}, whose image under #{T} is #{-u_j}.
+The fixed real generators are consequently #{\iota(u_j)} and
+#{i\iota(u_j)} in the positive and negative directions, respectively.}
+
+\p{Already in dimension one, the same complex algebra
+#{A=\mathbb C[u]/(u^2-1)} has two different real structures:
+
+##{\begin{aligned}
+\sigma_+(z+wu)&=\overline z+\overline w u,
+ & A^{\sigma_+}&=\mathbb R[ u]\simeq\mathbb R\oplus\mathbb R,\\
+\sigma_-(z+wu)&=\overline z-\overline w u,
+ & A^{\sigma_-}&=\mathbb R[iu]\simeq\mathbb C.
+\end{aligned}}
+
+The first real-algebra isomorphism evaluates at #{u=1,-1}; the second uses
+#{(iu)^2=-1}. Thus forgetting the real structure loses the distinction
+between #{\Cl(1,0)} and #{\Cl(0,1)}. If a different complex isometry is
+#{T'=UT}, then
+#{\sigma_{T'}=\Cl(U)\sigma_T\Cl(U)^{-1}}. The real structure moves with
+the coordinates; it is not generally entrywise conjugation in every model.}
+
+\p{The real-algebra identifications in this example are formalized as
+\leanref/tauceti{TauCeti.realCliffordOneZeroEquivProd} and
+\leanref/tauceti{TauCeti.realCliffordZeroOneEquivComplex}.
+These declarations identify the two real Clifford algebras; the comparison
+of their conjugations inside #{A} is the calculation above.}
+
+\p{Choosing the \vocabk{polarization data}{fcap-001H} for a spinor
+carrier is a further choice. For #{Q(x,y)=x^2+y^2}, the complex isotropic
+lines
+
+##{W=\mathbb C(e_1+i e_2),\qquad
+W'=\mathbb C(e_1-i e_2)}
+
+are complementary, and conjugation exchanges them. Their polar pairing is
+nonzero, so they give the split model after normalizing a dual basis.
+The carrier #{S=\bigwedge W} uses #{W} for creation and #{W'} for
+contraction, as in \ref{fcap-001I}. Conjugation therefore maps this exterior
+space to #{\bigwedge W'}, rather than supplying a conjugation on #{S}
+compatible with the same chosen operators. Comparing these carriers needs
+an additional intertwining map. This explains why the canonical real
+structure on the Clifford algebra alone does not choose a real structure
+on a particular spinor module. The creation/contraction construction is
+\citet{II.2.1--II.2.2, pp. 42--44}{chevalley1954algebraic}.}
+
+\related{\ref{ca-000J}}
