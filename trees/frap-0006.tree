@@ -4,25 +4,82 @@
 
 \title{From move sequences to play}
 
-  \p{A formal move description becomes useful only when a player can apply it
-  and reproduce its result. Play gives the mathematics an immediate test of
-  intelligibility: a notation should identify a move unambiguously, a
-  displayed turn should agree with the stated action, and replaying a
-  sequence should reproduce the same state. Scrambling, undoing, recognizing
-  a case, and following a solution all depend on those agreements.}
+\p{A formal move description becomes useful only when a player can apply it
+and reproduce its result. Play gives the mathematics an immediate test of
+intelligibility: a notation should identify a move unambiguously, a
+displayed turn should agree with the stated action, and replaying a
+sequence should reproduce the same state. Scrambling, undoing, recognizing
+a case, and following a solution all depend on those agreements.}
 
-  \p{The [tetrahedron turn](frap-000O) and
-  [cube face turn](frap-000P) give worked actions to explore.
-  Small interactive examples could accompany them:
-  follow a piece through a turn, compare two orders of moves, or inspect
-  what a sequence preserves. A fuller playing interface can then bring
-  together notation, visualization, replay, and methods. An animation
-  illustrates a claim; a proof must explain why it holds for the stated
-  class of moves and states.}
+\subtree{
+  \title{A replay contract}
 
-  \p{The existing [Rubik's Cube resources](uts-016J) collect material on
-  notation, methods, and demonstrations. The companion
-  [FRAP repository](https://github.com/utensil/frap) will support later
-  formal and executable work. The notes now develop incidence moves,
-  framed orientations and transfer; the companion repository does not
-  yet provide a formalized puzzle model or solver.}
+  \p{Let #{S} be a declared state space and let every legal move #{m} be a
+  reversible map #{S\to S}. A notation parser is correct only if it maps a
+  token to one such map, with an inverse token satisfying}
+  ##{m^{-1}m=\operatorname{id}_S.}
+  \p{For a word #{w=m_1m_2\cdots m_k}, we read moves from left to right as
+  in [the complete layer-first method](frap-0017):}
+  ##{s_0=s,\qquad s_i=m_i(s_{i-1}),\qquad
+      \operatorname{replay}(w,s)=s_k.}
+  \p{A replay test therefore records the initial state, the token list, the
+  convention for viewing each face, and the final state. Replaying #{w}
+  followed by #{w^{-1}} must return to #{s}; two displays are equivalent
+  only after their resulting states, rather than their typography, agree.}
+}
+
+\subtree{
+  \title{Two traces that expose the conventions}
+
+  \p{The [tetrahedron turn](frap-000O) gives a short noncommuting trace.
+  Starting at the recorded incidence position #{(1,124)}, the #{H}-move
+  followed by the #{K}-move reaches #{(4,134)}. Reversing the order reaches
+  #{(3,234)}. The two words are therefore different maps, even though each
+  move separately has order three. A player can check this by stepping
+  through the two token lists and comparing the final records.}
+
+  \p{The [cube face turn](frap-000P) fixes the frame and turns only the
+  chosen layer. Its coordinate map #{q(x,y,z)=(y,-x,z)} sends the four
+  #{z=1} corners around a four-cycle while leaving the opposite layer
+  fixed. This is a useful display test: a global rotation of the drawing is
+  not the same operation as the local puzzle move, and the unturned center
+  must not move merely because the picture was rotated.}
+}
+
+\subtree{
+  \title{From recognition to a solve}
+
+  \p{A reproducible solve has five recorded stages: identify the state in
+  the chosen coordinates; state the target condition; choose a move word;
+  replay it from the recorded state; and check the target and preserved
+  invariants. The [layer-first method](frap-0017) supplies a human version:
+  each stage fixes information and uses a stabilizer for what remains. The
+  [computer account](frap-0018) supplies a search version: a returned word
+  is an upper bound, while a projected-distance table gives a lower bound.}
+
+  \p{These certificates should be reported separately. A valid replay shows
+  that the word reaches the target. A short word improves an upper bound in
+  the named metric. A shortest-path claim additionally needs an exhaustive
+  search or a matching lower bound. The distinction also applies to a
+  scramble: [scrambling and spectra](frap-0015) requires the move law and
+  length before a distributional claim can be evaluated.}
+}
+
+\subtree{
+  \title{What a playing interface can check}
+
+  \p{A small interface can make the contract visible without pretending to
+  replace it. It can reject an unknown token, show the affected pieces,
+  step through a word, undo by inverse tokens, and compare the final state
+  with a target. It can also display parity, orientation, or subgroup
+  coordinates as diagnostics, provided each coordinate is tied to the
+  declared state model.}
+
+  \p{An animation illustrates a claim; the move map and replay log are the
+  evidence for it. The interface should therefore expose the convention,
+  the exact token sequence, and the before-and-after state so another
+  person or program can reproduce the check. The existing
+  [Rubik's Cube resources](uts-016J) collect notation, methods, and
+  demonstrations; the companion [FRAP repository](https://github.com/utensil/frap)
+  can later host executable versions of these checks.}
+}
