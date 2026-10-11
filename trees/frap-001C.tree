@@ -65,14 +65,14 @@ them.}
   \title{An algorithm borrows pieces and must return them}
 
   \tikzfig{\begin{tikzpicture}[
-    step/.style={draw,rounded corners=2pt,align=center,text width=25mm,
+    stagebox/.style={draw,rounded corners=2pt,align=center,text width=25mm,
       minimum height=10mm,font=\small},
     arrow/.style={-{Stealth[length=2mm]},semithick}
   ]
-  \node[step] (a) at (0,0) {recognize\\ the case};
-  \node[step] (b) at (3.6,0) {setup\\ the slot};
-  \node[step] (c) at (7.2,0) {trigger\\ $T=R'D'RD$};
-  \node[step] (d) at (10.8,0) {undo setup\\ and inspect};
+  \node[stagebox] (a) at (0,0) {recognize\\ the case};
+  \node[stagebox] (b) at (3.6,0) {setup\\ the slot};
+  \node[stagebox] (c) at (7.2,0) {trigger\\ $T=R'D'RD$};
+  \node[stagebox] (d) at (10.8,0) {undo setup\\ and inspect};
   \draw[arrow] (a) -- (b);
   \draw[arrow] (b) -- (c);
   \draw[arrow] (c) -- (d);
