@@ -15,23 +15,39 @@ coordinates.}
   \title{From facet incidence to the 54-sticker state}
 
   \p{The facet calculation in [one ordinary cube face turn](frap-000P)
-  selects the facet-colored part of the incidence set. It has three sticker
-  positions above each of the eight vertices, two above each of the twelve
-  edges, and one above each of the six facets:}
+  selects the facet-colored part of the incidence set. Put the cube's surface
+  cells at
+  #{p\in\{-1,0,1\}^3\ \text{with}\ \lVert p\rVert_\infty=1}.
+  A visible sticker is a pair #{(p,n)}, where #{n=\operatorname{sgn}(p_i)e_i}
+  for each nonzero coordinate #{p_i}. Thus a corner has three visible
+  normals, an edge has two, and a face center has one:}
   ##{8\cdot3+12\cdot2+6=54.}
-  \p{For #{N=3}, group these positions into the eight corner fibers and
-  twelve edge fibers, leaving the six center positions as fixed frame marks.
-  A legal outer-face move preserves this partition and carries the cyclic
-  labels in a corner fiber, or the ordered labels in an edge fiber, to the
-  corresponding destination fiber. Therefore it induces exactly the
-  fixed-frame coordinates}
+  \p{The vertex--facet incidences in the facet-colored set map to the pairs
+  above by sending a cube vertex, edge, or facet to its surface-cell coordinate
+  and its incident facet normal. For #{N=3}, group these pairs into the eight
+  corner fibers and twelve edge fibers, leaving the six center positions as
+  fixed frame marks. A legal outer-face move preserves this partition and
+  carries the cyclic labels in a corner fiber, or the ordered labels in an
+  edge fiber, to the corresponding destination fiber. Choose the cyclic corner
+  order and the U/D--F/B edge order used by the [complete three-layer
+  cube](frap-0016), so the destination permutation and local frame changes
+  are defined without an unstated convention. Therefore it induces exactly
+  the fixed-frame coordinates}
   ##{(\sigma,x;\tau,z)\in S_8\times(\mathbb Z_3)^8
         \times S_{12}\times(\mathbb Z_2)^{12}}
-  \p{used in [the complete three-layer cube](frap-0016). The induced map is
-  a change of state description for the legal action: it sends a sticker
-  permutation to its corner and edge destination permutations together with
-  the local frame changes. It does not assert that every permutation of the
-  54 positions is a legal cube move.}
+  \p{used in [the complete three-layer cube](frap-0016). More explicitly, if
+  a move sends a corner fiber #{C_p} to #{C_{p'}}, set #{\sigma(p)=p'};
+  the unique cyclic offset of the three normals gives #{x_p\in\mathbb Z_3}.
+  The analogous destination edge fiber and its ordered-normal offset give
+  #{\tau} and #{z\in(\mathbb Z_2)^{12}}. For the positive-#{z} turn
+  #{q(x,y,z)=(y,-x,z)} from [one ordinary cube face turn](frap-000P),}
+  ##{((1,1,1),e_z)\longmapsto((1,-1,1),e_z),\qquad
+      ((1,1,1),e_y)\longmapsto((1,-1,1),e_x).}
+  \p{This exhibits both the destination corner and the transported local
+  frame. The induced map is a change of state description for the legal
+  action: it sends a sticker permutation to its corner and edge destination
+  permutations together with the local frame changes. It does not assert that
+  every permutation of the 54 positions is a legal cube move.}
 
   \p{This also separates two kinds of forgetting. Passing from the incidence
   action to the displayed coordinates forgets the individual sticker
