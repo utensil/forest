@@ -1,8 +1,52 @@
 \import{ftip-macros}
 \meta{agent-authored}{true}
-\taxon{Remark}
-\title{Architecture effects are comparative estimands}
+\taxon{Definition}
+\title{Capability vector and conditional frontier}
 \tag{ftip}
-\p{A difference between two architectures is meaningful only after the task,
-data, post-training, inference, evaluation, and cost records identify which
-coordinates are held fixed and which are allowed to vary.}
+\tag{architecture}
+
+\p{For an architecture record #{A}, optimizer record #{O}, systems record
+#{S}, evaluation configuration #{\mathfrak e} from \ref{ftip-00CE}, and
+declared intervention #{\eta} at cost cap #{C}, define the
+\newvocab{capability vector}}
+##{
+\mathbf K(A,O,S,\mathfrak e,\eta,C)
+=\bigl(K_{\rm state},K_{\rm adapt},K_{\rm repr},
+K_{\rm plast},K_{\rm port}\bigr).
+}
+\p{Its coordinates respectively record state access, adaptive computation,
+representation and abstraction, plasticity, and portability under the named
+task, intervention, evaluation law, and cost accounting. A coordinate may be a
+descriptive field, an estimand, or #{\bot} when the record is missing,
+incompatible, or not measured. The tuple is therefore not a common scalar and
+does not order architectures without a declared comparison rule.}
+
+\p{The five coordinates attach to the existing ceiling layers conditionally:
+representation claims first require a map from #{A}; optimizer-reachable
+plasticity requires #{(A,O)}; state, adaptive computation, and portability
+claims require the relevant #{(A,O,S)} interface, task family, and deployment
+regime. A systems-feasible claim also carries #{C}, the cost vector and its
+declared scalarization. The records in \ref{ftip-00JH}, \ref{ftip-00JI},
+\ref{ftip-00JL}, and \ref{ftip-00CE} remain authoritative.}
+
+\p{The scalar frontier #{V_A(C)} of \ref{ftip-00JJ} is a projection onto the
+declared utility #{J_{\rm ev}} for one architecture and intervention envelope;
+it is not a capability coordinate. For a fixed evaluation configuration, a
+vector-valued study may instead retain the conditional set}
+##{
+\mathcal F_{\mathfrak e}(C)
+=\operatorname{Pareto}\left\{
+\bigl(\mathbf K(A,O,S,\mathfrak e,\eta,C),
+J_{\rm ev}(P_{A,\eta}),\mathbf c(P_{A,\eta})\bigr):
+c_A(\eta)\leq C
+\right\},
+}
+\p{where Pareto dominance is declared for the reported coordinates. The set
+is conditional on the task, intervention class, evaluation law, cost vector,
+and missingness rule; it is not a universal intelligence frontier.}
+
+\p{Matched-compute arms in \ref{ftip-00JU} compare entries only after stating
+which coordinates are held fixed, which are allowed to vary, and how the cost
+vector is charged. Cost, numerical stability, and monitorability remain
+evaluation coordinates alongside the vector, so a lower scalar cost or a
+stable implementation is not silently counted as a capability increase.}
