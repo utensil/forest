@@ -78,18 +78,6 @@ review of new terminology: keep standard mathematical language, terms grounded
 in cited research, and useful explicitly defined concepts; keep note-authoring
 workflow narration out of reader-facing pages.
 
-That independent review must also check reader orientation at every section
-opening. The first sentences should name the subject, result, or question
-directly rather than making an unintroduced document artifact (for example,
-“this map” or “this section”) perform an authorial action such as “asks.” A
-reader should know what each deictic reference denotes before it is used. A
-counted list or named taxonomy (for example, “the five capability dimensions”)
-must already be motivated or be connected to the preceding question before its
-members are enumerated; a definition alone does not repair an unexplained
-change of subject. This is a semantic review criterion, not a blanket ban on
-ordinary section navigation or on legitimate lists whose referent and purpose
-are established.
-
 ## 3. Coding standards
 
 *   **JavaScript/TypeScript**: ES2022+, Bun runtime, `async/await` preferred.
