@@ -47,19 +47,18 @@ them.}
     arrow/.style={-{Stealth[length=2mm]},semithick},
     lab/.style={font=\scriptsize,fill=white,inner sep=1pt}
   ]
-  \node[box] (a) at (0,0) {54 facet-incidence\\ positions};
-  \node[box] (b) at (5,0) {corner and edge\\ sticker fibres\\ plus six centres};
-  \node[box] (c) at (10,0) {$(\sigma,x;\tau,z)$\\ fixed-frame state};
-  \draw[arrow] (a) -- node[lab,above] {group by cubie} (b);
-  \draw[arrow] (b) -- node[lab,above] {record destination + frame} (c);
+    \node[box] (a) at (-2.6,1.0) {54 facet-incidence\\ positions};
+    \node[box] (b) at (2.6,1.0) {corner and edge\\ sticker fibres\\ plus six centres};
+    \node[box] (c) at (0,-1.35) {$(\sigma,x;\tau,z)$\\ fixed-frame state};
+    \draw[arrow] (a) -- node[lab,above] {group by cubie} (b);
+    \draw[arrow] (b) -- node[lab,right] {record destination + frame} (c);
   \end{tikzpicture}}
 
-  \p{A player sees colours; a proof must also remember which sticker belongs
-  to which cubie and how its local frame is transported. [How the cube models
-  connect](frap-001A) follows one sticker through incidence position, cubie
-  fibre, and fixed-frame coordinate. This is why a local turn becomes a
-  permutation with orientation data, and why a colour quotient or a larger
-  cube changes the state being discussed.}
+  \p{A player sees colours; a proof must also track each sticker's cubie and
+  transported local frame. [How the cube models connect](frap-001A) follows
+  one sticker through incidence position, cubie fibre, and fixed-frame
+  coordinate. A colour quotient forgets labels, while a larger cube adds
+  positions, so the state space changes with the question.}
 }
 
 \subtree{
@@ -97,13 +96,13 @@ them.}
       minimum height=10mm,font=\small},
     arrow/.style={-{Stealth[length=2mm]},semithick}
   ]
-  \node[stagebox] (a) at (0,0) {recognize\\ the case};
-  \node[stagebox] (b) at (3.6,0) {setup\\ the slot};
-  \node[stagebox] (c) at (7.2,0) {trigger\\ $T=R'D'RD$};
-  \node[stagebox] (d) at (10.8,0) {undo setup\\ and inspect};
-  \draw[arrow] (a) -- (b);
-  \draw[arrow] (b) -- (c);
-  \draw[arrow] (c) -- (d);
+    \node[stagebox] (a) at (-2.1,1.35) {recognize\\ the case};
+    \node[stagebox] (b) at (2.1,1.35) {setup\\ the slot};
+    \node[stagebox] (c) at (2.1,-1.35) {trigger\\ $T=R'D'RD$};
+    \node[stagebox] (d) at (-2.1,-1.35) {undo setup\\ and inspect};
+    \draw[arrow] (a) -- (b);
+    \draw[arrow] (b) -- (c);
+    \draw[arrow] (c) -- (d);
   \end{tikzpicture}}
 
   \p{A formula often disturbs pieces that were already placed. The disturbance
@@ -148,9 +147,8 @@ them.}
   \title{Changing one ingredient changes the problem}
 
   \p{Once the move, its frame, its local repair, and its replay are explicit,
-  three natural variations can be separated. What new position orbits appear
-  on a larger cube? Which local turns exist on another regular shape? If an
-  observation forgets labels, does the move still act on what remains visible?}
+  three variations separate the effects of enlarging the cube, changing the
+  shape, and forgetting labels.}
 
   \tikzfig{\begin{tikzpicture}[
     box/.style={draw,rounded corners=2pt,align=center,text width=33mm,
