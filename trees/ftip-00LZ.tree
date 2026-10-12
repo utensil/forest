@@ -3,7 +3,75 @@
 \taxon{Definition}
 \title{Architecture-family transfer matrix}
 \tag{ftip}
-\p{A transfer matrix records which interfaces and budgets permit a comparison
-among a Transformer reference, Kimi Delta Attention, looped or depth-reused
-variants, and JEPA-like systems. A blank or incompatible cell is an
-incomparability finding, not a missing score to be imputed.}
+\p{A transfer matrix records which interfaces, intervention arms, and budgets
+permit a comparison. Each row is a study record: its source, estimand, matched
+controls, evaluation coordinates, and declared scope boundary are explicit. A
+blank or incompatible cell is an incomparability finding, not a missing score to
+be imputed. The vector and evaluation coordinates are reported together under
+the conditional frontier of \ref{ftip-00JM}.}
+
+\table{
+  \thead{\tr{\th{Comparison cell}\th{Source}\th{Estimand}\th{Matched controls}\th{Cost / stability / monitorability}\th{Status and scope boundary}}}
+  \tbody{
+    \tr{\td{Transformer--KDA/full attention}
+    \td{\ref{ftip-00KF}, \ref{ftip-00LU}, \ref{ftip-00LQ}}
+    \td{Difference in utility, cost, and #{K_{\rm state}} between KDA and full attention}
+    \td{Same task, model scale, recipe, context, seeds, and evaluation law}
+    \td{Report measured cost vector, training/inference stability, and state/failure observability}
+    \td{Open; a finite KDA--Transformer result does not establish an architecture-wide ceiling}}
+    \tr{\td{Transformer--Mamba}
+    \td{\<html:a>[href]{https://arxiv.org/html/2312.00752v2#S3}{Mamba, Sections 3.1--3.3}; \ref{ftip-00OQ}}
+    \td{Difference in retrieval utility and #{K_{\rm state}} at the declared budget}
+    \td{Task, scale, recipe, context, and inference budget}
+    \td{Report cost vector, recurrence stability, and state/failure observability}
+    \td{Open; selective compression does not transfer a retrieval result across tasks}}
+    \tr{\td{Transformer--linear attention}
+    \td{\<html:a>[href]{https://arxiv.org/html/2006.16236v3#S3}{Linear attention, Sections 3.2--3.3}; \ref{ftip-00OQ}}
+    \td{Difference in retrieval utility and #{K_{\rm state}} for associative summaries}
+    \td{Task family, feature map, context budget, and evaluation law}
+    \td{Report prefix cost, numerical stability, and summary-state observability}
+    \td{Open; associative summaries do not imply full-attention equivalence}}
+    \tr{\td{Transformer--CTM or looped model}
+    \td{\<html:a>[href]{https://arxiv.org/html/2505.05522v4#S3}{Continuous Thought Machine, Sections 3.1--3.5}; \ref{ftip-00KG}; \ref{ftip-00OQ}}
+    \td{Difference in utility and #{K_{\rm adapt}} per charged tick or loop}
+    \td{Input, base model, stopping rule, recipe, and charged internal compute}
+    \td{Report tick/loop cost, training and inference stability, and stopping-signal monitorability}
+    \td{Open; extra passes are charged and do not imply continuous-time behavior}}
+    \tr{\td{Transformer--BDH}
+    \td{\<html:a>[href]{https://arxiv.org/html/2509.26507v1#S3.SS2}{BDH, Section 3.2}; \ref{ftip-00OQ}}
+    \td{Difference in task utility and #{K_{\rm state}} under the reduced state interface}
+    \td{Task, state parameterization, credit horizon, systems stack, and cost}
+    \td{Report memory and compute cost, optimization stability, and state observability}
+    \td{Open; a reduced state-space proposal is not a production transfer result}}
+    \tr{\td{Core architecture--JEPA adjunct}
+    \td{\<html:a>[href]{https://arxiv.org/html/2301.08243v3#S3}{I-JEPA, Section 3}; \ref{ftip-00OQ}}
+    \td{Conditional change in #{K_{\rm repr}} and #{K_{\rm plast}} after the objective intervention}
+    \td{Same base artifact, target task, predictor budget, data, and optimizer arm}
+    \td{Report intervention cost, training stability, and representation/probe monitorability}
+    \td{Conditional; an objective intervention is not a replacement architecture}}
+    \tr{\td{I-JEPA--SplitJEPA}
+    \td{\<html:a>[href]{https://arxiv.org/html/2610.12349v1#S3}{SplitJEPA, Sections 3.1--3.4}; \ref{ftip-00OQ}}
+    \td{Subspace identifiability and conditional change in #{K_{\rm repr}}}
+    \td{Matched invariant correspondences, variant-rank premise, normalization, and encoder budget}
+    \td{Report probe cost, numerical and optimization stability, and subspace monitorability}
+    \td{Conditional; identifiability does not become a general I-JEPA guarantee}}
+    \tr{\td{Core architecture--liquid dynamics}
+    \td{\<html:a>[href]{https://arxiv.org/html/2006.04439v4#S2}{Liquid time-constant networks, Sections 1--2}; \ref{ftip-00OQ}}
+    \td{Difference in utility and #{K_{\rm adapt}} under the solver intervention}
+    \td{Input law, solver, step budget, tolerance, task, and cost vector}
+    \td{Report solver cost, numerical stability, and trajectory/failure monitorability}
+    \td{Open; continuous dynamics and solver choices remain intervention coordinates}}
+    \tr{\td{Core architecture--Neural Operator}
+    \td{\<html:a>[href]{https://arxiv.org/html/2108.08481v6#S3}{Neural Operators, Section 3}; \ref{ftip-00OQ}}
+    \td{Difference in utility and #{K_{\rm repr}} across discretizations}
+    \td{Function-space task, discretization family, operator layer, and evaluation law}
+    \td{Report training/inference cost, discretization stability, and field-observation monitorability}
+    \td{Open; discretization invariance under one source formulation is not task transfer}}
+  }
+}
+
+
+\p{A completed row must report its paired observations through \ref{ftip-00L4}
+and the common-recipe, equal-tuning, and restricted-envelope arms of
+\ref{ftip-00JU}. Until those records are supplied, its status remains open or
+incompatible.}
