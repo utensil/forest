@@ -9,7 +9,11 @@ agent reliability, evaluation, capability growth and economic conditions.
 The diagram shows
 their main logical relationships. Solid arrows indicate concepts used by
 another analysis. The dashed branch supplies architecture-specific detail
-for comparisons involving a particular model implementation or optimizer.}
+for comparisons involving a particular model implementation or optimizer.
+Within that branch, the mechanism map identifies which capability bottleneck
+changes and what evidence would show the change; the second dashed edge marks
+its possible consequences for representations and discovery across model
+generations.}
 
 \texfig{\begin{tikzpicture}[
   box/.style={draw,rounded corners=2pt,align=center,font=\small,
@@ -70,10 +74,12 @@ conditions.}
   develops finite results about discovery, support, feedback and proxy error.
   Its closing synthesis collects the consequences and counterexamples.}
   \li{[Architecture-conditioned potential and computation](ftip-00JC)
-  begins with a decoder-only Transformer, then studies architecture,
-  optimization geometry and matched-compute capability comparisons. This
-  branch uses the evaluation framework to make implementation-specific
-  claims.}
+  begins with a decoder-only Transformer, then uses the
+  [mechanism-family map](ftip-00OQ) to ask which capability bottleneck a
+  design changes. Its optimization-geometry and matched-compute sections use
+  the evaluation framework to make implementation-specific claims. The core
+  panel is the default comparison path; the adjunct panel supplies optional
+  objective, temporal-dynamics and function-space lenses.}
   \li{[Conceptual discovery across model generations](ftip-00MH) studies
   discovery and learning across successive artifacts. It develops
   the complete lineage, independently developed contributions,
@@ -94,11 +100,23 @@ recursive execution and reliability lead to the [agent chapter](ftip-00JD).
 Both use the model, task and environment interfaces in the foundations.}
 
 \p{Questions about a particular model implementation or optimizer are
-developed in the [architecture chapter](ftip-00JC). Its decoder-only
-reference, optimization geometry and matched-compute comparisons explain
-how capability claims depend on the computation that implements the model.
-The shared evaluation framework supplies the task laws and resource
-comparisons used in that analysis.}
+developed in the [architecture chapter](ftip-00JC). Begin with its
+[mechanism-family map](ftip-00OQ) when the question is which bottleneck a
+mechanism changes and what evidence could establish the change. Then follow
+the frontier and protocol route through [architecture-indexed ceilings and
+matched compute](ftip-00JF), [published paired measurements](ftip-00KU),
+[paired model measurements](ftip-00L4), [conditional frontiers](ftip-00LH)
+and [study design](ftip-00LS). The shared evaluation framework supplies the
+task laws and resource comparisons used in that analysis.}
+
+\p{A mechanism-first route reads the [core panel](ftip-00OQ) before the
+frontier sections. Its adjunct panel is optional: it changes an objective,
+temporal law or function-space bias and should be compared under the same
+interfaces rather than treated as another architecture family. Questions
+about representations, curricula and discovery continue through
+[conceptual discovery](ftip-00MH); questions about costs, stability,
+monitorability and transfer return to [evaluation and finite limits](ftip-00JB)
+and its [comparison controls](ftip-00F9).}
 
 \p{Claims about a capability gain or limit are examined in
 [independent evaluation and post-training potential](ftip-005C) and the
