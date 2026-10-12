@@ -7,17 +7,21 @@
 
 \p{This chapter refines the [evaluation framework](ftip-005C) for claims
 that depend on architecture, optimization geometry or a systems
-implementation. It begins with the decoder-only Transformer, then introduces
-architecture-indexed frontiers and matched-compute comparisons, and studies
-how an optimizer can depend on the representation of its parameters.}
+implementation. It begins with the decoder-only Transformer, then maps
+mechanism families to capability bottlenecks before introducing
+architecture-indexed frontiers and matched-compute comparisons. It also
+studies how an optimizer can depend on the representation of its parameters.}
 
 \p{The reference architecture specifies how token probabilities are
-computed; it does not replace the shared task and evaluation interfaces.
+computed; it does not replace the shared task and evaluation interfaces. The
+[mechanism-family map](ftip-00OQ) asks which bottleneck a design changes and
+what evidence would demonstrate that change; it does not rank model families.
 Readers whose question does not depend on an architecture or optimizer can
 continue directly to [conceptual discovery](ftip-00MH). Changes to retained
 context and rollout computation are treated with
 [agent state](ftip-00DA).}
 
 \transclude{ftip-000K}
+\transclude{ftip-00OQ}
 \transclude{ftip-00JF}
 \transclude{ftip-00AU}

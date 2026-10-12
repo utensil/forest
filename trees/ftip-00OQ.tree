@@ -1,0 +1,120 @@
+\import{ftip-macros}
+\meta{agent-authored}{true}
+
+\title{Mechanism families and capability bottlenecks}
+\tag{ftip}
+\tag{architecture}
+\tag{mechanism}
+\tag{optional-refinement}
+
+\p{This map asks which \newvocab{mechanism family} changes a declared
+capability bottleneck and what evidence would show that change. It is a
+comparison aid, not a ranking of architectures. The shared model, task,
+intervention, cost and evaluation interfaces remain the conditions of every
+claim. A source description, a measured result and a transfer claim are kept
+separate.}
+
+\p{The five capability dimensions are \newvocab{state access}, the
+information that can remain available across tokens, steps or external memory
+operations; \newvocab{adaptive computation}, conditional allocation of depth,
+recurrence, search or stopping together with its charged cost;
+\newvocab{representation and abstraction}, the available representation,
+composition or predictive state; \newvocab{plasticity}, the changes reachable
+by a declared objective, optimizer, parameter tying and post-training recipe;
+and \newvocab{portability}, survival of a result when the model family, task,
+scale or deployment regime changes. This is distinct from
+\vocabk{transfer}{ftip-00NR}, which evaluates a frozen artifact on new
+problems under a common deployment budget. They are coordinates for a
+capability record, not a single intelligence scalar.}
+
+\p{A \newvocab{bottleneck} is the declared resource or interface condition
+that limits one of these dimensions in a comparison. Cost, numerical
+stability and \newvocab{monitorability} remain evaluation coordinates: the
+ability to observe the relevant state, compute, update or failure signals
+under the study protocol. A \vocabk{matched-compute comparison}{ftip-00JU} fixes the
+cost accounting before comparing outcomes; its protocol and the architecture
+\vocabk{frontier}{ftip-00JN} remain authoritative elsewhere in this chapter.}
+
+\p{The default \newvocab{core panel} contains mechanism families that alter
+the sequence computation or its state interface. Existing Transformer
+notation and the decoder-only reference are in \ref{ftip-000K}; the entries
+below identify the question each family makes testable.}
+
+\ol{
+  \li{\strong{Transformer reference.} Attention exposes token-indexed
+  content access through the declared context and serves as the baseline for
+  the \vocabk{matched-compute comparison}{ftip-00JU} and interface comparisons.}
+  \li{\strong{Selective state-space models.} The
+  [Mamba construction, Sections 3.1--3.3](https://arxiv.org/html/2312.00752v2#S3)
+  makes the state-space parameters input-dependent and computes the resulting
+  time-varying recurrence with a hardware-aware scan. The testable bottleneck
+  is how selective compression trades long-context access and throughput
+  against retrieval and portability boundaries; a source mechanism does not
+  settle that tradeoff.}
+  \li{\strong{Linear attention.} The
+  [linear-attention formulation, Sections 3.2--3.3](https://arxiv.org/html/2006.16236v3#S3)
+  uses a feature-map factorization and associative prefix summaries rather
+  than the full softmax attention matrix. The comparison asks which retrieval
+  and memory tasks preserve their evaluation under the changed state
+  interface; it does not identify every hybrid or recurrent model with pure
+  linear attention.}
+  \li{\strong{Internal-tick and looped models.} The
+  [Continuous Thought Machine, Sections 3.1--3.5](https://arxiv.org/html/2505.05522v4#S3)
+  uses a discrete internal tick dimension, private neuron-level models that
+  process activation histories, synchronization as a latent representation,
+  and standard cross-attention to the input features. Its loss selects
+  minimum-loss and maximum-certainty ticks, making variable internal compute
+  a testable mechanism. The looped computations in \ref{ftip-00KG} are a
+  separate family; neither is a continuous-time claim, and every extra tick
+  or loop must be charged in the comparison.}
+  \li{\strong{Recurrent or compressed-state mechanisms.} The
+  [Dragon Hatchling / BDH proposal, Section 3.2](https://arxiv.org/html/2509.26507v1#S3.SS2)
+  defines a tensor-friendly BDH-GPU state-space system whose attention state
+  admits a reduced representation, alongside local graph dynamics. Its open
+  comparison is whether this state interface supports the target tasks and
+  stable credit assignment at a declared budget; the proposal is not a
+  production result.}
+}
+
+\p{The \newvocab{adjunct panel} changes an objective, temporal law or
+function-space bias without being interchangeable with the core architecture
+families. [I-JEPA, Section 3](https://arxiv.org/html/2301.08243v3#S3) is an
+encoder/predictor training architecture as well as an embedding-space
+prediction objective: its context, target and predictor use ViT backbones,
+the target encoder is updated by exponential moving average, and masked target
+blocks are predicted from a context block. That predictive objective leaves a
+specific representation limit: retaining or recovering the latent state does
+not by itself identify which directions are invariant and which vary across
+matched observations. [SplitJEPA, Sections 3.1--3.4](https://arxiv.org/html/2610.12349v1#S3)
+(the [project overview](https://splitjepa.github.io/)) makes the boundary
+explicit—predictive recovery can leave a global orthogonal mixing—and resolves
+it under [stationary Gaussian predictive dynamics](https://arxiv.org/html/2610.12349v1#S2),
+a [full-rank second moment of variant differences across invariant
+correspondences](https://arxiv.org/html/2610.12349v1#S3.SS2), and
+[representation normalization](https://arxiv.org/html/2610.12349v1#S3.SS4),
+by identifying invariant and variant subspaces up to within-block isometries
+without an observation decoder.
+Here SplitJEPA is a structured JEPA adjunct and a conditional identifiability
+result, not a general guarantee for I-JEPA. [Liquid time-constant
+networks, Sections 1--2](https://arxiv.org/html/2006.04439v4#S2) supply
+input-dependent continuous dynamics and a numerical ODE-solver interface; the
+[Neural Operator formulation, Sections 1 and 3](https://arxiv.org/html/2108.08481v6#S3)
+supplies a function-space lens with discretization-invariant operator layers.
+The [Zoology study, Sections 3--5](https://arxiv.org/html/2312.04927v1#S3)
+provides controlled recall analyses of sequence mixers. These sources
+motivate hypotheses and controls; they do not establish a common capability
+ordering or make an adjunct a replacement architecture. The
+[JEPA comparability interface](ftip-00KA) specifies fields that must be fixed
+for a JEPA-like comparison; it is not the source of I-JEPA's architecture.
+Combining CTM's internal dynamics with I-JEPA's encoder/predictor package is a
+proposed joint intervention, not an established result, and would require
+separate attribution of both components.}
+
+\p{For each panel row, a study should name the changed state or compute
+  interface, the bottleneck dimension, the task and intervention, the evidence
+  type, and the transport boundary. Existing \vocabk{architecture-indexed ceilings
+and matched compute}{ftip-00JF}, published paired measurements
+(\ref{ftip-00KU} and \ref{ftip-00L4}), conditional frontiers
+(\ref{ftip-00LH}) and study design (\ref{ftip-00LS}) provide those controls.
+Blank, incompatible and unmeasured cells remain findings rather than scores
+to be filled by intuition.}
