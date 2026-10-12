@@ -82,7 +82,20 @@ families. [I-JEPA, Section 3](https://arxiv.org/html/2301.08243v3#S3) is an
 encoder/predictor training architecture as well as an embedding-space
 prediction objective: its context, target and predictor use ViT backbones,
 the target encoder is updated by exponential moving average, and masked target
-blocks are predicted from a context block. [Liquid time-constant
+blocks are predicted from a context block. That predictive objective leaves a
+specific representation limit: retaining or recovering the latent state does
+not by itself identify which directions are invariant and which vary across
+matched observations. [SplitJEPA, Sections 3.1--3.4](https://arxiv.org/html/2610.12349v1#S3)
+(the [project overview](https://splitjepa.github.io/)) makes the boundary
+explicit—predictive recovery can leave a global orthogonal mixing—and resolves
+it under [stationary Gaussian predictive dynamics](https://arxiv.org/html/2610.12349v1#S2),
+a [full-rank second moment of variant differences across invariant
+correspondences](https://arxiv.org/html/2610.12349v1#S3.SS2), and
+[representation normalization](https://arxiv.org/html/2610.12349v1#S3.SS4),
+by identifying invariant and variant subspaces up to within-block isometries
+without an observation decoder.
+Here SplitJEPA is a structured JEPA adjunct and a conditional identifiability
+result, not a general guarantee for I-JEPA. [Liquid time-constant
 networks, Sections 1--2](https://arxiv.org/html/2006.04439v4#S2) supply
 input-dependent continuous dynamics and a numerical ODE-solver interface; the
 [Neural Operator formulation, Sections 1 and 3](https://arxiv.org/html/2108.08481v6#S3)
