@@ -1,0 +1,113 @@
+\import{fcap-macros}
+\meta{agent-authored}{true}
+
+\tag{fcap}
+\tag{spin}
+\tag{clifford}
+
+\taxon{Proposition}
+\title{Binary local spinor norms and the Spin index}
+
+\p{Let #{K} be a nonarchimedean local field of characteristic different
+from two, as in \ref{fcap-0044}, and let #{Q} be a nondegenerate form on
+a finite-dimensional #{K}-space. Use the reverse-norm convention of
+\ref{fcap-002D}: #{\nu_Q^O} is the spinor norm on #{O(Q)}, and
+#{\nu_Q} is its restriction to #{SO(Q)}. Write
+
+##{\begin{gathered}
+S=K^{\times}/(K^{\times})^2,\\
+I_Q=[SO(Q):\rho(\Spin(Q))].
+\end{gathered}}
+
+The kernel theorem \ref{fcap-0023} gives
+#{I_Q=|\operatorname{im}\nu_Q|}. Thus the index of the Spin image in
+#{SO(Q)} measures the size of the spinor-norm image, not its index in #{S}.}
+
+\p{For the anisotropic form #{Q_+=\langle1,1\rangle} over
+#{\mathbb Q_3} from \ref{fcap-0048}, both spinor-norm images are the
+square classes of norms from #{\mathbb Q_3(\sqrt{-1})}. They form the
+same index-two subgroup of #{S}. Since #{|S|=4}, the Spin index is
+#{I_{Q_+}=2}. The square-class count is
+\citet{VI.2, Theorem 2.22, p. 162}{lam2005quadratic}; the norm-image
+calculation follows from the general binary formulas below.}
+
+\p{Suppose #{Q=\langle a,b\rangle} is anisotropic, with
+#{a,b\in K^\times}, and put #{d=-b/a}. Then #{d} is nonsquare and
+#{E=K(\sqrt d)} is a quadratic field. Its field norm is
+
+##{N_{E/K}(x+y\sqrt d)=x^2-dy^2.}
+
+The \newvocab{norm subgroup} #{N=N_{E/K}(E^\times)} contains
+#{(K^\times)^2}, since #{N_{E/K}(c)=c^2} for #{c\in K^\times}.
+Let #{H=N/(K^\times)^2\subseteq S}. Then
+
+##{\begin{gathered}
+\operatorname{im}\nu_Q=H,\\
+\operatorname{im}\nu_Q^O=H\cup[a]H,\\
+[S:H]=2,\\
+I_Q=|H|=|S|/2.
+\end{gathered}}
+
+In particular, #{\nu_Q^O} is surjective exactly when #{a\notin N}.
+If #{a\in N}, both images are #{H}. If #{Q} is split binary instead,
+both images are #{S} and #{I_Q=|S|}.}
+
+\p{The lower-dimensional boundary, with #{0} denoting the form on the
+zero space, is
+
+##{\begin{array}{c|c|c}
+Q&\operatorname{im}\nu_Q&\operatorname{im}\nu_Q^O\\ \hline
+0&\{1\}&\{1\}\\
+\langle a\rangle&\{1\}&\langle[a]\rangle
+\end{array}}
+
+In both rows #{SO(Q)} is trivial and #{I_Q=1}. In rank one,
+#{O(Q)=\{1,-1\}}, and #{-1} is reflection in the basis vector of
+value #{a}; its norm is #{[a]}. These statements agree with
+\leanref/tauceti{CliffordAlgebra.spinorNorm_eq_one_of_finrank_le_one}
+and
+\leanref/tauceti{CliffordAlgebra.orthogonalSpinorNorm_range_eq_zpowers_of_finrank_eq_one}.}
+
+\subtree{
+\taxon{Proof}
+\p{For the anisotropic binary form, the nonzero represented values are
+exactly #{aN}, because #{Q(x,y)=a(x^2-dy^2)}. Every isometry is a
+product of reflections by \ref{fcap-000W}, and determinant parity
+counts the factors by \ref{fcap-001A}. Its spinor norm is the square class
+of the product of their quadratic values \ref{fcap-002D}. Even products
+therefore have class in #{H}. Conversely, choose vectors with values
+#{a} and #{an} for any #{n\in N}. Their reflection product has class
+#{[a^2n]=[n]}, so every class of #{H} occurs on #{SO(Q)}. Multiplying
+by the reflection of value #{a} gives the odd coset #{[a]H}, proving
+the formula on #{O(Q)}. For a split binary form, the hyperbolic
+coordinate form #{xy} represents every nonzero scalar; reflections
+of values #{1} and #{c} give any prescribed class #{[c]}.}
+
+\p{To obtain the index of #{N}, use the local \newvocab{Hilbert symbol}
+#{(u,v)_K}: it is #{1} when the
+\vocabk{quaternion algebra}{fgap-0006} #{(u,v\mid K)} is a matrix
+algebra, and #{-1} otherwise. This is a symmetric bilinear pairing
+on #{S}, nondegenerate by
+\citet{VI.2, discussion on p. 159 and Theorem 2.16, p. 160}{lam2005quadratic}.
+The quaternion norm criterion
+\citet{III.2, Theorem 2.7(1), (8) and proof, pp. 58--59}{lam2005quadratic}
+says that #{(n,d)_K=1} exactly when #{n\in N}. Since #{[d]\ne1},
+nondegeneracy makes #{[n]\mapsto(n,d)_K} onto #{\{1,-1\}}.
+Its kernel is #{H}, so #{[S:H]=2}. The formula for #{I_Q} follows
+from \ref{fcap-0023}. For #{Q_+}, the first coefficient is #{1\in N},
+so the two norm images coincide, as claimed.}
+}
+
+\p{The two binary image formulas are
+\leanref/tauceti{CliffordAlgebra.range_spinorNorm_of_equivalent_binary}
+and
+\leanref/tauceti{CliffordAlgebra.range_orthogonalSpinorNorm_of_equivalent_binary}.
+They use the parameter #{-ab=a^2d}, which gives the same quadratic
+extension and norm subgroup. The local index and orthogonal
+surjectivity criterion are
+\leanref/tauceti{CliffordAlgebra.index_range_spinorNorm_of_finrank_eq_two_of_anisotropic}
+and
+\leanref/tauceti{CliffordAlgebra.orthogonalSpinorNorm_surjective_iff_not_mem_quadraticNormSubgroup_of_anisotropic_binary}.
+The image formulas require finite dimension, nondegeneracy and invertible
+two over a field; the index-two conclusion additionally uses the stated
+local-field and anisotropy hypotheses.}
