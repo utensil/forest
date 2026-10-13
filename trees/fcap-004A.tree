@@ -1,0 +1,106 @@
+\import{fcap-macros}
+\meta{agent-authored}{true}
+
+\tag{fcap}
+\tag{spin}
+\tag{clifford}
+
+\taxon{Proposition}
+\title{Higher-rank local spinor norms and square-class counts}
+
+\p{Let #{K} be a nonarchimedean local field of characteristic different
+from two, as in \ref{fcap-0044}. Let #{Q} be nondegenerate on a
+finite-dimensional #{K}-space #{V} with #{\dim_K V\geq3}. Use
+#{S=K^{\times}/(K^{\times})^2}, #{\nu_Q}, #{\nu_Q^O} and #{I_Q}
+as in \ref{fcap-0049}. Every element of #{S} is the spinor norm of
+a product of two reflections. Consequently,
+
+##{\begin{gathered}
+\operatorname{im}\nu_Q=\operatorname{im}\nu_Q^O=S,\\
+I_Q=|S|.
+\end{gathered}}
+
+This holds for anisotropic ternary and quaternary forms as well as
+isotropic forms. The input is the local isotropy theorem:
+every nondegenerate form of dimension at least five is isotropic
+\citet{VI.2, Theorem 2.12, pp. 158--159}{lam2005quadratic}.}
+
+\subtree{
+\taxon{Proof}
+\p{Fix #{c\in K^\times}. If #{Q} is isotropic, a hyperbolic plane
+in #{V} represents every scalar, so choose vectors of values #{1}
+and #{c}; their reflection product has spinor norm #{[c]} by
+\ref{fcap-002D}. To see the hyperbolic plane explicitly, take a
+nonzero isotropic #{u}. Nondegeneracy supplies #{w} with
+#{B_Q(u,w)=1}, in the unhalved convention \ref{fcap-0027}.
+Then #{v=w-Q(w)u} satisfies #{Q(v)=0}, #{B_Q(u,v)=1}, and
+#{Q(xu+yv)=xy}.}
+
+\p{If #{Q} is anisotropic, the nondegenerate form
+
+##{\begin{gathered}
+F(v,w)=Q(v)-cQ(w)\\
+\text{on }V\oplus V
+\end{gathered}}
+
+has dimension at least six. Restricting a diagonalization to five
+coordinates and applying the cited theorem gives a nonzero
+#{(v,w)} with #{Q(v)=cQ(w)}. Neither vector can vanish, since
+anisotropy would then force the other to vanish too. Set
+#{b=Q(v)\ne0}; thus #{Q(w)=b/c\ne0}. The two reflections give
+
+##{\begin{gathered}
+r_vr_w\in SO(Q),\\
+\nu_Q(r_vr_w)=[b^2/c]=[c].
+\end{gathered}}
+
+The last equality uses #{(b^2/c)/c=(b/c)^2}. This proves surjectivity
+on #{SO(Q)}, hence on #{O(Q)}. Finally,
+#{\rho(\Spin(Q))=\ker\nu_Q} by \ref{fcap-0023}, so the first
+isomorphism theorem gives #{I_Q=|S|}.}
+}
+
+\p{Let #{k} be the residue field, put #{q_0=|k|}, and normalize the
+additive valuation #{v_K:K^\times\to\mathbb Z} to be surjective.
+Set #{e=v_K(2)}. The square-class count is
+
+##{|S|=4q_0^e}
+
+by \citet{VI.2, Theorem 2.22, p. 162}{lam2005quadratic}.
+Here #{e=0} in odd residue characteristic. Over #{\mathbb Q_2},
+#{q_0=2} and #{e=1}, so #{|S|=8}; see also
+\citet{VI.2, Corollary 2.24(1), p. 163}{lam2005quadratic}.
+Combining this count with \ref{fcap-0049} gives the following Spin
+indices; the middle column means odd residue characteristic.
+
+##{\begin{array}{c|c|c}
+Q&\text{odd}&\mathbb Q_2\\ \hline
+\text{anis. binary}&2&4\\
+\text{split binary}&4&8\\
+\dim Q\geq3&4&8
+\end{array}}
+
+The rank-zero and rank-one indices remain one. The characteristic
+restriction is on #{K}; residue characteristic two is included.}
+
+\p{For a concrete dyadic contrast, #{x^2+y^2} is anisotropic over
+#{\mathbb Q_2}: a nontrivial zero would make #{-1} a square, but
+a 2-adic unit square is #{1} modulo #{8}, whereas #{-1} is #{7}
+modulo #{8} by the cited Corollary 2.24(1). Its Spin image therefore
+has index four, although its spinor-norm image has index two in #{S}.
+For the nondegenerate ternary form #{Q(x,y,z)=xy+z^2}, vectors
+#{(1,c,0)} and #{(1,1,0)} have values #{c} and #{1}. Their
+reflection product realizes #{[c]} for every #{c\in\mathbb Q_2^\times},
+and the Spin image has index eight.}
+
+\p{The two-reflection assertion and its surjectivity consequence are
+\leanref/tauceti{TauCeti.QuadraticMap.exists_reflectionPairSpecialOrthogonal_spinorNorm_eq}
+and
+\leanref/tauceti{TauCeti.QuadraticMap.spinorNorm_surjective_of_three_le_finrank}.
+The count is \leanref/tauceti{TauCeti.natCard_squareClassGroup}, and
+the resulting Spin index is
+\leanref/tauceti{TauCeti.QuadraticMap.index_range_spinToSpecialOrthogonal_of_three_le_finrank}.
+The reflection and index statements assume finite dimension,
+nondegeneracy, invertible two and dimension at least three over a
+nonarchimedean local field. The square-class count needs only that
+field setting and #{2\ne0}.}
