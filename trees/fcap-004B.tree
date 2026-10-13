@@ -1,0 +1,112 @@
+\import{fcap-macros}
+\meta{agent-authored}{true}
+
+\tag{fcap}
+\tag{spin}
+\tag{quadratic-forms}
+
+\taxon{Example}
+\title{A rational Spin obstruction vanishes over the 7-adic field}
+
+\p{On the rational hyperbolic plane with basis #{u,v}, put
+#{q(au+bv)=ab}. Its unhalved polar form has matrix
+#{\left(\begin{smallmatrix}0&1\\1&0\end{smallmatrix}\right)},
+so it is nondegenerate over both #{\mathbb{Q}} and #{\mathbb{Q}_7}.
+We construct a rational special orthogonal transformation with no
+rational Spin lift, then exhibit its lift over #{\mathbb{Q}_7}.
+This specializes the scalar-extension criterion of \ref{fcap-003N}.}
+
+\p{For #{c\ne0}, write #{r_c=r_{u+cv}}. The reflection formula
+#{r_z(w)=w-B_q(w,z)z/q(z)} gives, in the ordered basis #{u,v},
+
+##{\begin{gathered}
+r_c=\begin{pmatrix}0&-c^{-1}\\-c&0\end{pmatrix},\\
+g=r_2r_1=\begin{pmatrix}1/2&0\\0&2\end{pmatrix}.
+\end{gathered}}
+
+Thus #{g} preserves #{q} and has determinant one. Since
+#{q(u+2v)=2} and #{q(u+v)=1}, its spinor norm is
+
+##{\nu_q(g)=[2]_{\mathbb{Q}}}
+
+by \ref{fcap-002D}. This class is nontrivial: if
+#{(a/b)^2=2} for coprime integers #{a,b} with #{b\ne0}, then
+#{a^2=2b^2} first makes #{a} even and then makes #{b} even,
+a contradiction. The image/kernel theorem \ref{fcap-0023}
+therefore rules out a rational Spin lift of #{g}.}
+
+\p{In #{\mathbb{Z}_7}, take #{f(T)=T^2-2}. We have
+#{f(3)=7} and #{f'(3)=6}, a unit. Hensel's lemma
+\citet{VI.2, Theorem 2.18, p. 161}{lam2005quadratic} gives
+
+##{\begin{gathered}
+\alpha\in\mathbb{Z}_7,\qquad\alpha^2=2,\\
+\alpha\equiv3\pmod{7}.
+\end{gathered}}
+
+Indeed, in the theorem use the ideal #{7\mathbb{Z}_7} and
+#{e=f'(3)=6}: since #{e} is a unit,
+#{f(3)\in e^2(7\mathbb{Z}_7)}. In Mathlib's norm formulation
+\leanref{hensels_lemma}, the same input satisfies
+#{|f(3)|_7=1/7<1=|f'(3)|_7^2}.
+In particular #{\alpha\ne0} and #{[2]_{\mathbb{Q}_7}=1}.}
+
+\p{Identify #{\mathbb{Q}_7\otimes_{\mathbb{Q}}V} with the
+hyperbolic plane over #{\mathbb{Q}_7}, and denote the extended form
+and transformation by #{q_7,g_7}. Put
+#{\mathcal{S}_K=K^{\times}/(K^{\times})^2}. The square in
+\ref{fcap-003N} becomes
+
+\tikzfig2{\begin{tikzcd}[column sep=2em,row sep=2em,labels={inner sep=0.5em}]
+SO(q) \arrow[r,"\nu_q"] \arrow[d,"g\mapsto g_7"']
+  & \mathcal{S}_{\mathbb{Q}} \arrow[d,"j"] \\
+SO(q_7) \arrow[r,"\nu_{q_7}"'] & \mathcal{S}_{\mathbb{Q}_7}
+\end{tikzcd}}
+
+Here #{j([a]_{\mathbb{Q}})=[a]_{\mathbb{Q}_7}}. Its value on
+#{\nu_q(g)} is #{j([2]_{\mathbb{Q}})=1}, so #{g_7} has a
+Spin lift. The following calculation supplies that lift explicitly.}
+
+\p{Suppress the Clifford inclusion symbols and use
+#{u^2=v^2=0}, #{uv+vu=1} in #{\Cl(q_7)}. Set
+#{p=uv} and #{x=(u+2v)(u+v)}. Then
+
+##{\begin{gathered}
+p^2=u(vu)v,\\
+u(vu)v=u(1-uv)v=p,\\
+x=uv+2vu=2-p,\\
+\operatorname{rev}(x)=(u+v)(u+2v),\\
+\operatorname{rev}(x)=1+p,\\
+\operatorname{rev}(x)x=(1+p)(2-p),\\
+(1+p)(2-p)=2.
+\end{gathered}}
+
+Define
+
+##{s=\frac{x}{\alpha}
+=\left(\frac{u+2v}{\alpha}\right)(u+v).}
+
+Both displayed vector factors have quadratic value one. They are
+Clifford units in the vector-generated Lipschitz carrier; their even
+product has reverse norm #{2/\alpha^2=1}. On an even element the
+star and reverse norms agree by \ref{fcap-0028}. Thus #{s} lies
+in the actual #{\Spin(q_7)}, by the product-square construction
+\ref{fcap-000C}. Rescaling a nonisotropic vector leaves its
+reflection unchanged, so the Spin action of #{s} is
+
+##{r_{(u+2v)/\alpha}\,r_{u+v}=r_2r_1=g_7.}
+
+This is the normalized-pair construction
+\leanref/tauceti{CliffordAlgebra.spinReflectionPair} and its action
+\leanref/tauceti{CliffordAlgebra.spinToOrthogonal_spinReflectionPair}:
+the constructor assumes both quadratic values are one, and the
+action identity also assumes that two is invertible. These declarations
+certify the general pair construction; the arithmetic specialization
+above is proved here.}
+
+\p{The extension #{\mathbb{Q}\subset\mathbb{Q}_7} has killed this
+particular square-class obstruction. The quadratic-extension example
+\ref{fcap-003O} exhibits the same class becoming trivial over
+#{\mathbb{Q}(\sqrt{2})} for a different quadratic form. Here the
+Hensel root and the displayed Clifford product give a lift at the
+single completion #{\mathbb{Q}_7}.}
