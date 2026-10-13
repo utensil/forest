@@ -1,0 +1,132 @@
+\import{fcap-macros}
+\meta{agent-authored}{true}
+
+\tag{fcap}
+\tag{spin}
+\tag{clifford}
+
+\taxon{Theorem}
+\title{Proper Spin projections and anisotropic compactness}
+
+\p{Let #{K} be a local field of characteristic different from two as in
+\ref{fcap-0044}, and let #{Q} be a nondegenerate quadratic form on a
+finite-dimensional #{K}-space #{V}. Use the canonical topologies of
+\ref{fcap-0044}. A continuous map is called \newvocab{proper} here if the
+inverse image of every compact set is compact. The form #{Q} is
+\newvocab{anisotropic} if #{Q(v)=0} implies #{v=0}; otherwise it is
+isotropic. This includes the zero-dimensional form as anisotropic,
+as in \citet{I.3, Definition 3.1, p. 9}{lam2005quadratic}.}
+
+\p{The Spin projection #{\rho:\Spin(Q)\to SO(Q)} is proper, and
+
+##{\begin{gathered}
+\Spin(Q)\text{ is compact}\\
+\Longleftrightarrow\quad Q\text{ is anisotropic}.
+\end{gathered}}
+
+Anisotropy also makes #{O(Q)} compact. The proofs below deduce these
+claims from the closed carriers and open Clifford quotient of
+\ref{fcap-0045} and \ref{fcap-0046}, using the scalar-kernel and
+reverse-norm identities of \ref{fcap-002D}. Thus compactness depends
+on the quadratic form, even when the projection has finite kernel.}
+
+\subtree{
+\taxon{Proof}
+\p{If #{V=0}, the generated Spin carrier and both orthogonal groups
+are singletons by \ref{fcap-0045}; all assertions follow. Suppose
+henceforth that #{\dim_K V>0}, and let #{C\subseteq O(Q)} be compact.
+Write #{\tau:\Gamma(Q)\to O(Q)} for the open surjection in
+\ref{fcap-0046}. Choose a lift of each point of #{C}, and an open
+neighborhood of that lift with compact closure in the locally compact
+group #{\Gamma(Q)}. Their open images cover #{C}. A finite subcover
+therefore supplies a compact set #{L\subseteq\Gamma(Q)} such that
+#{C\subseteq\tau(L)}. If #{C} is empty, its preimage is already compact.}
+
+\p{Let #{x\in\Spin(Q)} have action in #{C}. Choose #{y\in L} with
+#{\tau(y)=\rho(x)}, viewing #{SO(Q)} inside #{O(Q)}. The scalar-kernel
+identity gives #{x=cy} for some #{c\in K^\times}. The star-unitary
+Spin convention has reverse norm one on even elements by
+\ref{fcap-0028}. Hence the scalar-scaling identity of \ref{fcap-002D}
+gives
+
+##{\begin{gathered}
+1=c^2N_{\mathrm{rev}}(y),\\
+c^2=N_{\mathrm{rev}}(y)^{-1}.
+\end{gathered}}
+
+The inverse norm is continuous on #{L} by \ref{fcap-0046}. Its
+absolute value is bounded there, say by #{M\geq1}, so #{|c|\leq\sqrt M}.
+Closed bounded scalar balls are compact over a local field: in the
+nonarchimedean case they are closed subsets of a scalar dilate of the
+compact valuation ring, and in the archimedean cases this is the usual
+closed-ball compactness. Write #{D=\{a\in K:|a|\leq\sqrt M\}}.
+Then the set
+
+##{DL=\{ay:a\in D,\ y\in L\}}
+
+is compact in #{\Cl(Q)}, as a continuous image of a product of compact sets. The
+preimage of #{C} in Spin is closed in the Clifford algebra: Spin is
+closed by \ref{fcap-0045}, #{C} is closed in the Hausdorff group
+#{O(Q)}, and the projection is continuous. It is contained in the
+displayed compact set, so it is compact. A compact subset of #{SO(Q)}
+is also compact in #{O(Q)}, proving properness of #{\rho}.}
+
+\p{Suppose now that #{Q} is anisotropic. Choose coordinates and put
+#{\|v\|=\max_i|v_i|}. The unit sphere #{\|v\|=1} is a compact
+subset of the coordinate unit ball. On it the continuous function
+#{|Q|} is positive, so has a positive minimum #{m}. For #{v\ne0},
+choose a coordinate #{a=v_j} of maximal absolute value. Then
+#{\|a^{-1}v\|=1}, giving
+
+##{\begin{aligned}
+|Q(v)|&=|a|^2|Q(a^{-1}v)|\\
+&\geq m\|v\|^2.
+\end{aligned}}
+
+This also holds at zero. If #{g\in O(Q)}, its #{i}-th column satisfies
+#{Q(ge_i)=Q(e_i)}, so the inequality bounds every column, uniformly
+in #{g}. The closed matrix carrier #{O(Q)} from \ref{fcap-0045}
+is consequently a closed subset of a compact finite product of scalar
+balls. Thus #{O(Q)} is compact. Its inverse image is all of Spin,
+which is compact by the properness just proved.}
+
+\p{Conversely, suppose #{Q} is isotropic. Take #{u\ne0} with
+#{Q(u)=0}. Write #{B_Q} for the unhalved polar form of
+\ref{fcap-0027}. Nondegeneracy supplies #{w} with #{B_Q(u,w)=1}; set
+#{v=w-Q(w)u}. Then #{Q(v)=0} and #{B_Q(u,v)=1}. Such #{u,v} form a
+hyperbolic pair: their plane #{H=Ku+Kv} has
+#{Q(au+bv)=ab}, and is nondegenerate, so #{V=H\perp H^\perp}.
+This is the hyperbolic plane of
+\citet{I.3, Theorems 3.2 and 3.4, pp. 9--10}{lam2005quadratic};
+Lam's symmetric bilinear form is our half-polar form #{b_Q=B_Q/2}.
+It specializes to the real model in \ref{fcap-0012}.}
+
+\p{For #{t\in K^\times}, define #{h_t} by
+
+##{\begin{gathered}
+h_tu=tu,\quad h_tv=t^{-1}v,\\
+h_t|_{H^\perp}=\operatorname{id}.
+\end{gathered}}
+
+It preserves #{Q} and has determinant #{1}. Square classes have
+exponent two, so #{\nu_Q(h_t^2)=\nu_Q(h_t)^2=1}. The exact image
+statement \ref{fcap-0023} therefore gives an actual Spin lift of each
+#{h_t^2}. Choose #{a\in K^\times} with #{|a|>1} and let #{t=a^r},
+#{r=1,2,\ldots}. In a basis beginning with #{u,v}, the first diagonal
+entry of #{h_t^2} is #{a^{2r}}, an unbounded scalar sequence. If Spin
+were compact, its continuous matrix image and every matrix coordinate
+would be compact, hence bounded. This contradiction proves noncompactness,
+including when #{H=V} is a split binary plane.}
+}
+
+\p{TauCeti formalizes properness and the compactness criterion in
+\leanref/tauceti{CliffordAlgebra.isProperMap_spinToSpecialOrthogonal}
+and \leanref/tauceti{CliffordAlgebra.isCompact_spinGroup_iff}.
+Their hypotheses are a weakly locally compact nontrivially normed field,
+finite dimension, invertible two and nondegeneracy. The supporting
+\leanref/tauceti{TauCeti.QuadraticMap.isCompact_orthogonalGroup}
+assumes anisotropy and finite dimension over the same kind of field,
+without a separate nondegeneracy or characteristic condition. These
+statements use the canonical module and subgroup topologies; on the
+locally compact Hausdorff targets here, formal properness agrees with the
+compact-preimage condition used above.}

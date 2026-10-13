@@ -1,0 +1,76 @@
+\import{fcap-macros}
+\meta{agent-authored}{true}
+
+\tag{fcap}
+\tag{spin}
+\tag{clifford}
+
+\taxon{Example}
+\title{Compact and split binary Spin groups over the 3-adic field}
+
+\p{Over #{\mathbb Q_3}, with #{|3|_3=1/3}, consider
+
+##{\begin{aligned}
+Q_+(x,y)&=x^2+y^2,\\
+Q_-(x,y)&=x^2-y^2.
+\end{aligned}}
+
+Both forms are nondegenerate. With the canonical local topologies,
+#{\Spin(Q_+)} is compact and #{\Spin(Q_-)} is not. This is a concrete
+application of \ref{fcap-0047}. The local-field convention is
+\ref{fcap-0044}; the #{p}-adic fields and their residue fields are
+included in \citet{VI.2, Definition 2.1 and discussion, pp. 151--152}{lam2005quadratic}.
+The calculations below establish the contrast directly.}
+
+\p{If #{x^2+y^2=0} and #{y=0}, then #{x=0}. If #{y\ne0}, set
+#{z=x/y}; then #{z^2=-1}. Its 3-adic valuation is zero, so #{z} is a
+unit in #{\mathbb Z_3}. Reduction modulo #{3} would give a square
+root of #{-1=2} in #{\mathbb F_3}. But the two nonzero residues both
+square to #{1}. Hence no such #{z} exists, and #{Q_+} is
+\vocabk{anisotropic}{fcap-0047}. Its Spin group is compact by
+\ref{fcap-0047}. The nonsquare input is also
+\leanref/tauceti{Padic.not_isSquare_neg_one_of_mod_four_eq_three}
+at #{p=3}; \leanref/tauceti{TauCeti.anisotropic_binary_one_one_iff}
+identifies anisotropy of #{\langle1,1\rangle} with this nonsquare
+condition over any field. These support the calculation, rather than
+asserting a formalization of every displayed lift below.}
+
+\p{For #{Q_-}, take
+
+##{\begin{gathered}
+u=(1,1),\\
+v=(1/4,-1/4).
+\end{gathered}}
+
+They satisfy #{Q_-(u)=Q_-(v)=0} and #{B_{Q_-}(u,v)=1}, in the
+unhalved convention of \ref{fcap-0027}. They form a basis, and
+#{Q_-(au+bv)=ab}. Thus #{Q_-} is a split hyperbolic plane, agreeing
+with \citet{I.3, Theorem 3.2, p. 9}{lam2005quadratic}.}
+
+\p{There is an explicit unbounded family in the Spin image. In the
+ordered basis #{(u,v)}, let #{h_t=\operatorname{diag}(t,t^{-1})},
+where #{t\in\mathbb Q_3^\times}. Write #{\widehat w=\iota_{Q_-}(w)}.
+Both #{tu+t^{-1}v} and #{u+v} have quadratic value one, so
+
+##{s_t=\widehat{(tu+t^{-1}v)}\,\widehat{(u+v)}}
+
+lies in the actual vector-generated Spin group by \ref{fcap-000C}
+and the reverse-norm convention in \ref{fcap-0028}. The reflection
+formula gives the following matrices in #{(u,v)}:
+
+##{\begin{gathered}
+r_{tu+t^{-1}v}=\begin{pmatrix}0&-t^2\\-t^{-2}&0\end{pmatrix},\\
+r_{u+v}=\begin{pmatrix}0&-1\\-1&0\end{pmatrix},\\
+\rho(s_t)=r_{tu+t^{-1}v}r_{u+v},\\
+\rho(s_t)=\begin{pmatrix}t^2&0\\0&t^{-2}\end{pmatrix}=h_t^2.
+\end{gathered}}
+
+The product order is that of the two Clifford factors. Thus these are
+actual normalized lifts, not only abstract square-class witnesses.}
+
+\p{Set #{t=3^{-r}} for #{r\geq1}. The first matrix entry has
+#{|t^2|_3=3^{2r}}, which is unbounded. The continuous image of a
+compact Spin group would have bounded matrix entries, proving that
+#{\Spin(Q_-)} is not compact. In particular, binary noncompactness
+already follows from this torus family, without an orthogonal
+complement in which to construct transvections.}
