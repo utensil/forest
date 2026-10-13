@@ -1,0 +1,120 @@
+\import{fcap-macros}
+\meta{agent-authored}{true}
+
+\tag{fcap}
+\tag{spin}
+\tag{clifford}
+
+\taxon{Proposition}
+\title{The open Clifford quotient and locally constant spinor norms}
+
+\p{Let #{K}, #{V}, #{Q} and their topologies be as in \ref{fcap-0045}.
+The continuous surjection
+#{\tau:\Gamma(Q)\to O(Q)} is open and is a quotient map. Give
+#{\mathcal S_K=K^{\times}/(K^{\times})^2} its quotient topology. It is
+discrete, and the two spinor norms of \ref{fcap-002D},
+
+##{\begin{aligned}
+\nu_Q^O &: O(Q)\longrightarrow\mathcal S_K,\\
+\nu_Q &: SO(Q)\longrightarrow\mathcal S_K,
+\end{aligned}}
+
+are continuous and locally constant. In particular,
+#{\rho(\Spin(Q))=\ker\nu_Q} is an open subgroup of #{SO(Q)}. This says
+that sufficiently small changes of an isometry preserve its square-class
+obstruction to a Spin lift.}
+
+\subtree{
+\taxon{Proof}
+\p{First suppose #{\dim_K V>0}. Local fields are locally compact and
+#{\sigma}-compact, meaning a countable union of compact subsets. For a
+nonarchimedean local field, its valuation ring is compact: completeness
+and the finite residue quotients make it a complete totally bounded
+metric space. Its scalar dilates exhaust #{K}; ordinary closed balls
+give the analogous exhaustion for #{\mathbb R} and #{\mathbb C}.
+Finite products give compact exhaustions of #{A=\Cl(Q)} and #{A^2}.}
+
+\p{By \ref{fcap-0044}, the units identify homeomorphically with the
+closed inverse graph #{\{(x,y):xy=yx=1\}\subseteq A^2}. Hence
+#{A^\times} is locally compact and #{\sigma}-compact. The closedness
+of #{\Gamma(Q)} in \ref{fcap-0045} gives the same properties to
+#{\Gamma(Q)}. Its vector action is continuous there and onto by
+\ref{fcap-002D}; the target #{O(Q)} is locally compact Hausdorff.}
+
+\p{Here is the open-map argument. Given an open identity neighborhood
+#{U\subseteq\Gamma(Q)}, choose an open identity neighborhood #{W}
+with compact closure and
+#{\overline W\,\overline W^{-1}\subseteq U}. Such #{W} exists by
+continuity of multiplication and inversion and local compactness.
+A compact exhaustion and finite subcovers of its terms give a countable
+cover #{\Gamma(Q)=\bigcup_j g_jW}. Thus
+
+##{O(Q)=\bigcup_j\tau(g_j)\tau(\overline W).}
+
+Each set in this union is closed, because #{\tau(\overline W)} is
+compact and the target is Hausdorff. The Baire theorem for locally
+compact Hausdorff spaces implies that #{\tau(\overline W)} has nonempty
+interior. If #{D} is a nonempty open subset of this image and #{d\in D},
+then #{Dd^{-1}} is an open identity neighborhood contained in
+
+##{\tau(\overline W)\tau(\overline W)^{-1}\subseteq\tau(U).}
+
+Translating this conclusion around every point of any open subset of
+#{\Gamma(Q)} proves that #{\tau} is open. A continuous open surjection
+is a quotient map: a subset of the target whose inverse image is open
+is the open image of that inverse image. This is the argument underlying
+Mathlib's \leanref{MonoidHom.isOpenMap_of_sigmaCompact}.}
+
+\p{The reverse norm #{N_{\mathrm{rev}}:\Gamma(Q)\to K^\times}
+is continuous. Indeed, \ref{fcap-002D} identifies
+#{\operatorname{rev}(x)x} with the scalar #{N_{\mathrm{rev}}(x)};
+extracting its scalar coefficient is a linear map on #{A}. Its values
+are nonzero, and #{K^\times} has the subspace topology from #{K} by
+\ref{fcap-0044}.}
+
+\p{The square subgroup is open in #{K^\times}. Over #{\mathbb R} it is
+the positive half-line, and over #{\mathbb C} it is all of #{K^\times}.
+For a complete discretely valued field of characteristic different from
+two, let #{\mathcal O_K} be its valuation ring and #{\mathfrak m_K}
+its maximal ideal. The local square theorem gives
+
+##{1+4\mathfrak m_K\subseteq(K^\times)^2.}
+
+This is \citet{VI.2, Theorem 2.19 and Corollary 2.20, p. 161}{lam2005quadratic};
+its complete discrete valuation hypotheses apply also in residue
+characteristic two. Since #{4\ne0}, multiplication by #{4} is a
+homeomorphism, so the left side is an open identity neighborhood.
+Translating it by squares proves that the subgroup is open. Every square
+coset is therefore open, which makes its quotient #{\mathcal S_K}
+discrete.}
+
+\p{Let #{q:K^\times\to\mathcal S_K} be the quotient map. The norm
+identity in \ref{fcap-002D} is
+
+##{\nu_Q^O\circ\tau=q\circ N_{\mathrm{rev}}.}
+
+The right side is continuous. The established quotient property of
+#{\tau} therefore proves continuity of #{\nu_Q^O}; restricting to the
+subgroup #{SO(Q)} proves continuity of #{\nu_Q}. A continuous map to a
+discrete space is locally constant. More explicitly,
+
+##{\ker\nu_Q^O=\tau\bigl(N_{\mathrm{rev}}^{-1}((K^\times)^2)\bigr)}
+
+is open, since both the preimage and #{\tau} are open. Its intersection
+with #{SO(Q)} is #{\ker\nu_Q}, identified with the Spin image by
+\ref{fcap-0023}. In dimension zero all domain groups are trivial by
+\ref{fcap-0045}; the same square-class topology and conclusions apply.}
+}
+
+\p{TauCeti's \leanref/tauceti{CliffordAlgebra.isOpenMap_lipschitzToOrthogonal}
+uses a Hausdorff, locally compact, #{\sigma}-compact topological field.
+Its \leanref/tauceti{CliffordAlgebra.continuous_cliffordNorm} uses a
+complete nontrivially normed field. Finally,
+\leanref/tauceti{CliffordAlgebra.continuous_orthogonalSpinorNorm},
+\leanref/tauceti{CliffordAlgebra.continuous_spinorNorm} and
+\leanref/tauceti{CliffordAlgebra.isOpen_range_spinToSpecialOrthogonal}
+assume a locally compact nontrivially normed field and explicitly require
+open squares. Each declaration assumes finite dimension and invertible
+two, with nondegeneracy for the action and spinor-norm conclusions.
+The local fields here satisfy those hypotheses, and the cited local
+square theorem discharges the extra open-squares condition.}

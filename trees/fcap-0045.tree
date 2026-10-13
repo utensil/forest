@@ -1,0 +1,119 @@
+\import{fcap-macros}
+\meta{agent-authored}{true}
+
+\tag{fcap}
+\tag{spin}
+\tag{clifford}
+
+\taxon{Lemma}
+\title{Closed local carriers and continuous Clifford actions}
+\related{\ref{spin-000O}}
+
+\p{Let #{K} be a local field of characteristic different from two in the
+sense of \ref{fcap-0044}, and let #{Q} be a nondegenerate quadratic form on
+a finite-dimensional #{K}-space #{V}. Give all spaces and carriers the
+canonical topologies of that definition. Then #{O(Q)} and #{SO(Q)} are
+closed in #{\operatorname{End}_K(V)}, and the actual vector-generated
+#{\Spin(Q)} is closed in #{A=\Cl(Q)}. These are locally compact Hausdorff
+topological groups. Their actions on #{V} and the projection
+#{\rho:\Spin(Q)\to SO(Q)} are continuous.}
+
+\p{Assume first that #{n=\dim_K V>0}. Write #{\widehat v=\iota_Q(v)},
+#{\alpha} for the grading involution, and #{\operatorname{rev}} for
+\vocabk{reversion}{ca-000J}. The vector-generated
+\vocabk{Lipschitz group}{spin-000W} has the following closed description
+inside #{A^\times}:
+
+##{\begin{gathered}
+\Gamma(Q)=\{x\in A^\times:\tau_x(V)\subseteq V\},\\
+\tau_x(\widehat v)=\alpha(x)\widehat v x^{-1}.
+\end{gathered}}
+
+Here and below #{V} is identified with its embedded vector subspace. We
+verify this description so that the generated carrier is retained. If
+#{w=\alpha(x)\widehat v x^{-1}\in V}, applying #{\alpha} also gives
+#{w=x\widehat v\alpha(x)^{-1}}. Multiplying the two expressions yields
+#{w^2=Q(v)1}. Thus #{\tau_x} preserves #{Q}; nondegeneracy makes it
+injective, hence an isometry of #{V}. By \ref{fcap-002D}, choose a vector
+product #{y\in\Gamma(Q)} with this action. For #{z=y^{-1}x},
+
+##{\alpha(z)\widehat v=\widehat v z\qquad(v\in V).}
+
+In an orthogonal basis #{e_1,\ldots,e_n}, expand #{z} in the Clifford
+monomials #{e_I}. For a fixed #{j}, the displayed equation is automatic
+on monomials with #{j\notin I}; on those with #{j\in I}, its two sides
+have opposite signs. The nonzero factors #{2Q(e_j)} and linear
+independence force all their coefficients to vanish. Doing this for
+every #{j} leaves only a scalar #{z=c1}, with #{c\ne0}. For any
+#{Q(v)\ne0},
+
+##{c1=\widehat v\,\widehat{\left(\frac{c}{Q(v)}v\right)}.}
+
+So #{c1}, and hence #{x}, belongs to #{\Gamma(Q)}. The reverse inclusion
+holds because each vector unit acts as a reflection. This also explains
+the general-field carrier argument behind the real case in \ref{fcap-0037}.}
+
+\p{The actual Spin carrier is therefore
+
+##{\begin{gathered}
+\Spin(Q)=\{x\in A^{\mathrm{even}}:\\
+\operatorname{rev}(x)x=1,\\
+x\widehat v\operatorname{rev}(x)\in V\quad(v\in V)\}.
+\end{gathered}}
+
+In finite dimension this left inverse is two-sided:
+#{L_{\operatorname{rev}(x)}L_x=1} makes #{L_x} invertible and gives
+#{x\operatorname{rev}(x)=1}. The preceding description now puts #{x}
+in #{\Gamma(Q)}; evenness and reverse norm one are exactly the Spin
+conditions of \ref{fcap-0028}. Conversely every Spin element satisfies
+these equations. This is the norm-one convention: the star and reverse
+norms agree on even elements.}
+
+\p{Every finite-dimensional linear subspace of #{A} is closed: extend
+a basis and set the complementary coordinates equal to zero. Evenness
+and membership in #{V} are consequently closed conditions. Reversion is
+linear, and multiplication is polynomial. It suffices to impose vector
+preservation on a basis of #{V}, so the displayed Spin carrier is a
+finite intersection of closed polynomial conditions in #{A}. The same
+argument, with continuous inversion on #{A^\times}, proves that
+#{\Gamma(Q)} is closed in #{A^\times}.}
+
+\p{Choose a basis of #{V} and let #{G} be the nonsingular Gram matrix
+of the half-polar form #{b_Q} from \ref{fcap-0027}. Then
+
+##{\begin{aligned}
+O(Q)&=\{g:g^{\mathsf T}Gg=G\},\\
+SO(Q)&=\{g\in O(Q):\det g=1\}.
+\end{aligned}}
+
+The first equation already forces #{g} invertible by taking determinants.
+These polynomial equations prove closedness in the whole matrix space.
+Matrix inversion, Clifford inversion and multiplication are continuous
+by \ref{fcap-0044}; their restrictions give the topological group
+operations. Finite-dimensional spaces over #{K} are locally compact
+Hausdorff, so the closed carriers have those properties.}
+
+\p{The joint action #{(x,v)\mapsto\alpha(x)\widehat v x^{-1}}
+is continuous by the same coordinate operations. Its values lie in the
+closed vector subspace, whose inverse identification with #{V} is linear
+and continuous. Evaluating on a basis proves continuity of
+#{\tau:\Gamma(Q)\to O(Q)} in matrix coordinates. Restricting to Spin
+removes #{\alpha}, and even determinant parity from \ref{fcap-001A}
+places its image in #{SO(Q)}, proving continuity of #{\rho}. The joint
+matrix actions of #{O(Q)} and #{SO(Q)} are polynomial as well.}
+
+\p{If #{V=0}, its only vector has zero quadratic value. There are no
+invertible vector generators, so #{\Gamma(Q)=\Spin(Q)=\{1\}}; both
+orthogonal groups are also trivial. All conclusions follow for these
+one-point carriers. The positive-dimensional normalizer description must
+not be used here: every Clifford unit preserves the zero vector space.}
+
+\p{TauCeti proves closedness and local compactness for the actual carrier
+in \leanref/tauceti{CliffordAlgebra.isClosed_spinGroup} and
+\leanref/tauceti{CliffordAlgebra.locallyCompactSpace_spinGroup}.
+The continuous projection is
+\leanref/tauceti{TauCeti.CliffordAlgebra.continuous_spinToSpecialOrthogonal}.
+These declarations use canonical module and subgroup topologies; the first
+two allow Hausdorff topological fields, with local compactness added for
+the second. The projection itself needs neither nondegeneracy nor local
+compactness. The argument above supplies their coordinate specialization.}
