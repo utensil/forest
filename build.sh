@@ -37,84 +37,20 @@ function show_lize_result {
     echo "Open output/$1.pdf to see the result."
 }
 
-function discover_primary_root {
-    if [ -n "${FOREST_PRIMARY_ROOT:-}" ]; then
-        return 0
-    fi
-
-    local jj_repo_dir git_common_dir
-    if [ -f "$PROJECT_ROOT/.jj/repo" ]; then
-        IFS= read -r jj_repo_dir < "$PROJECT_ROOT/.jj/repo"
-        FOREST_PRIMARY_ROOT=${jj_repo_dir%/.jj/repo}
-    fi
-
-    if [ -z "${FOREST_PRIMARY_ROOT:-}" ] && \
-        git_common_dir=$(git -C "$PROJECT_ROOT" rev-parse --git-common-dir 2>/dev/null); then
-        case "$git_common_dir" in
-            /*) ;;
-            *) git_common_dir="$PROJECT_ROOT/$git_common_dir" ;;
-        esac
-        FOREST_PRIMARY_ROOT=$(dirname "$git_common_dir")
-    fi
-}
-
-discover_primary_root
-export FOREST_PRIMARY_ROOT
-
-function wasm_package_has_output {
-    local pkg_dir=$1
-
-    [ -f "$pkg_dir/package.json" ] &&
-        compgen -G "$pkg_dir/*.js" > /dev/null &&
-        compgen -G "$pkg_dir/*.wasm" > /dev/null
-}
-
-function wasm_package_matches {
-    local pkg_dir=$1
-    local hash=$2
-
-    wasm_package_has_output "$pkg_dir" &&
-        [ -f "$pkg_dir/.commit_hash" ] &&
-        [ "$(cat "$pkg_dir/.commit_hash")" = "$hash" ]
-}
-
 function prep_wasm {
     mkdir -p lib
-    local lib_name=$1
-    local url=$2
-    local hash=$3
-    local lib_path=${4:-$lib_name}
-    local pkg_dir="lib/$lib_path/pkg"
-    local hash_file="$pkg_dir/.commit_hash"
+    lib_name=$1
+    url=$2
+    hash=$3
+    lib_path=${4:-$lib_name}
+    local hash_file="lib/$lib_path/pkg/.commit_hash"
     local needs_build=false
-    local cached_pkg
-
-    if [ -z "$CI" ] && [ -z "$UTS_DEV" ]; then
-        if ! wasm_package_matches "$pkg_dir" "$hash"; then
-            cached_pkg="$FOREST_PRIMARY_ROOT/lib/$lib_path/pkg"
-            if [ -n "$FOREST_PRIMARY_ROOT" ] && \
-                [ "$FOREST_PRIMARY_ROOT" != "$PROJECT_ROOT" ] && \
-                wasm_package_matches "$cached_pkg" "$hash"; then
-                mkdir -p "$pkg_dir"
-                cp -R "$cached_pkg"/. "$pkg_dir"/ || return 1
-                echo "Using pinned WASM package from the primary checkout for $lib_path"
-            fi
-        fi
-
-        if ! wasm_package_matches "$pkg_dir" "$hash"; then
-            echo "No pinned WASM package is available for $lib_name." >&2
-            echo "Run UTS_DEV=1 just build in the primary Forest checkout first." >&2
-            return 1
-        fi
-
-        cp "$pkg_dir"/*.wasm output/forest/ || return 1
-        return 0
-    fi
+    local package_ready=false
 
     # A CI cache restores only the generated package, not its source checkout.
     # The pinned commit marker and usable WASM output are sufficient to reuse it.
-    local package_ready=false
-    if wasm_package_matches "$pkg_dir" "$hash"; then
+    if [ -f "$hash_file" ] && [ "$(cat "$hash_file")" = "$hash" ] \
+        && compgen -G "lib/$lib_path/pkg/*.wasm" > /dev/null; then
         package_ready=true
     fi
 
@@ -134,7 +70,7 @@ function prep_wasm {
         needs_build=true
     fi
 
-    if [ "$package_ready" != "true" ] && { [ ! -d "$pkg_dir" ] || [ -z "$(ls -A "$pkg_dir")" ]; }; then
+    if [ "$package_ready" != "true" ] && { [ ! -d "lib/$lib_path/pkg" ] || [ -z "$(ls -A "lib/$lib_path/pkg")" ]; }; then
         needs_build=true
     elif [ "$package_ready" != "true" ] && { [ ! -f "$hash_file" ] || [ "$(cat "$hash_file")" != "$hash" ]; }; then
         needs_build=true
@@ -152,9 +88,11 @@ function prep_wasm {
         elif [ "$package_ready" != "true" ]; then
             echo "Using cached WASM package for $lib_name"
         fi
+    else
+        echo "🟡 Skipping wasm-pack build for $lib_name, some notes that used Rust and WASM might not work as epected."
     fi
 
-    if ! wasm_package_has_output "$pkg_dir"; then
+    if ! compgen -G "lib/$lib_path/pkg/*.wasm" > /dev/null; then
         echo "Missing WASM output for $lib_name" >&2
         return 1
     fi

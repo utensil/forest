@@ -119,7 +119,7 @@ To use any package, just figure out the package name from the import and run `bu
 
 I'm also experimenting with WebAssembly, and some of the JS/TS code will rely on WASM.
 
-CI and `UTS_DEV=1` builds use working `bun` and [rustup](https://rustup.rs/) to build the pinned WASM packages. A clean Jujutsu or Git worktree reuses matching generated packages and the Base Theme asset from the primary Forest checkout when they are available. If no matching local cache exists, prime the primary checkout with `UTS_DEV=1 just build`; the worktree build then fails early with that command when the cache is missing.
+As long as one has working `bun` and [rustup](https://rustup.rs/), the `build.sh` should take care of the rest. It also silently skips the WASM build if failed, to ensure the rest of the site can still be built.
 
 ## License
 
