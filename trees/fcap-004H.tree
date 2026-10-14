@@ -1,0 +1,91 @@
+\import{fcap-macros}
+\meta{agent-authored}{true}
+
+\tag{fcap}
+\tag{spin}
+\tag{quadratic-forms}
+
+\taxon{Definition}
+\title{Full adelic groups and the real factor}
+
+\p{Let #{Q} be a nondegenerate quadratic form on a finite-dimensional
+rational vector space #{V}, and choose a
+\vocabk{compatible compact-open reference tuple}{fcap-004C}.
+Extend scalars to #{V_\infty=\mathbb R\otimes_{\mathbb Q}V}, with
+quadratic form #{Q_\infty}. Write #{O_\infty}, #{SO_\infty} and
+#{\Spin_\infty} for its real groups with the canonical topologies
+of \ref{fcap-0044}. In particular #{\Spin_\infty} uses the actual
+vector-generated, even, reverse-norm-one carrier of \ref{fcap-0045}.}
+
+\p{The \newvocab{full adelic orthogonal, special orthogonal and Spin groups}
+relative to the chosen references are
+
+##{\begin{aligned}
+O_{\mathbb A}(U)&=O_\infty\times O_f(U),\\
+SO_{\mathbb A}(U)&=SO_\infty\times SO_f(U),\\
+\Spin_{\mathbb A}(U)&=\Spin_\infty\times\Spin_f(U).
+\end{aligned}}
+
+The finite factors are those of \ref{fcap-004F}. In each case take
+the ordinary product topology and coordinatewise group operations.
+There is no reference-subgroup condition at the real place: its
+factor is unrestricted. More generally write
+#{G_{\mathbb A}(U)=G_\infty\times G_f(U)} for any of these three
+constructions. They are Hausdorff locally compact topological groups.}
+
+\p{Indeed, \ref{fcap-0045} gives those properties for the real
+factor, and \ref{fcap-004F} gives them for the finite factor.
+Multiplication and inversion are continuous in each component,
+hence in the product topology. Products of separating neighborhoods
+give the Hausdorff property. At each point choose compact
+neighborhoods in the two factors; their product is a compact
+neighborhood, proving local compactness. The finite-coordinate
+projection is the continuous group homomorphism
+
+##{\begin{aligned}
+\pi_f:G_{\mathbb A}(U)&\longrightarrow G_f(U),\\
+(g_\infty,g_f)&\longmapsto g_f.
+\end{aligned}}
+
+Continuity is the defining property of the product topology, and
+the homomorphism identity follows from coordinatewise multiplication.}
+
+\p{For example, take the hyperbolic plane #{Q(x,y)=xy}. For #{t>0},
+the real matrix #{h_t=\operatorname{diag}(t,t^{-1})} preserves #{Q}
+and has determinant one. Thus #{(h_t,1)} is a point of
+#{SO_{\mathbb A}(U)} for every #{t>0}, with identity at every
+finite prime. The nonidentity matrices #{h_t} approach the identity
+as #{t\to1}, exhibiting a nondiscrete real factor.}
+
+\p{Let #{K(U)=\prod_pU_p} be the compact open reference subgroup
+of the finite factor. The subgroup #{\{1\}\times K(U)} of the
+full group is compact, but is not open when #{G_\infty} is
+nondiscrete. Compactness follows from compactness of both factors.
+If the subgroup were open, its inverse image under the continuous
+map #{g\mapsto(g,1)} would make #{\{1\}} open in #{G_\infty}.
+Translations would then make every singleton open, contradicting
+nondiscreteness. Instead, for each open identity neighborhood
+#{W_\infty\subseteq G_\infty}, the set
+#{W_\infty\times K(U)} is an open identity neighborhood in the
+full group. A compact real identity neighborhood
+#{C_\infty} gives the compact identity neighborhood
+#{C_\infty\times K(U)}, without asserting that it is open.
+In dimension zero all three real and finite groups are singletons,
+so the nondiscreteness qualification is essential.}
+
+\p{The unrestricted archimedean factors and the finite-place
+conditions occur together in the classical affine adelic stage
+formula of \citet{Theorem 3.6, equation (3.6.1), pp. 6-8}{conrad2011adelic}.
+Here the product construction is explicit for the chosen group
+references; it makes no additional identification with integral
+points of an affine scheme. TauCeti's
+\leanref/tauceti{TauCeti.RestrictedProductGroupWithFactor}
+is the general carrier with an extra unrestricted factor.
+The three specializations are
+\leanref/tauceti{TauCeti.QuadraticMap.OrthogonalCompactOpens.fullAdelicOrthogonal},
+\leanref/tauceti{TauCeti.QuadraticMap.OrthogonalCompactOpens.fullAdelicSpecialOrthogonal}
+and \leanref/tauceti{TauCeti.QuadraticMap.OrthogonalCompactOpens.fullAdelicSpin}.
+The corresponding continuous finite projections are
+\leanref/tauceti{TauCeti.QuadraticMap.OrthogonalCompactOpens.continuous_fullAdelicOrthogonalToFinite},
+\leanref/tauceti{TauCeti.QuadraticMap.OrthogonalCompactOpens.continuous_fullAdelicSpecialOrthogonalToFinite}
+and \leanref/tauceti{TauCeti.QuadraticMap.OrthogonalCompactOpens.continuous_fullAdelicSpinToFinite}.}
