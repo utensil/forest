@@ -1,0 +1,84 @@
+\import{fcap-macros}
+\meta{agent-authored}{true}
+
+\tag{fcap}
+\tag{spin}
+\tag{quadratic-forms}
+
+\taxon{Proposition}
+\title{Changing compact-open reference subgroups}
+
+\p{Let #{Q} be nondegenerate on a finite-dimensional rational space
+#{V}. The \vocabk{compatible compact-open reference tuples}{fcap-004C}
+constructed from any two rational bases in \ref{fcap-004D} agree at
+all but finitely many primes, in each of their O, SO and Spin families.}
+
+\p{There is also a finite shrinking operation. Given any compatible
+tuple #{U}, choose open subgroups #{W_p\leq O_p} and a finite set
+#{F} such that #{U_p^O\subseteq W_p} for #{p\notin F}. Then
+
+##{\begin{gathered}
+\widetilde U_p^O=U_p^O\cap W_p,\\
+\widetilde U_p^{\Spin}
+=U_p^{\Spin}\cap(i_p\rho_p)^{-1}(W_p),\\
+\widetilde U_p^{SO}=i_p^{-1}(\widetilde U_p^O)
+\end{gathered}}
+
+is another compatible tuple, contained in #{U} at every prime and
+equal to it outside #{F}. In particular one may take #{W_p=O_p}
+outside a chosen finite set. The maps #{i_p} and #{\rho_p} are those
+of \ref{fcap-004C}.}
+
+\subtree{
+\taxon{Proof}
+\p{For bases #{b} and #{b'}, let #{C} express the vectors of #{b'}
+in the basis #{b}. Let #{F_b} contain the denominator primes of
+every entry of both #{C} and #{C^{-1}}. This is a finite set.
+Write #{L_p,L'_p} for the respective #{\mathbb Z_p}-spans of
+#{b_p,b'_p}. For #{p\notin F_b}, the entries of #{C} belong to
+#{\mathbb Z_p}, so every vector of #{b'_p} belongs to #{L_p}.
+Applying #{C^{-1}} gives the reverse containment. Thus
+#{L'_p=L_p}. Their stabilizers in #{O_p} are equal. Taking full
+preimages under #{i_p\rho_p} and #{i_p} gives equality of the Spin
+and SO references as well. No integrality condition on the
+coefficients of #{Q} is needed.}
+
+\p{For shrinking, an open subgroup of a topological group is closed:
+its complement is the union of its other open cosets. Hence
+#{U_p^O\cap W_p} is open and is a closed subset of the compact
+group #{U_p^O}. The continuous action #{i_p\rho_p} has an open and
+closed preimage of #{W_p}. Intersecting this preimage with the
+compact-open #{U_p^{\Spin}} likewise gives an open compact
+subgroup. The action sends the Spin intersection into the orthogonal
+intersection. The derived SO group has the required properties by
+\ref{fcap-004C}.}
+
+\p{If #{p\notin F}, the orthogonal intersection equals #{U_p^O}.
+Compatibility of #{U} gives
+#{i_p\rho_p(U_p^{\Spin})\subseteq U_p^O\subseteq W_p}, so the
+Spin intersection also equals #{U_p^{\Spin}}; the derived SO
+preimages are then equal. For a rational point #{x}, adjoining
+#{F} to its original finite exceptional set proves eventual
+membership in the new references. The union is taken separately
+for each #{x}, as required. In dimension zero all groups are
+singletons and these statements retain their literal meanings.}
+}
+
+\p{For a concrete basis change in positive dimension, replace
+#{b_1} by #{2b_1} and leave the other basis vectors fixed. The two
+change matrices have diagonal entries #{2} and #{1/2}, respectively,
+with all other diagonal entries #{1}. Thus #{F_b=\{2\}} suffices.
+The two lattices agree at every odd prime, while at #{2} the new
+lattice is strictly smaller. This does not assert that their
+orthogonal stabilizers must differ at #{2}.}
+
+\p{These are deductions from the lattice construction in
+\ref{fcap-004D} and the continuous local action, using the
+coordinate topology of \citet{Proposition 2.1, p. 2}{conrad2011adelic}.
+The basis comparison is formalized by
+\leanref/tauceti{TauCeti.QuadraticMap.eventually_integralOrthogonalSubgroup_baseChange_eq},
+which also permits degenerate forms. The compatible shrinking
+construction is
+\leanref/tauceti{TauCeti.QuadraticMap.OrthogonalCompactOpens.infOpenSubgroup}.
+Neither construction requires a lift of an arbitrary integral
+orthogonal point to Spin.}
