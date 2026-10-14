@@ -1,0 +1,143 @@
+\import{fcap-macros}
+\meta{agent-authored}{true}
+
+\tag{fcap}
+\tag{spin}
+\tag{quadratic-forms}
+
+\taxon{Definition}
+\title{Finite restricted products}
+
+\p{Let #{G_p} be a Hausdorff locally compact topological group at
+each rational prime, and choose a compact open subgroup #{U_p\leq G_p}. The
+\newvocab{restricted product} relative to #{U=(U_p)} is
+
+##{G_f(U)=\prod_p'(G_p,U_p).}
+
+It consists of the tuples #{(g_p)\in\prod_pG_p} for which
+#{g_p\in U_p} at all but finitely many primes.
+
+For a finite set #{S} of primes its \newvocab{principal stage} is
+
+##{G_S(U)=\prod_{p\in S}G_p\times\prod_{p\notin S}U_p,}
+
+regarded as a subset of #{G_f(U)} and given the product topology.
+The \newvocab{restricted-product topology} declares #{A\subseteq G_f(U)}
+open exactly when #{A\cap G_S(U)} is open in every principal stage.
+Multiplication and inversion are coordinatewise. The
+\newvocab{product reference subgroup} is
+
+##{K(U)=\prod_pU_p=G_{\varnothing}(U).}}
+
+\p{For example, take the hyperbolic plane #{Q(x,y)=xy} and the
+references from its standard rational basis in \ref{fcap-004D}.
+The tuple whose #{2}-component is #{\operatorname{diag}(2,1/2)}
+and whose other components are identities belongs to #{G_{\{2\}}(U)}
+for #{G_p=O_p}, but not to #{K(U)}. The finite exceptional set
+permits a nonintegral component without discarding the restrictions
+at all other primes.}
+
+\p{With this topology, #{G_f(U)} is a Hausdorff locally compact
+topological group, each #{G_S(U)} is an open subspace with precisely
+its product topology, and #{K(U)} is compact and open. Every
+coordinate evaluation #{(g_q)\mapsto g_p} is continuous.}
+
+\subtree{
+\taxon{Proof}
+\p{The identity belongs to every reference subgroup. The product
+of tuples with exceptional sets #{S} and #{T} has exceptional set
+contained in #{S\cup T}; inversion preserves a tuple's exceptional
+set. Thus the coordinate operations define a group on #{G_f(U)},
+which is the union of its principal stages.}
+
+\p{If #{S\subseteq T}, the inclusion #{G_S(U)\to G_T(U)}
+replaces only the finitely many factors #{U_p} for #{p\in T\setminus S}
+by #{G_p}. Each inclusion #{U_p\hookrightarrow G_p} is an open
+embedding, so the product inclusion is an open embedding. For
+arbitrary finite #{S,T},
+
+##{G_S(U)\cap G_T(U)=G_{S\cap T}(U).}
+
+This intersection is open in both stages with the same topology.
+If #{A} is open in #{G_S(U)}, its intersection with #{G_T(U)}
+is therefore open in #{G_T(U)}: first intersect with the open
+#{G_{S\cap T}(U)}, then use its open inclusion into #{G_T(U)}.
+Hence #{A} is open in the union topology. Conversely, an open set
+of the union restricts to an open set in each stage by definition.
+This proves both the claimed stage topology and stage openness.}
+
+\p{A coordinate evaluation is continuous on every stage, hence on
+the union by the definition of its topology. Two distinct tuples
+differ at some prime; disjoint neighborhoods in that Hausdorff
+factor pull back to disjoint neighborhoods of the tuples. Thus the
+union is Hausdorff. Multiplication restricts to a continuous map
+
+##{G_S(U)\times G_T(U)\longrightarrow G_{S\cup T}(U)}
+
+by continuity in each factor of the product topology. These open
+products cover #{G_f(U)\times G_f(U)}, proving continuity of
+multiplication. Inversion is continuous on each open stage, hence
+on the union. Finally #{K(U)} is compact by the product compactness
+theorem and open as the empty stage. Its translates are compact
+neighborhoods of every point, proving local compactness.}
+}
+
+\p{For a \vocabk{compatible compact-open reference tuple}{fcap-004C},
+apply this construction to the three local families to define the
+\newvocab{finite adelic orthogonal, special orthogonal and Spin groups}:
+
+##{\begin{gathered}
+O_f(U)=\prod_p'(O_p,U_p^O),\\
+SO_f(U)=\prod_p'(SO_p,U_p^{SO}),\\
+\Spin_f(U)=\prod_p'(\Spin_p,U_p^{\Spin}).
+\end{gathered}}
+
+The local topological groups are supplied by \ref{fcap-0045}.
+The construction applies to the derived SO references as well as
+to the chosen O and Spin references. In dimension zero all three
+restricted products are singleton groups. Here the notation retains
+the chosen tuple; an arbitrary compatible tuple has not been
+identified with the integral points of an affine scheme.}
+
+\p{Finite changes of references leave the ambient group and its
+topology unchanged. More precisely, suppose #{U'_p=U_p} outside a
+finite set #{F}. A tuple restricted for one family is restricted
+for the other after adjoining #{F} to its exceptions. The identity
+in every coordinate is thus a group isomorphism
+#{G_f(U)\to G_f(U')}. On a stage it factors as
+
+##{G_S(U)\longrightarrow G_{S\cup F}(U')\longrightarrow G_f(U').}
+
+The first map is continuous: outside #{S\cup F} the reference
+factors coincide, and at the finitely many remaining factors it
+is either the identity on #{G_p} or the inclusion #{U_p\hookrightarrow G_p}.
+Stagewise continuity gives continuity on the union. Interchanging
+#{U} and #{U'} proves continuity of the inverse. Consequently
+the changes in \ref{fcap-004E} identify the finite adelic topological
+groups by the coordinate identity.}
+
+\p{This identity need not send #{K(U)} onto #{K(U')}.
+If, for example, #{U'_{p_0}} is a proper subgroup of #{U_{p_0}},
+choose #{u\in U_{p_0}\setminus U'_{p_0}}. The tuple with component
+#{u} at #{p_0} and identities elsewhere belongs to #{K(U)} but
+not to #{K(U')}. Thus the ambient topology and the chosen compact
+open subgroup are separate data. Continuity of all coordinate
+evaluations also shows that the restricted-product topology is at
+least as fine as the topology inherited from #{\prod_pG_p}.}
+
+\p{The classical affine adelic construction uses finite stages and
+open transition maps in \citet{Theorem 3.6, pp. 6-8}{conrad2011adelic};
+compactness of integral points and the resulting locally compact
+topology occur in \citet{Corollary 3.7 and Section 4 opening, p. 9}{conrad2011adelic}.
+The argument above proves the construction directly for the chosen
+compact-open group references. Mathlib's
+\leanref{RestrictedProduct.isOpenEmbedding_inclusion_principal}
+and \leanref{RestrictedProduct.locallyCompactSpace_of_group}
+support the stage and local compactness assertions. TauCeti's
+\leanref/tauceti{TauCeti.QuadraticMap.OrthogonalCompactOpens.finiteAdelicOrthogonal},
+\leanref/tauceti{TauCeti.QuadraticMap.OrthogonalCompactOpens.finiteAdelicSpecialOrthogonal}
+and \leanref/tauceti{TauCeti.QuadraticMap.OrthogonalCompactOpens.finiteAdelicSpin}
+define the three specializations. The coordinate identity and its
+continuity are
+\leanref/tauceti{TauCeti.restrictedProductCongr} and
+\leanref/tauceti{TauCeti.continuous_restrictedProductCongr}.}
