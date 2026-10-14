@@ -1,0 +1,77 @@
+\import{fcap-macros}
+\meta{agent-authored}{true}
+
+\tag{fcap}
+\tag{spin}
+\tag{quadratic-forms}
+
+\taxon{Definition}
+\title{Compatible compact-open reference subgroups}
+
+\p{Let #{V} be a finite-dimensional rational vector space and let
+#{Q} be nondegenerate. For each rational prime #{p}, put
+#{V_p=\mathbb Q_p\otimes_{\mathbb Q}V} and let #{Q_p} be the extended
+form. Write
+
+##{\begin{gathered}
+O_p=O(Q_p),\\
+SO_p=SO(Q_p),\\
+\Spin_p=\Spin(Q_p),\\
+\Spin_p\xrightarrow{\rho_p}SO_p\xrightarrow{i_p}O_p.
+\end{gathered}}
+
+Here #{i_p} is inclusion and #{\rho_p} is the vector action. Spin is
+the actual vector-generated even norm-one carrier of
+\ref{fcap-0028}, with the canonical local topology of
+\ref{fcap-0044}. The actions are continuous by \ref{fcap-0045}.
+For a rational orthogonal or Spin point #{x}, write #{x_p} for its
+scalar extension; the action compatibility is \ref{fcap-003N}.}
+
+\p{A \newvocab{compatible compact-open reference tuple} for #{Q}
+consists of subgroups
+
+##{U_p^O\leq O_p,\qquad U_p^{\Spin}\leq\Spin_p}
+
+at every prime, subject to the following requirements.}
+
+\ol{
+\li{Each subgroup is compact and open in its ambient local group.}
+\li{The reference groups respect the vector action:
+##{i_p\rho_p(U_p^{\Spin})\subseteq U_p^O.}}
+\li{For each #{g\in O(Q)}, there is a finite set #{S_O(g)} of primes
+such that #{g_p\in U_p^O} whenever #{p\notin S_O(g)}.}
+\li{For each #{s\in\Spin(Q)}, there is a finite set #{S_{\Spin}(s)}
+such that #{s_p\in U_p^{\Spin}} whenever #{p\notin S_{\Spin}(s)}.}
+}
+
+\p{The exceptional sets may depend on the rational point. The special
+orthogonal reference subgroup is determined by these data:
+
+##{U_p^{SO}=i_p^{-1}(U_p^O).}
+
+Thus an element of #{SO_p} belongs to #{U_p^{SO}} exactly when its
+underlying orthogonal transformation belongs to #{U_p^O}, and
+#{\rho_p} restricts to #{U_p^{\Spin}\to U_p^{SO}}.}
+
+\p{The subgroup #{U_p^{SO}} is open by continuity of #{i_p}. It is
+compact because #{i_p} is the closed embedding cut out by
+#{\det=1}, as in \ref{fcap-0045}: its image inside #{U_p^O} is closed
+in that compact set. If #{g\in SO(Q)}, determinant commutes with
+scalar extension, so the rational orthogonal membership condition gives
+#{g_p\in U_p^{SO}} outside #{S_O(i(g))}, where
+#{i:SO(Q)\to O(Q)} is inclusion. No further special orthogonal
+family or exceptional-set axiom is needed.}
+
+\p{For an affine finite-type scheme over a discrete valuation ring,
+its integral points are open and closed in its fraction-field points,
+as in \citet{Example 2.3, p. 3}{conrad2011adelic}. The paired orthogonal
+and Spin data above additionally impose compatibility and rational
+membership. TauCeti packages those exact fields in
+\leanref/tauceti{TauCeti.QuadraticMap.OrthogonalCompactOpens} and
+defines the derived subgroup in
+\leanref/tauceti{TauCeti.QuadraticMap.OrthogonalCompactOpens.specialOrthogonal}.
+Its compactness is
+\leanref/tauceti{TauCeti.QuadraticMap.OrthogonalCompactOpens.isCompact_specialOrthogonal}.
+The formal structure allows arbitrary rational quadratic forms; the
+nondegenerate setting here supplies the existence construction in
+\ref{fcap-004D}.}

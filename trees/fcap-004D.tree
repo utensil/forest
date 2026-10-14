@@ -1,0 +1,128 @@
+\import{fcap-macros}
+\meta{agent-authored}{true}
+
+\tag{fcap}
+\tag{spin}
+\tag{quadratic-forms}
+
+\taxon{Proposition}
+\title{A rational basis supplies compatible reference subgroups}
+
+\p{Let #{Q} be a nondegenerate quadratic form on a finite-dimensional
+rational space #{V}, with basis #{b=(b_1,\ldots,b_n)}. Use the local
+groups and maps of \ref{fcap-004C}. Let #{\mathbb Z_p\subseteq\mathbb Q_p}
+be the ring of #{p}-adic integers, and put
+
+##{\begin{gathered}
+b_{i,p}=1\otimes b_i,\\
+L_p=\sum_{i=1}^n\mathbb Z_p b_{i,p},\\
+H_p=\{g\in O_p:gL_p=L_p\}.
+\end{gathered}}
+
+Then the choices
+
+##{\begin{gathered}
+U_p^O=H_p,\\
+U_p^{\Spin}=(i_p\rho_p)^{-1}(H_p),\\
+U_p^{SO}=i_p^{-1}(H_p)
+\end{gathered}}
+
+form a \vocabk{compatible compact-open reference tuple}{fcap-004C}.
+The Spin condition is integrality of its orthogonal action in both
+directions; it imposes no separate Clifford-coordinate integral model.}
+
+\subtree{
+\taxon{Proof}
+\p{Suppose first that #{n>0}. In the basis #{b_p}, the condition
+#{gL_p=L_p} means that both the matrix #{A} of #{g} and its inverse
+have entries in #{\mathbb Z_p}. Indeed, integral columns are exactly
+the condition #{gL_p\subseteq L_p}; the inverse condition gives the
+reverse inclusion. These conditions are closed under products and
+inverses, so #{H_p} is a subgroup.}
+
+\p{The ring #{\mathbb Z_p} is open in #{\mathbb Q_p}. Every entry of
+#{A} and #{A^{-1}} varies continuously on #{O_p} by
+\ref{fcap-0044}. Requiring their finitely many entries to lie in
+#{\mathbb Z_p} is therefore an open condition, proving that #{H_p}
+is open.}
+
+\p{For compactness, retain both matrix coordinates. Let
+#{\mathcal C_p\subseteq M_n(\mathbb Z_p)^2} be defined by
+
+##{\begin{gathered}
+AC=CA=I,\\
+Q_p(Ax)=Q_p(x).
+\end{gathered}}
+
+The second identity is required for every #{x\in V_p}. This is a
+finite collection of polynomial equations in
+the entries of #{A}: expand the two quadratic forms in the coordinates
+of #{x} and equate their coefficients. The inverse equations are also
+polynomial. Thus #{\mathcal C_p} is closed in
+#{M_n(\mathbb Z_p)^2}. Since #{\mathbb Z_p} is compact, this finite
+product and its closed subset #{\mathcal C_p} are compact.
+Projection #{(A,C)\mapsto A} identifies #{\mathcal C_p}
+homeomorphically with #{H_p}; its inverse is #{A\mapsto(A,A^{-1})}.
+This is precisely the inverse-graph topology from \ref{fcap-0044}.
+Consequently #{H_p} is compact. This matrix argument itself does not
+require nondegeneracy of the quadratic form.}
+
+\p{The full action preimage #{U_p^{\Spin}} is a subgroup and is open
+by continuity of #{i_p\rho_p}. Nondegeneracy persists over
+#{\mathbb Q_p}: a rational Gram determinant remains nonzero after the
+field embedding. The derived group #{U_p^{SO}} is compact by the
+closed-inclusion argument in \ref{fcap-004C}, so
+
+##{U_p^{\Spin}=\rho_p^{-1}(U_p^{SO})}
+
+is compact by the properness theorem \ref{fcap-0047}. This is the
+step that uses nondegeneracy. The full-preimage definition also gives
+#{i_p\rho_p(U_p^{\Spin})\subseteq H_p} directly.}
+
+\p{Fix one #{g\in O(Q)}. Its matrix and inverse matrix in the
+rational basis #{b} contain finitely many rational entries. Let
+#{S_O(g)} be the union of the prime divisors of their reduced
+denominators. It is finite. If #{p\notin S_O(g)}, each denominator
+is a unit of #{\mathbb Z_p}, so all entries of both localized
+matrices lie in #{\mathbb Z_p}. Hence #{g_p\in H_p}. There is no
+need to require the coefficients of #{Q} to be integral in #{b}.}
+
+\p{Now fix #{s\in\Spin(Q)} and let #{g=i\rho(s)\in O(Q)} be
+its rational orthogonal action. Scalar-extension naturality from
+\ref{fcap-003N} gives
+
+##{i_p\rho_p(s_p)=g_p.}
+
+The preceding argument therefore puts #{s_p} in
+#{U_p^{\Spin}} for every #{p\notin S_O(g)}. Taking
+#{S_{\Spin}(s)=S_O(i\rho(s))} proves the remaining rational
+membership condition. The set is chosen separately for each #{s};
+no uniform denominator bound on all rational Spin points is asserted.}
+
+\p{If #{n=0}, the basis and all matrix-coordinate conditions are
+empty. Both orthogonal groups are trivial, and the actual generated
+Spin carrier is #{\{1\}}, by \ref{fcap-0045}. Thus every displayed
+reference subgroup is the singleton group, compact and open, and all
+exceptional sets can be empty.}
+}
+
+\p{For example, in the hyperbolic plane #{Q(x,y)=xy} with its standard
+rational basis, #{g=\operatorname{diag}(2,1/2)} preserves #{Q} and
+has determinant one. Both #{g} and #{g^{-1}} have integral entries
+at every prime except #{2}; thus #{S_O(g)=\{2\}} works, and
+#{g_2\notin H_2}. This is the rational instance of the torus in
+\ref{fcap-0048}, and makes the point-dependent denominator condition
+explicit.}
+
+\p{The matrix proof is a direct calculation using the local affine
+topology of \citet{Proposition 2.1 and its proof, p. 2}{conrad2011adelic};
+the compact Spin preimage is the deduction from \ref{fcap-0047}
+above. TauCeti's
+\leanref/tauceti{TauCeti.QuadraticMap.isCompact_integralOrthogonalSubgroup}
+also permits degenerate local forms, whereas
+\leanref/tauceti{TauCeti.CliffordAlgebra.isCompact_integralSpinSubgroup}
+requires nondegeneracy. The complete tuple is constructed in
+\leanref/tauceti{TauCeti.QuadraticMap.OrthogonalCompactOpens.integral}
+for a nondegenerate rational quadratic form and a finite rational basis.
+These references concern the chosen subgroups; they assert no
+surjectivity of the restricted Spin action onto the orthogonal reference.}
