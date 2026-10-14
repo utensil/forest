@@ -1,0 +1,122 @@
+\import{fcap-macros}
+\meta{agent-authored}{true}
+
+\tag{fcap}
+\tag{spin}
+\tag{quadratic-forms}
+
+\taxon{Definition}
+\title{Away restricted products and finite-prime splitting}
+
+\p{Use the Hausdorff locally compact groups #{G_p} and compact open
+references #{U_p} of \ref{fcap-004F}. For any set #{R} of rational
+primes, the \newvocab{away restricted product} is
+
+##{G_f^R(U)=\prod_{p\notin R}'(G_p,U_p).}
+
+Its tuples have only finitely many exceptions to #{g_p\in U_p}
+among the primes outside #{R}. Its topology is defined by the same
+principal-stage construction, now indexed by finite sets
+#{T\subseteq\{p:p\notin R\}}:
+
+##{G_T^R(U)=\prod_{p\in T}G_p\times\prod_{p\notin R\cup T}U_p.}
+
+The proof in \ref{fcap-004F} applies to this index set too. Thus
+#{G_f^R(U)} is a Hausdorff locally compact topological group, and
+each displayed stage is open with its product topology.}
+
+\p{Deleting the coordinates in #{R} defines a continuous group
+homomorphism
+
+##{\begin{aligned}
+r_R:G_f(U)&\longrightarrow G_f^R(U),\\
+(g_p)_p&\longmapsto(g_p)_{p\notin R}.
+\end{aligned}}
+
+Indeed, a finite exceptional set #{S} restricts to #{S\setminus R},
+so the map is well defined. On the open stage #{G_S(U)} it is
+the product-coordinate restriction
+#{G_S(U)\to G_{S\setminus R}^R(U)}, followed by the continuous
+stage inclusion. These restrictions are continuous, and the stages
+cover the source, proving continuity of #{r_R}. Coordinatewise
+operations prove the homomorphism assertion.}
+
+\p{For #{R=\varnothing}, the away group and restriction are
+#{G_f(U)} and its identity map. If #{R} is the set of all primes,
+the complement is empty, so the away group is the one-point group
+and restriction is its unique incoming homomorphism. No finiteness
+of #{R} is needed for the definition or for continuity.}
+
+\p{If #{R} is finite, separating its coordinates gives the
+\newvocab{finite-prime splitting}, a topological group isomorphism
+
+##{\begin{aligned}
+d_R:G_f(U)&\longrightarrow
+\Bigl(\prod_{p\in R}G_p\Bigr)\times G_f^R(U),\\
+(g_p)_p&\longmapsto\bigl((g_p)_{p\in R},r_R(g)\bigr).
+\end{aligned}}
+
+The target carries the product topology. In particular the removed
+prime factors are unrestricted. For the hyperbolic-plane tuple in
+\ref{fcap-004F}, choosing #{R=\{2\}} gives
+#{d_R(g)=(\operatorname{diag}(2,1/2),1)}. Reinserting that component
+recovers the tuple, even though its #{2}-component is outside #{U_2}.}
+
+\subtree{
+\taxon{Proof}
+\p{The inverse of #{d_R} reinserts the coordinates indexed by #{R}.
+If the away tuple has finite exceptional set #{T}, the reconstructed
+tuple has exceptional set contained in #{R\cup T}. This is finite,
+so the inverse is well defined. Coordinate restriction and reinsertion
+are mutually inverse homomorphisms. Continuity of #{d_R} follows
+from the continuous coordinate evaluations of \ref{fcap-004F} and
+the continuous map #{r_R}.}
+
+\p{For the inverse, the open subsets
+
+##{\Bigl(\prod_{p\in R}G_p\Bigr)\times G_T^R(U)}
+
+cover the target as #{T} ranges over the finite subsets of the
+complement. On each such subset reinsertion is the product
+rearrangement onto #{G_{R\cup T}(U)}, followed by its continuous
+inclusion into #{G_f(U)}. Hence the inverse is continuous on an
+open cover, and therefore continuous everywhere. This argument uses
+the established open stages and the ordinary product topology.}
+}
+
+\p{If #{R} is infinite, the removed coordinates must retain their
+own restricted-product condition. An unrestricted family on #{R}
+can have infinitely many components outside #{U_p}; reinserting
+it would not define a point of #{G_f(U)}. Thus the finite-prime
+formula does not extend by simply allowing infinite #{R}.
+The appropriate removed-coordinate factor is
+#{\prod_{p\in R}'(G_p,U_p)}. At the level of tuples this and the
+away factor split the finite exceptional set into two finite sets;
+conversely their union is finite. The resulting group isomorphism
+is also a homeomorphism: on each open product of two principal
+stages, reinsertion is a product rearrangement into the stage
+indexed by their union; restriction is continuous on every source
+stage. This also covers the empty and all-prime boundaries.}
+
+\p{For a \vocabk{compatible compact-open reference tuple}{fcap-004C},
+the same construction defines #{O_f^R(U)}, #{SO_f^R(U)} and
+#{\Spin_f^R(U)} by taking the local families #{O_p}, #{SO_p} and
+#{\Spin_p} and their respective reference subgroups.
+The finite-prime splitting is a direct consequence of the stage
+topology; the classical affine adelic finite-stage decomposition is
+\citet{Theorem 3.6, equation (3.6.1), pp. 6-8}{conrad2011adelic}.}
+
+\p{TauCeti's \leanref/tauceti{TauCeti.RestrictedProductGroupAway}
+defines the arbitrary-set carrier, and
+\leanref/tauceti{TauCeti.restrictAway} with
+\leanref/tauceti{TauCeti.continuous_restrictAway} supplies restriction.
+The finite-set splitting and its two continuity directions are
+\leanref/tauceti{TauCeti.awayDecomposition},
+\leanref/tauceti{TauCeti.continuous_awayDecomposition} and
+\leanref/tauceti{TauCeti.continuous_awayDecomposition_symm}.
+Its forward continuity does not need open references; inverse
+continuity assumes openness on the away coordinates, which our
+compact-open tuple supplies. The three specialized carriers are
+\leanref/tauceti{TauCeti.QuadraticMap.OrthogonalCompactOpens.awayAdelicOrthogonal},
+\leanref/tauceti{TauCeti.QuadraticMap.OrthogonalCompactOpens.awayAdelicSpecialOrthogonal}
+and \leanref/tauceti{TauCeti.QuadraticMap.OrthogonalCompactOpens.awayAdelicSpin}.}
