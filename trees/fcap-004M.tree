@@ -1,0 +1,105 @@
+\import{fcap-macros}
+\meta{agent-authored}{true}
+\tag{fcap}
+\tag{spin}
+\tag{quadratic-forms}
+
+\taxon{Proposition}
+\title{Isotropic rational SO diagonals accumulate in the finite adeles}
+\lean/tauceti{TauCeti.QuadraticMap.OrthogonalCompactOpens.not_discreteTopology_range_finiteAdelicSpecialOrthogonalDiagonal}
+
+\p{Let #{Q} be nondegenerate on a rational vector space #{V} of
+finite dimension #{d\geq3}, and suppose that #{Q} is
+\vocabk{isotropic}{fcap-0047}. For every
+\vocabk{compatible compact-open reference tuple}{fcap-004C} #{U},
+the finite \vocabk{rational diagonal subgroup}{fcap-004K}
+#{\delta_f^{SO}(SO(Q))} is not discrete in #{SO_f(U)}.
+A sequence of nonidentity rational Eichler transvections converges
+to the identity while staying in one fixed principal stage.}
+
+\subtree{
+\taxon{Proof}
+\p{Write #{B(x,y)=Q(x+y)-Q(x)-Q(y)} for the unhalved polar
+form. Choose #{u\ne0} with #{Q(u)=0}. Nondegeneracy makes
+#{B(u,-)} a nonzero functional, so its kernel #{u^\perp} has
+dimension #{d-1\geq2}. It contains the line #{\mathbb Q u};
+choose #{w\in u^\perp\setminus\mathbb Q u}. The
+Eichler transvection of \ref{fcap-002M} is
+
+##{T=E_{u,w}\in SO(Q),\qquad T^m=E_{u,mw}
+\quad(m\in\mathbb Z).}
+
+The power formula follows from the additive composition law there.}
+
+\p{Every nonzero integer power is nonidentity. Indeed, if
+#{E_{u,v}=1} with #{v\in u^\perp}, its formula on #{x\in u^\perp}
+reduces to
+
+##{E_{u,v}(x)-x=-B(x,v)u.}
+
+Since #{u\ne0}, this forces #{v\in(u^\perp)^\perp}.
+Nondegeneracy and finite dimension give
+#{(u^\perp)^\perp=\mathbb Q u}: the left side has dimension one
+and contains #{u}. Taking #{v=mw}, with #{m\ne0}, contradicts
+the choice of #{w}.}
+
+\p{Apply the tuple's rational membership condition to the single
+element #{T}. There is a finite set of primes #{S} such that
+#{T_p\in U_p^{SO}} for every #{p\notin S}. Each reference is a
+subgroup, so every power #{T_p^{n!}} belongs there too. Consequently
+all terms of the sequence
+
+##{g_n=\delta_f^{SO}(T^{n!})\quad(n\geq1)}
+
+belong to the same principal stage
+
+##{SO_S(U)=\prod_{p\in S}SO_p\times
+\prod_{p\notin S}U_p^{SO}.}
+
+The identity also belongs to this stage. The exceptional set is
+independent of #{n}; separate exceptional sets for each term would
+not suffice for this convergence argument.}
+
+\p{Fix a prime #{p}. With the valuation normalized by #{v_p(p)=1},
+
+##{v_p(n!)\geq\lfloor n/p\rfloor\longrightarrow\infty,
+\qquad n!\longrightarrow0\quad\text{in }\mathbb Q_p.}
+
+Scalar extension of the formula for #{T} gives
+#{T_p^{n!}=E_{u_p,n!w_p}}. In any fixed local basis, the entries of
+#{E_{u_p,tw_p}} are polynomials in #{t}, with value the identity
+at #{t=0}. Its inverse is #{E_{u_p,-tw_p}}, whose entries have the
+same property. Hence #{T_p^{n!}\to1} in the canonical inverse-graph
+topology of \ref{fcap-0044}. For #{p\notin S}, the convergence
+also holds in the subgroup topology of #{U_p^{SO}}.}
+
+\p{Coordinatewise convergence is convergence in the product topology
+of this one stage. Its inclusion into the restricted product is
+continuous by \ref{fcap-004F}, so #{g_n\to1} in #{SO_f(U)}.
+The rational diagonal is injective by \ref{fcap-004K}; since
+#{n!\ne0}, every #{g_n\ne1}. If the diagonal image were discrete,
+an ambient neighborhood would meet it only at the identity, contrary
+to convergence of this sequence.}
+}
+
+\p{In the explicit matrix of \ref{fcap-002N}, take #{t=n!}.
+Its off-diagonal entries tend to zero at every finite prime,
+whereas the real entry #{t} grows without bound. This exhibits
+what is lost on forgetting the real factor in \ref{fcap-004L}.
+In dimension two, #{u^\perp=\mathbb Q u}, so the required
+parameter does not exist. No assertion about anisotropic forms
+or universal finite-diagonal nondiscreteness follows.}
+
+\p{The transvection input is the general-field calculation in
+\ref{fcap-002M}; its totally singular special case is
+\citet{III.1.7 and formula (1), pp. 73-74}{chevalley1954algebraic}.
+Chevalley's displayed formula assumes both parameters lie in a
+totally singular subspace; the proof here uses the already established
+arbitrary-#{Q(w)} formula. The finite-stage topology is grounded in
+\citet{Theorem 3.6, pp. 6-8}{conrad2011adelic}.
+The factorial argument above is a deduction from these inputs.
+Its convergence statement is also
+\leanref/tauceti{TauCeti.QuadraticMap.OrthogonalCompactOpens.tendsto_finiteAdelicSpecialOrthogonalDiagonal_transvection_factorial};
+that statement needs the two polar identities but not the extra
+nondegeneracy and dimension assumptions used to obtain a nontrivial
+sequence.}

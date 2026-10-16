@@ -1,0 +1,90 @@
+\import{fcap-macros}
+\meta{agent-authored}{true}
+\tag{fcap}
+\tag{spin}
+\tag{quadratic-forms}
+
+\taxon{Definition}
+\title{The finite adelic spinor norm and its reference images}
+
+\p{Let #{Q} be nondegenerate on a finite-dimensional rational
+space #{V}, and choose a
+\vocabk{compatible compact-open reference tuple}{fcap-004C} #{U}.
+To collect the local spinor obstructions of one restricted SO tuple,
+the target must retain the images of its chosen reference subgroups.
+For each prime #{p}, put
+
+##{C_p=\mathbb Q_p^{\times}/(\mathbb Q_p^{\times})^2,\qquad
+\theta_p=\nu_{Q_p}:SO_p\longrightarrow C_p,}
+
+using the reverse-norm spinor norm of \ref{fcap-0023}, with
+multiplicative notation. Give #{C_p} its quotient topology.
+Define the \newvocab{spinor-norm reference image} and the
+\newvocab{finite adelic square-class target} by
+
+##{I_p=\theta_p(U_p^{SO}),\qquad
+C_f(U)=\prod_p'(C_p,I_p).}
+
+The restricted-product notation and topology are those of
+\ref{fcap-004F}; explicitly #{(c_p)_p\in C_f(U)} means
+#{c_p\in I_p} for all but finitely many #{p}.}
+
+\p{Each #{C_p} is discrete, including at #{p=2}. Indeed,
+\ref{fcap-0046} proves that the square subgroup is open, using
+\citet{VI.2, Theorem 2.19 and Corollary 2.20, p. 161}{lam2005quadratic}.
+Every coset is then open, so every singleton in the quotient is open.
+The same local result proves that #{\theta_p} is continuous.
+Since #{U_p^{SO}} is compact, its image #{I_p} is compact. A compact
+discrete set is finite: its open singleton cover has a finite subcover.
+Thus #{I_p} is a finite open subgroup of #{C_p}, and the restricted
+product has the compact-open references required by \ref{fcap-004F}.}
+
+\p{The \newvocab{finite adelic spinor norm} is the continuous
+homomorphism
+
+##{\begin{aligned}
+\Theta:SO_f(U)&\longrightarrow C_f(U),\\
+(g_p)_p&\longmapsto(\theta_p(g_p))_p.
+\end{aligned}}
+
+For if #{g_p\in U_p^{SO}} outside a finite set #{S}, then
+#{\theta_p(g_p)\in I_p} outside that same set. This proves
+restricted membership, and the local homomorphism laws give the
+global homomorphism law. Continuity is the component-map argument
+of \ref{fcap-004J}: on each principal stage the map is the product
+of the continuous maps #{SO_p\to C_p} for #{p\in S} and their
+restrictions #{U_p^{SO}\to I_p} elsewhere, followed by the continuous
+target-stage inclusion. The open stages cover the domain.}
+
+\p{For example, a tuple equal to #{g\in U_\ell^{SO}} at one
+prime #{\ell} and to the identity elsewhere maps to the tuple
+with #{\theta_\ell(g)\in I_\ell} at #{\ell} and identity elsewhere.
+It therefore lies in the target's product reference #{\prod_p I_p}.
+This describes the actual reference condition without replacing
+#{I_p} by the square classes of local units or asserting that it
+is all of #{C_p}.}
+
+\p{If #{\dim V=0} or #{1}, every local #{SO_p} is trivial.
+In dimension one a linear automorphism is scalar multiplication,
+and its determinant-one condition forces that scalar to be one;
+dimension zero has only the identity. Therefore every #{I_p=\{1\}}
+and #{\Theta} is the trivial homomorphism. The ambient square-class
+groups #{C_p} need not be trivial. No surjectivity of #{\Theta}
+is asserted in any dimension.}
+
+\p{This construction combines the local square theorem with the
+finite-stage functoriality described in
+\citet{Theorem 3.6 and the following paragraph, pp. 6-8}{conrad2011adelic}.
+The actual-image choice is
+\leanref/tauceti{TauCeti.QuadraticMap.OrthogonalCompactOpens.localSpinorNormImage},
+and its openness is
+\leanref/tauceti{TauCeti.QuadraticMap.OrthogonalCompactOpens.isOpen_localSpinorNormImage}.
+The target and continuous map are
+\leanref/tauceti{TauCeti.QuadraticMap.OrthogonalCompactOpens.finiteAdelicSquareClasses}
+and
+\leanref/tauceti{TauCeti.QuadraticMap.OrthogonalCompactOpens.continuous_adelicSpinorNorm}.
+These use the same chosen references and nondegeneracy assumption.
+The low-rank image statement is
+\leanref/tauceti{TauCeti.QuadraticMap.OrthogonalCompactOpens.localSpinorNormImage_eq_bot_of_finrank_le_one}.
+The compactness and finiteness of the images are the continuous-image
+argument given above, not a separate square-class count.}
