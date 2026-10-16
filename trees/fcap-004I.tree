@@ -1,0 +1,45 @@
+\import{fcap-macros}
+\meta{agent-authored}{true}
+\tag{fcap}
+\tag{spin}
+\tag{quadratic-forms}
+
+\taxon{Example}
+\title{A moving prime separates two topologies}
+
+\p{Use the hyperbolic plane #{Q(x,y)=xy} and the integral orthogonal
+references of the example in \ref{fcap-004F}. Enumerate the rational
+primes without repetition as #{p_1,p_2,\ldots}. Define #{x_n\in O_f(U)}
+by
+
+##{(x_n)_p=\begin{cases}
+\operatorname{diag}(p_n,p_n^{-1})&p=p_n,\\
+1&p\ne p_n.
+\end{cases}}
+
+The exceptional diagonal matrix preserves #{xy}, and every other
+component is the identity. Thus #{x_n} belongs to the principal
+stage #{O_{\{p_n\}}(U)}.}
+
+\p{For each fixed prime #{p}, the coordinate #{(x_n)_p} is the
+identity for all but at most one #{n}. Hence #{x_n\to1} in the
+topology inherited from the unrestricted product #{\prod_pO_p}.
+Explicitly, a basic product neighborhood of the identity restricts
+only a finite set #{F} of coordinates. Once the moving prime has
+passed every prime in #{F}, all those coordinates equal the identity,
+so the tuple belongs to that neighborhood.}
+
+\p{In contrast, #{x_n\notin K(U)=\prod_pU_p^O} for every #{n}:
+the entry #{p_n^{-1}} is not in #{\mathbb Z_{p_n}}, so its matrix
+does not preserve the standard integral lattice. Since #{K(U)} is
+an open identity neighborhood in the restricted-product topology,
+the sequence does not converge to the identity there. Coordinate
+continuity in \ref{fcap-004F} gives one topology inclusion; this
+sequence proves that the restricted-product topology is strictly
+finer in this example.}
+
+\p{For the classical open-stage topology, see
+\citet{Section 4 opening, p. 9}{conrad2011adelic} and its
+finite-stage formula in Theorem 3.6. The calculation above isolates
+what that topology detects: the nonintegral coordinate keeps moving,
+although every fixed coordinate eventually becomes the identity.}

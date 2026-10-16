@@ -1,0 +1,185 @@
+\import{fcap-macros}
+\meta{agent-authored}{true}
+\tag{fcap}
+\tag{spin}
+\tag{quadratic-forms}
+
+\taxon{Proposition}
+\title{Adelic component maps and sign kernels}
+\related{\ref{spin-000N}}
+
+\p{Let #{Q} be a nondegenerate quadratic form on a rational vector
+space of finite dimension #{n}, with a compatible reference tuple
+#{U} as in \ref{fcap-004C}. Let #{R} be any set of primes. The local
+maps #{\rho_p:\Spin_p\to SO_p} and #{i_p:SO_p\hookrightarrow O_p}
+induce continuous group homomorphisms
+
+##{\begin{gathered}
+\Spin_f(U)\xrightarrow{\rho_f}SO_f(U)\xrightarrow{i_f}O_f(U),\\
+\Spin_f^R(U)\xrightarrow{\rho^R}SO_f^R(U)\xrightarrow{i^R}O_f^R(U),\\
+\Spin_{\mathbb A}(U)\xrightarrow{\rho_{\mathbb A}}
+SO_{\mathbb A}(U)\xrightarrow{i_{\mathbb A}}O_{\mathbb A}(U).
+\end{gathered}}
+
+The groups are defined in \ref{fcap-004F}, \ref{fcap-004G} and
+\ref{fcap-004H}. Each #{i} is injective, with image exactly the
+orthogonal tuples of determinant one at every retained place,
+including the real place for the full group. These maps commute
+with forgetting the real component and with deleting the primes in #{R}.}
+
+\p{If #{n>0}, their Spin projection kernels are, as groups,
+
+##{\begin{aligned}
+\ker\rho_f&\cong\prod_p\{1,-1\},\\
+\ker\rho^R&\cong\prod_{p\notin R}\{1,-1\},\\
+\ker\rho_{\mathbb A}&\cong\{1,-1\}\times\prod_p\{1,-1\}.
+\end{aligned}}
+
+Every sign family occurs, with an independent real sign in the full
+case. These are algebraic identifications. If #{n=0}, all the groups
+and kernels above are singletons. If #{R} contains every prime, the
+away groups and the empty sign product are singletons even when #{n>0}.}
+
+\subtree{
+\taxon{Proof}
+\p{First consider continuous homomorphisms #{f_p:G_p\to H_p}
+between the local groups of two restricted products, with
+#{f_p(U_p)\subseteq U'_p} for every prime. If #{g} has exceptional
+set #{S}, the tuple #{(f_p(g_p))_p} has exceptional set contained in
+#{S}. Thus coordinatewise application defines a homomorphism
+#{f:G_f(U)\to H_f(U')}. On each principal stage it factors through
+
+##{G_S(U)\longrightarrow H_S(U')\longrightarrow H_f(U').}
+
+For #{p\in S} use #{f_p}; outside #{S} use its continuous restriction
+#{U_p\to U'_p}, with the subgroup topologies. The resulting product
+map is continuous. The second map is the continuous stage inclusion.
+Since the source stages form an open cover, #{f} is continuous on
+the whole restricted product. The same proof on the index set
+#{\{p:p\notin R\}} gives the arbitrary-away construction.}
+
+\p{Compatibility of #{U} says exactly that #{\rho_p} preserves
+the Spin and SO references, while #{U_p^{SO}=i_p^{-1}(U_p^O)}
+says that #{i_p} preserves the SO and O references. Their local
+continuity is \ref{fcap-0045}, so the preceding argument gives the
+finite and away maps. For the full maps take the product with the
+actual continuous real maps #{\rho_\infty} and #{i_\infty} from
+that same local result. Products of continuous homomorphisms are
+continuous homomorphisms. In particular
+
+##{\rho_{\mathbb A}(s_\infty,s_f)
+=(\rho_\infty(s_\infty),\rho_f(s_f)).}
+}
+
+\p{Each local #{i_p} is injective, so equality of images determines
+every coordinate and proves injectivity of #{i_f} and #{i^R}.
+The real inclusion gives injectivity for #{i_{\mathbb A}} too.
+Their images have determinant one at every place by definition.
+Conversely, let an orthogonal restricted tuple #{g} have determinant
+one everywhere. Each #{g_p} has a unique preimage #{h_p\in SO_p}.
+If #{S} is an exceptional set for #{g}, then for #{p\notin S},
+
+##{g_p\in U_p^O\quad\Longrightarrow\quad
+h_p\in i_p^{-1}(U_p^O)=U_p^{SO}.}
+
+Thus #{h} is restricted and maps to #{g}. Restricting the argument
+to #{p\notin R} proves the away image criterion. In the full case,
+the real determinant-one condition supplies the unique real SO
+preimage as well. If no prime remains, the away criterion is vacuous
+and both sides are singleton groups.}
+
+\p{Write #{\pi_f^{\Spin}} and #{\pi_f^{SO}} for the projections
+that forget the real component. The square}
+
+\<html:div>[style]{overflow-x: auto;}{
+\<html:div>[style]{min-width: 260px; text-align: center;}{
+\texfig{
+\begin{tikzcd}[column sep=large, row sep=large]
+\Spin_{\mathbb A}(U) \arrow[r,"\rho_{\mathbb A}"]
+  \arrow[d,"\pi_f^{\Spin}"']
+  & SO_{\mathbb A}(U) \arrow[d,"\pi_f^{SO}"] \\
+\Spin_f(U) \arrow[r,"\rho_f"'] & SO_f(U)
+\end{tikzcd}
+}
+}
+}
+
+\p{commutes because either path sends #{(s_\infty,(s_p)_p)} to
+#{(\rho_p(s_p))_p}. Replacing Spin and SO by SO and O gives the
+same square for #{i}, since both paths retain #{(i_p(h_p))_p}.
+Deleting #{R} commutes with each map for the same reason: both
+orders give #{\rho_p(s_p)} or #{i_p(h_p)} at every #{p\notin R}.
+This also proves the full-to-away identities by composition.}
+
+\p{Suppose now that #{n>0}. The scalar-kernel theorem of
+\ref{fcap-001C}, applied over #{\mathbb Q_p} and #{\mathbb R},
+says that the local Spin projection kernel consists of the two
+scalar elements #{1,-1}. Scalar extension preserves dimension and
+nondegeneracy. An existing restricted Spin element therefore lies
+in the kernel exactly when each retained coordinate is a scalar
+sign; in the full case the real component must also be a sign.}
+
+\p{It remains to show that arbitrary choices of signs really are
+restricted. Apply the rational membership axiom of \ref{fcap-004C}
+to the single rational Spin element #{-1}, which exists by
+\ref{fcap-001C}. Scalar extension carries it to the local scalar
+#{-1}: the Clifford algebra map preserves #{1} and negation, as
+in \ref{fcap-003N}. There is consequently one finite set #{F} such
+that #{-1\in U_p^{\Spin}} for every #{p\notin F}. Also
+#{1\in U_p^{\Spin}} at every prime. Every family
+#{(\varepsilon_p)_p\in\prod_p\{1,-1\}} is therefore restricted,
+with its exceptional set contained in this same #{F}, independently
+of the choices of signs. It lies in the projection kernel by the
+local scalar-kernel theorem.}
+
+\p{Sending a sign family to its scalar tuple is injective because
+#{1\ne-1} over these characteristic-zero fields, and is surjective
+onto the kernel by the existing-element criterion. It respects
+multiplication coordinatewise, proving the finite group isomorphism.
+Restricting the family and #{F} to the complement of #{R} gives the
+away isomorphism, including an empty complement. The real scalar
+sign is unrestricted and independent, giving the full product.
+Finally, if #{n=0}, \ref{fcap-003H} identifies the actual generated
+Spin carrier with the identity subgroup; the orthogonal and special
+orthogonal groups are also trivial. Scalar extension and products
+preserve these singleton descriptions, so no extra scalar #{-1}
+is introduced in that case.}
+}
+
+\p{For example, in positive dimension choose #{\varepsilon_2=-1}
+and #{\varepsilon_p=1} at every other prime. This is a kernel
+element distinct from both constant sign families. In the full
+group either real sign can accompany it. These projection kernels
+are different from the kernel of the spinor norm in \ref{fcap-0023}:
+the present maps start in Spin and record its scalar ambiguity.}
+
+\p{The classical finite-stage functoriality is described in
+\citet{Theorem 3.6 and the paragraph following its proof, pp. 6-8}{conrad2011adelic}.
+The real scalar-kernel prototype appears in
+\citet{Section 1.8, Proposition 1.21, pp. 39-40}{gallier2014clifford}.
+Gallier's Definition 1.6 uses norm #{\pm1}; the local input here is
+the norm-one field theorem in \ref{fcap-001C}. In particular this
+argument makes no claim that the Spin projections are surjective.}
+
+\p{The generic construction and its continuity are supported by
+\leanref/tauceti{TauCeti.restrictedProductMapOfForall} and
+\leanref/tauceti{TauCeti.continuous_restrictedProductMapOfForall}.
+The specialized continuity results are
+\leanref/tauceti{TauCeti.QuadraticMap.OrthogonalCompactOpens.continuous_finiteAdelicSpinToSpecialOrthogonal},
+\leanref/tauceti{TauCeti.QuadraticMap.OrthogonalCompactOpens.continuous_awayAdelicSpinToSpecialOrthogonal}
+and \leanref/tauceti{TauCeti.QuadraticMap.OrthogonalCompactOpens.continuous_fullAdelicSpinToSpecialOrthogonal}.
+For SO inclusion, the image criteria are
+\leanref/tauceti{TauCeti.QuadraticMap.OrthogonalCompactOpens.mem_range_finiteAdelicSpecialOrthogonalToOrthogonal_iff},
+\leanref/tauceti{TauCeti.QuadraticMap.OrthogonalCompactOpens.mem_range_awayAdelicSpecialOrthogonalToOrthogonal_iff}
+and \leanref/tauceti{TauCeti.QuadraticMap.OrthogonalCompactOpens.mem_range_fullAdelicSpecialOrthogonalToOrthogonal_iff}.}
+
+\p{The displayed square is
+\leanref/tauceti{TauCeti.QuadraticMap.OrthogonalCompactOpens.fullAdelicSpecialOrthogonalToFinite_comp_fullAdelicSpinToSpecialOrthogonal};
+deletion compatibility is
+\leanref/tauceti{TauCeti.QuadraticMap.OrthogonalCompactOpens.awayAdelicSpinToSpecialOrthogonal_comp_restrictAway}.
+The existing-element kernel criteria are
+\leanref/tauceti{TauCeti.QuadraticMap.OrthogonalCompactOpens.mem_ker_finiteAdelicSpinToSpecialOrthogonal_iff},
+\leanref/tauceti{TauCeti.QuadraticMap.OrthogonalCompactOpens.mem_ker_awayAdelicSpinToSpecialOrthogonal_iff}
+and \leanref/tauceti{TauCeti.QuadraticMap.OrthogonalCompactOpens.mem_ker_fullAdelicSpinToSpecialOrthogonal_iff}.
+They support the coordinate criteria; the proof that every sign
+family occurs is the additional rational #{-1} argument above.}
