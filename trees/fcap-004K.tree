@@ -1,0 +1,105 @@
+\import{fcap-macros}
+\meta{agent-authored}{true}
+\tag{fcap}
+\tag{spin}
+\tag{quadratic-forms}
+
+\taxon{Definition}
+\title{Rational diagonal subgroups}
+
+\p{Let #{Q} be a nondegenerate quadratic form on a finite-dimensional
+rational space #{V}, and let #{U} be a
+\vocabk{compatible compact-open reference tuple}{fcap-004C}.
+For #{G=O,SO,\Spin}, write #{G(Q)} for the rational group,
+#{g_p} for the scalar extension of #{g\in G(Q)} to #{\mathbb Q_p},
+and #{g_\infty} for its extension to #{\mathbb R}. Spin always means
+the actual vector-generated even reverse-norm-one carrier.
+The \newvocab{rational diagonal homomorphisms} are
+
+##{\begin{aligned}
+\delta_f^G:G(Q)&\longrightarrow G_f(U),
+&g&\longmapsto(g_p)_p,\\
+\delta_{\mathbb A}^G:G(Q)&\longrightarrow G_{\mathbb A}(U),
+&g&\longmapsto(g_\infty,(g_p)_p),\\
+\delta_R^G:G(Q)&\longrightarrow G_f^R(U),
+&g&\longmapsto(g_p)_{p\notin R},
+\end{aligned}}
+
+where #{R} is any set of rational primes. The targets are the finite,
+full and away groups of \ref{fcap-004F}, \ref{fcap-004H} and
+\ref{fcap-004G}. Their images are the corresponding
+\newvocab{rational diagonal subgroups}.}
+
+\p{For O and Spin, the tuple axioms put each rational point in its
+reference subgroup at all but finitely many primes. For SO the same
+assertion follows from #{U_p^{SO}=i_p^{-1}(U_p^O)}, because
+determinant commutes with scalar extension. Thus the finite tuples
+are restricted. Deleting coordinates preserves this property, and
+the real factor imposes no reference condition. Scalar extension
+preserves products and identities, proving the homomorphism assertions.}
+
+\p{For the hyperbolic form #{Q(x,y)=xy}, use the standard-basis references.
+The matrix #{g=\operatorname{diag}(2,1/2)} gives a rational SO diagonal.
+Its finite components are integral except at #{2}, as computed in
+\ref{fcap-004D}. The real component is the same rational matrix
+viewed over #{\mathbb R}. Deleting the #{2}-coordinate puts its
+away image in the product of the remaining reference subgroups.}
+
+\p{The finite and full diagonals are injective. The away diagonal is
+injective whenever at least one prime lies outside #{R}; in particular
+this holds for finite #{R}. If every prime is removed, its target is
+the singleton group, so the away map is injective only when #{G(Q)}
+is itself trivial.}
+
+\subtree{
+\taxon{Proof}
+\p{Scalar extension to any one retained completion detects a rational
+O or SO element: in a rational basis, equality of the extended matrices
+implies equality of every rational entry, because the field map is
+injective. For Spin, the Clifford scalar-extension isomorphism of
+\ref{fcap-003V} identifies its underlying Clifford map with
+
+##{\Cl_{\mathbb Q}(Q)\longrightarrow
+L\otimes_{\mathbb Q}\Cl_{\mathbb Q}(Q),
+\qquad c\longmapsto1\otimes c,}
+
+where #{L=\mathbb R} or #{\mathbb Q_p}. This map is injective:
+the extension of a rational vector-space basis is an #{L}-basis,
+so zero extended coefficients force every original coefficient to
+vanish. Restricting to the actual Spin carrier preserves injectivity.
+Equality of diagonal tuples therefore implies equality at one
+completion and hence equality of their rational arguments. The finite
+product retains, for example, the prime #{2}; the full product also
+retains the real place. The away argument requires the stated
+nonempty complement. The empty product is a singleton.}
+}
+
+\p{The diagonals commute with the component maps
+#{\Spin\to SO\to O} of \ref{fcap-004J}. At each place this is the
+scalar-extension action identity of \ref{fcap-003N}; for SO to O it
+is the equality of underlying matrices. The full-to-finite projection
+and coordinate restriction satisfy
+
+##{\pi_f\delta_{\mathbb A}^G=\delta_f^G,
+\qquad r_R\delta_f^G=\delta_R^G.}
+
+These are equalities of homomorphisms, with no topology assigned to
+#{G(Q)}. If the rational domain is given the discrete topology, the
+maps are continuous; injectivity alone does not make a map a
+topological embedding.}
+
+\p{The rational-point diagonal in classical affine full adelic
+points is discussed in \citet{Example 2.3, p. 3}{conrad2011adelic}.
+Here restricted membership follows directly from the chosen tuple
+axioms. TauCeti constructs the finite diagonals in
+\leanref/tauceti{TauCeti.QuadraticMap.OrthogonalCompactOpens.finiteAdelicOrthogonalDiagonal},
+\leanref/tauceti{TauCeti.QuadraticMap.OrthogonalCompactOpens.finiteAdelicSpecialOrthogonalDiagonal}
+and \leanref/tauceti{TauCeti.QuadraticMap.OrthogonalCompactOpens.finiteAdelicSpinDiagonal}.
+The full orthogonal construction is
+\leanref/tauceti{TauCeti.QuadraticMap.OrthogonalCompactOpens.fullAdelicOrthogonalDiagonal};
+the away injectivity condition is explicit in
+\leanref/tauceti{TauCeti.QuadraticMap.OrthogonalCompactOpens.awayAdelicSpecialOrthogonalDiagonal_injective}.
+The Spin scalar-extension input is
+\leanref/tauceti{CliffordAlgebra.spinGroupBaseChange_injective},
+whose faithful, flat scalar-extension hypotheses hold for these fields.
+The SO and Spin full and away maps use the same construction.}
