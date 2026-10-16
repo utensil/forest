@@ -1,0 +1,100 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Definition}
+\title{Polynomial observables and positive expectations}
+\author/literal{Kepler}
+\date{2026-10-16}
+
+\p{For the \vocabk{Gaussian probability law}{fdip-0005} #{\mu_Q},
+an \newvocab{integrable observable} is a Borel measurable function
+#{F:X\to\mathbb R} with #{\int_X|F|\,d\mu_Q<\infty}.
+Its \newvocab{Gaussian expectation} is
+##{\begin{aligned}
+\langle F\rangle_Q&=\int_X F\,d\mu_Q\\
+&=\frac{1}{Z_Q}\int_X F(\phi)w_Q(\phi)\,d\phi.
+\end{aligned}}
+This is the continuous version of an
+\vocabk{expectation}{ftip-000A}; absolute integrability replaces the
+automatic convergence of a finite sum. The real-spin integration
+convention is \citet{Definition 8.1 and Equation (8.3), p. 381}{friedli2017statistical}.}
+
+\p{Let #{\mathcal P(X)} be the real algebra of polynomials in the
+coordinate functions #{\phi\mapsto\phi_v}. Every member is integrable.
+On this algebra, #{P\mapsto\langle P\rangle_Q} is a
+\newvocab{positive normalized state}: it is real linear, sends the
+constant one to one, and satisfies
+##{\langle P^2\rangle_Q\geq 0\qquad(P\in\mathcal P(X)).}
+More generally, a pointwise nonnegative polynomial has nonnegative
+expectation. The following bound proves the polynomial domain using the
+orthogonal coordinates of
+\citet{Lemma B.54, p. 504}{friedli2017statistical}.}
+
+\proof{
+\p{For #{k\geq 0} an integer and #{a>0}, choose an integer #{M\geq 0}
+with #{2M\geq k}, and put #{c=a/4}. For #{r\geq 1}, the exponential
+series gives
+##{\begin{aligned}
+\exp(c r^2)&\geq\frac{(c r^2)^M}{M!},\\
+r^k\exp(-c r^2)&\leq M!c^{-M}.
+\end{aligned}}
+For #{0\leq r\leq 1}, the left side of the second inequality is at most
+one. Thus, with #{C=\max(1,M!c^{-M})},
+##{\begin{aligned}
+&|x|^k\exp(-a x^2/2)\\
+&\quad\leq C\exp(-a x^2/4).
+\end{aligned}}
+The right side is integrable by the one-dimensional estimate in
+\ref{fdip-0005}. This includes #{k=M=0}.}
+
+\p{Use #{\phi=Uy} and the positive eigenvalues #{\lambda_i} from
+\ref{fdip-0005}. A polynomial remains a finite sum of monomials after
+this substitution, with nonnegative integer exponents #{\alpha_i}:
+##{P(Uy)=\sum_\alpha c_\alpha\prod_{i=1}^n y_i^{\alpha_i}.}
+Put #{g_i(y_i)=\exp(-\lambda_i y_i^2/2)}.
+The triangle inequality gives
+##{\begin{aligned}
+&|P(Uy)|\prod_i g_i(y_i)\\
+&\quad\leq\sum_\alpha|c_\alpha|
+      \prod_i\left(|y_i|^{\alpha_i}g_i(y_i)\right).
+\end{aligned}}
+Each product has finite integral by Tonelli and the one-dimensional bound.
+The sum is finite, and the orthogonal substitution preserves measure.
+Hence #{\int_X|P|w_Q\,d\phi<\infty}. This applies to #{P^2} as well.
+Linearity and order positivity now follow from the integral, while
+#{\langle 1\rangle_Q=Z_Q/Z_Q=1}.}
+}
+
+\p{Constants have #{\langle c\rangle_Q=c}. Since
+#{S_Q(-\phi)=S_Q(\phi)}, the substitution #{\phi\mapsto-\phi}
+preserves the measure and weight. For any integrable odd observable,
+#{F(-\phi)=-F(\phi)}, it gives
+#{\langle F\rangle_Q=-\langle F\rangle_Q}, hence
+#{\langle F\rangle_Q=0}. In particular,
+#{\langle\phi_v\rangle_Q=0} for every vertex.}
+
+\p{The \vocabk{covariance}{ftip-008H} of two coordinate fields is the
+centered two-point expectation
+##{\begin{aligned}
+&\operatorname{Cov}_Q(u,v)\\
+&\quad=\left\langle
+      (\phi_u-\langle\phi_u\rangle_Q)
+      (\phi_v-\langle\phi_v\rangle_Q)
+     \right\rangle_Q\\
+&\quad=\langle\phi_u\phi_v\rangle_Q.
+\end{aligned}}
+It is well-defined by polynomial integrability. The partition function
+#{Z_Q}, this two-point expectation, and an expectation of another
+observable are different quantities. Computing the covariance requires a
+further argument.}
+
+\p{The larger space of all integrable observables is a real vector
+space, but need not be closed under multiplication; the state above is
+asserted on the polynomial algebra. Nor is every function integrable:
+#{F=\exp(S_Q)} has #{Fw_Q=1}, whose integral over #{X} is infinite.}
+
+\p{TauCeti's
+\leanref/tauceti{TauCeti.integrable_eval_mul_gaussianEnvelope}
+proves integrability of a one-variable polynomial times a positive-variance
+Gaussian envelope. The finite products and orthogonal substitution above
+extend that component statement to the polynomial domain used here.}
