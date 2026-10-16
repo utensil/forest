@@ -1,0 +1,119 @@
+\import{fcap-macros}
+\meta{agent-authored}{true}
+\tag{fcap}
+\tag{spin}
+\tag{quadratic-forms}
+
+\taxon{Proposition}
+\title{Full rational diagonals are discrete under lattice containment}
+
+\p{Let #{Q} be nondegenerate on a finite-dimensional rational space
+#{V}, choose a \vocabk{compatible compact-open reference tuple}{fcap-004C}
+#{U}, and fix a rational basis #{b}. Let #{L_p} be its
+#{\mathbb Z_p}-span and #{H_p=\{g\in O_p:gL_p=L_p\}} as in
+\ref{fcap-004D}. Assume the \em{eventual lattice containment}
+
+##{U_p^O\subseteq H_p\quad\text{for all but finitely many primes }p.}
+
+Then each \vocabk{rational diagonal subgroup}{fcap-004K}
+
+##{\delta_{\mathbb A}^O(O(Q)),\qquad
+\delta_{\mathbb A}^{SO}(SO(Q)),\qquad
+\delta_{\mathbb A}^{\Spin}(\Spin(Q))}
+
+is discrete in its full adelic group. In particular this holds for
+the integral tuple of \ref{fcap-004D}, its rational-basis changes
+and its finite shrinkings from \ref{fcap-004E}.}
+
+\subtree{
+\taxon{Proof}
+\p{Put #{W_p=U_p^O\cap H_p}. The groups #{W_p} are open, since
+both factors are open by \ref{fcap-004C} and \ref{fcap-004D}.
+Choose a finite set #{F} outside which #{U_p^O\subseteq H_p};
+then #{W_p=U_p^O} for #{p\notin F}. Thus
+
+##{K_W=\prod_p W_p\subseteq O_f(U)}
+
+is an open identity neighborhood. Indeed, inside the open principal
+stage #{O_F(U)} it imposes an open condition on only the finitely
+many coordinates in #{F}, and leaves the other reference factors
+unchanged. This uses the stage topology of \ref{fcap-004F}.}
+
+\p{Let #{M_b(g_\infty)} be the real matrix of #{g_\infty\in O_\infty}
+in the extended basis, and put
+
+##{A=\left\{g_\infty\in O_\infty:
+\left|M_b(g_\infty)_{ij}-\delta_{ij}\right|<\tfrac12
+\text{ for every }i,j\right\}.}
+
+Here #{\delta_{ij}} is the Kronecker delta. The finitely many matrix
+entries are continuous by \ref{fcap-0044}, so #{A} is open and
+contains the identity. Hence #{A\times K_W} is an open identity
+neighborhood in #{O_{\mathbb A}(U)}.}
+
+\p{Suppose a rational #{g\in O(Q)} has diagonal in this
+neighborhood. Every #{g_p} stabilizes #{L_p}; therefore each entry
+of its rational matrix #{M_b(g)} belongs to #{\mathbb Z_p} at
+every prime. A reduced fraction #{a/d}, with #{d>0}, has this
+property only if #{d=1}: a prime divisor #{p} of #{d} does not
+divide #{a}, giving negative #{p}-adic valuation. Thus all the
+entries of #{M_b(g)} are integers. Their real values differ from
+#{\delta_{ij}} by less than #{1/2}; an integer with that property
+must equal #{\delta_{ij}}. Consequently #{g=1}. This isolates the
+identity in the orthogonal diagonal image. Translation by each
+diagonal element isolates every point of that image.}
+
+\p{Pull the neighborhood back under the continuous inclusion
+#{SO_{\mathbb A}(U)\to O_{\mathbb A}(U)} from \ref{fcap-004J}.
+Naturality from \ref{fcap-004K} shows that its intersection with
+the rational SO image contains only the identity: the underlying
+rational orthogonal transformation is already the identity.
+This proves SO discreteness.}
+
+\p{Pull this SO neighborhood back along the continuous map
+#{\rho_{\mathbb A}:\Spin_{\mathbb A}(U)\to SO_{\mathbb A}(U)}.
+A rational Spin point in this preimage has rational projection
+#{1}, by naturality and injectivity of the SO diagonal. If
+#{\dim V>0}, the field version of the scalar-kernel statement in
+\ref{fcap-001C} gives precisely #{s=1} or #{s=-1}.
+The real Spin group is Hausdorff, and the scalar elements #{1}
+and #{-1} are distinct there. Choose an open real identity
+neighborhood #{B_\infty} excluding #{-1}. Intersect the preceding
+preimage with #{B_\infty\times\Spin_f(U)}. The intersection is
+open and its rational diagonal points consist of #{1} alone.
+Translation proves Spin discreteness.}
+
+\p{If #{\dim V=0}, the actual vector-generated Spin carrier is
+#{\{1\}}, as in \ref{fcap-003H}; both orthogonal carriers are
+also singleton. The conclusion is immediate. In particular there
+is no extra scalar #{-1} in this generated zero-dimensional carrier.}
+
+\p{For the integral tuple, #{U_p^O=H_p} at every prime.
+Finite shrinking only replaces reference subgroups by smaller ones,
+so it preserves containment. Changing rational basis changes
+#{H_p} at only finitely many primes by \ref{fcap-004E}.
+Adjoin these primes to the exceptional set to retain the hypothesis.}
+}
+
+\p{The separation has two independent parts: finite-place integrality
+forces rational matrix entries to be integers, and the real bound
+then forces the identity matrix. The finite projection discards the
+second condition. With the rational groups given the discrete topology,
+injectivity and the proved discrete images make these full diagonals
+topological embeddings; this argument asserts no such property for
+the finite diagonals.}
+
+\p{\citet{Example 2.3, p. 3}{conrad2011adelic} proves discreteness
+for rational points in classical affine full adelic points. The proof
+above supplies the chosen-tuple version under its explicit containment
+hypothesis, using \ref{fcap-001C} for the Spin scalar kernel.
+The exact O and SO criteria are
+\leanref/tauceti{TauCeti.QuadraticMap.OrthogonalCompactOpens.discreteTopology_range_fullAdelicOrthogonalDiagonal_of_eventually_integral}
+and
+\leanref/tauceti{TauCeti.QuadraticMap.OrthogonalCompactOpens.discreteTopology_range_fullAdelicSpecialOrthogonalDiagonal_of_eventually_integral};
+these two formal statements even allow degenerate forms.
+TauCeti's
+\leanref/tauceti{TauCeti.QuadraticMap.OrthogonalCompactOpens.discreteTopology_range_fullAdelicSpinDiagonal}
+proves the Spin conclusion for every nondegenerate compatible tuple,
+using a separate eventual-containment theorem. The explicit containment
+assumption is retained here to expose the neighborhood argument.}
