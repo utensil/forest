@@ -1,0 +1,70 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Definition}
+\title{Weighted graph differentials and adjoints}
+\author/literal{Kepler}
+\date{2026-10-16}
+
+\p{Let #{V,E,s,h} be a
+\vocabk{finite incidence presentation}{fdip-0002}, with positive edge
+weights #{w(e)>0}. Its \vocabk{incidence map}{fdip-0002} is
+#{D:\mathbb R^V\to\mathbb R^E}, with matrix #{B}; put
+#{W=\operatorname{diag}(w(e))}. Which adjoint returns an edge field to a
+vertex field depends on the chosen pairings. The convention
+#{L=B^TWB} is that of
+\citet{Section 2.1, p. 4}{spielman2009effective}.}
+
+\p{Use the \vocabk{counting inner products}{fdip-0002} on both spaces
+first. The \newvocab{counting adjoint} #{D^*} is characterized by
+#{\langle Df,a\rangle_E=\langle f,D^*a\rangle_V}. Exchanging finite sums
+proves its matrix is #{B^T}:
+##{\begin{aligned}
+\langle Df,a\rangle_E
+  &=\sum_e\sum_v B_{ev}f(v)a(e)\\
+  &=\sum_v f(v)\sum_e B_{ev}a(e)\\
+  &=\langle f,B^Ta\rangle_V.
+\end{aligned}}
+The characterizing identity determines the adjoint uniquely: the difference
+of two possible outputs is orthogonal to every vertex field, hence to
+itself, and is zero.}
+
+\p{Alternatively, give the edge space the
+\newvocab{weighted inner product}
+##{\langle a,b\rangle_{E,w}=\sum_e w(e)a(e)b(e).}
+It is bilinear and symmetric. Its self-pairing is a sum of nonnegative
+terms; strict positivity of every weight makes it vanish only at zero.
+Keep the vertex pairing counting. Then
+##{\begin{aligned}
+\langle Df,a\rangle_{E,w}
+ &=\langle Df,Wa\rangle_E\\
+ &=\langle f,B^TWa\rangle_V.
+\end{aligned}}
+Thus the \newvocab{weighted adjoint} is #{D_w^\dagger=B^TW}.
+The \newvocab{weighted graph Laplacian} is the vertex operator
+##{L=D^*WD=D_w^\dagger D=B^TWB.}
+With the counting adjoint, #{D^*D} is the unit-weight operator; the
+general weighted expression is #{D^*WD}. Using #{D_w^\dagger D}
+instead includes the weights through the edge pairing. For a single edge
+#{0\to1} of weight #{c>0}, the two adjoints send an edge value #{a}
+to #{(-a,a)} and #{(-ca,ca)}, respectively.}
+
+\p{The Laplacian does not depend on the auxiliary edge orientations.
+Reverse any selection of edges, and let #{S} be the diagonal edge matrix
+whose entries are #{-1} on reversed edges and #{1} otherwise. The new
+incidence matrix is #{B'=SB}. Because #{S^T=S}, #{S^2=I} and
+#{SWS=W},
+##{\begin{aligned}
+(B')^TWB'&=B^TSWSB\\
+         &=B^TWB.
+\end{aligned}}
+An edge field representing the same oriented data changes as #{a'=Sa};
+its weighted pairing is preserved. A loop has a zero incidence row
+before and after reversal. Parallel edges remain distinct coordinates.
+This changes orientations, not endpoints or weights.}
+
+\p{Mathlib's \leanref{LinearMap.toMatrix_adjoint} identifies adjoint
+matrices with conjugate transposes in orthonormal bases. Over the reals
+this is transpose. The coordinate edge basis is orthonormal for counting,
+but not generally for the weighted pairing; the finite-sum calculation
+above accounts for the extra #{W}.}
