@@ -1,0 +1,61 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Definition}
+\title{Massive graph Green functions}
+\author/literal{Kepler}
+\date{2026-10-16}
+
+\p{Let #{V} be a nonempty finite vertex set, with positive edge weights,
+and let #{L} be its \vocabk{weighted graph Laplacian}{fdip-0007}.
+For #{m>0}, define the \newvocab{massive precision} and its
+\newvocab{Green operator} by
+##{Q_m=L+m^2I,\qquad G_m=Q_m^{-1}.}
+The inverse exists even when the graph is disconnected. Indeed, the
+[energy identity](fdip-0008) gives, for #{f\ne0},
+##{\begin{aligned}
+f^TQ_mf&=\sum_e w(e)(Df)(e)^2\\
+      &\quad+m^2\sum_v f(v)^2>0.
+\end{aligned}}
+Thus #{Q_m} is a \vocabk{positive precision parameter}{fdip-0004}.}
+
+\p{To construct the inverse, choose an orthonormal eigenbasis #{u_a}
+of the real symmetric matrix #{L}, with eigenvalues #{\lambda_a\ge0}.
+The energy identity proves this last inequality by evaluation on each
+unit eigenvector. Put #{q_a=\lambda_a+m^2>0}. Then
+##{\begin{aligned}
+Q_m&=\sum_a q_a u_au_a^T,\\
+G_m&=\sum_a q_a^{-1}u_au_a^T.
+\end{aligned}}
+Since #{u_a^Tu_b=\delta_{ab}} and #{\sum_a u_au_a^T=I}, multiplication
+gives #{Q_mG_m=G_mQ_m=I}. Also #{G_m^T=G_m}, and
+#{f^TG_mf=\sum_a q_a^{-1}(u_a^Tf)^2>0} for nonzero #{f}.}
+
+\p{The \newvocab{Green kernel} is the matrix entry
+#{G_m(v,w)} in the counting coordinate basis. Its column at #{w}
+is the unique field solving
+##{Q_mG_m(\cdot,w)=\delta_w,}
+where #{\delta_w(v)} is one at #{v=w} and zero elsewhere.
+For a source field #{j}, the unique solution of #{Q_mf=j} is
+#{f(v)=\sum_wG_m(v,w)j(w)}. No vertex-volume factor occurs because
+the vertex pairing and basis are counting.}
+
+\p{This convention has to be matched when comparing lattice Green
+functions. Wingate's lattice action uses a positive operator built from
+minus the backward-forward difference and a mass term
+\citet{Section 4, Equations (4.2)-(4.5), p. 3}{wingate2025lattice}.
+For unit spacing, that difference term has the sign of our #{L}.}
+
+\p{In \citet{Theorem 8.26, p. 399}{friedli2017statistical}, the massive
+lattice precision is
+##{Q=-\frac{1}{2d}\Delta+m^2I.}
+Here #{\Delta f(x)=\sum_{y\sim x}(f(y)-f(x))}. The factor #{1/(2d)}
+and the lattice boundary conditions belong to that normalization.
+Identifying their covariance with an inverse requires that precision,
+not an unscaled adjacency Laplacian.}
+
+\p{Mathlib's \leanref{Matrix.PosDef.isUnit} proves invertibility of a
+positive definite matrix, and \leanref{Matrix.PosDef.inv} proves
+positivity of its inverse. These apply to the matrix step after the
+graph-energy calculation supplies positivity. The kernel convention and
+its graph interpretation are specified here.}
