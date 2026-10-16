@@ -1,0 +1,98 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{Graph energy and the constant modes}
+\author/literal{Kepler}
+\date{2026-10-16}
+
+\p{For finite incidence data with positive edge weights #{w(e)>0}, the
+\vocabk{weighted graph Laplacian}{fdip-0007} #{L=B^TWB}
+is symmetric and positive semidefinite. Its kernel consists exactly of
+fields constant on each connected component of the underlying undirected
+graph. Here two vertices lie in the same component when a finite path
+of edges joins them, with edge orientation ignored. If there are #{k}
+components, then
+##{\dim\ker L=k.}
+The energy convention and the connected-graph kernel argument appear in
+\citet{Section 2.1, pp. 4-5}{spielman2009effective}; the proof below also
+allows disconnected carriers, loops and parallel edges.}
+
+\proof{
+\p{Since #{W^T=W}, one has #{L^T=L}. For vertex fields #{f,g}, the
+counting-adjoint identity gives
+##{\begin{aligned}
+&\langle f,Lg\rangle_V\\
+&\quad=\langle Bf,WB g\rangle_E\\
+&\quad=\sum_e w(e)(Df)(e)(Dg)(e).
+\end{aligned}}
+Taking #{g=f} yields the energy identity
+##{\begin{aligned}
+&\langle f,Lf\rangle_V\\
+&\quad=\sum_e w(e)(Df)(e)^2\ge0.
+\end{aligned}}
+Each member of #{E} occurs once. There is no factor #{1/2} in this
+\vocabk{quadratic form}{ca-0004}; an action defined as half of it uses a separate convention.}
+
+\p{If #{Lf=0}, the sum of nonnegative terms is zero. Since #{w(e)>0},
+every edge has #{f(h(e))=f(s(e))}. These equalities propagate along any
+unoriented path, so #{f} is constant on each component. Conversely, a
+componentwise constant field has #{Bf=0}, hence #{Lf=0}.
+The indicators of the nonempty components have disjoint supports and are
+linearly independent. Every componentwise constant field is the sum of
+these indicators multiplied by its component values. They therefore form
+a basis of the kernel, proving the dimension statement.}
+}
+
+\p{If #{V} is nonempty and connected, the kernel is the one-dimensional
+space spanned by the constant field #{\mathbf1_V}. Its positive unit mode is
+##{|V|^{-1/2}\mathbf1_V.}
+An isolated vertex contributes
+one component and one kernel basis vector. If #{V} is empty, the maps
+#{s,h:E\to V} force #{E} to be empty too: both the component count and
+kernel dimension are zero. Loops contribute zero energy, while distinct
+parallel edges each contribute their own positive summand.}
+
+\p{For the [alternating four-cycle](fdip-0003), put #{u=1+t}.
+Direct multiplication gives
+##{L_t=\begin{pmatrix}
+u&-1&0&-t\\
+-1&u&-t&0\\
+0&-t&u&-1\\
+-t&0&-1&u
+\end{pmatrix}.}
+For #{f=(a,b,c,d)}, the energy is
+##{\begin{aligned}
+f^TL_tf={}&(b-a)^2+t(c-b)^2\\
+          &+(d-c)^2+t(a-d)^2.
+\end{aligned}}
+Every row of #{L_t} sums to zero, and for #{t>0} zero energy forces all
+four values equal. The precision of the
+[positive quadratic action](fdip-0004) is exactly
+#{Q_{t,m}=L_t+m^2I}. Thus its action is half this edge energy plus the
+mass term #{m^2\langle f,f\rangle_V/2}, in agreement with its displayed
+matrix and squared-difference formula.}
+
+\p{The hypotheses have concrete consequences. With vertices
+#{0,1,2,3} and just the unit-weight edges #{0\to1} and #{2\to3}, the
+matrix has two diagonal blocks #{\bigl(\begin{smallmatrix}1&-1\\-1&1\end{smallmatrix}\bigr)}.
+Its kernel is #{\{(a,a,b,b):a,b\in\mathbb R\}}; connectivity is
+needed for a single constant mode.}
+
+\p{On two vertices with one edge #{0\to1} of weight zero, the underlying
+graph is connected but #{L=0}, so its kernel is all of #{\mathbb R^2}.
+For nonnegative weights the same proof identifies the kernel using only
+the positive-weight edges. A zero weight also makes the proposed edge
+pairing degenerate. If instead this edge has weight #{-1}, then
+##{f^TLf=-(f(1)-f(0))^2,}
+which is negative at #{f=(0,1)}. Positivity fails, and the edge form is
+not an inner product. This example is negative semidefinite; two disjoint
+edges with weights #{1} and #{-1} give an indefinite form, since fields
+supported on the separate edges have energies of opposite signs.}
+
+\p{For unweighted simple graphs, Mathlib's
+\leanref{SimpleGraph.posSemidef_lapMatrix} proves positivity of its
+Laplacian. That model has no separate weighted edge set; its energy
+formula sums both adjacency directions and divides by two. The
+edge-once sum above also handles loops and parallel edges, and is proved
+directly here.}
