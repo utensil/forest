@@ -1,0 +1,62 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Example}
+\title{The alternating four-cycle}
+\author/literal{Kepler}
+\date{2026-10-16}
+
+\p{Let #{V=\mathbb Z/4\mathbb Z} and
+#{E=\{e_0,e_1,e_2,e_3\}}, with #{s(e_i)=i} and #{h(e_i)=i+1}
+modulo four. For #{t>0}, assign weights
+##{w_t(e_0)=w_t(e_2)=1,\qquad w_t(e_1)=w_t(e_3)=t.}
+This is a weighted \vocabk{finite incidence presentation}{fdip-0002}:
+the parameter #{t} is supplied, and every edge weight is positive.}
+
+\tikzfigs{0.9}{\begin{tikzpicture}[
+  vertex/.style={circle,draw,minimum size=7mm,inner sep=0pt},
+  edge/.style={-{Stealth[length=2mm]},thick}
+]
+\node[vertex] (v0) at (0,2.4) {$0$};
+\node[vertex] (v1) at (3.2,2.4) {$1$};
+\node[vertex] (v2) at (3.2,0) {$2$};
+\node[vertex] (v3) at (0,0) {$3$};
+\draw[edge] (v0) -- node[above=3mm] {$e_0:\ 1$} (v1);
+\draw[edge] (v1) -- node[right=3mm] {$e_1:\ t$} (v2);
+\draw[edge] (v2) -- node[below=3mm] {$e_2:\ 1$} (v3);
+\draw[edge] (v3) -- node[left=3mm] {$e_3:\ t$} (v0);
+\end{tikzpicture}}
+
+\p{Each arrow points from source to head; the label gives its edge name
+and weight. A half-turn exchanges opposite vertices and edges.}
+
+\p{\citet{Section 2.1, p. 4}{spielman2009effective} fixes the sign convention.
+Order vertices as #{0,1,2,3} and edges as #{e_0,e_1,e_2,e_3}.
+Substitution into the \vocabk{incidence matrix}{fdip-0002} gives
+##{B=\begin{pmatrix}
+-1&1&0&0\\
+0&-1&1&0\\
+0&0&-1&1\\
+1&0&0&-1
+\end{pmatrix},\qquad W_t=\operatorname{diag}(1,t,1,t).}
+For #{f=(a,b,c,d)^T}, this says
+##{Df=(b-a,c-b,d-c,a-d)^T.}
+In particular, #{f=(0,1,0,0)^T} gives #{Df=(1,-1,0,0)^T}:
+the field rises along #{e_0} and falls along #{e_1}.}
+
+\p{Define the half-turn on both sets by
+##{r_V(i)=i+2,\qquad r_E(e_i)=e_{i+2}.}
+Applying either map twice adds four, so both are involutions, and
+#{r_V(0)=2} shows that the map on vertices is not the identity. Moreover,
+##{s(r_E(e_i))=i+2=r_V(s(e_i)),}
+##{h(r_E(e_i))=i+3=r_V(h(e_i)).}
+The half-turn therefore preserves the directed incidence data. Since
+#{i} and #{i+2} have the same parity, it also preserves the weights:
+#{w_t(r_E(e_i))=w_t(e_i)}. In contrast, a one-step rotation sends
+#{e_0} to #{e_1} and fails to preserve weights when #{t\ne1}.}
+
+\p{After forgetting orientations and weights, the underlying graph is
+Mathlib's \leanref{SimpleGraph.cycleGraph} at four vertices, identifying
+#{\operatorname{Fin}(4)} with the residue classes modulo four. That
+declaration specifies the unweighted graph. The displayed matrix and
+weight-preserving half-turn follow from the substitutions above.}
