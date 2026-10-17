@@ -9,7 +9,7 @@
 \vocabk{evaluation inference protocol}{ftip-001R}. Fix the task law from
 \ref{ftip-001N}, the
 inference budget, the model artifact, the prompt and tokenizer, and the
-serializer that maps a public history to a token or tool action. Let an
+serializer #{S} that maps a public history to a token or tool action. Let an
 intervention #{I} change only the named sampler, random source, harness state,
 or evaluator coordinate; every other coordinate is held fixed. The four
 readouts below keep distribution fit, action behavior, verification, and
@@ -54,32 +54,37 @@ not identify which sampler or harness state produced its trajectory.}
 \p{Replay is evidence rather than a fourth scalar estimand. A \newvocab{replay
 certificate} is the tuple}
 ##{
-R_I=(\nu_I,\rho_I,h_0,L_n,\boldsymbol v,(F_v)_v,\nu_{\rm pol},e_{\rm ver},C(I)),
+\mathcal R_I=(M,x,S,Q_I,\nu_I,\rho_I,h_0,L_n,\boldsymbol v,(F_v)_v,\nu_{\rm pol},e_{\rm ver},C(I)),
 }
 \p{where #{\rho_I} is the realized random-source state and #{L_n} is the
 \vocabk{persistent event stream}{ftip-00C7}, #{h_0},
 #{\boldsymbol v} and #{F_v} give the \vocabk{materialized harness state}{ftip-00C8},
 #{\nu_{\rm pol}} is the content-addressed policy stamp from
 \ref{ftip-004Z}, #{e_{\rm ver}} is verifier evidence from \ref{ftip-0047}, and
-#{C(I)} is the \vocabk{lifecycle cost vector}{ftip-005H}. Equality of all these
-fields is the replay identity. The theorem in \ref{ftip-00C9} then gives equal
+#{C(I)} is the \vocabk{lifecycle cost vector}{ftip-005H}. Equality of all these fields, including the task instance, model, sampler,
+serializer and policy stamp carried by the certificate or its event record, is
+the replay identity. The theorem in \ref{ftip-00C9} then gives equal
 materialized state; replay identity still does not imply correctness, as
 \ref{ftip-00HH} records.}
 
 \p{\strong{Protocol proposal.} The transition boundary is typed by the following finite sequence. The
 protocol computes logits from the model, task input and current public history;
-the sampler #{Q_I} consumes those logits and random source #{R_I} to produce
-#{A_t}; the harness appends an event and folds it:}
+the sampler #{Q_I} consumes those logits and random source #{\rho_I} to produce
+#{A_t}; the event constructor records #{e_t=\operatorname{event}(H_t,A_t)} and
+the public-history observer records #{H_{t+1}=\operatorname{observe}(H_t,e_t)}; the
+harness appends the same event and folds it:}
 ##{
 L_{t+1}=\operatorname{append}(L_t,e_t),\qquad
+H_{t+1}=\operatorname{observe}(H_t,e_t),\qquad
 h_{t+1}=F_{v_t}(h_t,e_t),\qquad
 (o,c)=\mathsf I(M,x,b;\xi).
 }
 \p{The evaluator consumes the completed outcome and its evidence, not the
 pre-verification token. An intervention must name the changed member of
-#{(M,X,Q_I,R_I,h_0,\boldsymbol v,e_{\rm ver})} and the held-fixed members. A
-state update, retry, or evaluator call is a new event and a new cost coordinate;
-these are not silently absorbed into the model effect.}
+#{(M,x,S,Q_I,\rho_I,h_0,\boldsymbol v,e_{\rm ver})} and the held-fixed members. A
+state update, retry, or evaluator call is a new event and contributes to the
+recorded lifecycle cost vector; these are not silently absorbed into the model
+effect.}
 
 \p{\strong{Source observation.} Gu et al. (arXiv:2604.06543v2, PDF pp. 4-10)
 find biased direct sampling and reliable seed-to-distribution transformations
@@ -103,7 +108,7 @@ searched Forest, formal-math, TauCetiReview, or TauCetiWorker revisions;
 #{T=2}, #{h_0=()}, and events #{e_0=\operatorname{call}(0)} and
 #{e_1=\operatorname{verify}(1)}. Let #{F(h,e)=h\mathbin{\|}e} and
 #{L_2=(e_0,e_1)}. Two runs with the same policy stamp, realized random-source
-state, verifier identity, event version, fold map and cost vector have the same #{R_I}; the
+state, verifier identity, event version, fold map and cost vector have the same #{\mathcal R_I}; the
 recursion in \ref{ftip-00C9} checks #{h_2=((\operatorname{call}(0)),
 (\operatorname{verify}(1)))}. Changing the recorded random-source state
 therefore fails the replay-identity check, even if a coincidentally identical
