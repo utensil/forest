@@ -1,0 +1,136 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Definition}
+\title{A centered Dirac operator on a finite periodic grid}
+\date{2026-10-17}
+
+\p{To couple Clifford multiplication to spatial differences, fix an
+integer #{d\ge1} and periods #{N_j\ge3} for #{1\le j\le d}.
+The \newvocab{periodic grid} and its scalar fields are
+##{\begin{aligned}
+\Lambda&=\prod_{j=1}^d\mathbb Z/N_j\mathbb Z,\\
+M&=\prod_{j=1}^d N_j,\qquad H=\mathbb C^\Lambda.
+\end{aligned}}
+Write #{e_j\in\Lambda} for the unit step in coordinate #{j}.
+Addition is periodic and the lattice spacing is one. Extend the
+[counting pairing](fdip-0007) to the Hermitian inner product
+##{\langle f,g\rangle_H
+=\sum_{x\in\Lambda}\overline{f(x)}g(x),}
+conjugate-linear in the first slot.}
+
+\p{The spatial \vocabk{quadratic form}{ca-0004} is
+##{q_{\mathrm{sp}}(z)=\sum_{j=1}^d z_j^2
+\qquad(z\in\mathbb C^d).}
+It is distinct from the Hermitian norm squared #{\sum_j|z_j|^2}
+and from the real four-field [configuration form](fdip-000O).
+For example, at #{i\varepsilon_1}, where #{\varepsilon_j} is the
+standard basis of #{\mathbb C^d}, the quadratic value is #{-1}
+and the Hermitian norm squared is #{1}. The grid steps #{e_j},
+these complex coordinate vectors, and the four configuration
+coordinates have different carriers.}
+
+\p{Choose #{S=(\mathbb C^2)^{\otimes d}} with its standard tensor
+basis and product Hermitian inner product. In the
+[Pauli convention](fcap-002L), take
+##{X=\begin{pmatrix}0&1\\1&0\end{pmatrix},\qquad
+Z=\begin{pmatrix}1&0\\0&-1\end{pmatrix},}
+and put #{I=I_2} and
+##{\gamma_j=Z^{\otimes(j-1)}\otimes X
+\otimes I^{\otimes(d-j)}.}
+An empty tensor product contributes the scalar identity.
+Direct multiplication gives #{X^*=X}, #{Z^*=Z},
+#{X^2=Z^2=I} and #{XZ=-ZX}. Ordinary tensor products obey
+##{\begin{aligned}
+(A\otimes B)^*&=A^*\otimes B^*,\\
+(A\otimes B)(C\otimes E)&=AC\otimes BE.
+\end{aligned}}
+The product formula follows on pure tensors, which span; the
+adjoint formula follows from the product inner product on such
+tensors. Thus #{\gamma_j^*=\gamma_j} and
+#{\gamma_j^2=I_S}. For #{i<j}, the only anticommuting slot is
+#{i}, where #{X} meets #{Z}. Before it both factors are #{Z};
+after it at least one factor is #{I}. Hence
+##{\gamma_i\gamma_j+\gamma_j\gamma_i
+=2\delta_{ij}I_S.}
+Mathlib's \leanref{Matrix.kronecker},
+\leanref{Matrix.mul_kronecker_mul},
+\leanref{Matrix.conjTranspose_kronecker} and
+\leanref{Matrix.one_kronecker_one} give the corresponding
+matrix construction and identities. Iterating them requires
+identifying the product-index bases.}
+
+\p{The complex-linear map #{c:\mathbb C^d\to\operatorname{End}_{\mathbb C}(S)}
+defined by #{c(z)=\sum_j z_j\gamma_j} satisfies
+##{\begin{aligned}
+c(z)^2&=\sum_j z_j^2 I_S\\
+&\quad+\sum_{i<j}z_i z_j
+ (\gamma_i\gamma_j+\gamma_j\gamma_i)\\
+&=q_{\mathrm{sp}}(z)I_S.
+\end{aligned}}
+The [Clifford universal property](fdip-000P) therefore gives a
+unique unital complex-algebra map
+##{\begin{aligned}
+\rho:\operatorname{Cl}(q_{\mathrm{sp}})&\longrightarrow
+\operatorname{End}_{\mathbb C}(S),\\
+\rho(\iota(\varepsilon_j))&=\gamma_j.
+\end{aligned}}
+This makes #{S} a \vocabk{Clifford module}{uts-001Z}, in the
+[module-map convention](fcap-001O).
+The ordinary-algebra universal property is stated in
+\citet{Proposition 2.2 and Remark 2.2, p. 29}{meinrenken2013clifford}.
+Its bilinear form is #{b(z,w)=\sum_j z_jw_j}, with relation
+#{uv+vu=2b(u,v)1}; see
+\citet{Definition 2.1, p. 27}{meinrenken2013clifford}.
+The displayed square identity is precisely the input required
+by \leanref{CliffordAlgebra.lift} over #{\mathbb C}.}
+
+\p{This chosen module is reducible. The involution
+##{J=I^{\otimes(d-1)}\otimes X}
+commutes with every #{\gamma_j}: its last factor meets either
+#{I} or #{X}, and its other factors are identities.
+Its two eigenspaces are
+##{S_\pm=(\mathbb C^2)^{\otimes(d-1)}
+\otimes\mathbb C(1,\pm1).}
+Both are nonzero and have dimension #{2^{d-1}}. Commutation
+with #{J} makes them invariant under every generator and hence
+under the generated Clifford action. We use #{\dim S=2^d};
+no minimality or faithfulness of this representation is needed.}
+
+\p{Extend the \vocabk{cyclic shift}{fdip-0009} coordinatewise:
+##{(T_j f)(x)=f(x+e_j).}
+Its inverse shifts by #{-e_j}. Reindexing #{y=x+e_j} gives
+##{\begin{aligned}
+\langle T_jf,g\rangle_H
+&=\sum_y\overline{f(y)}g(y-e_j)\\
+&=\langle f,T_j^{-1}g\rangle_H.
+\end{aligned}}
+Thus #{T_j^*=T_j^{-1}}, so #{T_j} is unitary. The shifts and
+their inverses commute, since addition in #{\Lambda} commutes.
+The \newvocab{centered differences} are the endomorphisms
+##{\nabla_j=(T_j-T_j^{-1})/2.}
+They commute and satisfy #{\nabla_j^*=-\nabla_j}.
+Their source and target are both #{H}, unlike a general
+vertex-to-edge [incidence map](fdip-0002).}
+
+\p{Set #{K=S\otimes_{\mathbb C}H}, with
+#{\langle s\otimes f,t\otimes g\rangle_K
+=\langle s,t\rangle_S\langle f,g\rangle_H}.
+Identify #{s\otimes f} with the field #{x\mapsto f(x)s}.
+The \newvocab{centered Dirac operator} is
+##{D=\sum_{j=1}^d\gamma_j\otimes\nabla_j.}
+Equivalently,
+##{\begin{aligned}
+(D\psi)(x)
+&=\frac12\sum_{j=1}^d\gamma_j\psi(x+e_j)\\
+&\quad-\frac12\sum_{j=1}^d\gamma_j\psi(x-e_j).
+\end{aligned}}
+For #{d=1}, this is #{X} applied to the ordinary centered
+difference of a two-component field. Wingate's gauge-covariant
+centered difference reduces to this difference when all links
+are one and the spacing is one
+\citet{Section 9.1, Equation (9.2), p. 19}{wingate2025lattice}.
+The finite grid and tensor module here are specified directly;
+this construction introduces no Grassmann integration or gauge
+field. The [Lorentz-sign gamma algebra](fcap-002U) is a
+different choice of form, scalar field and representation.}
