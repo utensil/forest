@@ -1,0 +1,112 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{The retained Gaussian marginal}
+\date{2026-10-17}
+
+\p{Use the nonempty split and positive blocks of
+[Gaussian elimination](fdip-000D), with projection
+#{\pi_R(x,y)=x} and \vocabk{effective precision}{fdip-000D}
+#{S=A-HC^{-1}H^T}.
+Let #{\mu_Q} and #{\mu_S} be the corresponding
+\vocabk{Gaussian probability laws}{fdip-0005}. Then
+##{\begin{aligned}
+Z_Q&=c_C Z_S,\\
+(\pi_R)_*\mu_Q&=\mu_S.
+\end{aligned}}
+The second identity says that the \newvocab{retained marginal law} is
+#{\mu_S}: probabilities of events depending only on #{x} agree.
+Every Borel measurable #{F:\mathbb R^R\to\mathbb R} satisfies
+##{\begin{aligned}
+F\in L^1(\mu_S)
+ &\Longleftrightarrow F\circ\pi_R\in L^1(\mu_Q),\\
+\langle F\rangle_S
+ &=\langle F\circ\pi_R\rangle_Q.
+\end{aligned}}
+The expectation equality assumes either of the equivalent integrability
+conditions.
+Here #{L^1(\mu)} denotes Borel functions with finite integral of their
+absolute value, and #{(\pi_R)_*\mu_Q} assigns a set #{B} the probability
+#{\mu_Q(\pi_R^{-1}(B))}. This is the measure version of the
+[finite pushforward law](ftip-007S).
+The equality applies in particular to all polynomial retained
+observables by \ref{fdip-0006}.}
+
+\p{\citet{Appendix A.2}{rasmussen2006gaussian}, pp. 199-200,
+gives formulas for Gaussian marginals and conditionals. Here the Gaussian
+parameter is precision, so the inverse-block identification below
+is needed to compare covariance formulas.}
+
+\proof{
+\p{The weights are continuous and nonnegative. Tonelli and the fiber
+formula in \ref{fdip-000D} therefore give
+##{\begin{aligned}
+Z_Q
+ &=\int_{\mathbb R^R}\int_{\mathbb R^U}
+       e^{-(x,y)^TQ(x,y)/2}\,dy\,dx\\
+ &=c_C\int_{\mathbb R^R}e^{-x^TSx/2}\,dx
+  =c_CZ_S.
+\end{aligned}}
+All three factors are positive and finite. This also agrees with
+#{\det Q=\det C\det S} and the normalization formula. For a Borel
+set #{B\subseteq\mathbb R^R}, apply the same nonnegative calculation
+with the factor #{\mathbf1_B(x)}. Dividing by #{Z_Q=c_CZ_S} gives
+#{\mu_Q(\pi_R^{-1}(B))=\mu_S(B)}, which is the asserted pushforward.}
+
+\p{To justify signed expectations directly, first apply Tonelli with
+#{|F(x)|}. Even if either side is infinite, it yields
+##{\begin{aligned}
+&\int_{\mathbb R^R\times\mathbb R^U}
+ |F(x)|e^{-(x,y)^TQ(x,y)/2}\,dx\,dy\\
+&\qquad=c_C\int_{\mathbb R^R}|F(x)|e^{-x^TSx/2}\,dx.
+\end{aligned}}
+Division by the positive normalizers proves the integrability
+equivalence. When these absolute integrals are finite, Fubini
+applies to the signed integrand with #{F(x)} in place of #{|F(x)|}.
+The same fiber integral and normalization then give the expectation
+identity. Thus a formal cancellation of iterated signed integrals
+has been replaced by an explicit absolute-integrability check.}
+}
+
+\p{In particular the retained coordinate covariance is
+##{\operatorname{Cov}_{\mu_Q}(x)=S^{-1}=(Q^{-1})_{RR}.}
+The first equality is [covariance as inverse precision](fdip-000B)
+for #{\mu_S}, together with the expectation identity. To verify the
+block formula independently, solve #{Q(u,v)=(b,0)}. Its lower
+equation gives #{v=-C^{-1}H^Tu}; the upper equation is then
+#{Su=b}, so #{u=S^{-1}b}. Since this holds for every #{b}, the
+upper-left block of #{Q^{-1}} is #{S^{-1}}. This is
+\citet{Equation (A.13), p. 202}{rasmussen2006gaussian}.}
+
+\p{The marginal is not the law obtained by fixing #{y=y_0}. For the
+latter, #{A>0} follows by restricting #{Q} to #{(x,0)}, and
+##{\begin{aligned}
+&x^TAx+2x^THy_0\\
+&\quad=(x+A^{-1}Hy_0)^T\\
+&\qquad\cdot A(x+A^{-1}Hy_0)\\
+&\qquad-y_0^TH^TA^{-1}Hy_0.
+\end{aligned}}
+Normalizing this density in #{x} gives conditional mean
+#{-A^{-1}Hy_0} and conditional covariance #{A^{-1}}. These densities
+form a conditional probability kernel: divide the joint probability
+density #{p_Q(x,y)} by its positive #{y}-marginal density
+#{r(y)=\int p_Q(x,y)\,dx}. Their product with #{r(y)} is the joint
+density, which verifies the defining conditional integral identity.
+Integrating
+#{y} instead gives mean zero and covariance #{S^{-1}}. In
+particular, setting #{y=0} retains precision #{A}, whereas
+eliminating #{y} retains precision #{S}.}
+
+\p{Mathlib's
+\leanref{ProbabilityTheory.measurePreserving_restrict₂_multivariateGaussian}
+gives coordinate restriction of a Gaussian specified by its covariance.
+TauCeti's
+\leanref/tauceti{TauCeti.Probability.map_affine_multivariateGaussian}
+gives the more general rectangular affine image. To apply either to
+this statement, the input covariance is #{Q^{-1}}, and its retained
+block must be identified with #{S^{-1}} as above. Mathlib's
+\leanref{MeasureTheory.integral_prod} supplies Fubini under
+integrability; it does not dispense with the preceding absolute-value
+argument. These declarations do not by themselves identify the
+precision density or its partition factor.}
