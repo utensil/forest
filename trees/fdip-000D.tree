@@ -1,0 +1,115 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{Eliminating a positive Gaussian block}
+\date{2026-10-17}
+
+\p{Split a finite vertex set as #{V=R\sqcup U}, with nonempty retained
+set #{R} and eliminated set #{U}. Put #{p=|R|}, #{q=|U|}, and write a
+field as #{(x,y)\in\mathbb R^R\times\mathbb R^U}. Both spaces have
+their counting inner products and coordinate Lebesgue measures; the
+full measure is #{dx\,dy}. In this ordering, a
+\vocabk{positive precision parameter}{fdip-0004} has blocks
+##{Q=\begin{pmatrix}A&H\\H^T&C\end{pmatrix}>0.}
+Here #{A} is #{p\times p}, #{C} is #{q\times q}, and #{H} is
+#{p\times q}. Define the \newvocab{effective precision}, or
+\newvocab{Schur complement}
+of #{C}, by
+##{S=A-HC^{-1}H^T.}
+Then #{C>0}, #{S>0}, and integrating the unnormalized weight gives
+##{\begin{aligned}
+&\int_{\mathbb R^U}
+ \exp\left(-\tfrac12(x,y)^TQ(x,y)\right)dy\\
+&\qquad=c_C\exp\left(-\tfrac12x^TSx\right),\\
+&c_C=\frac{(2\pi)^{q/2}}{\sqrt{\det C}}>0.
+\end{aligned}}
+Thus the operation sends #{Q} to the pair #{(S,c_C)}, not just a matrix.}
+
+\p{\citet{Appendix A.5.5}{boyd2004convex}, pp. 650-651, gives the
+square completion with the other block as pivot. Exchanging the block
+order gives the formula above.
+\citet{Equation (A.4)}{rasmussen2006gaussian}, p. 200, gives the
+normalized Gaussian density. With covariance #{C^{-1}}, its
+normalization yields the factor #{c_C}.}
+
+\proof{
+\p{For #{y\ne0}, positivity of #{Q} on #{(0,y)} gives
+#{y^TCy>0}. Thus #{C} is positive definite and invertible. Set
+#{K=C^{-1}H^T}. Expanding the right side gives
+##{\begin{aligned}
+&(x,y)^TQ(x,y)\\
+&\quad=x^TSx\\
+&\qquad+(y+Kx)^TC(y+Kx).
+\end{aligned}}
+Indeed #{CK=H^T} and #{K^TCK=HC^{-1}H^T}; the latter cancels the
+subtracted term in #{S}. For nonzero #{x}, substitute #{y=-Kx}.
+The vector #{(x,-Kx)} is nonzero, so #{x^TSx>0}. Symmetry of #{C^{-1}}
+also makes #{S} symmetric. This proves #{S>0}.}
+
+\p{In matrix form the same identity is
+##{\begin{aligned}
+Q&=T^T\begin{pmatrix}S&0\\0&C\end{pmatrix}T,\\
+T&=\begin{pmatrix}I&0\\K&I\end{pmatrix},\qquad \det T=1.
+\end{aligned}}
+Taking determinants gives #{\det Q=\det C\det S}.
+For each fixed #{x}, the translation #{z=y+Kx} preserves Lebesgue
+measure. The [positive Gaussian integral](fdip-0005) for #{C} is
+finite and equals #{c_C}; pulling out the factor depending only on
+#{x} proves the displayed fiber integral. No exchange of signed
+integrals is needed.}
+}
+
+\p{Taking minus the logarithm of the fiber integral defines an exact
+\newvocab{effective action}
+##{\begin{aligned}
+\mathcal A_{\mathrm{eff}}(x)
+ &=\tfrac12x^TSx-\log c_C\\
+ &=\tfrac12x^TSx+\tfrac12\log\det C\\
+ &\quad-\tfrac q2\log(2\pi).
+\end{aligned}}
+The constant cancels from normalized retained expectations, but is
+part of the unnormalized weight and its partition function. The
+carrier, split, input precision and volume measure were supplied;
+#{S} and #{c_C} are induced relative to these choices. This finite
+operation alone does not supply the dynamical lattice or effective
+metric considered in \citet{Abstract}{shamir1994dynamical}.}
+
+\p{Singular #{C} cannot occur under #{Q>0}. If one weakens the
+hypothesis to #{Q\ge0} and allows #{0\ne z\in\ker C}, positivity of
+the \vocabk{quadratic form}{ca-0004} on #{(x,rz)} for every real #{r} forces
+#{x^THz=0} for every #{x}, hence #{Hz=0}. The weight is then constant
+along the eliminated direction #{z}. Orthogonal coordinates along
+#{\mathbb R z} and its complement, followed by Tonelli, give an
+infinite fiber integral for every #{x}. For example
+#{Q=\operatorname{diag}(1,0)} gives
+#{\exp(-x^2/2)\int_{\mathbb R}dy=\infty}. A pseudoinverse does
+not turn this integral into a finite one.}
+
+\p{One may instead \em{change the eliminated space} to
+#{U_0=(\ker C)^\perp}, with its induced Euclidean volume. For
+#{Q\ge0}, the preceding argument implies
+#{H^Tx\in U_0}. On #{U_0}, #{C} is positive definite, so the same
+square completion gives
+##{\begin{aligned}
+S_0&=A-HC^+H^T,\\
+c_0&=\frac{(2\pi)^{r/2}}{\sqrt{\operatorname{pdet}C}},
+\qquad r=\operatorname{rank}C.
+\end{aligned}}
+Here #{C^+} inverts the positive eigenvalues and is zero on the kernel;
+#{\operatorname{pdet}C} is their product. In rank zero the empty
+product and the volume of the zero-dimensional space are both one.
+A normalized law on the retained full space still requires #{S_0>0}.
+This constrained measure is a new model, as in the
+[massless mean-zero construction](fdip-000C).}
+
+\p{Mathlib's \leanref{Matrix.schur_complement_eq₂₂} supplies the
+block quadratic identity, and \leanref{Matrix.det_fromBlocks₂₂}
+supplies the determinant factorization with an invertible lower-right
+block. TauCeti's
+\leanref/tauceti{Matrix.PosDef.gaussianCondCov} proves strict
+positivity of this Schur complement for a positive definite block
+matrix. Its name refers to a conditional-covariance application;
+the algebraic conclusion applies to our precision matrix. The
+Lebesgue integral and effective-action conclusions above additionally
+use the stated measure and Gaussian normalization.}

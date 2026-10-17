@@ -1,0 +1,135 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Example}
+\title{Eliminating alternate vertices of the four-cycle}
+\date{2026-10-17}
+
+\p{In the [alternating four-cycle](fdip-0003), take #{t,m>0} and
+#{Q=Q_{t,m}=L_t+m^2I}. Retain #{R=(0,2)} and eliminate #{U=(1,3)},
+with coordinates #{x=(\phi_0,\phi_2)} and #{y=(\phi_1,\phi_3)} in
+these orders. Write #{a=m^2} and #{s=1+t+a}. Reordering the
+[explicit Laplacian](fdip-0008) gives
+##{\begin{aligned}
+A=C&=sI_2,\\
+H&=-\begin{pmatrix}1&t\\t&1\end{pmatrix}.
+\end{aligned}}
+The [elimination theorem](fdip-000D) therefore gives
+##{\begin{aligned}
+S&=\begin{pmatrix}\alpha&-\beta\\-\beta&\alpha\end{pmatrix},\\
+\alpha&=s-\frac{1+t^2}{s},\qquad
+\beta=\frac{2t}{s}>0.
+\end{aligned}}
+Indeed #{HH^T} has diagonal #{1+t^2} and off-diagonal #{2t}, so
+#{S=sI_2-s^{-1}HH^T}.}
+
+\p{\citet{Appendix A.5.5}{boyd2004convex}, pp. 650-651, gives the
+general \vocabk{Schur complement}{fdip-000D}. Here the chosen blocks make its entries
+explicit.}
+
+\tikzfigs{0.55}{\begin{tikzpicture}[
+  kept/.style={circle,draw,thick,minimum size=7mm,inner sep=0pt},
+  removed/.style={circle,draw,dashed,minimum size=7mm,inner sep=0pt},
+  edge/.style={thick}
+]
+\node[kept] (v0) at (0,3) {$0$};
+\node[removed] (v1) at (3.2,3) {$1$};
+\node[kept] (v2) at (3.2,0.8) {$2$};
+\node[removed] (v3) at (0,0.8) {$3$};
+\draw[edge] (v0) -- node[above=2mm] {$1$} (v1);
+\draw[edge] (v1) -- node[right=2mm] {$t$} (v2);
+\draw[edge] (v2) -- node[below=2mm] {$1$} (v3);
+\draw[edge] (v3) -- node[left=2mm] {$t$} (v0);
+\draw[-{Stealth[length=2mm]}] (1.6,0.1) -- (1.6,-0.6);
+\node[right=2mm] at (1.6,-0.25) {integrate $1,3$};
+\node[kept] (r0) at (0,-1.5) {$0$};
+\node[kept] (r2) at (3.2,-1.5) {$2$};
+\draw[edge] (r0) -- node[above=2mm] {$\beta=2t/s$} (r2);
+\end{tikzpicture}}
+
+\p{Solid circles are retained; dashed circles are integrated out.
+Orientations are suppressed because the quadratic energy is
+[orientation independent](fdip-0008). The bottom edge represents
+the induced coupling #{\beta}; its precision also has the diagonal
+term computed below.}
+
+\p{The vectors #{(1,1)^T/\sqrt2} and #{(1,-1)^T/\sqrt2} diagonalize
+#{S}. Their eigenvalues are
+##{\begin{aligned}
+\sigma_+&=\alpha-\beta
+ =\frac{s^2-(1+t)^2}{s}\\
+ &=\frac{a(a+2+2t)}{s},\\
+\sigma_-&=\alpha+\beta
+ =\frac{s^2-(1-t)^2}{s}\\
+ &=\frac{(a+2)(a+2t)}{s}.
+\end{aligned}}
+Both are positive. The factorizations follow from #{s=1+t+a};
+they also check positivity without appealing again to the general
+theorem. Put
+##{\mathcal D=a(a+2)(a+2t)(a+2+2t).}
+Then
+##{\begin{aligned}
+\det C&=s^2,\qquad \det S=\mathcal D/s^2,\\
+\det Q&=\det C\det S=\mathcal D,\\
+c_C&=\frac{2\pi}{s},\qquad
+Z_S=\frac{2\pi s}{\sqrt{\mathcal D}},\\
+Z_Q&=c_CZ_S=\frac{(2\pi)^2}{\sqrt{\mathcal D}}.
+\end{aligned}}
+This reproduces the [four-mode determinant and partition function](fdip-000B).
+The \vocabk{effective action}{fdip-000D} is
+##{\mathcal A_{\mathrm{eff}}(x)=\tfrac12x^TSx+\log\frac{s}{2\pi}.}
+Its constant records the integrated block.}
+
+\p{A retained observable checks more than normalization. For
+#{F(x)=x_0x_2}, polynomial integrability and the
+[marginal identity](fdip-000E) give
+##{\begin{aligned}
+\langle\phi_0\phi_2\rangle_Q
+ &=\langle x_0x_2\rangle_S
+  =(S^{-1})_{02}\\
+ &=\frac{\beta}{\alpha^2-\beta^2}
+  =\frac{2ts}{\mathcal D}.
+\end{aligned}}
+The indices #{0,2} here name retained vertices. Inverting the displayed
+two-by-two matrix gives its off-diagonal entry
+#{\frac{\beta}{\det S}}, which proves the last equalities. Independently, the
+[four-cycle spectral table](fdip-000B) gives
+##{\begin{aligned}
+4\langle\phi_0\phi_2\rangle_Q
+ &=\frac1a-\frac1{a+2}\\
+ &\quad-\frac1{a+2t}+\frac1{a+2+2t}\\
+ &=\frac{8ts}{\mathcal D}.
+\end{aligned}}
+For the last equality, pair the first two terms and the last two:
+their difference has numerator
+#{2((a+2t)(a+2+2t)-a(a+2))=8ts} over #{\mathcal D}.
+At #{t=m=1}, one obtains
+##{\begin{aligned}
+S&=\begin{pmatrix}7/3&-2/3\\-2/3&7/3\end{pmatrix},\\
+\langle\phi_0\phi_2\rangle_Q&=\frac{2}{15}.
+\end{aligned}}
+Fixing the eliminated fields to zero would instead give precision
+#{A=3I_2} and zero off-diagonal covariance.}
+
+\p{There was no edge between vertices #{0} and #{2} in the supplied
+cycle. Elimination induces one in the effective quadratic form:
+##{S=\beta\begin{pmatrix}1&-1\\-1&1\end{pmatrix}
+       +\sigma_+I_2.}
+Thus #{\beta} is an effective edge weight and #{\sigma_+} an effective
+mass coefficient. This is a finite instance of fill-in: eliminating
+a single vertex joined to retained vertices with weights #{w_i}
+and diagonal precision #{c>0} subtracts #{ww^T/c}, creating
+off-diagonal entries #{-w_iw_j/c} where no retained edge existed.
+The formula is the same Schur complement with #{H=-w} and #{C=(c)}.
+Locality in the original graph need not survive elimination.}
+
+\p{The half-turn preserves both sets #{R,U} and swaps the two
+coordinates within each. For the swap matrix #{J}, the displayed
+#{S} satisfies #{JSJ=S}; the induced two-site form retains this
+symmetry. At #{m=0}, however, #{C=(1+t)I_2} is still positive while
+#{\sigma_+=0}. The fiber factor is finite, but the integral over
+retained fields diverges along #{(1,1)}. A finite fiber integral
+does not imply a finite partition function. The
+[global mean-zero law](fdip-000C) uses a constraint coupling #{x}
+and #{y}, so its measure is not the product #{dx\,dy} used here.
+It cannot be obtained by substituting #{m=0} in this marginal formula.}
