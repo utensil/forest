@@ -63,6 +63,20 @@ on the full vertex space even though the probability measure is supported
 on #{H}; it is not an inverse of #{L} on the full vertex space.}
 }
 
+\p{For a [polynomial observable](fdip-0006) #{X} under the
+[Gaussian law](fdip-0005), define its \newvocab{variance} using
+[expectation](fdip-0006) by
+##{\operatorname{Var}_Q(X)
+   =\left\langle (X-\langle X\rangle_Q)^2\right\rangle_Q.}
+For every source field #{j}, the vanishing coordinate means give
+##{\begin{aligned}
+\langle j^T\phi\rangle_Q
+  &=\sum_v j_v\langle\phi_v\rangle_Q\\
+  &=0.
+\end{aligned}}
+Thus [the covariance formula](fdip-000B) implies
+##{\operatorname{Var}_{Q_m}(j^T\phi)=j^TG_mj.}}
+
 \p{The massive [Green operator](fdip-000A) separates the constant mode:
 ##{\begin{aligned}
 (L+m^2I)^{-1}
@@ -70,8 +84,8 @@ on #{H}; it is not an inverse of #{L} on the full vertex space.}
   &\quad+\sum_{a=1}^{n-1}
        \frac{u_au_a^T}{\lambda_a+m^2}.
 \end{aligned}}
-Its full covariance has no finite limit as #{m\downarrow0}: its constant
-mode has variance #{m^{-2}}, and each diagonal entry contains
+Its full covariance has no finite limit as #{m\downarrow0}: taking
+#{j=u_0} gives constant-mode variance #{m^{-2}}, and each diagonal entry contains
 #{1/(nm^2)}. For a mean-zero source #{j\in H}, the linear observable
 #{j^T\phi} instead has
 ##{\begin{aligned}
@@ -84,9 +98,11 @@ This includes field differences #{j=\delta_v-\delta_w}. The limit
 describes those observables and does not normalize the divergent
 full-space massless weight.}
 
-\p{Other constraints require their own measures. Fixing a vertex value
-removes the constant freedom on a connected graph, but uses a different
-subspace and generally gives different coordinate covariances. Fixed
+\p{Other constraints require their own measures. Fixing #{\phi(v)=a}
+uses an affine hyperplane with its induced Euclidean measure; it is a
+linear subspace when #{a=0}. On a connected graph this removes the
+constant freedom, but generally gives different coordinate covariances
+from the mean-zero constraint. Fixed
 external boundary values in finite lattice regions also remove zero
 modes; this is why a massless finite-volume law can exist in
 \citet{Definition 8.1, Remark 8.2 and Exercise 8.2, p. 381}{friedli2017statistical}.
