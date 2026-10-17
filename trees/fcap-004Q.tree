@@ -1,0 +1,71 @@
+\import{fcap-macros}
+\meta{agent-authored}{true}
+\tag{fcap}
+\tag{spin}
+\tag{quadratic-forms}
+
+\taxon{Proposition}
+\title{Enlarging the right subgroup of a double coset}
+
+\p{Let #{G} be a group and let #{\Gamma,K,K'} be subgroups of
+#{G}, with #{K\subseteq K'}. Write #{[x]_K} for the
+\vocabk{double coset}{fcap-004P} #{\Gamma xK}; throughout,
+#{\Gamma} is fixed. There is a surjection
+
+##{\begin{aligned}
+p_{K,K'}:\Gamma\backslash G/K&\longrightarrow\Gamma\backslash G/K',\\
+[x]_K&\longmapsto[x]_{K'}.
+\end{aligned}}
+
+Thus allowing more right transformations can identify classes that
+were previously distinct.}
+
+\subtree{
+\taxon{Proof}
+\p{If #{[x]_K=[y]_K}, there are #{\gamma\in\Gamma} and
+#{k\in K} with #{y=\gamma xk}. The inclusion puts the same
+#{k} in #{K'}, so the same witnesses give #{[x]_{K'}=[y]_{K'}}.
+The assignment therefore does not depend on the representative.
+For any target class #{c}, choose a representative #{x\in G}
+with #{c=[x]_{K'}}. Then #{[x]_K} is a source class and
+#{p_{K,K'}([x]_K)=c}, proving surjectivity.}
+}
+
+\p{Injectivity fails even for the group #{C_2=\{1,s\}}, where
+#{s^2=1} and #{s\ne1}. Take #{\Gamma=K=\{1\}} and #{K'=C_2}.
+The source classes are exactly #{\{1\}} and #{\{s\}}: with
+both witnesses equal to #{1}, two representatives are equivalent
+only when they are equal. The target has the single class #{C_2},
+because #{\Gamma xK'=xC_2=C_2} for each #{x}. Hence precisely
+two source classes map to one target class. This is a general-group
+counterexample, without an asserted adelic realization.}
+
+\p{For the \vocabk{finite adelic class sets}{fcap-004P}, fix a
+nondegenerate quadratic form #{Q} on a finite-dimensional rational space #{V}
+and one \vocabk{compatible compact-open reference tuple}{fcap-004C}
+#{U}. Apply the proposition separately with
+
+##{(G,\Gamma,K)=
+\bigl(H_f(U),\delta_f^H(H(V,Q)),K_H\bigr),
+\qquad H\in\{O,SO,\Spin\}.}
+
+Here the ambient restricted group is from \ref{fcap-004F},
+the rational image is from \ref{fcap-004K}, and #{K_H} is the
+actual product reference subgroup. Any subgroup #{K'_H} of that
+same #{H_f(U)} containing #{K_H} gives the stated surjection.
+An enlargement of reference families does not by itself keep the
+ambient restricted product fixed; the proposition applies only
+after the ambient group and the rational diagonal have been identified.}
+
+\p{The adelic objects have classical context in
+\citet{Example 2.3, p. 3, and Theorem 3.6, pp. 6-8}{conrad2011adelic}.
+The quotient map and counterexample above are elementary group
+arguments, not assertions quoted from that source. TauCeti's
+\leanref/tauceti{DoubleCoset.quotientMapOfLERight_surjective}
+formalizes the general surjectivity statement. Its separate adelic
+specializations are
+\leanref/tauceti{TauCeti.QuadraticMap.OrthogonalCompactOpens.finiteAdelicOrthogonalDoubleCosetMapOfLE_surjective},
+\leanref/tauceti{TauCeti.QuadraticMap.OrthogonalCompactOpens.finiteAdelicSpecialOrthogonalDoubleCosetMapOfLE_surjective}
+and
+\leanref/tauceti{TauCeti.QuadraticMap.OrthogonalCompactOpens.finiteAdelicSpinDoubleCosetMapOfLE_surjective}.
+No finiteness of these quotient sets is needed.}
