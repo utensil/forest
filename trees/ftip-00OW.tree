@@ -1,0 +1,111 @@
+\import{ftip-macros}
+\meta{agent-authored}{true}
+\tag{ftip}
+\tag{evaluation}
+\tag{event-log}
+\title{Sampling and replay protocol}
+
+\p{A sampling comparison begins with a task interface and an
+\vocabk{evaluation inference protocol}{ftip-001R}. Fix the task law from
+\ref{ftip-001N}, the
+inference budget, the model artifact, the prompt and tokenizer, and the
+serializer that maps a public history to a token or tool action. Let an
+intervention #{I} change only the named sampler, random source, harness state,
+or evaluator coordinate; every other coordinate is held fixed. The four
+readouts below keep distribution fit, action behavior, verification, and
+replay evidence distinct.}
+
+\p{\strong{Protocol estimands.} For a declared finite output set #{\mathcal Y}, target law
+#{P^*\in\mathsf{Prob}(\mathcal Y)}, sample size #{n\geq1}, and realized
+outputs #{Y_1,\ldots,Y_n\in\mathcal Y}, define the \newvocab{target-distribution
+fit} readout by}
+##{
+\widehat P_{I,n}(y)=\frac1n\sum_{j=1}^{n}{\bf1}\{Y_j=y\},\qquad
+E_{\rm dist}(I)=d(\widehat P_{I,n},P^*),
+}
+\p{where #{d} is a declared divergence or goodness-of-fit functional on
+\mathsf{Prob}(\mathcal Y). The task law, output serializer, sample size and
+random-source law are part of the intervention record; logits alone do not
+determine this readout.}
+
+\p{For horizon #{T\geq1}, public histories #{H_t\in\mathcal H_t}, and
+serialized actions #{A_t\in\mathcal A_t}, the \newvocab{action-law readout} is
+the empirical measure}
+##{
+\widehat\Pi_{I,n}=\frac1n\sum_{j=1}^{n}\delta_{(H_{j,0},A_{j,0},\ldots,H_{j,T-1},A_{j,T-1})}.
+}
+\p{The non-anticipating policy contract in \ref{ftip-0023} supplies the
+admissible action kernels and requires the serializer to be declared. Thus
+#{\widehat\Pi_{I,n}} records what the system did on the declared histories; it
+does not establish that those actions follow #{P^*}.}
+
+\p{For the \vocabk{evaluation utility}{ftip-001T} and joint evaluation law
+#{\nu_I} induced by the fixed task law, protocol randomness, inference seed,
+and evaluator seed, define the \newvocab{verifier readout} by}
+##{
+E_{\rm ver}(I)=\int u_{\mathsf T}(x,o;\omega)\,d\nu_I(x,o,\omega).
+}
+\p{A binary verifier is the special case of the indicator in
+\ref{ftip-0046}; its version and evidence record follow \ref{ftip-0047}.
+The expectation is taken only when the measurability and integrability
+conditions of \ref{ftip-001T} and \ref{ftip-005D} hold. A successful check does
+not identify which sampler or harness state produced its trajectory.}
+
+\p{Replay is evidence rather than a fourth scalar estimand. A \newvocab{replay
+certificate} is the tuple}
+##{
+R_I=(\nu_I,\rho_I,h_0,L_n,\boldsymbol v,(F_v)_v,\nu_{\rm pol},e_{\rm ver},C(I)),
+}
+\p{where #{\rho_I} is the realized random-source state and #{L_n} is the
+\vocabk{persistent event stream}{ftip-00C7}, #{h_0},
+#{\boldsymbol v} and #{F_v} give the \vocabk{materialized harness state}{ftip-00C8},
+#{\nu_{\rm pol}} is the content-addressed policy stamp from
+\ref{ftip-004Z}, #{e_{\rm ver}} is verifier evidence from \ref{ftip-0047}, and
+#{C(I)} is the \vocabk{lifecycle cost vector}{ftip-005H}. Equality of all these
+fields is the replay identity. The theorem in \ref{ftip-00C9} then gives equal
+materialized state; replay identity still does not imply correctness, as
+\ref{ftip-00HH} records.}
+
+\p{\strong{Protocol proposal.} The transition boundary is typed by the following finite sequence. The
+protocol computes logits from the model, task input and current public history;
+the sampler #{Q_I} consumes those logits and random source #{R_I} to produce
+#{A_t}; the harness appends an event and folds it:}
+##{
+L_{t+1}=\operatorname{append}(L_t,e_t),\qquad
+h_{t+1}=F_{v_t}(h_t,e_t),\qquad
+(o,c)=\mathsf I(M,x,b;\xi).
+}
+\p{The evaluator consumes the completed outcome and its evidence, not the
+pre-verification token. An intervention must name the changed member of
+#{(M,X,Q_I,R_I,h_0,\boldsymbol v,e_{\rm ver})} and the held-fixed members. A
+state update, retry, or evaluator call is a new event and a new cost coordinate;
+these are not silently absorbed into the model effect.}
+
+\p{\strong{Source observation.} Gu et al. (arXiv:2604.06543v2, PDF pp. 4-10)
+find biased direct sampling and reliable seed-to-distribution transformations
+in the tested models (\citet{Sections 3, 5, and 6}{gu2026stochasticity}). H1
+reports a simple Lean loop whose interface, verifier feedback, and
+self-reflection support a formal-Lean comparison (submitted 30 September 2026,
+PDF pp. 2-3 and 8-11; \citet{Sections 2.1-2.2 and 4}{moalla2026h1}); its
+reported benchmark results use additional empirical sections
+(\citet{Sections 3.1-3.3}{moalla2026h1}). Stateless Language Agents assign
+persistent experiment state to the harness while Advisor and Worker calls are
+stateless (arXiv:2610.07625v1, PDF pp. 3-12;
+\citet{Sections 2.2, 3.1-3.2, and 4.2-4.3}{zhang2026statelessagents}).}
+
+\p{\strong{FTIP deduction.} These observations justify separating the model,
+serializer, sampler, random source, harness, verifier, and lifecycle ledger.
+The empirical protocol itself has no corresponding Lean declaration in the
+searched Forest, formal-math, TauCetiReview, or TauCetiWorker revisions;
+\ref{ftip-00C9} supports only the deterministic event-folding sub-result.}
+
+\p{\strong{Finite replay check.} Take #{\mathcal A_0=\{0,1\}}, horizon
+#{T=2}, #{h_0=()}, and events #{e_0=\operatorname{call}(0)} and
+#{e_1=\operatorname{verify}(1)}. Let #{F(h,e)=h\mathbin{\|}e} and
+#{L_2=(e_0,e_1)}. Two runs with the same policy stamp, realized random-source
+state, verifier identity, event version, fold map and cost vector have the same #{R_I}; the
+recursion in \ref{ftip-00C9} checks #{h_2=((\operatorname{call}(0)),
+(\operatorname{verify}(1)))}. Changing the recorded random-source state
+therefore fails the replay-identity check, even if a coincidentally identical
+event stream is produced. This finite certificate is the Phase A boundary: it
+makes replay auditable without claiming a universal stochasticity law.}
