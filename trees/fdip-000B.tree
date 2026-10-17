@@ -1,0 +1,104 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{Covariance is inverse precision}
+\date{2026-10-16}
+
+\p{For a \vocabk{positive precision parameter}{fdip-0004} #{Q} on
+#{\mathbb R^V}, the centered
+\vocabk{Gaussian probability law}{fdip-0005} satisfies
+##{\langle\phi_v\phi_w\rangle_Q=(Q^{-1})_{vw}.}
+The left side is the coordinate
+\vocabk{covariance}{fdip-0006}, since the coordinate means vanish.
+This is the precision form of
+\citet{Proposition B.55, p. 505, and Theorem 8.4, p. 385}{friedli2017statistical}.
+For #{Q=Q_m=L+m^2I}, it identifies the covariance with the
+\vocabk{Green kernel}{fdip-000A}.}
+
+\proof{
+\p{Write #{g_a(x)=\exp(-a x^2/2)} and
+#{I(a)=\int_{\mathbb R}g_a(x)\,dx} for #{a>0}.
+The [normalization argument](fdip-0005) gives #{0<I(a)<\infty}.
+The [polynomial bound](fdip-0006) proves absolute integrability of
+#{xg_a(x)} and #{x^2g_a(x)}. Oddness therefore gives
+#{\int_{\mathbb R}xg_a(x)\,dx=0}. On #{[-R,R]}, integration of
+#{(xg_a(x))'=g_a(x)-a x^2g_a(x)} yields
+##{\begin{aligned}
+&a\int_{-R}^R x^2g_a(x)\,dx\\
+&\quad=\int_{-R}^R g_a(x)\,dx\\
+&\qquad-2R\exp(-aR^2/2).
+\end{aligned}}
+The same polynomial bound gives
+#{R\exp(-aR^2/2)\le C\exp(-aR^2/4)} for #{R\ge0}, with a finite
+constant #{C}; hence the boundary term tends to zero. Monotone
+convergence on both nonnegative integrands now gives
+##{\frac{1}{I(a)}\int_{\mathbb R}x^2g_a(x)\,dx=a^{-1}.}
+Thus the integration by parts has an integrable second moment and a
+vanishing boundary term.}
+
+\p{Diagonalize #{Q=U\operatorname{diag}(q_1,\ldots,q_n)U^T}, with
+#{U} orthogonal and every #{q_i>0}. Under #{\phi=Uy}, the normalized
+density becomes
+##{\prod_{i=1}^n\frac{g_{q_i}(y_i)}{I(q_i)}.}
+All coordinate products are absolutely integrable by
+\ref{fdip-0006}, so Fubini applies. Integrating the other coordinates
+gives one. For distinct #{i,j}, the two remaining first-moment integrals
+vanish; for #{i=j}, the preceding calculation gives
+##{\langle y_i y_j\rangle_Q=\delta_{ij}q_i^{-1}.}
+Expanding the finite sums #{\phi_v=\sum_iU_{vi}y_i} therefore gives
+##{\begin{aligned}
+\langle\phi_v\phi_w\rangle_Q
+  &=\sum_i U_{vi}q_i^{-1}U_{wi}\\
+  &=(Q^{-1})_{vw}.
+\end{aligned}}
+Here expectations in #{y} denote the same law after the indicated change
+of coordinates.}
+}
+
+\p{The [alternating four-cycle](fdip-0003) makes the formula explicit.
+For #{t,m>0}, the [matrix #{L_t}](fdip-0008) has the following
+orthonormal eigenvectors #{u_a}, written as rows #{2u_a^T}:
+##{\begin{array}{c|c|c}
+a&2u_a^T&\lambda_a\\\hline
+0&(1,1,1,1)&0\\
+1&(1,-1,-1,1)&2\\
+2&(1,1,-1,-1)&2t\\
+3&(1,-1,1,-1)&2+2t
+\end{array}}}
+\p{Each displayed row has squared norm four, distinct rows have dot
+product zero, and multiplication by the displayed #{L_t} gives the stated
+eigenvalue. For example its first row sends
+#{(1,-1,-1,1)^T} to #{(1+t)+1-t=2}; the remaining coordinates give
+#{2(-1,-1,1)}. The same substitution verifies the other three rows.
+These vectors still form an orthonormal basis when #{t=1}, although two
+eigenvalues then agree. With #{q_a=m^2+\lambda_a},
+##{\begin{aligned}
+G_m&=\sum_{a=0}^3q_a^{-1}u_au_a^T,\\
+\det Q_{t,m}&=m^2(m^2+2)(m^2+2t)\\
+ &\quad\cdot(m^2+2+2t).
+\end{aligned}}
+The [partition function](fdip-0005) is consequently
+##{Z_{t,m}=\frac{(2\pi)^2}{\sqrt{q_0q_1q_2q_3}}.}
+Two covariance entries, read from the signs in the table, are
+##{\begin{aligned}
+4\langle\phi_0^2\rangle_{t,m}
+  &=q_0^{-1}+q_1^{-1}\\
+  &\quad+q_2^{-1}+q_3^{-1},\\
+4\langle\phi_0\phi_1\rangle_{t,m}
+  &=q_0^{-1}-q_1^{-1}\\
+  &\quad+q_2^{-1}-q_3^{-1}.
+\end{aligned}}
+The sign of each term in the second entry is the product of the first
+two coordinates of its eigenvector.}
+
+\p{Mathlib's
+\leanref{ProbabilityTheory.covariance_eval_multivariateGaussian}
+identifies coordinate covariance with the supplied positive semidefinite
+covariance matrix #{S}. TauCeti's
+\leanref/tauceti{TauCeti.Probability.multivariateGaussian_eq_withDensity}
+gives the Lebesgue density when #{S} is positive definite. For this
+precision convention, one must take #{S=Q^{-1}} and identify its density,
+determinant factor and Euclidean coordinates with #{\mu_Q}; the theorem
+does not take #{Q} as a precision argument. The integral proof above
+establishes the stated identity directly.}
