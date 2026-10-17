@@ -1,0 +1,65 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Example}
+\title{The configuration quadratic form and its polar forms}
+\date{2026-10-17}
+
+\p{For the [alternating four-cycle](fdip-0003), let
+#{V=\mathbb R^4} be the space of vertex fields and let
+#{\delta_i(j)=\delta_{ij}} be its coordinate vectors. These are
+distinct from the oriented edges #{e_i} and the spectral vectors
+#{u_a} of \ref{fdip-0008}. With #{t,m>0}, put #{a=m^2} and
+#{s=1+t+a}. The [massive precision](fdip-000A) gives the
+\vocabk{quadratic form}{ca-0004}
+##{\begin{aligned}
+q_{t,m}(v)&=v^TQ_{t,m}v,\\
+Q_{t,m}&=\begin{pmatrix}
+s&-1&0&-t\\-1&s&-t&0\\0&-t&s&-1\\-t&0&-1&s
+\end{pmatrix}.
+\end{aligned}}
+The Euclidean action is #{\mathcal A(v)=q_{t,m}(v)/2}.
+The factor #{1/2} belongs to the action; the quadratic form used
+below is #{q_{t,m}} itself.}
+
+\p{Write #{q=q_{t,m}} and #{Q=Q_{t,m}}. The unhalved
+polar form and the half-polar form are respectively
+##{\begin{aligned}
+B_q(u,v)&=q(u+v)-q(u)-q(v)\\
+        &=2u^TQv,\\
+b_q(u,v)&=\tfrac12 B_q(u,v)=u^TQv.
+\end{aligned}}
+Thus #{q(v)=b_q(v,v)}, while #{B_q(v,v)=2q(v)}.
+This is the [polarization dictionary](fcap-0027): the symmetric
+bilinear form called #{B} by Meinrenken is #{b_q}, not #{B_q}.
+His Clifford relation uses #{2B}
+\citet{Definition 2.1, p. 27}{meinrenken2013clifford}.}
+
+\proof{
+\p{The matrix #{Q} is symmetric. Expanding #{(u+v)^TQ(u+v)}
+and canceling the two diagonal terms gives
+#{u^TQv+v^TQu=2u^TQv}. This is bilinear, and
+#{q(cv)=c^2q(v)} for every real #{c}, so #{q} is a quadratic
+form. The [edge energy](fdip-0008) also gives
+##{\begin{aligned}
+q(v)={}&(v_1-v_0)^2+t(v_2-v_1)^2\\
+       &{}+(v_3-v_2)^2+t(v_0-v_3)^2\\
+       &{}+m^2\sum_{i=0}^3v_i^2.
+\end{aligned}}
+Every term is nonnegative. If #{v\ne0}, the last term is
+positive because #{m>0}; hence #{q} is positive definite.}
+}
+
+\p{Mathlib's \leanref{Matrix.toQuadraticForm'} constructs this
+matrix quadratic form. Its underlying
+\leanref{LinearMap.BilinMap.toQuadraticMap} sends a bilinear map
+#{b} to #{v\mapsto b(v,v)}; here #{b(u,v)=u^TQv}.
+The definition \leanref{QuadraticMap.polar} is unhalved.
+These generic constructions supply the conventions; the displayed
+matrix and positivity calculation specify this example.}
+
+\p{The four coordinates are configuration directions, one per
+vertex. Positive definiteness therefore describes a form on field
+space. It supplies no Lorentzian spacetime metric. Changing
+#{t,m} changes this form and the [Gaussian state](fdip-000B),
+even though the [half-turn action](fdip-000J) stays fixed.}

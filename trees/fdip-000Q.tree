@@ -1,0 +1,119 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{Form-preserving maps and the half-turn Clifford automorphism}
+\date{2026-10-17}
+
+\p{Let #{k} be a commutative ring, #{M_1,M_2} be #{k}-modules
+with quadratic forms #{q_1,q_2}, and let #{f:M_1\to M_2} be
+linear with
+##{q_2(f(v))=q_1(v)\qquad(v\in M_1).}
+This form-preserving map induces a unique unital #{k}-algebra map
+##{\operatorname{Cl}(f):\operatorname{Cl}(q_1)\longrightarrow
+\operatorname{Cl}(q_2)}
+satisfying #{\operatorname{Cl}(f)(\iota_1(v))=\iota_2(f(v))}.
+This is the underlying Clifford map in
+[isometry transport](fcap-0029). It requires no inverse for #{f}.
+The defining square is:}
+
+\tikzfigs{0.75}{\begin{tikzpicture}[
+  every node/.style={inner sep=4pt},
+  map/.style={-{Stealth[length=2mm]},shorten >=2pt,shorten <=2pt}
+]
+\node (m1) at (0,0) {$M_1$};
+\node (m2) at (4,0) {$M_2$};
+\node (c1) at (0,-2) {$\operatorname{Cl}(q_1)$};
+\node (c2) at (4,-2) {$\operatorname{Cl}(q_2)$};
+\draw[map] (m1) -- node[above=2mm] {$f$} (m2);
+\draw[map] (c1) -- node[below=2mm] {$\operatorname{Cl}(f)$} (c2);
+\draw[map] (m1) -- node[left=2mm] {$\iota_1$} (c1);
+\draw[map] (m2) -- node[right=2mm] {$\iota_2$} (c2);
+\end{tikzpicture}}
+
+\p{The top and vertical arrows are linear maps; the bottom arrow
+is a unital algebra map. The square commutes as a square of
+linear maps. For composable form-preserving maps #{f,g},
+##{\begin{aligned}
+\operatorname{Cl}(\operatorname{id})&=\operatorname{id},\\
+\operatorname{Cl}(g\circ f)&=\operatorname{Cl}(g)\circ\operatorname{Cl}(f).
+\end{aligned}}
+If #{f} is a linear isomorphism, #{\operatorname{Cl}(f)} is an
+algebra isomorphism with inverse #{\operatorname{Cl}(f^{-1})}.}
+
+\proof{
+\p{The linear map #{v\mapsto\iota_2(f(v))} has square
+#{q_2(f(v))1=q_1(v)1}. Apply the
+[universal property](fdip-000P) to obtain the unique extension.
+For the identity, the induced map and the identity algebra map
+agree on every generator, hence are equal by uniqueness.
+For composition, both proposed maps send #{\iota_1(v)} to
+#{\iota_3(g(f(v)))}; uniqueness again proves equality.
+If #{f} is invertible, set #{v=f^{-1}(w)} in form preservation
+to get #{q_1(f^{-1}(w))=q_2(w)}. Thus the inverse is also
+form-preserving. The two composition identities give mutually
+inverse algebra maps.}
+}
+
+\p{Meinrenken derives this functoriality for bilinear-form-preserving
+maps in \citet{Section 2.2.2, p. 29}{meinrenken2013clifford}.
+Over his characteristic-zero field, polarization equates that
+condition with preservation of #{q}. The proof here applies
+directly to quadratic forms over commutative rings. Mathlib's
+\leanref{CliffordAlgebra.map},
+\leanref{CliffordAlgebra.map_apply_ι},
+\leanref{CliffordAlgebra.map_id},
+\leanref{CliffordAlgebra.map_comp_map} and
+\leanref{CliffordAlgebra.equivOfIsometry}
+provide the extension, generator equation, identity, composition
+and inverse construction. Their input is a linear map preserving
+the quadratic form, or a linear equivalence for the last result.}
+
+\p{Return to #{q=q_{t,m}} on #{V=\mathbb R^4}. The same
+[half-turn](fdip-000J) sends #{\delta_i} to #{\delta_{i+2}},
+with indices modulo four. It satisfies #{P^2=I} and
+#{P^TQP=Q}, so #{q(Pv)=q(v)}. Therefore
+##{\begin{aligned}
+\Theta&=\operatorname{Cl}(P),\\
+\Theta(c_i)&=c_{i+2},\qquad \Theta^2=\operatorname{id}.
+\end{aligned}}
+The matrix equation follows by shifting both indices of #{Q}
+by two: its diagonal, its paired off-diagonal entries #{-1} and
+#{-t}, and its zeros are preserved. Composition gives
+#{\Theta^2=\operatorname{Cl}(P^2)=\operatorname{id}}.
+Moreover #{\delta_0\ne\delta_2}, so
+[injectivity of #{\iota_q}](fdip-000P) gives #{c_0\ne c_2}.
+Thus #{\Theta} is nontrivial and has order exactly two.}
+
+\p{The [real half-turn sectors](fdip-000L)
+#{V_\pm=\ker(P\mp I)} are orthogonal for #{b_q}. Indeed,
+#{P^TQP=Q} gives #{b_q(Pu,Pv)=b_q(u,v)}. For
+#{u\in V_+} and #{v\in V_-}, the left side is
+#{b_q(u,-v)=-b_q(u,v)}. Over #{\mathbb R} this forces
+#{b_q(u,v)=0}, and hence
+##{\iota_q(u)\iota_q(v)=-\iota_q(v)\iota_q(u).}
+This is the generic orthogonality consequence
+\leanref{CliffordAlgebra.ι_mul_ι_comm_of_isOrtho}.
+The cross-sector vector generators anticommute; the direct sum
+of sectors does not make them commuting factors of an ordinary
+tensor-product algebra.}
+
+\p{Preservation of the form is essential. Compare #{q_{1,1}}
+and #{q_{2,1}} while keeping the coordinate labels unchanged.
+At #{\delta_0},
+##{q_{1,1}(\delta_0)=3,\qquad q_{2,1}(\delta_0)=4.}
+Thus the identity linear map is not form-preserving. Write
+#{c_i^{(1)},c_i^{(2)}} for the two sets of generators.
+A unital real algebra map with
+#{c_i^{(1)}\mapsto c_i^{(2)}} would send
+#{(c_0^{(1)})^2=3\,1} to #{(c_0^{(2)})^2=3\,1},
+but the target square is #{4\,1}. Its
+[injective scalar map](fdip-000P) rules this out.
+This excludes precisely the unchanged-label assignment. It does
+not exclude other isometries between the positive forms or an
+abstract isomorphism of their Clifford algebras.}
+
+\p{The construction transports a supplied configuration form and
+its discrete symmetry. It supplies no spacetime derivative,
+Dirac operator or Lorentzian interpretation. Those structures
+need additional data and compatibility conditions.}
