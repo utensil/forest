@@ -1,0 +1,150 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Definition}
+\title{The half-turn on vertex and edge fields}
+\date{2026-10-17}
+
+\p{The [alternating four-cycle](fdip-0003) has a symmetry for every
+#{t>0}, including unequal weights. Let #{C_2=\{1,r\}} with #{r^2=1}.
+Its \vocabk{left actions}{fgap-0008} on the distinct vertex and edge sets
+#{V=\mathbb Z/4\mathbb Z} and #{E=\{e_0,e_1,e_2,e_3\}} are
+##{r\cdot i=i+2,\qquad r\cdot e_i=e_{i+2}.}
+Indices are modulo four. These permutations square to the identity,
+preserve the endpoints #{e_i:i\to i+1}, and preserve the weights
+#{(1,t,1,t)}. Milne's \citet{Definition 4.1, p. 57}{milne2025group}
+gives the left-action convention; his
+\citet{Example 7.1(b), p. 101}{milne2025group} constructs the associated
+permutation representation.}
+
+\tikzfigs{0.55}{\begin{tikzpicture}[
+  kept/.style={circle,draw,thick,minimum size=7mm,inner sep=0pt},
+  removed/.style={circle,draw,dashed,minimum size=7mm,inner sep=0pt},
+  edge/.style={-{Stealth[length=2mm]},thick}
+]
+\node[kept] (v0) at (0,2.4) {$0$};
+\node[removed] (v1) at (3.2,2.4) {$1$};
+\node[kept] (v2) at (3.2,0) {$2$};
+\node[removed] (v3) at (0,0) {$3$};
+\draw[edge] (v0) -- node[above=3mm] {$e_0:\ 1$} (v1);
+\draw[edge] (v1) -- node[right=3mm] {$e_1:\ t$} (v2);
+\draw[edge] (v2) -- node[below=3mm] {$e_2:\ 1$} (v3);
+\draw[edge] (v3) -- node[left=3mm] {$e_3:\ t$} (v0);
+\draw[edge] (2.2,1.2) arc[start angle=0,end angle=180,radius=0.6];
+\node at (1.6,0.95) {$r$};
+\end{tikzpicture}}
+
+\p{The half-turn exchanges #{0,2} and #{1,3}, and exchanges
+#{e_0,e_2} and #{e_1,e_3}. Directed arrows and their weights agree
+after rotation. Solid vertices form the retained set #{\{0,2\}};
+the dashed vertices form its complement. Each set is preserved.}
+
+\p{The induced maps on real fields use inverse precomposition:
+##{\begin{aligned}
+P:\mathbb R^V&\to\mathbb R^V,&(P\phi)_i&=\phi_{i-2},\\
+U:\mathbb R^E&\to\mathbb R^E,&(Ua)(e_i)&=a(e_{i-2}).
+\end{aligned}}
+Both maps have the coordinate array
+##{\begin{pmatrix}
+0&0&1&0\\0&0&0&1\\1&0&0&0\\0&1&0&0
+\end{pmatrix},}
+but their domains differ. They satisfy #{P^2=I} and #{U^2=I}.
+Sending #{1} to the identity and #{r} to these maps gives two
+[real linear representations](fgap-001I) of #{C_2}.}
+
+\p{Write #{\delta_i(j)=\mathbf1_{j=i}} for the vertex coordinate
+basis and #{\eta_i(e_j)=\mathbf1_{j=i}} for the edge coordinate basis.
+Then #{P\delta_0=\delta_2\ne\delta_0} and
+#{U\eta_0=\eta_2\ne\eta_0}. Since #{r} is the only nonidentity
+element of #{C_2}, both representations are
+\vocabk{faithful}{fgap-0008}. Finite coordinate reindexing preserves
+the \vocabk{counting pairings}{fdip-0002}; weight preservation gives
+##{\begin{aligned}
+P^TP&=I,\qquad U^TU=I,\\
+U^TWU&=W,
+\end{aligned}}
+where #{W=\operatorname{diag}(1,t,1,t)}. The last identity also
+preserves the \vocabk{weighted edge pairing}{fdip-0007}.}
+
+\p{The two representations interact through the
+\vocabk{incidence matrix}{fdip-0002}. With its edge-by-vertex convention
+from \citet{Section 2.1, p. 4}{spielman2009effective},
+##{\begin{aligned}
+(BP\phi)(e_i)&=\phi_{i+1-2}-\phi_{i-2}\\
+             &=(UB\phi)(e_i).
+\end{aligned}}
+Thus #{BP=UB}: the incidence map is
+\vocabk{equivariant}{fgap-0008} between the vertex and edge actions.}
+
+\p{More generally, let a finite group #{\Gamma} act by permutations
+#{p_g} on a finite vertex set #{V} and #{q_g} on a finite edge set
+#{E}. Fix an incidence presentation, positive weights #{w}, and signs
+#{\varepsilon_g(e)\in\{1,-1\}}. Call these data a
+\newvocab{signed-incidence symmetry} when
+##{\begin{aligned}
+B_{q_g(e),p_g(v)}&=\varepsilon_g(e)B_{ev},\\
+w(q_g(e))&=w(e),\\
+\varepsilon_1(e)&=1,\\
+\varepsilon_{gk}(e)&=\varepsilon_g(q_k(e))\varepsilon_k(e).
+\end{aligned}}
+The last equation supplies compatibility of signs with the group law.
+For a loop, the incidence row is zero and cannot determine its sign;
+the sign equations are still required. Parallel edges keep their
+distinct labels. Define
+##{\begin{aligned}
+(P_g\phi)(p_g(v))&=\phi(v),\\
+(U_ga)(q_g(e))&=\varepsilon_g(e)a(e).
+\end{aligned}}
+The half-turn is the case #{\Gamma=C_2}, with every sign #{+1}.}
+
+\p{These maps are representations. The vertex group law follows by
+inverse precomposition. At #{q_gq_k(e)}, the coefficient of
+#{U_gU_ka} is #{\varepsilon_g(q_k(e))\varepsilon_k(e)a(e)},
+which equals that of #{U_{gk}a}. Identity signs give #{U_1=I};
+the inverse maps are indexed by #{g^{-1}}. Reindexing the finite
+pairing sums, using #{\varepsilon_g(e)^2=1}, proves
+##{P_g^TP_g=I,\qquad U_g^TWU_g=W.}
+Summing the incidence equation against #{\phi(v)} gives
+##{\begin{aligned}
+(BP_g\phi)(q_g(e))
+ &=\sum_v B_{q_g(e),p_g(v)}\phi(v)\\
+ &=\varepsilon_g(e)(B\phi)(e)\\
+ &=(U_gB\phi)(q_g(e)).
+\end{aligned}}
+Hence #{BP_g=U_gB}.}
+
+\p{For a graph-automorphism interpretation, require endpoints as well.
+If #{\varepsilon_g(e)=1}, require
+##{\begin{aligned}
+s(q_g(e))&=p_g(s(e)),\\
+h(q_g(e))&=p_g(h(e)).
+\end{aligned}}
+If #{\varepsilon_g(e)=-1}, require instead
+##{\begin{aligned}
+s(q_g(e))&=p_g(h(e)),\\
+h(q_g(e))&=p_g(s(e)).
+\end{aligned}}
+These equations imply the incidence equation by its indicator formula,
+including loops. The converse fails: a single loop attached to vertex
+#{0} in #{V=\{0,1\}} has incidence row #{(0,0)}. Swapping the
+vertices while fixing the loop label and using sign #{+1} satisfies
+all the matrix conditions, but moves neither endpoint of the loop.
+It is a signed-incidence symmetry, not an automorphism of that attached
+graph. The endpoint conditions exclude it.}
+
+\p{The all-positive endpoint-preserving case gives the directed
+\vocabk{exact relabelings}{fdip-000G}, once mass and retained subset
+are also preserved. Negative signs incorporate
+[edge-orientation reversal](fdip-0007) and extend that narrower
+relation. For one edge #{0\to1}, swapping its vertices and fixing
+its edge label requires sign #{-1}; orientation reversal is not
+itself a failure of symmetry.}
+
+\p{Mathlib's \leanref{Representation.ofMulAction} sends a coordinate
+basis vector at #{v} to the one at #{g\cdot v}. Its finitely supported
+coefficient module is identified with all functions on a finite set by
+\leanref{Finsupp.linearEquivFunOnFinite}, giving the inverse-precomposition
+convention above. \leanref{Representation.IntertwiningMap} bundles
+a linear map with the equation #{B P_g=U_gB}. These interfaces do not
+provide the particular incidence identity or the coherent signed-edge
+action without their proofs.}

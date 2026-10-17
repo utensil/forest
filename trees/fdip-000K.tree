@@ -1,0 +1,223 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{Symmetry survives the Gaussian marginal}
+\date{2026-10-17}
+
+\p{The [half-turn](fdip-000J) preserves the equations, Gaussian law
+and marginal on opposite vertices of the alternating cycle for every
+#{t,m>0}. More generally, let a finite group #{\Gamma} have a
+\vocabk{signed-incidence symmetry}{fdip-000J} of a finite incidence
+presentation with nonempty vertex set and positive weights. Use the counting vertex pairing,
+coordinate Lebesgue measure and scalar mass #{m>0}. Put
+##{\begin{aligned}
+L&=B^TWB,\\
+Q&=L+m^2I,\qquad G=Q^{-1}.
+\end{aligned}}
+The \vocabk{massive precision}{fdip-000A} is positive, and #{G} is
+its \vocabk{covariance}{fdip-000B}. For every #{g\in\Gamma},
+##{\begin{aligned}
+LP_g&=P_gL,&QP_g&=P_gQ,\\
+GP_g&=P_gG,&P_gGP_g^T&=G.
+\end{aligned}}
+Thus #{Q\phi=j} implies #{Q(P_g\phi)=P_gj}. The
+\vocabk{Gaussian probability law}{fdip-0005} is invariant under
+[pushforward](fdip-000H):
+#{(P_g)_*\mu_Q=\mu_Q}. For every Borel observable #{F},
+##{\begin{aligned}
+F\in L^1(\mu_Q)&\Longleftrightarrow F\circ P_g\in L^1(\mu_Q),\\
+\langle F\circ P_g\rangle_Q&=\langle F\rangle_Q.
+\end{aligned}}
+The expectation equality assumes the equivalent integrability conditions;
+#{L^1} means finite absolute integral.}
+
+\p{\citet{p. 58}{milne2025group} defines
+\vocabk{equivariance}{fgap-0008} and restriction to stable subsets.
+\citet{Proposition B.55}{friedli2017statistical}, p. 505, supplies
+the Gaussian change-of-variables convention. The weighted-incidence
+and elimination conclusions follow from the identities below.}
+
+\proof{
+\p{The incidence intertwiner and weighted pairing identity from
+\ref{fdip-000J} give
+##{\begin{aligned}
+P_g^TLP_g&=(BP_g)^TW(BP_g)\\
+ &=B^TU_g^TWU_gB=L.
+\end{aligned}}
+Since #{P_gP_g^T=I}, this implies #{LP_g=P_gL}. The scalar mass
+term commutes with #{P_g}, so #{QP_g=P_gQ}. Multiplying on both
+sides by #{Q^{-1}} gives #{GP_g=P_gG}, and orthogonality gives
+#{P_gGP_g^T=G}. The equation transforms by this same commutation;
+its solution is uniquely #{\phi=Gj}. At zero source the solution
+is zero, but the action on the whole field space can still be nontrivial.}
+
+\p{The scalar \vocabk{Euclidean action}{fdip-0004}
+#{\mathcal A(\phi)=\tfrac12\phi^TQ\phi} satisfies
+#{\mathcal A(P_g\phi)=\mathcal A(\phi)}. This function differs
+from the group action #{g\mapsto P_g}. Each coordinate permutation
+has absolute Jacobian one, so #{\psi=P_g\phi} preserves Lebesgue
+measure. For a Borel set #{T}, substitution gives
+##{\begin{aligned}
+&\mu_Q(P_g^{-1}(T))\\
+ &\quad=\frac1{Z_Q}\int\mathbf1_T(P_g\phi)
+       e^{-\mathcal A(\phi)}\,d\phi\\
+ &\quad=\frac1{Z_Q}\int\mathbf1_T(\psi)
+       e^{-\mathcal A(\psi)}\,d\psi\\
+ &\quad=\mu_Q(T).
+\end{aligned}}
+Applying this nonnegative substitution to #{|F|} first proves the
+integrability equivalence. Subtract the positive and negative parts
+when their integrals are finite to obtain the expectation identity.
+This is the [Gaussian transport theorem](fdip-000H) with
+#{P_gQP_g^T=Q}. Its matrix proof applies also to the signed-edge
+extension; that extension need not be a directed relabeling of the
+incidence presentation.}
+}
+
+\p{Now suppose a nonempty proper retained subset #{R\subsetneq V}
+is stable: #{p_g(R)=R} for every #{g}. Write #{D=V\setminus R}
+for its nonempty complement. The restrictions #{P_{g,R},P_{g,D}}
+give #{P_g=\operatorname{diag}(P_{g,R},P_{g,D})} in grouped
+coordinates. In the [Gaussian block decomposition](fdip-000D),
+write #{Q=\begin{pmatrix}A&H\\H^T&C\end{pmatrix}} and
+#{S=A-HC^{-1}H^T}. Then
+##{\begin{aligned}
+P_{g,R}SP_{g,R}^T&=S,\\
+(P_{g,R})_*\mu_S&=\mu_S.
+\end{aligned}}
+The retained covariance #{S^{-1}} and equation #{Sx=k} are
+equivariant under the same restricted action.}
+
+\proof{
+\p{Blockwise conjugation of #{P_gQP_g^T=Q} gives
+##{\begin{aligned}
+A&=P_{g,R}AP_{g,R}^T,\\
+H&=P_{g,R}HP_{g,D}^T,\\
+C&=P_{g,D}CP_{g,D}^T.
+\end{aligned}}
+Inverting the last equation gives the corresponding identity for
+#{C^{-1}}. Substitution into the Schur complement yields
+##{\begin{aligned}
+P_{g,R}SP_{g,R}^T
+ &=A-HC^{-1}H^T=S.
+\end{aligned}}
+The eliminated factor #{c_C=(2\pi)^{|D|/2}/\sqrt{\det C}}
+is unchanged as well.}
+
+\p{The projection satisfies
+##{\pi_RP_g=P_{g,R}\pi_R.}
+By the
+[exact normalized marginal](fdip-000E),
+##{\begin{aligned}
+(P_{g,R})_*\mu_S
+ &=(P_{g,R}\pi_R)_*\mu_Q\\
+ &=(\pi_RP_g)_*\mu_Q\\
+ &=(\pi_R)_*\mu_Q=\mu_S.
+\end{aligned}}
+The same theorem gives #{S^{-1}=(Q^{-1})_{RR}}. Conjugating
+#{S^{-1}} or the equation #{Sx=k} proves their equivariance.
+For every integrable retained observable #{f},
+##{\begin{aligned}
+\langle f\circ P_{g,R}\rangle_S&=\langle f\rangle_S,\\
+\langle f\circ\pi_R\rangle_Q&=\langle f\rangle_S.
+\end{aligned}}
+Finally, the eliminated stationary field
+#{y_*(x)=-C^{-1}H^Tx} obeys
+##{y_*(P_{g,R}x)=P_{g,D}y_*(x).}
+Indeed the block identities imply
+##{\begin{aligned}
+H^TP_{g,R}&=P_{g,D}H^T,\\
+C^{-1}P_{g,D}&=P_{g,D}C^{-1}.
+\end{aligned}}
+This proves compatibility
+of stationary elimination; the separate Gaussian integration proof
+establishes the marginal statement.}
+}
+
+\p{For the half-turn, retain #{R=(0,2)} and eliminate #{D=(1,3)}.
+Both restrictions are the nonidentity swap
+#{J=\begin{pmatrix}0&1\\1&0\end{pmatrix}}. The projection square is}
+
+\tikzfigs{0.75}{\begin{tikzpicture}[
+  every node/.style={inner sep=4pt},
+  transport/.style={-{Stealth[length=2mm]},shorten >=2pt,shorten <=2pt}
+]
+\node (v) at (0,0) {$\mathbb R^V$};
+\node (vp) at (3.4,0) {$\mathbb R^V$};
+\node (r) at (0,-2) {$\mathbb R^{\{0,2\}}$};
+\node (rp) at (3.4,-2) {$\mathbb R^{\{0,2\}}$};
+\draw[transport] (v) -- node[above=2mm] {$P$} (vp);
+\draw[transport] (r) -- node[above=2mm] {$J$} (rp);
+\draw[transport] (v) -- node[left=2mm] {$\pi_R$} (r);
+\draw[transport] (vp) -- node[right=2mm] {$\pi_R$} (rp);
+\end{tikzpicture}}
+
+\p{The lower map swaps the two retained coordinates. Put #{a=m^2}
+and #{s=1+t+a}. The [explicit elimination](fdip-000F) gives
+##{\begin{aligned}
+A=C&=sI_2,\qquad H=-\begin{pmatrix}1&t\\t&1\end{pmatrix},\\
+S&=\begin{pmatrix}\alpha&-\beta\\-\beta&\alpha\end{pmatrix},\\
+\alpha&=s-\frac{1+t^2}{s},\qquad\beta=\frac{2t}{s}.
+\end{aligned}}
+All three blocks commute with #{J}, hence #{JSJ=S}. Positivity
+follows also from the two eigenvalues
+##{\begin{aligned}
+\alpha-\beta&=\frac{a(a+2+2t)}s>0,\\
+\alpha+\beta&=\frac{(a+2)(a+2t)}s>0.
+\end{aligned}}
+Thus the same nontrivial action preserves the full and retained laws.
+The full covariance obeys #{G_{i+2,j+2}=G_{ij}}. Invariant state
+does not mean that each observable is pointwise invariant:
+#{\phi\mapsto\phi_0^2} is sent to #{\phi\mapsto\phi_2^2};
+they differ at #{\delta_0}, but their expectations agree.}
+
+\p{At #{t=m=1}, direct inversion gives
+##{\begin{aligned}
+S&=\begin{pmatrix}7/3&-2/3\\-2/3&7/3\end{pmatrix},\\
+S^{-1}&=\begin{pmatrix}7/15&2/15\\2/15&7/15\end{pmatrix}.
+\end{aligned}}
+Both swapped squared coordinates have expectation #{7/15}.
+The observable #{\phi_0\phi_2} is itself invariant under the
+half-turn and has expectation #{2/15}. These expectations agree
+before and after elimination.}
+
+\p{Weight invariance is necessary for this example. Replace
+#{(1,t,1,t)} by #{(1,t,2,t)} while keeping the proposed half-turn.
+Then #{L_{00}=1+t} and #{L_{22}=2+t}, so #{PLP^T\ne L} and
+#{\mathcal A(\delta_2)-\mathcal A(\delta_0)=1/2}.
+If its Gaussian law were invariant, second moments would give
+#{PGP^T=G}; inversion would give #{PQP^T=Q}, contradicting
+those diagonal entries. At #{t=m=1} the retained blocks are
+##{\begin{aligned}
+A=C&=\operatorname{diag}(3,4),\\
+H&=-\begin{pmatrix}1&1\\1&2\end{pmatrix},\\
+S_{\mathrm{broken}}
+ &=\begin{pmatrix}29/12&-5/6\\-5/6&8/3\end{pmatrix}.
+\end{aligned}}
+The last matrix follows by subtracting #{HC^{-1}H^T} from #{A}.
+Its diagonal entries differ by #{1/4}, so its marginal also fails
+swap invariance. Its positive Gaussian still exists.}
+
+\p{Partition stability is a different requirement. With the original
+weights, retain #{R=\{0,1\}} instead. The half-turn still preserves
+the full state, but sends #{R} to #{D=\{2,3\}}. No map #{T} of
+retained fields can satisfy #{\pi_RP=T\pi_R}: the zero field
+forces #{T(0)=0}, while #{\delta_2} has retained projection zero
+and projects to #{(1,0)} after the half-turn. The action transports
+the marginal to a different subset; it does not descend through this
+fixed projection. This does not exclude accidental symmetries of an
+individual two-site density. A general restricted action may also be
+trivial, unlike the opposite-pair swap proved above. Extra mass fields
+or reference pairings would require their own preservation hypotheses.}
+
+\p{Mathlib's \leanref{LinearIsometryEquiv.measurePreserving}
+supplies volume preservation for finite-dimensional real linear
+isometry equivalences. TauCeti's
+\leanref/tauceti{TauCeti.Probability.map_affine_multivariateGaussian}
+supplies the covariance-parameter Gaussian transport: set mean and
+translation to zero, covariance to #{Q^{-1}}, and linear map to
+#{P_g} or the retained projection. The
+[precision-density bridge](fdip-000B) and the proved conjugacies
+align that provider with these laws. The incidence, partition and
+counterexample statements are additional calculations.}
