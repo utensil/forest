@@ -1,0 +1,99 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Example}
+\title{The half-turn in characteristic two}
+\date{2026-10-17}
+
+\p{The coefficient assumption in the
+[two-sector decomposition](fdip-000L) is essential. Let #{k} now
+be a field of characteristic two. Use the same #{C_2}, group-basis
+element #{g}, coordinate modules #{V_k,W_k}, and maps #{P,J}.
+The faithful algebra actions still exist, but the algebra is
+##{k[C_2]\cong k[z]/(z^2),}
+and it has no idempotents other than #{0,1}. Thus it cannot be
+isomorphic to #{k\times k}.}
+
+\p{The \vocabk{Group Algebra}{fgap-001H} still has its group
+basis, as in \citet{Sections 3.1-3.2, pp. 39-41}{sengupta2010representations}.
+The character projectors in
+\citet{Section 4.5, p. 63}{sengupta2010representations}
+require the group order to be invertible in the field. The following
+calculation identifies what replaces that product when the order
+is zero in #{k}.}
+
+\proof{
+\p{Put #{\epsilon=g-1}. Its coefficient at #{g} is #{1}, so
+#{\epsilon\ne0}; nevertheless
+##{\epsilon^2=g^2-2g+1=0.}
+Since #{g=1+\epsilon}, the pair #{1,\epsilon} is a basis:
+##{c+d\epsilon=(c-d)+dg,}
+so coefficient comparison proves independence as well as spanning.
+Evaluation at #{\epsilon} therefore induces a unital
+#{k}-algebra map
+##{\begin{aligned}
+\Psi:k[z]/(z^2)&\longrightarrow k[C_2],\\
+[f(z)]&\longmapsto f(\epsilon).
+\end{aligned}}
+It is well defined because #{\epsilon^2=0}. Every polynomial has
+a unique remainder #{c+dz} modulo the monic polynomial #{z^2}:
+write #{f=c+dz+z^2q}, and observe that a multiple of #{z^2}
+has zero constant and linear coefficients. Hence the quotient has
+basis #{[1],[z]}. The map sends it to the basis #{1,\epsilon},
+so it is bijective. The algebra #{k[z]/(z^2)} is the algebra of
+\newvocab{dual numbers} over #{k}; its nonzero element #{[z]}
+has square zero.}
+
+\p{If #{c+d\epsilon} is idempotent, commutativity and
+characteristic two give
+##{(c+d\epsilon)^2=c^2.}
+Comparison in the basis #{1,\epsilon} forces #{d=0} and
+#{c^2=c}. Since #{k} is a field, #{c(c-1)=0} implies
+#{c=0} or #{c=1}. Both are idempotent. In contrast,
+#{(1,0)} is a nonzero idempotent different from the unit in
+#{k\times k}. An algebra isomorphism preserves these properties,
+which rules out the product. The field hypothesis matters: a
+general characteristic-two ring can already have nontrivial scalar
+idempotents.}
+}
+
+\p{On the vertex module, the same half-turn still satisfies
+#{P^2=I}, while #{-1=1}. Its two proposed eigenspaces now
+coincide:
+##{\begin{aligned}
+\ker(P-I)&=\ker(P+I)\\
+ &=\{(x,y,x,y):x,y\in k\}.
+\end{aligned}}
+This is a two-dimensional subspace of #{k^4}; adding it to itself
+does not recover the full module. On the retained module,
+##{\begin{aligned}
+\ker(J-I)&=\ker(J+I)\\
+ &=\{(x,x):x\in k\},
+\end{aligned}}
+which has dimension one inside #{k^2}. These equalities follow
+directly from the coordinate formulas for #{P,J}.}
+
+\p{The nonzero nilpotent is visible in the faithful action as well.
+For #{N=P-I},
+##{\begin{aligned}
+N^2&=P^2-2P+I=0,\\
+N\delta_0&=\delta_2-\delta_0\ne0.
+\end{aligned}}
+The last vector has coefficient #{1} at coordinate #{2}.
+Similarly, #{J-I} is nonzero on #{\delta_0^R} and has square
+zero. The expressions #{(I\pm P)/2} and #{(I\pm J)/2} are
+undefined because #{2=0}. The action and projection intertwiner
+survive, but the complementary projectors and eigenspace direct
+sum do not. This is a change of coefficient field for the algebra
+and modules; the real [Gaussian law](fdip-000M) is not being
+extended to characteristic two.}
+
+\p{TauCeti's
+\leanref/tauceti{MonoidAlgebra.isIdempotentElem_cyclicTwo_iff}
+proves the idempotent obstruction more generally for a commutative
+ring without zero divisors in which #{2} is not a unit. A
+characteristic-two field meets these hypotheses. The generator is
+identified with #{\operatorname{Multiplicative.ofAdd}
+(1:\mathbb Z/2\mathbb Z)} as in \ref{fdip-000L}.
+The dual-number presentation and the coordinate nilpotent above
+are separate explicit calculations.}

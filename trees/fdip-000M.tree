@@ -1,0 +1,204 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{Gaussian sectors and their retained scalars}
+\date{2026-10-17}
+
+\p{For the [alternating four-cycle](fdip-0003) with #{t,m>0},
+the two real \vocabk{half-turn sectors}{fdip-000L} are independent
+under the Gaussian law. Their precision and covariance blocks vary
+with #{t,m}, although the action and its projectors do not. Put
+#{a=m^2} and #{s=1+t+a}. In vertex order #{(0,1,2,3)}, the
+\vocabk{massive precision}{fdip-000A} is
+##{Q=\begin{pmatrix}
+s&-1&0&-t\\-1&s&-t&0\\0&-t&s&-1\\-t&0&-1&s
+\end{pmatrix}.}
+Use the orthonormal vectors
+##{\begin{aligned}
+v_{\varepsilon,0}&=(\delta_0+\varepsilon\delta_2)/\sqrt2,\\
+v_{\varepsilon,1}&=(\delta_1+\varepsilon\delta_3)/\sqrt2,
+\qquad\varepsilon\in\{1,-1\}.
+\end{aligned}}
+Write #{\phi=\sum_\varepsilon
+(x_\varepsilon v_{\varepsilon,0}+y_\varepsilon v_{\varepsilon,1})}
+and #{z_\varepsilon=(x_\varepsilon,y_\varepsilon)}. These are
+normalized sector coordinates, rather than the coefficients in the
+unnormalized free bases of \ref{fdip-000L}.}
+
+\p{In the order #{(v_{+,0},v_{+,1},v_{-,0},v_{-,1})}, the
+precision is #{\operatorname{diag}(Q_+,Q_-)} and its inverse is
+#{\operatorname{diag}(G_+,G_-)}, where
+##{\begin{aligned}
+Q_+&=\begin{pmatrix}s&-(1+t)\\-(1+t)&s\end{pmatrix},\\
+Q_-&=\begin{pmatrix}s&t-1\\t-1&s\end{pmatrix},\\
+G_+&=\tfrac1{a(a+2+2t)}
+     \begin{pmatrix}s&1+t\\1+t&s\end{pmatrix},\\
+G_-&=\tfrac1{(a+2)(a+2t)}
+     \begin{pmatrix}s&1-t\\1-t&s\end{pmatrix}.
+\end{aligned}}
+The \vocabk{covariance}{fdip-000B} in these coordinates is given
+by the displayed inverse blocks. If #{T\phi=(z_+,z_-)}, then
+##{T_*\mu_Q=\mu_{Q_+}\otimes\mu_{Q_-}.}
+The product on the right is the product probability measure.
+In particular the sector random vectors #{z_+,z_-} are independent.}
+
+\p{\citet{Proposition B.55, p. 505}{friedli2017statistical}
+gives the Gaussian covariance and coordinate-change convention.
+The [positive Gaussian normalization](fdip-0005) and
+[inverse-precision covariance](fdip-000B) apply to each block.
+The product assertion follows from the explicit density calculation
+below, rather than from the algebraic direct sum alone.}
+
+\proof{
+\p{Each unnormalized vector has squared norm two, and the pairings
+between distinct vectors are zero. Thus the basis matrix #{O} with the
+displayed columns is orthogonal, #{T=O^T}, and
+#{|\det O|=1}. Applying #{Q} gives
+##{\begin{aligned}
+Qv_{+,0}&=sv_{+,0}-(1+t)v_{+,1},\\
+Qv_{+,1}&=-(1+t)v_{+,0}+sv_{+,1},\\
+Qv_{-,0}&=sv_{-,0}+(t-1)v_{-,1},\\
+Qv_{-,1}&=(t-1)v_{-,0}+sv_{-,1}.
+\end{aligned}}
+These are precisely the two asserted blocks. Their sum and difference
+vectors have eigenvalues
+##{\begin{aligned}
+Q_+&:\quad a,\ a+2+2t,\\
+Q_-&:\quad a+2t,\ a+2.
+\end{aligned}}
+They are all positive. Multiplication by the displayed #{G_\pm}
+gives the identity: the diagonal numerators are respectively
+#{s^2-(1+t)^2=a(a+2+2t)} and
+#{s^2-(t-1)^2=(a+2)(a+2t)}, and the off-diagonal numerators
+vanish. This proves the inverse formulas.}
+
+\p{The orthogonal change of variables preserves coordinate Lebesgue
+measure and writes the Euclidean action as
+##{\mathcal A(\phi)=\tfrac12 z_+^TQ_+z_+
+                         +\tfrac12 z_-^TQ_-z_-.}
+Each factor has a finite positive normalizer
+##{Z_\pm=\frac{2\pi}{\sqrt{\det Q_\pm}}.}
+Tonelli's theorem applied to the nonnegative density gives
+#{Z_Q=Z_+Z_-}. Division by this product yields the product of the
+two normalized densities. Integrating over every Borel rectangle
+#{A_+\times A_-} gives
+##{\begin{aligned}
+&\mu_Q\{z_+\in A_+,\ z_-\in A_-\}\\
+&\qquad=\mu_{Q_+}(A_+)\mu_{Q_-}(A_-).
+\end{aligned}}
+This identifies the product law and proves independence. In particular
+it does not assume that zero covariance alone implies independence.
+Polynomial moments are integrable by \ref{fdip-0006}.}
+}
+
+\p{Retain #{R=(0,2)}. Its orthonormal sector vectors are
+##{w_\varepsilon=(\delta_0^R+\varepsilon\delta_2^R)/\sqrt2.}
+The projection satisfies
+##{\begin{aligned}
+\pi_Rv_{\varepsilon,0}&=w_\varepsilon,\\
+\pi_Rv_{\varepsilon,1}&=0.
+\end{aligned}}
+Thus the retained sector coordinates are exactly #{x_+,x_-},
+with no additional factor of #{\sqrt2}. In these coordinates, the
+[retained precision](fdip-000F) has positive scalar blocks
+##{\begin{aligned}
+\sigma_+&=s-\frac{(1+t)^2}{s}
+          =\frac{a(a+2+2t)}s,\\
+\sigma_-&=s-\frac{(t-1)^2}{s}
+          =\frac{(a+2)(a+2t)}s.
+\end{aligned}}
+The retained coordinates are independent centered Gaussians with
+variances #{\sigma_+^{-1},\sigma_-^{-1}}. Decomposing into
+sectors and taking this marginal therefore give the same law in
+either order.}
+
+\proof{
+\p{A sector has precision
+#{\begin{pmatrix}s&c\\c&s\end{pmatrix}}, with
+#{c=-(1+t)} or #{c=t-1}. Complete the square:
+##{\begin{aligned}
+sx^2+2cxy+sy^2
+ &=s(y+cx/s)^2\\
+ &{}+(s-c^2/s)x^2.
+\end{aligned}}
+The [scalar Gaussian integral](fdip-0005) gives
+##{\begin{aligned}
+&\int_{\mathbb R}
+   e^{-(sx^2+2cxy+sy^2)/2}\,dy\\
+&\qquad=\sqrt{\frac{2\pi}{s}}
+   e^{-(s-c^2/s)x^2/2}.
+\end{aligned}}
+Each eliminated sector coordinate contributes
+#{\sqrt{2\pi/s}}; the two factors multiply to #{2\pi/s}.
+This is exactly the factor for the original eliminated block
+#{C=sI_2} in \ref{fdip-000F}. The retained orthogonal change of
+coordinates also has absolute determinant one. Normalizing the two
+scalar densities proves the claimed retained product law.}
+
+\p{Equivalently, the effective precision in vertex coordinates is
+##{\begin{aligned}
+S&=\begin{pmatrix}\alpha&-\beta\\-\beta&\alpha\end{pmatrix},\\
+\alpha&=s-\frac{1+t^2}{s},\qquad\beta=\frac{2t}{s}.
+\end{aligned}}
+It acts on #{w_+} by #{\alpha-\beta=\sigma_+}, and on
+#{w_-} by #{\alpha+\beta=\sigma_-}. Thus each sector's
+\vocabk{Schur complement}{fdip-000D} agrees with the corresponding
+block of #{S}.}
+
+\p{See \citet{Appendix A.5.5, pp. 650-651}{boyd2004convex}
+for the general block formula.
+Restricting #{Q} to a full sector still leaves two coordinates.
+Integrating out its second coordinate takes the Schur complement
+computed above.}
+}
+
+\p{Transforming the retained coordinates back gives
+##{\begin{aligned}
+\operatorname{Var}(\phi_0)
+ =\operatorname{Var}(\phi_2)
+ &=\tfrac12(\sigma_+^{-1}+\sigma_-^{-1}),\\
+\langle\phi_0\phi_2\rangle_Q
+ &=\tfrac12(\sigma_+^{-1}-\sigma_-^{-1}).
+\end{aligned}}
+For #{m=t=1}, the sector blocks and their inverses are
+##{\begin{aligned}
+Q_+&=\begin{pmatrix}3&-2\\-2&3\end{pmatrix},&Q_-&=3I_2,\\
+G_+&=\tfrac15\begin{pmatrix}3&2\\2&3\end{pmatrix},&G_-&=I_2/3.
+\end{aligned}}
+Hence #{\sigma_+=5/3}, #{\sigma_-=3}; the retained variance
+is #{7/15} and the cross covariance is #{2/15}. For #{m=1,t=2},
+##{\begin{aligned}
+Q_+&=\begin{pmatrix}4&-3\\-3&4\end{pmatrix},\\
+Q_-&=\begin{pmatrix}4&1\\1&4\end{pmatrix},\\
+G_+&=\tfrac17\begin{pmatrix}4&3\\3&4\end{pmatrix},\\
+G_-&=\tfrac1{15}\begin{pmatrix}4&-1\\-1&4\end{pmatrix}.
+\end{aligned}}
+Now #{\sigma_+=7/4}, #{\sigma_-=15/4}; the retained variance
+is #{44/105} and the cross covariance is #{16/105}. Both examples
+have the same #{P,J,E_\pm,F_\pm}, but different covariance
+matrices and hence different Gaussian states.}
+
+\p{The remaining freedom is visible in the algebra of operators
+commuting with #{P}. In the sector basis,
+#{P=\operatorname{diag}(I_2,-I_2)}. For a block operator
+#{M=\begin{pmatrix}A&B\\C&D\end{pmatrix}},
+##{MP=PM\quad\Longleftrightarrow\quad B=C=0,}
+because the off-diagonal equations are #{2B=2C=0} over
+#{\mathbb R}. Its commutant is therefore
+#{M_2(\mathbb R)\times M_2(\mathbb R)}. The image of
+#{\mathbb R[C_2]} is only
+##{\{\operatorname{diag}(xI_2,yI_2):x,y\in\mathbb R\}.}
+Each sign occurs twice in the full module, so symmetry allows mixing
+within its two-dimensional sector. It does not require #{Q_\pm}
+to be scalar. The [distinction between mathematical summands and
+physical interpretations](fgap-0013) applies: this decomposition
+alone selects no continuous gauge group, physical mass spectrum or
+interaction.}
+
+\p{Mathlib's \leanref{OrthonormalBasis.measurePreserving_repr}
+supplies the volume-preserving passage to orthonormal coordinates.
+The concrete block matrices, product-density proof and sectorwise
+Schur calculation above supply the additional content for this
+family. The [covariance providers](fdip-000B) use covariance as
+their parameter, so they apply with #{G_\pm=Q_\pm^{-1}}.}
