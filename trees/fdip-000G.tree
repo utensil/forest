@@ -1,0 +1,99 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Definition}
+\title{Finite Gaussian backgrounds and relabelings}
+\date{2026-10-17}
+
+\p{To compare two discrete Gaussian models, specify which data a change
+of labels must carry. A \newvocab{finite Gaussian background} consists of a
+\vocabk{finite incidence presentation}{fdip-0002}
+#{(V,E,s,h)}, positive edge weights #{w:E\to\mathbb R_{>0}}, a mass
+#{m>0}, and a nonempty proper retained subset #{R\subsetneq V}.
+Put #{U=V\setminus R}; both index sets are nonempty.
+The reference structures are the
+\vocabk{counting inner products}{fdip-0002} on vertex and edge fields,
+the \vocabk{weighted edge inner product}{fdip-0007} determined by #{w},
+and coordinate Lebesgue measure #{\lambda_V} on #{\mathbb R^V}.
+Grouping the fields as #{(x,y)\in\mathbb R^R\times\mathbb R^U}
+identifies #{\lambda_V} with the product #{dx\,dy}.}
+
+\p{The incidence matrix #{B} and weight matrix #{W} determine the
+\vocabk{weighted graph Laplacian}{fdip-0007} and
+\vocabk{massive precision}{fdip-000A}:
+##{L=B^TWB,\qquad Q=L+m^2I>0.}
+The \vocabk{Gaussian probability law}{fdip-0005} #{\mu_Q} and its
+\vocabk{retained marginal law}{fdip-000E} #{\mu_S} are then derived
+data, with \vocabk{effective precision}{fdip-000D}
+#{S=A-HC^{-1}H^T} in the retained/eliminated block ordering.
+The Gaussian density in \citet{Proposition B.55}{friedli2017statistical},
+p. 505, uses covariance #{\Sigma}; here #{\Sigma=Q^{-1}} by
+\ref{fdip-000B}. A bare matrix omits the incidence data, reference
+structures and retained subset of this background.}
+
+\p{An \newvocab{exact relabeling} to a primed background is a pair of
+bijections #{p:V\to V'} and #{\eta:E\to E'} such that
+##{\begin{aligned}
+s'\circ\eta&=p\circ s,&h'\circ\eta&=p\circ h,\\
+w'\circ\eta&=w,&m'&=m,\\
+p(R)&=R'.
+\end{aligned}}
+Thus directed endpoints, weights, mass and the partition are preserved.
+In particular a loop's attachment vertex is preserved even though its
+incidence row is zero. Define the coordinate maps #{P,J} by
+##{\begin{aligned}
+(P\phi)(p(v))&=\phi(v),\\
+(Ja)(\eta(e))&=a(e).
+\end{aligned}}
+They preserve the counting pairings and satisfy
+#{P^{-1}=P^T}, #{J^{-1}=J^T}. Weight preservation also gives
+#{W'=JWJ^T}, so #{J} preserves the weighted edge pairing.}
+
+\p{The endpoint equations imply the operator identities. At an edge
+#{\eta(e)},
+##{\begin{aligned}
+(B'P\phi)_{\eta(e)}
+ &=\phi(h(e))-\phi(s(e))\\
+ &=(JB\phi)_{\eta(e)}.
+\end{aligned}}
+Hence #{B'P=JB}, or #{B'=JBP^T}. Substituting into the Laplacian gives
+##{\begin{aligned}
+L'&=(B')^TW'B'\\
+  &=PB^TJ^TJWJ^TJBP^T\\
+  &=PLP^T,\\
+Q'&=PQP^T.
+\end{aligned}}
+The same maps carry the normalized states and their marginals by
+\ref{fdip-000H}. Identity bijections satisfy all the conditions;
+inverse bijections do too, and componentwise composition preserves each
+endpoint, weight, mass and subset equation. Existence of an exact
+relabeling therefore defines an equivalence relation on these backgrounds.}
+
+\p{For a broader comparison, forget the mass, state and partition and
+restrict to nonzero Laplacians with their counting pairings. Define
+##{L\approx L'\quad\Longleftrightarrow\quad
+L'=cPLP^T}
+for some #{c>0} and vertex-coordinate permutation #{P}.
+Identity uses #{(c,P)=(1,I)}; inverse uses #{(c^{-1},P^T)};
+composition uses the product of the positive scalars and of the
+permutations. This is another equivalence relation. Exact background
+relabelings give its case #{c=1} when #{L\ne0}, but this broader
+relation need not identify the fixed-mass Gaussian states.
+The [trace ratio](fdip-000I) will separate two backgrounds even after
+these extra identifications.}
+
+\p{An arbitrary invertible real field map #{y=T\phi} is outside the
+declared arrows. In these coordinates the precision becomes
+#{T^{-T}QT^{-1}}, where #{T^{-T}=(T^{-1})^T}, and the original pairing
+becomes #{y^TT^{-T}T^{-1}z}. Coordinate volumes satisfy
+#{dy=|\det T|\,d\phi}.
+\citet{Proposition B.55}{friedli2017statistical} uses this substitution
+in its proof.
+Enlarging the comparison to such maps must carry these reference
+structures explicitly.}
+
+\p{Mathlib's \leanref{Matrix.reindexLinearEquiv} and
+\leanref{Matrix.reindexRingEquiv} express the linear and multiplicative
+parts of coordinate reindexing. They support the matrix calculation;
+the endpoint, weight, mass and partition requirements are additional
+data of the exact relabeling above.}

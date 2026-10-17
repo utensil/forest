@@ -1,0 +1,112 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Example}
+\title{A trace ratio separates two weighted cycles}
+\date{2026-10-17}
+
+\p{The alternating cycles at #{t=1} and #{t=2} remain different even
+under the [broader Laplacian comparison](fdip-000G)
+#{L'=cPLP^T}, with #{c>0} and #{P} a vertex permutation.
+To prove this, write #{\operatorname{tr}M=\sum_iM_{ii}} for the
+trace of a square matrix and define
+##{R(L)=\frac{\operatorname{tr}(L^2)}{(\operatorname{tr}L)^2}}
+for a nonzero real symmetric positive semidefinite #{L} on a counting
+space. Its eigenvalues are nonnegative and at least one is positive,
+so #{\operatorname{tr}L>0}.}
+
+\p{\citet{Appendix A.5.2}{boyd2004convex}, pp. 646-647, gives the symmetric
+spectral decomposition and trace formula used here.
+The [positive graph energy](fdip-0008) supplies the semidefinite
+hypothesis for a weighted Laplacian. The restriction #{L\ne0} is
+essential: incidence data with only loops have #{L=0}, where this ratio
+is undefined.}
+
+\p{The ratio is unchanged by the declared comparison. For square real
+matrices, finite sums give
+##{\begin{aligned}
+\operatorname{tr}(MN)
+ &=\sum_i\sum_jM_{ij}N_{ji}\\
+ &=\sum_j\sum_iN_{ji}M_{ij}
+  =\operatorname{tr}(NM).
+\end{aligned}}
+Thus #{\operatorname{tr}(PMP^T)=\operatorname{tr}M}. If
+#{L'=cPLP^T}, then #{(L')^2=c^2PL^2P^T}, and
+##{\begin{aligned}
+\operatorname{tr}L'&=c\operatorname{tr}L,\\
+\operatorname{tr}((L')^2)&=c^2\operatorname{tr}(L^2).
+\end{aligned}}
+The factors #{c^2} cancel from the ratio, proving #{R(L')=R(L)}.
+Hence #{R} is a well-defined invariant of these equivalence classes.
+It uses the counting-space operator, not the matrix of a bilinear form
+after an arbitrary nonorthogonal change of basis.}
+
+\p{For the [alternating four-cycle](fdip-0003), #{t>0}, the
+[orthonormal spectral basis](fdip-000B) gives eigenvalues
+#{0,2,2t,2+2t}, including at #{t=1}. Consequently
+##{\begin{aligned}
+\operatorname{tr}L_t&=4(1+t),\\
+\operatorname{tr}(L_t^2)
+ &=4+4t^2+4(1+t)^2\\
+ &=8(t^2+t+1),\\
+R(t):=R(L_t)&=\frac{t^2+t+1}{2(t+1)^2}.
+\end{aligned}}
+In particular
+##{\begin{aligned}
+R(1)&=\frac38,\qquad R(2)=\frac7{18},\\
+R(2)-R(1)&=\frac1{72}>0.
+\end{aligned}}
+There can be no #{c>0} and vertex permutation #{P} with
+#{L_2=cPL_1P^T}. Thus the associated finite Gaussian backgrounds
+cannot be exactly relabeled into each other either. This calculation
+separates the stated pair; it does not claim a classification of all
+backgrounds.}
+
+\p{The reciprocal identity #{R(t)=R(1/t)} is consistent with this
+comparison. A one-step rotation #{p(i)=i+1\pmod4} exchanges the
+alternating edge weights #{1,t} and leaves the common diagonal
+#{1+t} unchanged. Its coordinate permutation therefore satisfies
+##{PL_tP^T=tL_{1/t}.}
+Since #{1/t>0}, the reciprocal Laplacians are equivalent under
+#{\approx}. Their equal ratios do not demonstrate a failure of
+completeness.}
+
+\p{A fixed-mass calculation shows what changes in the induced state.
+Set #{m=1} and retain the same labeled vertices #{R=\{0,2\}}.
+The [alternate-vertex elimination](fdip-000F) has #{s=t+2}, giving
+##{\begin{aligned}
+\alpha(t)&=s-\frac{1+t^2}{s}=\frac{4t+3}{t+2},\\
+\beta(t)&=\frac{2t}{t+2},\\
+S_t&=\begin{pmatrix}\alpha(t)&-\beta(t)\\
+                         -\beta(t)&\alpha(t)\end{pmatrix}.
+\end{aligned}}
+Hence the effective coupling changes from #{\beta(1)=2/3} to
+#{\beta(2)=1}, and the two precisions are
+##{\begin{aligned}
+S_1&=\begin{pmatrix}7/3&-2/3\\-2/3&7/3\end{pmatrix},\\
+S_2&=\begin{pmatrix}11/4&-1\\-1&11/4\end{pmatrix}.
+\end{aligned}}
+Their determinants are #{5} and #{105/16}. The off-diagonal entry
+of #{S_t^{-1}} is #{\beta(t)/\det S_t}. By the
+[marginal expectation identity](fdip-000E), the same labeled observable
+therefore has different normalized expectations:
+##{\begin{aligned}
+\langle\phi_0\phi_2\rangle_{t=1,m=1}&=\frac{2}{15},\\
+\langle\phi_0\phi_2\rangle_{t=2,m=1}&=\frac{16}{105}.
+\end{aligned}}
+This comparison fixes the mass, coordinates, reference pairing and
+partition. The labeled observable is not itself asserted invariant under
+every relabeling; the trace ratio already established the broader
+inequivalence.}
+
+\p{Scale invariance of #{R} does not mean equality of fixed-mass
+states. On an eigenvector of #{L} with eigenvalue #{\lambda>0},
+replacing #{L} by #{cL} changes the covariance eigenvalue from
+#{1/(\lambda+m^2)} to #{1/(c\lambda+m^2)} when #{c\ne1}.
+The exact finite differences above do not construct a physical map
+from an environment to the parameter #{t}.}
+
+\p{Mathlib's \leanref{Matrix.trace_mul_comm} and
+\leanref{Matrix.trace_smul} supply the cyclic trace and scalar identities.
+The nonzero domain, ratio cancellation and four-cycle values are the
+additional explicit calculations above.}
