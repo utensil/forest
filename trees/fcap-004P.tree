@@ -1,0 +1,101 @@
+\import{fcap-macros}
+\meta{agent-authored}{true}
+\tag{fcap}
+\tag{spin}
+\tag{quadratic-forms}
+
+\taxon{Definition}
+\title{Finite adelic class sets}
+
+\p{A restricted tuple of local transformations can be changed on
+the left by one rational transformation and on the right by a
+tuple in the chosen reference subgroups. The resulting equivalence
+classes depend on which of O, SO or Spin is used at both ends.}
+
+\p{Let #{Q} be nondegenerate on a finite-dimensional rational
+space #{V}, with a
+\vocabk{compatible compact-open reference tuple}{fcap-004C} #{U}.
+Use the finite adelic groups of \ref{fcap-004F} and their
+\vocabk{rational diagonal subgroups}{fcap-004K}. Define separately
+
+##{\begin{aligned}
+\Gamma_O&=\delta_f^O(O(V,Q)), & K_O&=\prod_p U_p^O,\\
+\Gamma_{SO}&=\delta_f^{SO}(SO(V,Q)), & K_{SO}&=\prod_p U_p^{SO},\\
+\Gamma_{\Spin}&=\delta_f^{\Spin}(\Spin(V,Q)),
+& K_{\Spin}&=\prod_p U_p^{\Spin}.
+\end{aligned}}
+
+Each #{\Gamma_G} is the actual image subgroup in #{G_f(U)}.
+Each #{K_G} is its \vocabk{product reference subgroup}{fcap-004F},
+so it is compact and open by the restricted-product construction.
+The SO references are #{U_p^{SO}=i_p^{-1}(U_p^O)};
+Spin uses its own chosen references and its actual generated carrier.}
+
+\p{For each #{G\in\{O,SO,\Spin\}}, define a relation on
+#{G_f(U)} by
+
+##{x\sim_G y\quad\Longleftrightarrow\quad
+\exists\gamma\in\Gamma_G\;\exists k\in K_G,\quad y=\gamma xk.}
+
+The \newvocab{finite adelic class sets} are the three quotient sets
+
+##{\begin{aligned}
+\mathcal C_O(U)&=\Gamma_O\backslash O_f(U)/K_O,\\
+\mathcal C_{SO}(U)&=\Gamma_{SO}\backslash SO_f(U)/K_{SO},\\
+\mathcal C_{\Spin}(U)&=\Gamma_{\Spin}\backslash\Spin_f(U)/K_{\Spin}.
+\end{aligned}}
+
+Here #{\Gamma_G\backslash G_f(U)/K_G} means the set of
+equivalence classes for #{\sim_G}, with no quotient topology assigned.}
+
+\subtree{
+\taxon{Proof}
+\p{Reflexivity follows from #{x=1x1}. If #{y=\gamma xk}, then
+#{x=\gamma^{-1}yk^{-1}}, and the inverses remain in their
+respective subgroups, proving symmetry. If also
+#{z=\eta y\ell}, where #{\eta\in\Gamma_G} and #{\ell\in K_G},
+then associativity gives
+
+##{z=\eta(\gamma xk)\ell=(\eta\gamma)x(k\ell).}
+
+The products #{\eta\gamma\in\Gamma_G} and #{k\ell\in K_G}
+give transitivity. Their order matters; neither subgroup is
+assumed commutative or normal. This proves the equivalence relation
+separately for all three groups.}
+}
+
+\p{The class of #{x} is the \newvocab{double coset}
+#{\Gamma_GxK_G}. In coordinates, equality of the classes of #{x} and #{y} means
+
+##{y_p=h_p x_p k_p\qquad\text{for every prime }p,}
+
+for one rational #{h\in G(V,Q)} and a tuple
+#{(k_p)_p\in\prod_p U_p^G}. In particular, a tuple supported at
+one prime #{\ell}, with value #{u\in U_\ell^G} there, represents
+the identity class: it already lies in #{K_G}. The left changes
+must come from a single rational element; unrelated local left
+changes do not define this equivalence.}
+
+\p{The actual products #{K_G} are part of these definitions.
+Eventual equality of reference families identifies the ambient
+restricted products by \ref{fcap-004F}, but it need not identify
+their product reference subgroups. The definition therefore does
+not supply a class-set bijection from eventual equality alone.
+In dimension zero all three class sets are singletons. These are
+quotient-set constructions, without a finiteness, measure or
+approximation assertion.}
+
+\p{The finite-stage adelic construction and rational-point
+diagonal have classical context in
+\citet{Example 2.3, p. 3, and Theorem 3.6, pp. 6-8}{conrad2011adelic}.
+The quotient relation and its elementary verification above are
+applied here to the explicit chosen subgroups, rather than
+attributed to a class-number theorem. TauCeti's corresponding
+definitions are
+\leanref/tauceti{TauCeti.QuadraticMap.OrthogonalCompactOpens.finiteAdelicOrthogonalDoubleCoset},
+\leanref/tauceti{TauCeti.QuadraticMap.OrthogonalCompactOpens.finiteAdelicSpecialOrthogonalDoubleCoset}
+and
+\leanref/tauceti{TauCeti.QuadraticMap.OrthogonalCompactOpens.finiteAdelicSpinDoubleCoset}.
+They use the rational diagonal ranges and the subgroups of tuples
+lying in every reference, without assuming that those ranges
+are discrete or that the double-coset sets are finite.}

@@ -1,0 +1,105 @@
+\import{fcap-macros}
+\meta{agent-authored}{true}
+\tag{fcap}
+\tag{spin}
+\tag{quadratic-forms}
+
+\taxon{Proposition}
+\title{The adelic spinor kernel}
+
+\p{Let #{Q} be nondegenerate on a finite-dimensional rational
+space #{V}, and let #{U} be a
+\vocabk{compatible compact-open reference tuple}{fcap-004C}.
+Use the \vocabk{finite adelic spinor norm}{fcap-004N}
+#{\Theta:SO_f(U)\to C_f(U)}, with its actual reference images
+#{I_p=\theta_p(U_p^{SO})}. Its kernel, called the
+\newvocab{adelic spinor kernel}, is
+
+##{\ker\Theta
+=\{g\in SO_f(U):\theta_p(g_p)=1\text{ for every prime }p\}.}
+
+Give this subgroup the subspace topology from #{SO_f(U)}.
+The continuous Spin projection #{\rho_f} of \ref{fcap-004J}
+corestricts to a continuous homomorphism
+
+##{\bar\rho_f:\Spin_f(U)\longrightarrow\ker\Theta,
+\qquad (s_p)_p\longmapsto(\rho_p(s_p))_p.}
+
+The formula retains exactly the same coordinates as #{\rho_f}.}
+
+\subtree{
+\taxon{Proof}
+\p{The identity of the restricted product #{C_f(U)} has identity
+at every prime. Thus #{\Theta(g)=1} if and only if every
+#{\theta_p(g_p)=1}, proving the kernel description. For a restricted
+Spin element #{s}, the local image/kernel theorem \ref{fcap-0023}
+gives #{\theta_p(\rho_p(s_p))=1} at every prime. The already
+constructed #{\rho_f(s)} is restricted, so it lies in #{\ker\Theta}.
+Corestriction preserves its homomorphism law.}
+
+\p{Let #{j:\ker\Theta\hookrightarrow SO_f(U)} be the inclusion.
+Every open subset of the kernel is of the form
+#{A\cap\ker\Theta}, for some open #{A\subseteq SO_f(U)}.
+Its preimage under #{\bar\rho_f} is #{\rho_f^{-1}(A)}, which is
+open by continuity of #{\rho_f}. This proves continuity of the
+corestriction and the factorization #{j\bar\rho_f=\rho_f}.}
+}
+
+\p{The triangle records the factorization, with #{j} the subgroup
+inclusion and no surjectivity assigned to either Spin arrow.}
+
+\<html:div>[style]{overflow-x: auto;}{
+\<html:div>[style]{min-width: 240px; text-align: center;}{
+\texfig{
+\begin{tikzcd}[column sep=large, row sep=large]
+\Spin_f(U) \arrow[r,"\bar\rho_f"] \arrow[dr,"\rho_f"']
+  & \ker\Theta \arrow[d,hook,"j"] \\
+  & SO_f(U)
+\end{tikzcd}
+}
+}
+}
+
+\p{For a rational proper isometry #{g\in SO(V,Q)}, write
+#{\delta_f^{SO}(g)=(g_p)_p} for its
+\vocabk{rational diagonal}{fcap-004K}, and put
+
+##{j_p:\mathbb Q^{\times}/(\mathbb Q^{\times})^2\longrightarrow C_p,
+\qquad [a]_{\mathbb Q}\longmapsto[a]_{\mathbb Q_p}.}
+
+Scalar-extension naturality from \ref{fcap-003N} gives
+
+##{\bigl(\Theta(\delta_f^{SO}(g))\bigr)_p
+=j_p\bigl(\nu_Q(g)\bigr).}
+
+Consequently #{\nu_Q(g)=1} implies
+#{\delta_f^{SO}(g)\in\ker\Theta}, since every homomorphism
+#{j_p} sends the identity to the identity. No converse is asserted.
+The cited naturality proof covers positive dimension; in dimension
+zero the identity is the only proper isometry, so the same formula
+holds directly. If #{\dim V\leq1}, all local SO groups, hence
+#{SO_f(U)} and #{\ker\Theta}, are trivial, as in \ref{fcap-004N}.
+In dimension zero the actual Spin carrier is also trivial
+\ref{fcap-003H}; no additional scalar sign is introduced.}
+
+\p{For an arbitrary #{g\in\ker\Theta}, \ref{fcap-0023} supplies
+a Spin lift of each local #{g_p}. Choosing these lifts separately
+does not prove that they belong to the chosen #{U_p^{\Spin}}
+at all but finitely many primes. Thus the local lifting theorem
+alone does not establish surjectivity of #{\bar\rho_f} for the
+chosen reference tuple.}
+
+\p{The local reverse-norm argument is grounded in
+\citet{II.3.5-6, pp. 52-53}{chevalley1954algebraic}, with the
+even-lift convention explained in \ref{fcap-0023}.
+The kernel description and continuous corestriction above are
+deductions from that local theorem and the restricted-product map.
+Their precise formal counterparts are
+\leanref/tauceti{TauCeti.QuadraticMap.OrthogonalCompactOpens.mem_adelicSpinorKernel_iff}
+and
+\leanref/tauceti{TauCeti.QuadraticMap.OrthogonalCompactOpens.continuous_finiteAdelicSpinToSpinorKernel}.
+The rational coordinate identity is
+\leanref/tauceti{TauCeti.QuadraticMap.OrthogonalCompactOpens.adelicSpinorNorm_finiteAdelicSpecialOrthogonalDiagonal_apply};
+its trivial-norm consequence is
+\leanref/tauceti{TauCeti.QuadraticMap.OrthogonalCompactOpens.finiteAdelicSpecialOrthogonalDiagonal_mem_adelicSpinorKernel}.
+These statements retain nondegeneracy and the same chosen references.}
