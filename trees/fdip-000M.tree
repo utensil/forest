@@ -198,7 +198,16 @@ interaction.}
 
 \p{Mathlib's \leanref{OrthonormalBasis.measurePreserving_repr}
 supplies the volume-preserving passage to orthonormal coordinates.
-The concrete block matrices, product-density proof and sectorwise
-Schur calculation above supply the additional content for this
-family. The [covariance providers](fdip-000B) use covariance as
-their parameter, so they apply with #{G_\pm=Q_\pm^{-1}}.}
+TauCeti's
+\leanref/tauceti{TauCeti.Probability.indepFun_sumEquivProd_multivariateGaussian_iff}
+characterizes independence of complementary coordinate blocks by
+vanishing cross covariance. Index each sector by #{\{0,1\}} and
+the full coordinates by the disjoint union of these sets. Take mean
+zero and covariance #{\Sigma=\operatorname{diag}(G_+,G_-)}.
+The positive eigenvalues above make #{\Sigma} positive definite,
+hence positive semidefinite, and its cross block is zero.
+After identifying the normalized sector density with this Gaussian
+law, the theorem gives independence. The [covariance providers](fdip-000B)
+use #{G_\pm=Q_\pm^{-1}} as their parameters. The concrete matrices,
+density identification and sectorwise Schur calculation are supplied
+by the proofs above.}
