@@ -1,0 +1,123 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{The Dirac square and its finite Fourier blocks}
+\date{2026-10-17}
+
+\p{For the [periodic grid and Clifford module](fdip-000R),
+the centered Dirac operator is skew-adjoint and has square
+##{\begin{aligned}
+D^*&=-D,\\
+D^2&=I_S\otimes\sum_{j=1}^d\nabla_j^2,\\
+-D^2&=\frac14 I_S\otimes
+\sum_{j=1}^d(2I_H-T_j^2-T_j^{-2}).
+\end{aligned}}
+In particular #{-D^2=D^*D} is positive semidefinite.
+Its complete finite Fourier decomposition has blocks
+##{\begin{aligned}
+D(p)&=i\sum_{j=1}^d\gamma_j\sin p_j,\\
+-D(p)^2&=s(p)I_S,\\
+s(p)&=\sum_{j=1}^d\sin^2p_j,
+\end{aligned}}
+where #{p_j=2\pi r_j/N_j} and #{0\le r_j<N_j}.
+The sine convention agrees with the free propagator in
+\citet{Section 9.1, Equations (9.6)-(9.7), p. 20}{wingate2025lattice}
+after setting the spacing to one. The finite decomposition and
+square are proved below.}
+
+\proof{
+\p{The tensor adjoint formula and #{\gamma_j^*=\gamma_j},
+#{\nabla_j^*=-\nabla_j} give
+#{(\gamma_j\otimes\nabla_j)^*
+=-\gamma_j\otimes\nabla_j}; adding proves #{D^*=-D}.
+In the square, every diagonal term is
+#{\gamma_j^2\otimes\nabla_j^2=I_S\otimes\nabla_j^2}.
+For #{i<j}, the paired off-diagonal terms are
+##{\begin{gathered}
+\gamma_i\gamma_j\otimes\nabla_i\nabla_j
++\gamma_j\gamma_i\otimes\nabla_j\nabla_i\\
+=(\gamma_i\gamma_j+\gamma_j\gamma_i)
+\otimes\nabla_i\nabla_j=0,
+\end{gathered}}
+using commutation of the differences and anticommutation of
+the distinct gamma matrices. This proves the square formula.
+Expanding #{\nabla_j^2} gives
+#{(T_j^2-2I_H+T_j^{-2})/4}.
+Finally #{\langle\psi,-D^2\psi\rangle_K
+=\langle D\psi,D\psi\rangle_K\ge0}.}
+
+\p{Let #{\mathcal R=\prod_j\{0,\ldots,N_j-1\}} and,
+for #{r\in\mathcal R}, define the normalized character function
+##{\chi_r(x)=M^{-1/2}
+\exp\left(i\sum_{j=1}^d p_jx_j\right).}
+Choose integer representatives for #{x_j}. Changing one by
+#{N_j} multiplies the exponential by #{\exp(2\pi i r_j)=1};
+changing #{r_j} by #{N_j} likewise multiplies it by
+#{\exp(2\pi i x_j)=1}. Thus the function depends only on
+the residue classes.}
+
+\p{For #{r,t\in\mathcal R}, put
+##{\zeta_j=\exp\left(\frac{2\pi i(t_j-r_j)}{N_j}\right).}
+The counting inner product factors:
+##{\langle\chi_r,\chi_t\rangle_H
+=M^{-1}\prod_{j=1}^d\sum_{k=0}^{N_j-1}\zeta_j^k.}
+If #{t_j=r_j}, then #{\zeta_j=1} and the inner sum is
+#{N_j}. Otherwise the chosen range of labels gives
+#{\zeta_j\ne1} and #{\zeta_j^{N_j}=1}, so
+##{(1-\zeta_j)\sum_{k=0}^{N_j-1}\zeta_j^k
+=1-\zeta_j^{N_j}=0.}
+Division by #{1-\zeta_j} makes that sum zero.
+Consequently #{\langle\chi_r,\chi_t\rangle_H=\delta_{rt}}.
+There are #{M} such functions, and #{\dim_{\mathbb C}H=M},
+as witnessed by the vertex indicators. Orthonormality gives
+linear independence, so these functions form a complete basis.}
+
+\p{For a spinor-valued field, the Fourier transform and inverse
+therefore are
+##{\begin{aligned}
+\widehat\psi(r)
+&=M^{-1/2}\sum_{x\in\Lambda}
+ e^{-i\sum_jp_jx_j}\psi(x),\\
+\psi(x)
+&=M^{-1/2}\sum_{r\in\mathcal R}
+ e^{i\sum_jp_jx_j}\widehat\psi(r).
+\end{aligned}}
+For scalar fields the coefficient is
+#{\widehat f(r)=\langle\chi_r,f\rangle_H}; applying that
+basis expansion in each standard coordinate of #{S} proves
+the two vector-valued formulas. Thus
+##{K=\bigoplus_{r\in\mathcal R}
+ S\otimes\mathbb C\chi_r.}
+The forward shift has
+#{T_j\chi_r=e^{ip_j}\chi_r}, hence
+#{\nabla_j\chi_r=i\sin p_j\,\chi_r}.
+Each displayed summand is invariant under #{D}, with block
+#{D(p)=i\sum_j\gamma_j\sin p_j}.
+Expanding its square using the same anticommutators gives
+#{D(p)^2=-s(p)I_S}.}
+}
+
+\p{Mathlib's \leanref{LinearMap.adjoint} and
+\leanref{LinearMap.adjoint_inner_right} give the finite-dimensional
+adjoint and its characterizing identity;
+\leanref{LinearMap.adjoint_comp} reverses composition.
+The relevant formal inner-product structure is the counting
+Euclidean space, for example a #{\operatorname{PiLp}(2)}
+model. The raw function type's default supremum norm cannot
+silently replace that structure. The translation and tensor
+identifications are the direct calculations above.}
+
+\p{Mathlib's \leanref{ZMod.dft},
+\leanref{ZMod.dft_apply} and \leanref{ZMod.invDFT_apply}
+provide the one-coordinate Fourier equivalence: its forward
+sum has a negative exponent and no normalizing factor, while
+its inverse has a positive exponent and factor #{N^{-1}}.
+Iterating over coordinates and scaling the forward transform
+by #{M^{-1/2}} gives the conventions above.
+\leanref{AddChar.wInner_cWeight_eq_boole} gives generic
+character orthogonality for the normalized average inner
+product. Here the unscaled characters have counting norm
+#{\sqrt M}; the factor #{M^{-1/2}} makes them orthonormal.
+Their explicit enumeration, the shift eigenvalues and the
+spinor blocks are supplied by this finite proof.}
