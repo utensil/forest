@@ -1,0 +1,163 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{Clifford algebras under scalar extension}
+\date{2026-10-18}
+\lean{CliffordAlgebra.equivBaseChange}
+
+\p{Let #{R} be a commutative ring in which #{2} is a unit,
+#{M} any #{R}-module with quadratic form #{q}, and #{A} any
+commutative #{R}-algebra. Extend the symmetric half-polar form
+##{b(v,w)=\frac{q(v+w)-q(v)-q(w)}2}
+to #{M_A=A\otimes_R M}, and let #{q_A} be its diagonal.
+Thus
+##{q_A(a\otimes v)=a^2q(v),}
+where #{q(v)} on the right is mapped into #{A}. There is a
+canonical #{A}-algebra isomorphism
+##{\begin{aligned}
+\beta_A:A\otimes_R\operatorname{Cl}_R(q)
+&\longrightarrow\operatorname{Cl}_A(q_A),\\
+\beta_A(a\otimes\iota_q(v))
+&=a\,\iota_{q_A}(1\otimes v).
+\end{aligned}}
+No flatness, nondegeneracy, finite generation, or injectivity of
+#{R\to A} is required. This extends the displayed field case
+of [scalar extension](fcap-003V) to the declared commutative
+rings, using the same \vocabk{universal property}{ca-000C}.}
+
+\proof{
+\p{The #{R}-linear map #{v\mapsto\iota_{q_A}(1\otimes v)}
+has square #{q(v)1}, so the universal property extends it to
+an #{R}-algebra map out of #{\operatorname{Cl}_R(q)}.
+Central #{A}-scalars then extend it to #{\beta_A}. The algebra
+structure on the tensor product uses
+##{(a\otimes c)(a'\otimes c')=aa'\otimes cc'.}
+It is well-defined because the #{R}-scalars are central.}
+
+\p{Conversely, the balanced bilinear assignment
+#{(a,v)\mapsto a\otimes\iota_q(v)} gives an #{A}-linear map
+##{j:M_A\longrightarrow A\otimes_R\operatorname{Cl}_R(q).}
+Write #{\iota=\iota_q} and let
+##{\begin{aligned}
+B_q(v,w)&=q(v+w)\\
+&\quad-q(v)-q(w)\\
+&=2b(v,w)
+\end{aligned}}
+be the full polar form. The defining square relation gives
+##{\iota(v)\iota(w)+\iota(w)\iota(v)=B_q(v,w)1.}
+For an arbitrary finite sum #{x=\sum_i a_i\otimes v_i},
+write #{w_i=\iota(v_i)}. Then
+##{\begin{aligned}
+j(x)^2
+&=\sum_i a_i^2\otimes w_i^2\\
+&+\sum_{i<j}a_i a_j\otimes
+ (w_iw_j+w_jw_i)\\
+&=\Bigl(\sum_i a_i^2q(v_i)\\
+&\quad+\sum_{i<j}a_i a_j B_q(v_i,v_j)\Bigr)1\\
+&=q_A(x)1.
+\end{aligned}}
+Every tensor is such a finite sum; the cross terms are part of
+the square condition. Thus #{j} extends to an #{A}-algebra map
+in the opposite direction. Both composites fix scalars and
+vector generators. In the tensor-product algebra,
+#{a\otimes1} and #{1\otimes\iota(v)} generate; in the other
+algebra, the vectors #{\iota_{q_A}(x)} and scalars generate.
+The composites are therefore identities.}
+}
+
+\p{Mathlib's marked equivalence has the reverse direction,
+##{\operatorname{Cl}_A(q_A)
+\simeq A\otimes_R\operatorname{Cl}_R(q).}
+Its inverse is #{\beta_A}, and
+\leanref{CliffordAlgebra.ofBaseChange_tmul_ι}
+gives the displayed generator formula.
+\leanref{QuadraticForm.baseChange} constructs #{q_A}; its
+\leanref{QuadraticForm.baseChange_tmul} computes pure tensors.
+These declarations have exactly the commutative-ring and
+invertible-two hypotheses above. The marker concerns the
+generic algebra equivalence, not the arithmetic domain
+calculations or the sheaf multiplication below.}
+
+\p{Scalar extension is compatible with a further commutative
+algebra #{A\to B}. Identify
+##{\begin{aligned}
+B\otimes_A(A\otimes_R M)&\longrightarrow B\otimes_R M,\\
+b\otimes(a\otimes v)&\longmapsto ba\otimes v.
+\end{aligned}}
+The inverse inserts #{1} in the middle tensor factor.
+Under this identification the direct and successive Clifford
+maps both send #{b\otimes(a\otimes\iota_q(v))} to
+#{ba\,\iota_{q_B}(1\otimes v)}. These elements and scalars
+generate, proving equality of the algebra maps. TauCeti's
+\leanref/tauceti{QuadraticForm.baseChangeBaseChange}
+uses the inverse identification, from direct to successive
+extension. With compatible #{R}- and #{A}-algebra structures
+on #{B}, its
+\leanref/tauceti{CliffordAlgebra.ofBaseChangeAux_baseChange}
+states the same compatibility in that direction.}
+
+\p{For an #{R}-linear form-preserving map #{P:M\to M}, put
+#{P_A(a\otimes v)=a\otimes Pv}. The two orders of applying
+#{\beta_A} and the induced [Clifford map](fdip-000Q) both
+take #{a\otimes\iota_q(v)} to
+#{a\,\iota_{q_A}(1\otimes Pv)}. Generation again proves
+equivariance. In particular the [arithmetic half-turn](fdip-000U)
+and its #{C_2} action commute with every allowed scalar extension.}
+
+\p{Apply this to #{C=\operatorname{Cl}_{R_q}(q)} on the
+[arithmetic base](fdip-000U) #{X_q}. Write
+#{\mathcal O_{X_q}} for its structure sheaf: regular functions
+on #{D_{X_q}(g)} form #{(R_q)_g}. The
+\newvocab{associated module sheaf} #{\widetilde C} has
+##{\Gamma(D_{X_q}(g),\widetilde C)
+=C_g\simeq(R_q)_g\otimes_{R_q}C.}
+Its restriction maps are the localization maps; compatible
+local sections glue uniquely. This construction and the
+standard-open formula are
+\citet{Section 26.5 and Lemma 26.5.4, tag 01HR}{stacks2017stacks}.
+Mathlib's \leanref{AlgebraicGeometry.tilde}, with its
+standard-open localized-module instance, supplies the underlying
+module sheaf. It does not by itself give the algebra structure.}
+
+\p{Multiplication and unit on a standard open are
+##{\frac{c}{g^m}\frac{d}{g^n}
+=\frac{cd}{g^{m+n}},\qquad1=\frac11.}
+The denominators are central, so these operations are
+well-defined even though #{C} need not be commutative.
+Restriction maps preserve them. On an arbitrary open, cover
+by standard opens and multiply the restrictions of two sections.
+The products agree on overlaps, so the module-sheaf axiom
+glues them uniquely; the same argument glues the unit.
+Associativity, additivity, the unit law and central
+#{\mathcal O_{X_q}} action hold locally and hence globally.
+Thus #{\widetilde C} is a sheaf of unital associative
+#{\mathcal O_{X_q}}-algebras. No spectrum of the
+noncommutative algebra #{C} is taken.}
+
+\p{The isomorphisms #{\beta_{(R_q)_g}} identify these
+standard-open sections with
+##{\operatorname{Cl}_{(R_q)_g}(q_g).}
+Scalar-tower compatibility
+makes the identifications commute with restrictions. This
+constructs the Clifford algebra sheaf of
+#{\mathcal O_{X_q}^4} with matrix #{Q}. The half-turn acts
+on every localization by the same generator formula and
+commutes with restrictions, giving a #{C_2} action on the sheaf.
+Restricting to #{X_{\mathrm{elim}}} or #{X_{\mathrm{obs}}}
+uses exactly these base-change maps.}
+
+\p{At the real specialization #{t=1}, put
+#{q_1(x)=x^TQ(1)x} and let
+#{c_i=\iota_{q_1}(\delta_i)} with the coordinate notation of
+the [configuration Clifford algebra](fdip-000P). Then
+##{c_i^2=3\,1,\qquad
+c_ic_j+c_jc_i=2Q(1)_{ij}\,1.}
+The map #{\beta_{\mathbb R}} identifies these relations with
+#{\mathbb R\otimes_{R_q}C}; direct evaluation or evaluation
+through either localization gives the same algebra and action.
+This evaluation is not injective: it kills the nonzero element
+#{t-1} of #{R_q}. The isomorphism requires no injectivity.
+The [effective rank-two form](fdip-000W) has its own Clifford
+algebra on #{X_{\mathrm{elim}}}; it is separate from this
+rank-four construction.}

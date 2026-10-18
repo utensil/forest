@@ -1,0 +1,132 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{Different domains for the form, elimination and trace ratio}
+\date{2026-10-18}
+
+\p{On the [arithmetic family](fdip-000U), a nondegenerate
+full form need not permit a chosen elimination, and an
+invertible effective form need not give a regular trace ratio.
+With #{s=t+2}, #{f=t+1} and
+#{\Delta=3(2t+1)(2t+3)}, the exact regular loci in #{X_q} are
+##{\begin{aligned}
+\text{Schur matrix:}&\quad X_{\mathrm{elim}}=D_{X_q}(s),\\
+\text{trace ratio:}&\quad U_R=D_{X_q}(f).
+\end{aligned}}
+Their common domain is #{X_{\mathrm{obs}}=D_{X_q}(sf)}.
+These claims follow from the calculations below, extending the
+[real Schur example](fdip-000F) and
+[trace-ratio calculation](fdip-000I) over the declared rings.}
+
+\proof{
+\p{Order coordinates by retained #{(0,2)} and eliminated
+#{(1,3)}. The diagonal blocks of #{Q} are
+#{A=C_{\mathrm{block}}=sI_2}, and the off-diagonal block is
+##{B=\begin{pmatrix}-1&-t\\-t&-1\end{pmatrix}.}
+On #{R_{\mathrm{elim}}}, the Schur matrix is
+##{\begin{aligned}
+S&=A-BC_{\mathrm{block}}^{-1}B^T\\
+&=\frac1s\begin{pmatrix}4t+3&-2t\\-2t&4t+3\end{pmatrix}.
+\end{aligned}}
+Indeed #{BB^T} has diagonal #{1+t^2} and off-diagonal #{2t},
+and #{s^2-(1+t^2)=4t+3}. Moreover
+##{\det S=\frac{(4t+3)^2-4t^2}{s^2}
+=\frac{\Delta}{s^2},}
+a unit in #{R_{\mathrm{elim}}}. On #{R_{\mathrm{elim}}^2},
+define #{q_{\mathrm{eff}}(y)=y^TSy}; its half-polar matrix is
+#{S}. Thus both #{q} and #{q_{\mathrm{eff}}} are
+nondegenerate on this open. On the positive real locus,
+#{q_{\mathrm{eff}}/2} is the quadratic part of the effective
+action; the Gaussian normalization constant is additional.}
+
+\p{The domain #{R_q} embeds in its fraction field, so these
+entries can be tested in each local ring. If a prime
+#{\mathfrak p} contains #{s}, the off-diagonal numerator
+#{-2t} is congruent to #{4} modulo #{\mathfrak p} and is
+a unit in #{(R_q)_{\mathfrak p}}. If #{(-2t)/s} were
+regular there, multiplication by #{s} would equate an element
+of the maximal ideal with a unit. This is impossible.
+On #{D_{X_q}(s)} every entry is regular. Hence this is the
+exact regular locus of the displayed Schur matrix.}
+
+\p{For #{L=Q-I}, the diagonalization in
+\ref{fdip-000U} gives eigenvalues #{0,2,2t,2t+2}. Therefore
+##{\begin{aligned}
+\operatorname{tr}L&=4(t+1),\\
+\operatorname{tr}(L^2)&=8(t^2+t+1),\\
+R(t)&=\frac{\operatorname{tr}(L^2)}{(\operatorname{tr}L)^2}
+=\frac{t^2+t+1}{2(t+1)^2}.
+\end{aligned}}
+The numerator is #{f^2-f+1}. At every prime containing #{f},
+it has residue #{1}, so is a unit in the local ring.
+Regularity of #{R} there would make
+##{2f^2R=f^2-f+1}
+an equality of an element of the maximal ideal and a unit,
+again impossible. Where #{f} is invertible the formula is
+regular. Thus the exact ratio locus is #{U_R}, and its
+intersection with #{X_{\mathrm{elim}}} is
+#{X_{\mathrm{obs}}}. The interpretation of these localizations
+as regular functions is
+\citet{Lemma 26.5.4, tag 01HR}{stacks2017stacks}.}
+}
+
+\p{The half-turn restricts to
+#{J=\left(\begin{smallmatrix}0&1\\1&0\end{smallmatrix}\right)}
+on both coordinate blocks. The equal diagonal and equal
+off-diagonal entries of #{S} give #{J^TSJ=S}. Retained
+projection #{\pi} satisfies #{\pi P=J\pi}, but is not an
+isometry: #{q(\delta_1)=s} is a unit on
+#{R_{\mathrm{elim}}}, whereas #{\pi\delta_1=0}.
+Thus [Clifford functoriality](fdip-000Q) supplies no map induced
+by this projection. The effective rank-two Clifford algebra
+and the full rank-four algebra are different constructions.}
+
+\p{Three rational specializations separate the domains:}
+\ul{
+\li{At #{t=-2}, #{\det Q=9} and #{R=3/2}, but
+#{C_{\mathrm{block}}=0}. This point belongs to #{U_R}
+inside #{X_q} and lies outside #{X_{\mathrm{elim}}}.}
+\li{At #{t=-1}, #{\det Q=-3},
+#{C_{\mathrm{block}}=I_2}, and
+##{\begin{aligned}
+S&=\begin{pmatrix}-1&2\\2&-1\end{pmatrix},\\
+\det S&=-3.
+\end{aligned}}
+This point belongs to #{X_{\mathrm{elim}}}, but the trace
+ratio has a pole, so it lies outside #{X_{\mathrm{obs}}}.}
+\li{At #{t=1}, #{\det Q=45},
+#{C_{\mathrm{block}}=3I_2}, and
+##{\begin{aligned}
+S&=\frac13\begin{pmatrix}7&-2\\-2&7\end{pmatrix},\\
+\det S&=5,\qquad R=\frac38.
+\end{aligned}}
+This point belongs to #{X_{\mathrm{obs}}}.}
+}
+
+\p{For real #{t=\tau}, the matrix #{H/2} is orthogonal,
+and the four eigenvalues of #{Q(\tau)} are
+#{1,3,2\tau+1,2\tau+3}. They are all positive exactly
+when #{\tau>-1/2}. The running weighted graph assumes the
+smaller domain #{\tau>0}. Each such evaluation sends
+#{2,\Delta,s,f} to nonzero reals and extends uniquely to
+##{R_{\mathrm{obs}}\longrightarrow\mathbb R,\qquad t\longmapsto\tau.}
+It gives #{\operatorname{Spec}\mathbb R\to X_{\mathrm{obs}}}
+and recovers #{Q(\tau),S(\tau),P,J,R(\tau)}. The
+[Clifford base-change isomorphism](fdip-000V) transports their
+full-form algebra and symmetry; it does not require evaluation
+to be injective. Gaussian integration and the
+[normalized marginal](fdip-000E) apply on this positive real
+locus. Algebraic invertibility alone gives neither positivity
+nor a probability measure over the arithmetic base.}
+
+\p{This family retains a parameter, residue characteristics,
+and distinct regularity domains. It does not select a unique
+arithmetic realization. For example, at #{t=1} modulo #{11},
+#{\Delta=45}, #{s=3}, and #{f=2} are all nonzero. The point
+therefore lies in #{X_{\mathrm{obs}}}, but disappears after
+further inverting #{11}. Every real specialization survives
+that extra inversion. Thus the same real family admits
+different arithmetic opens. The construction predicts neither
+a real parameter nor a physical observable from arithmetic
+alone; an L-value comparison needs additional structure.}

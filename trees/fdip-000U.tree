@@ -1,0 +1,144 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Example}
+\title{An arithmetic family for the alternating four-cycle}
+\date{2026-10-18}
+
+\p{The [configuration form](fdip-000O) has polynomial
+coefficients when the mass is fixed by #{m^2=1}. Keeping the
+weight #{t} as a variable records which specializations preserve
+the form, its [half-turn](fdip-000Q), and the operations on it.
+Put #{A_0=\mathbb Z[1/2,t]} and #{s=t+2}. In the coordinate
+basis #{\delta_0,\ldots,\delta_3}, set
+##{Q(t)=\begin{pmatrix}
+s&-1&0&-t\\
+-1&s&-t&0\\
+0&-t&s&-1\\
+-t&0&-1&s
+\end{pmatrix},}
+##{\begin{aligned}
+q(x)&=x^TQ(t)x,\\
+b(x,y)&=x^TQ(t)y.
+\end{aligned}}
+Thus #{q} is twice the earlier quadratic action. Its
+half-polar form is #{b}; its full polar form has matrix #{2Q}:
+##{q(x+y)-q(x)-q(y)=2b(x,y).}
+These conventions also apply after changing the coefficient ring.}
+
+\p{Let #{H} have the four unnormalized columns
+##{H=\begin{pmatrix}
+1&1&1&1\\
+1&-1&1&-1\\
+1&-1&-1&1\\
+1&1&-1&-1
+\end{pmatrix}.}
+They are neither the coordinate vectors #{\delta_i} nor the
+normalized real spectral vectors #{u_a} of the
+[massive Green operator](fdip-000A). Direct multiplication gives
+##{\begin{aligned}
+H^TH&=4I,\\
+QH&=H\operatorname{diag}(1,3,2t+1,2t+3).
+\end{aligned}}
+Since #{2} is a unit in #{A_0}, #{H^{-1}=H^T/4}.
+Similarity therefore gives
+##{\Delta:=\det Q=3(2t+1)(2t+3).}
+The congruence formula retains a factor four:
+##{H^TQH=4\operatorname{diag}(1,3,2t+1,2t+3).}
+These are polynomial matrix identities, independent of any
+order or positivity on the coefficient ring.}
+
+\p{The \newvocab{nondegenerate arithmetic base} is
+##{R_q=A_0[\Delta^{-1}],\qquad X_q=\operatorname{Spec}R_q,}
+with quadratic module #{(R_q^4,q)}. Here #{A[g^{-1}]}
+denotes localization of a commutative ring #{A} by the powers
+of #{g}. The spectrum #{\operatorname{Spec}A} has prime ideals
+as points; its \newvocab{standard open}
+##{D_{\operatorname{Spec}A}(g)
+=\{\mathfrak p:g\notin\mathfrak p\}}
+has regular functions #{A[g^{-1}]}. The structure sheaf given
+by these rings and their restriction maps makes the spectrum
+an affine scheme, in the sense of
+\citet{Section 26.5, tag 01HR}{stacks2017stacks}.}
+
+\p{Every factor of the unit product #{\Delta} is a unit in
+#{R_q}: an inverse for a factor is the product of the other
+factors times #{\Delta^{-1}}. The displayed similarity then
+makes #{Q} invertible. Both #{Q} and #{2Q} identify #{R_q^4}
+with its dual. This localization selects nondegenerate forms;
+the [Clifford quotient](fdip-000P) exists over #{A_0} even
+before it is made. Inverting #{2} separately excludes
+characteristic two, although #{\Delta\equiv1\pmod2}.
+Inverting #{\Delta} removes characteristic three entirely.
+In any residue field of characteristic other than two or three,
+the excluded parameters are #{-1/2} and #{-3/2}; they are
+distinct because their difference is one.}
+
+\p{For example, evaluation at #{t=1} gives #{\det Q=45}.
+It is admissible over #{\mathbb Q} and over #{\mathbb F_{11}},
+but not over #{\mathbb F_5}. An arithmetic family therefore
+retains information that a single real matrix does not.}
+
+\p{The same half-turn
+##{P(x_0,x_1,x_2,x_3)=(x_2,x_3,x_0,x_1)}
+satisfies #{P^2=I} and #{P^TQP=Q}: shifting both indices by two
+preserves each entry of #{Q}. By the
+\vocabk{universal property}{ca-000C}, the assignment
+##{\iota_q(x)\longmapsto\iota_q(Px)}
+extends to an algebra endomorphism of
+#{\operatorname{Cl}_{R_q}(q)}. Its square fixes scalars and all
+vector generators, hence is the identity. It defines a #{C_2}
+action by automorphisms. The coordinate basis, reference pairing
+#{x^Ty}, and retained partition remain additional supplied data.}
+
+\p{Retain coordinates #{(0,2)} and eliminate #{(1,3)} as in
+the [four-cycle Schur calculation](fdip-000F). To distinguish
+its denominator from that of the [trace ratio](fdip-000I), put
+#{f=t+1} and define
+##{\begin{aligned}
+R_{\mathrm{elim}}&=R_q[s^{-1}],\\
+R_{\mathrm{obs}}&=R_{\mathrm{elim}}[f^{-1}],\\
+X_{\mathrm{elim}}&=\operatorname{Spec}R_{\mathrm{elim}},\\
+X_{\mathrm{obs}}&=\operatorname{Spec}R_{\mathrm{obs}},\\
+U_R&=D_{X_q}(f).
+\end{aligned}}
+The open immersions identify
+##{\begin{aligned}
+X_{\mathrm{elim}}&=D_{X_q}(s),\\
+X_{\mathrm{obs}}&=D_{X_{\mathrm{elim}}}(f)
+=D_{X_q}(sf),\\
+X_{\mathrm{obs}}&=X_{\mathrm{elim}}\cap U_R.
+\end{aligned}}
+The independent ratio locus #{U_R} is not identified with
+#{X_{\mathrm{obs}}}; [at #{t=-2}](fdip-000W), the ratio exists
+while the selected elimination fails.}
+
+\tikzfigs{0.8}{\begin{tikzpicture}[
+  every node/.style={inner sep=5pt},
+  inclusion/.style={-{Stealth[length=2mm]},shorten >=3pt,shorten <=3pt}
+]
+\node (obs) at (0,0) {$X_{\mathrm{obs}}$};
+\node (elim) at (3.7,0) {$X_{\mathrm{elim}}$};
+\node (ratio) at (0,-2) {$U_R$};
+\node (quad) at (3.7,-2) {$X_q$};
+\draw[inclusion] (obs) -- (elim);
+\draw[inclusion] (obs) -- (ratio);
+\draw[inclusion] (elim) -- (quad);
+\draw[inclusion] (ratio) -- (quad);
+\end{tikzpicture}}
+
+\p{All four arrows are inclusions of open subschemes. The square
+commutes and its upper-left open is the intersection of the
+other two opens inside #{X_q}. The localization homeomorphism is
+\citet{Lemma 10.17.6, tag 00E4}{stacks2017stacks}.
+The structure-sheaf construction in
+\citet{Section 26.5, tag 01HR}{stacks2017stacks}
+upgrades it to an open immersion: on a standard open inside
+#{D(g)}, successive localization gives the same ring and
+restriction map on either side. These identifications agree on
+intersections, so the structure sheaves agree. Mathlib's
+\leanref{AlgebraicGeometry.Scheme.isOpenImmersion_SpecMap_localizationAway}
+and \leanref{AlgebraicGeometry.Scheme.Hom.opensRange_localizationAway}
+give this generic map and its exact ambient image. The
+determinant and the particular family above are the direct
+calculations made here.}
