@@ -1,0 +1,114 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Example}
+\title{Quadratic isometry forgets the reference pairing and projection}
+\date{2026-10-18}
+
+\p{The [enriched classification](fdip-000X) changes if
+one keeps only a positive quadratic form and permits every linear
+isometry. Any two positive symmetric matrices #{Q_1,Q_2} of the
+same size define isometric quadratic spaces, even when their
+counting-relative spectra and retained observables differ.}
+
+\p{\citet{Appendix A.5.2, pp. 646-647}{boyd2004convex} gives the
+symmetric spectral decomposition and positive square root used below
+to construct the isometry.}
+
+\p{For #{Q=O\operatorname{diag}(\lambda_i)O^T}, with #{O}
+orthogonal and every #{\lambda_i>0}, define
+##{\begin{aligned}
+Q^{1/2}&=O\operatorname{diag}(\sqrt{\lambda_i})O^T,\\
+A=Q^{-1/2}&=O\operatorname{diag}(\lambda_i^{-1/2})O^T.
+\end{aligned}}
+Direct multiplication gives #{A^TQA=I}. More generally,
+##{\begin{aligned}
+T&=Q_2^{-1/2}Q_1^{1/2},\\
+T^TQ_2T
+ &=Q_1^{1/2}Q_2^{-1/2}Q_2Q_2^{-1/2}Q_1^{1/2}\\
+ &=Q_1.
+\end{aligned}}
+The map #{T} is invertible. This calculation does not require
+#{Q_1Q_2=Q_2Q_1}. Thus positive quadratic forms have one
+linear-isometry class in each fixed dimension.}
+
+\p{The reference pairing changes under the same substitution
+#{\phi=Az}: its matrix becomes
+##{H'=A^TIA=Q^{-1},}
+while the action form has matrix #{I}. If that transported pairing
+is retained, its relative operator is #{(H')^{-1}I=Q}, preserving
+the original spectrum. In general simultaneous transport of a positive
+reference pairing #{H} and an action form #{Q} gives
+##{\begin{aligned}
+H'&=A^THA,\qquad Q'=A^TQA,\\
+(H')^{-1}Q'&=A^{-1}(H^{-1}Q)A.
+\end{aligned}}
+Similarity preserves the spectrum. Replacing #{H'} by #{I} after
+normalizing #{Q} discards this data; it is not simultaneous transport
+of the pair.}
+
+\p{For the four-cycle with #{a=m=1}, compare #{b=1} and #{b=2}.
+The [spectral calculation](fdip-000B) gives respectively
+##{\begin{aligned}
+\operatorname{spec}(Q_1)&=\{1,3,3,5\},\\
+\operatorname{spec}(Q_2)&=\{1,3,5,7\}.
+\end{aligned}}
+These forms are linearly isometric by #{T}, but cannot be conjugate
+by a counting-orthogonal map, since their spectra differ. In particular
+they are not compatible relabelings. Their
+[trace ratios](fdip-000Y) also differ by #{1/72}.}
+
+\p{The same isometry gives a concrete obstruction to the retained
+projection, even though it preserves the named half-turn. In the
+common orthonormal spectral basis #{u_0,u_1,u_2,u_3}, the matrix
+of #{T} is
+##{\operatorname{diag}\bigl(1,1,\sqrt{3/5},\sqrt{5/7}\bigr).}
+The half-turn is diagonal in this basis as well, so
+#{T\rho(h)=\rho(h)T}. Returning to vertex coordinates gives
+##{T_{01}=\frac{\sqrt{3/5}-\sqrt{5/7}}4\ne0,}
+because #{3/5\ne 5/7}. For #{R=R_0}, one has
+#{\pi_R\delta_1=0}, whereas the zeroth component of
+#{\pi_RT\delta_1} is nonzero. Hence no linear map #{T_R} can
+satisfy #{\pi_RT=T_R\pi_R}. Also #{T^TT} has eigenvalues
+#{1,1,3/5,5/7}, so #{T} fails to preserve the counting pairing.
+These are separate failures of the enriched-arrow conditions.}
+
+\p{A nonunit Jacobian is not an obstruction to transport of the
+normalized Gaussian. If #{T^TQ_2T=Q_1}, then
+##{\det Q_1=(\det T)^2\det Q_2.}
+For #{y=T\phi}, the exponent in the
+[normalized density](fdip-0005) becomes #{-y^TQ_2y/2}; its
+coefficient after change of variables is
+##{\frac{\sqrt{\det Q_1}}{(2\pi)^{n/2}|\det T|}
+ =\frac{\sqrt{\det Q_2}}{(2\pi)^{n/2}}.}
+Therefore #{T_*\mu_{Q_1}=\mu_{Q_2}}. Equivalently,
+#{Q_2^{-1}=TQ_1^{-1}T^T} is the covariance transport law.
+For #{A=Q^{-1/2}}, the generally nonunit Jacobian
+#{|\det A|=(\det Q)^{-1/2}} is exactly absorbed by normalization.
+The loss is the discarded pairing, carrier and retained projection,
+not a failure of normalized probability transport.}
+
+\p{TauCeti's
+\leanref/tauceti{Matrix.PosDef.exists_generalLinearGroup_mul_transpose_eq}
+provides an invertible factor #{C} with #{Q=CC^T} for a real
+positive-definite matrix on a finite index set. For a bare witness
+of that conclusion the normalizer is #{C^{-T}}, since
+##{(C^{-T})^TQ C^{-T}=C^{-1}CC^TC^{-T}=I.}
+The theorem's proof chooses the symmetric positive square root,
+but its existential conclusion does not assert symmetry of #{C}.
+One therefore cannot infer that #{C^{-1}} is the normalizer
+from the factorization alone. Its separate
+\leanref/tauceti{TauCeti.Probability.map_affine_multivariateGaussian}
+supports Gaussian transport in covariance parameters, after the
+precision-density identification. Neither declaration supplies the
+enriched classification or projection obstruction.}
+
+\p{By [Clifford functoriality](fdip-000Q), an isometry of these
+configuration forms also induces an algebra isomorphism.
+Since the positive forms already lie in one isometry class, keeping
+only the abstract quadratic space, or its isometry-functorial Clifford
+algebra, cannot recover the discarded reference pairing, carrier and
+projection. This argument does not infer a quadratic isometry from
+an arbitrary Clifford-algebra isomorphism. Retaining the enriched
+objects and their specified relabeling arrows prevents the demonstrated
+collapse; it supplies no continuum or physical selection map.}
