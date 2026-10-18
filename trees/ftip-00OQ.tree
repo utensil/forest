@@ -69,7 +69,28 @@ below identify the question each family makes testable.}
   comparison is whether this state interface supports the target tasks and
   stable credit assignment at a declared budget; the proposal is not a
   production result.}
+  \li{\strong{Recurrent feedback.} The \citet{Sections 2-3 and 5-8}{zhang2026rlt} splits a causal
+  parallel encoder from a recurrent decoder whose previous-token state is
+  fed back into the next token. On finite parity, permutation-tracking, and
+  modular-arithmetic tasks, its reported length extrapolation depends on the
+  feedback ablation and on chunk size. This is evidence for a state-access
+  intervention in a bounded synthetic setting; it does not establish a
+  frontier reasoning gain or a general recurrence law.}
+  \li{\strong{Residual rewrite.} \citet{Sections 2-4 and 6}{zhang2026deepdelta} replaces an additive
+  residual shortcut with a gated rank-one read/compare/target/write edit.
+  Reported GPT-2 experiments are a finite mechanism observation whose effect
+  remains confounded with residual capacity, compression, and rewrite
+  behavior. A write-only control, capacity-matched control, multiple seeds,
+  and a charged transfer task are needed before attributing a capability
+  change to the rewrite interface.}
 }
+
+\p{The recurrent-feedback and residual-rewrite entries are separate
+intervention arms. Their paired records must expose the changed state or write
+interface, causal ablations, parameter and token budgets, inference FLOPs,
+memory, KV/cache or recurrent-state costs, chunking overhead, and monitorability.
+If the available evidence remains finite-only, the result stays finite-only and
+does not support ceiling or frontier language.}
 
 \p{The \newvocab{adjunct panel} changes an objective, temporal law or
 function-space bias without being interchangeable with the core architecture
