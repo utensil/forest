@@ -45,10 +45,14 @@ field, not a universal definition.}
 \p{A matched Phase B comparison holds model family, checkpoint, training data
 and order, token and environment steps, rollout limits, precision, gradient
 accumulation, seeds, evaluation prompts, and stopping rule fixed while changing
-SGD or AdamW. It records optimizer-state memory, wall-clock and energy, update
-support, effective rank, verifier/evaluator cost, and a prespecified held-out
-transfer task. Capability change and support change are reported as separate
-outcomes; a lower-rank update is not itself an acquisition witness.}
+SGD or AdamW. Learning-rate and optimizer tuning must use the same predeclared
+trial count, search ranges, selection data, and tuning seeds, with tuning tokens,
+steps, wall-clock, and energy charged to both arms. The protocol also declares
+an optimizer-state memory cap (or explicitly reports no cap) and records
+persistent-state bytes, peak memory, wall-clock and energy, update support,
+effective rank, verifier/evaluator cost, and a prespecified held-out transfer
+task. Capability change and support change are reported as separate outcomes; a
+lower-rank update is not itself an acquisition witness.}
 
 \p{The source does not establish general SGD superiority, a universal low-rank
 plasticity law, or transfer to long-horizon agents. Deep Delta's learned
