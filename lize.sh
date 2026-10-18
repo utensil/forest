@@ -1,7 +1,5 @@
 #!/bin/bash
-
-# fail fast for this shell
-# set -e
+set -euo pipefail
 
 SCRIPT_DIR=$(dirname "$(readlink -f "$0")")
 PROJECT_ROOT="$SCRIPT_DIR"
@@ -43,7 +41,7 @@ cd build || exit
 UNICOCE_LATEX=lualatex
 
 # if environment variable TEC is not set
-if [ -z "$TEC" ]; then
+if [ -z "${TEC:-}" ]; then
     echo "lize.sh| using $UNICOCE_LATEX"
     $UNICOCE_LATEX -halt-on-error -interaction=nonstopmode --shell-escape --jobname="$1" "$WRAPPER_FILE" # >/dev/null # 2>&1
     # https://tex.stackexchange.com/a/295524/75671
@@ -58,6 +56,11 @@ else
 fi
 
 cd ..
+
+if [ ! -s "build/$PDF_FILE" ]; then
+    echo "lize.sh| expected a non-empty build/$PDF_FILE" >&2
+    exit 1
+fi
 
 cp "build/$PDF_FILE" "output/forest/$PDF_FILE"
 

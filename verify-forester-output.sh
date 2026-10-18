@@ -84,10 +84,12 @@ if find "$output_dir" -type f -name index.tree -print -quit | grep -q .; then
     exit 1
 fi
 
-if rg -l 'meta.*http-equiv.*refresh.*index\.xml' "$output_dir" -g index.html | grep -q .; then
-    echo "Forester redirect stubs remain after XML-to-HTML conversion" >&2
-    exit 1
-fi
+while IFS= read -r -d '' html_file; do
+    if grep -Eiq 'meta.*http-equiv.*refresh.*index\.xml' "$html_file"; then
+        echo "Forester redirect stubs remain after XML-to-HTML conversion" >&2
+        exit 1
+    fi
+done < <(find "$output_dir" -type f -name index.html -print0)
 
 for pdf_id in "$@"; do
     pdf_file="$output_dir/$pdf_id.pdf"
