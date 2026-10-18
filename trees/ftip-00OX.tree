@@ -1,0 +1,56 @@
+\import{ftip-macros}
+\meta{agent-authored}{true}
+
+\title{Sparse optimizer plasticity in RLVR}
+\tag{ftip}
+\tag{optimization}
+\tag{post-training}
+\tag{plasticity}
+
+\p{The source question is whether reinforcement-learning updates need the
+momentum and per-parameter adaptive rates supplied by AdamW. Mukherjee et al.
+compare SGD, SGD with momentum, RMSProp, and AdamW in GRPO and PPO settings
+across mathematical, coding, and adaptive-verifiable environments
+(\citet{Sections 4--6 and conclusion}{mukherjee2026adam}). In the reported
+runs, SGD matches or often exceeds AdamW, while its updates are substantially
+sparser and lower-rank; the source reports fewer than #{0.02\%} changed
+parameters in representative cases and a 15.7 GB peak-memory reduction for
+Qwen3-1.7B. These are observations about the stated models, data, precision,
+threshold, seeds, and budgets.}
+
+\p{The relevant FTIP intervention is therefore a tuple, not an optimizer name:
+model and checkpoint, RL algorithm, prompt and environment laws, optimizer and
+hyperparameters, numerical precision, update-support rule, effective-rank rule,
+training and evaluation budgets, and the held-out capability interface. A
+reported reward or pass rate does not identify the update geometry that
+produced it.}
+
+\card{Definition}{optimizer update support and effective rank}{
+Let #{\theta_0} and #{\theta_1} be the parameters before and after a declared
+finite intervention, with #{n} trainable scalar parameters. For threshold
+#{\varepsilon>0}, define
+##{
+ S_{\varepsilon}(\theta_0,\theta_1)=
+ \frac{1}{n}\#\{i:|\theta_{1,i}-\theta_{0,i}|>\varepsilon\},
+}
+\p{and, for every two-dimensional weight update #{\Delta W}, let
+#{\operatorname{rank}_{.99}(\Delta W)} be the least number of singular
+values whose squared sum reaches 99 percent of the total squared singular-value
+sum. A study must report the threshold, precision, tensor selection, and
+aggregation rule alongside these numbers. The source uses bf16 and a
+#{10^{-5}} threshold for its sparsity calculation; that convention is a source
+field, not a universal definition.}
+}
+
+\p{A matched Phase B comparison holds model family, checkpoint, training data
+and order, token and environment steps, rollout limits, precision, gradient
+accumulation, seeds, evaluation prompts, and stopping rule fixed while changing
+SGD or AdamW. It records optimizer-state memory, wall-clock and energy, update
+support, effective rank, verifier/evaluator cost, and a prespecified held-out
+transfer task. Capability change and support change are reported as separate
+outcomes; a lower-rank update is not itself an acquisition witness.}
+
+\p{The source does not establish general SGD superiority, a universal low-rank
+plasticity law, or transfer to long-horizon agents. Deep Delta's learned
+read/compare/write mechanism changes a different coordinate and remains in the
+later recurrence/rewrite batch.}
