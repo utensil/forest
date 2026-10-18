@@ -1,0 +1,72 @@
+\import{ftip-macros}
+\meta{agent-authored}{true}
+\title{Semantic representation diagnostics along pretraining checkpoints}
+\tag{ftip}
+\tag{evaluation}
+
+\p{This bounded diagnostic records when a declared semantic representation
+becomes recoverable along a pretraining trajectory. It uses the spatial and
+temporal probing design of \citet{Sections 2-4 and 7}{gurnee2024space} as a
+measurement template. The result is a representation diagnostic, not a claim
+about a developmental mechanism, a deployment capability, or a post-training
+law.}
+
+\p{The task family is fixed before inspecting checkpoints: the six coordinate
+task datasets in the source family (world, United States, and New York City
+locations; historical figures, cultural works, and news headlines). Each score
+uses held-out entities. An eligible model family supplies at least three
+ordered pretraining checkpoints, identical train, validation, and test entity
+splits and filtering at every checkpoint, and the same layer-wise linear ridge-probe protocol, including a predeclared
+ridge-regularization grid and validation selection rule. A family or checkpoint
+missing one of those fields is
+reported as missing rather than silently pooled.}
+
+\p{For model family #{m}, checkpoint #{c}, task #{q}, and layer #{\ell}, let
+#{s^{\mathrm{val}}_{m,c,q,\ell}} and #{s^{\mathrm{test}}_{m,c,q,\ell}}
+be validation and held-out-test coefficients of determination for the fixed
+probe. Choose the layer on validation entities, then evaluate once on the test
+entities:}
+##{
+\ell^*_{m,c,q}=\arg\max_{\ell\in L_m}s^{\mathrm{val}}_{m,c,q,\ell},\qquad
+s_{m,c,q}=s^{\mathrm{test}}_{m,c,q,\ell^*_{m,c,q}}.
+}
+\p{A predeclared layer may replace the validation choice, but a test score is
+never used to select #{\ell^*}; this keeps the emergence score from being a
+layer-selection envelope.}
+\p{The primary absolute emergence threshold is #{\tau=0.50} in this held-out
+score, chosen before the trajectory is inspected. The first crossing is}
+##{
+e_{m,q}(\tau)=\min\{c:s_{m,c,q}\geq\tau\},
+}
+\p{with #{e_{m,q}(\tau)=\bot} when no checkpoint crosses. A crossing is
+reported with the checkpoint token count, layer, a bootstrap uncertainty
+interval over held-out entities, and the probe seed; it is not smoothed into a
+claim about an unobserved training
+interval. Sensitivity must include #{\tau\in\{0.25,0.50,0.75\}}, model family,
+parameter scale, and checkpoint spacing.}
+
+\p{The structural record contains held-out coordinate prediction, block and
+cross-entity generalization, prompt variants, and the layer at which the score
+peaks. These are content and representation probes. A function or deployment
+record is separate: it must specify an intervention or user task, an outcome
+metric, matched controls, and its own cost and failure accounting. A probe
+crossing alone cannot populate that record.}
+
+\p{The source reports linear spatial and temporal representations across
+Llama-2 and Pythia scales, prompt sensitivity, cross-entity robustness, and
+individual neurons; see \citet{Sections 2.1-2.3, 3.1-3.3, 4.1-4.2, and 5}{gurnee2024space}.
+Those observations motivate the fields above, but every trajectory association
+reported by this protocol is noncausal. In particular, it makes no claim about
+which training environment caused the score, whether a representation is used
+by a deployed function, or what post-training will preserve.}
+
+\p{Each trajectory record therefore retains the model family and size,
+checkpoint token count, task and entity split, probe class and seed, all layer
+scores, threshold grid, missingness, and the separately reported function or
+deployment assay. Comparisons are within the declared task family and model
+family before any cross-family summary. A change in checkpoint spacing or
+probe protocol is a new arm, not evidence of an earlier or later emergence.}
+
+\p{This protocol links the conceptual-discovery question in
+\ref{ftip-00MH} to the capability coordinates in \ref{ftip-00JM}; the panel
+of open comparison questions in \ref{ftip-00M2} transcludes this child.}
