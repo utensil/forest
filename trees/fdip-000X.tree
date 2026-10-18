@@ -1,0 +1,177 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Example}
+\title{The groupoid of enriched four-cycle backgrounds}
+\date{2026-10-18}
+
+\p{A classification of Gaussian backgrounds must retain the maps that
+transport their observables. Consider the [alternating four-cycle](fdip-0003)
+with vertices #{V=\mathbb Z/4\mathbb Z}, forward edges #{e_i:i\to i+1},
+and weights #{(a,b,a,b)}, where #{a,b>0}. Choose #{m>0} and one of
+#{R_0=\{0,2\}}, #{R_1=\{1,3\}} as retained vertices. Write
+#{x=(a,b,m,R_j)} and let #{X} be the set of all these tuples.
+The tuple specifies a [finite Gaussian background](fdip-000G), together
+with its named [half-turn](fdip-000J).}
+
+\p{More explicitly, retain the carrier, counting reference pairing,
+weight matrix #{W_x=\operatorname{diag}(a,b,a,b)}, and
+##{L_x=B^TW_xB,\qquad Q_x=L_x+m^2I.}
+Here #{(B\phi)_i=\phi_{i+1}-\phi_i}. For #{\phi\ne0},
+##{\begin{aligned}
+\phi^TQ_x\phi&=\sum_iw_i(\phi_{i+1}-\phi_i)^2\\
+ &\quad+m^2\|\phi\|^2>0.
+\end{aligned}}
+The [normalized Gaussian](fdip-0005) #{\mu_{Q_x}} is determined
+by this precision and coordinate Lebesgue measure. Also retain the
+coordinate projection #{\pi_{R_j}:\mathbb R^V\to\mathbb R^{R_j}}
+and the named action #{\rho(h)\delta_i=\delta_{i+2}} of
+#{C_2=\{1,h\}}. The vertex basis #{\delta_i(v)=\mathbf1_{v=i}}
+is distinct from the edges #{e_i} and the [spectral vectors](fdip-000B)
+#{u_a}. These structures are specified or determined, rather than
+additional freely variable coordinates of #{X}.}
+
+\p{Allow rotations and reflections of the underlying cycle. Put
+##{D_4=\langle r,s\mid r^4=s^2=1,\ srs=r^{-1}\rangle,}
+where #{r(i)=i+1} and #{s(i)=-i}. A reflection reverses the forward
+orientation. Thus these arrows use the [signed-edge convention](fdip-000J)
+and extend the earlier strictly directed [exact relabelings](fdip-000G).
+For #{g=r^ks^\varepsilon}, with #{k\in\mathbb Z/4} and
+#{\varepsilon\in\{0,1\}}, set
+##{\begin{aligned}
+g(i)&=k+(-1)^\varepsilon i,\\
+P_g\delta_i&=\delta_{g(i)},\\
+\tau_g(i)&=\begin{cases}k+i&\varepsilon=0,\\k-i-1&\varepsilon=1,\end{cases}\\
+U_g\eta_i&=(-1)^\varepsilon\eta_{\tau_g(i)}.
+\end{aligned}}
+Here #{\eta_i} is the edge-field coordinate basis. All indices are
+modulo four. The eight vertex maps are distinct because their values
+at #{0,1} determine #{k,\varepsilon}.}
+
+\p{The edge indexed by #{\tau_g(i)} has endpoints #{g(i),g(i+1)},
+in forward order for a rotation and reverse order for a reflection.
+Consequently, for every field #{\phi},
+##{\begin{aligned}
+(BP_g\phi)_{\tau_g(i)}&=(-1)^\varepsilon(B\phi)_i,\\
+BP_g&=U_gB.
+\end{aligned}}
+If #{k'} denotes a second group element, endpoint transport and
+multiplication of the orientation signs give
+##{P_{k'g}=P_{k'}P_g,\qquad U_{k'g}=U_{k'}U_g.}
+For an explicit group-law check, composition of
+#{(k,\varepsilon)} followed by #{(\ell,\eta)} gives
+##{\begin{aligned}
+(\ell,\eta)(k,\varepsilon)
+ &=(\ell+(-1)^\eta k,\eta+\varepsilon).
+\end{aligned}}
+The second coordinate is taken modulo two.
+Both coordinate maps are orthogonal, and their inverses are indexed
+by #{g^{-1}}.}
+
+\p{Transport weights by #{W_{gx}=U_gW_xU_g^T} and the retained set
+by #{R\mapsto gR}. The signs cancel in the diagonal weight matrix.
+The weights swap exactly when #{k+\varepsilon} is odd, while
+#{R_j\mapsto R_{j+k\bmod2}}. In particular,
+##{\begin{aligned}
+r(a,b,m,R_j)&=(b,a,m,R_{j+1}),\\
+s(a,b,m,R_j)&=(b,a,m,R_j).
+\end{aligned}}
+The family is closed under these maps, with mass unchanged.
+Using #{BP_g^T=U_g^TB} gives
+##{\begin{aligned}
+L_{gx}&=B^TU_gW_xU_g^TB=P_gL_xP_g^T,\\
+Q_{gx}&=P_gQ_xP_g^T.
+\end{aligned}}
+Moreover #{g(i+2)=g(i)+2}, so every arrow commutes with the
+same named half-turn: #{P_g\rho(h)=\rho(h)P_g}.}
+
+\p{Form the [action groupoid](fgap-000P) #{D_4\ltimes X} by setting
+##{\operatorname{Hom}(x,y)=\{g\in D_4:g x=y\}.}
+The group element remains part of an arrow. Compose #{g:x\to y}
+and #{k:y\to z} as #{kg:x\to z}; the action law gives its target.
+The identity is #{1:x\to x}, the inverse is
+#{g^{-1}:gx\to x}, and the two inverse identities and associativity
+follow from the group laws. Thus every arrow is invertible, as in
+\citet{Definition 4.2.5, tag 0018}{stacks2017stacks}.
+The source, target and composition follow the set-level pattern in
+\citet{Lemma 78.15.1, tag 0444}{stacks2017stacks}; that lemma is
+stated for algebraic spaces, whereas the axioms here were checked
+directly for sets. #{X} is infinite, but each orbit and its restricted
+groupoid is finite.}
+
+\p{The [stabilizer](frap-000Y) of the weights at #{a\ne b} is
+#{\{1,r^2,rs,r^3s\}\cong C_2\times C_2}; preserving weights
+requires #{k+\varepsilon} even. The stabilizer of either retained
+partition is #{\{1,r^2,s,r^2s\}\cong C_2\times C_2}, since
+preserving the partition requires #{k} even. Intersecting these
+conditions gives the following automorphism groups.
+When #{a\ne b},
+##{\operatorname{Aut}(x)=\{1,r^2\}\cong C_2.}
+When #{a=b},
+##{\begin{aligned}
+\operatorname{Aut}(x)&=\{1,r^2,s,r^2s\}\\
+ &\cong C_2\times C_2.
+\end{aligned}}
+At equal weights the first condition disappears. In each four-element
+subgroup the two indicated generators are distinct commuting
+involutions. No further condition comes from the named half-turn,
+which commutes with all eight elements. The kernel #{\{1,r^2\}}
+of the parameter action is retained as distinct arrows:
+#{P_{r^2}\delta_0=\delta_2\ne\delta_0}.}
+
+\p{For unequal weights the orbit consists of both weight orders and
+both partitions, at fixed mass. Write
+#{x_j=(a,b,m,R_j)} and #{y_j=(b,a,m,R_j)}. The drawing shows
+selected generator arrows; it does not draw all arrows or isotropy loops.}
+
+\tikzfigs{0.72}{\begin{tikzpicture}[
+  every node/.style={inner sep=4pt},
+  arrow/.style={-{Stealth[length=2mm]},shorten >=2pt,shorten <=2pt}
+]
+\node (x0) at (0,0) {$x_0$};
+\node (y0) at (4,0) {$y_0$};
+\node (y1) at (0,-2.6) {$y_1$};
+\node (x1) at (4,-2.6) {$x_1$};
+\draw[arrow] (x0) -- node[above=3mm] {$s$} (y0);
+\draw[arrow] (y1) -- node[below=3mm] {$s$} (x1);
+\draw[arrow] (x0) -- node[left=3mm] {$r$} (y1);
+\draw[arrow] (y0) -- node[right=3mm] {$r$} (x1);
+\node at (2,-1.3) {$\operatorname{Aut}=C_2$};
+\end{tikzpicture}}
+
+\p{At #{a=b}, put #{z_j=(a,a,m,R_j)}. There are two objects,
+each with automorphism group #{C_2\times C_2}:}
+
+\tikzfigs{0.72}{\begin{tikzpicture}[
+  every node/.style={inner sep=4pt},
+  arrow/.style={-{Stealth[length=2mm]},shorten >=2pt,shorten <=2pt}
+]
+\node (z0) at (0,0) {$z_0$};
+\node (z1) at (4,0) {$z_1$};
+\draw[arrow] (z0) -- node[above=3mm] {$r$} (z1);
+\node at (2,-1.1) {$\operatorname{Aut}=C_2\times C_2$};
+\end{tikzpicture}}
+
+\p{The generators #{s,r} reach every displayed object; there are
+exactly four objects when #{a\ne b} and two when #{a=b}.
+It follows in both directions that the coarse isomorphism classes are
+#{(m,\{a,b\})}. The coarse orbit set forgets the isotropy just
+computed, as in \ref{fgap-000P}. On the strict slice
+#{(1,t,m,R_0)}, isomorphism requires the same mass and
+#{\{1,t\}=\{1,t'\}}, whose products give #{t=t'}.
+Thus reciprocal parameters are not identified there unless #{t=1}.
+This is a set-level groupoid, within the [boundary before stacks](fgap-000U).}
+
+\p{Mathlib's \leanref{CategoryTheory.ActionCategory} constructs
+the generic action category; a group action makes it a groupoid.
+\leanref{CategoryTheory.ActionCategory.stabilizerIsoEnd}
+identifies the stabilizer monoid with endomorphisms, which are invertible
+in the group case. \leanref{MulAction.orbitRel} and
+\leanref{MulAction.stabilizer} provide the generic coarse relation
+and subgroup. \leanref{DihedralGroup.card} gives eight elements
+at #{n=4}, and \leanref{DihedralGroup.center_eq_closure_of_even_ne_two}
+gives the central half-turn. In its constructor convention our
+#{r^ks} corresponds to #{\texttt{sr}(-k)}, while #{r^k}
+corresponds to #{\texttt{r}(k)}. These declarations support the
+group constructions; the particular parameter action, signed incidence
+and stabilizer intersections are the calculations above.}
