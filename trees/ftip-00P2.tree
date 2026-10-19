@@ -7,21 +7,25 @@
 \tag{state}
 \tag{harness}
 
-\p{A long-horizon training trace should be selected for the behavior it
-preserves, the evidence it exposes, and the cost it consumes. Let a trace be}
+\p{A long-horizon training trace should preserve the behavior that a later
+agent must learn: its decisions, evidence, verification, recovery, and state
+boundary. Token count is one measurement of that record, not a substitute for
+the events that make a continuation useful.}
+
 ##{
   H\in\mathbb N,\qquad
-  T=(o_{0:H},a_{0:H},y_{0:H},e_{0:H},v_{0:H},\tau,\sigma)\in
+  T=(o_{0:H},a_{0:H},y_{0:H},e_{0:H},v_{0:H},\tau,\sigma,\kappa)\in
   \mathcal O^{H+1}\times\mathcal A^{H+1}\times\mathcal Y^{H+1}
-  \times\mathcal E^{H+1}\times\mathcal V^{H+1}\times\mathcal T\times\mathcal S.
+  \times\mathcal E^{H+1}\times\mathcal V^{H+1}\times\mathcal T
+  \times\mathcal S\times\mathbb N.
 }
 \p{Here #{o}, #{a}, and #{y} are observation, action, and outcome events;
 #{e} is an evidence or environment-state reference; #{v} is a verification or
-recovery event; #{\tau} is a termination event; and #{\sigma\in\mathcal S}
-records the state boundary under which the trace was produced. The component
-spaces are declared event domains, and a run may use a task-specific subtype
-of each domain. Token length is one coordinate of #{T}; it does not replace
-decision horizon, verification, recovery, or state context.}
+recovery event; #{\tau} is a termination event; #{\sigma\in\mathcal S}
+records the state boundary under which the trace was produced; and
+#{\kappa\in\mathbb N} is its token length. The component spaces are event
+domains, and a run may use a task-specific subtype of each domain. #{H} is
+the decision horizon, so #{H} and #{\kappa} must be reported separately.}
 
 \p{The direct observation in
 \citet{Abstract; Sections 3-5 and Tables 1-4}{dang2026selecting} compares
@@ -38,51 +42,37 @@ a universal horizon, long-term memory, or persistent identity.}
 can increase temporal-supervision bias by removing later decisions, while a
 longer continuation increases the policy complexity and finite-sample burden.
 The useful horizon is therefore conditional on the task law, teacher policy,
-model capacity, verifier, and retained state. A horizon comparison must keep
-those coordinates visible rather than treating context length as the cause.}
+model capacity, verifier, and retained state.}
 
 \p{Selective refinement makes the data intervention explicit
-\citet{Sections 6-7; Tables 4-5, 10}{dang2026selecting}. A warm-start
-model is trained on a shorter horizon, continuation segments are scored by
+\citet{Sections 6-7; Tables 4-5, 10}{dang2026selecting}. A warm-start model is
+trained on a shorter horizon, continuation segments are scored by
 teacher-forced likelihood, and a fixed fraction is retained for longer-horizon
 refinement. The score measures compatibility with the warm-start policy, not
-intrinsic truth or universal quality: high-likelihood selection can improve
-repeatability, while low-likelihood or random selection can preserve breadth,
-rare strategies, and recovery behavior. At a fixed retained budget, report
-both selection and coverage; quantity remains relevant when it buys coverage
-or variance reduction.}
+intrinsic truth. High-likelihood selection can improve repeatability; the FTIP
+protocol tests whether low-likelihood or random selection preserves breadth,
+rare strategies, and recovery behavior.}
 
-\p{For FTIP, call a run \strong{premature} when it terminates before the
-declared evidence or recovery condition, \strong{productive} when it continues
-through bounded evidence gathering, verification, and recovery, and
+\p{Call a run \strong{premature} when it terminates before the declared
+evidence or recovery condition, \strong{productive} when it continues through
+bounded evidence gathering, verification, and recovery, and
 \strong{over-persistent} when additional work repeats or explores after the
 task-relevant value has saturated. Record coverage loss separately: a selector
 can improve repeatability while deleting hard tasks or unusual recovery paths.
 These terms describe observable behavior; they are not claims about an agent's
 memory or inner objective.}
 
+\p{For example, an illustrative trace that inspects a failing build, edits the
+source, runs a test, and verifies the artifact is productive only if the
+retained record includes the test and verification events. Removing the test
+leaves a premature record even when its token count is small; retaining many
+identical shell retries after verification is over-persistent. This example is
+an FTIP classification proposal, not a result established by the source.}
+
 \p{The trace intervention belongs beside the lifecycle intervention in
 \ref{ftip-00P0}, and its context/state boundary is the four-layer state in
 \ref{ftip-00C4} with the access-mechanism qualification in \ref{ftip-00C5}.
-A fixed-budget comparison should cross horizon and selection
-with the state masks that retain or clear session context, candidate history,
-workspace, and the verified best candidate. At minimum compare full-long,
-verification-preserving intermediate truncation, top-likelihood, bottom-
-likelihood, and random selection at the same retained budget. Hold the model,
-teacher, scaffold, task split, verifier, seed law, and total token and compute
-budgets fixed; charge selection, storage, restart, and discarded-trace costs.}
-
-\p{The primary finite record should report successful tasks and attempts,
-repeatability, premature-stop, productive-persistence, over-persistence,
-recovery, verification, task and strategy coverage, retained tokens, total
-training compute, wall time, storage, and selection overhead. Pair every
-selected trace with its unselected continuation and reserve held-out tasks and
-a cross-benchmark split. These are FTIP protocol requirements, not results
-already established by the source.}
-
-\p{The current FTIP boundary keeps trace quality tied to task-relevant
-decisions, evidence, verification, recovery, and coverage. Existing state,
-reset, replay, and cost conventions are reused without claiming a
-formalization. The resulting boundary is: train on the shortest trace that preserves the target decision,
-evidence, verification, and recovery events, and test whether selection has
-removed coverage or merely removed repetition.}
+The fixed-budget comparison and its metrics are stated in
+\ref{ftip-00P3}. The resulting boundary is: train on the shortest trace that
+preserves the target decision, evidence, verification, and recovery events,
+then test whether selection has removed coverage or merely removed repetition.}

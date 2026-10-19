@@ -1,0 +1,40 @@
+\import{ftip-macros}
+\meta{agent-authored}{true}
+\taxon{Convention}
+\title{Fixed-budget trace-selection protocol}
+\tag{ftip}
+\tag{evaluation}
+\tag{harness}
+
+\p{The trace intervention is a finite evaluation proposal. It compares
+horizon and selector effects at a fixed retained budget while keeping the
+model, teacher, scaffold, task split, verifier, seed law, and total token and
+compute budgets visible. The source's selective-refinement intervention
+supplies the comparison pattern, but the following arm matrix is an FTIP
+protocol rather than a source result
+\citet{Sections 6-7; Tables 4-5, 10}{dang2026selecting}.}
+
+\p{Cross horizon and selection with the state masks in
+\ref{ftip-00P0}, which retain or clear session context, candidate history,
+workspace, and the verified best candidate. At minimum compare:}
+\ol{
+  \li{one-stage full-long traces;}
+  \li{verification-preserving intermediate truncation;}
+  \li{warm-start plus top-likelihood selection;}
+  \li{warm-start plus bottom-likelihood selection;}
+  \li{warm-start plus random selection at the same retained budget; and}
+  \li{a coverage-stratified or diversity-preserving selector.}
+}
+
+\p{For every arm, report successful tasks and attempts, repeatability,
+premature-stop, productive-persistence, over-persistence, recovery,
+verification success, task and strategy coverage, trace tokens, total training
+compute, wall time, storage, and selection overhead. Pair every selected trace
+with its unselected continuation and reserve held-out tasks and a
+cross-benchmark split. Score only information available at selection time and
+prevent verifier outcomes from leaking into the selection label.}
+
+\p{The protocol must charge selection, storage, restart, and discarded-trace
+costs and retain the task, selector, budget, split, and seed receipt. A claim
+that selected traces improve FTIP behavior waits for an immutable experiment
+record with those fields; the present card states a future-research gate.}
