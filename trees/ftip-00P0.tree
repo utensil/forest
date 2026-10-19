@@ -24,26 +24,31 @@ Candidate visibility and reducer behavior are part of the record: a
 candidate that is scored but not shown to a later proposer is not the same state
 as a candidate that remains in its context.}
 
-\p{A reset at boundary #{r} is a typed transition}
+\p{For a reset mask #{M\subseteq\{s,h,w\}}, define the typed transition at
+boundary #{r} by}
 ##{
-  \mathsf{Reset}_r(Z_r)=
-  (s_0,h_0,w_0,b_r,q_0,\rho'_r;\mathcal V),
+  \mathsf{Reset}_{r,M}(Z_r)=
+  (s^M_r,h^M_r,w^M_r,b_r,q^M_r,\rho^M_r;\mathcal V),
 }
-\p{that retains the declared best candidate #{b_r} and its content-addressed
-artifact, while clearing the named components. Here #{h_0} excludes discarded
-history and retained-best metadata, and #{w_0} is a clean workspace containing
-only the verified materialization of #{b_r}; #{h_0} contains no duplicate of
-#{b_r}. For a training-script task, runtime checkpoints and other generated
-outputs remain in #{w_t} and are cleared unless the protocol explicitly declares
-them part of #{b_r}. The retained artifact and its materialization are counted
-explicitly as retained storage. The transition records the
+\p{For #{x\in\{s,h,w\}}, set #{x^M_r=x_0} when #{x\in M} and
+#{x^M_r=x_r} otherwise; set #{q^M_r=q_0} and #{\rho^M_r=\rho'_r} when
+#{M\ne\varnothing}, and #{q^M_r=q_r}, #{\rho^M_r=\rho_r} for the continue
+mask #{M=\varnothing}. Thus session-only and history-only arms preserve
+#{w_r}, while the workspace arm uses a clean workspace containing only the
+verified materialization of #{b_r}. The transition retains the declared best
+candidate #{b_r} and its content-addressed artifact: #{h_0} excludes discarded
+history and retained-best metadata and contains no duplicate of #{b_r}. For a
+training-script task, runtime checkpoints and other generated outputs remain in
+#{w_t} and are cleared unless the protocol explicitly declares them part of
+#{b_r}. The retained artifact and its materialization are counted explicitly as
+retained storage. The transition records the
 parent and child hashes, the discarded bytes and tokens, the reducer and
 visibility rules, and the random-source change. It does not erase the rejected
 proposals or their execution and evaluation costs from the lifecycle vector in
 \ref{ftip-005H}. A reset is therefore an intervention on state lifecycle, not
 evidence that the solver or proposer learned a new general algorithm.}
 
-\p{The source observation in \citet{Abstract; Sections 3--5 and Tables 1--3}{tan2026forgetting}
+\p{The source observation in \citet{Abstract; Sections 3-5 and Tables 1-3}{tan2026forgetting}
 uses the Pi agent with DeepSeek V4.1 Flash on four bounded tasks spanning
 heuristic programming, kernel optimization, and model training, with the same
 budget in a single-agent run, four parallel agents, and a four-agent team that
@@ -58,6 +63,14 @@ arms:}
   \li{clear session, candidate history, and workspace state while retaining the
   best candidate, score, status, and artifact digest (new FTIP arm).}
 }
+
+\p{Use the scalar evaluation convention of \ref{ftip-005D}. For fixed task law
+#{Q} and evaluation kernel #{\Lambda}, #{U} denotes the measurable scalar
+random variable obtained by evaluating the retained candidate with the declared
+inference protocol and evaluator draw. Higher #{U} is better; a minimization
+cost is negated before comparison, and incompatible task coordinates are kept
+as separate contrasts rather than silently pooled. The evaluation kernel and
+task law are held fixed, and #{\mathbb E|U|<\infty}.}
 
 \p{For a fixed non-random endowment #{E_0}, verifier law/configuration
 #{\mathcal V}, proposal budget #{B}, and task law #{Q}, the primary finite
@@ -81,3 +94,11 @@ interaction among them. The four-arm decomposition is an FTIP protocol proposal.
 Without the isolated arms, the source supports a bounded reset observation but
 not a theorem that memory is harmful, a monotone law for forgetting, or a
 general self-improvement claim.}
+
+\p{A scoped search of Forest at #{41d8a4f4e22b4ed6b9b0d7c25fe06109a6d9bcb6},
+formal-math at #{795efb86f191735c5481675763537cfb4ff37e55}, TauCetiReview at
+#{4c47c65894315553937ff27a2e342ab4db36c803}, and TauCetiWorker at
+#{b4cc9afe252010468b2a7e333cbe989690587f1d} found no exact declaration for
+this reset protocol. Existing lifecycle, replay, and evaluation declarations
+cover subcomponents only, so the reset transition remains an informal protocol
+proposal.}
