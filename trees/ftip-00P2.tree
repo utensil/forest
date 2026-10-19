@@ -10,13 +10,18 @@
 \p{A long-horizon training trace should be selected for the behavior it
 preserves, the evidence it exposes, and the cost it consumes. Let a trace be}
 ##{
-  T=(o_{0:H},a_{0:H},y_{0:H},e_{0:H},v_{0:H},\tau,\sigma),
+  H\in\mathbb N,\qquad
+  T=(o_{0:H},a_{0:H},y_{0:H},e_{0:H},v_{0:H},\tau,\sigma)\in
+  \mathcal O^{H+1}\times\mathcal A^{H+1}\times\mathcal Y^{H+1}
+  \times\mathcal E^{H+1}\times\mathcal V^{H+1}\times\mathcal T\times\mathcal S.
 }
-\p{where #{o} are observations, #{a} actions, #{y} outcomes, #{e} evidence
-and environment-state references, #{v} verification or recovery events,
-#{\tau} is the termination event, and #{\sigma} records the state boundary
-under which the trace was produced. Token length is one coordinate of #{T}; it
-does not replace decision horizon, verification, recovery, or state context.}
+\p{Here #{o}, #{a}, and #{y} are observation, action, and outcome events;
+#{e} is an evidence or environment-state reference; #{v} is a verification or
+recovery event; #{\tau} is a termination event; and #{\sigma\in\mathcal S}
+records the state boundary under which the trace was produced. The component
+spaces are declared event domains, and a run may use a task-specific subtype
+of each domain. Token length is one coordinate of #{T}; it does not replace
+decision horizon, verification, recovery, or state context.}
 
 \p{The direct observation in
 \citet{Abstract; Sections 3-5 and Tables 1-4}{dang2026selecting} compares
@@ -28,14 +33,16 @@ best reported balance. This is a finite terminal-agent observation under one
 model, teacher corpus, scaffold, and benchmark family; it does not establish
 a universal horizon, long-term memory, or persistent identity.}
 
-\p{The paper's bias-complexity account gives the FTIP hypothesis. Truncation
+\p{The paper's bias-complexity account gives the FTIP hypothesis
+\citet{Sections 5.2 and 6-7; Tables 4-5, 10}{dang2026selecting}. Truncation
 can increase temporal-supervision bias by removing later decisions, while a
 longer continuation increases the policy complexity and finite-sample burden.
 The useful horizon is therefore conditional on the task law, teacher policy,
 model capacity, verifier, and retained state. A horizon comparison must keep
 those coordinates visible rather than treating context length as the cause.}
 
-\p{Selective refinement makes the data intervention explicit. A warm-start
+\p{Selective refinement makes the data intervention explicit
+\citet{Sections 6-7; Tables 4-5, 10}{dang2026selecting}. A warm-start
 model is trained on a shorter horizon, continuation segments are scored by
 teacher-forced likelihood, and a fixed fraction is retained for longer-horizon
 refinement. The score measures compatibility with the warm-start policy, not
@@ -55,7 +62,9 @@ These terms describe observable behavior; they are not claims about an agent's
 memory or inner objective.}
 
 \p{The trace intervention belongs beside the lifecycle intervention in
-\ref{ftip-00P0}. A fixed-budget comparison should cross horizon and selection
+\ref{ftip-00P0}, and its context/state boundary is the four-layer state in
+\ref{ftip-00C4} with the access-mechanism qualification in \ref{ftip-00C5}.
+A fixed-budget comparison should cross horizon and selection
 with the state masks that retain or clear session context, candidate history,
 workspace, and the verified best candidate. At minimum compare full-long,
 verification-preserving intermediate truncation, top-likelihood, bottom-
@@ -71,10 +80,9 @@ selected trace with its unselected continuation and reserve held-out tasks and
 a cross-benchmark split. These are FTIP protocol requirements, not results
 already established by the source.}
 
-\p{A scoped search of Forest, formal-math, TauCetiReview, and TauCetiWorker
-found no declaration corresponding to this trace record or its
-quality-by-quantity estimands. Existing state, reset, replay, and cost
-conventions are reused without claiming a formalization. The resulting
-boundary is: train on the shortest trace that preserves the target decision,
+\p{The current FTIP boundary keeps trace quality tied to task-relevant
+decisions, evidence, verification, recovery, and coverage. Existing state,
+reset, replay, and cost conventions are reused without claiming a
+formalization. The resulting boundary is: train on the shortest trace that preserves the target decision,
 evidence, verification, and recovery events, and test whether selection has
 removed coverage or merely removed repetition.}
