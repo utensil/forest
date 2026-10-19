@@ -1,0 +1,80 @@
+\import{ftip-macros}
+\meta{agent-authored}{true}
+\taxon{Convention}
+\title{Trace quality, supervision horizon, and productive persistence}
+\tag{ftip}
+\tag{evaluation}
+\tag{state}
+\tag{harness}
+
+\p{A long-horizon training trace should be selected for the behavior it
+preserves, the evidence it exposes, and the cost it consumes. Let a trace be}
+##{
+  T=(o_{0:H},a_{0:H},y_{0:H},e_{0:H},v_{0:H},\tau,\sigma),
+}
+\p{where #{o} are observations, #{a} actions, #{y} outcomes, #{e} evidence
+and environment-state references, #{v} verification or recovery events,
+#{\tau} is the termination event, and #{\sigma} records the state boundary
+under which the trace was produced. Token length is one coordinate of #{T}; it
+does not replace decision horizon, verification, recovery, or state context.}
+
+\p{The direct observation in
+\citet{Abstract; Sections 3-5 and Tables 1-4}{dang2026selecting} compares
+4K, 8K, 12K, and 16K supervision horizons for terminal-agent SFT. In its
+reported Terminal-Bench v1.0 setting, 12K reaches more tasks than 16K with
+about thirty percent less training time. The shorter setting under-persisted,
+the longest setting over-persisted, and the intermediate setting produced the
+best reported balance. This is a finite terminal-agent observation under one
+model, teacher corpus, scaffold, and benchmark family; it does not establish
+a universal horizon, long-term memory, or persistent identity.}
+
+\p{The paper's bias-complexity account gives the FTIP hypothesis. Truncation
+can increase temporal-supervision bias by removing later decisions, while a
+longer continuation increases the policy complexity and finite-sample burden.
+The useful horizon is therefore conditional on the task law, teacher policy,
+model capacity, verifier, and retained state. A horizon comparison must keep
+those coordinates visible rather than treating context length as the cause.}
+
+\p{Selective refinement makes the data intervention explicit. A warm-start
+model is trained on a shorter horizon, continuation segments are scored by
+teacher-forced likelihood, and a fixed fraction is retained for longer-horizon
+refinement. The score measures compatibility with the warm-start policy, not
+intrinsic truth or universal quality: high-likelihood selection can improve
+repeatability, while low-likelihood or random selection can preserve breadth,
+rare strategies, and recovery behavior. At a fixed retained budget, report
+both selection and coverage; quantity remains relevant when it buys coverage
+or variance reduction.}
+
+\p{For FTIP, call a run \strong{premature} when it terminates before the
+declared evidence or recovery condition, \strong{productive} when it continues
+through bounded evidence gathering, verification, and recovery, and
+\strong{over-persistent} when additional work repeats or explores after the
+task-relevant value has saturated. Record coverage loss separately: a selector
+can improve repeatability while deleting hard tasks or unusual recovery paths.
+These terms describe observable behavior; they are not claims about an agent's
+memory or inner objective.}
+
+\p{The trace intervention belongs beside the lifecycle intervention in
+\ref{ftip-00P0}. A fixed-budget comparison should cross horizon and selection
+with the state masks that retain or clear session context, candidate history,
+workspace, and the verified best candidate. At minimum compare full-long,
+verification-preserving intermediate truncation, top-likelihood, bottom-
+likelihood, and random selection at the same retained budget. Hold the model,
+teacher, scaffold, task split, verifier, seed law, and total token and compute
+budgets fixed; charge selection, storage, restart, and discarded-trace costs.}
+
+\p{The primary finite record should report successful tasks and attempts,
+repeatability, premature-stop, productive-persistence, over-persistence,
+recovery, verification, task and strategy coverage, retained tokens, total
+training compute, wall time, storage, and selection overhead. Pair every
+selected trace with its unselected continuation and reserve held-out tasks and
+a cross-benchmark split. These are FTIP protocol requirements, not results
+already established by the source.}
+
+\p{A scoped search of Forest, formal-math, TauCetiReview, and TauCetiWorker
+found no declaration corresponding to this trace record or its
+quality-by-quantity estimands. Existing state, reset, replay, and cost
+conventions are reused without claiming a formalization. The resulting
+boundary is: train on the shortest trace that preserves the target decision,
+evidence, verification, and recovery events, and test whether selection has
+removed coverage or merely removed repetition.}
