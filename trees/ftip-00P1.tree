@@ -27,14 +27,17 @@ candidate #{A} has #{N(A)\cap\Omega\ne\varnothing}. These are different
 capacity regimes, not two scores for one representation.}
 
 \p{The stronger conclusions require additional structure. In the generative
-case, Assumption 8.2 adds a factorized exponential conditional, constant
-conditional entropy, a uniform class prior, exact capacity #{m=n=n'},
+case, Assumption 8.2 takes #{Z=\mathbb R_+^n} and adds a factorized exponential
+conditional, constant conditional entropy, a uniform class prior, exact capacity
+#{m=n=n'},
 non-negative activations, fixed within-class variance, and an energy-minimizing
 global optimum. Theorem 4.3 then gives the scaled permutation
-#{h(z)=DP_\sigma z}. In the discriminative case, Assumption 8.3 adds
-#{W^*=U^*A^*}, #{k}-sparse latents, and
-#{\operatorname{spark}(A^*)>2k}; with #{m\geq n'} the classifier-visible
-encoder #{P_Uh(z)=Az} has #{N(A)=N(A^*)}, so the unique #{k}-sparse solution
+#{h(z)=DP_\sigma z}. In the discriminative case, Assumption 8.3 uses
+#{A^*\in\mathbb R^{n\prime\times n}} with full row rank and
+#{U^*\in\mathbb R^{|Y|\times n\prime}}, adds #{W^*=U^*A^*}, #{k}-sparse
+latents, and #{\operatorname{spark}(A^*)>2k}. With #{m\geq n\prime}, let
+#{P_U} be the orthogonal projector onto #{\operatorname{Row}(U)}; the
+classifier-visible encoder #{P_Uh(z)=Az} has #{N(A)=N(A^*)}, so the unique #{k}-sparse solution
 can recover #{z}. Axis alignment and sparse recovery are distinct routes through
 distinct assumptions.}
 
@@ -71,7 +74,8 @@ model, layers, unit sets, stimulus set, and correlation rule. An unavailable or
 inapplicable field is #{\bot}.}
 
 \p{The equivalence class identifies only the ambiguity allowed by the declared
-regime: #{(A,\nu)} with #{UA=W^*} and #{\nu(z)\in N(U)} in the linear regime;
+regime: #{(A,\nu)} with #{UA=W^*}, #{\operatorname{rank}(A)=n'}, and
+#{\nu(z)\in N(U)} in the linear regime;
 no universal quotient, recorded as non-identifiable under the stated
 assumptions, in the undercomplete regime; positive diagonal scaling and
 permutation #{(D,P_\sigma)} in the axis-aligned regime; and the
