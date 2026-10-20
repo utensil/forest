@@ -1,0 +1,35 @@
+\import{ftip-macros}
+\meta{agent-authored}{true}
+\taxon{Example}
+\title{A paired trace-selection calculation}
+\tag{ftip}
+\tag{evaluation}
+
+\p{Consider two arms from \ref{ftip-00P8} with the same P0 boundary, model,
+task split, verifier, budget, and paired randomization law. They differ only
+in the selector: #{a} retains the highest teacher-forced scores and #{a'}
+retains a coverage-stratified subset. Both have
+#{Q_{\rm hold}=\{q_1,q_2\}}, #{\mathfrak S=\{s_1,s_2\}}, and #{N=2}. Suppose
+the admitted receipts are}
+##{
+\begin{array}{c|cc|cc}
+ &q_{a,i}&s_{a,i}&I^{\rm prod}_{a,i}&Y_{a,i}\\\hline
+i=1&q_1&s_1&1&1\\
+i=2&q_1&s_1&1&0
+\end{array}
+\qquad
+\begin{array}{c|cc|cc}
+ &q_{a',i}&s_{a',i}&I^{\rm prod}_{a',i}&Y_{a',i}\\\hline
+i=1&q_1&s_1&1&1\\
+i=2&q_2&s_2&1&1
+\end{array}
+}
+\p{Then both arms have
+#{\widehat p^{\rm prod}=1}, while
+#{\widehat C^{\rm task}_a=\widehat C^{\rm strat}_a=\tfrac12} and
+#{\widehat C^{\rm task}_{a'}=\widehat C^{\rm strat}_{a'}=1}. The paired
+outcome contrast is #{\widehat\Delta_{a,a'}=-\tfrac12}. The calculation
+shows why a repeatability rate alone cannot identify coverage: the two
+selectors have the same productive rate but different admitted task and
+strategy support. This is a finite FTIP construction using the receipt
+definitions, not a source result.}
