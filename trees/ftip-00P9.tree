@@ -13,7 +13,11 @@ Fix an arm #{a\in\mathfrak A} from \ref{ftip-00P8} and a positive run count
 n^{\rm prod})_{t=0}^{H_a}},
 a task label #{q_{a,i}}, a strategy label #{s_{a,i}}, a measurable task-value
 score #{u_{a,i}(t)}, a declared saturation threshold #{u_a^{\rm sat}}, and a
-complete-admission indicator #{A_{a,i}}. The receipt contract emits a terminal
+typed held-out outcome #{Y_{a,i}\in\mathcal Y_a\cup\{\bot\}}, final verifier
+outcome #{v_{a,i}}, and complete-admission indicator #{A_{a,i}}. Define
+#{A_{a,i}:=\mathbf 1[q_{a,i}\in Q_{\rm hold,a}\land v_{a,i}=1
+\land Y_{a,i}\in\mathcal Y_a]}; when #{A_{a,i}=0}, set #{Y_{a,i}:=\bot}.
+The receipt contract emits a terminal
 event by #{H_a}; an execution that would not terminate naturally receives a
 timeout terminal event at #{H_a} and #{A_{a,i}=0}. Put
 #{\overline{\mathbb N}:=\mathbb N\cup\{+\infty\}} and
@@ -72,8 +76,9 @@ receipt reports both positive denominators and the admission rule.}
 let #{N:=\min(N_a,N_{a'})}. Define the common admitted index set
 #{J_{a,a'}:=\{i\leq N:A_{a,i}=A_{a',i}=1\}} and
 #{N_{\rm pair}:=|J_{a,a'}|}. For #{i\in J_{a,a'}}, let #{Y_{a,i}} and
-#{Y_{a',i}} be their admitted held-out outcomes under the shared paired
-randomization law. When #{N_{\rm pair}\geq2}, the primary finite contrast and
+#{Y_{a',i}} be their admitted held-out outcomes under the shared pairing
+law #{\Lambda_{a,a'}}, so #{q_{a,i}=q_{a',i}}. When
+#{N_{\rm pair}\geq2}, the primary finite contrast and
 its paired sample variance are}
 ##{
 \widehat\Delta_{a,a'}:=

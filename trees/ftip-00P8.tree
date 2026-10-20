@@ -50,7 +50,16 @@ objects are maps of #{a}, not implicit labels; paired arms must agree on every
 object except the factor named by their comparison. The split attached to
 #{D_a} is written #{(Q_{\rm sel,a},Q_{\rm hold,a},Q_{\rm xb,a})}; it also
 supplies a nonempty finite strategy-label set #{\mathfrak S_a} and a receipt
-space #{\mathcal R_a^{\rm rec}}.}
+space #{\mathcal R_a^{\rm rec}} containing a typed held-out outcome
+#{Y_a\in\mathcal Y_a\cup\{\bot\}} and an admission field. For every paired
+comparison #{(a,a')}, the record additionally declares the finite pairing
+space
+#{\mathcal P_{a,a'}:=(Q_{\rm hold,a}\cap Q_{\rm hold,a'})
+\times\mathfrak S_a\times\mathfrak S_{a'}}
+and a law #{\Lambda_{a,a'}} on
+#{\mathcal G\times\mathcal G\times\mathcal P_{a,a'}}. The shared task
+coordinate in this law is the pairing key; the two strategy coordinates may
+differ.}
 
 \p{For each arm, let #{\mathcal X^{\rm sel}_a} be the finite candidate-pool
 space with #{1\leq B_a\leq|\mathcal X^{\rm sel}_a|}, and let
@@ -69,19 +78,22 @@ access to held-out outcomes. Write
 #{\mathcal I_a:=\{I\subseteq\mathcal X^{\rm sel}_a:|I|=B_a\}}. A run kernel}
 ##{
 \mathsf K^{\rm run}_{a,\ell_a}:
-\mathcal X^{\rm sel}_a\times\mathcal I_a\times\mathcal G\times\mathcal Q
+\mathcal X^{\rm sel}_a\times\mathcal I_a\times\mathcal G
+\times\mathcal Q\times\mathfrak S_a
 \longrightarrow\operatorname{Dist}(\mathcal R_a^{\rm rec})
 }
 \p{maps a candidate pool, its retained index set, one component of the
-paired source draw, and a task to a receipt with an event sequence, task and
-strategy labels, final verifier outcome, state and artifact hashes, and the
-charged token, tool, storage, restart, discarded trace, and verification
-costs, with exactly #{H_a+1} event slots and a timeout receipt at the final
-slot when needed. For a paired comparison, #{\mathcal R_a} is the
-#{(\mathcal G\times\mathcal G)} law that supplies the two source components
-before the two kernels are applied. Thus an arm defines maps and kernels that
-use the selector output to produce receipts; it does not merely list factors
-whose later meaning is left implicit.}
+paired source draw, a task, and its arm-specific strategy coordinate to a
+receipt with an event sequence, task and strategy labels, final verifier
+outcome, typed held-out outcome, admission field, state and artifact hashes,
+and the charged token, tool, storage, restart, discarded trace, and
+verification costs, with exactly #{H_a+1} event slots and a timeout receipt
+at the final slot when needed. For a paired comparison, #{\Lambda_{a,a'}}
+supplies a common held-out task and the two strategy coordinates, while
+#{\mathcal R_a} supplies the two source components before the kernels are
+applied. Thus an arm defines maps and kernels that use the selector output to
+produce replayable receipts; it does not merely list factors whose later
+meaning is left implicit.}
 
 \p{The reset transition is #{\mathsf{Reset}_{r_a,M_a}} from
 \ref{ftip-00P0}. Horizon, selector, budget, split, and randomization are
