@@ -1,21 +1,33 @@
 \import{macros}
 \meta{agent-authored}{true}
 \tag{frap}
+\taxon{Definition}
 
 \title{Cubies, sticker states, and fixed local frames}
 
-\p{Use three pieces of vocabulary for the state drawn below. A
-\newvocab{cubie} is one physical unit of the layered cube, with a home
-position and the visible stickers incident to that position. For a
-three-layer cube these are the eight corners, twelve edges, and six centres
-described in [how the cube models connect](frap-001A).}
+\p{A fixed-frame description of a three-layer cube needs three pieces of
+vocabulary. A \vocabk{cubie}{frap-0003} is one physical unit of the layered
+cube, with a home position and the visible stickers incident to that
+position. For a three-layer cube these are the eight corners, twelve edges
+and six centres described in [how the cube models connect](frap-001A).
+Bonzio, Loi and Peruzzi use this cubie decomposition in their general model
+\citet{Sections 2--3}{bonzio2018nxnxn}; the fixed-frame, visible-sticker
+formulation here is our adaptation to the present cube convention.}
 
-\p{A \newvocab{sticker state} assigns each labelled visible sticker to one
-surface slot. In the three-layer model a slot is a pair #{(p,n)}, with #{p}
-the surface-cell coordinate and #{n} its outward normal; the solved
-assignment is the reference state, and a move permutes these assignments.
-The correspondence between these slots, cubie fibres, and the coordinates
-#{(\sigma,x;\tau,z)} is made explicit in [how the cube models connect](frap-001A).}
+\p{For #{N=3}, let #{\mathcal S} be the 54 labelled visible stickers and let
+#{\mathcal P=\{(p,n):p\in\{-1,0,1\}^3,\ \lVert p\rVert_\infty=1,\ n
+\text{ is an incident outward normal at }p\}}. Thus #{\lvert\mathcal
+P\rvert=54}. A \newvocab{sticker state} is a bijection
+#{s:\mathcal S\xrightarrow{\sim}\mathcal P}: every valid surface slot has
+exactly one occupant. The solved assignment #{s_0} is the reference state,
+and #{s_0^{-1}\mathbin{\circ}s} records the state as a permutation of the
+54 slots; a move composes this permutation with its induced slot
+permutation. Marchetti's position-and-label transport gives the structural
+pattern \citet{Section 3.1, Definition 7 and equation (5)}{marchetti2025rubik};
+the present 54-slot bijection is our adaptation of that pattern to the
+three-layer cube. The correspondence between these slots, cubie fibres, and
+the coordinates #{(\sigma,x;\tau,z)} is made explicit in
+[how the cube models connect](frap-001A).}
 
 \p{A \newvocab{fixed local frame} specializes the
 \vocabk{local frame}{frap-000Q}: it is a chosen reference ordering of the
