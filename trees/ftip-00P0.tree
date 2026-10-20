@@ -9,8 +9,18 @@
 
 \p{A lifecycle comparison must distinguish the state that proposes a candidate
 from the state that stores a candidate, its workspace, and its evaluation
-history. Let a search state at round #{t}, under fixed verifier/reducer law
-#{\mathcal V}, be}
+history. Fix an immutable verifier law/configuration #{\mathcal V\in\mathbf V}.
+Write #{s_t\in\mathcal S}, #{h_t\in\mathcal H}, #{w_t\in\mathcal W},
+#{b_t\in\mathcal B}, #{q_t\in\mathcal Q}, and #{\rho_t\in\mathcal G}. Let
+#{\mathcal J} be a finite set of lifecycle boundaries, with a recorded state
+#{Z_r} at every #{r\in\mathcal J} at which an arm may act. Let #{\mathcal A}
+be a finite arm-label set with maps #{r:\mathcal A\to\mathcal J} and
+#{M:\mathcal A\to\{M\subseteq\{s,h,w\}\}}.}
+\p{Fix baseline coordinates #{(s_0,h_0,w_0,b_0,q_0,\rho_0)} in these spaces.
+The declared endowment #{E_0} from \ref{ftip-00OY} fixes the baseline,
+verifier configuration, task law, and budget used by a comparison; an arm is
+admissible only when its retained-best record #{b_0} and initial source
+#{\rho_0} are included in that endowment. A search state at round #{t} is}
 ##{
   Z_t=(s_t,h_t,w_t,b_t,q_t,\rho_t;\mathcal V),
 }
@@ -18,20 +28,17 @@ history. Let a search state at round #{t}, under fixed verifier/reducer law
 candidate-history record, #{w_t} is the workspace and filesystem snapshot,
 #{b_t} is the retained best candidate together with its score, artifact digest,
 and required verifier status, #{q_t} is mutable reducer state, and #{\rho_t}
-is the random-source state. The law/configuration #{\mathcal V} is immutable;
-the reset recomputes #{q_0} rather than carrying mutable reducer pointers.
-Candidate visibility and reducer behavior are part of the record: a
-candidate that is scored but not shown to a later proposer is not the same state
-as a candidate that remains in its context.}
+is the random-source state. The reset recomputes #{q_0} rather than carrying
+mutable reducer pointers. Candidate visibility and reducer behavior are part of
+the record: a candidate that is scored but not shown to a later proposer is not
+the same state as a candidate that remains in its context.}
 
-\p{Write #{s_t\in\mathcal S}, #{h_t\in\mathcal H}, #{w_t\in\mathcal W},
-#{b_t\in\mathcal B}, #{q_t\in\mathcal Q}, and #{\rho_t\in\mathcal G}. Fix
-baseline coordinates #{(s_0,h_0,w_0,q_0)} in these spaces. Let #{\mathcal R}
-be the paired randomization law. For every boundary #{r} and nonempty mask
-#{M\subseteq\{s,h,w\}}, #{\mathcal R} includes a declared kernel
-#{K_{r,M}(\mathord\cdot\mid\rho_r;\mathcal R)} on #{\mathcal G}; write
-#{\rho'_r\sim K_{r,M}(\mathord\cdot\mid\rho_r;\mathcal R)} and record that
-draw in the run receipt. The continue arm uses #{\rho_r} itself.}
+\p{Let #{\mathcal R} be the declared joint paired randomization law. For every
+#{r\in\mathcal J} and nonempty mask #{M\subseteq\{s,h,w\}}, #{\mathcal R}
+determines a measurable Markov kernel #{K_{r,M}(\mathord\cdot\mid\rho_r)} on
+#{\mathcal G}; write #{\rho'_r\sim K_{r,M}(\mathord\cdot\mid\rho_r)} under
+that joint law and record the draw in the run receipt. The continue arm uses
+#{\rho_r} itself.}
 
 \p{For a reset mask #{M\subseteq\{s,h,w\}}, define the typed transition at
 boundary #{r} by}
@@ -81,19 +88,23 @@ cost is negated before comparison, and incompatible task coordinates are kept
 as separate contrasts rather than silently pooled. The evaluation kernel and
 task law are held fixed, and #{\mathbb E|U|<\infty}.}
 
-\p{Let #{\mathcal A} be a finite set of arm labels. Each #{a\in\mathcal A}
-declares a boundary #{r(a)} and mask #{M(a)}; define
+\p{For each #{a\in\mathcal A}, define
 #{\mathsf{Reset}_a:=\mathsf{Reset}_{r(a),M(a)}} and
-#{\mathsf{Continue}_a:=\mathsf{Reset}_{r(a),\varnothing}}. For a fixed
-non-random endowment #{E_0}, verifier law/configuration #{\mathcal V}, proposal
-budget #{B}, and task law #{Q}, the primary finite estimand is}
+#{\mathsf{Continue}_a:=\mathsf{Reset}_{r(a),\varnothing}}. Let
+#{\mathbb P^{\rm pair}_a} be the declared joint paired law induced by the fixed
+endowment #{E_0}, verifier law #{\mathcal V}, componentwise budget
+#{\mathbf B\in\mathbb R_+^7} from \ref{ftip-005H}, task law and evaluation law
+#{Q,\Lambda} from \ref{ftip-005D}, and #{\mathcal R}. Its reset and continue
+marginals are #{\mathbb P^{\rm reset}_a} and #{\mathbb P^{\rm cont}_a}; the
+primary finite estimand is}
 ##{
-  \Delta_a=\mathbb E[U\mid \mathsf{Reset}_a,E_0,\mathcal V,B,Q,\mathcal R]
-  -\mathbb E[U\mid \mathsf{Continue}_a,E_0,\mathcal V,B,Q,\mathcal R].
+  \Delta_a=\mathbb E_{\mathbb P^{\rm reset}_a}[U]
+  -\mathbb E_{\mathbb P^{\rm cont}_a}[U].
 }
-\p{The expectation is indexed by #{\mathcal R}, which assigns paired runs,
-their random-source draws, and the declared coupling; it is not defined by the
-informal instruction to reuse a seed. A run reports the best-candidate
+\p{The joint law #{\mathbb P^{\rm pair}_a} assigns paired runs, their
+random-source draws, and the declared coupling; it is not defined by the
+informal instruction to reuse a seed. The estimand is a marginal contrast, while
+the joint law supplies a paired estimator. A run reports the best-candidate
 utility, proposal and verifier outcomes, realized token/tool/storage cost, and
 the complete state and artifact hashes. A noisy or deceptive verifier is a
 future stress arm for this estimand; it is not an assumption that the reset is
@@ -106,6 +117,6 @@ Without the isolated arms, the source supports a bounded reset observation but
 not a theorem that memory is harmful, a monotone law for forgetting, or a
 general self-improvement claim.}
 
-\p{A scoped local search found no exact declaration for this reset protocol.
-Existing lifecycle, replay, and evaluation declarations cover subcomponents
-only, so the reset transition remains an informal protocol proposal.}
+\p{Existing lifecycle, replay, and evaluation declarations cover subcomponents
+only; this typed reset transition remains an evaluation protocol proposal and
+does not claim a corresponding formal theorem.}
