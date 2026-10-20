@@ -1,0 +1,45 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Definition}
+\title{Chosen perfect symmetric pairings}
+\date{2026-10-20}
+
+\p{The \vocabk{perfect counting duality}{fdip-001F} represents every
+linear functional by a unique field. To make the same construction on
+another carrier, let #{R} be a commutative unital \vocabk{ring}{ca-000U}
+and #{M} a unital \vocabk{#{R}-module}{ca-000X}. Write
+#{M^\vee=\operatorname{Hom}_R(M,R)} for its
+\vocabk{dual module}{ca-0012}. Every linear map here has coefficient
+map #{\operatorname{id}_R}, as in \ref{ca-001G}.}
+
+\p{A \newvocab{chosen perfect symmetric pairing} on #{M} is a
+\vocabk{bilinear form}{ca-0003} #{b_M:M\times M\to R} such that
+#{b_M(x,y)=b_M(y,x)} and the linear map
+##{\Phi_M:M\longrightarrow M^\vee,\qquad
+   \Phi_M(y)(x)=b_M(x,y)}
+is an \vocabk{isomorphism}{ca-0015}. Thus each functional #{\ell}
+has exactly one representative #{\Phi_M^{-1}\ell}, characterized by
+#{b_M(x,\Phi_M^{-1}\ell)=\ell(x)} for every #{x}. Bilinearity makes
+#{\Phi_M} linear. Symmetry identifies the other currying map
+#{y\mapsto (x\mapsto b_M(y,x))} with #{\Phi_M}, so both are
+isomorphisms. This agrees with the two-sided perfect-pairing convention
+in Mathlib's \leanref{LinearMap.IsPerfPair}. The ordinary Hom convention
+is \citet{Section 10.10, Tag 0581}{stacks2017stacks}.}
+
+\p{Injectivity alone says that #{b_M(x,y)=0} for every #{x} forces
+#{y=0}; symmetry gives the analogous assertion in the other slot.
+It does not give every functional a representative. For example,
+#{b(x,y)=2xy} on #{\mathbb Z} has zero radical: testing against
+#{x=1} gives #{2y=0}, hence #{y=0}. But every integer-linear
+functional on #{\mathbb Z} is determined by its value at #{1}, and
+#{\Phi(y)(1)=2y}. Thus #{\Phi} misses the functional #{x\mapsto x}.
+Freeness of #{M} does not repair this failure of the chosen form.}
+
+\p{No finiteness, basis or projectivity hypothesis is imposed on #{M};
+the specified duality is the assumption. The counting form on every
+finite function module satisfies it by the explicit inverse in
+\ref{fdip-001F}. The zero module has its unique perfect pairing.
+If #{R} is the zero ring, every unital module is zero since
+#{x=1x=0x=0}, so this case is included. Perfection does not assert
+positivity or determine a bilinear form from its diagonal values.}

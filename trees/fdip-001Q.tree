@@ -1,0 +1,52 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Lemma}
+\title{Inverse response for an invertible precision}
+\date{2026-10-20}
+
+\p{Let #{M} be a unital module over a commutative unital ring #{R},
+with a \vocabk{chosen perfect symmetric pairing}{fdip-001O} #{b}.
+Let #{L:M\to M} be \vocabk{self-adjoint}{fdip-001P}, and let
+#{\mu\in R}. The endomorphism
+##{Q=L+\mu I_M:M\longrightarrow M}
+is self-adjoint. Assume additionally that #{Q} is an
+\vocabk{isomorphism}{ca-0015}, and put #{G=Q^{-1}}. Then
+#{G^\dagger=G}, and for every source #{j\in M} the equation
+##{Qf=j}
+has the unique solution #{f=Gj}. This is a direct consequence of the
+[adjoint and inverse laws](fdip-001P) and the two-sided inverse
+convention of \citet{Definition 4.2.4, Tag 0017}{stacks2017stacks}.}
+
+\proof{
+\p{Linearity of the adjoint and #{I^\dagger=I} give
+#{Q^\dagger=L^\dagger+\mu I=Q}. The inverse-adjoint law gives
+#{G^\dagger=(Q^\dagger)^{-1}=G}. Since #{QG=I}, #{Q(Gj)=j}.
+Conversely, if #{Qf=j}, then #{GQ=I} gives #{f=Gj}.}
+}
+
+\p{For #{M=\mathcal F_R(V)} on a finite set with its
+\vocabk{perfect counting duality}{fdip-001F}, define the point kernel
+only after this inverse map exists:
+##{G(v,u)=(G\delta_u)(v).}
+The indicator expansion and linearity give
+##{(Gf)(v)=\sum_{u\in V}G(v,u)f(u).}
+Moreover,
+##{\begin{aligned}
+G(v,u)&=b(\delta_v,G\delta_u)\\
+ &=b(G\delta_v,\delta_u)=G(u,v).
+\end{aligned}}
+Thus the symmetric array presents the already defined inverse.
+On the zero module the unique endomorphism is the identity and is
+invertible; for an empty carrier the kernel and these sums are empty.}
+
+\p{A unit mass coefficient does not ensure invertibility over a ring.
+Over #{\mathbb Z}, take one unit-weight edge #{0\to1}, the
+[Laplacian](fdip-0007) #{L(a,b)=(a-b,b-a)}, and #{\mu=1}. Then
+##{Q(a,b)=(2a-b,2b-a).}
+If #{Q(a,b)=(1,0)}, the second equation gives #{a=2b}, and the first
+gives #{3b=1}, impossible in #{\mathbb Z}. Thus #{Q} is not onto,
+even though the mass and edge weight are units. The
+[real massive Green operator](fdip-000A) acquires invertibility from
+positive energy and finite dimension. No positivity, spectrum or
+probability law is asserted over an arbitrary #{R}.}

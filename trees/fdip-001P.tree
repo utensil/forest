@@ -1,0 +1,94 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{Adjoints from chosen dualities}
+\date{2026-10-20}
+
+\p{Let #{R} be a commutative unital ring and let #{M,N,P} be unital
+#{R}-modules with \vocabk{chosen perfect symmetric pairings}{fdip-001O}
+#{b_M,b_N,b_P} and duality maps #{\Phi_M,\Phi_N,\Phi_P}.
+For an ordinary \vocabk{#{R}-linear map}{ca-001F} #{A:M\to N},
+precomposition defines
+##{A^\vee:N^\vee\longrightarrow M^\vee,\qquad A^\vee\ell=\ell\circ A.}
+Its \newvocab{adjoint for chosen perfect pairings} is
+##{A^\dagger=\Phi_M^{-1}A^\vee\Phi_N:N\longrightarrow M.}
+Products denote composition, with the right factor first, as in
+\ref{fdip-0011}. This is the unique linear map satisfying
+##{b_M(x,A^\dagger y)=b_N(Ax,y)\qquad(x\in M,\ y\in N).}}
+
+\p{For #{A,A':M\to N}, #{B:N\to P} and #{r\in R},
+##{\begin{aligned}
+(A+A')^\dagger&=A^\dagger+(A')^\dagger,&
+(rA)^\dagger&=rA^\dagger,\\
+0^\dagger&=0,&I_M^\dagger&=I_M,\\
+(BA)^\dagger&=A^\dagger B^\dagger,&
+(A^\dagger)^\dagger&=A.
+\end{aligned}}
+If #{A} is an isomorphism, then #{A^\dagger} is an isomorphism and
+##{(A^{-1})^\dagger=(A^\dagger)^{-1}.}
+An endomorphism #{L:M\to M} is \newvocab{self-adjoint} for this
+pairing when #{L^\dagger=L}. In particular, the inverse of an
+invertible self-adjoint endomorphism is self-adjoint.}
+
+\proof{
+\p{The composite #{\ell\circ A} is linear. Evaluation at #{x} gives
+##{\begin{aligned}
+A^\vee(\ell+k)(x)&=\ell(Ax)+k(Ax),\\
+A^\vee(r\ell)(x)&=r\ell(Ax).
+\end{aligned}}
+Hence #{A^\vee} is linear, and so is the composite defining
+#{A^\dagger}. Also #{(BA)^\vee=A^\vee B^\vee} and #{I^\vee=I},
+since both sides have the same value on every functional and argument.
+Because #{\Phi_M\Phi_M^{-1}=I},
+##{b_M(x,A^\dagger y)=(A^\vee\Phi_Ny)(x)=b_N(Ax,y).}
+If #{K:N\to M} has the same identity, then
+#{\Phi_M(Ky)=\Phi_M(A^\dagger y)} for every #{y}. Injectivity gives
+#{K=A^\dagger}; existence also used surjectivity of #{\Phi_M}.}
+
+\p{Bilinearity shows that #{A^\dagger+(A')^\dagger}, #{rA^\dagger},
+#{0} and #{I_M} represent the identities for #{A+A'}, #{rA},
+#{0} and #{I_M}, respectively. Uniqueness proves the four stated laws.
+For composition, apply the adjoint identity twice:
+##{\begin{aligned}
+b_M(x,A^\dagger B^\dagger z)
+ &=b_N(Ax,B^\dagger z)\\
+ &=b_P(BAx,z).
+\end{aligned}}
+This proves the product-reversal law. Symmetry gives
+##{\begin{aligned}
+b_N(y,Ax)&=b_N(Ax,y)\\
+ &=b_M(x,A^\dagger y)=b_M(A^\dagger y,x).
+\end{aligned}}
+Thus #{A} is the adjoint of #{A^\dagger}, proving involution.}
+
+\p{Finally, adjointing #{AA^{-1}=I_N} and #{A^{-1}A=I_M} gives
+##{(A^{-1})^\dagger A^\dagger=I_N,\qquad
+   A^\dagger(A^{-1})^\dagger=I_M.}
+These are the two inverse identities. If #{A^\dagger=A}, they identify
+#{(A^{-1})^\dagger} with #{A^{-1}}. No order or division is used.}
+}
+
+\p{In particular, for #{d:M\to N} and a self-adjoint
+#{W:N\to N}, the composite #{L=d^\dagger Wd:M\to M} satisfies
+##{L^\dagger=d^\dagger W^\dagger d=L,\qquad
+   b_M(f,Lg)=b_N(df,Wdg).}
+The first equality uses product reversal and double adjunction; the
+second is the characterizing identity for #{d}. Taking #{g=f} gives
+its energy identity, without any order assumption on #{R}.}
+
+\p{For a finite function module with its counting form,
+#{\Phi^{-1}=\Psi} from \ref{fdip-001F}; the formula is exactly
+#{\Psi A^\vee\Phi} from \ref{fdip-001H}. Hence it gives the same
+\vocabk{ordinary #{R}-linear involution}{fdip-001G} on endomorphisms.
+The proof above extends that direct construction to different carriers.
+The Hom convention is \citet{Section 10.10, Tag 0581}{stacks2017stacks}.}
+
+\p{TauCeti's \leanref/tauceti{Module.dualEndAlgEquiv} expresses
+reversed dual composition for reflexive modules. It concerns dual
+endomorphisms, before the chosen symmetric identifications used here.
+Mathlib's \leanref{LinearMap.BilinForm.toDual} constructs a duality
+from a nondegenerate form in the finite-dimensional field case.
+Here the dualities are explicitly assumed over #{R}; the argument above
+proves the resulting adjoint laws. A nontrivial coefficient involution
+and Hermitian forms require different scalar conventions.}

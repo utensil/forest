@@ -13,10 +13,20 @@ For #{m>0}, define the \newvocab{massive precision} and its
 The inverse exists even when the graph is disconnected. Indeed, the
 [energy identity](fdip-0008) gives, for #{f\ne0},
 ##{\begin{aligned}
-f^TQ_mf&=\sum_e w(e)(Df)(e)^2\\
-      &\quad+m^2\sum_v f(v)^2>0.
+\langle f,Q_mf\rangle_V
+ &=\sum_e w(e)(Df)(e)^2\\
+ &\quad+m^2\sum_v f(v)^2>0.
 \end{aligned}}
-Thus #{Q_m} is a \vocabk{positive precision parameter}{fdip-0004}.}
+Thus #{Q_mf=0} implies #{f=0}. Finite dimension and rank-nullity
+make this injective endomorphism surjective, so it is an isomorphism.
+The [inverse-response lemma](fdip-001Q) now gives a self-adjoint
+inverse and the unique solution #{f=G_mj} to #{Q_mf=j}.
+The counting-coordinate matrix of #{Q_m} is a
+\vocabk{positive precision parameter}{fdip-0004}. For #{j\ne0},
+write #{x=G_mj\ne0}; then
+#{\langle j,G_mj\rangle_V=\langle Q_mx,x\rangle_V>0}.
+On an empty vertex set the same map argument gives the unique
+isomorphism of zero modules; there are no point-source columns.}
 
 \p{To construct the inverse, choose an orthonormal eigenbasis #{u_a}
 of the real symmetric matrix #{L}, with eigenvalues #{\lambda_a\ge0}.
@@ -30,8 +40,9 @@ Since #{u_a^Tu_b=\delta_{ab}} and #{\sum_a u_au_a^T=I}, multiplication
 gives #{Q_mG_m=G_mQ_m=I}. Also #{G_m^T=G_m}, and
 #{f^TG_mf=\sum_a q_a^{-1}(u_a^Tf)^2>0} for nonzero #{f}.}
 
-\p{The \newvocab{Green kernel} is the matrix entry
-#{G_m(v,w)} in the counting coordinate basis. Its column at #{w}
+\p{The \newvocab{Green kernel} is defined from the inverse map by
+#{G_m(v,w)=(G_m\delta_w)(v)}. These are its matrix entries in the
+counting coordinate basis. Its column at #{w}
 is the unique field solving
 ##{Q_mG_m(\cdot,w)=\delta_w,}
 where #{\delta_w(v)} is one at #{v=w} and zero elsewhere.

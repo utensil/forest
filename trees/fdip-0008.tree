@@ -5,42 +5,72 @@
 \title{Graph energy and the constant modes}
 \date{2026-10-16}
 
-\p{For finite incidence data with positive edge weights #{w(e)>0}, the
-\vocabk{weighted graph Laplacian}{fdip-0007} #{L=B^TWB}
-is symmetric and positive semidefinite. Its kernel consists exactly of
-fields constant on each connected component of the underlying undirected
-graph. Here two vertices lie in the same component when a finite path
-of edges joins them, with edge orientation ignored. If there are #{k}
-components, then
-##{\dim\ker L=k.}
-The energy convention and the connected-graph kernel argument appear in
-\citet{Section 2.1, pp. 4-5}{spielman2009effective}; the proof below also
-allows disconnected carriers, loops and parallel edges.}
+\p{Let #{R} be a commutative unital ring, #{V,E,s,h} finite incidence
+data and #{w:E\to R} arbitrary weights. With the counting forms and
+\vocabk{weighted graph Laplacian}{fdip-0007}
+#{L=d_R^\dagger Wd_R}, one has
+##{L^\dagger=L,\qquad
+ b_V(f,Lg)=\sum_e w(e)(d_Rf)(e)(d_Rg)(e).}
+The kernel of #{d_R} consists exactly of fields constant on each
+connected component of the underlying undirected graph, and
+#{\ker d_R\subseteq\ker L}. Two vertices are in the same component
+when a finite path joins them, with edge orientation ignored.}
 
 \proof{
-\p{Since #{W^T=W}, one has #{L^T=L}. For vertex fields #{f,g}, the
-counting-adjoint identity gives
+\p{The weight map is self-adjoint. The adjoint laws give
+#{L^\dagger=d_R^\dagger W^\dagger d_R=L}, and the defining identity gives
 ##{\begin{aligned}
-&\langle f,Lg\rangle_V\\
-&\quad=\langle Bf,WB g\rangle_E\\
-&\quad=\sum_e w(e)(Df)(e)(Dg)(e).
+b_V(f,Lg)&=b_E(d_Rf,Wd_Rg)\\
+ &=\sum_e w(e)(d_Rf)(e)(d_Rg)(e).
 \end{aligned}}
-Taking #{g=f} yields the energy identity
-##{\begin{aligned}
-&\langle f,Lf\rangle_V\\
-&\quad=\sum_e w(e)(Df)(e)^2\ge0.
-\end{aligned}}
-Each member of #{E} occurs once. There is no factor #{1/2} in this
-\vocabk{quadratic form}{ca-0004}; an action defined as half of it uses a separate convention.}
+In particular, #{b_V(f,Lf)=\sum_e w(e)(d_Rf)(e)^2}. Each edge
+occurs once and no factor #{1/2} is used. The equality #{d_Rf=0}
+says that endpoint values agree along every edge, hence along every
+path. Conversely, a componentwise constant field has zero difference
+on each edge. This identifies #{\ker d_R} with the function module
+on the components. Such a field also satisfies #{Lf=d_R^\dagger W0=0}.}
+}
 
-\p{If #{Lf=0}, the sum of nonnegative terms is zero. Since #{w(e)>0},
-every edge has #{f(h(e))=f(s(e))}. These equalities propagate along any
-unoriented path, so #{f} is constant on each component. Conversely, a
-componentwise constant field has #{Bf=0}, hence #{Lf=0}.
-The indicators of the nonempty components have disjoint supports and are
-linearly independent. Every componentwise constant field is the sum of
-these indicators multiplied by its component values. They therefore form
-a basis of the kernel, proving the dimension statement.}
+\p{The energy is unchanged by edge-orientation reversal: each reversed
+edge negates both factors in its summand. Equivalently, the
+[orientation-invariant return composite](fdip-0007) gives the same
+Laplacian.}
+
+\p{Perfection and unit weights do not give the reverse kernel inclusion.
+Over #{\mathbb F_2}, take two vertices #{0,1} and two distinct edges,
+both oriented #{0\to1}, both of weight #{1}. The counting pairings are
+perfect and #{W=I} is invertible. Nevertheless,
+##{\begin{aligned}
+d_R(a,b)&=(b-a,b-a),\\
+d_R^\dagger(u_1,u_2)&=(-u_1-u_2,u_1+u_2),\\
+L(a,b)&=(0,0).
+\end{aligned}}
+For #{\delta_1=(0,1)}, one has #{d_R\delta_1=(1,1)\ne0}, but
+its energy is #{1+1=0}. Hence #{\ker L=\mathbb F_2^2} strictly contains
+#{\ker d_R=\{(a,a):a\in\mathbb F_2\}}. This failure comes from the
+absence of real positivity, not from nonunit weights or nonperfect forms.}
+
+\p{Now specialize to #{R=\mathbb R} and #{w(e)>0}. Write
+#{D=d_{\mathbb R}}. The Laplacian is symmetric and positive
+semidefinite, and
+##{\ker L=\ker D,\qquad \dim\ker L=k,}
+where #{k} is the number of connected components. The energy convention
+and connected-graph argument appear in
+\citet{Section 2.1, pp. 4-5}{spielman2009effective}; the ring identity
+above and the disconnected, loop and parallel-edge extensions are
+proved directly here.}
+
+\proof{
+\p{The energy identity specializes to
+##{\langle f,Lf\rangle_V=\sum_e w(e)(Df)(e)^2\ge0.}
+If #{Lf=0}, this finite sum of nonnegative real terms is zero.
+Every summand is therefore zero; strict positivity of #{w(e)} gives
+#{Df(e)=0}. The reverse inclusion was proved over #{R}. Indicators
+of the nonempty components span the componentwise constant fields.
+In a linear relation between them, evaluation at a vertex of any one
+component makes its coefficient zero. Thus they are a basis, proving
+the dimension statement. An action defined as half this
+\vocabk{quadratic form}{ca-0004} uses a separate convention.}
 }
 
 \p{If #{V} is nonempty and connected, the kernel is the one-dimensional
@@ -66,11 +96,8 @@ f^TL_tf={}&(b-a)^2+t(c-b)^2\\
           &+(d-c)^2+t(a-d)^2.
 \end{aligned}}
 Every row of #{L_t} sums to zero, and for #{t>0} zero energy forces all
-four values equal. The precision of the
-[positive quadratic action](fdip-0004) is exactly
-#{Q_{t,m}=L_t+m^2I}. Thus its action is half this edge energy plus the
-mass term #{m^2\langle f,f\rangle_V/2}, in agreement with its displayed
-matrix and squared-difference formula.}
+four values equal. The [comparison with the positive action](fdip-001R)
+identifies how this edge energy combines with a mass term.}
 
 \p{The hypotheses have concrete consequences. With vertices
 #{0,1,2,3} and just the unit-weight edges #{0\to1} and #{2\to3}, the
