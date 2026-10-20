@@ -1,0 +1,64 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{The represented counting adjoint}
+\date{2026-10-20}
+
+\p{Let #{R} be a commutative unital ring, #{V} a finite set and
+#{H=\mathcal F_R(V)}. Equip #{H} with the
+\vocabk{perfect counting duality}{fdip-001F}
+#{b,\Phi,\Psi}, with #{H^\vee=\operatorname{Hom}_R(H,R)}.
+For #{a\in\operatorname{End}_R(H)}, define
+##{\begin{aligned}
+a^\vee:H^\vee&\longrightarrow H^\vee,
+&a^\vee(\ell)&=\ell\circ a,\\
+a^\dagger&=\Psi\circ a^\vee\circ\Phi:H\longrightarrow H.
+\end{aligned}}
+The \vocabk{counting adjoint}{fdip-0007} #{a^\dagger} is the unique ordinary
+#{R}-linear endomorphism satisfying
+##{b(f,a^\dagger g)=b(af,g)\qquad(f,g\in H).}
+It gives an \vocabk{ordinary #{R}-linear involution}{fdip-001G}
+on the [composition algebra](fdip-0011)
+#{\operatorname{End}_R(H)}. Products act with the right factor first.}
+
+\p{The real incidence construction in \ref{fdip-0007} starts from
+#{D:\mathbb R^V\to\mathbb R^E} and returns an adjoint in the
+opposite direction. Here #{a:H\to H} is an endomorphism over
+the commutative ring #{R}. Both use the characterizing identity
+that moves the operator between the two counting-pairing slots.
+The existence and laws below follow from \ref{fdip-001F},
+independently of the real incidence proof.}
+
+\proof{
+\p{The composite #{\ell\circ a} is linear, and precomposition is
+linear in #{\ell}; thus all three arrows defining #{a^\dagger}
+are linear. Since #{\Phi\Psi=I}, evaluation at #{f} gives the
+displayed adjoint identity. Injectivity of #{\Phi} gives uniqueness
+for each #{g}. In particular,
+##{(a^\dagger g)(v)=b(a\delta_v,g).}
+For #{a,c\in\operatorname{End}_R(H)} and #{r\in R}, bilinearity
+and uniqueness give
+##{(a+c)^\dagger=a^\dagger+c^\dagger,\quad
+   (ra)^\dagger=ra^\dagger,\quad I^\dagger=I.}
+Indeed the right-hand sides represent respectively
+#{b((a+c)f,g)}, #{b((ra)f,g)} and #{b(f,g)}.}
+\p{For products, applying the defining identity twice yields
+##{b(f,c^\dagger a^\dagger g)
+ =b(cf,a^\dagger g)=b(acf,g),}
+so #{(ac)^\dagger=c^\dagger a^\dagger}. Symmetry of #{b} gives
+##{\begin{aligned}
+b(f,(a^\dagger)^\dagger g)
+ &=b(a^\dagger f,g)=b(g,a^\dagger f)\\
+ &=b(ag,f)=b(f,ag).
+\end{aligned}}
+Uniqueness therefore gives #{(a^\dagger)^\dagger=a}.}
+}
+
+\p{The construction also applies when #{V} is empty or #{R} is
+the zero ring. Its representability is supplied by the explicit
+inverse to #{\Phi}, not by a field hypothesis or a positivity
+argument. Dual precomposition reverses composition before any
+pairing is chosen; the Hom convention is
+\citet{Section 10.10, Tag 0581}{stacks2017stacks}. The proof here
+adds the specified symmetric counting identification with the dual.}
