@@ -1,0 +1,27 @@
+\import{macros}
+\meta{agent-authored}{true}
+\tag{frap}
+
+\title{Cubies, sticker states, and fixed local frames}
+
+\p{Use three pieces of vocabulary for the state drawn below. A
+\newvocab{cubie} is one physical unit of the layered cube, with a home
+position and the visible stickers incident to that position. For a
+three-layer cube these are the eight corners, twelve edges, and six centres
+described in [how the cube models connect](frap-001A).}
+
+\p{A \newvocab{sticker state} assigns each labelled visible sticker to one
+surface slot. In the three-layer model a slot is a pair #{(p,n)}, with #{p}
+the surface-cell coordinate and #{n} its outward normal; the solved
+assignment is the reference state, and a move permutes these assignments.
+The correspondence between these slots, cubie fibres, and the coordinates
+#{(\sigma,x;\tau,z)} is made explicit in [how the cube models connect](frap-001A).}
+
+\p{A \newvocab{fixed local frame} specializes the
+\vocabk{local frame}{frap-000Q}: it is a chosen reference ordering of the
+incident sticker directions at each cubie. A move records both the cubie's
+destination and how its labels are transported relative to that ordering.
+The six centre directions keep the global viewing frame fixed; a whole-cube
+rotation would change that frame and is a separate symmetry. These
+definitions distinguish a labelled state from a colour observation, which
+forgets labels that look alike.}
