@@ -1,0 +1,120 @@
+\import{ftip-macros}
+\meta{agent-authored}{true}
+\taxon{Convention}
+\title{Identifiability regimes for semantic representation diagnostics}
+\tag{ftip}
+\tag{evaluation}
+\tag{identifiability}
+\tag{representation}
+
+\p{Zhou and Klindt study labels-to-latents and latents-to-labels data-generating
+directions. Their general assumptions include a fixed continuous invertible map
+#{g:Z\to X}, a continuous learned encoder with #{h=f\mathbin\circ g}, a
+row-centered log-linear posterior #{p(y|z)={\rm softmax}(W^*z)}, effective
+dimension #{n'={\rm rank}(W^*)}, and a global population cross-entropy optimum
+with linear readout #{U}. The source boundary for this note is the DGP
+construction and assumptions in Sections 3.1 to 3.2, Theorems 4.1 to 4.4,
+Sections 5.1 to 5.4, and Section 6, with Supplementary Assumptions 8.1 to 8.3,
+of \citet{Theorems 4.1 to 4.4, Sections 3 to 5, and Section 6}{zhou2026complete}.}
+
+\p{\strong{Source observation.} When #{m\geq n'}, Theorem 4.1 makes the
+classification-relevant part of every optimum linear, #{h(z)=Az+\nu(z)} with
+#{UA=W^*}; the null-readout term satisfies #{\nu(z)\in N(U)} and may remain
+unconstrained. When #{m<n'}, Theorem 4.2 gives generic nonlinear,
+non-identifiable optima when #{\operatorname{supp}(p_Z)} has nonempty interior
+#{\Omega}, #{p_Z} is continuous and strictly positive on #{\Omega}, and every
+candidate #{A} has #{N(A)\cap\Omega\ne\varnothing}. These are different
+capacity regimes, not two scores for one representation.}
+
+\p{The stronger conclusions require additional structure. In the generative
+case, Assumption 8.2 takes #{Z=\mathbb R_+^n} and adds a factorized exponential
+conditional, constant conditional entropy, a uniform class prior, exact capacity
+#{m=n=n'},
+non-negative activations, fixed within-class variance, and an energy-minimizing
+global optimum. Theorem 4.3 then gives the scaled permutation
+#{h(z)=DP_\sigma z}. In the discriminative case, Assumption 8.3 uses
+#{A^*\in\mathbb R^{n\prime\times n}} with full row rank and
+#{U^*\in\mathbb R^{|Y|\times n\prime}}, adds #{W^*=U^*A^*}, #{k}-sparse
+latents, and #{\operatorname{spark}(A^*)>2k}. With #{m\geq n\prime}, let
+#{P_U} be the orthogonal projector onto #{\operatorname{Row}(U)}; the
+classifier-visible encoder #{P_Uh(z)=Az} has #{N(A)=N(A^*)}, so the unique #{k}-sparse solution
+can recover #{z}. Axis alignment and sparse recovery are distinct routes through
+distinct assumptions.}
+
+\p{Section 5 reports finite experiments rather than a universal law. Linear
+alignment uses held-out coefficient of determination for a linear decoder;
+axis alignment uses the mean correlation coefficient (MCC) after Hungarian
+matching recovered axes to true latents. Sparse recovery compares supervised
+Lasso, dense OLS, and unsupervised sparse dictionary learning. Cross-system
+correspondence uses the Maximum Matching Unit (MMU): for each source unit, the
+maximum absolute Pearson correlation with any unit in a declared comparison
+model and layer on a declared stimulus set. The synthetic experiments use ten random seeds; the real-data cross-system
+analysis does not inherit that seed count. Section 6 records limits from constant conditional entropy, non-negativity,
+class priors, and the assumed sparse data-generating process; signed latents do
+not inherit Theorem 4.3 directly.}
+
+\p{\strong{Finite identifiability record.} For a fixed model family,
+checkpoint, task split, and probe seed, record}
+##{
+\mathcal D=\bigl(r,m,n,n',\mathcal A,[h]_{\sim_r},R^2_{\rm lin},
+R^2_{\rm sparse},\operatorname{MCC}_{\rm axis},
+\operatorname{MCC}_{\rm sparse},\operatorname{MMU}_{\rm cross},\mathsf E\bigr).
+}
+\p{Here #{r} is one declared regime: sufficient-capacity linear,
+undercomplete nonlinear, generative axis-aligned, or discriminative sparse
+recovery. #{\mathcal A} lists the causal direction, DGP, capacity, sparsity,
+and assumptions actually held. #{R^2_{\rm lin}} is the held-out coefficient
+for linear latent alignment; #{R^2_{\rm sparse}} names the decoder and target,
+with supervised Lasso and dense OLS kept as separate arms. #{\operatorname{MCC}_{\rm axis}}
+records the matching and correlation convention for axis recovery, while
+#{\operatorname{MCC}_{\rm sparse}} records the matching convention, sparsity
+level, and whether the decoder is supervised or an unsupervised dictionary.
+#{\operatorname{MMU}_{\rm cross}} records the directed source and comparison
+model, layers, unit sets, stimulus set, and correlation rule. An unavailable or
+inapplicable field is #{\bot}.}
+
+\p{The equivalence class identifies only the ambiguity allowed by the declared
+regime: #{(A,\nu)} with #{UA=W^*}, #{\operatorname{rank}(A)=n'}, and
+#{\nu(z)\in N(U)} in the linear regime;
+no universal quotient, recorded as non-identifiable under the stated
+assumptions, in the undercomplete regime; positive diagonal scaling and
+permutation #{(D,P_\sigma)} in the axis-aligned regime; and the
+classifier-visible null-space class #{N(A)=N(A^*)} in the sparse regime. A
+sparse decoder has permutation-and-scaling ambiguity only when that convention
+is declared and measured. No scalar summary is defined, and none of these
+fields alone establishes monosemanticity.}
+
+\p{\strong{Source-grounded finite instance.} In the compressed-sensing arm,
+the paper fixes #{n=16}, #{n'=m=8}, #{|Y|=64}, draws a Gaussian measurement
+matrix with normalized columns, and tests #{k\in\{1,2,3\}} over ten seeds. For
+the #{k=1} arm, the record declares discriminative sparse recovery and the
+#{W^*=U^*A^*} and spark conditions; it reports #{R^2_{\rm sparse}\approx1}
+for supervised Lasso, #{R^2_{\rm sparse}\approx n'/n=0.5} for OLS, and
+#{\operatorname{MCC}_{\rm sparse}\approx0.86} for unsupervised Lasso, with
+#{\operatorname{MCC}_{\rm axis}=\bot} and #{\operatorname{MMU}_{\rm cross}=\bot}.
+The ten-seed estimate, decoder arm, and missing fields are part of #{\mathsf E};
+the values are finite synthetic observations, not a deployment or capability
+claim.}
+
+\p{\strong{FTIP deduction.} This record makes the representation question
+conditional on capacity, causal direction, and an explicit equivalence class.
+It lets the existing checkpoint route report linear recoverability, axis
+alignment, sparse recovery, and cross-system matching without treating any one
+readout as a capability or deployment result. A finite observation can support
+a regime-specific comparison; it cannot identify a developmental mechanism or
+transfer beyond the declared task and assumptions.}
+
+\p{\strong{Proposed protocol.} Before inspecting a checkpoint, freeze the task
+family, latent or proxy labels, split, width ratio, causal regime, assumptions,
+decoder class, comparison model and layer for MMU, stimulus set, and held-out
+evaluator. Select layers or decoder settings on validation data only. Report
+the full record, seed repetitions, missingness, and assumption-violation arms;
+keep each #{R^2}, MCC, and MMU in its native units. For real model activations,
+treat latent recovery as a declared proxy assay and report the proxy
+construction with the same boundary.}
+
+\p{A scoped local formalization search of Forest, formal-math, TauCetiReview,
+and TauCetiWorker found no declaration that packages this four-regime record
+with its separately typed readouts. Existing representation and evaluation
+declarations cover neighboring fields only, so this finite identifiability
+record remains a protocol proposal.}

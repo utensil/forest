@@ -1,0 +1,170 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{Scalar descent and transport of Gaussian observables}
+\date{2026-10-18}
+
+\p{On the [enriched four-cycle groupoid](fdip-000X), the
+[trace ratio](fdip-000I) is a scalar on isomorphism classes, while
+covariance and effective precision are transported operators on their
+specified field spaces. For #{x=(a,b,m,R)} write
+#{C_x=Q_x^{-1}}. If #{g:x\to y}, then
+##{\begin{aligned}
+C_y&=P_gC_xP_g^T,\\
+(P_g)_*\mu_{Q_x}&=\mu_{Q_y},\\
+\langle F\rangle_{Q_y}&=\langle F\circ P_g\rangle_{Q_x}.
+\end{aligned}}
+The last identity holds for Borel #{F\in L^1(\mu_{Q_y})};
+integrability is equivalent to that of #{F\circ P_g} in the source
+law. These statements use the [inverse-precision covariance](fdip-000B)
+and [Gaussian transport](fdip-000H), including their normalization.}
+
+\proof{
+\p{The groupoid construction proves #{Q_y=P_gQ_xP_g^T} and
+#{P_g^{-1}=P_g^T}. Inverting gives the covariance equation.
+The normalized density in dimension four is
+##{d\mu_Q(\phi)=\frac{\sqrt{\det Q}}{(2\pi)^2}
+ e^{-\phi^TQ\phi /2}\,d\phi.}
+Set #{\psi=P_g\phi}. The absolute Jacobian is one.
+The exponent is now #{-\psi^TQ_y\psi /2}.
+Also #{\det Q_y=\det Q_x}, proving the pushforward identity.
+Apply the same substitution to #{|F|} first, then to the positive
+and negative parts when finite, to prove the expectation statement.
+Transport composes because #{P_{kg}=P_kP_g}.}
+
+\p{Transport does not imply equality of labeled arrays. At
+#{(a,b,m)=(1,2,1)}, the [spectral covariance formula](fdip-000B) gives
+##{\begin{aligned}
+(C_x)_{01}
+ &=\tfrac14(1-\tfrac13+\tfrac15-\tfrac17)\\
+ &=\tfrac{19}{105},\\
+(P_rC_xP_r^T)_{01}
+ &=\tfrac14(1+\tfrac13-\tfrac15-\tfrac17)\\
+ &=\tfrac{26}{105}.
+\end{aligned}}
+The second entry is the old #{(3,0)} entry. The observable's
+coordinate labels must move with the field to preserve its expectation.}
+}
+
+\p{Let #{D=V\setminus R}. In retained/eliminated coordinates write
+##{\begin{aligned}
+Q_x&=\begin{pmatrix}A&H\\H^T&C_D\end{pmatrix},\\
+S_R(x)&=A-HC_D^{-1}H^T.
+\end{aligned}}
+This [Schur complement](fdip-000D) is the positive precision
+of the [marginal](fdip-000E).
+The restrictions of #{g} give permutation isometries
+#{P_R:\mathbb R^R\to\mathbb R^{gR}} and
+#{P_D:\mathbb R^D\to\mathbb R^{gD}}. Then
+##{\begin{aligned}
+S_{gR}(y)&=P_RS_R(x)P_R^T,\\
+S_{gR}(y)^{-1}&=P_RS_R(x)^{-1}P_R^T,\\
+\pi_{gR}P_g&=P_R\pi_R.
+\end{aligned}}
+Thus the marginal laws are compatible on the changing retained spaces.}
+
+\proof{
+\p{The transformed blocks are
+##{\begin{aligned}
+A'&=P_RAP_R^T,\\
+H'&=P_RHP_D^T,\\
+C_D'&=P_DC_DP_D^T.
+\end{aligned}}
+Substitution, using #{P_D^TP_D=I}, gives
+##{\begin{aligned}
+S_{gR}(y)&=A'-H'(C_D')^{-1}(H')^T\\
+ &=P_R(A-HC_D^{-1}H^T)P_R^T.
+\end{aligned}}
+Inversion proves the covariance equation. The projection identity
+holds on each vertex coordinate vector. Consequently
+##{\begin{aligned}
+(P_R)_*\mu_{S_R(x)}
+ &=(P_R\pi_R)_*\mu_{Q_x}\\
+ &=(\pi_{gR}P_g)_*\mu_{Q_x}\\
+ &=(\pi_{gR})_*\mu_{Q_y}
+  =\mu_{S_{gR}(y)}.
+\end{aligned}}
+Restrictions of composable permutations compose on these spaces,
+so the identities are compatible with composition.}
+
+\p{For either opposite pair in ascending coordinate order, put
+#{d=a+b+m^2}. Direct block multiplication gives
+##{\begin{aligned}
+A=C_D&=dI_2,\\
+H&=-\begin{pmatrix}a&b\\b&a\end{pmatrix},\\
+S_R(x)&=\begin{pmatrix}\alpha&-\beta\\-\beta&\alpha\end{pmatrix},\\
+\alpha&=d-\frac{a^2+b^2}{d},\\
+\beta&=\frac{2ab}{d}.
+\end{aligned}}
+This particular two-by-two array is unchanged by swapping weights
+or retained coordinates. That special equality does not make general
+operator assignments scalar invariants; the full covariance entries
+above already differ.}
+}
+
+\p{For the nonzero positive semidefinite #{L_x}, define
+##{\mathcal R(x)=\frac{\operatorname{tr}(L_x^2)}
+ {\bigl(\operatorname{tr}L_x\bigr)^2}.}
+Then #{\mathcal R(gx)=\mathcal R(x)}, and
+##{\mathcal R(a,b)=\frac{a^2+ab+b^2}{2(a+b)^2}.}
+This scalar descends to the coarse orbit set but does not classify
+the enriched objects.}
+
+\proof{
+\p{Trace cyclicity gives
+#{\operatorname{tr}(P_gMP_g^T)=\operatorname{tr}M}.
+Also #{L_{gx}^2=P_gL_x^2P_g^T}; hence both traces are preserved.
+For the explicit value, the four orthonormal vectors #{u_0,u_1,u_2,u_3}
+from \ref{fdip-000B} remain eigenvectors after replacing weights
+#{(1,t)} by #{(a,b)}, with eigenvalues
+#{0,2a,2b,2a+2b}. Substituting the alternating entries of
+#{L_x} verifies each eigenvector equation. Therefore
+##{\begin{aligned}
+\operatorname{tr}L_x&=4(a+b)>0,\\
+\operatorname{tr}(L_x^2)&=8(a^2+ab+b^2).
+\end{aligned}}
+These spectral trace identities use
+\citet{Appendix A.5.2, pp. 646-647}{boyd2004convex}.
+The positive denominator justifies the division. In particular
+##{\begin{aligned}
+\mathcal R(1,1)&=\frac38,\\
+\mathcal R(1,2)&=\frac7{18},\\
+\frac7{18}-\frac38&=\frac1{72}.
+\end{aligned}}
+The ratio ignores #{m}, so backgrounds of different masses have the
+same value. It also satisfies #{\mathcal R(1,t)=\mathcal R(1,1/t)},
+although the strict slice objects are inequivalent for #{t\ne1}
+by \ref{fdip-000X}.}
+}
+
+\p{Now forget mass, state and partition and admit positive scaling
+of the Laplacian, as in the [broader comparison](fdip-000G):
+##{L'=cP_gLP_g^T,\qquad c>0.}
+The numerator of #{\mathcal R} gains #{c^2}, while its denominator
+gains the same factor. Thus the ratio is invariant under this
+different relation. A weight-swapping relabeling followed by
+#{c=1/t} sends #{L(1,t)} to #{L(1,1/t)}. Reciprocal parameters
+are identified in this reduced problem only; no scale arrow has been
+added to the original Gaussian groupoid. At fixed mass,
+#{cL+m^2I\ne cQ} for #{c\ne1}. If one instead rescales the
+entire precision to #{cQ}, then
+##{\begin{aligned}
+(cQ)^{-1}&=c^{-1}Q^{-1},\\
+cA-(cH)(cC_D)^{-1}(cH)^T&=cS_R.
+\end{aligned}}
+Raw covariance and effective precision therefore are not scale
+invariants. Any normalized operator ratio would need its own definition
+and scaling proof.}
+
+\p{Mathlib's \leanref{Matrix.trace_units_conj} and
+\leanref{Matrix.trace_smul} support the trace conjugacy and scaling
+identities. \leanref{Matrix.reindexLinearEquiv} and
+\leanref{Matrix.reindexRingEquiv} supply coordinate infrastructure.
+TauCeti's
+\leanref/tauceti{TauCeti.Probability.map_affine_multivariateGaussian}
+allows positive semidefinite covariance and an arbitrary rectangular
+linear map. Set its mean and translation to zero, its covariance
+to #{Q_x^{-1}}, and its linear map to #{P_g} or #{\pi_R}.
+The precision-density identification and the Schur and groupoid
+computations above remain separate obligations.}

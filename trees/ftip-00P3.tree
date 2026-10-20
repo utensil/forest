@@ -1,0 +1,153 @@
+\import{ftip-macros}
+\meta{agent-authored}{true}
+\taxon{Convention}
+\title{Fixed-budget trace-selection protocol}
+\tag{ftip}
+\tag{evaluation}
+\tag{harness}
+
+\p{The trace intervention is a finite evaluation proposal. It compares
+horizon and selector effects at a fixed retained budget while keeping the
+model, teacher, scaffold, task split, verifier, seed law, and total token and
+compute budgets visible. The source's selective-refinement intervention
+supplies the comparison pattern, but the following arm matrix is an FTIP
+protocol rather than a source result
+\citet{Sections 6-7; Tables 4-5, 10}{dang2026selecting}.}
+
+\p{Let #{\mathcal A} be the finite P0 arm-label set, with its declared
+boundary map #{r:\mathcal A\to\mathcal J}. Refine it with finite horizon labels
+#{\mathfrak H_{\rm hor}\subset\mathbb N}, selector labels
+#{\mathfrak L_{\rm sel}}, reset masks #{\mathfrak M_{\rm reset}:=\mathcal
+P(\{s,h,w\})} from \ref{ftip-00P0}, budget labels
+#{\mathfrak B_{\rm budget}}, split labels #{\mathfrak D_{\rm split}}, and a
+finite randomization-label set #{\mathfrak R_{\rm lbl}}. Let
+#{M:\mathcal A\to\mathfrak M_{\rm reset}} be the declared P0 reset-mask map.
+A law map
+#{\lambda_{\rm R}:\mathfrak R_{\rm lbl}\to\operatorname{Law}_{\rm pair}(\mathcal G)}
+assigns each label its declared paired randomization law, including its
+coupling. Each experimental arm is a tuple}
+##{
+ a=(a_0,H,\ell,B,D,\eta)\in
+ \mathcal A\times\mathfrak H_{\rm hor}\times\mathfrak L_{\rm sel}
+ \times\mathfrak B_{\rm budget}
+ \times\mathfrak D_{\rm split}\times\mathfrak R_{\rm lbl},
+}
+\p{where #{a_0} is the P0 arm label, #{r(a_0)} is its declared boundary,
+#{M(a_0)} is its P0 reset mask, and
+#{\mathcal R_a:=\lambda_{\rm R}(\eta)} is its paired law.
+Each arm declares one model, teacher,
+scaffold, verifier, task law, and inference protocol; those are held fixed
+across its paired reset and continue runs. The arm's split #{D} declares
+pairwise-disjoint selection and held-out task sets #{Q_{\rm sel}(D)} and
+#{Q_{\rm hold}(D)} with #{|Q_{\rm hold}(D)|>0}, plus any cross-benchmark
+split. The mask #{M(a_0)} is the P0 reset mask, so the transition is
+#{\mathsf{Reset}_{r(a_0),M(a_0)}}. Within this arm, instantiate the P0
+randomization symbol #{\mathcal R} in its kernel and paired law with
+#{\mathcal R_a}; the label therefore changes the declared coupling rather than
+merely recording an unused name.}
+
+\p{The boundary set #{\mathcal J}, random-source space #{\mathcal G}, maps
+#{r} and #{M}, and reset transition used here are the typed declarations of
+\ref{ftip-00P0}; this tree only adds the finite horizon, selector, budget,
+split, and randomization labels. Formalization status is intentionally scoped:
+the note makes no absence claim, and a private FTIP search receipt records
+candidate formalizations before any future theorem claim.}
+
+\p{Cross horizon and selection with the state masks in
+\ref{ftip-00P0}. Each mask clears a selected subset of session context,
+candidate history, and workspace coordinates; the lifecycle transition retains
+the verified best candidate and its artifact. At minimum compare:}
+\ol{
+  \li{one-stage full-long traces;}
+  \li{verification-preserving intermediate truncation;}
+  \li{warm-start plus top-likelihood selection;}
+  \li{warm-start plus bottom-likelihood selection;}
+  \li{warm-start plus random selection at the same retained budget; and}
+  \li{a coverage-stratified or diversity-preserving selector.}
+}
+
+\p{For arm #{a} and a positive run count #{N_a\in\mathbb N_{>0}}, with run
+index #{i\in\{1,\ldots,N_a\}}, use the event-time domain
+#{\overline{\mathbb N}:=\mathbb N\cup\{+\infty\}} and the convention
+#{\inf\varnothing:=+\infty}. The run receipt supplies measurable event
+indicators #{E^{\rm term}_{a,i,t}}, #{E^{\rm ev}_{a,i,t}},
+#{E^{\rm ver}_{a,i,t}},
+#{E^{\rm pass}_{a,i,t}}, #{E^{\rm fail}_{a,i,t}}, and
+#{E^{\rm rec}_{a,i,t}} from a declared finite
+event alphabet, a measurable task-value score #{u_{a,i}(t)}, and a finite
+saturation threshold #{u^{\rm sat}_a}. Here #{E^{\rm pass}} is the
+final-candidate verifier-pass event, while #{E^{\rm ver}} records a verifier
+event more generally. Define}
+##{
+ \tau_{a,i}:=\inf\{t:E^{\rm term}_{a,i,t}=1\},\quad
+ \tau^{\rm ev}_{a,i}:=\inf\{t:E^{\rm ev}_{a,i,t}=1\},\quad
+ \tau^{\rm ver}_{a,i}:=\inf\{t:E^{\rm ver}_{a,i,t}=1\},
+}
+##{
+ \tau^{\rm pass}_{a,i}:=\inf\{t:E^{\rm pass}_{a,i,t}=1\},\quad
+ \tau^{\rm fail}_{a,i}:=\inf\{t:E^{\rm fail}_{a,i,t}=1\},\quad
+ \tau^{\rm rec}_{a,i}:=\inf\{t:E^{\rm rec}_{a,i,t}=1\},\quad
+ \tau^{\rm sat}_{a,i}:=\inf\{t:u_{a,i}(t)\ge u^{\rm sat}_a\}.
+}
+\p{Define the measurable predicates #{G_{a,i}} for bounded evidence,
+verification, and recovery by}
+##{
+ G_{a,i}:=\mathbf 1[\tau^{\rm ev}_{a,i}<\tau_{a,i}\land\tau^{\rm pass}_{a,i}<\tau_{a,i}\land(\tau^{\rm fail}_{a,i}\ge\tau_{a,i}\lor\tau^{\rm fail}_{a,i}<\tau^{\rm rec}_{a,i}<\tau_{a,i})].
+}
+\p{#{F_{a,i}:=\mathbf 1[\tau^{\rm fail}_{a,i}<\tau_{a,i}]} records a
+failure before termination, and #{V_{a,i}:=\mathbf 1[\tau^{\rm pass}_{a,i}<\tau_{a,i}]}
+records a final-candidate verifier pass. A recovery follows a failure exactly when
+#{\tau^{\rm fail}_{a,i}<\tau^{\rm rec}_{a,i}<\tau_{a,i}}. Define the measurable indicators}
+##{
+ I^{\rm pre}_{a,i}=\mathbf 1[\tau_{a,i}<\tau^{\rm ev}_{a,i}],\qquad
+ I^{\rm prod}_{a,i}=\mathbf 1[G_{a,i}],\qquad
+ I^{\rm over}_{a,i}=\mathbf 1[\tau_{a,i}>\tau^{\rm sat}_{a,i}],
+}
+##{
+ I^{\rm rec}_{a,i}=\mathbf 1[\tau^{\rm fail}_{a,i}<\tau^{\rm rec}_{a,i}<\tau_{a,i}],\qquad
+ I^{\rm ver}_{a,i}=V_{a,i}.
+}
+\p{The corresponding run rates use the declared denominator #{N_a}:}
+##{
+ (\widehat p^{\rm pre}_a,\widehat p^{\rm prod}_a,\widehat p^{\rm over}_a,
+ \widehat p^{\rm rec}_a,\widehat p^{\rm ver}_a)
+ =\frac1{N_a}\sum_{i=1}^{N_a}
+ (I^{\rm pre}_{a,i},I^{\rm prod}_{a,i},I^{\rm over}_{a,i},I^{\rm rec}_{a,i},I^{\rm ver}_{a,i}).
+}
+\p{Let #{A_{a,i}} be the indicator that the receipt is complete, no protocol
+violation occurred, and its run task #{q_{a,i}} lies in #{Q_{\rm hold}(D)}.
+For the finite held-out task set, task coverage is}
+##{
+ \widehat C^{\rm task}_a:=
+ \frac{|\{q\in Q_{\rm hold}(D):\exists i,\ q_{a,i}=q,\ A_{a,i}=1\}|}
+ {|Q_{\rm hold}(D)|}.
+}
+\p{For a declared finite strategy-label set
+#{\mathfrak S_{\rm strat,a}} with #{|\mathfrak S_{\rm strat,a}|>0}, strategy
+coverage is}
+##{
+ \widehat C^{\rm strat}_a:=
+ \frac{|\{s\in\mathfrak S_{\rm strat,a}:
+ s\text{ appears in an admitted held-out trace}\}|}
+ {|\mathfrak S_{\rm strat,a}|}.
+}
+\p{These positive denominators are reported with the arm receipt.}
+
+\p{Let #{X^{\rm sel}_{a,i}} collect the selection-time prefix, teacher-forced
+selector score, data-only trace metadata, and the arm's training/selection
+split, with the metadata map declared to exclude held-out outcomes, verifier
+outcomes, and post-selection continuation events. Define
+#{\mathcal F^{\rm sel}_{a,i}:=\sigma(X^{\rm sel}_{a,i})}. The selector is
+measurable with respect to this sigma-field. Pair every selected trace with
+its unselected continuation under the same arm law, and reserve
+#{Q_{\rm hold}(D)} and the cross-benchmark split for evaluation only.}
+
+\p{The protocol charges selection, storage, restart, discarded-trace, and
+verification costs, and retains the task, selector, budget, split, seed, and
+randomization receipts. No claim that selected traces improve FTIP behavior is
+established until an immutable experiment record contains these fields and the
+finite rates and coverage denominators above.}
+
+\p{No formal declaration corresponding to this finite protocol is claimed
+here; it remains an empirical evaluation proposal until an implementation
+supplies the stated receipts and measurable interfaces.}
