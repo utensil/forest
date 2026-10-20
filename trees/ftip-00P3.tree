@@ -14,22 +14,34 @@ supplies the comparison pattern, but the following arm matrix is an FTIP
 protocol rather than a source result
 \citet{Sections 6-7; Tables 4-5, 10}{dang2026selecting}.}
 
-\p{Fix finite horizon labels #{\mathcal H}, selector labels #{\mathcal L},
-state masks #{\mathcal M:=\mathcal P(\{s,h,w\})} from
-\ref{ftip-00P0}, budget labels #{\mathcal B}, and split labels #{\mathcal D}.
-An experimental arm is a tuple}
+\p{Let #{\mathcal A} be the finite P0 arm-label set, with its declared
+boundary map #{r:\mathcal A\to\mathcal J}. Refine it with finite horizon labels
+#{\mathfrak H_{\rm hor}\subset\mathbb N}, selector labels
+#{\mathfrak L_{\rm sel}}, reset masks #{\mathfrak M_{\rm reset}:=\mathcal
+P(\{s,h,w\})} from \ref{ftip-00P0}, budget labels
+#{\mathfrak B_{\rm budget}}, split labels #{\mathfrak D_{\rm split}}, and a
+finite randomization-label set #{\mathfrak R_{\rm lbl}}. Let
+#{M:\mathcal A\to\mathfrak M_{\rm reset}} be the declared P0 reset-mask map.
+A law map
+#{\lambda_{\rm R}:\mathfrak R_{\rm lbl}\to\operatorname{Law}(\mathcal G)}
+assigns each label its declared paired randomization law. Each experimental arm
+is a tuple}
 ##{
- a=(H,\ell,M,B,D,\mathcal R)\in
- \mathcal A\subseteq\mathcal H\times\mathcal L\times\mathcal M
- \times\mathcal B\times\mathcal D\times\mathcal R,
+ a=(a_0,H,\ell,B,D,\eta)\in
+ \mathcal A\times\mathfrak H_{\rm hor}\times\mathfrak L_{\rm sel}
+ \times\mathfrak B_{\rm budget}
+ \times\mathfrak D_{\rm split}\times\mathfrak R_{\rm lbl},
 }
-\p{where #{\mathcal A} is finite. Each arm declares one model, teacher,
+\p{where #{a_0} is the P0 arm label, #{r(a_0)} is its declared boundary,
+#{M(a_0)} is its P0 reset mask, and
+#{\mathcal R_a:=\lambda_{\rm R}(\eta)} is its paired law.
+Each arm declares one model, teacher,
 scaffold, verifier, task law, and inference protocol; those are held fixed
 across its paired reset and continue runs. The arm's split #{D} declares
 pairwise-disjoint selection and held-out task sets #{Q_{\rm sel}(D)} and
 #{Q_{\rm hold}(D)} with #{|Q_{\rm hold}(D)|>0}, plus any cross-benchmark
-split. The randomization law
-#{\mathcal R} supplies paired seeds and the declared coupling.}
+split. The mask #{M(a_0)} is the P0 reset mask, so the transition is
+#{\mathsf{Reset}_{r(a_0),M(a_0)}}.}
 
 \p{Cross horizon and selection with the state masks in
 \ref{ftip-00P0}. Each mask clears a selected subset of session context,
@@ -45,22 +57,44 @@ the verified best candidate and its artifact. At minimum compare:}
 }
 
 \p{For arm #{a} and a positive run count #{N_a\in\mathbb N_{>0}}, with run
-index #{i\in\{1,\ldots,N_a\}}, let #{\tau_{a,i}} be
-termination, #{\tau^{\rm ev}_{a,i}} the declared evidence-or-recovery
-boundary, and #{\tau^{\rm sat}_{a,i}} the first time the declared task-value
-score reaches the arm's saturation threshold. Let #{G_{a,i}} mean that bounded
-evidence gathering, verification, and any declared recovery event are present
-in the retained trace; let #{F_{a,i}} mean that a verifier or execution failure
-occurs before termination; and let #{V_{a,i}} mean that the final candidate passes
-the declared verifier. Define the measurable indicators}
+index #{i\in\{1,\ldots,N_a\}}, use the event-time domain
+#{\overline{\mathbb N}:=\mathbb N\cup\{+\infty\}} and the convention
+#{\inf\varnothing:=+\infty}. The run receipt supplies measurable event
+indicators #{E^{\rm term}_{a,i,t}}, #{E^{\rm ev}_{a,i,t}},
+#{E^{\rm ver}_{a,i,t}},
+#{E^{\rm fail}_{a,i,t}}, and #{E^{\rm rec}_{a,i,t}} from a declared finite
+event alphabet, a measurable task-value score #{u_{a,i}(t)}, and a finite
+saturation threshold #{u^{\rm sat}_a}. Define}
+##{
+ \tau_{a,i}:=\inf\{t:E^{\rm term}_{a,i,t}=1\},\quad
+ \tau^{\rm ev}_{a,i}:=\inf\{t:E^{\rm ev}_{a,i,t}=1\},\quad
+ \tau^{\rm ver}_{a,i}:=\inf\{t:E^{\rm ver}_{a,i,t}=1\},
+}
+##{
+ \tau^{\rm fail}_{a,i}:=\inf\{t:E^{\rm fail}_{a,i,t}=1\},\quad
+ \tau^{\rm rec}_{a,i}:=\inf\{t:E^{\rm rec}_{a,i,t}=1\},\quad
+ \tau^{\rm sat}_{a,i}:=\inf\{t:u_{a,i}(t)\ge u^{\rm sat}_a\}.
+}
+\p{Define the measurable predicates #{G_{a,i}} for bounded evidence,
+verification, and recovery by}
+##{
+ G_{a,i}:=\mathbf 1[\tau^{\rm ev}_{a,i}<\tau_{a,i},\
+ \tau^{\rm ver}_{a,i}<\tau_{a,i},\
+ (\tau^{\rm fail}_{a,i}\ge\tau_{a,i}\ \mathord\lor\
+ \tau^{\rm fail}_{a,i}<\tau^{\rm rec}_{a,i}<\tau_{a,i})],
+}
+\p{#{F_{a,i}:=\mathbf 1[\tau^{\rm fail}_{a,i}<\tau_{a,i}]} records a
+failure before termination, and #{V_{a,i}:=\mathbf 1[\tau^{\rm ver}_{a,i}<\infty]}
+records a verifier pass. A recovery follows a failure exactly when
+#{\tau^{\rm fail}_{a,i}<\tau^{\rm rec}_{a,i}<\tau_{a,i}}. Define the measurable indicators}
 ##{
  I^{\rm pre}_{a,i}=\mathbf 1[\tau_{a,i}<\tau^{\rm ev}_{a,i}],\qquad
  I^{\rm prod}_{a,i}=\mathbf 1[G_{a,i}],\qquad
  I^{\rm over}_{a,i}=\mathbf 1[\tau_{a,i}>\tau^{\rm sat}_{a,i}],
 }
 ##{
- I^{\rm rec}_{a,i}=\mathbf 1[F_{a,i}\text{ and a declared recovery follows}],\qquad
- I^{\rm ver}_{a,i}=\mathbf 1[V_{a,i}].
+ I^{\rm rec}_{a,i}=\mathbf 1[\tau^{\rm fail}_{a,i}<\tau^{\rm rec}_{a,i}<\tau_{a,i}],\qquad
+ I^{\rm ver}_{a,i}=V_{a,i}.
 }
 \p{The corresponding run rates use the declared denominator #{N_a}:}
 ##{
@@ -69,25 +103,40 @@ the declared verifier. Define the measurable indicators}
  =\frac1{N_a}\sum_{i=1}^{N_a}
  (I^{\rm pre}_{a,i},I^{\rm prod}_{a,i},I^{\rm over}_{a,i},I^{\rm rec}_{a,i},I^{\rm ver}_{a,i}).
 }
-\p{For the finite held-out task set, task coverage is
-#{\widehat C^{\rm task}_a:=|\{q\in Q_{\rm hold}(D):q\text{ has an admitted
-run}\}|/|Q_{\rm hold}(D)|}; for a declared finite strategy label set
-#{\mathcal S_a} with #{|\mathcal S_a|>0}, strategy coverage is
-#{\widehat C^{\rm strat}_a:=|\{s\in\mathcal S_a:s\text{ appears in an admitted
-held-out trace}\}|/|\mathcal S_a|}. These positive denominators are reported
-with the arm receipt.}
+\p{Let #{A_{a,i}} be the indicator that the receipt is complete, no protocol
+violation occurred, and its run task #{q_{a,i}} lies in #{Q_{\rm hold}(D)}.
+For the finite held-out task set, task coverage is}
+##{
+ \widehat C^{\rm task}_a:=
+ \frac{|\{q\in Q_{\rm hold}(D):\exists i,\ q_{a,i}=q,\ A_{a,i}=1\}|}
+ {|Q_{\rm hold}(D)|}.
+}
+\p{For a declared finite strategy-label set
+#{\mathfrak S_{\rm strat,a}} with #{|\mathfrak S_{\rm strat,a}|>0}, strategy
+coverage is}
+##{
+ \widehat C^{\rm strat}_a:=
+ \frac{|\{s\in\mathfrak S_{\rm strat,a}:
+ s\text{ appears in an admitted held-out trace}\}|}
+ {|\mathfrak S_{\rm strat,a}|}.
+}
+\p{These positive denominators are reported with the arm receipt.}
 
-\p{Let #{\mathcal F^{\rm sel}_{a,i}} be the sigma-field generated by the
-selection-time prefix, teacher-forced selector score, declared trace metadata,
-and the arm's training/selection split. The selector is measurable with
-respect to #{\mathcal F^{\rm sel}_{a,i}}; held-out task outcomes, verifier
-outcomes, and post-selection continuation events are excluded from that
-sigma-field. Pair every selected trace with its unselected continuation under
-the same arm law, and reserve #{Q_{\rm hold}(D)} and the cross-benchmark split
-for evaluation only.}
+\p{Let #{X^{\rm sel}_{a,i}} collect the selection-time prefix, teacher-forced
+selector score, data-only trace metadata, and the arm's training/selection
+split, with the metadata map declared to exclude held-out outcomes, verifier
+outcomes, and post-selection continuation events. Define
+#{\mathcal F^{\rm sel}_{a,i}:=\sigma(X^{\rm sel}_{a,i})}. The selector is
+measurable with respect to this sigma-field. Pair every selected trace with
+its unselected continuation under the same arm law, and reserve
+#{Q_{\rm hold}(D)} and the cross-benchmark split for evaluation only.}
 
 \p{The protocol charges selection, storage, restart, discarded-trace, and
 verification costs, and retains the task, selector, budget, split, seed, and
 randomization receipts. No claim that selected traces improve FTIP behavior is
 established until an immutable experiment record contains these fields and the
 finite rates and coverage denominators above.}
+
+\p{No formal declaration corresponding to this finite protocol is claimed
+here; it remains an empirical evaluation proposal until an implementation
+supplies the stated receipts and measurable interfaces.}
