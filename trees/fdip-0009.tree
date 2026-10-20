@@ -6,75 +6,47 @@
 \lean{fwdDiff_smul}
 \date{2026-10-16}
 
-\p{Let #{n\ge1} be an integer and let
-#{f,g:\mathbb Z/n\mathbb Z\to\mathbb R}.
-The \newvocab{cyclic shift} and \newvocab{forward difference} are
-##{\begin{aligned}
-(Tf)(i)&=f(i+1),\\
-\Delta&=T-I,
-\end{aligned}}
-with indices taken modulo #{n}. Products of fields are pointwise.
-Then the product rule is
+\p{Let #{R} be a commutative unital ring, let #{n\ge1}, and take
+#{V=\mathbb Z/n\mathbb Z}, #{E=\{e_i:i\in V\}}, with
+#{s(e_i)=i} and #{h(e_i)=i+1}. The specified edge-label bijection gives
+an #{R}-algebra isomorphism
+##{j:\mathcal F_R(E)\to\mathcal F_R(V),\qquad j(a)(i)=a(e_i).}
+Its inverse sends #{f} to the edge field #{e_i\mapsto f(i)};
+both preserve the pointwise operations. With the
+\vocabk{ring-valued incidence map}{fdip-0010}, the
+\newvocab{cyclic shift} and \newvocab{forward difference} are
+##{(Tf)(i)=f(i+1),\qquad \Delta=jd=T-I.}
+The shift is an algebra automorphism, with
+#{(T^{-1}f)(i)=f(i-1)}. Vertex and edge fields are identified only
+through the displayed map #{j}.}
+
+\p{For #{f,g\in\mathcal F_R(V)},
 ##{\Delta(fg)=(\Delta f)(Tg)+f\Delta g.}
 Equivalently,
-##{\begin{aligned}
-\Delta(fg)&=(\Delta f)g+f\Delta g\\
-          &\quad+(\Delta f)(\Delta g).
-\end{aligned}}
+##{\Delta(fg)=(\Delta f)g+f\Delta g+(\Delta f)(\Delta g).}
 Wingate defines forward and backward differences with lattice spacing
 #{a} in \citet{Section 4, Equations (4.2)-(4.3), p. 3}{wingate2025lattice}.
-Here #{a=1}; the identities concern the finite periodic algebra and
-require no continuum approximation.}
+Here #{a=1}; the ring-valued finite identities are direct calculations,
+with no continuum approximation.}
 
 \proof{
-\p{Fix a residue class #{i} and abbreviate #{f_+=f(i+1)},
-#{g_+=g(i+1)}, #{f_0=f(i)}, #{g_0=g(i)}. Inserting and subtracting
-#{f_0g_+} gives
-##{\begin{aligned}
-\Delta(fg)(i)&=f_+g_+-f_0g_0\\
- &=(f_+-f_0)g_+\\
- &\quad+f_0(g_+-g_0).
-\end{aligned}}
-This is the shifted formula. Substituting #{Tg=g+\Delta g} into it
-gives the second formula.}
+\p{For every #{i}, #{(jh^*f)(i)=f(i+1)=Tf(i)} and
+#{(js^*f)(i)=f(i)}. Applying the product-preserving map #{j} to
+\ref{fdip-0012} therefore gives the first formula.
+Substitute #{Tg=g+\Delta g} to obtain the second. The inverse-shift
+formula follows by adding and subtracting one modulo #{n}.}
 }
 
-\p{The ordinary unshifted Leibniz rule generally fails. On
-#{\mathbb Z/4\mathbb Z}, let #{f=g} be the indicator of vertex #{1}.
-At vertex #{0}, #{f=g=0}, #{Tf=Tg=1} and #{\Delta f=\Delta g=1}.
-Thus #{\Delta(fg)(0)=1}, whereas
-#{((\Delta f)g+f\Delta g)(0)=0}. The additional product of differences
-is exactly the missing one. For #{n=1}, #{T=I} and #{\Delta=0}, and
-both displayed identities reduce to zero.}
+\p{At #{n=1}, the cycle has a loop and #{T=I}, #{\Delta=0}.
+At #{n=2}, its two edges have opposite orientations between the same
+vertices; it is not a single simple edge. The [four-cycle](fdip-0003)
+exhibits failure of the unshifted Leibniz rule. The separate
+[counting-adjoint calculation](fdip-0014) adds a real pairing
+and identifies the positive kinetic factorization.}
 
-\p{The counting adjoint of the shift is its inverse. Reindexing a finite
-sum gives
-##{\begin{aligned}
-\langle Tf,g\rangle
- &=\sum_i f(i+1)g(i)\\
- &=\sum_j f(j)g(j-1)\\
- &=\langle f,T^{-1}g\rangle.
-\end{aligned}}
-Consequently #{T^*=T^{-1}} and #{\Delta^*=T^{-1}-I}.
-With the backward difference #{\nabla^-=I-T^{-1}}, multiplication yields
-##{\Delta^*\Delta=-\nabla^-\Delta=2I-T-T^{-1}.}
-This agrees with the positive kinetic sign in
-\citet{Section 4, Equation (4.5), p. 3}{wingate2025lattice}.}
-
-\p{For the indexed cycle with edges #{e_i:i\to i+1}, identify an edge
-field with its values at the tail indices. The
-\vocabk{incidence map}{fdip-0002} then becomes #{\Delta}, and for unit
-weights the \vocabk{weighted graph Laplacian}{fdip-0007} becomes
-#{\Delta^*\Delta}. At #{n=2} this presentation has two oppositely
-oriented parallel edges, not one simple edge. At #{n=1} it has a loop
-with zero incidence row. An arbitrary graph has different vertex and
-edge carriers, so its incidence map is not an endomorphism without a
-specified identification.}
-
-\p{Mathlib's \leanref{fwdDiff_smul} proves the product identity
-on an additive commutative monoid, for a
-ring acting on an additive group. Specialize to step #{1} on
-#{\mathbb Z/n\mathbb Z}, with both functions real-valued. Scalar
-multiplication becomes multiplication, giving the second formula;
-#{Tg=g+\Delta g} gives the first. The finite counting-adjoint calculation
-is the separate reindexing argument above.}
+\p{Mathlib's \leanref{fwdDiff_smul} proves the three-term formula for
+an additive commutative monoid, a ring and a module over it. Take the
+index monoid #{\mathbb Z/n\mathbb Z}, step #{1}, and the regular
+#{R}-module #{R}. Scalar multiplication is ring multiplication.
+Substituting #{Tg=g+\Delta g} yields the shifted formula; this marker
+does not claim the endpoint incidence or counting-adjoint theorem.}

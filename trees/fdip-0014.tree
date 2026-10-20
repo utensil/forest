@@ -1,0 +1,45 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Lemma}
+\title{Counting adjoints on an indexed cycle}
+\date{2026-10-20}
+
+
+\p{Take the \vocabk{cyclic shift}{fdip-0009} on
+#{\mathbb R^{\mathbb Z/n\mathbb Z}}, #{n\ge1}, with the
+\vocabk{counting inner product}{fdip-0002}. For the
+\vocabk{counting adjoint}{fdip-0007},
+##{T^*=T^{-1},\qquad \Delta^*=T^{-1}-I.}
+Writing #{\nabla^-=I-T^{-1}} for the backward difference gives
+##{\Delta^*\Delta=-\nabla^-\Delta=2I-T-T^{-1}.}
+The backward-difference and positive kinetic sign conventions are
+\citet{Section 4, Equations (4.3) and (4.5), p. 3}{wingate2025lattice},
+with lattice spacing one. The finite periodic identities follow by
+reindexing, independently of the product rule.}
+
+\proof{
+\p{The substitution #{j=i+1} permutes the finite index set, so
+##{\begin{aligned}
+\langle Tf,g\rangle
+ &=\sum_i f(i+1)g(i)\\
+ &=\sum_j f(j)g(j-1)
+ =\langle f,T^{-1}g\rangle.
+\end{aligned}}
+Uniqueness of the counting adjoint gives #{T^*=T^{-1}}.
+Subtracting #{\langle f,g\rangle} gives
+#{\langle\Delta f,g\rangle=\langle f,(T^{-1}-I)g\rangle},
+so #{\Delta^*=T^{-1}-I}. Multiplication now gives
+##{(T^{-1}-I)(T-I)=2I-T-T^{-1}.}
+Its quadratic value is
+#{\langle f,\Delta^*\Delta f\rangle=\langle\Delta f,\Delta f\rangle\ge0}.}
+}
+
+\p{For the indexed cycle #{e_i:i\to i+1}, the edge-label map
+#{j(a)(i)=a(e_i)} of \ref{fdip-0009} preserves the real counting
+pairings, since it merely reindexes the sum. Thus #{\Delta=jD} and
+#{D^*D=\Delta^*\Delta}; this is the unit-weight
+\vocabk{graph Laplacian}{fdip-0007}. At #{n=2} there are two oppositely
+oriented edges between the same vertices; at #{n=1} there is one loop,
+#{T=I}, and the incidence and kinetic maps vanish. An arbitrary
+incidence map still has distinct vertex and edge carriers.}
