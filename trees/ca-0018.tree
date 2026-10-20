@@ -9,30 +9,58 @@
 % \refcardt{Lemma}{}{}{}{
 
 \card{Remark}{ }{
-
-\p{
 \label{mk:AlgebraLiterature}
 
-The definition above (adopted in \Mathlib) is more general than the definition in literature (e.g. \citet{1.6}{jadczyk2019notes}):
-}
-
-\p{
-Let #{R} be a commutative ring. An \newvocab{algebra} #{A} over #{R} is a pair #{(M, *)}, satisfying:
-
-\ol{
-\li{#{A} is a \vocab{module} #{M} over #{R} under #{+} and #{\bu}.}
-
-\li{#{A} is a \vocab{ring} under #{*}.}
-
-\li{For #{x, y \in A, a \in R}, we have}
-
+\p{For a commutative ring #{R}, the
+\vocabk{algebra}{ca-0016} structure is equivalently an
+\vocabk{#{R}-module}{ca-000X} structure on an associative ring #{A} with
+identity, with the same addition, such that
 ##{
-a \bu (x * y) = (a \bu x) * y = x * (a \bu y)
+r \bu (x * y) = (r \bu x) * y = x * (r \bu y)
+\qquad (r \in R,\ x,y \in A).
+}
+This is the formulation of \citet{Definition 1.6, p. 4}{jadczyk2019notes}.
+Both formulations require associativity and an identity.}
+
+\proof{
+\p{Given the central ring homomorphism #{\rfun}, define
+#{r \bu x=\rfun(r)*x}. The ring laws and the preservation of addition,
+multiplication and identity by #{\rfun} give
+##{
+\begin{aligned}
+r \bu (x+y)&=\rfun(r)*x+\rfun(r)*y,\\
+(r+s)\bu x&=\rfun(r)*x+\rfun(s)*x,\\
+r\bu(s\bu x)&=(\rfun(r)*\rfun(s))*x=(r*s)\bu x,\\
+1_R\bu x&=1_A*x=x.
+\end{aligned}
+}
+Thus the action defines an #{R}-module. Associativity gives
+#{r\bu(x*y)=(r\bu x)*y}; centrality of #{\rfun(r)} then gives
+#{(r\bu x)*y=x*(r\bu y)}.}
+
+\p{Conversely, given the module formulation, put
+#{\rfun(r)=r\bu 1_A}. The module axioms give
+#{\rfun(r+s)=\rfun(r)+\rfun(s)} and #{\rfun(1_R)=1_A}.
+They also give #{\rfun(0_R)=0_A}, by cancellation in
+#{0_R\bu 1_A=(0_R\bu 1_A)+(0_R\bu 1_A)}.
+Compatibility with multiplication implies
+##{
+\begin{aligned}
+\rfun(r)*\rfun(s)
+&=(r\bu 1_A)*(s\bu 1_A)\\
+&=r\bu(1_A*(s\bu 1_A))\\
+&=(r*s)\bu 1_A=\rfun(r*s),\\
+\rfun(r)*x&=r\bu x=x*\rfun(r).
+\end{aligned}
+}
+Hence #{\rfun} is a central, identity-preserving ring homomorphism,
+and its induced action is the original one.
+Starting with a central ring homomorphism instead recovers it because
+#{\rfun(r)*1_A=\rfun(r)}.}
 }
 
-}
-}
-
-\p{See \em{Implementation notes} in \MathlibDoc{Algebra} for details.}
-
+\p{The corresponding Mathlib constructions are
+\leanref{Algebra.toModule} and \leanref{Algebra.ofModule}.
+Mathlib also permits semirings; under the ring hypotheses here, the two
+formulations describe the same structures.}
 }
