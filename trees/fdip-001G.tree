@@ -1,0 +1,33 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Definition}
+\title{Ordinary linear involutions}
+\date{2026-10-20}
+
+\p{Let #{R} be a commutative unital ring and #{A} an associative
+unital \vocabk{#{R}-algebra}{ca-0016}. An
+\newvocab{ordinary #{R}-linear involution} on #{A} is an
+\vocabk{#{R}-linear map}{ca-001F} #{a\mapsto a^\dagger},
+with #{\sigma=\operatorname{id}_R}, satisfying
+##{1^\dagger=1,\qquad
+   (ab)^\dagger=b^\dagger a^\dagger,\qquad
+   (a^\dagger)^\dagger=a.}
+Thus it reverses products, preserves sums and satisfies
+#{(ra)^\dagger=ra^\dagger}. The involution on the coefficient ring
+is explicitly the identity.}
+
+\p{These are ordinary product-reversal laws: no sign depending on
+degree occurs. Over #{\mathbb C}, this convention is bilinear and
+does not introduce complex conjugation. A Hermitian adjoint needs
+different coefficient data. Neither a grading nor freeness selects
+an involution; the [counting adjoint](fdip-001H) below is constructed
+from a specified pairing.}
+
+\p{Mathlib separates the involutive law \leanref{InvolutiveStar},
+product reversal \leanref{StarMul}, additive compatibility
+\leanref{StarRing} and scalar compatibility \leanref{StarModule}.
+Its \leanref{starRingOfComm} permits the identity involution on
+a commutative ring. These interfaces support the stated convention;
+the represented example requires its own proof.
+For the library attribution, see \citek{mathlib2020lean}.}

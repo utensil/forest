@@ -1,0 +1,47 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Lemma}
+\title{Adjoints preserve the chosen parity}
+\date{2026-10-20}
+
+\p{Let #{R} be a commutative unital ring and
+#{V=V_0\sqcup V_1} a finite partition. Equip
+#{H=\mathcal F_R(V)} with its counting pairing #{b},
+\vocabk{counting adjoint}{fdip-0007} constructed in \ref{fdip-001H}, and
+\vocabk{parity grading}{fdip-001K} #{A_0,A_1}
+on #{\operatorname{End}_R(H)}.
+Then #{p_i^\dagger=p_i} for the
+\vocabk{support projections}{fdip-001I}, and
+##{a\in A_k\quad\Longrightarrow\quad a^\dagger\in A_k.}
+Every \vocabk{multiplication operator}{fdip-0011} #{M_f},
+for #{f\in H}, is even and satisfies #{M_f^\dagger=M_f}.}
+
+\proof{
+\p{For #{u,v\in H}, restriction of the counting sum gives
+##{b(p_iu,v)=\sum_{x\in V_i}u(x)v(x)=b(u,p_iv),}
+so uniqueness of the adjoint gives #{p_i^\dagger=p_i}.
+The support summands are orthogonal: if #{u\in H_0} and
+#{v\in H_1}, every term of #{b(u,v)} is zero.}
+\p{For #{a\in A_k}, evaluation on each support summand gives
+##{a=\sum_{i=0}^1p_{i+k}ap_i.}
+Taking the ordinary adjoint, including its linearity and
+product reversal, yields
+##{a^\dagger=\sum_{i=0}^1p_i a^\dagger p_{i+k}.}
+Each summand maps #{H_{i+k}} into #{H_i} and vanishes on the
+other support summand. Its degree is #{-k=k} in
+#{\mathbb Z/2\mathbb Z}, proving the claim.}
+\p{Multiplication by a field preserves support, so #{M_f\in A_0}.
+Commutativity of #{R} gives
+##{b(M_fu,v)=\sum_x f(x)u(x)v(x)=b(u,M_fv).}
+Uniqueness therefore gives #{M_f^\dagger=M_f}.}
+}
+
+\p{The degree statement depends on this orthogonal support
+decomposition and this symmetric counting pairing. It is not a
+law for an unspecified grading and involution. The involution on
+coefficients is the identity, including for complex coefficients;
+no Hermitian or positive conclusion is inferred. The graded
+composition convention is
+\citet{Section 22.25, Tag 09L1}{stacks2017stacks};
+the compatibility with the chosen pairing is proved above.}

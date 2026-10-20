@@ -1,0 +1,43 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{Parity of field endomorphisms}
+\date{2026-10-20}
+
+\p{Let #{R} be a commutative unital ring, #{V=V_0\sqcup V_1}
+a finite partition, and #{H=\mathcal F_R(V)}. Use its
+\vocabk{support submodules}{fdip-001I} #{H_i} and
+\vocabk{support projections}{fdip-001I} #{p_i}.
+All subscripts below are in #{\mathbb Z/2\mathbb Z}.
+For #{A=\operatorname{End}_R(H)} with composition product, put
+##{A_k=\{a\in A:a(H_i)\subseteq H_{i+k}\text{ for }i=0,1\}.}
+These submodules give an
+\vocabk{internal parity grading}{fdip-001J}. The two components
+of #{a\in A} are
+##{a_0=p_0ap_0+p_1ap_1,\qquad
+   a_1=p_1ap_0+p_0ap_1.}
+All products are compositions of maps #{H\to H}; these formulas
+require no choice of ordered basis.}
+
+\proof{
+\p{Each #{A_k} is a submodule because #{H_{i+k}} is a submodule.
+For #{f\in H_i}, the projection identities show that
+#{a_kf=p_{i+k}af\in H_{i+k}}, so #{a_k\in A_k}.
+Expanding #{(p_0+p_1)a(p_0+p_1)} gives #{a=a_0+a_1}.
+If #{a\in A_0\cap A_1}, its value on #{H_i} belongs to
+#{H_i\cap H_{i+1}=\{0\}}. Every field is a sum of such inputs,
+so #{a=0}. This proves uniqueness of the two components.}
+\p{The identity preserves each #{H_i}, hence lies in #{A_0}.
+If #{a\in A_k} and #{c\in A_l}, then
+#{c(H_i)\subseteq H_{i+l}} and
+#{a(H_{i+l})\subseteq H_{i+l+k}}.
+Thus #{ac\in A_{k+l}}, proving the multiplication rule.}
+}
+
+\p{If one part is empty, #{A_1=0}; if both parts are empty,
+the whole algebra is zero. The argument also allows the zero ring
+and characteristic #{2}. Graded endomorphism composition appears
+in \citet{Section 22.25, Tag 09L1, Example 22.25.5}{stacks2017stacks}.
+That example is integer-graded; the direct proof here establishes
+the two-parity, finite-function instance.}

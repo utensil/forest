@@ -1,0 +1,41 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Lemma}
+\title{A partition splits the field module}
+\date{2026-10-20}
+
+\p{Let #{R} be a commutative unital ring and choose a partition
+#{V=V_0\sqcup V_1} of a finite set. Put
+#{H=\mathcal F_R(V)} and #{K_i=\mathcal F_R(V_i)} for #{i=0,1}.
+Restriction and extension by zero are ordinary #{R}-linear maps
+##{\pi_i:H\to K_i,\qquad \iota_i:K_i\to H,}
+with #{(\pi_i f)(v)=f(v)} for #{v\in V_i}, and
+#{(\iota_i u)(v)=u(v)} on #{V_i}, zero elsewhere.
+The \newvocab{support submodules} are
+#{H_i=\iota_i(K_i)\subseteq H}. The
+\newvocab{support projections} #{p_i=\iota_i\pi_i:H\to H}
+satisfy
+##{\pi_i\iota_i=I_{K_i},\quad
+   \pi_i\iota_j=0\ (i\ne j),\quad
+   p_i^2=p_i,\quad p_ip_j=0\ (i\ne j),\quad p_0+p_1=I_H.}
+Every #{f\in H} has a unique expression
+#{f=f_0+f_1} with #{f_i\in H_i}, namely #{f_i=p_if}.}
+
+\proof{
+\p{Evaluation at a point proves linearity and all the displayed
+composition identities. A field belongs to #{H_i} precisely when
+it vanishes outside #{V_i}. Thus #{H_0\cap H_1=\{0\}}.
+The identity #{p_0+p_1=I_H} gives existence of the decomposition.
+If #{f_0+f_1=g_0+g_1}, then
+#{f_0-g_0=g_1-f_1\in H_0\cap H_1}, proving uniqueness.}
+}
+
+\p{The partition is additional data, not part of the general
+[incidence-field definition](fdip-0010). If one part is empty,
+its field module and support projection are zero. Nothing requires
+division by #{2}; the same construction works in characteristic
+#{2} and over the zero ring. This is the direct finite-function
+realization of a module decomposition.}
+
+\p{\citet{Section 10.10, Tag 0581}{stacks2017stacks} supplies the module convention.}
