@@ -1,0 +1,47 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Lemma}
+\title{Perfect counting duality}
+\date{2026-10-20}
+
+\p{Let #{R} be a commutative unital \vocabk{ring}{ca-000U},
+#{V} a finite set and #{H=\mathcal F_R(V)} its
+\vocabk{field module}{fdip-0010}. The counting
+\vocabk{bilinear form}{ca-0003} is
+##{b(f,g)=\sum_{v\in V}f(v)g(v).}
+It is symmetric. Write
+#{H^\vee=\operatorname{Hom}_R(H,R)} for the
+\vocabk{dual module}{ca-0012}, using ordinary
+\vocabk{#{R}-linear maps}{ca-001F}: both coefficient rings are
+#{R} and #{\sigma=\operatorname{id}_R}, as in \ref{ca-001G}.
+The \newvocab{perfect counting duality} is the pair of inverse
+#{R}-linear maps
+##{\begin{aligned}
+\Phi:H&\longrightarrow H^\vee,&\Phi(g)(f)&=b(f,g),\\
+\Psi:H^\vee&\longrightarrow H,&(\Psi\ell)(v)&=\ell(\delta_v).
+\end{aligned}}
+Here #{\delta_v(u)} is #{1} when #{u=v}, and #{0} otherwise.
+Perfection means precisely that #{\Phi} is an \vocabk{isomorphism}{ca-0015}.}
+
+\proof{
+\p{Commutativity and distributivity in #{R} give symmetry and
+bilinearity of #{b}; they also give linearity of #{\Phi} and #{\Psi}.
+For #{f\in H}, evaluation at every point proves
+#{f=\sum_v f(v)\delta_v}. Consequently
+##{(\Phi\Psi\ell)(f)
+ =\sum_v f(v)\ell(\delta_v)
+ =\ell\left(\sum_v f(v)\delta_v\right)=\ell(f).}
+Conversely, #{(\Psi\Phi g)(v)=b(\delta_v,g)=g(v)}.
+Thus both composites are identities.}
+}
+
+\p{This proof includes the empty set and the zero ring. It uses no
+order, positivity or division. A perfect form can have nonzero
+vectors of zero self-pairing: over #{\mathbb F_2}, the counting form
+on two points has #{b((1,1),(1,1))=0}. Conversely, separation of
+vectors alone does not imply perfection over a ring: the form
+#{b(x,y)=2xy} on #{\mathbb Z} cannot represent the functional
+#{x\mapsto x}. The Hom-module convention is
+\citet{Section 10.10, Tag 0581}{stacks2017stacks}; the explicit inverse
+above supplies the finite counting assertion.}

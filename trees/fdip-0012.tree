@@ -1,0 +1,35 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Lemma}
+\title{The endpoint product identity}
+\date{2026-10-20}
+
+
+\p{For the \vocabk{ring-valued incidence map}{fdip-0010}
+#{d=h^*-s^*:\mathcal F_R(V)\to\mathcal F_R(E)} over a commutative
+unital ring #{R} and fields #{f,g\in\mathcal F_R(V)}, one has
+##{d(fg)=(df)(h^*g)+(s^*f)(dg).}
+Every factor on the right is an edge field, and the products are
+pointwise in #{\mathcal F_R(E)}. Equivalently,
+##{d(fg)=(df)(s^*g)+(s^*f)(dg)+(df)(dg).}}
+
+\proof{
+\p{Fix an edge #{e} and abbreviate #{f_h=f(h(e))},
+#{f_s=f(s(e))}, and similarly for #{g}. Then
+##{\begin{aligned}
+(df)(e)(h^*g)(e)+(s^*f)(e)(dg)(e)
+  &=(f_h-f_s)g_h+f_s(g_h-g_s)\\
+  &=f_hg_h-f_sg_s\\
+  &=d(fg)(e).
+\end{aligned}}
+Equality at each edge proves the identity. Substituting
+#{h^*g=s^*g+dg} gives the second formula. The proof also applies to
+loops, parallel edges, empty carriers and the zero ring.}
+}
+
+\p{This is a direct endpoint calculation. Its cyclic specialization
+is the [shifted product rule](fdip-0009). The forward-difference
+convention is \citet{Section 4, Equations (4.2)-(4.3), p. 3}{wingate2025lattice};
+that real-lattice convention is not an attribution of the general
+ring-valued incidence statement.}

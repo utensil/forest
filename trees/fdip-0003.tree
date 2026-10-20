@@ -29,19 +29,48 @@ the parameter #{t} is supplied, and every edge weight is positive.}
 \p{Each arrow points from source to head; the label gives its edge name
 and weight. A half-turn exchanges opposite vertices and edges.}
 
-\p{\citet{Section 2.1, p. 4}{spielman2009effective} fixes the sign convention.
-Order vertices as #{0,1,2,3} and edges as #{e_0,e_1,e_2,e_3}.
-Substitution into the \vocabk{incidence matrix}{fdip-0002} gives
+\p{Coordinate arrays now recover the already defined maps.
+Over a commutative unital ring #{R}, take any finite incidence
+presentation and choose orders of its vertex and edge
+indicators, and let #{c_V:\mathcal F_R(V)\to R^{|V|}} and
+#{c_E:\mathcal F_R(E)\to R^{|E|}} send a field to its ordered values.
+The indicator expansion in \ref{fdip-0010} gives their inverses.
+The \newvocab{incidence matrix} represents #{c_Edc_V^{-1}}:
+##{B_{ev}=(d\delta_v)(e)=\mathbf1_{v=h(e)}-\mathbf1_{v=s(e)}.}
+Rows are indexed by edges and columns by vertices. A loop has a zero
+row; reversing an edge negates its row. This extends the oriented-graph
+sign convention of \citet{Section 2.1, p. 4}{spielman2009effective}.
+If coordinate reorderings are #{P_V,P_E}, then
+#{B'=P_EBP_V^{-1}}, because both sides send #{c'_V(f)} to #{c'_E(df)}.}
+
+\p{On the real four-cycle, order vertices as #{0,1,2,3} and edges as
+#{e_0,e_1,e_2,e_3}. The coordinate arrays of #{D} and #{W} are
 ##{B=\begin{pmatrix}
 -1&1&0&0\\
 0&-1&1&0\\
 0&0&-1&1\\
 1&0&0&-1
 \end{pmatrix},\qquad W_t=\operatorname{diag}(1,t,1,t).}
-For #{f=(a,b,c,d)^T}, this says
-##{Df=(b-a,c-b,d-c,a-d)^T.}
-In particular, #{f=(0,1,0,0)^T} gives #{Df=(1,-1,0,0)^T}:
-the field rises along #{e_0} and falls along #{e_1}.}
+Thus a field with ordered values #{(a,b,c,d)} has edge differences
+#{(b-a,c-b,d-c,a-d)}. For #{f=\delta_1}, the edge values of #{Df}
+are #{(1,-1,0,0)}: the field rises along #{e_0} and falls along #{e_1}.}
+
+\p{The same carrier works over #{R=\mathbb Z} without weights or
+positivity. Using the \vocabk{cyclic shift}{fdip-0009} and
+\vocabk{multiplication operators}{fdip-0011}, evaluate on the
+constant field #{1} at vertex zero:
+##{(TM_f1)(0)=f(1)=1,\qquad (M_fT1)(0)=f(0)=0.}
+Hence #{TM_f\ne M_fT}. Moreover #{f^2=f}, so
+##{\Delta(f^2)(0)=1,\qquad
+ ((\Delta f)f+f\Delta f)(0)=0.}
+The shifted expression gives #{(\Delta f)(0)(Tf)(0)+f(0)\Delta f(0)=1}.
+This is a concrete failure of ordinary Leibniz, not a claim of
+noncommutativity over every coefficient ring.}
+
+\p{As additional example data, choose retained vertices #{V_0=\{0,2\}}
+and eliminated vertices #{V_1=\{1,3\}}. This is the choice used in
+[alternate-vertex elimination](fdip-000F); it is not part of general
+incidence data. Both subsets are preserved by the half-turn below.}
 
 \p{Define the half-turn on both sets by
 ##{r_V(i)=i+2,\qquad r_E(e_i)=e_{i+2}.}

@@ -1,0 +1,62 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{Composition and field multiplication}
+\date{2026-10-20}
+
+
+\p{Let #{R} be a commutative unital ring. For
+\vocabk{#{R}-modules}{ca-000X} #{M,N,P}, use
+\vocabk{#{\operatorname{Hom}_R(M,N)}}{ca-001G} for additive,
+scalar-preserving maps. Thus \vocabk{linearity}{ca-001F} fixes
+#{\sigma=\operatorname{id}_R}. Given
+#{A\in\operatorname{Hom}_R(M,N)} and
+#{B\in\operatorname{Hom}_R(N,P)}, write
+##{BA=B\circ A:M\to P.}
+Composition is associative and #{R}-bilinear where the types match.
+In particular, the \vocabk{endomorphisms}{ca-0015}
+#{\operatorname{End}_R(M)=\operatorname{Hom}_R(M,M)} form an
+associative unital \vocabk{#{R}-algebra}{ca-0016}, with unit #{I_M}
+and central scalar map #{r\mapsto rI_M}.}
+
+\p{For a finite set #{V}, on the \vocabk{vertex-field module}{fdip-0010}, each
+#{f\in\mathcal F_R(V)} defines a \newvocab{multiplication operator}
+##{M_f:\mathcal F_R(V)\to\mathcal F_R(V),\qquad M_f(g)=fg.}
+The assignment #{f\mapsto M_f} is an injective #{R}-algebra map:
+##{M_{f+g}=M_f+M_g,\quad M_{rf}=rM_f,\quad
+   M_{fg}=M_fM_g,\quad M_1=I.}
+The full endomorphism algebra need not be commutative; the
+[shift relation](fdip-0013) and
+[four-cycle calculation](fdip-0003) exhibit the obstruction.}
+
+\proof{
+\p{Pointwise addition and scalar multiplication make
+#{\operatorname{Hom}_R(M,N)} a module: the linearity equations are
+preserved by both operations. If #{A,B} are composable, then
+#{BA(rx+y)=B(rAx+Ay)=rBAx+BAy}, so #{BA} is linear.
+For a third composable map #{C},
+#{(CB)A(x)=C(B(Ax))=C(BA)(x)}. The identity map is a two-sided unit.
+For composable maps with common source and target,
+##{\begin{aligned}
+B(A+A')(x)&=B(Ax)+B(A'x),\\
+(B+B')A(x)&=B(Ax)+B'(Ax),\\
+B(rA)(x)&=rB(Ax),\qquad (rB)A(x)=rB(Ax).
+\end{aligned}}
+These prove distributivity and bilinearity. For an endomorphism #{A},
+#{(rI)A(x)=rAx=A(rx)=A(rI)(x)}, proving centrality of the scalar map;
+its unit, addition and product laws follow immediately by evaluation.}
+\p{Pointwise multiplication makes #{M_f} linear. Evaluating the four
+claimed identities on a field proves them using the ring laws. If
+#{M_f=M_g}, applying both maps to the constant field #{1} yields
+#{f=g}; this also holds when #{V} is empty or #{R} is the zero ring.}
+}
+
+\p{The Hom-module and algebra conventions are
+\citet{Section 10.10, Tag 0581; Section 22.2, Tag 09JF}{stacks2017stacks};
+the field multiplication assertions are the direct calculation above.
+Mathlib's \leanref{Module.End.mul_eq_comp} and
+\leanref{Module.End.mul_apply} give this right-factor-first product.
+These declarations do not assert that arbitrary maps with different
+endpoints form one algebra, or that a formal generator presentation is
+faithful.}

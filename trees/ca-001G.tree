@@ -13,13 +13,26 @@
 % cox1997ideals gathmann2013commutative
 
 \card{Remark}{Lin}{
-\p{
 \label{mk:linearMap}
+\lean{LinearMap,Module.End}
 
-The set of all linear maps from #{M} to #{M'} is denoted #{\operatorname{Lin}(M, M')},
-and #{\operatorname{Lin}(M)} for mapping from #{M} to itself.
-
-#{\operatorname{Lin}(M)} is an \vocab{endomorphism}.
+\p{Let #{R} be a commutative ring and let #{M,M'} be
+\vocabk{#{R}-modules}{ca-000X}. The set of all #{R}-linear maps
+#{M\to M'} is denoted
+##{
+\operatorname{Lin}_R(M,M')=\operatorname{Hom}_R(M,M').
 }
+Here \vocabk{linear map}{ca-001F} means that the scalar homomorphism is
+#{\sigma=\operatorname{id}_R}.
+For this notation and scalar convention, see
+\citet{Section 10.10, Tag 0581}{stacks2017stacks}.}
 
+\p{For #{M'=M}, write
+##{
+\operatorname{Lin}_R(M)=\operatorname{End}_R(M).
+}
+This is the set of linear \vocabk{endomorphisms}{ca-0015} of #{M};
+its elements are the individual endomorphisms.
+When the coefficient ring is understood, we omit #{R} and write
+#{\operatorname{Lin}(M,M')} and #{\operatorname{Lin}(M)}.}
 }

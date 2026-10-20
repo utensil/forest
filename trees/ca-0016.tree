@@ -19,28 +19,22 @@
 \lean{Algebra}
 \uses{RingHom,Module}
 
-Let #{R} be a commutative ring. An \newvocab{algebra} #{A} over #{R} is a pair #{(A, \bu)}, satisfying:
-
-\ol{
-\li{#{A} is a \vocab{ring} under #{*}.}
-
-\li{there exists a \vocab{ring homomorphism} from #{R} to #{A}, denoted #{\rfun : R \to_{+*} A}.}
-
-\li{#{\bu : R \to M \to M} is a \vocab{scalar multiplication}}
-
-\li{for every #{r \in R}, #{x \in A}, we have
-
-\ol{
-    \li{#{r * x = x * r} (commutativity between #{R} and #{A})}
-    \li{#{r \bu x = r * x} (definition of scalar multiplication)}
+Let #{R} be a commutative \vocabk{ring}{ca-000U} with identity.
+An \newvocab{algebra} #{A} over #{R} is an associative ring with identity,
+equipped with a \vocabk{ring homomorphism}{ca-0014}
+#{\rfun : R \to_{+*} A} and a \vocabk{scalar multiplication}{ca-000X}
+#{\bu : R \to A \to A}, such that for every #{r \in R} and #{x \in A},
+##{
+\rfun(r) * x = x * \rfun(r),
+\qquad
+r \bu x = \rfun(r) * x.
+}
+The ring homomorphism preserves the identity; multiplication in #{A} need not
+be commutative.
 }
 
-where we omitted that the ring homomorphism #{\rfun} is applied to #{r} before each multiplication.
-
-}
-
-}
-
-}
-
+\p{This is the central-map convention of
+\citet{Section 22.2, Tag 09JF}{stacks2017stacks}. It is equivalent to the module formulation in
+\citet{Definition 1.6, p. 4}{jadczyk2019notes}; see
+[the comparison](ca-0018).}
 }
