@@ -16,14 +16,18 @@ the events that make a continuation useful.}
   \begin{aligned}
   H&\in\mathbb N,\\
   T&=(o_{0:H},a_{0:H},y_{0:H},e_{0:H},v_{0:H},\tau,\sigma,\kappa)\\
-   &\in\mathcal O^{H+1}\times\mathcal A^{H+1}\times\mathcal Y^{H+1}
-   \times\mathcal E^{H+1}\times\mathcal V^{H+1}\\
-   &\qquad{}\times\mathcal T\times\mathcal S\times\mathbb N.
+   &\in\mathcal O_{\rm evt}^{H+1}\times\mathcal A_{\rm evt}^{H+1}
+   \times\mathcal Y_{\rm evt}^{H+1}\times\mathcal E_{\rm evt}^{H+1}
+   \times\mathcal V_{\rm evt}^{H+1}\\
+   &\qquad{}\times\mathcal T_{\rm evt}\times\mathcal S_{\rm boundary}\times\mathbb N.
   \end{aligned}
 }
-\p{Here #{o}, #{a}, and #{y} are observation, action, and outcome events;
-#{e} is an evidence or environment-state reference; #{v} is a verification or
-recovery event; #{\tau} is a termination event; #{\sigma\in\mathcal S}
+\p{Here #{o}, #{a}, and #{y} are observation, action, and outcome events in the
+event spaces #{\mathcal O_{\rm evt}}, #{\mathcal A_{\rm evt}}, and
+#{\mathcal Y_{\rm evt}}; #{e} is an evidence or environment-state reference in
+#{\mathcal E_{\rm evt}}; #{v} is a verification or recovery event in
+#{\mathcal V_{\rm evt}}; #{\tau} is a termination event in
+#{\mathcal T_{\rm evt}}; #{\sigma\in\mathcal S_{\rm boundary}}
 records the state boundary under which the trace was produced; and
 #{\kappa\in\mathbb N} is its token length. The component spaces are event
 domains, and a run may use a task-specific subtype of each domain. #{H} is
@@ -74,7 +78,13 @@ an FTIP classification proposal, not a result established by the source.}
 \p{The trace intervention belongs beside the lifecycle intervention in
 \ref{ftip-00P0}, and its context/state boundary is the four-layer state in
 \ref{ftip-00C4} with the access-mechanism qualification in \ref{ftip-00C5}.
-The fixed-budget comparison and its metrics are stated in
-\ref{ftip-00P3}. The resulting boundary is: train on the shortest trace that
-preserves the target decision, evidence, verification, and recovery events,
-then test whether selection has removed coverage or merely removed repetition.}
+The protocol in \ref{ftip-00P3} introduces the finite arm tuple,
+selection-information boundary, and metric denominators. The reader-facing
+boundary is therefore a roadmap until that protocol is applied: train on the
+shortest trace that preserves the target decision, evidence, verification, and
+recovery events, then test whether selection removed coverage or merely removed
+repetition.}
+
+\p{No formal declaration corresponding to this trace schema is claimed here;
+it remains a reader-facing protocol component until a separate formalization
+defines its event spaces and transition semantics.}
