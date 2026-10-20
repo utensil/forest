@@ -12,7 +12,7 @@
 
 % cox1997ideals gathmann2013commutative
 
-\refdeft{module}{1.3}{jadczyk2019notes}{
+\refdeft{module}{Definition 1.3, p. 3}{jadczyk2019notes}{
 
 \p{
     \label{Module}
@@ -20,17 +20,17 @@
     \lean{Module}
     \uses{Group,Ring}
 
-    Let #{R} be a commutative ring. A \newvocab{module} over #{R}, called an \vocab{#{R}-module}, is a pair #{(M, \bu)}, satisfying:
+    Let #{R} be a commutative \vocabk{ring}{ca-000U} with identity #{1_R}. A \newvocab{module} over #{R}, called an \vocab{#{R}-module}, is a pair #{(M, \bu)}, satisfying:
 
     \ol{
-      \li{M is a group under #{+}.}
+      \li{#{M} is an \vocabk{abelian}{ca-000R} group under #{+}.}
     
-      \li{#{\bu : R \to M \to M} is called \newvocab{scalar multiplication}, for every #{a, b \in R}, #{x, y \in M}, we have
+      \li{#{\bu : R \to M \to M} is called \newvocab{scalar multiplication}, acting on the left. For every #{a, b \in R}, #{x, y \in M}, we have
       
         \ol{
-            \li{#{a \bu (x + y) = a \bu x + b \bu y}}
+            \li{#{a \bu (x + y) = a \bu x + a \bu y}}
             \li{#{(a + b) \bu x = a \bu x + b \bu x}}
-            \li{#{a * (b \bu x)=(a * b) \bu x}}
+            \li{#{a \bu (b \bu x)=(a * b) \bu x}}
             \li{#{1_R \bu x = x}}
         }
       }

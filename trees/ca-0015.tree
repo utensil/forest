@@ -13,17 +13,25 @@
 % cox1997ideals gathmann2013commutative
 
 \card{Definition}{isomorphism, endomorphism, automorphism}{
-    \label{mk:homomorphism}
+\label{mk:homomorphism}
+\lean{CategoryTheory.Iso,CategoryTheory.End,CategoryTheory.Aut}
 
-\p{\newvocab{Isomorphism} #{A \cong B} is a bijective \vocab{homomorphism} #{\phi : A \to B}
-    (it follows that #{\phi^{-1} : B \to A} is also a \vocab{homomorphism}).
-}
+\p{Fix the algebraic structures and the homomorphisms under consideration.
+An \newvocab{Isomorphism} #{\phi:A\to B} is an \vocabk{iso}{tt-000D}:
+a homomorphism admitting an
+inverse homomorphism #{\phi^{-1}:B\to A}, so that
+#{\phi^{-1}\circ\phi=\operatorname{id}_A} and
+#{\phi\circ\phi^{-1}=\operatorname{id}_B}. We write #{A\cong B} when such
+an isomorphism exists.
+This is the invertible-morphism definition of
+\citet{Definition 4.2.4 and the following paragraph, Tag 0013}{stacks2017stacks}.}
 
-\p{\newvocab{Endomorphism} is a \vocab{homomorphism} from an object to itself, denoted #{\operatorname{End}(A)}.
+\p{An \newvocab{Endomorphism} of #{A} is a homomorphism #{\phi:A\to A}.
+The set of all such homomorphisms is denoted #{\operatorname{End}(A)}.
+Thus an individual endomorphism satisfies #{\phi\in\operatorname{End}(A)}.}
 
-}
-
-\p{\newvocab{Automorphism} is an \vocab{endomorphism} which is also an \vocab{isomorphism}, denoted #{\operatorname{Aut}(A)}.
-}
-
+\p{An \newvocab{Automorphism} of #{A} is an endomorphism that is an
+isomorphism. The set of all automorphisms is denoted #{\operatorname{Aut}(A)}.
+These notations always refer to the chosen kind of homomorphism; for modules
+over #{R}, the notation #{\operatorname{End}_R(M)} specifies #{R}-linear maps.}
 }
