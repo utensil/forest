@@ -23,9 +23,9 @@ P(\{s,h,w\})} from \ref{ftip-00P0}, budget labels
 finite randomization-label set #{\mathfrak R_{\rm lbl}}. Let
 #{M:\mathcal A\to\mathfrak M_{\rm reset}} be the declared P0 reset-mask map.
 A law map
-#{\lambda_{\rm R}:\mathfrak R_{\rm lbl}\to\operatorname{Law}(\mathcal G)}
-assigns each label its declared paired randomization law. Each experimental arm
-is a tuple}
+#{\lambda_{\rm R}:\mathfrak R_{\rm lbl}\to\operatorname{Law}_{\rm pair}(\mathcal G)}
+assigns each label its declared paired randomization law, including its
+coupling. Each experimental arm is a tuple}
 ##{
  a=(a_0,H,\ell,B,D,\eta)\in
  \mathcal A\times\mathfrak H_{\rm hor}\times\mathfrak L_{\rm sel}
@@ -41,7 +41,17 @@ across its paired reset and continue runs. The arm's split #{D} declares
 pairwise-disjoint selection and held-out task sets #{Q_{\rm sel}(D)} and
 #{Q_{\rm hold}(D)} with #{|Q_{\rm hold}(D)|>0}, plus any cross-benchmark
 split. The mask #{M(a_0)} is the P0 reset mask, so the transition is
-#{\mathsf{Reset}_{r(a_0),M(a_0)}}.}
+#{\mathsf{Reset}_{r(a_0),M(a_0)}}. Within this arm, instantiate the P0
+randomization symbol #{\mathcal R} in its kernel and paired law with
+#{\mathcal R_a}; the label therefore changes the declared coupling rather than
+merely recording an unused name.}
+
+\p{The boundary set #{\mathcal J}, random-source space #{\mathcal G}, maps
+#{r} and #{M}, and reset transition used here are the typed declarations of
+\ref{ftip-00P0}; this tree only adds the finite horizon, selector, budget,
+split, and randomization labels. Formalization status is intentionally scoped:
+the note makes no absence claim, and a private FTIP search receipt records
+candidate formalizations before any future theorem claim.}
 
 \p{Cross horizon and selection with the state masks in
 \ref{ftip-00P0}. Each mask clears a selected subset of session context,
@@ -62,15 +72,19 @@ index #{i\in\{1,\ldots,N_a\}}, use the event-time domain
 #{\inf\varnothing:=+\infty}. The run receipt supplies measurable event
 indicators #{E^{\rm term}_{a,i,t}}, #{E^{\rm ev}_{a,i,t}},
 #{E^{\rm ver}_{a,i,t}},
-#{E^{\rm fail}_{a,i,t}}, and #{E^{\rm rec}_{a,i,t}} from a declared finite
+#{E^{\rm pass}_{a,i,t}}, #{E^{\rm fail}_{a,i,t}}, and
+#{E^{\rm rec}_{a,i,t}} from a declared finite
 event alphabet, a measurable task-value score #{u_{a,i}(t)}, and a finite
-saturation threshold #{u^{\rm sat}_a}. Define}
+saturation threshold #{u^{\rm sat}_a}. Here #{E^{\rm pass}} is the
+final-candidate verifier-pass event, while #{E^{\rm ver}} records a verifier
+event more generally. Define}
 ##{
  \tau_{a,i}:=\inf\{t:E^{\rm term}_{a,i,t}=1\},\quad
  \tau^{\rm ev}_{a,i}:=\inf\{t:E^{\rm ev}_{a,i,t}=1\},\quad
  \tau^{\rm ver}_{a,i}:=\inf\{t:E^{\rm ver}_{a,i,t}=1\},
 }
 ##{
+ \tau^{\rm pass}_{a,i}:=\inf\{t:E^{\rm pass}_{a,i,t}=1\},\quad
  \tau^{\rm fail}_{a,i}:=\inf\{t:E^{\rm fail}_{a,i,t}=1\},\quad
  \tau^{\rm rec}_{a,i}:=\inf\{t:E^{\rm rec}_{a,i,t}=1\},\quad
  \tau^{\rm sat}_{a,i}:=\inf\{t:u_{a,i}(t)\ge u^{\rm sat}_a\}.
@@ -78,14 +92,11 @@ saturation threshold #{u^{\rm sat}_a}. Define}
 \p{Define the measurable predicates #{G_{a,i}} for bounded evidence,
 verification, and recovery by}
 ##{
- G_{a,i}:=\mathbf 1[\tau^{\rm ev}_{a,i}<\tau_{a,i},\
- \tau^{\rm ver}_{a,i}<\tau_{a,i},\
- (\tau^{\rm fail}_{a,i}\ge\tau_{a,i}\ \mathord\lor\
- \tau^{\rm fail}_{a,i}<\tau^{\rm rec}_{a,i}<\tau_{a,i})],
+ G_{a,i}:=\mathbf 1[\tau^{\rm ev}_{a,i}<\tau_{a,i}\land\tau^{\rm pass}_{a,i}<\tau_{a,i}\land(\tau^{\rm fail}_{a,i}\ge\tau_{a,i}\lor\tau^{\rm fail}_{a,i}<\tau^{\rm rec}_{a,i}<\tau_{a,i})].
 }
 \p{#{F_{a,i}:=\mathbf 1[\tau^{\rm fail}_{a,i}<\tau_{a,i}]} records a
-failure before termination, and #{V_{a,i}:=\mathbf 1[\tau^{\rm ver}_{a,i}<\infty]}
-records a verifier pass. A recovery follows a failure exactly when
+failure before termination, and #{V_{a,i}:=\mathbf 1[\tau^{\rm pass}_{a,i}<\tau_{a,i}]}
+records a final-candidate verifier pass. A recovery follows a failure exactly when
 #{\tau^{\rm fail}_{a,i}<\tau^{\rm rec}_{a,i}<\tau_{a,i}}. Define the measurable indicators}
 ##{
  I^{\rm pre}_{a,i}=\mathbf 1[\tau_{a,i}<\tau^{\rm ev}_{a,i}],\qquad
