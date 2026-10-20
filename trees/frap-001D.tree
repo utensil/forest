@@ -20,9 +20,15 @@ formulation here is our adaptation to the present cube convention.}
 P\rvert=54}. A \newvocab{sticker state} is a bijection
 #{s:\mathcal S\xrightarrow{\sim}\mathcal P}: every valid surface slot has
 exactly one occupant. The solved assignment #{s_0} is the reference state,
-and #{s_0^{-1}\mathbin{\circ}s} records the state as a permutation of the
-54 slots; a move composes this permutation with its induced slot
-permutation. Marchetti's position-and-label transport gives the structural
+and #{s_0^{-1}\mathbin{\circ}s:\mathcal S\to\mathcal S} records the state as
+a permutation of sticker labels, while
+#{s\mathbin{\circ}s_0^{-1}:\mathcal P\to\mathcal P} records the same state as
+a permutation of the 54 slots. A move #{m:\mathcal P\to\mathcal P} acts on
+the state by #{m\mathbin{\circ}s:\mathcal S\to\mathcal P}, so it
+left-composes the slot permutation by #{m} and left-composes the
+sticker-label permutation by the transported move
+#{s_0^{-1}\mathbin{\circ}m\mathbin{\circ}s_0}. Marchetti's position-and-label
+transport gives the structural
 pattern \citet{Section 3.1, Definition 7 and equation (5)}{marchetti2025rubik};
 the present 54-slot bijection is our adaptation of that pattern to the
 three-layer cube. The correspondence between these slots, cubie fibres, and
