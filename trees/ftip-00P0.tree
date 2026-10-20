@@ -24,6 +24,15 @@ Candidate visibility and reducer behavior are part of the record: a
 candidate that is scored but not shown to a later proposer is not the same state
 as a candidate that remains in its context.}
 
+\p{Write #{s_t\in\mathcal S}, #{h_t\in\mathcal H}, #{w_t\in\mathcal W},
+#{b_t\in\mathcal B}, #{q_t\in\mathcal Q}, and #{\rho_t\in\mathcal G}. Fix
+baseline coordinates #{(s_0,h_0,w_0,q_0)} in these spaces. Let #{\mathcal R}
+be the paired randomization law. For every boundary #{r} and nonempty mask
+#{M\subseteq\{s,h,w\}}, #{\mathcal R} includes a declared kernel
+#{K_{r,M}(\mathord\cdot\mid\rho_r;\mathcal R)} on #{\mathcal G}; write
+#{\rho'_r\sim K_{r,M}(\mathord\cdot\mid\rho_r;\mathcal R)} and record that
+draw in the run receipt. The continue arm uses #{\rho_r} itself.}
+
 \p{For a reset mask #{M\subseteq\{s,h,w\}}, define the typed transition at
 boundary #{r} by}
 ##{
@@ -72,17 +81,19 @@ cost is negated before comparison, and incompatible task coordinates are kept
 as separate contrasts rather than silently pooled. The evaluation kernel and
 task law are held fixed, and #{\mathbb E|U|<\infty}.}
 
-\p{For a fixed non-random endowment #{E_0}, verifier law/configuration
-#{\mathcal V}, proposal budget #{B}, and task law #{Q}, the primary finite
-estimand is the paired reset contrast under paired randomization law
-#{\mathcal R}:}
+\p{Let #{\mathcal A} be a finite set of arm labels. Each #{a\in\mathcal A}
+declares a boundary #{r(a)} and mask #{M(a)}; define
+#{\mathsf{Reset}_a:=\mathsf{Reset}_{r(a),M(a)}} and
+#{\mathsf{Continue}_a:=\mathsf{Reset}_{r(a),\varnothing}}. For a fixed
+non-random endowment #{E_0}, verifier law/configuration #{\mathcal V}, proposal
+budget #{B}, and task law #{Q}, the primary finite estimand is}
 ##{
-  \Delta_r=\mathbb E[U\mid \mathsf{Reset}_r,E_0,\mathcal V,B,Q,\mathcal R]
-  -\mathbb E[U\mid \mathsf{Continue},E_0,\mathcal V,B,Q,\mathcal R].
+  \Delta_a=\mathbb E[U\mid \mathsf{Reset}_a,E_0,\mathcal V,B,Q,\mathcal R]
+  -\mathbb E[U\mid \mathsf{Continue}_a,E_0,\mathcal V,B,Q,\mathcal R].
 }
-\p{The expectation is indexed by #{\mathcal R}, which assigns paired runs and
-their random-source draws; it is not defined by the informal instruction to
-reuse a seed. A run reports the best-candidate
+\p{The expectation is indexed by #{\mathcal R}, which assigns paired runs,
+their random-source draws, and the declared coupling; it is not defined by the
+informal instruction to reuse a seed. A run reports the best-candidate
 utility, proposal and verifier outcomes, realized token/tool/storage cost, and
 the complete state and artifact hashes. A noisy or deceptive verifier is a
 future stress arm for this estimand; it is not an assumption that the reset is
