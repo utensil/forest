@@ -42,18 +42,21 @@ determines a measurable Markov kernel #{K_{r,M}(\mathord\cdot\mid\rho_r)} on
 that joint law and record the draw in the run receipt. The continue arm uses
 #{\rho_r} itself.}
 
-\p{For a reset mask #{M\subseteq\{s,h,w\}}, define the typed transition at
-boundary #{r} by}
+\p{For each arm, the protocol declares a workspace materialization map
+#{\operatorname{mat}:\mathcal B\to\mathcal W} for the verified retained-best
+artifact. For a reset mask #{M\subseteq\{s,h,w\}}, define the typed transition
+at boundary #{r} by}
 ##{
   \mathsf{Reset}_{r,M}(Z_r)=
   (s^M_r,h^M_r,w^M_r,b_r,q^M_r,\rho^M_r;\mathcal V),
 }
-\p{For #{x\in\{s,h,w\}}, set #{x^M_r=x_0} when #{x\in M} and
-#{x^M_r=x_r} otherwise; set #{q^M_r=q_0} and #{\rho^M_r=\rho'_r} when
+\p{For #{x\in\{s,h\}}, set #{x^M_r=x_0} when #{x\in M} and
+#{x^M_r=x_r} otherwise. Set #{w^M_r=\operatorname{mat}(b_r)} when #{w\in M}
+and #{w^M_r=w_r} otherwise. Set #{q^M_r=q_0} and #{\rho^M_r=\rho'_r} when
 #{M\ne\varnothing}, and #{q^M_r=q_r}, #{\rho^M_r=\rho_r} for the continue
 mask #{M=\varnothing}. Thus session-only and history-only arms preserve
-#{w_r}. For a workspace reset, the protocol declares a materialization map
-#{\operatorname{mat}:\mathcal B\to\mathcal W} and sets #{w^M_r=\operatorname{mat}(b_r)}.
+#{w_r}. For a workspace reset, #{w^M_r} is the declared materialization of
+#{b_r}.
 It also requires the precondition #{\operatorname{NoOverlap}(h_0,b_r)} for each
 arm, meaning that the history namespace contains neither discarded history nor
 retained-best metadata duplicated in #{b_r}; an arm that fails this predicate
