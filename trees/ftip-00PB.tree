@@ -1,0 +1,42 @@
+\import{ftip-macros}
+\meta{agent-authored}{true}
+\taxon{Remark}
+\title{Source horizon and selection hypothesis}
+\tag{ftip}
+\tag{evaluation}
+\tag{harness}
+
+\p{The direct observation in
+\citet{Abstract; Sections 3-5 and Tables 1-4}{dang2026selecting} compares
+4K, 8K, 12K, and 16K supervision horizons for terminal-agent SFT. In its
+reported Terminal-Bench v1.0 setting, 12K reaches more tasks than 16K with
+about thirty percent less training time. The shorter setting under-persisted,
+the longest setting over-persisted, and the intermediate setting produced the
+best reported balance. This is a finite terminal-agent observation under one
+model, teacher corpus, scaffold, and benchmark family; it does not establish a
+universal horizon, long-term memory, or persistent identity.}
+
+\p{The paper's bias-complexity account gives the FTIP hypothesis
+\citet{Sections 5.2 and 6-7; Tables 4-5, 10}{dang2026selecting}. Truncation
+can increase temporal-supervision bias by removing later decisions, while a
+longer continuation increases the policy complexity and finite-sample burden.
+The useful horizon is therefore conditional on the task law, teacher policy,
+model capacity, verifier, and retained state.}
+
+\p{Selective refinement makes the data intervention explicit
+\citet{Sections 6-7; Tables 4-5, 10}{dang2026selecting}. A warm-start model is
+trained on a shorter horizon, continuation segments are scored by
+teacher-forced likelihood, and a fixed fraction is retained for longer-horizon
+refinement. The score measures compatibility with the warm-start policy, not
+intrinsic truth. High-likelihood selection can improve repeatability; the FTIP
+protocol tests whether low-likelihood or random selection preserves breadth,
+rare strategies, and recovery behavior.}
+
+\p{A run is \strong{premature} when it terminates before the declared evidence
+or recovery condition, \strong{productive} when it continues through bounded
+evidence gathering, verification, and recovery, and \strong{over-persistent}
+when additional work repeats or explores after task-relevant value has
+saturated. Record coverage loss separately: a selector can improve
+repeatability while deleting hard tasks or unusual recovery paths. These terms
+describe observable behavior; they are not claims about an agent's memory or
+inner objective.}

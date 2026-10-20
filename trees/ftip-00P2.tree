@@ -6,58 +6,18 @@
 \tag{state}
 \tag{harness}
 
-\p{The direct observation in
-\citet{Abstract; Sections 3-5 and Tables 1-4}{dang2026selecting} compares
-4K, 8K, 12K, and 16K supervision horizons for terminal-agent SFT. In its
-reported Terminal-Bench v1.0 setting, 12K reaches more tasks than 16K with
-about thirty percent less training time. The shorter setting under-persisted,
-the longest setting over-persisted, and the intermediate setting produced the
-best reported balance. This is a finite terminal-agent observation under one
-model, teacher corpus, scaffold, and benchmark family; it does not establish
-a universal horizon, long-term memory, or persistent identity.}
+\p{FTIP asks which parts of a long-horizon trace remain useful to a later
+decision. The source horizon and selective-refinement observations are finite
+conditional evidence, while the trace record, persistence predicates, and
+build-repair example below make the retained events and state boundary
+explicit.}
 
-\p{The paper's bias-complexity account gives the FTIP hypothesis
-\citet{Sections 5.2 and 6-7; Tables 4-5, 10}{dang2026selecting}. Truncation
-can increase temporal-supervision bias by removing later decisions, while a
-longer continuation increases the policy complexity and finite-sample burden.
-The useful horizon is therefore conditional on the task law, teacher policy,
-model capacity, verifier, and retained state.}
+\p{A useful horizon preserves the declared decision, evidence, verification,
+and recovery events while separating repeatability from task and strategy
+coverage. The fixed-budget protocol in \ref{ftip-00P3} supplies the finite
+selection, receipt, and contrast definitions needed to test that distinction.}
 
-\p{Selective refinement makes the data intervention explicit
-\citet{Sections 6-7; Tables 4-5, 10}{dang2026selecting}. A warm-start model is
-trained on a shorter horizon, continuation segments are scored by
-teacher-forced likelihood, and a fixed fraction is retained for longer-horizon
-refinement. The score measures compatibility with the warm-start policy, not
-intrinsic truth. High-likelihood selection can improve repeatability; the FTIP
-protocol tests whether low-likelihood or random selection preserves breadth,
-rare strategies, and recovery behavior.}
-
-\p{Call a run \strong{premature} when it terminates before the declared
-evidence or recovery condition, \strong{productive} when it continues through
-bounded evidence gathering, verification, and recovery, and
-\strong{over-persistent} when additional work repeats or explores after the
-task-relevant value has saturated. Record coverage loss separately: a selector
-can improve repeatability while deleting hard tasks or unusual recovery paths.
-These terms describe observable behavior; they are not claims about an agent's
-memory or inner objective.}
-
-\p{For example, an illustrative trace that inspects a failing build, edits the
-source, runs a test, and verifies the artifact is productive only if the
-retained record includes the test and verification events. Removing the test
-leaves a premature record even when its token count is small; retaining many
-identical shell retries after verification is over-persistent. This example is
-an FTIP classification proposal, not a result established by the source.}
-
-\p{The trace intervention belongs beside the lifecycle intervention in
-\ref{ftip-00P0}, and its context/state boundary is the four-layer state in
-\ref{ftip-00C4} with the access-mechanism qualification in \ref{ftip-00C5}.
-The protocol in \ref{ftip-00P3} introduces the finite arm tuple,
-selection-information boundary, and metric denominators. Before an experiment
-is instantiated, the proposal has only this conditional scope: train on the
-shortest trace that preserves the target decision, evidence, verification, and
-recovery events, then test whether selection removed coverage or merely removed
-repetition.}
-
+\transclude{ftip-00PB}
 \transclude{ftip-00P5}
 \transclude{ftip-00P6}
 \transclude{ftip-00P7}
