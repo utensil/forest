@@ -89,39 +89,41 @@ add a central generator to the law above.}
 }
 
 \subtree{
-  \title{Why the conditions are sufficient}
+  \title{What the cited theorem supplies}
 
-  \p{The converse uses localized effects rather than a counting guess. First
-use a face turn, or an internal slice turn, to correct the common parity
-signs. The sign equations ensure that after this step every permutation
-factor is even. Commutators and conjugates then supply the required local
-subgroups:}
+  \p{Salkinder's Theorems 10--18 supply the sufficiency direction after the
+  position orbits, orientation conventions and parity rows have been fixed.
+  We use that result here as a source-backed proof sketch. The source
+  construction combines parity correction with 3-cycle generation on each
+  position orbit, then uses commutators to generate the two orientation
+  kernels. Its theorem sequence supplies the orbit-specific words and their
+  effects; the displayed equations are the conditions transported into the
+  coordinate conventions of this note.}
+
   \ul{
-    \li{a corner 3-cycle, for example
-      #{[[R:U],D]}, generates #{A_8} on corners;}
-    \li{the single-edge 3-cycle #{[F,[R:S]]} generates #{A_{12}} in the odd
-      case, with the middle-slice symbol interpreted by the parallel-slice
-      composition just described;}
-    \li{#{[[R_j^{-1},D_i],F^{-1}]} gives 3-cycles on a center-corner orbit
-      when #{i=j} and on a center-edge orbit when #{i\ne j};}
-    \li{the analogous coupled-edge commutator gives #{A_{24}} on each
-      coupled-edge orbit. In even size the source's explicit odd permutation
-      on that orbit upgrades it to #{S_{24}}; in odd size the parity row keeps
-      it at #{A_{24}}.}
+    \li{The corner and single-edge factors are reduced by the source's
+      parity-correction words and orbit 3-cycles, giving the alternating
+      groups required by the corresponding parity rows.}
+    \li{The center-corner, center-edge and coupled-edge factors are handled by
+      the analogous orbit-specific commutators and their conjugates. The
+      coupled-edge orientation factor remains zero in the fixed sticker
+      convention.}
+    \li{After the permutation factors are cleared, the source's opposite
+      corner twists and edge-flip commutators generate the kernels of the
+      corner-sum and single-edge-sum maps. The displayed orientation rows
+      are therefore exactly the residual conditions in this coordinate
+      summary.}
   }
-  \p{Conjugating these words moves each 3-cycle through its whole orbit.
-Thus the local subgroups clear the corner, single-edge, center-corner,
-center-edge and coupled-edge permutations in turn. Finally, commutators
-that twist two corners in opposite directions generate the kernel of the
-corner-sum map #{(\mathbb Z_3)^8\to\mathbb Z_3}; the corresponding
-edge-flip commutators generate the kernel of the single-edge sum. The
-coupled-edge orientation vector is already zero by its law. The parity and
-orientation equations are exactly what is needed for each cleanup step, so
-reversing the resulting word reaches every tuple satisfying the displayed
-conditions. This is the constructive sufficiency argument of
-\citet{Theorems 10--18}{salkinder2021nxnxn}; it is a subgroup generation
-argument, not an assertion that one universal short algorithm solves every
-size.}
+
+  \p{This is a source-backed proof sketch, not a self-contained constructive
+  proof in the present notation. In particular, the symbols for source
+  moves, orbit representatives, induced effects and kernel-generation words
+  are not redefined here. A complete independent construction would require
+  typed definitions, convention conversion and effect calculations for each
+  such word. Those details are supplied by the cited source theorem sequence,
+  rather than asserted by this summary. The argument is consequently a
+  subgroup-generation result, not a claim that one universal short algorithm
+  solves every size.}
 
   \p{There are two boundaries to keep visible. The theorem concerns labelled
 positions and a fixed frame; a colour-only observation quotients by equal
