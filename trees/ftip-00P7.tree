@@ -1,0 +1,21 @@
+\import{ftip-macros}
+\meta{agent-authored}{true}
+\taxon{Example}
+\title{A retained build-repair trace}
+\tag{ftip}
+\tag{evaluation}
+
+\p{The horizon and selective-refinement observations in
+\citet{Sections 3-7}{dang2026selecting} motivate the following finite
+classification. Consider a run whose task is to repair a failing build. The retained record
+contains the failing observation, the source edit, a test execution, and a
+final verifier pass. With the event interface of \ref{ftip-00P6}, the test and
+verification steps contribute to #{e_{\rm ev}}, #{e_{\rm pass}}, and
+#{n_{\rm prod}}, so the record can satisfy #{\operatorname{Prod}(T)}.}
+
+\p{If the test event is removed from the retained record, the same token budget
+can fail the productive predicate because the evidence chain is incomplete.
+If identical shell retries continue after #{\tau_{\rm sat}} with no new
+productive event, #{\operatorname{Over}(T)} can hold. This is a finite
+classification example; it does not claim that every short trace is better or
+that a model has an inner persistence objective.}

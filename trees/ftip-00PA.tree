@@ -1,0 +1,42 @@
+\import{ftip-macros}
+\meta{agent-authored}{true}
+\taxon{Example}
+\title{A paired trace-selection calculation}
+\tag{ftip}
+\tag{evaluation}
+
+\p{The selective-refinement comparison motivates contrasting repeatability and
+coverage under a fixed retained budget
+\citet{Sections 6-7; Tables 4-5, 10}{dang2026selecting}. Consider two arms from
+\ref{ftip-00P8} with the same P0 boundary, model, task split, verifier, budget,
+and paired assignment law. They differ only in the selector: #{a} retains the
+highest teacher-forced scores and #{a'} retains a coverage-stratified subset.
+Both have #{Q_{\rm hold}=\{q_1,q_2\}} and
+#{\mathfrak S=\{s_1,s_2\}}. The paired assignment law gives the same held-out
+task at indices 1 and 2; arm #{a'} has one additional admitted coverage run at
+index 3. Take #{g_a=g_{a'}=\operatorname{id}_{\{0,1\}}}. The receipts are}
+##{
+\begin{array}{c|cc|ccc}
+ &q_{a,i}&s_{a,i}&A_{a,i}&I^{\rm prod}_{a,i}&Y_{a,i}\\\hline
+ i=1&q_1&s_1&1&1&1\\
+ i=2&q_1&s_1&1&1&0
+\end{array}
+\qquad
+\begin{array}{c|cc|ccc}
+ &q_{a',i}&s_{a',i}&A_{a',i}&I^{\rm prod}_{a',i}&Y_{a',i}\\\hline
+ i=1&q_1&s_1&1&1&1\\
+ i=2&q_1&s_1&1&1&1\\
+ i=3&q_2&s_2&1&1&1
+\end{array}
+}
+\p{The first two rows are the common paired indices, so
+#{N_a=2}, #{N_{a'}=3}, and #{N_{\rm pair}=2}. Both arms have
+#{\widehat p^{\rm prod}=1}; the third row is included in arm #{a'}'s coverage
+and run-rate denominators but not in the paired contrast. Thus
+#{\widehat C^{\rm task}_a=\widehat C^{\rm strat}_a=\tfrac12} and
+#{\widehat C^{\rm task}_{a'}=\widehat C^{\rm strat}_{a'}=1}, while
+#{\widehat\Delta_{a,a'}=-\tfrac12}. The calculation shows why a
+repeatability rate alone cannot identify coverage: the two selectors have the
+same productive rate but different admitted task and strategy support. This is
+a finite FTIP construction using the typed receipt and pairing definitions,
+not a source result.}

@@ -1,0 +1,42 @@
+\import{ftip-macros}
+\meta{agent-authored}{true}
+\taxon{Definition}
+\title{Trace record and state boundary}
+\tag{ftip}
+\tag{evaluation}
+\tag{state}
+
+\p{A long-horizon training trace should preserve the behavior that a later
+agent must learn: its decisions, evidence, verification, recovery, and the
+state boundary visible to the continuation. Fix event domains
+#{\mathcal O_{\rm evt}}, #{\mathcal A_{\rm evt}}, #{\mathcal Y_{\rm evt}},
+#{\mathcal E_{\rm evt}}, and #{\mathcal V_{\rm evt}}, together with a
+termination domain #{\mathcal T_{\rm evt}} and a boundary domain
+#{\mathcal S_{\rm boundary}}. The horizon comparison and selective-refinement
+intervention in \citet{Sections 3-7}{dang2026selecting} motivate this
+adaptation; the typed record below is an FTIP protocol proposal.}
+
+\p{For #{H\in\mathbb N}, a \newvocab{trace record} is}
+##{
+ T=(o_{0:H},a_{0:H},y_{0:H},e_{0:H},v_{0:H},\tau,\sigma,\kappa)
+ \in\mathcal O_{\rm evt}^{H+1}\times\mathcal A_{\rm evt}^{H+1}
+ \times\mathcal Y_{\rm evt}^{H+1}\times\mathcal E_{\rm evt}^{H+1}
+ \times\mathcal V_{\rm evt}^{H+1}\times\mathcal T_{\rm evt}
+ \times\mathcal S_{\rm boundary}\times\mathbb N.
+}
+\p{The components #{o}, #{a}, and #{y} are observation, action, and outcome
+events; #{e} records evidence or an environment-state reference; #{v} records
+verification or recovery; #{\tau} records termination; #{\sigma} records the
+state boundary; and #{\kappa} is token length. The horizon #{H} and token
+length #{\kappa} are separate coordinates. A task may use a declared subtype
+of each event domain, but it must preserve the coordinate meaning.}
+
+\p{The record is a training datum only together with its declared boundary
+#{\sigma}: a continuation may access exactly the state coordinates allowed by
+that boundary. The record therefore supports a later selector or run kernel
+without treating token count as a proxy for the events that make continuation
+useful.}
+
+\p{This is a protocol definition rather than a formal theorem; the event
+domains and transition semantics must be instantiated by the experiment that
+uses the record.}
