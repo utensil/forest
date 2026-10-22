@@ -77,15 +77,17 @@ let #{N:=\min(N_a,N_{a'})}. Define the common admitted index set
 #{J_{a,a'}:=\{i\leq N:A_{a,i}=A_{a',i}=1\}} and
 #{N_{\rm pair}:=|J_{a,a'}|}. For #{i\in J_{a,a'}}, let #{Y_{a,i}} and
 #{Y_{a',i}} be their admitted held-out outcomes under the shared pairing
-law #{\Lambda_{a,a'}}, so #{q_{a,i}=q_{a',i}}. When
+law #{\Lambda_{a,a'}}, so #{q_{a,i}=q_{a',i}}. Compare their declared
+scalarizations #{g_a(Y_{a,i})} and #{g_{a'}(Y_{a',i})}. When
 #{N_{\rm pair}\geq2}, the primary finite contrast and
 its paired sample variance are}
 ##{
 \widehat\Delta_{a,a'}:=
-\frac1{N_{\rm pair}}\sum_{i\in J_{a,a'}}(Y_{a,i}-Y_{a',i}),\qquad
+\frac1{N_{\rm pair}}\sum_{i\in J_{a,a'}}
+\bigl(g_a(Y_{a,i})-g_{a'}(Y_{a',i})\bigr),\qquad
 \widehat V_{a,a'}:=
 \frac1{N_{\rm pair}-1}\sum_{i\in J_{a,a'}}
-\bigl((Y_{a,i}-Y_{a',i})-\widehat\Delta_{a,a'}\bigr)^2.
+\bigl((g_a(Y_{a,i})-g_{a'}(Y_{a',i}))-\widehat\Delta_{a,a'}\bigr)^2.
 }
 \p{When #{N_{\rm pair}=1}, report the single paired contrast but set
 #{\widehat V_{a,a'}:=\bot}; when #{N_{\rm pair}=0}, the paired contrast is
