@@ -1,0 +1,65 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{Inverse components and retained compression}
+\date{2026-10-23}
+
+\p{Over a commutative unital ring #{R}, let #{M=X\oplus Y} be a
+[chosen splitting](fdip-001T), with ordinary linear
+endomorphism #{Q(x,y)=(Ax+By,Ex+Cy)}. Assume that the eliminated
+component #{C} is an isomorphism, and put #{S=A-BC^{-1}E}.
+Then #{Q} is an isomorphism if and only if #{S} is an isomorphism.
+When these conditions hold, all four components of the inverse are
+##{\begin{aligned}
+\pi_XQ^{-1}\iota_X&=S^{-1}:X\to X,\\
+\pi_XQ^{-1}\iota_Y&=-S^{-1}BC^{-1}:Y\to X,\\
+\pi_YQ^{-1}\iota_X&=-C^{-1}ES^{-1}:X\to Y,\\
+\pi_YQ^{-1}\iota_Y&=C^{-1}+C^{-1}ES^{-1}BC^{-1}:Y\to Y.
+\end{aligned}}
+In particular, the retained compression of #{Q^{-1}} is #{S^{-1}};
+it is not in general #{A^{-1}}.}
+
+\proof{
+\p{Use #{Q=UDV} and the explicit inverses of #{U,V} from
+[triangular factorization](fdip-001U), where
+#{D(x,y)=(Sx,Cy)}. If #{S} is invertible, then
+#{D^{-1}(u,v)=(S^{-1}u,C^{-1}v)}. Thus
+#{Q^{-1}=V^{-1}D^{-1}U^{-1}} is a two-sided inverse.}
+
+\p{Conversely, suppose #{Q} is invertible. Then
+#{D=U^{-1}QV^{-1}} is invertible; write #{J=D^{-1}} and set
+#{J_X=\pi_XJ\iota_X:X\to X}. The identities
+#{\pi_XD=S\pi_X} and #{D\iota_X=\iota_XS} imply
+##{\begin{aligned}
+SJ_X&=\pi_XDJ\iota_X=\pi_X\iota_X=I_X,\\
+J_XS&=\pi_XJD\iota_X=\pi_X\iota_X=I_X.
+\end{aligned}}
+Hence #{J_X} is a two-sided inverse of #{S}. This implication still
+uses the assumed invertibility of #{C}.}
+
+\p{Applying the three inverse factors to #{(u,v)} gives
+##{\begin{aligned}
+x&=S^{-1}u-S^{-1}BC^{-1}v,\\
+y&=-C^{-1}ES^{-1}u
+ +(C^{-1}+C^{-1}ES^{-1}BC^{-1})v.
+\end{aligned}}
+Setting one input component to zero and projecting the other gives
+the four stated map identities.}
+}
+
+\p{The real symmetric inverse formula is
+\citet{Appendix A.5.5, p. 650}{boyd2004convex}; its first-pivot
+convention is exchanged here. The direct proof uses arbitrary unital
+#{R}-modules and needs no pairing or symmetry.
+Mathlib's \leanref{CategoryTheory.Limits.Biprod.isoElim'} constructs
+the residual isomorphism when both the first component and the whole
+biproduct map are isomorphisms. With summands #{(Y,X)} and component
+arguments #{(C,B,E,A)}, it supports the whole-to-residual direction;
+it does not by itself assert the four inverse formulas above.}
+
+\p{For a self-adjoint precision with a chosen perfect pairing,
+[inverse response](fdip-001Q) supplies its separate response
+interpretation. The [cycle calculation](fdip-001Z)
+exhibits a retained inverse entry #{2/15} where #{A^{-1}} has entry
+zero. No probability law is needed for the map comparison.}

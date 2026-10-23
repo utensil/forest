@@ -1,0 +1,73 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Definition}
+\title{Components of a split endomorphism}
+\date{2026-10-23}
+
+\p{To eliminate part of a field, first choose which part is retained.
+Let #{R} be a commutative unital \vocabk{ring}{ca-000U} and
+#{M,X,Y} unital \vocabk{#{R}-modules}{ca-000X}. A
+\newvocab{chosen binary splitting} of #{M} consists of ordinary
+#{R}-linear maps
+##{\iota_X:X\to M,\quad \iota_Y:Y\to M,\qquad
+   \pi_X:M\to X,\quad \pi_Y:M\to Y}
+satisfying all five identities
+##{\begin{aligned}
+\pi_X\iota_X&=I_X,&\pi_Y\iota_Y&=I_Y,\\
+\pi_X\iota_Y&=0,&\pi_Y\iota_X&=0,\\
+\iota_X\pi_X+\iota_Y\pi_Y&=I_M.
+\end{aligned}}
+Products apply the right factor first, as in \ref{fdip-0011}.
+The maps #{(x,y)\mapsto\iota_Xx+\iota_Yy} and
+#{z\mapsto(\pi_Xz,\pi_Yz)} are inverse linear maps by these identities.
+We consequently write #{M=X\oplus Y} and #{z=(x,y)} relative to
+this chosen identification.}
+
+\tikzfigs{0.7}{\begin{tikzpicture}[
+  carrier/.style={draw,rounded corners,minimum width=10mm,
+    minimum height=8mm,inner sep=2mm},
+  map/.style={-{Stealth[length=2mm]},thick}
+]
+\node[carrier] (x) at (0,0) {$X$};
+\node[carrier] (m) at (3.2,0) {$M$};
+\node[carrier] (y) at (6.4,0) {$Y$};
+\draw[map] (x) to[bend left=20] node[above=2mm] {$\iota_X$} (m);
+\draw[map] (m) to[bend left=20] node[below=2mm] {$\pi_X$} (x);
+\draw[map] (m) to[bend left=20] node[above=2mm] {$\pi_Y$} (y);
+\draw[map] (y) to[bend left=20] node[below=2mm] {$\iota_Y$} (m);
+\end{tikzpicture}}
+
+\p{Each summand is included in #{M} and recovered by its projection.
+The composite #{\pi_X\iota_X} is #{I_X}, whereas
+#{\iota_X\pi_X} is an endomorphism of #{M}. In the
+[partition realization](fdip-001I), these are restriction and
+extension by zero; the latter composite is the support projection.}
+
+\p{For an endomorphism #{Q:M\to M}, its
+\newvocab{components for the chosen splitting} are
+##{\begin{aligned}
+A&=\pi_XQ\iota_X:X\to X,&B&=\pi_XQ\iota_Y:Y\to X,\\
+E&=\pi_YQ\iota_X:X\to Y,&C&=\pi_YQ\iota_Y:Y\to Y.
+\end{aligned}}
+Inserting #{I_M=\iota_X\pi_X+\iota_Y\pi_Y} gives
+##{Q(x,y)=(Ax+By,Ex+Cy).}
+If the eliminated component #{C} is an
+\vocabk{isomorphism}{ca-0015}, define the
+\newvocab{split Schur map}, relative to this splitting and pivot, by
+##{S=A-BC^{-1}E:X\longrightarrow X.}
+Changing the splitting or the pivot changes the construction.}
+
+\p{The module convention is
+\citet{Section 10.10, Tag 0581}{stacks2017stacks}.
+Mathlib's \leanref{CategoryTheory.Limits.Biprod.ofComponents} gives
+components in a preadditive category with binary biproducts.
+Its arguments index source then target; after ordering summands
+#{(Y,X)}, the arguments corresponding to #{Q} are #{(C,B,E,A)}.}
+
+\p{\citet{Appendix A.5.5, pp. 650-651}{boyd2004convex} treats the real
+\vocabk{Schur complement}{fdip-000D}.
+The source eliminates its first block: exchanging its variables to
+#{(y,x)} makes its block order #{(C,E,B,A)} and its residual
+#{A-BC^{-1}E}. The chosen-splitting definition above uses only linear
+maps; it does not assume a basis, pairing or positivity.}

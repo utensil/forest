@@ -1,0 +1,79 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{Elimination with orthogonal perfect pairings}
+\date{2026-10-23}
+
+\p{Let #{X,Y} be unital modules over a commutative unital ring #{R},
+with \vocabk{chosen perfect symmetric pairings}{fdip-001O}
+#{b_X,b_Y}. On the [chosen sum](fdip-001T) #{M=X\oplus Y},
+choose the orthogonal sum form
+##{b_M((x,y),(x',y'))=b_X(x,x')+b_Y(y,y').}
+It is perfect and symmetric, and its injection/projection adjoints are
+##{\iota_X^\dagger=\pi_X,\quad \pi_X^\dagger=\iota_X,\qquad
+   \iota_Y^\dagger=\pi_Y,\quad \pi_Y^\dagger=\iota_Y.}
+Suppose #{Q:M\to M} is [self-adjoint](fdip-001P), with components
+#{A,B,E,C} and invertible #{C}. Then
+##{A^\dagger=A,\quad C^\dagger=C,\quad E=B^\dagger,\qquad
+   S^\dagger=S\quad\text{for }S=A-BC^{-1}E.}
+For the [triangular factors](fdip-001U),
+##{V^\dagger=U,\qquad Q=V^\dagger DV,\qquad
+   D(x,y)=(Sx,Cy).}
+Consequently, with #{K=C^{-1}E},
+##{\begin{aligned}
+b_M((x,y),Q(x,y))
+ &=b_X(x,Sx)\\
+ &\quad+b_Y(y+Kx,C(y+Kx)).
+\end{aligned}}}
+
+\proof{
+\p{Bilinearity and symmetry of #{b_M} follow termwise. For a linear
+functional #{\ell:M\to R}, represent #{\ell\iota_X} and
+#{\ell\iota_Y} uniquely by #{x_\ell\in X,y_\ell\in Y} using the
+two perfect pairings. Then for every #{(x,y)},
+##{\ell(x,y)=\ell\iota_X(x)+\ell\iota_Y(y)
+ =b_X(x,x_\ell)+b_Y(y,y_\ell).}
+This gives a representative #{(x_\ell,y_\ell)}. Uniqueness follows by
+testing #{(x,0)} and #{(0,y)} separately. The representative depends
+linearly on #{\ell}, since the two inverse duality maps are linear.
+Thus the currying map of #{b_M} is a linear isomorphism.}
+
+\p{For example,
+#{b_M(\iota_Xx,(u,v))=b_X(x,u)=b_X(x,\pi_X(u,v))}.
+[Adjoint uniqueness and involution](fdip-001P) give the two #{X}
+identities, and the same calculation gives those for #{Y}.
+Adjointing the definitions of the four components and using
+#{Q^\dagger=Q} gives #{A^\dagger=A}, #{C^\dagger=C} and
+#{B^\dagger=E}. The inverse-adjoint law then gives
+#{(C^{-1})^\dagger=C^{-1}} and
+##{K^\dagger=(C^{-1}E)^\dagger=BC^{-1},\qquad
+   (BC^{-1}E)^\dagger=BC^{-1}E.}
+The latter identity proves #{S^\dagger=S}.}
+
+\p{For #{z=(x,y)} and #{w=(u,v)},
+##{\begin{aligned}
+b_M(Vz,w)
+ &=b_X(x,u)+b_Y(y+Kx,v)\\
+ &=b_X(x,u+K^\dagger v)+b_Y(y,v)\\
+ &=b_M(z,Uw).
+\end{aligned}}
+Uniqueness gives #{V^\dagger=U}; factorization yields #{Q=V^\dagger DV}.
+Finally #{b_M(z,Qz)=b_M(Vz,DVz)}, and expanding the orthogonal sum
+form gives the stated identity.}
+}
+
+\p{This is a direct deduction from chosen dualities and triangular
+factorization. The real symmetric completion in
+\citet{Appendix A.5.5, p. 650}{boyd2004convex} is its real coordinate
+specialization. The chosen orthogonal sum is essential: an arbitrary
+perfect form on #{M} need not have these injection/projection adjoints.
+No division by two or recovery of bilinear data from diagonal values
+is used; the identity remains valid in characteristic two.}
+
+\p{TauCeti's \leanref/tauceti{LinearMap.BilinForm.prod} gives the
+orthogonal product form, and
+\leanref/tauceti{LinearMap.BilinForm.nondegenerate_prod_iff} identifies
+its radical nondegeneracy. The functional-splitting proof above also
+proves the surjectivity required for perfection. These declarations
+alone do not assert the paired-congruence result.}
