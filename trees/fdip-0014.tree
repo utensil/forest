@@ -5,41 +5,48 @@
 \title{Counting adjoints on an indexed cycle}
 \date{2026-10-20}
 
-
-\p{Take the \vocabk{cyclic shift}{fdip-0009} on
-#{\mathbb R^{\mathbb Z/n\mathbb Z}}, #{n\ge1}, with the
-\vocabk{counting inner product}{fdip-0002}. For the
-\vocabk{counting adjoint}{fdip-0007},
+\p{Let #{R} be a commutative unital ring. Take the
+\vocabk{cyclic shift}{fdip-0009} on
+#{\mathcal F_R(\mathbb Z/n\mathbb Z)}, #{n\ge1}, with its
+\vocabk{perfect counting duality}{fdip-001F} #{b}.
+For the \vocabk{counting adjoint}{fdip-0007}, write #{A^*=A^\dagger}.
+Then
 ##{T^*=T^{-1},\qquad \Delta^*=T^{-1}-I.}
 Writing #{\nabla^-=I-T^{-1}} for the backward difference gives
 ##{\Delta^*\Delta=-\nabla^-\Delta=2I-T-T^{-1}.}
-For these difference and kinetic signs, see
+Here #{2=1+1}; its invertibility is not required. For the real difference
+and kinetic signs, see
 \citet{Section 4, Equations (4.3) and (4.5), p. 3}{wingate2025lattice},
-with lattice spacing one. The finite periodic identities follow by
-reindexing, independently of the product rule.}
+with lattice spacing one. The finite periodic ring identities follow
+by reindexing, independently of the product rule.}
 
 \proof{
 \p{The substitution #{j=i+1} permutes the finite index set, so
 ##{\begin{aligned}
-\langle Tf,g\rangle
- &=\sum_i f(i+1)g(i)\\
- &=\sum_j f(j)g(j-1)
- =\langle f,T^{-1}g\rangle.
+b(Tf,g)&=\sum_i f(i+1)g(i)\\
+ &=\sum_j f(j)g(j-1)=b(f,T^{-1}g).
 \end{aligned}}
 Uniqueness of the counting adjoint gives #{T^*=T^{-1}}.
-Subtracting #{\langle f,g\rangle} gives
-#{\langle\Delta f,g\rangle=\langle f,(T^{-1}-I)g\rangle},
-so #{\Delta^*=T^{-1}-I}. Multiplication now gives
-##{(T^{-1}-I)(T-I)=2I-T-T^{-1}.}
-Its quadratic value is
-#{\langle f,\Delta^*\Delta f\rangle=\langle\Delta f,\Delta f\rangle\ge0}.}
+Subtracting #{b(f,g)} gives
+#{b(\Delta f,g)=b(f,(T^{-1}-I)g)}, so
+#{\Delta^*=T^{-1}-I}. Multiplication gives
+##{(T^{-1}-I)(T-I)=2I-T-T^{-1}=-\nabla^-\Delta.}
+Consequently #{b(f,\Delta^*\Delta f)=b(\Delta f,\Delta f)}.
+Over #{\mathbb R} this counting form is the
+\vocabk{counting inner product}{fdip-0002}, and the last expression is
+#{\sum_i(\Delta f(i))^2\ge0}.}
 }
 
-\p{For the indexed cycle #{e_i:i\to i+1}, the edge-label map
-#{j(a)(i)=a(e_i)} of \ref{fdip-0009} preserves the real counting
-pairings, since it merely reindexes the sum. Thus #{\Delta=jD} and
-#{D^*D=\Delta^*\Delta}; this is the unit-weight
-\vocabk{graph Laplacian}{fdip-0007}. At #{n=2} there are two oppositely
-oriented edges between the same vertices; at #{n=1} there is one loop,
-#{T=I}, and the incidence and kinetic maps vanish. An arbitrary
-incidence map still has distinct vertex and edge carriers.}
+\p{For the indexed cycle #{e_i:i\to i+1}, the edge-label isomorphism
+#{j(a)(i)=a(e_i)} of \ref{fdip-0009} preserves counting pairings:
+#{b_V(ja,jc)=\sum_i a(e_i)c(e_i)=b_E(a,c)}.
+Taking #{c=j^{-1}f} shows that #{j^*=j^{-1}}, hence #{j^*j=I}.
+Thus #{\Delta=jd_R} and
+##{\Delta^*\Delta=d_R^\dagger j^*j d_R=d_R^\dagger d_R,}
+the unit-weight \vocabk{graph Laplacian}{fdip-0007}.
+At #{n=2}, the two oppositely oriented edges give
+#{b(f,d_R^\dagger d_Rf)=2(f(1)-f(0))^2}; they are not one simple
+edge. At #{n=1}, there is one loop, #{T=I}, and both incidence and
+kinetic maps vanish. An arbitrary incidence map still has distinct
+vertex and edge carriers; this factorization does not assert that
+#{\Delta} is skew-adjoint or square-zero.}

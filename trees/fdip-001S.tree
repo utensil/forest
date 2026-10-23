@@ -1,0 +1,28 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Example}
+\title{A zero-radical pairing that is not perfect}
+\date{2026-10-20}
+
+\p{On the free rank-one #{\mathbb Z}-module #{M=\mathbb Z},
+the symmetric bilinear form #{b(x,y)=2xy} separates vectors in
+both slots but is not a
+\vocabk{perfect pairing}{fdip-001O}. Its currying map is
+##{\Phi:\mathbb Z\longrightarrow\operatorname{Hom}_{\mathbb Z}
+  (\mathbb Z,\mathbb Z),\qquad \Phi(y)(x)=2xy.}}
+
+\p{If #{b(x,y)=0} for every integer #{x}, testing against #{x=1}
+gives #{2y=0}, hence #{y=0}. Symmetry gives the same conclusion
+in the other slot, so both radicals are zero and #{\Phi} is injective.
+Every integer-linear functional #{\ell} on #{\mathbb Z} satisfies
+#{\ell(x)=x\ell(1)}, so it is determined by its value at #{1}.
+But #{\Phi(y)(1)=2y} is even for every #{y}. Thus #{\Phi} misses
+the linear functional #{x\mapsto x}, whose value at #{1} is #{1},
+and is not surjective. Freeness of #{M} does not repair this failure
+of the chosen form.}
+
+\p{The Hom convention is
+\citet{Section 10.10, Tag 0581}{stacks2017stacks}; the calculation
+above proves the failure for this chosen form. For the perfect
+counting form and its explicit inverse, see \ref{fdip-001F}.}
