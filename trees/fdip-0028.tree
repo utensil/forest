@@ -1,0 +1,75 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{Finite-map pullback and fiber weights}
+\date{2026-10-23}
+
+\p{Let #{\rho:\Omega\to\Lambda} be any map of finite sets and let
+#{R} be a commutative unital ring. On the [function algebras](fdip-0022),
+##{\begin{aligned}
+\rho^*:A_\Lambda&\longrightarrow A_\Omega,&
+f&\longmapsto f\circ\rho
+\end{aligned}}
+is a unital #{R}-algebra map. Over #{\mathbb R} or #{\mathbb C} it
+preserves pointwise conjugation. For #{\tau:\Lambda\to\Gamma},
+#{(\tau\circ\rho)^*=\rho^*\circ\tau^*}, and the identity set map
+induces the identity algebra map.}
+\proof{
+\p{At #{x\in\Omega}, pullback of #{rf+sg}, #{fg}, and #{1} has value
+#{rf(\rho(x))+sg(\rho(x))}, #{f(\rho(x))g(\rho(x))}, and #{1_R},
+respectively. Pullback commutes with conjugation by the same evaluation.
+Both composite pullbacks evaluate #{f} at #{\tau(\rho(x))}; the identity
+case evaluates #{f} at #{x}. These pointwise arguments also apply to
+empty domains and the zero ring.}
+}
+\p{The image of #{\rho^*} consists exactly of functions constant on each
+fiber of #{\rho}. If #{\rho} is surjective, #{\rho^*} is injective.
+Conversely, injectivity of #{\rho^*} forces surjectivity of #{\rho}
+provided #{R} is nonzero.}
+\proof{
+\p{A pullback takes equal values at #{x,x'} whenever
+#{\rho(x)=\rho(x')}. Conversely, for fiber-constant #{g}, define
+#{f(y)} to be the common value on the fiber when that fiber is nonempty,
+and #{0_R} when it is empty. The value is independent of the chosen
+representative, and #{g=f\rho}. If #{\rho} is surjective, equality of
+two pullbacks determines their value at every #{y}, proving injectivity.
+If #{y} is missed, #{\delta_y} pulls back to zero; for nonzero #{R} this
+indicator is nonzero, so pullback is not injective. Over the zero ring,
+all these algebras are singletons and every pullback is injective,
+including pullback along a nonsurjective set map.}
+}
+\p{For the [weight functional](fdip-0023) determined by #{p},
+its [pullback as a functional](fdip-0027) along #{\rho^*} has weights
+##{q(y)=\sum_{\rho(x)=y}p(x).}
+Thus normalized weights stay normalized; real nonnegative weights stay
+nonnegative. Empty fibers have weight zero.}
+\proof{
+\p{Regroup the finite sum:
+##{\begin{aligned}
+(\omega_p\circ\rho^*)(f)
+&=\sum_{x\in\Omega}p(x)f(\rho(x))\\
+&=\sum_{y\in\Lambda}\left(\sum_{\rho(x)=y}p(x)\right)f(y).
+\end{aligned}}
+The fibers partition #{\Omega}, so #{\sum_yq(y)=\sum_xp(x)}.
+Nonnegative summands give nonnegative fiber sums. For successive maps,
+##{\sum_{\tau(y)=z}\sum_{\rho(x)=y}p(x)
+=\sum_{\tau(\rho(x))=z}p(x),}
+which proves compatibility of the fiber formula with composition.}
+}
+\p{This is [pushforward of finite probabilities](ftip-007S), or a
+marginal law when #{\rho} forgets coordinates. It uses no division by
+fiber mass, even when that mass is zero; it is not a conditional
+expectation. The pointwise algebra construction uses
+\citet{Section 22.2, Tag 09JF}{stacks2017stacks}.
+Mathlib's \leanref{AlgHom.pi} constructs the family of evaluation maps
+#{f\mapsto f(\rho(x))}. Composition here changes the function's domain,
+not its coefficient ring.}
+
+\p{Over arbitrary rings, not every unital algebra map between function
+algebras is induced by a set map. For #{R=\mathbb Z/6\mathbb Z}, define
+#{h:R^2\to R} by #{h(a,b)=3a+4b}. It is #{R}-linear and unital since
+#{3+4=1}. The identities #{3^2=3}, #{4^2=4}, and #{3\cdot4=0} show
+#{h(a,b)h(c,d)=3ac+4bd=h(ac,bd)}, so it is multiplicative. But
+#{h(1,0)=3}, whereas either coordinate evaluation gives #{0} or #{1}.
+Thus this map is not the pullback of a map from a singleton to two points.}
