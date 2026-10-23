@@ -1,0 +1,56 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Definition}
+\title{Ring-valued incidence fields}
+\date{2026-10-20}
+
+
+\p{Let #{R} be a commutative \vocabk{ring}{ca-000U} with identity.
+Choose \vocabk{finite sets}{ftip-000A} #{V,E} and maps
+#{s,h:E\to V}. The edge #{e} goes from #{s(e)} to #{h(e)};
+loops and distinct edges with the same endpoints are allowed.
+The \newvocab{vertex-field module} and \newvocab{edge-field module} are
+##{\mathcal F_R(V)=\{f:V\to R\},\qquad
+   \mathcal F_R(E)=\{a:E\to R\}.}
+Addition, scalar multiplication and multiplication are pointwise:
+##{(f+g)(v)=f(v)+g(v),\quad (rf)(v)=rf(v),\quad
+   (fg)(v)=f(v)g(v).}
+These are \vocabk{modules}{ca-000X} and commutative unital
+\vocabk{#{R}-algebras}{ca-0016}; the unit is the constant field #{1}.}
+
+\p{For a map #{a:E\to V}, its \newvocab{field pullback} is
+##{a^*:\mathcal F_R(V)\to\mathcal F_R(E),\qquad
+   (a^*f)(e)=f(a(e)).}
+It preserves addition, scalars, products and the unit. The
+\newvocab{ring-valued incidence map} is the typed difference
+##{d=h^*-s^*:\mathcal F_R(V)\longrightarrow\mathcal F_R(E).}
+Thus #{(df)(e)=f(h(e))-f(s(e))}. This is an
+\vocabk{#{R}-linear map}{ca-001F}, with both coefficient rings equal to
+#{R} and scalar homomorphism #{\sigma=\operatorname{id}_R}, as in
+\ref{ca-001G}. The two field modules need not coincide, so #{d^2}
+has no meaning without an additional composable map.}
+
+\proof{
+\p{Every module and algebra identity follows by evaluation from the
+corresponding identity in #{R}. For example,
+#{((fg)k)(v)=f(v)g(v)k(v)=(f(gk))(v)}, and
+#{((r1)f)(v)=rf(v)}. For each #{v\in V}, let #{\delta_v(u)} be
+#{1} if #{u=v} and #{0} otherwise. Evaluation at #{u} proves
+##{f=\sum_{v\in V}f(v)\delta_v,}
+and proves uniqueness of its coefficients. The same argument applies to
+edge fields. Evaluation also proves every pullback law; for instance
+#{a^*(fg)(e)=f(a(e))g(a(e))}. Finally,
+##{d(rf+g)(e)=r\bigl(f(h(e))-f(s(e))\bigr)
+                  +g(h(e))-g(s(e)),}
+which proves linearity.}
+}
+
+\p{The zero ring and empty carriers are allowed. On an empty set there
+is one field, and the constant #{1} is also zero; the sum above is empty.
+No nontriviality, pairing, retained subset or positivity is assumed.
+The algebra convention is
+\citet{Section 22.2, Tag 09JF}{stacks2017stacks}.
+For real oriented-graph incidence, see
+\citet{Section 2.1, p. 4}{spielman2009effective}; the ring-level
+claims and degenerate cases follow from the direct proof here.}

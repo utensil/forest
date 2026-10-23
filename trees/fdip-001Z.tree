@@ -1,0 +1,108 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Example}
+\title{Eliminating alternate vertices of a ring-valued cycle}
+\date{2026-10-23}
+
+\p{Use the [four-cycle endpoints](fdip-0003)
+#{s(e_i)=i}, #{h(e_i)=i+1} on #{\mathbb Z/4\mathbb Z}, but now
+let #{R} be any commutative unital ring and take #{t,\mu\in R}.
+Give successive edges weights #{(1,t,1,t)}. On the finite function
+modules with their [counting pairings](fdip-001F), set
+##{Q=d^\dagger Wd+\mu I,\qquad s=1+t+\mu.}
+Here #{d} is [incidence](fdip-0007) and #{W} multiplies each edge
+field by its weight. This extends the positive-real weight choice
+in \ref{fdip-0003}; no weight is assumed positive or invertible.}
+
+\p{First compute from endpoints. The difference is
+#{(df)(e_i)=f(i+1)-f(i)}. Grouping the incoming and outgoing edge
+terms gives
+##{(d^\dagger Wdf)(i)
+ =w(e_{i-1})(f(i)-f(i-1))+w(e_i)(f(i)-f(i+1)).}
+Adding #{\mu f(i)} yields
+##{\begin{aligned}
+(Qf)(0)&=sf(0)-f(1)-tf(3),\\
+(Qf)(1)&=sf(1)-f(0)-tf(2),\\
+(Qf)(2)&=sf(2)-tf(1)-f(3),\\
+(Qf)(3)&=sf(3)-tf(0)-f(2).
+\end{aligned}}}
+
+\p{Choose the additional [partition](fdip-001I)
+#{V_0=\{0,2\}}, #{V_1=\{1,3\}}, and put
+#{X=\mathcal F_R(V_0)}, #{Y=\mathcal F_R(V_1)}.
+Restriction and extension by zero give the chosen splitting.
+The resulting [component maps](fdip-001T) are
+##{\begin{aligned}
+A&=sI_X,&C&=sI_Y,\\
+(Ex)(1)&=-x(0)-tx(2),&(Ex)(3)&=-tx(0)-x(2),\\
+(By)(0)&=-y(1)-ty(3),&(By)(2)&=-ty(1)-y(3).
+\end{aligned}}
+The pivot #{C} is invertible exactly when #{s} is a unit.
+A unit gives #{C^{-1}=s^{-1}I_Y}. Conversely, if #{CJ=I_Y},
+evaluation of #{CJ\delta_1=\delta_1} at vertex #{1} gives
+#{s(J\delta_1)(1)=1}; commutativity makes this a two-sided inverse
+of #{s}. In the zero ring #{0=1} is a unit, consistently with this
+argument.}
+
+\p{Assume this unit condition. Applying #{B} to #{Ex} gives
+##{\begin{aligned}
+(BEx)(0)&=(1+t^2)x(0)+2tx(2),\\
+(BEx)(2)&=2tx(0)+(1+t^2)x(2).
+\end{aligned}}
+Consequently the split Schur map is
+##{\begin{aligned}
+(Sx)(0)&=[s-s^{-1}(1+t^2)]x(0)-2ts^{-1}x(2),\\
+(Sx)(2)&=[s-s^{-1}(1+t^2)]x(2)-2ts^{-1}x(0).
+\end{aligned}}
+Here #{2=1+1}; neither #{2}, #{t}, #{\mu} nor #{S} is asserted to
+be invertible. In coordinates ordered #{(0,2)}, the same map is
+##{[S]=\begin{pmatrix}
+s-s^{-1}(1+t^2)&-2ts^{-1}\\
+-2ts^{-1}&s-s^{-1}(1+t^2)
+\end{pmatrix}.}
+This array presents the map just computed from endpoints.}
+
+\p{The [half-turn](fdip-0003) exchanges #{0\leftrightarrow2} and
+#{1\leftrightarrow3}. Let #{r_X,r_Y} exchange the corresponding
+field values. The component formulas give
+#{Ar_X=r_XA}, #{Cr_Y=r_YC}, #{Er_X=r_YE} and #{Br_Y=r_XB};
+hence #{Sr_X=r_XS}. A one-step shift exchanges the two parts and
+fails to preserve the alternating weights when #{t\ne1}.
+No retained partition is implicit in general incidence data.}
+
+\p{Now specialize to #{R=\mathbb R}, #{t>0}, #{\mu=m^2>0}.
+The [weighted energy identity](fdip-0008) gives, for #{f\ne0},
+##{b(f,Qf)=\sum_e w(e)(df(e))^2+m^2\sum_v f(v)^2>0.}
+Thus #{Q} is positive definite and invertible, and the
+[positive-real criterion](fdip-001Y) gives #{S>0}.
+At #{t=m=1}, #{s=3} and
+##{[S]=\frac13\begin{pmatrix}7&-2\\-2&7\end{pmatrix}.}
+To solve #{Sx=\delta_2}, solve
+#{7x(0)-2x(2)=0} and #{-2x(0)+7x(2)=3}.
+These give #{x(2)=7/15} and #{x(0)=2/15}. Therefore
+##{(\pi_XQ^{-1}\iota_X\delta_2)(0)
+ =(S^{-1}\delta_2)(0)=\frac{2}{15}.}
+By contrast, fixing the eliminated field to zero leaves the retained
+map #{A=3I_X}, and #{(A^{-1}\delta_2)(0)=0}. These are different
+map operations.}
+
+\p{At real #{\mu=0,t>0}, the pivot #{C=(1+t)I_Y} is still
+invertible. But
+#{s-s^{-1}(1+t^2)=2t/(1+t)}, so the nonzero constant retained
+field satisfies #{S1=0}. The [kernel correspondence](fdip-001W)
+then recovers the constant full field in #{\ker Q}, since
+#{-C^{-1}E1=1}.
+An invertible pivot does not imply an invertible full precision.}
+
+\p{\citet{Section 2.1, pp. 4-5}{spielman2009effective} gives the
+incidence sign convention for positive real weights. The arbitrary-ring
+identities use the direct counting construction of \ref{fdip-0007}.}
+
+\p{\citet{Appendix C.4.1, pp. 672-673}{boyd2004convex} gives the real
+elimination convention. All coefficients and inverse entries here were computed from the
+specified endpoints and weights. They recover the algebraic values
+in [real alternate-vertex elimination](fdip-000F); the covariance and
+marginal-law interpretation there additionally uses the Gaussian
+measure. No massless Gaussian formula follows by substituting
+#{\mu=0} into a massive normalization.}

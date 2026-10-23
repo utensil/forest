@@ -1,0 +1,122 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{Zero modes and the nearest-neighbor mismatch}
+\date{2026-10-17}
+
+\p{On the [periodic grid](fdip-000R), let #{e} be the number
+of even periods among #{N_1,\ldots,N_d}.
+The centered Dirac operator has exactly #{2^e} zero momentum
+blocks and
+##{\dim_{\mathbb C}\ker D=2^{d+e}.}
+This is the kernel dimension for the explicitly chosen
+reducible module #{S}, whose dimension is #{2^d}.
+The unit-weight \vocabk{graph Laplacian}{fdip-0007}
+##{L_{\mathrm{nn}}=\sum_{j=1}^d
+ (2I_H-T_j-T_j^{-1})}
+has only the zero momentum in its scalar kernel.
+Moreover #{-D^2\ne I_S\otimes L_{\mathrm{nn}}} on every
+permitted grid, including grids with all periods odd.
+These are finite consequences of the
+[Fourier blocks](fdip-000S); the centered-difference convention
+comes from \citet{Section 9.1, Equations (9.2), (9.6)-(9.7),
+pp. 19-20}{wingate2025lattice}.}
+
+\proof{
+\p{The forward-difference factorization from
+\ref{fdip-0014}, applied in each coordinate, gives
+##{L_{\mathrm{nn}}=\sum_j(T_j-I_H)^*(T_j-I_H).}
+For #{N_j\ge3}, each undirected nearest-neighbor edge occurs
+once in the corresponding squared-difference energy.
+On the character with momentum #{p}, the eigenvalue is
+##{\begin{aligned}
+\ell(p)&=\sum_j(2-2\cos p_j)\\
+       &=4\sum_j\sin^2(p_j/2).
+\end{aligned}}
+The positive Dirac square has scalar block
+#{s(p)=\sum_j\sin^2p_j}. The double-angle identity gives
+##{\ell(p)-s(p)=4\sum_j\sin^4(p_j/2).}
+Choose #{r_1=1} and the other labels zero. Since #{N_1\ge3},
+#{\sin(\pi/N_1)>0}, so the difference is strictly positive
+on that block. This proves the operator mismatch.}
+
+\p{Every summand of #{s(p)} is nonnegative. Hence #{s(p)=0}
+exactly when each #{\sin p_j=0}. In the range
+#{0\le r_j<N_j}, this means #{r_j=0}, or
+#{r_j=N_j/2} when #{N_j} is even. There are exactly
+#{2^e} choices. On each such block #{D(p)=0} on all of #{S}.
+Every other block is invertible, with two-sided inverse
+##{D(p)^{-1}=-D(p)/s(p),}
+because #{D(p)^2=-s(p)I_S}. Completeness of the Fourier
+basis therefore gives #{\dim\ker D=2^e\dim S=2^{d+e}}.
+In contrast, #{\ell(p)=0} forces #{r_j=0} for every #{j};
+thus #{\dim\ker(I_S\otimes L_{\mathrm{nn}})=2^d}.}
+}
+
+\p{For #{d=1,N=4}, the alternating scalar field
+#{a(x)=(-1)^x} has momentum #{p=\pi}. Its centered
+difference is zero, whereas #{L_{\mathrm{nn}}a=4a}.
+Consequently every field #{x\mapsto a(x)v}, #{v\in S},
+is killed by #{D}. Together with the constant fields these
+give the four-dimensional kernel. Write
+#{K_2=(2I_H-T^2-T^{-2})/4}, so #{-D^2=I_S\otimes K_2}.
+The two scalar Laplacians have the following weighted graphs:}
+
+\tikzfigs{0.75}{\begin{tikzpicture}[
+  vertex/.style={circle,draw,inner sep=2pt,minimum size=6mm},
+  every node/.style={inner sep=2pt}
+]
+\node at (0.8,1.3) {$L_{\mathrm{nn}}$};
+\node[vertex] (a0) at (0,0) {$0$};
+\node[vertex] (a1) at (1.6,0) {$1$};
+\node[vertex] (a2) at (1.6,-1.6) {$2$};
+\node[vertex] (a3) at (0,-1.6) {$3$};
+\draw (a0) -- node[above=2mm] {$1$} (a1);
+\draw (a1) -- node[right=2mm] {$1$} (a2);
+\draw (a2) -- node[below=2mm] {$1$} (a3);
+\draw (a3) -- node[left=2mm] {$1$} (a0);
+\node at (4.8,1.3) {$K_2$};
+\node[vertex] (b0) at (4,0) {$0$};
+\node[vertex] (b2) at (5.6,0) {$2$};
+\node[vertex] (b1) at (4,-1.6) {$1$};
+\node[vertex] (b3) at (5.6,-1.6) {$3$};
+\draw (b0) -- node[above=2mm] {$\tfrac12$} (b2);
+\draw (b1) -- node[below=2mm] {$\tfrac12$} (b3);
+\end{tikzpicture}}
+
+\p{Left: the four unit-weight nearest-neighbor edges.
+Right: the two-step edges, with vertices rearranged to display
+the parity classes #{\{0,2\}} and #{\{1,3\}}.
+At period four #{T^2=T^{-2}}, so
+#{K_2=(I_H-T^2)/2}: the two shift contributions of weight
+#{1/4} combine into one undirected edge of weight #{1/2}
+for each opposite pair. The alternating field is constant on
+each right-hand component, explaining its zero energy there.}
+
+\p{For #{d=1,N=3}, momentum #{p=2\pi/3} instead gives
+##{s(p)=\tfrac34,\qquad\ell(p)=3.}
+Only #{r=0} is a zero momentum, yet the operators still differ.
+Thus extra exact zero momenta occur precisely when at least
+one period is even, whereas the square mismatch always occurs.
+The excluded case #{N=2} has #{T=T^{-1}}, making its centered
+difference identically zero.}
+
+\p{The finite kernel dimension above is not a physical species
+or chirality count. Friedan's Nielsen-Ninomiya theorem concerns
+free fermions on the infinite lattice #{\mathbb Z^d} for odd
+#{d}, with continuous torus momenta. Its Hamiltonian is
+quadratic, phase invariant, translation invariant and local,
+with a Hermitian momentum symbol. The locality discussion
+reduces the Hamiltonian requirement to continuity; the
+internal-charge projections must be smooth. The zero set is
+finite and isolated, with specified relativistic
+Clifford-linear behavior near each zero. Under these hypotheses
+the total chiral index vanishes separately for each charge
+\citet{Sections 1-2, pp. 481-484; Equations (6), (10)-(11)}{friedan1982nielsen}.
+A finite sampled grid in arbitrary dimension with the chosen
+reducible module computes a different quantity. The odd-period
+example neither contradicts that theorem nor establishes a
+continuum limit. No Lorentzian model or factorization of the
+earlier weighted precision is supplied by this centered
+operator.}

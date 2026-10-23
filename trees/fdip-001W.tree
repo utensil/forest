@@ -1,0 +1,57 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{Eliminating equations and identifying kernels}
+\date{2026-10-23}
+
+\p{Let #{R} be a commutative unital ring and choose
+#{M=X\oplus Y} with [components](fdip-001T)
+#{Q(x,y)=(Ax+By,Ex+Cy)}. Assume #{C:Y\to Y} is an isomorphism
+and set #{S=A-BC^{-1}E}. For every #{u\in X,v\in Y},
+##{Q(x,y)=(u,v)}
+is equivalent to the two equations
+##{y=C^{-1}(v-Ex),\qquad Sx=u-BC^{-1}v.}
+No invertibility of #{S} is required. In particular, the maps
+##{\begin{aligned}
+J_S:\ker S&\longrightarrow\ker Q,&
+ x&\longmapsto(x,-C^{-1}Ex),\\
+\pi_X:\ker Q&\longrightarrow\ker S,&
+ (x,y)&\longmapsto x
+\end{aligned}}
+are inverse #{R}-linear maps. Here each kernel is the submodule of
+elements sent to zero.}
+
+\proof{
+\p{The second component of #{Q(x,y)=(u,v)} is #{Ex+Cy=v};
+since #{C} is invertible, it is equivalent to
+#{y=C^{-1}(v-Ex)}. Substitution in #{Ax+By=u} gives
+##{Ax+BC^{-1}(v-Ex)=Sx+BC^{-1}v=u.}
+Reversing these steps proves the full equivalence.}
+
+\p{For any #{x\in X}, direct substitution gives
+##{Q(x,-C^{-1}Ex)=(Sx,0).}
+Thus #{J_S} sends #{\ker S} into #{\ker Q}. If #{Q(x,y)=0}, the
+proved equivalence gives #{Sx=0} and #{y=-C^{-1}Ex}. Therefore
+#{\pi_XJ_Sx=x} and #{J_S\pi_X(x,y)=(x,y)} on the stated kernels.
+Both maps are restrictions of linear maps, so this is a module
+isomorphism, not merely a bijection of sets.}
+}
+
+\p{\citet{Appendix C.4.1, pp. 672-673}{boyd2004convex} gives real
+linear-system elimination. The direct argument above extends it to
+modules. After exchanging the source variables to
+#{(y,x)} and the right side to #{(v,u)}, its first-pivot equations
+become the displayed formulas. The kernel correspondence does not
+assume that the whole system is invertible.}
+
+\p{The pivot hypothesis cannot be deduced from invertibility of #{Q}.
+Over a nonzero ring take #{X=Y=R} and #{Q(x,y)=(y,x)}.
+Then #{Q^2=I}, but its component #{C=0:R\to R} is not an
+isomorphism. These formulas cannot invert that prescribed pivot.}
+
+\p{Zero summands cause no exception. If #{Y=0}, its unique
+endomorphism is its identity and is invertible; then #{S=A} and
+elimination changes nothing. If #{X=0}, #{S} is the unique invertible
+endomorphism of zero and #{Q=C}. Over the zero ring every unital
+module is zero, because #{x=1x=0x=0}; all statements remain valid.}

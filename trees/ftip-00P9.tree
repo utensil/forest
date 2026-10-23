@@ -1,0 +1,96 @@
+\import{ftip-macros}
+\meta{agent-authored}{true}
+\taxon{Definition}
+\title{Receipt metrics and paired contrasts}
+\tag{ftip}
+\tag{evaluation}
+
+\p{The source compares retained-horizon choices under declared task and
+evaluation boundaries \citet{Sections 6-7; Tables 4-5, 10}{dang2026selecting}.
+Fix an arm #{a\in\mathfrak A} from \ref{ftip-00P8} and a positive run count
+#{N_a}. Each receipt #{R_{a,i}} exposes a finite event sequence
+#{(e^{\rm term},e^{\rm ev},e^{\rm pass},e^{\rm fail},e^{\rm rec},
+n^{\rm prod})_{t=0}^{H_a}},
+a task label #{q_{a,i}}, a strategy label #{s_{a,i}}, a measurable task-value
+score #{u_{a,i}(t)}, a declared saturation threshold #{u_a^{\rm sat}}, and a
+typed held-out outcome #{Y_{a,i}\in\mathcal Y_a\cup\{\bot\}}, final verifier
+outcome #{v_{a,i}}, and complete-admission indicator #{A_{a,i}}. Define
+#{A_{a,i}:=\mathbf 1[q_{a,i}\in Q_{\rm hold,a}\land v_{a,i}=1
+\land Y_{a,i}\in\mathcal Y_a]}; when #{A_{a,i}=0}, set #{Y_{a,i}:=\bot}.
+The receipt contract emits a terminal
+event by #{H_a}; an execution that would not terminate naturally receives a
+timeout terminal event at #{H_a} and #{A_{a,i}=0}. Put
+#{\overline{\mathbb N}:=\mathbb N\cup\{+\infty\}} and
+#{\inf\varnothing:=+\infty}.}
+
+##{
+\tau^{\rm end}_{a,i}:=\inf\{t:e^{\rm term}_{a,i}(t)=1\},\quad
+\tau^{\rm ev}_{a,i}:=\inf\{t:e^{\rm ev}_{a,i}(t)=1\},\quad
+\tau^{\rm pass}_{a,i}:=\inf\{t:e^{\rm pass}_{a,i}(t)=1\},
+}
+##{
+\tau^{\rm fail}_{a,i}:=\inf\{t:e^{\rm fail}_{a,i}(t)=1\},\quad
+\tau^{\rm rec}_{a,i}:=\inf\{t:e^{\rm rec}_{a,i}(t)=1\},\quad
+\tau^{\rm sat}_{a,i}:=\inf\{t:u_{a,i}(t)\geq u_a^{\rm sat}\}.
+}
+
+\p{Define the receipt predicates}
+##{
+\begin{aligned}
+I^{\rm pre}_{a,i}&:=\mathbf 1[\tau^{\rm end}_{a,i}<\tau^{\rm ev}_{a,i}],\\
+I^{\rm rec}_{a,i}&:=\mathbf 1[\tau^{\rm fail}_{a,i}<\tau^{\rm rec}_{a,i}<\tau^{\rm end}_{a,i}],\\
+I^{\rm prod}_{a,i}&:=\mathbf 1[\tau^{\rm ev}_{a,i}<\tau^{\rm end}_{a,i}
+\land\tau^{\rm pass}_{a,i}<\tau^{\rm end}_{a,i}
+\land(\tau^{\rm fail}_{a,i}\geq\tau^{\rm end}_{a,i}
+\lor I^{\rm rec}_{a,i}=1)],\\
+I^{\rm over}_{a,i}&:=\mathbf 1[\tau^{\rm sat}_{a,i}<\tau^{\rm end}_{a,i}
+\land\sum_{t=\tau^{\rm sat}_{a,i}}^{\tau^{\rm end}_{a,i}-1}
+ n^{\rm prod}_{a,i}(t)=0].
+\end{aligned}
+}
+\p{Here #{n^{\rm prod}_{a,i}(t)} is a declared productive-novelty indicator
+in the receipt, and #{I^{\rm rec}} is zero when no failure precedes recovery.
+The five run rates are functions of the receipts, with the declared
+denominator #{N_a}:}
+##{
+(\widehat p_a^{\rm pre},\widehat p_a^{\rm prod},\widehat p_a^{\rm over},
+\widehat p_a^{\rm rec},\widehat p_a^{\rm pass})
+:=\frac1{N_a}\sum_{i=1}^{N_a}
+(I^{\rm pre}_{a,i},I^{\rm prod}_{a,i},I^{\rm over}_{a,i},
+ I^{\rm rec}_{a,i},\mathbf 1[\tau^{\rm pass}_{a,i}<\tau^{\rm end}_{a,i}]).
+}
+
+\p{For the finite held-out set, task and strategy coverage are}
+##{
+\widehat C^{\rm task}_a:=
+\frac{|\{q\in Q_{\rm hold,a}:\exists i,\ q_{a,i}=q,\ A_{a,i}=1\}|}
+{|Q_{\rm hold,a}|},\qquad
+\widehat C^{\rm strat}_a:=
+\frac{|\{s\in\mathfrak S_a:\exists i,\ s_{a,i}=s,\ A_{a,i}=1\}|}
+{|\mathfrak S_a|},
+}
+\p{where #{\mathfrak S_a} is a declared nonempty strategy-label set. Every
+receipt reports both positive denominators and the admission rule.}
+
+\p{For two paired arms #{a} and #{a'} that differ in one declared factor,
+let #{N:=\min(N_a,N_{a'})}. Define the common admitted index set
+#{J_{a,a'}:=\{i\leq N:A_{a,i}=A_{a',i}=1\}} and
+#{N_{\rm pair}:=|J_{a,a'}|}. For #{i\in J_{a,a'}}, let #{Y_{a,i}} and
+#{Y_{a',i}} be their admitted held-out outcomes under the shared pairing
+law #{\Lambda_{a,a'}}, so #{q_{a,i}=q_{a',i}}. Compare their declared
+scalarizations #{g_a(Y_{a,i})} and #{g_{a'}(Y_{a',i})}. When
+#{N_{\rm pair}\geq2}, the primary finite contrast and
+its paired sample variance are}
+##{
+\widehat\Delta_{a,a'}:=
+\frac1{N_{\rm pair}}\sum_{i\in J_{a,a'}}
+\bigl(g_a(Y_{a,i})-g_{a'}(Y_{a',i})\bigr),\qquad
+\widehat V_{a,a'}:=
+\frac1{N_{\rm pair}-1}\sum_{i\in J_{a,a'}}
+\bigl((g_a(Y_{a,i})-g_{a'}(Y_{a',i}))-\widehat\Delta_{a,a'}\bigr)^2.
+}
+\p{When #{N_{\rm pair}=1}, report the single paired contrast but set
+#{\widehat V_{a,a'}:=\bot}; when #{N_{\rm pair}=0}, the paired contrast is
+undefined and the missingness is reported. These are finite estimators under
+the declared arm, split, admission rule, and coupling; they are not a
+universal selector law.}

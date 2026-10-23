@@ -1,0 +1,59 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{Positive definiteness under elimination}
+\date{2026-10-23}
+
+\p{Let #{X,Y} be finite-dimensional real vector spaces with positive
+definite inner products #{b_X,b_Y}. Give #{M=X\oplus Y} their
+[orthogonal sum](fdip-001X), and let #{Q:M\to M} be
+self-adjoint, with [components](fdip-001T) #{A,B,E,C}.
+For a self-adjoint map #{T} on any of these spaces, write #{T>0}
+when #{b(z,Tz)>0} for every nonzero #{z}.}
+
+\p{If #{Q>0}, then #{C} is positive definite and invertible, and
+#{S=A-BC^{-1}E} is positive definite and invertible.
+Conversely, if #{C} is invertible, then
+##{Q>0\quad\Longleftrightarrow\quad C>0\ \text{and}\ S>0.}
+}
+
+\p{\citet{Appendix A.5.5, p. 650}{boyd2004convex} gives the
+positive-definite Schur criterion. Here the eliminated summand is
+placed second.}
+
+\proof{
+\p{The currying map of each inner product is injective. Indeed, if
+#{b(z,u)=0} for every #{z}, take #{z=u}; positive definiteness gives
+#{u=0}.
+Finite dimension makes this map onto the dual, which has the same
+dimension. Thus these forms are chosen perfect pairings, and the
+[paired-congruence identity](fdip-001X) applies whenever
+#{C} is invertible.}
+
+\p{Assume #{Q>0}. For #{y\ne0}, #{\iota_Yy\ne0} and
+##{b_Y(y,Cy)=b_M(\iota_Yy,Q\iota_Yy)>0.}
+Hence #{C>0}. If #{Cy=0}, positivity forces #{y=0}; finite dimension
+then turns injectivity into surjectivity, so #{C} is invertible.
+For #{x\ne0}, the vector #{(x,-C^{-1}Ex)} is nonzero and congruence
+gives
+##{b_X(x,Sx)
+ =b_M((x,-C^{-1}Ex),Q(x,-C^{-1}Ex))>0.}
+Thus #{S>0}, and the same injectivity and finite-dimension argument
+makes #{S} invertible.}
+
+\p{Conversely, suppose #{C>0} and #{S>0}. For any nonzero
+#{z=(x,y)}, the invertible map #{V(x,y)=(x,y+C^{-1}Ex)} has
+#{Vz\ne0}. At least one of its two components is nonzero.
+The corresponding term of
+##{b_M(z,Qz)=b_X(x,Sx)+b_Y(y+C^{-1}Ex,C(y+C^{-1}Ex))}
+is strictly positive, and the other is nonnegative. Hence #{Q>0}.
+If a summand is zero, its positivity assertion is vacuous and its
+unique endomorphism is invertible, so the same argument includes it.}
+}
+
+\p{This uses finite-dimensional real positivity in addition to the
+ring-level factorization. It explains the positivity assumption in
+[real effective precision](fdip-000D). It does not evaluate an integral
+or determine a normalization factor; those require the separately
+specified real measure and Gaussian law.}

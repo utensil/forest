@@ -1,0 +1,34 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Example}
+\title{Edge energy and the positive action}
+\date{2026-10-20}
+
+\p{For the real [alternating four-cycle](fdip-0003), take #{t,m>0}
+and let #{L_t} be the [weighted Laplacian](fdip-0008). Its
+\vocabk{positive precision parameter}{fdip-0004} is exactly
+##{Q_{t,m}=L_t+m^2I.}
+Indeed, the displayed array of #{L_t} has diagonal #{1+t} and the
+same off-diagonal entries as the action's precision. Adding #{m^2I}
+changes that diagonal to #{1+t+m^2}, giving the displayed
+#{Q_{t,m}} in \ref{fdip-0004}.}
+
+\p{For #{f=(a,b,c,d)}, the \vocabk{Euclidean quadratic action}{fdip-0004}
+is therefore
+##{\begin{aligned}
+S_{t,m}(f)
+ &=\frac12\langle f,L_tf\rangle_V
+      +\frac{m^2}{2}\langle f,f\rangle_V\\
+ &=\frac12\bigl((b-a)^2+t(c-b)^2\\
+ &\qquad\quad +(d-c)^2+t(a-d)^2\bigr)\\
+ &\qquad+\frac{m^2}{2}(a^2+b^2+c^2+d^2).
+\end{aligned}}
+This is the same squared-difference formula as in \ref{fdip-0004}:
+half of the edge-once energy plus the mass term. The first summand is
+nonnegative, and the mass summand is positive for #{f\ne0}. This
+calculation compares the graph convention of
+\citet{Section 2.1, pp. 4-5}{spielman2009effective}
+with the positive kinetic sign and half-action convention of
+\citet{Section 4, Equation (4.5), p. 3}{wingate2025lattice};
+the finite four-cycle equality follows by the substitutions above.}

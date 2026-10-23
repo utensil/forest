@@ -1,0 +1,54 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{Triangular factorization of a split map}
+\date{2026-10-23}
+
+\p{Let #{R} be a commutative unital ring and
+#{M=X\oplus Y} a \vocabk{chosen binary splitting}{fdip-001T}
+of unital #{R}-modules. Let #{Q(x,y)=(Ax+By,Ex+Cy)} have the
+[typed components](fdip-001T) of this splitting, and assume
+#{C:Y\to Y} is an isomorphism. Set
+##{K=C^{-1}E:X\to Y,\qquad S=A-BC^{-1}E:X\to X.}
+Define three endomorphisms of #{M} by
+##{\begin{aligned}
+U(x,y)&=(x+BC^{-1}y,y),\\
+D(x,y)&=(Sx,Cy),\\
+V(x,y)&=(x,y+Kx).
+\end{aligned}}
+Then #{U,V} are isomorphisms and, with right-factor-first composition,
+##{Q=UDV.}}
+
+\proof{
+\p{The displayed maps are linear since every component is linear.
+Direct substitution on both sides verifies the inverses
+##{U^{-1}(x,y)=(x-BC^{-1}y,y),\qquad
+   V^{-1}(x,y)=(x,y-Kx).}
+These inverses require no inverse of #{S}. Applying the three factors
+in order gives
+##{\begin{aligned}
+DV(x,y)&=(Sx,Ex+Cy),\\
+UDV(x,y)&=(Sx+BC^{-1}(Ex+Cy),Ex+Cy)\\
+        &=(Ax+By,Ex+Cy)=Q(x,y),
+\end{aligned}}
+where #{S+BC^{-1}E=A} and #{C^{-1}C=I_Y} give the last equality.}
+}
+
+\p{\citet{Appendix C.4.1, pp. 672-673}{boyd2004convex} gives real
+block-system elimination. The proof above extends it directly to
+modules. The source uses first-pivot order;
+[swapping to the eliminated summand](fdip-001T) gives the
+convention here. No finite rank, projectivity or determinant is used.}
+
+\p{Mathlib's \leanref{CategoryTheory.Biprod.gaussian'}
+supports elimination in a preadditive category with binary biproducts
+and an invertible first component. In the order #{(Y,X)}, use
+#{(C,B,E,A)} as its component arguments. Its notation #{f\gg g}
+applies #{f} first, so its residual is #{A-BC^{-1}E}.
+For finite coordinate index types,
+\leanref{Matrix.fromBlocks_eq_of_invertible₂₂} gives the corresponding
+matrix factorization over a commutative ring; its four arguments become
+#{(A,B,E,C)}. These support the factorization, while the subsequent
+[inverse](fdip-001V) and [kernel](fdip-001W)
+statements have their own proofs.}

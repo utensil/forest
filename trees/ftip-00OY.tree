@@ -1,0 +1,161 @@
+\import{ftip-macros}
+\meta{agent-authored}{true}
+
+\title{Typed harness adaptation and total lifecycle accounting}
+\tag{ftip}
+\tag{harness}
+\tag{state}
+\tag{evaluation}
+
+\p{A harness adaptation claim must keep the executable solver, the proposer
+that edits its harness, the retained harness state \ref{ftip-00C8}, and the
+evaluator \ref{ftip-001T} as
+different objects. A change in one object is not evidence that the others
+changed. The [stateful-search convention](ftip-00OW) already records durable
+research state and replay; the comparison therefore fixes an adaptation and
+accounting boundary for interpreting evidence.}
+
+\p{\strong{Typed roles and declared endowment.} Let #{M} be a fixed solver
+artifact, #{\theta} the parameters of a proposer, #{h_t\in\mathcal H} the
+versioned harness state after inner round #{t}, and #{q\in\mathcal Q} a task.
+The proposer is a revision policy}
+##{
+\pi_\theta:\mathcal Q\times\mathcal H\times\mathcal R
+\longrightarrow \mathsf{Dist}(\mathcal Y),
+}
+\p{where #{\mathcal R} is a typed execution-report space and #{\mathcal Y}
+contains candidate edits. Applying an edit to a parent state produces a
+candidate #{\widetilde h_t}; a validation and selection rule either commits
+#{h_t=\widetilde h_t} or retains #{h_t=h_{t-1}}. The solver #{M} and final
+proposer parameters #{\theta_*} are fixed during this inner loop.}
+
+\p{For the declared outer training, define}
+##{
+O_{\rm outer}=(\theta_0,\ldots,\theta_K,D_{\rm train},\xi_{<K},
+L_{\rm outer},C_{\rm outer}),
+}
+\p{The final proposer is #{\theta_*:=\theta_K}, and #{L_{\rm outer}} records
+prompts, generated and failed revisions, and teacher filtering. The declared
+endowment for an inner-loop comparison is}
+##{
+E_0=(M,\theta_*,h_0,\kappa_0,\mathcal Q_0,\mathcal P_0,\rho_0,O_{\rm outer}),
+}
+\p{where #{\kappa_0} contains implementation and harness versions,
+#{\mathcal Q_0} the task and split laws, #{\mathcal P_0} permissions and
+available tools, and #{\rho_0} seed, API, tokenizer, and evaluator state.
+Existing solver code, seed harnesses, accessible examples, and checker
+interfaces are part of #{E_0}; if an arm constructs any of them, that
+preparation is a charged outer operation recorded in #{C_{\rm outer}}. An
+adaptation result is therefore conditional on the same declared endowment,
+including its outer-training trace, event reports, and cost, even when the
+retained state is later changed.}
+
+\p{\strong{Outer training and inner adaptation.} Outer training updates only
+the proposer, for example}
+##{
+\theta_{k+1}=U(\theta_k;D_{\rm train},\xi_k),
+}
+\p{using proposer or teacher data and execution feedback. Its outer-training
+trace is included in #{E_0}; at test time the inner loop starts from the
+declared seed #{h_0}. For a finite nonempty
+candidate index set #{J_t}, it repeatedly records}
+##{
+R_t=\operatorname{report}(M,h_{t-1},q_{\rm fb,t},\xi_t),\qquad
+\{y_{t,j}\}_{j\in J_t}\sim\pi_{\theta_*}^{\otimes J_t}(q,h_{t-1},R_t),\qquad
+h_t=\operatorname{select}\bigl(h_{t-1},
+\{\operatorname{apply}(h_{t-1},y_{t,j})\}_{j\in J_t};q_{\rm score,t}\bigr).
+}
+\p{An outer teacher, when used for supervised initialization, is a separate
+role from the proposer and solver. Its prompts, generated revisions, failed
+revisions, and filtering work remain in #{L_{\rm outer}}. Neither an outer
+weight update nor an inner harness edit may be described as a model-weight
+capability change.}
+
+\p{\strong{Leakage controls.} A reported comparison declares pairwise-disjoint
+sets #{Q_{\rm train}}, #{Q_{\rm fb}}, #{Q_{\rm score}}, #{Q_{\rm dev}}, and
+#{Q_{\rm eval}} (or records the exact exception). Feedback and score questions
+may select or reject a candidate during adaptation; development questions may
+select a frozen proposer or protocol. Final evaluation questions are revealed
+only after the adapted state and its configuration are frozen, and their
+outcomes cannot revise that state in the same run. The task family, solver,
+proposer, seed harness, checker, and split law are reported with every score.}
+
+\p{\strong{Provenance and rollback.} Each committed state carries a record}
+##{
+V_t=(\operatorname{digest}(E_0,M,\theta_*,h_t,\kappa_t),
+E_0,
+L_t,\{y_i,R_i,d_i\}_{i<t},C_{\leq t}),
+}
+\p{where the digest also covers the declared endowment #{E_0}, including its
+task and split laws, permissions, tools, and seed and evaluator state. #{L_t}
+is the event prefix, #{d_i} records validation and commit
+decisions, and #{C_{\leq t}} is the cumulative cost record. A rejected edit
+leaves the parent state in place but remains in the event log. A proposed
+rollback, as specified in \ref{ftip-00D7}, to #{V_j} restores the complete named snapshot and its configuration;
+it cannot erase the proposal, execution, storage, or evaluator costs already
+incurred. Rollback is an FTIP protocol proposal, not a result established by
+the source papers.}
+
+\p{\strong{Total accounting.} Refine the lifecycle vector
+#{C(P)=(C_{\rm data},C_{\rm feedback},C_{\rm rollout},C_{\rm env},
+C_{\rm update},C_{\rm storage},C_{\rm eval})} from
+\ref{ftip-005H} by recording a role-indexed vector for}
+##{
+\mathbf C_{\rm total}
+=\sum_{r\in\{\rm teacher,prop_{outer},prop_{inner},solver,tool,evaluator\}}
+\mathbf C^{r}.
+}
+\p{Every component keeps its declared unit. The account includes initial
+endowment preparation when it is arm-specific, proposer and teacher calls,
+solver and tool executions, evaluator calls, context and artifact storage,
+retries, invalid edits, rejected candidates, failed experiments, and any
+development work. Cached and uncached tokens, wall time, FLOPs, bytes, and
+calls are not silently converted into one scalar. A price or scalar utility
+may be reported only after this typed vector and the split of each role are
+available.}
+
+\p{\strong{Finite typed example.} Fix #{M}, #{\theta_*}, and #{h_0} in the
+endowment. In round one, the proposer emits an invalid edit #{y_1^a} and a
+valid edit #{y_1^b}; the first execution and rejection are charged, while
+selection commits #{h_1=\operatorname{apply}(h_0,y_1^b)}. In round two, noisy
+feedback produces #{y_2}; an adversarial score check rejects it, so
+#{h_2=h_1}. A later audit may restore #{V_1}, but the costs of #{y_1^a},
+#{y_1^b}, #{y_2}, their executions, and the checks remain in
+#{\mathbf C_{\rm total}}. Evaluating #{h_1} on fresh #{Q_{\rm eval}} tests the
+frozen state; it does not prove that the proposer learned a general solver.}
+
+\p{\strong{Source observations.} Harness Learning defines a harness as the
+executable program that organizes solver calls, tools, and information flow,
+trains a proposer in an outer loop, and uses execution feedback to revise a
+fixed solver harness in an inner loop. Its test-time proposer and solver stay
+fixed while the harness changes; the paper reports Reasoning Gym and
+multi-hop question-answering experiments, including held-out and unseen-task
+comparisons (\citet{Sections 3-4.3 and 5-6}{zhang2026harnesslearning}).}
+
+\p{ReHarness reports a different intervention: under a strictly online stream,
+forward read and write are coupled with backward revision of reflections using
+the current trajectory. Its three continual-learning benchmarks and three
+backbones report source-grounded revisions and failures under distribution
+shift, but the result remains a benchmarked online protocol
+(\citet{Sections 3-5}{xiao2026reharness}). Stateless Language Agents likewise
+place durable research state in the harness and reconstruct role-specific
+contexts for stateless calls; their protected evaluation and token records
+motivate the provenance fields, while their mostly single-run settings and
+omitted experiment/evaluation compute limit the cost conclusion
+(\citet{Sections 3-5, Appendix B.1, and limitations}{zhang2026statelessagents}).}
+
+\p{\strong{FTIP deduction and boundary.} These observations support separating
+outer training, inner adaptation, state provenance, feedback, and lifecycle
+costs. The conceptual-discovery boundary in \ref{ftip-00MH} remains separate:
+these results do not establish a universal self-improvement law, transfer to
+frontier reasoning, or a monotone relation between more revisions and
+capability. The source results are finite empirical observations; the typed
+state record, leakage controls, complete cost decomposition, and rollback
+test are FTIP protocol proposals. The checked Forest, formal-math,
+TauCetiReview, and TauCetiWorker sources contain no declaration corresponding
+to these empirical harness mechanisms or their total-cost record; existing
+Forest state, replay, version, and lifecycle conventions are reused without
+adding a formalization claim.}
+
+\transclude{ftip-00P0}
+\transclude{ftip-00P4}

@@ -5,16 +5,15 @@
 \title{Finite incidence data and real fields}
 \date{2026-10-16}
 
-\p{A \newvocab{finite incidence presentation} consists of
-\vocabk{finite sets}{ftip-000A} #{V} of vertices and #{E} of edges,
-with source and head maps #{s,h:E\to V}. Vertices and edges are distinct
-types of objects. An edge #{e} runs from #{s(e)} to #{h(e)}; loops
-#{s(e)=h(e)} and distinct edges with the same endpoints are allowed.}
+\p{Specialize the [ring-valued incidence fields](fdip-0010) to
+#{R=\mathbb R}. The finite sets #{V,E} and endpoint maps #{s,h:E\to V}
+form a \newvocab{finite incidence presentation}; its real specialization
+adds the scalar order needed for positive pairings and weights.
+A \newvocab{real vertex field} is a function #{f:V\to\mathbb R}.
+Write #{\mathbb R^V=\mathcal F_{\mathbb R}(V)} and
+#{\mathbb R^E=\mathcal F_{\mathbb R}(E)} for the vertex and edge spaces.}
 
-\p{A \newvocab{real vertex field} is a function #{f:V\to\mathbb R}.
-Write #{\mathbb R^V} for the vector space of these functions, with pointwise
-operations, and similarly #{\mathbb R^E} for edge functions. Their
-\newvocab{counting inner products} are
+\p{Their \newvocab{counting inner products} are
 ##{\langle f,g\rangle_V=\sum_{v\in V}f(v)g(v),\qquad
    \langle a,b\rangle_E=\sum_{e\in E}a(e)b(e).}
 These finite sums are bilinear and symmetric. A sum of squares vanishes
@@ -22,33 +21,21 @@ exactly when all its entries vanish, so they are positive definite,
 including on the zero space when an indexing set is empty. The real field
 values remain continuous even though the carrier is finite.}
 
-\p{The \newvocab{incidence map} is the linear map
-##{D:\mathbb R^V\longrightarrow\mathbb R^E,\qquad
+\p{The real \newvocab{incidence map} is the specialization
+##{D=d_{\mathbb R}:\mathbb R^V\longrightarrow\mathbb R^E,\qquad
    (Df)(e)=f(h(e))-f(s(e)).}
-Linearity follows by substituting a linear combination of fields. In the
-delta-function bases, where #{\delta_v(u)} is one for #{u=v} and zero
-otherwise, its \newvocab{incidence matrix} has entries
-##{B_{ev}=(D\delta_v)(e)
-   =\mathbf 1_{v=h(e)}-\mathbf 1_{v=s(e)}.}
-Thus #{(Bf)_e=\sum_v B_{ev}f(v)=f(h(e))-f(s(e))}.
-Rows are indexed by edges and columns by vertices. A loop has a zero row;
-reversing an edge exchanges its endpoints and negates its row.}
-
-\p{For an oriented loopless graph this is the sign convention of
-Spielman and Srivastava \citet{Section 2.1, p. 4}{spielman2009effective}.
-The indicator difference explicitly extends it to loops. Their connected,
-positively weighted graph assumptions are not needed to define #{D}.}
+Its linearity follows from \ref{fdip-0010}. Loops have zero
+incidence, and parallel edges remain distinct. For an oriented loopless
+graph this is the sign convention of
+\citet{Section 2.1, p. 4}{spielman2009effective}; the endpoint formula
+extends it to loops. Connectedness and positive weights are not needed
+to define #{D}.}
 
 \p{A positive edge-weight function #{w:E\to\mathbb R_{>0}} is additional
-data, represented in the edge basis by #{W=\operatorname{diag}(w(e))}.
-The incidence presentation, the linear map #{D}, and its matrix #{B}
-should be distinguished. If permutation matrices #{P_V,P_E} reorder
-vertex and edge coordinates, then
-##{f'=P_Vf,\qquad (Df)'=P_EDf,\qquad
-   B'=P_EBP_V^{-1}.}
-The last equality follows from #{B'f'=P_EBf} for every #{f}.
-Changing coordinates represents the same map; choosing different weights
-changes the supplied data.}
+data. It acts on edge fields by #{(Wa)(e)=w(e)a(e)}. Different weights
+change the supplied data; no retained subset is part of this definition.
+The [four-cycle example](fdip-0003) recovers coordinate arrays from
+these maps and specifies a retained subset separately.}
 
 \p{For the counting inner product, Mathlib's
 \leanref{EuclideanSpace} is the corresponding finite function space and

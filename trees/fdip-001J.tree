@@ -1,0 +1,32 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Definition}
+\title{Internal parity grading}
+\date{2026-10-20}
+
+\p{Let #{R} be a commutative unital ring and #{A} an associative
+unital \vocabk{#{R}-algebra}{ca-0016}. An
+\newvocab{internal parity grading} consists of
+#{R}-\vocabk{submodules}{ca-0011} #{A_0,A_1\subseteq A}, with
+operations inherited from #{A}, such that every #{a\in A} has a unique
+decomposition #{a=a_0+a_1}, with #{a_i\in A_i}, and
+##{1\in A_0,\qquad A_iA_j\subseteq A_{i+j}.}
+Subscripts are added in #{\mathbb Z/2\mathbb Z}.
+An element of #{A_i} is \newvocab{homogeneous of parity #{i}};
+parity #{0} is even and parity #{1} is odd. The zero element lies
+in both submodules. Scalars #{r1} belong to #{A_0}.}
+
+\p{The multiplication condition controls the component of a product;
+it does not require
+#{ab=(-1)^{ij}ba} for #{a\in A_i}, #{b\in A_j}. Nor does it require an
+odd element to square to zero. Those are additional equations,
+tested explicitly by the [four-cycle](fdip-001M).}
+
+\p{The internal-submodule viewpoint and multiplication rule follow
+\citet{Section 1, accepted-manuscript pp. 1-2}{wieser2022graded},
+here specialized to the index group #{\mathbb Z/2\mathbb Z}.
+Mathlib's \leanref{GradedRing} and \leanref{GradedAlgebra} encode
+graded multiplication and compatible scalar data. The chosen
+operator decomposition still needs the proof in
+\ref{fdip-001K}.}

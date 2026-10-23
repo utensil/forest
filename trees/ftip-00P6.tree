@@ -1,0 +1,48 @@
+\import{ftip-macros}
+\meta{agent-authored}{true}
+\taxon{Definition}
+\title{Persistence classes of a retained trace}
+\tag{ftip}
+\tag{evaluation}
+
+\p{Fix a trace record #{T} from \ref{ftip-00P5} and a declared receipt
+interface with event indicators #{e_{\rm term}(t)}, #{e_{\rm ev}(t)},
+#{e_{\rm pass}(t)},
+#{e_{\rm fail}(t)}, #{e_{\rm rec}(t)} and a productive-novelty indicator
+#{n_{\rm prod}(t)} for #{0\leq t\leq H}. Let #{u(t)} be the declared task-value
+score and #{u^{\rm sat}} its saturation threshold. The source's reported
+horizon tradeoff and selective refinement
+\citet{Sections 5.2 and 6-7; Tables 4-5, 10}{dang2026selecting} motivate
+these observable classes, which are an FTIP proposal. Write}
+##{
+\tau_{\rm end}:=\inf\{t:e_{\rm term}(t)=1\},\quad
+\tau_{\rm ev}:=\inf\{t:e_{\rm ev}(t)=1\},\quad
+\tau_{\rm pass}:=\inf\{t:e_{\rm pass}(t)=1\},
+}
+##{
+\tau_{\rm fail}:=\inf\{t:e_{\rm fail}(t)=1\},\quad
+\tau_{\rm rec}:=\inf\{t:e_{\rm rec}(t)=1\},\quad
+\tau_{\rm sat}:=\inf\{t:u(t)\geq u^{\rm sat}\},
+}
+\p{with #{\inf\varnothing:=+\infty}. The receipt declares all indicators and
+the score as functions of the same run, so the following classes are
+replayable predicates rather than impressions about an agent's inner state.}
+##{
+\operatorname{Prem}(T):=\mathbf 1[\tau_{\rm end}<\tau_{\rm ev}\lor
+(\tau_{\rm fail}<\tau_{\rm end}\land\tau_{\rm rec}\geq\tau_{\rm end})],
+}
+##{
+\operatorname{Prod}(T):=\mathbf 1[\tau_{\rm ev}<\tau_{\rm end}\land
+\tau_{\rm pass}<\tau_{\rm end}\land
+(\tau_{\rm fail}\geq\tau_{\rm end}\lor
+\tau_{\rm fail}<\tau_{\rm rec}<\tau_{\rm end})],
+}
+##{
+\operatorname{Over}(T):=\mathbf 1[\tau_{\rm sat}<\tau_{\rm end}\land
+\sum_{t=\tau_{\rm sat}}^{\tau_{\rm end}-1}n_{\rm prod}(t)=0].
+}
+\p{A productive trace reaches evidence and a final verifier pass, and any
+failure before termination is followed by recovery. An over-persistent trace
+continues after saturation without another declared productive event. The
+experiment may refine #{n_{\rm prod}} for a task family, but it must declare
+that predicate before comparing selectors.}

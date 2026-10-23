@@ -1,0 +1,38 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Lemma}
+\title{Shift and multiplication operators}
+\date{2026-10-20}
+
+
+\p{Let #{R} be a commutative unital ring and #{n\ge1} an integer.
+On #{\mathcal F_R(\mathbb Z/n\mathbb Z)}, let
+#{T} and #{\Delta=T-I} be the
+\vocabk{cyclic shift and forward difference}{fdip-0009}, and let
+#{M_f} be the \vocabk{multiplication operator}{fdip-0011}
+of a field #{f\in\mathcal F_R(\mathbb Z/n\mathbb Z)}.
+As actual endomorphisms of this one module,
+##{TM_f=M_{Tf}T,\qquad
+   \Delta M_f=M_{\Delta f}T+M_f\Delta.}}
+
+\proof{
+\p{For each field #{g} and each residue class #{i},
+##{(TM_fg)(i)=f(i+1)g(i+1)=(M_{Tf}Tg)(i).}
+This proves the first equality. Since #{M_{\Delta f}=M_{Tf}-M_f},
+##{\begin{aligned}
+M_{\Delta f}T+M_f\Delta
+  &=(M_{Tf}-M_f)T+M_f(T-I)\\
+  &=M_{Tf}T-M_f\\
+  &=TM_f-M_f=\Delta M_f.
+\end{aligned}}
+For #{n=1}, #{T=I} and #{\Delta=0}, so the same identities hold.}
+}
+
+\p{The operator product is fixed in \ref{fdip-0011}.
+For the difference convention, see
+\citet{Section 4, Equations (4.2)-(4.3), p. 3}{wingate2025lattice}.
+The proof concerns these represented maps; it asserts no universal
+presentation for formal generators. On the
+[four-cycle](fdip-0003), a single indicator field witnesses
+#{TM_f\ne M_fT}.}
