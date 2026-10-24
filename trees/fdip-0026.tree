@@ -1,0 +1,39 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{Finite states are probability weights}
+\date{2026-10-23}
+
+\p{Let #{\Omega} be finite, #{K=\mathbb R} or #{\mathbb C}, and give
+#{A_\Omega=\operatorname{Map}(\Omega,K)} the pointwise involution
+#{f^*(x)=\overline{f(x)}}. The [weight functional](fdip-0023)
+#{\omega_p(f)=\sum_xp(x)f(x)} is a
+[real or complex algebraic state](fdip-0024) exactly when every
+#{p(x)} is real and nonnegative and #{\sum_xp(x)=1}.}
+\proof{
+\p{Pointwise conjugation is additive, conjugates scalars, fixes the unit
+and is involutive. It reverses products because #{K} is commutative.
+For necessity, #{\delta_x^*\delta_x=\delta_x}, so square positivity
+gives #{p(x)=\omega_p(\delta_x)\in\mathbb R_{\geq0}}. Normalization
+gives the sum condition. Conversely, real weights imply
+#{\omega_p(f^*)=\sum_xp(x)\overline{f(x)}=\overline{\omega_p(f)}}.
+Furthermore
+##{\omega_p(f^*f)=\sum_xp(x)|f(x)|^2\geq0,}
+and #{\omega_p(1)=\sum_xp(x)=1}. For a real pointwise nonnegative
+function, each summand #{p(x)f(x)} is also nonnegative, so its expectation
+is nonnegative.}
+}
+\p{There is no state on the empty configuration set over #{\mathbb R}
+or #{\mathbb C}, because the empty sum is zero. On two points, the
+weights #{p(0)=p(1)=1/2} give a state that is not multiplicative:
+#{\omega_p(\delta_0\delta_1)=0}, whereas
+#{\omega_p(\delta_0)\omega_p(\delta_1)=1/4}.
+A state is not required to be an algebra homomorphism.}
+
+\p{The positive-functional convention is
+\citet{Definition 3.9, p. 11}{waldmann2004states}; the indicator calculation
+above identifies it with [finite probability and expectation](ftip-000A)
+on this particular algebra. It does not identify positivity cones on
+arbitrary star algebras; the distinctions on
+\citet{p. 12}{waldmann2004states} remain separate.}

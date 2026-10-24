@@ -1,0 +1,38 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Definition}
+\title{Normalized linear functionals}
+\date{2026-10-23}
+
+\p{Let #{R} be a commutative unital ring, allowing #{1=0}, and let
+#{A} be a \vocabk{unital associative algebra}{ca-0016} over #{R}.
+Its scalar map is #{\eta:R\to A}, #{r\mapsto r1_A}, with central image.
+A \newvocab{normalized linear functional} is an ordinary #{R}-linear map
+#{\omega:A\to R} satisfying #{\omega(1_A)=1_R}.
+Thus #{\omega(ra+sb)=r\omega(a)+s\omega(b)}; the coefficient map for
+linearity is #{\mathrm{id}_R}, not a nontrivial semilinear twist. This is a member of the
+\vocabk{dual module}{ca-0012}, with an additional normalization condition.}
+
+\p{Normalization is equivalent to #{\omega\circ\eta=\mathrm{id}_R}.
+In particular, a normalized functional can exist only if #{\eta} is
+injective. This necessary condition alone is not a claim of existence.}
+\proof{
+\p{If #{\omega(1_A)=1_R}, linearity gives
+#{\omega(\eta(r))=\omega(r1_A)=r\omega(1_A)=r}.
+Conversely, evaluating #{\omega\eta=\mathrm{id}_R} at #{1_R} gives
+#{\omega(1_A)=1_R}. A map with a left inverse is injective.}
+}
+\p{For example, the scalar map #{\mathbb Z\to\mathbb Z/2\mathbb Z}
+is not injective, so this algebra admits no normalized
+#{\mathbb Z}-linear functional. If #{A} is the zero algebra,
+normalization is possible exactly when #{R} is the zero ring. If #{R}
+is the zero ring, every unital #{R}-module is zero, since
+#{a=1_Ra=0_Ra=0}; its unique functional is normalized.}
+
+\p{The algebra conventions are those of
+\citet{Section 22.2, Tag 09JF}{stacks2017stacks} and
+\citet{Definition 1.6, p. 4}{jadczyk2019notes}.
+Mathlib's \leanref{Module.Dual} supplies the ordinary linear dual;
+normalization and the scalar left-inverse criterion are the additional
+conditions proved here. No order, involution or topology is part of this definition.}

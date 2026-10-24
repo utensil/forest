@@ -1,0 +1,40 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Example}
+\title{A nonuniform law on sixteen cycle configurations}
+\date{2026-10-23}
+
+\p{Use the four vertices #{V=\{0,1,2,3\}} of the
+[alternating cycle](fdip-0003), the alphabet #{S=\{0,1\}}, and retained
+vertices #{J=\{0,2\}}. There are sixteen configurations
+#{\Omega=S^V} and four retained configurations #{\Lambda=S^J}.
+The map #{\rho(\sigma)=\sigma|_J} is surjective: assign zero at vertices
+#{1,3} to extend any retained configuration. Each fiber has four elements.
+The [pullback](fdip-0028) identifies retained observables with
+those depending only on the values at vertices #{0,2}.}
+
+\p{Choose the following real weights, independently of the edge energies:
+##{p(\sigma)=\begin{cases}
+1/12,&\sigma_0=\sigma_2,\\
+1/24,&\sigma_0\ne\sigma_2.
+\end{cases}}
+There are eight configurations of each kind, so
+#{\sum_\sigma p(\sigma)=8/12+8/24=1}. By the
+[finite-state criterion](fdip-0026), this defines a real algebraic
+state. Summing the four weights in each fiber gives
+##{q(0,0)=q(1,1)=1/3,\qquad q(0,1)=q(1,0)=1/6.}
+For #{F(\eta)=\eta_0\eta_2}, only #{\eta=(1,1)} contributes, and hence
+##{\omega_q(F)=1/3=4\cdot(1/12)=\omega_p(F\circ\rho).}
+This is an explicit instance of the finite fiber-sum identity.}
+
+\p{The law here is a chosen [finite probability distribution](ftip-000A).
+It is not obtained from the cycle's edge weights or its precision matrix,
+and the carrier #{S^V} is distinct from the real configuration space
+#{\mathbb R^V} used by the Gaussian law. The algebra convention remains
+\citet{Section 22.2, Tag 09JF}{stacks2017stacks}; the positivity convention
+is \citet{Definition 3.9, p. 11}{waldmann2004states}.
+If the vertex set is empty, #{S^\varnothing} has one outcome, even for
+empty #{S}. An empty alphabet with nonempty vertex set instead gives no
+outcomes and no real state. Thus zero vertices and an empty configuration
+set are different cases.}
