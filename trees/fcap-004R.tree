@@ -1,0 +1,88 @@
+\import{fcap-macros}
+\meta{agent-authored}{true}
+\tag{fcap}
+\tag{spin}
+\tag{quadratic-forms}
+
+\taxon{Proposition}
+\title{Right translation and conjugate double cosets}
+
+\p{Let #{G} be a group, let #{\Gamma,K\leq G}, and fix #{a\in G}.
+Write #{[x]_K} for the \vocabk{double coset}{fcap-004P}
+#{\Gamma xK}. Right translation induces a bijection
+
+##{\begin{aligned}
+T_a:\Gamma\backslash G/K&\longrightarrow
+\Gamma\backslash G/(a^{-1}Ka),\\
+[x]_K&\longmapsto[xa]_{a^{-1}Ka}.
+\end{aligned}}
+
+Its inverse sends #{[z]_{a^{-1}Ka}} to #{[za^{-1}]_K}.
+The left subgroup stays #{\Gamma}; neither subgroup is assumed
+normal, and #{G} need not be commutative.}
+
+\subtree{
+\taxon{Proof}
+\p{The map #{c_a(k)=a^{-1}ka} is a group automorphism:
+#{c_a(1)=1} and
+
+##{(a^{-1}ka)(a^{-1}\ell a)=a^{-1}(k\ell)a,}
+
+while its inverse is #{h\mapsto aha^{-1}}. Thus
+#{a^{-1}Ka=\{a^{-1}ka:k\in K\}} is a subgroup: it contains
+#{1}, and the displayed product and
+#{(a^{-1}ka)^{-1}=a^{-1}k^{-1}a} keep products and inverses
+inside it.}
+
+\p{Suppose #{y=\gamma xk} with #{\gamma\in\Gamma} and
+#{k\in K}. Associativity and cancellation give
+
+##{ya=\gamma(xa)(a^{-1}ka).}
+
+Since #{a^{-1}ka\in a^{-1}Ka}, this proves that #{T_a}
+is independent of the representative. For the proposed inverse,
+suppose #{w=\eta z h}, where #{\eta\in\Gamma} and
+#{h\in a^{-1}Ka}. Choose #{k\in K} with #{h=a^{-1}ka}.
+Then the inverse's witnesses are #{\eta} and #{k}, since
+
+##{wa^{-1}=\eta z(a^{-1}ka)a^{-1}
+=\eta(za^{-1})k.}
+
+The inverse assignment is therefore well defined. On a source
+representative its composite with #{T_a} gives
+#{(xa)a^{-1}=x}; on a target representative the other composite
+gives #{(za^{-1})a=z}. Every quotient class has a representative,
+so both composites are the identity.}
+}
+
+\p{For the \vocabk{finite adelic class sets}{fcap-004P}, fix a
+nondegenerate rational quadratic form and a
+\vocabk{compatible compact-open reference tuple}{fcap-004C} #{U}.
+For each #{H\in\{O,SO,\Spin\}}, use the same ambient group
+#{H_f(U)} of \ref{fcap-004F}, its own
+\vocabk{rational diagonal subgroup}{fcap-004K} #{\Gamma_H}, and
+its actual product subgroup #{K_H}. For #{a_H\in H_f(U)}, the
+bijection is
+
+##{\Gamma_H\backslash H_f(U)/K_H
+\longrightarrow
+\Gamma_H\backslash H_f(U)/(a_H^{-1}K_Ha_H).}
+
+It changes the right subgroup inside this fixed group, without
+replacing the chosen O, SO or Spin rational image. It is a
+bijection of sets; no quotient topology, approximation or
+class-number assertion is involved.}
+
+\p{The restricted groups and rational diagonals have adelic context in
+\citet{Example 2.3, p. 3, and Theorem 3.6, pp. 6-8}{conrad2011adelic}.
+The conjugation calculation and inverse above are direct group
+arguments, not statements attributed to that passage. TauCeti's
+\leanref/tauceti{DoubleCoset.quotientConjRight}
+is the general equivalence with this orientation. The three
+adelic specializations are
+\leanref/tauceti{TauCeti.QuadraticMap.OrthogonalCompactOpens.finiteAdelicOrthogonalDoubleCosetConj},
+\leanref/tauceti{TauCeti.QuadraticMap.OrthogonalCompactOpens.finiteAdelicSpecialOrthogonalDoubleCosetConj}
+and
+\leanref/tauceti{TauCeti.QuadraticMap.OrthogonalCompactOpens.finiteAdelicSpinDoubleCosetConj}.
+In their targets, the inverse conjugation automorphism sends
+#{k} to #{a_H^{-1}ka_H}, as in the displayed proof.}
