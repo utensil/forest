@@ -1250,3 +1250,40 @@ p {
 a {
     word-break: break-all;
 }
+
+/* AGENT-NOTE: Do not consume the mobile reading width at every transclusion depth. */
+@media only screen and (max-width: 600px) {
+    article section.block section.block {
+        padding-inline: 0;
+        margin-inline: 0;
+    }
+}
+
+/* AGENT-NOTE: Inline nested headers cannot reserve space for the absolute provenance watermark. */
+section:has(> details > summary > header .agent-authored-watermark)
+    > details
+    > summary
+    > header {
+    display: block;
+    min-height: 6.375rem;
+    padding-inline-end: 6.875rem;
+}
+
+@media only screen and (max-width: 450px) {
+    section:has(> details > summary > header .agent-authored-watermark)
+        > details
+        > summary
+        > header {
+        min-height: 5.15rem;
+        padding-inline-end: 5.65rem;
+    }
+}
+
+/* AGENT-NOTE: Numbered taxon prefixes may contain nonbreaking spaces. */
+section:has(> details > summary > header .agent-authored-watermark)
+    > details
+    > summary
+    > header
+    > h1 {
+    overflow-wrap: anywhere;
+}
