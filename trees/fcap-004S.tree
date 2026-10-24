@@ -1,0 +1,93 @@
+\import{fcap-macros}
+\meta{agent-authored}{true}
+\tag{fcap}
+\tag{spin}
+\tag{quadratic-forms}
+
+\taxon{Proposition}
+\title{Transporting double cosets by a group isomorphism}
+
+\p{Let #{G,G'} be groups, let #{\Gamma,K\leq G} and
+#{\Gamma',K'\leq G'}, and let #{e:G\to G'} be a group
+isomorphism satisfying #{e(\Gamma)=\Gamma'} and #{e(K)=K'}.
+Then the \vocabk{double cosets}{fcap-004P} are related by a bijection
+
+##{\begin{aligned}
+\overline e:\Gamma\backslash G/K&\longrightarrow
+\Gamma'\backslash G'/K',\\
+[x]&\longmapsto[e(x)].
+\end{aligned}}
+
+Its inverse sends #{[y]} to #{[e^{-1}(y)]}. Both subgroup
+equalities concern their images in the specified ambient groups.}
+
+\subtree{
+\taxon{Proof}
+\p{If #{y=\gamma xk} with #{\gamma\in\Gamma} and #{k\in K}, then
+
+##{e(y)=e(\gamma)e(x)e(k).}
+
+The two image equalities put #{e(\gamma)} in #{\Gamma'} and
+#{e(k)} in #{K'}, so the proposed map is independent of the
+representative. Conversely, suppose #{w=\gamma'zk'} with
+#{\gamma'\in\Gamma'} and #{k'\in K'}. The same equalities give
+#{e^{-1}(\gamma')\in\Gamma} and #{e^{-1}(k')\in K}, and
+
+##{e^{-1}(w)=e^{-1}(\gamma')e^{-1}(z)e^{-1}(k').}
+
+Thus the inverse assignment is well defined. Applying the two
+assignments successively to any representative gives
+#{e^{-1}(e(x))=x} or #{e(e^{-1}(z))=z}, respectively. Every class
+has a representative, so both composites are identities.}
+}
+
+\p{For the \vocabk{finite adelic class sets}{fcap-004P}, let
+#{Q,Q'} be nondegenerate forms on finite-dimensional rational
+spaces #{V,V'}, with \vocabk{compatible compact-open reference
+tuples}{fcap-004C} #{U,U'}. Fix one #{H\in\{O,SO,\Spin\}} and
+suppose that group isomorphisms
+
+##{\phi_p:H(Q_p)\longrightarrow H(Q'_p)}
+
+satisfy #{\phi_p(U_p^H)=U_p^{\prime H}} at \em{every} prime.
+They induce a group isomorphism
+
+##{e_H:H_f(U)\longrightarrow H_f(U'),\qquad
+(x_p)_p\longmapsto(\phi_p(x_p))_p.}
+
+Indeed, membership in a reference subgroup is equivalent at each
+coordinate, so a tuple and its image have the same finite exceptional
+set. The coordinatewise inverse is defined for the same reason;
+multiplication and the inverse identities hold at every coordinate.}
+
+\p{Write #{\Gamma_H(U)=\delta_f^H(H(V,Q))} and
+#{\Gamma_H(U')=\delta_f^{\prime H}(H(V',Q'))} for the actual
+\vocabk{rational diagonal images}{fcap-004K}. Assume additionally
+
+##{e_H(\Gamma_H(U))=\Gamma_H(U').}
+
+Everywhere reference preservation gives
+#{e_H(\prod_pU_p^H)=\prod_pU_p^{\prime H}}: inclusion follows
+coordinatewise, and the coordinatewise inverse proves the reverse
+inclusion. The proposition therefore gives
+#{\mathcal C_H(U)\simeq\mathcal C_H(U')}, with representatives
+sent by #{(x_p)_p\mapsto(\phi_p(x_p))_p}. The rational-image
+condition is a separate hypothesis; local group isomorphisms alone
+do not assert it. For SO use the derived reference subgroups
+#{i_p^{-1}(U_p^O)} and #{(i'_p)^{-1}(U_p^{\prime O})}; for Spin
+use its own references and actual
+generated carrier. The argument applies separately to all three
+groups, without identifying their rational images.}
+
+\p{The adelic objects have classical context in
+\citet{Example 2.3, p. 3, and Theorem 3.6, pp. 6-8}{conrad2011adelic}.
+The transport and inverse above are direct group arguments, not
+claims quoted from that passage. TauCeti's
+\leanref/tauceti{DoubleCoset.quotientCongr} formalizes the general
+equivalence. Its three corresponding specializations are
+\leanref/tauceti{TauCeti.QuadraticMap.OrthogonalCompactOpens.finiteAdelicOrthogonalDoubleCosetCongr},
+\leanref/tauceti{TauCeti.QuadraticMap.OrthogonalCompactOpens.finiteAdelicSpecialOrthogonalDoubleCosetCongr}
+and
+\leanref/tauceti{TauCeti.QuadraticMap.OrthogonalCompactOpens.finiteAdelicSpinDoubleCosetCongr}.
+These are equivalences of sets; no continuity of the local
+isomorphisms or quotient topology is assumed.}
