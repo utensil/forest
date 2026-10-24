@@ -1,0 +1,80 @@
+\import{fcap-macros}
+\meta{agent-authored}{true}
+\tag{fcap}
+\tag{spin}
+\tag{quadratic-forms}
+
+\taxon{Proposition}
+\title{Finite changes of references and the product subgroup}
+
+\p{Let #{G_p} be groups indexed by rational primes, with subgroups
+#{U_p,U'_p\leq G_p} equal outside a finite set #{F}. Write
+#{G_f(U)} and #{G_f(U')} for their
+\vocabk{restricted products}{fcap-004F}, regarded here as groups
+of tuples, and #{K(U)=\prod_pU_p}, #{K(U')=\prod_pU'_p} for
+their \vocabk{product reference subgroups}{fcap-004F}.
+The coordinate identity gives a group isomorphism
+#{e:G_f(U)\to G_f(U')}, but
+
+##{e(K(U))=K(U')\quad\Longleftrightarrow\quad
+U_p=U'_p\ \text{for every prime }p.}}
+
+\subtree{
+\taxon{Proof}
+\p{If #{x_p\in U_p} outside a finite set #{S}, then
+#{x_p\in U'_p} outside #{S\cup F}. Interchanging the two
+families proves the converse. Thus the two groups have the same
+tuples and coordinate operations, giving the stated isomorphism.}
+
+\p{Everywhere equality of references immediately gives equality
+of their products. For the converse, suppose #{e(K(U))=K(U')}.
+Fix a prime #{p} and #{u\in U_p}. The tuple with component #{u}
+at #{p} and identity at every other prime belongs to #{K(U)}.
+Its image is the same tuple in #{K(U')}, so #{u\in U'_p}.
+This proves #{U_p\subseteq U'_p}. Interchange the products and
+repeat the argument to obtain #{U'_p\subseteq U_p}. Since #{p}
+was arbitrary, all reference subgroups agree.}
+}
+
+\p{In particular, finite changes need not preserve even the number
+of double cosets. Take #{G_p=C_2=\{1,s\}} at every prime, with
+#{s^2=1\ne s}, and take #{U_p=C_2} for every #{p}. Change only
+#{U'_2=\{1\}}, keeping #{U'_p=C_2} for #{p\ne2}. Both restricted
+products are #{\prod_pC_2}: the changed condition can fail only at
+#{2}. With left subgroup #{\Gamma=\{1\}}, the quotient by
+#{K(U)=\prod_pC_2} has one class. The quotient by #{K(U')} has
+exactly two classes, distinguished by the #{2}-coordinate.
+Indeed, right multiplication by #{K(U')} preserves that coordinate;
+if #{x_2=y_2}, then #{x^{-1}y\in K(U')} and #{y=x(x^{-1}y)}.
+Both coordinates #{1,s} occur. This is a group-family example,
+without an asserted realization by adelic O, SO or Spin groups.}
+
+\p{For two compatible tuples #{U,U'} for the same rational
+quadratic form, fix #{H\in\{O,SO,\Spin\}} and suppose their
+#{H}-references agree outside a finite set. The coordinate identity
+#{e_H} identifies the ambient groups #{H_f(U)} and #{H_f(U')}
+and carries their actual rational diagonal images onto each other:
+both scalar extensions of any rational #{h} have the same
+coordinate #{h_p} at every prime. Thus \ref{fcap-004S} gives
+
+##{\Gamma_H(U)\backslash H_f(U)/K_H(U)
+\simeq
+\Gamma_H(U')\backslash H_f(U')/e_H(K_H(U)).}
+
+The right subgroup displayed in the target is the transported
+product, which equals #{K_H(U')} exactly when all the
+#{H}-references agree. Eventual equality alone does not supply
+the hypotheses for transport to #{\mathcal C_H(U')} with its
+chosen right subgroup. This does not assert that different right
+subgroups always give nonisomorphic class sets. The O, derived SO
+and generated Spin cases each retain their own subgroups.}
+
+\p{Finite-stage adelic constructions provide the background in
+\citet{Theorem 3.6, pp. 6-8}{conrad2011adelic}; the product-subgroup
+criterion and counterexample above are direct deductions.
+TauCeti's
+\leanref/tauceti{TauCeti.map_integralSubgroup_restrictedProductCongr_eq_iff}
+formalizes the criterion, and
+\leanref/tauceti{TauCeti.doubleCosetCongr}
+transports double cosets to the image subgroups. Neither
+statement replaces that image with a different product subgroup.}
