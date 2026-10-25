@@ -1,0 +1,46 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Example}
+\title{Observables on a finite configuration set}
+\date{2026-10-23}
+
+\p{Let #{V} be a finite vertex set and #{S} a finite set of possible
+values. A configuration is a function #{\sigma:V\to S}; the configuration
+set is #{\Omega=S^V}. The set #{\Omega} is distinct from the vertex set
+#{V}: an observable takes a whole configuration as its input. For a
+commutative unital ring #{R}, set
+##{A_\Omega=\operatorname{Map}(\Omega,R).}
+This is the \vocabk{pointwise function algebra}{fdip-0010}:
+#{(f+g)(\sigma)=f(\sigma)+g(\sigma)},
+#{(fg)(\sigma)=f(\sigma)g(\sigma)} and
+#{(rf)(\sigma)=rf(\sigma)}, with unit the constant function #{1_R}.}
+
+\p{For each #{\sigma\in\Omega}, evaluation
+#{\operatorname{ev}_\sigma(f)=f(\sigma)} is a unital #{R}-algebra map
+and a [normalized linear functional](fdip-0021).
+The scalar map sends #{r} to the constant function #{r}.
+The indicator #{\delta_\sigma} is #{1_R} at #{\sigma} and #{0_R}
+elsewhere. These are the same indicators used in
+[counting duality for finite functions](fdip-001F), now indexed by configurations.}
+\proof{
+\p{Each algebra law follows by evaluating at every configuration and
+using the corresponding law in #{R}. Evaluation preserves addition,
+scalar multiplication, products and the unit by the displayed definitions.
+The indicators satisfy
+##{\delta_\sigma^2=\delta_\sigma,\qquad
+\delta_\sigma\delta_\tau=0\ (\sigma\ne\tau),\qquad
+\sum_{\sigma\in\Omega}\delta_\sigma=1.}
+These equalities hold pointwise, including when #{R} is the zero ring.}
+}
+\p{If #{V=\varnothing}, then #{S^V} contains the unique empty function,
+even when #{S=\varnothing}. If #{S=\varnothing} and #{V\ne\varnothing},
+then #{\Omega=\varnothing}; its function algebra is the zero algebra.
+There is then no evaluation at a configuration.}
+
+\p{The underlying unital algebra convention is
+\citet{Section 22.2, Tag 09JF}{stacks2017stacks}.
+Mathlib's \leanref{Pi.algebra}, \leanref{Pi.evalAlgHom} and
+\leanref{Pi.constAlgHom} provide the pointwise algebra, evaluation and
+constant algebra maps. The configuration interpretation and the empty-set
+cases above are direct consequences of these definitions.}

@@ -1,0 +1,73 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{Pulling a functional back along a supplied algebra map}
+\date{2026-10-23}
+
+\p{Let #{R} be a commutative unital ring, #{A,B} unital associative
+#{R}-algebras, and let #{\iota:B\to A} be a supplied
+[unital algebra homomorphism](ca-001A). Precomposition defines an
+#{R}-linear map in the opposite direction on ordinary duals:
+##{\begin{aligned}
+\iota^\flat:\operatorname{Hom}_R(A,R)&\longrightarrow
+\operatorname{Hom}_R(B,R),\\
+\omega&\longmapsto\omega\circ\iota.
+\end{aligned}}
+It sends [normalized functionals](fdip-0021) to normalized functionals.
+For another unital associative #{R}-algebra #{C} and a unital
+#{R}-algebra homomorphism #{\kappa:C\to B},
+##{(\iota\circ\kappa)^\flat=\kappa^\flat\circ\iota^\flat,
+\qquad(\mathrm{id}_A)^\flat=\mathrm{id}.}
+When #{\iota} is inclusion this is literal restriction; for an injective
+map it becomes restriction after identifying #{B} with its image. No
+injectivity is needed for precomposition itself. A partition of a set by
+itself does not supply an algebra map between arbitrary algebras.}
+\proof{
+\p{For #{b,c\in B} and #{r,s\in R}, linearity of #{\iota} and
+#{\omega} gives
+#{(\omega\iota)(rb+sc)=r(\omega\iota)(b)+s(\omega\iota)(c)}.
+Pointwise operations on the dual also give
+#{(r\omega+s\nu)\iota=r(\omega\iota)+s(\nu\iota)}.
+Since #{\iota(1_B)=1_A}, normalization follows from
+#{(\omega\iota)(1_B)=\omega(1_A)=1_R}.
+For every #{c\in C}, both sides of the composition identity take
+#{\omega} to #{\omega(\iota(\kappa(c)))}; the identity law is immediate
+by evaluation.}
+}
+\p{Linearity and preservation of the unit suffice for the normalization
+calculation; multiplication preservation additionally respects observable
+products. Without unitality, the zero multiplicative linear map between
+nonzero real algebras pulls every normalized functional back to zero.}
+
+\p{Over #{K=\mathbb R} or #{\mathbb C}, suppose both algebras carry the
+star laws in [the state definition](fdip-0024), and suppose additionally
+#{\iota(b^*)=\iota(b)^*}. Then #{\iota^\flat} sends algebraic states
+to algebraic states. For composition in this setting, let #{C} also be
+a unital associative #{K}-algebra with these star laws, and let
+#{\kappa:C\to B} be a unital #{K}-algebra homomorphism preserving star.}
+\proof{
+\p{For a state #{\omega},
+#{(\omega\iota)(b^*)=\omega(\iota(b)^*)=\overline{\omega(\iota(b))}}.
+Multiplication and star compatibility give
+##{(\omega\iota)(b^*b)=\omega(\iota(b)^*\iota(b))\geq0.}
+Normalization holds. Identities preserve star, and
+#{(\iota\kappa)(c^*)=\iota(\kappa(c)^*)=(\iota\kappa(c))^*}, so
+composition preserves the same hypotheses.}
+}
+\p{Star compatibility cannot be omitted. Give #{\mathbb C[z]} the
+involution conjugating coefficients and fixing #{z}; give #{\mathbb C}
+ordinary conjugation. Evaluation at #{z=i} is a unital complex algebra
+map. The identity functional on #{\mathbb C} is a state, but its pullback
+takes #{z^*z=z^2} to #{-1}, so is not positive.}
+
+\p{The dual-map construction is supported by Mathlib's
+\leanref{LinearMap.dualMap}, \leanref{LinearMap.dualMap_apply},
+\leanref{LinearMap.dualMap_id} and \leanref{LinearMap.dualMap_comp_dualMap};
+these do not require finite dimension. The star-preserving map structures
+\leanref{StarAlgHom} and \leanref{StarAlgHom.comp} concern supplied star
+operations; the genuine star laws above remain explicit hypotheses.
+For the algebra and positivity conventions see
+\citet{Section 22.2, Tag 09JF}{stacks2017stacks} and
+\citet{Definitions 3.7 and 3.9, p. 11}{waldmann2004states}.
+The normalization and positivity assertions here are proved directly.}

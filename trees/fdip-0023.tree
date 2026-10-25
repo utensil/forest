@@ -1,0 +1,45 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{Finite functionals and their weights}
+\date{2026-10-23}
+
+\p{For a finite set #{\Omega} and commutative unital ring #{R}, every
+#{R}-linear functional on the [function algebra](fdip-0022) has a
+unique weight function #{p:\Omega\to R}, given by
+##{\omega(f)=\sum_{x\in\Omega}p(x)f(x),\qquad p(x)=\omega(\delta_x).}
+Conversely, every such weight function defines an #{R}-linear functional.
+It is [normalized](fdip-0021) exactly when #{\sum_xp(x)=1_R}.}
+\proof{
+\p{Pointwise evaluation gives #{f=\sum_x f(x)\delta_x}.
+Linearity therefore gives the stated formula, using commutativity of #{R}
+to write the coefficients in either order. Conversely, distributivity of
+the finite sum proves linearity of the formula. Evaluating it on
+#{\delta_y} recovers #{p(y)}, proving uniqueness in both directions.
+Evaluating at #{1=\sum_x\delta_x} proves the normalization criterion.}
+}
+\p{When #{\Omega=\varnothing}, the sole functional is the zero map
+from the zero algebra and its total weight is #{0_R}; it is normalized
+exactly when #{R} is the zero ring. When #{\Omega\ne\varnothing}, a
+chosen evaluation is normalized over every #{R}. Uniform weights
+#{p(x)=c} on a set of size #{n>0} are normalized exactly when
+#{(n1_R)c=1_R}. Such normalized uniform weights exist exactly when
+#{n1_R} is a unit, and then the unique coefficient is
+#{c=(n1_R)^{-1}}. Thus failure of uniform normalization does not imply
+failure of all normalized functionals.}
+
+\p{More generally, for raw weights #{w(x)} with total #{Z=\sum_xw(x)},
+a common rescaling #{p(x)=cw(x)} is normalized exactly when #{cZ=1_R}.
+This is possible exactly when #{Z} is a unit, and then #{c=Z^{-1}} is
+unique. No division by a nonunit is defined by this formula. In the zero
+ring the sole element is a unit, so the same criterion applies. For real
+nonnegative weights, #{Z>0} exactly when at least one weight is positive;
+all-zero weights cannot be normalized by rescaling.}
+
+\p{This is the indicator-basis argument of
+[finite function duality](fdip-001F), with the unital algebra convention of
+\citet{Section 22.2, Tag 09JF}{stacks2017stacks}.
+For real nonnegative normalized weights it gives the finite
+[expectation](ftip-000A). No positivity or division is needed for the
+ring-valued classification.}

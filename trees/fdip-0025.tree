@@ -1,0 +1,29 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Example}
+\title{Square positivity need not imply real Hermiticity}
+\date{2026-10-23}
+
+\p{In the real algebra #{A=\mathbb R[\varepsilon]/(\varepsilon^2)},
+each element is uniquely #{x+y\varepsilon}. Define
+#{(x+y\varepsilon)^*=x-y\varepsilon}. For any fixed real #{c\ne0}, let
+##{\omega_c(x+y\varepsilon)=x+cy.}
+Then #{\omega_c} is normalized and nonnegative on every #{a^*a}, but is
+not a [real algebraic state](fdip-0024), because it is not Hermitian.}
+\proof{
+\p{The operation is real linear, fixes the unit and squares to the
+identity. Multiplication gives
+#{(x+y\varepsilon)(u+v\varepsilon)=xu+(xv+yu)\varepsilon}; applying
+star negates the second coefficient, as does multiplying the starred
+factors. Since the algebra is commutative, this is also the required
+order-reversing product law. For #{a=x+y\varepsilon},
+#{a^*a=(x-y\varepsilon)(x+y\varepsilon)=x^2}.
+Thus #{\omega_c(a^*a)=x^2\geq0}, and #{\omega_c(1)=1}.
+But #{\omega_c(\varepsilon^*)=-c\ne c=\omega_c(\varepsilon)}.}
+}
+\p{This direct calculation distinguishes square positivity from the extra
+real Hermiticity condition. Square positivity is defined in
+\citet{Definition 3.9, p. 11}{waldmann2004states}.
+It is separate from the [characteristic-two group-algebra example](fdip-000N):
+the present algebra and functional are over #{\mathbb R}.}
