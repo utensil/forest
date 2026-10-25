@@ -1,0 +1,31 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Remark}
+\title{The counting array of a precision operator}
+\date{2026-10-25}
+
+\p{Let #{Q:X_V\to X_V} be a
+\vocabk{positive precision parameter}{fdip-0004}. Choose an indicator
+enumeration and its [counting chart](fdip-002J) #{C:X_V\to\mathbb R^n}.
+Write #{A=CQC^{-1}} for the resulting array. Then
+##{h_V(x,Qy)=(Cx)^TA(Cy).}
+Thus #{Q} is self-adjoint exactly when #{A^T=A}, and is strictly
+positive exactly when #{z^TAz>0} for every nonzero #{z}.
+The action is #{S_Q(x)=\tfrac12(Cx)^TA(Cx)}.}
+\proof{
+\p{The chart sends the indicator basis to the standard orthonormal
+basis, so the counting pairing becomes the ordinary dot product.
+Substitution yields the displayed identity. Testing it on every pair
+of basis vectors proves the symmetry equivalence; bijectivity of #{C}
+proves the positivity equivalence. Using this same basis for source and
+target gives #{\det A=\det Q}; a simultaneous re-enumeration conjugates
+#{A} by a permutation matrix and does not change the determinant.}
+}
+\p{In the ensuing [Gaussian formulas](fdip-0005), the customary matrix
+symbol #{Q} denotes this counting array of the endomorphism.
+An arbitrary nonorthonormal chart need not make its array symmetric:
+its Gram matrix must also enter the pairing. This calculation is a
+coordinate recovery of \ref{fdip-0004}, not a new normalization result.
+The half-action convention agrees with
+\citet{Section 4, Equation (4.5), p. 3}{wingate2025lattice}.}

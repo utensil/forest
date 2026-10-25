@@ -1,0 +1,91 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{Linear changes of reference volume}
+\date{2026-10-25}
+
+\p{Let #{T:X_V\to X_W} be an invertible real linear map, with
+#{|V|=|W|=n}. Choose ordered indicator bases and normalized top forms
+#{\eta_V,\eta_W}, each taking value one on its chosen basis. Define
+##{T^*\eta_W=d(T)\eta_V,\qquad J(T)=|d(T)|.}
+Reordering either basis changes #{d(T)} only by a sign; #{J(T)>0}
+is the \newvocab{reference-volume Jacobian}. For Borel sets #{E,B},
+##{\begin{aligned}
+\lambda_W(T(E))&=J(T)\lambda_V(E),\\
+T_*\lambda_V(B)&=J(T)^{-1}\lambda_W(B).
+\end{aligned}}
+For nonnegative Borel #{F:X_W\to[0,\infty]},
+##{\int_{X_V}F(Tx)\,d\lambda_V(x)
+ =J(T)^{-1}\int_{X_W}F(y)\,d\lambda_W(y).}
+For real signed #{F}, absolute integrability on either side is equivalent
+to that on the other; under this condition the same equality holds.
+Translation, and hence #{x\mapsto T(x)+b}, has the same coefficient.}
+\p{For an endomorphism, #{d(T)=\det T} only when source and target
+use the same normalized top form. Independently ordered indicator bases
+give #{d(T)=\varepsilon\det T}, #{\varepsilon\in\{1,-1\}}, although
+#{J(T)=|\det T|}. The identity on #{\mathbb R^2} with reversed target
+order has #{d=-1}, intrinsic determinant #{1}, and #{J=1}.
+In dimension zero the top form is #{1} and #{J=1}.}
+\proof{
+\p{Top exterior powers are one-dimensional. For composable maps #{T,S},
+use the same intermediate form to obtain
+#{(ST)^*\eta=d(S)d(T)\eta_V}. Thus #{J(ST)=J(S)J(T)};
+applying this to #{T^{-1}T} gives #{J(T^{-1})=J(T)^{-1}}.
+The absolute identities are independent of enumeration. Since #{T^{-1}}
+is continuous, #{T(E)} is Borel.}
+\p{On the Borel real line, translation preserves length and multiplication
+by #{a\ne0} has pushforward coefficient #{|a|^{-1}}. Compare preimages
+of bounded intervals and then use finite-on-bounded-interval uniqueness.
+When #{a<0}, the reversed half-open interval has the same length since
+singletons have measure zero. By rectangles and \ref{fdip-002I},
+scaling one coordinate has that coefficient. Coordinate permutations
+preserve measure by \ref{fdip-002J}. With a common basis their signed
+top-form multipliers are #{a} for scaling and #{-1} for a swap.}
+\p{For distinct coordinates #{i,j}, the shear
+#{E(x)=x+c\,x(j)\delta_i} preserves volume. Split off coordinate #{i},
+writing the others as #{z}. For fixed #{z}, translation invariance gives
+##{\int_{\mathbb R}F(z,t+c\,z(j))\,dt
+   =\int_{\mathbb R}F(z,t)\,dt.}
+Nonnegative Tonelli on the sigma-finite uncompleted Borel product then
+gives equality of full integrals; indicators give measure preservation.
+The shear's top-form multiplier is #{1}, since replacing the #{j}th
+basis vector by #{\delta_j+c\delta_i} leaves its top wedge unchanged.
+Tonelli here is
+\citet{Theorem 1.7.15, pp. 200-201, preliminary version}{tao2011measure},
+not the complete-space variant.}
+\p{These elementary maps generate every isomorphism in indicator charts.
+Induct on #{n}, the zero-dimensional case being immediate. For #{n>0},
+the image of the first basis vector is nonzero. Swap target coordinates
+to put a nonzero coefficient first, scale it to one, and subtract its
+suitable multiples from the other target coordinates. The resulting
+map #{ET} sends the first domain basis vector to the first target one.
+If the first coefficient of #{(ET)e_j} is #{a_j} for #{j>1}, precompose
+with the domain shears #{e_j\mapsto e_j-a_je_1}. The resulting map
+fixes the first basis vector and maps the complementary span into the
+target complementary span. Its restriction is injective; it is surjective
+because the first coefficient of a preimage of a complementary vector
+must be zero. Induction on these complements, extending their elementary
+maps by identity on the first coordinate, completes the factorization.}
+\p{Pushforwards compose and commute with scalar multiplication of
+measures. Multiplying the elementary coefficients therefore proves
+#{T_*\lambda_V=J(T)^{-1}\lambda_W}, after the measure-preserving
+coordinate charts of \ref{fdip-002J}. Substituting #{B=T(E)} gives
+the image formula. Translations in several coordinates follow from the
+one-dimensional result and rectangles, yielding the affine assertion.
+No reciprocal formula is asserted for a singular map.}
+\p{The integral formula follows first for indicators from the measure
+identity, then for nonnegative simple functions by additivity, then by
+increasing simple approximation and monotone convergence. Apply it to
+#{|F|} to obtain absolute-integrability equivalence, since #{J(T)} is
+positive and finite. Only then apply it to #{F^+,F^-} and subtract.
+No multiplication closure of #{L^1} is used.}
+}
+\p{The image convention is stated in
+\citet{Exercises 1.2.20-1.2.22, p. 41, preliminary version}{tao2011measure};
+the argument above proves its finite-field form. Mathlib's
+\leanref{Real.map_linearMap_volume_pi_eq_smul_volume_pi} is a
+finite-coordinate endomorphism theorem with nonzero determinant and
+reciprocal pushforward coefficient. Distinct carriers require the
+coordinate transport already proved, not an intrinsic signed determinant
+between unrelated spaces.}

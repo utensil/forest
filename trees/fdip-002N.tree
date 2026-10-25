@@ -1,0 +1,27 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Example}
+\title{Image volume and pushforward mass}
+\date{2026-10-25}
+
+\p{On the Borel real line, let #{T(x)=2x}. The
+[Jacobian theorem](fdip-002K) gives #{J(T)=2}, but its two measure
+directions have reciprocal coefficients:
+##{\lambda_{\mathbb R}(T[0,1])=2,\qquad
+ T_*\lambda_{\mathbb R}([0,1])=\tfrac12.}
+The first set is #{[0,2]}, whereas the second expression measures the
+preimage #{[0,1/2]}. This directly checks the convention of
+\citet{Exercise 1.2.21, p. 41, preliminary version}{tao2011measure}.
+Mathlib's \leanref{Real.map_volume_mul_left} requires a nonzero scalar
+and gives the reciprocal absolute pushforward factor.}
+\p{Put #{q_V(x)=x^2} and #{q_W(y)=y^2/4}. Then
+#{q_W(Tx)=q_V(x)} although #{J(T)=2}. Preserving a quadratic form
+alone does not preserve the supplied reference volume.}
+\p{If a Borel weight #{w\ge0} has a finite positive integral
+#{Z=\int w\,d\lambda_V}, replacing the reference by #{c\lambda_V},
+#{c>0}, replaces #{Z} by #{cZ}. Consequently
+#{(cZ)^{-1}w\,d(c\lambda_V)=Z^{-1}w\,d\lambda_V}.
+This conditional cancellation follows from linearity for indicators,
+simple functions and monotone limits. It proves neither existence nor
+finiteness of #{Z}; the reference and the action are separate data.}

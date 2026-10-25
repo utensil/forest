@@ -1,0 +1,30 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Corollary}
+\title{Counting isometries preserve volume}
+\date{2026-10-25}
+
+\p{A linear isomorphism #{T:X_V\to X_W} preserving the counting inner
+products satisfies #{J(T)=1}. It therefore preserves coordinate Lebesgue
+measure and the integrals in \ref{fdip-002K}. An isometric embedding
+into a higher-dimensional space is not included.}
+\proof{
+\p{The vectors #{T\delta_v} form an orthonormal basis. On simple top
+exterior vectors the induced inner product is
+##{\left\langle u_1\wedge\cdots\wedge u_n,
+ v_1\wedge\cdots\wedge v_n\right\rangle
+ =\det\bigl(h(u_i,v_j)\bigr).}
+Alternating multilinearity makes this well-defined on the top exterior
+power. The wedge of an ordered orthonormal basis has squared norm one,
+and an isometry preserves every entry of the displayed Gram matrix.
+Consequently #{d(T)^2=1}, so #{J(T)=1}; apply \ref{fdip-002K}.
+The empty wedge also has norm one.}
+}
+\p{This is a direct consequence of the preceding transformation theorem,
+with the convention of
+\citet{Exercise 1.2.21, p. 41, preliminary version}{tao2011measure}.
+Mathlib's \leanref{LinearIsometryEquiv.measurePreserving} concerns
+finite-dimensional real inner-product spaces with compatible Borel
+structures and their canonical volumes. An arbitrary perfect pairing
+or a general quadratic-form isometry does not supply these hypotheses.}

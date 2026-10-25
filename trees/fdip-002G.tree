@@ -1,0 +1,36 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{Coordinate tests for measurable maps}
+\date{2026-10-25}
+
+\p{Let #{V} be finite and #{(Y,\mathcal T)} a measurable space.
+A map #{f:Y\to X_V} is measurable if and only if every map
+#{y\mapsto f(y)(v)} to the Borel real line is measurable.
+Continuous maps between finite real field spaces are Borel measurable.
+In particular this holds for linear maps, coordinate restriction,
+zero extension and polynomial functions. Compare
+\citet{Exercise 1.4.29 and Remark 1.4.33, pp. 95-96, preliminary version}{tao2011measure}.}
+\proof{
+\p{Necessity follows by preimages of cylinders. For sufficiency, the
+sets #{A\subseteq X_V} with #{f^{-1}(A)\in\mathcal T} form a
+sigma-algebra containing the cylinders; use \ref{fdip-002E}.
+For a continuous map, preimages of open sets are open. The same
+sigma-algebra argument extends this to all Borel sets. Linearity gives
+continuity by \ref{fdip-002C}; finite sums and products give the
+polynomial case.}
+\p{For #{R\subseteq V}, restriction #{\rho_R:X_V\to X_R} sends
+#{x} to #{x|_R}. Zero extension #{\iota_R:X_R\to X_V} is #{y} on
+#{R} and zero elsewhere. Both are linear and measurable, and
+#{\rho_R\iota_R=\operatorname{id}_{X_R}}. The reverse composite
+zeros the removed coordinates and need not be the identity. This is
+precisely the real [polynomial pullback pair](fdip-002A), now with
+its Borel structures; it is not a claim about preserving reference volume.}
+}
+\p{The product-measurability equivalence is
+\leanref{measurable_pi_iff}; it concerns measurable products, without
+asserting topology or integrability. For Borel spaces an inducing map
+also detects measurability through composition, as in
+\leanref/tauceti{Topology.IsInducing.measurable_comp_iff}; no measurable
+range is required. Neither statement attaches a state to every observable.}

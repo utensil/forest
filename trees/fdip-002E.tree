@@ -1,0 +1,30 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{Borel sets and finite coordinate products}
+\date{2026-10-25}
+
+\p{For every finite real field space,
+##{\mathcal B(X_V)=\Sigma_V.}
+Here #{\Sigma_V} is the [coordinate-product sigma-algebra](fdip-002D).
+This finite-coordinate assertion, including dimension zero, follows by
+the direct argument below; compare
+\citet{Exercises 1.7.18-1.7.19, pp. 194-195, preliminary version}{tao2011measure}.}
+\proof{
+\p{Every evaluation is continuous by \ref{fdip-002C}. For fixed #{v},
+the subsets of #{\mathbb R} whose evaluation preimages are Borel form
+a sigma-algebra containing all open sets, hence all Borel sets. Thus
+each cylinder is Borel and #{\Sigma_V\subseteq\mathcal B(X_V)}.}
+\p{Rational open intervals form a countable basis of #{\mathbb R}.
+Their finite coordinate products form a countable basis of #{X_V}.
+Each is a finite intersection of cylinder sets and belongs to #{\Sigma_V}.
+An arbitrary open set is the union of the basis elements it contains;
+this is a countable union, proving the reverse inclusion. For empty
+#{V}, the one basic box is the singleton itself, and both sigma-algebras
+are #{\{\varnothing,X_V\}}.}
+}
+\p{Mathlib's \leanref{Pi.borelSpace} requires countable indices,
+second-countable topological factors and their Borel measurable structures.
+Finite real products meet these assumptions. The less restrictive
+\leanref{pi_le_borel_pi} gives only one inclusion, not the displayed equality.}

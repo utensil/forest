@@ -1,0 +1,37 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Definition}
+\title{Coordinate Lebesgue reference measure}
+\date{2026-10-25}
+
+\p{Let #{\lambda_{\mathbb R}} be Lebesgue measure restricted to
+#{\mathcal B(\mathbb R)}, normalized by
+#{\lambda_{\mathbb R}(\{x\in\mathbb R:a<x\le b\})=b-a} for #{a<b}.
+The \newvocab{coordinate Lebesgue measure} of a finite real field space is
+##{\lambda_V=\bigotimes_{v\in V}\lambda_{\mathbb R}}
+on #{\mathcal B(X_V)=\Sigma_V}, characterized on Borel rectangles by
+##{\lambda_V\left(\prod_v A_v\right)
+   =\prod_v\lambda_{\mathbb R}(A_v).}
+Products lie in #{[0,\infty]}, with #{0\cdot\infty=0}; the empty
+product is #{1}. The reference is fixed by counting coordinates,
+independently of any quadratic precision.}
+\p{Existence follows by induction from the sigma-finite product-measure
+theorem, \citet{Proposition 1.7.11, pp. 197-199, preliminary version}{tao2011measure}.
+Start with #{\lambda_\varnothing=\delta_0} on #{X_\varnothing=\{0\}}.
+Each factor is sigma-finite, and the cubes #{[-k,k]^V}, #{k\ge1},
+cover with finite masses #{(2k)^{|V|}}. Thus the product is sigma-finite.
+For nonempty #{V} these masses grow without bound, so
+#{\lambda_V(X_V)=\infty}; it is not a probability measure.
+[Finite-cube uniqueness](fdip-002I) handles its infinite total mass.}
+\p{The real-spin reference convention appears in
+\citet{Definition 8.1 and Equation (8.3), p. 381, author version revised 22 August 2017}{friedli2017statistical}.
+The model's boundary conditions and density are additional data.
+No completion or normalizing density is part of #{\lambda_V}.}
+\p{Mathlib constructs the finite product as
+\leanref{MeasureTheory.Measure.pi}; its rectangle law
+\leanref{MeasureTheory.Measure.pi_pi} uses sigma-finite factors.
+The product-volume convention is \leanref{MeasureTheory.volume_pi}.
+The empty cases \leanref{MeasureTheory.Measure.pi_of_empty} and
+\leanref{MeasureTheory.Measure.pi_empty_univ} give Dirac mass and total
+mass one, respectively.}

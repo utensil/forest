@@ -1,0 +1,50 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Example}
+\title{The positive action of the alternating cycle}
+\date{2026-10-25}
+
+\p{Use the [four-cycle](fdip-0003) oriented
+#{0\to1\to2\to3\to0}, with edge weights #{(1,t,1,t)}, #{t>0}.
+Let #{D:X_V\to X_E} evaluate endpoint differences and #{W} multiply
+by the supplied edge weights. With counting adjoint #{D^\dagger}, put
+##{L=D^\dagger WD,\qquad Q=L+m^2\operatorname{id},\qquad m>0.}
+For every #{x,y}, the [energy interface](fdip-0008) gives
+##{h_V(x,Ly)=\sum_e w(e)(Dx)(e)(Dy)(e).}
+It is symmetric in #{x,y}, so #{Q} is self-adjoint. On the diagonal
+all edge terms are nonnegative and #{m^2h_V(x,x)>0} off zero.
+Thus #{Q} is a \vocabk{positive precision parameter}{fdip-0004}.
+At zero mass constant fields instead expose the Laplacian kernel.}
+\p{In the specified vertex order #{(0,1,2,3)}, write #{x=(a,b,c,d)}.
+The four differences are #{b-a,c-b,d-c,a-d}, so the action is exactly
+##{\begin{aligned}
+2S_{t,m}(a,b,c,d)
+ &=(b-a)^2+t(c-b)^2\\
+ &\quad +(d-c)^2+t(a-d)^2\\
+ &\quad +m^2(a^2+b^2+c^2+d^2).
+\end{aligned}}
+Each edge occurs once, with one half of its weighted energy in #{S}.
+Every summand of #{2S} is nonnegative, with strict positivity off zero
+from the mass term.}
+\p{Set #{s=1+t+m^2}. The four edge outer products, equivalently
+expansion of the four squares, give diagonal coefficient #{s},
+cross terms #{-2ab,-2tbc,-2cd,-2tad}, and no #{ac} or #{bd} term.
+The [counting array](fdip-002O) is therefore
+##{Q_{t,m}=\begin{pmatrix}
+s&-1&0&-t\\
+-1&s&-t&0\\
+0&-t&s&-1\\
+-t&0&-1&s
+\end{pmatrix}.}
+Multiplication recovers #{x^TQ_{t,m}x=2S_{t,m}(x)}.
+For #{x=(0,1,0,0)}, the edge energy is #{1+t} and the mass energy
+is #{m^2}; hence #{S_{t,m}(0,1,0,0)=s/2}, explicitly #{3/2} when
+#{t=m=1}. No change of basis or reference measure occurs.}
+\p{This is a direct calculation in the supplied cycle data, with the
+edge-once convention of
+\citet{Section 2.1, pp. 4-5}{spielman2009effective} and the positive
+kinetic sign and half-action of
+\citet{Section 4, Equation (4.5), p. 3}{wingate2025lattice}.
+All coefficients here are dimensionless. No Gaussian normalizer or
+covariance is inferred from the energy calculation.}
