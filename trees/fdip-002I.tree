@@ -1,0 +1,52 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Lemma}
+\title{Uniqueness from finite rational cubes}
+\date{2026-10-25}
+
+\p{Let #{V} be finite. Suppose two Borel measures #{\mu,\nu} on
+#{X_V} agree on all bounded half-open coordinate boxes with rational
+endpoints and on the empty set. Assume explicitly that their common
+mass on every rational cube
+#{C_k=\{x\in X_V:-k<x(v)\le k\text{ for every }v\in V\}},
+#{k\ge1}, is finite. Then #{\mu=\nu}.
+In particular the hypothesis holds if both assign the prescribed
+finite Lebesgue volumes to those boxes. For empty #{V}, a box is the
+singleton, and agreement of its mass gives the conclusion.}
+\proof{
+\p{For nonempty #{V}, these rational boxes together with the empty set
+form a pi-system: intersections are again such boxes or empty.
+Each rational open box is a countable union of half-open rational boxes
+contained in it, so this pi-system generates the Borel structure by
+\ref{fdip-002E}. Fix #{k}. Restrict by
+#{\mu_k(A)=\mu(A\cap C_k)} and #{\nu_k(A)=\nu(A\cap C_k)}.
+The restrictions are finite, have the same finite total mass, and agree
+on the generating boxes because intersection with #{C_k} stays in that
+pi-system.}
+\p{For completeness, the pi-lambda argument is as follows. A lambda-system
+contains the whole space and is closed under complements and disjoint
+countable unions. Let #{\mathcal D} be the smallest lambda-system
+containing a pi-system #{\mathcal P}. For #{A\in\mathcal P}, the
+sets #{B} satisfying #{A\cap B\in\mathcal D} form a lambda-system:
+complement closure uses the difference of two nested members of
+#{\mathcal D}, and disjoint-union closure is immediate. It contains
+#{\mathcal P}, hence #{\mathcal D}. Repeating with fixed
+#{B\in\mathcal D} shows that #{\mathcal D} is closed under intersections.
+Complement and disjoint-union closure then give arbitrary countable
+unions by disjointification. Thus #{\mathcal D} is a sigma-algebra.}
+\p{The class on which #{\mu_k=\nu_k} is a lambda-system: complements
+use subtraction from their equal finite total masses, and disjoint
+unions use countable additivity. It therefore contains every Borel set.
+Finally #{C_k\uparrow X_V}; continuity from below gives
+#{\mu(A)=\lim_k\mu_k(A)=\lim_k\nu_k(A)=\nu(A)}. No subtraction
+of infinite masses occurs.}
+}
+\p{This is the localized uniqueness argument behind
+\citet{Proposition 1.7.11, pp. 197-199, preliminary version}{tao2011measure}.
+Mathlib's \leanref{MeasureTheory.Measure.pi_eq} characterizes a
+sigma-finite product by all measurable rectangles. TauCeti's
+\leanref/tauceti{MeasureTheory.Measure.ext_pi} assumes a finite total
+first measure; it cannot be applied directly to positive-dimensional
+#{\lambda_V}. Bare agreement of arbitrary infinite measures on rational
+boxes is not the lemma stated here.}

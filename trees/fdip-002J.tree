@@ -1,0 +1,49 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{Reindexing and splitting reference volume}
+\date{2026-10-25}
+
+\p{For a bijection #{e:V\to W}, define
+#{U_e:X_V\to X_W} by #{(U_ex)(w)=x(e^{-1}w)}. It is a linear
+homeomorphism, with inverse #{U_{e^{-1}}}, preserving the counting
+pairing, and
+##{(U_e)_*\lambda_V=\lambda_W,\qquad
+ f_*\mu(B):=\mu(f^{-1}B).}
+For a disjoint decomposition #{V=R\sqcup D}, the restriction-pair map
+#{\sigma(x)=(x|_R,x|_D)} has inverse pasting and satisfies
+##{\sigma_*\lambda_V=\lambda_R\otimes\lambda_D.}
+Either factor may be empty, carrying singleton mass one.}
+\proof{
+\p{The displayed maps and inverses are linear, hence continuous by
+\ref{fdip-002C}. Reindexing the finite sum proves preservation of
+#{h_V}. For a target rectangle #{\prod_wA_w}, its preimage under
+#{U_e} is #{\prod_vA_{e(v)}}. The rectangle formula and reindexing
+of a finite product give equal measures. The same argument for
+#{\sigma} combines the retained and removed coordinate boxes.
+The target generating boxes have prescribed finite cube masses, so
+\ref{fdip-002I} extends both equalities to all Borel sets.}
+\p{An enumeration #{b:\{1,\ldots,n\}\to V} gives the chart
+#{C_b(x)_i=x(b(i))}. It therefore transports #{\lambda_V} to ordinary
+Borel Lebesgue measure on #{\mathbb R^n}; two charts differ by a
+coordinate permutation. At #{n=0} both spaces are singletons with mass one.
+This proves independence of enumeration without a determinant calculation.}
+}
+\p{These finite-coordinate proofs use the product convention of
+\citet{Section 1.7.4, pp. 194-199, preliminary version}{tao2011measure}.
+The corresponding sigma-finite APIs are
+\leanref{MeasureTheory.measurePreserving_piCongrLeft} and
+\leanref{MeasureTheory.measurePreserving_piEquivPiSubtypeProd}; the latter
+uses a decidable splitting predicate. A one-coordinate split is
+\leanref/tauceti{TauCeti.measurePreserving_piSplitAt}, and the specified
+four-coordinate grouping is
+\leanref/tauceti{TauCeti.measurePreserving_finFourArrowPairPair}.}
+\p{Bare restriction #{\rho_R} is measurable, but if #{D\ne\varnothing}
+it is not reference-preserving: for a Borel #{A\subseteq X_R} of finite
+positive mass, #{\rho_R^{-1}(A)} has mass
+#{\lambda_R(A)\lambda_D(X_D)=\infty}. This includes #{R=\varnothing},
+when the target singleton has mass one. The probability-factor assumption
+in \leanref/tauceti{TauCeti.measurePreserving_pi_comp_embedding} excludes
+these unnormalized Lebesgue factors. Normalized marginals are a different
+[measure statement](fdip-000E).}

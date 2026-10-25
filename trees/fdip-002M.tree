@@ -1,0 +1,50 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Definition}
+\title{Induced Euclidean volume on a subspace}
+\date{2026-10-25}
+
+\p{Let #{H} be a finite-dimensional real inner-product space, in
+particular a subspace of #{(X_V,h_V)} with its induced topology and
+inner product. Choose an orthonormal chart #{C:H\to\mathbb R^k}.
+The \newvocab{induced Euclidean measure} is
+#{\lambda_H=(C^{-1})_*\lambda_{\{1,\ldots,k\}}} on its Borel sets.
+It is independent of the orthonormal chart. If #{H=\{0\}}, it is
+unit mass at zero. For an affine translate #{a+H}, use the pushforward
+of #{\lambda_H} under #{h\mapsto a+h}.}
+\proof{
+\p{A finite Gram-Schmidt construction produces an orthonormal basis:
+normalize a nonzero vector by its positive norm, subtract its components
+from a spanning family, and continue in the orthogonal complement.
+Positivity permits normalization at each nonzero step. Two such charts
+differ by a linear isometric isomorphism of #{\mathbb R^k};
+\ref{fdip-002L} proves independence. A different choice of origin
+in #{a+H} differs by a translation in #{H}, which preserves its
+coordinate measure by \ref{fdip-002K}.}
+\p{For a proper linear subspace #{H\subsetneq X_V}, extend its
+orthonormal basis to one of #{X_V} by the same construction. In those
+coordinates #{H} lies in a coordinate hyperplane and is closed.
+Within each bounded cube that hyperplane has measure zero: the
+rectangle formula has a zero-measure singleton factor and finite other
+factors. Monotonicity and countable exhaustion give zero ambient
+measure; orthogonal invariance transports this back. But the unit
+coordinate cube in #{H} has induced mass one. Thus induced volume is
+not the restriction of ambient #{\lambda_V}.}
+}
+\p{For example, on #{H=\{(s,s):s\in\mathbb R\}}, the segment
+#{0\le s\le1} has induced length #{\sqrt2}, ambient area zero,
+and raw #{s}-coordinate length one. Indeed its unit vector is
+#{(1,1)/\sqrt2}, so its orthonormal coordinate runs from zero to
+#{\sqrt2}. An arbitrary basis therefore needs its volume factor.}
+\p{The argument uses the transformation convention of
+\citet{Exercise 1.2.21, p. 41, preliminary version}{tao2011measure}.
+Mathlib's \leanref{OrthonormalBasis.measurePreserving_repr} targets
+EuclideanSpace; \leanref{PiLp.volume_preserving_ofLp} and
+\leanref{PiLp.volume_preserving_toLp} identify its real finite PiLp
+volume with ordinary coordinate products. TauCeti's
+\leanref/tauceti{Module.Basis.volume_eq_smul_addHaar} records the
+square-root Gram determinant factor for an arbitrary basis, while
+\leanref/tauceti{AffineIsometryEquiv.measurePreserving} applies to
+finite-dimensional real Borel inner-product spaces. These compare the
+same canonical-volume convention.}
