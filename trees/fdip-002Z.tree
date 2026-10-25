@@ -1,0 +1,58 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Definition}
+\title{Covariance and variance of Gaussian observables}
+\date{2026-10-25}
+
+\p{Let #{\mu_Q} be the [Gaussian law](fdip-0005) on a finite real
+inner-product space #{(E,h)}, and write #{\omega_Q} for its
+[expectation](fdip-0006). For Borel #{X,Y:E\to\mathbb R} with
+#{X}, #{Y} and #{XY} absolutely integrable, define their
+\newvocab{covariance} by
+##{\begin{aligned}
+\operatorname{Cov}_Q(X,Y)
+ &=\omega_Q(XY)-\omega_Q(X)\omega_Q(Y)\\
+ &=\omega_Q\bigl((X-\omega_Q(X))(Y-\omega_Q(Y))\bigr).
+\end{aligned}}
+Expansion and normalization prove the second equality; all four terms
+are integrable by the stated hypotheses. This extends the finite-sum
+\vocabk{covariance}{ftip-008H} to integrals.}
+\p{When #{X} and #{X^2} are integrable, its \newvocab{variance} is
+##{\begin{aligned}
+\operatorname{Var}_Q(X)&=\operatorname{Cov}_Q(X,X)\\
+ &=\omega_Q\bigl((X-\omega_Q(X))^2\bigr)\\
+ &=\omega_Q(X^2)-\omega_Q(X)^2\geq0.
+\end{aligned}}
+The inequality is positivity of the integral. In particular all these
+expressions exist for polynomials by \ref{fdip-002W}, consistently with
+the [polynomial state](fdip-002X).}
+\p{For #{\ell_j(x)=h(j,x)}, set #{K(j,k)=\operatorname{Cov}_Q(\ell_j,\ell_k)}.
+It is a finite symmetric bilinear form. There is a unique linear
+\newvocab{covariance operator} #{C_Q:E\to E}, relative to the specified
+#{h}, such that #{h(j,C_Qk)=K(j,k)}.}
+\proof{
+\p{In an orthonormal basis put #{C_Qk=\sum_i K(u_i,k)u_i}.
+Bilinearity of #{K} follows from integral linearity and gives the
+linearity of #{C_Q}. Orthonormal expansion proves the required pairing.
+If #{C_Q'} has the same pairings, then
+#{h(j,(C_Q-C_Q')k)=0} for every #{j,k}; choosing
+#{j=(C_Q-C_Q')k} proves equality. Thus the construction is independent
+of the basis. At #{E=0} it is the unique map. This representation
+does not identify #{C_Q} with inverse precision.}
+}
+\p{For the counting field space, the coordinate means vanish by
+\ref{fdip-002Y}, and the former coordinate notation is
+##{\begin{aligned}
+\operatorname{Cov}_Q(u,v)
+ &=\left\langle(\phi_u-\langle\phi_u\rangle_Q)
+                    (\phi_v-\langle\phi_v\rangle_Q)\right\rangle_Q\\
+ &=\langle\phi_u\phi_v\rangle_Q.
+\end{aligned}}
+The partition function, this two-point expectation, and the expectation
+of a different observable are different quantities. The separate
+[inverse-precision theorem](fdip-000B) computes this covariance.}
+\p{The definitions extend \ref{ftip-008H} directly; the integral identities
+use the preceding moment and state results. Positivity uses the ordinary
+real convention of \citet{Definition 3.9, p. 11}{waldmann2004states}
+through \ref{fdip-0024}, not an additional inverse-covariance assumption.}

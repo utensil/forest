@@ -10,7 +10,7 @@
 \vocabk{Gaussian probability law}{fdip-0005} satisfies
 ##{\langle\phi_v\phi_w\rangle_Q=(Q^{-1})_{vw}.}
 The left side is the coordinate
-\vocabk{covariance}{fdip-0006}, since the coordinate means vanish.
+\vocabk{covariance}{fdip-002Z}, since the coordinate means vanish.
 This is the precision form of
 \citet{Proposition B.55, p. 505, and Theorem 8.4, p. 385}{friedli2017statistical}.
 For #{Q=Q_m=L+m^2I}, it identifies the covariance with the
@@ -19,8 +19,8 @@ For #{Q=Q_m=L+m^2I}, it identifies the covariance with the
 \proof{
 \p{Write #{g_a(x)=\exp(-a x^2/2)} and
 #{I(a)=\int_{\mathbb R}g_a(x)\,dx} for #{a>0}.
-The [normalization argument](fdip-0005) gives #{0<I(a)<\infty}.
-The [polynomial bound](fdip-0006) proves absolute integrability of
+The [scalar normalization](fdip-002S) gives #{0<I(a)<\infty}.
+The [polynomial bound](fdip-002W) proves absolute integrability of
 #{xg_a(x)} and #{x^2g_a(x)}. Oddness therefore gives
 #{\int_{\mathbb R}xg_a(x)\,dx=0}. On #{[-R,R]}, integration of
 #{(xg_a(x))'=g_a(x)-a x^2g_a(x)} yields
@@ -42,7 +42,7 @@ vanishing boundary term.}
 density becomes
 ##{\prod_{i=1}^n\frac{g_{q_i}(y_i)}{I(q_i)}.}
 All coordinate products are absolutely integrable by
-\ref{fdip-0006}, so Fubini applies. Integrating the other coordinates
+\ref{fdip-002W}, so [signed Fubini](fdip-002Q) applies. Integrating the other coordinates
 gives one. For distinct #{i,j}, the two remaining first-moment integrals
 vanish; for #{i=j}, the preceding calculation gives
 ##{\langle y_i y_j\rangle_Q=\delta_{ij}q_i^{-1}.}
@@ -78,7 +78,8 @@ G_m&=\sum_{a=0}^3q_a^{-1}u_au_a^T,\\
 \det Q_{t,m}&=m^2(m^2+2)(m^2+2t)\\
  &\quad\cdot(m^2+2+2t).
 \end{aligned}}
-The [partition function](fdip-0005) is consequently
+The [partition function](fdip-0005), evaluated by
+[positive normalization](fdip-002T), is consequently
 ##{Z_{t,m}=\frac{(2\pi)^2}{\sqrt{q_0q_1q_2q_3}}.}
 Two covariance entries, read from the signs in the table, are
 ##{\begin{aligned}

@@ -2,81 +2,41 @@
 \meta{agent-authored}{true}
 \tag{fdip}
 \taxon{Definition}
-\title{Gaussian normalization}
-\date{2026-10-16}
+\title{The Gaussian partition function and probability law}
+\date{2026-10-25}
 
-\p{Let #{Q} be a \vocabk{positive precision parameter}{fdip-0004} on
-#{X=\mathbb R^V}, where #{n=|V|\geq 1}, with the specified product
-[Lebesgue measure](fdip-002H). Write #{Q} also for its
-[counting-coordinate array](fdip-002O). Its \newvocab{Gaussian partition function} is initially
-the extended nonnegative integral
-##{Z_Q=\int_X\exp\left(-\frac{1}{2}\phi^TQ\phi\right)d\phi.}
-It satisfies
-##{0<Z_Q=\frac{(2\pi)^{n/2}}{\sqrt{\det Q}}<\infty.}
-Consequently the \newvocab{Gaussian probability law} with precision
-parameter #{Q} is the Borel probability measure
-##{\mu_Q(A)=\frac{1}{Z_Q}\int_A
-   \exp\left(-\frac{1}{2}\phi^TQ\phi\right)d\phi.}
-The change-of-variables argument below adapts the positive Gaussian density
-calculation in \citet{Lemma B.54 and Proposition B.55, pp. 504-505}{friedli2017statistical}
-to a precision parameter.}
-
+\p{Let #{Q} be a [positive precision parameter](fdip-0004) on a
+finite real inner-product space #{(E,h)}, with canonical volume
+#{\lambda_E}. Its \newvocab{Gaussian partition function} is
+##{Z_Q=\int_E w_Q\,d\lambda_E,
+\qquad w_Q(x)=e^{-h(x,Qx)/2}.}
+The [normalization theorem](fdip-002T) proves
+##{0<Z_Q=\frac{(2\pi)^{n/2}}{\sqrt{\det Q}}<\infty,
+\qquad n=\dim E.}
+Its \newvocab{Gaussian probability law} is the Borel measure
+##{\mu_Q(A)=Z_Q^{-1}\int_A w_Q\,d\lambda_E.}
+In the counting field specialization this is exactly the density
+#{Z_Q^{-1}\exp(-\phi^TQ\phi/2)} against the product reference measure.}
 \proof{
-\p{First let #{a>0} and #{g_a(x)=\exp(-a x^2/2)}. On #{[-1,1]} this
-function is at most one. For #{|x|\geq 1}, the inequality
-#{x^2\geq|x|} gives #{g_a(x)\leq\exp(-a|x|/2)}, whose integral over
-the real line is #{4/a}. Thus #{I(a)=\int_{\mathbb R}g_a(x)\,dx}
-is finite. It is positive because #{g_a(x)\geq\exp(-a/2)>0} on
-#{[-1,1]}.}
-
-\p{The real symmetric spectral theorem gives an orthogonal matrix #{U}
-with
-##{Q=U\operatorname{diag}(\lambda_1,\ldots,\lambda_n)U^T.}
-Every eigenvalue is positive: #{\lambda_i=(Ue_i)^TQ(Ue_i)>0} for the
-#{i}-th coordinate vector #{e_i}. Substitute #{\phi=Uy}. Orthogonality
-gives #{|\det U|=1}, so [product Lebesgue measure is preserved](fdip-002L) and
-##{\begin{aligned}
-&\exp\left(-\frac{1}{2}\phi^TQ\phi\right)\\
-&\quad=\prod_{i=1}^n\exp(-\lambda_i y_i^2/2).
-\end{aligned}}
-Tonelli's theorem applies to this nonnegative integrand. Repeated
-integration yields #{Z_Q=\prod_{i=1}^n I(\lambda_i)}, a finite positive
-product. No covariance identity enters this argument.}
-
-\p{For the value, put #{J=I(1)}. Tonelli and polar coordinates give
-##{\begin{aligned}
-J^2&=\int_{\mathbb R^2}g_1(x)g_1(y)\,dx\,dy\\
-&=2\pi\int_0^\infty r\exp(-r^2/2)\,dr\\
-&=2\pi.
-\end{aligned}}
-Since #{J>0}, the substitution #{u=\sqrt a\,x} gives
-#{I(a)=\sqrt{2\pi /a}}. Also #{\det Q=\prod_i\lambda_i>0}, proving
-the stated formula for #{Z_Q}. The nonnegative density #{w_Q/Z_Q}
-defines a countably additive measure with total mass one.}
+\p{The weight is positive Borel. Nonnegativity and the empty-set axiom
+follow from the nonnegative integral. For pairwise disjoint Borel
+#{A_k}, the functions #{w_Q\sum_{k=1}^N\mathbf1_{A_k}} increase to
+#{w_Q\mathbf1_{\bigcup_k A_k}}. Monotone convergence and finite
+additivity of the integral give countable additivity after division
+by #{Z_Q}. The total mass is #{Z_Q/Z_Q=1}.}
 }
-
-\p{The reference measure matters for the unnormalized integral. Replacing
-#{d\phi} by #{c\,d\phi}, with #{c>0}, multiplies #{Z_Q} by #{c} but
-leaves #{\mu_Q} unchanged. A finite-sum
-\vocabk{partition function}{ftip-008J} has the same normalizing role;
-its finite-support argument does not prove integrability on #{X}.}
-
-\p{Positivity is essential. If #{Q=0}, the weight is one and
-#{Z_Q=\infty}, since #{\mathbb R^n} has infinite Lebesgue volume.
-For #{Q=\operatorname{diag}(1,-1)}, the weight is
-#{\exp(-x^2/2)\exp(y^2/2)}. On #{|x|\leq 1} its first factor is
-at least #{\exp(-1/2)}, and the integral over #{y} diverges. Neither
-case defines the probability law above. A probability law supported on a
-proper subspace would require a different reference measure.}
-
-\p{A zero normalizer is a different failure. For a general nonnegative
-weight #{w\equiv 0}, one has #{\int_Xw\,d\phi=0} and cannot normalize
-by division. This never occurs for the positive Gaussian weight just
-proved integrable. In particular, zero precision does not mean zero
-partition function.}
-
-\p{Mathlib's \leanref{integrable_exp_neg_mul_sq} proves the
-one-dimensional integrability step for a positive coefficient, and
-\leanref{integral_gaussian} computes its integral. The latter is a
-value theorem for a totalized integral; the positive-coefficient
-integrability hypothesis is necessary for its use here.}
+\p{In an orthonormal eigenchart the density is the product of the centered
+scalar densities #{I(q_i)^{-1}e^{-q_i y_i^2/2}}. This identification
+uses the scalar value and normalization, before computing covariance.
+For #{n=0}, the action is zero at the unique point, #{Z_Q=1}, and
+#{\mu_Q=\delta_0}. Replacing the reference volume by #{c\lambda_E},
+#{0<c<\infty}, multiplies #{Z_Q} by #{c} and leaves #{\mu_Q}
+unchanged, as in the [reference-rescaling example](fdip-002N).
+A finite-sum \vocabk{partition function}{ftip-008J} has the same
+normalizing role; finite support alone does not prove integrability here.}
+\p{The density convention is compared with
+\citet{Lemma B.54 and Proposition B.55, pp. 504-505}{friedli2017statistical};
+that source uses covariance rather than precision. Countable additivity
+uses \citet{Theorem 1.4.44, pp. 107-108, preliminary version}{tao2011measure}.
+The [normalization failures](fdip-002U) distinguish infinite normalizers,
+zero weights and the zero-dimensional case.}

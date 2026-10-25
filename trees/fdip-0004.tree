@@ -5,24 +5,28 @@
 \title{Positive quadratic actions}
 \date{2026-10-16}
 
-\p{Let #{V} be a nonempty finite vertex set and let
-#{X_V=\operatorname{Map}(V,\mathbb R)} be its
-[real field space](fdip-002C), with counting inner product
-#{h_V(x,y)=\sum_{v\in V}x(v)y(v)}. Its topology, [Borel sigma-algebra](fdip-002D)
-and [coordinate Lebesgue measure](fdip-002H) are fixed independently
-of an action. There are finitely many coordinates but continuously many
-configurations. Real-spin integration uses this reference measure in
-\citet{Definition 8.1 and Equation (8.3), author version p. 381}{friedli2017statistical}.}
+\p{Let #{(E,h)} be a finite-dimensional real inner-product space,
+with #{n=\dim E\geq0}, its finite-dimensional topology, Borel sigma-algebra
+and [canonical Euclidean volume](fdip-002M). The field specialization
+is #{E=X_V=\operatorname{Map}(V,\mathbb R)} for a finite vertex set,
+including the empty set, with counting inner product
+#{h_V(x,y)=\sum_{v\in V}x(v)y(v)} and
+[coordinate Lebesgue measure](fdip-002H). There are finitely many
+coordinates but, in positive dimension, continuously many configurations.
+Real-spin integration uses this reference convention in
+\citet{Definition 8.1 and Equation (8.3), author version p. 381}{friedli2017statistical}.
+The extension to #{(E,h)} is the same paired construction in an
+orthonormal chart; it asserts no ring-general probability law.}
 
 \p{A \newvocab{positive precision parameter} is a real linear
-endomorphism #{Q:X_V\to X_V} that is [self-adjoint](fdip-001P)
-for #{h_V} and
-strictly positive: #{h_V(x,Qx)>0} for every #{x\ne0}.
+endomorphism #{Q:E\to E} that is [self-adjoint](fdip-001P)
+for #{h} and
+strictly positive: #{h(x,Qx)>0} for every #{x\ne0}.
 Define its symmetric bilinear form and associated quadratic form by
-##{b_Q(x,y)=h_V(x,Qy),\qquad q_Q(x)=b_Q(x,x).}
+##{b_Q(x,y)=h(x,Qy),\qquad q_Q(x)=b_Q(x,x).}
 Linearity in both slots follows from linearity of #{Q} and the pairing.
 Self-adjointness gives
-#{b_Q(y,x)=h_V(Qy,x)=h_V(y,Qx)=b_Q(x,y)}.
+#{b_Q(y,x)=h(Qy,x)=h(y,Qx)=b_Q(x,y)}.
 Consequently
 ##{q_Q(x+y)-q_Q(x)-q_Q(y)=2b_Q(x,y).}
 Also #{q_Q(cx)=c^2q_Q(x)} for every real #{c}. This is the
@@ -32,7 +36,7 @@ alone would not assert self-adjointness of an arbitrary endomorphism.}
 \p{Its \newvocab{Euclidean quadratic action} and
 \newvocab{Boltzmann weight} are
 ##{\begin{aligned}
-S_Q(x)&=\frac12 q_Q(x)=\frac12h_V(x,Qx),\\
+S_Q(x)&=\frac12 q_Q(x)=\frac12h(x,Qx),\\
 w_Q(x)&=\exp(-S_Q(x)).
 \end{aligned}}
 Thus #{q_Q=2S_Q}, #{S_Q(0)=0}, and #{S_Q(x)>0} off zero.
@@ -42,7 +46,7 @@ The finite-coordinate formulas make #{S_Q} continuous, hence
 [Borel measurable](fdip-002G), and so is its exponential.
 In particular #{0<w_Q(x)\le1}, with equality #{w_Q(x)=1} exactly
 when #{x=0}. This bound does not prove integrability
-on a space of infinite reference volume; [Gaussian normalization](fdip-0005)
+on a space of infinite reference volume; [Gaussian normalization](fdip-002T)
 supplies that separate argument.}
 
 \p{The [counting-array bridge](fdip-002O) recovers the familiar
