@@ -1,0 +1,100 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{An explicit conditional Gaussian kernel}
+\date{2026-10-29}
+
+\p{In the orthogonal positive setting of
+[Gaussian elimination](fdip-000D), let #{X} be retained and #{Y}
+eliminated. The components of #{Q} are #{A,B,B^\dagger,C}.
+Put #{T=C-B^\dagger A^{-1}B} and
+#{c_A=(2\pi)^{\dim X/2}/\sqrt{\det A}}. The maps #{A,T} are
+positive definite by [exchanging the eliminated summand](fdip-001Y).
+For every #{y\in Y}, define a probability measure on #{X} by
+##{\begin{aligned}
+k_y(x)&=c_A^{-1}\exp\bigl(-\tfrac12
+ h_X(x+A^{-1}By,A(x+A^{-1}By))\bigr),\\
+\kappa(y,D)&=\int_D k_y(x)\,d\lambda_X(x)
+\end{aligned}}
+for Borel #{D\subseteq X}. These measures form a measurable
+\newvocab{conditional probability kernel} for the retained field
+given the eliminated field. Its mean is #{-A^{-1}By} and covariance
+operator is #{A^{-1}}.}
+
+\proof{
+\p{Exchanged square completion gives
+##{\begin{aligned}
+h_E(J(x,y),QJ(x,y))
+ &=h_X(x+A^{-1}By,A(x+A^{-1}By))\\
+ &\quad+h_Y(y,Ty).
+\end{aligned}}
+The joint density relative to #{\lambda_X\otimes\lambda_Y} is
+#{p_Q(x,y)=Z_Q^{-1}w_Q(J(x,y))}. Its #{Y}-marginal density is
+##{\begin{aligned}
+r(y)&=\int_Xp_Q(x,y)\,d\lambda_X(x)\\
+ &=\frac{c_A}{Z_Q}e^{-h_Y(y,Ty)/2}>0.
+\end{aligned}}
+It is continuous, finite and integrates to one by Tonelli.
+Division gives #{k_y(x)=p_Q(x,y)/r(y)}. Translation invariance and
+[positive normalization](fdip-002T) prove
+#{\int_Xk_y\,d\lambda_X=1} for every #{y}, including zero-dimensional
+spaces. Thus #{\kappa(y,\cdot)} is a probability measure.}
+\p{For fixed Borel #{D}, the function
+#{(y,x)\mapsto\mathbf1_D(x)k_y(x)} is nonnegative Borel.
+Measurability of parameter integrals for sigma-finite volume shows
+that #{y\mapsto\kappa(y,D)} is Borel. This is the measurable-parameter
+part of
+\citet{Theorem 1.7.15, pp. 200-201, preliminary version}{tao2011measure},
+applied to the uncompleted Borel product.}
+\p{For Borel #{D\subseteq X} and #{H\subseteq Y}, Tonelli and
+#{k_yr=p_Q} give
+##{\mu_Q(J(D\times H))
+ =\int_H\kappa(y,D)r(y)\,d\lambda_Y(y).}
+The set on the left is Borel because #{J} is a homeomorphism.
+This rectangle identity is the conditional-distribution identity
+with respect to the actual #{Y}-marginal. It divides densities,
+not the probability of the event #{Y=y}; in positive dimension the
+latter singleton has probability zero. Our version is defined for
+every #{y}, whereas conditional distributions in general are
+identified only almost everywhere.}
+\p{Under #{\kappa(y,\cdot)}, the translated variable
+#{u=x+A^{-1}By} has centered precision #{A}. Its mean is zero and
+its covariance is #{A^{-1}} by \ref{fdip-000B}. Translating back
+proves the stated mean and covariance.}
+}
+
+\p{The [retained marginal](fdip-000E) instead has mean zero and
+covariance #{S^{-1}} for #{S=A-BC^{-1}B^\dagger}. At #{y=0}, the
+conditional precision is #{A}, not #{S}. If #{B=0}, then #{S=A}
+and the conditional mean is zero for every #{y}, so the laws coincide.
+The [four-cycle](fdip-000F) exhibits their different off-diagonal
+covariances when the coupling is nonzero.}
+\p{To compare covariance parameters, put #{\Sigma=Q^{-1}} and
+write its components as #{\Sigma_{XX},\Sigma_{XY},\Sigma_{YY}}.
+The [opposite-pivot inverse formulas](fdip-001V) give
+##{\begin{aligned}
+\Sigma_{YY}&=T^{-1},\\
+\Sigma_{XY}&=-A^{-1}BT^{-1},\\
+\Sigma_{XX}&=A^{-1}+A^{-1}BT^{-1}B^\dagger A^{-1}.
+\end{aligned}}
+Consequently
+##{\begin{aligned}
+\Sigma_{XY}\Sigma_{YY}^{-1}&=-A^{-1}B,\\
+\Sigma_{XX}-\Sigma_{XY}\Sigma_{YY}^{-1}\Sigma_{YX}&=A^{-1}.
+\end{aligned}}
+The covariance Schur complement for conditioning differs from the
+precision Schur complement for marginalization.}
+\p{\citet{Appendix A.2, equation (A.6), p. 200}{rasmussen2006gaussian}
+gives these conditional Gaussian parameters. The density construction
+above additionally checks normalization, parameter measurability and
+the conditional integral identity.}
+\p{TauCeti's
+\leanref/tauceti{TauCeti.Probability.condDistrib_multivariateGaussian}
+identifies a conditional distribution with its Gaussian kernel almost
+everywhere for the conditioning marginal, assuming a Gaussian joint
+law, positive-semidefinite covariance and a positive-definite
+conditioning covariance block. Here #{\Sigma=Q^{-1}>0} and
+#{\Sigma_{YY}=T^{-1}>0}; the displayed identities supply the parameter
+conversion. The totalized Gaussian constructor or a Markov-kernel
+instance alone would not identify the conditional distribution.}
