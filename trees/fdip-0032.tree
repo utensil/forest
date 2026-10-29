@@ -1,0 +1,52 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{The Laplacian Moore-Penrose inverse}
+\date{2026-10-29}
+
+\p{With the [kernel decomposition](fdip-0031), define the
+\newvocab{Laplacian pseudoinverse} by
+##{L^+=iL_H^{-1}p_H.}
+This is the unique endomorphism #{A} satisfying the four
+\newvocab{Moore-Penrose identities}:
+##{\begin{aligned}
+LAL&=L,& ALA&=A,\\
+(LA)^\dagger&=LA,&(AL)^\dagger&=AL.
+\end{aligned}}
+It vanishes on #{K}, is the inverse of #{L_H} on #{H}, and has spectral
+expression #{L^+=\sum_{\lambda_a>0}\lambda_a^{-1}P_{u_a}}, where
+#{P_u x=h(u,x)u} for a unit eigenvector.}
+\proof{
+\p{On the orthogonal decomposition #{K\mathbin\perp H}, the operators
+#{L,L^+} have blocks #{(0,L_H)} and #{(0,L_H^{-1})}. Hence
+##{LL^+=L^+L=P_H.}
+The inverse on #{H} is self-adjoint by the
+[inverse-response lemma](fdip-001Q). Thus #{L^+} is self-adjoint, both
+products are self-adjoint, and multiplication once more gives
+#{LL^+L=L} and #{L^+LL^+=L^+}.}
+\p{Suppose #{A} satisfies the four identities. Then #{LA} is
+self-adjoint and idempotent, since #{LALA=LA}. Its range lies in
+#{\operatorname{ran}L=H}, and #{LAL=L} shows it acts as the identity
+on #{H}. Thus it is the orthogonal projection #{P_H}.
+Similarly #{AL} is self-adjoint and idempotent. Its kernel is #{K}:
+#{Lx=0} implies #{ALx=0}, while #{ALx=0} implies
+#{Lx=LALx=0}. A self-adjoint idempotent is the orthogonal projection
+onto its kernel complement, so #{AL=P_H}. For #{y=Lx\in H},
+##{Ay=ALx=P_Hx=L_H^{-1}y.}
+Finally #{A=ALA=A(LA)=AP_H}, so #{A} vanishes on #{K}.
+These two restrictions force #{A=L^+}. The argument includes #{H=0}
+and #{E=0}; the unique map on the zero space is its own inverse.}
+}
+\p{TauCeti's \leanref/tauceti{LinearMap.IsMoorePenroseInverse}
+uses exactly these four conditions for real inner-product spaces.
+Its \leanref/tauceti{LinearMap.IsMoorePenroseInverse.unique}
+supports uniqueness, and the finite-dimensional characterization
+\leanref/tauceti{LinearMap.isMoorePenroseInverse_iff_eq_moorePenroseInverse}
+identifies this construction with #{L.\mathrm{moorePenroseInverse}}.
+The weaker inner-inverse identity #{LAL=L} alone gives neither this
+uniqueness nor a constrained probability law.}
+\p{The construction is a direct specialization of the orthogonal spectral
+decomposition in \citet{Section A.5.2, pp. 646-647}{boyd2004convex}.
+The four-identity and uniqueness arguments above establish the additional
+Moore-Penrose conclusion; no Gaussian law follows from that conclusion alone.}

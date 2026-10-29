@@ -5,101 +5,85 @@
 \title{Covariance is inverse precision}
 \date{2026-10-16}
 
-\p{For a \vocabk{positive precision parameter}{fdip-0004} #{Q} on
-#{\mathbb R^V}, use its [counting array](fdip-002O). The centered
-\vocabk{Gaussian probability law}{fdip-0005} satisfies
-##{\langle\phi_v\phi_w\rangle_Q=(Q^{-1})_{vw}.}
-The left side is the coordinate
-\vocabk{covariance}{fdip-002Z}, since the coordinate means vanish.
-This is the precision form of
-\citet{Proposition B.55, p. 505, and Theorem 8.4, p. 385}{friedli2017statistical}.
-For #{Q=Q_m=L+m^2I}, it identifies the covariance with the
-\vocabk{Green kernel}{fdip-000A}.}
-
+\p{Let #{Q} be a positive self-adjoint precision on a finite real
+inner-product space #{(E,h)}, with its [Gaussian law](fdip-0005).
+For #{j,k\in E}, put #{\ell_j(x)=h(j,x)}. Then
+##{\begin{aligned}
+\omega_Q(\ell_j)&=0,\\
+\operatorname{Cov}_{\mu_Q}(\ell_j,\ell_k)
+ &=h(j,Q^{-1}k).
+\end{aligned}}
+Thus its [covariance operator](fdip-002Z), relative to the specified
+pairing, is #{C_Q=Q^{-1}}. On the counting vertex space,
+#{\ell_{\delta_v}(\phi)=\phi(v)}, so
+##{\omega_Q(\phi(v)\phi(w))
+   =h_V(\delta_v,Q^{-1}\delta_w).}
+For #{Q=L+m^2I}, this is the [Green kernel](fdip-000A), with no
+vertex-volume factor. The density convention agrees with
+\citet{Proposition B.55, p. 505, and Theorem 8.4, p. 385}{friedli2017statistical}
+after substituting covariance #{Q^{-1}} for precision #{Q}.}
 \proof{
 \p{Write #{g_a(x)=\exp(-a x^2/2)} and
 #{I(a)=\int_{\mathbb R}g_a(x)\,dx} for #{a>0}.
-The [scalar normalization](fdip-002S) gives #{0<I(a)<\infty}.
-The [polynomial bound](fdip-002W) proves absolute integrability of
-#{xg_a(x)} and #{x^2g_a(x)}. Oddness therefore gives
-#{\int_{\mathbb R}xg_a(x)\,dx=0}. On #{[-R,R]}, integration of
-#{(xg_a(x))'=g_a(x)-a x^2g_a(x)} yields
+The [scalar normalization](fdip-002S) gives #{0<I(a)<\infty};
+[finite polynomial moments](fdip-002W) give absolute integrability
+of #{xg_a(x)} and #{x^2g_a(x)}. Reflection makes the first integral
+its own negative, hence zero. On #{[-R,R]}, integrate
+#{(xg_a(x))'=g_a(x)-a x^2g_a(x)} to obtain
 ##{\begin{aligned}
-&a\int_{-R}^R x^2g_a(x)\,dx\\
-&\quad=\int_{-R}^R g_a(x)\,dx\\
-&\qquad-2R\exp(-aR^2/2).
+a\int_{-R}^R x^2g_a(x)\,dx
+ &=\int_{-R}^R g_a(x)\,dx\\
+ &\quad-2R\exp(-aR^2/2).
 \end{aligned}}
-The same polynomial bound gives
-#{R\exp(-aR^2/2)\le C\exp(-aR^2/4)} for #{R\ge0}, with a finite
-constant #{C}; hence the boundary term tends to zero. Monotone
-convergence on both nonnegative integrands now gives
-##{\frac{1}{I(a)}\int_{\mathbb R}x^2g_a(x)\,dx=a^{-1}.}
-Thus the integration by parts has an integrable second moment and a
-vanishing boundary term.}
-
-\p{Diagonalize #{Q=U\operatorname{diag}(q_1,\ldots,q_n)U^T}, with
-#{U} orthogonal and every #{q_i>0}. Under #{\phi=Uy}, the normalized
-density becomes
-##{\prod_{i=1}^n\frac{g_{q_i}(y_i)}{I(q_i)}.}
-All coordinate products are absolutely integrable by
-\ref{fdip-002W}, so [signed Fubini](fdip-002Q) applies. Integrating the other coordinates
-gives one. For distinct #{i,j}, the two remaining first-moment integrals
-vanish; for #{i=j}, the preceding calculation gives
-##{\langle y_i y_j\rangle_Q=\delta_{ij}q_i^{-1}.}
-Expanding the finite sums #{\phi_v=\sum_iU_{vi}y_i} therefore gives
+For #{R\geq1}, #{e^{aR^2/2}\geq aR^2/2} gives
+#{R e^{-aR^2/2}\leq 2/(aR)\to0}.
+Monotone convergence on both nonnegative integrands, with their
+already established finite integrals, therefore gives
+##{I(a)^{-1}\int_{\mathbb R}x^2g_a(x)\,dx=a^{-1}.}}
+\p{Choose an [orthonormal eigenbasis](fdip-002R) #{u_i} of #{Q}, with
+#{Qu_i=q_i u_i}, #{q_i>0}. In #{x=\sum_i y_i u_i}, volume preservation
+and [normalization](fdip-002T) give the product density
+##{\prod_i g_{q_i}(y_i)/I(q_i).}
+All coordinate products are absolutely integrable by \ref{fdip-002W},
+so [signed Fubini](fdip-002Q) applies. Integrating the other coordinates
+gives one. For #{i\ne j}, the two first moments give zero; for #{i=j},
+the scalar second moment gives #{q_i^{-1}}. Thus
+#{\omega_Q(y_i y_j)=\delta_{ij}q_i^{-1}} and every #{\omega_Q(y_i)=0}.
+The finite expansion #{\ell_j(x)=\sum_i h(j,u_i)y_i} now yields
 ##{\begin{aligned}
-\langle\phi_v\phi_w\rangle_Q
-  &=\sum_i U_{vi}q_i^{-1}U_{wi}\\
-  &=(Q^{-1})_{vw}.
+\operatorname{Cov}(\ell_j,\ell_k)
+ &=\sum_i q_i^{-1}h(j,u_i)h(k,u_i)\\
+ &=h(j,Q^{-1}k).
 \end{aligned}}
-Here expectations in #{y} denote the same law after the indicated change
-of coordinates.}
+If two operators represented this bilinear form, their difference
+applied to #{k} would be orthogonal to every #{j}, hence zero.
+This proves uniqueness. In dimension zero the covariance is the zero
+form, and its representing map is the unique invertible endomorphism.}
 }
-
-\p{The [alternating four-cycle](fdip-0003) makes the formula explicit.
-For #{t,m>0}, the [matrix #{L_t}](fdip-0008) has the following
-orthonormal eigenvectors #{u_a}, written as rows #{2u_a^T}:
-##{\begin{array}{c|c|c}
-a&2u_a^T&\lambda_a\\\hline
-0&(1,1,1,1)&0\\
-1&(1,-1,-1,1)&2\\
-2&(1,1,-1,-1)&2t\\
-3&(1,-1,1,-1)&2+2t
-\end{array}}}
-\p{Each displayed row has squared norm four, distinct rows have dot
-product zero, and multiplication by the displayed #{L_t} gives the stated
-eigenvalue. For example its first row sends
-#{(1,-1,-1,1)^T} to #{(1+t)+1-t=2}; the remaining coordinates give
-#{2(-1,-1,1)}. The same substitution verifies the other three rows.
-These vectors still form an orthonormal basis when #{t=1}, although two
-eigenvalues then agree. With #{q_a=m^2+\lambda_a},
+\p{For a nonorthonormal basis #{b_i}, the coordinate functional is
+#{h(b^i,\cdot)}. The dual basis satisfies #{h(b^i,b_j)=\delta_{ij}}.
+Its covariance array
+therefore has entries #{h(b^i,Q^{-1}b^j)}; it is not the unqualified
+array of the inverse operator in that basis. The counting basis is
+orthonormal, giving the coordinate formula above. The
+[alternating-cycle example](fdip-0037) evaluates it explicitly.}
+\p{To compare with formal Gaussian providers, put #{n=\dim E}, choose an orthonormal
+chart and let #{S} represent #{Q^{-1}} there. The positive inverse
+is positive definite, #{S^{-1}} represents #{Q}, and
+#{\det S=(\det Q)^{-1}}. Consequently the provider density is
 ##{\begin{aligned}
-G_m&=\sum_{a=0}^3q_a^{-1}u_au_a^T,\\
-\det Q_{t,m}&=m^2(m^2+2)(m^2+2t)\\
- &\quad\cdot(m^2+2+2t).
+ &(2\pi)^{-n/2}(\det S)^{-1/2}
+       e^{-y^TS^{-1}y/2}\\
+ &\qquad=Z_Q^{-1}e^{-h(x,Qx)/2}.
 \end{aligned}}
-The [partition function](fdip-0005), evaluated by
-[positive normalization](fdip-002T), is consequently
-##{Z_{t,m}=\frac{(2\pi)^2}{\sqrt{q_0q_1q_2q_3}}.}
-Two covariance entries, read from the signs in the table, are
-##{\begin{aligned}
-4\langle\phi_0^2\rangle_{t,m}
-  &=q_0^{-1}+q_1^{-1}\\
-  &\quad+q_2^{-1}+q_3^{-1},\\
-4\langle\phi_0\phi_1\rangle_{t,m}
-  &=q_0^{-1}-q_1^{-1}\\
-  &\quad+q_2^{-1}-q_3^{-1}.
-\end{aligned}}
-The sign of each term in the second entry is the product of the first
-two coordinates of its eigenvector.}
-
-\p{Mathlib's
+The [orthonormal chart](fdip-002L) and the Euclidean-space coordinate
+wrapper preserve canonical volume. Thus the chart pushforward of
+#{\mu_Q} is #{\mathrm{multivariateGaussian}(0,S)} by
+\leanref/tauceti{TauCeti.Probability.multivariateGaussian_eq_withDensity}.
+Mathlib's
 \leanref{ProbabilityTheory.covariance_eval_multivariateGaussian}
-identifies coordinate covariance with the supplied positive semidefinite
-covariance matrix #{S}. TauCeti's
-\leanref/tauceti{TauCeti.Probability.multivariateGaussian_eq_withDensity}
-gives the Lebesgue density when #{S} is positive definite. For this
-precision convention, one must take #{S=Q^{-1}} and identify its density,
-determinant factor and Euclidean coordinates with #{\mu_Q}; the theorem
-does not take #{Q} as a precision argument. The integral proof above
-establishes the stated identity directly.}
+then identifies its coordinate covariance with #{S}; its positive
+semidefinite hypothesis follows from positive definiteness. The
+parameter is covariance #{S=Q^{-1}}, not precision #{Q}. This density,
+determinant and volume identification is needed in addition to the
+covariance declaration; the integral proof above is independent of it.}

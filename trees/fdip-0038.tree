@@ -1,0 +1,40 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Example}
+\title{The alternating cycle at zero mass}
+\date{2026-10-29}
+
+\p{The [alternating-cycle eigenbasis](fdip-0037) has constant unit
+vector #{u_0=(1,1,1,1)/2}; its positive eigenvalues are
+#{2,2t,2+2t}. Hence the [mean-zero law](fdip-000C) has
+##{\begin{aligned}
+\operatorname{pdet}L&=8t(1+t),\\
+Z_H&=\frac{(2\pi)^{3/2}}{\sqrt{8t(1+t)}},\\
+L^+&=\tfrac12P_{u_1}+\tfrac1{2t}P_{u_2}
+            +\tfrac1{2+2t}P_{u_3}.
+\end{aligned}}
+Its covariance rows follow from the four signed sums of \ref{fdip-0037}
+by setting #{d_0=0}, #{d_1=1/2}, #{d_2=1/(2t)}, and
+#{d_3=1/(2+2t)}. This is the [pseudoinverse](fdip-0032), not an inverse
+on the full vertex space.}
+\p{At #{t=1}, its first row is
+##{(5/16,-1/16,-3/16,-1/16).}
+All diagonal entries are #{5/16}. Thus an opposite field difference has
+variance #{2(5/16)-2(-3/16)=1}, while an adjacent difference has variance
+#{2(5/16)-2(-1/16)=3/4}. Both are finite limits of the corresponding
+massive variances by \ref{fdip-0034}.}
+\p{The massive constant contribution to every covariance entry is
+#{1/(4m^2)}. Its divergence cancels in field differences, and
+[kernel factorization](fdip-0033) gives the exact normalizer relation
+##{\begin{aligned}
+Z_{Q_m}&=\frac{\sqrt{2\pi}}{m}Z_{H,m},\\
+mZ_{Q_m}&\longrightarrow\sqrt{2\pi}Z_H.
+\end{aligned}}
+The full normalizer therefore does not tend to #{Z_H}; the constrained
+law uses its own three-dimensional reference volume.}
+\p{This calculation applies the induced-volume construction of
+\ref{fdip-000C} to the positive spectral modes.}
+\p{\citet{Proposition B.55, p. 505}{friedli2017statistical} supplies the
+positive Gaussian density. The zero-mode removal and its normalization
+factor are derived above.}

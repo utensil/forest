@@ -1,0 +1,50 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{Massive kernel factorization and its normalizer}
+\date{2026-10-29}
+
+\p{Let #{L} have the [kernel decomposition](fdip-0031) and let #{m>0}.
+The positive precision #{Q_m=L+m^2I} has inverse and normalizer
+##{\begin{aligned}
+Q_m^{-1}&=m^{-2}P_K\\
+ &\quad+i(L_H+m^2I_H)^{-1}p_H,\\
+Z_{Q_m}&=(\sqrt{2\pi}/m)^k Z_{H,m},\\
+Z_{H,m}&=\frac{(2\pi)^{r/2}}
+ {\sqrt{\prod_{\lambda_a>0}(\lambda_a+m^2)}}.
+\end{aligned}}
+Under the addition isometry #{K\times H\to E}, its probability law is
+the product of the centered #{K}-law with precision #{m^2I_K} and the
+centered #{H}-law with precision #{L_H+m^2I_H}. In particular its
+pushforward by #{p_H} is exactly the second law.}
+\proof{
+\p{On #{K}, #{Q_m=m^2I_K}; on #{H}, #{Q_m=L_H+m^2I_H}.
+Inverting these blocks gives the displayed inverse. The addition
+isometry preserves [product volume](fdip-002Q), and the action splits:
+##{\begin{aligned}
+&\tfrac12h(z+x,Q_m(z+x))\\
+&\quad=\tfrac12m^2\|z\|^2\\
+&\qquad+\tfrac12h(x,(L_H+m^2I_H)x).
+\end{aligned}}
+Nonnegative Tonelli therefore factors the integral into the two
+normalizers. [Positive normalization](fdip-002T) makes the first
+#{(\sqrt{2\pi}/m)^k} and the second the stated spectral product.
+Division by this product identifies the probability on every measurable
+rectangle with the product of the two probabilities, hence identifies
+the measures. Integrating out the #{K} factor gives the projection law.}
+\p{Every empty product is one. Thus these formulas hold when #{k=0},
+#{r=0}, or #{E=0}. Since each positive eigenvalue stays positive,
+##{\begin{aligned}
+Z_{H,m}&\longrightarrow Z_H,\\
+m^k Z_{Q_m}&\longrightarrow(2\pi)^{k/2}Z_H.
+\end{aligned}}
+Here #{Z_H} is the [constrained normalizer](fdip-000C).
+For #{k>0}, the full normalizer diverges. This is orthogonal kernel
+separation; it does not require a general block-elimination theorem.}
+}
+\p{This product calculation combines the orthogonal decomposition with
+the positive-covariance density of
+\citet{Proposition B.55, p. 505}{friedli2017statistical} after replacing
+covariance by inverse precision. The displayed kernel factor is derived
+here, including zero-dimensional factors.}
