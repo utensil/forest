@@ -5,110 +5,118 @@
 \title{Eliminating a positive Gaussian block}
 \date{2026-10-17}
 
-\p{Split a finite vertex set as #{V=R\sqcup U}, with nonempty retained
-set #{R} and eliminated set #{U}. Put #{p=|R|}, #{q=|U|}, and write a
-field as #{(x,y)\in\mathbb R^R\times\mathbb R^U}. Both spaces have
-their counting inner products and coordinate Lebesgue measures; the
-full measure is [the product #{dx\,dy}](fdip-002J). In this ordering, a
-\vocabk{positive precision parameter}{fdip-0004} has blocks
-##{Q=\begin{pmatrix}A&H\\H^T&C\end{pmatrix}>0.}
-Here #{A} is #{p\times p}, #{C} is #{q\times q}, and #{H} is
-#{p\times q}. Define the \newvocab{effective precision}, or
-\newvocab{Schur complement}
-of #{C}, by
-##{S=A-HC^{-1}H^T.}
-Then #{C>0}, #{S>0}, and integrating the unnormalized weight gives
+\p{Let #{E=X\mathbin\perp Y} be a specified orthogonal sum of
+finite-dimensional real inner-product spaces. Write #{h_E,h_X,h_Y}
+for their pairings, #{i_X,i_Y} for inclusion and #{p_X,p_Y} for
+orthogonal projection. The addition isometry is
+#{J(x,y)=i_Xx+i_Yy}. Use [canonical Euclidean volume](fdip-002M) on
+uncompleted Borel sets. Then [product volume](fdip-002Q) gives
+#{J_*(\lambda_X\otimes\lambda_Y)=\lambda_E}.
+Zero summands are allowed; their volume is unit mass on a singleton.}
+\p{Let #{Q:E\to E} be a self-adjoint
+\vocabk{positive precision parameter}{fdip-0004}. Its
+[components for this splitting](fdip-001T) are
 ##{\begin{aligned}
-&\int_{\mathbb R^U}
- \exp\left(-\tfrac12(x,y)^TQ(x,y)\right)dy\\
-&\qquad=c_C\exp\left(-\tfrac12x^TSx\right),\\
-&c_C=\frac{(2\pi)^{q/2}}{\sqrt{\det C}}>0.
+A&=p_XQi_X:X\to X,\\
+B&=p_XQi_Y:Y\to X,\\
+C&=p_YQi_Y:Y\to Y.
 \end{aligned}}
-Thus the operation sends #{Q} to the pair #{(S,c_C)}, not just a matrix.}
-
-\p{\citet{Appendix A.5.5}{boyd2004convex}, pp. 650-651, gives the
-square completion with the other block as pivot. Exchanging the block
-order gives the formula above.
-\citet{Equation (A.4)}{rasmussen2006gaussian}, p. 200, gives the
-normalized Gaussian density. With covariance #{C^{-1}}, its
-normalization yields the factor #{c_C}.}
+The fourth component is #{p_YQi_X=B^\dagger}, where the adjoint
+uses the specified pairings. Both #{C} and the
+\newvocab{effective precision}, or real \newvocab{Schur complement},
+##{S=A-BC^{-1}B^\dagger:X\to X}
+are positive definite and invertible. This is the real positive
+specialization of the [split Schur map](fdip-001T).}
+\p{Put #{w_Q(z)=\exp(-h_E(z,Qz)/2)} and #{q=\dim Y}.
+For every #{x\in X}, the exact fiber integral is
+##{\begin{aligned}
+I_Q(x)&=\int_Y w_Q(J(x,y))\,d\lambda_Y(y)\\
+ &=c_C\exp(-h_X(x,Sx)/2),\\
+c_C&=\frac{(2\pi)^{q/2}}{\sqrt{\det C}}=Z_C>0.
+\end{aligned}}
+Moreover #{\det Q=\det C\det S}. Thus elimination induces both
+#{S} and a positive finite scalar #{c_C}.}
 
 \proof{
-\p{For #{y\ne0}, positivity of #{Q} on #{(0,y)} gives
-#{y^TCy>0}. Thus #{C} is positive definite and invertible. Set
-#{K=C^{-1}H^T}. Expanding the right side gives
+\p{[Positivity under elimination](fdip-001Y) applies to these real
+inner products. Explicitly, testing #{Q} on #{i_Yy} gives #{C>0};
+finite dimension makes #{C} invertible. Put #{K=C^{-1}B^\dagger}.
+The [orthogonal congruence identity](fdip-001X) is
 ##{\begin{aligned}
-&(x,y)^TQ(x,y)\\
-&\quad=x^TSx\\
-&\qquad+(y+Kx)^TC(y+Kx).
+&h_E(J(x,y),QJ(x,y))\\
+&\quad=h_X(x,Sx)\\
+&\qquad+h_Y(y+Kx,C(y+Kx)).
 \end{aligned}}
-Indeed #{CK=H^T} and #{K^TCK=HC^{-1}H^T}; the latter cancels the
-subtracted term in #{S}. For nonzero #{x}, substitute #{y=-Kx}.
-The vector #{(x,-Kx)} is nonzero, so #{x^TSx>0}. Symmetry of #{C^{-1}}
-also makes #{S} symmetric. This proves #{S>0}.}
-
-\p{In matrix form the same identity is
+Indeed #{CK=B^\dagger} and #{K^\dagger=BC^{-1}}; expansion cancels
+the term subtracted in #{S}. The self-adjoint inverse of #{C} makes
+#{S} self-adjoint. For #{x\ne0}, testing on #{J(x,-Kx)\ne0} gives
+#{h_X(x,Sx)>0}.}
+\p{For fixed #{x}, translation by #{Kx} preserves
+[reference volume](fdip-002K). Square completion and
+[positive Gaussian normalization](fdip-002T) therefore give
 ##{\begin{aligned}
-Q&=T^T\begin{pmatrix}S&0\\0&C\end{pmatrix}T,\\
-T&=\begin{pmatrix}I&0\\K&I\end{pmatrix},\qquad \det T=1.
+I_Q(x)&=e^{-h_X(x,Sx)/2}
+ \int_Y e^{-h_Y(v,Cv)/2}\,d\lambda_Y(v)\\
+ &=e^{-h_X(x,Sx)/2}Z_C.
 \end{aligned}}
-Taking determinants gives #{\det Q=\det C\det S}.
-For each fixed #{x}, the [translation #{z=y+Kx} preserves Lebesgue measure](fdip-002K). The [positive Gaussian integral](fdip-002T) for #{C} is
-finite and equals #{c_C}; pulling out the factor depending only on
-#{x} proves the displayed fiber integral. No exchange of signed
-integrals is needed.}
+This is a nonnegative integral with a positive finite prefactor;
+no signed Fubini interchange is needed. The same square completion
+shows that the stationary field is #{y_*(x)=-Kx}. Minimization alone
+does not evaluate the fiber integral or its scalar.}
+\p{For the determinant, let #{V(x,y)=(x,y+Kx)} and
+#{D(x,y)=(Sx,Cy)} on #{X\oplus Y}. Congruence gives
+#{J^{-1}QJ=V^\dagger DV}. Choose bases #{e_1,\ldots,e_p} of #{X}
+and #{f_1,\ldots,f_q} of #{Y}, with the same ordered concatenation
+in domain and codomain. In the top wedge of the images under #{V},
+we have #{Ve_j=e_j+Ke_j} and #{Vf_k=f_k}. Any term choosing some
+#{Ke_j} has more than #{q} vectors in #{Y}, so it vanishes. The
+remaining term is the original top wedge; hence #{\det V=1}.
+In orthonormal coordinates, the adjoint is the transpose and has the
+same determinant, by reindexing the determinant permutation sum.
+The direct sum #{D} acts on the top wedge by #{\det S\det C}.
+Multiplicativity of this scalar and invariance under conjugation
+now prove #{\det Q=\det C\det S}. Empty bases give determinant one,
+so the argument includes zero summands.}
 }
 
-\p{Taking minus the logarithm of the fiber integral defines an exact
-\newvocab{effective action}
+\p{Taking minus the logarithm of the positive fiber integral defines
+an exact \newvocab{effective action}:
 ##{\begin{aligned}
 \mathcal A_{\mathrm{eff}}(x)
- &=\tfrac12x^TSx-\log c_C\\
- &=\tfrac12x^TSx+\tfrac12\log\det C\\
+ &=\tfrac12h_X(x,Sx)-\log c_C\\
+ &=\tfrac12h_X(x,Sx)+\tfrac12\log\det C\\
  &\quad-\tfrac q2\log(2\pi).
 \end{aligned}}
-The constant cancels from normalized retained expectations, but is
-part of the unnormalized weight and its partition function. The
-carrier, split, input precision and volume measure were supplied;
-#{S} and #{c_C} are induced relative to these choices. This finite
-operation alone does not supply the dynamical lattice or effective
-metric considered in \citet{Abstract}{shamir1994dynamical}.}
+The constant cancels from normalized retained expectations but belongs
+to the unnormalized weight. Rescaling the two reference volumes by
+#{a_X,a_Y>0} multiplies #{c_C} by #{a_Y}, #{Z_S} by #{a_X} and
+#{Z_Q} by #{a_Xa_Y}; normalized laws remain unchanged.
+For #{Y=0}, #{c_C=1}; for #{X=0}, #{Z_S=1}. In each case the
+unique zero-space endomorphism is invertible and has determinant one.}
+\p{For counting fields on #{V=R\sqcup U}, the delta bases identify
+#{X=\mathbb R^R}, #{Y=\mathbb R^U}, #{B=H} and #{B^\dagger=H^T}.
+[Coordinate volume splitting](fdip-002J) recovers the usual
+#{dx\,dy} formula. The carrier, split, input precision and volumes
+are supplied; #{(S,c_C)} is induced relative to those choices.
+The [singular-pivot boundary](fdip-0039) requires a separate argument.}
 
-\p{Singular #{C} cannot occur under #{Q>0}. If one weakens the
-hypothesis to #{Q\ge0} and allows #{0\ne z\in\ker C}, positivity of
-the \vocabk{quadratic form}{ca-0004} on #{(x,rz)} for every real #{r} forces
-#{x^THz=0} for every #{x}, hence #{Hz=0}. The weight is then constant
-along the eliminated direction #{z}. Orthogonal coordinates along
-#{\mathbb R z} and its complement, followed by Tonelli, give an
-infinite fiber integral for every #{x}. For example
-#{Q=\operatorname{diag}(1,0)} gives
-#{\exp(-x^2/2)\int_{\mathbb R}dy=\infty}. A pseudoinverse does
-not turn this integral into a finite one.}
-
-\p{One may instead \em{change the eliminated space} to
-#{U_0=(\ker C)^\perp}, with its [induced Euclidean volume](fdip-002M). For
-#{Q\ge0}, the preceding argument implies
-#{H^Tx\in U_0}. On #{U_0}, #{C} is positive definite, so the same
-square completion gives
-##{\begin{aligned}
-S_0&=A-HC^+H^T,\\
-c_0&=\frac{(2\pi)^{r/2}}{\sqrt{\operatorname{pdet}C}},
-\qquad r=\operatorname{rank}C.
-\end{aligned}}
-Here #{C^+} inverts the positive eigenvalues and is zero on the kernel;
-#{\operatorname{pdet}C} is their product. In rank zero the empty
-product and the volume of the zero-dimensional space are both one.
-A normalized law on the retained full space still requires #{S_0>0}.
-This constrained measure is a new model, as in the
-[massless mean-zero construction](fdip-000C).}
-
-\p{Mathlib's \leanref{Matrix.schur_complement_eq₂₂} supplies the
-block quadratic identity, and \leanref{Matrix.det_fromBlocks₂₂}
-supplies the determinant factorization with an invertible lower-right
-block. TauCeti's
-\leanref/tauceti{Matrix.PosDef.gaussianCondCov} proves strict
-positivity of this Schur complement for a positive definite block
-matrix. Its name refers to a conditional-covariance application;
-the algebraic conclusion applies to our precision matrix. The
-Lebesgue integral and effective-action conclusions above additionally
-use the stated measure and Gaussian normalization.}
+\p{\citet{Appendix A.5.5, pp. 650-651}{boyd2004convex} gives square
+completion with the first block as pivot. Exchanging its order to
+#{(y,x)} gives the present eliminated pivot #{C}.}
+\p{\citet{Appendix A.2, equation (A.4), p. 200}{rasmussen2006gaussian}
+gives the Gaussian density with covariance as parameter. Substituting
+#{C^{-1}} gives the normalizer used here. The invariant integration
+and determinant argument above reconstruct these ingredients with
+specified pairings and volume.}
+\p{Mathlib's \leanref{Matrix.schur_complement_eq₂₂} supports square
+completion in compatible finite coordinates, with a Hermitian
+invertible eliminated block. Its \leanref{Matrix.det_fromBlocks₂₂}
+supports the determinant identity. TauCeti's
+\leanref/tauceti{Matrix.PosDef.gaussianCondCov} supports strict Schur
+positivity for a real positive-definite block matrix. Despite its
+conditional-covariance name, this algebraic conclusion can be applied
+to the precision #{Q}. These ingredients do not supply the integral
+or its reference-volume convention.}
+\p{The finite operation does not supply the dynamical carrier or
+metric considered in \citet{Abstract}{shamir1994dynamical}; those
+require additional data and hypotheses.}

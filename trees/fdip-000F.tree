@@ -6,13 +6,24 @@
 \date{2026-10-17}
 
 \p{In the [alternating four-cycle](fdip-0003), take #{t,m>0} and
-#{Q=Q_{t,m}=L_t+m^2I}. Retain #{R=(0,2)} and eliminate #{U=(1,3)},
+#{Q=Q_{t,m}=L_t+m^2I}. Its counting-pairing energy is
+##{\begin{aligned}
+&\langle\phi,Q\phi\rangle\\
+&\quad=(\phi_1-\phi_0)^2+t(\phi_2-\phi_1)^2\\
+&\qquad+(\phi_3-\phi_2)^2+t(\phi_0-\phi_3)^2\\
+&\qquad+m^2\sum_v\phi_v^2.
+\end{aligned}}
+It is positive for every nonzero field. Retain #{R=(0,2)} and eliminate #{U=(1,3)},
 with coordinates #{x=(\phi_0,\phi_2)} and #{y=(\phi_1,\phi_3)} in
-these orders, using the [product splitting](fdip-002J). Write #{a=m^2} and #{s=1+t+a}. Reordering the
+these orders. The maps #{x\mapsto x_0\delta_0+x_2\delta_2}
+and #{y\mapsto y_1\delta_1+y_3\delta_3} are isometries from
+ordinary #{\mathbb R^2}; their sum is the specified orthogonal
+splitting, and [product volume](fdip-002J) is #{dx\,dy}.
+Write #{a=m^2} and #{s=1+t+a}. Reordering the
 [explicit Laplacian](fdip-0008) gives
 ##{\begin{aligned}
 A=C&=sI_2,\\
-H&=-\begin{pmatrix}1&t\\t&1\end{pmatrix}.
+B=H&=-\begin{pmatrix}1&t\\t&1\end{pmatrix}.
 \end{aligned}}
 The [elimination theorem](fdip-000D) therefore gives
 ##{\begin{aligned}
@@ -106,10 +117,31 @@ their difference has numerator
 At #{t=m=1}, one obtains
 ##{\begin{aligned}
 S&=\begin{pmatrix}7/3&-2/3\\-2/3&7/3\end{pmatrix},\\
-\langle\phi_0\phi_2\rangle_Q&=\frac{2}{15}.
+S^{-1}&=\frac1{15}\begin{pmatrix}7&2\\2&7\end{pmatrix},\\
+\langle\phi_0\phi_2\rangle_Q&=\frac{2}{15},\\
+c_C&=\frac{2\pi}{3},\quad Z_S=\frac{2\pi}{\sqrt5},\quad
+Z_Q=\frac{4\pi^2}{3\sqrt5}.
 \end{aligned}}
-Fixing the eliminated fields to zero would instead give precision
-#{A=3I_2} and zero off-diagonal covariance.}
+[Fixing the eliminated fields to zero](fdip-003A) instead gives
+precision #{A=3I_2}, covariance #{I_2/3} and zero off-diagonal
+covariance. At #{t=2,m=1}, the same formulas give
+##{\begin{aligned}
+S&=\begin{pmatrix}11/4&-1\\-1&11/4\end{pmatrix},\\
+\det S&=105/16,\\
+S^{-1}&=\frac1{105}\begin{pmatrix}44&16\\16&44\end{pmatrix}.
+\end{aligned}}
+These are the parameters used in the [symmetry comparison](fdip-000K).}
+
+\p{In the orthonormal sector coordinates
+#{x_\pm=(x_0\pm x_2)/\sqrt2} and
+#{y_\pm=(y_1\pm y_3)/\sqrt2}, the couplings are
+#{-(1+t)} and #{-(1-t)}. Their two eliminated pivots are both
+#{s}; each contributes #{\sqrt{2\pi/s}}, whose product is
+#{2\pi/s}. The factors #{1/\sqrt2} make these changes orthogonal,
+so there is no extra volume factor. The retained variance is
+#{\frac12(\sigma_+^{-1}+\sigma_-^{-1})}, and the opposite
+covariance is #{\frac12(\sigma_+^{-1}-\sigma_-^{-1})}.
+This agrees with the [sector calculation](fdip-000M).}
 
 \p{There was no edge between vertices #{0} and #{2} in the supplied
 cycle. Elimination induces one in the effective quadratic form:
@@ -126,10 +158,63 @@ Locality in the original graph need not survive elimination.}
 \p{The half-turn preserves both sets #{R,U} and swaps the two
 coordinates within each. For the swap matrix #{J}, the displayed
 #{S} satisfies #{JSJ=S}; the induced two-site form retains this
-symmetry. At #{m=0}, however, #{C=(1+t)I_2} is still positive while
-#{\sigma_+=0}. The fiber factor is finite, but the integral over
-retained fields diverges along #{(1,1)}. A finite fiber integral
-does not imply a finite partition function. The
-[global mean-zero law](fdip-000C) uses a constraint coupling #{x}
-and #{y}, so its measure is not the product #{dx\,dy} used here.
-It cannot be obtained by substituting #{m=0} in this marginal formula.}
+symmetry. The density and orthogonal-volume invariance then show
+that the retained law is invariant as well.}
+
+\p{At #{m=0}, #{C=(1+t)I_2} remains positive. Square completion
+and integration over the eliminated block still give
+##{S=\frac{2t}{1+t}\begin{pmatrix}1&-1\\-1&1\end{pmatrix},
+\qquad c_C=\frac{2\pi}{1+t}.}
+The retained constant mode has zero energy, so its full integral
+diverges by the [kernel-box argument](fdip-0039). The finite fiber
+factor cannot be divided by a finite retained partition function.}
+
+\p{The [global mean-zero law](fdip-000C) instead uses the space
+#{H=\{\phi:\sum_v\phi_v=0\}} with its own induced volume.
+Its constraint #{x_0+x_2+y_1+y_3=0} couples the two parts;
+#{H} is neither their unrestricted product nor the product of their
+separate mean-zero lines. At #{t=1}, write a field in the
+[three positive orthonormal modes](fdip-0038) as
+#{\phi=z_1u_1+z_2u_2+z_3u_3}. The coordinates are independent
+centered Gaussians of precisions #{2,2,4}. Put
+##{r=\frac{z_1+z_2}{\sqrt2},\qquad
+v=\frac{z_1-z_2}{\sqrt2}.}
+This orthogonal change preserves #{z_1^2+z_2^2=r^2+v^2} and
+two-dimensional volume. Thus #{r,v,z_3} still have independent
+centered Gaussian laws of precisions #{2,2,4}. The retained unit
+coordinates satisfy
+##{\begin{aligned}
+x_-&=(\phi_0-\phi_2)/\sqrt2=r,\\
+x_+&=(\phi_0+\phi_2)/\sqrt2=z_3/\sqrt2.
+\end{aligned}}
+Integrating the normalized #{v} factor and changing variable
+#{z_3=\sqrt2x_+} give independent retained Gaussian densities
+of precisions #{2} and #{8}. This density calculation identifies
+the law, not merely its covariance. Returning orthogonally to
+#{(x_0,x_2)} gives
+##{\begin{aligned}
+\operatorname{Cov}(x)&=\frac1{16}
+  \begin{pmatrix}5&-3\\-3&5\end{pmatrix},\\
+Q_{H\to R}&=\begin{pmatrix}5&3\\3&5\end{pmatrix}.
+\end{aligned}}
+These matrices multiply to the identity. The projected normalizer
+for this precision is #{\frac{2\pi}{\sqrt{16}}=\frac\pi2}.}
+
+\p{In contrast, directly setting #{m=0,t=1} in the Schur formula
+gives the singular precision
+#{\begin{pmatrix}1&-1\\-1&1\end{pmatrix}}.
+Separately constraining that retained model to #{x_0+x_2=0}
+leaves unit direction #{(1,-1)/\sqrt2} with precision #{2},
+normalizer #{\sqrt\pi} and ambient covariance
+#{\frac14\begin{pmatrix}1&-1\\-1&1\end{pmatrix}}.
+These are three distinct specified measures. The
+[pinned affine law](fdip-0035) is another constraint with its own
+induced volume; fixing a vertex is not the marginal operation above.}
+
+\p{The [arithmetic pivot boundary](fdip-000U) is separate from
+the positive-real case. At #{m^2=1,t=-2}, #{s=t+2=0}, whereas
+#{\det Q=1\cdot3\cdot(-3)\cdot(-1)=9}. Thus the full map can
+be invertible while this eliminated pivot is not. At #{t=-1},
+the pivot exists but the later [ratio denominator](fdip-000W)
+#{t+1} vanishes. Neither value satisfies the positive-weight
+hypotheses used for the Gaussian laws here.}

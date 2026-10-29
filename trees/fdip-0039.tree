@@ -1,0 +1,87 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{Singular eliminated directions and changed reference volume}
+\date{2026-10-29}
+
+\p{Use the orthogonal spaces and components of
+[Gaussian elimination](fdip-000D), but assume only #{Q=Q^\dagger\geq0}.
+Then #{C\geq0}. If #{N=\ker C\ne0}, every full fiber integral is
+infinite:
+##{\int_Y e^{-h_E(J(x,y),QJ(x,y))/2}\,d\lambda_Y(y)=\infty.}
+Replacing #{C^{-1}} by a pseudoinverse does not change that integral.}
+\proof{
+\p{For #{z\in N}, #{x\in X} and every real #{r}, positivity gives
+##{0\leq h_X(x,Ax)+2r h_X(x,Bz).}
+An affine real function bounded below for all #{r} has slope zero.
+Thus #{h_X(x,Bz)=0} for every #{x}; taking #{x=Bz} gives #{Bz=0}.
+Adjointness consequently gives #{B^\dagger X\subseteq N^\perp}.
+The weight at #{J(x,z+y_0)} is independent of #{z\in N}.}
+\p{Put #{Y_0=N^\perp}. Choose a compact orthonormal unit box
+#{D\subseteq Y_0} of positive finite induced volume. If #{Y_0=0},
+use its singleton of mass one. For fixed #{x}, the continuous
+strictly positive weight has a minimum #{\epsilon_x>0} on #{D}.
+With #{k=\dim N>0}, integrate over the product of #{D} and the
+orthonormal box #{[-R,R]^k\subseteq N}. [Product volume](fdip-002Q)
+gives the lower bound #{\epsilon_x\lambda_{Y_0}(D)(2R)^k}.
+It tends to infinity. This proves divergence without multiplying
+an unexplained infinite constant by an integral.}
+}
+\p{For example, on #{X=Y=\mathbb R}, #{Q(x,y)=(x,0)} has weight
+#{e^{-x^2/2}}, independent of #{y}. Thus
+#{e^{-x^2/2}\int_{\mathbb R}dy=\infty} for every #{x}.}
+
+\p{A different model integrates only over #{Y_0} with its
+[induced Euclidean volume](fdip-002M). Let #{j_0:Y_0\to Y}
+and #{p_0:Y\to Y_0} be orthogonal inclusion and projection.
+The restriction #{C_0=C|_{Y_0}} is positive definite, and the
+[Moore-Penrose construction](fdip-0032) is
+##{C^+=j_0C_0^{-1}p_0.}
+For #{r=\dim Y_0=\operatorname{rank}C}, put
+##{\begin{aligned}
+S_0&=A-BC^+B^\dagger,\\
+c_0&=\frac{(2\pi)^{r/2}}{\sqrt{\operatorname{pdet}C}}.
+\end{aligned}}
+Then #{S_0\geq0} and
+##{\begin{aligned}
+&\int_{Y_0}e^{-h_E(J(x,j_0y),QJ(x,j_0y))/2}\,d\lambda_{Y_0}(y)\\
+&\qquad=c_0e^{-h_X(x,S_0x)/2}.
+\end{aligned}}
+A normalized law on the full retained #{X} exists exactly when
+#{S_0>0}.}
+\proof{
+\p{Self-adjointness makes #{Y_0} invariant under #{C}. Its
+[spectral decomposition](fdip-002R) shows that #{Y_0} is the sum of
+positive eigenspaces; hence #{C_0>0}. Its determinant is
+#{\operatorname{pdet}C}, including the empty product one.
+Since #{B^\dagger X\subseteq Y_0}, put
+#{K_0=C_0^{-1}p_0B^\dagger}. The same expansion as in square
+completion gives
+##{\begin{aligned}
+&h_E(J(x,j_0y),QJ(x,j_0y))\\
+&\qquad=h_X(x,S_0x)\\
+&\qquad\quad+h_{Y_0}(y+K_0x,C_0(y+K_0x)).
+\end{aligned}}
+Testing #{y=-K_0x} proves #{S_0\geq0}. Translation invariance on
+#{Y_0} and [positive normalization](fdip-002T) give the stated
+changed-space integral. If #{S_0>0}, a further Gaussian integral
+on #{X} is finite. If #{S_0} has a nonzero kernel, the same box
+argument proves divergence there. A finite-dimensional positive
+semidefinite self-adjoint map without a kernel is positive definite,
+so these exhaust the possibilities.}
+\p{In rank zero, #{C=0}, #{B=0}, #{Y_0=0}, #{C^+=0},
+#{\operatorname{pdet}C=1}, #{c_0=1} and #{S_0=A}. Integration over
+#{Y_0} is evaluation on its unit-mass singleton. When #{X=0},
+its retained normalizer is one. These conventions cover the zero
+spaces without restricting ambient Lebesgue measure to a lower-dimensional
+subspace.}
+}
+\p{The singular positive-semidefinite pivot, its range condition
+and pseudoinverse quadratic minimum are treated in
+\citet{Appendix A.5.5, p. 651}{boyd2004convex}.
+Exchanging the pivot gives the algebra used here.
+The divergence and induced-volume calculation above are additional
+arguments. The [constrained Gaussian construction](fdip-000C)
+likewise changes the space and measure. Neither a general indefinite
+pivot nor a regularized value for the original divergent fiber is asserted.}
