@@ -1,0 +1,124 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{Gaussian marginalization commutes with sector decomposition}
+\date{2026-10-29}
+
+\p{Let #{H=X\mathbin\perp Y} be a finite-dimensional real
+orthogonal sum, #{P=P_X\oplus P_Y} an orthogonal involution,
+and #{Q} a positive self-adjoint precision commuting with #{P}.
+Use induced Euclidean volumes and Borel Gaussian laws. For
+#{Q(x,y)=(Ax+By,B^\dagger x+Cy)}, put
+#{S=A-BC^{-1}B^\dagger}. The sign sectors are
+#{H_\varepsilon=X_\varepsilon\mathbin\perp Y_\varepsilon}.
+Let #{\pi(x,y)=x} and let #{\pi_\varepsilon} be its sector
+restriction. The [typed restriction identity](fdip-003Q) gives
+##{S_\varepsilon:=S|_{X_\varepsilon}
+ =A_\varepsilon-B_\varepsilon C_\varepsilon^{-1}
+ B_\varepsilon^\dagger.}
+Then the following square commutes both for maps and for their
+pushforwards of the Gaussian laws:}
+
+\tikzfigs{0.75}{\begin{tikzpicture}[
+  every node/.style={inner sep=4pt},
+  map/.style={-{Stealth[length=2mm]},shorten >=2pt,shorten <=2pt}
+]
+\node (h) at (0,0) {$H$};
+\node (hs) at (4.5,0) {$H_+\times H_-$};
+\node (x) at (0,-2.3) {$X$};
+\node (xs) at (4.5,-2.3) {$X_+\times X_-$};
+\draw[map] (h) -- node[above=2mm] {$D_H$} (hs);
+\draw[map] (x) -- node[below=2mm] {$D_X$} (xs);
+\draw[map] (h) -- node[left=2mm] {$\pi$} (x);
+\draw[map] (hs) -- node[right=2mm] {$\pi_+\times\pi_-$} (xs);
+\end{tikzpicture}}
+
+\p{Here #{D_H(z)=(E_+z,E_-z)} and #{D_X(x)=(F_+x,F_-x)}
+are the orthogonal sector decompositions. The full retained law is
+#{\pi_*\mu_Q=\mu_S}; both routes give
+#{\mu_{S_+}\otimes\mu_{S_-}} on #{X_+\times X_-}.}
+
+\proof{
+\p{Testing positivity on #{(0,y)} makes #{C} positive and invertible.
+Its inverse is self-adjoint by adjointing both inverse equations, so
+#{S} is self-adjoint. With #{K=C^{-1}B^\dagger}, expansion gives
+##{\langle(x,y),Q(x,y)\rangle
+ =\langle x,Sx\rangle+\langle y+Kx,C(y+Kx)\rangle.}
+The two cross terms sum to #{2\langle x,By\rangle}; the last
+#{K}-term cancels the subtraction in #{S}. Testing on #{(x,-Kx)}
+proves #{S>0}. Thus the hypotheses of
+[positive Gaussian elimination](fdip-000D) hold. For every fixed #{x},
+translation by #{Kx} preserves induced volume, giving the pointwise
+fiber identity
+##{\int_Y e^{-\langle(x,y),Q(x,y)\rangle/2}\,d\lambda_Y(y)
+ =Z_C e^{-\langle x,Sx\rangle/2}.}
+The normalizer is #{Z_C=(2\pi)^{\dim Y/2}/\sqrt{\det C}}.
+Nonnegative Tonelli gives #{Z_Q=Z_CZ_S}, and inserting a Borel
+indicator of #{x} then dividing proves #{\pi_*\mu_Q=\mu_S}.
+This is the [retained marginal theorem](fdip-000E), with its actual
+volume and positive finite normalizers.}
+
+\p{The restricted #{Q_\varepsilon,C_\varepsilon,S_\varepsilon}
+are positive self-adjoint. Applying the same fiber identity within
+#{H_\varepsilon} gives, for every #{x_\varepsilon},
+##{\begin{aligned}
+&\int_{Y_\varepsilon}
+ e^{-\langle(x_\varepsilon,y),Q_\varepsilon(x_\varepsilon,y)\rangle/2}
+ \,d\lambda_{Y_\varepsilon}(y)\\
+&\qquad=Z_{C_\varepsilon}
+ e^{-\langle x_\varepsilon,S_\varepsilon x_\varepsilon\rangle/2}.
+\end{aligned}}
+Hence #{(\pi_\varepsilon)_*\mu_{Q_\varepsilon}=\mu_{S_\varepsilon}}.
+The [orthogonal product theorem](fdip-000M), applied to #{Q,C,S},
+gives their product laws and #{Z_C=Z_{C_+}Z_{C_-}}. No scalar
+factor is discarded before normalization.}
+
+\p{Since #{\pi P=P_X\pi}, the projector formulas imply
+#{\pi E_\varepsilon=F_\varepsilon\pi}, proving the map square.
+Pushforwards compose by inverse images. The upper route first gives
+#{\mu_{Q_+}\otimes\mu_{Q_-}}. Its pushforward by
+#{\pi_+\times\pi_-} agrees with
+#{\mu_{S_+}\otimes\mu_{S_-}} on every Borel rectangle, using
+the sector marginal identities, and therefore everywhere by uniqueness
+of probability measures on the rectangle-generated Borel sigma-algebra.
+The lower route first gives #{\mu_S}; its sector decomposition gives
+the same product.}
+}
+
+\p{Pullback on the [polynomial function algebras](fdip-002V)
+reverses all four arrows. For every polynomial #{f} on
+#{X_+\times X_-}, the commuting map square gives
+##{f\circ D_X\circ\pi
+ =f\circ(\pi_+\times\pi_-)\circ D_H.}
+Precomposition by each linear map is a unital algebra homomorphism,
+as in [polynomial transport](fdip-003F). For a polynomial
+#{p\in\operatorname{Pol}(X)}, nonnegative integration first gives
+#{\int|p\circ\pi|\,d\mu_Q=\int|p|\,d\mu_S};
+[absolute Gaussian moments](fdip-002W) make both sides finite for
+polynomials. Subtraction of positive and negative parts then gives
+#{\omega_S=\omega_Q\circ\pi^*} and the corresponding equalities
+on every side of the square. This is equality of normalized
+polynomial functionals, in addition to maps and probability laws.}
+
+\p{The [specified conditional kernel](fdip-003A) at eliminated
+field zero instead has precision #{A};
+it need not equal the marginal of precision #{S}. If #{B=0}, then
+#{S=A}, so equality can occur. The
+[coupled cycle](fdip-003S) gives a concrete difference.
+A [nonstable retained set](fdip-003L) does not supply this square:
+for retention #{\{0,1\}}, #{\pi\delta_2=0} but
+#{\pi P\delta_2=\delta_0}. A singular eliminated direction can
+have infinite fiber integral, as for #{Q(x,y)=(x,0)} on
+#{\mathbb R^2}. A pseudoinverse does not make that integral finite.
+The [massless cycle](fdip-0038) has a constant zero mode and requires
+a separately specified constrained law.}
+
+\p{The Schur convention is
+\citet{Appendix A.5.5, pp. 650-651}{boyd2004convex}, with the
+pivot exchanged to #{C}. The Gaussian density convention is
+\citet{Proposition B.55, p. 505}{friedli2017statistical}, where
+covariance is #{\Sigma=Q^{-1}}. The sector square is the direct
+combination proved above; the [marginal providers](fdip-000E) support
+Gaussian images and signed Fubini with their stated hypotheses, not
+the pointwise fiber constants.}

@@ -2,212 +2,118 @@
 \meta{agent-authored}{true}
 \tag{fdip}
 \taxon{Theorem}
-\title{Gaussian sectors and their retained scalars}
+\title{The real Gaussian law is a product over orthogonal sectors}
 \date{2026-10-17}
 
-\p{For the [alternating four-cycle](fdip-0003) with #{t,m>0},
-the two real \vocabk{half-turn sectors}{fdip-000L} are independent
-under the Gaussian law. Their precision and covariance blocks vary
-with #{t,m}, although the action and its projectors do not. Put
-#{a=m^2} and #{s=1+t+a}. In vertex order #{(0,1,2,3)}, the
-\vocabk{massive precision}{fdip-000A} is
-##{Q=\begin{pmatrix}
-s&-1&0&-t\\-1&s&-t&0\\0&-t&s&-1\\-t&0&-1&s
-\end{pmatrix}.}
-Use the orthonormal vectors
+\p{Let #{H} be a finite-dimensional real inner-product space,
+#{P:H\to H} an orthogonal involution, and #{Q:H\to H} a
+positive self-adjoint precision with #{QP=PQ}. Put
+#{H_\varepsilon=\ker(P-\varepsilon I)} and
+#{E_\varepsilon=(I+\varepsilon P)/2}. Use
+[induced Euclidean volumes](fdip-002M) on the uncompleted Borel
+sigma-algebras. The restrictions #{Q_\varepsilon=Q|_{H_\varepsilon}}
+are positive self-adjoint. For their [Gaussian laws](fdip-0005),
 ##{\begin{aligned}
-v_{\varepsilon,0}&=(\delta_0+\varepsilon\delta_2)/\sqrt2,\\
-v_{\varepsilon,1}&=(\delta_1+\varepsilon\delta_3)/\sqrt2,
-\qquad\varepsilon\in\{1,-1\}.
+D:H&\longrightarrow H_+\times H_-,\\
+z&\longmapsto(E_+z,E_-z),\\
+D_*\mu_Q&=\mu_{Q_+}\otimes\mu_{Q_-},\qquad
+Z_Q=Z_{Q_+}Z_{Q_-}.
 \end{aligned}}
-Write #{\phi=\sum_\varepsilon
-(x_\varepsilon v_{\varepsilon,0}+y_\varepsilon v_{\varepsilon,1})}
-and #{z_\varepsilon=(x_\varepsilon,y_\varepsilon)}. These are
-normalized sector coordinates, rather than the coefficients in the
-unnormalized free bases of \ref{fdip-000L}.}
+Thus the sector-valued random variables #{E_+,E_-} are independent
+with the indicated marginal laws. The
+[four-cycle recovery](fdip-003S) computes both blocks, their
+normalizers and their retained scalar laws explicitly.}
 
-\p{In the order #{(v_{+,0},v_{+,1},v_{-,0},v_{-,1})}, the
-precision is #{\operatorname{diag}(Q_+,Q_-)} and its inverse is
-#{\operatorname{diag}(G_+,G_-)}, where
+\proof{
+\p{The [module projector identities](fdip-003O) give the direct sum.
+For #{u\in H_+}, #{v\in H_-}, orthogonality of #{P} gives
+#{\langle u,v\rangle=\langle Pu,Pv\rangle=-\langle u,v\rangle},
+so #{\langle u,v\rangle=0}. Addition
+#{J:H_+\times H_-\to H}, #{J(u,v)=u+v}, is therefore an
+isometric linear isomorphism with inverse #{D}. Commutation gives
+#{PQu=QPu=\varepsilon Qu} for #{u\in H_\varepsilon}; hence
+#{Q} preserves each sector. Restricting its pairing identity and
+testing nonzero sector vectors proves self-adjointness and positivity
+of #{Q_\varepsilon}.}
+
+\p{Concatenating orthonormal bases of #{H_+,H_-} gives an
+orthonormal basis of #{H}. Coordinate product Lebesgue measure,
+transported by these charts, therefore proves
+##{J_*(\lambda_+\otimes\lambda_-)=\lambda_H,\qquad
+D_*\lambda_H=\lambda_+\otimes\lambda_-.}
+This is precisely [orthogonal product volume](fdip-002Q).
+Finite-dimensional spaces have countable bases, so the product Borel
+sigma-algebra is the Borel sigma-algebra of the product. Bounded
+coordinate cubes exhaust each space, proving sigma-finiteness.
+A zero-dimensional sector has unit mass on its sole point.}
+
+\p{Orthogonality and preservation of sectors give the action identity
+##{\langle u+v,Q(u+v)\rangle
+ =\langle u,Q_+u\rangle+\langle v,Q_-v\rangle.}
+For #{w_Q(z)=e^{-\langle z,Qz\rangle/2}}, this says
+#{w_Q(J(u,v))=w_{Q_+}(u)w_{Q_-}(v)}. The
+[positive normalizer theorem](fdip-002T) applies separately to all
+three positive self-adjoint maps:
+##{Z_R=\frac{(2\pi)^{\dim U/2}}{\sqrt{\det R}}\in(0,\infty)
+\quad(R=Q,Q_+,Q_-\text{ on its space }U).}
+Its proof uses positive eigenvalues, the scalar Gaussian integral
+and nonnegative Tonelli, without presupposing this product law.
+Empty determinants and normalizers are one. Applying Tonelli with
+the volume and weight identities just proved gives #{Z_Q=Z_{Q_+}Z_{Q_-}}.}
+
+\p{For Borel sets #{A_+\subseteq H_+}, #{A_-\subseteq H_-},
+all the following integrands are nonnegative measurable functions:
 ##{\begin{aligned}
-Q_+&=\begin{pmatrix}s&-(1+t)\\-(1+t)&s\end{pmatrix},\\
-Q_-&=\begin{pmatrix}s&t-1\\t-1&s\end{pmatrix},\\
-G_+&=\tfrac1{a(a+2+2t)}
-     \begin{pmatrix}s&1+t\\1+t&s\end{pmatrix},\\
-G_-&=\tfrac1{(a+2)(a+2t)}
-     \begin{pmatrix}s&1-t\\1-t&s\end{pmatrix}.
+(D_*\mu_Q)(A_+\times A_-)
+ &=\frac{1}{Z_{Q_+}Z_{Q_-}}\\
+ &\quad\cdot\int_{A_+\times A_-}w_{Q_+}(u)w_{Q_-}(v)
+    \,d(\lambda_+\otimes\lambda_-)(u,v)\\
+ &=\mu_{Q_+}(A_+)\mu_{Q_-}(A_-).
 \end{aligned}}
-The \vocabk{covariance}{fdip-002Z} in these coordinates is given
-by the displayed inverse blocks. If #{T\phi=(z_+,z_-)}, then
-##{T_*\mu_Q=\mu_{Q_+}\otimes\mu_{Q_-}.}
-The product on the right is the product probability measure.
-In particular the sector random vectors #{z_+,z_-} are independent.}
+Rectangles form a pi-system containing the whole product and generating
+its Borel sigma-algebra. The pi-lambda uniqueness theorem for finite
+measures identifies the two probability measures everywhere.
+Their coordinate marginals and the displayed rectangle equation are
+exactly independence of #{E_+,E_-}. The argument also covers a
+zero sector, whose law is deterministic. Algebraic splitting alone
+would not have supplied this probability identity.}
+}
+
+\p{For the actual [polynomial function algebras](fdip-002V), write
+#{\omega_R(p)=\int p\,d\mu_R}. Then
+##{\omega_Q\bigl((p_+\circ E_+)(p_-\circ E_-)\bigr)
+ =\omega_{Q_+}(p_+)\omega_{Q_-}(p_-).}
+Indeed linear precomposition takes polynomial generators to polynomial
+generators. Every polynomial, product and square has finite absolute
+Gaussian integral by \ref{fdip-002W}, applied on the full space and
+on each sector. Tonelli applied first to the absolute product therefore
+justifies signed Fubini, which gives the formula from the product law.
+These are [real polynomial states](fdip-002X): they are linear,
+normalized and nonnegative on #{p^2}, with the identity star. No
+algebra structure on all integrable functions, or state on
+#{\operatorname{End}(H)}, is being used.}
 
 \p{\citet{Proposition B.55, p. 505}{friedli2017statistical}
-gives the Gaussian covariance and coordinate-change convention.
-The [positive Gaussian normalization](fdip-002T) and
-[inverse-precision covariance](fdip-000B) apply to each block.
-The product assertion follows from the explicit density calculation
-below, rather than from the algebraic direct sum alone.}
-
-\proof{
-\p{Each unnormalized vector has squared norm two, and the pairings
-between distinct vectors are zero. Thus the basis matrix #{O} with the
-displayed columns is orthogonal, #{T=O^T}, and
-#{|\det O|=1}. Applying #{Q} gives
-##{\begin{aligned}
-Qv_{+,0}&=sv_{+,0}-(1+t)v_{+,1},\\
-Qv_{+,1}&=-(1+t)v_{+,0}+sv_{+,1},\\
-Qv_{-,0}&=sv_{-,0}+(t-1)v_{-,1},\\
-Qv_{-,1}&=(t-1)v_{-,0}+sv_{-,1}.
-\end{aligned}}
-These are precisely the two asserted blocks. Their sum and difference
-vectors have eigenvalues
-##{\begin{aligned}
-Q_+&:\quad a,\ a+2+2t,\\
-Q_-&:\quad a+2t,\ a+2.
-\end{aligned}}
-They are all positive. Multiplication by the displayed #{G_\pm}
-gives the identity: the diagonal numerators are respectively
-#{s^2-(1+t)^2=a(a+2+2t)} and
-#{s^2-(t-1)^2=(a+2)(a+2t)}, and the off-diagonal numerators
-vanish. This proves the inverse formulas.}
-
-\p{The [orthogonal change of variables preserves coordinate Lebesgue
-measure](fdip-002L) and writes the Euclidean action as
-##{\mathcal A(\phi)=\tfrac12 z_+^TQ_+z_+
-                         +\tfrac12 z_-^TQ_-z_-.}
-Each factor has a finite positive normalizer
-##{Z_\pm=\frac{2\pi}{\sqrt{\det Q_\pm}}.}
-Tonelli's theorem applied to the nonnegative density gives
-#{Z_Q=Z_+Z_-}. Division by this product yields the product of the
-two normalized densities. Integrating over every Borel rectangle
-#{A_+\times A_-} gives
-##{\begin{aligned}
-&\mu_Q\{z_+\in A_+,\ z_-\in A_-\}\\
-&\qquad=\mu_{Q_+}(A_+)\mu_{Q_-}(A_-).
-\end{aligned}}
-This identifies the product law and proves independence. In particular
-it does not assume that zero covariance alone implies independence.
-Polynomial moments are integrable by \ref{fdip-002W}.}
-}
-
-\p{Retain #{R=(0,2)}. Its orthonormal sector vectors are
-##{w_\varepsilon=(\delta_0^R+\varepsilon\delta_2^R)/\sqrt2.}
-The projection satisfies
-##{\begin{aligned}
-\pi_Rv_{\varepsilon,0}&=w_\varepsilon,\\
-\pi_Rv_{\varepsilon,1}&=0.
-\end{aligned}}
-Thus the retained sector coordinates are exactly #{x_+,x_-},
-with no additional factor of #{\sqrt2}. In these coordinates, the
-[retained precision](fdip-000F) has positive scalar blocks
-##{\begin{aligned}
-\sigma_+&=s-\frac{(1+t)^2}{s}
-          =\frac{a(a+2+2t)}s,\\
-\sigma_-&=s-\frac{(t-1)^2}{s}
-          =\frac{(a+2)(a+2t)}s.
-\end{aligned}}
-The retained coordinates are independent centered Gaussians with
-variances #{\sigma_+^{-1},\sigma_-^{-1}}. Decomposing into
-sectors and taking this marginal therefore give the same law in
-either order.}
-
-\proof{
-\p{A sector has precision
-#{\begin{pmatrix}s&c\\c&s\end{pmatrix}}, with
-#{c=-(1+t)} or #{c=t-1}. Complete the square:
-##{\begin{aligned}
-sx^2+2cxy+sy^2
- &=s(y+cx/s)^2\\
- &{}+(s-c^2/s)x^2.
-\end{aligned}}
-The [scalar Gaussian integral](fdip-002S) gives
-##{\begin{aligned}
-&\int_{\mathbb R}
-   e^{-(sx^2+2cxy+sy^2)/2}\,dy\\
-&\qquad=\sqrt{\frac{2\pi}{s}}
-   e^{-(s-c^2/s)x^2/2}.
-\end{aligned}}
-Each eliminated sector coordinate contributes
-#{\sqrt{2\pi/s}}; the two factors multiply to #{2\pi/s}.
-This is exactly the factor for the original eliminated block
-#{C=sI_2} in \ref{fdip-000F}. The retained orthogonal change of
-coordinates also has absolute determinant one. Normalizing the two
-scalar densities proves the claimed retained product law.}
-
-\p{Equivalently, the effective precision in vertex coordinates is
-##{\begin{aligned}
-S&=\begin{pmatrix}\alpha&-\beta\\-\beta&\alpha\end{pmatrix},\\
-\alpha&=s-\frac{1+t^2}{s},\qquad\beta=\frac{2t}{s}.
-\end{aligned}}
-It acts on #{w_+} by #{\alpha-\beta=\sigma_+}, and on
-#{w_-} by #{\alpha+\beta=\sigma_-}. Thus each sector's
-\vocabk{Schur complement}{fdip-000D} agrees with the corresponding
-block of #{S}.}
-
-\p{See \citet{Appendix A.5.5, pp. 650-651}{boyd2004convex}
-for the general block formula.
-Restricting #{Q} to a full sector still leaves two coordinates.
-Integrating out its second coordinate takes the Schur complement
-computed above.}
-}
-
-\p{Transforming the retained coordinates back gives
-##{\begin{aligned}
-\operatorname{Var}(\phi_0)
- =\operatorname{Var}(\phi_2)
- &=\tfrac12(\sigma_+^{-1}+\sigma_-^{-1}),\\
-\langle\phi_0\phi_2\rangle_Q
- &=\tfrac12(\sigma_+^{-1}-\sigma_-^{-1}).
-\end{aligned}}
-For #{m=t=1}, the sector blocks and their inverses are
-##{\begin{aligned}
-Q_+&=\begin{pmatrix}3&-2\\-2&3\end{pmatrix},&Q_-&=3I_2,\\
-G_+&=\tfrac15\begin{pmatrix}3&2\\2&3\end{pmatrix},&G_-&=I_2/3.
-\end{aligned}}
-Hence #{\sigma_+=5/3}, #{\sigma_-=3}; the retained variance
-is #{7/15} and the cross covariance is #{2/15}. For #{m=1,t=2},
-##{\begin{aligned}
-Q_+&=\begin{pmatrix}4&-3\\-3&4\end{pmatrix},\\
-Q_-&=\begin{pmatrix}4&1\\1&4\end{pmatrix},\\
-G_+&=\tfrac17\begin{pmatrix}4&3\\3&4\end{pmatrix},\\
-G_-&=\tfrac1{15}\begin{pmatrix}4&-1\\-1&4\end{pmatrix}.
-\end{aligned}}
-Now #{\sigma_+=7/4}, #{\sigma_-=15/4}; the retained variance
-is #{44/105} and the cross covariance is #{16/105}. Both examples
-have the same #{P,J,E_\pm,F_\pm}, but different covariance
-matrices and hence different Gaussian states.}
-
-\p{The remaining freedom is visible in the algebra of operators
-commuting with #{P}. In the sector basis,
-#{P=\operatorname{diag}(I_2,-I_2)}. For a block operator
-#{M=\begin{pmatrix}A&B\\C&D\end{pmatrix}},
-##{MP=PM\quad\Longleftrightarrow\quad B=C=0,}
-because the off-diagonal equations are #{2B=2C=0} over
-#{\mathbb R}. Its commutant is therefore
-#{M_2(\mathbb R)\times M_2(\mathbb R)}. The image of
-#{\mathbb R[C_2]} is only
-##{\{\operatorname{diag}(xI_2,yI_2):x,y\in\mathbb R\}.}
-Each sign occurs twice in the full module, so symmetry allows mixing
-within its two-dimensional sector. It does not require #{Q_\pm}
-to be scalar. The [distinction between mathematical summands and
-physical interpretations](fgap-0013) applies: this decomposition
-alone selects no continuous gauge group, physical mass spectrum or
-interaction.}
-
+uses covariance as its positive parameter. In an orthonormal chart,
+set #{\Sigma=Q^{-1}}. Its eigenvalues are positive,
+#{\Sigma^{-1}=Q} and #{\det\Sigma=(\det Q)^{-1}}, so its
+normalized density is exactly #{Z_Q^{-1}w_Q}. The
+[inverse-precision covariance theorem](fdip-000B) identifies
+#{\Sigma} as the covariance. The product proof above uses densities,
+not an inference from zero covariance for an unspecified law.}
 \p{Mathlib's \leanref{OrthonormalBasis.measurePreserving_repr}
-supplies the volume-preserving passage to orthonormal coordinates.
-TauCeti's
+supports passage to orthonormal coordinates. Index coordinates by the
+disjoint union of orthonormal bases of #{H_+} and #{H_-}. Then
+#{\Sigma=\operatorname{diag}(Q_+^{-1},Q_-^{-1})} is positive
+definite, hence positive semidefinite, with zero cross block and mean
+zero. After the density identification, TauCeti's
 \leanref/tauceti{TauCeti.Probability.indepFun_sumEquivProd_multivariateGaussian_iff}
-characterizes independence of complementary coordinate blocks by
-vanishing cross covariance. Index each sector by #{\{0,1\}} and
-the full coordinates by the disjoint union of these sets. Take mean
-zero and covariance #{\Sigma=\operatorname{diag}(G_+,G_-)}.
-The positive eigenvalues above make #{\Sigma} positive definite,
-hence positive semidefinite, and its cross block is zero.
-After identifying the normalized sector density with this Gaussian
-law, the theorem gives independence. The [covariance providers](fdip-000B)
-use #{G_\pm=Q_\pm^{-1}} as their parameters. The concrete matrices,
-density identification and sectorwise Schur calculation are supplied
-by the proofs above.}
+gives the corresponding coordinate independence. It concerns this
+Gaussian covariance, not an arbitrary algebraic splitting or Schur
+fiber integral.}
+\p{The integration convention is
+\citet{Theorem 1.7.15, pp. 200-201, preliminary version}{tao2011measure}.
+All probability assertions here are finite-dimensional and real, with
+strictly positive precision and specified volume. They supply no
+Lebesgue probability over a general coefficient ring; a singular
+precision needs a separately specified constrained space and law.}

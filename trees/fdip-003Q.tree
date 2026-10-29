@@ -1,0 +1,54 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{Restricting a split Schur map to sign sectors}
+\date{2026-10-29}
+
+\p{Let #{k} be a commutative unital ring with invertible two and
+#{H=X\oplus Y}. Let #{P=P_X\oplus P_Y}, where
+#{P_X^2=I_X}, #{P_Y^2=I_Y}, and let #{Q:H\to H} commute
+with #{P}. Write the [typed split components](fdip-001T) as
+##{\begin{aligned}
+A&:X\to X,&B&:Y\to X,\\
+E&:X\to Y,&C&:Y\to Y,\\
+Q(x,y)&=(Ax+By,Ex+Cy).
+\end{aligned}}
+If #{C} is invertible, the split Schur map #{S=A-BC^{-1}E}
+preserves both sign sectors of #{P_X}, and
+##{S|_{X_\varepsilon}
+ =A_\varepsilon-B_\varepsilon C_\varepsilon^{-1}E_\varepsilon.}
+Here #{X_\varepsilon=\ker(P_X-\varepsilon I)},
+#{Y_\varepsilon=\ker(P_Y-\varepsilon I)}, and each subscript
+means restriction to the indicated source and target sectors.}
+
+\proof{
+\p{Evaluate #{QP=PQ} on #{(x,0)} and #{(0,y)} and project to
+both summands. This gives
+##{\begin{aligned}
+AP_X&=P_XA,&BP_Y&=P_XB,\\
+EP_X&=P_YE,&CP_Y&=P_YC.
+\end{aligned}}
+Multiplying the last identity on both sides by the inverse of #{C}
+gives #{C^{-1}P_Y=P_YC^{-1}}. Each of these identities proves
+that its map takes sign-#{\varepsilon} vectors to sign-#{\varepsilon}
+vectors. In particular #{C_\varepsilon} is invertible, with inverse
+#{C^{-1}|_{Y_\varepsilon}}, since the two inverse equations restrict
+to the sector. Finally
+##{\begin{aligned}
+SP_X&=AP_X-BC^{-1}EP_X\\
+ &=P_XA-BP_YC^{-1}E=P_XS.
+\end{aligned}}
+Restricting the actual composite #{BC^{-1}E:X\to X} now gives
+exactly the asserted formula, with no interchange of differently typed
+factors.}
+}
+
+\p{This is the sign-sector specialization of
+[Schur transport](fdip-003E), using the
+[module projectors](fdip-003O). Its block convention agrees with
+\citet{Appendix A.5.5, pp. 650-651}{boyd2004convex} after exchanging
+the source's first pivot to #{C}. The proof here is over modules;
+no pairing, self-adjointness, stationary field or probability law has
+been assumed. If the prescribed splitting is not preserved by #{P},
+the required #{P_X,P_Y} and these restrictions are not supplied.}

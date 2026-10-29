@@ -1,0 +1,75 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{Extending a group action on a ring module}
+\date{2026-10-29}
+
+\p{Let #{k} be a commutative unital ring, #{G} a group and #{M} a
+unital #{k}-module. A linear action #{\rho:G\to\operatorname{Aut}_k(M)}
+extends uniquely to a unital #{k}-algebra homomorphism
+##{\widehat\rho:k[G]\longrightarrow\operatorname{End}_k(M),\qquad
+\widehat\rho\left(\sum_g a_g[g]\right)=\sum_g a_g\rho(g).}
+Products of endomorphisms compose right to left. This extends the
+[Group Algebra universal property](fgap-001H) to the actual module action;
+no finiteness of #{G} is assumed.}
+
+\proof{
+\p{Elements of #{k[G]} are finite-support functions on #{G}. The
+coefficient of #{[u]} in a product is
+#{\sum_{gh=u}a_gb_h}; only pairs in the finite set
+#{\operatorname{supp}(a)\times\operatorname{supp}(b)} contribute.
+Its image under multiplication contains the product support. Associativity
+follows by reassociating the finite triple sum and using #{(gh)j=g(hj)}.
+The unit is #{[1_G]}, and the scalar #{c[1_G]} commutes with every basis
+element. Thus these formulas define a unital #{k}-algebra, including
+for the zero ring.}
+\p{The displayed extension is additive and #{k}-linear. Moreover
+##{\begin{aligned}
+\widehat\rho(ab)&=\sum_{g,h}a_gb_h\rho(gh)\\
+ &=\sum_{g,h}a_gb_h\rho(g)\rho(h)
+ =\widehat\rho(a)\widehat\rho(b).
+\end{aligned}}
+The #{k}-linearity of each #{\rho(g)} moves coefficients through it;
+the order of #{g,h} is unchanged. The extension sends #{[1_G]} to
+#{I_M} and #{c[1_G]} to #{cI_M}. Every linear extension has this
+value on each finite basis expansion, proving uniqueness. In the
+[regular action](fgap-001J), #{\rho(g)\rho(h)} first multiplies
+#{[1_G]} by #{[h]}, then by #{[g]}, giving #{[gh]}. For
+#{g=(12),h=(23)} in #{S_3}, this differs from #{[hg]} when
+#{k\ne0}. The nonzero assumption is needed only for this distinguishing
+witness.}
+}
+
+\p{Consequently linear #{G}-actions correspond to unital left
+#{k[G]}-module structures whose restriction along
+#{c\mapsto c[1_G]} is the given scalar action. Under this
+correspondence, a #{k}-linear map #{f:M\to N} is a module map
+exactly when #{f\rho_M(g)=\rho_N(g)f} for every #{g}.}
+\proof{
+\p{Define #{a\cdot m=\widehat\rho(a)m}; linearity, multiplication
+and the unit just proved give the module laws. Conversely, restrict
+a #{k[G]}-module to #{k} and set #{\rho(g)m=[g]m}. Centrality of
+scalars gives #{k}-linearity, #{[g^{-1}]} gives the inverse, and
+#{[gh]=[g][h]} gives the representation law. Finite distributivity
+shows that the two constructions are inverse. This scalar restriction
+is essential; an unrelated #{k}-module structure is not being identified.}
+\p{If #{f} intertwines the group elements, finite linearity gives
+##{f\widehat\rho_M(a)m
+ =\sum_g a_g f\rho_M(g)m
+ =\sum_g a_g\rho_N(g)fm
+ =\widehat\rho_N(a)fm.}
+The converse follows by taking #{a=[g]}. This proves intertwining
+for every algebra element, including scalars and the unit.}
+}
+
+\p{\citet{Sections 3.1-3.2, pp. 39-41}{sengupta2010representations}
+presents the field case, with finite support for an arbitrary group.
+The proof above is the ring adaptation of
+[representation/module correspondence](fgap-001I).
+Mathlib's \leanref{Representation.asAlgebraHom} and
+\leanref{Representation.asAlgebraHom_single} supply the linear extension
+and its value on basis monomials. They do not assert that an arbitrary
+faithful group action has a faithful algebra extension. For example,
+#{C_2\to\mathbb R^\times}, #{r\mapsto-1}, is injective, but its
+algebra extension annihilates the nonzero element #{1+[r]}.}
