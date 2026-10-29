@@ -1,0 +1,40 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Example}
+\title{Nonzero operators outside the trace-ratio domain}
+\date{2026-10-29}
+
+\p{The unit condition in the [trace ratio](fdip-003H) distinguishes
+several elementary cases. For one unit-weight edge on two vertices,
+the Laplacian over #{\mathbb Z} is
+##{L=\begin{pmatrix}1&-1\\-1&1\end{pmatrix}.}
+Its trace is #{2}, which is not a unit in #{\mathbb Z}; the defining
+formula therefore does not give a #{\mathbb Z}-valued ratio.
+After inverting #{2} it does: #{L^2=2L} gives ratio #{1}.
+Reduction over #{\mathbb F_2} instead gives the nonzero matrix
+##{\overline L=\begin{pmatrix}1&1\\1&1\end{pmatrix},}
+whose trace is zero and whose square is zero. Nonzero incidence energy
+as an algebraic operator does not imply a unit trace.}
+
+\p{Over #{\mathbb R}, the nonzero self-adjoint matrix
+#{\operatorname{diag}(1,-1)} has trace zero. It is not positive
+semidefinite, so it does not contradict the positive-trace proof.
+For an incidence presentation containing only loops, #{d=0} and
+#{L=d^\dagger Wd=0}; the trace is zero whatever the loop weights.
+The empty carrier likewise has zero trace by the empty dual-frame sum.
+In each case the ratio is undefined over a nonzero ring.}
+
+\p{In the zero ring, #{0=1} is its sole unit, and every unital
+module and scalar has one element. The formula for the ratio then has
+the unique value #{0}. This algebraic convention makes no assertion
+about a nonzero positive-real Laplacian.}
+
+\p{These computations use the edge-once incidence convention from
+\citet{Section 2.1, pp. 4-5}{spielman2009effective} as extended
+algebraically in \ref{fdip-003B}, and the directly proved
+[dual-frame trace](fdip-003G). The real positivity boundary is the
+spectral criterion in
+\citet{Appendix A.5.2, pp. 646-647}{boyd2004convex}.
+The ring reductions and zero-ring conclusion are the explicit
+calculations here, not probability statements from those sources.}

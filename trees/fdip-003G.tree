@@ -1,0 +1,72 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Definition}
+\title{Intrinsic trace on a finite free module}
+\date{2026-10-29}
+
+\p{A trace can be defined before choosing a pairing or displaying a
+matrix. Let #{k} be a commutative unital ring and #{M} a finite free
+#{k}-module. A \newvocab{finite dual frame} is a finite family
+#{m_i\in M}, #{\ell_i\in M^\vee} such that
+##{x=\sum_i\ell_i(x)m_i\qquad(x\in M).}
+A basis and its coefficient functionals supply such a frame; the
+counting carrier #{k^V} uses its [delta dual frame](fdip-001F).
+For an endomorphism #{T:M\to M}, define its \newvocab{intrinsic trace}
+by
+##{\operatorname{tr}_M(T)=\sum_i\ell_i(Tm_i).}
+This scalar is independent of the frame. It is linear in #{T}, and
+for maps between finite free modules #{f:M\to N}, #{g:N\to M},
+##{\operatorname{tr}_M(gf)=\operatorname{tr}_N(fg).}
+In particular, for an isomorphism #{P:M\to M'},
+##{\operatorname{tr}_{M'}(PTP^{-1})=\operatorname{tr}_M(T).}}
+
+\proof{
+\p{Let #{n_j,\psi_j} be another dual frame of #{M}. Expanding
+#{m_i} in this frame and commuting the scalars in #{k} gives
+##{\begin{aligned}
+\sum_i\ell_i(Tm_i)
+ &=\sum_{i,j}\psi_j(m_i)\ell_i(Tn_j)\\
+ &=\sum_j\psi_j(Tn_j).
+\end{aligned}}
+For the last equality, evaluate
+#{\sum_i\psi_j(m_i)\ell_i(x)=\psi_j(\sum_i\ell_i(x)m_i)=\psi_j(x)}
+at #{x=Tn_j}. This proves frame independence without a pairing.
+Termwise addition and scalar multiplication give
+#{\operatorname{tr}(T+U)=\operatorname{tr}(T)+\operatorname{tr}(U)}
+and #{\operatorname{tr}(cT)=c\operatorname{tr}(T)}.}
+
+\p{Take dual frames #{m_i,\ell_i} for #{M} and #{n_j,\psi_j}
+for #{N}. Expanding #{fm_i} and #{gn_j} gives
+##{\begin{aligned}
+\operatorname{tr}_M(gf)
+ &=\sum_{i,j}\psi_j(fm_i)\ell_i(gn_j)\\
+ &=\operatorname{tr}_N(fg).
+\end{aligned}}
+This is rectangular cyclicity; the two traces may be on different
+modules. The transported family #{Pm_i,\ell_iP^{-1}} is a dual
+frame of #{M'}. Substitution into the defining sum proves the
+conjugacy formula.}
+}
+
+\p{With a basis, #{\ell_i(Tm_i)} is the #{i}-th diagonal coefficient,
+so coordinate trace is recovered as #{\sum_iT_{ii}}.
+For the zero module the empty frame gives trace zero; the same formulas
+also make sense over the zero ring. The declared category here is
+finite free modules. No totalized trace on arbitrary modules and no
+finite-projective extension are needed.}
+
+\p{The duality/evaluation convention is
+\citet{More on Algebra, Lemma 74.1, Tag 0FNJ}{stacks2017stacks}.
+\citet{Exercises, Exercise 22.6, Tag 02DU}{stacks2017stacks} asks
+for trace, naturality and cyclicity on finite locally free modules;
+the finite-free proof above is supplied here, rather than attributed
+to a proof in that exercise.}
+
+\p{Mathlib's \leanref{LinearMap.trace} has a totalized definition.
+On the finite-free commutative-ring domain, its
+\leanref{LinearMap.trace_comp_comm'} is rectangular cyclicity and
+\leanref{LinearMap.trace_conj'} is conjugacy by a linear equivalence.
+The definition above uses only this finite-free domain.
+\leanref{Matrix.trace_mul_comm} expresses the coordinate rectangular
+identity; a trace pairing is not an assumption of either construction.}

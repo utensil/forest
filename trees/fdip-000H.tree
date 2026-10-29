@@ -5,85 +5,115 @@
 \title{Relabeling transports the state and its marginal}
 \date{2026-10-17}
 
-\p{Let #{Q>0} be a \vocabk{positive precision parameter}{fdip-0004}
-on #{\mathbb R^V}, and let #{P:\mathbb R^V\to\mathbb R^{V'}}
-be the coordinate permutation induced by a bijection #{p:V\to V'}.
-Put #{Q'=PQP^T}. Then #{Q'>0}, and the
-\vocabk{Gaussian probability laws}{fdip-0005} satisfy
+\p{Let #{M,M'} be finite-dimensional real positive inner-product
+spaces with their [induced Borel Euclidean volumes](fdip-002H)
+#{\lambda,\lambda'}.
+Let #{Q:M\to M} be positive and self-adjoint, and let
+#{P:M\to M'} be a linear isometry equivalence. Put #{Q'=PQP^{-1}}.
+Then #{Q'} is positive and self-adjoint, and the
+[Gaussian laws](fdip-0005) satisfy
 ##{Z_{Q'}=Z_Q,\qquad P_*\mu_Q=\mu_{Q'}.}
-Here the Borel pushforward is defined by
-#{(P_*\mu)(A)=\mu(P^{-1}(A))} for every Borel set #{A}.
-This extends the [finite pushforward convention](ftip-007S) to measures.
-For every Borel function #{F':\mathbb R^{V'}\to\mathbb R},
+Borel pushforward means #{(P_*\mu)(A)=\mu(P^{-1}(A))} for every
+Borel set #{A}, extending the [finite convention](ftip-007S).
+For every real or complex Borel function #{F'},
 ##{\begin{aligned}
-F'\in L^1(\mu_{Q'})
- &\Longleftrightarrow F'\circ P\in L^1(\mu_Q),\\
-\langle F'\rangle_{Q'}
- &=\langle F'\circ P\rangle_Q.
+\int|F'|\,d\mu_{Q'}&=\int|F'\circ P|\,d\mu_Q,\\
+F'\in L^1(\mu_{Q'})&\Longleftrightarrow F'\circ P\in L^1(\mu_Q).
 \end{aligned}}
-The second identity assumes the equivalent integrability conditions;
-#{L^1} means that the absolute integral is finite. The
-\vocabk{covariance}{fdip-002Z} matrices obey #{G'=PGP^T}.
-In particular these conclusions apply to an
-\vocabk{exact relabeling}{fdip-000G} of finite Gaussian backgrounds.}
-
-\p{\citet{Proposition B.55}{friedli2017statistical}, p. 505, proves
-the Gaussian change of variables. Here it specializes to a permutation,
-whose absolute determinant is one.
-\citet{Appendix A.5.5}{boyd2004convex}, pp. 650-651, supplies the block
-convention for the [positive Schur complement](fdip-000D) below.}
+The first identity allows infinity. Under the equivalent finite
+absolute-integral conditions,
+##{\omega_{Q'}(F')=\omega_Q(F'\circ P).}
+In particular, the target observable transported from #{F} is
+#{F'=F\circ P^{-1}}. Exact and signed arrows of
+[real backgrounds](fdip-000G) supply such isometries.}
 
 \proof{
-\p{For #{z\ne0}, one has #{P^Tz\ne0}, so
-#{z^TQ'z=(P^Tz)^TQ(P^Tz)>0}. Under #{z=P\phi},
-##{z^TQ'z=\phi^TQ\phi,\qquad dz=d\phi.}
-[Coordinate permutations preserve product Lebesgue measure](fdip-002J); equivalently,
-#{|\det P|=1}. Applying this substitution to
-the nonnegative Gaussian weight gives #{Z_{Q'}=Z_Q}. For a Borel set
-#{A\subseteq\mathbb R^{V'}}, applying it with an indicator gives
+\p{The [adjoint identity](fdip-003D) gives #{P^\dagger=P^{-1}},
+so #{Q'} is self-adjoint. For #{z'=Px\ne0},
+#{b_{M'}(z',Q'z')=b_M(x,Qx)>0}; this also proves equality of
+Gaussian actions at #{Px} and #{x}. The
+[isometry-volume theorem](fdip-002L) gives #{P_*\lambda=\lambda'}.
+Consequently, for every nonnegative Borel #{h'},
 ##{\begin{aligned}
-&\mu_{Q'}(A)\\
-&\quad=\frac1{Z_Q}\int_{\mathbb R^V}
-   \mathbf1_A(P\phi)e^{-\phi^TQ\phi/2}\,d\phi\\
-&\quad=\mu_Q(P^{-1}(A)).
+&\int h'(z')e^{-\mathcal A_{Q'}(z')}\,d\lambda'(z')\\
+&\qquad=\int h'(Px)e^{-\mathcal A_Q(x)}\,d\lambda(x).
 \end{aligned}}
-This proves the pushforward identity.}
+Take #{h'=1}; the [positive Gaussian integral](fdip-002T) gives
+finite nonzero normalizers, and this equality proves #{Z_{Q'}=Z_Q}.
+Then take #{h'=\mathbf1_A/Z_Q} to obtain
+#{\mu_{Q'}(A)=\mu_Q(P^{-1}(A))} for every Borel #{A}.}
 
-\p{Use the same nonnegative change of variables with #{|F'|} to get
-##{\int |F'|\,d\mu_{Q'}=\int |F'\circ P|\,d\mu_Q,}
-including when the value is infinite. This proves the integrability
-equivalence. When finite, apply the substitution to the positive and
-negative parts of #{F'} and subtract, giving the expectation identity.
-Thus transporting an original observable #{F} by #{F'=F\circ P^T}
-preserves its expectation. Finally, multiplying on either side shows
-##{(PQP^T)^{-1}=PQ^{-1}P^T.}
-The [inverse-precision covariance theorem](fdip-000B) identifies these
-inverses with #{G'} and #{G}; the coordinate means remain zero.}
+\p{Taking #{h'=|F'|/Z_Q} gives the extended absolute-integral
+identity and hence the integrability equivalence. If finite,
+positive and negative parts give the expectation identity; real and
+imaginary parts give the complex version. Every real polynomial
+function is integrable by [absolute Gaussian moments](fdip-002W).
+On that algebra the expectation identity agrees with the previously
+proved [functional transport](fdip-003F). No algebra structure on all
+of #{L^1} is required.}
+
+\p{For linear functionals #{\ell',r'\in(M')^\vee}, finite second
+moments and the pushforward give the intrinsic covariance identity
+##{\operatorname{Cov}_{Q'}(\ell',r')
+ =\operatorname{Cov}_{Q}(\ell'\circ P,r'\circ P).}
+The [inverse-precision covariance theorem](fdip-000B) says that,
+relative to the specified pairings,
+#{\operatorname{Cov}_Q(b_M(u,-),b_M(v,-))=b_M(u,Q^{-1}v)}.
+Since #{b_{M'}(u',Px)=b_M(P^{-1}u',x)}, this yields
+##{G'=PGP^{-1},\qquad G=Q^{-1}.}
+In orthonormal coordinates this is #{G'=PGP^T}; an arbitrary linear
+coordinate map gives covariance congruence instead, as in
+\ref{fdip-003M}. Equality of second moments was not used to infer the
+pushforward law.}
 }
 
-\p{Now take nonempty proper retained subsets #{R\subsetneq V} and
-#{R'\subsetneq V'}, with complements #{U,U'}, and assume #{p(R)=R'}.
-Let #{P_R,P_U} be the restrictions of the coordinate permutation. In
-the grouped coordinates, #{P=\operatorname{diag}(P_R,P_U)}. If
-#{Q=\begin{pmatrix}A&H\\H^T&C\end{pmatrix}}, then
+\p{Now let #{M=X\oplus Y} and #{M'=X'\oplus Y'} be orthogonal
+splittings that #{P} carries by isometries #{P_X,P_Y}, so the
+[split-square hypotheses](fdip-003E) hold. For the four components,
 ##{\begin{aligned}
-A'&=P_RAP_R^T,\\
-H'&=P_RHP_U^T,\\
-C'&=P_UCP_U^T,\\
-(C')^{-1}&=P_UC^{-1}P_U^T.
+A'&=P_XAP_X^{-1},&B'&=P_XBP_Y^{-1},\\
+E'&=P_YEP_X^{-1},&C'&=P_YCP_Y^{-1}.
 \end{aligned}}
-Consequently the \vocabk{effective precisions}{fdip-000D} satisfy
+Here #{E=B^\dagger}, and #{C>0}. The retained precisions and
+eliminated Gaussian factors satisfy
 ##{\begin{aligned}
-S'&=A'-H'(C')^{-1}(H')^T\\
-  &=P_R(A-HC^{-1}H^T)P_R^T\\
-  &=P_RSP_R^T.
+S'&=P_XSP_X^{-1},& S&=A-BC^{-1}E>0,\\
+c_{C'}&=c_C,&c_C&=\frac{(2\pi)^{\dim Y/2}}{\sqrt{\det C}},\\
+Z_{S'}&=Z_S,&(P_X)_*\mu_S&=\mu_{S'}.
 \end{aligned}}
-Also #{|U'|=|U|} and #{\det C'=\det C}, since
-#{(\det P_U)^2=1}. The entire integration factor
-#{c_C=(2\pi)^{|U|/2}/\sqrt{\det C}} is therefore preserved.}
+Thus the complete fiber scalar and the additive effective-action
+constant #{-\log c_C} are preserved, along with the normalized law.}
 
-\p{For the coordinate projections #{\pi_R,\pi_{R'}}, the identity
-#{\pi_{R'}P=P_R\pi_R} says that this square commutes:}
+\proof{
+\p{The four blocks and Schur conjugacy are \ref{fdip-003E}.
+A basis of #{Y} and its image under #{P_Y} give the same array
+for #{C} and #{C'}, hence equal determinants; the dimensions are
+also equal. This proves #{c_{C'}=c_C}. The first part of the theorem
+applied on #{X} proves #{Z_{S'}=Z_S}.
+The [exact integration formula](fdip-000D), for the induced product
+volumes, is
+##{\int_Y e^{-\mathcal A_Q(x,y)}\,d\lambda_Y(y)
+ =c_Ce^{-b_X(x,Sx)/2}.}
+The [event marginal theorem](fdip-000E) proves
+#{\pi_*\mu_Q=\mu_S} and #{\pi'_*\mu_{Q'}=\mu_{S'}}.
+Pushforwards compose by inverse images of Borel sets. Using
+#{\pi'P=P_X\pi}, one obtains
+##{\begin{aligned}
+(P_X)_*\mu_S
+ &=(P_X\pi)_*\mu_Q\\
+ &=(\pi'P)_*\mu_Q=\pi'_*\mu_{Q'}=\mu_{S'}.
+\end{aligned}}
+This proves moving marginal transport from actual measures, rather
+than from Schur or covariance identities alone. The same marginal
+supplier gives the extended absolute-integral identity for retained
+observables and the polynomial-state restriction.}
+}
+
+\p{For vertex bijections #{p:V\to V'}, take a nonempty proper
+#{R\subsetneq V}, set #{R'=pR}, and use the coordinate splits.
+The map #{P_R:\mathbb R^R\to\mathbb R^{R'}} has the genuine moving
+target #{\mathbb R^{pR}}. At #{p(v)}, #{v\in R}, both
+#{\pi_{R'}Pf} and #{P_R\pi_Rf} have value #{f(v)}. Thus:}
 
 \tikzfigs{0.75}{\begin{tikzpicture}[
   every node/.style={inner sep=4pt},
@@ -100,51 +130,35 @@ Also #{|U'|=|U|} and #{\det C'=\det C}, since
 \end{tikzpicture}}
 
 \p{The lower map exists because the retained subset is transported.
-Pushforwards compose by taking inverse images of Borel sets. Combining
-this square with the [marginal theorem](fdip-000E) therefore gives
-##{\begin{aligned}
-(P_R)_*\mu_S
- &=(P_R\pi_R)_*\mu_Q\\
- &=(\pi_{R'}P)_*\mu_Q\\
- &=(\pi_{R'})_*\mu_{Q'}=\mu_{S'}.
-\end{aligned}}
-Applying the first part to #{S'=P_RSP_R^T} also gives
-#{Z_{S'}=Z_S}. Thus both the normalized retained law and the raw factor
-#{c_C} respect this partition correspondence.}
+Keeping the target labels fixed can select an inequivalent marginal;
+the [adjacent-versus-opposite example](fdip-003J) gives both the
+precision calculation and a failure of projection factorization.}
 
-\p{A global relabeling need not preserve a marginal requested on fixed
-labels. In the [four-cycle](fdip-000F), take #{t=m=1} and retain
-#{R=\{0,2\}}. Its effective precision is
-##{S_{\mathrm{opp}}=
-\begin{pmatrix}7/3&-2/3\\-2/3&7/3\end{pmatrix}.}
-Exchange labels #{1,2}, fixing #{0,3}, and form #{Q'=PQP^T}.
-If the new retained labels are still #{\{0,2\}}, they select the
-original adjacent variables #{\{0,1\}}. In the old coordinate order
-#{(0,1)\mid(2,3)}, the relevant blocks are
-##{\begin{aligned}
-A=C&=\begin{pmatrix}3&-1\\-1&3\end{pmatrix},\\
-H&=\begin{pmatrix}0&-1\\-1&0\end{pmatrix},\\
-C^{-1}=HC^{-1}H^T
- &=\frac18\begin{pmatrix}3&1\\1&3\end{pmatrix}.
-\end{aligned}}
-Subtraction gives
-##{S_{\mathrm{adj}}=
-\begin{pmatrix}21/8&-9/8\\-9/8&21/8\end{pmatrix}.}
-The diagonal entries #{7/3} and #{21/8} differ, so no two-coordinate
-permutation conjugates these precisions. There is also no map on the old
-retained fields factoring #{\pi_RP} through #{\pi_R}: the fields
-#{0} and #{e_1} have the same old projection, but their projections
-after #{P} are #{0} and #{(0,1)}. Here #{e_1} is one at vertex #{1}
-and zero elsewhere. Transporting the retained subset to
-#{p(R)=\{0,1\}} in the new labels restores the square and the theorem.}
+\p{These conclusions use positive precisions and the stated product
+volumes. Fixing an eliminated field, taking a
+[conditional-density kernel](fdip-003A), and taking a marginal are
+different operations. A singular full-fiber integral is not repaired
+by a pseudoinverse: [changing the integration space](fdip-0039)
+changes the measure. The [massless projected cycle law](fdip-000F)
+has its proved density on the specified retained image, and is not
+obtained by inserting a mean-zero constraint into the unconstrained
+marginal formula.}
 
-\p{Mathlib's \leanref{LinearIsometryEquiv.measurePreserving} supplies
-volume preservation for a linear isometry equivalence of finite-dimensional
-real inner-product spaces. TauCeti's
+\p{The Gaussian change-of-variables convention is
+\citet{Proposition B.55, p. 505}{friedli2017statistical}.
+The nonnegative integration convention is
+\citet{Theorem 1.7.15, pp. 200-202}{tao2011measure} on the Borel
+product measures; absolute integrability precedes signed subtraction.
+The real block convention is
+\citet{Appendix A.5.5, pp. 650-651}{boyd2004convex}, with its
+first pivot exchanged to #{C}.}
+
+\p{Mathlib's \leanref{LinearIsometryEquiv.measurePreserving}
+supplies volume preservation for finite-dimensional real linear
+isometry equivalences. TauCeti's
 \leanref/tauceti{TauCeti.Probability.map_affine_multivariateGaussian}
-supplies Gaussian transport in covariance parameters; specialize its
-mean and shift to zero, its linear map to #{P}, and its covariance to
-#{Q^{-1}}. The inverse identity above and the
-[precision-density identification](fdip-000B) align that result with
-#{\mu_Q}. These ingredients do not include the declared partition or its
-counterexample.}
+supplies covariance-parameter transport. Set mean and shift to zero,
+linear map to #{P}, and covariance to #{Q^{-1}}; the
+[precision-density identification](fdip-000B) and the proved inverse
+identity align it with this law. These interfaces do not supply the
+endpoint data, declared partition or its counterexample.}

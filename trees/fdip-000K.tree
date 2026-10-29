@@ -5,138 +5,89 @@
 \title{Symmetry survives the Gaussian marginal}
 \date{2026-10-17}
 
-\p{The [half-turn](fdip-000J) preserves the equations, Gaussian law
-and marginal on opposite vertices of the alternating cycle for every
-#{t,m>0}. More generally, let a finite group #{\Gamma} have a
-\vocabk{signed-incidence symmetry}{fdip-000J} of a finite incidence
-presentation with nonempty vertex set and positive weights. Use the counting vertex pairing,
-coordinate Lebesgue measure and scalar mass #{m>0}. Put
-##{\begin{aligned}
-L&=B^TWB,\\
-Q&=L+m^2I,\qquad G=Q^{-1}.
-\end{aligned}}
-The \vocabk{massive precision}{fdip-000A} is positive, and #{G} is
-its \vocabk{covariance}{fdip-002Z}, by the [inverse-precision theorem](fdip-000B). For every #{g\in\Gamma},
+\p{Let a group #{\Gamma} act by a
+\vocabk{signed-incidence symmetry}{fdip-003B} on a finite incidence
+presentation with positive real weights and nonempty vertex set.
+Use the counting pairings, their induced Borel volume and a scalar
+mass #{m>0}. The [positive massive precision](fdip-000A) and
+[inverse-precision covariance](fdip-000B) are
+##{L=d^\dagger Wd,\qquad Q=L+m^2I,\qquad G=Q^{-1}.}
+For every #{g\in\Gamma},
 ##{\begin{aligned}
 LP_g&=P_gL,&QP_g&=P_gQ,\\
-GP_g&=P_gG,&P_gGP_g^T&=G.
+GP_g&=P_gG,&P_gGP_g^\dagger&=G.
 \end{aligned}}
-Thus #{Q\phi=j} implies #{Q(P_g\phi)=P_gj}. The
-\vocabk{Gaussian probability law}{fdip-0005} is invariant under
-[pushforward](fdip-000H):
-#{(P_g)_*\mu_Q=\mu_Q}. For every Borel observable #{F},
+Thus #{Qf=j} implies #{Q(P_gf)=P_gj}. The
+[Gaussian law](fdip-0005) is invariant: #{(P_g)_*\mu_Q=\mu_Q}.
+For every real or complex Borel observable #{F},
 ##{\begin{aligned}
-F\in L^1(\mu_Q)&\Longleftrightarrow F\circ P_g\in L^1(\mu_Q),\\
-\langle F\circ P_g\rangle_Q&=\langle F\rangle_Q.
+\int|F\circ P_g|\,d\mu_Q&=\int|F|\,d\mu_Q,\\
+\omega_Q(F\circ P_g)&=\omega_Q(F)
 \end{aligned}}
-The expectation equality assumes the equivalent integrability conditions;
-#{L^1} means finite absolute integral.}
-
-\p{\citet{p. 58}{milne2025group} defines
-\vocabk{equivariance}{fgap-0008} and restriction to stable subsets.
-\citet{Proposition B.55}{friedli2017statistical}, p. 505, supplies
-the Gaussian change-of-variables convention. The weighted-incidence
-and elimination conclusions follow from the identities below.}
+with extended integrals in the first equality, and finite absolute
+integral required in the second.}
 
 \proof{
-\p{The incidence intertwiner and weighted pairing identity from
-\ref{fdip-000J} give
-##{\begin{aligned}
-P_g^TLP_g&=(BP_g)^TW(BP_g)\\
- &=B^TU_g^TWU_gB=L.
-\end{aligned}}
-Since #{P_gP_g^T=I}, this implies #{LP_g=P_gL}. The scalar mass
-term commutes with #{P_g}, so #{QP_g=P_gQ}. Multiplying on both
-sides by #{Q^{-1}} gives #{GP_g=P_gG}, and orthogonality gives
-#{P_gGP_g^T=G}. The equation transforms by this same commutation;
-its solution is uniquely #{\phi=Gj}. At zero source the solution
-is zero, but the action on the whole field space can still be nontrivial.}
+\p{The signed action gives counting isometries and
+#{dP_g=J_gd}, #{WJ_g=J_gW}. The
+[paired transport theorem](fdip-003D) gives the stated commutations;
+#{P_g^\dagger=P_g^{-1}} gives the covariance congruence.
+The unique sourced solution is #{f=Gj}. At zero source this is zero,
+although the action on the entire field carrier need not be trivial.}
 
-\p{The scalar \vocabk{Euclidean action}{fdip-0004}
-#{\mathcal A(\phi)=\tfrac12\phi^TQ\phi} satisfies
-#{\mathcal A(P_g\phi)=\mathcal A(\phi)}. This function differs
-from the group action #{g\mapsto P_g}. Each [coordinate permutation has absolute Jacobian one](fdip-002J), so #{\psi=P_g\phi} preserves Lebesgue
-measure. For a Borel set #{T}, substitution gives
-##{\begin{aligned}
-&\mu_Q(P_g^{-1}(T))\\
- &\quad=\frac1{Z_Q}\int\mathbf1_T(P_g\phi)
-       e^{-\mathcal A(\phi)}\,d\phi\\
- &\quad=\frac1{Z_Q}\int\mathbf1_T(\psi)
-       e^{-\mathcal A(\psi)}\,d\psi\\
- &\quad=\mu_Q(T).
-\end{aligned}}
-Applying this nonnegative substitution to #{|F|} first proves the
-integrability equivalence. Subtract the positive and negative parts
-when their integrals are finite to obtain the expectation identity.
-This is the [Gaussian transport theorem](fdip-000H) with
-#{P_gQP_g^T=Q}. Its matrix proof applies also to the signed-edge
-extension; that extension need not be a directed relabeling of the
-incidence presentation.}
+\p{The scalar [Euclidean action](fdip-0004)
+#{\mathcal A_Q(f)=b(f,Qf)/2} satisfies
+#{\mathcal A_Q(P_gf)=\mathcal A_Q(f)} by pairing isometry and
+commutation. This scalar function differs from the group action
+#{g\mapsto P_g}. The [Gaussian transport theorem](fdip-000H),
+with #{Q'=Q}, proves event-law invariance and the extended absolute
+integral before the expectation assertion. Its proof applies to the
+weaker incidence intertwiners and therefore to signed endpoint actions;
+no directed-endpoint claim is inferred from the weaker hypotheses.}
 }
 
-\p{Now suppose a nonempty proper retained subset #{R\subsetneq V}
-is stable: #{p_g(R)=R} for every #{g}. Write #{D=V\setminus R}
-for its nonempty complement. The restrictions #{P_{g,R},P_{g,D}}
-give #{P_g=\operatorname{diag}(P_{g,R},P_{g,D})} in grouped
-coordinates. In the [Gaussian block decomposition](fdip-000D),
-write #{Q=\begin{pmatrix}A&H\\H^T&C\end{pmatrix}} and
-#{S=A-HC^{-1}H^T}. Then
+\p{Suppose further that a nonempty proper retained subset
+#{R\subsetneq V} is stable under every #{p_g}. Its complement
+#{D=V\setminus R} is also stable. The restricted maps
+#{P_{g,R},P_{g,D}} give the orthogonal split correspondence.
+For the [split components](fdip-001T) #{A,B,E,C}, with
+#{E=B^\dagger}, and #{S=A-BC^{-1}E>0}, one has
 ##{\begin{aligned}
-P_{g,R}SP_{g,R}^T&=S,\\
+P_{g,R}SP_{g,R}^{-1}&=S,\\
+P_{g,R}S^{-1}P_{g,R}^{-1}&=S^{-1},\\
 (P_{g,R})_*\mu_S&=\mu_S.
 \end{aligned}}
-The retained covariance #{S^{-1}} and equation #{Sx=k} are
-equivariant under the same restricted action.}
+The retained equation #{Sx=k} is equivariant as well. The full fiber
+factor #{c_C=(2\pi)^{|D|/2}/\sqrt{\det C}} and the stationary
+eliminated field are compatible with the action:
+##{y_*(P_{g,R}x)=P_{g,D}y_*(x),\qquad y_*(x)=-C^{-1}Ex.}}
 
 \proof{
-\p{Blockwise conjugation of #{P_gQP_g^T=Q} gives
-##{\begin{aligned}
-A&=P_{g,R}AP_{g,R}^T,\\
-H&=P_{g,R}HP_{g,D}^T,\\
-C&=P_{g,D}CP_{g,D}^T.
-\end{aligned}}
-Inverting the last equation gives the corresponding identity for
-#{C^{-1}}. Substitution into the Schur complement yields
-##{\begin{aligned}
-P_{g,R}SP_{g,R}^T
- &=A-HC^{-1}H^T=S.
-\end{aligned}}
-The eliminated factor #{c_C=(2\pi)^{|D|/2}/\sqrt{\det C}}
-is unchanged as well.}
-
-\p{The projection satisfies
-##{\pi_RP_g=P_{g,R}\pi_R.}
-By the
-[exact normalized marginal](fdip-000E),
+\p{The [four-block transport identities](fdip-003E) give
+Schur conjugacy, its inverse conjugacy, and stationary-field transport.
+Its actual projection identity is #{\pi_RP_g=P_{g,R}\pi_R}.
+By the [normalized marginal theorem](fdip-000E) and full-law invariance,
 ##{\begin{aligned}
 (P_{g,R})_*\mu_S
  &=(P_{g,R}\pi_R)_*\mu_Q\\
- &=(\pi_RP_g)_*\mu_Q\\
- &=(\pi_R)_*\mu_Q=\mu_S.
+ &=(\pi_RP_g)_*\mu_Q=\pi_{R*}\mu_Q=\mu_S.
 \end{aligned}}
-The same theorem gives #{S^{-1}=(Q^{-1})_{RR}}. Conjugating
-#{S^{-1}} or the equation #{Sx=k} proves their equivariance.
+The [real transport theorem](fdip-000H) also proves invariance of
+#{\det C}, #{c_C}, the additive action constant and #{Z_S}.
 For every integrable retained observable #{f},
 ##{\begin{aligned}
-\langle f\circ P_{g,R}\rangle_S&=\langle f\rangle_S,\\
-\langle f\circ\pi_R\rangle_Q&=\langle f\rangle_S.
+\omega_S(f\circ P_{g,R})&=\omega_S(f),\\
+\omega_Q(f\circ\pi_R)&=\omega_S(f).
 \end{aligned}}
-Finally, the eliminated stationary field
-#{y_*(x)=-C^{-1}H^Tx} obeys
-##{y_*(P_{g,R}x)=P_{g,D}y_*(x).}
-Indeed the block identities imply
-##{\begin{aligned}
-H^TP_{g,R}&=P_{g,D}H^T,\\
-C^{-1}P_{g,D}&=P_{g,D}C^{-1}.
-\end{aligned}}
-This proves compatibility
-of stationary elimination; the separate Gaussian integration proof
-establishes the marginal statement.}
+The marginal theorem supplies the absolute-integral equivalence
+needed here. On actual polynomial functions this is the
+[retained functional square](fdip-003F). Gaussian integration proves
+the law; algebraic Schur conjugacy by itself does not.}
 }
 
 \p{For the half-turn, retain #{R=(0,2)} and eliminate #{D=(1,3)}.
 Both restrictions are the nonidentity swap
-#{J=\begin{pmatrix}0&1\\1&0\end{pmatrix}}. The projection square is}
+#{J=\begin{pmatrix}0&1\\1&0\end{pmatrix}}. Here #{H} is the array of the split component #{B}. The projection square is}
 
 \tikzfigs{0.75}{\begin{tikzpicture}[
   every node/.style={inner sep=4pt},
@@ -181,42 +132,30 @@ The observable #{\phi_0\phi_2} is itself invariant under the
 half-turn and has expectation #{2/15}. These expectations agree
 before and after elimination.}
 
-\p{Weight invariance is necessary for this example. Replace
-#{(1,t,1,t)} by #{(1,t,2,t)} while keeping the proposed half-turn.
-Then #{L_{00}=1+t} and #{L_{22}=2+t}, so #{PLP^T\ne L} and
-#{\mathcal A(\delta_2)-\mathcal A(\delta_0)=1/2}.
-If its Gaussian law were invariant, second moments would give
-#{PGP^T=G}; inversion would give #{PQP^T=Q}, contradicting
-those diagonal entries. At #{t=m=1} the retained blocks are
-##{\begin{aligned}
-A=C&=\operatorname{diag}(3,4),\\
-H&=-\begin{pmatrix}1&1\\1&2\end{pmatrix},\\
-S_{\mathrm{broken}}
- &=\begin{pmatrix}29/12&-5/6\\-5/6&8/3\end{pmatrix}.
-\end{aligned}}
-The last matrix follows by subtracting #{HC^{-1}H^T} from #{A}.
-Its diagonal entries differ by #{1/4}, so its marginal also fails
-swap invariance. Its positive Gaussian still exists.}
+\p{The full and retained half-turns are both faithful: their
+nonidentity maps send #{\delta_0} to #{\delta_2}. A general full
+faithful action can restrict trivially, for instance when it moves
+only eliminated vertices. These two assertions are compatible.}
 
-\p{Partition stability is a different requirement. With the original
-weights, retain #{R=\{0,1\}} instead. The half-turn still preserves
-the full state, but sends #{R} to #{D=\{2,3\}}. No map #{T} of
-retained fields can satisfy #{\pi_RP=T\pi_R}: the zero field
-forces #{T(0)=0}, while #{\delta_2} has retained projection zero
-and projects to #{(1,0)} after the half-turn. The action transports
-the marginal to a different subset; it does not descend through this
-fixed projection. This does not exclude accidental symmetries of an
-individual two-site density. A general restricted action may also be
-trivial, unlike the opposite-pair swap proved above. Extra mass fields
+\p{Three concrete obstructions distinguish the hypotheses:
+[keeping fixed target labels after relabeling](fdip-003J),
+[breaking the alternating weights](fdip-003K), and
+[choosing a nonstable retained subset](fdip-003L).
+The last is a failure of descent through that projection and does not
+exclude accidental symmetry of a marginal density. Extra mass fields
 or reference pairings would require their own preservation hypotheses.}
 
+\p{The group-action and stable-subset conventions are
+\citet{Definition 4.1 and p. 58}{milne2025group}.
+The Gaussian substitution convention is
+\citet{Proposition B.55, p. 505}{friedli2017statistical}.
+The incidence, stationary and half-turn computations above use the
+proved transport results and the [exact cycle elimination](fdip-000F).}
+
 \p{Mathlib's \leanref{LinearIsometryEquiv.measurePreserving}
-supplies volume preservation for finite-dimensional real linear
-isometry equivalences. TauCeti's
+supplies isometry-volume preservation. TauCeti's
 \leanref/tauceti{TauCeti.Probability.map_affine_multivariateGaussian}
-supplies the covariance-parameter Gaussian transport: set mean and
-translation to zero, covariance to #{Q^{-1}}, and linear map to
-#{P_g} or the retained projection. The
-[precision-density bridge](fdip-000B) and the proved conjugacies
-align that provider with these laws. The incidence, partition and
-counterexample statements are additional calculations.}
+supports covariance-parameter pushforward for the supplied #{P_g}
+or retained projection after the [precision-density bridge](fdip-000B).
+These declarations do not assert the endpoint, weight or stable-subset
+hypotheses, or the concrete failures just cited.}

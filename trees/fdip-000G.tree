@@ -6,94 +6,77 @@
 \date{2026-10-17}
 
 \p{To compare two discrete Gaussian models, specify which data a change
-of labels must carry. A \newvocab{finite Gaussian background} consists of a
-\vocabk{finite incidence presentation}{fdip-0002}
-#{(V,E,s,h)}, positive edge weights #{w:E\to\mathbb R_{>0}}, a mass
+of labels must carry. A \newvocab{finite Gaussian background} consists
+of a \vocabk{finite incidence presentation}{fdip-0002}
+#{(V,E,s,h)}, positive weights #{w:E\to\mathbb R_{>0}}, a mass
 #{m>0}, and a nonempty proper retained subset #{R\subsetneq V}.
-Put #{U=V\setminus R}; both index sets are nonempty.
-The reference structures are the
+Put #{U=V\setminus R}; both retained and eliminated carriers are
+nonempty. The specified reference structures are the
 \vocabk{counting inner products}{fdip-0002} on vertex and edge fields,
-the \vocabk{weighted edge inner product}{fdip-0007} determined by #{w},
-and [coordinate Lebesgue measure](fdip-002H) #{\lambda_V} on #{\mathbb R^V}.
-Grouping the fields as #{(x,y)\in\mathbb R^R\times\mathbb R^U}
-identifies #{\lambda_V} with the product #{dx\,dy}.}
+the \vocabk{weighted edge inner product}{fdip-0007}, and the
+[induced Borel Euclidean volume](fdip-002H) #{\lambda_V} on
+#{\mathbb R^V}. The [orthogonal coordinate split](fdip-002Q)
+identifies it with the product of the retained and eliminated volumes.}
 
-\p{The incidence matrix #{B} and weight matrix #{W} determine the
-\vocabk{weighted graph Laplacian}{fdip-0007} and
-\vocabk{massive precision}{fdip-000A}:
-##{L=B^TWB,\qquad Q=L+m^2I>0.}
-The \vocabk{Gaussian probability law}{fdip-0005} #{\mu_Q} and its
-\vocabk{retained marginal law}{fdip-000E} #{\mu_S} are then derived
-data, with \vocabk{effective precision}{fdip-000D}
-#{S=A-HC^{-1}H^T} in the retained/eliminated block ordering.
-The Gaussian density in \citet{Proposition B.55}{friedli2017statistical},
-p. 505, uses covariance #{\Sigma}; here #{\Sigma=Q^{-1}} by
-\ref{fdip-000B}. A bare matrix omits the incidence data, reference
-structures and retained subset of this background.}
+\p{Let #{d:\mathbb R^V\to\mathbb R^E} be incidence,
+#{(df)(e)=f(h(e))-f(s(e))}, and let #{W} multiply edge fields by
+#{w}. The derived operators are
+##{L=d^\dagger Wd,\qquad Q=L+m^2I>0,}
+where #{d^\dagger} is the [counting adjoint](fdip-001P).
+In counting bases, #{d} has array #{D} and #{L=D^TWD}.
+The [action](fdip-0004) #{\mathcal A_Q(f)=b_V(f,Qf)/2}, finite
+positive [normalizer](fdip-002T) #{Z_Q},
+[Gaussian law](fdip-0005) #{\mu_Q}, and
+[retained marginal](fdip-000E) #{\mu_S} are derived data.
+For the four [split components](fdip-001T),
+#{S=A-BC^{-1}E}; the real orthogonal specialization has
+#{E=B^\dagger}; the block #{B:Y\to X} is distinct from incidence.}
 
-\p{An \newvocab{exact relabeling} to a primed background is a pair of
-bijections #{p:V\to V'} and #{\eta:E\to E'} such that
+\p{An \newvocab{exact relabeling} to a primed background consists of
+bijections #{p:V\to V'}, #{q:E\to E'} satisfying
 ##{\begin{aligned}
-s'\circ\eta&=p\circ s,&h'\circ\eta&=p\circ h,\\
-w'\circ\eta&=w,&m'&=m,\\
-p(R)&=R'.
+s'q&=ps,&h'q&=ph,\\
+w'q&=w,&m'&=m,\qquad pR=R'.
 \end{aligned}}
-Thus directed endpoints, weights, mass and the partition are preserved.
-In particular a loop's attachment vertex is preserved even though its
-incidence row is zero. Define the coordinate maps #{P,J} by
-##{\begin{aligned}
-(P\phi)(p(v))&=\phi(v),\\
-(Ja)(\eta(e))&=a(e).
-\end{aligned}}
-They preserve the counting pairings and satisfy
-#{P^{-1}=P^T}, #{J^{-1}=J^T}. Weight preservation also gives
-#{W'=JWJ^T}, so #{J} preserves the weighted edge pairing.}
+It is the all-positive specialization of a
+\vocabk{signed endpoint arrow}{fdip-003B}. It preserves the attachment
+of a loop even when its incidence is zero. The induced maps are
+##{(Pf)(p(v))=f(v),\qquad (Ja)(q(e))=a(e).}
+They preserve both counting pairings, the weighted edge pairing, and
+by [isometry of reference volume](fdip-002L) the reference volume.
+Allowing coherent endpoint reversals gives the larger signed relation;
+it does not change what an exact directed relabeling means.}
 
-\p{The endpoint equations imply the operator identities. At an edge
-#{\eta(e)},
-##{\begin{aligned}
-(B'P\phi)_{\eta(e)}
- &=\phi(h(e))-\phi(s(e))\\
- &=(JB\phi)_{\eta(e)}.
-\end{aligned}}
-Hence #{B'P=JB}, or #{B'=JBP^T}. Substituting into the Laplacian gives
-##{\begin{aligned}
-L'&=(B')^TW'B'\\
-  &=PB^TJ^TJWJ^TJBP^T\\
-  &=PLP^T,\\
-Q'&=PQP^T.
-\end{aligned}}
-The same maps carry the normalized states and their marginals by
-\ref{fdip-000H}. Identity bijections satisfy all the conditions;
-inverse bijections do too, and componentwise composition preserves each
-endpoint, weight, mass and subset equation. Existence of an exact
-relabeling therefore defines an equivalence relation on these backgrounds.}
+\p{Evaluation at #{q(e)} gives
+#{(d'Pf)(q(e))=f(h(e))-f(s(e))=(Jdf)(q(e))}.
+Weight preservation gives #{W'J=JW}. Thus
+[paired transport](fdip-003D) yields
+##{L'=PLP^{-1},\qquad Q'=PQP^{-1}.}
+Counting isometry gives #{P^{-1}=P^T}, #{J^{-1}=J^T} in the
+coordinate bases, recovering #{D'=JDP^T} and #{W'=JWJ^T}.
+The [normalized-law theorem](fdip-000H) carries the laws and moving
+marginals. Identity, inverse and composition are the directed cases
+of the proved signed-arrow laws, so existence of an exact relabeling
+is an equivalence relation on backgrounds.}
 
-\p{For a broader comparison, forget the mass, state and partition and
-restrict to nonzero Laplacians with their counting pairings. Define
-##{L\approx L'\quad\Longleftrightarrow\quad
-L'=cPLP^T}
-for some #{c>0} and vertex-coordinate permutation #{P}.
-Identity uses #{(c,P)=(1,I)}; inverse uses #{(c^{-1},P^T)};
-composition uses the product of the positive scalars and of the
-permutations. This is another equivalence relation. Exact background
-relabelings give its case #{c=1} when #{L\ne0}, but this broader
-relation need not identify the fixed-mass Gaussian states.
-The [trace ratio](fdip-000I) will separate two backgrounds even after
-these extra identifications.}
+\p{Two broader comparisons retain less data. The
+[positive-scaling Laplacian relation](fdip-003H) forgets mass, state
+and partition, and compares nonzero Laplacians by #{L'=cPLP^{-1}}
+with #{c>0} and a vertex permutation. Its
+[cycle trace ratio](fdip-000I) still separates two examples.
+An arbitrary invertible real field map #{y=T\phi} instead changes
+precision to #{T^{-T}QT^{-1}} and the counting pairing to
+#{y^TT^{-T}T^{-1}z}. Its [reference Jacobian](fdip-002K) is
+#{dy=|\det T|\,d\phi}. Such a map can transport the
+[normalized law by Jacobian compensation](fdip-003M), while
+[losing the reference pairing or retained projection](fdip-000Z).
+It is not thereby an enriched background arrow.}
 
-\p{An arbitrary invertible real field map #{y=T\phi} is outside the
-declared arrows. In these coordinates the precision becomes
-#{T^{-T}QT^{-1}}, where #{T^{-T}=(T^{-1})^T}, and the original pairing
-becomes #{y^TT^{-T}T^{-1}z}. The [reference Jacobian](fdip-002K) gives
-#{dy=|\det T|\,d\phi}.
-\citet{Proposition B.55}{friedli2017statistical} uses this substitution
-in its proof.
-Enlarging the comparison to such maps must carry these reference
-structures explicitly.}
-
-\p{Mathlib's \leanref{Matrix.reindexLinearEquiv} and
-\leanref{Matrix.reindexRingEquiv} express the linear and multiplicative
-parts of coordinate reindexing. They support the matrix calculation;
-the endpoint, weight, mass and partition requirements are additional
-data of the exact relabeling above.}
+\p{The covariance-parameter Gaussian density in
+\citet{Proposition B.55, p. 505}{friedli2017statistical} agrees with
+these conventions after the [inverse-precision theorem](fdip-000B)
+identifies #{\Sigma=Q^{-1}}. Its change-of-variables argument does
+not specify the endpoint, mass or retained-subset data.
+Mathlib's \leanref{Matrix.reindexLinearEquiv} and
+\leanref{Matrix.reindexRingEquiv} support the coordinate reindexing
+identities. The extra background requirements are those stated here.}

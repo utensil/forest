@@ -1,0 +1,41 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Example}
+\title{Fixed labels can select a different marginal}
+\date{2026-10-29}
+
+\p{A global relabeling need not preserve a marginal requested on fixed
+labels. In the [four-cycle](fdip-000F), take #{t=m=1} and retain
+#{R=\{0,2\}}. Its effective precision is
+##{S_{\mathrm{opp}}=
+\begin{pmatrix}7/3&-2/3\\-2/3&7/3\end{pmatrix}.}
+Exchange labels #{1,2}, fixing #{0,3}, and form #{Q'=PQP^T}.
+If the new retained labels are still #{\{0,2\}}, they select the
+original adjacent variables #{\{0,1\}}. In the old coordinate order
+#{(0,1)\mid(2,3)}, the relevant blocks are
+##{\begin{aligned}
+A=C&=\begin{pmatrix}3&-1\\-1&3\end{pmatrix},\\
+H&=\begin{pmatrix}0&-1\\-1&0\end{pmatrix},\\
+C^{-1}=HC^{-1}H^T
+ &=\frac18\begin{pmatrix}3&1\\1&3\end{pmatrix}.
+\end{aligned}}
+Subtraction gives
+##{S_{\mathrm{adj}}=
+\begin{pmatrix}21/8&-9/8\\-9/8&21/8\end{pmatrix}.}
+The diagonal entries #{7/3} and #{21/8} differ, so no two-coordinate
+permutation conjugates these precisions. There is also no map on the old
+retained fields factoring #{\pi_RP} through #{\pi_R}: the fields
+#{0} and #{\delta_1} have the same old projection, but their projections
+after #{P} are #{0} and #{(0,1)}. Here #{\delta_1} is the
+[delta field](fdip-001F) at vertex #{1}, not the edge label #{e_1}.
+Transporting the retained subset to
+#{p(R)=\{0,1\}} in the new labels restores the square and the
+[marginal transport theorem](fdip-000H).}
+
+\p{The blocks are a direct calculation from the
+[alternating-cycle precision](fdip-000F), using the
+[Schur convention](fdip-000D) of
+\citet{Appendix A.5.5, pp. 650-651}{boyd2004convex} after exchanging
+its first pivot to #{C}. The example separates a fixed set of labels
+from the moving retained space required by \ref{fdip-003E}.}

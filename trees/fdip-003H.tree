@@ -1,0 +1,57 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{The trace ratio on its unit-denominator domain}
+\date{2026-10-29}
+
+\p{Let #{L:M\to M} be an endomorphism of a finite free module
+over a commutative unital ring #{k}. On the domain
+#{\operatorname{tr}_M(L)\in k^\times}, define the
+\newvocab{trace ratio}
+##{R(L)=\operatorname{tr}_M(L^2)\bigl(\operatorname{tr}_M(L)\bigr)^{-2},}
+using [intrinsic trace](fdip-003G). If #{P:M\to M'} is an
+isomorphism, #{c\in k^\times}, and #{L'=cPLP^{-1}}, then
+#{\operatorname{tr}_{M'}(L')} is a unit and #{R(L')=R(L)}.}
+
+\proof{
+\p{Put #{a=\operatorname{tr}_M(L)}. Linearity, conjugacy and
+#{(L')^2=c^2PL^2P^{-1}} give
+##{\begin{aligned}
+\operatorname{tr}_{M'}(L')&=ca,\\
+\operatorname{tr}_{M'}((L')^2)&=c^2\operatorname{tr}_M(L^2).
+\end{aligned}}
+Both #{c} and #{a} are units, so #{ca} is a unit with inverse
+#{a^{-1}c^{-1}}. Substitution cancels #{c^2} from the ratio.}
+}
+
+\p{Over #{\mathbb R}, a nonzero self-adjoint positive-semidefinite
+operator on a finite-dimensional positive inner-product space has
+positive trace. Indeed an [orthonormal eigenbasis](fdip-002R) gives
+eigenvalues #{\lambda_i\geq0}; if all were zero the operator would
+be zero. Hence
+#{\operatorname{tr}L=\sum_i\lambda_i>0}.
+This verifies the denominator for a nonzero positive-weight graph
+Laplacian. The spectral and trace formulas are
+\citet{Appendix A.5.2, pp. 646-647}{boyd2004convex}.
+The [exceptional examples](fdip-003I) show why nonzero alone is
+insufficient over other rings or without positivity.}
+
+\p{For nonzero real positive-semidefinite Laplacians with their
+counting pairings, write #{L\approx L'} when
+#{L'=cPLP^{-1}} for a positive scalar and a vertex permutation.
+Identity uses #{(1,I)}; inverse uses #{(c^{-1},P^{-1})};
+composition uses the products of the scalars and permutations.
+This is an equivalence relation with invariant #{R}.
+It forgets the mass, normalized state and retained partition of an
+[enriched background](fdip-000G). It also differs from arbitrary
+congruence of bilinear-form arrays: the ratio compares the associated
+endomorphisms. It is an invariant, not a classification assertion.}
+
+\p{The ring calculation is a direct consequence of \ref{fdip-003G},
+whose trace convention is
+\citet{Exercise 22.6, Tag 02DU}{stacks2017stacks}.
+Mathlib's \leanref{Matrix.trace_smul} supplies the coordinate scalar
+identity; the unit domain and cancellation above are additional
+hypotheses and deductions. The [cycle comparison](fdip-000I) computes
+the invariant and the associated normalized observables explicitly.}

@@ -1,0 +1,105 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Definition}
+\title{Signed arrows preserve endpoints before incidence}
+\date{2026-10-29}
+
+\p{Reversing an oriented edge changes the sign of its difference, but
+does not erase its endpoints. Fix a commutative unital ring #{k} and
+two \vocabk{finite incidence presentations}{fdip-0002}
+#{(V,E,s,h)} and #{(V',E',s',h')}. Equip them with weights
+#{w:E\to k}, #{w':E'\to k}, scalars #{\mu,\mu'\in k}, and
+retained subsets #{R\subseteq V}, #{R'\subseteq V'}.
+Empty carriers, loops and distinct parallel edge labels are allowed.}
+
+\p{Write #{C_2=\{+,-\}} for the abstract group with #{-\cdot-=+},
+and #{\sigma:C_2\to k^\times} for #{\sigma(+)=1},
+#{\sigma(-)=-1}. A \newvocab{signed endpoint arrow} consists of
+bijections #{p:V\to V'}, #{q:E\to E'} and signs
+#{\varepsilon:E\to C_2} such that
+##{\begin{aligned}
+\varepsilon(e)=+&:\quad s'q(e)=ps(e),\quad h'q(e)=ph(e),\\
+\varepsilon(e)=-&:\quad s'q(e)=ph(e),\quad h'q(e)=ps(e),\\
+w'q&=w,\qquad \mu'=\mu,\qquad pR=R'.
+\end{aligned}}
+The signs are abstract orientation data, even when #{1=-1} in #{k}.
+An arrow with all signs #{+} is directed. For the
+[real Gaussian backgrounds](fdip-000G), directed arrows are their exact
+relabelings, with #{\mu=m^2}; positivity of mass then recovers #{m'=m}.}
+
+\p{Composition applies the right arrow first. The composite with
+#{(p',q',\varepsilon')} is
+##{\bigl(p'p,q'q,\ e\mapsto\varepsilon'(q(e))\varepsilon(e)\bigr).}
+Identity arrows have identity bijections and all signs #{+}. The inverse
+of #{(p,q,\varepsilon)} has bijections #{p^{-1},q^{-1}} and the sign
+#{\varepsilon(e)} at #{q(e)}. These operations make the declared objects
+and arrows a groupoid: composition is associative, identities exist,
+and every arrow is invertible, as for an [action groupoid](fgap-000P).}
+
+\proof{
+\p{For two arrows, zero, one or two endpoint exchanges occur according
+as their signs are #{(+,+)}, #{(+,-)} or #{(-,+)}, and #{(-,-)}.
+These give, respectively, the product signs #{+,-,+}. Thus composition
+has the required endpoints. Also #{w''q'q=w'q=w} and
+#{p'pR=p'R'=R''}; the scalar stays fixed. The inverse applies the
+same sign twice, so restores endpoints and gives sign #{+}.
+For three arrows either parenthesization gives the sign
+##{\varepsilon''(q'q(e))\varepsilon'(q(e))\varepsilon(e).}
+Associativity in #{C_2} and of the bijections proves associativity;
+the stated identities and inverses satisfy both unit and inverse laws.}
+}
+
+\p{Let #{M=k^V}, #{N=k^E} and similarly #{M',N'}, with incidence
+maps #{(df)(e)=f(h(e))-f(s(e))}. The induced ordinary linear maps are
+##{\begin{aligned}
+(Pf)(p(v))&=f(v),&P&:M\to M',\\
+(Ja)(q(e))&=\sigma(\varepsilon(e))a(e),&J&:N\to N'.
+\end{aligned}}
+They are isomorphisms: #{P^{-1}f'=f'\circ p} and
+#{(J^{-1}a')(e)=\sigma(\varepsilon(e))a'(q(e))}.
+Evaluation at #{q(e)}, in the two endpoint cases, gives
+##{d'P=Jd:M\longrightarrow N'.}
+Both differences vanish on a loop; the endpoint condition still
+remembers where that loop is attached.}
+
+\p{For a \vocabk{left action}{fgap-0008} of a group #{\Gamma},
+take actions #{p_g,q_g} on the vertex and edge sets. A
+\newvocab{signed endpoint action} additionally requires
+##{\varepsilon_1(e)=+,\qquad
+\varepsilon_{gk}(e)=\varepsilon_g(q_k(e))\varepsilon_k(e).}
+Thus the arrow assigned to #{gk} is the composite of those assigned to
+#{g} and #{k}. The induced maps satisfy
+#{P_gP_k=P_{gk}} and #{J_gJ_k=J_{gk}}. Indeed evaluation at
+#{p_{gk}(v)} gives #{f(v)} on both sides of the first equation;
+at #{q_{gk}(e)} the second has coefficient
+#{\sigma(\varepsilon_g(q_k(e)))\sigma(\varepsilon_k(e))a(e)}.
+Identity signs and maps give the identity operators. These are linear
+representations on two distinct carriers; no faithfulness is assumed.}
+
+\p{A weaker \newvocab{signed-incidence symmetry} requires the same
+actions, abstract sign cocycle and weight preservation, but only the
+incidence equation #{dP_g=J_gd}, instead of the endpoint equations.
+It is an incidence intertwiner and suffices for
+[operator transport](fdip-003D). It need not be a graph automorphism;
+[loops and characteristic two](fdip-003C) distinguish the requirements.
+The concrete [half-turn](fdip-000J) satisfies the stronger endpoint
+conditions.}
+
+\p{The left-action and equivariance conventions are
+\citet{Definition 4.1, pp. 57-58}{milne2025group}.
+\citet{Example 7.1(b), p. 101}{milne2025group} gives a permutation
+representation over a field; the ring and signed endpoint construction
+above is proved directly. The incidence convention in
+\citet{Section 2.1, pp. 4-5}{spielman2009effective} concerns a connected
+undirected positive-weight graph with a chosen orientation; the
+endpoint-difference definition here also allows loops, parallel labels
+and arbitrary coefficients.}
+
+\p{Mathlib's \leanref{Representation.ofMulAction} sends the free
+basis vector at #{v} to that at #{g\cdot v}.
+\leanref{Finsupp.linearEquivFunOnFinite} identifies its coefficients
+with functions on a finite set, yielding inverse precomposition for a
+group action. \leanref{Representation.IntertwiningMap} bundles an
+intertwiner between already supplied representations. Neither supplies
+the endpoint equations or abstract sign cocycle above.}
