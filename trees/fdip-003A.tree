@@ -13,9 +13,9 @@ Put #{T=C-B^\dagger A^{-1}B} and
 positive definite by [exchanging the eliminated summand](fdip-001Y).
 For every #{y\in Y}, define a probability measure on #{X} by
 ##{\begin{aligned}
-k_y(x)&=c_A^{-1}\exp\bigl(-\tfrac12
- h_X(x+A^{-1}By,A(x+A^{-1}By))\bigr),\\
-\kappa(y,D)&=\int_D k_y(x)\,d\lambda_X(x)
+&k_y(x)=c_A^{-1}\exp\bigl(-\tfrac12\\
+&\qquad\cdot h_X(x+A^{-1}By,A(x+A^{-1}By))\bigr),\\
+&\kappa(y,D)=\int_D k_y(x)\,d\lambda_X(x)
 \end{aligned}}
 for Borel #{D\subseteq X}. These measures form a measurable
 \newvocab{conditional probability kernel} for the retained field
@@ -25,9 +25,9 @@ operator is #{A^{-1}}.}
 \proof{
 \p{Exchanged square completion gives
 ##{\begin{aligned}
-h_E(J(x,y),QJ(x,y))
- &=h_X(x+A^{-1}By,A(x+A^{-1}By))\\
- &\quad+h_Y(y,Ty).
+&h_E(J(x,y),QJ(x,y))\\
+&\quad=h_X(x+A^{-1}By,A(x+A^{-1}By))\\
+&\qquad+h_Y(y,Ty).
 \end{aligned}}
 The joint density relative to #{\lambda_X\otimes\lambda_Y} is
 #{p_Q(x,y)=Z_Q^{-1}w_Q(J(x,y))}. Its #{Y}-marginal density is
@@ -35,8 +35,8 @@ The joint density relative to #{\lambda_X\otimes\lambda_Y} is
 r(y)&=\int_Xp_Q(x,y)\,d\lambda_X(x)\\
  &=\frac{c_A}{Z_Q}e^{-h_Y(y,Ty)/2}>0.
 \end{aligned}}
-It is continuous, finite and integrates to one by Tonelli.
-Division gives #{k_y(x)=p_Q(x,y)/r(y)}. Translation invariance and
+It is continuous, finite and integrates to one by Tonelli.}
+\p{Division gives #{k_y(x)=p_Q(x,y)/r(y)}. Translation invariance and
 [positive normalization](fdip-002T) prove
 #{\int_Xk_y\,d\lambda_X=1} for every #{y}, including zero-dimensional
 spaces. Thus #{\kappa(y,\cdot)} is a probability measure.}
