@@ -1,0 +1,102 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Example}
+\title{Exact covariance on the alternating four-cycle}
+\date{2026-10-29}
+
+\p{Take the [four-cycle](fdip-0003) on #{V=(0,1,2,3)}, with forward
+edges and weights #{(1,t,1,t)}, #{t>0}. Use counting pairing and
+#{Q=L+m^2I}, #{m>0}. Put #{a=m^2} and #{s=1+t+a}.
+The following functions on vertices form an orthonormal eigenbasis;
+the middle column lists the unnormalized rows #{2u_i^T}:
+##{\begin{array}{c|c|c}
+i&2u_i^T&\lambda_i\\\hline
+0&(1,1,1,1)&0\\
+1&(1,-1,-1,1)&2\\
+2&(1,1,-1,-1)&2t\\
+3&(1,-1,1,-1)&2+2t
+\end{array}}}
+\proof{
+\p{Each row has squared norm four. Distinct rows agree in two signs
+and disagree in two, giving inner product zero. The weighted coordinate
+formula is #{(L\phi)_0=(1+t)\phi_0-\phi_1-t\phi_3}, with the other
+rows given by their adjacent weights. For #{v_i=2u_i}, all four products
+are
+##{\begin{aligned}
+Lv_0&=(0,0,0,0),\\
+Lv_1&=(2,-2,-2,2),\\
+Lv_2&=(2t,2t,-2t,-2t),\\
+Lv_3&=(2+2t,-2-2t,\\
+ &\qquad 2+2t,-2-2t).
+\end{aligned}}
+For example the zeroth coordinates are respectively #{0},
+#{(1+t)+1-t=2}, #{(1+t)-1+t=2t}, and #{(1+t)+1+t=2+2t};
+the same substitutions at the other three vertices give the displayed
+signs. Thus #{Lu_i=\lambda_i u_i}. This basis remains orthonormal at
+#{t=1}, when #{\lambda_1=\lambda_2}; no distinct-eigenvalue assumption
+is needed.}
+}
+\p{Set
+##{\begin{aligned}
+q_0&=a,\\
+q_1&=a+2,\\
+q_2&=a+2t,\\
+q_3&=a+2+2t,\\
+\Delta&=a(a+2)(a+2t)(a+2+2t).
+\end{aligned}}
+All four #{q_i} are positive. With #{P_{u_i}=u_i u_i^T}, [normalization](fdip-002T) and
+[inverse covariance](fdip-000B) give
+##{\begin{aligned}
+\det Q&=\Delta,& Z_Q&=4\pi^2/\sqrt\Delta,\\
+G&=\sum_{i=0}^3q_i^{-1}P_{u_i}.
+\end{aligned}}
+With #{O} the array whose columns are #{u_i}, this is
+#{G=O\operatorname{diag}(q_i^{-1})O^T}.}
+\p{Write #{d_i=q_i^{-1}}. Multiplying the signs of the relevant
+coordinates in each projector gives
+##{\begin{aligned}
+4G_{00}&=d_0+d_1+d_2+d_3,\\
+4G_{01}&=d_0-d_1+d_2-d_3,\\
+4G_{02}&=d_0-d_1-d_2+d_3,\\
+4G_{03}&=d_0+d_1-d_2-d_3.
+\end{aligned}}
+Thus the complete covariance, with #{(A,B,C,D)=(G_{00},G_{01},G_{02},G_{03})}, is
+##{G=\begin{pmatrix}
+A&B&C&D\\B&A&D&C\\C&D&A&B\\D&C&B&A
+\end{pmatrix}.}
+In particular the variance and adjacent two-point expectation are the
+first two formulas, with their indicated signs.}
+\p{For the opposite entry, the common denominator #{4\Delta} has
+numerator
+##{\begin{aligned}
+N&=(a+2)(a+2t)(a+2+2t)\\
+ &\quad-a(a+2t)(a+2+2t)\\
+ &\quad-a(a+2)(a+2+2t)\\
+ &\quad+a(a+2)(a+2t)\\
+ &=2[(a+2t)(a+2+2t)-a(a+2)]\\
+ &=8t(a+1+t).
+\end{aligned}}
+Consequently #{G_{02}=2ts/\Delta}. At #{(t,m)=(1,1)},
+#{q=(1,3,3,5)}, #{\Delta=45}, #{Z_Q=4\pi^2/(3\sqrt5)}, and
+##{\begin{aligned}
+&(G_{00},G_{01},G_{02},G_{03})\\
+&\qquad=(7/15,1/5,2/15,1/5).
+\end{aligned}}
+At #{(t,m)=(2,1)}, #{q=(1,3,5,7)}, #{\Delta=105}, and
+##{(G_{00},G_{01},G_{02},G_{03})
+  =(44,19,16,26)/105.}
+These numbers are obtained by direct substitution in the four signed
+sums above. They give, in particular, the opposite covariance used in
+[block elimination](fdip-000F) and the two distinct adjacent covariances
+used in [relabeling](fdip-000Y).}
+\p{More generally, weights #{(b,c,b,c)} with #{b,c>0} keep the same
+four eigenvectors and give eigenvalues #{0,2b,2c,2b+2c}, by the same
+coordinate products. This is a real spectral calculation. The
+[arithmetic columns](fdip-000U) are #{2u_i}, whose Gram matrix is #{4I};
+they are not an orthonormal basis over an arbitrary coefficient ring.}
+\p{The eigenvectors and signed sums are computed here from the weighted
+cycle. The general ingredients are the spectral decomposition in
+\citet{Section A.5.2, pp. 646-647}{boyd2004convex} and the Gaussian
+density in \citet{Proposition B.55, p. 505}{friedli2017statistical},
+with covariance equal to inverse precision as proved in \ref{fdip-000B}.}

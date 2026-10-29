@@ -1,0 +1,41 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Definition}
+\title{Kernel complement and pseudodeterminant}
+\date{2026-10-29}
+
+\p{Let #{L:E\to E} be a self-adjoint positive semidefinite operator on
+ a finite real inner-product space #{(E,h)}. Set
+##{\begin{aligned}
+K&=\ker L,& H&=K^\perp,\\
+k&=\dim K,& r&=\dim H.
+\end{aligned}}
+Write #{i:H\to E} for inclusion, #{p_H:E\to H} for orthogonal projection,
+#{P_H=ip_H} and #{P_K=I-P_H} for the endomorphism projections.}
+\p{The [spectral theorem](fdip-002R) gives #{E=K\mathbin\perp H}.
+The positive-eigenvalue vectors span #{H}, so #{L(H)\subset H} and
+#{L_H=L|_H:H\to H} is positive definite. Define the
+\newvocab{pseudodeterminant} by
+##{\operatorname{pdet}L=\det L_H
+   =\prod_{\lambda_a>0}\lambda_a.}
+Its empty product is one, including #{L=0}. These definitions use the
+specified pairing and its [induced subspace volume](fdip-002M).}
+\p{For a [weighted incidence Laplacian](fdip-0007) with positive real edge weights, the
+[kernel theorem](fdip-0008) identifies #{K} with fields constant on each
+connected component. Indeed its energy is a sum of positive weights
+times squared edge differences; zero energy means every difference is
+zero, and propagation along undirected paths gives those constants.
+Loops contribute zero and isolated vertices are components. Thus #{H}
+imposes zero sum separately on each component. For a connected nonempty
+graph, #{n=|V|} gives the \newvocab{mean-zero field space}
+##{\begin{aligned}
+u_0&=\mathbf1_V/\sqrt n,\\
+H&=\{\phi:\sum_v\phi(v)=0\},\\
+P_H\phi&=\phi-\frac{\sum_v\phi(v)}{n}\mathbf1_V.
+\end{aligned}}
+The empty graph has #{E=K=H=0}; no division by #{n} is used there.}
+\p{The kernel complement and determinant product are direct consequences
+of the spectral decomposition in
+\citet{Section A.5.2, pp. 646-647}{boyd2004convex}; the graph kernel
+uses the incidence-energy identity proved in \ref{fdip-0008}.}

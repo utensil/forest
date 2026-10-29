@@ -1,0 +1,43 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{Pinned affine massless laws}
+\date{2026-10-29}
+
+\p{Let a finite nonempty graph be connected, with positive edge weights.
+Put #{n=|V|} and fix a vertex #{p}. Its massless action defines a probability law on
+#{F_p=\{\phi:\phi(p)=0\}} with induced counting volume.
+For any #{b\in\mathbb R}, translation by #{b\mathbf1_V} defines the
+law on the affine constraint #{\phi(p)=b}; its mean is
+#{b\mathbf1_V} and its covariance is that of the zero-pinned law.}
+\proof{
+\p{Write #{i_F:F_p\to\mathbb R^V} for inclusion and
+#{p_F:\mathbb R^V\to F_p} for orthogonal projection. The compressed
+precision is
+##{Q_F=p_F L i_F:F_p\to F_p.}
+It is self-adjoint, since
+#{h_F(x,Q_Fy)=h_V(i_Fx,Li_Fy)}. A zero-energy vector is constant by
+the [kernel theorem](fdip-0008); vanishing at #{p} makes it zero.
+Thus #{Q_F} is positive definite. [Normalization](fdip-002T) on the
+inner-product space #{F_p} gives
+##{Z_F=(2\pi)^{(n-1)/2}/\sqrt{\det Q_F}.}
+The centered law has covariance #{Q_F^{-1}} on #{F_p}, and ambient
+covariance #{i_F Q_F^{-1}p_F}, by \ref{fdip-000B}.
+The subspace need not be invariant under #{L}; the precision is the
+compressed quadratic form, not an endomorphism restriction of #{L}.}
+\p{The affine constraint equals #{b\mathbf1_V+F_p}. Define its
+induced volume by translating the volume on #{F_p}. Since
+#{D(b\mathbf1_V+\psi)=D\psi}, this translation preserves the action
+and normalizer. Centeredness on #{F_p} gives the stated mean;
+subtracting that mean gives exactly the zero-pinned covariance.
+For a single vertex #{F_p=0}, the normalizer is one and the law is
+concentrated at the value #{b}.}
+}
+\p{These are laws on their own constraint spaces. They are not defined
+by conditioning on an event in an unconstrained massless probability,
+whose normalizer diverges. Fixed external boundary values also remove
+zero modes in finite lattice regions, as in
+\citet{Definition 8.1, Remark 8.2 and Exercise 8.2, p. 381}{friedli2017statistical}.
+That source's lattice boundary and volume conventions remain part of its
+model; the induced-volume construction here proves the finite-graph claim.}

@@ -1,0 +1,59 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{Projected Gaussian laws and the massless limit}
+\date{2026-10-29}
+
+\p{For the [kernel decomposition](fdip-0031), let #{\nu_m} be the
+projection onto #{H} of the law with precision #{L+m^2I}, #{m>0}.
+Then #{\nu_m} converges to the [constrained law](fdip-000C) #{\nu_H}
+in total variation, meaning
+#{\sup_{A\text{ Borel}}|\nu_m(A)-\nu_H(A)|\to0}.
+For every fixed polynomial #{P} on #{H}, its expectations converge too.}
+\proof{
+\p{By [kernel factorization](fdip-0033), the densities on #{H} are
+#{f_m=w_m/Z_{H,m}}, where
+##{\begin{aligned}
+w_m(x)&=e^{-h(x,(L_H+m^2I_H)x)/2},\\
+w_0(x)&=e^{-h(x,L_Hx)/2}.
+\end{aligned}}
+They are continuous, #{w_m\to w_0} pointwise, and
+#{0\leq w_m\leq w_0}, with #{\int_H w_0=Z_H<\infty}.
+Dominated convergence gives #{Z_{H,m}\to Z_H>0}.
+For sufficiently small #{m}, #{Z_{H,m}\geq Z_H/2}; hence
+##{|f_m-f_0|\leq 3w_0/Z_H.}
+Another application gives #{\int_H|f_m-f_0|\to0}. For each Borel #{A},
+#{|\nu_m(A)-\nu_H(A)|\leq\int_H|f_m-f_0|}, proving the uniform claim.
+For a fixed polynomial, the dominating function
+#{3|P|w_0/Z_H} is integrable by [finite polynomial moments](fdip-002W),
+so #{\int P f_m\to\int P f_0}. Each use of dominated convergence
+applies along every positive sequence #{m_j\to0}; the sequential
+criterion gives the real-parameter limits as #{m\downarrow0}.
+When #{H=0}, these laws are all the same point mass.}
+}
+\p{For a fixed source #{j\in E} and #{\ell_j(x)=h(j,x)}, the
+[inverse-covariance formula](fdip-000B) and the kernel split give
+##{\begin{aligned}
+\operatorname{Var}_{Q_m}(\ell_j)
+ &=m^{-2}\|P_Kj\|^2\\
+ &\quad+\sum_{\lambda_a>0}
+       \frac{h(j,u_a)^2}{\lambda_a+m^2}.
+\end{aligned}}
+Every term is nonnegative. The finite sum converges; the first term
+is finite in the limit precisely when #{P_Kj=0}. Thus the variance
+has a finite limit if and only if #{j\in H}, in which case it is
+#{h(j,L^+j)}.}
+\p{For a connected nonempty graph with positive edge weights, put #{n=|V|}.
+The source #{u_0=\mathbf1_V/\sqrt n} has
+variance #{m^{-2}} as a source. Its contribution to every Green-kernel
+entry is #{1/(nm^2)}, and #{G_m(v,v)\geq 1/(nm^2)}. A field difference
+has source #{\delta_v-\delta_w\in H}, so its variance converges to the
+constrained variance. On a disconnected graph this holds for vertices
+in the same component; a difference between components has a nonzero
+kernel projection. These observable limits do not supply a normalized
+full-space massless density.}
+\p{The analytic ingredient is
+\citet{Theorem 1.4.49, pp. 111-112, preliminary version}{tao2011measure}.
+The three dominators above verify its hypotheses for these Gaussian
+laws and their fixed polynomial observables.}
