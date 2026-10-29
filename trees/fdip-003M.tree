@@ -1,0 +1,65 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{Jacobian compensation in normalized Gaussian transport}
+\date{2026-10-29}
+
+\p{Let #{M,M'} be finite-dimensional real positive inner-product
+spaces with induced [Borel Euclidean volumes](fdip-002H)
+#{\lambda,\lambda'}. Let #{Q,Q'} be positive self-adjoint precisions,
+and suppose a linear isomorphism #{T:M\to M'} preserves their actions:
+##{\mathcal A_{Q'}(Tx)=\mathcal A_Q(x).}
+It need not preserve the reference pairings. For its absolute
+Jacobian #{J(T)>0}, one has
+##{\begin{aligned}
+T_*\lambda&=J(T)^{-1}\lambda',\\
+Z_{Q'}&=J(T)Z_Q,\qquad T_*\mu_Q=\mu_{Q'}.
+\end{aligned}}
+For every real or complex Borel observable #{F'},
+##{\int|F'|\,d\mu_{Q'}=\int|F'\circ T|\,d\mu_Q}
+as extended nonnegative integrals. Hence integrability is equivalent
+on the two sides, and, under that condition,
+#{\omega_{Q'}(F')=\omega_Q(F'\circ T)}.}
+
+\proof{
+\p{The [reference-volume change formula](fdip-002K) gives the
+pushforward of volume, equivalently
+#{\int h'\,d\lambda'=J(T)\int h'\circ T\,d\lambda}
+for every nonnegative Borel #{h'}. Apply it to the Gaussian weight;
+action preservation gives #{Z_{Q'}=J(T)Z_Q}. Both normalizers are
+finite and positive by \ref{fdip-002T}. For a nonnegative Borel
+#{h'}, divide the same substitution by this equality:
+##{\begin{aligned}
+\int h'\,d\mu_{Q'}
+ &=\frac{J(T)}{Z_{Q'}}\int h'(Tx)e^{-\mathcal A_Q(x)}\,d\lambda(x)\\
+ &=\int h'\circ T\,d\mu_Q.
+\end{aligned}}
+Indicators of Borel sets prove the event-pushforward statement.
+Taking #{h'=|F'|} proves the extended absolute-integral equality.
+Only when finite do positive/negative parts, and for complex functions
+real/imaginary parts, give the stated expectation identity.}
+}
+
+\p{In orthonormal coordinates, action preservation means
+#{T^TQ'T=Q}, so inversion gives
+##{(Q')^{-1}=TQ^{-1}T^T.}
+This is covariance congruence, not generally operator similarity.
+The scalar Jacobian is computed in the specified reference volumes;
+independently ordered orthonormal frames may change the signed
+determinant but not its absolute value. The
+[quadratic-isometry example](fdip-000Z) shows that this normalized
+transport can lose both counting-pairing and retained-projection
+compatibility. Such maps are not enriched background arrows.}
+
+\p{The volume convention is
+\citet{Exercises 1.2.20-22, p. 41}{tao2011measure}; the covariance-parameter
+Gaussian substitution is
+\citet{Proposition B.55, p. 505}{friedli2017statistical}.
+The [inverse-precision covariance theorem](fdip-000B) identifies its
+covariance with #{Q^{-1}} for these reference pairings.
+TauCeti's
+\leanref/tauceti{TauCeti.Probability.map_affine_multivariateGaussian}
+supports the covariance congruence for a supplied finite real linear
+map, even rectangular. That broader covariance result does not assert
+invertibility, endpoint preservation or the retained square used here.}

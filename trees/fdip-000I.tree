@@ -6,40 +6,21 @@
 \date{2026-10-17}
 
 \p{The alternating cycles at #{t=1} and #{t=2} remain different even
-under the [broader Laplacian comparison](fdip-000G)
-#{L'=cPLP^T}, with #{c>0} and #{P} a vertex permutation.
-To prove this, write #{\operatorname{tr}M=\sum_iM_{ii}} for the
-trace of a square matrix and define
-##{R(L)=\frac{\operatorname{tr}(L^2)}{(\operatorname{tr}L)^2}}
-for a nonzero real symmetric positive semidefinite #{L} on a counting
-space. Its eigenvalues are nonnegative and at least one is positive,
-so #{\operatorname{tr}L>0}.}
+under the [positive-scaling Laplacian comparison](fdip-003H)
+#{L'=cPLP^{-1}}, with #{c>0} and #{P} a vertex permutation.
+Use the \vocabk{trace ratio}{fdip-003H}
+##{R(L)=\frac{\operatorname{tr}(L^2)}{(\operatorname{tr}L)^2},}
+where the trace is the [intrinsic endomorphism trace](fdip-003G).
+The positive graph energy gives a nonzero positive-semidefinite #{L_t}
+for #{t>0}, so its trace is positive and the ratio is defined.
+The cited proposition proves invariance by trace conjugacy and scalar
+cancellation. It compares counting-relative operators, not bilinear-form
+arrays under arbitrary congruence.}
 
-\p{\citet{Appendix A.5.2}{boyd2004convex}, pp. 646-647, gives the symmetric
-spectral decomposition and trace formula used here.
-The [positive graph energy](fdip-0008) supplies the semidefinite
-hypothesis for a weighted Laplacian. The restriction #{L\ne0} is
-essential: incidence data with only loops have #{L=0}, where this ratio
-is undefined.}
-
-\p{The ratio is unchanged by the declared comparison. For square real
-matrices, finite sums give
-##{\begin{aligned}
-\operatorname{tr}(MN)
- &=\sum_i\sum_jM_{ij}N_{ji}\\
- &=\sum_j\sum_iN_{ji}M_{ij}
-  =\operatorname{tr}(NM).
-\end{aligned}}
-Thus #{\operatorname{tr}(PMP^T)=\operatorname{tr}M}. If
-#{L'=cPLP^T}, then #{(L')^2=c^2PL^2P^T}, and
-##{\begin{aligned}
-\operatorname{tr}L'&=c\operatorname{tr}L,\\
-\operatorname{tr}((L')^2)&=c^2\operatorname{tr}(L^2).
-\end{aligned}}
-The factors #{c^2} cancel from the ratio, proving #{R(L')=R(L)}.
-Hence #{R} is a well-defined invariant of these equivalence classes.
-It uses the counting-space operator, not the matrix of a bilinear form
-after an arbitrary nonorthogonal change of basis.}
+\p{\citet{Appendix A.5.2, pp. 646-647}{boyd2004convex}
+gives the symmetric spectral and trace formulas.
+The [spectral cycle calculation](fdip-0037) supplies the concrete
+basis; the following traces and comparisons are direct computations.}
 
 \p{For the [alternating four-cycle](fdip-0003), #{t>0}, the
 [orthonormal spectral basis](fdip-0037) gives eigenvalues
@@ -69,7 +50,12 @@ alternating edge weights #{1,t} and leaves the common diagonal
 ##{PL_tP^T=tL_{1/t}.}
 Since #{1/t>0}, the reciprocal Laplacians are equivalent under
 #{\approx}. Their equal ratios do not demonstrate a failure of
-completeness.}
+completeness. On the strict enriched slice with weights #{(1,t,1,t)},
+fixed mass and fixed opposite retained pair, the weight product is
+#{t^2}, whereas at parameter #{1/t} it is #{t^{-2}}.
+A weight-preserving edge bijection would preserve this product;
+for positive #{t} equality forces #{t=1}. Thus the broader reciprocal
+comparison is not a strict background isomorphism for #{t\ne1}.}
 
 \p{A fixed-mass calculation shows what changes in the induced state.
 Set #{m=1} and retain the same labeled vertices #{R=\{0,2\}}.
@@ -103,10 +89,13 @@ inequivalence.}
 states. On an eigenvector of #{L} with eigenvalue #{\lambda>0},
 replacing #{L} by #{cL} changes the covariance eigenvalue from
 #{1/(\lambda+m^2)} to #{1/(c\lambda+m^2)} when #{c\ne1}.
+Scaling all of #{Q} instead gives covariance #{c^{-1}G} and
+Schur map #{cS}, by inversion and the Schur formula. Changing mass
+can also leave #{R(L)} unchanged while changing the law.
 The exact finite differences above do not construct a physical map
 from an environment to the parameter #{t}.}
 
-\p{Mathlib's \leanref{Matrix.trace_mul_comm} and
-\leanref{Matrix.trace_smul} supply the cyclic trace and scalar identities.
-The nonzero domain, ratio cancellation and four-cycle values are the
-additional explicit calculations above.}
+\p{The trace identities and their formalization correspondence are
+at \ref{fdip-003G} and \ref{fdip-003H}. Their unit-domain hypotheses
+specialize here to positive real trace; the values and normalized
+expectation comparisons above are additional cycle calculations.}

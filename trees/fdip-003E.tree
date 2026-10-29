@@ -1,0 +1,78 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{Transport of the retained Schur map}
+\date{2026-10-29}
+
+\p{Over a commutative unital ring #{k}, give #{M=X\oplus Y} and
+#{M'=X'\oplus Y'} [chosen splittings](fdip-001T).
+Suppose isomorphisms #{P:M\to M'}, #{P_X:X\to X'},
+#{P_Y:Y\to Y'} preserve the inclusions and projections:
+##{\begin{aligned}
+P\iota_X&=\iota'_XP_X,&P\iota_Y&=\iota'_YP_Y,\\
+\pi'_XP&=P_X\pi_X,&\pi'_YP&=P_Y\pi_Y.
+\end{aligned}}
+Let #{Q'=PQP^{-1}}. Write its four split components and those of
+#{Q} as #{A:X\to X}, #{B:Y\to X}, #{E:X\to Y}, #{C:Y\to Y},
+and their primed versions. Then
+##{\begin{aligned}
+A'&=P_XAP_X^{-1},&B'&=P_XBP_Y^{-1},\\
+E'&=P_YEP_X^{-1},&C'&=P_YCP_Y^{-1}.
+\end{aligned}}
+If #{C} is invertible, the [split Schur maps](fdip-001T) obey
+##{S'=P_XSP_X^{-1},\qquad S=A-BC^{-1}E.}
+For #{K=C^{-1}E:X\to Y}, #{K'=(C')^{-1}E'},
+##{K'P_X=P_YK,\qquad -K'(P_Xx)=P_Y(-Kx).}
+Thus the [eliminated-equation field](fdip-001W) #{y_*(x)=-Kx},
+the unique solution of the lower equation with zero source, is transported
+with its sign intact.}
+
+\proof{
+\p{For indices #{i,j\in\{X,Y\}}, the inclusion and projection
+identities give
+##{\pi'_iQ'\iota'_j
+ =P_i(\pi_iQ\iota_j)P_j^{-1}.}
+Taking #{(i,j)=(X,X),(X,Y),(Y,X),(Y,Y)} gives all four typed
+identities. Inverting the last one gives
+#{(C')^{-1}=P_YC^{-1}P_Y^{-1}}. Substitution cancels each adjacent
+#{P_Y^{-1}P_Y} in #{B'(C')^{-1}E'}, proving the Schur formula.
+The same substitution in #{K'} proves #{K'P_X=P_YK} and hence the
+transport identity for this field.}
+}
+
+\p{When #{Q} is also invertible, the
+[inverse-compression theorem](fdip-001V) says
+##{S^{-1}=\pi_XQ^{-1}\iota_X.}
+Conjugating and using the split maps gives
+##{(S')^{-1}=P_XS^{-1}P_X^{-1}
+             =\pi'_X(Q')^{-1}\iota'_X.}
+This uses an actual inverse. No pairing has been assumed; only for an
+orthogonal split and self-adjoint #{Q} does one further have
+#{E=B^\dagger}, by \ref{fdip-001X}.
+For an orthogonal split of finite-dimensional real inner-product
+spaces and a positive self-adjoint #{Q}, this field is also stationary
+for the quadratic action in the eliminated variable, by the
+[real square-completion argument](fdip-000D).}
+
+\p{For a vertex bijection #{p:V\to V'}, let #{R'=pR},
+#{X=k^R}, #{X'=k^{R'}}, and let #{P_R} be inverse precomposition
+by #{p|_R}. At #{p(v)}, #{v\in R}, both sides of
+##{\pi_{R'}P=P_R\pi_R}
+take the value #{f(v)}. The target space is #{k^{pR}}, even if the
+labels of #{R} and #{pR} differ. This equation supplies the moving
+projection square in [Gaussian marginal transport](fdip-000H).}
+
+\p{If a group action preserves #{R}, its restrictions compose on
+#{k^R} and the square becomes #{\pi_RP_g=P_{g,R}\pi_R}.
+Faithfulness of the full action need not survive restriction: a
+permutation moving only eliminated vertices acts trivially on retained
+fields. The [opposite-pair half-turn](fdip-000K) has a separate
+nontrivial retained action.}
+
+\p{Stable subsets and equivariance follow the convention of
+\citet{p. 58}{milne2025group}. The real Schur convention is
+\citet{Appendix A.5.5, pp. 650-651}{boyd2004convex}, with the
+source's first pivot exchanged to the eliminated #{C} block.
+The typed transport proof above uses only the chosen splitting, and
+does not by itself supply any integral or Gaussian normalizer.}

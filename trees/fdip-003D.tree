@@ -1,0 +1,79 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{Pairing isometries transport incidence operators}
+\date{2026-10-29}
+
+\p{Let #{k} be a commutative unital ring. Give #{M,N,M',N'}
+\vocabk{chosen perfect symmetric pairings}{fdip-001O}, and let
+#{d:M\to N}, #{d':M'\to N'} be ordinary linear maps.
+Suppose the linear isomorphisms #{P:M\to M'}, #{J:N\to N'}
+preserve these pairings and satisfy #{d'P=Jd}.
+Let #{W:N\to N}, #{W':N'\to N'} be self-adjoint maps with
+#{W'J=JW}. For a fixed #{\mu\in k}, put
+##{L=d^\dagger Wd,\qquad Q=L+\mu I_M,}
+and define #{L',Q'} by the primed data. Then
+##{\begin{aligned}
+(d')^\dagger&=Pd^\dagger J^{-1}:N'\to M',\\
+L'&=PLP^{-1},\qquad Q'=PQP^{-1}.
+\end{aligned}}
+If #{Q} is an isomorphism, so is #{Q'}, and its
+[inverse response](fdip-001Q) satisfies
+##{G'=(Q')^{-1}=PQ^{-1}P^{-1}=PGP^{-1}.}
+Consequently #{Qf=j} implies #{Q'(Pf)=Pj}.}
+
+\proof{
+\p{For #{z'\in M'}, pairing preservation gives
+#{b_{M'}(Px,z')=b_M(x,P^{-1}z')}.
+The [uniqueness of the adjoint](fdip-001P) therefore gives
+#{P^\dagger=P^{-1}}, and similarly #{J^\dagger=J^{-1}}.
+From #{d'=JdP^{-1}}, the adjoint product law gives
+#{(d')^\dagger=Pd^\dagger J^{-1}}. Thus
+##{\begin{aligned}
+L'&=Pd^\dagger J^{-1}W'JdP^{-1}\\
+  &=Pd^\dagger WdP^{-1}=PLP^{-1}.
+\end{aligned}}
+Here #{J^{-1}W'J:N\to N} equals #{W}; every composition is typed.
+The same scalar #{\mu} gives the assertion for #{Q}.
+Multiplication in either order proves that #{PQ^{-1}P^{-1}} is the
+inverse of #{Q'}. Finally #{Q'Pf=PQf=Pj}.}
+}
+
+\p{For [signed endpoint arrows](fdip-003B), the finite function
+modules have [perfect counting duality](fdip-001F), including empty
+carriers. Reindexing gives
+##{\begin{aligned}
+b_{M'}(Pf,Pg)&=\sum_{v\in V}f(v)g(v),\\
+b_{N'}(Ja,Jb)&=\sum_{e\in E}\sigma(\varepsilon(e))^2a(e)b(e)
+              =b_N(a,b).
+\end{aligned}}
+Multiplication by transported weights obeys #{W'J=JW}, by evaluation
+at #{q(e)}. Thus the theorem applies without inverting any weight.
+It also applies to the weaker signed-incidence symmetries. The weighted
+edge pairing is #{b_W(a,b)=b_N(a,Wb)}; its adjoint of #{d} into the
+counting vertex pairing is #{d^\dagger W}, whereas #{d^\dagger} uses
+the counting edge pairing. The expression #{d^\dagger Wd} does not
+require #{b_W} to be perfect.}
+
+\p{The inverse hypothesis cannot be replaced by a unit mass scalar.
+Over #{\mathbb Z}, a unit-weight edge on two vertices with #{\mu=1}
+has #{Q=\begin{pmatrix}2&-1\\-1&2\end{pmatrix}}.
+Solving #{Q(x,y)=(1,0)} would require #{x=2y} and #{3y=1}, which
+is impossible in #{\mathbb Z}. This #{Q} is not even surjective.}
+
+\p{For automorphisms the conjugacies are commutation identities.
+They concern symmetric bilinear pairings over fixed coefficients.
+A grading is preserved only if #{P} preserves its graded pieces;
+a star is preserved only if #{P} commutes with that star. A nontrivial
+coefficient involution and Hermitian adjoint need their own conventions.}
+
+\p{The proof uses the chosen duality construction in \ref{fdip-001P},
+with the Hom convention of
+\citet{Section 10.10, Tag 0581}{stacks2017stacks}.
+For real graph incidence, the energy convention is
+\citet{Section 2.1, pp. 4-5}{spielman2009effective}; the displayed
+ring transport is a direct deduction, not a positivity theorem.
+Mathlib's \leanref{Matrix.reindexLinearEquiv} and
+\leanref{Matrix.reindexRingEquiv} support its coordinate reindexing
+specialization, without supplying the endpoint or pairing hypotheses.}
