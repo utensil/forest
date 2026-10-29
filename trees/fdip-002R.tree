@@ -1,0 +1,44 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Lemma}
+\title{A finite real self-adjoint spectral decomposition}
+\date{2026-10-25}
+
+\p{Let #{(E,h)} be a real inner-product space of dimension #{n\geq0},
+and let #{T:E\to E} be linear and [self-adjoint](fdip-001P). There is an
+orthonormal basis #{u_1,\ldots,u_n} with real eigenvalues #{q_i}. Put
+#{P_ix=h(u_i,x)u_i}. Then
+##{\begin{aligned}
+I&=\sum_iP_i,&T&=\sum_iq_iP_i,\\
+P_iP_j&=\delta_{ij}P_i,&\det T&=\prod_iq_i.
+\end{aligned}}
+Moreover #{h(x,Tx)>0} for every nonzero #{x} exactly when every #{q_i>0}.
+In that case #{T^{-1}=\sum_iq_i^{-1}P_i} is self-adjoint and positive.}
+\proof{
+\p{For #{n>0}, maximize the continuous function #{x\mapsto h(x,Tx)}
+on the compact unit sphere. Let #{u} be a maximizing unit vector and
+#{q=h(u,Tu)}. If #{v\perp u}, the Rayleigh quotient
+##{\frac{h(u+tv,T(u+tv))}{1+t^2h(v,v)}}
+has derivative zero at #{t=0}. Self-adjointness gives derivative
+#{2h(v,Tu)}, so #{Tu-qu} is orthogonal both to #{u^\perp} and to #{u}.
+It is zero. Also #{h(u,Tv)=h(Tu,v)=qh(u,v)=0} on #{u^\perp}, so
+this complement is stable and the restriction is self-adjoint.
+Induction gives the basis; the base case #{n=0} is the empty basis.}
+\p{Orthonormal expansion proves the projector identities. On the top
+exterior power, #{\bigwedge^nT} multiplies
+#{u_1\wedge\cdots\wedge u_n} by #{\prod_iq_i}. This scalar is independent
+of the nonzero top generator and is the intrinsic determinant.
+Necessity of positive eigenvalues follows by evaluating at #{u_i};
+sufficiency follows from
+##{h(x,Tx)=\sum_iq_i h(u_i,x)^2.}
+Multiplying the projector sums proves the asserted inverse and its positivity.
+For #{n=0}, the empty product is one and the unique endomorphism is the
+identity, invertible and vacuously positive.}
+}
+\p{This gives the operator proof of the real symmetric decomposition in
+\citet{Appendix A.5.2, pp. 646-647}{boyd2004convex}.
+Mathlib's \leanref{LinearMap.IsSymmetric.eigenvectorBasis} supplies an
+orthonormal eigenbasis for a finite-dimensional inner-product space;
+here its scalar field is specialized to #{\mathbb R}. The declaration
+alone asserts neither Gaussian normalization nor a graph spectrum.}

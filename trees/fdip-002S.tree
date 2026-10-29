@@ -1,0 +1,43 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Lemma}
+\title{The scalar Gaussian integral}
+\date{2026-10-25}
+
+\p{For real #{a}, consider the extended nonnegative Lebesgue integral
+##{I(a)=\int_{\mathbb R}e^{-a x^2/2}\,dx.}
+For #{a>0} it is finite and positive, and
+##{I(a)=\sqrt{2\pi /a},\qquad I(1)^2=2\pi.}
+For #{a\leq0} it is infinite.}
+\proof{
+\p{Suppose #{a>0}. The continuous integrand is at most one on
+#{[-1,1]}. For #{|x|\geq1}, it is at most #{e^{-a|x|/2}}, whose
+integral on #{\mathbb R} is #{4/a}. This proves finiteness before
+evaluation. On #{[-1,1]} the integrand is at least #{e^{-a/2}}, giving
+the strictly positive lower bound #{2e^{-a/2}}.}
+\p{Set #{J=\int_0^\infty e^{-x^2}\,dx}, likewise finite and positive.
+For each fixed #{y>0}, the substitution #{x=yt} gives
+#{J=\int_0^\infty y e^{-y^2t^2}\,dt}. Multiply by #{e^{-y^2}},
+integrate in #{y}, and apply nonnegative [Tonelli](fdip-002Q):
+##{\begin{aligned}
+J^2&=\int_0^\infty \int_0^\infty
+           y e^{-(1+t^2)y^2}\,dy\,dt\\
+   &=\int_0^\infty\frac{dt}{2(1+t^2)}=\frac\pi4.
+\end{aligned}}
+The inner primitive is #{-e^{-(1+t^2)y^2}/(2(1+t^2))}; the final
+integral is evaluated by arctangent. Thus #{J=\sqrt{\pi}/2}.
+Reflection and the positive substitution #{x=\sqrt{2/a}\,z} give
+the asserted value of #{I(a)}. If #{a\leq0}, the integrand is at
+least one everywhere and its nonnegative integral is infinite.}
+}
+\p{The calculation adapts the improper-integral argument in
+\citet{Section 2, Second proof: Another change of variables, PDF pp. 1-2}{conradGaussianIntegral}
+to Lebesgue integration. The explicit tail bound and nonnegative Tonelli
+justify the adaptation; Tonelli is
+\citet{Theorem 1.7.15, pp. 200-201, preliminary version}{tao2011measure}.
+Mathlib's \leanref{integrable_exp_neg_mul_sq} and
+\leanref{integral_gaussian} support the real one-variable result with
+coefficient #{b=a/2>0}. The value theorem uses a totalized integral;
+its value at a nonintegrable parameter does not mean the nonnegative
+normalizer is finite.}

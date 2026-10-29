@@ -1,0 +1,47 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{Finite positive Gaussian normalization}
+\date{2026-10-25}
+
+\p{Let #{(E,h)} be a finite-dimensional real inner-product space,
+#{n=\dim E\geq0}, and let #{Q:E\to E} be self-adjoint. With the
+[canonical h-volume](fdip-002M), put locally
+##{Z=\int_E\exp\bigl(-h(x,Qx)/2\bigr)\,d\lambda_E(x).}
+This nonnegative integral is finite if and only if #{Q} is
+[strictly positive](fdip-0004). In that case
+##{0<Z=\frac{(2\pi)^{n/2}}{\sqrt{\det Q}}<\infty.}
+For #{n=0}, the determinant and normalizer are both one.}
+\proof{
+\p{Use the [orthonormal eigenbasis](fdip-002R), with eigenvalues #{q_i}.
+Its coordinates #{y_i=h(u_i,x)} preserve canonical volume and give
+##{\begin{aligned}
+\frac12h(x,Qx)&=\frac12\sum_iq_i y_i^2,\\
+\exp\bigl(-h(x,Qx)/2\bigr)&=\prod_i e^{-q_i y_i^2/2}.
+\end{aligned}}
+If #{Q} is positive, every #{q_i>0}. Repeated nonnegative
+[Tonelli](fdip-002Q) and the [scalar integral](fdip-002S) yield
+##{Z=\prod_i I(q_i)
+     =\frac{(2\pi)^{n/2}}{\sqrt{\prod_iq_i}}.}
+The spectral determinant identity proves the formula. For an empty
+basis the product and the singleton volume are one.}
+\p{Conversely, if #{Q} is not positive, self-adjointness and the spectral
+lemma give an eigenvalue #{q_i\leq0}. Restrict the other coordinates
+to #{[-1,1]}. Their product weight is bounded below there by
+#{c=\exp(-\tfrac12\sum_{j\ne i}\max(q_j,0))>0}.
+On the box with #{|y_i|\leq R}, the remaining factor is at least one,
+so the weight integral is at least #{c\,2^{n-1}(2R)}. These bounds
+diverge as #{R\to\infty}. This avoids any product of zero and infinity.
+In dimension zero nonpositivity cannot occur.}
+}
+\p{For the spectral input, see
+\citet{Appendix A.5.2, pp. 646-647}{boyd2004convex}.
+For the scalar integral, see
+\citet{Section 2, PDF pp. 1-2}{conradGaussianIntegral}.
+The density convention in
+\citet{Lemma B.54 and Proposition B.55, pp. 504-505}{friedli2017statistical}
+is a comparison, not an assumption of normalization: that source uses
+a covariance parameter, while #{Q} here is precision.
+For the counting field space, the [array bridge](fdip-002O) recovers
+the customary determinant formula without changing its reference volume.}

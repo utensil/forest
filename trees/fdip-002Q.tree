@@ -1,0 +1,37 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Lemma}
+\title{Orthogonal sums have product volume}
+\date{2026-10-25}
+
+\p{Let #{E=E_1\mathbin\perp E_2} be an orthogonal direct sum of finite-dimensional
+real inner-product spaces. Use their [canonical Euclidean volumes](fdip-002M)
+on the uncompleted Borel sigma-algebras. Addition #{a(x_1,x_2)=x_1+x_2}
+is a measure-preserving isometric isomorphism:
+##{a_*(\lambda_{E_1}\otimes\lambda_{E_2})=\lambda_E.}
+All these measures are sigma-finite. Nonnegative Borel functions therefore
+satisfy Tonelli's iterated-integral identities. For a real Borel function
+with finite absolute integral, Fubini holds and its sections are integrable
+almost everywhere.}
+\proof{
+\p{Concatenate orthonormal bases of #{E_1} and #{E_2}. The resulting
+orthonormal chart of #{E} turns addition into concatenation of coordinate
+tuples. The [finite product splitting](fdip-002J) identifies the measures,
+and chart independence is already proved at \ref{fdip-002M}. Empty bases
+give singleton factors of mass one, so the argument includes zero summands.}
+\p{Each finite chart is exhausted by cubes #{[-N,N]^n} of finite measure;
+in dimension zero the whole measure has mass one. Thus
+\citet{Theorem 1.7.15, pp. 200-201, preliminary version}{tao2011measure}
+applies to these uncompleted sigma-finite products. Applying Tonelli to
+the absolute value shows that section integrals of the absolute value are
+finite almost everywhere. Applying it to positive and negative parts then
+gives signed Fubini. The null-section statement in
+\citet{Corollary 1.7.17, pp. 201-202, preliminary version}{tao2011measure}
+concerns product-null sets; it does not remove the absolute-integrability
+hypothesis for signed integrals.}
+}
+\p{This follows from canonical Euclidean volume and finite product splitting.
+Mathlib's \leanref{LinearIsometryEquiv.measurePreserving} supports the
+isometry step for finite-dimensional real Borel inner-product spaces with
+canonical volume; arbitrary perfect pairings do not supply these hypotheses.}
