@@ -1,0 +1,82 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{Projectors of an involution on a module}
+\date{2026-10-29}
+
+\p{Let #{k} be a commutative unital ring in which #{2} is a unit,
+put #{h=2^{-1}}, and let #{T:M\to M} be linear with #{T^2=I}.
+The maps #{E_\varepsilon=h(I+\varepsilon T)}, for
+#{\varepsilon\in\{1,-1\}}, give
+##{\begin{aligned}
+E_\varepsilon^2&=E_\varepsilon,&E_+E_-&=E_-E_+=0,\\
+E_++E_-&=I,&E_+-E_-&=T,\\
+\operatorname{im}E_\varepsilon&=\ker(T-\varepsilon I)=M_\varepsilon.
+\end{aligned}}
+Thus #{M\cong M_+\oplus M_-}, with map
+#{v\mapsto(E_+v,E_-v)} and inverse addition. No finite generation,
+freeness or pairing is needed.}
+\proof{
+\p{Scalar maps commute with #{T}, so
+##{E_\varepsilon^2=h^2(I+2\varepsilon T+T^2)
+ =2h^2(I+\varepsilon T)=E_\varepsilon.}
+Both mixed products equal #{h^2(I-T^2)=0}; sum and difference
+use #{2h=1}. Also #{TE_\varepsilon=\varepsilon E_\varepsilon}.
+If #{Tv=\varepsilon v}, then #{E_\varepsilon v=h(v+v)=v},
+proving equality of image and eigenspace. The sum identity decomposes
+every vector. If #{u_++u_-=0} with #{u_\pm\in M_\pm}, applying
+#{E_+} gives #{u_+=0}, and then #{u_-=0}, proving uniqueness.}
+}
+
+\p{If an algebra acts by #{\alpha:A\to\operatorname{End}_k(M)},
+these projectors are #{A}-linear precisely when
+##{T\alpha(a)=\alpha(a)T\qquad(a\in A).}
+Indeed this is exactly #{A}-linearity of #{T}; its linear combinations
+with #{I} are then #{A}-linear. Conversely, either projector recovers
+#{T=2E_+-I=I-2E_-}. When #{T=\alpha(\omega)},
+[centrality](fgap-000W) of #{\omega} is sufficient. It need not be
+necessary: on #{M=\mathbb R}, let #{A=\mathbb R\times M_2(\mathbb R)}
+act by #{\alpha(a,B)=aI}, and put
+#{\omega=(1,\operatorname{diag}(1,-1))}. Then #{\omega^2=1}
+and #{T=I}, although #{\omega} fails to commute with a matrix unit
+in the second factor.}
+
+\p{For comparison, the [central-idempotent product](fgap-0010)
+is an algebra statement. Central orthogonal idempotents #{e_+,e_-}
+with sum one give the mutually inverse unital algebra maps
+##{a\longmapsto(e_+a,e_-a),\qquad (x,y)\longmapsto x+y.}
+Each ideal #{e_\varepsilon A} has unit #{e_\varepsilon} and scalar
+map #{c\mapsto ce_\varepsilon}. Centrality makes each component
+multiplicative and the mixed products zero; the sum and orthogonality
+identities prove both inverse equations. This is stronger than the
+module splitting above.}
+
+\p{In #{k[C_2]}, writing #{g=[r]} for #{r^2=1}, the
+[two central idempotents](fgap-000Y) are #{e_\pm=h(1\pm g)}.
+The [explicit product](fgap-0011) is
+##{\begin{aligned}
+\Phi(a+bg)&=(a+b,a-b),\\
+\Phi^{-1}(x,y)&=h(x+y)+h(x-y)g.
+\end{aligned}}
+The coefficient product
+#{(a+bg)(c+dg)=(ac+bd)+(ad+bc)g} maps to
+#{((a+b)(c+d),(a-b)(c-d))}. Thus #{\Phi} is multiplicative;
+its inverse equations use #{2h=1}, its unit image is #{(1,1)},
+and scalars map diagonally. The images of #{e_+,e_-} are
+#{(1,0),(0,1)}. An arbitrary coefficient ring need not be semisimple,
+and an abstract idempotent summand need not be free.}
+
+\p{\citet{Section 4.5, pp. 63-64}{sengupta2010representations}
+discusses character projectors over a field with invertible group order;
+its subsequent ideal argument assumes semisimplicity. The displayed
+ring identities require only invertible two. Mathlib's
+\leanref{LinearMap.IsIdempotentElem.isCompl} supplies the abstract
+range/kernel complement. TauCeti's
+\leanref/tauceti{TauCeti.isIdempotentElem_halfOneAdd} supplies the
+square-one idempotent identity, and
+\leanref/tauceti{MonoidAlgebra.cyclicTwoEquivProd} supplies the
+#{C_2} algebra product. Its generator is
+#{\operatorname{Multiplicative.ofAdd}(1:\mathbb Z/2\mathbb Z)}.
+None of these facts determines the ranks of a particular represented
+sector; those require the [coordinate bases](fdip-000L).}

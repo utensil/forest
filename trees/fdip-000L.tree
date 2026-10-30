@@ -15,8 +15,9 @@ Every element has unique coefficients #{a+bg}, and
  &\quad+(ad+bc)g.
 \end{aligned}}
 \citet{Sections 3.1-3.2, pp. 39-41}{sengupta2010representations}
-gives the group basis and linear extension over a field. The following
-two-element calculation works over the stated ring.}
+gives the group basis and linear extension over a field. The
+[ring-module extension](fdip-003N) supplies the general ring theorem;
+the following formulas identify its particular faithful actions.}
 
 \p{Put #{V_k=k^4}, in vertex order #{(0,1,2,3)}, and
 #{W_k=k^R}, with #{R=(0,2)} in that order. Let
@@ -29,7 +30,8 @@ real [spectral vectors #{u_a}](fdip-0037) and from the edge labels
 P(\phi_0,\phi_1,\phi_2,\phi_3)&=(\phi_2,\phi_3,\phi_0,\phi_1),\\
 J(x_0,x_2)&=(x_2,x_0).
 \end{aligned}}
-Define their unital #{k}-algebra actions by
+Applying either permutation twice returns the original coordinates,
+so #{P^2=I} and #{J^2=I}. Their unique unital #{k}-algebra extensions are
 ##{\begin{aligned}
 \widehat\rho_V:k[C_2]&\longrightarrow\operatorname{End}_k(V_k),\\
 \widehat\rho_V(a+bg)&=aI+bP,\\
@@ -60,51 +62,19 @@ on #{W_k} in the same way. No absence of zero divisors is required.}
 #{\pi_RP=J\pi_R}, it intertwines the whole algebra action:
 ##{\pi_R\widehat\rho_V(z)=\widehat\rho_W(z)\pi_R
 \qquad(z\in k[C_2]).}
-Thus it is a #{k[C_2]}-module map. The
-[representation/module correspondence](fgap-001I) describes the
-general field case; these formulas establish this particular ring case
-directly. Mathlib's \leanref{Representation.asAlgebraHom} supplies
-the general linear extension, and
-\leanref{Representation.asAlgebraHom_single} evaluates its basis
-elements. The specified #{P,J,\pi_R} supply the concrete action
-and intertwiner.}
+Thus it is a #{k[C_2]}-module map by the
+[all-element intertwining theorem](fdip-003N). Both coordinate
+faithfulness witnesses above work with zero divisors; they use more
+than faithfulness of the group action alone.}
 
 \p{Suppose now that #{2} is a unit in #{k}, and put #{h=2^{-1}}.
 The element #{g} is a \vocabk{central involution}{fgap-000W}.
-Its [two idempotents](fgap-000Y) are
+Its [two idempotents and algebra product](fdip-003O) are
 ##{e_+=h(1+g),\qquad e_-=h(1-g).}
-Direct multiplication gives
-##{\begin{aligned}
-e_++e_-&=1,\\
-e_+-e_-&=g,\\
-e_\pm^2&=h^2(2\pm2g)=e_\pm,\\
-e_+e_-&=e_-e_+=h^2(1-g^2)=0.
-\end{aligned}}
-The corresponding [two-element group-algebra product](fgap-0011) is
-the concrete instance of the [central-idempotent product](fgap-0010):
-##{\begin{aligned}
-\Phi:k[C_2]&\longrightarrow k\times k,\\
-\Phi(a+bg)&=(a+b,a-b),\\
-\Phi^{-1}(x,y)&=h(x+y)+h(x-y)g.
-\end{aligned}}
-Substitution in either order gives the identity since #{2h=1}.
-The coefficient product shows multiplicativity, scalars map to
-#{(a,a)}, and the unit maps to #{(1,1)}. Thus #{\Phi} is a
-#{k}-algebra isomorphism, with #{e_+,e_-} mapping to
-#{(1,0),(0,1)}. This proves the product without a semisimplicity
-assumption on #{k}.}
-
-\p{The character-projector construction in
-\citet{Section 4.5, p. 63}{sengupta2010representations}
-assumes a field in which the group order is invertible. Here the displayed
-identities give the ring-level proof. TauCeti's
-\leanref/tauceti{TauCeti.isIdempotentElem_halfOneAdd} supplies the
-generic idempotent identity, and
-\leanref/tauceti{MonoidAlgebra.cyclicTwoEquivProd} gives this exact
-algebra product when #{2} is invertible. Its generator is
-#{\operatorname{Multiplicative.ofAdd}(1:\mathbb Z/2\mathbb Z)};
-#{a+bg} corresponds to the two basis monomials with coefficients
-#{a,b}.}
+Their images under the two algebra actions are the following concrete
+module projectors. Abstract centrality in #{k[C_2]} supplies commutation
+with the represented algebra; it does not make #{P} central in all
+#{\operatorname{End}_k(V_k)}.}
 
 \p{The represented projectors are
 ##{E_\pm=h(I\pm P),\qquad F_\pm=h(I\pm J).}
@@ -146,7 +116,10 @@ Its restriction #{\pi_\varepsilon:V_\varepsilon\to W_\varepsilon}
 sends #{b_{\varepsilon,0}} to #{c_\varepsilon} and
 #{b_{\varepsilon,1}} to zero. It is surjective, with
 ##{\ker\pi_\varepsilon=k b_{\varepsilon,1}.}
-For each sign, the square commutes:}
+The first coefficient of a sector vector proves the kernel formula
+and the displayed image of #{b_{\varepsilon,0}} proves surjectivity.
+For each sign, the square commutes, with the horizontal codomains
+restricted to the indicated sectors:}
 
 \tikzfigs{0.75}{\begin{tikzpicture}[
   every node/.style={inner sep=4pt},
