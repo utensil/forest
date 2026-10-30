@@ -1,0 +1,95 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Remark}
+\title{Stationary elimination and the tree contribution}
+\date{2026-10-30}
+
+\p{For the [three-coordinate quartic action](fdip-0047), minimizing
+the eliminated variables and integrating their fluctuations agree
+on some coefficients but not all. Write #{u=(y,z)},
+#{u_0=(x,x)} and
+##{H=C^{-1}=\begin{pmatrix}1&1\\1&2\end{pmatrix}.}
+At fixed #{x}, the action is
+##{\mathcal A(x,u)=\frac{x^2}{2}
+ +\frac12(u-u_0)^TC(u-u_0)+\lambda V(x,u).}
+There is a unique formal stationary solution
+#{u_*(x,\lambda)=u_0+O(\lambda)}. Its stationary value is
+##{\begin{aligned}
+\mathcal A_{\mathrm{cl}}(x,\lambda)
+ &=\mathcal A(x,u_*(x,\lambda))\\
+ &=\frac{x^2}{2}+\frac{\lambda x^4}{8}
+    -\frac{5\lambda^2x^6}{72}+O(\lambda^3).
+\end{aligned}}
+For real #{\lambda\geq0}, the action is coercive and strictly
+convex in #{u}: the quadratic Hessian #{C} is positive definite
+and the quartic summands are convex. It therefore has a unique
+minimizer. The calculation below uses only formal stationarity
+at #{\lambda=0}.}
+
+\proof{
+\p{The equation is
+#{C(u-u_0)+\lambda\nabla_uV(x,u)=0}.
+Since #{C} is invertible, comparison of successive powers of
+#{\lambda} uniquely determines the formal coefficients. Put
+##{r=\nabla_uV(x,u_0)=\frac{x^3}{6}\binom{1}{1}.}
+The first coefficient gives #{u_*=u_0-\lambda Hr+O(\lambda^2)}.
+Substitution in the action yields
+##{\mathcal A_{\mathrm{cl}}=
+ \frac{x^2}{2}+\lambda V(x,u_0)
+ -\frac{\lambda^2}{2}r^THr+O(\lambda^3).}
+Now #{V(x,u_0)=x^4/8} and #{r^THr=5x^6/36}. This proves the
+stationary coefficient without replacing a Gaussian integral by
+a minimum.}
+}
+
+\p{To distinguish fluctuation terms, take #{\hbar>0}, let
+#{\eta_\hbar} be centered Gaussian with covariance #{\hbar H}, and
+use the normalized fiber expression
+##{F_{\lambda,\hbar}(x)=
+ -\hbar\log\mathbb E\exp\left(
+ -\frac{\lambda}{\hbar}V(x,u_0+\eta_\hbar)\right).}
+Expand formally in #{\lambda}; through the second order its
+coefficients are polynomials in #{\hbar}:
+##{\begin{aligned}
+F_{\lambda,\hbar}(x)
+={}&\lambda\left(\frac{x^4}{8}+\frac{3\hbar x^2}{4}
+                    +\frac{5\hbar^2}{8}\right)\\
+ &-\lambda^2\left(\frac{5x^6}{72}
+                    +\frac{53\hbar x^4}{48}\right.\\
+ &\hspace{38pt}\left.+\frac{97\hbar^2x^2}{24}
+                    +\frac{41\hbar^3}{24}\right)
+ +O(\lambda^3).
+\end{aligned}}
+Indeed each Gaussian pairing contributes one #{\hbar}; the first
+coefficient is #{\mathbb E V} and the second is
+#{-\operatorname{Var}(V)/(2\hbar)}. Applying this scaling to the
+explicit moment calculation proves the formula.}
+
+\p{Consequently, through order #{\lambda^2}, the coefficient of
+#{\hbar^0} in this fiber interaction is
+##{\begin{aligned}
+[\hbar^0]F_{\lambda,\hbar}(x)
+ &=\frac{\lambda x^4}{8}-\frac{5\lambda^2x^6}{72}
+     +O(\lambda^3)\\
+ &=\mathcal A_{\mathrm{cl}}(x,\lambda)-\frac{x^2}{2}
+     +O(\lambda^3).
+\end{aligned}}
+The retained Gaussian action #{x^2/2} must be added to recover
+the full stationary value. At #{\lambda=0} the normalized fiber
+interaction is zero, whereas that stationary value is #{x^2/2}.}
+
+\p{This is the \newvocab{tree contribution} in the loop grading of
+\citet{v2, Section 3.6 and Theorem 3.12, pp. 38-39}{etingof2024mathematical}.
+In that convention a Gaussian contraction contributes #{\hbar}
+and an interaction vertex contributes #{\hbar^{-1}}. The logarithm
+selects connected graphs; after multiplication by #{-\hbar},
+a connected graph with #{e} contracted edges and #{v} interaction
+vertices has power #{\hbar^{e-v+1}}. Its number of independent
+cycles is #{e-v+1}; zero cycles means a tree. Thus connected
+contractions need not be trees. In the displayed second-order
+coefficient, only the sextic term is at tree order; its quartic,
+quadratic and constant companions have positive powers of
+#{\hbar}. The source's stationary-action convention is applied to
+the shifted fiber action, whose unperturbed minimum is zero,
+which explains the subtraction of #{x^2/2}.}
