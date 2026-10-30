@@ -11,8 +11,11 @@ on some coefficients but not all. Write #{u=(y,z)},
 #{u_0=(x,x)} and
 ##{H=C^{-1}=\begin{pmatrix}1&1\\1&2\end{pmatrix}.}
 At fixed #{x}, the action is
-##{\mathcal A(x,u)=\frac{x^2}{2}
- +\frac12(u-u_0)^TC(u-u_0)+\lambda V(x,u).}
+##{\begin{aligned}
+\mathcal A(x,u)={}&\frac{x^2}{2}
+ +\frac12(u-u_0)^TC(u-u_0)\\
+ &+\lambda V(x,u).
+\end{aligned}}
 There is a unique formal stationary solution
 #{u_*(x,\lambda)=u_0+O(\lambda)}. Its stationary value is
 ##{\begin{aligned}
@@ -46,9 +49,11 @@ a minimum.}
 \p{To distinguish fluctuation terms, take #{\hbar>0}, let
 #{\eta_\hbar} be centered Gaussian with covariance #{\hbar H}, and
 use the normalized fiber expression
-##{F_{\lambda,\hbar}(x)=
- -\hbar\log\mathbb E\exp\left(
- -\frac{\lambda}{\hbar}V(x,u_0+\eta_\hbar)\right).}
+##{\begin{aligned}
+&F_{\lambda,\hbar}(x)\\
+&\quad=-\hbar\log\mathbb E\exp\left(
+ -\frac{\lambda}{\hbar}V(x,u_0+\eta_\hbar)\right).
+\end{aligned}}
 Expand formally in #{\lambda}; through the second order its
 coefficients are polynomials in #{\hbar}:
 ##{\begin{aligned}
@@ -58,8 +63,8 @@ F_{\lambda,\hbar}(x)
  &-\lambda^2\left(\frac{5x^6}{72}
                     +\frac{53\hbar x^4}{48}\right.\\
  &\hspace{38pt}\left.+\frac{97\hbar^2x^2}{24}
-                    +\frac{41\hbar^3}{24}\right)
- +O(\lambda^3).
+                    +\frac{41\hbar^3}{24}\right)\\
+ &+O(\lambda^3).
 \end{aligned}}
 Indeed each Gaussian pairing contributes one #{\hbar}; the first
 coefficient is #{\mathbb E V} and the second is
