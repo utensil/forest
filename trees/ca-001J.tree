@@ -1,4 +1,5 @@
 \import{spin-macros}
+\meta{agent-authored}{true}
 % clifford hopf spin draft
 \tag{clifford}
 \tag{draft}
@@ -11,17 +12,29 @@
 
 % james2001representations woit2017quantum lux2010representations sims1994computation wilson2024discrete hamilton2023supergeometric hamilton2023unification
 
-\refdef{even subalgebra of Clifford algebra}{wieser2022computing}{
+\refdeft{even subalgebra of a Clifford algebra}{§8.3, Theorem 8.5 and proof, p. 104}{wieser2024formalizing}{
 \lean{CliffordAlgebra.even}
 
-\p{
-The even subalgebra of the Clifford algebra is defined as the submodule of the Clifford algebra
+\p{Let #{R} be a commutative ring, #{V} an #{R}-module and
+#{Q:V\to R} a \vocabk{quadratic form}{ca-0004}. Write #{\Cl(Q)} for its
+\vocabk{Clifford algebra}{ca-0006}, with canonical #{R}-linear
+\vocabk{Clifford map}{ca-000A} #{\iota:V\to\Cl(Q)}.}
 
+\p{The \newvocab{even subalgebra} is the #{R}-linear span of all
+even words:
 ##{
-\Cl^{+}(Q) \equiv \left\{ x_1 \cdots x_k \in \Cl \mid x \in V, k \text{ is even} \right\}
+\Cl^+(Q)=\operatorname{span}_R
+\{\iota(v_1)\cdots\iota(v_{2k})\}.
 }
+Here #{k} ranges over all nonnegative integers and each #{v_i} ranges over
+#{V}; the word for #{k=0} is the empty product #{1}. Thus an
+\newvocab{even element} is a finite #{R}-linear combination of such words,
+including scalar multiples of #{1}.}
 
-which also forms a subalgebra. Its elements are called even elements, as they can be expressed as the geometric product of an even number of 1-vectors.
-
-}
+\p{The product of two even words is an even word. Distributivity therefore
+makes this span closed under multiplication, and the empty word supplies
+the unit. Hence it is an #{R}-subalgebra of #{\Cl(Q)}. In Mathlib its
+underlying submodule is \leanref{CliffordAlgebra.evenOdd} #{Q\,0};
+\leanref{CliffordAlgebra.even_induction} expresses the same closure under
+scalars, addition and left multiplication by pairs of Clifford generators.}
 }
