@@ -1,0 +1,46 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{Factorization through an invariant requires fiber constancy}
+\date{2026-10-30}
+
+\p{Let #{X,C,Y} be sets and let #{c:X\to C} and #{r:X\to Y}
+be functions. There is a function #{F:c(X)\to Y} with
+#{r=F\circ c}, viewing #{c} as a map to its image, if and only if
+##{c(x)=c(x')\ \Longrightarrow\ r(x)=r(x')}
+for all #{x,x'\in X}. When it exists, #{F} is unique on #{c(X)}.
+This is the set-level form of the fiber-constancy argument for
+[finite-map pullback](fdip-0028); no finiteness is required here.}
+
+\proof{
+\p{If #{r=F\circ c}, equal inputs to #{F} give equal outputs.
+Conversely, assign to #{z\in c(X)} the common value of #{r}
+on its nonempty fiber. The condition makes that value well-defined
+and gives #{F(c(x))=r(x)}. Every element of #{c(X)} is reached,
+so this identity also gives uniqueness. This includes the empty
+image, on which there is exactly one function to #{Y}.}
+}
+
+\p{Mathlib's \leanref{Function.FactorsThrough} is the displayed
+fiber-constancy condition. Its \leanref{Function.factorsThrough_iff}
+extends to the entire codomain #{C} when #{Y} is nonempty;
+the image formulation above needs no such extra assumption.}
+
+\p{Apply this to any set of representatives of the rational
+[enriched objects](fdip-0041), with #{c(\mathcal B)=\chi_q}
+and #{r(\mathcal B)=R(\mathcal B)}. Both are unchanged by the
+declared arrows. A pair with equal character and unequal trace
+ratio therefore excludes every set-level recovery rule from
+that character on a domain containing the pair. In particular,
+a fixed function of #{L(2,\chi_D)}, or of any fixed collection
+of values determined solely by the same character, cannot
+recover #{R} there. The [two rational fibers](fdip-0043) provide
+such a pair.}
+
+\p{The criterion asserts neither regularity nor continuity of
+#{F}. Even fiber constancy would not supply those properties,
+a choice of a physical observable, or a physical parameter law.
+The obstruction concerns this specific character and this
+independently defined trace ratio; it makes no assertion about
+richer arithmetic invariants.}
