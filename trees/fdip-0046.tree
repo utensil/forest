@@ -1,0 +1,140 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{Formal interaction under Gaussian elimination}
+\date{2026-10-30}
+
+\p{Eliminating a field with a quartic interaction generally creates
+quadratic and sextic terms. The coefficients through second order
+can be found by conditional Gaussian moments, while preserving a
+supplied symmetry and composition of eliminations.}
+
+\p{Use the finite orthogonal sum #{E=X\mathbin\perp Y}, positive
+precision #{Q}, components #{A,B,C}, Schur precision #{S} and scalar
+#{c_C} of [Gaussian elimination](fdip-000D). Let
+#{T:E^4\to\mathbb R} be a symmetric four-linear form and put
+##{V(u)=\frac{T(u,u,u,u)}{4!}.}
+Write #{\mathcal P(X)} for the [polynomial function algebra](fdip-002V).
+For #{x\in X}, let #{\eta} have centered Gaussian law with covariance
+#{C^{-1}} on #{Y}, and set
+##{v_x=(x,-C^{-1}B^\dagger x+\eta).}
+This is the conditional law of the eliminated field given the retained
+value. It is the [conditional kernel](fdip-003A) with its two named
+summands exchanged; its covariance is #{C^{-1}}, whereas that
+proposition's retained-given-eliminated kernel has covariance #{A^{-1}}.}
+
+\p{For a formal variable #{\lambda}, use ordinary power-series
+coefficients in #{\lambda} and define the
+\newvocab{fiber effective interaction} by
+##{\begin{aligned}
+F_\lambda(x)&=-\log\mathbb E_\eta e^{-\lambda V(v_x)},\\
+\mathbb E_\eta e^{-\lambda V(v_x)}
+ &=\sum_{n\geq0}\frac{(-\lambda)^n}{n!}
+       \mathbb E_\eta V(v_x)^n.
+\end{aligned}}
+These are formal series in #{\lambda} with coefficients in
+#{\mathcal P(X)}; the logarithm
+is the formal logarithm of a series with constant coefficient one.
+Every coefficient is finite by [polynomial integrability](fdip-002W).
+The notation #{O(\lambda^3)} means a series divisible by #{\lambda^3},
+not an analytic error estimate. With
+##{\begin{aligned}
+a(x)&=\mathbb E[V\mid x],\\
+b(x)&=\mathbb E[V^2\mid x]-a(x)^2,
+\end{aligned}}
+the first two coefficients are
+##{F_\lambda=\lambda a-\frac{\lambda^2}{2}b+O(\lambda^3).}
+The degree-zero terms are retained: coefficientwise integration gives
+##{\begin{aligned}
+&\int_Y e^{-\frac12\langle(x,y),Q(x,y)\rangle}
+                    e^{-\lambda V(x,y)}\,dy\\
+&\qquad=c_Ce^{-\frac12\langle x,Sx\rangle}e^{-F_\lambda(x)}.
+\end{aligned}}
+Here #{dy} is the specified Euclidean volume. This fiber logarithm
+integrates eliminated variables; it does not take the Legendre
+transform of a source-generating function used for a one-particle
+irreducible (1PI) effective action in
+\citet{v2, Proposition 3.23, p. 50}{etingof2024mathematical}.}
+
+\p{For a specified orthogonal flag
+#{E=X\mathbin\perp Y\mathbin\perp Z}, first eliminate #{Z} and then
+#{Y}. All conditional expectations below use the original Gaussian
+law, with the #{Y}-given-#{X} kernel obtained after eliminating #{Z}.
+Put
+##{\begin{aligned}
+a_1(x,y)&=\mathbb E[V\mid x,y],\\
+b_1(x,y)&=\mathbb E[V^2\mid x,y]-a_1(x,y)^2.
+\end{aligned}}
+Both stages together give
+##{\begin{aligned}
+F_\lambda(x)
+={}&\lambda\mathbb E[a_1\mid x]\\
+&-\frac{\lambda^2}{2}\bigl(
+ \mathbb E[b_1\mid x]+\operatorname{Var}(a_1\mid x)\bigr)\\
+ &+O(\lambda^3),
+\end{aligned}}
+which agrees with direct elimination of #{Y\oplus Z}. The first
+coefficient has degrees among #{4,2,0}; the second has degrees among
+#{6,4,2,0}. Particular components may vanish.}
+
+\proof{
+\p{Expand the expectation as
+#{1-\lambda a+\lambda^2\mathbb E[V^2\mid x]/2+O(\lambda^3)}.
+The identity #{\log(1+u)=u-u^2/2+O(u^3)} gives the displayed
+coefficient #{-b/2}. Square completion in \ref{fdip-000D} identifies
+the normalized conditional Gaussian and the raw scalar #{c_C};
+applying it to each polynomial coefficient proves the fiber identity.
+No convergence or interchange of an infinite series and an integral
+is needed.}
+\p{The first-stage interaction is
+#{F_1=\lambda a_1-\lambda^2b_1/2+O(\lambda^3)}. Hence
+##{e^{-F_1}=1-\lambda a_1+
+ \frac{\lambda^2}{2}(a_1^2+b_1)+O(\lambda^3).}
+Take the #{Y}-given-#{X} expectation and the negative logarithm.
+This yields the stated two-stage formula. Polynomial integrability
+permits signed Fubini for every coefficient, so the tower identities
+for these Gaussian kernels give
+##{\begin{aligned}
+&\mathbb E[a_1\mid x]=\mathbb E[V\mid x],\\
+&\mathbb E[b_1\mid x]+\operatorname{Var}(a_1\mid x)\\
+&\qquad=\mathbb E[V^2\mid x]-\mathbb E[V\mid x]^2.
+\end{aligned}}
+These identities also follow directly by expanding #{b_1} and
+cancelling #{\mathbb E[a_1^2\mid x]}. They prove composition
+through the stated order without discarding any generated term.}
+\p{The mean of #{v_x} is linear in #{x}, and its centered noise is
+independent of #{x}. Expanding the four-linear tensor and pairing
+centered Gaussian factors by Wick's theorem leaves degrees #{4,2,0}
+in #{a}. In #{\mathbb E[V^2\mid x]-\mathbb E[V\mid x]^2}, pairings
+with no contraction between the two copies of #{V} cancel. Every
+remaining pairing uses at least two noise factors. The eight original
+factors therefore leave at most six mean factors. An even number of
+noise factors is paired, giving only degrees #{6,4,2,0}. The
+homogeneous components are symmetric tensors on #{X} by polarization;
+they need not be diagonal in a chosen coordinate basis.}
+}
+
+\p{Suppose a second such model is related by a linear isometric isomorphism
+#{L=L_X\oplus L_Y:E\to E'} satisfying
+#{Q'L=LQ} and #{V'\circ L=V}. Then
+##{F'_\lambda(L_Xx)=F_\lambda(x)\pmod{\lambda^3}.}
+Indeed the component identities give
+#{C'L_Y=L_YC} and #{(B')^\dagger L_X=L_YB^\dagger}.
+Thus #{L_Y} transports the conditional mean and covariance, hence
+its Gaussian law and both moments #{a,b}. For two-stage elimination
+also require preservation of the supplied flag. A source
+#{j'\in(X')^*} pulls back to #{j'\circ L_X\in X^*}.
+In particular, a supplied finite group of these isometries preserves
+each induced coefficient. The result transports a given action;
+it does not select that action.}
+
+\p{Wick contractions are
+\citet{v2, Theorem 3.1 and Example 3.2, p. 29}{etingof2024mathematical}.
+The perturbation convention in
+\citet{v2, Section 3.3, p. 33}{etingof2024mathematical}
+is #{B(u,u)/2-\sum_i g_iB_i(u,\ldots,u)/i!}; here
+#{g_4=-\lambda} and #{B_4=T}, at #{\hbar=1}.
+The conditional formulas and composition above are direct deductions
+using these contractions and the specified Gaussian kernels. The
+[three-coordinate example](fdip-0047) exhibits every indicated degree.}
