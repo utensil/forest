@@ -110,6 +110,12 @@ value zero when #{\gcd(n,|D|)>1}; its conductor is #{|D|}.
 For the split class use the trivial character of conductor one.
 These conventions agree with
 \citet{Sections 1 and 3, especially Theorem 3.4}{conradQuadraticCharacters}.
+For an integer #{D} satisfying \leanref{Int.IsFundamentalDiscr} #{D},
+TauCeti's \leanref/tauceti{TauCeti.Multiquadratic.fundamentalDiscriminantChar}
+defines the integer-valued Dirichlet character of level #{|D|}, and
+\leanref/tauceti{TauCeti.Multiquadratic.isPrimitive_fundamentalDiscriminantChar}
+proves it primitive, so its conductor is #{|D|}.
+These declarations supply this character/conductor step, including #{D=1}.
 Fix the uncompleted convention
 ##{L(s,\chi_D)=\prod_{p\ \mathrm{prime}}
  (1-\chi_D(p)p^{-s})^{-1}}
