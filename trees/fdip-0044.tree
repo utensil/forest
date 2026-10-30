@@ -1,0 +1,119 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{Schur elimination multiplies quadratic center characters}
+\date{2026-10-30}
+
+\p{For an [enriched rational object](fdip-0041), write its
+relative precision in the specified orthogonal splitting as
+##{Q=\begin{pmatrix}A&B\\B^\dagger&C\end{pmatrix},
+\qquad S=A-BC^{-1}B^\dagger.}
+The [positive elimination theorem](fdip-000D) gives invertible
+positive #{C,S}. The adjoint uses the restricted reference
+pairings #{g_{0,\mathrm{ret}},g_{0,\mathrm{el}}}.
+Define the two rank-two forms
+##{\begin{aligned}
+q_S(x)&=g_{0,\mathrm{ret}}(x,Sx),\\
+q_C(y)&=g_{0,\mathrm{el}}(y,Cy).
+\end{aligned}}
+Their signed discriminants and associated quadratic Galois
+characters satisfy
+##{\delta(q)=\delta(q_S)\delta(q_C),\qquad
+\chi_q=\chi_{q_S}\chi_{q_C}.}
+Multiplication of the #{\{1,-1\}}-valued characters is their
+tensor product. It retains the eliminated character as well
+as the retained one.}
+
+\proof{
+\p{Put #{K=C^{-1}B^\dagger}, as in \ref{fdip-000D}.
+The rational triangular isomorphism
+#{U(x,y)=(x,y+Kx)} has determinant one. The
+[square-completion identity](fdip-001X) says
+##{q(x,y)=q_S(x)+q_C(y+Kx).}
+Thus #{q\simeq q_S\perp q_C} as quadratic forms. In a
+concatenated rational basis, congruence and #{\det U=1} give
+##{\det(b_q)=\det(b_{q_S})\det(b_{q_C}).}
+For a rank-two form #{\langle a,b\rangle}, orthogonal
+Clifford generators #{e_1,e_2} have squares #{a,b} and
+anticommute. Its even algebra has basis #{1,w=e_1e_2},
+with #{w^2=-ab}; it is commutative, so it is its own center.
+Consequently its center is #{\mathbb Q[z]/(z^2+ab)}, and
+its signed discriminant is #{[-ab]}.
+The dimension formula and this binary algebra are also
+\citet{Section 11, Example 11.2, pp. 57-58}{elmankarpenkomerkurjev2008quadratic}.}
+
+\p{In rank four the signed discriminant has positive determinant
+sign by [the field-center calculation](fcap-0043).
+The two rank-two minus signs therefore cancel, proving the
+first identity. This is the #{2+2} instance of
+\citet{Lemma 13.4 and Example 13.5, p. 62}{elmankarpenkomerkurjev2008quadratic}.
+Choose square roots of representatives #{d_S,d_C} in
+#{\overline{\mathbb Q}}. Their product is a square root of
+#{d_Sd_C}; applying any #{\sigma\in G_{\mathbb Q}} gives
+##{\frac{\sigma(\sqrt{d_S}\sqrt{d_C})}{\sqrt{d_S}\sqrt{d_C}}
+ =\frac{\sigma(\sqrt{d_S})}{\sqrt{d_S}}
+  \frac{\sigma(\sqrt{d_C})}{\sqrt{d_C}},}
+which proves the character identity, including split classes.}
+}
+
+\p{The construction respects the declared arrows. If
+#{T=T_{\mathrm{ret}}\oplus T_{\mathrm{el}}} preserves the
+pairing, action and splitting, the identity #{Q'T=TQ} gives
+##{\begin{aligned}
+C'T_{\mathrm{el}}&=T_{\mathrm{el}}C,\\
+B'T_{\mathrm{el}}&=T_{\mathrm{ret}}B,\\
+(B')^\dagger T_{\mathrm{ret}}&=T_{\mathrm{el}}B^\dagger.
+\end{aligned}}
+Inversion of the first relation and substitution in the
+Schur formula yield
+#{S'T_{\mathrm{ret}}=T_{\mathrm{ret}}S}.
+The restricted maps consequently preserve #{q_C,q_S} and
+both reference pairings. The retained data inherit #{m^2};
+they carry no further splitting unless one is supplied.
+Thus this naturality statement does not make elimination
+an endofunctor on the already split rank-four objects. A
+retained trace ratio uses
+#{L_{\mathrm{rel,ret}}=S-m^2I} on its own positive-semidefinite,
+nonzero-trace domain, with the same trace formula.}
+
+\p{The triangular form isometry generally does not preserve
+#{g_0}. Nor does its graph map
+##{j_Q(x)=(x,-C^{-1}B^\dagger x)}
+preserve the reference pairing: its pulled-back value is
+##{g_0(j_Qx,j_Qx')=g_{0,\mathrm{ret}}(x,x')
+ +g_{0,\mathrm{el}}(Kx,Kx').}
+It is a form isometry #{q(j_Qx)=q_S(x)} into the full space,
+not an enriched isomorphism. Clifford functoriality gives
+an algebra embedding: after square completion it is the
+inclusion of the Clifford algebra of an orthogonal summand,
+injective on its monomial basis. But this embedding need
+not carry even centers into the full even center. In an
+orthogonal basis adapted to #{q_S\perp q_C}, the retained
+volume #{e_1e_2} anticommutes with the even element #{e_1f_1},
+where #{f_1} is an eliminated nonisotropic generator.
+Both products are nonzero, and characteristic is zero;
+so this central element of the retained even algebra is
+not central in the full even algebra.}
+
+\p{Primitive Dirichlet representatives must be taken after
+multiplying Galois characters. They are not in general the
+pointwise product of the zero-extended functions on integers.
+At #{t=1}, the [cycle Schur computation](fdip-000W) has
+#{\det Q=45}, #{\det S=5} and #{C=3I_2}. The three signed
+square classes are #{[5],[-5],[-1]}, with fundamental
+discriminants #{5,-20,-4}. The Galois product is #{\chi_5},
+but
+##{\chi_{-20}(2)\chi_{-4}(2)=0,\qquad\chi_5(2)=-1.}
+The last value follows from
+#{\chi_D(2)=(-1)^{(D^2-1)/8}} for odd fundamental #{D},
+as in \citet{Corollary 3.1, p. 4}{conradQuadraticCharacters}.
+On integers coprime to twenty the product agrees with
+#{\chi_5}; passing to its primitive representative restores
+the prime-two value. No multiplication rule for the
+corresponding L-functions follows from the character law.
+Mathlib's \leanref{DirichletCharacter.primitiveCharacter}
+and \leanref{DirichletCharacter.primitiveCharacter_apply_of_isCoprime}
+separate primitive reduction from evaluation: agreement is
+asserted at integers coprime to the original level, which
+does not include the prime two in this example.}
