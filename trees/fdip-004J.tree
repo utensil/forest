@@ -1,0 +1,59 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{A fixed Fourier mode and its massive inverse converge}
+\date{2026-10-31}
+
+\p{Use the [circle meshes](fdip-004H) with fixed #{\mu>0}, and fix
+#{k\in\mathbb Z} before letting #{n\to\infty}. For the
+[Fourier modes and eigenvalues](fdip-004I),
+##{\begin{aligned}
+\lambda_{n,k}&\longrightarrow4\pi^2k^2,\\
+(\mu+\lambda_{n,k})^{-1}
+ &\longrightarrow(\mu+4\pi^2k^2)^{-1}.
+\end{aligned}}
+Moreover, in #{L^2(\mathbb R/\mathbb Z,dx)},
+##{I_nQ_n^{-1}e_{n,k}
+\longrightarrow(\mu+4\pi^2k^2)^{-1}e_k.}
+The vector on the right solves #{Au=e_k} for
+#{A=-d^2/dx^2+\mu} on smooth periodic functions. The selected
+Gaussian moment #{\mathbb E_{\nu_n}|a_{n,k}|^2} converges to the
+same inverse eigenvalue.}
+
+\proof{
+\p{For #{k=0}, the eigenvalue is identically zero and the sampled
+constant interpolates exactly to #{e_0=1}; all three assertions
+follow. For #{k\ne0},
+##{\lambda_{n,k}
+=4\pi^2k^2\left(\frac{\sin(\pi k/n)}{\pi k/n}\right)^2.}
+The sine quotient tends to one. Since #{\mu>0}, all denominators
+are at least #{\mu}, so continuity of inversion proves the scalar
+inverse limit.}
+
+\p{For #{j/n\leq x<(j+1)/n}, the elementary inequality
+#{|e^{it}-e^{is}|\leq|t-s|} gives
+##{|I_ne_{n,k}(x)-e_k(x)|\leq\frac{2\pi|k|}{n}.}
+The inequality follows by integrating #{ie^{iu}} between #{s}
+and #{t}. The circle has measure one, hence the same bound holds
+for the #{L^2} norm. Put
+#{b_n=(\mu+\lambda_{n,k})^{-1}} and
+#{b=(\mu+4\pi^2k^2)^{-1}}. Because #{|b_n|\leq 1/\mu}
+and #{\|e_k\|_{L^2}=1},
+##{\begin{aligned}
+\|b_nI_ne_{n,k}-be_k\|_{L^2}
+ &\leq |b_n|\|I_ne_{n,k}-e_k\|_{L^2}+|b_n-b|\\
+ &\leq \frac{2\pi|k|}{\mu n}+|b_n-b|\longrightarrow0.
+\end{aligned}}
+The eigenvector equation identifies the left vector with
+#{I_nQ_n^{-1}e_{n,k}}. Differentiation gives
+#{Ae_k=(\mu+4\pi^2k^2)e_k}. Finally the Gaussian second-moment
+formula in \ref{fdip-004I} is exactly #{b_n}.}
+}
+
+\p{This is an elementary limit deduction from the preceding finite
+symbol, with an explicit interpolation map. Mathlib's
+\leanref{Real.tendsto_sin_div_nhdsNE_zero} supplies the nonzero
+sine-quotient limit used in the proof; the zero mode was handled
+separately. The declaration does not supply the interpolation or
+Gaussian comparison.}

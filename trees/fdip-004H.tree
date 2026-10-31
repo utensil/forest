@@ -1,0 +1,47 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Definition}
+\title{A circle mesh with normalized pairing}
+\date{2026-10-31}
+
+\p{Supply the unit circle #{\mathbb R/\mathbb Z}, its coordinate
+#{x} modulo one and length measure #{dx}. For an integer #{n\geq3},
+the \newvocab{circle mesh} consists of the points #{j/n}, with
+#{j\in\mathbb Z/n\mathbb Z}, and spacing #{h_n=1/n}. Its real field
+space and reference pairing are
+##{E_n=\mathbb R^{\mathbb Z/n\mathbb Z},\qquad
+g_{0,n}(f,g)=\frac1n\sum_{j=0}^{n-1}f_jg_j.}
+On the complexification use
+#{\langle f,g\rangle_n=n^{-1}\sum_j\overline{f_j}g_j}; its restriction
+to real fields is #{g_{0,n}}.}
+
+\p{Fix a mass squared #{\mu>0}, independent of #{n}. Define the
+cyclic shift, scaled nearest-neighbor Laplacian and precision by
+##{\begin{aligned}
+(T_nf)_j&=f_{j+1},\\
+L_n&=n^2(2I-T_n-T_n^{-1}),\\
+Q_n&=\mu I+L_n,\qquad q_n(f)=g_{0,n}(f,Q_nf).
+\end{aligned}}
+Indices are taken modulo #{n}. These specialize the
+[cyclic shift](fdip-0009) and [difference energy](fdip-0014), with
+the supplied scale #{n^2}. The scalar #{L_n} is the nearest-neighbor
+operator compared with, and generally different from, the centered
+Dirac square in \ref{fdip-000T}.}
+
+\p{Periodic reindexing gives #{T_n^*=T_n^{-1}} in the normalized
+pairing. Consequently
+##{\langle f,L_nf\rangle_n
+=n\sum_{j=0}^{n-1}|f_{j+1}-f_j|^2\geq0.}
+Thus #{Q_n\geq\mu I} and #{Q_n} is invertible, including on constant
+fields. This is the [positive precision](fdip-0004) convention with
+the declared #{g_{0,n}}, rather than a change of the action form.}
+
+\p{The \newvocab{step-function interpolation} #{I_n} assigns to #{f}
+the function with value #{f_j} whenever
+#{j/n\leq x<(j+1)/n}, using the representative #{0\leq x<1}.
+It maps real or complex fields into #{L^2(\mathbb R/\mathbb Z,dx)},
+the square-integrable functions modulo almost-everywhere equality.
+Each interval has length #{1/n}, so
+##{\|I_nf\|_{L^2}^2=\frac1n\sum_j|f_j|^2=\|f\|_n^2.}
+Thus the comparison preserves the specified norm.}
