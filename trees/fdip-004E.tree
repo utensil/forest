@@ -27,9 +27,10 @@ precise assumptions.}
 \node[box] (clifford) at (1.7,-4.3) {Clifford algebras};
 \node[box] (dirac) at (1.7,-6) {Spatial Dirac};
 \node[box] (enriched) at (1.7,-7.8) {Enriched comparison};
-\node[box] (circle) at (-2,-7.8) {Circle approximation};
+\node[box] (circle) at (-2,-6) {Circle approximation};
 \node[box] (arithmetic) at (1.7,-9.6) {Arithmetic};
-\node[box] (synthesis) at (-2,-9.6) {Synthesis};
+\node[box] (realization) at (-2,-9.6) {Realization and observables};
+\node[box] (synthesis) at (-2,-11.4) {Synthesis};
 \draw[flow] (foundation) -- (retained);
 \draw[flow] (retained) -- (background);
 \draw[flow] (background.south) -- (0,-3.5) -| (sector.north);
@@ -38,13 +39,15 @@ precise assumptions.}
 \draw[flow] (clifford.east) -- (3.5,-4.3) |- (enriched.east);
 \draw[flow] (clifford.east) -- (3.9,-4.3) |- (arithmetic.east);
 \draw[flow] (foundation.west) -- (-4,0) |- (circle.west);
-\draw[flow] (circle) -- (synthesis);
-\draw[flow] (enriched.west) -- (-0.15,-7.8) -- (synthesis.east);
-\draw[flow] (arithmetic.west) -- (synthesis.east);
+\draw[flow] (circle.south) -- (-2,-6.9) -- (-3.7,-6.9)
+  |- (synthesis.west);
+\draw[flow] (enriched.west) -- (-0.15,-7.8) -- (realization.north);
+\draw[flow] (arithmetic.west) -- (realization.east);
+\draw[flow] (realization) -- (synthesis);
 \draw[flow,dashed] (enriched.south) -- node[right,font=\scriptsize]
   {context} (arithmetic.north);
-\draw[flow,dashed] (dirac.west) -- (circle.north);
-\node[font=\scriptsize] at (-0.9,-5.7) {context};
+\draw[flow,dashed] (dirac.west) -- (circle.east);
+\node[font=\scriptsize] at (-0.15,-5.2) {context};
 \end{tikzpicture}}
 
 \p{[Retained laws](fdip-0018) combine Schur elimination and Gaussian
@@ -56,6 +59,9 @@ the Clifford chapter. [Spatial Dirac](fdip-001C),
 different subsequent questions, with relative precision restated in the
 arithmetic setting. The [circle approximation](fdip-004G) uses the
 foundation pairings and Gaussian covariance, with spatial Dirac as
-optional comparison. The [synthesis](fdip-003W) compares these results
+optional comparison. [Realization and observables](fdip-004L) use
+incidence, retained laws, enriched transport and the arithmetic
+chapter's fiber criterion; the triangle illustrates the realization
+choice. The [synthesis](fdip-003W) compares these results
 with the conjecture. The opening motivation and forward example links
 orient these readings without adding hypotheses.}

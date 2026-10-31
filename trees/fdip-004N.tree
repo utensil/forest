@@ -1,0 +1,74 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Example}
+\title{A triangle boundary and a filled triangle}
+\date{2026-10-31}
+
+\p{Take the simple undirected triangle on vertices #{\{0,1,2\}}.
+Give its three edges any orientations, then forget them here;
+any parallel copies would also have to be merged before this simple
+undirected comparison. The
+[one-dimensional realization](fdip-004M) retains the three edges
+without a face. In the nonempty-face convention of
+\citet{Definition 6.1.1, p. 61}{maypishevar2025finitespaces},
+its boundary complex and the filled complex have faces
+##{\begin{aligned}
+K_{\partial}
+ &=\{\{0\},\{1\},\{2\},\{0,1\},\{1,2\},\{0,2\}\},\\
+K_{\Delta}&=K_{\partial}\cup\{\{0,1,2\}\}.
+\end{aligned}}
+The added face consists of three pairwise adjacent vertices: it is
+the filled clique triangle. This specifies these two complexes,
+without declaring a general clique-construction functor.}
+
+\p{Choose three noncollinear points #{v_0,v_1,v_2} in the plane.
+Realize each listed face by the convex hull of its vertices, as in
+\citet{Definitions 6.2.1 and 6.2.6, pp. 62-63}{maypishevar2025finitespaces}.
+Then #{|K_{\partial}|} is the perimeter and #{|K_{\Delta}|}
+is the closed triangular region. Traversing the three line segments
+identifies the perimeter with #{[0,3]/(0\sim3)}: the induced map
+is a continuous bijection from a compact space to a Hausdorff space,
+hence a homeomorphism. The map #{t\mapsto\exp(2\pi i t/3)}
+gives the same identification with #{S^1}.}
+
+\texfig{\begin{tikzpicture}[font=\small]
+\coordinate (a0) at (-2.8,0);
+\coordinate (a1) at (-1,0);
+\coordinate (a2) at (-1.9,1.6);
+\coordinate (b0) at (1,0);
+\coordinate (b1) at (2.8,0);
+\coordinate (b2) at (1.9,1.6);
+\draw[semithick] (a0) -- (a1) -- (a2) -- cycle;
+\filldraw[fill=gray!15,semithick] (b0) -- (b1) -- (b2) -- cycle;
+\fill (a0) circle (1.4pt) (a1) circle (1.4pt) (a2) circle (1.4pt);
+\fill (b0) circle (1.4pt) (b1) circle (1.4pt) (b2) circle (1.4pt);
+\node[below left] at (a0) {$0$};
+\node[below right] at (a1) {$1$};
+\node[above] at (a2) {$2$};
+\node[below left] at (b0) {$0$};
+\node[below right] at (b1) {$1$};
+\node[above] at (b2) {$2$};
+\fill (1.9,0.533) circle (1.4pt);
+\node[above right] at (1.9,0.533) {$b$};
+\node at (-1.9,-0.65) {$|K_{\partial}|$: boundary};
+\node at (1.9,-0.65) {$|K_{\Delta}|$: filled};
+\end{tikzpicture}}
+
+\p{The filled triangle contracts to its barycenter
+#{b=(v_0+v_1+v_2)/3} by
+##{H(x,t)=(1-t)x+tb,\qquad 0\leq t\leq 1.}
+Convexity keeps #{H(x,t)} in the triangle, and the formula is
+continuous, with #{H(x,0)=x} and #{H(x,1)=b}.
+The two constructions have the same vertices and edges, but only
+the second supplies a two-dimensional face. Incidence alone therefore
+does not choose between keeping the perimeter and filling it. Each
+specified realization is nevertheless a well-defined construction.}
+
+\p{These comparisons are elementary deductions from the cited
+realization definitions. Mathlib's \leanref{AbstractSimplicialComplex}
+uses nonempty faces and includes each vertex; its
+\leanref{Convex.contractibleSpace} supplies contractibility of a
+nonempty convex subset of a real topological vector space. These
+support the conventions and the contraction step, not the complete
+incidence-to-triangle comparison.}
