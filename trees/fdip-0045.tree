@@ -13,6 +13,48 @@ its induced Clifford automorphism fixes the even center
 pointwise. This action is different from the nontrivial
 involution of that quadratic algebra.}
 
+\p{More generally, let #{q} be a nondegenerate rational quadratic
+form of positive even rank #{n}, and let #{T} be a #{q}-isometry.
+Choose a rational orthogonal basis #{e_1,\ldots,e_n} and put
+#{w=\iota_q(e_1)\cdots\iota_q(e_n)}. Then
+##{\begin{aligned}
+Z(\operatorname{Cl}^+(q))&=\mathbb Q\cdot1\oplus\mathbb Q\cdot w,\\
+\operatorname{Cl}(T)(w)&=(\det T)w.
+\end{aligned}}
+Thus determinant #{+1} fixes the center pointwise, while determinant
+#{-1} induces its nontrivial involution.}
+
+\p{For the center description, use the orthogonal Clifford monomial
+basis. A basis monomial in the even algebra commutes with
+#{\iota_q(e_i)\iota_q(e_j)}, for #{i\ne j}, precisely when its
+index set contains both indices or neither. Every generator square
+is nonzero, so these pairs are invertible and their conjugations
+act diagonally on that basis. A central linear combination can
+therefore involve only the empty and full index sets, since their
+membership indicators must agree for every pair. Conversely both
+#{1} and #{w} commute with every even word. They are independent
+because #{n>0}. This gives the stated center and is the general
+even-rank center description in TauCeti's
+\leanref/tauceti{CliffordAlgebra.mem_center_even_iff_exists_eq_add_smul_volume},
+under its nonempty even nonisotropic orthogonal spanning-list hypotheses over a
+field of characteristic different from two.}
+
+\p{For the action, consider the alternating multilinear map
+##{A(v_1,\ldots,v_n)=\frac1{n!}
+ \sum_{\sigma\in S_n}\operatorname{sgn}(\sigma)
+ \iota_q(v_{\sigma(1)})\cdots\iota_q(v_{\sigma(n)}).}
+On an orthogonal list anticommutation makes this its ordered
+Clifford product. Both #{(e_i)} and #{(Te_i)} are orthogonal,
+so alternation gives
+##{\begin{aligned}
+\operatorname{Cl}(T)(w)&=A(Te_1,\ldots,Te_n)\\
+ &=(\det T)A(e_1,\ldots,e_n)=(\det T)w.
+\end{aligned}}
+Nondegeneracy gives #{(\det T)^2=1}. The center is quadratic
+étale since #{w^2\ne0}; sending #{w} to #{-w} is its unique
+nontrivial involution. This determinant-action argument is separate
+from the cited formal center description.}
+
 \p{To check the assertion in the actual family, let
 #{h_1,\ldots,h_4} be the columns of the matrix #{H} in
 \ref{fdip-000U}. They are a rational orthogonal basis for
@@ -38,5 +80,5 @@ Thus the two-element graph group and the two-element group
 of center automorphisms have different specified actions:
 the former acts trivially on the center, whereas the latter
 acts nontrivially. The center character in
-\ref{fdip-0041} records the arithmetic Galois action, not
+\ref{fdip-0049} records the arithmetic Galois action, not
 this supplied graph symmetry.}
