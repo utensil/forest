@@ -1,0 +1,98 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Example}
+\title{Fourier modes and their Gaussian moments on a circle mesh}
+\date{2026-10-31}
+
+\p{For the [circle mesh](fdip-004H), let #{k\in\mathbb Z} and set
+##{e_k(x)=e^{2\pi ikx},\qquad e_{n,k}(j)=e^{2\pi ikj/n}.}
+Every entry has modulus one, hence #{\|e_{n,k}\|_n=1}. Applying
+the shift and its inverse directly gives
+##{\begin{aligned}
+T_ne_{n,k}&=e^{2\pi ik/n}e_{n,k},\\
+L_ne_{n,k}&=\lambda_{n,k}e_{n,k},\\
+\lambda_{n,k}
+ &=n^2(2-e^{2\pi ik/n}-e^{-2\pi ik/n})\\
+ &=4n^2\sin^2(\pi k/n).
+\end{aligned}}
+This derives the scaled version of the
+[nearest-neighbor symbol](fdip-000T). Frequencies differing by #{n}
+give the same samples. For fixed #{k\ne0}, the condition #{n>2|k|}
+separates #{k} from #{-k} modulo #{n}.}
+
+\p{For #{k=0}, #{e_{n,0}=\mathbf1} and #{\lambda_{n,0}=0}.
+For #{k=1}, a four-point mesh has #{\lambda_{4,1}=32}; an eight-point
+mesh has #{\lambda_{8,1}=64(2-\sqrt2)}. The picture shows the supplied
+unit circle sampled at four equally spaced points. Its arrows indicate
+increasing #{j}; they do not specify a dynamics.}
+
+\texfig{\begin{tikzpicture}[>=Stealth]
+\draw (0,0) circle (12mm);
+\foreach \a in {0,90,180,270} {\fill (\a:12mm) circle (1.1pt);}
+\node[right] at (0:13mm) {$0$};
+\node[above] at (90:13mm) {$1/4$};
+\node[left] at (180:13mm) {$1/2$};
+\node[below] at (270:13mm) {$3/4$};
+\draw[->] (20:12mm) arc (20:65:12mm);
+\draw[->] (110:12mm) arc (110:155:12mm);
+\draw[->] (200:12mm) arc (200:245:12mm);
+\draw[->] (290:12mm) arc (290:335:12mm);
+\end{tikzpicture}}
+
+\p{Now use real fields and the [Gaussian law](fdip-0005)
+##{d\nu_n(f)=Z_n^{-1}e^{-q_n(f)/2}\,d\operatorname{vol}_{g_{0,n}}(f).}
+In raw coordinates the volume and normalization are
+##{\begin{aligned}
+d\operatorname{vol}_{g_{0,n}}&=n^{-n/2}\,df_0\cdots df_{n-1},\\
+Z_n&=(2\pi)^{n/2}(\det Q_n)^{-1/2}.
+\end{aligned}}
+The volume factor follows because #{f\mapsto f/\sqrt n} is an
+orthonormal chart; the partition function is
+\ref{fdip-002T}. The [covariance operator](fdip-002Z) relative to
+#{g_{0,n}} is #{Q_n^{-1}} by \ref{fdip-000B}. Since the exponent
+is #{f^TQ_nf/(2n)}, the raw coordinate covariance matrix is
+#{nQ_n^{-1}}.}
+
+\p{Define the complex Fourier observable
+#{a_{n,k}=n^{-1}\sum_j e^{-2\pi ikj/n}f_j}. It has zero mean.
+Writing #{v=e_{n,k}} and #{v^*} for its conjugate transpose,
+the coordinate covariance gives
+##{\begin{aligned}
+\mathbb E_{\nu_n}|a_{n,k}|^2
+ &=n^{-2}v^*(nQ_n^{-1})v\\
+ &=\frac1{\mu+\lambda_{n,k}},
+\end{aligned}}
+because #{v^*v=n}. All real and imaginary parts and their products
+are integrable polynomials by \ref{fdip-002W}. In particular the
+real mean #{a_{n,0}} has variance #{1/\mu}. At #{k=1}, the four-
+and eight-point second moments are respectively
+#{(\mu+32)^{-1}} and #{(\mu+64(2-\sqrt2))^{-1}}.}
+
+\p{For #{k\ne0} and #{n>2|k|}, put
+##{\begin{aligned}
+c_{n,k}&=\operatorname{Re}a_{n,k}
+  =\frac1n\sum_j\cos(2\pi kj/n)f_j,\\
+s_{n,k}&=-\operatorname{Im}a_{n,k}
+  =\frac1n\sum_j\sin(2\pi kj/n)f_j.
+\end{aligned}}
+The geometric sum #{\sum_j e^{4\pi ikj/n}=0}: its ratio is not one,
+its #{n}-th power is one, and multiplying the sum by one minus
+the ratio gives zero. Taking real and imaginary parts, and using
+the double-angle identities, gives normalized squared norms
+#{1/2} for both the cosine and sine vectors and their orthogonality.
+Both vectors have precision eigenvalue #{\mu+\lambda_{n,k}}, so
+\ref{fdip-000B} yields
+##{\operatorname{Var}(c_{n,k})=\operatorname{Var}(s_{n,k})
+=\frac1{2(\mu+\lambda_{n,k})}.}
+The coefficients of the orthogonal projection
+#{A\cos(2\pi kj/n)+B\sin(2\pi kj/n)} are #{A=2c_{n,k}},
+#{B=2s_{n,k}}. Their variances are four times the displayed
+projection variances.}
+
+\p{The character calculation and normalization above are direct
+deductions from the cited finite operators and Gaussian results.
+Mathlib's \leanref{ZMod.dft} uses the counting-measure forward sum;
+#{a_{n,k}} has the additional factor #{1/n}. This formal Fourier
+transform is a supporting construction, not a formalization of the
+mesh limit.}
