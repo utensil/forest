@@ -20,7 +20,8 @@
 \vocabk{Clifford algebra}{ca-0006}, with canonical #{R}-linear
 \vocabk{Clifford map}{ca-000A} #{\iota:V\to\Cl(Q)}.}
 
-\p{The \newvocab{even subalgebra} is the #{R}-linear span of all
+\p{The \newvocab{even subalgebra}, also called the
+\newvocab{even Clifford algebra}, is the #{R}-linear span of all
 even words:
 ##{
 \Cl^+(Q)=\operatorname{span}_R
@@ -34,7 +35,10 @@ including scalar multiples of #{1}.}
 \p{The product of two even words is an even word. Distributivity therefore
 makes this span closed under multiplication, and the empty word supplies
 the unit. Hence it is an #{R}-subalgebra of #{\Cl(Q)}. In Mathlib its
-underlying submodule is \leanref{CliffordAlgebra.evenOdd} #{Q\,0};
-\leanref{CliffordAlgebra.even_induction} expresses the same closure under
-scalars, addition and left multiplication by pairs of Clifford generators.}
+underlying submodule is \leanref{CliffordAlgebra.evenOdd} #{Q\,0},
+as stated by \leanref{CliffordAlgebra.even_toSubmodule}.
+The induction principle \leanref{CliffordAlgebra.even_induction}
+proves a property of every even element from its scalar case and
+preservation under addition and left multiplication by pairs of
+Clifford generators.}
 }

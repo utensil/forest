@@ -70,10 +70,38 @@ b&=\frac{5x^6}{36}+\frac{53x^4}{24}
    +\frac{97x^2}{12}+\frac{41}{12}.
 \end{aligned}}
 Substitute these into #{F_\lambda=\lambda a-\lambda^2b/2+O(\lambda^3)}.}
+
+\p{The same coefficients arise in two stages. First eliminate
+#{z=y+\xi} with #{x,y} fixed. The moments above, with #{x} replaced
+by #{y}, give
+##{\begin{aligned}
+a_1(x,y)&=\frac{x^4+2y^4+6y^2+3}{24},\\
+b_1(x,y)&=\frac{y^6}{36}+\frac{7y^4}{24}
+           +\frac{2y^2}{3}+\frac16.
+\end{aligned}}
+Here #{a_1=\mathbb E[V\mid x,y]} and
+#{b_1=\operatorname{Var}(V\mid x,y)}; the terms #{x^4,y^4}
+are constant at this stage. Next take #{y=x+\eta}. The even
+moments #{1,3,15,105} of orders #{2,4,6,8} give
+##{\begin{aligned}
+\mathbb E[a_1\mid x]&=\frac{x^4}{8}+\frac{3x^2}{4}+\frac58=a,\\
+\mathbb E[b_1\mid x]&=\frac{x^6}{36}+\frac{17x^4}{24}
+                       +\frac{11x^2}{3}+\frac{17}{8},\\
+\operatorname{Var}(a_1\mid x)&=\frac{x^6}{9}+\frac{3x^4}{2}
+                       +\frac{53x^2}{12}+\frac{31}{24}.
+\end{aligned}}
+The last two lines sum to #{b}. Thus the
+[two-stage identity](fdip-0046) reproduces both direct coefficients,
+including their constants.}
 }
 
-\p{Let #{\mu_Q} be the [normalized Gaussian law](fdip-0005), and
-let #{J} be a formal scalar source for the retained coordinate. Define
+\p{A source on a retained space #{X} is a linear functional
+#{j\in X^*}, coupled by multiplying the weight by #{e^{j(x)}}.
+Under a retained linear isomorphism #{L_X:X\to X'}, a source
+#{j'\in(X')^*} pulls back to #{j'\circ L_X}, since
+#{e^{j'(L_Xx)}=e^{(j'\circ L_X)(x)}}. In this example #{X=\mathbb R}
+and #{j(x)=Jx}, with #{J} treated as a formal scalar variable.
+Let #{\mu_Q} be the [normalized Gaussian law](fdip-0005). Define
 ##{\begin{aligned}
 W(J,\lambda)
 ={}&\log\mathbb E_{\mu_Q}e^{Jx-\lambda V}\\

@@ -1,0 +1,93 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Definition}
+\title{The quadratic center character}
+\date{2026-10-31}
+
+\p{Let #{q} be a nondegenerate rational quadratic form of rank four,
+with half-polar pairing #{b_q}. In particular, forgetting the extra
+data of an [enriched rational object](fdip-0041) supplies such a form.
+Its
+\vocabk{even Clifford algebra}{ca-001J} has quadratic center
+##{E_q=Z(\operatorname{Cl}^+(q))
+ \simeq\mathbb Q[z]/(z^2-d),}
+where #{d} represents the signed discriminant class
+#{\delta(q)\in\mathbb Q^\times /(\mathbb Q^\times)^2}.
+In rank four this is the determinant class of #{b_q}.
+This uses exactly the field/rank-four center statement and
+proof of [the discriminant center](fcap-0043), without its
+subsequent Spin identifications. For an enriched object, in any common
+rational basis,
+##{\det(b_q)=\det(g_0)\det(Q).}
+Each pairing determinant changes by a square under a basis
+change. Thus #{\det Q} alone does not supply #{\delta(q)}
+unless the reference-pairing determinant class is also known.
+TauCeti's \leanref/tauceti{CliffordAlgebra.adjoinRootEquivCenterEven}
+gives the generic center identification from a nonempty even
+orthogonal spanning list of nonisotropic vectors over a field
+of characteristic different from two. It supplies this algebraic
+step, not the character or trace-observable construction.}
+
+\p{Fix an algebraic closure #{\overline{\mathbb Q}}.
+The \newvocab{quadratic center character} is the Galois character
+##{\begin{aligned}
+\chi_q:G_{\mathbb Q}&\longrightarrow\{1,-1\},\\
+\sigma&\longmapsto\frac{\sigma(\sqrt d)}{\sqrt d},
+\end{aligned}}
+where #{G_{\mathbb Q}=\operatorname{Gal}(\overline{\mathbb Q}/\mathbb Q)}.
+The value is independent of the sign of the root and of
+multiplying #{d} by a rational square. If #{d} is a square,
+#{E_q\simeq\mathbb Q\times\mathbb Q} and #{\chi_q} is trivial.
+Otherwise the center is the field #{\mathbb Q(\sqrt d)} and
+#{\chi_q} is its quadratic character. The corresponding algebraic
+dichotomy is formalized by
+\leanref/tauceti{CliffordAlgebra.nonempty_center_even_algEquiv_prod_iff_isSquare_discriminant}
+and
+\leanref/tauceti{CliffordAlgebra.isField_center_even_iff_not_isSquare_discriminant},
+with the same field, characteristic and orthogonal-list hypotheses
+as the center identification above. The cyclotomic description of the
+character is given by Brian Conrad in
+\citet{Section 1, p. 1}{conradQuadraticCharacters}.}
+
+\p{The diagram records two constructions on enriched objects.
+Its left downward arrow is the [independently defined trace ratio](fdip-0041);
+no arrow from #{\chi_q} to #{R} is asserted. A quadratic
+isometry induces an even Clifford algebra isomorphism, hence a
+center isomorphism and the same character.}
+\tikzfigs{0.9}{\begin{tikzpicture}[
+ every node/.style={inner sep=4pt},
+ arr/.style={-{Stealth[length=2mm]},shorten >=2pt,shorten <=2pt}]
+\node (b) at (0,0) {$\mathcal B$};
+\node (q) at (2.2,0) {$(V,q)$};
+\node (c) at (5,0) {$\operatorname{Cl}^+(q)$};
+\node (e) at (5,-1.5) {$E_q$};
+\node (x) at (2.2,-1.5) {$\chi_q$};
+\node (r) at (0,-1.5) {$R(\mathcal B)\in\mathbb Q$};
+\draw[arr] (b)--(q); \draw[arr] (q)--(c);
+\draw[arr] (c)--(e); \draw[arr] (e)--(x);
+\draw[arr] (b)--(r);
+\end{tikzpicture}}
+
+\p{For a nonsquare class, let #{d_0} be its squarefree integer
+representative and put #{D=d_0} if #{d_0\equiv1\pmod4},
+and #{D=4d_0} otherwise. The primitive Dirichlet representative
+is #{\chi_D(n)=(D/n)}, with Kronecker-symbol convention and
+value zero when #{\gcd(n,|D|)>1}; its conductor is #{|D|}.
+For the split class use the trivial character of conductor one.
+These conventions agree with Brian Conrad's
+\citet{Sections 1 and 3, especially Theorem 3.4}{conradQuadraticCharacters}.
+For an integer #{D} satisfying \leanref{Int.IsFundamentalDiscr} #{D},
+TauCeti's \leanref/tauceti{TauCeti.Multiquadratic.fundamentalDiscriminantChar}
+defines the integer-valued Dirichlet character of level #{|D|}, and
+\leanref/tauceti{TauCeti.Multiquadratic.isPrimitive_fundamentalDiscriminantChar}
+proves it primitive, so its conductor is #{|D|}.
+These declarations supply this character/conductor step, including #{D=1}.
+Fix the uncompleted convention
+##{L(s,\chi_D)=\prod_{p\ \mathrm{prime}}
+ (1-\chi_D(p)p^{-s})^{-1}}
+for #{\operatorname{Re}s>1}, and the comparison point #{s=2}. The product converges absolutely;
+no gamma or conductor factor is included. The Euler convention
+is Brian Conrad's \citet{p. 5}{conradQuadraticCharacters}.
+The [factorization criterion](fdip-0042) asks whether this
+character retains enough information to recover #{R}.}

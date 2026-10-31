@@ -5,8 +5,9 @@
 \title{Stationary elimination and the tree contribution}
 \date{2026-10-30}
 
-\p{For the [three-coordinate quartic action](fdip-0047), minimizing
-the eliminated variables and integrating their fluctuations agree
+\p{For the [three-coordinate quartic action](fdip-0047), formal
+power-series stationarity around the Gaussian stationary point
+and integration of the eliminated fluctuations agree
 on some coefficients but not all. Write #{u=(y,z)},
 #{u_0=(x,x)} and
 ##{H=C^{-1}=\begin{pmatrix}1&1\\1&2\end{pmatrix}.}
@@ -27,8 +28,8 @@ There is a unique formal stationary solution
 For real #{\lambda\geq0}, the action is coercive and strictly
 convex in #{u}: the quadratic Hessian #{C} is positive definite
 and the quartic summands are convex. It therefore has a unique
-minimizer. The calculation below uses only formal stationarity
-at #{\lambda=0}.}
+minimizer. The calculation below uses only formal power-series
+stationarity around #{u_0} at #{\lambda=0}.}
 
 \proof{
 \p{The equation is
@@ -86,8 +87,10 @@ interaction is zero, whereas that stationary value is #{x^2/2}.}
 
 \p{This is the \newvocab{tree contribution} in the loop grading of
 \citet{v2, Section 3.6 and Theorem 3.12, pp. 38-39}{etingof2024mathematical}.
-In that convention a Gaussian contraction contributes #{\hbar}
-and an interaction vertex contributes #{\hbar^{-1}}. The logarithm
+We adapt Etingof's rescaled convention to the displayed weight
+#{\exp(-\lambda V/\hbar)} with covariance #{\hbar H}:
+a Gaussian contraction contributes #{\hbar} and an interaction
+vertex contributes #{\hbar^{-1}}. The logarithm
 selects connected graphs; after multiplication by #{-\hbar},
 a connected graph with #{e} contracted edges and #{v} interaction
 vertices has power #{\hbar^{e-v+1}}. Its number of independent
