@@ -1,0 +1,37 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Remark}
+\title{Scalar factorization, localization and gluing}
+\date{2026-10-31}
+
+\p{The [retained-variance example](fdip-004P) tests scalar
+factorization: for specified functions #{c:X\to Y} and
+#{r:X\to\mathbb R}, it asks whether #{r=F\circ c} for a
+function on #{c(X)}. The [fiber criterion](fdip-0042) answers
+exactly this question, without supplying continuity or any
+categorical structure.}
+
+\p{Functorial factorization instead starts with [categories](tt-0002) and
+[functors](tt-0014) #{U:\mathcal B\to\mathcal D} and
+#{O:\mathcal B\to\mathcal A}, and asks for
+#{\overline O:\mathcal D\to\mathcal A} and a
+[natural isomorphism](tt-001H)
+#{O\cong\overline O\circ U}. A \em{localization} at a declared
+class #{W} of arrows has an additional universal property: it
+inverts those arrows and is universal among functors that do so
+\citet{Section 4.27, Tag 04VB}{stacks2017stacks}.
+A generic [forgetful functor](tt-003R) is not thereby a localization.
+Mathlib's \leanref{CategoryTheory.Localization.lift} requires
+both a localization functor and a functor that inverts #{W};
+these hypotheses are absent from the scalar example.}
+
+\p{Local-to-global descent requires a site with covers,
+restriction maps and compatible data on overlaps, together with
+an effective gluing statement. For category-valued data, a stack
+also requires a fibred category and sheaves of morphisms
+\citet{Definition 8.4.1, Tag 0268}{stacks2017stacks}.
+The [enriched background groupoid](fdip-000X) and the scalar
+variance calculation supply none of this cover-and-gluing structure.
+The groupoid is a category of finite backgrounds, not necessarily a
+finite category. No local-to-global descent theorem follows.}

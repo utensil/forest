@@ -1,0 +1,42 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Definition}
+\title{Forgetting a weight while retaining its endpoint}
+\date{2026-10-31}
+
+\p{For each #{w>0}, let #{\mathcal B_w} be the
+\vocabk{finite Gaussian background}{fdip-000G} with vertices
+#{V=\{0,1\}}, one edge #{0\to1} of weight #{w}, counting
+pairing, mass #{m=1}, retained set #{R=\{0\}} and eliminated
+set #{V\setminus R=\{1\}}. The field coordinates remain labelled.
+The [weighted Laplacian](fdip-0007) and massive precision are
+##{\begin{aligned}
+L_w&=w\begin{pmatrix}1&-1\\-1&1\end{pmatrix},\\
+Q_w&=I+L_w=\begin{pmatrix}1+w&-w\\-w&1+w\end{pmatrix}.
+\end{aligned}}
+Indeed the incidence row is #{(-1,1)}. The vectors #{(1,1)}
+and #{(1,-1)} have precision eigenvalues #{1} and #{1+2w},
+so #{Q_w>0}. The [normalized Gaussian law](fdip-0005) is therefore
+well-defined on counting-coordinate volume #{df_0\,df_1}, with
+##{\begin{aligned}
+d\mu_w(f)&=Z_w^{-1}\exp(-f^TQ_wf/2)\,df_0\,df_1,\\
+Z_w&=\frac{2\pi}{\sqrt{1+2w}}.
+\end{aligned}}
+The normalizer is the two-dimensional specialization of
+[positive Gaussian normalization](fdip-002T).}
+
+\p{Let #{X=\{\mathcal B_w:w>0\}} and let #{Y=\{U\}} be the
+singleton whose element is the unweighted labelled directed edge
+#{0\to1} with distinguished endpoint #{0}. Define
+##{\begin{aligned}
+c:X&\longrightarrow Y,&c(\mathcal B_w)&=U,\\
+r:X&\longrightarrow\mathbb R,&r(\mathcal B_w)&=\int f_0^2\,d\mu_w(f).
+\end{aligned}}
+Thus #{c} forgets the varying weight while retaining the labels,
+orientation and selected endpoint; the mass and reference pairing
+are fixed throughout the family. The observable is integrable by
+[Gaussian polynomial integrability](fdip-002W). The coordinate has
+[zero mean](fdip-000B), so #{r} is the variance at the retained endpoint.
+Composing #{c} with the [interval realization](fdip-004M) gives
+the same labelled interval with that endpoint for every #{w}.}
