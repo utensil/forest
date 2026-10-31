@@ -1,0 +1,31 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Example}
+\title{Transpose as an ordinary involution}
+\date{2026-10-31}
+
+\p{Let #{R} be a commutative unital ring and #{A=M_n(R)}. Define
+#{(X^T)_{ij}=X_{ji}}. This gives an
+[ordinary linear involution](fdip-001G):
+##{(rX+Y)^T=rX^T+Y^T,\qquad I^T=I,\qquad
+(XY)^T=Y^TX^T,\qquad (X^T)^T=X.}}
+\proof{
+\p{The first, second and fourth identities follow by evaluating the
+#{(i,j)} entry. For product reversal, commutativity gives
+##{\begin{aligned}
+((XY)^T)_{ij}&=\sum_k X_{jk}Y_{ki}\\
+&=\sum_k Y_{ki}X_{jk}=(Y^TX^T)_{ij}.
+\end{aligned}}
+The same formulas include #{n=0}, with empty sums.}
+}
+\p{For instance, transposing #{\left(\begin{smallmatrix}a&b\\c&d\end{smallmatrix}\right)}
+exchanges #{b} and #{c}. Over #{\mathbb C}, transpose is complex-linear,
+whereas conjugate transpose is not: #{(iI)^*=-iI\ne iI^*}
+when #{n>0}. Conjugate transpose is nevertheless real-linear, so the
+coefficient ring matters. The [counting adjoint](fdip-001H) recovers
+ordinary transpose from its specified bilinear pairing.}
+\p{These are entrywise deductions from the definition. Mathlib's
+\leanref{Matrix.transpose_add}, \leanref{Matrix.transpose_smul},
+\leanref{Matrix.transpose_mul} and \leanref{Matrix.transpose_transpose}
+record the corresponding identities; see \citek{mathlib2020lean}.}

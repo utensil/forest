@@ -1,0 +1,30 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Example}
+\title{Volumes of four-coordinate boxes}
+\date{2026-10-31}
+
+\p{Keep the four-cycle carrier #{V=\{0,1,2,3\}}. For real
+#{a_i\le b_i}, let
+##{B=\{x\in\mathbb R^4:a_i<x_i\le b_i\text{ for }i=0,1,2,3\}.}
+The [coordinate Lebesgue measure](fdip-002H) gives
+##{\lambda_V(B)=\prod_{i=0}^3(b_i-a_i).}
+Each factor is the length of its half-open interval, and the defining
+rectangle law multiplies them. If an endpoint pair is equal, the box
+is empty and the formula gives zero.}
+\p{For example,
+##{\begin{aligned}
+\lambda_V((0,1]^4)&=1,\\
+\lambda_V((0,2]\times(0,1]\times(-1,1]\times(0,3])&=12,\\
+\lambda_V((-k,k]^4)&=(2k)^4\quad(k>0).
+\end{aligned}}
+The last volumes are unbounded as #{k} increases, so the whole
+configuration space has infinite volume. Neither the edge weights nor
+a mass parameter enter these values. Reference volume is not a
+probability law; the later [Gaussian density](fdip-0005) supplies a
+normalized weighting.}
+\p{This is the rectangle formula of \ref{fdip-002H}, from
+\citet{Proposition 1.7.11, pp. 197-199, preliminary version}{tao2011measure}.
+Mathlib's \leanref{MeasureTheory.Measure.pi_pi} gives the finite-product
+rectangle law; \leanref{Real.volume_Ioc} gives each interval length.}
