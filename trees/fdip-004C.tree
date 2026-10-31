@@ -1,0 +1,31 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Remark}
+\title{Topology, Borel sets and coordinate observables}
+\date{2026-10-31}
+
+\p{On the four-cycle, a configuration is a point
+#{x=(x_0,x_1,x_2,x_3)\in\mathbb R^4}. The
+[product topology](fdip-002C) makes #{(-1,1)^4} open. The
+[Borel sigma-algebra](fdip-002D) also contains the closed half-space
+#{H=\{x:x_0\le0\}}, because its complement is open. Thus Borel
+sets include both open and closed coordinate conditions.}
+\p{The coordinate observable #{p_0(x)=x_0} is continuous: the preimage
+of an open interval is its coordinate cylinder. For every Borel
+#{A\subseteq\mathbb R}, the set #{p_0^{-1}(A)} is Borel by the
+coordinate-product definition and \ref{fdip-002E}, proving
+[measurability](fdip-002F). The indicator #{\mathbf1_H} is also
+measurable: its preimage of a Borel set is one of
+#{\varnothing,H,H^c,\mathbb R^4}. It is not continuous at the origin,
+since its values on #{(1/k,0,0,0)}, for positive integers #{k}, are
+all zero while its value at their limit is one.}
+\p{Mathlib's \leanref{continuous_apply} and
+\leanref{measurable_pi_apply} give the coordinate projection facts
+for product topologies and product measurable spaces, respectively.}
+\p{These deductions distinguish topology, measurable sets and
+measurable maps using the conventions of
+\citet{Definitions 1.4.16 and 1.4.32, pp. 87 and 95, preliminary version}{tao2011measure}.
+They say nothing by themselves about integrability. For example, the
+constant observable #{1} is measurable, but its integral against the
+[coordinate reference measure](fdip-002H) on #{\mathbb R^4} is infinite.}

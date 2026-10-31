@@ -1,0 +1,55 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Remark}
+\title{How to read these notes}
+\date{2026-10-31}
+
+\p{The displayed order is a safe reading route. Its first box groups
+the eight foundation chapters, from [fields on finite carriers](fdip-0015) to
+[constrained Gaussian laws](fdip-003V); it does not make every foundation
+a premise of every later result. Solid arrows show selected uses of
+definitions and results, not all prerequisites. The dashed route is
+optional context for relative precision. Each statement names its
+precise assumptions.}
+
+\texfig{\begin{tikzpicture}[
+  box/.style={draw,rounded corners=2pt,align=center,font=\small,
+    text width=27mm,minimum height=10mm,inner sep=3pt},
+  flow/.style={-{Stealth[length=2mm]},semithick}
+]
+\node[box,text width=41mm] (foundation) at (0,0)
+  {Foundations\\first eight chapters};
+\node[box] (retained) at (0,-1.4) {Retained laws};
+\node[box] (background) at (0,-2.8) {Backgrounds};
+\node[box] (sector) at (-2,-4.3) {Sectors};
+\node[box] (clifford) at (1.7,-4.3) {Clifford algebras};
+\node[box] (dirac) at (1.7,-6) {Spatial Dirac};
+\node[box] (enriched) at (1.7,-7.8) {Enriched comparison};
+\node[box] (arithmetic) at (1.7,-9.6) {Arithmetic};
+\node[box] (synthesis) at (-2,-9.6) {Synthesis};
+\draw[flow] (foundation) -- (retained);
+\draw[flow] (retained) -- (background);
+\draw[flow] (background.south) -- (0,-3.5) -| (sector.north);
+\draw[flow] (background.south) -- (0,-3.5) -| (clifford.north);
+\draw[flow] (clifford) -- (dirac);
+\draw[flow] (clifford.east) -- (3.5,-4.3) |- (enriched.east);
+\draw[flow] (clifford.east) -- (3.9,-4.3) |- (arithmetic.east);
+\draw[flow] (sector) -- (synthesis);
+\draw[flow] (dirac.west) -- (-0.15,-6) -- (synthesis.north east);
+\draw[flow] (enriched.west) -- (-0.15,-7.8) -- (synthesis.east);
+\draw[flow] (arithmetic.west) -- (synthesis.east);
+\draw[flow,dashed] (enriched.south) -- node[right,font=\scriptsize]
+  {context} (arithmetic.north);
+\end{tikzpicture}}
+
+\p{[Retained laws](fdip-0018) combine Schur elimination and Gaussian
+integration; [backgrounds](fdip-0019) then specify which data and laws
+are transported. [Sectors](fdip-001A) and [Clifford algebras](fdip-001B)
+use these constructions; the sector comparison is restated locally in
+the Clifford chapter. [Spatial Dirac](fdip-001C),
+[enriched comparison](fdip-001E) and [arithmetic](fdip-001D) develop
+different subsequent questions, with relative precision restated in the
+arithmetic setting. The [synthesis](fdip-003W) compares their results
+with the conjecture. The opening motivation and forward example links
+orient these readings without adding hypotheses.}

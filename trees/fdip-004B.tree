@@ -1,0 +1,37 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Example}
+\title{The weighted four-cycle Laplacian}
+\date{2026-10-31}
+
+\p{Use the [alternating four-cycle](fdip-0003), with vertices
+#{0,1,2,3}, edges #{e_i:i\to i+1}, and positive real weights
+#{(1,t,1,t)}. For a field #{f=(a,b,c,d)}, the incidence values are
+#{Df=(b-a,c-b,d-c,a-d)}. The
+[counting adjoint](fdip-0007) sends an edge field to
+##{D^*(u_0,u_1,u_2,u_3)
+  =(u_3-u_0,u_0-u_1,u_1-u_2,u_2-u_3).}
+First multiply by #{W_t=\operatorname{diag}(1,t,1,t)}, then apply
+#{D^*}. The resulting #{L_t=D^*W_tD} has coordinate matrix
+##{L_t=\begin{pmatrix}
+1+t&-1&0&-t\\
+-1&1+t&-t&0\\
+0&-t&1+t&-1\\
+-t&0&-1&1+t
+\end{pmatrix}.}}
+\p{For example, its first coordinate is
+#{t(a-d)-(b-a)=(1+t)a-b-td}; the other coordinates follow from
+the same return formula. Thus
+##{L_t\delta_0=(1+t,-1,0,-t),\qquad L_t\mathbf1=0,}
+and the counting energy is
+##{\langle f,L_tf\rangle
+=(b-a)^2+t(c-b)^2+(d-c)^2+t(a-d)^2.}
+The counting adjoint #{D^*} does not depend on #{t}. The weighted
+return map #{D^*W_t}, and hence #{L_t}, do. When #{t=1} the two
+return maps coincide; otherwise the factors #{t} must be retained.}
+\p{This calculation substitutes the four-cycle data into
+\ref{fdip-0007}; its incidence convention follows
+\citet{Section 2.1, p. 4}{spielman2009effective}.
+The [cyclic energy factorization](fdip-0014) gives the corresponding
+operator identity.}
