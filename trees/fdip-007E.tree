@@ -1,0 +1,41 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Example}
+\title{Matching one plaquette coefficient}
+\date{2026-11-01}
+
+\p{Consider a single #{U(1)} plaquette variable with the
+[normalized Wilson or Villain weight](fdip-007D). Write
+#{r(\beta)=I_1(\beta)/I_0(\beta)}. The coefficient series makes
+#{r>0}; the integral of #{(1-\cos\theta)e^{\beta\cos\theta}}
+is strictly positive, so #{r<1}. Matching the fundamental coefficient
+therefore determines a unique positive parameter
+##{\beta_V(\beta)=-\frac1{2\log r(\beta)}.}
+At this parameter the Villain coefficient at #{n} is
+#{r(\beta)^{n^2}}, whereas the Wilson coefficient is
+#{I_n(\beta)/I_0(\beta)}.}
+
+\p{At #{\beta=2}, the convergent series gives
+##{r\approx0.697774657964008,\qquad
+ \beta_V\approx1.38943282120604.}
+The first coefficients are
+##{\begin{array}{c|c|c}
+n&\widehat c_n^W&\widehat c_n^V\\\hline
+0&1&1\\
+1&0.697774657964008&0.697774657964008\\
+2&0.302225342035992&0.237061359207224
+\end{array}}
+The negative coefficients equal the corresponding positive ones.
+These numbers are evaluations of the exact series in
+\ref{fdip-007D}; for example, at #{\beta=2} the ratio of successive
+terms of #{I_n} is #{1/((j+1)(j+|n|+1))}, providing a geometric
+bound on the remaining tail once #{j} is fixed.}
+
+\p{For either normalized even weight,
+#{\mathbb E[\cos(n\theta)]=\widehat c_n}. Thus the two models
+agree on the fundamental cosine expectation and disagree on the
+second harmonic. They are different probability laws and different
+actions, even after adjusting the coupling and discarding additive
+action constants. This is a one-plaquette comparison, not an assertion
+about a many-plaquette continuum limit.}
