@@ -1,0 +1,62 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Example}
+\title{Short periods add winding terms}
+\date{2026-11-01}
+
+\p{Start with all links equal to one on an #{L\times L} square
+torus, then change one horizontal link to minus one. Keep the real
+scalar convention, #{D=4+m^2}, and write
+#{\Delta W=W(U_{\mathrm{flip}})-W(1)}.
+Two adjacent plaquettes change sign, so
+#{\Delta\sum_pU_p=-4}. For #{L\ge6}, the
+[induced plaquette theorem](fdip-0072) gives
+##{\Delta W=\frac4{D^4}+O(D^{-6}),\qquad
+ \frac{\Delta W}{4/D^4}\longrightarrow1.}
+The constants in the error bound may depend on the fixed volume.}
+
+\p{For #{L=4}, there are also straight four-step walks winding
+around a periodic row or column. The changed edge lies in one
+horizontal winding cycle. It has four starting vertices and two
+orientations, so eight based walks change holonomy from one to minus
+one. Their contribution to #{\Delta\operatorname{tr}H^4} is
+#{-16}, in addition to the plaquettes' #{8(-4)=-32}.
+There are no odd closed walks because this torus is bipartite.
+The same convergent series therefore gives
+##{\Delta W=\frac6{D^4}+O(D^{-6}),\qquad
+ \frac{\Delta W}{4/D^4}\longrightarrow\frac32.}
+The extra leading term is winding holonomy, not a different local
+plaquette coefficient.}
+
+\texfig{
+\begin{tikzpicture}[>=stealth,
+ vertex/.style={circle,draw,inner sep=2pt,minimum size=6mm}]
+\node[vertex] (a) at (0,0) {$0$};
+\node[vertex] (b) at (1.4,0) {$1$};
+\node[vertex] (c) at (2.8,0) {$2$};
+\node[vertex] (d) at (4.2,0) {$3$};
+\draw[->,very thick] (a) -- node[above] {$-1$} (b);
+\draw[->] (b) -- node[above] {$1$} (c);
+\draw[->] (c) -- node[above] {$1$} (d);
+\draw[->] (d) to[out=-90,in=-90,looseness=0.6]
+ node[below] {$1$} (a);
+\end{tikzpicture}
+}
+
+\p{The diagram shows one horizontal row of the #{4\times4} torus;
+vertical edges are omitted. The curved edge is the periodic join.
+The four-step winding product is minus one, independently of the
+two neighboring plaquette products.}
+
+\p{For #{L=5}, length-four winding is absent, but each periodic
+row or column has straight winding walks of length five. The changed
+row has ten such based oriented walks, so
+#{\Delta\operatorname{tr}H^5=-20}. No other five-step return can
+wind: displacement five requires all five steps along that axis.
+The plaquette change remains #{\Delta\operatorname{tr}H^4=-32}.
+Consequently
+##{\Delta W=\frac4{D^4}+\frac2{D^5}+O(D^{-6}).}
+Thus a period-five hypothesis would leave an order #{D^{-5}} term
+outside the claimed order #{D^{-6}} remainder. This is why the
+preceding theorem requires both periods to be at least six.}
