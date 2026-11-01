@@ -1,0 +1,56 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Lemma}
+\title{A sufficient positive-half decomposition}
+\date{2026-11-01}
+
+\p{Let a finite set #{X} have an involution #{\theta} and halves
+#{X_-=\theta X_+} with #{X_+\cup X_-=X} and
+#{X_+\cap X_-=\operatorname{Fix}(\theta)=X_0}.
+Use the observable conventions of \ref{fdip-007M}; both torus
+reflections there have these properties.
+Let #{\nu} be a probability measure supported on
+a compact interval of #{\mathbb R}, and put
+#{\mu_0=\bigotimes_{v\in X}\nu}. Suppose a real Hamiltonian
+has the form
+##{-H=A+\Theta A+\sum_{\alpha=1}^q C_\alpha\Theta C_\alpha,}
+where #{A,C_1,\ldots,C_q} are bounded real functions in
+#{\mathcal A_+}; the sum may be empty. Then the probability law
+##{d\mu=Z^{-1}e^{-H}\,d\mu_0,\qquad
+ Z=\int e^{-H}\,d\mu_0}
+is reflection invariant and reflection positive. This is the
+complex-observable version of
+\citet{Lemma 10.8, pp. 442–443}{friedli2017statistical}.}
+
+\proof{
+\p{First consider the product reference. Conditional on the field
+#{b=\phi|_{X_0}} at the fixed sites, the two interiors are independent
+and have matching product laws under reflection. The boundary field
+is a single shared variable. For any bounded positive-half
+observable #{F}, therefore,
+##{\int(\Theta F)F\,d\mu_0
+ =\int\left|\int F(\phi_+,b)\,d\nu_+(\phi_+)\right|^2
+ \,d\nu_0(b)\ge0.}
+Here #{\nu_+} is the product over #{X_+\setminus X_0} and
+#{\nu_0} the product over #{X_0}. When #{X_0} is empty the
+outer integral is evaluation at the unique empty configuration.
+This also proves the product case of
+\citet{Lemma 10.7, p. 442}{friedli2017statistical}.}
+
+\p{The displayed decomposition is invariant under reflection
+because its functions are real and multiplication commutes.
+The reference law is invariant as well. Boundedness makes
+#{0<Z<\infty} and permits uniform absolute expansion of the
+crossing exponential. For #{f\in\mathcal A_+}, this gives
+##{\begin{aligned}
+ZB_\mu(f,f)
+ &=\sum_{n\in\mathbb N^q}\frac1{n!}
+   B_{\mu_0}\left(fe^A C^n,fe^A C^n\right),\\
+n!&=\prod_\alpha n_\alpha!,\qquad
+C^n=\prod_\alpha C_\alpha^{n_\alpha}.
+\end{aligned}}
+Every summand is nonnegative by the conditional product identity.
+The sum converges absolutely by the bounded exponential majorant,
+so the claimed positivity follows.}
+}

@@ -1,0 +1,87 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Definition}
+\title{Reflections, halves and the positive-time domain}
+\date{2026-11-01}
+
+\p{Let #{Y} be a finite spatial torus with coordinate periods at
+least three, or a point. Put
+#{X=Y\times\mathbb Z/(2M)}, where #{M\ge2}; the second coordinate
+is the chosen time direction. The nearest-neighbor graph joins sites
+differing by one coordinate step, with each undirected edge counted
+once. Time indices below are taken modulo #{2M}. Define the
+\newvocab{site reflection} and \newvocab{link reflection} by
+##{\theta_s(y,t)=(y,-t),\qquad
+   \theta_\ell(y,t)=(y,1-t).}
+Their positive halves and fixed sets are
+##{\begin{aligned}
+X_+^s&=Y\times\{0,\ldots,M\},&
+X_0^s&=Y\times\{0,M\},\\
+X_+^\ell&=Y\times\{1,\ldots,M\},&
+X_0^\ell&=\varnothing.
+\end{aligned}}
+In either case set #{X_-=\theta X_+}. Then
+#{X_+\cup X_-=X} and #{X_+\cap X_-=X_0}; sites in #{X_0}
+are fixed individually.}
+
+\texfig{\begin{tikzpicture}[
+  cell/.style={draw,minimum width=7mm,minimum height=7mm,
+    inner sep=1pt,font=\small},
+  label/.style={font=\small,anchor=west}
+]
+\node[label] at (-0.35,0.85) {Site reflection: $t\mapsto-t$};
+\node[cell] at (0,0) {$0^*$};
+\node[cell] at (0.75,0) {$1^+$};
+\node[cell] at (1.5,0) {$2^+$};
+\node[cell] at (2.25,0) {$3^+$};
+\node[cell] at (3,0) {$4^*$};
+\node[cell] at (3.75,0) {$5^-$};
+\node[cell] at (4.5,0) {$6^-$};
+\node[cell] at (5.25,0) {$7^-$};
+\node[label] at (-0.35,-0.95) {Link reflection: $t\mapsto1-t$};
+\node[cell] at (0,-1.8) {$0^-$};
+\node[cell] at (0.75,-1.8) {$1^+$};
+\node[cell] at (1.5,-1.8) {$2^+$};
+\node[cell] at (2.25,-1.8) {$3^+$};
+\node[cell] at (3,-1.8) {$4^+$};
+\node[cell] at (3.75,-1.8) {$5^-$};
+\node[cell] at (4.5,-1.8) {$6^-$};
+\node[cell] at (5.25,-1.8) {$7^-$};
+\end{tikzpicture}}
+
+\p{The diagram shows one time circle of length eight. A plus or
+minus marks an interior site of that half; a star marks a fixed
+site shared by both halves. Time #{7} is adjacent to time #{0}.
+The boxes display membership in the halves, not separate field copies.}
+
+\p{For a real scalar configuration #{\phi\in\mathbb R^X}, write
+#{(\theta\phi)_v=\phi_{\theta v}}. On complex observables define
+##{(\Theta f)(\phi)=\overline{f(\theta\phi)}.}
+Thus #{\Theta} is an antilinear multiplicative involution.
+Let #{\mathcal A_+} be the algebra of bounded complex measurable
+functions depending only on #{\phi|_{X_+}}. Let #{\mu} be a
+probability measure on #{\mathbb R^X}. Reflection invariance means
+#{\theta_*\mu=\mu}. In addition, \newvocab{reflection positivity}
+means
+##{B_\mu(f,f):=\int(\Theta f)f\,d\mu\ge0
+ \qquad(f\in\mathcal A_+).}
+The inequality includes the assertion that the integral is real.
+Under reflection invariance, #{B_\mu(f,g)=\int(\Theta f)g\,d\mu}
+is Hermitian and conjugate-linear in its first argument. These are
+the complex-observable conventions corresponding to
+\citet{Definition 10.5, p. 441}{friedli2017statistical}.}
+
+\p{The larger positive-time domain is
+#{\mathcal H_+=L^2(\mathbb R^X,\mu;\mathbb C)}
+restricted to functions measurable in the coordinates of #{X_+}.
+It is a closed vector subspace, generally not an algebra under
+pointwise multiplication. Reflection invariance gives
+##{|B_\mu(f,g)|\le\|f\|_{L^2(\mu)}\|g\|_{L^2(\mu)}.}
+Truncating the values of a function shows that #{\mathcal A_+}
+is dense in #{\mathcal H_+}. Consequently positivity on
+#{\mathcal A_+} extends to this domain. For a reflection-positive
+law, the quotient by
+#{\mathcal N=\{f:B_\mu(f,f)=0\}}, with the induced pairing,
+has a Hilbert-space completion. This definition supplies no
+translation operator on that quotient.}

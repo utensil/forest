@@ -1,0 +1,49 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Example}
+\title{The two-site reflection Gram matrix}
+\date{2026-11-01}
+
+\p{Take two real field coordinates #{x,y}, interchanged by
+reflection, and the centered Gaussian precision
+##{Q=\begin{pmatrix}a&-w\\-w&a\end{pmatrix},
+ \qquad a>|w|.}
+The positive-half observables depend on #{x}. The covariance is
+##{G=Q^{-1}
+ =\frac1{a^2-w^2}\begin{pmatrix}a&w\\w&a\end{pmatrix}.}
+For #{a=2,w=1}, this becomes
+##{G=\begin{pmatrix}2/3&1/3\\1/3&2/3\end{pmatrix}.}
+The energy has positive mass squared #{a-w=1} and crossing weight
+#{w=1}, so the same cutoff criterion proves reflection positivity.}
+
+\p{For #{f_0=1,f_1=x,f_2=x^2}, the reflection Gram matrix is
+##{\left(B_\mu(f_j,f_k)\right)_{j,k=0}^2
+ =\begin{pmatrix}
+ 1&0&2/3\\
+ 0&1/3&0\\
+ 2/3&0&2/3
+ \end{pmatrix}.}
+Odd Gaussian moments vanish, and
+#{\mathbb E[x^2y^2]=(2/3)^2+2(1/3)^2=2/3}
+by the [four-factor Gaussian calculation](fdip-005T).
+The leading principal minors are #{1}, #{1/3} and #{2/27},
+so this finite Gram matrix is positive definite. Positivity of
+this one matrix is an illustration; the criterion proves the
+claim for all positive-half observables.}
+
+\p{TauCeti's
+\leanref/tauceti{TauCeti.Probability.integral_mul_mul_mul_multivariateGaussian}
+proves the fourth-moment identity for a finite coordinate index set
+and a positive-semidefinite covariance, including repeated indices.
+Apply it with the displayed #{G} and indices #{x,x,y,y}.
+This correspondence supports the moment calculation; the reflected
+pairing and its Gram-matrix positivity are computed here.}
+
+\p{If instead #{a=2,w=-1}, the precision remains positive definite
+and its Gaussian remains reflection invariant. But
+##{B_\mu(x,x)=\mathbb E[xy]=-\frac13<0.}
+Thus reflection invariance and ordinary Gaussian positivity do not
+imply reflection positivity. The witness #{x} is square-integrable;
+bounded value truncations also have a negative pairing once the
+cutoff is large enough, by continuity of #{B_\mu}.}
