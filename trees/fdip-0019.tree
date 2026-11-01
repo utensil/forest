@@ -4,6 +4,24 @@
 \title{Backgrounds and symmetry}
 \date{2026-10-20}
 
+\texfig{\begin{tikzpicture}[x=1cm,y=1cm,font=\sffamily,
+  box/.style={draw=black,line width=0.5pt,rounded corners=2pt,align=center,execute at begin node={\hyphenpenalty=10000\exhyphenpenalty=10000},
+    font=\sffamily\small,minimum height=7mm,inner sep=2.5pt,text width=#1},
+  ext/.style={draw=black,densely dotted,line width=0.4pt,rounded corners=2pt,align=center,execute at begin node={\hyphenpenalty=10000\exhyphenpenalty=10000},
+    font=\sffamily\small,text=black!60,minimum height=7mm,inner sep=2.5pt,text width=#1},
+  arr/.style={-{Stealth[length=2.2mm]},line width=0.6pt},
+  lab/.style={font=\sffamily\footnotesize\itshape,inner sep=1.5pt,fill=white,align=center}]
+\node[ext=6.4cm] (II) at (7,7.05) {Part II: Gaussian laws};
+\node[box=7.4cm] (a) at (7,5.2) {Backgrounds and symmetry};
+\node[box=7.4cm] (b) at (7,3.8) {Group-algebra sectors};
+\node[ext=4.8cm] (IV) at (3.5,0.0) {Part IV: Finite-group symmetry};
+\node[ext=5.6cm] (V) at (10.5,0.0) {Part V: Clifford algebras and Dirac operators};
+\draw[arr] (II) -- node[lab,midway,right=1mm] {what can be exchanged in a discrete world\\ while the physics stays the same?} (a);
+\draw[arr] (a) -- (b);
+\draw[arr] (b.south -| IV.north) -- node[lab,midway,pos=0.2,right=1mm] {does symmetry still sort the physics into sectors\\ when the order of exchanges matters?} (IV);
+\draw[arr] (b.south -| V.north) -- node[lab,midway,pos=0.8,left=1mm] {how does matter with spin, like the electron,\\ arise in a discrete setting?} (V);
+\end{tikzpicture}}
+
 \p{Which changes preserve the model while transporting its equations,
 expectations and retained law? A symmetry preserves the specified data;
 it transports observables rather than fixing every observable function
