@@ -4,6 +4,28 @@
 \title{Reflection positivity on a finite time lattice}
 \date{2026-11-01}
 
+\texfig{\begin{tikzpicture}[x=1cm,y=1cm,font=\sffamily,
+  box/.style={draw=black,line width=0.5pt,rounded corners=2pt,align=center,execute at begin node={\hyphenpenalty=10000\exhyphenpenalty=10000},
+    font=\sffamily\small,minimum height=7mm,inner sep=2.5pt,text width=#1},
+  ext/.style={draw=black,densely dotted,line width=0.4pt,rounded corners=2pt,align=center,execute at begin node={\hyphenpenalty=10000\exhyphenpenalty=10000},
+    font=\sffamily\small,text=black!60,minimum height=7mm,inner sep=2.5pt,text width=#1},
+  arr/.style={-{Stealth[length=2.2mm]},line width=0.6pt},
+  lab/.style={font=\sffamily\footnotesize\itshape,inner sep=1.5pt,fill=white,align=center}]
+\node[ext=5.0cm] (IX) at (5.0,7.8) {Part IX: Induced action};
+\node[ext=4.4cm] (X) at (11.6,4.8) {Part X: Gauge fields};
+\node[box=5.0cm] (a) at (5.0,6.1) {Reflection positivity on a finite time lattice};
+\node[box=5.0cm] (b) at (5.0,4.8) {Transfer operators of the Gaussian chain};
+\node[box=5.0cm] (c) at (5.0,3.5) {Gauge transfer operators at finite volume};
+\node[box=5.0cm] (d) at (5.0,2.2) {Gauss's law and charged multiplicities};
+\node[ext=5.0cm] (XIII) at (5.0,0.8) {Part XIII: Structure};
+\draw[arr] (IX) -- node[lab,midway,right=1mm] {where does time come from\\ in a discrete setting?} (a);
+\draw[arr] (a) -- (b);
+\draw[arr] (b) -- (c);
+\draw[arr] (X) |- (c.east);
+\draw[arr] (c) -- (d);
+\draw[arr] (d) -- node[lab,midway,right=1mm] {can the physics be rebuilt\\ from its observables alone?} (XIII);
+\end{tikzpicture}}
+
 \p{Where could time evolution come from when a law describes all lattice
 sites at once? Choose one direction to test as Euclidean time. Reflection
 positivity asks whether observables on one half of the lattice have a
