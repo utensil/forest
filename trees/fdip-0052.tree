@@ -13,6 +13,35 @@ The [graph precision](fdip-000A) is #{Q=L+I}.
 Each edge is undirected for the energy; arbitrary chosen orientations
 are transported with the [signed convention](fdip-004S).}
 
+\texfig{\begin{tikzpicture}[
+  vertex/.style={circle,draw,fill=white,inner sep=2pt,
+    minimum size=7mm,font=\small},
+  shifted/.style={densely dashed,semithick}
+]
+\node[vertex] (a0) at (0,0) {$0$};
+\node[vertex] (a1) at (1.8,0) {$1$};
+\node[vertex] (a2) at (3.6,0) {$2$};
+\node[vertex] (b0) at (0,-1.8) {$0'$};
+\node[vertex] (b1) at (1.8,-1.8) {$1'$};
+\node[vertex] (b2) at (3.6,-1.8) {$2'$};
+\draw (a0) -- (a1) -- (a2);
+\draw (a0) to[bend left=40] (a2);
+\draw[very thick] (b0) -- (b1) -- (b2);
+\draw[very thick] (b0) to[bend right=40] (b2);
+\draw (a0) -- (b0);
+\draw (a1) -- (b1);
+\draw (a2) -- (b2);
+\draw[shifted] (a0) -- (b1);
+\draw[shifted] (a1) -- (b2);
+\draw[shifted,rounded corners=3pt] (a2) -- (4.3,0)
+  -- (4.3,-3) -- (-0.7,-3) -- (-0.7,-1.8) -- (b0);
+\end{tikzpicture}}
+
+\p{Thin solid edges have weight #{1}; the thick lower triangle has
+weight #{2}; dashed edges have weight #{1/2}. The outer dashed edge
+joins #{2} to #{0'}, completing the shift modulo three. Crossings
+without a circle are not vertices.}
+
 \p{The simultaneous rotation #{x\mapsto x+1} generates #{C_3}.
 It is the entire weight-preserving vertex automorphism group.
 The weighted degrees #{7/2} and #{11/2} distinguish the two layers.
