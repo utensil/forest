@@ -1,0 +1,55 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Definition}
+\title{Plaquette transport and Wilson loops}
+\date{2026-11-01}
+
+\p{Let #{G} be a finite group on a [square complex](fdip-006M).
+A [connection](fdip-006D) is #{U\in G^E}, with
+#{U_{\bar e}=U_e^{-1}} on a reversed edge. For a traversed path
+#{C=(e_1^{\epsilon_1},\ldots,e_k^{\epsilon_k})}, define
+##{U_C=U_{e_k}^{\epsilon_k}\cdots U_{e_1}^{\epsilon_1}.}
+The first transport acts on the right. The
+\newvocab{plaquette holonomy} is #{U_p=U_{\partial p}}.
+The [gauge group](fdip-006E) #{\mathcal G=G^V} acts by
+##{(gU)_e=g_{h(e)}U_eg_{s(e)}^{-1}.}
+Cancellation at successive vertices gives
+##{(gU)_C=g_{h(C)}U_Cg_{s(C)}^{-1}.}
+For a closed path based at #{v}, this is conjugation by #{g_v}.}
+
+\p{Choose a unitary representation #{\rho:G\to U(d)} with #{d>0},
+and let #{\chi_\rho(g)=\operatorname{Tr}\rho(g)} be its
+[character](fgap-001M).
+The \newvocab{Wilson loop} of a closed path is the unnormalized trace
+##{W_\rho(C)=\chi_\rho(U_C).}
+It is gauge invariant. Changing the starting vertex conjugates the
+holonomy, so it does not change this trace. Reversing the path replaces
+#{U_C} by #{U_C^{-1}}, hence replaces #{W_\rho(C)} by its complex
+conjugate. In particular #{\operatorname{Re}W_\rho(C)} is independent
+of the chosen boundary orientation. These are the transport and trace
+conventions of \citet{equations (6.14)–(6.19), pp. 7–8}{wingate2025lattice}.}
+
+\texfig{\begin{tikzpicture}[
+  flow/.style={-{Stealth[length=2mm]},semithick},font=\small]
+\coordinate (v0) at (0,0);
+\coordinate (v1) at (3,0);
+\coordinate (v2) at (3,2.2);
+\coordinate (v3) at (0,2.2);
+\draw[flow] (v0) -- node[below] {$U_1$} (v1);
+\draw[flow] (v1) -- node[right] {$U_2$} (v2);
+\draw[flow] (v3) -- node[above] {$U_3$} (v2);
+\draw[flow] (v0) -- node[left] {$U_4$} (v3);
+\fill (v0) circle (1.3pt) (v1) circle (1.3pt)
+ (v2) circle (1.3pt) (v3) circle (1.3pt);
+\node[below left] at (v0) {$v_0$};
+\node[below right] at (v1) {$v_1$};
+\node[above right] at (v2) {$v_2$};
+\node[above left] at (v3) {$v_3$};
+\node at (1.5,1.1) {$U_p=U_4^{-1}U_3^{-1}U_2U_1$};
+\end{tikzpicture}}
+
+\p{The arrows show the chosen edge orientations and the labels are
+connection values, not scalar weights. The boundary traversal is
+##{v_0\to v_1\to v_2\to v_3\to v_0.}
+It uses the top and left edges backwards, accounting for both inverses.}
