@@ -1,0 +1,64 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Corollary}
+\title{The oscillator Hamiltonian}
+\date{2026-11-01}
+
+\p{For the normalized transfer operator
+#{\widehat T=T/\lambda_0} of \ref{fdip-007U}, the
+\newvocab{transfer Hamiltonian} is the spectral logarithm
+#{H=-\log\widehat T}. Explicitly, if
+#{f=\sum_{n\ge0}c_nh_n^s}, its domain and action are
+##{\begin{aligned}
+D(H)&=\left\{f:\sum_{n=0}^\infty
+                    (n\omega)^2|c_n|^2<\infty\right\},\\
+Hf&=\sum_{n=0}^\infty n\omega c_nh_n^s.
+\end{aligned}}
+It is nonnegative and self-adjoint, with eigenvalues #{n\omega}.
+Its zero eigenspace is the line spanned by #{h_0^s}, and its mass
+gap is #{\omega}. It is unbounded even though
+#{\widehat T} is bounded and injective.}
+
+\p{On the finite Hermite span, it has the differential expression
+##{Hf=\frac\omega{2s}
+ \left(-f''+s^2x^2f-sf\right).}
+The closure of this expression on that span is the above spectral
+operator. This is the harmonic oscillator with its ground energy
+subtracted. The time step has length one; a specified step
+#{a_t>0} instead gives #{H/a_t} and gap #{\omega /a_t}.}
+
+\proof{
+\p{The unitary coefficient map #{f\mapsto(c_n)} identifies
+#{\widehat T} with multiplication by #{q^n>0} on #{\ell^2}.
+Its negative logarithm is multiplication by #{n\omega} on the
+stated maximal domain. A real diagonal operator on that domain
+is self-adjoint; its quadratic form is nonnegative. The listed
+eigenspaces, spectrum and gap follow directly, and
+#{\|Hh_n^s\|=n\omega} proves unboundedness. Finite coefficient
+truncations converge both in norm and after applying #{H}, so
+the finite Hermite span is a core.}
+
+\p{Differentiating the Hermite generating function and comparing
+coefficients gives
+#{\operatorname{He}_n''(u)-u\operatorname{He}_n'(u)
++n\operatorname{He}_n(u)=0}. Substitution into the definition of
+#{h_n^s} yields
+##{-(h_n^s)''+s^2x^2h_n^s=(2n+1)s\,h_n^s.}
+The displayed differential expression therefore acts as
+#{n\omega} on every basis vector. The core statement proves
+that its closure is exactly #{H}.}
+}
+
+\p{TauCeti's
+\leanref/tauceti{TauCeti.hermiteFunction_oscillator}
+proves the pointwise differential identity at #{s=1} for the
+same normalized Hermite functions. Dilation gives the identity
+above for #{s>0}; the spectral logarithm, its domain and the
+closure statement are supplied by the preceding argument.}
+
+\p{The logarithmic prescription follows
+\citet{Eq. (5.5), p. 4}{wingate2025lattice}, with the leading
+transfer eigenvalue removed explicitly. It constructs the
+Hamiltonian for a Gaussian model of finite spatial volume.
+No limit in time, spatial volume or lattice spacing is needed.}

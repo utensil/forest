@@ -1,0 +1,99 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{Periodic traces and field correlations}
+\date{2026-11-01}
+
+\p{Use the kernel and parameters of \ref{fdip-007T} and
+\ref{fdip-007U}. For every integer #{N\ge1},
+##{\operatorname{Tr}T^N
+ =\frac{\lambda_0^N}{1-q^N}
+ =\frac{(2\pi /w)^{N/2}}{2\sinh(N\omega /2)}.}
+For #{N\ge3}, this equals the periodic Gaussian normalizer
+#{Z_N}. If #{f_0,\ldots,f_{N-1}} are bounded complex measurable
+functions and #{M_f} denotes multiplication by #{f}, then
+##{\mathbb E_{\mu_N}\prod_{j=0}^{N-1}f_j(x_j)
+ =\frac{\operatorname{Tr}
+ (M_{f_0}T M_{f_1}T\cdots M_{f_{N-1}}T)}{Z_N}.}
+In particular, bounded two-point observables have the usual
+cyclic trace expression with #{T^{N-t}} and #{T^t}.}
+
+\p{For #{N\ge3} and the unbounded coordinate observable,
+let #{Xf(x)=xf(x)}
+on its domain #{\{f\in L^2:xf\in L^2\}}. For integers
+#{0\le t\le N}, initially on finite Hermite sums, put
+##{A_t=T^{t/2}XT^{(N-t)/2}.}
+It has a unique Hilbert–Schmidt extension. The precise coordinate
+trace formula is
+##{\begin{aligned}
+\mathbb E_{\mu_N}[x_0x_t]
+ &=\frac{\operatorname{Tr}(A_t^*A_t)}{Z_N}\\
+ &=\frac{q^t+q^{N-t}}{2s(1-q^N)},
+ \qquad x_N=x_0.
+\end{aligned}}
+Here #{\operatorname{Tr}(A_t^*A_t)} supplies the meaning of the
+frequently written unbounded expression
+#{\operatorname{Tr}(T^{N-t}XT^tX)}.}
+
+\proof{
+\p{The eigenvalues in \ref{fdip-007U} give the first trace by a
+geometric sum. The remaining expression uses
+#{\lambda_0=\sqrt{2\pi /w}\,q^{1/2}} and
+#{q^{-N/2}-q^{N/2}=2\sinh(N\omega /2)}.
+On the ordinary cycle, the precision is
+#{Q_N=m^2I+wL_{C_N}}. The [twisted-cycle determinant](fdip-006G)
+at trivial holonomy, with the scalar factor #{w} restored, gives
+##{\det Q_N=w^N\bigl(2\cosh(N\omega)-2\bigr).}
+The [real Gaussian integral](fdip-002T) therefore gives exactly
+the same #{Z_N}. The trace identity for #{N=1,2} remains an
+operator identity; no ordinary simple-cycle identification is
+used for those two periods.}
+
+\p{For bounded insertions, #{M_fT} is Hilbert–Schmidt.
+The product of two such operators is trace class; multiplying
+by the remaining bounded factors preserves this property.
+The Hilbert–Schmidt kernel trace identity
+##{\operatorname{Tr}(AB)=\int_{\mathbb R^2}A(x,y)B(y,x)\,dx\,dy}
+follows by expanding the two kernels in an orthonormal basis
+and taking their #{L^2} pairing. Applying it to the cyclic
+product and composing the intervening kernels yields
+##{\operatorname{Tr}(M_{f_0}T\cdots M_{f_{N-1}}T)
+ =\int_{\mathbb R^N}\prod_j f_j(x_j)
+   \prod_jK(x_j,x_{j+1})\,d^Nx.}
+All repeated integrals are absolutely convergent: the absolute
+integrand is bounded by #{\prod_j\|f_j\|_\infty} times the
+integrable massive Gaussian. The kernel factorization in
+\ref{fdip-007T} proves the asserted expectation.}
+
+\p{For the coordinate insertion, the Hermite generating function
+gives the recurrence
+##{Xh_n^s=\frac{\sqrt{n+1}\,h_{n+1}^s
+                  +\sqrt n\,h_{n-1}^s}{\sqrt{2s}},}
+where the second term is zero at #{n=0}. Consequently the matrix
+of #{A_t} has only two adjacent diagonals. Summing their squared
+entries gives
+##{\begin{aligned}
+\|A_t\|_{\mathrm{HS}}^2
+ &=\frac{\lambda_0^N}{2s}
+   \frac{q^t+q^{N-t}}{(1-q^N)^2}.
+\end{aligned}}
+The sum is finite also at #{t=0,N}. Thus the operator on the dense
+finite Hermite span extends uniquely to a Hilbert–Schmidt operator.
+Thus #{A_t^*A_t} is positive trace class and its trace is this
+squared norm. Division by #{Z_N} gives the displayed value.
+Finally, the [periodic covariance calculation](fdip-0057), with
+#{s=w\sinh\omega}, gives this same value for
+#{(Q_N^{-1})_{0t}}. Gaussian covariance therefore identifies it
+with #{\mathbb E_{\mu_N}[x_0x_t]}, including the periodic endpoint.
+No cyclic manipulation of an undefined unbounded product is used.}
+}
+
+\p{This finite periodic calculation makes the trace notation of
+\citet{Eq. (5.4), p. 4}{wingate2025lattice} explicit for the
+Gaussian chain. That source subsequently takes an infinite-time
+limit; the identities here hold at finite #{N}. The Ising transfer
+and Markov-chain comparison in
+\citet{Section 3.10.4, p. 139}{friedli2017statistical}
+concerns a different state space and is background for the
+transfer interpretation, not a premise for this Gaussian proof.}
