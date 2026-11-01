@@ -1,0 +1,50 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Lemma}
+\title{Plaquette signs and the two torus holonomies}
+\date{2026-11-01}
+
+\p{On the [square torus](fdip-006M), let
+#{G=\mathbb Z_2=\{1,-1\}} under multiplication, with
+#{n=|V|=P} and #{|E|=2n}. The map sending a connection to its
+plaquette signs has image exactly
+##{\left\{(u_p)\in\{1,-1\}^{\mathcal P}:\prod_pu_p=1\right\}.}
+Every such sign configuration has #{2^{n+1}} preimages in #{G^E}.
+It consists of four gauge orbits, distinguished by two fundamental
+cycle holonomies.}
+
+\proof{
+\p{Each edge occurs twice among the square boundaries, so
+#{\prod_pU_p=1}. Conversely, choose a spanning tree in the connected
+dual graph, whose vertices are squares and whose edges cross their
+shared primal edges. Root this tree and set all primal edge signs to
+#{1}. Process dual leaves towards the root. At each leaf, its unique
+remaining dual-tree edge crosses a primal edge shared with its parent.
+Flip that primal sign exactly when needed to give the leaf its
+prescribed plaquette sign, then remove the leaf. This changes only the
+leaf and its parent among the unprocessed squares and changes no
+previously fixed square. At the last square, the global product
+constraint forces the prescribed root sign. This constructs every
+even-parity plaquette pattern.}
+
+\p{The plaquette map is a homomorphism between finite abelian groups.
+Multiplication by one preimage identifies its kernel with any nonempty
+fiber. There are #{2^{P-1}} target patterns, hence each fiber has
+##{\frac{2^{|E|}}{2^{P-1}}=2^{n+1}}
+elements. For a connected graph, a gauge transformation fixes an
+abelian connection exactly when #{g_{h(e)}=g_{s(e)}} on every edge,
+that is, when all vertex values are the same. The stabilizer has two
+elements, so every gauge orbit has #{2^{n-1}} elements. The fiber
+therefore contains #{2^{n+1}/2^{n-1}=4} orbits.}
+
+\p{Take a horizontal fundamental cycle in one row and a vertical one
+in one column. Multiply by #{-1} every horizontal edge crossing the
+periodic seam from #{x=N_1-1} to #{x=0}. Each plaquette contains zero
+or two such edges, so its sign is unchanged, while the horizontal
+cycle holonomy flips and the vertical one does not. The analogous
+vertical seam operation flips just the other holonomy. The two
+operations give four possibilities for these gauge-invariant signs.
+They are distinct gauge orbits, and the count above shows that they
+exhaust the four orbits in each plaquette fiber.}
+}
