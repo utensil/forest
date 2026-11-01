@@ -1,0 +1,84 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{Unit quaternions and binary rotation groups}
+\date{2026-11-01}
+
+\p{The unit quaternions are isomorphic to #{SU(2)} by
+##{M(a+bi+cj+dk)=
+ \begin{pmatrix}a+bi&c+di\\-c+di&a-bi\end{pmatrix}.}
+Conjugation on the imaginary quaternions defines a surjective
+homomorphism
+##{\pi:SU(2)\longrightarrow SO(3),\qquad
+ \pi(M(q))(v)=qvq^{-1},\qquad\ker\pi=\{1,-1\}.}
+For the proper rotation groups #{R_T,R_O,R_I} of the regular
+tetrahedron, octahedron and icosahedron, define
+##{2T=\pi^{-1}(R_T),\qquad
+ 2O=\pi^{-1}(R_O),\qquad 2I=\pi^{-1}(R_I).}
+Their orders are respectively #{24,48,120}. Each quotient by
+#{\{1,-1\}} is its indicated rotation group.}
+
+\proof{
+\p{The images of #{i,j,k} satisfy the quaternion multiplication
+relations, so #{M} is an injective real-algebra homomorphism.
+Direct calculation gives
+##{M(q)^*M(q)=|q|^2I,\qquad\det M(q)=|q|^2.}
+Conversely, a special unitary matrix of degree two has the form
+##{\begin{pmatrix}z&w\\-\overline w&\overline z\end{pmatrix},
+ \qquad |z|^2+|w|^2=1,}
+by orthonormality of its columns and determinant one. Taking real and
+imaginary parts of #{z,w} gives a unique unit quaternion. This proves
+the group identification.}
+
+\p{Conjugation preserves imaginary quaternions and their norm,
+so gives an orthogonal map of #{\mathbb R^3}. Its determinant is
+one: it depends continuously on the unit quaternion, the sphere
+#{S^3} is connected, and at #{q=1} it equals one. A quaternion
+commuting with all of #{i,j,k} is real, so the kernel on unit
+quaternions is #{\{1,-1\}}. More explicitly, for a unit imaginary
+quaternion #{n} and #{q=\cos(\theta /2)+n\sin(\theta /2)},
+quaternion multiplication gives
+##{qvq^{-1}=v\cos\theta+(n\times v)\sin\theta
+ +n(n\cdot v)(1-\cos\theta).}
+This is rotation through #{\theta} about #{n}. Every element of
+#{SO(3)} has an axis: its real orthogonal eigenvalues include one,
+and its restriction to the perpendicular plane is a planar rotation.
+The displayed formula therefore proves surjectivity.}
+
+\p{The proper rotations of a regular solid act transitively on its
+vertices. A rotation fixing a vertex must rotate its incident edges
+cyclically about the center-to-vertex axis; all those cyclic rotations
+are symmetries. The tetrahedron has four vertices with stabilizer
+order three; the octahedron has six with stabilizer order four; the
+icosahedron has twelve with stabilizer order five. Orbit–stabilizer
+therefore gives #{|R_T|=12}, #{|R_O|=24}, #{|R_I|=60}.
+Every rotation has exactly two lifts under #{\pi}, giving the stated
+binary group orders and quotients.}
+}
+
+\texfig{\begin{tikzcd}[column sep=large,row sep=large]
+\pi^{-1}(R) \arrow[r,hook] \arrow[d,"2:1"'] &
+ SU(2) \arrow[d,"\pi"] \\
+R \arrow[r,hook] & SO(3)
+\end{tikzcd}}
+
+\p{For any of the three rotation groups #{R}, the square records
+the subgroup and its central double cover. In particular, the
+[Hurwitz-unit model](fgap-000K) of #{2T} is this tetrahedral
+preimage. Its quaternion generators #{i,j,k} and
+#{(-1+i+j+k)/2} preserve the four imaginary vectors
+#{(1,1,1)}, #{(1,-1,-1)}, #{(-1,1,-1)}, #{(-1,-1,1)}:
+the first generators change two coordinate signs, and the last
+cyclically permutes coordinates. Its twenty-four elements therefore
+exhaust the preimage. This identifies the group used in the
+[finite spinor gauge example](fdip-006Y).}
+
+\p{TauCeti's
+\leanref/tauceti{Quaternion.unitaryEquivSpecialUnitaryGroup}
+formalizes precisely the group equivalence between unit Hamilton
+quaternions and #{SU(2)}, using the displayed matrix map. This
+correspondence does not assert the #{SO(3)} quotient or the three
+binary subgroup identifications; those have their separate arguments
+above. A finite subgroup supplies an available group action, not a
+physical interpretation of that action.}
