@@ -1,0 +1,109 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{From Frobenius-Schur indicators to real Gaussian types}
+\date{2026-11-01}
+
+\p{Let #{W} be an irreducible real representation of a finite group,
+#{D=\operatorname{End}_G(W)}, and #{\chi} an irreducible constituent
+of #{W_{\mathbb C}=W\otimes_{\mathbb R}\mathbb C}.
+The [Frobenius-Schur indicator](fgap-0021) gives exactly the following
+possibilities, where #{X_\chi} denotes a complex module of character
+#{\chi}:
+##{\begin{array}{c|c|c|c}
+\nu_2(\chi)&D&W_{\mathbb C}&\dim_{\mathbb R}W\\\hline
+1&\mathbb R&X_\chi&\chi(1)\\
+0&\mathbb C&X_\chi\oplus X_{\bar\chi}&2\chi(1)\\
+-1&\mathbb H&X_\chi\oplus X_\chi&2\chi(1).
+\end{array}}
+In the middle row #{\chi\ne\bar\chi}. In the last row #{\chi(1)}
+is even and #{\dim_{\mathbb H}W=\chi(1)/2}.
+The form trichotomy alone is not the real descent argument;
+these assertions use the bridge proved below. They agree with
+\citet{Section 13.2, Proposition 39, p. 109}{serre1977linear}.}
+
+\proof{
+\p{Commutation with the finitely many real group matrices is a
+system of real linear equations. Complexifying its solution space
+therefore gives
+##{\operatorname{End}_G(W_{\mathbb C})
+ \cong D\otimes_{\mathbb R}\mathbb C.}
+For #{D=\mathbb R,\mathbb C,\mathbb H} the right side is respectively
+#{\mathbb C}, #{\mathbb C\times\mathbb C}, #{M_2(\mathbb C)}.
+For the middle identity use
+#{z\otimes a\mapsto(za,\bar z a)}; for the last use the usual
+quaternion two-by-two complex matrices, whose complex span is all
+#{M_2(\mathbb C)}, as in \ref{fcap-0042}.
+Complex semisimplicity identifies the left side with
+#{\prod_\psi M_{n_\psi}(\mathbb C)}, where #{n_\psi} is the
+constituent multiplicity. Its simple factors and their dimensions
+force one constituent once, two distinct constituents once each,
+or one constituent twice, respectively.}
+
+\p{Let #{c(w+iv)=w-iv}. It exchanges the #{\psi} and
+#{\bar\psi} components. If #{D=\mathbb R}, the single complex
+irreducible has the real form #{W}. Averaging a real inner product
+and complexifying it supplies an invariant nondegenerate symmetric
+bilinear form, so #{\nu_2=1}. If #{D=\mathbb C} and either of the
+two inequivalent components were fixed by #{c}, its fixed vectors
+would be a nonzero proper real invariant subspace of #{W}.
+Indeed, for a #{c}-stable space every vector is uniquely
+#{(x+cx)/2+i(x-cx)/(2i)} with both components fixed by #{c}.
+Irreducibility excludes this, so the two characters are a nonreal
+conjugate pair and #{\nu_2=0}.}
+
+\p{If #{D=\mathbb H}, conjugation fixes the sole constituent type,
+so #{\chi=\bar\chi} and #{\nu_2=\pm1}. Suppose #{\nu_2=1}.
+Choose a nondegenerate invariant symmetric complex bilinear form
+#{B} on #{X_\chi} and an averaged invariant positive Hermitian
+form #{h}, conjugate-linear in its first argument. There is a unique
+antilinear map #{J} with #{B(x,y)=h(Jx,y)}, and it commutes with
+#{G}. In an #{h}-orthonormal basis write #{B(x,y)=x^TAy}.
+Then #{A^T=A}, #{Jx=\bar A\bar x} and
+#{J^2=\bar A A=A^*A>0}. By complex Schur's lemma
+#{J^2=tI} for a positive real #{t}. Replacing #{J} by
+#{t^{-1/2}J} makes #{J^2=I}. Its fixed space #{U} is a real
+form of #{X_\chi}, by the same two-component formula. This is the
+irreducible specialization of
+\citet{Section 13.2, Theorem 31, pp. 106-108}{serre1977linear}.}
+
+\p{The real module #{U} is irreducible, since a proper real
+invariant subspace would complexify to a proper subspace of
+#{X_\chi}. There is a nonzero complex intertwiner
+#{U_{\mathbb C}\to W_{\mathbb C}=X_\chi^{\oplus2}}.
+In real bases its real or imaginary part gives a nonzero real
+intertwiner #{U\to W}, which must be an isomorphism by
+irreducibility. But #{\dim_{\mathbb R}U=\chi(1)} and
+#{\dim_{\mathbb R}W=2\chi(1)}, a contradiction.
+Thus #{\nu_2=-1}. The three division algebras exhaust the cases
+and give distinct indicators, so all implications reverse.
+Finally #{W} is a left #{\mathbb H}-space, making its real dimension
+a multiple of four; hence #{\chi(1)} is even.}
+}
+
+\p{For an equivariant centered real Gaussian on an isotypic sector,
+use the coordinates #{z_1,\ldots,z_r\in D^m} of
+\ref{fdip-0050}. Its real density is proportional to
+##{\exp\left(-\frac12\sum_{a=1}^r
+ \operatorname{Re}(z_a^*Q_\Xi z_a)\right).}
+The real covariance is the Hermitian multiplicity matrix #{Q_\Xi^{-1}}
+acting on each column. For #{D=\mathbb C}, multiplication of a
+column by #{e^{i\theta}} preserves this real law: this is circular
+symmetry. With the displayed real normalization the complex second
+moment is #{\mathbb E[z_a z_a^*]=2Q_\Xi^{-1}}.
+For #{D=\mathbb H}, right multiplication #{z_a\mapsto z_a q}
+by a unit quaternion likewise preserves the real quadratic form
+and Lebesgue measure. This is the asserted quaternionic symmetry;
+left multiplication by an arbitrary quaternion need not commute
+with the entries of #{Q_\Xi}. These coordinate symmetries need not
+be additional graph symmetries. The real Gaussian normalization and
+covariance are those of \ref{fdip-000H}.}
+
+\p{TauCeti's
+\leanref/tauceti{Representation.frobeniusSchurIndicator_eq_one_iff_isRealizableOverReal}
+proves the indicator-one/real-realizability equivalence for an
+irreducible complex representation of a finite group. It supports
+the real-form step; the full commutant identification, all three
+real dimensions and the Gaussian coordinate statements are the
+arguments above.}

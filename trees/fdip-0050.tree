@@ -1,0 +1,75 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Corollary}
+\title{Positive multiplicity blocks and real dimensions}
+\date{2026-11-01}
+
+\p{Under the [commutant identification](fdip-004Z), an equivariant
+self-adjoint positive definite precision #{Q} is specified by
+#{Q_\Xi\in M_{m_\Xi}(D_\Xi)} with #{Q_\Xi^*=Q_\Xi>0}.
+Thus all such precisions form an open cone in a real vector space
+of dimension
+##{\sum_\Xi h(m_\Xi,D_\Xi),\qquad
+\begin{array}{c|ccc}
+D&\mathbb R&\mathbb C&\mathbb H\\\hline
+h(m,D)&m(m+1)/2&m^2&2m^2-m.
+\end{array}}
+For a vertex permutation representation this dimension also counts
+#{G}-orbits on unordered pairs #{\{u,v\}}, including #{u=v}.
+This is the full cone of equivariant precisions; graph Laplacians
+with prescribed edges and positive weights generally form a smaller
+family.}
+
+\proof{
+\p{Choose an orthonormal basis of #{W_\Xi} as a left
+#{D_\Xi}-space, using the positive adjoint of \ref{fdip-004Z}.
+Explicitly, an orthonormal real set
+#{e,ie} or #{e,ie,je,ke} spans one such scalar line;
+its real orthogonal complement is #{D_\Xi}-stable, so induction
+constructs the basis. Put
+#{r_\Xi=\dim_{D_\Xi}W_\Xi} and
+#{d_D=\dim_{\mathbb R}D\in\{1,2,4\}}.
+Expanding each of the #{m_\Xi} vectors in this basis identifies
+#{H_\Xi} with #{r_\Xi} columns in #{D_\Xi^{m_\Xi}}.
+The same matrix #{Q_\Xi} acts on every column by left multiplication.
+The real inner product is the sum of
+#{\operatorname{Re}(z^*w)} on these columns.
+Consequently positivity of #{Q|_{H_\Xi}} is exactly positivity of
+#{Q_\Xi}.}
+
+\p{A Hermitian matrix has #{m} real diagonal entries and
+#{m(m-1)/2} freely chosen off-diagonal entries in #{D}; the opposite
+entries are their conjugates. This gives
+#{h(m,D)=m+d_Dm(m-1)/2}. Positive definiteness is open because
+#{\langle Qx,x\rangle} has a strictly positive minimum on the unit
+sphere. In permutation coordinates a symmetric commuting matrix
+is constant on unordered-pair orbits, whose indicator matrices
+again form a basis.}
+}
+
+\p{These coordinates fix the determinant convention without a
+noncommutative determinant ambiguity:
+##{\begin{aligned}
+\dim_{\mathbb R}H_\Xi&=m_\Xi r_\Xi d_{D_\Xi},\\
+\det_{\mathbb R}(Q|_{H_\Xi})
+ &=\det_{\mathbb R}(Q_\Xi:D_\Xi^{m_\Xi}\to
+ D_\Xi^{m_\Xi})^{r_\Xi}.
+\end{aligned}}
+For a positive Hermitian block with eigenvalues
+#{\lambda_1,\ldots,\lambda_m}, the latter real determinant is
+#{\prod_j\lambda_j^{d_D}}. The spectral assertion follows by taking
+an eigenvector of the real self-adjoint operator: its eigenspace is
+stable under right scalar multiplication on #{D^m}; its scalar
+line has an invariant orthogonal complement, and induction gives
+a #{D}-orthonormal eigenbasis. In particular a complex determinant
+is squared, and the product of quaternionic Hermitian eigenvalues
+is raised to the fourth power, before taking the exponent #{r_\Xi}.
+This is the positive-matrix specialization of the real block
+classification in
+\citet{Section 13.2, pp. 108-109}{serre1977linear}.}
+
+\p{For a graph write #{L=d^*Wd} and #{Q=L+m^2I}, with #{m^2>0}.
+The multiplicity matrices obey #{Q_\Xi=L_\Xi+m^2I}.
+A zero Laplacian eigenvalue therefore gives a strictly positive
+precision eigenvalue #{m^2}, not a normalized massless Gaussian.}
