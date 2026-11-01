@@ -1,0 +1,57 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Definition}
+\title{A connection background and its positive precision}
+\date{2026-11-01}
+
+\p{Fix a finite or compact Hausdorff group #{G} and a finite-dimensional real or
+complex representation #{\rho:G\to\operatorname{GL}(F)}, continuous
+in the compact case. Supply a positive inner product for which #{\rho}
+is orthogonal or unitary. If necessary, start from any positive inner
+product and average it:
+##{\langle x,y\rangle_G
+=\int_G\langle\rho(g)x,\rho(g)y\rangle_0\,dg.}
+Here #{dg} is normalized right Haar measure; for a finite group it is the
+uniform average. Haar existence and inversion from left to right are
+given in \citet{Theorem 4.3, pp. 6–9; Proposition 4.1, pp. 4–5}{gleason2010haar}.
+Compactness makes its nonzero total mass finite, allowing normalization.
+Right invariance gives invariance of the displayed
+pairing. The integrand is continuous and strictly positive for
+#{x=y\ne0}, so the average is positive. The invariant metric is part
+of the data used below.}
+
+\p{On a [finite incidence presentation](fdip-0002), a
+\newvocab{connection} assigns #{U_e\in G} to every chosen oriented
+edge. Reversing that edge assigns #{U_{\bar e}=U_e^{-1}}.
+Set #{H=F^V} and #{K=F^E}, with the sums of the supplied fiber inner
+products. Write #{U_e} also for #{\rho(U_e)} in operator formulas.
+For scalar weights #{w_e>0} and mass #{m>0}, define
+##{\begin{aligned}
+(d_Uf)(e)&=f(h(e))-U_ef(s(e)),\\
+W&=\operatorname{diag}(w_eI_F),\\
+L_U&=d_U^*Wd_U,\qquad Q_U=L_U+m^2I_H.
+\end{aligned}}
+The adjoint uses these declared inner products. Directly,
+##{\langle f,Q_Uf\rangle
+=\sum_e w_e\|f(h(e))-U_ef(s(e))\|^2+m^2\|f\|^2.}
+Thus #{Q_U\ge m^2I_H>0}. This is the unitary connection version of
+the [difference energy](fdip-0014); the adjoint qualification is also
+explicit in \citet{Section 3.3, p. 6}{kenyon2011spanning}.}
+
+\p{At #{m=0}, the same sum shows
+##{\ker L_U=\ker d_U
+=\{f:f(h(e))=U_ef(s(e))\text{ for every }e\}.}
+Its elements are called \newvocab{parallel sections}. The unpinned
+massless Gaussian is normalizable exactly when this space is zero:
+then #{L_U} is positive definite; otherwise the density is constant
+along a nonzero kernel direction and its integral diverges. This is
+separate from the [pinned construction](fdip-003V). Nontrivial group
+holonomy need not eliminate all parallel vectors in a higher-dimensional
+or nonfaithful representation.}
+
+\p{Mathlib's \leanref{LinearMap.ker_adjoint_comp_self} gives
+#{\ker(A^*A)=\ker A} for finite-dimensional inner-product spaces.
+Apply it to #{A=W^{1/2}d_U}; positive weights make #{W^{1/2}}
+invertible. This supports the kernel identity, not the connection,
+holonomy or normalizability assertions.}
