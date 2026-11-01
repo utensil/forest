@@ -1,0 +1,68 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{Link reflection as a trace square}
+\date{2026-11-01}
+
+\p{Use the [periodic gauge law](fdip-0083) with #{N=2m},
+#{m\ge1}. Reflect time by #{\theta(j)=1-j} modulo #{2m};
+the positive half is #{\{1,\ldots,m\}}. As in the
+[scalar definition](fdip-007M), this is a link reflection:
+its cuts lie between times #{0,1} and #{m,m+1}.}
+
+\p{Let #{\mathcal A_+} consist of finite linear combinations of
+functions
+##{F(U)=\prod_{j=1}^m f_j(U_j),}
+where each #{f_j:X\to\mathbb C} is bounded, measurable and
+gauge invariant. These form an algebra of spatial observables.
+For such a product, on #{\mathcal H_{\mathrm{phys}}} define
+##{A_F=T_{\mathrm{phys}}^{1/2}M_{f_1}T_{\mathrm{phys}}
+ M_{f_2}\cdots T_{\mathrm{phys}}M_{f_m}
+ T_{\mathrm{phys}}^{1/2},}
+where for #{m=1} this means
+#{T_{\mathrm{phys}}^{1/2}M_{f_1}T_{\mathrm{phys}}^{1/2}}.
+Extend this assignment linearly to finite sums. Then #{A_F} is
+Hilbert–Schmidt and
+##{\mathbb E_{2m}\!\left[\overline{F(\theta U)}F(U)\right]
+ =\frac{\operatorname{Tr}(A_F^*A_F)}{Z_{2m}}\ge0,
+ \qquad (\theta U)_j=U_{1-j}.}
+The temporal links have already been integrated in the periodic
+trace identity. No assertion about arbitrary observables involving
+individual temporal links is included.}
+
+\proof{
+\p{The positive trace-class operator #{T_{\mathrm{phys}}} has a
+Hilbert–Schmidt square root. Every multiplication operator here is
+bounded, as are all intervening transfer factors, so #{A_F} is
+Hilbert–Schmidt; the same holds for a finite sum.}
+
+\p{For products #{F=\prod_j f_j(U_j)} and
+#{G=\prod_j g_j(U_j)}, the adjoint reverses the order and
+conjugates each multiplier. The [bounded trace formula](fdip-0083)
+and cyclicity of a trace-class product give
+##{\operatorname{Tr}(A_F^*A_G)
+ =Z_{2m}\,\mathbb E_{2m}
+   \left[\overline{F(\theta U)}G(U)\right].}
+To check the time labels, read the product cyclically as
+#{\overline f_m,\ldots,\overline f_1,g_1,\ldots,g_m},
+with one full transfer between adjacent entries. These occur at
+times #{m+1,\ldots,2m,1,\ldots,m}, where #{2m=0}; hence
+#{f_j} is conjugated at time #{1-j}. There are exactly #{2m}
+transfer factors after the adjacent half-powers combine.}
+
+\p{Expanding finite sums proves the same sesquilinear identity
+for all #{F,G\in\mathcal A_+}. If two product-sum presentations
+define the same function, their difference has zero expectation
+against its reflected conjugate, and the identity makes the
+corresponding difference of operators have Hilbert–Schmidt norm
+zero. Thus #{A_F} is independent of that presentation. Taking
+#{G=F} proves the trace-square identity and positivity.}
+}
+
+\p{This proof uses the explicitly positive operator of
+\ref{fdip-0080} and the exact finite-time law of \ref{fdip-0083}.
+It does not reverse the argument to reconstruct a transfer operator
+from an arbitrary reflection-positive law; the
+[scalar quotient obstruction](fdip-007Q) shows why that distinction
+matters.}
