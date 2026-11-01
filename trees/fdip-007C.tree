@@ -19,6 +19,21 @@ Woit's Section 5, Theorem 1 and Corollary 1
 \citet{p. 6}{woit2012peterweyl}. It does not assert pointwise or
 absolute convergence for an arbitrary #{L^2} function.}
 
+\p{For an inequivalent exhaustive family of finite-dimensional unitary
+continuous models, TauCeti's
+\leanref/tauceti{TauCeti.peterWeylBasis} constructs the normalized
+matrix-coefficient Hilbert basis, with its inner-product convention
+for matrix coefficients. Over #{\mathbb C}, its coefficient
+#{\langle\rho(g)e_a,e_b\rangle} is the conjugate of the matrix
+entry #{\rho(g)_{ba}}; conjugation, or reindexing by dual
+representations, gives the equivalent entry-coordinate basis.
+The separate \leanref/tauceti{TauCeti.characterBasis} constructs
+the actual character basis of the central #{L^2} subspace.
+Compact Hausdorff groups over #{\mathbb C}, hence the compact Lie
+groups here, satisfy the stated hypotheses. These correspondences
+support the two #{L^2} basis statements, not the uniform absolute
+convergence or surface integral established next.}
+
 \p{Suppose now that #{f} is continuous and central and that
 ##{\sum_{\rho\in\widehat G}|c_\rho|d_\rho<\infty.}
 Then its character expansion converges uniformly and absolutely.
@@ -55,20 +70,3 @@ integrated terms are bounded by the integrals of the absolute face
 terms, whose total has just been bounded. In particular #{f=1}
 still gives #{Z_\Sigma(1)=1}.}
 }
-
-\p{For later convolution constructions, we will use real continuous
-central kernels #{k} with the separate hypotheses
-##{\begin{gathered}
-k(h)>0,\qquad k(h^{-1})=k(h),\\
-k(h)=\sum_{\rho\in\widehat G}d_\rho a_\rho\chi_\rho(h),
-\qquad a_\rho>0,\qquad
-\sum_{\rho\in\widehat G}d_\rho^2a_\rho<\infty.
-\end{gathered}}
-The last condition gives uniform absolute convergence; inversion
-symmetry and reality impose the corresponding agreement of conjugate
-coefficients. The convention is #{c_\rho=d_\rho a_\rho}, not
-#{c_\rho=a_\rho}. Pointwise positivity alone does not imply positive
-Fourier coefficients: on #{U(1)}, #{1-\epsilon\cos\theta>0}
-for #{0<\epsilon<1}, but its coefficients at #{\pm1} are
-#{-\epsilon /2}. The conditions displayed here are assumptions on a
-kernel, not consequences of the Peter–Weyl theorem.}
