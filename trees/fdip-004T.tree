@@ -1,0 +1,36 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Lemma}
+\title{Signed symmetries commute with massive precision}
+\date{2026-10-31}
+
+\p{For a [finite symmetry of a Gaussian background](fdip-004S),
+#{\rho(g)} and #{J_g} are orthogonal, #{J_gW=WJ_g}, and
+##{\rho(g)^*Q\rho(g)=Q,\qquad Q\rho(g)=\rho(g)Q.}
+The Green operator #{Q^{-1}} also commutes with every #{\rho(g)}.}
+
+\proof{
+\p{Reindexing the counting sums gives
+##{\begin{aligned}
+\langle\rho(g)f,\rho(g)u\rangle_V&=\langle f,u\rangle_V,\\
+\langle J_ga,J_gb\rangle_E&=\langle a,b\rangle_E.
+\end{aligned}}
+The edge signs have square one. Since #{w_{q_g(e)}=w_e}, evaluation
+at #{q_g(e)} proves #{WJ_g=J_gW}, and hence #{J_g^*WJ_g=W}.
+Using the incidence intertwiner,
+##{\begin{aligned}
+\rho(g)^*Q\rho(g)
+ &=(d\rho(g))^*W(d\rho(g))+m^2I\\
+ &=d^*J_g^*WJ_gd+m^2I=Q.
+\end{aligned}}
+Multiply on the left by #{\rho(g)} to obtain commutation.
+Multiplication by #{Q^{-1}} on both sides then proves the inverse
+claim. Equivalently, each reversed difference changes sign in
+#{\sum_e w_e(f(h(e))-f(s(e)))^2} and leaves its square unchanged.}
+}
+
+\p{This specializes [signed operator transport](fdip-003D)
+to positive real data. The incidence convention is
+\citet{Section 2.1, pp. 4-5}{spielman2009effective};
+the argument above also covers loops and parallel labels.}
