@@ -1,0 +1,76 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Example}
+\title{Quartic vertices on an alternating cycle}
+\date{2026-11-01}
+
+\p{On the [alternating four-cycle](fdip-0003) with weights
+#{(1,t,1,t)}, take #{t>0}, #{m>0} and #{s=1+t+m^2}. Retain
+#{R=\{0,2\}}, eliminate #{U=\{1,3\}}, and choose the interaction
+##{\mathcal V(\phi)=\frac{\phi_1^4+\phi_3^4}{24}.}
+In retained coordinates #{x=(x_0,x_2)}, the
+[conditional rules](fdip-0060) give independent eliminated noises
+of variance #{1/s}, with means
+##{\mu_1=\frac{x_0+tx_2}{s},\qquad
+   \mu_3=\frac{tx_0+x_2}{s}.}
+The first coefficient #{a(x)} of the fiber interaction is
+##{\begin{aligned}
+a(x)={}&\frac{(1+t^4)(x_0^4+x_2^4)}{24s^4}\\
+ &+\frac{4t(1+t^2)(x_0^3x_2+x_0x_2^3)
+                +12t^2x_0^2x_2^2}{24s^4}\\
+ &+\frac{(1+t^2)(x_0^2+x_2^2)+4tx_0x_2}{4s^3}
+   +\frac1{4s^2}.
+\end{aligned}}
+Thus eliminating a quartic supported on the removed vertices creates
+quartic and quadratic couplings on the retained vertices, as well
+as a constant.}
+
+\proof{
+\p{The eliminated precision is #{D=sI_2}; its cross block gives the
+two means above. For a centered real Gaussian #{\eta} of variance
+#{v}, Wick's identity gives #{\mathbb E\eta^4=3v^2}. Expanding
+#{(\mu+\eta)^4} and discarding odd moments yields
+##{\mathbb E(\mu+\eta)^4=\mu^4+6\mu^2v+3v^2.}
+Consequently
+##{a(x)=\frac{\mu_1^4+\mu_3^4}{24}
+       +\frac{\mu_1^2+\mu_3^2}{4s}+\frac1{4s^2}.}
+The binomial expansions of #{(x_0+tx_2)^4+(tx_0+x_2)^4} give
+coefficients #{1+t^4}, #{4t(1+t^2)} and #{12t^2}. Squaring the
+two numerators gives
+#{(1+t^2)(x_0^2+x_2^2)+4tx_0x_2}. Substitution proves every
+coefficient in the displayed polynomial.}
+}
+
+\p{In these named vertex coordinates, the ratio of the
+#{x_0^3x_2} coefficient to the #{x_0^4} coefficient is
+##{r(t)=\frac{4t(1+t^2)}{1+t^4}.}
+It is unchanged by exchanging the two retained vertices and obeys
+##{\begin{aligned}
+r(t)&=r(1/t),&r(2)=r(1/2)&=\frac{40}{17},\\
+r'(t)&=\frac{4(1-t^2)(1+4t^2+t^4)}{(1+t^4)^2}.
+\end{aligned}}
+The derivative is positive for #{0<t<1}. Therefore #{r} separates
+the parameter for #{0<t\le1}, and on all positive parameters it separates
+exactly modulo #{t\leftrightarrow1/t}. This is a vertex-coordinate
+shape ratio, not an invariant of arbitrary orthogonal changes of the
+retained basis. The complete coefficient tensors instead obey the
+[naturality theorem](fdip-005Z).}
+
+\p{The reciprocal equality resembles that of the
+[trace ratio](fdip-000I), but neither equality gives a strict
+fixed-mass background isomorphism at reciprocal parameters.
+The edge-weight products are #{t^2} and #{t^{-2}}, so a
+weight-preserving edge bijection would force #{t=1}. Also #{s}
+changes at fixed mass; equality of the shape ratio does not make all
+induced coefficients equal.}
+
+\p{A finite numerical illustration uses #{t=2}, #{m=1} and
+#{x=(0.5,-0.3)}. The means are #{(-1/40,7/40)}, and the exact
+coefficient is
+##{a(x)=\frac{541201}{30720000}=0.017617220052\ldots.}
+One million independent conditional samples, using NumPy's PCG64
+generator with seed #{20261031}, give #{0.0175836} with one estimated
+standard error #{0.0000404}. The estimate concerns this one conditional
+moment; the polynomial identity and exact value follow from the
+analytic calculation above.}

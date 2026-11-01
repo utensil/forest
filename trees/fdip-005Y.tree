@@ -1,0 +1,53 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Definition}
+\title{An interaction on a selected background}
+\date{2026-11-01}
+
+\p{An \newvocab{interacting selected background} consists of a
+[selected Gaussian background](fdip-005A) #{b=(\Pi,w,m,P)}, a real
+polynomial #{\mathcal V:H\to\mathbb R}, and a formal variable
+#{\lambda}. Thus the precision #{Q>0}, metric and selector are
+supplied along with the interaction. Write #{X=\operatorname{im}P}
+and #{Y=\ker P}, so #{H=X\mathbin\perp Y}.}
+
+\p{For every #{x\in X}, define a probability law on #{Y} by
+##{\begin{aligned}
+Z_b(x)&=\int_Y e^{-\frac12\langle x+y,Q(x+y)\rangle}\,dy,\\
+\kappa_{b,x}(dy)
+ &=Z_b(x)^{-1}e^{-\frac12\langle x+y,Q(x+y)\rangle}\,dy.
+\end{aligned}}
+The volume #{dy} is the [induced Euclidean volume](fdip-002M).
+Positive precision makes #{Z_b(x)} positive and finite. The
+[square-completion formula](fdip-000D) shows that this is a Gaussian
+law whose mean depends linearly on #{x}. It is the conditional law
+of the eliminated field given the retained value, using the
+canonical density formula at every #{x}; general regular conditional
+laws are unique only almost everywhere.}
+
+\p{The \vocabk{fiber effective interaction}{fdip-0046} is the formal series
+##{\begin{aligned}
+M_{b,\mathcal V}(\lambda,x)
+ &=\sum_{n\ge0}\frac{(-\lambda)^n}{n!}
+       \int_Y\mathcal V(x+y)^n\,\kappa_{b,x}(dy),\\
+F_{b,\mathcal V}(\lambda,x)&=-\log M_{b,\mathcal V}(\lambda,x).
+\end{aligned}}
+Each coefficient is a polynomial on #{X}: expand the polynomial
+about the conditional mean and use the fixed centered Gaussian
+moments. These moments are finite by
+[polynomial integrability](fdip-002W). The series #{M} has constant
+coefficient one, so its logarithm is a formal power series in
+#{\lambda} with coefficients in the [real polynomial algebra](fdip-002V)
+#{\mathcal P(X)} on #{X}. This extends the
+[quartic construction](fdip-0046) to any polynomial interaction and
+any orthogonal selector. Constants in #{x} remain part of #{F}.}
+
+\p{This definition is coefficientwise. It imposes no positivity on
+#{\mathcal V}, asserts no convergence for nonzero #{\lambda}, and
+uses no interchange of an infinite sum with an integral. The notation
+#{O(\lambda^k)} means divisibility by #{\lambda^k}. A fiber logarithm
+is different from the Legendre transform that defines a one-particle
+irreducible effective action in
+\citet{v2, Proposition 3.23, p. 50}{etingof2024mathematical}. Here the
+retained field is fixed while its orthogonal complement is integrated.}
