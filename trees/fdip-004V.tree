@@ -1,0 +1,93 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{Complete orthogonal real isotypic projectors}
+\date{2026-10-31}
+
+\p{Let #{G} be finite and let #{\rho} be an orthogonal action on a
+finite-dimensional real inner-product space #{H}. Let #{Q} be a
+linear operator commuting with every #{\rho(g)}.
+Write #{\operatorname{Irr}_{\mathbb C}(G)} for the irreducible
+complex [characters](fgap-001M). For each orbit #{\Xi} under
+#{\chi\mapsto\overline\chi}, put
+##{\begin{aligned}
+e_\chi&=\frac{\chi(1)}{|G|}\sum_{g\in G}\chi(g^{-1})[g],\\
+\epsilon_\Xi&=\sum_{\chi\in\Xi}e_\chi,
+& P_\Xi&=\widehat\rho(\epsilon_\Xi).
+\end{aligned}}
+Then #{\epsilon_\Xi} belongs to #{\mathbb R[G]}, is central,
+and is fixed by the real involution #{[g]^*=[g^{-1}]}.
+The operators satisfy
+##{\begin{aligned}
+P_\Xi^2&=P_\Xi=P_\Xi^*,& QP_\Xi&=P_\Xi Q,\\
+P_\Xi P_\Upsilon&=0\quad(\Xi\ne\Upsilon),&
+\sum_\Xi P_\Xi&=I_H.
+\end{aligned}}
+Thus #{H} is the orthogonal direct sum of their ranges; a range may
+be zero. These ranges are its \newvocab{real isotypic sectors}:
+each is the sum of all irreducible real subrepresentations of one
+isomorphism type. Complexification of a sector is the sum of the
+complex isotypic components with characters in #{\Xi}.}
+
+\proof{
+\p{Maschke's theorem and the
+[complex central-idempotent formula](fgap-001N) give central,
+pairwise orthogonal idempotents #{e_\chi} acting on the indicated
+complex components. Coefficient conjugation sends #{e_\chi} to
+#{e_{\overline\chi}}, so it fixes #{\epsilon_\Xi}; its coefficients
+are real. Average a Hermitian inner product on a complex
+representation over #{G}. Each group operator becomes unitary, whence
+#{\chi(g^{-1})=\overline{\chi(g)}}. The complex linear extension of
+#{[g]\mapsto[g^{-1}]} therefore sends #{e_\chi} to
+#{e_{\overline\chi}}, and fixes #{\epsilon_\Xi}.
+This is coefficient conjugation and inversion separately; the latter
+restricts to the stated real involution.}
+
+\p{For completeness, the regular character is
+#{r_G(g)=|G|\,\delta_{g,1}} and decomposes as
+#{r_G=\sum_\chi\chi(1)\chi} by
+\citet{Section 2.4, Proposition 5 and Corollary 1, p. 18}{serre1977linear}.
+Consequently
+##{\begin{aligned}
+\sum_\chi e_\chi
+ &=\frac1{|G|}\sum_{g\in G}
+     \left(\sum_\chi\chi(1)\chi(g^{-1})\right)[g]\\
+ &=\frac1{|G|}\sum_{g\in G}r_G(g^{-1})[g]=[1].
+\end{aligned}}
+Grouping by conjugation orbits preserves this sum. Applying
+#{\widehat\rho} gives idempotence, mixed-product zero and sum #{I_H}.
+Orthogonality gives #{\rho(g)^*=\rho(g^{-1})}, so
+#{\widehat\rho(a^*)=\widehat\rho(a)^*} for real coefficients.
+Thus each #{P_\Xi} is self-adjoint; distinct ranges are perpendicular
+because #{\langle P_\Xi x,P_\Upsilon y\rangle
+=\langle x,P_\Xi P_\Upsilon y\rangle=0}.
+The sum identity gives existence of the decomposition, and applying
+each projector gives its uniqueness. Commutation with #{Q} follows
+by linearity from commutation with every group operator.}
+
+\p{To justify the real isotypic terminology, decompose #{H} into
+irreducible real subrepresentations by Maschke. On any such #{U},
+the real commuting idempotents #{P_\Xi} have invariant ranges, so
+exactly one acts as the identity and the rest as zero.
+Its complexification therefore has constituents in just that orbit.
+Two real irreducibles assigned to the same orbit share a complex
+constituent: complex conjugation on each complexification exchanges
+the constituents indexed by #{\chi} and #{\overline\chi}.
+Semisimplicity over #{\mathbb C} then gives a nonzero complex
+intertwiner between their complexifications. In real bases, the real
+and imaginary parts of its matrix are real intertwiners, at least
+one nonzero. Its kernel and image are invariant, so irreducibility
+makes it an isomorphism. Conversely an isomorphism commutes with all
+the character projectors. This proves precisely the asserted grouping.}
+}
+
+\p{Serre's \citet{Section 2.6, Theorem 8, p. 21}{serre1977linear}
+gives the canonical complex components and their projectors; the
+real grouping and adjoint argument above are deductions from it.
+TauCeti's
+\leanref/tauceti{TauCeti.Representation.sum_primitiveCentralIdempotent}
+proves the complex sum-to-one identity for a finite pairwise inequivalent
+family of irreducibles whose cardinality equals the number of conjugacy
+classes, over an algebraically closed field with invertible group order.
+It supports the completeness step, not the real adjoint or graph claims.}

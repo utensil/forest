@@ -1,0 +1,61 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Example}
+\title{Real Fourier sectors of a cycle}
+\date{2026-10-31}
+
+\p{Let #{n\ge3}, #{V=E=\mathbb Z/n\mathbb Z}, with edge #{e_v}
+from #{v} to #{v+1}, uniform weight #{w>0} and mass #{m>0}.
+The generator #{r} of #{C_n} sends #{v} to #{v+1} and #{e_v}
+to #{e_{v+1}}, with every edge sign positive.
+Its action on fields is #{(\rho(r)f)(v)=f(v-1)}.
+The cyclic characters in
+\citet{Section 5.1, p. 35}{serre1977linear}
+and the [real projectors](fdip-004V) yield the following direct calculation.}
+
+\p{Set #{\theta_k=2\pi k/n}. The normalized constant vector
+#{u_0(v)=1/\sqrt n} spans the trivial sector.
+For #{1\le k<n/2}, the sector #{H_k} has orthonormal basis
+##{c_k(v)=\sqrt{2/n}\cos(\theta_kv),\qquad
+s_k(v)=\sqrt{2/n}\sin(\theta_kv).}
+When #{n} is even there is also
+#{u_{n/2}(v)=(-1)^v/\sqrt n}.
+These give all sectors indexed by #{0\le k\le\lfloor n/2\rfloor}.
+In the ordered basis #{(c_k,s_k)}, the rotation is
+##{\rho(r)|_{H_k}=\begin{pmatrix}
+\cos\theta_k&-\sin\theta_k\\
+\sin\theta_k&\cos\theta_k
+\end{pmatrix}.}
+For #{0<\theta_k<\pi} it has no real eigenline, so #{H_k} is real
+irreducible. Its complex constituents have characters
+#{r\mapsto e^{i\theta_k}} and #{r\mapsto e^{-i\theta_k}}.}
+
+\proof{
+\p{The finite geometric sum
+#{\sum_{v=0}^{n-1}e^{2\pi i jv/n}} equals #{n} when #{n} divides
+#{j} and zero otherwise. Taking real and imaginary parts proves
+all stated norms and orthogonality. There are #{n} basis vectors,
+so they span #{H}. The addition formulas give the displayed rotation.
+A real rotation through #{0<\theta_k<\pi} has eigenvalues
+#{e^{\pm i\theta_k}}, neither real, proving the irreducibility claim.}
+}
+
+\p{The precision and each sector eigenvalue are
+##{\begin{aligned}
+(Qf)(v)&=(m^2+2w)f(v)-wf(v-1)-wf(v+1),\\
+Q|_{H_k}&=q_kI,&q_k&=m^2+2w(1-\cos\theta_k).
+\end{aligned}}
+Substitution of each sine, cosine and exceptional one-dimensional
+mode proves the formula. The orthogonal projector kernels are
+##{\begin{aligned}
+P_0(v,u)&=1/n,\\
+P_k(v,u)&=\frac2n\cos(\theta_k(v-u))\quad(0<k<n/2),\\
+P_{n/2}(v,u)&=(-1)^{v-u}/n\quad(n\text{ even}).
+\end{aligned}}
+They follow by summing the outer products of the displayed
+orthonormal basis vectors, so their sum is the identity.
+For #{n=3}, this reads #{P_0=\mathbf1\mathbf1^T/3} and
+#{P_1=I-P_0}; the eigenvalues are #{m^2} and #{m^2+3w}, the latter
+twice. The later [circle comparison](fdip-004H) rescales these
+same finite modes; no continuum limit is used in this calculation.}

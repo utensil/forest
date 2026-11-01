@@ -1,0 +1,44 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Definition}
+\title{Finite symmetries of a Gaussian background}
+\date{2026-10-31}
+
+\p{Fix finite incidence data #{(V,E,s,h)}, weights #{w_e>0},
+a constant mass #{m>0}, and counting pairings on
+#{H=\mathbb R^V} and #{\mathbb R^E}.
+A \newvocab{finite symmetry of a Gaussian background} is a finite
+group #{G} with a weight-preserving
+\vocabk{signed endpoint action}{fdip-003B}
+#{g\mapsto(p_g,q_g,\varepsilon_g)} on these data.
+No retained subset is selected here: in the signed-arrow definition
+one may take #{R=V}. An additional retained subset would have to be
+#{G}-stable. The signs belong to the abstract #{C_2} of that definition,
+with #{\sigma(+)=1} and #{\sigma(-)=-1}. This unpartitioned data
+does not assert preservation of a nonempty proper retained set as in
+\ref{fdip-000G}.}
+
+\p{The vertex and edge representations are
+##{\begin{aligned}
+(\rho(g)f)(p_g(v))&=f(v),\\
+(J_ga)(q_g(e))&=\sigma(\varepsilon_g(e))a(e).
+\end{aligned}}
+Thus #{\rho(g)f=f\circ p_g^{-1}}; in particular
+#{\rho(g)\delta_v=\delta_{p_g(v)}}.
+We call #{H} with this action the \newvocab{vertex permutation module}.
+With #{(df)(e)=f(h(e))-f(s(e))}, the endpoint equations give
+#{d\rho(g)=J_gd}. The sign cocycle gives
+#{\rho(gk)=\rho(g)\rho(k)} and #{J_{gk}=J_gJ_k}.
+These conventions are the real specialization of
+\ref{fdip-003B}, whose proof includes loops and parallel edge labels.}
+
+\p{Write #{W=\operatorname{diag}(w_e)} and
+#{Q=d^*Wd+m^2I} for the \vocabk{massive precision}{fdip-000A}.
+A reflection may reverse the chosen edge orientations; it is then a
+signed symmetry, not necessarily a directed relabeling in
+\ref{fdip-000G}. Forgetting those orientations preserves the energy,
+while still retaining incidence, weights and distinct edge labels.
+The underlying permutation-representation convention is
+\citet{Example 7.1(b), p. 101}{milne2025group}; the signed extension
+and its endpoint requirements are proved in \ref{fdip-003B}.}
