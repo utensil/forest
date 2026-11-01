@@ -1,0 +1,49 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Corollary}
+\title{The physical spectral Hamiltonian}
+\date{2026-11-01}
+
+\p{For the [physical transfer operator](fdip-0083), let
+#{\lambda_0=\|T_{\mathrm{phys}}\|>0} and fix a time step
+#{a_t>0}. There is an orthonormal eigenbasis #{(\psi_j)} with
+#{0<\lambda_j\le\lambda_0}, including an eigenvector at
+#{\lambda_0}. Define
+##{\widehat T=\frac{T_{\mathrm{phys}}}{\lambda_0},\qquad
+ E_j=\frac1{a_t}\log\frac{\lambda_0}{\lambda_j}.}
+The [transfer Hamiltonian](fdip-007W) is
+#{H=-a_t^{-1}\log\widehat T}, with the explicit domain and action
+##{\begin{aligned}
+D(H)&=\left\{f=\sum_jc_j\psi_j:
+                    \sum_jE_j^2|c_j|^2<\infty\right\},\\
+Hf&=\sum_jE_jc_j\psi_j.
+\end{aligned}}
+It is nonnegative and self-adjoint, and
+#{e^{-a_tH}=\widehat T}. If the physical Hilbert space is infinite
+dimensional, #{H} is unbounded. This assertion does not specify
+the multiplicity of its zero eigenspace.}
+
+\proof{
+\p{The spectral theorem for compact self-adjoint operators applies
+to the positive trace-class operator of \ref{fdip-0083}.
+Injectivity removes its zero eigenspace, so the positive eigenvectors
+form a complete orthonormal basis. Its nonzero norm is an eigenvalue.
+In the finite-dimensional case the list is finite; otherwise its
+eigenvalues tend to zero.}
+
+\p{Under the unitary coefficient map #{f\mapsto(c_j)}, the
+normalized transfer is multiplication by #{\lambda_j/\lambda_0}.
+Its spectral logarithm is therefore multiplication by the real
+nonnegative sequence #{E_j} on the stated maximal domain.
+This diagonal operator is self-adjoint; finite coefficient
+truncations form a core. Exponentiating on the basis proves the
+transfer identity. If the list is infinite, #{\lambda_j\to0}
+implies #{E_j\to\infty}, proving unboundedness.}
+}
+
+\p{This is the same normalization and domain construction as the
+[Gaussian oscillator](fdip-007W), without its explicit eigenvalues.
+It supplies a Hamiltonian at finite spatial volume. A unique vacuum,
+limits in time or volume, and a continuum field theory are separate
+questions, not conclusions of this spectral construction.}
