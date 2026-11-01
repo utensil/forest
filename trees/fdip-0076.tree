@@ -1,0 +1,49 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Definition}
+\title{The joint gauge and real-matter measure}
+\date{2026-11-01}
+
+\p{Fix the graph, positive edge weights and invariant fiber metric of
+a [connection background](fdip-006D). When using a Wilson action,
+also supply [square faces and their attaching walks](fdip-006M). Let #{G} be a finite
+group, or a compact Hausdorff group supplied with a normalized
+bi-invariant Borel probability measure #{\mu_G}. In the finite case
+use uniform probability measure. Let #{\rho:G\to O(F)} be a
+continuous orthogonal representation on a finite-dimensional real
+inner-product space; continuity is automatic for a finite group.
+The compact-group measure is assumed as part of the data here.}
+
+\p{Put #{\mathcal H=F^V}, #{N=\dim_{\mathbb R}\mathcal H} and
+#{d\mu(U)=\prod_{e\in E}d\mu_G(U_e)}. Choose #{m>0} and write
+#{Q_U=L_U+m^2I}. Use a continuous real gauge-invariant action
+#{S_W(U)}, such as the [Wilson action](fdip-006O) with its declared
+representation and coupling. With ordinary Lebesgue volume
+#{d\operatorname{vol}(\phi)} in the fixed metric, define
+##{\begin{aligned}
+\mathfrak Z
+ &=\int_{G^E}\int_{\mathcal H}
+ e^{-S_W(U)-\frac12\langle\phi,Q_U\phi\rangle}
+ \,d\operatorname{vol}(\phi)\,d\mu(U),\\
+d\mathbb P(U,\phi)
+ &=\mathfrak Z^{-1}
+ e^{-S_W(U)-\frac12\langle\phi,Q_U\phi\rangle}
+ \,d\mu(U)\,d\operatorname{vol}(\phi).
+\end{aligned}}
+This is a law on both the connection and the real matter field.}
+
+\p{The normalization is finite and positive. Indeed,
+#{Q_U\ge m^2I}, and the continuous action has a finite lower bound
+on compact #{G^E}. Thus the integrand is bounded by a constant times
+#{e^{-m^2\|\phi\|^2/2}}, which is integrable. It is everywhere
+positive. A gauge transformation preserves the edge measure by left
+and right invariance, the matter volume by orthogonality, and the
+quadratic form by [gauge covariance](fdip-006E). Hence the joint law
+is gauge invariant.}
+
+\p{The edge measure differs from the unnormalized counting convention
+in \ref{fdip-006O}: for finite #{G}, replacing #{\mu} by counting
+measure multiplies #{\mathfrak Z} by #{|G|^{|E|}} and leaves
+normalized expectations unchanged. The matter volume is also explicit:
+it has not been divided by #{(2\pi)^{N/2}}.}
