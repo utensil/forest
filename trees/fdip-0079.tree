@@ -1,0 +1,68 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{A finite loop comparison does not determine screening}
+\date{2026-11-01}
+
+\p{On a [square torus](fdip-006M) of periods at least three, use the
+[joint law](fdip-0076) with #{G=\{1,-1\}} acting by multiplication
+on the real field #{\phi\in\mathbb R^V}, unit weights, #{m>0}
+and #{\beta=0}.
+For any simple nonempty closed edge cycle #{C}, its Wilson product
+#{W_C(U)=\prod_{e\in C}U_e} has
+##{\langle W_C\rangle_{\mathrm{matter}}>0,\qquad
+ \langle W_C\rangle_{\mathrm{pure}}=0.}
+In particular, the strict positivity in the
+[three-by-three example](fdip-0078) has a direct proof independent
+of rounding the determinant sums.}
+
+\proof{
+\p{Put #{D=4+m^2}. For the real scalar convention, the joint
+Boltzmann factor at zero bare gauge coupling is
+##{\exp\left(-\frac D2\sum_v\phi_v^2\right)
+ \prod_{e\in E}\exp(U_e\phi_{s(e)}\phi_{h(e)}).}
+Average the independent edge signs before integrating the matter.
+Since
+##{\frac12\sum_{u=\pm1}e^{ut}=\cosh t,\qquad
+ \frac12\sum_{u=\pm1}u e^{ut}=\sinh t,}
+the Wilson expectation is #{I_C/I_{\varnothing}}, where
+##{\begin{aligned}
+I_C={}&\int_{\mathbb R^V}e^{-\frac D2\sum_v\phi_v^2}
+ \prod_{e\in C}\sinh(\phi_{s(e)}\phi_{h(e)})\\
+ &\qquad\qquad\cdot\prod_{e\notin C}
+ \cosh(\phi_{s(e)}\phi_{h(e)})\,d\phi.
+\end{aligned}}
+For #{C=\varnothing}, every edge contributes a hyperbolic cosine.
+For nonzero vertex coordinates, the sign of the numerator's product
+of hyperbolic sines is
+##{\prod_{e\in C}\operatorname{sgn}(\phi_{s(e)}\phi_{h(e)})
+ =\prod_{v\in C}\operatorname{sgn}(\phi_v)^2=1.}
+Each cycle vertex occurs twice. All other factors are strictly positive,
+so the numerator integrand is positive off coordinate hyperplanes.
+Its absolute value is bounded by the denominator integrand because
+#{|\sinh t|\le\cosh t}. Positive mass makes the latter integrable
+by the [joint-law bound](fdip-0076). Both integrals are therefore
+finite and strictly positive. In the pure law, independent uniform
+edge signs give zero expectation for any nonempty product of distinct
+edges, proving the comparison.}
+}
+
+\p{Integrating matter has changed the connection law, so the exact
+pure-gauge formula cannot be reused unchanged. On tori with periods
+at least six, the [closed-walk calculation](fdip-0072) gives a separate
+controlled large-mass explanation: matter generates a positive
+plaquette coefficient and higher loop terms. Its order #{D^{-6}}
+remainder is not being applied to the three-by-three example, where
+short winding cycles occur.}
+
+\p{Neither the finite comparison nor the positive plaquette term
+establishes an asymptotic area law, a perimeter law or string breaking.
+Such a claim needs a specified family of volumes and loops, a limiting
+regime and control of the higher terms. Gliozzi and Rago study a
+different system: a three-dimensional two-element gauge group coupled
+to Ising matter taking only the values #{\pm1}, rather than an
+unbounded Gaussian field. Their Section 3, equation (12), fixes that
+action; their analysis of Wilson-loop overlap with a broken-string
+state is model-specific context \citet{pp. 2, 5}{gliozzi2004overlap}.
+It does not supply a screening theorem for the present Gaussian law.}
