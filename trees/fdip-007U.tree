@@ -1,0 +1,102 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{Hermite diagonalization}
+\date{2026-11-01}
+
+\p{For the [Gaussian transfer operator](fdip-007T), define
+##{\begin{aligned}
+\cosh\omega&=1+\frac{m^2}{2w},& \omega&>0,\\
+q&=e^{-\omega},& s&=w\sinh\omega,\\
+\lambda_0&=\sqrt{\frac{2\pi}{w}}e^{-\omega/2}.
+\end{aligned}}
+Define the probabilists' \newvocab{Hermite polynomials}
+#{\operatorname{He}_n} by the generating function
+##{e^{uz-z^2/2}
+ =\sum_{n=0}^\infty\operatorname{He}_n(u)\frac{z^n}{n!},}
+and put
+##{h_n^s(x)=\left(\frac{s}{\pi}\right)^{1/4}
+ \frac{\operatorname{He}_n(\sqrt{2s}\,x)}{\sqrt{n!}}
+ e^{-sx^2/2}.}
+These functions form an orthonormal basis of
+#{L^2(\mathbb R,dx;\mathbb C)}, and
+##{Th_n^s=\lambda_0q^nh_n^s\qquad(n\ge0).}
+Consequently #{T} is positive, injective and trace class, with
+#{\|T\|=\lambda_0} and
+#{\operatorname{Tr}T=\lambda_0/(1-q)}.
+The normalized operator #{\widehat T=T/\lambda_0} is an
+injective positive contraction.}
+
+\proof{
+\p{First establish the basis. Integrating two generating functions
+against #{e^{-sx^2}} gives
+##{\begin{aligned}
+&\int_{\mathbb R}e^{-sx^2}
+ e^{\sqrt{2s}\,xz-z^2/2}
+ e^{\sqrt{2s}\,xt-t^2/2}\,dx\\
+&\hspace{20mm}=\sqrt{\frac\pi s}\,e^{zt}.
+\end{aligned}}
+Differentiation at #{z=t=0} proves orthogonality with precisely
+the displayed normalization. Every such differentiation is
+justified by a polynomial times an integrable Gaussian, uniformly
+for the complex parameters in a compact set.}
+
+\p{For completeness, suppose #{f\in L^2} is orthogonal to every
+#{h_n^s}. Since #{\operatorname{He}_n} has degree #{n} and leading
+coefficient one, all moments of
+#{g(x)=f(x)e^{-sx^2/2}} vanish. Cauchy–Schwarz shows that
+#{g\in L^1} and that
+##{F(z)=\int_{\mathbb R}g(x)e^{zx}\,dx}
+is entire: on every compact set of complex #{z}, all derivative
+integrands have an integrable majorant of the form
+#{|f(x)|\,|x|^k e^{-sx^2/2+R|x|}}.
+All Taylor coefficients of #{F} vanish, so #{F=0}; in particular
+the Fourier transform of #{g} vanishes. To see the needed
+uniqueness directly, convolve #{g} with a normalized Gaussian.
+The Gaussian Fourier integral and Fubini express this convolution
+as an integral of its zero Fourier transform, hence it is zero.
+As the Gaussian variance tends to zero, these convolutions tend
+to #{g} in #{L^1}, by continuity of translations in #{L^1} and
+dominated convergence. Thus #{g=0} almost everywhere and #{f=0}.
+The orthonormal family is complete.}
+
+\p{Now diagonalize the kernel. With
+#{a=w\cosh\omega/2}, the identities
+#{s=w\sinh\omega} and #{a+s/2=w/(2q)} give, by completing
+the square in #{y},
+##{\begin{aligned}
+&\int_{\mathbb R}K(x,y)e^{-sy^2/2}
+ e^{\sqrt{2s}\,yz-z^2/2}\,dy\\
+&\hspace{8mm}=\lambda_0e^{-sx^2/2}
+ e^{\sqrt{2s}\,xqz-q^2z^2/2}.
+\end{aligned}}
+The constant is
+#{\sqrt{\pi/(a+s/2)}=\sqrt{2\pi q/w}=\lambda_0}.
+Differentiating #{n} times at zero, again under a Gaussian
+majorant, gives #{Th_n^s=\lambda_0q^nh_n^s}.}
+
+\p{If #{f=\sum_n c_nh_n^s}, boundedness and completeness give
+##{Tf=\sum_{n=0}^\infty\lambda_0q^nc_nh_n^s}
+in #{L^2}. Every eigenvalue is strictly positive, which proves
+positivity and injectivity. Their maximum is #{\lambda_0}.
+For a positive compact operator, being trace class means that
+these eigenvalues have finite sum; here the sum is
+#{\lambda_0/(1-q)}. This proves all operator assertions.
+It also gives the Mehler kernel expansion
+##{K(x,y)=\sum_{n=0}^\infty
+ \lambda_0q^nh_n^s(x)h_n^s(y)}
+in #{L^2(\mathbb R^2)}: the squared Hilbert–Schmidt norm of the
+tail is #{\lambda_0^2\sum_{n>r}q^{2n}} after truncation at #{r}.
+This convergence statement suffices for the operator identity.}
+}
+
+\p{The calculation is a direct diagonalization of
+\ref{fdip-007T}. TauCeti's
+\leanref/tauceti{TauCeti.hermiteHilbertBasis} and
+\leanref/tauceti{TauCeti.coe_hermiteHilbertBasis}
+supply the complete orthonormal Hermite basis at #{s=1}, with
+exactly the probabilists' normalization used here. The unitary
+dilation #{f(x)\mapsto s^{1/4}f(\sqrt{s}\,x)} gives the displayed
+basis for general #{s>0}. These references support the basis;
+the kernel eigenvalues and transfer properties are proved above.}
