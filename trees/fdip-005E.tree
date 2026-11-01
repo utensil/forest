@@ -1,0 +1,73 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Definition}
+\title{The base and its retained-law fibers}
+\date{2026-11-01}
+
+\p{Fix an incidence presentation #{\Pi=(V,E,s,h)}, with #{|V|\ge2}.
+Its parameter set and selector set are
+##{\begin{aligned}
+\operatorname{Par}_{\Pi}&=\mathbb R_{>0}^E\times\mathbb R_{>0},\\
+\operatorname{Sel}_V&=\{P:P^2=P=P^*,\ 0<\operatorname{rank}P<|V|\},\\
+\mathcal B_\Pi&=\operatorname{Par}_\Pi\times\operatorname{Sel}_V.
+\end{aligned}}
+The counting metric is fixed. Each rank component of
+#{\operatorname{Sel}_V} identifies with the real Grassmannian
+#{\operatorname{Gr}_r(H)}, the set of #{r}-dimensional subspaces
+of #{H}, by
+#{P\mapsto\operatorname{im}P}; the unique orthogonal projector gives
+the inverse identification. No topology or smooth structure is needed
+for the following groupoid description.}
+
+\p{Only the directed automorphism group #{\operatorname{Aut}(\Pi)}
+acts on this fixed-presentation set. For #{g=(p,q)}, let
+#{U_g\delta_v=\delta_{p(v)}} and put
+##{g(w,m,P)=(w\circ q^{-1},m,U_gPU_g^{-1}).}
+Its action groupoid #{\operatorname{Aut}(\Pi)\ltimes\mathcal B_\Pi}
+is the full subgroupoid of #{\mathsf{Bg}} on backgrounds whose
+presentation is exactly #{\Pi}: in both cases arrows are precisely
+the same graph automorphisms satisfying the parameter equations.
+Replacing directed automorphisms by signed endpoint automorphisms
+gives the corresponding full subgroupoid of #{\mathsf{Bg}^{\pm}}.}
+
+\p{To allow arrows between presentations, take
+#{\mathcal B=\coprod_\Pi\mathcal B_\Pi}, over a fixed set of
+finite labelled presentations, with #{\mathsf{Bg}} as its groupoid
+of arrows. For example one may use finite subsets of a fixed
+countable universe as carriers; every finite presentation has an
+isomorphic labelled representative. There is no single action of
+#{\operatorname{Aut}(\Pi)} on all presentations.}
+
+\p{The \newvocab{selected-structure map} is
+##{\sigma:\mathcal B\longrightarrow\operatorname{Ob}(\mathcal Q),\qquad
+\sigma(b)=(X,S_P),\quad X=\operatorname{im}P,}
+where #{\mathcal Q} is the groupoid of positive-dimensional real
+Euclidean spaces with positive self-adjoint precisions and isometric
+precision-intertwining arrows. More precisely, the displayed
+object map extends to a functor #{\mathsf{Bg}\to\mathcal Q}, or
+#{\mathsf{Bg}^{\pm}\to\mathcal Q}, by sending an arrow to #{U|_X}.
+The [transport identities](fdip-005C) and ordinary restriction of
+composites prove functoriality. The symbol #{\sigma} denotes this
+assignment, whereas #{P:H\to H} is the field-space projector.}
+
+\p{The retained-law fiber over #{b} is the probability space
+##{\mathcal F_b=(X,\mathcal B(X),\nu_b),\qquad
+\nu_b=N_X(0,S_P^{-1}).}
+Here #{\mathcal B(X)} is the Borel sigma-algebra. Arrows transport
+these fibers by measure-preserving isometries and transport
+observables by pullback. Thus a fiber is a specified law on a
+specified space, rather than a bare covariance matrix.
+If an interaction is additionally supplied, its induced retained
+vertices require that further data; they are not part of the present
+Gaussian tuple.}
+
+\p{Forgetting #{P} gives the unselected weighted incidence data
+#{(\Pi,w,m)} and their full law #{\mu_Q}. It does not by itself
+give a [coordinate background](fdip-000G), which also requires a
+retained subset #{R}. Choosing #{P=P_R} recovers that background
+and its [Schur marginal](fdip-0018). Equivalence here means
+isomorphism in the chosen graph groupoid; the
+[orthogonal comparison](fdip-005D) is coarser. For a different
+operation, the supplied cycle scaling of the
+[circle comparison](fdip-004H) is a limit of models, not a graph arrow.}

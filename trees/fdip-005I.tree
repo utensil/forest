@@ -1,0 +1,42 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{Graph and orthogonal stabilizers}
+\date{2026-11-01}
+
+\p{The stabilizers also distinguish the two notions. For the
+[alternating four-cycle family](fdip-000X), with weights
+#{(a,b,a,b)}, #{m>0}, and #{R=\{0,2\}}, the stabilizer of
+#{(Q,P_R)} in #{O(4)} is #{(C_2)^2} if #{a\ne b}, and
+#{(C_2)^3} if #{a=b}. The signed graph stabilizers are respectively
+#{C_2} and #{C_2\times C_2}. By contrast, the orthogonal stabilizer
+of #{Q} alone is continuous when #{a=b}; it contains #{O(2)} on
+the repeated eigenspace.}
+
+\proof{
+\p{Use the orthonormal eigenvectors
+##{\begin{aligned}
+u_0&=(1,1,1,1)/2,&u_3&=(1,-1,1,-1)/2,\\
+u_1&=(1,1,-1,-1)/2,&u_2&=(1,-1,-1,1)/2.
+\end{aligned}}
+Their eigenvalues are #{m^2,m^2+2a+2b,m^2+2b,m^2+2a},
+respectively. In the ordered pairs #{(u_0,u_3)} and #{(u_1,u_2)},
+#{P_R} has the same block
+#{\frac12\begin{pmatrix}1&1\\1&1\end{pmatrix}}.
+If #{a\ne b}, all four eigenvalues are distinct, so an orthogonal
+commuter of #{Q} chooses one sign on each eigenline. Commuting with
+#{P_R} makes the signs equal within each pair, leaving two independent
+signs. If #{a=b}, the first pair still shares one sign. On
+#{\operatorname{span}(u_1,u_2)}, an orthogonal commuter must preserve
+the two lines spanned by #{u_1+u_2} and #{u_1-u_2}, leaving two
+further signs. This proves the orthogonal counts.}
+
+\p{For a signed graph symmetry #{r^ks^\epsilon} with
+#{r(i)=i+1}, #{s(i)=-i}, the opposite set is preserved iff #{k}
+is even. When #{a\ne b}, weight preservation additionally requires
+#{k+\epsilon} even. Thus only #{1,r^2} remain; when #{a=b},
+#{1,r^2,s,r^2s} remain. These are all possibilities because the
+underlying simple-cycle automorphism group is #{D_4}, as in
+\ref{fdip-000X}.}
+}

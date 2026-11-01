@@ -1,0 +1,84 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{The law on a selected subspace}
+\date{2026-11-01}
+
+\p{For a [selected background](fdip-005A), view #{P} as a map
+#{H\to X=\operatorname{im}P} and let #{r=\dim X}. The law
+#{\nu_b=P_*\mu_Q} is the centered Gaussian on #{X} with intrinsic
+covariance and precision
+##{C_P=(PGP)|_X>0,\qquad S_P=C_P^{-1}:X\to X.}
+Relative to the induced Euclidean volume #{\lambda_X}, its density is
+##{\frac{d\nu_b}{d\lambda_X}(x)
+ =\frac{\sqrt{\det_X S_P}}{(2\pi)^{r/2}}
+   e^{-\langle x,S_Px\rangle /2}.}
+If #{B:\mathbb R^r\to H} is an isometric inclusion with image #{X},
+then #{BB^*=P}; its chosen coordinate matrices are
+##{B^*C_PB=B^*GB,\qquad [S_P]_B=(B^*GB)^{-1}.}
+For another such basis #{B'=BU}, #{U\in O(r)}, the latter changes
+to #{U^*[S_P]_BU}. The intrinsic operator #{S_P} is independent
+of this choice.}
+
+\proof{
+\p{For nonzero #{x\in X},
+#{\langle x,C_Px\rangle=\langle x,Gx\rangle>0}.
+Set #{C=B^*GB}, so #{C>0}. The positive square roots of #{Q}
+and #{C} exist by the real spectral theorem. The density
+change of variables #{z=Q^{1/2}\phi} gives the standard Gaussian
+density #{(2\pi)^{-|V|/2}e^{-|z|^2/2}}: its Jacobian and the
+[normalizer](fdip-002T) cancel. Put
+##{T=C^{-1/2}B^*Q^{-1/2}.}
+Then #{TT^*=C^{-1/2}(B^*GB)C^{-1/2}=I_r}, so its rows extend
+to an orthonormal basis of #{H}. The resulting square orthogonal
+matrix carries #{z} to a standard Gaussian, since its Jacobian
+has absolute value one and it preserves the squared norm.
+Its first #{r} coordinates are #{Tz}; integration over the other
+coordinates gives the standard #{r}-dimensional density. Hence
+##{B^*\phi=C^{1/2}Tz}
+has density #{(2\pi)^{-r/2}(\det C)^{-1/2}
+e^{-y^TC^{-1}y/2}} by an invertible change of variables.
+The isometry #{B} carries Euclidean volume to #{\lambda_X} and
+#{B(B^*\phi)=P\phi}. This proves the law and its density, rather
+than inferring a law from its covariance alone.}
+
+\p{For #{x,x'\in X}, the covariance of the corresponding linear
+observations is #{\langle x,Gx'\rangle=\langle x,C_Px'\rangle}
+by the [inverse-precision formula](fdip-000B). The inverse identity
+and #{B'=BU} give the coordinate statements.}
+}
+
+\p{In the orthogonal split #{H=X\oplus Y}, write
+##{Q=\begin{pmatrix}A&K\\K^*&D\end{pmatrix},\qquad D>0.}
+Then
+##{S_P=A-KD^{-1}K^*.}
+Indeed, solving #{Q(x,y)=(u,0)} gives
+#{y=-D^{-1}K^*x} and #{(A-KD^{-1}K^*)x=u}.
+Positivity follows by evaluating the quadratic form on
+#{(x,-D^{-1}K^*x)}. Thus the #{X,X} block of #{Q^{-1}}
+is the inverse of this Schur complement, and it is exactly #{C_P}.
+For #{P=P_R}, this recovers the [coordinate marginal](fdip-000E).
+If #{PQ=QP}, then #{K=0} and #{S_P=Q|_X}; symmetry of a
+subspace alone does not justify that equality.}
+
+\p{\citet{Appendix A.2, p. 200}{rasmussen2006gaussian}
+gives formulas (A.4)-(A.6) for Gaussian densities and marginals.}
+
+\p{\citet{Definition 8.3, p. 384}{friedli2017statistical}
+characterizes Gaussian vectors by linear observations.}
+
+\p{\citet{Theorem 8.4, p. 385}{friedli2017statistical}
+gives their nonsingular density. The row-isometry argument above supplies the
+linear-image step, including its Euclidean-volume identification.}
+
+\p{A partial formal correspondence is supplied by TauCeti's
+\leanref/tauceti{TauCeti.Probability.map_affine_multivariateGaussian}.
+It allows finite real coordinate spaces, a positive semidefinite
+covariance and an arbitrary rectangular linear map. Set its mean
+and shift to zero, its covariance to #{G=Q^{-1}>0}, and its matrix
+to #{B^*}. After the [precision-density identification](fdip-000B),
+the result gives the coordinate image law with covariance #{B^*GB}.
+It does not require full row rank. Positivity of this compressed
+covariance, its inverse precision, the isometric identification
+with #{X}, and the graph data are the additional arguments above.}
