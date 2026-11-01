@@ -1,0 +1,64 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{Integrating and conditioning the matter field}
+\date{2026-11-01}
+
+\p{For the [joint law](fdip-0076), let
+#{W(U)=\frac12\log\det_{\mathbb R}Q_U} and set
+##{Z_U=\int_{G^E}e^{-S_W(U)-W(U)}\,d\mu(U).}
+Then
+##{\mathfrak Z=(2\pi)^{N/2}Z_U,\qquad
+ d\mathbb P_U(U)=Z_U^{-1}e^{-S_W(U)-W(U)}\,d\mu(U).}
+A [conditional matter kernel](fdip-003A) is
+##{K_U(d\phi)=(2\pi)^{-N/2}(\det Q_U)^{1/2}
+ e^{-\frac12\langle\phi,Q_U\phi\rangle}
+ \,d\operatorname{vol}(\phi),}
+so, conditionally on #{U}, the field has law
+#{N(0,Q_U^{-1})}. In particular the induced action adds to the bare
+gauge action exactly, with no large-mass approximation.}
+
+\proof{
+\p{The [real Gaussian integral](fdip-0070), converted from its
+normalized reference volume to ordinary volume, gives
+##{\int_{\mathcal H}e^{-\frac12\langle\phi,Q_U\phi\rangle}
+ \,d\operatorname{vol}(\phi)
+ =(2\pi)^{N/2}e^{-W(U)}.}
+Tonelli's theorem applies to the nonnegative joint density.
+Integrating first over #{\phi} proves the normalization and marginal
+formulas. Dividing the fixed-#{U} matter density by this Gaussian
+integral yields #{K_U}. Multiplying the two displayed densities
+recovers the joint density, proving the disintegration identity
+##{\mathbb P(dU,d\phi)=\mathbb P_U(dU)K_U(d\phi).}
+This explicitly chosen kernel supplies a conditional version at every
+connection.}
+}
+
+\p{Mathlib's \leanref{MeasureTheory.lintegral_prod} states Tonelli's
+identity for an almost-everywhere measurable nonnegative extended-real
+function, with an s-finite inner measure. The gauge probability and
+finite-dimensional Lebesgue measure satisfy these measure conditions;
+the density here is measurable. This is partial support for the
+product-integration step, not for the Gaussian evaluation or the
+marginal and conditional formulas derived above.}
+
+\p{The [selected Gaussian marginal](fdip-005B) and
+[conditional propagator](fdip-0060) formulas therefore apply separately
+at each fixed #{U}. For example, in orthonormal retained and eliminated
+coordinates, write
+##{Q_U=\begin{pmatrix}A_U&B_U\\B_U^T&C_U\end{pmatrix},\qquad C_U>0.}
+Then the retained precision at that connection is
+#{A_U-B_UC_U^{-1}B_U^T}, and
+##{\phi_{\mathrm{elim}}\mid(\phi_{\mathrm{ret}}=x,U)
+ \sim N(-C_U^{-1}B_U^Tx,C_U^{-1}).}
+These statements keep the connection in the conditioning data.}
+
+\p{After averaging over #{U}, the matter law is generally a mixture
+of Gaussian laws, rather than one Gaussian law. Its covariance is
+##{\mathbb E_{\mathbb P_U}[Q_U^{-1}],}
+by the conditional covariance identity and the zero conditional mean.
+Observing retained matter coordinates also reweights the distribution
+of #{U} by their conditional likelihood. One cannot obtain the joint
+conditional law by keeping the original connection probabilities
+fixed and applying a single Gaussian formula.}
