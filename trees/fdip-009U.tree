@@ -1,0 +1,50 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Definition}
+\title{The covariant Wilson operator with lattice spacing}
+\date{2026-11-01}
+
+\p{Use the [field space and unitary shifts](fdip-009O)
+#{\mathcal H=\ell^2(\Lambda)\otimes S\otimes F} and
+#{T_j^U}, with #{\dim_{\mathbb C}S=2^d} and
+#{q=\dim_{\mathbb C}F>0}. A lattice spacing #{a>0}
+rescales the differences, while #{x\in\Lambda} remains an
+integer site label. Define
+##{\begin{aligned}
+D_{a,U}&=a^{-1}D_U,\\
+L_{a,U}&=a^{-2}\sum_{j=1}^d
+ \bigl(2I-T_j^U-(T_j^U)^{-1}\bigr).
+\end{aligned}}
+For #{r\in\mathbb R\setminus\{0\}}, the massless
+\newvocab{Wilson operator} in the skew Dirac convention is
+##{D_{W,a,U}=D_{a,U}+\frac{ra}{2}L_{a,U}.}
+The usual positive Wilson coefficient is #{r>0}. For #{a=1}
+this is #{D_U+(r/2)L_{1,U}}. The Laplacian is the
+nearest-neighbor second difference, not the negative square of
+the centered first difference.}
+
+\p{Each #{T_j^U} is unitary, so
+##{2I-T_j^U-(T_j^U)^{-1}
+ =(I-T_j^U)^*(I-T_j^U).}
+Consequently #{L_{a,U}} is self-adjoint and nonnegative,
+whereas #{D_{a,U}} is [skew-adjoint](fdip-009P).
+For the internal gauge transformation #{\mathcal G} of that
+proposition, conjugating every shift and its inverse gives
+##{\begin{aligned}
+L_{a,U^g}&=\mathcal G L_{a,U}\mathcal G^{-1},\\
+D_{W,a,U^g}&=\mathcal G D_{W,a,U}\mathcal G^{-1}.
+\end{aligned}}
+This defines a covariant operator for all the supplied unitary
+connections. The Fourier kernel theorem below assumes the
+trivial connection.}
+
+\p{For #{r=1}, this is the second-derivative addition in
+\citet{Section 9.3, Equation (9.15), p. 21}{wingate2025lattice}:
+#{L_a=-\sum_j\nabla_j^+\nabla_j^-} in the free difference
+notation. The coefficient #{ra/2}, rather than #{r/2}, is
+required when #{L_a} contains #{a^{-2}}. A paired Grassmann
+quadratic form may use this finite matrix as its kernel, as in
+\ref{fdip-008H}. Gauge covariance and the Wilson coefficient
+alone supply neither a positive probability density nor a
+fermionic reflection-positive transfer construction.}
