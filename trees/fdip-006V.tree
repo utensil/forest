@@ -1,0 +1,63 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Definition}
+\title{Finite surface gauge data and face weights}
+\date{2026-11-01}
+
+\p{Let #{\Sigma} be a connected closed oriented surface of genus
+#{g}, with a finite polygonal cell decomposition. Write #{V,E,\mathcal P}
+for its vertices, edges and disk faces, and #{P=|\mathcal P|>0}.
+Each face has a nonempty cyclic boundary word. Every edge occurs
+exactly twice among all face boundaries, with opposite orientations;
+the two occurrences may belong to the same face. The link of each
+vertex is a circle. These surface conditions are stronger than the
+[square-cell data](fdip-006M): singular quotients are excluded.
+Loops and repeated boundary edges are allowed.}
+
+\p{Choose one orientation per edge and a finite group #{G}.
+A connection is #{U\in G^E}, with the inverse assigned to a reversed
+traversal. Use the [ordered-transport convention](fdip-006N): if a
+face boundary successively traverses #{e_1^{\epsilon_1},\ldots,
+e_k^{\epsilon_k}}, its holonomy is
+##{U_p=U_{e_k}^{\epsilon_k}\cdots U_{e_1}^{\epsilon_1}.}
+Orient all faces by the orientation of #{\Sigma}. Changing a starting
+vertex conjugates #{U_p}. A central function, or
+[class function](fgap-001M), is a function #{f:G\to\mathbb C}
+satisfying #{f(khk^{-1})=f(h)} for all #{h,k\in G}.
+It therefore defines the normalized partition sum
+##{Z_\Sigma(f)=\frac1{|G|^{|E|}}\sum_{U\in G^E}
+ \prod_{p\in\mathcal P}f(U_p).}
+This uses uniform probability measure on each edge. Unnormalized
+counting gives #{|G|^{|E|}Z_\Sigma(f)}. A complex face weight is allowed
+for the algebraic identity; if #{f>0}, division by the partition sum
+defines a probability law.}
+
+\p{For a fixed unitary representation #{\sigma} of complex dimension
+#{d_\sigma>0} and #{\beta\ge0}, the
+[Wilson action](fdip-006O) corresponds to
+##{f_\beta(h)=\exp\left[-\beta\left(
+ 1-\frac{\operatorname{Re}\chi_\sigma(h)}{d_\sigma}\right)\right].}
+The constant #{e^{-\beta}} per face is part of this weight.
+For an oriented closed edge path #{C}, its normalized real Wilson loop is
+##{W_\sigma(C)=\frac{\operatorname{Re}\chi_\sigma(U_C)}{d_\sigma}.}
+It is gauge invariant, independent of its starting vertex and unchanged
+by reversal. For a general central #{f}, reversal of the chosen surface
+orientation need not preserve the weight; the Wilson weight is
+inversion invariant.}
+
+\p{Choose one unitary representative of each complex irreducible
+representation, indexed by #{\widehat G}, with dimension #{d_\rho}.
+The [character basis](fgap-001M) gives the finite expansion
+##{\begin{aligned}
+f(h)&=\sum_{\rho\in\widehat G}c_\rho\chi_\rho(h),\\
+c_\rho&=\frac1{|G|}\sum_{h\in G}
+ f(h)\overline{\chi_\rho(h)}.
+\end{aligned}}
+These coefficients are not divided by #{d_\rho} in the expansion.
+TauCeti's
+\leanref/tauceti{TauCeti.ClassFunction.apply_eq_sum_characterPairing_mul_character}
+formalizes this finite class-function expansion. Its bilinear pairing
+is #{|G|^{-1}\sum_h\chi_\rho(h)f(h^{-1})}; substitution by inversion
+and unitarity give the displayed coefficient. This correspondence
+concerns the expansion, not the surface partition theorem below.}

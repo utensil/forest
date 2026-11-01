@@ -1,0 +1,69 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Example}
+\title{Quaternion spinor gauge fields}
+\date{2026-11-01}
+
+\p{Take #{G=Q_8=\{\pm1,\pm i,\pm j,\pm k\}} in the unit
+quaternions and its defining complex spinor representation
+#{\sigma:Q_8\to SU(2)}. Its character is
+#{\chi_\sigma(h)=2\operatorname{Re}h}. The four linear characters
+factor through #{Q_8/\{\pm1\}\cong C_2\times C_2}.
+The spinor has character norm #{(2^2+(-2)^2)/8=1}, so is
+irreducible. These five inequivalent irreducibles are complete
+because #{4\cdot1^2+2^2=8}. This is the quaternion representation
+already used in the [group-algebra examples](fgap-001B).}
+
+\p{For the [spinor Wilson weight](fdip-006V), put #{q=e^{-\beta}}.
+Then
+##{f_\beta(1)=1,\qquad f_\beta(-1)=q^2,\qquad
+ f_\beta(\pm i)=f_\beta(\pm j)=f_\beta(\pm k)=q.}
+Its irreducible character coefficients are
+##{\begin{aligned}
+a&=\frac{1+q^2+6q}{8} &&\text{(trivial)},\\
+b&=\frac{(1-q)^2}{8} &&\text{(each other linear character)},\\
+c&=\frac{1-q^2}{4} &&\text{(spinor)}.
+\end{aligned}}
+For a nontrivial linear character, the sum over the six noncentral
+units is #{-2}; for the spinor it is zero, while the central values
+are #{2,-2}. Substitution into the character inner product proves
+all three formulas. The [surface theorem](fdip-006W) gives
+##{Z_\Sigma(f_\beta)=a^P+3b^P+
+ 2^{2-2g}\left(\frac c2\right)^P.}
+At #{\beta=0}, only #{a=1} remains. At the identity,
+#{a+3b+2c=1}, checking the coefficient normalization.}
+
+\p{A one-face torus has one vertex and two loop edges #{x,y}.
+The square below identifies equally labelled sides in their arrow
+directions and all four corners. A positive boundary traversal is
+#{x,y,x^{-1},y^{-1}}. Writing #{A=U_x} and #{B=U_y}, its
+holonomy is #{H=B^{-1}A^{-1}BA}.}
+
+\tikzfig{
+\begin{tikzpicture}[scale=1.05,>=stealth]
+\coordinate (A) at (0,0);
+\coordinate (B) at (2.6,0);
+\coordinate (C) at (2.6,1.8);
+\coordinate (D) at (0,1.8);
+\draw[->] (A) -- node[below] {$x$} (B);
+\draw[->] (B) -- node[right] {$y$} (C);
+\draw[->] (D) -- node[above] {$x$} (C);
+\draw[->] (A) -- node[left] {$y$} (D);
+\node at (1.3,0.9) {$p$};
+\foreach \v in {A,B,C,D} {\fill (\v) circle (1.8pt);}
+\end{tikzpicture}
+}
+
+\p{The normalized Wilson loop is #{W_\sigma=\operatorname{Re}H}.
+Of the #{64} ordered pairs #{(A,B)}, exactly #{40} commute:
+the two central elements have centralizer size eight and the six
+others size four. Their commutator is #{1}; the other #{24}
+commutators are #{-1}. Hence the direct finite sum gives
+##{Z_{\mathbb T^2}(f_\beta)=\frac{5+3q^2}{8},\qquad
+ \langle W_\sigma\rangle=\frac{5-3q^2}{5+3q^2}.}
+The partition formula also follows from #{a+3b+c/2}.
+This single plaquette is the whole torus, not a disk bounded by a
+simple contractible loop of the earlier square-torus theorem.
+Its boundary word can have a nontrivial holonomy because the
+connection is not constrained to be flat.}
