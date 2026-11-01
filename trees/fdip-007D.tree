@@ -1,0 +1,73 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{Wilson and Villain coefficients on the circle}
+\date{2026-11-01}
+
+\p{For #{G=U(1)}, use characters #{\chi_n(e^{i\theta})=e^{in\theta}}
+with #{n\in\mathbb Z} and normalized Haar measure
+#{d\theta /(2\pi)}. For #{\beta>0}, the Wilson weight
+#{w_\beta(\theta)=e^{\beta\cos\theta}} has coefficients
+##{I_n(\beta)=\sum_{j=0}^\infty
+ \frac{(\beta /2)^{2j+|n|}}{j!(j+|n|)!}>0,
+ \qquad \sum_{n\in\mathbb Z}I_n(\beta)=e^\beta.}
+Thus its character series is uniformly absolutely convergent.
+The [Wilson action convention](fdip-006O) includes the additional
+constant factor #{e^{-\beta}}; this multiplies all coefficients
+but cancels from the normalized one-plaquette probability.}
+
+\p{TauCeti's
+\leanref/tauceti{Real.integral_exp_mul_cos_mul_cexp}
+proves the Wilson circle integral with exponent #{+in\theta} and
+unnormalized measure on #{[-\pi,\pi]}. Replacing #{n} by #{-n}
+and dividing by #{2\pi} gives the coefficient convention here;
+its Bessel value has the displayed power series. This correspondence
+supports the Wilson coefficient identity, not the Villain formula
+or the comparison of the two weights.}
+
+\p{For #{\beta_V>0}, the Villain weight is the periodic Gaussian
+##{v_{\beta_V}(\theta)=\sum_{\ell\in\mathbb Z}
+ \exp\left[-\frac{\beta_V}{2}(\theta-2\pi\ell)^2\right].}
+Its character coefficient is
+##{c_n^V=(2\pi\beta_V)^{-1/2}
+ e^{-n^2/(2\beta_V)}.}
+The coefficient series is again uniformly absolutely convergent and
+all coefficients are strictly positive. Dividing each weight by its
+zeroth coefficient normalizes its integral to one, giving
+##{\widehat c_n^W=\frac{I_n(\beta)}{I_0(\beta)},\qquad
+ \widehat c_n^V=e^{-n^2/(2\beta_V)}.}
+These normalized coefficients differ from the unnormalized
+#{c_\rho} in the [surface formula](fdip-007C).}
+
+\proof{
+\p{Put #{z=e^{i\theta}}. Multiply the two absolutely convergent
+series for #{\exp(\beta z/2)} and #{\exp(\beta z^{-1}/2)}.
+The coefficient of #{z^n} is the displayed #{I_n}; the total of
+all absolute coefficients is the product #{e^{\beta /2}e^{\beta /2}}.
+Every #{I_n} is positive for #{\beta>0}.}
+
+\p{For the periodic Gaussian, uniform Gaussian tail bounds on a
+period justify continuity and integration term by term. Unfolding
+its coefficient integral gives
+##{c_n^V=\frac1{2\pi}\int_{\mathbb R}
+ e^{-\beta_V x^2/2}e^{-inx}\,dx.}
+For real #{t}, let #{J(t)} be the integral without #{1/(2\pi)}
+and with #{n} replaced by #{t}. Gaussian domination permits
+differentiation under the integral. Integration by parts, with
+vanishing boundary terms, gives
+#{J'(t)=-(t/\beta_V)J(t)}. Since
+#{J(0)=\sqrt{2\pi /\beta_V}}, this proves the coefficient formula.
+The Gaussian coefficient bound is summable over #{n}. Its uniformly
+convergent Fourier series has the same coefficients as the continuous
+periodic Gaussian, so completeness of the [character basis](fdip-007C)
+and continuity identify the two functions. Finally, the integral of a
+weight is its zeroth coefficient, which proves the normalization.}
+}
+
+\p{Both positive-parameter weights satisfy the
+[positive-character kernel hypotheses](fdip-007I): they are real,
+strictly positive, invariant under inversion, and have positive
+summable coefficients. For #{U(1)} every irreducible dimension is
+one. This checks the kernel assumptions without asserting any
+transfer-operator or continuum conclusion.}

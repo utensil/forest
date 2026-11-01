@@ -1,0 +1,45 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Definition}
+\title{A representation datum for a field}
+\date{2026-11-01}
+
+\p{A \newvocab{representation datum} specifies a finite discrete
+or compact Hausdorff group #{G}, a scalar field #{\mathbb K\in\{\mathbb R,\mathbb C\}},
+a finite-dimensional fiber #{F} over #{\mathbb K}, a continuous
+representation #{\rho:G\to GL_{\mathbb K}(F)}, and a separately
+chosen action #{\alpha:G\to\operatorname{Aut}(X)} on the finite
+substrate #{X}. The substrate automorphisms preserve the graph,
+weights and any supplied oriented cell data, with orientation changes
+interpreted by the established inverse-transport convention. One must
+also specify a positive invariant real or Hermitian inner product on
+#{F}. The field itself is a map #{\phi:V\to F}.}
+
+\p{An invariant inner product always exists for these groups. From
+any positive inner product #{h_0}, define
+##{h(v,w)=\int_G h_0(\rho(g)v,\rho(g)w)\,d\mu_G(g).}
+The [normalized Haar measure](fdip-007B) makes this invariant by a
+change of variable. The integral is finite by compactness, and
+#{h(v,v)>0} for #{v\ne0}, since #{\rho(g)v\ne0} for every #{g}.
+This proves existence of an invariant metric; it does not make that
+metric a canonical choice. A selected metric remains part of the
+background data.}
+
+\p{The global action associated to the datum is
+##{(g\cdot\phi)(v)=\rho(g)\phi(\alpha(g)^{-1}v).}
+The two actions have different roles. For a purely internal group,
+#{\alpha} is trivial: the group acts on values without moving
+vertices. A [local gauge transformation](fdip-006E) instead assigns
+an element #{g_v} independently at each vertex and transforms links
+by #{U_e\mapsto g_{h(e)}U_eg_{s(e)}^{-1}}. It fixes the substrate;
+a global substrate action #{\alpha} cannot simply be applied
+independently at each vertex.}
+
+\p{If a field has an additional spin space #{S}, an internal action
+on #{S\otimes F} is #{1_S\otimes\rho(g)}. Clifford operators
+#{\gamma_j\otimes1_F} then commute with that action because they
+act on different factors. An identification of internal and spin
+symmetries, or an action moving the substrate, needs extra compatible
+data; it is not implied by the abstract group name or by an inclusion
+in #{SU(2)}.}
