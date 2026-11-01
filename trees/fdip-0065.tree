@@ -1,0 +1,83 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{Precision zeros and Gaussian conditional independence}
+\date{2026-11-01}
+
+\p{Let #{\phi\sim N(0,Q^{-1})} on #{\mathbb R^V}, where #{Q} is any
+real symmetric positive-definite matrix. Its \newvocab{precision graph}
+has an edge #{\{a,b\}} for distinct vertices exactly when #{Q_{ab}\ne0}.
+For pairwise disjoint subsets #{A,B,S}, say that #{S} separates #{A}
+from #{B} if every graph path from #{A} to #{B} meets #{S}. Then
+##{S\text{ separates }A\text{ from }B
+\quad\Longrightarrow\quad
+\phi_A\mathrel{\perp\mkern-9mu\perp}\phi_B\mid\phi_S.}
+Here conditional independence means that the conditional joint law
+factors into its two conditional marginals almost everywhere in
+#{\phi_S}. The canonical Gaussian density kernels used below factor
+at every conditioning value. For distinct vertices there is also the
+pairwise equivalence
+##{Q_{ab}=0\quad\Longleftrightarrow\quad
+\phi_a\mathrel{\perp\mkern-9mu\perp}\phi_b
+     \mid\phi_{V\setminus\{a,b\}}.}
+No Laplacian sign condition on #{Q} is required.}
+
+\proof{
+\p{First suppose #{V=A\sqcup S\sqcup B}. Separation implies
+#{Q_{AB}=0}. With #{\phi_S=s} fixed, the quadratic energy in #{a,b}
+is the sum
+##{\begin{aligned}
+&\frac12a^TQ_{AA}a+a^TQ_{AS}s\\
+&\qquad+\frac12b^TQ_{BB}b+b^TQ_{BS}s
+  +\frac12s^TQ_{SS}s.
+\end{aligned}}
+The last term is constant. The two remaining positive Gaussian
+factors normalize separately, proving independence at every #{s}.
+Equivalently, the conditional precision is
+#{\operatorname{diag}(Q_{AA},Q_{BB})}; its inverse has zero cross block.
+The square completion is the coordinate case of
+\ref{fdip-0060}.}
+
+\p{For smaller disjoint #{A,B,S}, no connected component of the graph
+on #{V\setminus S} meets both #{A} and #{B}. Assign its components
+to two unions #{A',B'} with #{A\subseteq A'}, #{B\subseteq B'} and
+#{A'\sqcup B'=V\setminus S}; components meeting neither may be
+assigned arbitrarily. The preceding argument gives conditional
+independence of #{\phi_{A'}} and #{\phi_{B'}} given #{s}. Taking
+coordinate marginals gives the asserted independence of #{\phi_A}
+and #{\phi_B}.}
+
+\p{For the pairwise statement, fixing all other coordinates leaves
+conditional precision and cross covariance
+##{\begin{pmatrix}Q_{aa}&Q_{ab}\\Q_{ab}&Q_{bb}\end{pmatrix},
+\qquad
+\operatorname{Cov}(\phi_a,\phi_b\mid\phi_{V\setminus\{a,b\}})
+ =\frac{-Q_{ab}}{Q_{aa}Q_{bb}-Q_{ab}^2}.}
+The denominator is positive. Independence implies zero covariance,
+and zero #{Q_{ab}} makes the conditional density a product. This
+proves both directions.}
+}
+
+\p{A positive Gaussian law is \newvocab{Markov with respect to a graph}
+#{\Gamma} if its precision is zero on all distinct nonedges of
+#{\Gamma}; extra zeros on edges are allowed. The same proof gives
+conditional independence across every separator of #{\Gamma}.
+Conversely its separator condition implies these zeros by taking
+#{S=V\setminus\{a,b\}} for each nonedge. This is the finite Gaussian
+global Markov equivalence of
+\citet{Proposition 1 and Corollary 1, p. 139; Proposition 2, pp. 140–141}{speed1986gaussian}.
+The lattice harmonic-field statements of
+\citet{Theorems 8.17 and 8.26, pp. 391 and 399}{friedli2017statistical}
+concern their specified lattice precisions, not this arbitrary-precision
+theorem.}
+
+\p{Mathlib's
+\leanref{ProbabilityTheory.HasGaussianLaw.indepFun_of_covariance_eval}
+supports the independence step for two finite coordinate families
+with a jointly Gaussian law and zero cross covariances. Apply it
+separately to the conditional Gaussian at each fixed #{s}; the block
+inverse above verifies its covariance hypothesis. The declaration
+asserts ordinary independence under that probability law. Graph
+separation, the passage to conditional kernels and the pairwise
+converse are supplied by the argument above.}
