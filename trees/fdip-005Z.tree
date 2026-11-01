@@ -1,0 +1,51 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{Naturality of the fiber interaction}
+\date{2026-11-01}
+
+\p{Let #{b,b'} be [selected backgrounds](fdip-005A) with polynomial
+interactions #{\mathcal V,\mathcal V'}. Suppose a
+[background arrow](fdip-005C) has vertex counting isometry
+#{U:H\to H'} and satisfies #{\mathcal V'\circ U=\mathcal V}.
+Then the [fiber interactions](fdip-005Y) obey, to all formal orders,
+##{F_{b',\mathcal V'}(\lambda,Ux)
+   =F_{b,\mathcal V}(\lambda,x)\qquad(x\in X).}
+The assertion also holds for signed endpoint arrows. More generally,
+it holds for an orthogonal isomorphism #{O:H\to H'} satisfying
+##{Q'=OQO^{-1},\qquad P'=OPO^{-1},\qquad
+   \mathcal V'\circ O=\mathcal V,}
+with #{Ox} in place of #{Ux}. This latter statement uses the wider
+[orthogonal comparison](fdip-005D), which need not preserve incidence.}
+
+\proof{
+\p{It suffices to prove the orthogonal statement. The equation for
+#{P'} gives isometries #{O_X:X\to X'} and #{O_Y:Y\to Y'}.
+For #{x\in X} and #{y\in Y},
+##{\langle O_Xx+O_Yy,Q'(O_Xx+O_Yy)\rangle
+   =\langle x+y,Q(x+y)\rangle.}
+The change of variables #{y'=O_Yy} has absolute Jacobian one for
+the induced Euclidean volumes. Consequently #{Z_{b'}(O_Xx)=Z_b(x)}
+and
+##{(O_Y)_*\kappa_{b,x}=\kappa_{b',O_Xx}.}
+Transport of #{\mathcal V} now gives, for every integer #{n\ge0},
+##{\begin{aligned}
+&\int_{Y'}\mathcal V'(O_Xx+y')^n\,\kappa_{b',O_Xx}(dy')\\
+&\qquad=\int_Y\mathcal V(x+y)^n\,\kappa_{b,x}(dy).
+\end{aligned}}
+The integrals are finite. Thus the two moment series agree after
+pullback, and so do their formal logarithms. A directed or signed
+background arrow supplies the required conjugacy of #{Q,P}, proving
+the graph cases as well.}
+}
+
+\p{Each coefficient of #{F} is therefore a polynomial transported
+by the same retained isometry. Its homogeneous parts correspond by
+polarization to symmetric tensors on #{X}. A background automorphism
+that also preserves #{\mathcal V} fixes these polynomials and tensors;
+choosing coordinates only records their components. Arbitrary
+components need not be unchanged by an orthogonal change of basis.
+Likewise a graph symmetry need not preserve a supplied interaction.
+The invariance assertion uses both the background and interaction
+transport equations.}

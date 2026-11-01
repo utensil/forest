@@ -1,0 +1,61 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Remark}
+\title{How the selector changes induced interactions}
+\date{2026-11-01}
+
+\p{A comparison of selectors should hold the full interaction fixed.
+On the alternating cycle of \ref{fdip-0061}, now use
+##{\mathcal V_{\mathrm{tot}}(\phi)=\frac1{24}\sum_{v=0}^3\phi_v^4.}
+For opposite retained vertices #{R=\{0,2\}}, add
+#{(x_0^4+x_2^4)/24} to that example's first coefficient. The
+eliminated covariance is #{s^{-1}I_2}. For adjacent retained vertices
+#{R=\{0,1\}}, the eliminated coordinates are #{(\phi_2,\phi_3)},
+and
+##{\begin{aligned}
+D&=\begin{pmatrix}s&-1\\-1&s\end{pmatrix},\\
+D^{-1}&=\frac1{s^2-1}\begin{pmatrix}s&1\\1&s\end{pmatrix},\\
+\mu(x)&=\frac{t}{s^2-1}
+        \begin{pmatrix}1&s\\s&1\end{pmatrix}
+        \begin{pmatrix}x_0\\x_1\end{pmatrix}.
+\end{aligned}}
+Here #{s>1}, so the denominator is positive. These formulas follow
+from #{Q_{UR}=\left(\begin{smallmatrix}0&-t\\-t&0\end{smallmatrix}\right)}
+and the [conditional rules](fdip-0060).}
+
+\p{The adjacent first coefficient is explicitly
+##{\begin{aligned}
+a_{\mathrm{adj}}(x)={}&\frac{x_0^4+x_1^4}{24}\\
+ &+\frac1{24}\sum_{j=2,3}
+       \bigl(\mu_j(x)^4+6\mu_j(x)^2v+3v^2\bigr),\\
+v={}&\frac{s}{s^2-1}.
+\end{aligned}}
+In particular its constant term is #{s^2/[4(s^2-1)^2]}, whereas
+the opposite selector gives #{1/(4s^2)}. They are unequal for
+#{s>1}. The adjacent propagator also has a nonzero cross entry
+#{1/(s^2-1)} between eliminated vertices, which contributes pairings
+between their quartics in the variance coefficient. Such a cross
+entry is absent for opposite elimination. Thus the same precision
+and full interaction yield different conditional contraction rules
+and induced vertices when the selector changes.}
+
+\p{For a [restricting selector](fdip-005M), #{PQ=QP} makes the
+cross block #{K} zero. The Gaussian law then factors between #{X}
+and #{Y}, and the eliminated conditional mean is zero. Any remaining
+coupling between the two subspaces comes from #{\mathcal V}, not
+from a Gaussian cross term. In particular, if
+#{\mathcal V(x+y)=\mathcal V_X(x)+\mathcal V_Y(y)}, then
+##{F_\lambda(x)=\lambda\mathcal V_X(x)
+  -\log\mathbb E_{N(0,D^{-1})}e^{-\lambda\mathcal V_Y}.}
+The second term is a formal scalar independent of #{x}. If the
+interaction has mixed terms, new retained vertices can still be
+induced even though the Gaussian selector restricts.
+[Group-algebra selectors](fdip-005N) restrict under the stated
+equivariance hypothesis; a subrepresentation selector need not.}
+
+\p{These formulas answer the finite perturbative question: the
+propagator and induced interaction depend on the supplied background
+and selector. They do not establish convergence of the formal
+series, a continuum interacting measure, or a physical mechanism
+that selects the background.}
