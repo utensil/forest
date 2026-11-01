@@ -1,0 +1,61 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{Gluing two Gaussian laws across a separator}
+\date{2026-11-01}
+
+\p{Let #{V=V_1\cup V_2}, #{S=V_1\cap V_2},
+#{A=V_1\setminus S} and #{B=V_2\setminus S}. Suppose positive-definite
+centered Gaussian laws #{\mu_1,\mu_2} have the same marginal
+#{\mu_S}. Write #{p_1,p_2,p_S} for their positive Lebesgue densities.
+There is exactly one positive Gaussian extension with
+#{\phi_A\mathrel{\perp\mkern-9mu\perp}\phi_B\mid\phi_S}. Its density is
+##{p(a,s,b)=\frac{p_1(a,s)p_2(s,b)}{p_S(s)}.}
+If #{S=\varnothing}, take #{p_S=1}; this is the product law.}
+
+\p{Let #{\Lambda_1,\Lambda_2,\Lambda_S} denote the three marginal
+precision matrices. Padding a matrix on #{T} with zeros gives the matrix
+on #{V} defined by
+##{\operatorname{pad}_T(M)=\pi_T^TM\pi_T.}
+The extension's precision is
+##{Q=\operatorname{pad}_{V_1}(\Lambda_1)
+     +\operatorname{pad}_{V_2}(\Lambda_2)
+     -\operatorname{pad}_S(\Lambda_S).}
+In particular, if a positive global Gaussian law has #{S} separating
+#{A} and #{B} in its precision graph, this formula reconstructs its
+precision from the indicated marginals. The matrices #{\Lambda_i}
+are marginal precisions, not principal restrictions of #{Q}.}
+
+\proof{
+\p{Factor the proposed density as
+#{p_S(s)p_1(a\mid s)p_2(b\mid s)}. Successively integrating over
+#{a,b,s} gives total mass one. Integrating just #{b} or just #{a}
+recovers #{p_1} or #{p_2}, respectively; its conditional density is
+visibly a product. Completing the two local squares writes the quadratic
+form in its exponent #{-q/2} as
+##{\begin{aligned}
+q(a,s,b)={}&s^T\Lambda_Ss
+ +(a-M_1s)^TD_1(a-M_1s)\\
+ &+(b-M_2s)^TD_2(b-M_2s),
+\end{aligned}}
+where #{D_1,D_2>0} are the conditional precisions and #{M_1,M_2}
+are the conditional mean maps. This form is positive definite:
+if it is zero, its three nonnegative terms force first #{s=0},
+then #{a=b=0}. The density is therefore a centered positive Gaussian.
+Subtracting the three density exponents gives the displayed padding
+formula. These statements include empty coordinate spaces.}
+
+\p{For any extension with the asserted conditional independence,
+its conditional marginals must equal the two prescribed conditional
+marginals almost everywhere. Its density is consequently the same
+product almost everywhere, proving uniqueness as a probability law.
+For an existing global law the [Markov theorem](fdip-0065) supplies
+this independence. This is the density factorization underlying
+\citet{Propositions 1–2, pp. 139–141}{speed1986gaussian}; the
+construction here also proves positive-definite existence from the
+two compatible input laws.}
+}
+
+\p{The [four-cycle calculation](fdip-006B) displays the marginal
+precisions and reconstructs every entry by this formula.}

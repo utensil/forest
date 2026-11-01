@@ -1,0 +1,104 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{Chordal Gaussian gluing along a junction tree}
+\date{2026-11-01}
+
+\p{A clique is a vertex subset whose distinct vertices are pairwise
+adjacent; a maximal clique is inclusion-maximal. A finite simple graph
+#{\Gamma} on #{V} is \newvocab{chordal} if it has no
+induced cycle of length at least four. Suppose centered positive-definite
+Gaussian laws #{\mu_K} on its maximal cliques agree on every overlap.
+Then there is a unique centered positive-definite Gaussian law with
+these clique marginals that is [Markov with respect to](fdip-0065)
+#{\Gamma}. Uniqueness is asserted within that Markov class.}
+
+\p{The maximal cliques admit a \newvocab{junction tree}: a tree
+#{\mathcal T} whose nodes are the maximal cliques, such that the nodes
+containing any given vertex form a connected subtree. This is the
+running-intersection property. Write #{S_e=K\cap K'} for the
+separator on an edge #{e=KK'} and #{p_{S_e}} for its common marginal
+density. Empty separators have density one. The glued law and precision
+are
+##{p(\phi)=\frac{\prod_Kp_K(\phi_K)}
+                       {\prod_{e\in E(\mathcal T)}p_{S_e}(\phi_{S_e})},}
+##{Q=\sum_K\operatorname{pad}_K(\Lambda_K)
+       -\sum_{e\in E(\mathcal T)}
+                 \operatorname{pad}_{S_e}(\Lambda_{S_e}).}
+Separator terms are counted once per tree edge, including repetitions
+of the same vertex subset. For #{V=\varnothing} the law is the unit
+mass and both products are empty.}
+
+\proof{
+\p{We first justify the finite junction-tree construction. A vertex is
+simplicial when its neighbors form a clique. Every noncomplete chordal
+graph has two nonadjacent simplicial vertices. Here is an induction
+proof. In the connected case choose nonadjacent vertices #{a,b} and
+an inclusion-minimal separator #{S}. Let #{C_a,C_b} be their components
+in #{\Gamma\setminus S}. Minimality implies that each #{s\in S}
+has a neighbor in both components: otherwise restoring that #{s}
+would still leave #{a,b} separated. If nonadjacent #{x,y} belonged
+to #{S}, choose shortest #{x}-to-#{y} paths with internal vertices
+in #{C_a} and in #{C_b}. Each path has no chord, and there are no
+edges between their interiors. Their union would be an induced
+cycle of length at least four. Thus #{S} is a clique.}
+
+\p{Each induced graph #{C_a\cup S} and #{C_b\cup S} is smaller and
+chordal. If one is complete, any vertex in its component is simplicial.
+Otherwise induction gives two nonadjacent simplicial vertices; at most
+one lies in the clique #{S}, so choose one outside #{S}. Its full-graph
+neighbors still lie in that same induced graph, so it is simplicial
+in #{\Gamma}. The two choices are nonadjacent. In a disconnected
+graph choose a simplicial vertex in each of two components by the
+same induction; complete components pose no problem. Complete graphs
+have every vertex simplicial. This proves the assertion and allows
+repeated deletion of a simplicial vertex, a perfect elimination order.}
+
+\p{Induct on that deletion to construct the clique tree. Remove a
+simplicial vertex #{v}, and write #{N} for its neighbor clique. Unless
+no vertices remain, #{N} lies in a maximal clique #{C} of the remaining
+graph; when #{N=\varnothing}, choose any such #{C}. If #{N=C},
+replace node #{C} in its clique tree by #{C\cup\{v\}}. If
+#{N\subsetneq C}, attach #{N\cup\{v\}} as a new leaf at #{C}.
+These are precisely the changes to the maximal cliques. In either
+case the nodes containing each old vertex remain connected, while
+#{v} occurs only in the new node. A one-vertex graph starts the
+induction. Connecting different graph components in this way uses
+empty separators. This proves the required running-intersection
+property. The perfect-elimination characterization is also stated in
+\citet{Theorem 6, p. 119}{grone1984positive}.}
+
+\p{Now remove a leaf clique #{K} of #{\mathcal T} with neighbor #{C}
+and separator #{S=K\cap C}. Running intersection says that
+#{A=K\setminus S} occurs in no other clique, and that #{K}'s
+intersection with the union of the remaining cliques is exactly
+#{S}. By induction glue the remaining clique laws; a one-clique
+tree starts with its prescribed law. The remaining law's marginal on
+#{S} is the prescribed one, since it has the prescribed law on
+#{C}. The [two-law theorem](fdip-0066) then glues in #{\mu_K} by
+multiplication by #{p_K/p_S}. This proves normalization,
+positive definiteness, all clique marginals and the density formula.
+The precision formula follows at each step. Every nonzero summand
+is supported on a clique, so the precision is zero on all nonedges:
+the constructed law is Markov.}
+
+\p{For uniqueness, #{S} separates #{A} from the remaining vertices
+outside #{S}: an edge out of #{A} would belong to a maximal clique,
+but no other clique contains its endpoint in #{A}. Any Markov extension
+therefore factors across this separator by \ref{fdip-0065}. Its
+marginal after removing #{A} is again Markov for the induced remaining
+graph. Indeed the Schur correction from eliminating #{A} is supported
+only on #{S\times S}, and #{S} is a clique, so it creates no entry
+on a nonedge. Induction makes that remaining marginal unique; the
+separator factorization then makes the full law unique.}
+}
+
+\p{The positive-definite completion theorem of
+\citet{Theorem 7, p. 120, proof pp. 121–122}{grone1984positive}
+characterizes chordal graphs by existence for every compatible
+positive clique specification. The proof above additionally constructs
+the Markov extension and proves uniqueness within that class. Bare
+completion existence alone does not assert that all extensions are
+identical. Even for two isolated vertices, \ref{fdip-006A} has many
+positive completions and exactly one Markov completion.}
