@@ -1,0 +1,30 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Definition}
+\title{The Pfaffian records signed pairings}
+\date{2026-11-01}
+
+\p{Let #{A^T=-A} be a #{2m\times2m} matrix over
+#{\mathbb R} or #{\mathbb C}. A perfect matching of
+#{\{1,\ldots,2m\}} partitions it into pairs
+#{(i_1,j_1),\ldots,(i_m,j_m)}, written with #{i_r<j_r}
+and #{i_1<\cdots<i_m}. Let #{\varepsilon(M)} be the sign
+of the permutation with word #{i_1,j_1,\ldots,i_m,j_m}.
+The \newvocab{Pfaffian} is
+##{\operatorname{Pf}(A)
+ =\sum_M\varepsilon(M)\prod_{r=1}^m A_{i_rj_r}.}
+The empty Pfaffian is #{1}. This is the matching formula in
+\citet{v2, Section 9.9, pp. 130-131}{etingof2024mathematical}.}
+
+\p{Grouping matchings by the partner #{j} of #{1} gives
+##{\operatorname{Pf}(A)=
+ \sum_{j=2}^{2m}(-1)^j A_{1j}
+       \operatorname{Pf}(A_{\widehat1\widehat j}),}
+where the indicated two rows and columns are deleted, retaining
+the original order. Indeed, moving #{j} immediately after #{1}
+crosses #{j-2} entries. In dimensions two and four this reads
+##{\operatorname{Pf}\begin{pmatrix}0&a\\-a&0\end{pmatrix}=a,}
+##{\operatorname{Pf}(A)=A_{12}A_{34}-A_{13}A_{24}+A_{14}A_{23}.}
+Each term pairs every index exactly once; unlike a determinant
+expansion, it sums over pairings rather than all permutations.}
