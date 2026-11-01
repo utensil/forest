@@ -1,0 +1,78 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{Reflection positivity of a massive scalar lattice}
+\date{2026-11-01}
+
+\p{On the nearest-neighbor torus of \ref{fdip-007M}, choose either
+reflection #{\theta}. Give every undirected edge a nonnegative
+weight #{w_e} with #{w_{\theta e}=w_e}, and fix #{m>0}.
+The real scalar law
+##{\begin{aligned}
+H(\phi)&=\frac12\sum_{e=\{u,v\}}w_e(\phi_u-\phi_v)^2
+       +\frac{m^2}{2}\sum_{v\in X}\phi_v^2,\\
+d\mu(\phi)&=Z^{-1}e^{-H(\phi)}
+ \prod_{v\in X}d\phi_v
+\end{aligned}}
+is reflection invariant and reflection positive on
+#{\mathcal A_+} and its positive-time #{L^2} domain.
+Every polynomial in the positive-half field coordinates belongs
+to that domain. This is the [massive scalar precision](fdip-000A)
+with zero-weight edges omitted. It uses ordinary differences,
+equivalently trivial transport in the
+[connection energy](fdip-006D).}
+
+\proof{
+\p{Since #{H(\phi)\ge(m^2/2)\|\phi\|^2}, the normalizer is finite
+and positive, and every polynomial moment exists. Reflection is a
+permutation of the coordinates, preserves Lebesgue measure and
+preserves #{H} by the weight hypothesis. This proves invariance
+separately from positivity.}
+
+\p{For a site reflection, no nearest-neighbor edge joins
+#{X_+\setminus X_0} directly to #{X_-\setminus X_0}.
+Partition the terms of #{H} into #{H_+}, those supported in
+#{X_+} but not wholly in #{X_0}; their reflected partners
+#{H_-=\Theta H_+}; and #{H_0}, those supported wholly in
+#{X_0}. Include onsite mass terms in the same partition.
+Because reflection fixes every boundary coordinate,
+##{-H=A+\Theta A,\qquad A=-H_+-\tfrac12H_0.}
+In particular the boundary terms are counted once.}
+
+\p{For a link reflection the halves are disjoint. The only
+crossing edges are the time bonds at the two cuts, and each has
+the form #{e=\{v,\theta v\}} with a unique #{v\in X_+}.
+Its contribution to #{-H} is
+##{-\frac{w_e}{2}\phi_v^2
+   -\frac{w_e}{2}\phi_{\theta v}^2
+   +w_e\phi_v\phi_{\theta v}.}
+Put its first term into #{A}, its second into #{\Theta A}, and
+write the last as #{C_e\Theta C_e}, where
+#{C_e=\sqrt{w_e}\phi_v}. All within-half edge energies and
+onsite mass terms are assigned to their own half, with a minus
+sign. Reflection invariance of the weights then gives the
+[positive-half decomposition](fdip-007N).}
+
+\p{For #{R>0}, restrict every coordinate to #{[-R,R]} and use the
+uniform probability on this interval as the product reference.
+On that cube the functions #{A,C_e} are bounded, so the lemma
+proves reflection positivity of the normalized cutoff law
+#{\mu_R}. The constant reference-density factor cancels from
+normalization; thus #{\mu_R} is exactly #{\mu} conditioned on
+#{\max_v|\phi_v|\le R}. For bounded #{f,g}, dominated convergence
+in the integrable Gaussian density gives
+##{B_{\mu_R}(f,g)\longrightarrow B_\mu(f,g).}
+For polynomials the same argument uses a polynomial times the
+dominating massive Gaussian. In particular positivity survives
+the limit. Finally, bounded value truncations are dense in
+#{\mathcal H_+}; the norm bound in \ref{fdip-007M} extends
+the pairing and its positivity to all of that domain.}
+}
+
+\p{The half decompositions parallel
+\citet{Examples 10.9–10.10, pp. 443–444}{friedli2017statistical};
+the cutoff argument above supplies the noncompact Gaussian step.
+Arbitrary inhomogeneous weights need not respect the chosen
+reflection. Arbitrary fixed connections need not have the displayed
+nonnegative crossing terms. Neither case is asserted by this theorem.}
