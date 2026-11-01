@@ -1,0 +1,69 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{The odd Wick rule pairs inverse alternating entries}
+\date{2026-11-01}
+
+\p{Let #{A^T=-A} be an invertible #{2m\times2m} matrix.
+Its [nonzero Pfaffian](fdip-008J) defines the normalized
+linear functional
+##{W_A(f)=\frac{I_\xi(f e^{-\xi^TA\xi/2})}
+                 {\operatorname{Pf}(A)}.}
+For linear Grassmann elements
+#{\lambda_a=\sum_i\ell_{ai}\xi_i}, put
+#{C_{ab}=\ell_aA^{-1}\ell_b^T}. For every #{r\ge0},
+##{W_A(\lambda_1\cdots\lambda_{2r})=\operatorname{Pf}(C),}
+where #{C} is the #{2r\times2r} alternating matrix just defined.
+Every odd product has value zero. Repeated or dependent
+#{\lambda_a} are allowed. The inverse formula requires
+invertible #{A}; it asserts no singular extension.}
+
+\proof{
+\p{Define the left derivative on a monomial by
+##{\partial_i(\xi_{j_1}\cdots\xi_{j_s})
+ =\sum_{a=1}^s(-1)^{a-1}\delta_{i,j_a}
+   \xi_{j_1}\cdots\widehat{\xi_{j_a}}\cdots\xi_{j_s}.}
+This respects the exterior relations. Splitting the removed
+positions between two factors gives the graded product rule
+##{\partial_i(fg)=(\partial_i f)g+(-1)^s f(\partial_i g)}
+when #{f} is homogeneous of degree #{s}. It lowers degree,
+so #{I_\xi(\partial_i h)=0} for every #{h}.}
+
+\p{Write #{E=e^{-\xi^TA\xi/2}}. Differentiating its finite
+series, using that its quadratic exponent is even, gives
+##{\partial_iE=-\sum_jA_{ij}\xi_jE.}
+For odd homogeneous #{f}, the product rule and coefficient of
+the total derivative imply
+##{\begin{aligned}
+0&=I_\xi((\partial_i f)E+f\sum_jA_{ij}\xi_jE),\\
+\sum_jA_{ij}W_A(\xi_jf)&=W_A(\partial_i f).
+\end{aligned}}
+The second line uses #{f\xi_j=-\xi_jf}. Multiplying by
+#{A^{-1}} gives
+##{W_A(\xi_kf)=\sum_i(A^{-1})_{ki}W_A(\partial_i f).}
+}
+
+\p{Apply this to #{f=\lambda_2\cdots\lambda_{2r}} and
+expand #{\lambda_1}. The derivative removes its #{a}-th
+listed factor with sign #{(-1)^{a-2}}, yielding
+##{\begin{aligned}
+W_A(\lambda_1\cdots\lambda_{2r})
+ &=\sum_{a=2}^{2r}(-1)^a C_{1a}\\
+ &\quad\cdot W_A(\lambda_2\cdots\widehat{\lambda_a}
+                         \cdots\lambda_{2r}).
+\end{aligned}}
+Starting from #{W_A(1)=1}, this is exactly the
+[Pfaffian recursion](fdip-008I). Odd products have odd degree,
+while #{E} has only even degrees and the selected top degree
+#{2m} is even; hence their integrals vanish.}
+}
+
+\p{For #{A=\left(\begin{smallmatrix}0&a\\-a&0\end{smallmatrix}\right)}
+with #{a\ne0}, the [two-generator calculation](fdip-008G) gives
+#{W_A(\xi_1\xi_2)=-1/a=(A^{-1})_{12}}. This checks the
+inverse-pairing sign. In
+\citet{v2, Theorem 9.11, p. 132}{etingof2024mathematical},
+the increasing top order gives normalization #{\operatorname{Pf}(-A)}.
+Changing the volume multiplies both numerator and normalization
+by the same sign, leaving this normalized Wick rule unchanged.}
