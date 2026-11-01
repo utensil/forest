@@ -1,0 +1,52 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Example}
+\title{Compatible edge laws with no global extension}
+\date{2026-11-01}
+
+\p{On the four-cycle #{0,1,2,3,0}, prescribe centered Gaussian edge
+laws with unit variances and correlations
+##{\rho_{01}=\rho_{12}=\rho_{23}=\frac9{10},
+\qquad \rho_{30}=-\frac9{10}.}
+Each edge covariance has eigenvalues #{1/10,19/10}, hence is positive
+definite. All overlap singleton laws are #{N(0,1)}. Nevertheless
+there is no global positive-semidefinite covariance matrix with these
+entries, and therefore no global Gaussian extension.}
+
+\proof{
+\p{In any joint law with these second moments,
+##{\|\phi_0-\phi_3\|_{L^2}=\sqrt{19/5},
+\qquad
+\|\phi_i-\phi_{i+1}\|_{L^2}=\sqrt{1/5}
+\quad(i=0,1,2).}
+But the first difference is the sum of the three consecutive
+differences. The triangle inequality would give
+#{\sqrt{19/5}\le3\sqrt{1/5}}, contradicting #{19>9}.
+Any proposed positive-semidefinite covariance is a Gram matrix
+of real vectors and obeys the same norm inequality. Thus the
+obstruction already rules out semidefinite completion, without a
+nondegeneracy assumption.}
+
+\p{The angular description gives another view of the same
+obstruction. Unit Gram vectors have consecutive angles
+#{\alpha=\arccos(9/10)} and endpoint angle #{\pi-\alpha}.
+For unit vectors with successive angles #{\beta,\gamma} and
+#{\beta+\gamma\le\pi}, orthogonal decomposition along the middle
+vector and Cauchy–Schwarz give
+##{\langle u,w\rangle\ge
+\cos\beta\cos\gamma-\sin\beta\sin\gamma
+=\cos(\beta+\gamma).}
+Since arccosine decreases, the endpoint angle is at most
+#{\beta+\gamma}. If the sum exceeds #{\pi}, that bound is automatic.
+Iteration gives endpoint angle at most #{3\alpha}. But
+#{\alpha<\pi/4}, because #{9/10>1/\sqrt2}; hence
+#{3\alpha<\pi-\alpha}, again a contradiction.}
+}
+
+\p{This example concerns the [presheaf of laws](fdip-0064) on the
+edge cover: agreement on every overlap does not ensure existence.
+It is a concrete [non-chordal](fdip-0068) obstruction of the kind distinguished by
+\citet{Theorem 7, p. 120}{grone1984positive}. It does not say that
+all data on a non-chordal graph fail to extend; the global four-cycle
+law in \ref{fdip-006B} supplies data that do extend.}
