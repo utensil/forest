@@ -1,0 +1,60 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Example}
+\title{One permutation-group link has four isotypic states but one charged state}
+\date{2026-11-01}
+
+\p{Take one oriented edge with distinct source and target and
+#{G=S_3}. Then #{\mathcal H_{\mathrm{link}}=L^2(S_3)} has
+complex dimension six. Order the gauge factors as
+#{K=S_3^{\mathrm{target}}\times S_3^{\mathrm{source}}}; their
+[function action](fdip-0089) is
+##{(R_{(h_t,h_s)}f)(U)=f(h_t^{-1}Uh_s).}
+Let #{V=\{(z_1,z_2,z_3)\in\mathbb C^3:z_1+z_2+z_3=0\}}
+carry the standard unitary permutation representation #{\rho}.
+Use the charge datum
+##{R=V_{\mathrm{target}}\otimes V_{\mathrm{source}}^*.}
+It has dimension four.}
+
+\p{The standard representation is irreducible: a three-cycle has
+two distinct eigenlines on #{V}, with eigenvalues
+#{e^{2\pi i/3}} and #{e^{-2\pi i/3}}, and a transposition
+exchanges them. Thus neither line is invariant under #{S_3}.
+The external tensor product #{R} is also irreducible under #{K}.
+To see this, expand an endomorphism in a basis of
+#{\operatorname{End}(V^*)}. Commutation with the first factor
+and Schur's lemma make it #{I\otimes B}; commutation with the
+second factor makes #{B} scalar. Any invariant subspace has a
+commuting orthogonal projector, so it is zero or all of #{R}.}
+
+\p{The inverse matrix-coefficient map is
+##{\begin{aligned}
+\Psi:R&\longrightarrow L^2(S_3),\\
+\Psi(v\otimes\lambda)(U)
+ &=\sqrt2\,\lambda(\rho(U^{-1})v).
+\end{aligned}}
+[Schur orthogonality](fdip-007C) makes this map isometric for
+normalized counting measure. Its order of duals is checked directly:
+##{R_{(h_t,h_s)}\Psi(v\otimes\lambda)
+ =\Psi(\rho(h_t)v\otimes\rho^*(h_s)\lambda).}
+Thus its four-dimensional image is a copy of the specified charge
+representation, with the target and source conventions as stated.}
+
+\p{The [finite Peter–Weyl decomposition](fdip-007C) gives the
+bilateral decomposition
+##{L^2(S_3)\cong
+ (\mathbf1\otimes\mathbf1)
+ \oplus(\operatorname{sgn}\otimes\operatorname{sgn})
+ \oplus(V\otimes V^*).}
+Indeed, the trivial, sign and standard representations are
+inequivalent, and their squared dimensions sum to
+#{1+1+4=6=|S_3|}, so their orthogonal coefficient spaces exhaust
+#{L^2(S_3)}. Hence the standard bilateral type has multiplicity
+one. By the [charged-space theorem](fdip-008B),
+##{\dim\mathcal H_R=4,\qquad
+ \dim\mathcal H_{\mathrm{phys}}(R)
+ =\dim\operatorname{Hom}_K(R,L^2(S_3))=1.}
+The four-dimensional isotypic component is therefore not the
+charged physical space. Isotypic projectors separate representation
+types; invariant charge tensors supply the Gauss constraint.}

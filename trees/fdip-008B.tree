@@ -1,0 +1,103 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{Charged invariant tensors and multiplicity spaces}
+\date{2026-11-01}
+
+\p{Let #{(R,\rho)} be a specified finite-dimensional continuous
+unitary representation of the [residual group](fdip-0089)
+#{K} over #{\mathbb C}. Its complex linear dual #{R^*} carries
+#{(\rho^*(g)\lambda)(v)=\lambda(\rho(g)^{-1}v)}.
+The \newvocab{charged physical space} for this charge datum is
+##{\mathcal H_{\mathrm{phys}}(R)
+ =(\mathcal H_{\mathrm{link}}\otimes R^*)^K,}
+where #{g} acts as #{R_g\otimes\rho^*(g)}. Since #{R} is
+finite dimensional, the Hilbert tensor product here is a finite
+orthogonal sum of copies of #{\mathcal H_{\mathrm{link}}}.}
+
+\p{There is a canonical unitary identification
+##{\mathcal H_{\mathrm{phys}}(R)
+ \cong\operatorname{Hom}_K(R,\mathcal H_{\mathrm{link}})
+ =:\mathcal M_R.}
+Here #{\operatorname{Hom}_K} consists of the linear maps #{F}
+satisfying #{R_gF=F\rho(g)} for every #{g}; its inner product is
+#{\langle F,G\rangle_{\mathrm{HS}}=\operatorname{Tr}(F^*G)},
+linear in the second argument. The [transfer operator](fdip-0080)
+#{T\otimes I} preserves charged physical states and corresponds
+to #{F\mapsto TF}.}
+
+\p{Suppose further that #{R} is irreducible and put #{d=\dim R}.
+Its [isotypic component](fdip-004V) in this complex Hilbert setting
+is #{\mathcal H_R}, defined as the
+closed span of all images #{F(R)} with #{F\in\mathcal M_R}.
+Then
+##{\begin{aligned}
+R\otimes\mathcal M_R&\longrightarrow\mathcal H_R,\\
+v\otimes F&\longmapsto\sqrt d\,F(v)
+\end{aligned}}
+is a unitary representation isomorphism, with trivial #{K}-action
+on #{\mathcal M_R}. The charged physical space is
+#{\mathcal M_R}, whereas #{\mathcal H_R} includes the additional
+factor #{R}. In finite dimension, their dimensions are respectively
+#{\dim\mathcal M_R} and #{d\dim\mathcal M_R}.}
+
+\proof{
+\p{For an elementary tensor define
+##{\Phi(x\otimes\lambda)(v)=\lambda(v)x.}
+If #{e_1,\ldots,e_d} is an orthonormal basis of #{R} with dual
+basis #{e_1^*,\ldots,e_d^*}, the inverse is
+##{F\longmapsto\sum_{i=1}^dF(e_i)\otimes e_i^*.}
+Evaluating on the basis proves both inverse identities. The map
+#{\Phi} is basis independent, so its inverse is as well. Its norm
+is the Hilbert–Schmidt norm
+#{\|F\|_{\mathrm{HS}}^2=\sum_i\|F(e_i)\|^2}, proving that
+#{\Phi} is unitary.}
+
+\p{Under #{\Phi}, the tensor action becomes
+##{F\longmapsto R_gF\rho(g)^{-1}.}
+Indeed, apply both sides to #{v} on an elementary tensor. Its
+fixed points are exactly the intertwiners, which proves the charged
+identification. The invariant subspace is closed, so #{\mathcal M_R}
+is a Hilbert space. Since #{TR_g=R_gT}, postcomposition by #{T}
+preserves intertwiners and corresponds to #{T\otimes I}.}
+
+\p{For irreducible #{R}, unitarity and the intertwining identities
+show that #{F^*G:R\to R} commutes with #{\rho(K)}.
+Complex Schur's lemma gives
+##{F^*G=\frac{\operatorname{Tr}(F^*G)}d I_R
+ =\frac{\langle F,G\rangle_{\mathrm{HS}}}d I_R.}
+One elementary proof of the lemma chooses an eigenvalue of a
+commuting complex endomorphism: its nonzero invariant eigenspace
+must be all of an irreducible representation. Therefore
+##{\langle F(v),G(w)\rangle
+ =\frac1d\langle v,w\rangle
+       \langle F,G\rangle_{\mathrm{HS}}.}
+Extending by linearity in finite sums proves that #{\sqrt d}
+times evaluation is isometric. Its range is closed, and contains
+every #{F(R)}; by the definition of #{\mathcal H_R}, it is onto.
+The intertwining identity makes it equivariant. This proves the
+stated isotypic factorization and its normalization.}
+}
+
+\p{The fixed-map step is formalized by
+\leanref{Representation.invariantsEquivIntertwiningMap} for the
+conjugation action on linear maps. The tensor identification and
+Hilbert normalization are the direct arguments above. The earlier
+[real isotypic projectors](fdip-004V) and
+[multiplicity matrices](fdip-004Z) concern whole representation
+components; a projector onto such a component does not by itself
+impose the charged tensor constraint.}
+
+\p{For reducible charge data, first choose an irreducible
+orthogonal decomposition
+#{R=\bigoplus_\lambda R_\lambda\otimes\mathbb C^{n_\lambda}}.
+Applying the intertwiner identification to each summand gives
+##{\mathcal M_R\cong
+ \bigoplus_\lambda
+ \operatorname{Hom}(\mathbb C^{n_\lambda},\mathcal M_{R_\lambda}).}
+This is an isomorphism of vector spaces. If all these spaces are
+finite dimensional and #{m_\lambda=\dim\mathcal M_{R_\lambda}},
+then #{\dim\mathcal M_R=\sum_\lambda n_\lambda m_\lambda}.
+For the trivial one-dimensional charge, the construction recovers
+the [neutral space](fdip-008A).}
