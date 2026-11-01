@@ -1,0 +1,138 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{Gauge projection and periodic-time traces}
+\date{2026-11-01}
+
+\p{For the [spatial transfer data](fdip-007Z), normalized gauge
+averaging is the orthogonal projection
+##{\begin{aligned}
+(Pf)(U)&=\int_K f(h^{-1}\cdot U)\,dh,\\
+\mathcal H_{\mathrm{phys}}
+ &=\{f:R_hf=f\text{ for every }h\in K\}=P\mathcal H_{\mathrm{link}}.
+\end{aligned}}
+This defines the \newvocab{physical Hilbert space} of neutral
+states. The restriction #{T_{\mathrm{phys}}=T|_{\mathcal H_{\mathrm{phys}}}}
+is positive, injective and trace class. It is nonzero since constants
+belong to #{\mathcal H_{\mathrm{phys}}}. For every integer #{N\ge1},
+##{Z_N=\operatorname{Tr}_{\mathrm{phys}}T_{\mathrm{phys}}^N
+ =\operatorname{Tr}_{\mathrm{link}}(PT^N)>0.}
+The gauge projector is part of the periodic trace.}
+
+\p{There is an explicit lattice integral for #{Z_N}. Put
+#{U_N=U_0}, take independent variables
+#{U_j\in X} and #{h_j\in K} for #{0\le j<N}, and define
+##{\begin{aligned}
+B_{j,e}&=U_{j,e}h_{j,s(e)}U_{j+1,e}^{-1}h_{j,t(e)}^{-1},\\
+\mathcal W_N(U,h)&=
+ \prod_{j=0}^{N-1}e^{-V(U_j)}
+ \prod_{j=0}^{N-1}\prod_{e\in E_s}k(B_{j,e}).
+\end{aligned}}
+Then, with normalized product Haar measures,
+##{Z_N=\int_{X^N\times K^N}\mathcal W_N(U,h)\,dU\,dh.}
+Thus #{Z_N^{-1}\mathcal W_N\,dU\,dh} is a probability law.
+The temporal link #{h_{j,v}} transports from time #{j+1} back
+to time #{j}. For #{N=1,2}, the formula retains the indexed
+temporal steps; it does not identify them with edges of an ordinary
+simple cycle.}
+
+\p{For independent gauge changes #{g_j\in K}, with #{g_N=g_0},
+the transformations are
+##{\begin{aligned}
+U_j&\longmapsto g_j\cdot U_j,\\
+h_{j,v}&\longmapsto g_{j,v}h_{j,v}g_{j+1,v}^{-1}.
+\end{aligned}}
+Each #{B_{j,e}} is conjugated by #{g_{j,t(e)}}. Therefore the
+weight and measure are invariant. If #{f_j:X\to\mathbb C}
+are bounded measurable gauge-invariant functions, multiplication
+by #{f_j} preserves #{\mathcal H_{\mathrm{phys}}}, and
+##{\mathbb E_N\prod_{j=0}^{N-1}f_j(U_j)
+ =\frac{\operatorname{Tr}_{\mathrm{phys}}
+ (M_{f_0}T_{\mathrm{phys}}\cdots M_{f_{N-1}}T_{\mathrm{phys}})}{Z_N}.}
+This is a finite periodic-time identity for the specified spatial
+observables, with the temporal links integrated as above.}
+
+\proof{
+\p{Fubini and Jensen define #{P} on #{L^2} and give
+#{\|P\|\le1}. Haar invariance gives #{P^2=P}; inversion of
+#{h} gives #{P^*=P}. Translating the averaging variable shows
+that its image is fixed by each #{R_h}, while averaging a fixed
+vector leaves it unchanged. These are Hilbert-space equalities;
+no common pointwise representative for all group elements is
+required. By \ref{fdip-0080}, #{T} commutes with #{P}.
+Its restriction is therefore positive and trace class, and
+#{\langle f,Tf\rangle>0} for nonzero physical #{f} proves
+injectivity there. Set #{S=PT=PTP} on the full link space.
+It acts as #{T_{\mathrm{phys}}} on the physical space and as
+zero on its orthogonal complement, so
+#{S^N=PT^N} has the asserted physical trace.}
+
+\p{Averaging the first variable of the kernel of #{T} gives the
+continuous kernel of #{S}:
+##{L(U,U')=b(U)b(U')\int_K
+ \prod_e k(U_eh_{s(e)}U_e'^{-1}h_{t(e)}^{-1})\,dh.}
+To obtain this expression, use invariance of #{b} and move
+#{h_{t(e)}^{-1}} from the front of the kernel argument to its
+end by centrality. Every factor is strictly positive.}
+
+\p{The diagonal trace formula, including the case #{N=1}, can
+be justified directly. The rank-one expansion in \ref{fdip-0080}
+gives
+##{S=\sum_I\alpha_I
+ |P(b\phi_I)\rangle\langle P(b\phi_I)|}
+in trace norm. Its kernel expansion converges uniformly when
+summed over finite sets of representation blocks. For one edge,
+unitarity gives
+##{\sum_{i,j}|\phi_{\rho ij}(U)|^2=d_\rho^2.}
+For the finite edge product, the diagonal sum over a tail of blocks
+is therefore the corresponding tail of
+#{\sum_I\alpha_I=\kappa^{|E_s|}}, uniformly in #{U}.
+Cauchy–Schwarz gives the same bound off the diagonal.
+Multiplying by #{b} and averaging in both variables preserve
+uniform convergence. Integrating the diagonal term by
+term consequently gives
+##{\int_XL(U,U)\,dU
+ =\sum_I\alpha_I\|P(b\phi_I)\|_2^2
+ =\operatorname{Tr}S.}
+Multiplication by a bounded function permits the same argument
+for #{\operatorname{Tr}(M_fS)}.}
+
+\p{For #{N\ge2}, the Hilbert–Schmidt kernel trace identity of
+\ref{fdip-007V} gives
+##{\operatorname{Tr}(M_{f_0}S\cdots M_{f_{N-1}}S)
+ =\int_{X^N}\prod_j f_j(U_j)L(U_j,U_{j+1})\,dU.}
+All kernels are bounded on compact spaces, so repeated integrals
+are absolutely convergent. The same formula for #{N=1} was
+proved by the diagonal expansion. Gauge-invariant multiplication
+commutes with #{P}; hence this full-space trace equals the
+physical-space trace in the statement. Expanding each #{L} with
+an independent #{h_j} gives #{\mathcal W_N}, because the two
+adjacent factors #{b(U_j)} combine to #{e^{-V(U_j)}}.
+Taking every #{f_j=1} proves the partition function; general
+#{f_j} prove the expectation identity. Strict positivity and
+compactness of the weight give #{0<Z_N<\infty}. The displayed
+gauge transformation conjugates #{B_{j,e}} by direct cancellation,
+which proves the final invariance assertion.}
+}
+
+\texfig{\begin{tikzpicture}[
+  flow/.style={-{Stealth[length=2mm]},semithick},
+  site/.style={circle,draw,fill=white,minimum size=3mm,inner sep=0pt},
+  font=\small]
+\node[site,label=above left:{$(j,s)$}] (a) at (0,2) {};
+\node[site,label=above right:{$(j,t)$}] (b) at (4,2) {};
+\node[site,label=below left:{$(j+1,s)$}] (c) at (0,0) {};
+\node[site,label=below right:{$(j+1,t)$}] (d) at (4,0) {};
+\draw[flow] (a) -- node[above=3pt] {$U_{j,e}$} (b);
+\draw[flow] (c) -- node[below=3pt] {$U_{j+1,e}$} (d);
+\draw[flow] (c) -- node[left=3pt] {$h_{j,s}$} (a);
+\draw[flow] (d) -- node[right=3pt] {$h_{j,t}$} (b);
+\end{tikzpicture}}
+
+\p{The temporal plaquette based at #{(j,t)} is traversed down
+the right edge, backwards along the bottom, up the left edge and
+then along the top. With the [transport order](fdip-006N), the
+first transport acts on the right and the product is exactly
+#{B_{j,e}}. Temporal averaging is retained at every step, so no
+periodic gauge-fixing assumption removes #{P}.}

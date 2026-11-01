@@ -1,0 +1,66 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{A positive coefficient expansion on SU(2)}
+\date{2026-11-01}
+
+\p{Let #{f} be the defining two-dimensional representation of
+#{SU(2)} and #{\beta>0}. Then
+##{k(g)=e^{\beta\chi_f(g)}}
+satisfies the [transfer kernel conditions](fdip-007Z).
+More precisely, if #{m_\rho(n)} is the multiplicity of #{\rho}
+in #{f^{\otimes n}}, then
+##{\begin{aligned}
+c_\rho&=\sum_{n=0}^\infty
+ \frac{\beta^n}{n!}m_\rho(n)>0,\\
+a_\rho&=\frac{c_\rho}{d_\rho},\qquad
+\sum_\rho d_\rho^2a_\rho=e^{2\beta}.
+\end{aligned}}
+This is the tensor-power argument used in
+\citet{Proposition 1, p. 288}{luscher1977transfer}, with
+strict occurrence and absolute convergence justified below.}
+
+\proof{
+\p{The [matrix description of SU(2)](fdip-007G) writes its elements
+as
+##{g=\begin{pmatrix}z&w\\-\overline w&\overline z\end{pmatrix},
+ \qquad |z|^2+|w|^2=1.}
+Hence #{\chi_f(g)=2\operatorname{Re}z} is real,
+#{\chi_f(g^{-1})=\chi_f(g)}, and #{k} is continuous, central
+and strictly positive. Every tensor power is unitary; invariant
+orthogonal complements decompose it into irreducibles. Therefore
+##{\chi_f(g)^n=\sum_\rho m_\rho(n)\chi_\rho(g),
+ \qquad \sum_\rho m_\rho(n)d_\rho=2^n.}
+Expanding the exponential and using nonnegative multiplicities gives
+##{\sum_\rho d_\rho c_\rho
+ =\sum_{n=0}^\infty\frac{\beta^n2^n}{n!}=e^{2\beta}.}
+Since #{|\chi_\rho(g)|\le d_\rho}, this also justifies
+rearranging the series uniformly and proves the claimed expansion.
+It remains to show that no #{c_\rho} is zero.}
+
+\p{Consider the algebra of finite linear combinations of matrix
+coefficients of the powers #{f^{\otimes n}}, including #{n=0}.
+Products are coefficients of tensor products, so this is a unital
+algebra of continuous functions. The entries of #{g} distinguish
+its points. Their complex conjugates are again entries up to a
+sign, by the displayed matrix form, so the algebra is closed under
+complex conjugation. The complex Stone–Weierstrass theorem makes
+it uniformly dense in #{C(SU(2),\mathbb C)}. Here that analytic
+theorem is used as a cited statement: a conjugation-closed unital
+subalgebra of continuous complex functions on a compact space is
+dense if it separates points. Its exact formal statement is
+\leanref{ContinuousMap.starSubalgebra_topologicalClosure_eq_top_of_separatesPoints}.
+The reference supplies this density theorem, not the representation
+argument that follows.}
+
+\p{If an irreducible #{\rho} occurred in no tensor power, Schur
+orthogonality from the [Peter–Weyl theorem](fdip-007C) would make
+all its matrix coefficients orthogonal to this algebra. Choose a
+nonzero such coefficient #{u}. Uniform density gives algebra
+functions converging uniformly, hence in normalized Haar #{L^2},
+to #{u}. Orthogonality would then give #{\|u\|_2^2=0}, a
+contradiction. Thus #{m_\rho(n)>0} for some #{n}, and
+#{\beta>0} makes #{c_\rho>0}. Dividing by #{d_\rho} proves all
+remaining coefficient assertions.}
+}

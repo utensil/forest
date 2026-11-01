@@ -1,0 +1,79 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{Positivity and trace class of the gauge transfer operator}
+\date{2026-11-01}
+
+\p{For the [spatial transfer data](fdip-007Z), #{C_k} and
+#{T=M_bC_kM_b} are bounded, self-adjoint, positive, injective
+and trace class. Both commute with every gauge operator #{R_h}.
+If
+##{\kappa=\sum_\rho d_\rho^2a_\rho=k(1),}
+then
+##{\operatorname{Tr}C_k=\kappa^{|E_s|},\qquad
+ \operatorname{Tr}T\le\|b\|_\infty^2\kappa^{|E_s|}.}
+Positive means #{\langle f,Tf\rangle\ge0}; in fact this pairing
+is strictly positive for every nonzero #{f}. It does not assert a
+uniform positive lower bound on the spectrum.}
+
+\proof{
+\p{For one edge, use the normalized matrix-entry basis
+#{\phi_{\rho ij}(U)=\sqrt{d_\rho}\rho(U)_{ij}} of the
+[Peter–Weyl theorem](fdip-007C). Unitarity gives
+##{k(UU'^{-1})=\sum_{\rho,i,j}
+ a_\rho\phi_{\rho ij}(U)\overline{\phi_{\rho ij}(U')}.}
+Indeed, the matrix-entry sum is
+#{d_\rho\operatorname{Tr}(\rho(U)\rho(U')^*)}.
+Schur orthogonality therefore makes convolution act by
+#{a_\rho} on this block. The tensor products of these bases over
+the finitely many edges give an orthonormal basis #{(\phi_I)}
+of #{\mathcal H_{\mathrm{link}}}, with eigenvalues
+##{\alpha_I=\prod_{e\in E_s}a_{\rho_e}>0,\qquad
+ \sum_I\alpha_I=\kappa^{|E_s|}<\infty.}
+The operator assertions about #{C_k}, including injectivity and
+its trace, follow directly from this complete diagonalization.
+Here trace class for a positive compact operator has the meaning
+used in the [Gaussian spectrum](fdip-007U): its eigenvalues are
+summable.}
+
+\p{For clarity, write the rank-one operator
+#{|v\rangle\langle v|} as #{f\mapsto v\langle v,f\rangle},
+with the inner product linear in its second variable. Then
+##{T=\sum_I\alpha_I
+ |b\phi_I\rangle\langle b\phi_I|.}
+The \newvocab{trace norm} is
+#{\|A\|_1=\operatorname{Tr}((A^*A)^{1/2})}; for a positive
+operator it equals its trace. Trace class means this norm is finite.
+Each summand is positive and its trace norm is
+#{\alpha_I\|b\phi_I\|_2^2}. Their sum is at most
+#{\|b\|_\infty^2\sum_I\alpha_I}, so the series converges in
+trace norm and proves positivity, self-adjointness, compactness
+and the trace bound. For #{f\ne0}, bounded invertibility of
+#{M_b} gives #{bf\ne0}; hence
+##{\langle f,Tf\rangle=\langle bf,C_kbf\rangle>0.}
+This proves injectivity as well.}
+
+\p{Under a simultaneous gauge change of #{U,U'},
+##{(h\cdot U)_e(h\cdot U')_e^{-1}
+ =h_{t(e)}(U_eU_e'^{-1})h_{t(e)}^{-1}.}
+Centrality of #{k} and invariance of product Haar measure show
+#{C_kR_h=R_hC_k}. Gauge invariance of #{b} gives the same
+commutation for #{M_b} and #{T}.}
+}
+
+\p{The coefficient calculation is a direct application of
+Peter–Weyl orthogonality. TauCeti's
+\leanref/tauceti{TauCeti.peterWeylBlockAveraging_eq_starProjection}
+identifies character averaging with the corresponding orthogonal
+block projection. Its kernel is #{d_\rho\overline{\chi_\rho}}
+and its matrix-coefficient convention is the conjugated one
+explained in \ref{fdip-007C}. Reindexing by dual representations
+aligns the conventions; reality and inversion symmetry give
+#{a_{\overline\rho}=a_\rho}. This correspondence concerns the
+block projection, while the positive weighted sum and spatial
+multipliers are proved above.}
+
+\p{The factorization proof follows the idea of
+\citet{Proposition 1, p. 288}{luscher1977transfer}, under the
+explicit pure-gauge hypotheses of \ref{fdip-007Z}.}
