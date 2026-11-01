@@ -1,0 +1,51 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{Finite gauge averaging}
+\date{2026-11-01}
+
+\p{For the [finite Wilson law](fdip-006O), define
+##{(\mathcal AF)(U)=\frac1{|\mathcal G|}
+ \sum_{g\in\mathcal G}F(gU),\qquad \mathcal G=G^V.}
+Then #{\mathcal A} projects onto gauge-invariant observables and
+##{\langle F\rangle_W=\langle\mathcal AF\rangle_W.}
+In particular #{\langle F\rangle_W=0} whenever #{\mathcal AF=0}.
+A general noninvariant observable may have a nonzero invariant part;
+only #{F-\mathcal AF} is always forced to have zero expectation.}
+
+\proof{
+\p{For each #{g}, the map #{U\mapsto gU} is a bijection of #{G^E}
+with inverse #{U\mapsto g^{-1}U}. Gauge invariance of the action and
+change of variable in a finite sum give
+##{\sum_U F(gU)e^{-S_W(U)}=\sum_U F(U)e^{-S_W(U)}.}
+Divide by #{Z_W} and average over #{g}. Reindexing #{g\mapsto gh}
+gives #{(\mathcal AF)(hU)=(\mathcal AF)(U)}. If #{F} is already
+invariant then #{\mathcal AF=F}, proving #{\mathcal A^2=\mathcal A}
+and the asserted range.}
+}
+
+\p{Let #{\sigma} be a nontrivial irreducible complex representation of
+#{G}, and let #{e} have distinct endpoints. Then
+##{\langle\sigma(U_e)\rangle_W=0.}
+To see this, set #{R=|G|^{-1}\sum_{a\in G}\sigma(a)}. Reindexing
+shows that #{\sigma(b)R=R} for every #{b}, so #{R} maps into the
+fixed-vector space. It is the identity on that space. A nonzero fixed
+vector would span a trivial subrepresentation; irreducibility and
+nontriviality therefore make the fixed-vector space zero and #{R=0}.
+Averaging the gauge transformation at #{h(e)} while fixing the other
+vertices now replaces #{\sigma(U_e)} by #{R\sigma(U_e)=0}.
+The expectation is unchanged by this averaging, by the same finite
+change-of-variable proof. Distinct endpoints are essential here.}
+
+\p{For a self-loop, the transformation is only conjugation. The
+[one-loop example](fdip-006T) shows that its expectation need not vanish.}
+
+\p{This is a direct finite averaging proof, related to
+[Maschke averaging](fgap-001K). Mathlib's
+\leanref{Representation.isProj_averageMap} proves projection onto
+invariants for a finite group representation over a commutative ring
+in which the group order is invertible. Over #{\mathbb C}, apply it
+to the inverse-pullback representation
+#{(R_gF)(U)=F(g^{-1}U)}, or to #{\sigma} above. This supports the
+linear averaging step, not the Wilson probability or torus formulas.}

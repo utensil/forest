@@ -1,0 +1,40 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Definition}
+\title{Square faces on a finite graph}
+\date{2026-11-01}
+
+\p{A \newvocab{finite cubical 2-complex}, in the square-cell convention
+used here, consists of a [finite incidence presentation](fdip-0002)
+#{(V,E,s,h)}, a finite set #{\mathcal P} of squares, and a specified
+four-edge attaching walk for each square. Choose one orientation for
+each edge and one boundary orientation and starting vertex for each
+square. Its walk is
+##{\partial p=(e_{p,1}^{\epsilon_{p,1}},\ldots,
+ e_{p,4}^{\epsilon_{p,4}}),\qquad \epsilon_{p,j}\in\{1,-1\},}
+where an exponent #{-1} means traversal against the chosen edge
+orientation. Consecutive endpoints match, including the last to the
+first.}
+
+\p{Starting from the [one-dimensional realization](fdip-004M), attach
+one copy of #{[0,1]^2} for each #{p}, mapping its four sides to the
+specified traversed edges, and use the quotient topology. Boundary
+vertices or sides may be identified in this presentation, as in
+periodic quotients; no regularity or nonpositive-curvature condition is
+imposed. No higher-dimensional cubes are supplied. The squares and
+their attaching maps are additional data, just as the filled face is
+additional data in the [triangle comparison](fdip-004N).}
+
+\p{The main example is the \newvocab{square torus} with periods
+#{N_1,N_2\ge3}. Its vertices are
+##{V=(\mathbb Z/N_1\mathbb Z)\times(\mathbb Z/N_2\mathbb Z).}
+There are horizontal edges #{a_{x,y}:(x,y)\to(x+1,y)} and vertical
+edges #{b_{x,y}:(x,y)\to(x,y+1)}, with indices read modulo the
+periods. The square at #{(x,y)} has boundary walk
+##{a_{x,y}\,b_{x+1,y}\,a_{x,y+1}^{-1}\,b_{x,y}^{-1}.}
+This written order is the order of traversal. Put
+##{n=|V|=N_1N_2,\qquad |E|=2n,\qquad P=|\mathcal P|=n.}
+The realization is the usual square grid on a torus. The periods ensure
+that each square has four distinct vertices and sides, although
+periodic identifications occur globally.}

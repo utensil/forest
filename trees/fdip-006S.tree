@@ -1,0 +1,38 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Example}
+\title{A three-by-three torus calculation}
+\date{2026-11-01}
+
+\p{For #{N_1=N_2=3}, there are nine vertices, eighteen edges and nine
+plaquettes. The [plaquette constraint](fdip-006Q) permits only an even
+number #{k} of negative plaquettes. There are #{\binom9k} such
+patterns and #{2^{10}=1024} edge configurations for each pattern.
+The resulting numbers of edge configurations are
+##{\begin{array}{c|rrrrr}
+k&0&2&4&6&8\\\hline
+\text{count}&1024&36864&129024&86016&9216.
+\end{array}}
+They sum to #{262144=2^{18}}, the number of all edge assignments.}
+
+\p{Since #{\sum_pU_p=9-2k}, the partition polynomial is
+##{\begin{aligned}
+\mathcal Z(\beta)=1024\bigl(&e^{9\beta}+36e^{5\beta}+126e^\beta\\
+                         &+84e^{-3\beta}+9e^{-7\beta}\bigr),\\
+Z_W(\beta)&=e^{-9\beta}\mathcal Z(\beta).
+\end{aligned}}
+At #{\beta=0}, this again gives #{2^{18}}. The factor #{e^{-9\beta}}
+is necessary for the Wilson-action partition function even though it
+cancels from every normalized observable.}
+
+\p{For #{\tanh\beta=1/2}, the [exact loop formula](fdip-006R) gives
+##{\begin{aligned}
+\langle W(C_1)\rangle_W
+ &=\frac{(1/2)+(1/2)^8}{1+(1/2)^9}=\frac{86}{171},\\
+\langle W(C_2)\rangle_W
+ &=\frac{(1/2)^2+(1/2)^7}{1+(1/2)^9}=\frac{44}{171}.
+\end{aligned}}
+Here #{C_1} bounds one square and #{C_2} bounds two adjacent squares,
+each a simple disk boundary on this torus. These values include the
+finite-volume corrections; they are not yet #{t} and #{t^2}.}
