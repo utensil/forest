@@ -1,0 +1,50 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Definition}
+\title{Ordered Berezin coefficients}
+\date{2026-11-01}
+
+\p{Let #{V} be an #{N}-dimensional vector space over
+#{\mathbb k=\mathbb R} or #{\mathbb C}, with an ordered basis
+#{\xi_1,\ldots,\xi_N} of #{V^*}. The
+\newvocab{Grassmann algebra} on these generators is the
+[exterior algebra](ca-000E) #{\Lambda(V^*)}. Multiplication is
+written by juxtaposition, so
+##{\xi_i\xi_j=-\xi_j\xi_i,\qquad \xi_i^2=0.}
+Its basis consists of #{1} and the increasing words
+#{\xi_{i_1}\cdots\xi_{i_r}} with #{i_1<\cdots<i_r}; its
+dimension is #{2^N}. A word of length #{r} has degree #{r}.
+Elements of even degree commute with every homogeneous element;
+two homogeneous elements of degrees #{r,s} commute with sign
+#{(-1)^{rs}}.}
+
+\p{The \newvocab{Berezin integral} with reversed top order is
+the linear functional
+##{I_\xi(f)=\text{coefficient of }\xi_N\cdots\xi_1
+       \text{ in }f.}
+Thus #{I_\xi(\xi_N\cdots\xi_1)=1} and it vanishes on all
+lower degrees. Relative to the increasing top coefficient it
+has the sign #{(-1)^{N(N-1)/2}}. For #{N=0} it is the identity
+on #{\mathbb k}. This is the purely odd coefficient definition
+of \citet{v2, Definition 9.6, p. 128}{etingof2024mathematical},
+with the top order stated explicitly.}
+
+\p{For #{n} complex pairs, take #{2n} independent generators
+#{\psi_1,\bar\psi_1,\ldots,\psi_n,\bar\psi_n} and use
+the paired functional
+##{J_n(f)=\text{coefficient of }
+  \psi_1\bar\psi_1\cdots\psi_n\bar\psi_n
+  \text{ in }f.}
+The bars label independent generators, not complex conjugates.
+The symbols #{I_\xi} and #{J_n} keep these two top-order
+conventions distinct. They are coefficient functionals, not
+positive measures on ordinary field configurations.}
+
+\p{For a positive-degree nilpotent element #{q}, define
+#{e^q=\sum_{r\ge0}q^r/r!}; only finitely many terms survive.
+For a quadratic #{q} in #{N} generators, terms with #{2r>N}
+vanish. No analytic convergence is involved. The ordered
+monomial basis is supplied formally by
+\leanref{Module.Basis.ExteriorAlgebra}; this supports the
+algebraic coordinates, not the Berezin or Gaussian identities.}
