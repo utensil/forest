@@ -1,0 +1,63 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Example}
+\title{Thirty-two neutral states on a two-by-two sign torus}
+\date{2026-11-01}
+
+\p{Let the spatial vertices be #{V_s=(\mathbb Z/2\mathbb Z)^2}.
+For each vertex #{x} and direction #{i\in\{1,2\}}, retain a
+separate edge #{e_{x,i}} from #{x} to #{x+\hat i}. There are
+four vertices and eight indexed edges. In a period-two direction,
+#{e_{x,i}} and #{e_{x+\hat i,i}} have opposite endpoints but
+are distinct edges. The underlying graph is a multigraph with two
+parallel edges on each side of a square, not an ordinary four-cycle.}
+
+\texfig{\begin{tikzpicture}[
+  site/.style={circle,draw,fill=white,minimum size=3mm,inner sep=0pt},
+  flow/.style={-{Stealth[length=2mm]},semithick},
+  font=\small]
+\node[site,label=below left:{$(0,0)$}] (a) at (0,0) {};
+\node[site,label=below right:{$(1,0)$}] (b) at (3,0) {};
+\node[site,label=above left:{$(0,1)$}] (c) at (0,2.4) {};
+\node[site,label=above right:{$(1,1)$}] (d) at (3,2.4) {};
+\draw[flow] (a) to[bend left=20] (b);
+\draw[flow] (b) to[bend left=20] (a);
+\draw[flow] (c) to[bend left=20] (d);
+\draw[flow] (d) to[bend left=20] (c);
+\draw[flow] (a) to[bend left=20] (c);
+\draw[flow] (c) to[bend left=20] (a);
+\draw[flow] (b) to[bend left=20] (d);
+\draw[flow] (d) to[bend left=20] (b);
+\end{tikzpicture}}
+
+\p{Each directed arc is one indexed edge. Horizontal and vertical
+arcs represent positive steps in the first and second coordinates,
+respectively; modulo two, both directions are positive coordinate
+steps. No face or plaquette constraint is imposed on the spatial
+link configurations in this example.}
+
+\p{Take #{G=\mathbb Z_2}, written additively as #{\mathbb F_2}.
+A link configuration is #{u\in\mathbb F_2^{E_s}}, so
+##{\dim_{\mathbb C}\mathcal H_{\mathrm{link}}=2^8=256.}
+A gauge function #{a\in\mathbb F_2^{V_s}} acts by
+##{u_e\longmapsto u_e+a_{t(e)}+a_{s(e)}.}
+The corresponding [incidence map](fdip-0010)
+#{\delta:\mathbb F_2^{V_s}\to\mathbb F_2^{E_s}}
+has kernel the constant functions: vanishing on every edge forces
+equal values along every path, and the graph is connected.
+Thus #{\dim\ker\delta=1}, #{\operatorname{rank}\delta=3}
+and #{|\operatorname{im}\delta|=8}.}
+
+\p{Every gauge orbit is a coset of #{\operatorname{im}\delta},
+with eight elements. The [orbit basis](fdip-008A) therefore gives
+##{\dim_{\mathbb C}\mathcal H_{\mathrm{phys}}
+ =\frac{256}{8}=32=2^5.}
+The exponent is the cycle rank of this multigraph,
+#{b_1=|E_s|-|V_s|+1=8-4+1=5}. Equivalently, choose a
+spanning tree with three edges and set their additive link values
+to zero successively from a root. The remaining five chord values are free;
+the residual constant gauge function changes none of them.
+This supplies the same thirty-two representatives. The result counts
+neutral states of the link Hilbert space; it does not impose a
+flatness condition or identify opposite indexed edges.}

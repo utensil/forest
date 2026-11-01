@@ -1,0 +1,50 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{Neutral Gauss's law as an averaging constraint}
+\date{2026-11-01}
+
+\p{For the [residual action](fdip-0089), the neutral
+\newvocab{Gauss constraint} requires
+##{R_gf=f\qquad\text{for every }g\in K.}
+Its solution space is the [physical Hilbert space](fdip-0083)
+#{\mathcal H_{\mathrm{phys}}=\mathcal H_{\mathrm{link}}^K}.
+The orthogonal projector onto it is
+##{P=\int_KR_g\,dg,}
+with normalized Haar measure. For a finite group #{G}, this is
+##{P=\frac1{|G|^{|V_s|}}\sum_{g\in G^{V_s}}R_g.}
+For the [positive gauge transfer operator](fdip-0080),
+#{TP=PT}; hence time evolution preserves the constraint.}
+
+\proof{
+\p{For finite #{G}, left translation permutes the sum, so
+#{R_hPf=Pf} for every #{h}. If #{f} is invariant, every summand
+is #{f}, so #{Pf=f}. These facts prove #{P^2=P} and identify
+its image. Unitarity gives #{R_g^*=R_{g^{-1}}}; inversion
+permutes the sum, proving #{P^*=P}. Thus #{P} is the
+orthogonal projector.}
+
+\p{For compact #{G}, the same identities use normalized Haar
+invariance, inversion and Fubini. The integral on #{L^2}, its
+boundedness and its image were proved in \ref{fdip-0083};
+that theorem applies here without a finite-group assumption.
+The transfer operator commutes with every #{R_g} by
+\ref{fdip-0080}, so it commutes with the average.}
+}
+
+\p{The finite algebraic projection statement is
+\leanref{Representation.isProj_averageMap}. It assumes an
+invertible group order in the coefficient ring, as holds over
+#{\mathbb C}. Unitarity gives the orthogonality used here;
+the compact Haar and transfer assertions have the separate proofs
+just cited. [Maschke averaging](fgap-001K) uses a related finite
+average to produce invariant complements.}
+
+\p{For a finite configuration set #{X}, an invariant function is
+exactly a function constant on each gauge orbit. Consequently
+##{\dim_{\mathbb C}\mathcal H_{\mathrm{phys}}=|X/K|.}
+Indeed, the orbit indicators have disjoint support and form a
+basis. For Haar probability on a finite set, dividing each indicator
+by the square root of its orbit's probability makes this basis
+orthonormal.}
