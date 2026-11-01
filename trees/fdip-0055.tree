@@ -1,0 +1,110 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{Independent Gaussian laws on real isotypic sectors}
+\date{2026-11-01}
+
+\p{Let a finite group #{G} act orthogonally on a finite-dimensional
+real inner-product space #{H}, and let #{Q>0} be self-adjoint and
+#{G}-equivariant. Write the [orthogonal isotypic projectors](fdip-004V)
+as #{E_\Xi}, put #{H_\Xi=E_\Xi H}, and omit the zero sectors.
+Use [induced Euclidean volumes](fdip-002M) and uncompleted Borel
+sigma-algebras. For the normalized Gaussian law #{\mu_Q}, the map
+##{\mathcal D:H\longrightarrow\prod_\Xi H_\Xi,
+\qquad z\longmapsto(E_\Xi z)_\Xi}
+satisfies
+##{\mathcal D_*\mu_Q=\bigotimes_\Xi\mu_{Q|_{H_\Xi}}.
+\qquad Z_Q=\prod_\Xi Z_{Q|_{H_\Xi}}.}
+Thus the projected fields are independent. Each has covariance
+#{(Q|_{H_\Xi})^{-1}} on its own real sector.}
+
+\p{In the [multiplicity coordinates](fdip-0050), set
+#{D_\Xi=\operatorname{End}_G(W_\Xi)},
+#{r_\Xi=\dim_{D_\Xi}W_\Xi}, and
+#{d_\Xi=\dim_{\mathbb R}D_\Xi\in\{1,2,4\}}.
+Write #{Q_\Xi\in M_{m_\Xi}(D_\Xi)} for the multiplicity matrix;
+it is not the entire real-sector matrix. Then
+##{\begin{aligned}
+\det_{\mathbb R}Q
+ &=\prod_\Xi\det_{\mathbb R}
+   (Q_\Xi:D_\Xi^{m_\Xi}\to D_\Xi^{m_\Xi})^{r_\Xi},\\
+Z_{Q|_{H_\Xi}}
+ &=\frac{(2\pi)^{m_\Xi r_\Xi d_\Xi/2}}
+ {\det_{\mathbb R}(Q_\Xi)^{r_\Xi/2}}.
+\end{aligned}}
+The determinants in these formulas are ordinary determinants of real
+linear operators, including when #{D_\Xi=\mathbb H}.}
+
+\proof{
+\p{The projectors are self-adjoint, mutually orthogonal and sum to
+#{I}. Addition from the product of their images is an isometry inverse
+to #{\mathcal D}. Concatenated orthonormal bases identify the
+[orthogonal product volume](fdip-002Q) with volume on #{H};
+finite products of these Borel spaces have the product Borel
+sigma-algebra. Commutation with every projector makes #{Q}
+block diagonal, so its positive quadratic form is the sum of its
+sector quadratic forms. The exponential weight therefore factors.}
+
+\p{Each restricted precision is positive, and the
+[Gaussian normalizer theorem](fdip-002T) makes every sector integral
+finite and positive. Nonnegative Tonelli gives the product of
+normalizers. Integrating the factored density on a Borel rectangle
+gives the product of its sector probabilities; uniqueness of finite
+measures on the rectangle-generated sigma-algebra gives the stated
+product law. This is the same measure argument as in
+\ref{fdip-000M}, now for the finite family of projectors.
+The [inverse-precision covariance theorem](fdip-000B) applies to each
+factor. Empty sectors have unit normalizer and their one-point law.}
+
+\p{For the determinant, the real-sector matrix is the direct sum of
+#{r_\Xi} identical real operators #{Q_\Xi} on
+#{D_\Xi^{m_\Xi}}, by the orthonormal scalar-column construction of
+\ref{fdip-0050}. Determinants multiply under real direct sums.
+If the positive Hermitian eigenvalues of #{Q_\Xi} are
+#{\lambda_1,\ldots,\lambda_{m_\Xi}}, its real determinant is
+#{\prod_j\lambda_j^{d_\Xi}}. Substitution into the real Gaussian
+normalizer gives the displayed formula.}
+}
+
+\p{For the [twisted prism](fdip-0052), the trivial multiplicity matrix
+has determinant #{4}, while the complex matrix has complex determinant
+#{46}. Both have #{r_\Xi=1}, so
+#{\det_{\mathbb R}Q=4\cdot46^2=8464} and
+#{Z_Q=(2\pi)^3/92}. For the
+[binary tetrahedral Cayley graph](fdip-0053), write #{a=m^2>0}.
+The five real sectors give the following factors:
+##{\begin{array}{c|c|c}
+D_\Xi&r_\Xi&\det_{\mathbb R}(Q|_{H_\Xi})\\\hline
+\mathbb R&1&a\\
+\mathbb C&1&(a+3)^2\\
+\mathbb R&3&[(a+8)(a+11)^2]^3\\
+\mathbb H&1&(a+9)^4\\
+\mathbb C&2&[(a+6)(a+9)]^4
+\end{array}}
+Their product is
+##{\det_{\mathbb R}Q
+ =a(a+3)^2(a+6)^4(a+8)^3(a+9)^8(a+11)^6.}
+The exponents sum to #{24}, the real field dimension. The normalizer is
+##{Z_Q=\frac{(2\pi)^{12}}{\sqrt{\det_{\mathbb R}Q}}.}
+These factors use the mass-shifted precision, not the singular
+Laplacian alone.}
+
+\p{The density convention agrees with
+\citet{Theorem 8.4, p. 385}{friedli2017statistical} after setting
+its mean to zero and its covariance to #{\Sigma=Q^{-1}}.
+That theorem identifies the Gaussian density; the finite-group
+projectors and real determinant exponents are supplied by the proofs
+above and in \ref{fdip-0050}.}
+
+\p{Mathlib's
+\leanref{ProbabilityTheory.HasGaussianLaw.iIndepFun_of_covariance_inner}
+supports the independence step for a finite family of jointly
+Gaussian real Hilbert-space variables. Here the family is
+#{z\mapsto(E_\Xi z)_\Xi}, a linear image of the Gaussian field.
+For distinct sectors and #{u\in H_\Xi}, #{v\in H_\Psi}, its
+scalar cross covariance is #{\langle u,Q^{-1}v\rangle=0},
+because #{Q^{-1}} preserves the orthogonal sectors. Thus the
+declaration's zero-cross-covariance hypothesis matches this family.
+It does not assert the representation-theoretic decomposition or the
+real determinant exponents.}
