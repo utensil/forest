@@ -1,0 +1,60 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{Invariants of a selected background}
+\date{2026-11-01}
+
+\p{For a [selected background](fdip-005A), put
+#{X=\operatorname{im}P}. The following are invariants of its
+[orthogonal comparison class](fdip-005D):}
+\ul{
+\li{the spectrum of #{Q}, with multiplicities, and the rank of #{P};}
+\li{the spectrum of #{S_P}, hence its determinant and trace;}
+\li{for each eigenvalue #{\lambda} of #{Q}, the principal angles
+between #{X} and #{E_\lambda=\ker(Q-\lambda I)}.}
+}
+\p{Here principal angles are defined by taking orthonormal inclusion
+matrices #{B_X,B_\lambda} and the
+#{\min(\dim X,\dim E_\lambda)} singular values of
+#{B_X^*B_\lambda}. These numbers lie in #{[0,1]}; their arccosines,
+in increasing order, are the angles. This definition includes zero
+singular values and uses the entire eigenspace when #{\lambda}
+is repeated. It is independent of the two orthonormal bases.}
+
+\proof{
+\p{If #{Q'=OQO^{-1}} and #{P'=OPO^{-1}}, then
+#{O(X)=X'} and #{O(E_\lambda)=E'_\lambda}. Choosing the transported
+bases leaves #{B_X^*B_\lambda} unchanged; changing either basis
+multiplies this matrix on the left or right by an orthogonal matrix,
+which does not change its singular values. These are at most one
+because both inclusions and orthogonal projections have operator
+norm at most one. Conjugation gives the spectrum of #{Q} and
+rank of #{P}. The [selected-law transport](fdip-005C) gives
+#{S_{P'}=(O|_X)S_P(O|_X)^{-1}}, proving the remaining claims.}
+}
+
+\p{These are consequently invariants of both graph groupoids
+#{\mathsf{Bg}} and #{\mathsf{Bg}^{\pm}}. There is additional
+incidence information: the isomorphism class of the weighted
+incidence presentation with its selector, and the order of its
+finite automorphism group, are invariants in the chosen graph
+groupoid. Indeed, an arrow #{g:b\to b'} induces the group
+isomorphism #{\alpha\mapsto g\alpha g^{-1}} of automorphism groups.
+The directed and signed groups are different choices here;
+#{|\operatorname{Aut}_{\mathsf{Bg}}(b)|} is not being asserted
+invariant under an arbitrary signed arrow.}
+
+\p{The [cospectral pair](fdip-005H) has an orthogonal comparison
+but no graph arrow. Thus even all the listed spectral and angle
+invariants cannot recover incidence. No completeness claim for
+invariants of the pair #{(Q,P)} under #{O(H)} is made.}
+
+\p{TauCeti's \leanref/tauceti{TauCeti.cosPrincipalAngles} defines
+the singular values of the overlap operator of two finite
+orthonormal families as a nonincreasing sequence padded by zeros.
+Taking its first #{\min(\dim X,\dim E_\lambda)} values and then
+arccosines gives the convention above. Its
+\leanref/tauceti{TauCeti.cosPrincipalAngles_le_one} supplies the
+upper bound; the background-conjugacy and incidence claims are
+the separate arguments here.}

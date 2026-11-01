@@ -1,0 +1,65 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{When a marginal precision is a restriction}
+\date{2026-11-01}
+
+\p{Let #{Q>0} be self-adjoint on a finite-dimensional real Euclidean
+space #{H} and let #{P} be an orthogonal projector. Assume its image
+#{X} and kernel #{Y} are nonzero. In #{H=X\oplus Y}, write
+##{Q=\begin{pmatrix}A&K\\K^*&D\end{pmatrix},\qquad D>0.}
+The [selected precision](fdip-005B) obeys
+##{S_P=A-KD^{-1}K^*\preceq A.}
+Here #{A=PQ|_X} is the compression, and #{T\preceq A} means that
+#{\langle x,(A-T)x\rangle\ge0} for every #{x\in X}.
+The following conditions are equivalent:
+##{\begin{aligned}
+S_P=A&\quad\Longleftrightarrow\quad K=0\\
+&\quad\Longleftrightarrow\quad QX\subseteq X
+\quad\Longleftrightarrow\quad PQ=QP.
+\end{aligned}}
+In this case #{A=Q|_X}; call the selector \newvocab{restricting}.
+Otherwise it \newvocab{induces a different precision} through
+elimination of the complement.}
+
+\proof{
+\p{The Schur formula is proved in \ref{fdip-005B}. Its difference
+from the compression satisfies
+##{\langle x,(A-S_P)x\rangle
+ =\|D^{-1/2}K^*x\|^2\ge0.}
+It vanishes for all #{x} exactly when #{K^*=0}, since
+#{D^{-1/2}} is invertible. The #{Y}-component of #{Q(x,0)} is
+#{K^*x}, so the same condition is #{QX\subseteq X}.
+Self-adjointness then makes #{Y=X^\perp} invariant as well:
+#{\langle Qy,x\rangle=\langle y,Qx\rangle=0}.
+The resulting block diagonal matrix commutes with #{P}; conversely
+#{PQ=QP} carries its image to itself.}
+}
+
+\p{When #{K\ne0}, the positive semidefinite difference
+#{A-S_P} is nonzero, so the quadratic form decreases in some
+direction. It need not be positive definite: some directions may
+have zero loss. The assertion is a Loewner inequality with the
+stated equality criterion, not a strict inequality in every direction.}
+
+\p{For a positive-weight graph and a coordinate selector #{P_R},
+#{K} consists of the entries of #{Q} between #{R} and its complement.
+For distinct vertices these are minus the sum of weights of edges
+joining them; orientation does not affect the sum. All summands are
+positive. Hence #{K=0} exactly when no edge joins #{R} to its
+complement. In a connected graph every nonempty proper coordinate
+selector therefore induces a different precision. In particular,
+the retained vertices in [cycle decimation](fdip-0057) are stable
+under the retained cyclic action, but this symmetry does not make
+their span #{Q}-invariant.}
+
+\p{In orthonormal coordinates, Mathlib's
+\leanref{Matrix.PosDef.inv} gives positivity of #{D^{-1}}.
+The congruence lemma
+\leanref{Matrix.PosSemidef.mul_mul_conjTranspose_same},
+with its positive semidefinite matrix set to #{D^{-1}} and its
+rectangular matrix set to #{K}, gives #{KD^{-1}K^*\succeq0}.
+These declarations support the positivity steps. The equality
+criterion, subspace equivalences and graph specialization are
+proved above.}

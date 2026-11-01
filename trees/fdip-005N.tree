@@ -1,0 +1,72 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Corollary}
+\title{Which symmetry selectors restrict}
+\date{2026-11-01}
+
+\p{Let a finite group #{\Gamma} act orthogonally on a
+finite-dimensional real Euclidean space #{H}, and let
+#{Q>0} be self-adjoint and #{\Gamma}-equivariant. Two constructions
+of [symmetry selectors](fdip-005A) have different criteria.}
+\ol{
+\li{For a self-adjoint idempotent #{e\in\mathbb R[\Gamma]},
+the selector #{P=\rho(e)} restricts whenever its rank is nonzero
+and proper. Its image need not be a #{\Gamma}-subrepresentation.}
+\li{A nonzero proper #{\Gamma}-subrepresentation #{X} restricts precisely when
+its multiplicity subspace in every real isotypic block is invariant
+under the corresponding Hermitian precision matrix #{Q_\Xi}.}
+}
+
+\p{Here is the precise multiplicity convention. Use the
+[real commutant](fdip-004Z) and the
+[right-scalar column coordinates](fdip-0050). For
+#{D_\Xi=\operatorname{End}_\Gamma(W_\Xi)} and
+#{r_\Xi=\dim_{D_\Xi}W_\Xi}, represent #{H_\Xi} by
+#{r_\Xi} columns in #{D_\Xi^{m_\Xi}}; matrices act on each
+column by left multiplication. There is a right #{D_\Xi}-subspace
+#{U_\Xi\subseteq D_\Xi^{m_\Xi}} such that
+##{X\cap H_\Xi
+ \cong\{(z_1,\ldots,z_{r_\Xi}):z_a\in U_\Xi\}.}
+The criterion is
+##{Q_\Xi U_\Xi\subseteq U_\Xi\qquad\text{for every }\Xi.}
+Equivalently, each #{U_\Xi} has a #{D_\Xi}-basis of
+#{Q_\Xi}-eigenvectors. Repeated eigenvalues allow proper subspaces
+of an eigenspace; whole eigenspaces need not be selected.}
+
+\proof{
+\p{Equivariance makes #{Q} commute with every #{\rho(g)}, hence
+with #{\rho(e)}. The [restriction criterion](fdip-005M) proves
+the first assertion. Centrality is not needed for this commutation;
+it would additionally make #{\rho(e)} commute with the group action.}
+
+\p{For a subrepresentation #{X}, both #{X} and #{X^\perp} are
+#{\Gamma}-stable, so its orthogonal projector belongs to the
+commutant. By \ref{fdip-004Z} it is represented by Hermitian
+idempotents #{p_\Xi\in M_{m_\Xi}(D_\Xi)}. In the stated column
+coordinates its image has exactly the displayed form with
+#{U_\Xi=\operatorname{im}p_\Xi}. Conversely a right
+#{D_\Xi}-subspace has an orthogonal projector commuting with
+right scalar multiplication: its real orthogonal complement is
+right-scalar stable, since multiplication by each unit scalar is
+orthogonal and preserves the subspace. Thus that projector is a
+matrix over #{D_\Xi}; the commutant identification gives the
+corresponding subrepresentation.}
+
+\p{The matrix #{Q_\Xi} acts on every column, so #{QX\subseteq X}
+is exactly the displayed invariance condition. If it holds,
+self-adjointness preserves the orthogonal complement too. The
+Hermitian spectral argument of \ref{fdip-0050} applies to the
+restriction on #{U_\Xi}: a real eigenvector generates a right
+#{D_\Xi}-line of eigenvectors, its orthogonal complement is
+invariant, and induction gives a #{D_\Xi}-orthonormal eigenbasis.
+Conversely a span of eigenvectors is invariant, since their
+eigenvalues are real and the matrix is right-linear. Apply
+\ref{fdip-005M} to finish.}
+}
+
+\p{In a multiplicity-free representation every
+#{m_\Xi=1}, and a right #{D_\Xi}-subspace of #{D_\Xi} is either
+zero or all of it. Thus every nonzero proper subrepresentation restricts. At
+higher multiplicity, group stability alone does not suffice, as
+the [prism line](fdip-005O) shows.}
