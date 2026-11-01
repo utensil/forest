@@ -1,0 +1,93 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Example}
+\title{A twisted prism with a complex multiplicity block}
+\date{2026-11-01}
+
+\p{Take two triangles with vertices #{x,x'} indexed by
+#{x\in\mathbb Z/3\mathbb Z}. Give the upper triangle weight
+#{a=1}, the lower triangle weight #{b=2}, the edges #{\{x,x'\}}
+weight #{u=1}, and the edges #{\{x,(x+1)'\}} weight #{v=1/2}.
+The [graph precision](fdip-000A) is #{Q=L+I}.
+Each edge is undirected for the energy; arbitrary chosen orientations
+are transported with the [signed convention](fdip-004S).}
+
+\texfig{\begin{tikzpicture}[
+  vertex/.style={circle,draw,fill=white,inner sep=2pt,
+    minimum size=7mm,font=\small},
+  shifted/.style={densely dashed,semithick}
+]
+\node[vertex] (a0) at (0,0) {$0$};
+\node[vertex] (a1) at (1.8,0) {$1$};
+\node[vertex] (a2) at (3.6,0) {$2$};
+\node[vertex] (b0) at (0,-1.8) {$0'$};
+\node[vertex] (b1) at (1.8,-1.8) {$1'$};
+\node[vertex] (b2) at (3.6,-1.8) {$2'$};
+\draw (a0) -- (a1) -- (a2);
+\draw (a0) to[bend left=40] (a2);
+\draw[very thick] (b0) -- (b1) -- (b2);
+\draw[very thick] (b0) to[bend right=40] (b2);
+\draw (a0) -- (b0);
+\draw (a1) -- (b1);
+\draw (a2) -- (b2);
+\draw[shifted] (a0) -- (b1);
+\draw[shifted] (a1) -- (b2);
+\draw[shifted,rounded corners=3pt] (a2) -- (4.3,0)
+  -- (4.3,-3) -- (-0.7,-3) -- (-0.7,-1.8) -- (b0);
+\end{tikzpicture}}
+
+\p{Thin solid edges have weight #{1}; the thick lower triangle has
+weight #{2}; dashed edges have weight #{1/2}. The outer dashed edge
+joins #{2} to #{0'}, completing the shift modulo three. Crossings
+without a circle are not vertices.}
+
+\p{The simultaneous rotation #{x\mapsto x+1} generates #{C_3}.
+It is the entire weight-preserving vertex automorphism group.
+The weighted degrees #{7/2} and #{11/2} distinguish the two layers.
+The interlayer edges of weight #{1} force the same permutation
+#{\pi} on both layers, and those of weight #{1/2} force
+#{\pi(x+1)=\pi(x)+1}. Thus only the three rotations remain.}
+
+\p{The real representation is
+#{\mathbb R^6\cong\mathbb R^{\oplus2}\oplus W^{\oplus2}},
+where #{W} is the two-dimensional rotation representation and has
+#{D=\mathbb C} by \ref{fdip-0051}. The commutant is
+#{M_2(\mathbb R)\times M_2(\mathbb C)}, of real dimension
+#{4+8=12}. Its orbitals are the four choices of ordered layers
+and three differences #{y-x}. The symmetric dimension is
+#{3+4=7}: there are two diagonal orbits, two within-layer edge
+orbits and three interlayer pair orbits.}
+
+\p{Use normalized constant vectors on the two layers for the
+trivial sector. For the other sector put
+#{\zeta=e^{2\pi i/3}} and represent its upper values by
+#{f(x)=\sqrt{2/3}\operatorname{Re}(z\zeta^{-x})}, and its lower
+values by the same formula with #{z'}.
+This is an isometry from #{\mathbb C^2} with its real Euclidean
+inner product to the four-dimensional sector. Evaluating the edge
+energy gives
+##{\begin{aligned}
+Q_{\mathrm{triv}}&=
+ \begin{pmatrix}5/2&-3/2\\-3/2&5/2\end{pmatrix},\\
+Q_{\mathbb C}&=
+ \begin{pmatrix}
+11/2&-3/4+i\sqrt3/4\\
+-3/4-i\sqrt3/4&17/2
+\end{pmatrix}.
+\end{aligned}}
+Indeed the diagonal Fourier entries are #{1+3a+u+v} and
+#{1+3b+u+v}; the upper-right entry is
+#{-u-v\zeta^{-1}}. The trivial eigenvalues are #{1,4}.
+The complex block has trace #{14}, determinant #{46}, and eigenvalues
+#{7-\sqrt3,7+\sqrt3}, each repeated twice over the reals. Hence
+##{\det_{\mathbb R}Q=4\cdot46^2=8464.}
+The square is required by the [real determinant convention](fdip-0050).}
+
+\p{The imaginary entry records the shift in the declared Fourier
+coordinates. Rephasing one coordinate can make this single
+Hermitian matrix real; the intrinsic complex feature is the full
+commutant #{M_2(\mathbb C)}, not an obstruction to diagonalizing
+one positive operator. This calculation adapts the cyclic Fourier
+modes of \ref{fdip-004W}, based on
+\citet{Section 5.1, p. 35}{serre1977linear}.}

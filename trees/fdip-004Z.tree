@@ -1,0 +1,66 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{The real commutant and multiplicity matrices}
+\date{2026-11-01}
+
+\p{Let a finite group #{G} act orthogonally on a finite-dimensional
+real space #{H}. In its [isotypic decomposition](fdip-004V), write
+#{H_\Xi\cong W_\Xi^{\oplus m_\Xi}}, where #{W_\Xi} is irreducible
+and #{m_\Xi>0} is its \newvocab{multiplicity}. The
+\vocabk{commutant}{fdip-003T} consists of all linear maps commuting
+with #{G}. With multiplication given by composition, put
+#{D_\Xi=\operatorname{End}_G(W_\Xi)}. Then
+##{\begin{aligned}
+D_\Xi&\cong\mathbb R,\ \mathbb C\ \text{or}\ \mathbb H,\\
+\operatorname{End}_G(H)&\cong\prod_\Xi M_{m_\Xi}(D_\Xi).
+\end{aligned}}
+The isomorphism can be chosen to carry adjunction to conjugate
+transpose. If #{H=\mathbb R^V} is a vertex permutation representation,
+the real dimension of #{\operatorname{End}_G(H)} is the number of
+orbits of the diagonal action
+#{g(u,v)=(gu,gv)} on #{V\times V}. These orbits are called
+\newvocab{orbitals}.}
+
+\proof{
+\p{Maschke's theorem decomposes #{H} orthogonally into irreducibles.
+The kernel and image of an intertwiner are invariant. Hence an
+intertwiner between inequivalent irreducibles is zero, and every
+nonzero endomorphism of one irreducible is invertible. Thus
+#{D_\Xi} is a finite-dimensional associative real division algebra;
+Frobenius's division-algebra theorem gives the three displayed
+possibilities. Between #{m_\Xi} identified copies the intertwiners
+are precisely matrices of elements of #{D_\Xi}, acting by
+#{(Aw)_i=\sum_j A_{ij}(w_j)}. This proves the algebra statement.
+The real classification and its representation-theoretic use are
+\citet{Section 13.2, pp. 106-109}{serre1977linear}; compare the
+[real-type distinction](fgap-001Y).}
+
+\p{Adjunction preserves #{D_\Xi}. A self-adjoint element of it has
+real eigenspaces invariant under #{G}, so irreducibility makes it a
+real scalar. In particular #{d^*d=cI} with #{c>0} for #{d\ne0}.
+The resulting positive adjoint on #{\mathbb R}, #{\mathbb C} or
+#{\mathbb H} is the usual conjugation: for an imaginary unit
+#{j^2=-1}, write #{j+j^*=2aI} with #{a\in\mathbb R}.
+Then #{j^*j=2aj+I} is scalar, forcing #{a=0}.
+Thus #{j^*=-j}.
+Identifications between equivalent orthogonal copies can be made
+isometric by dividing an intertwiner by the positive square root
+of its scalar #{T^*T}. In those coordinates the block adjoint is
+conjugate transpose.}
+
+\p{For vertex permutations, a matrix #{A} commutes with every
+#{\rho(g)} exactly when #{A_{gu,gv}=A_{u,v}}. Its entries are
+therefore constant on orbitals. The indicator matrices of distinct
+orbitals have disjoint supports and form a real basis of the
+commutant, proving the dimension formula.}
+}
+
+\p{The scalar-side convention matters for #{\mathbb H}.
+Here #{D_\Xi} acts on #{W_\Xi} on the left by endomorphisms.
+If instead #{W_\Xi} is presented as a left module for a simple
+matrix algebra, its commuting scalars act on the right and form
+an opposite algebra, as in \ref{fcap-0042}. Quaternion conjugation
+identifies that opposite algebra with #{\mathbb H}; it does not
+license reversing the order of quaternion products.}

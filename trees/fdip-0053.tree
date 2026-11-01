@@ -1,0 +1,98 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Example}
+\title{All real types in a binary tetrahedral Cayley graph}
+\date{2026-11-01}
+
+\p{Let #{T=2T} be the [twenty-four Hurwitz units](fgap-000K), with
+#{\omega=(-1+i+j+k)/2}, and take the inverse-closed generating set
+##{S=\{i,-i,j,-j,k,-k,\omega,\bar\omega\}.}
+Give each unordered edge #{\{g,gs\}} weight one, counting it once.
+There are no loops, the degree is eight, and left multiplication
+acts by signed graph symmetries. On #{\mathbb R^T} the Laplacian is
+##{(Lf)(g)=8f(g)-\sum_{s\in S}f(gs).}
+The underlying group construction is
+\citet{Section 11.2, pp. 166-168}{voight2021quaternion}.
+The following spectrum and blocks are calculations for this
+particular generating set.}
+
+\p{The quotient #{T/Q_8\cong C_3} gives the character
+#{\lambda(\omega)=\zeta=e^{2\pi i/3}}, #{\lambda|_{Q_8}=1}.
+Let #{\sigma} be the defining two-dimensional complex quaternion
+representation, with #{\chi_\sigma(q)=2\operatorname{Re}q}, and
+let #{\tau} act by quaternion conjugation on
+#{\operatorname{span}_{\mathbb R}\{i,j,k\}}.
+Its character is #{4(\operatorname{Re}q)^2-1}.
+The seven conjugacy classes and their characters are
+##{\begin{array}{c|rrrrrrr}
+q&1&-1&i&\omega&-\omega&\omega^2&-\omega^2\\\hline
+|[q]|&1&1&6&4&4&4&4\\
+\lambda^j&1&1&1&\zeta^j&\zeta^j&\zeta^{2j}&\zeta^{2j}\\
+\sigma\lambda^j&2&-2&0&-\zeta^j&\zeta^j&-\zeta^{2j}&\zeta^{2j}\\
+\tau&3&3&-1&0&0&0&0
+\end{array}}
+with #{j=0,1,2}. The class of #{i} comprises
+#{\{\pm i,\pm j,\pm k\}}; each remaining class is determined
+by its #{Q_8}-coset and real part. These descriptions follow by
+conjugating the explicit Hurwitz units.}
+
+\p{Using the displayed sizes, the character inner products are
+#{\delta_{\alpha\beta}} and the sum of squared degrees is
+#{3\cdot1^2+3\cdot2^2+3^2=24}. Thus the seven characters are
+irreducible, inequivalent and complete. Squaring sends the first
+three classes to #{1,1,-1}, the two #{\pm\omega} classes to
+#{[\omega^2]}, and the two #{\pm\omega^2} classes to #{[\omega]}.
+Substitution into #{|T|^{-1}\sum_g\chi(g^2)} gives indicators
+#{1,0,0} for #{1,\lambda,\lambda^2}, #{-1,0,0} for
+#{\sigma,\sigma\lambda,\sigma\lambda^2}, and #{1} for #{\tau}.
+For example the numerator for #{\sigma} is
+#{2+2-12-16=-24}; for #{\sigma\lambda} it is
+#{4-12-8(\zeta+\zeta^2)=0}.
+The [real-type bridge](fdip-0051) therefore gives
+##{\operatorname{End}_T(\mathbb R^T)
+ \cong\mathbb R\times\mathbb C\times M_3(\mathbb R)
+       \times\mathbb H\times M_2(\mathbb C).}
+Here the regular real multiplicity is #{m_\Xi=\dim_{D_\Xi}W_\Xi}:
+a real simple matrix algebra #{M_r(D)} has #{r} column copies of
+its defining module, as in \ref{fcap-0042}.}
+
+\p{Fourier decomposition of right translation gives, up to the
+chosen dual-basis convention, the block
+#{8I-\sum_{s\in S}\pi(s)}. Its adjoint or transpose gives the
+same spectra and determinants, since #{S=S^{-1}}.
+The [multiplicity matrices](fdip-0050) are as follows; in the table
+#{m} is multiplicity, not the mass parameter:
+##{\begin{array}{c|c|c|c|c}
+W\text{ type}&D&m&\dim_{\mathbb R}W&L_\Xi\\\hline
+1&\mathbb R&1&1&0\\
+\lambda,\bar\lambda&\mathbb C&1&2&3\\
+\tau&\mathbb R&3&3&11I_3-J_3\\
+\sigma&\mathbb H&1&4&9\\
+\sigma\lambda,\sigma\bar\lambda&\mathbb C&2&4&\operatorname{diag}(6,9)
+\end{array}}
+Here #{J_3} is the all-ones matrix. For #{\tau}, the six
+#{\pm i,\pm j,\pm k} contribute #{-2I_3}, while
+#{\tau(\omega)+\tau(\bar\omega)=J_3-I_3}; the block has
+eigenvalues #{8,11,11}. For #{\sigma} the six contributions
+cancel and #{\sigma(\omega)+\sigma(\bar\omega)=-I_2}, giving
+#{9}. For #{\sigma\lambda}, diagonalize #{\sigma(\omega)}
+with eigenvalues #{\zeta,\zeta^2}. The twisted adjacency sum has
+eigenvalues #{-1,2}, giving #{9,6}. The nonreal linear pair has
+adjacency eigenvalue #{6+\zeta+\zeta^2=5}.}
+
+\p{The real sector dimensions are #{1,2,9,4,8}, summing to #{24}.
+Consequently
+##{\operatorname{spec}(L)=\{0,3^{[2]},6^{[4]},8^{[3]},9^{[8]},11^{[6]}\},}
+where brackets denote eigenvalue multiplicity. For a mass squared
+#{a>0}, set #{Q=L+aI}; every block receives the same shift and
+##{\begin{aligned}
+\det_{\mathbb R}Q={}&a(a+3)^2(a+6)^4\\
+ &\cdot(a+8)^3(a+9)^8(a+11)^6.
+\end{aligned}}
+The complex and quaternionic exponents are real dimensions, not
+complex degrees copied without descent. The commutant dimension
+is #{24}; the symmetric dimension is #{13}, also the number of
+inversion orbits in #{T}, since only #{1,-1} are self-inverse.
+These are finite graph calculations; the possible physical
+interpretations discussed in \ref{fgap-0018} are separate hypotheses.}
