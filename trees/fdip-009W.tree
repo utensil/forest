@@ -1,0 +1,39 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Example}
+\title{The Hermitian convention can retain extra Wilson zeros}
+\date{2026-11-01}
+
+\p{Set #{d=1}, #{N=4}, #{a=r=1}, trivial links and
+#{F=\mathbb C}. The chosen spin space is #{S=\mathbb C^2},
+with gamma matrix
+##{X=\begin{pmatrix}0&1\\1&0\end{pmatrix}.}
+The free skew Dirac block is #{D_1(p)=iX\sin p}.
+Replacing it by the Hermitian operator #{iD_1} and then adding
+the same Wilson term gives the block
+##{H_W(p)=-X\sin p+(1-\cos p)I.}
+This is a different operator from \ref{fdip-009V}.}
+
+\p{The normalized vectors #{(1,1)/\sqrt2} and
+#{(1,-1)/\sqrt2} are #{X}-eigenvectors of eigenvalues
+#{+1} and #{-1}. Thus the two eigenvalues of #{H_W(p)} are
+#{1-\cos p\mp\sin p}. On the four allowed momenta:
+##{\begin{array}{c|cc|c}
+p&X=+1&X=-1&\dim\ker H_W(p)\\\hline
+0&0&0&2\\
+\pi /2&0&2&1\\
+\pi&2&2&0\\
+3\pi /2&2&0&1
+\end{array}}
+The total kernel dimension is four. The skew Wilson operator
+#{D_1+L_1/2} instead has kernel dimension two, consisting of
+constant fields. Tensoring this example with an internal space
+of dimension #{q} multiplies both counts by #{q}.}
+
+\p{The difference is elementary: a real scalar can cancel a
+real eigenvalue of the Hermitian first difference. For the skew
+first difference the squared norm is a sum of nonnegative
+squares, as in the preceding proof. Adjoint conventions therefore
+cannot be changed silently in a claim that the Wilson term
+removes all nonzero-momentum zeros.}
