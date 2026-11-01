@@ -9,6 +9,45 @@ calculus when space is discrete?}
 
 \p{\em{Planned.} The questions in this part are not yet developed here.}
 
+\texfig{\begin{tikzpicture}[x=1cm,y=1cm,font=\sffamily,
+  box/.style={draw=black,line width=0.5pt,rounded corners=2pt,align=center,execute at begin node={\hyphenpenalty=10000\exhyphenpenalty=10000},
+    font=\sffamily\small,minimum height=7mm,inner sep=2.5pt,text width=#1},
+  ext/.style={draw=black,densely dotted,line width=0.4pt,rounded corners=2pt,align=center,execute at begin node={\hyphenpenalty=10000\exhyphenpenalty=10000},
+    font=\sffamily\small,text=black!60,minimum height=7mm,inner sep=2.5pt,text width=#1},
+  arr/.style={-{Stealth[length=2.2mm]},line width=0.6pt},
+  lab/.style={font=\sffamily\footnotesize\itshape,inner sep=1.5pt,fill=white,align=center}]
+\node[ext=4.4cm] (XI) at (3,10.3) {Part XI: Euclidean time};
+\node[ext=4.4cm] (XII) at (13.6,10.3) {Part XII: Lattice fermions};
+\node[box=4.4cm] (oa) at (3,8.55) {States and conditional expectations};
+\node[box=4.4cm] (dc) at (8.4,8.55) {Cochains, Stokes and Hodge theory};
+\node[box=4.4cm] (ob) at (3,6.35) {Transfer, KMS states and superselection};
+\node[box=4.4cm] (ng) at (8.4,6.35) {Spectral triples and induced distance};
+\node[box=3.6cm] (dd) at (13.6,6.35) {Dirac–Kähler operators};
+\node[box=4.4cm] (gc) at (3,4.15) {Gluing and spin networks};
+\node[box=4.4cm] (n3) at (8.4,4.15) {Spectral action as induced action};
+\node[box=4.4cm] (g2) at (3,1.95) {Contexts and background stacks};
+\node[box=4.4cm] (um) at (8.4,1.95) {Ultrametric coarse-graining};
+\node[ext=3.6cm] (XIV) at (13.6,0.4) {Part XIV: Explorations and synthesis};
+\draw[arr] (XI.west) -- (0.2,10.3) -- (0.2,6.35) -- (ob.west);
+\draw[arr] (XII) -- (dd);
+\draw[arr] (oa) -- (ob);
+\draw[arr] (oa) -- (ng);
+\draw[arr] (dc) -- node[lab,midway,right=1mm] {can the lengths that\\ are still supplied be read off\\ from the physics itself?} (ng);
+\draw[arr] (dc.east) -| (dd);
+\draw[arr] (ob) -- node[lab,midway,right=1mm] {can the physics on a closed\\ surface be built by joining\\ the physics of its pieces?} (gc);
+\draw[arr] (ng) -- (n3);
+\draw[arr] (n3) -- node[lab,midway,right=1mm] {does the physics at large\\ scales follow exactly from\\ the physics at small scales?} (um);
+\draw[arr] (gc) -- (g2);
+\draw[arr] (dd) -- (XIV);
+\draw[arr] (um) -- (XIV);
+\end{tikzpicture}}
+
+\p{The arrows from Euclidean time enter the transfer chapter; those
+from lattice fermions enter the Dirac-Kähler chapter. They mark selected
+intended prerequisites for the planned results, while the two opening
+questions motivate the part as a whole. Other suppliers are specified
+when each construction is developed.}
+
 \transclude{fdip-008S}
 \transclude{fdip-008V}
 \transclude{fdip-008Y}

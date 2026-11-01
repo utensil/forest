@@ -5,147 +5,123 @@
 \title{How to read these notes}
 \date{2026-10-31}
 
-\p{The displayed order is a safe reading route. Its first box groups
-the eight foundation chapters, from [fields on finite carriers](fdip-0015) to
-[constrained Gaussian laws](fdip-003V); it does not make every foundation
-a premise of every later result. Solid arrows show selected uses of
-definitions and results, not all prerequisites. Dashed routes give
-optional context for relative precision and circle approximation.
-Each statement names its
-precise assumptions.}
+\p{The reading route has fourteen parts. The diagrams show selected
+prerequisites for reading, not every premise of every result. An arrow
+means that its destination uses a construction or comparison from its
+source. Each statement still gives its precise hypotheses. Questions on
+the arrows motivate the next topic; they do not assert that the notes
+already derive the corresponding physics.}
 
-\texfig{\begin{tikzpicture}[
-  box/.style={draw,rounded corners=2pt,align=center,font=\small,
-    text width=27mm,minimum height=10mm,inner sep=3pt},
-  flow/.style={-{Stealth[length=2mm]},semithick}
-]
-\node[box,text width=41mm] (foundation) at (0,0)
-  {Foundations\\first eight chapters};
-\node[box] (retained) at (0,-1.4) {Retained laws};
-\node[box] (background) at (0,-2.8) {Backgrounds};
-\node[box] (sector) at (-2,-4.3) {Half-turn and\\finite-group sectors};
-\node[box] (clifford) at (1.7,-4.3) {Clifford algebras};
-\node[box] (dirac) at (1.7,-6) {Spatial Dirac};
-\node[box] (enriched) at (1.7,-7.8) {Enriched comparison};
-\node[box] (circle) at (-2,-6) {Circle approximation};
-\node[box] (arithmetic) at (1.7,-9.6) {Arithmetic};
-\node[box] (realization) at (-2,-9.6) {Realization and observables};
-\node[box] (selected) at (-2,-11.4) {Selected backgrounds};
-\node[box] (synthesis) at (1.7,-11.4) {Synthesis};
-\draw[flow] (foundation) -- (retained);
-\draw[flow] (retained) -- (background);
-\draw[flow] (background.south) -- (0,-3.5) -| (sector.north);
-\draw[flow] (background.south) -- (0,-3.5) -| (clifford.north);
-\draw[flow] (clifford) -- (dirac);
-\draw[flow] (clifford.east) -- (3.5,-4.3) |- (enriched.east);
-\draw[flow] (clifford.east) -- (3.9,-4.3) |- (arithmetic.east);
-\draw[flow] (foundation.west) -- (-4,0) |- (circle.west);
-\draw[flow] (circle.south) -- (-2,-6.9) -- (-3.7,-6.9)
-  -- (-3.7,-12.4) -| (synthesis.south);
-\draw[flow] (enriched.west) -- (-0.15,-7.8) -- (realization.north);
-\draw[flow] (arithmetic.west) -- (realization.east);
-\draw[flow] (enriched.west) -- (-0.15,-7.8) -- (-0.15,-10.5)
-  -| (selected.north);
-\draw[flow] (realization.east) -- (0,-9.6) -- (0,-10.5)
-  -| (synthesis.north);
-\draw[flow,dashed] (enriched.south) -- node[right,font=\scriptsize]
-  {context} (arithmetic.north);
-\draw[flow,dashed] (dirac.west) -- (circle.east);
-\node[font=\scriptsize] at (-0.15,-5.2) {context};
+\p{The overview includes the full intended route. The
+[prime-by-prime Gaussian extension](fdip-008M),
+[Structure](fdip-008R) and the concluding
+[comparison of fixed and free data](fdip-009G) are explicitly planned.
+Lattice fermions and the new compatibility explorations are also still
+planned. A solid arrow into such material records an intended prerequisite,
+not a result already proved. In the part diagrams, a dotted box names a
+neighboring part; every arrow is solid.}
+
+\texfig{\begin{tikzpicture}[x=1cm,y=1cm,font=\sffamily,
+  box/.style={draw=black,line width=0.5pt,rounded corners=2pt,align=center,execute at begin node={\hyphenpenalty=10000\exhyphenpenalty=10000},
+    font=\sffamily\small,minimum height=7mm,inner sep=2.5pt,text width=#1},
+  ext/.style={draw=black,densely dotted,line width=0.4pt,rounded corners=2pt,align=center,execute at begin node={\hyphenpenalty=10000\exhyphenpenalty=10000},
+    font=\sffamily\small,text=black!60,minimum height=7mm,inner sep=2.5pt,text width=#1},
+  arr/.style={-{Stealth[length=2.2mm]},line width=0.6pt},
+  lab/.style={font=\sffamily\footnotesize\itshape,inner sep=1.5pt,fill=white,align=center}]
+\node[ext=9cm] (R) at (0,23.95) {\textbf{Purpose}\\ {\footnotesize can physics be built without continuous (infinitely divisible) quantities: can finite structures induce geometry, time and matter?}};
+\node[box=9cm] (I) at (0,21.95) {\textbf{I\enspace Foundations}\\ {\footnotesize fields on a finite graph · pairings · differences · elimination}};
+\node[box=9cm] (II) at (0,20.0) {\textbf{II\enspace Gaussian laws}\\ {\footnotesize states · reference measure · Gaussian laws · retained laws}};
+\node[box=13.6cm] (III) at (0,18.05) {\textbf{III\enspace Backgrounds and symmetry}\\ {\footnotesize backgrounds · relabelings · group-algebra sectors}};
+\node[box=2.6cm] (IV) at (-6.55,15.25) {\textbf{IV\enspace Finite-group symmetry}\\ {\footnotesize isotypic sectors · equivariant laws}};
+\node[box=8.8cm] (V) at (2.6,15.25) {\textbf{V\enspace Clifford algebras, Dirac operators}\\ {\footnotesize Clifford algebras · Dirac operators · comparison}};
+\node[box=3.0cm] (VIII) at (2.3,11.5) {\textbf{VIII\enspace Geometric realization}\\ {\footnotesize triangles · forgotten weights · gluing}};
+\node[box=3.4cm] (VII) at (-1.5,11.95) {\textbf{VII\enspace Continuum approximation}\\ {\footnotesize supplied circle · fixed modes}};
+\node[box=10.6cm] (IX) at (-1.8,9.25) {\textbf{IX\enspace Induced action and backgrounds}\\ {\footnotesize selected backgrounds · induced action · connections}};
+\node[box=2.6cm] (VI) at (6.45,12.5) {\textbf{VI\enspace Arithmetic}\\ {\footnotesize every prime · Euler products}};
+\node[box=8.0cm] (X) at (-1.8,7.15) {\textbf{X\enspace Gauge fields}\\ {\footnotesize finite and compact gauge groups · matter}};
+\node[box=5.6cm] (XI) at (-4.6,5.05) {\textbf{XI\enspace Euclidean time}\\ {\footnotesize reflection positivity · transfer · Gauss's law}};
+\node[box=5.0cm] (XII) at (2.05,4.45) {\textbf{XII\enspace Lattice fermions}\\ {\footnotesize Grassmann integration · Wilson term}};
+\node[box=8.4cm] (XIII) at (-1.8,2.65) {\textbf{XIII\enspace Structure}\\ {\footnotesize states · cochains · spectral geometry · coarse-graining · gluing}};
+\node[box=14.6cm] (XIV) at (0,0.6) {\textbf{XIV\enspace Explorations and synthesis}\\ {\footnotesize Wilson tests · discrete induction and its open interfaces}};
+\draw[arr] (R) -- node[lab,midway,right=1mm] {what is a classical field like\\ in a discrete setting?} (I);
+\draw[arr] (I) -- node[lab,midway,right=1mm] {what is this discrete physics like\\ in a probability-based setting?} (II);
+\draw[arr] (II) -- node[lab,midway,right=1mm] {what can be exchanged in a discrete world\\ while the physics stays the same?} (III);
+\draw[arr] (III.south -| IV.north) -- node[lab,midway,right=1mm] {does symmetry still sort\\ the physics into sectors when\\ the order of exchanges matters?} (IV);
+\draw[arr] (III.south -| V.north) -- node[lab,midway,right=1mm] {how does matter with spin,\\ like the electron, arise\\ in a discrete setting?} (V);
+\draw[arr] (V.south -| VII.north) -- node[lab,midway,left=1mm] {on a given\\ continuous space,\\ does the discrete physics\\ approach the\\ continuous one?} (VII);
+\draw[arr] (V.south -| VIII.north) -- node[lab,midway,left=1mm] {what is retained\\ when a finite graph\\ is replaced by\\ a geometric shape?} (VIII);
+\draw[arr] (V.south -| VI.north) -- node[lab,midway,left=1mm] {can fields, probabilities\\ and symmetries\\ all be built without\\ continuous quantities?} (VI);
+\draw[arr] (VI.west) -- (VIII.east);
+\draw[arr] (IV.south) -- (IV.south |- IX.north);
+\draw[arr] (VII.south) -- node[lab,midway,left=1mm] {can the geometry of space\\ come out of the physics\\ instead of being put in?} (VII.south |- IX.north);
+\draw[arr] (VIII.south) -- (VIII.south |- IX.north);
+\draw[arr] (IX) -- node[lab,midway,right=1mm] {how do forces like electromagnetism\\ arise in a discrete setting?} (X);
+\draw[arr] (X.south -| XI.north) -- node[lab,midway,right=1mm] {where does time come from\\ in a discrete setting?} (XI);
+\draw[arr] (X.south -| XII.north) -- node[lab,midway,right=1mm] {can electrons, which\\ never share a state,\\ be described in the\\ probability-based setting?} (XII);
+\draw[arr] (XI.south) -- node[lab,midway,right=1mm] {can the physics be rebuilt\\ from its observables alone?} (XI.south |- XIII.north);
+\draw[arr] (XII.south) -- node[lab,midway,right=1mm] {what replaces calculus\\ when space is discrete?} (XII.south |- XIII.north);
+\draw[arr] (XIII.south) -- node[lab,midway,right=1mm] {which parameters of physics follow from the choice\\ of a finite structure, and which remain free?} (XIII.south |- XIV.north);
+\draw[arr] (VI.south) -- (VI.south |- XIV.north);
 \end{tikzpicture}}
 
-\p{[Retained laws](fdip-0018) combine Schur elimination and Gaussian
-integration; [backgrounds](fdip-0019) then specify which data and laws
-are transported. [Half-turn sectors](fdip-001A) lead to
-[finite-group symmetry](fdip-004R), with complete real projectors
-and cyclic and dihedral examples. [Equivariant precision](fdip-004Y)
-then resolves multiplicities over the reals, complexes and quaternions,
-with a twisted prism and a binary tetrahedral Cayley graph.
-The [Gaussian sector laws](fdip-0054) give independent factors and
-equivariant elimination; cycle decimation computes a stable retained
-set whose precision is induced rather than restricted.
-The finite-group action preserves the
-unpartitioned graph precision; a retained subset would additionally
-have to be stable. [Clifford algebras](fdip-001B)
-use the earlier constructions; the sector comparison is restated locally in
-the Clifford chapter. [Spatial Dirac](fdip-001C),
-[enriched comparison](fdip-001E) and [arithmetic](fdip-001D) develop
-different subsequent questions, with relative precision restated in the
-arithmetic setting. The [circle approximation](fdip-004G) uses the
-foundation pairings and Gaussian covariance, with spatial Dirac as
-optional comparison. [Realization and observables](fdip-004L) use
-incidence, retained laws, enriched transport and the arithmetic
-chapter's fiber criterion; the triangle illustrates the realization
-choice. [Selected backgrounds and invariants](fdip-0059) then allow arbitrary
-orthogonal retained subspaces, derive their Gaussian laws and
-distinguish graph arrows from wider orthogonal comparisons. The
-four-cycle and quaternion examples compare coordinate and group-algebra
-selectors. Their retained spectra distinguish the resulting laws;
-the restriction criterion and prism example explain which symmetry
-selectors preserve a precision by restriction. Isotropy pieces record
-graph stabilizers without asserting physical phase structure.
-The [induced action](fdip-005Q) integrates the full Gaussian field;
-its edge derivatives, concavity and rooted-forest expansion connect
-the normalizer to graph observables. A finite-cycle determinant
-keeps the circle scaling and reference-measure convention explicit.
-Conditional Gaussian elimination then produces
-[background-dependent interactions](fdip-005Y). Their formal
-coefficients transport with the interaction; a quartic cycle exhibits
-the induced vertices and their dependence on the selector.
-The [local Gaussian laws](fdip-0063) use marginalization and conditional
-precision to study gluing. Separator products give a unique Markov law
-on a chordal clique cover; a four-cycle shows why overlap consistency
-alone does not suffice. This is a finite gluing statement for laws,
-with a separate boundary from descent of background objects.
-The [connection chapter](fdip-006C) replaces ordinary differences by
-unitary transport along edges. Gauge covariance and cycle holonomies
-lead to exact determinants and a normalized complex circle action;
-antiperiodic spatial modes separate exact zero modes from additional
-low-energy branches.
-The [finite gauge-field chapter](fdip-006L) then supplies square faces
-and sums over edge connections with a Wilson action. Finite averaging
-and the exact two-element torus law distinguish gauge invariance,
-global holonomies and the pure-gauge area-law limit.
-The [surface character formula](fdip-006U) extends the exact
-partition calculation to noncommutative finite groups on closed
-oriented surfaces. Edge orthogonality and vertex index sums fix
-the normalization; quaternion and binary tetrahedral examples
-give distinct spinor Wilson laws.
-For [matter in a fixed connection](fdip-006Z), an absolutely
-convergent closed-walk expansion computes the determinant action.
-Its leading scalar plaquette coefficient, short-period winding terms
-and link-current derivative retain the real or complex normalization.
-The [joint matter and connection law](fdip-0075) then makes the
-connection dynamical. Its exact marginal and conditional measures,
-a small-torus determinant sum and a positive-loop comparison separate
-finite matter effects from claims about asymptotic screening.
-The [compact-group chapter](fdip-007A) replaces edge sums by Haar
-integrals and states the convergence needed for surface character
-expansions. Circle weights distinguish matching one Fourier coefficient
-from matching a law; the classical smooth-field calculation fixes
-Wilson-action normalization. Quaternion double covers and explicit
-representation data separate internal fields from substrate actions.
-The [reflection-positivity chapter](fdip-007L) chooses a time
-direction and distinguishes site and link reflections. A scalar
-Gaussian criterion, its cutoff proof and a two-site Gram matrix
-explain positive reflected pairings. A six-site product law shows
-why those pairings alone do not give a quotient time shift.
-The [Gaussian transfer operator](fdip-007S) then supplies an
-explicit time step. Hermite diagonalization fixes its leading
-eigenvalue; periodic traces reproduce the cycle determinant and
-covariance. Normalization produces a spectral logarithm with the
-domain and gap of a harmonic oscillator.
-The [gauge transfer construction](fdip-007Y) uses positive
-character coefficients on a finite spatial graph. Gauge projection
-retains temporal averaging in periodic traces; a one-link example
-shows the effect of omitting it. The resulting operator has a
-spectral Hamiltonian and a link-reflection trace-square identity
-for bounded spatial observables.
-The [Gauss-law chapter](fdip-0088) interprets gauge invariance
-as the residual constraint on a time slice. Charged invariant
-tensors are spaces of intertwiners, distinct from whole isotypic
-components. A permutation-group link and a two-by-two sign torus
-compute the resulting multiplicities and neutral state counts.
-The [synthesis](fdip-003W) compares the earlier finite constructions
-with the conjecture. The opening motivation and forward example links
-orient these readings without adding hypotheses.}
+\p{After backgrounds and symmetry, the route separates finite-group
+sectors from Clifford algebras and spatial Dirac operators. The latter
+lead to arithmetic, approximation on a supplied circle and geometric
+realization. These are not three independent branches: the
+[fiber-constancy criterion](fdip-0042) remains in Arithmetic and is used
+by Realization. The direct comparison from Part V also remains visible.
+The figures therefore show selected prerequisites, not an exact
+transitive reduction of all dependencies.}
+
+\p{Finite-group sectors, circle approximation and realization meet in
+the study of selected backgrounds and induced actions. Connections lead
+to gauge fields; Euclidean time and the planned fermion branch then feed
+the intended Structure part. Arithmetic and Structure contribute different
+questions to the closing explorations. These destinations are earned by
+specific finite constructions, rather than adopted as starting axioms.}
+
+\ul{
+  \li{Part I, [Foundations](fdip-0015): fields on finite carriers,
+  reference pairings, differences and algebraic elimination.}
+  \li{Part II, [Gaussian laws](fdip-002B): states, reference measure,
+  positive and constrained Gaussian laws, and retained observables.}
+  \li{Part III, [Backgrounds and symmetry](fdip-0019): transported
+  data, observables and half-turn sectors.}
+  \li{Part IV, [Finite-group symmetry](fdip-004R): real isotypic
+  projectors, multiplicities and Gaussian sector laws.}
+  \li{Part V, [Clifford algebras](fdip-001B),
+  [spatial Dirac operators](fdip-001C) and
+  [enriched comparison](fdip-001E): distinct questions about quadratic
+  forms, first-order operators and preserved observables.}
+  \li{Part VI, [Arithmetic families](fdip-001D), followed by the
+  planned [Gaussian extension at every prime](fdip-008M).}
+  \li{Part VII, [Continuum approximation](fdip-004F): a supplied
+  circle and fixed Fourier modes, not a general emergent continuum.}
+  \li{Part VIII, [Geometric realization](fdip-004L): which information
+  survives a replacement by a shape, including the weights it can forget.}
+  \li{Part IX, [Selected backgrounds](fdip-0059),
+  [induced actions and interactions](fdip-005Q),
+  [local laws and gluing](fdip-0063), and
+  [connections and holonomy](fdip-006C).}
+  \li{Part X, [Gauge fields](fdip-006L): finite surface laws,
+  matter-induced actions, dynamical connections and compact groups.}
+  \li{Part XI, [Euclidean time](fdip-007L): reflected pairings,
+  explicit transfer operators and Gauss's law. Reflection positivity
+  alone does not supply a time shift.}
+  \li{Part XII, Lattice fermions: the planned anticommuting-integral,
+  elimination, covariant-Dirac and doubling questions.}
+  \li{Part XIII, [Structure](fdip-008R): planned operator-algebra,
+  cochain, spectral-geometry, coarse-graining and gluing questions.
+  Speculative and optional sections retain those qualifications.}
+  \li{Part XIV, [Explorations and synthesis](fdip-003W): the existing
+  conjecture and finite interfaces, together with planned compatibility
+  tests and a comparison of what is fixed or free.}
+}
+
+\p{The part diagrams appear at their openings. The Structure diagram
+routes its time input to the transfer chapter and its fermion input to
+the Dirac-Kähler chapter, where those suppliers are actually intended.
+It does not make the earlier states or cochains definitions consequences
+of time evolution or fermions. The root retains one linear reading order;
+forward examples and open questions orient that reading without becoming
+premises of the preceding proofs.}

@@ -4,6 +4,28 @@
 \title{States and pullback of observables}
 \date{2026-10-23}
 
+\texfig{\begin{tikzpicture}[x=1cm,y=1cm,font=\sffamily,
+  box/.style={draw=black,line width=0.5pt,rounded corners=2pt,align=center,execute at begin node={\hyphenpenalty=10000\exhyphenpenalty=10000},
+    font=\sffamily\small,minimum height=7mm,inner sep=2.5pt,text width=#1},
+  ext/.style={draw=black,densely dotted,line width=0.4pt,rounded corners=2pt,align=center,execute at begin node={\hyphenpenalty=10000\exhyphenpenalty=10000},
+    font=\sffamily\small,text=black!60,minimum height=7mm,inner sep=2.5pt,text width=#1},
+  arr/.style={-{Stealth[length=2.2mm]},line width=0.6pt},
+  lab/.style={font=\sffamily\footnotesize\itshape,inner sep=1.5pt,fill=white,align=center}]
+\node[ext=5.6cm] (I) at (3.2,7.85) {Part I: Foundations};
+\node[box=5.6cm] (a) at (3.2,6.25) {States and pullback of observables};
+\node[box=5.6cm] (b) at (3.2,5.1) {Reference measure for real fields};
+\node[box=5.6cm] (c) at (9.6,3.95) {Positive Gaussian laws and covariance};
+\node[box=5.6cm] (d) at (9.6,2.8) {Constrained massless Gaussian laws};
+\node[box=5.6cm] (e) at (9.6,1.65) {Elimination and retained observables};
+\node[ext=5.6cm] (X) at (9.6,0.05) {Part III: Backgrounds and symmetry};
+\draw[arr] (I) -- node[lab,midway,right=1mm] {what is this discrete physics like\\ in a probability-based setting?} (a);
+\draw[arr] (a) -- (b);
+\draw[arr] (b) |- (c);
+\draw[arr] (c) -- (d);
+\draw[arr] (d) -- (e);
+\draw[arr] (e) -- node[lab,midway,right=1mm] {what can be exchanged in a discrete world\\ while the physics stays the same?} (X);
+\end{tikzpicture}}
+
 \p{How can a model describe many possible fields and average what we
 observe? A law on a finite set of configurations assigns probability
 weights to those fields and averages their observables. The

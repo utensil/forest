@@ -4,6 +4,24 @@
 \title{Arithmetic families}
 \date{2026-10-20}
 
+\texfig{\begin{tikzpicture}[x=1cm,y=1cm,font=\sffamily,
+  box/.style={draw=black,line width=0.5pt,rounded corners=2pt,align=center,execute at begin node={\hyphenpenalty=10000\exhyphenpenalty=10000},
+    font=\sffamily\small,minimum height=7mm,inner sep=2.5pt,text width=#1},
+  ext/.style={draw=black,densely dotted,line width=0.4pt,rounded corners=2pt,align=center,execute at begin node={\hyphenpenalty=10000\exhyphenpenalty=10000},
+    font=\sffamily\small,text=black!60,minimum height=7mm,inner sep=2.5pt,text width=#1},
+  arr/.style={-{Stealth[length=2.2mm]},line width=0.6pt},
+  lab/.style={font=\sffamily\footnotesize\itshape,inner sep=1.5pt,fill=white,align=center}]
+\node[ext=6.4cm] (V) at (6,7.0) {Part V: Clifford algebras and Dirac operators};
+\node[box=6.4cm] (a) at (6,5.4) {Arithmetic families};
+\node[box=6.4cm] (b) at (6,3.3) {Gaussian elimination at every prime};
+\node[ext=4.0cm] (VIII) at (13,4.4) {Part VIII: Geometric realization};
+\node[ext=6.4cm] (X) at (6,1.4) {Part XIV: Explorations and synthesis};
+\draw[arr] (V) -- node[lab,midway,right=1mm] {can fields, probabilities and symmetries all\\ be built without continuous quantities?} (a);
+\draw[arr] (a.east) -- (VIII.west);
+\draw[arr] (a) -- node[lab,midway,right=1mm] {can the Gaussian laws also be built\\ without continuous quantities?} (b);
+\draw[arr] (b) -- (X);
+\end{tikzpicture}}
+
 \p{Which constructions survive if field values use finite arithmetic
 instead of the real numbers? For each prime #{p}, the finite field
 #{\mathbb F_p} gives such a value system. Comparing it with a real model
@@ -20,7 +38,9 @@ while its sector decomposition changes.}
 \p{The rational comparison uses [Gaussian elimination](fdip-0018)
 and the [reference pairing](fdip-001N) and [trace conventions](fdip-0019).
 It distinguishes the information in a [quadratic center character](fdip-0049)
-from the independently defined trace observable.}
+from the independently defined trace observable. These arithmetic
+families also supply the [fiber-constancy criterion](fdip-0042) used by
+the [realization comparison](fdip-004L).}
 
 \p{With rational positive-definite precision in counting coordinates,
 the Gaussian covariance #{Q^{-1}} is rational, although its normalized
