@@ -1,0 +1,63 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Definition}
+\title{The one-step Gaussian kernel}
+\date{2026-11-01}
+
+\p{Fix #{w>0} and #{m>0}. On
+#{\mathcal H=L^2(\mathbb R,dx;\mathbb C)}, define the
+\newvocab{Gaussian transfer operator} by
+##{\begin{aligned}
+K(x,y)&=\exp\left[-\frac w2(x-y)^2
+                 -\frac{m^2}{4}(x^2+y^2)\right],\\
+(Tf)(x)&=\int_{\mathbb R}K(x,y)f(y)\,dy.
+\end{aligned}}
+The reference measure is exactly Lebesgue measure #{dy}; no
+normalizing factor is included in #{K}. This is the one-coordinate
+instance of the slice-kernel construction in
+\citet{Eqs. (5.1)–(5.3), p. 4}{wingate2025lattice}.}
+
+\p{Write #{a=w/2+m^2/4}, so
+#{K(x,y)=e^{-a(x^2+y^2)+wxy}} and #{2a>w}.
+Thus #{K\in L^2(\mathbb R^2)}. Cauchy–Schwarz makes #{T} bounded,
+and symmetry of the real kernel makes it self-adjoint.
+An integral operator with a square-integrable kernel is
+\newvocab{Hilbert–Schmidt}: in an orthonormal basis #{(e_n)},
+its squared norm of this kind is
+#{\|T\|_{\mathrm{HS}}^2=\sum_n\|Te_n\|^2}
+(the value is independent of the basis).
+Here it equals #{\int|K|^2}. Approximation of #{K} by finite sums
+of products of one-variable square-integrable functions also
+shows that #{T} is compact. Operator positivity will follow from
+its explicit spectrum in \ref{fdip-007U}.}
+
+\p{For #{N\ge3}, let #{x_N=x_0} and define the periodic chain by
+##{\begin{aligned}
+H_N(x)&=\frac w2\sum_{j=0}^{N-1}(x_{j+1}-x_j)^2
+       +\frac{m^2}{2}\sum_{j=0}^{N-1}x_j^2,\\
+Z_N&=\int_{\mathbb R^N}e^{-H_N(x)}\,d^Nx,\qquad
+ d\mu_N=Z_N^{-1}e^{-H_N(x)}\,d^Nx.
+\end{aligned}}
+Each undirected edge of the ordinary cycle #{C_N} occurs once.
+Splitting each onsite mass term between its two incident edges gives
+##{e^{-H_N(x)}=\prod_{j=0}^{N-1}K(x_j,x_{j+1}).}
+Positive mass makes #{0<Z_N<\infty}. The identity
+#{Z_N=\operatorname{Tr}T^N} is proved in \ref{fdip-007V}.}
+
+\texfig{\begin{tikzpicture}[
+  site/.style={circle,draw,minimum size=7mm,inner sep=1pt},
+  every node/.style={font=\small}
+]
+\node[site] (x0) at (0,1.2) {$x_0$};
+\node[site] (x1) at (3.2,1.2) {$x_1$};
+\node[site] (x2) at (3.2,-1.2) {$x_2$};
+\node[site] (x3) at (0,-1.2) {$x_3$};
+\draw (x0) -- node[above=3pt] {$K(x_0,x_1)$} (x1);
+\draw (x1) -- (x2) -- (x3) -- (x0);
+\end{tikzpicture}}
+
+\p{The four-cycle illustrates the kernel product. Every edge
+contributes the same function #{K} of its endpoints. Each site's
+two mass contributions add to #{m^2x_j^2/2}; closing the last edge
+identifies #{x_4} with #{x_0}.}
