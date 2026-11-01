@@ -1,0 +1,84 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Example}
+\title{Quaternion and coordinate selectors}
+\date{2026-11-01}
+
+\p{Let #{\Gamma=Q_8=\{\pm1,\pm i,\pm j,\pm k\}} and take
+the simple undirected Cayley graph with edges
+#{\{g,gs\}}, #{s\in\{\pm i,\pm j\}}, counted once each.
+Give each edge weight one, choose any orientation, and set #{m=1}.
+The two parts
+##{A=\{\pm1,\pm k\},\qquad B=\{\pm i,\pm j\}}
+give #{K_{4,4}}: every vertex in one part has the four distinct
+vertices of the other as its neighbors. In part order,
+##{L=\begin{pmatrix}4I_4&-J_4\\-J_4&4I_4\end{pmatrix},
+\qquad Q=L+I_8,}
+where #{J_4} is the all-ones matrix. The two constant-on-part
+vectors give Laplacian eigenvalues #{0,8}; the two partwise
+zero-sum spaces give eigenvalue #{4}, of total multiplicity six.}
+
+\p{Left multiplication gives a signed graph action #{\rho} on
+#{\mathbb R^{Q_8}}, independent of the arbitrary edge orientations.
+For the central involution #{z=-1}, put
+##{e_-=(1-[z])/2\in\mathbb R[Q_8],\qquad
+P_-=\rho(e_-)=(I-\rho(z))/2.}
+Since #{z^2=1} and #{z^{-1}=z}, this is a self-adjoint
+idempotent. Its image is the four-dimensional space of fields
+#{f(-g)=-f(g)}. The group-algebra decomposition
+#{\mathbb R[Q_8]\cong\mathbb R^4\times\mathbb H}
+in \ref{fgap-001B} sends #{e_-} to #{(0,1)}: each real character
+takes #{z} to #{1}, while the quaternionic realization takes it
+to #{-1}. Thus this selector retains precisely the quaternion factor
+in the regular module, without assigning it a physical interpretation.}
+
+\proof{
+\p{An odd field has zero sum on each of #{A,B}, since each part
+is a union of pairs #{\{g,-g\}}. Therefore #{J_4} kills its
+restriction to either part, and the displayed Laplacian gives
+#{Lf=4f}. An orthonormal basis is
+#{(\delta_g-\delta_{-g})/\sqrt2} for #{g=1,i,j,k}.
+Hence the [selected precision](fdip-005B) is
+##{S_-=5I_4,\qquad C_-=I_4/5.}
+Equivalently, the two neighbor contributions indexed by #{s,-s}
+cancel on an odd field. The positive mass supplies the shift from
+#{4} to #{5}.}
+}
+
+\p{Compare the coordinate selector on the subgroup
+#{R=\langle i\rangle=\{1,-1,i,-i\}}, which retains two vertices
+from each part. In the full graph, decompose fields into the two
+constant-on-part lines and the two partwise zero-sum spaces. On the
+normalized part constants, the precision and covariance are
+##{\begin{pmatrix}5&-4\\-4&5\end{pmatrix},\qquad
+\frac19\begin{pmatrix}5&4\\4&5\end{pmatrix};}
+on the zero-sum spaces the covariance is #{1/5}. It follows that
+full covariance entries are #{13/45} on the diagonal,
+#{4/45} between distinct vertices in the same part, and #{1/9}
+between parts. For example the first entry is
+#{(1-1/4)/5+(5/9)/4=13/45}.}
+
+\p{In retained order #{(1,-1,i,-i)}, compression therefore gives
+##{C_R=\frac1{45}\begin{pmatrix}
+13&4&5&5\\4&13&5&5\\5&5&13&4\\5&5&4&13
+\end{pmatrix}.}
+The two within-part difference vectors have covariance eigenvalue
+#{(13-4)/45=1/5}. On normalized retained part constants the
+covariance block is
+#{\frac1{45}\begin{pmatrix}17&10\\10&17\end{pmatrix}},
+with eigenvalues #{3/5,7/45}. Inversion gives the retained
+precision spectrum
+##{\operatorname{spec}(S_R)=\{5/3,5,5,45/7\}.}
+It differs from #{\{5,5,5,5\}} for the quaternion selector despite
+equal rank and the same full background precision.}
+
+\p{The chosen #{Q_8} action is auxiliary data used to construct
+#{P_-}; it is not another slot of the [selected tuple](fdip-005A).
+Indeed the underlying graph has #{2(4!)^2=1152} automorphisms:
+its connected bipartition is unique up to exchange, and every
+permutation within either part, as well as their exchange, preserves
+all edges. The selected-background groupoid remembers the graph and
+the resulting projector, not a named subgroup of this automorphism
+group. Remembering the action would require an enhanced tuple and
+arrows intertwining that action.}

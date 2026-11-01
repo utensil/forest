@@ -1,0 +1,65 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Definition}
+\title{Arrows of selected backgrounds}
+\date{2026-11-01}
+
+\p{The groupoid #{\mathsf{Bg}} has [selected backgrounds](fdip-005A)
+as objects. An arrow #{b\to b'} is a pair of bijections
+#{p:V\to V'}, #{q:E\to E'} satisfying
+##{\begin{aligned}
+s'q&=ps,&h'q&=ph,\\
+w'q&=w,&m'&=m,\\
+P'&=UPU^{-1},&&(U\phi)(p(v))=\phi(v).
+\end{aligned}}
+Here #{U:H\to H'} is the vertex counting isometry, distinct
+from the selector #{P}. For coordinate selectors the last equation
+is equivalent to #{pR=R'}, so these are precisely the
+[exact relabelings](fdip-000G).}
+
+\p{The larger groupoid #{\mathsf{Bg}^{\pm}} allows
+[signed endpoint arrows](fdip-003B): an additional sign
+#{\varepsilon(e)\in\{+,-\}} specifies whether #{q(e)} has
+endpoints #{(ps(e),ph(e))} or #{(ph(e),ps(e))}.
+Weights, mass and the selector obey the same equations.
+The signed edge map is
+#{(Ja)(q(e))=\varepsilon(e)a(e)}, where the sign acts as #{\pm1}.
+Then #{d'U=Jd} and #{W'J=JW}. Consequently
+##{Q'=UQU^{-1},\qquad G'=UGU^{-1}.}
+The endpoint condition is retained even for loops of zero incidence.
+Signs are part of an arrow, not merely an equation between Laplacians.}
+
+\p{Compose vertex and edge bijections, and for signed arrows use
+#{\varepsilon_{21}(e)=\varepsilon_2(q_1(e))\varepsilon_1(e)}.
+The identity has identity bijections and positive signs; the inverse
+has inverse bijections and sign #{\varepsilon(e)} at #{q(e)}.
+The [endpoint-arrow proof](fdip-003B) checks all graph equations.
+Selector transport also composes because
+#{P''=U_2U_1P(U_2U_1)^{-1}}. It inverts by conjugating back.
+These operations therefore give groupoids on the stated tuples.}
+
+\p{Restrict #{U} to the isometry #{U_X:X\to X'} of selected spaces.
+Then the [selected laws](fdip-005B) satisfy
+##{\begin{aligned}
+C_{P'}&=U_XC_PU_X^{-1},\\
+S_{P'}&=U_XS_PU_X^{-1},\\
+(U_X)_*\nu_b&=\nu_{b'}.
+\end{aligned}}
+For the first identity insert #{P'=UPU^{-1}} and #{G'=UGU^{-1}};
+inversion gives the second. The [full-law transport](fdip-000H)
+gives #{U_*\mu_Q=\mu_{Q'}}, while #{P'U=U_XP}. Composition
+of Borel pushforwards proves the third. In particular, for an
+integrable retained observable #{F'} on #{X'},
+##{\int_{X'}F'\,d\nu_{b'}=\int_X F'\circ U_X\,d\nu_b.}
+The equality for #{|F'|}, allowing infinity, first establishes
+the matching integrability condition.}
+
+\p{These arrows carry incidence, not only the precision and projector.
+Replacing one edge of weight #{w} by two parallel edges with the
+same endpoints and positive weights summing to #{w} leaves #{Q}
+unchanged, but changes #{|E|}; it admits no arrow in either groupoid.
+Reversing the orientation of a specified edge gives an identity-on-vertices
+signed arrow with negative sign on that edge. That particular
+correspondence is not directed. Another directed isomorphism may exist
+if the graph has additional symmetries.}

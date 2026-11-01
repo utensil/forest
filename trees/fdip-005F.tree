@@ -1,0 +1,102 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Example}
+\title{Three selectors on the same four-cycle}
+\date{2026-11-01}
+
+\p{Take the unit four-cycle, #{m=1}, and vertex order #{(0,1,2,3)}.
+Its full precision and covariance are
+##{\begin{aligned}
+Q&=\begin{pmatrix}
+3&-1&0&-1\\-1&3&-1&0\\0&-1&3&-1\\-1&0&-1&3
+\end{pmatrix},\\
+G&=\frac1{15}\begin{pmatrix}
+7&3&2&3\\3&7&3&2\\2&3&7&3\\3&2&3&7
+\end{pmatrix}.
+\end{aligned}}
+Multiplication gives #{QG=I}; the full spectrum is #{1,3,3,5}.
+The graph and full law stay fixed in all three selections below.}
+
+\tikzfigs{0.9}{\begin{tikzpicture}[
+  vertex/.style={circle,draw,inner sep=1.5pt,minimum size=5mm,font=\small},
+  retained/.style={vertex,fill=blue!18},
+  second/.style={vertex,fill=orange!25}
+]
+\begin{scope}
+\node[retained] (a0) at (0,1.2) {$0$};
+\node[vertex] (a1) at (1.2,1.2) {$1$};
+\node[retained] (a2) at (1.2,0) {$2$};
+\node[vertex] (a3) at (0,0) {$3$};
+\draw (a0)--(a1)--(a2)--(a3)--(a0);
+\node at (0.6,-0.55) {opposite};
+\node[font=\small] at (0.6,-1) {$\phi_0,\ \phi_2$};
+\end{scope}
+\begin{scope}[xshift=3cm]
+\node[retained] (b0) at (0,1.2) {$0$};
+\node[retained] (b1) at (1.2,1.2) {$1$};
+\node[vertex] (b2) at (1.2,0) {$2$};
+\node[vertex] (b3) at (0,0) {$3$};
+\draw (b0)--(b1)--(b2)--(b3)--(b0);
+\node at (0.6,-0.55) {adjacent};
+\node[font=\small] at (0.6,-1) {$\phi_0,\ \phi_1$};
+\end{scope}
+\begin{scope}[xshift=6cm]
+\node[retained] (c0) at (0,1.2) {$0$};
+\node[second] (c1) at (1.2,1.2) {$1$};
+\node[retained] (c2) at (1.2,0) {$2$};
+\node[second] (c3) at (0,0) {$3$};
+\draw (c0)--(c1)--(c2)--(c3)--(c0);
+\draw[dashed,blue] (c0)--(c2);
+\draw[dashed,orange!80!black] (c1)--(c3);
+\node at (0.6,-0.55) {half-turn};
+\node[font=\small] at (0.6,-1) {$x_+,\ y_+$};
+\end{scope}
+\end{tikzpicture}}
+
+\p{In the first two panels, filled vertices are retained coordinates.
+In the third, the paired colors and dashed diagonals indicate the
+normalized sums #{x_+=(\phi_0+\phi_2)/\sqrt2} and
+#{y_+=(\phi_1+\phi_3)/\sqrt2}; the diagonals are pairing guides,
+not added graph edges. All three observations have rank two.}
+
+\p{For #{R=\{0,2\}}, use the orthonormal retained basis
+#{(\delta_0,\delta_2)}. Compressing #{G} and inverting gives
+##{\begin{aligned}
+C_{\mathrm{opp}}&=\frac1{15}\begin{pmatrix}7&2\\2&7\end{pmatrix},\\
+S_{\mathrm{opp}}&=\frac13\begin{pmatrix}7&-2\\-2&7\end{pmatrix}.
+\end{aligned}}
+The sum and difference vectors have precision eigenvalues
+#{5/3,3}; their product is #{\det S_{\mathrm{opp}}=5}.
+This is the [opposite-vertex marginal](fdip-000F).}
+
+\p{For #{R=\{0,1\}}, use #{(\delta_0,\delta_1)}. The same
+operation yields
+##{\begin{aligned}
+C_{\mathrm{adj}}&=\frac1{15}\begin{pmatrix}7&3\\3&7\end{pmatrix},\\
+S_{\mathrm{adj}}&=\frac18\begin{pmatrix}21&-9\\-9&21\end{pmatrix}.
+\end{aligned}}
+Its sum and difference eigenvalues are #{3/2,15/4}, with
+#{\det S_{\mathrm{adj}}=45/8}. This recovers the
+[fixed-label counterexample](fdip-003J) as a change of selector.}
+
+\p{Finally let #{H_2\delta_i=\delta_{i+2}} be the half-turn and
+#{P_+=(I+H_2)/2}. In the orthonormal basis
+##{v_0=(\delta_0+\delta_2)/\sqrt2,\qquad
+v_1=(\delta_1+\delta_3)/\sqrt2}
+of its image, the [positive sector](fdip-003S) has
+##{\begin{aligned}
+C_+&=\frac15\begin{pmatrix}3&2\\2&3\end{pmatrix},\\
+S_+&=\begin{pmatrix}3&-2\\-2&3\end{pmatrix}.
+\end{aligned}}
+Indeed #{Qv_0=3v_0-2v_1} and #{Qv_1=-2v_0+3v_1},
+so this space is #{Q}-invariant and the retained precision is
+the restriction. Its eigenvalues are #{1,5}, with determinant #{5}.
+The coordinates are normalized sums
+#{(\phi_0+\phi_2)/\sqrt2}, #{(\phi_1+\phi_3)/\sqrt2}, not
+the values of two retained vertices.}
+
+\p{All three laws follow from the [selected-law theorem](fdip-005B)
+with the displayed basis choices. Equal rank, or even the shared
+determinant #{5} of the first and third examples, does not force
+equal retained spectra.}

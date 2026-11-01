@@ -1,0 +1,47 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Example}
+\title{Cospectral graphs with the same selector}
+\date{2026-11-01}
+
+\p{There are selected backgrounds related by #{\sim_O} with no signed
+graph arrow. On vertices #{\{0,1,2,3,4,5\}}, take simple graphs with
+unit weights and the following unordered edges:
+##{\begin{aligned}
+E_A&=\{02,03,04,05,14,15,23\},\\
+E_B&=\{02,04,05,12,14,15,23\}.
+\end{aligned}}
+Orient each edge from its lower to its higher endpoint, choose #{m=1},
+and in both cases choose #{P=\mathbf1\mathbf1^T/6}, the projector
+onto the constant line. Both graphs are connected. Their degree
+multisets are #{(4,2,2,2,2,2)} and #{(3,3,3,2,2,1)}, so even
+their unoriented incidence presentations are not isomorphic.}
+
+\proof{
+\p{For graph #{A}, the differences on the twin pairs #{\{2,3\}}
+and #{\{4,5\}} have Laplacian eigenvalues #{3} and #{2}.
+On fields constant on the cells #{(\{0\},\{1\},\{2,3\},\{4,5\})},
+the remaining matrix is
+##{M_A=\begin{pmatrix}
+4&0&-2&-2\\0&2&0&-2\\-1&0&1&0\\-1&-1&0&2
+\end{pmatrix}.}
+For graph #{B}, use twin differences on #{\{0,1\}} and #{\{4,5\}},
+again of eigenvalues #{3} and #{2}. On cells
+#{(\{0,1\},\{2\},\{3\},\{4,5\})}, the matrix is
+##{M_B=\begin{pmatrix}
+3&-1&0&-2\\-2&3&-1&0\\0&-1&1&0\\-2&0&0&2
+\end{pmatrix}.}
+These are cell-value coordinates, so the displayed quotient matrices
+need not be symmetric. In each case expansion gives
+##{\det(tI-M_A)=\det(tI-M_B)=t(t-3)(t^2-6t+4).}
+Together with the two difference eigenvectors, this proves the common
+Laplacian spectrum #{0,2,3,3,3-\sqrt5,3+\sqrt5}.
+Choose orthonormal eigenbases with the same normalized constant vector
+#{\mathbf1 / \sqrt6} first, and map one basis to the other.
+The resulting #{O} conjugates #{L_A} to #{L_B}, hence also
+#{Q_A=L_A+I} to #{Q_B=L_B+I}. It fixes the constant line and
+therefore transports #{P} as well. This proves the selected comparison.
+The degree multisets exclude every signed graph arrow.}
+}
+

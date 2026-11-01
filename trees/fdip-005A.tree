@@ -1,0 +1,60 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Definition}
+\title{A selected Gaussian background}
+\date{2026-11-01}
+
+\p{A \newvocab{selected Gaussian background} is a tuple
+##{b=(\Pi,w,m,P),\qquad \Pi=(V,E,s,h),}
+where #{\Pi} is a [finite incidence presentation](fdip-0002),
+#{w:E\to\mathbb R_{>0}}, #{m>0}, and #{P} is an orthogonal
+projector on the counting inner-product space #{H=\mathbb R^V}, with
+##{P^2=P=P^*,\qquad 0<\operatorname{rank}P<|V|.}
+The selected space is #{X=\operatorname{im}P}, its orthogonal
+complement is #{Y=\ker P}, and the observed random vector is
+#{P\phi\in X}. Incidence, the Green operator and the full law are
+##{\begin{aligned}
+(d\phi)(e)&=\phi(h(e))-\phi(s(e)),\\
+Q&=d^*Wd+m^2I>0,\qquad G=Q^{-1},\\
+\phi&\sim\mu_Q.
+\end{aligned}}
+Here #{W=\operatorname{diag}(w)} and #{\mu_Q} uses the
+[induced Euclidean volume](fdip-002H). These are derived from the
+tuple, not additional choices.}
+
+\p{Three constructions supply such projectors, provided their ranks
+are nonzero and proper.}
+\ol{
+\li{A retained subset #{R\subsetneq V} gives
+#{P_R\phi=\sum_{v\in R}\phi(v)\delta_v}. Identifying
+#{\operatorname{im}P_R} with #{\mathbb R^R} recovers the
+[coordinate background](fdip-000G).}
+\li{A [finite signed graph symmetry](fdip-004S)
+#{\rho:\Gamma\to O(H)} extends to #{\mathbb R[\Gamma]}.
+For #{e^2=e=e^*}, where #{[g]^*=[g^{-1}]},
+#{P=\rho(e)} is orthogonal because
+#{\rho(e)^*=\rho(e^*)}. The [precision commutes](fdip-004T)
+with every #{\rho(g)}, hence with this #{P}.}
+\li{For a #{\Gamma}-stable subspace #{X\subset H}, its orthogonal
+projector commutes with #{\rho(\Gamma)}: orthogonality makes
+#{X^\perp} stable too. It need not commute with #{Q}. Within a
+[repeated real isotypic block](fdip-0050), the chosen multiplicity
+subspace may fail to be invariant under the positive multiplicity
+matrix. These are different constructions: a subrepresentation
+projector commutes with #{\rho(\Gamma)} but need not commute with
+#{Q}; a group-algebra projector commutes with #{Q} but need not
+commute with #{\rho(\Gamma)}. Centrality of #{e} is sufficient
+for the latter commutation, and hence for a stable image.}
+}
+
+\p{Every subspace has a unique orthogonal projector for the specified
+metric. This makes the selector equivalent to choosing #{X}, without
+choosing an additional complementary subspace. An oblique idempotent
+#{T^2=T} also gives a Gaussian observation #{T\phi}, and orthogonal
+conjugation does transport it naturally:
+#{T\mapsto OTO^{-1}}. But it also records a possibly nonorthogonal
+kernel, so the image alone no longer determines the observation or
+its covariance #{TGT^*}. General linear observations are outside this
+definition. No physical rule selecting #{P} from an environment is
+assumed.}
