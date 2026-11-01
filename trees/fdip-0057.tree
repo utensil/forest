@@ -1,0 +1,136 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Example}
+\title{Cycle decimation and periodic covariance}
+\date{2026-11-01}
+
+\p{Take the unit-weight cycle on #{\mathbb Z/(2N)}, with
+#{N\ge3} and precision #{Q=L_{C_{2N}}+aI}, where
+#{a=m^2>0}. The group #{G=C_N} acts by two-site rotations.
+It preserves the even retained vertices and the odd eliminated
+vertices. Write #{x_j=\phi_{2j}}, #{y_j=\phi_{2j+1}} and
+#{q=2+a}; indices #{j} lie in #{\mathbb Z/N}.
+For the shift #{(Tz)_j=z_{j-1}}, the blocks are
+##{A=C=qI,\qquad B=-(I+T),\qquad B^*=-(I+T^{-1}).}
+Thus the [equivariant Schur formula](fdip-0056) gives
+##{\begin{aligned}
+S&=qI-q^{-1}(2I+T+T^{-1})\\
+ &=w'L_{C_N}+a'I,\\
+w'&=\frac1{2+a},\qquad
+ a'=(2+a)-\frac4{2+a}
+    =\frac{a(a+4)}{a+2}>0.
+\end{aligned}}
+Here #{L_{C_N}=2I-T-T^{-1}}. The restriction #{Q_{RR}=qI}
+has no off-diagonal entries, while #{S} has entries #{-1/q}
+between adjacent retained vertices. The retained set is stable under
+#{G}, but the marginal precision is induced by elimination.}
+
+\tikzfigs{0.75}{\begin{tikzpicture}[
+  retained/.style={circle,draw,fill=black!18,minimum size=6mm,inner sep=1pt},
+  removed/.style={circle,draw,dashed,minimum size=6mm,inner sep=1pt},
+  every node/.style={font=\small}
+]
+\node[retained] (v0) at (0,1.25) {$0$};
+\node[removed] (v1) at (1.08,0.625) {$1$};
+\node[retained] (v2) at (1.08,-0.625) {$2$};
+\node[removed] (v3) at (0,-1.25) {$3$};
+\node[retained] (v4) at (-1.08,-0.625) {$4$};
+\node[removed] (v5) at (-1.08,0.625) {$5$};
+\draw (v0)--(v1)--(v2)--(v3)--(v4)--(v5)--(v0);
+\draw[-{Stealth[length=2mm]}] (1.6,0)--node[above,align=center]
+ {eliminate\\odd vertices} (3.4,0);
+\node[retained] (r0) at (4.9,1.25) {$0$};
+\node[retained] (r2) at (5.98,-0.625) {$2$};
+\node[retained] (r4) at (3.82,-0.625) {$4$};
+\draw (r0)--(r2)--(r4)--(r0);
+\node at (0,-1.9) {$w=1,\quad m^2=a$};
+\node at (4.9,-1.9) {$w'=1/q,\quad m'^2=q-4/q$};
+\end{tikzpicture}}
+
+\p{The six-cycle illustrates #{N=3}. Shaded even vertices remain;
+dashed odd vertices are integrated out. Each triangle edge has
+weight #{1/q}, and the mass squared changes from #{a} to
+#{q-4/q}, with #{q=2+a}.}
+
+\p{The finite Gaussian normalization is retained exactly:
+#{Z_Q=Z_CZ_S} with #{Z_C=(2\pi/q)^{N/2}}, and the retained
+law is #{\mu_S}. The effective weight and mass are both part of
+this law. Dividing #{S} by #{w'} is useful for comparing its
+parameters, but changes the field covariance by a scalar unless
+the corresponding field rescaling is also made.}
+
+\p{Put #{q=2\cosh\omega} with #{\omega>0}. Then
+##{2+\frac{a'}{w'}=q^2-2=2\cosh(2\omega).}
+The doubled parameter has an exact finite-ring interpretation.
+For #{M\ge3}, the covariance of precision
+#{w(2\cosh\eta\,I-T-T^{-1})} on #{\mathbb Z/M}, with
+#{w,\eta>0}, is the periodic kernel
+##{\begin{aligned}
+K_{M,w,\eta}(r)
+ &=\frac{e^{-\eta r}+e^{-\eta(M-r)}}
+ {2w\sinh\eta\,(1-e^{-M\eta})},\\
+&\hspace{24mm}0\le r\le M-1.
+\end{aligned}}
+For the original and retained fields this gives
+##{(Q^{-1})_{0,2r}
+ =K_{2N,1,\omega}(2r)
+ =K_{N,w',2\omega}(r)
+ =(S^{-1})_{0,r}.}
+The equality is between covariances with their actual weights.}
+
+\proof{
+\p{On the integer line, put
+#{h(n)=e^{-\eta|n|}/(2w\sinh\eta)}.
+For #{n\ne0}, the two geometric progressions give
+#{w(2\cosh\eta\,h(n)-h(n-1)-h(n+1))=0}.
+At #{n=0} the expression equals
+#{(2\cosh\eta-2e^{-\eta})/(2\sinh\eta)=1}.
+Periodize this identity by summing #{h(r+kM)} over
+#{k\in\mathbb Z}; absolute convergence permits the finite
+difference operation under the sum. The result is the unit point
+source on #{\mathbb Z/M}, so the periodized kernel is the inverse
+of the positive precision. Summing the geometric series gives
+#{K_{M,w,\eta}}.}
+
+\p{For #{M=2N} and even separation #{2r}, the numerator and
+periodic denominator equal those for #{M=N}, #{\eta=2\omega}.
+Their remaining constants agree because
+##{2w'\sinh(2\omega)
+ =\frac{2\sinh(2\omega)}{2\cosh\omega}
+ =2\sinh\omega.}
+This proves the covariance identity directly, in agreement with
+Gaussian marginalization.}
+}
+
+\p{In the convention that correlation length is the reciprocal decay
+rate of these periodized exponential images, it changes from
+#{\xi=1/\omega} fine lattice units to
+#{\xi'=1/(2\omega)=\xi/2} coarse lattice units. The finite ring
+has two winding directions, so its covariance is not a single
+exponential in separation. If the old spacing is #{\ell}, the new
+spacing is #{2\ell}; the physical decay length
+#{\ell/\omega=(2\ell)/(2\omega)} is unchanged.}
+
+\p{The bound #{N\ge3} keeps the reduced graph a simple cycle.
+At #{N=2}, #{T=T^{-1}} and two eliminated vertices connect the
+same retained pair, producing two parallel edges of weight #{1/q},
+or one edge of weight #{2/q}. At #{a=0}, the algebraic formula
+still gives #{w'=1/2} and #{a'=0}, the two-resistors-in-series
+limit. The full precision then has a constant zero mode and no
+normalized full-space Gaussian law. Pinning or a mean-zero
+constraint must be specified as in
+[constrained massless laws](fdip-003V); the positive-mass covariance
+formula is not a finite limit on the full field space.}
+
+\p{This is a direct cycle calculation within
+\newvocab{Kron reduction}, the Schur reduction of graph Laplacians
+with possible positive diagonal terms.
+\citet{Lemma 2.1, pp. 5-6, and Lemma 3.3, p. 14, arXiv version}{dorfler2011kron}
+proves closure and the equivalence of successive and simultaneous
+eliminations. In that source the diagonal mass corresponds to a
+shunt conductance or graph self-loop. In the incidence convention
+used here an edge with identical endpoints has zero difference;
+the mass is therefore kept as the separate term #{aI}.
+The source supplies the general reduction context, while the
+periodic covariance and scale statements are proved above.}
