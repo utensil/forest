@@ -1,0 +1,36 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Example}
+\title{An antiperiodic four-cycle has no parallel line section}
+\date{2026-11-01}
+
+\p{Give the unit four-cycle total holonomy #{u=-1}, or
+#{\theta=\pi}. In the [tree gauge](fdip-006F), three links are one
+and the final link is minus one. The [cycle modes](fdip-006G) have
+momenta #{-\pi /4,\pi /4,3\pi /4,5\pi /4}, so
+##{\operatorname{spec}L_\pi
+=\{2-\sqrt2,2-\sqrt2,2+\sqrt2,2+\sqrt2\}.}
+All four eigenvalues are positive, and
+#{\det L_\pi=((2-\sqrt2)(2+\sqrt2))^2=4}.}
+
+\tikzfigs{0.8}{\begin{tikzpicture}[>=Stealth,
+ vertex/.style={circle,draw,inner sep=2pt,minimum size=6mm}]
+\node[vertex] (a) at (0,0) {$0$};
+\node[vertex] (b) at (2,0) {$1$};
+\node[vertex] (c) at (2,-2) {$2$};
+\node[vertex] (d) at (0,-2) {$3$};
+\draw[->] (a) -- node[above] {$1$} (b);
+\draw[->] (b) -- node[right] {$1$} (c);
+\draw[->] (c) -- node[below] {$1$} (d);
+\draw[->,very thick] (d) -- node[left] {$-1$} (a);
+\end{tikzpicture}}
+
+\p{The arrows show the chosen orientation; labels are connection values,
+not edge weights, which are all one. The thick edge carries the remaining
+holonomy after the other three form a tree. A parallel section would
+have #{f_0=f_1=f_2=f_3} along those tree edges and #{f_0=-f_3} along
+the last edge, forcing zero. Thus the massless complex Gaussian exists
+without a pin. With trivial holonomy the constant line is a kernel
+instead. This is a change of background connection, distinct from
+[conditioning a scalar Gaussian on pinned values](fdip-003V).}

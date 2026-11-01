@@ -1,0 +1,63 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{Determinants of a twisted cycle}
+\date{2026-11-01}
+
+\p{Let #{C_n}, #{n\ge3}, have vertices #{0,\ldots,n-1} and edges
+#{j\to j+1} modulo #{n}. Take a complex line with unitary connection,
+positive weights #{w_j}, and total oriented holonomy
+#{u=\prod_jU_j=e^{i\theta}}. For #{L_\theta=d_U^*Wd_U},
+##{\det L_\theta=\left(\prod_jw_j\right)(2-2\cos\theta).}
+For unit weights and #{c\ge0}, let #{\omega\ge0} be determined by
+#{2\cosh\omega=2+c}. Then
+##{\det(cI+L_\theta)=2\cosh(n\omega)-2\cos\theta.}
+The first formula is the cycle case of the weighted line-bundle
+matrix-tree formula, \citet{Theorem 5, Section 7.1, p. 13}{kenyon2011spanning}.
+Its unweighted precursor is \citet{Theorem 1, p. 7}{kenyon2011spanning}.
+Both cycle identities are proved directly below.}
+
+\proof{
+\p{Use \ref{fdip-006F} to set #{U_0=\cdots=U_{n-2}=1} and
+#{U_{n-1}=u}. The square incidence matrix has row equations
+#{f_{j+1}-f_j} for #{j<n-1} and #{f_0-uf_{n-1}} for the last row.
+In its determinant expansion the only nonzero permutations choose
+all source entries or all head entries: choosing one head entry forces
+the next row to choose its head entry, and so around the cycle.
+Their signed sum is #{1-u} up to an overall sign. Hence
+##{\det(d_U^*Wd_U)
+=|\det d_U|^2\det W
+=|1-u|^2\prod_jw_j.}
+Since #{|1-e^{i\theta}|^2=2-2\cos\theta}, this proves the first
+formula, including trivial holonomy.}
+
+\p{For unit weights introduce the unitary shift
+##{(T_\theta f)_j=\begin{cases}
+f_{j+1},&j<n-1,\\
+u^{-1}f_0,&j=n-1.
+\end{cases}}
+The last edge difference is #{u(T_\theta f-f)_{n-1}}, so its modulus
+is unchanged. Thus #{L_\theta=2I-T_\theta-T_\theta^*}.
+The seam convention is #{f_n=u^{-1}f_0}; its modes and eigenvalues are
+##{\begin{aligned}
+p_k&=(2\pi k-\theta)/n,\qquad 0\le k<n,\\
+f_k(j)&=n^{-1/2}e^{ip_kj},\\
+L_\theta f_k&=(2-2\cos p_k)f_k.
+\end{aligned}}
+Distinct modes are orthogonal because their ratios are nontrivial
+#{n}-th roots of unity; the finite geometric sum vanishes. There are
+#{n} modes, so they form a complete basis.}
+
+\p{Put #{r=e^\omega} and #{z_k=e^{ip_k}}. The numbers #{z_k} are
+all roots of #{z^n=u^{-1}}. Since
+##{c+2-z-z^{-1}=r^{-1}(r-z)(r-z^{-1}),}
+the product of the eigenvalues is
+##{\begin{aligned}
+\det(cI+L_\theta)
+&=r^{-n}(r^n-u^{-1})(r^n-u)\\
+&=r^n+r^{-n}-u-u^{-1}\\
+&=2\cosh(n\omega)-2\cos\theta.
+\end{aligned}}
+The computation remains valid at #{c=0}, when #{r=1}.}
+}
