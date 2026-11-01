@@ -1,0 +1,38 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Definition}
+\title{The Gaussian induced action}
+\date{2026-11-01}
+
+\p{Fix a finite nonempty vertex set #{V}, with #{n=|V|}, and a
+finite set #{E} of labelled edges with source and head maps. Orientations
+are auxiliary. In the counting metric on #{\mathbb R^V}, put
+#{d_e=\delta_{h(e)}-\delta_{s(e)}}. For weights #{w_e\ge0} and
+mass #{m>0}, write
+##{L_w=\sum_{e\in E}w_e d_ed_e^T,\qquad
+Q=L_w+m^2I,\qquad G=Q^{-1}.}
+A zero weight means the corresponding edge is deleted. Parallel
+labels remain distinct, and a loop has #{d_e=0}. Thus the boundary
+faces of this weight orthant describe subgraphs, extending the
+positive-weight [background convention](fdip-000G).}
+
+\p{The \newvocab{Gaussian induced action}, relative to counting-metric
+Lebesgue measure, is
+##{\mathcal W(w,m)=\frac12\log\det Q.}
+The [Gaussian normalizer](fdip-002T) gives
+##{Z(w,m)=\int_{\mathbb R^V}e^{-\phi^TQ\phi /2}\,d\phi
+ =(2\pi)^{n/2}(\det Q)^{-1/2},}
+so #{-\log Z=\mathcal W-(n/2)\log(2\pi)}. This scalar is
+invariant under graph relabeling and orthogonal conjugation of #{Q}.
+It does not by itself retain all graph or selector data.}
+
+\p{For fixed #{m>0}, differentiation in the weights means
+differentiation of the smooth extension to
+##{\mathcal U_m=\{w\in\mathbb R^E:L_w+m^2I>0\}.}
+This open convex set contains the nonnegative orthant. For
+#{w_e\ge0} and #{x\ne0}, indeed,
+##{x^TQx=\sum_e w_e(d_e^Tx)^2+m^2\|x\|^2>0.}
+In particular the formulas below remain meaningful at
+deleted edges, even though only nonnegative weights are interpreted
+as graph conductances.}

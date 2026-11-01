@@ -1,0 +1,87 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{The determinant as a rooted-forest sum}
+\date{2026-11-01}
+
+\p{A \newvocab{rooted spanning forest} on #{V} is an acyclic set
+#{F\subseteq E} together with exactly one chosen vertex in each
+component, including isolated vertices. Write #{R} for these roots
+and #{r=|R|}. Loops cannot occur, and distinct parallel labels count
+as distinct choices. With the data of \ref{fdip-005R},
+##{\det(L_w+m^2I)
+ =\sum_{(F,R)}\left(\prod_{e\in F}w_e\right)m^{2|R|}.}
+Normalize these nonnegative terms to obtain a probability law on
+rooted spanning forests. It satisfies
+##{\begin{aligned}
+\mathbb P(e\in F)&=w_ed_e^TGd_e,\\
+\mathbb E[|R|]&=m^2\operatorname{tr}G,\\
+\mathbb E[|F|]&=n-m^2\operatorname{tr}G.
+\end{aligned}}
+If the positive-weight support is connected, with weighted
+spanning-tree sum #{\tau_w}, then
+##{\det(L_w+m^2I)=n\tau_wm^2+O(m^4)
+ \qquad(m\downarrow0).}
+Thus the spanning-tree coefficient appears after division by
+#{m^2}; the unscaled determinant tends to zero.}
+
+\proof{
+\p{Form the #{n\times(|E|+n)} matrix with columns
+#{\sqrt{w_e}d_e} for edges and #{m\delta_v} for vertices.
+Call it #{A}; then #{AA^T=L_w+m^2I}. Cauchy-Binet expresses
+its determinant as the sum of the squared #{n\times n} minors.
+A chosen minor consists of edge columns #{F} and vertex columns
+#{R}, with #{|F|+|R|=n}. A cycle in #{F} makes its incidence
+columns dependent (this includes a loop and the two-edge cycle
+of parallel edges), so only forests contribute.}
+
+\p{Suppose #{F} is a forest with components #{C_i}. Their
+incidence columns span the coordinate-sum-zero subspace in each
+#{\mathbb R^{C_i}}, of dimension #{|C_i|-1}. This follows by
+successively removing leaves. A component with no chosen vertex
+column therefore prevents full rank. There are as many chosen
+vertex columns as components, because
+#{|R|=n-|F|}; hence full rank requires exactly one in each
+component. Conversely, for a tree with one root, the matrix of its
+unweighted incidence columns and that root's coordinate vector
+has determinant #{\pm1}: remove a nonroot leaf and expand along
+its row, then finish with the root's #{1\times1} matrix.
+Applying this to all components proves that precisely the stated
+forests contribute, with squared minor
+#{(\prod_{e\in F}w_e)m^{2|R|}}. Zero-weight edge columns
+vanish, consistent with deletion.}
+
+\p{Put #{t=m^2} and call this polynomial #{D(w,t)}.
+Termwise differentiation gives
+#{w_e\partial_eD=\sum_{F\ni e,R}(\prod_{f\in F}w_f)t^{|R|}}
+and #{t\partial_tD=\sum_{F,R}|R|(\prod_{f\in F}w_f)t^{|R|}}.
+Divide by #{D>0} and use the determinant derivative from
+\ref{fdip-005S}, first in direction #{d_ed_e^T}, then in
+direction #{I}. The edge identity holds also at #{w_e=0}, when
+both sides vanish. Finally every forest has #{|F|+|R|=n}.
+For connected positive support, the coefficient of #{t} comes
+from spanning trees; each has #{n} choices of root. All other
+terms have at least two roots and hence order #{t^2}.}
+}
+
+\p{Equivalently, add a new boundary vertex #{*} with an edge of
+weight #{m^2} to each old vertex. Attach #{*} to the chosen root
+of each forest component; this is a bijection to spanning trees
+of the augmented graph. Its Dirichlet Laplacian at #{*} is
+#{L_w+m^2I}. This is the trivial-connection case of Kenyon's
+boundary theorem: cycle factors vanish, leaving trees rooted at
+the boundary \citet{Theorem 7, Section 8, p. 15}{kenyon2011spanning}.
+The conductance extension is given in
+\citet{Section 7.1, Theorem 5, p. 13}{kenyon2011spanning}.
+The proof above includes the needed weights and zero-weight faces.}
+
+\p{TauCeti's
+\leanref/tauceti{Matrix.det_mul_transpose_eq_sum_plucker_sq}
+gives the Cauchy-Binet identity for a matrix over a commutative
+ring with rows indexed by #{\mathrm{Fin}(n)} and a finite ordered
+column set. Reindexing the present real matrix supplies those
+hypotheses. Its Plücker coordinates are the maximal minors.
+This supports the sum-of-squares step; the classification of
+nonzero forest minors and the probability consequences are
+proved here.}

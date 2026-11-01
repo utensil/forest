@@ -1,0 +1,45 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{A massive sum rule and Foster's identity}
+\date{2026-11-01}
+
+\p{For fixed nonnegative weights and #{m>0},
+##{\sum_e w_e\frac{\partial\mathcal W}{\partial w_e}
+ =\frac12(n-m^2\operatorname{tr}G).}
+If the positive-weight support is connected, its limit as
+#{m\downarrow0} is #{(n-1)/2}. More explicitly, let #{L_w^+}
+be zero on constant fields and the inverse of #{L_w} on their
+orthogonal complement. The effective resistance between the
+endpoints of an edge is #{R_{\mathrm{eff}}(e)=d_e^TL_w^+d_e},
+and
+##{\sum_e w_eR_{\mathrm{eff}}(e)=n-1.}
+The resistance definition agrees with
+\citet{p. 2}{spielman2009effective}.}
+
+\proof{
+\p{The edge derivative and cyclicity of trace give
+##{\sum_e w_e\frac{\partial\mathcal W}{\partial w_e}
+ =\frac12\operatorname{tr}(GL_w)
+ =\frac12\operatorname{tr}(I-m^2G).}
+For connected positive support, the energy expression for #{L_w}
+shows that its kernel consists exactly of constants. Choose an
+orthonormal eigenbasis #{u_0=n^{-1/2}\mathbf1,u_1,\ldots,u_{n-1}},
+with positive nonconstant eigenvalues #{\lambda_j}. Then
+##{G=m^{-2}u_0u_0^T+
+ \sum_{j=1}^{n-1}(\lambda_j+m^2)^{-1}u_ju_j^T.}
+Thus #{m^2\operatorname{tr}G\to1}. Every incidence vector
+#{d_e} is perpendicular to constants, so its quadratic form
+does not contain the divergent first term and tends to
+#{d_e^TL_w^+d_e}. Passing to the limit in the finite sum proves
+Foster's identity.}
+}
+
+\p{This is the projection-trace sum in
+\citet{Lemma 3(iii), pp. 6-7; proof of Theorem 1, p. 8}{spielman2009effective}.
+The massive law itself has no limit as a
+probability law on the full field space: its constant-mode variance
+diverges. Only the displayed edge observables have been passed to
+the limit. With #{k} connected components the same eigenbasis
+argument replaces #{1} by #{k} in the trace limit.}
