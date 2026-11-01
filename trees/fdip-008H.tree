@@ -1,0 +1,50 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{Paired Grassmann integration gives a determinant}
+\date{2026-11-01}
+
+\p{For any complex #{n\times n} matrix #{K}, use the
+[independent generators and paired top order](fdip-008F).
+Then
+##{J_n\left(e^{-\bar\psi K\psi}\right)=\det K,
+ \qquad \bar\psi K\psi=\sum_{i,j=1}^n\bar\psi_iK_{ij}\psi_j.}
+No invertibility or positivity assumption is needed. The empty
+case has #{J_0(1)=1}, equal to the determinant of the empty matrix.}
+
+\proof{
+\p{Move each barred generator to the right and put
+##{q_i=\sum_{j=1}^nK_{ij}\psi_j\bar\psi_i,
+ \qquad -\bar\psi K\psi=\sum_iq_i.}
+Each #{q_i^2=0}, because every term repeats #{\bar\psi_i}.
+The #{q_i} have even degree and commute, so finite expansion gives
+##{e^{\sum_iq_i}=\prod_{i=1}^n(1+q_i).}
+Only #{q_1\cdots q_n} can contribute to the top degree. A nonzero
+term in that product chooses every unbarred generator once, hence
+is indexed by a permutation #{\sigma\in S_n}.}
+
+\p{The associated word is
+#{\psi_{\sigma(1)}\bar\psi_1\cdots
+\psi_{\sigma(n)}\bar\psi_n}.
+Moving all barred factors to the right gives
+#{(-1)^{n(n-1)/2}}. Sorting the unbarred factors gives
+#{\operatorname{sgn}(\sigma)}. Returning the bars to the paired
+top order gives the same first sign again. Their product is
+#{\operatorname{sgn}(\sigma)}. Thus the required coefficient is
+##{\sum_{\sigma\in S_n}\operatorname{sgn}(\sigma)
+       \prod_{i=1}^nK_{i,\sigma(i)}=\det K.}
+}
+
+\p{Selecting the grouped top word
+#{\psi_1\cdots\psi_n\bar\psi_1\cdots\bar\psi_n}
+would instead give #{(-1)^{n(n-1)/2}\det K}.
+There is a local ordering discrepancy in
+\citet{v2, Proposition 9.10, p. 131}{etingof2024mathematical}:
+the volume displayed immediately before the proposition is
+interleaved, whereas its printed determinant sign is the grouped
+one under Definition 9.6's coefficient rule. For #{n=2,K=I},
+the exponential is
+#{(1+\psi_1\bar\psi_1)(1+\psi_2\bar\psi_2)};
+its interleaved coefficient is #{+1} and its grouped coefficient
+is #{-1}. The direct expansion above fixes the convention used here.}
