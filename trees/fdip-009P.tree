@@ -1,0 +1,67 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{Gauge covariance and skew-adjointness of the Dirac operator}
+\date{2026-11-01}
+
+\p{For the [declared unitary internal connection](fdip-009O),
+##{\begin{aligned}
+(T_j^U)^*&=(T_j^U)^{-1},\\
+D_U^*&=-D_U,\\
+D_{U^g}\mathcal G&=\mathcal G D_U.
+\end{aligned}}
+Consequently the spectrum and determinant of #{D_U}, and of
+#{mI+D_U} for a fixed scalar #{m}, are gauge invariant.}
+
+\proof{
+\p{The operator #{T_j^U} is the product of pointwise unitary
+multiplication by #{I_S\otimes U_j(x)^{-1}} and the periodic
+forward shift. Reindexing the counting inner product shows that
+the shift is unitary, as in \ref{fdip-000R}. Their product is
+therefore unitary, with the inverse already displayed in the
+definition. Thus #{(\nabla_j^U)^*=-\nabla_j^U}. Since
+#{\Gamma_j^*=\Gamma_j} and #{\Gamma_j} commutes with
+#{\nabla_j^U}, the adjoint of their product is its negative.
+Summing proves the second identity.}
+
+\p{The transformed inverse link is
+##{U_j^g(x)^{-1}=g_xU_j(x)^{-1}g_{x+e_j}^{-1}.}
+Therefore
+##{\begin{aligned}
+(T_j^{U^g}\mathcal G\psi)(x)
+&=(I_S\otimes g_xU_j(x)^{-1})\psi(x+e_j)\\
+&=(\mathcal G T_j^U\psi)(x).
+\end{aligned}}
+Both shifts are invertible, so the same intertwining identity
+holds for their inverses and hence their centered differences.
+Commutation of #{\mathcal G} with each #{\Gamma_j} then gives
+#{D_{U^g}\mathcal G=\mathcal G D_U}. The operator
+#{\mathcal G} is unitary and invertible. The two Dirac matrices
+are conjugate, as are their scalar translates, proving the
+spectral and determinant statements.}
+}
+
+\p{For a general connection, the coordinate shifts need not
+commute. Accordingly the free identity
+#{D^2=\sum_j\nabla_j^2} cannot be imported without its
+commutation hypothesis. In the present notation direct expansion
+gives
+##{\begin{aligned}
+D_U^2&=\sum_j(\nabla_j^U)^2\\
+ &\quad+\sum_{i<j}\Gamma_i\Gamma_j
+ [\nabla_i^U,\nabla_j^U],
+\end{aligned}}
+where #{[A,B]=AB-BA}. The first sum includes the identity on
+#{S}; the second sum need not vanish. Skew-adjointness still
+implies #{D_U^*D_U=-D_U^2\ge0}. This does not identify that
+square with the nearest-neighbor connection Laplacian.}
+
+\p{The formal adjoint identities linked in the
+[free square theorem](fdip-000S) support the algebraic ingredients;
+the shifted-link reindexing and the internal-factor commutation
+are the explicit calculations here. In any chosen orthonormal
+basis of #{\mathcal H}, the [paired Grassmann formula](fdip-008H)
+applies to #{mI+D_U} as a finite complex matrix. This observation
+requires neither positivity nor invertibility and is not an
+ordinary probability interpretation.}
