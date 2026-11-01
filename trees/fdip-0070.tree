@@ -1,0 +1,48 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Definition}
+\title{The determinant action of a fixed connection}
+\date{2026-11-01}
+
+\p{Use a [connection background](fdip-006D) with its fixed invariant
+fiber metric and mass #{m>0}. Let #{\mathbb K=\mathbb R} with an
+orthogonal representation, or #{\mathbb K=\mathbb C} with a unitary
+representation. The matter space is #{\mathcal H=F^V}, and
+#{N=\dim_{\mathbb K}\mathcal H} includes the fiber dimension.
+Write #{d\operatorname{vol}} for the induced real volume on this
+space, of real dimension #{N} or #{2N}, respectively. Set
+##{\begin{array}{c|cc}
+\mathbb K&\kappa&d\nu\\\hline
+\mathbb R&1/2&(2\pi)^{-N/2}d\operatorname{vol}\\
+\mathbb C&1&\pi^{-N}d\operatorname{vol}
+\end{array}}
+and define the matter partition function and determinant action by
+##{\begin{aligned}
+Z_{\mathrm{mat}}(U)
+ &=\int_{\mathcal H}e^{-\kappa\langle\phi,Q_U\phi\rangle}\,d\nu(\phi),\\
+W(U)&=-\log Z_{\mathrm{mat}}(U).
+\end{aligned}}
+The connection is fixed in this integral; only #{\phi} is integrated.}
+
+\p{Orthogonal or unitary diagonalization reduces the integral to
+positive eigenvalues #{\lambda_1,\ldots,\lambda_N}. Each real
+coordinate contributes #{\lambda_j^{-1/2}} by the
+[real Gaussian integral](fdip-002T); each complex coordinate contributes
+#{\lambda_j^{-1}} by the [complex integral](fdip-006I). Therefore
+##{Z_{\mathrm{mat}}(U)=(\det_{\mathbb K}Q_U)^{-\kappa},\qquad
+ W(U)=\kappa\log\det_{\mathbb K}Q_U.}
+The determinant is positive even in the complex case, since #{Q_U}
+is positive Hermitian. These reference measures make
+#{Z_{\mathrm{mat}}=1} when #{Q_U=I}. The normalized matter law has
+density #{Z_{\mathrm{mat}}(U)^{-1}e^{-\kappa\langle\phi,Q_U\phi\rangle}
+with respect to #{\nu}, and covariance #{Q_U^{-1}} over the chosen
+field. In the complex convention this means
+#{\mathbb E[\phi\phi^*]=Q_U^{-1}}.}
+
+\p{A gauge transformation acts unitarily on #{\mathcal H}, and
+[gauge covariance](fdip-006E) gives
+#{Q_{U^g}=T_gQ_UT_g^{-1}}. Thus #{W(U^g)=W(U)}. Unitary coordinate
+changes also preserve the declared real volume. The metric, mass,
+weights and graph remain supplied data; this determinant does not
+choose them or yet define a probability law on connections.}

@@ -1,0 +1,62 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{A convergent expansion over closed walks}
+\date{2026-11-01}
+
+\p{Let the vertices be
+#{\Lambda=\prod_{j=1}^d\mathbb Z/L_j\mathbb Z}, with #{L_j\ge3}.
+Give each edge #{(x,j):x\to x+e_j} weight one and a unitary or
+orthogonal transport #{U_{x,j}} on a fixed fiber. For the
+[determinant action](fdip-0070), put #{D=2d+m^2}, where #{m>0},
+and let #{H_U} be the covariant adjacency operator. Then
+##{Q_U=DI-H_U,\qquad \|H_U\|\le2d<D,}
+and
+##{W(U)=\kappa N\log D-
+ \kappa\sum_{k\ge1}\frac{\operatorname{tr}_{\mathbb K}(H_U^k)}{kD^k}.}
+The series is absolutely convergent, uniformly over all such unitary
+connections. For #{K\ge0}, its remainder after length #{K} satisfies
+##{|R_K(U)|\le\frac{\kappa N}{K+1}
+ \frac{(2d/D)^{K+1}}{1-2d/D}.}
+Each trace is the sum of fiber holonomy traces over all based oriented
+closed nearest-neighbor walks of length #{k}.}
+
+\proof{
+\p{Define the covariant shift
+##{(T_j\phi)(x)=U_{x-e_j,j}\phi(x-e_j).}
+A permutation of sites and the unitary fiber maps preserve the norm,
+so #{T_j} is unitary. Expanding the difference energy gives
+##{H_U=\sum_{j=1}^d(T_j+T_j^*),\qquad Q_U=(2d+m^2)I-H_U.}
+Thus #{H_U} is self-adjoint and the triangle inequality gives
+#{\|H_U\|\le2d}. If its eigenvalues are #{h_1,\ldots,h_N},
+then #{|h_i|/D<1}. Apply the scalar Taylor series for
+#{\log(1-h_i/D)} to
+#{\log\det Q_U=N\log D+\sum_i\log(1-h_i/D)}.
+There are finitely many eigenvalues and
+##{|\operatorname{tr}(H_U^k)|\le N(2d)^k,}
+so the resulting trace series is absolutely convergent. For
+#{k\ge K+1}, bound #{1/k\le1/(K+1)} and sum the geometric tail.
+This proves the stated uniform remainder.}
+
+\p{The matrix block from #{s(e)} to #{h(e)} in #{H_U} is #{U_e},
+and the reverse block is #{U_e^*}. Multiplying #{k} blocks follows
+an oriented walk; the diagonal blocks are exactly the closed walks.
+The ordered product agrees with the
+[transport convention](fdip-006N), and taking the fiber trace gives
+the claimed expansion. Reverse walks pair adjoint products, so the
+total is real even for a complex fiber.}
+}
+
+\p{The numerical bound #{2d} and scalar diagonal #{D} use this
+regular lattice and its unit edge weights. For arbitrary weights or
+degrees one must change the diagonal decomposition and norm estimate;
+the displayed bound is not asserted unchanged.}
+
+\p{Kazakov and Migdal integrate an adjoint matrix field in a different
+lattice model. Their Section 2, equations (3)–(4), gives a trace-log
+and loop weights involving #{|\operatorname{tr}U[\Gamma]|^2}
+\citet{p. 2}{kazakov1992induced}. This is a comparison with the
+closed-walk method. The finite real-scalar coefficient below follows
+from the present proof, not from their large-#{N} analysis or a
+continuum identification.}
