@@ -1,0 +1,56 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{Three inequivalent selectors and their observables}
+\date{2026-11-01}
+
+\p{On the unit four-cycle with #{m=1}, the
+[opposite, adjacent and positive half-turn selectors](fdip-005F)
+are pairwise inequivalent under the orthogonal comparison.
+Consequently no directed or signed graph arrow identifies any pair.
+Their retained precisions have the following invariants:}
+##{\begin{array}{c|c|c|c}
+\text{selector}&\operatorname{spec}S_P&\det S_P&\operatorname{tr}S_P\\\hline
+\text{opposite}&\{5/3,3\}&5&14/3\\
+\text{adjacent}&\{3/2,15/4\}&45/8&21/4\\
+\text{half-turn}&\{1,5\}&5&6.
+\end{array}}
+
+\proof{
+\p{The three two-by-two precisions and their eigenvectors are
+computed in \ref{fdip-005F}. Their distinct spectra separate them
+by the [invariance proposition](fdip-005J). Products and sums of
+the eigenvalues give the displayed determinants and traces.}
+}
+
+\p{The intrinsic squared-norm observable has expectation
+##{\mathbb E_{\mu_Q}\|P\phi\|^2
+ =\mathbb E_{\nu_b}\|x\|^2
+ =\operatorname{tr}_X C_P
+ =\operatorname{tr}_H(PG).}
+Indeed, in an orthonormal basis of #{X} the squared norm is the
+sum of squares of coordinates, each with variance equal to the
+corresponding diagonal covariance entry. Since
+#{C_P=(PGP)|_X} and #{P^2=P}, cyclicity of the finite-dimensional
+trace gives the last equality. In the same order as the table,
+##{\mathbb E\|P\phi\|^2=\frac{14}{15},\quad
+\frac{14}{15},\quad\frac65.}
+The reciprocal eigenvalues give these values. Thus neither
+#{\det S_P} nor this covariance trace alone separates all three
+selectors. In particular the equal covariance traces of the first
+two do not mean equal precision traces.}
+
+\p{For the two coordinate selectors, named coordinate observations
+also distinguish the laws. The full covariance in \ref{fdip-005F}
+gives
+##{\begin{aligned}
+\frac{\langle\phi_0\phi_2\rangle}{\langle\phi_0^2\rangle}
+ &=\frac27&&\text{(opposite)},\\
+\frac{\langle\phi_0\phi_1\rangle}{\langle\phi_0^2\rangle}
+ &=\frac37&&\text{(adjacent)}.
+\end{aligned}}
+The marginal expectation identity makes these the corresponding
+retained expectations. They refer to the stated vertex coordinates;
+unlike the spectrum and squared norm, such coordinate ratios are
+not invariants under arbitrary orthogonal changes of retained basis.}
