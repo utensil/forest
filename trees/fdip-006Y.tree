@@ -1,0 +1,75 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Example}
+\title{Binary tetrahedral spinor gauge fields}
+\date{2026-11-01}
+
+\p{Let #{G=2T\subset SU(2)} be the
+[twenty-four Hurwitz units](fgap-000K). Use its defining complex
+spinor representation #{\sigma}, with
+#{\chi_\sigma(h)=2\operatorname{Re}h}, for both the Wilson action
+and the normalized Wilson loops of \ref{fdip-006V}.
+The [complete character table](fdip-0053) has irreducibles
+#{1,\lambda,\lambda^2,\sigma,\sigma\lambda,
+\sigma\lambda^2,\tau}, with degrees #{1,1,1,2,2,2,3}.
+Their squared degrees sum to #{24}. The nonreal characters are
+kept separately as complex irreducibles here; no real isotypic
+multiplicity is substituted into the surface formula.}
+
+\p{Put #{r=e^{-\beta /2}} and
+#{\omega=(-1+i+j+k)/2}. In the class order of that table,
+##{\begin{array}{c|rrrrrrr}
+h&1&-1&i&\omega&-\omega&\omega^2&-\omega^2\\\hline
+|[h]|&1&1&6&4&4&4&4\\
+f_\beta(h)&1&r^4&r^2&r^3&r&r^3&r
+\end{array}}
+The resulting character coefficients are
+##{\begin{aligned}
+a&=\frac{1+r^4+6r^2+8r+8r^3}{24} &&(1),\\
+b&=\frac{(1-r)^4}{24} &&(\lambda,\lambda^2),\\
+c&=\frac{(1-r^2)(1+r^2+4r)}{12} &&(\sigma),\\
+d&=\frac{(1-r^2)(1-r)^2}{12}
+ &&(\sigma\lambda,\sigma\lambda^2),\\
+e&=\frac{(1-r^2)^2}{8} &&(\tau).
+\end{aligned}}
+To verify them, let #{s_j=\zeta^j+\zeta^{2j}}, where
+#{\zeta=e^{2\pi i/3}}. Thus #{s_0=2} and #{s_1=s_2=-1}.
+The class-weighted inner products give
+##{\begin{aligned}
+c_{\lambda^j}&=\frac{1+r^4+6r^2+4s_j(r+r^3)}{24},\\
+c_{\sigma\lambda^j}&=\frac{1-r^4+2s_j(r-r^3)}{12},\\
+c_\tau&=\frac{3+3r^4-6r^2}{24}.
+\end{aligned}}
+Factoring these expressions gives the displayed coefficients. They
+are nonnegative for #{\beta\ge0}, and
+#{a+2b+2c+4d+3e=1}. At #{\beta=0}, only #{a=1} remains;
+as #{\beta\to\infty}, each coefficient tends to its degree
+divided by #{24}, the character expansion of the identity indicator.}
+
+\p{For the [closed oriented surface](fdip-006W),
+##{\begin{aligned}
+Z_\Sigma(f_\beta)={}&a^P+2b^P\\
+ &+2^{2-2g}\left[\left(\frac c2\right)^P
+       +2\left(\frac d2\right)^P\right]\\
+ &+3^{2-2g}\left(\frac e3\right)^P.
+\end{aligned}}
+Unnormalized counting multiplies this by #{24^{|E|}}.
+These powers use complex irreducible dimensions; the quaternionic
+nature of the spinor does not change its complex degree two.}
+
+\p{On the [one-face torus](fdip-006X), set #{g=1}, #{P=1}.
+Substitution gives
+##{Z_{\mathbb T^2}(f_\beta)
+ =a+2b+\frac c2+d+\frac e3
+ =\frac{7+16r^2+r^4}{24}.}
+For its face loop, #{W_\sigma=\operatorname{Re}H} and
+#{f_\beta(H)=e^{-\beta(1-W_\sigma)}}. Differentiating the finite
+sum therefore gives
+##{\langle W_\sigma\rangle
+ =1+\frac{d}{d\beta}\log Z_{\mathbb T^2}(f_\beta)
+ =\frac{7-r^4}{7+16r^2+r^4}.}
+This differs from the quaternion-group answer, despite using the
+same spinor trace convention. The calculation concerns the specified
+finite gauge group and plaquette; it does not identify the finite
+model with an #{SU(2)} continuum theory.}
