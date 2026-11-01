@@ -1,0 +1,52 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Definition}
+\title{Spatial link fields and their transfer kernel}
+\date{2026-11-01}
+
+\p{Let #{G} be a finite group, #{U(1)} or #{SU(2)}, with
+[normalized Haar measure](fdip-007B). Fix a
+[finite incidence presentation](fdip-0002) with vertex set
+#{V_s}, oriented edge set #{E_s} and source and target maps
+#{s,t:E_s\to V_s}. The spatial configuration space and
+\newvocab{link Hilbert space} are
+##{X=G^{E_s},\qquad
+ \mathcal H_{\mathrm{link}}=L^2(X,dU;\mathbb C),}
+where #{dU} is product Haar probability measure. The
+[gauge action](fdip-006E) of #{K=G^{V_s}} is
+##{(h\cdot U)_e=h_{t(e)}U_eh_{s(e)}^{-1},\qquad
+ (R_hf)(U)=f(h^{-1}\cdot U).}
+Haar invariance makes every #{R_h} unitary.}
+
+\p{Choose a real continuous central kernel #{k} satisfying the
+[positive coefficient conditions](fdip-007I):
+##{\begin{gathered}
+k(g)>0,\qquad k(g^{-1})=k(g),\\
+k(g)=\sum_{\rho\in\widehat G}d_\rho a_\rho\chi_\rho(g),
+\qquad a_\rho>0,\qquad
+\sum_{\rho\in\widehat G}d_\rho^2a_\rho<\infty.
+\end{gathered}}
+All irreducible representations here are complex and unitary.
+The expansion is uniformly absolutely convergent. Pointwise
+positivity and coefficient positivity are separate hypotheses.}
+
+\p{Let #{V:X\to\mathbb R} be continuous and gauge invariant,
+and set #{b(U)=e^{-V(U)/2}}. Compactness makes #{b} and
+#{b^{-1}} bounded. If #{M_b} denotes multiplication by #{b},
+define
+##{\begin{aligned}
+c(U,U')&=\prod_{e\in E_s}k(U_eU_e'^{-1}),\\
+(C_kf)(U)&=\int_Xc(U,U')f(U')\,dU',\\
+T&=M_bC_kM_b.
+\end{aligned}}
+This is the \newvocab{pure-gauge transfer operator} for the
+specified data. Its integral kernel is #{b(U)c(U,U')b(U')}.
+The spatial potential may be a sum of Wilson plaquette terms,
+but the definition only needs its stated invariance and continuity.}
+
+\p{The factorization separates the two spatial half-weights from
+the temporal convolution. It parallels the gauge factors in
+\citet{Eqs. (17), (20)–(21), p. 287}{luscher1977transfer};
+the [source comparison](fdip-0087) distinguishes this pure-gauge
+model from that paper's gauge and fermion construction.}
