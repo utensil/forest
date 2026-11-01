@@ -4,6 +4,28 @@
 \title{Configuration Clifford algebras}
 \date{2026-10-20}
 
+\texfig{\begin{tikzpicture}[x=1cm,y=1cm,font=\sffamily,
+  box/.style={draw=black,line width=0.5pt,rounded corners=2pt,align=center,execute at begin node={\hyphenpenalty=10000\exhyphenpenalty=10000},
+    font=\sffamily\small,minimum height=7mm,inner sep=2.5pt,text width=#1},
+  ext/.style={draw=black,densely dotted,line width=0.4pt,rounded corners=2pt,align=center,execute at begin node={\hyphenpenalty=10000\exhyphenpenalty=10000},
+    font=\sffamily\small,text=black!60,minimum height=7mm,inner sep=2.5pt,text width=#1},
+  arr/.style={-{Stealth[length=2.2mm]},line width=0.6pt},
+  lab/.style={font=\sffamily\footnotesize\itshape,inner sep=1.5pt,fill=white,align=center}]
+\node[ext=5.6cm] (III) at (6,7.85) {Part III: Backgrounds and symmetry};
+\node[box=5.6cm] (a) at (6,6.0) {Configuration Clifford algebras};
+\node[box=4.6cm] (b) at (2.2,4.2) {Spatial Dirac operators};
+\node[box=6.0cm] (c) at (11.0,4.2) {Enriched backgrounds and comparison};
+\node[ext=4.6cm] (VII) at (2.2,0.8) {Part VII: Continuum approximation};
+\node[ext=3.6cm] (VIII) at (9.0,0.8) {Part VIII: Geometric realization};
+\node[ext=3.0cm] (VI) at (13.1,0.8) {Part VI: Arithmetic families};
+\draw[arr] (III) -- node[lab,midway,right=1mm] {how does matter with spin, like the electron,\\ arise in a discrete setting?} (a);
+\draw[arr] (a.west) -| (b);
+\draw[arr] (a.east) -| node[lab,midway,pos=0.75,right=1mm] {when do two different backgrounds\\ describe the same physics?} (c);
+\draw[arr] (b.south) -- node[lab,midway,right=1mm] {on a given continuous space,\\ does the discrete physics\\ approach the continuous one?} (b.south |- VII.north);
+\draw[arr] (c.south -| VIII.north) -- node[lab,midway,left=1mm] {what is retained\\ when a finite graph\\ is replaced by\\ a geometric shape?} (VIII);
+\draw[arr] (c.south -| VI.north) -- node[lab,midway,left=1mm] {can fields, probabilities\\ and symmetries\\ all be built without\\ continuous quantities?} (VI);
+\end{tikzpicture}}
+
 \p{How might a discrete first-order equation acquire the internal
 components used to describe matter with spin? For two commuting centered
 differences, try #{D=a\nabla_1+b\nabla_2}. Relations

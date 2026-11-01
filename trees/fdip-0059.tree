@@ -4,6 +4,33 @@
 \title{Selected backgrounds and invariants}
 \date{2026-11-01}
 
+\texfig{\begin{tikzpicture}[x=1cm,y=1cm,font=\sffamily,
+  box/.style={draw=black,line width=0.5pt,rounded corners=2pt,align=center,execute at begin node={\hyphenpenalty=10000\exhyphenpenalty=10000},
+    font=\sffamily\small,minimum height=7mm,inner sep=2.5pt,text width=#1},
+  ext/.style={draw=black,densely dotted,line width=0.4pt,rounded corners=2pt,align=center,execute at begin node={\hyphenpenalty=10000\exhyphenpenalty=10000},
+    font=\sffamily\small,text=black!60,minimum height=7mm,inner sep=2.5pt,text width=#1},
+  arr/.style={-{Stealth[length=2.2mm]},line width=0.6pt},
+  lab/.style={font=\sffamily\footnotesize\itshape,inner sep=1.5pt,fill=white,align=center}]
+\node[ext=5.0cm] (VII) at (3.2,8.1) {Part VII: Continuum approximation};
+\node[ext=4.4cm] (IV) at (9.0,8.1) {Part IV: Finite-group symmetry};
+\node[box=5.0cm] (a) at (3.2,6.0) {Selected backgrounds and invariants};
+\node[box=5.0cm] (b) at (3.2,4.3) {Induced action and interactions};
+\node[ext=3.0cm] (R8) at (7.75,0.5) {Part VIII: Geometric realization};
+\node[box=5.0cm] (c) at (3.2,-0.8) {Connections, holonomy and twisted operators};
+\node[box=3.6cm] (d) at (12.6,-0.8) {Local Gaussian laws and gluing};
+\node[ext=5.0cm] (X) at (3.2,-2.8) {Part X: Gauge fields};
+\node[ext=3.6cm] (XIII) at (12.6,-2.8) {Parts XIII–XIV};
+\draw[arr] (VII) -- node[lab,midway,right=1mm] {can the geometry of space\\ come out of the physics\\ instead of being put in?} (a);
+\draw[arr] (IV) |- (a.east);
+\draw[arr] (a) -- node[lab,midway,right=1mm] {does the physics itself prefer\\ some backgrounds over others?} (b);
+\draw[arr] (b) -- node[lab,midway,right=1mm] {why should a symmetry act\\ on all vertices at once rather than\\ separately at each one?} (c);
+\draw[arr] (b.east) -| node[lab,midway,pos=0.75,left=1mm] {do the laws on small pieces\\ of the graph determine\\ the law of the whole?} (d);
+\draw[arr] (R8) -- (c);
+\draw[arr] (R8) -- (d);
+\draw[arr] (c) -- node[lab,midway,right=1mm] {how do forces like electromagnetism\\ arise in a discrete setting?} (X);
+\draw[arr] (d) -- (XIII);
+\end{tikzpicture}}
+
 \p{Can geometry be induced instead of supplied? Edge weights set the
 stiffness of field differences and may encode geometric information;
 they are not universally distances. Comparing choices through an
