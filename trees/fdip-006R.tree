@@ -1,0 +1,63 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{The exact pure-gauge torus law}
+\date{2026-11-01}
+
+\p{For the [square torus](fdip-006M), take #{G=\{1,-1\}} in its
+one-dimensional sign representation and use the
+[counting convention](fdip-006O). With #{n=|V|=P} and #{\beta\ge0},
+##{\begin{aligned}
+\mathcal Z(\beta)
+ &=2^{n+1}\,\frac{(2\cosh\beta)^P+(2\sinh\beta)^P}{2},\\
+Z_W(\beta)&=e^{-\beta P}\mathcal Z(\beta).
+\end{aligned}}
+Let #{C} be a simple contractible edge loop bounding a specified disk
+of #{A} square faces, where #{0<A<P}. Put #{t=\tanh\beta}. Its
+Wilson loop is #{W(C)=U_C\in\{1,-1\}}, and
+##{\langle W(C)\rangle_W
+ =\frac{t^A+t^{P-A}}{1+t^P}.}
+The finite formula includes the complementary region through the
+second term.}
+
+\proof{
+\p{Write #{u_p=U_p}. By the [plaquette counting lemma](fdip-006Q),
+every pattern with #{\prod_pu_p=1} has #{2^{n+1}} preimages. The
+indicator of this constraint is #{(1+\prod_pu_p)/2}. Therefore
+##{\begin{aligned}
+\mathcal Z(\beta)
+ &=\frac{2^{n+1}}2\sum_{u\in\{1,-1\}^{\mathcal P}}
+   \left(1+\prod_pu_p\right)\prod_p e^{\beta u_p}\\
+ &=\frac{2^{n+1}}2
+   \left[(2\cosh\beta)^P+(2\sinh\beta)^P\right].
+\end{aligned}}
+Here each unweighted one-sign sum is #{2\cosh\beta} and each
+sign-weighted sum is #{2\sinh\beta}. The displayed Wilson action
+constant gives the formula for #{Z_W}.}
+
+\p{Multiplying the plaquette signs inside the chosen disk cancels every
+interior edge twice and leaves exactly the boundary product, so
+#{W(C)=\prod_{p\text{ inside }C}u_p}. Insert this product into the
+preceding constrained sum. The two terms in the unnormalized numerator,
+after removing the common factor #{2^{n+1}/2}, are
+##{\begin{aligned}
+ &(2\sinh\beta)^A(2\cosh\beta)^{P-A},\\
+ &(2\cosh\beta)^A(2\sinh\beta)^{P-A}.
+\end{aligned}}
+Divide by the corresponding partition function and then by
+#{(2\cosh\beta)^P}. The common action constant cancels, proving the
+expectation formula.}
+}
+
+\p{Fix #{\beta>0} and a finite disk loop while both torus periods
+grow, so #{A} stays fixed and #{P\to\infty}. Then #{0<t<1}, giving
+##{\begin{aligned}
+\lim_{P\to\infty}\langle W(C)\rangle_W
+ &=t^A=e^{-\sigma A},\\
+\sigma&=-\log(\tanh\beta)>0.
+\end{aligned}}
+This is an exact area law for this two-dimensional pure-gauge limit.
+It is not a claim for a matter-coupled law or for higher-dimensional
+lattices. At #{\beta=0}, the finite formula instead gives zero for
+these nonempty proper disk loops, and #{Z_W(0)=2^{2n}}.}

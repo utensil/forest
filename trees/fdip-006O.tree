@@ -1,0 +1,43 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Definition}
+\title{The finite Wilson action and counting law}
+\date{2026-11-01}
+
+\p{For the [finite connection data](fdip-006N) and a fixed real
+#{\beta\ge0}, define the \newvocab{Wilson action}
+##{S_W(U)=\beta\sum_{p\in\mathcal P}
+ \left(1-\frac{\operatorname{Re}\chi_\rho(U_p)}d\right).}
+Since #{\rho(U_p)} is unitary, its eigenvalues have modulus one and
+#{-d\le\operatorname{Re}\chi_\rho(U_p)\le d}. Thus
+#{S_W(U)\ge0}. The action is gauge invariant and does not depend on
+starting vertices or boundary orientations.}
+
+\p{Use unnormalized counting measure on each edge group, and therefore
+on #{G^E}. The partition function, probability and expectation are
+##{\begin{aligned}
+Z_W&=\sum_{U\in G^E}e^{-S_W(U)},\\
+\mathbb P_W(U)&=Z_W^{-1}e^{-S_W(U)},\\
+\langle F\rangle_W&=Z_W^{-1}\sum_{U\in G^E}F(U)e^{-S_W(U)}.
+\end{aligned}}
+These finite sums have #{0<Z_W<\infty}. Matrix-valued observables are
+averaged entry by entry. The finite group and chosen representation
+are inputs to this law, alongside the square complex and #{\beta}.}
+
+\p{The constant term in the action matters for the partition function.
+With #{P=|\mathcal P|}, put
+##{\begin{aligned}
+\mathcal Z(\beta)
+ &=\sum_{U\in G^E}\exp\left(
+   \frac\beta d\sum_p\operatorname{Re}\chi_\rho(U_p)\right),\\
+Z_W(\beta)&=e^{-\beta P}\mathcal Z(\beta).
+\end{aligned}}
+The two weights define the same normalized expectation. Replacing each
+edge's counting measure by uniform probability measure instead gives
+#{|G|^{-|E|}Z_W}; that is a different partition-function normalization,
+again with the same expectation. In particular #{Z_W(0)=|G|^{|E|}}.
+The action and expectation agree with the conventions in
+\citet{equations (6.20)–(6.21), p. 8}{wingate2025lattice}; that source
+uses normalized Haar integration for its compact-group setting,
+whereas the finite counting convention here is explicit.}
