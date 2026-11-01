@@ -1,0 +1,67 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{Gauge covariance and transport of selected laws}
+\date{2026-11-01}
+
+\p{For a [connection background](fdip-006D), the
+\newvocab{gauge group} #{G^V} changes the frame independently at each
+vertex. For #{g=(g_v)_{v\in V}}, define
+##{\begin{aligned}
+(gU)_e&=g_{h(e)}U_eg_{s(e)}^{-1},\\
+(G_Vf)_v&=\rho(g_v)f_v,\\
+(G_Ea)_e&=\rho(g_{h(e)})a_e.
+\end{aligned}}
+Then
+##{\begin{aligned}
+d_{gU}G_V&=G_Ed_U,\\
+Q_{gU}&=G_VQ_UG_V^{-1},\\
+\det Q_{gU}&=\det Q_U.
+\end{aligned}}
+In particular, the massive spectra and Gaussian normalizers are gauge
+invariant.}
+
+\proof{
+\p{On an edge with endpoints #{s,h},
+##{\begin{aligned}
+(d_{gU}G_Vf)(e)
+&=\rho(g_h)f_h-\rho(g_hU_eg_s^{-1})\rho(g_s)f_s\\
+&=\rho(g_h)(f_h-\rho(U_e)f_s).
+\end{aligned}}
+This proves the first identity. Both #{G_V} and #{G_E} are isometries,
+and scalar weights imply #{G_E^*WG_E=W}. Taking adjoints in
+#{d_{gU}=G_Ed_UG_V^{-1}} therefore gives
+##{d_{gU}^*Wd_{gU}=G_Vd_U^*Wd_UG_V^{-1}.}
+The mass term commutes with #{G_V}. Multiplicativity of the determinant
+gives its invariance. The same isometry preserves real Euclidean volume,
+or the real volume underlying a complex Hermitian space, so changing
+variables also preserves the corresponding Gaussian integral.}
+}
+
+\p{For a fixed incidence presentation, #{U\mapsto gU} is a group
+action: #{g_2(g_1U)=(g_2g_1)U}. Its action groupoid has connections
+as objects and gauge transformations as arrows. If a selector is
+included, use an orthogonal projector #{P} on real #{H}, or a
+complex-linear orthogonal projector on complex #{H}, and transport it by
+##{P'=G_VPG_V^{-1}.}
+The identity, composition and inverse obey this equation by conjugation.
+Together with relabelings that carry the connection values, these are
+the connection counterparts of [selected-background arrows](fdip-005C).
+The earlier scalar backgrounds and relabeling arrows are recovered with
+#{F=\mathbb R}, #{G=\{1\}} and their original selector rank condition.}
+
+\p{On the selected space #{X=\operatorname{im}P}, the compressed
+inverse is #{C_P=(PQ_U^{-1}P)|_X}. The restriction
+#{G_X:X\to\operatorname{im}P'} satisfies
+##{C_{P'}=G_XC_PG_X^{-1}.}
+Indeed insert the three conjugation identities for #{P'},
+#{Q_{gU}^{-1}} and #{P'}. Inversion transports the selected precision.
+For real fields this is exactly the
+[selected Gaussian transport](fdip-005B); for complex fields the
+Gaussian convention is specified in \ref{fdip-006I}.}
+
+\p{Unitarity is essential for this argument. A nonorthogonal matrix
+representation with an unchanged Euclidean metric need not satisfy
+#{G_E^*WG_E=W}; changing connection matrices alone would then fail to
+produce the asserted conjugacy.}
