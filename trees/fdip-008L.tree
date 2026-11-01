@@ -1,0 +1,29 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Remark}
+\title{Exterior symbols preserve vectors, not Clifford products}
+\date{2026-11-01}
+
+\p{The [Grassmann algebra](fdip-008F) and the earlier
+[configuration Clifford algebra](fdip-001B) share an exterior
+vector-space model. For a quadratic form #{q} on #{V^*},
+the symbol map is a linear isomorphism
+##{\operatorname{Cl}(V^*,q)\cong\Lambda(V^*).}
+This is \citet{Proposition 2.5, pp. 32-33}{meinrenken2013clifford}
+and the equivalence used in the
+[transported exterior-basis coordinates](fcap-0003).
+The formal declaration \leanref{CliffordAlgebra.equivExterior}
+supplies a module equivalence over any commutative ring in which
+#{2} is invertible; it does not identify the products.}
+
+\p{For example, an exterior generator satisfies #{\xi^2=0},
+while the corresponding Clifford generator satisfies
+#{\iota_q(\xi)^2=q(\xi)1}. For #{q(\xi)\ne0} these
+cannot be the same multiplication under a unit-preserving map.
+The quadratic form remains in Clifford contraction terms.
+The [associated graded algebra](fcap-000J) forgets those lower
+terms, but the Clifford algebra itself does not. Therefore the
+[Berezin functional](fdip-008F) and its determinant formulas
+belong to the exterior product; the vector-space comparison alone
+does not transfer them to a Clifford product.}

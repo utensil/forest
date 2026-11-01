@@ -1,0 +1,47 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{An odd quadratic integral is a Pfaffian}
+\date{2026-11-01}
+
+\p{Let #{A^T=-A} on #{2m} generators and use the
+[reversed top coefficient](fdip-008F). Then
+##{I_\xi\left(e^{-\frac12\xi^TA\xi}\right)
+ =\operatorname{Pf}(A).}
+This holds for singular as well as invertible #{A}. If #{A} is
+invertible, then #{\operatorname{Pf}(A)\ne0}.}
+
+\proof{
+\p{Put #{\Omega=\sum_{i<j}A_{ij}\xi_i\xi_j
+=\xi^TA\xi/2}. In #{\Omega^m}, a nonzero top word uses
+each generator exactly once. The even two-letter factors commute;
+every matching appears in #{m!} orders. Reordering its word to
+#{\xi_1\cdots\xi_{2m}} gives its matching sign. Therefore
+##{\frac{\Omega^m}{m!}
+ =\operatorname{Pf}(A)\xi_1\cdots\xi_{2m}.}
+The top term of #{e^{-\Omega}} is #{(-1)^m\Omega^m/m!}.
+Reversing #{2m} generators has sign
+#{(-1)^{m(2m-1)}=(-1)^m}; the two signs cancel. This proves
+the integral identity, without an inverse.}
+
+\p{For the nonvanishing assertion, regard #{A} as a nondegenerate
+alternating form on the vector space dual to the generators.
+Choose a nonzero #{u} and then #{v} with #{A(u,v)=1}.
+The plane they span is nondegenerate, and its orthogonal complement
+for #{A} is a direct complement on which #{A} remains
+nondegenerate. Induction gives a basis of such pairs. In the dual
+basis #{\alpha_1,\beta_1,\ldots,\alpha_m,\beta_m},
+##{\Omega=\sum_{r=1}^m\alpha_r\beta_r,\qquad
+ \frac{\Omega^m}{m!}=\alpha_1\beta_1\cdots\alpha_m\beta_m\ne0.}
+An invertible change of generators multiplies a top word by a
+nonzero determinant. The displayed top coefficient is therefore
+nonzero in the original basis as well, proving
+#{\operatorname{Pf}(A)\ne0}. The zero-dimensional case is #{1}.}
+}
+
+\p{In \citet{v2, Proposition 9.9, p. 131}{etingof2024mathematical},
+the increasing top order accompanies a positive quadratic
+exponent. Replacing #{A} by #{-A} contributes #{(-1)^m} to
+the Pfaffian, and reversing the top order contributes the same
+sign. Thus the convention conversion agrees with the direct proof.}
