@@ -1,0 +1,62 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{A link current is an action derivative}
+\date{2026-11-01}
+
+\p{Use a complex scalar field on the unit-weight lattice of
+\ref{fdip-0071}, with #{G=U(1)}, #{U_e=e^{iA_e}} and #{m>0}.
+Fix an oriented edge #{e:s\to h}, and let its angle #{A_e} vary
+while all other angles are fixed. For the
+[complex matter law](fdip-0070), write
+##{S_U(\phi)=\phi^*Q_U\phi,\qquad C_U=Q_U^{-1}.}
+Define the sign of the link current by
+##{J_e(\phi,U)=\frac{\partial S_U(\phi)}{\partial A_e}
+ =2\operatorname{Im}(\overline{\phi_h}U_e\phi_s).}
+Then
+##{\begin{aligned}
+\frac{\partial W}{\partial A_e}
+ &=\operatorname{tr}_{\mathbb C}
+   \left(C_U\frac{\partial Q_U}{\partial A_e}\right)\\
+ &=\mathbb E_U[J_e]
+ =2\operatorname{Im}\bigl(U_e(C_U)_{s,h}\bigr).
+\end{aligned}}
+All expectations here condition on the fixed connection #{U}.}
+
+\proof{
+\p{The only angle-dependent edge energy is
+##{|\phi_h-e^{iA_e}\phi_s|^2
+ =|\phi_h|^2+|\phi_s|^2
+  -2\operatorname{Re}(\overline{\phi_h}e^{iA_e}\phi_s).}
+Its derivative is the displayed positive twice-imaginary-part
+expression, fixing the current sign. The matrix derivative has
+entries #{-iU_e} in position #{(h,s)} and #{i\overline{U_e}} in
+position #{(s,h)}, and zero elsewhere. Since #{C_U} is Hermitian,
+its trace pairing with that derivative is
+#{2\operatorname{Im}(U_e(C_U)_{s,h})}.}
+
+\p{The determinant derivative used in the
+[edge-variance identity](fdip-005S) applies equally to complex
+invertible matrices. Along this real parameter, #{Q_U} stays positive
+Hermitian, so its determinant is positive and
+##{\frac{\partial}{\partial A_e}\log\det_{\mathbb C}Q_U
+ =\operatorname{tr}_{\mathbb C}
+  \left(Q_U^{-1}\frac{\partial Q_U}{\partial A_e}\right).}
+Finally, the complex Gaussian covariance gives
+#{\mathbb E_U[\overline{\phi_h}\phi_s]=(C_U)_{s,h}}.
+Substitution into the explicit current proves the expectation identity.}
+}
+
+\p{TauCeti's \leanref/tauceti{Matrix.fderiv_det_apply} supplies
+#{D\det(Q)[B]=\det(Q)\operatorname{tr}(Q^{-1}B)} over a complete
+nontrivially normed field when #{\det Q} is a unit. Complex positive
+definiteness supplies invertibility here. The logarithm, angle direction,
+current sign and Gaussian expectation are the additional steps above;
+the formal declaration does not state this current law.}
+
+\p{For a differentiable real orthogonal family, the corresponding
+convention uses #{S=\frac12\langle\phi,Q\phi\rangle},
+#{J=\partial S} and #{W=\frac12\log\det_{\mathbb R}Q}.
+Both sides then carry the same factor #{1/2}. In the complex convention
+used here, neither the action nor the log determinant has that factor.}
