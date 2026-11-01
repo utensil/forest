@@ -1,0 +1,55 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Example}
+\title{A finite cycle determinant and its circle scaling}
+\date{2026-11-01}
+
+\p{For the unit-weight cycle #{C_n}, #{n\ge3}, let #{c>0}
+and define #{\omega>0} by #{2\cosh\omega=2+c}. Then
+##{\det(cI+L_{C_n})=2\cosh(n\omega)-2
+ =4\sinh^2(n\omega /2).}
+This uses the nearest-neighbor Laplacian
+#{L_{C_n}=2I-T_n-T_n^{-1}}, with every undirected edge counted
+once. The condition #{n\ge3} avoids replacing the two-vertex
+cycle by a different parallel-edge convention.}
+
+\proof{
+\p{Complex Fourier vectors diagonalize #{T_n}; write
+#{\zeta_k=e^{2\pi ik/n}} and #{z=e^\omega>1}. The eigenvalues
+of #{cI+L_{C_n}} are
+##{c+2-\zeta_k-\zeta_k^{-1}
+ =z^{-1}(z-\zeta_k)(z-\zeta_k^{-1}).}
+Since inversion permutes the #{n}-th roots of unity, their
+product is
+##{z^{-n}(z^n-1)^2=z^n+z^{-n}-2.}
+This equals the real determinant: complexification does not
+change the determinant of the original real matrix.}
+}
+
+\p{Now fix #{\mu>0}, set #{c=\mu /n^2}, and write
+#{\omega_n} for the corresponding solution. Since
+#{2\cosh x-2=x^2+O(x^4)} at zero, #{\omega_n\to0} and
+#{n\omega_n\to\sqrt\mu}. Therefore
+##{\det(\mu n^{-2}I+L_{C_n})
+ \longrightarrow4\sinh^2(\sqrt{\mu}/2).}
+For the [circle mesh](fdip-004H), with
+#{L_n=n^2L_{C_n}} and #{Q_n=L_n+\mu I}, this is exactly
+##{\frac{\det Q_n}{n^{2n}}
+ \longrightarrow4\sinh^2(\sqrt{\mu}/2),}
+or, in the induced-action notation,
+##{\frac12\log\det Q_n-n\log n
+ \longrightarrow\log\left(2\sinh(\sqrt{\mu}/2)\right).}
+The determinant here is that of the operator #{Q_n}, equivalently
+its matrix in an orthonormal basis for the supplied normalized
+pairing. In raw vertex coordinates the action-form matrix is
+#{Q_n/n}; its determinant carries the additional factor #{n^{-n}}.
+Thus a reference measure convention still matters when passing
+from this operator calculation to a Gaussian integral.}
+
+\p{This finite-product limit complements the [fixed-mode
+covariance limit](fdip-004J) and the [exact cycle covariance](fdip-0057).
+It does not define an infinite product without a
+normalization, prove convergence of full-field measures, or
+identify the limit with a continuum determinant under an unstated
+regularization convention. The positive mass is fixed throughout.}

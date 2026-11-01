@@ -1,0 +1,47 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{Concavity and covariance of squared edge differences}
+\date{2026-11-01}
+
+\p{On the open set #{\mathcal U_m} of \ref{fdip-005R},
+##{\frac{\partial^2\mathcal W}{\partial w_e\partial w_f}
+ =-\frac12(d_e^TGd_f)^2.}
+The induced action is concave, including on the nonnegative
+weight orthant. For the corresponding centered Gaussian field,
+##{\operatorname{Cov}((d_e^T\phi)^2,(d_f^T\phi)^2)
+ =2(d_e^TGd_f)^2,}
+so the Hessian is minus one quarter of this covariance matrix.}
+
+\proof{
+\p{Differentiating #{QG=I} in weight #{w_f} gives
+#{\partial_fG=-Gd_fd_f^TG}. Substitute this into
+\ref{fdip-005S}; symmetry of #{G} gives the Hessian entry.
+For a real weight direction #{a=(a_e)}, set
+#{A=\sum_e a_e d_ed_e^T}. Its second directional derivative is
+##{D^2\mathcal W[a,a]
+ =-\frac12\operatorname{tr}(GAGA)
+ =-\frac12\operatorname{tr}((G^{1/2}AG^{1/2})^2)\le0.}
+The last matrix is real symmetric, and the trace of its square
+is the sum of the squares of its entries. Restricting to a line
+segment in the convex set #{\mathcal U_m} proves concavity.
+This is also the Gram-square form of the Schur-product argument.}
+
+\p{For completeness let #{X=d_e^T\phi}, #{Y=d_f^T\phi},
+with variances #{\alpha,\beta} and covariance #{\gamma}.
+Their moment-generating function is
+##{\mathbb E[e^{sX+tY}]
+ =\exp\left(\frac{\alpha s^2+2\gamma st+\beta t^2}{2}\right).}
+Differentiation at zero is justified by Gaussian exponential
+integrability, also when this pair is degenerate. The coefficient
+of #{s^2t^2} is #{\alpha\beta /4+\gamma^2/2}, hence
+#{\mathbb E[X^2Y^2]=\alpha\beta+2\gamma^2}. Subtracting
+#{\mathbb E[X^2]\mathbb E[Y^2]} proves the covariance identity.}
+}
+
+\p{\citet{Exercise 8.3, p. 385}{friedli2017statistical}
+states Wick's formula. The last calculation is its four-factor
+case and agrees with the [Gaussian contraction rule](fdip-0046). Concavity need
+not be strict in the weights: loops or dependent matrices
+#{d_ed_e^T} can give zero second derivatives in nonzero directions.}
