@@ -1,0 +1,83 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Example}
+\title{An exact matter-weighted sum on the three-by-three torus}
+\date{2026-11-01}
+
+\p{Take the [square torus](fdip-006M) with both periods three,
+#{G=\{1,-1\}}, real scalar matter, unit edge weights, #{m^2=1}
+and bare coupling #{\beta=0}. Vertices are #{(x,y)} with coordinates
+in #{\mathbb Z/3\mathbb Z}; use horizontal edges #{a_{x,y}} and
+vertical edges #{b_{x,y}} in the orientations of that definition.
+There are nine matter coordinates and eighteen links.}
+
+\p{Fix a spanning tree by requiring
+##{a_{0,y}=a_{1,y}=1\quad(y=0,1,2),\qquad
+ b_{0,0}=b_{0,1}=1.}
+These eight edges connect every vertex without a cycle. Parameterize
+the ten remaining links by #{s=(s_1,\ldots,s_{10})\in\{1,-1\}^{10}}:
+##{\begin{aligned}
+(a_{2,0},a_{2,1},a_{2,2})&=(s_1,s_2,s_3),\\
+(b_{1,0},b_{2,0},b_{1,1},b_{2,1})&=(s_4,s_5,s_6,s_7),\\
+(b_{0,2},b_{1,2},b_{2,2})&=(s_8,s_9,s_{10}).
+\end{aligned}}
+Let #{U_e(s)} denote these assigned signs.}
+
+\p{In the vertex order
+#{(0,0),(1,0),(2,0),(0,1),\ldots,(2,2)}, let #{E_{v,w}}
+be a matrix unit and define
+##{\begin{aligned}
+H_s&=\sum_{e\in E}U_e(s)(E_{h(e),s(e)}+E_{s(e),h(e)}),\\
+d_s&=\det(5I-H_s),\\
+P_{x,y}(s)&=a_{x,y}b_{x+1,y}a_{x,y+1}b_{x,y},\\
+k(s)&=\#\{(x,y):P_{x,y}(s)=-1\}.
+\end{aligned}}
+The symbol #{s(e)} in a matrix index is the edge's source vertex;
+the tuple #{s} labels the ten free signs. All subscripts on links
+are read modulo three. Every #{d_s} is a positive integer.}
+
+\p{For each connection there is a unique gauge transformation with
+value one at #{(0,0)} that makes the tree links positive: propagate
+its vertex values along the tree. The only remaining transformations
+fixing a connection are the two constant signs, since the graph is
+connected. Hence every gauge orbit has #{2^8} elements and exactly
+one displayed representative. Gauge-invariant normalized edge sums
+therefore reduce to the following exact formulas:
+##{\begin{aligned}
+R&=\sum_{s\in\{1,-1\}^{10}}d_s^{-1/2},&
+Z_U&=2^{-10}R,\\
+\langle P_{0,0}\rangle
+ &=\frac{\sum_sP_{0,0}(s)d_s^{-1/2}}{R},&
+\mathfrak Z&=(2\pi)^{9/2}Z_U.
+\end{aligned}}
+Here #{Z_U} is the determinant-weighted edge integral, whereas
+#{\mathfrak Z} includes ordinary matter volume.}
+
+\p{The finite sums contain 1024 terms. They can be evaluated by
+forming the displayed integer matrix for each sign tuple and taking
+its determinant. As checks, the determinants have 43 distinct values,
+from 614656 to 967680. At the all-positive tuple, the eigenvalues of
+#{5I-H_s} are #{1}, four copies of #{4}, and four copies of #{7},
+so #{d_s=4^4 7^4=614656}. Grouping by the number of negative
+plaquettes gives the table; probabilities are rounded evaluations of
+the exact radical sums.}
+
+##{\begin{array}{c|r|c|c}
+k&\text{orbits}&\text{pure gauge }(\beta=0)&\text{with matter}\\\hline
+0&4&0.00390625&0.00404317\\
+2&144&0.14062500&0.14286686\\
+4&504&0.49218750&0.49338270\\
+6&336&0.32812500&0.32522204\\
+8&36&0.03515625&0.03448524
+\end{array}}
+
+\p{Explicitly, the matter probability in row #{k} is
+#{R^{-1}\sum_{s:k(s)=k}d_s^{-1/2}}; the pure probability is the
+orbit count divided by 1024. The resulting values are
+##{Z_U\approx0.00109665722870537,\qquad
+ \langle P_{0,0}\rangle\approx0.00300474565684294.}
+Translation invariance gives the same expectation at every plaquette.
+The [pure-gauge torus law](fdip-006R) at #{\beta=0} instead has
+#{\langle P_{0,0}\rangle=0}. No large-mass truncation was used in
+these finite sums.}
