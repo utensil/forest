@@ -1,0 +1,65 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{Free and antiperiodic Dirac kernels with internal multiplicity}
+\date{2026-11-01}
+
+\p{For the [covariant Dirac data](fdip-009O), take the
+trivial connection #{U_j(x)=I_F} and write #{D_0} for its operator.
+If #{e} is the number of even periods, then
+##{\dim_{\mathbb C}\ker D_0=q\,2^{d+e}.}
+There are exactly #{2^e} zero momentum blocks, each of dimension
+#{q\,2^d}. If instead every coordinate has the fixed scalar
+antiperiodic boundary condition, the corresponding operator
+#{D^-} satisfies
+##{\dim_{\mathbb C}\ker D^-
+=\begin{cases}
+q\,2^d,&\text{all }N_j\text{ are odd},\\
+0,&\text{some }N_j\text{ is even}.
+\end{cases}}
+The antiperiodic statement applies to the specified scalar
+boundary condition on #{S\otimes F}. Interpreting its seam
+transport as a #{G}-connection requires
+#{-I_F\in\rho(G)}; otherwise it is an external scalar twist,
+or can be supplied by an additional #{\mathbb Z_2} factor.}
+
+\proof{
+\p{Tensor the complete normalized
+[finite Fourier basis](fdip-000S) with #{S\otimes F}.
+For #{p_j=2\pi r_j/N_j}, #{0\le r_j<N_j}, the block is
+##{\begin{aligned}
+D_0(p)&=i\sum_j\Gamma_j\sin p_j,\\
+D_0(p)^2&=-s(p)I_{S\otimes F},\\
+s(p)&=\sum_j\sin^2p_j.
+\end{aligned}}
+The square follows from the Clifford anticommutators; the
+internal factor is the identity. If #{s(p)>0}, the inverse is
+#{-D_0(p)/s(p)}. If #{s(p)=0}, every sine vanishes and the
+entire block is zero. A coordinate has only #{p_j=0} when
+#{N_j} is odd, and also #{p_j=\pi} when it is even.
+The #{2^e} choices and complete Fourier decomposition give
+the asserted dimension. Setting #{q=1} recovers
+\ref{fdip-000T}.}
+
+\p{For the antiperiodic box, the complete basis from
+\ref{fdip-006J} instead has
+#{p_j=(2r_j+1)\pi /N_j}. Tensoring with #{S\otimes F}
+gives the same matrix symbol and square. In the interval
+#{0<p_j<2\pi}, the only possible zero is #{p_j=\pi}.
+The equation #{2r_j+1=N_j} has one allowed solution exactly
+when #{N_j} is odd. Thus there is one zero block if every
+period is odd and none otherwise. Its dimension is #{q\,2^d}.
+These scalar seam operators commute in different coordinates;
+the calculation asserts no such property for arbitrary links.}
+}
+
+\p{For two coordinates the explicit comparison is
+##{\begin{array}{c|ccc}
+(N_1,N_2)&(4,4)&(4,3)&(3,3)\\\hline
+\dim\ker D_0&16q&8q&4q\\
+\dim\ker D^-&0&0&4q
+\end{array}}
+These are dimensions over #{\mathbb C} in the chosen reducible
+module #{S}, with internal multiplicity #{q}. They count exact
+zero vectors on a finite grid, not physical species or chirality.}
