@@ -1,41 +1,70 @@
 \import{fdip-macros}
 \meta{agent-authored}{true}
 \tag{fdip}
-\taxon{Example}
-\title{Matching one plaquette coefficient}
-\date{2026-11-01}
+\taxon{Theorem}
+\title{The matched Wilson and Villain laws differ}
+\date{2026-11-02}
 
-\p{Consider a single #{U(1)} plaquette variable with the
-[normalized Wilson or Villain weight](fdip-007D). Write
-#{r(\beta)=I_1(\beta)/I_0(\beta)}. The coefficient series makes
-#{r>0}; the integral of #{(1-\cos\theta)e^{\beta\cos\theta}}
-is strictly positive, so #{r<1}. Matching the fundamental coefficient
-therefore determines a unique positive parameter
-##{\beta_V(\beta)=-\frac1{2\log r(\beta)}.}
-At this parameter the Villain coefficient at #{n} is
-#{r(\beta)^{n^2}}, whereas the Wilson coefficient is
-#{I_n(\beta)/I_0(\beta)}.}
+\p{A single #{U(1)} plaquette has the
+[normalized Wilson or Villain weight](fdip-007D). Matching their
+fundamental Fourier coefficients determines a Villain coupling for
+every Wilson coupling. The two probability laws still differ.}
 
-\p{At #{\beta=2}, the convergent series gives
-##{r\approx0.697774657964008,\qquad
- \beta_V\approx1.38943282120604.}
-The first coefficients are
-##{\begin{array}{c|c|c}
-n&\widehat c_n^W&\widehat c_n^V\\\hline
-0&1&1\\
-1&0.697774657964008&0.697774657964008\\
-2&0.302225342035992&0.237061359207224
-\end{array}}
-The negative coefficients equal the corresponding positive ones.
-These numbers are evaluations of the exact series in
-\ref{fdip-007D}; for example, at #{\beta=2} the ratio of successive
-terms of #{I_n} is #{1/((j+1)(j+|n|+1))}, providing a geometric
-bound on the remaining tail once #{j} is fixed.}
+\p{For #{\beta>0}, write #{r(\beta)=I_1(\beta)/I_0(\beta)} and
+#{\beta_V(\beta)=-\frac{1}{2\log r(\beta)}}. Then #{0<r(\beta)<1},
+the matched Villain coefficient is #{r(\beta)^{n^2}}, and
+##{\frac{\widehat c_n^W}{\widehat c_n^V}\to\infty}
+as #{|n|\to\infty}. In particular the two normalized weights are
+distinct, so they define distinct probability laws on the circle.
+The second Wilson coefficient is #{1-\frac{2r(\beta)}{\beta}}.}
+\proof{
+\p{The series for #{I_1} has positive terms, so #{r>0}. With normalized
+Haar measure,
+##{\int(1-\cos\theta)\,e^{\beta\cos\theta}\,\frac{d\theta}{2\pi}
+=I_0(\beta)-I_1(\beta).}
+The integrand is nonnegative and not identically zero, and the
+exponential is positive, so the integral is positive. Thus #{r<1},
+the logarithm is negative, and #{\beta_V} is positive. The Villain
+normalization in the coefficient note gives
+#{\widehat c_n^V=\exp(-n^2/(2\beta_V))}. Substituting the displayed
+#{\beta_V} produces #{1/(2\beta_V)=-\log r}, hence
+#{\widehat c_n^V=r^{n^2}}.}
 
-\p{For either normalized even weight,
-#{\mathbb E[\cos(n\theta)]=\widehat c_n}. Thus the two models
-agree on the fundamental cosine expectation and disagree on the
-second harmonic. They are different probability laws and different
-actions, even after adjusting the coupling and discarding additive
-action constants. This is a one-plaquette comparison, not an assertion
-about a many-plaquette continuum limit.}
+\p{The #{j=0} term of the series for #{I_n(\beta)}, with #{n\ge 0}, is
+#{(\beta/2)^n/n!}. Every term is positive, so
+#{I_n(\beta)\ge(\beta/2)^n/n!}. Therefore
+#{\widehat c_n^W=I_n(\beta)/I_0(\beta)} satisfies
+##{\frac{\widehat c_n^W}{r^{n^2}}
+\ge\frac{(\beta/2)^n}{n!\,I_0(\beta)\,r^{n^2}}.}
+For #{n\ge 1}, one has #{n!\le n^n}, so the logarithm of the right-hand
+side is at least
+#{n\log(\beta/2)-n\log n-\log I_0(\beta)-n^2\log r}.
+The last summand tends to #{+\infty} because #{\log r<0}, and it
+dominates the remaining terms. The lower bound tends to infinity, and
+so does the ratio, as #{n\to+\infty}. The series in the coefficient
+note depends on #{|n|}, so #{I_n(\beta)=I_{-n}(\beta)}. The matched
+Villain coefficient #{r^{n^2}} is likewise unchanged when #{n} is
+replaced by #{-n}. The ratio at #{-n} equals the ratio at #{n}, and
+the same limit holds as #{|n|\to\infty}.}
+
+\p{The coefficient note identifies each normalized continuous weight with
+its Fourier series. Some coefficient of large order differs, so the
+weights differ as functions and as probability laws.}
+
+\p{The same series gives the second coefficient. The identity
+#{\frac{2}{\beta}(\beta/2)^{2j+1}=(\beta/2)^{2j}} rewrites
+##{\frac{2}{\beta}I_1(\beta)
+=\sum_{j\ge 0}\frac{(\beta/2)^{2j}}{j!\,(j+1)!}.}
+Subtracting from #{I_0} cancels the #{j=0} term. For #{j\ge 1} the
+difference of the summands is
+#{\frac{(\beta/2)^{2j}\,j}{j!\,(j+1)!}
+=\frac{(\beta/2)^{2j}}{(j-1)!(j+1)!}},
+which is the #{j-1} term of #{I_2}. Hence
+#{I_0-I_2=\frac{2}{\beta}I_1}, and
+#{\widehat c_2^W=1-\frac{2r(\beta)}{\beta}}. At #{\beta=2} this
+coefficient is #{1-r(2)}, while the matched Villain coefficient is
+#{r(2)^4}.}
+}
+
+\p{The comparison is a one-plaquette identity. It does not assert a
+many-plaquette continuum limit.}
