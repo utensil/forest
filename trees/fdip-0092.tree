@@ -1,11 +1,122 @@
 \import{fdip-macros}
 \meta{agent-authored}{true}
 \tag{fdip}
-\title{Dirac–Kähler and Kähler–Atiyah}
-\date{2026-11-01}
+\taxon{Theorem}
+\title{Ordered exterior operators span the endomorphisms}
+\date{2026-11-02}
 
-\p{How are form degree, a first-order operator and a Clifford-type product
-related? This section will develop that comparison with its module and
-multiplicity choices stated.}
+\p{On every square torus the kernel of #{d+d^\dagger} has dimension
+#{4}, by the [Hodge theorem](fdip-0090). For periods at least #{3},
+the [centered Dirac operator](fdip-000T) has kernel dimension
+#{2^{2+e}}. That dimension equals #{4} when both periods are odd,
+and it is strictly larger when either period is even.}
 
-\p{\em{Planned section.} Its results and proofs are not yet developed here.}
+\p{Let #{k} be a commutative ring and let #{n} be a positive integer.
+Write #{\bigwedge} for the exterior algebra of the free module on
+basis vectors #{e_1,\ldots,e_n}, with basis the monomials #{e_I}
+indexed by subsets #{I}, written in increasing order, and with
+#{e_\varnothing=1}. Exterior multiplication and contraction along
+the basis are the linear operators
+##{\epsilon_i(e_I)=e_i\wedge e_I,}
+##{\iota_i(e_I)=0}
+when #{i\notin I}, and, when #{i} occupies position #{p} in #{I},
+##{\iota_i(e_I)=(-1)^p e_{I\setminus\{i\}}.}
+For subsets #{S} and #{T}, write #{\epsilon_S} and #{\iota_T} for
+the compositions of these operators in increasing index order, the
+largest index acting first, and write
+#{M_{S,T}=\epsilon_S\circ\iota_T}. There are #{2^n} choices for
+each subset, hence #{4^n} such operators, and they are a basis
+of the endomorphism ring of #{\bigwedge}. In particular
+#{\gamma_i=\epsilon_i+\iota_i} satisfies
+##{\gamma_i\gamma_j+\gamma_j\gamma_i=2\delta_{ij}I.}
+The [configuration Clifford algebra](fdip-000P) is the square
+quotient of a supplied quadratic form. The operators here are
+defined before any such form, and the displayed relation is the
+square relation of the standard dot product. The note does not
+claim that the resulting Clifford representation is injective.}
+
+\proof{
+\p{The dimension #{4} is the kernel dimension in the Hodge theorem.
+The centered count is the cited formula at #{d=2}. It equals #{4}
+when #{e=0}. When #{e\ge 1} the factor #{2^e} makes it strictly
+larger. The two statements have the scopes already named.}
+
+\p{The monomials are a basis, so operator identities may be checked
+on #{e_I}. If #{i\in I}, then #{e_i\wedge e_I=0}. If #{i\notin I}
+and #{q} indices of #{I} are smaller than #{i}, then
+#{e_i\wedge e_I=(-1)^q e_{I\cup\{i\}}}. Thus #{\epsilon_i^2=0}.
+For #{i\ne j} the wedge of the two basis vectors changes sign when
+their order is exchanged, so
+#{\epsilon_i\epsilon_j+\epsilon_j\epsilon_i=0}. A monomial contains
+#{i} at most once, so #{\iota_i^2=0}.}
+
+\p{For the contractions, take #{i\ne j} and suppose both lie in
+#{I}, with positions #{p} and #{r} and with #{i<j}, so #{p<r}.
+Removing #{j} first contributes #{(-1)^r}, and #{i} is still at
+position #{p}, so the second removal contributes #{(-1)^p}.
+Removing #{i} first contributes #{(-1)^p}, after which #{j} stands
+one place earlier, and the second removal contributes #{(-1)^{r-1}}.
+The two signs are opposite, and the remaining monomial is the same.
+If either index is missing, both double contractions vanish. Hence
+#{\iota_i\iota_j+\iota_j\iota_i=0}.}
+
+\p{Now compare #{\iota_j\epsilon_i} with #{\epsilon_i\iota_j}. If
+#{i\ne j} and #{j\notin I}, the contraction of the input is zero.
+Exterior multiplication either vanishes or produces a monomial that
+still omits #{j}, so the later contraction vanishes as well. If
+#{j\in I} and #{i\in I}, exterior multiplication of the input
+vanishes, and the contraction still leaves #{i} in place, so the
+later exterior multiplication vanishes. The remaining pattern is
+#{j\in I} and #{i\notin I}. Let #{p} be the position of #{j} and
+let #{q} be the number of indices of #{I} smaller than #{i}.
+Removing #{j} contributes #{(-1)^p}. If #{i<j}, wedging #{e_i}
+back contributes the same sign #{(-1)^q} that #{e_i\wedge e_I}
+carries, while the later removal of #{j} from #{I\cup\{i\}}
+contributes #{(-1)^{p+1}}, because #{i} stands before #{j}. If
+#{i>j}, wedging #{e_i} after the removal contributes
+#{(-1)^{q-1}}, because #{j} was one of the indices counted by
+#{q}, while the removal of #{j} from #{I\cup\{i\}} still
+contributes #{(-1)^p}. In both subcases the two compositions land
+on the same monomial with opposite signs. If #{i=j} and
+#{i\notin I}, the contraction of the input vanishes and
+#{\iota_i\epsilon_i} returns #{e_I}, and the product of the two
+signs #{(-1)^q} is #{1}. If #{i\in I}, exterior multiplication of
+the input vanishes and #{\epsilon_i\iota_i} returns #{e_I}, and the
+product of the two signs #{(-1)^p} is #{1}. Therefore
+#{\epsilon_i\iota_j+\iota_j\epsilon_i=\delta_{ij}I}.}
+
+\p{The square of #{\gamma_i} is
+#{\epsilon_i\iota_i+\iota_i\epsilon_i=I}. For #{i\ne j} each of
+the four pairs in the expansion of
+#{\gamma_i\gamma_j+\gamma_j\gamma_i} anticommutes, so the sum is
+zero. This is the displayed Clifford relation.}
+
+\p{The monomials are a free basis, so the endomorphism ring is
+free on the operators that send one monomial to one monomial and
+kill the rest. Order the pairs of subsets so that the cardinality
+of #{T} increases, and index both the operators #{M_{S,T}} and
+these monomial matrix units by that order. The coefficient of
+#{e_S} in #{M_{S',T'}e_T} can be nonzero only when
+#{T'\subseteq T}. A column with a strictly larger second set
+therefore does not meet this row. When the cardinalities are
+equal, necessarily #{T'=T}. The contraction #{\iota_T} removes
+every factor of #{e_T}. Each removal meets a present factor, so
+the image of the contraction is #{(\pm 1)\,1}. The following
+exterior product inserts the factors in #{S'}, each into a
+monomial that does not yet contain it, and the image is
+#{(\pm 1)\,e_{S'}}. The coefficient of #{e_S} is therefore zero
+unless #{S'=S}, in which case it is #{\pm 1}. Within one
+cardinality the block is diagonal. A strictly smaller #{T'}
+meets the row in an earlier column. The matrix is consequently
+lower triangular, with units #{\pm 1} on the diagonal. Given a
+target endomorphism, its coefficients against the #{M_{S,T}}
+are the unique solution of that system: start from the empty
+second set, invert the diagonal unit, and at each later row use
+the coefficients already found. The operators are therefore a
+basis.}
+}
+
+\p{For a single basis vector the four operators are the identity,
+exterior multiplication, contraction, and their composite. On a
+space of dimension #{2} any four independent endomorphisms are a
+basis, and the triangular count supplies the independence.}
