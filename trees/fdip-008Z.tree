@@ -1,11 +1,140 @@
 \import{fdip-macros}
 \meta{agent-authored}{true}
 \tag{fdip}
-\title{Cochains, Stokes and cohomology}
-\date{2026-11-01}
+\taxon{Theorem}
+\title{Square tori have Betti numbers (1, 2, 1)}
+\date{2026-11-02}
 
-\p{How can discrete data record integration over regions and their boundaries?
-Cochains, their differences and cohomology provide the language to be
-developed here.}
+\p{Let #{N_1} and #{N_2} be positive integers, and set
+#{V=N_1N_2}. The vertices are the #{V} pairs #{(x,y)} of integers
+modulo #{N_1} and #{N_2}, with addition of coordinates taken modulo
+those side lengths. For each vertex there is a horizontal edge
+#{e^h_{x,y}} from #{(x,y)} to #{(x+1,y)}, a vertical edge
+#{e^v_{x,y}} from #{(x,y)} to #{(x,y+1)}, and a face #{\sigma_{x,y}}.
+When a side length equals #{1}, each edge in that direction is a
+loop. The boundary of the face is
+##{\partial\sigma_{x,y}
+=e^h_{x,y}+e^v_{x+1,y}-e^h_{x,y+1}-e^v_{x,y}.}}
 
-\p{\em{Planned section.} Its results and proofs are not yet developed here.}
+\p{Real cochains are real functions on these cells. Write #{C^0},
+#{C^1} and #{C^2} for the functions on vertices, edges and faces,
+of dimensions #{V}, #{2V} and #{V}. A chain is a real linear
+combination of cells of one dimension, and the evaluation pairing
+#{\langle\beta,c\rangle} sums the pointwise products of a cochain
+with the coefficients of a chain. The coboundary #{d} is the
+transpose of the boundary, in the sense that
+#{\langle d\beta,c\rangle=\langle\beta,\partial c\rangle}
+whenever the degrees match. On vertex functions this is the
+incidence map of the [ring-valued incidence](fdip-0010):
+#{(df)(e)=f(h(e))-f(s(e))}. In coordinates,
+##{\begin{aligned}
+(d_0f)^h(x,y)&=f(x+1,y)-f(x,y),\\
+(d_0f)^v(x,y)&=f(x,y+1)-f(x,y),\\
+(d_1\alpha)(\sigma_{x,y})
+&=\alpha^h(x,y)+\alpha^v(x+1,y)
+-\alpha^h(x,y+1)-\alpha^v(x,y).
+\end{aligned}}}
+
+\p{The composite #{d_1\circ d_0} is zero. Write #{b_0} for the
+dimension of #{\ker d_0}, write #{b_1} for the dimension of the
+quotient of #{\ker d_1} by the image of #{d_0}, and write #{b_2}
+for the dimension of the quotient of #{C^2} by the image of
+#{d_1}. These Betti numbers are #{1}, #{2} and #{1}.}
+
+\proof{
+\p{Substitute the coordinate formulas. At the face #{\sigma_{x,y}},
+##{\begin{aligned}
+(d_1d_0f)(\sigma_{x,y})
+&=\bigl(f(x+1,y)-f(x,y)\bigr)\\
+&\quad+\bigl(f(x+1,y+1)-f(x+1,y)\bigr)\\
+&\quad-\bigl(f(x+1,y+1)-f(x,y+1)\bigr)\\
+&\quad-\bigl(f(x,y+1)-f(x,y)\bigr).
+\end{aligned}}
+The eight terms cancel in pairs, so #{d_1d_0f=0}. The pairing
+separates chains, and therefore the boundary of every face
+boundary is zero as well.}
+
+\p{If #{d_0f=0}, then #{f(x+1,y)=f(x,y)} and
+#{f(x,y+1)=f(x,y)} for every vertex. Following the horizontal
+steps from #{(0,0)} and then the vertical steps gives
+#{f(x,y)=f(0,0)}. The kernel consists of the constant functions,
+so #{\dim\ker d_0=1} and the rank of #{d_0} is #{V-1}.}
+
+\p{On a single cycle of length #{N\ge 1}, a real function #{g} on
+the residues modulo #{N} is the coboundary of a vertex function if
+and only if the sum of its values is zero. The forward difference
+of any vertex function sums to zero. Conversely, if that sum
+vanishes, set #{f(0)=0} and let #{f(k)} be the sum of
+#{g(0),\ldots,g(k-1)} for #{1\le k\le N-1}, with the empty sum
+equal to zero when #{N=1}. For #{0\le k\le N-2} the forward
+difference equals #{g(k)}. The remaining difference is
+#{f(0)-f(N-1)}. It equals the negative of the sum of
+#{g(0),\ldots,g(N-2)}, which the vanishing-sum hypothesis rewrites
+as #{g(N-1)}. When #{N=1} both that difference and #{g(0)} are
+zero. Thus #{g} is a coboundary. The functions with vanishing
+difference are the constants, a one-dimensional space, so the
+coboundary on the cycle has rank #{N-1}.}
+
+\p{Let #{\alpha} satisfy #{d_1\alpha=0}. Write
+#{P^h(y)=\sum_x\alpha^h(x,y)} and
+#{P^v(x)=\sum_y\alpha^v(x,y)}. Sum the face equation over #{x}.
+The vertical terms cancel because #{x+1} runs through every
+residue, and the result is #{P^h(y)=P^h(y+1)}. Sum the face
+equation over #{y}. The horizontal terms cancel, and the result
+is #{P^v(x)=P^v(x+1)}. Thus both quantities are constants; call
+them #{P^h} and #{P^v}. If #{\alpha=d_0f}, each is a sum of a
+telescoping difference, so #{(P^h,P^v)=(0,0)}.}
+
+\p{Conversely, suppose #{d_1\alpha=0} and #{(P^h,P^v)=(0,0)}. For
+each fixed #{y}, the horizontal row sums to zero, so the cycle
+criterion supplies a function #{f(\cdot,y)} with #{f(0,y)=0} and
+horizontal difference #{\alpha^h}. Define
+#{\delta(x,y)=\alpha^v(x,y)-\bigl(f(x,y+1)-f(x,y)\bigr)}.
+Its horizontal difference is
+##{\alpha^v(x+1,y)-\alpha^v(x,y)
+-\bigl(\alpha^h(x,y+1)-\alpha^h(x,y)\bigr).}
+The face equation rearranges to the vanishing of that expression.
+Hence #{\delta(x,y)} depends only on #{y}.
+The normalization #{f(0,y)=0} gives the common value
+#{k(y)=\alpha^v(0,y)}. The sum of #{k} is #{P^v=0}, so the cycle
+criterion supplies #{c} with #{c(y+1)-c(y)=k(y)}. The function
+#{f(x,y)+c(y)} then has horizontal difference #{\alpha^h} and
+vertical difference #{\alpha^v}. Every cocycle with vanishing
+periods is therefore a coboundary.}
+
+\p{The identity #{d_1d_0=0} puts the image of #{d_0} inside
+#{\ker d_1}. Coboundaries have vanishing periods, and every
+cocycle with vanishing periods is a coboundary, so that image is
+exactly the set of cocycles whose periods vanish. The edge field
+with every horizontal value #{1} and every vertical value #{0}
+has coboundary zero on each face, because the face sees #{+1} on
+its lower edge and #{-1} on its upper edge. Its periods are
+#{(N_1,0)}. The field with the two roles exchanged is likewise a
+cocycle, with periods #{(0,N_2)}. For real #{a} and #{b}, the
+combination with horizontal value #{a/N_1} and vertical value
+#{b/N_2} is a cocycle of periods #{(a,b)}. The period map on
+#{\ker d_1} is therefore a surjective linear map to
+#{\mathbb R^2}, with kernel equal to the image of #{d_0}. Rank
+nullity gives
+##{\dim\ker d_1=(V-1)+2=V+1,}
+and the quotient dimension is
+##{b_1=(V+1)-(V-1)=2.}
+The rank of #{d_1} is #{2V-(V+1)=V-1}.}
+
+\p{Summing a coboundary over every face cancels: each horizontal
+value appears once with each sign as #{y} runs through a full set
+of residues, and each vertical value does the same as #{x} does.
+The sum of the face values is therefore a linear functional
+vanishing on the image of #{d_1}. The constant function #{1} has
+sum #{V\ne 0}, so the functional is nonzero, its kernel has
+dimension #{V-1}, and that constant is not a coboundary. The
+image already has dimension #{V-1}, so the image equals the
+kernel of the sum. Therefore #{b_2=1}.}
+}
+
+\p{The constant vertex functions span the degree-zero cohomology.
+The two edge fields just named have linearly independent periods,
+and the degree-one quotient is two-dimensional, so their classes
+form a basis: one winds around the first coordinate and the other
+winds around the second. The constant face functions span the
+degree-two cohomology.}
