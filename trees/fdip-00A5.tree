@@ -1,0 +1,78 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{The discriminant character of an integer}
+\date{2026-11-02}
+
+\p{The [quadratic center character](fdip-0049) attaches to a square
+class its primitive Dirichlet character. A partition function produces
+Legendre symbols of one integer. This note identifies the two on odd
+primes.}
+
+\p{Let #{d} be a nonzero integer. If #{d} is a square, the center note
+uses the trivial character of conductor one. If #{d} is not a square,
+let #{d_0} be its squarefree integer representative, with the sign of
+#{d}, and set #{D=d_0} when #{d_0\equiv 1\pmod 4} and #{D=4d_0}
+otherwise. Write #{\chi_D} for the primitive character of that
+discriminant in the center note. For an odd prime #{p} that does not
+divide #{d},
+#{\bigl(\frac{d}{p}\bigr)=\chi_D(p)}.}
+\proof{
+\p{For an odd prime #{p} and an integer #{a} not divisible by #{p},
+the symbol #{\bigl(\frac{a}{p}\bigr)} is #{1} when #{a} is a nonzero
+square modulo #{p}, and #{-1} otherwise. The group
+#{\mathbb F_p^\times} has #{(p-1)/2} squares. The equation
+#{x^2=1} factors as #{(x-1)(x+1)=0}, so the kernel of the squaring map
+is the two units #{1} and #{-1}. In that field, every square
+#{a=b^2} satisfies #{a^{(p-1)/2}=b^{p-1}=1}. The polynomial
+#{X^{(p-1)/2}-1} has at most #{(p-1)/2} roots, so the squares are all
+of its roots. A nonsquare is not among them. Fermat's identity
+#{a^{p-1}-1=0} factors as
+#{(a^{(p-1)/2}-1)(a^{(p-1)/2}+1)=0}, so a nonsquare satisfies
+#{a^{(p-1)/2}=-1} in the field. Thus there is a unique residue
+#{\varepsilon} among #{1} and #{-1} such that
+#{a^{(p-1)/2}\equiv\varepsilon\pmod p}, and #{\varepsilon} is the
+symbol just defined. The integer power itself need not lie in that
+pair.}
+
+\p{The symbol is multiplicative. If #{p} divides neither #{a} nor
+#{b}, the field powers satisfy
+##{(ab)^{(p-1)/2}\equiv a^{(p-1)/2}b^{(p-1)/2}\pmod p.}
+Each of those three powers is congruent to its symbol, so
+##{\bigl(\frac{ab}{p}\bigr)\equiv\bigl(\frac{a}{p}\bigr)\bigl(\frac{b}{p}\bigr)\pmod p.}
+Both sides lie among #{1} and #{-1}. Those two residues are distinct
+modulo an odd prime, so the two sides are equal as integers. A square
+#{c^2} not divisible by #{p} therefore has symbol #{1}.}
+
+\p{Every nonzero integer has a unique squarefree kernel. Factor
+#{d=\varepsilon\prod_pp^{a_p}}, with #{\varepsilon} the sign of #{d}
+and each #{a_p\ge 0}. Let #{d_0} be #{\varepsilon} times the product
+of the primes whose exponent is odd, and let #{f^2} absorb every even
+part of an exponent. Then #{d=f^2d_0}. No square #{p^2} divides
+#{d_0}. The sign is unique, and so is the set of primes of odd
+exponent, so #{d_0} is unique.}
+
+\p{The odd prime #{p} does not divide #{d}, so it divides neither
+#{f} nor #{d_0}. Multiplicativity gives
+#{\bigl(\frac{d}{p}\bigr)=\bigl(\frac{d_0}{p}\bigr)}. The center
+note writes #{\chi_D(n)=\bigl(\frac{D}{n}\bigr)} under its Kronecker
+convention, and that value is #{0} when #{p} divides #{D}. On an odd
+prime that does not divide #{D}, this note reads
+#{\bigl(\frac{D}{p}\bigr)} as the Legendre symbol just defined. The
+prime #{2} is not given that reading.
+If #{d} is a square, that note uses the trivial character, and the
+symbol just proved is #{1}. If #{d} is not a square and
+#{d_0\equiv 1\pmod 4}, then #{D=d_0}. The prime #{p} does not divide
+#{D}, so #{\chi_D(p)=\bigl(\frac{d_0}{p}\bigr)}. If instead
+#{D=4d_0}, the same prime is odd and does not divide #{d_0}, so it
+does not divide #{D}. Then
+#{\bigl(\frac{D}{p}\bigr)=\bigl(\frac{4}{p}\bigr)\bigl(\frac{d_0}{p}\bigr)},
+and #{4} is a square, so the first factor is #{1}. In every case
+#{\bigl(\frac{d}{p}\bigr)=\chi_D(p)}.}
+}
+
+\p{The center note records that #{\chi_D} is primitive of conductor
+#{|D|}. This section uses that conductor and does not re-prove it.
+The identification is the equality of symbols on odd primes. It is not
+the law that exchanges the two arguments of a Legendre symbol.}
