@@ -1,0 +1,49 @@
+\input{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\title{The compatibility test as a definition}
+\date{2026-11-02}
+
+\texfig{\begin{tikzpicture}[x=1cm,y=1cm,font=\sffamily,
+  box/.style={draw=black,line width=0.5pt,rounded corners=2pt,align=center,execute at begin node={\hyphenpenalty=10000\exhyphenpenalty=10000},
+    font=\sffamily\small,minimum height=7mm,inner sep=2.5pt,text width=#1},
+  ext/.style={draw=black,densely dotted,line width=0.4pt,rounded corners=2pt,align=center,execute at begin node={\hyphenpenalty=10000\exhyphenpenalty=10000},
+    font=\sffamily\small,text=black!60,minimum height=7mm,inner sep=2.5pt,text width=#1},
+  arr/.style={-{Stealth[length=2.2mm]},line width=0.6pt},
+  lab/.style={font=\sffamily\footnotesize\itshape,inner sep=1.5pt,fill=white,align=center}]
+\node[ext=4.6cm] (XII) at (3.4,7.2) {Part XII: Lattice fermions};
+\node[ext=4.0cm] (XIII) at (8.6,7.2) {Part XIII: Structure};
+\node[ext=4.2cm] (VI) at (14.2,7.2) {Part VI: Arithmetic families};
+\node[box=4.6cm] (w1) at (3.4,5.6) {The compatibility test as a definition};
+\node[box=4.6cm] (w2) at (3.4,4.1) {The larger proposals as open tests};
+\node[box=5.0cm] (x1) at (8.6,2.4) {Discrete induction and its open interfaces};
+\draw[arr] (XII) -- (w1);
+\draw[arr] (w1) -- (w2);
+\draw[arr] (w2) |- (x1.west);
+\draw[arr] (XIII) -- node[lab,midway,right=1mm] {which parameters of physics follow\\ from the choice of a finite structure,\\ and which remain free?} (x1);
+\draw[arr] (VI) |- (x1.east);
+\end{tikzpicture}}
+
+\p{Which declared group, representation, selector and comparison
+fit together, and which proposed correspondences are still missing?
+A finite symmetry can act on a spinor, on a rotation space, or on
+values at the vertices. Those actions are different data.}
+
+\p{The test uses the [representation datum](fdip-007H),
+the [binary tetrahedral quotient](fdip-007G) and its
+[two fibers](fdip-007K), the central idempotent of
+[the real group algebra of #{2T}](fgap-0015), and the separation
+of spinor and internal factors in the
+[covariant Dirac operator](fdip-009N). The identities proved
+here do not use the structure questions.}
+
+\p{A compatibility datum names the group, the coefficient field,
+the representation, the action on the finite graph, the selector
+and one reference comparison. Five criteria then say what has
+been proved, what is only conditional, and what is open.
+The worked case is the binary tetrahedral spinor. Correspondences
+for the larger classical groups are not constructed.}
+
+\transclude{fdip-009Z}
+\transclude{fdip-00A0}
+\transclude{fdip-00A1}
