@@ -83,22 +83,90 @@ multiplies, so #{\det Q=\det Q_{UU}\det S}.}
 block factorization used for the [quadratic center characters](fdip-0044).
 It does not prove that rational character identity.}
 
-\p{On the massive four-cycle, #{\det Q=45} and #{\det Q_{UU}=8}. The odd
-primes dividing #{45} are #{3} and #{5}; together with #{2}, they are the
-primes excluded by the hypotheses. For the five primes
-#{7,11,13,17,19} the sum was evaluated over every vector and is
-##{\begin{aligned}
-Z_7&=-49,&Z_{11}&=121,&Z_{13}&=-169,\\
-Z_{17}&=-289,&Z_{19}&=361,
-\end{aligned}}
-equal to #{\bigl(\frac{45}{p}\bigr)p^2}. Reducing the rational Schur
-complement of the Wick state modulo #{7} gives
-##{S\equiv\begin{pmatrix}0&5\\5&0\end{pmatrix}\pmod7,}
-and #{Z_7(Q_{UU})=-7}. The elimination identity holds for every one of the
-#{7^2} retained vectors over #{\mathbb F_7}.}
+\p{For a symmetric #{n\times n} matrix over #{\mathbb F_p}, define the
+signed discriminant
+#{d_{\pm}(Q)=(-1)^{\frac{n(n-1)}{2}}\det Q} in #{\mathbb F_p}. If
+#{\det Q\neq 0}, then
+##{Z_p(Q)=\Bigl(\frac{d_{\pm}(Q)}{p}\Bigr)g^{\varepsilon}p^{m},}
+where #{n=2m+\varepsilon} and #{\varepsilon} is #{0} or #{1}. When #{4}
+divides #{n}, one has #{\varepsilon=0} and #{d_{\pm}(Q)=\det Q}, so this
+is the power stated above.}
+\proof{
+\p{The nondegenerate evaluation gives
+#{Z_p(Q)=\bigl(\frac{\det Q}{p}\bigr)g^n}, and
+#{g^2=\bigl(\frac{-1}{p}\bigr)p}. Hence
+#{g^n=g^{\varepsilon}(g^2)^m
+=g^{\varepsilon}\bigl(\frac{-1}{p}\bigr)^m p^m}, and
+##{Z_p(Q)=\Bigl(\frac{(-1)^m\det Q}{p}\Bigr)g^{\varepsilon}p^{m}.}
+The exponent #{m} has the same parity as #{\frac{n(n-1)}{2}}. If
+#{\varepsilon=0}, then #{n=2m} and
+#{\frac{n(n-1)}{2}=m(2m-1)}; the factor #{2m-1} is odd. If
+#{\varepsilon=1}, then #{n=2m+1} and
+#{\frac{n(n-1)}{2}=m(2m+1)}; the factor #{2m+1} is odd. In both cases
+#{(-1)^m=(-1)^{\frac{n(n-1)}{2}}}, so the symbol is that of #{d_{\pm}(Q)}.
+When #{4} divides #{n}, the integer #{m} is even, and the sign is #{+1}.}
+}
+
+\p{Now suppose #{\det Q=0}, and let #{r} be the rank of #{Q}. The same
+diagonalization, which does not require a nonzero determinant, produces an
+invertible change of variables to
+#{\operatorname{diag}(a_1,\ldots,a_r,0,\ldots,0)} with every #{a_i\neq 0}.
+In the new coordinates the last #{n-r} basis vectors span the kernel. Then
+##{Z_p(Q)=p^{n-r}Z_p(Q'),}
+where #{Q'=\operatorname{diag}(a_1,\ldots,a_r)}. If #{r=0}, the original
+form is zero and #{Z_p(Q)=p^n}. If #{r\ge 1}, the signed evaluation on
+#{Q'} gives
+##{Z_p(Q)=p^{n-r}\Bigl(\frac{d_{\pm}(Q')}{p}\Bigr)g^{\varepsilon'}p^{m'},}
+with #{r=2m'+\varepsilon'} and #{\varepsilon'} equal to #{0} or #{1}.}
+\proof{
+\p{The diagonalization already proved for a form that is not identically
+zero splits off a line whenever some quadratic value is nonzero, and it
+stops when every remaining value is zero. On that diagonal matrix the
+equation #{Qv=0} reads #{a_iv_i=0} for each #{i\le r}, so those
+coefficients vanish and the zero block is the kernel. An invertible change
+of variables preserves the partition
+function, by the same substitution used in the nondegenerate case. On the
+diagonal matrix the sum factors as a product of one-variable sums. Each
+nonzero entry #{a_i} contributes #{g(a_i)}, and each zero entry contributes
+#{\sum_te(0)=p}. There are #{n-r} zero entries, so the power of #{p} is
+#{p^{n-r}}, and the product of the #{g(a_i)} is #{Z_p(Q')}. The
+nondegenerate evaluation and the signed formula apply to #{Q'}.}
+
+\p{The symbol #{\bigl(\frac{d_{\pm}(Q')}{p}\bigr)} does not depend on the
+choice of splitting. Another invertible substitution multiplies
+#{\prod_ia_i} by a square, so it preserves the Legendre symbol of that
+product. The sign #{\,(-1)^{\frac{r(r-1)}{2}}} depends only on the rank, and the
+rank is unchanged by an invertible substitution. If #{r=0}, there is no
+diagonal product: every one of the #{p^n} vectors contributes #{e(0)=1}.}
+}
+
+\p{Suppose a coordinate split has #{Q_{UU}} invertible, with Schur
+complement #{S}, and write #{n_U} and #{n_R} for the two block sizes. Then
+#{Z_p(Q)=Z_p(Q_{UU})Z_p(S)}, and
+#{d_{\pm}(Q)=(-1)^{n_Un_R}d_{\pm}(Q_{UU})d_{\pm}(S)}.
+The sign is #{+1} when #{n_U} or #{n_R} is even.}
+\proof{
+\p{Summing the elimination identity over the retained vectors multiplies
+the two partition functions. For the signed discriminants, the exponent
+identity
+##{\frac{n(n-1)}{2}
+=\frac{n_U(n_U-1)}{2}+\frac{n_R(n_R-1)}{2}+n_Un_R}
+holds for #{n=n_U+n_R}, and the block factorization gives
+#{\det Q=\det Q_{UU}\det S}. Multiplying the signs produces the factor
+#{(-1)^{n_Un_R}}.}
+}
+
+\p{On the massive four-cycle, #{n=4} and #{\det Q=45}, so
+#{d_{\pm}(Q)=\det Q}, because the exponent #{\frac{4\cdot 3}{2}} equals
+#{6}. For an odd prime that does not divide #{45},
+#{Z_p(Q)=\bigl(\frac{45}{p}\bigr)p^2}. Since #{45=9\cdot 5} and #{9} is a
+square, #{\bigl(\frac{9}{p}\bigr)=1}, and the value equals
+#{\bigl(\frac{5}{p}\bigr)p^2}.}
 
 \p{Characteristic #{2} is outside the argument, because both the
-polarization step and the change of variables divide by #{2}. A prime that
-divides #{\det Q} makes the form degenerate, and the product formula is not
-claimed there. The identity gives no Euler product and no comparison with
-the real normalizer.}
+polarization step and the change of variables divide by #{2}. The kernel
+dimension #{n-r} records the rank drop of #{Q} itself.
+[Different domains](fdip-000W) separate the primes at which a chosen
+elimination block stays invertible from the primes at which a trace ratio
+stays regular; those loci are not this kernel. This section gives no
+Euler product and no comparison with the real normalizer.}
