@@ -3,7 +3,17 @@
 \tag{fdip}
 \taxon{Example}
 \title{An exact matter-weighted sum on the three-by-three torus}
-\date{2026-11-01}
+\date{2026-11-02}
+
+\p{On a connected graph, take #{G=\{1,-1\}} acting by multiplication on
+the real line. Two gauges induce the same action precisely when their
+ratio is constant, so each orbit contains #{2^{|V|-1}} connections. A
+spanning tree meets every vertex and contains no cycle. Requiring its
+edges to be positive selects one connection from each orbit. With
+#{b_1=|E|-|V|+1} and with zero bare coupling, gauge invariance of the
+determinant converts the [marginal](fdip-0077) into
+##{Z_U=2^{-b_1}\sum_s(\det Q_s)^{-1/2},}
+where #{s} runs through the sign patterns on the complementary edges.}
 
 \p{Take the [square torus](fdip-006M) with both periods three,
 #{G=\{1,-1\}}, real scalar matter, unit edge weights, #{m^2=1}
@@ -56,12 +66,13 @@ Here #{Z_U} is the determinant-weighted edge integral, whereas
 
 \p{The finite sums contain 1024 terms. They can be evaluated by
 forming the displayed integer matrix for each sign tuple and taking
-its determinant. As checks, the determinants have 43 distinct values,
-from 614656 to 967680. At the all-positive tuple, the eigenvalues of
+its determinant. At the all-positive tuple, the eigenvalues of
 #{5I-H_s} are #{1}, four copies of #{4}, and four copies of #{7},
-so #{d_s=4^4 7^4=614656}. Grouping by the number of negative
-plaquettes gives the table; probabilities are rounded evaluations of
-the exact radical sums.}
+so #{d_s=4^4\cdot 7^4=614656}. This is the lower bound of the
+[matter-determinant comparison](fdip-00A6). Grouping by the number of
+negative plaquettes gives the table. The matter probability in row
+#{k} is #{R^{-1}\sum_{s:k(s)=k}d_s^{-1/2}}, and the probability without
+matter is the orbit count divided by #{1024}.}
 
 ##{\begin{array}{c|r|c|c}
 k&\text{orbits}&\text{pure gauge }(\beta=0)&\text{with matter}\\\hline
@@ -72,12 +83,7 @@ k&\text{orbits}&\text{pure gauge }(\beta=0)&\text{with matter}\\\hline
 8&36&0.03515625&0.03448524
 \end{array}}
 
-\p{Explicitly, the matter probability in row #{k} is
-#{R^{-1}\sum_{s:k(s)=k}d_s^{-1/2}}; the pure probability is the
-orbit count divided by 1024. The resulting values are
-##{Z_U\approx0.00109665722870537,\qquad
- \langle P_{0,0}\rangle\approx0.00300474565684294.}
-Translation invariance gives the same expectation at every plaquette.
+\p{Translation invariance gives the same expectation at every plaquette.
 The [pure-gauge torus law](fdip-006R) at #{\beta=0} instead has
 #{\langle P_{0,0}\rangle=0}. No large-mass truncation was used in
 these finite sums.}
