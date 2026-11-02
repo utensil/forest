@@ -1,10 +1,217 @@
 \import{fdip-macros}
 \meta{agent-authored}{true}
 \tag{fdip}
-\title{Theta series and the Weil index}
-\date{2026-11-01}
+\taxon{Theorem}
+\title{Class Epstein zetas sum to a Dirichlet value}
+\date{2026-11-02}
 
-\p{How might theta series and the Weil index relate the local arithmetic to the
-global picture? This is a speculative direction.}
+\p{The preceding section identifies a local factor with the
+[discriminant character](fdip-00A5). The same character has a global
+sum over classes of binary forms. Let #{D<0} be a fundamental
+discriminant: either #{D\equiv 1\pmod 4} and #{D} is squarefree, or
+#{D=4m} with #{m} squarefree and #{m\equiv 2\pmod 4} or
+#{m\equiv 3\pmod 4}. A positive definite binary form of discriminant
+#{D} is #{Q(x,y)=ax^2+bxy+cy^2} with #{a>0} and #{b^2-4ac=D}. Two such
+forms are equivalent when one is the other after an
+#{\mathrm{SL}_2(\mathbb Z)} change of variables. Equivalent forms
+represent the same integers equally often, because the change of
+variables is a bijection of #{\mathbb Z^2}.}
 
-\p{\em{Planned section (speculative).} Its results and proofs are not yet developed here.}
+\p{For #{\operatorname{Re}s>1} the Epstein zeta of #{Q} is
+##{E_Q(s)=\sum_{(x,y)\neq(0,0)}Q(x,y)^{-s}.}
+Let #{\chi_D} be the [quadratic center character](fdip-0049) of #{D}.
+It is completely multiplicative, it vanishes when #{\gcd(n,|D|)>1},
+and on an odd prime it is the Legendre symbol of
+[fdip-00A5](fdip-00A5). The prime #{2} is not given that reading.
+When #{D} is even, #{\chi_D(2)=0} because
+#{\gcd(2,|D|)>1}, which is the vanishing clause of the center note.
+When #{D} is an odd fundamental discriminant, the value already stated
+in [fdip-0044](fdip-0044) is
+#{\chi_D(2)=(-1)^{(D^2-1)/8}}, from
+\citet{Corollary 3.1, p. 4}{conradQuadraticCharacters}.
+That sign is #{1} when #{D\equiv 1\pmod 8} and #{-1} when
+#{D\equiv 5\pmod 8}. This is the value of the symbol in the Euler
+factor #{(1-\chi_D(2)\,2^{-s})^{-1}} of the
+[center note](fdip-0049). Let #{w_D} be the number of
+integer solutions of #{t^2-Du^2=4}. Write #{\zeta(s)=\sum_{n\ge 1}n^{-s}}
+and write #{L(s,\chi_D)} for the Euler product in the center note.
+Let #{\mathcal F} contain one form from each equivalence class.}
+
+\p{Then
+##{\sum_{Q\in\mathcal F}E_Q(s)=w_D\,\zeta(s)\,L(s,\chi_D).}
+The weight is #{w_D=6} when #{D=-3}, #{w_D=4} when #{D=-4}, and
+#{w_D=2} otherwise. For #{D=-4} the only class is #{x^2+y^2}, so that
+one zeta equals #{4\zeta(s)L(s,\chi_{-4})}.}
+
+\proof{
+\p{Since #{D<0}, the equation #{t^2+|D|u^2=4} forces #{|u|\le 1}.
+The solutions with #{u=0} are #{(t,u)=(\pm 2,0)}. When #{|u|=1},
+#{t^2=4-|D|}, so #{t=\pm 1} when #{|D|=3} and #{t=0} when
+#{|D|=4}. Thus #{|D|=3} gives six solutions, #{|D|=4} gives four,
+and every larger value gives two. These are the three values of
+#{w_D}.}
+
+\p{The matrix of #{Q} has determinant #{-D/4} up to the usual factor
+#{4}. Explicitly,
+##{\det\begin{pmatrix}2a&b\\b&2c\end{pmatrix}=-D.}
+An element
+#{\gamma\in\mathrm{SL}_2(\mathbb Z)} replaces that matrix by a congruent
+matrix, so it preserves #{D}. Let #{\tau=(-b+\sqrt{D})/(2a)} be the
+root in the upper half plane, taking the square root of positive
+imaginary part. The factorization
+#{Q(x,y)=a(x-\tau y)(x-\overline{\tau} y)}
+shows that an automorph permutes the two roots. Determinant #{1}
+preserves the upper half plane, so the automorph fixes #{\tau}. If
+#{\gamma=\begin{pmatrix}p&q\\r&s\end{pmatrix}}, the fixed-point equation
+is #{r\tau^2+(s-p)\tau-q=0}. The minimal equation
+#{a\tau^2+b\tau+c=0} is irreducible over #{\mathbb Q}, so there is a
+rational scalar #{u} with #{r=au}, #{s-p=bu}, and #{q=-cu}.
+First, #{\gcd(a,b,c)=1}. A prime dividing all three coefficients
+square-divides #{D}. The odd part of a fundamental discriminant is
+squarefree, so that prime is not odd. If the prime is #{2}, then #{D=4m}. Writing the coefficients as
+twice integers #{a'}, #{b'}, and #{c'} gives
+#{m=b'^2-4a'c'\equiv b'^2\pmod 4}, and a square modulo #{4} is #{0} or
+#{1}, contrary to the fundamental condition on #{m}.
+Bézout's identity therefore writes #{1} as an integer combination of
+#{a}, #{b}, and #{c}, and the rational scalar #{u} is an integer.
+Set #{t=p+s}. The determinant #{ps-qr=1} becomes
+#{(t^2-Du^2)/4=1}. Conversely each solution #{(t,u)} determines
+##{p=\frac{t-bu}{2},\qquad
+s=\frac{t+bu}{2},\qquad q=-cu,\qquad r=au.}
+The same parity of #{t} and #{bu} makes #{p} and #{s} integers, since
+#{t^2\equiv Du^2\pmod 2} and #{D\equiv b^2\pmod 2}. The form produced
+by #{\gamma} has the same root and the same discriminant, so it is a
+positive multiple of #{Q}. The discriminant scales by the square of
+that multiple, and the multiple is positive, so the multiple is #{1}.
+Thus these #{w_D} matrices are exactly the automorphs of every form of
+discriminant #{D}.}
+
+\p{Let #{R(n)} be the number of pairs #{\bigl(Q,(x,y)\bigr)} with
+#{Q\in\mathcal F} and #{Q(x,y)=n}. Let #{R^\ast(n)} count only the pairs
+with #{\gcd(x,y)=1}. A nonzero vector has content #{d=\gcd(x,y)}, and
+#{Q(dv)=d^2Q(v)}, so
+##{R(n)=\sum_{d^2\mid n}R^\ast(n/d^2).}
+The stabilizer in the automorph group of any primitive vector is
+trivial: an automorph fixing a vector has eigenvalue #{1}, hence trace
+#{2} because the determinant is #{1}, hence #{t=2} and #{u=0}. The
+group therefore acts freely on the proper representations of each
+form. It remains to show that the orbits are indexed by the residues
+#{b} modulo #{2n} with #{b^2\equiv D\pmod{4n}}.}
+
+\p{Given a proper representation of #{n} by a vector #{v}, complete
+#{v} to a basis #{(v,w)} of determinant #{1}. In that basis the form is
+#{nx^2+Bxy+Cy^2} with #{B^2-4nC=D}. Replacing #{w} by #{w+tv}
+sends #{xv+yw} to #{(x+ty)v+yw}. The term #{n(x+ty)^2} contributes
+the extra middle term #{2nt\,xy}, so the middle coefficient changes
+by #{2nt} and #{B} modulo #{2n} is invariant. An automorph changes the vector inside one
+orbit and does not change this residue. In the other direction, a
+residue #{b} produces the positive definite form
+#{nx^2+bxy+cy^2} with #{c=(b^2-D)/(4n)}. That form has discriminant
+#{D}, so it is equivalent to exactly one representative in
+#{\mathcal F}. Transporting #{(1,0)} by such an equivalence yields a
+proper representation with that residue. If two proper representations
+have the same residue #{b}, replace each second basis vector by a
+shear so that the middle coefficient equals #{b}. The discriminant
+identity then forces both coordinate forms to equal
+#{nx^2+bxy+cy^2} with the same #{c=(b^2-D)/(4n)}. Those two
+determinant-#{1} bases therefore belong to the same class
+representative. If #{M_1} and #{M_2} are the basis matrices,
+#{M_1M_2^{-1}} carries one represented vector to the other and
+preserves the form, since both bases pull it back to that coordinate
+polynomial. The number of such residues is therefore the number of
+orbits, and #{R^\ast(n)=w_D\rho(n)}, where #{\rho(n)} denotes that
+number of residues.}
+
+\p{The count #{\rho} is multiplicative on coprime arguments. If #{n_2}
+is odd and coprime to #{n_1}, a residue modulo #{2n_1n_2} is a pair of
+a residue modulo #{2n_1} and a residue modulo #{n_2}. The square
+condition splits, and for odd #{n} the count #{\rho(n)} equals the
+number of solutions of #{v^2\equiv D\pmod n}. Indeed #{\gcd(4,n)=1}, so
+the condition modulo #{4n} splits into conditions modulo #{4} and
+modulo #{n}, and exactly one of the two lifts modulo #{2n} has the
+parity required by #{D} modulo #{4}. Thus #{\rho(n_1n_2)=\rho(n_1)\rho(n_2)}.}
+
+\p{For an odd prime #{p} the same count is the number of roots of
+#{v^2-D} modulo #{p^k}. If #{p} does not divide #{D} and
+#{\chi_D(p)=1}, there are two simple roots modulo #{p}, and the
+derivative #{2v} is invertible at each, so each lifts uniquely and
+#{\rho(p^k)=2}. If #{\chi_D(p)=-1}, there is no root and
+#{\rho(p^k)=0}. If #{p} divides #{D}, then #{p} divides #{D} exactly
+once. Modulo #{p} the only root is #{0}, so #{\rho(p)=1}. Modulo
+#{p^k} with #{k\ge 2} the valuation #{v_p(D)=1} is odd, while a square
+has even valuation, so #{\rho(p^k)=0}.}
+
+\p{At the prime #{2}, first take #{n=1}: exactly one of #{b=0,1} satisfies
+#{b^2\equiv D\pmod 4}, so #{\rho(1)=1}. If #{D} is odd and
+#{D\equiv 5\pmod 8}, then for #{a\ge 1} the modulus #{2^{a+2}} is a
+multiple of #{8}, and no square is congruent to #{5} modulo #{8}, so
+#{\rho(2^a)=0}. If #{D\equiv 1\pmod 8}, the two odd residues modulo
+#{4} satisfy the congruence modulo #{8}. A solution modulo
+#{2^{a+1}} lifts to a solution modulo #{2^{a+2}} by
+#{b=b_0+t2^{a+1}}. The cross term determines #{t} uniquely because
+#{b_0} is odd, and the quadratic term in #{t} is divisible by
+#{2^{a+3}}. Thus #{\rho(2^a)=2} for every #{a\ge 1}. If #{D} is even, inspect #{b} modulo #{4} against the condition
+modulo #{8}. When #{D\equiv 4\pmod 8} the only solution is
+#{b\equiv 2\pmod 4}. When #{D\equiv 0\pmod 8} the only solution is
+#{b\equiv 0\pmod 4}. Thus #{\rho(2)=1}. For #{a\ge 2} write
+#{D=4m}. If #{m\equiv 2\pmod 4}, then #{v_2(D)=3}. A square cannot
+have that valuation, and #{3} is strictly smaller than the modulus
+#{2^{a+2}}, so there is no solution. If #{m} is odd, a solution would
+have valuation exactly #{2}, hence the shape #{b=2c} with #{c} odd,
+and then #{c^2\equiv m\pmod 4}. An odd square is #{1} modulo #{4},
+while #{m\equiv 3\pmod 4}. There is again no solution, so
+#{\rho(2^a)=0} for #{a\ge 2}.}
+
+\p{Let #{\psi(n)=\sum_{d\mid n}\chi_D(d)} and
+#{g(n)=\sum_{d^2\mid n}\rho(n/d^2)}. Both functions are multiplicative, since a square divisor of a
+product of coprime arguments splits, so it is enough to compare them
+on prime powers. If #{\chi_D(p)=1}, then #{\rho(p^j)=2} for #{j\ge 1}.
+For even #{k=2m} the sum #{g(p^k)} is #{m} terms equal to #{2} and one
+term #{\rho(1)}, hence #{k+1}. For odd #{k=2m+1} it is #{m+1} terms
+equal to #{2}, hence again #{k+1}. The character sum is the same
+geometric sum. If #{\chi_D(p)=-1}, then #{\rho(p^j)=0} for #{j\ge 1},
+so #{g(p^k)} keeps only #{\rho(1)} when #{k} is even and is #{0} when
+#{k} is odd. The alternating character sum has those same two values.
+If #{\chi_D(p)=0}, then #{\rho(p)=1} and #{\rho(p^j)=0} for #{j\ge 2},
+so every #{g(p^k)} equals #{1}, as does #{\psi(p^k)}. Therefore
+#{g=\psi}, and
+##{R(n)=w_D\sum_{d\mid n}\chi_D(d).}}
+
+\p{Absolute convergence for #{\operatorname{Re}s>1} lets the zeta sums
+be rearranged. The form has no real root and #{a>0}, so its minimum #{\mu} on the
+unit circle is positive and #{Q(x,y)\ge\mu(x^2+y^2)}. The comparison
+series converges for #{\operatorname{Re}s>1} because, in polar
+coordinates, the tail is a constant multiple of #{\int_1^\infty r^{1-2s}\,dr}.
+Hence
+##{\sum_{Q\in\mathcal F}E_Q(s)
+=\sum_{n\ge 1}R(n)\,n^{-s}.}
+The representation count and the substitution #{n=dm} give
+##{w_D\sum_{d,m\ge 1}\chi_D(d)\,(dm)^{-s}
+=w_D\,\zeta(s)\sum_{d\ge 1}\chi_D(d)\,d^{-s}.}
+Complete multiplicativity expands each Euler factor
+#{(1-\chi_D(p)p^{-s})^{-1}} as a geometric series. The product in the
+[center note](fdip-0049) is therefore the Dirichlet series, which is
+the identity claimed above.}
+
+\p{For the illustration #{D=-4}, repeat the shear
+#{\begin{pmatrix}1&k\\0&1\end{pmatrix}}, which replaces #{b} by
+#{b+2ak} and does not change #{a}, until #{|b|\le a}. Whenever
+#{a>c}, apply #{\begin{pmatrix}0&-1\\1&0\end{pmatrix}}. That matrix
+exchanges the outer coefficients and changes the sign of the middle
+coefficient, so it replaces #{a} by the smaller positive integer
+#{c}. Each such swap decreases #{a}, and the process stops at a
+representative with #{|b|\le a\le c}. Then #{b} is even,
+#{ac=(b/2)^2+1}, and #{a^2\le ac\le a^2/4+1}, so #{a=1}, #{b=0},
+and #{c=1}. The only class is #{x^2+y^2}, and #{w_{-4}=4}.}
+}
+
+\p{The identity concerns binary forms. The four-cycle precision has rank
+#{4}. Schiemann's papers of 1990 and 1997, which have not been read
+here, are not a step in the argument: this section does not claim that
+one theta series separates a quaternary form from the other forms in
+its genus.}
+
+\p{\em{The Weil index remains speculative.} No product of local indices
+is proved here, and Weil's paper of 1964 has not been read for this
+note. The class sum does not identify an Epstein zeta with the real
+normalizer.}
