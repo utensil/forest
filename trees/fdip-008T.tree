@@ -1,10 +1,192 @@
 \import{fdip-macros}
 \meta{agent-authored}{true}
 \tag{fdip}
+\taxon{Theorem}
 \title{Finite *-algebras, states and GNS}
-\date{2026-11-01}
+\date{2026-11-02}
 
-\p{What information must an algebra of observables and an expectation rule
-carry to reconstruct a state space? This section will take up the finite-algebra version of that question.}
+\p{A state in the sense of the
+[real and complex algebraic states](fdip-0024) is a normalized
+positive functional. That note assumes no norm and no operator
+representation. On a finite-dimensional *-algebra the functional
+itself determines both. The squared length of a class is the value
+of the state on #{\,a^*a}, and the dimension of the resulting space
+is the rank of one Gram matrix.}
 
-\p{\em{Planned section.} Its results and proofs are not yet developed here.}
+\p{Let #{K=\mathbb R} or #{K=\mathbb C}, and let #{A} be a
+finite-dimensional unital associative #{K}-algebra with an involution
+of the kind fixed in [fdip-0024](fdip-0024). Let #{\omega} be a real
+or complex algebraic state on #{A}, according to the scalar field:
+#{K}-linear, normalized in the sense of
+[fdip-0021](fdip-0021), Hermitian positive, and satisfying
+#{\omega(a^*a)\ge 0}. Define
+#{\langle x,y\rangle=\omega(x^*y)}.
+Let #{N} be the set of #{x} with #{\langle x,x\rangle=0}. The
+quotient #{H_\omega=A/N} carries the descended inner product, the
+operator #{\pi_\omega(a)} sends the class of #{b} to the class of
+#{ab}, and #{\Omega} is the class of #{1}.}
+
+\p{The form is positive semidefinite and Hermitian, and #{N} is a
+left ideal. For the cyclic vector,
+##{\langle\pi_\omega(a)\Omega,\pi_\omega(b)\Omega\rangle
+=\omega(a^*b).}
+For any basis the Gram matrix #{G_{ij}=\omega(e_i^*e_j)} has
+#{\dim H_\omega=\operatorname{rank} G}. The squared length of the
+class of #{a} is #{\omega(a^*a)}.}
+
+\p{Let #{A=\bigoplus_i M_{m_i}(K)}, with componentwise product and with
+conjugate transpose acting on each block. Suppose each #{\rho_i}
+has the form #{\rho_i=c_i^*c_i}, and
+#{\sum_i\mathrm{Tr}(\rho_i)=1}. The functional
+#{\omega(a)=\sum_i\mathrm{Tr}(\rho_i a_i)} is a state, and
+##{\dim H_\omega=\sum_i m_i\operatorname{rank}\rho_i.}
+On #{M_2}, the density #{\mathrm{diag}(2/3,1/3)} has rank #{2} and
+gives dimension #{4}. The density #{\mathrm{diag}(1,0)} has rank
+#{1} and gives dimension #{2}.}
+
+\p{Let #{X} be a finite set and let #{A} be the algebra of functions
+#{X\to K}, with pointwise product and pointwise conjugation. Let
+#{w:X\to\mathbb R_{\geq 0}} satisfy #{\sum_x w(x)=1}, and set
+#{\omega(f)=\sum_x w(x)f(x)}. Write #{\operatorname{supp} w} for the
+labels with #{w(x)>0}. Then #{H_\omega} is the space of all functions
+on that support, with the inner product weighted by #{w}. On a finite
+set that space is #{\ell^2(\operatorname{supp} w)}.}
+
+\p{[Equivariant precision](fdip-004Y) records, inside a symmetry
+sector, a matrix over the reals, the complexes or the quaternions.
+This section does not prove that those matrices are the blocks of a
+decomposition of the observable algebra.}
+\proof{
+\p{The form is linear in the second argument because #{\omega} is.}
+
+\p{It is conjugate-linear in the first because
+#{(\lambda x)^*=\overline\lambda\,x^*}.}
+
+\p{It is Hermitian because #{\langle y,x\rangle} equals
+#{\omega((x^*y)^*)}, and Hermitian positivity makes that the
+conjugate of #{\omega(x^*y)}. The square
+#{\langle x,x\rangle=\omega(x^*x)} is nonnegative by the state.}
+
+\p{The inequality of Cauchy and Schwarz is
+#{\lvert\langle x,y\rangle\rvert^2\le\langle x,x\rangle\langle y,y\rangle}.
+Over #{\mathbb C}, if #{\langle x,y\rangle} is not zero, choose a
+scalar #{u} of modulus #{1} with
+#{u\langle x,y\rangle=\lvert\langle x,y\rangle\rvert}, and replace
+#{y} by #{uy}. The new square #{\langle y,y\rangle} is unchanged, and
+the new inner product is real and nonnegative. Over #{\mathbb R} no
+phase is required. For every real #{t},
+##{\langle x+ty,x+ty\rangle
+=\langle x,x\rangle+2t\langle x,y\rangle+t^2\langle y,y\rangle\ge 0.}
+If #{\langle y,y\rangle=0}, the values #{2t\langle x,y\rangle} cannot
+stay above #{- \langle x,x\rangle} for every real #{t} unless
+#{\langle x,y\rangle=0}. If #{\langle y,y\rangle>0}, complete the
+square. The same quadratic is
+##{\langle y,y\rangle\Bigl(t+\frac{\langle x,y\rangle}{\langle y,y\rangle}\Bigr)^2
++\langle x,x\rangle-\frac{\langle x,y\rangle^2}{\langle y,y\rangle}.}
+The squared term can be made zero, so the remaining term is
+nonnegative. Thus the inequality holds. Over #{\mathbb C}, putting
+the unimodular factor back into #{y} multiplies #{\langle x,y\rangle}
+by a scalar of modulus #{1} and does not change #{\langle y,y\rangle}.}
+
+\p{If #{\langle x,x\rangle=0}, the inequality forces
+#{\langle x,y\rangle=0} for every #{y}. Conversely the case #{y=x}
+shows that the radical is exactly #{N}. It is a subspace. If
+#{x,y\in N} and #{\lambda\in K}, then
+##{\begin{aligned}
+\langle x+\lambda y,x+\lambda y\rangle
+={}&\langle x,x\rangle+\lambda\langle x,y\rangle\\
+&+\overline{\lambda}\langle y,x\rangle
++\lvert\lambda\rvert^2\langle y,y\rangle.
+\end{aligned}}
+The two squares vanish because #{x,y\in N}. The two cross terms
+vanish because an element of #{N} is orthogonal to every vector.
+It is a left ideal. For #{b\in A} and #{x\in N},
+#{\langle bx,bx\rangle=\omega(x^*b^*bx)=\langle x,(b^*b)x\rangle=0}.}
+
+\p{The form therefore descends to the quotient. If #{x-x'} and
+#{y-y'} lie in #{N}, then
+#{\langle x,y\rangle-\langle x',y'\rangle
+=\langle x-x',y\rangle+\langle x',y-y'\rangle}.
+The first summand vanishes because #{x-x'} is in the radical. The
+second is the conjugate of #{\langle y-y',x'\rangle}, which vanishes
+for the same reason. The descended form is positive definite, and
+finite dimensionality makes the quotient a Hilbert space with no
+further completion. Its dimension is #{\dim A-\dim N}.}
+
+\p{On a basis #{e_1,\ldots,e_n}, the matrix
+#{G_{ij}=\langle e_i,e_j\rangle=\omega(e_i^*e_j)} is Hermitian. A
+vector #{v} represents #{x=\sum_i v_i e_i}. Hermitian symmetry gives
+#{G_{ji}=\overline{G_{ij}}}. The number
+#{\langle x,e_j\rangle=\sum_i\overline{v_i}G_{ij}}
+vanishes for every #{j} if and only if #{x\in N}: the forward
+direction was proved for every vector, and the converse is linearity
+in the second argument. Conjugating those
+sums and replacing #{\overline{G_{ij}}} by #{G_{ji}} produces
+#{(Gv)_j=0}. Rank-nullity
+gives #{\operatorname{rank} G=n-\dim N=\dim H_\omega}. The class of
+#{a} has squared length #{\omega(a^*a)}. The operator
+#{\pi_\omega(a)} is well defined because #{N} is a left ideal, and
+#{\langle\pi_\omega(a)\Omega,\pi_\omega(b)\Omega\rangle
+=\langle a,b\rangle=\omega(a^*b)}.}
+
+\p{On the direct sum, the product and the involution act blockwise, so
+#{\omega(a^*a)=\sum_i\mathrm{Tr}(\rho_i a_i^*a_i)}. The trace is
+invariant under a cyclic permutation, and
+#{\mathrm{Tr}(b^*b)} is the sum of the squared moduli of the entries
+of #{b}. Hence
+##{\mathrm{Tr}(\rho_i a_i^*a_i)
+=\mathrm{Tr}(c_i a_i^*a_i c_i^*)
+=\mathrm{Tr}\bigl((a_i c_i^*)^*(a_i c_i^*)\bigr),}
+which is nonnegative. The functional is therefore positive. It is
+normalized because #{\omega(1)=\sum_i\mathrm{Tr}(\rho_i)=1}. Each
+#{\rho_i=c_i^*c_i} is self-adjoint. The trace of a conjugate
+transpose is the conjugate of the trace, and
+#{(a_i\rho_i)^*=\rho_i a_i^*}, so
+#{\mathrm{Tr}(\rho_i a_i^*)=\overline{\mathrm{Tr}(\rho_i a_i)}}.
+Thus #{\omega} is Hermitian.}
+
+\p{The same identity shows that #{\omega(a^*a)=0} if and only if
+#{a_i c_i^*=0} for every #{i}. Different blocks occupy
+complementary summands, so
+#{\dim N=\sum_i\dim\{a_i:a_i c_i^*=0\}}. A matrix vanishes on a
+subspace precisely when it factors through the quotient by that
+subspace. The image of #{c_i^*} has dimension #{\operatorname{rank} c_i^*}.
+The matrices vanishing on it are determined by their values on a
+complement, so their space has dimension
+#{m_i\bigl(m_i-\operatorname{rank} c_i^*\bigr)}. The quotient of that
+block therefore has dimension #{m_i\operatorname{rank} c_i^*}. Summing
+over the blocks gives
+#{\dim H_\omega=\sum_i m_i\operatorname{rank} c_i^*}.}
+
+\p{It remains to match that rank with #{\operatorname{rank}\rho_i}.
+For the standard inner product,
+#{\|c_i v\|^2=\langle c_i^*c_i v,v\rangle}.
+If #{c_i^*c_i v=0}, the right-hand side vanishes, so #{c_i v=0}.
+The converse is immediate, and rank-nullity gives
+#{\operatorname{rank}\rho_i=\operatorname{rank} c_i}. A minor of a
+transpose is the transpose of a minor, and the determinant is
+unchanged by transposition. A minor of a conjugate transpose is the
+conjugate of a minor of the transpose. The largest size of a nonzero
+minor is therefore the same for #{c_i}, #{c_i^T} and #{c_i^*}. Hence
+#{\operatorname{rank} c_i^*=\operatorname{rank}\rho_i}, and
+#{\dim H_\omega=\sum_i m_i\operatorname{rank}\rho_i}. On #{M_2},
+#{\mathrm{diag}(2/3,1/3)} is the square of
+#{\mathrm{diag}(\sqrt{2/3},\sqrt{1/3})}, so its rank is #{2}.
+#{\mathrm{diag}(1,0)} is the square of #{\mathrm{diag}(1,0)}, and
+its only nonzero minor has size #{1}. The formula gives dimensions
+#{4} and #{2}.}
+
+\p{On functions, the indicator basis is orthogonal for the Gram form.
+Indeed #{\omega(1_x^*1_y)=\delta_{xy}w(x)}, so the Gram matrix is
+diagonal with entries #{w(x)}. Its rank is the number of strictly
+positive weights. A function lies in #{N} exactly when it vanishes
+on #{\operatorname{supp} w}, because
+#{\omega(f^*f)=\sum_x w(x)\lvert f(x)\rvert^2}. Two functions
+determine the same class exactly when they agree on that support, and
+every function on the support arises in this way. The descended inner
+product is
+##{\langle f,g\rangle
+=\sum_{w(x)>0}w(x)\overline{f(x)}\,g(x).}
+Every function on a finite set is square-summable, so the space is
+#{\ell^2(\operatorname{supp} w)}.}
+}
