@@ -1,27 +1,32 @@
-\input{fdip-macros}
+\import{fdip-macros}
 \meta{agent-authored}{true}
 \tag{fdip}
 \taxon{Proposition}
 \title{Finite identities for the binary tetrahedral spinor}
 \date{2026-11-02}
 
-\p{Let #{2T} be the group of twenty-four Hurwitz units, with
-distinguished central involution #{z=-1}, as in the
-[binary tetrahedral quotient](fdip-007G). Let
-#{\pi:SU(2)\to SO(3)} be the conjugation homomorphism of that
-statement, and write #{R_T=\pi(2T)}. Let #{\sigma} be the
-defining representation on #{\mathbb C^2} through the matrix
-map #{M} of the same statement, and let #{\tau} be the
+\p{Let #{2T} be the group of twenty-four Hurwitz units in the
+[binary tetrahedral quotient](fdip-007G). In this model the
+central group element is the quaternion #{-1}. The
+[distinguished central involution](fgap-0014) of the abstract
+group is the preimage of that quaternion under the comparison
+isomorphism, not the quaternion itself. Let
+#{\pi:SU(2)\to SO(3)} be the conjugation homomorphism of
+\ref{fdip-007G}, and write #{R_T=\pi(2T)}. Let #{\rho_s} be
+the defining representation on #{\mathbb C^2} through the
+matrix map #{M} of the same statement, and let #{\tau} be the
 three-dimensional representation on
 #{\operatorname{span}_{\mathbb R}\{i,j,k\}} given by
 #{\tau(q)v=qvq^{-1}}. Both are the fibers of
 [the two-fiber example](fdip-007K). The substrate action
 #{\alpha} is trivial. On the sum
 #{F=\mathbb C^2\oplus\mathbb R^3}, with
-#{\rho=\sigma\oplus\tau}, define the selector by the
-central idempotent of [the real group algebra](fgap-0015),
-##{e_-=\frac{1_A-[z]}2,\qquad
-P=\rho(e_-)=\frac{I-\rho(z)}2.}
+#{\rho=\rho_s\oplus\tau}, the selector #{\sigma} of the
+[compatibility datum](fdip-009Z) is the idempotent
+##{P=\frac{I-\rho(-1)}2.}
+The abstract involution #{z} maps to the quaternion #{-1},
+so this is the Hurwitz action of the central idempotent
+#{e_-=(1_A-[z])/2} from [the real group algebra](fgap-0015).
 The reference comparison #{C} is the pair of homomorphisms
 #{\pi:SU(2)\to SO(3)} and the vertex identification
 #{R_T\cong A_4} proved below.}
@@ -29,9 +34,10 @@ The reference comparison #{C} is the pair of homomorphisms
 \p{Then #{\ker(\pi|_{2T})=\{1,-1\}}, the vertex action induces
 #{R_T\cong A_4}, and
 ##{P=I_2\oplus 0.}
-Left multiplication by #{z} is #{-1} on the quaternion module,
-so that module is fixed by #{e_-} and annihilated by
-#{e_+=(1_A+[z])/2}. The products of the #{d=3} Clifford matrices
+Left multiplication by the quaternion #{-1} is #{-1} on the
+quaternion module, so that module is fixed by #{e_-} and
+annihilated by #{e_+=(1_A+[z])/2}. The products of the #{d=3}
+Clifford matrices
 of [the spatial Dirac operator](fdip-000R) reproduce the
 quaternion multiplication table. None of these identities
 supplies a covariance law for that Dirac operator.}
@@ -41,12 +47,13 @@ supplies a covariance law for that Dirac operator.}
 #{\ker\pi=\{1,-1\}} from \ref{fdip-007G}. The same source
 identifies #{2T} with the full preimage #{\pi^{-1}(R_T)} and
 gives #{|R_T|=12}. The matrix #{M(-1)=-I_2}, so
-#{\sigma(z)=-I_2}. Conjugation by #{z} is the identity, so
-#{\tau(z)=I_3}. Therefore
+#{\rho_s(-1)=-I_2}. Conjugation by the quaternion #{-1} is
+the identity, so #{\tau(-1)=I_3}. Therefore
 ##{P=I_2\oplus 0.}
 On the quaternion module, left multiplication by #{-1} is
-#{-1}. Applying the algebra homomorphism induced by that
-representation sends #{e_-} to #{1} and #{e_+} to #{0}.}
+#{-1}. The abstract involution maps to that quaternion, so
+the same operators are #{\rho(z)=-I_2\oplus I_3},
+#{\rho(e_-)=P} and #{\rho(e_+)=0}.}
 
 \p{Label the four imaginary vectors of \ref{fdip-007G} by
 ##{v_1=(1,1,1),\; v_2=(1,-1,-1),\;
