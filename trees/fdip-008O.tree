@@ -1,11 +1,104 @@
 \import{fdip-macros}
 \meta{agent-authored}{true}
 \tag{fdip}
+\taxon{Theorem}
 \title{Finite-field partition functions}
-\date{2026-11-01}
+\date{2026-11-02}
 
 \p{What takes the place of a Gaussian partition function when field values lie
-in a finite field? Finite sums give a setting in which to compare the
-arithmetic at different primes.}
+in a finite field? Let #{p} be an odd prime and let #{e(t)=\exp(2\pi i t/p)}
+for the representative of #{t\in\mathbb F_p} in #{\{0,\ldots,p-1\}}. For a
+symmetric #{n\times n} matrix #{Q} over #{\mathbb F_p}, define
+##{Z_p(Q)=\sum_{x\in\mathbb F_p^n}e(x^TQx).}
+The exponent is the full quadratic form #{x^TQx}, not half of it. The sum
+is a complex number. It is not a probability.}
 
-\p{\em{Planned section.} Its results and proofs are not yet developed here.}
+\p{Write #{\bigl(\frac{a}{p}\bigr)} for the Legendre symbol, and
+##{g=\sum_{t\in\mathbb F_p}e(t^2).}
+If #{\det Q\neq0} in #{\mathbb F_p}, then
+##{Z_p(Q)=\Bigl(\frac{\det Q}{p}\Bigr)g^n,\qquad g^2=\Bigl(\frac{-1}{p}\Bigr)p.}
+In particular, when #{n} is divisible by #{4},
+##{Z_p(Q)=\Bigl(\frac{\det Q}{p}\Bigr)p^{n/2},}
+an ordinary integer. If a coordinate split has #{Q_{UU}} invertible, with
+Schur complement #{S} and #{B=-Q_{UU}^{-1}Q_{UR}} as in the
+[Wick state](fdip-008N), then for every retained vector
+##{\sum_{x_U}e(x^TQx)=Z_p(Q_{UU})\,e(x_R^TSx_R).}
+The same block factorization gives #{\det Q=\det Q_{UU}\det S}, so the
+Legendre symbol of the determinant factors as a product.}
+
+\proof{
+\p{For #{a\in\mathbb F_p}, put #{g(a)=\sum_te(at^2)}. Then #{g(0)=p}.
+The value #{g(a)} depends only on the square class of #{a}: if #{a=c^2b}
+with #{c\neq0}, the substitution #{t=c^{-1}s} gives #{g(a)=g(b)}.
+There are #{(p-1)/2} nonzero squares and the same number of nonsquares.
+Summing the nontrivial additive character,
+##{\sum_{a\neq0}g(a)=\sum_t\sum_{a\neq0}e(at^2)=(p-1)+(p-1)(-1)=0,}
+because the inner sum is #{p-1} at #{t=0} and #{-1} for #{t\neq0}.
+Hence #{g(\nu)=-g} for any nonsquare #{\nu}, which is
+#{g(a)=\bigl(\frac{a}{p}\bigr)g} for #{a\neq0}.}
+
+\p{The change of variables #{u=x-y}, #{v=x+y} is bijective on
+#{\mathbb F_p^2} because #{2} is invertible:
+#{x=2^{-1}(u+v)} and #{y=2^{-1}(v-u)}. It turns the difference of squares
+into a product, so
+##{\sum_{x,y}e(x^2-y^2)=\sum_{u,v}e(uv)=p.}
+The left side is #{g\cdot g(-1)=\bigl(\frac{-1}{p}\bigr)g^2}. Therefore
+#{g^2=\bigl(\frac{-1}{p}\bigr)p}.}
+
+\p{Over a field of characteristic not #{2}, a symmetric matrix is congruent
+to a diagonal matrix. If #{Q=0} it is already diagonal. Otherwise some
+quadratic value is nonzero: if every #{v^TQv} vanished, the polarization
+identity
+##{(x+y)^TQ(x+y)-x^TQx-y^TQy=2x^TQy}
+would force every bilinear value to vanish, hence #{Q=0}. Take such a
+vector first in a basis, and replace each later basis vector #{w} by
+#{w-(v^TQw)(v^TQv)^{-1}v}. The change is invertible, those vectors are
+orthogonal to #{v}, and the form splits off the line through #{v}.
+Induction diagonalizes the complement.}
+
+\p{If #{A} is invertible and #{R=A^TQA}, then #{y=A^{-1}x} runs through
+#{\mathbb F_p^n} as #{x} does, and #{x^TQx=y^TRy}. Thus #{Z_p(Q)=Z_p(R)}.
+Also #{\det R=(\det A)^2\det Q}, so the two matrices have the same Legendre
+symbol. On a nondegenerate diagonal matrix
+#{\operatorname{diag}(a_1,\ldots,a_n)} the sum factors as
+#{\prod_ig(a_i)=\bigl(\frac{\det R}{p}\bigr)g^n}. This is the stated
+formula. When #{4} divides #{n}, the exponent #{n/2} is even, so
+##{g^n=(g^2)^{n/2}=\Bigl(\frac{-1}{p}\Bigr)^{n/2}p^{n/2}=p^{n/2}.}}
+
+\p{For the elimination, set #{z=x_U-Bx_R}. As #{x_U} runs through the
+eliminated space, so does #{z}. Expanding the symmetric form gives the
+polynomial identity
+##{x^TQx=z^TQ_{UU}z+x_R^TSx_R,}
+the same cancellation used for the quadratic completion in the Wick state,
+applied to the full form rather than to half of it. Additivity of #{e}
+factors the sum.}
+
+\p{Write #{Q} in retained and eliminated blocks and factor it as in the
+Wick state, with unitriangular factors of determinant #{1} and a
+block-diagonal factor #{\operatorname{diag}(S,Q_{UU})}. The determinant
+multiplies, so #{\det Q=\det Q_{UU}\det S}.}
+}
+
+\p{The identity #{\det Q=\det Q_{UU}\det S} is the finite-field form of the
+block factorization used for the [quadratic center characters](fdip-0044).
+It does not prove that rational character identity.}
+
+\p{On the massive four-cycle, #{\det Q=45} and #{\det Q_{UU}=8}. The odd
+primes dividing #{45} are #{3} and #{5}; together with #{2}, they are the
+primes excluded by the hypotheses. For the five primes
+#{7,11,13,17,19} the sum was evaluated over every vector and is
+##{\begin{aligned}
+Z_7&=-49,&Z_{11}&=121,&Z_{13}&=-169,\\
+Z_{17}&=-289,&Z_{19}&=361,
+\end{aligned}}
+equal to #{\bigl(\frac{45}{p}\bigr)p^2}. Reducing the rational Schur
+complement of the Wick state modulo #{7} gives
+##{S\equiv\begin{pmatrix}0&5\\5&0\end{pmatrix}\pmod7,}
+and #{Z_7(Q_{UU})=-7}. The elimination identity holds for every one of the
+#{7^2} retained vectors over #{\mathbb F_7}.}
+
+\p{Characteristic #{2} is outside the argument, because both the
+polarization step and the change of variables divide by #{2}. A prime that
+divides #{\det Q} makes the form degenerate, and the product formula is not
+claimed there. The identity gives no Euler product and no comparison with
+the real normalizer.}
