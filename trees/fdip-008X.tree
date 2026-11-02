@@ -1,10 +1,97 @@
 \import{fdip-macros}
 \meta{agent-authored}{true}
 \tag{fdip}
-\title{Automorphisms, fixed points and superselection}
-\date{2026-11-01}
+\taxon{Theorem}
+\title{The fixed-point algebra is the averaged image}
+\date{2026-11-02}
 
-\p{Which observables and states remain when a symmetry is imposed? This section
-asks how automorphisms, fixed points and sectors express that restriction.}
+\p{Let #{K} be #{\mathbb R} or #{\mathbb C}, and let #{A} be a unital
+associative #{K}-algebra. A \newvocab{symmetry} of a linear
+functional #{\omega} on #{A} is a unital #{K}-algebra automorphism
+#{\alpha} with #{\omega(\alpha(a))=\omega(a)} for every #{a}. Let
+#{G} be a finite group, and let #{g\mapsto\alpha_g} be a
+homomorphism from #{G} into the unital #{K}-algebra automorphisms
+of #{A}, so that #{\alpha_{hg}=\alpha_h\circ\alpha_g}. The order
+#{|G|} is invertible in #{K}. Define
+##{E(a)=\frac1{|G|}\sum_{g\in G}\alpha_g(a).}
+Write #{A^G} for the fixed-point algebra, the elements fixed by
+every #{\alpha_g}. Then #{E} is linear, #{E(1)=1}, the image of
+#{E} is #{A^G}, and
+#{E(b_1ab_2)=b_1E(a)b_2} whenever #{b_1} and #{b_2} are fixed.
+If every #{\alpha_g} preserves #{\omega}, then
+#{\omega(E(a))=\omega(a)}. These are the identities of a
+[conditional expectation](fdip-008U) of #{\omega} onto #{A^G}.
+If every #{\alpha_g} preserves an involution of #{A}, then
+#{E(a^*)=E(a)^*}.}
 
-\p{\em{Planned section.} Its results and proofs are not yet developed here.}
+\p{When the automorphisms are conjugations
+#{\alpha_g(R)=\rho(g)R\rho(g)^{-1}} by a representation
+#{\rho} on a finite-dimensional space, the fixed-point algebra
+is the commutant of #{\rho(G)}. On the half-turn of
+[fdip-003T](fdip-003T), with #{P=\operatorname{diag}(I_2,-I_2)}
+and #{R} written in those blocks as
+#{\begin{pmatrix}A&B\\C&D\end{pmatrix}}, the average is the
+block-diagonal operator
+##{E(R)=\begin{pmatrix}A&0\\0&D\end{pmatrix}.}
+That note identifies this commutant with
+#{M_2(\mathbb R)\times M_2(\mathbb R)} and records that the
+image of the group algebra is the smaller algebra of scalar
+blocks.}
+
+\p{The neutral [Gauss constraint](fdip-008A) for a finite gauge
+group asks for the link functions fixed by every group element,
+and its projector is this same average. An invariant functional
+therefore satisfies #{\omega=\omega\circ E}: its value depends
+on an observable only through the averaged observable. The
+charged space remains the intertwiner space of
+[fdip-008B](fdip-008B). The multiplicity matrices of a real
+orthogonal action remain the commutant description of
+[fdip-004Z](fdip-004Z).}
+
+\proof{
+\p{Each #{\alpha_g} is #{K}-linear, so #{E} is linear. A unital
+automorphism fixes #{1}, and therefore #{E(1)=1}.}
+
+\p{For #{h\in G},
+##{\alpha_h(E(a))
+=\frac1{|G|}\sum_{g\in G}\alpha_h(\alpha_g(a))
+=\frac1{|G|}\sum_{g\in G}\alpha_{hg}(a).}
+As #{g} runs through #{G}, so does #{hg}. Hence
+#{\alpha_h(E(a))=E(a)}, and the image of #{E} lies in #{A^G}.}
+
+\p{If #{b} is fixed by every #{\alpha_g}, every summand equals
+#{b}, so #{E(b)=b}. Thus #{A^G} is contained in the image, and
+#{E} is the identity on #{A^G}. The two inclusions give
+##{A^G=\operatorname{im}E.}}
+
+\p{Let #{b_1} and #{b_2} be fixed. Multiplicativity gives
+#{\alpha_g(b_1ab_2)=\alpha_g(b_1)\alpha_g(a)\alpha_g(b_2)
+=b_1\alpha_g(a)b_2}. Averaging both sides yields
+#{E(b_1ab_2)=b_1E(a)b_2}.}
+
+\p{If every #{\alpha_g} preserves #{\omega}, then
+#{\omega(\alpha_g(a))=\omega(a)}. Averaging the scalar values
+gives #{\omega(E(a))=\omega(a)}. If every automorphism preserves
+an involution, #{\alpha_g(a^*)=\alpha_g(a)^*}, and the same
+average gives #{E(a^*)=E(a)^*}.}
+
+\p{For a conjugation action, #{\alpha_h(E(R))=E(R)} is the
+statement that #{E(R)} commutes with every #{\rho(h)}. If #{R}
+already lies in the commutant, the preceding paragraph gives
+#{E(R)=R}. Thus the image is exactly the commutant.}
+
+\p{In the half-turn coordinates the conjugation by
+#{P=\operatorname{diag}(I_2,-I_2)} sends
+#{\begin{pmatrix}A&B\\C&D\end{pmatrix}} to
+#{\begin{pmatrix}A&-B\\-C&D\end{pmatrix}}. The average of the
+two operators is the displayed block-diagonal matrix. The
+identification of that commutant, and the comparison with the
+group-algebra image, are the calculations of
+[fdip-003T](fdip-003T).}
+}
+
+\p{Tomiyama's norm-one projection theorem has not been read, and
+no norm on #{A} is used. The argument gives the finite average
+only. It does not identify the sectors with the centre of the
+commutant, and it does not replace the charged intertwiner
+description.}
