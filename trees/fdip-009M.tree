@@ -1,0 +1,56 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Example}
+\title{The same four-cycle Schur matrix with fermions}
+\date{2026-11-01}
+
+\p{Take the [alternating four-cycle](fdip-000F) with
+#{t,m>0}, set #{a=m^2}, #{s=1+t+a}, and use
+#{K=Q_{t,m}=L_t+aI} now as a complex matrix. Order retained
+vertices #{R=(0,2)} before eliminated vertices #{U=(1,3)}.
+Its blocks are
+##{A=D=sI_2,\qquad B=C=-\begin{pmatrix}1&t\\t&1\end{pmatrix}.}
+The [fermionic Schur formula](fdip-009J) gives
+##{J_U(e^{-\bar\psi K\psi})
+ =s^2e^{-\bar\psi_R S\psi_R},}
+where
+##{\begin{aligned}
+S&=\begin{pmatrix}\alpha&-\beta\\-\beta&\alpha\end{pmatrix},\\
+\alpha&=s-\frac{1+t^2}{s},\qquad \beta=\frac{2t}{s}.
+\end{aligned}}
+This is exactly the real Gaussian effective precision. The
+fermionic scalar is #{s^2}; the real Gaussian eliminated
+factor in the cited example is #{2\pi /s}.}
+
+\p{The two eigenvalues of #{S} are
+##{\frac{a(a+2+2t)}s,\qquad\frac{(a+2)(a+2t)}s.}
+Writing #{\mathcal D=a(a+2)(a+2t)(a+2+2t)}, it follows that
+##{\det S=\frac{\mathcal D}{s^2},\qquad
+  Z_F(K)=s^2\det S=\mathcal D.}
+Positivity of #{K} also allows the ordinary complex integral
+with normalized volume #{\pi^{-4}d^8z}. The
+[complex Gaussian theorem](fdip-009K) gives
+##{Z_B(K)=\mathcal D^{-1},\qquad Z_F(K)Z_B(K)=1.}
+In contrast, the original real Gaussian, with exponent
+#{-\phi^TK\phi /2} and volume #{d^4\phi}, has partition
+function #{(2\pi)^2/\sqrt{\mathcal D}}. These powers and
+constants refer to different field spaces and measures.}
+
+\p{At #{t=m=1}, #{s=3}, #{\mathcal D=45}, and
+##{S=\begin{pmatrix}7/3&-2/3\\-2/3&7/3\end{pmatrix},
+  \qquad\det S=5.}
+The Grassmann eliminated factor #{9} times the retained
+factor #{5} gives #{45}, while the normalized complex-boson
+value is #{1/45}. At #{t=2,m=1}, #{s=4},
+#{\det S=105/16}; the product is #{16\cdot 105/16=105}.
+These are the same two effective matrices compared in the
+[weighted-cycle example](fdip-000I).}
+
+\p{At #{m=0,t>0}, the eliminated block #{(1+t)I_2}
+is still invertible and the partial Grassmann formula is
+valid. The retained Schur matrix has a constant zero mode,
+so #{\det K=0}: the full Grassmann integral vanishes.
+The commuting full Gaussian instead diverges in its constant
+mode. There is no finite inverse determinant, cancellation
+identity or logarithmic contribution at this massless point.}

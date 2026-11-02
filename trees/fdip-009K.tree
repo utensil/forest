@@ -1,0 +1,86 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{Accretive complex Gaussian integrals and cancellation}
+\date{2026-11-01}
+
+\p{Call #{K\in M_n(\mathbb C)} \newvocab{strictly accretive}
+when its Hermitian part #{H=(K+K^*)/2} is positive definite.
+For #{z_j=x_j+iy_j}, use ordinary Lebesgue volume
+#{d^{2n}z=\prod_j dx_j\,dy_j}. Then #{K} is invertible,
+the following integral converges absolutely, and
+##{I(K):=\int_{\mathbb C^n}e^{-z^*Kz}\,d^{2n}z
+       =\frac{\pi^n}{\det K}.}
+Consequently, with #{Z_B(K)=\pi^{-n}I(K)} and the
+[paired Grassmann value](fdip-008H)
+#{Z_F(K)=J_n(e^{-\bar\psi K\psi})},
+##{Z_B(K)Z_F(K)=1.}
+For #{n=0} both factors are one.}
+
+\proof{
+\p{For #{n>0}, choose #{h>0} with #{H\ge hI}. Then
+##{|e^{-z^*Kz}|=e^{-z^*Hz}\le e^{-h\|z\|^2}.}
+The right side is integrable by the product of scalar Gaussian
+integrals. If #{Kz=0}, its real quadratic value is
+#{z^*Hz=0}, so #{z=0}; finite dimension makes #{K} invertible.}
+
+\p{First suppose #{K=K^*>0}. A unitary eigenbasis gives
+positive eigenvalues #{\lambda_j}. The unitary change of
+variables preserves real volume, since its real Jacobian has
+absolute determinant #{|\det_{\mathbb C}U|^2=1}. In each
+complex coordinate the [scalar Gaussian formula](fdip-002T)
+gives
+##{\int_{\mathbb R^2}e^{-\lambda_j(x^2+y^2)}dx\,dy
+       =\frac\pi{\lambda_j}.}
+Multiplication gives #{I(K)=\pi^n/\det K}.}
+
+\p{For general #{K}, write #{K=H+A}, where #{A^*=-A},
+and set #{K(w)=H+wA} for a complex parameter #{w}.
+Its Hermitian part is #{H+i(\operatorname{Im}w)A}.
+Choose #{\epsilon>0} such that
+#{\epsilon\|A\|<h/2}, with any positive choice if #{A=0}.
+On the connected strip #{|\operatorname{Im}w|<\epsilon},
+this part is at least #{hI/2}, so #{K(w)} is invertible.}
+
+\p{The integral #{I(K(w))} is holomorphic on that strip.
+Differentiation of the integrand brings down powers of
+#{-z^*Az}; on every smaller neighborhood these are bounded by
+a polynomial in #{\|z\|} times #{e^{-h\|z\|^2/2}}.
+This integrable bound justifies differentiation under the
+integral. The function #{\pi^n/\det K(w)} is holomorphic
+there too. For #{w=it} with real #{|t|<\epsilon}, the matrix
+#{H+itA} is Hermitian positive, so the preceding calculation
+identifies the two functions. These points accumulate at the
+interior point zero. The one-variable identity theorem therefore
+identifies the functions throughout the strip, in particular
+at #{w=1}. The Grassmann determinant then proves cancellation.}
+}
+
+\p{For Hermitian positive #{K}, the normalized density
+#{(\det K/\pi^n)e^{-z^*Kz}} is a genuine Gaussian probability
+law on #{2n} real coordinates. For general accretive #{K},
+the weight can be complex: #{K=(1+i)} gives
+#{Z_F=1+i} and #{Z_B=(1+i)^{-1}}. Normalization and determinant
+cancellation still hold, but there is no positive Gaussian law
+with this density. A single real Gaussian has only a determinant
+power #{-1/2}; [Grassmann algebra](fdip-008F) by itself supplies
+no convergence for a commuting integral.}
+
+\p{Accretivity also survives the [Schur operation](fdip-009J).
+Its principal block #{D} is accretive by testing #{K} on
+#{(0,u)}, hence invertible. For #{v\ne0}, put
+#{x=(v,-D^{-1}Cv)}. Then #{Kx=(Sv,0)}, and
+##{\operatorname{Re}(v^*Sv)
+ =\operatorname{Re}(x^*Kx)>0.}
+Thus #{S} is accretive. This extra conclusion uses accretivity
+of the full matrix, not just invertibility of #{D}.}
+
+\p{\citet{Section 9.1, equations (9.3)-(9.5), p. 19}{wingate2025lattice}
+describes integrating a fermion matrix
+and re-expressing its determinant with commuting complex
+pseudofermions. Its equation (9.5) uses #{K^{-1}} in the
+commuting quadratic form, yielding a determinant rather than
+its inverse when convergence holds. The cancellation here uses
+#{K} in both forms and the specified factor #{\pi^{-n}};
+the proof above states its convergence hypotheses explicitly.}
