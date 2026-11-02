@@ -1,0 +1,65 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{Only the zero-momentum block survives the free Wilson term}
+\date{2026-11-01}
+
+\p{Take the [Wilson operator](fdip-009U) at trivial links,
+with #{a>0} and real #{r\ne0}, on the periodic grid with
+#{N_j\ge3}. Its kernel consists exactly of constant fields.
+In particular,
+##{\dim_{\mathbb C}\ker D_{W,a,1}=2^d q.}
+For the continuous momentum symbol, a corner having #{k}
+coordinates equal to #{\pi} receives scalar Wilson term
+#{2rk/a}; it is nonzero for #{k\ge1}.}
+
+\proof{
+\p{The [finite Fourier decomposition](fdip-009Q) has momenta
+#{p_j=2\pi n_j/N_j}, with #{0\le n_j<N_j}. These are
+dimensionless lattice momenta; their physical representatives
+are #{p_j/a}. Put
+##{\begin{aligned}
+A_a(p)&=\frac{i}{a}\sum_j\Gamma_j\sin p_j,\\
+M_a(p)&=\frac{r}{a}\sum_j(1-\cos p_j).
+\end{aligned}}
+The Wilson block is #{A_a(p)+M_a(p)I}. Hermitian gamma
+matrices and their anticommutation relations give
+##{\begin{aligned}
+A_a(p)^*&=-A_a(p),\\
+A_a(p)^2&=-a^{-2}\sum_j\sin^2p_j\,I.
+\end{aligned}}
+Since #{M_a(p)} is real and scalar, the mixed terms cancel:
+##{\begin{aligned}
+&(A_a+M_aI)^*(A_a+M_aI)\\
+&\qquad=\left(a^{-2}\sum_j\sin^2p_j+M_a^2\right)I.
+\end{aligned}}
+Thus a block has a nonzero kernel precisely when both
+#{\sum_j\sin^2p_j=0} and #{M_a(p)=0}. Because
+#{r\ne0} and each #{1-\cos p_j\ge0}, the latter condition
+already forces every #{\cos p_j=1}. In the chosen momentum
+range this means #{p=0}. Conversely the entire block at
+#{p=0} is zero. Its dimension is #{\dim(S\otimes F)=2^d q},
+and the zero Fourier character is the constant field.}
+
+\p{The same formula is defined for every real momentum modulo
+#{2\pi}. At #{p=\pi\epsilon}, with
+#{\epsilon\in\{0,1\}^d}, the sine part vanishes and
+##{M_a(\pi\epsilon)=\frac{2r}{a}\sum_j\epsilon_j.}
+This proves the corner claim, whether or not a particular finite
+grid samples that corner exactly.}
+}
+
+\p{For #{q=1}, periods #{(4,4)} and #{(4,6)} both give
+kernel dimension four; periods #{(4,4,4)} give eight.
+The same formula applies to odd periods: zero momentum is
+always present and every other block is invertible.}
+
+\p{The scalar addition is the free Wilson denominator mechanism
+in \citet{Section 9.3, Equations (9.15)–(9.16), p. 21}{wingate2025lattice}.
+For #{r>0}, its value at each nonzero corner grows as #{1/a}.
+This is an exact free-symbol statement, not a continuum-limit
+construction or an interacting mass calculation. The cancellation
+above uses the scalar free block and proves no corresponding
+kernel formula for a general connection. The surviving block
+still contains the whole chosen reducible #{S\otimes F}.}
