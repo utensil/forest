@@ -1,11 +1,125 @@
 \import{fdip-macros}
 \meta{agent-authored}{true}
 \tag{fdip}
+\taxon{Theorem}
 \title{The Euler product}
-\date{2026-11-01}
+\date{2026-11-02}
 
-\p{Can information from the separate primes be assembled into one global
-expression? This section asks when such an assembly is meaningful and what
-it recovers.}
+\p{The additive character sums of the [finite-field partition functions](fdip-008O)
+are one complex number at each odd prime. For the massive four-cycle the
+identity below is the odd nondegenerate case of that theorem. The prime
+#{2} lies outside it. The odd primes that divide #{\det Q=45} are #{3}
+and #{5}. The character is the [quadratic center character](fdip-0049)
+of discriminant #{5}.}
 
-\p{\em{Planned section.} Its results and proofs are not yet developed here.}
+\p{Let #{Q} be that four-cycle matrix, with #{\det Q=45}, and let #{\chi_5}
+be the character of discriminant #{5} in the center note. For every odd prime
+#{p\notin\{3,5\}},
+##{Z_p(Q)/p^2=\chi_5(p).}
+At the comparison point #{s=2} the same identity is an Euler product. Because
+#{Z_p(Q)\,p^{-4}=\chi_5(p)\,p^{-2}},
+##{\prod_{p\nmid 30}\bigl(1-Z_p(Q)\,p^{-4}\bigr)^{-1}
+=\prod_{p\notin\{2,3,5\}}\bigl(1-\chi_5(p)p^{-2}\bigr)^{-1}
+=L(2,\chi_5)\Bigl(1-\frac{\chi_5(2)}{4}\Bigr)\Bigl(1-\frac{\chi_5(3)}{9}\Bigr).}
+Here #{L(2,\chi_5)} is the uncompleted product of [fdip-0049](fdip-0049),
+taken over every prime. The factor at #{5} equals #{1}, since #{\chi_5(5)=0}.
+The prime #{2} lies outside the finite-field theorem. Under the Kronecker
+convention named in the center note,
+#{\bigl(\frac{5}{2}\bigr)=(-1)^{(5^2-1)/8}=-1}, so #{\chi_5(2)=-1}. The value
+#{\chi_5(3)=-1} is proved below. The two explicit factors are therefore
+#{5/4} and #{10/9}.}
+
+\proof{
+\p{For an odd prime #{p\neq 3}, the factorization #{45=3^2\cdot 5} gives
+#{\bigl(\frac{45}{p}\bigr)=\bigl(\frac{5}{p}\bigr)}. The finite-field theorem
+then gives #{Z_p(Q)/p^2=\bigl(\frac{5}{p}\bigr)} whenever #{p} does not divide
+#{45}. For an odd prime outside #{\{3,5\}} it remains only to match that
+Legendre symbol with #{\chi_5(p)}.}
+
+\p{The group #{\mathbb F_p^\times} has #{(p-1)/2} squares, because the
+squaring map has kernel #{\{\pm 1\}}. Every square #{a=b^2} satisfies
+#{a^{(p-1)/2}=b^{p-1}=1}. The polynomial #{X^{(p-1)/2}-1} has at most
+#{(p-1)/2} roots, so the squares are all of its roots. A nonsquare is not
+among them. Fermat's identity #{a^{p-1}-1=0} factors as
+#{(a^{(p-1)/2}-1)(a^{(p-1)/2}+1)=0}, so a nonsquare satisfies
+#{a^{(p-1)/2}=-1}. Thus
+#{\bigl(\frac{a}{p}\bigr)\equiv a^{(p-1)/2}\pmod p}, and the two sides, each
+equal to #{\pm 1}, are equal.}
+
+\p{Gauss's count for the prime #{5}: for #{k=1,\ldots,(p-1)/2}, let
+#{\rho(k)} be the representative of #{5k} in #{\{1,\ldots,p-1\}}, and set
+#{\lambda(k)=\rho(k)} when #{\rho(k)\le(p-1)/2} and
+#{\lambda(k)=\rho(k)-p} otherwise. The absolute values
+#{\lvert\lambda(k)\rvert} are a permutation of #{\{1,\ldots,(p-1)/2\}}.
+They lie in that range, and #{\lvert\lambda(i)\rvert=\lvert\lambda(j)\rvert}
+would force #{5i\equiv\pm 5j\pmod p}, hence #{i\equiv\pm j}, which cannot
+happen for distinct indices in the range. If #{\mu} is the number of negative
+values #{\lambda(k)}, comparing products gives
+#{\bigl(\frac{5}{p}\bigr)=(-1)^\mu}.}
+
+\p{Write #{5k=qp+\rho(k)} with #{q=\lfloor 5k/p\rfloor}. Then
+#{q\in\{0,1,2\}}, because #{5(p-1)/2<5p/2}. The representative exceeds
+#{p/2} in these cases: #{q=0} on #{p/10<k<p/5}; #{q=1} on
+#{3p/10<k<2p/5}; #{q=2} on #{p/2<k<3p/5}. The last interval contains no
+admissible #{k}, since #{k\le(p-1)/2}. Equality of #{5k} with a multiple
+of #{p/2} would require #{p} to divide #{10k}. For an odd prime
+#{p\neq 5} that does not occur, so each endpoint is non-integral. The
+number of integers strictly between two non-integral bounds #{\alpha<\beta}
+is #{\lfloor\beta\rfloor-\lfloor\alpha\rfloor}.}
+
+\p{Write #{p=10t+r} with #{r\in\{1,3,7,9\}}. Then
+#{p/10=t+r/10} and #{r/10<1}, so #{\lfloor p/10\rfloor=t}. Next
+#{p/5=2t+r/5}, and the four values of #{r/5} are #{1/5}, #{3/5}, #{7/5}
+and #{9/5}. Their floors contribute #{0}, #{0}, #{1} and #{1}, so
+#{\lfloor p/5\rfloor} equals #{2t}, #{2t}, #{2t+1} and #{2t+1}. The first
+count is therefore #{t}, #{t}, #{t+1} and #{t+1}. For the second interval,
+#{2p/5=4t+2r/5} and the four values of #{2r/5} are #{2/5}, #{6/5},
+#{14/5} and #{18/5}, so #{\lfloor 2p/5\rfloor} equals #{4t}, #{4t+1},
+#{4t+2} and #{4t+3}. Likewise #{3p/10=3t+3r/10} and the four values of
+#{3r/10} are #{3/10}, #{9/10}, #{21/10} and #{27/10}, so
+#{\lfloor 3p/10\rfloor} equals #{3t}, #{3t}, #{3t+2} and #{3t+2}. The
+second count is the difference: #{t}, #{t+1}, #{t} and #{t+1}. Adding the
+two counts, #{\mu} is even
+for #{r=1} and #{r=9}, and odd for #{r=3} and #{r=7}. These are the classes
+#{p\equiv\pm 1\pmod 5} and #{p\equiv\pm 2\pmod 5}. The Legendre symbol
+#{\bigl(\frac{p}{5}\bigr)} takes the same values, because the residues
+modulo #{5} are #{1,4,3,2} and
+##{\bigl(\frac{1}{5}\bigr)=\bigl(\frac{4}{5}\bigr)=1,\qquad
+\bigl(\frac{2}{5}\bigr)=\bigl(\frac{3}{5}\bigr)=-1,}
+the last two from #{2^2\equiv-1} and #{3^2\equiv-1\pmod 5}. Thus
+#{\bigl(\frac{5}{p}\bigr)=\bigl(\frac{p}{5}\bigr)} for this one odd prime
+#{5} and every odd prime #{p\neq 5}. On such a prime the Kronecker symbol
+named in the center note is this Legendre symbol, so
+#{Z_p(Q)/p^2=\chi_5(p)}.}
+
+\p{The same evaluation gives
+#{\chi_5(3)=\bigl(\frac{5}{3}\bigr)=\bigl(\frac{2}{3}\bigr)=-1}, since
+#{2^{(3-1)/2}=2\equiv-1\pmod 3}. The uncompleted product runs over every
+prime. Removing the factors at #{2} and #{3}, and using that the factor at
+#{5} equals #{1}, is the displayed identity. It is an equality of convergent
+products, not a truncation.}
+}
+
+\p{The correspondence with formal libraries is partial. Mathlib's
+\leanref{legendreSym.quadratic_reciprocity} is the law for distinct odd
+primes,
+#{\bigl(\frac{q}{p}\bigr)\bigl(\frac{p}{q}\bigr)=(-1)^{(p-1)(q-1)/4}.}
+For the prime #{5} the exponent is even, so the law also yields
+#{\bigl(\frac{5}{p}\bigr)=\bigl(\frac{p}{5}\bigr)}. The count above is the
+argument used for that pair. Mathlib's
+\leanref{DirichletCharacter.LFunction} agrees, for real part greater than
+#{1}, with the Dirichlet series #{\sum_n\chi(n)n^{-s}}, by
+\leanref{DirichletCharacter.LFunction_eq_LSeries}. Neither declaration
+identifies #{Z_p(Q)/p^2} with #{\chi_5(p)}, assembles this product, or
+evaluates the Kronecker symbol at the prime #{2}.}
+
+\p{The closed form #{4\pi^2/(25\sqrt 5)} is not derived from this product. A
+direct product through the primes #{p\le 200000}, excluding #{2}, #{3} and
+#{5}, equals #{0.9808491713}, while that closed form multiplied by the
+factors #{5/4} and #{10/9} equals #{0.9808491712}. The agreement is
+numerical.}
+
+\p{A function of #{L(2,\chi_5)} does not recover a trace ratio. That
+obstruction is the [fiber-constancy criterion](fdip-0042), which concerns
+invariants of the quadratic form alone. The product above does not evaluate
+a Weil index, and it is not identified with the real normalizer.}
