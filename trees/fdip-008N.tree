@@ -1,11 +1,138 @@
 \import{fdip-macros}
 \meta{agent-authored}{true}
 \tag{fdip}
+\taxon{Theorem}
 \title{Wick states over a ring}
-\date{2026-11-01}
+\date{2026-11-02}
 
-\p{Can the algebraic rule for Gaussian moments be stated over a ring? The
-question is which identities remain meaningful before a positive probability
-measure is chosen.}
+\p{Let #{A} be a commutative ring in which #{2} is a unit, and let #{Q} be a
+symmetric #{n\times n} matrix over #{A} with an inverse #{C=Q^{-1}} in
+#{M_n(A)}. Write #{A[x]=A[x_1,\ldots,x_n]}. The Wick functional #{\omega_Q}
+is the #{A}-linear map #{A[x]\to A} with #{\omega_Q(1)=1} determined by
+Isserlis' pairing rule. On a product of an odd number of factors the value
+is #{0}. On a product of #{2m} factors, not necessarily distinct, sum over
+the pairings of those #{2m} factor positions the product of the #{m} entries
+of #{C} on the paired positions. There are #{(2m-1)!!} such pairings, so
+#{\omega_Q(x_i^4)=3C_{ii}^2}. The value depends only on those entries. It
+uses no order on #{A} and no measure on #{A^n}.
+The same pairing rule is the one applied to centered real Gaussians in the
+[quartic elimination](fdip-0046), which cites
+\citet{v2, Theorem 3.1 and Example 3.2, p. 29}{etingof2024mathematical}
+for these contractions. Here the rule is the definition of #{\omega_Q}.}
 
-\p{\em{Planned section.} Its results and proofs are not yet developed here.}
+\p{Order the coordinates as a retained set #{R} and an eliminated set #{U},
+and assume that the block #{Q_{UU}} is invertible over #{A}. Define
+##{\begin{aligned}
+L&=Q_{UU}^{-1}Q_{UR},\\
+B&=-L,\\
+S&=Q_{RR}-Q_{RU}L.
+\end{aligned}}
+Symmetry of #{Q} makes #{S} symmetric. For #{f\in A[x]}, substitute
+#{x_U=Bx_R+z} and apply the Wick functional of covariance #{Q_{UU}^{-1}} in
+the indeterminates #{z}, treating the retained variables as coefficients.
+Call the result #{E[f\mid x_R]\in A[x_R]}.}
+
+\p{The block #{S} is invertible, and #{C_{RR}=S^{-1}}. Restriction of
+#{\omega_Q} to #{A[x_R]} is the Wick functional #{\omega_S}. Furthermore
+#{E[f\mid x_R]} is a polynomial and
+##{\omega_Q(f)=\omega_S(E[f\mid x_R]).}
+The identity #{2^{-1}x^TQx=2^{-1}z^TQ_{UU}z+2^{-1}x_R^TSx_R}, with
+#{z=x_U-Bx_R}, is the quadratic completion that names these blocks. The
+moment proof does not integrate that quadratic.}
+
+\proof{
+\p{Factor the symmetric matrix in retained and eliminated blocks as
+##{\begin{aligned}
+Q&=\begin{pmatrix}I&Q_{RU}Q_{UU}^{-1}\\0&I\end{pmatrix}
+\begin{pmatrix}S&0\\0&Q_{UU}\end{pmatrix}
+\begin{pmatrix}I&0\\L&I\end{pmatrix}.
+\end{aligned}}
+The two outer factors are invertible over #{A}: each is undone by changing
+the sign of its off-diagonal block. The hypothesis already makes
+#{Q_{UU}} invertible. If #{S} is invertible, the block-diagonal matrix of
+#{S^{-1}} and #{Q_{UU}^{-1}} inverts the middle factor, so that factor
+and #{Q} are invertible. Conversely, if #{Q} is invertible then the
+middle factor #{D} is invertible. If #{DE=I=ED}, the retained block of
+#{DE} is #{S} times the retained block of #{E}, and the retained block
+of #{ED} is that block times #{S}. Both products are the identity, so
+#{S} is invertible. The same reading applies to #{Q_{UU}}. Thus, once
+#{Q_{UU}} is invertible, #{Q} is invertible if and only if #{S} is.
+The running hypotheses give both, so #{S} is invertible.
+The inverse is
+##{\begin{aligned}
+C&=\begin{pmatrix}I&0\\-L&I\end{pmatrix}
+\begin{pmatrix}S^{-1}&0\\0&Q_{UU}^{-1}\end{pmatrix}
+\begin{pmatrix}I&-Q_{RU}Q_{UU}^{-1}\\0&I\end{pmatrix}.
+\end{aligned}}
+Reading blocks gives #{C_{RR}=S^{-1}} and
+#{C_{UR}=-LS^{-1}}. A polynomial in the retained variables alone is paired
+only on retained indices, so its value under #{\omega_Q} uses only
+#{C_{RR}}. That is #{\omega_S}.}
+
+\p{The same inverse gives
+##{C_{UU}=Q_{UU}^{-1}+LS^{-1}Q_{RU}Q_{UU}^{-1}.}
+Symmetry makes #{Q_{RU}Q_{UU}^{-1}=L^T}. For the linear forms
+#{z=x_U+Lx_R}, the cross covariance is
+##{C(z,x_R)=C_{UR}+LC_{RR}=-LS^{-1}+LS^{-1}=0.}
+The unshifted cross blocks are
+##{C_{RU}=-S^{-1}L^T,\qquad C_{UR}=-LS^{-1}.}
+Expanding the residual in those blocks gives
+##{\begin{aligned}
+C(z,z)&=C_{UU}+LC_{RR}L^T+LC_{RU}+C_{UR}L^T\\
+&=Q_{UU}^{-1}+LS^{-1}L^T+LS^{-1}L^T\\
+&\qquad+L(-S^{-1}L^T)+(-LS^{-1})L^T\\
+&=Q_{UU}^{-1}.
+\end{aligned}}
+Thus, under #{\omega_Q}, the linear forms #{(x_R,z)} have covariance
+#{\operatorname{diag}(S^{-1},Q_{UU}^{-1})}.}
+
+\p{If #{\ell=a^Tx} and #{\ell'=b^Tx}, the pairing rule gives
+#{\omega_Q(\ell\ell')=a^TCb}. By multilinearity the same holds for a
+product of linear forms: its moment is the Isserlis value of the matrix of
+those pairwise covariances. Since #{x_U=z-Lx_R}, one has
+#{f(x)=f(x_R,Bx_R+z)} as polynomials. The moment #{\omega_Q(f)} is therefore
+the Isserlis moment of #{(x_R,z)} at the block diagonal covariance above.
+A matching that joins a retained factor to a residual factor contributes
+#{0}. Every surviving matching is a retained matching times a residual
+matching, and the sum factors. Averaging the residual variables first, with
+coefficients in #{A[x_R]}, is #{E[f\mid x_R]}. The retained Wick functional
+of that polynomial is #{\omega_Q(f)}.}
+
+\p{For the quadratic completion expand #{x_U=z+Bx_R=z-Lx_R}. The cross term
+produced by #{Q_{UR}} cancels against #{Q_{UU}L}, and the retained square
+that remains is #{S}. Each half is legitimate because #{2} is a unit. This
+is the same block arithmetic as the [real elimination theorem](fdip-000D),
+without positivity and without the factor
+#{(2\pi)^{|U|/2}(\det Q_{UU})^{-1/2}}.}
+}
+
+\p{The correspondence with formal libraries is partial. Mathlib's
+\leanref{Matrix.fromBlocks_eq_of_invertible₂₂} is the block
+factorization over a commutative ring, and
+\leanref{Matrix.isUnit_fromBlocks_iff_of_invertible₂₂} is the criterion
+that, once the eliminated block is invertible, the matrix is a unit if
+and only if the Schur complement is. \leanref{Matrix.det_fromBlocks₂₂}
+is the determinant identity. No Mathlib or TauCeti declaration supplies
+the Isserlis pairing rule or the tower identity over a commutative ring.
+TauCeti's \leanref/tauceti{Matrix.PosDef.gaussianCondCov} is the real
+positive-definite case only, as already recorded for the
+[real elimination theorem](fdip-000D).}
+
+\p{On the four-cycle matrix of the chapter,
+#{Q_{UU}=\begin{pmatrix}3&-1\\-1&3\end{pmatrix}} has determinant #{8}, and
+##{B=\frac18\begin{pmatrix}1&3\\3&1\end{pmatrix},\qquad
+\det S=45/8.}
+The product of the determinants is #{\det Q_{UU}\cdot\det S=45=\det Q}.
+Take #{f=x_2^2x_3x_0+x_2^3x_1}. Exact rational evaluation of the two Wick
+functionals gives
+##{E[f\mid x_R]=\frac{1}{512}\bigl(3x_0^4+20x_0^3x_1+42x_0^2x_1^2+36x_0x_1^3+27x_1^4+88x_0^2+144x_0x_1+216x_1^2\bigr)}
+and #{\omega_Q(f)=\omega_S(E[f\mid x_R])=32/75}. The conditional polynomial
+lies in #{\mathbb Q[x_0,x_1]}.}
+
+\p{The rule is not the [odd Wick rule](fdip-008K), whose matrix is
+alternating and whose value is a Pfaffian. It defines no measure on
+#{A^n}, no finite-field character sum, and no Euler product. Characteristic
+#{2} is outside the hypothesis; the [half-turn example](fdip-000N) is the
+place where an algebra in that characteristic is treated. Nothing here
+evaluates the real normalizer or compares these moments with the logarithm
+of a determinant.}
