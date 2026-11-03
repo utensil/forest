@@ -1,10 +1,75 @@
 \import{fdip-macros}
 \meta{agent-authored}{true}
 \tag{fdip}
-\title{The background stack}
-\date{2026-11-01}
+\taxon{Theorem}
+\title{Background symmetries form a presheaf of groupoids}
+\date{2026-11-03}
 
-\p{What additional data would be needed to organize backgrounds and their
-comparisons as a stack? This optional proposal remains speculative.}
+\p{Let a group #{G} act on the left on a set #{X}. For each subgroup
+#{H}, the action groupoid #{H\ltimes X} has the elements of #{X} as
+objects, and an arrow #{h:x\to y} for each #{h\in H} with
+#{h\cdot x=y}. If #{H} is contained in a subgroup #{K}, sending
+each arrow to itself is a functor
+#{H\ltimes X\to K\ltimes X}, identical on objects. These functors
+preserve identities and composition, and they compose with the
+inclusions of subgroups. The assignment is therefore a functor from
+the poset of subgroups of #{G} to groupoids. Equivalently, it is a
+groupoid-valued presheaf on the opposite of that poset.}
 
-\p{\em{Planned section (speculative, optional).} Its results and proofs are not yet developed here.}
+\p{The isomorphism classes of #{H\ltimes X} are the orbits of #{H}.
+Thus the objects modulo the symmetries in #{H} are the isomorphism
+classes of that groupoid. The [enriched four-cycle
+backgrounds](fdip-000X) carry an action of the dihedral group
+constructed there. The action groupoid in that note is the value of
+this presheaf at that whole group. That note is transcluded by
+[enriched backgrounds](fdip-001E). The [reader guide](fdip-004E)
+places that comparison in Part V, with the Clifford algebras and
+the Dirac operators. The chapter on [backgrounds and
+symmetry](fdip-0019) does not transclude the four-cycle note or
+the enriched-backgrounds note. It says that its examples prepare
+those comparisons. The arrow pattern is the
+[action groupoid](fgap-000P). This note does not claim that every
+background in that chapter arises from the four-cycle.}
+
+\p{\em{No stack is proved.} A stack would require a topology and a
+descent equivalence for compatible families. No cover is defined
+here, and no descent map is shown to be an equivalence. The finite
+tests of [where the topos layer begins](fgap-000U) record that the
+action-groupoid example does not require a quotient stack, and that
+those tests have supplied no site, descent theorem, or physical
+correspondence.
+\em{Whether this presheaf organises a stack of backgrounds remains
+open.}}
+
+\proof{
+\p{Composition in #{H\ltimes X} sends #{g:x\to y} and
+#{k:y\to z} to #{kg:x\to z}. The action law gives
+#{(kg)\cdot x=k\cdot(g\cdot x)}, so the composite is an arrow.
+The identity arrow is #{1:x\to x}. The inverse of #{h:x\to h\cdot x}
+is #{h^{-1}:h\cdot x\to x}, and #{h^{-1}} lies in #{H} because #{H}
+is a subgroup. The two inverse identities and associativity are the
+corresponding group laws. Every arrow is therefore invertible.}
+
+\p{Suppose #{H\subset K}. An arrow labelled by an element of #{H}
+is an arrow of #{K\ltimes X} with the same source and target. The
+identity element and the product #{kg} are unchanged by this
+inclusion, so the map on arrows preserves identities and
+composition. If #{H\subset K\subset L}, the composite of the two
+inclusions of arrows is the inclusion of #{H} into #{L}. The
+inclusion of a subgroup into itself is the identity functor. This
+is a functor from the subgroup poset to groupoids. That poset
+has one morphism from #{H} to #{K} exactly when #{H} is contained
+in #{K}, and the functor sends it to the inclusion of action
+groupoids. A
+groupoid-valued presheaf on a category is a functor from the
+opposite of that category. The opposite of the opposite of the
+subgroup poset is the subgroup poset, so the functor just
+constructed is a groupoid-valued presheaf on the opposite poset.}
+
+\p{Two objects are isomorphic exactly when some element of #{H}
+carries one to the other, which is the definition of an orbit.
+For the dihedral action, the groupoid at the whole group is the
+one whose arrows are already identified in the enriched four-cycle
+note. No topology on the subgroup poset is defined, so the
+presheaf is not given the data of a stack.}
+}
