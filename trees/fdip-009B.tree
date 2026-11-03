@@ -1,10 +1,88 @@
 \import{fdip-macros}
 \meta{agent-authored}{true}
 \tag{fdip}
-\title{Hierarchical #{\varphi^4}}
-\date{2026-11-01}
+\taxon{Theorem}
+\title{Hierarchical Gaussians share a site fourth moment}
+\date{2026-11-03}
 
-\p{How might a quartic interaction behave across a hierarchy of scales? This
-optional extension is speculative.}
+\p{Let #{p\ge 2} and #{k\ge 1} be integers, and let the sites be the
+residues modulo #{p^k}. Let #{E_j} and #{P_j} be the nested averages
+and orthogonal projectors of the [nested blocks](fdip-0099), and let
+#{Q=\sum_{j=0}^{k}c_jP_j} with every coefficient #{c_j} positive.
+Then #{Q} is a [positive precision](fdip-0004). In the counting basis
+its inverse has the same diagonal entry at every site,
+##{\sigma^2=\sum_{j=0}^{k-1}c_j^{-1}\bigl(p^{-j}-p^{-(j+1)}\bigr)
+ +c_k^{-1}p^{-k}.}
+The centered [Gaussian law](fdip-0005) of #{Q} gives every site the
+second moment #{\sigma^2}, and the fourth moment at each site is
+#{3\sigma^4}.}
 
-\p{\em{Planned section (speculative, optional).} Its results and proofs are not yet developed here.}
+\p{For distinct sites #{x} and #{y}, let #{v} be the largest integer
+such that #{x\equiv y\pmod{p^v}}. Then #{0\le v\le k-1}, and the
+matrix entry #{Q_{xy}} depends only on #{v}.}
+
+\p{The common value #{3\sigma^4} is the Gaussian moment of one quartic
+monomial. \em{No non-Gaussian hierarchical fixed point is proved
+here.} The paper of Abdesselam, Chandra and Guadagni,
+arXiv:1302.5971, has not been read, and this note does not state
+their result. Nothing proved here shows that the nearest-neighbour
+path precision, the [finite Wilson action](fdip-006O), or the
+[fourth-power trace](fdip-00A7) is a hierarchical precision on a
+residue ring.}
+
+\proof{
+\p{Each class of #{E_j} has #{p^j} sites, and #{E_j} replaces every
+value by the mean of its class. In the counting basis the matrix
+entry is #{p^{-j}} when the two sites are congruent modulo
+#{p^{k-j}}, and zero otherwise. The diagonal entry is #{p^{-j}} at
+every site. For #{j<k} the diagonal of #{P_j=E_j-E_{j+1}} is
+#{p^{-j}-p^{-(j+1)}}, and the diagonal of #{P_k=E_k} is #{p^{-k}}.}
+
+\p{The projectors are symmetric, pairwise orthogonal and sum to the
+identity. Symmetry gives #{h(v,P_jv)=h(P_jv,P_jv)}. Expanding
+#{v=\sum_i P_iv} and using #{h(P_iv,P_jv)=h(v,P_iP_jv)=0} for
+#{i\ne j} gives
+##{h(v,v)=\sum_{j=0}^{k}h(P_jv,P_jv).}
+The quadratic form is therefore
+##{h(v,Qv)=\sum_{j=0}^{k}c_j\,h(P_jv,P_jv).}
+Each summand is nonnegative. If #{v\ne 0}, then #{h(v,v)>0}, so
+the form is at least the least coefficient times #{h(v,v)} and is
+positive. Thus #{Q} is a positive precision. The [nested blocks](fdip-0099) give an inverse
+that multiplies the image of #{P_j} by #{c_j^{-1}}, hence
+#{Q^{-1}=\sum_{j=0}^{k}c_j^{-1}P_j}. Every diagonal entry equals
+#{\sigma^2}. The [inverse-precision theorem](fdip-000B) converts
+that entry into the second moment of the coordinate.}
+
+\p{Fix a site #{x} and let #{X} be the line through the counting basis
+vector #{\delta_x}. Retaining that line, the
+[retained Gaussian marginal](fdip-000E) is the Gaussian law on
+#{X} whose precision #{S} satisfies #{h(\delta_x,S^{-1}\delta_x)=\sigma^2}.
+The coordinate on #{X} is the scalar #{t} in #{t\delta_x}. Its law
+is the scalar Gaussian of precision #{a=1/\sigma^2}.}
+
+\p{Write #{g_a(t)=\exp(-at^2/2)}. The product rule gives
+##{(t^3g_a(t))'=3t^2g_a(t)-at^4g_a(t).}
+Integration on #{[-R,R]} gives
+##{a\int_{-R}^{R}t^4g_a(t)\,dt
+ =3\int_{-R}^{R}t^2g_a(t)\,dt
+ -2R^3\exp(-aR^2/2).}
+For #{u\ge 0} the exponential series gives #{e^u\ge u^2/2}. At
+#{u=aR^2/2} and #{R\ge 1} the boundary term is at most
+#{16/(a^2R)}, so it tends to zero. The integrands are nonnegative,
+and [polynomial moments](fdip-002W) make their full integrals finite,
+so the compact integrals increase to those limits. Therefore
+##{a\int_{\mathbb R}t^4g_a(t)\,dt
+ =3\int_{\mathbb R}t^2g_a(t)\,dt.}
+The [scalar Gaussian integral](fdip-002S) is #{I(a)}. Dividing by it
+and using the scalar identity #{\int t^2g_a=I(a)/a} from the
+[inverse-precision theorem](fdip-000B) gives the normalized moment
+#{3/a^2=3\sigma^4}. The polynomial pullback in \ref{fdip-000E}
+carries this moment to the coordinate #{\phi(x)}.}
+
+\p{If #{x\ne y}, the integer #{v} above is the largest for which the
+two sites are congruent modulo #{p^v}, and #{v\le k-1} because the
+sites are distinct residues modulo #{p^k}. Congruence modulo
+#{p^{k-j}} holds exactly when #{k-j\le v}. The matrix entry of
+#{E_j} at this pair is therefore determined by #{v}. The same is
+true of every #{P_j}, and of #{Q}.}
+}
