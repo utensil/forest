@@ -1,11 +1,96 @@
 \import{fdip-macros}
 \meta{agent-authored}{true}
 \tag{fdip}
-\title{Hodge theory, Maxwell and Gauss}
-\date{2026-11-01}
+\taxon{Theorem}
+\title{Harmonic cochains realize the Betti numbers}
+\date{2026-11-02}
 
-\p{How do a discrete inner product and a difference operator organize field
-equations? This section will take up Hodge theory, Maxwell's equations and
-Gauss's law in that setting.}
+\p{Let the square torus, its coboundary #{d}, and its evaluation
+pairing be those of the [Betti count](fdip-008Z). There is no cell
+below a vertex or above a face, so the coboundary of a face function
+is zero and there is no adjoint into a vertex from a lower cell.
+Write #{d^\dagger} for the adjoint of each coboundary in the
+evaluation pairing: #{\langle d\gamma,\beta\rangle
+=\langle\gamma,d^\dagger\beta\rangle}. On edge fields this is the
+\vocabk{counting adjoint}{fdip-0007}. The pairing is symmetric, so
+#{d} and #{d^\dagger} are adjoints of one another, and
+#{d+d^\dagger} is self-adjoint. The adjoint of the zero map is
+zero, and the adjoint reverses composition, so #{d\circ d=0}
+gives #{d^\dagger\circ d^\dagger=0}.}
 
-\p{\em{Planned section.} Its results and proofs are not yet developed here.}
+\p{On a cochain #{\gamma} of one degree, define
+#{\Delta\gamma=d(d^\dagger\gamma)+d^\dagger(d\gamma)}, with either
+summand omitted when its map has no cells to land on. Call
+#{\Delta} the \newvocab{Hodge Laplacian}, and call #{\gamma}
+\newvocab{harmonic} when #{\Delta\gamma=0}. Then
+#{\Delta=(d+d^\dagger)\circ(d+d^\dagger)} on each degree. On vertex
+functions, and with every edge weight equal to #{1}, #{\Delta} is
+the unit-weight case of the [weighted graph Laplacian](fdip-0007).
+The harmonic cochains in each degree realize the cohomology of that
+degree, so their dimensions are the Betti numbers #{(1,2,1)}. The
+kernel of #{d+d^\dagger} therefore has dimension #{4}. A vertex
+function is the adjoint of an edge field if and only if the sum of
+its values is zero.}
+
+\proof{
+\p{On a cochain of one degree the two summands of
+#{(d+d^\dagger)\circ(d+d^\dagger)} are #{d(d^\dagger\gamma)} and
+#{d^\dagger(d\gamma)}, because #{d\circ d} and
+#{d^\dagger\circ d^\dagger} vanish. Thus the square is #{\Delta}.
+Self-adjointness gives
+#{\langle\Delta\Phi,\Phi\rangle
+=\langle(d+d^\dagger)\Phi,(d+d^\dagger)\Phi\rangle}
+for a sum #{\Phi} of cochains of all three degrees. Expanding the
+degree-wise formula gives
+##{\langle\Delta\gamma,\gamma\rangle
+=\langle d\gamma,d\gamma\rangle
++\langle d^\dagger\gamma,d^\dagger\gamma\rangle.}
+Both summands are nonnegative, so #{\Delta\gamma=0} if and only if
+#{d\gamma=0} and #{d^\dagger\gamma=0}. The same identity shows that
+#{(d+d^\dagger)\Phi=0} if and only if every degree of #{\Phi} is
+harmonic.}
+
+\p{On vertex functions the incoming adjoint is zero, so
+#{\Delta f=d^\dagger(df)}. The counting adjoint on edge fields is
+this #{d^\dagger}, and for the constant weight #{1} the weighted
+graph Laplacian is #{d_R^\dagger d_R}. The two operators agree.}
+
+\p{Fix a degree, and write #{d_-} for the coboundary into that
+degree. Its image is contained in the kernel of the outgoing
+coboundary, because #{d\circ d=0}. The rank of #{d_-^\dagger}
+equals the rank of #{d_-}, so the kernel of the adjoint has
+dimension equal to the dimension of the cochain space minus that
+rank. Added to the dimension of the image, the total is the whole
+space. If #{d_-\alpha} lies in the kernel of #{d_-^\dagger}, then
+#{\langle d_-\alpha,d_-\alpha\rangle
+=\langle\alpha,d_-^\dagger d_-\alpha\rangle=0},
+so #{d_-\alpha=0}. The image therefore meets that kernel only at
+zero, and the cochain space is their direct sum. A closed cochain
+splits uniquely as #{d_-\alpha+\rho} with
+#{d_-^\dagger\rho=0}. The outgoing coboundary kills #{d_-\alpha}
+and kills the sum, so it kills #{\rho}. Thus #{\rho} is harmonic.
+The splitting of the closed cochains is direct, and the dimension
+of the harmonic space is the Betti number of that degree.}
+
+\p{On vertices the kernel of #{d} is the constants. The Betti count
+gives that kernel dimension #{1}, so the rank of #{d} is one less
+than the number of vertices. The image of #{d^\dagger} from edge
+fields is orthogonal to that kernel, because
+#{\langle d^\dagger\alpha,f\rangle=\langle\alpha,df\rangle}. The
+rank of this adjoint equals the rank of #{d}, so the image is the
+orthogonal complement of the constants. The pairing of a vertex
+function against the constant #{1} is the sum of its values, and
+therefore the complement is the set of vertex functions whose
+values sum to zero.}
+}
+
+\p{The constant vertex functions are harmonic. The two winding edge
+fields of the Betti count are closed, and each vertex is the head
+of one edge and the source of one edge in the direction of the
+winding, with equal values, so the counting-adjoint formula gives
+zero. The sum of the face values of every coboundary is zero, so
+the constant face function is orthogonal to every coboundary and
+its adjoint vanishes. The four cochains lie in the three degrees,
+and the two edge fields are not scalar multiples of one another,
+so they are linearly independent. The kernel has dimension #{4},
+and therefore they form a basis.}
