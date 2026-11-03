@@ -42,7 +42,8 @@ class PdfNumberingTest(unittest.TestCase):
             '<html:p>References: <f:ref display-uri="guide"/>; '
             '<f:ref display-uri="aside"/>; '
             '<f:link type="local" display-uri="claim">Theorem <f:contextual-number/></f:link>. '
-            '<f:link type="local" display-uri="aside">Named aside</f:link>.'
+            '<f:link type="local" display-uri="aside">Named aside</f:link>. '
+            '<f:ref display-uri="bridge"/>.'
             "</html:p>"
         )
         fixture = (
@@ -117,10 +118,13 @@ class PdfNumberingTest(unittest.TestCase):
         ):
             with self.subTest(heading=heading):
                 self.assertIn(heading, self.pdf_text)
+        # \Cref prints the taxon name. numbered=no leaves its counter empty for
+        # every card, including Theorem; the forest card number is the heading.
         self.assertIn(
-            "References: Remark (Reader guide); Remark (Later aside); Theorem 1.1. Named aside.",
+            "References: Remark (Reader guide); Remark (Later aside); Theorem 1.1. Named aside. Discussion .",
             self.pdf_text,
         )
+        self.assertIn("\\Cref{bridge}", self.tex)
         self.assertNotIn("\\Cref{guide}", self.tex)
         self.assertNotIn("\\Cref{aside}", self.tex)
 
