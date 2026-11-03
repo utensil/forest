@@ -10,7 +10,8 @@
 Choose \vocabk{finite sets}{ftip-000A} #{V,E} and maps
 #{s,h:E\to V}. The edge #{e} goes from #{s(e)} to #{h(e)};
 loops and distinct edges with the same endpoints are allowed.
-The \newvocab{vertex-field module} and \newvocab{edge-field module} are
+The \newvocab{field modules} are the vertex-field module and the
+edge-field module
 ##{\mathcal F_R(V)=\{f:V\to R\},\qquad
    \mathcal F_R(E)=\{a:E\to R\}.}
 Addition, scalar multiplication and multiplication are pointwise:
@@ -29,31 +30,18 @@ Thus #{(df)(e)=f(h(e))-f(s(e))}. This is an
 \vocabk{#{R}-linear map}{ca-001F}, with both coefficient rings equal to
 #{R} and scalar homomorphism #{\sigma=\operatorname{id}_R}, as in
 \ref{ca-001G}. The two field modules need not coincide, so #{d^2}
-has no meaning without an additional composable map.}
-
-\proof{
-\p{Every module and algebra identity follows by evaluation from the
-corresponding identity in #{R}. For example,
-#{((fg)k)(v)=f(v)g(v)k(v)=(f(gk))(v)}, and
-#{((r1)f)(v)=rf(v)}. For each #{v\in V}, let #{\delta_v(u)} be
-#{1} if #{u=v} and #{0} otherwise. Evaluation at #{u} proves
-##{f=\sum_{v\in V}f(v)\delta_v,}
-and proves uniqueness of its coefficients. The same argument applies to
-edge fields. Evaluation also proves every pullback law; for instance
-#{a^*(fg)(e)=f(a(e))g(a(e))}. Finally,
-##{d(rf+g)(e)=r\bigl(f(h(e))-f(s(e))\bigr)
-                  +g(h(e))-g(s(e)),}
-which proves linearity.}
-}
+has no meaning without an additional composable map. The module,
+algebra, pullback and linearity laws, and the kernel of #{d}, are
+\ref{fdip-00AC}.}
 
 \p{The zero ring and empty carriers are allowed. On an empty set there
-is one field, and the constant #{1} is also zero; the sum above is empty.
+is one field, and the constant #{1} is also zero.
 No nontriviality, pairing, retained subset or positivity is assumed.
 The algebra convention is
 \citet{Section 22.2}{stacks2017stacks}, [Tag 09JF](https://stacks.math.columbia.edu/tag/09JF).
 For real oriented-graph incidence, see
 \citet{Section 2.1, p. 4}{spielman2009effective}; the ring-level
-claims and degenerate cases follow from the direct proof here.}
+claims and degenerate cases follow from \ref{fdip-00AC}.}
 
-\p{The [alternating four-cycle](fdip-0003) computes these incidence
-fields and their ordered coordinate arrays.}
+\p{The alternating four-cycle of \ref{fdip-0003} is an instance of
+these fields.}
