@@ -1,10 +1,133 @@
 \import{fdip-macros}
 \meta{agent-authored}{true}
 \tag{fdip}
-\title{Exact coarse-graining and the projective limit}
-\date{2026-11-01}
+\taxon{Theorem}
+\title{Block means preserve the hierarchical precision}
+\date{2026-11-03}
 
-\p{When do exact eliminations at different levels fit into one compatible
-family? This section asks how that family can determine a projective limit.}
+\p{Let #{p\ge 2} and #{k\ge 1} be integers, and let the sites be the
+residues modulo #{p^k}. For #{0\le j\le k}, let #{E_j} replace the
+value at each site by the mean of the sites congruent to it modulo
+#{p^{k-j}}. Each class has #{p^j} sites, so #{E_0} is the identity and
+#{E_k} is the mean of every site. These are the averages of the
+[nested blocks](fdip-0099). Set #{P_j=E_j-E_{j+1}} for #{j<k} and
+#{P_k=E_k}. For nonzero real coefficients #{c_0,\ldots,c_k}, the
+hierarchical precision #{Q=\sum_{j=0}^{k}c_jP_j} is invertible.}
 
-\p{\em{Planned section.} Its results and proofs are not yet developed here.}
+\p{Let #{A} send a function #{\xi} on these sites to the residues modulo
+#{p^{k-1}} by the class means
+##{(A\xi)(r)=\frac{1}{p}\sum_{t=0}^{p-1}\xi(r+tp^{k-1}).}
+The matrix #{(AQ^{-1}A^{T})^{-1}} equals the hierarchical precision
+#{Q'} of depth #{k-1} with coefficients
+##{c'_i=pc_{i+1}\qquad(0\le i\le k-1).}
+If every #{c_j} is positive, #{Q} is the precision of a centered
+[Gaussian law](fdip-0005). In the counting basis, the second-moment
+matrix of #{A\xi} is #{(Q')^{-1}}.}
+
+\p{Fix #{\lambda>0} and a positive mass #{m}, and take #{c_j=\lambda^j} for
+#{j<k} together with #{c_k=m}. Replacing #{A\xi} by
+#{Z=\sqrt{p\lambda}\,A\xi} divides the precision matrix #{Q'} by #{p\lambda}.
+The resulting matrix is
+hierarchical of depth #{k-1}, with coefficient #{\lambda^i} on each
+projector below the top level and with top coefficient #{m/\lambda}. That
+top coefficient grows when #{0<\lambda<1}, stays unchanged when #{\lambda=1}, and
+shrinks when #{\lambda>1}. In the sense that a mass is relevant when it
+grows toward coarser scales, relevance holds only for #{0<\lambda<1}. The same coefficient
+relation repeats at every depth: the second-moment matrix of each
+block mean is the inverse of the coarser hierarchical precision. These matrix relations do not by
+themselves produce a Gaussian measure on functions on the #{p}-adic
+integers.}
+
+\proof{
+\p{Each #{E_j} is symmetric, because its matrix is constant on the
+pairs inside a class and zero across classes, and #{E_j^2=E_j},
+because a class mean is unchanged by a second average. If #{i\ge j},
+congruence modulo #{p^{k-i}} is coarser than congruence modulo
+#{p^{k-j}}, so each coarser class is a union of finer classes. A
+function constant on a coarser class is constant on each finer class
+inside it, and therefore #{E_jE_i=E_i}. That identity does not use the
+sizes of the classes. For the other order, every finer class has
+#{p^j} sites, so the mean on a coarser class is the mean of the finer
+means and #{E_iE_j=E_i}.}
+
+\p{In particular #{E_{j+1}E_j=E_jE_{j+1}=E_{j+1}}. Then
+#{P_jE_{j+1}=E_jE_{j+1}-E_{j+1}^2=E_{j+1}-E_{j+1}=0}. If #{i>j},
+then #{i\ge j+1}.
+The size-free identity gives #{E_{j+1}E_i=E_i}, so
+#{E_if=E_{j+1}(E_if)} and the image of #{E_i} lies in the image of
+#{E_{j+1}}. When #{i<k} the same left factor gives
+#{E_{j+1}E_{i+1}=E_{i+1}}, and both summands of #{P_i} land in that
+image. When #{i=k}, #{E_{j+1}E_k=E_k}. A vector in the image of
+#{P_i} is therefore #{E_{j+1}} applied to something, and
+#{P_jE_{j+1}=0} gives #{P_jP_i=0}. Both matrices are symmetric, so the
+opposite product vanishes as well. For #{j<k} the square expands to
+#{E_j-E_jE_{j+1}-E_{j+1}E_j+E_{j+1}^2}, which equals
+#{E_j-E_{j+1}-E_{j+1}+E_{j+1}=P_j}. The case #{P_k=E_k} is symmetric
+and idempotent because #{E_k} is. The sum of the projectors telescopes
+to #{E_0}. Thus the #{P_j} are pairwise orthogonal projectors summing
+to the identity, and #{Q} multiplies the image of #{P_j} by #{c_j}.
+Its inverse multiplies that image by #{c_j^{-1}}. The functions carry
+the [counting inner product](fdip-0002). Since #{P_j} is
+symmetric and idempotent, #{\xi\cdot P_j\xi=|P_j\xi|^2}, and the quadratic
+form is #{\xi\cdot Q\xi=\sum_j c_j|P_j\xi|^2}. If #{\xi\neq 0}, some
+#{P_j\xi} is nonzero because the projectors sum to the identity. Whenever
+every coefficient is positive, the form is therefore positive, and it
+is the precision of a centered Gaussian. By the
+[inverse-precision theorem](fdip-000B), that law has covariance
+operator #{Q^{-1}}. In the counting basis, the second-moment matrix of
+#{A\xi} is #{AQ^{-1}A^{T}}.}
+
+\p{Write #{S} for the lift that makes a coarse function constant on
+each class:
+#{(Sg)(r+tp^{k-1})=g(r)}. Averaging a constant returns the constant,
+so #{AS=I}. The counting pairing gives
+#{(A^{T}g)\cdot \xi=g\cdot A\xi}, and the right-hand side expands to
+##{\sum_r g(r)\frac{1}{p}\sum_{t=0}^{p-1}\xi(r+tp^{k-1}).}
+The coefficient of #{\xi(r+tp^{k-1})} is #{g(r)/p}, so
+#{A^{T}=S/p}. The class mean is
+#{(E_1\xi)(r+tp^{k-1})=(A\xi)(r)}. Averaging those #{p} equal values
+returns #{(A\xi)(r)}, hence #{AE_1=A} and #{AP_0=0}.}
+
+\p{For #{j\ge 1}, the coarse average #{E'_{j-1}} is formed on the
+residues modulo #{p^{k-1}} by classes congruent modulo #{p^{k-j}}.
+Fix a site #{x=r+tp^{k-1}}. Since #{j\ge 1}, the step #{p^{k-1}} is
+divisible by #{p^{k-j}}, so the fine class of #{x} modulo #{p^{k-j}}
+consists of the sites #{r'+t'p^{k-1}} whose coarse residue satisfies
+#{r'\equiv r} modulo #{p^{k-j}}. Each such #{r'} occurs for all #{p}
+choices of #{t'}, and #{Sg} depends only on #{r'}. The fine mean is
+therefore the coarse mean of #{g}, which is
+#{(E'_{j-1}g)(r)=(SE'_{j-1}g)(x)}. Thus #{E_jS=SE'_{j-1}}. Applying
+#{A} and using #{AS=I} gives #{AE_jS=E'_{j-1}}, and
+#{AE_jA^{T}=E'_{j-1}/p}.}
+
+\p{For #{1\le j\le k-1} this difference is
+#{AP_jA^{T}=(E'_{j-1}-E'_j)/p}. The top term is
+#{AE_kA^{T}=E'_{k-1}/p}. Because #{AP_0=0},
+##{AQ^{-1}A^{T}=\sum_{j=1}^{k}c_j^{-1}AP_jA^{T}.}
+Reindex #{i=j-1}. The right-hand side equals
+##{\sum_{i=0}^{k-1}(pc_{i+1})^{-1}P'_i,}
+where #{P'_i=E'_i-E'_{i+1}} for #{i<k-1} and #{P'_{k-1}=E'_{k-1}}.
+The same orthogonal decomposition on the coarser residues says that
+this sum is the inverse of the hierarchical precision #{Q'} with
+coefficients #{c'_i=pc_{i+1}}. The matrix #{AQ^{-1}A^{T}} is therefore
+invertible, and its inverse is #{Q'}. If the fine coefficients are
+positive, the coarse coefficients are positive as well.}
+
+\p{Now take #{c_j=\lambda^j} for #{j<k} and #{c_k=m}, with #{\lambda>0} and
+#{m>0}. Then #{c'_i=p\lambda^{i+1}} for #{i<k-1}, while
+#{c'_{k-1}=pm}. Dividing #{Q'} by #{p\lambda} sends #{c'_i} to #{\lambda^i} below
+the top level and sends the top coefficient to #{m/\lambda}. If #{Z} denotes
+#{\sqrt{p\lambda}\,A\xi}, the second-moment matrix of #{Z} is #{p\lambda} times the
+second-moment matrix of #{A\xi}, so the second-moment matrix of
+#{Z} is the inverse of #{Q'/(p\lambda)}.
+The top coefficient #{m/\lambda} is larger than #{m} when #{0<\lambda<1}, equal
+to #{m} when #{\lambda=1}, and smaller than #{m} when #{\lambda>1}.}
+
+\p{Repeat the construction at every depth. If positive coefficients
+#{c^{(k)}_0,\ldots,c^{(k)}_k} satisfy
+#{c^{(k-1)}_i=pc^{(k)}_{i+1}} for each #{i}, the second-moment matrix
+of the depth-#{k} block mean is the inverse of the depth-#{(k-1)}
+hierarchical precision. The same matrix identity repeats at every
+depth. These identities do not by themselves produce a Gaussian
+measure on functions on the #{p}-adic integers.}
+}
