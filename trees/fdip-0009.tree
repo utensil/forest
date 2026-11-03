@@ -6,21 +6,11 @@
 \lean{fwdDiff_smul}
 \date{2026-10-16}
 
-\p{Let #{R} be a commutative unital ring, let #{n\ge1}, and take
-#{V=\mathbb Z/n\mathbb Z}, #{E=\{e_i:i\in V\}}, with
-#{s(e_i)=i} and #{h(e_i)=i+1}. The specified edge-label bijection gives
-an \vocabk{#{R}-algebra isomorphism}{ca-0015}
-##{j:\mathcal F_R(E)\to\mathcal F_R(V),\qquad j(a)(i)=a(e_i).}
-Its inverse sends #{f} to the edge field #{e_i\mapsto f(i)};
-both preserve the pointwise operations. With the
-\vocabk{ring-valued incidence map}{fdip-0010}, the
-\newvocab{cyclic shift} and \newvocab{forward difference} are
-##{(Tf)(i)=f(i+1),\qquad \Delta=jd=T-I.}
-The shift is an \vocabk{algebra automorphism}{ca-0015}, with
-#{(T^{-1}f)(i)=f(i-1)}. Vertex and edge fields are identified only
-through the displayed map #{j}.}
+\p{Let #{R} be a commutative unital ring and let #{n\ge1}. On
+#{\mathcal F_R(\mathbb Z/n\mathbb Z)}, let #{T} and #{\Delta} be the
+\vocabk{cyclic shift and forward difference}{fdip-00AN}.}
 
-\p{For #{f,g\in\mathcal F_R(V)},
+\p{For #{f,g} in that module,
 ##{\Delta(fg)=(\Delta f)(Tg)+f\Delta g.}
 Equivalently,
 ##{\Delta(fg)=(\Delta f)g+f\Delta g+(\Delta f)(\Delta g).}
@@ -32,17 +22,19 @@ with no continuum approximation.}
 \proof{
 \p{For every #{i}, #{(jh^*f)(i)=f(i+1)=Tf(i)} and
 #{(js^*f)(i)=f(i)}. Applying the product-preserving map #{j} to
-\ref{fdip-0012} therefore gives the first formula.
-Substitute #{Tg=g+\Delta g} to obtain the second. The inverse-shift
-formula follows by adding and subtracting one modulo #{n}.}
+\ref{fdip-0012} therefore gives the first formula, where #{j}, #{s}
+and #{h} are the isomorphism and endpoint maps of that cycle.
+Substitute #{Tg=g+\Delta g} to obtain the second.}
 }
 
 \p{At #{n=1}, the cycle has a loop and #{T=I}, #{\Delta=0}.
 At #{n=2}, its two edges have opposite orientations between the same
-vertices; it is not a single simple edge. The [four-cycle](fdip-0003)
-exhibits failure of the unshifted Leibniz rule. The separate
-[counting-adjoint calculation](fdip-0014) adds a real pairing
-and identifies the positive kinetic factorization.}
+vertices; it is not a single simple edge. The unshifted Leibniz rule
+fails by the correction #{\,(\Delta f)(\Delta g)}. On the four-cycle,
+#{f=\delta_1} satisfies #{f^2=f}; at vertex #{0},
+#{\,(\Delta(f^2))(0)=1} and #{\,((\Delta f)f+f\Delta f)(0)=0}, while
+#{\,((\Delta f)(Tf)+f\Delta f)(0)=1}. \ref{fdip-0014} adds a real
+pairing and identifies the positive kinetic factorization.}
 
 \p{Mathlib's \leanref{fwdDiff_smul} proves the three-term formula for
 an additive commutative monoid, a ring and a module over it. Take the

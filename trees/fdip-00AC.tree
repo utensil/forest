@@ -1,0 +1,39 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Lemma}
+\title{Basic properties of incidence fields}
+\date{2026-11-03}
+
+
+\p{Let #{R} be a commutative unital ring, and let #{V,E,s,h} and the
+\vocabk{field modules}{fdip-0010},
+\vocabk{field pullback}{fdip-0010} and
+\vocabk{ring-valued incidence map}{fdip-0010} be as in that
+definition. The pointwise operations make both modules commutative
+unital #{R}-algebras, the indicator fields are a basis of each, every
+field pullback preserves the operations, and #{d} is #{R}-linear.
+Call two vertices equivalent when they are equal or a finite sequence
+of edges has them as successive ends, ignoring orientation. The
+equivalence classes are the undirected components; a vertex that lies
+on no edge is a component of its own. Then #{df=0} if and only if
+#{f} is constant on each undirected component.}
+
+\proof{
+\p{Every module and algebra identity follows by evaluation from the
+corresponding identity in #{R}. For each #{v\in V}, let #{\delta_v(u)}
+be #{1} if #{u=v} and #{0} otherwise. Evaluation at #{u} proves
+##{f=\sum_{v\in V}f(v)\delta_v,}
+and proves uniqueness of the coefficients. The same argument applies
+to edge fields. On an empty carrier the sum is empty and there is one
+field. Evaluation also proves every pullback law; for instance
+#{a^*(fg)(e)=f(a(e))g(a(e))}. Finally
+##{d(rf+g)(e)=r\bigl(f(h(e))-f(s(e))\bigr)+g(h(e))-g(s(e)),}
+which proves linearity. These evaluations apply to the zero ring.}
+\p{If #{df=0}, then #{f(h(e))=f(s(e))} for every edge, so #{f} takes
+the same value at the successive ends of any finite sequence of edges
+and is constant on each component. Conversely, the two ends of an edge
+lie in one component, and the two ends of a loop are the same vertex,
+so a field constant on each component has #{df=0}. The argument uses
+no division.}
+}
