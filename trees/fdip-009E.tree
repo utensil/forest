@@ -47,13 +47,14 @@ the chosen character. Conversely, the restrictions of such a
 function are characters, and they agree on shared matrices.}
 
 \p{On an elementary tensor,
-#{(A\otimes B)(e_j\otimes f_l)=Ae_j\otimes Bf_l}. Applying this
-twice gives
+#{(A\otimes B)(e_j\otimes f_l)=Ae_j\otimes Bf_l}. Extending
+that rule by linearity and applying it twice gives
 #{(A\otimes B)(C\otimes D)=(AC)\otimes(BD)}. The matrix entry of
 #{A\otimes B} from #{e_j\otimes f_l} to #{e_i\otimes f_k} is
-#{A_{ij}B_{kl}}. The adjoint entry is the conjugate
+#{A_{ij}B_{kl}}. The adjoint entry, placed from
+#{e_i\otimes f_k} back to #{e_j\otimes f_l}, is the conjugate
 #{\overline{A_{ij}B_{kl}}=A^*_{ji}B^*_{lk}}, which is the
-corresponding entry of #{A^*\otimes B^*}. Thus
+matching entry of #{A^*\otimes B^*}. Thus
 #{(A\otimes B)^*=A^*\otimes B^*}.}
 
 \p{The Pauli matrices are Hermitian and square to #{I}.
@@ -114,7 +115,7 @@ The column products are
 Within a row or a column the three matrices commute. If
 #{(AB)C=I\otimes I} and #{C^2=I\otimes I}, then
 #{AB=(AB)C^2=((AB)C)C=C}. If instead #{(AB)C=-(I\otimes I)},
-then #{AB=-C}. The first case is every row and the first two
+then #{AB=(AB)C^2=((AB)C)C=(-(I\otimes I))C=-C}. The first case is every row and the first two
 columns. The second case is the third column.}
 
 \p{A character sends a Hermitian involution to a complex number
@@ -141,9 +142,12 @@ trace zero, so each #{\sigma_k} has trace zero. The product of two
 distinct matrices among the four is either one of them or #{\pm i}
 times one of them, and in every case the trace is zero. Distinct
 tensors #{\sigma_a\otimes\sigma_b}
-are therefore orthogonal for #{\operatorname{Tr}(P^*Q)}. The four
-matrices of any one row or column are four distinct tensors of
-this form, so they are linearly independent.}
+are therefore orthogonal for #{\operatorname{Tr}(P^*Q)}. The
+square of such a tensor is #{I\otimes I}, so
+#{\operatorname{Tr}(P^*P)=4}. The four matrices of any one row or
+column are the identity tensor together with three generators.
+They are four distinct tensors of this form, each with nonzero
+trace against itself, so they are linearly independent.}
 
 \p{Write #{A} and #{B} for the first two matrices of a context and
 #{C} for the third. They commute. Assign #{\pm 1} freely to #{A}
