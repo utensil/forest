@@ -1,10 +1,81 @@
 \import{fdip-macros}
 \meta{agent-authored}{true}
 \tag{fdip}
-\title{Ultrametric levels}
-\date{2026-11-01}
+\taxon{Theorem}
+\title{Nested blocks diagonalize the hierarchical precision}
+\date{2026-11-03}
 
-\p{How does a hierarchy of nested regions specify a notion of distance? This
-section will introduce the levels needed for the later comparison of scales.}
+\p{On the path with vertices #{0,1,2,3,4,5}, let #{\mu>0} and let the
+precision be the path Laplacian plus #{\mu} on the diagonal. The
+diagonal entries are #{\mu+1} at the two ends and #{\mu+2} at the
+four interior vertices, and each of the five edges contributes
+#{-1}. Write #{m_0,m_1,m_2} for the averages of the three adjacent
+pairs and #{d_0,d_1,d_2} for half the differences, so that the field
+on pair #{i} is #{m_i+d_i} and #{m_i-d_i}. The change of coordinates
+has constant Jacobian #{-8}. In these coordinates the quadratic form
+has blocks
+##{\begin{aligned}
+H_{mm}&=\begin{pmatrix}2\mu+1&-1&0\\-1&2\mu+2&-1\\0&-1&2\mu+1\end{pmatrix},\\
+B&=\begin{pmatrix}-1&-1&0\\1&0&-1\\0&1&1\end{pmatrix},\\
+D&=\begin{pmatrix}2\mu+5&1&0\\1&2\mu+6&1\\0&1&2\mu+5\end{pmatrix},
+\end{aligned}}
+where #{B} holds the cross terms between means and differences. The
+marginal precision of the three means is the Schur complement
+#{H_{mm}-BD^{-1}B^{T}}.}
 
-\p{\em{Planned section.} Its results and proofs are not yet developed here.}
+\p{The corner of #{H_{mm}} vanishes. The corner of
+#{BD^{-1}B^{T}} is the pairing of #{(-1,-1,0)} with the solution of
+#{D(x,y,z)^{T}=(0,1,1)^{T}}. The first row gives
+#{y=-(2\mu+5)x}. The last row then gives
+#{z=x+1/(2\mu+5)}. Substitution in the middle row produces
+##{-2(\mu+2)(2\mu+7)x=\frac{2(\mu+2)}{2\mu+5},}
+hence #{x=-1/((2\mu+5)(2\mu+7))} and
+#{y=1/(2\mu+7)}. The pairing equals the corner of #{BD^{-1}B^{T}}:
+##{-x-y=-\frac{2(\mu+2)}{(2\mu+5)(2\mu+7)}.}
+Subtracting it from the zero corner of #{H_{mm}} gives the positive
+quantity
+##{\frac{2(\mu+2)}{(2\mu+5)(2\mu+7)}.}
+A nearest-neighbour precision on the three coarse vertices would have
+a zero corner. These pair means do not.}
+
+\p{Let #{p\ge 2} and #{k\ge 1} be integers, and let the sites be the
+residues modulo #{p^k}. For #{0\le j\le k} let #{E_j} replace the
+value at each site by the mean of the sites congruent to it modulo
+#{p^{k-j}}. Each such class has #{p^j} sites. Thus #{E_0} is the
+identity, since congruence modulo #{p^k} isolates every residue, and
+#{E_k} replaces every value by the mean of all the sites. Each
+#{E_j} is symmetric, because its matrix is constant on the pairs
+inside each class and zero across classes, and #{E_j^2=E_j}, because
+a class mean is unchanged by a second average. If #{i\ge j},
+congruence modulo #{p^{k-i}} is coarser than congruence modulo
+#{p^{k-j}}, so each coarser class is a union of finer classes. A
+function constant on a coarser class is constant on each finer class
+inside it, and therefore #{E_jE_i=E_i}. That identity does not use
+the sizes of the classes. For the other order, every finer class has
+#{p^j} sites, so the mean on a coarser class is the mean of the finer
+means and #{E_iE_j=E_i}.}
+
+\p{In particular #{E_{j+1}E_j=E_jE_{j+1}=E_{j+1}}. Set
+#{P_j=E_j-E_{j+1}} for #{j<k}, and #{P_k=E_k}. Then
+#{P_jE_{j+1}=E_jE_{j+1}-E_{j+1}^2=E_{j+1}-E_{j+1}=0}. If #{i>j},
+then #{i\ge j+1}. The size-free identity gives #{E_{j+1}E_i=E_i}, so
+#{E_if=E_{j+1}(E_if)} and the image of #{E_i} lies in the image of
+#{E_{j+1}}. When #{i<k} the same left factor gives
+#{E_{j+1}E_{i+1}=E_{i+1}}, and both summands of #{P_i} land in that
+image. When #{i=k}, #{E_{j+1}E_k=E_k}. A vector in the image of
+#{P_i} is therefore #{E_{j+1}} applied to something, and
+#{P_jE_{j+1}=0} gives #{P_jP_i=0}.
+Both matrices are symmetric, so the opposite product vanishes as
+well. The case #{P_k=E_k} is symmetric and idempotent because
+#{E_k} is. For #{j<k}, the square expands to
+#{E_j-E_jE_{j+1}-E_{j+1}E_j+E_{j+1}^2}, and the relations replace
+that by #{E_j-E_{j+1}-E_{j+1}+E_{j+1}=P_j}. Symmetry of #{P_j} is
+the same property of the two averages. The sum of the projectors
+telescopes to #{E_0}, since #{E_0} is the identity. These matrices
+are orthogonal projectors, they are pairwise orthogonal, and they
+sum to the identity. For real coefficients #{c_0,\ldots,c_k}, the
+hierarchical precision
+##{Q=\sum_{j=0}^{k}c_jP_j}
+acts on the image of #{P_j} by multiplication by #{c_j}. Whenever
+every coefficient is nonzero, #{Q} is invertible and its inverse
+multiplies that same image by #{c_j^{-1}}.}
