@@ -80,6 +80,10 @@
     <xsl:text>definition</xsl:text>
   </xsl:template>
 
+  <xsl:template match="f:taxon[text()='Discussion']">
+    <xsl:text>discussion</xsl:text>
+  </xsl:template>
+
   <xsl:template match="f:taxon[text()='Proposition']">
     <xsl:text>proposition</xsl:text>
   </xsl:template>

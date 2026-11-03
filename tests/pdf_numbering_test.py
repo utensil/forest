@@ -61,6 +61,7 @@ class PdfNumberingTest(unittest.TestCase):
                         tree("deep-aside", "Deep aside", "Remark", "false", "Deep body.")
                         + tree("deep-claim", "Deep claim", "Conjecture", body="Deep claim body.")
                     ))
+                    + tree("bridge", "Comparing values", "Discussion", body="Bridge body.")
                 )
             )
             + tree("last", "Last chapter", body=references)
@@ -102,7 +103,7 @@ class PdfNumberingTest(unittest.TestCase):
         for address, number in {
             "guide": "", "foundations": "1", "claim": "1.1", "aside": "",
             "next": "1.2", "details": "1.3", "deep-aside": "",
-            "deep-claim": "1.3.1", "last": "2",
+            "deep-claim": "1.3.1", "bridge": "1.4", "last": "2",
         }.items():
             with self.subTest(address=address):
                 self.assertEqual(self.label(address)[0], number)
@@ -111,7 +112,8 @@ class PdfNumberingTest(unittest.TestCase):
         for heading in (
             "Remark (Reader guide)", "1 Foundations", "Theorem 1.1 (First claim)",
             "Remark (Later aside)", "Proposition 1.2 (Next claim)",
-            "Remark (Deep aside)", "Conjecture 1.3.1 (Deep claim)", "2 Last chapter",
+            "Remark (Deep aside)", "Conjecture 1.3.1 (Deep claim)",
+            "Discussion 1.4 (Comparing values)", "2 Last chapter",
         ):
             with self.subTest(heading=heading):
                 self.assertIn(heading, self.pdf_text)
@@ -123,7 +125,7 @@ class PdfNumberingTest(unittest.TestCase):
         self.assertNotIn("\\Cref{aside}", self.tex)
 
     def test_distinct_link_destinations(self):
-        addresses = ("guide", "foundations", "claim", "aside", "next", "deep-aside", "deep-claim")
+        addresses = ("guide", "foundations", "claim", "aside", "next", "deep-aside", "deep-claim", "bridge")
         anchors = [self.label(address)[1] for address in addresses]
         self.assertTrue(all(anchors))
         self.assertEqual(len(anchors), len(set(anchors)))
