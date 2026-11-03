@@ -1,0 +1,88 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{Invariant tensors count the gauge orbits}
+\date{2026-11-03}
+
+\p{Let #{G} be a finite group, with unitary irreducible
+representatives as in the [surface data](fdip-006V). Let
+#{s,h:E\to V} be a [finite incidence presentation](fdip-0002);
+loops and parallel edges are allowed, and either set may be
+empty. The [gauge action](fdip-006E) of #{G^V} on connections
+#{U\in G^E} is
+##{(g\cdot U)_e=g_{h(e)}U_eg_{s(e)}^{-1}.}
+A function #{F:G^E\to\mathbb C} is gauge invariant when
+#{F(g\cdot U)=F(U)} for every #{g}. The dimension of the
+gauge-invariant functions equals the number of orbits of this
+action. It also equals
+##{\sum_{\rho}\prod_{x\in V}\dim W_x(\rho)^G,}
+where the sum runs over all assignments of irreducible
+representatives to the edges. For each assignment, the local
+space at a vertex #{x} is the tensor product of the
+representation spaces of the edges leaving #{x} and of the dual
+spaces of the edges entering #{x}. An empty tensor product is
+the scalar line. The group element #{g_x} acts by
+#{\rho_e(g_x)^{-1}} on each outgoing factor and by
+#{(\,g_x\cdot\lambda)(v)=\lambda(\rho_e(g_x)v)} on each incoming
+covector. A basis of the invariant tensors in these local
+spaces, as the edge assignment varies, pushes to a basis of the
+gauge-invariant functions.}
+
+\p{The datum of an edge assignment together with one invariant
+tensor at each vertex is the finite spin-network datum of this
+note. Nothing proved here identifies that datum with a continuous
+orthonormal basis, or with the
+[charged multiplicity spaces](fdip-008B).}
+
+\proof{
+\p{Two connections lie in the same orbit exactly when one is the
+image of the other under #{G^V}. A gauge-invariant function is
+constant on each orbit, and the indicator of an orbit is
+gauge invariant. Those indicators are linearly independent and
+span the invariant functions, so the dimension equals the number
+of orbits.}
+
+\p{The identity #{\sum_\rho d_\rho^2=|G|} is the evaluation at
+the identity in the [handle convolution](fdip-00A8). The matrix
+orthogonality derived there makes the #{|G|} matrix coefficients
+of the irreducible representatives linearly independent as
+functions on #{G}. They are therefore a basis of all functions
+on #{G}. Products of basis functions, one factor for each edge,
+are a basis of the functions on #{G^E}. Grouping that basis by
+the edge assignment writes every function uniquely as a sum of
+its assignment components. The gauge action preserves each
+component: conjugating an edge value by group elements keeps the
+result in the matrix-coefficient span of the same
+representation.}
+
+\p{Fix an edge assignment #{\rho}. Send an elementary tensor
+#{\bigotimes_e(v_e\otimes\lambda_e)} to the function
+##{F(U)=\prod_{e\in E}\lambda_e(\rho_e(U_e)v_e),}
+and extend linearly. On basis vectors this produces every product
+of matrix coefficients of the assigned representations, so the
+map is an isomorphism from #{\bigotimes_e(V_e\otimes V_e^*)} onto
+the assignment component. Substituting the gauge action gives
+##{F(g\cdot U)
+ =\prod_e\lambda_e\bigl(\rho_e(g_{h(e)})
+ \rho_e(U_e)\rho_e(g_{s(e)})^{-1}v_e\bigr).}
+The right-hand side is the function of the tensor whose vector
+at #{e} is #{\rho_e(g_{s(e)})^{-1}v_e} and whose covector at
+#{e} is #{g_{h(e)}\cdot\lambda_e}. Reordering tensor factors
+assigns each vector factor to the source vertex and each
+covector factor to the head vertex. Under that reordering the
+isomorphism is equivariant for #{G^V}, and the action of
+#{g_x} touches only the factors assigned to #{x}.}
+
+\p{Averaging over the group element at one vertex is a projector
+onto the tensors fixed by that vertex, and it acts on the factor
+belonging to that vertex. The average over #{G^V} is the
+composition of these commuting projectors, so its image is the
+tensor product of the local invariant spaces. The dimension of
+the invariant tensors in one assignment is therefore the product
+of the local invariant dimensions. A function is gauge invariant
+exactly when every assignment component comes from an invariant
+tensor. Summing the dimensions gives the stated count, and
+bases of the local invariant spaces push to a basis of the
+gauge-invariant functions.}
+}
