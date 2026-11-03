@@ -1,10 +1,106 @@
 \import{fdip-macros}
 \meta{agent-authored}{true}
 \tag{fdip}
-\title{Geometric calculus}
-\date{2026-11-01}
+\taxon{Theorem}
+\title{The cup product obeys graded Leibniz}
+\date{2026-11-02}
 
-\p{Which parts of geometric calculus have a finite counterpart? The question is
-how products and derivatives interact once the discrete data are fixed.}
+\p{Let the vertices of a finite simplicial complex be ordered, and let a
+cochain take values in a commutative ring. On an increasing simplex the
+cup product of a cochain #{\alpha} of degree #{k} and a cochain #{\beta}
+of degree #{l} reads the front face of dimension #{k} and the back face
+of dimension #{l}:
+##{(\alpha\cup\beta)(v_0,\ldots,v_{k+l})
+=\alpha(v_0,\ldots,v_k)\,\beta(v_k,\ldots,v_{k+l}).}
+The coboundary is the alternating sum of the faces with one vertex
+removed. Then
+##{d(\alpha\cup\beta)=(d\alpha)\cup\beta+(-1)^k\alpha\cup(d\beta).}
+The same formula does not make the product graded-commutative on
+cochains.}
 
-\p{\em{Planned section.} Its results and proofs are not yet developed here.}
+\p{Let #{G} be a group and let the transport of a path be the one in the
+[plaquette convention](fdip-006N): the first edge stands on the right,
+and a reversed edge contributes the inverse. On the rectangle with
+#{M} squares horizontally and #{N} squares vertically, label the
+square whose lower-left corner is #{(i,j)} by #{p_{i,j}}. Let
+#{\gamma_{i,j}} run from the lower-left corner of the rectangle along
+the bottom to column #{i} and then up to row #{j}. The boundary
+holonomy, traversed counterclockwise from that corner, equals
+##{\prod_{i=0}^{M-1}\prod_{j=N-1}^{0}
+U_{\gamma_{i,j}}^{-1}U_{p_{i,j}}U_{\gamma_{i,j}},}
+with the left column on the left of the product and, inside a column,
+the top square on the left.}
+
+\proof{
+\p{Evaluate both sides of the Leibniz identity on an ordered
+simplex of dimension #{k+l+1}, with vertices #{v_0} through
+#{v_{k+l+1}}. The coboundary of the product is the
+alternating sum of the products on the faces. On the face that omits
+#{v_i} with #{i\le k}, the front face of dimension #{k} is
+#{(v_0,\ldots,\widehat{v_i},\ldots,v_{k+1})} and the back begins at
+#{v_{k+1}}. Those are the terms #{i\le k} of #{(d\alpha)\cup\beta}.
+On the face that omits #{v_i} with #{i\ge k+1}, write #{j=i-k}. The
+front is #{(v_0,\ldots,v_k)} and the back omits the vertex of index
+#{j} in #{(v_k,\ldots,v_{k+l+1})}. The sign #{(-1)^{k+j}} is the sign
+in #{(-1)^k\alpha\cup(d\beta)}. The two sums therefore share every
+face except the face #{i=k+1} of #{(d\alpha)\cup\beta} and the face
+#{j=0} of #{(-1)^k\alpha\cup(d\beta)}. Those two faces are the same
+product
+#{\alpha(v_0,\ldots,v_k)\beta(v_{k+1},\ldots,v_{k+l+1})},
+with signs #{(-1)^{k+1}} and #{(-1)^k}, which add to zero.}
+
+\p{On the simplex #{(0,1,2)}, let #{\alpha} and #{\beta} be
+#{1}-cochains with #{\alpha(0,1)=1}, #{\alpha(1,2)=0},
+#{\beta(0,1)=0} and #{\beta(1,2)=1}. Then
+#{(\alpha\cup\beta)(0,1,2)=1} and #{(\beta\cup\alpha)(0,1,2)=0}.
+The two products differ as cochains. This note does not prove that
+their difference becomes a coboundary after both factors are closed.}
+
+\p{Write #{U_{p}} for the plaquette transport of
+[fdip-006N](fdip-006N). For the square with lower-left corner
+#{(i,j)}, if #{b} is its bottom edge, #{r} its right edge, #{t} its
+top edge and #{s} its left edge, each oriented rightward or upward,
+then #{U_p=s^{-1}t^{-1}rb}. The displayed product is proved by
+adding columns from the left. A single column has bottom edge
+#{b_0}, right edges #{r_0,\ldots,r_{N-1}} from bottom to top, top
+edge #{t}, and left edges #{s_0,\ldots,s_{N-1}}. Its boundary
+transport is #{s_0^{-1}\cdots s_{N-1}^{-1}t^{-1}r_{N-1}\cdots r_0b_0}.
+The path #{\gamma_{0,j}} is the left side up to height #{j}, with
+transport #{\sigma_j=s_{j-1}\cdots s_0} and #{\sigma_0=1}. One
+square is already the boundary word. For several squares the
+conjugate by #{\sigma_j^{-1}} is
+#{\sigma_j^{-1}s_j^{-1}t_j^{-1}r_jb_j\sigma_j}. In the product from
+the top of the column down to the bottom, the junction of the
+square at height #{j} with the square below it is
+#{\sigma_j\sigma_{j-1}^{-1}s_{j-1}^{-1}=1}, because
+#{\sigma_j=s_{j-1}\sigma_{j-1}}, and #{b_jt_{j-1}^{-1}=1},
+because the bottom of the upper square is the top of the square
+below it. The right edges remain in order from the top down, and
+the surviving left edge is the full inverse
+#{s_0^{-1}\cdots s_{N-1}^{-1}}. The product is the boundary word.}
+
+\p{Suppose the identity holds for the rectangle with #{M-1} columns,
+and attach one column on the right. The conjugating paths of the
+columns already present do not use the new column, so the inductive
+product is the old boundary transport times the new column product,
+the new factor standing on the right. Let #{\beta} be the transport
+along the old bottom, #{S} the transport up the shared vertical
+side, #{T} the reversed old top and #{L} the reversed left side.
+The old boundary transport is #{LTS\beta}. The new boundary inserts
+the new bottom edge #{b_0} after #{\beta}, replaces the shared side
+by the new right side #{R}, and inserts the inverse of the new top
+edge #{t} before #{T}. Its transport is
+#{LTt^{-1}Rb_0\beta}. Each new path is the old bottom followed by
+the upward path of the previous paragraph, so each new conjugate
+is #{\beta^{-1}} times the corresponding column factor times
+#{\beta}. Between successive squares #{\beta} meets #{\beta^{-1}},
+and the product of those conjugates is
+#{\beta^{-1}S^{-1}t^{-1}Rb_0\beta}. Here #{S} is the upward
+transport of the shared side, lowest edge on the right, so
+#{\beta^{-1}S^{-1}} is the inverse of the path along the old
+bottom and then up that side. Multiplying on the left by
+#{LTS\beta} cancels
+#{\beta} against #{\beta^{-1}} and #{S} against #{S^{-1}}, and
+leaves the new boundary transport. Finiteness of the group is not
+used.}
+}
