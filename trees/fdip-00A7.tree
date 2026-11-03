@@ -1,0 +1,163 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{Four-cycles determine the fourth-power trace}
+\date{2026-11-03}
+
+\p{Let #{G} be a finite undirected simple graph, with no loops and no
+multiple edges, and assume #{G} is triangle-free. Let each undirected
+edge #{e} receive one orientation, from a source #{s(e)} to a head
+#{h(e)}, and a transport #{U_e\in U(1)}. The reverse orientation
+carries #{U_e^{-1}}. For unit weights and vanishing mass, the
+[connection background](fdip-006D) supplies the covariant Laplacian
+#{L_U} on complex functions of the vertices. Its matrix in the
+standard basis is
+##{L_{h(e),s(e)}=-U_e,\qquad
+L_{s(e),h(e)}=-U_e^{-1},\qquad
+L_{vv}=\deg(v),}
+and every other entry is zero. The same formula with every transport
+equal to #{1} is written #{L_1}. Both operators are Hermitian, so the
+two traces below are real.}
+
+\p{Write #{A} for the off-diagonal part, so #{L_U=D-A} with #{D} the
+diagonal matrix of degrees. Thus #{A_{h(e),s(e)}=U_e}. For a 4-cycle
+#{c}, choose either orientation and let #{e^{i\varphi_c}} be the
+product of the four transports along it. The opposite orientation
+gives the complex conjugate, so #{\cos\varphi_c} does not depend on
+the choice.}
+
+\p{The gauge-dependent part of the fourth-power trace is eight times
+the sum of #{\cos\varphi_c-1} over the undirected 4-cycles of #{G},
+each taken once:
+##{\operatorname{Tr}L_U^4-\operatorname{Tr}L_1^4
+=8\sum_c(\cos\varphi_c-1).}}
+
+\proof{
+\p{Expand the trace as a sum over quadruples of vertices. A factor
+#{L_{xy}} is a diagonal degree when #{x=y}, and an off-diagonal
+transport when the two indices are the ends of an edge. The degree
+matrix does not
+depend on the connection. It is enough to show that every summand
+with fewer than four off-diagonal factors takes the same value at
+#{U} and at the trivial connection, and then to evaluate the
+four-transport walks.}
+
+\p{One off-diagonal factor cannot occur. The other three factors are
+diagonal, so they force all four vertices to agree, and #{A} has
+zero diagonal. Three off-diagonal factors leave one stationary
+vertex and three steps. Those three steps would be a closed walk of
+length 3. No such walk exists: a simple graph has no loop that could
+close in one step, two vertices determine only one edge and an odd
+number of crossings of that edge ends at the other vertex, and three
+vertices of a closed walk would form a triangle. Thus every
+contribution with one or three off-diagonal factors vanishes for
+every connection.}
+
+\p{Two off-diagonal factors are transports across one edge and back
+across the same edge. The other two factors are diagonal, so each
+equates its two indices. Rotating the four positions, the two moving
+steps are either consecutive or separated by a stay. In the
+consecutive case the walk leaves a vertex and returns on the next
+step. In the separated case it makes the same return after the stay.
+Either way the two steps are inverses, and a simple graph has only
+one edge between those vertices. The product of a transport with its
+inverse is #{1}, for every value in #{U(1)}. These summands
+therefore agree with the trivial connection.}
+
+\p{The remaining sum is #{\operatorname{Tr}A_U^4-\operatorname{Tr}A_1^4}.
+Each of the four minus signs in #{L=D-A} contributes a factor
+#{-1}, and four of them multiply to #{1}, so this is also the
+difference of the four-transport parts of #{\operatorname{Tr}L^4}.
+A summand is the product of the entries of #{A} around a closed walk
+of length 4. If that walk is not a simple cycle, then it visits at
+most three vertices. The edges it actually uses form a connected
+subgraph of a triangle-free simple graph on those vertices, hence a
+tree. On a tree every closed walk has transport product #{1}: the
+first time the walk repeats a vertex, the two steps just taken are
+inverses, because any longer return would be a simple cycle, and
+deleting that immediate reversal multiplies the product by #{1} and
+shortens the walk. By induction the product equals #{1}, which is
+also its value at the trivial connection.}
+
+\p{A simple closed walk of length 4 is a 4-cycle. U(1) transports
+commute, so the product depends on the orientation but not on the
+starting vertex. The trace meets each undirected 4-cycle in four
+starting vertices and two orientations. One orientation contributes
+#{e^{i\varphi_c}} at each start, and the other contributes the
+conjugate. The eight products sum to #{8\cos\varphi_c}. At the
+trivial connection they sum to #{8}. Subtracting these
+contributions gives the displayed identity.}
+
+\p{Now let both periods #{N_1} and #{N_2} be integers at least #{4},
+and let the vertices be residue classes in
+#{\mathbb Z/N_1\mathbb Z\times\mathbb Z/N_2\mathbb Z}, with an
+undirected edge from each vertex to its four axis neighbors. These
+neighbors are distinct, so the graph is simple. It is also
+triangle-free. A closed walk of length 3 would need net displacement
+zero in each coordinate. Each coordinate that returns to its start
+uses an even number of steps, so the whole walk would have even
+length, except if some coordinate is displaced by a nonzero multiple
+of its period. Three steps cannot make a displacement of size at
+least #{4}. The trace identity therefore applies.}
+
+\p{A 4-cycle on this torus is four axis steps through four distinct
+vertices whose vector sum is zero in the torus. Write #{r}, #{l},
+#{u} and #{d} for the numbers of steps in the four axis directions.
+If both periods are at least #{5}, each net displacement has absolute
+value at most #{4} and is divisible by a period, so both nets vanish.
+Then #{r=l}, #{u=d} and #{r+u=2}. Two steps out and back along one
+axis visit at most three vertices. The remaining case is one step in
+each direction. Any order in which a direction is followed
+immediately by its opposite repeats a vertex. The only remaining
+orders are the two cyclic orders around a unit square. Thus every
+4-cycle is a plaquette, and
+##{\operatorname{Tr}L_U^4-\operatorname{Tr}L_1^4
+=-8\sum_p(1-\cos\varphi_p),}
+the sum running once over plaquettes.}
+
+\p{If instead a period equals #{4}, four steps along that axis close
+after one winding and visit four distinct vertices. There is one such
+undirected cycle for each position in the transverse direction. A net
+displacement of size #{4} uses all four steps, so these windings do
+not mix the two axes. They are 4-cycles, and they are not plaquettes.
+The same identity includes them, each with its own cosine, on the
+same footing as the plaquettes. For a holonomy in #{U(1)}, the sum
+##{-8\sum_p(1-\cos\varphi_p)}
+is the Wilson face sum at coupling #{8}. The [Wilson action](fdip-006O)
+is that shape of face sum for a finite group, with each plaquette
+weighted by #{1-\operatorname{Re}\chi_\rho(U_p)/d}. The trace
+identity has the same face sum, up to sign and coupling, precisely
+when every 4-cycle is a plaquette. The finite-group hypothesis of
+that note remains in force. A period equal to #{4} adds winding cycles
+that a sum over plaquettes does not contain.}
+}
+
+\p{\citet{Theorem 28}{marcolli2013gaugenetworks} computes a different
+trace. On a four-dimensional square lattice, with cutoff inversely
+proportional to the spacing and with #{f(x)=x^4}, the spectral action
+equals minus one fourth of the two orientation traces around each
+plaquette, together with a constant and the Higgs terms displayed
+there.}
+
+\p{\citet{Proposition 29}{marcolli2013gaugenetworks} states the
+corresponding continuum functional. This note does not reproduce
+those calculations. The operator here is the scalar Laplacian of the
+[connection background](fdip-006D), not their lattice Dirac operator.}
+
+\p{The [determinant action](fdip-0070) is #{\kappa\log\det Q_U}, where
+#{Q_U=L_U+m^2I} and #{m>0}. For positive matrices this is
+#{\kappa\operatorname{Tr}\log Q_U}, a spectral action with
+#{f=\log} applied to the massive precision rather than to #{L_U}.
+On a square torus with both periods at least six, the
+[induced plaquette coefficient](fdip-0072) isolates a length-four
+plaquette sum in the large-mass expansion of that logarithm, for a
+real scalar and the sign representation. The logarithm is not the
+fourth-power trace proved above.}
+
+\p{\em{The comparison of these spectral actions remains speculative.}
+Nothing proved here identifies #{\operatorname{Tr}\log Q_U} with
+#{\operatorname{Tr}L_U^4}, or either finite trace with a continuum
+limit. The continuum statement in
+\citet{Proposition 29}{marcolli2013gaugenetworks} is their
+computation, and it is not a step in the identity for 4-cycles.}
