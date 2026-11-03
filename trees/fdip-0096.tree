@@ -1,10 +1,144 @@
 \import{fdip-macros}
 \meta{agent-authored}{true}
 \tag{fdip}
+\taxon{Theorem}
 \title{The edge-source triple and inner fluctuations}
-\date{2026-11-01}
+\date{2026-11-03}
 
-\p{What changes when edge data enter a Dirac operator? This section asks how an
-edge-source construction and inner fluctuations compare.}
+\p{Let #{G} be a finite oriented graph, with vertex set #{V} and edge
+set #{E}. Write #{s(e)} and #{h(e)} for the source and head of an
+edge. No edge is a loop. Let the real Hilbert space have the
+counting inner product and the orthonormal basis indexed by
+#{V} and by #{E}. Define
+##{(d_E\xi)(e)=\xi(h(e))-\xi(s(e)).}
+Let #{D} be the self-adjoint operator whose vertex-to-edge block is
+#{d_E} and whose edge-to-vertex block is the adjoint #{d_E^{\dagger}}.
+A real function #{f} on #{V} acts by multiplication by #{f(v)} on
+vertex #{v} and by multiplication by #{f(s(e))} on edge #{e}.}
 
-\p{\em{Planned section.} Its results and proofs are not yet developed here.}
+\p{The operator norm of the commutator is read from the jumps on the
+edges that enter each vertex. For every vertex #{v},
+##{\bigl|[D,f]\bigr|
+=\max_v\Bigl(\sum_{h(e)=v}\bigl(f(h(e))-f(s(e))\bigr)^{2}\Bigr)^{1/2}.}
+If every vertex has at most one incoming edge, this norm is the
+maximum of #{|f(h(e))-f(s(e))|} over the edges. On each connected
+component of the underlying undirected graph, the supremum
+##{\sup\bigl\{|f(j)-f(i)|:\bigl|[D,f]\bigr|\le 1\bigr\}}
+equals the least number of edges joining the two vertices. Between
+distinct components that supremum is infinite. A directed cycle has
+one incoming edge at each vertex, so opposite vertices of a directed
+#{6}-cycle are at distance #{3}.}
+
+\proof{
+\p{Write #{\delta_e=f(h(e))-f(s(e))}. The edge component of
+#{[D,f]} applied to #{(\xi,\psi)} is #{\delta_e\xi(h(e))}, and the
+vertex component is the negative adjoint of that edge map applied
+to #{\psi}. The operator norm is therefore the norm of the edge map
+#{C\xi(e)=\delta_e\xi(h(e))}. Its square length is
+##{\|C\xi\|^{2}=\sum_v\xi(v)^{2}\sum_{h(e)=v}\delta_e^{2}.}
+The vertex basis is orthonormal, so the second sum is the
+eigenvalue at #{v}. The largest square root is the displayed
+maximum.}
+
+\p{If each vertex has at most one incoming edge, the inner sum is a
+single square, and the norm is the largest absolute jump. The
+constraint then says that #{|f(h)-f(s)|\le 1} on every edge. The
+graph-distance function from #{i} changes by at most #{1} along an
+edge, so it is allowed, and its value at #{j} is the graph
+distance. Any allowed function changes by at most #{1} along each
+edge, so it cannot exceed that distance. If no path joins #{i} to
+#{j}, adding a constant on the component of #{j} does not change
+the commutator, and the difference is unbounded.}
+}
+
+\p{The same norm is stricter where a vertex has two incoming edges.
+On the grid whose coordinates each run through #{0,1,2}, orient
+each edge in the positive direction of one axis. The distance from
+#{(0,0)} to #{(1,1)} is #{1+1/\sqrt{2}}. The Euclidean distance is
+#{\sqrt{2}} and the graph distance is #{2}, and the commutator
+distance lies strictly between them.}
+
+\proof{
+\p{Write #{x=f(1,0)-f(0,0)}, #{y=f(0,1)-f(0,0)},
+#{p=f(1,1)-f(1,0)} and #{q=f(1,1)-f(0,1)}. The vertex #{(1,0)} has
+only the incoming edge from #{(0,0)}, and #{(0,1)} has only the
+incoming edge from #{(0,0)}, so an allowed function satisfies
+#{x^{2}\le 1} and #{y^{2}\le 1}. The vertex #{(1,1)} has those two
+incoming edges, so #{p^{2}+q^{2}\le 1}. The difference
+#{\delta=f(1,1)-f(0,0)} equals both #{x+p} and #{y+q}. Thus
+#{(\delta-x)^{2}+(\delta-y)^{2}\le 1} for some #{x,y} in the
+interval from #{-1} to #{1}. If #{\delta>1+1/\sqrt{2}}, then both
+#{\delta-x} and #{\delta-y} exceed #{1/\sqrt{2}}, and the sum of
+squares exceeds #{1}. Hence #{\delta\le 1+1/\sqrt{2}}.}
+
+\p{The bound is attained by #{f(0,0)=0}, #{f(1,0)=f(0,1)=f(2,0)=1},
+#{f(0,2)=1}, and the value #{1+1/\sqrt{2}} at the other four
+vertices. The incoming square sums are #{1} at #{(1,0)}, #{(0,1)}
+and #{(1,1)}, they are #{1/2} at #{(2,1)} and #{(1,2)}, and they
+vanish elsewhere. The norm is #{1}, and the difference of the
+endpoint values is #{1+1/\sqrt{2}}. It is larger than #{\sqrt{2}}
+because #{1>1/\sqrt{2}}, and it is smaller than #{2} because
+#{1/\sqrt{2}<1}.}
+}
+
+\p{Inner fluctuations fill the head slots of #{D}. For real functions
+#{a} and #{b}, the edge component of #{a[D,b]} applied to a vertex
+vector #{\xi} is
+##{e\mapsto a(s(e))\bigl(b(h(e))-b(s(e))\bigr)\xi(h(e)).}
+Suppose that at most one edge runs from any vertex to any other,
+and that the opposite orientation is absent. For an edge #{e} from
+#{s} to #{h} and a real scalar #{c}, let #{a} equal #{c} at #{s}
+and equal #{0} elsewhere, and let #{b} equal #{1} at #{h} and equal
+#{0} elsewhere. The sum #{S=a[D,b]+b[D,a]} is self-adjoint. Its
+edge component is #{c\,\xi(h)} on #{e} and zero on every other
+edge. Summing one such operator for each edge gives every real
+assignment #{(c_e)}. Adding that sum to #{D} replaces the edge
+formula by
+##{U_e\xi(h(e))-\xi(s(e)),\qquad U_e=1+c_e.}
+}
+
+\proof{
+\p{The displayed edge formula for #{a[D,b]} is the commutator
+calculation already used for the norm: the terms in which #{b} is
+read at the source cancel, and multiplication by #{a} is evaluated
+at the source. With the two functions just chosen,
+#{a(s(e'))(b(h(e'))-b(s(e')))} equals #{c} on the edge from #{s}
+to #{h} and equals #{0} on every other edge. The swapped product
+#{b(s(e'))(a(h(e'))-a(s(e')))} is nonzero only on an edge from
+#{h} to #{s}. No such edge is present.}
+
+\p{It remains to check that #{b[D,a]} is the adjoint of #{a[D,b]}.
+The edge block of #{a[D,b]} multiplies the value at #{h} by #{c}
+and places it on #{e}. Its adjoint therefore multiplies the value
+on #{e} by #{c} and places it at #{h}. The vertex component of a
+commutator #{p[D,q]}, evaluated at a vertex #{v}, is
+##{-p(v)\sum_{h(e')=v}\bigl(q(h(e'))-q(s(e'))\bigr)\psi(e').}
+For #{p=b} and #{q=a}, the only vertex where #{b} is nonzero is
+#{h}. The only incoming edge there whose source carries a nonzero
+value of #{a} is #{e}, and on that edge
+#{a(h)-a(s)=-c}. The leading minus sign turns that term into
+#{c\,\psi(e)} at #{h}, and the component is #{0} at every other
+vertex. The two blocks agree. For the other pair, the vertex
+component of #{a[D,b]} is supported at #{s}, and no edge entering
+#{s} starts at #{h}, so that component is #{0}. The edge component
+of #{b[D,a]} is #{0} because the reverse edge is absent. Hence
+#{S} is self-adjoint and its edge coefficient on #{e} is #{c}.}
+}
+
+\p{The coefficients #{U_e} constructed above are real. When
+#{U_e\ne 0},
+##{U_e\xi(h(e))-\xi(s(e))
+=U_e\bigl(\xi(h(e))-U_e^{-1}\xi(s(e))\bigr).}
+The second factor is the [covariant difference](fdip-006D) of the
+scalar connection #{U_e^{-1}}. The two edge maps have the same
+kernel. This construction does not produce a matrix representation
+of a nonabelian group.}
+
+\p{If every #{U_e} equals #{\pm 1}, multiplication by #{U_e} is an
+orthogonal map #{W} of the edges, and #{W^{-1}=W}. Let #{d_1} be
+the covariant difference and set #{d_2=Wd_1}. Then
+#{d_2^{\dagger}=d_1^{\dagger}W}. Conjugating the off-diagonal
+operator of #{d_2} by the orthogonal map that is the identity on
+vertices and #{W} on edges replaces the edge block #{d_2} by
+#{Wd_2=d_1} and replaces #{d_2^{\dagger}} by #{d_1^{\dagger}}.
+The two self-adjoint operators are orthogonally equivalent.}
