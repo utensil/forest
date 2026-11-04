@@ -2,26 +2,61 @@
 \meta{agent-authored}{true}
 \tag{fdip}
 \taxon{Discussion}
-\title{Potentials on points, differences on edges}
-\date{2026-11-03}
+\title{The field equations in three languages}
+\date{2026-11-04}
 
 
-\p{The classical field we know best is the electromagnetic field. In
-electrostatics the potential #{\varphi} assigns a number to each point
-of space, the field #{E=-\nabla\varphi} is what a test charge feels,
-and #{\varphi} is fixed only up to an added constant, which #{E} does
-not see. In the language of differential forms, #{\varphi} is a
-#{0}-form and #{E=-d\varphi} is a #{1}-form: #{d} takes a function on
-points to something evaluated along directions, and it kills constants.
-The vector potential #{A} is a #{1}-form too, the field strength is
-#{F=dA}, and #{d\circ d=0} says that a gradient has no curl. Geometric
-calculus puts the same thing through the vector derivative:
-#{\nabla\varphi} is a vector field, and #{a\cdot\nabla\varphi} is the
-rate of change of #{\varphi} along a direction #{a}, so comparing
-nearby values is again tied to a direction.}
+\p{In the undergraduate course on electromagnetism the field equations arrive
+in the language of vector calculus. With a charge density #{\rho} and a current
+#{J}, and with the constants set to one, they read
+##{\operatorname{div} E=\rho,\qquad \operatorname{div} B=0,\qquad
+   \operatorname{curl} E=-\partial_t B,\qquad
+   \operatorname{curl} B=\partial_t E+J.}
+4 equations, two vector fields, and a potential #{A} that enters when one
+wants to solve them. There the potential is primitive and the fields are derived
+from it by a gradient, and the metric sits in the operators: the divergence, the
+curl and the cross product all know about lengths and angles. Every object is
+continuous as well: #{\rho} is a density, and #{\partial_t} presupposes a
+parameter along which to differentiate.}
 
-\p{On a lattice only finitely many points remain, and a direction
-becomes a step from one site to a neighbour. What is left of the
-gradient when there is no limit to take, only the values at the two
-ends of each step? And if comparing values is nothing but subtraction,
-what kinds of values may a field take?}
+\p{A course in mathematical physics rewrites the system in the language of
+differential forms. The potential becomes a #{1}-form #{A} and the field
+strength its exterior derivative #{F=dA}. The exterior derivative needs no
+metric, so #{dF=0} is a consequence of #{d\circ d=0} rather than an equation to
+impose, and gauge transformations #{A\mapsto A+d\chi} leave #{F} unchanged by
+construction, which is why gauge theory is written this way. The metric is not
+eliminated: it reappears in the Hodge star that the equations with sources
+require, #{d\star F=\star j}, while #{d} raises the degree of a form.
+Hassani treats the field equations in this language \citek{hassani2013mathematical}.}
+
+\p{Readers who have met geometric calculus will recognize the same system in the
+unified language that Hestenes and Sobczyk proposed for mathematics and physics.
+The electric and magnetic fields are then grades of one object, the bivector
+#{F=E+IB}, where #{I} is the pseudoscalar of the algebra, the product of the
+4 frame vectors, with #{I^2=-1}, so the magnetic field enters as the dual
+bivector #{IB}, and the pair forms one bivector rather than the vector and
+pseudovector of vector calculus. The derivative is the vector derivative
+#{\nabla}: the derivative along each direction of a chosen frame, combined into a
+single vector-valued operator by the geometric product with the frame vectors.
+It acts by geometric multiplication, and a vector multiplied that way by a
+multivector splits into two parts,
+##{\nabla F=\nabla\cdot F+\nabla\wedge F,}
+an inner product giving a divergence and an outer product giving a curl. With it
+the 4 equations become #{\nabla F=J}, the divergence part carrying the sources
+and the curl part vanishing, so each original equation returns as a definite
+grade. Hestenes and Sobczyk develop the calculus
+\citek{hestenes2012clifford}, Doran and Lasenby carry it through classical
+electrodynamics \citet{Section 7.1}{doran2003geometric}, and Macdonald's
+textbook is the treatment \citek{macdonald2012vector}. Here
+one algebra and one derivative serve both objects, and the metric is neither an
+operator nor a dual: it is inside the geometric product, which is why the
+language carries a chosen spacetime with it.}
+
+\p{All three ways of writing these equations need a limit: in each, a derivative
+compares values at points whose separation shrinks. Those points are not bare:
+the continuum carries a metric, a topology and a smooth structure, and that is
+what gives a separation, a direction and a gradient their meaning. On a lattice
+only finitely many points remain, and a direction becomes a step from one site
+to a neighbour. What is left of the gradient when there is no limit to take, only
+the values at the two ends of each step? And if comparing values is nothing but
+subtraction, what kinds of values may a field take?}
