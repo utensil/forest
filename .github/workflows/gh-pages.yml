@@ -177,6 +177,8 @@ jobs:
           sudo apt install libev-dev
           sudo apt update
           sudo apt install libev-dev
+          opam pin add lsp 1.22.0 --yes
+          opam pin add jsonrpc 1.22.0 --yes
           opam pin add forester git+https://github.com/utensil/ocaml-forester.git#2ed9c1cab0112921eb3497cb1a5a0e2fbaa1f8cd --yes
           opam install forester --yes
       - name: Install xsltproc and PDF text tools
