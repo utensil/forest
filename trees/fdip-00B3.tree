@@ -27,8 +27,9 @@ neighbor value is #{1} and the diagonal equals #{2} plus the
 mass parameter. The map sends that matrix to the retained
 matrix. The mass parameter there is not this diagonal. Over an
 odd prime field, when #{\det C\neq 0}, the eliminated sum is
-the factor #{Z_p(C)} in \ref{fdip-008O}. For every integer
-#{r\ge 2}, a step by #{r} and then a step by #{q} returns the
+the factor #{Z_p(C)} in \ref{fdip-008O}. Let #{r\ge 2} be an
+integer such that #{U_{r-1}(t)} and #{U_{q-1}(T_r(t))} are
+units. A step by #{r} and then a step by #{q} returns the
 neighbor value and the eliminated determinant of the single
 step by #{qr}.}
 
@@ -64,13 +65,15 @@ the neighbor value of \ref{fdip-0057} returns its retained
 matrix. The mass parameter there equals that diagonal minus
 twice the retained neighbor value. Over an odd prime field, the
 block factorization of \ref{fdip-008O} is the eliminated sum
-once #{\det C\neq 0}, with this #{S}. For a composite step
-with an integer #{r\ge 2}, start from length #{qrN}.
-Eliminating by #{r} and then by #{q}
-keeps the multiples of #{qr}. \ref{fdip-00B1} multiplies the
-factors #{U}, and the neighbor value agrees with the direct
-step. The factorizations #{\det Q=\det(C_r)\det S} and
-#{\det S=\det(C_q)\det(S_{\mathrm{final}})} use the same final
-kept set as the direct step, so
-#{\det(C_r)\det(C_q)=\det(C_{qr})}.}
+once #{\det C\neq 0}, with this #{S}. When #{U_{r-1}(t)} and
+#{U_{q-1}(T_r(t))} are units, start from length #{qrN}. With
+#{b'=b/U_{r-1}(t)},
+##{\det(C_r)\det(C_q)
+=(b^{r-1}U_{r-1}(t))^{qN}
+\biggl(\frac{b^{q-1}U_{q-1}(T_r(t))}{(U_{r-1}(t))^{q-1}}\biggr)^N
+=(b^{qr-1}U_{r-1}(t)\,U_{q-1}(T_r(t)))^N.}
+\ref{fdip-00B1} replaces the product of these two units by
+#{U_{qr-1}(t)}, so
+#{\det(C_r)\det(C_q)=(b^{qr-1}U_{qr-1}(t))^N} and the neighbor
+value #{b'/U_{q-1}(T_r(t))} equals #{b/U_{qr-1}(t)}.}
 }
