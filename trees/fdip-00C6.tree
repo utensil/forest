@@ -1,0 +1,53 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{Eventually geometric coefficients converge}
+\date{2026-11-06}
+
+\p{Fix an integer #{p\ge 2}, a depth #{k\ge 0}, and real
+numbers #{\lambda>0} and #{m>0}. Let #{(c_j)_{j\ge 0}} be
+positive reals such that #{\frac{c_j}{\lambda^j}} tends to
+#{1}, and for each integer #{K>k} let #{\tau_K>0} satisfy
+that #{\frac{\tau_K}{m\lambda^K}} tends to #{1} as
+#{K\to\infty}. Let #{\xi^{(K)}} have the centered Gaussian
+law of the hierarchical precision on the residues modulo
+#{p^K} with coefficients #{c_j} for #{j<K} and top
+coefficient #{\tau_K}, as in \ref{fdip-009A}. Let #{S_K} be
+the composition of the rescaled class means of the
+\vocabk{fixed-ratio precision}{fdip-00BY} from depth #{K}
+down to depth #{k}. As #{K\to\infty}, the law of
+#{S_K\xi^{(K)}} converges to #{\nu_k}.}
+
+\proof{
+\p{Write #{n=K-k} and abbreviate the one-depth map of
+\ref{fdip-00C1} by #{T}. That proposition divides every
+coefficient by #{\lambda} and moves it one index downward,
+the old top coefficient included. After #{n} applications,
+the coefficient in position #{i} on the residues modulo
+#{p^k} is the original coefficient in position #{i+n},
+divided by #{\lambda^n}. For #{i<k} one has #{i+n<K}, so the
+coefficient is #{\frac{c_{n+i}}{\lambda^n}}. The top
+position #{i=k} reads #{\tau_K}, and its image is
+#{\frac{\tau_K}{\lambda^n}}.}
+\p{The lower coefficient equals
+#{\lambda^i\frac{c_{n+i}}{\lambda^{n+i}}}, which tends to
+#{\lambda^i} because #{n+i\to\infty}. The top coefficient
+equals #{m\lambda^k\frac{\tau_K}{m\lambda^K}}, which tends
+to #{m\lambda^k}. The projectors on this fixed residue ring
+do not depend on #{K}. By \ref{fdip-009A} each coefficient
+is the eigenvalue on the image of the corresponding
+projector. Every coefficient is positive for every #{K},
+and the coefficients converge to the positive coefficients
+of #{Q_k}. The inverse multiplies each image by the
+reciprocal of its coefficient, and those reciprocals
+converge. The covariance matrices therefore converge to
+#{Q_k^{-1}}.}
+\p{Each pushforward is centered Gaussian. Its characteristic
+function is #{\exp(-\frac{1}{2}\zeta\cdot C_K\zeta)}, where
+#{C_K} is the covariance matrix just obtained, by the same
+eigenchart computation as in \ref{fdip-00C1}. Pointwise
+convergence to the continuous characteristic function of
+#{\nu_k} determines the limiting law. The covariances
+themselves are the content of \ref{fdip-000B}.}
+}

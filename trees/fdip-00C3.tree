@@ -1,0 +1,71 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{A law on coherent residue sequences}
+\date{2026-11-06}
+
+\p{Fix an integer #{p\ge 2} and real numbers #{\lambda>0} and
+#{m>0}. Let #{Q_k}, #{\nu_k}, #{T_k} and #{M_k} be the
+precision, law, rescaled class mean and coordinate formula of
+the \vocabk{fixed-ratio precision}{fdip-00BY}. There is a
+unique probability measure on the sequences
+#{(x_k)_{k\ge 0}} satisfying #{x_{k-1}=T_kx_k} for every
+#{k\ge 1}, such that #{x_k} has law #{\nu_k}.}
+
+\p{For every such sequence, every #{k\ge 1} and every residue
+#{r} modulo #{p^{k-1}},
+##{\sum_{t=0}^{p-1}M_k(r+tp^{k-1})=M_{k-1}(r).}
+When #{p} is prime, #{M_k(r)} is the ball assignment of the
+ball of #{p}-adic integers congruent to #{r} modulo #{p^k},
+and the displayed sum is finite additivity for the #{p}
+finer balls inside a coarser ball. In that case, if a real
+function on the #{p}-adic integers is constant on residue
+classes modulo #{p^k} for some #{k}, the sum
+#{\sum_r f(r)M_k(r)} is independent of #{k} and linear in
+#{f}.}
+
+\proof{
+\p{Each coordinate space is a finite product of copies of the
+Borel line, so it is second-countable and completely
+pseudo-metrizable, and each #{\nu_k} is a probability
+measure. For #{\ell<k} the map from depth #{k} to depth
+#{\ell} applies #{T_k}, then #{T_{k-1}}, and so on through
+#{T_{\ell+1}}. \ref{fdip-00C2} makes each
+consecutive pushforward consistent, so the compositions are
+consistent. A finite set of coordinates, taken at several
+depths, is a function of the coordinates at the finest depth
+in the set.}
+\p{Mathlib revision \code{727d8bbe6044} supplies the extension
+for that class of spaces.
+\leanref{MeasureTheory.isProjectiveLimit_projectiveLimit}
+constructs a projective limit,
+\leanref{MeasureTheory.isProbabilityMeasure_projectiveLimit}
+makes it a probability measure, and
+\leanref{MeasureTheory.IsProjectiveLimit.unique} gives
+uniqueness among finite measures with those projections.
+The declarations take the finite-dimensional laws as data.
+The Gaussian laws and their covariances are the content of
+the [fixed-ratio precision](fdip-00BY) together with
+\ref{fdip-000B} and \ref{fdip-00C2}. The projections are
+probability measures, so a finite measure with those
+projections is a probability measure.}
+\p{Set #{\alpha=\sqrt{\frac{\lambda}{p}}}. The definition of
+#{T_k} gives
+##{(T_kx)(r)=\alpha\sum_{t=0}^{p-1}x(r+tp^{k-1}),}
+because #{\frac{\sqrt{p\lambda}}{p}=\alpha}. On a coherent
+sequence, #{x_{k-1}=T_kx_k}, and
+#{M_k(r)=\alpha^k x_k(r)}, so
+##{\sum_{t=0}^{p-1}M_k(r+tp^{k-1})
+=\alpha^{k-1}(T_kx_k)(r)
+=\alpha^{k-1}x_{k-1}(r)=M_{k-1}(r).}
+The identity holds at every coherent sequence.}
+\p{Suppose #{p} is prime and #{f} is constant on residue
+classes modulo #{p^k}. The sum
+#{\Lambda_k(f)=\sum_r f(r)M_k(r)} is linear in #{f}. If #{f}
+is also constant on classes modulo #{p^{k-1}}, then #{f}
+takes the same value at #{r+tp^{k-1}} as at #{r}, and the
+preceding identity gives #{\Lambda_k(f)=\Lambda_{k-1}(f)}.
+The same comparison applies to each coarser power of #{p},
+so the sum is independent of #{k}.}
+}

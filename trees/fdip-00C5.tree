@@ -1,0 +1,82 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{Congruence depth from the two-point function}
+\date{2026-11-06}
+
+\p{Fix an integer #{p\ge 2}, a depth #{k\ge 0}, and real
+numbers #{\lambda>0} and #{m>0}. Let #{x} have the centered
+Gaussian law of the
+\vocabk{fixed-ratio precision}{fdip-00BY} at that depth. For
+sites #{a} and #{b}, set #{v=k} when #{a=b}; otherwise let
+#{v} be the largest integer such that
+#{a\equiv b\pmod{p^v}}. Then
+#{\mathbb E\lvert x(a)-x(b)\rvert^2} depends only on #{v}.
+The value is #{0} when #{a=b}. When #{\lambda=1} the value
+equals #{2} for every pair of distinct sites, independently
+of #{p}, #{k} and #{m}. When #{\lambda<1} the value is a
+strictly decreasing function of #{v}. When #{\lambda>1} it
+is a strictly increasing function of #{v} on distinct sites,
+and the diagonal value remains #{0}. In particular, when
+#{\lambda\neq 1} each depth #{v} produces a different value,
+so the two-point function determines #{v}.}
+
+\proof{
+\p{The coefficients of #{Q_k} are #{\lambda^j} for #{j<k} and
+#{m\lambda^k} at the top. By \ref{fdip-009B} the projectors
+#{P_j} are pairwise orthogonal and sum to the identity, and
+##{Q_k^{-1}=\sum_{j=0}^{k}c_j^{-1}P_j.}
+In the [counting inner products](fdip-0002) the matrix of
+#{E_j} has entry #{p^{-j}} when the sites are congruent
+modulo #{p^{k-j}}, and entry #{0} otherwise. Every diagonal
+entry equals #{p^{-j}}. For #{j<k} one has
+#{P_j=E_j-E_{j+1}}, and #{P_k=E_k}.}
+
+\p{Let #{j_*=k-v}. Congruence modulo #{p^{k-j}} holds exactly
+when #{j\ge j_*}, so the off-diagonal entry of #{E_j} equals
+the diagonal entry precisely for those #{j}. The same
+agreement passes to #{P_j}, including #{j=k}. Write
+#{\delta_j} for the diagonal entry of #{P_j} minus the entry
+at the pair #{(a,b)}. Then #{\delta_j=0} for every
+#{j\ge j_*}. The mass coefficient multiplies #{P_k} and
+cancels in the variance. If #{j_*=0}, every index
+#{j\ge 0} satisfies #{j\ge j_*}, so the variance is #{0}.}
+
+\p{Now take #{j_*\ge 1}. For #{j\le j_*-2} the off-diagonal
+entries of #{E_j} and of #{E_{j+1}} both vanish, hence
+#{\delta_j=p^{-j}-p^{-(j+1)}}. For #{j=j_*-1} the entry of
+#{E_j} vanishes and the entry of #{E_{j+1}} equals
+#{p^{-j_*}}, so
+##{\delta_{j_*-1}
+=p^{-(j_*-1)}-p^{-j_*}+p^{-j_*}
+=p^{1-j_*}.}
+On every index with #{\delta_j\neq 0} one has #{j<k}, so
+#{c_j=\lambda^j}. The covariance difference is
+#{\sum_j\lambda^{-j}\delta_j}, and
+##{\mathbb E\lvert x(a)-x(b)\rvert^2
+=2\sum_j\lambda^{-j}\delta_j.}
+Set #{S(0)=0} and, for #{s\ge 1},
+##{S(s)=\sum_{j=0}^{s-2}\lambda^{-j}\bigl(p^{-j}-p^{-(j+1)}\bigr)
++\lambda^{-(s-1)}p^{1-s}.}
+Term by term, #{\sum_j\lambda^{-j}\delta_j=S(j_*)}, so the
+variance equals #{2S(j_*)}. The empty sum for #{s=1} leaves
+#{S(1)=1}. The value depends on the sites only through
+#{v}. If #{\lambda=1},
+the sum telescopes to #{1-p^{1-s}} and the final term is
+#{p^{1-s}}, so #{S(s)=1} for every #{s\ge 1}. The variance
+equals #{2} whenever #{a\neq b}.}
+
+\p{For #{s\ge 2},
+##{S(s)-S(s-1)=p^{1-s}\lambda^{-(s-1)}(1-\lambda).}
+Every term of #{S(s)} is positive for #{s\ge 1}, so
+#{S(s)>0}. The factor #{1-\lambda} does not depend on #{s}.
+If #{\lambda<1}, then #{S(s)} is strictly increasing, and the
+variance is a strictly decreasing function of #{v}. If
+#{\lambda>1}, then #{S(s)} for #{s\ge 1} is strictly
+decreasing and remains positive, so on distinct sites the
+variance is a strictly increasing function of #{v}, while the
+diagonal value is #{0}. In both cases
+#{S(0),\ldots,S(k)} are pairwise distinct. If #{\lambda=1},
+every depth #{v<k} gives the same variance.}
+}

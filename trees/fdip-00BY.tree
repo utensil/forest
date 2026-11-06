@@ -1,0 +1,29 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Definition}
+\title{Fixed-ratio hierarchical precisions}
+\date{2026-11-06}
+
+\p{Fix an integer #{p\ge 2} and real numbers #{\lambda>0} and
+#{m>0}. For each integer #{k\ge 0}, let the sites be the
+residues modulo #{p^k}. Let #{E_j} be the nested averages of
+\ref{fdip-009A}, and set #{P_j=E_j-E_{j+1}} for #{j<k} and
+#{P_k=E_k}. The \newvocab{fixed-ratio precision} at depth #{k}
+is
+##{Q_k=\sum_{j<k}\lambda^j P_j+m\lambda^k P_k.}
+The coefficients are positive. By \ref{fdip-009B}, #{Q_k} is a
+\vocabk{positive precision parameter}{fdip-0004}. Its centered
+\vocabk{Gaussian probability law}{fdip-0005} is written
+#{\nu_k}.}
+
+\p{For #{k\ge 1}, the rescaled class mean
+#{T_k:\mathbb R^{X_k}\to\mathbb R^{X_{k-1}}} is
+##{(T_kx)(r)=\sqrt{p\lambda}\cdot\frac{1}{p}\sum_{t=0}^{p-1}x(r+tp^{k-1}),}
+where #{X_k} denotes the residues modulo #{p^k}. For each
+residue #{r} modulo #{p^k}, set
+##{M_k(r)=\left(\frac{\lambda}{p}\right)^{\frac{k}{2}}x_k(r).}
+When #{p} is prime, the inverse limit of these residue rings is
+the ring of #{p}-adic integers. The ball of #{p}-adic integers
+congruent to #{r} modulo #{p^k} receives the value #{M_k(r)},
+and that value is its ball assignment.}

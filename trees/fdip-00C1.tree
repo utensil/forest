@@ -1,0 +1,45 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{Rescaled block means shift the coefficients}
+\date{2026-11-06}
+
+\p{Fix an integer #{p\ge 2}, a depth #{k\ge 1}, and a real
+number #{\lambda>0}. Let #{c_0,\ldots,c_k} be positive, and let
+#{Q} be the hierarchical precision of \ref{fdip-009A} with
+these coefficients. Then #{Q} is a
+\vocabk{positive precision parameter}{fdip-0004}. Let #{\xi}
+have its centered
+\vocabk{Gaussian probability law}{fdip-0005}, write #{A} for
+the class-mean map of \ref{fdip-009A}, and set
+##{(T\xi)(r)=\sqrt{p\lambda}\,(A\xi)(r).}
+The field #{T\xi} has the centered Gaussian probability law of
+the hierarchical precision of depth #{k-1} with coefficients
+#{\frac{c_{i+1}}{\lambda}} for #{0\le i\le k-1}.}
+
+\proof{
+\p{By \ref{fdip-009B}, #{Q^{-1}=\sum_{j=0}^{k}c_j^{-1}P_j} on
+the [counting inner products](fdip-0002). In an orthonormal
+eigenchart the [Gaussian probability law](fdip-0005) is a
+product of centered scalar Gaussians. The scalar law of
+variance #{v} has characteristic function
+#{\exp(-\frac{1}{2}vt^2)}, so the field #{\xi} has
+characteristic function
+#{\exp(-\frac{1}{2}\eta\cdot Q^{-1}\eta)}. This quadratic form
+is the covariance of \ref{fdip-000B}. For a coarse vector
+#{\zeta}, the characteristic function of #{A\xi} at #{\zeta}
+equals the characteristic function of #{\xi} at #{A^{T}\zeta},
+hence equals
+##{\exp\bigl(-\frac{1}{2}\zeta\cdot(AQ^{-1}A^{T})\zeta\bigr).}
+\ref{fdip-009A} identifies #{AQ^{-1}A^{T}} with the inverse of
+the coarse hierarchical precision #{Q'} whose coefficients are
+#{c'_i=pc_{i+1}}. Multiplication by #{\sqrt{p\lambda}}
+multiplies that covariance by #{p\lambda}, so the covariance
+of #{T\xi} is #{p\lambda\,(Q')^{-1}}. The precision matrix is
+#{\frac{1}{p\lambda}Q'}, and the coefficient of each coarse
+projector is
+##{\frac{c'_i}{p\lambda}=\frac{c_{i+1}}{\lambda}.}
+These coefficients are positive, and the characteristic
+function is that of their centered Gaussian probability law.}
+}
