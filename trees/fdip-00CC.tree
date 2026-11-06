@@ -1,0 +1,54 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{Fixed Fourier moments share one mass}
+\date{2026-11-06}
+
+\p{Fix #{\mu>0}, an integer #{k}, and a
+\vocabk{finite-range circle precision}{fdip-00C8} with
+second-order coefficient #{\kappa}. Let #{\varphi} be the
+rescaled field of \ref{fdip-00CB}, and set
+##{a_{N,k}=N^{-1}\sum_{j=0}^{N-1}
+\exp(-2\pi i kj/N)\,\varphi(j).}
+Whenever #{N>2R} and, if #{k\ne 0}, also #{N>2R|k|},
+##{\mathbb E|a_{N,k}|^2
+=\frac{\kappa}{\mu+N^2\alpha(2\pi k/N)}.}
+As #{N\to\infty} through such integers, the moment converges
+to #{\frac{1}{m^2+4\pi^2k^2}} with #{m^2=\frac{\mu}{\kappa}}.
+This is
+the moment in \ref{fdip-004J} for the circle mesh of mass
+squared #{m^2}. Frequencies distinct modulo #{N} are
+uncorrelated.}
+
+\proof{
+\p{Let #{v} be the Fourier vector with entries
+#{\exp(2\pi i kj/N)}. By the eigenvalue computation in
+\ref{fdip-00CB}, #{Q_Nv=\lambda v} with
+#{\lambda=\mu+N^2\alpha(2\pi k/N)}, and #{v^*v=N}. The
+counting covariance of #{\varphi} is #{\kappa N Q_N^{-1}}, so
+##{\mathbb E|a_{N,k}|^2
+=N^{-2}v^*(\kappa N Q_N^{-1})v
+=\kappa\lambda^{-1}.}
+If #{k\not\equiv \ell\pmod{N}}, the two Fourier vectors are
+orthogonal eigenvectors, and the same calculation gives
+covariance zero.}
+\p{If #{k=0}, then #{\alpha(0)=0} and the moment equals
+#{\frac{\kappa}{\mu}} for every #{N}. If #{k\ne 0}, the identity
+#{1-\cos u=2\sin^2(u/2)} gives
+##{N^2\bigl(1-\cos(r\theta)\bigr)
+=2\Bigl(N\sin\frac{r\pi k}{N}\Bigr)^2}
+with #{\theta=2\pi k/N}. The sine quotient in the proof of
+\ref{fdip-004J} yields
+#{N\sin(r\pi k/N)\to r\pi k}. Summing against #{c_r} produces
+##{N^2\alpha(\theta)\to
+\sum_{r=1}^{R}2c_r\cdot 2(r\pi k)^2
+=4\pi^2k^2\kappa.}
+The factor #{2} in front of #{c_r} records the pair of signs,
+and #{\kappa=\sum_{r=1}^{R}c_r r^2}. Therefore
+##{\frac{\kappa}{\lambda}\to
+\frac{\kappa}{\mu+4\pi^2\kappa k^2}
+=\frac{1}{m^2+4\pi^2k^2}.}
+\ref{fdip-004J} identifies that value with the circle-mesh
+moment of mass squared #{m^2}.}
+}
