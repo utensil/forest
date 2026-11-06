@@ -1,0 +1,46 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Lemma}
+\title{The Chebyshev recurrence above 1}
+\date{2026-11-06}
+
+\p{Define polynomials #{T_r} and #{U_r} by #{T_0=1},
+#{T_1(t)=t}, #{U_0=1}, #{U_1(t)=2t}, and
+#{X_r=2tX_{r-1}-X_{r-2}} for #{r\ge 2}. For every
+#{\theta>0} and every integer #{r\ge 0},
+##{T_r(\cosh\theta)=\cosh(r\theta),\qquad
+U_r(\cosh\theta)=\frac{\sinh((r+1)\theta)}{\sinh\theta}.}
+As polynomial identities, #{T_q\circ T_r=T_{qr}} and
+#{U_{qr-1}(t)=U_{q-1}(T_r(t))\,U_{r-1}(t)} for integers
+#{q,r\ge 1}. For every integer #{q\ge 2},
+#{T_q(t)=tU_{q-1}(t)-U_{q-2}(t)}, where the second index is
+#{0} when #{q=2}.
+Also #{T_q(1)=1} for every integer #{q\ge 0}, and the only
+fixed points of #{T_2} are #{t=1} and #{t=-1/2}.}
+
+\proof{
+\p{The addition formula
+#{\cosh((r+1)\theta)=2\cosh\theta\,\cosh(r\theta)-\cosh((r-1)\theta)}
+is the recurrence for #{T_r}. The values at #{r=0} and #{r=1}
+agree, so #{T_r(\cosh\theta)=\cosh(r\theta)}. Dividing
+#{\sinh((r+1)\theta)=2\cosh\theta\,\sinh(r\theta)-\sinh((r-1)\theta)}
+by #{\sinh\theta} is the recurrence for #{U_r}, and the values
+#{U_0=1} and #{U_1(\cosh\theta)=2\cosh\theta} agree, so
+#{U_r(\cosh\theta)=\sinh((r+1)\theta)/\sinh\theta}. Therefore
+#{T_q(T_r(\cosh\theta))=\cosh(qr\theta)=T_{qr}(\cosh\theta)}, and
+#{U_{qr-1}(\cosh\theta)=\sinh(qr\theta)/\sinh\theta} equals
+#{U_{q-1}(T_r(\cosh\theta))\,U_{r-1}(\cosh\theta)}. The two
+sides of each identity differ by a polynomial that vanishes
+for every #{t>1}, so both identities hold in #{\mathbb Z[t]}.
+For #{q\ge 2} and #{t=\cosh\theta},
+##{tU_{q-1}(t)-U_{q-2}(t)
+=\frac{\cosh\theta\sinh(q\theta)-\sinh((q-1)\theta)}{\sinh\theta}.}
+The subtraction formula
+#{\sinh((q-1)\theta)=\sinh(q\theta)\cosh\theta-\cosh(q\theta)\sinh\theta}
+makes the numerator #{\cosh(q\theta)\sinh\theta}, so the
+quotient equals #{T_q(t)}. The identity follows in
+#{\mathbb Z[t]}. For #{q=2} the index #{q-2} is #{0}. Finally
+#{T_2(t)-t=(2t+1)(t-1)}, and #{T_q(1)=1} follows from the
+recurrence.}
+}
