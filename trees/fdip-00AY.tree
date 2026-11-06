@@ -24,24 +24,6 @@ Every family of this form satisfies the same scale relation.
 Along it, decimation by #{q} preserves both the shape and the
 neighbor value.}
 
-\p{The precision #{Q_n} of the \vocabk{circle mesh}{fdip-004H}
-has diagonal #{\mu+2n^2} and neighbor coefficient #{n^2}, for
-its mass squared #{\mu>0}. Its shape is therefore
-#{1+(\mu)/(2n^2)}. On the cycle of #{2N} vertices that shape is
-#{1+(\mu)/(8N^2)}. Decimation by #{2} sends it to #{T_2} of that
-value. The mesh shape on the cycle of #{N} vertices is
-#{1+(\mu)/(2N^2)}, and
-##{T_2\Bigl(1+\frac{\mu}{8N^2}\Bigr)
- -\Bigl(1+\frac{\mu}{2N^2}\Bigr)
- =\frac{\mu^2}{32N^4}.}
-The difference is positive for every #{\mu>0} and every
-#{N\ge 3}. Define #{\mu_N=2N^2\bigl(\cosh(m/N)-1\bigr)}. Then
-#{t_N=1+\mu_N/(2N^2)} and
-##{\mu_N-m^2=\frac{m^4}{12N^2}+O(N^{-4})}
-as #{N\to\infty}, with the implied constant depending only on
-#{m}. Thus the mesh shape agrees with #{t_N} through order
-#{1/N^2} and is not invariant under decimation by #{2}.}
-
 \proof{
 \p{The evaluation in \ref{fdip-00B1} gives
 #{T_q(\cosh\theta)=\cosh(q\theta)}. Hence
@@ -79,21 +61,4 @@ confirms it, and
 #{T_q(t_{qN})=t_N} was proved above. Decimation by #{q}
 therefore returns the neighbor value #{b_N} and the shape
 #{t_N}.}
-
-\p{The matrix of #{Q_n} on the circle mesh is
-#{\mu I+n^2(2I-T_n-T_n^{-1})}, so the stated diagonal, neighbor
-coefficient, and shape are immediate. The cycle of #{2N}
-vertices has the shape #{1+(\mu)/(8N^2)}. Set
-#{\varepsilon=(\mu)/(8N^2)}. Then
-#{T_2(1+\varepsilon)=2(1+\varepsilon)^2-1=1+4\varepsilon+2\varepsilon^2},
-and #{4\varepsilon=(\mu)/(2N^2)}, while
-#{2\varepsilon^2=\mu^2/(32N^4)}. Subtracting
-#{1+(\mu)/(2N^2)} leaves the displayed difference, which is
-positive. For the hyperbolic family, the expansion above
-supplies an #{\eta} strictly between #{0} and #{m/N}.
-Multiplying by #{2N^2} yields
-##{\mu_N=m^2+\frac{m^4}{12N^2}+\frac{m^6}{360N^4}\cosh\eta.}
-For #{N\ge 3} one has #{m/N\le m/3}, so
-#{\cosh\eta\le\cosh(m/3)} and the last term is at most
-#{(m^6\cosh(m/3)/360)\,N^{-4}}.}
 }
