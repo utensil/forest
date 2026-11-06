@@ -11,8 +11,9 @@ maximum degree at most #{\Delta}, whose smallest positive
 eigenvalue of the combinatorial Laplacian is at least
 #{c}. Write #{Z} for its heat trace, #{d_s} for its
 \vocabk{spectral dimension}{fdip-00CO}, and
-#{W(t)=Z(t)-1}. There is a unique #{\tau>0} with
-#{W(\tau)=1}, and
+#{W(t)=Z(t)-1}. There is a unique #{\tau\ge 0} with
+#{W(\tau)=1}. When #{N=2}, one has #{W(0)=1}, so
+#{\tau=0}. In every case
 ##{\frac{1}{2\Delta}\log(N-1)
 \le\tau\le\frac{1}{c}\log(N-1).}
 Every positive eigenvalue is at most #{2\Delta}. For
@@ -25,7 +26,7 @@ For #{0\le s\le t},
 \le\frac{W(t)}{W(s)}
 \le e^{-c(t-s)}.}
 In particular, #{ct\le d_s(t)\le 4\Delta t} whenever
-#{t\le\tau}, and
+#{0<t\le\tau}, and
 #{d_s(t)\le 4\Delta t\,e^{-c(t-\tau)}} whenever
 #{t\ge\tau}.}
 
@@ -48,9 +49,11 @@ the same sum weighted by the eigenvalues, then
 from #{s} to #{t} gives the exponential comparison.
 #{W(0)=N-1} and #{0<W(t)\le(N-1)e^{-ct}}, so #{W} tends to
 #{0}. Since #{W'=-S<0}, the function #{W} is strictly
-decreasing, and the time #{\tau} exists and is unique. The
-comparison from time
-#{0} to time #{\tau} bounds #{\tau}. For #{t\le\tau} one
+decreasing, so there is a unique #{\tau\ge 0} with
+#{W(\tau)=1}. If #{N=2}, then #{W(0)=1} and #{\tau=0}.
+The comparison from time #{0} to time #{\tau} bounds
+#{\tau}, and both sides equal #{0} when #{N=2}. For
+#{0\le t\le\tau} one
 has #{W(t)\ge 1}, so #{W/(1+W)} lies between #{1/2} and
 #{1}, and the bound on #{d_s} simplifies. For #{t\ge\tau},
 #{W(t)\le e^{-c(t-\tau)}}, and
