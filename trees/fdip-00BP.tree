@@ -1,0 +1,57 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{The limit covariance is an averaged Green function}
+\date{2026-11-06}
+
+\p{Set #{m=\sqrt{\mu}}. For #{|u|\le 1} define
+##{H(u)=\frac{\cosh\bigl(m(1/2-|u|)\bigr)}{2m^3\sinh(m/2)}
++\frac{|u|}{2m^2}.}
+Let #{I} be the half-open block from #{\alpha} to #{\beta},
+and let #{J} be the half-open block from #{\gamma} to
+#{\delta}. Both have length #{1/B} and lie in the unit
+interval. The limit
+covariance of \ref{fdip-00BO} equals
+##{B^2\Bigl(H(\beta-\gamma)+H(\alpha-\delta)
+-H(\beta-\delta)-H(\alpha-\gamma)\Bigr).}
+The same number is the covariance of the means
+#{B\int_I f} and #{B\int_J f} for a field with the covariance
+#{G} of \ref{fdip-00BG}.}
+
+\proof{
+\p{For #{0<u\le 1} the derivative of #{H} is
+##{H'(u)=-\frac{\sinh\bigl(m(1/2-u)\bigr)}{2m^2\sinh(m/2)}
++\frac{1}{2m^2}.}
+Thus #{H'(0+)=0}. Evenness gives #{H'(0-)=0}, so #{H'} is
+continuous at #{0}. A further derivative off #{0} equals
+#{G(u)=\cosh(m(1/2-|u|))/(2m\sinh(m/2))}, which is the
+function in \ref{fdip-00BG}. The jump in the first derivative
+cancels, so there is no atom in the second derivative.}
+\p{On the unit interval the same formula for #{G} has Fourier
+coefficients #{1/(\mu+(2\pi p)^2)}. Indeed, for each integer
+#{p},
+##{\int_0^1 e^{m(1/2-x)}e^{-2\pi i px}\,dx
+=\frac{2\sinh(m/2)}{m+2\pi i p},}
+and the integral with #{e^{-m(1/2-x)}} replaces the
+denominator by #{m-2\pi i p}. Averaging these identities and
+dividing by #{2m\sinh(m/2)} leaves
+#{1/(\mu+(2\pi p)^2)}. The constant term is #{1/\mu}.}
+\p{Integrate the series over a block. For #{p\neq 0} the
+integral of #{e^{2\pi i px}} over an interval of length
+#{1/B} has square #{sin^2(\pi p/B)/(\pi p)^2}, and the
+constant mode contributes #{1/B}. Multiplying by #{B} for
+each mean produces the coefficients #{\alpha_p} of
+\ref{fdip-00BO}. Termwise integration is legitimate because
+#{|\alpha_p|} is bounded by a multiple of #{1/p^2}.}
+\p{The same double integral equals the combination of #{H}.
+For fixed #{x}, the inner integral of #{G(x-y)} from
+#{y=\gamma} to #{y=\delta} equals
+#{H'(x-\gamma)-H'(x-\delta)}, since #{H''=G} off #{0} and
+#{H'} is continuous. Integrating in #{x} from #{\alpha} to
+#{\beta} replaces each #{H'} by #{H}. The endpoint
+differences of two blocks inside the unit interval run from
+#{-1} to #{1}, endpoints included, where this
+antiderivative is the function #{H} above. Multiplying by
+#{B^2} is the covariance of the two normalized means.}
+}
