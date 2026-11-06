@@ -1,0 +1,57 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{Block means share one mass}
+\date{2026-11-06}
+
+\p{Fix an integer #{B\ge 1}, a mass #{\mu>0}, and a
+\vocabk{finite-range circle precision}{fdip-00C8} with
+second-order coefficient #{\kappa}. Let #{N=BM} with
+#{M\ge 1} and #{N>2R}, and let #{\varphi} be the rescaled
+field of \ref{fdip-00CB}. Write #{A_b} for the mean of the
+#{M} consecutive coordinates of #{\varphi} on the
+half-open interval from #{b/B} to #{(b+1)/B}. These are
+the means in the \vocabk{block averages}{fdip-00BL}, applied
+to #{\varphi}. As #{M\to\infty}, the covariance of
+#{(A_0,\ldots,A_{B-1})} converges to the circulant matrix of
+\ref{fdip-00BO} computed at mass squared
+#{m^2=\frac{\mu}{\kappa}}.}
+
+\proof{
+\p{The counting covariance of #{\varphi} has entries
+##{\mathbb E\bigl(\varphi(u)\varphi(v)\bigr)
+=\kappa\sum_{p=0}^{N-1}\lambda_p^{-1}
+\exp\bigl(2\pi i p(u-v)/N\bigr),}
+where #{\lambda_p=\mu+N^2\alpha(2\pi p/N)}. The geometric sum
+over a block is the one in the proof of \ref{fdip-00BO}, and
+it contributes the same ratio of sines. Hence
+##{\mathbb E(A_bA_c)
+=\sum_{p=0}^{N-1}t_{N,p}
+\exp\bigl(2\pi i p(b-c)/B\bigr).}
+The constant mode contributes #{t_{N,0}=\frac{\kappa}{\mu}}.
+For
+every other mode,
+##{t_{N,p}=\frac{\kappa B^2\sin^2(\pi p/B)}
+{N^2\sin^2(\pi p/N)\,\lambda_p}.}}
+\p{Take the representative of #{p} in a symmetric range of
+length #{N}. The chord bound in the proof of \ref{fdip-00BO}
+gives #{\sin(\pi |p|/N)\ge 2|p|/N} for #{1\le |p|\le N/2}, so
+#{N^2\sin^2(\pi p/N)\ge 4p^2}. Since #{\lambda_p\ge\mu} and
+the squared sine in the numerator is at most #{1},
+##{t_{N,p}\le\frac{\kappa B^2}{4\mu p^2}.}
+Extend #{t_{N,p}} by zero outside that range. For each fixed
+#{p\ne 0}, the mode computation of \ref{fdip-00CC} gives
+#{N^2\alpha(2\pi p/N)\to 4\pi^2\kappa p^2} and
+#{N\sin(\pi p/N)\to\pi p}, so
+##{t_{N,p}\to
+\frac{B^2\sin^2(\pi p/B)}
+{(\pi p)^2\bigl(m^2+(2\pi p)^2\bigr)}.}
+The comparison #{\kappa B^2/(4\mu p^2)} is summable over the
+nonzero integers and does not depend on #{N}. Split the sum
+into the terms with #{|p|\le P} and the tail. The tail is
+smaller than any prescribed positive tolerance, uniformly in
+#{N}, once #{P} is large. Each of the finitely many remaining
+terms converges. The resulting matrix is the matrix of
+\ref{fdip-00BO} at mass squared #{m^2}.}
+}

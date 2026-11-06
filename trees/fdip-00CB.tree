@@ -1,0 +1,41 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{The symbol determines a positive precision}
+\date{2026-11-06}
+
+\p{Let #{Q_N} be a
+\vocabk{finite-range circle precision}{fdip-00C8}, with mass
+#{\mu>0} and second-order coefficient #{\kappa}. Then #{Q_N}
+is a \vocabk{positive precision parameter}{fdip-0004} for the
+counting inner product. Let #{x} be a field with its centered
+\vocabk{Gaussian probability law}{fdip-0005}, and set
+#{\varphi=\sqrt{\kappa N}\,x}. The counting covariance of
+#{\varphi} is #{\kappa N Q_N^{-1}}.}
+
+\proof{
+\p{Write #{h} for the counting inner product and #{\theta_k=2\pi k/N}.
+For each offset #{r},
+##{\sum_j x(j)y(j+r)=\sum_j x(j-r)y(j),}
+by reindexing. Therefore
+##{h(x,A_Ny)=\sum_{1\le |r|\le R}c_r\sum_j
+\bigl(x(j)-x(j-r)\bigr)y(j).}
+The hypothesis #{c_r=c_{-r}} replaces each offset #{-r} by
+#{r}, so #{h(x,A_Ny)=h(A_Nx,y)}. Thus #{A_N} and #{Q_N} are
+self-adjoint.}
+\p{The function #{v(j)=\exp(2\pi i kj/N)} satisfies
+##{(A_Nv)(j)=\alpha(\theta_k)v(j),}
+because the contributions of #{r} and #{-r} add to
+#{2c_r(1-\cos(r\theta_k))} when #{r>0}, and those terms sum
+to #{\alpha(\theta_k)}. Hence
+##{Q_Nv=\bigl(\mu+N^2\alpha(\theta_k)\bigr)v.}
+For #{k=0} the eigenvalue is #{\mu}. For every other residue
+#{k}, the angle #{\theta_k} is not a multiple of #{2\pi}, so
+#{\alpha(\theta_k)>0} and the eigenvalue is greater than
+#{\mu}. Every eigenvalue is therefore positive, and
+#{h(x,Q_Nx)>0} for #{x\ne 0}.}
+\p{By \ref{fdip-000B}, the counting covariance of #{x} is
+#{Q_N^{-1}}. Multiplication by #{\sqrt{\kappa N}} multiplies
+that covariance by #{\kappa N}.}
+}
