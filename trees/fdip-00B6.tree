@@ -1,0 +1,35 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Definition}
+\title{Cyclic arc precision on the dyadic index}
+\date{2026-11-06}
+
+\p{For each integer #{k\ge 0}, write
+#{X_k=\mathbb Z/2^k\mathbb Z}. The doubling map
+#{X_k\to X_{k+1}} sends the class of an integer #{j} to the
+class of #{2j}. These maps form an inductive system. Its direct
+limit is the \newvocab{dyadic index} #{D}. The class of #{j} at
+level #{k} is the point #{j/2^k}, read modulo #{1}. The next
+level represents the same point, because
+#{(2j)/2^{k+1}=j/2^k}.}
+
+\p{Let #{S\subset D} be finite, with #{|S|\ge 2}, and equip
+#{\mathbb R^S} with its
+\vocabk{counting inner products}{fdip-0002}. List the points of
+#{S} in the cyclic order of their positions modulo #{1}, and
+let #{h_i>0} be the arc from one point to the next. Each arc
+is a difference of dyadic positions. Viewing the same points at
+a finer level does not change the arcs, and the arcs sum to
+#{1}. Fix #{m>0}. The \newvocab{cyclic arc precision} #{Q_S} is
+the following symmetric matrix. When #{|S|\ge 3},
+##{Q_{ii}=m\bigl(\coth(m h_{i-1})+\coth(m h_i)\bigr),
+\qquad
+Q_{i,i+1}=-\frac{m}{\sinh(m h_i)},}
+with indices read in that cyclic order, and with every other
+entry equal to #{0}. When #{|S|=2}, the arcs #{h} and #{1-h}
+are parallel edges between the same two points, so the couplings
+add: both diagonal entries equal
+#{m\bigl(\coth(m h)+\coth(m(1-h))\bigr)}, and both
+off-diagonal entries equal
+#{-m\left(\frac{1}{\sinh(m h)}+\frac{1}{\sinh(m(1-h))}\right)}.}

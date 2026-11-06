@@ -1,0 +1,60 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{Block maps and residue maps have different limits}
+\date{2026-11-06}
+
+\p{Let #{q\ge 2} be an integer. On the cycles
+#{X_k=\mathbb Z/q^k\mathbb Z}, the block maps
+#{j\mapsto\operatorname{floor}(j/q)} and the residue maps
+#{j\mapsto j\bmod q^{k-1}} have different projective limits.
+The block limit is a Cantor set, and the map that sends a
+thread to its nested-interval point is continuous and
+surjective onto the circle #{\mathbb{R}/\mathbb{Z}}, but not
+injective. The residue limit is the group of #{q}-adic
+integers. The closure of the component of #{0} in the Cayley
+graph of the steps #{\{\pm 1\}} is the whole group, so the
+quotient by that closure is a single point. For #{q=2}, the
+doubling map of the \vocabk{dyadic index}{fdip-00B6} is a
+section of the block map.}
+
+\proof{
+\p{A block thread satisfies
+#{\operatorname{floor}(x_k/q)=x_{k-1}}, hence
+#{x_k=q x_{k-1}+r_k} with a digit
+#{r_k\in\{0,\ldots,q-1\}}. The inverse limit is the product
+of these digit sets. It is compact, Hausdorff, and totally
+disconnected, and #{q\ge 2} leaves a later digit free, so
+no point is isolated. The partial sums
+#{s_k=\sum_{i=1}^k r_i q^{-i}} give nested closed intervals
+of length #{q^{-k}} beginning at #{s_k}. Their intersection
+is one point of the circle. Agreement through digit #{K}
+puts the images at most #{q^{-K}} apart, so the map is
+continuous and, by base-#{q} expansions, surjective. It
+identifies the two expansions of #{q^{-1}}: the digits
+#{(1,0,0,\ldots)} and #{(0,q-1,q-1,\ldots)}. The quotient
+by these fibers maps bijectively and continuously onto the
+circle. A closed set in the quotient is the image of a
+compact set of threads. The circle is Hausdorff, so that
+image is closed. The bijection is a closed map, and the
+quotient is the circle.}
+
+\p{A residue thread satisfies
+#{x_k\equiv x_{k-1}\pmod{q^{k-1}}}. The inverse limit is
+#{\mathbb Z_q}. Ordinary integers embed by
+#{n\mapsto(n\bmod q^k)_k}. A nonzero integer is not
+divisible by every power of #{q}, so the embedding is
+injective. In the Cayley graph of the steps #{\pm 1}, the
+component of #{0} is this image. Each basic neighborhood
+fixes a class modulo #{q^k} and contains the corresponding
+integer, so the image is dense. Its closure is the whole
+group, and the quotient by that closure is one point.}
+
+\p{For #{q=2} and #{0\le j<2^k}, doubling sends #{j} to
+#{2j}, and #{\operatorname{floor}((2j)/2)=j}. Doubling is a
+section of the block map. The class of #{j} at level #{k}
+determines the thread that uses the block map below that
+level and doubling above it. These threads are the points of
+the [dyadic index](fdip-00B6).}
+}

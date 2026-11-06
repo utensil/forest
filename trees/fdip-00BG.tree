@@ -1,0 +1,76 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{The covariance matches a Green function}
+\date{2026-11-06}
+
+\p{Fix #{m>0}, and let #{\nu} be the law of \ref{fdip-00BC}.
+For #{x,y} in the \vocabk{dyadic index}{fdip-00B6}, with
+shorter arc #{\delta}, 
+##{\mathbb E_\nu(f_x f_y)=G(\delta),
+\qquad
+G(\delta)=\frac{\cosh\bigl(m(1/2-\delta)\bigr)}{2m\sinh(m/2)}.}
+The same formula, read on the completion of \ref{fdip-00BE},
+is the Green function of #{-\frac{d^2}{dx^2}+m^2} on the
+circle of length #{1}. The finite-dimensional precisions were
+fixed before this operator was used.}
+
+\proof{
+\p{The one-point precision #{2m\tanh(m/2)} of \ref{fdip-00BA}
+has reciprocal #{\coth(m/2)/(2m)}, which equals #{G(0)}. For
+#{x\ne y}, \ref{fdip-00BD} gives
+#{\mathbb E(f_x-f_y)^2=2\sinh(m\delta / 2)\sinh(m(1-\delta)/2)/(m\sinh(m/2))}.
+Set #{X=m/2}, #{Y=m(1/2-\delta)},
+#{A=(X+Y)/2} and #{B=(X-Y)/2}. Then #{A+B=X} and #{A-B=Y}. The addition formulas are
+#{\cosh(A+B)=\cosh A\cosh B+\sinh A\sinh B} and
+#{\cosh(A-B)=\cosh A\cosh B-\sinh A\sinh B}. Subtracting
+them gives
+#{\sinh A\sinh B=(\cosh(A+B)-\cosh(A-B))/2}, which rearranges to
+##{\cosh(m/2)-\cosh\bigl(m(1/2-\delta)\bigr)
+=2\sinh(m\delta / 2)\sinh(m(1-\delta)/2).}
+Dividing by
+#{m\sinh(m/2)} shows that the increment equals
+#{2\bigl(G(0)-G(\delta)\bigr)}. Therefore
+##{\mathbb E(f_x f_y)
+=\frac{1}{2}\bigl(\mathbb E f_x^2+\mathbb E f_y^2
+-\mathbb E(f_x-f_y)^2\bigr)
+=G(\delta).}
+Both sides are unchanged if #{x=y}, since then #{\delta=0}.}
+
+\p{Extend #{G} to the circle by using the shorter arc from
+#{0}, so #{G(x)} depends on #{|x|} for #{|x|\le 1/2}. Off
+#{0}, the right-hand derivative is
+#{-\sinh(m(1/2-x))/(2\sinh(m/2))}, and the left-hand
+derivative is its negative. On each side the second
+derivative equals #{m^2 G(x)}. Thus
+#{-G''+m^2 G=0} off #{0}. The right derivative at #{0}
+equals #{-1/2}, and evenness makes the left derivative
+#{+1/2}, so the jump #{G'(0+)-G'(0-)} equals #{-1}. The
+distributional second derivative is the pointwise second
+derivative plus this jump times a unit point mass, hence
+#{m^2 G-\delta_0}. Applying #{-\frac{d^2}{dx^2}+m^2}
+therefore yields the unit point mass at #{0}. On the open
+interval from #{0} to #{1}, a solution of the homogeneous
+equation has the form
+#{A\cosh(m(x-1/2))+B\sinh(m(x-1/2))}. If a second continuous
+function has the same differential equation off #{0} and the
+same jump, the difference #{u} is continuous on the circle
+and its derivative has jump #{0}. The one-sided values
+therefore agree: #{u(0+)=u(1-)} and #{u'(0+)=u'(1-)}.
+Evaluating the form gives
+#{u(0+)=A\cosh(m/2)-B\sinh(m/2)} and
+#{u(1-)=A\cosh(m/2)+B\sinh(m/2)}, so #{B=0}. Then
+#{u'(x)=Am\sinh(m(x-1/2))}, and the derivatives
+#{u'(0+)=-Am\sinh(m/2)} and #{u'(1-)=Am\sinh(m/2)} force
+#{A=0}. Thus #{G} is the only such function. The
+continuous version of \ref{fdip-00BE} agrees with the
+coordinate process on #{D}, so its covariance there equals
+#{G}. Every one-point law on #{D} is the same centered
+Gaussian, so the coordinate functions are bounded in every
+#{L^{2r}}. An almost-sure limit along dyadic approximations
+is therefore an #{L^2} limit, and the products converge in
+#{L^1}. The covariance of the continuous version at a pair of
+points on the completion is the limit of values of #{G},
+hence equals #{G} at the limiting arc.}
+}
