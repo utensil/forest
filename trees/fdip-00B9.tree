@@ -1,0 +1,36 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{The cyclic arc precision is positive definite}
+\date{2026-11-06}
+
+\p{Fix #{m>0}. For every finite #{S\subset D} with
+#{|S|\ge 2}, the \vocabk{cyclic arc precision}{fdip-00B6}
+#{Q_S} is a \vocabk{positive precision parameter}{fdip-0004}
+on #{\mathbb R^S} with its
+\vocabk{counting inner products}{fdip-0002}.}
+
+\proof{
+\p{The matrix #{Q_S} is symmetric, hence self-adjoint for the
+counting inner product. It is the sum of one symmetric form for
+each edge. An edge of arc #{h}, with #{\theta=mh>0},
+contributes on its two endpoint values #{u} and #{v} the
+quadratic form
+##{m\coth\theta\,(u^2+v^2)-\frac{2m\,uv}{\sinh\theta},}
+and contributes #{0} to every other coordinate. The symmetric
+matrix of this form has diagonal entries #{m\coth\theta} and
+off-diagonal entries #{-m/\sinh\theta}. Its trace is
+#{2m\coth\theta>0}. Its determinant equals
+##{m^2\left((\coth\theta)^2-\frac{1}{(\sinh\theta)^2}\right)
+=m^2,}
+because #{\cosh^2\theta-1=\sinh^2\theta}.
+The product of the eigenvalues is positive and their sum is
+positive, so both are positive. The block form is therefore
+positive semidefinite on #{\mathbb R^S}, and it vanishes if and
+only if both endpoint values are #{0}. For #{|S|=2} the two
+parallel edges have the same endpoints, so the sum vanishes only
+at #{0}. For #{|S|\ge 3} the edges form a cycle. If the sum
+vanishes, every endpoint value vanishes, hence the vector is
+#{0}. In both cases #{h(x,Q_Sx)>0} for every #{x\ne 0}.}
+}

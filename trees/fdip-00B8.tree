@@ -1,0 +1,51 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Lemma}
+\title{Eliminating one vertex merges its two arcs}
+\date{2026-11-06}
+
+\p{Fix #{m>0} and a finite #{S\subset D} with #{|S|\ge 3}. Let
+#{p\in S}, and let #{h>0} and #{h'>0} be the arcs from #{p} to
+its two neighbors in the cyclic order. Write #{S'=S\setminus\{p\}}.
+The \vocabk{Schur complement}{fdip-000D} that eliminates the
+coordinate #{p} of the \vocabk{cyclic arc precision}{fdip-00B6}
+#{Q_S} equals #{Q_{S'}}.}
+
+\proof{
+\p{Let #{\theta=mh} and #{\varphi=mh'}. The two addition
+formulas used below are
+##{\coth u+\coth v=\frac{\sinh(u+v)}{\sinh u\sinh v}}
+and
+##{\coth u-\coth(u+v)=\frac{\sinh v}{\sinh u\sinh(u+v)}.}
+The first is the expansion of #{\sinh(u+v)}. The second follows
+by clearing the common denominator
+#{\sinh u\sinh(u+v)}: the numerator is
+#{\cosh u\sinh(u+v)-\cosh(u+v)\sinh u=\sinh v}.}
+
+\p{The vertex #{p} meets only the two neighboring edges. Its
+diagonal entry is #{m(\coth\theta+\coth\varphi)}, and its
+off-diagonal entries toward the neighbors #{y} and #{z} are
+#{-m/\sinh\theta} and #{-m/\sinh\varphi}. Every other entry of
+its row is #{0}. The Schur update therefore changes only the
+principal block on #{\{y,z\}}. The pivot is
+#{d=m(\coth\theta+\coth\varphi)}. By the first identity,
+#{1/(\coth\theta+\coth\varphi)=\sinh\theta\sinh\varphi / \sinh(\theta+\varphi)},
+so
+##{\frac{m}{\sinh^2\theta\,(\coth\theta+\coth\varphi)}
+=\frac{m\sinh\varphi}{\sinh\theta\sinh(\theta+\varphi)}
+=m\bigl(\coth\theta-\coth(\theta+\varphi)\bigr).}
+The last step is the second identity. Subtracting this from
+the #{y}-diagonal contribution #{m\coth\theta} leaves
+#{m\coth(\theta+\varphi)}. The same replacement occurs at
+#{z}. The new off-diagonal entry produced between #{y} and
+#{z} is
+##{-\frac{m}{\sinh\theta}\cdot\frac{m}{\sinh\varphi}\cdot\frac{1}{d}
+=-\frac{m}{\sinh(\theta+\varphi)},}
+again by the first identity. Edges that do not meet #{p} are
+unchanged. The two arcs #{h} and #{h'} have
+been replaced by one arc #{h+h'}, with the couplings of the
+[cyclic arc precision](fdip-00B6) on #{S'}. When #{|S|=3}, the
+third edge already joins #{y} to #{z}, and the two parallel
+couplings add, which is the two-point case of that definition.}
+}

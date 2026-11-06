@@ -1,0 +1,62 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{The Gaussian laws on finite subsets are consistent}
+\date{2026-11-06}
+
+\p{Fix #{m>0}. For every finite #{S\subset D} with
+#{|S|\ge 2}, let #{\nu_S} be the
+\vocabk{Gaussian probability law}{fdip-0005} of the
+\vocabk{cyclic arc precision}{fdip-00B6} #{Q_S}. If
+#{S'\subset S} and #{|S'|\ge 2}, the marginal of #{\nu_S} on
+the coordinates in #{S'} equals #{\nu_{S'}}. If #{|S'|=1}, that
+marginal is the centered Gaussian law on #{\mathbb R} of
+precision #{2m\tanh(m/2)}. The one-point precision depends
+neither on the point nor on #{S}.}
+
+\proof{
+\p{Eliminating one coordinate is the Schur complement in
+\ref{fdip-000D}, and the marginal is the law in
+\ref{fdip-000E}. For #{|S|\ge 3},
+\ref{fdip-00B8} says that the Schur complement is the cyclic
+arc precision of the remaining set. Repeating this removal
+gives the marginal #{\nu_{S'}} whenever #{|S'|\ge 2}. The same
+identification holds if #{S'} is already the whole set.}
+
+\p{It remains to remove one point of a two-point set, with arcs
+#{h} and #{1-h}. Both diagonal entries equal
+#{a=m\bigl(\coth(mh)+\coth(m(1-h))\bigr)}, and the off-diagonal
+entries equal #{-b} with
+#{b=m\bigl(1/\sinh(mh)+1/\sinh(m(1-h))\bigr)}. The scalar Schur
+complement is #{(a^2-b^2)/a=(a-b)(a+b)/a}. The half-angle identities
+##{\coth\psi+\frac{1}{\sinh\psi}=\coth(\psi / 2),
+\qquad
+\coth\psi-\frac{1}{\sinh\psi}=\tanh(\psi / 2)}
+are the expansions
+#{(\cosh\psi\pm 1)/\sinh\psi}, using
+#{\cosh\psi+1=2\cosh^2(\psi / 2)},
+#{\cosh\psi-1=2\sinh^2(\psi / 2)} and
+#{\sinh\psi=2\sinh(\psi / 2)\cosh(\psi / 2)}. They give
+#{a+b=m\bigl(\coth(mh/2)+\coth(m(1-h)/2)\bigr)} and
+#{a-b=m\bigl(\tanh(mh/2)+\tanh(m(1-h)/2)\bigr)}. Set
+#{p=mh/2} and #{q=m(1-h)/2}, so #{p+q=m/2}. The first
+identity of \ref{fdip-00B8} gives
+#{\coth p+\coth q=\sinh(m/2)/(\sinh p\sinh q)}. The sum of
+hyperbolic tangents is
+#{\tanh p+\tanh q=\sinh(m/2)/(\cosh p\cosh q)}, because the
+common denominator is #{\cosh p\cosh q} and the numerator is
+#{\sinh(p+q)}. Therefore
+##{(a+b)(a-b)
+=m^2\frac{\sinh^2(m/2)}{\sinh p\cosh p\sinh q\cosh q}
+=m^2\frac{4\sinh^2(m/2)}{\sinh(mh)\sinh(m(1-h))},}
+where #{\sinh(mh)=2\sinh p\cosh p}. The same identity gives
+#{a=m\sinh(m)/(\sinh(mh)\sinh(m(1-h)))}. Hence
+##{\frac{(a-b)(a+b)}{a}
+=\frac{4m\sinh^2(m/2)}{\sinh m}.}
+The double-angle formula
+#{sinh m=2\sinh(m/2)\cosh(m/2)} reduces the right-hand side
+to #{2m\tanh(m/2)}.
+The right-hand side does not depend on #{h}. Thus every
+one-point marginal has this precision.}
+}

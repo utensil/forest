@@ -1,0 +1,38 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{A law on the dyadic index}
+\date{2026-11-06}
+
+\p{Fix #{m>0}. There is a unique probability measure #{\nu} on
+#{\mathbb R^D}, for the product sigma-algebra, whose
+coordinate projections are the laws of \ref{fdip-00BA}. Every
+finite set of coordinates with at least two points has law
+#{\nu_S}, and every one-point marginal is the centered
+Gaussian law of precision #{2m\tanh(m/2)}.}
+
+\proof{
+\p{For a finite #{S\subset D}, the law #{\nu_S} is defined when
+#{|S|\ge 2}, and the one-point law is defined by the same
+statement. If #{S'\subset S}, the marginal of the law on
+#{S} equals the law on #{S'}, by \ref{fdip-00BA}. The family
+of finite-dimensional distributions is therefore consistent
+under coordinate projections. Each factor is the Borel line
+#{\mathbb R}, which is second-countable and completely
+pseudo-metrizable, and each law in the family is a
+probability measure.}
+
+\p{Mathlib revision \code{727d8bbe6044} supplies the extension
+for that class of spaces.
+\leanref{MeasureTheory.isProjectiveLimit_projectiveLimit}
+constructs a projective limit of the family, and
+\leanref{MeasureTheory.isProbabilityMeasure_projectiveLimit}
+makes the limit a probability measure.
+\leanref{MeasureTheory.IsProjectiveLimit.unique} gives
+uniqueness among finite measures with the same coordinate
+projections. The declarations take the finite-dimensional
+laws as data. Their Gaussian form is the content of
+\ref{fdip-00BA}, and the Hölder modification is the content
+of \ref{fdip-00BE}.}
+}

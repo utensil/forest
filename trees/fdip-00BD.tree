@@ -1,0 +1,67 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Lemma}
+\title{The increment across one arc}
+\date{2026-11-06}
+
+\p{Fix #{m>0}. Let #{x,y\in D} be distinct, and let
+#{0<\delta\le 1/2} be the shorter arc between them. Under
+the two-point law of \ref{fdip-00BA},
+##{\mathbb E\lvert f_x-f_y\rvert^2
+=\frac{2}{m\bigl(\coth(m\delta / 2)+\coth(m(1-\delta)/2)\bigr)}
+=\frac{2\sinh(m\delta / 2)\sinh(m(1-\delta)/2)}{m\sinh(m/2)}.}
+This expectation is at most #{\delta}. For every integer
+#{r\ge 1} there is a constant #{C_r}, depending only on
+#{r}, such that
+#{\mathbb E\lvert f_x-f_y\rvert^{2r}\le C_r\delta^r}.}
+
+\proof{
+\p{The two-point precision has equal diagonal entries #{a} and
+off-diagonal entries #{-b}, with #{a} and #{b} as in the
+two-point case of \ref{fdip-00BA}. The inverse matrix has
+diagonal entries #{a/(a^2-b^2)} and off-diagonal entries
+#{b/(a^2-b^2)}. Hence
+##{\mathbb E(f_x-f_y)^2=\frac{2(a-b)}{a^2-b^2}=\frac{2}{a+b}.}
+The sum #{a+b} equals
+#{m\bigl(\coth(m\delta / 2)+\coth(m(1-\delta)/2)\bigr)} by the
+half-angle identities in \ref{fdip-00BA}. Set
+#{p=m\delta / 2} and #{q=m(1-\delta)/2}. The first addition
+formula of \ref{fdip-00B8} gives
+#{\coth p+\coth q=\sinh(m/2)/(\sinh p\sinh q)}, and the second
+displayed formula follows. Since #{\coth q>0},
+#{a+b\ge m\coth p}, so the expectation is at most
+#{(2/m)\tanh p}. For #{z\ge 0}, the derivative of #{\tanh} is
+#{\operatorname{sech}^2\le 1} and #{\tanh 0=0}, hence
+#{\tanh z\le z}. Taking #{z=p} yields
+#{(2/m)\tanh p\le\delta}.}
+
+\p{For the higher moments, pass to an orthonormal eigenchart of
+the two-point precision, as in the
+[Gaussian probability law](fdip-0005). The density becomes a
+product of centered scalar densities proportional to
+#{e^{-q_i y_i^2/2}}. The logarithmic derivative of the weight
+#{e^{-q_i y^2/2}} is #{-q_i y}. Integrating
+#{y^{2r-1}} against #{y} times the weight, and discarding the
+boundary term #{y^{2r-1}e^{-q_i y^2/2}} at infinity, gives
+#{\mathbb E Y^2=1/q_i} and
+#{\mathbb E Y^{2r}=(2r-1)q_i^{-1}\mathbb E Y^{2r-2}}. Thus
+#{\mathbb E Y^{2r}=P_r q_i^{-r}}, where #{P_r} is the product
+of the odd positive integers from #{1} through #{2r-1}, and
+#{P_1=1}. The difference #{f_x-f_y} is a linear form
+#{\ell_1 y_1+\ell_2 y_2}. Its variance is
+#{\sigma^2=\ell_1^2/q_1+\ell_2^2/q_2}, which is the
+expectation already computed, hence #{\sigma^2\le\delta}.
+The function #{t\mapsto\lvert t\rvert^{2r}} is convex for
+#{r\ge 1}, so
+#{\lvert\ell_1 y_1+\ell_2 y_2\rvert^{2r}
+\le 2^{2r-1}\bigl(\lvert\ell_1 y_1\rvert^{2r}
++\lvert\ell_2 y_2\rvert^{2r}\bigr)}.
+Each term satisfies
+#{\lvert\ell_i\rvert^{2r}\mathbb E\lvert y_i\rvert^{2r}
+=P_r(\ell_i^2/q_i)^r\le P_r\sigma^{2r}}.
+Therefore
+#{\mathbb E\lvert f_x-f_y\rvert^{2r}
+\le 2^{2r}P_r\sigma^{2r}\le 2^{2r}P_r\delta^r}.
+The constant #{C_r=2^{2r}P_r} depends only on #{r}.}
+}
