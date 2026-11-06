@@ -1,0 +1,60 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{Cycle decimation sends laws to laws}
+\date{2026-11-06}
+
+\p{Let #{q\ge 2} and #{N\ge 3} be integers, and let #{Q} be a
+\vocabk{uniform cycle precision}{fdip-00AW} on
+#{\mathbb Z/(qN)\mathbb Z} with neighbor value #{b>0} and shape
+#{t}. Let #{S}, #{b'}, #{t'} and #{C} be the retained precision,
+neighbor value, shape and eliminated block of
+\ref{fdip-00B3}. Then #{Q} is positive definite if and only if
+#{t>1}. In that case #{b'>0} and #{t'>1}. The
+\vocabk{Gaussian partition function}{fdip-0005} factors as
+##{Z_Q=(2\pi)^{N(q-1)/2}(\det C)^{-1/2}Z_S,}
+and the \vocabk{Gaussian induced action}{fdip-005R} adds
+#{(N/2)\log(b^{q-1}U_{q-1}(t))}, where #{U_{q-1}} is the
+polynomial of \ref{fdip-00B1}. At #{t=1} the
+constant fields are a zero mode, so there is no Gaussian law on
+all field values. At #{t=-1/2}, the other fixed point of #{T_2}
+in \ref{fdip-00B1}, a negative eigenvalue occurs. When
+#{t>1}, for every integer #{r\ge 2}, the induced-action shifts
+of a step by #{r} and a following step by #{q} add to the shift
+of the single step by #{qr}.}
+
+\proof{
+\p{On a cycle of length #{n}, the mode with value
+#{\omega^{jk}} at vertex #{j}, where #{\omega=\exp(2\pi i k/n)},
+receives #{-b} from each neighbor. Those couplings contribute
+#{-b(\omega^{k}+\omega^{-k})=-2b\cos(2\pi k/n)}, so the
+eigenvalue is
+#{a-2b\cos(2\pi k/n)=2b\bigl(t-\cos(2\pi k/n)\bigr)}.
+The constant mode #{k=0} has eigenvalue #{2b(t-1)}. Since
+#{\cos\le 1}, this is the smallest eigenvalue. For #{b>0} it
+is positive if and only if #{t>1}, and then every eigenvalue
+is positive. At #{t=1} the constant eigenvalue vanishes. At
+#{t=-1/2} it equals #{-3b}, which is negative.
+\ref{fdip-00B1} says that #{t=-1/2} is the other fixed point of
+#{T_2}, and that
+#{U_{q-1}(\cosh\theta)=\sinh(q\theta)/\sinh\theta>0} whenever
+#{t=\cosh\theta>1}. Thus #{t'=\cosh(q\theta)>1}. Since
+#{b>0}, the formula #{b'=b/U_{q-1}(t)} of \ref{fdip-00B3} is
+positive.}
+
+\p{The counting inner product makes the kept and eliminated
+coordinates orthogonal. For #{t>1} the precision #{Q} is
+positive, so \ref{fdip-000D} supplies the scalar
+#{(2\pi)^{N(q-1)/2}(\det C)^{-1/2}} and the identity
+#{\det Q=\det C\det S}. \ref{fdip-000E} identifies the
+pushforward with the Gaussian law of #{S}. The induced action
+adds half the logarithm of #{\det C}. The determinant formula
+of \ref{fdip-00B3} makes that logarithm
+#{(N/2)\log(b^{q-1}U_{q-1}(t))}, and the argument is positive.
+\ref{fdip-00B1} gives #{U_k(\cosh\theta)>0} for every integer
+#{k\ge 0} when #{t=\cosh\theta>1}. The composite step in
+\ref{fdip-00B3} therefore applies for every integer #{r\ge 2}.
+Its eliminated determinants multiply, and the induced-action
+shifts add.}
+}

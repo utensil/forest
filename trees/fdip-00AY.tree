@@ -1,0 +1,64 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{The shape preserved by cycle decimation}
+\date{2026-11-06}
+
+\p{Let #{m>0}. For each integer #{N\ge 3} set
+#{t_N=\cosh(m/N)}, and let #{T_q} and #{U_q} be the polynomials
+of \ref{fdip-00B1}. Then #{t_N>1} and
+##{T_q(t_{qN})=t_N}
+for every integer #{q\ge 2}. Conversely, suppose #{s_N>1} for
+every integer #{N\ge 3}, that #{T_q(s_{qN})=s_N} for all integers
+#{q\ge 2} and #{N\ge 3}, and that #{s_N-1} is asymptotic to
+#{c/(2N^2)} as #{N\to\infty}, for some constant #{c>0}. Then
+there is a unique #{m>0} with #{c=m^2} and
+#{s_N=\cosh(m/N)}.}
+
+\p{Let #{b_N>0} satisfy
+#{b_N=b_{qN}/U_{q-1}(t_{qN})} for all such #{q} and #{N}.
+Then there is a constant #{\kappa>0} with
+##{b_N=\kappa\frac{m}{\sinh(m/N)}.}
+Every family of this form satisfies the same scale relation.
+Along it, decimation by #{q} preserves both the shape and the
+neighbor value.}
+
+\proof{
+\p{The evaluation in \ref{fdip-00B1} gives
+#{T_q(\cosh\theta)=\cosh(q\theta)}. Hence
+#{T_q(t_{qN})=\cosh(m/N)=t_N}. Since #{m/N>0}, one has
+#{t_N>1}. For the converse, set
+#{\theta_N=\operatorname{acosh}(s_N)>0}. The relation
+#{T_q(s_{qN})=s_N} becomes #{\theta_N=q\theta_{qN}}, so
+#{N\theta_N=(qN)\theta_{qN}}. For integers #{N,M\ge 3},
+#{N\theta_N=(NM)\theta_{NM}=M\theta_M}. The positive number
+#{N\theta_N} is therefore independent of #{N}; call it #{m}.
+Then #{s_N=\cosh(m/N)}. This #{m} is the only positive number
+with that property.}
+
+\p{The Taylor expansion of #{\cosh} through order #{5}, with
+Lagrange remainder, gives some #{\eta} between #{0} and #{u}
+such that
+##{\cosh u=1+\frac{u^2}{2}+\frac{u^4}{24}+\frac{u^6}{720}\cosh\eta.}
+For #{u=m/N} the quotient
+#{(\cosh u-1)/(u^2/2)} tends to #{1} as #{N\to\infty}. Thus
+#{s_N-1} is asymptotic to #{m^2/(2N^2)}, and the constant in
+the hypothesis is #{c=m^2}.}
+
+\p{The same addition formula gives
+#{U_{q-1}(\cosh\theta)=\sinh(q\theta)/\sinh\theta}, hence
+#{U_{q-1}(t_{qN})=\sinh(m/N)/\sinh(m/(qN))}. The scale relation
+becomes
+#{b_N\sinh(m/N)=b_{qN}\sinh(m/(qN))}. For integers
+#{N,M\ge 3} the case #{q=M} gives
+#{b_N\sinh(m/N)=b_{MN}\sinh(m/(MN))=b_M\sinh(m/M)}.
+The positive number #{b_N\sinh(m/N)} is therefore independent
+of #{N}. Call it #{\kappa m}, with #{\kappa>0}. The displayed
+formula follows. Substituting
+#{b_N=\kappa m/\sinh(m/N)} back into the scale relation
+confirms it, and
+#{T_q(t_{qN})=t_N} was proved above. Decimation by #{q}
+therefore returns the neighbor value #{b_N} and the shape
+#{t_N}.}
+}
