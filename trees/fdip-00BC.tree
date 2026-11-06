@@ -18,9 +18,21 @@ Gaussian law of precision #{2m\tanh(m/2)}.}
 statement. If #{S'\subset S}, the marginal of the law on
 #{S} equals the law on #{S'}, by \ref{fdip-00BA}. The family
 of finite-dimensional distributions is therefore consistent
-under coordinate projections. The Kolmogorov extension
-theorem, in its standard form for a consistent family of
-Borel probability measures on finite-dimensional real spaces,
-supplies a unique probability measure on the product space
-whose finite-dimensional distributions are these laws.}
+under coordinate projections. Each factor is the Borel line
+#{\mathbb R}, which is second-countable and completely
+pseudo-metrizable, and each law in the family is a
+probability measure.}
+
+\p{Mathlib revision \code{727d8bbe6044} supplies the extension
+for that class of spaces.
+\leanref{MeasureTheory.isProjectiveLimit_projectiveLimit}
+constructs a projective limit of the family, and
+\leanref{MeasureTheory.isProbabilityMeasure_projectiveLimit}
+makes the limit a probability measure.
+\leanref{MeasureTheory.IsProjectiveLimit.unique} gives
+uniqueness among finite measures with the same coordinate
+projections. The declarations take the finite-dimensional
+laws as data. Their Gaussian form is the content of
+\ref{fdip-00BA}, and the Hölder modification is the content
+of \ref{fdip-00BE}.}
 }
