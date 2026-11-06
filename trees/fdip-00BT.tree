@@ -1,0 +1,82 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{The limit precision is not nearest-neighbor}
+\date{2026-11-06}
+
+\p{Fix #{B\ge 4} and #{m>0}, and set #{\mu=m^2}. The
+covariance #{C} of \ref{fdip-00BO} is positive definite. Its
+inverse, the precision of the limit law, has a nonzero entry
+at some distance at least #{2}.}
+
+\proof{
+\p{The eigenvalues of the symmetric circulant #{C} are
+#{\lambda_q=\sum_{d=0}^{B-1}C_{0d}\cos(2\pi q d/B)}.
+From the series in \ref{fdip-00BO}, the sum over one period
+equals #{B} when the frequency differs from #{q} by a
+multiple of #{B}, and equals #{0} otherwise. Thus
+#{\lambda_q=B\sigma_q} with
+#{\sigma_q=\sum_{t\in\mathbb Z}\alpha_{q+tB}}. The terms
+#{\alpha_{tB}} vanish for #{t\neq 0}, and #{\alpha_0=1/\mu},
+so #{\lambda_0=B/\mu}.}
+\p{For #{q=1,\ldots,B-1} the decomposition
+##{\frac{1}{k^2\bigl(\mu+(2\pi k)^2\bigr)}
+=\frac{1}{\mu}\left(\frac{1}{k^2}
+-\frac{4\pi^2}{\mu+(2\pi k)^2}\right)}
+and the differentiated cotangent sum
+#{\sum_{t\in\mathbb Z}1/(t+z)^2=\pi^2/\sin^2(\pi z)} give
+##{\sigma_q=\frac1\mu-\frac{4B^2\sin^2(\pi q/B)}{\mu}
+\sum_{t\in\mathbb Z}\frac{1}{\mu+(2\pi(q+tB))^2}.}
+Partial fractions,
+##{\frac{1}{(t+z)^2+b^2}
+=\frac{1}{2ib}\left(\frac{1}{t+z-ib}
+-\frac{1}{t+z+ib}\right),}
+and #{\sum_t 1/(t+w)=\pi\cot(\pi w)} give
+##{\sum_{t\in\mathbb Z}\frac{1}{(t+z)^2+b^2}
+=\frac{\pi}{2ib}\bigl(\cot(\pi(z-ib))-\cot(\pi(z+ib))\bigr)}
+for #{b>0}. The difference of cotangents has numerator
+#{\sin(2\pi ib)=i\sinh(2\pi b)} and denominator
+#{(\cosh(2\pi b)-\cos(2\pi z))/2}, so the sum equals
+##{\frac{\pi}{b}\frac{\sinh(2\pi b)}{\cosh(2\pi b)-\cos(2\pi z)}.}
+Here #{\mu+(2\pi(q+tB))^2=(2\pi B)^2((t+z)^2+b^2)} with
+#{z=q/B} and #{b=m/(2\pi B)}. Since
+#{\frac{\pi}{b}=\frac{2\pi^2 B}{m}} and #{2\pi b=m/B}, the inner sum equals
+#{\sinh(m/B)/\bigl(2Bm(\cosh(m/B)-\cos\theta)\bigr)}, where
+#{\theta=2\pi q/B}.}
+\p{Set #{\delta=m/B}. Substitution produces
+##{\sigma_q=\frac{1}{m^2}\left(1
+-\frac{2B\sin^2\bigl(\frac{\theta}{2}\bigr)\sinh\delta}
+{m(\cosh\delta-\cos\theta)}\right).}
+The identity #{2\sin^2\bigl(\frac{\theta}{2}\bigr)=1-\cos\theta} rewrites the
+factor in parentheses as
+#{(A_0-A_1\cos\theta)/(m(\cosh\delta-\cos\theta))}, with
+#{A_0=m\cosh\delta-B\sinh\delta} and
+#{A_1=m-B\sinh\delta}. Therefore
+##{\frac{1}{\lambda_q}=\frac{m^3}{B}
+\frac{\cosh\delta-\cos\theta}{A_0-A_1\cos\theta}.}
+At #{\cos\theta=1} the factor #{\cosh\delta-1} cancels, because
+#{A_0-A_1=m(\cosh\delta-1)}, and the value equals
+#{m^2/B=1/\lambda_0}. The same expression holds for every mode.}
+\p{The function #{\sinh u-u} vanishes at #{0} and has
+derivative #{\cosh u-1}, so #{\sinh\delta>\delta} and
+#{A_1<0}. The denominator #{A_0-A_1\cos\theta} is then at
+least #{A_0+A_1}. Set #{u=\frac{\delta}{2}}. The double-angle
+identities give
+#{A_0+A_1=4B\cosh u\,(u\cosh u-\sinh u)}. The function
+#{u\cosh u-\sinh u} vanishes at #{0} and has derivative
+#{u\sinh u}, positive for #{u>0}. Thus #{A_0+A_1>0}, every
+denominator is positive, and #{\lambda_q>0}.}
+\p{The displayed reciprocal is affine in #{\cos\theta} only
+if #{A_0=A_1\cosh\delta}. That fails:
+#{A_0-A_1\cosh\delta=B\sinh\delta(\cosh\delta-1)>0}.
+Clearing the denominator in a comparison with
+#{A+D\cos\theta} leaves a polynomial of degree at most #{2}.
+A nonzero polynomial of that degree has at most two roots, so
+the reciprocal agrees with an affine function for at most two
+values of #{\cos\theta}. For #{B\ge 4} the values
+#{\cos(2\pi q/B)} include at least three distinct numbers. A
+nearest-neighbor circulant has eigenvalues
+#{A+D\cos(2\pi q/B)}, so the precision has a nonzero entry
+at distance #{2} or greater.}
+}

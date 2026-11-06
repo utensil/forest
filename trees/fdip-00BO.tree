@@ -1,0 +1,47 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{Block covariances converge}
+\date{2026-11-06}
+
+\p{Fix #{B\ge 1} and #{\mu>0}. As #{M\to\infty}, the covariance
+of the \vocabk{block averages}{fdip-00BL} converges. The limit matrix #{C} is
+circulant, and
+##{C_{bc}=\sum_{p\in\mathbb Z}\alpha_p
+\exp\bigl(2\pi i p(b-c)/B\bigr),}
+where #{\alpha_0=1/\mu} and, for every nonzero integer #{p},
+##{\alpha_p=\frac{B^2\sin^2(\pi p/B)}
+{(\pi p)^2\bigl(\mu+(2\pi p)^2\bigr)}.}}
+
+\proof{
+\p{The eigenvalues of #{Q_n} are
+#{\lambda_p=\mu+4n^2\sin^2(\pi p/n)} for
+#{p=0,\ldots,n-1}. The raw covariance in \ref{fdip-004I}
+therefore has entries
+##{\mathbb E(f_uf_v)=\sum_{p=0}^{n-1}\lambda_p^{-1}
+\exp\bigl(2\pi i p(u-v)/n\bigr).}
+The block average #{A_b} is the mean of #{M} consecutive
+coordinates. Summing the geometric series in each block gives
+##{\mathbb E(A_bA_c)=\sum_{p=0}^{n-1}t_{n,p}
+\exp\bigl(2\pi i p(b-c)/B\bigr).}
+The constant mode contributes #{t_{n,0}=1/\mu}. For every
+other mode,
+##{t_{n,p}=\frac{B^2\sin^2(\pi p/B)}
+{n^2\sin^2(\pi p/n)\,
+\bigl(\mu+4n^2\sin^2(\pi p/n)\bigr)}.}}
+\p{Take the representative of #{p} in the symmetric range of
+length #{n}. For #{0<\theta\le \frac{\pi}{2}} the sine lies above
+its chord, because its second derivative is #{-\sin}, so
+#{\sin\theta\ge \frac{2\theta}{\pi}}. For #{1\le |p|\le n/2} this
+gives #{\sin(\pi |p|/n)\ge 2|p|/n}. The squared sine in the
+numerator is at most #{1}, and the mass term in the
+denominator is at least #{\mu}, so
+#{t_{n,p}\le B^2/(4\mu p^2)}. Extend #{t_{n,p}} by #{0} outside
+that range. For each fixed #{p\neq 0},
+#{n\sin(\pi p/n)\to\pi p}, and therefore #{t_{n,p}\to\alpha_p}.
+The comparison #{B^2/(4\mu p^2)} is summable over
+#{p\in\mathbb Z\setminus\{0\}} and does not depend on #{n}.
+Dominated convergence for series passes the limit inside the
+sum, which is the stated matrix #{C}.}
+}

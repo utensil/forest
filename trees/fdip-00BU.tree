@@ -1,0 +1,32 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{Checkerboard elimination creates two new couplings}
+\date{2026-11-06}
+
+\p{Let #{L\ge 6} be even, and let the vertices be the torus
+#{\mathbb Z/L\mathbb Z\times\mathbb Z/L\mathbb Z}. Let #{a\neq 0}
+and #{b\neq 0}, and let #{Q} have diagonal #{a} and
+nearest-neighbor entries #{-b}. Write the vertices as the
+even-parity class and the odd-parity class. The \vocabk{Schur complement}{fdip-000D} that eliminates the odd class has diagonal
+#{a-4b^2/a}, entry #{-b^2/a} at each offset #{(2,0)} and
+#{(0,2)}, and entry #{-2b^2/a} at each offset #{(1,1)} and
+#{(1,-1)}. When #{Q} is a \vocabk{positive precision parameter}{fdip-0004}, this
+complement is the precision of the retained Gaussian marginal.}
+
+\proof{
+\p{The square lattice is bipartite, so each class induces an
+empty graph. Both diagonal blocks of #{Q} equal #{a} times
+the identity. The Schur complement on the even class is
+therefore #{aI-(1/a)MM^{T}}, where #{M} records the entries
+#{-b} between even and odd vertices. The product
+#{(MM^{T})_{xy}} equals #{b^2} times the number of common
+odd neighbors. An even vertex has #{4} neighbors, so the
+diagonal is #{a-4b^2/a}. The vertices separated by
+#{(2,0)} share exactly one odd neighbor, and the vertices
+separated by #{(1,1)} share exactly two. For #{L\ge 6}
+these offsets are distinct on the torus. If #{Q} is a
+positive precision parameter, \ref{fdip-000D} identifies
+the complement with the precision of the marginal.}
+}
