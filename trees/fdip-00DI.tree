@@ -1,0 +1,32 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Lemma}
+\title{Kept forms compose}
+\date{2026-11-06}
+
+\p{Let the edge weights be strictly positive and the graph
+connected. Let #{K} and #{K'} be nonempty sets of vertices
+with #{K} contained in #{K'}. For every function #{u} on
+#{K}, the \vocabk{kept form}{fdip-00DF} of #{u} equals the
+minimum, over functions on #{K'} that extend #{u}, of the
+kept form on #{K'}.}
+
+\proof{
+\p{\ref{fdip-00DH} supplies a kept form on #{K'} and a unique
+energy-minimizing extension of any prescribed values there.
+Take a function #{u} on #{K}. Every extension of #{u} to the
+whole vertex set restricts to an extension of #{u} to #{K'},
+and the inner minimum depends only on that restriction.
+Minimizing over the restriction therefore equals minimizing
+over all extensions. The common value is the kept form of
+#{u}.}
+
+\p{The same completion as in \ref{fdip-00DH} applies to the
+quadratic form on #{K'}, once its block off #{K} is positive
+definite. If a function on #{K'} vanishes on #{K} and has
+kept energy #{0}, its minimizing extension has energy #{0},
+hence is constant, hence is #{0}. The block is therefore
+positive definite, and the minimum over extensions from
+#{K} to #{K'} is attained.}
+}

@@ -1,0 +1,39 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Lemma}
+\title{Cells of a gasket graph meet at vertices}
+\date{2026-11-06}
+
+\p{For every #{n\ge 0}, the \vocabk{gasket graph}{fdip-00DP}
+#{G_n} is connected, its #{n}-cells partition its edges, and
+any two distinct #{n}-cells share at most one vertex.
+Midpoints of edges from distinct #{n}-cells are distinct.}
+
+\proof{
+\p{The graph #{G_0} is one cell, and it is connected. That cell
+contains every edge. Only one cell is present. Suppose the
+claims hold for #{G_n}. Inside one parent cell the 9 edges run from #{A} to #{b},
+from #{A} to #{c}, from #{b} to #{c}, from #{B} to #{a}, from
+#{B} to #{c}, from #{a} to #{c}, from #{C} to #{a}, from
+#{C} to #{b}, and from #{a} to #{b}. Each of the three
+triangles uses three of these edges, and the 9 edges are
+pairwise distinct.
+Distinct parent cells use distinct midpoints, because the
+#{n}-cells partition the edges of #{G_n}. Edges coming from
+different parents are therefore distinct, and the
+#{(n+1)}-cells partition the edges of #{G_{n+1}}. Each edge
+of #{G_{n+1}} receives one midpoint, so midpoints of edges
+from distinct #{(n+1)}-cells are distinct.}
+
+\p{Two of the three triangles inside one parent have vertex
+sets #{\{A,b,c\}} and #{\{B,a,c\}}, or a pair of the same
+shape, so they share one midpoint. A triangle in another
+parent uses other midpoints. Its only vertex in #{V_n} is
+its corner. Distinct parents share at most one vertex, so
+triangles from different parents share at most that vertex.}
+
+\p{A path in #{G_n} becomes a path in #{G_{n+1}} when each
+edge is replaced by the two edges through its midpoint. Every
+midpoint lies on such a path. Thus #{G_{n+1}} is connected.}
+}

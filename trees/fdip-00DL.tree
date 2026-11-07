@@ -1,0 +1,27 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{A path has conductance one over its length}
+\date{2026-11-06}
+
+\p{Let #{q\ge 1} be an integer. On the path with vertices
+#{0,1,\ldots,q} and with unit weight on each of the #{q}
+edges, the \vocabk{effective conductance}{fdip-00DF} between
+the endpoints is #{\frac{1}{q}}.}
+
+\proof{
+\p{Define #{v(j)=\frac{q-j}{q}} for #{j} from #{0} through
+#{q}. Then #{v(0)=1} and #{v(q)=0}. Consecutive values differ
+by #{\frac{1}{q}}, so the energy is
+#{q\cdot\frac{1}{q^2}=\frac{1}{q}}.}
+
+\p{If #{q=1}, the two endpoints are the whole vertex set, and
+\ref{fdip-00DH} identifies this energy with the effective
+conductance. If #{q\ge 2}, consider a vertex strictly between
+the endpoints. Its two neighbor differences are
+#{- \frac{1}{q}} and #{\frac{1}{q}}, so they sum to #{0} and
+the Laplacian vanishes there. \ref{fdip-00DH} identifies this
+extension as the minimizer and identifies the energy with the
+effective conductance.}
+}

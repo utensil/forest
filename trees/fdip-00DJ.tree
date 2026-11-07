@@ -1,0 +1,34 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Lemma}
+\title{Separated edges add}
+\date{2026-11-06}
+
+\p{Let the edge weights be strictly positive and let #{K} be a
+nonempty set of vertices. Suppose the edges are partitioned
+into families #{E_i}. Let #{U_i} be the set of vertices
+outside #{K} that are incident to #{E_i}, and suppose the sets
+#{U_i} are pairwise disjoint. Suppose every edge of #{E_i}
+has both ends in #{K\cup U_i}, and every vertex of #{U_i} is
+joined to #{K} by a path in #{E_i}. Let #{L_i} be the
+Laplacian of the edges #{E_i}. Then #{L_w=\sum_i L_i}. For each family, the minimum of the
+#{L_i}-energy over extensions of a function on #{K} exists.
+The \vocabk{kept form}{fdip-00DF} of #{L_w} on #{K} is the
+sum of these minima.}
+
+\proof{
+\p{Each edge belongs to one family, so the energies add for
+every function. A function on #{U_i} does not appear in any
+other summand. For prescribed values on #{K}, the minimum of
+the sum is the sum of the minima.}
+
+\p{If #{U_i} is empty, the contribution of #{E_i} is already an
+energy on #{K}. If #{U_i} is nonempty and #{y} on #{U_i} has
+#{E_i}-energy #{0}, every difference along #{E_i} vanishes.
+Each vertex of #{U_i} is joined to a vertex of #{K} by such
+edges, and the extension vanishes on #{K}, so #{y=0}. The
+block of #{L_i} on #{U_i} is positive definite. The
+completion in \ref{fdip-00DH} then gives the minimum of the
+#{L_i}-energy.}
+}
