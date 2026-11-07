@@ -1,16 +1,71 @@
 \import{fdip-macros}
 \meta{agent-authored}{true}
 \tag{fdip}
-\taxon{Conjecture}
+\taxon{Theorem}
 \title{A plateau for the cycle}
-\date{2026-11-06}
+\date{2026-11-07}
 
 \p{Let #{Z_N} be the heat trace of the cycle in
-\ref{fdip-00CS}. The sequence #{C_N} has a
-[plateau](fdip-00CO) at #{1} along some windows
-#{0<a_N<b_N} for which #{a_N\to\infty},
-#{b_N/N^2\to 0} and #{b_N/a_N\to\infty}. The Cartesian
-product of #{d} copies of #{C_N}, for any positive integer
-#{d} and with the same windows, then has a
-[plateau](fdip-00CO) at #{d}. This follows from
-\ref{fdip-00CQ} applied one factor at a time.}
+\ref{fdip-00CS}, and let #{W_N} be the weighted sum in
+\ref{fdip-00G2}. For every sequence of windows
+#{0<a_N<b_N} with #{a_N\to\infty}, #{b_N/N^2\to 0} and
+#{b_N/a_N\to\infty}, the cycles #{C_N} have a
+\vocabk{plateau}{fdip-00CO} at #{1}. One such sequence is
+#{a_N=N^{1/4}} and #{b_N=N}. For every fixed positive
+integer #{d}, the Cartesian product of #{d} copies of
+#{C_N}, taken with the same windows, has a
+\vocabk{plateau}{fdip-00CO} at #{d}.}
+
+\proof{
+\p{Let #{N\ge 3} and #{t\ge 1}, and write
+#{G} for the Gaussian main term of \ref{fdip-00G3}. From
+\ref{fdip-00G2}, #{\lvert Z_N-NI\rvert\le 2} and
+#{\lvert W_N-NJ\rvert\le 4/e}. From #{e>27/10} and
+#{27/10>8/3}, the latter because #{81>80}, one has
+#{4/e<3/2}. \ref{fdip-00G3} and
+\ref{fdip-00G5} give #{\lvert I-G\rvert\le 5G/t} and
+#{\lvert J-G/2\rvert\le 19G/t}. Since #{\pi<22/7<4}, one
+has #{\sqrt{\pi}<2}. Therefore
+##{\Bigl\lvert\frac{\sqrt{4\pi t}}{N}Z_N-1\Bigr\rvert
+\le 19\Bigl(t^{-1}+\frac{\sqrt{t}}{N}\Bigr),}
+and the same bound holds with #{W_N} in place of #{Z_N}
+and with #{\frac{1}{2}} in place of #{1}. The trace
+comparison uses the smaller factor #{8} coming from
+#{2\sqrt{4\pi t}=4\sqrt{\pi t}}, and #{8\le 19}. The
+weighted comparison uses
+#{\frac{3}{2}\sqrt{4\pi t}=3\sqrt{\pi t}<6\sqrt{t}}.}
+
+\p{Write #{A} and #{B} for the normalized trace and the
+normalized weighted sum, and write
+#{\varepsilon=19(t^{-1}+\sqrt{t}/N)}. Whenever
+#{\varepsilon\le 1/4}, one has #{A\ge 3/4}, and
+##{\Bigl\lvert\frac{2B}{A}-1\Bigr\rvert
+\le\frac{3\varepsilon}{3/4}=4\varepsilon
+=76\Bigl(t^{-1}+\frac{\sqrt{t}}{N}\Bigr).}
+The quotient #{2B/A} is the
+[spectral dimension](fdip-00CO). On a window with
+#{a_N\to\infty} and #{b_N/N^2\to 0}, the left endpoint is
+eventually at least #{1} and #{\varepsilon\le 1/4}
+throughout the window, because
+#{t^{-1}\le 1/a_N} and #{\sqrt{t}/N\le\sqrt{b_N}/N}. The
+supremum of the absolute deviation from #{1} is then at
+most #{76(1/a_N+\sqrt{b_N}/N)}, which tends to #{0}. The
+condition #{b_N/a_N\to\infty} is the widening required by
+the plateau.}
+
+\p{For #{a_N=N^{1/4}} and #{b_N=N}, one has
+#{b_N/a_N=N^{3/4}}, #{b_N/N^2=1/N} and #{a_N\to\infty}.
+Also #{N^{-1/2}\le N^{-1/4}} when #{N\ge 1}, so
+#{19(N^{-1/4}+N^{-1/2})\le 38N^{-1/4}}. This quantity is
+at most #{1/4} once #{N^{1/4}\ge 152}. Since
+#{152^2=23104} and
+#{23104^2=533794816}, the bound holds for every
+#{N\ge 533794816}.}
+
+\p{\ref{fdip-00CQ} adds the logarithmic derivatives of two
+factors. Repeating the sum gives the value #{d} times the
+cycle value for the Cartesian product of #{d} copies. The
+absolute deviation from #{d} is #{d} times the absolute
+deviation from #{1}, so the same windows give a plateau
+at #{d}.}
+}
