@@ -1,0 +1,54 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Lemma}
+\title{Rectangle sums for the cycle trace}
+\date{2026-11-07}
+
+\p{Let #{N\ge 3} and #{t>0}. Write #{\ell(\theta)=2-2\cos\theta},
+#{f(\theta)=\exp(-t\ell(\theta))} and
+#{g(\theta)=t\ell(\theta)\exp(-t\ell(\theta))}. Let #{I(t)}
+and #{J(t)} be the integrals of #{f} and of #{g} over the
+interval from #{-\pi} to #{\pi}, each divided by #{2\pi}.
+Let #{Z_N(t)} be the heat trace in \ref{fdip-00CS}, and let
+##{W_N(t)=\sum_{k=0}^{N-1}t\lambda_{k,N}e^{-t\lambda_{k,N}},}
+with #{\lambda_{k,N}} the eigenvalue in that example. Then
+#{\lvert Z_N(t)-NI(t)\rvert\le 2} and
+#{\lvert W_N(t)-NJ(t)\rvert\le 4/e}.}
+
+\proof{
+\p{The identity #{\ell(\theta)=4\sin^2\frac{\theta}{2}} shows that
+#{f(2\pi k/N)} is the summand of #{Z_N} and that
+#{g(2\pi k/N)} is the summand of #{W_N}. Both functions are
+continuous and #{2\pi}-periodic, so their integrals over a
+period of length #{2\pi} agree with the integrals above.
+On each interval from #{2\pi k/N} to #{2\pi(k+1)/N}, the
+difference between #{f} and its value at the left endpoint
+is at most the variation of #{f} on that interval. The
+integral over the period therefore differs from
+#{(\frac{2\pi}{N})Z_N} by at most #{(\frac{2\pi}{N})} times the variation
+of #{f} on a period. Multiplying by #{N/(2\pi)} gives
+#{\lvert Z_N-NI\rvert} at most that variation. The same
+comparison gives #{\lvert W_N-NJ\rvert} at most the
+variation of #{g}.}
+
+\p{The derivative #{\ell'(\theta)=2\sin\theta} is nonnegative
+on the interval from #{0} to #{\pi} and nonpositive on the
+interval from #{\pi} to #{2\pi}. Thus #{f} falls from #{1}
+to #{e^{-4t}} and rises back to #{1}. Its variation is
+#{2(1-e^{-4t})}, which is at most #{2}.}
+
+\p{Let #{\varphi(y)=ye^{-y}}. Then
+#{\varphi'(y)=(1-y)e^{-y}}, so #{\varphi} increases on the
+interval from #{0} to #{1} and decreases after #{1}, and
+its maximum value is #{1/e}. As #{\theta} runs through a
+period, #{t\ell(\theta)} runs from #{0} up to #{4t} and
+back to #{0}. When #{4t\le 1}, the weight #{g} rises from
+#{0} to #{\varphi(4t)} and falls back to #{0}, so its
+variation is #{2\varphi(4t)}, at most #{2/e}. When
+#{4t>1}, there is a point #{\theta_\ast} between #{0} and
+#{\pi} with #{t\ell(\theta_\ast)=1}. On the interval from
+#{0} to #{\pi} the variation is #{2/e-\varphi(4t)}, and
+the return from #{\pi} to #{2\pi} repeats that variation.
+The total is #{4/e-2\varphi(4t)}, at most #{4/e}.}
+}
