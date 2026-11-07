@@ -1,0 +1,53 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{Unbounded cell variance}
+\date{2026-11-07}
+
+\p{Fix an integer #{p\ge 2} and real numbers #{\lambda>0} and
+#{m>0} with #{p\lambda\ge 1}. Let #{F_k} be the cell density
+of \ref{fdip-00FA} on the residue ring of depth #{k}, and let
+#{X} and #{\eta} be the inverse limit and cylinder
+probability of \ref{fdip-00FE}. There is no random element
+#{G} of #{L^2(X,\eta)}, defined on a probability space and
+satisfying #{\mathbb E\|G\|_{\eta}^2<\infty}, for which the
+integrals over depth-#{k} cylinders have the joint law of
+#{M_k}. There is likewise no pointwise random function, with
+second moments bounded by one finite constant at every point
+of #{X}, whose cylinder averages have the law of #{F_k}. The
+finitely additive ball
+assignment of \ref{fdip-00C3} remains defined for these
+parameters.}
+
+\proof{
+\p{\ref{fdip-00FD} shows that
+#{\mathbb E\lvert F_k(r)\rvert^2} tends to infinity with
+#{k}. The Haar square of the depth-#{k} step function equals
+this common point variance. Suppose #{G} satisfies
+#{\mathbb E\|G\|_{\eta}^2<\infty}, and write #{H_k} for the
+function constant on depth-#{k} cylinders whose value on
+#{C(r)} is #{p^k} times the integral of #{G}. This #{H_k} is
+the orthogonal projection of #{G} onto those step functions,
+so #{\mathbb E\|H_k\|_{\eta}^2\le\mathbb E\|G\|_{\eta}^2}.
+The right-hand side is finite and independent of #{k}. If the
+cylinder integrals of #{G} have the law of #{M_k}, then
+#{H_k} has the law of #{F_k} and
+##{\mathbb E\|H_k\|_{\eta}^2 =\mathbb E\lvert F_k(r)\rvert^2.}
+The right-hand side tends to infinity, a contradiction.}
+
+\p{Suppose instead that a random function satisfies
+#{\mathbb E\lvert G(x)\rvert^2\le V} at every #{x}, for one
+finite #{V}. The average of #{G} over a cylinder #{C} is the
+integral of #{G} against the probability
+#{\eta(C)^{-1}\eta}. Jensen's inequality for that probability
+gives
+##{\Bigl(p^k\int_C G\,d\eta\Bigr)^2 \le p^k\int_C G^2\,d\eta.}
+Taking expectations and using the uniform second-moment bound
+shows that the average has second moment at most #{V}. The
+cell density has second moment larger than #{V} for large
+#{k}, so these averages do not reproduce #{F_k}. The
+construction of the ball assignment in \ref{fdip-00C3} uses
+only the finite-dimensional laws and places no restriction on
+#{p\lambda}.}
+}

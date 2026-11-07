@@ -1,0 +1,73 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{Covering sums of the increment metric}
+\date{2026-11-07}
+
+\p{Let #{d} be the ultrametric of \ref{fdip-00FI}, and set
+##{\alpha=\frac{2\log p}{\log(1/(p\lambda))}.}
+For a countable cover of #{X} by nonempty sets, form the sum
+of the #{s}-powers of their #{d}-diameters. For #{s=0}, take
+each power to be #{1}. For every #{s>\alpha} the infimum of
+these sums is #{0}. For every #{0\le s\le\alpha} the infimum
+is positive. The infimum of the orders #{s} for which the
+covering infimum vanishes therefore equals #{\alpha}.}
+
+\proof{
+\p{Let #{C} be the positive prefactor in \ref{fdip-00FI}, and
+set #{r_*=p\lambda} and #{\delta_n=C^{1/2}r_*^{n/2}}. A
+depth-#{n} cylinder has diameter #{\delta_n}: any two of its
+points meet at depth at least #{n}, and it contains two
+points that meet at depth exactly #{n}. The space #{X} is the
+union of the #{p^n} cylinders of depth #{n}. Their
+#{s}-power sum equals
+##{p^n\delta_n^s=C^{s/2}\exp\bigl(n\log p+(ns/2)\log r_*\bigr).}
+The coefficient of #{n} is negative precisely when
+#{s>\alpha}, because
+#{\frac{\alpha}{2}=\log p/\log(1/r_*)}. The sums tend to #{0}, so the
+infimum vanishes for every #{s>\alpha}.}
+
+\p{The same computation with #{s=\alpha} uses
+#{r_*^{\frac{\alpha}{2}}=p^{-1}}, hence
+#{\delta_n^{\alpha}=C^{\frac{\alpha}{2}}p^{-n}}. Suppose
+#{0<\operatorname{diam}(U)<\delta_n}. Any two points of #{U}
+satisfy #{d<\delta_n}, so their meeting depth is at least
+#{n+1} and #{U} lies in one cylinder of depth #{n+1}. If
+#{\delta_{n+1}\le\operatorname{diam}(U)<\delta_n}, let #{B}
+be a depth-#{(n+1)} cylinder containing #{U}. Then
+#{\eta(B)=p^{-(n+1)}} and
+#{\delta_{n+1}^{\alpha}=C^{\frac{\alpha}{2}}p^{-(n+1)}}, so
+##{\eta(B)\le C^{-\frac{\alpha}{2}}\operatorname{diam}(U)^{\alpha}.}
+A set of diameter #{0} is a single point. The singleton is contained in a depth-#{k} cylinder of
+measure #{p^{-k}} for every #{k}, so its measure is #{0}.
+Countable additivity gives measure #{0} to every countable
+set of points.}
+
+\p{Take #{s=\alpha} and a countable cover. Sets of diameter
+#{0} contribute nothing. The remaining sets have positive
+diameter. Those of diameter at least #{\delta_0} contribute
+at least #{\delta_0^{\alpha}} if one of them is present. If
+every remaining diameter is strictly less than #{\delta_0},
+each such set sits in a cylinder to which the preceding bound
+applies, and those cylinders cover all but countably many
+points. A countable set of points has measure #{0}, so the
+sum of the cylinder measures is at least #{1}. Therefore the
+sum of the #{\alpha}-powers is at least #{C^{\frac{\alpha}{2}}}. In
+every case the covering sum is bounded below by a positive
+constant.}
+
+\p{Now take #{0<s<\alpha}. A set of diameter at least
+#{\delta_0} contributes at least #{\delta_0^s}. If every set
+has diameter strictly less than #{\delta_0}, then
+#{\operatorname{diam}(U)^{s-\alpha}\ge\delta_0^{s-\alpha}}
+because #{s-\alpha<0}. Let #{C_U} be a depth cylinder
+containing #{U} and satisfying
+#{\eta(C_U)\le C^{-\frac{\alpha}{2}}\operatorname{diam}(U)^{\alpha}},
+as above. Then
+##{\operatorname{diam}(U)^s \ge\delta_0^{s-\alpha}C^{\frac{\alpha}{2}}\eta(C_U).}
+Summing and discarding a null set of points again produces a
+positive lower bound. For #{s=0} the content is
+the infimum of the number of nonempty sets in a cover, hence
+equals #{1}.}
+}

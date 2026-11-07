@@ -1,0 +1,49 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{Point variance of the cell density}
+\date{2026-11-07}
+
+\p{Keep the notation of \ref{fdip-00FC}. At every residue
+#{r},
+##{\mathbb E\lvert F(r)\rvert^2 =\frac{p-1}{p}\sum_{s=1}^{k}(p\lambda)^s+\frac{1}{m},}
+where the sum is #{0} when #{k=0}. The expected Haar square
+equals the same quantity. For #{0\le\ell\le k-1}, the
+expected Haar square of the projection of #{F} onto the image
+of #{P_{k-1-\ell}} equals #{(p-1)\lambda(p\lambda)^{\ell}}.
+The sequence of point variances stays bounded as
+#{k\to\infty} if and only if #{0<p\lambda<1}. In that case
+the limit equals
+##{\frac{p-1}{p}\cdot\frac{p\lambda}{1-p\lambda}+\frac{1}{m}.}}
+
+\proof{
+\p{The diagonal entry of #{E_j} equals #{p^{-j}}, as recorded
+in the proof of \ref{fdip-00C5}. For #{j<k} the diagonal
+entry of #{P_j} is
+#{p^{-j}-p^{-(j+1)}=((p-1)/p)p^{-j}}. The diagonal entry of
+#{P_k} is #{p^{-k}}. \ref{fdip-000B} and the spectral form of
+#{Q^{-1}} give
+##{\mathbb E\lvert x(r)\rvert^2 =\sum_{j=0}^{k-1}\lambda^{-j}\frac{p-1}{p}p^{-j} +\frac{p^{-k}}{m\lambda^k}.}
+Multiplication by #{(p\lambda)^k} produces
+##{\mathbb E\lvert F(r)\rvert^2 =\frac{p-1}{p}\sum_{j=0}^{k-1}(p\lambda)^{k-j}+\frac{1}{m}.}
+The change of index #{s=k-j} is the displayed sum. Every
+residue has the same diagonal, so
+##{\mathbb E\langle F,F\rangle_{\eta} =p^{-k}\sum_r\mathbb E\lvert F(r)\rvert^2}
+equals that common value.}
+
+\p{A Haar-orthonormal basis of the image has
+#{(p-1)p^{\ell}} vectors, and \ref{fdip-00FC} assigns
+variance #{\lambda^{\ell+1}} to each coefficient. The
+expected square of the projection is
+##{(p-1)p^{\ell}\lambda^{\ell+1}=(p-1)\lambda(p\lambda)^{\ell}.}
+Summing these contributions from #{\ell=0} through
+#{\ell=k-1} recovers the sum in the point variance, and the
+constant mode contributes #{1/m}.}
+
+\p{Set #{r_*=p\lambda}. The partial sum
+#{\sum_{s=1}^{k}r_*^s} remains bounded in #{k} precisely when
+#{0<r_*<1}. Its limit is then #{r_*/(1-r_*)}. If #{r_*=1} the
+partial sum equals #{k}. If #{r_*>1} the partial sum grows
+like #{r_*^k}.}
+}

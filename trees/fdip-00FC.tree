@@ -1,0 +1,57 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{Haar coefficients of the cell density}
+\date{2026-11-07}
+
+\p{Fix an integer #{p\ge 2}, a depth #{k\ge 0}, and real
+numbers #{\lambda>0} and #{m>0}. Let #{x} have the centered
+Gaussian law of the
+\vocabk{fixed-ratio precision}{fdip-00BY} at depth #{k}, and
+set #{F=(p\lambda)^{k/2}x}. Write #{f\cdot g} for the
+\vocabk{counting inner product}{fdip-0002}, and write
+##{\langle f,g\rangle_{\eta}=p^{-k}f\cdot g}
+for the normalized Haar product on the residues modulo
+#{p^k}. Let #{P_j} be the orthogonal projectors of
+\ref{fdip-009A}, with coefficients #{c_j=\lambda^j} for
+#{j<k} and #{c_k=m\lambda^k}. If #{P_j\varphi=\varphi} and
+#{\langle\varphi,\varphi\rangle_{\eta}=1}, then
+#{\langle F,\varphi\rangle_{\eta}} is centered Gaussian of
+variance #{\lambda^k/c_j}.}
+
+\p{The constant mode #{j=k} has variance #{1/m}. For #{j<k},
+set #{\ell=k-1-j}. The variance equals #{\lambda^{\ell+1}},
+and the image of #{P_j} has dimension #{(p-1)p^{\ell}}.}
+
+\proof{
+\p{The normalization
+#{\langle\varphi,\varphi\rangle_{\eta}=1} means
+#{\varphi\cdot\varphi=p^k}. The coefficient is
+##{\langle F,\varphi\rangle_{\eta} =p^{-k}(p\lambda)^{k/2}(x\cdot\varphi).}
+\ref{fdip-000B} evaluates the counting covariance by the
+inverse precision. \ref{fdip-009A} shows that #{Q^{-1}}
+multiplies the image of #{P_j} by #{c_j^{-1}}, so
+#{\varphi\cdot Q^{-1}\varphi=c_j^{-1}p^k}. The variance of
+the coefficient is
+##{p^{-2k}(p\lambda)^k c_j^{-1}p^k=\lambda^k/c_j.}
+The scalar #{c_j^{-1}} depends on the image, so every
+Haar-unit vector in that image has the same coefficient
+variance.}
+
+\p{At #{j=k} one has #{c_k=m\lambda^k}, and the quotient is
+#{1/m}. For #{j<k} one has #{c_j=\lambda^j}, so the variance
+is #{\lambda^{k-j}}. The relation #{\ell=k-1-j} rewrites the
+exponent as #{\ell+1}.}
+
+\p{The image of #{E_j} consists of the functions constant on
+residue classes modulo #{p^{k-j}}. Each class has #{p^j}
+residues, so there are #{p^{k-j}} classes and the image has
+dimension #{p^{k-j}}. The image of #{E_{j+1}} has dimension
+#{p^{k-j-1}} and lies in the image of #{E_j}. \ref{fdip-009A}
+makes #{P_j=E_j-E_{j+1}} the orthogonal projector onto a
+complement of that subspace, of dimension
+##{p^{k-j}-p^{k-j-1}=(p-1)p^{k-j-1}.}
+The exponent #{k-j-1} equals #{\ell}. The constant projector
+#{P_k=E_k} has one-dimensional image.}
+}
