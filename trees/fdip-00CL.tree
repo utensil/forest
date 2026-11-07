@@ -1,0 +1,44 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{Directed-cycle vertices in the circle}
+\date{2026-11-06}
+
+\p{Let #{N\ge 3}. Orient a cycle on vertices
+#{0,1,\ldots,N-1} so that each vertex has one incoming edge.
+\ref{fdip-0096} makes the commutator distance equal to the
+least number of edges. Divide that distance by #{N}, and
+send vertex #{j} to the point #{j/N} on the circle of length
+#{1} with arc distance. This embedding is isometric, and its
+image is within #{1/(2N)} of every point of the circle. The
+\vocabk{Gromov–Hausdorff distance}{fdip-00CJ} between the
+vertex space and the circle is at most #{1/(2N)}.}
+
+\proof{
+\p{For #{0\le j,k\le N-1}, the least number of edges is
+#{\min(|j-k|,N-|j-k|)}. The arc length from #{j/N} to
+#{k/N} is the same integer divided by #{N}. The embedding
+preserves distances.}
+
+\p{Let #{x} be a point of the circle, represented in the
+half-open interval from #{0} to #{1}, and let #{j} be the
+integer part of #{Nx}, so #{0\le j\le N-1}. Then #{x} lies
+in the half-open spacing from #{j/N} to #{(j+1)/N}, where
+#{N/N} is read as the point #{0}. The distance from #{x} to
+the nearer endpoint of that spacing is at most half the
+spacing, hence at most #{1/(2N)}. Every point of the circle is therefore at most
+#{1/(2N)} from the image. The
+[Hausdorff distance](fdip-00CJ) between the image and the
+circle is at most #{1/(2N)}, and the definition of the
+[Gromov–Hausdorff distance](fdip-00CJ) supplies the same
+upper bound.}
+}
+
+\p{Mathlib revision \code{727d8bbe6044} defines
+\leanref{GromovHausdorff.ghDist} on nonempty compact metric
+spaces and proves
+\leanref{GromovHausdorff.ghDist_le_hausdorffDist}, the
+comparison with the Hausdorff distance of one pair of
+isometric embeddings. Those declarations do not identify
+the directed cycle or the embedding #{j\mapsto j/N}.}

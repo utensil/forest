@@ -1,0 +1,74 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{The mesh resolvent converges strongly}
+\date{2026-11-06}
+
+\p{Fix #{\mu>0}. Let #{Q_n} and the interpolation #{I_n} belong
+to a \vocabk{circle mesh}{fdip-004H}, and let #{e_k} and
+#{e_{n,k}} be the modes of \ref{fdip-004I}. On the
+square-integrable functions of the circle, the cell-average
+map #{P_n} is
+##{(P_nu)_j=n\int_{j/n}^{(j+1)/n}u(x)\,dx.}
+For #{k=0} set #{\sigma_{n,0}=1}. For #{k\ne 0} set
+##{\sigma_{n,k}=\frac{e^{2\pi ik/n}-1}{2\pi ik/n}.}
+Write #{A^{-1}u} for the square-integrable function whose
+coefficient of #{e_k} is the coefficient of #{u} divided by
+#{\mu+4\pi^2k^2}. Then, for every square-integrable #{u},
+##{\|I_nQ_n^{-1}P_nu-A^{-1}u\|_{L^2}\longrightarrow 0}
+as #{n\to\infty} through integers #{n\ge 3}.}
+
+\proof{
+\p{For #{k=0}, each cell average of the constant function
+#{1} equals #{1}. For #{k\ne 0}, the integral of #{e_k}
+over the half-open spacing from #{j/n} to #{(j+1)/n} is
+##{e^{2\pi ikj/n}\frac{e^{2\pi ik/n}-1}{2\pi ik}
+=\sigma_{n,k}e_{n,k}(j)\cdot\frac1n.}
+Multiplying by #{n} gives #{P_ne_k=\sigma_{n,k}e_{n,k}}.
+\ref{fdip-004I} gives
+#{Q_n^{-1}e_{n,k}=(\mu+\lambda_{n,k})^{-1}e_{n,k}}, so
+##{I_nQ_n^{-1}P_ne_k
+=\sigma_{n,k}\,I_nQ_n^{-1}e_{n,k}.}
+For #{k=0}, one has #{\sigma_{n,0}=1}. For fixed #{k\ne 0}
+and #{n>2|k|}, put #{\varphi=\pi k/n}. Then
+##{\sigma_{n,k}=e^{i\varphi}\frac{\sin\varphi}{\varphi}.}
+The sine quotient in the proof of \ref{fdip-004J} tends to
+one, and #{|e^{i\varphi}-1|\le|\varphi|}, so
+#{\sigma_{n,k}\to 1}. The same proposition gives
+#{I_nQ_n^{-1}e_{n,k}\to(\mu+4\pi^2k^2)^{-1}e_k}. The product
+has that limit.}
+
+\p{A finite sum is handled one frequency at a time.
+The [circle mesh](fdip-004H) gives #{Q_n\ge\mu I} and
+#{\|I_nf\|_{L^2}=\|f\|_n}. On one spacing of length #{1/n}, with both integrals
+over that spacing,
+##{\Bigl|n\int u\,dx\Bigr|^2
+\le n\int|u|^2\,dx.}
+Summing the spacings and dividing by #{n} gives
+#{\|P_nu\|_n\le\|u\|_{L^2}}, and
+#{\|I_nQ_n^{-1}P_n\|\le 1/\mu}. The integral of
+#{\overline{e_k}e_\ell} over the circle equals #{1} when
+#{k=\ell} and equals #{0} otherwise. For a finite sum
+#{p}, the multiplier definition therefore satisfies
+#{\|A^{-1}p\|_{L^2}\le\|p\|_{L^2}/\mu}.}
+
+\p{On the circle of length #{1},
+\leanref{AddCircle.volume_eq_smul_haarAddCircle} at Mathlib
+revision \code{727d8bbe6044} identifies length measure with
+probability Haar measure.
+\leanref{fourierBasis} is a Hilbert basis of that
+#{L^2} space with vectors #{e_k}, so finite sums of
+characters are dense. If two such sums differ by #{\eta}
+in #{L^2}, their images under #{A^{-1}} differ by at most
+#{\frac{\eta}{\mu}}, and #{A^{-1}} extends with norm at most
+#{1/\mu}. Given
+square-integrable #{u} and #{\varepsilon>0}, choose such a
+sum #{p} with #{\|u-p\|_{L^2}\le\varepsilon}. Then
+##{\|I_nQ_n^{-1}P_nu-A^{-1}u\|_{L^2}
+\le\frac{2\varepsilon}{\mu}
++\|I_nQ_n^{-1}P_np-A^{-1}p\|_{L^2}.}
+The second term tends to zero, so the limsup is at most
+#{\frac{2\varepsilon}{\mu}}. The declaration does not construct the
+cell averages or the mesh resolvent.}
+}
