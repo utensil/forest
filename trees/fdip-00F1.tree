@@ -1,0 +1,56 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{The measured energy is a closed local form}
+\date{2026-11-07}
+
+\p{Let #{(E,F)} be the resistance form on the compact space
+#{X} of \ref{fdip-00EI} and \ref{fdip-00EN}, and let #{\mu}
+be a measure from \ref{fdip-00EY}. For #{u,v\in F} set
+##{E_1(u,v)=E(u,v)+\int_X uv\,d\mu.}
+Then #{(F,E_1)} is a real Hilbert space. The truncation
+#{\bar u=\min(\max(u,0),1)} lies in #{F} and satisfies
+#{E(\bar u)\le E(u)}. If #{u} and #{v} have disjoint
+supports, then #{E(u,v)=0}.}
+
+\proof{
+\p{If #{E_1(u,u)=0}, then #{E(u)=0} and
+#{\int_X u^2\,d\mu=0}. By \ref{fdip-00EL}, energy zero on
+every finite level means that #{u} is constant on #{V_*},
+hence on #{X}. A probability gives integral zero only for
+the zero constant, so #{u=0}.}
+
+\p{Let #{D} be the resistance diameter of #{X}. By
+\ref{fdip-00EM} the level-zero cell has diameter at most
+#{4}, so #{D} is finite.
+\citet{Proposition 3.6}{kigami2010resistance} gives
+#{|u(a)-u(b)|^2\le R(a,b)\,E(u)}. Let #{(u_k)} be
+#{E_1}-Cauchy. It is Cauchy in #{L^2(X,\mu)}, and
+#{E(u_k-u_\ell)} tends to zero. Since #{\mu(X)=1}, the
+value #{\bigl|\int u\,d\mu\bigr|} is at most #{\|u\|_2}, and
+the cited resistance estimate bounds #{\bigl|u(x)-\int u\,d\mu\bigr|}
+by #{\sqrt{D\,E(u)}}. Hence
+##{\bigl|(u_k-u_\ell)(x)\bigr|\le\|u_k-u_\ell\|_2+\sqrt{D\,E(u_k-u_\ell)}.}
+Thus #{(u_k)} is uniformly Cauchy. The limit #{u} is
+continuous. The set #{V_n} is finite, so
+#{E_n(u|_{V_n})=\lim_k E_n(u_k|_{V_n})\le\liminf_k E(u_k)}.
+Hence #{u\in F}. The same bound, applied to
+#{u_k-u_\ell} as #{\ell} increases, gives
+#{E(u_k-u)\le\liminf_\ell E(u_k-u_\ell)}. Therefore
+#{E_1(u_k-u)} tends to zero.}
+
+\p{On each finite graph the truncation does not increase a
+squared edge difference, so
+#{E_n(\bar u|_{V_n})\le E_n(u|_{V_n})\le E(u)}. The
+supremum over #{n} is finite, and #{\bar u\in F} with
+#{E(\bar u)\le E(u)}.}
+
+\p{Disjoint supports of continuous functions on the compact
+space #{X} are at positive resistance distance. For large
+#{n} every cell has resistance diameter less than that
+distance, by \ref{fdip-00EM}, so no edge of #{G_n} meets
+both supports. The bilinear [edge sum](fdip-00EG)
+therefore vanishes at level #{n}, and the limit
+#{E(u,v)} vanishes.}
+}

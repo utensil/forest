@@ -1,0 +1,65 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{The form domain is dense for the measure}
+\date{2026-11-07}
+
+\p{With #{F} and #{\mu} as in \ref{fdip-00F1}, the domain
+#{F} is dense in #{L^2(X,\mu)}. The subspace
+#{F_0=\{u\in F:u=0\text{ on }V_0\}} is dense as well.}
+
+\proof{
+\p{Every open set in #{\Sigma} is a countable union of
+cylinders. Successive differences in the algebra of
+\ref{fdip-00EV} make the union disjoint. A finite partial
+union is a cylinder function and converges in #{L^2} to the
+open indicator. A nested difference of indicators is their
+difference in #{L^2}, and an increasing union is their
+#{L^2} limit, so the Borel sets whose indicators lie in
+that closure form a difference system in the sense of
+\ref{fdip-00F8}. They contain the open sets. That
+theorem identifies the smallest such system with the Borel
+#{\sigma}-algebra, so every Borel indicator lies in the
+closure. Cylinder functions are dense in #{L^2(\Sigma,\nu)}.}
+
+\p{A function on #{X} pulls back to a function constant on
+the fibers of #{\pi}. By \ref{fdip-00EY} a cylinder indicator
+agrees almost everywhere with the pullback of the
+corresponding cell indicator. Cell indicators are therefore
+dense in #{L^2(X,\mu)}.}
+
+\p{Let #{C} be the image of a cell and let #{J} be its finite
+intersection with the other cells of that length. Let #{U}
+be the union of the level-#{m} cells that meet #{J}, with
+#{m} larger than the length of #{C}. By \ref{fdip-00EY} the
+measure of #{U} tends to zero with #{m}. The cells of
+level #{m} that miss #{J} are compact and disjoint from
+#{J}, so the distance from #{J} to their union is positive
+and #{U} contains a neighborhood of #{J}. Cells of one
+length meet only inside #{J}. Every point of
+#{C\setminus U} therefore has a neighborhood that stays in
+#{C\setminus U}. The closure of #{C\setminus U} and the
+closure of #{X\setminus(C\cup U)} are disjoint and compact:
+a common point would lie in #{J}, which those sets avoid.
+Resistance distance to the two closures defines a continuous
+function equal to #{1} on the first and equal to #{0} on
+the second. The function and the indicator of #{C} differ
+only on #{U}, so their square distance in #{L^2} is at
+most #{\mu(U)}. \ref{fdip-00EP} supplies a function of #{F}
+uniformly close to that continuous function, hence close in
+#{L^2}.}
+
+\p{For the subspace vanishing on #{V_0}, fix #{u\in F} and
+#{n\ge 1}. Let #{\psi} be the energy-minimizing extension,
+given by the trace in \ref{fdip-00EI}, of the values #{u}
+on #{V_0} and #{0} on the rest of #{V_n}. At every later
+vertex the graph equation is a weighted average of the
+neighbors, so the maximum and the minimum lie on #{V_n}.
+Thus #{|\psi|} is at most the maximum of #{|u|} on #{V_0}.
+Only the three level-#{n} cells that contain the corners
+carry a nonzero value, and \ref{fdip-00EY} makes their
+measures tend to zero. Hence #{\psi} tends to zero in
+#{L^2}, while #{u-\psi} vanishes on #{V_0} and lies in
+#{F}.}
+}
