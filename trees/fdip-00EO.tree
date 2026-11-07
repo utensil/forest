@@ -1,0 +1,74 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{Planar codes agree on paired junctions}
+\date{2026-11-07}
+
+\p{Let #{p_1=(0,0)}, #{p_2=(1,0)}, and
+#{p_3=\bigl(\frac{1}{2},\frac{\sqrt{3}}{2}\bigr)}. Define
+##{F_1(x)=\frac{x}{2},\quad
+F_2(x)=\frac{x}{2}+\Bigl(\frac{1}{2},0\Bigr),\quad
+F_3(x)=\frac{x}{2}+\Bigl(\frac{1}{4},\frac{\sqrt{3}}{4}\Bigr).}
+Let #{\Sigma} be the set of infinite words on
+#{\{1,2,3\}}. For #{\omega\in\Sigma} set
+##{\pi(\omega)=\lim_{n}F_{\omega_1}\circ\cdots\circ F_{\omega_n}(p_1),}
+and let #{K} be the image of #{\pi}. Then #{\pi} is
+continuous, and the cell
+#{F_{w_1}\circ\cdots\circ F_{w_n}(K)} has Euclidean diameter
+#{2^{-n}}. Two words have the same image if and only if they
+are equal, or a finite word #{w} and distinct letters
+#{i,j} make one word #{w} followed by #{i} and then the
+constant letter #{j}, and the other #{w} followed by #{j}
+and then the constant letter #{i}.}
+
+\proof{
+\p{Each #{F_i} multiplies distances by #{\frac{1}{2}}. The
+images of #{p_1} are therefore Cauchy, and #{\pi(\omega)}
+exists. A composition of #{n} maps sends the triangle
+#{p_1p_2p_3}, of diameter #{1}, onto a triangle of diameter
+#{2^{-n}}. That triangle contains the cell, and the cell
+contains the three image corners, so the cell has diameter
+#{2^{-n}}. Words with the same prefix of length #{n} land in
+one such cell, and #{\pi} is continuous.}
+
+\p{Direct evaluation gives
+#{F_1(p_2)=F_2(p_1)=\bigl(\frac{1}{2},0\bigr)},
+#{F_1(p_3)=F_3(p_1)=\bigl(\frac{1}{4},\frac{\sqrt{3}}{4}\bigr)},
+and
+#{F_2(p_3)=F_3(p_2)=\bigl(\frac{3}{4},\frac{\sqrt{3}}{4}\bigr)}.
+Thus #{F_i(p_j)=F_j(p_i)} when #{i\ne j}. The constant word
+of letter #{j} is sent to #{p_j}. The two words in the
+statement are therefore sent to
+#{F_w\bigl(F_i(p_j)\bigr)}.}
+
+\p{A point of the triangle #{p_1p_2p_3} may be written
+#{\alpha p_1+\beta p_2+\gamma p_3} with
+#{\alpha+\beta+\gamma=1} and #{\alpha,\beta,\gamma\ge 0}.
+Since #{p_1} is the origin, #{p_2=(1,0)}, and the
+translation in #{F_3} is #{p_3/2},
+##{F_1=\frac{1+\alpha}{2}p_1+\frac{\beta}{2}p_2+\frac{\gamma}{2}p_3,\quad
+F_2=\frac{\alpha}{2}p_1+\frac{1+\beta}{2}p_2+\frac{\gamma}{2}p_3,\quad
+F_3=\frac{\alpha}{2}p_1+\frac{\beta}{2}p_2+\frac{1+\gamma}{2}p_3.}
+Each image therefore carries one coefficient at least
+#{\frac{1}{2}}. Two of these bounds force those two
+coefficients to equal #{\frac{1}{2}} and the third to
+vanish, so #{F_i(p_1p_2p_3)} and #{F_j(p_1p_2p_3)} meet only
+at #{F_i(p_j)}. The triangle #{F_k(p_1p_2p_3)} contains
+#{p_k} and excludes the other two corners, so a word sent
+to #{p_k} begins with #{k}. The map #{F_k} is injective,
+and #{F_k(x)=p_k} forces #{x=p_k}. The tail is sent to
+#{p_k} as well, so the word is the constant word of letter
+#{k}.}
+
+\p{Suppose #{\omega} and #{\tau} differ, and let #{w} be
+their longest common prefix, with next letters #{i\ne j}.
+Their images lie in #{F_w(F_i(K))} and #{F_w(F_j(K))}.
+Applying the injective map #{F_w} to the previous
+intersection shows that these cells meet only at
+#{F_w(F_i(p_j))}. Equal images must both equal that point.
+Inside the first cell the point is the corner
+#{F_i(p_j)}, whose only address is the constant letter
+#{j}. The words are the paired junction words of the
+statement.}
+}
