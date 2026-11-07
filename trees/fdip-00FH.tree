@@ -1,0 +1,47 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{Continuous version of the cell density}
+\date{2026-11-07}
+
+\p{Under the hypotheses of \ref{fdip-00FG}, there is a
+modification of #{F} whose sample functions are continuous on
+#{X}. The partial densities #{F_k} converge to that
+modification uniformly on #{X}, almost surely.}
+
+\proof{
+\p{Write #{G_k=F_{k+1}-F_k} for #{k\ge 0}, and write #{F_0} for
+the constant mode. Each #{G_k} is constant on the cylinders
+of depth #{k+1}. \ref{fdip-00FD} gives the pointwise variance
+##{\sigma_k^2=\frac{p-1}{p}(p\lambda)^{k+1}.}
+There are #{p^{k+1}} such cylinders. Let #{Z} be centered
+Gaussian of variance #{\sigma^2}. For #{u>0},
+##{\mathbb P(Z\ge t) \le e^{-ut}\mathbb E e^{uZ}.}
+Completing the square in the Gaussian integral gives
+#{\mathbb E e^{uZ}=\exp(u^2\sigma^2/2)}. The choice
+#{u=t/\sigma^2} produces
+#{\mathbb P(Z\ge t)\le\exp(-t^2/(2\sigma^2))}, and the same
+bound applies to #{-Z}.}
+
+\p{Set
+##{t_k^2=2\sigma_k^2\bigl((k+1)\log p+2\log(k+2)\bigr).}
+A union bound over the #{p^{k+1}} cylinder values gives
+##{\mathbb P(\sup\lvert G_k\rvert>t_k) \le\frac{2}{(k+2)^2}.}
+The sum over #{k\ge 0} is finite. Almost every outcome
+therefore satisfies #{\sup\lvert G_k\rvert\le t_k} for all
+sufficiently large #{k}.}
+
+\p{The ratio #{t_{k+1}/t_k} tends to #{\sqrt{p\lambda}}. Indeed
+#{\sigma_{k+1}/\sigma_k=\sqrt{p\lambda}}, while the ratio of
+the remaining square roots tends to #{1}. Since
+#{0<p\lambda<1}, the ratio is eventually bounded by a
+constant strictly smaller than #{1}. The tail of
+#{\sum_k t_k} is dominated by a convergent geometric series.
+Almost surely #{\sum_k\sup\lvert G_k\rvert<\infty}. The
+series #{\sum_k G_k} converges uniformly, and each #{G_k} is
+continuous, so the sum is continuous. The partial sums are
+the functions #{F_k}. Uniform convergence implies convergence
+in #{L^2(X,\eta)}, so the continuous sum represents the limit
+of \ref{fdip-00FG}.}
+}

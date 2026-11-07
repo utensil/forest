@@ -1,0 +1,70 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{Inverse limit of the residue rings}
+\date{2026-11-07}
+
+\p{Fix an integer #{p\ge 2}. Let #{X_k} be the ring of
+residues modulo #{p^k}, and let
+#{\pi_k:X_k\to X_{k-1}} be reduction modulo #{p^{k-1}}. The
+inverse limit #{X} is the set of coherent sequences
+#{(r_k)_{k\ge 0}} with #{\pi_k(r_k)=r_{k-1}}. Each #{X_k} is
+finite and discrete. The product of the #{X_k} is compact,
+and #{X} is closed in that product, hence compact. For
+#{a\neq b} in #{X}, let #{v(a,b)} be the largest integer such
+that #{a} and #{b} agree modulo #{p^{v(a,b)}}. Set
+#{\delta(a,a)=0} and #{\delta(a,b)=p^{-v(a,b)}}. Then
+#{\delta} is an ultrametric, it induces the inverse-limit
+topology, and #{(X,\delta)} is complete.}
+
+\p{Let #{\eta_k} be the uniform probability on #{X_k}. There
+is a unique probability measure #{\eta} on the Borel sets of
+#{X} whose image under the coordinate map #{X\to X_k} is
+#{\eta_k}. A cylinder of depth #{k} then has measure
+#{p^{-k}}. When #{p} is prime, #{X} is the ring of #{p}-adic
+integers named by the
+\vocabk{fixed-ratio precision}{fdip-00BY}.}
+
+\proof{
+\p{A sequence lies in #{X} when each consecutive pair satisfies
+the closed condition #{\pi_k(r_k)=r_{k-1}}. Thus #{X} is a
+closed subset of a compact product, so #{X} is compact. The
+basic open sets of the product specify finitely many
+coordinates. Agreement through the finest of those depths is
+a cylinder, and every cylinder arises in this way. The
+cylinder sets form a base for the subspace topology.}
+
+\p{If #{a}, #{b} and #{c} are points of #{X}, then
+#{v(a,c)\ge\min(v(a,b),v(b,c))}, because congruence modulo a
+fixed power of #{p} is an equivalence relation. The function
+#{p^{-v}} reverses this inequality, so
+#{\delta(a,c)\le\max(\delta(a,b),\delta(b,c))}. Since
+#{\delta(a,b)=p^{-v(a,b)}}, the inequality
+#{\delta(a,b)<p^{-n}} holds exactly when #{v(a,b)\ge n+1}.
+The open ball of radius #{p^{-n}} about #{a} is therefore
+the cylinder of depth #{n+1}. For #{n\ge 1} the cylinder of
+depth #{n} is the open ball of radius #{p^{-(n-1)}}. Those
+balls are a neighborhood base, so #{\delta} induces the
+inverse-limit topology. A compact metrizable space is complete: a Cauchy
+sequence has a convergent subsequence by compactness, and a
+Cauchy sequence with a convergent subsequence converges to
+the same point.}
+
+\p{Each #{X_k} is finite, hence second-countable and completely
+pseudo-metrizable. Every residue modulo #{p^{k-1}} has #{p}
+representatives modulo #{p^k}, so #{\pi_k} pushes #{\eta_k}
+forward to #{\eta_{k-1}}. Mathlib revision
+\code{727d8bbe6044} supplies the projective extension used in
+\ref{fdip-00C3}.
+\leanref{MeasureTheory.isProjectiveLimit_projectiveLimit}
+constructs a projective limit,
+\leanref{MeasureTheory.isProbabilityMeasure_projectiveLimit}
+makes it a probability measure, and
+\leanref{MeasureTheory.IsProjectiveLimit.unique} gives
+uniqueness among finite measures with those coordinate laws.
+A depth-#{k} cylinder is the preimage of one residue, so its
+measure equals #{p^{-k}}. The identification of the inverse
+limit with the #{p}-adic integers, for prime #{p}, is the
+sentence in the [fixed-ratio precision](fdip-00BY).}
+}
