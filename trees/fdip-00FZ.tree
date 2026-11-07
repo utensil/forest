@@ -1,0 +1,78 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{An equal-spacing representative}
+\date{2026-11-07}
+
+\p{Fix #{m>0} and #{\kappa>0}. For every integer #{N\ge 3}
+set
+##{c_{1,N}=c_{-1,N}=\kappa\frac{m}{N\sinh(m/N)},
+\qquad
+\mu_N=2\kappa Nm\tanh\frac{m}{2N}.}
+Let #{A_N} act on functions on the residues modulo #{N} by
+##{(A_Nx)(j)=c_{1,N}\bigl(x(j)-x(j+1)\bigr)
++c_{-1,N}\bigl(x(j)-x(j-1)\bigr),}
+and set #{Q_N=\mu_N I+N^2A_N}. Let #{P_N} be the
+\vocabk{cyclic arc precision}{fdip-00B6} on #{N} equal arcs
+of length #{1/N}. Then #{Q_N=\kappa NP_N}. In particular
+#{Q_N} is a \vocabk{positive precision parameter}{fdip-0004}.
+The coefficients converge, #{c_{1,N}\to\kappa} and
+#{\mu_N\to\kappa m^2}. Their limiting symbol is
+#{2\kappa\bigl(1-\cos\theta\bigr)}, which is positive off the
+integer multiples of #{2\pi}, and the limiting second-order
+coefficient is #{\kappa}.}
+
+\p{Let #{x} be a field with the centered
+\vocabk{Gaussian probability law}{fdip-0005} of precision
+#{Q_N}, and set #{\varphi=\sqrt{\kappa N}\,x}. The law of
+#{\varphi} is the centered Gaussian law of precision #{P_N}.}
+
+\proof{
+\p{\ref{fdip-00B7} gives the diagonal value
+#{2m\coth(m/N)} and the neighbor value
+#{\frac{m}{\sinh(m/N)}} of the
+[uniform cycle precision](fdip-00AW) equal to #{P_N}. The
+matrix entries of #{P_N} are therefore
+#{2m\coth(m/N)} on the diagonal and
+#{-\frac{m}{\sinh(m/N)}} on each neighboring pair. The half-angle
+identity in the proof of \ref{fdip-00BA} rearranges to
+##{\coth\psi=\tanh\frac{\psi}{2}+\frac{1}{\sinh\psi}.}
+With #{\psi=m/N} this gives
+##{2\kappa Nm\coth\frac{m}{N}
+=\mu_N+\frac{2\kappa Nm}{\sinh(m/N)}.}
+The diagonal entry of #{Q_N} is
+#{\mu_N+2N^2c_{1,N}}. Since
+#{2N^2c_{1,N}=\frac{2\kappa Nm}{\sinh(m/N)}}, the diagonal equals
+the diagonal of #{\kappa NP_N}. Each neighbor entry of
+#{Q_N} is #{-\,N^2c_{1,N}=-\frac{\kappa Nm}{\sinh(m/N)}}, which is
+the neighbor entry of #{\kappa NP_N}. Every other entry is
+#{0}. Thus #{Q_N=\kappa NP_N}. \ref{fdip-00B9} makes #{P_N}
+a positive precision parameter, and multiplication by
+#{\kappa N>0} preserves that property.}
+
+\p{Set #{u=m/N}. The Taylor expansion of #{\sinh} through
+degree #{2}, with Lagrange remainder, gives some #{\eta}
+between #{0} and #{u} such that
+#{\sinh u=u+\frac{u^3}{6}\cosh\eta}. Hence
+#{\frac{u}{\sinh u}} tends to #{1} as #{N\to\infty}, and
+#{c_{1,N}=\kappa\frac{u}{\sinh u}} tends to #{\kappa}. Set
+#{v=m/(2N)}. Then
+#{\mu_N=\kappa m^2\frac{\tanh v}{v}}. The same expansion
+gives #{\frac{\sinh v}{v}\to 1}, and #{\cosh v\to 1}, so
+#{\frac{\tanh v}{v}\to 1} and #{\mu_N\to\kappa m^2}. The limiting symbol is
+#{2\kappa(1-\cos\theta)}. It vanishes only at integer
+multiples of #{2\pi}, and
+#{\sum_{r=1}^{1}\kappa r^2=\kappa}.}
+
+\p{Let #{\sigma=\sqrt{\kappa N}}, so #{x=\frac{\varphi}{\sigma}} and
+#{Q_N=\sigma^2P_N}. For the counting inner product,
+#{h(x,Q_Nx)=h(\varphi,P_N\varphi)}. The change of variables
+multiplies Lebesgue measure by #{\sigma^{-N}}. The
+[Gaussian partition function](fdip-0005) therefore satisfies
+#{Z_{Q_N}=\sigma^{-N}Z_{P_N}}, and the normalized weight of
+#{x} pushes forward to the normalized weight of precision
+#{P_N}. By \ref{fdip-000B}, the counting covariance of
+#{x} is #{Q_N^{-1}}, so the counting covariance of
+#{\varphi} is #{\sigma^2Q_N^{-1}=P_N^{-1}}.}
+}

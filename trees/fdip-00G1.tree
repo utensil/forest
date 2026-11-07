@@ -1,0 +1,83 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{Converging coefficients share the block field}
+\date{2026-11-07}
+
+\p{Keep the coefficients, the mass, and the limiting
+second-order coefficient #{\kappa} of \ref{fdip-00G0}, and
+set #{m^2=\frac{\mu}{\kappa}}. Let #{\varphi} be the rescaled field
+of that statement, for #{N=BM} with integers #{B\ge 1} and
+#{M\ge 1}, and with #{N} large enough that #{Q_N} is a
+positive precision parameter. Write #{A_b} for the mean of
+the #{M} consecutive coordinates of #{\varphi} on the
+half-open interval from #{b/B} to #{(b+1)/B}. As
+#{M\to\infty}, the covariance of
+#{(A_0,\ldots,A_{B-1})} converges to the circulant matrix of
+\ref{fdip-00BO} computed at mass squared #{m^2}. Let #{F}
+be a Hölder version, of this mass #{m}, from
+\ref{fdip-00BE}. The joint law of the block means converges
+to the joint law of the integral means of #{F} over the
+#{B} equal arcs. Those integral means determine the
+\vocabk{dyadic increment}{fdip-00E5} of #{F}.}
+
+\proof{
+\p{The spectral expansion in the proof of \ref{fdip-00G0}
+gives
+##{\mathbb E\bigl(\varphi(u)\varphi(v)\bigr)
+=\kappa\sum_{p=0}^{N-1}\lambda_p^{-1}
+\exp\bigl(2\pi i p(u-v)/N\bigr),}
+with #{\lambda_p=\mu_N+N^2\alpha_N(2\pi p/N)}. The block
+mean #{A_b} averages #{M} consecutive sites. The sum over
+one block is geometric. For the zero mode it contributes
+#{M}, and for every other mode its squared modulus, divided
+by #{M^2}, equals
+##{\frac{B^2\sin^2(\pi p/B)}{N^2\sin^2(\pi p/N)},}
+because #{|1-e^{i\phi}|^2=4\sin^2\frac{\phi}{2}} and #{M=N/B}.
+Hence
+##{\mathbb E(A_bA_c)
+=\sum_{p=0}^{N-1}t_{N,p}
+\exp\bigl(2\pi i p(b-c)/B\bigr),}
+where #{t_{N,0}=\frac{\kappa}{\mu_N}} and, for the other modes,
+##{t_{N,p}
+=\frac{\kappa B^2\sin^2(\pi p/B)}
+{N^2\sin^2(\pi p/N)\,\lambda_p}.}}
+
+\p{Take the representative of #{p} in a symmetric range of
+length #{N}. The chord bound in the proof of
+\ref{fdip-00BO} gives #{\sin(\pi |p|/N)\ge 2|p|/N} for
+#{1\le |p|\le N/2}, so #{N^2\sin^2(\pi p/N)\ge 4p^2}. For
+every sufficiently large #{N} one has #{\mu_N\ge\frac{\mu}{2}}, and
+#{\lambda_p\ge\mu_N}, while the squared sine in the
+numerator is at most #{1}. Thus
+#{t_{N,p}\le\kappa B^2/(2\mu p^2)}. Extend #{t_{N,p}} by
+#{0} outside that range. The comparison is summable over
+the nonzero integers. For each fixed #{p\ne 0}, the symbol
+limit in \ref{fdip-00G0} and
+#{N\sin(\pi p/N)\to\pi p} give
+numerator #{\kappa B^2\sin^2(\pi p/B)} and denominator
+#{(\pi p)^2(\mu+4\pi^2\kappa p^2)}. Dividing both by
+#{\kappa} cancels the leading factor and replaces
+#{\mu+4\pi^2\kappa p^2} by #{m^2+(2\pi p)^2}, so
+##{t_{N,p}\to
+\frac{B^2\sin^2(\pi p/B)}
+{(\pi p)^2\bigl(m^2+(2\pi p)^2\bigr)}.}
+The constant mode tends to #{1/m^2}. Split the series into
+#{|p|\le P} and the tail. The tail is smaller than any
+prescribed positive tolerance, uniformly in all sufficiently
+large #{N}, once #{P} is large. Each of the finitely many
+remaining terms converges. The resulting matrix is the
+matrix of \ref{fdip-00BO} at mass squared #{m^2}.}
+
+\p{\ref{fdip-00BP} identifies that matrix with the
+covariance of the means #{B\int_I F} for a field with the
+covariance #{G} of \ref{fdip-00BG}. From that
+identification, the argument of \ref{fdip-00ED} shows that
+these integral means determine the dyadic increment of
+#{F}. The block means are centered Gaussian, as linear
+images of #{x}. The integral means are centered Gaussian,
+singular covariance included, by the same argument. Both
+laws are fixed by their covariances, so the block-mean laws
+converge to the laws of the integral means.}
+}
