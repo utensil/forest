@@ -1,0 +1,43 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{Real algebraic numbers are real-closed and metrically incomplete}
+\date{2026-11-07}
+
+\p{Let #{A} be the set of real algebraic numbers, with the
+metric inherited from the line. Every positive element of
+#{A} has its positive square root in #{A}. Every polynomial
+of odd degree with coefficients in #{A} has a root in #{A}.
+There is a Cauchy sequence in #{A} with no limit in #{A}.}
+
+\proof{
+\p{Suppose #{\alpha>0} lies in #{A}, and let #{p} be a nonzero
+polynomial with rational coefficients and #{p(\alpha)=0}. The
+polynomial #{p(x^2)} has rational coefficients and vanishes at
+the positive square root of #{\alpha}. That square root is
+therefore real algebraic.}
+
+\p{Let #{f} be a polynomial of odd degree with coefficients in
+#{A}. For every sufficiently large positive #{T}, the values
+#{f(T)} and #{f(-T)} have opposite signs. The intermediate
+value theorem supplies a real root #{\rho}. Adjoin the
+coefficients to #{\mathbb Q} one at a time. Each adjunction
+is a finite extension, so the field #{K} they generate is
+finite over #{\mathbb Q}. The coefficients of #{f} lie in
+#{K} and #{f(\rho)=0}, so #{K(\rho)} is finite over #{K},
+hence finite over #{\mathbb Q}, and #{\rho} lies in #{A}.}
+
+\p{The nonzero polynomials with rational coefficients are
+countable: each degree contributes countably many coefficient
+tuples, and there are countably many degrees. Each has
+finitely many roots. Every element of #{A} is such a root, so
+#{A} is countable. Every rational is a root of a linear
+polynomial, hence lies in #{A}. Enumerate #{A} as #{a_k}.
+Begin with the open interval from #{0} to #{1}. At step #{k},
+choose a nonempty open subinterval of length less than #{1/k}
+whose closure lies in the previous interval and excludes
+#{a_k}, and choose its center to be a rational number. The
+centers form a Cauchy sequence in #{A}. A limit in #{A} would
+equal some #{a_k}, which was excluded at step #{k}.}
+}
