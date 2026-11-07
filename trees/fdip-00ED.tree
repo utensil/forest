@@ -1,0 +1,72 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{Finite-range block means share the dyadic field}
+\date{2026-11-07}
+
+\p{Let #{Q_N} be any
+\vocabk{finite-range circle precision}{fdip-00C8}, with
+second-order coefficient #{\kappa} and mass #{\mu},
+including every coefficient sequence admitted by that
+definition. Set #{m^2=\frac{\mu}{\kappa}}, and let #{\varphi} be
+the rescaled field of \ref{fdip-00CB}. Let #{F} be a Hölder
+version, of this mass #{m}, from \ref{fdip-00BE}. For every
+integer #{B\ge 1}, as #{N=BM\to\infty} through integers
+#{N>2R}, the covariance of the #{B} block means of
+#{\varphi} converges to the covariance of the integral means
+of #{F} over the #{B} equal arcs of the circle. Those
+integral means determine the
+\vocabk{dyadic increment}{fdip-00E5} of #{F}. The fixed
+Fourier moments remain the convergence of \ref{fdip-00CC},
+at the same mass squared.}
+
+\proof{
+\p{\ref{fdip-00CD} identifies the limiting covariance with
+the circulant matrix of \ref{fdip-00BO} computed at mass
+squared #{m^2}. In \ref{fdip-00BP} the mass parameter of
+that matrix has square root #{m}, and the matrix equals the
+covariance of the means #{B\int_I F} for a field with the
+covariance #{G} of \ref{fdip-00BG}. On the dyadic index,
+\ref{fdip-00BG} gives
+#{\mathbb E(F(a)F(b))=G(\delta(a,b))}. Both sides extend
+continuously to the circle: the left side by the #{L^2}
+map of \ref{fdip-00E8}, and the right side because #{G} is
+continuous, so the identity holds for every pair.}
+
+\p{Let #{I} be a closed dyadic arc of length #{L=2^{-k}}
+with #{k\ge 1}, and let #{x\in I}. For #{n\ge 1} let
+#{Z_n} be the mean of #{F} at the left endpoint of each of
+the #{2^n} equal subarcs of #{I}. Those endpoints lie in
+the dyadic index. \ref{fdip-00EC}
+gives #{\mathbb E\lvert Z_n-F(x)\rvert^2\le L}. On dyadic sample points,
+#{\mathbb E(F(y)F(z))=G(\delta(y,z))}. The function #{G} is
+uniformly continuous. Hence
+#{\mathbb E Z_n^2}, #{\mathbb E Z_p^2} and
+#{\mathbb E(Z_n Z_p)} all tend, as the mesh tends to #{0},
+to the same double integral of #{G} over #{I\times I},
+divided by #{L^2}. Therefore
+##{\mathbb E\lvert Z_n-Z_p\rvert^2
+=\mathbb E Z_n^2+\mathbb E Z_p^2-2\mathbb E(Z_n Z_p)}
+tends to #{0}. The sequence is Cauchy in #{L^2}. Its limit
+#{A} satisfies #{\mathbb E\lvert A-F(x)\rvert^2\le L}.}
+
+\p{Sample paths of #{F} are almost surely uniformly
+continuous, by \ref{fdip-00BE}, so these Riemann sums
+converge almost surely to #{L^{-1}\int_I F}. A subsequence
+with
+#{\mathbb E\lvert Z_{n_{j+1}}-Z_{n_j}\rvert^2\le 2^{-2j}}
+has absolute increments of expectation at most #{2^{-j}}.
+Their sum is finite almost surely, so the subsequence
+converges almost surely. Convergence to #{A} in #{L^2}
+yields convergence in probability, and the two limits
+agree, so #{A} is the integral mean. Nested integral means
+on dyadic arcs shrinking to #{x} converge to #{F(x)} in
+mean square, and \ref{fdip-00EC} recovers the two-point
+moments and the dyadic increment. The Riemann sums are
+centered Gaussian, so their #{L^2} limit, the integral
+mean, is centered Gaussian, singular covariance included.
+\ref{fdip-00CB} makes the block means centered Gaussian as
+well. Both laws are fixed by covariance, so the block-mean
+laws converge to the laws of the integral means.}
+}

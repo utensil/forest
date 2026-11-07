@@ -1,0 +1,47 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{Dyadic means recover the field}
+\date{2026-11-07}
+
+\p{Fix #{m>0}, and let #{F} be a Hölder version from
+\ref{fdip-00BE}. Let #{I} be a closed arc of length
+#{L\le 1/2} on the circle, and let #{x} be a point of
+#{I}. If #{Z} is the mean of #{F} on a nonempty finite
+subset of the \vocabk{dyadic index}{fdip-00B6} inside
+#{I}, then
+##{\mathbb E\lvert Z-F(x)\rvert^2\le L.}
+Along nested closed dyadic arcs of length #{2^{-k}}
+containing a point #{x}, the means of the level-#{2k}
+dyadic points in those arcs converge to #{F(x)} in mean
+square. The joint laws of all such means determine the
+\vocabk{dyadic increment}{fdip-00E5} and the dimension in
+\ref{fdip-00E9}.}
+
+\proof{
+\p{Every sample point #{y} lies with #{x} in an arc of
+length #{L\le 1/2}, so the shorter arc between them is at
+most #{L}. \ref{fdip-00E8} gives
+#{\mathbb E\lvert F(y)-F(x)\rvert^2\le L}. If #{Z} is the
+mean of #{N\ge 1} such values, then
+##{\lvert Z-F(x)\rvert^2
+\le N^{-1}\sum_{s=1}^{N}\lvert F(y_s)-F(x)\rvert^2,}
+because the square of an average is at most the average of
+the squares. Taking expectations yields the bound #{L}.}
+
+\p{For #{k\ge 1} the closed dyadic arc of length #{2^{-k}}
+contains #{2^k+1} points of level #{2k}. Their mean #{Z_k}
+satisfies
+#{\mathbb E\lvert Z_k-F(x)\rvert^2\le 2^{-k}}. The right-hand
+side tends to #{0}, so #{Z_k} converges to #{F(x)} in mean
+square. A finite collection of point values is the mean-square
+limit of the corresponding collection of these means, once
+the arcs are smaller than the separation of the points and
+each point lies in its own arc. The joint Gaussian law of the
+limits is determined by the joint law of the means. The
+two-point moment
+#{\mathbb E\lvert F(a)-F(b)\rvert^2} is
+#{d_m(a,b)^2}, and \ref{fdip-00E9} reads the dimension from
+that metric.}
+}
