@@ -1,0 +1,77 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{Resistance between two vertices of a cycle}
+\date{2026-11-06}
+
+\p{Let #{N\ge 3}, and let the cycle be the graph of
+\ref{fdip-00CS} with every edge weight equal to #{1}. For an
+integer #{\ell} from #{1} through #{N-1}, the effective
+resistance between vertices #{0} and #{\ell} is
+##{(\delta_0-\delta_\ell)^T L_w^+(\delta_0-\delta_\ell)
+=\frac{\ell(N-\ell)}{N}.}
+For the \vocabk{Gaussian induced action}{fdip-005R}, the increment
+#{\mathbb E(\phi_0-\phi_\ell)^2} tends to the same value as
+#{m\downarrow 0}. The law of all vertex values has no
+probability limit, by \ref{fdip-005U}. The #{N} edges each
+contribute #{\frac{N-1}{N}}, and those contributions sum to
+#{N-1}.}
+
+\proof{
+\p{Orientations in the [Gaussian induced action](fdip-005R) are auxiliary.
+The value of #{L_w v} at a vertex is the sum, over
+neighboring vertices, of the differences of #{v}. Label the vertices
+#{0,1,\ldots,N-1} in cycle order. The path
+#{0,1,\ldots,\ell} and the path
+#{0,N-1,\ldots,\ell} meet only at the endpoints. Set
+##{I_1=\frac{N-\ell}{N},\qquad I_2=\frac{\ell}{N}.}
+Define a voltage by
+##{v(j)=\frac{(\ell-j)(N-\ell)}{N}}
+for #{j} from #{0} through #{\ell}, and by
+##{v(j)=\frac{\ell(j-\ell)}{N}}
+for #{j} from #{\ell} through #{N-1}. Both formulas give
+#{v(\ell)=0}, and the first gives
+#{v(0)=\frac{\ell(N-\ell)}{N}}.}
+
+\p{For #{0\le j<\ell},
+#{v(j)-v(j+1)=\frac{N-\ell}{N}=I_1}. For #{\ell\le j\le N-2},
+#{v(j+1)-v(j)=\frac{\ell}{N}=I_2}. The remaining neighbor of #{0} is
+#{N-1}, where
+#{v(N-1)=\frac{\ell(N-1-\ell)}{N}}, so
+#{v(0)-v(N-1)=\frac{\ell}{N}=I_2}. Thus, at a vertex strictly between
+the endpoints, the two neighbor differences cancel. At #{0}
+they are #{I_1} and #{I_2}, and
+#{(L_w v)(0)=1}. At #{\ell} the neighbor differences are
+#{-I_1} and #{-I_2}: the neighbor along the first path
+differs by #{I_1}, and the neighbor along the second path
+differs by #{I_2}. Hence #{(L_w v)(\ell)=-1} and
+#{L_w v=\delta_0-\delta_\ell}.}
+
+\p{The vector #{\delta_0-\delta_\ell} is orthogonal to constant
+fields. \ref{fdip-005U} inverts #{L_w} on that complement and
+sets #{L_w^+} to zero on constants, so
+##{(\delta_0-\delta_\ell)^T L_w^+(\delta_0-\delta_\ell)
+=(\delta_0-\delta_\ell)^T v
+=v(0)
+=\frac{\ell(N-\ell)}{N}.}
+Adding a constant to #{v} leaves the middle expression
+unchanged. The case #{\ell=1} is one edge. Summing the #{N}
+edge resistances produces #{N-1}, in agreement with the sum in
+\ref{fdip-005U}.}
+
+\p{For #{m>0}, set #{G=(L_w+m^2I)^{-1}}. The coordinate
+functionals in \ref{fdip-000B}, on the counting vertex space,
+give
+#{\mathbb E(\phi_0-\phi_\ell)^2
+=(\delta_0-\delta_\ell)^T G(\delta_0-\delta_\ell)}.
+When the two vertices are adjacent, this is the edge identity
+in \ref{fdip-005S}. The expansion in the proof of
+\ref{fdip-005U} is a constant-mode term #{m^{-2}} plus terms
+#{(\lambda_j+m^2)^{-1}} for the positive eigenvalues. The
+constant mode is absent from the quadratic form. Each
+remaining coefficient tends to #{\lambda_j^{-1}} as
+#{m\downarrow 0}, so the quadratic form tends to the
+resistance above. \ref{fdip-005U} states that the law on all
+vertex values has no probability limit.}
+}

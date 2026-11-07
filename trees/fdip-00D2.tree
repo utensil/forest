@@ -1,0 +1,42 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Lemma}
+\title{The increment is comparable to a square root}
+\date{2026-11-06}
+
+\p{Keep the notation of \ref{fdip-00D1}, and set
+##{\alpha
+=\frac{\cosh(m/2)-1}{(m/2)\sinh(m/2)}.}
+For every shorter arc #{\delta},
+##{\sqrt{\alpha}\,\sqrt{\delta}\le d\le\sqrt{\delta}.}
+The constant satisfies #{0<\alpha<1}. As #{\delta} runs from
+#{0} to #{1/2}, the quotient #{d^2/\delta} decreases from
+#{1} to #{\alpha}. The distance #{d} and arc length determine
+the same open sets.}
+
+\proof{
+\p{Let #{\psi(\delta)} be the numerator in \ref{fdip-00D1}. Then
+#{\psi(0)=0} and
+#{\psi''(\delta)=-m^2\cosh(m(1/2-\delta))<0}, so #{\psi} is
+strictly concave. The difference quotients
+#{\psi(\delta)/\delta} therefore decrease as #{\delta} increases.
+At the right endpoint,
+#{\psi(1/2)/(1/2)=2(\cosh(m/2)-1)}, and at the left the
+derivative is #{\psi'(0)=m\sinh(m/2)}. Hence
+##{2\bigl(\cosh(m/2)-1\bigr)
+\le\frac{\psi(\delta)}{\delta}
+\le m\sinh(m/2).}
+Dividing by the positive number #{m\sinh(m/2)} gives
+#{\alpha\delta\le d^2\le\delta}. The numerator
+#{\cosh(m/2)-1} is positive. The function
+#{u\sinh u-\cosh u+1} vanishes at #{0} and has derivative
+#{u\cosh u}, which is positive for #{u=m/2>0}, so
+#{0<\alpha<1}. Taking square roots yields the comparison of
+distances. Since #{\psi(\delta)/\delta} tends to #{\psi'(0)} as
+#{\delta} tends to #{0}, the quotient #{d^2/\delta} decreases
+from #{1} to #{\alpha}. If #{d(x,y)<r}, then
+#{\delta<r^{2}/\alpha}. If #{\delta<r^{2}}, then
+#{d(x,y)<r}. Balls of either distance contain balls of the
+other.}
+}
