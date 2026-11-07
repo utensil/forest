@@ -1,0 +1,53 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{The dyadic increment has dimension two}
+\date{2026-11-07}
+
+\p{Equip the circle of length #{1} with the completion metric
+of the \vocabk{dyadic increment}{fdip-00E5}, as in
+\ref{fdip-00E8}. For every #{s>2} the
+\vocabk{Hausdorff content}{fdip-00D5} of order #{s} equals
+#{0}. For every #{0\le s\le 2} that content is positive. The
+\vocabk{Hausdorff dimension}{fdip-00D5} is #{2}. The
+shorter-arc metric on the same circle has Hausdorff
+dimension #{1}, by \ref{fdip-00D8}.}
+
+\proof{
+\p{Let #{\alpha} be the constant of \ref{fdip-00E7}, and set
+#{c=\sqrt{\alpha}}, so #{c>0}. \ref{fdip-00E8} gives
+#{c\sqrt{\delta}\le d\le\sqrt{\delta}} for the shorter arc
+#{\delta} between any two points of the circle. For
+#{N\ge 2}, partition the circle into #{N} arcs of length
+#{1/N}. The completed distance between two points of one arc
+is at most #{N^{-1/2}}. The sum of the #{s}-powers of these
+diameters is at most #{N^{1-s/2}}. For #{s>2} the exponent
+is negative, and the sum tends to #{0} as #{N} grows. The
+content of order #{s} is #{0}.}
+
+\p{For #{s=0} the content is the infimum of the number of
+nonempty sets in a cover, hence equals #{1}. Now take
+#{0<s\le 2}, and let #{U_i} be a countable cover by nonempty
+sets. Write #{\rho_i} for the diameter in the completed
+dyadic increment and #{\delta_i} for the supremum of
+shorter-arc lengths inside #{U_i}. Then
+#{0\le\delta_i\le 1/2} and #{c\sqrt{\delta_i}\le\rho_i}. If
+some #{\delta_j} equals #{1/2}, then
+#{\rho_j^s\ge(c/\sqrt{2})^s}, which is positive.}
+
+\p{Otherwise every #{\delta_i} is strictly less than #{1/2}.
+Any point of #{U_i} is the center of a closed arc of length
+#{2\delta_i} that contains #{U_i}. These arcs cover the
+circle, so \ref{fdip-00DD} gives
+#{\sum_i 2\delta_i\ge 1}, hence
+#{\sum_i\delta_i\ge 1/2}. If #{0<\delta_i\le 1}, then
+#{\delta_i^{s/2-1}\ge 1} because #{s/2\le 1}, and therefore
+#{\delta_i^{s/2}\ge\delta_i}. A vanishing diameter
+contributes nothing. Combined with
+#{\rho_i\ge c\sqrt{\delta_i}},
+##{\rho_i^s\ge c^s\delta_i^{s/2}\ge c^s\delta_i.}
+The sum of the #{s}-powers is at least #{c^s/2}. Every cover
+is bounded below by a positive number. The content of order
+#{s} is positive, and the dimension equals #{2}.}
+}

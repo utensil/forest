@@ -1,0 +1,41 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{The selected shape differs from the symbol matrix}
+\date{2026-11-07}
+
+\p{Fix #{m>0} and #{\kappa>0}, and set #{\mu=\kappa m^2}. For
+the nearest-neighbor coefficients #{c_1=c_{-1}=\kappa} and
+an integer #{N>2}, let #{Q_N} be the corresponding
+\vocabk{finite-range circle precision}{fdip-00C8}. Its shape,
+in the sense of the ratio of the diagonal entry to twice the
+neighbor coefficient, equals #{1+m^2/(2N^2)}. The shape
+selected by \ref{fdip-00AY} equals #{\cosh(m/N)}. The
+difference is at least #{(m/N)^4/24}.}
+
+\proof{
+\p{On the residues modulo #{N}, the two offsets #{\pm 1} are
+distinct because #{N>2}. In the definition of a
+[finite-range circle precision](fdip-00C8), the matrix
+#{A_N} therefore has diagonal #{2\kappa} and neighbor
+entries #{-\kappa}. Multiplying by #{N^2} and
+adding #{\mu} on the diagonal produces the diagonal entry
+#{\mu+2\kappa N^2} and the neighbor entry #{-\kappa N^2}.
+The shape is
+##{\frac{\mu+2\kappa N^2}{2\kappa N^2}
+=1+\frac{\mu}{2\kappa N^2}
+=1+\frac{m^2}{2N^2}.}
+\ref{fdip-00AY} gives the selected shape #{\cosh(m/N)}.}
+
+\p{Set #{\varphi(u)=\cosh u-1-u^2/2}. Then
+#{\varphi(0)=\varphi'(0)=\varphi''(0)=0},
+#{\varphi'''(u)=\sinh u}, and #{\varphi''''(u)=\cosh u}. The
+integral remainder is
+##{\varphi(u)
+=\int_0^u\frac{(u-t)^3}{6}\cosh t\,dt.}
+For #{u>0} the integrand is at least #{(u-t)^3/6}, so
+#{\varphi(u)\ge u^4/24}. Taking #{u=m/N} shows that the
+selected shape exceeds the shape of #{Q_N} by at least
+#{(m/N)^4/24}.}
+}

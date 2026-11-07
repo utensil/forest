@@ -1,0 +1,66 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{The dyadic increment completes the index}
+\date{2026-11-07}
+
+\p{Fix #{m>0}. Let #{\delta} be the shorter-arc metric on the
+\vocabk{dyadic index}{fdip-00B6}, and let #{d_m} be the
+\vocabk{dyadic increment}{fdip-00E5}. Then #{d_m} is a metric.
+A sequence in #{D} is Cauchy for #{d_m} if and only if it is
+Cauchy for #{\delta}. The completion may be identified with
+the circle of length #{1} obtained in \ref{fdip-00BE}. On
+that circle, the Hölder version #{F} of \ref{fdip-00BE}
+satisfies
+##{\alpha\,\delta(u,v)
+\le\mathbb E\lvert F(u)-F(v)\rvert^2
+\le\delta(u,v)}
+for every pair of points, with #{\alpha} as in
+\ref{fdip-00E7}. The topology of #{d_m} agrees with the
+shorter-arc topology.}
+
+\proof{
+\p{Each coordinate belongs to #{L^2} because the one-point
+precision in \ref{fdip-00BC} is the positive number
+#{2m\tanh(m/2)}. Thus
+#{d_m(a,b)=\|f_a-f_b\|_{L^2}}. The triangle
+inequality is the triangle inequality of that norm, and
+\ref{fdip-00E7} gives separation. The same lemma gives
+#{\alpha\delta\le d_m^2\le\delta} on #{D}. If
+#{d_m(a,b)<\varepsilon}, then
+#{\delta(a,b)<\varepsilon^2/\alpha}. If
+#{\delta(a,b)<\varepsilon}, then
+#{d_m(a,b)<\sqrt{\varepsilon}}. The two metrics therefore
+have the same Cauchy sequences.}
+
+\p{\ref{fdip-00BE} identifies the completion of
+#{(D,\delta)} with the circle of length #{1}, and supplies a
+version #{F} that agrees with the coordinates on #{D}. On
+#{D},
+##{\lvert d_m(a,b)-d_m(a',b')\rvert
+\le d_m(a,a')+d_m(b,b')
+\le\sqrt{\delta(a,a')}+\sqrt{\delta(b,b')}.}
+The metric extends uniquely by uniform continuity to the
+completion. Separately, #{a\mapsto f_a} is uniformly
+continuous from #{(D,\delta)} into #{L^2}, so it extends to
+a uniformly continuous map #{\Phi} from the circle into
+#{L^2}. For a sequence of dyadic points tending to a circle
+point #{u}, the coordinates converge to #{\Phi(u)} in
+#{L^2}, hence in probability, and \ref{fdip-00BE} makes them
+converge almost surely to #{F(u)}. The two limits agree
+almost surely, so
+#{\mathbb E\lvert F(u)-F(v)\rvert^2
+=\|\Phi(u)-\Phi(v)\|_{L^2}^2}.
+Both sides of the comparison are continuous functions of the
+pair and the inequality holds on the dense subset #{D}, so it
+holds for every pair on the circle. The extended distance is
+the norm distance of #{\Phi}, and it is the completion
+metric.}
+
+\p{If the extended distance is less than #{r}, the shorter arc
+is less than #{r^2/\alpha}. If the shorter arc is less than
+#{r^2}, the extended distance is less than #{r}. Every ball
+of either metric contains a ball of the other, so the two
+metrics determine the same open sets.}
+}

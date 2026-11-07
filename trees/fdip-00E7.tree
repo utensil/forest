@@ -1,0 +1,65 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Lemma}
+\title{A square-root bound for the dyadic increment}
+\date{2026-11-07}
+
+\p{Fix #{m>0} and write #{\delta} for the shorter arc between
+two points of the \vocabk{dyadic index}{fdip-00B6}. Set
+##{\alpha=\frac{2}{m}\tanh\frac{m}{4}
+=\frac{\cosh(m/2)-1}{(m/2)\sinh(m/2)}.}
+The constant satisfies #{0<\alpha<1}. For the
+\vocabk{dyadic increment}{fdip-00E5},
+##{\alpha\delta\le d_m^2\le\delta}
+whenever #{0\le\delta\le 1/2}. The quotient #{d_m^2/\delta}
+decreases from #{1} to #{\alpha} as #{\delta} runs from #{0}
+to #{1/2}. In particular #{d_m(a,b)=0} only when #{a=b}.}
+
+\proof{
+\p{The case #{\delta=0} is the diagonal. For
+#{0<\delta\le 1/2}, \ref{fdip-00BD} gives
+##{d_m^2
+=\frac{2\sinh(m\delta / 2)\sinh(m(1-\delta)/2)}{m\sinh(m/2)}.}
+Write #{g(\delta)} for the right-hand side and
+#{\rho(\delta)=\sinh(m\delta / 2)\sinh(m(1-\delta)/2)}, so
+#{g=2\rho /(m\sinh(m/2))}. Differentiating the product yields
+##{\rho'(\delta)
+=\frac{m}{2}\sinh\bigl(m(1-2\delta)/2\bigr),}
+and a second differentiation yields
+##{\rho''(\delta)
+=-\frac{m^2}{2}\cosh\bigl(m(1-2\delta)/2\bigr)<0.}
+Thus #{g''<0} on #{[0,1]}. Since #{g(0)=0} and #{g'} is
+strictly decreasing,
+##{\frac{g(\delta)}{\delta}
+=\int_0^1 g'(t\delta)\,dt}
+decreases strictly as #{\delta} increases. The first
+derivative at the origin is
+##{g'(0)
+=\frac{2}{m\sinh(m/2)}\cdot\frac{m}{2}\sinh(m/2)
+=1,}
+so the quotient is at most #{1}, and #{g(\delta)\le\delta}.}
+
+\p{At the right endpoint the half-angle identity
+#{\sinh(m/2)=2\sinh(m/4)\cosh(m/4)} gives
+##{g(1/2)
+=\frac{2\sinh^2(m/4)}{m\sinh(m/2)}
+=\frac{1}{m}\tanh\frac{m}{4}.}
+Dividing by #{1/2} produces #{\alpha=(2/m)\tanh(m/4)}. The
+same identity, together with
+#{\cosh(m/2)-1=2\sinh^2(m/4)}, gives
+##{\frac{\cosh(m/2)-1}{(m/2)\sinh(m/2)}
+=\frac{2\sinh^2(m/4)}{(m/2)\cdot 2\sinh(m/4)\cosh(m/4)}
+=\frac{2}{m}\tanh\frac{m}{4}.}
+The quotient therefore decreases from
+#{1} to #{\alpha}, which is the bound
+#{\alpha\delta\le g(\delta)\le\delta}.}
+
+\p{The function #{\psi(z)=z-\tanh z} vanishes at #{0}, and
+#{\psi'(z)=\tanh^2 z}. For #{z>0} the derivative is positive, so
+#{\psi(z)>0}. Taking #{z=m/4} gives
+#{\tanh(m/4)<m/4}, hence #{\alpha<1/2<1}. The factor
+#{\tanh(m/4)} is positive, so #{\alpha>0}. If #{d_m(a,b)=0},
+then #{g(\delta)=0}. Every factor in the formula is positive
+when #{0<\delta\le 1/2}, so #{\delta=0} and #{a=b}.}
+}
