@@ -1,0 +1,33 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Lemma}
+\title{Arc length has dimension one}
+\date{2026-11-06}
+
+\p{Equip the circle of length #{1} with the shorter-arc
+distance. For every #{s>1} the
+\vocabk{Hausdorff content}{fdip-00D5} of order #{s} equals
+#{0}. For every #{0\le s\le 1} that content is positive. The
+\vocabk{Hausdorff dimension}{fdip-00D5} is #{1}.}
+
+\proof{
+\p{For #{N\ge 2}, partition the circle into #{N} arcs of
+length #{1/N}. Each piece has arc-length diameter #{1/N}. The
+sum of the #{s}-powers is #{N^{1-s}}. For #{s>1} this tends
+to #{0} as #{N} grows, so the content of order #{s} is #{0}.
+For #{s=0} the content equals #{1}, as in \ref{fdip-00D7}.}
+
+\p{Fix #{0<s\le 1} and a countable cover by nonempty sets of
+arc-length diameters #{\delta_i}. Each #{\delta_i} is at most
+#{1/2}. If some #{\delta_j} equals #{1/2}, that term is
+#{(1/2)^s}, which is positive. Otherwise every #{\delta_i} is
+strictly less than #{1/2}, and the same centered arcs as in
+\ref{fdip-00D7} have lengths #{2\delta_i} and cover the
+circle. \ref{fdip-00DD} yields #{\sum_i\delta_i\ge 1/2}. If
+#{0<\delta_i\le 1}, then #{\delta_i^{s-1}\ge 1}, so
+#{\delta_i^s\ge\delta_i}. Vanishing diameters contribute
+nothing. The sum of the #{s}-powers is therefore at least
+#{1/2}. The content of order #{s} is positive, and the
+dimension equals #{1}.}
+}

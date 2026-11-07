@@ -1,0 +1,45 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Lemma}
+\title{Covering arcs meet the length of the circle}
+\date{2026-11-06}
+
+\p{Let a circle of length #{1} be covered by countably many
+closed arcs, of lengths #{\ell_i}. The sum of the lengths is
+at least #{1}.}
+
+\proof{
+\p{If some length is at least #{1}, the sum is at least #{1}.
+Assume, on the contrary, that the sum is strictly less than
+#{1}. Every length is then strictly less than #{1}. Let
+#{\varepsilon} be half the difference between #{1} and the
+sum, and widen the #{i}-th arc by extending each end. The new
+arc is open, and its length is the old length plus
+#{\varepsilon 2^{-(i+1)}}. The new lengths still sum to less
+than #{1}, and the open arcs cover the circle. Compactness
+retains a finite subcover. Every arc in that subcover still
+has length strictly less than #{1}.}
+
+\p{Cut the circle at one point and open the cut onto the unit
+interval. An open arc from the finite subcover lifts to one
+open interval, or to two open intervals when the arc contains
+the cut. The lifted lengths add to the arc lengths, so their
+sum is strictly less than #{1}. The lifted intervals cover
+the compact interval running from #{\eta} to #{1-\eta}, for
+every #{\eta} with #{0<\eta<1/2}.}
+
+\p{Start at the left endpoint of that compact interval. Among
+the open intervals that contain the current point, choose one
+whose right endpoint is maximal. The chosen interval is open,
+so the right endpoint lies strictly beyond the current point,
+and the length of the interval is at least the distance
+advanced. Continue from that right endpoint. The right
+endpoints strictly increase, so each interval is chosen at
+most once, and a finite subcover forces the process to pass
+the right end of the compact interval. The chosen lengths
+therefore sum to at least #{1-2\eta}. The lifted total is at
+least #{1-2\eta}. Letting #{\eta} tend to #{0} makes that
+total at least #{1}, contradicting the widening. The original
+sum is therefore at least #{1}.}
+}

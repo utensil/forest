@@ -1,0 +1,63 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{The increment has a closed form}
+\date{2026-11-06}
+
+\p{Fix #{m>0}, and let #{d} be the \vocabk{increment metric}{fdip-00CY}
+of the continuous field in \ref{fdip-00BG}. If #{x} and #{y} are
+separated by a shorter arc of length #{\delta}, then
+##{d(x,y)^2
+=\frac{\cosh(m/2)-\cosh\bigl(m(1/2-\delta)\bigr)}{m\sinh(m/2)}.}
+As #{\delta} runs from #{0} to #{1/2}, the right-hand side is
+strictly increasing. Writing
+##{C_m=\cosh(m/2)\left(\frac{m^2}{6}
++\frac{m^3\coth(m/2)}{48}\right),}
+one has, for every such #{\delta},
+##{\left\lvert d(x,y)^2
+-\left(\delta-\frac{m\coth(m/2)}{2}\delta^2\right)
+\right\rvert
+\le C_m\delta^3.}
+}
+
+\proof{
+\p{The proof of \ref{fdip-00BG} records the identity
+#{\cosh(m/2)-\cosh(m(1/2-\delta))
+=2\sinh\frac{m\delta}{2}\sinh\frac{m(1-\delta)}{2}.}
+\ref{fdip-00BD} says that the increment variance equals the
+right-hand side divided by #{m\sinh(m/2)}. That quotient is
+the displayed formula for #{d(x,y)^2}. Let
+#{\psi(\delta)=\cosh(m/2)-\cosh(m(1/2-\delta))}. Its derivative
+is #{m\sinh(m(1/2-\delta))}, which is positive for
+#{\delta<1/2} and zero at #{1/2}. The denominator
+#{m\sinh(m/2)} is positive, so #{d^2} is strictly increasing
+on this range of arcs.}
+
+\p{Set #{u=m/2} and #{z=m\delta}, so #{0\le z\le u}. The addition
+formula gives
+#{\psi(\delta)=\cosh u\,(1-\cosh z)+\sinh u\,\sinh z}.
+The Taylor expansions with remainder supply #{\xi} and #{\eta}
+between #{0} and #{z} such that
+#{\sinh z=z+\frac{z^3\cosh\xi}{6}} and
+#{\cosh z=1+\frac{z^2}{2}+\frac{z^4\cosh\eta}{24}}. Therefore
+##{\psi(\delta)
+=z\sinh u-\frac{z^2}{2}\cosh u+R,}
+where
+##{\lvert R\rvert
+\le\frac{z^3}{6}\sinh u\cosh u
++\frac{z^4}{24}\cosh^2 u.}
+Since #{z\le u}, the second term is at most
+#{u z^3\cosh^2 u/24}, and
+##{\lvert R\rvert
+\le z^3\cosh u\left(\frac{\sinh u}{6}
++\frac{u\cosh u}{24}\right).}
+Dividing by #{m\sinh(m/2)=2u\sinh u} produces #{d^2}. The
+first two terms become #{\delta} and
+#{\frac{m\coth(m/2)}{2}\delta^2}, because #{z/(2u)=\delta} and
+#{z^2\cosh u/(4u\sinh u)
+=(m\coth(m/2)/2)\delta^2}. The remainder is at most
+#{C_m\delta^3}, since #{z=2u\delta} turns the bound into
+#{\cosh u\bigl(u^2\cdot 2/3+u^3\coth u/6\bigr)\delta^3},
+which is #{C_m\delta^3}.}
+}

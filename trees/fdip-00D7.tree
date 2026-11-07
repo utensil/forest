@@ -1,0 +1,53 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{The increment metric has dimension two}
+\date{2026-11-06}
+
+\p{Equip the circle of length #{1} with the
+\vocabk{increment metric}{fdip-00CY} of the field in
+\ref{fdip-00BG}. For every #{s>2} the
+\vocabk{Hausdorff content}{fdip-00D5} of order #{s} equals
+#{0}. For every #{0\le s\le 2} that content is positive. The
+\vocabk{Hausdorff dimension}{fdip-00D5} is #{2}.}
+
+\proof{
+\p{Let #{N\ge 2} and partition the circle into #{N} arcs of
+length #{1/N}. Any two points of one arc determine a shorter
+arc of length at most #{1/N}, so \ref{fdip-00D2} bounds the
+diameter of that piece by #{N^{-1/2}}. The sum of the
+#{s}-powers of these diameters is at most #{N^{1-s/2}}. For
+#{s>2} the exponent is negative, and the sum tends to #{0} as
+#{N} grows. The content of order #{s} is #{0}.}
+
+\p{Let #{\alpha} be the constant of \ref{fdip-00D2}, and set
+#{c=\sqrt{\alpha}}. The lemma gives #{c>0}. For #{s=0} the
+content is the infimum of the number of nonempty sets in a
+cover, hence equals #{1}. Now take #{0<s\le 2}, and let
+#{U_i} be a countable cover by nonempty sets. Write #{\rho_i}
+for the diameter in the increment metric and #{\delta_i} for
+the supremum of shorter-arc lengths inside #{U_i}. Then
+#{0\le\delta_i\le 1/2} and #{c\sqrt{\delta_i}\le\rho_i}. If
+some #{\delta_j} equals #{1/2}, the corresponding term
+satisfies #{\rho_j^s\ge (c/\sqrt{2})^s}, which is positive.}
+
+\p{Otherwise every #{\delta_i} is strictly less than #{1/2}.
+Any point of #{U_i} is a center of a closed arc of length
+#{2\delta_i} that contains #{U_i}: the arc extends distance
+#{\delta_i} in each direction, and #{2\delta_i<1}, so the two
+directions do not meet. These arcs cover the circle.
+\ref{fdip-00DD} gives #{\sum_i 2\delta_i\ge 1}, hence
+#{\sum_i\delta_i\ge 1/2}. If #{0<\delta_i\le 1} and
+#{0<s\le 2}, then #{s/2\le 1}, so
+#{\delta_i^{s/2-1}\ge 1} and therefore
+#{\delta_i^{s/2}\ge\delta_i}. The case #{\delta_i=0}
+contributes nothing to the sum. Combined with
+#{\rho_i\ge c\sqrt{\delta_i}},
+##{\rho_i^s\ge c^s\delta_i^{s/2}\ge c^s\delta_i.}
+Summing and using #{\sum_i\delta_i\ge 1/2} shows that the sum
+of the #{s}-powers is at least #{c^s/2}. Every cover is
+bounded below by a positive number, in this case or in the
+case where some shorter arc reaches #{1/2}. The content of
+order #{s} is positive, and the dimension equals #{2}.}
+}
