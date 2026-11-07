@@ -1,0 +1,55 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{Cylinder positivity of the circle field}
+\date{2026-11-07}
+
+\p{Fix #{m>0}, and let the coordinate process of \ref{fdip-00BC}
+be extended to the circle by \ref{fdip-00BE}. Let
+#{t_1,\ldots,t_n} satisfy #{0\le t_j\le 1/2}, and let #{F} be
+a bounded measurable function of #{n} real variables. Then
+##{\mathbb E\Bigl(\overline{F\bigl(X(-t_1),\ldots,X(-t_n)\bigr)}\,F\bigl(X(t_1),\ldots,X(t_n)\bigr)\Bigr)\ge 0.}
+Fixed coordinates at #{0} and at #{1/2} may be included among
+the arguments of #{F} on both sides.}
+
+\proof{
+\p{First suppose that every #{t_j} is dyadic and that the
+points #{t_j} and #{-t_j} are distinct except at the fixed
+points. The finite set they form is invariant under
+#{x\mapsto -x}, and \ref{fdip-00FP} is the stated inequality.
+If some non-fixed times coincide, pass to the distinct subset
+and read #{F} as constant in the repeated coordinates.}
+
+\p{For arbitrary real times, choose dyadic #{t_j^{(N)}} in the
+same range, with #{t_j^{(N)}\to t_j}, leaving a time equal to
+#{0} or to #{1/2} unchanged. The version of \ref{fdip-00BE}
+has continuous paths, so the samples converge almost surely.
+A bounded continuous function of those samples is dominated by
+its supremum norm, and each dyadic expectation is nonnegative.
+Dominated convergence gives the inequality for every bounded
+continuous #{F}.}
+
+\p{Let #{\mu} be the centered law of
+#{(X(t_1),\ldots,X(t_n))}. It is the image of a standard
+Gaussian on #{\mathbb R^k} under an injective linear map,
+where #{k} is the rank of the covariance. Hermite polynomials
+are an orthogonal basis of the square-integrable functions of
+that standard Gaussian. Injectivity realizes each of them as a
+polynomial in these #{n} coordinates, so polynomials are dense
+in #{L^2(\mu)}. For a polynomial #{p} and a radius #{R}, let
+#{\chi_R} be continuous, equal to #{1} on the ball of radius
+#{R}, and equal to #{0} outside the ball of radius #{R+1}.
+The product #{\chi_R p} is a bounded continuous function of
+the same coordinates, and #{|p|^2} is #{\mu}-integrable, so
+the #{L^2(\mu)} distance from #{\chi_R p} to #{p} tends to
+#{0} as #{R\to\infty}. Bounded continuous functions of these
+coordinates are therefore dense in #{L^2(\mu)}. The form
+#{B(F)=\mathbb E\bigl(\overline{F(X(-t))}F(X(t))\bigr)}
+satisfies
+##{|B(F)-B(G)|\le\|F\|_2\|F-G\|_2+\|G\|_2\|F-G\|_2,}
+because #{t\mapsto -t} preserves the joint samples, by
+#{r(s)=r(1-s)} in \ref{fdip-00FO}. Nonnegativity on the
+bounded continuous functions extends to every class in
+#{L^2(\mu)}, including every bounded measurable #{F}.}
+}

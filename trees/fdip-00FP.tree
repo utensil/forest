@@ -1,0 +1,77 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{Reflection positivity of an invariant arc law}
+\date{2026-11-07}
+
+\p{Fix #{m>0}. Let #{S} be a finite subset of the
+\vocabk{dyadic index}{fdip-00B6}, with #{|S|\ge 2}, and assume
+#{S} is invariant under #{x\mapsto -x} on the circle of length
+#{1}. Write #{\theta} for that reflection and let #{X_+} be the
+set of points of #{S} whose representative in the half-open
+interval from #{0} to #{1} lies in the interval from #{0} to
+#{1/2}. Let #{F} be a bounded measurable function of the
+coordinates in #{X_+}, extended to complex values. Under the
+Gaussian law #{\nu_S} of \ref{fdip-00BA},
+##{\mathbb E\bigl(\overline{F(\phi\circ\theta)}\,F(\phi)\bigr)\ge 0.}
+The same inequality holds when #{F} is a polynomial in those
+coordinates.}
+
+\proof{
+\p{Write #{w_i=m/\sinh(m h_i)>0} for the weight of each arc and
+##{\lambda_i=m\Bigl(\tanh\frac{m h_{i-1}}{2}+\tanh\frac{m h_i}{2}\Bigr)>0.}
+The identity #{\coth\psi=\tanh\frac{\psi}{2}+\frac{1}{\sinh\psi}} gives
+#{Q_{ii}=\lambda_i+w_{i-1}+w_i}. For #{|S|\ge 3} the neighbor
+entry is #{Q_{i,i+1}=-w_i} and every other entry is #{0}. For
+#{|S|=2} the [cyclic arc precision](fdip-00B6) adds the two
+parallel weights in the off-diagonal entry, and both arcs
+appear in the sum below. In both cases
+#{E(\phi)=\frac{1}{2}\phi\cdot Q\phi} equals
+##{\frac{1}{2}\sum_i\lambda_i\phi_i^2+\frac{1}{2}\sum_i w_i(\phi_i-\phi_{i+1})^2.}
+Reflection
+reverses cyclic order and preserves arc length, so
+#{w_{\theta i}=w_i} and #{\lambda_{\theta i}=\lambda_i}. The
+form dominates #{\frac{1}{2}\sum_i\lambda_i\phi_i^2}, so it is
+positive definite. By the counting normalization of the
+[Gaussian probability law](fdip-0005), #{\nu_S} has
+unnormalized weight #{e^{-E}} and a positive normalizing
+constant.}
+
+\p{Partition the points into the strict positive points, their
+images under #{\theta}, and the fixed points #{0} and #{1/2}
+when those lie in #{S}. Call an arc crossing when its ends are
+#{v} and #{\theta v} with #{\theta v\neq v}. Let #{E_+} contain
+the on-site terms #{\frac{1}{2}\lambda_i\phi_i^2} at strict
+positive points, the full energy of every arc with at least one
+strict positive end and no strict negative end, and the square
+#{\frac{w_e}{2}\phi_v^2} from each crossing arc. Let #{E_-} be
+#{E_+} after #{\theta}, and let #{E_0} contain the on-site
+terms at the fixed points and the energy of every arc with both
+ends fixed. Then
+##{E=E_++E_-+E_0-\sum_e w_e\phi_v\phi_{\theta v},}
+the sum running over crossing arcs, and
+##{-E=A+A\circ\theta+\sum_e w_e\phi_v\phi_{\theta v},\qquad A=-E_+-\frac{1}{2} E_0.}
+Each crossing exponential expands as
+##{e^{w_e\phi_v\phi_{\theta v}}=\sum_{k\ge 0}\frac{1}{k!}(\sqrt{w_e}\phi_v)^k(\sqrt{w_e}\phi_{\theta v})^k.}
+A product of these series is a sum over multi-indices of a
+positive reciprocal of factorials times a monomial in the
+strict positive coordinates times the same monomial in the
+reflected coordinates. The substitution #{\phi_-=\theta\phi_+}
+preserves Lebesgue measure. Each multi-index therefore
+contributes a square of one integral over the strict positive
+coordinates, and those squares are integrated over the fixed
+coordinates, with an empty strict-positive set leaving a
+square in the fixed coordinates. Dividing by the positive
+normalizing constant yields the claim for bounded measurable
+#{F}.}
+
+\p{For a polynomial #{P} in the coordinates on #{X_+}, let
+#{F_R} equal #{P} wherever every such coordinate has absolute
+value at most #{R}, and equal #{0} otherwise. Then #{F_R} is
+a bounded measurable function of #{X_+} alone, so the
+inequality applies to it. The bound
+#{E\ge\frac{1}{2}\sum_i\lambda_i\phi_i^2} dominates
+#{|P(\phi\circ\theta)P(\phi)|e^{-E}} independently of #{R}.
+Dominated convergence removes the cutoff.}
+}

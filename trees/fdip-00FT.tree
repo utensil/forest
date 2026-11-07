@@ -1,0 +1,52 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{The circle field matches the periodic oscillator}
+\date{2026-11-07}
+
+\p{The coordinate field of \ref{fdip-00BE} is centered. Its
+covariance is the function #{r} of \ref{fdip-00FO}. For
+#{0\le t\le 1},
+##{r(t)=\frac{e^{-mt}+e^{-m(1-t)}}{2m\bigl(1-e^{-m}\bigr)}.}
+This is the covariance, on a circle of length #{1}, of the
+periodic Ornstein-Uhlenbeck process of mass #{m} in
+\citet{p. 341}{klein1981periodic}. For the point mass
+#{\nu_+=\bigl(2m(1-e^{-m})\bigr)^{-1}\delta_m},
+##{r(t)=\int_0^{\infty}\bigl(e^{-ta}+e^{-(1-t)a}\bigr)\,d\nu_+(a).}
+\citet{Theorem 2.5}{klein1981periodic} gives uniqueness of such
+a measure for a covariance in this class, so the point mass is
+the representing measure. For a
+circle of length #{\beta>0}, let #{f} be the unit-circle field
+of mass #{m\beta} and set #{g(x)=\sqrt{\beta}\,f\bigl(\frac{x}{\beta}\bigr)}.
+Then #{g} is centered and, for #{0\le t\le\beta},
+##{\mathbb E\bigl(g(0)g(t)\bigr)=\frac{e^{-mt}+e^{-m(\beta-t)}}{2m\bigl(1-e^{-m\beta}\bigr)}.}
+The prefactor is again the weight of #{\delta_m}.}
+
+\proof{
+\p{The mean zero statement is \ref{fdip-00BC}. The covariance
+identity on the unit circle is \ref{fdip-00FO}, through
+\ref{fdip-00DX} and \ref{fdip-00BG}. The periodic extension of
+#{r} is continuous because #{r(0)=r(1)}. For complex
+coefficients and real times, the periodic extension satisfies
+##{\sum_{i,j}\overline{c_i}c_j r(t_i-t_j)=\mathbb E\Bigl\lvert\sum_j c_j X(t_j)\Bigr\rvert^2\ge 0,}
+so #{r} is positive semidefinite. Together with condition
+(iii) of \citet{Proposition 2.1}{klein1981periodic}, proved in
+\ref{fdip-00FO}, these are the hypotheses of
+\citet{Theorem 2.5}{klein1981periodic}. Substituting the
+displayed point mass collapses the integral to #{r} and
+accounts for the whole prefactor. Uniqueness identifies the
+representing measure with that point mass.}
+
+\p{For the longer circle, set #{M=m\beta}, #{u=M\bigl(\frac{1}{2}-\frac{t}{\beta}\bigr)}
+and #{v=M/2}. \ref{fdip-00BG} at mass #{M} gives
+##{\mathbb E\bigl(f(0)f\bigl(\frac{t}{\beta}\bigr)\bigr)=\frac{\cosh u}{2M\sinh v}=\frac{e^{u}+e^{-u}}{2M\bigl(e^{v}-e^{-v}\bigr)}.}
+Multiplication of the numerator and the denominator by
+#{e^{-v}} produces
+##{\frac{e^{-mt}+e^{-m(\beta-t)}}{2m\beta\bigl(1-e^{-m\beta}\bigr)},}
+because #{u-v=-mt}, #{-u-v=-m(\beta-t)} and #{2v=m\beta}.
+The square of #{\sqrt{\beta}} multiplies this value by
+#{\beta} and cancels the remaining factor #{\beta} in the
+denominator. The resulting prefactor is the weight of
+#{\delta_m}.}
+}
