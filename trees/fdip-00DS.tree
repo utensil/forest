@@ -1,0 +1,81 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{A refined cell keeps the factor 3/5}
+\date{2026-11-06}
+
+\p{Fix #{n\ge 0} and a weight #{w>0}. Form the 9 edges in
+the refinement of one #{n}-cell of the
+\vocabk{gasket graph}{fdip-00DP}, each of weight #{w}. The
+\vocabk{kept form}{fdip-00DF} on the three corners equals
+#{\frac{3}{5}} times the energy of those corners joined by
+three edges of weight #{w}. The eliminated block has
+determinant #{50 w^3}. On #{G_{n+1}} itself, with
+every edge of weight #{w}, the kept form on #{V_n} equals
+#{\frac{3}{5}} times the energy of #{G_n} with every edge of
+weight #{w}.}
+
+\proof{
+\p{The refinement of any #{n}-cell is the same 9-edge graph
+as the refinement of #{G_0}, so the unit-weight calculation
+scales by #{w}. Use the labels of the definition.
+Each midpoint meets two corners and the other
+two midpoints, so the block on #{(a,b,c)} is
+#{M=5I-J}, where #{J} is the #{3\times 3} matrix of ones.
+The diagonal entries of #{M} are #{4} and the off-diagonal
+entries are #{-1}. Since #{J^2=3J},
+##{\Bigl(5I-J\Bigr)\Bigl(\frac{1}{5}I+\frac{1}{10}J\Bigr)
+=I+\frac{1}{2}J-\frac{1}{5}J-\frac{1}{10}J^2
+=I+\Bigl(\frac{1}{2}-\frac{1}{5}-\frac{3}{10}\Bigr)J.}
+The coefficient equals
+#{\frac{5}{10}-\frac{2}{10}-\frac{3}{10}=0}, so the product
+is #{I} and the second factor is #{M^{-1}}. The determinant
+expands as
+##{4\bigl(16-1\bigr)-(-1)\bigl(-4-1\bigr)+(-1)\bigl(1+4\bigr)
+=60-5-5=50.}
+For weight #{w} the block is #{wM}, with determinant
+#{50 w^3}.}
+
+\p{The neighbors of #{a} are #{B}, #{C}, #{b}, and #{c}, so
+the Laplacian vanishes at #{a} when #{4a=B+C+b+c}. The same
+count at #{b} and at #{c} gives the other two rows of #{M}.
+For a column #{v},
+##{M^{-1}v=\frac{1}{5}v+\frac{1}{10}\Bigl(\sum_i v_i\Bigr)(1,1,1).}
+The first right-hand entry is #{B+C} and the three entries
+sum to #{2(A+B+C)}, so the first output entry is
+#{\frac{B+C}{5}+\frac{A+B+C}{5}}. Hence
+##{a=\frac{A+2B+2C}{5},\quad
+b=\frac{2A+B+2C}{5},\quad
+c=\frac{2A+2B+C}{5},}
+where the formulas for #{b} and #{c} are the same calculation
+with the corners cycled. For #{A=1}, #{B=0}, and #{C=0}, the
+midpoint values are #{\frac{1}{5}}, #{\frac{2}{5}}, and
+#{\frac{2}{5}}. In the edge order of \ref{fdip-00DR}, the
+squared differences are
+##{\frac{9}{25},\frac{9}{25},0,\frac{1}{25},\frac{4}{25},
+\frac{1}{25},\frac{1}{25},\frac{4}{25},\frac{1}{25}.}
+Their sum is #{\frac{6}{5}}. The block is positive definite,
+so \ref{fdip-00DH} identifies this extension as the
+minimizer.}
+
+\p{Every permutation of the corners extends to an automorphism
+by the same permutation of the opposite midpoints, so the
+three off-diagonal entries of the kept form are equal.
+Constants have energy #{0} and lie in the kernel. A symmetric
+#{3\times 3} matrix with those two properties is a multiple
+of the unit-triangle Laplacian. At #{(1,0,0)} that triangle
+has energy #{2}, since two edges contribute #{1} and the
+third contributes #{0}. The multiple is
+#{\frac{6}{5}\cdot\frac{1}{2}=\frac{3}{5}}.
+Multiplying every edge weight by #{w} multiplies both
+quadratic forms by #{w}.}
+
+\p{On #{G_{n+1}}, \ref{fdip-00DR} puts the midpoints of distinct
+#{n}-cells in disjoint sets and partitions the edges into the
+cells. Each midpoint is joined to a corner of its own cell.
+\ref{fdip-00DJ} adds the cell minima. Each minimum is
+#{\frac{3}{5}} times the energy of that cell's three boundary
+edges of weight #{w}, and those boundary edges are the edges
+of #{G_n}.}
+}
