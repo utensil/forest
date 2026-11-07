@@ -1,0 +1,34 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{The circle covariance is a two-exponential kernel}
+\date{2026-11-06}
+
+\p{Fix #{m>0}. For a shorter arc #{\delta} with
+#{0\le\delta\le 1/2}, the function #{G} of \ref{fdip-00BG}
+equals
+##{K(\delta)=\frac{e^{-m\delta}+e^{-m(1-\delta)}}{2m\bigl(1-e^{-m}\bigr)}.}
+}
+
+\proof{
+\p{The denominator #{2m\bigl(1-e^{-m}\bigr)} is positive.
+\ref{fdip-00BG} gives
+##{G(\delta)=\frac{\cosh\bigl(m\bigl(\frac{1}{2}-\delta\bigr)\bigr)}{2m\sinh\bigl(\frac{m}{2}\bigr)}.}
+Write #{u=m\bigl(\frac{1}{2}-\delta\bigr)} and #{v=\frac{m}{2}}.
+The addition formulas are
+##{\cosh u=\frac{e^{u}+e^{-u}}{2},
+\qquad
+\sinh v=\frac{e^{v}-e^{-v}}{2},}
+so
+##{G(\delta)=\frac{e^{u}+e^{-u}}{2m\bigl(e^{v}-e^{-v}\bigr)}.}
+Multiply the numerator and the denominator by #{e^{v}}.
+The exponents simplify by #{u+v=m(1-\delta)} and
+#{v-u=m\delta}, and #{2v=m}, so
+##{G(\delta)=\frac{e^{m(1-\delta)}+e^{m\delta}}{2m\bigl(e^{m}-1\bigr)}.}
+The same multiplication, applied to #{K(\delta)}, uses
+#{e^{m}\bigl(e^{-m\delta}+e^{-m(1-\delta)}\bigr)
+=e^{m(1-\delta)}+e^{m\delta}}
+and #{e^{m}\bigl(1-e^{-m}\bigr)=e^{m}-1}. The numerators
+agree, and the denominators agree.}
+}
