@@ -1,0 +1,60 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{Increment metric of the cell density}
+\date{2026-11-07}
+
+\p{Keep #{0<p\lambda<1}, and let #{F} be the continuous version
+of \ref{fdip-00FH}. This forces #{0<\lambda<1/p}. For
+#{a,b\in X}, set #{d(a,a)=0}. If #{a\neq b}, let #{v} be
+their meeting depth, as in \ref{fdip-00FE}, and set
+##{d(a,b)^2=\mathbb E\lvert F(a)-F(b)\rvert^2 =\frac{2p\lambda(1-\lambda)}{1-p\lambda}(p\lambda)^v.}
+The prefactor is positive. The function #{d} is an
+ultrametric. It induces the inverse-limit topology, and
+#{(X,d)} is compact and complete.}
+
+\proof{
+\p{Distinct points of the compact Hausdorff space #{X} lie in
+disjoint cylinders, so #{v} is finite and the right-hand side
+is positive. Let #{r_*=p\lambda} and, for #{s\ge 2}, let
+#{S(s)} be the sum in \ref{fdip-00C5}. The diagonal
+computation there gives
+##{S(s)=\frac{p-1}{p}\sum_{j=0}^{s-2}r_*^{-j}+r_*^{1-s},}
+while #{S(1)=1}. For #{s\ge 1} the geometric sum equals
+#{(1-r_*^{1-s})r_*/(r_*-1)}, and
+##{S(s)=\frac{p-1}{p}\cdot\frac{r_*}{r_*-1} +r_*^{1-s}\cdot\frac{r_*-p}{p(r_*-1)}.}
+The identity also holds at #{s=1}, where both sides equal
+#{1}. For representatives of #{a} and #{b} at depth #{k>v},
+\ref{fdip-00C5} and the scaling in \ref{fdip-00FA} give
+##{\mathbb E\lvert F_k(a)-F_k(b)\rvert^2=2r_*^k S(k-v).}
+With #{s=k-v}, the power #{k+1-s} equals #{v+1}, so
+##{r_*^k S(k-v) =\frac{p-1}{p}\cdot\frac{r_*}{r_*-1}\,r_*^k +r_*^{v+1}\frac{p-r_*}{p(1-r_*)}.}
+As #{k\to\infty} one has #{r_*^k\to 0}. Since
+#{p-r_*=p(1-\lambda)} and #{1-r_*=1-p\lambda},
+##{\lim_{k\to\infty}2r_*^k S(k-v) =\frac{2p\lambda(1-\lambda)}{1-p\lambda}(p\lambda)^v.}
+Both #{1-\lambda} and #{1-p\lambda} are positive.}
+
+\p{Uniform convergence in \ref{fdip-00FH} sends
+#{F_k(a)-F_k(b)} to #{F(a)-F(b)} almost surely. Each
+difference is centered Gaussian. The variances converge to
+the limit just obtained, so the characteristic functions
+converge to the centered Gaussian characteristic function of
+that variance. Almost-sure convergence implies convergence
+in distribution to #{F(a)-F(b)}. The two distributional
+limits agree, and the displayed second moment follows.}
+
+\p{Write #{C} for the positive prefactor and
+#{\rho(v)=C^{1/2}(p\lambda)^{v/2}}. Then #{d(a,b)=\rho(v)}
+when #{a\neq b}, and #{\rho} is strictly decreasing. As in
+\ref{fdip-00FE},
+#{v(a,c)\ge\min(v(a,b),v(b,c))}, hence
+#{d(a,c)\le\max(d(a,b),d(b,c))}. The open #{d}-ball of radius
+#{\rho(n)} about #{a} is the cylinder of depth #{n+1}. Those
+cylinders form a base for the inverse-limit topology, so
+#{d} and the cylinder ultrametric induce the same topology.
+\ref{fdip-00FE} makes that topology compact. A Cauchy
+sequence therefore has a convergent subsequence, and the
+Cauchy condition forces the whole sequence to the same limit.
+The space #{(X,d)} is complete.}
+}

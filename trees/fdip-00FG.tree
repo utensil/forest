@@ -1,0 +1,73 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{Square-integrable cell density}
+\date{2026-11-07}
+
+\p{Fix an integer #{p\ge 2} and real numbers #{\lambda>0} and
+#{m>0} with #{0<p\lambda<1}. Let #{X} and #{\eta} be the
+inverse limit and cylinder probability of \ref{fdip-00FE},
+and let #{(x_k)} be a coherent sequence with the projective
+law of \ref{fdip-00C3}. Regard the cell density #{F_k} of
+\ref{fdip-00FA} as the function on #{X} that takes the value
+#{F_k(r)} on the depth-#{k} cylinder of #{r}. Then
+#{(F_k)_{k\ge 0}} converges in
+#{L^2(\Omega;L^2(X,\eta))} to a centered Gaussian random
+element #{F} of #{L^2(X,\eta)}. For every residue #{r} modulo
+#{p^k},
+##{\int_{C(r)}F\,d\eta=M_k(r)}
+in #{L^2(\Omega)}. The same identity extends by linearity to
+every function constant on the cylinders of some finite
+depth.}
+
+\proof{
+\p{Set #{F_0=x_0}. For this one-point residue ring the factor
+#{(p\lambda)^{0}} equals #{1}, so #{F_0} is the depth-zero
+case of the scaling in \ref{fdip-00FA}. The cylinder #{C(r)} of depth #{k} has measure
+#{p^{-k}} and splits into #{p} cylinders of depth #{k+1}, of
+equal measure.
+On a coherent sequence, \ref{fdip-00FA} says that #{F_k(r)}
+is the arithmetic mean of those #{p} finer values. The
+conditional expectation of #{F_{k+1}} onto the depth-#{k}
+cylinders is therefore #{F_k}. The difference
+#{F_{k+1}-F_k} is orthogonal in #{L^2(X,\eta)} to every
+function constant on depth-#{k} cylinders. At depth #{k+1},
+\ref{fdip-00FC} assigns this difference the index
+#{\ell=k}, hence the projector #{P_0}. That image is
+orthogonal to every function constant on the classes modulo
+#{p^k}. If #{j<k}, the earlier difference
+#{F_{j+1}-F_j} is constant on cylinders of depth #{j+1},
+hence constant on cylinders of depth #{k}. Its Haar product
+with #{F_{k+1}-F_k} is #{0}.}
+
+\p{The expected Haar square of the difference equals the scale
+mass #{(p-1)\lambda(p\lambda)^k} of \ref{fdip-00FD}. These
+differences are orthogonal in #{L^2(\Omega;L^2(X,\eta))}, so
+the expected square of a sum of them is the sum of the
+expected squares. The numerical series
+#{\sum_k(p\lambda)^k} converges because #{0<p\lambda<1}. The
+partial sums #{F_k} are therefore Cauchy in
+#{L^2(\Omega;L^2(X,\eta))} and converge to some #{F}.}
+
+\p{For #{f\in L^2(X,\eta)}, the scalar
+#{\langle F_k,f\rangle_{\eta}} is centered Gaussian. Its
+variance converges because #{F_k} converges in
+#{L^2(\Omega)}. The characteristic function
+#{\exp(-t^2 v_k/2)} converges pointwise to
+#{\exp(-t^2 v/2)}. Convergence in #{L^2(\Omega)} implies
+convergence in distribution, so
+#{\langle F,f\rangle_{\eta}} is centered Gaussian of variance
+#{v}.}
+
+\p{The integral of #{F_k} over #{C(r)} equals
+#{p^{-k}F_k(r)=M_k(r)}. For every integer #{n\ge k} the
+conditional expectation identity gives the same integral for
+#{F_n}. The
+linear functional #{g\mapsto\int_{C(r)}g\,d\eta} is
+continuous on #{L^2(X,\eta)}, of operator norm #{p^{-k/2}}.
+Passing to the #{L^2(\Omega)} limit yields the stated
+equality. A function constant on depth-#{k} cylinders is a
+finite linear combination of the indicators of those
+cylinders.}
+}
