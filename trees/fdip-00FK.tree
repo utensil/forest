@@ -55,9 +55,11 @@ Those cylinders cover a set of measure #{1}, so the sum of
 their measures is at least #{1} and the sum of the
 #{\alpha}-powers is at least #{C^{\frac{\alpha}{2}}}.}
 
-\p{Now take #{0<s<\alpha}. A set of diameter at least
-#{\delta_0} contributes at least #{\delta_0^s}. A singleton
-contributes #{0}. Each remaining set #{U} satisfies
+\p{Now take #{0<s<\alpha}. If some set in the cover has
+diameter at least #{\delta_0}, that one term is at least
+#{\delta_0^s}. Otherwise every diameter is strictly less
+than #{\delta_0}. A singleton contributes #{0}. Each
+remaining set #{U} satisfies
 #{0<\operatorname{diam}(U)<\delta_0}, hence
 #{\operatorname{diam}(U)^{s-\alpha}\ge\delta_0^{s-\alpha}}
 since #{s-\alpha<0}. The bound above gives a cylinder
@@ -65,9 +67,14 @@ since #{s-\alpha<0}. The bound above gives a cylinder
 #{\eta(C_U)\le C^{-\frac{\alpha}{2}}\operatorname{diam}(U)^{\alpha}},
 and therefore
 ##{\operatorname{diam}(U)^s \ge\delta_0^{s-\alpha}C^{\frac{\alpha}{2}}\eta(C_U).}
-These cylinders cover a set of measure #{1}. The sum of their
-measures is at least #{1}, and the covering sum is at least
-#{\delta_0^{s-\alpha}C^{\frac{\alpha}{2}}}. For #{s=0} the
-content is the least number of nonempty sets in a cover,
-hence equals #{1}.}
+In this remaining case the cylinders cover every point
+outside the singletons. Those singletons form a set of
+measure #{0}, so the sum of the cylinder measures is at
+least #{1}. Since #{\delta_0^{\alpha}=C^{\frac{\alpha}{2}}},
+the constant #{\delta_0^{s-\alpha}C^{\frac{\alpha}{2}}} equals
+#{\delta_0^s}. The small-diameter covering sum is therefore
+at least #{\delta_0^s}, the same bound as the one term from
+a set of diameter at least #{\delta_0}. For #{s=0} the
+content is the least number of
+nonempty sets in a cover, hence equals #{1}.}
 }
