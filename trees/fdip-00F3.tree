@@ -1,0 +1,70 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{The energy determines a nonnegative generator}
+\date{2026-11-07}
+
+\p{Let #{E_1} and #{F} be as in \ref{fdip-00F1}. For each
+#{f\in L^2(X,\mu)} there is a unique #{Gf\in F} with
+#{E_1(Gf,v)=\int_X fv\,d\mu} for every #{v\in F}. The
+operator #{G} is bounded and self-adjoint on
+#{L^2(X,\mu)}, #{(f,Gf)\ge 0}, #{\|G\|\le 1}, and #{G} is
+injective. On the domain #{\{Gf:f\in L^2(X,\mu)\}} the
+operator #{H_\mu=G^{-1}-I} is nonnegative and self-adjoint,
+and
+##{E(u,v)=\int_X(H_\mu u)\,v\,d\mu}
+for every #{u} in that domain and every #{v\in F}. The same
+construction on the subspace #{F_0} of \ref{fdip-00F2}
+gives a nonnegative self-adjoint operator with form domain
+#{F_0}. Set #{\Delta_\mu=-H_\mu} on the first domain.}
+
+\proof{
+\p{Let #{\Lambda} be a bounded real-linear functional on the
+Hilbert space #{(F,E_1)}. If #{\Lambda=0}, represent it by
+the zero vector. Otherwise its kernel #{K} is a proper
+closed subspace. Take #{w\notin K}, and let #{d} be the
+infimum of #{E_1(w-z,w-z)} over #{z\in K}. Choose #{v_j\in K}
+with this quantity approaching #{d}. Expanding the quadratic
+form gives
+##{E_1(v_j-v_k,v_j-v_k)=2E_1(w-v_j,w-v_j)+2E_1(w-v_k,w-v_k)-4E_1\bigl(w-\tfrac{v_j+v_k}{2},w-\tfrac{v_j+v_k}{2}\bigr).}
+The midpoint lies in #{K}, so its distance from #{w} is at
+least #{d}. The displayed quantity is therefore at most
+#{2E_1(w-v_j,w-v_j)+2E_1(w-v_k,w-v_k)-4d}, which tends to
+zero. Thus #{(v_j)} is Cauchy, and its limit #{v} lies in
+#{K}. For #{z\in K} and real #{t}, the value
+#{E_1(w-v-tz,w-v-tz)} is at least #{E_1(w-v,w-v)}.
+Differentiating at #{t=0} gives #{-2E_1(w-v,z)=0}, so
+#{w-v} is orthogonal to #{K}. Set #{n=w-v}. This vector
+is nonzero because #{w\notin K}. For arbitrary #{x}, the vector
+#{x-(\Lambda(x)/\Lambda(n))n} lies in #{K}, hence is
+orthogonal to #{n}. Therefore
+#{\Lambda(x)=E_1(x,cn)} with
+#{c=\Lambda(n)/E_1(n,n)}. Apply this to
+#{\Lambda(v)=\int fv\,d\mu}, which is bounded by
+#{\|f\|_2\sqrt{E_1(v,v)}}. The resulting vector is #{Gf}.}
+
+\p{The identity #{E_1(Gf,Gf)=\int f\,Gf\,d\mu} gives
+#{\|Gf\|_2\le\|f\|_2} and #{(f,Gf)\ge 0}. Symmetry of
+#{E_1} gives #{\int f\,Gg\,d\mu=\int g\,Gf\,d\mu}. If
+#{Gf=0}, then #{\int fv\,d\mu=0} for every #{v\in F}, so
+#{f=0} by \ref{fdip-00F2}.}
+
+\p{The formula #{H_\mu(Gf)=f-Gf} is well defined because
+#{G} is injective. For #{u=Gf} and #{v\in F},
+##{E(u,v)=E_1(u,v)-\int_X uv\,d\mu=\int_X(f-u)v\,d\mu.}
+The right-hand side is #{\int(H_\mu u)v\,d\mu}, and
+#{E(u,u)\ge 0}. Symmetry of #{E} makes #{H_\mu}
+symmetric. The identity #{(H_\mu+I)Gf=f} shows that
+#{H_\mu+I} maps the domain onto #{L^2(X,\mu)}. If #{w} is
+in the adjoint domain and the adjoint sends #{w} to #{z},
+then #{((H_\mu+I)u,w)=(u,z+w)} for every #{u} in the
+domain, so #{w} equals #{(H_\mu+I)^{-1}(z+w)} and
+#{H_\mu w=z}. Thus #{H_\mu} is self-adjoint.}
+
+\p{The resistance estimate in \ref{fdip-00F1} bounds point
+values by #{E_1}, so #{F_0} is closed. \ref{fdip-00F2}
+makes it dense in #{L^2(X,\mu)}. The same representation
+applies inside #{F_0}. The sign in #{\Delta_\mu=-H_\mu}
+names this generator.}
+}

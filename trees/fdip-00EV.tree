@@ -1,0 +1,60 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{Cylinder weights extend to a Borel probability}
+\date{2026-11-07}
+
+\p{Let #{\mu_1,\mu_2,\mu_3} be positive reals summing to #{1},
+and let #{\Sigma} be the infinite words on #{\{1,2,3\}}.
+Write #{C_w} for the words that begin with a finite word
+#{w}. There is a Borel probability #{\nu} on #{\Sigma} with
+##{\nu(C_w)=\mu_{w_1}\cdots\mu_{w_n}}
+whenever #{w} has length #{n}. The running choice is
+#{\mu_i=\frac{1}{3}}.}
+
+\proof{
+\p{The cylinder #{C_w} is the disjoint union of its three
+one-letter extensions, and those weights sum to the weight
+of #{C_w}. Let #{A} be the finite unions of cylinders.
+Refinement to a common length shows that a finite disjoint
+decomposition has a mass independent of the chosen
+cylinders, so the formula defines a finitely additive
+probability on the algebra #{A}. Each set in #{A} is
+compact, being a finite union of cylinders. A countable
+cover of a set in #{A} by sets in #{A} therefore has a
+finite subcover, and finite additivity gives countable
+additivity on #{A}.}
+
+\p{For an arbitrary set #{E} define #{\nu_*(E)} to be the
+infimum of #{\sum\nu(B_j)} over covers of #{E} by sets
+#{B_j\in A}. This set function vanishes on the empty set,
+is monotone, and is countably subadditive. Compactness
+gives #{\nu_*(B)=\nu(B)} for #{B\in A}. Call #{E}
+measurable when
+#{\nu_*(T)\ge\nu_*(T\cap E)+\nu_*(T\cap E^{c})}
+for every test set #{T}. Subadditivity supplies the reverse
+inequality. If #{E\in A} and #{T} is covered by sets of
+#{A} up to a small tolerance, those sets split along #{E}
+into members of #{A}, so #{E} is measurable.}
+
+\p{The inequality is symmetric in a set and its complement.
+Let #{E} and #{F} be measurable. Apply it to #{E}, then to
+#{F} on each of the two pieces:
+##{\nu_*(T)\ge\nu_*(T\cap E\cap F)+\nu_*(T\cap E\cap F^{c})+\nu_*(T\cap E^{c}\cap F)+\nu_*(T\cap E^{c}\cap F^{c}).}
+The first three sets cover #{T\cap(E\cup F)}. Subadditivity
+therefore yields the same inequality for #{E\cup F}, so a
+finite union of measurable sets is measurable. Complements
+give finite intersections. For a countable union,
+successive differences produce a disjoint decomposition to
+which the finite case applies. At stage #{n} the remainder
+is at least the complement of the whole union, and
+countable subadditivity on that union closes the
+inequality. The union is measurable. The test set equal to
+the union, together with subadditivity, gives
+#{\nu_*(E)=\sum_i\nu_*(E_i)}. The measurable sets form a
+#{\sigma}-algebra containing #{A}. Every open set is a
+countable union of cylinders, hence measurable, and so is
+every Borel set. Restricting #{\nu_*} gives the Borel
+probability.}
+}

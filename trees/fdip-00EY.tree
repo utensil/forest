@@ -1,0 +1,44 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{The quotient carries the cylinder law}
+\date{2026-11-07}
+
+\p{Let #{\nu} be the product of \ref{fdip-00EV}, and let
+#{\varphi:K\to X} be the homeomorphism of \ref{fdip-00EU}.
+Set #{\mu=\varphi_*(\pi_*\nu)}. Then #{\mu} is a Borel
+probability on #{X}. For a word #{w} of length #{n}, the
+image of the cell #{K_w} has measure
+#{\mu_{w_1}\cdots\mu_{w_n}}. Every nonempty open set has
+positive measure, and every finite set has measure zero. A
+junction point does not receive the sum of its two cylinder
+masses.}
+
+\proof{
+\p{The maps #{\pi} and #{\varphi} are continuous, so the
+pushforward of a Borel probability is a Borel probability.
+The cell #{K_w} equals #{\pi(C_w)}. Its intersection with a
+different cell of the same length is a finite set of junction
+points, by the address criterion in \ref{fdip-00EO}.
+\ref{fdip-00F9} makes each word null, so that finite
+intersection is null.
+Hence the image of #{K_w} has measure #{\nu(C_w)}.}
+
+\p{The cell is closed. A point of the cell other than its
+three corners lies at positive Euclidean distance from every
+other cell of that length, so a small relative ball stays
+inside the cell. Removing the three corners does not change
+the measure. Let #{U} be a nonempty open set in #{X} and let
+#{x\in U}. For large #{n} the Euclidean cell of
+#{\varphi^{-1}(x)} has diameter #{2^{-n}} smaller than the
+distance from that point to the complement of
+#{\varphi^{-1}(U)}. That cell lies in the preimage and has
+positive measure, so #{\mu(U)>0}.}
+
+\p{A singleton lies in cells whose measures tend to zero along
+its address, since each factor is strictly less than #{1}.
+A finite union of singletons is null. A junction point is one
+point of a cell intersection, hence null. Each of the two
+cylinders keeps its own mass.}
+}

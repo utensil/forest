@@ -1,0 +1,42 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{Dirichlet eigenvalues agree with the pointwise operator}
+\date{2026-11-07}
+
+\p{Let #{H_\mu^{D}} be the generator on #{F_0} constructed in
+\ref{fdip-00F3}. A real number #{\lambda} and a nonzero
+#{u\in F_0} satisfy #{H_\mu^{D}u=\lambda u} if and only if
+#{u} lies in the pointwise domain of
+\citet{Definition 3.10}{kigami1996kokyuroku}, vanishes on
+#{V_0}, and #{\Delta_\mu u=-\lambda u} in the sense of
+\citet{Definition 4.1}{kigami1996kokyuroku}. The
+homeomorphism of \ref{fdip-00EU} transports the statements
+between #{K} and #{X}.}
+
+\proof{
+\p{The form identity #{E(u,u)=\lambda\int u^2\,d\mu} forces
+#{\lambda\ge 0}. Energy zero implies that #{u} is constant,
+and the only constant in #{F_0} is zero, so #{\lambda>0}
+when #{u} is an eigenfunction. Transport #{u} to #{K}.
+\citet{Theorem 3.12}{kigami1996kokyuroku} supplies #{f} in
+the pointwise domain with #{\Delta_\mu f=-\lambda u} and
+#{f=0} on #{V_0}. \citet{Theorem 3.11}{kigami1996kokyuroku}
+places #{f} in #{F}. For every test function in #{F_0} the
+boundary sum in that theorem vanishes, so
+#{E(w,f)=\lambda\int wu\,d\mu=E(w,u)}. Then
+#{E(f-u,f-u)=0}. By \ref{fdip-00EL}, energy zero on every
+finite level means the function is constant on #{V_*}, hence
+on #{X}. Both functions vanish on #{V_0}, so #{f=u}. Thus
+#{u} is a Dirichlet eigenfunction of the pointwise
+operator.}
+
+\p{Conversely, take such a pointwise eigenfunction #{v}.
+\citet{Theorem 3.11}{kigami1996kokyuroku} gives #{v\in F}
+and, for every #{w\in F_0},
+#{E(w,v)=\lambda\int wv\,d\mu}. Hence
+#{E_1(v,w)=\int(\lambda+1)vw\,d\mu}. The representation in
+\ref{fdip-00F3} yields #{v=G((\lambda+1)v)} in the domain of
+#{H_\mu^{D}}, and #{H_\mu^{D}v=\lambda v}.}
+}
