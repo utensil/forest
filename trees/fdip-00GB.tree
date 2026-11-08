@@ -1,0 +1,82 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{The weak spectrum is discrete}
+\date{2026-11-07}
+
+\p{Let #{H} be either nonnegative generator of
+\ref{fdip-00F3}, with form domain #{F} or #{F_0}. Then
+#{L^2(X,\mu)} has an orthonormal basis of eigenfunctions
+of #{H}. Indexed by multiplicity from #{k=1}, the
+eigenvalues satisfy #{\lambda_k\le\lambda_{k+1}} and
+#{\lambda_k\to\infty}. Each multiplicity is finite, the
+spectrum of #{H} is exactly this set, and only finitely
+many eigenvalues are at most a given bound.}
+
+\proof{
+\p{On a subspace #{V} of the form domain, closed in
+#{E_1}, let #{\lambda(V)} be the infimum of #{E(u)} over
+unit vectors. A minimizing sequence is bounded in #{E_1}.
+\ref{fdip-00GA} gives a subsequence convergent in
+#{L^2}. For two late unit vectors #{u} and #{v}, set
+#{w=(u+v)/2}. Then
+#{E_1(u-v)=2E_1(u)+2E_1(v)-4E_1(w)}. Since
+#{E(w)\ge\lambda(V)\|w\|_2^2} and both vectors are units,
+##{E_1(u-v)\le 2\bigl(E(u)-\lambda(V)\bigr)+2\bigl(E(v)-\lambda(V)\bigr)+(\lambda(V)+1)\|u-v\|_2^2.}
+The identity #{1-\|w\|_2^2=\tfrac{1}{4}\|u-v\|_2^2} turns
+the parallelogram upper bound into this estimate. The
+right-hand side tends to zero, so the subsequence is
+#{E_1}-Cauchy. \ref{fdip-00F1} returns the limit to the
+form domain, and the limit lies in #{V} at the infimum.}
+
+\p{For a unit minimizer #{u} and #{v\in V}, set
+#{N(t)=E(u+tv)} and #{D(t)=\|u+tv\|_2^2}. Then
+#{N(0)=\lambda(V)}, #{D(0)=1}, #{N'(0)=2E(u,v)}, and
+#{D'(0)=2(u,v)}. The derivative of #{N/D} at zero equals
+#{N'(0)-N(0)D'(0)} and vanishes, so
+#{E(u,v)=\lambda(V)(u,v)} for every #{v\in V}.}
+
+\p{Start from the whole form domain and pass to successive
+orthogonal complements. The inner product against one fixed
+vector is continuous for #{E_1}, so each complement is
+closed and sits inside the previous one. The eigenvalues
+are nondecreasing. The first eigenrelation holds for
+every test function, so \ref{fdip-00F3} gives
+#{u=G((\lambda+1)u)} and #{Hu=\lambda u} for that first
+minimizer. Suppose the first #{m} eigenrelations hold for
+every test function. Their complement carries the next
+minimizer #{u}. For an earlier eigenvector
+#{u_i}, #{E(u_i,u)=\lambda_i(u_i,u)=0}, and symmetry gives
+#{E(u,u_i)=0}. Every test function splits as a combination
+of those eigenvectors plus a vector in the complement, so
+#{E(u,v)=\lambda(u,v)} for every test function #{v}.
+\ref{fdip-00F3} again gives #{u=G((\lambda+1)u)} and
+#{Hu=\lambda u}, with #{\lambda} the infimum on that
+complement. Distinct eigenfunctions are orthogonal for
+#{E}.}
+
+\p{\ref{fdip-00EN} and \ref{fdip-00EY} give arbitrarily many
+cells of positive measure meeting on null sets, so
+#{L^2(X,\mu)} is infinite-dimensional. By \ref{fdip-00F2}
+the form domain is too, and every complement is nonzero.
+The resulting infinite orthonormal sequence cannot have
+bounded energy: \ref{fdip-00GA} would give an #{L^2}-convergent
+subsequence, while #{\|u_j-u_\ell\|_2^2=2}. Thus
+#{\lambda_k\to\infty} and each multiplicity is finite. A
+form vector #{w} orthogonal to every eigenvector lies in
+every complement. If #{w\ne 0}, then
+#{E(w)\ge\lambda_k\|w\|_2^2} for every #{k}, contradicting
+#{\lambda_k\to\infty}. Thus #{w=0}.}
+
+\p{The extended relation gives #{Gu_k=u_k/(\lambda_k+1)}.
+If #{f} is orthogonal to every #{u_k}, symmetry gives
+#{(Gf,u_k)=(f,Gu_k)=0}, so the previous paragraph yields
+#{Gf=0}. Injectivity in \ref{fdip-00F3} gives #{f=0}. The
+eigenvectors are an orthonormal basis of #{L^2(X,\mu)}.
+Multiplication by #{\lambda_k} puts #{\lambda_k} in the
+spectrum. The eigenvalue set is closed. A scalar #{z}
+outside it has positive distance from it, and multiplication
+by #{\frac{1}{\lambda_k-z}} is a bounded two-sided inverse
+of #{H-z}.}
+}

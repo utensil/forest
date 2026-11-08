@@ -1,0 +1,80 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{The natural counting function}
+\date{2026-11-07}
+
+\p{Let #{H_N} be the operator #{H_\mu} of \ref{fdip-00F3}
+and let #{H_D} be the operator constructed there on
+#{F_0}, written #{H_\mu^{D}} in \ref{fdip-00F6}. The sign
+remains #{\Delta_\mu=-H_\mu}. Evaluation at the three
+points of #{V_0} is a continuous linear map of
+#{(F,E_1)} onto #{\mathbb{R}^3}, and #{F} is the direct
+sum of #{F_0} and a complement of dimension three. With
+the eigenvalues of \ref{fdip-00GB} indexed from #{k=1},
+#{\lambda_{N,k}\le\lambda_{D,k}\le\lambda_{N,k+3}}.
+If #{N_*(\Lambda)} counts eigenvalues at most
+#{\Lambda}, then
+#{N_D(\Lambda)\le N_N(\Lambda)\le N_D(\Lambda)+3}.
+The eigenvalue #{0} of #{H_N} is simple. For the
+equal-weight measure used in \ref{fdip-00F5}, #{N_D}
+agrees with the Dirichlet counting function of that
+theorem, and
+##{0<\liminf_{\Lambda\to\infty}\frac{N_N(\Lambda)}{\Lambda^{d_s/2}}\le\limsup_{\Lambda\to\infty}\frac{N_N(\Lambda)}{\Lambda^{d_s/2}}<\infty,}
+##{\lim_{\Lambda\to\infty}\frac{2\log N_N(\Lambda)}{\log\Lambda}=d_s,}
+with that exponent #{d_s}. The cited pointwise Neumann
+identification remains unproved.}
+
+\proof{
+\p{The bound in \ref{fdip-00F1} makes evaluation at each
+point of #{V_0} continuous. \ref{fdip-00EI} extends
+arbitrary values on #{V_0}. Let #{e_i} be the extension of
+the value #{1} at one point and #{0} at the other two. A
+linear combination in #{F_0} has vanishing corner values,
+so the three extensions are independent modulo #{F_0}.
+For #{u\in F}, subtracting the combination of extensions
+with the same corner values leaves a function in #{F_0}.
+The quotient of form domains has dimension three.}
+
+\p{Let #{\rho(L)} be the supremum of #{E} on the unit
+sphere of a finite-dimensional subspace #{L}. By
+\ref{fdip-00GB} the span of the first #{k} eigenfunctions
+is orthogonal for #{E}, and the supremum on that span is
+#{\lambda_k}. A subspace of dimension #{k} meets the
+complement of the preceding eigenfunctions, because
+#{k-1} linear conditions on a space of dimension #{k}
+have a nonzero solution. A unit vector there has energy at
+least #{\lambda_k}. Thus #{\lambda_k} is the minimum of
+#{\rho} over subspaces of dimension #{k}. Every subspace
+of #{F_0} is a subspace of #{F}, so
+#{\lambda_{N,k}\le\lambda_{D,k}}. On a subspace of #{F}
+with dimension #{k+3}, the corner trace has rank at most
+three, and its kernel has dimension at least #{k} and lies
+in #{F_0}. The supremum of #{E} on the large subspace is
+at least the supremum on a #{k}-dimensional piece of that
+kernel, hence at least #{\lambda_{D,k}}. The minimum over
+those large subspaces is #{\lambda_{N,k+3}}.}
+
+\p{The eigenvalue comparison yields
+#{N_D(\Lambda)\le N_N(\Lambda)}. Indices #{m\le 3}
+contribute at most three. For #{m>3}, the shift
+#{m\mapsto m-3} injects the remaining indices into the
+Dirichlet count. Thus
+#{N_N(\Lambda)\le N_D(\Lambda)+3}. A constant lies in
+#{F}. \ref{fdip-00F1} forces energy zero to mean a
+constant, and #{\mu(X)=1} supplies a unit constant, so
+#{\lambda_{N,1}=0} is simple.}
+
+\p{\ref{fdip-00F6} matches eigenfunctions and eigenvalues of
+#{H_D} with the pointwise Dirichlet operator, so #{N_D}
+is the Dirichlet counting function of \ref{fdip-00F5}.
+Hence
+#{0\le N_N(\Lambda)\Lambda^{-d_s/2}-N_D(\Lambda)\Lambda^{-d_s/2}\le 3\Lambda^{-d_s/2}\to 0}.
+The liminf and limsup pass to #{N_N}. Since
+#{N_D(\Lambda)\to\infty},
+#{\bigl|\log N_N(\Lambda)-\log N_D(\Lambda)\bigr|\le\log\bigl(1+\frac{3}{N_D(\Lambda)}\bigr)}
+tends to #{0} and the logarithmic limit is unchanged. The
+comparison is independent of #{\frac{1}{3}}, and the
+exponent is the equal-weight one of \ref{fdip-00F5}.}
+}
