@@ -3,20 +3,21 @@
 \tag{fdip}
 \taxon{Theorem}
 \title{Pushforward of a reflection-positive law}
-\date{2026-11-07}
+\date{2026-11-08}
 
-\p{Let #{\nu} be a probability measure on a space #{\Omega}
-with an involution #{\theta}. Suppose a collection #{A_+} of
-bounded measurable complex functions satisfies
+\p{Let #{(\Omega,\mathcal{F})} and #{(\Omega',\mathcal{F}')} be
+measurable spaces, and let #{\nu} be a probability measure on
+#{(\Omega,\mathcal{F})}. Let #{\theta} and #{\theta'} be
+measurable involutions of #{\Omega} and #{\Omega'}, and let
+#{T:\Omega\to\Omega'} be measurable, with
+#{T\circ\theta=\theta'\circ T}. Let #{A_+} be a collection of
+bounded #{\mathcal{F}}-measurable complex functions such that
 ##{\int \overline{F(\theta\omega)}\,F(\omega)\,d\nu(\omega)\ge 0}
-for every #{F\in A_+}. Let #{T:\Omega\to\Omega'} be measurable,
-let #{\theta'} be an involution of #{\Omega'}, and assume
-#{T(\theta\omega)=\theta'(T\omega)}. If #{H\circ T\in A_+}
-for every function #{H} in a collection #{B_+}, then
+for every #{F\in A_+}. Let #{B_+} be a collection of bounded
+#{\mathcal{F}'}-measurable complex functions #{H} with
+#{H\circ T\in A_+}. Then
 ##{\int \overline{H(\theta'\eta)}\,H(\eta)\,d(T_*\nu)(\eta)\ge 0.}
-Boundedness on a probability space makes both integrals
-exist. This is substitution of the pullback, not a weak
-limit.}
+That bounded measurable product is integrable for #{T_*\nu}.}
 
 \p{Apply this to \ref{fdip-00FP}. Fix #{m>0} and a finite
 reflection-invariant #{S} in the dyadic index, with
@@ -31,33 +32,44 @@ block, with the same weight at the reflected site. No such
 block contains a point and its image. Let #{T} send a sample
 to the block averages, the reflected averages, and the kept
 fixed coordinates, and let #{\theta'} swap each block with
-its reflected block. Take #{B_+} to be the bounded measurable
-functions of the coarse positive coordinates. The inequality
-holds for the law of that coarse sample, with the
-normalization of \ref{fdip-00FP}. One point in a block forces
-the weight #{1} on that block. #{T} is the coordinate
-projection of \ref{fdip-00FQ} when every block contains one
-point. A block with two or more points is not identified
-with an arc precision, and a partition that contains such a
-block is not that projection.}
+its reflected block. Both coordinate spaces carry Borel sigma-algebras, so the
+continuous maps #{T} and #{\theta'} are measurable. Take
+#{B_+} to be the bounded measurable functions of the coarse
+positive coordinates. The inequality holds for the law of
+that coarse sample, with the normalization of
+\ref{fdip-00FP}. One point in a block forces the weight
+#{1} on that block. When each block has one strictly positive weight, that weight is #{1},
+and #{T}, on the surviving sites, their
+images, and the fixed points in #{S}, is the coordinate
+projection of \ref{fdip-00FQ}. The image law is that set's
+arc precision. Two positive weights in one block are not
+that projection.}
 
 \proof{
-\p{For #{H\in B_+} set #{F=H\circ T}. Intertwining gives
-#{H(\theta'(T\omega))=F(\theta\omega)}, so the pushforward
-integral equals the integral of
-#{\overline{F(\theta\omega)}\,F(\omega)} and is
-nonnegative.}
+\p{Fix #{H\in B_+} and set #{F=H\circ T}, so #{F\in A_+}.
+Conjugation and composition preserve measurability, so the
+bounded product
+##{g=\overline{H\circ\theta'}\,H}
+is measurable. Preimages preserve countable disjoint unions, so
+#{(T_*\nu)(A)=\nu(T^{-1}(A))} is a probability measure, and
+indicators, then simple functions, satisfy
+##{\int s\,d(T_*\nu)=\int (s\circ T)\,d\nu.}
+Equal-subinterval left endpoints, retaining the final value,
+define such an #{s} for bounded real measurable #{f}, with
+#{f-s} and #{(f-s)\circ T} bounded by one subinterval length.
+Simple integrals differ by at most that combined length and
+approach the integral of #{f}. Real and imaginary parts extend the
+identity to #{g}. Intertwining gives
+##{g\circ T=\overline{F\circ\theta}\,F,}
+with nonnegative source integral.}
 
 \p{On the arc, \ref{fdip-00FP} gives the inequality for
 #{A_+}. For a block #{B} with weights #{a_i},
 ##{(T\phi)_B=\sum_{i\in B}a_i\phi_i,\qquad
 (T\phi)_{\theta B}=\sum_{i\in B}a_i\phi_{\theta i}.}
-A fixed coordinate is copied. Reflection replaces
-#{\phi_i} by #{\phi_{\theta i}}, so the two averages
-exchange places and the fixed coordinates stay. Thus #{T}
-intertwines the reflections. A function in #{B_+} reads
-only averages of blocks in #{P} and the kept fixed
-coordinates, all of which are functions of the positive
-coordinates in \ref{fdip-00FP}. Its pullback lies in
-#{A_+}, and the substitution gives the coarse inequality.}
+Reflection swaps the two block averages and fixes the
+remaining coordinates, so #{T} intertwines the reflections.
+A function in #{B_+} depends measurably on the positive
+coordinates in \ref{fdip-00FP}, so its pullback lies in
+#{A_+}. The substitution gives the coarse inequality.}
 }
