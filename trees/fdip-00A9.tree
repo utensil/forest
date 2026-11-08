@@ -3,7 +3,7 @@
 \tag{fdip}
 \taxon{Theorem}
 \title{Invariant tensors count the gauge orbits}
-\date{2026-11-03}
+\date{2026-11-08}
 
 \p{Let #{G} be a finite group, with unitary irreducible
 representatives as in the [surface data](fdip-006V). Let
@@ -12,6 +12,9 @@ loops and parallel edges are allowed, and either set may be
 empty. The [gauge action](fdip-006E) of #{G^V} on connections
 #{U\in G^E} is
 ##{(g\cdot U)_e=g_{h(e)}U_eg_{s(e)}^{-1}.}
+The rule #{g\cdot U} is a left action of #{G^V}. On functions set
+#{(T_g F)(U)=F(g\cdot U)}. This pullback is a right action,
+#{T_g\circ T_h=T_{hg}}.
 A function #{F:G^E\to\mathbb C} is gauge invariant when
 #{F(g\cdot U)=F(U)} for every #{g}. The dimension of the
 gauge-invariant functions equals the number of orbits of this
@@ -69,17 +72,35 @@ the assignment component. Substituting the gauge action gives
  \rho_e(U_e)\rho_e(g_{s(e)})^{-1}v_e\bigr).}
 The right-hand side is the function of the tensor whose vector
 at #{e} is #{\rho_e(g_{s(e)})^{-1}v_e} and whose covector at
-#{e} is #{g_{h(e)}\cdot\lambda_e}. Reordering tensor factors
-assigns each vector factor to the source vertex and each
-covector factor to the head vertex. Under that reordering the
-isomorphism is equivariant for #{G^V}, and the action of
-#{g_x} touches only the factors assigned to #{x}.}
+#{e} is #{g_{h(e)}\cdot\lambda_e}. For a second group element
+#{k},
+##{(k\cdot(g\cdot U))_e
+ =k_{h(e)}(g_{h(e)}U_eg_{s(e)}^{-1})k_{s(e)}^{-1}
+ =(kg\cdot U)_e,}
+so #{k\cdot(g\cdot U)=(kg)\cdot U}. Therefore
+#{(T_g T_k F)(U)=F(k\cdot(g\cdot U))=F((kg)\cdot U)},
+and #{T_g\circ T_k=T_{kg}}, as stated for the right action.
+The outgoing map sends #{v} to #{\rho_e(g)^{-1}v}. Applying #{k}
+and then #{g} multiplies by
+#{\rho_e(g)^{-1}\rho_e(k)^{-1}=\rho_e(kg)^{-1}}. The incoming
+covector sends #{\lambda} to #{\lambda\circ\rho_e(g)}. With #{k}
+acting first, the composite is
+#{\lambda\circ\rho_e(k)\circ\rho_e(g)=\lambda\circ\rho_e(kg)}.
+Reordering tensor factors assigns each
+vector factor to the source vertex and each covector factor to
+the head vertex. Under that reordering the isomorphism
+intertwines these right actions, and the action of #{g_x}
+touches only the factors assigned to #{x}.}
 
-\p{Averaging over the group element at one vertex is a projector
-onto the tensors fixed by that vertex, and it acts on the factor
-belonging to that vertex. The average over #{G^V} is the
-composition of these commuting projectors, so its image is the
-tensor product of the local invariant spaces. The dimension of
+\p{Averaging over the group element at one vertex is the mean of
+its right action. In the square of that mean, the product of the
+two group elements runs through the group as either factor does,
+so the mean is an idempotent onto the tensors fixed by that
+vertex. It acts on the factor belonging to that vertex. Distinct
+vertices act on distinct factors, so their projectors commute.
+The average over #{G^V} is the composition of these projectors,
+and its image is the tensor product of the local invariant
+spaces. The dimension of
 the invariant tensors in one assignment is therefore the product
 of the local invariant dimensions. A function is gauge invariant
 exactly when every assignment component comes from an invariant
