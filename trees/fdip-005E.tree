@@ -3,7 +3,7 @@
 \tag{fdip}
 \taxon{Definition}
 \title{The base and its retained-law fibers}
-\date{2026-11-01}
+\date{2026-11-08}
 
 \p{Fix an incidence presentation #{\Pi=(V,E,s,h)}, with #{|V|\ge2}.
 Its parameter set and selector set are
@@ -39,6 +39,23 @@ countable universe as carriers; every finite presentation has an
 isomorphic labelled representative. There is no single action of
 #{\operatorname{Aut}(\Pi)} on all presentations.}
 
+\p{Write #{h_H} for the counting inner product on #{H=\mathbb R^V}.
+Let #{\mathcal S} consist of triples #{(H,h_H,P)} on these vertex
+spaces with #{P\in\operatorname{Sel}_V}, and let #{\mathcal D}
+consist of quadruples #{(H,h_H,Q,P)} with the same data and
+#{Q=Q^*>0}. The \newvocab{raw selector map} and the
+\newvocab{sufficient Gaussian data map} are
+##{\begin{aligned}
+s_{\mathrm{sel}}:\mathcal B&\longrightarrow\mathcal S,
+&s_{\mathrm{sel}}(b)&=(H,h_H,P),\\
+j:\mathcal B&\longrightarrow\mathcal D,
+&j(b)&=(H,h_H,d^*Wd+m^2I,P).
+\end{aligned}}
+The map #{s_{\mathrm{sel}}} extracts the supplied projector; it does not choose one
+from the incidence data. Both maps forget incidence. The metric
+specifies the adjoints and the induced Euclidean volumes, so there
+is no independent volume choice in these tuples.}
+
 \p{The \newvocab{selected-structure map} is
 ##{\sigma:\mathcal B\longrightarrow\operatorname{Ob}(\mathcal Q),\qquad
 \sigma(b)=(X,S_P),\quad X=\operatorname{im}P,}
@@ -51,6 +68,18 @@ The [transport identities](fdip-005C) and ordinary restriction of
 composites prove functoriality. The symbol #{\sigma} denotes this
 assignment, whereas #{P:H\to H} is the field-space projector.}
 
+\p{In terms of the sufficient data, this is #{\sigma=\kappa\circ j},
+where
+##{\begin{aligned}
+\kappa:\mathcal D&\longrightarrow\operatorname{Ob}(\mathcal Q),\\
+\kappa(H,h_H,Q,P)&=(X,C_P^{-1}),\\
+X&=\operatorname{im}P,\qquad C_P=(PQ^{-1}P)|_X.
+\end{aligned}}
+The image carries the restricted metric. The positivity and inverse
+in this formula are supplied by \ref{fdip-005B}. Thus the output is
+an operator on its specified Euclidean space, including when the
+dimension varies.}
+
 \p{The retained-law fiber over #{b} is the probability space
 ##{\mathcal F_b=(X,\mathcal B(X),\nu_b),\qquad
 \nu_b=N_X(0,S_P^{-1}).}
@@ -61,6 +90,26 @@ specified space, rather than a bare covariance matrix.
 If an interaction is additionally supplied, its induced retained
 vertices require that further data; they are not part of the present
 Gaussian tuple.}
+
+\p{Gaussian induction assigns to #{(X,S)\in\operatorname{Ob}(\mathcal Q)}
+the probability space #{\iota(X,S)=(X,\mathcal B(X),N_X(0,S^{-1}))},
+using the Euclidean volume of #{X}. Thus
+#{\mathcal F_b=(\iota\circ\kappa\circ j)(b)}.
+For an arrow with selected isometry
+#{U_X:X\to X'}, observable pullback is
+##{U_X^*:L^1(X',\nu_{b'})\longrightarrow L^1(X,\nu_b),
+\qquad U_X^*F'=F'\circ U_X.}
+Here #{L^1} denotes actual integrable real Borel functions, as in
+\ref{fdip-000E}. Integrability is preserved by the measure transport
+for \vocabk{background arrows}{fdip-005C}.
+Successive selected isometries
+#{U_X:X\to X'} and #{V_X:X'\to X''} obey
+#{(V_XU_X)^*=U_X^*V_X^*}; the identity pulls back to the identity.
+For a measure-preserving left configuration action #{a_g} on #{X},
+this convention gives the right observable action
+#{a_g^*a_h^*=a_{hg}^*}.
+The projection #{P:H\to X} and these isometries are continuous,
+hence measurable for the Borel sigma-algebras.}
 
 \p{Forgetting #{P} gives the unselected weighted incidence data
 #{(\Pi,w,m)} and their full law #{\mu_Q}. It does not by itself
