@@ -3,7 +3,7 @@
 \tag{fdip}
 \taxon{Theorem}
 \title{Ordered exterior operators span the endomorphisms}
-\date{2026-11-02}
+\date{2026-11-08}
 
 \p{On every square torus the kernel of #{d+d^\dagger} has dimension
 #{4}, by the [Hodge theorem](fdip-0090). For periods at least #{3},
@@ -19,8 +19,13 @@ indexed by subsets #{I}, written in increasing order, and with
 the basis are the linear operators
 ##{\epsilon_i(e_I)=e_i\wedge e_I,}
 ##{\iota_i(e_I)=0}
-when #{i\notin I}, and, when #{i} occupies position #{p} in #{I},
+when #{i\notin I}. When #{i\in I}, let
+#{p=\lvert\{j\in I:j<i\}\rvert}
+and set
 ##{\iota_i(e_I)=(-1)^p e_{I\setminus\{i\}}.}
+The singleton has #{p=0}, so #{\iota_i(e_i)=1}. For the factor
+in place #{j}, counted from one, #{p=j-1}. That is the exponent
+of #{(-1)^{j-1}} in the ordered contraction of \ref{fdip-000P}.
 For subsets #{S} and #{T}, write #{\epsilon_S} and #{\iota_T} for
 the compositions of these operators in increasing index order, the
 largest index acting first, and write
@@ -51,12 +56,17 @@ their order is exchanged, so
 #{i} at most once, so #{\iota_i^2=0}.}
 
 \p{For the contractions, take #{i\ne j} and suppose both lie in
-#{I}, with positions #{p} and #{r} and with #{i<j}, so #{p<r}.
-Removing #{j} first contributes #{(-1)^r}, and #{i} is still at
-position #{p}, so the second removal contributes #{(-1)^p}.
-Removing #{i} first contributes #{(-1)^p}, after which #{j} stands
-one place earlier, and the second removal contributes #{(-1)^{r-1}}.
-The two signs are opposite, and the remaining monomial is the same.
+#{I}. Let #{p} be the number of indices of #{I} smaller than #{i},
+and let #{r} be the number smaller than #{j}. Order the labels
+so that #{i<j}.
+Removing #{j} first contributes #{(-1)^r}, and the count for #{i}
+is unchanged, so the second removal contributes #{(-1)^p}.
+Removing #{i} first contributes #{(-1)^p}. The remaining set has
+count #{r-1} below #{j}, so the second removal contributes
+#{(-1)^{r-1}}. Both orders remove #{i} with sign #{(-1)^p}. The
+two signs for removing #{j} differ by the factor #{-1}. The
+products therefore differ by #{-1}, the remaining monomial is the
+same, and the sum is zero.
 If either index is missing, both double contractions vanish. Hence
 #{\iota_i\iota_j+\iota_j\iota_i=0}.}
 
@@ -67,22 +77,25 @@ still omits #{j}, so the later contraction vanishes as well. If
 #{j\in I} and #{i\in I}, exterior multiplication of the input
 vanishes, and the contraction still leaves #{i} in place, so the
 later exterior multiplication vanishes. The remaining pattern is
-#{j\in I} and #{i\notin I}. Let #{p} be the position of #{j} and
-let #{q} be the number of indices of #{I} smaller than #{i}.
-Removing #{j} contributes #{(-1)^p}. If #{i<j}, wedging #{e_i}
-back contributes the same sign #{(-1)^q} that #{e_i\wedge e_I}
-carries, while the later removal of #{j} from #{I\cup\{i\}}
-contributes #{(-1)^{p+1}}, because #{i} stands before #{j}. If
-#{i>j}, wedging #{e_i} after the removal contributes
-#{(-1)^{q-1}}, because #{j} was one of the indices counted by
-#{q}, while the removal of #{j} from #{I\cup\{i\}} still
-contributes #{(-1)^p}. In both subcases the two compositions land
-on the same monomial with opposite signs. If #{i=j} and
-#{i\notin I}, the contraction of the input vanishes and
-#{\iota_i\epsilon_i} returns #{e_I}, and the product of the two
-signs #{(-1)^q} is #{1}. If #{i\in I}, exterior multiplication of
-the input vanishes and #{\epsilon_i\iota_i} returns #{e_I}, and the
-product of the two signs #{(-1)^p} is #{1}. Therefore
+#{j\in I} and #{i\notin I}. Let #{p} be the number of indices of
+#{I} smaller than #{j}, and let #{q} be the number smaller than
+#{i}. The wedge #{e_i\wedge e_I} contributes #{(-1)^q}, and removal
+of #{j} from #{I} contributes #{(-1)^p}. If #{i<j}, removal of
+#{j} from #{I\cup\{i\}} contributes #{(-1)^{p+1}}, while the wedge
+of #{e_i} into #{I\setminus\{j\}} still contributes #{(-1)^q}. If
+#{i>j}, removal of #{j} from #{I\cup\{i\}} still contributes
+#{(-1)^p}, while the wedge into #{I\setminus\{j\}} contributes
+#{(-1)^{q-1}}, because #{j} was counted by #{q}. In both subcases
+the two compositions land on the same monomial. The product of
+the signs in one order is the product in the other order
+multiplied by #{-1}, so the sum is zero. If #{i=j} and
+#{i\notin I}, the contraction of the input vanishes. Insertion
+uses the count #{q}, and removal of that inserted factor uses the
+same count, so #{\iota_i\epsilon_i} returns #{e_I} and the product
+of the signs is #{1}. If #{i\in I}, exterior multiplication of the
+input vanishes. Removal uses the count #{p}, and the wedge that
+restores #{i} uses the same count, so #{\epsilon_i\iota_i} returns
+#{e_I} and the product of the signs is #{1}. Therefore
 #{\epsilon_i\iota_j+\iota_j\epsilon_i=\delta_{ij}I}.}
 
 \p{The square of #{\gamma_i} is
@@ -111,9 +124,9 @@ meets the row in an earlier column. The matrix is consequently
 lower triangular, with units #{\pm 1} on the diagonal. Given a
 target endomorphism, its coefficients against the #{M_{S,T}}
 are the unique solution of that system: start from the empty
-second set, invert the diagonal unit, and at each later row use
-the coefficients already found. The operators are therefore a
-basis.}
+second set, multiply by the diagonal entry #{\pm 1}, whose square
+is #{1}, and at each later row use the coefficients already found.
+The operators are therefore a basis.}
 }
 
 \p{For a single basis vector the 4 operators are the identity,
