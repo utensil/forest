@@ -30,41 +30,48 @@ right-hand side tends to zero, so the subsequence is
 #{E_1}-Cauchy. \ref{fdip-00F1} returns the limit to the
 form domain, and the limit lies in #{V} at the infimum.}
 
-\p{For a unit minimizer #{u} and #{v\in V}, the derivative
-at #{t=0} of
-#{\frac{E(u+tv)}{\|u+tv\|_2^2}} vanishes. That derivative
-equals #{2E(u,v)-2\lambda(V)(u,v)}, so
-#{E(u,v)=\lambda(V)(u,v)}. \ref{fdip-00F3} gives
-#{u=G\bigl((\lambda(V)+1)u\bigr)}, and #{H} sends #{u} to
-#{\lambda(V)u}.}
+\p{For a unit minimizer #{u} and #{v\in V}, set
+#{N(t)=E(u+tv)} and #{D(t)=\|u+tv\|_2^2}. Then
+#{N(0)=\lambda(V)}, #{D(0)=1}, #{N'(0)=2E(u,v)}, and
+#{D'(0)=2(u,v)}. The derivative of #{N/D} at zero equals
+#{N'(0)-N(0)D'(0)} and vanishes, so
+#{E(u,v)=\lambda(V)(u,v)} for every #{v\in V}.}
 
 \p{Start from the whole form domain and pass to successive
-orthogonal complements. The inner product against one
-fixed vector is continuous for #{E_1}, so each complement
-is closed. The first eigenrelation holds for every test
-function. Suppose the first #{m} eigenvectors do. On
-their complement, the next minimizer #{u} satisfies the
-relation. For an earlier eigenvector #{u_i},
-#{E(u_i,u)=\lambda_i(u_i,u)=0}, and symmetry gives
+orthogonal complements. The inner product against one fixed
+vector is continuous for #{E_1}, so each complement is
+closed and sits inside the previous one. The eigenvalues
+therefore increase. The first eigenrelation holds for every
+test function. Suppose the first #{m} do. Their complement
+carries the next minimizer #{u}. For an earlier eigenvector
+#{u_i}, #{E(u_i,u)=\lambda_i(u_i,u)=0}, and symmetry gives
 #{E(u,u_i)=0}. Every test function splits as a combination
 of those eigenvectors plus a vector in the complement, so
-the relation for #{u} extends to the whole form domain.
-The eigenvalues increase, and distinct eigenfunctions are
-orthogonal for #{E}.}
+#{E(u,v)=\lambda(u,v)} for every test function #{v}. Only
+then does \ref{fdip-00F3} give #{u=G((\lambda+1)u)} and
+#{Hu=\lambda u}, with #{\lambda} the infimum on that
+complement. Distinct eigenfunctions are orthogonal for
+#{E}.}
 
-\p{An infinite orthonormal sequence of bounded energy is
-bounded in #{E_1}. \ref{fdip-00GA} would give an
-#{L^2}-convergent subsequence, while
-#{\|u_j-u_\ell\|_2^2=2}. Thus each eigenspace is finite
-and #{\lambda_k\to\infty}. A vector of the form domain
-orthogonal to every eigenvector lies in every complement,
-so its energy exceeds every multiple of its squared norm
-and the vector is #{0}. \ref{fdip-00F2} makes the
-eigenvectors an orthonormal basis of #{L^2}. On that
-basis #{H} multiplies the #{k}-th coefficient by
-#{\lambda_k}. If no eigenvalue equals #{z}, the distance from
-#{z} to the eigenvalues is positive. Multiplication of
-the #{k}-th coefficient by
-#{\frac{1}{\lambda_k-z}} is a bounded inverse of
-#{H-z}. The spectrum consists of these eigenvalues.}
+\p{\ref{fdip-00EN} and \ref{fdip-00EY} give arbitrarily many
+cells of positive measure meeting on null sets, so
+#{L^2(X,\mu)} is infinite-dimensional. By \ref{fdip-00F2}
+the form domain is too, and every complement is nonzero.
+The resulting infinite orthonormal sequence cannot have
+bounded energy: \ref{fdip-00GA} would give an #{L^2}-convergent
+subsequence, while #{\|u_j-u_\ell\|_2^2=2}. Thus
+#{\lambda_k\to\infty} and each multiplicity is finite. A
+form vector orthogonal to every eigenvector lies in every
+complement, hence is zero.}
+
+\p{The extended relation gives #{Gu_k=u_k/(\lambda_k+1)}.
+If #{f} is orthogonal to every #{u_k}, symmetry gives
+#{(Gf,u_k)=(f,Gu_k)=0}, so the previous paragraph yields
+#{Gf=0}. Injectivity in \ref{fdip-00F3} gives #{f=0}. The
+eigenvectors are an orthonormal basis of #{L^2(X,\mu)}.
+Multiplication by #{\lambda_k} puts #{\lambda_k} in the
+spectrum. The eigenvalue set is closed. A scalar #{z}
+outside it has positive distance from it, and multiplication
+by #{\frac{1}{\lambda_k-z}} is a bounded two-sided inverse
+of #{H-z}.}
 }
