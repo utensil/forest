@@ -41,14 +41,17 @@ form domain, and the limit lies in #{V} at the infimum.}
 orthogonal complements. The inner product against one fixed
 vector is continuous for #{E_1}, so each complement is
 closed and sits inside the previous one. The eigenvalues
-therefore increase. The first eigenrelation holds for every
-test function. Suppose the first #{m} do. Their complement
-carries the next minimizer #{u}. For an earlier eigenvector
+are nondecreasing. The first eigenrelation holds for
+every test function, so \ref{fdip-00F3} gives
+#{u=G((\lambda+1)u)} and #{Hu=\lambda u} for that first
+minimizer. Suppose the first #{m} eigenrelations hold for
+every test function. Their complement carries the next
+minimizer #{u}. For an earlier eigenvector
 #{u_i}, #{E(u_i,u)=\lambda_i(u_i,u)=0}, and symmetry gives
 #{E(u,u_i)=0}. Every test function splits as a combination
 of those eigenvectors plus a vector in the complement, so
-#{E(u,v)=\lambda(u,v)} for every test function #{v}. Only
-then does \ref{fdip-00F3} give #{u=G((\lambda+1)u)} and
+#{E(u,v)=\lambda(u,v)} for every test function #{v}.
+\ref{fdip-00F3} again gives #{u=G((\lambda+1)u)} and
 #{Hu=\lambda u}, with #{\lambda} the infimum on that
 complement. Distinct eigenfunctions are orthogonal for
 #{E}.}
@@ -61,8 +64,10 @@ The resulting infinite orthonormal sequence cannot have
 bounded energy: \ref{fdip-00GA} would give an #{L^2}-convergent
 subsequence, while #{\|u_j-u_\ell\|_2^2=2}. Thus
 #{\lambda_k\to\infty} and each multiplicity is finite. A
-form vector orthogonal to every eigenvector lies in every
-complement, hence is zero.}
+form vector #{w} orthogonal to every eigenvector lies in
+every complement. If #{w\ne 0}, then
+#{E(w)\ge\lambda_k\|w\|_2^2} for every #{k}, contradicting
+#{\lambda_k\to\infty}. Thus #{w=0}.}
 
 \p{The extended relation gives #{Gu_k=u_k/(\lambda_k+1)}.
 If #{f} is orthogonal to every #{u_k}, symmetry gives
