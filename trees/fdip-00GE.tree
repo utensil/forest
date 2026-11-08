@@ -1,0 +1,55 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Corollary}
+\title{A fixed selector admits inequivalent backgrounds}
+\date{2026-11-08}
+
+\p{Fix a \vocabk{selected Gaussian background}{fdip-005A}
+#{b_0=(\Pi,w,m,P)} with a non-loop edge #{e_0}.
+Take #{O=\{e_0\}}, or take the edge orbit of #{e_0} under a
+fixed \vocabk{finite signed graph symmetry}{fdip-004S}.
+Put
+##{\begin{aligned}
+I&=\left(-\min_{e\in O}w_e,\infty\right),\\
+w_e^{(t)}&=w_e+t\mathbf1_O(e),\qquad t\in I,\\
+b_t&=(\Pi,w^{(t)},m,P).
+\end{aligned}}
+Let #{Q_t} be the precision of #{b_t}. All weights are positive and the
+\vocabk{raw selector map}{fdip-005E} is constant. In the orbit
+case the given symmetry is preserved. The full
+\vocabk{Gaussian induced action}{fdip-005R} strictly increases:
+##{\frac{d}{dt}\mathcal W_{\mathrm{full}}(b_t)
+ =\frac12\sum_{e\in O}d_e^TQ_t^{-1}d_e>0.}
+Consequently distinct parameters give no directed or signed
+\vocabk{background arrow}{fdip-005C}. On this family
+#{\mathcal W_{\mathrm{full}}} cannot factor through
+#{s_{\mathrm{sel}}}.}
+
+\proof{
+\p{The set #{O} is nonempty and consists of non-loop edges:
+the signed endpoint condition preserves that property. In the orbit
+case, adding the same weight to every edge preserves the original weight
+invariance. A representation and idempotent supplying #{P} can
+therefore stay fixed. In either case
+##{Q_t=Q_0+t\sum_{e\in O}d_ed_e^T>0,}
+because the weights stay positive and #{m>0}. The derivative is
+\ref{fdip-005S} along this weight direction. Every summand is
+nonnegative, and the one for #{e_0} is strictly positive since
+#{d_{e_0}\ne0} and #{Q_t^{-1}>0}. The positive derivative on the
+interval #{I} proves strict increase. Any background arrow would
+orthogonally conjugate the precisions and hence preserve their
+determinants, contradicting this increase. Finally, a function
+of the constant raw selector data would be constant on the family.}
+}
+
+\p{This conclusion concerns the full action; it does not require
+that every retained observable vary. Retained dependence is
+explicit in the existing positive half-turn sector of
+\ref{fdip-003S}: at fixed #{a=m^2>0} and for #{t>0}, its precision eigenvalues
+are #{a} and #{a+2+2t}. Thus the selected law varies with #{t},
+and the squared-norm expectation of \ref{fdip-005K} is
+##{\operatorname{tr}_{V_+}C_P=\frac1a+\frac1{a+2+2t}.}
+The projector remains fixed. In this family the
+\vocabk{selected-structure map}{fdip-005E} #{\sigma}, which
+includes the retained precision, varies along with the law.}
