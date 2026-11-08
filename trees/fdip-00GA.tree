@@ -1,0 +1,57 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{The form embedding is compact}
+\date{2026-11-07}
+
+\p{Let #{(E,F)} and #{E_1} be as in \ref{fdip-00F1}, on the
+compact resistance space of \ref{fdip-00EN}. The inclusion
+of #{(F,E_1)} into #{L^2(X,\mu)} is compact. The same
+holds for the closed subspace #{F_0}. The resolvent #{G}
+of \ref{fdip-00F3} is a compact operator on
+#{L^2(X,\mu)}, and so is the resolvent of the form on
+#{F_0}.}
+
+\proof{
+\p{Let #{D} be the resistance diameter of #{X}.
+\ref{fdip-00F1} gives
+#{|u(x)-u(y)|^2\le R(x,y)\,E(u)} and
+#{\bigl|u(x)-\int u\,d\mu\bigr|\le\sqrt{D\,E(u)}}. Since
+#{\mu(X)=1}, the integral is at most #{\|u\|_2}. A set with
+#{E_1\le M} is therefore bounded in the supremum norm by
+#{\sqrt{M}+\sqrt{DM}} and equicontinuous, with modulus
+#{\sqrt{M\,R(x,y)}}.}
+
+\p{Let #{(u_j)} be such a sequence. For each integer
+#{n\ge 1}, compactness of #{(X,R)} supplies a finite
+#{1/n}-net #{Q_n}. The union #{Q} is countable. Enumerate
+#{Q=\{q_i\}}. The supremum bound puts the values at
+#{q_1} in a bounded interval, so some subsequence
+converges there. From that subsequence, extract one that
+converges at #{q_2}, and continue. Let #{v_m} be the
+#{m}-th term of the #{m}-th subsequence. Then #{(v_m)}
+converges at every point of #{Q}.}
+
+\p{Fix #{\varepsilon>0} and choose #{\delta>0} so that
+#{\sqrt{M\delta}<\varepsilon}. Choose #{n} with
+#{1/n\le\delta}, so that #{Q_n} is a finite #{\delta}-net.
+For all large indices #{j,\ell}, the values #{v_j} and
+#{v_\ell} differ by less than #{\varepsilon} at every
+point of #{Q_n}. If #{R(x,q)\le\delta}, then
+#{|v_j(x)-v_\ell(x)|\le|v_j(x)-v_j(q)|+|v_j(q)-v_\ell(q)|+|v_\ell(q)-v_\ell(x)|<3\varepsilon}.
+The subsequence is uniformly Cauchy. The resistance
+modulus passes to the limit, which is continuous. Since
+#{\mu(X)=1}, uniform convergence yields convergence in
+#{L^2}. Thus the inclusion is compact.}
+
+\p{\ref{fdip-00F3} makes #{F_0} closed in #{E_1}. A bounded
+sequence in #{F_0} is bounded in #{F}, so it has a
+subsequence convergent in #{L^2}. For #{\|f\|_2\le 1},
+\ref{fdip-00F3} gives #{\|Gf\|_2\le\|f\|_2} and
+#{E_1(Gf,Gf)=\int f\,Gf\,d\mu}. The integral is at most
+#{\|f\|_2\|Gf\|_2}, so #{E_1(Gf)\le 1}.
+The image of the unit ball therefore has compact closure
+in #{L^2}. The representation inside #{F_0} gives the
+same bound for its resolvent.}
+}
