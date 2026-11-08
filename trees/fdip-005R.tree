@@ -3,7 +3,7 @@
 \tag{fdip}
 \taxon{Definition}
 \title{The Gaussian induced action}
-\date{2026-11-01}
+\date{2026-11-08}
 
 \p{Fix a finite nonempty vertex set #{V}, with #{n=|V|}, and a
 finite set #{E} of labelled edges with source and head maps. Orientations
@@ -26,6 +26,56 @@ The [Gaussian normalizer](fdip-002T) gives
 so #{-\log Z=\mathcal W-(n/2)\log(2\pi)}. This scalar is
 invariant under graph relabeling and orthogonal conjugation of #{Q}.
 It does not by itself retain all graph or selector data.}
+
+\p{For a \vocabk{selected Gaussian background}{fdip-005A} #{b}, use the
+orthogonal split #{H=X\mathbin\perp Y} with #{X=\operatorname{im}P}
+and #{Y=\ker P}. Put #{r=\dim X} and #{q=\dim Y}, so #{r+q=n},
+and write
+##{Q=\begin{pmatrix}A&K\\K^*&D_Y\end{pmatrix},\qquad
+S_P=A-KD_Y^{-1}K^*.}
+The blocks #{D_Y} and #{S_P} are positive by \ref{fdip-005B}.
+The full, retained and eliminated scalar actions are
+##{\begin{aligned}
+\mathcal W_{\mathrm{full}}&=\mathcal W=\tfrac12\log\det_H Q,\\
+\mathcal W_X&=\tfrac12\log\det_X S_P,\\
+\mathcal W_{\mathrm{elim}}&=\tfrac12\log\det_Y D_Y.
+\end{aligned}}
+These are functions of the \vocabk{sufficient Gaussian data}{fdip-005E}
+#{j(b)}. At fixed #{Q}, #{\mathcal W_{\mathrm{full}}} is independent
+of #{P}. The two other terms may change with the selected space.}
+
+\p{Use the induced Euclidean volumes #{\lambda_H,\lambda_X,\lambda_Y}.
+The determinant and fiber-integral identities of \ref{fdip-000D},
+with the inverse-compression identification in \ref{fdip-005B}, give
+##{\begin{aligned}
+\det_H Q&=\det_X S_P\det_Y D_Y,\\
+\mathcal W_{\mathrm{full}}&=\mathcal W_X+\mathcal W_{\mathrm{elim}},\\
+c_Y&=(2\pi)^{q/2}e^{-\mathcal W_{\mathrm{elim}}},\\
+Z_X&=(2\pi)^{r/2}e^{-\mathcal W_X},\\
+Z_{\mathrm{full}}&=Z=c_YZ_X.
+\end{aligned}}
+In particular, for every #{x\in X},
+##{\begin{aligned}
+I_Q(x)&=\int_Y e^{-\langle x+y,Q(x+y)\rangle/2}\,d\lambda_Y(y)\\
+&=c_Ye^{-\langle x,S_Px\rangle/2}.
+\end{aligned}}
+The factor #{c_Y} uses the conditional precision on #{Y} at fixed
+#{x}, as in \ref{fdip-003A} with the summands exchanged. The
+#{Y}-marginal generally has a different precision.}
+
+\p{The retained quadratic action is #{\langle x,S_Px\rangle/2}.
+The negative logarithms of the unnormalized fiber integral and of
+the normalized retained density are, respectively,
+##{\begin{aligned}
+-\log I_Q(x)&=\tfrac12\langle x,S_Px\rangle
+   +\mathcal W_{\mathrm{elim}}-\tfrac q2\log(2\pi),\\
+-\log\frac{d\nu_b}{d\lambda_X}(x)
+ &=\tfrac12\langle x,S_Px\rangle
+   -\mathcal W_X+\tfrac r2\log(2\pi).
+\end{aligned}}
+Here #{\nu_b=P_*\mu_Q} is the Borel probability law of
+\ref{fdip-005B}; normalization is the identity #{Z=c_YZ_X}
+of \ref{fdip-000E}.}
 
 \p{For fixed #{m>0}, differentiation in the weights means
 differentiation of the smooth extension to
