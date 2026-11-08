@@ -1,0 +1,63 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{Pushforward of a reflection-positive law}
+\date{2026-11-07}
+
+\p{Let #{\nu} be a probability measure on a space #{\Omega}
+with an involution #{\theta}. Suppose a collection #{A_+} of
+bounded measurable complex functions satisfies
+##{\int \overline{F(\theta\omega)}\,F(\omega)\,d\nu(\omega)\ge 0}
+for every #{F\in A_+}. Let #{T:\Omega\to\Omega'} be measurable,
+let #{\theta'} be an involution of #{\Omega'}, and assume
+#{T(\theta\omega)=\theta'(T\omega)}. If #{H\circ T\in A_+}
+for every function #{H} in a collection #{B_+}, then
+##{\int \overline{H(\theta'\eta)}\,H(\eta)\,d(T_*\nu)(\eta)\ge 0.}
+Boundedness on a probability space makes both integrals
+exist. This is substitution of the pullback, not a weak
+limit.}
+
+\p{Apply this to \ref{fdip-00FP}. Fix #{m>0} and a finite
+reflection-invariant #{S} in the dyadic index, with
+#{|S|\ge 2}. Let #{\nu_S} be its Gaussian law and let
+#{A_+} be the bounded measurable functions of its positive
+coordinates. Let #{P} be the points of #{S} strictly between
+#{0} and #{1/2}, and keep #{0} and #{1/2} as coordinates
+when they lie in #{S}. An empty #{P} leaves only those
+coordinates. Otherwise partition #{P} into disjoint nonempty
+blocks and put nonnegative weights summing to #{1} on each
+block, with the same weight at the reflected site. No such
+block contains a point and its image. Let #{T} send a sample
+to the block averages, the reflected averages, and the kept
+fixed coordinates, and let #{\theta'} swap each block with
+its reflected block. Take #{B_+} to be the bounded measurable
+functions of the coarse positive coordinates. The inequality
+holds for the law of that coarse sample, with the
+normalization of \ref{fdip-00FP}. One point in a block forces
+the weight #{1} on that block. #{T} is the coordinate
+projection of \ref{fdip-00FQ} when every block contains one
+point. A block with two or more points is not identified
+with an arc precision, and a partition that contains such a
+block is not that projection.}
+
+\proof{
+\p{For #{H\in B_+} set #{F=H\circ T}. Intertwining gives
+#{H(\theta'(T\omega))=F(\theta\omega)}, so the pushforward
+integral equals the integral of
+#{\overline{F(\theta\omega)}\,F(\omega)} and is
+nonnegative.}
+
+\p{On the arc, \ref{fdip-00FP} gives the inequality for
+#{A_+}. For a block #{B} with weights #{a_i},
+##{(T\phi)_B=\sum_{i\in B}a_i\phi_i,\qquad
+(T\phi)_{\theta B}=\sum_{i\in B}a_i\phi_{\theta i}.}
+A fixed coordinate is copied. Reflection replaces
+#{\phi_i} by #{\phi_{\theta i}}, so the two averages
+exchange places and the fixed coordinates stay. Thus #{T}
+intertwines the reflections. A function in #{B_+} reads
+only averages of blocks in #{P} and the kept fixed
+coordinates, all of which are functions of the positive
+coordinates in \ref{fdip-00FP}. Its pullback lies in
+#{A_+}, and the substitution gives the coarse inequality.}
+}
