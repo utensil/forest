@@ -1,0 +1,73 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{Self-adjoint fields, Weyl relations and stationary states}
+\date{2026-11-09}
+
+\p{For the \vocabk{quantum scalar fields}{fdip-00H8} and
+\vocabk{conjugate momenta}{fdip-00H8}, each #{\Phi_v} and #{\Pi_v}
+is self-adjoint on its stated maximal domain, with core
+#{C_c^\infty(\mathbb R^s)}. For real #{r,z\in\mathbb R^V}, the
+\vocabk{Weyl operators}{fdip-00H8} are unitary and satisfy
+##{\begin{aligned}
+W(r,z)^{-1}&=W(-r,-z),\\
+W(r,z)&=e^{ir\cdot\Phi /2}e^{iz\cdot\Pi}e^{ir\cdot\Phi /2},\\
+W(r,z)W(r',z')
+ &=e^{-i\sigma((r,z),(r',z'))/2}W(r+r',z+z').
+\end{aligned}}
+The dot products in the exponentials are self-adjoint real
+multipliers after position or Fourier transformation.}
+
+\p{The \vocabk{real-time evolution}{fdip-00H8} is a strongly
+continuous unitary group. The \vocabk{vacuum state}{fdip-00H8}
+and \vocabk{thermal state}{fdip-00H8} are positive, normalized
+and stationary under this evolution. For either state, arbitrary
+real times and bounded insertions,
+##{|\omega(A_0\alpha_{t_1}(A_1)\cdots\alpha_{t_n}(A_n))|
+ \le\prod_{j=0}^n\|A_j\|.}
+In particular all these correlations of Weyl operators exist
+and have absolute value at most one. The potential has the full
+continuous coercive hypotheses of \ref{fdip-00H2}; no polynomial
+specialization is used.}
+
+\proof{
+\p{The multiplication operator #{\Phi_v} is self-adjoint on
+its maximal domain. The unitary Fourier transform sends
+#{\Pi_v} to real multiplication by #{\xi_v}, proving the same
+assertion for momentum. Cutoff followed by mollification
+approximates both a function and its position product in #{L^2};
+for momentum it approximates #{f,\partial_vf} in #{L^2}.
+Thus #{C_c^\infty} is a core for each operator.
+Fourier inversion gives #{(e^{iz\cdot\Pi}f)(q)=f(q+z)};
+putting the two half-phase multipliers around this translation
+gives the stated exponential factorization. These computations
+specialize \citet{Section 8.1, pp. 207-208}{teschl2014quantum}
+to the chosen coordinates.}
+
+\p{Translation invariance of #{dq} and modulus one of the phase
+give #{\|W(r,z)f\|=\|f\|}. Direct substitution gives the
+inverse #{W(-r,-z)}, so the operator is unitary. Applying two
+Weyl actions successively gives the phase
+#{r\cdot(q+z/2)+r'\cdot(q+z+z'/2)}. Subtracting the phase
+#{(r+r')\cdot(q+(z+z')/2)} leaves
+#{-\sigma((r,z),(r',z'))/2}, proving the multiplication rule.}
+
+\p{Since #{H} is self-adjoint, its spectral calculus gives
+#{V_t^*=V_{-t}} and #{V_tV_u=V_{t+u}}. Dominated convergence
+of the spectral multipliers #{e^{-it\lambda}} proves strong
+continuity. The vacuum state is a unit vector state; the thermal
+state uses the positive trace-one operator #{e^{-\beta H}/Z_\beta},
+whose finite trace follows from \ref{fdip-00H3}. Thus both are
+positive and normalized. Conjugation by #{V_t} preserves operator
+norm, and either state is bounded by that norm; for the thermal
+state this follows from the trace norm inequality. Multiplying
+the operator-norm bounds gives the correlation estimate.}
+
+\p{The ground vector evolves by the phase #{e^{-itE_0}}, and
+#{e^{-\beta H}} commutes with #{V_t}. Substitution into the
+vacuum inner product and cyclicity of the bounded/trace-class
+thermal product give #{\omega\circ\alpha_t=\omega}.
+The group identity then gives stationarity of the multi-time
+correlations under a common time translation.}
+}
