@@ -1,0 +1,73 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Example}
+\title{A coupled interacting coordinate retains memory}
+\date{2026-11-09}
+
+\p{Take the two-site specialization of the coupled chain in \ref{fdip-00GV} and
+\ref{fdip-00HD}. Retain #{x} from #{\mathsf Q=\mathbb R^2}, with}
+
+##{\begin{aligned}
+U(x,y)&=\frac{m^2}{2}(x^2+y^2)+\frac c2(x-y)^2\\
+ &\quad+\frac{\lambda_x}{24}x^4+\frac{\lambda_y}{24}y^4,
+\end{aligned}}
+
+\p{where #{m,c>0}, #{\lambda_x,\lambda_y\geq0} and at least one quartic coupling is
+positive. Then #{U\geq(m^2/2)(x^2+y^2)}, but the compressed family #{A_t} is not a
+semigroup.}
+
+\p{Write #{\psi=\psi_0}. The form domain in \ref{fdip-00H2} gives #{\psi\in
+H^1_{\mathrm{loc}}}. Suppose #{\psi\in H^k_{\mathrm{loc}}}, #{k\ge1}. Its weak
+equation #{\Delta\psi=2(U-E_0)\psi} has right side in #{H^k_{\mathrm{loc}}} because
+#{U} is smooth. For a smooth compactly supported cutoff #{\chi},}
+
+##{\Delta(\chi\psi)=\chi\Delta\psi+2\nabla\chi\cdot\nabla\psi+(\Delta\chi)\psi\in H^{k-1}.}
+
+\p{Fourier transformation gives #{\chi\psi\in H^{k+1}}: the weight
+#{(1+|\xi|^2)^{k+1}} is bounded by a constant times #{1+|\xi|^4(1+|\xi|^2)^{k-1}}.
+Nested cutoffs and induction yield every local Sobolev order. For each derivative
+order #{j}, choose #{k>j+1}; Cauchy–Schwarz makes #{|\xi|^j\widehat{\chi\psi}}
+integrable. Fourier inversion gives continuous derivatives through order #{j}. Thus
+#{\psi} is smooth. Its representative is strictly positive by \ref{fdip-00H6}.}
+
+\p{For #{f\in C_c^\infty(\mathbb R)}, the function
+#{w(x,y)=\psi(x,y)f(x)} lies in the form domain: #{f,f'} are bounded,
+#{\psi,\nabla\psi\in L^2}, and the potential-weighted integral is bounded by
+#{\|f\|_\infty^2} times the corresponding integral for #{\psi}. In distributions,}
+
+##{ (H-E_0)w=-\tfrac12\psi f''-(\partial_x\psi)f'.}
+
+\p{The right side is in #{L^2}. The identity initially paired with compactly supported
+smooth test functions extends to the whole form domain by the form-core density in
+\ref{fdip-00H2}. The form characterization of #{D(H)} therefore gives #{w\in D(H)}
+with this action. Compact support in the eliminated coordinate is unnecessary.}
+
+\p{Suppose that #{A_t} were a semigroup. \ref{fdip-00HI} gives invariance of
+#{\operatorname{Ran}J} under #{S_t}. Since this range is closed, the derivative at
+zero of #{S_tw} belongs to it whenever #{w\in D(H)\cap\operatorname{Ran}J}. Dividing
+the displayed formula by #{\psi>0} shows that}
+
+##{-\tfrac12 f''(x)-(\partial_x\log\psi)(x,y)f'(x)}
+
+\p{is a function of #{x} alone, almost everywhere, for every such #{f}. On each
+bounded interval choose #{f} with #{f'=1} there. Because #{\psi^2dq} is equivalent to
+Lebesgue measure, Fubini shows that #{\partial_x\log\psi} is independent of #{y}
+almost everywhere on that strip. Its continuity extends this to every #{(x,y)}, first
+in #{y} on almost every vertical line, then in #{x} by density. Countably many
+intervals cover #{\mathbb R}.}
+
+\p{Thus #{\partial_x\log\psi(x,y)=b(x)} everywhere. Integrating in #{x} yields
+#{\psi(x,y)=u(x)v(y)} with positive smooth #{u,v}. The eigen-equation then implies}
+
+##{U(x,y)=E_0+\frac{u''(x)}{2u(x)}+\frac{v''(y)}{2v(y)}.}
+
+\p{Its right side has zero mixed derivative, whereas #{\partial_x\partial_yU=-c\ne0},
+a contradiction. This proves failure of the semigroup law for the interacting family,
+without requiring an explicit ground-state formula. By \ref{fdip-00HI}, some
+#{t>0} and some #{f\in L^2(\rho)} satisfy #{\|(I-E)S_tJf\|>0}.}
+
+\p{When #{c=0}, the Hamiltonian and ground state factor into the two coordinates; the
+retained subspace is invariant and the compressed semigroup is the ground-state
+transform of the one-coordinate Hamiltonian. Interaction alone therefore does not
+decide the issue: the coupling to the eliminated coordinate matters.}

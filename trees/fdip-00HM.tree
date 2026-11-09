@@ -1,0 +1,90 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{Exact path projection and observables}
+\date{2026-11-09}
+
+\p{Use the \vocabk{retained vacuum embedding}{fdip-00HG} and the vacuum data of
+\ref{fdip-00HB}. Let #{\Omega=\mathsf Q^{\mathbb R}} with its cylinder sigma-algebra.
+The consistent vacuum finite-dimensional laws of \ref{fdip-00HB} determine, by \citet{Theorem 2.4.3, pp. 237-238}{tao2011measure}, a stationary
+probability measure #{\mathbb P_0} on this space. Its one-time marginal is #{\nu_0}.
+For #{\Omega_X=X^{\mathbb R}} with its cylinder sigma-algebra define}
+
+##{ (\mathcal P\omega)(t)=P\omega(t),\qquad \overline{\mathbb P}_0=\mathcal P_*\mathbb P_0.}
+
+\p{The coarse one-time law is #{\rho}. For every bounded measurable path observable #{F},}
+
+##{\int_{\Omega_X}F\,d\overline{\mathbb P}_0=\int_\Omega F\circ\mathcal P\,d\mathbb P_0.}
+
+\p{In particular, for #{0=t_0<t_1<\cdots<t_n}, #{\Delta_j=t_j-t_{j-1}} and bounded
+Borel functions #{f_j:X\to\mathbb C},}
+
+##{\mathbb E_{\overline{\mathbb P}_0}\prod_{j=0}^nf_j(x_{t_j})
+=\langle\psi_0,M_{f_0\circ P}S_{\Delta_1}M_{f_1\circ P}\cdots S_{\Delta_n}M_{f_n\circ P}\psi_0\rangle.}
+
+\proof{
+
+\p{For each finite set of times, \ref{fdip-00HB} gives a Borel
+probability on a finite-dimensional Euclidean space. These measures
+are inner regular, including the unit point mass when #{s=0}.
+Their compatibility is exactly the projection condition (2.6) of
+\citet{Theorem 2.4.3, pp. 237-238}{tao2011measure}.
+That theorem gives the unique law on the cylinder sigma-algebra.
+Uniqueness and stationarity of the finite-dimensional laws give
+stationarity of #{\mathbb P_0}.}
+
+\p{The coordinate maps of #{\mathcal P} are measurable, so #{\mathcal P} is measurable
+for the cylinder sigma-algebras. The pushforward integral identity follows first for
+indicators, then simple functions and bounded limits, as in \ref{fdip-00G8}. All
+operators in this formula are bounded. Its absolute value is at most
+#{\prod_j\|f_j\|_\infty}. Substituting the lifted observables in \ref{fdip-00HB} and
+applying the measurable pushforward identity proves the formula. The #{n=0} formula is
+integration against #{\rho}; the #{n=1} formula is
+#{\langle1,M_{f_0}A_{t_1}M_{f_1}1\rangle}.}
+
+\p{For a single-time bounded multiplier, the exact relation is}
+
+##{JM_f=M_{f\circ P}J.}
+
+\tikzfigs{0.8}{\begin{tikzpicture}[
+  every node/.style={inner sep=4pt},
+  map/.style={-{Stealth[length=2mm]},shorten >=2pt,shorten <=2pt}
+]
+\node (a) at (0,0) {$L^2(\rho)$};
+\node (b) at (3.8,0) {$L^2(\rho)$};
+\node (c) at (0,-2) {$L^2(dq)$};
+\node (d) at (3.8,-2) {$L^2(dq)$};
+\draw[map] (a) -- node[above=2mm] {$M_f$} (b);
+\draw[map] (c) -- node[below=2mm] {$M_{f\circ P}$} (d);
+\draw[map] (a) -- node[left=2mm] {$J$} (c);
+\draw[map] (b) -- node[right=2mm] {$J$} (d);
+\end{tikzpicture}}
+
+\p{A retained observable acts on the full configuration by pullback.
+The square commutes for every bounded Borel #{f}; its bottom
+multiplier uses #{f\mapsto f\circ P}, while #{P} maps fields
+in the opposite direction.}
+
+\p{The lifted multiplier preserves #{\operatorname{Ran}J} and its orthogonal
+complement: apply the same relation to #{\bar f} and take adjoints. Thus it commutes
+with #{E=JJ^*}. However, no such commutation with #{E} has been established for
+#{S_t}. In general the displayed multi-time correlation differs from}
+
+##{\langle1,M_{f_0}A_{\Delta_1}M_{f_1}\cdots A_{\Delta_n}M_{f_n}1\rangle.}
+
+\p{The latter inserts projections #{E} on both sides of every interior lifted
+multiplier, as follows by expanding each #{A_t=J^*S_tJ} and using #{J^*J=I}.
+Equivalently it replaces each hidden conditional state by the conditional equilibrium
+given the retained present. \ref{fdip-00HK} detects this change already at three
+times by taking the middle observable equal to one and comparing #{A_{2t}} with
+#{A_t^2}. The coordinate insertions in that example are justified by their Gaussian
+moments or by bounded truncation.}
+
+\p{Under the reducing condition of \ref{fdip-00HI}, every #{S_t} commutes with
+#{E}, so the two multi-time formulas agree. Without that condition the original
+operator string still defines all the exact coarse multi-time observations. Neither
+the existence of #{\rho} nor a family of positive one-step operators supplies the
+missing semigroup identity.}
+
+}

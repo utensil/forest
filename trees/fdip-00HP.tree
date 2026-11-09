@@ -1,0 +1,109 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{Selected finite data and the exact effective action}
+\date{2026-11-09}
+
+\p{Let #{\mathsf Q} be a real inner product space of finite
+ dimension #{s}, and let #{P:\mathsf Q\to X} be an orthogonal
+projection onto a subspace. Let #{D} specify finite path data: spatial metric and volume,
+complete quadratic precision and interaction, spatial selector,
+time step and slice count, temporal and spatial boundary conditions,
+field normalization and any raw scalar prefactor. Assume its precision
+#{Q_D} is positive and self-adjoint and its interaction #{V_D}
+is continuous and bounded below. Its
+\vocabk{weighted Gaussian law}{fdip-00GH} is}
+
+##{Z_D=\int e^{-V_D}\,d\mu_{Q_D},\qquad
+   d\mu_D=Z_D^{-1}e^{-V_D}\,d\mu_{Q_D}.}
+
+\p{The full path configuration space is the finite orthogonal
+sum #{\mathsf E_D=\mathsf Q^{\oplus N}}, #{N\ge1}, with its
+product metric and Euclidean volume. The precision
+#{Q_D:\mathsf E_D\to\mathsf E_D} is positive and self-adjoint.
+The normalized Gaussian #{\mu_{Q_D}} uses its inverse as
+covariance; #{V_D} includes the interaction and its coupling.
+The periodic transfer law of \ref{fdip-00GX} has this form
+in the positive quadratic polynomial specialization of the
+\vocabk{coercive slice potential}{fdip-00GU}.}
+
+\p{Let #{\mathcal P=P^{\oplus N}:\mathsf E_D\to X^{\oplus N}}
+be the orthogonal projection and
+#{\iota_Y:\ker\mathcal P\hookrightarrow\mathsf E_D} the
+isometric inclusion. The induced and eliminated positive operators are
+##{Q_{D,X}=(\mathcal P Q_D^{-1}\mathcal P^*)^{-1},\qquad
+   C_D=\iota_Y^*Q_D\iota_Y.}
+The first is the \vocabk{Schur complement}{fdip-000D},
+expressed through the retained covariance. Exact integration gives}
+
+##{\begin{aligned}
+\mathcal P_*\mu_D(dx)&=Z_D^{-1}e^{-F_D(x)}\,d\mu_{Q_{D,X}}(x),\\
+F_D(x)&=-\log\mathbb E_{\mu_{Q_D}}
+ [e^{-V_D}\mid\mathcal P q=x].
+\end{aligned}}
+
+\p{The \vocabk{effective action}{fdip-000D} relative to the induced retained Lebesgue volume is}
+
+##{\begin{aligned}
+S_{\mathrm{eff},D}(x)
+ &=\tfrac12\langle x,Q_{D,X}x\rangle+F_D(x)-\log c_{C_D},\\
+c_{C_D}&=\frac{(2\pi)^{\dim\ker\mathcal P/2}}{\sqrt{\det C_D}}.
+\end{aligned}}
+
+\p{Retain the induced metric, coordinate spaces and time/boundary
+labels together with the tuple
+#{R(D)=(Q_{D,X},F_D,c_{C_D},Z_D,h_D)}, where #{h_D>0} is any scalar multiplying the raw input density; take #{h_D=1}
+when there is no external prefactor. Here #{R} denotes the exact
+Gaussian fiber integration just specified, and
+#{\operatorname{Law}(R(D))=Z_D^{-1}e^{-F_D}\mu_{Q_{D,X}}}.}
+
+\tikzfigs{0.85}{\begin{tikzpicture}[
+  every node/.style={inner sep=4pt},
+  map/.style={-{Stealth[length=2mm]},shorten >=2pt,shorten <=2pt}
+]
+\node (a) at (0,0) {$D$};
+\node (b) at (3.8,0) {$R(D)$};
+\node (c) at (0,-2) {$\mu_D$};
+\node (d) at (3.8,-2) {$\mathcal P_*\mu_D$};
+\draw[map] (a) -- node[above=2mm] {$R$} (b);
+\draw[map] (c) -- node[below=2mm] {$\mathcal P_*$} (d);
+\draw[map] (a) -- node[left=2mm] {$\operatorname{Law}$} (c);
+\draw[map] (b) -- node[right=2mm] {$\operatorname{Law}$} (d);
+\end{tikzpicture}}
+
+\p{Exact elimination sends complete finite data to its induced
+precision, interaction and scalar normalizers. The lower arrow
+pushes forward the normalized path law; the upper arrow performs
+integration and need not preserve a finite-parameter family.}
+
+\proof{
+
+\p{The Gaussian marginal supplied by \ref{fdip-000E} has
+covariance #{\mathcal P Q_D^{-1}\mathcal P^*}: evaluate its
+second moment on retained linear observables, using
+\ref{fdip-000B}. Its precision is therefore #{Q_{D,X}},
+which identifies the Schur operator without a choice of basis.
+The operator #{C_D} is the restriction of the quadratic form
+to the eliminated subspace. Positivity of both operators follows
+by evaluating on their isometric inclusions.}
+
+\p{Apply \ref{fdip-00GI} to #{Q_D} and #{w=e^{-V_D}}. The finite lower bound for
+#{V_D} makes #{w} a continuous bounded positive weight. Its explicit Gaussian
+conditional version defines #{F_D} at every retained #{x}, and its marginal formula
+gives the normalized law. For the raw input density #{e^{-\langle
+q,Q_Dq\rangle /2-V_D(q)}dq}, exact integration over its eliminated coordinates gives
+#{e^{-S_{\mathrm{eff},D}(x)}dx}. Its total integral is #{c_{Q_D}Z_D}, where
+#{c_{Q_D}=(2\pi)^{\dim\mathsf E_D/2}/\sqrt{\det Q_D}}. For the periodic transfer convention in \ref{fdip-00GX},
+the heat prefactor is #{h_D=(2\pi\epsilon)^{-sN/2}}. Its effective
+action is #{S_{\mathrm{eff},D}-\log h_D} and its raw partition is #{h_Dc_{Q_D}Z_D}.
+Nested elimination uses the induced Gaussian and current interaction, by \ref{fdip-00GK}.}
+
+\p{If #{V_D} is replaced by #{V_D+k}, then #{F_D} and #{S_{\mathrm{eff},D}} increase
+by #{k}, while #{Z_D} and the raw partition are multiplied by #{e^{-k}}. The
+normalized law is unchanged. Empty eliminated spaces have #{c_{C_D}=1}; empty retained
+spaces carry a unit point mass and their effective density is the full raw integral.
+Empty determinants equal one.}
+
+}
+

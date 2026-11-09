@@ -1,0 +1,51 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Example}
+\title{Two explicit relaxation rates}
+\date{2026-11-09}
+
+\p{Keep #{m,c>0} in the potential of \ref{fdip-00HJ} and set both quartic couplings
+to zero. This is its coupled Gaussian boundary. The orthogonal normal modes
+#{(x+y)/\sqrt2} and #{(x-y)/\sqrt2} have frequencies #{m} and #{w=\sqrt{m^2+2c}>m}.
+For a one-mode Hamiltonian #{-\partial_z^2/2+\omega^2z^2/2}, the normalized ground
+state is #{(\omega /\pi)^{1/4}e^{-\omega z^2/2}}, its stationary variance is
+#{1/(2\omega)}, and its transformed transition has conditional mean #{e^{-\omega t}z}.
+The Hermite and Mehler formulas in \ref{fdip-007W} and \ref{fdip-00H6}, after the
+stated frequency dilation, give these identities with the same kinetic normalization.}
+
+\p{Independence of the normal modes gives the retained covariance}
+
+##{\begin{aligned}
+C(t)&=\mathbb E[x_0x_t]
+ =\frac14\left(\frac{e^{-mt}}m+\frac{e^{-wt}}w\right),\\
+C(0)&=\frac14\left(\frac1m+\frac1w\right).
+\end{aligned}}
+
+\p{The pair #{(x_0,x_t)} is jointly Gaussian. The conditional Gaussian formula in
+[Gaussian conditional law](fdip-00GH), applied with weight one, gives}
+
+##{\begin{aligned}
+A_tx&=r(t)x,\\
+r(t)&=\frac{C(t)}{C(0)}=\alpha e^{-mt}+(1-\alpha)e^{-wt},\\
+\alpha&=\frac{1/m}{1/m+1/w}\in(0,1).
+\end{aligned}}
+
+\p{The coordinate #{x} lies in #{L^2(\rho)}, so this is a legitimate test of the
+bounded operators. For every #{t>0},}
+
+##{(A_{2t}-A_t^2)x=\alpha(1-\alpha)(e^{-mt}-e^{-wt})^2x\ne0.}
+
+\p{It also distinguishes actual three-time memory from one-step iteration. In the
+centered Gaussian triple #{(x_0,x_t,x_{2t})},}
+
+##{\begin{aligned}
+\operatorname{Cov}(x_0,x_{2t}\mid x_t)
+ &=C(2t)-C(t)^2/C(0)\\
+ &=C(0)\alpha(1-\alpha)(e^{-mt}-e^{-wt})^2>0.
+\end{aligned}}
+
+\p{The full two-coordinate transition law in \ref{fdip-00HB} is Markovian. The
+positive conditional covariance shows that its retained past and future are
+conditionally dependent given the retained present. At #{c=0} the rates coincide and
+this obstruction vanishes.}
