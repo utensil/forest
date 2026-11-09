@@ -1,0 +1,77 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Corollary}
+\title{Reflection of the projected path}
+\date{2026-11-09}
+
+\p{On the full and coarse path spaces of \ref{fdip-00HM}, let
+#{\theta\omega(t)=\omega(-t)} and #{\theta_X\eta(t)=\eta(-t)}. Both involutions are
+measurable, and}
+
+##{\mathcal P\theta=\theta_X\mathcal P.}
+
+\tikzfigs{0.75}{\begin{tikzpicture}[
+  every node/.style={inner sep=4pt},
+  map/.style={-{Stealth[length=2mm]},shorten >=2pt,shorten <=2pt}
+]
+\node (a) at (0,0) {$\Omega$};
+\node (b) at (3.4,0) {$\Omega$};
+\node (c) at (0,-2) {$\Omega_X$};
+\node (d) at (3.4,-2) {$\Omega_X$};
+\draw[map] (a) -- node[above=2mm] {$\theta$} (b);
+\draw[map] (c) -- node[below=2mm] {$\theta_X$} (d);
+\draw[map] (a) -- node[left=2mm] {$\mathcal P$} (c);
+\draw[map] (b) -- node[right=2mm] {$\mathcal P$} (d);
+\end{tikzpicture}}
+
+\p{Slicewise spatial projection intertwines time reflection.
+Its pullback also preserves the positive-half observable algebra,
+because each projected coordinate uses only its own time slice.}
+
+\p{Let the positive-half observables be bounded measurable functions of coordinates
+with #{t\geq0}. A positive-half coarse observable pulls back to a positive-half full
+observable. The stationary vacuum law is reflection positive, and the measurable
+pushforward theorem \ref{fdip-00G8} gives}
+
+##{\int\overline{F(\theta_X\eta)}F(\eta)\,d\overline{\mathbb P}_0(\eta)\geq0.}
+
+\proof{
+
+\p{The hypotheses of \ref{fdip-00G8} hold: the spaces have their cylinder
+sigma-algebras, #{\mathcal P} is measurable, the involutions intertwine, and the
+positive-half inclusion follows coordinatewise. The same application works for a
+discrete temporal lattice and its declared reflection, using \ref{fdip-00GY}. Spatial
+averaging within each time slice is permitted. A block containing both positive and
+negative times need not preserve the positive-half algebra and does not meet this
+hypothesis merely by being called a coarse block.}
+
+\p{For the stationary vacuum law, positivity follows directly from the Hamiltonian.
+For a positive-time coarse cylinder}
+
+##{F(\eta)=\prod_{j=1}^nf_j(\eta(t_j)),\qquad0\leq t_1<\cdots<t_n,}
+
+\p{set}
+
+##{v_F=S_{t_1}M_{f_1\circ P}S_{t_2-t_1}\cdots S_{t_n-t_{n-1}}M_{f_n\circ P}\psi_0,}
+
+\p{and extend linearly to finite sums of such cylinders, with #{v_1=\psi_0} for the
+empty product. The finite-dimensional correlation formula of \ref{fdip-00HB} and
+self-adjointness of #{S_t} give}
+
+##{\mathbb E_{\overline{\mathbb P}_0}[\overline{F\circ\theta_X}\,G]=\langle v_F,v_G\rangle.}
+
+\p{To verify the order, the adjoint of the left positive-time string places the
+reflected times in increasing order on the negative half; the two central factors
+#{S_{t_1}} and #{S_{u_1}} combine to #{S_{t_1+u_1}}. If both first times are zero, the
+central multiplication observables multiply at that same time. Bilinearity gives the
+identity for finite sums. The same calculation with #{P=I} proves the full-law premise
+used above. Kernel symmetry in \ref{fdip-00HB} makes both laws reflection invariant.
+The identity proves positivity and makes #{v_F} independent of a cylinder's chosen
+expression modulo the reflection-null space. Finite linear combinations of rectangle
+indicators in finitely many positive coordinates are dense in the positive-half #{L^2}
+space, since their cylinder sets generate its sigma-algebra. Thus bounded measurable
+positive-half observables admit #{L^2} approximation by bounded cylinders; reflection
+invariance and Cauchy–Schwarz make the reflection form continuous in #{L^2}.}
+
+}

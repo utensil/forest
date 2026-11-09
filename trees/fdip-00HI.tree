@@ -1,0 +1,112 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{The compression defect}
+\date{2026-11-09}
+
+\p{For the \vocabk{retained vacuum embedding}{fdip-00HG},
+#{J} is an isometry with closed range. Each #{A_t} is a positive
+self-adjoint contraction, and the family is strongly continuous
+with #{A_0=I}. Moreover, #{A_t1=1} and #{A_t} preserves
+nonnegative functions; these two assertions concern the vacuum
+realization.}
+
+\p{More generally, let #{J:\mathcal K\to\mathcal H} be any
+linear isometry between real or complex Hilbert spaces over the same scalar field, let #{L\ge0}
+be self-adjoint on #{\mathcal H}, and put
+#{S_t=e^{-tL}}, #{A_t=J^*S_tJ}, #{E=JJ^*}.
+Then #{E} is the orthogonal range projection and #{A_t} is a
+strongly continuous family of positive self-adjoint contractions
+with #{A_0=I}. The following identity and equivalences hold;
+the vacuum case has #{L=H-E_0}. For every #{t\ge0},}
+
+##{\begin{aligned}
+A_{2t}-A_t^2&=J^*S_t(I-E)S_tJ=B_t^*B_t\geq0,\\
+B_t&=(I-E)S_tJ.
+\end{aligned}}
+
+\p{The following statements are equivalent:}
+
+\ol{
+\li{#{A_{t+u}=A_tA_u} for all #{t,u\geq0}.}
+\li{#{A_{2t}=A_t^2} for all #{t\geq0}.}
+\li{#{S_t\operatorname{Ran}J\subseteq\operatorname{Ran}J} for every #{t\geq0}.}
+\li{#{E S_t=S_t E} for every #{t\geq0}.}
+}
+
+\p{Under these conditions #{A_t} is a strongly continuous self-adjoint contraction
+semigroup, with nonnegative generator unitarily equivalent to the restriction of
+#{L} to the reducing subspace #{\operatorname{Ran}J}.}
+
+\proof{
+\p{Choose an orthonormal identification #{\mathsf Q\cong\mathbb R^s}.
+It preserves volume, norm and the quadratic form
+#{\tfrac12\int|\nabla f|^2+\int U|f|^2}, so
+\ref{fdip-00H2}, \ref{fdip-00H4} and \ref{fdip-00H6}
+apply with the same coercivity bound.}
+
+\p{The pushforward identity gives #{\|Jf\|^2=\int|f(Pq)|^2\,d\nu_0(q)=\|f\|^2}. Hence
+#{J^*J=I}, the range is closed, and #{E^*=E=E^2} with exactly that range. For
+#{u\in\mathcal H}, #{u/\psi_0\in L^2(\nu_0)}, and the adjoint is characterized by}
+
+##{ (J^*u)(Pq)=\mathbb E_{\nu_0}[u/\psi_0\mid\sigma(P)](q)\quad\nu_0\text{-almost everywhere}.}
+
+\p{Indeed pullback identifies #{L^2(\rho)} with the closed
+subspace of #{\sigma(P)}-measurable functions in #{L^2(\nu_0)}:
+indicator pullbacks generate that subspace, and simple-function
+approximation gives surjectivity. Conditional expectation is its
+orthogonal projection; pairing against these pullbacks proves
+the adjoint identity for every #{u\in\mathcal H}.}
+
+\p{When #{P} is an orthogonal projection, its marginal has density
+##{r(x)=\int_Y\psi_0(x+y)^2\,dy}
+relative to induced Euclidean volume. By \ref{fdip-00H6},
+#{\psi_0} is continuous, everywhere positive and Gaussian bounded.
+The bound is integrable in #{y}, uniformly for #{x} in compact
+sets. Dominated convergence gives finite continuous #{r>0},
+and Tonelli gives #{\int_Xr\,dx=1}. In this specialization,
+for #{\rho}-almost every #{x},}
+
+##{J^*u(x)=\frac1{r(x)}\int_Y\psi_0(x+y)u(x+y)\,dy.}
+
+\p{Fiberwise Cauchy–Schwarz and Fubini justify this density
+formula. For general measurable #{P}, positivity preservation
+of #{J^*} follows from its conditional-expectation formula.
+The kernel in \ref{fdip-00H4} makes #{S_t} positivity preserving.
+Spectral calculus gives its operator positivity, self-adjointness,
+contraction and strong continuity. These pass to #{A_t}.
+Finally #{J1=\psi_0} and #{S_t\psi_0=\psi_0}, so #{A_t1=1}.}
+
+\p{For the abstract isometry, #{J^*J=I} again makes #{E} the
+orthogonal range projection. Spectral calculus gives the asserted
+contraction, operator positivity and continuity. Using #{S_{2t}=S_t^2} gives the defect formula. Since #{I-E} is a self-adjoint
+projection, its right side equals #{B_t^*B_t}. Thus}
+
+##{\langle f,(A_{2t}-A_t^2)f\rangle=\|(I-E)S_tJf\|^2.}
+
+\p{Consequently (2) implies (3), and (1) implies (2). If (3) holds, then #{ES_uJ=S_uJ}, so}
+
+##{A_tA_u=J^*S_tES_uJ=J^*S_{t+u}J=A_{t+u}.}
+
+\p{Self-adjointness of #{S_t} makes the orthogonal complement of an invariant closed
+subspace invariant: for #{v\perp\operatorname{Ran}J} and #{w\in\operatorname{Ran}J},
+#{\langle S_tv,w\rangle=\langle v,S_tw\rangle=0}. Thus (3) implies (4); the converse
+is immediate. The last assertion is the self-adjoint contraction-semigroup spectral
+calculus on this reducing subspace. Its generator domain is precisely
+#{J^{-1}(D(L)\cap\operatorname{Ran}J)}, with action #{J^*LJ} there.}
+
+\p{In the vacuum realization, if #{P} is constant, #{\mathcal K=\mathbb C}, #{\operatorname{Ran}J=\mathbb C\psi_0} and
+#{A_t=I}. For #{P=I}, multiplication by #{\psi_0} is unitary from #{L^2(\nu_0)} onto
+#{L^2(dq)}, so #{A_t} is the full ground-state transformed semigroup. If #{s=0}, both
+Hilbert spaces are one-dimensional and #{S_t=A_t=I}. An additive constant in #{U} shifts
+#{E_0} by the same amount and changes neither #{S_t}, #{\nu_0} nor #{A_t}.}
+}
+
+\p{TauCeti's
+\leanref/tauceti{ContinuousLinearMap.comp_adjoint_eq_starProjection_range}
+supplies #{JJ^*=\operatorname{proj}_{\operatorname{Ran}J}}
+for isometries between complete Hilbert spaces with orthogonally
+complemented range. The closed range here meets that hypothesis.
+Its formalized conclusion is this supporting identity; the
+compression equivalences use the additional proof above.}
