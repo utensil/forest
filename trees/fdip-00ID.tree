@@ -1,0 +1,48 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{Susceptibility implies smeared two-point decay}
+\date{2026-11-09}
+
+\p{In mass-one units and the coupling domain of \ref{fdip-00IC},
+the covariance form #{S_2} of the state in \ref{fdip-00I6} satisfies
+##{0\le S_2(f,h)\le K\|f\|_1\|h\|_\infty
+ \qquad(f,h\in C_c^\infty(\mathbb R^2;\mathbb R),\ f,h\ge0).}
+For the translation representation on tests,
+#{(\tau_ag)(x)=g(x-a)}, and arbitrary real compact smooth #{f,g},
+##{S_2(f,\tau_ag)\longrightarrow0\qquad(|a|\to\infty).}
+The state is even, so this two-point form is already centered.}
+
+\proof{
+\p{At each fixed lattice, \ref{fdip-00IC} bounds the smeared
+moment by #{K(\epsilon^2\sum_xf(x))\|h\|_\infty}.
+Pass first to the fixed-square moment limit of \ref{fdip-00I4},
+using Riemann-sum convergence, and then to the volume moment limit
+of \ref{fdip-00I6}. This proves the bound for the same canonical
+state. Its one-point functions vanish by evenness.}
+
+\p{For #{f,g\ge0}, set #{F(a)=S_2(f,\tau_ag)\ge0}.
+For a bounded measurable translation set #{A}, the function
+#{h_A=\int_A\tau_ag\,da} is compact smooth and nonnegative, and
+#{h_A\le\|g\|_1}. Continuity of the moment form permits this
+test-function integral, so
+##{\int_AF(a)da=S_2(f,h_A)\le K\|f\|_1\|g\|_1.}
+Exhausting the plane by bounded sets proves #{F\in L^1(\mathbb R^2)}.}
+
+\p{Euclidean invariance and Cauchy-Schwarz in #{L^2(\nu)} give
+##{|F(a+b)-F(a)|
+ \le\|\Phi(f)\|_2\,\|\Phi(\tau_bg-g)\|_2.}
+Continuity of #{S_2} makes the right side tend to zero as #{b\to0},
+uniformly in #{a}. Thus #{F} is uniformly continuous. A nonnegative
+integrable uniformly continuous function vanishes at infinity:
+otherwise infinitely many disjoint balls of a fixed radius would each
+carry a uniformly positive integral. Decompose each signed compact
+smooth test into two nonnegative compact smooth tests and expand the
+bilinear form to obtain the assertion for arbitrary real #{f,g}.}
+}
+
+\p{The deduction uses the finite comparison of \ref{fdip-00IC}
+and the canonical invariant state supplied by
+\citet{Theorems 4.1(II), 4.2}{frohlich1974schwingerI}.
+No decay rate is asserted.}

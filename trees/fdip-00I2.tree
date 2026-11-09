@@ -1,0 +1,48 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Definition}
+\title{The continuum half-Dirichlet field and its moment forms}
+\date{2026-11-09}
+
+\p{On a bounded square #{\Lambda}, let #{Q_{\Lambda,D}} be the
+self-adjoint operator represented by the closed form
+##{\mathfrak q_{\Lambda,D}(u,v)
+ =\int_\Lambda\nabla u\cdot\nabla v+m_0^2uv,
+ \qquad u,v\in H_0^1(\Lambda).}
+Thus #{Q_{\Lambda,D}=-\Delta_{\Lambda,D}+m_0^2I}. Its centered
+Gaussian distribution law #{\mu_{\Lambda,D}} has characteristic
+functional
+##{\int e^{i\phi(f)}\,d\mu_{\Lambda,D}(\phi)
+ =\exp\left(-\tfrac12
+ \langle f|_\Lambda,Q_{\Lambda,D}^{-1}f|_\Lambda\rangle_{L^2(\Lambda)}\right).}
+The field is extended by zero outside #{\Lambda}. The whole-space
+reference covariance for Wick ordering is
+#{C_\infty=(-\Delta+m_0^2I)^{-1}}.}
+
+\p{Using the local Gaussian regularization and its finite-#{L^p}
+Wick limit, the \newvocab{continuum half-Dirichlet law} is
+##{\begin{aligned}
+V_\Lambda&=\frac\lambda{24}\int_\Lambda :\phi^4:_{C_\infty},\\
+Z_\Lambda&=\int e^{-V_\Lambda}\,d\mu_{\Lambda,D},&
+d\nu_\Lambda&=Z_\Lambda^{-1}e^{-V_\Lambda}d\mu_{\Lambda,D}.
+\end{aligned}}
+The Wick integral is an #{L^p(\mu_{\Lambda,D})} random variable;
+it does not require evaluating a continuum distribution at a point.
+The existence and exponential integrability are those of
+\citet{Theorem II.38 and Corollary II.39, pp. 172-174}{guerra1975euclideanI}.
+The square satisfies the required regularity by \ref{fdip-00I4}.}
+
+\p{Integration defines a \vocabk{complex algebraic state}{fdip-0024}
+#{\omega_\Lambda} on bounded measurable field observables, extended
+to the polynomial observables by its moments. The linear field map is
+#{\Phi:f\mapsto[\phi\mapsto\phi(f)]}, for real Schwartz tests.
+Its \newvocab{characteristic functional} and
+\newvocab{Schwinger moment forms} are
+##{\begin{aligned}
+J_\Lambda(f)&=\omega_\Lambda(e^{i\Phi(f)}),\\
+S_r^\Lambda(f_1,\ldots,f_r)
+ &=\omega_\Lambda\bigl(\Phi(f_1)\cdots\Phi(f_r)\bigr).
+\end{aligned}}
+These are the canonical covariance and normalized weight in
+\citet{(3.79)-(3.81), pp. 293-294}{frohlich1974schwingerI}.}

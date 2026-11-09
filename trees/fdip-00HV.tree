@@ -1,0 +1,77 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Example}
+\title{A boundary site retains four bonds}
+\date{2026-11-09}
+
+\p{Choose the site-indicator basis of the [square field space](fdip-00HU).
+It is orthogonal with squared norm #{\epsilon^2}. For the values
+#{\phi_x=\phi(x)}, the precision and its coordinate quadratic matrix are
+##{\begin{aligned}
+(Q_{\epsilon,D}\phi)_x
+ &=m_0^2\phi_x+\epsilon^{-2}
+       \left(4\phi_x-\sum_{|y-x|=\epsilon}(j\phi)_y\right),\\
+A_{\epsilon,D}&=\epsilon^2Q_{\epsilon,D},&
+C_{\epsilon,D}&=A_{\epsilon,D}^{-1}
+                   =\epsilon^{-2}Q_{\epsilon,D}^{-1}.
+\end{aligned}}
+The entries of #{C_{\epsilon,D}} are covariances of the site evaluations;
+#{Q_{\epsilon,D}^{-1}} remains the covariance operator for the weighted
+Hilbert metric.}
+
+\p{At a retained corner #{x}, only two nearest neighbors are retained.
+The diagonal of #{A_{\epsilon,D}} is still #{4+m_0^2\epsilon^2}:
+the two zero-exterior bonds contribute #{2\phi_x^2} to the form.
+Using the internal-edge graph alone would give
+#{2+m_0^2\epsilon^2} at this corner and a different law.}
+
+\tikzfigs{0.80}{\begin{tikzpicture}[
+  site/.style={circle,fill,inner sep=1.8pt},
+  exterior/.style={circle,draw,inner sep=2pt},
+  every node/.style={font=\small}
+]
+\node[site,label=below right:$x$] (x) at (0,0) {};
+\node[site,label=below:$y$] (y) at (2.3,0) {};
+\node[site,label=right:$z$] (z) at (0,2.1) {};
+\node[exterior,label=below:$0$] (u) at (-2.3,0) {};
+\node[exterior,label=left:$0$] (v) at (0,-2.1) {};
+\draw[thick] (x) -- node[below=5mm] {$(\phi_x-\phi_y)^2$} (y);
+\draw[thick] (x) -- node[right=5mm] {$(\phi_x-\phi_z)^2$} (z);
+\draw[dashed,thick] (u) -- node[above=4mm] {$\phi_x^2$} (x);
+\draw[dashed,thick] (v) -- node[left=4mm] {$\phi_x^2$} (x);
+\end{tikzpicture}}
+
+\p{Solid bonds join retained sites; dashed bonds end at prescribed zero
+values. Each label gives its contribution to the quadratic form before
+the action's factor #{1/2}.}
+
+\p{On the same #{N=5} site set, periodic identification adds wrap
+couplings. The next picture shows the 25 sites, internal bonds, and one
+horizontal and one vertical wrap bond; the same wrap construction is
+repeated in every row and column. Each site then still has degree 4.
+In the killed form the two boundary penalties for a paired pair of edge
+sites are replaced by #{(\phi_x-\phi_y)^2}; the diagonal is preserved
+and the term #{-2\phi_x\phi_y} is added.}
+
+\tikzfigs{0.72}{\begin{tikzpicture}[every node/.style={font=\small}]
+\foreach \i in {0,...,4}{
+  \foreach \j in {0,...,4}{\fill (\i,\j) circle (1.6pt);}
+}
+\foreach \i in {0,...,4}{\draw[thin] (0,\i) -- (4,\i);\draw[thin] (\i,0) -- (\i,4);}
+\draw[thick,dashed] (0,2) -- (-0.6,2) -- (-0.6,4.8)
+  -- (4.6,4.8) -- (4.6,2) -- (4,2);
+\node at (2,5.25) {horizontal wrap};
+\draw[thick,dotted] (2,0) -- (2,-0.6) -- (5.2,-0.6)
+  -- (5.2,4.4) -- (2,4.4) -- (2,4);
+\node[rotate=90] at (5.7,2) {vertical wrap};
+\end{tikzpicture}}
+
+\p{The crossing of the two exterior wrap paths is not a vertex;
+only the 25 filled dots carry field values.}
+
+\p{For a one-site algebraic illustration the variance is
+#{(4+m_0^2\epsilon^2)^{-1}}, rather than #{(m_0^2\epsilon^2)^{-1}}.
+The periodic comparison uses #{N\ge5}; no one-site or two-site periodic
+edge convention is substituted. These calculations unpack
+\citet{Theorem IV.9}{guerra1975euclideanII} for the stated form.}

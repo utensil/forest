@@ -1,0 +1,45 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Definition}
+\title{The square Dirichlet form and sampled fields}
+\date{2026-11-09}
+
+\p{Fix #{m_0>0}, #{\ell>0} and an odd integer #{N\ge5}. Put
+##{\begin{aligned}
+\Lambda_\ell&=(-\ell /2,\ell /2)^2,&\epsilon&=\frac{\ell}{N+1},\\
+V_{\ell,N}&=\Lambda_\ell\cap\epsilon\mathbb Z^2,&
+H_{\ell,N}&=L^2(V_{\ell,N},\epsilon^2\text{ counting};\mathbb R).
+\end{aligned}}
+The set #{V_{\ell,N}} has #{N^2} points. Write #{h_\epsilon} for the
+Hilbert pairing and #{j} for extension by zero to the whole lattice.
+Let #{E} contain each undirected nearest-neighbor bond with at least one
+endpoint in #{V_{\ell,N}} exactly once, and choose an orientation for
+each bond. The incidence map #{d_D:H_{\ell,N}\to\mathbb R^E} sends
+#{\phi} to the oriented differences of #{j\phi}; the edge space has its
+counting pairing.}
+
+\p{The \newvocab{square Dirichlet form} and its Riesz operator are
+##{\begin{aligned}
+\mathfrak q_{\epsilon,D}(\phi,\psi)
+ &=m_0^2h_\epsilon(\phi,\psi)
+     +\langle d_D\phi,d_D\psi\rangle_E,\\
+Q_{\epsilon,D}&=m_0^2I+d_D^*d_D,\qquad
+\mathfrak q_{\epsilon,D}(\phi,\psi)
+ =h_\epsilon(\phi,Q_{\epsilon,D}\psi).
+\end{aligned}}
+Here the adjoint uses the declared vertex and edge metrics. The
+\vocabk{Gaussian probability law}{fdip-0005} #{\mu_{Q_{\epsilon,D}}}
+has covariance operator #{Q_{\epsilon,D}^{-1}} on #{H_{\ell,N}}.
+For a test function #{f}, let #{R_\epsilon f=f|_{V_{\ell,N}}} be the
+restriction map. The \newvocab{point-sampled field} is the linear map
+from tests to linear observables
+##{\Phi_\epsilon(f):\phi\longmapsto
+             h_\epsilon(R_\epsilon f,\phi).}
+Initially #{f\in C_c^\infty(\mathbb R^2;\mathbb R)}.}
+
+\p{\citet{(IV.3)-(IV.8), pp. 192-193; Theorem IV.9,
+p. 202}{guerra1975euclideanII} gives this killed-lattice construction
+and point-sampling convention. The metric identifies the energy form
+with its positive operator; its coordinate expression is calculated in
+\ref{fdip-00HV}.}

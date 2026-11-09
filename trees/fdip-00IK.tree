@@ -1,0 +1,47 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Remark}
+\title{Sequential limits and the relativistic conclusion}
+\date{2026-11-09}
+
+\p{The construction has two successive limits. The finite periodic
+law supplies an upper bound for two-point forms; it is not identified
+with the limiting half-Dirichlet law. The diagram distinguishes that
+comparison from the limits and reconstruction.}
+
+\tikzfigs{0.82}{\begin{tikzpicture}[
+  object/.style={draw,rounded corners,align=center,
+    minimum width=29mm,minimum height=11mm,inner sep=3pt},
+  every node/.style={font=\small},
+  arrow/.style={-{Stealth[length=2mm]},thick}
+]
+\node[object] (finite) at (0,4) {Finite square\\state};
+\node[object] (square) at (5,4) {Continuum square\\state};
+\node[object] (torus) at (0,0) {Periodic\\comparison};
+\node[object] (euclidean) at (5,0) {Infinite-volume\\Euclidean state};
+\node[object] (quantum) at (5,-4) {Wightman field\\unique vacuum};
+\draw[arrow] (finite) -- (square);
+\node[align=center] at (2.5,5.1) {$\epsilon\to0$\\$\ell$ fixed};
+\draw[arrow] (square) -- (euclidean);
+\node[align=right,anchor=east] at (4.65,2) {$\ell\to\infty$\\tests fixed};
+\draw[arrow,dashed] (finite) -- (torus);
+\node[align=right,anchor=east] at (-0.35,2) {two-point\\upper bound};
+\draw[arrow] (euclidean) -- (quantum);
+\node[align=right,anchor=east] at (4.65,-2) {A-C\\and mixing};
+\end{tikzpicture}}
+
+\p{The first arrow is \ref{fdip-00I4}, the second
+\ref{fdip-00I6}, and the dashed comparison is
+\ref{fdip-00IC}. The last arrow uses all the constructive
+regularity in \ref{fdip-00I8}, mixing in \ref{fdip-00IE}
+and \citet{Theorem 2.6}{frohlich1974verification}.}
+
+\p{The finite-chain [real-time evolution](fdip-00H8) is unitary
+on its finite-spatial-volume Hilbert space. The stronger
+Lorentz-covariant unitarity in \ref{fdip-00IH} comes from
+the continuum Poincaré representation and its forward-cone spectrum.
+The present conclusions give qualitative clustering and a unique
+vacuum. They supply no exponential clustering rate, interacting
+spectral mass gap, scattering theory or S-matrix. The positive
+#{m_0} is the bare mass of the reference covariance.}

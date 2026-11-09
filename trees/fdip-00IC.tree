@@ -1,0 +1,101 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{Comparison with the periodic quartic state}
+\date{2026-11-09}
+
+\p{Use mass-one units and the common site space of
+\ref{fdip-00IB}. Put #{\kappa=\lambda'/6}.}
+
+\p{\citet{Theorem 1.1(ii), arXiv v2, p. 3}{bauerschmidt2024logsobolev}
+supplies the positive small-coupling threshold
+##{\kappa_{\mathrm{BD}}=\kappa_{\mathrm{BD}}(2,1/2)>0.}
+Assume
+##{0<\kappa<\kappa_*:=
+ \min\{\kappa_{\mathrm{BD}},(24B)^{-1/2}\}.}
+The periodic comparison state #{\omega_{\mathrm{BD}}} is integration
+against the normalized density with action
+##{\mathcal A_{\mathrm{BD}}(\phi)
+ =\tfrac12h_\epsilon(\phi,
+       (-\Delta_{\epsilon,P}+r_{\mathrm{BD}}I)\phi)
+       +\tfrac\kappa4\|\phi\|_{L^4(\epsilon^2)}^4,
+ \quad r_{\mathrm{BD}}=\tfrac12-3\kappa c_P+6\kappa^2b.}
+For either law write #{\mathcal C_\omega(u,v)
+=\omega(h_\epsilon(u,\phi)h_\epsilon(v,\phi))}.
+On the positive cone of the common function space,
+##{0\le\mathcal C_{\mathrm{HD}}(u,v)
+      \le\mathcal C_{\mathrm{BD}}(u,v)
+      \le K\|u\|_{L^1(\epsilon^2)}\|v\|_\infty
+       \qquad(u,v\ge0),}
+with #{K} independent of #{N,\ell}. In physical parameters the
+coupling domain is the nonempty interval
+##{m_0>0,\qquad 0<\lambda /m_0^2<\eta,
+            \qquad\eta=6\kappa_*>0.}
+The comparison is positivity on this function cone, not a claim of
+Loewner order on arbitrary signed bilinear tests.}
+
+\proof{
+\p{Choose the site-indicator basis used in \ref{fdip-00HV}.
+The whole-space Wick quartic has coefficient #{\lambda'/24=\kappa /4}.
+Dropping only the constant term in the normalized density gives
+#{r_{\mathrm{HD}}=1-3\kappa c_\epsilon^\infty(1)}.
+Here #{c_\epsilon^\infty(s)} denotes the whole-lattice site
+variance with squared mass #{s}; at #{s=1} it is #{c_\epsilon(1)}.
+Equations (1.1)-(1.3) of
+\citek{bauerschmidt2024logsobolev}, with its reference mass squared
+equal to #{\mu=1/2}, give exactly the displayed #{r_{\mathrm{BD}}}.
+Periodization of the positive whole-lattice kernel and its positive
+heat-kernel resolvent give
+##{c_P(1/2)\ge c_\epsilon^\infty(1/2)
+                    \ge c_\epsilon^\infty(1).}
+Thus \ref{fdip-00IB} implies
+##{r_{\mathrm{HD}}-r_{\mathrm{BD}}
+       \ge\tfrac12-6\kappa^2B\ge\tfrac14.}
+}
+
+\p{The killed and periodic Laplacians have the same diagonal
+#{4/\epsilon^2} on these sites. Adding each wrap coupling keeps
+that diagonal fixed and makes its off-diagonal coupling more
+ferromagnetic, as in \ref{fdip-00HV}. First keep
+#{r=r_{\mathrm{HD}}}. Each bond-strength derivative of
+#{\mathbb E(\phi_x\phi_y)} is a positive multiple of
+#{\operatorname{Cov}(\phi_x\phi_y,\phi_u\phi_v)}, nonnegative by
+\citet{Theorem V.2, p. 207}{guerra1975euclideanII}.
+Next lower #{r} to #{r_{\mathrm{BD}}}; then
+##{\frac\partial{\partial r}\mathbb E(\phi_x\phi_y)
+ =-\frac{\epsilon^2}{2}\sum_z
+       \operatorname{Cov}(\phi_x\phi_y,\phi_z^2)\le0.}
+Theorem V.1 of the same source gives nonnegative two-point functions.
+These two monotone interpolations prove the sitewise comparison.}
+
+\p{The negative counterterms do not invalidate this application.
+Throughout the interpolation retain an arbitrary positive Gaussian
+reference mass. The kinetic matrix is positive semidefinite by
+diagonal dominance and nonnegative row sums; adding the reference
+mass makes it positive definite with nonpositive off-diagonal
+entries. Put the residual quadratic term into onsite weights
+#{\exp(-a u^4+b u^2)}, #{a>0}. These are bounded, positive, even
+and continuous, exactly the class in GRS Theorems V.1-V.3.
+Finite quartic domination justifies differentiation in each
+interpolation parameter.}
+
+\p{The periodic law has, by Theorem 1.1(ii) of
+\citek{bauerschmidt2024logsobolev}, a log-Sobolev constant
+#{\gamma\ge K^{-1}>0} uniformly in #{\epsilon,L} on the stated
+coupling interval. Its equation (1.12) gives
+##{\chi:=\epsilon^2\sum_y\mathbb E_{\mathrm{BD}}(\phi_0\phi_y)
+                         \le\gamma^{-1}\le K.}
+Translation invariance of the comparison torus makes this a bound
+for every row. The sitewise comparison therefore yields
+#{\epsilon^2\sum_y\mathbb E_{\mathrm{HD}}(\phi_x\phi_y)\le K}
+for every #{x}. Multiplying by the nonnegative site values of
+#{u,v}, summing and using #{v\le\|v\|_\infty} proves the
+stated bilinear inequalities. No bounded-square translation
+invariance is used.}
+}
+
+\p{This combines the cited periodic estimate with the GRS
+correlation inequalities for this half-Dirichlet state. It does not
+identify two infinite-volume laws. The constant #{\gamma} concerns
+stochastic dynamics and is not a relativistic mass gap.}
