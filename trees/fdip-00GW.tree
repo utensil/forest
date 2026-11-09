@@ -1,0 +1,52 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{Positive trace-class transfer}
+\date{2026-11-09}
+
+\p{For every \vocabk{coercive slice potential}{fdip-00GU},
+#{T_\epsilon} is bounded, self-adjoint, injective and trace class.
+For every nonzero #{f\in\mathcal H},
+#{\langle f,T_\epsilon f\rangle>0}. Its kernel also improves
+positivity: #{f\ge0}, #{f\ne0} implies #{T_\epsilon f>0}
+almost everywhere. Its trace obeys the exact identity and bound
+##{\begin{aligned}
+\operatorname{Tr}T_\epsilon
+ &=(2\pi\epsilon)^{-s/2}\int e^{-\epsilon U(q)}\,dq\\
+ &\le(2\pi\epsilon)^{-s/2}e^{\epsilon b}
+       \left(\frac\pi{\epsilon a}\right)^{s/2}.
+\end{aligned}}}
+
+\proof{
+\p{The multiplier #{W_\epsilon} is bounded by #{e^{\epsilon b/2}},
+and #{P_\epsilon} is the self-adjoint heat contraction. Set
+#{A=P_{\epsilon /2}W_\epsilon}. Its kernel is
+#{p_{\epsilon /2}(x-y)e^{-\epsilon U(y)/2}}. Tonelli and Gaussian
+convolution give
+##{\begin{aligned}
+\|A\|_{\mathrm{HS}}^2
+ &=\int e^{-\epsilon U(y)}
+       \left(\int p_{\epsilon /2}(x-y)^2\,dx\right)dy\\
+ &=p_\epsilon(0)\int e^{-\epsilon U(y)}\,dy.
+\end{aligned}}
+Coercivity bounds the last integral by
+#{e^{\epsilon b}(\pi /(\epsilon a))^{s/2}}. Therefore
+#{T_\epsilon=A^*A} is positive trace class and its trace is
+#{\|A\|_{\mathrm{HS}}^2}.}
+
+\p{The multiplier #{W_\epsilon} is everywhere positive, hence
+injective. The Fourier multiplier of #{P_{\epsilon /2}} is
+#{e^{-\epsilon|\xi|^2/4}}, which never vanishes. Thus #{A} is
+injective and #{\langle f,T_\epsilon f\rangle=\|Af\|^2>0}
+for #{f\ne0}. Separately, #{k_\epsilon(x,y)>0} for every pair,
+and its #{y}-section is square integrable for every #{x}.
+Its integral against a nonnegative nonzero #{f} is strictly positive.
+This proves positivity improvement as well as operator positivity.}
+}
+
+\p{This extends the [Gaussian transfer operator](fdip-007T)
+to coercive potentials by an explicit heat factorization. If #{s\ge1}, compactness and injectivity
+on the infinite-dimensional #{\mathcal H} force eigenvalues to
+approach zero. There is no bounded inverse or lower bound
+#{T_\epsilon\ge cI} with #{c>0}.}

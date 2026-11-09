@@ -1,0 +1,34 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Example}
+\title{Coordinate translation and phase multiplication}
+\date{2026-11-09}
+
+\p{On a site #{v} of the coupled chain of \ref{fdip-00GV}, take
+#{r=\eta e_v}, #{z=\ell e_v}, with #{\eta,\ell\in\mathbb R}.
+The [Weyl operator](fdip-00H8) acts by
+##{(W(\eta e_v,\ell e_v)f)(q)
+ =e^{i\eta(q_v+\ell /2)}f(q+\ell e_v).}
+It shifts one coordinate and multiplies by a phase. Its squared
+norm on #{f} is #{\int|f(q+\ell e_v)|^2\,dq=\|f\|^2},
+by translation invariance of Lebesgue measure.}
+
+\p{Setting one parameter to zero isolates the two operations.
+Applying their defining actions in opposite orders gives
+##{\begin{aligned}
+(W(\eta e_v,0)W(0,\ell e_v)f)(q)
+ &=e^{i\eta q_v}f(q+\ell e_v),\\
+(W(0,\ell e_v)W(\eta e_v,0)f)(q)
+ &=e^{i\eta(q_v+\ell)}f(q+\ell e_v).
+\end{aligned}}
+Comparing these phases with the joint action yields
+##{\begin{aligned}
+W(\eta e_v,0)W(0,\ell e_v)
+ &=e^{-i\eta\ell /2}W(\eta e_v,\ell e_v),\\
+W(0,\ell e_v)W(\eta e_v,0)
+ &=e^{i\eta\ell /2}W(\eta e_v,\ell e_v).
+\end{aligned}}
+Thus reversing phase multiplication and translation changes the
+scalar factor by #{e^{i\eta\ell}}. This is the one-site instance
+of the general Weyl multiplication rule in \ref{fdip-00HE}.}

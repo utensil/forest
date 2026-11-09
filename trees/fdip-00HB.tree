@@ -1,0 +1,90 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{Vacuum and thermal Euclidean correlations}
+\date{2026-11-09}
+
+\p{For the \vocabk{vacuum state}{fdip-00H8}, take bounded
+multipliers #{f_j}, times #{0=\tau_0<\tau_1<\cdots<\tau_n},
+#{\Delta_j=\tau_j-\tau_{j-1}}, and #{S_t=e^{-t(H-E_0)}}.
+The correlation
+##{F_0=\langle\psi_0,M_{f_0}S_{\Delta_1}M_{f_1}\cdots
+ S_{\Delta_n}M_{f_n}\psi_0\rangle}
+is the integral of #{\prod_jf_j(q_j)} against the probability
+density
+##{\psi_0(q_0)\psi_0(q_n)
+ \prod_{j=1}^n e^{E_0\Delta_j}K_{\Delta_j}(q_{j-1},q_j).}
+These finite-dimensional laws are consistent and stationary.
+Their transition probabilities are
+##{P_t^0(x,dy)=e^{tE_0}K_t(x,y)
+                      \frac{\psi_0(y)}{\psi_0(x)}\,dy,}
+with stationary measure #{\psi_0^2dq}.}
+
+\p{For the \vocabk{thermal state}{fdip-00H8}, take
+#{0<\tau_1<\cdots<\tau_n<\beta} and
+#{\Delta_{n+1}=\beta-\tau_n}. Then
+##{F_\beta=Z_\beta^{-1}\operatorname{Tr}
+ (M_{f_0}e^{-\Delta_1H}M_{f_1}\cdots
+ M_{f_n}e^{-\Delta_{n+1}H})}
+is the cyclic integral against
+##{Z_\beta^{-1}\prod_{j=1}^{n+1}K_{\Delta_j}(q_{j-1},q_j),
+ \qquad q_{n+1}=q_0.}
+For #{n=0}, #{Z_\beta=\int K_\beta(q,q)\,dq}.}
+
+\proof{
+\p{Insert the kernel of \ref{fdip-00H4} between the bounded
+multipliers. Its positive ground representative from \ref{fdip-00H6}
+makes the quotient in #{P_t^0} well-defined everywhere.
+The semigroup identity and
+#{e^{-tH}\psi_0=e^{-tE_0}\psi_0} show that each transition
+has mass one and prove consistency. Kernel symmetry proves
+stationarity of #{\psi_0^2dq}. Integrating out successive
+coordinates gives normalization of the displayed vacuum density.}
+
+\p{Splitting a heat factor in half gives the thermal formula
+by the kernel pairing of \ref{fdip-00GX}.
+The Gaussian comparison in \ref{fdip-00H6} gives absolute
+integrability of the cyclic integrand. In particular
+##{Z_\beta=\|e^{-\beta H/2}\|_{\mathrm{HS}}^2
+          =\int K_\beta(q,q)\,dq.}
+By \citet{Theorem 1.1, p. 2}{simon1999feynman}, this is the
+Brownian-loop measure obtained by integrating the bridge weight
+#{p_\beta(0)\exp(-\int_0^\beta U)} over its common endpoint.
+Splitting bridges at the insertion times gives exactly the cyclic
+densities above. This identifies the continuous-time law for #{H};
+it makes no trace-norm convergence claim for discrete periodic laws.}
+}
+
+\p{Arbitrary bounded quantum operators also define the same
+Euclidean operator strings. Only multiplication observables are
+pointwise functions of the coordinate path. A momentum Weyl
+operator translates wavefunctions, so its insertion is not a
+coordinate-path multiplier.}
+
+\p{With the \vocabk{real-time evolution}{fdip-00H8}, the vacuum
+two-point function is
+##{\begin{aligned}
+C_0(A,B;t)&=\omega_0(A\alpha_t(B))\\
+ &=\langle\psi_0,Ae^{it(H-E_0)}B\psi_0\rangle.
+\end{aligned}}
+Its finite spectral measure is supported in #{\mathbb R_{\ge0}}, so
+it extends analytically to #{\operatorname{Im}t>0}; at #{t=i\tau}
+it equals the Euclidean expression. Thermally,
+##{\begin{aligned}
+C_\beta(A,B;t)
+ &=Z_\beta^{-1}\operatorname{Tr}
+   (e^{-\beta H}Ae^{itH}Be^{-itH}),\\
+C_\beta(A,B;i\tau)
+ &=Z_\beta^{-1}\operatorname{Tr}
+   (e^{-(\beta-\tau)H}Ae^{-\tau H}B),\quad 0<\tau<\beta.
+\end{aligned}}
+The spectral expansion has weights
+#{e^{-(\beta-\tau)E_j-\tau E_k}}. Cauchy–Schwarz with
+Schatten Hölder bounds its absolute sum by
+#{\|A\|\|B\|Z_\beta}, locally uniformly in the open strip;
+positive heat intervals also absorb spectral powers for derivatives.
+Thus it is analytic for #{0<\operatorname{Im}t<\beta} and has
+the stated imaginary-time values. The same argument applies to
+products at strictly ordered imaginary times, using their positive
+successive intervals.}

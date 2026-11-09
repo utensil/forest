@@ -1,0 +1,52 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Definition}
+\title{Scalar fields, Weyl operators and equilibrium states}
+\date{2026-11-09}
+
+\p{Use #{\mathcal H} and #{U} from the
+\vocabk{coercive slice potential}{fdip-00GU}, the Hamiltonian
+#{H} of \ref{fdip-00H2}, and its normalized positive ground
+vector #{\psi_0} from \ref{fdip-00H6}. For #{v\in V}, the
+\newvocab{quantum scalar field} and its \newvocab{conjugate momentum}
+are the maximal-domain operators
+##{\begin{aligned}
+(\Phi_vf)(q)&=q_vf(q),&
+D(\Phi_v)&=\{f\in\mathcal H:q_vf\in\mathcal H\},\\
+\Pi_vf&=-i\partial_vf,&
+D(\Pi_v)&=\{f\in\mathcal H:\partial_vf\in\mathcal H\}.
+\end{aligned}}
+The derivative is distributional. Their self-adjointness and common
+test cores follow from the position and Fourier calculations in
+\ref{fdip-00HE}. This is the
+position-momentum realization of
+\citet{Section 8.1, pp. 207-208}{teschl2014quantum}, with #{\hbar=1}.}
+
+\p{For real #{r,z\in\mathbb R^V}, the \newvocab{Weyl operator}
+is the bounded operator
+##{(W(r,z)f)(q)=e^{ir\cdot(q+z/2)}f(q+z).}
+Write #{\sigma((r,z),(r',z'))=r\cdot z'-z\cdot r'}.
+The factorization into exponentials and multiplication rule
+are computed in \ref{fdip-00HE}.}
+
+\p{The \newvocab{real-time evolution} and its action on bounded
+operators are
+##{V_t=e^{-itH},\qquad \alpha_t(A)=V_t^*AV_t,\qquad t\in\mathbb R.}
+By \ref{fdip-00HE}, #{V_t} is a strongly continuous unitary group.
+This unitarity concerns a Hamiltonian with
+finitely many spatial sites. No unitary representation of the
+Poincaré group, relativistic spectrum condition or S-matrix is
+asserted by this construction.}
+
+\p{The \newvocab{vacuum state} and \newvocab{thermal state} on bounded
+operators are
+##{\begin{aligned}
+\omega_0(A)&=\langle\psi_0,A\psi_0\rangle,\\
+\omega_\beta(A)&=Z_\beta^{-1}\operatorname{Tr}(e^{-\beta H}A),&
+Z_\beta&=\operatorname{Tr}e^{-\beta H},\quad\beta>0.
+\end{aligned}}
+Their bounded real-time correlations are
+#{\omega(A_0\alpha_{t_1}(A_1)\cdots\alpha_{t_n}(A_n))}.
+The trace is finite by \ref{fdip-00H3}; positivity, normalization,
+stationarity and the correlation bound follow in \ref{fdip-00HE}.}

@@ -1,0 +1,82 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{Canonical commutators and the nonlinear quantum force}
+\date{2026-11-09}
+
+\p{Specialize the \vocabk{coercive slice potential}{fdip-00GU} to
+#{U(q)=q^TKq/2+\sum_v\lambda_vq_v^4/24}, with real symmetric
+#{K>0} and #{\lambda_v\ge0}. On #{\mathcal D=C_c^\infty(\mathbb R^s)},
+the \vocabk{quantum scalar fields}{fdip-00H8} and their
+\vocabk{conjugate momenta}{fdip-00H8} satisfy
+##{\begin{aligned}
+[\Phi_v,\Phi_w]&=[\Pi_v,\Pi_w]=0,&
+[\Phi_v,\Pi_w]&=i\delta_{vw}I,\\
+i[H,\Phi_v]&=\Pi_v,&
+i[H,\Pi_v]&=-\left(\sum_wK_{vw}\Phi_w+\frac{\lambda_v}{6}\Phi_v^3\right).
+\end{aligned}}
+Every product is defined on #{\mathcal D}, which each listed
+polynomial differential operator preserves.}
+
+\p{Define the self-adjoint transported fields by
+##{\begin{aligned}
+\Phi_v(t)&=e^{itH}\Phi_ve^{-itH},&
+D(\Phi_v(t))&=e^{itH}D(\Phi_v),\\
+\Pi_v(t)&=e^{itH}\Pi_ve^{-itH},&
+D(\Pi_v(t))&=e^{itH}D(\Pi_v).
+\end{aligned}}
+For every fixed #{t_0} and #{\psi\in\mathcal D_{t_0}
+=e^{it_0H}\mathcal D}, both vector-valued maps are defined
+near #{t_0}, differentiable there at #{t_0}, and
+##{\begin{aligned}
+\left.\frac d{dt}\Phi_v(t)\psi\right|_{t=t_0}
+ &=\Pi_v(t_0)\psi,\\
+\left.\frac d{dt}\Pi_v(t)\psi\right|_{t=t_0}
+ &=-e^{it_0H}\left(\sum_wK_{vw}\Phi_w+
+                  \frac{\lambda_v}{6}\Phi_v^3\right)e^{-it_0H}\psi.
+\end{aligned}}
+The cubic can equivalently be written #{\Phi_v(t_0)^3} on this
+domain. The algebraic invariance of #{\mathcal D} does not assert
+its preservation by real-time evolution.}
+
+\proof{
+\p{The product rule on test functions gives the commutators.
+In particular #{[U,\Pi_v]f=i(\partial_vU)f}, so multiplication
+by #{i} gives the negative force. This computes the canonical
+position-momentum algebra of
+\citet{Section 8.1, pp. 207-208}{teschl2014quantum} for the present polynomial.}
+
+\p{For differentiability, put #{B=H+b+1\ge I}. The form domain
+of \ref{fdip-00H2} is #{Q=D(B^{1/2})}; its norm satisfies
+#{\|f\|_Q=\|B^{1/2}f\|}. Coercivity bounds the fields as maps
+#{Q\to\mathcal H}:
+##{\|\Phi_vf\|^2\le a^{-1}(h[f]+b\|f\|^2),\qquad
+   \|\Pi_vf\|^2\le2(h[f]+b\|f\|^2).}
+Polynomial #{U} gives #{H^k\mathcal D\subset\mathcal D} for all
+integers #{k\ge0}. Thus #{f\in\mathcal D} lies in
+#{D(B^{3/2})}. Spectral dominated convergence gives
+##{\frac{e^{-ihH}f-f}{h}\longrightarrow-iHf\quad\text{in }Q.}
+Indeed #{|(e^{-ih\lambda}-1)/h|\le|\lambda|}, and the squared
+#{Q} norm is dominated by a constant times the spectral integral
+of #{(\lambda+b+1)\lambda^2}, finite on #{D(B^{3/2})}.}
+
+\p{For #{A=\Phi_v} or #{\Pi_v}, the convergence in #{Q} yields
+#{A(e^{-ihH}f-f)/h\to-iAHf} in #{\mathcal H}. Also
+#{Af\in\mathcal D\subset D(H)}, so
+#{(e^{ihH}-I)Af/h\to iHAf}. Split the difference as
+##{\begin{aligned}
+\frac{e^{ihH}Ae^{-ihH}f-Af}{h}
+ &=\frac{(e^{ihH}-I)Af}{h}\\
+ &\quad+e^{ihH}A\frac{(e^{-ihH}-I)f}{h}.
+\end{aligned}}
+All terms are defined because #{e^{-ihH}} preserves #{Q} and
+#{A:Q\to\mathcal H} is bounded. The limit is #{i[H,A]f}.
+Conjugating this identity and writing #{\psi=e^{it_0H}f}
+proves the derivative at #{t_0}. Unitary conjugation of the
+maximal multiplication domain justifies the cubic notation.}
+}
+
+\p{These force identities use the polynomial specialization.
+A merely continuous coercive potential supplies the Hamiltonian
+and bounded correlations, without a differentiable force claim.}

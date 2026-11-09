@@ -1,0 +1,68 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{Temporal reflection positivity}
+\date{2026-11-09}
+
+\p{For the periodic law of \ref{fdip-00GX}, take #{N=2m},
+#{m\ge1}. The \vocabk{link reflection}{fdip-007M} is
+#{\theta(j)=1-j} modulo #{2m}, with positive half
+#{\{1,\ldots,m\}}. Let #{\mathcal A_+} be finite sums of
+products #{F(q)=\prod_{j=1}^m f_j(q_j)}, with arbitrary bounded
+measurable functions of a whole spatial slice. For a product set
+##{A_F=T_\epsilon^{1/2}M_{f_1}T_\epsilon M_{f_2}\cdots
+ T_\epsilon M_{f_m}T_\epsilon^{1/2},}
+with just #{M_{f_1}} between the half-powers if #{m=1}, and
+extend linearly. Then
+##{\mathbb E_{\mu_{\epsilon,2m}}
+ [\overline{F(\theta q)}F(q)]
+ =\frac{\|A_F\|_{\mathrm{HS}}^2}{Z_{\epsilon,2m}}\ge0.}
+The \vocabk{site reflection}{fdip-007M} #{\theta(j)=-j} also
+has this positivity, with positive-half observables depending on
+#{q_0,\ldots,q_m}. Both assertions extend to positive-half
+#{L^2} observables, including polynomials.}
+
+\proof{
+\p{By \ref{fdip-00GW}, #{T_\epsilon^{1/2}} is Hilbert–Schmidt;
+other factors are bounded. The proof of \ref{fdip-0086}
+uses exactly these hypotheses, positivity of #{T_\epsilon}, and
+the bounded cyclic trace identity. The multipliers occur in order
+#{\overline f_m,\ldots,\overline f_1,f_1,\ldots,f_m}, with
+#{2m} full transfers after adjacent half-powers combine.
+Apply it with the present Hilbert space and slice algebra. The
+sesquilinear identity for #{F,G} proves independence of the
+product-sum presentation, and #{G=F} gives the asserted square.}
+
+\p{For a site reflection, fix #{q_0=x,q_m=z} and define
+##{B_F(x,z)=\int F(x,q_1,\ldots,q_{m-1},z)
+ \prod_{j=0}^{m-1}k_\epsilon(q_j,q_{j+1})
+ \prod_{j=1}^{m-1}dq_j.}
+Symmetry of the kernels splits the other half into the conjugate
+integral, hence
+##{\mathbb E[\overline{F(\theta q)}F(q)]
+ =Z_{\epsilon,2m}^{-1}\int|B_F(x,z)|^2\,dx\,dz\ge0.}
+The bound #{|B_F|\le\|F\|_\infty k_\epsilon^{(m)}} and the
+Hilbert–Schmidt property of #{T_\epsilon^m} give integrability.
+For #{m=1}, there is no interior integral and the reflection fixes
+both slices.}
+
+\p{Kernel symmetry makes the law reflection invariant. Finite
+sums of rectangle indicators are dense in the #{L^2} law of the
+positive-half variables, and
+##{|\mathbb E[\overline{F\circ\theta}G]|
+ \le\|F\|_{L^2(\mu)}\|G\|_{L^2(\mu)}.}
+Continuity extends positivity from bounded products to that space.
+Polynomial observables belong to it by \ref{fdip-00GX}.}
+}
+
+\p{These are the onsite half decompositions of
+\ref{fdip-007N} and \ref{fdip-007O} with a whole configuration as
+one slice. Each fixed-slice potential is shared equally at a site
+cut; a link cut has heat cross terms #{q_vq'_v/\epsilon} with
+positive coefficients. On invariant compact cubes the bounded
+half decompositions apply, and coercivity supplies a Gaussian
+majorant for removing the cutoff. Additional spatial reflection
+positivity requires a specified graph reflection and nonnegative
+crossing-bond decomposition. An arbitrary finite spatial graph
+alone does not supply them.}

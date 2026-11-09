@@ -1,0 +1,80 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{The closed-form scalar Hamiltonian}
+\date{2026-11-09}
+
+\p{For a \vocabk{coercive slice potential}{fdip-00GU}, put
+##{\begin{aligned}
+Q&=\left\{f\in H^1(\mathbb R^s):
+           \int(U+b)|f|^2<\infty\right\},\\
+h(g,f)&=\tfrac12\int\nabla\overline g\cdot\nabla f
+               +\int U\overline g f.
+\end{aligned}}
+This densely defined closed form satisfies #{h[f]\ge-b\|f\|^2},
+where #{h[f]=h(f,f)}. It determines a unique self-adjoint
+#{H\ge-bI}, with the exact domain and action
+##{\begin{aligned}
+D(H)=\{f\in Q: &\text{there exists }v\in\mathcal H
+ \text{ such that}\\
+ &h(g,f)=\langle g,v\rangle\text{ for every }g\in Q\},
+ \qquad Hf=v.
+\end{aligned}}
+For #{f\in C_c^\infty(\mathbb R^s)},
+#{Hf=-\Delta f/2+Uf}. This test space is both a form core and
+an operator core. The representation domain above applies to an
+arbitrary continuous #{U}; it does not presume
+#{D(H)=H^2\cap D(M_U)}.}
+
+\proof{
+\p{The form norm is
+##{\|f\|_Q^2=\|f\|^2+\tfrac12\|\nabla f\|^2
+                      +\|(U+b)^{1/2}f\|^2.}
+A Cauchy sequence converges in #{H^1} and in the weighted
+#{L^2} component. A common almost-everywhere convergent subsequence
+identifies the latter limit as the multiplier of the former.
+Thus #{Q} is complete. Smooth compactly supported functions lie
+in #{Q} and are dense in #{L^2}. They are dense in the form norm:
+first multiply by cutoffs #{\chi(q/R)} and use dominated
+convergence in all three norm terms, with gradient error bounded
+by #{C\|f\|/R}; then mollify on a fixed larger compact set, where
+#{U+b} is bounded.}
+
+\p{The closed-form representation theorem,
+\citet{Theorem 2.14 and (2.63), p. 81}{teschl2014quantum}, now
+gives #{H} and its stated domain. Integration by parts gives
+the differential expression on #{C_c^\infty}.}
+
+\p{For the operator core, let
+#{S=-\Delta /2+U+b+1} on #{C_c^\infty}, so #{S\ge I}.
+If #{f\in\ker S^*}, then distributionally
+#{-\Delta f/2+(U+b+1)f=0}. Local boundedness of #{U} gives
+#{\Delta f\in L^2_{\mathrm{loc}}}; local elliptic regularity
+then gives #{f\in H^2_{\mathrm{loc}}}. Choose real cutoffs
+#{\chi_R=1} on #{|q|\le R}, with compact support and
+#{|\nabla\chi_R|\le C/R}. Testing the weak equation against
+#{\chi_R^2f} and taking real parts gives
+##{\begin{aligned}
+\tfrac12\|\nabla(\chi_Rf)\|^2
+ +\int(U+b+1)|\chi_Rf|^2
+ &=\tfrac12\int|\nabla\chi_R|^2|f|^2\\
+ &\le\frac{C^2}{2R^2}\|f\|^2.
+\end{aligned}}
+Compactly supported Sobolev approximation justifies the test.
+Since #{U+b+1\ge1}, letting #{R\to\infty} forces #{f=0}.}
+
+\p{Hence #{\operatorname{Ran}S} is dense. The estimate
+#{\|Sf\|\ge\|f\|} passes to the closure and makes
+#{\operatorname{Ran}\overline S} closed, so #{\overline S}
+is onto. Its inverse is a bounded symmetric operator defined on
+all of #{\mathcal H}, hence self-adjoint. Its injectivity and
+dense range imply that #{\overline S} is self-adjoint as well.
+Thus #{-\Delta /2+U} is essentially self-adjoint on
+#{C_c^\infty}, and its closure agrees with the form extension.
+This also identifies the realization mentioned after (1.4) in
+\citet{p. 2}{simon1999feynman}.}
+}
+
+\p{For #{s=0}, #{Q=\mathbb C} and #{H=U(0)I}; the derivative
+terms vanish.}
