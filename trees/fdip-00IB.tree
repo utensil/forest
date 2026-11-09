@@ -1,0 +1,63 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Lemma}
+\title{A uniform bound for the periodic counterterm}
+\date{2026-11-09}
+
+\p{Use the mass-one units of \ref{fdip-00I5}, #{\ell\ge2}, odd
+#{N\ge5}, #{\epsilon=\ell /(N+1)} and #{L=N\epsilon\ge1}.
+On the periodic function space
+#{H_P=L^2((\epsilon\mathbb Z/L\mathbb Z)^2,\epsilon^2;\mathbb R)},
+let #{-\Delta_{\epsilon,P}} be the operator of its periodic
+incidence form. For #{\mu=1/2}, put
+##{\begin{aligned}
+C_P&=(-\Delta_{\epsilon,P}+\mu I)^{-1},\\
+u_P&=C_P\delta_0^\sharp,&c_P&=\delta_0(u_P),\\
+b&=\|u_P\|_{L^3(\epsilon^2\text{ counting})}^3.
+\end{aligned}}
+Here #{\delta_0} is evaluation at the torus origin and
+#{\delta_0^\sharp} its Riesz vector. The positive resolvent satisfies
+#{u_P\ge0}, and
+##{b\le B,\qquad B=\left(18\sqrt2+\tfrac14\right)^2,}
+uniformly in the mesh and #{L\ge1}.}
+
+\proof{
+\p{Choose the Fourier basis of the finite torus. With physical
+measure #{\epsilon^2} and dual measure #{L^{-2}},
+\citet{(A.2)-(A.6), p. 21, arXiv v2}{bauerschmidt2024logsobolev}
+gives multiplier #{(\mu+\theta_\epsilon(k))^{-1}} and
+#{\theta_\epsilon(k)\ge4|k|^2/\pi^2} in the Brillouin zone.
+The inverse Fourier map has #{L^1\to L^\infty} norm at most one
+by the triangle inequality and #{L^2\to L^2} norm one by
+Parseval. Interpolation at parameter #{2/3} gives
+#{L^{3/2}\to L^3} norm at most one. Consequently
+##{\begin{aligned}
+b&\le\left[L^{-2}\sum_k
+               (1/2+\theta_\epsilon(k))^{-3/2}\right]^2\\
+ &\le\left[L^{-2}\sum_{n\in\mathbb Z^2}
+               (1/2+16|n|^2/L^2)^{-3/2}\right]^2.
+\end{aligned}}
+The second inequality uses #{k=2\pi n/L} and enlarges the
+finite frequency set to all integer frequencies.}
+
+\p{The terms with #{|n|_\infty\le L} have total, after division
+by #{L^2}, at most #{18\sqrt2}: there are at most #{9L^2}
+such terms and each is at most #{2\sqrt2}. For an integer
+#{j>L}, the shell #{|n|_\infty=j} has #{8j} points and each
+summand is at most #{L^3/(64j^3)}. The tail is at most
+##{\frac L8\sum_{j>L}j^{-2}\le\frac14,}
+since #{\lfloor L\rfloor\ge L/2} and
+#{\sum_{j>L}j^{-2}\le1/\lfloor L\rfloor}. Squaring proves the
+bound. Positivity of the massive heat-kernel resolvent gives
+#{u_P\ge0}, so its cube equals its absolute cube.}
+}
+
+\p{The abstract interpolation step is supported by TauCeti's
+\leanref/tauceti{TauCeti.eLpNorm_le_rpow_mul_rpow_mul_eLpNorm}.
+The inverse Fourier map is complex linear; both finite measure spaces
+are sigma-finite and all their functions are simple. Its endpoints are
+#{(p_0,q_0)=(1,\infty)}, #{(p_1,q_1)=(2,2)}, with bounds one;
+#{\theta=2/3} gives #{(p,q)=(3/2,3)}. The Fourier normalization,
+dispersion and shell computation above are separate mathematical
+inputs, not conclusions of that declaration.}

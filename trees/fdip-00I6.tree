@@ -1,0 +1,128 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{The canonical infinite-volume state and its moment topology}
+\date{2026-11-09}
+
+\p{For #{m_0,\lambda>0} and any increasing #{\ell_j\to\infty},
+the states of the \vocabk{continuum half-Dirichlet laws}{fdip-00I2} converge
+to a state #{\omega} represented by a probability measure
+#{\nu} on real tempered distributions, independent of the square
+exhaustion. Write #{J(f)=\omega(e^{i\Phi(f)})} and
+#{S_r(f_1,\ldots,f_r)=\omega(\Phi(f_1)\cdots\Phi(f_r))}.
+The measure is Euclidean invariant and even under #{\phi\mapsto-\phi}.
+The functional is entire on every finite-dimensional complex test
+span, and convergence of the bounded-region functionals is locally
+uniform on every such span. For fixed Schwartz tests,
+##{S_r(f_1,\ldots,f_r)=
+ \lim_{j\to\infty}\lim_{\substack{N\to\infty\\N\text{ odd}}}
+ \omega_{\ell_j,N}\bigl(\Phi_\epsilon(f_1)\cdots\Phi_\epsilon(f_r)\bigr),
+ \quad\epsilon=\frac{\ell_j}{N+1}.}
+Put
+##{\begin{aligned}
+n_H(h)&=\left(\int_\mathbb R(2+x^2)|h(x)|^2dx\right)^{1/2},\\
+G_H(f)&=\int_\mathbb R n_H(f(\cdot,t))dt
+                     +\sup_t n_H(f(\cdot,t)).
+\end{aligned}}
+There is a constant #{D}, depending on the fixed model, such that
+##{|S_r(f_1,\ldots,f_r)|\le D^r\sqrt{r!}\prod_{k=1}^rG_H(f_k).}
+Thus the moment forms are jointly continuous and tempered.}
+
+\proof{
+\p{The exact source law is
+\citet{(3.79)-(3.81), pp. 293-294}{frohlich1974schwingerI}:
+the covariance is #{(-\Delta_{\Lambda,D}+m_0^2I)^{-1}}, the
+Gaussian exponent has its canonical factor #{1/2}, and the normalized
+interaction is the negative exponential of the whole-space Wick
+polynomial #{P(u)=\lambda u^4/24}. There is zero external field.
+The square closure has continuous piecewise smooth boundary and is
+the closure of its interior, satisfying that paper's regularity
+condition. The polynomial satisfies (3.69) and condition (C2), (4.4),
+p. 296: its leading coefficient is positive and its linear coefficient
+is zero, which the printed inequality permits. The separate
+cluster-expansion condition (C1) is not used.}
+
+\p{The norm #{n_H} is exactly (3.58), p. 289, of
+\citek{frohlich1974schwingerI}. The equivalent operator-bound norms
+around (3.40)-(3.42), p. 286, lie between #{n_H} and a
+model-dependent multiple of it; enlarging constants therefore transfers
+their estimates. For the weight-one norm
+#{n_1(h)^2=\int(1+x^2)|h(x)|^2dx} and its analogous #{G_1},
+##{n_1\le n_H\le\sqrt2\,n_1,\qquad
+   G_1\le G_H\le\sqrt2\,G_1.}
+The norms are not identified with one another. The spacetime norm is
+finite and continuous on Schwartz space. Absolute values preserve
+#{n_H} and #{G_H} in their function-space completion; smooth compact
+approximation justifies the absolute-test inequalities there.}
+
+\p{By \citet{Theorem 3.13', p. 294}{frohlich1974schwingerI},
+every moment smeared with nonnegative compact tests is nonnegative
+and increasing under inclusion of regular domains. Odd moments vanish
+by even symmetry. Corollary 3.14' transfers the entire-functional and
+norm estimates of Section 3.4, particularly the first assertion of
+Theorem 3.12, uniformly to the bounded-region laws. For fixed real
+tests #{f_1,\ldots,f_s}, put
+#{F_\Lambda(z)=J_\Lambda(\sum_{k=1}^sz_kf_k)}. There are
+#{A,B}, independent of #{\Lambda}, with
+##{|F_\Lambda(z)|\le A\exp\left[
+ B\,G_H\left(\sum_{k=1}^s|\operatorname{Im}z_k|\,|f_k|\right)^2\right].}
+This bounds the family locally on every complex test span. The same
+estimates, or Cauchy differentiation as in Theorem 4.2(II), give
+#{D^r\sqrt{r!}\prod_kG_H(f_k)} for the moments uniformly in
+the region. Consequently the monotone nonnegative moments have finite
+limits. Each real compact smooth test is a difference of two nonnegative
+compact smooth tests. Multilinear expansion extends the limits to
+signed tests, independently of the decomposition, since each
+finite-domain functional is multilinear.}
+
+\p{To identify this limit with the precise state of Section 4.1 of
+\citek{frohlich1974schwingerI}, put
+#{R(a,b)=[-a,a]\times[-b,b]} and
+#{\Sigma_a=[-a,a]\times\mathbb R}. For fixed nonnegative compact
+tests let #{M(a,b)} be their half-Dirichlet moment on #{R(a,b)}.
+The compact-region and strip construction in Section 3.5,
+pp. 293-295, removes the time boundary and gives
+##{M_{\mathrm{strip}}(a)=\sup_b M(a,b).}
+The transfer statement on p. 295 identifies the notation used in
+Section 4 with these strip measures. For #{q_j=\ell_j/2},
+##{\begin{aligned}
+\lim_jM(q_j,q_j)
+ &=\sup_{a,b}M(a,b)\\
+ &=\sup_a\sup_bM(a,b)
+  =\lim_{a\to\infty}M_{\mathrm{strip}}(a).
+\end{aligned}}
+Every bounded rectangle lies in a sufficiently large centered square,
+and each square is itself a rectangle. Every bounded regular domain
+also lies in such a square. These facts prove the equalities of
+directed suprema; they apply after the ultraviolet limit, with no
+interchange of lattice and volume limits. Multilinear decomposition
+transfers equality to signed compact tests.}
+
+\p{Theorem 4.1(II), p. 296, of
+\citek{frohlich1974schwingerI} identifies this strip limit as its
+Euclidean-invariant half-Dirichlet state. Theorem 4.2(I)-(II),
+pp. 296-297, supplies its continuous entire functional and tempered
+moments. Invariance therefore belongs to the square-limit state as
+well.}
+
+\p{Moment equality implies functional equality here through the
+uniform entire bounds. Cauchy estimates on a larger polydisc bound
+the tails of the multivariate Taylor expansions uniformly on compact
+coefficient sets. The coefficient limits therefore give locally uniform
+convergence of #{F_\Lambda}. Equivalently, normal-family compactness
+and uniqueness of the Taylor coefficients give the same conclusion.
+Cauchy's formula passes every mixed derivative to the limit. Compact
+tests approximate each Schwartz test in #{G_H}, and the uniform
+#{G_H}-continuity extends both equality and convergence. Theorem 4.2
+identifies #{J} as the Fourier transform of a unique probability
+measure on real tempered distributions. Its finite-dimensional entire
+Laplace transforms also give moment determinacy.}
+
+\p{For the inner ultraviolet limit of a fixed Schwartz test, multiply
+it by a compact smooth cutoff equal to one near the closed square.
+This changes neither the lattice smear nor the bounded-region field,
+so \ref{fdip-00I4} applies exactly. The uniform #{G_H} estimates then
+give the outer limit for the original tests. All tests, including any
+translation parameter used subsequently, are fixed during both limits.}
+}

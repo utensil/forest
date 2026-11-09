@@ -1,0 +1,50 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Lemma}
+\title{The square satisfies the ultraviolet theorem}
+\date{2026-11-09}
+
+\p{Fix #{m_0,\lambda,\ell>0}. The positive states of the
+\vocabk{half-Dirichlet laws}{fdip-00HX} converge on every fixed product
+of \vocabk{point-sampled fields}{fdip-00HU} to the
+\vocabk{Schwinger moment form}{fdip-00I2} of the continuum law on
+the same square: for every #{r\ge0} and
+#{f_1,\ldots,f_r\in C_c^\infty(\mathbb R^2;\mathbb R)},
+##{\lim_{\substack{N\to\infty\\N\text{ odd}}}
+ \omega_{\ell,N}\bigl(\Phi_\epsilon(f_1)\cdots\Phi_\epsilon(f_r)\bigr)
+ =S_r^{\Lambda_\ell}(f_1,\ldots,f_r),
+ \qquad\epsilon=\frac\ell{N+1}.}
+The square and all tests remain fixed in this limit.}
+
+\proof{
+\p{A square is bounded, open and convex. The scaling and convolution
+argument in \citet{p. 202}{guerra1975euclideanII} therefore proves
+regularity in that paper's sense. It is the interior of a Jordan
+curve, so \citet{p. 171}{guerra1975euclideanI} makes it normal:
+the Dirichlet Green function vanishes at its boundary in the required
+sense.}
+
+\p{Let #{d(x)=\operatorname{dist}(x,\partial\Lambda_\ell)}.
+The boundary strip of width #{t} has area at most #{4\ell t}.
+For every integer #{p\ge1}, the boundary contribution to
+#{\int_{\Lambda_\ell}|\log d(x)|^pdx} is thus bounded by a
+constant times #{\int_0^a|\log t|^pdt<\infty}; the part away from
+the boundary is bounded. This is exactly log-normality as defined on
+\citet{p. 173}{guerra1975euclideanI}. It also supplies the
+coefficient integrability required for the continuum Wick law.}
+
+\p{The numerator and denominator of
+\citet{(IV.36), Theorem IV.13, p. 205}{guerra1975euclideanII}
+are the law of [the stated Wick construction](fdip-00HX): the
+Dirichlet covariance, whole-space Wick mass, polynomial coefficient,
+normalization and point samples all agree. The theorem gives every
+displayed moment limit. The odd-#{N} grids are a subsequence of its
+#{\epsilon\to0} limit and satisfy
+#{V_{\ell,N}=\epsilon\mathbb Z^2\cap\Lambda_\ell} exactly.}
+}
+
+\p{This is fixed-test moment convergence. The field and interaction
+estimates in the proof of the cited theorem also control local
+approximations; no simultaneous volume/mesh limit or estimate for
+arbitrary moving tests is part of the assertion.}

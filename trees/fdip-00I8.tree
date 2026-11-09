@@ -1,0 +1,142 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{Constructive regularity and the reflected positive form}
+\date{2026-11-09}
+
+\p{The state #{\omega} and functional #{J} of \ref{fdip-00I6}
+satisfy Axioms A-C of
+\citet{pp. 273-275}{frohlich1974verification}. In particular, let
+#{\theta(x,t)=(x,-t)} act on distributions by pullback and let
+#{\mathcal E_+} be the complex linear span of the bounded observables
+#{e^{i\Phi(f)}} with real Schwartz #{f} supported at nonnegative
+times. The reflected sesquilinear form
+##{B(F,G)=\omega\bigl(\overline{F\circ\theta}\,G\bigr)}
+is positive on #{\mathcal E_+}. This is the continuum version of the
+\vocabk{reflection-positive pairing}{fdip-007M}.}
+
+\p{The sharp-time fields form linear maps of spatial Schwartz
+tests into #{L^2(\nu)}. Their two-point form is continuous in both
+time arguments, compatible with ordinary time smearing, and obeys
+##{|\omega(\Phi_{t_1}(h_1)\Phi_{t_2}(h_2))|
+      \le C n_H(h_1)n_H(h_2).}
+For the time cutoffs #{g_T} specified in the proof, there are
+#{K,c>0} such that
+##{J(\pm i h\otimes g_T)\le Ke^{cT}
+ \qquad(T\ge0,\ h\text{ real Schwartz},\ n_H(h)\le1).}
+The constants depend on the fixed model and are independent of
+#{h,T} in this normalized class.}
+
+\proof{
+\p{For A1-A4, normalization, positivity and involution compatibility
+hold because integration is a positive normalized state on the
+commutative observable algebra. Thus #{J(0)=1}, #{J} is of positive
+type and #{J(f)=\overline{J(-f)}}. Schwartz continuity follows from
+\ref{fdip-00I6} and
+\citet{Theorem 4.2(I)}{frohlich1974schwingerI}. For A5-A6, full
+Euclidean invariance, including time translations and time reflection,
+follows from Theorems 4.1(II), 4.2(I) of that source and the
+directed-domain identification in \ref{fdip-00I6}. Invariance is
+asserted of the limit state, not of a bounded square.}
+
+\p{For B, first consider the canonical Dirichlet Gaussian on
+#{(-a,a)^2}. Choose an orthonormal eigenbasis of the spatial
+Dirichlet massive operator; its square-root frequencies are positive
+numbers #{\omega}. In each mode the time Dirichlet Green function
+obeys, for #{0<s,t<a},
+##{G_\omega(-t,s)=
+ \frac{\sinh(\omega(a-t))\sinh(\omega(a-s))}
+      {\omega\sinh(2a\omega)}.}
+This is a positive rank-one kernel on positive times. Summing modes
+makes the reflected covariance form positive. For any finite list
+of positive-time tests, use the standard basis of its complex
+coefficient space. The Gaussian characteristic matrix factors into
+positive diagonal factors #{e^{-C(f_i,f_i)/2}} and the entrywise
+exponential of the positive matrix #{C(\theta f_i,f_j)}.
+The exponential is positive by its power series and the Schur product
+theorem. This proves Gaussian reflection positivity.}
+
+\p{The whole-space Wick interaction splits as
+#{V_\Lambda=V_{\Lambda,+}+V_{\Lambda,+}\circ\theta}.
+The time-zero line has area zero and the Wick reference is reflection
+invariant. Its positive-half weight #{W_+=e^{-V_{\Lambda,+}}}
+is positive-time measurable and belongs to Gaussian #{L^2}.
+Here is the precise integrability check. The Wick conversion
+\citet{(II.88), Theorem II.38(ii)-(iv),
+pp. 172-173}{guerra1975euclideanI} rewrites the whole-space Wick
+quartic in Dirichlet Wick powers. The additional quadratic and
+constant coefficients are multiples of the boundary correction and
+its square. Equation (II.88b) bounds that correction near the boundary
+by a constant times #{|\log d(x)|}.}
+
+\p{On the positive half-square the leading coefficient is the
+positive constant #{\lambda /24} times its indicator. The ratios of
+the lower coefficients to it are bounded by powers of
+#{1+|\log d(x)|}. The weighted powers required in (II.89) are
+therefore integrable by the square's log-normality from
+\ref{fdip-00I4}; the coefficient #{L^{1+\delta}} conditions hold as
+well. Restriction to the half-square preserves these estimates.
+Theorem II.38(ii)-(iv) consequently gives all finite Gaussian
+#{L^p} bounds for #{W_+} and convergence of local approximations.
+Approximations supported at positive times retain positive-time
+measurability; their #{L^2} limit does too. This justifies the
+reflection factorization for exactly the canonical law of
+\citet{(3.80)-(3.81)}{frohlich1974schwingerI}, with the same
+argument as \citet{(3.19)}{frohlich1974verification}.}
+
+\p{For a bounded positive-time cylinder #{F}, the reflected
+interacting expectation is the Gaussian pairing of #{W_+F} with
+itself, divided by #{Z_\Lambda>0}. Gaussian positivity extends
+from bounded cylinders to the positive-time #{L^2} domain by
+truncation and its Cauchy-Schwarz bound, exactly as in
+[positive-time domain](fdip-007M). Thus the interacting form is positive. The
+locally uniform characteristic convergence of \ref{fdip-00I6}
+passes every finite such inequality to the volume limit. Tests whose
+support touches time zero follow by smooth positive-time
+approximation and Schwartz continuity.}
+
+\p{For C1, \ref{fdip-00I6} gives entire finite-dimensional
+functionals, continuous mixed derivatives and the jointly
+Schwartz-continuous two-point distribution. The distinct sharp-time
+input is \citet{Proposition 3.15(a), pp. 294-295}{frohlich1974schwingerI}:
+uniformly in region and times,
+##{|S_2^\Lambda(h_1\otimes\delta_{t_1},h_2\otimes\delta_{t_2})|
+ \le C n_H(h_1)n_H(h_2).}
+Theorem 4.4 and Corollary 4.5 of that source, pp. 298-300,
+construct these sharp-time fields in the same limit state. Lemma 4.6
+and Theorem 4.7, pp. 300-302, give continuity of their characteristic
+functions and moments in all time arguments, and compatibility with
+ordinary smearing. Their spatial norm is
+#{\|h\|_1+\|h\|_\infty}, finite on Schwartz tests. It is separate
+from #{G_H}, which is not applied to a delta-time test. These facts
+give the required bounded measurable, indeed continuous, sharp-time
+two-point form near equal times.}
+
+\p{For C2, choose smooth even #{g} with #{0\le g\le1}, supported
+in #{[-1,1]} and equal to one on #{[-1/2,1/2]}. For #{T\ge0}, put
+#{g_T(t)=1} when #{|t|\le T} and
+#{g_T(t)=g(|t|-T)} otherwise, as on p. 275 of
+\citek{frohlich1974verification}. Positivity of the moment
+coefficients and the absolute-test comparison bound the Laplace
+transform for #{h\otimes g_T} by that for
+#{|h|\otimes\mathbf1_{[-T-1,T+1]}}. Proposition 3.15(a) of
+\citek{frohlich1974schwingerI} gives
+##{J_\Lambda(\pm i h\otimes g_T)
+ \le\exp\bigl[2(T+1)(K_4n_H(h)^2+K_5)\bigr].}
+Enlarge #{K_4,K_5} to be nonnegative. On #{n_H(h)\le1}, take
+#{c=2(K_4+K_5)} and #{K=e^c}.}
+
+\p{The indicator-time Laplace transform is directly the object
+bounded in Proposition 3.15(a). No smooth approximation of that
+indicator in the time supremum norm is needed. Positivity of the
+moment distributions gives comparison with the smooth #{g_T}
+bounded by it; the nonsmooth spatial absolute value uses the
+weighted-#{L^2} extension of the source estimates. Entire convergence
+at the fixed smooth test #{h\otimes g_T} passes the bound to #{J}.
+If #{n_1(h)\le1} is used instead, take
+#{c=2(2K_4+K_5)} and enlarge #{K} accordingly. The spatial norm
+is Schwartz-continuous and the required #{K_h e^{cT}} bound holds,
+even with uniform #{K}. This constructive estimate is distinct from
+finite-cutoff coercivity.}
+}

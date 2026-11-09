@@ -1,0 +1,76 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{Mixing of the field state and uniqueness of the vacuum}
+\date{2026-11-09}
+
+\p{In the coupling domain of \ref{fdip-00IC}, the invariant
+state #{\omega} of \ref{fdip-00I6} is mixing for the translation
+action on field observables: for all #{F,G\in L^2(\nu)},
+##{\omega(F\,\alpha_aG)\longrightarrow\omega(F)\omega(G)
+                             \qquad(|a|\to\infty),}
+where #{\alpha_a\Phi(g)=\Phi(\tau_ag)} and #{\alpha_a} is the
+induced measure-preserving pullback. In particular,
+##{J(f+\tau_ag)\longrightarrow J(f)J(g)}
+for real Schwartz #{f,g}. With the A-C properties of
+\ref{fdip-00I8}, its Euclidean and reconstructed physical
+vacua are unique.}
+
+\proof{
+\p{The finite laws satisfy FKG association by
+\citet{Theorem V.3, p. 207}{guerra1975euclideanII}, with the
+bounded even onsite weights checked in \ref{fdip-00IC}.
+This inequality passes to the selected continuum and volume state
+for bounded continuous increasing cylinder functions. Indeed, at a
+fixed volume, convergence of second moments gives tightness for each
+finite family of smears. Convergence of higher moments supplies
+uniform integrability for every polynomial, so each subsequential
+law has the limiting moments of \ref{fdip-00I4}. The continuum law
+has finite exponential moments of linear smears, by
+\citet{Corollary 3.14'}{frohlich1974schwingerI} and the exact law
+identification in \ref{fdip-00I6}, and is therefore moment
+determinate. Every subsequential law is the same, proving
+finite-dimensional weak convergence. The volume limit follows from
+the characteristic convergence of \ref{fdip-00I6}. Bounded
+continuous testing now passes the FKG inequality.}
+
+\p{For a cylinder calculation, explicitly choose the standard bases
+in the finite spaces of arguments. Let #{X_i=\Phi(f_i)} and
+#{Y_j=\Phi(g_j)} with nonnegative smears; take bounded smooth real
+#{F,G} with bounded first derivatives. Set
+##{c_i=\|\partial_iF\|_\infty,\quad
+ d_j=\|\partial_jG\|_\infty,\quad
+ A=\sum_ic_iX_i,\quad B=\sum_jd_jY_j.}
+The functions #{A\pm F} and #{B\pm G} are coordinatewise
+increasing. FKG for the two equal-sign pairs, added together, gives
+#{\operatorname{Cov}(F,G)\ge-\operatorname{Cov}(A,B)}.
+Adding the two opposite-sign inequalities gives the reverse upper
+bound. Thus
+##{|\operatorname{Cov}(F(X),G(Y))|
+ \le\sum_{i,j}c_id_j\operatorname{Cov}(X_i,Y_j).}
+For the unbounded linear terms first use increasing clipping of
+#{A\pm F} and #{B\pm G}, then pass in #{L^2} by their finite
+second moments. This justifies all 4 FKG applications.}
+
+\p{The decay of \ref{fdip-00ID} makes the right side tend to zero
+under translation. Signed smears are differences of nonnegative
+ones; real and imaginary parts cover complex cylinders. This
+includes the exponentials of compact smooth smeared fields. For a
+Schwartz test #{f}, choose compact smooth #{f_R\to f} in Schwartz
+topology. Then
+##{\|e^{i\Phi(f)}-e^{i\Phi(f_R)}\|_2^2
+                   =2-2\operatorname{Re}J(f-f_R)\longrightarrow0.}
+Invariance makes this approximation uniform after translation.
+Cylinder exponentials span a dense subspace of the field #{L^2}
+space; their density follows from uniqueness of finite-dimensional
+Fourier transforms and the cylinder sigma-algebra. Cauchy-Schwarz
+and invariant #{L^2} approximation extend mixing to all #{L^2}
+observables.}
+
+\p{In particular #{J} satisfies condition (4.1) of
+\citek{frohlich1974verification}. The general Proposition D,
+pp. 303-304, applies together with the A-C verification in
+\ref{fdip-00I8}; it gives both Euclidean and physical vacuum
+uniqueness. The separate nonzero-external-field theorem is not used.}
+}

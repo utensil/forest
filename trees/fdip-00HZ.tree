@@ -1,0 +1,70 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{Finite-cutoff coercivity and exact normalizers}
+\date{2026-11-09}
+
+\p{For every #{m_0,\ell,\lambda>0} and odd #{N\ge5}, the
+\vocabk{square Dirichlet form}{fdip-00HU} satisfies
+#{Q_{\epsilon,D}\ge m_0^2I}. The
+\vocabk{half-Dirichlet law}{fdip-00HX} has every absolute polynomial
+moment and every exponential moment of a real linear functional.
+Writing #{c=c_\epsilon(m_0)} and #{d=N^2}, one has
+##{V_\epsilon\ge-\frac{\epsilon^2dc^2}{4},\qquad
+0<Z_{\ell,N}\le\exp\left(\frac{\lambda\epsilon^2dc^2}{4}\right).}
+The total action obeys, for a finite constant #{K_{\ell,N}},
+##{\tfrac12\mathfrak q_{\epsilon,D}(\phi,\phi)
+       +\lambda V_\epsilon(\phi)
+ \ge\frac{\lambda}{48}\|\phi\|_{L^4(V_{\ell,N},\epsilon^2)}^4
+        -K_{\ell,N}.}
+For the \vocabk{canonical Euclidean volume}{fdip-002M},
+##{\begin{aligned}
+\int e^{-\mathfrak q_{\epsilon,D}(\phi,\phi)/2}\,d\operatorname{vol}_{h_\epsilon}
+  &=(2\pi)^{d/2}\det(Q_{\epsilon,D})^{-1/2},\\
+\int e^{-\mathfrak q_{\epsilon,D}(\phi,\phi)/2-\lambda V_\epsilon(\phi)}
+                 \,d\operatorname{vol}_{h_\epsilon}
+  &=(2\pi)^{d/2}\det(Q_{\epsilon,D})^{-1/2}Z_{\ell,N}.
+\end{aligned}}
+No constant in the coercivity or weight bound is asserted uniform in
+the mesh.}
+
+\proof{
+\p{The incidence term is nonnegative, proving the operator lower
+bound. Choose the site-indicator basis. Let #{E_{\mathrm{int}}} contain
+internal bonds and #{E_\partial} bonds with one exterior endpoint, each
+counted once. Then
+##{\mathfrak q_{\epsilon,D}(\phi,\phi)
+ =m_0^2\epsilon^2\sum_x\phi_x^2
+ +\sum_{\{x,y\}\in E_{\mathrm{int}}}(\phi_x-\phi_y)^2
+ +\sum_{(x,y)\in E_\partial}\phi_x^2.}
+Every retained site has 4 incident bonds including the exterior ones,
+giving the diagonal and neighbor entries in \ref{fdip-00HV}.}
+
+\p{The scalar identity
+##{u^4-6cu^2+3c^2=(u^2-3c)^2-6c^2}
+gives the stated lower bound on #{V_\epsilon}. Thus
+#{0<e^{-\lambda V_\epsilon}\le e^{\lambda\epsilon^2dc^2/4}},
+and \ref{fdip-00GI} proves positive finite normalization and all
+polynomial moments. A real linear functional has every exponential
+moment under a finite-dimensional positive Gaussian. The same bounded
+weight estimate proves the assertion for the interacting law.
+Splitting the leading quartic into two equal parts absorbs all finite
+quadratic coefficients into one part and a constant, leaving the
+displayed quartic coercivity bound.}
+
+\p{The Gaussian integral and multiplication by its normalized weight
+give both raw integrals by \ref{fdip-00GI}. In the chosen site basis,
+#{d\operatorname{vol}_{h_\epsilon}=\epsilon^d\prod_xd\phi_x};
+counting-coordinate Lebesgue volume therefore multiplies both raw
+integrals by #{\epsilon^{-d}}. The constant term of the Wick quartic
+contributes
+##{\exp\left(-\frac{\lambda\epsilon^2dc^2}{8}\right)}
+to #{Z_{\ell,N}}. It cancels from normalized moments and remains in
+the unnormalized integral.}
+}
+
+\p{The Gaussian normalization and bounded-weight argument are the
+suppliers in \ref{fdip-00GI}; the square-completion and coercivity
+estimates above apply them to the Wick interaction of
+\citet{(IV.9), (IV.36)}{guerra1975euclideanII}.}
