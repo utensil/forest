@@ -19,13 +19,14 @@ of #{U}.}
 \p{The polynomial specialization is
 ##{\begin{aligned}
 K&=m^2I+L_w+B,& m&>0,\\
-U(q)&=\tfrac12q^TKq+\sum_{v\in V}\frac{\lambda_vq_v^4}{24},&
+U(q)&=\tfrac12\langle q,Kq\rangle+\sum_{v\in V}\frac{\lambda_vq_v^4}{24},&
 \lambda_v&\ge0.
 \end{aligned}}
-Here #{L_w} is the weighted graph Laplacian with
-#{q^TL_wq=\sum_{\{v,w\}\in E}w_{vw}(q_v-q_w)^2}, each internal
+Here #{K} is a positive operator on #{\mathbb R^V}. The weighted
+graph Laplacian #{L_w} satisfies
+#{\langle q,L_wq\rangle=\sum_{\{v,w\}\in E}w_{vw}(q_v-q_w)^2}, each internal
 undirected edge counted once and #{w_{vw}\ge0}.
-The diagonal matrix #{B=\operatorname{diag}(\beta_v)} has
+The multiplication operator #{Bq=(\beta_vq_v)_{v\in V}} has
 #{\beta_v\ge0}. Free boundaries have #{B=0}; zero Dirichlet exterior
 neighbors add their incident edge weights to #{\beta_v}.
 Periodic spatial boundaries require their actual finite edge set.
