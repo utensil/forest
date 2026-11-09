@@ -1,0 +1,25 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Example}
+\title{Graded spin carriers in even and odd lattice dimensions}
+\date{2026-11-09}
+
+\p{If #{d=2\ell}, the product #{\Gamma=i^\ell\gamma_1\cdots\gamma_d} supplies the required grading. Reversing this product as in [Chirality and the scope of other doubling remedies](fdip-009X) gives #{\Gamma^*=\Gamma}, #{\Gamma^2=I} and #{\Gamma\gamma_j\Gamma=-\gamma_j}. The commuting Hermitian involutions #{H_r=i\gamma_{2r-1}\gamma_{2r}} have an orthogonal joint eigenspace decomposition indexed by #{\{\pm1\}^\ell}. The invertible operator #{\gamma_{2r-1}} reverses the #{r}th eigenvalue and preserves all the others. Thus all joint eigenspaces have the same dimension. One is nonzero, so every nonzero carrier has dimension divisible by #{2^\ell}.}
+
+\p{In the standard basis of #{\mathbb C^2}, take
+##{X=\begin{pmatrix}0&1\\1&0\end{pmatrix},\quad
+Y=\begin{pmatrix}0&-i\\i&0\end{pmatrix},\quad
+Z=\begin{pmatrix}1&0\\0&-1\end{pmatrix}.}
+On #{(\mathbb C^2)^{\otimes\ell}} set
+##{\begin{aligned}
+\gamma_{2r-1}&=Z^{\otimes(r-1)}\otimes X\otimes I^{\otimes(\ell-r)},\\
+\gamma_{2r}&=Z^{\otimes(r-1)}\otimes Y\otimes I^{\otimes(\ell-r)}.
+\end{aligned}}
+Their squares and adjoints are the identity and themselves. For distinct generators, the first tensor factor where their nonidentity patterns differ contributes exactly one anticommutation. These operators therefore realize dimension #{2^\ell}, proving minimality. The tensor carrier in [Covariant centered differences with an internal fiber](fdip-009O) instead has #{n_s=2^d}; in dimension #{4} it has 16 components, rather than the 4 components of one minimal Dirac module. The chosen multiplicity remains part of the field data.}
+
+\p{For odd #{d}, begin with any nonzero Hermitian Clifford module #{W} with endomorphisms #{\widetilde\gamma_j}. Such a module is explicit: for #{d=2\ell+1}, add the even-dimensional chirality operator to the preceding #{2\ell} generators; when #{\ell=0}, use #{W=\mathbb C} and #{\widetilde\gamma_1=1}. On #{S=W\oplus W} set
+##{\gamma_j=\begin{pmatrix}\widetilde\gamma_j&0\\0&-\widetilde\gamma_j\end{pmatrix},\qquad
+\Gamma=\begin{pmatrix}0&I_W\\I_W&0\end{pmatrix}.}}
+
+\p{Block multiplication verifies all the displayed Clifford and grading relations, and #{n_s=2\dim W}. Thus a supplied graded module is available in odd lattice dimensions as well. More generally, anticommutation with the invertible #{\gamma_1} exchanges the two eigenspaces of any supplied #{\Gamma}, so their dimensions agree. None of the determinant, source or Ward arguments requires even #{d}.}

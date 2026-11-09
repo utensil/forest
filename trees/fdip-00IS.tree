@@ -1,0 +1,18 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Definition}
+\title{Intrinsic paired coefficients and odd sources}
+\date{2026-11-09}
+
+\p{Let #{V} be an ordinary finite-dimensional complex vector space, #{n=\dim V}. Use the \vocabk{Grassmann algebra}{fdip-008F}
+##{\mathcal A(V)=\Lambda(V^*\oplus V),}
+with the summands ordered as written and every generator odd. Write #{\iota_\psi:V^*\to\mathcal A(V)} and #{\iota_{\bar\psi}:V\to\mathcal A(V)} for the two canonical inclusions. The canonical coevaluation tensor in #{V^*\otimes V} gives, by wedge multiplication in that order, an element #{\theta\in\Lambda^2(V^*\oplus V)}. Put #{\Omega_V=\theta^n/n!}. The \newvocab{intrinsic paired coefficient} is the linear functional #{J_V:\mathcal A(V)\to\mathbb C} that vanishes below degree #{2n} and satisfies #{J_V(\Omega_V)=1}. For #{V=0}, it is the identity.}
+
+\p{The universal odd vector #{\psi\in V\otimes\mathcal A(V)} is the coevaluation tensor followed by #{\iota_\psi} in its dual factor. The universal odd covector #{\bar\psi\in V^*\otimes\mathcal A(V)} is the other coevaluation tensor followed by #{\iota_{\bar\psi}}. Bars are labels, not complex conjugation. For #{K\in\operatorname{End}(V)}, the contraction #{\bar\psi(K\psi)} multiplies the barred coefficient first. Equivalently #{\theta_K=-\bar\psi(K\psi)} is the wedge image of #{(I\otimes K)\operatorname{coev}_V} in #{V^*\otimes V}.}
+
+\p{An independent copy #{\mathcal B(V)} of #{\mathcal A(V)} supplies universal odd vectors #{\eta,\bar\eta}, called \newvocab{external odd sources}. Work in the graded tensor product #{\mathcal B(V)\widehat\otimes\mathcal A(V)}: source and field generators anticommute, and source coefficients are placed first. Extend #{J_V} by #{\mathcal B(V)}-linearity. For any endomorphism #{K} define its \newvocab{source generating polynomial}
+##{\mathscr Z_K(\bar\eta,\eta)=J_V e^{-\bar\psi(K\psi)+\bar\eta(\psi)+\bar\psi(\eta)}.}
+All exponentials are finite nilpotent series. For a complex-linear functional #{\lambda} on the source generator space #{V^*\oplus V}, the left contraction derivative #{\partial^L_\lambda} is the odd derivation with #{\partial^L_\lambda(w)=\lambda(w)} on source generators and zero on field generators. It satisfies
+##{\partial^L_\lambda(AB)=(\partial^L_\lambda A)B+(-1)^{|A|}A\partial^L_\lambda B}
+for homogeneous #{A}; composed derivatives act rightmost first. This is the \vocabk{paired Berezin convention}{fdip-008F}, expressed without a basis. Its agreement with that order is proved in \ref{fdip-00IV}.}
