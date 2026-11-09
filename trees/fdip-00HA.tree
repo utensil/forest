@@ -5,44 +5,52 @@
 \title{Canonical commutators and the nonlinear quantum force}
 \date{2026-11-09}
 
-\p{Specialize the \vocabk{coercive slice potential}{fdip-00GU} to
-#{U(q)=q^TKq/2+\sum_v\lambda_vq_v^4/24}, with real symmetric
-#{K>0} and #{\lambda_v\ge0}. On #{\mathcal D=C_c^\infty(\mathbb R^s)},
-the \vocabk{quantum scalar fields}{fdip-00H8} and their
-\vocabk{conjugate momenta}{fdip-00H8} satisfy
+\p{On the field Hilbert space #{\mathsf Q=\mathbb R^V}, specialize
+the \vocabk{coercive slice potential}{fdip-00GU} to
+##{U(q)=\tfrac12\langle q,Kq\rangle
+          +\tfrac1{24}\langle\lambda,q^4\rangle,}
+where #{K:\mathsf Q\to\mathsf Q} is positive definite and self-adjoint,
+#{\lambda:V\to\mathbb R_{\ge0}}, and powers and multiplication
+of site functions are pointwise. Define its gradient and directional derivative by
+##{\mathcal F(q)=Kq+\tfrac16\lambda q^3,\qquad
+   F_z(q)=\langle z,\mathcal F(q)\rangle.}
+On #{\mathcal D=C_c^\infty(\mathsf Q)}, for arbitrary real
+#{r,z\in\mathsf Q}, the \vocabk{quantum scalar fields}{fdip-00H8}
+and \vocabk{conjugate momenta}{fdip-00H8} satisfy
 ##{\begin{aligned}
-[\Phi_v,\Phi_w]&=[\Pi_v,\Pi_w]=0,&
-[\Phi_v,\Pi_w]&=i\delta_{vw}I,\\
-i[H,\Phi_v]&=\Pi_v,&
-i[H,\Pi_v]&=-\left(\sum_wK_{vw}\Phi_w+\frac{\lambda_v}{6}\Phi_v^3\right).
+[\Phi(r),\Phi(z)]&=[\Pi(r),\Pi(z)]=0,\\
+[\Phi(r),\Pi(z)]&=i\langle r,z\rangle I,\\
+i[H,\Phi(r)]&=\Pi(r),&
+i[H,\Pi(z)]&=-M_{F_z}.
 \end{aligned}}
 Every product is defined on #{\mathcal D}, which each listed
-polynomial differential operator preserves.}
+polynomial differential operator preserves. In particular the site
+gradient multiplier is #{M_{F_{e_v}}=\Phi(Ke_v)+\lambda_v\Phi_v^3/6}; the
+symmetry of #{K} gives this intrinsic operator action.}
 
-\p{Define the self-adjoint transported fields by
-##{\begin{aligned}
-\Phi_v(t)&=e^{itH}\Phi_ve^{-itH},&
-D(\Phi_v(t))&=e^{itH}D(\Phi_v),\\
-\Pi_v(t)&=e^{itH}\Pi_ve^{-itH},&
-D(\Pi_v(t))&=e^{itH}D(\Pi_v).
-\end{aligned}}
+\p{For #{A=\Phi(r)} or #{\Pi(z)}, define the self-adjoint transported
+operator and its domain by
+##{A(t)=e^{itH}Ae^{-itH},\qquad D(A(t))=e^{itH}D(A).}
+Write these as #{\Phi(r;t)} and #{\Pi(z;t)} respectively, with
+#{\Phi_v(t)=\Phi(e_v;t)} and #{\Pi_v(t)=\Pi(e_v;t)} for the site fields.
 For every fixed #{t_0} and #{\psi\in\mathcal D_{t_0}
 =e^{it_0H}\mathcal D}, both vector-valued maps are defined
 near #{t_0}, differentiable there at #{t_0}, and
 ##{\begin{aligned}
-\left.\frac d{dt}\Phi_v(t)\psi\right|_{t=t_0}
- &=\Pi_v(t_0)\psi,\\
-\left.\frac d{dt}\Pi_v(t)\psi\right|_{t=t_0}
- &=-e^{it_0H}\left(\sum_wK_{vw}\Phi_w+
-                  \frac{\lambda_v}{6}\Phi_v^3\right)e^{-it_0H}\psi.
+\left.\frac d{dt}\Phi(r;t)\psi\right|_{t=t_0}
+ &=\Pi(r;t_0)\psi,\\
+\left.\frac d{dt}\Pi(z;t)\psi\right|_{t=t_0}
+ &=-e^{it_0H}M_{F_z}e^{-it_0H}\psi.
 \end{aligned}}
-The cubic can equivalently be written #{\Phi_v(t_0)^3} on this
-domain. The algebraic invariance of #{\mathcal D} does not assert
+For #{z=e_v}, the cubic term can equivalently be written
+#{\lambda_v\Phi_v(t_0)^3/6} on this domain.
+The algebraic invariance of #{\mathcal D} does not assert
 its preservation by real-time evolution.}
 
 \proof{
 \p{The product rule on test functions gives the commutators.
-In particular #{[U,\Pi_v]f=i(\partial_vU)f}, so multiplication
+In particular #{D_zU=F_z} and
+#{[M_U,\Pi(z)]f=iF_zf}, so multiplication
 by #{i} gives the negative force. This computes the canonical
 position-momentum algebra of
 \citet{Section 8.1, pp. 207-208}{teschl2014quantum} for the present polynomial.}
@@ -51,8 +59,10 @@ position-momentum algebra of
 of \ref{fdip-00H2} is #{Q=D(B^{1/2})}; its norm satisfies
 #{\|f\|_Q=\|B^{1/2}f\|}. Coercivity bounds the fields as maps
 #{Q\to\mathcal H}:
-##{\|\Phi_vf\|^2\le a^{-1}(h[f]+b\|f\|^2),\qquad
-   \|\Pi_vf\|^2\le2(h[f]+b\|f\|^2).}
+##{\begin{aligned}
+\|\Phi(r)f\|^2&\le |r|^2a^{-1}(h[f]+b\|f\|^2),\\
+\|\Pi(z)f\|^2&\le2|z|^2(h[f]+b\|f\|^2).
+\end{aligned}}
 Polynomial #{U} gives #{H^k\mathcal D\subset\mathcal D} for all
 integers #{k\ge0}. Thus #{f\in\mathcal D} lies in
 #{D(B^{3/2})}. Spectral dominated convergence gives
@@ -61,7 +71,7 @@ Indeed #{|(e^{-ih\lambda}-1)/h|\le|\lambda|}, and the squared
 #{Q} norm is dominated by a constant times the spectral integral
 of #{(\lambda+b+1)\lambda^2}, finite on #{D(B^{3/2})}.}
 
-\p{For #{A=\Phi_v} or #{\Pi_v}, the convergence in #{Q} yields
+\p{For #{A=\Phi(r)} or #{\Pi(z)}, the convergence in #{Q} yields
 #{A(e^{-ihH}f-f)/h\to-iAHf} in #{\mathcal H}. Also
 #{Af\in\mathcal D\subset D(H)}, so
 #{(e^{ihH}-I)Af/h\to iHAf}. Split the difference as

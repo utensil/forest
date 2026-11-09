@@ -9,18 +9,20 @@
 #{E_\epsilon=-\epsilon^{-1}\log\lambda_\epsilon} for the
 \vocabk{interacting slice transfer}{fdip-00GU}.
 Its norm eigenvalue is simple, with a real normalized eigenfunction
-#{\psi_\epsilon>0} almost everywhere. For an orthonormal eigenbasis
-#{T_\epsilon\psi_{\epsilon,j}=\lambda_{\epsilon,j}\psi_{\epsilon,j}},
-put #{e_{\epsilon,j}=\epsilon^{-1}
-\log(\lambda_\epsilon /\lambda_{\epsilon,j})}. The
+#{\psi_\epsilon>0} almost everywhere. Let #{E_T} be the
+projection-valued spectral measure of #{T_\epsilon}, and for
+#{f\in\mathcal H} put #{\mu_f(B)=\langle f,E_T(B)f\rangle}.
+With #{b_\epsilon(t)=\epsilon^{-1}\log(\lambda_\epsilon /t)}
+for #{0<t\le\lambda_\epsilon}, the
 \vocabk{transfer Hamiltonian}{fdip-007W} is
 ##{\begin{aligned}
-H_\epsilon&=-\epsilon^{-1}\log(T_\epsilon /\lambda_\epsilon),\\
-D(H_\epsilon)&=\left\{\sum_jc_j\psi_{\epsilon,j}:
- \sum_j e_{\epsilon,j}^2|c_j|^2<\infty\right\},\\
-H_\epsilon\sum_jc_j\psi_{\epsilon,j}
- &=\sum_j e_{\epsilon,j}c_j\psi_{\epsilon,j}.
+H_\epsilon&=b_\epsilon(T_\epsilon)
+          =-\epsilon^{-1}\log(T_\epsilon /\lambda_\epsilon),\\
+D(H_\epsilon)&=\left\{f\in\mathcal H:
+ \int_{0<t\le\lambda_\epsilon}b_\epsilon(t)^2\,d\mu_f(t)<\infty\right\},\\
+H_\epsilon f&=\int_{0<t\le\lambda_\epsilon}b_\epsilon(t)\,dE_T(t)f.
 \end{aligned}}
+Injectivity gives #{E_T(\{0\})=0}, so no value at zero is needed.
 It is nonnegative and self-adjoint, with zero eigenspace
 #{\mathbb C\psi_\epsilon}, and
 #{T_\epsilon=e^{-\epsilon(H_\epsilon+E_\epsilon I)}}.}
@@ -39,11 +41,18 @@ sign, a contradiction. This is the argument of
 \citet{Theorem 10.12, pp. 272-273}{teschl2014quantum}, with all
 its operator hypotheses supplied by \ref{fdip-00GW}.}
 
-\p{Compactness, self-adjointness and injectivity give the positive
-eigenbasis. The diagonal logarithm argument in \ref{fdip-0085}
-applies with time step #{\epsilon}; it proves the stated maximal
-domain, self-adjointness and exponential identity. Simplicity gives
-the stated zero eigenspace.}
+\p{For this proof choose an orthonormal eigenbasis
+#{T_\epsilon\psi_{\epsilon,j}=\lambda_{\epsilon,j}\psi_{\epsilon,j}};
+compactness, self-adjointness and injectivity give
+#{\lambda_{\epsilon,j}>0}. Put
+#{e_{\epsilon,j}=b_\epsilon(\lambda_{\epsilon,j})}. The spectral
+integral domain is exactly
+##{\left\{\sum_jc_j\psi_{\epsilon,j}\in\mathcal H:
+             \sum_j e_{\epsilon,j}^2|c_j|^2<\infty\right\},}
+and its action multiplies #{c_j} by #{e_{\epsilon,j}}.
+The diagonal logarithm argument in \ref{fdip-0085} therefore proves
+the stated maximal domain, self-adjointness and exponential identity.
+Simplicity gives the stated zero eigenspace.}
 }
 
 \p{At a nonzero time step this is a spectral Hamiltonian; no

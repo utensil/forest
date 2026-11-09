@@ -6,10 +6,14 @@
 \date{2026-11-09}
 
 \p{For the Hamiltonian of \ref{fdip-00H2}, let
-#{\alpha:[0,1]\to\mathbb R^s} be the standard Brownian bridge:
-its coordinates are independent and
-#{\mathbb E[\alpha_i(r)\alpha_j(u)]
- =\delta_{ij}(\min(r,u)-ru)}. For #{t>0}, set
+#{\alpha:[0,1]\to\mathbb R^V} be the centered continuous Gaussian
+bridge with covariance form
+##{\begin{gathered}
+\mathbb E[\langle u,\alpha(r)\rangle\langle v,\alpha(t)\rangle]
+ =(\min(r,t)-rt)\langle u,v\rangle,\\
+u,v\in\mathbb R^V,\qquad r,t\in[0,1].
+\end{gathered}}
+For #{t>0}, set
 ##{\begin{aligned}
 X_r^{x,y}&=(1-r/t)x+(r/t)y+\sqrt t\,\alpha(r/t),\quad 0\le r\le t,\\
 K_t(x,y)&=p_t(x-y)\,
@@ -21,7 +25,11 @@ for #{e^{-tH}}, and
 In particular, the semigroup improves positivity.}
 
 \proof{
-\p{The potential is real, continuous and bounded below.
+\p{Choose an orthonormal basis of #{\mathbb R^V} for applying the
+Euclidean kernel theorem. In this basis the bridge coordinates are
+independent standard scalar bridges, since their joint Gaussian
+covariance is #{\delta_{ij}(\min(r,t)-rt)}.
+The potential is real, continuous and bounded below.
 The core argument of \ref{fdip-00H2} identifies its form
 Hamiltonian with the Schrödinger realization in
 \citet{Theorem 1.1, (1.1)-(1.3), p. 2}{simon1999feynman}.

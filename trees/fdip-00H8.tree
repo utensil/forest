@@ -8,16 +8,20 @@
 \p{Use #{\mathcal H} and #{U} from the
 \vocabk{coercive slice potential}{fdip-00GU}, the Hamiltonian
 #{H} of \ref{fdip-00H2}, and its normalized positive ground
-vector #{\psi_0} from \ref{fdip-00H6}. For #{v\in V}, the
-\newvocab{quantum scalar field} and its \newvocab{conjugate momentum}
-are the maximal-domain operators
+vector #{\psi_0} from \ref{fdip-00H6}. Write #{\mathsf Q=\mathbb R^V}
+for the real field Hilbert space with its counting pairing. For
+#{r,z\in\mathsf Q}, the smeared \newvocab{quantum scalar field} and
+its \newvocab{conjugate momentum} are the maximal-domain operators
 ##{\begin{aligned}
-(\Phi_vf)(q)&=q_vf(q),&
-D(\Phi_v)&=\{f\in\mathcal H:q_vf\in\mathcal H\},\\
-\Pi_vf&=-i\partial_vf,&
-D(\Pi_v)&=\{f\in\mathcal H:\partial_vf\in\mathcal H\}.
+(\Phi(r)f)(q)&=\langle r,q\rangle f(q),\\
+D(\Phi(r))&=\{f\in\mathcal H:\langle r,\cdot\rangle f\in\mathcal H\},\\
+\Pi(z)f&=-iD_zf,\\
+D(\Pi(z))&=\{f\in\mathcal H:D_zf\in\mathcal H\}.
 \end{aligned}}
-The derivative is distributional. Their self-adjointness and common
+Here #{D_z} is the distributional directional derivative along #{z}.
+For a vertex #{v}, let #{e_v} be the Riesz vector of the evaluation
+functional #{q\mapsto q(v)}. The site fields are
+#{\Phi_v=\Phi(e_v)} and #{\Pi_v=\Pi(e_v)}. Their self-adjointness and common
 test cores follow from the position and Fourier calculations in
 \ref{fdip-00HE}. This is the
 position-momentum realization of
@@ -25,8 +29,8 @@ position-momentum realization of
 
 \p{For real #{r,z\in\mathbb R^V}, the \newvocab{Weyl operator}
 is the bounded operator
-##{(W(r,z)f)(q)=e^{ir\cdot(q+z/2)}f(q+z).}
-Write #{\sigma((r,z),(r',z'))=r\cdot z'-z\cdot r'}.
+##{(W(r,z)f)(q)=e^{i\langle r,q+z/2\rangle}f(q+z).}
+Write #{\sigma((r,z),(r',z'))=\langle r,z'\rangle-\langle z,r'\rangle}.
 The factorization into exponentials and multiplication rule
 are computed in \ref{fdip-00HE}.}
 
