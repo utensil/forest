@@ -1,0 +1,73 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{Positive laws and exact marginal densities}
+\date{2026-11-09}
+
+\p{For every \vocabk{bounded positive weight}{fdip-00GH},
+#{0<\mathcal Z_Q[w]\leq L}. The law #{\nu_{Q,w}} is a probability
+measure with every absolute polynomial moment finite. Its
+\vocabk{reduced weight}{fdip-00GH} is continuous, positive and at most #{L};
+its \vocabk{exact fiber interaction}{fdip-00GH} is continuous. Moreover,
+##{\begin{aligned}
+P_*\nu_{Q,w}(dx)
+ &=\mathcal Z_Q[w]^{-1}(\mathcal R_Q^Xw)(x)\,d\mu_S(x),\\
+\mathcal Z_Q[w]&=\int_X\mathcal R_Q^Xw\,d\mu_S.
+\end{aligned}}
+In particular, for #{V\geq-b} polynomial and #{\lambda\geq0},
+##{0<Z_\lambda\leq e^{\lambda b},\qquad
+   P_*\mu_\lambda(dx)=Z_\lambda^{-1}e^{-F_\lambda(x)}d\mu_S(x).}
+The latter density is relative to the normalized Schur Gaussian.}
+
+\p{For the Euclidean volumes specified in \ref{fdip-000D}, put
+##{c_Q=\frac{(2\pi)^{\dim H/2}}{\sqrt{\det Q}},\qquad
+   c_C=\frac{(2\pi)^{\dim Y/2}}{\sqrt{\det C}},\qquad
+   c_S=\frac{(2\pi)^{\dim X/2}}{\sqrt{\det S}}.}
+Then #{c_Q=c_Cc_S}, and the unnormalized integrals are exactly
+##{\begin{aligned}
+\int_H e^{-h(\phi,Q\phi)/2}w(\phi)\,d\phi
+ &=c_Q\mathcal Z_Q[w],\\
+\int_Y e^{-h(x+y,Q(x+y))/2}w(x+y)\,dy
+ &=c_Ce^{-h(x,Sx)/2}(\mathcal R_Q^Xw)(x).
+\end{aligned}}
+Thus the negative logarithm of the second integral is
+#{h(x,Sx)/2+\mathcal F_Q^X[w](x)-\log c_C}.}
+
+\proof{
+\p{A strictly positive measurable function has positive integral
+against a probability measure: the sets #{\{w\geq1/n\}} exhaust
+#{H}. Boundedness gives the upper bound. For any polynomial #{R},
+##{\int_H|R|\,d\nu_{Q,w}
+ \leq\frac{L}{\mathcal Z_Q[w]}\int_H|R|\,d\mu_Q<\infty}
+by \ref{fdip-002W}. The same positivity argument applies to each
+conditional probability measure. Write its full field as
+#{a(x)+\eta}, where #{a(x)=x-C^{-1}B^\dagger x} is linear and
+#{\eta\sim\mu_C} is embedded in #{Y}. If #{x_j\to x}, continuity
+of #{w} gives pointwise convergence of #{w(a(x_j)+\eta)}, dominated
+by #{L}. Dominated convergence proves continuity of the reduced
+weight, and positivity permits its continuous logarithm.}
+
+\p{Square completion in \ref{fdip-000D} gives, at every #{x},
+##{e^{-h(x+y,Q(x+y))/2}\,dy
+ =c_Ce^{-h(x,Sx)/2}\kappa_{Q,x}(dy).}
+Multiply by #{w(x+y)} and integrate. Tonelli then integrates over
+#{x}; dividing by #{c_Q\mathcal Z_Q[w]} proves the marginal formula.
+This also proves the formulas with any nonnegative Borel retained
+observable. Integrable signed observables follow by their positive
+and negative parts. Finally #{0<e^{-\lambda V}\leq e^{\lambda b}}.}
+}
+
+\p{For #{\lambda=0}, one has #{Z_0=M_0=1}, #{F_0=0} and
+#{\mu_0=\mu_Q}, recovering Gaussian elimination including #{c_C}.
+For #{Y=0}, #{\mathcal R_Q^Hw=w} and #{c_C=1}; for #{X=0},
+the reduced weight is the scalar #{\mathcal Z_Q[w]} and #{c_S=1}.
+If #{H=0}, its volume and Gaussian law both have mass one,
+#{Z_\lambda=e^{-\lambda V(0)}} and #{F_\lambda(0)=\lambda V(0)}.
+Empty determinants are one.}
+
+\p{This is a direct application of the supplied Gaussian
+factorization, \citet{Theorem 1.4.49, p. 111}{tao2011measure}
+(dominated convergence), and
+\citet{Theorem 1.7.15, pp. 200-201}{tao2011measure} (Tonelli),
+using the uncompleted Borel Euclidean measures.}

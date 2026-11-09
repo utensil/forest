@@ -1,0 +1,62 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{The first response of the connected fourth moment}
+\date{2026-11-09}
+
+\p{Use orthonormal coordinates on a finite real Hilbert space,
+#{Q>0}, and
+##{V(\phi)=\frac1{4!}\sum_v g_v\phi_v^4,\qquad g_v>0.}
+For any nonzero coordinate vector #{f}, let #{Y=f\cdot\phi}
+and let #{\kappa_{4,\lambda}(Y)} be its
+\vocabk{joint cumulant}{fdip-00GM} with 4 equal arguments under
+#{\mu_\lambda}. Then
+##{\left.\frac{d}{d\lambda}\kappa_{4,\lambda}(Y)\right|_{0+}
+ =-\sum_v g_v\bigl((Q^{-1}f)_v\bigr)^4<0.}
+Consequently, for each fixed nonzero #{f}, there is #{\epsilon_f>0}
+such that the actual law of #{Y} is non-Gaussian whenever
+#{0<\lambda<\epsilon_f}. If #{H\ne0}, the full law
+#{\mu_\lambda} is therefore non-Gaussian for sufficiently small
+positive coupling.}
+
+\proof{
+\p{Put #{\Sigma=Q^{-1}} and #{a=\Sigma f}. Under the Gaussian
+source tilt #{e^{tY}}, square completion changes the mean to #{ta}
+and leaves covariance #{\Sigma} fixed. The scalar Gaussian fourth
+moment therefore gives
+##{\mathbb E_{0,tf}\phi_v^4
+ =t^4a_v^4+6t^2a_v^2\Sigma_{vv}+3\Sigma_{vv}^2.}
+Here #{tf} denotes the source #{\phi\mapsto tf\cdot\phi}.
+By \ref{fdip-00GO}, the coupling response of the normalized
+source logarithm is
+##{\begin{aligned}
+\left.\partial_\lambda W_\lambda(tf)\right|_{0+}
+ &=-\mathbb E_{0,tf}V+\mathbb E_{\mu_Q}V\\
+ &=-\frac1{24}\sum_vg_v
+      (t^4a_v^4+6t^2a_v^2\Sigma_{vv}).
+\end{aligned}}
+The constant terms cancel because #{W_\lambda(0)=0}.
+Taking 4 derivatives in #{t} and commuting them with the right
+coupling derivative proves the formula. Invertibility of #{\Sigma}
+gives #{a\ne0} whenever #{f\ne0}; at least one positive summand
+then makes its sign strict.}
+
+\p{At #{\lambda=0}, the fourth cumulant is zero. Continuity of
+the second coupling derivative, again from \ref{fdip-00GO},
+gives the actual expansion
+##{\kappa_{4,\lambda}(Y)
+ =-\lambda\sum_vg_va_v^4+O_f(\lambda^2)
+ \qquad(\lambda\downarrow0).}
+It is strictly negative on a sufficiently short positive interval.
+A real Gaussian variable has a quadratic source logarithm and zero
+fourth cumulant, proving the assertion. A Gaussian full law would
+have Gaussian linear images, so any one such #{f} proves the final
+claim. For #{H=0} there is no nonzero #{f} and no non-Gaussianity
+assertion.}
+}
+
+\p{The centered fourth-moment identity is
+\citet{v2, Theorem 3.1 and Example 3.2, p. 29}{etingof2024mathematical};
+its use after a linear source shift and the coupling response are
+the deductions above.}

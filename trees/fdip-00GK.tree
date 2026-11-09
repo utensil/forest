@@ -1,0 +1,68 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{Exact iteration of interacting marginals}
+\date{2026-11-09}
+
+\p{Let #{H=X\mathbin\perp Y\mathbin\perp Z}, #{E=X\oplus Y},
+#{Q>0}, and #{w} a \vocabk{bounded positive weight}{fdip-00GH}.
+Eliminating #{Z} from the Gaussian precision gives #{Q_E>0};
+eliminating #{Y} from #{Q_E} gives #{S>0} on #{X}. Then
+##{\mathcal R_Q^Xw
+  =\mathcal R_{Q_E}^X\bigl(\mathcal R_Q^Ew\bigr)}
+at every #{x\in X}. The reduced weights remain continuous,
+strictly positive and bounded by the same #{L}. Thus these operations
+iterate within the class of weights, whether or not their logarithms
+are polynomial. Their normalizers satisfy
+##{\mathcal Z_Q[w]
+ =\mathcal Z_{Q_E}[\mathcal R_Q^Ew]
+ =\mathcal Z_S[\mathcal R_Q^Xw].}
+For #{w=e^{-\lambda V}}, write #{F_E=-\log\mathcal R_Q^Ew}
+and #{F_X=-\log\mathcal R_Q^Xw}. The second step is exactly
+##{e^{-F_X(x)}
+ =\int_Y e^{-F_E(x+y)}\,\kappa_{Q_E,x}(dy).}
+In particular its reference is the conditional kernel of the induced
+Gaussian #{\mu_{Q_E}}, and its weight is the current #{e^{-F_E}}.}
+
+\proof{
+\p{Let #{p_Q(x,y,z)} be the normalized Gaussian density, #{p_E(x,y)}
+its #{E}-marginal density and #{p_X(x)} its #{X}-marginal density.
+All are everywhere positive. Gaussian elimination identifies the
+last two with the densities of #{\mu_{Q_E}} and #{\mu_S}.
+Direct elimination has the same #{X}-marginal, hence the same
+Gaussian covariance and Schur precision #{S}.
+The canonical conditional densities obey the pointwise identity
+##{\frac{p_Q(x,y,z)}{p_X(x)}
+ =\frac{p_E(x,y)}{p_X(x)}\frac{p_Q(x,y,z)}{p_E(x,y)}.}
+For fixed #{x}, multiply by #{w(x+y+z)} and integrate first over
+#{z}, then over #{y}. Tonelli proves the displayed reduction formula
+at every #{x}; no choice of a null-set version enters. Integrating
+against #{\mu_S} proves the equalities of normalizers. Continuity
+and boundedness at each step follow from \ref{fdip-00GI}.}
+
+\p{For the unnormalized constants, let #{C_Z=Q_{ZZ}} and let
+#{D_Y=(Q_E)_{YY}}. Direct elimination of #{Y\oplus Z} has block
+#{C_{YZ}=Q_{(Y\oplus Z)(Y\oplus Z)}}. Its Schur complement after
+#{Z} is precisely #{D_Y}; hence \ref{fdip-000D} gives
+##{\begin{aligned}
+\det C_{YZ}&=\det C_Z\det D_Y,\\
+c_{C_{YZ}}&=c_{C_Z}c_{D_Y},\\
+c_Q&=c_{C_Z}c_{Q_E}=c_{C_Z}c_{D_Y}c_S.
+\end{aligned}}
+Multiplying the normalized identities by these factors gives the
+same raw fiber and full integrals for direct and iterated elimination.
+For a polynomial insertion #{R}, the identical density argument uses
+Fubini: #{|R|w\leq L|R|} has finite full and conditional Gaussian
+integrals by \ref{fdip-002W}. This includes retained polynomial
+observables and their expectations.}
+}
+
+\p{The density factorization uses
+\citet{Appendix A.1, (A.1)-(A.2), p. 199}{rasmussen2006gaussian};
+its integral interchange uses
+\citet{Theorem 1.7.15, pp. 200-201}{tao2011measure}.
+The exact weight identity above extends the
+formal two-stage calculation in \ref{fdip-0046} without truncating its
+exponential or discarding constants. Zero summands use unit point
+masses and empty determinants, so the same identities apply.}

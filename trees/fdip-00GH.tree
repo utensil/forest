@@ -1,0 +1,51 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Definition}
+\title{Positive weights over a Gaussian law}
+\date{2026-11-09}
+
+\p{Let #{(H,h)} be a finite-dimensional real Hilbert space,
+#{Q:H\to H} positive definite and self-adjoint, and #{P} an orthogonal
+projection. Put #{X=\operatorname{im}P}, #{Y=\ker P}. Use the
+\vocabk{normalized Gaussian law}{fdip-0005} #{\mu_Q} and the
+\vocabk{canonical Euclidean volume}{fdip-002M} #{d\phi}.
+A \newvocab{bounded positive weight} is a continuous function
+#{w:H\to(0,\infty)} with #{w\leq L} for some finite #{L}.
+Its normalizing integral and \newvocab{weighted Gaussian law} are
+##{\mathcal Z_Q[w]=\int_H w\,d\mu_Q,\qquad
+   d\nu_{Q,w}=\mathcal Z_Q[w]^{-1}w\,d\mu_Q.}
+Their positivity and finiteness are established in \ref{fdip-00GI}.}
+
+\p{Write #{A,B,C} for the blocks of #{Q} on #{X\mathbin\perp Y},
+#{B:Y\to X}, and #{S=A-BC^{-1}B^\dagger}. For every #{x\in X},
+let
+##{\kappa_{Q,x}=N(-C^{-1}B^\dagger x,C^{-1})}
+be the \vocabk{conditional probability kernel}{fdip-003A} on #{Y},
+with that construction's two named summands exchanged. Define the
+\newvocab{reduced weight} and \newvocab{exact fiber interaction} by
+##{\begin{aligned}
+(\mathcal R_Q^Xw)(x)&=\int_Yw(x+y)\,\kappa_{Q,x}(dy),\\
+\mathcal F_Q^X[w](x)&=-\log(\mathcal R_Q^Xw)(x).
+\end{aligned}}
+This fixes the explicit Gaussian density version at every #{x}.
+General conditional versions are specified only almost everywhere.}
+
+\p{For a real polynomial #{V:H\to\mathbb R} with #{V\geq-b},
+#{b\geq0}, and a real coupling #{\lambda\geq0}, the weight
+#{w_\lambda=e^{-\lambda V}} belongs to this class. Write
+##{\begin{aligned}
+Z_\lambda&=\mathcal Z_Q[w_\lambda],&
+\mu_\lambda&=\nu_{Q,w_\lambda},\\
+M_\lambda(x)&=(\mathcal R_Q^Xw_\lambda)(x),&
+F_\lambda(x)&=\mathcal F_Q^X[w_\lambda](x).
+\end{aligned}}
+Here #{M_\lambda,F_\lambda} are real functions. The
+\vocabk{formal fiber interaction}{fdip-005Y} remains a series with a formal
+coupling variable; \ref{fdip-00GN} identifies its coefficients with
+finite-order asymptotics of these functions.}
+
+\p{The conditional density is the precision-parameter form of
+\citet{Appendix A.2, (A.6), p. 200}{rasmussen2006gaussian}, with
+square completion as in \ref{fdip-000D}. Multiplication by #{w}
+and the logarithm above specify the interacting construction.}

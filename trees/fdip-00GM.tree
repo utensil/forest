@@ -1,0 +1,46 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Definition}
+\title{Cumulants and the normalized source logarithm}
+\date{2026-11-09}
+
+\p{For #{r\geq1} real random variables #{R_1,\ldots,R_r} with finite absolute
+mixed moments, their \newvocab{joint cumulant} is
+##{\kappa(R_1,\ldots,R_r)
+ =\sum_{\pi\in\mathfrak P_r}(-1)^{|\pi|-1}(|\pi|-1)!
+     \prod_{B\in\pi}\mathbb E\left[\prod_{i\in B}R_i\right],}
+where #{\mathfrak P_r} is the set of partitions of
+#{\{1,\ldots,r\}} into nonempty blocks. Write
+#{\kappa_r(R)=\kappa(R,\ldots,R)}. Thus #{\kappa_1(R)=\mathbb E R}
+and #{\kappa_2(R)=\mathbb E[R^2]-(\mathbb E R)^2}.
+For the conditional law #{\kappa_{Q,x}} from
+\vocabk{positive weights}{fdip-00GH}, the same formula defines
+#{\kappa_r(V\mid x)} using #{R=V(x+\cdot)}. This is a finite
+moment expression for each #{r}, including when no two-sided
+exponential moment of #{V} exists.}
+
+\p{For a real \vocabk{source}{fdip-0047} #{J\in H^*} and the
+\vocabk{weighted Gaussian law}{fdip-00GH} #{\mu_\lambda}
+associated to #{V\geq-b}, the \newvocab{normalized source logarithm}
+is
+##{\begin{aligned}
+\mathscr Z_\lambda(J)&=\int_H e^{J(\phi)-\lambda V(\phi)}d\mu_Q(\phi),\\
+W_\lambda(J)&=\log\mathscr Z_\lambda(J)-\log Z_\lambda
+             =\log\mathbb E_{\mu_\lambda}e^{J(\phi)}.
+\end{aligned}}
+In particular #{W_\lambda(0)=0}. The integrals and their source
+derivatives are justified in \ref{fdip-00GO}. For linear
+observables #{\ell_1,\ldots,\ell_r\in H^*}, their
+\newvocab{connected correlation} is the joint cumulant under
+#{\mu_\lambda}; it equals
+#{D_{\ell_1}\cdots D_{\ell_r}W_\lambda(0)}, where
+#{D_\ell W(J)=\left.\frac{d}{dt}W(J+t\ell)\right|_{t=0}}.
+This extends the connected four-point function in \ref{fdip-0047} to
+arbitrary linear observables.}
+
+\p{The partition formula is the coefficient identity for the
+logarithm of a moment series. It is the finite-probability version
+of the connected-logarithm convention in
+\citet{v2, Theorem 3.11, p. 38}{etingof2024mathematical}.
+}

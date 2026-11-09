@@ -1,0 +1,53 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{Transport of exact interacting laws}
+\date{2026-11-09}
+
+\p{Let #{O:(H,h)\to(H',h')} be a linear isometric isomorphism,
+with transported full data
+##{Q'=OQO^{-1},\qquad P'=OPO^{-1},\qquad w'\circ O=w.}
+For the \vocabk{weighted Gaussian laws}{fdip-00GH} and
+\vocabk{exact fiber interactions}{fdip-00GH}, one has
+##{\begin{aligned}
+\mathcal Z_{Q'}[w']&=\mathcal Z_Q[w],&
+O_*\nu_{Q,w}&=\nu_{Q',w'},\\
+(\mathcal R_{Q'}^{OX}w')(Ox)&=(\mathcal R_Q^Xw)(x),\\
+\mathcal F_{Q'}^{OX}[w'](Ox)&=\mathcal F_Q^X[w](x).
+\end{aligned}}
+The Euclidean constants #{c_Q,c_C,c_S} also agree with their
+transported counterparts. For a polynomial interaction the weight
+condition follows from #{V'\circ O=V} and the same real #{\lambda}.
+If #{O} transports each subspace of a supplied orthogonal flag,
+these identities hold at every stage of \ref{fdip-00GK}.}
+
+\proof{
+\p{The restrictions of #{O} to #{X,Y} preserve the induced
+Euclidean volumes. Their block conjugacies carry #{S,C} to #{S',C'}
+and carry the mean #{-C^{-1}B^\dagger x} to the corresponding mean
+at #{Ox}. Thus they transport the explicit conditional Gaussian
+kernels, by exactly the change of variables used in
+\ref{fdip-005Z}. Integrating #{w'\circ O=w} gives the reduced-weight
+identity; taking its real logarithm gives the interaction identity.
+The full change of variables proves the normalizer and probability
+statements. Orthogonal conjugacy preserves each determinant and
+dimension. Applying the same reasoning to the transported induced
+precision and weight proves the flag assertion.}
+}
+
+\p{Composition is covariant on fields and contravariant on
+observables. If isometries form a left action #{L_gL_h=L_{gh}},
+then their pushforwards obey #{(L_g)_*(L_h)_*=(L_{gh})_*}.
+For #{T_gf=f\circ L_g}, evaluation gives
+##{T_gT_hf=f\circ L_h\circ L_g=T_{hg}f.}
+Consequently #{U_gf=f\circ L_{g^{-1}}} is the left representation
+#{U_gU_h=U_{gh}}. No commutativity assumption is involved.
+For preserved data, the law and fiber interaction are invariant;
+transporting a selector alone does not transport #{Q} or #{V}.}
+
+\p{This is the actual-integral counterpart of
+\ref{fdip-005Z}, based on the conditional density in
+\citet{Appendix A.2, (A.6), p. 200}{rasmussen2006gaussian}.
+The supplied \vocabk{background arrows}{fdip-005C} give graph examples;
+an arbitrary isometry need not preserve graph incidence.}
