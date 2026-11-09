@@ -1,0 +1,43 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{The Feynman–Kac kernel}
+\date{2026-11-09}
+
+\p{For the Hamiltonian of \ref{fdip-00H2}, let
+#{\alpha:[0,1]\to\mathbb R^s} be the standard Brownian bridge:
+its coordinates are independent and
+#{\mathbb E[\alpha_i(r)\alpha_j(u)]
+ =\delta_{ij}(\min(r,u)-ru)}. For #{t>0}, set
+##{\begin{aligned}
+X_r^{x,y}&=(1-r/t)x+(r/t)y+\sqrt t\,\alpha(r/t),\quad 0\le r\le t,\\
+K_t(x,y)&=p_t(x-y)\,
+ \mathbb E\exp\left(-\int_0^t U(X_r^{x,y})\,dr\right).
+\end{aligned}}
+Then #{K_t} is a strictly positive, continuous, symmetric kernel
+for #{e^{-tH}}, and
+##{0<K_t(x,y)\le e^{bt}p_t(x-y).}
+In particular, the semigroup improves positivity.}
+
+\proof{
+\p{The potential is real, continuous and bounded below.
+The core argument of \ref{fdip-00H2} identifies its form
+Hamiltonian with the Schrödinger realization in
+\citet{Theorem 1.1, (1.1)-(1.3), p. 2}{simon1999feynman}.
+That theorem uses exactly #{-\Delta /2}, the stated bridge
+covariance and the prefactor #{(2\pi t)^{-s/2}}, so it gives
+the asserted integral kernel.}
+
+\p{Each bridge path is continuous with compact range. The
+potential along it is bounded, so its exponential integral is
+finite and strictly positive. The lower bound #{U\ge-b}
+gives the common majorant #{e^{bt}}. For convergent endpoints,
+continuity of #{U} gives uniform convergence along a fixed bridge
+path on a common compact range. Dominated convergence proves
+endpoint continuity; bridge reversal proves symmetry.
+The Gaussian bound gives square-integrable kernel sections,
+hence pointwise representatives of semigroup outputs. Integrating
+a strictly positive kernel against a nonnegative nonzero function
+proves positivity improvement.}
+}

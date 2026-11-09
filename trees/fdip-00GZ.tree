@@ -1,0 +1,51 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Corollary}
+\title{The spectral transfer Hamiltonian and its positive vacuum}
+\date{2026-11-09}
+
+\p{Let #{\lambda_\epsilon=\|T_\epsilon\|} and
+#{E_\epsilon=-\epsilon^{-1}\log\lambda_\epsilon} for the
+\vocabk{interacting slice transfer}{fdip-00GU}.
+Its norm eigenvalue is simple, with a real normalized eigenfunction
+#{\psi_\epsilon>0} almost everywhere. For an orthonormal eigenbasis
+#{T_\epsilon\psi_{\epsilon,j}=\lambda_{\epsilon,j}\psi_{\epsilon,j}},
+put #{e_{\epsilon,j}=\epsilon^{-1}
+\log(\lambda_\epsilon /\lambda_{\epsilon,j})}. The
+\vocabk{transfer Hamiltonian}{fdip-007W} is
+##{\begin{aligned}
+H_\epsilon&=-\epsilon^{-1}\log(T_\epsilon /\lambda_\epsilon),\\
+D(H_\epsilon)&=\left\{\sum_jc_j\psi_{\epsilon,j}:
+ \sum_j e_{\epsilon,j}^2|c_j|^2<\infty\right\},\\
+H_\epsilon\sum_jc_j\psi_{\epsilon,j}
+ &=\sum_j e_{\epsilon,j}c_j\psi_{\epsilon,j}.
+\end{aligned}}
+It is nonnegative and self-adjoint, with zero eigenspace
+#{\mathbb C\psi_\epsilon}, and
+#{T_\epsilon=e^{-\epsilon(H_\epsilon+E_\epsilon I)}}.}
+
+\proof{
+\p{The transfer is real, positive, compact and positivity improving
+by \ref{fdip-00GW}. Its nonzero norm is an eigenvalue. If a real
+norm eigenvector #{f} had nonzero positive and negative parts,
+##{\langle|f|,T_\epsilon|f|\rangle
+ -\langle f,T_\epsilon f\rangle
+ =4\langle f_+,T_\epsilon f_-\rangle>0,}
+contradicting the norm bound. Thus it has a fixed sign, made strictly
+positive by the eigenvalue equation. A second independent real
+eigenvector could be chosen orthogonal to this one and would change
+sign, a contradiction. This is the argument of
+\citet{Theorem 10.12, pp. 272-273}{teschl2014quantum}, with all
+its operator hypotheses supplied by \ref{fdip-00GW}.}
+
+\p{Compactness, self-adjointness and injectivity give the positive
+eigenbasis. The diagonal logarithm argument in \ref{fdip-0085}
+applies with time step #{\epsilon}; it proves the stated maximal
+domain, self-adjointness and exponential identity. Simplicity gives
+the stated zero eigenspace.}
+}
+
+\p{At a nonzero time step this is a spectral Hamiltonian; no
+differential expression has been identified. The scalar
+#{E_\epsilon} retains the heat normalization of the transfer.}

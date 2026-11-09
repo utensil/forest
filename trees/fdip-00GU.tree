@@ -1,0 +1,53 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Definition}
+\title{Coercive slice potentials and transfer kernels}
+\date{2026-11-09}
+
+\p{Let #{G} have finite vertex set #{V}, #{s=|V|}. A spatial slice is
+#{q\in\mathbb R^V}, with the counting inner product and its
+\vocabk{canonical Euclidean volume}{fdip-002M} #{dq}. Put
+#{\mathcal H=L^2(\mathbb R^V,dq;\mathbb C)}, with inner product
+conjugate-linear in the first argument. Take #{\hbar=1} and kinetic
+coefficient #{1/2}. A \newvocab{coercive slice potential} here is a real
+continuous function #{U} satisfying
+##{U(q)\ge a|q|^2-b,\qquad a>0,\quad b\ge0.}
+Spatial edge weights and fixed boundary contributions are parameters
+of #{U}.}
+
+\p{The polynomial specialization is
+##{\begin{aligned}
+K&=m^2I+L_w+B,& m&>0,\\
+U(q)&=\tfrac12q^TKq+\sum_{v\in V}\frac{\lambda_vq_v^4}{24},&
+\lambda_v&\ge0.
+\end{aligned}}
+Here #{L_w} is the weighted graph Laplacian with
+#{q^TL_wq=\sum_{\{v,w\}\in E}w_{vw}(q_v-q_w)^2}, each internal
+undirected edge counted once and #{w_{vw}\ge0}.
+The diagonal matrix #{B=\operatorname{diag}(\beta_v)} has
+#{\beta_v\ge0}. Free boundaries have #{B=0}; zero Dirichlet exterior
+neighbors add their incident edge weights to #{\beta_v}.
+Periodic spatial boundaries require their actual finite edge set.
+The quartic term is nonzero when some #{\lambda_v>0}.}
+
+\p{For #{\epsilon>0}, let #{M_f} denote multiplication by #{f} and set
+##{\begin{aligned}
+p_\epsilon(z)&=(2\pi\epsilon)^{-s/2}e^{-|z|^2/(2\epsilon)},&
+P_\epsilon&=e^{\epsilon\Delta /2},\\
+W_\epsilon&=M_{e^{-\epsilon U/2}},&
+T_\epsilon&=W_\epsilon P_\epsilon W_\epsilon.
+\end{aligned}}
+The \newvocab{interacting slice transfer} #{T_\epsilon} has kernel
+##{k_\epsilon(x,y)=(2\pi\epsilon)^{-s/2}
+ \exp\left(-\frac{|x-y|^2}{2\epsilon}
+ -\frac\epsilon2(U(x)+U(y))\right).}
+The heat prefactor is part of the operator, including its spectral
+energy normalization. This has the symmetric kernel pattern of the
+\vocabk{Gaussian transfer operator}{fdip-007T}, with the heat convention of
+\citet{(1.2), p. 2}{simon1999feynman}.}
+
+\p{For #{V=\varnothing}, #{\mathbb R^V} is a point of volume one,
+#{\mathcal H=\mathbb C}, #{P_\epsilon=1} and
+#{T_\epsilon=e^{-\epsilon U(0)}}. Empty sums and products have their
+usual values.}

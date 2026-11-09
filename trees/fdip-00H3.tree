@@ -1,0 +1,64 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{Compact resolvent and thermal trace}
+\date{2026-11-09}
+
+\p{The Hamiltonian of \ref{fdip-00H2} has compact resolvent.
+For #{s\ge1}, its eigenvalues #{E_0\le E_1\le\cdots}, counted
+with multiplicity, tend to infinity. Put #{\omega=\sqrt{2a}}.
+For every #{\beta>0},
+##{\operatorname{Tr}e^{-\beta H}
+ \le e^{\beta b}[2\sinh(\beta\omega /2)]^{-s}<\infty.}}
+
+\proof{
+\p{A bounded set in the form norm has bounded #{\|\nabla f\|}
+and #{\||q|f\|}. Let #{P_M} be the Fourier projection onto
+#{|\xi|\le M}, and let #{\chi_R} be the indicator of
+#{|q|\le R}. Spatial and Fourier tails give
+##{\|f-\chi_RP_Mf\|
+ \le R^{-1}\||q|f\|+M^{-1}\|\nabla f\|.}
+Indeed write the difference as #{(1-\chi_R)f+\chi_R(f-P_Mf)}.
+For fixed #{R,M}, #{\chi_RP_M} is Hilbert–Schmidt: its kernel
+is #{\chi_R(x)} times the inverse Fourier transform of a
+finite-volume frequency indicator evaluated at #{x-y}.
+Thus the form unit ball is uniformly approximated by relatively
+compact sets and is precompact in #{L^2}. This is the cutoff
+argument of \citet{Lemma 7.21, pp. 200-201}{teschl2014quantum}.
+The form identity makes #{(H+b+1)^{-1}} a bounded map into
+#{Q}. Composing with its compact embedding proves compactness
+of the resolvent.}
+
+\p{For the trace, compare with #{H_{\mathrm{osc}}=-\Delta /2+a|q|^2}.
+Its form domain contains #{Q}, and
+#{h[f]\ge h_{\mathrm{osc}}[f]-b\|f\|^2} there.
+The Hermite tensor basis gives oscillator eigenvalues
+#{\omega(|n|+s/2)}, #{n\in\mathbb N^s}: dilate the
+one-coordinate identity of \ref{fdip-007W} and tensor its basis.
+The form-domain version of
+\citet{Theorem 4.12, p. 141}{teschl2014quantum} gives
+#{E_j(H)\ge E_j(H_{\mathrm{osc}})-b} for the ordered lists.
+Summing their exponential bounds yields
+##{\begin{aligned}
+\operatorname{Tr}e^{-\beta H}
+ &\le e^{\beta b}\sum_{n\in\mathbb N^s}
+              e^{-\beta\omega(|n|+s/2)}\\
+ &=e^{\beta b}
+       \left(\frac{e^{-\beta\omega /2}}{1-e^{-\beta\omega}}\right)^s.
+\end{aligned}}
+This comparison uses ordered eigenvalues, not operator
+monotonicity of the exponential.}
+}
+
+\p{The tensor basis and its concrete product identification are
+formalized by \leanref/tauceti{TauCeti.hermiteFunctionPiBasis}
+and \leanref/tauceti{TauCeti.coeFn_hermiteFunctionPiBasis}.
+The one-coordinate differential premise is
+\leanref/tauceti{TauCeti.hermiteFunction_oscillator}.
+Dilation, form comparison and the interacting trace estimate
+are the deductions above.}
+
+\p{For #{s=0}, there is one eigenvalue and
+#{\operatorname{Tr}e^{-\beta H}=e^{-\beta U(0)}\le e^{\beta b}};
+the factor with exponent #{-s} is one.}

@@ -1,0 +1,50 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{The continuous-time product limit}
+\date{2026-11-09}
+
+\p{The \vocabk{interacting slice transfer}{fdip-00GU} and the
+Hamiltonian of \ref{fdip-00H2} satisfy, for every #{t>0},
+##{\operatorname{s-lim}_{n\to\infty}T_{t/n}^{\,n}=e^{-tH}.}
+This is strong operator convergence of the unnormalized products.}
+
+\proof{
+\p{Put #{\delta=t/n}. For standard Brownian motion #{B} started
+at #{x}, kernel composition gives, for bounded compactly
+supported #{f},
+##{\begin{aligned}
+(T_\delta^nf)(x)&=\mathbb E_x[e^{-R_n}f(B_t)],\\
+R_n&=\delta\left(\frac{U(B_0)}2+
+ \sum_{j=1}^{n-1}U(B_{j\delta})+\frac{U(B_t)}2\right).
+\end{aligned}}
+The trapezoidal sums #{R_n} converge almost surely to
+#{\int_0^tU(B_r)\,dr}, because every path has compact range and
+#{U} is continuous. Every weight is at most #{e^{bt}}.
+Dominated convergence gives the Brownian-motion form of the
+Feynman–Kac limit in \ref{fdip-00H4}. Conditioning Brownian
+motion on its endpoint gives precisely that bridge kernel.}
+
+\p{Both approximants and limit are bounded in absolute value by
+#{e^{bt}(P_t|f|)(x)}, which belongs to #{L^2}. Dominated
+convergence for the squared difference therefore gives #{L^2}
+convergence. Finally #{\|T_\delta^n\|\le e^{bt}} and
+#{\|e^{-tH}\|\le e^{bt}}; density extends the convergence to
+every #{f\in\mathcal H}.}
+}
+
+\p{For the spectral shift #{E_\epsilon} of \ref{fdip-00GZ},
+the exact scalar identity is
+##{(T_\epsilon /\|T_\epsilon\|)^n
+ =e^{n\epsilon E_\epsilon}T_\epsilon^n.}
+Consequently, with #{E_0=\min\sigma(H)}, the normalized limit
+at #{\epsilon=t/n} is #{e^{-t(H-E_0)}} if
+#{E_{t/n}\to E_0}. That extra energy convergence is not a
+conclusion of the strong limit. Trace-norm convergence,
+partition-function convergence and convergence of unbounded
+correlations also require additional estimates.}
+
+\p{The path argument is a direct application of
+\citet{Theorem 1.1, p. 2}{simon1999feynman} to these symmetric
+heat products; it preserves their specified scalar normalization.}

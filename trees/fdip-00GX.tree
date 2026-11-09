@@ -1,0 +1,54 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{Periodic scalar laws and observable traces}
+\date{2026-11-09}
+
+\p{For the \vocabk{interacting slice transfer}{fdip-00GU} and an
+integer #{N\ge1}, put #{q_N=q_0} and
+##{\begin{aligned}
+S_{\epsilon,N}(q)&=\sum_{j=0}^{N-1}
+ \left(\frac{|q_{j+1}-q_j|^2}{2\epsilon}+\epsilon U(q_j)\right),\\
+Z_{\epsilon,N}&=(2\pi\epsilon)^{-Ns/2}
+ \int e^{-S_{\epsilon,N}(q)}\prod_{j=0}^{N-1}dq_j.
+\end{aligned}}
+Then #{0<Z_{\epsilon,N}=\operatorname{Tr}T_\epsilon^N<\infty} and
+##{d\mu_{\epsilon,N}
+ =Z_{\epsilon,N}^{-1}\prod_{j=0}^{N-1}k_\epsilon(q_j,q_{j+1})\,dq_j}
+is a probability law with all polynomial moments finite. For
+bounded complex measurable #{f_j:\mathbb R^V\to\mathbb C},
+##{\mathbb E_{\mu_{\epsilon,N}}\prod_{j=0}^{N-1}f_j(q_j)
+ =\frac{\operatorname{Tr}
+ (M_{f_0}T_\epsilon\cdots M_{f_{N-1}}T_\epsilon)}{Z_{\epsilon,N}}.}
+These are the interacting analogues of \ref{fdip-007V}.}
+
+\proof{
+\p{Every onsite half-potential occurs twice in the product of
+kernels. Their product is the stated exponential, including
+#{(2\pi\epsilon)^{-Ns/2}}. The bound
+##{S_{\epsilon,N}\ge\epsilon a\sum_j|q_j|^2-\epsilon Nb}
+proves its integrability and all polynomial moments. For #{N\ge2},
+pair two Hilbert–Schmidt factors and compose the remaining bounded
+factors. The Hilbert–Schmidt trace identity gives exactly the cyclic
+kernel integral. The displayed Gaussian bound justifies every
+integration, including bounded complex insertions.}
+
+\p{For #{N=1}, use #{T_\epsilon=A^*A} from \ref{fdip-00GW}.
+The Hilbert–Schmidt pairing and cyclicity for a bounded multiplier
+between these factors give
+##{\begin{aligned}
+\operatorname{Tr}(M_fT_\epsilon)
+ &=\operatorname{Tr}(AM_fA^*)\\
+ &=p_\epsilon(0)\int f(q)e^{-\epsilon U(q)}\,dq.
+\end{aligned}}
+Taking every #{f_j=1} proves the partition identity. The positive
+integrand gives strict positivity of the partition.}
+}
+
+\p{This periodic convention is a transfer product. For #{N=1},
+the temporal kinetic difference is zero and there is one onsite
+weight. For #{N=2}, the pair occurs twice, in opposite temporal
+directions, giving kinetic action #{|q_1-q_0|^2/\epsilon}.
+Only #{N\ge3} agrees with an ordinary simple time cycle whose
+edges are each counted once.}

@@ -1,0 +1,54 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Example}
+\title{Coordinate translation and phase multiplication}
+\date{2026-11-09}
+
+\p{On a site #{v} of the coupled chain of \ref{fdip-00GV}, take
+#{r=\eta e_v}, #{z=\ell e_v}. The
+[Weyl operator](fdip-00H8) acts by
+##{(W(\eta e_v,\ell e_v)f)(q)
+ =e^{i\eta(q_v+\ell /2)}f(q+\ell e_v).}
+It shifts one coordinate and multiplies by a phase. Translation
+invariance of #{dq} and modulus one of the phase give
+#{\|W(r,z)f\|=\|f\|}; the inverse is #{W(-r,-z)}.}
+
+\p{The multiplication operator #{\Phi_v} is self-adjoint on
+its stated maximal domain. The unitary Fourier transform sends
+#{\Pi_v} to real multiplication by #{\xi_v}, proving the same
+assertion for momentum. Cutoff followed by mollification
+approximates both position and its product in #{L^2}; for momentum
+it approximates #{f,\partial_vf} in #{L^2}. Thus #{C_c^\infty}
+is a core for each operator. Fourier inversion then gives
+#{(e^{iz\cdot\Pi}f)(q)=f(q+z)}, and hence
+##{W(r,z)=e^{ir\cdot\Phi /2}e^{iz\cdot\Pi}e^{ir\cdot\Phi /2}.}
+The dot products here are self-adjoint real multipliers after
+position or Fourier transformation. These calculations specialize
+\citet{Section 8.1, pp. 207-208}{teschl2014quantum} to the chosen coordinates.}
+
+\p{For arbitrary real vectors, applying the two actions successively
+gives the phase
+#{r\cdot(q+z/2)+r'\cdot(q+z+z'/2)}. Subtracting the phase
+#{(r+r')\cdot(q+(z+z')/2)} leaves
+#{-\sigma((r,z),(r',z'))/2}. Therefore
+##{W(r,z)W(r',z')
+ =e^{-i\sigma((r,z),(r',z'))/2}W(r+r',z+z').}
+For phase then translation at one site, the coefficient is
+#{e^{-i\eta\ell /2}}; reversing the order changes its sign in
+the exponent.}
+
+\p{The [vacuum and thermal states](fdip-00H8) are normalized
+and positive: the first is a unit vector state, and the second
+uses the positive trace-one operator #{e^{-\beta H}/Z_\beta}.
+For either state and bounded insertions,
+##{|\omega(A_0\alpha_{t_1}(A_1)\cdots\alpha_{t_n}(A_n))|
+ \le\prod_{j=0}^n\|A_j\|.}
+Indeed each conjugation preserves operator norm and a positive
+normalized state is bounded by that norm; for the thermal state
+this also follows directly from the trace norm inequality.
+The ground vector evolves by the phase #{e^{-itE_0}}, and
+#{e^{-\beta H}} commutes with #{V_t}. These identities prove
+stationarity of both states. In particular every Weyl correlation
+above exists for arbitrary real times and has absolute value
+at most one.}
