@@ -1,0 +1,74 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{Differentiating the actual source logarithm}
+\date{2026-11-09}
+
+\p{For every real polynomial #{V\geq-b}, #{b\geq0}, and #{\lambda\geq0},
+the \vocabk{normalized source logarithm}{fdip-00GM}
+#{W_\lambda(J)} is defined for every real #{J\in H^*}.
+All mixed coupling and source derivatives exist, commute, and are
+continuous for #{\lambda\geq0}, #{J\in H^*}, with right coupling
+derivatives at zero. For integers #{r,k\geq0} and source
+directions #{\ell_i\in H^*},
+##{\partial_\lambda^rD_{\ell_1}\cdots D_{\ell_k}
+ \mathscr Z_\lambda(J)
+ =\int_H(-V)^r\prod_{i=1}^k\ell_i(\phi)
+       e^{J(\phi)-\lambda V(\phi)}\,d\mu_Q(\phi).}
+The source derivatives of #{W_\lambda} at zero are the joint
+cumulants of the #{\ell_i} under #{\mu_\lambda}.}
+
+\proof{
+\p{For #{0\leq\lambda\leq\lambda_0} and #{\|J\|\leq R},
+the absolute integrand is bounded by
+##{e^{\lambda_0b}|V(\phi)|^r
+       \prod_i|\ell_i(\phi)|e^{R\|\phi\|}.}
+If #{H\ne0}, take #{q>0} with #{Q\geq qI}. Multiplication by the
+Gaussian density is controlled by
+##{e^{-q\|\phi\|^2/2+R\|\phi\|}
+ \leq e^{R^2/q}e^{-q\|\phi\|^2/4}.}
+Every remaining factor is bounded by a polynomial in absolute
+coordinates, so \ref{fdip-002W} makes this an integrable envelope.
+The same reasoning covers any finite number of further derivatives.
+Dominated convergence applied to difference quotients proves the
+formula, continuity and interchange of differentiation. For #{H=0}
+the integrals are evaluations and the claim is immediate.}
+
+\p{The integrals are strictly positive. In fact the supporting-line
+inequality used in \ref{fdip-00GN}, and #{\mathbb E_{\mu_Q}J(\phi)=0},
+give the denominator bound
+##{\mathscr Z_\lambda(J)\geq
+  e^{-\lambda\mathbb E_{\mu_Q}V}
+ \geq e^{-\lambda_0\max(0,\mathbb E_{\mu_Q}V)}>0.}
+It also applies at #{J=0} to #{Z_\lambda}. Hence taking logarithms
+and their finite derivatives is justified on every such compact
+parameter set. The finite derivative identity for a logarithm gives
+the partition formula in [joint cumulants](fdip-00GM), since the
+normalized moment-generating function equals one at #{J=0}.}
+}
+
+\p{If #{j\in H} is the metric representative of #{J}, square
+completion gives #{W_0(J)=h(j,Q^{-1}j)/2}. More generally, for
+#{Y=\ell(\phi)}, let #{\mathbb E_{0,t\ell}} denote expectation
+under the Gaussian tilted by #{e^{tY}} and then normalized. The
+mixed-derivative formula yields
+##{\left.\partial_\lambda W_\lambda(t\ell)\right|_{0+}
+ =-\mathbb E_{0,t\ell}V+\mathbb E_{\mu_Q}V.}
+If #{\ell=\ell_X\circ P}, the exact marginal formula in
+\ref{fdip-00GI} computes the same source logarithm from the retained
+law, including all its source derivatives.}
+
+\p{The integration argument uses
+\citet{Theorem 1.4.49, p. 111}{tao2011measure}; the connected
+interpretation uses
+\citet{v2, Theorem 3.11, p. 38}{etingof2024mathematical}.
+Mathlib's \leanref{ProbabilityTheory.iteratedDeriv_mgf} supplies
+the scalar-source identity for a measurable real random variable
+whenever its parameter lies in the interior of its exponential
+integrability set. Here that set is all of #{\mathbb R} for
+#{Y=\ell(\phi)} under #{\mu_\lambda}, by the displayed domination.
+Its \leanref{ProbabilityTheory.analyticAt_cgf} also gives real
+analyticity in this scalar source. These declarations concern the
+source variable; the mixed coupling derivatives above use the
+separate domination proof, with a one-sided boundary at zero.}

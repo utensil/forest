@@ -1,0 +1,89 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{Uniform finite-order expansions of the exact fiber interaction}
+\date{2026-11-09}
+
+\p{Let #{V\geq-b}, #{b\geq0}, be a real polynomial in the
+\vocabk{weighted Gaussian law}{fdip-00GH}. Fix a nonempty compact
+#{K\subseteq X}, #{\lambda_0>0}, and integer #{n\geq0}.
+Write #{v_x=a(x)+\eta}, where #{a(x)=x-C^{-1}B^\dagger x}
+and #{\eta\sim\mu_C} on #{Y}. Set
+##{\begin{aligned}
+m_r(x)&=\mathbb E[V(v_x)^r],&
+B_r&=\sup_{x\in K}\mathbb E|V(v_x)|^r,\\
+D_r&=e^{\lambda_0b}B_r,&
+\delta&=\exp\left[-\lambda_0\max\left(0,\sup_{x\in K}m_1(x)\right)\right].
+\end{aligned}}
+All #{B_r} are finite and #{\delta>0}. On #{K\times[0,\lambda_0]},
+##{\begin{aligned}
+M_\lambda(x)&\geq\delta,\\
+\partial_\lambda^rM_\lambda(x)
+ &=\mathbb E[(-V(v_x))^r e^{-\lambda V(v_x)}],\\
+|\partial_\lambda^rM_\lambda(x)|&\leq D_r.
+\end{aligned}}
+At zero all coupling derivatives are right derivatives. The
+functions and these derivatives are jointly continuous up to zero.}
+
+\p{Define finite constants #{H_k} recursively, for #{k\geq1}, by
+##{H_k=\delta^{-1}\left(D_k+
+       \sum_{j=1}^{k-1}\binom{k-1}{j}D_jH_{k-j}\right).}
+Then #{|\partial_\lambda^kF_\lambda(x)|\leq H_k}, and for every
+#{x\in K}, #{0\leq\lambda\leq\lambda_0},
+##{\begin{aligned}
+\left|M_\lambda(x)-\sum_{r=0}^n
+       \frac{(-\lambda)^r}{r!}m_r(x)\right|
+ &\leq\frac{D_{n+1}}{(n+1)!}\lambda^{n+1},\\
+\left|F_\lambda(x)-\sum_{r=1}^n
+       \frac{(-1)^{r+1}\lambda^r}{r!}\kappa_r(V\mid x)\right|
+ &\leq\frac{H_{n+1}}{(n+1)!}\lambda^{n+1}.
+\end{aligned}}
+The coefficients use the \vocabk{joint cumulant}{fdip-00GM}
+with all arguments #{V}. Empty sums give the case #{n=0}.}
+
+\proof{
+\p{Choose #{C_V>0}, #{d\geq0} with
+#{|V(\phi)|\leq C_V(1+\|\phi\|)^d}. Compactness gives
+#{A_K=\sup_{x\in K}\|a(x)\|<\infty}, and the explicit bound
+##{B_r\leq C_V^r\mathbb E(1+A_K+\|\eta\|)^{dr}<\infty.}
+The last moment is finite by bounding powers of the norm by finite
+sums of absolute coordinate monomials and applying
+\ref{fdip-002W}. The same envelope, multiplied by
+#{e^{\lambda_0b}}, dominates all displayed integrands and their
+coupling derivatives of any fixed order. Difference quotients use
+the next such derivative on the intervening coupling interval.
+Dominated convergence therefore gives the derivative formula and
+its joint continuity, including right limits at zero.}
+
+\p{Convexity of the exponential gives
+#{M_\lambda(x)\geq\exp[-\lambda m_1(x)]\geq\delta}.
+Equivalently, integrate the elementary supporting-line inequality
+#{e^t\geq e^s(1+t-s)} with #{t=-\lambda V(v_x)} and
+#{s=-\lambda m_1(x)}. Since #{F_\lambda=-\log M_\lambda},
+##{M_\lambda\partial_\lambda F_\lambda=-\partial_\lambda M_\lambda.}
+Differentiating #{k-1} times and isolating
+#{M_\lambda\partial_\lambda^k F_\lambda} gives the stated recurrence
+bound by induction. Taylor's integral remainder on #{[0,\lambda]}
+then proves both estimates.}
+
+\p{At zero, #{M_0=1} and
+#{\partial_\lambda^rM_0=(-1)^rm_r}. The finite coefficient identity
+for #{-\log(1+u)} therefore gives
+#{\partial_\lambda^rF_0=(-1)^{r+1}\kappa_r(V\mid x)}.
+One can obtain this identity by expanding the logarithm only through
+degree #{r}: assigning the #{r} labeled factors to its nonempty
+blocks produces #{(-1)^{|\pi|-1}(|\pi|-1)!} for each partition.
+Thus the [formal moment series](fdip-005Y) has precisely these
+coefficients at every order. No infinite series is integrated.}
+}
+
+\p{The domination argument applies
+\citet{Theorem 1.4.49, p. 111}{tao2011measure} to the explicit
+polynomial envelopes. The moment/logarithm coefficients agree with
+the formal Wick and connected rules of
+\citet{v2, Theorems 3.1 and 3.11, pp. 29 and 38}{etingof2024mathematical}.
+The constants and right-hand remainder bounds are the deductions
+proved here. In particular the coefficients in
+\ref{fdip-0060} and \ref{fdip-0047} gain these compact-set
+interpretations as actual asymptotics.}
