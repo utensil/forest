@@ -1,0 +1,23 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Remark}
+\title{The Gram factor in an ordered basis}
+\date{2026-11-10}
+
+\p{For a finite-dimensional real inner-product space #{H} with its
+[induced Euclidean measure](fdip-002M), choose an ordered basis
+#{b_1,\ldots,b_k}. The isomorphism in \ref{fdip-00JN} is then
+##{B:\mathbb R^k\to H,\qquad B(t)=\sum_{i=1}^k t_i b_i.}
+In the ordered standard source basis, #{B^\dagger B} is represented
+by the Gram matrix #{G_{ij}=h(b_i,b_j)}. The proved formulas read,
+for every Borel #{E\subseteq\mathbb R^k},
+##{\lambda_H(B(E))=\sqrt{\det G}\,\lambda_{\{1,\ldots,k\}}(E),}
+##{B_*\lambda_{\{1,\ldots,k\}}=(\det G)^{-1/2}\lambda_H.}
+The empty basis gives factor #{1}.}
+\p{TauCeti's \leanref/tauceti{Module.Basis.volume_eq_smul_addHaar}
+expresses canonical volume as the square root of the Gram determinant
+times the basis-normalized additive Haar measure. The latter is the
+coordinate pushforward #{B_*\lambda_{\{1,\ldots,k\}}}, by
+\leanref{Module.Basis.map_addHaar} and the standard coordinate
+volume normalization. Thus the two formulas use the same factor.}

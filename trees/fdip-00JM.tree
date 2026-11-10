@@ -1,0 +1,62 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{Existence and uniqueness of induced volume}
+\date{2026-11-10}
+
+\p{Every finite-dimensional real inner-product space #{H} has the
+\vocabk{induced Euclidean measure}{fdip-002M}. It is unique and
+translation invariant. The associated measure on #{a+H} is independent
+of the chosen origin #{a}. The zero space has unit mass at zero.
+For a proper linear subspace #{H\subsetneq X_V}, the induced measure
+is different from the restriction of ambient coordinate Lebesgue measure:
+#{\lambda_V(H)=0}, whereas an orthonormal unit cube in #{H} has
+induced mass #{1}.}
+\proof{
+\p{A finite Gram-Schmidt construction produces an orthonormal basis:
+normalize a nonzero vector by its positive norm, subtract its components
+from a spanning family, and continue in the orthogonal complement.
+Positivity permits normalization at each nonzero step. In dimension zero
+use the empty basis. An orthonormal basis supplies a linear isometric
+isomorphism #{C:H\to\mathbb R^k}, where #{k=\dim H}. Both directions
+are continuous and Borel measurable. Put
+#{\mu=(C^{-1})_*\lambda_{\{1,\ldots,k\}}}.}
+\p{If #{D:H\to\mathbb R^k} is any other orthonormal chart, then
+#{DC^{-1}} is a linear isometric isomorphism of counting coordinate
+spaces. By \ref{fdip-002L} and composition of pushforwards,
+##{D_*\mu=(DC^{-1})_*\lambda_{\{1,\ldots,k\}}
+ =\lambda_{\{1,\ldots,k\}}.}
+Thus #{\mu} meets the every-chart characterization. Conversely, if a
+Borel measure #{\nu} meets it, then #{C_*\nu=\lambda_{\{1,\ldots,k\}}}
+for this one chart, and
+##{\nu=(C^{-1})_*C_*\nu=(C^{-1})_*\lambda_{\{1,\ldots,k\}}=\mu.}
+This proves existence and uniqueness without any assumption of finite
+total mass or completed sigma-algebras. For #{k=0}, the coordinate
+measure is unit mass on the singleton, and so is its inverse pushforward.}
+\p{Translation by #{u\in H} becomes translation by #{Cu} in the
+chart #{C}. The translation statement in \ref{fdip-002K} therefore
+makes it measure preserving on #{H}. If #{a'=a+u} is another origin
+in the same affine space, then #{\tau_{a'}=\tau_a\circ\tau_u};
+composition of pushforwards proves independence of the origin.}
+\p{For #{H\subsetneq X_V}, extend its orthonormal basis to one of
+#{X_V} by the same construction. In the resulting coordinates #{H}
+is a coordinate subspace and hence is closed. Since it is proper, it lies
+in a coordinate hyperplane. Within each bounded cube,
+that hyperplane has measure zero: the rectangle formula has a
+zero-measure singleton factor and finite other factors. Monotonicity
+and countable exhaustion give zero ambient measure, and
+\ref{fdip-002L} transports this back. The inverse image in #{H} of
+its orthonormal unit coordinate cube has induced mass #{1}, including
+the singleton cube in dimension zero.}
+}
+\p{This deduction uses \ref{fdip-002L} and
+the transformation convention of
+\citet{Exercise 1.2.21, p. 41, preliminary version}{tao2011measure}.
+Mathlib's \leanref{OrthonormalBasis.measurePreserving_repr} targets
+EuclideanSpace; \leanref{PiLp.volume_preserving_ofLp} and
+\leanref{PiLp.volume_preserving_toLp} identify its real finite PiLp
+volume with ordinary coordinate products. TauCeti's
+\leanref/tauceti{AffineIsometryEquiv.measurePreserving} applies to
+finite-dimensional real Borel inner-product spaces. These compare the
+same canonical-volume convention.}
