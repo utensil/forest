@@ -1,0 +1,27 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Remark}
+\title{Finite-free coordinates for split factorization}
+\date{2026-11-09}
+
+\p{Let #{R} be a commutative unital ring. For the
+[triangular factorization](fdip-001U) on #{M=X\oplus Y} with
+#{C:Y\to Y} invertible, suppose the summands are finite free and
+choose finite bases, with coordinate isomorphisms
+#{c_X:X\to R^I} and #{c_Y:Y\to R^J}. The 4 arrays of the
+[split components](fdip-001T), in row-by-column order, are
+##{\begin{aligned}
+A_c&=c_XAc_X^{-1},&B_c&=c_XBc_Y^{-1},\\
+E_c&=c_YEc_X^{-1},&C_c&=c_YCc_Y^{-1}.
+\end{aligned}}
+The eliminated array has inverse #{c_YC^{-1}c_Y^{-1}}.}
+
+\p{Mathlib's \leanref{Matrix.fromBlocks_eq_of_invertible₂₂}
+gives the corresponding matrix factorization over a commutative ring
+with finite coordinate index types. Its 4 arguments are
+#{(A_c,B_c,E_c,C_c)}, and its invertibility assumption is on
+#{C_c}. The residual array is #{A_c-B_cC_c^{-1}E_c}, the coordinate
+form of the [split Schur map](fdip-001T). This declaration supports
+the factorization; the [inverse](fdip-001V) and
+[kernel](fdip-001W) statements have their own proofs.}

@@ -14,10 +14,12 @@ data and #{w:E\to R} arbitrary weights. With the counting forms and
 The kernel of #{d_R} consists exactly of fields constant on each
 connected component of the underlying undirected graph, and
 #{\ker d_R\subseteq\ker L}. Two vertices are in the same component
-when a finite path joins them, with edge orientation ignored.}
+when a finite path joins them, with edge orientation ignored.
+The energy and Laplacian are unchanged by edge-orientation reversal.}
 
 \proof{
-\p{The weight map is self-adjoint. The adjoint laws give
+\p{The weight map is self-adjoint by
+\ref{fdip-00JD}. The adjoint laws give
 #{L^\dagger=d_R^\dagger W^\dagger d_R=L}, and the defining identity gives
 ##{\begin{aligned}
 b_V(f,Lg)&=b_E(d_Rf,Wd_Rg)\\
@@ -29,36 +31,23 @@ says that endpoint values agree along every edge, hence along every
 path. Conversely, a componentwise constant field has zero difference
 on each edge. This identifies #{\ker d_R} with the function module
 on the components. Such a field also satisfies #{Lf=d_R^\dagger W0=0}.}
+\p{Reversing an edge negates both factors in its energy summand.
+The Laplacian itself is unchanged by the sign-map identity in
+\ref{fdip-00JD}.}
 }
 
-\p{The energy is unchanged by edge-orientation reversal: each reversed
-edge negates both factors in its summand. Equivalently, the
-[orientation-invariant return composite](fdip-0007) gives the same
-Laplacian.}
-
-\p{Perfection and unit weights do not give the reverse kernel inclusion.
-Over #{\mathbb F_2}, take two vertices #{0,1} and two distinct edges,
-both oriented #{0\to1}, both of weight #{1}. The counting pairings are
-perfect and #{W=I} is invertible. Nevertheless,
-##{\begin{aligned}
-d_R(a,b)&=(b-a,b-a),\\
-d_R^\dagger(u_1,u_2)&=(-u_1-u_2,u_1+u_2),\\
-L(a,b)&=(0,0).
-\end{aligned}}
-For #{\delta_1=(0,1)}, one has #{d_R\delta_1=(1,1)\ne0}, but
-its energy is #{1+1=0}. Hence #{\ker L=\mathbb F_2^2} strictly contains
-#{\ker d_R=\{(a,a):a\in\mathbb F_2\}}. This failure comes from the
-absence of real positivity, not from nonunit weights or nonperfect forms.}
-
 \p{Now specialize to #{R=\mathbb R} and #{w(e)>0}. Write
-#{D=d_{\mathbb R}}. The Laplacian is symmetric and positive
+#{D=d_{\mathbb R}}. The Laplacian is self-adjoint and positive
 semidefinite, and
 ##{\ker L=\ker D,\qquad \dim\ker L=k,}
-where #{k} is the number of connected components. The energy convention
-and connected-graph argument appear in
-\citet{Section 2.1, pp. 4-5}{spielman2009effective}; the ring identity
-above and the disconnected, loop and parallel-edge extensions are
-proved directly here.}
+where #{k} is the number of connected components.
+If #{V} is nonempty and connected, the kernel is the one-dimensional
+space spanned by the constant field #{\mathbf1_V}. Its positive unit
+mode is #{|V|^{-1/2}\mathbf1_V}. An isolated vertex contributes one
+component and one kernel basis vector. If #{V} is empty, both the
+component count and kernel dimension are zero. Loops contribute zero
+energy, while distinct parallel edges each contribute their own
+positive-weight summand.}
 
 \proof{
 \p{The energy identity specializes to
@@ -69,56 +58,32 @@ Every summand is therefore zero; strict positivity of #{w(e)} gives
 of the nonempty components span the componentwise constant fields.
 In a linear relation between them, evaluation at a vertex of any one
 component makes its coefficient zero. Thus they are a basis, proving
-the dimension statement. An action defined as half this
-\vocabk{quadratic form}{ca-0004} uses a separate convention.}
+the dimension statement. For a nonempty connected graph the one
+indicator is #{\mathbf1_V}, of squared counting norm #{|V|}.
+For #{V=\varnothing}, the endpoint maps force #{E=\varnothing}.
+A loop has zero endpoint difference, and each parallel edge retains
+its own term in the sum. An action defined as half this
+[quadratic form](ca-0004) uses a separate convention.}
 }
 
-\p{If #{V} is nonempty and connected, the kernel is the one-dimensional
-space spanned by the constant field #{\mathbf1_V}. Its positive unit mode is
-##{|V|^{-1/2}\mathbf1_V.}
-An isolated vertex contributes
-one component and one kernel basis vector. If #{V} is empty, the maps
-#{s,h:E\to V} force #{E} to be empty too: both the component count and
-kernel dimension are zero. Loops contribute zero energy, while distinct
-parallel edges each contribute their own positive summand.}
+\p{More generally, for real nonnegative weights #{w(e)\ge0}, the
+kernel of #{L} consists exactly of fields constant on each connected
+component of the graph with vertex set #{V} and edge set
+#{E_+=\{e\in E:w(e)>0\}}.}
 
-\p{For the [alternating four-cycle](fdip-0003), put #{u=1+t}.
-Direct multiplication gives
-##{L_t=\begin{pmatrix}
-u&-1&0&-t\\
--1&u&-t&0\\
-0&-t&u&-1\\
--t&0&-1&u
-\end{pmatrix}.}
-For #{f=(a,b,c,d)}, the energy is
-##{\begin{aligned}
-f^TL_tf={}&(b-a)^2+t(c-b)^2\\
-          &+(d-c)^2+t(a-d)^2.
-\end{aligned}}
-Every row of #{L_t} sums to zero, and for #{t>0} zero energy forces all
-4 values equal. The [comparison with the positive action](fdip-001R)
-identifies how this edge energy combines with a mass term.}
+\proof{
+\p{If #{Lf=0}, the energy sum is zero and every positive-weight
+edge has #{Df(e)=0}. Conversely, if those endpoint differences vanish,
+then #{WDf=0}: positive-weight edges have zero difference and all other
+edges have zero weight. Hence #{Lf=D^*WDf=0}. The path argument
+already proved identifies the fields with zero difference on #{E_+}
+as exactly the componentwise constant fields for that graph.}
+}
 
-\p{The hypotheses have concrete consequences. With vertices
-#{0,1,2,3} and just the unit-weight edges #{0\to1} and #{2\to3}, the
-matrix has two diagonal blocks #{\bigl(\begin{smallmatrix}1&-1\\-1&1\end{smallmatrix}\bigr)}.
-Its kernel is #{\{(a,a,b,b):a,b\in\mathbb R\}}; connectivity is
-needed for a single constant mode.}
-
-\p{On two vertices with one edge #{0\to1} of weight zero, the underlying
-graph is connected but #{L=0}, so its kernel is all of #{\mathbb R^2}.
-For nonnegative weights the same proof identifies the kernel using only
-the positive-weight edges. A zero weight also makes the proposed edge
-pairing degenerate. If instead this edge has weight #{-1}, then
-##{f^TLf=-(f(1)-f(0))^2,}
-which is negative at #{f=(0,1)}. Positivity fails, and the edge form is
-not an inner product. This example is negative semidefinite; two disjoint
-edges with weights #{1} and #{-1} give an indefinite form, since fields
-supported on the separate edges have energies of opposite signs.}
-
-\p{For unweighted simple graphs, Mathlib's
-\leanref{SimpleGraph.posSemidef_lapMatrix} proves positivity of its
-Laplacian. That model has no separate weighted edge set; its energy
-formula sums both adjacency directions and divides by two. The
-edge-once sum above also handles loops and parallel edges, and is proved
-directly here.}
+\p{The energy convention and connected positive-real argument appear
+in \citet{Section 2.1, pp. 4-5}{spielman2009effective}; the ring
+identity and the disconnected, loop and parallel-edge extensions are
+proved above. The [four-cycle calculation](fdip-004B) displays the
+energy and its coordinate Laplacian. The weight and connectivity
+examples in \ref{fdip-00JF} show how the kernel and
+positivity change when the hypotheses change.}

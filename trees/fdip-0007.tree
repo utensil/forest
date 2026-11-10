@@ -17,96 +17,25 @@ Their \vocabk{perfect counting dualities}{fdip-001F} give the
 \ref{fdip-001P}. It is characterized by
 #{b_E(d_Rf,a)=b_V(f,d_R^\dagger a)}.}
 
-\p{The return map can be read directly from the endpoints:
-##{(d_R^\dagger a)(v)
- =\sum_{h(e)=v}a(e)-\sum_{s(e)=v}a(e).}}
-\proof{
-\p{Expanding and regrouping finite sums gives
-##{\begin{aligned}
-b_E(d_Rf,a)
- &=\sum_e\bigl(f(h(e))-f(s(e))\bigr)a(e)\\
- &=\sum_v f(v)\left(\sum_{h(e)=v}a(e)-\sum_{s(e)=v}a(e)\right).
-\end{aligned}}
-This is the characterizing identity, so uniqueness identifies the map.
-Each loop occurs once in both sums and cancels; parallel edges remain
-separate summands. If #{V} is empty, existence of #{s:E\to V} forces
-#{E} empty; the formula gives the unique map of zero modules.}
-}
-
 \p{For arbitrary weights #{w:E\to R}, let
 #{W:H_E\to H_E} multiply pointwise by #{w}:
-#{(Wa)(e)=w(e)a(e)}. The \newvocab{weighted graph Laplacian} is
-##{L=d_R^\dagger Wd_R:H_V\longrightarrow H_V.}
-Commutativity makes #{W} self-adjoint, since
-#{b_E(Wa,c)=\sum_e w(e)a(e)c(e)=b_E(a,Wc)}.
-The weighted edge form
-##{b_{E,w}(a,c)=b_E(a,Wc)=\sum_e w(e)a(e)c(e)}
-is symmetric bilinear. It is perfect if and only if every #{w(e)}
-is a unit, meaning an invertible element of #{R}.}
+#{(Wa)(e)=w(e)a(e)}. The \newvocab{weighted edge form} and
+\newvocab{weighted graph Laplacian} are
+##{b_{E,w}(a,c)=b_E(a,Wc)=\sum_e w(e)a(e)c(e),\qquad
+L=d_R^\dagger Wd_R:H_V\longrightarrow H_V.}
+The represented return map for the weighted edge form is
+#{d_R^\dagger W:H_E\to H_V}. Its characterizing identity and the
+criterion for perfection of #{b_{E,w}} are in
+\ref{fdip-00JD}.}
 
-\proof{
-\p{Its duality map is #{\Phi_EW}. Since #{\Phi_E} is an
-isomorphism, #{\Phi_EW} is an isomorphism exactly when #{W} is.
-If every weight is a unit, multiplication by #{w(e)^{-1}} gives both
-inverse identities pointwise. Conversely, if #{WJ=I}, evaluate
-#{WJ\delta_e=\delta_e} at #{e}:
-##{w(e)(J\delta_e)(e)=1.}
-Commutativity supplies the other inverse identity for this scalar, so
-#{w(e)} is a unit. For #{E=\varnothing}, the unit condition is vacuous
-and #{W} is the unique isomorphism of the zero module. In the zero ring,
-#{0=1} is itself a unit, consistent with the same proof.}
-}
-
-\p{Even when some weights are nonunits, the represented return map
-#{d_R^\dagger W} exists and satisfies
-##{b_{E,w}(d_Rf,a)=b_V(f,d_R^\dagger Wa).}
-Its existence does not make the weighted edge form perfect. Thus it
-does not by itself give a two-sided adjoint involution for that form.
-All these ring identities are direct deductions from the chosen
-counting dualities. Their positive-real incidence convention is
-\citet{Section 2.1, p. 4}{spielman2009effective}.}
-
-\p{Orientation reversal leaves #{L} unchanged. Choose which edges to
-reverse, and put #{\varepsilon(e)=-1} on those edges and #{1} on the
-others, interpreted in #{R}. The sign map #{Ja(e)=\varepsilon(e)a(e)}
-satisfies #{J^\dagger=J}, #{J^2=I}, #{JW=WJ}, and the reversed
-incidence map is #{d'_R=Jd_R}. Therefore
-##{(d'_R)^\dagger Wd'_R=d_R^\dagger JWJd_R=d_R^\dagger Wd_R.}
-The corresponding edge field is #{a'=Ja}, and
-#{b_{E,w}(Ja,Jc)=b_{E,w}(a,c)}. The proof includes characteristic two,
-loops and parallel edges. Endpoints and weights are otherwise fixed.}
-
-\p{For the real incidence adapter, start with the
-\vocabk{incidence map}{fdip-0002}
-#{D:\mathbb R^V\to\mathbb R^E} and positive weights #{w(e)>0}.
-The counting forms are the \vocabk{counting inner products}{fdip-0002},
-and write #{D^*=d_{\mathbb R}^\dagger}. The edge form becomes the
-\newvocab{weighted inner product}
-##{\langle a,c\rangle_{E,w}=\sum_e w(e)a(e)c(e).}
-It is symmetric bilinear, and its self-pairing is a finite sum of
-nonnegative terms. Strictly positive weights make that sum zero only
-at the zero edge field. Keeping the vertex pairing counting, the
-\newvocab{weighted adjoint} is
-#{D_w^\dagger=D^*W}, since
-##{\langle Df,a\rangle_{E,w}
- =\langle Df,Wa\rangle_E=\langle f,D^*Wa\rangle_V.}
-Hence #{L=D^*WD=D_w^\dagger D}; #{D^*D} is the unit-weight case.}
-
-\p{For the coordinate recovery, use the ordered-value isomorphisms
-#{c_V,c_E} and \vocabk{incidence matrix}{fdip-00AF} #{B=c_EDc_V^{-1}}.
-The endpoint return formula gives
-#{c_VD^*c_E^{-1}=B^T}. The multiplication map #{W} has diagonal
-array #{\operatorname{diag}(w(e))}; writing the same letter for that
-array yields #{[D_w^\dagger]=B^TW} and #{[L]=B^TWB}.
-For a single edge #{0\to1} of weight #{c>0}, the two adjoints send
-an edge value #{a} to #{(-a,a)} and #{(-ca,ca)}, respectively.
-Under orientation reversal the sign array #{S} gives #{B'=SB},
-#{S^T=S}, #{S^2=I}, #{SWS=W}, and
-#{(B')^TWB'=B^TWB}. A loop has a zero incidence row before and
-after reversal.}
-
-\p{Mathlib's \leanref{LinearMap.toMatrix_adjoint} identifies adjoint
-matrices with conjugate transposes in orthonormal bases. Over the reals
-this is transpose. The coordinate edge basis is orthonormal for counting,
-but not generally for the weighted pairing; the return-map calculation
-above accounts for the extra #{W}.}
+\p{For real incidence, write
+#{D=d_{\mathbb R}:\mathbb R^V\to\mathbb R^E} and
+#{D^*=d_{\mathbb R}^\dagger}. The counting forms are the
+\vocabk{counting inner products}{fdip-0002}. When #{w(e)>0}, the
+\newvocab{weighted inner product} is
+##{\langle a,c\rangle_{E,w}=b_{E,w}(a,c).}
+With the vertex inner product still counting, the
+\newvocab{weighted adjoint} is the return map
+#{D_w^\dagger=D^*W}. Thus #{L=D^*WD=D_w^\dagger D};
+#{D^*D} is the unit-weight case. The positivity and adjoint identity
+are proved in \ref{fdip-00JD}.}
