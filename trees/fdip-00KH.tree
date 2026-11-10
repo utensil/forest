@@ -1,0 +1,26 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Remark}
+\title{Jacobian and covariance in orthonormal charts}
+\date{2026-11-10}
+
+\p{Choose orthonormal charts #{C:M\to\mathbb R^n} and
+#{C':M'\to\mathbb R^n}. Write
+#{A=C'TC^{-1}}, #{R=CQC^{-1}} and #{R'=C'Q'(C')^{-1}}.
+The identities of \ref{fdip-003M} are
+##{A^TR'A=R,\qquad (R')^{-1}=AR^{-1}A^T,\qquad J(T)=|\det A|.}
+Thus the transpose formula #{(Q')^{-1}=TQ^{-1}T^T} is the
+same identity when #{T,Q,Q'} denote their arrays in these charts.
+The transported reference pairing has array #{A^{-T}A^{-1}}.
+Independently ordering the two orthonormal frames may change the
+signed determinant, but not its absolute value.}
+
+\p{TauCeti's
+\leanref/tauceti{TauCeti.Probability.map_affine_multivariateGaussian}
+supports this covariance congruence with mean and shift zero, supplied
+linear map #{A}, and covariance #{R^{-1}}. It also allows rectangular
+maps. The declaration does not assert invertibility, endpoint
+preservation or a retained square. The density and volume conventions
+are \citet{Proposition B.55, p. 505}{friedli2017statistical} and
+\citet{Exercises 1.2.20-22, p. 41}{tao2011measure}.}

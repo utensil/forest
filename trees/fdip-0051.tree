@@ -24,17 +24,18 @@ these assertions use the bridge proved below. They agree with
 \citet{Section 13.2, Proposition 39, p. 109}{serre1977linear}.}
 
 \proof{
-\p{Commutation with the finitely many real group matrices is a
-system of real linear equations. Complexifying its solution space
+\p{Choose a real basis of #{W}. Commutation with the matrices of the
+group operators in that basis is a system of real linear equations.
+Complexifying its solution space
 therefore gives
 ##{\operatorname{End}_G(W_{\mathbb C})
  \cong D\otimes_{\mathbb R}\mathbb C.}
 For #{D=\mathbb R,\mathbb C,\mathbb H} the right side is respectively
 #{\mathbb C}, #{\mathbb C\times\mathbb C}, #{M_2(\mathbb C)}.
 For the middle identity use
-#{z\otimes a\mapsto(za,\bar z a)}; for the last use the usual
-quaternion two-by-two complex matrices, whose complex span is all
-#{M_2(\mathbb C)}, as in \ref{fcap-0042}.
+#{z\otimes a\mapsto(za,\bar z a)}; for the last use the quaternion model of \ref{fcap-0042}, the usual
+inclusion of #{\mathbb H} into #{M_2(\mathbb C)}, whose complex span
+is all of #{M_2(\mathbb C)}.
 Complex semisimplicity identifies the left side with
 #{\prod_\psi M_{n_\psi}(\mathbb C)}, where #{n_\psi} is the
 constituent multiplicity. Its simple factors and their dimensions
@@ -58,8 +59,10 @@ so #{\chi=\bar\chi} and #{\nu_2=\pm1}. Suppose #{\nu_2=1}.
 Choose a nondegenerate invariant symmetric complex bilinear form
 #{B} on #{X_\chi} and an averaged invariant positive Hermitian
 form #{h}, conjugate-linear in its first argument. There is a unique
-antilinear map #{J} with #{B(x,y)=h(Jx,y)}, and it commutes with
-#{G}. In an #{h}-orthonormal basis write #{B(x,y)=x^TAy}.
+antilinear map #{J} on the complex irreducible #{X_\chi}, not on
+the real module #{W}, with #{B(x,y)=h(Jx,y)}, and it commutes with
+#{G}. In an #{h}-orthonormal basis of #{X_\chi} write
+#{B(x,y)=x^TAy}.
 Then #{A^T=A}, #{Jx=\bar A\bar x} and
 #{J^2=\bar A A=A^*A>0}. By complex Schur's lemma
 #{J^2=tI} for a positive real #{t}. Replacing #{J} by
@@ -72,33 +75,30 @@ irreducible specialization of
 invariant subspace would complexify to a proper subspace of
 #{X_\chi}. There is a nonzero complex intertwiner
 #{U_{\mathbb C}\to W_{\mathbb C}=X_\chi^{\oplus2}}.
-In real bases its real or imaginary part gives a nonzero real
-intertwiner #{U\to W}, which must be an isomorphism by
-irreducibility. But #{\dim_{\mathbb R}U=\chi(1)} and
+Choose real bases of #{U} and #{W}. In those bases, its real or
+imaginary part gives a nonzero real intertwiner #{U\to W}, which
+must be an isomorphism by irreducibility. But #{\dim_{\mathbb R}U=\chi(1)} and
 #{\dim_{\mathbb R}W=2\chi(1)}, a contradiction.
 Thus #{\nu_2=-1}. The three division algebras exhaust the cases
 and give distinct indicators, so all implications reverse.
 Finally #{W} is a left #{\mathbb H}-space, making its real dimension
 a multiple of 4; hence #{\chi(1)} is even.}
-}
 
-\p{For an equivariant centered real Gaussian on an isotypic sector,
-use the coordinates #{z_1,\ldots,z_r\in D^m} of
-\ref{fdip-0050}. Its real density is proportional to
+\p{In the scalar-column coordinates #{z_1,\ldots,z_r\in D^m} of
+\ref{fdip-0050}, the real density is proportional to
 ##{\exp\left(-\frac12\sum_{a=1}^r
- \operatorname{Re}(z_a^*Q_\Xi z_a)\right).}
-The real covariance is the Hermitian multiplicity matrix #{Q_\Xi^{-1}}
-acting on each column. For #{D=\mathbb C}, multiplication of a
-column by #{e^{i\theta}} preserves this real law: this is circular
-symmetry. With the displayed real normalization the complex second
-moment is #{\mathbb E[z_a z_a^*]=2Q_\Xi^{-1}}.
-For #{D=\mathbb H}, right multiplication #{z_a\mapsto z_a q}
-by a unit quaternion likewise preserves the real quadratic form
-and Lebesgue measure. This is the asserted quaternionic symmetry;
-left multiplication by an arbitrary quaternion need not commute
-with the entries of #{Q_\Xi}. These coordinate symmetries need not
-be additional graph symmetries. The real Gaussian normalization and
-covariance are those of \ref{fdip-000H}.}
+\operatorname{Re}(z_a^*Q_\Xi z_a)\right),}
+and the real covariance is #{Q_\Xi^{-1}} on each column. For
+#{D=\mathbb C}, multiplication of a column by #{e^{i\theta}} preserves
+this real law. With that real normalization the complex second moment
+is #{\mathbb E[z_az_a^*]=2Q_\Xi^{-1}}. For #{D=\mathbb H}, right
+multiplication #{z_a\mapsto z_aq} by a unit quaternion preserves
+#{\operatorname{Re}(z^*Q_\Xi z)} and Lebesgue measure. Left
+multiplication by an arbitrary quaternion need not commute with the
+entries of #{Q_\Xi}. Neither symmetry is an additional graph symmetry.
+The [coordinate reading](fdip-00KQ) records these formulas. The real
+Gaussian normalization is that of \ref{fdip-000H}.}
+}
 
 \p{TauCeti's
 \leanref/tauceti{Representation.frobeniusSchurIndicator_eq_one_iff_isRealizableOverReal}
