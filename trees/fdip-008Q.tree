@@ -51,10 +51,12 @@ The solutions with #{u=0} are #{(t,u)=(\pm 2,0)}. When #{|u|=1},
 and every larger value gives two. These are the three values of
 #{w_D}.}
 
-\p{The matrix of #{Q} has determinant #{-D/4} up to the usual factor
-#{4}. Explicitly,
-##{\det\begin{pmatrix}2a&b\\b&2c\end{pmatrix}=-D.}
-An element
+\p{Let #{B_Q} be the full polar form
+#{B_Q(v,w)=Q(v+w)-Q(v)-Q(w)}. In the coordinate basis its Gram matrix is
+##{\begin{pmatrix}2a&b\\b&2c\end{pmatrix},}
+and #{D=-\det(B_Q)}. The argument does not divide the middle coefficient
+by #{2}. When #{D\equiv 1\pmod 4} that coefficient is odd, so the halved
+matrix is not an integral Gram matrix. An element
 #{\gamma\in\mathrm{SL}_2(\mathbb Z)} replaces that matrix by a congruent
 matrix, so it preserves #{D}. Let #{\tau=(-b+\sqrt{D})/(2a)} be the
 root in the upper half plane, taking the square root of positive
@@ -146,11 +148,20 @@ has even valuation, so #{\rho(p^k)=0}.}
 #{D\equiv 5\pmod 8}, then for #{a\ge 1} the modulus #{2^{a+2}} is a
 multiple of #{8}, and no square is congruent to #{5} modulo #{8}, so
 #{\rho(2^a)=0}. If #{D\equiv 1\pmod 8}, the two odd residues modulo
-#{4} satisfy the congruence modulo #{8}. A solution modulo
-#{2^{a+1}} lifts to a solution modulo #{2^{a+2}} by
-#{b=b_0+t2^{a+1}}. The cross term determines #{t} uniquely because
-#{b_0} is odd, and the quadratic term in #{t} is divisible by
-#{2^{a+3}}. Thus #{\rho(2^a)=2} for every #{a\ge 1}. If #{D} is even, inspect #{b} modulo #{4} against the condition
+#{4} satisfy #{b^2\equiv D\pmod 8}, so #{\rho(2)=2}. Every later
+solution is odd, because #{D} is odd. Suppose #{a\ge 1} and #{b_0} is a
+residue modulo #{2^{a+1}} with #{b_0^2\equiv D\pmod{2^{a+2}}}. Its lifts
+modulo #{2^{a+2}} are #{b=b_0+t2^{a+1}} for #{t\in\{0,1\}}. Expanding
+gives
+##{b^2=b_0^2+tb_0\,2^{a+2}+t^2 2^{2a+2}.}
+This class already solves the congruence modulo #{2^{a+2}}, so the cross
+term vanishes at that modulus and cannot choose #{t} there. The next
+count tests #{b^2\equiv D\pmod{2^{a+3}}}. For #{a\ge 1} the quadratic
+term is divisible by #{2^{a+3}}. The cross term #{2^{a+2}b_0 t} remains,
+and #{b_0} odd makes exactly one value of #{t} succeed. Reduction
+modulo #{2^{a+1}} sends each solution counted by #{\rho(2^{a+1})} to a
+solution counted by #{\rho(2^a)}, so the two counts are equal. Thus
+#{\rho(2^a)=2} for every #{a\ge 1}. If #{D} is even, inspect #{b} modulo #{4} against the condition
 modulo #{8}. When #{D\equiv 4\pmod 8} the only solution is
 #{b\equiv 2\pmod 4}. When #{D\equiv 0\pmod 8} the only solution is
 #{b\equiv 0\pmod 4}. Thus #{\rho(2)=1}. For #{a\ge 2} write
@@ -177,14 +188,21 @@ so every #{g(p^k)} equals #{1}, as does #{\psi(p^k)}. Therefore
 #{g=\psi}, and
 ##{R(n)=w_D\sum_{d\mid n}\chi_D(d).}}
 
-\p{Absolute convergence for #{\operatorname{Re}s>1} lets the zeta sums
-be rearranged. The form has no real root and #{a>0}, so its minimum #{\mu} on the
-unit circle is positive and #{Q(x,y)\ge\mu(x^2+y^2)}. The comparison
-series converges for #{\operatorname{Re}s>1} because, in polar
-coordinates, the tail is a constant multiple of #{\int_1^\infty r^{1-2s}\,dr}.
-Hence
+\p{The identity already proved gives #{|R(n)|\le w_D\,\tau(n)}, where
+#{\tau(n)} is the number of positive divisors of #{n}: the absolute
+value of #{\chi_D} is at most #{1}. Since #{\tau=1\ast 1},
+##{\sum_{n\ge 1}\tau(n)\,n^{-s}=\zeta(s)^2,}
+which converges for #{\operatorname{Re}s>1}. Therefore
+#{\sum_n R(n)\,n^{-s}} converges absolutely in that half-plane. Each
+pair #{\bigl(Q,(x,y)\bigr)} with #{Q(x,y)=n} contributes one term
+#{n^{-s}}, so
 ##{\sum_{Q\in\mathcal F}E_Q(s)
 =\sum_{n\ge 1}R(n)\,n^{-s}.}
+A comparison integral for one positive form does not by itself control
+this sum over classes. The hypothesis #{a>0}, together with #{D<0}, is
+what makes every represented value positive. The identity is not claimed
+when #{D>0}: an indefinite form has an automorphism group governed by a
+Pell equation, and that group need not have order #{w_D}.
 The representation count and the substitution #{n=dm} give
 ##{w_D\sum_{d,m\ge 1}\chi_D(d)\,(dm)^{-s}
 =w_D\,\zeta(s)\sum_{d\ge 1}\chi_D(d)\,d^{-s}.}
