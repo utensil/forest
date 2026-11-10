@@ -3,42 +3,29 @@
 \tag{fdip}
 \taxon{Definition}
 \title{The Gaussian partition function and probability law}
-\date{2026-10-25}
+\date{2026-11-10}
 
-\p{Let #{Q} be a [positive precision parameter](fdip-0004) on a
-finite real inner-product space #{(E,h)}, with canonical volume
+\p{Let #{Q} be a \vocabk{positive precision parameter}{fdip-0004}
+on a finite real inner-product space #{(E,h)}, with canonical volume
 #{\lambda_E}. Its \newvocab{Gaussian partition function} is
 ##{Z_Q=\int_E w_Q\,d\lambda_E,
 \qquad w_Q(x)=e^{-h(x,Qx)/2}.}
-The [normalization theorem](fdip-002T) proves
+The normalization theorem \ref{fdip-002T} proves
 ##{0<Z_Q=\frac{(2\pi)^{n/2}}{\sqrt{\det Q}}<\infty,
 \qquad n=\dim E.}
-Its \newvocab{Gaussian probability law} is the Borel measure
-##{\mu_Q(A)=Z_Q^{-1}\int_A w_Q\,d\lambda_E.}
-In the counting field specialization this is exactly the density
-#{Z_Q^{-1}\exp(-\phi^TQ\phi /2)} against the product reference measure.}
-\proof{
-\p{The weight is positive Borel. Nonnegativity and the empty-set axiom
-follow from the nonnegative integral. For pairwise disjoint Borel
-#{A_k}, the functions #{w_Q\sum_{k=1}^N\mathbf1_{A_k}} increase to
-#{w_Q\mathbf1_{\bigcup_k A_k}}. Monotone convergence and finite
-additivity of the integral give countable additivity after division
-by #{Z_Q}. The total mass is #{Z_Q/Z_Q=1}.}
-}
-\p{In an orthonormal eigenchart the density is the product of the centered
-scalar densities #{I(q_i)^{-1}e^{-q_i y_i^2/2}}. This identification
-uses the scalar value and normalization, before computing covariance.
-For #{n=0}, the action is zero at the unique point, #{Z_Q=1}, and
-#{\mu_Q=\delta_0}. Replacing the reference volume by #{c\lambda_E},
-#{0<c<\infty}, multiplies #{Z_Q} by #{c} and leaves #{\mu_Q}
-unchanged, as in the [reference-rescaling example](fdip-002N).
-A finite-sum \vocabk{partition function}{ftip-008J} has the same
-normalizing role. A finite vertex set gives a finite-dimensional configuration space.
-Integrability of its Gaussian weight follows from the normalization theorem,
-using positive precision.}
+Its \newvocab{Gaussian probability law} is the Borel measure given,
+for Borel #{A\subseteq E}, by
+##{\mu_Q(A)=Z_Q^{-1}\int_A w_Q\,d\lambda_E.}}
+\p{The coordinate densities in \ref{fdip-00JS} realize this measure
+in counting and orthonormal eigencharts. Its probability-measure properties,
+zero-dimensional case and reference-rescaling identity are
+\ref{fdip-00JT}. A finite-sum
+\vocabk{partition function}{ftip-008J} has the same normalizing role.
+A finite vertex set gives a finite-dimensional configuration space.
+Integrability of its Gaussian weight follows from the normalization
+theorem, using positive precision.}
 \p{The density convention is compared with
 \citet{Lemma B.54 and Proposition B.55, pp. 504-505}{friedli2017statistical};
-that source uses covariance rather than precision. Countable additivity
-uses \citet{Theorem 1.4.44, pp. 107-108, preliminary version}{tao2011measure}.
-The [normalization failures](fdip-002U) distinguish infinite normalizers,
+that source uses covariance rather than precision.
+The normalization failures in \ref{fdip-002U} distinguish infinite normalizers,
 zero weights and the zero-dimensional case.}

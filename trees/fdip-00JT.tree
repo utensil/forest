@@ -1,0 +1,39 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{The normalized weight is a probability measure}
+\date{2026-11-10}
+
+\p{For a \vocabk{positive precision parameter}{fdip-0004} #{Q}
+on a finite real inner-product space #{(E,h)}, the formula for its
+\vocabk{Gaussian probability law}{fdip-0005} defines a Borel
+probability measure. If #{\dim E=0}, then #{S_Q=0}, #{Z_Q=1} and
+#{\mu_Q=\delta_0}. If the same normalization construction uses
+#{c\lambda_E} in place of #{\lambda_E}, with #{0<c<\infty}, its
+normalizer and law satisfy
+##{\widetilde Z_Q=cZ_Q,\qquad\widetilde\mu_Q=\mu_Q.}}
+\proof{
+\p{The weight is positive Borel by \ref{fdip-00JQ}.
+Nonnegativity and the empty-set axiom
+follow from the nonnegative integral. For pairwise disjoint Borel
+#{A_k}, the functions #{w_Q\sum_{k=1}^N\mathbf1_{A_k}} increase to
+#{w_Q\mathbf1_{\bigcup_k A_k}}. Monotone convergence and finite
+additivity of the integral give countable additivity after division
+by #{Z_Q}. The total mass is #{Z_Q/Z_Q=1}, using the positive finite
+normalizer in \ref{fdip-002T}.}
+\p{In dimension zero, #{E} is the singleton #{\{0\}} with canonical
+mass one. Its action is zero and its weight is one, so #{Z_Q=1}
+and the displayed set formula is #{\delta_0}. For #{0<c<\infty},
+linearity in the reference measure gives
+##{\int_A w_Q\,d(c\lambda_E)=c\int_A w_Q\,d\lambda_E.}
+Taking #{A=E} gives #{\widetilde Z_Q=cZ_Q}. Dividing the set formula
+by #{cZ_Q} cancels #{c} and proves equality of the normalized laws
+on every Borel set.}
+}
+\p{Countable additivity uses
+\citet{Theorem 1.4.44, pp. 107-108, preliminary version}{tao2011measure}.
+The reference-rescaling example \ref{fdip-002N} displays the same
+cancellation. Mathlib's \leanref{MeasureTheory.Measure.withDensity}
+constructs the measure with #{Z_Q^{-1}w_Q} viewed as an extended
+nonnegative density.}

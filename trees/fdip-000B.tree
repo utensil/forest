@@ -60,30 +60,6 @@ applied to #{k} would be orthogonal to every #{j}, hence zero.
 This proves uniqueness. In dimension zero the covariance is the zero
 form, and its representing map is the unique invertible endomorphism.}
 }
-\p{For a nonorthonormal basis #{b_i}, the coordinate functional is
-#{h(b^i,\cdot)}. The dual basis satisfies #{h(b^i,b_j)=\delta_{ij}}.
-Its covariance array
-therefore has entries #{h(b^i,Q^{-1}b^j)}; it is not the unqualified
-array of the inverse operator in that basis. The counting basis is
-orthonormal, giving the coordinate formula above. The
-[alternating-cycle example](fdip-0037) evaluates it explicitly.}
-\p{To compare with formal Gaussian providers, put #{n=\dim E}, choose an orthonormal
-chart and let #{S} represent #{Q^{-1}} there. The positive inverse
-is positive definite, #{S^{-1}} represents #{Q}, and
-#{\det S=(\det Q)^{-1}}. Consequently the provider density is
-##{\begin{aligned}
- &(2\pi)^{-n/2}(\det S)^{-1/2}
-       e^{-y^TS^{-1}y/2}\\
- &\qquad=Z_Q^{-1}e^{-h(x,Qx)/2}.
-\end{aligned}}
-The [orthonormal chart](fdip-002L) and the Euclidean-space coordinate
-wrapper preserve canonical volume. Thus the chart pushforward of
-#{\mu_Q} is #{\mathrm{multivariateGaussian}(0,S)} by
-\leanref/tauceti{TauCeti.Probability.multivariateGaussian_eq_withDensity}.
-Mathlib's
-\leanref{ProbabilityTheory.covariance_eval_multivariateGaussian}
-then identifies its coordinate covariance with #{S}; its positive
-semidefinite hypothesis follows from positive definiteness. The
-parameter is covariance #{S=Q^{-1}}, not precision #{Q}. This density,
-determinant and volume identification is needed in addition to the
-covariance declaration; the integral proof above is independent of it.}
+\p{The coordinate covariance and density calculation in \ref{fdip-00JU}
+gives the dual-basis entries and identifies this canonical-volume law
+with the formal covariance-parameter Gaussian measure.}
