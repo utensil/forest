@@ -1,0 +1,23 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{Centered differences are skew-adjoint}
+\date{2026-11-10}
+
+\p{On the [periodic grid](fdip-000R), the coordinate shifts commute
+and satisfy #{T_j^*=T_j^{-1}}. Each centered difference satisfies
+#{\nabla_j^*=-\nabla_j}.}
+
+\proof{
+\p{Reindexing #{y=x+e_j} gives
+##{\begin{aligned}
+\langle T_jf,g\rangle_H
+&=\sum_y\overline{f(y)}g(y-e_j)\\
+&=\langle f,T_j^{-1}g\rangle_H.
+\end{aligned}}
+Thus #{T_j} is unitary. The shifts and their inverses commute,
+since addition in #{\Lambda} commutes. Also
+#{(T_j^{-1})^*=T_j}, so
+#{\nabla_j^*=(T_j^{-1}-T_j)/2=-\nabla_j}.}
+}
