@@ -6,11 +6,9 @@
 \date{2026-10-25}
 
 \p{Let #{T:X_V\to X_W} be an invertible real linear map, with
-#{|V|=|W|=n}. Choose ordered indicator bases and normalized top forms
-#{\eta_V,\eta_W}, each taking value one on its chosen basis. Define
-##{T^*\eta_W=d(T)\eta_V,\qquad J(T)=|d(T)|.}
-Reordering either basis changes #{d(T)} only by a sign; #{J(T)>0}
-is the \newvocab{reference-volume Jacobian}. For Borel sets #{E,B},
+#{|V|=|W|=n}. Its
+\vocabk{reference-volume Jacobian}{fdip-00JI} #{J(T)} is positive.
+For Borel sets #{E,B},
 ##{\begin{aligned}
 \lambda_W(T(E))&=J(T)\lambda_V(E),\\
 T_*\lambda_V(B)&=J(T)^{-1}\lambda_W(B).
@@ -21,13 +19,25 @@ For nonnegative Borel #{F:X_W\to[0,\infty]},
 For real signed #{F}, absolute integrability on either side is equivalent
 to that on the other; under this condition the same equality holds.
 Translation, and hence #{x\mapsto T(x)+b}, has the same coefficient.}
+\proof{
+\p{Choose orderings #{v_1,\ldots,v_n} and #{w_1,\ldots,w_n}
+of the carriers. Their indicator bases are orthonormal for the counting
+inner products. Let #{A} represent #{T} in these two ordered bases.
+The adjoint identity makes #{A^T} the array of #{T^\dagger}; thus
+##{\det(T^\dagger T)=\det(A^TA)=(\det A)^2>0.}
+The last inequality uses invertibility; for #{n=0} the determinant is
+#{1}. Let #{\eta_V,\eta_W} be the top forms taking value one on the
+chosen ordered bases, and write #{T^*\eta_W=d(T)\eta_V}.
+Alternating multilinearity gives #{d(T)=\det A}, so
+##{J(T)=\sqrt{\det(T^\dagger T)}=|\det A|=|d(T)|.}
+Reordering either indicator basis changes #{d(T)} only by a sign.
+The absolute coefficient therefore agrees with the intrinsic definition.}
 \p{For an endomorphism, #{d(T)=\det T} only when source and target
 use the same normalized top form. Independently ordered indicator bases
 give #{d(T)=\varepsilon\det T}, #{\varepsilon\in\{1,-1\}}, although
 #{J(T)=|\det T|}. The identity on #{\mathbb R^2} with reversed target
 order has #{d=-1}, intrinsic determinant #{1}, and #{J=1}.
 In dimension zero the top form is #{1} and #{J=1}.}
-\proof{
 \p{Top exterior powers are one-dimensional. For composable maps #{T,S},
 use the same intermediate form to obtain
 #{(ST)^*\eta=d(S)d(T)\eta_V}. Thus #{J(ST)=J(S)J(T)};
@@ -83,9 +93,18 @@ No multiplication closure of #{L^1} is used.}
 }
 \p{The image convention is stated in
 \citet{Exercises 1.2.20-1.2.22, p. 41, preliminary version}{tao2011measure};
-the argument above proves its finite-field form. Mathlib's
+the argument above proves the formula for finite real field spaces.
+Mathlib's
 \leanref{Real.map_linearMap_volume_pi_eq_smul_volume_pi} is a
 finite-coordinate endomorphism theorem with nonzero determinant and
 reciprocal pushforward coefficient. Distinct carriers require the
 coordinate transport already proved, not an intrinsic signed determinant
 between unrelated spaces.}
+
+\p{Mathlib's \leanref{LinearMap.normDet_sq} and
+\leanref{LinearMap.normDet_nonneg} identify this square root with
+#{\operatorname{normDet}(T)} for finite-dimensional real inner-product
+spaces. Its \leanref{LinearMap.normDet_eq_norm_det_toMatrix} gives the
+absolute determinant in two orthonormal bases with the same finite index
+set. These are algebraic volume-factor identities; the Borel image and
+integrability assertions are proved above.}

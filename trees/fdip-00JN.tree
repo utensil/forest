@@ -1,0 +1,59 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{Volume under a real linear isomorphism}
+\date{2026-11-10}
+
+\p{Let #{I} be a finite set, let #{H} be a finite-dimensional real
+inner-product space with its
+\vocabk{induced Euclidean measure}{fdip-002M}, and let #{B:X_I\to H}
+be a real linear isomorphism. Use the
+\vocabk{adjoint for chosen perfect pairings}{fdip-001P}
+#{B^\dagger:H\to X_I} for the counting inner product on #{X_I}
+and the given inner product on #{H}. Then
+##{\det(B^\dagger B)>0,\qquad
+ j_B=\sqrt{\det(B^\dagger B)}>0.}
+For every Borel #{E\subseteq X_I},
+##{\lambda_H(B(E))=j_B\lambda_I(E),\qquad
+ B_*\lambda_I=j_B^{-1}\lambda_H.}
+If #{I} is empty, then #{H=\{0\}} and #{j_B=1}.}
+\proof{
+\p{Put #{k=|I|=\dim H}. Choose an orthonormal chart
+#{C:H\to\mathbb R^k}, whose existence and measure preservation are
+proved in \ref{fdip-00JM}. The adjoint identity gives
+#{C^\dagger C=I_H}; composition of the adjoints in \ref{fdip-001P}
+therefore gives
+##{(CB)^\dagger(CB)=B^\dagger C^\dagger CB=B^\dagger B.}
+The isomorphism #{CB} is between counting real field spaces, so
+\ref{fdip-002K} proves the determinant positivity and identifies its
+[reference-volume Jacobian](fdip-00JI) with #{j_B}.}
+\p{The image #{B(E)} is Borel because #{B} is a linear
+homeomorphism. The chart characterization and \ref{fdip-002K} give
+##{\lambda_H(B(E))
+ =\lambda_{\{1,\ldots,k\}}((CB)(E))=j_B\lambda_I(E).}
+For a Borel #{F\subseteq H}, apply this to #{E=B^{-1}(F)}:
+#{\lambda_H(F)=j_B\lambda_I(B^{-1}(F))}. Positivity of #{j_B}
+gives the reciprocal pushforward formula. The empty-space determinant
+is #{1}, so both factors are #{1} in dimension zero.}
+\p{To recover the ordered-basis formula, explicitly order #{I} as
+#{i_1,\ldots,i_k} and set #{e_r=\delta_{i_r}} and #{b_r=Be_r}.
+The #{e_r} form an orthonormal source basis and the #{b_r} a basis of
+#{H}. In this source basis the endomorphism #{B^\dagger B} has entries
+##{G_{rs}=h_I(e_r,B^\dagger Be_s)=h_H(b_r,b_s).}
+Let #{D:X_I\to\mathbb R^k} be the enumeration chart and let #{A}
+represent #{CB D^{-1}} in the ordered standard bases. Its #{r}th
+column is #{Cb_r}, so #{G=A^TA} and
+##{\det(B^\dagger B)=\det G=(\det A)^2,\qquad
+ j_B=\sqrt{\det G}=|\det A|.}
+In particular, if #{I=\{1,\ldots,k\}} with its standard order, then
+#{B(t)=\sum_r t_r b_r}; the image identity is
+##{\lambda_H(B(E))=\lambda_{\{1,\ldots,k\}}(A(E))
+ =\sqrt{\det G}\,\lambda_{\{1,\ldots,k\}}(E).}
+Every ordered basis of #{H} arises from such an isomorphism #{B}.
+The pushforward identity therefore has coefficient #{(\det G)^{-1/2}}
+for that basis. Empty Gram determinants are #{1}.}
+}
+\p{This extends \ref{fdip-002K} from counting coordinate targets to
+[induced Euclidean volume](fdip-002M) through an orthonormal chart.
+The declared-basis provider comparison is \ref{fdip-00JO}.}
