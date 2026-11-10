@@ -6,8 +6,9 @@
 \date{2026-11-01}
 
 \p{Let #{\phi\sim N(0,Q^{-1})} on #{\mathbb R^V}, where #{Q} is any
-real symmetric positive-definite matrix. Its \newvocab{precision graph}
-has an edge #{\{a,b\}} for distinct vertices exactly when #{Q_{ab}\ne0}.
+positive-definite self-adjoint operator on this counting space. Its
+\newvocab{precision graph} has an edge #{\{a,b\}} for distinct
+vertices exactly when #{\langle\delta_a,Q\delta_b\rangle\ne0}.
 For pairwise disjoint subsets #{A,B,S}, say that #{S} separates #{A}
 from #{B} if every graph path from #{A} to #{B} meets #{S}. Then
 ##{S\text{ separates }A\text{ from }B
@@ -18,14 +19,19 @@ factors into its two conditional marginals almost everywhere in
 #{\phi_S}. The canonical Gaussian density kernels used below factor
 at every conditioning value. For distinct vertices there is also the
 pairwise equivalence
-##{Q_{ab}=0\quad\Longleftrightarrow\quad
+##{\langle\delta_a,Q\delta_b\rangle=0
+ \quad\Longleftrightarrow\quad
 \phi_a\mathrel{\perp\mkern-9mu\perp}\phi_b
      \mid\phi_{V\setminus\{a,b\}}.}
-No Laplacian sign condition on #{Q} is required.}
+No Laplacian sign condition on #{Q} is required. The counting-basis
+matrices and the covariance-provider boundary are given in
+\ref{fdip-00LW}.}
 
 \proof{
-\p{First suppose #{V=A\sqcup S\sqcup B}. Separation implies
-#{Q_{AB}=0}. With #{\phi_S=s} fixed, the quadratic energy in #{a,b}
+\p{Order #{V} and use the counting basis, so the matrix entries are
+#{Q_{ab}=\langle\delta_a,Q\delta_b\rangle}. First suppose
+#{V=A\sqcup S\sqcup B}. Separation implies #{Q_{AB}=0}. With
+#{\phi_S=s} fixed, the quadratic energy in #{a,b}
 is the sum
 ##{\begin{aligned}
 &\frac12a^TQ_{AA}a+a^TQ_{AS}s\\
@@ -72,12 +78,6 @@ The lattice harmonic-field statements of
 concern their specified lattice precisions, not this arbitrary-precision
 theorem.}
 
-\p{Mathlib's
-\leanref{ProbabilityTheory.HasGaussianLaw.indepFun_of_covariance_eval}
-supports the independence step for two finite coordinate families
-with a jointly Gaussian law and zero cross covariances. Apply it
-separately to the conditional Gaussian at each fixed #{s}; the block
-inverse above verifies its covariance hypothesis. The declaration
-asserts ordinary independence under that probability law. Graph
-separation, the passage to conditional kernels and the pairwise
-converse are supplied by the argument above.}
+\p{The coordinate independence declaration, and the sense in which
+it supplies ordinary independence rather than the graph argument,
+is \ref{fdip-00LW}.}

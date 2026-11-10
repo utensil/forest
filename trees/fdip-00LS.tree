@@ -1,0 +1,54 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Remark}
+\title{Coordinates for conditional propagators}
+\date{2026-11-10}
+
+\p{Choose orthonormal basis maps #{B:\mathbb R^r\to X} and
+#{B_\perp:\mathbb R^{n-r}\to Y} as in the proof of
+\ref{fdip-0060}. In these bases the blocks are
+#{A=B^TQB}, #{K=B^TQB_\perp} and #{D=B_\perp^TQB_\perp}, the
+conditional mean coordinates are #{\mu(x)=-D^{-1}K^Tx}, and the
+full noise covariance has matrix #{C=B_\perp D^{-1}B_\perp^T}.
+For a coordinate selector retaining #{R} and eliminating
+#{U=V\setminus R}, the same formulas are
+##{\mu(x)=-Q_{UU}^{-1}Q_{UR}x,\qquad
+   \operatorname{Cov}(\eta)=Q_{UU}^{-1}.}}
+
+\p{In full vertex coordinates, with the symmetric four-tensor
+#{T_{ijkl}} and #{h=h(x)}, Wick's three pairings give
+##{\begin{aligned}
+24a(x)={}&T(h,h,h,h)
+ +6\sum_{i,j,k,l}T_{ijkl}h_i h_j C_{kl}\\
+ &+3\sum_{i,j,k,l}T_{ijkl}C_{ij}C_{kl}.
+\end{aligned}}
+The covariance #{C} can be singular on #{H}: it is supported on
+#{Y}. The formula follows by applying Wick to the nonsingular
+#{D^{-1}} in eliminated coordinates. No nondegeneracy on all of
+#{H} is needed.}
+
+\p{TauCeti's
+[\code{integral_mul_mul_mul_multivariateGaussian}](https://github.com/TauCetiProject/TauCeti/blob/df319cee080d8cab30699ff8ab3ed8d9347768aa/TauCeti/Probability/Distributions/Gaussian/MixedMoments.lean#L162)
+proves the three-pairing identity for four centered Gaussian
+coordinates, allowing repeated indices and any positive-semidefinite
+covariance. Setting that covariance to #{C} supplies the fourth-moment
+step. Contraction with #{T}, the formal logarithm and the
+higher-moment pairing arguments are proved in the proposition.}
+
+\p{TauCeti's
+[\code{condDistrib_multivariateGaussian}](https://github.com/TauCetiProject/TauCeti/blob/df319cee080d8cab30699ff8ab3ed8d9347768aa/TauCeti/Probability/Distributions/Gaussian/Conditional.lean#L444)
+assumes a positive-semidefinite joint covariance and a
+positive-definite observed covariance block. It identifies the
+regular conditional law with an explicit Gaussian kernel almost
+everywhere in the observed marginal. Order the coordinates as
+#{Y\oplus X} and use #{G=Q^{-1}>0}. From #{QG=I},
+##{\begin{aligned}
+DG_{YX}+K^TG_{XX}&=0,\\
+DG_{YY}+K^TG_{XY}&=I.
+\end{aligned}}
+Therefore #{G_{YX}G_{XX}^{-1}=-D^{-1}K^T} and
+#{G_{YY}-G_{YX}G_{XX}^{-1}G_{XY}=D^{-1}}. This is the coordinate
+form of the mean and covariance in the proposition. Its
+almost-everywhere identification is distinct from the explicit
+density kernel used there at every #{x}.}

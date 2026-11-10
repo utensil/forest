@@ -15,20 +15,22 @@ There is exactly one positive Gaussian extension with
 If #{S=\varnothing}, take #{p_S=1}; this is the product law.}
 
 \p{Let #{\Lambda_1,\Lambda_2,\Lambda_S} denote the three marginal
-precision matrices. Padding a matrix on #{T} with zeros gives the matrix
-on #{V} defined by
-##{\operatorname{pad}_T(M)=\pi_T^TM\pi_T.}
+precision operators. For #{T\subseteq V}, let #{i_T:\mathbb R^T\to\mathbb R^V}
+be the counting inclusion, extending functions by zero. Padding is
+##{\operatorname{pad}_T(\Lambda)=i_T\Lambda i_T^*.}
 The extension's precision is
 ##{Q=\operatorname{pad}_{V_1}(\Lambda_1)
      +\operatorname{pad}_{V_2}(\Lambda_2)
      -\operatorname{pad}_S(\Lambda_S).}
 In particular, if a positive global Gaussian law has #{S} separating
 #{A} and #{B} in its precision graph, this formula reconstructs its
-precision from the indicated marginals. The matrices #{\Lambda_i}
-are marginal precisions, not principal restrictions of #{Q}.}
+precision from the indicated marginals. The operators #{\Lambda_i}
+are marginal precisions, not the compressions of #{Q} to those
+vertex sets. Their counting matrices are given in \ref{fdip-00LV}.}
 
 \proof{
-\p{Factor the proposed density as
+\p{Order the coordinates as #{A}, #{S}, #{B} and use the counting
+basis. Factor the proposed density as
 #{p_S(s)p_1(a\mid s)p_2(b\mid s)}. Successively integrating over
 #{a,b,s} gives total mass one. Integrating just #{b} or just #{a}
 recovers #{p_1} or #{p_2}, respectively; its conditional density is

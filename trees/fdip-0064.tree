@@ -9,31 +9,34 @@
 #{\mathcal G(T)} be the set of centered real Gaussian probability laws
 on #{\mathbb R^T} with positive-definite covariance. Put
 #{\mathcal G(\varnothing)=\{1\}}, the unit mass on the zero-dimensional
-space. For #{S\subseteq T}, coordinate projection
-#{\pi_{S,T}:\mathbb R^T\to\mathbb R^S} defines marginal restriction
+space. For #{S\subseteq T}, let
+#{\pi_{S,T}:\mathbb R^T\to\mathbb R^S} be coordinate projection.
+Its adjoint, for the \vocabk{counting inner products}{fdip-0002},
+extends a function on #{S} by zero. Marginal restriction is
 ##{\operatorname{res}_{S,T}\mu=(\pi_{S,T})_*\mu.}
-If #{\mu=N(0,G)}, its restriction is #{N(0,G_{SS})}; a principal
-submatrix of #{G>0} is positive definite. Identity and composition of
+If #{\mu=N(0,G)}, the restricted covariance operator is
+#{\pi_{S,T}G\pi_{S,T}^*}. Identity and composition of
 projections make #{\mathcal G} a [presheaf](tt-002Q) on the poset of
 all subsets of #{V}.}
 
 \p{A cover of #{T} is a finite family #{(T_i)} with
 #{\bigcup_iT_i=T}. A family #{\mu_i\in\mathcal G(T_i)} is
-\newvocab{compatible local Gaussian data} if its two marginals on each
-#{T_i\cap T_j} agree. A global extension is a law
-#{\mu\in\mathcal G(T)} with these restrictions. In covariance
-coordinates, compatibility means equality of the two principal
-submatrices on each overlap.}
+\newvocab{compatible local Gaussian data} if its two marginal laws on
+each #{T_i\cap T_j} agree. A global extension is a law
+#{\mu\in\mathcal G(T)} with these restrictions.}
 
 \p{The domain contains all subsets and all such positive Gaussian laws.
 It is not restricted to the Markov laws of one fixed graph: marginalizing
 vertices can create new precision entries. For a law with precision
-#{Q=G^{-1}}, the [Schur formula](fdip-000D) gives the precision of its
+#{Q=G^{-1}} and both #{S} and #{S^c=T\setminus S} are nonempty,
+write #{i_S} and #{i_{S^c}} for the counting inclusions of those
+coordinate subspaces. With the blocks #{A,K,D} of \ref{fdip-005M},
+the [Schur formula](fdip-000D) gives the precision of the
 #{S}-marginal as
-##{\Lambda_S=(G_{SS})^{-1}
- =Q_{SS}-Q_{S,S^c}Q_{S^c,S^c}^{-1}Q_{S^c,S},}
-where #{S^c=T\setminus S}. This is generally different from
-#{Q_{SS}}. Empty blocks follow the zero-dimensional convention.}
+##{(\pi_{S,T}G\pi_{S,T}^*)^{-1}=A-KD^{-1}K^*.}
+This is generally different from the compression #{A=i_S^*Qi_S}.
+Empty blocks follow the zero-dimensional convention. The principal
+submatrices of these operators are given in \ref{fdip-00LU}.}
 
 \p{The [two-singleton example](fdip-006A) shows why overlap
 compatibility alone does not ensure uniqueness.}

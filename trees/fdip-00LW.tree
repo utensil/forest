@@ -1,0 +1,23 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Remark}
+\title{Counting matrices for precision zeros}
+\date{2026-11-10}
+
+\p{In the counting basis declared in \ref{fdip-0065}, the precision
+graph is the usual pattern of nonzero matrix entries. The pairwise
+conditional covariance is
+##{\operatorname{Cov}(\phi_a,\phi_b\mid\phi_{V\setminus\{a,b\}})
+ =\frac{-Q_{ab}}{Q_{aa}Q_{bb}-Q_{ab}^2},}
+with positive denominator, as computed in the proof.}
+
+\p{Mathlib's
+\leanref{ProbabilityTheory.HasGaussianLaw.indepFun_of_covariance_eval}
+supports the independence step for two finite coordinate families
+with a jointly Gaussian law and zero cross covariances. Apply it
+separately to the conditional Gaussian at each fixed #{s}; the block
+inverse in the proof verifies its covariance hypothesis. The
+declaration asserts ordinary independence under that probability
+law. Graph separation, the passage to conditional kernels and the
+pairwise converse are proved in the theorem.}
