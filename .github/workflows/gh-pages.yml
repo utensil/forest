@@ -241,12 +241,182 @@ jobs:
 
     # Specify runner + deployment step
     runs-on: ubuntu-latest
+    # The poll below waits 45 minutes, then cancels. Leave headroom so
+    # the runner is not killed before that cancel runs.
+    timeout-minutes: 60
     if: ${{ github.event_name == 'push' }}
     steps:
+      # actions/deploy-pages@v4 clamps its timeout to 600000 ms and then
+      # cancels the deployment. A slow syncing_files state never finishes.
+      # This step creates the same deployment and polls without that cancel.
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
-        with:
-          # The 314 MB site has been stuck in syncing_files until the
-          # action's 10 minute default cancels the deployment.
-          timeout: 1800000
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json
+          import os
+          import sys
+          import time
+          import urllib.error
+          import urllib.request
+
+          token = os.environ["GITHUB_TOKEN"]
+          repo = os.environ["GITHUB_REPOSITORY"]
+          run_id = os.environ["GITHUB_RUN_ID"]
+          sha = os.environ["GITHUB_SHA"]
+          api = os.environ.get("GITHUB_API_URL", "https://api.github.com").rstrip("/")
+          deadline_s = 45 * 60
+          final_ok = {"succeed", "success"}
+          final_err = {
+              "deployment_failed",
+              "deployment_perms_error",
+              "deployment_content_failed",
+              "deployment_cancelled",
+              "deployment_lost",
+          }
+
+          def redact(obj):
+              if isinstance(obj, dict):
+                  return {k: ("***" if k == "oidc_token" else redact(v)) for k, v in obj.items()}
+              if isinstance(obj, list):
+                  return [redact(v) for v in obj]
+              return obj
+
+          def request(method, url, body=None, auth=None, github=True):
+              data = None if body is None else json.dumps(body).encode()
+              headers = {}
+              if github:
+                  headers["Accept"] = "application/vnd.github+json"
+                  headers["X-GitHub-Api-Version"] = "2022-11-28"
+              else:
+                  headers["Accept"] = "application/json"
+              if auth:
+                  headers["Authorization"] = auth
+              if body is not None:
+                  headers["Content-Type"] = "application/json"
+              req = urllib.request.Request(url, data=data, headers=headers, method=method)
+              try:
+                  with urllib.request.urlopen(req, timeout=60) as resp:
+                      raw = resp.read().decode()
+                      return resp.status, json.loads(raw) if raw else {}
+              except urllib.error.HTTPError as err:
+                  raw = err.read().decode()
+                  try:
+                      parsed = json.loads(raw) if raw else {}
+                  except json.JSONDecodeError:
+                      parsed = {"message": raw[:500]}
+                  return err.code, parsed
+
+          oidc_code, oidc_payload = request(
+              "GET",
+              os.environ["ACTIONS_ID_TOKEN_REQUEST_URL"],
+              auth="bearer " + os.environ["ACTIONS_ID_TOKEN_REQUEST_TOKEN"],
+              github=False,
+          )
+          if oidc_code != 200 or not isinstance(oidc_payload, dict) or "value" not in oidc_payload:
+              message = oidc_payload.get("message") if isinstance(oidc_payload, dict) else ""
+              print(f"OIDC token request failed: HTTP {oidc_code} {message}", file=sys.stderr)
+              sys.exit(1)
+          oidc = oidc_payload["value"]
+          print("::add-mask::" + oidc)
+
+          artifact_id = None
+          artifact_size = None
+          for _attempt in range(24):
+              code, payload = request(
+                  "GET",
+                  f"{api}/repos/{repo}/actions/runs/{run_id}/artifacts?per_page=100",
+                  auth="Bearer " + token,
+              )
+              if code == 200 and isinstance(payload, dict):
+                  matches = [
+                      item
+                      for item in payload.get("artifacts", [])
+                      if item.get("name") == "github-pages" and not item.get("expired")
+                  ]
+                  if len(matches) == 1:
+                      artifact_id = int(matches[0]["id"])
+                      artifact_size = matches[0].get("size_in_bytes")
+                      break
+                  print(f"github-pages artifact count is {len(matches)}; retrying")
+              else:
+                  print(f"artifact list HTTP {code}; retrying")
+              time.sleep(5)
+          if artifact_id is None:
+              print(f"No single github-pages artifact on run {run_id}", file=sys.stderr)
+              sys.exit(1)
+          print(f"Using artifact {artifact_id} size {artifact_size}")
+
+          code, deployment = request(
+              "POST",
+              f"{api}/repos/{repo}/pages/deployments",
+              body={
+                  "artifact_id": artifact_id,
+                  "pages_build_version": sha,
+                  "oidc_token": oidc,
+              },
+              auth="Bearer " + token,
+          )
+          if code not in (200, 201) or not isinstance(deployment, dict):
+              print(
+                  f"Create deployment failed: HTTP {code} {json.dumps(redact(deployment))[:1000]}",
+                  file=sys.stderr,
+              )
+              sys.exit(1)
+
+          status_url = str(deployment.get("status_url") or "")
+          dep_id = deployment.get("id") or (status_url.rstrip("/").split("/")[-1] if status_url else "") or sha
+          page_url = deployment.get("page_url") or ""
+          safe = {k: deployment.get(k) for k in ("id", "status_url", "page_url") if k in deployment}
+          print("Created deployment " + json.dumps(safe))
+          output_path = os.environ.get("GITHUB_OUTPUT")
+          if output_path and page_url:
+              with open(output_path, "a", encoding="utf-8") as handle:
+                  handle.write(f"page_url={page_url}\n")
+
+          started = time.time()
+          deadline = started + deadline_s
+          last = None
+          next_beat = started
+          while True:
+              now = time.time()
+              code, payload = request(
+                  "GET",
+                  f"{api}/repos/{repo}/pages/deployments/{dep_id}",
+                  auth="Bearer " + token,
+              )
+              if code == 200 and isinstance(payload, dict):
+                  state = payload.get("status") or "unknown_status"
+                  if state != last or now >= next_beat:
+                      elapsed = int((now - started) / 60)
+                      print(f"Current status: {state} ({elapsed} min)")
+                      last = state
+                      next_beat = now + 60
+                  if state in final_ok:
+                      if output_path:
+                          with open(output_path, "a", encoding="utf-8") as handle:
+                              handle.write("status=succeed\n")
+                      print("Reported success")
+                      sys.exit(0)
+                  if state in final_err:
+                      print(f"Deployment ended with {state}", file=sys.stderr)
+                      sys.exit(1)
+              elif now >= next_beat:
+                  print(f"Status query HTTP {code} ({int((now - started) / 60)} min)")
+                  next_beat = now + 60
+              if time.time() >= deadline:
+                  break
+              time.sleep(15)
+
+          print("Still not succeed after 45 minutes; cancelling", file=sys.stderr)
+          code, payload = request(
+              "POST",
+              f"{api}/repos/{repo}/pages/deployments/{dep_id}/cancel",
+              auth="Bearer " + token,
+          )
+          print(f"Cancel HTTP {code} {json.dumps(redact(payload))[:500]}", file=sys.stderr)
+          sys.exit(1)
+          PY
