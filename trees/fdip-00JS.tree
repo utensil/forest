@@ -1,0 +1,47 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Example}
+\title{Counting and eigenchart Gaussian densities}
+\date{2026-11-10}
+
+\p{Let #{Q} be a [positive precision parameter](fdip-0004) on
+#{(X_V,h_V)}. Choose an indicator enumeration and its
+counting chart #{C:X_V\to\mathbb R^n} from \ref{fdip-002J}. For the
+counting array #{A=CQC^{-1}} in \ref{fdip-002O}, the action and volume give
+##{\begin{aligned}
+S_Q(x)&=\tfrac12(Cx)^TA(Cx),\\
+C_*\lambda_V&=\lambda_{\{1,\ldots,n\}}.
+\end{aligned}}
+Consequently the pushforward of the [Gaussian law](fdip-0005) has
+density
+##{Z_Q^{-1}\exp(-y^TAy/2)}
+against product Lebesgue measure.
+The customary expression
+##{Z_Q^{-1}\exp(-\phi^TQ\phi /2)}
+uses
+#{\phi=Cx} and the same symbol #{Q} for this counting array.}
+\p{More generally, let #{Q} be a positive precision parameter on a
+finite real inner-product space #{(E,h)}.
+Choose an orthonormal eigenbasis #{u_i} from \ref{fdip-002R}, with
+#{Qu_i=q_i u_i}, #{q_i>0}, and use the chart
+#{D(x)=(h(u_i,x))_i}. The [canonical-volume characterization](fdip-002M)
+makes #{D_*\lambda_E} product Lebesgue measure. In coordinates
+#{y=D(x)}, the normalization formula in \ref{fdip-002T} and
+scalar integral in \ref{fdip-002S} give
+##{\begin{aligned}
+w_Q(x)&=\prod_i e^{-q_i y_i^2/2},\\
+Z_Q&=\prod_i I(q_i),\qquad I(q_i)=\sqrt{2\pi /q_i}.
+\end{aligned}}
+Dividing the first product by the second gives the density
+##{\prod_i I(q_i)^{-1}e^{-q_i y_i^2/2}.}
+This identification uses the scalar value and normalization before
+computing covariance. For the empty eigenbasis both products are one,
+and the coordinate space is a singleton.}
+\p{These chart calculations recover the density convention in
+\citet{Lemma B.54 and Proposition B.55, pp. 504-505}{friedli2017statistical}
+with precision #{Q}; the source uses covariance #{Q^{-1}}.
+Mathlib's \leanref{OrthonormalBasis.measurePreserving_repr} and
+\leanref{PiLp.volume_preserving_ofLp} identify the orthonormal
+Euclidean-space chart with the ordinary real coordinate product
+volume.}
