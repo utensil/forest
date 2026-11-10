@@ -370,8 +370,13 @@ jobs:
           status_url = str(deployment.get("status_url") or "")
           dep_id = deployment.get("id") or (status_url.rstrip("/").split("/")[-1] if status_url else "") or sha
           page_url = deployment.get("page_url") or ""
+          if status_url.startswith(api + "/"):
+              poll_url = status_url
+          else:
+              poll_url = f"{api}/repos/{repo}/pages/deployments/{dep_id}"
           safe = {k: deployment.get(k) for k in ("id", "status_url", "page_url") if k in deployment}
           print("Created deployment " + json.dumps(safe))
+          print("Polling " + poll_url)
           output_path = os.environ.get("GITHUB_OUTPUT")
           if output_path and page_url:
               with open(output_path, "a", encoding="utf-8") as handle:
@@ -385,14 +390,20 @@ jobs:
               now = time.time()
               code, payload = request(
                   "GET",
-                  f"{api}/repos/{repo}/pages/deployments/{dep_id}",
+                  poll_url,
                   auth="Bearer " + token,
               )
               if code == 200 and isinstance(payload, dict):
                   state = payload.get("status") or "unknown_status"
                   if state != last or now >= next_beat:
                       elapsed = int((now - started) / 60)
-                      print(f"Current status: {state} ({elapsed} min)")
+                      detail = ""
+                      if state == "unknown_status":
+                          detail = " keys=" + ",".join(sorted(str(k) for k in payload))
+                          extra = payload.get("error") or payload.get("message") or ""
+                          if extra:
+                              detail += " detail=" + str(extra)[:180]
+                      print(f"Current status: {state} ({elapsed} min){detail}")
                       last = state
                       next_beat = now + 60
                   if state in final_ok:
