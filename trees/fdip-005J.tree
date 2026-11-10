@@ -14,23 +14,26 @@
 \li{for each eigenvalue #{\lambda} of #{Q}, the principal angles
 between #{X} and #{E_\lambda=\ker(Q-\lambda I)}.}
 }
-\p{Here principal angles are defined by taking orthonormal inclusion
-matrices #{B_X,B_\lambda} and the
-#{\min(\dim X,\dim E_\lambda)} singular values of
-#{B_X^*B_\lambda}. These numbers lie in #{[0,1]}; their arccosines,
-in increasing order, are the angles. This definition includes zero
-singular values and uses the entire eigenspace when #{\lambda}
-is repeated. It is independent of the two orthonormal bases.}
+\p{Write #{i_X} and #{i_\lambda} for the inclusions of #{X} and
+#{E_\lambda} into #{H}. The overlap
+##{i_X^*\,i_\lambda:E_\lambda\to X}
+has #{\min(\dim X,\dim E_\lambda)} singular values in #{[0,1]},
+counting zeros, and the count uses the whole eigenspace when
+#{\lambda} is repeated. The principal angles are the arccosines of
+those singular values, in increasing order. They do not depend on
+a basis. Orthonormal matrices for the overlap, and the finite-family
+formalization, are in \ref{fdip-00LM}.}
 
 \proof{
 \p{If #{Q'=OQO^{-1}} and #{P'=OPO^{-1}}, then
-#{O(X)=X'} and #{O(E_\lambda)=E'_\lambda}. Choosing the transported
-bases leaves #{B_X^*B_\lambda} unchanged; changing either basis
-multiplies this matrix on the left or right by an orthogonal matrix,
-which does not change its singular values. These are at most one
-because both inclusions and orthogonal projections have operator
-norm at most one. Conjugation gives the spectrum of #{Q} and
-rank of #{P}. The [selected-law transport](fdip-005C) gives
+#{O(X)=X'} and #{O(E_\lambda)=E'_\lambda}. The inclusions of the
+transported subspaces then satisfy
+##{i_{X'}^*\,i_{\lambda'}=(O|_X)\,(i_X^*\,i_\lambda)\,(O|_{E_\lambda})^{-1},}
+so the singular values agree. Those values are at most one because each inclusion
+is an isometry and the adjoint of an inclusion is an orthogonal
+projection, hence has operator norm at most one. Conjugation gives
+the spectrum of #{Q} and the rank of #{P}. The
+[selected-law transport](fdip-005C) gives
 #{S_{P'}=(O|_X)S_P(O|_X)^{-1}}, proving the remaining claims.}
 }
 
@@ -50,11 +53,4 @@ but no graph arrow. Thus even all the listed spectral and angle
 invariants cannot recover incidence. No completeness claim for
 invariants of the pair #{(Q,P)} under #{O(H)} is made.}
 
-\p{TauCeti's \leanref/tauceti{TauCeti.cosPrincipalAngles} defines
-the singular values of the overlap operator of two finite
-orthonormal families as a nonincreasing sequence padded by zeros.
-Taking its first #{\min(\dim X,\dim E_\lambda)} values and then
-arccosines gives the convention above. Its
-\leanref/tauceti{TauCeti.cosPrincipalAngles_le_one} supplies the
-upper bound; the background-conjugacy and incidence claims are
-the separate arguments here.}
+
