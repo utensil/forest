@@ -13,26 +13,25 @@ of [symmetry selectors](fdip-005A) have different criteria.}
 \li{For a self-adjoint idempotent #{e\in\mathbb R[\Gamma]},
 the selector #{P=\rho(e)} restricts whenever its rank is nonzero
 and proper. Its image need not be a #{\Gamma}-subrepresentation.}
-\li{A nonzero proper #{\Gamma}-subrepresentation #{X} restricts precisely when
-its multiplicity subspace in every real isotypic block is invariant
-under the corresponding Hermitian precision matrix #{Q_\Xi}.}
+\li{Let #{X} be a nonzero proper #{\Gamma}-subrepresentation.
+For each irreducible #{W_\Xi}, write
+#{M_\Xi=\operatorname{Hom}_\Gamma(W_\Xi,H)} and
+#{M_\Xi(X)=\operatorname{Hom}_\Gamma(W_\Xi,X)}, with the right
+#{D_\Xi}-action of the \vocabk{multiplicity module}{fdip-00KN}.
+Postcomposition
+##{(Q\cdot f)(w)=Q(f(w))}
+is real-linear on #{M_\Xi} and self-adjoint for the pairing
+#{h(f,g)=f^*\circ g}. The selector restricts precisely when
+##{Q\cdot M_\Xi(X)\subseteq M_\Xi(X)
+ \qquad\text{for every }\Xi.}
+Equivalently, each #{M_\Xi(X)} admits a right
+#{D_\Xi}-basis of eigenvectors of #{Q\cdot}. Repeated eigenvalues
+allow a proper subspace of an eigenspace; whole eigenspaces need
+not be selected.}
 }
 
-\p{Here is the precise multiplicity convention. Use the
-[real commutant](fdip-004Z) and the
-[right-scalar column coordinates](fdip-0050). For
-#{D_\Xi=\operatorname{End}_\Gamma(W_\Xi)} and
-#{r_\Xi=\dim_{D_\Xi}W_\Xi}, represent #{H_\Xi} by
-#{r_\Xi} columns in #{D_\Xi^{m_\Xi}}; matrices act on each
-column by left multiplication. There is a right #{D_\Xi}-subspace
-#{U_\Xi\subseteq D_\Xi^{m_\Xi}} such that
-##{X\cap H_\Xi
- \cong\{(z_1,\ldots,z_{r_\Xi}):z_a\in U_\Xi\}.}
-The criterion is
-##{Q_\Xi U_\Xi\subseteq U_\Xi\qquad\text{for every }\Xi.}
-Equivalently, each #{U_\Xi} has a #{D_\Xi}-basis of
-#{Q_\Xi}-eigenvectors. Repeated eigenvalues allow proper subspaces
-of an eigenspace; whole eigenspaces need not be selected.}
+\p{The right-scalar column form of this criterion is
+\ref{fdip-00LO}.}
 
 \proof{
 \p{Equivariance makes #{Q} commute with every #{\rho(g)}, hence
@@ -42,31 +41,34 @@ it would additionally make #{\rho(e)} commute with the group action.}
 
 \p{For a subrepresentation #{X}, both #{X} and #{X^\perp} are
 #{\Gamma}-stable, so its orthogonal projector belongs to the
-commutant. By \ref{fdip-004Z} it is represented by Hermitian
-idempotents #{p_\Xi\in M_{m_\Xi}(D_\Xi)}. In the stated column
-coordinates its image has exactly the displayed form with
-#{U_\Xi=\operatorname{im}p_\Xi}. Conversely a right
-#{D_\Xi}-subspace has an orthogonal projector commuting with
-right scalar multiplication: its real orthogonal complement is
-right-scalar stable, since multiplication by each unit scalar is
-orthogonal and preserves the subspace. Thus that projector is a
-matrix over #{D_\Xi}; the commutant identification gives the
-corresponding subrepresentation.}
+commutant. By evaluation in that module and the
+identification in \ref{fdip-004Z}, every vector of
+#{X\cap H_\Xi} is a finite sum of values #{f(w)} with
+#{f\in M_\Xi(X)} and #{w\in W_\Xi}. Thus #{QX\subseteq X} if and
+only if #{Q\circ f} still lands in #{X} for every such #{f}.
+Equivariance of #{Q} keeps #{Q\circ f} an intertwiner, so this is
+the displayed invariance of #{M_\Xi(X)}. Summing over the isotypic
+components gives the criterion on #{X}. Self-adjointness of #{Q}
+preserves the orthogonal complement once it preserves #{X}. Apply
+\ref{fdip-005M}.}
 
-\p{The matrix #{Q_\Xi} acts on every column, so #{QX\subseteq X}
-is exactly the displayed invariance condition. If it holds,
-self-adjointness preserves the orthogonal complement too. The
-Hermitian spectral argument of \ref{fdip-0050} applies to the
-restriction on #{U_\Xi}: a real eigenvector generates a right
-#{D_\Xi}-line of eigenvectors, its orthogonal complement is
-invariant, and induction gives a #{D_\Xi}-orthonormal eigenbasis.
-Conversely a span of eigenvectors is invariant, since their
-eigenvalues are real and the matrix is right-linear. Apply
-\ref{fdip-005M} to finish.}
+\p{The same self-adjointness gives
+#{h(Q\cdot f,g)=h(f,Q\cdot g)}. On an irreducible, a nonzero
+intertwiner satisfies #{f^*\circ f=cI} with #{c>0}, by
+\ref{fdip-004Z}, so #{f\mapsto\operatorname{Re}h(f,f)} is a
+positive definite real inner product and #{Q\cdot} is self-adjoint
+for it. It is also right-linear. A real eigenvector therefore
+generates a right #{D_\Xi}-line of eigenvectors. Right
+multiplication by a unit scalar is orthogonal for this real
+product, so the orthogonal complement of the line is a right
+submodule and is invariant. Applied to an invariant
+#{M_\Xi(X)}, induction gives a right #{D_\Xi}-orthonormal
+eigenbasis. Conversely, a right span of eigenvectors is invariant.}
 }
 
 \p{In a multiplicity-free representation every
-#{m_\Xi=1}, and a right #{D_\Xi}-subspace of #{D_\Xi} is either
-zero or all of it. Thus every nonzero proper subrepresentation restricts. At
-higher multiplicity, group stability alone does not suffice, as
-the [prism line](fdip-005O) shows.}
+#{m_\Xi=1}, and a right #{D_\Xi}-submodule of the multiplicity
+module is either zero or all of it. Thus every nonzero proper
+subrepresentation restricts. At higher multiplicity, group
+stability alone does not suffice, as the [prism line](fdip-005O)
+shows.}

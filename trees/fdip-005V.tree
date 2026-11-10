@@ -15,7 +15,7 @@ as distinct choices. With the data of \ref{fdip-005R},
 Normalize these nonnegative terms to obtain a probability law on
 rooted spanning forests. It satisfies
 ##{\begin{aligned}
-\mathbb P(e\in F)&=w_ed_e^TGd_e,\\
+\mathbb P(e\in F)&=w_e\langle d_e,Gd_e\rangle,\\
 \mathbb E[|R|]&=m^2\operatorname{tr}G,\\
 \mathbb E[|F|]&=n-m^2\operatorname{tr}G.
 \end{aligned}}
@@ -27,8 +27,11 @@ Thus the spanning-tree coefficient appears after division by
 #{m^2}; the unscaled determinant tends to zero.}
 
 \proof{
-\p{Form the #{n\times(|E|+n)} matrix with columns
-#{\sqrt{w_e}d_e} for edges and #{m\delta_v} for vertices.
+\p{Order the vertices and the labelled edges, and use the counting
+bases of the \vocabk{counting inner products}{fdip-0002}.
+Form the #{n\times(|E|+n)} matrix whose
+columns are the coordinates of #{\sqrt{w_e}d_e} for edges and of
+#{m\delta_v} for vertices.
 Call it #{A}; then #{AA^T=L_w+m^2I}. Cauchy-Binet expresses
 its determinant as the sum of the squared #{n\times n} minors.
 A chosen minor consists of edge columns #{F} and vertex columns
@@ -57,7 +60,7 @@ Termwise differentiation gives
 #{w_e\partial_eD=\sum_{F\ni e,R}(\prod_{f\in F}w_f)t^{|R|}}
 and #{t\partial_tD=\sum_{F,R}|R|(\prod_{f\in F}w_f)t^{|R|}}.
 Divide by #{D>0} and use the determinant derivative from
-\ref{fdip-005S}, first in direction #{d_ed_e^T}, then in
+\ref{fdip-005S}, first in direction #{d_e\otimes d_e^\flat}, then in
 direction #{I}. The edge identity holds also at #{w_e=0}, when
 both sides vanish. Finally every forest has #{|F|+|R|=n}.
 For connected positive support, the coefficient of #{t} comes
@@ -81,12 +84,6 @@ forests by the minors of a Laplacian whose columns sum to zero
 above is the undirected weighted case, obtained from
 Cauchy-Binet. It does not reproduce Chaiken's directed sign rule.}
 
-\p{TauCeti's
-\leanref/tauceti{Matrix.det_mul_transpose_eq_sum_plucker_sq}
-gives the Cauchy-Binet identity for a matrix over a commutative
-ring with rows indexed by #{\mathrm{Fin}(n)} and a finite ordered
-column set. Reindexing the present real matrix supplies those
-hypotheses. Its Plücker coordinates are the maximal minors.
-This supports the sum-of-squares step; the classification of
-nonzero forest minors and the probability consequences are
-proved here.}
+\p{The Cauchy-Binet provider boundary, for a matrix over a
+commutative ring with rows indexed by a finite ordered set, is
+\ref{fdip-00LR}.}

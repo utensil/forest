@@ -7,32 +7,36 @@
 
 \p{For the [induced action](fdip-005R), with #{m>0} fixed,
 ##{\frac{\partial\mathcal W}{\partial w_e}
- =\frac12 d_e^TGd_e
+ =\frac12\langle d_e,Gd_e\rangle
  =\frac12\mathbb E[(\phi_{h(e)}-\phi_{s(e)})^2],}
-where #{\phi\sim N(0,G)}. Each derivative is nonnegative.}
+where #{\phi\sim N(0,G)} and the pairing is the counting inner
+product. Each derivative is nonnegative. The counting-basis
+matrices and the determinant-provider boundary are given in
+\ref{fdip-00LP}.}
 
 \proof{
-\p{For any square matrix #{B}, multilinearity of the determinant
-gives #{\det(I+tB)=1+t\operatorname{tr}B+O(t^2)}: the linear
-terms select one diagonal entry of #{tB}, and all higher terms use
-at least two entries of #{tB}. Factoring an invertible #{Q} yields
+\p{Choose an orthonormal basis of #{\mathbb R^V} and represent
+the operators by their symmetric matrices in that basis. For any
+such square matrix #{B}, multilinearity of the determinant gives
+#{\det(I+tB)=1+t\operatorname{tr}B+O(t^2)}: the linear terms select
+one diagonal entry of #{tB}, and all higher terms use at least two
+entries of #{tB}. Factoring an invertible #{Q} yields
 ##{\det(Q+tA)=\det Q\det(I+tQ^{-1}A).}
 When #{Q>0} and #{A} is symmetric, the perturbed matrix is positive
 for sufficiently small #{|t|}. Differentiating its real logarithm
 therefore gives
 ##{\left.\frac{d}{dt}\log\det(Q+tA)\right|_{t=0}
  =\operatorname{tr}(Q^{-1}A).}
-Set #{A=d_ed_e^T}; cyclicity of trace gives
-#{\operatorname{tr}(Gd_ed_e^T)=d_e^TGd_e}. Finally the
+Set #{A} equal to the matrix of #{d_e\otimes d_e^\flat}. Cyclicity
+of trace gives
+#{\operatorname{tr}(GA)=\langle d_e,Gd_e\rangle}. Finally the
 [covariance identity](fdip-000B) says
-#{\mathbb E[(d_e^T\phi)^2]=d_e^TGd_e\ge0}.}
+#{\mathbb E[\langle d_e,\phi\rangle^2]=\langle d_e,Gd_e\rangle\ge0}.
+Since #{\langle d_e,\phi\rangle=\phi_{h(e)}-\phi_{s(e)}}, this is the
+displayed edge variance.}
 }
 
 \p{The matrix differential is the log-determinant gradient in
 \citet{Appendix A.4.1, pp. 641-642}{boyd2004convex}.
-TauCeti's \leanref/tauceti{Matrix.fderiv_det_apply} states
-#{D\det(Q)[A]=\det(Q)\operatorname{tr}(Q^{-1}A)} for a finite
-matrix over a complete nontrivially normed field whose determinant
-is a unit. Over #{\mathbb R}, positivity supplies this hypothesis.
-It supports the determinant derivative; the logarithm, edge direction
-and Gaussian interpretation are the steps proved here.}
+The finite-matrix provider boundary, including the unit-determinant
+hypothesis, is \ref{fdip-00LP}.}

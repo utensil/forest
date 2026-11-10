@@ -7,28 +7,34 @@
 
 \p{On the open set #{\mathcal U_m} of \ref{fdip-005R},
 ##{\frac{\partial^2\mathcal W}{\partial w_e\partial w_f}
- =-\frac12(d_e^TGd_f)^2.}
+ =-\frac12\langle d_e,Gd_f\rangle^2.}
 The induced action is concave, including on the nonnegative
 weight orthant. For the corresponding centered Gaussian field,
-##{\operatorname{Cov}((d_e^T\phi)^2,(d_f^T\phi)^2)
- =2(d_e^TGd_f)^2,}
-so the Hessian is minus one quarter of this covariance matrix.}
+##{\operatorname{Cov}(\langle d_e,\phi\rangle^2,
+ \langle d_f,\phi\rangle^2)
+ =2\langle d_e,Gd_f\rangle^2,}
+so the Hessian bilinear form on weight directions is minus one
+quarter of this covariance. Its matrix in the weight coordinates
+is given in \ref{fdip-00LQ}.}
 
 \proof{
 \p{Differentiating #{QG=I} in weight #{w_f} gives
-#{\partial_fG=-Gd_fd_f^TG}. Substitute this into
+#{\partial_fG=-G(d_f\otimes d_f^\flat)G}. Substitute this into
 \ref{fdip-005S}; symmetry of #{G} gives the Hessian entry.
 For a real weight direction #{a=(a_e)}, set
-#{A=\sum_e a_e d_ed_e^T}. Its second directional derivative is
+#{A=\sum_e a_e\,d_e\otimes d_e^\flat}. Its second directional
+derivative is
 ##{D^2\mathcal W[a,a]
  =-\frac12\operatorname{tr}(GAGA)
- =-\frac12\operatorname{tr}((G^{1/2}AG^{1/2})^2)\le0.}
-The last matrix is real symmetric, and the trace of its square
-is the sum of the squares of its entries. Restricting to a line
-segment in the convex set #{\mathcal U_m} proves concavity.
-This is also the Gram-square form of the Schur-product argument.}
+ =-\frac12\|G^{1/2}AG^{1/2}\|_{\mathrm{HS}}^2\le0.}
+The Hilbert-Schmidt norm is #{\|B\|_{\mathrm{HS}}^2=\operatorname{tr}(B^*B)}.
+The operator #{G^{1/2}AG^{1/2}} is real self-adjoint, so this
+square is nonnegative. Restricting to a line segment in the convex
+set #{\mathcal U_m} proves concavity. This is also the Gram-square
+form of the Schur-product argument.}
 
-\p{For completeness let #{X=d_e^T\phi}, #{Y=d_f^T\phi},
+\p{For completeness let #{X=\langle d_e,\phi\rangle},
+#{Y=\langle d_f,\phi\rangle},
 with variances #{\alpha,\beta} and covariance #{\gamma}.
 Their moment-generating function is
 ##{\mathbb E[e^{sX+tY}]
@@ -43,5 +49,6 @@ of #{s^2t^2} is #{\alpha\beta /4+\gamma^2/2}, hence
 \p{\citet{Exercise 8.3, p. 385}{friedli2017statistical}
 states Wick's formula. The last calculation is its four-factor
 case and agrees with the [Gaussian contraction rule](fdip-0046). Concavity need
-not be strict in the weights: loops or dependent matrices
-#{d_ed_e^T} can give zero second derivatives in nonzero directions.}
+not be strict in the weights: loops or dependent rank-one
+operators #{d_e\otimes d_e^\flat} can give zero second derivatives
+in nonzero directions.}

@@ -6,44 +6,46 @@
 \date{2026-11-01}
 
 \p{For an [interacting selected background](fdip-005Y), put
-#{n=\dim H} and #{r=\operatorname{rank}P}, and choose
-orthonormal basis maps #{B:\mathbb R^r\to X} and
-#{B_\perp:\mathbb R^{n-r}\to Y}. Thus a full field is
-#{\phi=Bx+B_\perp y}; in this proposition #{x,y} denote coordinates.
-Set
+#{n=\dim H} and #{r=\operatorname{rank}P}. Write #{i_X:X\to H} and
+#{i_Y:Y\to H} for the inclusions of the image and kernel of #{P}.
+Define
 ##{\begin{aligned}
-A&=B^TQB,&K&=B^TQB_\perp,\\
-D&=B_\perp^TQB_\perp>0,&S&=A-KD^{-1}K^T.
+A&=i_X^*\,Q\,i_X,&K&=i_X^*\,Q\,i_Y,\\
+D&=i_Y^*\,Q\,i_Y>0,&S&=A-KD^{-1}K^*.
 \end{aligned}}
-The eliminated coordinates, conditionally on #{x}, have law
+The eliminated component, conditionally on the retained vector
+#{x\in X}, has law
 ##{y=\mu(x)+\eta,\qquad
-   \mu(x)=-D^{-1}K^Tx,\qquad \eta\sim N(0,D^{-1}).}
-In particular the full conditional mean and noise covariance are
-##{h(x)=Bx+B_\perp\mu(x),\qquad
-   C=B_\perp D^{-1}B_\perp^T.}
-The map #{h} is the harmonic extension: #{B^Th(x)=x} and
-#{B_\perp^TQh(x)=0}. It is the unique minimizer of the quadratic
-energy among fields with these retained coordinates.}
+   \mu(x)=-D^{-1}K^*x,\qquad \eta\sim N(0,D^{-1}).}
+The full conditional mean and noise covariance are
+##{h(x)=i_Xx-i_YD^{-1}K^*x,\qquad
+   C=i_YD^{-1}i_Y^*.}
+The map #{h} is the harmonic extension: #{i_X^*h(x)=x} and
+#{i_Y^*Qh(x)=0}. It is the unique minimizer of the quadratic
+energy among fields whose retained component is #{x}. Orthonormal
+coordinates, the coordinate-selector formulas and the quartic
+components are given in \ref{fdip-00LS}.}
 
-\p{Write #{F_\lambda(x)=F_{b,\mathcal V}(\lambda,Bx)}. Then
+\p{Write #{F_\lambda(x)=F_{b,\mathcal V}(\lambda,x)}, with
+#{x\in X}. Then
 ##{\begin{aligned}
-a(x)&=\mathbb E\mathcal V(h(x)+B_\perp\eta),\\
-b(x)&=\operatorname{Var}\bigl(\mathcal V(h(x)+B_\perp\eta)\bigr),\\
+a(x)&=\mathbb E\mathcal V(h(x)+i_Y\eta),\\
+b(x)&=\operatorname{Var}\bigl(\mathcal V(h(x)+i_Y\eta)\bigr),\\
 F_\lambda(x)&=\lambda a(x)-\frac{\lambda^2}{2}b(x)
                    +O(\lambda^3).
 \end{aligned}}
 Thus external mean factors in the conditional moment expansion use
-#{h(x)}, and each internal pairing of eliminated coordinates uses
-#{D^{-1}}. These are the background-dependent Feynman rules for this
-fiber integral. In full-field components the internal pairing is
-#{C}; the eliminated mean #{\mu} alone omits the retained part of
-#{h}. For a coordinate selector retaining #{R} and eliminating
-#{U=V\setminus R}, the formulas become
-##{\mu(x)=-Q_{UU}^{-1}Q_{UR}x,\qquad
-   \operatorname{Cov}(\eta)=Q_{UU}^{-1}.}}
+#{h(x)}, and each internal pairing of eliminated vectors uses the
+covariance #{D^{-1}} on #{Y}. On the full field that pairing is the
+operator #{C}. The eliminated mean #{\mu} alone omits the retained
+part of #{h}. These are the background-dependent Feynman rules for
+this fiber integral.}
 
 \proof{
-\p{Orthogonality preserves the volume and gives
+\p{Choose orthonormal basis maps #{B:\mathbb R^r\to X} and
+#{B_\perp:\mathbb R^{n-r}\to Y}, and use them as the inclusions
+#{i_X} and #{i_Y} for this calculation. A full field is
+#{\phi=Bx+B_\perp y}. Orthogonality preserves the volume and gives
 ##{\begin{aligned}
 \langle\phi,Q\phi\rangle
  &=x^TAx+2x^TKy+y^TDy\\
@@ -74,29 +76,10 @@ applied to the positive form #{D}. For a quartic
 #{\mathcal V(\phi)=T(\phi,\phi,\phi,\phi)/24}, the first coefficient
 has degrees #{4,2,0}. In the variance, pairings with no contraction
 between the two copies cancel, leaving degrees among #{6,4,2,0},
-as shown in \ref{fdip-0046}. All these claims concern finite
+as shown in \ref{fdip-0046}. The coefficients #{6} and #{3} are
+the components in \ref{fdip-00LS}. All these claims concern finite
 polynomial coefficients.}
 }
-
-\p{For example, in full vertex coordinates with the symmetric
-four-tensor #{T_{ijkl}} and #{h=h(x)}, Wick's three pairings give
-##{\begin{aligned}
-24a(x)={}&T(h,h,h,h)
- +6\sum_{i,j,k,l}T_{ijkl}h_i h_j C_{kl}\\
- &+3\sum_{i,j,k,l}T_{ijkl}C_{ij}C_{kl}.
-\end{aligned}}
-The covariance #{C} can be singular on #{H}: it is supported on
-#{Y}, and the formula follows by applying Wick to the nonsingular
-#{D^{-1}} in eliminated coordinates. No nondegeneracy on all of
-#{H} is needed for this expression.}
-
-\p{TauCeti's
-[\code{integral_mul_mul_mul_multivariateGaussian}](https://github.com/TauCetiProject/TauCeti/blob/df319cee080d8cab30699ff8ab3ed8d9347768aa/TauCeti/Probability/Distributions/Gaussian/MixedMoments.lean#L162)
-proves the three-pairing identity for 4 centered Gaussian
-coordinates, allowing repeated indices and any positive-semidefinite
-covariance. Setting that covariance to #{C} supplies the fourth-moment
-step here. Contraction with #{T}, the formal logarithm and the
-higher-moment pairing arguments are the additional deductions above.}
 
 \p{The massive lattice analogue is
 \citet{Theorem 8.26, p. 399}{friedli2017statistical}: on a finite
@@ -107,19 +90,9 @@ it does not supply the arbitrary-projector argument above. The
 massless finite-domain analogue is Theorem 8.17, p. 391 of the same
 source.}
 
-\p{A formal conditional-distribution counterpart in TauCeti is
-[\code{condDistrib_multivariateGaussian}](https://github.com/TauCetiProject/TauCeti/blob/df319cee080d8cab30699ff8ab3ed8d9347768aa/TauCeti/Probability/Distributions/Gaussian/Conditional.lean#L444).
-It assumes a positive-semidefinite joint covariance and a
-positive-definite observed covariance block, and identifies the
-regular conditional law with an explicit Gaussian kernel almost
-everywhere in the observed marginal. To specialize, order the
-coordinates as #{Y\oplus X} and use #{G=Q^{-1}>0}. From #{QG=I},
-##{\begin{aligned}
-DG_{YX}+K^TG_{XX}&=0,\\
-DG_{YY}+K^TG_{XY}&=I.
-\end{aligned}}
-Therefore #{G_{YX}G_{XX}^{-1}=-D^{-1}K^T} and
-#{G_{YY}-G_{YX}G_{XX}^{-1}G_{XY}=D^{-1}}, the theorem's mean
-and covariance formulas. Its almost-everywhere identification is
-distinct from the explicit density kernel used here at every #{x}.
-The perturbative logarithm and vertex calculations are proved above.}
+\p{The conditional density in the proof is the explicit Gaussian
+kernel at every retained value #{x}. A coordinate declaration of
+the regular conditional law identifies that law only almost
+everywhere in the observed marginal. The two scopes, the quartic
+components and the singular full covariance are compared in
+\ref{fdip-00LS}.}
