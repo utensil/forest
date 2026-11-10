@@ -1,0 +1,99 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{Weighted incidence adjoints and orientation}
+\date{2026-11-09}
+
+\p{Let #{R} be a commutative unital ring, #{V,E,s,h} finite incidence
+data and #{w:E\to R} arbitrary weights. Use the counting forms,
+\vocabk{counting adjoint}{fdip-0007} #{d_R^\dagger}, weight map
+#{W} and \vocabk{weighted edge form}{fdip-0007} #{b_{E,w}}.
+The endpoint formula is
+##{(d_R^\dagger a)(v)
+ =\sum_{h(e)=v}a(e)-\sum_{s(e)=v}a(e).}
+The map #{W} is self-adjoint for the counting form. The form
+#{b_{E,w}} is symmetric bilinear, and is perfect if and only if
+every #{w(e)} is a unit, meaning an invertible element of #{R}.
+For arbitrary weights, the return
+map satisfies
+##{b_{E,w}(d_Rf,a)=b_V(f,d_R^\dagger Wa).}}
+
+\proof{
+\p{Expanding and regrouping finite sums gives
+##{\begin{aligned}
+b_E(d_Rf,a)
+ &=\sum_e\bigl(f(h(e))-f(s(e))\bigr)a(e)\\
+ &=\sum_v f(v)\left(\sum_{h(e)=v}a(e)-\sum_{s(e)=v}a(e)\right).
+\end{aligned}}
+This is the characterizing identity, so uniqueness identifies the map.
+Each loop occurs once in both sums and cancels; parallel edges remain
+separate summands. If #{V} is empty, existence of #{s:E\to V} forces
+#{E} empty; the formula gives the unique map of zero modules.}
+
+\p{Commutativity gives
+#{b_E(Wa,c)=\sum_e w(e)a(e)c(e)=b_E(a,Wc)}, and also symmetry
+of #{b_{E,w}}. Bilinearity follows term by term. Its duality map is
+#{\Phi_EW}, where #{\Phi_E:H_E\to H_E^\vee} is the
+[counting duality](fdip-001F). Since #{\Phi_E} is an isomorphism,
+#{\Phi_EW} is an isomorphism exactly when #{W} is.
+If every weight is a unit, multiplication by #{w(e)^{-1}} gives both
+inverse identities pointwise. Conversely, if #{WJ=I}, evaluate
+#{WJ\delta_e=\delta_e} at #{e}:
+##{w(e)(J\delta_e)(e)=1.}
+Commutativity supplies the other inverse identity for this scalar, so
+#{w(e)} is a unit. For #{E=\varnothing}, the unit condition is vacuous
+and #{W} is the unique isomorphism of the zero module. In the zero ring,
+#{0=1} is itself a unit, consistent with the same proof. Finally,
+#{b_{E,w}(d_Rf,a)=b_E(d_Rf,Wa)=b_V(f,d_R^\dagger Wa)}
+uses the counting adjoint and does not require #{W} invertible.}
+}
+
+\p{Choose any subset of edges to reverse, keeping their weights.
+Let #{\varepsilon(e)=-1} on those edges and #{1} on the others,
+interpreted in #{R}, and let #{(Ja)(e)=\varepsilon(e)a(e)}.
+Then
+##{J^\dagger=J,\qquad J^2=I,\qquad JW=WJ,\qquad d'_R=Jd_R.}
+The reversed incidence map gives the same
+\vocabk{weighted graph Laplacian}{fdip-0007}, and the sign map
+preserves the weighted edge form:
+##{(d'_R)^\dagger Wd'_R=d_R^\dagger Wd_R,\qquad
+b_{E,w}(Ja,Jc)=b_{E,w}(a,c).}}
+
+\proof{
+\p{The sign map multiplies pointwise by #{\varepsilon}, so the
+preceding self-adjointness calculation applies to it. Pointwise,
+#{\varepsilon(e)^2=1} and #{\varepsilon(e)w(e)=w(e)\varepsilon(e)},
+giving #{J^2=I} and #{JW=WJ}. Reversing the endpoints negates their
+difference, so #{d'_R=Jd_R}. The adjoint composition law in
+\ref{fdip-001P} now gives
+##{(d'_R)^\dagger Wd'_R
+=d_R^\dagger JWJd_R=d_R^\dagger Wd_R.}
+In each summand of #{b_{E,w}(Ja,Jc)}, the two sign factors multiply
+to 1. The corresponding edge field is #{a'=Ja}. These computations
+include characteristic two, loops and parallel edges.}
+}
+
+\p{Over #{\mathbb R}, suppose #{w(e)>0} and write
+#{D=d_{\mathbb R}}. The weighted edge form is a positive-definite
+inner product, and the \vocabk{weighted adjoint}{fdip-0007}
+#{D_w^\dagger=D^*W} satisfies
+##{\langle Df,a\rangle_{E,w}=\langle f,D_w^\dagger a\rangle_V.}}
+
+\proof{
+\p{The self-pairing is #{\sum_e w(e)a(e)^2}, a finite sum of
+nonnegative terms. Strict positivity of the weights makes this sum
+zero only when every #{a(e)=0}. Together with symmetry and
+bilinearity this proves positive definiteness, including the zero
+edge space. The return identity specializes to
+##{\langle Df,a\rangle_{E,w}
+=\langle Df,Wa\rangle_E=\langle f,D^*Wa\rangle_V.}
+Uniqueness follows from the perfect vertex counting pairing.}
+}
+
+\p{A represented return map can exist when the weighted edge form
+is not perfect, as it does for a nonunit weight above. Its existence
+therefore does not give a two-sided adjoint involution for that form.
+The positive-real incidence convention is
+\citet{Section 2.1, p. 4}{spielman2009effective}; the ring identities
+follow from the counting dualities used in the proofs.}

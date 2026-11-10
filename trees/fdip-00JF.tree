@@ -1,0 +1,48 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Example}
+\title{Weight and connectivity boundary cases}
+\date{2026-11-09}
+
+\p{For the [weighted graph Laplacian](fdip-0007), perfect pairings
+and unit weights do not suffice for the [constant-mode conclusion](fdip-0008).
+Over #{\mathbb F_2}, take two vertices #{0,1} and two distinct edges,
+both oriented #{0\to1}, both of weight #{1}. In the ordered vertex
+indicators #{(0,1)} and the chosen order of the two edge indicators,
+the endpoint calculations are
+##{\begin{aligned}
+d_R(a,b)&=(b-a,b-a),\\
+d_R^\dagger(u_1,u_2)&=(-u_1-u_2,u_1+u_2),\\
+L(a,b)&=(0,0).
+\end{aligned}}
+The counting pairings are perfect and #{W=I} is invertible. For
+#{\delta_1=(0,1)}, one has #{d_R\delta_1=(1,1)\ne0}, but its
+energy is #{1+1=0}. Hence #{\ker L=\mathbb F_2^2} strictly contains
+#{\ker d_R=\{(a,a):a\in\mathbb F_2\}}. This is the failure of
+the positive-real conclusion over #{\mathbb F_2}, despite unit weights
+and perfect forms.}
+
+\p{Over #{\mathbb R}, take vertices #{0,1,2,3} and just the
+unit-weight edges #{0\to1} and #{2\to3}. The ordered vertex
+indicators #{(0,1,2,3)} give the value map
+#{c_V:\mathbb R^V\to\mathbb R^4}. The array #{c_VLc_V^{-1}}
+has two diagonal blocks
+#{\bigl(\begin{smallmatrix}1&-1\\-1&1\end{smallmatrix}\bigr)}.
+Its kernel is #{\{(a,a,b,b):a,b\in\mathbb R\}}; each connected
+component contributes its own constant mode.}
+
+\p{On two real vertices with one edge #{0\to1} of weight zero,
+the underlying graph is connected but #{L=0}, so its kernel is all
+of #{\mathbb R^2}. The weighted edge form is zero on the nonzero
+one-dimensional edge space and is therefore degenerate. Write
+#{c_Vf=(f(0),f(1))} for the ordered-value chart on the vertex space. The
+nonnegative-weight case of \ref{fdip-0008} uses only the
+positive-weight edges to identify the kernel.}
+
+\p{If instead the edge has weight #{-1}, then, with #{f_c=c_Vf},
+##{f_c^T(c_VLc_V^{-1})f_c=-(f(1)-f(0))^2.}
+This is negative at #{f=(0,1)}, and the edge form is not an inner
+product. The displayed form is negative semidefinite. Two disjoint
+edges with weights #{1} and #{-1} give an indefinite form: fields
+supported on the separate edges have energies of opposite signs.}
