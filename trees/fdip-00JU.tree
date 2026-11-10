@@ -6,45 +6,41 @@
 \date{2026-11-10}
 
 \p{Let #{Q} be a [positive precision parameter](fdip-0004) on a
-finite real inner-product space #{(E,h)}, and use its
-inverse-precision covariance formula in \ref{fdip-000B}.
-For a chosen nonorthonormal basis #{b_i}, the coordinate functional is
-#{h(b^i,\cdot)}. The dual basis satisfies #{h(b^i,b_j)=\delta_{ij}}.
-Its covariance array
-therefore has entries #{h(b^i,Q^{-1}b^j)}; it is not the unqualified
-array of the inverse operator in that basis. The counting basis is
-orthonormal, giving the coordinate formula in \ref{fdip-000B}.
-The alternating-cycle example \ref{fdip-0037} evaluates it explicitly.}
-\p{To compare with formal Gaussian providers, put #{n=\dim E}, choose
-an orthonormal chart #{C:E\to\mathbb R^n}, and write #{y=Cx}.
-Let #{S=CQ^{-1}C^{-1}} be the array in this chart. The positive inverse
-is positive definite, #{S^{-1}=CQC^{-1}}, and
-#{\det S=(\det Q)^{-1}}. Consequently the provider density is
+finite real inner-product space #{(E,h)}, with inverse-precision
+covariance given by \ref{fdip-000B}.
+For a chosen nonorthonormal basis #{b_i}, coordinates are the functionals
+#{h(b^i,\cdot)}. The dual basis satisfies #{h(b^i,b_j)=\delta_{ij}},
+so the covariance array has entries #{h(b^i,Q^{-1}b^j)}; this is not the
+unqualified array of the inverse operator in that basis.
+The orthonormal counting basis gives the coordinate formula in
+\ref{fdip-000B}, evaluated on the alternating cycle in \ref{fdip-0037}.}
+\p{For formal Gaussian providers, put #{n=\dim E}, choose an
+orthonormal chart #{C:E\to\mathbb R^n}, and write #{y=Cx}.
+The inverse and its chart array #{S=CQ^{-1}C^{-1}} are positive definite,
+with #{S^{-1}=CQC^{-1}} and #{\det S=(\det Q)^{-1}}.
+The provider density is
 ##{\begin{aligned}
  &(2\pi)^{-n/2}(\det S)^{-1/2}
        e^{-y^TS^{-1}y/2}\\
  &\qquad=Z_Q^{-1}e^{-h(x,Qx)/2}.
 \end{aligned}}
-The [canonical-volume characterization](fdip-002M), using
+By the [canonical-volume characterization](fdip-002M) and
 \ref{fdip-002L} for isometries between counting coordinate spaces,
-makes #{C} volume preserving. The Euclidean-space coordinate wrapper
-also preserves volume, as in
-\leanref{OrthonormalBasis.measurePreserving_repr} and
+#{C} preserves volume. The Euclidean-space coordinate wrapper preserves
+volume by \leanref{OrthonormalBasis.measurePreserving_repr} and
 \leanref{PiLp.volume_preserving_toLp}. After this wrapper, the chart
 pushforward of #{\mu_Q} is #{\mathrm{multivariateGaussian}(0,S)} by
 \leanref/tauceti{TauCeti.Probability.multivariateGaussian_eq_withDensity}.
 Mathlib's
 \leanref{ProbabilityTheory.covariance_eval_multivariateGaussian}
-then identifies its coordinate covariance with #{S}; its positive
-semidefinite hypothesis follows from positive definiteness. The
-parameter is the covariance array #{S} of #{Q^{-1}}, not the precision
-array #{CQC^{-1}}. This density,
-determinant and volume identification is needed in addition to the
-covariance declaration; the integral proof in \ref{fdip-000B} is
-independent of it.}
+gives coordinate covariance #{S}; its positive semidefinite hypothesis
+follows from positive definiteness. The parameter is the covariance array
+#{S} of #{Q^{-1}}, not the precision array #{CQC^{-1}}.
+The comparison also needs these density, determinant and volume
+identifications; the integral proof in \ref{fdip-000B} is independent of them.}
 
 \p{The density comparison uses
 \citet{Proposition B.55, p. 505, and Theorem 8.4, p. 385}{friedli2017statistical},
-with zero mean and covariance #{S} in the specified orthonormal
-chart. The nonorthonormal coordinate entries follow by applying
-\ref{fdip-000B} to the displayed dual-basis functionals.}
+with zero mean and covariance #{S} in the specified orthonormal chart.
+The nonorthonormal coordinate entries follow from \ref{fdip-000B}
+on the displayed dual-basis functionals.}
