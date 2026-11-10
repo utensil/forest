@@ -246,3 +246,7 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+        with:
+          # The 314 MB site has been stuck in syncing_files until the
+          # action's 10 minute default cancels the deployment.
+          timeout: 1800000
