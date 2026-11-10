@@ -69,49 +69,41 @@ provide the extension, generator equation, identity, composition
 and inverse construction. Their input is a linear map preserving
 the quadratic form, or a linear equivalence for the last result.}
 
-\p{Return to #{q=q_{t,m}} on #{V=\mathbb R^4}. The same
-[half-turn](fdip-000J) sends #{\delta_i} to #{\delta_{i+2}},
-with indices modulo #{4}. It satisfies #{P^2=I} and
-#{P^TQP=Q}, so #{q(Pv)=q(v)}. Therefore
+\p{Return to #{q=q_{t,m}} on #{V=\mathbb R^4}. In the vertex basis
+#{\delta_0,\delta_1,\delta_2,\delta_3}, the
+[half-turn](fdip-000J) is the linear map #{P} sending
+#{\delta_i} to #{\delta_{i+2}}, with indices modulo #{4}. It
+satisfies #{P^2=I}, #{q(Pv)=q(v)} and the polar identity
+#{b_q(Pu,Pv)=b_q(u,v)}. Therefore
 ##{\begin{aligned}
 \Theta&=\operatorname{Cl}(P),\\
 \Theta(c_i)&=c_{i+2},\qquad \Theta^2=\operatorname{id}.
 \end{aligned}}
-The matrix equation follows by shifting both indices of #{Q}
-by two: its diagonal, its paired off-diagonal entries #{-1} and
-#{-t}, and its zeros are preserved. Composition gives
+The map #{\Theta} is nontrivial and has order exactly two.
+The [real half-turn sectors](fdip-000L)
+#{V_\pm=\ker(P\mp I)} are orthogonal for #{b_q}, so the
+cross-sector vector generators anticommute. The direct sum of
+sectors does not make them commuting factors of an ordinary
+tensor-product algebra. The unchanged-label comparison of
+#{3} with #{4} is \ref{fdip-00L7}.}
+
+\proof{
+\p{Shifting both indices of #{Q} by two preserves its diagonal,
+its paired off-diagonal entries #{-1} and #{-t}, and its zeros.
+Thus #{P^TQP=Q} in this basis. The counting pairing identifies
+that transpose with the adjoint, so #{q(Pv)=q(v)} and
+#{b_q(Pu,Pv)=b_q(u,v)}. Composition gives
 #{\Theta^2=\operatorname{Cl}(P^2)=\operatorname{id}}.
 Moreover #{\delta_0\ne\delta_2}, so
-[injectivity of #{\iota_q}](fdip-000P) gives #{c_0\ne c_2}.
-Thus #{\Theta} is nontrivial and has order exactly two.}
+[injectivity of #{\iota_q}](fdip-000P) gives #{c_0\ne c_2}.}
 
-\p{The [real half-turn sectors](fdip-000L)
-#{V_\pm=\ker(P\mp I)} are orthogonal for #{b_q}. Indeed,
-#{P^TQP=Q} gives #{b_q(Pu,Pv)=b_q(u,v)}. For
-#{u\in V_+} and #{v\in V_-}, the left side is
+\p{For #{u\in V_+} and #{v\in V_-}, polar preservation gives
 #{b_q(u,-v)=-b_q(u,v)}. Over #{\mathbb R} this forces
 #{b_q(u,v)=0}, and hence
 ##{\iota_q(u)\iota_q(v)=-\iota_q(v)\iota_q(u).}
 This is the generic orthogonality consequence
-\leanref{CliffordAlgebra.ι_mul_ι_comm_of_isOrtho}.
-The cross-sector vector generators anticommute; the direct sum
-of sectors does not make them commuting factors of an ordinary
-tensor-product algebra.}
-
-\p{Preservation of the form is essential. Compare #{q_{1,1}}
-and #{q_{2,1}} while keeping the coordinate labels unchanged.
-At #{\delta_0},
-##{q_{1,1}(\delta_0)=3,\qquad q_{2,1}(\delta_0)=4.}
-Thus the identity linear map is not form-preserving. Write
-#{c_i^{(1)},c_i^{(2)}} for the two sets of generators.
-A unital real algebra map with
-#{c_i^{(1)}\mapsto c_i^{(2)}} would send
-#{(c_0^{(1)})^2=3\,1} to #{(c_0^{(2)})^2=3\,1},
-but the target square is #{4\,1}. Its
-[injective scalar map](fdip-000P) rules this out.
-This excludes precisely the unchanged-label assignment. It does
-not exclude other isometries between the positive forms or an
-abstract isomorphism of their Clifford algebras.}
+\leanref{CliffordAlgebra.ι_mul_ι_comm_of_isOrtho}.}
+}
 
 \p{The construction transports a supplied configuration form and
 its discrete symmetry. It supplies no spacetime derivative,

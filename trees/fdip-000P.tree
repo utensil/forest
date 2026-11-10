@@ -54,14 +54,18 @@ proves uniqueness.}
 =\bigl(q(u+v)-q(u)-q(v)\bigr)1\\
 =B_q(u,v)1.
 \end{gathered}}
-Indeed, expand #{(\iota_q(u)+\iota_q(v))^2} and subtract
-the two squares. This uses no division by #{2}. When #{2} is
-invertible, #{b_q=B_q/2} exists and the relation becomes
+When #{2} is invertible, #{b_q=B_q/2} exists and the two
+presentations agree. Without that hypothesis, the anticommutator
+alone need not recover the squares.}
+
+\proof{
+\p{Expand #{(\iota_q(u)+\iota_q(v))^2} and subtract the two
+squares. This uses no division by #{2}. When #{2} is invertible,
+the relation becomes
 #{\iota_q(u)\iota_q(v)+\iota_q(v)\iota_q(u)=2b_q(u,v)1}.
 Conversely that relation with #{u=v} recovers the square relation
-by cancellation of #{2}. Thus the two presentations agree in
-this case. Without that hypothesis, the anticommutator alone
-need not recover the squares.}
+by cancellation of #{2}.}
+}
 
 \p{Meinrenken gives the bilinear presentation in
 \citet{Definition 2.1, p. 27}{meinrenken2013clifford}
@@ -78,24 +82,16 @@ commutative-ring generality. Mathlib's
 provide these respective generic square, extension, uniqueness and
 unhalved-polar statements.}
 
-\p{Now take the real [configuration form](fdip-000O) and put
-#{c_i=\iota_q(\delta_i)}. Write #{\{x,y\}=xy+yx} for the
-anticommutator. The matrix entries give
-##{\begin{aligned}
-c_i^2&=s1\quad(i=0,1,2,3),\\
-\{c_0,c_1\}&=\{c_2,c_3\}=-2\,1,\\
-\{c_1,c_2\}&=\{c_3,c_0\}=-2t\,1,\\
-\{c_0,c_2\}&=\{c_1,c_3\}=0.
-\end{aligned}}
-These follow from #{q(\delta_i)=Q_{ii}=s} and
-#{b_q(\delta_i,\delta_j)=Q_{ij}}. In particular the squares
-are positive in this convention. The
-[opposite-sign convention](fcap-0008) would use #{-q}.}
-
-\p{For this real form, both the scalar map and #{\iota_q} are
-injective. Here is the \vocabk{exterior algebra}{ca-000E} argument of
+\p{For the real [configuration form](fdip-000O), both the scalar
+map and #{\iota_q} are injective. The vertex-basis signs, including
+#{s}, #{-2}, #{-2t} and the zero anticommutators, are
+\ref{fdip-00L6}. The argument is the
+\vocabk{exterior algebra}{ca-000E} construction of
 \citet{Proposition 2.1, p. 28}{meinrenken2013clifford}, with its
-operator identities made explicit. On #{\bigwedge V}, let
+operator identities made explicit.}
+
+\proof{
+\p{On #{\bigwedge V}, let
 #{\epsilon(v)\omega=v\wedge\omega}, and define contraction by
 ##{d_v(1)=0,}
 ##{\begin{gathered}
@@ -121,6 +117,7 @@ TauCeti's \leanref/tauceti{CliffordAlgebra.ι_injective} and
 \leanref/tauceti{CliffordAlgebra.algebraMap_injective}
 give the corresponding injections for an arbitrary quadratic form
 over a commutative ring with invertible #{2}.}
+}
 
 \p{The exterior action just used proves faithfulness on vectors
 and scalars; it does not assert that #{\rho} is a faithful algebra

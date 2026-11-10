@@ -11,7 +11,7 @@ covariance and effective precision are transported operators on their
 specified field spaces. For #{x=(a,b,m,R)} write
 #{C_x=Q_x^{-1}}. If #{g:x\to y}, then
 ##{\begin{aligned}
-C_y&=P_gC_xP_g^T,\\
+C_y&=P_gC_xP_g^*,\\
 (P_g)_*\mu_{Q_x}&=\mu_{Q_y},\\
 \langle F\rangle_{Q_y}&=\langle F\circ P_g\rangle_{Q_x}.
 \end{aligned}}
@@ -21,8 +21,10 @@ law. These statements use the [inverse-precision covariance](fdip-000B)
 and [Gaussian transport](fdip-000H), including their normalization.}
 
 \proof{
-\p{The groupoid construction proves #{Q_y=P_gQ_xP_g^T} and
-#{P_g^{-1}=P_g^T}. Inverting gives the covariance equation.
+\p{Use the vertex indicator basis. In that basis the groupoid
+construction proves #{Q_y=P_gQ_xP_g^T}, and this transpose is the
+counting adjoint, so #{Q_y=P_gQ_xP_g^*} and #{P_g^*=P_g^{-1}}.
+Inverting gives the covariance equation.
 The normalized density in dimension #{4} is
 ##{d\mu_Q(\phi)=\frac{\sqrt{\det Q}}{(2\pi)^2}
  e^{-\phi^TQ\phi /2}\,d\phi.}
@@ -39,7 +41,7 @@ Transport composes because #{P_{kg}=P_kP_g}.}
 (C_x)_{01}
  &=\tfrac14(1-\tfrac13+\tfrac15-\tfrac17)\\
  &=\tfrac{19}{105},\\
-(P_rC_xP_r^T)_{01}
+(P_rC_xP_r^*)_{01}
  &=\tfrac14(1+\tfrac13-\tfrac15-\tfrac17)\\
  &=\tfrac{26}{105}.
 \end{aligned}}
@@ -47,10 +49,13 @@ The second entry is the old #{(3,0)} entry. The observable's
 coordinate labels must move with the field to preserve its expectation.}
 }
 
-\p{Let #{D=V\setminus R}. In retained/eliminated coordinates write
+\p{Let #{D=V\setminus R}. Write #{i_R} and #{i_D} for the
+inclusions of the retained and eliminated coordinate spaces, and
 ##{\begin{aligned}
-Q_x&=\begin{pmatrix}A&H\\H^T&C_D\end{pmatrix},\\
-S_R(x)&=A-HC_D^{-1}H^T.
+A&=i_R^*Q_xi_R,\\
+H&=i_R^*Q_xi_D,\\
+C_D&=i_D^*Q_xi_D,\\
+S_R(x)&=A-HC_D^{-1}H^*.
 \end{aligned}}
 This [Schur complement](fdip-000D) is the positive precision
 of the [marginal](fdip-000E).
@@ -58,23 +63,25 @@ The restrictions of #{g} give permutation isometries
 #{P_R:\mathbb R^R\to\mathbb R^{gR}} and
 #{P_D:\mathbb R^D\to\mathbb R^{gD}}. Then
 ##{\begin{aligned}
-S_{gR}(y)&=P_RS_R(x)P_R^T,\\
-S_{gR}(y)^{-1}&=P_RS_R(x)^{-1}P_R^T,\\
+S_{gR}(y)&=P_RS_R(x)P_R^*,\\
+S_{gR}(y)^{-1}&=P_RS_R(x)^{-1}P_R^*,\\
 \pi_{gR}P_g&=P_R\pi_R.
 \end{aligned}}
+The counting-basis matrix of this split is \ref{fdip-00LC}.
 Thus the marginal laws are compatible on the changing retained spaces.}
 
 \proof{
-\p{The transformed blocks are
+\p{In the same vertex indicator basis, where the counting adjoint is
+the transpose, the transformed blocks are
 ##{\begin{aligned}
-A'&=P_RAP_R^T,\\
-H'&=P_RHP_D^T,\\
-C_D'&=P_DC_DP_D^T.
+A'&=P_RAP_R^*,\\
+H'&=P_RHP_D^*,\\
+C_D'&=P_DC_DP_D^*.
 \end{aligned}}
-Substitution, using #{P_D^TP_D=I}, gives
+Substitution, using #{P_D^*P_D=I}, gives
 ##{\begin{aligned}
-S_{gR}(y)&=A'-H'(C_D')^{-1}(H')^T\\
- &=P_R(A-HC_D^{-1}H^T)P_R^T.
+S_{gR}(y)&=A'-H'(C_D')^{-1}(H')^*\\
+ &=P_R(A-HC_D^{-1}H^*)P_R^*.
 \end{aligned}}
 Inversion proves the covariance equation. The projection identity
 holds on each vertex coordinate vector. Consequently
@@ -113,8 +120,8 @@ the enriched objects.}
 
 \proof{
 \p{Trace cyclicity gives
-#{\operatorname{tr}(P_gMP_g^T)=\operatorname{tr}M}.
-Also #{L_{gx}^2=P_gL_x^2P_g^T}; hence both traces are preserved.
+#{\operatorname{tr}(P_gMP_g^*)=\operatorname{tr}M}.
+Also #{L_{gx}^2=P_gL_x^2P_g^*}; hence both traces are preserved.
 For the explicit value, the 4 orthonormal vectors #{u_0,u_1,u_2,u_3}
 from \ref{fdip-0037} remain eigenvectors after replacing weights
 #{(1,t)} by #{(a,b)}, with eigenvalues
@@ -140,7 +147,7 @@ by \ref{fdip-000X}.}
 
 \p{Now forget mass, state and partition and admit positive scaling
 of the Laplacian, as in the [broader comparison](fdip-003H):
-##{L'=cP_gLP_g^T,\qquad c>0.}
+##{L'=cP_gLP_g^*,\qquad c>0.}
 The numerator of #{\mathcal R} gains #{c^2}, while its denominator
 gains the same factor. Thus the ratio is invariant under this
 different relation. A weight-swapping relabeling followed by
@@ -151,7 +158,7 @@ added to the original Gaussian groupoid. At fixed mass,
 entire precision to #{cQ}, then
 ##{\begin{aligned}
 (cQ)^{-1}&=c^{-1}Q^{-1},\\
-cA-(cH)(cC_D)^{-1}(cH)^T&=cS_R.
+cA-(cH)(cC_D)^{-1}(cH)^*&=cS_R.
 \end{aligned}}
 Raw covariance and effective precision therefore are not scale
 invariants. Any normalized operator ratio would need its own definition
