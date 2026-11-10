@@ -1,0 +1,52 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{Positive mass gives an invertible response}
+\date{2026-11-10}
+
+\p{Let #{L} be the \vocabk{weighted graph Laplacian}{fdip-0007}
+on a finite vertex set #{V}, with positive real edge weights, and
+let #{m>0}. Its \vocabk{massive precision}{fdip-000A}
+#{Q_m=L+m^2I} is a \vocabk{positive precision parameter}{fdip-0004}
+and an \vocabk{isomorphism}{ca-0015}. Its \vocabk{Green operator}{fdip-000A}
+#{G_m=Q_m^{-1}} is \vocabk{self-adjoint}{fdip-001P} and strictly positive.
+For each source field #{j}, the unique solution of #{Q_mf=j} is
+##{f=G_mj,\qquad f(v)=\sum_wG_m(v,w)j(w).}
+For every vertex #{w}, its \vocabk{Green kernel}{fdip-000A} column
+is the unique field satisfying
+##{Q_mG_m(\cdot,w)=\delta_w.}
+These assertions include disconnected graphs. On the empty vertex
+set the unique endomorphism is an isomorphism, and there are no
+point-source columns.}
+\proof{
+\p{The Laplacian is self-adjoint, and adding the scalar identity
+preserves self-adjointness. The energy identity in \ref{fdip-0008}
+gives, for #{f\ne0},
+##{\begin{aligned}
+\langle f,Q_mf\rangle_V
+ &=\sum_e w(e)(Df)(e)^2\\
+ &\quad+m^2\sum_v f(v)^2>0.
+\end{aligned}}
+Thus #{Q_mf=0} implies #{f=0}. Finite dimension and rank-nullity
+make this injective endomorphism surjective, so it is an isomorphism.
+The inverse-response lemma \ref{fdip-001Q} gives a self-adjoint
+inverse and the unique solution #{f=G_mj}. For #{j\ne0}, write
+#{x=G_mj\ne0}; then
+##{\langle j,G_mj\rangle_V=\langle Q_mx,x\rangle_V>0.}
+On the empty vertex set the same map argument gives the unique
+isomorphism of zero modules.}
+\p{The kernel column at #{w} is #{G_m\delta_w}. Multiplying by
+#{Q_m} gives the point-source equation, and inverse response gives
+uniqueness. The counting indicator expansion
+#{j=\sum_wj(w)\delta_w} and linearity give the displayed response
+sum after evaluation at #{v}. No vertex-volume factor occurs because
+the vertex pairing and indicators are counting. On an empty carrier
+this expansion is the empty sum.}
+}
+\p{The argument combines the incidence energy in \ref{fdip-0008}
+with inverse response in \ref{fdip-001Q}. The lattice precision
+comparison in the [massive Green construction](fdip-000A) uses
+\citet{Section 4, Equations (4.2)-(4.5), p. 3}{wingate2025lattice}
+and \citet{Theorem 8.26, p. 399}{friedli2017statistical}; their
+lattice and boundary conventions remain part of that comparison.}
