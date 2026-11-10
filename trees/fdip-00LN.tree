@@ -1,0 +1,25 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Remark}
+\title{Orthonormal blocks for a marginal precision}
+\date{2026-11-10}
+
+\p{Choose orthonormal bases of the retained space #{X} and the
+eliminated space #{Y} in \ref{fdip-005M}.
+Relative to the corresponding inclusions, the blocks have matrix
+##{Q=\begin{pmatrix}A&K\\K^*&D\end{pmatrix},}
+and the retained precision is the Schur complement
+#{A-KD^{-1}K^*}. For a coordinate selector, order the retained
+vertices and then the eliminated vertices. The matrix of #{K} then
+has entries #{\langle\delta_v,Q\delta_u\rangle}.}
+
+\p{In those coordinates, Mathlib's
+\leanref{Matrix.PosDef.inv} gives positivity of #{D^{-1}}.
+The congruence lemma
+\leanref{Matrix.PosSemidef.mul_mul_conjTranspose_same},
+with its positive semidefinite matrix set to #{D^{-1}} and its
+rectangular matrix set to #{K}, gives #{KD^{-1}K^*\succeq0}.
+These declarations support the positivity steps. The equality
+criterion, the subspace equivalences and the graph specialization
+are proved in the theorem.}
