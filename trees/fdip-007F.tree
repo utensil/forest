@@ -7,75 +7,62 @@
 
 \p{Fix a flat #{d}-dimensional torus with #{d\ge2}, a compact Lie
 group #{G}, and a unitary representation #{\rho:G\to U(r)}, #{r>0}.
-Choose smooth periodic Hermitian fields #{A_j(x)} such that
-#{iA_j(x)} lies in the image of the derived Lie-algebra representation.
-All derivative bounds are fixed
+Choose smooth periodic skew-adjoint fields #{X_j(x)}, so
+#{X_j(x)^*=-X_j(x)}, lying in the image of the derived representation
+of the compact real form. All derivative bounds are fixed
 as the mesh spacing #{a\to0}; take meshes whose periods fit the
 torus. Define head-directed midpoint links
-##{U_j(x)=\exp\left(ia A_j(x+\tfrac a2 e_j)\right).}
+##{U_j(x)=\exp\left(a X_j(x+\tfrac a2 e_j)\right).}
 With the [rightmost-first transport convention](fdip-006N), the
 #{j}-then-#{k} plaquette is
 ##{U_{jk}(x)=U_k(x)^*U_j(x+ae_k)^*U_k(x+ae_j)U_j(x).}
-Its curvature convention is
-##{F_{jk}=\partial_jA_k-\partial_kA_j-i[A_j,A_k].}
-The matrices #{F_{jk}} are Hermitian.}
+Its curvature uses the real-algebra bracket #{[X,Y]=XY-YX}:
+##{F_{jk}=\partial_jX_k-\partial_kX_j-[X_j,X_k].}
+The matrices #{F_{jk}} are skew-adjoint. The invariant form of this
+real Lie algebra is #{\langle Y,Z\rangle=-\operatorname{tr}(YZ)}.
+Compactness of the real form makes that form positive definite, and
+##{-\operatorname{tr}(F_{jk}^2)=\langle F_{jk},F_{jk}\rangle.}
+The split real form, on which the same coordinate trace is indefinite,
+is named in \ref{fdip-00LX}.}
 
 \p{For the Wilson action
 ##{S_W(a)=\beta\sum_x\sum_{j<k}
  \left(1-\frac{\operatorname{Re}\operatorname{tr}U_{jk}(x)}r\right),}
 one has
 ##{S_W(a)=\frac{\beta a^{4-d}}{2r}
- \int\sum_{j<k}\operatorname{tr}(F_{jk}(x)^2)\,dx
+ \int\sum_{j<k}\bigl(-\operatorname{tr}(F_{jk}(x)^2)\bigr)\,dx
  +O(\beta a^{5-d}).}
 This is a statement about evaluating a discrete action on a fixed
 smooth field. The constant in the remainder depends on that field,
-the fixed torus and the representation.}
+the fixed torus and the representation. The Hermitian component
+normalization, including #{\beta=2r a^{d-4}/g^2} for the fundamental
+representation of #{SU(r)} and #{\beta=a^{d-4}/g^2} for unit-charge
+#{U(1)}, is the complexification recorded in \ref{fdip-00LX}.}
 
 \proof{
 \p{Taylor-expand the 4 midpoint values at #{x} and use
-#{e^{iaA}=I+iaA-\tfrac12a^2A^2+O(a^3)}.
+#{e^{aX}=I+aX+\tfrac12a^2X^2+O(a^3)}.
 The terms of order #{a} cancel. The variation of the two transverse
-links contributes #{ia^2(\partial_jA_k-\partial_kA_j)};
-the products of first-order terms contribute #{a^2[A_j,A_k]}.
+links contributes #{a^2(\partial_jX_k-\partial_kX_j)};
+the products of first-order terms contribute #{-a^2[X_j,X_k]}.
 The midpoint derivatives along each link cancel between opposite
 traversals. Hence, uniformly in #{x},
-##{U_{jk}(x)=I+ia^2F_{jk}(x)+O(a^3).}
+##{U_{jk}(x)=I+a^2F_{jk}(x)+O(a^3).}
 To obtain the real trace to the needed order, use the exact identity
 for a unitary #{r\times r} matrix:
 ##{1-\frac{\operatorname{Re}\operatorname{tr}U}{r}
  =\frac1{2r}\operatorname{tr}\bigl((U-I)^*(U-I)\bigr).}
-Substitution yields
+Since #{F_{jk}^*=-F_{jk}}, one has #{F_{jk}^*F_{jk}=-F_{jk}^2}, and
+substitution yields
 ##{1-\frac{\operatorname{Re}\operatorname{tr}U_{jk}(x)}r
- =\frac{a^4}{2r}\operatorname{tr}(F_{jk}(x)^2)+O(a^5).}
+ =\frac{a^4}{2r}\bigl(-\operatorname{tr}(F_{jk}(x)^2)\bigr)+O(a^5).}
 There are #{O(a^{-d})} plaquettes. After multiplication by #{a^d},
-the Riemann sum for #{\sum_{j<k}\operatorname{tr}(F_{jk}^2)}
+the Riemann sum for #{\sum_{j<k}\bigl(-\operatorname{tr}(F_{jk}^2)\bigr)}
 differs from its integral by #{O(a)}.
 Summing the uniform error and this Riemann-sum error proves the formula.}
 }
 
-\p{To fix a component convention, suppose the Hermitian generators
-in the chosen representation satisfy
-##{\operatorname{tr}(T_\alpha T_\gamma)
- =T(\rho)\delta_{\alpha\gamma},\qquad T(\rho)>0.}
-Write #{F_{jk}=\sum_\alpha F_{jk}^\alpha T_\alpha} and fix
-#{g>0}. Choosing
-##{\beta=\frac{r a^{d-4}}{T(\rho)g^2}}
-gives the classical limit
-##{\begin{aligned}
-S_W(a)&=\frac1{2g^2}\int
- \sum_{j<k,\alpha}(F_{jk}^\alpha)^2\,dx+O(a)\\
- &=\frac1{4g^2}\int
- \sum_{j,k,\alpha}(F_{jk}^\alpha)^2\,dx+O(a).
-\end{aligned}}
-The second sum counts both orders, with #{F_{kj}=-F_{jk}} and
-#{F_{jj}=0}. The trace normalization is an explicit assumption;
-it must not be imposed on directions annihilated by a nonfaithful
-representation. For the fundamental representation of #{SU(r)}
-with #{T(\rho)=1/2}, this is #{\beta=2r a^{d-4}/g^2}.
-For unit-charge #{U(1)}, #{r=T(\rho)=1}, giving
-#{\beta=a^{d-4}/g^2}.}
-
-\p{The matrices #{A_j} are those appearing in the link exponential;
+\p{The matrices #{X_j} are those appearing in the link exponential;
 any coupling absorbed into them must be retained when comparing
 component conventions. Wingate's equation (6.20) and Exercise 2
 \citet{p. 8}{wingate2025lattice} give the Wilson-action context and
