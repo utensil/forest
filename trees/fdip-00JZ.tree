@@ -1,0 +1,93 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Example}
+\title{The retained marginal in orthonormal coordinates}
+\date{2026-11-10}
+
+\p{Apply \ref{fdip-000E} in orthonormal
+charts #{C_X:X\to\mathbb R^I}, #{C_Y:Y\to\mathbb R^{J_Y}}
+with finite index sets. The joint chart
+#{C_E=(C_X\oplus C_Y)J^{-1}} uses the addition isometry #{J}.
+Write
+##{\begin{aligned}
+\widehat Q&=C_EQC_E^{-1},\qquad
+\widehat\Sigma=C_EQ^{-1}C_E^{-1},\\
+\widehat S&=C_XSC_X^{-1},\\
+L&=C_Xp_XC_E^{-1}:\mathbb R^{I\sqcup J_Y}\to\mathbb R^I.
+\end{aligned}}
+Thus #{L(\xi,\eta)=\xi}; its transpose represents #{i_X}.
+The intrinsic inverse-compression identity in \ref{fdip-000E} gives
+##{L\widehat\Sigma L^T=C_XS^{-1}C_X^{-1}
+                         =\widehat S^{-1}.}
+In the ordered delta bases for counting fields on #{R\sqcup U},
+this is exactly #{(Q^{-1})_{RR}=S^{-1}}. For nonorthonormal charts,
+coordinate functionals instead require their own Riesz
+representatives, as in the covariance formula of \ref{fdip-000B}.}
+
+\p{The marginal and conditional formulas in
+\citet{Appendix A.2, equations (A.5)-(A.6), p. 200}{rasmussen2006gaussian}
+use joint covariance, here #{\widehat\Sigma}. The inverse-block
+notation is set out in
+\citet{Appendix A.3, equations (A.11)-(A.13), pp. 201-202}{rasmussen2006gaussian}.
+Its retained covariance is #{\widehat S^{-1}}, whereas
+#{\widehat S} is retained precision.}
+
+\p{For a finite index set #{K}, write
+#{U_K=\operatorname{toLp}_2:\mathbb R^K\to
+\operatorname{EuclideanSpace}(\mathbb R,K)} for the coordinate
+wrapper, whose inverse is #{\operatorname{ofLp}}. The provider's
+joint and retained charts are #{U_{I\sqcup J_Y}C_E} and
+#{U_IC_X}; the displayed arrays act on their coordinate functions.}
+\p{The density and volume comparison in \ref{fdip-00JU} applies to these
+charts: #{\widehat\Sigma>0},
+#{\widehat\Sigma^{-1}=\widehat Q}, and
+#{\det\widehat\Sigma=(\det Q)^{-1}}. With
+#{n=\dim E}, the centered provider density relative to coordinate
+Lebesgue volume is
+##{\begin{aligned}
+&\frac{\exp(-\frac12z^T\widehat\Sigma^{-1}z)}
+ {(2\pi)^{n/2}\sqrt{\det\widehat\Sigma}}\\
+&\qquad=Z_Q^{-1}w_Q(C_E^{-1}z).
+\end{aligned}}
+Transporting the provider law by #{U_{I\sqcup J_Y}^{-1}}
+therefore gives #{(C_E)_*\mu_Q}. Likewise its retained Gaussian
+with covariance #{\widehat S^{-1}}, transported by #{U_I^{-1}},
+is #{(C_X)_*\mu_S}.
+The provider density theorem
+\leanref/tauceti{TauCeti.Probability.multivariateGaussian_eq_withDensity}
+requires strictly positive-definite covariance on a finite decidable
+real coordinate type; its nonnegative density is converted by
+#{\operatorname{ENNReal.ofReal}} for the measure constructor.}
+\p{The [orthonormal chart](fdip-002M) and
+\leanref{OrthonormalBasis.measurePreserving_repr} use the canonical
+volumes on finite-dimensional real inner-product Borel spaces.
+The latter chart takes values in the Euclidean #{\ell^2} wrapper.
+The maps in \leanref{PiLp.volume_preserving_ofLp} and
+\leanref{PiLp.volume_preserving_toLp} pass between that wrapper
+and ordinary coordinate functions with their product volume.
+The orthonormal representation followed by #{\operatorname{ofLp}}
+is the volume-preserving coordinate chart in the density identity. The rectangular map #{L} is a different
+map and need not preserve these volumes.}
+
+\p{Mathlib's
+\leanref{ProbabilityTheory.measurePreserving_restrict₂_multivariateGaussian}
+applies to finite subsets #{J_0\subseteq I_0} of a decidable
+coordinate type, an arbitrary mean and a positive-semidefinite
+covariance. Take #{I_0} to be the full disjoint-union index set and
+#{J_0} its retained subset, identifying their subtype functions
+with the joint and retained coordinate spaces. It maps the joint
+Gaussian to the Gaussian with restricted mean and covariance.}
+\p{Equivalently, TauCeti's
+\leanref/tauceti{TauCeti.Probability.map_affine_multivariateGaussian}
+uses finite decidable source and target index types, arbitrary
+rectangular array #{L}, translation #{c} and positive-semidefinite
+covariance #{\widehat\Sigma}. Its Euclidean linear map is
+#{U_ILU_{I\sqcup J_Y}^{-1}}. At mean zero and #{c=0}, its image
+has mean zero and covariance #{L\widehat\Sigma L^T}.
+Using the density identifications above and
+#{LC_E=C_Xp_X} recovers #{(p_X)_*\mu_Q=\mu_S}.
+These are identities between Gaussian probability measures;
+they assert no volume preservation by projection. The raw factor
+#{c_C} and absolute-integral identity remain supplied by the
+intrinsic integral calculation of \ref{fdip-000E}.}

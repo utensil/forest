@@ -1,0 +1,79 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Example}
+\title{Gaussian elimination in orthonormal coordinates}
+\date{2026-11-10}
+
+\p{Take the specified orthogonal sum and positive precision of
+\ref{fdip-000D}. Choose orthonormal charts
+#{C_X:X\to\mathbb R^I} and #{C_Y:Y\to\mathbb R^{J_Y}}, where #{I,J_Y}
+are finite index sets and the coordinate spaces have their counting
+inner products. On the disjoint-union coordinate space, the joint
+chart is #{C_E=(C_X\oplus C_Y)J^{-1}}, where #{J}
+is the addition isometry from that theorem.}
+\p{The precision array and its components are
+##{\begin{aligned}
+\widehat Q&=C_EQC_E^{-1}
+ =\begin{pmatrix}\widehat A&\widehat B\\
+                  \widehat B^T&\widehat C\end{pmatrix},\\
+\widehat A&=C_XAC_X^{-1},\qquad
+\widehat B=C_XBC_Y^{-1},\\
+\widehat C&=C_YCC_Y^{-1},\qquad
+\widehat S=C_XSC_X^{-1}.
+\end{aligned}}
+Orthonormality identifies the adjoint with transpose. Thus
+##{\widehat S=\widehat A-
+       \widehat B\widehat C^{-1}\widehat B^T,\qquad
+\det\widehat Q=\det\widehat C\det\widehat S.}
+Each chart preserves [canonical Euclidean volume](fdip-002M).
+Applying the intrinsic fiber formula at #{x=C_X^{-1}\xi} gives
+##{\begin{aligned}
+&\int_{\mathbb R^{J_Y}}
+ e^{-\frac12(\xi,\eta)^T\widehat Q(\xi,\eta)}\,d\eta\\
+&\qquad=c_Ce^{-\frac12\xi^T\widehat S\xi},\\
+c_C&=\frac{(2\pi)^{|J_Y|/2}}{\sqrt{\det\widehat C}}.
+\end{aligned}}
+The determinant is unchanged by conjugation, so this is the same
+raw scalar as in the intrinsic calculation. Empty index sets use
+the determinant one and singleton volume one conventions.}
+
+\p{For counting fields on #{V=R\sqcup U}, take the ordered delta
+bases of #{X=\mathbb R^R} and #{Y=\mathbb R^U}. These charts are
+the identity maps, #{B=H} and #{B^\dagger=H^T}.
+Coordinate volume splitting in \ref{fdip-002J} recovers the usual
+#{dx\,dy} formula. The carrier, split, precision and volumes are
+supplied; the resulting pair #{(S,c_C)} is relative to those data.}
+
+\p{\citet{Appendix A.5.5, pp. 650-651}{boyd2004convex} uses its
+first block as pivot. Ordering the coordinates as #{(\eta,\xi)}
+puts #{\widehat C} first and gives the eliminated pivot above.
+Its square-completion formula applies because #{\widehat Q}
+is real symmetric positive definite and #{\widehat C} is invertible.}
+\p{The density in
+\citet{Appendix A.2, equation (A.4), p. 200}{rasmussen2006gaussian}
+is parametrized by covariance. Substituting #{\widehat C^{-1}}
+for that covariance gives
+##{(2\pi)^{-|J_Y|/2}\sqrt{\det\widehat C}\,
+ e^{-\frac12\eta^T\widehat C\eta}.}
+Its reciprocal prefactor is #{c_C}. The intrinsic proof also
+specifies the volume and proves the determinant identity.}
+
+\p{For finite decidable index types, Mathlib's
+\leanref{Matrix.schur_complement_eq₂₂} supplies the corresponding
+quadratic identity over a commutative star ring when the eliminated
+block is Hermitian and invertible. Apply it over #{\mathbb R}
+with its blocks #{A,B,D} equal to
+#{\widehat A,\widehat B,\widehat C}; its lower-left block is
+#{\widehat B^T}. Mathlib's \leanref{Matrix.det_fromBlocks₂₂}
+has finite decidable indices and a commutative coefficient ring,
+with invertible eliminated block #{D}. In its four-block notation,
+#{(A,B,C,D)} here means
+#{(\widehat A,\widehat B,\widehat B^T,\widehat C)}.}
+\p{TauCeti's \leanref/tauceti{Matrix.PosDef.gaussianCondCov}
+gives strict positivity of the Schur complement of a real
+positive-definite block matrix, with finite retained and eliminated
+indices. Apply its joint matrix to #{\widehat Q}.
+Despite its conditional-covariance name, this is an algebraic
+application to precision. These declarations supply neither the
+fiber integral nor its reference-volume convention.}

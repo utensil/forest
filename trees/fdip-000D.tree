@@ -71,8 +71,11 @@ in domain and codomain. In the top wedge of the images under #{V},
 we have #{Ve_j=e_j+Ke_j} and #{Vf_k=f_k}. Any term choosing some
 #{Ke_j} has more than #{q} vectors in #{Y}, so it vanishes. The
 remaining term is the original top wedge; hence #{\det V=1}.
-In orthonormal coordinates, the adjoint is the transpose and has the
-same determinant, by reindexing the determinant permutation sum.
+Now choose orthonormal bases of #{X} and #{Y}, independently of
+the arbitrary bases used for the wedge calculation. Their concatenation
+is orthonormal on #{X\oplus Y}. In these coordinates the adjoint
+is the transpose and has the same determinant, by reindexing the
+determinant permutation sum.
 The direct sum #{D} acts on the top wedge by #{\det S\det C}.
 Multiplicativity of this scalar and invariance under conjugation
 now prove #{\det Q=\det C\det S}. Empty bases give determinant one,
@@ -93,30 +96,24 @@ to the unnormalized weight. Rescaling the two reference volumes by
 #{Z_Q} by #{a_Xa_Y}; normalized laws remain unchanged.
 For #{Y=0}, #{c_C=1}; for #{X=0}, #{Z_S=1}. In each case the
 unique zero-space endomorphism is invertible and has determinant one.}
-\p{For counting fields on #{V=R\sqcup U}, the delta bases identify
-#{X=\mathbb R^R}, #{Y=\mathbb R^U}, #{B=H} and #{B^\dagger=H^T}.
-[Coordinate volume splitting](fdip-002J) recovers the usual
-#{dx\,dy} formula. The carrier, split, input precision and volumes
-are supplied; #{(S,c_C)} is induced relative to those choices.
+\p{Square completion is supported by
+\citet{Appendix A.5.5, pp. 650-651}{boyd2004convex}, and Gaussian
+normalization by
+\citet{Appendix A.2, equation (A.4), p. 200}{rasmussen2006gaussian}.
+The invariant integration and determinant argument above reconstruct
+these ingredients with specified pairings and volume.
+The orthonormal and counting-coordinate calculation in \ref{fdip-00JY}
+gives the pivot, covariance and formalization conventions explicitly.
+The carrier, split, input precision and volumes are supplied;
+#{(S,c_C)} is induced relative to those choices.
 The [singular-pivot boundary](fdip-0039) requires a separate argument.}
-
-\p{\citet{Appendix A.5.5, pp. 650-651}{boyd2004convex} gives square
-completion with the first block as pivot. Exchanging its order to
-#{(y,x)} gives the present eliminated pivot #{C}.}
-\p{\citet{Appendix A.2, equation (A.4), p. 200}{rasmussen2006gaussian}
-gives the Gaussian density with covariance as parameter. Substituting
-#{C^{-1}} gives the normalizer used here. The invariant integration
-and determinant argument above reconstruct these ingredients with
-specified pairings and volume.}
-\p{Mathlib's \leanref{Matrix.schur_complement_eq₂₂} supports square
-completion in compatible finite coordinates, with a Hermitian
-invertible eliminated block. Its \leanref{Matrix.det_fromBlocks₂₂}
-supports the determinant identity. TauCeti's
-\leanref/tauceti{Matrix.PosDef.gaussianCondCov} supports strict Schur
-positivity for a real positive-definite block matrix. Despite its
-conditional-covariance name, this algebraic conclusion can be applied
-to the precision #{Q}. These ingredients do not supply the integral
-or its reference-volume convention.}
 \p{The operation is algebraic: it acts on vertex and edge sets that are
 supplied, and carries neither a dynamical carrier nor an effective metric,
 which are additional data.}
+
+\p{For these real data, \ref{fdip-00K8} identifies the embedded
+endomorphism #{i_XSp_X:E\to E} as the
+\vocabk{shorted operator}{fdip-00K6} of #{Q} along #{i_X(X)}.
+Its quadratic value is the minimum over the eliminated field.
+The fiber integral above additionally supplies the raw scalar #{c_C}
+relative to the specified volume.}

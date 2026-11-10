@@ -1,0 +1,67 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{The greatest operator supported on a retained subspace}
+\date{2026-11-10}
+
+\p{Under the hypotheses and notation of \ref{fdip-00K7}, the
+\vocabk{shorted operator}{fdip-00K6} exists and is
+##{T_0=i_XSp_X:V\to V.}
+Thus #{T_0} is the greatest self-adjoint operator satisfying
+#{0\leq T_0\leq A} and #{\operatorname{im}T_0\subseteq X}.
+It is unique.}
+\p{If the eliminated compression #{c:U\to U} is invertible,
+then #{N=0}, #{W=U}, and the retained map is the
+\vocabk{split Schur map}{fdip-001T}
+##{S=a-bc^{-1}b^\dagger.}
+If #{A>0}, then #{c>0} and #{S>0}; both are invertible.
+Invertibility of #{c} alone does not imply #{S>0}.}
+
+\proof{
+\p{The projection-adjoint identities give
+#{T_0^\dagger=i_XS^\dagger p_X=T_0}, and its range is contained
+in #{X}. On #{v=i_Xx+i_Uu}, its quadratic value is
+#{h(v,T_0v)=h_X(x,Sx)\geq0}. Square completion in
+\ref{fdip-00K7} shows that #{q_A(v)-h(v,T_0v)\geq0}.
+Hence #{T_0\in\mathcal C_X(A)}.}
+\p{Let #{T\in\mathcal C_X(A)}. For #{u\in U} and #{v\in V},
+self-adjointness and #{Tv\in X} give
+##{h(Ti_Uu,v)=h(i_Uu,Tv)=0.}
+Nondegeneracy of #{h} implies #{Ti_Uu=0}. Consequently the
+quadratic value of #{T} on #{i_Xx+i_Uu} is its value on #{i_Xx},
+independently of #{u}. Apply #{T\leq A} at the minimizing extension
+#{u_*=-jc_W^{-1}d_Wx}:
+##{\begin{aligned}
+h(i_Xx,Ti_Xx)
+ &=h(i_Xx+i_Uu_*,T(i_Xx+i_Uu_*))\\
+ &\leq q_A(i_Xx+i_Uu_*)=h_X(x,Sx).
+\end{aligned}}
+This is #{T\leq T_0} on every split vector, so #{T_0} is greatest.
+Antisymmetry from \ref{fdip-00K3} proves uniqueness.}
+\p{If #{c} is invertible, its kernel is zero and the canonical
+identification #{W=U} turns the construction into
+#{S=a-bc^{-1}d=a-bc^{-1}b^\dagger}.
+If #{A>0}, then for nonzero #{u},
+#{h_U(u,cu)=q_A(i_Uu)>0}, so #{c>0} and finite dimension makes
+#{c} invertible. For nonzero #{x}, the minimizing vector
+#{i_Xx-i_Uc^{-1}b^\dagger x} is nonzero, because its retained
+projection is #{x}. Its strictly positive energy is #{h_X(x,Sx)};
+hence #{S>0}, and finite dimension again gives invertibility.
+The example in \ref{fdip-00K9} shows why the hypothesis #{A>0}
+cannot be replaced by invertibility of #{c}.}
+\p{For #{U=0}, the result gives #{T_0=A}; for #{X=0}, it gives
+#{T_0=0}. If #{c=0}, it gives #{T_0=i_Xap_X}; if #{A=0}, it gives
+#{T_0=0}. On #{V=0}, all maps and all forms are the unique zero-space
+ones, so the same assertions apply. The range condition remains
+containment in #{X}, even when #{S} has a kernel.}
+}
+
+\p{This greatestness statement is a deduction from
+\ref{fdip-00K7} and the Loewner comparison; it does not require
+an orthonormal basis. The real strict Schur equivalence, including
+its converse, is proved separately in \ref{fdip-001Y}.
+The real matrix minimum in
+\citet{Appendix A.5.5, pp. 650-651}{boyd2004convex}
+is consistent with this specialization; the ordered-field
+greatestness argument is the one given above.}

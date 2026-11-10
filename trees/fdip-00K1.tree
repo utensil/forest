@@ -1,0 +1,33 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Definition}
+\title{Loewner comparison over an ordered field}
+\date{2026-11-10}
+
+\p{Let #{F} be an ordered field: its total order is compatible with
+addition and multiplication of nonnegative elements. Let #{V} be a
+finite-dimensional #{F}-vector space with a specified symmetric
+\vocabk{bilinear form}{ca-0003} #{h} satisfying
+#{h(v,v)>0} for every #{v\ne0}. An endomorphism #{A:V\to V} is
+\vocabk{self-adjoint}{fdip-001P} for #{h} when
+##{h(Av,w)=h(v,Aw)\qquad(v,w\in V).}
+This pairing equation specifies the condition directly;
+\ref{fdip-00K2} establishes the perfect duality that represents
+adjoints in this setting. Write #{q_A(v)=h(v,Av)}.}
+
+\p{A self-adjoint #{A} is a \newvocab{nonnegative operator}, written
+#{A\geq0}, when #{q_A(v)\geq0} for every #{v}.
+It is a \newvocab{positive-definite operator}, written #{A>0},
+when #{q_A(v)>0} for every nonzero #{v}.
+For self-adjoint #{A,B}, the \newvocab{Loewner order} is the comparison
+##{A\leq B\quad\Longleftrightarrow\quad
+       h(v,(B-A)v)\geq0\quad\text{for every }v\in V.}
+The partial-order axioms, in the sense of [ordered sets](tt-002C),
+are proved in \ref{fdip-00K3}.}
+
+\p{This is the operator form of symmetry and diagonal nonnegativity
+in Mathlib's \leanref{LinearMap.IsPosSemidef}, applied to
+#{(v,w)\mapsto h(v,Aw)} with the identity scalar homomorphism.
+That definition supplies the form-level condition; the specified
+pairing identifies the form with the operator.}
