@@ -1,0 +1,53 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{Weighted elimination towers}
+\date{2026-11-10}
+
+\p{Let #{k} be a commutative ring and let #{C\subseteq B\subseteq A} be unital associative #{k}-algebras with the same unit, graded as in the definition of a \vocabk{normalized conditional functional}{fdip-00KV}. Let
+##{P:A\to B,\qquad Q:B\to C}
+be even linear bimodule maps over #{B} and over #{C} respectively. Let #{D:A\to C} be an even linear map satisfying the raw integration identity
+##{D=Q\circ P.}
+Let #{w\in A} be even and commute with every element of #{B}. Put
+##{z=P(w),\qquad t=Q(z)=D(w),}
+and assume that #{z} is a unit of #{B} and #{t} is a unit of #{C}. Define
+##{\begin{aligned}
+E_{A,B}^{w}(a)&=z^{-1}P(aw),\\
+E_{B,C}^{z}(b)&=t^{-1}Q(bz),\\
+E_{A,C}^{w}(a)&=t^{-1}D(aw).
+\end{aligned}}
+Then each map is a normalized conditional functional onto its indicated subalgebra, and
+##{E_{B,C}^{z}\circ E_{A,B}^{w}=E_{A,C}^{w}.}}
+
+\proof{
+\p{For #{b\in B}, bimodularity of #{P} and the relation #{bw=wb} give
+##{bz=P(bw)=P(wb)=zb.}
+Thus #{z} is central in #{B}, and so is #{z^{-1}}. The same argument with #{Q} and the weight #{z} shows that #{t} is central in #{C}. The inverse of an even unit is even: if #{zu=1} and #{u=u_0+u_1} is the even-odd decomposition, then #{zu_1=0}, and multiplication by the unit #{z} is injective.}
+
+\p{The first map sends #{1} to #{z^{-1}P(w)=1}. For #{b_1,b_2\in B},
+##{E_{A,B}^{w}(b_1ab_2)
+=z^{-1}P(b_1awb_2)
+=z^{-1}b_1P(aw)b_2
+=b_1E_{A,B}^{w}(a)b_2,}
+where #{w} commutes past #{b_2} and #{z^{-1}} commutes past #{b_1}. The same calculation applies to #{Q} with weight #{z}. Since #{P} is a #{B}-bimodule map, it is a #{C}-bimodule map, and
+##{D(c_1ac_2)=Q(P(c_1ac_2))=Q(c_1P(a)c_2)=c_1D(a)c_2.}
+The element #{w} commutes with #{C}, so the same calculation applies to #{D}. Every operation preserves parity.}
+
+\p{For the tower,
+##{\begin{aligned}
+E_{B,C}^{z}(E_{A,B}^{w}(a))
+&=t^{-1}Q\bigl(z^{-1}P(aw)\,z\bigr)\\
+&=t^{-1}Q(P(aw))
+=t^{-1}D(aw).
+\end{aligned}}
+The second equality holds because #{P(aw)} lies in #{B} and #{z} is central there. This is the cancellation of the intermediate marginal weight.}
+}
+
+\p{The raw maps form a triangle. Multiplication by the weight, followed by the raw map and division by the marginal unit, produces the three normalized maps.}
+
+\texfig{\begin{tikzcd}[column sep=large]
+A \arrow[r, "P"] \arrow[rr, bend right=25, "D"'] & B \arrow[r, "Q"] & C
+\end{tikzcd}}
+
+\p{Mathlib's \leanref{Representation.averageMap}, in the invariants section over a commutative ring, is the linear projection onto a representation's invariant subspace when the group order is invertible. It does not encode a marginal weight or the identity #{D=Q\circ P}. Mathlib's \leanref{MeasureTheory.condExp_condExp_of_le} is an almost-everywhere tower for nested σ-algebras under the stated σ-finiteness hypotheses. The weighted identity above is a separate algebraic statement.}

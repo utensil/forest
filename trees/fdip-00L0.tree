@@ -1,0 +1,28 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{Nested paired eliminations compose}
+\date{2026-11-10}
+
+\p{Let #{V=R\oplus F\oplus E} be a direct sum of finite-dimensional complex vector spaces, and let #{K:V\to V}. Write #{D_E} for the compression of #{K} to #{E}, and assume that #{D_E} is invertible. Let #{S'} be the Schur complement of that compression, on #{R\oplus F}, and assume that the compression #{D_F} of #{S'} to #{F} is invertible. Let #{S} be the Schur complement of #{D_F} in #{S'}. No positivity or adjoint relation is assumed. On every element of the paired algebra,
+##{\mathcal E_R^{S'}\circ\mathcal E_{R\oplus F}^{K}=\mathcal E_R^{K},}
+where each symbol denotes the \vocabk{normalized paired conditional functional}{fdip-008U} of its indicated precision and eliminated summand.}
+
+\proof{
+\p{The canonical quadratic element splits as a sum of the three pairwise coevaluations. Those summands are even and commute. In the multinomial expansion of #{(\theta_R+\theta_F+\theta_E)^N/N!}, with #{N=\dim V}, the only surviving top term takes each summand to its own dimension, and that term is #{\Omega_R\Omega_F\Omega_E}. Hence
+##{\Omega_V=\Omega_R\Omega_F\Omega_E.}
+The identity #{J_F(X\Omega_F)=X} therefore gives #{J_FJ_E=J_{F\oplus E}} on every exterior monomial.}
+
+\p{Order the eliminated basis as #{F} then #{E}, and write the compression of #{K} to #{F\oplus E} as
+##{\begin{pmatrix}P&Q\\ R&D_E\end{pmatrix}.}
+Its determinant equals #{\det(D_E)\det(P-QD_E^{-1}R)}. The block #{P-QD_E^{-1}R} is the compression of #{S'} to #{F}, namely #{D_F}. Thus the combined compression is invertible and
+##{\det(K_{F\oplus E})=\det(D_E)\det(D_F).}
+The same block factorization identifies the Schur complement of #{K_{F\oplus E}} with #{S}.}
+
+\p{Let #{w=e^{\theta_K}}. The partial formula gives
+##{z=J_E(w)=\det(D_E)\,e^{\theta_{S'}},}
+an even central unit of the paired algebra on #{R\oplus F}. Applying #{J_F} yields
+##{t=J_F(z)=\det(D_E)\det(D_F)\,e^{\theta_S},}
+an even central unit of the paired algebra on #{R}. The raw identity #{J_{F\oplus E}=J_FJ_E} is the hypothesis #{D=Q\circ P} of \ref{fdip-00KX}, with this weight #{w}. Its inner normalized map is #{\mathcal E_{R\oplus F}^{K}}. Its outer map multiplies by the constant #{\det(D_E)} and then divides by #{t}, which cancels that constant and leaves #{\mathcal E_R^{S'}}. The direct normalized map of the tower is #{\mathcal E_R^{K}}.}
+}
