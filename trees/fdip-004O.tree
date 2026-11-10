@@ -10,21 +10,19 @@
 #{V=\{0,1\}}, one edge #{0\to1} of weight #{w}, counting
 pairing, mass #{m=1}, retained set #{R=\{0\}} and eliminated
 set #{V\setminus R=\{1\}}. The field coordinates remain labelled.
-The [weighted Laplacian](fdip-0007) and massive precision are
-##{\begin{aligned}
-L_w&=w\begin{pmatrix}1&-1\\-1&1\end{pmatrix},\\
-Q_w&=I+L_w=\begin{pmatrix}1+w&-w\\-w&1+w\end{pmatrix}.
-\end{aligned}}
-Indeed the incidence row is #{(-1,1)}. The vectors #{(1,1)}
-and #{(1,-1)} have precision eigenvalues #{1} and #{1+2w},
-so #{Q_w>0}. The [normalized Gaussian law](fdip-0005) is therefore
-well-defined on counting-coordinate volume #{df_0\,df_1}, with
-##{\begin{aligned}
-d\mu_w(f)&=Z_w^{-1}\exp(-f^TQ_wf/2)\,df_0\,df_1,\\
-Z_w&=\frac{2\pi}{\sqrt{1+2w}}.
-\end{aligned}}
-The normalizer is the two-dimensional specialization of
-[positive Gaussian normalization](fdip-002T).}
+Let #{\delta} send a vertex function to the edge value
+#{f(0)-f(1)}. The [weighted Laplacian](fdip-0007) is
+#{L_w=w\,\delta^*\delta}, with the adjoint taken for the counting
+pairing, and the massive precision is #{Q_w=I+L_w}. Since
+#{L_w} is positive semidefinite and the mass term is the identity,
+#{Q_w} is positive definite. The [normalized Gaussian law](fdip-0005)
+is therefore well-defined for the counting inner product and the
+reference volume it determines. Its normalizer is
+##{Z_w=\frac{2\pi}{\sqrt{1+2w}},}
+the two-dimensional specialization of
+[positive Gaussian normalization](fdip-002T). The counting-basis
+arrays, the incidence row, and the eigenvalues #{1} and #{1+2w}
+are \ref{fdip-00LJ}.}
 
 \p{Let #{X=\{\mathcal B_w:w>0\}} and let #{Y=\{U\}} be the
 singleton whose element is the unweighted labelled directed edge

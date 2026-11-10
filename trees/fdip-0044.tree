@@ -5,14 +5,23 @@
 \title{Schur elimination multiplies quadratic center characters}
 \date{2026-10-30}
 
-\p{For an [enriched rational object](fdip-0041), write its
-relative precision in the specified orthogonal splitting as
-##{Q=\begin{pmatrix}A&B\\B^\dagger&C\end{pmatrix},
-\qquad S=A-BC^{-1}B^\dagger.}
+\p{For an [enriched rational object](fdip-0041), let
+#{i_{\mathrm{ret}}} and #{i_{\mathrm{el}}} be the inclusions of
+the retained and eliminated summands, and let
+#{\pi_{\mathrm{ret}}} and #{\pi_{\mathrm{el}}} be the
+#{g_0}-orthogonal projections onto them. The blocks of the
+relative precision are
+##{\begin{aligned}
+A&=\pi_{\mathrm{ret}}Qi_{\mathrm{ret}},&
+B&=\pi_{\mathrm{ret}}Qi_{\mathrm{el}},&
+C&=\pi_{\mathrm{el}}Qi_{\mathrm{el}}.
+\end{aligned}}
+Let #{B^\dagger=\pi_{\mathrm{el}}Qi_{\mathrm{ret}}} be the adjoint
+of #{B} for the restricted reference pairings
+#{g_{0,\mathrm{ret}},g_{0,\mathrm{el}}}, and put
+##{S=A-BC^{-1}B^\dagger.}
 The [positive elimination theorem](fdip-000D) gives invertible
-positive #{C,S}. The adjoint uses the restricted reference
-pairings #{g_{0,\mathrm{ret}},g_{0,\mathrm{el}}}.
-Define the two rank-two forms
+positive #{C,S}. Define the two rank-two forms
 ##{\begin{aligned}
 q_S(x)&=g_{0,\mathrm{ret}}(x,Sx),\\
 q_C(y)&=g_{0,\mathrm{el}}(y,Cy).
@@ -86,12 +95,9 @@ g_{0,\mathrm{ret}}(x,Sx)&=q(x,y_*)\\
 \end{aligned}}
 where the norms use the restricted reference pairings. Thus
 #{L_{\mathrm{rel,ret}}\geq0}. Its trace must still be assumed
-nonzero for the retained ratio to be defined. For example, with
-counting pairing and the first summand retained,
-##{Q=\operatorname{diag}(m^2I_2,(m^2+1)I_2)}
-has #{\operatorname{tr}(Q-m^2I)=2}, but #{S=m^2I_2} and
-#{L_{\mathrm{rel,ret}}=0}. The full trace-ratio domain is therefore
-not inherited.}
+nonzero for the retained ratio to be defined. The full
+trace-ratio domain is not inherited; the diagonal witness is
+\ref{fdip-00LG}.}
 
 \p{The triangular form isometry generally does not preserve
 #{g_0}. Nor does its graph map
@@ -117,21 +123,7 @@ not central in the full even algebra.}
 \p{Primitive Dirichlet representatives must be taken after
 multiplying Galois characters. They are not in general the
 pointwise product of the zero-extended functions on integers.
-At #{t=1}, the [cycle Schur computation](fdip-000W) has
-#{\det Q=45}, #{\det S=5} and #{C=3I_2}. The three signed
-square classes are #{[5],[-5],[-1]}, with fundamental
-discriminants #{5,-20,-4}. The Galois product is #{\chi_5},
-but
-##{\chi_{-20}(2)\chi_{-4}(2)=0,\qquad\chi_5(2)=-1.}
-The last value follows from
-#{\chi_D(2)=(-1)^{(D^2-1)/8}} for odd fundamental #{D},
-as in Brian Conrad's \citet{Corollary 3.1, p. 4}{conradQuadraticCharacters}.
-On integers coprime to 20 the product agrees with
-#{\chi_5}; passing to its primitive representative restores
-the prime-two value. No multiplication rule for the
-corresponding L-functions follows from the character law.
-Mathlib's \leanref{DirichletCharacter.primitiveCharacter}
-and \leanref{DirichletCharacter.primitiveCharacter_apply_of_isCoprime}
-separate primitive reduction from evaluation: agreement is
-asserted at integers coprime to the original level, which
-does not include the prime two in this example.}
+No multiplication rule for the corresponding L-functions
+follows from the character law. At the prime two the
+zero-extended product can vanish while the primitive character
+equals #{-1}; that comparison is \ref{fdip-00LH}.}
