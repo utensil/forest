@@ -1,0 +1,89 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Example}
+\title{Conditional covariance in orthonormal coordinates}
+\date{2026-11-10}
+
+\p{For the explicit conditional kernel of \ref{fdip-003A}, choose
+orthonormal charts #{C_X:X\to\mathbb R^I} and
+#{C_Y:Y\to\mathbb R^{J_Y}} with finite index sets.
+Use the joint chart #{C_E=(C_X\oplus C_Y)J^{-1}}, where #{J}
+is the addition isometry. Write
+#{\widehat Q=C_EQC_E^{-1}} and
+#{\widehat\Sigma=C_EQ^{-1}C_E^{-1}} for precision and covariance.
+Their blocks are taken in the retained-then-eliminated order;
+for example,
+##{\begin{aligned}
+\widehat A&=C_XAC_X^{-1},\quad
+\widehat B=C_XBC_Y^{-1},\\
+\widehat\Sigma_{XY}&=C_X\Sigma_{XY}C_Y^{-1},\quad
+\widehat T=C_YTC_Y^{-1}.
+\end{aligned}}
+The typed inverse identities of \ref{fdip-003A} now read
+##{\begin{aligned}
+\widehat\Sigma_{YY}&=\widehat T^{-1}>0,\\
+\widehat\Sigma_{XY}\widehat\Sigma_{YY}^{-1}
+ &=-\widehat A^{-1}\widehat B,\\
+\widehat\Sigma_{XX}
+ -\widehat\Sigma_{XY}\widehat\Sigma_{YY}^{-1}
+       \widehat\Sigma_{YX}&=\widehat A^{-1}.
+\end{aligned}}
+For an observed coordinate #{\eta=C_Yy}, these are mean
+#{-\widehat A^{-1}\widehat B\eta} and covariance
+#{\widehat A^{-1}}, as in
+\citet{Appendix A.2, equation (A.6), p. 200}{rasmussen2006gaussian}.}
+
+\p{Write #{U_K=\operatorname{toLp}_2} for the wrapper from
+ordinary functions on a finite index set #{K} to
+#{\operatorname{EuclideanSpace}(\mathbb R,K)}, with inverse
+#{\operatorname{ofLp}}. The Gaussian density and volume comparison in \ref{fdip-00JU}
+identifies #{(U_{I\sqcup J_Y}C_E)_*\mu_Q} with the provider's
+centered Gaussian of covariance #{\widehat\Sigma>0}.
+Transporting it by #{U_{I\sqcup J_Y}^{-1}} gives the ordinary
+coordinate law #{\gamma=(C_E)_*\mu_Q}. In particular,
+#{\widehat\Sigma^{-1}=\widehat Q} and
+#{\det\widehat\Sigma=(\det Q)^{-1}} give density
+#{Z_Q^{-1}w_Q(C_E^{-1}z)}. The canonical volumes and Euclidean
+#{\ell^2} wrappers are matched by the orthonormal chart and
+\leanref{OrthonormalBasis.measurePreserving_repr}, followed by
+\leanref{PiLp.volume_preserving_ofLp}; the reverse wrapper is
+\leanref{PiLp.volume_preserving_toLp}. These maps preserve their
+full coordinate volumes.}
+\p{For each fixed #{y}, the same positive-definite density formula,
+now at mean #{-\widehat A^{-1}\widehat B C_Yy} and covariance
+#{\widehat A^{-1}}, is exactly #{k_y(C_X^{-1}\xi)}.
+Here #{\det\widehat A=\det A} makes its prefactor #{c_A^{-1}}.
+Consequently the provider Gaussian is
+#{(U_IC_X)_*\kappa(y,\cdot)} for every #{y}. This is a specialization
+of the already proved density construction, including zero-dimensional
+spaces.}
+
+\p{TauCeti's
+\leanref/tauceti{TauCeti.Probability.condDistrib_multivariateGaussian}
+uses finite decidable retained and conditioning index types, a
+measurable source #{\Omega} with finite measure #{P}, and an actual
+joint random variable with the stated Gaussian law. Its covariance
+must be positive semidefinite and its conditioning covariance block
+positive definite. Apply it with #{\Omega=E}, #{P=\mu_Q} and
+the joint variable #{U_{I\sqcup J_Y}C_E}. Its two Euclidean
+components are #{U_IC_Xp_X} and #{U_{J_Y}C_Yp_Y}; both are Borel,
+the source is a probability space, and the density comparison gives
+the required joint law. The two positivity hypotheses hold because
+#{\widehat\Sigma>0} and #{\widehat\Sigma_{YY}=\widehat T^{-1}>0}.}
+\p{The actual conditioning marginal is
+#{\nu_Y=(C_Yp_Y)_*\mu_Q}. The exchanged marginal formula in \ref{fdip-003A}
+identifies its pullback to #{Y} with density
+#{r(y)=c_AZ_Q^{-1}e^{-h_Y(y,Ty)/2}}.
+The provider's conditioning marginal is #{(U_{J_Y})_*\nu_Y}.
+Its kernel equality holds almost everywhere for that marginal,
+or, after #{U_{J_Y}^{-1}}, for #{\nu_Y}-almost every coordinate
+#{\eta}. Its mean and covariance are the displayed arrays;
+at #{U_{J_Y}\eta} the provider kernel is
+#{(U_IC_X)_*\kappa(C_Y^{-1}\eta,\cdot)}.
+This almost-everywhere conclusion does not select values on an
+exceptional set. The independent normalization, Borel parameter
+measurability and rectangle identity in \ref{fdip-003A} establish
+our specified version for every #{y}. A totalized Gaussian
+constructor or a Markov-kernel instance alone would not identify
+that conditional distribution.}

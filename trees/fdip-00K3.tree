@@ -1,0 +1,47 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Lemma}
+\title{Zero energy and the radical}
+\date{2026-11-10}
+
+\p{Let #{V} be a finite-dimensional vector space over an ordered
+field #{F}, and let #{B:V\times V\to F} be symmetric bilinear with
+#{B(v,v)\geq0} for every #{v}. Then
+##{B(z,z)=0\quad\Longleftrightarrow\quad
+       B(z,v)=0\quad\text{for every }v.}
+The space on the right is the radical of #{B}.
+For a \vocabk{nonnegative self-adjoint operator}{fdip-00K1} #{A}
+and its specified positive pairing #{h}, this becomes
+##{q_A(z)=0\quad\Longleftrightarrow\quad Az=0.}
+The Loewner comparison on the self-adjoint endomorphisms is a
+partial order.}
+
+\proof{
+\p{Suppose #{B(z,z)=0}. For fixed #{v}, put #{e=B(z,v)} and
+#{d=B(v,v)\geq0}. Bilinearity and symmetry give
+##{0\leq B(z+tv,z+tv)=2te+t^2d\qquad(t\in F).}
+If #{e\ne0} and #{d>0}, choose #{t=-e/d}; the right side is
+#{-e^2/d<0}. If #{e\ne0} and #{d=0}, choose #{t=-e}; it is
+#{-2e^2<0}. Both contradict nonnegativity, so #{e=0}.
+The reverse implication follows by taking #{v=z}. These scalar
+choices use only the ordered-field axioms.}
+\p{For #{B(v,w)=h(v,Aw)}, self-adjointness gives symmetry and
+#{A\geq0} gives nonnegativity. The first conclusion says that
+#{q_A(z)=0} exactly when #{h(v,Az)=0} for every #{v}.
+The positive pairing is nondegenerate, so this is equivalent to
+#{Az=0}.}
+\p{The zero operator is nonnegative, proving reflexivity.
+Sums of nonnegative self-adjoint operators are nonnegative, proving
+transitivity. For antisymmetry, suppose #{A\leq C} and #{C\leq A}.
+Then #{D=C-A} and #{-D} are nonnegative, hence #{q_D(v)=0} for
+every #{v}. The kernel conclusion gives #{Dv=0} for every #{v},
+so #{A=C}.}
+}
+
+\p{Mathlib's
+\leanref{LinearMap.BilinForm.apply_apply_same_eq_zero_iff}
+proves the form-level radical equivalence for a symmetric
+nonnegative bilinear form over its strictly ordered commutative-ring
+setting. The operator conclusion additionally uses the specified
+nondegenerate pairing, as proved above.}

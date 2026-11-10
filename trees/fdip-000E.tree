@@ -91,8 +91,7 @@ p_XQ^{-1}i_X&=S^{-1},\\
 \operatorname{Cov}_{\mu_Q}(\ell_j\circ\pi,\ell_k\circ\pi)
  &=h_X(j,S^{-1}k),
 \end{aligned}}
-where #{\ell_j(x)=h_X(j,x)}. The means vanish. In counting
-coordinates this is #{(Q^{-1})_{RR}=S^{-1}}.}
+where #{\ell_j(x)=h_X(j,x)}. The means vanish.}
 \proof{
 \p{To check [inverse compression](fdip-001V) directly, solve
 #{QJ(u,v)=i_Xb}. Its lower component gives #{v=-C^{-1}B^\dagger u};
@@ -119,17 +118,11 @@ block formula is in
 \citet{Appendix A.3, equation (A.13), p. 202}{rasmussen2006gaussian}.
 Its joint parameter is covariance #{\Sigma=Q^{-1}}. Retained
 covariance is therefore #{p_X\Sigma i_X=S^{-1}}, not #{S}.}
-\p{In orthonormal coordinates, #{\Sigma^{-1}=Q} and
-#{\det\Sigma=(\det Q)^{-1}} turn the provider density into
-#{Z_Q^{-1}w_Q}; the [density and volume comparison](fdip-000B)
-identifies the probability laws. Mathlib's
-\leanref{ProbabilityTheory.measurePreserving_restrict₂_multivariateGaussian}
-then supports coordinate restriction with covariance #{\Sigma}.
-TauCeti's \leanref/tauceti{TauCeti.Probability.map_affine_multivariateGaussian}
-supports rectangular affine images with positive-semidefinite
-covariance. Apply its linear map as the orthonormal presentation of
-#{p_X} and its translation as zero. These concern Gaussian
-probability measures, not volume preservation by a projection.}
+\p{The orthonormal-coordinate marginal in \ref{fdip-00JZ} recovers the
+counting inverse-block formula and matches these laws to the finite
+coordinate Gaussian providers, including their density and volume
+conventions.}
 \p{Mathlib's \leanref{MeasureTheory.integral_prod} supports signed
-Fubini under integrability. None of these declarations supplies the
-raw factor #{c_C} or removes the preceding absolute-value argument.}
+Fubini under integrability and SFinite hypotheses on both measures;
+the sigma-finite volumes here satisfy those hypotheses. It supplies neither the
+raw factor #{c_C} nor the preceding absolute-value argument.}

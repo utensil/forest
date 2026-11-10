@@ -1,0 +1,44 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Example}
+\title{A rational pairing with a zero-energy direction}
+\date{2026-11-10}
+
+\p{Over #{\mathbb Q}, choose the standard coordinate basis
+#{e_1,e_2,e_3} of #{V=\mathbb Q^3}. Specify
+##{\begin{aligned}
+h(v,w)&=2v_1w_1+3v_2w_2+5v_3w_3,\\
+A(x,y,z)&=(2x+\tfrac32y,\ x+y,\ 0).
+\end{aligned}}
+The pairing is positive definite: all three coefficients are
+positive, and a nonzero vector has a nonzero coordinate.
+In these chosen coordinates its matrix and the operator matrix are
+##{H=\operatorname{diag}(2,3,5),\qquad
+ [A]=\begin{pmatrix}2&3/2&0\\1&1&0\\0&0&0\end{pmatrix}.}
+The product
+##{H[A]=\begin{pmatrix}4&3&0\\3&3&0\\0&0&0\end{pmatrix}}
+is symmetric, which verifies the self-adjointness condition of
+\ref{fdip-001P} for #{h}. Direct calculation gives
+##{q_A(x,y,z)=4x^2+6xy+3y^2=x^2+3(x+y)^2.}
+Thus #{A} is [nonnegative](fdip-00K1). Zero energy forces
+#{x=0} and #{x+y=0}, so the zero-energy space is #{\mathbb Qe_3}.
+The equations #{Av=0} give the same space, as \ref{fdip-00K3} predicts.}
+
+\p{Take the retained line #{X=\mathbb Qe_1}. The orthogonal
+complement is #{U=\mathbb Qe_2\oplus\mathbb Qe_3}.
+The projections of \ref{fdip-00K2}, embedded back in #{V}, are
+##{(x,y,z)\longmapsto(x,0,0),\qquad
+   (x,y,z)\longmapsto(0,y,z).}
+Inside #{U}, the zero-energy line #{\mathbb Qe_3} has orthogonal
+complement #{\mathbb Qe_2}; the restricted pairings have coefficients
+#{5} and #{3}, respectively.}
+
+\p{This positive pairing has no rational orthonormal basis.
+If the columns of an invertible rational matrix #{R} formed one,
+then #{R^THR=I} would give #{30(\det R)^2=1}.
+The exponent of the prime #{2} in a nonzero rational number is an
+integer. Taking that exponent would give
+#{1+2v_2(\det R)=0}, an impossibility. The projection construction
+therefore applies even when orthonormal coordinates over the stated
+field do not exist.}

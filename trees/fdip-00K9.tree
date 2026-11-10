@@ -1,0 +1,62 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Example}
+\title{Minimizing extensions for the rational pairing}
+\date{2026-11-10}
+
+\p{Return to the rational pairing, operator and retained line of
+\ref{fdip-00K4}, with the same chosen coordinate basis.
+The component maps of \ref{fdip-00K7} are
+##{\begin{aligned}
+a&=2,& b(y,z)&=\tfrac32y,\\
+d(x)&=(x,0),& c(y,z)&=(y,0).
+\end{aligned}}
+Thus #{N=\mathbb Qe_3}, #{W=\mathbb Qe_2}, and the coordinate
+identifications #{X\simeq\mathbb Q}, #{W\simeq\mathbb Q} give
+##{b_W=\tfrac32,\qquad d_W=1,\qquad c_W=1.}
+The restricted pairings have coefficients #{2} and #{3}.
+Their adjoint equation is #{2x(\tfrac32y)=3(1x)y}, so these
+cross maps are adjoints despite their different entries.}
+
+\p{The retained map and quadratic minimum are
+##{S=2-\tfrac32\cdot1^{-1}\cdot1=\tfrac12,\qquad
+   h_X(x,Sx)=x^2.}
+The completed square is #{q_A(x,y,z)=x^2+3(y+x)^2}.
+For each #{x}, every minimizer has #{y=-x}, with arbitrary
+#{z\in\mathbb Q}; the full coset is #{-xe_2+\mathbb Qe_3}.
+The embedded [shorted operator](fdip-00K6) is
+##{T_0(x,y,z)=(\tfrac12x,0,0),\qquad
+   q_{A-T_0}(x,y,z)=3(x+y)^2.}
+Its greatestness among the specified admissible operators follows
+from \ref{fdip-00K8}. The coefficient of the retained quadratic
+form is #{1}, although the operator entry is #{1/2}.}
+
+\p{Extend these same formulas from #{\mathbb Q} to #{\mathbb R}.
+The full eliminated space is now #{U=\mathbb Re_2\oplus\mathbb Re_3},
+with induced volume #{\sqrt{15}\,dy\,dz}.
+For fixed #{x}, the weight
+#{\exp(-x^2/2)\exp(-3(y+x)^2/2)} is independent of #{z}.
+Its integral over any fixed compact #{y}-interval of positive length
+is positive and finite. Integrating also over #{-R\leq z\leq R}
+therefore grows as a positive constant times #{2R}.
+The full #{U}-integral is infinite, both for coordinate volume and
+for induced volume, even though #{S>0} on #{X}.}
+\p{Integration over #{W=\mathbb Re_2} instead uses the induced
+volume #{\sqrt3\,dy}. By the one-dimensional Gaussian integral,
+##{\begin{aligned}
+&\int_W e^{-q_A(i_Xx+i_Ujw)/2}\,d\lambda_W(w)\\
+&\qquad=\sqrt{2\pi}\,e^{-x^2/2}.
+\end{aligned}}
+Coordinate volume #{dy} gives #{\sqrt{\frac{2\pi}{3}}\,e^{-x^2/2}}.
+These are the changed-space and volume distinctions of
+\ref{fdip-0039}; the algebraic calculation over #{\mathbb Q}
+has introduced no measure there.}
+
+\p{For a separate strictness diagnostic, choose standard coordinates
+on #{\mathbb Q^2}, the counting pairing and the nonnegative operator
+##{[A]=\begin{pmatrix}1&1\\1&1\end{pmatrix},\qquad
+   q_A(x,y)=(x+y)^2.}
+Eliminating the second coordinate gives #{c=1}, #{S=0} and the
+unique minimizer #{y=-x}. An invertible eliminated compression
+therefore need not give a strictly positive retained map.}
