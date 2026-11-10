@@ -18,29 +18,44 @@ walk acts as the identity on #{F}. Every connection in the identity orbit
 has that property. So does every connection whose holonomy acts through
 the kernel of #{\rho}.}
 \proof{
-\p{Write #{D} for the positive diagonal operator on scalar functions with
-#{D_v=m^2+\sum_{e\ni v}w_e}, and write #{D_H} for #{D} acting separately
-on each fiber. The quadratic form in the connection background expands as
+\p{If the vertex set is empty, the field space is zero-dimensional,
+both determinants are #{1}, and the closed-walk condition is vacuous.
+Assume henceforth that the vertex set is nonempty. Write #{D} for the
+positive multiplication operator on scalar functions with
+##{D_v=m^2+\sum_e w_e\bigl(\mathbf1_{s(e)=v}+\mathbf1_{h(e)=v}\bigr),}
+and write #{D_H} for #{D} acting separately on each fiber. Each
+self-loop contributes twice to this sum. The quadratic form in the
+connection background expands as
 #{\langle f,Q_Uf\rangle=\sum_v D_v\|f_v\|^2-\sum_e 2w_e\operatorname{Re}\langle f(h(e)),U_ef(s(e))\rangle}.
-The associated self-adjoint operator is #{Q_U=D_H-H_U}, where the only
-nonzero blocks of #{H_U} are #{w_eU_e} and #{w_eU_e^*}. Let
+Let #{i_v:F\to F^V} and #{p_v:F^V\to F} be the canonical inclusion
+and evaluation at #{v}. The associated self-adjoint operator is
+#{Q_U=D_H-H_U}, where
+##{H_U=\sum_e w_e\bigl(i_{h(e)}U_ep_{s(e)}
+                    +i_{s(e)}U_e^*p_{h(e)}\bigr).}
+Thus a self-loop contributes #{w_e(U_e+U_e^*)} on its vertex fiber;
+parallel edges retain separate summands. Let
 #{K_U=D_H^{-1/2}H_UD_H^{-1/2}}. Then
 #{Q_U=D_H^{1/2}(I-K_U)D_H^{1/2}}, so
 #{\det Q_U=(\det D)^n\det(I-K_U)}. The identity connection has
 #{Q_I=Q_1\otimes I_F}, hence #{(\det Q_1)^n=\det Q_I}. It is enough to
 compare #{I-K_U} with #{I-K_I}.}
 
-\p{The scalar adjacency #{A} has the same off-diagonal weights. Its
+\p{The scalar adjacency #{A} is the same sum of directed steps with
+each transport replaced by the scalar identity. In particular, a loop
+contributes #{2w_e} to the value at its vertex. Its
 normalized operator #{K_1=D^{-1/2}AD^{-1/2}} is self-adjoint, and
 #{K_I=K_1\otimes I_F}. The similar operator #{D^{-1}A} has row sums
-#{\bigl(\sum_{e\ni v}w_e\bigr)/D_v<1}, because #{m>0}. The maximum
+#{(D_v-m^2)/D_v<1}, because #{m>0}. Here the row-sum calculation uses
+the canonical delta basis of scalar functions on the finite vertex set.
+The maximum
 absolute row sum is strictly less than #{1}, so the spectral radius
 of #{D^{-1}A} is strictly less than #{1}. Since
 #{K_1=D^{1/2}(D^{-1}A)D^{-1/2}}, the operator #{K_1} has the same
 spectral radius. Self-adjointness gives #{\|K_1\|=\rho(K_1)<1}.}
 
 \p{The same comparison bounds the connection. For a section #{f}, set
-#{y_v=\|f_v\|}. Each fiber of #{H_U} has operator norm #{w_e}, so
+#{y_v=\|f_v\|}. Bound each directed edge contribution separately by
+unitarity, then apply the triangle inequality at each vertex. This gives
 #{\|(H_Uf)_v\|\le(Ay)_v}. Conjugating by #{D^{1/2}} yields
 #{\|(K_Uf)_v\|\le(K_1y)_v}. Therefore
 #{\|K_Uf\|\le\|K_1y\|\le\|K_1\|\|f\|}, and #{\|K_U\|<1}. The eigenvalues
@@ -51,12 +66,15 @@ of the self-adjoint operator #{K_U} are real and lie in the open interval
 #{\log(1-\lambda)=-\sum_{k\ge 1}\lambda^k/k}. Summing over eigenvalues
 gives
 #{\log\det(I-K_U)=-\sum_{k\ge 1}\frac1k\operatorname{tr}(K_U^k)}.
-Expanding the trace in walks, a closed walk #{\gamma} of length #{k}
+Expanding the trace using the labeled directed-edge summands, a
+closed walk #{\gamma} of length #{k}
 contributes its positive weight
 #{w(\gamma)=\prod_{e\in\gamma}\frac{w_e}{\sqrt{D_{s(e)}D_{h(e)}}}} times the
 trace of its holonomy. The holonomy is the ordered product of the fiber
 maps, with the first edge on the right, because parallel transport along
-#{e} sends #{f(s(e))} to #{U_ef(s(e))}. A unitary or orthogonal map has
+#{e} sends #{f(s(e))} to #{U_ef(s(e))}. Both orientations of a
+self-loop occur as length-one steps, even when they have the same
+endpoints; parallel edge labels likewise remain distinct. A unitary or orthogonal map has
 eigenvalues on the circle, so the real part of its trace is at most #{n},
 with equality exactly when the map is the identity. The trace
 #{\operatorname{tr}(K_U^k)} is real and equals the sum of those real
