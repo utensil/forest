@@ -3,40 +3,40 @@
 \tag{fdip}
 \taxon{Theorem}
 \title{The fixed-point algebra is the averaged image}
-\date{2026-11-02}
+\date{2026-11-10}
 
-\p{Let #{K} be #{\mathbb R} or #{\mathbb C}, and let #{A} be a unital
-associative #{K}-algebra. A \newvocab{symmetry} of a linear
-functional #{\omega} on #{A} is a unital #{K}-algebra automorphism
+\p{Let #{k} be a commutative ring and let #{A} be a unital
+associative #{k}-algebra. A \newvocab{symmetry} of a linear
+functional #{\omega} on #{A} is a unital #{k}-algebra automorphism
 #{\alpha} with #{\omega(\alpha(a))=\omega(a)} for every #{a}. Let
 #{G} be a finite group, and let #{g\mapsto\alpha_g} be a
-homomorphism from #{G} into the unital #{K}-algebra automorphisms
+homomorphism from #{G} into the unital #{k}-algebra automorphisms
 of #{A}, so that #{\alpha_{hg}=\alpha_h\circ\alpha_g}. The order
-#{|G|} is invertible in #{K}. Define
+#{|G|} is a unit in #{k}. Define
 ##{E(a)=\frac1{|G|}\sum_{g\in G}\alpha_g(a).}
 Write #{A^G} for the fixed-point algebra, the elements fixed by
 every #{\alpha_g}. Then #{E} is linear, #{E(1)=1}, the image of
 #{E} is #{A^G}, and
 #{E(b_1ab_2)=b_1E(a)b_2} whenever #{b_1} and #{b_2} are fixed.
-If every #{\alpha_g} preserves #{\omega}, then
-#{\omega(E(a))=\omega(a)}. These are the identities of a
+Thus #{E} is a \vocabk{normalized conditional functional}{fdip-00KV}
+onto #{A^G}. If every #{\alpha_g} preserves #{\omega}, then
+#{\omega(E(a))=\omega(a)}, and #{E} is a
 [conditional expectation](fdip-008U) of #{\omega} onto #{A^G}.
 If every #{\alpha_g} preserves an involution of #{A}, then
-#{E(a^*)=E(a)^*}.}
+#{E(a^*)=E(a)^*}. For a subgroup #{H\subseteq G}, the average
+#{P_H} formed with #{H} in place of #{G} satisfies
+##{P_G\circ P_H=P_G.}}
 
 \p{When the automorphisms are conjugations
 #{\alpha_g(R)=\rho(g)R\rho(g)^{-1}} by a representation
 #{\rho} on a finite-dimensional space, the fixed-point algebra
-is the commutant of #{\rho(G)}. On the half-turn of
-\ref{fdip-003T}, with #{P=\operatorname{diag}(I_2,-I_2)}
-and #{R} written in those blocks as
-#{\begin{pmatrix}A&B\\C&D\end{pmatrix}}, the average is the
-block-diagonal operator
-##{E(R)=\begin{pmatrix}A&0\\0&D\end{pmatrix}.}
-That note identifies this commutant with
-#{M_2(\mathbb R)\times M_2(\mathbb R)} and records that the
-image of the group algebra is the smaller algebra of scalar
-blocks.}
+is the commutant of #{\rho(G)}. For the real half-turn, let
+#{P} be its operator and let #{E_\pm=2^{-1}(I\pm P)} be the
+represented projectors of the [half-turn](fdip-000L). The
+average of conjugation by #{P} is
+##{E(R)=E_+RE_++E_-RE_-.}
+The sector matrix of this operator is the calculation of
+\ref{fdip-00L3}.}
 
 \p{The neutral [Gauss constraint](fdip-008A) for a finite gauge
 group asks for the link functions fixed by every group element,
@@ -49,7 +49,7 @@ orthogonal action remain the commutant description of
 \ref{fdip-004Z}.}
 
 \proof{
-\p{Each #{\alpha_g} is #{K}-linear, so #{E} is linear. A unital
+\p{Each #{\alpha_g} is #{k}-linear, so #{E} is linear. A unital
 automorphism fixes #{1}, and therefore #{E(1)=1}.}
 
 \p{For #{h\in G},
@@ -75,23 +75,29 @@ gives #{\omega(E(a))=\omega(a)}. If every automorphism preserves
 an involution, #{\alpha_g(a^*)=\alpha_g(a)^*}, and the same
 average gives #{E(a^*)=E(a)^*}.}
 
+\p{For #{H\subseteq G} and #{h\in H}, right multiplication by #{h}
+permutes #{G}. Therefore
+##{P_GP_H(a)
+=\frac1{|H|}\sum_{h\in H}\frac1{|G|}\sum_{g\in G}\alpha_{gh}(a)
+=P_G(a).}
+The reindexing uses the group law only.}
+
 \p{For a conjugation action, #{\alpha_h(E(R))=E(R)} is the
 statement that #{E(R)} commutes with every #{\rho(h)}. If #{R}
-already lies in the commutant, the preceding paragraph gives
-#{E(R)=R}. Thus the image is exactly the commutant.}
+already lies in the commutant, then #{E(R)=R}, because #{E} fixes
+every invariant element. Thus the image is exactly the commutant.}
 
-\p{In the half-turn coordinates the conjugation by
-#{P=\operatorname{diag}(I_2,-I_2)} sends
-#{\begin{pmatrix}A&B\\C&D\end{pmatrix}} to
-#{\begin{pmatrix}A&-B\\-C&D\end{pmatrix}}. The average of the
-two operators is the displayed block-diagonal matrix. The
-identification of that commutant, and the comparison with the
-group-algebra image, are the calculations of
-\ref{fdip-003T}.}
+\p{Since #{P^2=I}, the two conjugates are #{R} and #{PRP}, and
+##{E(R)=\frac12(R+PRP).}
+Expanding the projectors gives
+##{E_+RE_++E_-RE_-
+=\frac14\bigl((I+P)R(I+P)+(I-P)R(I-P)\bigr)
+=\frac12(R+PRP).}
+The two formulas agree.}
 }
 
-\p{Tomiyama's norm-one projection theorem has not been read, and
-no norm on #{A} is used. The argument gives the finite average
-only. It does not identify the sectors with the centre of the
+\p{No norm on #{A} is used, and the average is not asserted to be
+a norm-one projection. The argument gives the finite average
+only. It does not identify the sectors with the center of the
 commutant, and it does not replace the charged intertwiner
 description.}

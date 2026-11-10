@@ -3,15 +3,15 @@
 \tag{fdip}
 \taxon{Theorem}
 \title{Nested conditional expectations compose}
-\date{2026-11-02}
+\date{2026-11-10}
 
 \p{Let #{A} be a unital associative algebra and #{\omega} a linear
 functional on #{A}. Let #{B\subset A} be a unital subalgebra. A
 \newvocab{conditional expectation} of #{\omega} onto #{B} is a
-linear map #{E:A\to B} with #{E(1)=1},
-#{E(b_1ab_2)=b_1E(a)b_2} for #{b_1,b_2\in B}, and
-#{\omega(E(a))=\omega(a)}. When #{A} carries the involution of an
-[algebraic state](fdip-0024), #{\omega} is such a state, and
+\vocabk{normalized conditional functional}{fdip-00KV}
+#{E:A\to B} satisfying the further identity #{\omega(E(a))=\omega(a)}.
+When #{A} carries the involution of an
+\vocabk{algebraic state}{fdip-0024}, #{\omega} is such a state, and
 #{E(a^*)=E(a)^*}, the same identities give
 #{\omega(c^*E(a^*a)c)=\omega((ac)^*(ac))} for #{c\in B}. No norm
 on #{A} enters that identity.}
@@ -30,16 +30,10 @@ after eliminating #{U'}, and assume that #{Q_{U'U'}} and the block
 ##{E_R\circ E_{R'}=E_R.}
 On the four-cycle of the moment note, the conditional expectation of
 the displayed quartic lies in #{\mathbb Q[x_0,x_1]}, and the common
-value of the two Wick functionals is #{32/75}.}
-
-\p{Let #{K} be an invertible complex matrix, ordered as in the
-[Grassmann Schur formula](fdip-009J), with invertible eliminated
-block #{D} and Schur complement #{S}. Let #{F} be a polynomial in
-the retained paired generators. The normalized state
-##{\omega_K(F)=\frac{J_n(F e^{-\bar\psi K\psi})}{\det K}}
-restricts by
-##{\omega_K(F)=\omega_S(F).}
-Thus the retained state is the normalized Grassmann state of #{S}.}
+value of the two Wick functionals is #{32/75}. The residual
+evaluations are normalized conditional functionals of weight #{1},
+and the one-step evaluation equals their composite. This is the raw
+identity of \ref{fdip-00KX} with #{w=z=t=1}.}
 
 \proof{
 \p{The constant #{1} does not involve the residual indeterminates, and
@@ -106,27 +100,13 @@ one-step residual average uses only #{z_V}, with covariance
 #{(S')_{VV}^{-1}}. On #{A[x_{R'}]} that average is #{E_R}. The
 iterated average is therefore #{E_R(E_{R'}(f))}, and it equals
 #{E_R(f)}.}
-
-\p{For the Grassmann state, the exponential is a sum of even elements.
-An even element commutes with every homogeneous element, by the
-[Grassmann algebra](fdip-008F). The eliminated top word is even, so
-passing it through the retained polynomial #{F} contributes no sign.
-The [partial coefficient formula](fdip-009J) therefore gives
-##{J_U(F e^{-\bar\psi K\psi})
-=\det(D)\,F e^{-\bar\psi_R S\psi_R}.}
-Applying #{J_R} and dividing by #{\det K=\det(D)\det S} produces
-#{\omega_S(F)}. The scalar conventions of the empty blocks remain
-those of the partial formula.}
 }
 
 \p{The block factorization used above is the same matrix identity
 recorded for the moment theorem. TauCeti's
 \leanref/tauceti{Matrix.PosDef.gaussianCondCov} remains the real
 positive-definite covariance, not this tower over a ring. No Mathlib
-declaration was found for the Isserlis composition or for the
-normalized Grassmann restriction.}
+declaration was found for the Isserlis composition.}
 
-\p{\em{No norm-one projection theorem is proved here.} Tomiyama's
-paper of 1957 has not been read. The identities above do not use a
-norm on the algebra. They also do not identify the Grassmann state
-with a state on the configuration Clifford algebra.}
+\p{No norm on the algebra enters these identities, and they are not
+a norm-one projection.}
