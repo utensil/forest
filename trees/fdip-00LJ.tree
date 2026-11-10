@@ -1,0 +1,31 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Example}
+\title{Counting arrays for one weighted edge}
+\date{2026-11-10}
+
+\p{In the ordered vertex basis #{(e_0,e_1)} of \ref{fdip-004O},
+the incidence row of #{0\to1} is #{(-1,1)}, and
+##{\begin{aligned}
+L_w&=w\begin{pmatrix}1&-1\\-1&1\end{pmatrix},\\
+Q_w&=\begin{pmatrix}1+w&-w\\-w&1+w\end{pmatrix}.
+\end{aligned}}
+The vectors #{(1,1)} and #{(1,-1)} are eigenvectors, with
+precision eigenvalues #{1} and #{1+2w}. On counting-coordinate
+volume the normalized density is
+##{d\mu_w(f)=Z_w^{-1}\exp(-f^TQ_wf/2)\,df_0\,df_1.}}
+
+\proof{
+\p{The coboundary #{f(1)-f(0)} has matrix row #{(-1,1)}.
+Its adjoint for the counting pairing is the column
+#{(-1,1)^T}, so #{w\delta^*\delta} is the displayed multiple
+of that rank-one array. Adding the identity gives #{Q_w}.
+Direct multiplication gives
+##{Q_w\begin{pmatrix}1\\1\end{pmatrix}=\begin{pmatrix}1\\1\end{pmatrix},
+\qquad
+Q_w\begin{pmatrix}1\\-1\end{pmatrix}=(1+2w)\begin{pmatrix}1\\-1\end{pmatrix}.}
+The product of the eigenvalues is #{1+2w}, which is the
+determinant in this basis and the square of the factor in
+#{Z_w}.}
+}

@@ -11,7 +11,9 @@ for the representative of #{t\in\mathbb F_p} in #{\{0,\ldots,p-1\}}. For a
 symmetric #{n\times n} matrix #{Q} over #{\mathbb F_p}, define
 ##{Z_p(Q)=\sum_{x\in\mathbb F_p^n}e(x^TQx).}
 The exponent is the full quadratic form #{x^TQx}, not half of it. The sum
-is a complex number. It is not a probability.}
+is a complex number. It is not a probability. The bilinear radical
+#{\operatorname{rad}(Q)} is the set of vectors #{v} with #{x^TQv=0} for
+every #{x}. Since #{p} is odd, this radical is the kernel of #{Q}.}
 
 \p{Write #{\bigl(\frac{a}{p}\bigr)} for the Legendre symbol, and
 ##{g=\sum_{t\in\mathbb F_p}e(t^2).}
@@ -107,23 +109,29 @@ The exponent #{m} has the same parity as #{\frac{n(n-1)}{2}}. If
 When #{4} divides #{n}, the integer #{m} is even, and the sign is #{+1}.}
 }
 
-\p{Now suppose #{\det Q=0}, and let #{r} be the rank of #{Q}. The same
-diagonalization, which does not require a nonzero determinant, produces an
-invertible change of variables to
+\p{Now suppose #{\det Q=0}, and let #{r} be the rank of #{Q}. Then
+#{\dim\operatorname{rad}(Q)=n-r}. The same diagonalization, which does not
+require a nonzero determinant, produces an invertible change of variables to
 #{\operatorname{diag}(a_1,\ldots,a_r,0,\ldots,0)} with every #{a_i\neq 0}.
-In the new coordinates the last #{n-r} basis vectors span the kernel. Then
-##{Z_p(Q)=p^{n-r}Z_p(Q'),}
-where #{Q'=\operatorname{diag}(a_1,\ldots,a_r)}. If #{r=0}, the original
-form is zero and #{Z_p(Q)=p^n}. If #{r\ge 1}, the signed evaluation on
-#{Q'} gives
+In the new coordinates the last #{n-r} basis vectors span the radical, and
+#{Q'} represents the nondegenerate form induced on the quotient by that
+radical. Then
+##{Z_p(Q)=p^{\dim\operatorname{rad}(Q)}Z_p(Q')=p^{n-r}Z_p(Q'),}
+where #{Q'=\operatorname{diag}(a_1,\ldots,a_r)}. If #{r=0}, the radical is
+the whole domain, the original form is zero, and #{Z_p(Q)=p^n}. If
+#{r\ge 1}, the signed evaluation on the quotient form #{Q'} gives
 ##{Z_p(Q)=p^{n-r}\Bigl(\frac{d_{\pm}(Q')}{p}\Bigr)g^{\varepsilon'}p^{m'},}
-with #{r=2m'+\varepsilon'} and #{\varepsilon'} equal to #{0} or #{1}.}
+with #{r=2m'+\varepsilon'} and #{\varepsilon'} equal to #{0} or #{1}.
+Here #{d_{\pm}(Q)=0}. That zero discriminant belongs to the degenerate
+form; the identities below do not drop it.}
 \proof{
 \p{The diagonalization already proved for a form that is not identically
 zero splits off a line whenever some quadratic value is nonzero, and it
 stops when every remaining value is zero. On that diagonal matrix the
 equation #{Qv=0} reads #{a_iv_i=0} for each #{i\le r}, so those
-coefficients vanish and the zero block is the kernel. An invertible change
+coefficients vanish and the zero block is the kernel. Since #{p} is odd,
+that kernel is #{\operatorname{rad}(Q)}, and #{Q'} is the form on the
+quotient by the radical. An invertible change
 of variables preserves the partition
 function, by the same substitution used in the nondegenerate case. On the
 diagonal matrix the sum factors as a product of one-variable sums. Each
@@ -144,7 +152,10 @@ diagonal product: every one of the #{p^n} vectors contributes #{e(0)=1}.}
 complement #{S}, and write #{n_U} and #{n_R} for the two block sizes. Then
 #{Z_p(Q)=Z_p(Q_{UU})Z_p(S)}, and
 #{d_{\pm}(Q)=(-1)^{n_Un_R}d_{\pm}(Q_{UU})d_{\pm}(S)}.
-The sign is #{+1} when #{n_U} or #{n_R} is even.}
+The sign is #{+1} when #{n_U} or #{n_R} is even. Both identities use
+invertibility of #{Q_{UU}} only. They do not require #{\det Q\neq 0}.
+When the retained form is degenerate, #{d_{\pm}(S)=0} and therefore
+#{d_{\pm}(Q)=0}: the product includes that zero discriminant.}
 \proof{
 \p{Summing the elimination identity over the retained vectors multiplies
 the two partition functions. For the signed discriminants, the exponent

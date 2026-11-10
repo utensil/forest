@@ -5,40 +5,77 @@
 \title{Wick states over a ring}
 \date{2026-11-02}
 
-\p{Let #{A} be a commutative ring in which #{2} is a unit, and let #{Q} be a
-symmetric #{n\times n} matrix over #{A} with an inverse #{C=Q^{-1}} in
-#{M_n(A)}. Write #{A[x]=A[x_1,\ldots,x_n]}. The Wick functional #{\omega_Q}
-is the #{A}-linear map #{A[x]\to A} with #{\omega_Q(1)=1} determined by
-Isserlis' pairing rule. On a product of an odd number of factors the value
-is #{0}. On a product of #{2m} factors, not necessarily distinct, sum over
-the pairings of those #{2m} factor positions the product of the #{m} entries
-of #{C} on the paired positions. There are #{(2m-1)!!} such pairings, so
-#{\omega_Q(x_i^4)=3C_{ii}^2}. The value depends only on those entries. It
-uses no order on #{A} and no measure on #{A^n}.
-The same pairing rule is the one applied to centered real Gaussians in the
+\p{Let #{A} be a commutative ring in which #{2} is a unit, and let #{M}
+be a finite free #{A}-module with a direct-sum decomposition into finite
+free summands #{M=M_R\oplus M_U}. Let #{b} be a symmetric #{A}-bilinear
+form on #{M} whose form map
+##{b^\sharp:M\to M^*,\qquad b^\sharp(v)(w)=b(v,w)}
+is an isomorphism. Write #{i_R} and #{i_U} for the inclusions of the
+summands. Compression to a summand is that inclusion, followed by
+#{b^\sharp}, followed by dual restriction. The eliminated compression
+##{c_U=i_U^*\circ b^\sharp\circ i_U:M_U\to M_U^*}
+is an isomorphism. The module and both summands stay finite free. The
+argument asks for no field structure, no positive form, no measure, and
+no faithful pairing on the polynomial algebra, and it is not stated for
+a general projective module.}
+
+\p{The polynomial algebra is #{\operatorname{Sym}_A(M^*)}. Its linear
+generators are covectors. The covariance pairing on those generators is
+##{c(\lambda,\mu)=\lambda\bigl((b^\sharp)^{-1}\mu\bigr).}
+The Wick functional #{\omega_b} is the #{A}-linear map
+#{\operatorname{Sym}_A(M^*)\to A} with #{\omega_b(1)=1} determined by
+Isserlis' pairing rule for #{c}. On a product of an odd number of linear
+generators the value is #{0}. On a product of #{2m} linear generators,
+not necessarily distinct, sum over the pairings of those #{2m} positions
+the product of the #{m} values of #{c}. There are #{(2m-1)!!} such
+pairings. The value depends only on #{c}. The same pairing rule is the
+one applied to centered real Gaussians in the
 [quartic elimination](fdip-0046), which cites
 \citet{v2, Theorem 3.1 and Example 3.2, p. 29}{etingof2024mathematical}
-for these contractions. Here the rule is the definition of #{\omega_Q}.}
+for these contractions. Here the rule is the definition of #{\omega_b}.}
 
-\p{Order the coordinates as a retained set #{R} and an eliminated set #{U},
-and assume that the block #{Q_{UU}} is invertible over #{A}. Define
+\p{Let #{\beta=i_U^*\circ b^\sharp\circ i_R:M_R\to M_U^*}, and let
+#{L:M_R\to M_U} be the regression defined by #{c_U\circ L=\beta}. Put
+#{B=-L}. For #{x\in M_R} and #{u\in M_U}, put #{z=u-B(x)}. On
+#{v=i_R(x)+i_U(u)}, the quadratic form #{v\mapsto b(v,v)} splits as an
+eliminated form in #{z} plus a retained form #{s} on #{M_R}. Write
+#{s^\sharp:M_R\to M_R^*} for the form map of #{s}. Then
+#{s^\sharp} is an isomorphism, and the covariance of the retained
+generators is #{(s^\sharp)^{-1}}. Restriction of #{\omega_b} to
+#{\operatorname{Sym}_A(M_R^*)} is the Wick functional #{\omega_s} of
+#{s^\sharp}. Applying the eliminated Wick functional in the residual
+covectors, with retained covectors as coefficients, produces a polynomial
+#{E[f\mid M_R]}, and
+##{\omega_b(f)=\omega_s(E[f\mid M_R]).}
+The moment proof does not integrate the quadratic completion.}
+
+\p{The proof uses a basis of #{M} adapted to #{M_R\oplus M_U}. Let #{Q}
+be the Gram matrix of #{b} in that basis, with inverse #{C=Q^{-1}} in
+#{M_n(A)}, and write #{A[x]=A[x_1,\ldots,x_n]} for the resulting
+presentation of #{\operatorname{Sym}_A(M^*)}. The coordinate functions
+are the dual basis, #{c(x_i,x_j)=C_{ij}}, and #{\omega_Q} denotes
+#{\omega_b} in these coordinates, so #{\omega_Q(x_i^4)=3C_{ii}^2}.
+Order the coordinates as the retained set #{R} and the eliminated set
+#{U}. The block #{Q_{UU}} is the matrix of #{c_U}, hence invertible
+over #{A}. Define
 ##{\begin{aligned}
 L&=Q_{UU}^{-1}Q_{UR},\\
 B&=-L,\\
 S&=Q_{RR}-Q_{RU}L.
 \end{aligned}}
-Symmetry of #{Q} makes #{S} symmetric. For #{f\in A[x]}, substitute
-#{x_U=Bx_R+z} and apply the Wick functional of covariance #{Q_{UU}^{-1}} in
-the indeterminates #{z}, treating the retained variables as coefficients.
-Call the result #{E[f\mid x_R]\in A[x_R]}.}
-
-\p{The block #{S} is invertible, and #{C_{RR}=S^{-1}}. Restriction of
+Symmetry of #{Q} makes #{S} symmetric, and #{S} is the Gram matrix of
+#{s^\sharp}. For #{f\in A[x]}, substitute #{x_U=Bx_R+z} and apply the
+Wick functional of covariance #{Q_{UU}^{-1}} in the indeterminates #{z},
+treating the retained variables as coefficients. Call the result
+#{E[f\mid x_R]\in A[x_R]}; this is #{E[f\mid M_R]} in the chosen basis.
+The block #{S} is invertible, and #{C_{RR}=S^{-1}}. Restriction of
 #{\omega_Q} to #{A[x_R]} is the Wick functional #{\omega_S}. Furthermore
 #{E[f\mid x_R]} is a polynomial and
 ##{\omega_Q(f)=\omega_S(E[f\mid x_R]).}
 The identity #{2^{-1}x^TQx=2^{-1}z^TQ_{UU}z+2^{-1}x_R^TSx_R}, with
-#{z=x_U-Bx_R}, is the quadratic completion that names these blocks. The
-moment proof does not integrate that quadratic.}
+#{z=x_U-Bx_R}, is the quadratic completion in this basis. The moment
+proof does not integrate that quadratic. These coordinate identities are
+the module identities above.}
 
 \proof{
 \p{Factor the symmetric matrix in retained and eliminated blocks as

@@ -1,0 +1,29 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Example}
+\title{Primitive reduction restores the value at two}
+\date{2026-11-10}
+
+\p{At #{t=1}, the [cycle elimination](fdip-000W) has
+#{\det Q=45}, #{\det S=5} and #{C=3I_2}. The three signed
+square classes are #{[5]}, #{[-5]} and #{[-1]}, with fundamental
+discriminants #{5}, #{-20} and #{-4}. The Galois product is
+#{\chi_5}, but
+##{\chi_{-20}(2)\chi_{-4}(2)=0,\qquad\chi_5(2)=-1.}
+On integers coprime to #{20} the product agrees with #{\chi_5}.
+Passing to its primitive representative restores the prime-two
+value.}
+
+\proof{
+\p{The value #{\chi_5(2)=-1} follows from
+#{\chi_D(2)=(-1)^{(D^2-1)/8}} for odd fundamental #{D},
+as in Brian Conrad's \citet{Corollary 3.1, p. 4}{conradQuadraticCharacters}.
+The factors #{\chi_{-20}} and #{\chi_{-4}} both have conductor
+divisible by #{2}, so each zero-extends by zero at that prime.
+Mathlib's \leanref{DirichletCharacter.primitiveCharacter}
+and \leanref{DirichletCharacter.primitiveCharacter_apply_of_isCoprime}
+separate primitive reduction from evaluation: agreement is
+asserted at integers coprime to the original level, which does
+not include the prime two.}
+}
