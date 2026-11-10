@@ -3,16 +3,39 @@
 \tag{fdip}
 \taxon{Proposition}
 \title{Projected Gaussian laws and the massless limit}
-\date{2026-10-29}
+\date{2026-11-10}
 
-\p{For the [kernel decomposition](fdip-0031), let #{\nu_m} be the
-projection onto #{H} of the law with precision #{L+m^2I}, #{m>0}.
-Then #{\nu_m} converges to the [constrained law](fdip-000C) #{\nu_H}
-in total variation, meaning
+\p{Use the \vocabk{kernel decomposition}{fdip-0031} of a
+self-adjoint positive semidefinite #{L:E\to E} on a finite real
+inner-product space #{(E,h)}. Let #{\nu_m} be the projection onto
+#{H} of the law with precision #{Q_m=L+m^2I},
+#{m>0}. Then #{\nu_m} converges to the constrained law
+#{\nu_H} of \ref{fdip-000C} in total variation, meaning
 #{\sup_{A\text{ Borel}}|\nu_m(A)-\nu_H(A)|\to0}.
 For every fixed polynomial #{P} on #{H}, its expectations converge too.}
+
+\p{For a fixed source #{j\in E} and #{\ell_j(x)=h(j,x)},
+the variance satisfies
+##{\begin{aligned}
+\operatorname{Var}_{Q_m}(\ell_j)
+ &=m^{-2}\|P_Kj\|^2\\
+ &\quad+h_H\bigl(p_Hj,(L_H+m^2I_H)^{-1}p_Hj\bigr).
+\end{aligned}}
+Here #{p_H:E\to H} is the orthogonal projection with codomain #{H},
+#{h_H} is its induced pairing, and #{P_H=ip_H:E\to E}.
+The variance has a finite limit if and only if #{P_Kj=0},
+equivalently #{j\in H}; in that case its limit is #{h(j,L^+j)}.}
+
+\p{When #{L} is the \vocabk{weighted graph Laplacian}{fdip-0007}
+of a connected nonempty graph with positive edge weights, put
+#{n=|V|}. The source #{u_0=\mathbf1_V/\sqrt n} has variance
+#{m^{-2}}. Its contribution to every Green-kernel entry is
+#{1/(nm^2)}, and #{G_m(v,v)\geq 1/(nm^2)}. The variance of a field
+difference converges to the constrained variance. On a disconnected
+graph this holds for vertices in the same component; a difference
+between components has a nonzero kernel projection.}
 \proof{
-\p{By [kernel factorization](fdip-0033), the densities on #{H} are
+\p{By \ref{fdip-0033}, the densities on #{H} are
 #{f_m=w_m/Z_{H,m}}, where
 ##{\begin{aligned}
 w_m(x)&=e^{-h(x,(L_H+m^2I_H)x)/2},\\
@@ -26,34 +49,49 @@ For sufficiently small #{m}, #{Z_{H,m}\geq Z_H/2}; hence
 Another application gives #{\int_H|f_m-f_0|\to0}. For each Borel #{A},
 #{|\nu_m(A)-\nu_H(A)|\leq\int_H|f_m-f_0|}, proving the uniform claim.
 For a fixed polynomial, the dominating function
-#{3|P|w_0/Z_H} is integrable by [finite polynomial moments](fdip-002W),
+#{3|P|w_0/Z_H} is integrable by \ref{fdip-002W},
 so #{\int P f_m\to\int P f_0}. Each use of dominated convergence
 applies along every positive sequence #{m_j\to0}; the sequential
 criterion gives the real-parameter limits as #{m\downarrow0}.
 When #{H=0}, these laws are all the same point mass.}
-}
-\p{For a fixed source #{j\in E} and #{\ell_j(x)=h(j,x)}, the
-[inverse-covariance formula](fdip-000B) and the kernel split give
+\p{The inverse-covariance formula \ref{fdip-000B} and the
+compressed inverse in \ref{fdip-0033} give the displayed variance.
+To recover its spectral expression, choose an orthonormal eigenbasis
+#{u_a} of #{L}, with corresponding eigenvalues #{\lambda_a\ge0}.
+For #{\lambda_a>0}, let #{\widetilde u_a\in H} denote the vector
+with #{i\widetilde u_a=u_a}. These vectors form an orthonormal
+eigenbasis of #{L_H}. Orthogonal projection gives
+##{h_H(p_Hj,\widetilde u_a)=h(j,i\widetilde u_a)=h(j,u_a).}
+The inverse of #{L_H+m^2I_H} acts on #{\widetilde u_a} by
+#{(\lambda_a+m^2)^{-1}}. Expanding #{p_Hj} therefore gives
 ##{\begin{aligned}
-\operatorname{Var}_{Q_m}(\ell_j)
- &=m^{-2}\|P_Kj\|^2\\
- &\quad+\sum_{\lambda_a>0}
+&h_H\bigl(p_Hj,(L_H+m^2I_H)^{-1}p_Hj\bigr)\\
+&\qquad=\sum_{\lambda_a>0}
        \frac{h(j,u_a)^2}{\lambda_a+m^2}.
 \end{aligned}}
-Every term is nonnegative. The finite sum converges; the first term
-is finite in the limit precisely when #{P_Kj=0}. Thus the variance
-has a finite limit if and only if #{j\in H}, in which case it is
-#{h(j,L^+j)}.}
-\p{For a connected nonempty graph with positive edge weights, put #{n=|V|}.
-The source #{u_0=\mathbf1_V/\sqrt n} has
-variance #{m^{-2}} as a source. Its contribution to every Green-kernel
-entry is #{1/(nm^2)}, and #{G_m(v,v)\geq 1/(nm^2)}. A field difference
-has source #{\delta_v-\delta_w\in H}, so its variance converges to the
-constrained variance. On a disconnected graph this holds for vertices
-in the same component; a difference between components has a nonzero
-kernel projection. These observable limits do not supply a normalized
-full-space massless density.}
-\p{The analytic ingredient is
+Every term is nonnegative. The sum converges
+as #{m\downarrow0}; the kernel term has a finite limit precisely
+when #{P_Kj=0}. In that case the sum tends to #{h(j,L^+j)} by
+\ref{fdip-0032}. If #{H=0}, the sum and compressed term are both zero.}
+\p{For the connected nonempty graph, #{K} is spanned by the unit
+constant vector #{u_0}. Its precision eigenvalue is #{m^2}, so its
+source variance is #{m^{-2}}. The projection onto this direction
+has kernel entries #{1/n}; multiplying by #{m^{-2}} gives the
+constant contribution #{1/(nm^2)}. The other spectral contributions
+to a diagonal entry are nonnegative, proving the diagonal bound.
+The source of a field difference is #{\delta_v-\delta_w}.
+It lies in #{H} when the vertices are in the same component, so the
+variance criterion gives its constrained limit. For different
+components its sum on either of those components is nonzero,
+so its projection onto the component-constant kernel is nonzero.}
+}
+\p{These observable limits do not supply a normalized full-space
+massless density; the constrained law in \ref{fdip-000C} uses its
+own induced volume. The analytic ingredient is
 \citet{Theorem 1.4.49, pp. 111-112, preliminary version}{tao2011measure}.
-The three dominators above verify its hypotheses for these Gaussian
-laws and their fixed polynomial observables.}
+The three dominators in the proof verify its hypotheses for these
+Gaussian laws and their fixed polynomial observables.
+Mathlib's \leanref{MeasureTheory.tendsto_integral_of_dominated_convergence}
+supports each sequential integral limit under the stated measurability,
+integrable-majorant and almost-everywhere convergence hypotheses;
+the density and variance identifications are proved here.}

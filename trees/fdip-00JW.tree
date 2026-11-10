@@ -1,0 +1,52 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Example}
+\title{Counting and spectral arrays of a Green operator}
+\date{2026-11-10}
+
+\p{For the [massive precision](fdip-000A) #{Q_m=L+m^2I},
+put #{n=|V|} and choose an ordering, a bijection
+#{b:\{1,\ldots,n\}\to V}, of the vertices.
+The counting chart #{C:X_V\to\mathbb R^n} from \ref{fdip-002J}
+sends #{\delta_{b(i)}} to the standard orthonormal vector #{e_i}.
+Write
+##{A=CQ_mC^{-1},\qquad B=CG_mC^{-1}.}
+By \ref{fdip-00JX}, #{Q_m} is a positive precision parameter.
+The counting-array calculation in \ref{fdip-002O} therefore makes
+#{A} a positive symmetric matrix. The entries of #{B} are
+#{B_{ij}=G_m(b(i),b(j))}, by applying #{B} to #{e_j} and
+evaluating at #{i}. Thus the Green-kernel evaluations give precisely
+the entries in this declared counting basis.}
+
+\p{By the real spectral theorem \ref{fdip-002R}, choose an
+orthonormal eigenbasis #{u_a} of #{L}, with eigenvalues
+#{\lambda_a\ge0}. The energy identity in \ref{fdip-0008} proves
+this inequality by evaluation on each unit eigenvector.
+Put #{q_a=\lambda_a+m^2>0} and #{v_a=Cu_a}. In the chosen chart,
+##{\begin{aligned}
+A&=\sum_a q_a v_av_a^T,\\
+B&=\sum_a q_a^{-1}v_av_a^T.
+\end{aligned}}
+Applying #{Q_m} to #{u_a} gives #{Q_mu_a=q_au_a}, hence
+#{Av_a=q_av_a}. Since #{v_a^Tv_b=\delta_{ab}} and
+#{\sum_a v_av_a^T=I}, multiplication shows that the second sum
+is a two-sided inverse of the first, hence equals #{B}.
+Also #{B^T=B}, and for every nonzero coordinate vector #{z},
+##{z^TBz=\sum_a q_a^{-1}(v_a^Tz)^2>0.}
+At least one coefficient is nonzero because the #{v_a} form a basis.
+These are the usual formulas written as #{Q_m=\sum_a q_au_au_a^T}
+and #{G_m=\sum_a q_a^{-1}u_au_a^T} when an operator and each
+eigenvector are identified with their arrays in this same chart.
+For #{V=\varnothing}, the sums and arrays are empty and the unique
+zero-dimensional endomorphism is its identity and inverse.}
+
+\p{The spectral calculation uses
+\citet{Section A.5.2, pp. 646-647}{boyd2004convex}; the graph
+energy supplies nonnegative eigenvalues, and #{m>0} makes the
+shifted eigenvalues positive. Mathlib's \leanref{Matrix.PosDef.isUnit}
+proves invertibility of a positive definite matrix, and
+\leanref{Matrix.PosDef.inv} proves positivity of its inverse.
+They apply to #{A} after the graph-energy calculation supplies
+positivity in the declared counting chart. The kernel convention
+and its graph interpretation are specified by the [Green kernel](fdip-000A).}

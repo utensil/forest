@@ -3,9 +3,9 @@
 \tag{fdip}
 \taxon{Proposition}
 \title{The Laplacian Moore-Penrose inverse}
-\date{2026-10-29}
+\date{2026-11-10}
 
-\p{With the [kernel decomposition](fdip-0031), define the
+\p{With the \vocabk{kernel decomposition}{fdip-0031}, define the
 \newvocab{Laplacian pseudoinverse} by
 ##{L^+=iL_H^{-1}p_H.}
 This is the unique endomorphism #{A} satisfying the 4
@@ -14,17 +14,26 @@ This is the unique endomorphism #{A} satisfying the 4
 LAL&=L,& ALA&=A,\\
 (LA)^\dagger&=LA,&(AL)^\dagger&=AL.
 \end{aligned}}
-It vanishes on #{K}, is the inverse of #{L_H} on #{H}, and has spectral
-expression #{L^+=\sum_{\lambda_a>0}\lambda_a^{-1}P_{u_a}}, where
-#{P_u x=h(u,x)u} for a unit eigenvector.}
+It vanishes on #{K} and is the inverse of #{L_H} on #{H}.
+For any orthonormal eigenbasis #{u_a} of #{L} with corresponding
+eigenvalues #{\lambda_a\ge0}, its spectral expression is
+##{L^+=\sum_{\lambda_a>0}\lambda_a^{-1}P_{u_a},
+\qquad P_u x=h(u,x)u.}
+Here #{P_u} is the rank-one orthogonal projection for the unit
+eigenvector #{u}.}
 \proof{
 \p{On the orthogonal decomposition #{K\mathbin\perp H}, the operators
 #{L,L^+} have blocks #{(0,L_H)} and #{(0,L_H^{-1})}. Hence
 ##{LL^+=L^+L=P_H.}
 The inverse on #{H} is self-adjoint by the
-[inverse-response lemma](fdip-001Q). Thus #{L^+} is self-adjoint, both
+inverse-response lemma \ref{fdip-001Q}. Thus #{L^+} is self-adjoint, both
 products are self-adjoint, and multiplication once more gives
 #{LL^+L=L} and #{L^+LL^+=L^+}.}
+\p{For the stated eigenbasis, the summands act by zero on the
+zero-eigenvalue vectors and by #{\lambda_a^{-1}} on each positive
+eigenvector. These are exactly the restrictions of #{iL_H^{-1}p_H}
+to #{K} and #{H}, proving the spectral expression. An empty positive
+eigenfamily gives the zero map.}
 \p{Suppose #{A} satisfies the 4 identities. Then #{LA} is
 self-adjoint and idempotent, since #{LALA=LA}. Its range lies in
 #{\operatorname{ran}L=H}, and #{LAL=L} shows it acts as the identity
