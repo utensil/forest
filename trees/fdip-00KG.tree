@@ -1,1 +1,27 @@
-\date{2026-11-10T08:28:00Z}
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Remark}
+\title{Trace in declared bases}
+\date{2026-11-10}
+
+\p{Choose bases #{(m_i)_{i\in I}} of #{M} and
+#{(n_j)_{j\in J}} of #{N}, with coefficient isomorphisms
+#{C_M:M\to k^I} and #{C_N:N\to k^J}. If
+#{A=C_MTC_M^{-1}}, its coefficient #{A_{ii}} is
+#{\ell_i(Tm_i)}, so the [intrinsic trace](fdip-003G) is
+#{\sum_i A_{ii}}. For the arrays
+#{F=C_NfC_M^{-1}} and #{G=C_MgC_N^{-1}},
+\ref{fdip-00KF} reads
+##{\operatorname{tr}(GF)=\operatorname{tr}(FG),\qquad
+\operatorname{tr}(cA)=c\operatorname{tr}(A).}
+The two products may have different sizes. Mathlib's
+\leanref{Matrix.trace_mul_comm} and \leanref{Matrix.trace_smul}
+express these coordinate identities. A trace pairing is not an
+assumption; no totalized trace on arbitrary modules or extension to
+finite projective modules is asserted here.}
+
+\p{This is the basis realization of the finite-free calculation
+associated with \citet{Exercise 22.6}{stacks2017stacks},
+[Tag 02DU](https://stacks.math.columbia.edu/tag/02DU). The
+[trace ratio](fdip-003H) additionally requires a unit denominator.}

@@ -6,7 +6,7 @@
 \date{2026-10-17}
 
 \p{Let #{M,M'} be finite-dimensional real positive inner-product
-spaces with their [induced Borel Euclidean volumes](fdip-002H)
+spaces with their [induced Euclidean volumes](fdip-002M)
 #{\lambda,\lambda'}.
 Let #{Q:M\to M} be positive and self-adjoint, and let
 #{P:M\to M'} be a linear isometry equivalence. Put #{Q'=PQP^{-1}}.
@@ -31,8 +31,12 @@ In particular, the target observable transported from #{F} is
 \p{The [adjoint identity](fdip-003D) gives #{P^\dagger=P^{-1}},
 so #{Q'} is self-adjoint. For #{z'=Px\ne0},
 #{b_{M'}(z',Q'z')=b_M(x,Qx)>0}; this also proves equality of
-Gaussian actions at #{Px} and #{x}. The
-[isometry-volume theorem](fdip-002L) gives #{P_*\lambda=\lambda'}.
+Gaussian actions at #{Px} and #{x}. Choose orthonormal charts #{C:M\to\mathbb R^n} and
+#{C':M'\to\mathbb R^n}. Their volume identities are the
+[induced-volume convention](fdip-002M). Identify the chart targets
+with counting spaces. The coordinate isometry #{C'PC^{-1}} preserves
+those counting products, hence preserves Lebesgue measure by
+\ref{fdip-002L}, and therefore #{P_*\lambda=\lambda'}.
 Consequently, for every nonnegative Borel #{h'},
 ##{\begin{aligned}
 &\int h'(z')e^{-\mathcal A_{Q'}(z')}\,d\lambda'(z')\\
@@ -61,9 +65,11 @@ relative to the specified pairings,
 #{\operatorname{Cov}_Q(b_M(u,-),b_M(v,-))=b_M(u,Q^{-1}v)}.
 Since #{b_{M'}(u',Px)=b_M(P^{-1}u',x)}, this yields
 ##{G'=PGP^{-1},\qquad G=Q^{-1}.}
-In orthonormal coordinates this is #{G'=PGP^T}; an arbitrary linear
-coordinate map gives covariance congruence instead, as in
-\ref{fdip-003M}. Equality of second moments was not used to infer the
+In the two chosen charts, write #{A=C'PC^{-1}},
+#{\Sigma=CGC^{-1}} and #{\Sigma'=C'G'(C')^{-1}}. Then
+#{\Sigma'=A\Sigma A^T}, which is the formula #{G'=PGP^T} when those
+symbols denote the arrays. An arbitrary linear coordinate map gives
+covariance congruence instead, as in \ref{fdip-003M}. Equality of second moments was not used to infer the
 pushforward law.}
 }
 
@@ -160,7 +166,8 @@ supplies volume preservation for finite-dimensional real linear
 isometry equivalences. TauCeti's
 \leanref/tauceti{TauCeti.Probability.map_affine_multivariateGaussian}
 supplies covariance-parameter transport. Set mean and shift to zero,
-linear map to #{P}, and covariance to #{Q^{-1}}; the
+linear map to #{C'PC^{-1}}, and covariance to #{CQ^{-1}C^{-1}}
+in the orthonormal charts chosen in the proof; the
 [precision-density identification](fdip-000B) and the proved inverse
 identity align it with this law. These interfaces do not supply the
 endpoint data, declared partition or its counterexample.}

@@ -1,1 +1,40 @@
-\date{2026-11-10T08:27:38Z}
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Remark}
+\title{Counting-basis realizations of background transport}
+\date{2026-11-10}
+
+\p{Choose orderings of #{V,E,V',E'} and use the coefficient maps
+#{C_Vf=(f(v_i))_i}, #{C_Ea=(a(e_j))_j}, and their primed versions.
+These send the indicator bases to the standard bases. Write
+#{D=C_EdC_V^{-1}}, #{P=C_{V'}P_{\mathrm{op}}C_V^{-1}} and
+#{J=C_{E'}J_{\mathrm{op}}C_E^{-1}}, and use #{W,L,Q} for the
+corresponding endomorphism arrays. The intrinsic identities of
+\ref{fdip-003D} and \ref{fdip-00KC} become
+##{L=D^TWD,\qquad P^{-1}=P^T,\qquad J^{-1}=J^T,
+\qquad D'=JDP^T,\qquad W'=JWJ^T.}
+The array of the split component #{B:Y\to X} is distinct from the
+incidence array #{D}. Mathlib's \leanref{Matrix.reindexLinearEquiv}
+and \leanref{Matrix.reindexRingEquiv} support these coordinate
+reindexings; they supply neither endpoint data nor perfect pairings
+on arbitrary modules.}
+
+\p{Two broader comparisons retain less data. The
+[positive-scaling Laplacian relation](fdip-003H) forgets mass, state
+and partition and compares nonzero Laplacians by #{L'=cPLP^{-1}}
+with #{c>0} and a vertex permutation. The
+[cycle trace ratio](fdip-000I) still separates two examples.
+For a general invertible real field map, use the same coefficient
+maps and write #{T} for its array. Setting #{y=T\phi} gives
+precision array #{T^{-T}QT^{-1}} and transported counting pairing
+#{y^TT^{-T}T^{-1}z}; the reference Jacobian is
+#{dy=|\det T|\,d\phi}. These are the declared-basis formulas in
+\ref{fdip-00KH}. [Jacobian compensation](fdip-003M) transports the
+normalized law, although the [quadratic-isometry example](fdip-000Z)
+loses the reference pairing or retained projection. Such a map need
+not be an exact or signed background arrow.}
+
+\p{The coordinate density convention is
+\citet{Proposition B.55, p. 505}{friedli2017statistical}; its
+covariance parameter equals inverse precision by \ref{fdip-000B}.}

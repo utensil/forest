@@ -1,1 +1,59 @@
-\date{2026-11-10T08:27:53Z}
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{Dual-frame trace is natural and cyclic}
+\date{2026-11-10}
+
+\p{Let #{M,N,M'} be finite free modules over a commutative unital
+ring #{k}. The \vocabk{intrinsic trace}{fdip-003G} is independent
+of the finite dual frame used to compute it and is linear in its
+endomorphism. For #{f:M\to N}, #{g:N\to M} and an isomorphism
+#{P:M\to M'},
+##{\operatorname{tr}_M(gf)=\operatorname{tr}_N(fg),\qquad
+\operatorname{tr}_{M'}(PTP^{-1})=\operatorname{tr}_M(T).}
+The first identity permits distinct modules. The empty frame gives
+trace zero on the zero module; all identities include the zero ring.}
+
+\proof{
+\p{Let #{n_j,\psi_j} be another dual frame of #{M}. Expanding
+#{m_i} in this frame and commuting the scalars in #{k} gives
+##{\begin{aligned}
+\sum_i\ell_i(Tm_i)
+ &=\sum_{i,j}\psi_j(m_i)\ell_i(Tn_j)\\
+ &=\sum_j\psi_j(Tn_j).
+\end{aligned}}
+For the last equality, evaluate
+#{\sum_i\psi_j(m_i)\ell_i(x)=\psi_j(\sum_i\ell_i(x)m_i)=\psi_j(x)}
+at #{x=Tn_j}. This proves frame independence without a pairing.
+Termwise addition and scalar multiplication give
+#{\operatorname{tr}(T+U)=\operatorname{tr}(T)+\operatorname{tr}(U)}
+and #{\operatorname{tr}(cT)=c\operatorname{tr}(T)}.}
+
+\p{Take dual frames #{m_i,\ell_i} for #{M} and #{n_j,\psi_j}
+for #{N}. Expanding #{fm_i} and #{gn_j} gives
+##{\begin{aligned}
+\operatorname{tr}_M(gf)
+ &=\sum_{i,j}\psi_j(fm_i)\ell_i(gn_j)\\
+ &=\operatorname{tr}_N(fg).
+\end{aligned}}
+This is rectangular cyclicity; the two traces may be on different
+modules. The transported family #{Pm_i,\ell_iP^{-1}} is a dual
+frame of #{M'}. Substitution into the defining sum proves the
+conjugacy formula.}
+}
+
+\p{The duality convention is
+\citet{More on Algebra, Lemma 74.1}{stacks2017stacks},
+[Tag 0FNJ](https://stacks.math.columbia.edu/tag/0FNJ).
+\citet{Exercises, Exercise 22.6}{stacks2017stacks},
+[Tag 02DU](https://stacks.math.columbia.edu/tag/02DU) asks for trace,
+naturality and cyclicity on finite locally free modules. The proof
+here supplies the finite-free case; it is not attributed to a proof
+in that exercise.}
+
+\p{Mathlib's \leanref{LinearMap.trace} is totalized. On the
+finite-free commutative-ring domain,
+\leanref{LinearMap.trace_comp_comm'} is rectangular cyclicity and
+\leanref{LinearMap.trace_conj'} is conjugacy by a linear equivalence.
+These are the domain and identities used here.}

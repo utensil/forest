@@ -6,12 +6,14 @@
 \date{2026-10-29}
 
 \p{Let #{M,M'} be finite-dimensional real positive inner-product
-spaces with induced [Borel Euclidean volumes](fdip-002H)
+spaces with [induced Euclidean volumes](fdip-002M)
 #{\lambda,\lambda'}. Let #{Q,Q'} be positive self-adjoint precisions,
 and suppose a linear isomorphism #{T:M\to M'} preserves their actions:
 ##{\mathcal A_{Q'}(Tx)=\mathcal A_Q(x).}
-It need not preserve the reference pairings. For its absolute
-Jacobian #{J(T)>0}, one has
+It need not preserve the reference pairings. Its adjoint uses these
+specified inner products, and
+##{T^\dagger Q'T=Q,\qquad (Q')^{-1}=TQ^{-1}T^\dagger.}
+For its absolute Jacobian #{J(T)>0}, one has
 ##{\begin{aligned}
 T_*\lambda&=J(T)^{-1}\lambda',\\
 Z_{Q'}&=J(T)Z_Q,\qquad T_*\mu_Q=\mu_{Q'}.
@@ -23,8 +25,17 @@ on the two sides, and, under that condition,
 #{\omega_{Q'}(F')=\omega_Q(F'\circ T)}.}
 
 \proof{
-\p{The [reference-volume change formula](fdip-002K) gives the
-pushforward of volume, equivalently
+\p{Polarization of the preserved real quadratic forms gives
+#{T^\dagger Q'T=Q}; taking inverses gives the stated inverse-precision
+identity. Choose orthonormal charts #{C:M\to\mathbb R^n} and
+#{C':M'\to\mathbb R^n}. By the [induced-volume convention](fdip-002M),
+both charts carry volume to coordinate Lebesgue measure. Identify
+the chart targets with counting spaces and apply the
+[reference-volume change formula](fdip-002K) to #{C'TC^{-1}}.
+Its Gram determinant equals that of #{T^\dagger T}, so the absolute
+Jacobian is #{J(T)=\sqrt{\det(T^\dagger T)}}. Transporting the
+formula back through the charts gives the pushforward of volume,
+equivalently
 #{\int h'\,d\lambda'=J(T)\int h'\circ T\,d\lambda}
 for every nonnegative Borel #{h'}. Apply it to the Gaussian weight;
 action preservation gives #{Z_{Q'}=J(T)Z_Q}. Both normalizers are
@@ -41,13 +52,10 @@ Only when finite do positive/negative parts, and for complex functions
 real/imaginary parts, give the stated expectation identity.}
 }
 
-\p{In orthonormal coordinates, action preservation means
-#{T^TQ'T=Q}, so inversion gives
-##{(Q')^{-1}=TQ^{-1}T^T.}
-This is covariance congruence, not generally operator similarity.
-The scalar Jacobian is computed in the specified reference volumes;
-independently ordered orthonormal frames may change the signed
-determinant but not its absolute value. The
+\p{The inverse-precision identity is covariance congruence for the
+specified pairings, not generally operator similarity. The
+[orthonormal-basis realization](fdip-00KH) gives its transpose formula
+and the covariance-parameter provider correspondence. The
 [quadratic-isometry example](fdip-000Z) shows that this normalized
 transport can lose both counting-pairing and retained-projection
 compatibility. Such maps are not enriched background arrows.}
@@ -57,9 +65,4 @@ compatibility. Such maps are not enriched background arrows.}
 Gaussian substitution is
 \citet{Proposition B.55, p. 505}{friedli2017statistical}.
 The [inverse-precision covariance theorem](fdip-000B) identifies its
-covariance with #{Q^{-1}} for these reference pairings.
-TauCeti's
-\leanref/tauceti{TauCeti.Probability.map_affine_multivariateGaussian}
-supports the covariance congruence for a supplied finite real linear
-map, even rectangular. That broader covariance result does not assert
-invertibility, endpoint preservation or the retained square used here.}
+covariance with #{Q^{-1}} for these reference pairings.}
