@@ -5,65 +5,54 @@
 \title{The logarithm on the accretive cone}
 \date{2026-11-01}
 
-\p{On the open convex cone #{\mathcal C_n} of
-[strictly accretive](fdip-009K) complex matrices, there is a
-unique holomorphic function #{\mathcal L} such that
+\p{Let #{E} be a finite-dimensional complex Hermitian space, and
+let #{\mathcal C} be the open convex cone of strictly accretive
+endomorphisms of #{E}, in the sense of \ref{fdip-009K}. There
+is a unique holomorphic function #{\mathcal L} on #{\mathcal C}
+such that
 ##{e^{\mathcal L(K)}=\det K,\qquad \mathcal L(I)=0.}
 For #{K_t=I+t(K-I)}, it is given by
 ##{\mathcal L(K)=\int_0^1
  \operatorname{tr}\left[K_t^{-1}(K-I)\right]dt.}
-On Hermitian positive matrices it equals the real
+On Hermitian positive operators it equals the real
 #{\log\det K}. Thus the fermionic logarithmic contribution
-#{W_F(K)=-\mathcal L(K)} is unambiguous on this cone.}
+#{W_F(K)=-\mathcal L(K)} is unambiguous on this cone. This
+branch need not be the principal scalar logarithm of
+#{\det K}. \ref{fdip-00MI} records the values
+#{4\pi i/3} and #{-2\pi i/3}, the winding obstruction, and the
+singular determinant.}
 
 \proof{
-\p{Write #{K_t=I+t(K-I)}. Convexity makes #{K_t}
-accretive and invertible for every #{0\le t\le1}.
-In a neighborhood of each #{K\in\mathcal C_n}, the
-Hermitian parts of all these matrices have a common positive
-lower bound. Their inverses and derivatives in the matrix
-entries are therefore locally bounded uniformly in #{t}.
-The integral of the holomorphic rational integrand is
-holomorphic in #{K}.}
+\p{Write #{K_t=I+t(K-I)}. Convexity makes #{K_t} strictly
+accretive, hence invertible, for every #{0\le t\le1}. In a
+neighborhood of each #{K\in\mathcal C}, the Hermitian parts of
+all these operators have a common positive lower bound. Their
+inverses remain locally bounded uniformly in #{t}. Inversion,
+the trace, and this integral are holomorphic operator
+operations on that neighborhood, so #{\mathcal L} is
+holomorphic.}
 
-\p{Put #{g(t)=\det K_t}. The determinant derivative, as in
-the [real log-determinant calculation](fdip-005S), gives
+\p{Put #{g(t)=\det K_t}. Choose an orthonormal basis and
+represent the operators by their matrices in that basis. The
+determinant derivative, as in the
+[real log-determinant calculation](fdip-005S), gives
 ##{\frac{g'(t)}{g(t)}
  =\operatorname{tr}(K_t^{-1}(K-I)).}
-This complex version follows directly from
-#{\det(K_t+hB)=\det K_t\det(I+hK_t^{-1}B)} and
-#{\det(I+hM)=1+h\operatorname{tr}M+O(h^2)}, obtained
-by the permutation expansion. Therefore the derivative of
-#{g(t)\exp(-\int_0^t g'(s)/g(s)\,ds)} is zero.
-Its value at zero is one, proving
-#{\exp\mathcal L(K)=\det K}; the identity matrix gives
-#{\mathcal L(I)=0}.}
+This complex version follows from
+#{\det(K_t+hB)=\det K_t\det(I+hK_t^{-1}B)} and from the
+permutation expansion
+#{\det(I+hM)=1+h\operatorname{tr}M+O(h^2)}. Therefore the
+derivative of
+#{g(t)\exp(-\int_0^t g'(s)/g(s)\,ds)} is zero. Its value at
+zero is one, proving #{\exp\mathcal L(K)=\det K}. The identity
+operator gives #{\mathcal L(I)=0}.}
 
 \p{Two such logarithms differ by a continuous function with
 values in #{2\pi i\mathbb Z}. The cone is connected, so this
-function is constant, and normalization makes it zero. On
-Hermitian positive #{K}, all #{K_t} are positive and
-#{g(t)>0}; ordinary real logarithmic differentiation identifies
-the integral with #{\log\det K}.}
+function is constant, and normalization makes it zero. On a
+Hermitian positive operator, every #{K_t} is Hermitian
+positive and #{g(t)>0}; ordinary real logarithmic
+differentiation identifies the integral with #{\log\det K}.}
 }
 
-\p{This branch is not always the principal scalar logarithm
-of #{\det K}. For #{K=e^{i\pi /3}I_4}, the Hermitian part
-is #{I_4/2>0}. Along #{K(s)=e^{is}I_4},
-#{0\le s\le\pi /3}, continuity and normalization give
-#{\mathcal L(K(s))=4is}. Hence
-##{\mathcal L(e^{i\pi /3}I_4)=\frac{4\pi i}{3},}
-whereas the principal scalar logarithm of its determinant is
-#{-2\pi i/3}. The determinant can even reach the scalar
-principal branch cut while the matrix stays accretive.}
-
-\p{For a general invertible complex matrix, writing
-#{-\log\det K} requires a declared branch on the domain
-under consideration; there is no single-valued continuous
-logarithm on all invertible matrices when #{n\ge1}. The loop
-#{\operatorname{diag}(e^{it},1,\ldots,1)},
-#{0\le t\le2\pi}, already has determinant winding once.
-If #{\det K=0}, no logarithm exists, although the
-[Grassmann determinant identity](fdip-008H) still does.
-The [boson-fermion cancellation](fdip-009K) itself uses no
-logarithm branch.}
+\transclude{fdip-00MI}

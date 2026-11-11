@@ -5,16 +5,22 @@
 \title{Paired Grassmann integration gives a determinant}
 \date{2026-11-01}
 
-\p{For any complex #{n\times n} matrix #{K}, use the
-[independent generators and paired top order](fdip-008F).
-Then
-##{J_n\left(e^{-\bar\psi K\psi}\right)=\det K,
- \qquad \bar\psi K\psi=\sum_{i,j=1}^n\bar\psi_iK_{ij}\psi_j.}
+\p{Let #{E} be a finite-dimensional complex vector space and let
+#{K\in\operatorname{End}(E)}. Write #{q_K=\bar\psi(K\psi)} for the
+quadratic of the [intrinsic paired coefficient](fdip-00IS). Then
+##{J_E\left(e^{-q_K}\right)=\det_E K.}
 No invertibility or positivity assumption is needed. The empty
-case has #{J_0(1)=1}, equal to the determinant of the empty matrix.}
+case has #{J_E(1)=1}, equal to the determinant of the zero
+endomorphism of the zero space. The coevaluation order is the one
+in \ref{fdip-00IS}: the barred coefficient is contracted first.
+That places #{\theta_K=-q_K}. The proof below computes the
+interleaved coefficient and then uses the basis comparison of
+\ref{fdip-00IV} only to match that coefficient with #{J_E}.}
 
 \proof{
-\p{Move each barred generator to the right and put
+\p{Use the interleaved chart of \ref{fdip-00MC}, and write
+#{\bar\psi K\psi=\sum_{i,j}\bar\psi_iK_{ij}\psi_j}.
+Move each barred generator to the right and put
 ##{q_i=\sum_{j=1}^nK_{ij}\psi_j\bar\psi_i,
  \qquad -\bar\psi K\psi=\sum_iq_i.}
 Each #{q_i^2=0}, because every term repeats #{\bar\psi_i}.
@@ -34,7 +40,11 @@ top order gives the same first sign again. Their product is
 #{\operatorname{sgn}(\sigma)}. Thus the required coefficient is
 ##{\sum_{\sigma\in S_n}\operatorname{sgn}(\sigma)
        \prod_{i=1}^nK_{i,\sigma(i)}=\det K.}
-}
+This is #{J_n(e^{-q_K})}. \ref{fdip-00MC} records that the
+basis comparison in \ref{fdip-00IV} identifies this word with
+the coevaluation top element, so #{J_E=J_n} on the top degree.
+Therefore #{J_E(e^{-q_K})=\det_E K}.}
+
 }
 
 \p{Selecting the grouped top word

@@ -5,82 +5,104 @@
 \title{Accretive complex Gaussian integrals and cancellation}
 \date{2026-11-01}
 
-\p{Call #{K\in M_n(\mathbb C)} \newvocab{strictly accretive}
-when its Hermitian part #{H=(K+K^*)/2} is positive definite.
-For #{z_j=x_j+iy_j}, use ordinary Lebesgue volume
-#{d^{2n}z=\prod_j dx_j\,dy_j}. Then #{K} is invertible,
-the following integral converges absolutely, and
-##{I(K):=\int_{\mathbb C^n}e^{-z^*Kz}\,d^{2n}z
+\p{Let #{V} be a finite-dimensional complex Hermitian space, of
+dimension #{n}, and let #{h} be its Hermitian product,
+conjugate-linear in the first argument as in \ref{fdip-0070}.
+Call #{K\in\operatorname{End}(V)} \newvocab{strictly accretive}
+when #{\operatorname{Re}h(z,Kz)>0} for every #{z\ne0}.
+Equivalently, the Hermitian part #{H=(K+K^*)/2} is positive
+definite, because #{\operatorname{Re}h(z,Kz)=h(z,Hz)}. Let
+#{d\operatorname{vol}} be the canonical real volume of this
+Hermitian product: in any orthonormal basis,
+#{z_j=x_j+iy_j} and
+#{d\operatorname{vol}=\prod_j dx_j\,dy_j}. A unitary change of
+basis has real Jacobian of absolute value one, so the volume
+does not depend on that basis. Then #{K} is invertible, the
+following integral converges absolutely, and
+##{I(K):=\int_V e^{-h(z,Kz)}\,d\operatorname{vol}
        =\frac{\pi^n}{\det K}.}
-Consequently, with #{Z_B(K)=\pi^{-n}I(K)} and the
+With #{Z_B(K)=\pi^{-n}I(K)} and the
 [paired Grassmann value](fdip-008H)
-#{Z_F(K)=J_n(e^{-\bar\psi K\psi})},
+#{Z_F(K)=J_V(e^{-\bar\psi(K\psi)})},
 ##{Z_B(K)Z_F(K)=1.}
 For #{n=0} both factors are one.}
 
-\proof{
-\p{For #{n>0}, choose #{h>0} with #{H\ge hI}. Then
-##{|e^{-z^*Kz}|=e^{-z^*Hz}\le e^{-h\|z\|^2}.}
-The right side is integrable by the product of scalar Gaussian
-integrals. If #{Kz=0}, its real quadratic value is
-#{z^*Hz=0}, so #{z=0}; finite dimension makes #{K} invertible.}
+\p{Accretivity survives an orthogonal Schur complement. Split
+#{V=R\oplus E} by an orthogonal direct sum, and let
+#{A,B,C,D,S} be the typed compressions of \ref{fdip-009J} for
+the orthogonal projections, with #{E} eliminated. Then #{D} is
+strictly accretive, hence invertible, and #{S} is strictly
+accretive. For #{v\ne0} the graph vector
+#{x=i_Rv-i_ED^{-1}Cv} satisfies #{Kx=i_RSv} and
+#{h(x,Kx)=h(v,Sv)}. This uses accretivity of #{K}, not only
+invertibility of #{D}.}
 
-\p{First suppose #{K=K^*>0}. A unitary eigenbasis gives
-positive eigenvalues #{\lambda_j}. The unitary change of
-variables preserves real volume, since its real Jacobian has
-absolute determinant #{|\det_{\mathbb C}U|^2=1}. In each
-complex coordinate the [scalar Gaussian formula](fdip-002T)
-gives
-##{\int_{\mathbb R^2}e^{-\lambda_j(x^2+y^2)}dx\,dy
+\proof{
+\p{For #{n>0}, choose #{\alpha>0} with #{H\ge\alpha I}. Then
+##{|e^{-h(z,Kz)}|
+ =e^{-\operatorname{Re}h(z,Kz)}
+ =e^{-h(z,Hz)}
+ \le e^{-\alpha\|z\|^2}.}
+The right side is integrable by the product of scalar Gaussian
+integrals. If #{Kz=0}, then #{h(z,Hz)=0}, so #{z=0}; finite
+dimension makes #{K} invertible.}
+
+\p{First suppose #{K=K^*>0}. Choose an orthonormal eigenbasis,
+with positive eigenvalues #{\lambda_j}. In these coordinates
+the unitary change from any other orthonormal basis preserves
+#{d\operatorname{vol}}. In each complex coordinate the
+[scalar Gaussian formula](fdip-002T) gives
+##{\int_{\mathbb R^2}e^{-\lambda_j(x^2+y^2)}\,dx\,dy
        =\frac\pi{\lambda_j}.}
 Multiplication gives #{I(K)=\pi^n/\det K}.}
 
-\p{For general #{K}, write #{K=H+A}, where #{A^*=-A},
-and set #{K(w)=H+wA} for a complex parameter #{w}.
-Its Hermitian part is #{H+i(\operatorname{Im}w)A}.
-Choose #{\epsilon>0} such that
-#{\epsilon\|A\|<h/2}, with any positive choice if #{A=0}.
-On the connected strip #{|\operatorname{Im}w|<\epsilon},
-this part is at least #{hI/2}, so #{K(w)} is invertible.}
+\p{For general #{K}, write #{K=H+A} with #{A^*=-A}, and set
+#{K(w)=H+wA} for a complex parameter #{w}. Its Hermitian part
+is #{H+i(\operatorname{Im}w)A}. Choose #{\epsilon>0} such that
+#{\epsilon\|A\|<\frac{\alpha}{2}}, with any positive choice if #{A=0}.
+On the connected strip #{|\operatorname{Im}w|<\epsilon}, this
+part is at least #{\alpha I/2}, so #{K(w)} is invertible.}
 
 \p{The integral #{I(K(w))} is holomorphic on that strip.
 Differentiation of the integrand brings down powers of
-#{-z^*Az}; on every smaller neighborhood these are bounded by
-a polynomial in #{\|z\|} times #{e^{-h\|z\|^2/2}}.
+#{-h(z,Az)}; on every smaller neighborhood these are bounded
+by a polynomial in #{\|z\|} times #{e^{-\frac{\alpha}{2}\|z\|^2}}.
 This integrable bound justifies differentiation under the
-integral. The function #{\pi^n/\det K(w)} is holomorphic
-there too. For #{w=it} with real #{|t|<\epsilon}, the matrix
+integral. The function #{\pi^n/\det K(w)} is holomorphic there
+too. For #{w=it} with real #{|t|<\epsilon}, the operator
 #{H+itA} is Hermitian positive, so the preceding calculation
 identifies the two functions. These points accumulate at the
-interior point zero. The one-variable identity theorem therefore
-identifies the functions throughout the strip, in particular
-at #{w=1}. The Grassmann determinant then proves cancellation.}
+interior point zero. The one-variable identity theorem
+therefore identifies the functions throughout the strip, in
+particular at #{w=1}. The Grassmann determinant then proves
+cancellation.}
+
+\p{For the orthogonal splitting, #{u\ne0} gives
+#{h(i_Eu,Ki_Eu)=h(u,Du)}, because the cross term lands in
+#{R} and the sum is orthogonal. Thus #{D} is strictly
+accretive, hence invertible. For the graph vector above,
+#{p_EKx=0} and #{p_RKx=Sv}, so #{Kx=i_RSv}. Orthogonality
+removes the eliminated component of #{x} from the product, and
+#{h(x,Kx)=h(v,Sv)}. Therefore #{S} is strictly accretive.}
 }
 
 \p{For Hermitian positive #{K}, the normalized density
-#{(\det K/\pi^n)e^{-z^*Kz}} is a genuine Gaussian probability
-law on #{2n} real coordinates. For general accretive #{K},
-the weight can be complex: #{K=(1+i)} gives
-#{Z_F=1+i} and #{Z_B=(1+i)^{-1}}. Normalization and determinant
-cancellation still hold, but there is no positive Gaussian law
-with this density. A single real Gaussian has only a determinant
-power #{-1/2}; [Grassmann algebra](fdip-008F) by itself supplies
-no convergence for a commuting integral.}
-
-\p{Accretivity also survives the [Schur operation](fdip-009J).
-Its principal block #{D} is accretive by testing #{K} on
-#{(0,u)}, hence invertible. For #{v\ne0}, put
-#{x=(v,-D^{-1}Cv)}. Then #{Kx=(Sv,0)}, and
-##{\operatorname{Re}(v^*Sv)
- =\operatorname{Re}(x^*Kx)>0.}
-Thus #{S} is accretive. This extra conclusion uses accretivity
-of the full matrix, not just invertibility of #{D}.}
+#{(\det K/\pi^n)e^{-h(z,Kz)}} is a genuine Gaussian probability
+law on the underlying real space of dimension #{2n}. For a
+general strictly accretive endomorphism the weight can be
+complex, so there need not be a positive Gaussian law with
+this density. \ref{fdip-00MH} records the value #{1+i}. A
+single real Gaussian has only a determinant power #{-1/2}.
+[Grassmann algebra](fdip-008F) by itself supplies no
+convergence for a commuting integral.}
 
 \p{\citet{Section 9.1, equations (9.3)-(9.5), p. 19}{wingate2025lattice}
-describes integrating a fermion matrix
-and re-expressing its determinant with commuting complex
-pseudofermions. Its equation (9.5) uses #{K^{-1}} in the
-commuting quadratic form, yielding a determinant rather than
-its inverse when convergence holds. The cancellation here uses
-#{K} in both forms and the specified factor #{\pi^{-n}};
-the proof above states its convergence hypotheses explicitly.}
+describes integrating a fermion matrix and re-expressing its
+determinant with commuting complex pseudofermions. Its equation
+(9.5) uses #{K^{-1}} in the commuting quadratic form, yielding
+a determinant rather than its inverse when convergence holds.
+The cancellation here uses #{K} in both forms and the specified
+factor #{\pi^{-n}}; the proof above states its convergence
+hypotheses explicitly.}
+
+\transclude{fdip-00MH}
