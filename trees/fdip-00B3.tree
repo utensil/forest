@@ -2,30 +2,55 @@
 \meta{agent-authored}{true}
 \tag{fdip}
 \taxon{Proposition}
-\title{The retained cycle matrix}
+\title{The retained cycle operator}
 \date{2026-11-06}
 
-\p{Let #{q\ge 2} and #{N\ge 3} be integers, and let #{Q} be a
-\vocabk{uniform cycle precision}{fdip-00AW} on
-#{\mathbb Z/(qN)\mathbb Z}, with neighbor value #{b} and shape
-#{t}. Let #{T_r} and #{U_r} be the polynomials of
-\ref{fdip-00B1}. Suppose #{2b} and #{U_{q-1}(t)} are invertible, so that
-\vocabk{decimation}{fdip-00AW} by #{q} returns a uniform cycle
-precision #{S} on #{\mathbb Z/N\mathbb Z} with
+\p{Let #{R} be any commutative ring, and let #{q\ge 2} and
+#{N\ge 3} be integers. Write #{X=\mathbb Z/(qN)\mathbb Z}, and
+let #{M=\mathcal F_R(X)} be the finite free site module of
+functions from #{X} to #{R}, as in the
+\vocabk{field modules}{fdip-0010}. Let #{T} be the canonical
+shift endomorphism of #{M}, given by #{(Tf)(i)=f(i-1)}, with
+indices read modulo #{qN}. For #{a,b\in R} set
+##{Q=aI-b(T+T^{-1})}
+When #{2b} is a unit, the shape is #{t=a(2b)^{-1}}. Let #{K}
+be the retained sites #{q\mathbb Z/(qN)\mathbb Z}, identified
+with #{\mathbb Z/N\mathbb Z} by #{qj\mapsto j}, and let #{Y}
+be the complementary eliminated sites. Extension by zero and
+restriction are the retained and eliminated inclusions and
+projections #{\iota_K}, #{\iota_Y}, #{\pi_K} and #{\pi_Y}.
+They form a \vocabk{chosen binary splitting}{fdip-001T} of
+#{M}. The components are #{A=\pi_KQ\iota_K},
+#{B=\pi_KQ\iota_Y}, #{E=\pi_YQ\iota_K} and
+#{C=\pi_YQ\iota_Y}. Let #{T_r} and #{U_r} be the polynomials
+of \ref{fdip-00B1}. Suppose #{2b} and #{U_{q-1}(t)} are
+invertible. Then the \vocabk{split Schur map}{fdip-001T}
+##{S=A-BC^{-1}E}
+equals #{a'I-b'(T_K+T_K^{-1})}, where #{T_K} is the
+canonical shift of the finite free module on the retained
+sites, given by #{(T_Kf)(j)=f(j-1)}, and
 ##{b'=\frac{b}{U_{q-1}(t)},\qquad
 a'=2b'T_q(t),\qquad
 t'=T_q(t).}
 The eliminated set is #{N} disjoint paths of #{q-1} vertices.
-The determinant of that block #{C} is
+The determinant of the compression #{C} is
 #{(b^{q-1}U_{q-1}(t))^N}. These formulae use only the ring
 operations and the two inverses, so they hold in any commutative
 ring in which #{2b} and #{U_{q-1}(t)} are units.}
 
+\p{Remark. In the counting basis of site indicators, the only
+nonzero coordinates of #{Q} are #{Q_{ii}=a} and
+#{Q_{i,i\pm 1}=-b}. When the unit hypotheses hold and
+#{R=\mathbb R}, with the counting inner product, #{Q} is the
+\vocabk{uniform cycle precision}{fdip-00AW}; for a Gaussian
+law, #{S} is the precision of its decimation. The identities
+above are not restricted to that specialization.}
+
 \p{For #{q=2} the map on #{(a,b)} is
 #{(a,b)\mapsto(a-2b^2/a,\,b^2/a)}. In \ref{fdip-0057} the
 neighbor value is #{1} and the diagonal equals #{2} plus the
-mass parameter. The map sends that matrix to the retained
-matrix. The mass parameter there is not this diagonal. Over an
+mass parameter. The map sends that precision to the retained
+operator. The mass parameter there is not this diagonal. Over an
 odd prime field, when #{\det C\neq 0}, the eliminated sum is
 the factor #{Z_p(C)} in \ref{fdip-008O}. Let #{r\ge 2} be an
 integer such that #{U_{r-1}(t)} and #{U_{q-1}(T_r(t))} are
@@ -34,7 +59,7 @@ neighbor value and the eliminated determinant of the single
 step by #{qr}.}
 
 \proof{
-\p{Number the vertices #{0,\ldots,qN-1} and keep
+\p{Declare the counting basis of site indicators. Number the vertices #{0,\ldots,qN-1} and keep
 #{0,q,\ldots,(N-1)q}. The #{N} paths of #{q-1} vertices between
 consecutive kept vertices are disjoint, so #{C} is their direct
 sum. Let #{\Delta_m} be the determinant of one #{m\times m}
@@ -57,12 +82,15 @@ inverse is #{\Delta_{m-1}/\Delta_m=U_{m-1}(t)/(bU_m(t))}, so
 one path subtracts #{bU_{q-2}(t)/U_{q-1}(t)}. Two paths give
 ##{a'=a-2b\frac{U_{q-2}(t)}{U_{q-1}(t)}.}
 \ref{fdip-00B1} rewrites this diagonal as #{a'=2b'T_q(t)}.
+In the declared counting basis, the diagonal #{a'} and the
+neighbor entries #{-b'} are the entries of
+#{a'I-b'(T_K+T_K^{-1})}.
 Nothing in the arithmetic requires more than the two units.}
 
 \p{For #{q=2}, #{U_1(t)=a/b}, hence
 #{b'=b^2/a} and #{a'=a-2b^2/a}. Substituting the diagonal and
 the neighbor value of \ref{fdip-0057} returns its retained
-matrix. The retained mass parameter in \ref{fdip-0057} equals
+operator. The retained mass parameter in \ref{fdip-0057} equals
 #{a'-2b'}. Over an odd prime field, the
 block factorization of \ref{fdip-008O} is the eliminated sum
 once #{\det C\neq 0}, with this #{S}. When #{U_{r-1}(t)} and

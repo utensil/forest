@@ -7,9 +7,10 @@
 
 \p{Let #{N\ge 3}, and let the cycle be the graph of
 \ref{fdip-00CS} with every edge weight equal to #{1}. For an
-integer #{\ell} from #{1} through #{N-1}, the effective
+integer #{\ell} from #{1} through #{N-1}, let #{h} be the
+counting inner product on vertex functions. The effective
 resistance between vertices #{0} and #{\ell} is
-##{(\delta_0-\delta_\ell)^T L_w^+(\delta_0-\delta_\ell)
+##{h(\delta_0-\delta_\ell,L_w^+(\delta_0-\delta_\ell))
 =\frac{\ell(N-\ell)}{N}.}
 For the \vocabk{Gaussian induced action}{fdip-005R}, the increment
 #{\mathbb E(\phi_0-\phi_\ell)^2} tends to the same value as
@@ -19,7 +20,9 @@ contribute #{\frac{N-1}{N}}, and those contributions sum to
 #{N-1}.}
 
 \proof{
-\p{Orientations in the [Gaussian induced action](fdip-005R) are auxiliary.
+\p{Declare the counting basis of vertex indicators in cycle
+order. In that basis the pairing #{h} is the dot product used
+below. Orientations in the [Gaussian induced action](fdip-005R) are auxiliary.
 The value of #{L_w v} at a vertex is the sum, over
 neighboring vertices, of the differences of #{v}. Label the vertices
 #{0,1,\ldots,N-1} in cycle order. The path
