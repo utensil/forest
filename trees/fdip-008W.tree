@@ -5,44 +5,53 @@
 \title{The crossing block sets the reflection rank}
 \date{2026-11-02}
 
-\p{Let #{Q} be a real symmetric positive definite matrix, partitioned
-into blocks #{Q_{++}}, #{Q_{+-}}, #{Q_{-+}} and #{Q_{{-}{-}}}, and let
-#{C=Q^{-1}}. Principal submatrices of a positive definite matrix are
-positive definite, so #{Q_{++}} and #{C_{{-}{-}}} are invertible, and
-##{\operatorname{rank}C_{+-}=\operatorname{rank}Q_{+-}.}}
+\p{Let #{V} be a finite-dimensional real inner-product space, written
+as an orthogonal sum #{V=V_+\oplus V_-}. Either summand may be the
+zero space. Let #{i_\pm} and #{p_\pm} be the inclusions and the
+orthogonal projections, and let #{Q:V\to V} be self-adjoint and
+positive definite. Write #{Q_{\varepsilon\eta}=p_\varepsilon Q i_\eta}.
+Let #{C=Q^{-1}} and write #{C_{\varepsilon\eta}} in the same way.
+The compressions #{Q_{++}} and #{C_{{-}{-}}} are invertible, and
+##{\operatorname{rank}C_{+-}=\operatorname{rank}Q_{+-}.}
+The zero map between zero spaces has rank zero, so the identity
+includes a zero summand.}
 
 \p{On the even torus of the [reflection halves](fdip-007M), with the
 spatial factor a point, take the link reflection and the
 [massive scalar law](fdip-007O) of nearest-neighbor weight #{1} and
-mass #{m>0}. The linear reflection Gram matrix, indexed by the
-positive-half coordinates, has rank #{2} and is positive
-semidefinite. The normalized Gaussian transfer operator remains the
+mass #{m>0}. The reflected bilinear form on the positive-half
+linear observables has rank #{2} and is positive semidefinite. In
+the coordinate basis of that half, the form is the crossing block
+of #{C} with columns ordered by the link reflection. The normalized Gaussian transfer operator remains the
 injective positive contraction of the [Hermite diagonalization](fdip-007U).
 The gauge transfer operator remains positive, injective and trace
 class, as proved for the [spatial transfer data](fdip-0080).}
 
-\p{Let #{H} be an #{n\times n} Hermitian matrix and let #{\beta} be
-real. The exponential series of a finite matrix converges entrywise.
-Write #{\rho=e^{-\beta H}/Z} with #{Z=\operatorname{Tr}(e^{-\beta H})},
+\p{Let #{H} be a self-adjoint operator on a Hermitian space of finite
+dimension #{n\ge 1}, and let #{\beta} be real. This dimension
+hypothesis belongs only to the Gibbs state: the rank identity above
+does not use it. Write #{\rho=e^{-\beta H}/Z} with #{Z=\operatorname{Tr}(e^{-\beta H})},
 and write #{\sigma(A)=e^{-\beta H}Ae^{\beta H}}. The Gibbs state
 #{\omega(A)=\operatorname{Tr}(\rho A)} satisfies
 ##{\omega(AB)=\omega(B\sigma(A)).}}
 
 \proof{
-\p{If #{v} is a nonzero vector in the first block of coordinates,
-extend it by zero on the second block. Positive definiteness of
-#{Q} gives #{v^TQ_{++}v>0}, so #{Q_{++}} is positive definite.
-If #{v} is a nonzero vector supported on the minus coordinates,
-extend it by zero on the plus coordinates. Positive definiteness
-of #{C} gives #{v^TC_{{-}{-}}v>0}, so #{C_{{-}{-}}} is positive
-definite. The off-diagonal block of
-#{QC=I} is
+\p{Use the orthogonal splitting as the declared block basis. If
+#{V_+} is the zero space, then #{Q_{++}} is the identity
+endomorphism of that space, hence invertible, and there is no
+nonzero vector in it. If #{v} is a nonzero vector in #{V_+},
+extend it by zero on #{V_-}. Positive definiteness of #{Q} gives
+#{v^TQ_{++}v>0}, so #{Q_{++}} is positive definite and invertible.
+The same argument with the roles exchanged shows that #{C_{{-}{-}}}
+is invertible, including when #{V_-} is zero. The identity
+#{p_+QC i_-=p_+i_-=0} is the block equation
 ##{Q_{++}C_{+-}+Q_{+-}C_{{-}{-}}=0.}
 Hence
 ##{C_{+-}=-Q_{++}^{-1}Q_{+-}C_{{-}{-}}.}
-Left multiplication by the invertible matrix #{Q_{++}^{-1}} and
-right multiplication by the invertible matrix #{C_{{-}{-}}} preserve
-rank, so the two blocks have the same rank.}
+Composition on the left with the invertible map #{Q_{++}^{-1}} and
+on the right with the invertible map #{C_{{-}{-}}} preserves rank,
+including when #{C_{+-}} or #{Q_{+-}} is the zero map. The two
+compressions therefore have the same rank.}
 
 \p{For the cycle, the positive half is #{\{1,\ldots,M\}} and its
 image under #{\theta_\ell(t)=1-t} is the complementary half, with
@@ -61,7 +70,10 @@ crossing block of #{C} with columns ordered by #{\theta}. Its rank is
 domain of the massive scalar law, so the Gram matrix is positive
 semidefinite.}
 
-\p{Let #{\mu} bound the absolute values of the entries of #{H}.
+\p{Choose an orthonormal basis of the Hermitian space. Its dimension
+#{n} is at least #{1}, and the matrix of #{H} in that basis is
+Hermitian. Let #{\mu} bound the absolute values of the entries of
+that matrix.
 By induction, the entries of #{H^k} are at most #{n^{k-1}\mu^k}.
 The exponential series is therefore dominated by a scalar
 exponential and converges entrywise. Since #{H} commutes with

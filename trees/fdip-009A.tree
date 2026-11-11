@@ -17,29 +17,37 @@ hierarchical precision #{Q=\sum_{j=0}^{k}c_jP_j} is invertible.}
 \p{Let #{A} send a function #{\xi} on these sites to the residues modulo
 #{p^{k-1}} by the class means
 ##{(A\xi)(r)=\frac{1}{p}\sum_{t=0}^{p-1}\xi(r+tp^{k-1}).}
-The matrix #{(AQ^{-1}A^{T})^{-1}} equals the hierarchical precision
+Let #{A^*} be the counting adjoint of #{A} for the
+[counting inner product](fdip-0002). The proof shows #{A^*=S/p},
+where #{S} lifts a coarse function by making it constant on each
+class. The operator #{(AQ^{-1}A^{*})^{-1}} equals the hierarchical precision
 #{Q'} of depth #{k-1} with coefficients
 ##{c'_i=pc_{i+1}\qquad(0\le i\le k-1).}
-If every #{c_j} is positive, #{Q} is the precision of a centered
-[Gaussian law](fdip-0005). In the counting basis, the second-moment
-matrix of #{A\xi} is #{(Q')^{-1}}.}
+Nonzero real coefficients are enough for this identity. If every
+#{c_j} is positive, #{Q} is the precision of a centered
+[Gaussian law](fdip-0005), and the covariance operator of #{A\xi}
+is #{(Q')^{-1}}. In the counting basis that operator has matrix
+#{(Q')^{-1}}.}
 
 \p{Fix #{\lambda>0} and a positive mass #{m}, and take #{c_j=\lambda^j} for
 #{j<k} together with #{c_k=m}. Replacing #{A\xi} by
-#{Z=\sqrt{p\lambda}\,A\xi} divides the precision matrix #{Q'} by #{p\lambda}.
-The resulting matrix is
+#{Z=\sqrt{p\lambda}\,A\xi} divides the precision operator #{Q'} by #{p\lambda}.
+The resulting operator is
 hierarchical of depth #{k-1}, with coefficient #{\lambda^i} on each
 projector below the top level and with top coefficient #{m/\lambda}. That
 top coefficient grows when #{0<\lambda<1}, stays unchanged when #{\lambda=1}, and
 shrinks when #{\lambda>1}. In the sense that a mass is relevant when it
 grows toward coarser scales, relevance holds only for #{0<\lambda<1}. The same coefficient
-relation repeats at every depth: the second-moment matrix of each
-block mean is the inverse of the coarser hierarchical precision. These matrix relations do not by
+relation repeats at every depth: the covariance operator of each
+block mean is the inverse of the coarser hierarchical precision. These operator relations do not by
 themselves produce a Gaussian measure on functions on the #{p}-adic
 integers.}
 
 \proof{
-\p{Each #{E_j} is symmetric, because its matrix is constant on the
+\p{Throughout this proof the matrices are those of the counting basis
+of residue indicators. A symmetric matrix in that basis is the matrix
+of an operator which is self-adjoint for the counting inner product.
+Each #{E_j} is symmetric, because its matrix is constant on the
 pairs inside a class and zero across classes, and #{E_j^2=E_j},
 because a class mean is unchanged by a second average. If #{i\ge j},
 congruence modulo #{p^{k-i}} is coarser than congruence modulo
@@ -75,16 +83,17 @@ every coefficient is positive, the form is therefore positive, and it
 is the precision of a centered Gaussian. By the
 [inverse-precision theorem](fdip-000B), that law has covariance
 operator #{Q^{-1}}. In the counting basis, the second-moment matrix of
-#{A\xi} is #{AQ^{-1}A^{T}}.}
+#{A\xi} is #{AQ^{-1}A^{*}}.}
 
 \p{Write #{S} for the lift that makes a coarse function constant on
 each class:
 #{(Sg)(r+tp^{k-1})=g(r)}. Averaging a constant returns the constant,
 so #{AS=I}. The counting pairing gives
-#{(A^{T}g)\cdot \xi=g\cdot A\xi}, and the right-hand side expands to
+#{(A^{*}g)\cdot \xi=g\cdot A\xi}. In the counting basis the matrix of
+#{A^*} is the transpose of the matrix of #{A}. The right-hand side expands to
 ##{\sum_r g(r)\frac{1}{p}\sum_{t=0}^{p-1}\xi(r+tp^{k-1}).}
 The coefficient of #{\xi(r+tp^{k-1})} is #{g(r)/p}, so
-#{A^{T}=S/p}. The class mean is
+#{A^{*}=S/p}. The class mean is
 #{(E_1\xi)(r+tp^{k-1})=(A\xi)(r)}. Averaging those #{p} equal values
 returns #{(A\xi)(r)}, hence #{AE_1=A} and #{AP_0=0}.}
 
@@ -98,18 +107,18 @@ choices of #{t'}, and #{Sg} depends only on #{r'}. The fine mean is
 therefore the coarse mean of #{g}, which is
 #{(E'_{j-1}g)(r)=(SE'_{j-1}g)(x)}. Thus #{E_jS=SE'_{j-1}}. Applying
 #{A} and using #{AS=I} gives #{AE_jS=E'_{j-1}}, and
-#{AE_jA^{T}=E'_{j-1}/p}.}
+#{AE_jA^{*}=E'_{j-1}/p}.}
 
 \p{For #{1\le j\le k-1} this difference is
-#{AP_jA^{T}=(E'_{j-1}-E'_j)/p}. The top term is
-#{AE_kA^{T}=E'_{k-1}/p}. Because #{AP_0=0},
-##{AQ^{-1}A^{T}=\sum_{j=1}^{k}c_j^{-1}AP_jA^{T}.}
+#{AP_jA^{*}=(E'_{j-1}-E'_j)/p}. The top term is
+#{AE_kA^{*}=E'_{k-1}/p}. Because #{AP_0=0},
+##{AQ^{-1}A^{*}=\sum_{j=1}^{k}c_j^{-1}AP_jA^{*}.}
 Reindex #{i=j-1}. The right-hand side equals
 ##{\sum_{i=0}^{k-1}(pc_{i+1})^{-1}P'_i,}
 where #{P'_i=E'_i-E'_{i+1}} for #{i<k-1} and #{P'_{k-1}=E'_{k-1}}.
 The same orthogonal decomposition on the coarser residues says that
 this sum is the inverse of the hierarchical precision #{Q'} with
-coefficients #{c'_i=pc_{i+1}}. The matrix #{AQ^{-1}A^{T}} is therefore
+coefficients #{c'_i=pc_{i+1}}. The matrix #{AQ^{-1}A^{*}} is therefore
 invertible, and its inverse is #{Q'}. If the fine coefficients are
 positive, the coarse coefficients are positive as well.}
 
