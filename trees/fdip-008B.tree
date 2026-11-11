@@ -94,15 +94,24 @@ conjugation action on linear maps. The Hilbert–Schmidt isometry and
 components; a projector onto such a component does not by itself
 impose the charged tensor constraint.}
 
-\p{For reducible charge data, first choose an irreducible
-orthogonal decomposition
-#{R=\bigoplus_\lambda R_\lambda\otimes\mathbb C^{n_\lambda}}.
-Applying the intertwiner identification to each summand gives
+\p{For reducible charge data, let #{\lambda} run over the
+equivalence classes of irreducible continuous unitary
+representations of #{K}, and write
+#{M_\lambda=\operatorname{Hom}_K(R_\lambda,R)}.
+Evaluation #{v\otimes\alpha\mapsto\alpha(v)} is a linear
+isomorphism of representations
+##{R\cong\bigoplus_\lambda R_\lambda\otimes M_\lambda,}
+with #{K} acting on the first factor and trivially on
+#{M_\lambda}. The charged identification, applied summandwise,
+then gives a vector-space isomorphism
 ##{\mathcal M_R\cong
  \bigoplus_\lambda
- \operatorname{Hom}(\mathbb C^{n_\lambda},\mathcal M_{R_\lambda}).}
-This is an isomorphism of vector spaces. If all these spaces are
-finite dimensional and #{m_\lambda=\dim\mathcal M_{R_\lambda}},
-then #{\dim\mathcal M_R=\sum_\lambda n_\lambda m_\lambda}.
-For the trivial one-dimensional charge, the construction recovers
-the [neutral space](fdip-008A).}
+ \operatorname{Hom}(M_\lambda,\mathcal M_{R_\lambda}).}
+It is not claimed to be unitary. If these spaces are finite
+dimensional and #{m_\lambda=\dim\mathcal M_{R_\lambda}}, then
+#{\dim\mathcal M_R=\sum_\lambda(\dim M_\lambda)\,m_\lambda}.
+\ref{fdip-00MA} recovers the coordinate form on
+#{\mathbb C^{n_\lambda}}. For the trivial one-dimensional charge,
+the construction recovers the [neutral space](fdip-008A).}
+
+\transclude{fdip-00MA}
