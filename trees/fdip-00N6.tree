@@ -1,0 +1,77 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{The positive gauge vacuum}
+\date{2026-11-11}
+
+\p{For the \vocabk{pure-gauge transfer operator}{fdip-007Z}
+ on #{\mathcal H=L^2(X,\nu)}, where #{\nu} is product Haar
+ probability, the leading eigenvalue
+ #{\lambda_0=\|T\|>0} is simple. Its positive normalized
+ eigenvector #{\Omega} has an everywhere positive Borel
+ representative, bounded above and below by positive constants,
+ satisfying
+##{T\Omega(U)=\lambda_0\Omega(U)\qquad(U\in X).}
+This representative is pointwise gauge invariant. If the spatial
+ potential #{V} is continuous, #{\Omega} is continuous.
+ Consequently
+##{\Omega\in\mathcal H_{\mathrm{phys}},\qquad
+ \|T_{\mathrm{phys}}\|=\|T\|.}
+The vector #{\Omega} specifies the [vacuum state](fdip-00H8)
+ #{A\mapsto\langle\Omega,A\Omega\rangle} on bounded physical
+ operators.}
+
+\proof{
+\p{Write #{K_T(U,U')=b(U)c(U,U')b(U')}. The bounds on
+ #{b,b^{-1}} and strict positivity of the continuous kernel #{c}
+ give constants #{0<m\le K_T\le M<\infty}. By
+ \ref{fdip-0080}, #{T} is a nonzero positive compact
+ self-adjoint operator, so its norm is a positive eigenvalue.
+ For a normalized top eigenvector #{u}, kernel positivity gives
+##{\lambda_0=\langle u,Tu\rangle
+ \le\langle |u|,T|u|\rangle\le\lambda_0.}
+Equality in the Rayleigh bound implies #{T|u|=\lambda_0|u|}:
+ the positive operator #{\lambda_0I-T} has zero quadratic form
+ there, hence its square root annihilates #{|u|}.
+ Replacing #{|u|} by #{\lambda_0^{-1}T|u|} gives a strictly
+ positive representative. Normalize it as #{\Omega}.}
+
+\p{If a real top eigenvector #{v} were nonzero and orthogonal
+ to #{\Omega}, its positive and negative sets would both have
+ positive measure. On their product,
+ #{|v(U)||v(U')|-v(U)v(U')>0}; elsewhere this quantity is
+ nonnegative. The lower bound on #{K_T} therefore gives
+##{\langle |v|,T|v|\rangle>\langle v,Tv\rangle
+ =\lambda_0\|v\|^2,}
+contradicting the norm bound. Since the kernel is real, real
+ and imaginary parts of a complex top eigenvector are real top
+ eigenvectors. Removing its component along #{\Omega} and using
+ the preceding argument proves simplicity over #{\mathbb C}.}
+
+\p{Every gauge translate #{R_h\Omega} is a positive normalized
+ top eigenvector by \ref{fdip-0080}. Simplicity forces
+ #{R_h\Omega=\Omega} as an #{L^2} class. Thus the full top
+ eigenvector is physical; the restriction norm is at least
+ #{\lambda_0} and at most #{\|T\|}, proving equality.}
+
+\p{For the promised representative, use
+##{\Omega(U)=\lambda_0^{-1}b(U)
+ \int_X c(U,U')b(U')\Omega(U')\,d\nu(U').}
+The integral is continuous in #{U}: #{c} is uniformly
+ continuous on the compact product and #{b\Omega\in L^1}.
+ It is bounded above and below by positive multiples of
+ #{\int b\Omega\,d\nu>0}. Multiplication by bounded positive
+ Borel #{b} gives the stated Borel bounds. This representative
+ equals the eigenvector almost everywhere. Substituting it into
+ the integral leaves the integral unchanged, proving the
+ eigen-equation at every #{U}. Simultaneous gauge covariance of
+ #{K_T}, invariance of Haar measure and invariance of the
+ eigenvector class give #{\Omega(h\cdot U)=\Omega(U)} at
+ every point. If #{b} is continuous, the displayed formula
+ is continuous as well.}
+}
+
+\p{The compact spectral premise is the one used in
+ \ref{fdip-0085}; strict kernel positivity supplies the additional
+ simplicity and representative assertions proved here.}

@@ -1,0 +1,71 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Lemma}
+\title{Spatial symmetries and charge conjugation}
+\date{2026-11-11}
+
+\p{For the \vocabk{pure-gauge transfer operator}{fdip-007Z},
+ a signed graph automorphism #{a} permutes vertices and oriented
+ edges, sending each edge to a chosen edge or its reverse.
+ Its action #{A_a} on configurations is specified by
+##{(A_aU)_{a(e)}=U_e^{\epsilon_e},\qquad\epsilon_e\in\{1,-1\},}
+where #{\epsilon_e} records that orientation choice. Suppose
+ #{V(A_aU)=V(U)}. The inverse-pullback unitary
+ #{R_af=f\circ A_a^{-1}} preserves the physical space,
+ commutes with #{T} and fixes the positive vacuum #{\Omega}.}
+
+\p{For #{G=SU(N)}, #{N\ge2}, the same conclusions hold for
+ charge conjugation #{CU=(\overline{U_e})_e} whenever
+ #{V(CU)=V(U)}. No additional assumption on the admitted
+ central inversion-symmetric kernel is needed.
+ If a bounded real gauge-invariant function #{F} is invariant
+ under a collection of these symmetries, its centered vector
+ #{(M_F-\langle\Omega,M_F\Omega\rangle I)\Omega}
+ and all its spectral components belong to their common
+ fixed subspace.}
+
+\proof{
+\p{Product Haar probability is invariant under edge permutation
+ and inversion. The graph automorphism intertwines vertex gauge
+ actions with the corresponding vertex permutation, so its
+ pullback preserves the physical space. A simultaneous inversion
+ of two edge variables replaces #{k(xy^{-1})} by #{k(x^{-1}y)}.
+ Centrality and inversion symmetry give
+##{k(x^{-1}y)=k(yx^{-1})=k((xy^{-1})^{-1})=k(xy^{-1}).}
+Thus #{c(A_aU,A_aU')=c(U,U')}; the assumed potential
+ invariance gives the same identity for #{K_T}. Changing
+ variables in the integral proves #{R_aT=TR_a}.}
+
+\p{For #{g\in SU(N)}, unitary diagonalization shows that
+ #{\overline g} and #{g^{-1}} have the same eigenvalues
+ with multiplicities and are conjugate in #{SU(N)}. A unitary
+ conjugator can be multiplied by a scalar to have determinant
+ one. Therefore
+##{k(\overline g)=k(g^{-1})=k(g).}
+Complex conjugation is a Haar-preserving group automorphism
+ and intertwines gauge actions by #{h\mapsto\overline h}.
+ The kernel and potential identities again prove commutation
+ and physical-space preservation.}
+
+\p{Each pullback sends #{\Omega} to a positive normalized top
+ eigenvector, so \ref{fdip-00N6} makes it equal to #{\Omega}.
+ Also #{R_aM_FR_a^{-1}=M_{F\circ A_a^{-1}}}, with the
+ analogous identity for #{C}. An invariant #{F} therefore
+ gives a fixed centered vector. Commutation with the compact
+ self-adjoint transfer makes every eigenspace invariant and its
+ orthogonal spectral projection commute with these unitaries.
+ This proves the last assertion.}
+\p{The metric used in the [SU(2) and SU(3) heat examples](fdip-00MM)
+ extends to #{\mathfrak{su}(N)} as
+ #{\langle X,Y\rangle=-\operatorname{tr}(XY)}.
+ It is invariant under conjugation of entries because the trace
+ is real on this real Lie algebra. More generally, an
+ Ad-invariant positive inner product on this simple Lie algebra
+ is a positive scalar multiple of that one: its representing
+ positive self-adjoint map commutes with the adjoint action,
+ and each eigenspace is an ideal, forcing a single eigenvalue.
+ Thus complex conjugation preserves every such metric and its
+ heat kernel. Other groups or automorphisms require their own
+ metric-invariance check.}
+}

@@ -69,7 +69,7 @@ zero on its orthogonal complement, so
 #{S^N=PT^N} has the asserted physical trace.}
 
 \p{Averaging the first variable of the kernel of #{T} gives the
-continuous kernel of #{S}:
+bounded Borel kernel of #{S}, continuous when #{V} is continuous:
 ##{L(U,U')=b(U)b(U')\int_K
  \prod_e k(U_eh_{s(e)}U_e'^{-1}h_{t(e)}^{-1})\,dh.}
 To obtain this expression, use invariance of #{b} and move
@@ -89,8 +89,10 @@ For the finite edge product, the diagonal sum over a tail of blocks
 is therefore the corresponding tail of
 #{\sum_I\alpha_I=\kappa^{|E_s|}}, uniformly in #{U}.
 Cauchy–Schwarz gives the same bound off the diagonal.
-Multiplying by #{b} and averaging in both variables preserve
-uniform convergence. Integrating the diagonal term by
+Multiplying by the bounded Borel factors #{b(U)b(U')} costs
+at most #{\|b\|_\infty^2} in this tail bound; normalized gauge
+averaging in both variables cannot increase it. Thus uniform
+convergence survives without continuity of #{b}. Integrating the diagonal term by
 term consequently gives
 ##{\int_XL(U,U)\,dU
  =\sum_I\alpha_I\|P(b\phi_I)\|_2^2
@@ -110,8 +112,8 @@ physical-space trace in the statement. Expanding each #{L} with
 an independent #{h_j} gives #{\mathcal W_N}, because the two
 adjacent factors #{b(U_j)} combine to #{e^{-V(U_j)}}.
 Taking every #{f_j=1} proves the partition function; general
-#{f_j} prove the expectation identity. Strict positivity and
-compactness of the weight give #{0<Z_N<\infty}. The displayed
+#{f_j} prove the expectation identity. The weight's finite upper
+bound and positive lower bound give #{0<Z_N<\infty}. The displayed
 gauge transformation conjugates #{B_{j,e}} by direct cancellation,
 which proves the final invariance assertion.}
 }

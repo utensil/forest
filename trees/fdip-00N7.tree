@@ -1,0 +1,70 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{Connected correlations and the long periodic limit}
+\date{2026-11-11}
+
+\p{Use the positive normalized vector #{\Omega} and
+ #{\lambda_0} of \ref{fdip-00N6}, and put
+ #{S=T_{\mathrm{phys}}/\lambda_0} on the
+ \vocabk{physical Hilbert space}{fdip-0083}.
+ For any bounded self-adjoint operator #{O}, set
+##{O_c=O-\langle\Omega,O\Omega\rangle I,\qquad
+ v=O_c\Omega.}
+Let #{P_0=|\Omega\rangle\langle\Omega|}; for each distinct
+ eigenvalue #{r\in(0,1)} of #{S}, let #{E_r} be its
+ orthogonal spectral projection. The vacuum connected correlation
+ is, for every integer #{n\ge0},
+##{C_O(n)=\langle\Omega,O_cS^nO_c\Omega\rangle
+ =\sum_{0<r<1}r^n\|E_rv\|^2.}
+The sum is absolutely convergent, including #{n=0}.
+ For integers #{N>n},
+##{\lim_{N\to\infty}
+ \frac{\operatorname{Tr}(O_cS^nO_cS^{N-n})}
+      {\operatorname{Tr}(S^N)}=C_O(n).}
+If the physical space has dimension greater than one, its
+ largest excited eigenvalue #{r_*} satisfies #{r_*<1}. With
+ the time step #{a_t>0} of \ref{fdip-0085}, put
+ #{\Delta=-a_t^{-1}\log r_*>0}. Then
+##{0\le C_O(n)\le e^{-na_t\Delta}\|v\|^2.}
+If the physical space is one-dimensional, #{C_O(n)=0} and
+ there is no excited eigenvalue.}
+
+\proof{
+\p{Self-adjointness makes #{\langle\Omega,O\Omega\rangle}
+ real and #{v\perp\Omega}. Compactness, positivity and
+ injectivity from \ref{fdip-0083}, together with vacuum
+ simplicity, give an orthogonal decomposition into the vacuum
+ line and the positive excited eigenspaces. Parseval gives
+ #{\sum_r\|E_rv\|^2=\|v\|^2}; applying #{S^n} on
+ each eigenspace proves the correlation formula and convergence.}
+
+\p{For integers #{m\ge1}, positivity and the same spectral
+ decomposition give
+##{\|S^m-P_0\|_1=\sum_{0<r<1}(\operatorname{rank}E_r)r^m
+ \longrightarrow0.}
+The summands are dominated by the summable trace series for
+ #{S}; each tends to zero. Let #{A=O_cS^nO_c}, a bounded
+ operator of norm at most #{\|O_c\|^2}. The trace bound
+ #{|\operatorname{Tr}(AB)|\le\|A\|\|B\|_1} gives
+##{\operatorname{Tr}(AS^{N-n})\longrightarrow
+ \operatorname{Tr}(AP_0)=\langle\Omega,A\Omega\rangle.}
+Also #{\operatorname{Tr}(S^N)\to1}, proving the ratio limit.
+ All traces are defined since #{N-n\ge1}.}
+
+\p{If the vacuum complement is nonzero, the restriction of
+ #{S} to it is a nonzero positive compact operator. Its norm
+ #{r_*} is an eigenvalue. Simplicity excludes #{r_*=1};
+ bounding each #{r^n} by #{r_*^n} proves the estimate.
+ In dimension one every bounded operator is scalar, so #{v=0}.}
+}
+
+\p{When #{O=M_f} for a bounded real gauge-invariant spatial
+ function, \ref{fdip-0083} identifies the finite trace ratio
+ with its two insertion integral in the periodic link law.
+ At #{n=0} the insertion is #{(f-\langle\Omega,M_f\Omega\rangle)^2}.
+ A general bounded self-adjoint operator has the trace formula
+ above without being a function of spatial links. The gap
+ #{\Delta} concerns the specified finite graph and transfer data;
+ no uniform bound as volume or spacing changes is asserted.}
