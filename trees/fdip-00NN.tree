@@ -1,0 +1,63 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Lemma}
+\title{Torus cohomology and exact cochain multiplicities}
+\date{2026-11-11}
+
+\p{For the [dual cellular complex](fdip-00NL) and every
+#{N\ge2}, including composite #{N},
+##{H^j(K^*;A)\cong A^{\binom dj}\qquad(0\le j\le d).}
+Writing #{|Z^j(K^*;A)|=N^{z_j}}, the integers #{z_j}
+are determined by the actual dual cell counts:
+##{z_0=1,\qquad
+ z_{j+1}=n_j^*-z_j+\binom d{j+1}\quad(0\le j<d).}
+Consequently #{|Z^{d-3}|=N} for #{d=3}, and
+#{|Z^{d-3}|=N^{n_0^*+3}} for #{d=4}.
+These cardinalities are units in the [weight ring](fdip-00NI).}
+
+\proof{
+\p{Give each circle one vertex and one oriented edge.
+Its integral cellular boundary is zero. The product CW
+structure on #{T^d} has #{\binom dj} cells in degree #{j};
+the graded product boundary formula makes every differential
+zero. This formula is
+\citet{Proposition 3B.1, pp. 269–271}{hatcher2002algebraic}.
+Applying #{\operatorname{Hom}_{\mathbb Z}(-,A)} directly
+gives cohomology #{A^{\binom dj}}. Cellular cohomology with
+any abelian coefficient group agrees with singular cohomology
+by \citet{Theorem 3.5, p. 203}{hatcher2002algebraic}.
+Applying that comparison also to #{K^*} proves the claimed
+isomorphism for the given cellulation. This compares
+cohomology; it asserts no invariance of the weights under
+subdivision.}
+
+\p{The dual one-skeleton is connected, so a zero-cocycle is
+constant and #{|Z^0|=N}. The exact sequences of finite
+additive groups
+##{\begin{gathered}
+ 0\longrightarrow Z^j\longrightarrow C^j
+    \overset{\delta}{\longrightarrow}B^{j+1}
+    \longrightarrow0,\\
+ 0\longrightarrow B^{j+1}\longrightarrow Z^{j+1}
+    \longrightarrow H^{j+1}\longrightarrow0
+\end{gathered}}
+give
+##{\begin{aligned}
+ |B^{j+1}|&=N^{n_j^*}/|Z^j|,\\
+ |Z^{j+1}|&=|B^{j+1}|N^{\binom d{j+1}}.
+\end{aligned}}
+Every fiber of a surjective group homomorphism is a coset
+of its kernel, which proves these cardinality products.
+Induction gives the displayed recurrence. Since
+#{|Z^j|\le|C^j|}, each exponent #{n_j^*-z_j} is
+nonnegative. All cardinalities used as denominators are
+powers of the unit #{N}. Substitution of #{d=3} and
+#{d=4} gives the two stated redundancies.}
+}
+
+\p{Mathlib's
+\leanref{Submodule.card_eq_card_quotient_mul_card}
+supports the finite module cardinality step over a ring.
+Neither this step nor the proof above treats arbitrary
+submodules over #{\mathbb Z/N} as vector spaces.}

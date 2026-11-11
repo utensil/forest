@@ -1,0 +1,49 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Lemma}
+\title{The signed dual-cell differential}
+\date{2026-11-11}
+
+\p{For the [oriented cellular maps](fdip-00NL),
+##{\delta D_k=(-1)^kD_{k-1}\partial_k\qquad(1\le k\le d).}
+In particular #{\delta D_2=D_1\partial_2}. Thus #{D_2}
+identifies #{Z_2(K;A)} with #{Z^{d-2}(K^*;A)} and
+#{B_2(K;A)} with #{B^{d-2}(K^*;A)}.
+The following local incidence calculation fixes the sign
+for the stated orientation convention.}
+
+\proof{
+\p{Let #{f} be a codimension-one face occurrence of an
+oriented #{k}-cell #{e}. First give #{f} its induced boundary
+orientation, so #{[e:f]=1}. Write an oriented frame of #{e}
+as #{(n,F)}, with #{n} the outward normal and #{F} a frame
+of #{f}; let #{V} orient #{e^*}. The ambient frame is
+#{(n,F,V)}. Moving #{n} past the #{k-1} vectors of #{F}
+shows that #{f^*} has frame #{(-1)^{k-1}(n,V)}.
+The face #{e^*} inside #{f^*} lies toward the interior of
+#{e}, so its outward normal there is #{-n}. Its induced
+boundary frame is #{(-1)^kV}, since
+##{(-n,(-1)^kV)=(-1)^{k-1}(n,V)}
+as oriented frames. Therefore #{[f^*:e^*]=(-1)^k[e:f]}.
+Changing a chosen orientation changes the corresponding
+incidences and dual orientation together, preserving this
+identity. Summing signed occurrences also covers periodic
+identifications. Evaluating on every #{f^*} gives the
+asserted differential identity.}
+
+\p{Since #{D_1} is invertible, #{\delta D_2b=0} exactly
+when #{\partial_2b=0}. In degree three the identity is
+#{D_2\partial_3=-\delta D_3}; invertibility of #{D_3}
+then identifies the boundary and coboundary images.}
+
+\p{For a concrete incidence in ambient orientation #{(x,y,z)},
+orient an #{xy}-plaquette #{e} by #{(x,y)} and its right
+edge #{f} by #{+y}. Its primal incidence is #{+1} and
+#{e^*} is oriented by #{+z}. The dual face #{f^*} has
+orientation #{(-x,z)} because #{(y,-x,z)} is positive.
+Its #{e^*} face has outward normal #{-x}, hence boundary
+orientation #{+z}: the dual incidence is also #{+1}.
+Appending the remaining coordinate directions gives the same
+check in every #{d\ge3}.}
+}
