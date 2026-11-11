@@ -1,0 +1,63 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{The vacuum Markov kernel}
+\date{2026-11-11}
+
+\p{Use the full transfer kernel #{K_T}, product Haar probability
+ #{\nu} and everywhere positive representative #{\Omega} from
+ \ref{fdip-00N6}. Then
+##{\begin{aligned}
+\pi(dU)&=\Omega(U)^2\nu(dU),\\
+Q(U,dU')&=\frac{K_T(U,U')\Omega(U')}
+ {\lambda_0\Omega(U)}\,\nu(dU')
+\end{aligned}}
+defines a Borel probability transition kernel reversible for
+ #{\pi}. Its operator on #{L^2(\pi)} is conjugate to the
+ normalized full transfer by the unitary
+##{W:L^2(\pi)\longrightarrow L^2(\nu),\qquad Wf=\Omega f,
+ \qquad WQW^{-1}=T/\lambda_0.}
+The stationary discrete-time Markov chain with initial law
+ #{\pi} and transition #{Q} realizes the vacuum correlations
+ of bounded gauge-invariant spatial multiplication observables,
+ at integer multiples of the chosen time step #{a_t}.}
+
+\proof{
+\p{The positive Borel density is defined at every #{U}.
+ Integrating its row gives one by the pointwise eigen-equation
+ of \ref{fdip-00N6}. Its dependence on #{U} is measurable
+ by integration of a bounded Borel function; the positive bounds
+ on #{\Omega} suffice here. Symmetry of the real kernel gives
+##{\pi(dU)Q(U,dU')=
+ \lambda_0^{-1}\Omega(U)K_T(U,U')\Omega(U')
+ \,\nu(dU)\nu(dU'),}
+which is invariant under exchanging #{U,U'}. This proves
+ detailed balance and stationarity.}
+
+\p{The identity #{\|Wf\|_{L^2(\nu)}^2=\|f\|_{L^2(\pi)}^2}
+ proves isometry; #{u\mapsto u/\Omega} is its inverse
+ because its #{L^2(\pi)} norm equals #{\|u\|_{L^2(\nu)}}.
+ Direct substitution of the kernel proves the conjugacy on
+ bounded functions, then on #{L^2} by density and boundedness.
+ The chain's finite-dimensional laws are the iterated integrals
+ #{\pi(dU_0)Q(U_0,dU_1)\cdots Q(U_{m-1},dU_m)}.
+ Their consistency gives the law on #{X^{\mathbb N}}.
+ For bounded functions and integers #{0=n_0\le n_1\le\cdots\le n_m},
+ the resulting expectation is
+##{\mathbb E_\pi\prod_{j=0}^m f_j(U_{n_j})
+ =\langle\Omega,M_{f_0}(T/\lambda_0)^{n_1-n_0}
+ M_{f_1}\cdots(T/\lambda_0)^{n_m-n_{m-1}}M_{f_m}\Omega\rangle.}
+This follows by inserting #{W^{-1}W} between the transition
+ powers and multipliers. For gauge-invariant #{f_j}, all
+ factors preserve the physical subspace, so its two centered
+ insertions give \ref{fdip-00N7}.}
+}
+
+\p{The construction of a path law from a measurable probability
+ transition kernel is formalized by
+ \leanref/tauceti{TauCeti.Probability.markovChainLaw}, with the
+ finite-prefix identity
+ \leanref/tauceti{TauCeti.Probability.markovChainLaw_map_prefix_succ_eq_compProd}.
+ These declarations supply the discrete path-law step; the
+ vacuum density, normalization and reversibility were proved above.}
