@@ -8,62 +8,84 @@
 \p{Suppose the reference of an
 \vocabk{effective gauge weight}{fdip-00MX} is product Haar on
 #{G^{E_c}}, with #{G} compact Lie, and suppose
-#{f\in L^2(G^{E_c})}. Choose orthonormal matrix-entry bases
-for the irreducibles of #{G}. The finite products
-##{\Phi_I(u)=\prod_{e\in E_c}
- \sqrt{d_{\rho_e}}\,\rho_e(u_e)_{i_ej_e}}
-form an orthonormal basis, and
-##{f=\sum_I\widehat f_I\Phi_I,\qquad
- \widehat f_I=\int f\,\overline{\Phi_I}\,d\nu_c}
-converges in #{L^2}. If additionally
-#{\sum_I|\widehat f_I|\|\Phi_I\|_\infty<\infty},
+#{f\in L^2(G^{E_c})}. For a unitary irreducible
+#{\rho:G\to U(V_\rho)}, let #{\mathcal C_\rho\subset L^2(G)}
+be its finite-dimensional coefficient space, consisting of
+linear combinations of #{g\mapsto\lambda(\rho(g)v)} with
+#{\lambda\in V_\rho^*} and #{v\in V_\rho}.
+For an edge-representation tuple
+#{\boldsymbol\rho=(\rho_e)_{e\in E_c}}, put
+##{\mathcal C_{\boldsymbol\rho}
+ =\bigotimes_{e\in E_c}\mathcal C_{\rho_e}
+ \ \subset L^2(G^{E_c}),\qquad
+ f_{\boldsymbol\rho}=\Pi_{\boldsymbol\rho}f,}
+where #{\Pi_{\boldsymbol\rho}} is orthogonal projection.
+Then
+##{f=\sum_{\boldsymbol\rho}f_{\boldsymbol\rho}}
+converges in #{L^2}, as the limit over finite sets of tuples.
+If additionally
+#{\sum_{\boldsymbol\rho}\|f_{\boldsymbol\rho}\|_\infty<\infty},
 the series converges uniformly absolutely to a continuous
-representative of #{f}.}
+representative of #{f}. The sup norm here uses the canonical
+continuous representative of each coefficient-space element.}
 
-\p{For a gauge-invariant #{f}, the same #{L^2} limit may be
-written by applying the gauge projection termwise to finite
-partial sums. On each fixed representation tuple,
-vertex Haar averaging gives invariant contractions of matrix
-entries. In the matrix #{\rho_e(u_e)\in V_{\rho_e}\otimes
-V_{\rho_e}^*}, the forward gauge action acts on the target
-row factor and the source dual column factor. Contracting
-these edge tensors against invariant vertex covectors
-describes the surviving functions. For a central
-density on one copy of #{G}, the specialization is the
-character expansion and convergence criterion in
-\ref{fdip-007C}.}
+\p{If #{f} is gauge invariant, each
+#{f_{\boldsymbol\rho}} is gauge invariant. Under the intrinsic
+coefficient identification
+#{\mathcal C_{\rho_e}\cong V_{\rho_e}^*\otimes V_{\rho_e}},
+regrouping factors by vertices identifies the invariant
+coefficient space with the tensor product of the invariant
+parts of
+##{W_v=
+ \left(\bigotimes_{e:t(e)=v}V_{\rho_e}^*\right)
+ \otimes
+ \left(\bigotimes_{e:s(e)=v}V_{\rho_e}\right).}
+The gauge action on each dual factor is contragredient;
+on each undualized factor it is the given representation.
+A loop contributes both factors at the same vertex.
+Thus the surviving functions are vertex-invariant tensor
+contractions. For a central density on one copy of #{G},
+the specialization is the character expansion and
+convergence criterion in \ref{fdip-007C}.}
 
 \proof{
-\p{Peter–Weyl in \ref{fdip-007C} gives the orthonormal
-matrix-entry basis on one group. Tensoring over the finite
-edge set gives the displayed basis and #{L^2} expansion.
-The extra summability assumption bounds the series uniformly;
-its continuous limit equals the #{L^2} function almost
-everywhere.}
+\p{Peter–Weyl in \ref{fdip-007C} gives the orthogonal
+decomposition #{L^2(G)=\widehat{\bigoplus}_\rho\mathcal C_\rho}.
+Tensoring over the finite edge set proves the tuple
+decomposition and the asserted #{L^2} sum. Coefficient
+functions are continuous. Haar has full support, so their
+continuous representatives are unique.
+The extra sup-norm summability assumption gives a uniformly
+absolutely convergent series of these continuous functions.
+Its limit agrees with #{f} in #{L^2}.}
 
-\p{The gauge action preserves each finite-dimensional
-representation-tuple space. Explicitly, inverse pullback
-on one matrix entry gives
-##{R_g\bigl(\rho_e(u_e)_{ij}\bigr)
- =\sum_{k,l}\rho_e(g_{t(e)}^{-1})_{ik}
-              \rho_e(u_e)_{kl}\rho_e(g_{s(e)})_{lj}.}
-This is the dual coefficient action induced by the forward
-matrix action described above. For each vertex, averaging
-this finite-dimensional unitary action projects onto its
-invariant subspace. The separate vertex averages combine
-because gauge Haar is a finite product. Thus the averaged
-coefficient covectors are invariant vertex contractions.
-This is the same Haar projection as in \ref{fdip-0083}.
-Gauge projection is bounded on #{L^2}, so applying it to
-partial sums preserves convergence to an invariant #{f}.
-This justifies invariant coefficient contractions without
-asserting absolute convergence under an #{L^2} assumption
+\p{For one edge, inverse gauge pullback sends the coefficient
+#{\lambda(\rho_e(u_e)v)} to
+##{\lambda\bigl(\rho_e(g_{t(e)}^{-1})
+                 \rho_e(u_e)\rho_e(g_{s(e)})v\bigr).}
+Thus the coefficient tensor transforms as
+#{\lambda\mapsto\lambda\circ\rho_e(g_{t(e)}^{-1})}
+at the target and #{v\mapsto\rho_e(g_{s(e)})v}
+at the source. This proves the stated vertex actions
+and preservation of every tuple space. The action is
+unitary on #{L^2}, so it preserves the orthogonal complement
+of each tuple space as well. Hence it commutes with
+#{\Pi_{\boldsymbol\rho}}, and each component of an invariant
+#{f} is invariant.}
+
+\p{The gauge group is the product of the vertex groups.
+After regrouping the coefficient factors, its Haar
+projection is the tensor product of the projections
+onto #{W_v^G}. Each is the finite-dimensional invariant
+projection supplied by \ref{fdip-0083}. Its image is
+#{\bigotimes_v W_v^G}, giving the invariant contractions.
+No absolute convergence follows from #{L^2} membership
 alone.}
 }
 
 \p{For a general image reference, such as the diagonal law
-of \ref{fdip-00MS}, these product-Haar basis functions need
-not be orthonormal. An arbitrary #{L^1} effective density
-also need not be in #{L^2}. The exact observable and
-composition identities of \ref{fdip-00MQ} still apply in
-both cases.}
+of \ref{fdip-00MS}, these product-Haar coefficient spaces
+need not be mutually orthogonal. An arbitrary #{L^1}
+effective density also need not be in #{L^2}. The exact
+observable and composition identities of \ref{fdip-00MQ}
+still apply in both cases.}
