@@ -1,0 +1,47 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Lemma}
+\title{Path holonomy intertwines vertex gauge actions}
+\date{2026-11-11}
+
+\p{For a \vocabk{coarse path map}{fdip-00MO},
+#{\mathcal B} is continuous, #{r:K_f\to K_c} is a continuous
+surjective homomorphism, and
+##{\mathcal B(g\cdot U)=r(g)\cdot\mathcal B(U).}
+The image of normalized Haar under #{r} is normalized Haar on
+#{K_c}. The measures #{\nu_f} and #{\rho=\mathcal B_*\nu_f}
+are invariant under their respective gauge groups. Inverse
+pullback satisfies #{R_gR_h=R_{gh}}.}
+
+\proof{
+\p{Continuity follows from continuity of multiplication and
+inversion and the finiteness of every path. Let its successive
+vertices be #{v_0,\ldots,v_\ell}. For either direction of an
+edge traversal, its transformed transport is
+##{g_{v_j}U_{e_j}^{\epsilon_j}g_{v_{j-1}}^{-1}.}
+In the rightmost-first product, every adjacent
+#{g_{v_j}^{-1}g_{v_j}} cancels. The remaining factors are
+#{g_{v_\ell}(\mathcal BU)_ag_{v_0}^{-1}}, which is the
+claimed endpoint action. The empty-path case gives
+#{g_{v_0}eg_{v_0}^{-1}=e}.}
+
+\p{Any coarse vertex transformation extends to the fine
+vertices by assigning the identity at the other vertices.
+Thus #{r} is surjective. Its Haar pushforward is a regular
+probability invariant under every coarse left translation:
+lift that translation to #{K_f} and use Haar invariance.
+Normalized uniqueness in \ref{fdip-007B} identifies it with
+coarse gauge Haar.}
+
+\p{For each fixed #{g}, the edge action consists of left and
+right translations. It preserves product Haar by
+\ref{fdip-007B}; for the general compact Hausdorff case this
+can be checked on continuous product functions and extended
+by their uniform density and regularity. Equivariance and a
+lift of each coarse transformation then show that #{\rho}
+is invariant. Finally,
+#{R_gR_hF(U)=F(h^{-1}g^{-1}\cdot U)=R_{gh}F(U)}.
+This is the pathwise extension of the gauge transport
+calculation in \ref{fdip-006E}.}
+}

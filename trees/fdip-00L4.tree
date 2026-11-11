@@ -5,9 +5,16 @@
 \title{Haar averaging of bounded link observables}
 \date{2026-11-10}
 
-\p{Let #{X=G^{E_s}} and #{\Gamma=G^{V_s}} be the configuration space and gauge group used to define the \vocabk{link Hilbert space}{fdip-007Z}, with #{G} finite, #{U(1)} or #{SU(2)}, and with normalized Haar measure. Let #{A} be the algebra of bounded Borel functions #{X\to\mathbb C} under pointwise product. For a closed subgroup #{H\subseteq\Gamma}, define
+\p{Let #{G} be a compact metrizable group, let #{E_s,V_s}
+be the edges and vertices of a finite incidence presentation,
+and set #{X=G^{E_s}}, #{\Gamma=G^{V_s}}. Use normalized Haar
+measure and the vertex gauge action of \ref{fdip-006E}.
+These configuration spaces include those of the
+\vocabk{link Hilbert space}{fdip-007Z}; this averaging theorem
+does not require its transfer-kernel hypotheses.
+Let #{A} be the algebra of bounded Borel functions #{X\to\mathbb C} under pointwise product. For a closed subgroup #{H\subseteq\Gamma}, define
 ##{(P_Hf)(U)=\int_H f(h^{-1}\cdot U)\,d\mu_H(h).}
-Then #{P_H} is a \vocabk{normalized conditional functional}{fdip-00KV} of #{A} onto the #{H}-invariant functions in #{A}. If #{H\subseteq\Gamma}, the gauge average of \ref{fdip-0083} satisfies #{P_\Gamma\circ P_H=P_\Gamma}.}
+Then #{P_H} is a \vocabk{normalized conditional functional}{fdip-00KV} of #{A} onto the #{H}-invariant functions in #{A}. The full gauge average #{P_\Gamma}, defined by the same formula, satisfies #{P_\Gamma\circ P_H=P_\Gamma}.}
 
 \proof{
 \p{The configuration space is compact and metrizable, and the action is continuous. For bounded Borel #{f}, the map #{(h,U)\mapsto f(h^{-1}\cdot U)} is Borel on #{H\times X}. Integration against the Haar probability in the group variable therefore returns a Borel function of #{U}, and #{|P_Hf|\le\|f\|_\infty}. Left invariance of #{\mu_H} gives #{P_Hf(k^{-1}\cdot U)=P_Hf(U)} for every #{k\in H}. An invariant function factors out of the integrand, so #{P_H} fixes the invariant subalgebra and pulls an invariant function through the integral on either side. The unit is fixed because the measure is a probability.}
@@ -17,5 +24,10 @@ Then #{P_H} is a \vocabk{normalized conditional functional}{fdip-00KV} of #{A} o
 =\int_\Gamma\int_H f(h^{-1}g^{-1}\cdot U)\,d\mu_H(h)\,d\mu_\Gamma(g),}
 and #{h^{-1}g^{-1}=(gh)^{-1}}. The inner integral over #{H} then collapses. The resulting identity is the raw integration identity of \ref{fdip-00KX} with every weight equal to #{1}.}
 
-\p{On a bounded representative, the same integral is the orthogonal projection that defines the [physical Hilbert space](fdip-0083). The #{L^2} space itself is a different object. On #{U(1)}, a function comparable to #{|\theta|^{-1/3}} near the identity lies in #{L^2}, and its pointwise square does not. TauCeti's \leanref/tauceti{ContRepresentation.haarAverageMap} is the integrated operator of a continuous representation on a complete normed space. It supplies the projection on that space, not the pointwise product of bounded Borel functions.}
+\p{For the compact Lie setting of \ref{fdip-0083}, the same
+integral on bounded representatives is the orthogonal
+projection defining the [physical Hilbert space](fdip-0083).
+The extension to invariant probability laws on compact
+metrizable configurations is proved in \ref{fdip-00MU}.
+The #{L^2} space itself is a different object. On #{U(1)}, a function comparable to #{|\theta|^{-1/3}} near the identity lies in #{L^2}, and its pointwise square does not. TauCeti's \leanref/tauceti{ContRepresentation.haarAverageMap} integrates a representation assumed continuous as a map into continuous linear operators, on a complete normed space. That assumption must be checked in an application; the theorem does not by itself construct this bounded-Borel average or the full #{L^2} gauge representation.}
 }

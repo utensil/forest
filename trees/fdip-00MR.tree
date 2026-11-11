@@ -1,0 +1,75 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{Haar-preserving coordinate replacements}
+\date{2026-11-11}
+
+\p{Let #{G} be compact Hausdorff and equip #{G^m} with its
+regular Haar probability. Consider a finite sequence of
+coordinate replacements. In each step one current coordinate
+#{x} is replaced by
+##{y=A(z)x^\epsilon B(z),\qquad \epsilon\in\{1,-1\},}
+where #{z} denotes all other current coordinates and #{A,B}
+are continuous group-valued functions of #{z}. All coordinates
+#{z} are left fixed by that step. Each replacement is an
+invertible Haar-preserving homeomorphism.}
+
+\p{Suppose some distinct output coordinates are retained and
+never altered by subsequent steps. If their final values are
+exactly the specified words of a
+\vocabk{coarse path map}{fdip-00MO}, then its image reference
+#{\rho} is product Haar on the retained links. Write the
+composite change as #{\Phi:U\mapsto(u,v)}, where #{u} is retained
+and #{v} contains the remaining coordinates. For compact
+metrizable #{G}, a disintegration is explicitly
+##{\kappa(u,\cdot)
+ =\bigl(v\mapsto\Phi^{-1}(u,v)\bigr)_*\nu_v,}
+with #{\nu_v} the product Haar probability of the unused
+coordinates. In particular the image density is
+##{f(u)=\int w(\Phi^{-1}(u,v))\,d\nu_v(v)}
+for almost every #{u}, for every nonnegative integrable
+fine weight #{w}.}
+
+\proof{
+\p{The inverse replacement is
+##{x=\begin{cases}
+ A(z)^{-1}yB(z)^{-1},&\epsilon=1,\\
+ B(z)y^{-1}A(z),&\epsilon=-1.
+ \end{cases}}
+Both inverses are continuous. For fixed #{z}, translation
+and inversion preserve Haar by \ref{fdip-007B}.
+Test the transformed measure against a continuous function
+on #{G^m}. Its iterated integral over #{x} and #{z} is
+unchanged by this substitution. Iterated integration here
+represents the regular product measure: equality holds on
+continuous product functions and extends by uniform density.
+Uniqueness of regular Borel measures from their continuous
+integrals proves preservation of the entire Haar probability.
+This argument does not identify the topological Borel
+sigma-algebra with a product sigma-algebra in the
+nonmetrizable case.}
+
+\p{Composition preserves the same probability. Its retained
+coordinate projection therefore has product Haar law, provided
+that those coordinates are the stated path words. This
+requires checking the final words after all replacements:
+an occurrence once in a current pivot, with all other factors
+independent of that pivot, is the condition used at each step.}
+
+\p{For compact metrizable #{G}, finite Borel products agree
+with product sigma-algebras. The displayed inverse coordinate
+formula is then a Borel probability kernel. Fubini gives
+##{\int F(U)\,d\nu_f(U)
+ =\int\int F(\Phi^{-1}(u,v))\,d\nu_v(v)\,d\nu_c(u)}
+for integrable #{F}; Tonelli gives the nonnegative version.
+The kernel is supported on #{\mathcal B^{-1}\{u\}} for every
+#{u}. Apply \ref{fdip-00MQ} with #{F=w} to obtain the density.}
+}
+
+\p{These substitutions include the rooted-tree changes in
+\citet{Theorem 5.3, pp. 590–591}{driver1989ym2} and the
+triangular lasso changes in
+\citet{Corollary 2.4.9, pp. 102–103}{levy2010holonomy}.
+The proof above applies to the stated compact-group class;
+arbitrary repeated path words need not admit such a sequence.}
