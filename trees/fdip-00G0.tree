@@ -42,10 +42,17 @@ converges as #{N\to\infty}. The limit is the centered
 Gaussian law on those modes whose second moments are
 #{1/(m^2+4\pi^2k^2)} with #{m^2=\frac{\mu}{\kappa}}, and whose
 cross moment #{E(a_ka_\ell)} equals that variance when
-#{\ell=-k} and equals #{0} for every other pair in the set.}
+#{\ell=-k} and equals #{0} for every other pair in the set.
+The field is real, so both moments are kept: the conjugate
+covariance #{\mathbb E(a_{N,k}\overline{a_{N,\ell}})} vanishes
+when #{k\not\equiv\ell\pmod{N}}, and the unconjugated moment
+is the cross moment just stated, including #{\ell=-k}.
+Positivity of #{Q_N} is eventual, not claimed for every #{N}.}
 
 \proof{
-\p{Reindexing as in \ref{fdip-00CB}, and the equality
+\p{Let #{h} be the complexified counting Hermitian product,
+conjugate-linear in its first argument. On real functions it
+is the counting inner product. Reindexing as in \ref{fdip-00CB}, and the equality
 #{c_{r,N}=c_{-r,N}}, make #{A_N} and #{Q_N} self-adjoint.
 The same computation gives
 eigenvalue #{\alpha_N(2\pi k/N)} for #{A_N} on the Fourier
@@ -79,17 +86,21 @@ zero Fourier mode has eigenvalue #{\mu_N>0}. Every other
 mode has angle outside #{2\pi\mathbb Z}, so its eigenvalue
 is positive. Hence #{h(x,Q_Nx)>0} for #{x\ne 0}.}
 
-\p{Let #{v_k} be the Fourier vector above, so
-#{v_k^*v_k=N} and #{Q_Nv_k=\lambda_k v_k} with
+\p{Declare the counting basis of site indicators. In that basis
+#{h(f,g)=\sum_j\overline{f(j)}g(j)}, and a column product
+#{v^*Mv} equals #{h(v,Mv)}. Let #{v_k} be the Fourier vector
+above, so
+#{v_k^*v_k=h(v_k,v_k)=N} and #{Q_Nv_k=\lambda_k v_k} with
 #{\lambda_k=\mu_N+N^2\alpha_N(2\pi k/N)}. By \ref{fdip-000B}, scaling the covariance #{Q_N^{-1}} of
 #{x} by #{\kappa N} gives the counting covariance of
 #{\varphi}. Thus
 ##{\mathbb E|a_{N,k}|^2
 =N^{-2}v_k^*(\kappa NQ_N^{-1})v_k
+=N^{-2}h\bigl(v_k,(\kappa N Q_N^{-1})v_k\bigr)
 =\kappa\lambda_k^{-1}.}
 If #{k\not\equiv\ell\pmod{N}}, the vectors are orthogonal
-and the cross moment #{\mathbb E(a_{N,k}\overline{a_{N,\ell}})}
-vanishes. The product moment pairs that covariance with
+and the conjugate covariance #{\mathbb E(a_{N,k}\overline{a_{N,\ell}})}
+vanishes. The unconjugated product moment pairs that covariance with
 #{v_k} and #{v_{-\ell}}. Those vectors are orthogonal unless
 #{\ell\equiv -k\pmod{N}}, in which case the moment equals
 #{\frac{\kappa}{\lambda_k}}. Large #{N} separates a fixed finite

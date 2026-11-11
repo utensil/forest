@@ -13,9 +13,11 @@ of that statement, for #{N=BM} with integers #{B\ge 1} and
 positive precision parameter. Write #{A_b} for the mean of
 the #{M} consecutive coordinates of #{\varphi} on the
 half-open interval from #{b/B} to #{(b+1)/B}. As
-#{M\to\infty}, the covariance of
-#{(A_0,\ldots,A_{B-1})} converges to the circulant matrix of
-\ref{fdip-00BO} computed at mass squared #{m^2}. Let #{F}
+#{M\to\infty}, the covariance operator of
+#{(A_0,\ldots,A_{B-1})} on the counting space of these
+#{B} block labels converges to the covariance operator of
+\ref{fdip-00BO} at mass squared #{m^2}. Its canonical kernel
+is #{C(b,c)=\mathbb E(A_bA_c)}. Let #{F}
 be a Hölder version, of this mass #{m}, from
 \ref{fdip-00BE}. The joint law of the block means converges
 to the joint law of the integral means of #{F} over the
@@ -23,8 +25,9 @@ to the joint law of the integral means of #{F} over the
 \vocabk{dyadic increment}{fdip-00E5} of #{F}.}
 
 \proof{
-\p{The spectral expansion in the proof of \ref{fdip-00G0}
-gives
+\p{Declare the counting basis of site indicators. The spectral
+expansion in the proof of \ref{fdip-00G0}
+gives the kernel of the counting covariance operator,
 ##{\mathbb E\bigl(\varphi(u)\varphi(v)\bigr)
 =\kappa\sum_{p=0}^{N-1}\lambda_p^{-1}
 \exp\bigl(2\pi i p(u-v)/N\bigr),}
@@ -67,10 +70,11 @@ The constant mode tends to #{1/m^2}. Split the series into
 #{|p|\le P} and the tail. The tail is smaller than any
 prescribed positive tolerance, uniformly in all sufficiently
 large #{N}, once #{P} is large. Each of the finitely many
-remaining terms converges. The resulting matrix is the
-matrix of \ref{fdip-00BO} at mass squared #{m^2}.}
+remaining terms converges. The resulting kernel is the
+canonical kernel of the covariance operator of
+\ref{fdip-00BO} at mass squared #{m^2}.}
 
-\p{\ref{fdip-00BP} identifies that matrix with the
+\p{\ref{fdip-00BP} identifies that kernel with the
 covariance of the means #{B\int_I F} for a field with the
 covariance #{G} of \ref{fdip-00BG}. From that
 identification, the argument of \ref{fdip-00ED} shows that

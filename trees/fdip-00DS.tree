@@ -20,9 +20,11 @@ weight #{w}.}
 \p{The refinement of any #{n}-cell is the same 9-edge graph
 as the refinement of #{G_0}, so the unit-weight calculation
 scales by #{w}. Use the labels of the definition.
-Each midpoint meets two corners and the other
-two midpoints, so the block on #{(a,b,c)} is
-#{M=5I-J}, where #{J} is the #{3\times 3} matrix of ones.
+Declare the ordered counting basis #{(a,b,c)} of midpoint
+indicators, in that order. Each midpoint meets two corners
+and the other two midpoints, so in that basis the block on
+#{(a,b,c)} is #{M=5I-J}, where #{J} is the #{3\times 3}
+matrix of ones.
 The diagonal entries of #{M} are #{4} and the off-diagonal
 entries are #{-1}. Since #{J^2=3J},
 ##{\Bigl(5I-J\Bigr)\Bigl(\frac{1}{5}I+\frac{1}{10}J\Bigr)
@@ -59,11 +61,13 @@ Their sum is #{\frac{6}{5}}. The block is positive definite,
 so \ref{fdip-00DH} identifies this extension as the
 minimizer.}
 
-\p{Every permutation of the corners extends to an automorphism
-by the same permutation of the opposite midpoints, so the
-three off-diagonal entries of the kept form are equal.
-Constants have energy #{0} and lie in the kernel. A symmetric
-#{3\times 3} matrix with those two properties is a multiple
+\p{Declare the ordered counting basis of the three corner
+indicators. Every permutation of the corners extends to an
+automorphism by the same permutation of the opposite
+midpoints, so the three off-diagonal entries of the kept
+form are equal. Constants have energy #{0} and lie in the
+kernel. In that basis, a symmetric #{3\times 3} matrix with
+those two properties is a multiple
 of the unit-triangle Laplacian. At #{(1,0,0)} that triangle
 has energy #{2}, since two edges contribute #{1} and the
 third contributes #{0}. The multiple is
