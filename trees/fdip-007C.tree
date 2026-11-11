@@ -6,12 +6,16 @@
 \date{2026-11-01}
 
 \p{Let #{G} be a compact Lie group with [normalized Haar
-measure](fdip-007B). Choose unitary representatives of its complex
-irreducibles, indexed by #{\widehat G}, with dimensions #{d_\rho}.
-The Peter–Weyl theorem says that the functions
-#{\sqrt{d_\rho}\rho(\cdot)_{ij}} form an orthonormal basis of
-#{L^2(G)}. Its central subspace has orthonormal basis
-#{\chi_\rho}. Thus a central #{f\in L^2(G)} has the expansion
+measure](fdip-007B). That probability uses compactness of #{G}.
+\ref{fdip-00LY} records that the same normalization is unavailable
+for #{SL(2,\mathbb R)}. Choose unitary representatives of its complex
+irreducibles, indexed by #{\widehat G}, with dimensions #{d_\rho}
+and spaces #{V_\rho}. The Peter–Weyl theorem identifies #{L^2(G)}
+unitarily with the orthogonal sum of the coefficient spaces
+#{\operatorname{End}(V_\rho)\cong V_\rho^*\otimes V_\rho}. The
+inner-product convention is the one recorded in \ref{fdip-00M7}.
+The central subspace has orthonormal basis #{\chi_\rho}. Thus a
+central #{f\in L^2(G)} has the expansion
 ##{f=\sum_{\rho\in\widehat G}c_\rho\chi_\rho,
  \qquad c_\rho=\int_G f(h)\overline{\chi_\rho(h)}\,d\mu_G(h),}
 with convergence in #{L^2}. This is a \em{cited statement}, namely
@@ -19,20 +23,7 @@ Woit's Section 5, Theorem 1 and Corollary 1
 \citet{p. 6}{woit2012peterweyl}. It does not assert pointwise or
 absolute convergence for an arbitrary #{L^2} function.}
 
-\p{For an inequivalent exhaustive family of finite-dimensional unitary
-continuous models, TauCeti's
-\leanref/tauceti{TauCeti.peterWeylBasis} constructs the normalized
-matrix-coefficient Hilbert basis, with its inner-product convention
-for matrix coefficients. Over #{\mathbb C}, its coefficient
-#{\langle\rho(g)e_a,e_b\rangle} is the conjugate of the matrix
-entry #{\rho(g)_{ba}}; conjugation, or reindexing by dual
-representations, gives the equivalent entry-coordinate basis.
-The separate \leanref/tauceti{TauCeti.characterBasis} constructs
-the actual character basis of the central #{L^2} subspace.
-Compact Hausdorff groups over #{\mathbb C}, hence the compact Lie
-groups here, satisfy the stated hypotheses. These correspondences
-support the two #{L^2} basis statements, not the uniform absolute
-convergence or surface integral established next.}
+\transclude{fdip-00M7}
 
 \p{Suppose now that #{f} is continuous and central and that
 ##{\sum_{\rho\in\widehat G}|c_\rho|d_\rho<\infty.}
@@ -56,7 +47,8 @@ whose total absolute value is bounded uniformly by
 This bound is integrable against probability measure, justifying
 interchange of the full face-label sum and the edge integrals.}
 
-\p{Haar averaging gives the same matrix orthogonality as finite
+\p{Use the ordered orthonormal bases of \ref{fdip-00M7}. Haar
+averaging gives the same matrix orthogonality as finite
 averaging: for #{A:V_\tau\to V_\rho}, the integral
 #{\int_G\rho(h)A\tau(h)^{-1}\,d\mu_G(h)} is an intertwiner.
 Schur's lemma and its trace make it zero for inequivalent

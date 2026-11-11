@@ -5,13 +5,16 @@
 \title{Unit quaternions and binary rotation groups}
 \date{2026-11-01}
 
-\p{The unit quaternions are isomorphic to #{SU(2)} by
-##{M(a+bi+cj+dk)=
- \begin{pmatrix}a+bi&c+di\\-c+di&a-bi\end{pmatrix}.}
-Conjugation on the imaginary quaternions defines a surjective
-homomorphism
+\p{View the Hamilton quaternions as a right vector space over
+#{\mathbb C=\operatorname{span}_{\mathbb R}\{1,i\}}. Left
+multiplication by a quaternion is complex-linear for that right
+structure. \ref{fdip-00M6} chooses the ordered basis in which this
+action of a unit quaternion is special unitary, with the matrix
+recorded there. The unit quaternions are therefore isomorphic to
+#{SU(2)}. Conjugation on the imaginary quaternions defines a
+surjective homomorphism
 ##{\pi:SU(2)\longrightarrow SO(3),\qquad
- \pi(M(q))(v)=qvq^{-1},\qquad\ker\pi=\{1,-1\}.}
+ \pi(q)(v)=qvq^{-1},\qquad\ker\pi=\{1,-1\}.}
 For the proper rotation groups #{R_T,R_O,R_I} of the regular
 tetrahedron, octahedron and icosahedron, define
 ##{2T=\pi^{-1}(R_T),\qquad
@@ -20,7 +23,7 @@ Their orders are respectively #{24,48,120}. Each quotient by
 #{\{1,-1\}} is its indicated rotation group.}
 
 \proof{
-\p{The images of #{i,j,k} satisfy the quaternion multiplication
+\p{Let #{M} be the matrix map of \ref{fdip-00M6}. The images of #{i,j,k} satisfy the quaternion multiplication
 relations, so #{M} is an injective real-algebra homomorphism.
 Direct calculation gives
 ##{M(q)^*M(q)=|q|^2I,\qquad\det M(q)=|q|^2.}
@@ -66,19 +69,13 @@ R \arrow[r,hook] & SO(3)
 \p{For any of the three rotation groups #{R}, the square records
 the subgroup and its central double cover. In particular, the
 [Hurwitz-unit model](fgap-000K) of #{2T} is this tetrahedral
-preimage. Its quaternion generators #{i,j,k} and
-#{(-1+i+j+k)/2} preserve the 4 imaginary vectors
-#{(1,1,1)}, #{(1,-1,-1)}, #{(-1,1,-1)}, #{(-1,-1,1)}:
-the first generators change two coordinate signs, and the last
-cyclically permutes coordinates. Its 24 elements therefore
-exhaust the preimage. This identifies the group used in the
-[finite spinor gauge example](fdip-006Y).}
+preimage. \ref{fdip-00M6} checks that its generators preserve a
+regular tetrahedron, so its 24 elements exhaust the preimage. This
+identifies the group used in the
+[finite spinor gauge example](fdip-006Y). The matrix equivalence
+does not assert the #{SO(3)} quotient or the three binary subgroup
+identifications; those have their separate arguments above. A finite
+subgroup supplies an available group action, not a physical
+interpretation of that action.}
 
-\p{TauCeti's
-\leanref/tauceti{Quaternion.unitaryEquivSpecialUnitaryGroup}
-formalizes precisely the group equivalence between unit Hamilton
-quaternions and #{SU(2)}, using the displayed matrix map. This
-correspondence does not assert the #{SO(3)} quotient or the three
-binary subgroup identifications; those have their separate arguments
-above. A finite subgroup supplies an available group action, not a
-physical interpretation of that action.}
+\transclude{fdip-00M6}
