@@ -8,8 +8,14 @@
 \p{Fix #{\mu>0}, an integer #{k}, and a
 \vocabk{finite-range circle precision}{fdip-00C8} with
 second-order coefficient #{\kappa}. Let #{\varphi} be the
-rescaled field of \ref{fdip-00CB}, and set
-##{a_{N,k}=N^{-1}\sum_{j=0}^{N-1}
+rescaled field of \ref{fdip-00CB}. For an integer #{N}, let
+#{h} be the complexified counting Hermitian product on
+functions on the residues modulo #{N}, conjugate-linear in
+its first argument and linear in its second. The observable
+is the canonical Fourier pairing of #{\varphi} with the
+character #{\chi_k(j)=\exp(2\pi i kj/N)},
+##{a_{N,k}=N^{-1}h(\chi_k,\varphi)
+=N^{-1}\sum_{j=0}^{N-1}
 \exp(-2\pi i kj/N)\,\varphi(j).}
 Whenever #{N>2R} and, if #{k\ne 0}, also #{N>2R|k|},
 ##{\mathbb E|a_{N,k}|^2
@@ -18,21 +24,32 @@ As #{N\to\infty} through such integers, the moment converges
 to #{\frac{1}{m^2+4\pi^2k^2}} with #{m^2=\frac{\mu}{\kappa}}.
 This is
 the moment in \ref{fdip-004J} for the circle mesh of mass
-squared #{m^2}. Frequencies distinct modulo #{N} are
-uncorrelated.}
+squared #{m^2}. The field is real. If
+#{k\not\equiv\ell\pmod{N}}, the conjugate covariance is
+##{\mathbb E\bigl(a_{N,k}\overline{a_{N,\ell}}\bigr)=0.}
+That is not the assertion that the unconjugated moment
+#{\mathbb E(a_{N,k}a_{N,\ell})} vanishes for the pair
+#{k} and #{-k}.}
 
 \proof{
-\p{Let #{v} be the Fourier vector with entries
-#{\exp(2\pi i kj/N)}. By the eigenvalue computation in
+\p{Declare the counting basis of site indicators. In that
+basis #{h(f,g)=\sum_j\overline{f(j)}g(j)}, and a column
+product #{v^*Mv} is the pairing #{h(v,Mv)}. Let #{v} be the
+Fourier vector with entries #{\exp(2\pi i kj/N)}, so
+#{v=\chi_k}. By the eigenvalue computation in
 \ref{fdip-00CB}, #{Q_Nv=\lambda v} with
-#{\lambda=\mu+N^2\alpha(2\pi k/N)}, and #{v^*v=N}. The
+#{\lambda=\mu+N^2\alpha(2\pi k/N)}, and #{v^*v=h(v,v)=N}. The
 counting covariance of #{\varphi} is #{\kappa N Q_N^{-1}}, so
 ##{\mathbb E|a_{N,k}|^2
 =N^{-2}v^*(\kappa N Q_N^{-1})v
+=N^{-2}h\bigl(v,(\kappa N Q_N^{-1})v\bigr)
 =\kappa\lambda^{-1}.}
 If #{k\not\equiv \ell\pmod{N}}, the two Fourier vectors are
 orthogonal eigenvectors, and the same calculation gives
-covariance zero.}
+#{\mathbb E(a_{N,k}\overline{a_{N,\ell}})=0}. Since the field
+is real, this is the conjugate covariance. It does not assert
+that #{\mathbb E(a_{N,k}a_{N,\ell})} vanishes when
+#{\ell\equiv -k\pmod{N}}.}
 \p{If #{k=0}, then #{\alpha(0)=0} and the moment equals
 #{\frac{\kappa}{\mu}} for every #{N}. If #{k\ne 0}, the identity
 #{1-\cos u=2\sin^2(u/2)} gives

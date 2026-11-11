@@ -2,27 +2,34 @@
 \meta{agent-authored}{true}
 \tag{fdip}
 \taxon{Proposition}
-\title{The selected shape differs from the symbol matrix}
+\title{The selected shape differs from the finite-range operator}
 \date{2026-11-07}
 
 \p{Fix #{m>0} and #{\kappa>0}, and set #{\mu=\kappa m^2}. For
 the nearest-neighbor coefficients #{c_1=c_{-1}=\kappa} and
-an integer #{N>2}, let #{Q_N} be the corresponding
-\vocabk{finite-range circle precision}{fdip-00C8}. Its shape,
-in the sense of the ratio of the diagonal entry to twice the
-neighbor coefficient, equals #{1+m^2/(2N^2)}. The shape
+an integer #{N>2}, let the sites be the residues modulo
+#{N}. Let #{T} be the cyclic shift #{(Tf)(j)=f(j-1)}. The
+offsets #{\pm 1} are distinct because #{N>2}. Define
+##{Q_N=(\mu+2\kappa N^2)I-\kappa N^2(T+T^{-1}).}
+This is the \vocabk{finite-range circle precision}{fdip-00C8}
+for those coefficients. Its shape, the ratio of the diagonal
+coefficient to twice the neighbor coefficient, equals
+#{1+m^2/(2N^2)}. The shape
 selected by \ref{fdip-00AY} equals #{\cosh(m/N)}. The
 difference is at least #{(m/N)^4/24}.}
 
+\p{Remark. Declare the counting basis of site indicators. In
+that basis #{Q_N} has diagonal #{\mu+2\kappa N^2} and neighbor
+entries #{-\kappa N^2}.}
+
 \proof{
-\p{On the residues modulo #{N}, the two offsets #{\pm 1} are
-distinct because #{N>2}. In the definition of a
-[finite-range circle precision](fdip-00C8), the matrix
-#{A_N} therefore has diagonal #{2\kappa} and neighbor
-entries #{-\kappa}. Multiplying by #{N^2} and
-adding #{\mu} on the diagonal produces the diagonal entry
-#{\mu+2\kappa N^2} and the neighbor entry #{-\kappa N^2}.
-The shape is
+\p{The shift formula acts by
+##{(Q_Nx)(j)=(\mu+2\kappa N^2)x(j)
+-\kappa N^2 x(j-1)-\kappa N^2 x(j+1).}
+That is #{Q_N=\mu I+N^2A_N} for the operator #{A_N} of
+\ref{fdip-00C8}. The diagonal coefficient is #{\mu+2\kappa N^2}. The
+coefficient of #{T+T^{-1}} is #{-\kappa N^2}, so the neighbor
+coefficient is #{\kappa N^2} and the shape is
 ##{\frac{\mu+2\kappa N^2}{2\kappa N^2}
 =1+\frac{\mu}{2\kappa N^2}
 =1+\frac{m^2}{2N^2}.}

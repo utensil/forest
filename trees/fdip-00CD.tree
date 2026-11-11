@@ -13,13 +13,20 @@ field of \ref{fdip-00CB}. Write #{A_b} for the mean of the
 #{M} consecutive coordinates of #{\varphi} on the
 half-open interval from #{b/B} to #{(b+1)/B}. These are
 the means in the \vocabk{block averages}{fdip-00BL}, applied
-to #{\varphi}. As #{M\to\infty}, the covariance of
-#{(A_0,\ldots,A_{B-1})} converges to the circulant matrix of
-\ref{fdip-00BO} computed at mass squared
-#{m^2=\frac{\mu}{\kappa}}.}
+to #{\varphi}. As #{M\to\infty}, the covariance operator of
+#{(A_0,\ldots,A_{B-1})} on the real counting space of the
+#{B} block labels converges to the covariance operator of
+\ref{fdip-00BO} at mass squared
+#{m^2=\frac{\mu}{\kappa}}. That operator commutes with the
+cyclic shift of the block labels. Its canonical kernel is
+#{C(b,c)=\mathbb E(A_bA_c)}.}
 
 \proof{
-\p{The counting covariance of #{\varphi} has entries
+\p{Let #{h} be the counting inner product on the residues
+modulo #{N}. Declare the counting basis of site indicators.
+The counting covariance operator of #{\varphi} is
+#{\kappa N Q_N^{-1}}. In that basis the pairing
+#{h(\delta_u,(\kappa N Q_N^{-1})\delta_v)} is the kernel
 ##{\mathbb E\bigl(\varphi(u)\varphi(v)\bigr)
 =\kappa\sum_{p=0}^{N-1}\lambda_p^{-1}
 \exp\bigl(2\pi i p(u-v)/N\bigr),}
@@ -52,6 +59,7 @@ nonzero integers and does not depend on #{N}. Split the sum
 into the terms with #{|p|\le P} and the tail. The tail is
 smaller than any prescribed positive tolerance, uniformly in
 #{N}, once #{P} is large. Each of the finitely many remaining
-terms converges. The resulting matrix is the matrix of
-\ref{fdip-00BO} at mass squared #{m^2}.}
+terms converges. The resulting kernel is the canonical
+kernel of the covariance operator of \ref{fdip-00BO} at mass
+squared #{m^2}.}
 }
