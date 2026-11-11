@@ -1,0 +1,75 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Example}
+\title{Three commutants of the binary tetrahedral group}
+\date{2026-11-11}
+
+\p{Let #{2T} be the group of 24 Hurwitz units in
+\ref{fdip-007G}, and set #{\omega=(-1+i+j+k)/2}.
+The rows of \ref{fgap-000K} partition #{2T} into the cosets
+#{Q}, #{Q\omega} and #{Q\omega^2}, where
+#{Q=\{\pm1,\pm i,\pm j,\pm k\}}.
+Direct multiplication gives #{\omega^3=1} and
+##{\omega i\omega^{-1}=k,\qquad
+\omega k\omega^{-1}=j,\qquad
+\omega j\omega^{-1}=i.}
+Work in #{\operatorname{SL}(2,\mathbb F_3)}, with entries read in
+#{\mathbb F_3}. Set
+##{\iota=\begin{pmatrix}0&-1\\1&0\end{pmatrix},\qquad
+\eta=\begin{pmatrix}-1&1\\1&1\end{pmatrix},\qquad
+\rho=\begin{pmatrix}0&1\\-1&-1\end{pmatrix},}
+and put #{\kappa=\iota\eta}. Matrix multiplication gives
+#{\iota^2=\eta^2=-I}, #{\iota\eta=-\eta\iota}, #{\rho^3=I}, and
+##{\rho\iota\rho^{-1}=\kappa,\qquad
+\rho\kappa\rho^{-1}=\eta,\qquad
+\rho\eta\rho^{-1}=\iota.}
+The 8 matrices #{\{\pm I,\pm\iota,\pm\eta,\pm\kappa\}} are
+distinct, and the relations just given are the products of
+#{i} and #{j} in #{Q}. Every
+element of #{2T} is uniquely #{q\omega^r} with #{q\in Q} and
+#{r\in\{0,1,2\}}, and
+##{(q\omega^r)(q'\omega^s)
+ =q\,(\omega^r q'\omega^{-r})\,\omega^{r+s}.}
+Let #{\phi} send #{i,j,k} to #{\iota,\eta,\kappa} and send
+#{\omega} to #{\rho}. The displayed conjugations say that
+#{\phi(\omega q\omega^{-1})=\rho\phi(q)\rho^{-1}} on
+#{\{i,j,k\}}, hence on #{Q}. Define
+#{\phi(q\omega^r)=\phi(q)\rho^r}. This preserves the product
+rule above, so #{\phi} is a homomorphism. The image
+#{\phi(Q)} is a subgroup of order 8. If
+#{\phi(q)\rho^r=I}, then #{\rho^r} lies in #{\phi(Q)}. The
+order of #{\rho} is 3, so #{r=0} and #{q=1}. The kernel is
+trivial.
+A first column of a matrix in the codomain may be any of the
+#{3^2-1=8} nonzero vectors, and #{w\mapsto\det(v,w)} takes
+the value #{1} for exactly 3 choices of the second column.
+The codomain therefore has order 24, and the homomorphism is
+an isomorphism
+##{2T\cong\operatorname{SL}(2,\mathbb F_3).}}
+
+\p{\ref{fdip-0053} records the 7 irreducible characters, of
+degrees #{1,1,1,2,2,2,3}, and the squares of the conjugacy
+classes. Substitution of that table into the
+[Frobenius-Schur indicator](fgap-0021)
+#{|2T|^{-1}\sum_g\chi(g^2)} gives the numerators
+#{24}, #{0}, #{0}, #{-24}, #{0}, #{0} and #{24} for
+#{1}, #{\lambda}, #{\lambda^2}, #{\sigma}, #{\sigma\lambda},
+#{\sigma\lambda^2} and #{\tau}. The indicators are
+#{1,0,0,-1,0,0,1}. For the sample terms,
+#{2+2-12-16=-24} is the numerator of #{\sigma}, and
+#{3+3+18=24} is the numerator of #{\tau}.
+\ref{fdip-0051} converts an indicator into a commutant.
+The trivial representation and the degree-#{3} representation
+#{\tau} have indicator #{1} and commutant #{\mathbb R}.
+The defining representation #{\sigma} has indicator #{-1} and
+commutant #{\mathbb H}. The other 4 irreducible characters
+have indicator #{0}, and each conjugate pair has commutant
+#{\mathbb C}. Thus each of #{\mathbb R}, #{\mathbb H} and
+#{\mathbb C} occurs as #{\operatorname{End}_G(W)} for an
+irreducible real representation #{W} of this group, and so
+occurs as the scalar ring of a
+[right multiplicity module](fdip-00KN)
+#{\operatorname{Hom}_G(W,H)}.
+The isomorphism is an identification of these finite groups.
+It is not a physical symmetry assignment.}
