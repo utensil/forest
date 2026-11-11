@@ -8,7 +8,7 @@
 \p{Extend the [free Fourier symbol](fdip-009Q) to the continuous
 momentum torus #{(\mathbb R/2\pi\mathbb Z)^d}:
 ##{\mathcal D(p)=i\sum_j\Gamma_j\sin p_j.}
-Its zero matrices occur exactly at the #{2^d} corners
+Its zeros occur exactly at the #{2^d} corners
 #{p^\epsilon=\pi\epsilon}, with
 #{\epsilon\in\{0,1\}^d}. Near each corner,
 ##{\begin{aligned}
@@ -17,19 +17,21 @@ Its zero matrices occur exactly at the #{2^d} corners
 \widetilde\Gamma_j&=(-1)^{\epsilon_j}\Gamma_j,
 \end{aligned}}
 where the remainder is measured in the operator norm on
-#{S\otimes F}. The matrices #{\widetilde\Gamma_j} obey the
-same Clifford anticommutation relations as #{\Gamma_j}.}
+#{S\otimes F}. The operators #{\widetilde\Gamma_j} obey the
+same Euclidean Clifford relation as #{\Gamma_j}. The leading
+factor #{i} is the centered-difference symbol of \ref{fdip-00LZ},
+not the substitution #{\gamma_j\mapsto i\gamma_j}.}
 
 \proof{
 \p{The identity
 #{\mathcal D(p)^2=-(\sum_j\sin^2p_j)I} holds for every
 real momentum. If #{\mathcal D(p)=0}, its square forces each
-sine to vanish; conversely those vanishing sines make the matrix
+sine to vanish; conversely those vanishing sines make the operator
 zero. Modulo #{2\pi}, each coordinate is #{0} or #{\pi}.
 The expansion follows from
 #{\sin(\pi\epsilon_j+k_j)=(-1)^{\epsilon_j}\sin k_j}
-and #{\sin k_j=k_j+O(|k_j|^3)}. The gamma matrices have norm
-one, and there are finitely many coordinates, so summing the
+and #{\sin k_j=k_j+O(|k_j|^3)}. The operators #{\Gamma_j} have
+norm one, and there are finitely many coordinates, so summing the
 remainders gives the stated operator-norm bound. Finally
 ##{\widetilde\Gamma_i\widetilde\Gamma_j
  +\widetilde\Gamma_j\widetilde\Gamma_i
