@@ -5,17 +5,23 @@
 \title{Block covariances converge}
 \date{2026-11-06}
 
-\p{Fix #{B\ge 1} and #{\mu>0}. As #{M\to\infty}, the covariance
-of the \vocabk{block averages}{fdip-00BL} converges. The limit matrix #{C} is
-circulant, and
-##{C_{bc}=\sum_{p\in\mathbb Z}\alpha_p
+\p{Fix #{B\ge 1} and #{\mu>0}. As #{M\to\infty} through mesh
+sizes #{n=BM\ge 3}, the covariance
+of the \vocabk{block averages}{fdip-00BL} converges. The limit
+is the covariance operator #{C} on the real counting space
+#{\mathbb R^{\mathbb Z/B\mathbb Z}} of the #{B} block labels,
+and it commutes with the cyclic shift
+#{(Tg)(b)=g(b-1)} of those labels. Its
+canonical kernel #{C(b,c)=\mathbb E(A_bA_c)} is
+##{C(b,c)=\sum_{p\in\mathbb Z}\alpha_p
 \exp\bigl(2\pi i p(b-c)/B\bigr),}
 where #{\alpha_0=1/\mu} and, for every nonzero integer #{p},
 ##{\alpha_p=\frac{B^2\sin^2(\pi p/B)}
 {(\pi p)^2\bigl(\mu+(2\pi p)^2\bigr)}.}}
 
 \proof{
-\p{The eigenvalues of #{Q_n} are
+\p{Declare the characters #{j\mapsto\exp(2\pi i pj/n)} on the
+counting basis of mesh sites. The eigenvalues of #{Q_n} are
 #{\lambda_p=\mu+4n^2\sin^2(\pi p/n)} for
 #{p=0,\ldots,n-1}. The raw covariance in \ref{fdip-004I}
 therefore has entries
@@ -43,5 +49,6 @@ that range. For each fixed #{p\neq 0},
 The comparison #{B^2/(4\mu p^2)} is summable over
 #{p\in\mathbb Z\setminus\{0\}} and does not depend on #{n}.
 Dominated convergence for series passes the limit inside the
-sum, which is the stated matrix #{C}.}
+sum along #{n=BM\ge 3}, which is the kernel of the covariance
+operator #{C}.}
 }

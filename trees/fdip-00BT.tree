@@ -6,12 +6,15 @@
 \date{2026-11-06}
 
 \p{Fix #{B\ge 4} and #{m>0}, and set #{\mu=m^2}. The
-covariance #{C} of \ref{fdip-00BO} is positive definite. Its
-inverse, the precision of the limit law, has a nonzero entry
-at some distance at least #{2}.}
+covariance operator #{C} of \ref{fdip-00BO} is positive definite. Its
+inverse #{C^{-1}} is the precision of the limit law. The
+evaluation kernel of #{C^{-1}} takes a nonzero value on some
+pair of canonical block indicators at cyclic distance at least
+#{2}.}
 
 \proof{
-\p{The eigenvalues of the symmetric circulant #{C} are
+\p{Declare the counting chart of block indicators. In that chart,
+the eigenvalues of the symmetric circulant #{C} are
 #{\lambda_q=\sum_{d=0}^{B-1}C_{0d}\cos(2\pi q d/B)}.
 From the series in \ref{fdip-00BO}, the sum over one period
 equals #{B} when the frequency differs from #{q} by a
@@ -100,6 +103,8 @@ the reciprocal agrees with an affine function for at most two
 values of #{\cos\theta}. For #{B\ge 4} the values
 #{\cos(2\pi q/B)} include at least three distinct numbers. A
 nearest-neighbor circulant has eigenvalues
-#{A+D\cos(2\pi q/B)}, so the precision has a nonzero entry
-at distance #{2} or greater.}
+#{A+D\cos(2\pi q/B)}. In this counting chart the precision
+therefore has a nonzero entry at distance #{2} or greater, and
+that entry is the nonzero kernel value of #{C^{-1}} on the
+corresponding canonical block indicators.}
 }

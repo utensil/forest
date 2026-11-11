@@ -6,27 +6,58 @@
 \date{2026-11-06}
 
 \p{Let #{L\ge 6} be even, and let the vertices be the torus
-#{\mathbb Z/L\mathbb Z\times\mathbb Z/L\mathbb Z}. Let #{a\neq 0}
-and #{b\neq 0}, and let #{Q} have diagonal #{a} and
-nearest-neighbor entries #{-b}. Write the vertices as the
-even-parity class and the odd-parity class. The \vocabk{Schur complement}{fdip-000D} that eliminates the odd class has diagonal
-#{a-4b^2/a}, entry #{-b^2/a} at each offset #{(2,0)} and
-#{(0,2)}, and entry #{-2b^2/a} at each offset #{(1,1)} and
-#{(1,-1)}. When #{Q} is a \vocabk{positive precision parameter}{fdip-0004}, this
+#{\mathbb Z/L\mathbb Z\times\mathbb Z/L\mathbb Z}. Equip the real
+functions on these vertices with the counting inner product
+#{h}.
+Let #{a\neq 0} and #{b\neq 0}. Let #{T_1} and #{T_2} be the
+unit shifts #{(T_1f)(x,y)=f(x-1,y)} and
+#{(T_2f)(x,y)=f(x,y-1)}, and define
+##{Q=aI-b(T_1+T_1^{-1}+T_2+T_2^{-1}).}
+Let #{X} and #{Y} be the canonical subspaces of functions
+supported on the even-parity sites and the odd-parity sites.
+Let #{\iota_X}, #{\iota_Y}, #{\pi_X} and #{\pi_Y} be the
+corresponding inclusions and projections, and let
+#{M=\pi_XQ\iota_Y} be the off-diagonal map from #{Y} to #{X}.
+Write #{M^*} for its counting adjoint. The
+\vocabk{Schur complement}{fdip-000D} that eliminates the odd
+class is the operator
+##{S=aI-a^{-1}MM^*}
+on #{X}. For the canonical indicator #{e_x} of an even site,
+the kernel evaluations are #{h(e_x,Se_x)=a-4b^2/a},
+#{h(e_x,Se_{x+v})=-b^2/a} at each axial offset
+#{v=\pm(2,0)} or #{v=\pm(0,2)}, and
+#{h(e_x,Se_{x+v})=-2b^2/a} at each diagonal offset
+#{v=(\pm 1,\pm 1)}. For #{L\ge 6} these offsets are distinct
+on the torus. When #{Q} is a
+\vocabk{positive precision parameter}{fdip-0004}, this
 complement is the precision of the retained Gaussian marginal.}
 
+\p{Remark. In the counting basis of site indicators, #{Q} has
+diagonal #{a} and nearest-neighbor entries #{-b}.}
+
 \proof{
-\p{The square lattice is bipartite, so each class induces an
-empty graph. Both diagonal blocks of #{Q} equal #{a} times
-the identity. The Schur complement on the even class is
-therefore #{aI-(1/a)MM^{T}}, where #{M} records the entries
-#{-b} between even and odd vertices. The product
-#{(MM^{T})_{xy}} equals #{b^2} times the number of common
-odd neighbors. An even vertex has #{4} neighbors, so the
-diagonal is #{a-4b^2/a}. The vertices separated by
-#{(2,0)} share exactly one odd neighbor, and the vertices
-separated by #{(1,1)} share exactly two. For #{L\ge 6}
-these offsets are distinct on the torus. If #{Q} is a
-positive precision parameter, \ref{fdip-000D} identifies
-the complement with the precision of the marginal.}
+\p{The shifts #{T_1} and #{T_2} exchange the two parity classes,
+so each class induces an empty graph. Declare the counting
+basis of site indicators, with the even class written first.
+In that basis both diagonal blocks of #{Q} equal #{a} times
+the identity, and the off-diagonal block is the matrix of
+#{M}. The counting adjoint #{M^*} has that block's transpose
+as its matrix. The Schur complement on the even class is
+therefore #{aI-a^{-1}MM^*}. The product of the off-diagonal
+block with its transpose, at a pair of even sites, equals
+#{b^2} times the number of common odd neighbors, and #{S}
+subtracts #{a^{-1}} times that product. An even
+vertex has #{4} neighbors, so the kernel value on one
+canonical indicator against itself is #{a-4b^2/a}. The
+vertices separated by #{(2,0)} share exactly one odd neighbor,
+and likewise those separated by #{(0,2)}, so each axial
+coefficient is #{-b^2/a}. The vertices separated by #{(1,1)}
+share exactly two, and likewise those separated by #{(1,-1)},
+so each diagonal-offset coefficient is #{-2b^2/a}. Since
+#{M^*} is the counting adjoint, #{S} is self-adjoint, and the
+kernel takes the same coefficients at the opposite signs. For #{L\ge 6} the offsets
+#{\pm(2,0)}, #{\pm(0,2)} and #{(\pm 1,\pm 1)} are distinct on
+the torus. If #{Q} is a positive precision parameter,
+\ref{fdip-000D} identifies the complement with the precision
+of the marginal.}
 }

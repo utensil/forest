@@ -18,11 +18,23 @@ level represents the same point, because
 #{\mathbb R^S} with its
 \vocabk{counting inner products}{fdip-0002}. List the points of
 #{S} in the cyclic order of their positions modulo #{1}, and
-let #{h_i>0} be the arc from one point to the next. Each arc
+let #{h_i>0} be the oriented arc from its source #{s} to the next
+point #{t}, taken once. Each arc
 is a difference of dyadic positions. Viewing the same points at
 a finer level does not change the arcs, and the arcs sum to
-#{1}. Fix #{m>0}. The \newvocab{cyclic arc precision} #{Q_S} is
-the following symmetric matrix. When #{|S|\ge 3},
+#{1}. Fix #{m>0}. On #{u,v\in\mathbb R^S}, that arc contributes
+the symmetric bilinear expression
+##{m\coth(mh_i)(u_s v_s+u_t v_t)
+-m\operatorname{csch}(mh_i)(u_s v_t+u_t v_s).}
+The \newvocab{cyclic arc precision} #{Q_S} is the
+counting-metric Riesz operator of the sum of these expressions
+over the oriented cyclic arcs: the counting inner product of
+#{u} with #{Q_Sv} equals that sum. When #{|S|=2}, the arcs #{h}
+and #{1-h} are parallel edges between the same two points, and
+both are included in the sum, with no factor #{\frac{1}{2}}.}
+
+\p{Remark. Declare the counting basis of site indicators in the
+cyclic order. In that basis, when #{|S|\ge 3},
 ##{Q_{ii}=m\bigl(\coth(m h_{i-1})+\coth(m h_i)\bigr),
 \qquad
 Q_{i,i+1}=-\frac{m}{\sinh(m h_i)},}

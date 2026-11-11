@@ -7,19 +7,26 @@
 
 \p{Let #{n\ge 3} be an integer. On
 #{\mathbb R^{\mathbb Z/n\mathbb Z}} with its
-\vocabk{counting inner products}{fdip-0002}, the
-\newvocab{uniform cycle precision} with diagonal value #{a} and
-neighbor value #{b} is the symmetric matrix #{Q} given by
-#{Q_{ii}=a} and #{Q_{i,i\pm 1}=-b}, indices being read modulo
-#{n}. When #{b\neq 0}, its \newvocab{shape} is
+\vocabk{counting inner products}{fdip-0002}, let #{T} be the
+cyclic shift #{(Tf)(i)=f(i-1)}, with indices read modulo #{n}.
+For real coefficients #{a} and #{b}, define
+##{Q=aI-b(T+T^{-1})}
+The counting adjoint satisfies #{T^*=T^{-1}}, so #{Q} is
+self-adjoint. This operator is the
+\newvocab{uniform cycle precision}.
+When #{b\neq 0}, its \newvocab{shape} is
 #{t=a/(2b)}.}
 
+\p{Remark. In the counting basis of site indicators, the only
+nonzero entries are #{Q_{ii}=a} and #{Q_{i,i\pm 1}=-b}.}
+
 \p{Let #{q\ge 2} and #{N\ge 3} be integers, and take this precision
-on #{\mathbb Z/(qN)\mathbb Z}. The kept set is the subgroup
-#{q\mathbb Z/(qN)\mathbb Z}, identified with
+on #{\mathbb Z/(qN)\mathbb Z}. The kept set is the canonical
+subgroup #{q\mathbb Z/(qN)\mathbb Z}, identified with
 #{\mathbb Z/N\mathbb Z} by #{qj\mapsto j}. The complementary
-vertices are eliminated, and \newvocab{decimation} by the factor
-#{q} is passage to the marginal law on the kept coordinates. For a
-\vocabk{Gaussian probability law}{fdip-0005} this marginal is the
+vertices are eliminated. \newvocab{Decimation} by the factor
+#{q} is the pushforward of a law along restriction of fields
+to that subgroup. For a
+\vocabk{Gaussian probability law}{fdip-0005} the pushed law is the
 \vocabk{retained marginal law}{fdip-000E}, whose precision is the
-\vocabk{Schur complement}{fdip-000D} of the eliminated block.}
+\vocabk{Schur complement}{fdip-000D} of the eliminated compression.}

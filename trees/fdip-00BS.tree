@@ -8,15 +8,20 @@
 \p{There is a unique probability measure on
 #{\prod_{B\ge 1}\mathbb R^B} whose finite-dimensional
 distributions are the centered Gaussian laws with the
-covariances of \ref{fdip-00BO}. Whenever #{r} divides #{B},
+counting covariance operator of \ref{fdip-00BO}. Whenever #{r} divides #{B},
 the mean of #{r} consecutive coordinates at level #{B}
-equals the coordinate at level #{B/r}.}
+equals the coordinate at level #{B/r}, almost surely. These
+countably many identities hold on one common set of full measure.}
 
 \proof{
 \p{Each block-mean law at finite #{M} is centered Gaussian, as
 a linear image of the mesh field. For every
-#{\xi\in\mathbb R^B}, its characteristic function is
-#{\exp(-\frac{1}{2}\xi\cdot C_M\xi)}. Pointwise convergence
+#{\xi\in\mathbb R^B}, let #{h} be the counting inner product
+on #{\mathbb R^B}. The characteristic function of the
+block-mean law is
+#{\exp(-\frac{1}{2}h(\xi,C_M\xi))}, through the counting
+covariance pairing, at an admissible mesh size #{n=BM\ge 3}.
+Pointwise convergence
 of these functions to a continuous limit determines the
 limiting law, and that law is the centered Gaussian with the
 covariance of \ref{fdip-00BO}. Index the
@@ -24,7 +29,8 @@ coordinates by pairs
 #{(B,b)} with #{B\ge 1} and #{b=0,\ldots,B-1}. For a finite
 set of these coordinates, let #{B_*} be a common multiple of
 the levels that appear. The joint law is the image of the
-level-#{B_*} Gaussian under the averaging maps. At every
+level-#{B_*} Gaussian under the averaging maps, not merely the
+separate marginal law at each level. At every
 finite #{M}, \ref{fdip-00BN} identifies a coarse block mean
 with the average of the fine ones. Both sides converge in
 distribution, so the identity holds for the limiting
@@ -41,6 +47,8 @@ constructs a projective limit,
 makes it a probability measure, and
 \leanref{MeasureTheory.IsProjectiveLimit.unique} gives
 uniqueness among finite measures with those projections.
+These three projective-limit references remain partial machinery.
+They are not a Gaussian or Green-kernel formalization.
 The declarations take the finite-dimensional laws as data.
 The covariances are the content of \ref{fdip-00BO}, and the
 identification with averaged integrals of #{G} is the content

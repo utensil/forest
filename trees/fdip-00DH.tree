@@ -6,25 +6,39 @@
 \date{2026-11-06}
 
 \p{Let the edge weights be strictly positive and the graph
-connected, and let #{K} be a nonempty set of vertices. If
-#{K} omits at least one vertex, the block of #{L_w} off #{K}
-is positive definite. The \vocabk{kept form}{fdip-00DF} is then
-#{u^T S u}, where
-##{S=A-BC^{-1}B^T}
-is formed from the blocks of #{L_w} with the vertices of #{K}
-written first, by the same formula as the
-\vocabk{Schur complement}{fdip-000D}. The minimizer is the
-unique extension whose Laplacian vanishes off #{K}. For
-distinct vertices #{a} and #{b}, the kept form on the vertex
-set #{\{a,b\}} of the function that equals #{1} at #{a} and
-#{0} at #{b} equals the \vocabk{effective conductance}{fdip-00DF}
-#{c(a,b)}.}
+connected, and let #{K} be a nonempty set of vertices. Write
+#{V} for the vertex set and let
+#{h} be the counting inner product on #{\mathbb R^V}, and
+let #{h_K} be the counting inner product on #{\mathbb R^K}.
+Split
+#{\mathbb R^V=\mathbb R^K\oplus\mathbb R^{V\setminus K}}
+orthogonally, and let #{i_K}, #{i_U}, #{p_K} and #{p_U} be the
+inclusions and orthogonal projections of the two summands.
+The weighted Laplacian #{L_w} is self-adjoint for #{h}. Set
+#{A=p_K L_w i_K}, #{C=p_U L_w i_U} and #{B=p_K L_w i_U}, and
+let #{B^*} be the counting adjoint of #{B}, so
+#{B^*=p_U L_w i_K}. If #{K} omits at least one vertex, then
+#{C} is positive definite, and the \vocabk{kept form}{fdip-00DF}
+is #{h_K(u,Su)}, where
+##{S=A-BC^{-1}B^*}
+is the \vocabk{Schur complement}{fdip-000D} of #{C}. The
+minimizer on the eliminated summand is #{-C^{-1}B^*u}, and it
+is the unique extension whose Laplacian vanishes off #{K}.
+When #{K=V} there is no eliminated summand and the kept form
+is the energy. For distinct vertices #{a} and #{b}, the kept
+form on the vertex set #{\{a,b\}} of the function that equals
+#{1} at #{a} and #{0} at #{b} equals the
+\vocabk{effective conductance}{fdip-00DF} #{c(a,b)}.}
 
 \proof{
 \p{The case in which #{K} is the whole vertex set is the energy
-itself. Suppose some vertex lies outside #{K}, and write
-##{L_w=\begin{pmatrix}A&B\\ B^T&C\end{pmatrix}}
-with #{C} the block off #{K}. If #{y^T C y=0}, extend #{y} by
+itself. Suppose some vertex lies outside #{K}. Declare the
+counting basis of vertex indicators with the vertices of #{K}
+written first. In that basis
+##{L_w=\begin{pmatrix}A&B\\ B^T&C\end{pmatrix},}
+where these blocks are the matrices of the operators #{A},
+#{B}, #{C} and #{B^*} in the statement, and #{B^T} is the
+matrix of #{B^*}. If #{y^T C y=0}, extend #{y} by
 #{0} on #{K}. The energy of the extension is a sum of
 strictly positive weights times squared edge differences, so
 every edge difference vanishes. The graph is connected, and
@@ -37,7 +51,9 @@ the extension vanishes on #{K}, so the extension is #{0} and
 =(y+K_\ast u)^T C(y+K_\ast u)
 -u^T BC^{-1}B^T u.}
 The completed square is nonnegative and vanishes at
-#{y=-K_\ast u}. The minimum value is #{u^T S u}. At that
+#{y=-K_\ast u}. The minimum value is #{u^T S u}. In this
+basis that value is #{h_K(u,Su)}, and #{y=-K_\ast u} is the
+coordinate vector of #{-C^{-1}B^*u}. At that
 extension the block equation #{C y+B^T u=0} says that the
 Laplacian vanishes off #{K}. Positive definiteness makes the
 extension unique. The same completion is written in the proof of
@@ -56,6 +72,8 @@ constant fields. Then #{L_w\phi=\delta_a-\delta_b}, and
 \ref{fdip-005U} gives #{\phi=L_w^+(\delta_a-\delta_b)}. Hence
 ##{(\delta_a-\delta_b)^T L_w^+(\delta_a-\delta_b)
 =\phi(a)-\phi(b)=\frac{1}{\alpha}.}
+In this counting basis that product is the pairing
+#{h(\delta_a-\delta_b,L_w^+(\delta_a-\delta_b))}.
 The reciprocal is the energy of #{v}, which is the kept form
 of #{u}.}
 }
