@@ -7,24 +7,35 @@
 
 \p{Take the unit-weight cycle on #{\mathbb Z/(2N)}, with
 #{N\ge3} and precision #{Q=L_{C_{2N}}+aI}, where
-#{a=m^2>0}. The group #{G=C_N} acts by two-site rotations.
-It preserves the even retained vertices and the odd eliminated
-vertices. Write #{x_j=\phi_{2j}}, #{y_j=\phi_{2j+1}} and
-#{q=2+a}; indices #{j} lie in #{\mathbb Z/N}.
-For the shift #{(Tz)_j=z_{j-1}}, the blocks are
-##{A=C=qI,\qquad B=-(I+T),\qquad B^*=-(I+T^{-1}).}
+#{a=m^2>0}. The neighbor coefficient is #{1} and the diagonal
+coefficient is #{2+a}, so the shape is #{t=(2+a)/2}. Thus
+#{Q=P_t}, the \vocabk{unit-coupling cycle operator}{fdip-00AW}
+on this cycle, and the decimation factor is #{2}. The group
+#{G=C_N} acts by two-site rotations. It preserves the even
+retained vertices and the odd eliminated vertices. Write
+#{x_j=\phi_{2j}}, #{y_j=\phi_{2j+1}}; indices #{j} lie in
+#{\mathbb Z/N}. For the shift #{(Tz)_j=z_{j-1}} on the
+retained cycle, the blocks are
+##{A=C=(2+a)I,\qquad B=-(I+T),\qquad B^*=-(I+T^{-1}).}
 Thus the [equivariant Schur formula](fdip-0056) gives
 ##{\begin{aligned}
-S&=qI-q^{-1}(2I+T+T^{-1})\\
- &=w'L_{C_N}+a'I,\\
-w'&=\frac1{2+a},\qquad
- a'=(2+a)-\frac4{2+a}
-    =\frac{a(a+4)}{a+2}>0.
+S&=(2+a)I-(2+a)^{-1}(2I+T+T^{-1})\\
+ &=\frac{1}{2+a}\,P^K_{T_2(t)},
 \end{aligned}}
-Here #{L_{C_N}=2I-T-T^{-1}}. The restriction #{Q_{RR}=qI}
-has no off-diagonal entries, while #{S} has entries #{-1/q}
-between adjacent retained vertices. The retained set is stable under
-#{G}, but the marginal precision is induced by elimination.}
+where #{T_2(t)=2t^2-1} and
+#{P^K_s=2s\,I-(T+T^{-1})} is the same operator on the retained
+sites. Since #{2t=2+a}, the diagonal
+#{2T_2(t)/(2+a)} equals #{(2+a)-2/(2+a)}, so the two
+displays agree. The retained shape is #{T_2(t)} and the
+retained coupling is #{1/(2+a)}. The retained mass, the
+diagonal minus twice that coupling, equals
+##{\frac{a(a+4)}{a+2}=(2+a)-\frac{4}{2+a}>0.}
+The restriction #{Q_{RR}=(2+a)I} has no off-diagonal entries,
+while #{S} has entries #{-1/(2+a)} between adjacent retained
+vertices. The retained set is stable under #{G}, but the
+marginal precision is induced by elimination. This is the
+#{q=2} case of \ref{fdip-00B3}, with neighbor value #{1} and
+diagonal #{2+a}.}
 
 \tikzfigs{0.75}{\begin{tikzpicture}[
   retained/.style={circle,draw,fill=black!18,minimum size=6mm,inner sep=1pt},
@@ -45,23 +56,27 @@ between adjacent retained vertices. The retained set is stable under
 \node[retained] (r4) at (3.82,-0.625) {$4$};
 \draw (r0)--(r2)--(r4)--(r0);
 \node at (0,-1.9) {$w=1,\quad m^2=a$};
-\node at (4.9,-1.9) {$w'=1/q,\quad m'^2=q-4/q$};
+\node at (4.9,-1.9) {$\frac{1}{2+a},\ \frac{a(a+4)}{a+2}$};
 \end{tikzpicture}}
 
 \p{The six-cycle illustrates #{N=3}. Shaded even vertices remain;
 dashed odd vertices are integrated out. Each triangle edge has
-weight #{1/q}, and the mass squared changes from #{a} to
-#{q-4/q}, with #{q=2+a}.}
+coupling #{1/(2+a)}, and the mass squared changes from #{a} to
+#{a(a+4)/(a+2)}.}
 
 \p{The finite Gaussian normalization is retained exactly:
-#{Z_Q=Z_CZ_S} with #{Z_C=(2\pi/q)^{N/2}}, and the retained
-law is #{\mu_S}. The effective weight and mass are both part of
-this law. Dividing #{S} by #{w'} is useful for comparing its
-parameters, but changes the field covariance by a scalar unless
-the corresponding field rescaling is also made.}
+#{Z_Q=Z_CZ_S} with
+#{Z_C=\bigl(\frac{2\pi}{2+a}\bigr)^{N/2}}, and the retained
+law is #{\mu_S}. The retained coupling and the retained mass
+are both part of this law. Dividing #{S} by the coupling
+#{1/(2+a)} compares the shape, but changes the field
+covariance by a scalar unless the corresponding field
+rescaling is also made.}
 
-\p{Put #{q=2\cosh\omega} with #{\omega>0}. Then
-##{2+\frac{a'}{w'}=q^2-2=2\cosh(2\omega).}
+\p{Put #{2+a=2\cosh\omega} with #{\omega>0}. The shape is then
+#{t=\cosh\omega}, and the retained shape is
+#{T_2(t)=\cosh(2\omega)}. Twice that shape equals
+##{(2+a)^2-2=2\cosh(2\omega).}
 The doubled parameter has an exact finite-ring interpretation.
 For #{M\ge3}, the covariance of precision
 #{w(2\cosh\eta\,I-T-T^{-1})} on #{\mathbb Z/M}, with
@@ -75,49 +90,66 @@ K_{M,w,\eta}(r)
 For the original and retained fields this gives
 ##{(Q^{-1})_{0,2r}
  =K_{2N,1,\omega}(2r)
- =K_{N,w',2\omega}(r)
+ =K_{N,\,1/(2+a),\,2\omega}(r)
  =(S^{-1})_{0,r}.}
-The equality is between covariances with their actual weights.}
+The equality is between covariances with their actual
+couplings. Here #{1/(2+a)=1/(2\cosh\omega)}.}
 
 \proof{
-\p{On the integer line, put
-#{h(n)=e^{-\eta|n|}/(2w\sinh\eta)}.
-For #{n\ne0}, the two geometric progressions give
-#{w(2\cosh\eta\,h(n)-h(n-1)-h(n+1))=0}.
-At #{n=0} the expression equals
-#{(2\cosh\eta-2e^{-\eta})/(2\sinh\eta)=1}.
-Periodize this identity by summing #{h(r+kM)} over
-#{k\in\mathbb Z}; absolute convergence permits the finite
-difference operation under the sum. The result is the unit point
-source on #{\mathbb Z/M}, so the periodized kernel is the inverse
-of the positive precision. Summing the geometric series gives
-#{K_{M,w,\eta}}.}
+\p{Write #{D=2w\sinh\eta\,(1-e^{-M\eta})} and, for an integer
+#{r},
+#{g(r)=e^{-\eta r}+e^{-\eta(M-r)}}. On a representative
+#{0\le r\le M-1} the kernel is #{K(r)=g(r)/D}, and the value
+at the cycle site #{0} is also the value #{g(M)}. For every
+integer #{r},
+##{g(r+1)+g(r-1)=2\cosh\eta\,g(r),}
+because each exponential is multiplied by #{e^{\pm\eta}} under
+a unit shift and those factors sum to #{2\cosh\eta}. Thus
+#{2\cosh\eta\,g(r)-g(r-1)-g(r+1)=0}. For
+#{r=1,\ldots,M-1} the two cycle neighbors are represented by
+#{r-1} and #{r+1}, using #{g(M)=g(0)} at the last site, so
+##{w\bigl(2\cosh\eta\,K(r)-K(r-1)-K(r+1)\bigr)=0.}
+At #{r=0} the previous site is #{M-1}. Its value is
+#{g(M-1)}, and #{g(1)=g(M-1)}, so the cycle combination is
+#{2\cosh\eta\,g(0)-2g(1)}. The identities
+#{\cosh\eta-e^{-\eta}=\sinh\eta} and
+#{\cosh\eta-e^{\eta}=-\sinh\eta} give
+##{\cosh\eta\,g(0)-g(1)=\sinh\eta\,(1-e^{-M\eta}).}
+Multiplying by #{2w/D} yields #{1}. The precision is positive
+for #{w,\eta>0}, so this unit source shows that #{K} is its
+inverse on #{\mathbb Z/M}.}
 
-\p{For #{M=2N} and even separation #{2r}, the numerator and
-periodic denominator equal those for #{M=N}, #{\eta=2\omega}.
-Their remaining constants agree because
-##{2w'\sinh(2\omega)
- =\frac{2\sinh(2\omega)}{2\cosh\omega}
+\p{For #{M=2N} and even separation #{2r}, the numerator
+#{e^{-\omega(2r)}+e^{-\omega(2N-2r)}} is the numerator of
+#{K_{N,\,1/(2\cosh\omega),\,2\omega}(r)}. The denominators
+agree because
+##{2\cdot\frac{1}{2\cosh\omega}\cdot\sinh(2\omega)
  =2\sinh\omega.}
-This proves the covariance identity directly, in agreement with
-Gaussian marginalization.}
+Thus #{K_{2N,1,\omega}(2r)} equals the retained kernel. Both
+are inverses of the stated precisions, so the covariance
+identity holds.}
 }
 
-\p{In the convention that correlation length is the reciprocal decay
-rate of these periodized exponential images, it changes from
-#{\xi=1/\omega} fine lattice units to
-#{\xi'=1/(2\omega)=\xi / 2} coarse lattice units. The finite ring
-has two winding directions, so its covariance is not a single
-exponential in separation. If the old spacing is #{\ell}, the new
-spacing is #{2\ell}; the physical decay length
-#{\ell / \omega=(2\ell)/(2\omega)} is unchanged.}
+\p{Remark. The same kernel is the sum of
+#{h(n)=e^{-\eta|n|}/(2w\sinh\eta)} over the periods
+#{n=r+kM}. That sum is not used above.}
+
+\p{In the convention that correlation length is the reciprocal
+decay rate of these two-exponential kernels, it changes from
+#{1/\omega} fine lattice units to #{1/(2\omega)} coarse
+lattice units. The finite ring has two winding directions, so
+its covariance is not a single exponential in separation. If
+the old spacing is #{\ell}, the new spacing is #{2\ell}; the
+physical decay length #{\ell / \omega=(2\ell)/(2\omega)} is
+unchanged.}
 
 \p{The bound #{N\ge3} keeps the reduced graph a simple cycle.
 At #{N=2}, #{T=T^{-1}} and two eliminated vertices connect the
-same retained pair, producing two parallel edges of weight #{1/q},
-or one edge of weight #{2/q}. At #{a=0}, the algebraic formula
-still gives #{w'=1/2} and #{a'=0}, the two-resistors-in-series
-limit. The full precision then has a constant zero mode and no
+same retained pair, producing two parallel edges of coupling
+#{1/(2+a)}, or one edge of coupling #{2/(2+a)}. At #{a=0},
+the algebraic formula still gives retained coupling #{1/2}
+and retained mass #{0}, the two-resistors-in-series limit.
+The full precision then has a constant zero mode and no
 normalized full-space Gaussian law. Pinning or a mean-zero
 constraint must be specified as in
 [constrained massless laws](fdip-003V); the positive-mass covariance
