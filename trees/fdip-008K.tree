@@ -5,22 +5,39 @@
 \title{The odd Wick rule pairs inverse alternating entries}
 \date{2026-11-01}
 
-\p{Let #{A^T=-A} be an invertible #{2m\times2m} matrix.
-Its [nonzero Pfaffian](fdip-008J) defines the normalized
-linear functional
-##{W_A(f)=\frac{I_\xi(f e^{-\xi^TA\xi/2})}
-                 {\operatorname{Pf}(A)}.}
-For linear Grassmann elements
-#{\lambda_a=\sum_i\ell_{ai}\xi_i}, put
-#{C_{ab}=\ell_aA^{-1}\ell_b^T}. For every #{r\ge0},
-##{W_A(\lambda_1\cdots\lambda_{2r})=\operatorname{Pf}(C),}
-where #{C} is the #{2r\times2r} alternating matrix just defined.
-Every odd product has value zero. Repeated or dependent
-#{\lambda_a} are allowed. The inverse formula requires
-invertible #{A}; it asserts no singular extension.}
+\p{Let #{b} be a nondegenerate alternating bilinear form on a
+#{2m}-dimensional space over #{\mathbb R} or #{\mathbb C}, with
+image #{\Omega} as in \ref{fdip-008I}. For a nonzero top volume
+#{\omega}, \ref{fdip-008J} makes #{I_\omega(e^{-\Omega})} nonzero.
+The normalized functional is
+##{W(f)=\frac{I_\omega(f e^{-\Omega})}{I_\omega(e^{-\Omega})}.}
+Define #{b^\flat:V\to V^*} by #{b^\flat(v)(w)=b(w,v)}.
+Nondegeneracy makes this an isomorphism. For linear forms
+#{\lambda,\mu} put
+##{C(\lambda,\mu)=\lambda\bigl((b^\flat)^{-1}\mu\bigr).}
+The form is evaluated on the vector argument second. This is
+the opposite slot from the symmetric form map of \ref{fdip-008N};
+the alternating sign needs this order. For an ordered list
+#{\lambda_1,\ldots,\lambda_{2r}}, set
+#{C_{ab}=C(\lambda_a,\lambda_b)}. The order is the order of
+insertion in the product below. It is not a choice of basis of
+#{V}. For every #{r\ge0},
+##{W(\lambda_1\cdots\lambda_{2r})=\operatorname{Pf}(C),}
+where #{\operatorname{Pf}} is the increasing matching scalar of
+\ref{fdip-00MD}. Every odd product has value zero. Repeated or
+dependent factors are allowed. The inverse requires
+nondegeneracy of #{b}; the statement asserts no singular
+extension.}
 
 \proof{
-\p{Define the left derivative on a monomial by
+\p{Choose the ordered basis of \ref{fdip-00MD}, and let #{A} be
+the matrix of #{b}, so #{A_{ij}=b(e_i,e_j)} and #{A^T=-A}.
+In dual coordinates, #{b(w,v)=w^TAv}, so the covector
+#{b^\flat(v)} has column #{Av}. Its inverse sends the column
+#{\ell'} to #{A^{-1}\ell'}, and therefore
+#{C(\lambda,\mu)=\ell A^{-1}(\ell')^T}. Use the reversed volume
+of \ref{fdip-00MB}, so #{W} is the coordinate functional
+#{W_A} below. Define the left derivative on a monomial by
 ##{\partial_i(\xi_{j_1}\cdots\xi_{j_s})
  =\sum_{a=1}^s(-1)^{a-1}\delta_{i,j_a}
    \xi_{j_1}\cdots\widehat{\xi_{j_a}}\cdots\xi_{j_s}.}
@@ -30,7 +47,7 @@ positions between two factors gives the graded product rule
 when #{f} is homogeneous of degree #{s}. It lowers degree,
 so #{I_\xi(\partial_i h)=0} for every #{h}.}
 
-\p{Write #{E=e^{-\xi^TA\xi/2}}. Differentiating its finite
+\p{Write #{E=e^{-\frac12\xi^TA\xi}}. Differentiating its finite
 series, using that its quadratic exponent is even, gives
 ##{\partial_iE=-\sum_jA_{ij}\xi_jE.}
 For odd homogeneous #{f}, the product rule and coefficient of
@@ -69,11 +86,11 @@ in degree #{s}. These support the contraction identities;
 the Berezin normalization and Wick recurrence are the direct
 argument above.}
 
-\p{For #{A=\left(\begin{smallmatrix}0&a\\-a&0\end{smallmatrix}\right)}
-with #{a\ne0}, the [two-generator calculation](fdip-008G) gives
-#{W_A(\xi_1\xi_2)=-1/a=(A^{-1})_{12}}. This checks the
-inverse-pairing sign. In
+\p{In
 \citet{v2, Theorem 9.11, p. 132}{etingof2024mathematical},
 the increasing top order gives normalization #{\operatorname{Pf}(-A)}.
 Changing the volume multiplies both numerator and normalization
-by the same sign, leaving this normalized Wick rule unchanged.}
+by the same sign, leaving this normalized Wick rule unchanged.
+\ref{fdip-00MF} records the two-generator sign check.}
+
+\transclude{fdip-00MF}

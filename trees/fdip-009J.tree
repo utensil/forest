@@ -5,67 +5,69 @@
 \title{Partial Grassmann integration and the Schur complement}
 \date{2026-11-01}
 
-\p{Let #{R,U} be disjoint ordered finite sets. Order the
-[independent paired generators](fdip-008F) with all retained
-#{R}-pairs first and all eliminated #{U}-pairs second. For
-#{n=|R|+|U|}, let
-##{K=\begin{pmatrix}A&B\\C&D\end{pmatrix}
-  \in M_n(\mathbb C).}
-Require #{D=K_{UU}} to be invertible and put
-#{S=A-BD^{-1}C}. No adjoint relation between #{B,C}
-is assumed. Define #{J_U} by taking the coefficient of the
-ordered #{U}-pair top word after moving retained generators to
-the left. The result is an element of the retained exterior
-algebra. Define #{J_R} by its paired top word, so
-#{J_RJ_U=J_n}. The eliminated top word has even degree,
-so moving it past a retained coefficient gives no further sign. Then
-##{J_U\left(e^{-\bar\psi K\psi}\right)
- =\det D\,e^{-\bar\psi_R S\psi_R},}
+\p{Let #{V=R\oplus E} be a direct sum of finite-dimensional
+complex vector spaces, with inclusions #{i_R,i_E} and
+projections #{p_R,p_E}. For #{K\in\operatorname{End}(V)} define
+the compressions
+##{\begin{gathered}
+A=p_RKi_R,\quad B=p_RKi_E,\\
+C=p_EKi_R,\quad D=p_EKi_E,
+\end{gathered}}
+and, when #{D} is invertible, #{S=A-BD^{-1}C}. No adjoint
+relation between #{B} and #{C} is assumed. Let #{J_E} be the
+retained-first paired coefficient of \ref{fdip-00IX}, and let
+#{J_R} be the intrinsic paired coefficient on the retained
+summand. Then #{J_RJ_E=J_V}. The eliminated top degree
+#{2\dim E} is even, so moving that top element past a retained
+coefficient gives no further sign. With zero sources,
+##{J_E\left(e^{-\bar\psi(K\psi)}\right)
+ =\det_E D\,e^{-\bar\psi_R(S\psi_R)},}
 and consequently
-##{\det K=\det D\det S.}
-The empty-block conventions are determinant one and the identity
-coefficient map. Invertibility of #{K} or #{S} is unnecessary.}
+##{\det_V K=\det_E D\,\det_R S.}
+Empty summands use determinant one and the identity coefficient
+map. Invertibility of #{K} or #{S} is unnecessary. The map
+#{D} is a compression; it is a restriction into #{E} only when
+#{K(E)\subseteq E}. \ref{fdip-00IX} restores sources in this
+identity.}
 
 \proof{
-\p{Introduce the odd linear combinations
+\p{Write #{\psi_R=p_R\psi}, #{\bar\psi_R=\bar\psi\,i_R}, and
+likewise for #{E}. Complete the eliminated quadratic by
 ##{\begin{aligned}
-\chi_U&=\psi_U+D^{-1}C\psi_R,\\
-\bar\chi_U&=\bar\psi_U+\bar\psi_RBD^{-1}.
+\chi_E&=\psi_E+D^{-1}C\psi_R,\\
+\bar\chi_E&=\bar\psi_E+\bar\psi_RBD^{-1}.
 \end{aligned}}
-The bars remain labels of independent generators. Expanding in
-the displayed multiplication order gives
-##{\bar\psi K\psi
- =\bar\psi_R S\psi_R+\bar\chi_U D\chi_U.}
-For example, the last term of the expansion of
-#{\bar\chi_U D\chi_U} is
-#{\bar\psi_RBD^{-1}C\psi_R}, which cancels the subtraction
+The bars remain labels of independent generators. Expanding
+in this multiplication order gives
+##{\bar\psi(K\psi)
+ =\bar\psi_R(S\psi_R)+\bar\chi_E(D\chi_E).}
+The last term of #{\bar\chi_E(D\chi_E)} is
+#{\bar\psi_R(BD^{-1}C\psi_R)}, which cancels the subtraction
 in #{S}. All these quadratic elements are even. They commute,
 so their finite exponentials multiply.}
 
-\p{Replacing an eliminated generator by itself plus a retained
-odd linear combination preserves its partial top coefficient.
-Indeed, expand each exterior monomial in the new symbols: every
-term using a retained replacement has fewer eliminated
-generators, while the term using no replacement has coefficient
-one and its original order. Terms of lower eliminated degree
-cannot contribute to the top degree. Thus the coefficient in
-the shifted quadratic exponential equals the coefficient for
-independent #{U}-generators. The
-[paired determinant identity](fdip-008H) evaluates it as #{\det D}.
-The retained exponential factors on the left, proving the
-partial formula. Applying #{J_R} and the same determinant
-identity proves the full factorization.}
+\p{Choose an ordered basis of #{E} and use the paired
+generators of that basis, with every retained generator
+standing to the left. Replacing an eliminated generator by
+itself plus a retained odd linear combination preserves its
+partial top coefficient. Expand each exterior monomial in the
+new symbols: every term that uses a retained replacement has
+fewer eliminated generators, while the term that uses no
+replacement has coefficient one and the original order.
+Terms of lower eliminated degree cannot contribute to the
+top degree. Thus the coefficient in the shifted quadratic
+exponential equals the coefficient for independent
+#{E}-generators. The [paired determinant identity](fdip-008H)
+evaluates it as #{\det_E D}. The retained exponential factors
+on the left, proving the partial formula. Applying #{J_R}
+and the same determinant identity proves the factorization.}
 }
 
-\p{The effective matrix is the same block expression as in
-[real positive Gaussian elimination](fdip-000D). The scalar here
-is #{\det D}; the real Gaussian fiber integral instead has
-#{(2\pi)^{|U|/2}(\det D)^{-1/2}} under its real positive
+\p{The scalar here is #{\det_E D}. The real positive Gaussian
+fiber integral of \ref{fdip-000D}, for an eliminated real
+block of the same size #{q=\dim E}, instead has the factor
+#{(2\pi)^{q/2}(\det D)^{-1/2}} under its real positive
 hypotheses and volume convention. Neither positivity nor an
 ordinary integration measure was used in the Grassmann proof.}
 
-\p{The finite block identity is also supplied by
-\leanref{Matrix.det_fromBlocks₂₂}, for finite index types over a
-commutative ring with an invertible eliminated block. This
-formal statement supports the determinant factorization, not
-the partial Grassmann coefficient operation.}
+\transclude{fdip-00MG}
