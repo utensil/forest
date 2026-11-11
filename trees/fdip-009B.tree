@@ -9,17 +9,21 @@
 residues modulo #{p^k}. Let #{E_j} and #{P_j} be the nested averages
 and orthogonal projectors of the [nested blocks](fdip-0099), and let
 #{Q=\sum_{j=0}^{k}c_jP_j} with every coefficient #{c_j} positive.
-Then #{Q} is a [positive precision](fdip-0004). In the counting basis
-its inverse has the same diagonal entry at every site,
-##{\sigma^2=\sum_{j=0}^{k-1}c_j^{-1}\bigl(p^{-j}-p^{-(j+1)}\bigr)
+Then #{Q} is a [positive precision](fdip-0004). Let #{h} be the
+counting inner product and let #{\delta_x} be the indicator of a
+site. The value
+##{\sigma^2=h(\delta_x,Q^{-1}\delta_x)}
+does not depend on #{x}. In the counting basis of residue indicators
+it equals
+##{\sum_{j=0}^{k-1}c_j^{-1}\bigl(p^{-j}-p^{-(j+1)}\bigr)
  +c_k^{-1}p^{-k}.}
 The centered [Gaussian law](fdip-0005) of #{Q} gives every site the
 second moment #{\sigma^2}, and the fourth moment at each site is
 #{3\sigma^4}.}
 
 \p{For distinct sites #{x} and #{y}, let #{v} be the largest integer
-such that #{x\equiv y\pmod{p^v}}. Then #{0\le v\le k-1}, and the
-matrix entry #{Q_{xy}} depends only on #{v}.}
+such that #{x\equiv y\pmod{p^v}}. Then #{0\le v\le k-1}, and the kernel value
+#{h(\delta_x,Q\delta_y)} depends only on #{v}.}
 
 \p{The common value #{3\sigma^4} is the Gaussian moment of one quartic
 monomial. \em{No non-Gaussian hierarchical fixed point is proved

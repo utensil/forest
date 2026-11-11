@@ -27,16 +27,19 @@ variance #{v} has characteristic function
 #{\exp(-\frac{1}{2}vt^2)}, so the field #{\xi} has
 characteristic function
 #{\exp(-\frac{1}{2}\eta\cdot Q^{-1}\eta)}. This quadratic form
-is the covariance of \ref{fdip-000B}. For a coarse vector
+is the covariance of \ref{fdip-000B}. Let #{A^*} be the counting adjoint of #{A}. In the counting
+basis its matrix is the transpose of the matrix of #{A}. For a coarse vector
 #{\zeta}, the characteristic function of #{A\xi} at #{\zeta}
-equals the characteristic function of #{\xi} at #{A^{T}\zeta},
+equals the characteristic function of #{\xi} at #{A^{*}\zeta},
 hence equals
-##{\exp\bigl(-\frac{1}{2}\zeta\cdot(AQ^{-1}A^{T})\zeta\bigr).}
-\ref{fdip-009A} identifies #{AQ^{-1}A^{T}} with the inverse of
+##{\exp\bigl(-\frac{1}{2}\zeta\cdot(AQ^{-1}A^{*})\zeta\bigr).}
+The dot product is the counting pairing of #{\zeta} with
+#{(AQ^{-1}A^{*})\zeta}.
+\ref{fdip-009A} identifies #{AQ^{-1}A^{*}} with the inverse of
 the coarse hierarchical precision #{Q'} whose coefficients are
 #{c'_i=pc_{i+1}}. Multiplication by #{\sqrt{p\lambda}}
 multiplies that covariance by #{p\lambda}, so the covariance
-of #{T\xi} is #{p\lambda\,(Q')^{-1}}. The precision matrix is
+of #{T\xi} is #{p\lambda\,(Q')^{-1}}. The precision operator is
 #{\frac{1}{p\lambda}Q'}, and the coefficient of each coarse
 projector is
 ##{\frac{c'_i}{p\lambda}=\frac{c_{i+1}}{\lambda}.}

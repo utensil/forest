@@ -7,9 +7,10 @@
 
 \p{Let #{G} be a finite oriented graph, with vertex set #{V} and edge
 set #{E}. Write #{s(e)} and #{h(e)} for the source and head of an
-edge. No edge is a loop. Let the real Hilbert space have the
-counting inner product and the orthonormal basis indexed by
-#{V} and by #{E}. Define
+edge. No edge is a loop. Either set may be empty. Let
+#{H=\mathbb R^V\oplus\mathbb R^E} carry the counting inner products,
+and let #{\delta_v} and #{\delta_e} be the corresponding indicator
+functions. Define
 ##{(d_E\xi)(e)=\xi(h(e))-\xi(s(e)).}
 Let #{D} be the self-adjoint operator whose vertex-to-edge block is
 #{d_E} and whose edge-to-vertex block is the adjoint #{d_E^{\dagger}}.
@@ -20,6 +21,10 @@ vertex #{v} and by multiplication by #{f(s(e))} on edge #{e}.}
 edges that enter each vertex. For every vertex #{v},
 ##{\bigl|[D,f]\bigr|
 =\max_v\Bigl(\sum_{h(e)=v}\bigl(f(h(e))-f(s(e))\bigr)^{2}\Bigr)^{1/2}.}
+A sum over an empty set of edges is zero. The maximum of a
+nonnegative quantity over the empty set of vertices is zero. These
+conventions cover an empty edge set and an empty vertex set. They
+do not add a hypothesis that either set is nonempty.
 If every vertex has at most one incoming edge, this norm is the
 maximum of #{|f(h(e))-f(s(e))|} over the edges. On each connected
 component of the underlying undirected graph, the supremum
@@ -36,8 +41,10 @@ vertex component is the negative adjoint of that edge map applied
 to #{\psi}. The operator norm is therefore the norm of the edge map
 #{C\xi(e)=\delta_e\xi(h(e))}. Its square length is
 ##{\|C\xi\|^{2}=\sum_v\xi(v)^{2}\sum_{h(e)=v}\delta_e^{2}.}
-The vertex basis is orthonormal, so the second sum is the
-eigenvalue at #{v}. The largest square root is the displayed
+The counting inner product makes the vertex indicators orthonormal, so the second sum is the
+eigenvalue at #{v}. If #{V} is empty, both the operator and the
+maximum are zero by the convention in the statement. If a vertex
+has no incoming edge, its inner sum is zero. Otherwise the largest square root is the displayed
 maximum.}
 
 \p{If each vertex has at most one incoming edge, the inner sum is a

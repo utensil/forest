@@ -9,19 +9,17 @@
 multiple edges, and assume #{G} is triangle-free. Let each undirected
 edge #{e} receive one orientation, from a source #{s(e)} to a head
 #{h(e)}, and a transport #{U_e\in U(1)}. The reverse orientation
-carries #{U_e^{-1}}. For unit weights and vanishing mass, the
-[connection background](fdip-006D) supplies the covariant Laplacian
-#{L_U} on complex functions of the vertices. Its matrix in the
-standard basis is
-##{L_{h(e),s(e)}=-U_e,\qquad
-L_{s(e),h(e)}=-U_e^{-1},\qquad
-L_{vv}=\deg(v),}
-and every other entry is zero. The same formula with every transport
-equal to #{1} is written #{L_1}. Both operators are Hermitian, so the
-two traces below are real.}
+carries #{U_e^{-1}}. For unit weights and vanishing mass, let
+#{D} be multiplication by the degree,
+#{(Df)(v)=\deg(v)f(v)}, and let #{A} be the transported adjacency
+##{(Af)(v)=\sum_{h(e)=v}U_ef(s(e))+\sum_{s(e)=v}U_e^{-1}f(h(e)).}
+Write #{A_U} for this adjacency. The [connection background](fdip-006D) supplies the covariant Laplacian
+#{L_U=D-A_U} on complex functions of the vertices. The same operators
+with every transport equal to #{1} are written #{D}, #{A_1} and
+#{L_1}. Both Laplacians are self-adjoint for the counting inner
+product, so the two traces below are real.}
 
-\p{Write #{A} for the off-diagonal part, so #{L_U=D-A} with #{D} the
-diagonal matrix of degrees. Thus #{A_{h(e),s(e)}=U_e}. For a 4-cycle
+\p{For a 4-cycle
 #{c}, choose either orientation and let #{e^{i\varphi_c}} be the
 product of the 4 transports along it. The opposite orientation
 gives the complex conjugate, so #{\cos\varphi_c} does not depend on
@@ -34,7 +32,12 @@ each taken once:
 =8\sum_c(\cos\varphi_c-1).}}
 
 \proof{
-\p{Expand the trace as a sum over quadruples of vertices. A factor
+\p{Declare the counting basis of vertex indicators. In that basis the
+only nonzero entries are
+##{L_{h(e),s(e)}=-U_e,\qquad
+L_{s(e),h(e)}=-U_e^{-1},\qquad
+L_{vv}=\deg(v),}
+and #{A_{h(e),s(e)}=U_e}. Expand the trace as a sum over quadruples of vertices. A factor
 #{L_{xy}} is a diagonal degree when #{x=y}, and an off-diagonal
 transport when the two indices are the ends of an edge. The degree
 matrix does not

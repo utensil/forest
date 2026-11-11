@@ -9,12 +9,11 @@
 let #{d_k:C^k\to C^{k+1}} be linear maps with
 #{d_{k+1}\circ d_k=0}. Degree
 #{0} has no incoming map, and degree #{n} has no outgoing map. Each
-degree has a positive-definite inner product. Its adjoint obeys
+degree has a positive-definite inner product. Its adjoint is the
+unique linear map obeying
 #{\langle d_k\alpha,\beta\rangle_{k+1}
 =\langle\alpha,d_k^*\beta\rangle_k}.
-For Gram matrices #{G_k},
-#{d_k^*=G_k^{-1}d_k^{T}G_{k+1}}.
-Identity Gram matrices make this adjoint the counting transpose.}
+No Gram matrix enters this definition.}
 
 \p{The Hodge Laplacian of degree #{k} is
 #{\Delta_k=d_{k-1}d_{k-1}^*+d_k^*d_k},
@@ -40,9 +39,13 @@ sum to zero. A different positive-definite edge product can leave a
 winding field with nonzero adjoint.}
 
 \proof{
-\p{Nondegeneracy gives a unique adjoint. Both sides of the Gram
-formula equal #{\alpha^{T}d_k^{T}G_{k+1}\beta}, since #{G_k} cancels
-on the right. Adjoints reverse composition, so
+\p{Nondegeneracy gives a unique adjoint. Declare a basis of each
+degree and let #{G_k} be the Gram matrix of its inner product. Both
+sides of
+#{d_k^*=G_k^{-1}d_k^{T}G_{k+1}}
+equal #{\alpha^{T}d_k^{T}G_{k+1}\beta}, since #{G_k} cancels
+on the right. Identity Gram matrices make this adjoint the counting
+transpose. Adjoints reverse composition, so
 #{d_k^*\circ d_{k+1}^*=0}. On one degree,
 #{(d+d^*)\circ(d+d^*)=\Delta_k} because #{d\circ d} and
 #{d^*\circ d^*} vanish, and
@@ -78,3 +81,9 @@ edge of weight #{2} and all other edges of weight #{1} leave that
 winding closed, and the adjoint at its head equals #{1}. On a horizontal loop the
 two contributions agree.}
 }
+
+\p{Remark. Once a basis of each degree has been declared, the Gram matrices
+#{G_k} of the inner products satisfy
+#{d_k^*=G_k^{-1}d_k^{T}G_{k+1}}. Identity Gram matrices make this
+adjoint the counting transpose. The proof above derives that
+formula, and the Hodge decomposition itself does not use it.}

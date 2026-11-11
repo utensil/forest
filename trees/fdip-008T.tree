@@ -9,9 +9,14 @@
 [real and complex algebraic states](fdip-0024) is a normalized
 positive functional. That note assumes no norm and no operator
 representation. On a finite-dimensional *-algebra the functional
-itself determines both. The squared length of a class is the value
-of the state on #{\,a^*a}, and the dimension of the resulting space
-is the rank of one Gram matrix.}
+determines the GNS representation on the quotient by the left ideal
+below. The value #{\omega(a^*a)} is the squared length of the class
+of #{a}. The square root of that value is a seminorm on #{A} and a
+norm on the quotient. A nonfaithful state, one whose left ideal is
+nonzero, does not define a norm on all of #{A}. The dimension of the quotient is the rank of
+the positive semidefinite form sending #{y} to the conjugate-linear
+functional #{x\mapsto\omega(x^*y)}, and that rank equals the
+codimension of the left ideal.}
 
 \p{Let #{K=\mathbb R} or #{K=\mathbb C}, and let #{A} be a
 finite-dimensional unital associative #{K}-algebra with an involution
@@ -32,17 +37,23 @@ operator #{\pi_\omega(a)} sends the class of #{b} to the class of
 left ideal. For the cyclic vector,
 ##{\langle\pi_\omega(a)\Omega,\pi_\omega(b)\Omega\rangle
 =\omega(a^*b).}
-For any basis the Gram matrix #{G_{ij}=\omega(e_i^*e_j)} has
+After a basis #{(e_i)} of #{A} is declared, the Gram matrix
+#{G_{ij}=\omega(e_i^*e_j)} satisfies
 #{\dim H_\omega=\operatorname{rank} G}. The squared length of the
 class of #{a} is #{\omega(a^*a)}.}
 
-\p{Let #{A=\bigoplus_i M_{m_i}(K)}, with componentwise product and with
-conjugate transpose acting on each block. Suppose each #{\rho_i}
+\p{Let #{A=\bigoplus_i\operatorname{End}_K(V_i)}, with each #{V_i} a
+finite-dimensional #{K}-vector space, with componentwise composition
+and with the adjoint acting on each block. After a basis of #{V_i}
+is declared, #{\operatorname{End}_K(V_i)} is the matrix algebra
+#{M_{m_i}(K)} with #{m_i=\dim V_i}, and the adjoint is conjugate
+transpose. Suppose each #{\rho_i}
 has the form #{\rho_i=c_i^*c_i}, and
 #{\sum_i\mathrm{Tr}(\rho_i)=1}. The functional
 #{\omega(a)=\sum_i\mathrm{Tr}(\rho_i a_i)} is a state, and
-##{\dim H_\omega=\sum_i m_i\operatorname{rank}\rho_i.}
-On #{M_2}, the density #{\mathrm{diag}(2/3,1/3)} has rank #{2} and
+##{\dim H_\omega=\sum_i m_i\operatorname{rank}\rho_i.}}
+
+\p{Example. On #{M_2}, the density #{\mathrm{diag}(2/3,1/3)} has rank #{2} and
 gives dimension #{4}. The density #{\mathrm{diag}(1,0)} has rank
 #{1} and gives dimension #{2}.}
 
