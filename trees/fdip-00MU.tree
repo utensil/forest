@@ -1,0 +1,58 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{Coarse pullback commutes with Gauss projection}
+\date{2026-11-11}
+
+\p{Let #{G} be compact metrizable, let #{\mathcal B} be a
+\vocabk{coarse path map}{fdip-00MO}, and let #{\lambda_f} be
+any gauge-invariant Borel probability on #{X_f}. Put
+#{\lambda_c=\mathcal B_*\lambda_f}. On the complex Hilbert
+spaces #{\mathcal H_f=L^2(\lambda_f)} and
+#{\mathcal H_c=L^2(\lambda_c)}, use inverse-pullback gauge
+representations and their normalized Haar projections
+#{P_f,P_c}. Then
+##{J_0:\mathcal H_c\to\mathcal H_f,\qquad
+ J_0F=F\circ\mathcal B}
+is an isometry, and
+##{R_g^fJ_0=J_0R_{r(g)}^c,\qquad
+ P_fJ_0=J_0P_c.}
+In particular #{J_0} embeds the coarse invariant subspace
+isometrically into the fine invariant subspace. This applies
+to #{\lambda_f=\nu_f} and to #{\lambda_f=Z^{-1}w\nu_f}
+under \ref{fdip-00MQ}.}
+
+\proof{
+\p{Equivariance shows that #{\lambda_c} is gauge invariant.
+The pushforward integration identity gives
+##{\|J_0F\|_{L^2(\lambda_f)}^2
+ =\int |F|^2\,d\lambda_c.}
+It also shows that changing an #{L^2} representative changes
+its pullback only on a null set. Thus #{J_0} is well defined
+and isometric. The inverse-pullback identity follows from
+#{\mathcal B(g^{-1}\cdot U)=r(g)^{-1}\cdot\mathcal B(U)}.}
+
+\p{For bounded Borel #{F}, the averaging theorem
+\ref{fdip-00L4} gives
+##{P_fJ_0F(U)
+ =\int_{K_f}F(r(g)^{-1}\cdot\mathcal BU)\,d\mu_{K_f}(g).}
+The Haar pushforward under #{r} is #{\mu_{K_c}} by
+\ref{fdip-00MP}, so the integral is #{J_0P_cF(U)}.
+For any invariant probability #{\lambda}, Jensen's inequality
+and Fubini give #{\|P_KF\|_2\le\|F\|_2}. Inversion invariance
+of Haar and invariance of #{\lambda} make this average
+self-adjoint; the invariant range and idempotence follow
+from \ref{fdip-00L4}. It is therefore the orthogonal
+projection in #{L^2(\lambda)}. Bounded functions are dense
+in #{L^2}, so the displayed identity extends to every
+#{F\in\mathcal H_c}.}
+
+\p{These Hilbert maps use #{L^2(\lambda_c)}, even when the
+coarse image is supported on a diagonal as in
+\ref{fdip-00MS}. The normalized conditional functional in
+\ref{fdip-00L4} instead acts on the algebra of bounded Borel
+functions with pointwise product. The equality of their
+averages on bounded representatives does not make all of
+#{L^2} an algebra.}
+}

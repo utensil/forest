@@ -1,0 +1,76 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Corollary}
+\title{Gluing conditional boundary amplitudes}
+\date{2026-11-11}
+
+\p{Let #{X_1,Y,X_2} be finite products of a compact metrizable
+group, with their respective product Haar probabilities
+#{\nu_1,\nu_\partial,\nu_2}. The boundary configuration
+#{y\in Y} is retained as one shared variable. Suppose the
+fine weight actually factors as
+##{w(x_1,y,x_2)
+ =w_1(x_1,y)w_\partial(y)w_2(x_2,y).}
+Assume #{w_i\ge0} is Borel and integrable on
+#{X_i\times Y}, #{w_\partial\ge0} is finite and Borel, and
+#{0<Z=\int w\,d(\nu_1\otimes\nu_\partial\otimes\nu_2)<\infty}.
+Let
+##{A_i(y)=\int_{X_i}w_i(x_i,y)\,d\nu_i(x_i)}
+where this is finite, assigning zero on the null exceptional
+set. Then the unnormalized retained boundary law and its mass are
+##{A_1(y)w_\partial(y)A_2(y)\,d\nu_\partial(y),\qquad
+ Z=\int_Y A_1w_\partial A_2\,d\nu_\partial.}
+For complex factors the same conclusion holds if each #{w_i}
+is integrable on #{X_i\times Y}, #{w_\partial} is finite
+Borel, and the full product is absolutely integrable;
+normalization as a probability additionally requires a
+nonnegative law and positive mass.}
+
+\proof{
+\p{Tonelli makes the two conditional amplitudes finite
+outside a boundary null set, by the assumed integrability of
+each factor. Outside that set, iterating the two independent
+bulk integrals gives #{A_1w_\partial A_2}. The exceptional
+set has zero product-reference measure, so assigning zero
+there changes no integral. This specifies the formula
+without an undefined #{0\cdot\infty}. Testing a boundary
+indicator gives the asserted law, and testing one gives
+#{Z}. In the complex case, slice integrability of each factor
+and absolute integrability of the full product permit the
+same calculation by Fubini. This is the projection case of
+the conditional integration formula in
+\citet{Theorem 6.4, p. 108}{kallenberg2002foundations}
+and \ref{fdip-00MQ}.}
+
+\p{For weights written as exponentials of actions, the
+factorization means
+#{S=S_1(x_1,y)+S_\partial(y)+S_2(x_2,y)}. Every shared
+boundary interaction is assigned once, to #{S_\partial}
+or to one of the two specified pieces. An interaction
+depending genuinely on both #{x_1} and #{x_2} is not
+covered unless it admits the stated factorization.}
+}
+
+\p{For a boundary gauge assertion, assume a compact subgroup
+#{H} acts continuously on #{Y} and each #{X_i}, preserves
+their Haar probabilities, and each factor satisfies
+#{w_i(h\cdot x_i,h\cdot y)=w_i(x_i,y)}.
+Changing the bulk integration variable gives
+#{A_i(h\cdot y)=A_i(y)} wherever the defining integral is
+finite; its exceptional set is invariant, so the zero
+extension preserves this equality. This assumption concerns
+each factor, not merely the full weight. If #{w_\partial}
+is also invariant, the boundary law is invariant.}
+
+\p{The same matching variable #{y} is integrated once.
+When a boundary amplitude is bounded Borel, the Haar
+projector of \ref{fdip-00L4} fixes it under the preceding
+invariance hypothesis. Inserting that projector therefore
+changes neither the amplitude nor the gluing integral.
+Nested bulk and boundary gauge averages use
+#{P_\Gamma P_H=P_\Gamma}, as in that theorem.
+For unbounded amplitudes the integral formula above uses
+Tonelli or Fubini; it does not treat them as elements of the
+bounded-function algebra. These retained-variable statements
+do not replace boundary data by separate orbit classes.}

@@ -1,0 +1,50 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Corollary}
+\title{Reflection positivity for retained-half paths}
+\date{2026-11-11}
+
+\p{Let #{G} be compact metrizable. Suppose the fine and coarse
+graphs of a \vocabk{coarse path map}{fdip-00MO} have
+involutive graph reflections. Reflected edges are interpreted
+as oriented traversals, with inversion when orientation is
+reversed. Suppose each chosen reflected coarse path is the
+reflected fine path, in its traversal order. Also choose
+positive-half edge sets #{E_{f,+},E_{c,+}} such that every
+path assigned to #{a\in E_{c,+}} uses only edges in
+#{E_{f,+}}, in either orientation.}
+
+\p{Let #{\lambda_f} be a reflection-invariant probability
+whose reflected pairing is nonnegative on the specified
+algebra #{\mathcal A_{f,+}} of bounded positive-half
+observables. Let #{\mathcal A_{c,+}} consist of bounded
+coarse observables whose pullbacks belong to that algebra.
+Then #{\lambda_c=\mathcal B_*\lambda_f} is reflection
+invariant and
+##{\int\overline{F(\theta_cu)}F(u)\,d\lambda_c(u)\ge0
+ \qquad(F\in\mathcal A_{c,+}).}
+If the fine algebra contains all bounded functions of
+#{E_{f,+}}, this includes every bounded function of
+#{E_{c,+}}. If the fine algebra is restricted to gauge-invariant
+observables, impose the same restriction on #{F}.}
+
+\proof{
+\p{Reflecting each oriented traversal and then multiplying
+in the original order gives
+#{\mathcal B\theta_f=\theta_c\mathcal B}. By the path
+support hypothesis, a retained positive-half observable
+depends only on the permitted fine half after pullback.
+Gauge-invariant coarse functions have gauge-invariant
+pullbacks by \ref{fdip-00MP}. Thus the hypotheses of the
+general pushforward theorem \ref{fdip-00G8} hold, and it
+gives the displayed inequality. Reflection invariance
+follows separately by equivariance and pushforward of
+#{\theta_{f*}\lambda_f=\lambda_f}.}
+}
+
+\p{A path crossing outside the specified fine positive
+half does not meet the support hypothesis. Its exact image
+law still exists by \ref{fdip-00MQ}, but that measure identity
+alone gives no reflection-positivity conclusion for the
+coarse positive-half algebra.}

@@ -1,0 +1,69 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{When effective weights admit representation expansions}
+\date{2026-11-11}
+
+\p{Suppose the reference of an
+\vocabk{effective gauge weight}{fdip-00MX} is product Haar on
+#{G^{E_c}}, with #{G} compact Lie, and suppose
+#{f\in L^2(G^{E_c})}. Choose orthonormal matrix-entry bases
+for the irreducibles of #{G}. The finite products
+##{\Phi_I(u)=\prod_{e\in E_c}
+ \sqrt{d_{\rho_e}}\,\rho_e(u_e)_{i_ej_e}}
+form an orthonormal basis, and
+##{f=\sum_I\widehat f_I\Phi_I,\qquad
+ \widehat f_I=\int f\,\overline{\Phi_I}\,d\nu_c}
+converges in #{L^2}. If additionally
+#{\sum_I|\widehat f_I|\|\Phi_I\|_\infty<\infty},
+the series converges uniformly absolutely to a continuous
+representative of #{f}.}
+
+\p{For a gauge-invariant #{f}, the same #{L^2} limit may be
+written by applying the gauge projection termwise to finite
+partial sums. On each fixed representation tuple,
+vertex Haar averaging gives invariant contractions of matrix
+entries. In the matrix #{\rho_e(u_e)\in V_{\rho_e}\otimes
+V_{\rho_e}^*}, the forward gauge action acts on the target
+row factor and the source dual column factor. Contracting
+these edge tensors against invariant vertex covectors
+describes the surviving functions. For a central
+density on one copy of #{G}, the specialization is the
+character expansion and convergence criterion in
+\ref{fdip-007C}.}
+
+\proof{
+\p{Peter–Weyl in \ref{fdip-007C} gives the orthonormal
+matrix-entry basis on one group. Tensoring over the finite
+edge set gives the displayed basis and #{L^2} expansion.
+The extra summability assumption bounds the series uniformly;
+its continuous limit equals the #{L^2} function almost
+everywhere.}
+
+\p{The gauge action preserves each finite-dimensional
+representation-tuple space. Explicitly, inverse pullback
+on one matrix entry gives
+##{R_g\bigl(\rho_e(u_e)_{ij}\bigr)
+ =\sum_{k,l}\rho_e(g_{t(e)}^{-1})_{ik}
+              \rho_e(u_e)_{kl}\rho_e(g_{s(e)})_{lj}.}
+This is the dual coefficient action induced by the forward
+matrix action described above. For each vertex, averaging
+this finite-dimensional unitary action projects onto its
+invariant subspace. The separate vertex averages combine
+because gauge Haar is a finite product. Thus the averaged
+coefficient covectors are invariant vertex contractions.
+This is the same Haar projection as in \ref{fdip-0083}.
+Gauge projection is bounded on #{L^2}, so applying it to
+partial sums preserves convergence to an invariant #{f}.
+This justifies invariant coefficient contractions without
+asserting absolute convergence under an #{L^2} assumption
+alone.}
+}
+
+\p{For a general image reference, such as the diagonal law
+of \ref{fdip-00MS}, these product-Haar basis functions need
+not be orthonormal. An arbitrary #{L^1} effective density
+also need not be in #{L^2}. The exact observable and
+composition identities of \ref{fdip-00MQ} still apply in
+both cases.}

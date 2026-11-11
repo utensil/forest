@@ -1,0 +1,84 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{Rooted-tree Haar coordinates and quotient measure}
+\date{2026-11-11}
+
+\p{Let a finite connected oriented graph have root #{o} and
+spanning tree #{T}, and let #{G} be compact Hausdorff.
+For each vertex #{v}, let #{t_v(U)} be the ordered tree-path
+transport from #{o} to #{v}, with #{t_o=e}. For each
+non-tree edge define
+##{H_e=t_{t(e)}^{-1}U_et_{s(e)}.}
+Then
+##{\Phi_T:U\longmapsto
+ ((t_v)_{v\ne o},(H_e)_{e\notin T})}
+is a homeomorphism carrying product Haar to product Haar.
+There are #{|V|-1} tree variables and
+#{b_1=|E|-|V|+1} chord variables.}
+
+\p{Under a vertex gauge transformation #{g},
+##{t_v(g\cdot U)=g_vt_v(U)g_o^{-1},\qquad
+ H_e(g\cdot U)=g_oH_e(U)g_o^{-1}.}
+Consequently the orbit identification of \ref{fdip-006F}
+carries the Haar quotient measure to
+#{q_*\mu_G^{\otimes b_1}}, where
+#{q:G^{b_1}\to G^{b_1}/G} is simultaneous conjugacy.
+For a nonnegative integrable, pointwise gauge-invariant
+Borel weight #{w}, put
+#{\widetilde w(H)=w(\Phi_T^{-1}((e)_{v\ne o},H))}.
+It is constant on simultaneous conjugacy classes, and the
+weighted quotient measure is
+##{q_*(\widetilde w\,\mu_G^{\otimes b_1}).}
+Quotient measurable sets here are those with Borel preimage;
+this includes the Borel sets of the topological quotient.}
+
+\proof{
+\p{Set #{H_e=e} on tree edges. The inverse map is
+##{U_e=t_{t(e)}H_et_{s(e)}^{-1}.}
+The unique rooted paths verify the inverse on the tree, and
+the chord formula verifies it on the remaining edges.
+Both directions are continuous. Order the non-root vertices
+so that a parent precedes its children. If a tree edge has
+parent #{p} and child #{v}, its path variable is
+#{t_v=U_e^\epsilon t_p}, with the appropriate orientation
+#{\epsilon}. Replacing that edge coordinate by #{t_v} is a
+replacement of \ref{fdip-00MR}, using already computed parent
+coordinates. After all tree replacements, change each chord
+coordinate to #{t_{t(e)}^{-1}U_et_{s(e)}}. Each chord is an
+independent pivot; all tree coordinates remain fixed.
+Thus \ref{fdip-00MR} proves the product-Haar assertion.}
+
+\p{Endpoint cancellation from \ref{fdip-00MP} gives the tree
+transport rule. Substitution in the chord formula leaves
+only #{g_o} and #{g_o^{-1}}. Gauging by #{g_v=t_v^{-1}}
+sets all tree values to #{e}; a transformation between two
+such representatives must be constant on the connected tree.
+It therefore acts by simultaneous conjugation on the chords,
+as already proved in \ref{fdip-006F}.}
+
+\p{For the stated pointwise invariant weight,
+#{w(U)=\widetilde w(H(U))}. The projection onto chord variables
+has Haar pushforward, so integrating any nonnegative measurable
+function of #{H} gives its product-Haar integral, without
+an extra orbit-volume factor. Applying this to
+#{\widetilde w\,1_{q^{-1}(A)}} proves the quotient formula.
+All stabilizers are retained by this pushforward: the orbit
+of a chord tuple has stabilizer equal to the common centralizer
+of its entries. For #{b_1=0}, the chord space and quotient
+are points.}
+
+\p{For compact metrizable #{G}, a weight given only as an
+invariant #{L^1} class can first be replaced by a pointwise
+invariant Borel representative using the averaging argument
+of \ref{fdip-00MQ}, applied to the identity map. The quotient
+formula then applies to that representative.}
+}
+
+\p{Driver's tree integration theorem already treats arbitrary
+finite oriented graphs, with a rooted forest, for connected
+compact Lie groups
+\citet{Theorem 5.3 and Corollary 5.4, pp. 590–591}{driver1989ym2}.
+The explicit substitutions above establish the stated wider
+compact-group applicability.}

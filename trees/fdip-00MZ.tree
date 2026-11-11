@@ -1,0 +1,98 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{The SU(2) Wilson family is not closed under convolution}
+\date{2026-11-11}
+
+\p{Let #{\chi} be the two-dimensional fundamental character
+of #{SU(2)}, let Haar measure be normalized, and define
+##{Z_\beta=\int e^{\beta\chi(g)/2}\,d\mu(g),\qquad
+ k_\beta(g)=Z_\beta^{-1}e^{\beta\chi(g)/2}
+ \quad(\beta\ge0).}
+Use convolution #{(f*h)(g)=\int f(gx^{-1})h(x)\,d\mu(x)}.
+There is #{\varepsilon>0} such that, for every
+#{0<\beta<\varepsilon}, no #{\gamma\ge0} satisfies
+#{k_\beta*k_\beta=k_\gamma}, even as an almost-everywhere
+equality.}
+
+\proof{
+\p{The fundamental character is real, lies in #{[-2,2]},
+and obeys #{\chi(-g)=-\chi(g)}. Its tensor square decomposes
+as #{\chi^2=1+\chi_{\rm ad}}, with the adjoint character
+irreducible of dimension three. Character orthogonality
+from \ref{fdip-007C} therefore gives
+##{\int\chi^2\,d\mu=1,\qquad
+ \int\chi^4\,d\mu=2,\qquad
+ \int\chi^{2m+1}\,d\mu=0.}
+Indeed the second integral is the squared norm of
+#{1+\chi_{\rm ad}}. Haar invariance under #{g\mapsto-g}
+gives the odd moments.}
+
+\p{For #{|\beta|\le b}, Taylor's remainder for
+#{e^{\beta\chi/2}} after degree #{r} is bounded uniformly
+in #{g} by #{e^b|\beta|^{r+1}/(r+1)!}. Thus integration,
+the parity just proved, and division by #{Z_\beta}, which
+is positive and equals one at zero, give controlled expansions
+##{\begin{aligned}
+ Z_\beta&=1+\beta^2/8+O(\beta^4),\\
+ a_f(\beta)&=\tfrac12\int k_\beta\chi\,d\mu
+             =\beta/4+O(\beta^3),\\
+ a_{\rm ad}(\beta)&=\tfrac13\int k_\beta(\chi^2-1)\,d\mu
+             =\beta^2/24+O(\beta^4).
+ \end{aligned}}
+For the adjoint numerator the coefficient before division
+by three is
+#{\tfrac18\int(\chi^4-\chi^2)\,d\mu=1/8}.
+The remainders are bounded by constants times the stated
+powers throughout a fixed neighborhood of zero.}
+
+\p{For a central density #{k}, Schur's lemma makes
+#{\int k(g)\rho(g)\,d\mu(g)} scalar. On the two real
+characters used here that scalar is
+#{a_\rho=d_\rho^{-1}\int k\chi_\rho\,d\mu}.
+Fubini and #{g=yx} show that convolution multiplies these
+matrices, hence squares these two scalars for #{k*k}.
+This is the normalized central-character contraction
+underlying \ref{fdip-007C} and the face-merging calculation
+of \citet{§2, pp. 415–416, equations (19)–(23)}{migdal1975recursion}.
+Consequently equality with #{k_\gamma} requires
+##{a_f(\gamma)=a_f(\beta)^2,\qquad
+ a_{\rm ad}(\gamma)=a_{\rm ad}(\beta)^2.}}
+
+\p{Differentiation under the bounded-character integral
+gives, for every finite #{\beta\ge0},
+##{a_f'(\beta)=\tfrac14\operatorname{Var}_{k_\beta\mu}(\chi)>0.}
+The variance is positive because #{\chi} is nonconstant
+and the strictly positive density has full Haar support.
+Since #{a_f(0)=0} and #{\chi<2} on an open set of positive
+measure, #{0<a_f(\beta)<1} for #{\beta>0}.
+There is therefore exactly one solution of the fundamental
+equation among nonnegative couplings, and it lies in #{(0,\beta)}.
+Existence follows by the intermediate value theorem;
+strict monotonicity gives uniqueness.}
+
+\p{As #{\beta\to0}, this solution #{\gamma} tends to zero.
+The first expansion and its nonzero derivative imply first
+#{\gamma=O(\beta^2)}, and then
+##{\gamma=\beta^2/4+O(\beta^4).}
+Substitute into the adjoint expansion:
+##{\begin{aligned}
+ a_{\rm ad}(\beta)^2&=\beta^4/576+O(\beta^6),\\
+ a_{\rm ad}(\gamma)&=\beta^4/384+O(\beta^6),\\
+ a_{\rm ad}(\beta)^2-a_{\rm ad}(\gamma)
+   &=-\beta^4/1152+O(\beta^6).
+ \end{aligned}}
+The remainder bound makes this strictly negative for every
+sufficiently small positive #{\beta}. It contradicts the
+second necessary equation. Uniqueness in the preceding
+paragraph excludes every other nonnegative coupling.}
+}
+
+\p{The explicit Wilson character coefficients in
+\citet{§2.3, p. 5, equations (13)–(14)}{caselle1996recent}
+also give the leading coefficients. The
+calculation above proves the discrepancy and its remainder
+directly. It concerns this analytic SU(2) family and this
+convolution operation; it is not a claim about every compact
+group, action or coarse path map.}
