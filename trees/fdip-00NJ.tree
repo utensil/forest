@@ -1,0 +1,39 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{Ring-valued finite Fourier inversion}
+\date{2026-11-11}
+
+\p{For the \vocabk{Fourier weights}{fdip-00NI}, the maps
+#{\mathcal F} and #{\mathcal G} are mutually inverse
+#{R}-linear equivalences. In particular
+##{w(x)=\sum_{m\in A}\widehat w(m)\zeta^{mx}.}
+The calculation extends the [complex character
+orthogonality proof](fdip-000S) using precisely the stipulated
+root sums.}
+
+\proof{
+\p{Finite sums and multiplication by fixed elements of #{R}
+are #{R}-linear. For #{w\in R^A}, commutativity and
+orthogonality give
+##{\begin{aligned}
+ (\mathcal G\mathcal Fw)(x)
+ &=\sum_{y\in A}w(y)N^{-1}
+       \sum_{m\in A}\zeta^{m(x-y)}\\
+ &=w(x).
+\end{aligned}}
+In the other order, the coefficient of #{v(n)} in
+#{(\mathcal F\mathcal Gv)(m)} is
+#{N^{-1}\sum_x\zeta^{(n-m)x}=\mathbf1_{n=m}}.
+Thus #{\mathcal F\mathcal Gv=v} as well.}
+}
+
+\p{For #{R=\mathbb C} and #{\zeta=e^{2\pi i/N}}, Mathlib's
+\leanref{ZMod.dft_apply} and \leanref{ZMod.invDFT_apply}
+use an unnormalized negative-exponent forward transform
+and a normalized positive-exponent inverse. Consequently
+#{\mathcal F=N^{-1}\operatorname{dft}} and
+#{\mathcal G=N\operatorname{dft}^{-1}} in that specialization.
+Those declarations support the complex case; the general
+ring statement follows from the proof above.}

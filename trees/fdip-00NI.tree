@@ -1,0 +1,30 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Definition}
+\title{Fourier weights over a commutative ring}
+\date{2026-11-11}
+
+\p{Let #{A=\mathbb Z/N}, #{N\ge2}, and let #{R} be a nonzero
+commutative \vocabk{ring}{ca-000U} with identity in which
+#{N\cdot1_R} is a unit. A \newvocab{Fourier-orthogonal root}
+for #{A} in #{R} is an element #{\zeta} satisfying
+##{\zeta^N=1,\qquad
+ \sum_{x\in A}\zeta^{mx}=N\,\mathbf1_{m=0}
+ \quad(m\in A).}
+Here the indicator takes values zero and one in #{R}.
+The first equality makes #{\zeta} a unit, so positive and
+negative exponents depend only on their residue classes.}
+
+\p{On the \vocabk{field module}{fdip-0010} #{R^A}, define
+#{R}-linear maps #{\mathcal F,\mathcal G:R^A\to R^A} by
+##{\begin{aligned}
+ (\mathcal Fw)(m)&=N^{-1}\sum_{x\in A}w(x)\zeta^{-mx},\\
+ (\mathcal Gv)(x)&=\sum_{m\in A}v(m)\zeta^{mx}.
+\end{aligned}}
+Write #{\widehat w=\mathcal Fw} for the Fourier weight.
+This normalized-average convention specializes the cyclic
+transform in \citet{Section 6, p. 13, Equation (59)}{wegner2014duality};
+its exact sign and scale conversion is stated in
+\ref{fdip-00NR}. The inverse identities are proved in
+\ref{fdip-00NJ}.}

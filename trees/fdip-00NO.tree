@@ -1,0 +1,68 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{Finite cyclic duality with every torus sector}
+\date{2026-11-11}
+
+\p{For the \vocabk{cyclic lattice data}{fdip-00NL}, set #{r=d-2}
+and choose a cocycle #{h_s\in Z^r(K^*;A)} representing
+each #{s\in H^r(K^*;A)}. Define the dual weight function
+on #{C^r(K^*;A)} by
+##{\widehat W(q)=\prod_{p\in K_2}
+      \widehat w_p((D_2^{-1}q)_p).}
+Then the normalized link partition function satisfies
+##{\begin{aligned}
+ Z&=\sum_{b\in Z_2(K;A)}\prod_p\widehat w_p(b_p)\\
+  &=\frac1{|Z^{r-1}(K^*;A)|}
+       \sum_{s\in H^r(K^*;A)}
+       \sum_{\alpha\in C^{r-1}(K^*;A)}
+           \widehat W(\delta\alpha+h_s).
+\end{aligned}}
+Equivalently, with normalized counting on dual cochains,
+##{Z=|B^r(K^*;A)|\sum_{s\in H^r(K^*;A)}
+ \left[N^{-n_{r-1}^*}\sum_{\alpha\in C^{r-1}(K^*;A)}
+              \widehat W(\delta\alpha+h_s)\right].}
+The outer operation is a sum over #{N^{\binom d2}} sectors.
+Both expressions are independent of their cocycle representatives.
+All displayed integer inverses exist in #{R} by
+\ref{fdip-00NN}. This is the finite-cochain form of the cyclic
+Fourier duality discussed in
+\citet{Section 6, pp. 12–13}{wegner2014duality}, with
+normalization and topology proved explicitly here.}
+
+\proof{
+\p{Apply \ref{fdip-00NJ} to every face and exchange finite
+sums. Label the chosen face characters by the chain
+#{b=\sum_p b_pp\in C_2(K;A)}. The pairing identity gives
+##{\begin{aligned}
+ Z&=\sum_{b\in C_2(K;A)}\left(\prod_p\widehat w_p(b_p)\right)
+     N^{-n_1}\sum_{a\in C^1(K;A)}
+          \zeta^{\langle b,\delta a\rangle},\\
+ \langle b,\delta a\rangle&=\langle\partial b,a\rangle.
+\end{aligned}}
+The remaining link average factors as
+##{\prod_{e\in K_1}
+   \left[N^{-1}\sum_{x\in A}\zeta^{(\partial b)_e x}\right]
+   =\mathbf1_{\partial b=0}.}
+Every factor #{N} from a surviving character sum cancels its
+normalized link factor. This proves the cycle formula without
+any residual division by an original gauge-group volume.}
+
+\p{By \ref{fdip-00NM}, #{D_2} maps those cycles bijectively
+to #{Z^r(K^*;A)}. Each cocycle #{q} has a unique class #{s},
+and #{q-h_s\in B^r}, so #{q=\delta\alpha+h_s} for some
+#{\alpha}. Two choices of #{\alpha} give the same #{q}
+exactly when their difference belongs to #{Z^{r-1}}.
+Thus the parameterization counts every #{q} precisely
+#{|Z^{r-1}|} times. Dividing by this unit proves the
+second expression. If #{h'_s=h_s+\delta\beta_s}, the
+translation #{\alpha\mapsto\alpha-\beta_s} leaves every
+argument unchanged, proving representative independence.}
+
+\p{Finally \ref{fdip-00NN} gives
+#{|B^r|=N^{n_{r-1}^*}/|Z^{r-1}|}.
+Extracting the normalized dual-cochain average therefore gives
+the last formula. There is no division by the number of
+cohomology classes.}
+}
