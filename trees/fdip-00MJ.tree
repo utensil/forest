@@ -1,0 +1,109 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{The scalar part of a Clifford product is a Pfaffian}
+\date{2026-11-11}
+
+\p{Let #{V} be a finite-dimensional vector space over
+#{\mathbb R} or #{\mathbb C}, and let #{b} be a symmetric
+bilinear form on #{V}. Set #{q(v)=b(v,v)}, and let
+#{\operatorname{Cl}(V,b)} be the Clifford algebra of #{q} in
+the square-quotient convention of \ref{fdip-000P}. Since #{2}
+is invertible, that convention gives
+#{uv+vu=2b(u,v)1}.}
+
+\p{Let #{\Lambda V} be the exterior algebra of #{V}. For
+#{v\in V}, let #{\iota_v} be the antiderivation of
+#{\Lambda V} of degree #{-1} determined by
+#{\iota_v(w)=b(v,w)}. Define #{c(v)} on #{\Lambda V} by
+#{c(v)\alpha=v\wedge\alpha+\iota_v\alpha}. The proof shows
+#{c(v)^2=q(v)\operatorname{Id}}, so \ref{fdip-000P} supplies
+an algebra homomorphism
+#{\rho:\operatorname{Cl}(V,b)\to\operatorname{End}(\Lambda V)}
+with #{\rho(v)=c(v)}. For vectors #{v_1,\ldots,v_n}, the
+scalar part #{\langle v_1\cdots v_n\rangle_0} is the
+degree-zero component of #{\rho(v_1\cdots v_n)\cdot 1}.}
+
+\p{This scalar vanishes when #{n} is odd. For #{n=2k}, let
+#{A} be the alternating matrix of size #{2k} whose strict
+upper entries are #{A_{ij}=b(v_i,v_j)}. Then
+##{\langle v_1\cdots v_{2k}\rangle_0=\operatorname{Pf}(A),}
+where #{\operatorname{Pf}} is the increasing-word scalar of
+\ref{fdip-00MD}. The empty product has scalar part #{1}.
+The Chevalley map is the inverse of
+#{x\mapsto\rho(x)\cdot 1}. It sends a vector to itself, and
+##{v_1\wedge v_2\mapsto v_1v_2-b(v_1,v_2).}
+No nondegeneracy is assumed.}
+
+\p{The same signed sum is the value of the odd Wick rule in
+\ref{fdip-008K} when the covariance entries are these
+pairings. That rule is the expansion of this Clifford
+product, with #{b} the covariance. The form #{b} is
+symmetric. The matrix #{A} is alternating because each lower
+entry is defined to be the negative of the pairing above it.
+It is not the coordinate matrix of an alternating form on
+#{V}.}
+
+\proof{
+\p{The contraction lowers degree by one, and
+#{\iota_v(w\wedge\alpha)=b(v,w)\alpha-w\wedge\iota_v(\alpha)}.
+The square #{\bigl(v\wedge+\iota_v\bigr)^2} cancels its two
+cross terms and leaves #{\iota_v(v)=q(v)}. Thus
+#{c(v)^2=q(v)\operatorname{Id}}. The universal property in
+\ref{fdip-000P} supplies #{\rho}.}
+
+\p{Write #{\sigma(v_1\cdots v_n)=\rho(v_1\cdots v_n)\cdot 1}.
+The operator rule gives
+#{\sigma(v\cdot x)=v\wedge\sigma(x)+\iota_v\sigma(x)}.
+In particular
+#{\sigma(v_1v_2)=v_1\wedge v_2+b(v_1,v_2)}, so the
+degree-zero component is #{b(v_1,v_2)} and
+#{\rho\bigl(v_1v_2-b(v_1,v_2)\bigr)\cdot 1=v_1\wedge v_2}.}
+
+\p{A partial matching of the indices #{1} through #{n} is a
+set of disjoint pairs. Write each pair in increasing order,
+and order the pairs by their first entries. The sign
+#{\varepsilon(M)} is the sign of the permutation whose word
+lists those pairs and then the unmatched indices in
+increasing order. The empty matching has sign #{1}. Claim:
+#{\sigma(v_1\cdots v_n)} equals the sum, over all partial
+matchings #{M}, of #{\varepsilon(M)} times the product of
+the pairings #{b(v_i,v_j)} on those pairs, times the wedge
+of the unmatched vectors in increasing index order. The
+degree-zero term is that sum over perfect matchings. By
+\ref{fdip-00MD}, the sum is #{\operatorname{Pf}(A)}.}
+
+\p{The claim holds for #{n\le 2} by the calculation above.
+For the inductive step, apply the operator rule to the tail
+#{\sigma(v_2\cdots v_n)}. Wedging by #{v_1} adds the index
+#{1} at the front of the unmatched list. That index is
+inserted after a pair block of even length, so the
+permutation sign is unchanged, and the new wedge is
+increasing. Contraction by #{\iota_{v_1}} against the
+#{t}-th unmatched vector contributes the antiderivation
+sign #{(-1)^{t-1}}. Moving that index from the unmatched
+list to the place immediately after #{1} passes the pair
+block and the #{t-1} earlier unmatched indices, and
+multiplies the permutation sign by the same factor. The
+new pair begins with #{1}, so it stands first among the
+pairs. Every partial matching of the full list arises
+once.}
+
+\p{A perfect matching exists only for even length, so an odd
+product has scalar part #{0}. The empty product has scalar
+part #{1}. Choose an ordered basis of #{V}. The relation
+#{vw=-wv+2b(v,w)} rewrites every word as a linear
+combination of the #{2^{\dim V}} increasing products, so
+those products span #{\operatorname{Cl}(V,b)}. Their images
+under #{\sigma} have distinct leading wedges, so the
+products are linearly independent and #{\sigma} is
+bijective. Its inverse is the Chevalley map in the
+statement.}
+
+\p{Grouping the perfect matchings by the partner of the
+first index is the recursion in \ref{fdip-00MD}.
+\ref{fdip-008K} identifies that recursion with the odd Wick
+rule. Evaluating the recursion on the pairings
+#{b(v_i,v_j)} is the expansion above.}
+}
