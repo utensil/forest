@@ -8,11 +8,15 @@
 \p{Let #{q\ge 2} and #{N\ge 3} be integers, and let #{Q} be a
 \vocabk{uniform cycle precision}{fdip-00AW} on
 #{\mathbb Z/(qN)\mathbb Z} with neighbor value #{b>0} and shape
-#{t}. Let #{S}, #{b'}, #{t'} and #{C} be the retained precision,
-neighbor value, shape and eliminated operator compression
-supplied by \ref{fdip-00B3} for the decimation in
-\ref{fdip-00AW}. Then #{Q} is positive definite if and only if
-#{t>1}. In that case #{b'>0} and #{t'>1}. The
+#{t}. Let #{S} and #{C} be the retained precision and the
+eliminated operator compression supplied by \ref{fdip-00B3}.
+The retained coupling
+is #{b/U_{q-1}(t)} and the retained shape is #{T_q(t)}.
+Then #{Q} is positive definite if and only if #{t>1}. In
+that case the retained coupling is positive and the retained
+shape is greater than #{1}. The coupling-flow Remark of
+\ref{fdip-00B3} records this step.
+The
 \vocabk{Gaussian partition function}{fdip-0005} factors as
 ##{Z_Q=(2\pi)^{N(q-1)/2}(\det C)^{-1/2}Z_S,}
 and the \vocabk{Gaussian induced action}{fdip-005R} adds
@@ -20,7 +24,8 @@ and the \vocabk{Gaussian induced action}{fdip-005R} adds
 polynomial of \ref{fdip-00B1}. At #{t=1} the
 constant fields are a zero mode, so there is no Gaussian law on
 all field values. At #{t=-1/2}, the other fixed point of #{T_2}
-in \ref{fdip-00B1}, a negative eigenvalue occurs. When
+over an integral domain in which #{2} is invertible, as in
+\ref{fdip-00B1}, a negative eigenvalue occurs. When
 #{t>1}, for every integer #{r\ge 2}, the induced-action shifts
 of a step by #{r} and a following step by #{q} add to the shift
 of the single step by #{qr}.}
@@ -39,12 +44,15 @@ The constant mode #{k=0} has eigenvalue #{2b(t-1)}. Since
 is positive if and only if #{t>1}, and then every eigenvalue
 is positive. At #{t=1} the constant eigenvalue vanishes. At
 #{t=-1/2} it equals #{-3b}, which is negative.
-\ref{fdip-00B1} says that #{t=-1/2} is the other fixed point of
+\ref{fdip-00B1} says that, in an integral domain in which #{2}
+is invertible, #{t=-1/2} is the other fixed point of
 #{T_2}, and that
 #{U_{q-1}(\cosh\theta)=\sinh(q\theta)/\sinh\theta>0} whenever
-#{t=\cosh\theta>1}. Thus #{t'=\cosh(q\theta)>1}. Since
-#{b>0}, the formula #{b'=b/U_{q-1}(t)} of \ref{fdip-00B3} is
-positive.}
+#{t=\cosh\theta>1}. Thus the retained shape is
+#{T_q(t)=\cosh(q\theta)>1}. Since #{b>0}, the retained
+coupling #{b/U_{q-1}(t)} of \ref{fdip-00B3} is positive.
+The same evaluation is the coupling-flow Remark of
+\ref{fdip-00B3}: the step sends #{\theta} to #{q\theta}.}
 
 \p{The counting inner product makes the kept and eliminated
 coordinates orthogonal. For #{t>1} the precision #{Q} is

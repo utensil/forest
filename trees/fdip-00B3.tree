@@ -26,12 +26,13 @@ They form a \vocabk{chosen binary splitting}{fdip-001T} of
 of \ref{fdip-00B1}. Suppose #{2b} and #{U_{q-1}(t)} are
 invertible. Then the \vocabk{split Schur map}{fdip-001T}
 ##{S=A-BC^{-1}E}
-equals #{a'I-b'(T_K+T_K^{-1})}, where #{T_K} is the
-canonical shift of the finite free module on the retained
-sites, given by #{(T_Kf)(j)=f(j-1)}, and
-##{b'=\frac{b}{U_{q-1}(t)},\qquad
-a'=2b'T_q(t),\qquad
-t'=T_q(t).}
+equals
+##{S=\frac{b}{U_{q-1}(t)}\,P^K_{T_q(t)},}
+where #{P^K_s=2s\,I-(T_K+T_K^{-1})} is the
+\vocabk{unit-coupling cycle operator}{fdip-00AW} formed on
+the retained sites and #{T_K} is their canonical shift,
+#{(T_Kf)(j)=f(j-1)}. The retained shape is #{T_q(t)} and
+the retained coupling is #{b\,U_{q-1}(t)^{-1}}.
 The eliminated set is #{N} disjoint paths of #{q-1} vertices.
 The determinant of the compression #{C} is
 #{(b^{q-1}U_{q-1}(t))^N}. These formulae use only the ring
@@ -46,17 +47,31 @@ nonzero coordinates of #{Q} are #{Q_{ii}=a} and
 law, #{S} is the precision of its decimation. The identities
 above are not restricted to that specialization.}
 
+\p{Remark. Suppose #{t=\cosh\theta} with #{\theta>0}, so
+#{t>1}. The evaluation in \ref{fdip-00B1} sends one
+decimation step by #{q} to the shape
+#{T_q(t)=\cosh(q\theta)}, hence #{\theta\mapsto q\theta}.
+Thus #{\theta} is the inverse correlation length in lattice
+units, and that length scales by #{1/q}. The value #{t=1},
+equivalently #{\theta=0}, is the massless fixed point that
+every step preserves, because #{T_q(1)=1}. Every #{t>1}
+moves away from it, because #{\cosh(q\theta)>\cosh\theta}.
+The identity #{T_q\circ T_r=T_{qr}} is the semigroup law of
+the steps. This reading uses the real evaluation. It is not
+part of the ring calculation.}
+
 \p{For #{q=2} the map on #{(a,b)} is
 #{(a,b)\mapsto(a-2b^2/a,\,b^2/a)}. In \ref{fdip-0057} the
 neighbor value is #{1} and the diagonal equals #{2} plus the
 mass parameter. The map sends that precision to the retained
-operator. The mass parameter there is not this diagonal. Over an
-odd prime field, when #{\det C\neq 0}, the eliminated sum is
-the factor #{Z_p(C)} in \ref{fdip-008O}. Let #{r\ge 2} be an
-integer such that #{U_{r-1}(t)} and #{U_{q-1}(T_r(t))} are
-units. A step by #{r} and then a step by #{q} returns the
-neighbor value and the eliminated determinant of the single
-step by #{qr}.}
+operator. The mass parameter there is the retained diagonal
+minus twice the retained coupling.
+Over an odd prime field, when #{\det C\neq 0}, the eliminated
+sum is the factor #{Z_p(C)} in \ref{fdip-008O}. Let
+#{r\ge 2} be an integer such that #{U_{r-1}(t)} and
+#{U_{q-1}(T_r(t))} are units. A step by #{r} and then a step
+by #{q} returns the retained coupling and the eliminated
+determinant of the single step by #{qr}.}
 
 \proof{
 \p{Declare the counting basis of site indicators. Number the vertices #{0,\ldots,qN-1} and keep
@@ -76,32 +91,38 @@ gives #{y_k=y_1U_{k-1}(t)}. The last row is
 #{y_1=1/(bU_m(t))}. The case #{m=1} is
 #{U_1(t)=a/b}. The couplings at the two ends are #{-b}, so
 the [split Schur map](fdip-001T) gives the off-diagonal entry
-#{-b^2 y_1=-b'}.
+#{-b^2 y_1=-b/U_m(t)}.
 Each kept vertex meets two paths. The endpoint entry of the
 inverse is #{\Delta_{m-1}/\Delta_m=U_{m-1}(t)/(bU_m(t))}, so
 one path subtracts #{bU_{q-2}(t)/U_{q-1}(t)}. Two paths give
-##{a'=a-2b\frac{U_{q-2}(t)}{U_{q-1}(t)}.}
-\ref{fdip-00B1} rewrites this diagonal as #{a'=2b'T_q(t)}.
-In the declared counting basis, the diagonal #{a'} and the
-neighbor entries #{-b'} are the entries of
-#{a'I-b'(T_K+T_K^{-1})}.
+the diagonal
+##{a-2b\frac{U_{q-2}(t)}{U_{q-1}(t)}.}
+\ref{fdip-00B1} gives
+#{T_q(t)=tU_{q-1}(t)-U_{q-2}(t)}. Since #{2bt=a},
+##{2\cdot\frac{b}{U_{q-1}(t)}\,T_q(t)
+=a-2b\frac{U_{q-2}(t)}{U_{q-1}(t)}.}
+In the declared counting basis, that diagonal and the neighbor
+entries #{-b/U_{q-1}(t)} are the entries of
+#{\frac{b}{U_{q-1}(t)}\,P^K_{T_q(t)}}.
 Nothing in the arithmetic requires more than the two units.}
 
-\p{For #{q=2}, #{U_1(t)=a/b}, hence
-#{b'=b^2/a} and #{a'=a-2b^2/a}. Substituting the diagonal and
-the neighbor value of \ref{fdip-0057} returns its retained
-operator. The retained mass parameter in \ref{fdip-0057} equals
-#{a'-2b'}. Over an odd prime field, the
-block factorization of \ref{fdip-008O} is the eliminated sum
-once #{\det C\neq 0}, with this #{S}. When #{U_{r-1}(t)} and
-#{U_{q-1}(T_r(t))} are units, start from length #{qrN}. With
-#{b'=b/U_{r-1}(t)},
+\p{For #{q=2}, #{U_1(t)=a/b}, hence the retained coupling is
+#{b^2/a} and the retained diagonal is #{a-2b^2/a}.
+Substituting the diagonal and the neighbor value of
+\ref{fdip-0057} returns its retained operator. The retained
+mass parameter in \ref{fdip-0057} equals that diagonal minus
+twice that coupling. Over an odd prime field, the block
+factorization of \ref{fdip-008O} is the eliminated sum once
+#{\det C\neq 0}, with this #{S}. When #{U_{r-1}(t)} and
+#{U_{q-1}(T_r(t))} are units, start from length #{qrN}. The
+first step has retained coupling #{b/U_{r-1}(t)}, and
 ##{\det(C_r)\det(C_q)
 =(b^{r-1}U_{r-1}(t))^{qN}
 \biggl(\frac{b^{q-1}U_{q-1}(T_r(t))}{(U_{r-1}(t))^{q-1}}\biggr)^N
 =(b^{qr-1}U_{r-1}(t)\,U_{q-1}(T_r(t)))^N.}
 \ref{fdip-00B1} replaces the product of these two units by
 #{U_{qr-1}(t)}, so
-#{\det(C_r)\det(C_q)=(b^{qr-1}U_{qr-1}(t))^N} and the neighbor
-value #{b'/U_{q-1}(T_r(t))} equals #{b/U_{qr-1}(t)}.}
+#{\det(C_r)\det(C_q)=(b^{qr-1}U_{qr-1}(t))^N} and the coupling
+#{\bigl(b/U_{r-1}(t)\bigr)/U_{q-1}(T_r(t))} equals
+#{b/U_{qr-1}(t)}.}
 }

@@ -2,48 +2,94 @@
 \meta{agent-authored}{true}
 \tag{fdip}
 \taxon{Lemma}
-\title{The Chebyshev recurrence above 1}
+\title{Chebyshev polynomial identities}
 \date{2026-11-06}
 
-\p{Define polynomials #{T_r} and #{U_r} by #{T_0=1},
+\p{Define polynomials #{T_r,U_r\in\mathbb Z[t]} by #{T_0=1},
 #{T_1(t)=t}, #{U_0=1}, #{U_1(t)=2t}, and
-#{X_r=2tX_{r-1}-X_{r-2}} for #{r\ge 2}. For every
-#{\theta>0} and every integer #{r\ge 0},
-##{T_r(\cosh\theta)=\cosh(r\theta),\qquad
-U_r(\cosh\theta)=\frac{\sinh((r+1)\theta)}{\sinh\theta}.}
-As polynomial identities, #{T_q\circ T_r=T_{qr}} and
-#{U_{qr-1}(t)=U_{q-1}(T_r(t))\,U_{r-1}(t)} for integers
-#{q,r\ge 1}. For every integer #{q\ge 2},
+#{X_r=2tX_{r-1}-X_{r-2}} for #{r\ge 2}.
+Extend both sequences to negative indices by the same
+recurrence, which forces #{T_{-k}=T_k} and #{U_{-1}=0}, and
+#{U_{-k}=-U_{k-2}} for #{k\ge 2}. For integers #{q,r\ge 1},
+##{T_q\circ T_r=T_{qr},\qquad
+U_{qr-1}(t)=U_{q-1}(T_r(t))\,U_{r-1}(t).}
+For every integer #{q\ge 2},
 #{T_q(t)=tU_{q-1}(t)-U_{q-2}(t)}, where the second index is
 #{0} when #{q=2}.
-Also #{T_q(1)=1} for every integer #{q\ge 0}, and the only
-fixed points of #{T_2} are #{t=1} and #{t=-1/2}.}
+Also #{T_q(1)=1} for every integer #{q\ge 0}, and
+#{T_2(t)-t=(2t+1)(t-1)}.
+These are identities in #{\mathbb Z[t]}, so they hold for an
+element of any commutative ring. In an integral domain in
+which #{2} is invertible, the only solutions of #{T_2(t)=t}
+are #{t=1} and #{t=-1/2}.}
 
 \proof{
-\p{The addition formula
-#{\cosh((r+1)\theta)=2\cosh\theta\,\cosh(r\theta)-\cosh((r-1)\theta)}
-is the recurrence for #{T_r}. The values at #{r=0} and #{r=1}
-agree, so #{T_r(\cosh\theta)=\cosh(r\theta)}. Dividing
-#{\sinh((r+1)\theta)=2\cosh\theta\,\sinh(r\theta)-\sinh((r-1)\theta)}
-by #{\sinh\theta} is the recurrence for #{U_r}, and the values
-#{U_0=1} and #{U_1(\cosh\theta)=2\cosh\theta} agree, so
-#{U_r(\cosh\theta)=\sinh((r+1)\theta)/\sinh\theta}. Therefore
-#{T_q(T_r(\cosh\theta))=\cosh(qr\theta)=T_{qr}(\cosh\theta)}, and
-#{U_{qr-1}(\cosh\theta)=\sinh(qr\theta)/\sinh\theta} equals
-#{U_{q-1}(T_r(\cosh\theta))\,U_{r-1}(\cosh\theta)}. The two
-sides of each identity differ by a polynomial that vanishes
-for every #{t>1}, so both identities hold in #{\mathbb Z[t]}.
-For #{q\ge 2} and #{t=\cosh\theta},
-##{tU_{q-1}(t)-U_{q-2}(t)
-=\frac{\cosh\theta\sinh(q\theta)-\sinh((q-1)\theta)}{\sinh\theta}.}
-The subtraction formula
-#{\sinh((q-1)\theta)=\sinh(q\theta)\cosh\theta-\cosh(q\theta)\sinh\theta}
-makes the numerator #{\cosh(q\theta)\sinh\theta}, so the
-quotient equals #{T_q(t)}. The identity follows in
-#{\mathbb Z[t]}. For #{q=2} the index #{q-2} is #{0}. Finally
-#{T_2(t)-t=(2t+1)(t-1)}, and #{T_q(1)=1} follows from the
-recurrence.}
+\p{For #{q=2}, both sides of
+#{T_q=tU_{q-1}-U_{q-2}} equal #{2t^2-1}.
+For #{q=3}, the recurrence gives
+#{T_3=2t(2t^2-1)-t=4t^3-3t}, and
+#{tU_2-U_1=t(4t^2-1)-2t} is the same polynomial.
+If the identity holds at #{q-1} and at #{q}, with #{q\ge 3},
+substitute #{U_q=2tU_{q-1}-U_{q-2}} and
+#{U_{q-1}=2tU_{q-2}-U_{q-3}}:
+##{tU_q-U_{q-1}
+=t(2tU_{q-1}-U_{q-2})-(2tU_{q-2}-U_{q-3})
+=2t(tU_{q-1}-U_{q-2})-(tU_{q-2}-U_{q-3}).}
+The two parentheses are #{T_q} and #{T_{q-1}}, so the
+right side is #{2tT_q-T_{q-1}=T_{q+1}}.}
+
+\p{The extension gives #{T_{-1}=T_1}. If #{T_{-k}=T_k} and
+#{T_{-(k-1)}=T_{k-1}}, the recurrence at index #{-k+1}
+gives #{T_{-k-1}=T_{k+1}}. Thus #{T_{-k}=T_k} for every
+#{k\ge 0}. Fix #{m\ge 0} and set
+#{S_n=T_{m+n}+T_{m-n}}. Then #{S_0=2T_m} and
+#{S_1=2tT_m=2T_1T_m}. The recurrence at the two indices
+#{m+n} and #{m-n} gives
+#{S_{n+1}=2tS_n-S_{n-1}}. The sequence #{2T_nT_m} obeys the
+same rule and the same two initial values, so
+#{T_{m+n}+T_{m-n}=2T_mT_n}.}
+
+\p{Set #{u_q=T_q\circ T_r}. Then #{u_0=1}, #{u_1=T_r}, and
+the recurrence in the outer argument gives
+#{u_q=2T_ru_{q-1}-u_{q-2}}.
+The addition formula with step #{r} gives the same rule for
+#{T_{qr}}. The two sequences agree, so
+#{T_q\circ T_r=T_{qr}}.}
+
+\p{The same backwards recurrence gives #{U_{-1}=0}, and then
+#{U_{-k}=-U_{k-2}}. Fix #{m\ge 0} and set
+#{V_r=U_{m+r}+U_{m-r}}. Then #{V_0=2U_m} and
+#{V_1=2tU_m=2T_1U_m}. The recurrence at #{m+r} and at
+#{m-r} gives #{V_{r+1}=2tV_r-V_{r-1}}. The sequence
+#{2T_rU_m} obeys the same rule, so
+#{U_{m+r}=2T_rU_m-U_{m-r}}.}
+
+\p{Set #{W_q=U_{q-1}(T_r)\,U_{r-1}} and #{Z_q=U_{qr-1}},
+with #{W_0=Z_0=0}. Then #{W_1=Z_1=U_{r-1}}.
+The recurrence for #{U} at the argument #{T_r} multiplies by
+the fixed polynomial #{U_{r-1}} and gives
+#{W_q=2T_rW_{q-1}-W_{q-2}}.
+The dilation at index #{m=(q-1)r-1}, which is at least #{-1},
+gives the same rule for #{Z_q}. Thus
+#{U_{qr-1}(t)=U_{q-1}(T_r(t))\,U_{r-1}(t)}.}
+
+\p{Finally #{T_2(t)-t=(2t+1)(t-1)}. The values #{T_0(1)=1}
+and #{T_1(1)=1}, with the recurrence, give #{T_q(1)=1}.
+In an integral domain a product is zero only when a factor is
+zero. When #{2} is invertible, #{2t+1=0} means #{t=-1/2}.
+Those two values are then the only solutions of #{T_2(t)=t}.}
 }
+
+\p{Remark. For every #{\theta>0} and every integer #{r\ge 0},
+##{T_r(\cosh\theta)=\cosh(r\theta),\qquad
+U_r(\cosh\theta)=\frac{\sinh((r+1)\theta)}{\sinh\theta}.}
+The addition formulas
+#{\cosh((r+1)\theta)=2\cosh\theta\,\cosh(r\theta)-\cosh((r-1)\theta)}
+and
+#{\sinh((r+1)\theta)=2\cosh\theta\,\sinh(r\theta)-\sinh((r-1)\theta)}
+are the recurrence above, and the values at #{r=0} and #{r=1}
+agree. These evaluations are not used in the proof of the
+polynomial identities.}
 
 \p{Mathlib revision \code{94f43000e8ad} contains part of this evaluation.
 \leanref{Polynomial.Chebyshev.T_real_cosh} gives
