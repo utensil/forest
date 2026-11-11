@@ -5,48 +5,110 @@
 \title{Three commutants of the binary tetrahedral group}
 \date{2026-11-11}
 
-\p{Let #{2T} be the group of 24 Hurwitz units in
-\ref{fdip-007G}, and set #{\omega=(-1+i+j+k)/2}.
-The rows of \ref{fgap-000K} partition #{2T} into the cosets
-#{Q}, #{Q\omega} and #{Q\omega^2}, where
-#{Q=\{\pm1,\pm i,\pm j,\pm k\}}.
-Direct multiplication gives #{\omega^3=1} and
-##{\omega i\omega^{-1}=k,\qquad
-\omega k\omega^{-1}=j,\qquad
-\omega j\omega^{-1}=i.}
-Work in #{\operatorname{SL}(2,\mathbb F_3)}, with entries read in
-#{\mathbb F_3}. Set
+\p{Let #{\mathcal O} be the [Hurwitz order](fgap-0016), let #{N} be its
+reduced norm and let #{t(x)=x+\bar x}, so
+#{x^2-t(x)x+N(x)=0} with #{t(x),N(x)\in\mathbb Z} for
+#{x\in\mathcal O}. The Lipschitz order #{L} of that definition has index
+#{2} in #{\mathcal O}. Also #{2\mathcal O\subset L}: the generator
+#{\omega=(-1+i+j+k)/2} satisfies #{2\omega\in L}. Since #{2} is invertible
+modulo #{3}, the inclusion induces an isomorphism #{L/3L\to\mathcal O/3\mathcal O}.
+Call the quotient #{A}. This is the first step. It has #{\mathbb F_3}-basis #{1,i,j,k}, with
+#{i^2=j^2=-1} and #{ij=-ji=k}.
+For a nonzero #{x=a+bi+cj+dk} in a two-sided ideal, the scalar parts of
+#{x}, #{ix}, #{jx} and #{kx} are #{a,-b,-c,-d}, so one left multiple
+#{y} has nonzero scalar part. Since #{i^2=-1}, the inverse of #{i} is
+#{-i}, and #{i(a+bi+cj+dk)i^{-1}=a+bi-cj-dk}. The same rule with #{j}
+fixes the scalar part and sends #{i} to #{-i}. Thus
+#{y\mapsto\tfrac12(y+iyi^{-1})}, followed by
+#{y\mapsto\tfrac12(y+jyj^{-1})}, leaves that nonzero scalar, a unit.
+The ideal is all of #{A}, so #{A} is simple.
+It is not a division algebra: #{z=1+i+j} has
+#{z\bar z=N(z)=3=0}. A minimal left ideal #{S} is therefore proper.
+Left multiplication gives a homomorphism #{A\to\operatorname{End}(S)}
+whose kernel is a two-sided ideal not containing #{1}, hence zero, and
+#{(\dim S)^2\ge 4}. Dimension #{3} is impossible: #{A} would act on the
+line #{A/S}, the action is nonzero because #{1} acts as the identity, and
+its kernel would be a two-sided ideal of codimension one. Dimension #{4}
+would force #{S=A}, which is not a proper ideal. Hence #{\dim S=2} and
+#{A\to\operatorname{End}(S)} is an isomorphism by dimension.
+This is the second step. Write #{r:\mathcal O\to\operatorname{End}(S)} for the composition.
+If #{r(x)} is not scalar, its minimal polynomial has degree #{2}. Comparing
+#{r(x)^2-t(x)r(x)+N(x)=0} with the Cayley-Hamilton theorem on #{S} gives
+#{\det r(x)=N(x)} in #{\mathbb F_3}, the determinant being the action
+on #{\Lambda^2 S}. If #{r(x)=c}, then #{x=c+3w} and
+#{N(x)\equiv c^2=\det r(x)}.
+This is the third step. The units are the elements of reduced norm #{1}.
+The same definition counts them: there are #{24},
+and #{r} sends them into #{\operatorname{SL}(S)}. This unit group is the
+binary tetrahedral group #{2T}. If #{r(u)=1}, then #{u-1=3w} with
+#{w\in\mathcal O}, and #{9N(w)=N(u-1)}. Expanding the norm gives
+#{N(u-1)=(u-1)(\bar u-1)=N(u)-t(u)+1=2-t(u)}. Writing #{u=a+v}
+with #{a} the scalar part, #{N(u)=a^2+N(v)} and #{t(u)=2a}. Since
+#{N(v)} is a sum of three squares, #{a^2\le 1}, so #{t(u)^2\le 4}
+and #{2-t(u)\le 4}. Thus #{9N(w)\le 4}. Since #{N(w)} is a nonnegative
+integer, #{N(w)=0}. The reduced norm is a sum of four squares, so
+#{w=0}. Thus the kernel is trivial.
+#{\operatorname{GL}(S)} acts simply transitively on ordered bases, so its
+order is #{(3^2-1)(3^2-3)=48}. The determinant is surjective onto
+#{\mathbb F_3^{\times}} because scaling one vector of a basis attains
+every nonzero value, and #{\lvert\operatorname{SL}(S)\rvert=24}. An
+injective homomorphism between groups of order #{24} is an isomorphism
+##{2T\cong\operatorname{SL}(2,\mathbb F_3).}}
+
+\p{Remark. In the basis of #{S} fixed by
 ##{\iota=\begin{pmatrix}0&-1\\1&0\end{pmatrix},\qquad
 \eta=\begin{pmatrix}-1&1\\1&1\end{pmatrix},\qquad
 \rho=\begin{pmatrix}0&1\\-1&-1\end{pmatrix},}
-and put #{\kappa=\iota\eta}. Matrix multiplication gives
+the images of #{i}, #{j} and #{\omega} are #{\iota}, #{\eta} and #{\rho}.
+Set #{\kappa=\iota\eta}. Matrix multiplication gives
 #{\iota^2=\eta^2=-I}, #{\iota\eta=-\eta\iota}, #{\rho^3=I}, and
 ##{\rho\iota\rho^{-1}=\kappa,\qquad
 \rho\kappa\rho^{-1}=\eta,\qquad
 \rho\eta\rho^{-1}=\iota.}
-The 8 matrices #{\{\pm I,\pm\iota,\pm\eta,\pm\kappa\}} are
-distinct, and the relations just given are the products of
-#{i} and #{j} in #{Q}. Every
-element of #{2T} is uniquely #{q\omega^r} with #{q\in Q} and
-#{r\in\{0,1,2\}}, and
-##{(q\omega^r)(q'\omega^s)
- =q\,(\omega^r q'\omega^{-r})\,\omega^{r+s}.}
-Let #{\phi} send #{i,j,k} to #{\iota,\eta,\kappa} and send
-#{\omega} to #{\rho}. The displayed conjugations say that
-#{\phi(\omega q\omega^{-1})=\rho\phi(q)\rho^{-1}} on
-#{\{i,j,k\}}, hence on #{Q}. Define
-#{\phi(q\omega^r)=\phi(q)\rho^r}. This preserves the product
-rule above, so #{\phi} is a homomorphism. The image
-#{\phi(Q)} is a subgroup of order 8. If
-#{\phi(q)\rho^r=I}, then #{\rho^r} lies in #{\phi(Q)}. The
-order of #{\rho} is 3, so #{r=0} and #{q=1}. The kernel is
-trivial.
-A first column of a matrix in the codomain may be any of the
-#{3^2-1=8} nonzero vectors, and #{w\mapsto\det(v,w)} takes
-the value #{1} for exactly 3 choices of the second column.
-The codomain therefore has order 24, and the homomorphism is
-an isomorphism
-##{2T\cong\operatorname{SL}(2,\mathbb F_3).}}
+These displayed relations are a coordinate check of step 3.}
+
+\p{Remark. Over a finite field #{\mathbb F_q}, every central simple algebra
+of dimension #{4} is #{\operatorname{End}_{\mathbb F_q}(S)} with
+#{\dim S=2}. By the Artin-Wedderburn theorem such an algebra is a matrix
+ring over a division algebra finite-dimensional over its center, and a
+finite division ring is commutative, so the division algebra equals
+#{\mathbb F_q} and the dimension forces #{2\times 2} matrices. The
+commutativity is Wedderburn's little theorem. Let #{D} be a finite
+division ring with center #{Z}, write #{q=\lvert Z\rvert} and
+#{n=[D:Z]}. For #{a\notin Z} the centralizer has order #{q^d-1} with
+#{d\mid n} and #{d<n}, and the class equation of #{D^{\times}}, summed over
+representatives outside the center, is
+##{q^n-1=q-1+\sum\frac{q^n-1}{q^d-1}.}
+In #{\mathbb Z[x]}, #{x^k-1=\prod_{e\mid k}\Phi_e(x)}. If #{d\mid n} and
+#{d<n}, then #{\Phi_n(x)} divides #{(x^n-1)/(x^d-1)}, because #{n} does
+not divide #{d}. Thus #{\Phi_n(q)} divides every term of the sum and
+divides #{q^n-1}, so it divides #{q-1}. If #{n>1}, then
+#{\Phi_n(q)=\prod(q-\zeta)} over the primitive #{n}th roots of unity.
+For each such root other than #{1}, writing #{\zeta=\cos\theta+i\sin\theta}
+gives
+#{\lvert q-\zeta\rvert^2=(q-\cos\theta)^2+\sin^2\theta>(q-1)^2},
+so #{\lvert\Phi_n(q)\rvert>q-1}, which cannot divide #{q-1}. Hence
+#{n=1} and #{D} is the field #{Z}. This is the theorem of
+J. H. M. Wedderburn, A theorem on finite algebras, Trans. Amer. Math.
+Soc. #{6} (1905), pp. 349-351.
+The same conclusion removes the choice, over #{\mathbb F_q}, between a
+compact and a split quaternion algebra, #{\mathbb H} versus
+#{M_2(\mathbb R)} over #{\mathbb R}. What remains in
+#{\operatorname{SL}(S)} is a choice of torus. A split torus consists of
+the elements acting by #{a} and #{a^{-1}} on a decomposition
+#{S=\ell_1\oplus\ell_2}; as #{a} runs through #{\mathbb F_q^{\times}} the
+group has order #{q-1}. A non-split torus is the group of norm-one units
+of a quadratic extension #{E\cong\mathbb F_{q^2}} inside
+#{\operatorname{End}(S)} for which #{S} is one-dimensional over #{E}.
+Multiplication by a field element has determinant equal to its field
+norm, so the norm-one elements lie in #{\operatorname{SL}(S)}, and the
+norm #{E^{\times}\to\mathbb F_q^{\times}} has kernel of order
+#{(q^2-1)/(q-1)=q+1}. For #{q=3} the orders are #{2} and #{4}. In
+#{2T} they are realized by #{\{\pm 1\}} and by #{\langle i\rangle}:
+the first is the scalar group of order #{2}, and #{i^2=-1} gives a root
+of #{x^2+1}, which has no root in #{\mathbb F_3}, so
+#{\mathbb F_3(i)} is the field of order #{9} and #{\langle i\rangle}
+has order #{4}.}
 
 \p{\ref{fdip-0053} records the 7 irreducible characters, of
 degrees #{1,1,1,2,2,2,3}, and the squares of the conjugacy
