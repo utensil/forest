@@ -1,0 +1,45 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Example}
+\title{SU(2) and SU(3) heat-kernel gauge models}
+\date{2026-11-11}
+
+\p{For #{n=2} or #{n=3}, take #{G=SU(n)} and its real Lie
+algebra
+##{\mathfrak{su}(n)=\{X\in M_n(\mathbb C):X^*=-X,
+ \ \operatorname{tr}X=0\}.}
+Fix the normalization
+##{\langle X,Y\rangle=-\operatorname{tr}(XY).}
+This is a real symmetric bilinear form on that real vector
+space: cyclicity of the trace and #{X^*=-X}, #{Y^*=-Y} make
+#{\operatorname{tr}(XY)} real and symmetric in #{X,Y}.
+Moreover
+#{-\operatorname{tr}(X^2)=\operatorname{tr}(X^*X)>0}
+for #{X\ne0}. Conjugation preserves the trace, so the form is
+Ad invariant. Compactness and connectedness of #{SU(n)} allow
+\ref{fdip-00ML} to apply with this metric.}
+
+\p{Choose any #{\tau>0}, set #{k=k_\tau}, and choose any
+real continuous gauge-invariant spatial potential on a finite
+graph. For example, with a finite set of oriented closed
+plaquette paths and their ordered holonomies #{U_p}, one may take
+##{V(U)=\beta\sum_p\left(1-\frac1n
+ \operatorname{Re}\operatorname{tr}U_p\right),\qquad\beta\ge0.}
+Endpoint cancellation makes a closed holonomy transform by
+conjugation, so this #{V} is gauge invariant. The transfer
+operator #{T=M_bC_{k_\tau}M_b}, with #{b=e^{-V/2}}, therefore
+has the [positivity and trace properties](fdip-0080),
+[Gauss projection and periodic trace law](fdip-0083),
+[spectral Hamiltonian](fdip-0085), and
+[link-reflected spatial positivity](fdip-0086) already proved
+from the [spatial transfer data](fdip-007Z). Those arguments use compact Haar measure,
+Peter–Weyl and the stated coefficient summability, and require
+no further restriction to #{SU(2)}.}
+
+\p{The temporal weight in this example is the heat kernel.
+The separate [SU(2) Wilson weight](fdip-0082) has its own
+coefficient proof. For #{SU(3)} the fundamental character
+may be complex; the spatial potential above explicitly takes
+its real part, while the temporal heat kernel is real by
+\ref{fdip-00ML}.}
