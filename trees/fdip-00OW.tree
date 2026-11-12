@@ -1,0 +1,39 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Lemma}
+\title{Dyadic subdivision dualizes to a cochain map}
+\date{2026-11-12}
+
+\p{Let #{k} be a commutative unital ring and let #{N\ge 1}. Let
+#{X} be the cubical torus of \ref{fdip-00OK} in dimension one or
+two, of side #{N}, and let #{Y} be the same torus of side #{2N}.
+Doubling every coordinate sends a vertex #{x} of #{X} to the
+vertex #{2x} of #{Y}. It sends an edge of direction #{i} to the
+sum of the two fine edges of that direction which cross the same
+step, and it sends a square to the sum of the four fine squares
+in its block. This chain map is written #{s}. Its dual #{s^*}
+on counting cochains satisfies #{s^*d=ds^*}.}
+
+\proof{
+\p{On an edge from #{x} to #{x+\varepsilon_i}, the two fine edges
+run from #{2x} to #{2x+\varepsilon_i} and from there to
+#{2x+2\varepsilon_i}. Their boundaries cancel at the midpoint, and
+the remaining vertices are #{s} of the coarse boundary. On a
+square, each internal edge of the block lies in two fine squares.
+The boundary signs on that edge are opposite, so those terms
+cancel. Each outer side is the sum of two fine edges, equal to
+#{s} of the corresponding coarse face, with that face's sign.
+Thus #{s} commutes with the cellular boundary.}
+
+\p{Define #{s^*} by the counting pairing,
+#{\langle s^*\alpha,c\rangle=\langle\alpha,sc\rangle}.
+\ref{fdip-00OK} makes the coboundary the transpose of the
+boundary, so
+##{\langle s^*d\alpha,c\rangle
+=\langle d\alpha,sc\rangle
+=\langle\alpha,\partial sc\rangle
+=\langle\alpha,s\partial c\rangle
+=\langle ds^*\alpha,c\rangle.}
+The two sides agree on every chain, so #{s^*d=ds^*}.}
+}

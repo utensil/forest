@@ -1,0 +1,44 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{A factor of two matches the massless Dirichlet form}
+\date{2026-11-12}
+
+\p{On the cycle of even length #{2N}, let #{E(f)} be the sum of
+#{(f(h)-f(t))^2} over the fine edges, and let #{E_0(f)} be the
+same sum over the coarse edges that join even vertices. Then
+##{2E(f)=E_0(f)+\sum_i\bigl(2f(2i+1)-f(2i)-f(2i+2)\bigr)^2.}
+The sum is the defect. It vanishes when
+#{2f(2i+1)=f(2i)+f(2i+2)} for every #{i}, and then the coarse
+counting form equals twice the fine counting form. That factor
+is the declared rescaling of the degree-one weight. It is a
+relation of quadratic forms. \ref{fdip-00OZ} shows that the
+unweighted adjoints themselves do not commute.}
+
+\p{Let #{q\ge 2}, and suppose #{2b} and #{U_{q-1}(t)} are units,
+in the notation of \ref{fdip-00B3}. The retained operator there
+has shape #{T_q(t)}. When #{t\neq 1}, that replacement of the
+input shape is the naturality defect of the massive Laplacian.
+When #{t=1} and #{q}
+is a unit, the same formula gives
+##{S=\frac{b}{q}\,P^K_1.}
+\ref{fdip-00AY} records the real comparison
+#{T_q(t_{qN})=t_N} for #{t_N=\cosh(m/N)}. This note does not
+reprove that comparison, and it takes no mesh limit.}
+
+\proof{
+\p{For one triple #{b=f(2i)}, #{a=f(2i+1)} and
+#{c=f(2i+2)}, expand
+##{2\bigl((a-b)^2+(c-a)^2\bigr)
+=(c-b)^2+(2a-b-c)^2.}
+Both sides equal #{4a^2-4ab-4ac+2b^2+2c^2}. Sum over the #{N}
+coarse edges.}
+
+\p{\ref{fdip-00B1} gives #{T_q(1)=1}, and the recurrence
+#{U_0=1}, #{U_1(1)=2} and
+#{U_r(1)=2U_{r-1}(1)-U_{r-2}(1)}.
+The values #{U_0(1)=1} and #{U_1(1)=2} start the induction
+#{U_r(1)=r+1}. Thus #{U_{q-1}(1)=q}. Substitute #{t=1} in the
+displayed formula of \ref{fdip-00B3}.}
+}
