@@ -1,0 +1,69 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Lemma}
+\title{The twisted form counts reversed directions}
+\date{2026-11-12}
+
+\p{Let #{\theta} be a \vocabk{reflection}{fdip-00PX}, and let
+#{B_x} be the bilinear form of \ref{fdip-00PB}. At a vertex
+fixed by #{\theta}, and at every vertex of a homogeneous
+calculus after the fibres have been identified by translation,
+define
+##{q^\theta_x(v)=B_x(v,\theta v).}
+Off these vertices no fibrewise twisted form is defined.
+The form #{q^\theta_x} is quadratic. If #{2} is invertible,
+the fibre splits as the sum of the #{\pm 1} eigenspaces of
+#{\theta}. Those summands are orthogonal for #{B_x}. The form
+#{q^\theta} equals #{q} on the #{+1} summand and equals
+#{-q} on the #{-1} summand. Over an ordered field with #{q}
+positive definite, the signature of #{q^\theta} is the pair of
+those two ranks. On the unit-weight symmetric torus, one
+coordinate reflection has signature #{(2d-1,1)} on the rank
+#{2d} fibre and signature #{(d-1,1)} on the odd quotient of
+\ref{fdip-00PO}. For #{d=4} that quotient has signature
+#{(3,1)}. Over #{\mathbb{F}_2} the swap of one opposite pair
+is unipotent and has no complementary eigenline. Over
+#{\mathbb{Z}}, #{r} independent swapped pairs span a
+submodule of index #{2^r}.}
+
+\proof{
+\p{The identity #{B_x(v,v)=q_x(v)} is the normalization of
+\ref{fdip-00PB}, so no step divides by #{2}. For a scalar
+#{a},
+##{q^\theta(av)=B(av,\theta(av))=a^2 q^\theta(v).}
+The polar expression is bilinear,
+##{q^\theta(v+w)-q^\theta(v)-q^\theta(w)
+ =B(v,\theta w)+B(w,\theta v),}
+so #{q^\theta} is a quadratic form in the same sense. Since
+#{\theta} is an isometric involution,
+#{B(v,\theta w)=B(\theta v,w)=B(w,\theta v)}. If #{2} is
+invertible, every vector splits as
+##{v=\frac{v+\theta v}{2}+\frac{v-\theta v}{2}.}
+If #{\theta v=\varepsilon v} and #{\theta w=\delta w} with
+#{\varepsilon,\delta\in\{\pm 1\}}, then
+##{B(v,w)=B(\theta v,\theta w)=\varepsilon\delta B(v,w).}
+When #{\varepsilon\delta=-1}, one has #{2B(v,w)=0}, so
+#{B(v,w)} vanishes. On a #{+1} vector,
+#{q^\theta(v)=q(v)}. On a #{-1} vector,
+#{q^\theta(v)=-q(v)}.}
+
+\p{On the unit-weight symmetric torus, reflection in one axis
+swaps one opposite pair and fixes every other direction. The
+swapped pair contributes one positive line and one negative
+line. The negative line is the odd vector of \ref{fdip-00PO}.
+The remaining #{2d-2} directions stay positive, so the fibre
+has signature #{(2d-1,1)}. The odd identification of that
+lemma sends the reversed odd vector to its negative and fixes
+the other odd lines, which is the signature #{(d-1,1)}.}
+
+\p{Over #{\mathbb{F}_2} the swap of a pair has matrix
+#{\begin{pmatrix}0&1\\1&0\end{pmatrix}} relative to the two
+edges. That matrix equals the identity plus a matrix of square
+zero, so the only eigenvalue is #{1} and there is no
+complementary eigenline. Over #{\mathbb{Z}} the
+same pair has index #{2} by \ref{fdip-00PO}, and #{r}
+independent pairs give index #{2^r}. On the rank #{2d}
+fibre the signature is #{(2d-1,1)}. For #{d=4} the quotient
+has signature #{(3,1)}.}
+}
