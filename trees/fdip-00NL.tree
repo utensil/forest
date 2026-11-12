@@ -16,16 +16,16 @@ These are the cellular chain and cochain modules. The boundary
 #{\partial_j:C_j\to C_{j-1}} uses the oriented face incidences,
 adding repeated occurrences under periodic identifications;
 #{\partial_{j-1}\partial_j=0}. Its dual is
-#{\delta_j:C^j\to C^{j+1}}, #{\delta_j a=a\circ\partial_{j+1}}.
+#{\covwedge_j:C^j\to C^{j+1}}, #{\covwedge_j a=a\circ\partial_{j+1}}.
 This extends the \vocabk{incidence map}{fdip-00AQ} from vertices
 and edges to all cell degrees. These are the cellular
 complexes of \citet{Theorem 3.5, p. 203}{hatcher2002algebraic}.}
 
 \p{Write #{Z_j=\ker\partial_j}, #{B_j=\operatorname{im}\partial_{j+1}}
-and #{H_j=Z_j/B_j}; write #{Z^j=\ker\delta_j},
-#{B^j=\operatorname{im}\delta_{j-1}} and #{H^j=Z^j/B^j}.
+and #{H_j=Z_j/B_j}; write #{Z^j=\ker\covwedge_j},
+#{B^j=\operatorname{im}\covwedge_{j-1}} and #{H^j=Z^j/B^j}.
 The evaluation pairing is #{\langle b,a\rangle=a(b)},
-so #{\langle b,\delta a\rangle=\langle\partial b,a\rangle}.
+so #{\langle b,\covwedge a\rangle=\langle\partial b,a\rangle}.
 Use the same notation with #{K^*} specified for the dual complex.}
 
 \p{Orient the dual cell #{e^*} by requiring the orientation
@@ -40,13 +40,13 @@ The sign relating its two differentials is calculated in
 \p{Fix the \vocabk{weight ring and root}{fdip-00NI}, and a function
 #{w_p:A\to R} for every oriented plaquette #{p\in K_2}.
 A cyclic connection is #{a\in C^1(K;A)}, its plaquette
-value is #{(\delta a)_p}, and its normalized link partition sum is
+value is #{(\covwedge a)_p}, and its normalized link partition sum is
 ##{Z=N^{-n_1}\sum_{a\in C^1(K;A)}
-       \prod_{p\in K_2}w_p((\delta a)_p).}
+       \prod_{p\in K_2}w_p((\covwedge a)_p).}
 This is the normalized-edge convention of
 \vocabk{finite surface gauge data}{fdip-006V}, now with general
 ring-valued weights and higher-dimensional cells.
-The vertex gauge change #{a\mapsto a+\delta\lambda}
+The vertex gauge change #{a\mapsto a+\covwedge\lambda}
 preserves every plaquette value. Orientations remain fixed;
 reversing a face while describing the same weight requires
 replacing #{w_p(x)} by #{w_p(-x)}.}
