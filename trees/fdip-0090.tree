@@ -6,24 +6,24 @@
 \date{2026-11-02}
 
 \p{Let #{C^0,\ldots,C^n} be finite-dimensional real vector spaces and
-let #{d_k:C^k\to C^{k+1}} be linear maps with
-#{d_{k+1}\circ d_k=0}. Degree
+let #{\extd_k:C^k\to C^{k+1}} be linear maps with
+#{\extd_{k+1}\circ \extd_k=0}. Degree
 #{0} has no incoming map, and degree #{n} has no outgoing map. Each
 degree has a positive-definite inner product. Its adjoint is the
 unique linear map obeying
-#{\langle d_k\alpha,\beta\rangle_{k+1}
-=\langle\alpha,d_k^*\beta\rangle_k}.
+#{\langle \extd_k\alpha,\beta\rangle_{k+1}
+=\langle\alpha,\extd_k^\dagger\beta\rangle_k}.
 No Gram matrix enters this definition.}
 
 \p{The Hodge Laplacian of degree #{k} is
-#{\Delta_k=d_{k-1}d_{k-1}^*+d_k^*d_k},
+#{\Delta_k=\extd_{k-1}\extd_{k-1}^\dagger+\extd_k^\dagger\extd_k},
 with either summand omitted at an endpoint. A cochain #{\gamma} is
 harmonic when #{\Delta_k\gamma=0}. Then
 #{\ker\Delta_k} is isomorphic to
-#{H^k=\ker d_k/\operatorname{im}d_{k-1}}, and
+#{H^k=\ker \extd_k/\operatorname{im}\extd_{k-1}}, and
 #{C^k} is the orthogonal sum
-#{\operatorname{im}d_{k-1}\oplus\ker\Delta_k\oplus\operatorname{im}d_k^*}.
-The kernel of #{d+d^*} has dimension equal to the sum of the Betti
+#{\operatorname{im}\extd_{k-1}\oplus\ker\Delta_k\oplus\operatorname{im}\extd_k^\dagger}.
+The kernel of #{\extd+\extdag} has dimension equal to the sum of the Betti
 numbers.}
 
 \p{On the square torus of \ref{fdip-008Z}, the evaluation pairing
@@ -42,31 +42,31 @@ winding field with nonzero adjoint.}
 \p{Nondegeneracy gives a unique adjoint. Declare a basis of each
 degree and let #{G_k} be the Gram matrix of its inner product. Both
 sides of
-#{d_k^*=G_k^{-1}d_k^{T}G_{k+1}}
-equal #{\alpha^{T}d_k^{T}G_{k+1}\beta}, since #{G_k} cancels
+#{\extd_k^\dagger=G_k^{-1}\extd_k^{T}G_{k+1}}
+equal #{\alpha^{T}\extd_k^{T}G_{k+1}\beta}, since #{G_k} cancels
 on the right. Identity Gram matrices make this adjoint the counting
 transpose. Adjoints reverse composition, so
-#{d_k^*\circ d_{k+1}^*=0}. On one degree,
-#{(d+d^*)\circ(d+d^*)=\Delta_k} because #{d\circ d} and
-#{d^*\circ d^*} vanish, and
+#{\extd_k^\dagger\circ \extd_{k+1}^\dagger=0}. On one degree,
+#{(\extd+\extdag)\circ(\extd+\extdag)=\Delta_k} because #{\extd\circ\extd} and
+#{\extdag\circ\extdag} vanish, and
 ##{\langle\Delta_k\gamma,\gamma\rangle
-=\langle d_k\gamma,d_k\gamma\rangle
-+\langle d_{k-1}^*\gamma,d_{k-1}^*\gamma\rangle.}
+=\langle \extd_k\gamma,\extd_k\gamma\rangle
++\langle \extd_{k-1}^\dagger\gamma,\extd_{k-1}^\dagger\gamma\rangle.}
 Thus #{\Delta_k\gamma=0} exactly when both maps vanish on #{\gamma}.
-On the orthogonal sum of the degrees, #{d+d^*} vanishes exactly on
+On the orthogonal sum of the degrees, #{\extd+\extdag} vanishes exactly on
 harmonic tuples, so the kernel dimension adds.}
 
 \p{Equal ranks give
-#{\dim\ker d_{k-1}^*=\dim C^k-\operatorname{rank}d_{k-1}}.
-If #{d_{k-1}\alpha} lies in that kernel, then
-#{\langle d_{k-1}\alpha,d_{k-1}\alpha\rangle
-=\langle\alpha,d_{k-1}^*d_{k-1}\alpha\rangle=0},
-so #{d_{k-1}\alpha=0}. The sum of image and kernel is therefore
-all of #{C^k}. A closed cochain splits as #{d_{k-1}\alpha+\rho}
-with #{d_{k-1}^*\rho=0} and #{d_k\rho=0}, hence #{\rho} is
+#{\dim\ker \extd_{k-1}^\dagger=\dim C^k-\operatorname{rank}\extd_{k-1}}.
+If #{\extd_{k-1}\alpha} lies in that kernel, then
+#{\langle \extd_{k-1}\alpha,\extd_{k-1}\alpha\rangle
+=\langle\alpha,\extd_{k-1}^\dagger\extd_{k-1}\alpha\rangle=0},
+so #{\extd_{k-1}\alpha=0}. The sum of image and kernel is therefore
+all of #{C^k}. A closed cochain splits as #{\extd_{k-1}\alpha+\rho}
+with #{\extd_{k-1}^\dagger\rho=0} and #{\extd_k\rho=0}, hence #{\rho} is
 harmonic. Harmonic coboundaries vanish, so the class map is an
 isomorphism onto #{H^k}. The same count splits off
-#{\operatorname{im}d_k^*}. Cross pairings among the three summands
+#{\operatorname{im}\extd_k^\dagger}. Cross pairings among the three summands
 vanish by that adjoint identity.}
 
 \p{The torus Gram matrices are identities. Constants are closed and
@@ -84,6 +84,6 @@ two contributions agree.}
 
 \p{Remark. Once a basis of each degree has been declared, the Gram matrices
 #{G_k} of the inner products satisfy
-#{d_k^*=G_k^{-1}d_k^{T}G_{k+1}}. Identity Gram matrices make this
+#{\extd_k^\dagger=G_k^{-1}\extd_k^{T}G_{k+1}}. Identity Gram matrices make this
 adjoint the counting transpose. The proof above derives that
 formula, and the Hodge decomposition itself does not use it.}
