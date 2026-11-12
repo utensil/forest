@@ -1,0 +1,41 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{A cochain pairs against the fundamental solution}
+\date{2026-11-12}
+
+\p{Keep the ordered field, the operator #{E}, and the projection
+#{H} of \ref{fdip-00P6}. Let #{M} be any set of cubes, and let
+#{G_M} be the difference of \ref{fdip-00P3}. For every cochain
+#{F} and every test cochain #{\gamma},
+##{\langle F,\gamma\rangle_M
+=\langle DF,E\gamma\rangle_M
++\langle F,H\gamma\rangle_M
+-G_M(F,E\gamma).}
+The source term uses #{DF} only on #{M}. When #{M} contains
+every cube,
+##{F=E(DF)+HF.}
+When #{DF} vanishes on #{M},
+##{\langle F,\gamma\rangle_M
+=\langle F,H\gamma\rangle_M-G_M(F,E\gamma).}}
+
+\proof{
+\p{Set #{\beta=E\gamma}. \ref{fdip-00P6} gives
+#{D\beta=\gamma-H\gamma}. Substitute this cochain into the
+identity of \ref{fdip-00P3}:
+##{\langle DF,\beta\rangle_M-\langle F,D\beta\rangle_M
+=G_M(F,\beta).}
+The second sum is
+#{\langle F,\gamma\rangle_M-\langle F,H\gamma\rangle_M}, so
+##{\langle DF,\beta\rangle_M-\langle F,\gamma\rangle_M
++\langle F,H\gamma\rangle_M=G_M(F,\beta).}
+Rearrangement is the first display.}
+
+\p{If #{M} is the whole torus, the complement is empty, so
+#{G_M=0}. Self-adjointness of #{H} and of #{E} replaces
+#{\langle F,H\gamma\rangle} by #{\langle HF,\gamma\rangle} and
+#{\langle DF,E\gamma\rangle} by #{\langle E(DF),\gamma\rangle}.
+The identity holds for every #{\gamma}, which is the operator
+formula. The vanishing case drops the source term.}
+}
