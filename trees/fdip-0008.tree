@@ -8,38 +8,38 @@
 \p{Let #{R} be a commutative unital ring, #{V,E,s,h} finite incidence
 data and #{w:E\to R} arbitrary weights. With the counting forms and
 \vocabk{weighted graph Laplacian}{fdip-0007}
-#{L=-d_R^\dagger Wd_R}, one has
+#{L=-\extd_{R}^{\dagger} W\extd_{R}}, one has
 ##{L^\dagger=L,\qquad
- b_V(f,(-L)g)=\sum_e w(e)(d_Rf)(e)(d_Rg)(e).}
-The kernel of #{d_R} consists exactly of fields constant on each
+ b_V(f,(-L)g)=\sum_e w(e)(\extd_{R}f)(e)(\extd_{R}g)(e).}
+The kernel of #{\extd_{R}} consists exactly of fields constant on each
 connected component of the underlying undirected graph, and
-#{\ker d_R\subseteq\ker L}. Two vertices are in the same component
+#{\ker \extd_{R}\subseteq\ker L}. Two vertices are in the same component
 when a finite path joins them, with edge orientation ignored.
 The energy and Laplacian are unchanged by edge-orientation reversal.}
 
 \proof{
 \p{The weight map is self-adjoint by
 \ref{fdip-00JD}. The adjoint laws give
-#{L^\dagger=-d_R^\dagger W^\dagger d_R=L}, and the defining identity gives
+#{L^\dagger=-\extd_{R}^{\dagger} W^\dagger \extd_{R}=L}, and the defining identity gives
 ##{\begin{aligned}
-b_V(f,(-L)g)&=b_E(d_Rf,Wd_Rg)\\
- &=\sum_e w(e)(d_Rf)(e)(d_Rg)(e).
+b_V(f,(-L)g)&=b_E(\extd_{R}f,W\extd_{R}g)\\
+ &=\sum_e w(e)(\extd_{R}f)(e)(\extd_{R}g)(e).
 \end{aligned}}
-In particular, #{b_V(f,(-L)f)=\sum_e w(e)(d_Rf)(e)^2}. Each edge
-occurs once and no factor #{1/2} is used. The equality #{d_Rf=0}
+In particular, #{b_V(f,(-L)f)=\sum_e w(e)(\extd_{R}f)(e)^2}. Each edge
+occurs once and no factor #{1/2} is used. The equality #{\extd_{R}f=0}
 says that endpoint values agree along every edge, hence along every
 path. Conversely, a componentwise constant field has zero difference
-on each edge. This identifies #{\ker d_R} with the function module
-on the components. Such a field also satisfies #{Lf=-d_R^\dagger W0=0}.}
+on each edge. This identifies #{\ker \extd_{R}} with the function module
+on the components. Such a field also satisfies #{Lf=-\extd_{R}^{\dagger} W0=0}.}
 \p{Reversing an edge negates both factors in its energy summand.
 The Laplacian itself is unchanged by the sign-map identity in
 \ref{fdip-00JD}.}
 }
 
-\p{Now specialize to #{R=\mathbb R} and #{w(e)>0}. Write
-#{D=d_{\mathbb R}}. The Laplacian is self-adjoint. The operator #{-L} is positive
+\p{Now specialize to #{R=\mathbb R} and #{w(e)>0}. The real incidence map is
+#{\extd_{\mathbb R}}. The Laplacian is self-adjoint. The operator #{-L} is positive
 semidefinite, and
-##{\ker L=\ker D,\qquad \dim\ker L=k,}
+##{\ker L=\ker\extd_{\mathbb R},\qquad \dim\ker L=k,}
 where #{k} is the number of connected components.
 If #{V} is nonempty and connected, the kernel is the one-dimensional
 space spanned by the constant field #{\mathbf1_V}. Its positive unit
@@ -51,10 +51,10 @@ positive-weight summand.}
 
 \proof{
 \p{The energy identity specializes to
-##{\langle f,(-L)f\rangle_V=\sum_e w(e)(Df)(e)^2\ge0.}
+##{\langle f,(-L)f\rangle_V=\sum_e w(e)(\extd_{\mathbb R}f)(e)^2\ge0.}
 If #{Lf=0}, this finite sum of nonnegative real terms is zero.
 Every summand is therefore zero; strict positivity of #{w(e)} gives
-#{Df(e)=0}. The reverse inclusion was proved over #{R}. Indicators
+#{\extd_{\mathbb R}f(e)=0}. The reverse inclusion was proved over #{R}. Indicators
 of the nonempty components span the componentwise constant fields.
 In a linear relation between them, evaluation at a vertex of any one
 component makes its coefficient zero. Thus they are a basis, proving
@@ -73,9 +73,9 @@ component of the graph with vertex set #{V} and edge set
 
 \proof{
 \p{If #{Lf=0}, the energy sum is zero and every positive-weight
-edge has #{Df(e)=0}. Conversely, if those endpoint differences vanish,
-then #{WDf=0}: positive-weight edges have zero difference and all other
-edges have zero weight. Hence #{Lf=-D^*WDf=0}. The path argument
+edge has #{\extd_{\mathbb R}f(e)=0}. Conversely, if those endpoint differences vanish,
+then #{W\extd_{\mathbb R}f=0}: positive-weight edges have zero difference and all other
+edges have zero weight. Hence #{Lf=-\extd_{\mathbb R}^{\dagger}W\extd_{\mathbb R}f=0}. The path argument
 already proved identifies the fields with zero difference on #{E_+}
 as exactly the componentwise constant fields for that graph.}
 }

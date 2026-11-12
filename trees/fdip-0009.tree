@@ -7,13 +7,13 @@
 \date{2026-10-16}
 
 \p{Let #{R} be a commutative unital ring and let #{n\ge1}. On
-#{\mathcal F_R(\mathbb Z/n\mathbb Z)}, let #{T} and #{\Delta} be the
+#{\mathcal F_R(\mathbb Z/n\mathbb Z)}, let #{T} and #{\varepsilon\cdot\cov} be the
 \vocabk{cyclic shift and forward difference}{fdip-00AN}.}
 
 \p{For #{f,g} in that module,
-##{\Delta(fg)=(\Delta f)(Tg)+f\Delta g.}
+##{\varepsilon\cdot\cov(fg)=(\varepsilon\cdot\cov f)(Tg)+f(\varepsilon\cdot\cov g).}
 Equivalently,
-##{\Delta(fg)=(\Delta f)g+f\Delta g+(\Delta f)(\Delta g).}
+##{\varepsilon\cdot\cov(fg)=(\varepsilon\cdot\cov f)g+f(\varepsilon\cdot\cov g)+(\varepsilon\cdot\cov f)(\varepsilon\cdot\cov g).}
 Wingate defines forward and backward differences with lattice spacing
 #{a} in \citet{Section 4, Equations (4.2)-(4.3), p. 3}{wingate2025lattice}.
 Here #{a=1}; the ring-valued finite identities are direct calculations,
@@ -24,21 +24,21 @@ with no continuum approximation.}
 #{(js^*f)(i)=f(i)}. Applying the product-preserving map #{j} to
 \ref{fdip-0012} therefore gives the first formula, where #{j}, #{s}
 and #{h} are the isomorphism and endpoint maps of that cycle.
-Substitute #{Tg=g+\Delta g} to obtain the second.}
+Substitute #{Tg=g+(\varepsilon\cdot\cov g)} to obtain the second.}
 }
 
-\p{At #{n=1}, the cycle has a loop and #{T=I}, #{\Delta=0}.
+\p{At #{n=1}, the cycle has a loop and #{T=I}, #{\varepsilon\cdot\cov=0}.
 At #{n=2}, its two edges have opposite orientations between the same
 vertices; it is not a single simple edge. The unshifted Leibniz rule
-fails by the correction #{\,(\Delta f)(\Delta g)}. On the four-cycle,
+fails by the correction #{\,(\varepsilon\cdot\cov f)(\varepsilon\cdot\cov g)}. On the four-cycle,
 #{f=\delta_1} satisfies #{f^2=f}; at vertex #{0},
-#{\,(\Delta(f^2))(0)=1} and #{\,((\Delta f)f+f\Delta f)(0)=0}, while
-#{\,((\Delta f)(Tf)+f\Delta f)(0)=1}. \ref{fdip-0014} adds a real
+#{\,(\varepsilon\cdot\cov(f^2))(0)=1} and #{\,((\varepsilon\cdot\cov f)f+f(\varepsilon\cdot\cov f))(0)=0}, while
+#{\,((\varepsilon\cdot\cov f)(Tf)+f(\varepsilon\cdot\cov f))(0)=1}. \ref{fdip-0014} adds a real
 pairing and identifies the positive kinetic factorization.}
 
 \p{Mathlib's \leanref{fwdDiff_smul} proves the three-term formula for
 an additive commutative monoid, a ring and a module over it. Take the
 index monoid #{\mathbb Z/n\mathbb Z}, step #{1}, and the regular
 #{R}-module #{R}. Scalar multiplication is ring multiplication.
-Substituting #{Tg=g+\Delta g} yields the shifted formula; this marker
+Substituting #{Tg=g+(\varepsilon\cdot\cov g)} yields the shifted formula; this marker
 does not claim the endpoint incidence or counting-adjoint theorem.}
