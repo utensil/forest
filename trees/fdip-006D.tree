@@ -29,8 +29,8 @@ products. Write #{U_e} also for #{\rho(U_e)} in operator formulas.
 For scalar weights #{w_e>0} and mass #{m>0}, let #{W} act on
 edge fields by #{(Wa)(e)=w_ea(e)}. Define
 ##{\begin{aligned}
-(d_Uf)(e)&=f(h(e))-U_ef(s(e)),\\
-L_U&=d_U^*Wd_U,\qquad Q_U=L_U+m^2I_H.
+(\extd_Uf)(e)&=f(h(e))-U_ef(s(e)),\\
+L_U&=\extd_U^\dagger W\extd_U,\qquad Q_U=L_U+m^2I_H.
 \end{aligned}}
 In a basis of the fiber, this weight is the block-diagonal operator
 of \ref{fdip-00LT}.
@@ -42,7 +42,7 @@ the [difference energy](fdip-0014); the adjoint qualification is also
 explicit in \citet{Section 3.3, p. 6}{kenyon2011spanning}.}
 
 \p{At #{m=0}, the same sum shows
-##{\ker L_U=\ker d_U
+##{\ker L_U=\ker\extd_U
 =\{f:f(h(e))=U_ef(s(e))\text{ for every }e\}.}
 Its elements are called \newvocab{parallel sections}. The unpinned
 massless Gaussian is normalizable exactly when this space is zero:
@@ -54,6 +54,6 @@ or nonfaithful representation.}
 
 \p{Mathlib's \leanref{LinearMap.ker_adjoint_comp_self} gives
 #{\ker(A^*A)=\ker A} for finite-dimensional inner-product spaces.
-Apply it to #{A=W^{1/2}d_U}; positive weights make #{W^{1/2}}
+Apply it to #{A=W^{1/2}\extd_U}; positive weights make #{W^{1/2}}
 invertible. This supports the kernel identity, not the connection,
 holonomy or normalizability assertions.}
