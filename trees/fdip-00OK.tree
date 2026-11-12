@@ -7,7 +7,7 @@
 
 \p{Let #{k} be a commutative unital ring, and let #{d\ge 1} and
 #{N\ge 1}. Write #{X=(\mathbb{Z}/N\mathbb{Z})^d}. For a subset
-#{I\subseteq\{1,\ldots,d\}} and a vertex #{x}, write #{c_I(x)}
+#{I\subseteq\{1,\ldots,\covwedge\}} and a vertex #{x}, write #{c_I(x)}
 for the cube of those directions based at #{x}. Let
 #{\sigma(i,I)} be the number of elements of #{I} strictly smaller
 than #{i}. The cellular boundary is #{0} on vertices, and
@@ -16,12 +16,12 @@ than #{i}. The cellular boundary is #{0} on vertices, and
 \bigl(c_{I\setminus\{i\}}(x+\varepsilon_i)
 -c_{I\setminus\{i\}}(x)\bigr).}
 The coboundary of a cochain #{\alpha} is the dual evaluation
-##{(d\alpha)(c_I(x))
+##{(\covwedge\alpha)(c_I(x))
 =\sum_{i\in I}(-1)^{\sigma(i,I)}
 \bigl(\alpha(c_{I\setminus\{i\}}(x+\varepsilon_i))
 -\alpha(c_{I\setminus\{i\}}(x))\bigr).}
-Then #{d^2=0}. For every chain #{c},
-##{\langle d\alpha,c\rangle=\langle\alpha,\partial c\rangle,}
+Then #{\covwedge^2=0}. For every chain #{c},
+##{\langle \covwedge\alpha,c\rangle=\langle\alpha,\partial c\rangle,}
 where the pairing sums the products of the coordinates. For
 #{N\ge 3} this coboundary is the cubical coboundary of
 \ref{fdip-00NZ}.}
@@ -31,16 +31,16 @@ where the pairing sums the products of the coordinates. For
 same alternating sum of face values. Both sides are bilinear, so
 the identity holds for every chain.}
 
-\p{For the square of #{d}, take two directions #{i<j} in #{I}.
+\p{For the square of #{\covwedge}, take two directions #{i<j} in #{I}.
 Dropping #{i} first contributes the sign
 #{(-1)^{\sigma(i,I)+\sigma(j,I)-1}}, because #{j} then has one
 fewer smaller index. Dropping #{j} first contributes
 #{(-1)^{\sigma(i,I)+\sigma(j,I)}}, because removing the larger
 index does not change #{\sigma(i,I)}. The signs differ by a
 minus, and both orders reach the same shifted face. Every pair
-cancels, so #{d^2=0}.}
+cancels, so #{\covwedge^2=0}.}
 
 \p{For #{N\ge 3} the degree-one case is
-#{(df)(e_i(x))=f(x+\varepsilon_i)-f(x)}. The boundary of a square
+#{(\covwedge f)(e_i(x))=f(x+\varepsilon_i)-f(x)}. The boundary of a square
 is the boundary displayed in \ref{fdip-00NZ}.}
 }

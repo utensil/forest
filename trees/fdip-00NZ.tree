@@ -8,7 +8,7 @@
 \p{Let #{k} be a commutative unital ring, let #{d\ge 1}, and let
 #{N\ge 3}. Write #{X=(\mathbb Z/N\mathbb Z)^d} and let the edges of
 \ref{fdip-00NU} run from #{x} to #{x+\varepsilon_i} for
-#{1\le i\le d}. In the maximal prolongation of \ref{fdip-00NW},
+#{1\le i\le \covwedge}. In the maximal prolongation of \ref{fdip-00NW},
 every word with a repeated consecutive direction is zero, and
 ##{e_i(x)\,e_j(x+\varepsilon_i)
 =-e_j(x)\,e_i(x+\varepsilon_j)
@@ -20,7 +20,7 @@ Sending each such word to the dual of the corresponding oriented
 cube is an isomorphism onto the cubical cochains of #{X} with
 values in #{k}. Under that isomorphism the differential on functions
 is the forward difference
-##{(df)(e_i(x))=f(x+\varepsilon_i)-f(x),}
+##{(\covwedge f)(e_i(x))=f(x+\varepsilon_i)-f(x),}
 and in every degree it is the cubical coboundary. For #{d=2} that
 coboundary is the formula of \ref{fdip-008Z}, now over #{k}. The
 case #{d=1} is the directed cycle, whose prolongation has no
@@ -28,8 +28,8 @@ case #{d=1} is the directed cycle, whose prolongation has no
 
 \proof{
 \p{Let #{y=x+2\varepsilon_i}. Then #{N\ge 3} forces #{y\neq x} and
-forces #{x\to y} to be a non-edge, so #{\delta_x\,d\delta_y=0}.
-Differentiating gives #{d\delta_x\,d\delta_y=0}. Expanding the two
+forces #{x\to y} to be a non-edge, so #{\delta_x\,\covwedge\delta_y=0}.
+Differentiating gives #{\covwedge\delta_x\,\covwedge\delta_y=0}. Expanding the two
 differentials and keeping only composable pairs leaves the single
 word #{e_i(x)\,e_i(x+\varepsilon_i)}, with coefficient #{-1}. That
 word is zero. For #{i\neq j} the same argument with
@@ -57,8 +57,8 @@ of one cube. Distinct cubes are independent, so the sorted words
 are independent.}
 
 \p{The edge generator is
-#{e_i(x)=\delta_x\,d\delta_{x+\varepsilon_i}}, so
-##{d(e_i(x))
+#{e_i(x)=\delta_x\,\covwedge\delta_{x+\varepsilon_i}}, so
+##{\covwedge(e_i(x))
 =\sum_p e_p(x-\varepsilon_p)\,e_i(x)
 +\sum_q e_i(x)\,e_q(x+\varepsilon_i).}
 Reduce by the quadratic relations and evaluate on the square
@@ -68,12 +68,12 @@ it is #{-1} when the edge is #{e_a(z+\varepsilon_b)} or #{e_b(z)}.
 That is #{\langle e_i(x),\partial\sigma_{ab}(z)\rangle}.}
 
 \p{Write #{e^i=\sum_x e_i(x)}. Summing the formula for
-#{d(e_i(x))} and using the anticommutator gives #{d(e^i)=0}.
+#{\covwedge(e_i(x))} and using the anticommutator gives #{\covwedge(e^i)=0}.
 Both the prolongation differential and the cubical coboundary are
 graded derivations, they agree on functions, and both kill every
 #{e^i}. A general form is a sum of terms
 #{f\,e^{i_1}\cdots e^{i_r}} with #{i_1<\cdots<i_r}, so the two
 differentials agree in every degree. For #{d=2} the square formula
 is the coordinate formula of \ref{fdip-008Z}. The cancellation that
-proves #{d^2=0} there uses only addition in #{k}.}
+proves #{\covwedge^2=0} there uses only addition in #{k}.}
 }

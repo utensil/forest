@@ -9,18 +9,23 @@
 In the calculus of \ref{fdip-00NT}, take each ideal to be #{0} or
 #{k}, and call a pair #{(x,y)} an edge when its ideal is #{0}.
 For #{f\in A}, define
-##{df=\sum_{(x,y)}(f(y)-f(x))e_{xy},}
+##{\covwedge f=\sum_{(x,y)}(f(y)-f(x))e_{xy},}
 the sum running over edges. Then, for all #{f,g\in A},
-##{d(fg)=(df)\cdot g+f\cdot(dg),}
+##{\covwedge(fg)=(\covwedge f)\cdot g+f\cdot(\covwedge g),}
 with the bimodule actions of that theorem. On the forward cycle
 this is the shifted formula of \ref{fdip-0009}.}
+
+\p{The mark #{\covwedge} is the exterior derivative on cochains
+and equals the upright #{\extd}. Geometric calculus writes the
+raising operator in this way. The correspondence is the one in
+\ref{fdip-00PV}.}
 
 \proof{
 \p{On an edge from #{x} to #{y},
 ##{(fg)(y)-(fg)(x)
  =(f(y)-f(x))g(y)+f(x)(g(y)-g(x)).}
-The first summand is the #{(x,y)} component of #{(df)\cdot g},
-and the second is the #{(x,y)} component of #{f\cdot(dg)}.
+The first summand is the #{(x,y)} component of #{(\covwedge f)\cdot g},
+and the second is the #{(x,y)} component of #{f\cdot(\covwedge g)}.
 Pairs that are not edges are zero on both sides.}
 
 \p{On #{\mathbb Z/n\mathbb Z} with #{n\ge2}, the forward edges

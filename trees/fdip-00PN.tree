@@ -6,18 +6,18 @@
 \date{2026-11-12}
 
 \p{Let #{g} be a vertex function and let #{i<j}. The value of
-#{[D,f]^2 g} on the square of those directions based at #{x} is
+#{[\extD,f]^2 g} on the square of those directions based at #{x} is
 ##{\bigl(a_i(x)\,a_j(x+\varepsilon_i)
 -a_j(x)\,a_i(x+\varepsilon_j)\bigr)
 g(x+\varepsilon_i+\varepsilon_j).}
 The coefficient equals
-#{a_i(x)\,(\Delta_i a_j)(x)-a_j(x)\,(\Delta_j a_i)(x)}.
+#{a_i(x)\,((\varepsilon_i\cdot\cov)a_j)(x)-a_j(x)\,((\varepsilon_j\cdot\cov)a_i)(x)}.
 The two mixed differences agree, so the coefficient is
-#{(a_i(x)-a_j(x))\,(\Delta_i a_j)(x)}. It is zero whenever the
+#{(a_i(x)-a_j(x))\,((\varepsilon_i\cdot\cov)a_j)(x)}. It is zero whenever the
 mixed difference is zero.}
 
 \proof{
-\p{By \ref{fdip-00PJ}, #{[D,f]g} is the edge cochain whose value
+\p{By \ref{fdip-00PJ}, #{[\extD,f]g} is the edge cochain whose value
 on the edge of direction #{j} based at #{z} is
 #{a_j(z)\,g(z+\varepsilon_j)}. The coboundary part of the same
 lemma, applied to that edge cochain, contributes to the square
@@ -28,8 +28,8 @@ that differentiates in direction #{i} first contributes
 The opposite order contributes the same monomial with a minus.
 Adding them gives the displayed coefficient.}
 
-\p{Expand #{a_j(x+\varepsilon_i)=a_j(x)+(\Delta_i a_j)(x)} and
-#{a_i(x+\varepsilon_j)=a_i(x)+(\Delta_j a_i)(x)}. The products
+\p{Expand #{a_j(x+\varepsilon_i)=a_j(x)+((\varepsilon_i\cdot\cov)a_j)(x)} and
+#{a_i(x+\varepsilon_j)=a_i(x)+((\varepsilon_j\cdot\cov)a_i)(x)}. The products
 #{a_i(x)a_j(x)} cancel, and the remainder is the second
 display. Both mixed differences equal
 #{f(x+\varepsilon_i+\varepsilon_j)-f(x+\varepsilon_i)
