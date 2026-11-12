@@ -1,0 +1,54 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{Ideal labels of a first-order calculus}
+\date{2026-11-12}
+
+\p{Let #{X} be a finite set and let #{k} be a commutative unital
+ring. Write #{A} for the ring of functions #{X\to k}, with
+pointwise addition and multiplication. For #{x\neq y} in #{X},
+let #{e_{xy}} be a symbol, and let #{\Omega} be the direct sum
+of one copy of #{k} for each such pair. A function #{f\in A}
+acts on the left and on the right by
+##{(f\cdot a)_{xy}=f(x)a_{xy},\qquad
+ (a\cdot f)_{xy}=a_{xy}f(y).}
+An #{A}-sub-bimodule of #{\Omega} is an additive subgroup closed
+under both actions. These sub-bimodules are exactly the sums
+##{N=\bigoplus_{x\neq y}I_{xy}e_{xy},}
+where each #{I_{xy}} is an ideal of #{k}. The quotient bimodule
+has coefficient ring #{k/I_{xy}} on the pair #{(x,y)}. When
+#{k} is a field, each ideal is #{0} or #{k}, so the quotient is
+the free calculus on a directed graph with no loop. That field
+case is the correspondence of
+\citet{pp. 3159-3178}{dimakis1994finite}.}
+
+\proof{
+\p{Let #{\delta_z} be the function with value #{1} at #{z} and
+value #{0} elsewhere. For #{v\in N} and #{x\neq y},
+##{\delta_x\cdot v\cdot\delta_y=v_{xy}e_{xy}}
+lies in #{N}, because #{N} is a sub-bimodule. Thus every
+component of an element of #{N} lies in #{N}. Let
+#{I_{xy}} be the set of #{c\in k} for which #{c e_{xy}} lies in
+#{N}. If #{c} and #{d} lie in #{I_{xy}}, then so does #{c+d}.
+If #{r\in k} and #{c\in I_{xy}}, the constant function of value
+#{r} multiplies #{c e_{xy}} to #{(rc)e_{xy}}, so #{rc} lies in
+#{I_{xy}}. Hence #{I_{xy}} is an ideal, and
+#{N} is the displayed sum.}
+
+\p{Conversely, fix an ideal #{I_{xy}} for each ordered pair
+#{x\neq y}. The displayed sum is an additive subgroup. Left
+multiplication by #{f} multiplies the #{(x,y)} component by
+#{f(x)}, and right multiplication multiplies it by #{f(y)}.
+Both scalars preserve the ideal, so the sum is a sub-bimodule.
+The quotient on that component is #{k/I_{xy}}.}
+
+\p{A field has exactly two ideals, #{0} and itself. Keeping the
+pairs with ideal #{0} and discarding the pairs with ideal
+#{k} is a directed graph with no loop. For a ring that is not a
+field the same description is too small. Take #{k=\mathbb Z}
+and one ordered pair with ideal #{2\mathbb Z}, and take every
+other ideal to be #{0}. The quotient coefficient on that pair
+is #{\mathbb Z/2\mathbb Z}, which is neither #{0} nor
+#{\mathbb Z}.}
+}

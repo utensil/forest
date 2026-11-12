@@ -1,0 +1,33 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Lemma}
+\title{Twisted Leibniz rule on a directed graph}
+\date{2026-11-12}
+
+\p{Let #{k} be a commutative unital ring and let #{X} be finite.
+In the calculus of \ref{fdip-00NT}, take each ideal to be #{0} or
+#{k}, and call a pair #{(x,y)} an edge when its ideal is #{0}.
+For #{f\in A}, define
+##{df=\sum_{(x,y)}(f(y)-f(x))e_{xy},}
+the sum running over edges. Then, for all #{f,g\in A},
+##{d(fg)=(df)\cdot g+f\cdot(dg),}
+with the bimodule actions of that theorem. On the forward cycle
+this is the shifted formula of \ref{fdip-0009}.}
+
+\proof{
+\p{On an edge from #{x} to #{y},
+##{(fg)(y)-(fg)(x)
+ =(f(y)-f(x))g(y)+f(x)(g(y)-g(x)).}
+The first summand is the #{(x,y)} component of #{(df)\cdot g},
+and the second is the #{(x,y)} component of #{f\cdot(dg)}.
+Pairs that are not edges are zero on both sides.}
+
+\p{On #{\mathbb Z/n\mathbb Z} with #{n\ge2}, the forward edges
+run from #{i} to #{i+1}. The coefficient #{f(i+1)-f(i)} is the
+forward difference, and right multiplication by #{g} evaluates
+#{g} at #{i+1}. Those are the two factors in \ref{fdip-0009}.
+For #{n=1} there is no ordered pair of distinct points, so
+#{d=0}, which agrees with the vanishing difference in that
+lemma.}
+}

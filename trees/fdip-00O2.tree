@@ -1,0 +1,53 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{Permutation weights are the twisted traces}
+\date{2026-11-12}
+
+\p{Keep the weighted integral of \ref{fdip-00O1}. An algebra
+automorphism #{\sigma} of #{A} is a \newvocab{twist} of the
+integral when
+##{\int f\omega=\int\omega\,\sigma(f)}
+for every function #{f} and every #{1}-form #{\omega}. If the
+support of #{w} is contained in the graph of a permutation
+#{\pi} of #{X}, the automorphism
+#{(\sigma f)(y)=f(\pi^{-1}y)} is a twist. Conversely, when the only
+idempotents of #{k} are #{0} and #{1}, a twist exists only in that
+case. The shift of the directed cycle is the permutation
+#{i\mapsto i+1}. The unrestricted converse fails for a general
+commutative ring: on #{X=\{1,2,3\}} with #{k=\mathbb Z\times\mathbb Z},
+the weights #{w_{12}=(1,0)} and #{w_{13}=(0,1)} admit a twist, and
+vertex #{1} has two outgoing edges in the support.}
+
+\proof{
+\p{Suppose #{y=\pi(x)} whenever #{w_{xy}\neq 0}. Then
+#{\sigma(f)(y)=f(x)} on every such edge, so the two integrals
+agree. Off the support both sides have coefficient zero.}
+
+\p{Now suppose the only idempotents of #{k} are #{0} and #{1}, and
+suppose a twist #{\sigma} exists. The primitive idempotents of
+#{A} are the functions #{\delta_x}. Thus #{\sigma} permutes them:
+#{\sigma(\delta_x)=\delta_{\pi(x)}} for a permutation #{\pi} of
+#{X}. The twist identity says
+#{w_{xy}f(x)=w_{xy}(\sigma f)(y)} for every #{f}. If
+#{y\neq\pi(x)}, take #{f=\delta_x}. Then #{(\sigma f)(y)=0}, so
+the right side is zero and the left side is #{w_{xy}}. Hence
+#{w_{xy}=0}. The support is contained in the graph of #{\pi}.}
+
+\p{For the product ring, split a function into a pair
+#{(f_+,f_-)} of integer-valued functions. Let #{\pi_+} exchange
+#{1} and #{2} and fix #{3}, and let #{\pi_-} exchange #{1} and
+#{3} and fix #{2}. The rule
+##{(\sigma f)_+=f_+\circ\pi_+^{-1},\qquad
+(\sigma f)_-=f_-\circ\pi_-^{-1}}
+is an algebra automorphism. On the edge #{1\to 2} the weight
+#{(1,0)} retains only the first component, and
+#{(\sigma f)_+(2)=f_+(1)}. On the edge #{1\to 3} the weight
+#{(0,1)} retains only the second component, and
+#{(\sigma f)_-(3)=f_-(1)}. Both edges satisfy the twist identity,
+and no permutation of #{X} contains both pairs.}
+}
+
+\p{The twisted identity is the degree-one case of the cocycle
+condition in \citef{kustermans2003twisted}.}
