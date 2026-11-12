@@ -1,0 +1,66 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{Positive weights realize the cohomology}
+\date{2026-11-12}
+
+\p{Let #{k} be an ordered field, and keep the torus and the
+coboundary of \ref{fdip-00OK}. Give every cube #{c} a weight
+#{w_c>0}. The weighted pairing
+##{\langle\alpha,\beta\rangle=\sum_c w_c\alpha(c)\beta(c)}
+admits a unique adjoint #{d^\dagger} of degree #{-1}. Set
+#{\Delta=dd^\dagger+d^\dagger d} and #{D=d+d^\dagger}. Then
+#{D^2=\Delta}. The kernel of #{\Delta} is isomorphic to the
+cohomology of #{d}, and both have rank #{2^d}.}
+
+\proof{
+\p{Let #{d^\dagger_0} be the counting adjoint of \ref{fdip-00OL},
+and let #{(W\alpha)(c)=w_c\alpha(c)}. Then
+#{d^\dagger=W^{-1}d^\dagger_0 W}: the weight of each cube is a
+unit, and the counting identity gives
+##{\langle d\alpha,\beta\rangle
+=\langle\alpha,W^{-1}d^\dagger_0 W\beta\rangle.}
+If a cochain is orthogonal to every cochain, its weighted square
+vanishes. Each term #{w_c\alpha(c)^2} is nonnegative in an
+ordered field, so every coefficient vanishes and the adjoint is
+unique.}
+
+\p{\ref{fdip-00OK} gives #{d^2=0}. Adjoints reverse composition, so
+#{(d^\dagger)^2=0}. The cross terms in #{D^2} are
+#{dd^\dagger+d^\dagger d}. The same expansion gives
+##{\langle\Delta\alpha,\alpha\rangle
+=\langle d\alpha,d\alpha\rangle
++\langle d^\dagger\alpha,d^\dagger\alpha\rangle.}
+In an ordered field the right-hand side vanishes only when both
+cochains vanish, so #{\Delta\alpha=0} exactly when #{d\alpha=0}
+and #{d^\dagger\alpha=0}. If #{d^\dagger d\beta=0}, the same
+identity gives #{\langle d\beta,d\beta\rangle=0}, hence
+#{d\beta=0}. The image of #{d} therefore meets the kernel of
+#{d^\dagger} only at zero.}
+
+\p{In the cube basis the counting adjoint is the transpose, so
+#{d^\dagger_0} has the same rank as #{d}. Conjugation by the
+invertible map #{W} keeps that rank. In one degree, the kernel of
+#{d^\dagger} then has
+dimension equal to the dimension of the cochains minus the rank
+of #{d}. The image of #{d} and that kernel therefore span the
+degree. A closed cochain splits as #{d\beta+\rho} with
+#{d^\dagger\rho=0}. Applying #{d} gives #{d\rho=0}, so #{\rho}
+is harmonic. A harmonic coboundary vanishes, and the class map
+is an isomorphism. \ref{fdip-00OQ} gives both spaces the rank
+#{2^d}.}
+
+\p{For the counting weights #{w_c=1}, let #{\omega_I} be the
+cochain with value #{1} on every cube of direction set #{I} and
+value #{0} on every other cube. The two faces obtained by adding
+one direction carry the same value, so the coboundary vanishes.
+A cube of one lower degree meets two cubes of direction set
+#{I}, and those two faces enter the boundary with opposite
+signs, so the counting adjoint vanishes. Let #{Z_I} be the chain
+which sums every cube of direction set #{I}. The pairing of
+#{\omega_I} with #{Z_I} equals #{N^d}, which is nonzero in an
+ordered field, while a coboundary pairs to #{0} with #{Z_I}.
+The classes are linearly independent. There are #{2^d} subsets,
+so these harmonic cochains are a basis of the kernel.}
+}

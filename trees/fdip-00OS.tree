@@ -1,0 +1,60 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{The exterior algebra is the regular module}
+\date{2026-11-12}
+
+\p{Let #{k} be a commutative ring and let #{d\ge 1}. Write
+#{\Lambda} for the exterior algebra of the free module on basis
+vectors #{e_1,\ldots,e_d}, and write
+#{q\bigl(\sum_i x_i e_i\bigr)=\sum_i x_i^2}. The operators
+#{\gamma_i=\epsilon_i+\iota_i} of \ref{fdip-0092} determine a
+unital algebra homomorphism from the Clifford algebra
+#{\operatorname{Cl}(q)} of \ref{fdip-000P} into the endomorphism
+ring of #{\Lambda}. Sending an algebra element to its action on
+#{1} is an isomorphism of left modules from
+#{\operatorname{Cl}(q)} onto #{\Lambda}. The homomorphism is
+injective, and both modules are free of rank #{2^d}. When
+#{d=4} that rank is #{16}.}
+
+\proof{
+\p{For #{v=\sum_i x_i e_i} set #{C(v)=\sum_i x_i\gamma_i}.
+\ref{fdip-0092} gives #{\epsilon_i\iota_i+\iota_i\epsilon_i=I},
+hence #{\gamma_i^2=I}, and it gives
+#{\gamma_i\gamma_j+\gamma_j\gamma_i=0} for #{i\neq j}. Expanding
+#{C(v)^2} leaves #{\sum_i x_i^2 I}, because each cross term
+carries an anticommutator. Thus #{C(v)^2=q(v)I}. The universal
+property in \ref{fdip-000P} supplies the homomorphism #{\rho}.}
+
+\p{For a subset #{I}, let #{\gamma_I} be the composition of
+#{\gamma_i} over #{i\in I}, with the largest index acting first,
+and let #{\gamma_\varnothing} be the identity. Applied to #{1},
+the contractions meet factors that are not yet present, so each
+vanishes, and each exterior multiplication inserts its factor
+with sign #{\pm 1}. Hence #{\gamma_I(1)=\pm e_I}. These images
+are linearly independent. A linear relation among the
+corresponding ordered monomials in #{\operatorname{Cl}(q)} would
+give the same relation among the operators #{\gamma_I}, and
+evaluating on #{1} would force every coefficient to vanish.}
+
+\p{Products of the generators span #{\operatorname{Cl}(q)}, by
+\ref{fdip-000P}. Each generator is a linear combination of the
+#{\iota_q(e_i)}, so it is enough to reduce words in that basis.
+In such a word, a repeated adjacent generator equals #{1} by the
+square relation, and an adjacent inversion may be swapped by the
+anticommutator at the cost of a sign. Each swap lowers the number
+of inversions and each square shortens the word, so the reduction
+ends at a sign times an ordered monomial.
+The ordered monomials therefore span. There are #{2^d} of them,
+and the previous paragraph shows that they are independent, so
+they are a basis.}
+
+\p{The map #{\Phi(a)=\rho(a)(1)} sends that basis to #{\pm e_I}.
+The change-of-basis matrix is diagonal with units #{\pm 1} on
+the diagonal, so #{\Phi} is a module isomorphism. It preserves
+the left action because #{\rho} is an algebra homomorphism.
+Injectivity of #{\rho} follows: #{\rho(a)=0} implies
+#{\Phi(a)=0}, hence #{a=0}. Both modules are free of rank
+#{2^d}. The case #{d=4} is the rank #{16}.}
+}

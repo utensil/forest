@@ -1,0 +1,68 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Lemma}
+\title{Cubical cohomology has binomial rank}
+\date{2026-11-12}
+
+\p{Let #{k} be a field, and keep the torus and the coboundary of
+\ref{fdip-00OK}, with coefficients in #{k}. In degree #{r} the
+cohomology has dimension #{\binom{d}{r}}. The sum of these
+dimensions is #{2^d}.}
+
+\proof{
+\p{Proceed by induction on #{d}. Write #{h_r(d)} for the
+degree-#{r} dimension, with #{h_r(d)=0} outside
+#{0\le r\le d} and #{h_{-1}(d)=0}.}
+
+\p{For #{d=1}, a closed vertex function is constant, so
+#{h_0(1)=1}. The values of any vertex coboundary on the edges sum
+to zero. Conversely, if an edge cochain sums to zero, set the
+vertex value at #{0} equal to zero and let each later value be the
+sum of the preceding edge values. The last step closes because
+that sum vanishes, and the forward differences reproduce the edge
+cochain. The sum of the edge values is a surjective linear form,
+so these coboundaries have codimension one and #{h_1(1)=1}.}
+
+\p{Fix #{d\ge 2} and assume the binomial count in dimension
+#{d-1}. Let #{L} be the cochains supported on cubes whose
+direction set contains the largest label #{d}, and let #{Q} be
+the quotient by #{L}. On a cube that omits #{d}, every face in
+the coboundary of \ref{fdip-00OK} omits #{d} and stays in the
+same last coordinate. Thus #{L} is a subcomplex, and each fixed
+last coordinate in #{Q} carries the coboundary of the
+#{(d-1)}-torus. Hence the degree-#{r} cohomology of #{Q} has
+dimension #{N\,h_r(d-1)}.}
+
+\p{On a cube that contains #{d}, a face that still contains #{d}
+lies in the same last coordinate, while the face that drops #{d}
+lies outside #{L}. The differential on #{L} is the #{(d-1)}
+coboundary on each slice. Shifting degree by one, the
+degree-#{r} cohomology of #{L} has dimension
+#{N\,h_{r-1}(d-1)}.}
+
+\p{Lift a cocycle family #{\beta_t} by those values on cubes that
+omit #{d} and by zero on cubes that contain #{d}. The coboundary
+of the lift is supported on cubes containing #{d}. On a cube of
+direction set #{I}, only the face that drops #{d} survives, with
+sign #{(-1)^{\sigma(d,I)}}. Since
+#{\sigma(d,I)=\lvert I\rvert-1} and #{\lvert I\rvert=r+1}, the
+sign is #{(-1)^r}. The connecting homomorphism sends #{(b_t)} to
+#{(-1)^r(b_{t+1}-b_t)}. Its kernel is the constant families, of
+dimension #{h_r(d-1)}. Its image is the families whose sum is
+zero, and partial sums recover every such family.}
+
+\p{The short exact sequence of complexes gives a long exact
+sequence on cohomology. Exactness at the cohomology of #{Q}
+identifies the image of the torus cohomology with the kernel of
+the connecting map, of dimension #{h_r(d-1)}. Exactness at the
+cohomology of #{L} identifies the kernel of the map into the
+torus cohomology with the image of the preceding connecting map.
+That image has dimension #{(N-1)h_{r-1}(d-1)}, so the image in
+the torus cohomology has dimension #{h_{r-1}(d-1)}. Exactness at
+the torus cohomology adds the two contributions:
+##{h_r(d)=h_{r-1}(d-1)+h_r(d-1).}
+The binomial coefficients satisfy the same recurrence and the
+same values at #{d=1}. Thus #{h_r(d)=\binom{d}{r}}. Summing over
+#{r} gives #{2^d}.}
+}
