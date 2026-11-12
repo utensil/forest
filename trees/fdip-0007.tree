@@ -8,34 +8,41 @@
 \p{Let #{R} be a commutative unital ring, #{V,E} finite sets and
 #{s,h:E\to V} endpoint maps. The
 \vocabk{ring-valued incidence map}{fdip-00AQ} is
-#{d_R:H_V\to H_E}, where #{H_V=\mathcal F_R(V)},
-#{H_E=\mathcal F_R(E)} and #{d_Rf(e)=f(h(e))-f(s(e))}.
+#{\extd_{R}:H_V\to H_E}, where #{H_V=\mathcal F_R(V)},
+#{H_E=\mathcal F_R(E)} and #{\extd_{R}f(e)=f(h(e))-f(s(e))}.
 Equip both modules with the symmetric counting forms
 ##{b_V(f,g)=\sum_v f(v)g(v),\qquad b_E(a,c)=\sum_e a(e)c(e).}
 Their \vocabk{perfect counting dualities}{fdip-001F} give the
-\newvocab{counting adjoint} #{d_R^\dagger:H_E\to H_V} by
+\newvocab{counting adjoint} #{\extd_{R}^{\dagger}:H_E\to H_V} by
 \ref{fdip-001P}. It is characterized by
-#{b_E(d_Rf,a)=b_V(f,d_R^\dagger a)}.}
+#{b_E(\extd_{R}f,a)=b_V(f,\extd_{R}^{\dagger}a)}.
+This incidence map is the exterior derivative #{\covwedge} of
+\ref{fdip-00PV}, and #{\extd_{R}^{\dagger}} is its counting
+adjoint.}
 
 \p{For arbitrary weights #{w:E\to R}, let
 #{W:H_E\to H_E} multiply pointwise by #{w}:
 #{(Wa)(e)=w(e)a(e)}. The \newvocab{weighted edge form} and
 \newvocab{weighted graph Laplacian} are
 ##{b_{E,w}(a,c)=b_E(a,Wc)=\sum_e w(e)a(e)c(e),\qquad
-L=-d_R^\dagger Wd_R:H_V\longrightarrow H_V.}
-The represented return map for the weighted edge form is
-#{d_R^\dagger W:H_E\to H_V}. Its characterizing identity and the
+L=-\extd_{R}^{\dagger}W\extd_{R}:H_V\longrightarrow H_V.}
+This weighted Laplacian is the weighted square #{\covsq} of
+\ref{fdip-00PV}. The represented return map for the weighted edge form is
+#{\extd_{R}^{\dagger}W:H_E\to H_V}. Its characterizing identity and the
 criterion for perfection of #{b_{E,w}} are in
 \ref{fdip-00JD}.}
 
-\p{For real incidence, write
-#{D=d_{\mathbb R}:\mathbb R^V\to\mathbb R^E} and
-#{D^*=d_{\mathbb R}^\dagger}. The counting forms are the
+\p{For real incidence, the map is
+#{\extd_{\mathbb R}:\mathbb R^V\to\mathbb R^E}, with adjoint
+#{\extd_{\mathbb R}^{\dagger}}. The counting forms are the
 \vocabk{counting inner products}{fdip-0002}. When #{w(e)>0}, the
 \newvocab{weighted inner product} is
 ##{\langle a,c\rangle_{E,w}=b_{E,w}(a,c).}
 With the vertex inner product still counting, the
 \newvocab{weighted adjoint} is the return map
-#{D_w^\dagger=D^*W}. Thus #{L=-D^*WD=-D_w^\dagger D};
-#{-D^*D} is the unit-weight case. The positivity and adjoint identity
+#{\extd_{\mathbb R,w}^{\dagger}=\extd_{\mathbb R}^{\dagger}W}. Thus
+#{L=-\extd_{\mathbb R}^{\dagger}W\extd_{\mathbb R}
+=-\extd_{\mathbb R,w}^{\dagger}\extd_{\mathbb R}};
+#{-\extd_{\mathbb R}^{\dagger}\extd_{\mathbb R}} is the unit-weight
+case. The positivity and adjoint identity
 are proved in \ref{fdip-00JD}.}
