@@ -8,7 +8,7 @@
 \p{Let #{C_n}, #{n\ge3}, have vertices #{0,\ldots,n-1} and edges
 #{j\to j+1} modulo #{n}. Take a complex line with unitary connection,
 positive weights #{w_j}, and total oriented holonomy
-#{u=\prod_jU_j=e^{i\theta}}. For #{L_\theta=d_U^*Wd_U},
+#{u=\prod_jU_j=e^{i\theta}}. For #{L_\theta=\extd_U^\dagger W\extd_U},
 ##{\det L_\theta=\left(\prod_jw_j\right)(2-2\cos\theta).}
 For unit weights and #{c\ge0}, let #{\omega\ge0} be determined by
 #{2\cosh\omega=2+c}. Then
@@ -21,7 +21,7 @@ Both cycle identities are proved directly below.}
 \proof{
 \p{Order the vertices #{0,\ldots,n-1} and the edges #{j\to j+1},
 and use those counting bases. The row equations below are the
-matrix of #{d_U} in these bases, and #{W} is diagonal with entries
+matrix of #{\extd_U} in these bases, and #{W} is diagonal with entries
 #{w_j}. Use \ref{fdip-006F} to set
 #{U_0=\cdots=U_{n-2}=1} and
 #{U_{n-1}=u}. The square incidence matrix has row equations
@@ -30,8 +30,8 @@ In its determinant expansion the only nonzero permutations choose
 all source entries or all head entries: choosing one head entry forces
 the next row to choose its head entry, and so around the cycle.
 Their signed sum is #{1-u} up to an overall sign. Hence
-##{\det(d_U^*Wd_U)
-=|\det d_U|^2\det W
+##{\det(\extd_U^\dagger W\extd_U)
+=|\det\extd_U|^2\det W
 =|1-u|^2\prod_jw_j.}
 Since #{|1-e^{i\theta}|^2=2-2\cos\theta}, this proves the first
 formula, including trivial holonomy.}
