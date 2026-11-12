@@ -7,22 +7,22 @@
 
 \p{Let #{R} be a commutative unital ring, #{V,E,s,h} finite incidence
 data and #{w:E\to R} arbitrary weights. Use the counting forms,
-\vocabk{counting adjoint}{fdip-0007} #{d_R^\dagger}, weight map
+\vocabk{counting adjoint}{fdip-0007} #{\extd_{R}^\dagger}, weight map
 #{W} and \vocabk{weighted edge form}{fdip-0007} #{b_{E,w}}.
 The endpoint formula is
-##{(d_R^\dagger a)(v)
+##{(\extd_{R}^\dagger a)(v)
  =\sum_{h(e)=v}a(e)-\sum_{s(e)=v}a(e).}
 The map #{W} is self-adjoint for the counting form. The form
 #{b_{E,w}} is symmetric bilinear, and is perfect if and only if
 every #{w(e)} is a unit, meaning an invertible element of #{R}.
 For arbitrary weights, the return
 map satisfies
-##{b_{E,w}(d_Rf,a)=b_V(f,d_R^\dagger Wa).}}
+##{b_{E,w}(\extd_{R}f,a)=b_V(f,\extd_{R}^\dagger Wa).}}
 
 \proof{
 \p{Expanding and regrouping finite sums gives
 ##{\begin{aligned}
-b_E(d_Rf,a)
+b_E(\extd_{R}f,a)
  &=\sum_e\bigl(f(h(e))-f(s(e))\bigr)a(e)\\
  &=\sum_v f(v)\left(\sum_{h(e)=v}a(e)-\sum_{s(e)=v}a(e)\right).
 \end{aligned}}
@@ -45,7 +45,7 @@ Commutativity supplies the other inverse identity for this scalar, so
 #{w(e)} is a unit. For #{E=\varnothing}, the unit condition is vacuous
 and #{W} is the unique isomorphism of the zero module. In the zero ring,
 #{0=1} is itself a unit, consistent with the same proof. Finally,
-#{b_{E,w}(d_Rf,a)=b_E(d_Rf,Wa)=b_V(f,d_R^\dagger Wa)}
+#{b_{E,w}(\extd_{R}f,a)=b_E(\extd_{R}f,Wa)=b_V(f,\extd_{R}^\dagger Wa)}
 uses the counting adjoint and does not require #{W} invertible.}
 }
 
@@ -53,11 +53,11 @@ uses the counting adjoint and does not require #{W} invertible.}
 Let #{\varepsilon(e)=-1} on those edges and #{1} on the others,
 interpreted in #{R}, and let #{(Ja)(e)=\varepsilon(e)a(e)}.
 Then
-##{J^\dagger=J,\qquad J^2=I,\qquad JW=WJ,\qquad d'_R=Jd_R.}
+##{J^\dagger=J,\qquad J^2=I,\qquad JW=WJ,\qquad \extd'_{R}=J\extd_{R}.}
 The reversed incidence map gives the same
 \vocabk{weighted graph Laplacian}{fdip-0007}, and the sign map
 preserves the weighted edge form:
-##{(d'_R)^\dagger Wd'_R=d_R^\dagger Wd_R=-L,\qquad
+##{(\extd'_{R})^\dagger W\extd'_{R}=\extd_{R}^\dagger W\extd_{R}=-L,\qquad
 b_{E,w}(Ja,Jc)=b_{E,w}(a,c).}}
 
 \proof{
@@ -65,20 +65,20 @@ b_{E,w}(Ja,Jc)=b_{E,w}(a,c).}}
 preceding self-adjointness calculation applies to it. Pointwise,
 #{\varepsilon(e)^2=1} and #{\varepsilon(e)w(e)=w(e)\varepsilon(e)},
 giving #{J^2=I} and #{JW=WJ}. Reversing the endpoints negates their
-difference, so #{d'_R=Jd_R}. The adjoint composition law in
+difference, so #{\extd'_{R}=J\extd_{R}}. The adjoint composition law in
 \ref{fdip-001P} now gives
-##{(d'_R)^\dagger Wd'_R
-=d_R^\dagger JWJd_R=d_R^\dagger Wd_R.}
+##{(\extd'_{R})^\dagger W\extd'_{R}
+=\extd_{R}^\dagger JWJ\extd_{R}=\extd_{R}^\dagger W\extd_{R}.}
 In each summand of #{b_{E,w}(Ja,Jc)}, the two sign factors multiply
 to 1. The corresponding edge field is #{a'=Ja}. These computations
 include characteristic two, loops and parallel edges.}
 }
 
-\p{Over #{\mathbb R}, suppose #{w(e)>0} and write
-#{D=d_{\mathbb R}}. The weighted edge form is a positive-definite
+\p{Over #{\mathbb R}, suppose #{w(e)>0}. The incidence map is
+#{\extd_{\mathbb R}}. The weighted edge form is a positive-definite
 inner product, and the \vocabk{weighted adjoint}{fdip-0007}
-#{D_w^\dagger=D^*W} satisfies
-##{\langle Df,a\rangle_{E,w}=\langle f,D_w^\dagger a\rangle_V.}}
+#{\extd_{\mathbb R,w}^{\dagger}=\extd_{\mathbb R}^{\dagger}W} satisfies
+##{\langle\extd_{\mathbb R}f,a\rangle_{E,w}=\langle f,\extd_{\mathbb R,w}^{\dagger}a\rangle_V.}}
 
 \proof{
 \p{The self-pairing is #{\sum_e w(e)a(e)^2}, a finite sum of
@@ -86,8 +86,8 @@ nonnegative terms. Strict positivity of the weights makes this sum
 zero only when every #{a(e)=0}. Together with symmetry and
 bilinearity this proves positive definiteness, including the zero
 edge space. The return identity specializes to
-##{\langle Df,a\rangle_{E,w}
-=\langle Df,Wa\rangle_E=\langle f,D^*Wa\rangle_V.}
+##{\langle\extd_{\mathbb R}f,a\rangle_{E,w}
+=\langle\extd_{\mathbb R}f,Wa\rangle_E=\langle f,\extd_{\mathbb R}^{\dagger}Wa\rangle_V.}
 Uniqueness follows from the perfect vertex counting pairing.}
 }
 
