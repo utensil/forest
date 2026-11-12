@@ -1,0 +1,42 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{A bimodule metric needs both directions}
+\date{2026-11-12}
+
+\p{Let the calculus be free on a digraph, over a commutative unital
+ring #{k}. It admits a bimodule metric if and only if the digraph
+is bidirected. A bimodule metric is an element of
+#{\Omega\otimes_A\Omega} and an #{A}-bimodule pairing of that
+tensor into #{A} whose two contractions recover the identity of
+#{\Omega}. Every coefficient that appears is a unit. The field
+case is \citet{Proposition 3.4}{majid2013graphs}. The forward-edge
+torus admits no such metric. Whenever a weight and its reverse
+are equal units, the support of the corresponding weighted
+Laplacian is bidirected and the metric exists.}
+
+\proof{
+\p{The balanced tensor is the free #{k}-module on composable
+pairs #{e_{xy}\otimes e_{yz}}. An #{A}-bimodule map from that
+tensor to the functions sends #{e_{xy}\otimes e_{yz}} to a
+function supported at #{x} and at #{z}. The two supports agree
+only when #{x=z}, and the value is then a scalar times the
+indicator of #{x}. Thus only a reverse pair pairs, and
+##{\langle e_{xy},e_{yx}\rangle=c_{xy}\,\delta_x.}
+Write a metric as the sum of terms #{\mu_{xy}\,e_{xy}\otimes e_{yx}}.
+Pair a test form against the first factor. The only nonzero
+value is #{\langle e_{yx},e_{xy}\rangle=c_{yx}\,\delta_y}, and the
+second factor is then #{e_{yx}}. The product #{\mu_{xy}c_{yx}}
+equals #{1} for every edge exactly when each reverse edge
+exists and #{\mu_{xy}} is the inverse of #{c_{yx}}. Both
+factors are then units. Pairing against the second factor
+recovers the first factor by the same product.}
+
+\p{Conversely, if the digraph is bidirected and each #{c_{xy}}
+is a unit, set #{\mu_{xy}=c_{yx}^{-1}}. Both contractions are
+the identity. The forward-edge torus has no reverse edge, so
+the first paragraph forbids a metric. Equal unit weights in
+the two directions give a bidirected support, and the same
+converse supplies the metric.}
+}

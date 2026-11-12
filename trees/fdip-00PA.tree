@@ -1,0 +1,32 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Lemma}
+\title{A Laplacian is the weighted digraph of its entries}
+\date{2026-11-12}
+
+\p{Let #{k} be a commutative unital ring and let #{X} be finite.
+Let #{L} be a #{k}-linear operator on the functions #{X\to k}
+with #{L1=0}. Write #{L_{xy}} for the value at #{x} of #{L}
+applied to the function that is #{1} at #{y} and #{0} elsewhere.
+Then, for all functions #{f} and #{g},
+##{(L(fg)-f\,Lg-g\,Lf)(x)
+ =\sum_{y\neq x}L_{xy}\,(f(y)-f(x))(g(y)-g(x)).}
+The pairs #{x\to y} with #{L_{xy}\neq 0} are the edges of a free
+calculus in the sense of \ref{fdip-00NT}, and #{L} is the weighted
+Laplacian of that digraph.}
+
+\proof{
+\p{The condition #{L1=0} says #{L_{xx}=-\sum_{y\neq x}L_{xy}}.
+Hence
+##{(Lf)(x)=\sum_{y\neq x}L_{xy}\,(f(y)-f(x)).}
+Apply this to #{fg}. The summand at #{y} is
+##{L_{xy}\bigl(f(y)g(y)-f(x)g(x)\bigr).}
+Subtract #{f(x)} times the summand of #{Lg} and #{g(x)} times
+the summand of #{Lf}. The expression in parentheses becomes
+##{(f(y)-f(x))(g(y)-g(x)).}
+Each pair with nonzero coefficient is an edge whose ideal is
+#{0}, and every other pair has ideal #{k}. That is a free
+calculus. The displayed formula is the weighted Laplacian of
+those edges.}
+}
