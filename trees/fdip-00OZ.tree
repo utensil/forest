@@ -1,0 +1,30 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Example}
+\title{The cup product and the unweighted adjoint fail}
+\date{2026-11-12}
+
+\p{Subdivide the ordered edge with vertices #{0<m<1} into the
+edges #{(0,m)} and #{(m,1)}. Let #{\alpha} be the vertex cochain
+with #{\alpha(0)=0} and #{\alpha(m)=1}, and let #{\beta} be the
+edge cochain with value #{0} on #{(0,m)} and value #{1} on
+#{(m,1)}. The cup product of \ref{fdip-0093} reads
+##{(\alpha\cup\beta)(0,m)=\alpha(0)\beta(0,m)=0,}
+##{(\alpha\cup\beta)(m,1)=\alpha(m)\beta(m,1)=1.}
+The dual of subdivision sums these two values and gets #{1}.
+The pulled vertex cochain has value #{\alpha(0)=0} at the
+coarse initial vertex, and the pulled edge cochain has value
+#{0+1=1}. Their cup product is #{0}. The two results differ.}
+
+\p{On the cycle of length #{6}, let the coarse vertices be the
+even residues and let #{a} equal #{1} on the fine edge from
+#{0} to #{1} and equal #{0} on every other fine edge. The dual
+of subdivision sends #{a} to the coarse cochain with value
+#{1} on the edge from #{0} to #{2} and value #{0} on the other
+two coarse edges. The counting adjoint of \ref{fdip-00OL} at
+the coarse vertex #{2} is the incoming value minus the outgoing
+value, hence #{1}. The same adjoint on the fine cycle vanishes
+at vertex #{2}, because the only nonzero edge ends at vertex
+#{1}. Pulling that fine adjoint back to the coarse vertex
+#{2} gives #{0}.}
