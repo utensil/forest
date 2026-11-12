@@ -110,7 +110,7 @@ operator assignments scalar invariants; the full covariance entries
 above already differ.}
 }
 
-\p{For the nonzero positive semidefinite #{L_x}, define
+\p{For the graph Laplacian #{L_x}, define
 ##{\mathcal R(x)=\frac{\operatorname{tr}(L_x^2)}
  {\bigl(\operatorname{tr}L_x\bigr)^2}.}
 Then #{\mathcal R(gx)=\mathcal R(x)}, and
@@ -125,10 +125,10 @@ Also #{L_{gx}^2=P_gL_x^2P_g^*}; hence both traces are preserved.
 For the explicit value, the 4 orthonormal vectors #{u_0,u_1,u_2,u_3}
 from \ref{fdip-0037} remain eigenvectors after replacing weights
 #{(1,t)} by #{(a,b)}, with eigenvalues
-#{0,2a,2b,2a+2b}. Substituting the alternating entries of
+#{0,-2a,-2b,-(2a+2b)}. Substituting the alternating entries of
 #{L_x} verifies each eigenvector equation. Therefore
 ##{\begin{aligned}
-\operatorname{tr}L_x&=4(a+b)>0,\\
+\operatorname{tr}L_x&=-4(a+b),\\
 \operatorname{tr}(L_x^2)&=8(a^2+ab+b^2).
 \end{aligned}}
 These spectral trace identities use
@@ -154,7 +154,7 @@ different relation. A weight-swapping relabeling followed by
 #{c=1/t} sends #{L(1,t)} to #{L(1,1/t)}. Reciprocal parameters
 are identified in this reduced problem only; no scale arrow has been
 added to the original Gaussian groupoid. At fixed mass,
-#{cL+m^2I\ne cQ} for #{c\ne1}. If one instead rescales the
+#{m^2I-cL\ne cQ} for #{c\ne1}. If one instead rescales the
 entire precision to #{cQ}, then
 ##{\begin{aligned}
 (cQ)^{-1}&=c^{-1}Q^{-1},\\

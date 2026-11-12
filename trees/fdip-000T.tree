@@ -13,10 +13,10 @@ blocks and
 This is the kernel dimension for the explicitly chosen
 reducible module #{S}, whose dimension is #{2^d}.
 The unit-weight \vocabk{graph Laplacian}{fdip-0007}
-##{L_{\mathrm{nn}}=\sum_{j=1}^d
+##{L_{\mathrm{nn}}=-\sum_{j=1}^d
  (2I_H-T_j-T_j^{-1})}
 has only the zero momentum in its scalar kernel.
-Moreover #{-D^2\ne I_S\otimes L_{\mathrm{nn}}} on every
+Moreover #{-D^2\ne I_S\otimes(-L_{\mathrm{nn}})} on every
 permitted grid, including grids with all periods odd.
 These are finite consequences of the
 [Fourier blocks](fdip-000S); the centered-difference convention
@@ -26,10 +26,10 @@ pp. 19-20}{wingate2025lattice}.}
 \proof{
 \p{The forward-difference factorization from
 \ref{fdip-0014}, applied in each coordinate, gives
-##{L_{\mathrm{nn}}=\sum_j(T_j-I_H)^*(T_j-I_H).}
+##{-L_{\mathrm{nn}}=\sum_j(T_j-I_H)^*(T_j-I_H).}
 For #{N_j\ge3}, each undirected nearest-neighbor edge occurs
 once in the corresponding squared-difference energy.
-On the character with momentum #{p}, the eigenvalue is
+On the character with momentum #{p}, the eigenvalue of #{-L_{\mathrm{nn}}} is
 ##{\begin{aligned}
 \ell(p)&=\sum_j(2-2\cos p_j)\\
        &=4\sum_j\sin^2(p_j/2).
@@ -56,7 +56,7 @@ thus #{\dim\ker(I_S\otimes L_{\mathrm{nn}})=2^d}.}
 
 \p{For #{d=1,N=4}, the alternating scalar field
 #{a(x)=(-1)^x} has momentum #{p=\pi}. Its centered
-difference is zero, whereas #{L_{\mathrm{nn}}a=4a}.
+difference is zero, whereas #{(-L_{\mathrm{nn}})a=4a}.
 Consequently every field #{x\mapsto a(x)v}, #{v\in S},
 is killed by #{D}. Together with the constant fields these
 give the four-dimensional kernel. Write

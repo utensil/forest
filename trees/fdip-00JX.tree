@@ -8,7 +8,7 @@
 \p{Let #{L} be the \vocabk{weighted graph Laplacian}{fdip-0007}
 on a finite vertex set #{V}, with positive real edge weights, and
 let #{m>0}. Its \vocabk{massive precision}{fdip-000A}
-#{Q_m=L+m^2I} is a \vocabk{positive precision parameter}{fdip-0004}
+#{Q_m=m^2I-L} is a \vocabk{positive precision parameter}{fdip-0004}
 and an \vocabk{isomorphism}{ca-0015}. Its \vocabk{Green operator}{fdip-000A}
 #{G_m=Q_m^{-1}} is \vocabk{self-adjoint}{fdip-001P} and strictly positive.
 For each source field #{j}, the unique solution of #{Q_mf=j} is
@@ -25,6 +25,7 @@ preserves self-adjointness. The energy identity in \ref{fdip-0008}
 gives, for #{f\ne0},
 ##{\begin{aligned}
 \langle f,Q_mf\rangle_V
+ &=\langle f,(-L)f\rangle_V+m^2\sum_v f(v)^2\\
  &=\sum_e w(e)(Df)(e)^2\\
  &\quad+m^2\sum_v f(v)^2>0.
 \end{aligned}}

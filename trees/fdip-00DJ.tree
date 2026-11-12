@@ -14,7 +14,7 @@ has both ends in #{K\cup U_i}, and every vertex of #{U_i} is
 joined to #{K} by a path in #{E_i}. Let #{L_i} be the
 Laplacian of the edges #{E_i}. Then #{L_w=\sum_i L_i}. Let
 #{h} be the counting inner product, and let the energy of a
-function #{x} be #{h(x,L_w x)}. Let #{Z} be the set of
+function #{x} be #{h(x,(-L_w)x)}. Let #{Z} be the set of
 vertices outside #{K} and outside every #{U_i}. No edge meets
 #{Z}, so each vertex of #{Z} is isolated and the energy does
 not depend on its value. These local assumptions do not
@@ -24,11 +24,11 @@ not the connected-graph \vocabk{kept form}{fdip-00DF}.}
 \p{For a function #{u} on #{K} and for each family, the minimum
 of the #{L_i}-energy over extensions of #{u} to #{K\cup U_i}
 exists. If #{U_i} is empty, that contribution is the energy
-#{h(u,L_i u)} on #{K}. If #{U_i} is nonempty, let #{i_{U_i}}
+#{h(u,(-L_i)u)} on #{K}. If #{U_i} is nonempty, let #{i_{U_i}}
 be the inclusion of functions supported on #{U_i}. The
-compression #{i_{U_i}^* L_i i_{U_i}} is positive definite, and
+compression #{i_{U_i}^*(-L_i)i_{U_i}} is positive definite, and
 the minimizer on #{U_i} is unique. The minimum of
-#{h(x,L_w x)} over extensions of #{u} to the whole vertex set
+#{h(x,(-L_w)x)} over extensions of #{u} to the whole vertex set
 is attained and equals the sum of these local minima. The
 minimizer is unique on the active vertices
 #{K\cup\bigcup_i U_i} and arbitrary on #{Z}. Global uniqueness
@@ -42,11 +42,11 @@ prescribed values on #{K}, the minimum of the sum is the sum
 of the minima, once each local minimum is attained.}
 
 \p{If #{U_i} is empty, the contribution of #{E_i} is already an
-energy #{h(u,L_i u)} on #{K}. If #{U_i} is nonempty and #{y}
-supported on #{U_i} has #{h(y,L_i y)=0}, every difference
+energy #{h(u,(-L_i)u)} on #{K}. If #{U_i} is nonempty and #{y}
+supported on #{U_i} has #{h(y,(-L_i)y)=0}, every difference
 along #{E_i} vanishes. Each vertex of #{U_i} is joined to a
 vertex of #{K} by a path in #{E_i}, and #{y} vanishes on
-#{K}, so #{y=0}. The compression #{i_{U_i}^* L_i i_{U_i}} is
+#{K}, so #{y=0}. The compression #{i_{U_i}^*(-L_i)i_{U_i}} is
 therefore positive definite. The square completion recorded
 in \ref{fdip-00DH} gives the unique minimum of the
 #{L_i}-energy on that compression. The completion adds no

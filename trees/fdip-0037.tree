@@ -7,31 +7,31 @@
 
 \p{Take the [four-cycle](fdip-0003) on #{V=(0,1,2,3)}, with forward
 edges and weights #{(1,t,1,t)}, #{t>0}. Use counting pairing and
-#{Q=L+m^2I}, #{m>0}. Put #{a=m^2} and #{s=1+t+a}.
+#{Q=m^2I-L}, #{m>0}. Put #{a=m^2} and #{s=1+t+a}.
 The following functions on vertices form an orthonormal eigenbasis;
 the middle column lists the unnormalized rows #{2u_i^T}:
 ##{\begin{array}{c|c|c}
 i&2u_i^T&\lambda_i\\\hline
 0&(1,1,1,1)&0\\
-1&(1,-1,-1,1)&2\\
-2&(1,1,-1,-1)&2t\\
-3&(1,-1,1,-1)&2+2t
+1&(1,-1,-1,1)&-2\\
+2&(1,1,-1,-1)&-2t\\
+3&(1,-1,1,-1)&-(2+2t)
 \end{array}}}
 \proof{
 \p{Each row has squared norm 4. Distinct rows agree in two signs
 and disagree in two, giving inner product zero. The weighted coordinate
-formula is #{(L\phi)_0=(1+t)\phi_0-\phi_1-t\phi_3}, with the other
+formula is #{(L\phi)_0=-(1+t)\phi_0+\phi_1+t\phi_3}, with the other
 rows given by their adjacent weights. For #{v_i=2u_i}, all 4 products
 are
 ##{\begin{aligned}
 Lv_0&=(0,0,0,0),\\
-Lv_1&=(2,-2,-2,2),\\
-Lv_2&=(2t,2t,-2t,-2t),\\
-Lv_3&=(2+2t,-2-2t,\\
- &\qquad 2+2t,-2-2t).
+Lv_1&=(-2,2,2,-2),\\
+Lv_2&=(-2t,-2t,2t,2t),\\
+Lv_3&=(-(2+2t),2+2t,\\
+ &\qquad -(2+2t),2+2t).
 \end{aligned}}
 For example the zeroth coordinates are respectively #{0},
-#{(1+t)+1-t=2}, #{(1+t)-1+t=2t}, and #{(1+t)+1+t=2+2t};
+#{-(1+t)-1+t=-2}, #{-(1+t)+1-t=-2t}, and #{-(1+t)-1-t=-(2+2t)};
 the same substitutions at the other three vertices give the displayed
 signs. Thus #{Lu_i=\lambda_i u_i}. This basis remains orthonormal at
 #{t=1}, when #{\lambda_1=\lambda_2}; no distinct-eigenvalue assumption
@@ -45,7 +45,7 @@ q_2&=a+2t,\\
 q_3&=a+2+2t,\\
 \Delta&=a(a+2)(a+2t)(a+2+2t).
 \end{aligned}}
-All 4 #{q_i} are positive. With #{P_{u_i}=u_i u_i^T}, [normalization](fdip-002T) and
+All 4 #{q_i} are positive. They equal #{a-\lambda_i}. With #{P_{u_i}=u_i u_i^T}, [normalization](fdip-002T) and
 [inverse covariance](fdip-000B) give
 ##{\begin{aligned}
 \det Q&=\Delta,& Z_Q&=4\pi^2/\sqrt\Delta,\\
@@ -91,7 +91,7 @@ sums above. They give, in particular, the opposite covariance used in
 [block elimination](fdip-000F) and the two distinct adjacent covariances
 used in [relabeling](fdip-000Y).}
 \p{More generally, weights #{(b,c,b,c)} with #{b,c>0} keep the same
-4 eigenvectors and give eigenvalues #{0,2b,2c,2b+2c}, by the same
+4 eigenvectors and give eigenvalues #{0,-2b,-2c,-(2b+2c)}, by the same
 coordinate products. This is a real spectral calculation. The
 [arithmetic columns](fdip-000U) are #{2u_i}, whose Gram matrix is #{4I};
 they are not an orthonormal basis over an arbitrary coefficient ring.}
