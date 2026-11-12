@@ -10,53 +10,78 @@ disconnected groups, with
 [normalized Haar measure](fdip-007B). Fix a
 [finite incidence presentation](fdip-0002) with vertex set
 #{V_s}, oriented edge set #{E_s} and source and target maps
-#{s,t:E_s\to V_s}. The spatial configuration space and
-\newvocab{link Hilbert space} are
-##{X=G^{E_s},\qquad
- \mathcal H_{\mathrm{link}}=L^2(X,dU;\mathbb C),}
-where #{dU} is product Haar probability measure. The
+#{s,t:E_s\to V_s}. The spatial configuration space is
+#{X=G^{E_s}}, with product Haar probability #{dU}. Let
+#{A(X)} be the algebra of bounded Borel functions
+#{X\to\mathbb C} under the pointwise product. The
 [gauge action](fdip-006E) of #{K=G^{V_s}} is
 ##{(h\cdot U)_e=h_{t(e)}U_eh_{s(e)}^{-1},\qquad
  (R_hf)(U)=f(h^{-1}\cdot U).}
-Haar invariance makes every #{R_h} unitary.}
+Each #{R_h} is an automorphism of #{A(X)} and preserves the
+supremum norm.}
 
-\p{Choose a real continuous central kernel #{k} satisfying the
-[positive coefficient conditions](fdip-007I):
-##{\begin{gathered}
-k(g)>0,\qquad k(g^{-1})=k(g),\\
-k(g)=\sum_{\rho\in\widehat G}d_\rho a_\rho\chi_\rho(g),
-\qquad a_\rho>0,\qquad
-\sum_{\rho\in\widehat G}d_\rho^2a_\rho<\infty.
-\end{gathered}}
-All irreducible representations here are complex and unitary.
-The expansion is uniformly absolutely convergent. Pointwise
-positivity and coefficient positivity are separate hypotheses.}
-
-\p{The scalar #{a_\rho} is the convolution eigenvalue on the
-#{\rho} coefficient space; the character coefficient is
-#{d_\rho a_\rho}. If #{k} is a probability density, then
-#{a_{\mathrm{triv}}=\int_G k\,d\mu_G=1}; this normalization
-is not required here. The [heat kernel](fdip-00ML) supplies
-these hypotheses for every compact connected Lie group.}
+\p{All irreducible representations here are complex and unitary.
+For a finite set #{F} of them and coefficients #{a_\rho>0}, the
+truncation
+##{k_F(g)=\sum_{\rho\in F}d_\rho a_\rho\chi_\rho(g)}
+is a finite sum. Write
+##{\kappa_F=\sum_{\rho\in F}d_\rho^2a_\rho.}
+Unitarity gives #{|\chi_\rho(g)|\le d_\rho}, so
+#{|k_F(g)|\le\kappa_F}, with equality at the identity. For finite
+sets #{F\subset F'} carrying the same coefficients,
+##{|k_{F'}(g)-k_F(g)|
+ \le\kappa_{F'}-\kappa_F
+ =\sum_{\rho\in F'\setminus F}d_\rho^2a_\rho,}
+with equality at the identity. If #{F} is closed under dual
+representations and #{a_{\rho^*}=a_\rho}, then #{k_F} is real,
+central and inversion-symmetric. Coefficient positivity does not
+imply #{k_F(g)>0}. The scalar #{a_\rho} is the convolution
+eigenvalue of this finite sum on the #{\rho} coefficient space;
+the character coefficient is #{d_\rho a_\rho}. If the trivial
+representation lies in #{F}, then
+#{\int_G k_F\,d\mu_G=a_{\mathrm{triv}}}.}
 
 \p{Let #{V:X\to\mathbb R} be bounded Borel and pointwise
 gauge invariant, and set #{b(U)=e^{-V(U)/2}}. Then #{b} and
-#{b^{-1}} are bounded Borel functions. If #{M_b} denotes multiplication by #{b},
-define
+#{b^{-1}} are bounded Borel functions. If #{M_b} denotes
+multiplication by #{b}, define
 ##{\begin{aligned}
-c(U,U')&=\prod_{e\in E_s}k(U_eU_e'^{-1}),\\
-(C_kf)(U)&=\int_Xc(U,U')f(U')\,dU',\\
-T&=M_bC_kM_b.
+c_F(U,U')&=\prod_{e\in E_s}k_F(U_eU_e'^{-1}),\\
+(C_{k_F}f)(U)&=\int_Xc_F(U,U')f(U')\,dU',\\
+T_F&=M_bC_{k_F}M_b.
 \end{aligned}}
-This is the \newvocab{pure-gauge transfer operator} for the
-specified data. Its integral kernel is #{b(U)c(U,U')b(U')}.
-The kernel is bounded Borel and bounded below by a positive
-constant. If #{V} is continuous, the kernel is continuous.
-The spatial potential may be a sum of Wilson plaquette terms;
-boundedness, Borel measurability and the stated invariance suffice.}
+For #{f\in A(X)} the integral is a bounded Borel function, since
+the kernel is a finite sum of continuous characters and
+#{|c_F|\le\kappa_F^{|E_s|}}. This is the truncated transfer
+operator for the specified finite data. Its integral kernel is
+#{b(U)c_F(U,U')b(U')}. If #{V} is continuous, the kernel is
+continuous. The spatial potential may be a sum of Wilson
+plaquette terms; boundedness, Borel measurability and the stated
+invariance suffice.}
 
 \p{The factorization separates the two spatial half-weights from
 the temporal convolution. It parallels the gauge factors in
 \citet{Eqs. (17), (20)–(21), p. 287}{luscher1977transfer};
 the [source comparison](fdip-0087) distinguishes this pure-gauge
 model from that paper's gauge and fermion construction.}
+
+\p{Remark. Continuum comparison. The convergent series and the
+#{L^2} setting are not the definition above. For a real
+continuous central kernel satisfying the
+[positive coefficient conditions](fdip-007I),
+##{k(g)=\sum_{\rho\in\widehat G}d_\rho a_\rho\chi_\rho(g),
+ \qquad a_\rho>0,\qquad
+ \sum_{\rho\in\widehat G}d_\rho^2a_\rho<\infty,}
+the expansion is uniformly absolutely convergent. The
+\newvocab{link Hilbert space} is
+##{\mathcal H_{\mathrm{link}}=L^2(X,dU;\mathbb C),}
+on which every #{R_h} is unitary. The operator #{T=M_bC_kM_b}
+defined by the same formulas with this kernel #{k} is the
+\newvocab{pure-gauge transfer operator} on that space. Its
+integral kernel is bounded Borel and bounded below by a positive
+constant when #{k(g)>0}. If #{k} is a probability density, then
+#{a_{\mathrm{triv}}=\int_G k\,d\mu_G=1}. The
+[heat kernel](fdip-00ML) supplies this comparison, for every
+compact connected Lie group, through the series recorded in its
+continuum comparison. Each finite set #{F} recovers the
+truncation #{k_F} displayed above.}
