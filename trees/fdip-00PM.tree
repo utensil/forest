@@ -1,0 +1,36 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Lemma}
+\title{Vanishing mixed differences give a multiplication}
+\date{2026-11-12}
+
+\p{Suppose #{a_i(x+\varepsilon_j)=a_i(x)} whenever #{i\neq j}.
+Then #{[D,f]^2} is multiplication on each cube. On the cube
+#{c_I(x)} the factor is #{- \sum_i b_i^2}, where #{b_i=a_i(x)}
+if #{i\in I} and #{b_i=a_i(x-\varepsilon_i)} if #{i\notin I}.
+On vertices every direction is omitted, so each factor is the
+backward difference. The converse, that a multiplication
+operator forces the mixed differences to vanish, is left open.}
+
+\proof{
+\p{Write #{E_i} and #{L_i} for the summands of \ref{fdip-00PJ},
+so that #{E_i} carries the coefficient #{a_i(x)} at the base of
+the output cube and #{L_i} carries #{-a_i(y-\varepsilon_i)} at
+the backward point. For #{i\neq j}, each composition of one
+operator from direction #{i} with one from direction #{j}
+evaluates #{a_i} at a pair of points separated by
+#{\varepsilon_j}, and evaluates #{a_j} at a pair separated by
+#{\varepsilon_i}. The hypothesis makes those pairs equal. The
+signs are then the signs of \ref{fdip-00PK}, and the cross terms
+cancel.}
+
+\p{The diagonal terms are the one-dimensional squares of
+\ref{fdip-00PL}, taken along the coordinate #{i}. A shift in that
+coordinate does not move the other coordinates. A direction #{i} that
+belongs to the cube is the edge case of that example, so the
+factor reads #{a_i} at the base. A direction that does not
+belong to the cube is the vertex case, so the factor reads
+#{a_i} one step backward. The shifts of distinct coordinates
+commute, and the sum of the squares is the stated factor.}
+}

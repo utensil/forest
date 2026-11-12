@@ -1,0 +1,55 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{An affine function squares to the dot form}
+\date{2026-11-12}
+
+\p{Suppose #{f(x+\varepsilon_i)-f(x)=a_i} for every vertex #{x}
+and every axis #{i}, with each #{a_i} in #{k}. Then, on every
+cochain,
+##{[D,f]^2=-\Bigl(\sum_{i=1}^{d}a_i^2\Bigr).}
+A function on the whole torus with those constant differences
+exists if and only if #{Na_i=0} in #{k} for every #{i}. If the
+differences equal #{a_i} only on the edges that meet a set #{U}
+of vertices, the same identity holds for every cochain supported
+on the cubes whose vertices lie in #{U} and whose one-step
+shifts along the axes still lie in #{U}.}
+
+\proof{
+\p{Constancy gives #{f(y-\varepsilon_i)-f(y)=-a_i}. Define
+operators on cochains by
+##{(e_i\alpha)(c_I(x))
+=(-1)^{\sigma(i,I)}\alpha(c_{I\setminus\{i\}}(x+\varepsilon_i))}
+when #{i\in I}, and #{0} otherwise, and
+##{(\iota_i\alpha)(c_J(y))
+=(-1)^{\sigma(i,J\cup\{i\})+1}
+\alpha(c_{J\cup\{i\}}(y-\varepsilon_i))}
+when #{i\notin J}, and #{0} otherwise. \ref{fdip-00PJ} becomes
+#{[D,f]=\sum_i a_i(e_i+\iota_i)}.}
+
+\p{The operator #{e_i} lands on cubes that contain #{i}, and
+#{\iota_i} lands on cubes that do not, so #{e_i^2=\iota_i^2=0}.
+On a cube that contains #{i}, #{e_i\iota_i} returns the same
+cube: the backward shift in #{\iota_i} is undone by the forward
+shift in #{e_i}, and the two signs are equal, so one minus
+remains. On a cube that does not contain #{i}, the same
+cancellation runs in the order #{\iota_i e_i}. Thus
+#{e_i\iota_i+\iota_i e_i=-1}. For #{i\neq j} the two orders of
+#{e_i e_j} reach the same shifted face, and the exponents
+#{\sigma(i,I)+\sigma(j,I\setminus\{i\})} differ by #{1}, so the
+orders anticommute. The same comparison of exponents gives the
+anticommutators of #{\iota_i} with #{\iota_j} and of #{e_i} with
+#{\iota_j}. Therefore
+##{\Bigl(\sum_i a_i(e_i+\iota_i)\Bigr)^2
+=-\sum_i a_i^2.}
+}
+
+\p{Summing the constant difference #{a_i} around a coordinate
+cycle yields #{Na_i=0}. Conversely, if #{Na_i=0}, the assignment
+#{f(x)=\sum_i a_i\tilde x_i} on representatives
+#{0\le\tilde x_i<N} changes by #{a_i} across the wrap, because
+the jump is #{-(N-1)a_i=a_i}. The local statement uses only the
+vertices named in the two shifts, which the support hypothesis
+keeps inside #{U}.}
+}

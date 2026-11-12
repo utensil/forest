@@ -1,0 +1,71 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{Degree parity anticommutes with the counting operator}
+\date{2026-11-12}
+
+\p{Keep #{N\ge 3} and the counting operator #{D} of
+\ref{fdip-00OL} on the symmetric torus, including every
+\vocabk{recovery site}{fdip-00PQ}. Let #{\omega} be the volume
+operator of \ref{fdip-00OS}, with the largest index acting
+first. Right multiplication is the Clifford product of that
+theorem. The sign #{(-1)^{\deg}} anticommutes with #{D} over
+any commutative unital ring. Left multiplication obeys
+#{\omega\gamma_i=(-1)^{d-1}\gamma_i\omega}. Right
+multiplication by #{\omega}, followed by left multiplication
+by #{\omega}, multiplies a homogeneous element of degree #{p}
+by #{(-1)^{d(d-1)/2}(-1)^{(d-1)p}}. This product equals
+#{(-1)^{\deg}} for every degree exactly when #{4} divides
+#{d}. In the other classes it is the identity, the opposite
+degree sign, and multiplication by #{-1}, for
+#{d=4m+1}, #{d=4m+2} and #{d=4m+3} respectively. On a vertex
+function #{f}, with #{e_{\hat\imath}} the monomial on every
+axis except #{i},
+##{(\omega D+D\omega)f
+=\sum_{i=1}^{d}(-1)^{i-1}
+\bigl[(-1)^{d-1}\delta_i f+\delta_i^\dagger f\bigr]
+e_{\hat\imath},}
+##{(R_\omega D+DR_\omega)f
+=\sum_{i=1}^{d}(-1)^{i-1}
+\bigl(f(x+\varepsilon_i)+f(x-\varepsilon_i)-2f(x)\bigr)
+e_{\hat\imath}.}
+Both operators are nonzero. The case #{d=1} is
+\ref{fdip-00PU}.}
+
+\proof{
+\p{The coboundary raises form degree by one and the adjoint
+lowers it by one, so the degree sign anticommutes with each
+summand of #{D}.}
+
+\p{Conjugation by #{\gamma_i} fixes #{\gamma_i} and changes the
+sign of each other generator, so
+#{\gamma_i\omega\gamma_i=(-1)^{d-1}\omega}. Left
+multiplication by #{\gamma_i} is the operator relation. Moving
+each factor of the second copy of #{\omega} through the tail
+before it gives #{\omega^2=(-1)^{d(d-1)/2}}. A monomial #{x}
+of degree #{p} therefore satisfies
+#{\omega x\omega=(-1)^{(d-1)p}x\omega^2}. For even #{p} and
+for odd #{p}, the product equals #{(-1)^p} only when #{4}
+divides #{d}.}
+
+\p{Both multiplications commute with the differences. The left
+anticommutator is the sum of #{\{\omega,\epsilon_i\}} on
+#{\delta_i} and of #{\{\omega,\iota_i\}} on
+#{\delta_i^\dagger}, and the right anticommutator has the same
+shape. The volume sends #{1} to the top monomial, and
+#{\epsilon_i} kills that monomial. Contraction along axis
+#{i} multiplies the complementary monomial by #{(-1)^{i-1}}.
+Hence #{\omega(e_i)=(-1)^{d-1}(-1)^{i-1}e_{\hat\imath}}, which
+is the forward coefficient, and the backward coefficient is
+#{(-1)^{i-1}e_{\hat\imath}}. On the right, #{e_i\omega} equals
+that contraction: #{e_i} passes #{i-1} factors before its
+square cancels. Adding the two differences produces the second
+difference.}
+
+\p{The vertices #{x}, #{x+\varepsilon_i} and
+#{x-\varepsilon_i} are distinct. The function equal to #{1} at
+one vertex and #{0} elsewhere has forward difference #{1} and
+backward difference #{0} at the backward neighbor. Both
+displayed coefficients equal a unit there.}
+}
