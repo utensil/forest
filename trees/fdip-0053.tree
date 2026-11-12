@@ -11,7 +11,7 @@
 Give each unordered edge #{\{g,gs\}} weight one, counting it once.
 There are no loops, the degree is 8, and left multiplication
 acts by signed graph symmetries. On #{\mathbb R^T} the Laplacian is
-##{(Lf)(g)=8f(g)-\sum_{s\in S}f(gs).}
+##{(Lf)(g)=\sum_{s\in S}f(gs)-8f(g).}
 The underlying group construction is
 \citet{Section 11.2, pp. 166-168}{voight2021quaternion}.
 The following spectrum and blocks are calculations for this
@@ -58,7 +58,7 @@ a real simple matrix algebra #{M_r(D)} has #{r} column copies of
 its defining module, as in \ref{fcap-0042}.}
 
 \p{Fourier decomposition of right translation gives, up to the
-chosen dual-basis convention, the block
+chosen dual-basis convention, the block of #{-L},
 #{8I-\sum_{s\in S}\pi(s)}. Its adjoint or transpose gives the
 same spectra and determinants, since #{S=S^{-1}}.
 The [multiplicity matrices](fdip-0050) are as follows; in the table
@@ -66,10 +66,10 @@ The [multiplicity matrices](fdip-0050) are as follows; in the table
 ##{\begin{array}{c|c|c|c|c}
 W\text{ type}&D&m&\dim_{\mathbb R}W&L_\Xi\\\hline
 1&\mathbb R&1&1&0\\
-\lambda,\bar\lambda&\mathbb C&1&2&3\\
-\tau&\mathbb R&3&3&11I_3-J_3\\
-\sigma&\mathbb H&1&4&9\\
-\sigma\lambda,\sigma\bar\lambda&\mathbb C&2&4&\operatorname{diag}(6,9)
+\lambda,\bar\lambda&\mathbb C&1&2&-3\\
+\tau&\mathbb R&3&3&J_3-11I_3\\
+\sigma&\mathbb H&1&4&-9\\
+\sigma\lambda,\sigma\bar\lambda&\mathbb C&2&4&\operatorname{diag}(-6,-9)
 \end{array}}
 Here #{J_3} is the all-ones matrix. For #{\tau}, the 6
 #{\pm i,\pm j,\pm k} contribute #{-2I_3}, while
@@ -82,10 +82,10 @@ eigenvalues #{-1,2}, giving #{9,6}. The nonreal linear pair has
 adjacency eigenvalue #{6+\zeta+\zeta^2=5}.}
 
 \p{The real sector dimensions are #{1,2,9,4,8}, summing to #{24}.
-Consequently
-##{\operatorname{spec}(L)=\{0,3^{[2]},6^{[4]},8^{[3]},9^{[8]},11^{[6]}\},}
+These eigenvalues belong to #{-L}. Consequently
+##{\operatorname{spec}(L)=\{0,-3^{[2]},-6^{[4]},-8^{[3]},-9^{[8]},-11^{[6]}\},}
 where brackets denote eigenvalue multiplicity. For a mass squared
-#{a>0}, set #{Q=L+aI}; every block receives the same shift and
+#{a>0}, set #{Q=aI-L}; every block of #{-L} receives the same shift and
 ##{\begin{aligned}
 \det_{\mathbb R}Q={}&a(a+3)^2(a+6)^4\\
  &\cdot(a+8)^3(a+9)^8(a+11)^6.

@@ -15,9 +15,9 @@ Split
 orthogonally, and let #{i_K}, #{i_U}, #{p_K} and #{p_U} be the
 inclusions and orthogonal projections of the two summands.
 The weighted Laplacian #{L_w} is self-adjoint for #{h}. Set
-#{A=p_K L_w i_K}, #{C=p_U L_w i_U} and #{B=p_K L_w i_U}, and
+#{A=p_K(-L_w)i_K}, #{C=p_U(-L_w)i_U} and #{B=p_K(-L_w)i_U}, and
 let #{B^*} be the counting adjoint of #{B}, so
-#{B^*=p_U L_w i_K}. If #{K} omits at least one vertex, then
+#{B^*=p_U(-L_w)i_K}. If #{K} omits at least one vertex, then
 #{C} is positive definite, and the \vocabk{kept form}{fdip-00DF}
 is #{h_K(u,Su)}, where
 ##{S=A-BC^{-1}B^*}
@@ -35,7 +35,7 @@ form on the vertex set #{\{a,b\}} of the function that equals
 itself. Suppose some vertex lies outside #{K}. Declare the
 counting basis of vertex indicators with the vertices of #{K}
 written first. In that basis
-##{L_w=\begin{pmatrix}A&B\\ B^T&C\end{pmatrix},}
+##{-L_w=\begin{pmatrix}A&B\\ B^T&C\end{pmatrix},}
 where these blocks are the matrices of the operators #{A},
 #{B}, #{C} and #{B^*} in the statement, and #{B^T} is the
 matrix of #{B^*}. If #{y^T C y=0}, extend #{y} by
@@ -61,19 +61,19 @@ extension unique. The same completion is written in the proof of
 
 \p{Now let #{K=\{a,b\}}, let #{u} equal #{1} at #{a} and #{0}
 at #{b}, and let #{v} be its minimizing extension. Then
-#{L_w v} vanishes off #{\{a,b\}}. Each generator of #{L_w} is orthogonal to constant
+#{L_w v} vanishes off #{\{a,b\}}. Each generator of #{-L_w} is orthogonal to constant
 fields, so the two remaining values sum to #{0}:
-#{L_w v=(L_w v)(a)\,(\delta_a-\delta_b)}. The energy is #{v^T L_w v}. It receives a contribution only
+#{(-L_w)v=((-L_w)v)(a)\,(\delta_a-\delta_b)}. The energy is #{v^T(-L_w)v}. It receives a contribution only
 from #{a} and #{b}. Since #{v(a)=1} and #{v(b)=0}, the energy
-equals #{\alpha=(L_w v)(a)}. The extension #{v} is not
+equals #{\alpha=((-L_w)v)(a)}. The extension #{v} is not
 constant, so #{\alpha>0}. Subtract a constant
 from #{v/\alpha} so that the result #{\phi} is orthogonal to
-constant fields. Then #{L_w\phi=\delta_a-\delta_b}, and
-\ref{fdip-005U} gives #{\phi=L_w^+(\delta_a-\delta_b)}. Hence
-##{(\delta_a-\delta_b)^T L_w^+(\delta_a-\delta_b)
+constant fields. Then #{(-L_w)\phi=\delta_a-\delta_b}, and
+\ref{fdip-005U} gives #{\phi=(-L_w)^+(\delta_a-\delta_b)}. Hence
+##{(\delta_a-\delta_b)^T(-L_w)^+(\delta_a-\delta_b)
 =\phi(a)-\phi(b)=\frac{1}{\alpha}.}
 In this counting basis that product is the pairing
-#{h(\delta_a-\delta_b,L_w^+(\delta_a-\delta_b))}.
+#{h(\delta_a-\delta_b,(-L_w)^+(\delta_a-\delta_b))}.
 The reciprocal is the energy of #{v}, which is the kept form
 of #{u}.}
 }

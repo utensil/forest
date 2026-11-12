@@ -17,20 +17,21 @@
 ##{(c_VD^*c_E^{-1})(u_0,u_1,u_2,u_3)
   =(u_3-u_0,u_0-u_1,u_1-u_2,u_2-u_3).}
 The weight map has array #{c_EW_tc_E^{-1}=\operatorname{diag}(1,t,1,t)}.
-First multiply by #{W_t}, then apply #{D^*}. The resulting
-#{L_t=D^*W_tD} has coordinate matrix
+First multiply by #{W_t}, then apply #{D^*}. The Laplacian is the
+negative of that return, so
+#{L_t=-D^*W_tD} has coordinate matrix
 ##{A_t=c_VL_tc_V^{-1}=\begin{pmatrix}
-1+t&-1&0&-t\\
--1&1+t&-t&0\\
-0&-t&1+t&-1\\
--t&0&-1&1+t
+-(1+t)&1&0&t\\
+1&-(1+t)&t&0\\
+0&t&-(1+t)&1\\
+t&0&1&-(1+t)
 \end{pmatrix}.}}
-\p{For example, its first coordinate is
+\p{For example, the first coordinate of #{-L_t} is
 #{t(a-d)-(b-a)=(1+t)a-b-td}; the other coordinates follow from
 the same return formula. Thus
-##{c_VL_t\delta_0=(1+t,-1,0,-t),\qquad L_t\mathbf1=0,}
+##{c_VL_t\delta_0=(-(1+t),1,0,t),\qquad L_t\mathbf1=0,}
 and the counting energy is
-##{\langle f,L_tf\rangle=f_c^TA_tf_c
+##{\langle f,(-L_t)f\rangle=f_c^T(-A_t)f_c
 =(b-a)^2+t(c-b)^2+(d-c)^2+t(a-d)^2.}
 The counting adjoint #{D^*} does not depend on #{t}. The weighted
 return map #{D^*W_t}, and hence #{L_t}, do. When #{t=1} the two

@@ -5,7 +5,7 @@
 \title{Counting and spectral arrays of a Green operator}
 \date{2026-11-10}
 
-\p{For the [massive precision](fdip-000A) #{Q_m=L+m^2I},
+\p{For the [massive precision](fdip-000A) #{Q_m=m^2I-L},
 put #{n=|V|} and choose an ordering, a bijection
 #{b:\{1,\ldots,n\}\to V}, of the vertices.
 The counting chart #{C:X_V\to\mathbb R^n} from \ref{fdip-002J}
@@ -20,7 +20,7 @@ evaluating at #{i}. Thus the Green-kernel evaluations give precisely
 the entries in this declared counting basis.}
 
 \p{By the real spectral theorem \ref{fdip-002R}, choose an
-orthonormal eigenbasis #{u_a} of #{L}, with eigenvalues
+orthonormal eigenbasis #{u_a} of #{-L}, with eigenvalues
 #{\lambda_a\ge0}. The energy identity in \ref{fdip-0008} proves
 this inequality by evaluation on each unit eigenvector.
 Put #{q_a=\lambda_a+m^2>0} and #{v_a=Cu_a}. In the chosen chart,
@@ -43,7 +43,7 @@ zero-dimensional endomorphism is its identity and inverse.}
 
 \p{The spectral calculation uses
 \citet{Section A.5.2, pp. 646-647}{boyd2004convex}; the graph
-energy supplies nonnegative eigenvalues, and #{m>0} makes the
+energy supplies nonnegative eigenvalues of #{-L}, and #{m>0} makes the
 shifted eigenvalues positive. Mathlib's \leanref{Matrix.PosDef.isUnit}
 proves invertibility of a positive definite matrix, and
 \leanref{Matrix.PosDef.inv} proves positivity of its inverse.

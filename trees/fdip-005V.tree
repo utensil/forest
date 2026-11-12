@@ -10,7 +10,7 @@
 component, including isolated vertices. Write #{R} for these roots
 and #{r=|R|}. Loops cannot occur, and distinct parallel labels count
 as distinct choices. With the data of \ref{fdip-005R},
-##{\det(L_w+m^2I)
+##{\det(m^2I-L_w)
  =\sum_{(F,R)}\left(\prod_{e\in F}w_e\right)m^{2|R|}.}
 Normalize these nonnegative terms to obtain a probability law on
 rooted spanning forests. It satisfies
@@ -21,7 +21,7 @@ rooted spanning forests. It satisfies
 \end{aligned}}
 If the positive-weight support is connected, with weighted
 spanning-tree sum #{\tau_w}, then
-##{\det(L_w+m^2I)=n\tau_wm^2+O(m^4)
+##{\det(m^2I-L_w)=n\tau_wm^2+O(m^4)
  \qquad(m\downarrow0).}
 Thus the spanning-tree coefficient appears after division by
 #{m^2}; the unscaled determinant tends to zero.}
@@ -32,7 +32,7 @@ bases of the \vocabk{counting inner products}{fdip-0002}.
 Form the #{n\times(|E|+n)} matrix whose
 columns are the coordinates of #{\sqrt{w_e}d_e} for edges and of
 #{m\delta_v} for vertices.
-Call it #{A}; then #{AA^T=L_w+m^2I}. Cauchy-Binet expresses
+Call it #{A}; then #{AA^T=m^2I-L_w}. Cauchy-Binet expresses
 its determinant as the sum of the squared #{n\times n} minors.
 A chosen minor consists of edge columns #{F} and vertex columns
 #{R}, with #{|F|+|R|=n}. A cycle in #{F} makes its incidence
@@ -72,7 +72,7 @@ terms have at least two roots and hence order #{t^2}.}
 weight #{m^2} to each old vertex. Attach #{*} to the chosen root
 of each forest component; this is a bijection to spanning trees
 of the augmented graph. Its Dirichlet Laplacian at #{*} is
-#{L_w+m^2I}. This is the trivial-connection case of Kenyon's
+#{m^2I-L_w}. This is the trivial-connection case of Kenyon's
 boundary theorem: cycle factors vanish, leaving trees rooted at
 the boundary \citet{Theorem 7, Section 8, p. 15}{kenyon2011spanning}.
 The conductance extension is given in

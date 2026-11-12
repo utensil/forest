@@ -11,8 +11,8 @@ under the [positive-scaling Laplacian comparison](fdip-003H)
 Use the \vocabk{trace ratio}{fdip-003H}
 ##{R(L)=\frac{\operatorname{tr}(L^2)}{(\operatorname{tr}L)^2},}
 where the trace is the [intrinsic endomorphism trace](fdip-003G).
-The positive graph energy gives a nonzero positive-semidefinite #{L_t}
-for #{t>0}, so its trace is positive and the ratio is defined.
+The positive graph energy gives a nonzero positive-semidefinite operator
+#{-L_t} for #{t>0}, so the trace of #{L_t} is nonzero and the ratio is defined.
 The cited proposition proves invariance by trace conjugacy and scalar
 cancellation. It compares counting-relative operators, not bilinear-form
 arrays under arbitrary congruence.}
@@ -24,9 +24,9 @@ basis; the following traces and comparisons are direct computations.}
 
 \p{For the [alternating four-cycle](fdip-0003), #{t>0}, the
 [orthonormal spectral basis](fdip-0037) gives eigenvalues
-#{0,2,2t,2+2t}, including at #{t=1}. Consequently
+#{0,-2,-2t,-(2+2t)}, including at #{t=1}. Consequently
 ##{\begin{aligned}
-\operatorname{tr}L_t&=4(1+t),\\
+\operatorname{tr}L_t&=-4(1+t),\\
 \operatorname{tr}(L_t^2)
  &=4+4t^2+4(1+t)^2\\
  &=8(t^2+t+1),\\
@@ -46,7 +46,7 @@ backgrounds.}
 \p{The reciprocal identity #{R(t)=R(1/t)} is consistent with this
 comparison. A one-step rotation #{p(i)=i+1\pmod4} exchanges the
 alternating edge weights #{1,t} and leaves the common diagonal
-#{1+t} unchanged. Its coordinate permutation therefore satisfies
+#{-(1+t)} unchanged. Its coordinate permutation therefore satisfies
 ##{PL_tP^T=tL_{1/t}.}
 Since #{1/t>0}, the reciprocal Laplacians are equivalent under
 #{\approx}. Their equal ratios do not demonstrate a failure of
@@ -86,7 +86,7 @@ every relabeling; the trace ratio already established the broader
 inequivalence.}
 
 \p{Scale invariance of #{R} does not mean equality of fixed-mass
-states. On an eigenvector of #{L} with eigenvalue #{\lambda>0},
+states. On an eigenvector of #{-L} with eigenvalue #{\lambda>0},
 replacing #{L} by #{cL} changes the covariance eigenvalue from
 #{1/(\lambda+m^2)} to #{1/(c\lambda+m^2)} when #{c\ne1}.
 Scaling all of #{Q} instead gives covariance #{c^{-1}G} and
@@ -97,5 +97,5 @@ from an environment to the parameter #{t}.}
 
 \p{The trace identities and their formalization correspondence are
 at \ref{fdip-003G} and \ref{fdip-003H}. Their unit-domain hypotheses
-specialize here to positive real trace; the values and normalized
+specialize here to the positive real trace of #{-L_t}; the values and normalized
 expectation comparisons above are additional cycle calculations.}
