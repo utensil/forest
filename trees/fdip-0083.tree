@@ -5,37 +5,46 @@
 \title{Gauge projection and periodic-time traces}
 \date{2026-11-01}
 
-\p{For the [spatial transfer data](fdip-007Z), normalized gauge
-averaging is the orthogonal projection
-##{\begin{aligned}
-(Pf)(U)&=\int_K f(h^{-1}\cdot U)\,dh,\\
-\mathcal H_{\mathrm{phys}}
- &=\{f:R_hf=f\text{ for every }h\in K\}=P\mathcal H_{\mathrm{link}}.
-\end{aligned}}
-This defines the \newvocab{physical Hilbert space} of neutral
-states. The restriction #{T_{\mathrm{phys}}=T|_{\mathcal H_{\mathrm{phys}}}}
-is positive, injective and trace class. It is nonzero since constants
-belong to #{\mathcal H_{\mathrm{phys}}}. For every integer #{N\ge1},
-##{Z_N=\operatorname{Tr}_{\mathrm{phys}}T_{\mathrm{phys}}^N
- =\operatorname{Tr}_{\mathrm{link}}(PT^N)>0.}
-The gauge projector is part of the periodic trace.}
+\p{For a finite truncation #{k_F} of
+[Spatial link fields and their transfer kernel](fdip-007Z),
+with #{F} nonempty and closed
+under dual representations, let #{b} and #{T_F} be the
+half-weight and truncated transfer operator of that definition.
+For bounded Borel #{f:X\to\mathbb C}, the gauge average is
+##{(Pf)(U)=\int_K f(h^{-1}\cdot U)\,dh.}
+The matrix coefficients of representations in #{F}, one factor
+on each edge, are a finite set #{\mathcal I_F}. For
+#{f} bounded and Borel,
+##{(T_Ff)(U)=\sum_{I\in\mathcal I_F}\alpha_I
+ b(U)\phi_I(U)\int_X b\overline{\phi_I}f\,dU,
+ \qquad \alpha_I=\prod_{e\in E_s}a_{\rho_e}>0,}
+and #{\sum_{I\in\mathcal I_F}\alpha_I=\kappa_F^{|E_s|}}.
+This is a finite sum of integrals. The gauge average preserves
+the span of these coefficients. The operator #{S_F}, given by
+#{P}, then #{T_F}, then #{P}, has finite rank. Its trace is the
+matrix trace on the span of the functions #{P(b\phi_I)}.}
 
-\p{There is an explicit lattice integral for #{Z_N}. Put
-#{U_N=U_0}, take independent variables
-#{U_j\in X} and #{h_j\in K} for #{0\le j<N}, and define
+\p{For every integer #{N\ge1}, put #{U_N=U_0} and take
+independent variables #{U_j\in X} and #{h_j\in K} for
+#{0\le j<N}. Define
 ##{\begin{aligned}
 B_{j,e}&=U_{j,e}h_{j,s(e)}U_{j+1,e}^{-1}h_{j,t(e)}^{-1},\\
-\mathcal W_N(U,h)&=
- \prod_{j=0}^{N-1}e^{-V(U_j)}
- \prod_{j=0}^{N-1}\prod_{e\in E_s}k(B_{j,e}).
+\mathcal W_N(F)
+ &=\prod_{j=0}^{N-1}e^{-V(U_j)}
+ \prod_{j=0}^{N-1}\prod_{e\in E_s}k_F(B_{j,e}).
 \end{aligned}}
-Then, with normalized product Haar measures,
-##{Z_N=\int_{X^N\times K^N}\mathcal W_N(U,h)\,dU\,dh.}
-Thus #{Z_N^{-1}\mathcal W_N\,dU\,dh} is a probability law.
-The temporal link #{h_{j,v}} transports from time #{j+1} back
-to time #{j}. For #{N=1,2}, the formula retains the indexed
-temporal steps; it does not identify them with edges of an ordinary
-simple cycle.}
+With normalized product Haar measures,
+##{Z_N(F)=\int_{X^N\times K^N}\mathcal W_N(F)\,dU\,dh
+ =\operatorname{Tr}(S_F^N).}
+This is a finite identity. If #{|E_s|\ge1}, then for every finite
+#{F'} properly containing #{F}, with the same dual closure and
+##{M=N|E_s|,\qquad
+ \varepsilon_{F',F}=\kappa_{F'}-\kappa_F,}
+the truncations satisfy
+##{|Z_N(F')-Z_N(F)|
+ \le\|b\|_\infty^{2N}M\kappa_{F'}^{M-1}\varepsilon_{F',F}.}
+If #{E_s} is empty, the kernel product is #{1} and
+#{Z_N(F)} does not depend on #{F}.}
 
 \p{For independent gauge changes #{g_j\in K}, with #{g_N=g_0},
 the transformations are
@@ -44,78 +53,65 @@ U_j&\longmapsto g_j\cdot U_j,\\
 h_{j,v}&\longmapsto g_{j,v}h_{j,v}g_{j+1,v}^{-1}.
 \end{aligned}}
 Each #{B_{j,e}} is conjugated by #{g_{j,t(e)}}. Therefore the
-weight and measure are invariant. If #{f_j:X\to\mathbb C}
-are bounded measurable gauge-invariant functions, multiplication
-by #{f_j} preserves #{\mathcal H_{\mathrm{phys}}}, and
+truncated weight and the measure are invariant. If
+#{f_j:X\to\mathbb C} are bounded measurable gauge-invariant
+functions and #{Z_N(F)\ne0}, multiplication by #{f_j} preserves
+the gauge-invariant bounded functions, and
 ##{\mathbb E_N\prod_{j=0}^{N-1}f_j(U_j)
- =\frac{\operatorname{Tr}_{\mathrm{phys}}
- (M_{f_0}T_{\mathrm{phys}}\cdots M_{f_{N-1}}T_{\mathrm{phys}})}{Z_N}.}
+ =\frac{1}{Z_N(F)}
+ \int_{X^N\times K^N}
+ \prod_{j=0}^{N-1}f_j(U_j)\,\mathcal W_N(F)\,dU\,dh.}
 This is a finite periodic-time identity for the specified spatial
-observables, with the temporal links integrated as above.}
+observables, with the temporal links integrated as above. For
+#{N=1,2}, the formula retains the indexed temporal steps; it
+does not identify them with edges of an ordinary simple cycle.}
 
 \proof{
-\p{Fubini and Jensen define #{P} on #{L^2} and give
-#{\|P\|\le1}. Haar invariance gives #{P^2=P}; inversion of
-#{h} gives #{P^*=P}. Translating the averaging variable shows
-that its image is fixed by each #{R_h}, while averaging a fixed
-vector leaves it unchanged. These are Hilbert-space equalities;
-no common pointwise representative for all group elements is
-required. By \ref{fdip-0080}, #{T} commutes with #{P}.
-Its restriction is therefore positive and trace class, and
-#{\langle f,Tf\rangle>0} for nonzero physical #{f} proves
-injectivity there. Set #{S=PT=PTP} on the full link space.
-It acts as #{T_{\mathrm{phys}}} on the physical space and as
-zero on its orthogonal complement, so
-#{S^N=PT^N} has the asserted physical trace.}
+\p{The one-edge identity
+##{k_F(UU'^{-1})=\sum_{\rho\in F}\sum_{i,j}
+ a_\rho\phi_{\rho ij}(U)\overline{\phi_{\rho ij}(U')}}
+is a finite sum: #{\phi_{\rho ij}=\sqrt{d_\rho}\rho(\cdot)_{ij}}
+and the matrix-entry sum equals #{d_\rho\chi_\rho(UU'^{-1})}.
+The tensor product over the finitely many edges is the displayed
+finite sum, and summing #{\alpha_I} factors as
+#{\kappa_F^{|E_s|}}. Conjugation by a vertex gauge element stays
+inside the matrix coefficients of the same representation, so
+#{P} preserves their span.}
 
-\p{Averaging the first variable of the kernel of #{T} gives the
-bounded Borel kernel of #{S}, continuous when #{V} is continuous:
-##{L(U,U')=b(U)b(U')\int_K
- \prod_e k(U_eh_{s(e)}U_e'^{-1}h_{t(e)}^{-1})\,dh.}
-To obtain this expression, use invariance of #{b} and move
-#{h_{t(e)}^{-1}} from the front of the kernel argument to its
-end by centrality. Every factor is strictly positive.}
+\p{Averaging the first variable of the kernel of #{T_F} gives
+the bounded Borel kernel of #{S_F}:
+##{L_F(U,U')=b(U)b(U')\int_K
+ \prod_e k_F(U_eh_{s(e)}U_e'^{-1}h_{t(e)}^{-1})\,dh.}
+Centrality moves #{h_{t(e)}^{-1}} from the front of each kernel
+argument to its end. The integral pairing
+#{\int_X\overline f g\,dU} makes #{P} symmetric on bounded
+functions, so #{S_F} expands as the finite sum with vectors
+#{P(b\phi_I)}. Because the sum over #{\mathcal I_F} is finite,
+the matrix trace is the corresponding finite diagonal sum
+##{\operatorname{Tr}S_F
+ =\sum_{I\in\mathcal I_F}\alpha_I\int_X|P(b\phi_I)|^2\,dU
+ =\int_XL_F(U,U)\,dU.}
+For #{N\ge2} the same finite sum, iterated along a cycle of
+length #{N}, equals both #{\operatorname{Tr}(S_F^N)} and the
+integral of #{\prod_j L_F(U_j,U_{j+1})}. Expanding each
+#{L_F} with an independent #{h_j} produces
+#{\mathcal W_N(F)}, because the two adjacent factors
+#{b(U_j)} combine to #{e^{-V(U_j)}}. Taking every test
+function equal to #{1} proves the partition identity.}
 
-\p{The diagonal trace formula, including the case #{N=1}, can
-be justified directly. The rank-one expansion in \ref{fdip-0080}
-gives
-##{S=\sum_I\alpha_I
- |P(b\phi_I)\rangle\langle P(b\phi_I)|}
-in trace norm. Its kernel expansion converges uniformly when
-summed over finite sets of representation blocks. For one edge,
-unitarity gives
-##{\sum_{i,j}|\phi_{\rho ij}(U)|^2=d_\rho^2.}
-For the finite edge product, the diagonal sum over a tail of blocks
-is therefore the corresponding tail of
-#{\sum_I\alpha_I=\kappa^{|E_s|}}, uniformly in #{U}.
-Cauchy–Schwarz gives the same bound off the diagonal.
-Multiplying by the bounded Borel factors #{b(U)b(U')} costs
-at most #{\|b\|_\infty^2} in this tail bound; normalized gauge
-averaging in both variables cannot increase it. Thus uniform
-convergence survives without continuity of #{b}. Integrating the diagonal term by
-term consequently gives
-##{\int_XL(U,U)\,dU
- =\sum_I\alpha_I\|P(b\phi_I)\|_2^2
- =\operatorname{Tr}S.}
-Multiplication by a bounded function permits the same argument
-for #{\operatorname{Tr}(M_fS)}.}
+\p{For the truncation bound, #{|k_F|\le\kappa_F\le\kappa_{F'}}
+and #{|k_{F'}-k_F|\le\varepsilon_{F',F}}. The weight
+#{\mathcal W_N} contains #{M} kernel factors and a potential
+factor at most #{\|b\|_\infty^{2N}}. Telescoping the product of
+#{M} bounded factors gives the displayed majorant. Normalized
+Haar measure is a probability, so the integrals obey the same
+bound. If #{E_s} is empty there are no kernel factors.}
 
-\p{For #{N\ge2}, the Hilbert–Schmidt kernel trace identity of
-\ref{fdip-007V} gives
-##{\operatorname{Tr}(M_{f_0}S\cdots M_{f_{N-1}}S)
- =\int_{X^N}\prod_j f_j(U_j)L(U_j,U_{j+1})\,dU.}
-All kernels are bounded on compact spaces, so repeated integrals
-are absolutely convergent. The same formula for #{N=1} was
-proved by the diagonal expansion. Gauge-invariant multiplication
-commutes with #{P}; hence this full-space trace equals the
-physical-space trace in the statement. Expanding each #{L} with
-an independent #{h_j} gives #{\mathcal W_N}, because the two
-adjacent factors #{b(U_j)} combine to #{e^{-V(U_j)}}.
-Taking every #{f_j=1} proves the partition function; general
-#{f_j} prove the expectation identity. The weight's finite upper
-bound and positive lower bound give #{0<Z_N<\infty}. The displayed
-gauge transformation conjugates #{B_{j,e}} by direct cancellation,
-which proves the final invariance assertion.}
+\p{The gauge transformation conjugates #{B_{j,e}} by direct
+cancellation, which proves the invariance assertion. A
+gauge-invariant bounded function factors out of the #{h_j}
+integrals, and the ratio of integrals is the displayed
+expectation.}
 }
 
 \texfig{\begin{tikzpicture}[
@@ -138,3 +134,25 @@ then along the top. With the [transport order](fdip-006N), the
 first transport acts on the right and the product is exactly
 #{B_{j,e}}. Temporal averaging is retained at every step, so no
 periodic gauge-fixing assumption removes #{P}.}
+
+\p{Remark. Continuum comparison. The convergent series and the
+#{L^2} setting are not the statement above. On the
+\vocabk{link Hilbert space}{fdip-007Z}, normalized gauge
+averaging is the orthogonal projection onto
+##{\mathcal H_{\mathrm{phys}}
+ =\{f:R_hf=f\text{ for every }h\in K\}
+ =P\mathcal H_{\mathrm{link}},}
+the \newvocab{physical Hilbert space}. For a kernel #{k} in the continuum comparison of
+[Spatial link fields and their transfer kernel](fdip-007Z),
+the restriction
+#{T_{\mathrm{phys}}} is positive, injective and trace class, and
+##{Z_N=\operatorname{Tr}_{\mathrm{phys}}T_{\mathrm{phys}}^N
+ =\operatorname{Tr}_{\mathrm{link}}(PT^N)>0.}
+The rank-one expansion of \ref{fdip-0080} writes this operator
+as a series over all representation blocks. Its kernel expansion
+converges uniformly on finite sets of blocks, and the tail is the
+corresponding tail of #{\sum_I\alpha_I=\kappa^{|E_s|}}. The
+Hilbert–Schmidt trace identity of \ref{fdip-007V} identifies the
+untruncated periodic trace with the lattice integral of the
+untruncated weight. The finite identities above are the partial
+sums of that comparison.}
