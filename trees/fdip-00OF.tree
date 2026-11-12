@@ -1,0 +1,62 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{Column cocycles compute the torus cohomology}
+\date{2026-11-12}
+
+\p{Let #{d\ge 1} and #{N\ge 1}, and let
+#{X=(\mathbb{Z}/N\mathbb{Z})^d}. The edge #{e_i(x)} runs from #{x}
+to #{x+\varepsilon_i}. For #{i<j} the square #{\sigma_{ij}(x)} has
+boundary
+##{e_i(x)+e_j(x+\varepsilon_i)-e_i(x+\varepsilon_j)-e_j(x).}
+Let #{V} be a module over the commutative unital ring #{k}. A
+cochain assigns to each edge an element of #{V}, and
+##{(\delta X)(e_i(x))=X(x+\varepsilon_i)-X(x).}
+Its coboundary on a square is the displayed combination. The
+#{i}-period is the sum along one coordinate cycle in direction
+#{i}. For a cocycle that period is independent of the other
+coordinates, and every coboundary has period #{0}. The period map
+is an isomorphism from the quotient of cocycles by coboundaries
+onto #{V^d}.}
+
+\p{The column cocycle #{c_i^v} equals #{v} on each edge #{e_i(y)}
+with #{y_i=0}, and equals #{0} on every other edge. It is a
+cocycle of #{i}-period #{v} and of period #{0} in the other
+directions. The inverse of the period map sends
+#{(v_1,\ldots,v_d)} to the class of #{\sum_i c_i^{v_i}}.}
+
+\p{Fix #{\epsilon_i\in V}. The cochain with value #{\epsilon_i} on
+every edge of direction #{i} has #{i}-period #{N\epsilon_i}, so its
+class is that of the column cocycle labeled by #{N\epsilon_i}. It
+is a coboundary exactly when every #{N\epsilon_i} is #{0}.
+\ref{fdip-008Z} divides an invariant field by the side lengths over
+#{\mathbb{R}}. The period map here does not divide by #{N}. A
+closed cochain is pure gauge, in the sense of \ref{fdip-00OE},
+exactly when its class is zero.}
+
+\proof{
+\p{For #{d=1} the period is the sum around the only cycle. For
+#{d\ge 2}, the square relation rearranges to
+##{a(e_i(x))-a(e_i(x+\varepsilon_j))
+=a(e_j(x))-a(e_j(x+\varepsilon_i)).}
+Summing around the #{i}-cycle makes the left side the difference of
+the periods at #{y} and at #{y+\varepsilon_j}. The right side
+cancels, so each period is a constant #{p_i(a)}. A coboundary sums
+to #{0} on a closed path.}
+
+\p{\ref{fdip-00OI} makes a cocycle of period #{0} a coboundary. For
+#{d=1}, #{c_1^v} is the value #{v} on the seam edge. For #{d\ge 2},
+the two edges of direction #{i} on a square have the same
+#{i}-coordinate, and the boundary gives them opposite signs, so the
+square sum vanishes. The #{i}-cycle meets the seam once. Another
+coordinate cycle meets no seam edge of direction #{i}. Thus
+#{a-\sum_i c_i^{p_i(a)}} has period #{0} and is a coboundary. The
+period map is an isomorphism.}
+
+\p{On a square the invariant cochain contributes
+#{\epsilon_i+\epsilon_j-\epsilon_i-\epsilon_j=0}. Its #{i}-period
+is #{N} copies of #{\epsilon_i}. Equal periods give the same class,
+and replacing the label #{v} by #{Nv} multiplies that class by
+#{N}.}
+}

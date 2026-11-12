@@ -1,0 +1,37 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Lemma}
+\title{Vanishing periods are coboundaries}
+\date{2026-11-12}
+
+\p{On the torus of \ref{fdip-00OF}, a cocycle whose periods all vanish
+is the coboundary of a vertex cochain.}
+
+\proof{
+\p{On a cycle, #{d=1}, there are no squares. Set #{X(0)=0} and
+#{X(t+1)=X(t)+a(e_1(t))}. The value at #{t=N} equals the period.
+That period is #{0}, so #{X} descends to the cycle and has
+coboundary #{a}.}
+
+\p{Suppose the statement is known in dimension #{d-1}, and let #{a}
+be a cocycle on the #{d}-torus with every period #{0}. At each fixed
+last coordinate #{t}, the edges of directions #{1} through #{d-1}
+form a cocycle on a torus of dimension #{d-1}. Its periods equal the
+global periods, hence vanish. The inductive hypothesis supplies
+#{f_t} on that slice with #{f_t(0)=0} and with coboundary equal to
+the slice of #{a}. Set
+##{\eta(y,t)=a(e_d(y,t))-\bigl(f_{t+1}(y)-f_t(y)\bigr).}
+The square in directions #{i} and #{d} rearranges to
+##{a(e_d(y+\varepsilon_i,t))-a(e_d(y,t))
+=a(e_i(y,t+1))-a(e_i(y,t)).}
+The right side equals the same difference of slice coboundaries, so
+#{\eta(y+\varepsilon_i,t)=\eta(y,t)}. Thus #{\eta} depends only on
+#{t}. The normalization #{f_t(0)=0} makes that value equal to
+#{a(e_d(0,t))}. The sum over #{t} is the last period, which is
+#{0}, so the cycle case supplies #{c} with
+#{c(t+1)-c(t)=a(e_d(0,t))}. For #{X(y,t)=f_t(y)+c(t)} the slice
+directions reproduce #{a}, and the last direction reproduces #{a}
+because
+#{f_{t+1}(y)-f_t(y)+a(e_d(0,t))=a(e_d(y,t))}.}
+}

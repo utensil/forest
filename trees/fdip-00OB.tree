@@ -1,0 +1,67 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{Affine links form a group}
+\date{2026-11-12}
+
+\p{Let #{k} be a commutative unital ring, let #{V} be a #{k}-module,
+and let #{q} be a quadratic form on #{V}. Write
+#{\operatorname{Cl}(q)} for the Clifford algebra of \ref{fdip-000P}.
+The sign map on #{V} and the reversal of products extend, by the
+universal property recorded in \ref{fdip-00O5}, to an automorphism
+#{\alpha} and to an anti-automorphism. Write #{\tilde{R}} for the
+image of an element #{R} under that anti-automorphism. The Clifford
+group #{\Gamma} consists of the units #{u} satisfying
+#{\alpha(u)\,V\,u^{-1}=V}. For #{R\in\Gamma} and #{c\in V} set
+##{\rho(R)c=\alpha(R)\,c\,R^{-1}.}
+The value lies in #{V}. The product of pairs #{(R,a)} and #{(S,c)},
+with #{R,S\in\Gamma} and #{a,c\in V}, is
+##{(R,a)(S,c)=(RS,\,a+\rho(R)c).}
+These pairs form a group. The identity is #{(1,0)}, and
+##{(R,a)^{-1}=\bigl(R^{-1},\,-\rho(R^{-1})a\bigr).}
+The map #{\rho} is a group homomorphism. Every unit #{\lambda\in k},
+read as a scalar of #{\operatorname{Cl}(q)}, lies in #{\Gamma} and
+satisfies #{\rho(\lambda)=\operatorname{id}}.}
+
+\p{If #{\alpha(R)=R} and #{R\tilde{R}=1}, then
+#{\rho(R)c=Rc\tilde{R}} for every #{c\in V}, and the product above
+adds #{Rc\tilde{R}}. The relation #{R\tilde{R}=1} does not by itself
+give that identity. Take #{V=\mathbb{Z}} with #{q(n)=n^2}, and let
+#{v=1} be the generator. Then #{v^2=1}, so #{v} is a unit,
+#{\tilde{v}=v}, and #{v\tilde{v}=1}. The automorphism sends #{v} to
+#{-v}, and
+##{\rho(v)c=-c,\qquad vc\tilde{v}=c.}
+These two vectors differ whenever #{2c\neq 0}.}
+
+\proof{
+\p{The universal property supplies #{\alpha} and the
+anti-automorphism, as in \ref{fdip-00O5}. Since #{\alpha} is an
+algebra automorphism, #{\alpha(RS)=\alpha(R)\alpha(S)}. Thus
+##{\rho(RS)c=\alpha(R)\bigl(\alpha(S)\,c\,S^{-1}\bigr)R^{-1}
+=\rho(R)\rho(S)c.}
+In particular #{\rho(1)=\operatorname{id}} and
+#{\rho(R^{-1})=\rho(R)^{-1}}. A scalar unit #{\lambda} is fixed by
+#{\alpha} and is central, so
+#{\rho(\lambda)c=\lambda c\lambda^{-1}=c}. The same scalar satisfies
+#{\alpha(\lambda)V\lambda^{-1}=V}, so it lies in #{\Gamma}.}
+
+\p{The product of three pairs #{(R,a)}, #{(S,c)} and #{(T,e)} has
+rotational component #{RST} in either association. The translational
+component is #{a+\rho(R)c+\rho(RS)e} on one side and
+#{a+\rho(R)\bigl(c+\rho(S)e\bigr)} on the other. The homomorphism
+property makes the two sums equal. The displayed inverse multiplies
+with #{(R,a)} to #{(1,0)} on either side. The pairs therefore form
+a group.}
+
+\p{If #{\alpha(R)=R} and #{R\tilde{R}=1}, then #{\tilde{R}} is a
+right inverse of the unit #{R}, hence #{\tilde{R}=R^{-1}}.
+Substitution gives #{\rho(R)c=Rc\tilde{R}}.}
+
+\p{On #{\mathbb{Z}} with #{q(n)=n^2}, the generator #{v} satisfies
+#{v^2=q(v)=1}. Reversion fixes #{V}, so #{\tilde{v}=v} and
+#{v^{-1}=v}. Then #{\alpha(v)=-v}. Every element of #{V} has the
+form #{c=nv}. Hence #{vcv=nv^3=nv=c}, while
+#{\rho(v)c=(-v)cv=-c}. Both values lie in #{V}, so #{v\in\Gamma}.
+For #{c=v} they are #{-v} and #{v}.}
+}

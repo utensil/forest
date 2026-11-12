@@ -1,0 +1,64 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{Pure gauge means trivial holonomy}
+\date{2026-11-12}
+
+\p{Let #{K} and the affine connection #{g} be those of
+\ref{fdip-00OC}. The connection is pure gauge when there is a
+vertex assignment #{h} with
+##{g_e=h_{h(e)}\,h_{s(e)}^{-1}}
+on every oriented edge. By \ref{fdip-006F}, this happens exactly
+when the holonomy of every closed path is the identity pair
+#{(1,0)}. Equivalently, every attaching walk has identity holonomy,
+and the holonomies of a generating set of based loops for the
+fundamental group of #{K} are the identity. On a rectangle, the
+boundary product of \ref{fdip-0093} is the identity whenever every
+plaquette holonomy is the identity.}
+
+\p{Suppose #{R_e=1} on every edge. Path composition then adds the
+translational components. The connection is pure gauge exactly when
+those components are the coboundary of a vertex cochain #{X} with
+values in #{V},
+##{a_e=X(h(e))-X(s(e)).}
+Equivalently, the sum of #{a} around every square vanishes, and the
+sum of #{a} around each cycle in a generating set of
+#{H_1(K;\mathbb{Z})} vanishes. A constant gauge #{(S,0)} replaces
+#{a} by #{\rho(S)a}. A translation gauge changes #{a} by a
+coboundary. In this sector the quotient by the full gauge group is
+the quotient of the closed cochains, modulo coboundaries, by the
+global action #{[a]\mapsto[\rho(S)a]}.}
+
+\proof{
+\p{\ref{fdip-006F} places a connection in the pure-gauge orbit
+exactly when every closed-path holonomy is the identity.
+\ref{fdip-0093} writes a rectangle boundary as a product of
+conjugated plaquette holonomies, so identity plaquettes make that
+boundary the identity.}
+
+\p{With every #{R_e=1}, the product rule of \ref{fdip-00OB} gives
+#{(1,a)(1,c)=(1,a+c)}, and the inverse of #{(1,a)} is #{(1,-a)}.
+The sum of #{a} on the boundary of a square is the translational
+holonomy of that square. The sum of #{a} on a cellular boundary
+therefore vanishes once every square sum vanishes, and the sum on a
+closed path depends only on the class of that path in
+#{H_1(K;\mathbb{Z})}. Vanishing on a generating set implies
+vanishing on every closed path.}
+
+\p{Choose a spanning tree rooted at a vertex #{o}, as in
+\ref{fdip-006F}, and define #{X(o)=0}. Along the tree path from
+#{o} to a vertex #{x}, let #{X(x)} be the sum of the forward values
+of #{a}, with a sign change on an edge traversed against its
+orientation. If a tree edge runs from #{s} to #{h} in the direction
+away from the root, then #{X(h)=X(s)+a_e}. If the rooted path
+traverses that edge backwards, the inverse contributes #{-a_e} and
+the same difference #{a_e=X(h)-X(s)} results. For an edge outside
+the tree, the based loop that follows the tree to the source,
+crosses the edge and returns along the tree has sum
+#{X(s)+a_e-X(h)}. That sum is #{0}, so again
+#{a_e=X(h)-X(s)}. Thus #{a} is the coboundary of #{X}. A constant
+gauge #{(S,0)} fixes every rotational component that equals #{1}
+and replaces #{a_e} by #{\rho(S)a_e}. A gauge #{(1,\xi)} adds
+#{\xi(h(e))-\xi(s(e))}.}
+}
