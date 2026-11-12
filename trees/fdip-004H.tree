@@ -20,8 +20,8 @@ to real fields is #{g_{0,n}}.}
 cyclic shift, scaled nearest-neighbor Laplacian and precision by
 ##{\begin{aligned}
 (T_nf)_j&=f_{j+1},\\
-L_n&=n^2(2I-T_n-T_n^{-1}),\\
-Q_n&=\mu I+L_n,\qquad q_n(f)=g_{0,n}(f,Q_nf).
+L_n&=-n^2(2I-T_n-T_n^{-1}),\\
+Q_n&=\mu I-L_n,\qquad q_n(f)=g_{0,n}(f,Q_nf).
 \end{aligned}}
 Indices are taken modulo #{n}. These specialize the
 [cyclic shift](fdip-0009) and [difference energy](fdip-0014), with
@@ -31,7 +31,7 @@ Dirac square in \ref{fdip-000T}.}
 
 \p{Periodic reindexing gives #{T_n^*=T_n^{-1}} in the normalized
 pairing. Consequently
-##{\langle f,L_nf\rangle_n
+##{\langle f,-L_nf\rangle_n
 =n\sum_{j=0}^{n-1}|f_{j+1}-f_j|^2\geq0.}
 Thus #{Q_n\geq\mu I} and #{Q_n} is invertible, including on constant
 fields. This is the [positive precision](fdip-0004) convention with
