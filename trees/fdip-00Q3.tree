@@ -1,0 +1,43 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Example}
+\title{No reflection, and a negative weight}
+\date{2026-11-12}
+
+\p{Let #{G} be the graph on vertices
+#{\{0,1,2,3,4,5\}} with edges
+#{\{01,02,03,12,14,35\}}. Its bidirected graph, with every
+weight equal to #{1}, has trivial automorphism group. The
+identity fixes every edge, so the twisted form of
+\ref{fdip-00Q1} equals the derived form and reverses no
+direction.}
+
+\p{Separately, let two vertices be joined by one edge of
+weight #{w=-a} with #{a>0}, and let the precision be
+#{Q=\extd^\dagger W\extd+mI} with #{m>2a}. Then #{Q} is
+positive definite, but the swap of the two vertices is not
+reflection positive.}
+
+\proof{
+\p{The degrees in #{G} are #{3,3,2,2,1,1}. The leaf at #{4}
+meets a vertex of degree #{3}, and the leaf at #{5} meets a
+vertex of degree #{2}, so both leaves are fixed by every
+automorphism. The degree #{3} vertex adjacent to #{4} is then
+fixed, and so is the other degree #{3} vertex. The remaining
+two vertices are distinguished by adjacency to #{5}. Thus
+only the identity remains. A bidirected automorphism induces
+an automorphism of #{G}, so the bidirected graph is equally
+rigid.}
+
+\p{In the two-vertex example the precision matrix is
+##{Q=\begin{pmatrix}m-a&a\\a&m-a\end{pmatrix}.}
+Its determinant is #{m(m-2a)>0}, and both diagonal entries
+are positive, so #{Q} is positive definite. The covariance is
+a positive multiple of
+##{\begin{pmatrix}m-a&-a\\-a&m-a\end{pmatrix},}
+whose off-diagonal entry is negative. For the swap, the
+positive half may be taken to be one vertex. The coordinate
+function at that vertex pairs with its reflected copy by the
+off-diagonal covariance, which is negative.}
+}

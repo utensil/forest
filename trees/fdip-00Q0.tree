@@ -1,0 +1,59 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{A point reflection of two axes fails positivity}
+\date{2026-11-12}
+
+\p{On #{X=(\mathbb{Z}/6\mathbb{Z})^2}, give every nearest-neighbor
+edge weight #{1} and set the precision equal to
+#{Q=\extd^\dagger W\extd+I}. Let #{\theta(x,y)=(-x,-y)}. This
+involution reverses two axes. It is not reflection positive for
+the centered Gaussian of precision #{Q}.}
+
+\proof{
+\p{The 4 points fixed by #{\theta} are
+#{(0,0)}, #{(0,3)}, #{(3,0)} and #{(3,3)}. Put
+#{(1,0)} and #{(0,1)} in the positive half, and put exactly one
+point of every other pair #{(p,\theta p)} in that half. The
+function #{f=\phi_{(1,0)}-\phi_{(0,1)}} depends only on the
+positive half. Its reflected partner is
+#{\phi_{(5,0)}-\phi_{(0,5)}}. The Gaussian covariance is
+translation invariant, and the pairing of \ref{fdip-007M} equals
+##{2\bigl(c(2,0)-c(1,1)\bigr),}
+where #{c(z)} is the covariance at displacement #{z}.}
+
+\p{The characters #{\chi_k(x)=\exp(2\pi i k\cdot x/6)} diagonalize
+#{Q}. The eigenvalue at #{k=(k_1,k_2)} is
+##{\lambda(k)=5-2\cos(\pi k_1/3)-2\cos(\pi k_2/3),}
+and
+##{c(z)=\frac1{36}\sum_{k\in X}
+ \frac{\cos(2\pi k\cdot z/6)}{\lambda(k)}.}
+Every cosine of an integer multiple of #{\pi / 3} lies in
+#{\mathbb{Q}}. Group modes of equal cosine and equal
+eigenvalue, and record multiplicity, cosine, and eigenvalue.
+For displacement #{(2,0)} the groups are
+##{\begin{aligned}
+&(1,1,1),\ (2,-\tfrac12,2),\ (2,1,2),\\
+&(4,-\tfrac12,3),\ (2,-\tfrac12,4),\ (2,1,4),\\
+&(8,-\tfrac12,5),\ (2,1,5),\\
+&(2,-\tfrac12,6),\ (2,1,6),\\
+&(4,-\tfrac12,7),\ (2,-\tfrac12,8),\ (2,1,8),\\
+&(1,1,9).
+\end{aligned}}
+The sum of multiplicity times cosine over eigenvalue is
+#{2017/2520}, so #{c(2,0)=2017/90720}. For displacement
+#{(1,1)} the groups are
+##{\begin{aligned}
+&(1,1,1),\ (4,\tfrac12,2),\\
+&(2,-\tfrac12,3),\ (2,1,3),\ (4,-\tfrac12,4),\\
+&(6,-1,5),\ (4,\tfrac12,5),\ (4,-\tfrac12,6),\\
+&(2,-\tfrac12,7),\ (2,1,7),\ (4,\tfrac12,8),\\
+&(1,1,9).
+\end{aligned}}
+That sum is #{1517/1260}, so #{c(1,1)=1517/45360}. The
+pairing equals
+##{2\Bigl(\frac{2017}{90720}-\frac{3034}{90720}\Bigr)
+ =-\frac{113}{5040},}
+which is negative.}
+}
