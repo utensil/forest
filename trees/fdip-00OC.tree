@@ -1,0 +1,61 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{Torsion is a coset of translations}
+\date{2026-11-12}
+
+\p{Let #{K} be a connected
+\vocabk{finite cubical 2-complex}{fdip-006M}, and let each oriented
+edge carry a pair #{g_e=(R_e,a_e)} from the group of
+\ref{fdip-00OB}, with #{g_{\bar{e}}=g_e^{-1}}. A vertex gauge
+assigns a pair #{h_x=(S_x,\xi_x)} to each vertex. It acts by
+##{(hg)_e=h_{h(e)}\,g_e\,h_{s(e)}^{-1},}
+as for the \vocabk{plaquette holonomy}{fdip-006N}.
+The new pair has rotational component
+#{R'=S_{h(e)}R_eS_{s(e)}^{-1}} and translational component
+##{\xi_{h(e)}+\rho(S_{h(e)})a_e-\rho(R')\xi_{s(e)}.}
+Along a closed path based at a vertex #{v}, the same cancellation
+replaces the holonomy #{(R,b)} by its conjugate under #{h_v}. If
+#{h_v=(S,\xi)} and #{R'=SRS^{-1}}, the conjugate has translational
+component
+##{b'=\rho(S)b+\bigl(\operatorname{id}-\rho(R')\bigr)\xi.}
+A translation gauge, meaning #{S=1}, fixes #{R} and replaces #{b}
+by #{b+\bigl(\operatorname{id}-\rho(R)\bigr)\xi}. The class of #{b}
+in the quotient
+##{V/\bigl(\operatorname{id}-\rho(R)\bigr)V}
+is invariant under translation gauges. The quotient equals #{V}
+exactly when #{\rho(R)=\operatorname{id}}. Every scalar unit has
+that property, by \ref{fdip-00OB}, and the case #{R=-1} is
+\ref{fdip-00OD}. A constant gauge #{(S,0)} sends #{b} to
+#{\rho(S)b} and sends #{R} to #{SRS^{-1}}.}
+
+\p{The plaquette holonomy is the holonomy of the attaching walk of a
+square. Its translational component is the
+torsion of that square, read as a class in the quotient of its
+rotational component.}
+
+\proof{
+\p{The inverse in \ref{fdip-00OB} is
+#{h_s^{-1}=\bigl(S_s^{-1},-\rho(S_s^{-1})\xi_s\bigr)}. The product
+#{g_eh_s^{-1}} has rotational component #{R_eS_s^{-1}} and
+translational component
+#{a_e-\rho(R_eS_s^{-1})\xi_s}. Multiplying on the left by
+#{h_h=(S_h,\xi_h)} gives rotational component
+#{S_hR_eS_s^{-1}} and translational component
+#{\xi_h+\rho(S_h)a_e-\rho(S_hR_eS_s^{-1})\xi_s}, which is the
+displayed edge formula.}
+
+\p{On a closed path the successive vertex elements cancel, as in the
+path formula of \ref{fdip-006F}, and the holonomy is conjugated by
+the value at the base vertex. The same multiplication with
+#{h_v=(S,\xi)} gives rotational component #{SRS^{-1}} and
+translational component
+#{\rho(S)b+\xi-\rho(SRS^{-1})\xi}. For a translation gauge one has
+#{S=1} and #{R'=R}, so #{b'} differs from #{b} by
+#{\bigl(\operatorname{id}-\rho(R)\bigr)\xi}. The image of
+#{\operatorname{id}-\rho(R)} is the zero submodule exactly when
+#{\rho(R)=\operatorname{id}}, and the quotient is then #{V}. For a
+constant gauge one has #{\xi=0}, and the formula reduces to
+#{\rho(S)b} with rotational component #{SRS^{-1}}.}
+}
