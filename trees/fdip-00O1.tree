@@ -1,0 +1,40 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{Closed weights are the divergence-free ones}
+\date{2026-11-12}
+
+\p{Let #{k} be a commutative unital ring and let #{\Omega^1} be a
+free calculus of \ref{fdip-00NU} whose maximal prolongation has no
+#{2}-form, as the directed cycle of length at least #{3} does by
+\ref{fdip-00NZ}. A weight assigns #{w_{xy}\in k} to each edge. The
+\newvocab{weighted integral} of a #{1}-form
+#{\omega=\sum\omega_{xy}e_{xy}} is
+##{\int\omega=\sum_{x\to y}w_{xy}\omega_{xy}.}
+The integral is \newvocab{closed} when #{\int df=0} for every
+function #{f}. This holds if and only if, at every vertex, the sum
+of the weights on incoming edges equals the sum of the weights on
+outgoing edges. For the actions of \ref{fdip-00NT},
+##{\int f\omega-\int\omega f
+=\sum_{x\to y}w_{xy}\bigl(f(x)-f(y)\bigr)\omega_{xy}.}
+The difference vanishes for all #{f} and #{\omega} if and only if
+every weight is zero. A nonzero closed integral is therefore not an
+untwisted graded trace in the sense of \citef{connes1985ncg}. On
+the directed cycle the constant weight #{1} is closed, and the
+difference reduces to #{\sum_i\bigl(f(i)-f(i+1)\bigr)\omega_i}.}
+
+\proof{
+\p{Substitute #{df}. The coefficient of #{f(z)} in #{\int df} is
+the incoming sum at #{z} minus the outgoing sum at #{z}. The
+integral vanishes for every #{f} exactly when each of those
+coefficients is zero.}
+
+\p{Left multiplication by #{f} multiplies the coefficient on
+#{x\to y} by #{f(x)}, and right multiplication multiplies it by
+#{f(y)}. Their integrals differ by the displayed sum. Take
+#{\omega=e_{xy}} and #{f=\delta_x}. The sum reduces to #{w_{xy}}.
+Thus every coefficient vanishes. The constant weight on a directed
+cycle has one incoming edge and one outgoing edge at each vertex,
+so it is closed, and the same substitution gives the cycle formula.}
+}
