@@ -8,32 +8,32 @@
 \p{Keep the torus, the coboundary and the sign #{\sigma(i,I)} of
 \ref{fdip-00OK}, and the counting adjoint of \ref{fdip-00OL}.
 For a vertex function #{f} and a cochain #{\alpha},
-##{([d,f]\alpha)(c_I(x))
+##{([\covwedge,f]\alpha)(c_I(x))
 =\sum_{i\in I}(-1)^{\sigma(i,I)}
 a_i(x)\,\alpha(c_{I\setminus\{i\}}(x+\varepsilon_i)),}
-##{([d^\dagger,f]\alpha)(c_J(y))
+##{([\extdag,f]\alpha)(c_J(y))
 =\sum_{i\notin J}(-1)^{\sigma(i,J\cup\{i\})}
 \bigl(f(y-\varepsilon_i)-f(y)\bigr)
 \alpha(c_{J\cup\{i\}}(y-\varepsilon_i)).}
-In particular #{[D,f]=[d,f]+[d^\dagger,f]}.}
+In particular #{[\extD,f]=[\covwedge,f]+[\extdag,f]}.}
 
 \proof{
 \p{The coboundary of \ref{fdip-00OK} gives
-##{(d(f\cdot\alpha))(c_I(x))
+##{(\covwedge(f\cdot\alpha))(c_I(x))
 =\sum_{i\in I}(-1)^{\sigma(i,I)}
 \bigl(f(x+\varepsilon_i)\alpha(c_{I\setminus\{i\}}(x+\varepsilon_i))
 -f(x)\alpha(c_{I\setminus\{i\}}(x))\bigr).}
-Subtracting #{f(x)\,(d\alpha)(c_I(x))} cancels the second summand
+Subtracting #{f(x)\,(\covwedge\alpha)(c_I(x))} cancels the second summand
 against the unshifted term and leaves the first display.}
 
 \p{The same coboundary, summed against a cochain #{\gamma} and
 reindexed by #{y=x+\varepsilon_i} in the forward term, gives
-##{(d^\dagger\gamma)(c_J(y))
+##{(\extdag\gamma)(c_J(y))
 =\sum_{i\notin J}(-1)^{\sigma(i,J\cup\{i\})}
 \bigl(\gamma(c_{J\cup\{i\}}(y-\varepsilon_i))
 -\gamma(c_{J\cup\{i\}}(y))\bigr).}
 Apply this to #{f\cdot\alpha} and subtract
-#{f(y)\,(d^\dagger\alpha)(c_J(y))}. The unshifted term cancels,
+#{f(y)\,(\extdag\alpha)(c_J(y))}. The unshifted term cancels,
 and the remaining coefficient of the backward face is
 #{f(y-\varepsilon_i)-f(y)}.}
 }

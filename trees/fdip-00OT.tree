@@ -5,43 +5,48 @@
 \title{The counting operator retains scalar right multiplications}
 \date{2026-11-12}
 
-\p{Keep the counting operator #{D} of \ref{fdip-00OL} and the
+\p{Keep the counting operator #{\extD} of \ref{fdip-00OL} and the
 Clifford product transported to the exterior algebra by
 \ref{fdip-00OS}. For a fixed element #{a} of that algebra, the
 associated right multiplication acts on a torus cochain by
 multiplying its value at every vertex on the right by #{a}.
-Every right multiplication commutes with #{D} when #{N=1} or
+Every right multiplication commutes with #{\extD} when #{N=1} or
 #{N=2}. When #{N\ge 3}, a right multiplication commutes with
-#{D} exactly when #{a} is a scalar.}
+#{\extD} exactly when #{a} is a scalar.}
+
+\p{A difference along the step #{\varepsilon_i} is
+#{\varepsilon_i\cdot\cov}, in the sense of \ref{fdip-00PV}. The
+backward step is #{-\varepsilon_i}, and the backward difference
+is #{(-\varepsilon_i\cdot\cov)}.}
 
 \proof{
 \p{Write #{\varphi} for a cochain, valued in the exterior
 algebra, and write
-##{(\delta_i\varphi)(x)=\varphi(x+\varepsilon_i)-\varphi(x),}
-##{(\delta_i^\dagger\varphi)(x)=\varphi(x-\varepsilon_i)-\varphi(x).}
+##{((\varepsilon_i\cdot\cov)\varphi)(x)=\varphi(x+\varepsilon_i)-\varphi(x),}
+##{((-\varepsilon_i\cdot\cov)\varphi)(x)=\varphi(x-\varepsilon_i)-\varphi(x).}
 As in the face formula of \ref{fdip-00OK}, the coboundary is
-#{d=\sum_i\epsilon_i\circ\delta_i}. On the orthonormal monomial
+#{\covwedge=\sum_i\epsilon_i\circ(\varepsilon_i\cdot\cov)}. On the orthonormal monomial
 basis, the sign with which \ref{fdip-0092} inserts #{e_i} equals
 the sign with which it removes #{e_i}, so #{\iota_i} is the
 counting adjoint of #{\epsilon_i}. The base difference and the
 fiber operator act on different factors, and the counting pairing
 sums the monomial pairing over the vertices, so
-#{d^\dagger=\sum_i\delta_i^\dagger\circ\iota_i}.
-A constant right multiplication commutes with each #{\delta_i}
-and each #{\delta_i^\dagger}.}
+#{\extdag=\sum_i(-\varepsilon_i\cdot\cov)\circ\iota_i}.
+A constant right multiplication commutes with each #{(\varepsilon_i\cdot\cov)}
+and each #{(-\varepsilon_i\cdot\cov)}.}
 
 \p{If #{N=1}, then #{x+\varepsilon_i=x}, so every difference
-vanishes and #{D=0}. If #{N=2}, then
+vanishes and #{\extD=0}. If #{N=2}, then
 #{x-\varepsilon_i=x+\varepsilon_i}, so
-#{\delta_i^\dagger=\delta_i} and
-#{D=\sum_i\delta_i\circ\gamma_i}. Each #{\gamma_i} is left
+#{(-\varepsilon_i\cdot\cov)=(\varepsilon_i\cdot\cov)} and
+#{\extD=\sum_i(\varepsilon_i\cdot\cov)\circ\gamma_i}. Each #{\gamma_i} is left
 multiplication by #{e_i}, which commutes with right
-multiplication, and each #{\delta_i} commutes with a constant
-right multiplication. Thus #{D} commutes with every right
+multiplication, and each #{(\varepsilon_i\cdot\cov)} commutes with a constant
+right multiplication. Thus #{\extD} commutes with every right
 multiplication in both cases.}
 
 \p{Now take #{N\ge 3}, and suppose right multiplication by #{a}
-commutes with #{D}. The step #{\varepsilon_i} then satisfies
+commutes with #{\extD}. The step #{\varepsilon_i} then satisfies
 #{2\varepsilon_i\neq 0}, so at a fixed vertex #{x} the #{1+2d}
 points #{x} and #{x\pm\varepsilon_i} are distinct. Cochain values
 at those points may be chosen independently. The defect
@@ -49,7 +54,7 @@ at those points may be chosen independently. The defect
 for #{\epsilon_i}, so the commutator at #{x} depends on the
 differences only. Setting #{\varphi(x)=0} and prescribing the
 neighboring values makes the #{2d} differences
-#{\delta_i\varphi(x)} and #{\delta_i^\dagger\varphi(x)}
+#{(\varepsilon_i\cdot\cov)\varphi(x)} and #{(-\varepsilon_i\cdot\cov)\varphi(x)}
 independent. The commutator at #{x} is the sum over #{i} of
 ##{\epsilon_i(v_i a)-(\epsilon_i v_i)a
 +\iota_i(w_i a)-(\iota_i w_i)a,}
@@ -64,5 +69,5 @@ basis, commutation with the matrix units forces that
 endomorphism to multiply every basis vector by one scalar. Its
 value on #{1} is #{a}, so #{a} is that scalar. Conversely every
 scalar is central, so the corresponding right multiplication
-commutes with #{D}.}
+commutes with #{\extD}.}
 }

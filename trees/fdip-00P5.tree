@@ -8,10 +8,10 @@
 \p{Let #{N\ge 1}, and let #{f} be a vertex cochain on the cycle of
 \ref{fdip-00OK}. For #{0\le m<N},
 ##{\sum_{i=0}^{m-1}\bigl(f(i+1)-f(i)\bigr)=f(m)-f(0),}
-where the sum is empty when #{m=0}. Write #{(\Delta^0 f)=f},
-#{(\Delta f)(i)=f(i+1)-f(i)}, and
-#{(\Delta^{k+1}f)(0)=(\Delta^k f)(1)-(\Delta^k f)(0)}. Then
-##{f(m)=\sum_{k=0}^{m}\binom{m}{k}(\Delta^k f)(0).}
+where the sum is empty when #{m=0}. Here #{\varepsilon} is the forward step of the cycle. Write #{((\varepsilon\cdot\cov)^0 f)=f},
+#{((\varepsilon\cdot\cov)f)(i)=f(i+1)-f(i)}, and
+#{((\varepsilon\cdot\cov)^{k+1}f)(0)=((\varepsilon\cdot\cov)^k f)(1)-((\varepsilon\cdot\cov)^k f)(0)}. Then
+##{f(m)=\sum_{k=0}^{m}\binom{m}{k}((\varepsilon\cdot\cov)^k f)(0).}
 The sum stops at #{k=m}.}
 
 \proof{
@@ -20,20 +20,20 @@ The sum stops at #{k=m}.}
 cancels every intermediate vertex, and #{m<N} keeps the
 endpoints distinct, so #{\partial c} is the vertex #{m} minus
 the vertex #{0}. The same theorem gives
-#{\langle df,c\rangle=\langle f,\partial c\rangle}, which is the
+#{\langle \covwedge f,c\rangle=\langle f,\partial c\rangle}, which is the
 telescoping sum. The case #{m=0} is the empty chain.}
 
 \p{The forward-difference formula is induction on #{m}, for an
 arbitrary function on #{0,1,\ldots,m}. The case #{m=0} is
 #{f(0)}. For the step, the case #{m-1} gives
-##{f(m-1)=\sum_{k=0}^{m-1}\binom{m-1}{k}(\Delta^k f)(0)}
-and the same formula for #{\Delta f} at index #{m-1}. The
+##{f(m-1)=\sum_{k=0}^{m-1}\binom{m-1}{k}((\varepsilon\cdot\cov)^k f)(0)}
+and the same formula for #{(\varepsilon\cdot\cov)f} at index #{m-1}. The
 recursive definition gives
-#{(\Delta^k\Delta f)(0)=(\Delta^{k+1}f)(0)}, so
-##{f(m)=f(m-1)+(\Delta f)(m-1)}
+#{((\varepsilon\cdot\cov)^k(\varepsilon\cdot\cov)f)(0)=((\varepsilon\cdot\cov)^{k+1}f)(0)}, so
+##{f(m)=f(m-1)+((\varepsilon\cdot\cov)f)(m-1)}
 is the sum of those two expansions. Reindex the second sum by
 #{j=k+1}. The #{k=0} term of the first sum is #{f(0)}, and the
-last term of the second sum is #{(\Delta^m f)(0)}. For
+last term of the second sum is #{((\varepsilon\cdot\cov)^m f)(0)}. For
 #{1\le k\le m-1}, Pascal's identity
 #{\binom{m}{k}=\binom{m-1}{k}+\binom{m-1}{k-1}}
 adds the coefficients. The binomial coefficients are integers,
