@@ -8,12 +8,12 @@
 \p{Let #{\mathcal B:X_f\to X_c} be a
 \vocabk{coarse path map}{fdip-00MO}, put
 #{\rho=\mathcal B_*\nu_f}, and let #{w\ge0} be a Borel function
-in #{L^1(\nu_f)}. Put #{Z=\int w\,d\nu_f}. There is a unique
+in #{L^1(\nu_f)}. Put #{Z=\int w\,\extd\nu_f}. There is a unique
 nonnegative #{L^1(\rho)} class #{f} such that
 ##{\mathcal B_*(w\nu_f)=f\rho,\qquad
- \int_{X_c}f\,d\rho=Z.}
+ \int_{X_c}f\,\extd\rho=Z.}
 For every bounded Borel #{F:X_c\to\mathbb C},
-##{\int F(\mathcal BU)w(U)\,d\nu_f(U)=\int F(u)f(u)\,d\rho(u).}
+##{\int F(\mathcal BU)w(U)\,\extd\nu_f(U)=\int F(u)f(u)\,\extd\rho(u).}
 If #{Z>0}, the normalized coarse law is #{Z^{-1}f\rho}.}
 
 \p{If #{G} is compact metrizable, there is a Borel probability
@@ -30,7 +30,7 @@ compact Hausdorff group.}
 If #{h} is the density of #{C_*(f\rho)} relative to #{\sigma},
 then
 ##{(C\circ\mathcal B)_*(w\nu_f)=h\sigma,\qquad
- \int h\,d\sigma=Z.}
+ \int h\,\extd\sigma=Z.}
 Equivalently, #{h\circ C} represents
 #{\mathbb E_\rho[f\mid\sigma(C)]}, and
 #{h\circ C\circ\mathcal B} represents
@@ -46,7 +46,7 @@ Borel representative invariant at every point.}
 
 \proof{
 \p{If #{\rho(A)=0}, then #{\nu_f(\mathcal B^{-1}A)=0}, so
-#{\int_{\mathcal B^{-1}A}w\,d\nu_f=0}. Thus the two finite
+#{\int_{\mathcal B^{-1}A}w\,\extd\nu_f=0}. Thus the two finite
 measures satisfy
 ##{\mathcal B_*(w\nu_f)\ll\rho.}
 The Radon–Nikodym theorem
@@ -67,9 +67,9 @@ the measurable indicator of #{\mathcal BU\ne u} shows that
 This uses measurability of the diagonal in #{X_c\times X_c}.}
 
 \p{For a measurable #{A\subseteq Y},
-##{\int_Ah\,d\sigma
- =\int_{C^{-1}A}f\,d\rho
- =\int_{(C\circ\mathcal B)^{-1}A}w\,d\nu_f.}
+##{\int_Ah\,\extd\sigma
+ =\int_{C^{-1}A}f\,\extd\rho
+ =\int_{(C\circ\mathcal B)^{-1}A}w\,\extd\nu_f.}
 These tests prove both the composed image identity and the
 conditional-expectation assertions. They are the tower property
 of \citet{Theorem 6.1(vii), p. 104}{kallenberg2002foundations}.
@@ -88,12 +88,12 @@ uniqueness of the Radon–Nikodym density gives the claimed
 case, first choose a finite nonnegative Borel representative
 #{f_0}; an infinite value on its null exceptional set can be
 replaced by zero. The function
-##{\bar f(u)=\int_{K_c}f_0(a^{-1}\cdot u)\,d\mu_{K_c}(a)}
+##{\bar f(u)=\int_{K_c}f_0(a^{-1}\cdot u)\,\extd\mu_{K_c}(a)}
 is Borel with values in #{[0,\infty]}. Joint measurability and
 Tonelli apply on these compact metrizable spaces. Haar
 invariance makes #{\bar f} invariant at every point. Moreover,
 ##{\int_{K_c}\int_{X_c}
- |f_0(a^{-1}\cdot u)-f_0(u)|\,d\rho(u)\,d\mu_{K_c}(a)=0,}
+ |f_0(a^{-1}\cdot u)-f_0(u)|\,\extd\rho(u)\,\extd\mu_{K_c}(a)=0,}
 because the inner integral vanishes for each #{a}. Hence
 #{\bar f=f_0} almost everywhere. Its infinite-value set is
 Borel, invariant and null; replacing #{\bar f} there by zero
