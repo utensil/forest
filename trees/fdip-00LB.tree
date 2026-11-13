@@ -5,18 +5,28 @@
 \title{Pauli arrays of the flip and the sign}
 \date{2026-11-10}
 
-\p{At #{i\varepsilon_1}, where #{\varepsilon_j} is the standard basis
+\p{At #{\ui\varepsilon_1}, where #{\varepsilon_j} is the standard basis
 of #{\mathbb C^n}, the spatial form has value #{-1}, while the
-Hermitian norm squared is #{1}. In the ordered basis #{(e_0,e_1)}
-of one factor of the
-[centered Dirac operator](fdip-000R), and in the
-[Pauli convention](fcap-002L), the flip and the sign have arrays
+Hermitian norm squared is #{1}. Choose #{S=(\mathbb C^2)^{\otimes n}}
+as in the [centered Dirac operator](fdip-000R), with the ordered
+basis #{(e_0,e_1)} of each factor. The flip of that factor exchanges
+the two basis vectors, and the sign of that factor fixes #{e_0} and
+sends #{e_1} to #{-e_1}. For #{1\le j\le n}, the operator #{\gamma_j}
+applies the sign to each factor before #{j}, the flip to factor
+#{j}, and the identity to each later factor. An empty collection of
+factors contributes the scalar identity. For #{n=1}, #{\gamma_1} is
+the flip of the single factor.}
+
+\p{In the [Pauli convention](fcap-002L), the flip and the sign have
+arrays
 ##{X=\begin{pmatrix}0&1\\1&0\end{pmatrix},\qquad
 Z=\begin{pmatrix}1&0\\0&-1\end{pmatrix}.}
 With #{\bbI=\bbI_2}, the product-index array of #{\gamma_j} is
 ##{\gamma_j=Z^{\otimes(j-1)}\otimes X
 \otimes \bbI^{\otimes(n-j)}.}
-An empty tensor product contributes the scalar identity. The
+An empty tensor product contributes the scalar identity. This array
+is the matrix of the represented generator
+#{\rho(\iota(\varepsilon_j))} in \ref{fdip-000R}. The
 identities #{X^{\dagger}=X}, #{Z^{\dagger}=Z}, #{X^2=Z^2=\bbI}, #{XZ=-ZX} and the
 Clifford relation are proved in \ref{fdip-00L8}. Mathlib's
 \leanref{Matrix.kronecker},
