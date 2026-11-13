@@ -6,7 +6,7 @@
 \date{2026-11-01}
 
 \p{Use a complex scalar field on the unit-weight lattice of
-\ref{fdip-0071}, with #{G=U(1)}, #{U_e=e^{iA_e}} and #{m>0}.
+\ref{fdip-0071}, with #{G=U(1)}, #{U_e=\ue^{\ui A_e}} and #{m>0}.
 Fix an oriented edge #{e:s\to h}, and let its angle #{A_e} vary
 while all other angles are fixed. For the
 \vocabk{complex matter law}{fdip-0070}, let #{h} be its Hermitian
@@ -18,8 +18,8 @@ On each complex site this product is
  =2\operatorname{Im}\bigl(h(\phi_h,U_e\phi_s)\bigr).}
 Let #{\delta_x} be the indicator of a vertex. Then
 ##{\begin{aligned}
-\frac{\partial W}{\partial A_e}
- &=\operatorname{tr}_{\mathbb C}
+\frac{\partial\cW}{\partial A_e}
+ &=\trace_{\mathbb C}
    \left(C_U\frac{\partial Q_U}{\partial A_e}\right)\\
  &=\mathbb E_U[J_e]
  =2\operatorname{Im}\bigl(U_e\, h(\delta_s,C_U\delta_h)\bigr).
@@ -29,13 +29,13 @@ All expectations here condition on the fixed connection #{U}.}
 \proof{
 \p{Use the ordered vertex indicators #{\delta_x} as a basis. The only
 angle-dependent edge energy is
-##{|\phi_h-e^{iA_e}\phi_s|^2
+##{|\phi_h-\ue^{\ui A_e}\phi_s|^2
  =|\phi_h|^2+|\phi_s|^2
-  -2\operatorname{Re}(\overline{\phi_h}e^{iA_e}\phi_s).}
+  -2\operatorname{Re}(\overline{\phi_h}\ue^{\ui A_e}\phi_s).}
 Its derivative is the displayed positive twice-imaginary-part
 expression, fixing the current sign. In this basis the derivative
-of #{Q_U} has entries #{-iU_e} in position #{(h,s)} and
-#{i\overline{U_e}} in position #{(s,h)}, and zero elsewhere.
+of #{Q_U} has entries #{-\ui U_e} in position #{(h,s)} and
+#{\ui\overline{U_e}} in position #{(s,h)}, and zero elsewhere.
 Since #{C_U} is Hermitian, its trace pairing with that derivative
 is #{2\operatorname{Im}(U_e(C_U)_{s,h})}. The same basis gives
 #{(C_U)_{s,h}=h(\delta_s,C_U\delta_h)}.}
@@ -45,7 +45,7 @@ is #{2\operatorname{Im}(U_e(C_U)_{s,h})}. The same basis gives
 invertible matrices. Along this real parameter, #{Q_U} stays positive
 Hermitian, so its determinant is positive and
 ##{\frac{\partial}{\partial A_e}\log\det_{\mathbb C}Q_U
- =\operatorname{tr}_{\mathbb C}
+ =\trace_{\mathbb C}
   \left(Q_U^{-1}\frac{\partial Q_U}{\partial A_e}\right).}
 Finally, the complex Gaussian covariance gives
 #{\mathbb E_U[\overline{\phi_h}\phi_s]=(C_U)_{s,h}}.
@@ -56,6 +56,6 @@ Substitution into the explicit current proves the expectation identity.}
 
 \p{For a differentiable real orthogonal family, the corresponding
 convention uses #{S=\frac12\langle\phi,Q\phi\rangle},
-#{J=\partial S} and #{W=\frac12\log\det_{\mathbb R}Q}.
+#{J=\partial S} and #{\cW=\frac12\log\det_{\mathbb R}Q}.
 Both sides then carry the same factor #{1/2}. In the complex convention
 used here, neither the action nor the log determinant has that factor.}

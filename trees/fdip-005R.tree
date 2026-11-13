@@ -14,7 +14,7 @@ let #{d_e\otimes d_e^\flat} be the rank-one operator sending
 #{\phi} to #{\langle d_e,\phi\rangle d_e}. For weights #{w_e\ge0}
 and mass #{m>0}, write
 ##{L_w=-\sum_{e\in E}w_e\,d_e\otimes d_e^\flat,\qquad
-Q=m^2I-L_w,\qquad G=Q^{-1}.}
+Q=m^2\bbI -L_w,\qquad G=Q^{-1}.}
 A zero weight means the corresponding edge is deleted. Parallel
 labels remain distinct, and a loop has #{d_e=0}. Thus the boundary
 faces of this weight orthant describe subgraphs, extending the
@@ -22,32 +22,32 @@ positive-weight \vocabk{background convention}{fdip-000G}.}
 
 \p{The \newvocab{Gaussian induced action}, relative to counting-metric
 Lebesgue measure, is
-##{\mathcal W(w,m)=\frac12\log\det Q.}
+##{\cW(w,m)=\frac12\log\det Q.}
 The [Gaussian normalizer](fdip-002T) gives
-##{Z(w,m)=\int_{\mathbb R^V}e^{-\langle\phi,Q\phi\rangle /2}\,d\phi
+##{Z(w,m)=\int_{\mathbb R^V}\ue^{-\langle\phi,Q\phi\rangle /2}\,\extd\phi
  =(2\pi)^{n/2}(\det Q)^{-1/2},}
-so #{-\log Z=\mathcal W-(n/2)\log(2\pi)}. This scalar is
+so #{-\log Z=\cW -(n/2)\log(2\pi)}. This scalar is
 invariant under graph relabeling and orthogonal conjugation of #{Q}.
 It does not by itself retain all graph or selector data.}
 
 \p{For a \vocabk{selected Gaussian background}{fdip-005A} #{b}, use the
 orthogonal split #{H=X\mathbin\perp Y} with #{X=\operatorname{im}P}
-and #{Y=\ker P}. Write #{i_X:X\to H} and #{i_Y:Y\to H}
+and #{Y=\ker P}. Write #{\iota_X:X\to H} and #{\iota_Y:Y\to H}
 for the inclusions. Put #{r=\dim X} and #{q=\dim Y}, so
 #{r+q=n}, and define
-##{A=i_X^*\,Q\,i_X,\quad K=i_X^*\,Q\,i_Y,\quad
- D_Y=i_Y^*\,Q\,i_Y,}
-##{S_P=A-KD_Y^{-1}K^*.}
+##{A=\iota_X^{\dagger}\,Q\,\iota_X,\quad K=\iota_X^{\dagger}\,Q\,\iota_Y,\quad
+ D_Y=\iota_Y^{\dagger}\,Q\,\iota_Y,}
+##{S_P=A-KD_Y^{-1}K^{\dagger}.}
 The operators #{D_Y} and #{S_P} are positive by \ref{fdip-005B}.
 Their matrices in declared bases are given in \ref{fdip-00LP}.
 The full, retained and eliminated scalar actions are
 ##{\begin{aligned}
-\mathcal W_{\mathrm{full}}&=\mathcal W=\tfrac12\log\det_H Q,\\
-\mathcal W_X&=\tfrac12\log\det_X S_P,\\
-\mathcal W_{\mathrm{elim}}&=\tfrac12\log\det_Y D_Y.
+\cW_{\mathrm{full}}&=\cW=\tfrac12\log\det_H Q,\\
+\cW_X&=\tfrac12\log\det_X S_P,\\
+\cW_{\mathrm{elim}}&=\tfrac12\log\det_Y D_Y.
 \end{aligned}}
 These are functions of the \vocabk{sufficient Gaussian data}{fdip-005E}
-#{j(b)}. At fixed #{Q}, #{\mathcal W_{\mathrm{full}}} is independent
+#{j(b)}. At fixed #{Q}, #{\cW_{\mathrm{full}}} is independent
 of #{P}. The two other terms may change with the selected space.}
 
 \p{Use the induced Euclidean volumes #{\lambda_H,\lambda_X,\lambda_Y}.
@@ -55,15 +55,15 @@ The determinant and fiber-integral identities of \ref{fdip-000D},
 with the inverse-compression identification in \ref{fdip-005B}, give
 ##{\begin{aligned}
 \det_H Q&=\det_X S_P\det_Y D_Y,\\
-\mathcal W_{\mathrm{full}}&=\mathcal W_X+\mathcal W_{\mathrm{elim}},\\
-c_Y&=(2\pi)^{q/2}e^{-\mathcal W_{\mathrm{elim}}},\\
-Z_X&=(2\pi)^{r/2}e^{-\mathcal W_X},\\
+\cW_{\mathrm{full}}&=\cW_X+\cW_{\mathrm{elim}},\\
+c_Y&=(2\pi)^{q/2}\ue^{-\cW_{\mathrm{elim}}},\\
+Z_X&=(2\pi)^{r/2}\ue^{-\cW_X},\\
 Z_{\mathrm{full}}&=Z=c_YZ_X.
 \end{aligned}}
 In particular, for every #{x\in X},
 ##{\begin{aligned}
-I_Q(x)&=\int_Y e^{-\langle x+y,Q(x+y)\rangle/2}\,d\lambda_Y(y)\\
-&=c_Ye^{-\langle x,S_Px\rangle/2}.
+I_Q(x)&=\int_Y \ue^{-\langle x+y,Q(x+y)\rangle/2}\,\extd\lambda_Y(y)\\
+&=c_Y\ue^{-\langle x,S_Px\rangle/2}.
 \end{aligned}}
 The factor #{c_Y} uses the conditional precision on #{Y} at fixed
 #{x}, as in \ref{fdip-003A} with the summands exchanged. The
@@ -74,10 +74,10 @@ The negative logarithms of the unnormalized fiber integral and of
 the normalized retained density are, respectively,
 ##{\begin{aligned}
 -\log I_Q(x)&=\tfrac12\langle x,S_Px\rangle
-   +\mathcal W_{\mathrm{elim}}-\tfrac q2\log(2\pi),\\
--\log\frac{d\nu_b}{d\lambda_X}(x)
+   +\cW_{\mathrm{elim}}-\tfrac q2\log(2\pi),\\
+-\log\frac{\extd\nu_b}{\extd\lambda_X}(x)
  &=\tfrac12\langle x,S_Px\rangle
-   -\mathcal W_X+\tfrac r2\log(2\pi).
+   -\cW_X+\tfrac r2\log(2\pi).
 \end{aligned}}
 Here #{\nu_b=P_*\mu_Q} is the Borel probability law of
 \ref{fdip-005B}; normalization is the identity #{Z=c_YZ_X}
@@ -85,7 +85,7 @@ of \ref{fdip-000E}.}
 
 \p{For fixed #{m>0}, differentiation in the weights means
 differentiation of the smooth extension to
-##{\mathcal U_m=\{w\in\mathbb R^E:m^2I-L_w>0\}.}
+##{\mathcal U_m=\{w\in\mathbb R^E:m^2\bbI -L_w>0\}.}
 This open convex set contains the nonnegative orthant. For
 #{w_e\ge0} and #{x\ne0}, indeed,
 ##{\langle x,Qx\rangle

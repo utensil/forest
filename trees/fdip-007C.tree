@@ -9,7 +9,7 @@
 measure](fdip-007B). That probability uses compactness of #{G}.
 \ref{fdip-00LY} records that the same normalization is unavailable
 for #{SL(2,\mathbb R)}. Choose unitary representatives of its complex
-irreducibles, indexed by #{\widehat G}, with dimensions #{d_\rho}
+irreducibles, indexed by #{\widehat G}, with dimensions #{\dim\rho}
 and spaces #{V_\rho}. The Peter–Weyl theorem identifies #{L^2(G)}
 unitarily with the orthogonal sum of the coefficient spaces
 #{\operatorname{End}(V_\rho)\cong V_\rho^*\otimes V_\rho}. The
@@ -17,7 +17,7 @@ inner-product convention is the one recorded in \ref{fdip-00M7}.
 The central subspace has orthonormal basis #{\chi_\rho}. Thus a
 central #{f\in L^2(G)} has the expansion
 ##{f=\sum_{\rho\in\widehat G}c_\rho\chi_\rho,
- \qquad c_\rho=\int_G f(h)\overline{\chi_\rho(h)}\,d\mu_G(h),}
+ \qquad c_\rho=\int_G f(h)\overline{\chi_\rho(h)}\,\extd\mu_G(h),}
 with convergence in #{L^2}. This is a \em{cited statement}, namely
 Woit's Section 5, Theorem 1 and Corollary 1
 \citet{p. 6}{woit2012peterweyl}. It does not assert pointwise or
@@ -26,37 +26,37 @@ absolute convergence for an arbitrary #{L^2} function.}
 \transclude{fdip-00M7}
 
 \p{Suppose now that #{f} is continuous and central and that
-##{\sum_{\rho\in\widehat G}|c_\rho|d_\rho<\infty.}
+##{\sum_{\rho\in\widehat G}|c_\rho|\dim\rho<\infty.}
 Then its character expansion converges uniformly and absolutely.
 For the \vocabk{closed oriented polygonal surface}{fdip-006V}, with
 #{P} faces and genus #{g}, define the edge integral
-##{Z_\Sigma(f)=\int_{G^E}\prod_p f(U_p)\,d\mu(U).}
+##{Z_\Sigma(f)=\int_{G^E}\prod_p f(U_p)\,\extd\mu(U).}
 Under the displayed summability condition,
 ##{Z_\Sigma(f)=\sum_{\rho\in\widehat G}
- d_\rho^{2-2g}\left(\frac{c_\rho}{d_\rho}\right)^P,}
+ (\dim\rho)^{2-2g}\left(\frac{c_\rho}{\dim\rho}\right)^P,}
 and this numerical series is absolutely convergent.}
 
 \proof{
-\p{Unitarity gives #{|\chi_\rho(h)|\le d_\rho}. The sum of the
+\p{Unitarity gives #{|\chi_\rho(h)|\le \dim\rho}. The sum of the
 uniform bounds is finite, so the character series has a continuous
 uniform limit. Peter–Weyl identifies that limit with #{f} in #{L^2};
 continuity and full support of Haar measure make the equality
 pointwise. Expanding a product over the finite face set gives a sum
 whose total absolute value is bounded uniformly by
-##{\left(\sum_\rho |c_\rho|d_\rho\right)^P.}
+##{\left(\sum_\rho |c_\rho|\dim\rho\right)^P.}
 This bound is integrable against probability measure, justifying
 interchange of the full face-label sum and the edge integrals.}
 
 \p{Use the ordered orthonormal bases of \ref{fdip-00M7}. Haar
 averaging gives the same matrix orthogonality as finite
 averaging: for #{A:V_\tau\to V_\rho}, the integral
-#{\int_G\rho(h)A\tau(h)^{-1}\,d\mu_G(h)} is an intertwiner.
+#{\int_G\rho(h)A\tau(h)^{-1}\,\extd\mu_G(h)} is an intertwiner.
 Schur's lemma and its trace make it zero for inequivalent
-representatives and #{(\operatorname{tr}A/d_\rho)I} for equal ones.
+representatives and #{(\trace A/\dim\rho)\bbI} for equal ones.
 The edge contractions and circular vertex links in the
 [finite surface proof](fdip-006W) therefore leave one common face
 label and one free index per vertex. Their contribution is
-#{c_\rho^P d_\rho^{|V|-|E|}}, the displayed formula.
+#{c_\rho^P (\dim\rho)^{|V|-|E|}}, the displayed formula.
 Absolute convergence follows as well: the absolute values of these
 integrated terms are bounded by the integrals of the absolute face
 terms, whose total has just been bounded. In particular #{f=1}
