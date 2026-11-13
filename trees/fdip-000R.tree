@@ -6,11 +6,11 @@
 \date{2026-10-17}
 
 \p{To couple Clifford multiplication to spatial differences, fix an
-integer #{d\ge1} and periods #{N_j\ge3} for #{1\le j\le d}.
+integer #{n\ge1} and periods #{N_j\ge3} for #{1\le j\le n}.
 The \newvocab{periodic grid} and its scalar fields are
 ##{\begin{aligned}
-\Lambda&=\prod_{j=1}^d\mathbb Z/N_j\mathbb Z,\\
-M&=\prod_{j=1}^d N_j,\qquad H=\mathbb C^\Lambda.
+\Lambda&=\prod_{j=1}^n\mathbb Z/N_j\mathbb Z,\\
+M&=\prod_{j=1}^n N_j,\qquad H=\mathbb C^\Lambda.
 \end{aligned}}
 Write #{e_j\in\Lambda} for the unit step in coordinate #{j}.
 Addition is periodic and the lattice spacing is one. Extend the
@@ -20,8 +20,8 @@ Addition is periodic and the lattice spacing is one. Extend the
 conjugate-linear in the first slot.}
 
 \p{The spatial \vocabk{quadratic form}{ca-0004} is
-##{q_{\mathrm{sp}}(z)=\sum_{j=1}^d z_j^2
-\qquad(z\in\mathbb C^d).}
+##{q_{\mathrm{sp}}(z)=\sum_{j=1}^n z_j^2
+\qquad(z\in\mathbb C^n).}
 It is distinct from the Hermitian norm squared #{\sum_j|z_j|^2}
 and from the real four-field [configuration form](fdip-000O).
 The comparison #{q_{\mathrm{sp}}(i\varepsilon_1)=-1} against
@@ -30,18 +30,18 @@ Hermitian norm squared #{1} is \ref{fdip-00LB}. The grid steps
 coordinate vectors, and the 4 configuration coordinates have
 different carriers.}
 
-\p{Choose #{S=(\mathbb C^2)^{\otimes d}} with its product Hermitian
+\p{Choose #{S=(\mathbb C^2)^{\otimes n}} with its product Hermitian
 inner product. Fix the ordered basis #{(e_0,e_1)} of each factor.
 The \newvocab{flip} of that factor exchanges the two basis vectors,
 and the \newvocab{sign} of that factor fixes #{e_0} and sends
-#{e_1} to #{-e_1}. For #{1\le j\le d}, the operator #{\gamma_j}
+#{e_1} to #{-e_1}. For #{1\le j\le n}, the operator #{\gamma_j}
 applies the sign to each factor before #{j}, the flip to factor
 #{j}, and the identity to each later factor. An empty collection
 of factors contributes the scalar identity. The Pauli arrays of
 these operators are \ref{fdip-00LB}. \ref{fdip-00L8} proves that
 the operators are self-adjoint and represent #{q_{\mathrm{sp}}},
 and \ref{fdip-00L9} proves that #{S} is a reducible Clifford module
-of complex dimension #{2^d}.}
+of complex dimension #{2^n}.}
 
 \p{Extend the \vocabk{cyclic shift}{fdip-0009} coordinatewise by
 ##{(T_j f)(x)=f(x+e_j).}
@@ -58,14 +58,14 @@ difference is skew-adjoint.}
 =\langle s,t\rangle_S\langle f,g\rangle_H}.
 Identify #{s\otimes f} with the field #{x\mapsto f(x)s}.
 The \newvocab{centered Dirac operator} is
-##{D=\sum_{j=1}^d\gamma_j\otimes\cov_j.}
+##{D=\sum_{j=1}^n\gamma_j\otimes\cov_j.}
 Equivalently,
 ##{\begin{aligned}
 (D\psi)(x)
-&=\frac12\sum_{j=1}^d\gamma_j\psi(x+e_j)\\
-&\quad-\frac12\sum_{j=1}^d\gamma_j\psi(x-e_j).
+&=\frac12\sum_{j=1}^n\gamma_j\psi(x+e_j)\\
+&\quad-\frac12\sum_{j=1}^n\gamma_j\psi(x-e_j).
 \end{aligned}}
-For #{d=1}, #{\gamma_1} is the flip of the single factor, applied
+For #{n=1}, #{\gamma_1} is the flip of the single factor, applied
 to the ordinary centered difference of a two-component field.
 Wingate's gauge-covariant centered difference reduces to this
 difference when all links are one and the spacing is one

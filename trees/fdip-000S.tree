@@ -9,16 +9,16 @@
 the centered Dirac operator is skew-adjoint and has square
 ##{\begin{aligned}
 D^{\dagger}&=-D,\\
-D^2&=I_S\otimes\sum_{j=1}^d\cov_j^2,\\
+D^2&=I_S\otimes\sum_{j=1}^n\cov_j^2,\\
 -D^2&=\frac14 I_S\otimes
-\sum_{j=1}^d(2I_H-T_j^2-T_j^{-2}).
+\sum_{j=1}^n(2I_H-T_j^2-T_j^{-2}).
 \end{aligned}}
 In particular #{-D^2=D^{\dagger}D} is positive semidefinite.
 Its complete finite Fourier decomposition has blocks
 ##{\begin{aligned}
-D(p)&=\ui\sum_{j=1}^d\gamma_j\sin p_j,\\
+D(p)&=\ui\sum_{j=1}^n\gamma_j\sin p_j,\\
 -D(p)^2&=s(p)I_S,\\
-s(p)&=\sum_{j=1}^d\sin^2p_j,
+s(p)&=\sum_{j=1}^n\sin^2p_j,
 \end{aligned}}
 where #{p_j=2\pi r_j/N_j} and #{0\le r_j<N_j}.
 The coefficient #{\ui} is the eigenvalue of the centered difference
@@ -54,7 +54,7 @@ Finally #{\langle\psi,-D^2\psi\rangle_K
 \p{Let #{\mathcal R=\prod_j\{0,\ldots,N_j-1\}} and,
 for #{r\in\mathcal R}, define the normalized character function
 ##{\chi_r(x)=M^{-1/2}
-\exp\left(\ui\sum_{j=1}^d p_jx_j\right).}
+\exp\left(\ui\sum_{j=1}^n p_jx_j\right).}
 Choose integer representatives for #{x_j}. Changing one by
 #{N_j} multiplies the exponential by #{\exp(2\pi \ui r_j)=1};
 changing #{r_j} by #{N_j} likewise multiplies it by
@@ -65,7 +65,7 @@ the residue classes.}
 ##{\zeta_j=\exp\left(\frac{2\pi \ui(t_j-r_j)}{N_j}\right).}
 The counting inner product factors:
 ##{\langle\chi_r,\chi_t\rangle_H
-=M^{-1}\prod_{j=1}^d\sum_{k=0}^{N_j-1}\zeta_j^k.}
+=M^{-1}\prod_{j=1}^n\sum_{k=0}^{N_j-1}\zeta_j^k.}
 If #{t_j=r_j}, then #{\zeta_j=1} and the inner sum is
 #{N_j}. Otherwise the chosen range of labels gives
 #{\zeta_j\ne1} and #{\zeta_j^{N_j}=1}, so
