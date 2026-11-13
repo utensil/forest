@@ -485,7 +485,9 @@ This section provides pointers to important files and common patterns within the
 
 *   **No formal versioning**: Content-focused repository with continuous integration.
 *   **Deployment**: Automatic GitHub Pages deployment on main branch push.
-*   **Git workflow**: Direct commits to main for content, feature branches for major changes.
+*   **Pull-request CI**: `gh-pages.yml` runs `just verify-render` and does not build the 14 fixture PDFs. It uploads the HTML artifact as `pages-${{ steps.source.outputs.tree }}`, kept for 7 days.
+*   **Main deploy**: a push to `main` reuses a successful pull-request artifact whose name matches `HEAD^{tree}`, then runs `just build-pdfs` and `just verify-pdfs` so the 14 fixture PDFs, including `fdip-0001.pdf`, are on the deployed site. If no artifact matches, the push builds the HTML itself and then builds and verifies the PDFs.
+*   **Git workflow**: normal pull requests are non-stacked branches off `main`. CI supports stacked pull requests: branch each one off the previous head and squash-merge in order, so a later pull request can reuse the previous head's HTML artifact. Stack only when asked to speed up a batch.
 *   **Backup strategy**: Git history serves as version control and backup.
 
 ## 15. Performance considerations
