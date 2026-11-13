@@ -6,41 +6,43 @@
 \date{2026-11-01}
 
 \p{Extend the [free Fourier symbol](fdip-009Q) to the continuous
-momentum torus #{(\mathbb R/2\pi\mathbb Z)^d}:
-##{\mathcal D(p)=i\sum_j\Gamma_j\sin p_j.}
-Its zeros occur exactly at the #{2^d} corners
+momentum torus #{(\mathbb R/2\pi\mathbb Z)^n}:
+##{\mathcal D(p)=\ui\sum_j(\varepsilon_j^{S}\otimes\bbI_F)\sin p_j.}
+Its zeros occur exactly at the #{2^n} corners
 #{p^\epsilon=\pi\epsilon}, with
-#{\epsilon\in\{0,1\}^d}. Near each corner,
+#{\epsilon\in\{0,1\}^n}. Near each corner,
 ##{\begin{aligned}
 \mathcal D(p^\epsilon+k)
- &=i\sum_j\widetilde\Gamma_j k_j+O(\|k\|^3),\\
-\widetilde\Gamma_j&=(-1)^{\epsilon_j}\Gamma_j,
+ &=\ui\sum_j(\varepsilon_j^{S}\otimes\bbI_F)' k_j+O(\|k\|^3),\\
+(\varepsilon_j^{S}\otimes\bbI_F)'&=(-1)^{\epsilon_j}(\varepsilon_j^{S}\otimes\bbI_F),
 \end{aligned}}
 where the remainder is measured in the operator norm on
-#{S\otimes F}. The operators #{\widetilde\Gamma_j} obey the
-same Euclidean Clifford relation as #{\Gamma_j}. The leading
-factor #{i} is the centered-difference symbol of \ref{fdip-00LZ},
-not the substitution #{\gamma_j\mapsto i\gamma_j}.}
+#{S\otimes F}. The operators #{(\varepsilon_j^{S}\otimes\bbI_F)'} obey the
+same Euclidean Clifford relation as #{\varepsilon_j^{S}\otimes\bbI_F}. The leading
+factor #{\ui} is the centered-difference symbol of \ref{fdip-00LZ},
+not the substitution #{\varepsilon_j^{S}\mapsto\ui\varepsilon_j^{S}}.}
 
 \proof{
 \p{The identity
-#{\mathcal D(p)^2=-(\sum_j\sin^2p_j)I} holds for every
+#{\mathcal D(p)^2=-(\sum_j\sin^2p_j)\bbI_{S\otimes F}} holds for every
 real momentum. If #{\mathcal D(p)=0}, its square forces each
 sine to vanish; conversely those vanishing sines make the operator
 zero. Modulo #{2\pi}, each coordinate is #{0} or #{\pi}.
 The expansion follows from
 #{\sin(\pi\epsilon_j+k_j)=(-1)^{\epsilon_j}\sin k_j}
-and #{\sin k_j=k_j+O(|k_j|^3)}. The operators #{\Gamma_j} have
+and #{\sin k_j=k_j+O(|k_j|^3)}. The operators #{\varepsilon_j^{S}\otimes\bbI_F} have
 norm one, and there are finitely many coordinates, so summing the
 remainders gives the stated operator-norm bound. Finally
-##{\widetilde\Gamma_i\widetilde\Gamma_j
- +\widetilde\Gamma_j\widetilde\Gamma_i
- =2\delta_{ij}I,}
+##{\begin{aligned}
+&(\varepsilon_i^{S}\otimes\bbI_F)'(\varepsilon_j^{S}\otimes\bbI_F)'\\
+&\quad+(\varepsilon_j^{S}\otimes\bbI_F)'(\varepsilon_i^{S}\otimes\bbI_F)'
+=2\delta_{ij}\bbI_{S\otimes F},
+\end{aligned}}
 since the two signs cancel when #{i=j}, while the off-diagonal
 anticommutator was already zero.}
 }
 
-\p{Thus the centered symbol has #{2^d} local first-order
+\p{Thus the centered symbol has #{2^n} local first-order
 branches on the same specified spinor/internal carrier. This is
 the algebraic doubling mechanism behind the sine propagator and
 opposite-slope discussion in
