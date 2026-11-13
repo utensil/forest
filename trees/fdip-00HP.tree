@@ -15,8 +15,8 @@ field normalization and any raw scalar prefactor. Assume its precision
 is continuous and bounded below. Its
 \vocabk{weighted Gaussian law}{fdip-00GH} is}
 
-##{Z_D=\int e^{-V_D}\,d\mu_{Q_D},\qquad
-   d\mu_D=Z_D^{-1}e^{-V_D}\,d\mu_{Q_D}.}
+##{Z_D=\int \ue^{-V_D}\,d\mu_{Q_D},\qquad
+   d\mu_D=Z_D^{-1}\ue^{-V_D}\,d\mu_{Q_D}.}
 
 \p{The full path configuration space is the finite orthogonal
 sum #{\mathsf E_D=\mathsf Q^{\oplus N}}, #{N\ge1}, with its
@@ -38,9 +38,9 @@ The first is the \vocabk{Schur complement}{fdip-000D},
 expressed through the retained covariance. Exact integration gives}
 
 ##{\begin{aligned}
-\mathcal P_*\mu_D(dx)&=Z_D^{-1}e^{-F_D(x)}\,d\mu_{Q_{D,X}}(x),\\
+\mathcal P_*\mu_D(dx)&=Z_D^{-1}\ue^{-F_D(x)}\,d\mu_{Q_{D,X}}(x),\\
 F_D(x)&=-\log\mathbb E_{\mu_{Q_D}}
- [e^{-V_D}\mid\mathcal P q=x].
+ [\ue^{-V_D}\mid\mathcal P q=x].
 \end{aligned}}
 
 \p{The \vocabk{effective action}{fdip-000D} relative to the induced retained Lebesgue volume is}
@@ -56,7 +56,7 @@ labels together with the tuple
 #{R(D)=(Q_{D,X},F_D,c_{C_D},Z_D,h_D)}, where #{h_D>0} is any scalar multiplying the raw input density; take #{h_D=1}
 when there is no external prefactor. Here #{R} denotes the exact
 Gaussian fiber integration just specified, and
-#{\operatorname{Law}(R(D))=Z_D^{-1}e^{-F_D}\mu_{Q_{D,X}}}.}
+#{\operatorname{Law}(R(D))=Z_D^{-1}\ue^{-F_D}\mu_{Q_{D,X}}}.}
 
 \tikzfigs{0.85}{\begin{tikzpicture}[
   every node/.style={inner sep=4pt},
@@ -88,19 +88,19 @@ The operator #{C_D} is the restriction of the quadratic form
 to the eliminated subspace. Positivity of both operators follows
 by evaluating on their isometric inclusions.}
 
-\p{Apply \ref{fdip-00GI} to #{Q_D} and #{w=e^{-V_D}}. The finite lower bound for
+\p{Apply \ref{fdip-00GI} to #{Q_D} and #{w=\ue^{-V_D}}. The finite lower bound for
 #{V_D} makes #{w} a continuous bounded positive weight. Its explicit Gaussian
 conditional version defines #{F_D} at every retained #{x}, and its marginal formula
-gives the normalized law. For the raw input density #{e^{-\langle
+gives the normalized law. For the raw input density #{\ue^{-\langle
 q,Q_Dq\rangle /2-V_D(q)}dq}, exact integration over its eliminated coordinates gives
-#{e^{-S_{\mathrm{eff},D}(x)}dx}. Its total integral is #{c_{Q_D}Z_D}, where
+#{\ue^{-S_{\mathrm{eff},D}(x)}dx}. Its total integral is #{c_{Q_D}Z_D}, where
 #{c_{Q_D}=(2\pi)^{\dim\mathsf E_D/2}/\sqrt{\det Q_D}}. For the periodic transfer convention in \ref{fdip-00GX},
 the heat prefactor is #{h_D=(2\pi\epsilon)^{-sN/2}}. Its effective
 action is #{S_{\mathrm{eff},D}-\log h_D} and its raw partition is #{h_Dc_{Q_D}Z_D}.
 Nested elimination uses the induced Gaussian and current interaction, by \ref{fdip-00GK}.}
 
 \p{If #{V_D} is replaced by #{V_D+k}, then #{F_D} and #{S_{\mathrm{eff},D}} increase
-by #{k}, while #{Z_D} and the raw partition are multiplied by #{e^{-k}}. The
+by #{k}, while #{Z_D} and the raw partition are multiplied by #{\ue^{-k}}. The
 normalized law is unchanged. Empty eliminated spaces have #{c_{C_D}=1}; empty retained
 spaces carry a unit point mass and their effective density is the full raw integral.
 Empty determinants equal one.}
