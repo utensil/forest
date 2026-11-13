@@ -7,7 +7,7 @@
 
 \p{Let #{G} be a finite group, and choose one unitary representative
 of each irreducible complex representation, as in the
-\vocabk{surface data}{fdip-006V}. Write #{d_\rho} for its dimension and
+\vocabk{surface data}{fdip-006V}. Write #{\dim\rho} for its dimension and
 #{\chi_\rho} for its character. For an integer #{g\ge 0}, let
 #{\Pi_g} be the group presented by generators
 #{x_1,y_1,\ldots,x_g,y_g} and the single relation that the product
@@ -19,11 +19,11 @@ be the number of #{2g}-tuples in #{G} whose product of commutators
 equals #{h}, with the empty product equal to the identity. Then
 each #{\psi_g} is a [class function](fgap-001M),
 #{\psi_{g+1}=\psi_g*\psi_1}, and
-##{\psi_g(h)=\sum_{\rho\in\widehat G}|G|^{2g-1}d_\rho^{1-2g}\chi_\rho(h).}
+##{\psi_g(h)=\sum_{\rho\in\widehat G}|G|^{2g-1}(\dim\rho)^{1-2g}\chi_\rho(h).}
 The number of homomorphisms satisfies
 ##{\frac{|\operatorname{Hom}(\Pi_g,G)|}{|G|}
  =\sum_{\rho\in\widehat G}
- \left(\frac{|G|}{d_\rho}\right)^{2g-2}.}}
+ \left(\frac{|G|}{\dim\rho}\right)^{2g-2}.}}
 
 \p{Let #{f} be the class function with #{f(1)=|G|} and with value
 #{0} at every other group element. For every surface admitted by
@@ -56,7 +56,7 @@ entries in that basis. The matrix orthogonality in \ref{fdip-006W} says
 ##{\frac1{|G|}\sum_{h\in G}
  \rho(h)_{ij}\tau(h^{-1})_{ab}
  =\begin{cases}
- d_\rho^{-1}\delta_{ib}\delta_{ja},&\rho=\tau,\\
+ (\dim\rho)^{-1}\delta_{ib}\delta_{ja},&\rho=\tau,\\
  0,&\rho\ne\tau.
  \end{cases}}
 Unitarity gives #{\tau(h^{-1})_{ab}=\overline{\tau(h)_{ba}}}.
@@ -64,12 +64,12 @@ Relabelling the indices therefore gives
 ##{\frac1{|G|}\sum_{h\in G}
  \rho(h)_{ij}\overline{\tau(h)_{kl}}
  =\begin{cases}
- d_\rho^{-1}\delta_{ik}\delta_{jl},&\rho=\tau,\\
+ (\dim\rho)^{-1}\delta_{ik}\delta_{jl},&\rho=\tau,\\
  0,&\rho\ne\tau.
  \end{cases}}
 Sum #{\rho(h)_{ii}\overline{\tau(h)_{kk}}} over the diagonal
 indices #{i} and #{k}. The identity supplies a factor
-#{d_\rho^{-1}} only when #{i=k}, and there are #{d_\rho} such
+#{(\dim\rho)^{-1}} only when #{i=k}, and there are #{\dim\rho} such
 indices, so
 ##{\frac1{|G|}\sum_{h\in G}
  \chi_\rho(h)\overline{\chi_\tau(h)}=\begin{cases}
@@ -80,15 +80,15 @@ In particular #{\sum_h|\chi_\rho(h)|^2=|G|}. The trace of
 the unitary identity #{\tau(h^{-1})=\tau(h)^*} gives
 #{\chi_\tau(h^{-1})=\overline{\chi_\tau(h)}}.}
 
-\p{Let #{f(h)=\sum_\rho d_\rho\chi_\rho(h)}. The
+\p{Let #{f(h)=\sum_\rho \dim\rho\chi_\rho(h)}. The
 [character expansion](fdip-006V) gives #{f} the coefficient
-##{c_\tau=\frac1{|G|}\sum_h f(h)\overline{\chi_\tau(h)}=d_\tau}
+##{c_\tau=\frac1{|G|}\sum_h f(h)\overline{\chi_\tau(h)}=\dim\tau}
 against #{\chi_\tau}. The class function #{|G|} at the identity
 and #{0} elsewhere has the same coefficients, so
-#{\sum_\rho d_\rho\chi_\rho(h)} equals #{|G|} at the identity and
+#{\sum_\rho \dim\rho\chi_\rho(h)} equals #{|G|} at the identity and
 equals #{0} elsewhere. Thus
-#{\psi_0=\sum_\rho(d_\rho\,|G|^{-1})\chi_\rho}, and evaluating at the
-identity gives #{\sum_\rho d_\rho^2=|G|}.}
+#{\psi_0=\sum_\rho(\dim\rho\,|G|^{-1})\chi_\rho}, and evaluating at the
+identity gives #{\sum_\rho (\dim\rho)^2=|G|}.}
 
 \p{For a linear map #{A} on the space of #{\rho}, the average
 ##{S(A)=\frac1{|G|}\sum_{g\in G}\rho(g)A\rho(g)^{-1}}
@@ -96,32 +96,32 @@ commutes with every #{\rho(h)}. Over #{\mathbb C} the
 endomorphism #{S(A)} has an eigenvalue. Its eigenspace is
 invariant, and irreducibility forces the eigenspace to be the
 whole space, so #{S(A)} is scalar. Its trace equals
-#{\operatorname{tr}A}, hence
-#{S(A)=(\operatorname{tr}A/d_\rho)I}. Taking #{A=\rho(b)} gives
+#{\trace A}, hence
+#{S(A)=(\trace A/\dim\rho)\bbI}. Taking #{A=\rho(b)} gives
 ##{\sum_{a\in G}\rho(a)\rho(b)\rho(a)^{-1}
- =\frac{|G|}{d_\rho}\chi_\rho(b)\,I.}
+ =\frac{|G|}{\dim\rho}\chi_\rho(b)\,\bbI.}
 Multiply by #{\rho(b)^{-1}} and sum over #{b}. The left side is
 #{\sum_{a,b}\rho([a,b])}. The right side is
-#{(|G|/d_\rho)\sum_b\chi_\rho(b)\rho(b)^{-1}}.}
+#{(|G|/\dim\rho)\sum_b\chi_\rho(b)\rho(b)^{-1}}.}
 
 \p{Set #{C=\sum_b\overline{\chi_\rho(b)}\rho(b)}. Then
 #{\rho(h)C\rho(h)^{-1}=C}, because #{\chi_\rho} is a class
 function, so the same scalar argument gives
-#{C=(|G|/d_\rho)I}. The trace computation uses
+#{C=(|G|/\dim\rho)\bbI}. The trace computation uses
 #{\sum_b|\chi_\rho(b)|^2=|G|}. The change of variable
 #{b\mapsto b^{-1}} and
 #{\chi_\rho(b)=\overline{\chi_\rho(b^{-1})}} identify
 #{\sum_b\chi_\rho(b)\rho(b)^{-1}} with #{C}. Therefore
 ##{\sum_{a,b\in G}\rho([a,b])
- =\left(\frac{|G|}{d_\rho}\right)^2 I.}
+ =\left(\frac{|G|}{\dim\rho}\right)^2 \bbI.}
 Taking traces gives
-#{\sum_{a,b}\chi_\rho([a,b])=|G|^2/d_\rho}. Inverting a
+#{\sum_{a,b}\chi_\rho([a,b])=|G|^2/\dim\rho}. Inverting a
 commutator swaps the two summation variables, so the same sum
 with #{\overline{\chi_\rho}} is equal. The coefficient in the
 [character expansion](fdip-006V) is that sum divided by #{|G|},
-hence #{|G|/d_\rho}:
+hence #{|G|/\dim\rho}:
 ##{\psi_1=\sum_{\rho\in\widehat G}
- \frac{|G|}{d_\rho}\chi_\rho.}}
+ \frac{|G|}{\dim\rho}\chi_\rho.}}
 
 \p{Expand the character convolution and insert a matrix product
 for the second character:
@@ -130,20 +130,20 @@ for the second character:
  \rho(x)_{ii}\tau(x^{-1})_{kl}\tau(z)_{lk}.}
 The matrix identity already displayed sums the variable #{x}:
 the sum over #{x} of #{\rho(x)_{ii}\tau(x^{-1})_{kl}} equals
-#{|G|d_\rho^{-1}} when #{\rho=\tau}, #{i=l} and #{i=k}, and
+#{|G|(\dim\rho)^{-1}} when #{\rho=\tau}, #{i=l} and #{i=k}, and
 equals zero otherwise. Multiplying by #{\tau(z)_{lk}} and
 summing those indices leaves the trace of #{\tau(z)}, so
 ##{(\chi_\rho*\chi_\tau)(z)
  =\begin{cases}
- (|G|/d_\rho)\chi_\rho(z),&\rho=\tau,\\
+ (|G|/\dim\rho)\chi_\rho(z),&\rho=\tau,\\
  0,&\rho\ne\tau.
  \end{cases}}
 Consequently, if #{\alpha_\rho} and #{\beta_\rho} are the
 character coefficients of two class functions, the coefficient of
 #{\chi_\rho} in their convolution is
-#{\alpha_\rho\beta_\rho(|G|/d_\rho)}. Convolution against
+#{\alpha_\rho\beta_\rho(|G|/\dim\rho)}. Convolution against
 #{\psi_1} multiplies the coefficient #{\alpha_\rho} by
-#{|G|^2/d_\rho^2}. Starting from #{\psi_0} and applying this
+#{|G|^2/(\dim\rho)^2}. Starting from #{\psi_0} and applying this
 multiplication #{g} times gives the displayed formula for
 #{\psi_g}.}
 
@@ -151,12 +151,12 @@ multiplication #{g} times gives the displayed formula for
 product of commutators is the identity, so
 #{|\operatorname{Hom}(\Pi_g,G)|=\psi_g(1)}. The displayed
 expansion at the identity is
-#{|G|^{2g-1}\sum_\rho d_\rho^{2-2g}}. Dividing by #{|G|} gives
+#{|G|^{2g-1}\sum_\rho (\dim\rho)^{2-2g}}. Dividing by #{|G|} gives
 the homomorphism formula.}
 
 \p{For the stated face weight, the character expansion in
-\ref{fdip-006V} has #{c_\rho=d_\rho}. Every ratio #{c_\rho/d_\rho}
+\ref{fdip-006V} has #{c_\rho=\dim\rho}. Every ratio #{c_\rho/\dim\rho}
 equals #{1}, so \ref{fdip-006W} gives
-#{Z_\Sigma(f)=\sum_\rho d_\rho^{2-2g}}. The evaluation of
+#{Z_\Sigma(f)=\sum_\rho (\dim\rho)^{2-2g}}. The evaluation of
 #{\psi_g} at the identity is #{|G|^{2g-1}} times that sum.}
 }
