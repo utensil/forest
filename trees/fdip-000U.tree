@@ -37,39 +37,39 @@ They are neither the coordinate vectors #{\delta_i} nor the
 normalized real spectral vectors #{u_a} of the
 [cycle spectral calculation](fdip-0037). Direct multiplication gives
 ##{\begin{aligned}
-H^TH&=4I,\\
+H^TH&=4\bbI,\\
 QH&=H\operatorname{diag}(1,3,2t+1,2t+3).
 \end{aligned}}
 Since #{2} is a unit in #{A_0}, #{H^{-1}=H^T/4}.
 Similarity therefore gives
-##{\Delta:=\det Q=3(2t+1)(2t+3).}
+##{\kappa:=\det Q=3(2t+1)(2t+3).}
 The congruence formula retains a factor 4:
 ##{H^TQH=4\operatorname{diag}(1,3,2t+1,2t+3).}
 These are polynomial matrix identities, independent of any
 order or positivity on the coefficient ring.}
 
 \p{The \newvocab{nondegenerate arithmetic base} is
-##{R_q=A_0[\Delta^{-1}],\qquad X_q=\operatorname{Spec}R_q,}
+##{R_q=A_0[\kappa^{-1}],\qquad X_q=\Spec R_q,}
 with quadratic module #{(R_q^4,q)}. Here #{A[g^{-1}]}
 denotes localization of a commutative ring #{A} by the powers
-of #{g}. The spectrum #{\operatorname{Spec}A} has prime ideals
+of #{g}. The spectrum #{\Spec A} has prime ideals
 as points; its \newvocab{standard open}
-##{D_{\operatorname{Spec}A}(g)
+##{{\basic{g}}_{\Spec A}
 =\{\mathfrak p:g\notin\mathfrak p\}}
 has regular functions #{A[g^{-1}]}. The structure sheaf given
 by these rings and their restriction maps makes the spectrum
 an affine scheme, in the sense of
 \citet{Section 26.5}{stacks2017stacks}, [Tag 01HR](https://stacks.math.columbia.edu/tag/01HR).}
 
-\p{Every factor of the unit product #{\Delta} is a unit in
+\p{Every factor of the unit product #{\kappa} is a unit in
 #{R_q}: an inverse for a factor is the product of the other
-factors times #{\Delta^{-1}}. The displayed similarity then
+factors times #{\kappa^{-1}}. The displayed similarity then
 makes #{Q} invertible. Both #{Q} and #{2Q} identify #{R_q^4}
 with its dual. This localization selects nondegenerate forms;
 the [Clifford quotient](fdip-000P) exists over #{A_0} even
 before it is made. Inverting #{2} separately excludes
-characteristic two, although #{\Delta\equiv1\pmod2}.
-Inverting #{\Delta} removes characteristic three entirely.
+characteristic two, although #{\kappa\equiv1\pmod2}.
+Inverting #{\kappa} removes characteristic three entirely.
 In any residue field of characteristic other than two or three,
 the excluded parameters are #{-1/2} and #{-3/2}; they are
 distinct because their difference is one.}
@@ -81,7 +81,7 @@ retains information that a single real matrix does not.}
 
 \p{The same half-turn
 ##{P(x_0,x_1,x_2,x_3)=(x_2,x_3,x_0,x_1)}
-satisfies #{P^2=I} and #{P^TQP=Q}: shifting both indices by two
+satisfies #{P^2=\bbI} and #{P^TQP=Q}: shifting both indices by two
 preserves each entry of #{Q}. By the
 \vocabk{universal property}{ca-000C}, the assignment
 ##{\iota_q(x)\longmapsto\iota_q(Px)}
@@ -98,15 +98,15 @@ its denominator from that of the [trace ratio on its unit domain](fdip-003H), pu
 ##{\begin{aligned}
 R_{\mathrm{elim}}&=R_q[s^{-1}],\\
 R_{\mathrm{obs}}&=R_{\mathrm{elim}}[f^{-1}],\\
-X_{\mathrm{elim}}&=\operatorname{Spec}R_{\mathrm{elim}},\\
-X_{\mathrm{obs}}&=\operatorname{Spec}R_{\mathrm{obs}},\\
-U_R&=D_{X_q}(f).
+X_{\mathrm{elim}}&=\Spec R_{\mathrm{elim}},\\
+X_{\mathrm{obs}}&=\Spec R_{\mathrm{obs}},\\
+U_R&={\basic{f}}_{X_q}.
 \end{aligned}}
 The open immersions identify
 ##{\begin{aligned}
-X_{\mathrm{elim}}&=D_{X_q}(s),\\
-X_{\mathrm{obs}}&=D_{X_{\mathrm{elim}}}(f)
-=D_{X_q}(sf),\\
+X_{\mathrm{elim}}&={\basic{s}}_{X_q},\\
+X_{\mathrm{obs}}&={\basic{f}}_{X_{\mathrm{elim}}}
+={\basic{sf}}_{X_q},\\
 X_{\mathrm{obs}}&=X_{\mathrm{elim}}\cap U_R.
 \end{aligned}}
 The independent ratio locus #{U_R} is not identified with
@@ -134,7 +134,7 @@ other two opens inside #{X_q}. The localization homeomorphism is
 The structure-sheaf construction in
 \citet{Section 26.5}{stacks2017stacks}, [Tag 01HR](https://stacks.math.columbia.edu/tag/01HR)
 upgrades it to an open immersion: on a standard open inside
-#{D(g)}, successive localization gives the same ring and
+#{\basic{g}}, successive localization gives the same ring and
 restriction map on either side. These identifications agree on
 intersections, so the structure sheaves agree. Mathlib's
 \leanref{AlgebraicGeometry.Scheme.isOpenImmersion_SpecMap_localizationAway}
