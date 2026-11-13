@@ -14,9 +14,9 @@ This is the kernel dimension for the explicitly chosen
 reducible module #{S}, whose dimension is #{2^n}.
 The unit-weight \vocabk{graph Laplacian}{fdip-0007}
 ##{L_{\mathrm{nn}}=-\sum_{j=1}^n
- (2I_H-T_j-T_j^{-1})}
+ (2\bbI_H-T_j-T_j^{-1})}
 has only the zero momentum in its scalar kernel.
-Moreover #{-D^2\ne I_S\otimes(-L_{\mathrm{nn}})} on every
+Moreover #{-D^2\ne \bbI_S\otimes(-L_{\mathrm{nn}})} on every
 permitted grid, including grids with all periods odd.
 These are finite consequences of the
 [Fourier blocks](fdip-000S); the centered-difference convention
@@ -26,7 +26,7 @@ pp. 19-20}{wingate2025lattice}.}
 \proof{
 \p{The forward-difference factorization from
 \ref{fdip-0014}, applied in each coordinate, gives
-##{-L_{\mathrm{nn}}=\sum_j(T_j-I_H)^{\dagger}(T_j-I_H).}
+##{-L_{\mathrm{nn}}=\sum_j(T_j-\bbI_H)^{\dagger}(T_j-\bbI_H).}
 For #{N_j\ge3}, each undirected nearest-neighbor edge occurs
 once in the corresponding squared-difference energy.
 On the character with momentum #{p}, the eigenvalue of #{-L_{\mathrm{nn}}} is
@@ -48,10 +48,10 @@ exactly when each #{\sin p_j=0}. In the range
 #{2^e} choices. On each such block #{D(p)=0} on all of #{S}.
 Every other block is invertible, with two-sided inverse
 ##{D(p)^{-1}=-D(p)/s(p),}
-because #{D(p)^2=-s(p)I_S}. Completeness of the Fourier
+because #{D(p)^2=-s(p)\bbI_S}. Completeness of the Fourier
 basis therefore gives #{\dim\ker D=2^e\dim S=2^{n+e}}.
 In contrast, #{\ell(p)=0} forces #{r_j=0} for every #{j};
-thus #{\dim\ker(I_S\otimes L_{\mathrm{nn}})=2^n}.}
+thus #{\dim\ker(\bbI_S\otimes L_{\mathrm{nn}})=2^n}.}
 }
 
 \p{For #{n=1,N=4}, the alternating scalar field
@@ -60,7 +60,7 @@ difference is zero, whereas #{(-L_{\mathrm{nn}})a=4a}.
 Consequently every field #{x\mapsto a(x)v}, #{v\in S},
 is killed by #{D}. Together with the constant fields these
 give the four-dimensional kernel. Write
-#{K_2=(2I_H-T^2-T^{-2})/4}, so #{-D^2=I_S\otimes K_2}.
+#{K_2=(2\bbI_H-T^2-T^{-2})/4}, so #{-D^2=\bbI_S\otimes K_2}.
 The two scalar Laplacians have the following weighted graphs:}
 
 \tikzfigs{0.75}{\begin{tikzpicture}[
@@ -89,7 +89,7 @@ The two scalar Laplacians have the following weighted graphs:}
 Right: the two-step edges, with vertices rearranged to display
 the parity classes #{\{0,2\}} and #{\{1,3\}}.
 At period #{4}, #{T^2=T^{-2}}, so
-#{K_2=(I_H-T^2)/2}: the two shift contributions of weight
+#{K_2=(\bbI_H-T^2)/2}: the two shift contributions of weight
 #{1/4} combine into one undirected edge of weight #{1/2}
 for each opposite pair. The alternating field is constant on
 each right-hand component, explaining its zero energy there.}

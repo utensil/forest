@@ -80,16 +80,16 @@ the module identities above.}
 \proof{
 \p{Factor the symmetric matrix in retained and eliminated blocks as
 ##{\begin{aligned}
-Q&=\begin{pmatrix}I&Q_{RU}Q_{UU}^{-1}\\0&I\end{pmatrix}
+Q&=\begin{pmatrix}\bbI&Q_{RU}Q_{UU}^{-1}\\0&\bbI\end{pmatrix}
 \begin{pmatrix}S&0\\0&Q_{UU}\end{pmatrix}
-\begin{pmatrix}I&0\\L&I\end{pmatrix}.
+\begin{pmatrix}\bbI&0\\L&\bbI\end{pmatrix}.
 \end{aligned}}
 The two outer factors are invertible over #{A}: each is undone by changing
 the sign of its off-diagonal block. The hypothesis already makes
 #{Q_{UU}} invertible. If #{S} is invertible, the block-diagonal matrix of
 #{S^{-1}} and #{Q_{UU}^{-1}} inverts the middle factor, so that factor
 and #{Q} are invertible. Conversely, if #{Q} is invertible then the
-middle factor #{D} is invertible. If #{DE=I=ED}, the retained block of
+middle factor #{D} is invertible. If #{DE=\bbI=ED}, the retained block of
 #{DE} is #{S} times the retained block of #{E}, and the retained block
 of #{ED} is that block times #{S}. Both products are the identity, so
 #{S} is invertible. The same reading applies to #{Q_{UU}}. Thus, once
@@ -97,9 +97,9 @@ of #{ED} is that block times #{S}. Both products are the identity, so
 The running hypotheses give both, so #{S} is invertible.
 The inverse is
 ##{\begin{aligned}
-C&=\begin{pmatrix}I&0\\-L&I\end{pmatrix}
+C&=\begin{pmatrix}\bbI&0\\-L&\bbI\end{pmatrix}
 \begin{pmatrix}S^{-1}&0\\0&Q_{UU}^{-1}\end{pmatrix}
-\begin{pmatrix}I&-Q_{RU}Q_{UU}^{-1}\\0&I\end{pmatrix}.
+\begin{pmatrix}\bbI&-Q_{RU}Q_{UU}^{-1}\\0&\bbI\end{pmatrix}.
 \end{aligned}}
 Reading blocks gives #{C_{RR}=S^{-1}} and
 #{C_{UR}=-LS^{-1}}. A polynomial in the retained variables alone is paired

@@ -9,15 +9,15 @@
 the centered Dirac operator is skew-adjoint and has square
 ##{\begin{aligned}
 D^{\dagger}&=-D,\\
-D^2&=I_S\otimes\sum_{j=1}^n\cov_j^2,\\
--D^2&=\frac14 I_S\otimes
-\sum_{j=1}^n(2I_H-T_j^2-T_j^{-2}).
+D^2&=\bbI_S\otimes\sum_{j=1}^n\cov_j^2,\\
+-D^2&=\frac14 \bbI_S\otimes
+\sum_{j=1}^n(2\bbI_H-T_j^2-T_j^{-2}).
 \end{aligned}}
 In particular #{-D^2=D^{\dagger}D} is positive semidefinite.
 Its complete finite Fourier decomposition has blocks
 ##{\begin{aligned}
 D(p)&=\ui\sum_{j=1}^n\gamma_j\sin p_j,\\
--D(p)^2&=s(p)I_S,\\
+-D(p)^2&=s(p)\bbI_S,\\
 s(p)&=\sum_{j=1}^n\sin^2p_j,
 \end{aligned}}
 where #{p_j=2\pi r_j/N_j} and #{0\le r_j<N_j}.
@@ -36,7 +36,7 @@ adjoint formula gives
 #{(\gamma_j\otimes\cov_j)^{\dagger}
 =-\gamma_j\otimes\cov_j}; adding proves #{D^{\dagger}=-D}.
 In the square, every diagonal term is
-#{\gamma_j^2\otimes\cov_j^2=I_S\otimes\cov_j^2}.
+#{\gamma_j^2\otimes\cov_j^2=\bbI_S\otimes\cov_j^2}.
 For #{i<j}, the paired off-diagonal terms are
 ##{\begin{gathered}
 \gamma_i\gamma_j\otimes\cov_i\cov_j
@@ -47,7 +47,7 @@ For #{i<j}, the paired off-diagonal terms are
 using commutation of the differences and anticommutation of
 the distinct gamma matrices. This proves the square formula.
 Expanding #{\cov_j^2} gives
-#{(T_j^2-2I_H+T_j^{-2})/4}.
+#{(T_j^2-2\bbI_H+T_j^{-2})/4}.
 Finally #{\langle\psi,-D^2\psi\rangle_K
 =\langle D\psi,D\psi\rangle_K\ge0}.}
 
@@ -99,7 +99,7 @@ The forward shift has
 Each displayed summand is invariant under #{D}, with block
 #{D(p)=\ui\sum_j\gamma_j\sin p_j}.
 Expanding its square using the same anticommutators gives
-#{D(p)^2=-s(p)I_S}.}
+#{D(p)^2=-s(p)\bbI_S}.}
 }
 
 \p{Mathlib's \leanref{LinearMap.adjoint} and
