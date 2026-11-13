@@ -6,38 +6,63 @@
 \date{2026-11-01}
 
 \p{Let #{f} be the defining two-dimensional representation of
-#{SU(2)} and #{\beta>0}. Then
+#{SU(2)} and let #{\beta>0}. The function
 ##{k(g)=e^{\beta\chi_f(g)}}
-satisfies the [transfer kernel conditions](fdip-007Z).
-More precisely, if #{m_\rho(n)} is the multiplicity of #{\rho}
-in #{f^{\otimes n}}, then
-##{\begin{aligned}
-c_\rho&=\sum_{n=0}^\infty
- \frac{\beta^n}{n!}m_\rho(n)>0,\\
-a_\rho&=\frac{c_\rho}{d_\rho},\qquad
-\sum_\rho d_\rho^2a_\rho=e^{2\beta}.
-\end{aligned}}
-This is the tensor-power argument used in
-\citet{Proposition 1, p. 288}{luscher1977transfer}, with
-strict occurrence and absolute convergence justified below.}
+is continuous, central, strictly positive and inversion-symmetric.
+For each integer #{N\ge0} and each irreducible #{\rho}, write
+#{m_\rho(n)} for the multiplicity of #{\rho} in #{f^{\otimes n}} and
+##{c_{\rho,N}=\sum_{n=0}^{N}\frac{\beta^n}{n!}m_\rho(n).}
+Each tensor power contributes a finite character sum,
+##{\chi_f(g)^n=\sum_\rho m_\rho(n)\chi_\rho(g),
+ \qquad \sum_\rho m_\rho(n)d_\rho=2^n.}
+The Taylor polynomial of degree #{N} therefore expands as
+##{\sum_{n=0}^{N}\frac{\beta^n}{n!}\chi_f(g)^n
+ =\sum_\rho c_{\rho,N}\chi_\rho(g),}
+and the dimension-weighted sum of the coefficients is the partial
+sum of the exponential,
+##{\sum_\rho d_\rho c_{\rho,N}
+ =\sum_{n=0}^{N}\frac{(2\beta)^n}{n!}.}
+Lagrange's form of the remainder gives a real #{\xi} between #{0}
+and #{2\beta} such that
+##{e^{2\beta}
+ =\sum_{n=0}^{N}\frac{(2\beta)^n}{n!}
+ +e^{\xi}\frac{(2\beta)^{N+1}}{(N+1)!}.}
+For each #{g} there is a real number #{\eta} between #{0} and
+#{\beta\chi_f(g)} such that
+##{k(g)=\sum_{n=0}^{N}\frac{(\beta\chi_f(g))^n}{n!}
+ +e^{\eta}\frac{(\beta\chi_f(g))^{N+1}}{(N+1)!}.}
+The irreducible representations with
+#{c_{\rho,N}>0} form a finite set #{F}, and
+#{k_N=\sum_{\rho\in F}c_{\rho,N}\chi_\rho} is the truncation
+#{k_F} of \ref{fdip-007Z} with coefficients
+#{a_\rho=c_{\rho,N}/d_\rho}. For each irreducible #{\rho} there is
+a finite degree at which it occurs, and #{c_{\rho,N}>0} for every
+larger truncation degree.}
 
 \proof{
 \p{Use the ordered matrix chart of \ref{fdip-007G}. In that chart
 an element of #{SU(2)} is
 ##{g=\begin{pmatrix}z&w\\-\overline w&\overline z\end{pmatrix},
  \qquad |z|^2+|w|^2=1.}
-Hence #{\chi_f(g)=2\operatorname{Re}z} is real,
+Hence #{\chi_f(g)=2\operatorname{Re}z} is real and lies in
+#{[-2,2]}. Also
 #{\chi_f(g^{-1})=\chi_f(g)}, and #{k} is continuous, central
-and strictly positive. Every tensor power is unitary; invariant
-orthogonal complements decompose it into irreducibles. Therefore
-##{\chi_f(g)^n=\sum_\rho m_\rho(n)\chi_\rho(g),
- \qquad \sum_\rho m_\rho(n)d_\rho=2^n.}
-Expanding the exponential and using nonnegative multiplicities gives
-##{\sum_\rho d_\rho c_\rho
- =\sum_{n=0}^\infty\frac{\beta^n2^n}{n!}=e^{2\beta}.}
-Since #{|\chi_\rho(g)|\le d_\rho}, this also justifies
-rearranging the series uniformly and proves the claimed expansion.
-It remains to show that no #{c_\rho} is zero.}
+and strictly positive because it is an exponential of a real
+value. Every tensor power is unitary; invariant orthogonal
+complements decompose it into irreducibles. Evaluating the
+character identity at the identity gives
+#{\sum_\rho m_\rho(n)d_\rho=2^n}. Only finitely many multiplicities
+are nonzero. Multiplying by #{\beta^n/n!} and summing through
+degree #{N} gives the displayed polynomial and the partial sum
+#{\sum_\rho d_\rho c_{\rho,N}}.}
+
+\p{For #{\psi(s)=e^s}, Taylor expansion at #{0} with Lagrange
+remainder produces, at #{s=2\beta}, a point #{\xi} between #{0}
+and #{2\beta} with the displayed scalar identity. The same
+expansion at #{s=\beta\chi_f(g)} produces a point #{\eta} between
+#{0} and #{\beta\chi_f(g)} and the displayed pointwise identity
+for #{k(g)}. Since #{\beta>0} and each multiplicity is nonnegative,
+#{c_{\rho,N}} is a sum of nonnegative terms.}
 
 \p{Consider the algebra of finite linear combinations of matrix
 coefficients of the powers #{f^{\otimes n}}, including #{n=0}.
@@ -60,7 +85,23 @@ all its matrix coefficients orthogonal to this algebra. Choose a
 nonzero such coefficient #{u}. Uniform density gives algebra
 functions converging uniformly, hence in normalized Haar #{L^2},
 to #{u}. Orthogonality would then give #{\|u\|_2^2=0}, a
-contradiction. Thus #{m_\rho(n)>0} for some #{n}, and
-#{\beta>0} makes #{c_\rho>0}. Dividing by #{d_\rho} proves all
-remaining coefficient assertions.}
+contradiction. Thus #{m_\rho(n)>0} for some finite #{n}. For every
+truncation degree #{N\ge n}, the corresponding term is positive,
+so #{c_{\rho,N}>0}. The representations with positive coefficient
+at a fixed #{N} are among the irreducible summands of
+#{f^{\otimes 0},\ldots,f^{\otimes N}}, a finite list. Self-duality
+of the irreducible representations of #{SU(2)} closes that list
+under duals.}
 }
+
+\p{Remark. Continuum comparison. The convergent series is not the
+statement above. Summing every degree gives
+##{c_\rho=\sum_{n=0}^\infty\frac{\beta^n}{n!}m_\rho(n),\qquad
+ a_\rho=\frac{c_\rho}{d_\rho},\qquad
+ \sum_\rho d_\rho^2a_\rho=e^{2\beta}.}
+The scalar remainder tends to #{0} as #{N} increases, and
+#{|\chi_\rho(g)|\le d_\rho} lets the character series of #{k} be
+rearranged uniformly. The resulting coefficients are positive for
+every #{\rho}, by the finite occurrence proved above. This is the
+expansion compared with
+\citet{Proposition 1, p. 288}{luscher1977transfer}.}

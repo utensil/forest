@@ -5,63 +5,60 @@
 \title{Positivity and trace class of the gauge transfer operator}
 \date{2026-11-01}
 
-\p{For the [spatial transfer data](fdip-007Z), #{C_k} and
-#{T=M_bC_kM_b} are bounded, self-adjoint, positive, injective
-and trace class. Both commute with every gauge operator #{R_h}.
-If
-##{\kappa=\sum_\rho d_\rho^2a_\rho=k(1),}
-then
-##{\operatorname{Tr}C_k=\kappa^{|E_s|},\qquad
- \operatorname{Tr}T\le\|b\|_\infty^2\kappa^{|E_s|}.}
-Positive means #{\langle f,Tf\rangle\ge0}; in fact this pairing
-is strictly positive for every nonzero #{f}. It does not assert a
-uniform positive lower bound on the spectrum.}
+\p{For the [spatial transfer data](fdip-007Z), let #{F} be a finite
+set of irreducible unitary representations, closed under duals, with
+coefficients #{a_\rho>0} and #{a_{\rho^*}=a_\rho}. Let #{k_F},
+#{\kappa_F}, #{C_{k_F}} and #{T_F} be the truncation, the scalar and
+the two operators defined there. Then #{C_{k_F}} and #{T_F} are
+bounded and self-adjoint, and both are positive semidefinite. Both
+commute with every gauge operator #{R_h}. The operator #{C_{k_F}}
+has finite rank, and
+##{\operatorname{Tr}C_{k_F}=\kappa_F^{|E_s|},\qquad
+ \operatorname{Tr}T_F\le\|b\|_\infty^2\kappa_F^{|E_s|}.}
+Positive semidefinite means #{\langle f,T_Ff\rangle\ge0}. On each
+matrix-coefficient block of a representation in #{F}, convolution
+by #{k_F} acts by the scalar #{a_\rho}.}
 
 \proof{
 \p{For one edge, use the normalized matrix-entry basis
-#{\phi_{\rho ij}(U)=\sqrt{d_\rho}\rho(U)_{ij}} of the
-[Peter–Weyl theorem](fdip-007C). Unitarity gives
-##{k(UU'^{-1})=\sum_{\rho,i,j}
+#{\phi_{\rho ij}(U)=\sqrt{d_\rho}\rho(U)_{ij}}, for #{\rho\in F}, of
+the [Peter–Weyl theorem](fdip-007C). Unitarity gives
+##{k_F(UU'^{-1})=\sum_{\rho\in F}\sum_{i,j}
  a_\rho\phi_{\rho ij}(U)\overline{\phi_{\rho ij}(U')}.}
-Indeed, the matrix-entry sum is
+The matrix-entry sum for one #{\rho} is
 #{d_\rho\operatorname{Tr}(\rho(U)\rho(U')^*)}.
-Schur orthogonality therefore makes convolution act by
-#{a_\rho} on this block. The tensor products of these bases over
-the finitely many edges give an orthonormal basis #{(\phi_I)}
-of #{\mathcal H_{\mathrm{link}}}, with eigenvalues
-##{\alpha_I=\prod_{e\in E_s}a_{\rho_e}>0,\qquad
- \sum_I\alpha_I=\kappa^{|E_s|}<\infty.}
-The operator assertions about #{C_k}, including injectivity and
-its trace, follow directly from this complete diagonalization.
-Here trace class for a positive compact operator has the meaning
-used in the [Gaussian spectrum](fdip-007U): its eigenvalues are
-summable.}
+Schur orthogonality therefore makes convolution act by #{a_\rho} on
+this block. The tensor products of these bases over the finitely
+many edges give finitely many orthonormal vectors #{(\phi_I)},
+indexed by tuples #{I} with each factor in #{F}. Their eigenvalues
+are
+##{\alpha_I=\prod_{e\in E_s}a_{\rho_e}>0.}
+The sum of these eigenvalues is finite, and grouping by edges gives
+##{\sum_I\alpha_I=\kappa_F^{|E_s|}.}
+These vectors are eigenvectors for the nonzero eigenvalues, and
+every other mode is annihilated. The trace is the sum of the
+eigenvalues, hence equal to #{\kappa_F^{|E_s|}}. Finite rank
+follows.}
 
 \p{For clarity, write the rank-one operator
 #{|v\rangle\langle v|} as #{f\mapsto v\langle v,f\rangle},
 with the inner product linear in its second variable. Then
-##{T=\sum_I\alpha_I
- |b\phi_I\rangle\langle b\phi_I|.}
-The \newvocab{trace norm} is
-#{\|A\|_1=\operatorname{Tr}((A^*A)^{1/2})}; for a positive
-operator it equals its trace. Trace class means this norm is finite.
-Each summand is positive and its trace norm is
-#{\alpha_I\|b\phi_I\|_2^2}. Their sum is at most
-#{\|b\|_\infty^2\sum_I\alpha_I}, so the series converges in
-trace norm and proves positivity, self-adjointness, compactness
-and the trace bound. For #{f\ne0}, bounded invertibility of
-#{M_b} gives #{bf\ne0}; hence
-##{\langle f,Tf\rangle=\langle bf,C_kbf\rangle>0.}
-This proves injectivity as well. Only boundedness and bounded
-invertibility of #{M_b} were used; no continuity of the spatial
-potential is required.}
+##{T_F=\sum_I\alpha_I
+ |b\phi_I\rangle\langle b\phi_I|,}
+a finite sum. Each summand is positive and self-adjoint, and
+its trace is
+#{\alpha_I\|b\phi_I\|_2^2\le\alpha_I\|b\|_\infty^2}.
+The sum of the traces is at most
+#{\|b\|_\infty^2\kappa_F^{|E_s|}}. Thus #{T_F} is bounded,
+self-adjoint and positive semidefinite, and the trace bound holds.
+Only boundedness of #{M_b} was used for that bound.}
 
 \p{Under a simultaneous gauge change of #{U,U'},
 ##{(h\cdot U)_e(h\cdot U')_e^{-1}
  =h_{t(e)}(U_eU_e'^{-1})h_{t(e)}^{-1}.}
-Centrality of #{k} and invariance of product Haar measure show
-#{C_kR_h=R_hC_k}. Gauge invariance of #{b} gives the same
-commutation for #{M_b} and #{T}.}
+Centrality of #{k_F} and invariance of product Haar measure show
+#{C_{k_F}R_h=R_hC_{k_F}}. Gauge invariance of #{b} gives the same
+commutation for #{M_b} and #{T_F}.}
 }
 
 \transclude{fdip-00M9}
@@ -69,3 +66,26 @@ commutation for #{M_b} and #{T}.}
 \p{The factorization proof follows the idea of
 \citet{Proposition 1, p. 288}{luscher1977transfer}, under the
 explicit pure-gauge hypotheses of \ref{fdip-007Z}.}
+
+\p{Remark. Continuum comparison. The convergent series is not the
+statement above. For a real central inversion-symmetric kernel
+whose coefficient #{a_\rho} is positive on every irreducible and
+whose sum #{\kappa=\sum_\rho d_\rho^2a_\rho=k(1)} is finite, the
+same block eigenvalues, now over every irreducible, give
+##{\sum_I\alpha_I=\kappa^{|E_s|}<\infty.}
+The corresponding sum for #{T} then converges in trace norm. Its
+sum is trace class, self-adjoint and positive, with
+##{\operatorname{Tr}C_k=\kappa^{|E_s|},\qquad
+ \operatorname{Tr}T\le\|b\|_\infty^2\kappa^{|E_s|}.}
+Centrality of #{k} and gauge invariance of #{b} give
+#{C_kR_h=R_hC_k} and #{TR_h=R_hT}, by the same conjugation as
+for the truncation. If #{f\ne0} and #{M_b} is boundedly invertible,
+then #{bf\ne0} and
+#{\langle bf,C_kbf\rangle>0}, because every coefficient is positive
+and the blocks exhaust the link space. The untruncated operator is
+therefore injective. A finite truncation does not have this
+injectivity. Convolution by #{k_F} annihilates every function
+supported on blocks outside #{F}. Where #{T_F} is defined,
+#{b^{-1}} is bounded and #{T_F=M_bC_{k_F}M_b}, so the kernel of
+#{T_F} is the preimage of that kernel under #{M_b}. Neither
+operator is given a uniform positive lower bound on its spectrum.}
