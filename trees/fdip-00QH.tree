@@ -1,0 +1,46 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{Elementary abelian directions are Clifford}
+\date{2026-11-12}
+
+\p{Let #{k} be a commutative unital ring and let
+#{G=(\mathbb Z/2\mathbb Z)^n}. Write elements as vectors with
+coordinates in #{\{0,1\}}. For units #{q_1,\ldots,q_n} of #{k} set
+##{F(x,y)=(-1)^{\sum_{j<i}x_i y_j}\prod_{i=1}^n q_i^{x_i y_i}.}
+Then #{F} is a #{2}-cocycle, and #{k_F[G]} is isomorphic to the
+Clifford algebra of the diagonal form #{q(e_i)=q_i}. The unit-weight
+derived form on the calculus with those directions is the case
+#{q_i=1}. This is the shape of
+\citet{Proposition 2.1}{albuquerque2002clifford} and
+\citet{Proposition 2.2}{albuquerque2002clifford}, proved here over
+any commutative ring.}
+
+\proof{
+\p{The exponent of #{(-1)} is an integer, so the value #{(-1)} is
+the ring element, including in characteristic #{2} where it equals
+#{1}. For the cocycle identity compare exponents of each #{q_i} and
+of #{-1}, using representatives #{0} and #{1}. The group sum is
+the exclusive or #{x_i+y_i-2x_i y_i}. Both sides of the identity
+then have #{q_i}-exponent
+#{x_i y_i+x_i z_i+y_i z_i-2x_i y_i z_i}. The sign exponent differs
+by an even integer, so the powers of #{-1} agree. Expanding the
+product then gives
+#{(u_x u_y)u_z=F(x,y)F(xy,z)\,u_{xyz}} and
+#{u_x(u_y u_z)=F(y,z)F(x,yz)\,u_{xyz}}. The cocycle identity says
+the coefficients agree, so the product is associative.}
+
+\p{Write #{u_i} for the basis element of the standard generator
+#{e_i}. Then #{u_i^2=q_i}. If #{i<j}, the sign exponent of
+#{F(e_i,e_j)} vanishes and that of #{F(e_j,e_i)} equals #{1}, while
+every #{q}-exponent vanishes. Hence
+#{u_i u_j=-u_j u_i}. The assignment #{e_i\mapsto u_i} therefore
+satisfies the square and anticommutator relations of
+\ref{fdip-000P}. The universal property supplies a homomorphism from
+the Clifford algebra into this associative algebra. An ordered
+monomial on a subset #{S} maps to a unit times #{u_S}: reordering
+contributes a sign, and that monomial contains no square. Distinct
+subsets give distinct group elements, so the images of the #{2^n}
+ordered monomials are a basis. The homomorphism is an isomorphism.}
+}
