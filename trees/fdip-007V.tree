@@ -7,14 +7,14 @@
 
 \p{Use the kernel and parameters of \ref{fdip-007T} and
 \ref{fdip-007U}. For every integer #{N\ge1},
-##{\operatorname{Tr}T^N
+##{\trace T^N
  =\frac{\lambda_0^N}{1-q^N}
  =\frac{(2\pi /w)^{N/2}}{2\sinh(N\omega /2)}.}
 For #{N\ge3}, this equals the periodic Gaussian normalizer
 #{Z_N}. If #{f_0,\ldots,f_{N-1}} are bounded complex measurable
 functions and #{M_f} denotes multiplication by #{f}, then
 ##{\mathbb E_{\mu_N}\prod_{j=0}^{N-1}f_j(x_j)
- =\frac{\operatorname{Tr}
+ =\frac{\trace
  (M_{f_0}T M_{f_1}T\cdots M_{f_{N-1}}T)}{Z_N}.}
 In particular, bounded two-point observables have the usual
 cyclic trace expression with #{T^{N-t}} and #{T^t}.}
@@ -28,13 +28,13 @@ It has a unique Hilbert–Schmidt extension. The precise coordinate
 trace formula is
 ##{\begin{aligned}
 \mathbb E_{\mu_N}[x_0x_t]
- &=\frac{\operatorname{Tr}(A_t^*A_t)}{Z_N}\\
+ &=\frac{\trace(A_t^{\dagger}A_t)}{Z_N}\\
  &=\frac{q^t+q^{N-t}}{2s(1-q^N)},
  \qquad x_N=x_0.
 \end{aligned}}
-Here #{\operatorname{Tr}(A_t^*A_t)} supplies the meaning of the
+Here #{\trace(A_t^{\dagger}A_t)} supplies the meaning of the
 frequently written unbounded expression
-#{\operatorname{Tr}(T^{N-t}XT^tX)}.}
+#{\trace(T^{N-t}XT^tX)}.}
 
 \proof{
 \p{The eigenvalues in \ref{fdip-007U} give the first trace by a
@@ -42,7 +42,7 @@ geometric sum. The remaining expression uses
 #{\lambda_0=\sqrt{2\pi /w}\,q^{1/2}} and
 #{q^{-N/2}-q^{N/2}=2\sinh(N\omega /2)}.
 On the ordinary cycle, the precision is
-#{Q_N=m^2I+wL_{C_N}}. The [twisted-cycle determinant](fdip-006G)
+#{Q_N=m^2\bbI+wL_{C_N}}. The [twisted-cycle determinant](fdip-006G)
 at trivial holonomy, with the scalar factor #{w} restored, gives
 ##{\det Q_N=w^N\bigl(2\cosh(N\omega)-2\bigr).}
 The [real Gaussian integral](fdip-002T) therefore gives exactly
@@ -54,13 +54,13 @@ used for those two periods.}
 The product of two such operators is trace class; multiplying
 by the remaining bounded factors preserves this property.
 The Hilbert–Schmidt kernel trace identity
-##{\operatorname{Tr}(AB)=\int_{\mathbb R^2}A(x,y)B(y,x)\,dx\,dy}
+##{\trace(AB)=\int_{\mathbb R^2}A(x,y)B(y,x)\,\extd x\,\extd y}
 follows by expanding the two kernels in an orthonormal basis
 and taking their #{L^2} pairing. Applying it to the cyclic
 product and composing the intervening kernels yields
-##{\operatorname{Tr}(M_{f_0}T\cdots M_{f_{N-1}}T)
+##{\trace(M_{f_0}T\cdots M_{f_{N-1}}T)
  =\int_{\mathbb R^N}\prod_j f_j(x_j)
-   \prod_jK(x_j,x_{j+1})\,d^Nx.}
+   \prod_jK(x_j,x_{j+1})\,\extd^Nx.}
 All repeated integrals are absolutely convergent: the absolute
 integrand is bounded by #{\prod_j\|f_j\|_\infty} times the
 integrable massive Gaussian. The kernel factorization in
@@ -80,7 +80,7 @@ entries gives
 \end{aligned}}
 The sum is finite also at #{t=0,N}. Thus the operator on the dense
 finite Hermite span extends uniquely to a Hilbert–Schmidt operator.
-Thus #{A_t^*A_t} is positive trace class and its trace is this
+Thus #{A_t^{\dagger}A_t} is positive trace class and its trace is this
 squared norm. Division by #{Z_N} gives the displayed value.
 Finally, the [periodic covariance calculation](fdip-0057), with
 #{s=w\sinh\omega}, gives this same value for

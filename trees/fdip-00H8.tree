@@ -14,9 +14,9 @@ for the real field Hilbert space with its counting pairing. For
 its \newvocab{conjugate momentum} are the maximal-domain operators
 ##{\begin{aligned}
 (\Phi(r)f)(q)&=\langle r,q\rangle f(q),\\
-D(\Phi(r))&=\{f\in\mathcal H:\langle r,\cdot\rangle f\in\mathcal H\},\\
-\Pi(z)f&=-iD_zf,\\
-D(\Pi(z))&=\{f\in\mathcal H:D_zf\in\mathcal H\}.
+\Dom{\Phi(r)}&=\{f\in\mathcal H:\langle r,\cdot\rangle f\in\mathcal H\},\\
+\Pi(z)f&=-\ui D_zf,\\
+\Dom{\Pi(z)}&=\{f\in\mathcal H:D_zf\in\mathcal H\}.
 \end{aligned}}
 Here #{D_z} is the distributional directional derivative along #{z}.
 For a vertex #{v}, let #{e_v} be the Riesz vector of the evaluation
@@ -29,14 +29,14 @@ position-momentum realization of
 
 \p{For real #{r,z\in\mathbb R^V}, the \newvocab{Weyl operator}
 is the bounded operator
-##{(W(r,z)f)(q)=e^{i\langle r,q+z/2\rangle}f(q+z).}
+##{(W(r,z)f)(q)=\ue^{\ui \langle r,q+z/2\rangle}f(q+z).}
 Write #{\sigma((r,z),(r',z'))=\langle r,z'\rangle-\langle z,r'\rangle}.
 The factorization into exponentials and multiplication rule
 are computed in \ref{fdip-00HE}.}
 
 \p{The \newvocab{real-time evolution} and its action on bounded
 operators are
-##{V_t=e^{-itH},\qquad \alpha_t(A)=V_t^*AV_t,\qquad t\in\mathbb R.}
+##{V_t=\ue^{-\ui tH},\qquad \alpha_t(A)=V_t^{\dagger}AV_t,\qquad t\in\mathbb R.}
 By \ref{fdip-00HE}, #{V_t} is a strongly continuous unitary group.
 This unitarity concerns a Hamiltonian with
 finitely many spatial sites. No unitary representation of the
@@ -47,8 +47,8 @@ asserted by this construction.}
 operators are
 ##{\begin{aligned}
 \omega_0(A)&=\langle\psi_0,A\psi_0\rangle,\\
-\omega_\beta(A)&=Z_\beta^{-1}\operatorname{Tr}(e^{-\beta H}A),&
-Z_\beta&=\operatorname{Tr}e^{-\beta H},\quad\beta>0.
+\omega_\beta(A)&=Z_\beta^{-1}\trace(\ue^{-\beta H}A),&
+Z_\beta&=\trace\ue^{-\beta H},\quad\beta>0.
 \end{aligned}}
 Their bounded real-time correlations are
 #{\omega(A_0\alpha_{t_1}(A_1)\cdots\alpha_{t_n}(A_n))}.

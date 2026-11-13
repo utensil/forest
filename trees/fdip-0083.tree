@@ -30,12 +30,12 @@ independent variables #{U_j\in X} and #{h_j\in K} for
 ##{\begin{aligned}
 B_{j,e}&=U_{j,e}h_{j,s(e)}U_{j+1,e}^{-1}h_{j,t(e)}^{-1},\\
 \mathcal W_N(F)
- &=\prod_{j=0}^{N-1}e^{-V(U_j)}
+ &=\prod_{j=0}^{N-1}\ue^{-V(U_j)}
  \prod_{j=0}^{N-1}\prod_{e\in E_s}k_F(B_{j,e}).
 \end{aligned}}
 With normalized product Haar measures,
-##{Z_N(F)=\int_{X^N\times K^N}\mathcal W_N(F)\,dU\,dh
- =\operatorname{Tr}(S_F^N).}
+##{Z_N(F)=\int_{X^N\times K^N}\mathcal W_N(F)\,\extd U\,\extd h
+ =\trace(S_F^N).}
 This is a finite identity. If #{|E_s|\ge1}, then for every finite
 #{F'} properly containing #{F}, with the same dual closure and
 ##{M=N|E_s|,\qquad
@@ -70,8 +70,8 @@ does not identify them with edges of an ordinary simple cycle.}
 \p{The one-edge identity
 ##{k_F(UU'^{-1})=\sum_{\rho\in F}\sum_{i,j}
  a_\rho\phi_{\rho ij}(U)\overline{\phi_{\rho ij}(U')}}
-is a finite sum: #{\phi_{\rho ij}=\sqrt{d_\rho}\rho(\cdot)_{ij}}
-and the matrix-entry sum equals #{d_\rho\chi_\rho(UU'^{-1})}.
+is a finite sum: #{\phi_{\rho ij}=\sqrt{\dim\rho}\rho(\cdot)_{ij}}
+and the matrix-entry sum equals #{\dim\rho\chi_\rho(UU'^{-1})}.
 The tensor product over the finitely many edges is the displayed
 finite sum, and summing #{\alpha_I} factors as
 #{\kappa_F^{|E_s|}}. Conjugation by a vertex gauge element stays
@@ -88,15 +88,15 @@ argument to its end. The integral pairing
 functions, so #{S_F} expands as the finite sum with vectors
 #{P(b\phi_I)}. Because the sum over #{\mathcal I_F} is finite,
 the matrix trace is the corresponding finite diagonal sum
-##{\operatorname{Tr}S_F
+##{\trace S_F
  =\sum_{I\in\mathcal I_F}\alpha_I\int_X|P(b\phi_I)|^2\,dU
  =\int_XL_F(U,U)\,dU.}
 For #{N\ge2} the same finite sum, iterated along a cycle of
-length #{N}, equals both #{\operatorname{Tr}(S_F^N)} and the
+length #{N}, equals both #{\trace(S_F^N)} and the
 integral of #{\prod_j L_F(U_j,U_{j+1})}. Expanding each
 #{L_F} with an independent #{h_j} produces
 #{\mathcal W_N(F)}, because the two adjacent factors
-#{b(U_j)} combine to #{e^{-V(U_j)}}. Taking every test
+#{b(U_j)} combine to #{\ue^{-V(U_j)}}. Taking every test
 function equal to #{1} proves the partition identity.}
 
 \p{For the truncation bound, #{|k_F|\le\kappa_F\le\kappa_{F'}}
@@ -146,8 +146,8 @@ the \newvocab{physical Hilbert space}. For a kernel #{k} in the continuum compar
 [Spatial link fields and their transfer kernel](fdip-007Z),
 the restriction
 #{T_{\mathrm{phys}}} is positive, injective and trace class, and
-##{Z_N=\operatorname{Tr}_{\mathrm{phys}}T_{\mathrm{phys}}^N
- =\operatorname{Tr}_{\mathrm{link}}(PT^N)>0.}
+##{Z_N=\trace_{\mathrm{phys}}T_{\mathrm{phys}}^N
+ =\trace_{\mathrm{link}}(PT^N)>0.}
 The rank-one expansion of \ref{fdip-0080} writes this operator
 as a series over all representation blocks. Its kernel expansion
 converges uniformly on finite sets of blocks, and the tail is the

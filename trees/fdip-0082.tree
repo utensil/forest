@@ -7,35 +7,35 @@
 
 \p{Let #{f} be the defining two-dimensional representation of
 #{SU(2)} and let #{\beta>0}. The function
-##{k(g)=e^{\beta\chi_f(g)}}
+##{k(g)=\ue^{\beta\chi_f(g)}}
 is continuous, central, strictly positive and inversion-symmetric.
 For each integer #{N\ge0} and each irreducible #{\rho}, write
 #{m_\rho(n)} for the multiplicity of #{\rho} in #{f^{\otimes n}} and
 ##{c_{\rho,N}=\sum_{n=0}^{N}\frac{\beta^n}{n!}m_\rho(n).}
 Each tensor power contributes a finite character sum,
 ##{\chi_f(g)^n=\sum_\rho m_\rho(n)\chi_\rho(g),
- \qquad \sum_\rho m_\rho(n)d_\rho=2^n.}
+ \qquad \sum_\rho m_\rho(n)\dim\rho=2^n.}
 The Taylor polynomial of degree #{N} therefore expands as
 ##{\sum_{n=0}^{N}\frac{\beta^n}{n!}\chi_f(g)^n
  =\sum_\rho c_{\rho,N}\chi_\rho(g),}
 and the dimension-weighted sum of the coefficients is the partial
 sum of the exponential,
-##{\sum_\rho d_\rho c_{\rho,N}
+##{\sum_\rho \dim\rho c_{\rho,N}
  =\sum_{n=0}^{N}\frac{(2\beta)^n}{n!}.}
 Lagrange's form of the remainder gives a real #{\xi} between #{0}
 and #{2\beta} such that
-##{e^{2\beta}
+##{\ue^{2\beta}
  =\sum_{n=0}^{N}\frac{(2\beta)^n}{n!}
- +e^{\xi}\frac{(2\beta)^{N+1}}{(N+1)!}.}
+ +\ue^{\xi}\frac{(2\beta)^{N+1}}{(N+1)!}.}
 For each #{g} there is a real number #{\eta} between #{0} and
 #{\beta\chi_f(g)} such that
 ##{k(g)=\sum_{n=0}^{N}\frac{(\beta\chi_f(g))^n}{n!}
- +e^{\eta}\frac{(\beta\chi_f(g))^{N+1}}{(N+1)!}.}
+ +\ue^{\eta}\frac{(\beta\chi_f(g))^{N+1}}{(N+1)!}.}
 The irreducible representations with
 #{c_{\rho,N}>0} form a finite set #{F}, and
 #{k_N=\sum_{\rho\in F}c_{\rho,N}\chi_\rho} is the truncation
 #{k_F} of \ref{fdip-007Z} with coefficients
-#{a_\rho=c_{\rho,N}/d_\rho}. For each irreducible #{\rho} there is
+#{a_\rho=c_{\rho,N}/\dim\rho}. For each irreducible #{\rho} there is
 a finite degree at which it occurs, and #{c_{\rho,N}>0} for every
 larger truncation degree.}
 
@@ -51,12 +51,12 @@ and strictly positive because it is an exponential of a real
 value. Every tensor power is unitary; invariant orthogonal
 complements decompose it into irreducibles. Evaluating the
 character identity at the identity gives
-#{\sum_\rho m_\rho(n)d_\rho=2^n}. Only finitely many multiplicities
+#{\sum_\rho m_\rho(n)\dim\rho=2^n}. Only finitely many multiplicities
 are nonzero. Multiplying by #{\beta^n/n!} and summing through
 degree #{N} gives the displayed polynomial and the partial sum
-#{\sum_\rho d_\rho c_{\rho,N}}.}
+#{\sum_\rho \dim\rho c_{\rho,N}}.}
 
-\p{For #{\psi(s)=e^s}, Taylor expansion at #{0} with Lagrange
+\p{For #{\psi(s)=\ue^s}, Taylor expansion at #{0} with Lagrange
 remainder produces, at #{s=2\beta}, a point #{\xi} between #{0}
 and #{2\beta} with the displayed scalar identity. The same
 expansion at #{s=\beta\chi_f(g)} produces a point #{\eta} between
@@ -97,10 +97,10 @@ under duals.}
 \p{Remark. Continuum comparison. The convergent series is not the
 statement above. Summing every degree gives
 ##{c_\rho=\sum_{n=0}^\infty\frac{\beta^n}{n!}m_\rho(n),\qquad
- a_\rho=\frac{c_\rho}{d_\rho},\qquad
- \sum_\rho d_\rho^2a_\rho=e^{2\beta}.}
+ a_\rho=\frac{c_\rho}{\dim\rho},\qquad
+ \sum_\rho (\dim\rho)^2a_\rho=\ue^{2\beta}.}
 The scalar remainder tends to #{0} as #{N} increases, and
-#{|\chi_\rho(g)|\le d_\rho} lets the character series of #{k} be
+#{|\chi_\rho(g)|\le \dim\rho} lets the character series of #{k} be
 rearranged uniformly. The resulting coefficients are positive for
 every #{\rho}, by the finite occurrence proved above. This is the
 expansion compared with

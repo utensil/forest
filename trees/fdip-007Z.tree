@@ -23,31 +23,31 @@ supremum norm.}
 \p{All irreducible representations here are complex and unitary.
 For a finite set #{F} of them and coefficients #{a_\rho>0}, the
 truncation
-##{k_F(g)=\sum_{\rho\in F}d_\rho a_\rho\chi_\rho(g)}
+##{k_F(g)=\sum_{\rho\in F}\dim\rho a_\rho\chi_\rho(g)}
 is a finite sum. Write
-##{\kappa_F=\sum_{\rho\in F}d_\rho^2a_\rho.}
-Unitarity gives #{|\chi_\rho(g)|\le d_\rho}, so
+##{\kappa_F=\sum_{\rho\in F}(\dim\rho)^2a_\rho.}
+Unitarity gives #{|\chi_\rho(g)|\le \dim\rho}, so
 #{|k_F(g)|\le\kappa_F}, with equality at the identity. For finite
 sets #{F\subset F'} carrying the same coefficients,
 ##{|k_{F'}(g)-k_F(g)|
  \le\kappa_{F'}-\kappa_F
- =\sum_{\rho\in F'\setminus F}d_\rho^2a_\rho,}
+ =\sum_{\rho\in F'\setminus F}(\dim\rho)^2a_\rho,}
 with equality at the identity. If #{F} is closed under dual
 representations and #{a_{\rho^*}=a_\rho}, then #{k_F} is real,
 central and inversion-symmetric. Coefficient positivity does not
 imply #{k_F(g)>0}. The scalar #{a_\rho} is the convolution
 eigenvalue of this finite sum on the #{\rho} coefficient space;
-the character coefficient is #{d_\rho a_\rho}. If the trivial
+the character coefficient is #{\dim\rho a_\rho}. If the trivial
 representation lies in #{F}, then
-#{\int_G k_F\,d\mu_G=a_{\mathrm{triv}}}.}
+#{\int_G k_F\,\extd\mu_G=a_{\mathrm{triv}}}.}
 
 \p{Let #{V:X\to\mathbb R} be bounded Borel and pointwise
-gauge invariant, and set #{b(U)=e^{-V(U)/2}}. Then #{b} and
+gauge invariant, and set #{b(U)=\ue^{-V(U)/2}}. Then #{b} and
 #{b^{-1}} are bounded Borel functions. If #{M_b} denotes
 multiplication by #{b}, define
 ##{\begin{aligned}
 c_F(U,U')&=\prod_{e\in E_s}k_F(U_eU_e'^{-1}),\\
-(C_{k_F}f)(U)&=\int_Xc_F(U,U')f(U')\,dU',\\
+(C_{k_F}f)(U)&=\int_Xc_F(U,U')f(U')\,\extd U',\\
 T_F&=M_bC_{k_F}M_b.
 \end{aligned}}
 For #{f\in A(X)} the integral is a bounded Borel function, since
@@ -69,9 +69,9 @@ model from that paper's gauge and fermion construction.}
 #{L^2} setting are not the definition above. For a real
 continuous central kernel satisfying the
 \vocabk{positive coefficient conditions}{fdip-007I},
-##{k(g)=\sum_{\rho\in\widehat G}d_\rho a_\rho\chi_\rho(g),
+##{k(g)=\sum_{\rho\in\widehat G}\dim\rho a_\rho\chi_\rho(g),
  \qquad a_\rho>0,\qquad
- \sum_{\rho\in\widehat G}d_\rho^2a_\rho<\infty,}
+ \sum_{\rho\in\widehat G}(\dim\rho)^2a_\rho<\infty,}
 the expansion is uniformly absolutely convergent. The
 \newvocab{link Hilbert space} is
 ##{\mathcal H_{\mathrm{link}}=L^2(X,dU;\mathbb C),}
@@ -80,7 +80,7 @@ defined by the same formulas with this kernel #{k} is the
 \newvocab{pure-gauge transfer operator} on that space. Its
 integral kernel is bounded Borel and bounded below by a positive
 constant when #{k(g)>0}. If #{k} is a probability density, then
-#{a_{\mathrm{triv}}=\int_G k\,d\mu_G=1}. The
+#{a_{\mathrm{triv}}=\int_G k\,\extd\mu_G=1}. The
 [heat kernel](fdip-00ML) supplies this comparison, for every
 compact connected Lie group, through the series recorded in its
 continuum comparison. Each finite set #{F} recovers the

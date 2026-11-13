@@ -9,18 +9,18 @@
  #{V=0}. The gauge action is conjugation, so the
  [physical space](fdip-0083) consists of class functions.
  Write #{\chi_n} for the irreducible character of dimension
- #{d_n=n+1}, as in \ref{fdip-0082}. With #{\epsilon=1/10}, choose
+ #{n+1}. With #{\epsilon=1/10}, choose
 ##{a_0=1,\qquad a_1=1/8,\qquad
  a_n=\frac{\epsilon^{2n}}{(n+1)^4}\quad(n\ge2),}
-and set #{k=\sum_{n\ge0}d_na_n\chi_n}.
- The bound #{|\chi_n|\le d_n} gives uniform absolute
+and set #{k=\sum_{n\ge0}(n+1)a_n\chi_n}.
+ The bound #{|\chi_n|\le n+1} gives uniform absolute
  convergence and
-##{\sum_{n\ge1}d_n^2a_n
+##{\sum_{n\ge1}(n+1)^2a_n
  =\frac12+\sum_{n\ge2}\frac{\epsilon^{2n}}{(n+1)^2}
  <\frac12+\frac{\epsilon^4}{1-\epsilon^2}<1.}
 Thus #{k} is continuous and strictly positive. All SU(2)
  characters are real and inversion symmetric, so #{k} is as well.
- Character orthogonality gives #{\int k\,d\mu=1}; every
+ Character orthogonality gives #{\int k\,\extd\mu=1}; every
  coefficient eigenvalue is positive and their dimension-weighted
  sum is finite. These are exactly the
  [transfer-kernel hypotheses](fdip-007Z).}
@@ -28,31 +28,31 @@ Thus #{k} is continuous and strictly positive. All SU(2)
 \p{Here #{T=C_k}, and its eigenvalues are #{a_n\le1}.
  Hence #{\lambda_0=1} and #{\Omega=1}. Its positive square
  root is convolution by
-##{q(g)=\sum_{n\ge0}d_n\sqrt{a_n}\chi_n(g).}
+##{q(g)=\sum_{n\ge0}(n+1)\sqrt{a_n}\chi_n(g).}
 Indeed, for #{n\ge2},
- #{d_n^2\sqrt{a_n}=\epsilon^n}, so this series converges
+ #{(n+1)^2\sqrt{a_n}=\epsilon^n}, so this series converges
  uniformly absolutely. Its convolution acts by #{\sqrt{a_n}}
  on each Peter–Weyl coefficient space, identifying the operator
  with #{T^{1/2}} by the block eigenvalues in the continuum
 comparison of \ref{fdip-0080}.
  The center acts on the #{n}-th irreducible by #{(-1)^n}; hence
-##{q(-I)=1-\sqrt2+\sum_{n\ge2}(-1)^n\epsilon^n
+##{q(-\bbI)=1-\sqrt2+\sum_{n\ge2}(-1)^n\epsilon^n
  =1-\sqrt2+\frac{\epsilon^2}{1+\epsilon}<0.}
 For the last inequality, #{\sqrt2>7/5} and
  #{\epsilon^2/(1+\epsilon)=1/110}.}
 
 \p{This sign gives failure on an #{L^2} set, not just at one
  point. By continuity of #{(g,h)\mapsto q(gh^{-1})}, choose
- neighborhoods #{A} of #{-I}, #{B} of #{I}, and #{\delta>0}
+ neighborhoods #{A} of #{-\bbI}, #{B} of #{\bbI}, and #{\delta>0}
  such that #{q(gh^{-1})<-\delta} for #{g\in A,h\in B}.
- A sufficiently small ball around #{I} in a bi-invariant metric
+ A sufficiently small ball around #{\bbI} in a bi-invariant metric
  is contained in #{B} and is conjugation invariant. The function
- #{f(h)=\max(0,1-d(h,I)/\eta)} for a suitably small radius
+ #{f(h)=\max(0,1-\operatorname{dist}(h,\bbI)/\eta)} for a suitably small radius
  #{\eta>0} is a continuous nonnegative central bump supported
- in #{B}. It is positive near #{I}, so #{\int f\,d\mu>0}
+ in #{B}. It is positive near #{\bbI}, so #{\int f\,\extd\mu>0}
  by Haar full support from \ref{fdip-007B}. Therefore
-##{(T^{1/2}f)(g)=\int q(gh^{-1})f(h)\,d\mu(h)
- <-\delta\int f\,d\mu<0\qquad(g\in A).}
+##{(T^{1/2}f)(g)=\int q(gh^{-1})f(h)\,\extd\mu(h)
+ <-\delta\int f\,\extd\mu<0\qquad(g\in A).}
 The open set #{A} has positive Haar measure. Both #{f} and
  its image are class functions, so the failure occurs on the
  physical space itself.}

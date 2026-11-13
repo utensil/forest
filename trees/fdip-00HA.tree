@@ -19,9 +19,9 @@ On #{\mathcal D=C_c^\infty(\mathsf Q)}, for arbitrary real
 and \vocabk{conjugate momenta}{fdip-00H8} satisfy
 ##{\begin{aligned}
 [\Phi(r),\Phi(z)]&=[\Pi(r),\Pi(z)]=0,\\
-[\Phi(r),\Pi(z)]&=i\langle r,z\rangle I,\\
-i[H,\Phi(r)]&=\Pi(r),&
-i[H,\Pi(z)]&=-M_{F_z}.
+[\Phi(r),\Pi(z)]&=\ui\langle r,z\rangle\bbI,\\
+\ui[H,\Phi(r)]&=\Pi(r),&
+\ui[H,\Pi(z)]&=-M_{F_z}.
 \end{aligned}}
 Every product is defined on #{\mathcal D}, which each listed
 polynomial differential operator preserves. In particular the site
@@ -30,17 +30,17 @@ symmetry of #{K} gives this intrinsic operator action.}
 
 \p{For #{A=\Phi(r)} or #{\Pi(z)}, define the self-adjoint transported
 operator and its domain by
-##{A(t)=e^{itH}Ae^{-itH},\qquad D(A(t))=e^{itH}D(A).}
+##{A(t)=\ue^{\ui tH}A\ue^{-\ui tH},\qquad \Dom{A(t)}=\ue^{\ui tH}\Dom{A}.}
 Write these as #{\Phi(r;t)} and #{\Pi(z;t)} respectively, with
 #{\Phi_v(t)=\Phi(e_v;t)} and #{\Pi_v(t)=\Pi(e_v;t)} for the site fields.
 For every fixed #{t_0} and #{\psi\in\mathcal D_{t_0}
-=e^{it_0H}\mathcal D}, both vector-valued maps are defined
+=\ue^{\ui t_0H}\mathcal D}, both vector-valued maps are defined
 near #{t_0}, differentiable there at #{t_0}, and
 ##{\begin{aligned}
-\left.\frac d{dt}\Phi(r;t)\psi\right|_{t=t_0}
+\left.\frac{\extd}{\extd t}\Phi(r;t)\psi\right|_{t=t_0}
  &=\Pi(r;t_0)\psi,\\
-\left.\frac d{dt}\Pi(z;t)\psi\right|_{t=t_0}
- &=-e^{it_0H}M_{F_z}e^{-it_0H}\psi.
+\left.\frac{\extd}{\extd t}\Pi(z;t)\psi\right|_{t=t_0}
+ &=-\ue^{\ui t_0H}M_{F_z}\ue^{-\ui t_0H}\psi.
 \end{aligned}}
 For #{z=e_v}, the cubic term can equivalently be written
 #{\lambda_v\Phi_v(t_0)^3/6} on this domain.
@@ -50,13 +50,13 @@ its preservation by real-time evolution.}
 \proof{
 \p{The product rule on test functions gives the commutators.
 In particular #{D_zU=F_z} and
-#{[M_U,\Pi(z)]f=iF_zf}, so multiplication
-by #{i} gives the negative force. This computes the canonical
+#{[M_U,\Pi(z)]f=\ui F_zf}, so multiplication
+by #{\ui} gives the negative force. This computes the canonical
 position-momentum algebra of
 \citet{Section 8.1, pp. 207-208}{teschl2014quantum} for the present polynomial.}
 
-\p{For differentiability, put #{B=H+b+1\ge I}. The form domain
-of \ref{fdip-00H2} is #{Q=D(B^{1/2})}; its norm satisfies
+\p{For differentiability, put #{B=H+b+1\ge\bbI}. The form domain
+of \ref{fdip-00H2} is #{Q=\Dom{B^{1/2}}}; its norm satisfies
 #{\|f\|_Q=\|B^{1/2}f\|}. Coercivity bounds the fields as maps
 #{Q\to\mathcal H}:
 ##{\begin{aligned}
@@ -65,24 +65,24 @@ of \ref{fdip-00H2} is #{Q=D(B^{1/2})}; its norm satisfies
 \end{aligned}}
 Polynomial #{U} gives #{H^k\mathcal D\subset\mathcal D} for all
 integers #{k\ge0}. Thus #{f\in\mathcal D} lies in
-#{D(B^{3/2})}. Spectral dominated convergence gives
-##{\frac{e^{-ihH}f-f}{h}\longrightarrow-iHf\quad\text{in }Q.}
-Indeed #{|(e^{-ih\lambda}-1)/h|\le|\lambda|}, and the squared
+#{\Dom{B^{3/2}}}. Spectral dominated convergence gives
+##{\frac{\ue^{-\ui hH}f-f}{h}\longrightarrow-\ui Hf\quad\text{in }Q.}
+Indeed #{|(\ue^{-\ui h\lambda}-1)/h|\le|\lambda|}, and the squared
 #{Q} norm is dominated by a constant times the spectral integral
-of #{(\lambda+b+1)\lambda^2}, finite on #{D(B^{3/2})}.}
+of #{(\lambda+b+1)\lambda^2}, finite on #{\Dom{B^{3/2}}}.}
 
 \p{For #{A=\Phi(r)} or #{\Pi(z)}, the convergence in #{Q} yields
-#{A(e^{-ihH}f-f)/h\to-iAHf} in #{\mathcal H}. Also
-#{Af\in\mathcal D\subset D(H)}, so
-#{(e^{ihH}-I)Af/h\to iHAf}. Split the difference as
+#{A(\ue^{-\ui hH}f-f)/h\to-\ui AHf} in #{\mathcal H}. Also
+#{Af\in\mathcal D\subset \Dom{H}}, so
+#{(\ue^{\ui hH}-\bbI)Af/h\to\ui HAf}. Split the difference as
 ##{\begin{aligned}
-\frac{e^{ihH}Ae^{-ihH}f-Af}{h}
- &=\frac{(e^{ihH}-I)Af}{h}\\
- &\quad+e^{ihH}A\frac{(e^{-ihH}-I)f}{h}.
+\frac{\ue^{\ui hH}A\ue^{-\ui hH}f-Af}{h}
+ &=\frac{(\ue^{\ui hH}-\bbI)Af}{h}\\
+ &\quad+\ue^{\ui hH}A\frac{(\ue^{-\ui hH}-\bbI)f}{h}.
 \end{aligned}}
-All terms are defined because #{e^{-ihH}} preserves #{Q} and
-#{A:Q\to\mathcal H} is bounded. The limit is #{i[H,A]f}.
-Conjugating this identity and writing #{\psi=e^{it_0H}f}
+All terms are defined because #{\ue^{-\ui hH}} preserves #{Q} and
+#{A:Q\to\mathcal H} is bounded. The limit is #{\ui[H,A]f}.
+Conjugating this identity and writing #{\psi=\ue^{\ui t_0H}f}
 proves the derivative at #{t_0}. Unitary conjugation of the
 maximal multiplication domain justifies the cubic notation.}
 }
