@@ -1,0 +1,40 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{A bilinear form is a graph}
+\date{2026-11-12}
+
+\p{Let #{b} be any bilinear form on a finite free module #{V}.
+Set #{q_b(v)=b(v,v)} and #{\beta_v=b(v,\cdot)}. The operators
+##{\gamma_v=\epsilon_v+\iota_{\beta_v}}
+define a homomorphism
+#{\operatorname{Cl}(V,q_b)\to\operatorname{End}\bigwedge V}.
+The graph
+##{W_b=\{v+\beta_v:v\in V\}}
+is a free direct summand of #{V\oplus V^*}, and the hyperbolic
+form of \ref{fdip-00Q9} restricts to #{q_b} on it. The two
+forms of \ref{fdip-00O6} are two graphs with the same
+quadratic form. At each vertex the diagonal form of
+\ref{fdip-00PB} selects one graph.}
+
+\proof{
+\p{Exterior multiplication and contraction each square to zero,
+so
+##{\gamma_v^2=\epsilon_v\iota_{\beta_v}+\iota_{\beta_v}\epsilon_v
+ =b(v,v)\,I.}
+The same expansion gives
+##{\gamma_u\gamma_v+\gamma_v\gamma_u
+ =(b(u,v)+b(v,u))\,I,}
+which is #{B_{q_b}(u,v)} in \ref{fdip-000P}. The
+universal property supplies the homomorphism. The projection
+onto #{V} along #{V^*} splits #{v\mapsto v+\beta_v}, so the
+graph is a free direct summand. On that graph
+#{q(v+\beta_v)=\beta_v(v)=q_b(v)}.}
+
+\p{The forms #{B_+} and #{B_-} of \ref{fdip-00O6} satisfy
+#{B(v,v)=q(v)} and differ as bilinear forms, so their graphs
+differ. The form #{B_x} of \ref{fdip-00PB} is one bilinear
+form with #{B_x(v,v)=q_x(v)}, and it is the graph selected by
+the weights.}
+}
