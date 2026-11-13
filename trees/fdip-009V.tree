@@ -9,7 +9,7 @@
 with #{a>0} and real #{r\ne0}, on the periodic grid with
 #{N_j\ge3}. Its kernel consists exactly of constant fields.
 In particular,
-##{\dim_{\mathbb C}\ker D_{W,a,1}=2^d q.}
+##{\dim_{\mathbb C}\ker D_{W,a,1}=\dim_{\mathbb C}F\cdot 2^n.}
 For the continuous momentum symbol, a corner having #{k}
 coordinates equal to #{\pi} receives scalar Wilson term
 #{2rk/a}; it is nonzero for #{k\ge1}.}
@@ -20,38 +20,38 @@ coordinates equal to #{\pi} receives scalar Wilson term
 dimensionless lattice momenta; their physical representatives
 are #{p_j/a}. Put
 ##{\begin{aligned}
-A_a(p)&=\frac{i}{a}\sum_j\Gamma_j\sin p_j,\\
+A_a(p)&=\frac{\ui}{a}\sum_j(\varepsilon_j^{S}\otimes\bbI_F)\sin p_j,\\
 M_a(p)&=\frac{r}{a}\sum_j(1-\cos p_j).
 \end{aligned}}
-The Wilson block is #{A_a(p)+M_a(p)I}. The self-adjoint
+The Wilson block is #{A_a(p)+M_a(p)\bbI}. The self-adjoint
 Clifford operators of \ref{fdip-00LZ}, and their anticommutation
 relations, give
 ##{\begin{aligned}
-A_a(p)^*&=-A_a(p),\\
-A_a(p)^2&=-a^{-2}\sum_j\sin^2p_j\,I.
+A_a(p)^{\dagger}&=-A_a(p),\\
+A_a(p)^2&=-a^{-2}\sum_j\sin^2p_j\,\bbI.
 \end{aligned}}
 Since #{M_a(p)} is real and scalar, the mixed terms cancel:
 ##{\begin{aligned}
-&(A_a+M_aI)^*(A_a+M_aI)\\
-&\qquad=\left(a^{-2}\sum_j\sin^2p_j+M_a^2\right)I.
+&(A_a+M_a\bbI)^{\dagger}(A_a+M_a\bbI)\\
+&\qquad=\left(a^{-2}\sum_j\sin^2p_j+M_a^2\right)\bbI.
 \end{aligned}}
 Thus a block has a nonzero kernel precisely when both
 #{\sum_j\sin^2p_j=0} and #{M_a(p)=0}. Because
 #{r\ne0} and each #{1-\cos p_j\ge0}, the latter condition
 already forces every #{\cos p_j=1}. In the chosen momentum
 range this means #{p=0}. Conversely the entire block at
-#{p=0} is zero. Its dimension is #{\dim(S\otimes F)=2^d q},
+#{p=0} is zero. Its dimension is #{\dim_{\mathbb C}(S\otimes F)=\dim_{\mathbb C}F\cdot 2^n},
 and the zero Fourier character is the constant field.}
 
 \p{The same formula is defined for every real momentum modulo
 #{2\pi}. At #{p=\pi\epsilon}, with
-#{\epsilon\in\{0,1\}^d}, the sine part vanishes and
+#{\epsilon\in\{0,1\}^n}, the sine part vanishes and
 ##{M_a(\pi\epsilon)=\frac{2r}{a}\sum_j\epsilon_j.}
 This proves the corner claim, whether or not a particular finite
 grid samples that corner exactly.}
 }
 
-\p{For #{q=1}, periods #{(4,4)} and #{(4,6)} both give
+\p{For #{\dim_{\mathbb C}F=1}, periods #{(4,4)} and #{(4,6)} both give
 kernel dimension #{4}; periods #{(4,4,4)} give 8.
 The same formula applies to odd periods: zero momentum is
 always present and every other block is invertible.}
