@@ -6,51 +6,51 @@
 \date{2026-11-06}
 
 \p{Fix an integer #{\Delta\ge 1} and a real number #{c>0}.
-Let #{G_n} be connected graphs whose number of vertices
+Let #{G_k} be connected graphs whose number of vertices
 tends to infinity, whose maximum degree is at most
 #{\Delta}, and whose smallest positive combinatorial
 eigenvalue is at least #{c}. The sequence has no
-\vocabk{plateau}{fdip-00CO} at any #{d>0}.}
+\vocabk{plateau}{fdip-00CO} at any #{n>0}.}
 
 \proof{
-\p{Apply \ref{fdip-00CU} to #{G_n}, and write #{\tau_n} for
+\p{Apply \ref{fdip-00CU} to #{G_k}, and write #{\tau_k} for
 the time at which the removed heat trace equals #{1}. The
-lower bound on #{\tau_n} tends to infinity with the number
-of vertices. Suppose there is a plateau at #{d>0} on
-windows from #{a_n} to #{b_n}. For every large #{n}, the
-spectral dimension stays between #{d/2} and #{3d/2} on that
+lower bound on #{\tau_k} tends to infinity with the number
+of vertices. Suppose there is a plateau at #{n>0} on
+windows from #{a_k} to #{b_k}. For every large #{k}, the
+spectral dimension stays between #{n/2} and #{3n/2} on that
 window. The lemma also gives #{c\le 2\Delta}.}
 
-\p{Consider times #{t\le\tau_n} at which the spectral
-dimension lies between #{d/2} and #{3d/2}. The lemma
+\p{Consider times #{t\le\tau_k} at which the spectral
+dimension lies between #{n/2} and #{3n/2}. The lemma
 supplies #{ct\le d_s(t)\le 4\Delta t}, so
-##{\frac{d}{8\Delta}\le t\le\frac{3d}{2c}.}
+##{\frac{n}{8\Delta}\le t\le\frac{3n}{2c}.}
 The quotient of the endpoints of this interval is
-#{\frac{12\Delta}{c}}. A subwindow lying in #{t\le\tau_n}
+#{\frac{12\Delta}{c}}. A subwindow lying in #{t\le\tau_k}
 and having endpoint quotient larger than
 #{\frac{12\Delta}{c}} is impossible.}
 
-\p{Consider times #{t\ge\tau_n} at which
-#{d_s(t)\ge d/2}. The lemma supplies
-#{d_s(t)\le 4\Delta t\,\ue^{-c(t-\tau_n)}}, hence
-##{t-\tau_n\le\frac1c\log\frac{8\Delta t}{d}.}
+\p{Consider times #{t\ge\tau_k} at which
+#{d_s(t)\ge n/2}. The lemma supplies
+#{d_s(t)\le 4\Delta t\,\ue^{-c(t-\tau_k)}}, hence
+##{t-\tau_k\le\frac1c\log\frac{8\Delta t}{n}.}
 Let #{\beta} be the right endpoint of such a window and set
-#{s=\beta-\tau_n}. Then
-#{\ue^{cs}\le 8\Delta(\tau_n+s)/d}. If #{s\ge\tau_n}, then
-#{\ue^{cs}/s\le\frac{16\Delta}{d}}. The quotient
+#{s=\beta-\tau_k}. Then
+#{\ue^{cs}\le 8\Delta(\tau_k+s)/n}. If #{s\ge\tau_k}, then
+#{\ue^{cs}/s\le\frac{16\Delta}{n}}. The quotient
 #{\ue^{cs}/s} tends to infinity with #{s}, so this bound
-forbids #{s\ge\tau_n} once #{\tau_n} is large. Thus
-#{s<\tau_n} and
-#{s\le\frac{1}{c}\log(16\Delta\tau_n/d)}. The quotient
-#{\frac{\beta}{\tau_n}} tends to #{1}. A subwindow in the region
-#{t\ge\tau_n} whose endpoint quotient tends to infinity is
+forbids #{s\ge\tau_k} once #{\tau_k} is large. Thus
+#{s<\tau_k} and
+#{s\le\frac{1}{c}\log(16\Delta\tau_k/n)}. The quotient
+#{\frac{\beta}{\tau_k}} tends to #{1}. A subwindow in the region
+#{t\ge\tau_k} whose endpoint quotient tends to infinity is
 impossible.}
 
-\p{The original quotient #{b_n/a_n} tends to infinity. If
-#{b_n\le\tau_n}, or if #{a_n\ge\tau_n}, the window is one
-of the two subwindows just excluded. If #{a_n<\tau_n<b_n},
-the product of #{\tau_n/a_n} and #{b_n/\tau_n} equals
-#{b_n/a_n}, so the larger factor is at least the square
+\p{The original quotient #{b_k/a_k} tends to infinity. If
+#{b_k\le\tau_k}, or if #{a_k\ge\tau_k}, the window is one
+of the two subwindows just excluded. If #{a_k<\tau_k<b_k},
+the product of #{\tau_k/a_k} and #{b_k/\tau_k} equals
+#{b_k/a_k}, so the larger factor is at least the square
 root and still tends to infinity. That factor is the
 endpoint quotient of one of the two subwindows.}
 }
