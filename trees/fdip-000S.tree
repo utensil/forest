@@ -8,20 +8,20 @@
 \p{For the \vocabk{periodic grid and Clifford module}{fdip-000R},
 the centered Dirac operator is skew-adjoint and has square
 ##{\begin{aligned}
-D^*&=-D,\\
-D^2&=I_S\otimes\sum_{j=1}^d\cov_j^2,\\
--D^2&=\frac14 I_S\otimes
-\sum_{j=1}^d(2I_H-T_j^2-T_j^{-2}).
+D^{\dagger}&=-D,\\
+D^2&=\bbI_S\otimes\sum_{j=1}^n\cov_j^2,\\
+-D^2&=\frac14 \bbI_S\otimes
+\sum_{j=1}^n(2\bbI_H-T_j^2-T_j^{-2}).
 \end{aligned}}
-In particular #{-D^2=D^*D} is positive semidefinite.
+In particular #{-D^2=D^{\dagger}D} is positive semidefinite.
 Its complete finite Fourier decomposition has blocks
 ##{\begin{aligned}
-D(p)&=i\sum_{j=1}^d\gamma_j\sin p_j,\\
--D(p)^2&=s(p)I_S,\\
-s(p)&=\sum_{j=1}^d\sin^2p_j,
+D(p)&=\ui\sum_{j=1}^n\rho(\iota(\varepsilon_j))\sin p_j,\\
+-D(p)^2&=s(p)\bbI_S,\\
+s(p)&=\sum_{j=1}^n\sin^2p_j,
 \end{aligned}}
 where #{p_j=2\pi r_j/N_j} and #{0\le r_j<N_j}.
-The coefficient #{i} is the eigenvalue of the centered difference
+The coefficient #{\ui} is the eigenvalue of the centered difference
 on the Fourier mode. It is not an identification of this complex
 Clifford module with a real Clifford algebra.
 The sine convention agrees with the free propagator in
@@ -30,13 +30,15 @@ after setting the spacing to one. The finite decomposition and
 square are proved below.}
 
 \proof{
-\p{By \ref{fdip-00L8} and \ref{fdip-00LA},
-#{\gamma_j^*=\gamma_j} and #{\cov_j^*=-\cov_j}. The tensor
+\p{Write #{\gamma_j} for the represented generator
+#{\rho(\iota(\varepsilon_j))} of \ref{fdip-000R}.
+By \ref{fdip-00L8} and \ref{fdip-00LA},
+#{\gamma_j^{\dagger}=\gamma_j} and #{\cov_j^{\dagger}=-\cov_j}. The tensor
 adjoint formula gives
-#{(\gamma_j\otimes\cov_j)^*
-=-\gamma_j\otimes\cov_j}; adding proves #{D^*=-D}.
+#{(\gamma_j\otimes\cov_j)^{\dagger}
+=-\gamma_j\otimes\cov_j}; adding proves #{D^{\dagger}=-D}.
 In the square, every diagonal term is
-#{\gamma_j^2\otimes\cov_j^2=I_S\otimes\cov_j^2}.
+#{\gamma_j^2\otimes\cov_j^2=\bbI_S\otimes\cov_j^2}.
 For #{i<j}, the paired off-diagonal terms are
 ##{\begin{gathered}
 \gamma_i\gamma_j\otimes\cov_i\cov_j
@@ -45,27 +47,27 @@ For #{i<j}, the paired off-diagonal terms are
 \otimes\cov_i\cov_j=0,
 \end{gathered}}
 using commutation of the differences and anticommutation of
-the distinct gamma matrices. This proves the square formula.
+the distinct represented generators. This proves the square formula.
 Expanding #{\cov_j^2} gives
-#{(T_j^2-2I_H+T_j^{-2})/4}.
+#{(T_j^2-2\bbI_H+T_j^{-2})/4}.
 Finally #{\langle\psi,-D^2\psi\rangle_K
 =\langle D\psi,D\psi\rangle_K\ge0}.}
 
 \p{Let #{\mathcal R=\prod_j\{0,\ldots,N_j-1\}} and,
 for #{r\in\mathcal R}, define the normalized character function
 ##{\chi_r(x)=M^{-1/2}
-\exp\left(i\sum_{j=1}^d p_jx_j\right).}
+\exp\left(\ui\sum_{j=1}^n p_jx_j\right).}
 Choose integer representatives for #{x_j}. Changing one by
-#{N_j} multiplies the exponential by #{\exp(2\pi i r_j)=1};
+#{N_j} multiplies the exponential by #{\exp(2\pi \ui r_j)=1};
 changing #{r_j} by #{N_j} likewise multiplies it by
-#{\exp(2\pi i x_j)=1}. Thus the function depends only on
+#{\exp(2\pi \ui x_j)=1}. Thus the function depends only on
 the residue classes.}
 
 \p{For #{r,t\in\mathcal R}, put
-##{\zeta_j=\exp\left(\frac{2\pi i(t_j-r_j)}{N_j}\right).}
+##{\zeta_j=\exp\left(\frac{2\pi \ui(t_j-r_j)}{N_j}\right).}
 The counting inner product factors:
 ##{\langle\chi_r,\chi_t\rangle_H
-=M^{-1}\prod_{j=1}^d\sum_{k=0}^{N_j-1}\zeta_j^k.}
+=M^{-1}\prod_{j=1}^n\sum_{k=0}^{N_j-1}\zeta_j^k.}
 If #{t_j=r_j}, then #{\zeta_j=1} and the inner sum is
 #{N_j}. Otherwise the chosen range of labels gives
 #{\zeta_j\ne1} and #{\zeta_j^{N_j}=1}, so
@@ -82,10 +84,10 @@ therefore are
 ##{\begin{aligned}
 \widehat\psi(r)
 &=M^{-1/2}\sum_{x\in\Lambda}
- e^{-i\sum_jp_jx_j}\psi(x),\\
+ \ue^{-\ui\sum_jp_jx_j}\psi(x),\\
 \psi(x)
 &=M^{-1/2}\sum_{r\in\mathcal R}
- e^{i\sum_jp_jx_j}\widehat\psi(r).
+ \ue^{\ui\sum_jp_jx_j}\widehat\psi(r).
 \end{aligned}}
 For scalar fields the coefficient is
 #{\widehat f(r)=\langle\chi_r,f\rangle_H}; applying that
@@ -94,12 +96,12 @@ the two vector-valued formulas. Thus
 ##{K=\bigoplus_{r\in\mathcal R}
  S\otimes\mathbb C\chi_r.}
 The forward shift has
-#{T_j\chi_r=e^{ip_j}\chi_r}, hence
-#{\cov_j\chi_r=i\sin p_j\,\chi_r}.
+#{T_j\chi_r=\ue^{\ui p_j}\chi_r}, hence
+#{\cov_j\chi_r=\ui\sin p_j\,\chi_r}.
 Each displayed summand is invariant under #{D}, with block
-#{D(p)=i\sum_j\gamma_j\sin p_j}.
+#{D(p)=\ui\sum_j\gamma_j\sin p_j}.
 Expanding its square using the same anticommutators gives
-#{D(p)^2=-s(p)I_S}.}
+#{D(p)^2=-s(p)\bbI_S}.}
 }
 
 \p{Mathlib's \leanref{LinearMap.adjoint} and

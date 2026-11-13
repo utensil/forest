@@ -6,7 +6,7 @@
 \date{2026-11-01}
 
 \p{Take the unit-weight cycle on #{\mathbb Z/(2N)}, with
-#{N\ge3} and precision #{Q=L_{C_{2N}}+aI}, where
+#{N\ge3} and precision #{Q=L_{C_{2N}}+a\bbI}, where
 #{a=m^2>0}. The neighbor coefficient is #{1} and the diagonal
 coefficient is #{2+a}, so the shape is #{t=(2+a)/2}. Thus
 #{Q=P_t}, the \vocabk{unit-coupling cycle operator}{fdip-00AW}
@@ -16,21 +16,21 @@ retained vertices and the odd eliminated vertices. Write
 #{x_j=\phi_{2j}}, #{y_j=\phi_{2j+1}}; indices #{j} lie in
 #{\mathbb Z/N}. For the shift #{(Tz)_j=z_{j-1}} on the
 retained cycle, the blocks are
-##{A=C=(2+a)I,\qquad B=-(I+T),\qquad B^*=-(I+T^{-1}).}
+##{A=C=(2+a)\bbI,\qquad B=-(\bbI+T),\qquad B^{\dagger}=-(\bbI+T^{-1}).}
 Thus the [equivariant Schur formula](fdip-0056) gives
 ##{\begin{aligned}
-S&=(2+a)I-(2+a)^{-1}(2I+T+T^{-1})\\
+S&=(2+a)\bbI-(2+a)^{-1}(2\bbI+T+T^{-1})\\
  &=\frac{1}{2+a}\,P^K_{T_2(t)},
 \end{aligned}}
 where #{T_2(t)=2t^2-1} and
-#{P^K_s=2s\,I-(T+T^{-1})} is the same operator on the retained
+#{P^K_s=2s\,\bbI-(T+T^{-1})} is the same operator on the retained
 sites. Since #{2t=2+a}, the diagonal
 #{2T_2(t)/(2+a)} equals #{(2+a)-2/(2+a)}, so the two
 displays agree. The retained shape is #{T_2(t)} and the
 retained coupling is #{1/(2+a)}. The retained mass, the
 diagonal minus twice that coupling, equals
 ##{\frac{a(a+4)}{a+2}=(2+a)-\frac{4}{2+a}>0.}
-The restriction #{Q_{RR}=(2+a)I} has no off-diagonal entries,
+The restriction #{Q_{RR}=(2+a)\bbI} has no off-diagonal entries,
 while #{S} has entries #{-1/(2+a)} between adjacent retained
 vertices. The retained set is stable under #{G}, but the
 marginal precision is induced by elimination. This is the
@@ -79,12 +79,12 @@ rescaling is also made.}
 ##{(2+a)^2-2=2\cosh(2\omega).}
 The doubled parameter has an exact finite-ring interpretation.
 For #{M\ge3}, the covariance of precision
-#{w(2\cosh\eta\,I-T-T^{-1})} on #{\mathbb Z/M}, with
+#{w(2\cosh\eta\,\bbI-T-T^{-1})} on #{\mathbb Z/M}, with
 #{w,\eta>0}, is the periodic kernel
 ##{\begin{aligned}
 K_{M,w,\eta}(r)
- &=\frac{e^{-\eta r}+e^{-\eta(M-r)}}
- {2w\sinh\eta\,(1-e^{-M\eta})},\\
+ &=\frac{\ue^{-\eta r}+\ue^{-\eta(M-r)}}
+ {2w\sinh\eta\,(1-\ue^{-M\eta})},\\
 &\hspace{24mm}0\le r\le M-1.
 \end{aligned}}
 For the original and retained fields this gives
@@ -96,14 +96,14 @@ The equality is between covariances with their actual
 couplings. Here #{1/(2+a)=1/(2\cosh\omega)}.}
 
 \proof{
-\p{Write #{D=2w\sinh\eta\,(1-e^{-M\eta})} and, for an integer
+\p{Write #{D=2w\sinh\eta\,(1-\ue^{-M\eta})} and, for an integer
 #{r},
-#{g(r)=e^{-\eta r}+e^{-\eta(M-r)}}. On a representative
+#{g(r)=\ue^{-\eta r}+\ue^{-\eta(M-r)}}. On a representative
 #{0\le r\le M-1} the kernel is #{K(r)=g(r)/D}, and the value
 at the cycle site #{0} is also the value #{g(M)}. For every
 integer #{r},
 ##{g(r+1)+g(r-1)=2\cosh\eta\,g(r),}
-because each exponential is multiplied by #{e^{\pm\eta}} under
+because each exponential is multiplied by #{\ue^{\pm\eta}} under
 a unit shift and those factors sum to #{2\cosh\eta}. Thus
 #{2\cosh\eta\,g(r)-g(r-1)-g(r+1)=0}. For
 #{r=1,\ldots,M-1} the two cycle neighbors are represented by
@@ -112,15 +112,15 @@ a unit shift and those factors sum to #{2\cosh\eta}. Thus
 At #{r=0} the previous site is #{M-1}. Its value is
 #{g(M-1)}, and #{g(1)=g(M-1)}, so the cycle combination is
 #{2\cosh\eta\,g(0)-2g(1)}. The identities
-#{\cosh\eta-e^{-\eta}=\sinh\eta} and
-#{\cosh\eta-e^{\eta}=-\sinh\eta} give
-##{\cosh\eta\,g(0)-g(1)=\sinh\eta\,(1-e^{-M\eta}).}
+#{\cosh\eta-\ue^{-\eta}=\sinh\eta} and
+#{\cosh\eta-\ue^{\eta}=-\sinh\eta} give
+##{\cosh\eta\,g(0)-g(1)=\sinh\eta\,(1-\ue^{-M\eta}).}
 Multiplying by #{2w/D} yields #{1}. The precision is positive
 for #{w,\eta>0}, so this unit source shows that #{K} is its
 inverse on #{\mathbb Z/M}.}
 
 \p{For #{M=2N} and even separation #{2r}, the numerator
-#{e^{-\omega(2r)}+e^{-\omega(2N-2r)}} is the numerator of
+#{\ue^{-\omega(2r)}+\ue^{-\omega(2N-2r)}} is the numerator of
 #{K_{N,\,1/(2\cosh\omega),\,2\omega}(r)}. The denominators
 agree because
 ##{2\cdot\frac{1}{2\cosh\omega}\cdot\sinh(2\omega)
@@ -131,7 +131,7 @@ identity holds.}
 }
 
 \p{Remark. The same kernel is the sum of
-#{h(n)=e^{-\eta|n|}/(2w\sinh\eta)} over the periods
+#{h(n)=\ue^{-\eta|n|}/(2w\sinh\eta)} over the periods
 #{n=r+kM}. That sum is not used above.}
 
 \p{In the convention that correlation length is the reciprocal
@@ -164,6 +164,6 @@ Successive and simultaneous eliminations agree by
 In that source the diagonal mass corresponds to a
 shunt conductance or graph self-loop. In the incidence convention
 used here an edge with identical endpoints has zero difference;
-the mass is therefore kept as the separate term #{aI}.
+the mass is therefore kept as the separate term #{a\bbI}.
 The source supplies the general reduction context, while the
 periodic covariance and scale statements are proved above.}

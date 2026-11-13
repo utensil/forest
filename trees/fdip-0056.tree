@@ -8,19 +8,19 @@
 \p{Let #{H=X\mathbin\perp Y} be a finite-dimensional orthogonal
 real representation of a finite group #{G}, with both summands
 #{G}-stable. Let #{Q:H\to H} be positive, self-adjoint and
-#{G}-equivariant. Write #{i_X,i_Y} for the inclusions and
+#{G}-equivariant. Write #{\iota_X,\iota_Y} for the inclusions and
 #{p_X,p_Y} for the orthogonal projections, and set
-##{A=p_XQi_X,\qquad B=p_XQi_Y,\qquad C=p_YQi_Y.}
-Thus #{B:Y\to X}, its adjoint is #{B^*:X\to Y}, and
-##{Q(x,y)=(Ax+By,\,B^*x+Cy).}
+##{A=p_XQ\iota_X,\qquad B=p_XQ\iota_Y,\qquad C=p_YQ\iota_Y.}
+Thus #{B:Y\to X}, its adjoint is #{B^{\dagger}:X\to Y}, and
+##{Q(x,y)=(Ax+By,\,B^{\dagger}x+Cy).}
 Then #{C>0}, and the retained precision
-#{S=A-BC^{-1}B^*:X\to X} is positive, self-adjoint and
+#{S=A-BC^{-1}B^{\dagger}:X\to X} is positive, self-adjoint and
 #{G}-equivariant. For every real irreducible type #{\Xi}, set
 #{X_\Xi=E_\Xi X} and #{Y_\Xi=E_\Xi Y}.
 All block maps restrict to the indicated source and target sectors,
 and
 ##{S|_{X_\Xi}
- =A|_{X_\Xi}-B_\Xi(C|_{Y_\Xi})^{-1}B_\Xi^*.}
+ =A|_{X_\Xi}-B_\Xi(C|_{Y_\Xi})^{-1}B_\Xi^{\dagger}.}
 The rectangular multiplicity-matrix form of this identity is
 \ref{fdip-00KT}.}
 
@@ -30,14 +30,14 @@ Equivariance of #{Q} gives
 #{A\rho_X(g)=\rho_X(g)A},
 #{B\rho_Y(g)=\rho_X(g)B}, and
 #{C\rho_Y(g)=\rho_Y(g)C}, together with the adjoint identity
-for #{B^*}. Positivity on #{(0,y)} makes #{C} positive and
+for #{B^{\dagger}}. Positivity on #{(0,y)} makes #{C} positive and
 invertible. Its inverse commutes with #{\rho_Y(g)} by multiplying
 the commuting identity by #{C^{-1}} on both sides. Hence the
-composite #{BC^{-1}B^*:X\to X} and #{S} commute with
+composite #{BC^{-1}B^{\dagger}:X\to X} and #{S} commute with
 #{\rho_X(g)}. The same relations hold for the projectors, since
 they are real linear combinations of group actions.}
 
-\p{Consequently #{B^*} takes #{X_\Xi} to #{Y_\Xi},
+\p{Consequently #{B^{\dagger}} takes #{X_\Xi} to #{Y_\Xi},
 #{C^{-1}} preserves #{Y_\Xi}, and #{B} takes #{Y_\Xi} back to
 #{X_\Xi}. The restriction of #{C^{-1}} is the inverse of the
 restriction of #{C}, by restricting both inverse identities.
@@ -54,10 +54,10 @@ given by conjugate transpose. The resulting formula is
 ##{\begin{aligned}
 \langle(x,y),Q(x,y)\rangle
  &=\langle x,Sx\rangle\\
- &\quad+\langle y+C^{-1}B^*x,
- C(y+C^{-1}B^*x)\rangle.
+ &\quad+\langle y+C^{-1}B^{\dagger}x,
+ C(y+C^{-1}B^{\dagger}x)\rangle.
 \end{aligned}}
-Testing at #{y=-C^{-1}B^*x} proves #{S>0}; its self-adjointness
+Testing at #{y=-C^{-1}B^{\dagger}x} proves #{S>0}; its self-adjointness
 follows by adjointing the composite. This uses the real inner
 product, regardless of the scalar algebra of a multiplicity matrix.}
 }
@@ -65,8 +65,8 @@ product, regardless of the scalar algebra of a multiplicity matrix.}
 \p{Use induced Euclidean volumes and let #{\pi:H\to X} be the
 orthogonal projection. For every fixed #{x}, translation in #{Y}
 and the completed square give
-##{\int_Y e^{-\langle(x,y),Q(x,y)\rangle/2}\,d\lambda_Y(y)
- =Z_Ce^{-\langle x,Sx\rangle/2}.}
+##{\int_Y \ue^{-\langle(x,y),Q(x,y)\rangle/2}\,\extd\lambda_Y(y)
+ =Z_C\ue^{-\langle x,Sx\rangle/2}.}
 Nonnegative Tonelli and normalization therefore give
 #{Z_Q=Z_CZ_S} and #{\pi_*\mu_Q=\mu_S}, as in
 [positive elimination](fdip-000D). Applying the same argument in

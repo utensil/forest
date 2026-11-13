@@ -2,58 +2,64 @@
 \meta{agent-authored}{true}
 \tag{fdip}
 \taxon{Proposition}
-\title{The gamma operators represent the spatial form}
+\title{The represented generators square to the spatial form}
 \date{2026-11-10}
 
-\p{Let #{\gamma_j} be the flip and sign operators of the
-\vocabk{centered Dirac operator}{fdip-000R}, and let
-#{c(z)=\sum_j z_j\gamma_j}. Then #{\gamma_j^*=\gamma_j},
-##{\gamma_i\gamma_j+\gamma_j\gamma_i=2\delta_{ij}I_S,}
-and #{c(z)^2=q_{\mathrm{sp}}(z)I_S}. The
+\p{Let #{\rho(\iota(\varepsilon_j))} be the represented generator of
+the \vocabk{centered Dirac operator}{fdip-000R}, and let
+#{c(z)=\sum_j z_j\rho(\iota(\varepsilon_j))}. Then
+#{{\rho(\iota(\varepsilon_j))}^{\dagger}
+=\rho(\iota(\varepsilon_j))},
+##{\rho(\iota(\varepsilon_i))\rho(\iota(\varepsilon_j))
++\rho(\iota(\varepsilon_j))\rho(\iota(\varepsilon_i))
+=2\delta_{ij}\bbI_S,}
+and #{c(z)^2=q_{\mathrm{sp}}(z)\bbI_S}. The
 [Clifford universal property](fdip-000P) therefore supplies a
 unique unital complex-algebra map
-##{\begin{aligned}
-\rho:\operatorname{Cl}(q_{\mathrm{sp}})&\longrightarrow
-\operatorname{End}_{\mathbb C}(S),\\
-\rho(\iota(\varepsilon_j))&=\gamma_j.
-\end{aligned}}
+#{\rho:\operatorname{Cl}(q_{\mathrm{sp}})
+\longrightarrow\operatorname{End}_{\mathbb C}(S)},
+sending #{\iota(\varepsilon_j)} to that generator.
 This makes #{S} a \vocabk{Clifford module}{uts-001Z}, in the
 [module-map convention](fcap-001O).}
 
 \proof{
-\p{In the ordered basis #{(e_0,e_1)} of a factor, the flip and the
+\p{Write #{\gamma_j} for the array of #{\rho(\iota(\varepsilon_j))}
+in \ref{fdip-00LB}. In the ordered basis #{(e_0,e_1)} of a factor, the flip and the
 sign have the arrays
 ##{X=\begin{pmatrix}0&1\\1&0\end{pmatrix},\qquad
 Z=\begin{pmatrix}1&0\\0&-1\end{pmatrix}}
-of \ref{fdip-00LB}, and #{I=I_2}. Direct multiplication gives
-#{X^*=X}, #{Z^*=Z}, #{X^2=Z^2=I} and #{XZ=-ZX}. Ordinary tensor
+of \ref{fdip-00LB}, and #{\bbI=\bbI_2}. Direct multiplication gives
+#{X^{\dagger}=X}, #{Z^{\dagger}=Z}, #{X^2=Z^2=\bbI} and #{XZ=-ZX}. Ordinary tensor
 products obey
 ##{\begin{aligned}
-(A\otimes B)^*&=A^*\otimes B^*,\\
+(A\otimes B)^{\dagger}&=A^{\dagger}\otimes B^{\dagger},\\
 (A\otimes B)(C\otimes E)&=AC\otimes BE.
 \end{aligned}}
 The product formula follows on pure tensors, which span; the
 adjoint formula follows from the product inner product on such
 tensors. The operator #{\gamma_j} therefore has array
 ##{\gamma_j=Z^{\otimes(j-1)}\otimes X
-\otimes I^{\otimes(d-j)}.}
+\otimes \bbI^{\otimes(n-j)}.}
 An empty tensor product contributes the scalar identity. Thus
-#{\gamma_j^*=\gamma_j} and #{\gamma_j^2=I_S}. For #{i<j}, the
+#{\gamma_j^{\dagger}=\gamma_j} and #{\gamma_j^2=\bbI_S}. For #{i<j}, the
 only anticommuting slot is #{i}, where #{X} meets #{Z}. Before it
-both factors are #{Z}; after it at least one factor is #{I}.
+both factors are #{Z}; after it at least one factor is #{\bbI}.
 Hence the displayed anticommutator holds. Therefore
 ##{\begin{aligned}
-c(z)^2&=\sum_j z_j^2 I_S\\
+c(z)^2&=\sum_j z_j^2 \bbI_S\\
 &\quad+\sum_{i<j}z_i z_j
  (\gamma_i\gamma_j+\gamma_j\gamma_i)\\
-&=q_{\mathrm{sp}}(z)I_S.
+&=q_{\mathrm{sp}}(z)\bbI_S.
 \end{aligned}}}
 
 \p{The ordinary-algebra universal property is stated in
 \citet{Proposition 2.2 and Remark 2.2, p. 29}{meinrenken2013clifford}.
-Its bilinear form is #{b(z,w)=\sum_j z_jw_j}, with relation
-#{uv+vu=2b(u,v)1}; see
+Its bilinear form is #{b(z,w)=\sum_j z_jw_j}. The relation
+used here is the scalar #{uv+vu=B_q(u,v)1} of \ref{fdip-00R2},
+equal to #{2b(u,v)1} when #{2} is invertible; see
 \citet{Definition 2.1, p. 27}{meinrenken2013clifford}.
 The displayed square identity is precisely the input required
-by \leanref{CliffordAlgebra.lift} over #{\mathbb C}.}
+by \leanref{CliffordAlgebra.lift} over #{\mathbb C}.
+That lift is the map #{\rho} of the statement, and it sends
+#{\iota(\varepsilon_j)} to #{\gamma_j}.}
 }

@@ -6,14 +6,14 @@
 \date{2026-10-31}
 
 \p{For the [circle mesh](fdip-004H), let #{k\in\mathbb Z} and set
-##{e_k(x)=e^{2\pi ikx},\qquad e_{n,k}(j)=e^{2\pi ikj/n}.}
+##{e_k(x)=\ue^{2\pi\ui kx},\qquad e_{n,k}(j)=\ue^{2\pi\ui kj/n}.}
 Every entry has modulus one, hence #{\|e_{n,k}\|_n=1}. Applying
 the shift and its inverse directly gives
 ##{\begin{aligned}
-T_ne_{n,k}&=e^{2\pi ik/n}e_{n,k},\\
+T_ne_{n,k}&=\ue^{2\pi\ui k/n}e_{n,k},\\
 L_ne_{n,k}&=-\lambda_{n,k}e_{n,k},\\
 \lambda_{n,k}
- &=n^2(2-e^{2\pi ik/n}-e^{-2\pi ik/n})\\
+ &=n^2(2-\ue^{2\pi\ui k/n}-\ue^{-2\pi\ui k/n})\\
  &=4n^2\sin^2(\pi k/n).
 \end{aligned}}
 This derives the scaled version of the
@@ -41,10 +41,10 @@ increasing #{j}; they do not specify a dynamics.}
 \end{tikzpicture}}
 
 \p{Now use real fields and the [Gaussian law](fdip-0005)
-##{d\nu_n(f)=Z_n^{-1}e^{-q_n(f)/2}\,d\operatorname{vol}_{g_{0,n}}(f).}
+##{\extd\nu_n(f)=Z_n^{-1}\ue^{-q_n(f)/2}\,\extd\operatorname{vol}_{g_{0,n}}(f).}
 In raw coordinates the volume and normalization are
 ##{\begin{aligned}
-d\operatorname{vol}_{g_{0,n}}&=n^{-n/2}\,df_0\cdots df_{n-1},\\
+\extd\operatorname{vol}_{g_{0,n}}&=n^{-n/2}\,\extd f_0\cdots\extd f_{n-1},\\
 Z_n&=(2\pi)^{n/2}(\det Q_n)^{-1/2}.
 \end{aligned}}
 The volume factor follows because #{f\mapsto f/\sqrt n} is an
@@ -55,15 +55,15 @@ is #{f^TQ_nf/(2n)}, the raw coordinate covariance matrix is
 #{nQ_n^{-1}}.}
 
 \p{Define the complex Fourier observable
-#{a_{n,k}=n^{-1}\sum_j e^{-2\pi ikj/n}f_j}. It has zero mean.
-Writing #{v=e_{n,k}} and #{v^*} for its conjugate transpose,
+#{a_{n,k}=n^{-1}\sum_j \ue^{-2\pi\ui kj/n}f_j}. It has zero mean.
+Writing #{v=e_{n,k}} and #{{\overline v}^{T}} for its conjugate transpose,
 the coordinate covariance gives
 ##{\begin{aligned}
 \mathbb E_{\nu_n}|a_{n,k}|^2
- &=n^{-2}v^*(nQ_n^{-1})v\\
+ &=n^{-2}{\overline v}^{T}(nQ_n^{-1})v\\
  &=\frac1{\mu+\lambda_{n,k}},
 \end{aligned}}
-because #{v^*v=n}. All real and imaginary parts and their products
+because #{{\overline v}^{T}v=n}. All real and imaginary parts and their products
 are integrable polynomials by \ref{fdip-002W}. In particular the
 real mean #{a_{n,0}} has variance #{1/\mu}. At #{k=1}, the
 four-point and eight-point second moments are respectively
@@ -76,7 +76,7 @@ c_{n,k}&=\operatorname{Re}a_{n,k}
 s_{n,k}&=-\operatorname{Im}a_{n,k}
   =\frac1n\sum_j\sin(2\pi kj/n)f_j.
 \end{aligned}}
-The geometric sum #{\sum_j e^{4\pi ikj/n}=0}: its ratio is not one,
+The geometric sum #{\sum_j \ue^{4\pi\ui kj/n}=0}: its ratio is not one,
 its #{n}-th power is one, and multiplying the sum by one minus
 the ratio gives zero. Taking real and imaginary parts, and using
 the double-angle identities, gives normalized squared norms

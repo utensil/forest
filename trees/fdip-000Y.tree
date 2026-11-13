@@ -11,7 +11,7 @@ covariance and effective precision are transported operators on their
 specified field spaces. For #{x=(a,b,m,R)} write
 #{C_x=Q_x^{-1}}. If #{g:x\to y}, then
 ##{\begin{aligned}
-C_y&=P_gC_xP_g^*,\\
+C_y&=P_gC_xP_g^{\dagger},\\
 (P_g)_*\mu_{Q_x}&=\mu_{Q_y},\\
 \langle F\rangle_{Q_y}&=\langle F\circ P_g\rangle_{Q_x}.
 \end{aligned}}
@@ -23,11 +23,11 @@ and [Gaussian transport](fdip-000H), including their normalization.}
 \proof{
 \p{Use the vertex indicator basis. In that basis the groupoid
 construction proves #{Q_y=P_gQ_xP_g^T}, and this transpose is the
-counting adjoint, so #{Q_y=P_gQ_xP_g^*} and #{P_g^*=P_g^{-1}}.
+counting adjoint, so #{Q_y=P_gQ_xP_g^{\dagger}} and #{P_g^{\dagger}=P_g^{-1}}.
 Inverting gives the covariance equation.
 The normalized density in dimension #{4} is
-##{d\mu_Q(\phi)=\frac{\sqrt{\det Q}}{(2\pi)^2}
- e^{-\phi^TQ\phi /2}\,d\phi.}
+##{\extd\mu_Q(\phi)=\frac{\sqrt{\det Q}}{(2\pi)^2}
+ \ue^{-\phi^TQ\phi /2}\,\extd\phi.}
 Set #{\psi=P_g\phi}. The [absolute Jacobian is one](fdip-002L).
 The exponent is now #{-\psi^TQ_y\psi /2}.
 Also #{\det Q_y=\det Q_x}, proving the pushforward identity.
@@ -41,7 +41,7 @@ Transport composes because #{P_{kg}=P_kP_g}.}
 (C_x)_{01}
  &=\tfrac14(1-\tfrac13+\tfrac15-\tfrac17)\\
  &=\tfrac{19}{105},\\
-(P_rC_xP_r^*)_{01}
+(P_rC_xP_r^{\dagger})_{01}
  &=\tfrac14(1+\tfrac13-\tfrac15-\tfrac17)\\
  &=\tfrac{26}{105}.
 \end{aligned}}
@@ -49,13 +49,13 @@ The second entry is the old #{(3,0)} entry. The observable's
 coordinate labels must move with the field to preserve its expectation.}
 }
 
-\p{Let #{D=V\setminus R}. Write #{i_R} and #{i_D} for the
+\p{Let #{D=V\setminus R}. Write #{\iota_R} and #{\iota_D} for the
 inclusions of the retained and eliminated coordinate spaces, and
 ##{\begin{aligned}
-A&=i_R^*Q_xi_R,\\
-H&=i_R^*Q_xi_D,\\
-C_D&=i_D^*Q_xi_D,\\
-S_R(x)&=A-HC_D^{-1}H^*.
+A&=\iota_R^{\dagger}Q_x\iota_R,\\
+H&=\iota_R^{\dagger}Q_x\iota_D,\\
+C_D&=\iota_D^{\dagger}Q_x\iota_D,\\
+S_R(x)&=A-HC_D^{-1}H^{\dagger}.
 \end{aligned}}
 This [Schur complement](fdip-000D) is the positive precision
 of the [marginal](fdip-000E).
@@ -63,8 +63,8 @@ The restrictions of #{g} give permutation isometries
 #{P_R:\mathbb R^R\to\mathbb R^{gR}} and
 #{P_D:\mathbb R^D\to\mathbb R^{gD}}. Then
 ##{\begin{aligned}
-S_{gR}(y)&=P_RS_R(x)P_R^*,\\
-S_{gR}(y)^{-1}&=P_RS_R(x)^{-1}P_R^*,\\
+S_{gR}(y)&=P_RS_R(x)P_R^{\dagger},\\
+S_{gR}(y)^{-1}&=P_RS_R(x)^{-1}P_R^{\dagger},\\
 \pi_{gR}P_g&=P_R\pi_R.
 \end{aligned}}
 The counting-basis matrix of this split is \ref{fdip-00LC}.
@@ -74,14 +74,14 @@ Thus the marginal laws are compatible on the changing retained spaces.}
 \p{In the same vertex indicator basis, where the counting adjoint is
 the transpose, the transformed blocks are
 ##{\begin{aligned}
-A'&=P_RAP_R^*,\\
-H'&=P_RHP_D^*,\\
-C_D'&=P_DC_DP_D^*.
+A'&=P_RAP_R^{\dagger},\\
+H'&=P_RHP_D^{\dagger},\\
+C_D'&=P_DC_DP_D^{\dagger}.
 \end{aligned}}
-Substitution, using #{P_D^*P_D=I}, gives
+Substitution, using #{P_D^{\dagger}P_D=\bbI}, gives
 ##{\begin{aligned}
-S_{gR}(y)&=A'-H'(C_D')^{-1}(H')^*\\
- &=P_R(A-HC_D^{-1}H^*)P_R^*.
+S_{gR}(y)&=A'-H'(C_D')^{-1}(H')^{\dagger}\\
+ &=P_R(A-HC_D^{-1}H^{\dagger})P_R^{\dagger}.
 \end{aligned}}
 Inversion proves the covariance equation. The projection identity
 holds on each vertex coordinate vector. Consequently
@@ -98,7 +98,7 @@ so the identities are compatible with composition.}
 \p{For either opposite pair in ascending coordinate order, put
 #{d=a+b+m^2}. Direct block multiplication gives
 ##{\begin{aligned}
-A=C_D&=dI_2,\\
+A=C_D&=d\bbI_2,\\
 H&=-\begin{pmatrix}a&b\\b&a\end{pmatrix},\\
 S_R(x)&=\begin{pmatrix}\alpha&-\beta\\-\beta&\alpha\end{pmatrix},\\
 \alpha&=d-\frac{a^2+b^2}{d},\\
@@ -111,8 +111,8 @@ above already differ.}
 }
 
 \p{For the graph Laplacian #{L_x}, define
-##{\mathcal R(x)=\frac{\operatorname{tr}(L_x^2)}
- {\bigl(\operatorname{tr}L_x\bigr)^2}.}
+##{\mathcal R(x)=\frac{\trace(L_x^2)}
+ {\bigl(\trace L_x\bigr)^2}.}
 Then #{\mathcal R(gx)=\mathcal R(x)}, and
 ##{\mathcal R(a,b)=\frac{a^2+ab+b^2}{2(a+b)^2}.}
 This scalar descends to the coarse orbit set but does not classify
@@ -120,16 +120,16 @@ the enriched objects.}
 
 \proof{
 \p{Trace cyclicity gives
-#{\operatorname{tr}(P_gMP_g^*)=\operatorname{tr}M}.
-Also #{L_{gx}^2=P_gL_x^2P_g^*}; hence both traces are preserved.
+#{\trace(P_gMP_g^{\dagger})=\trace M}.
+Also #{L_{gx}^2=P_gL_x^2P_g^{\dagger}}; hence both traces are preserved.
 For the explicit value, the 4 orthonormal vectors #{u_0,u_1,u_2,u_3}
 from \ref{fdip-0037} remain eigenvectors after replacing weights
 #{(1,t)} by #{(a,b)}, with eigenvalues
 #{0,-2a,-2b,-(2a+2b)}. Substituting the alternating entries of
 #{L_x} verifies each eigenvector equation. Therefore
 ##{\begin{aligned}
-\operatorname{tr}L_x&=-4(a+b),\\
-\operatorname{tr}(L_x^2)&=8(a^2+ab+b^2).
+\trace L_x&=-4(a+b),\\
+\trace(L_x^2)&=8(a^2+ab+b^2).
 \end{aligned}}
 These spectral trace identities use
 \citet{Appendix A.5.2, pp. 646-647}{boyd2004convex}.
@@ -147,18 +147,18 @@ by \ref{fdip-000X}.}
 
 \p{Now forget mass, state and partition and admit positive scaling
 of the Laplacian, as in the [broader comparison](fdip-003H):
-##{L'=cP_gLP_g^*,\qquad c>0.}
+##{L'=cP_gLP_g^{\dagger},\qquad c>0.}
 The numerator of #{\mathcal R} gains #{c^2}, while its denominator
 gains the same factor. Thus the ratio is invariant under this
 different relation. A weight-swapping relabeling followed by
 #{c=1/t} sends #{L(1,t)} to #{L(1,1/t)}. Reciprocal parameters
 are identified in this reduced problem only; no scale arrow has been
 added to the original Gaussian groupoid. At fixed mass,
-#{m^2I-cL\ne cQ} for #{c\ne1}. If one instead rescales the
+#{m^2\bbI-cL\ne cQ} for #{c\ne1}. If one instead rescales the
 entire precision to #{cQ}, then
 ##{\begin{aligned}
 (cQ)^{-1}&=c^{-1}Q^{-1},\\
-cA-(cH)(cC_D)^{-1}(cH)^*&=cS_R.
+cA-(cH)(cC_D)^{-1}(cH)^{\dagger}&=cS_R.
 \end{aligned}}
 Raw covariance and effective precision therefore are not scale
 invariants. Any normalized operator ratio would need its own definition
