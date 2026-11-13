@@ -15,7 +15,7 @@ For every #{y\in Y}, define a probability measure on #{X} by
 ##{\begin{aligned}
 &k_y(x)=c_A^{-1}\exp\bigl(-\tfrac12\\
 &\qquad\cdot h_X(x+A^{-1}By,A(x+A^{-1}By))\bigr),\\
-&\kappa(y,D)=\int_D k_y(x)\,d\lambda_X(x)
+&\kappa(y,D)=\int_D k_y(x)\,\extd\lambda_X(x)
 \end{aligned}}
 for Borel #{D\subseteq X}. These measures form a measurable
 \newvocab{conditional probability kernel} for the retained field
@@ -32,13 +32,13 @@ operator is #{A^{-1}}.}
 The joint density relative to #{\lambda_X\otimes\lambda_Y} is
 #{p_Q(x,y)=Z_Q^{-1}w_Q(J(x,y))}. Its #{Y}-marginal density is
 ##{\begin{aligned}
-r(y)&=\int_Xp_Q(x,y)\,d\lambda_X(x)\\
+r(y)&=\int_Xp_Q(x,y)\,\extd\lambda_X(x)\\
  &=\frac{c_A}{Z_Q}e^{-h_Y(y,Ty)/2}>0.
 \end{aligned}}
 It is continuous, finite and integrates to one by Tonelli.}
 \p{Division gives #{k_y(x)=p_Q(x,y)/r(y)}. Translation invariance and
 [positive normalization](fdip-002T) prove
-#{\int_Xk_y\,d\lambda_X=1} for every #{y}, including zero-dimensional
+#{\int_Xk_y\,\extd\lambda_X=1} for every #{y}, including zero-dimensional
 spaces. Thus #{\kappa(y,\cdot)} is a probability measure.}
 \p{For fixed Borel #{D}, the function
 #{(y,x)\mapsto\mathbf1_D(x)k_y(x)} is nonnegative Borel.
@@ -50,7 +50,7 @@ applied to the uncompleted Borel product.}
 \p{For Borel #{D\subseteq X} and #{H\subseteq Y}, Tonelli and
 #{k_yr=p_Q} give
 ##{\mu_Q(J(D\times H))
- =\int_H\kappa(y,D)r(y)\,d\lambda_Y(y).}
+ =\int_H\kappa(y,D)r(y)\,\extd\lambda_Y(y).}
 The set on the left is Borel because #{J} is a homeomorphism.
 This rectangle identity is the conditional-distribution identity
 with respect to the actual #{Y}-marginal. It divides densities,
