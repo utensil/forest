@@ -157,7 +157,7 @@ chk:
 verify-render:
     ./verify-forester-output.sh
 
-verify-pdf-fixtures:
+build-pdfs:
     #!/usr/bin/env bash
     set -euo pipefail
     fixtures=(spin-0001 hopf-0001 ca-0001 fgap-0001 fgap-001F fgap-001G fcap-0001 connes-0001 tt-0001 uts-000C ftip-0001 ftip-00NX frap-0001 fdip-0001)
@@ -167,9 +167,36 @@ verify-pdf-fixtures:
         jobs="$(sysctl -n hw.ncpu)"
     fi
     mkdir -p build
-    printf '%s\n' "${fixtures[@]}" | xargs -P "$jobs" -I{} bash -c './lize.sh "$1" > "build/forester-pdf-$1.log" 2>&1' _ {}
+    pids=()
+    fail=0
+    for id in "${fixtures[@]}"; do
+        ./lize.sh "$id" >"build/forester-pdf-$id.log" 2>&1 &
+        pids+=("$!")
+        if [ "${#pids[@]}" -ge "$jobs" ]; then
+            if ! wait "${pids[0]}"; then
+                fail=1
+            fi
+            pids=("${pids[@]:1}")
+        fi
+    done
+    for pid in "${pids[@]}"; do
+        if ! wait "$pid"; then
+            fail=1
+        fi
+    done
+    if [ "$fail" -ne 0 ]; then
+        echo "PDF build failed; see build/forester-pdf-*.log" >&2
+        exit 1
+    fi
+
+verify-pdfs:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    fixtures=(spin-0001 hopf-0001 ca-0001 fgap-0001 fgap-001F fgap-001G fcap-0001 connes-0001 tt-0001 uts-000C ftip-0001 ftip-00NX frap-0001 fdip-0001)
     ./verify-forester-output.sh output/forest "${fixtures[@]}"
     bash ./verify-pdf-dates.sh "${fixtures[@]}"
+
+verify-pdf-fixtures: build-pdfs verify-pdfs
 
 pre-push:
     just chk

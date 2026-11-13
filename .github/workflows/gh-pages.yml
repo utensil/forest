@@ -127,7 +127,7 @@ jobs:
         with:
             version: latest
       - name: Lint
-        if: ${{ steps.restore.outcome != 'success' }}
+        if: ${{ steps.restore.outcome != 'success' && github.event_name != 'pull_request' }}
         run: |
           ./chk.sh
       - name: Setup TeX Live
@@ -144,8 +144,17 @@ jobs:
           echo $GITHUB_PATH
           tlmgr --version
           which latex
+      - name: Restore WASM packages
+        if: ${{ steps.restore.outcome != 'success' && github.event_name == 'pull_request' }}
+        uses: actions/cache/restore@v4
+        with:
+          path: |
+            lib/**/pkg
+          key: ${{ runner.os }}-wasm-${{ hashFiles('build.sh', 'bun.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-wasm-
       - name: Cache WASM packages
-        if: ${{ steps.restore.outcome != 'success' }}
+        if: ${{ steps.restore.outcome != 'success' && github.event_name == 'push' }}
         uses: actions/cache@v4
         with:
           path: |
@@ -158,33 +167,58 @@ jobs:
         if: ${{ !env.ACT }}
         id: pages
         uses: actions/configure-pages@v5
+      - name: Install system packages
+        if: ${{ steps.restore.outcome != 'success' }}
+        run: |
+          sudo apt update
+          sudo apt install -y libev-dev xsltproc poppler-utils
       - name: Set-up OCaml
         if: ${{ steps.restore.outcome != 'success' }}
         uses: ocaml/setup-ocaml@v3
         with:
           ocaml-compiler: "5.3.0"
           # dune-cache: true
-      # - name: Cache opam packages
-      #   uses: actions/cache@v4
-      #   with:
-      #     path: ~/.opam
-      #     key: ${{ runner.os }}-opam-${{ hashFiles('**/*.opam') }}
-      #     restore-keys: |
-      #       ${{ runner.os }}-opam-
-      - name: Install forester
-        if: ${{ steps.restore.outcome != 'success' }}
+      - name: Restore Forester switch
+        id: forester-cache
+        if: ${{ steps.restore.outcome != 'success' && github.event_name == 'pull_request' }}
+        uses: actions/cache/restore@v4
+        with:
+          path: _opam
+          key: ${{ runner.os }}-forester-5.3.0-2ed9c1cab0112921eb3497cb1a5a0e2fbaa1f8cd-lsp1.22.0-jsonrpc1.22.0
+      - name: Cache Forester switch
+        id: forester-cache-push
+        if: ${{ steps.restore.outcome != 'success' && github.event_name == 'push' }}
+        uses: actions/cache@v4
+        with:
+          path: _opam
+          key: ${{ runner.os }}-forester-5.3.0-2ed9c1cab0112921eb3497cb1a5a0e2fbaa1f8cd-lsp1.22.0-jsonrpc1.22.0
+      - name: Check cached Forester
+        id: forester-ok
+        if: ${{ steps.restore.outcome != 'success' && (steps.forester-cache.outputs.cache-hit == 'true' || steps.forester-cache-push.outputs.cache-hit == 'true') }}
+        continue-on-error: true
         run: |
-          sudo apt install libev-dev
-          sudo apt update
-          sudo apt install libev-dev
+          set -euo pipefail
+          unset OPAMSWITCH || true
+          eval "$(opam env --switch=. --set-switch)"
+          forester --version
+          echo "ok=true" >> "$GITHUB_OUTPUT"
+          echo "$(opam var bin)" >> "$GITHUB_PATH"
+      - name: Install forester
+        if: ${{ steps.restore.outcome != 'success' && steps.forester-ok.outputs.ok != 'true' }}
+        run: |
+          set -euo pipefail
+          unset OPAMSWITCH || true
+          if ! opam env --switch=. --set-switch >/dev/null 2>&1; then
+            rm -rf _opam
+            opam switch create . --yes ocaml-base-compiler.5.3.0
+          fi
+          eval "$(opam env --switch=. --set-switch)"
           opam pin add lsp 1.22.0 --yes
           opam pin add jsonrpc 1.22.0 --yes
           opam pin add forester git+https://github.com/utensil/ocaml-forester.git#2ed9c1cab0112921eb3497cb1a5a0e2fbaa1f8cd --yes
           opam install forester --yes
-      - name: Install xsltproc and PDF text tools
-        if: ${{ steps.restore.outcome != 'success' }}
-        run: |
-          sudo apt install xsltproc poppler-utils
+          forester --version
+          echo "$(opam var bin)" >> "$GITHUB_PATH"
       # - name: Install Homebrew
       #   run: |
       #     bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
@@ -196,7 +230,8 @@ jobs:
       - name: Build with forester
         if: ${{ steps.restore.outcome != 'success' }}
         run: |
-          eval $(opam env)
+          unset OPAMSWITCH || true
+          eval "$(opam env --switch=. --set-switch)"
           export TERM=xterm-256color
           forester --version
           bash ./build.sh
@@ -236,10 +271,11 @@ jobs:
         if: ${{ github.event_name == 'pull_request' }}
         run: |
           just verify-render
-      - name: Verify PDF fixtures on main
+      - name: Build and verify PDF fixtures on main
         if: ${{ github.event_name == 'push' }}
         run: |
-          just verify-pdf-fixtures
+          just build-pdfs
+          just verify-pdfs
       # - name: Check for PDF files
       #   run: |
       #     pdf_count=$(find ./output -name "*.pdf" | wc -l)
@@ -259,6 +295,7 @@ jobs:
         with:
           name: pages-${{ steps.source.outputs.tree }}
           path: ./output/forest
+          retention-days: 7
       - name: Upload Pages artifact
         if: ${{ !env.ACT && github.event_name == 'push' }}
         uses: actions/upload-pages-artifact@v3

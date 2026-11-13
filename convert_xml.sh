@@ -158,7 +158,9 @@ function detect_max_jobs() {
     # Cross-platform CPU core detection
     local num_cores=1
     if [ -n "$CI" ]; then
-        num_cores=2
+        num_cores=$(nproc)
+        echo "$num_cores"
+        return
     elif [ -f /proc/cpuinfo ]; then
         num_cores=$(grep -c ^processor /proc/cpuinfo)
     elif [ "$(uname)" = "Darwin" ]; then
