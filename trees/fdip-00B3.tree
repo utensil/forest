@@ -77,15 +77,15 @@ determinant of the single step by #{qr}.}
 \p{Declare the counting basis of site indicators. Number the vertices #{0,\ldots,qN-1} and keep
 #{0,q,\ldots,(N-1)q}. The #{N} paths of #{q-1} vertices between
 consecutive kept vertices are disjoint, so #{C} is their direct
-sum. Let #{\Delta_m} be the determinant of one #{m\times m}
-tridiagonal block, with #{\Delta_0=1} and #{\Delta_1=a}. Then
-#{\Delta_m=a\Delta_{m-1}-b^2\Delta_{m-2}}. With
-#{t=a(2b)^{-1}}, the identity #{\Delta_m=b^m U_m(t)} holds for
+sum. Let #{\kappa_m} be the determinant of one #{m\times m}
+tridiagonal block, with #{\kappa_0=1} and #{\kappa_1=a}. Then
+#{\kappa_m=a\kappa_{m-1}-b^2\kappa_{m-2}}. With
+#{t=a(2b)^{-1}}, the identity #{\kappa_m=b^m U_m(t)} holds for
 #{m=0} and #{m=1}, and the recurrence of #{U_m} carries it
 forward. Thus #{\det C=(b^{q-1}U_{q-1}(t))^N}.}
 
 \p{No two kept vertices are adjacent, so the kept block is
-#{aI_N}. Let #{m=q-1} and let #{C_1y=e_m}. The path recurrence
+#{a\bbI_N}. Let #{m=q-1} and let #{C_1y=e_m}. The path recurrence
 gives #{y_k=y_1U_{k-1}(t)}. The last row is
 #{-by_{m-1}+ay_m=1}, and it gives
 #{y_1=1/(bU_m(t))}. The case #{m=1} is
@@ -93,7 +93,7 @@ gives #{y_k=y_1U_{k-1}(t)}. The last row is
 the [split Schur map](fdip-001T) gives the off-diagonal entry
 #{-b^2 y_1=-b/U_m(t)}.
 Each kept vertex meets two paths. The endpoint entry of the
-inverse is #{\Delta_{m-1}/\Delta_m=U_{m-1}(t)/(bU_m(t))}, so
+inverse is #{\kappa_{m-1}/\kappa_m=U_{m-1}(t)/(bU_m(t))}, so
 one path subtracts #{bU_{q-2}(t)/U_{q-1}(t)}. Two paths give
 the diagonal
 ##{a-2b\frac{U_{q-2}(t)}{U_{q-1}(t)}.}
