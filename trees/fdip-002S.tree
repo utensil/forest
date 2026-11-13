@@ -6,26 +6,26 @@
 \date{2026-10-25}
 
 \p{For real #{a}, consider the extended nonnegative Lebesgue integral
-##{I(a)=\int_{\mathbb R}e^{-a x^2/2}\,dx.}
+##{I(a)=\int_{\mathbb R}\ue^{-a x^2/2}\,\extd x.}
 For #{a>0} it is finite and positive, and
 ##{I(a)=\sqrt{2\pi /a},\qquad I(1)^2=2\pi.}
 For #{a\leq0} it is infinite.}
 \proof{
 \p{Suppose #{a>0}. The continuous integrand is at most one on
-#{[-1,1]}. For #{|x|\geq1}, it is at most #{e^{-a|x|/2}}, whose
+#{[-1,1]}. For #{|x|\geq1}, it is at most #{\ue^{-a|x|/2}}, whose
 integral on #{\mathbb R} is #{4/a}. This proves finiteness before
-evaluation. On #{[-1,1]} the integrand is at least #{e^{-a/2}}, giving
-the strictly positive lower bound #{2e^{-a/2}}.}
-\p{Set #{J=\int_0^\infty e^{-x^2}\,dx}, likewise finite and positive.
+evaluation. On #{[-1,1]} the integrand is at least #{\ue^{-a/2}}, giving
+the strictly positive lower bound #{2\ue^{-a/2}}.}
+\p{Set #{J=\int_0^\infty \ue^{-x^2}\,\extd x}, likewise finite and positive.
 For each fixed #{y>0}, the substitution #{x=yt} gives
-#{J=\int_0^\infty y e^{-y^2t^2}\,dt}. Multiply by #{e^{-y^2}},
+#{J=\int_0^\infty y \ue^{-y^2t^2}\,\extd t}. Multiply by #{\ue^{-y^2}},
 integrate in #{y}, and apply nonnegative [Tonelli](fdip-002Q):
 ##{\begin{aligned}
 J^2&=\int_0^\infty \int_0^\infty
-           y e^{-(1+t^2)y^2}\,dy\,dt\\
-   &=\int_0^\infty\frac{dt}{2(1+t^2)}=\frac\pi4.
+           y \ue^{-(1+t^2)y^2}\,\extd y\,\extd t\\
+   &=\int_0^\infty\frac{\extd t}{2(1+t^2)}=\frac\pi4.
 \end{aligned}}
-The inner primitive is #{-e^{-(1+t^2)y^2}/(2(1+t^2))}; the final
+The inner primitive is #{-\ue^{-(1+t^2)y^2}/(2(1+t^2))}; the final
 integral is evaluated by arctangent. Thus #{J=\sqrt{\pi}/2}.
 Reflection and the positive substitution #{x=\sqrt{2/a}\,z} give
 the asserted value of #{I(a)}. If #{a\leq0}, the integrand is at

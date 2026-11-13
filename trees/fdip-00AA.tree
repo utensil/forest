@@ -10,11 +10,11 @@
 in the language of vector calculus. With a charge density #{\rho} and a current
 #{J}, and with the constants set to one, they read
 ##{\operatorname{div} E=\rho,\qquad \operatorname{div} B=0,\qquad
-   \operatorname{curl} E=-\partial_t B,\qquad
-   \operatorname{curl} B=\partial_t E+J.}
+   \covwedge E=-\partial_t B,\qquad
+   \covwedge B=\partial_t E+J.}
 4 equations for two vector fields, with a potential #{A} that enters when one
 wants to solve them. There the potential is primitive, and the fields are
-##{E=-\nabla\varphi-\partial_t A,\qquad B=\operatorname{curl} A,}
+##{E=-\nabla\varphi-\partial_t A,\qquad B=\covwedge A,}
 with #{\varphi} the scalar potential. The metric sits in the operators: the
 divergence, the curl and the cross product all know about lengths and angles.
 Every object is continuous as well: #{\rho} is a density, and #{\partial_t}
@@ -28,8 +28,8 @@ equation to impose, and gauge transformations #{A\mapsto A+d\chi} leave #{F}
 unchanged by construction, which is why gauge theory is written this way.
 \citet{Example 28.5.5}{hassani2013mathematical} and
 \citet{Box 28.5.6}{hassani2013mathematical} write #{dF=0}. The metric reappears
-in the Hodge star that the sourced equation requires,
-##{d(\star F)=4\pi(\star J),}
+in the dual that the sourced equation requires,
+##{d(F\psI^{-1})=4\pi(J\psI^{-1}),}
 where #{J} is the current #{1}-form, and #{d} raises the degree of a form.
 \citet{Box 28.5.14}{hassani2013mathematical} writes that equation.}
 
@@ -49,9 +49,9 @@ single vector-valued operator by the geometric product with the frame vectors.
 It acts by geometric multiplication, and a vector multiplied that way by a
 multivector splits into two parts,
 ##{\nabla F=\nabla\cdot F+\nabla\wedge F,}
-an inner product giving a divergence and an outer product giving a curl. With it
+an inner product giving a divergence and an outer product giving an exterior part. With it
 the 4 equations become #{\nabla F=J}, the divergence part carrying the sources
-and the curl part vanishing, so each original equation returns as a definite
+and the exterior part vanishing, so each original equation returns as a definite
 grade. \citet{(7.14)}{doran2003geometric} writes that equation. Hestenes and
 Sobczyk develop the calculus \citek{hestenes2012clifford}, Doran and Lasenby
 carry it through classical electrodynamics
