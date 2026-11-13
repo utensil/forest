@@ -7,23 +7,23 @@
 
 \p{Let #{V} be a finite-dimensional complex Hermitian space, of
 dimension #{n}, and let #{h} be its Hermitian product,
-conjugate-linear in the first argument as in \ref{fdip-0070}.
+conjugate-linear in the first argument as in the \vocabk{determinant action of a fixed connection}{fdip-0070}.
 Call #{K\in\operatorname{End}(V)} \newvocab{strictly accretive}
 when #{\operatorname{Re}h(z,Kz)>0} for every #{z\ne0}.
-Equivalently, the Hermitian part #{H=(K+K^*)/2} is positive
+Equivalently, the Hermitian part #{H=(K+K^{\dagger})/2} is positive
 definite, because #{\operatorname{Re}h(z,Kz)=h(z,Hz)}. Let
-#{d\operatorname{vol}} be the canonical real volume of this
+#{\extd\operatorname{vol}} be the canonical real volume of this
 Hermitian product: in any orthonormal basis,
 #{z_j=x_j+iy_j} and
-#{d\operatorname{vol}=\prod_j dx_j\,dy_j}. A unitary change of
+#{\extd\operatorname{vol}=\prod_j \extd x_j\,\extd y_j}. A unitary change of
 basis has real Jacobian of absolute value one, so the volume
 does not depend on that basis. Then #{K} is invertible, the
 following integral converges absolutely, and
-##{I(K):=\int_V e^{-h(z,Kz)}\,d\operatorname{vol}
+##{I(K):=\int_V \ue^{-h(z,Kz)}\,\extd\operatorname{vol}
        =\frac{\pi^n}{\det K}.}
 With #{Z_B(K)=\pi^{-n}I(K)} and the
 [paired Grassmann value](fdip-008H)
-#{Z_F(K)=J_V(e^{-\bar\psi(K\psi)})},
+#{Z_F(K)=\int\extd\bar\psi\,\extd\psi\;(\ue^{-\bar\psi(K\psi)})},
 ##{Z_B(K)Z_F(K)=1.}
 For #{n=0} both factors are one.}
 
@@ -38,35 +38,35 @@ accretive. For #{v\ne0} the graph vector
 invertibility of #{D}.}
 
 \proof{
-\p{For #{n>0}, choose #{\alpha>0} with #{H\ge\alpha I}. Then
-##{|e^{-h(z,Kz)}|
- =e^{-\operatorname{Re}h(z,Kz)}
- =e^{-h(z,Hz)}
- \le e^{-\alpha\|z\|^2}.}
+\p{For #{n>0}, choose #{\alpha>0} with #{H\ge\alpha\bbI}. Then
+##{|\ue^{-h(z,Kz)}|
+ =\ue^{-\operatorname{Re}h(z,Kz)}
+ =\ue^{-h(z,Hz)}
+ \le \ue^{-\alpha\|z\|^2}.}
 The right side is integrable by the product of scalar Gaussian
 integrals. If #{Kz=0}, then #{h(z,Hz)=0}, so #{z=0}; finite
 dimension makes #{K} invertible.}
 
-\p{First suppose #{K=K^*>0}. Choose an orthonormal eigenbasis,
+\p{First suppose #{K=K^{\dagger}>0}. Choose an orthonormal eigenbasis,
 with positive eigenvalues #{\lambda_j}. In these coordinates
 the unitary change from any other orthonormal basis preserves
-#{d\operatorname{vol}}. In each complex coordinate the
+#{\extd\operatorname{vol}}. In each complex coordinate the
 [scalar Gaussian formula](fdip-002T) gives
-##{\int_{\mathbb R^2}e^{-\lambda_j(x^2+y^2)}\,dx\,dy
+##{\int_{\mathbb R^2}\ue^{-\lambda_j(x^2+y^2)}\,\extd x\,\extd y
        =\frac\pi{\lambda_j}.}
 Multiplication gives #{I(K)=\pi^n/\det K}.}
 
-\p{For general #{K}, write #{K=H+A} with #{A^*=-A}, and set
+\p{For general #{K}, write #{K=H+A} with #{A^{\dagger}=-A}, and set
 #{K(w)=H+wA} for a complex parameter #{w}. Its Hermitian part
 is #{H+i(\operatorname{Im}w)A}. Choose #{\epsilon>0} such that
 #{\epsilon\|A\|<\frac{\alpha}{2}}, with any positive choice if #{A=0}.
 On the connected strip #{|\operatorname{Im}w|<\epsilon}, this
-part is at least #{\alpha I/2}, so #{K(w)} is invertible.}
+part is at least #{\alpha\bbI /2}, so #{K(w)} is invertible.}
 
 \p{The integral #{I(K(w))} is holomorphic on that strip.
 Differentiation of the integrand brings down powers of
 #{-h(z,Az)}; on every smaller neighborhood these are bounded
-by a polynomial in #{\|z\|} times #{e^{-\frac{\alpha}{2}\|z\|^2}}.
+by a polynomial in #{\|z\|} times #{\ue^{-\frac{\alpha}{2}\|z\|^2}}.
 This integrable bound justifies differentiation under the
 integral. The function #{\pi^n/\det K(w)} is holomorphic there
 too. For #{w=it} with real #{|t|<\epsilon}, the operator
@@ -87,7 +87,7 @@ removes the eliminated component of #{x} from the product, and
 }
 
 \p{For Hermitian positive #{K}, the normalized density
-#{(\det K/\pi^n)e^{-h(z,Kz)}} is a genuine Gaussian probability
+#{(\det K/\pi^n)\ue^{-h(z,Kz)}} is a genuine Gaussian probability
 law on the underlying real space of dimension #{2n}. For a
 general strictly accretive endomorphism the weight can be
 complex, so there need not be a positive Gaussian law with

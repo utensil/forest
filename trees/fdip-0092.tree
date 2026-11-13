@@ -13,13 +13,13 @@ and it is strictly larger when either period is even.}
 
 \p{Let #{V} be a finite free module of positive rank over a
 commutative ring. Exterior multiplication by a vector #{v} is the
-module endomorphism #{\epsilon_v} of the exterior algebra given by
-#{\epsilon_v(\omega)=v\wedge\omega}. Contraction by a covector
-#{\alpha} is the unique antiderivation #{\iota_\alpha} of degree
-#{-1} with #{\iota_\alpha(1)=0} and #{\iota_\alpha(v)=\alpha(v)}.
+module endomorphism #{v\wedge} of the exterior algebra given by
+#{(v\wedge)(\omega)=v\wedge\omega}. Contraction by a covector
+#{\alpha} is the unique antiderivation of degree #{-1} that
+vanishes on #{1} and sends a vector #{v} to #{\alpha(v)}.
 The normal-order map sends a pure tensor #{u\otimes\varphi} in
-#{\bigwedge V\otimes\bigwedge V^*} to
-#{\epsilon_u\circ\iota_\varphi}. On an ordered basis, composing
+#{\bigwedge V\otimes\bigwedge V^*} to wedge by #{u} after that
+contraction by #{\varphi}. On an ordered basis, composing
 contractions in increasing index order with the largest index
 acting first recovers the operators #{M_{S,T}} of the next
 paragraph. The isomorphism below is that coordinate form of the
@@ -31,23 +31,25 @@ basis vectors #{e_1,\ldots,e_n}, with basis the monomials #{e_I}
 indexed by subsets #{I}, written in increasing order, and with
 #{e_\varnothing=1}. Exterior multiplication and contraction along
 the basis are the linear operators
-##{\epsilon_i(e_I)=e_i\wedge e_I,}
-##{\iota_i(e_I)=0}
+##{(e_i\wedge)(e_I)=e_i\wedge e_I,}
+##{(e_i\cdot)(e_I)=0}
 when #{i\notin I}. When #{i\in I}, let
 #{p=\lvert\{j\in I:j<i\}\rvert}
 and set
-##{\iota_i(e_I)=(-1)^p e_{I\setminus\{i\}}.}
-The singleton has #{p=0}, so #{\iota_i(e_i)=1}. For the factor
+##{(e_i\cdot)(e_I)=(-1)^p e_{I\setminus\{i\}}.}
+The singleton has #{p=0}, so #{(e_i\cdot)(e_i)=1}. For the factor
 in place #{j}, counted from one, #{p=j-1}. That is the exponent
 of #{(-1)^{j-1}} in the ordered contraction of \ref{fdip-000P}.
-For subsets #{S} and #{T}, write #{\epsilon_S} and #{\iota_T} for
-the compositions of these operators in increasing index order, the
-largest index acting first, and write
-#{M_{S,T}=\epsilon_S\circ\iota_T}. There are #{2^n} choices for
+For subsets #{S} and #{T}, write #{(e\wedge)_S} and #{(e\cdot)_T}
+for the compositions of these operators in increasing index order,
+the largest index acting first, and write
+#{M_{S,T}=(e\wedge)_S\circ(e\cdot)_T}. There are #{2^n} choices for
 each subset, hence #{4^n} such operators, and they are a basis
 of the endomorphism ring of #{\bigwedge}. In particular
-#{\gamma_i=\epsilon_i+\iota_i} satisfies
-##{\gamma_i\gamma_j+\gamma_j\gamma_i=2\delta_{ij}I.}
+#{e_i\wedge+e_i\cdot} satisfies
+##{(e_i\wedge+e_i\cdot)(e_j\wedge+e_j\cdot)
+ +(e_j\wedge+e_j\cdot)(e_i\wedge+e_i\cdot)
+ =2\delta_{ij}\bbI.}
 The [configuration Clifford algebra](fdip-000P) is the square
 quotient of a supplied quadratic form. The operators here are
 defined before any such form, and the displayed relation is the
@@ -56,18 +58,18 @@ claim that the resulting Clifford representation is injective.}
 
 \proof{
 \p{The dimension #{4} is the kernel dimension in the Hodge theorem.
-The centered count is the cited formula at #{d=2}. It equals #{4}
+The centered count is the cited formula at #{n=2}. It equals #{4}
 when #{e=0}. When #{e\ge 1} the factor #{2^e} makes it strictly
 larger. The two statements have the scopes already named.}
 
 \p{The monomials are a basis, so operator identities may be checked
 on #{e_I}. If #{i\in I}, then #{e_i\wedge e_I=0}. If #{i\notin I}
-and #{q} indices of #{I} are smaller than #{i}, then
-#{e_i\wedge e_I=(-1)^q e_{I\cup\{i\}}}. Thus #{\epsilon_i^2=0}.
+and #{s} indices of #{I} are smaller than #{i}, then
+#{e_i\wedge e_I=(-1)^s e_{I\cup\{i\}}}. Thus #{(e_i\wedge)^2=0}.
 For #{i\ne j} the wedge of the two basis vectors changes sign when
 their order is exchanged, so
-#{\epsilon_i\epsilon_j+\epsilon_j\epsilon_i=0}. A monomial contains
-#{i} at most once, so #{\iota_i^2=0}.}
+#{(e_i\wedge)(e_j\wedge)+(e_j\wedge)(e_i\wedge)=0}. A monomial contains
+#{i} at most once, so #{(e_i\cdot)^2=0}.}
 
 \p{For the contractions, take #{i\ne j} and suppose both lie in
 #{I}. Let #{p} be the number of indices of #{I} smaller than #{i},
@@ -82,9 +84,9 @@ two signs for removing #{j} differ by the factor #{-1}. The
 products therefore differ by #{-1}, the remaining monomial is the
 same, and the sum is zero.
 If either index is missing, both double contractions vanish. Hence
-#{\iota_i\iota_j+\iota_j\iota_i=0}.}
+#{(e_i\cdot)(e_j\cdot)+(e_j\cdot)(e_i\cdot)=0}.}
 
-\p{Now compare #{\iota_j\epsilon_i} with #{\epsilon_i\iota_j}. If
+\p{Now compare #{(e_j\cdot)(e_i\wedge)} with #{(e_i\wedge)(e_j\cdot)}. If
 #{i\ne j} and #{j\notin I}, the contraction of the input is zero.
 Exterior multiplication either vanishes or produces a monomial that
 still omits #{j}, so the later contraction vanishes as well. If
@@ -92,30 +94,30 @@ still omits #{j}, so the later contraction vanishes as well. If
 vanishes, and the contraction still leaves #{i} in place, so the
 later exterior multiplication vanishes. The remaining pattern is
 #{j\in I} and #{i\notin I}. Let #{p} be the number of indices of
-#{I} smaller than #{j}, and let #{q} be the number smaller than
-#{i}. The wedge #{e_i\wedge e_I} contributes #{(-1)^q}, and removal
+#{I} smaller than #{j}, and let #{s} be the number smaller than
+#{i}. The wedge #{e_i\wedge e_I} contributes #{(-1)^s}, and removal
 of #{j} from #{I} contributes #{(-1)^p}. If #{i<j}, removal of
 #{j} from #{I\cup\{i\}} contributes #{(-1)^{p+1}}, while the wedge
-of #{e_i} into #{I\setminus\{j\}} still contributes #{(-1)^q}. If
+of #{e_i} into #{I\setminus\{j\}} still contributes #{(-1)^s}. If
 #{i>j}, removal of #{j} from #{I\cup\{i\}} still contributes
 #{(-1)^p}, while the wedge into #{I\setminus\{j\}} contributes
-#{(-1)^{q-1}}, because #{j} was counted by #{q}. In both subcases
+#{(-1)^{s-1}}, because #{j} was counted by #{s}. In both subcases
 the two compositions land on the same monomial. The product of
 the signs in one order is the product in the other order
 multiplied by #{-1}, so the sum is zero. If #{i=j} and
 #{i\notin I}, the contraction of the input vanishes. Insertion
-uses the count #{q}, and removal of that inserted factor uses the
-same count, so #{\iota_i\epsilon_i} returns #{e_I} and the product
+uses the count #{s}, and removal of that inserted factor uses the
+same count, so #{(e_i\cdot)(e_i\wedge)} returns #{e_I} and the product
 of the signs is #{1}. If #{i\in I}, exterior multiplication of the
 input vanishes. Removal uses the count #{p}, and the wedge that
-restores #{i} uses the same count, so #{\epsilon_i\iota_i} returns
+restores #{i} uses the same count, so #{(e_i\wedge)(e_i\cdot)} returns
 #{e_I} and the product of the signs is #{1}. Therefore
-#{\epsilon_i\iota_j+\iota_j\epsilon_i=\delta_{ij}I}.}
+#{(e_i\wedge)(e_j\cdot)+(e_j\cdot)(e_i\wedge)=\delta_{ij}\bbI}.}
 
-\p{The square of #{\gamma_i} is
-#{\epsilon_i\iota_i+\iota_i\epsilon_i=I}. For #{i\ne j} each of
+\p{The square of #{(e_i\wedge+e_i\cdot)} is
+#{(e_i\wedge)(e_i\cdot)+(e_i\cdot)(e_i\wedge)=\bbI}. For #{i\ne j} each of
 the 4 pairs in the expansion of
-#{\gamma_i\gamma_j+\gamma_j\gamma_i} anticommutes, so the sum is
+#{(e_i\wedge+e_i\cdot)(e_j\wedge+e_j\cdot)+(e_j\wedge+e_j\cdot)(e_i\wedge+e_i\cdot)} anticommutes, so the sum is
 zero. This is the displayed Clifford relation.}
 
 \p{The monomials are a free basis, so the endomorphism ring is
@@ -126,7 +128,7 @@ these monomial matrix units by that order. The coefficient of
 #{e_S} in #{M_{S',T'}e_T} can be nonzero only when
 #{T'\subseteq T}. A column with a strictly larger second set
 therefore does not meet this row. When the cardinalities are
-equal, necessarily #{T'=T}. The contraction #{\iota_T} removes
+equal, necessarily #{T'=T}. The contraction #{(e\cdot)_T} removes
 every factor of #{e_T}. Each removal meets a present factor, so
 the image of the contraction is #{(\pm 1)\,1}. The following
 exterior product inserts the factors in #{S'}, each into a

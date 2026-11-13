@@ -5,7 +5,7 @@
 \title{Finite vector Ward and contact identities}
 \date{2026-11-09}
 
-\p{For the \vocabk{coupled coefficient functional}{fdip-00IT}, let #{i_z:S_z\to\mathcal V} include the spin fiber at #{z}, let #{p_z=i_z^*}, and put #{P_z=i_zp_z}. Write #{\psi_z=p_z\psi} and #{\bar\psi_z=\bar\psi i_z}. Write #{\partial_{\varphi_e}} for the global angular vector field on the circle of the labeled link #{e}. Define the even derivations #{N_z} on field generators and #{N_z^{\rm src}} on source generators by
+\p{For the \vocabk{coupled coefficient functional}{fdip-00IT}, let #{i_z:S_z\to\mathcal V} include the spin fiber at #{z}, let #{p_z=i_z^{\dagger}}, and put #{P_z=i_zp_z}. Write #{\psi_z=p_z\psi} and #{\bar\psi_z=\bar\psi i_z}. Write #{\partial_{\varphi_e}} for the global angular vector field on the circle of the labeled link #{e}. Define the even derivations #{N_z} on field generators and #{N_z^{\rm src}} on source generators by
 ##{N_z\psi=P_z\psi,\quad N_z\bar\psi=-\bar\psi P_z,\qquad
 N_z^{\rm src}\eta=P_z\eta,\quad N_z^{\rm src}\bar\eta=-\bar\eta P_z,}
 and extend by the ordinary Leibniz rule, acting trivially on the other algebra. Put
@@ -13,22 +13,22 @@ and extend by the ordinary Leibniz rule, acting trivially on the other algebra. 
 -\sum_{\operatorname{tail}(e)=z}\partial_{\varphi_e},\qquad
 Q_z=\bar\psi([K_U,P_z]\psi).}
 Then
-##{(\mathscr D_z+iqN_z^{\rm src})\mathscr Z_{K_U}=0,\qquad
+##{(\mathscr D_z+\ui qN_z^{\rm src})\mathscr Z_{K_U}=0,\qquad
 N_z^{\rm src}\mathcal Z=0,}
 and every field polynomial #{F} with bounded Borel connection coefficients obeys
 ##{\langle N_zF\rangle_U=\langle FQ_z\rangle_U,\qquad
 \langle N_zF\rangle=\langle FQ_z\rangle.}
 In particular, for #{u\in S_y} and #{\ell\in S_x^*}, set #{F=\ell(p_x\psi)\bar\psi(i_yu)}. Its contact identity is
 ##{\langle FQ_z\rangle=(\delta_{zx}-\delta_{zy})\langle F\rangle.}
-Multiplication by #{iq} restores the physical phase charge on both sides. With #{\mathscr E=-\bar\psi(K_U\psi)+\bar\eta(\psi)+\bar\psi(\eta)} and #{C_z=\bar\eta(P_z\psi)-\bar\psi(P_z\eta)}, the source-present identity is
-##{J_{\mathcal V}((N_zF)e^{\mathscr E})=J_{\mathcal V}(F(Q_z-C_z)e^{\mathscr E}).}}
+Multiplication by #{\ui q} restores the physical phase charge on both sides. With #{\mathscr E=-\bar\psi(K_U\psi)+\bar\eta(\psi)+\bar\psi(\eta)} and #{C_z=\bar\eta(P_z\psi)-\bar\psi(P_z\eta)}, the source-present identity is
+##{\int\extd\bar\psi\,\extd\psi\;((N_zF)\ue^{\mathscr E})=\int\extd\bar\psi\,\extd\psi\;(F(Q_z-C_z)\ue^{\mathscr E}).}}
 
 \proof{
-\p{Differentiate \ref{fdip-00J1} at #{g_z=e^{it}} and #{g_x=1} for #{x\ne z}. The active link variation gives #{\mathscr D_zK_U=iq[P_z,K_U]} and the source variation gives #{iqN_z^{\rm src}}. This proves both source identities. Differentiation acts on a finite source polynomial, and the integrated identity follows directly from exact invariance; the Borel action #{S_g} need not be differentiable.}
+\p{Differentiate \ref{fdip-00J1} at #{g_z=\ue^{\ui t}} and #{g_x=1} for #{x\ne z}. The active link variation gives #{\mathscr D_zK_U=\ui q[P_z,K_U]} and the source variation gives #{\ui qN_z^{\rm src}}. This proves both source identities. Differentiation acts on a finite source polynomial, and the integrated identity follows directly from exact invariance; the Borel action #{S_g} need not be differentiable.}
 
-\p{The derivation #{N_z} annihilates #{\Omega_{\mathcal V}}, since the two generator summands at #{z} contribute opposite traces. It preserves degree, hence #{J_{\mathcal V}N_z(A)=0} for every polynomial #{A}. Direct contraction gives
+\p{The derivation #{N_z} annihilates #{\Omega_{\mathcal V}}, since the two generator summands at #{z} contribute opposite traces. It preserves degree, hence #{\int\extd\bar\psi\,\extd\psi\;N_z(A)=0} for every polynomial #{A}. Direct contraction gives
 ##{N_z\mathscr E=-Q_z+C_z.}
-Apply this to #{A=Fe^{\mathscr E}}. The derivation is even, so the Leibniz rule gives #{J_{\mathcal V}((N_zF-FQ_z+FC_z)e^{\mathscr E})=0}. This proves the source-present identity. Set sources to zero, divide by #{\det K_U}, and average against #{\nu} for the other identities. On the displayed insertion, #{N_z} multiplies by #{\delta_{zx}-\delta_{zy}}. Products of further charged insertions acquire the sum of their endpoint charges.}
+Apply this to #{A=F\ue^{\mathscr E}}. The derivation is even, so the Leibniz rule gives #{\int\extd\bar\psi\,\extd\psi\;((N_zF-FQ_z+FC_z)\ue^{\mathscr E})=0}. This proves the source-present identity. Set sources to zero, divide by #{\det K_U}, and average against #{\nu} for the other identities. On the displayed insertion, #{N_z} multiplies by #{\delta_{zx}-\delta_{zy}}. Products of further charged insertions acquire the sum of their endpoint charges.}
 
 \p{For comparison with coordinate source derivatives, choose an orthonormal basis in each spin fiber only in this proof. The same derivation is
 ##{N_z^{\rm src}=\sum_\alpha\left(\eta_{z\alpha}\partial^L_{\eta_{z\alpha}}-

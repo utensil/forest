@@ -6,16 +6,15 @@
 \date{2026-11-01}
 
 \p{Let #{E} be a finite-dimensional complex vector space and let
-#{K\in\operatorname{End}(E)}. Write #{q_K=\bar\psi(K\psi)} for the
-quadratic of the [intrinsic paired coefficient](fdip-00IS). Then
-##{J_E\left(e^{-q_K}\right)=\det_E K.}
+#{K\in\operatorname{End}(E)}. The quadratic element is #{\bar\psi K\psi}. Then
+##{\int\extd\bar\psi\,\extd\psi\;\ue^{-\bar\psi K\psi}=\det_E K.}
 No invertibility or positivity assumption is needed. The empty
-case has #{J_E(1)=1}, equal to the determinant of the zero
+case has #{\int\extd\bar\psi\,\extd\psi\;1=1}, equal to the determinant of the zero
 endomorphism of the zero space. The coevaluation order is the one
-in \ref{fdip-00IS}: the barred coefficient is contracted first.
-That places #{\theta_K=-q_K}. The proof below computes the
+in the \vocabk{intrinsic paired coefficient}{fdip-00IS}: the barred coefficient is contracted first.
+That places #{\theta_K=-\bar\psi K\psi}. The proof below computes the
 interleaved coefficient and then uses the basis comparison of
-\ref{fdip-00IV} only to match that coefficient with #{J_E}.}
+\ref{fdip-00IV} only to match that coefficient with the paired integral.}
 
 \proof{
 \p{Use the interleaved chart of \ref{fdip-00MC}, and write
@@ -25,7 +24,7 @@ Move each barred generator to the right and put
  \qquad -\bar\psi K\psi=\sum_iq_i.}
 Each #{q_i^2=0}, because every term repeats #{\bar\psi_i}.
 The #{q_i} have even degree and commute, so finite expansion gives
-##{e^{\sum_iq_i}=\prod_{i=1}^n(1+q_i).}
+##{\ue^{\sum_iq_i}=\prod_{i=1}^n(1+q_i).}
 Only #{q_1\cdots q_n} can contribute to the top degree. A nonzero
 term in that product chooses every unbarred generator once, hence
 is indexed by a permutation #{\sigma\in S_n}.}
@@ -40,10 +39,11 @@ top order gives the same first sign again. Their product is
 #{\operatorname{sgn}(\sigma)}. Thus the required coefficient is
 ##{\sum_{\sigma\in S_n}\operatorname{sgn}(\sigma)
        \prod_{i=1}^nK_{i,\sigma(i)}=\det K.}
-This is #{J_n(e^{-q_K})}. \ref{fdip-00MC} records that the
+This is #{\int\extd\bar\psi\,\extd\psi\;\ue^{-\bar\psi K\psi}}. \ref{fdip-00MC} records that the
 basis comparison in \ref{fdip-00IV} identifies this word with
-the coevaluation top element, so #{J_E=J_n} on the top degree.
-Therefore #{J_E(e^{-q_K})=\det_E K}.}
+the coevaluation top element, so the paired integral agrees with
+that coefficient on the top degree.
+Therefore #{\int\extd\bar\psi\,\extd\psi\;\ue^{-\bar\psi K\psi}=\det_E K}.}
 
 }
 
@@ -54,7 +54,7 @@ There is a local ordering discrepancy in
 \citet{v2, Proposition 9.10, p. 131}{etingof2024mathematical}:
 the volume displayed immediately before the proposition is
 interleaved, whereas its printed determinant sign is the grouped
-one under Definition 9.6's coefficient rule. For #{n=2,K=I},
+one under Definition 9.6's coefficient rule. For #{n=2,K=\bbI},
 the exponential is
 #{(1+\psi_1\bar\psi_1)(1+\psi_2\bar\psi_2)};
 its interleaved coefficient is #{+1} and its grouped coefficient

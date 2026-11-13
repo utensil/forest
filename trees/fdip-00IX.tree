@@ -7,7 +7,7 @@
 
 \p{Let #{V=R\oplus E} be a direct sum of finite-dimensional ordinary complex vector spaces, with inclusions #{i_R,i_E} and projections #{p_R,p_E}. Both summands contribute odd generators. The canonical graded tensor decomposition
 ##{\mathcal A(V)\simeq\mathcal A(R)\widehat\otimes\mathcal A(E)}
-places retained generators first. Define the even #{\mathcal A(R)}-linear coefficient map #{J_E} by the paired top element #{\Omega_E}: it vanishes on eliminated degrees below #{2\dim E} and #{J_E(F\Omega_E)=F}. Its extension places external sources first. For an endomorphism #{K:V\to V}, set
+places retained generators first. Define the even #{\mathcal A(R)}-linear coefficient map #{\int\extd\bar\psi_E\,\extd\psi_E} by the paired top element #{\Omega_E}: it vanishes on eliminated degrees below #{2\dim E} and #{\int\extd\bar\psi_E\,\extd\psi_E\;(F\Omega_E)=F}. Its extension places external sources first. For an endomorphism #{K:V\to V}, set
 ##{\begin{gathered}
 A=p_RKi_R:R\to R,\quad B=p_RKi_E:E\to R,\\
 C=p_EKi_R:R\to E,\quad D=p_EKi_E:E\to E.
@@ -17,11 +17,11 @@ Assume #{D} invertible and put #{S=A-BD^{-1}C}. Write #{\psi_R=p_R\psi}, #{\bar\
 \bar\eta'_R=\bar\eta_R-\bar\eta_E D^{-1}C.}
 Then the exact identity is
 ##{\begin{aligned}
-J_E e^{-\bar\psi(K\psi)+\bar\eta(\psi)+\bar\psi(\eta)}
-=\det_E D\,\exp\bigl(&-\bar\psi_R(S\psi_R)+\bar\eta'_R(\psi_R)\\
-&+\bar\psi_R(\eta'_R)+\bar\eta_E(D^{-1}\eta_E)\bigr).
+\int\extd\bar\psi_E\,\extd\psi_E\;\ue^{-\bar\psi(K\psi)+\bar\eta(\psi)+\bar\psi(\eta)}
+=\det_E D\,\ue^{-\bar\psi_R(S\psi_R)+\bar\eta'_R(\psi_R)
++\bar\psi_R(\eta'_R)+\bar\eta_E(D^{-1}\eta_E)}.
 \end{aligned}}
-Moreover #{J_RJ_E=J_V}. Empty summands use determinant one and the identity coefficient map. Invertibility of #{K} or #{S} is not needed.}
+Moreover #{\int\extd\bar\psi_R\,\extd\psi_R\int\extd\bar\psi_E\,\extd\psi_E=\int\extd\bar\psi\,\extd\psi}. Empty summands use determinant one and the identity coefficient map. Invertibility of #{K} or #{S} is not needed.}
 
 \proof{
 \p{The canonical quadratic element splits as #{\theta_V=\theta_R+\theta_E}. The two terms commute, so their top powers give #{\Omega_V=\Omega_R\Omega_E}. This proves the composition rule without an orientation choice.}
@@ -35,11 +35,11 @@ In addition to the original eliminated quadratic, cross and source terms, expans
 The exponent in the statement cancels these extra terms and restores the retained terms. All summands are even and commute. Translation by retained or source odd combinations preserves eliminated top degree, by the same monomial argument as \ref{fdip-009J}. Applying \ref{fdip-00IV} with zero eliminated sources to the shifted quadratic gives #{\det_E D} and proves the formula. If #{K} is invertible, integrating the retained pairs also recovers the full source identity.}
 }
 
-\p{At zero sources, this is the operator form of \ref{fdip-009J}. The map #{D=p_EKi_E} is a compression; it is a restriction into #{E} only when #{K(E)\subseteq E}. For #{E\ne0}, #{J_E(1)=0}. Its normalization is top-degree normalization, not unital normalization.}
+\p{At zero sources, this is the operator form of \ref{fdip-009J}. The map #{D=p_EKi_E} is a compression; it is a restriction into #{E} only when #{K(E)\subseteq E}. For #{E\ne0}, #{\int\extd\bar\psi_E\,\extd\psi_E\;(1)=0}. Its normalization is top-degree normalization, not unital normalization.}
 
 \texfig{\begin{tikzcd}[column sep=large,row sep=large]
-\mathcal B\widehat\otimes\mathcal A(V) \arrow[r,"J_E"] \arrow[d,"J_V"'] &
-\mathcal B\widehat\otimes\mathcal A(R) \arrow[d,"J_R"] \\
+\mathcal B\widehat\otimes\mathcal A(V) \arrow[r,"\int\mathrm{d}\bar\psi_E\,\mathrm{d}\psi_E"] \arrow[d,"\int\mathrm{d}\bar\psi\,\mathrm{d}\psi"'] &
+\mathcal B\widehat\otimes\mathcal A(R) \arrow[d,"\int\mathrm{d}\bar\psi_R\,\mathrm{d}\psi_R"] \\
 \mathcal B \arrow[r,equal] & \mathcal B
 \end{tikzcd}}
 

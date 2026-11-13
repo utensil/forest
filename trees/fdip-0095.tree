@@ -23,48 +23,48 @@ that rescaling.}
 functions on those points carry the counting inner product #{h}.
 Let #{D} be a self-adjoint endomorphism of that function space, and
 let a real function #{f} act by multiplication. Write
-#{q(i,j)=h(\delta_i,D\delta_j)}. The distance from point #{1} to
+#{D_{ij}=h(\delta_i,D\delta_j)}. The distance from point #{1} to
 point #{2} is the supremum of #{|f(2)-f(1)|} over all #{f} with
 #{|[D,f]|\le 1}. Set
-##{\Delta=q(1,2)^{2}q(1,3)^{2}+q(1,2)^{2}q(2,3)^{2}+q(1,3)^{2}q(2,3)^{2}.}
-If #{\Delta>0}, the distance is
-##{\sqrt{\frac{q(1,3)^{2}+q(2,3)^{2}}{\Delta}}.}
-If #{q(1,3)=q(2,3)=0} and #{q(1,2)\ne 0}, the distance is
-#{1/|q(1,2)|}. In every remaining case there is no finite upper
+##{\kappa=D_{12}^{2}D_{13}^{2}+D_{12}^{2}D_{23}^{2}+D_{13}^{2}D_{23}^{2}.}
+If #{\kappa>0}, the distance is
+##{\sqrt{\frac{D_{13}^{2}+D_{23}^{2}}{\kappa}}.}
+If #{D_{13}=D_{23}=0} and #{D_{12}\ne 0}, the distance is
+#{1/|D_{12}|}. In every remaining case there is no finite upper
 bound. The distances among the other pairs are the same statements
 with the indices cycled.}
 
 \proof{
 \p{Declare the counting basis of the three indicators. In that basis
-the matrix entries of #{D} are #{D_{ij}=q(i,j)}, and multiplication
+the matrix entries of #{D} are #{D_{ij}}, and multiplication
 by #{f} is the diagonal matrix with entries #{f_i=f(i)}. The commutator has entries #{[D,f]_{ij}=D_{ij}(f_j-f_i)}. Adding a
 constant to #{f} does not change it, so set #{f_1=0}, #{f_2=x} and
 #{f_3=y}. The entries above the diagonal are #{a=D_{12}x},
 #{b=D_{13}y} and #{c=D_{23}(y-x)}. Let
-#{\omega=(-c,b,-a)} and let #{\sigma^{2}=a^{2}+b^{2}+c^{2}}. Write
+#{\omega=(-c,b,-a)} and let #{s^{2}=a^{2}+b^{2}+c^{2}}. Write
 #{M} for the matrix of #{[D,f]}. It is skew-symmetric, so its square
 is the negative of #{M^{\mathrm T}M}. Expanding that product gives
-#{M^{\mathrm T}M=\sigma^{2}I-\omega\omega^{\mathrm T}}. Thus
+#{M^{\mathrm T}M=s^{2}\bbI -\omega\omega^{\mathrm T}}. Thus
 #{M^{\mathrm T}M} fixes the line through #{\omega} by #{0} and acts
-as #{\sigma^{2}} on the orthogonal plane. The operator norm of
-#{[D,f]} is therefore #{\sigma}. The constraint #{\sigma\le 1} reads
+as #{s^{2}} on the orthogonal plane. The operator norm of
+#{[D,f]} is therefore #{s}. The constraint #{s\le 1} reads
 ##{(D_{12}^{2}+D_{23}^{2})x^{2}-2D_{23}^{2}xy+(D_{13}^{2}+D_{23}^{2})y^{2}\le 1.}
 }
 
 \p{Write #{A=D_{13}^{2}+D_{23}^{2}}. If #{A>0}, the left side is a
 quadratic polynomial in #{y} opening upwards. The discriminant of
-this polynomial set equal to #{1} is #{4A-4\Delta x^{2}}. A real
+this polynomial set equal to #{1} is #{4A-4\kappa x^{2}}. A real
 #{y} exists exactly when this discriminant
-is nonnegative. If #{\Delta>0}, that condition is
-#{x^{2}\le A/\Delta}, so the largest value of #{|x|} is the displayed square
-root. If #{\Delta=0}, the discriminant is positive for every #{x},
+is nonnegative. If #{\kappa>0}, that condition is
+#{x^{2}\le A/\kappa}, so the largest value of #{|x|} is the displayed square
+root. If #{\kappa=0}, the discriminant is positive for every #{x},
 and there is no finite upper bound.}
 
 \p{If #{A=0}, then #{D_{13}=D_{23}=0} and the constraint reduces to
 #{D_{12}^{2}x^{2}\le 1}. A nonzero #{D_{12}} gives the reciprocal
 bound. If #{D_{12}} vanishes as well, every #{x} is allowed. Since
-#{A=0} forces #{\Delta=0}, this case and the case #{A>0} with
-#{\Delta=0} cover every vanishing #{\Delta}.}
+#{A=0} forces #{\kappa=0}, this case and the case #{A>0} with
+#{\kappa=0} cover every vanishing #{\kappa}.}
 
 \p{On the path with vertices #{0,1,2,3}, declare the counting basis of
 vertex indicators and let #{D} be the adjacency operator. Its matrix

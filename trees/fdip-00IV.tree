@@ -6,9 +6,9 @@
 \date{2026-11-09}
 
 \p{For the \vocabk{intrinsic paired coefficient}{fdip-00IS} on any finite-dimensional complex #{V} and every invertible #{K\in\operatorname{End}(V)},
-##{\mathscr Z_K(\bar\eta,\eta)=\det_V K\,e^{\bar\eta(K^{-1}\eta)}.}
+##{\mathscr Z_K(\bar\eta,\eta)=\det_V K\,\ue^{\bar\eta(K^{-1}\eta)}.}
 The corresponding #{\operatorname{End}(V)}-valued insertion identity is
-##{J_V\left((\psi\otimes\bar\psi)e^{-\bar\psi(K\psi)}\right)=\det_V K\,K^{-1}.}
+##{\int\extd\bar\psi\,\extd\psi\;\left((\psi\otimes\bar\psi)\ue^{-\bar\psi(K\psi)}\right)=\det_V K\,K^{-1}.}
 Here #{\psi\otimes\bar\psi} denotes the rank-one endomorphism with unbarred coefficient before barred coefficient. Reversing that coefficient order changes the sign. No positivity assumption is needed.}
 
 \proof{
@@ -16,15 +16,15 @@ Here #{\psi\otimes\bar\psi} denotes the rank-one endomorphism with unbarred coef
 ##{\theta=\sum_i\psi_i\bar\psi_i,\qquad
 \Omega_V=\psi_1\bar\psi_1\cdots\psi_n\bar\psi_n,\qquad
 \theta_K=-\sum_{i,j}\bar\psi_iK_{ij}\psi_j.}
-The even pair factors commute, their squares vanish, and their product is nonzero. This proves that #{\Omega_V} is a top generator and that #{J_V} is exactly the paired functional of \ref{fdip-008H}. In particular #{J_Ve^{\theta_K}=\det K}, including singular #{K}.}
+The even pair factors commute, their squares vanish, and their product is nonzero. This proves that #{\Omega_V} is a top generator and that #{\int\extd\bar\psi\,\extd\psi} is exactly the paired functional of \ref{fdip-008H}. In particular #{\int\extd\bar\psi\,\extd\psi\;\ue^{\theta_K}=\det K}, including singular #{K}.}
 
 \p{Set #{\chi=\psi-K^{-1}\eta} and #{\bar\chi=\bar\psi-\bar\eta K^{-1}}. Expansion in the written order gives
 ##{-\bar\psi K\psi+\bar\eta\psi+\bar\psi\eta=-\bar\chi K\chi+\bar\eta K^{-1}\eta.}
 Both terms are even. Replacing a field generator by itself plus a source-only odd element preserves the field top coefficient: every term using a replacement has lower field degree, and lower-degree terms cannot acquire top degree. The paired determinant formula therefore proves the source identity.}
 
-\p{With #{\mathscr E=-\bar\psi K\psi+\bar\eta\psi+\bar\psi\eta}, left differentiation gives #{\partial^L_{\bar\eta_i}e^{\mathscr E}=\psi_i e^{\mathscr E}} and #{\partial^L_{\eta_j}e^{\mathscr E}=-\bar\psi_j e^{\mathscr E}}. Consequently
+\p{With #{\mathscr E=-\bar\psi K\psi+\bar\eta\psi+\bar\psi\eta}, left differentiation gives #{\partial^L_{\bar\eta_i}\ue^{\mathscr E}=\psi_i \ue^{\mathscr E}} and #{\partial^L_{\eta_j}\ue^{\mathscr E}=-\bar\psi_j \ue^{\mathscr E}}. Consequently
 ##{\left.\partial^L_{\eta_j}\partial^L_{\bar\eta_i}\mathscr Z_K\right|_0
-=J_V(\psi_i\bar\psi_j e^{-\bar\psi K\psi})
+=\int\extd\bar\psi\,\extd\psi\;(\psi_i\bar\psi_j \ue^{-\bar\psi K\psi})
 =\det K\,(K^{-1})_{ij}.}
 Differentiating past the odd #{\psi_i} supplies the second minus sign. These entries assemble into the stated endomorphism equality; anticommuting the two field generators proves the reversed-order sign. The resulting statement is independent of the chosen basis.}
 }

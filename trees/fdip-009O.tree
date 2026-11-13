@@ -6,16 +6,18 @@
 \date{2026-11-01}
 
 \p{Use the \vocabk{periodic grid and Clifford module}{fdip-000R}:
-#{d\ge1}, periods #{N_j\ge3},
+#{n\ge1}, periods #{N_j\ge3},
 #{\Lambda=\prod_j\mathbb Z/N_j\mathbb Z}, and
-#{S=(\mathbb C^2)^{\otimes d}} with the self-adjoint Clifford
-operators #{\gamma_j} of \ref{fdip-000R}. Thus
-#{\dim_{\mathbb C}S=2^d} and
-##{\gamma_i\gamma_j+\gamma_j\gamma_i=2\delta_{ij}I_S.}
+#{S=(\mathbb C^2)^{\otimes n}} with represented generators
+#{\varepsilon_j^{S}}. Each equals the represented generator of
+the \vocabk{centered Dirac operator}{fdip-000R}; \ref{fdip-00RP} writes
+the equality. Thus
+#{\dim_{\mathbb C}S=2^n} and
+##{\varepsilon_i^{S}\varepsilon_j^{S}+\varepsilon_j^{S}\varepsilon_i^{S}=2\delta_{ij}\bbI_S.}
 This is the Euclidean real form recorded in \ref{fdip-00LZ}. The
-substitution #{\gamma_j\mapsto i\gamma_j} is not used.
+substitution #{\varepsilon_j^{S}\mapsto\ui\varepsilon_j^{S}} is not used.
 The lattice spacing is one. Choose a nonzero finite-dimensional
-complex Hermitian space #{F}, with #{q=\dim_{\mathbb C}F}, and a
+complex Hermitian space #{F} and a
 unitary representation #{\rho:G\to U(F)} of a finite or compact
 group, continuous in the compact case. The invariant metric is
 part of the \vocabk{representation datum}{fdip-007H}. The field space is
@@ -34,17 +36,18 @@ value at #{x+e_j} with one at #{x} uses the inverse transport.
 Define
 ##{\begin{gathered}
 (T_j^U\psi)(x)
- = (I_S\otimes U_j(x)^{-1})\psi(x+e_j),\\
+ = (\bbI_S\otimes U_j(x)^{-1})\psi(x+e_j),\\
 ((T_j^U)^{-1}\psi)(x)\\
- = (I_S\otimes U_j(x-e_j))\psi(x-e_j).
+ = (\bbI_S\otimes U_j(x-e_j))\psi(x-e_j).
 \end{gathered}}
 Substitution verifies that the second operator is the inverse
 of the first. Put
-##{\cov_j^U=\frac{T_j^U-(T_j^U)^{-1}}2,\qquad
-\Gamma_j=\gamma_j\otimes I_F,}
-where #{\Gamma_j} acts pointwise on the field. The
+##{\cov_j^U=\frac{T_j^U-(T_j^U)^{-1}}2.}
+The operator #{\varepsilon_j^{S}\otimes\bbI_F} acts
+pointwise on the field, on the spinor factor and on the internal
+factor respectively. The
 \newvocab{covariant lattice Dirac operator} is
-##{D_U=\sum_{j=1}^d\Gamma_j\cov_j^U.}
+##{D_U=\sum_{j=1}^n\bigl(\varepsilon_j^{S}\otimes\bbI_F\bigr)\cov_j^U.}
 This is the centered nearest-neighbor convention in
 \citet{Section 9.1, Equations (9.1)–(9.2), p. 19}{wingate2025lattice},
 with spacing one and the declared link orientation.}
@@ -53,9 +56,9 @@ with spacing one and the declared link orientation.}
 operator formulas. The transformed links and field are
 ##{\begin{aligned}
 U_j^g(x)&=g_{x+e_j}U_j(x)g_x^{-1},\\
-(\mathcal G\psi)(x)&=(I_S\otimes g_x)\psi(x).
+(\mathcal G\psi)(x)&=(\bbI_S\otimes g_x)\psi(x).
 \end{aligned}}
 This is an internal gauge transformation: it fixes the lattice
-and the chosen Clifford operators. Links and #{\mathcal G}
-commute with every #{\Gamma_j}, because they act on the other
-tensor factor.}
+and the chosen represented generators. Links and #{\mathcal G}
+commute with every #{\varepsilon_j^{S}\otimes\bbI_F},
+because they act on the other tensor factor.}

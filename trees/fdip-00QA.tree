@@ -7,8 +7,8 @@
 
 \p{Let #{b} be any bilinear form on a finite free module #{V}.
 Set #{q_b(v)=b(v,v)} and #{\beta_v=b(v,\cdot)}. The operators
-##{\gamma_v=\epsilon_v+\iota_{\beta_v}}
-define a homomorphism
+##{v\wedge+v\cdot_b,}
+with #{(v\cdot_b)(w)=b(v,w)}, define a homomorphism
 #{\operatorname{Cl}(V,q_b)\to\operatorname{End}\bigwedge V}.
 The graph
 ##{W_b=\{v+\beta_v:v\in V\}}
@@ -19,13 +19,20 @@ quadratic form. At each vertex the diagonal form of
 \ref{fdip-00PB} selects one graph.}
 
 \proof{
-\p{Exterior multiplication and contraction each square to zero,
-so
-##{\gamma_v^2=\epsilon_v\iota_{\beta_v}+\iota_{\beta_v}\epsilon_v
- =b(v,v)\,I.}
-The same expansion gives
-##{\gamma_u\gamma_v+\gamma_v\gamma_u
- =(b(u,v)+b(v,u))\,I,}
+\p{Exterior multiplication and contraction each square to zero.
+Their cross terms are
+##{(v\wedge)(v\cdot_b)+(v\cdot_b)(v\wedge)=b(v,v)\,\bbI,}
+and therefore
+##{(v\wedge+v\cdot_b)^2=b(v,v)\,\bbI.}
+For two vectors the wedges anticommute and the contractions
+anticommute. The remaining cross terms are
+##{(u\wedge)(v\cdot_b)+(v\cdot_b)(u\wedge)=b(v,u)\,\bbI}
+and
+##{(v\wedge)(u\cdot_b)+(u\cdot_b)(v\wedge)=b(u,v)\,\bbI.}
+Adding them gives
+##{(u\wedge+u\cdot_b)(v\wedge+v\cdot_b)
+ +(v\wedge+v\cdot_b)(u\wedge+u\cdot_b)
+ =(b(u,v)+b(v,u))\,\bbI,}
 which is #{B_{q_b}(u,v)} in \ref{fdip-000P}. The
 universal property supplies the homomorphism. The projection
 onto #{V} along #{V^*} splits #{v\mapsto v+\beta_v}, so the
