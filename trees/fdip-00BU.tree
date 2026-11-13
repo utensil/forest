@@ -12,16 +12,16 @@ functions on these vertices with the counting inner product
 Let #{a\neq 0} and #{b\neq 0}. Let #{T_1} and #{T_2} be the
 unit shifts #{(T_1f)(x,y)=f(x-1,y)} and
 #{(T_2f)(x,y)=f(x,y-1)}, and define
-##{Q=aI-b(T_1+T_1^{-1}+T_2+T_2^{-1}).}
+##{Q=a\bbI -b(T_1+T_1^{-1}+T_2+T_2^{-1}).}
 Let #{X} and #{Y} be the canonical subspaces of functions
 supported on the even-parity sites and the odd-parity sites.
-Let #{\iota_X}, #{\iota_Y}, #{\pi_X} and #{\pi_Y} be the
+Let #{\iota_X}, #{\iota_Y}, #{\pr_X} and #{\pr_Y} be the
 corresponding inclusions and projections, and let
-#{M=\pi_XQ\iota_Y} be the off-diagonal map from #{Y} to #{X}.
-Write #{M^*} for its counting adjoint. The
+#{M=\pr_XQ\iota_Y} be the off-diagonal map from #{Y} to #{X}.
+Write #{M^{\dagger}} for its counting adjoint. The
 \vocabk{Schur complement}{fdip-000D} that eliminates the odd
 class is the operator
-##{S=aI-a^{-1}MM^*}
+##{S=a\bbI -a^{-1}MM^{\dagger}}
 on #{X}. For the canonical indicator #{e_x} of an even site,
 the kernel evaluations are #{h(e_x,Se_x)=a-4b^2/a},
 #{h(e_x,Se_{x+v})=-b^2/a} at each axial offset
@@ -41,9 +41,9 @@ so each class induces an empty graph. Declare the counting
 basis of site indicators, with the even class written first.
 In that basis both diagonal blocks of #{Q} equal #{a} times
 the identity, and the off-diagonal block is the matrix of
-#{M}. The counting adjoint #{M^*} has that block's transpose
+#{M}. The counting adjoint #{M^{\dagger}} has that block's transpose
 as its matrix. The Schur complement on the even class is
-therefore #{aI-a^{-1}MM^*}. The product of the off-diagonal
+therefore #{a\bbI -a^{-1}MM^{\dagger}}. The product of the off-diagonal
 block with its transpose, at a pair of even sites, equals
 #{b^2} times the number of common odd neighbors, and #{S}
 subtracts #{a^{-1}} times that product. An even
@@ -54,7 +54,7 @@ and likewise those separated by #{(0,2)}, so each axial
 coefficient is #{-b^2/a}. The vertices separated by #{(1,1)}
 share exactly two, and likewise those separated by #{(1,-1)},
 so each diagonal-offset coefficient is #{-2b^2/a}. Since
-#{M^*} is the counting adjoint, #{S} is self-adjoint, and the
+#{M^{\dagger}} is the counting adjoint, #{S} is self-adjoint, and the
 kernel takes the same coefficients at the opposite signs. For #{L\ge 6} the offsets
 #{\pm(2,0)}, #{\pm(0,2)} and #{(\pm 1,\pm 1)} are distinct on
 the torus. If #{Q} is a positive precision parameter,

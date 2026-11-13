@@ -18,7 +18,7 @@ integer multiple of #{2\pi}, together with
 ##{(A_Nx)(j)
 =\sum_{1\le |r|\le R}c_{r,N}\bigl(x(j)-x(j+r)\bigr)}
 on the residues modulo #{N}, and set
-#{Q_N=\mu_N I+N^2A_N}. For every sufficiently large #{N},
+#{Q_N=\mu_N \bbI+N^2A_N}. For every sufficiently large #{N},
 #{Q_N} is a \vocabk{positive precision parameter}{fdip-0004}.
 If #{c_{r,N}=c_r} and #{\mu_N=\mu} for every #{N}, then
 #{Q_N} is the
@@ -32,7 +32,7 @@ moment below is the moment of \ref{fdip-00CC}.}
 #{N>2R} large enough that #{Q_N} is positive, and for an
 integer #{k},
 ##{a_{N,k}=N^{-1}\sum_{j=0}^{N-1}
-\exp(-2\pi i kj/N)\,\varphi(j)}
+\ue^{-2\pi \ui kj/N}\,\varphi(j)}
 satisfies
 ##{\mathbb E|a_{N,k}|^2
 =\frac{\kappa}{\mu_N+N^2\alpha_N(2\pi k/N)}.}
@@ -56,7 +56,7 @@ is the counting inner product. Reindexing as in \ref{fdip-00CB}, and the equalit
 #{c_{r,N}=c_{-r,N}}, make #{A_N} and #{Q_N} self-adjoint.
 The same computation gives
 eigenvalue #{\alpha_N(2\pi k/N)} for #{A_N} on the Fourier
-vector with entries #{\exp(2\pi i kj/N)}, and eigenvalue
+vector with entries #{\ue^{2\pi \ui kj/N}}, and eigenvalue
 #{\mu_N+N^2\alpha_N(2\pi k/N)} for #{Q_N}.}
 
 \p{The identity #{1-\cos u=2\sin^2(u/2)} gives, for
@@ -65,7 +65,7 @@ vector with entries #{\exp(2\pi i kj/N)}, and eigenvalue
 =\sum_{r=1}^{R}c_r r^2
 \Bigl(\frac{\sin\frac{r\theta}{2}}{\frac{r\theta}{2}}\Bigr)^2.}
 For #{u\ne 0},
-#{\frac{\sin u}{u}=\frac{1}{u}\int_0^u\cos t\,dt} tends to #{1}
+#{\frac{\sin u}{u}=\frac{1}{u}\int_0^u\cos t\,\extd t} tends to #{1}
 as #{u\to 0}, so #{\frac{\alpha(\theta)}{\theta^2}} tends to
 #{\kappa}. Extend it by #{\kappa} at
 #{0}. The extension is continuous and positive on the
@@ -74,7 +74,7 @@ positive. Since #{\alpha} is even,
 #{\alpha(\theta)\ge c_0\theta^2} whenever #{|\theta|\le\pi}.}
 
 \p{For every real #{v},
-#{|\sin v|=\bigl|\int_0^v\cos t\,dt\bigr|\le |v|}, so
+#{|\sin v|=\bigl|\int_0^v\cos t\,\extd t\bigr|\le |v|}, so
 #{1-\cos(r\theta)\le r^2\theta^2/2}. Therefore
 ##{\bigl|\alpha_N(\theta)-\alpha(\theta)\bigr|
 \le\theta^2\sum_{r=1}^{R}r^2|c_{r,N}-c_r|}
@@ -88,14 +88,14 @@ is positive. Hence #{h(x,Q_Nx)>0} for #{x\ne 0}.}
 
 \p{Declare the counting basis of site indicators. In that basis
 #{h(f,g)=\sum_j\overline{f(j)}g(j)}, and a column product
-#{v^*Mv} equals #{h(v,Mv)}. Let #{v_k} be the Fourier vector
+#{v^{\dagger}Mv} equals #{h(v,Mv)}. Let #{v_k} be the Fourier vector
 above, so
-#{v_k^*v_k=h(v_k,v_k)=N} and #{Q_Nv_k=\lambda_k v_k} with
+#{v_k^{\dagger}v_k=h(v_k,v_k)=N} and #{Q_Nv_k=\lambda_k v_k} with
 #{\lambda_k=\mu_N+N^2\alpha_N(2\pi k/N)}. By \ref{fdip-000B}, scaling the covariance #{Q_N^{-1}} of
 #{x} by #{\kappa N} gives the counting covariance of
 #{\varphi}. Thus
 ##{\mathbb E|a_{N,k}|^2
-=N^{-2}v_k^*(\kappa NQ_N^{-1})v_k
+=N^{-2}v_k^{\dagger}(\kappa NQ_N^{-1})v_k
 =N^{-2}h\bigl(v_k,(\kappa N Q_N^{-1})v_k\bigr)
 =\kappa\lambda_k^{-1}.}
 If #{k\not\equiv\ell\pmod{N}}, the vectors are orthogonal

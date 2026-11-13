@@ -12,17 +12,17 @@ connected, and let #{K} be a nonempty set of vertices. Write
 let #{h_K} be the counting inner product on #{\mathbb R^K}.
 Split
 #{\mathbb R^V=\mathbb R^K\oplus\mathbb R^{V\setminus K}}
-orthogonally, and let #{i_K}, #{i_U}, #{p_K} and #{p_U} be the
+orthogonally, and let #{\iota_K}, #{\iota_U}, #{\pr_K} and #{\pr_U} be the
 inclusions and orthogonal projections of the two summands.
 The weighted Laplacian #{L_w} is self-adjoint for #{h}. Set
-#{A=p_K(-L_w)i_K}, #{C=p_U(-L_w)i_U} and #{B=p_K(-L_w)i_U}, and
-let #{B^*} be the counting adjoint of #{B}, so
-#{B^*=p_U(-L_w)i_K}. If #{K} omits at least one vertex, then
+#{A=\pr_K(-L_w)\iota_K}, #{C=\pr_U(-L_w)\iota_U} and #{B=\pr_K(-L_w)\iota_U}, and
+let #{B^{\dagger}} be the counting adjoint of #{B}, so
+#{B^{\dagger}=\pr_U(-L_w)\iota_K}. If #{K} omits at least one vertex, then
 #{C} is positive definite, and the \vocabk{kept form}{fdip-00DF}
 is #{h_K(u,Su)}, where
-##{S=A-BC^{-1}B^*}
+##{S=A-BC^{-1}B^{\dagger}}
 is the \vocabk{Schur complement}{fdip-000D} of #{C}. The
-minimizer on the eliminated summand is #{-C^{-1}B^*u}, and it
+minimizer on the eliminated summand is #{-C^{-1}B^{\dagger}u}, and it
 is the unique extension whose Laplacian vanishes off #{K}.
 When #{K=V} there is no eliminated summand and the kept form
 is the energy. For distinct vertices #{a} and #{b}, the kept
@@ -37,8 +37,8 @@ counting basis of vertex indicators with the vertices of #{K}
 written first. In that basis
 ##{-L_w=\begin{pmatrix}A&B\\ B^T&C\end{pmatrix},}
 where these blocks are the matrices of the operators #{A},
-#{B}, #{C} and #{B^*} in the statement, and #{B^T} is the
-matrix of #{B^*}. If #{y^T C y=0}, extend #{y} by
+#{B}, #{C} and #{B^{\dagger}} in the statement, and #{B^T} is the
+matrix of #{B^{\dagger}}. If #{y^T C y=0}, extend #{y} by
 #{0} on #{K}. The energy of the extension is a sum of
 strictly positive weights times squared edge differences, so
 every edge difference vanishes. The graph is connected, and
@@ -53,7 +53,7 @@ the extension vanishes on #{K}, so the extension is #{0} and
 The completed square is nonnegative and vanishes at
 #{y=-K_\ast u}. The minimum value is #{u^T S u}. In this
 basis that value is #{h_K(u,Su)}, and #{y=-K_\ast u} is the
-coordinate vector of #{-C^{-1}B^*u}. At that
+coordinate vector of #{-C^{-1}B^{\dagger}u}. At that
 extension the block equation #{C y+B^T u=0} says that the
 Laplacian vanishes off #{K}. Positive definiteness makes the
 extension unique. The same completion is written in the proof of
