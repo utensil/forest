@@ -10,10 +10,10 @@
 gives #{e>27/10}. Also #{\pi<22/7}. For every #{t\ge 1},
 ##{\lvert I(t)-G(t)\rvert\le 5\frac{G(t)}{t}.}
 The Gaussian moments used below are
-##{\frac{1}{2\pi}\int_{-\infty}^{\infty}e^{-t\theta^2}\,d\theta=G(t),}
-##{\frac{1}{2\pi}\int_{-\infty}^{\infty}t\theta^2e^{-t\theta^2}\,d\theta
+##{\frac{1}{2\pi}\int_{-\infty}^{\infty}\ue^{-t\theta^2}\,d\theta=G(t),}
+##{\frac{1}{2\pi}\int_{-\infty}^{\infty}t\theta^2\ue^{-t\theta^2}\,d\theta
 =\frac{G(t)}{2},}
-##{\frac{1}{2\pi}\int_{-\infty}^{\infty}t\theta^4e^{-t\theta^2}\,d\theta
+##{\frac{1}{2\pi}\int_{-\infty}^{\infty}t\theta^4\ue^{-t\theta^2}\,d\theta
 =\frac{3}{4}\frac{G(t)}{t}.}}
 
 \proof{
@@ -29,15 +29,15 @@ writes the positive integrand
 antiderivative of #{1/(1+x^2)} is the arctangent, and
 the arctangent of #{1} is #{\frac{\pi}{4}}.}
 
-\p{Let #{S=\int_{-\infty}^{\infty}e^{-u^2}\,du}. The square
-#{S^2} is the plane integral of #{e^{-(u^2+v^2)}}. Polar
+\p{Let #{S=\int_{-\infty}^{\infty}\ue^{-u^2}\,du}. The square
+#{S^2} is the plane integral of #{\ue^{-(u^2+v^2)}}. Polar
 coordinates, with area element #{r\,dr\,d\varphi}, give
-#{\int_0^{2\pi}\int_0^{\infty}e^{-r^2}r\,dr\,d\varphi=\pi},
+#{\int_0^{2\pi}\int_0^{\infty}\ue^{-r^2}r\,dr\,d\varphi=\pi},
 so #{S=\sqrt{\pi}}. The substitution #{u=\sqrt{t}\,\theta}
-gives #{\int e^{-t\theta^2}\,d\theta=\sqrt{\frac{\pi}{t}}}, and
+gives #{\int \ue^{-t\theta^2}\,d\theta=\sqrt{\frac{\pi}{t}}}, and
 division by #{2\pi} produces #{G(t)}. For #{t\ge 1} the
 #{t}-derivative of the integrand is dominated by the
-integrable function #{\theta^2e^{-\theta^2}}. Differentiating
+integrable function #{\theta^2\ue^{-\theta^2}}. Differentiating
 under the integral once, and then again, produces the second
 and fourth moments. Division by #{2\pi} and multiplication
 by #{t} give the displayed moment identities.}
@@ -62,22 +62,22 @@ for #{\theta} between #{0} and #{\pi}, and
 integrand. On the first region
 #{\lvert t(\ell(\theta)-\theta^2)\rvert\le 1/12}. For
 #{0<x<1} the geometric series gives #{e^x<1/(1-x)}, so
-#{e^{1/12}<12/11}. Therefore
-#{\lvert e^{-t\ell}-e^{-t\theta^2}\rvert
-\le e^{-t\theta^2}(t\theta^4/12)e^{1/12}}.
+#{\ue^{1/12}<12/11}. Therefore
+#{\lvert \ue^{-t\ell}-\ue^{-t\theta^2}\rvert
+\le \ue^{-t\theta^2}(t\theta^4/12)\ue^{1/12}}.
 Extending the integral and using the fourth-moment
 identity bounds this piece by
 #{(12/11)(1/12)(3/4)G(t)/t=(3/44)G(t)/t}.}
 
 \p{The Gaussian tail satisfies
-#{\int_{\delta}^{\infty}e^{-t\theta^2}\,d\theta
-\le e^{-t\delta^2}/(2t\delta)},
+#{\int_{\delta}^{\infty}\ue^{-t\theta^2}\,d\theta
+\le \ue^{-t\delta^2}/(2t\delta)},
 because #{\frac{\theta}{\delta}\ge 1} on that ray and the
 resulting integral is elementary. Both rays together
 contribute at most #{G(t)/t}: with #{s=\sqrt{t}}, the
 quotient of this contribution by #{G(t)/t} equals
-#{\frac{s^{3/2}e^{-s}}{\sqrt{\pi}}}. Because #{\pi>3},
-#{\sqrt{\pi}>1}, and #{s^{3/2}e^{-s}<1} for #{s\ge 1}.
+#{\frac{s^{3/2}\ue^{-s}}{\sqrt{\pi}}}. Because #{\pi>3},
+#{\sqrt{\pi}>1}, and #{s^{3/2}\ue^{-s}<1} for #{s\ge 1}.
 Indeed #{\log s\le s-1}. On the interval from #{1} to
 #{3}, #{\frac{3}{2}(s-1)\le s}, hence
 #{\frac{3}{2}\log s\le s}. For #{s>3} the derivative of
@@ -86,18 +86,18 @@ positive because #{\log 3<2}, which follows from
 #{e^2>7>3}.}
 
 \p{On the outer region the chord bound gives
-#{e^{-t\ell(\theta)}\le\exp(-\frac{4t}{\pi^2}\theta^2)}. The same
+#{\ue^{-t\ell(\theta)}\le\ue^{-\frac{4t}{\pi^2}\theta^2}}. The same
 tail estimate, with this quadratic rate, has quotient
-#{\frac{\pi^{3/2}}{4}s^{3/2}\exp(-\frac{4s}{\pi^2})} against #{G(t)/t}.
+#{\frac{\pi^{3/2}}{4}s^{3/2}\ue^{-\frac{4s}{\pi^2}}} against #{G(t)/t}.
 Since #{\pi<22/7}, one has #{\pi^2<484/49} and
 #{\frac{4}{\pi^2}>49/121}. Also
 #{\frac{\pi^{3/2}}{4}<7/5}, because
 #{(22/7)^{3/2}<28/5} follows from
 #{22\cdot 3025=66550<67228=7\cdot 9604}, and
 #{28/5} divided by #{4} equals #{7/5}. The
-maximum of #{u^{3/2}e^{-u}} is at most #{1/2}, because
+maximum of #{u^{3/2}\ue^{-u}} is at most #{1/2}, because
 #{e^u/u^{3/2}} has its only positive critical point at
-#{u=3/2} and #{e^{3/2}\ge 2(3/2)^{3/2}} follows from
+#{u=3/2} and #{\ue^{3/2}\ge 2(3/2)^{3/2}} follows from
 #{e^3>27/2}, itself a consequence of #{e>27/10}. With
 #{\beta=49/121} one has
 #{\beta^{-3/2}=(11/7)^3=1331/343}. Multiplying by
