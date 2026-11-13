@@ -7,9 +7,9 @@
 
 \p{Let #{E=X\mathbin\perp Y} be a specified orthogonal sum of
 finite-dimensional real inner-product spaces. Write #{h_E,h_X,h_Y}
-for their pairings, #{i_X,i_Y} for inclusion and #{p_X,p_Y} for
+for their pairings, #{\iota_X,\iota_Y} for inclusion and #{p_X,p_Y} for
 orthogonal projection. The addition isometry is
-#{J(x,y)=i_Xx+i_Yy}. Use \vocabk{canonical Euclidean volume}{fdip-002M} on
+#{J(x,y)=\iota_Xx+\iota_Yy}. Use \vocabk{canonical Euclidean volume}{fdip-002M} on
 uncompleted Borel sets. Then [product volume](fdip-002Q) gives
 #{J_*(\lambda_X\otimes\lambda_Y)=\lambda_E}.
 Zero summands are allowed; their volume is unit mass on a singleton.}
@@ -17,11 +17,11 @@ Zero summands are allowed; their volume is unit mass on a singleton.}
 \vocabk{positive precision parameter}{fdip-0004}. Its
 \vocabk{components for this splitting}{fdip-001T} are
 ##{\begin{aligned}
-A&=p_XQi_X:X\to X,\\
-B&=p_XQi_Y:Y\to X,\\
-C&=p_YQi_Y:Y\to Y.
+A&=p_XQ\iota_X:X\to X,\\
+B&=p_XQ\iota_Y:Y\to X,\\
+C&=p_YQ\iota_Y:Y\to Y.
 \end{aligned}}
-The fourth component is #{p_YQi_X=B^\dagger}, where the adjoint
+The fourth component is #{p_YQ\iota_X=B^\dagger}, where the adjoint
 uses the specified pairings. Both #{C} and the
 \newvocab{effective precision}, or real \newvocab{Schur complement},
 ##{S=A-BC^{-1}B^\dagger:X\to X}
@@ -30,7 +30,7 @@ specialization of the \vocabk{split Schur map}{fdip-001T}.}
 \p{Put #{w_Q(z)=\exp(-h_E(z,Qz)/2)} and #{q=\dim Y}.
 For every #{x\in X}, the exact fiber integral is
 ##{\begin{aligned}
-I_Q(x)&=\int_Y w_Q(J(x,y))\,d\lambda_Y(y)\\
+I_Q(x)&=\int_Y w_Q(J(x,y))\,\extd\lambda_Y(y)\\
  &=c_C\exp(-h_X(x,Sx)/2),\\
 c_C&=\frac{(2\pi)^{q/2}}{\sqrt{\det C}}=Z_C>0.
 \end{aligned}}
@@ -39,7 +39,7 @@ Moreover #{\det Q=\det C\det S}. Thus elimination induces both
 
 \proof{
 \p{[Positivity under elimination](fdip-001Y) applies to these real
-inner products. Explicitly, testing #{Q} on #{i_Yy} gives #{C>0};
+inner products. Explicitly, testing #{Q} on #{\iota_Yy} gives #{C>0};
 finite dimension makes #{C} invertible. Put #{K=C^{-1}B^\dagger}.
 The [orthogonal congruence identity](fdip-001X) is
 ##{\begin{aligned}
@@ -55,17 +55,17 @@ the term subtracted in #{S}. The self-adjoint inverse of #{C} makes
 [reference volume](fdip-002K). Square completion and
 [positive Gaussian normalization](fdip-002T) therefore give
 ##{\begin{aligned}
-I_Q(x)&=e^{-h_X(x,Sx)/2}
- \int_Y e^{-h_Y(v,Cv)/2}\,d\lambda_Y(v)\\
- &=e^{-h_X(x,Sx)/2}Z_C.
+I_Q(x)&=\ue^{-h_X(x,Sx)/2}
+ \int_Y \ue^{-h_Y(v,Cv)/2}\,\extd\lambda_Y(v)\\
+ &=\ue^{-h_X(x,Sx)/2}Z_C.
 \end{aligned}}
 This is a nonnegative integral with a positive finite prefactor;
 no signed Fubini interchange is needed. The same square completion
 shows that the stationary field is #{y_*(x)=-Kx}. Minimization alone
 does not evaluate the fiber integral or its scalar.}
 \p{For the determinant, let #{V(x,y)=(x,y+Kx)} and
-#{D(x,y)=(Sx,Cy)} on #{X\oplus Y}. Congruence gives
-#{J^{-1}QJ=V^\dagger DV}. Choose bases #{e_1,\ldots,e_p} of #{X}
+#{F(x,y)=(Sx,Cy)} on #{X\oplus Y}. Congruence gives
+#{J^{-1}QJ=V^\dagger FV}. Choose bases #{e_1,\ldots,e_p} of #{X}
 and #{f_1,\ldots,f_q} of #{Y}, with the same ordered concatenation
 in domain and codomain. In the top wedge of the images under #{V},
 we have #{Ve_j=e_j+Ke_j} and #{Vf_k=f_k}. Any term choosing some
@@ -76,7 +76,7 @@ the arbitrary bases used for the wedge calculation. Their concatenation
 is orthonormal on #{X\oplus Y}. In these coordinates the adjoint
 is the transpose and has the same determinant, by reindexing the
 determinant permutation sum.
-The direct sum #{D} acts on the top wedge by #{\det S\det C}.
+The direct sum #{F} acts on the top wedge by #{\det S\det C}.
 Multiplicativity of this scalar and invariance under conjugation
 now prove #{\det Q=\det C\det S}. Empty bases give determinant one,
 so the argument includes zero summands.}
@@ -112,8 +112,8 @@ supplied, and carries neither a dynamical carrier nor an effective metric,
 which are additional data.}
 
 \p{For these real data, \ref{fdip-00K8} identifies the embedded
-endomorphism #{i_XSp_X:E\to E} as the
-\vocabk{shorted operator}{fdip-00K6} of #{Q} along #{i_X(X)}.
+endomorphism #{\iota_XSp_X:E\to E} as the
+\vocabk{shorted operator}{fdip-00K6} of #{Q} along #{\iota_X(X)}.
 Its quadratic value is the minimum over the eliminated field.
 The fiber integral above additionally supplies the raw scalar #{c_C}
 relative to the specified volume.}

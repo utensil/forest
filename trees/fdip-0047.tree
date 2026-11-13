@@ -6,7 +6,7 @@
 \date{2026-10-30}
 
 \p{On the real realization of #{\mathbb Q^3}, use coordinates
-#{x,y,z}, counting pairing #{g_0=I} and the coordinate flag retaining
+#{x,y,z}, counting pairing #{g_0=\bbI} and the coordinate flag retaining
 #{(x,y)} and then #{x}. Fix the action #{q/2+\lambda V}, where
 ##{\begin{aligned}
 q&=x^2+(y-x)^2+(z-y)^2,\\
@@ -96,16 +96,16 @@ including their constants.}
 }
 
 \p{A source on a retained space #{X} is a linear functional
-#{j\in X^*}, coupled by multiplying the weight by #{e^{j(x)}}.
+#{j\in X^*}, coupled by multiplying the weight by #{\ue^{j(x)}}.
 Under a retained linear isomorphism #{L_X:X\to X'}, a source
 #{j'\in(X')^*} pulls back to #{j'\circ L_X}, since
-#{e^{j'(L_Xx)}=e^{(j'\circ L_X)(x)}}. In this example #{X=\mathbb R}
+#{\ue^{j'(L_Xx)}=\ue^{(j'\circ L_X)(x)}}. In this example #{X=\mathbb R}
 and #{j(x)=Jx}, with #{J} treated as a formal scalar variable.
 Let #{\mu_Q} be the [normalized Gaussian law](fdip-0005). Define
 ##{\begin{aligned}
 W(J,\lambda)
-={}&\log\mathbb E_{\mu_Q}e^{Jx-\lambda V}\\
- &-\log\mathbb E_{\mu_Q}e^{-\lambda V}.
+={}&\log\mathbb E_{\mu_Q}\ue^{Jx-\lambda V}\\
+ &-\log\mathbb E_{\mu_Q}\ue^{-\lambda V}.
 \end{aligned}}
 Each coefficient in the two formal variables #{J,\lambda} is a finite Gaussian
 moment. Thus #{W(0,\lambda)=0}. Coefficients use ordinary powers
@@ -122,23 +122,23 @@ G_c^{(4)}(\lambda)
 \proof{
 \p{Write
 ##{\mathbb E_\lambda[P]=
- \frac{\mathbb E_{\mu_Q}[P e^{-\lambda V}]}
-      {\mathbb E_{\mu_Q}e^{-\lambda V}}}
+ \frac{\mathbb E_{\mu_Q}[P \ue^{-\lambda V}]}
+      {\mathbb E_{\mu_Q}\ue^{-\lambda V}}}
 as a formal ratio. After eliminating #{y,z}, both numerator and
 denominator are expectations for #{x\sim N(0,1)} with weight
 ##{\begin{aligned}
-e^{-F_\lambda(x)}={}&1-\lambda a(x)\\
+\ue^{-F_\lambda(x)}={}&1-\lambda a(x)\\
  &+\frac{\lambda^2}{2}(a(x)^2+b(x))\\
  &+O(\lambda^3).
 \end{aligned}}
 The scalar #{c_C} cancels from this ratio, but the constant terms
 in #{a,b} are included before the division. Gaussian moments give
 ##{\begin{aligned}
-\mathbb E[e^{-F_\lambda}]&=
+\mathbb E[\ue^{-F_\lambda}]&=
  1-\frac74\lambda+\frac{1351}{96}\lambda^2+O(\lambda^3),\\
-\mathbb E[x^2e^{-F_\lambda}]&=
+\mathbb E[x^2\ue^{-F_\lambda}]&=
  1-\frac{19}{4}\lambda+\frac{1981}{32}\lambda^2+O(\lambda^3),\\
-\mathbb E[x^4e^{-F_\lambda}]&=
+\mathbb E[x^4\ue^{-F_\lambda}]&=
  3-\frac{105}{4}\lambda+\frac{14799}{32}\lambda^2\\
  &\qquad+O(\lambda^3).
 \end{aligned}}
@@ -166,7 +166,7 @@ None of this asserts convergence of the formal series at zero.
 For every fixed #{\lambda>0}, exponentiating only the displayed
 second-order #{F_\lambda} instead gives a nonintegrable retained
 weight: its leading term is #{-5\lambda^2x^6/72}, so
-#{e^{-x^2/2-F_\lambda^{(2)}(x)}} grows at infinity. Here
+#{\ue^{-x^2/2-F_\lambda^{(2)}(x)}} grows at infinity. Here
 #{F_\lambda^{(2)}} denotes the displayed polynomial through
 #{\lambda^2}.}
 

@@ -11,17 +11,17 @@ Let #{R} be a commutative unital \vocabk{ring}{ca-000U} and
 \newvocab{chosen binary splitting} of #{M} consists of ordinary
 #{R}-linear maps
 ##{\iota_X:X\to M,\quad \iota_Y:Y\to M,\qquad
-   \pi_X:M\to X,\quad \pi_Y:M\to Y}
+   \pr_X:M\to X,\quad \pr_Y:M\to Y}
 satisfying all 5 identities
 ##{\begin{aligned}
-\pi_X\iota_X&=I_X,&\pi_Y\iota_Y&=I_Y,\\
-\pi_X\iota_Y&=0,&\pi_Y\iota_X&=0,\\
-\iota_X\pi_X+\iota_Y\pi_Y&=I_M.
+\pr_X\iota_X&=\bbI_X,&\pr_Y\iota_Y&=\bbI_Y,\\
+\pr_X\iota_Y&=0,&\pr_Y\iota_X&=0,\\
+\iota_X\pr_X+\iota_Y\pr_Y&=\bbI_M.
 \end{aligned}}
 Products apply the right factor first, as in
 [composition and field multiplication](fdip-0011).
 The maps #{(x,y)\mapsto\iota_Xx+\iota_Yy} and
-#{z\mapsto(\pi_Xz,\pi_Yz)} are inverse linear maps by these identities.
+#{z\mapsto(\pr_Xz,\pr_Yz)} are inverse linear maps by these identities.
 We consequently write #{M=X\oplus Y} and #{z=(x,y)} relative to
 this chosen identification.}
 
@@ -34,24 +34,24 @@ this chosen identification.}
 \node[carrier] (m) at (3.2,0) {$M$};
 \node[carrier] (y) at (6.4,0) {$Y$};
 \draw[map] (x) to[bend left=20] node[above=2mm] {$\iota_X$} (m);
-\draw[map] (m) to[bend left=20] node[below=2mm] {$\pi_X$} (x);
-\draw[map] (m) to[bend left=20] node[above=2mm] {$\pi_Y$} (y);
+\draw[map] (m) to[bend left=20] node[below=2mm] {$\pr_X$} (x);
+\draw[map] (m) to[bend left=20] node[above=2mm] {$\pr_Y$} (y);
 \draw[map] (y) to[bend left=20] node[below=2mm] {$\iota_Y$} (m);
 \end{tikzpicture}}
 
 \p{Each summand is included in #{M} and recovered by its projection.
-The composite #{\pi_X\iota_X} is #{I_X}, whereas
-#{\iota_X\pi_X} is an endomorphism of #{M}. In the
+The composite #{\pr_X\iota_X} is #{\bbI_X}, whereas
+#{\iota_X\pr_X} is an endomorphism of #{M}. In the
 [partition realization](fdip-001I), these are restriction and
 extension by zero; the latter composite is the support projection.}
 
 \p{For an endomorphism #{Q:M\to M}, its
 \newvocab{components for the chosen splitting} are
 ##{\begin{aligned}
-A&=\pi_XQ\iota_X:X\to X,&B&=\pi_XQ\iota_Y:Y\to X,\\
-E&=\pi_YQ\iota_X:X\to Y,&C&=\pi_YQ\iota_Y:Y\to Y.
+A&=\pr_XQ\iota_X:X\to X,&B&=\pr_XQ\iota_Y:Y\to X,\\
+E&=\pr_YQ\iota_X:X\to Y,&C&=\pr_YQ\iota_Y:Y\to Y.
 \end{aligned}}
-Inserting #{I_M=\iota_X\pi_X+\iota_Y\pi_Y} gives
+Inserting #{\bbI_M=\iota_X\pr_X+\iota_Y\pr_Y} gives
 ##{Q(x,y)=(Ax+By,Ex+Cy).}
 If the eliminated component #{C} is an
 \vocabk{isomorphism}{ca-0015}, define the

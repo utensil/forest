@@ -9,12 +9,12 @@
 positive symmetric pairing #{h}, and let #{A:V\to V} be
 \vocabk{nonnegative and self-adjoint}{fdip-00K1}. For a retained
 subspace #{X}, put #{U=X^\perp}. Use the inclusions
-#{i_X:X\to V}, #{i_U:U\to V} and orthogonal projections
+#{\iota_X:X\to V}, #{\iota_U:U\to V} and orthogonal projections
 #{p_X:V\to X}, #{p_U:V\to U} from \ref{fdip-00K2}.
 The \vocabk{split components}{fdip-001T} are
 ##{\begin{aligned}
-a&=p_XAi_X:X\to X,& b&=p_XAi_U:U\to X,\\
-d&=p_UAi_X:X\to U,& c&=p_UAi_U:U\to U.
+a&=p_XA\iota_X:X\to X,& b&=p_XA\iota_U:U\to X,\\
+d&=p_UA\iota_X:X\to U,& c&=p_UA\iota_U:U\to U.
 \end{aligned}}
 Let #{N=\ker c} and let #{W=N^\perp} inside #{U}.
 Write #{j:W\to U} and #{p:U\to W} for the orthogonal inclusion
@@ -33,7 +33,7 @@ The map #{c_W} is positive definite and invertible, including when
 For #{x\in X}, put #{r_x=c_W^{-1}d_Wx\in W}.
 For #{u=jw+n} with #{w\in W}, #{n\in N},
 ##{\begin{aligned}
-q_A(i_Xx+i_Uu)
+q_A(\iota_Xx+\iota_Uu)
  &=h_X(x,Sx)\\
  &\quad+h_W(w+r_x,\ c_W(w+r_x)).
 \end{aligned}}
@@ -45,9 +45,9 @@ For each #{x}, it is a singleton exactly when #{N=0}.}
 \proof{
 \p{The projection-adjoint identities and \ref{fdip-001P} give
 #{a^\dagger=a}, #{c^\dagger=c}, #{d=b^\dagger} and
-#{h_U(u,cu)=q_A(i_Uu)\geq0}.
-For #{n\in N}, #{q_A(i_Un)=h_U(n,cn)=0}.
-By \ref{fdip-00K3}, #{Ai_Un=0}; in particular #{bn=0}.}
+#{h_U(u,cu)=q_A(\iota_Uu)\geq0}.
+For #{n\in N}, #{q_A(\iota_Un)=h_U(n,cn)=0}.
+By \ref{fdip-00K3}, #{A\iota_Un=0}; in particular #{bn=0}.}
 \p{For #{w\in W} and #{n\in N},
 #{h_U(cjw,n)=h_U(jw,cn)=0}, so #{c} preserves #{W} and
 #{jc_W=cj}. The compression #{c_W} is self-adjoint.
@@ -64,9 +64,9 @@ is vacuous.}
 ##{h_W(w,d_Wx)=h_U(jw,dx)=h_X(bjw,x),}
 which proves #{d_W=b_W^\dagger}. The inverse of #{c_W} is
 self-adjoint by \ref{fdip-001P}, so #{S} is self-adjoint.}
-\p{Write #{r=c_W^{-1}d_Wx}. Since #{Ai_Un=0}, expansion gives
+\p{Write #{r=c_W^{-1}d_Wx}. Since #{A\iota_Un=0}, expansion gives
 ##{\begin{aligned}
-q_A(i_Xx+i_U(jw+n))
+q_A(\iota_Xx+\iota_U(jw+n))
  &=h_X(x,ax)+2h_X(x,b_Ww)+h_W(w,c_Ww),\\
 h_W(w+r,c_W(w+r))
  &=h_W(w,c_Ww)+2h_X(x,b_Ww)\\

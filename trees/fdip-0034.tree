@@ -8,7 +8,7 @@
 \p{Use the \vocabk{kernel decomposition}{fdip-0031} of a
 self-adjoint positive semidefinite #{L:E\to E} on a finite real
 inner-product space #{(E,h)}. Let #{\nu_m} be the projection onto
-#{H} of the law with precision #{Q_m=L+m^2I},
+#{H} of the law with precision #{Q_m=L+m^2\bbI},
 #{m>0}. Then #{\nu_m} converges to the constrained law
 #{\nu_H} of \ref{fdip-000C} in total variation, meaning
 #{\sup_{A\text{ Borel}}|\nu_m(A)-\nu_H(A)|\to0}.
@@ -19,10 +19,10 @@ the variance satisfies
 ##{\begin{aligned}
 \operatorname{Var}_{Q_m}(\ell_j)
  &=m^{-2}\|P_Kj\|^2\\
- &\quad+h_H\bigl(p_Hj,(L_H+m^2I_H)^{-1}p_Hj\bigr).
+ &\quad+h_H\bigl(p_Hj,(L_H+m^2\bbI_H)^{-1}p_Hj\bigr).
 \end{aligned}}
 Here #{p_H:E\to H} is the orthogonal projection with codomain #{H},
-#{h_H} is its induced pairing, and #{P_H=ip_H:E\to E}.
+#{h_H} is its induced pairing, and #{P_H=\iota p_H:E\to E}.
 The variance has a finite limit if and only if #{P_Kj=0},
 equivalently #{j\in H}; in that case its limit is #{h(j,L^+j)}.}
 
@@ -40,8 +40,8 @@ between components has a nonzero kernel projection.}
 \p{By \ref{fdip-0033}, the densities on #{H} are
 #{f_m=w_m/Z_{H,m}}, where
 ##{\begin{aligned}
-w_m(x)&=e^{-h(x,(L_H+m^2I_H)x)/2},\\
-w_0(x)&=e^{-h(x,L_Hx)/2}.
+w_m(x)&=\ue^{-h(x,(L_H+m^2\bbI_H)x)/2},\\
+w_0(x)&=\ue^{-h(x,L_Hx)/2}.
 \end{aligned}}
 They are continuous, #{w_m\to w_0} pointwise, and
 #{0\leq w_m\leq w_0}, with #{\int_H w_0=Z_H<\infty}.
@@ -60,14 +60,14 @@ When #{H=0}, these laws are all the same point mass.}
 compressed inverse in \ref{fdip-0033} give the displayed variance.
 To recover its spectral expression, choose an orthonormal eigenbasis
 #{u_a} of #{L}, with corresponding eigenvalues #{\lambda_a\ge0}.
-For #{\lambda_a>0}, let #{\widetilde u_a\in H} denote the vector
-with #{i\widetilde u_a=u_a}. These vectors form an orthonormal
+For #{\lambda_a>0}, let #{u_a'\in H} denote the vector
+with #{\iota u_a'=u_a}. These vectors form an orthonormal
 eigenbasis of #{L_H}. Orthogonal projection gives
-##{h_H(p_Hj,\widetilde u_a)=h(j,i\widetilde u_a)=h(j,u_a).}
-The inverse of #{L_H+m^2I_H} acts on #{\widetilde u_a} by
+##{h_H(p_Hj,u_a')=h(j,\iota u_a')=h(j,u_a).}
+The inverse of #{L_H+m^2\bbI_H} acts on #{u_a'} by
 #{(\lambda_a+m^2)^{-1}}. Expanding #{p_Hj} therefore gives
 ##{\begin{aligned}
-&h_H\bigl(p_Hj,(L_H+m^2I_H)^{-1}p_Hj\bigr)\\
+&h_H\bigl(p_Hj,(L_H+m^2\bbI_H)^{-1}p_Hj\bigr)\\
 &\qquad=\sum_{\lambda_a>0}
        \frac{h(j,u_a)^2}{\lambda_a+m^2}.
 \end{aligned}}

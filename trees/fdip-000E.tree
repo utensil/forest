@@ -17,11 +17,11 @@ pushforward assigns #{D} the mass of its inverse image, extending
 the [finite pushforward convention](ftip-007S) to these Borel spaces.}
 \p{Every real Borel function #{F:X\to\mathbb R} satisfies the
 extended nonnegative identity
-##{\int_E|F\circ\pi|\,d\mu_Q
-       =\int_X|F|\,d\mu_S\ \in[0,\infty].}
+##{\int_E|F\circ\pi|\,\extd\mu_Q
+       =\int_X|F|\,\extd\mu_S\ \in[0,\infty].}
 Consequently #{F\in L^1(\mu_S)} if and only if
 #{F\circ\pi\in L^1(\mu_Q)}. Under these equivalent conditions,
-##{\int_E F\circ\pi\,d\mu_Q=\int_X F\,d\mu_S.}
+##{\int_E F\circ\pi\,\extd\mu_Q=\int_X F\,\extd\mu_S.}
 We use actual Borel functions; #{L^1} here denotes their integrable
 vector space. It is [not asserted to be an algebra](fdip-0030).}
 
@@ -30,8 +30,8 @@ vector space. It is [not asserted to be an algebra](fdip-0030).}
 are continuous and nonnegative, and the [orthogonal product volumes](fdip-002Q)
 are sigma-finite. Nonnegative Tonelli and the fiber formula give
 ##{\begin{aligned}
-Z_Q&=\int_X\int_Y w_Q(J(x,y))\,d\lambda_Y(y)\,d\lambda_X(x)\\
- &=c_C\int_X e^{-h_X(x,Sx)/2}\,d\lambda_X(x)\\
+Z_Q&=\int_X\int_Y w_Q(J(x,y))\,\extd\lambda_Y(y)\,\extd\lambda_X(x)\\
+ &=c_C\int_X \ue^{-h_X(x,Sx)/2}\,\extd\lambda_X(x)\\
  &=c_CZ_S.
 \end{aligned}}
 All three factors are positive and finite by [normalization](fdip-002T).
@@ -40,7 +40,7 @@ This also agrees with #{\det Q=\det C\det S}.}
 #{\mathbf1_D(x)}. Division by #{Z_Q=c_CZ_S} gives
 ##{\begin{aligned}
 \mu_Q(\pi^{-1}D)
- &=\frac{c_C}{Z_Q}\int_D e^{-h_X(x,Sx)/2}\,d\lambda_X(x)\\
+ &=\frac{c_C}{Z_Q}\int_D \ue^{-h_X(x,Sx)/2}\,\extd\lambda_X(x)\\
  &=\mu_S(D).
 \end{aligned}}
 This proves equality of measures without inferring it from second moments.}
@@ -69,14 +69,14 @@ in the opposite direction.}
 #{E}, so composition preserves the polynomial algebras. Pointwise
 evaluation proves preservation of sums, products, real scalar
 multiples and the constant one. Both involutions are the identity.
-Since #{\pi i_X=I_X}, equality #{P\circ\pi=R\circ\pi} composed
-with #{i_X} implies #{P=R}. This is the invariant form of
-[polynomial pullback](fdip-002A), with the actual section #{i_X}.}
+Since #{\pi \iota_X=\bbI_X}, equality #{P\circ\pi=R\circ\pi} composed
+with #{\iota_X} implies #{P=R}. This is the invariant form of
+[polynomial pullback](fdip-002A), with the actual section #{\iota_X}.}
 \p{Every polynomial, product and square is absolutely integrable by
-\ref{fdip-002W}. Thus #{\omega_Q(P)=\int P\,d\mu_Q} and
-#{\omega_S(P)=\int P\,d\mu_S} are independently defined real
+\ref{fdip-002W}. Thus #{\omega_Q(P)=\int P\,\extd\mu_Q} and
+#{\omega_S(P)=\int P\,\extd\mu_S} are independently defined real
 Hermitian positive normalized functionals: they are linear, take
-one to one, respect the identity star and take #{P^*P=P^2} to a
+one to one, respect the identity involution and take #{P^{\dagger}P=P^2} to a
 nonnegative number. Apply the expectation identity to each #{P} to
 obtain #{\omega_S(P)=\omega_Q(\pi^*P)}. Abstract
 [state pullback](fdip-0027) guarantees that the right side is a
@@ -87,20 +87,20 @@ endomorphisms has been introduced.}
 
 \p{The inverse-compression and covariance identities are
 ##{\begin{aligned}
-p_XQ^{-1}i_X&=S^{-1},\\
+p_XQ^{-1}\iota_X&=S^{-1},\\
 \operatorname{Cov}_{\mu_Q}(\ell_j\circ\pi,\ell_k\circ\pi)
  &=h_X(j,S^{-1}k),
 \end{aligned}}
 where #{\ell_j(x)=h_X(j,x)}. The means vanish.}
 \proof{
 \p{To check [inverse compression](fdip-001V) directly, solve
-#{QJ(u,v)=i_Xb}. Its lower component gives #{v=-C^{-1}B^\dagger u};
-its upper gives #{Su=b}. Hence #{u=S^{-1}b=p_XQ^{-1}i_Xb}.
+#{QJ(u,v)=\iota_Xb}. Its lower component gives #{v=-C^{-1}B^\dagger u};
+its upper gives #{Su=b}. Hence #{u=S^{-1}b=p_XQ^{-1}\iota_Xb}.
 The existence of #{C^{-1}} uses positivity, not merely invertibility
 of the whole #{Q}.}
-\p{Orthogonality gives #{\ell_j\pi(z)=h_E(i_Xj,z)}.
+\p{Orthogonality gives #{\ell_j\pi(z)=h_E(\iota_Xj,z)}.
 [Inverse-precision covariance](fdip-000B) and
-#{i_X^\dagger=p_X} then give the claimed covariance and zero means.
+#{\iota_X^\dagger=p_X} then give the claimed covariance and zero means.
 Alternatively use the expectation equality for #{\ell_j,\ell_k}
 and their product. These functions are integrable polynomials.
 For a nonorthonormal basis, coordinate functionals have their own
@@ -117,7 +117,7 @@ gives Gaussian marginal and conditional parameters. The inverse
 block formula is in
 \citet{Appendix A.3, equation (A.13), p. 202}{rasmussen2006gaussian}.
 Its joint parameter is covariance #{\Sigma=Q^{-1}}. Retained
-covariance is therefore #{p_X\Sigma i_X=S^{-1}}, not #{S}.}
+covariance is therefore #{p_X\Sigma \iota_X=S^{-1}}, not #{S}.}
 \p{The orthonormal-coordinate marginal in \ref{fdip-00JZ} recovers the
 counting inverse-block formula and matches these laws to the finite
 coordinate Gaussian providers, including their density and volume
