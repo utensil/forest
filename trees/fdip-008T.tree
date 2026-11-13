@@ -2,20 +2,20 @@
 \meta{agent-authored}{true}
 \tag{fdip}
 \taxon{Theorem}
-\title{Finite *-algebras, states and GNS}
+\title{Finite algebras with involution, states and GNS}
 \date{2026-11-02}
 
 \p{A state in the sense of the
 \vocabk{real and complex algebraic states}{fdip-0024} is a normalized
 positive functional. That note assumes no norm and no operator
-representation. On a finite-dimensional *-algebra the functional
+representation. On a finite-dimensional algebra with involution the functional
 determines the GNS representation on the quotient by the left ideal
-below. The value #{\omega(a^*a)} is the squared length of the class
+below. The value #{\omega(a^{\dagger}a)} is the squared length of the class
 of #{a}. The square root of that value is a seminorm on #{A} and a
 norm on the quotient. A nonfaithful state, one whose left ideal is
 nonzero, does not define a norm on all of #{A}. The dimension of the quotient is the rank of
 the positive semidefinite form sending #{y} to the conjugate-linear
-functional #{x\mapsto\omega(x^*y)}, and that rank equals the
+functional #{x\mapsto\omega(x^{\dagger}y)}, and that rank equals the
 codimension of the left ideal.}
 
 \p{Let #{K=\mathbb R} or #{K=\mathbb C}, and let #{A} be a
@@ -26,8 +26,8 @@ Let #{\omega} be a real
 or complex algebraic state on #{A}, according to the scalar field:
 #{K}-linear, normalized in the sense of a
 \vocabk{normalized linear functional}{fdip-0021}, Hermitian positive, and satisfying
-#{\omega(a^*a)\ge 0}. Define
-#{\langle x,y\rangle=\omega(x^*y)}.
+#{\omega(a^{\dagger}a)\ge 0}. Define
+#{\langle x,y\rangle=\omega(x^{\dagger}y)}.
 Let #{N} be the set of #{x} with #{\langle x,x\rangle=0}. The
 quotient #{H_\omega=A/N} carries the descended inner product, the
 operator #{\pi_\omega(a)} sends the class of #{b} to the class of
@@ -36,11 +36,11 @@ operator #{\pi_\omega(a)} sends the class of #{b} to the class of
 \p{The form is positive semidefinite and Hermitian, and #{N} is a
 left ideal. For the cyclic vector,
 ##{\langle\pi_\omega(a)\Omega,\pi_\omega(b)\Omega\rangle
-=\omega(a^*b).}
+=\omega(a^{\dagger}b).}
 After a basis #{(e_i)} of #{A} is declared, the Gram matrix
-#{G_{ij}=\omega(e_i^*e_j)} satisfies
+#{G_{ij}=\omega(e_i^{\dagger}e_j)} satisfies
 #{\dim H_\omega=\operatorname{rank} G}. The squared length of the
-class of #{a} is #{\omega(a^*a)}.}
+class of #{a} is #{\omega(a^{\dagger}a)}.}
 
 \p{Let #{A=\bigoplus_i\operatorname{End}_K(V_i)}, with each #{V_i} a
 finite-dimensional #{K}-vector space, with componentwise composition
@@ -48,7 +48,7 @@ and with the adjoint acting on each block. After a basis of #{V_i}
 is declared, #{\operatorname{End}_K(V_i)} is the matrix algebra
 #{M_{m_i}(K)} with #{m_i=\dim V_i}, and the adjoint is conjugate
 transpose. Suppose each #{\rho_i}
-has the form #{\rho_i=c_i^*c_i}, and
+has the form #{\rho_i=c_i^{\dagger}c_i}, and
 #{\sum_i\trace(\rho_i)=1}. The functional
 #{\omega(a)=\sum_i\trace(\rho_i a_i)} is a state, and
 ##{\dim H_\omega=\sum_i m_i\operatorname{rank}\rho_i.}}
@@ -73,12 +73,12 @@ decomposition of the observable algebra.}
 \p{The form is linear in the second argument because #{\omega} is.}
 
 \p{It is conjugate-linear in the first because
-#{(\lambda x)^*=\overline\lambda\,x^*}.}
+#{(\lambda x)^{\dagger}=\overline\lambda\,x^{\dagger}}.}
 
 \p{It is Hermitian because #{\langle y,x\rangle} equals
-#{\omega((x^*y)^*)}, and Hermitian positivity makes that the
-conjugate of #{\omega(x^*y)}. The square
-#{\langle x,x\rangle=\omega(x^*x)} is nonnegative by the state.}
+#{\omega((x^{\dagger}y)^{\dagger})}, and Hermitian positivity makes that the
+conjugate of #{\omega(x^{\dagger}y)}. The square
+#{\langle x,x\rangle=\omega(x^{\dagger}x)} is nonnegative by the state.}
 
 \p{The inequality of Cauchy and Schwarz is
 #{\lvert\langle x,y\rangle\rvert^2\le\langle x,x\rangle\langle y,y\rangle}.
@@ -114,7 +114,7 @@ shows that the radical is exactly #{N}. It is a subspace. If
 The two squares vanish because #{x,y\in N}. The two cross terms
 vanish because an element of #{N} is orthogonal to every vector.
 It is a left ideal. For #{b\in A} and #{x\in N},
-#{\langle bx,bx\rangle=\omega(x^*b^*bx)=\langle x,(b^*b)x\rangle=0}.}
+#{\langle bx,bx\rangle=\omega(x^{\dagger}b^{\dagger}bx)=\langle x,(b^{\dagger}b)x\rangle=0}.}
 
 \p{The form therefore descends to the quotient. If #{x-x'} and
 #{y-y'} lie in #{N}, then
@@ -127,7 +127,7 @@ finite dimensionality makes the quotient a Hilbert space with no
 further completion. Its dimension is #{\dim A-\dim N}.}
 
 \p{On a basis #{e_1,\ldots,e_n}, the matrix
-#{G_{ij}=\langle e_i,e_j\rangle=\omega(e_i^*e_j)} is Hermitian. A
+#{G_{ij}=\langle e_i,e_j\rangle=\omega(e_i^{\dagger}e_j)} is Hermitian. A
 vector #{v} represents #{x=\sum_i v_i e_i}. Hermitian symmetry gives
 #{G_{ji}=\overline{G_{ij}}}. The number
 #{\langle x,e_j\rangle=\sum_i\overline{v_i}G_{ij}}
@@ -137,51 +137,51 @@ in the second argument. Conjugating those
 sums and replacing #{\overline{G_{ij}}} by #{G_{ji}} produces
 #{(Gv)_j=0}. Rank-nullity
 gives #{\operatorname{rank} G=n-\dim N=\dim H_\omega}. The class of
-#{a} has squared length #{\omega(a^*a)}. The operator
+#{a} has squared length #{\omega(a^{\dagger}a)}. The operator
 #{\pi_\omega(a)} is well defined because #{N} is a left ideal, and
 #{\langle\pi_\omega(a)\Omega,\pi_\omega(b)\Omega\rangle
-=\langle a,b\rangle=\omega(a^*b)}.}
+=\langle a,b\rangle=\omega(a^{\dagger}b)}.}
 
 \p{On the direct sum, the product and the involution act blockwise, so
-#{\omega(a^*a)=\sum_i\trace(\rho_i a_i^*a_i)}. The trace is
+#{\omega(a^{\dagger}a)=\sum_i\trace(\rho_i a_i^{\dagger}a_i)}. The trace is
 invariant under a cyclic permutation, and
-#{\trace(b^*b)} is the sum of the squared moduli of the entries
+#{\trace(b^{\dagger}b)} is the sum of the squared moduli of the entries
 of #{b}. Hence
-##{\trace(\rho_i a_i^*a_i)
-=\trace(c_i a_i^*a_i c_i^*)
-=\trace\bigl((a_i c_i^*)^*(a_i c_i^*)\bigr),}
+##{\trace(\rho_i a_i^{\dagger}a_i)
+=\trace(c_i a_i^{\dagger}a_i c_i^{\dagger})
+=\trace\bigl((a_i c_i^{\dagger})^{\dagger}(a_i c_i^{\dagger})\bigr),}
 which is nonnegative. The functional is therefore positive. It is
 normalized because #{\omega(1)=\sum_i\trace(\rho_i)=1}. Each
-#{\rho_i=c_i^*c_i} is self-adjoint. The trace of a conjugate
+#{\rho_i=c_i^{\dagger}c_i} is self-adjoint. The trace of a conjugate
 transpose is the conjugate of the trace, and
-#{(a_i\rho_i)^*=\rho_i a_i^*}, so
-#{\trace(\rho_i a_i^*)=\overline{\trace(\rho_i a_i)}}.
+#{(a_i\rho_i)^{\dagger}=\rho_i a_i^{\dagger}}, so
+#{\trace(\rho_i a_i^{\dagger})=\overline{\trace(\rho_i a_i)}}.
 Thus #{\omega} is Hermitian.}
 
-\p{The same identity shows that #{\omega(a^*a)=0} if and only if
-#{a_i c_i^*=0} for every #{i}. Different blocks occupy
+\p{The same identity shows that #{\omega(a^{\dagger}a)=0} if and only if
+#{a_i c_i^{\dagger}=0} for every #{i}. Different blocks occupy
 complementary summands, so
-#{\dim N=\sum_i\dim\{a_i:a_i c_i^*=0\}}. A matrix vanishes on a
+#{\dim N=\sum_i\dim\{a_i:a_i c_i^{\dagger}=0\}}. A matrix vanishes on a
 subspace precisely when it factors through the quotient by that
-subspace. The image of #{c_i^*} has dimension #{\operatorname{rank} c_i^*}.
+subspace. The image of #{c_i^{\dagger}} has dimension #{\operatorname{rank} c_i^{\dagger}}.
 The matrices vanishing on it are determined by their values on a
 complement, so their space has dimension
-#{m_i\bigl(m_i-\operatorname{rank} c_i^*\bigr)}. The quotient of that
-block therefore has dimension #{m_i\operatorname{rank} c_i^*}. Summing
+#{m_i\bigl(m_i-\operatorname{rank} c_i^{\dagger}\bigr)}. The quotient of that
+block therefore has dimension #{m_i\operatorname{rank} c_i^{\dagger}}. Summing
 over the blocks gives
-#{\dim H_\omega=\sum_i m_i\operatorname{rank} c_i^*}.}
+#{\dim H_\omega=\sum_i m_i\operatorname{rank} c_i^{\dagger}}.}
 
 \p{It remains to match that rank with #{\operatorname{rank}\rho_i}.
 For the standard inner product,
-#{\|c_i v\|^2=\langle c_i^*c_i v,v\rangle}.
-If #{c_i^*c_i v=0}, the right-hand side vanishes, so #{c_i v=0}.
+#{\|c_i v\|^2=\langle c_i^{\dagger}c_i v,v\rangle}.
+If #{c_i^{\dagger}c_i v=0}, the right-hand side vanishes, so #{c_i v=0}.
 The converse is immediate, and rank-nullity gives
 #{\operatorname{rank}\rho_i=\operatorname{rank} c_i}. A minor of a
 transpose is the transpose of a minor, and the determinant is
 unchanged by transposition. A minor of a conjugate transpose is the
 conjugate of a minor of the transpose. The largest size of a nonzero
-minor is therefore the same for #{c_i}, #{c_i^T} and #{c_i^*}. Hence
-#{\operatorname{rank} c_i^*=\operatorname{rank}\rho_i}, and
+minor is therefore the same for #{c_i}, #{c_i^T} and #{c_i^{\dagger}}. Hence
+#{\operatorname{rank} c_i^{\dagger}=\operatorname{rank}\rho_i}, and
 #{\dim H_\omega=\sum_i m_i\operatorname{rank}\rho_i}. On #{M_2},
 #{\mathrm{diag}(2/3,1/3)} is the square of
 #{\mathrm{diag}(\sqrt{2/3},\sqrt{1/3})}, so its rank is #{2}.
@@ -190,11 +190,11 @@ its only nonzero minor has size #{1}. The formula gives dimensions
 #{4} and #{2}.}
 
 \p{On functions, the indicator basis is orthogonal for the Gram form.
-Indeed #{\omega(1_x^*1_y)=\delta_{xy}w(x)}, so the Gram matrix is
+Indeed #{\omega(1_x^{\dagger}1_y)=\delta_{xy}w(x)}, so the Gram matrix is
 diagonal with entries #{w(x)}. Its rank is the number of strictly
 positive weights. A function lies in #{N} exactly when it vanishes
 on #{\operatorname{supp} w}, because
-#{\omega(f^*f)=\sum_x w(x)\lvert f(x)\rvert^2}. Two functions
+#{\omega(f^{\dagger}f)=\sum_x w(x)\lvert f(x)\rvert^2}. Two functions
 determine the same class exactly when they agree on that support, and
 every function on the support arises in this way. The descended inner
 product is
