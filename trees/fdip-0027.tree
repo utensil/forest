@@ -41,32 +41,31 @@ products. Without unitality, the zero multiplicative linear map between
 nonzero real algebras pulls every normalized functional back to zero.}
 
 \p{Over #{K=\mathbb R} or #{\mathbb C}, suppose both algebras carry the
-star laws in \vocabk{the state definition}{fdip-0024}, and suppose additionally
-#{\iota(b^*)=\iota(b)^*}. Then #{\iota^\flat} sends algebraic states
+involution laws in \vocabk{the state definition}{fdip-0024}, and suppose additionally
+#{\iota(b^{\dagger})=\iota(b)^{\dagger}}. Then #{\iota^\flat} sends algebraic states
 to algebraic states. For composition in this setting, let #{C} also be
-a unital associative #{K}-algebra with these star laws, and let
-#{\kappa:C\to B} be a unital #{K}-algebra homomorphism preserving star.}
+a unital associative #{K}-algebra with these involution laws, and let
+#{\kappa:C\to B} be a unital #{K}-algebra homomorphism preserving the involution.}
 \proof{
 \p{For a state #{\omega},
-#{(\omega\iota)(b^*)=\omega(\iota(b)^*)=\overline{\omega(\iota(b))}}.
-Multiplication and star compatibility give
-##{(\omega\iota)(b^*b)=\omega(\iota(b)^*\iota(b))\geq0.}
-Normalization holds. Identities preserve star, and
-#{(\iota\kappa)(c^*)=\iota(\kappa(c)^*)=(\iota\kappa(c))^*}, so
+#{(\omega\iota)(b^{\dagger})=\omega(\iota(b)^{\dagger})=\overline{\omega(\iota(b))}}.
+Multiplication and compatibility with the involution give
+##{(\omega\iota)(b^{\dagger}b)=\omega(\iota(b)^{\dagger}\iota(b))\geq0.}
+Normalization holds. Identities preserve the involution, and
+#{(\iota\kappa)(c^{\dagger})=\iota(\kappa(c)^{\dagger})=(\iota\kappa(c))^{\dagger}}, so
 composition preserves the same hypotheses.}
 }
-\p{Star compatibility cannot be omitted. Give #{\mathbb C[z]} the
+\p{Compatibility with the involution cannot be omitted. Give #{\mathbb C[z]} the
 involution conjugating coefficients and fixing #{z}; give #{\mathbb C}
-ordinary conjugation. Evaluation at #{z=i} is a unital complex algebra
+ordinary conjugation. Evaluation at #{z=\ui} is a unital complex algebra
 map. The identity functional on #{\mathbb C} is a state, but its pullback
-takes #{z^*z=z^2} to #{-1}, so is not positive.}
+takes #{z^{\dagger}z=z^2} to #{-1}, so is not positive.}
 
 \p{The dual-map construction is supported by Mathlib's
 \leanref{LinearMap.dualMap}, \leanref{LinearMap.dualMap_apply},
 \leanref{LinearMap.dualMap_id} and \leanref{LinearMap.dualMap_comp_dualMap};
-these do not require finite dimension. The star-preserving map structures
-\leanref{StarAlgHom} and \leanref{StarAlgHom.comp} concern supplied star
-operations; the genuine star laws above remain explicit hypotheses.
+these do not require finite dimension. The involution-preserving map structures
+\leanref{StarAlgHom} and \leanref{StarAlgHom.comp} concern supplied involutions; the genuine involution laws above remain explicit hypotheses.
 For the algebra and positivity conventions see
 \citet{Section 22.2}{stacks2017stacks}, [Tag 09JF](https://stacks.math.columbia.edu/tag/09JF) and
 \citet{Definitions 3.7 and 3.9, p. 11}{waldmann2004states}.
