@@ -200,8 +200,44 @@ jobs:
           export TERM=xterm-256color
           forester --version
           bash ./build.sh
+      # A restored pull-request artifact has HTML and no fixture PDFs.
+      # Install only what lize.sh and the PDF date check need, then overlay
+      # the fourteen PDFs before the Pages upload.
+      - name: Setup just for the main PDF overlay
+        if: ${{ github.event_name == 'push' && steps.restore.outcome == 'success' }}
+        uses: extractions/setup-just@v1
+        with:
+          just-version: 1.40.0
+      - name: Setup bun for the main PDF overlay
+        if: ${{ github.event_name == 'push' && steps.restore.outcome == 'success' }}
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: 1.2.22
+      - name: Install xslt3 for the main PDF overlay
+        if: ${{ github.event_name == 'push' && steps.restore.outcome == 'success' }}
+        run: bun install --frozen-lockfile
+      - name: Setup Python for the main PDF overlay
+        if: ${{ github.event_name == 'push' && steps.restore.outcome == 'success' }}
+        uses: astral-sh/setup-uv@v3
+        with:
+          version: "0.4.27"
+      - name: Setup TeX Live for the main PDF overlay
+        if: ${{ github.event_name == 'push' && steps.restore.outcome == 'success' }}
+        uses: utensil/setup-texlive-action@v4
+        with:
+          packages: scheme-full
+          version: 2025
+      - name: Install poppler for the main PDF overlay
+        if: ${{ github.event_name == 'push' && steps.restore.outcome == 'success' }}
+        run: |
+          sudo apt install poppler-utils
+          which lualatex pdftotext bun
       - name: Verify Forester output contract
-        if: ${{ steps.restore.outcome != 'success' }}
+        if: ${{ github.event_name == 'pull_request' }}
+        run: |
+          just verify-render
+      - name: Verify PDF fixtures on main
+        if: ${{ github.event_name == 'push' }}
         run: |
           just verify-pdf-fixtures
       # - name: Check for PDF files
