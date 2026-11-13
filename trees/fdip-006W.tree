@@ -7,7 +7,7 @@
 
 \p{For the \vocabk{surface data and coefficients}{fdip-006V},
 ##{Z_\Sigma(f)=\sum_{\rho\in\widehat G}
- d_\rho^{\,2-2g}\left(\frac{c_\rho}{d_\rho}\right)^P.}
+ (\dim\rho)^{\,2-2g}\left(\frac{c_\rho}{\dim\rho}\right)^P.}
 The formula uses normalized counting on every edge. In particular,
 #{f\equiv1} gives #{Z_\Sigma(1)=1}; the unnormalized sum is
 #{|G|^{|E|}}.}
@@ -23,12 +23,12 @@ unitary representations #{\rho,\tau} and a linear map
 Changing the summation variable shows this is an intertwiner. Schur's
 lemma makes it zero when the representatives are inequivalent. For
 #{\rho=\tau}, it is scalar, and preservation of trace gives
-#{\mathcal A(A)=(\operatorname{tr}A/d_\rho)I}. Apply this to matrix
+#{\mathcal A(A)=(\trace A/\dim\rho)I}. Apply this to matrix
 units to obtain
 ##{\frac1{|G|}\sum_{h\in G}
  \rho(h)_{ij}\tau(h^{-1})_{kl}
  =\begin{cases}
- d_\rho^{-1}\delta_{il}\delta_{jk},&\rho=\tau,\\
+ (\dim\rho)^{-1}\delta_{il}\delta_{jk},&\rho=\tau,\\
  0,&\rho\ne\tau.
  \end{cases}}
 This is a finite averaging argument; all sums below are finite.}
@@ -43,18 +43,18 @@ must coincide for a nonzero contribution. The dual adjacency graph
 of a connected closed surface is connected, so one common label
 #{\rho} remains on every face. A self-adjacent edge simply contracts
 two occurrences of this same label. Each edge contributes
-#{d_\rho^{-1}}.}
+#{(\dim\rho)^{-1}}.}
 
 \p{The two Kronecker deltas identify corner indices at the same
 endpoint of that edge. Around a vertex, the successive sectors form
 its circular link. Consequently all corners at that vertex have one
 common index, while no contraction equates indices at different
 vertices. Exactly one free index remains per vertex, contributing
-#{d_\rho^{|V|}}. This also covers loops and repeated face edges:
+#{(\dim\rho)^{|V|}}. This also covers loops and repeated face edges:
 the circular link, rather than distinct face or edge names, determines
 the index cycle. The contribution of the common label is therefore
-##{c_\rho^P d_\rho^{|V|-|E|}
- =d_\rho^{2-2g}\left(\frac{c_\rho}{d_\rho}\right)^P,}
+##{c_\rho^P (\dim\rho)^{|V|-|E|}
+ =(\dim\rho)^{2-2g}\left(\frac{c_\rho}{\dim\rho}\right)^P,}
 using #{|V|-|E|+P=2-2g}. Sum over #{\rho}. For #{f=1}, character
 orthogonality makes the trivial coefficient one and all others zero.}
 }
@@ -63,7 +63,7 @@ orthogonality makes the trivial coefficient one and all others zero.}
 edges and one face attached by a constant map lies outside the
 nonempty polygon convention. Its partition sum is directly #{f(1)}.
 The same expression still holds, since #{g=0}, #{P=1} and
-#{f(1)=\sum_\rho d_\rho c_\rho}.}
+#{f(1)=\sum_\rho \dim\rho c_\rho}.}
 
 \p{For #{G=\{1,-1\}} and #{f(h)=e^{-\beta(1-h)}}, the two
 coefficients are #{c_+=e^{-\beta}\cosh\beta} and
