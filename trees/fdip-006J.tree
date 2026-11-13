@@ -6,15 +6,15 @@
 \date{2026-11-01}
 
 \p{Keep the [spatial Clifford module](fdip-000R)
-#{S=(\mathbb C^2)^{\otimes d}}, with #{\dim_{\mathbb C}S=2^d},
+#{S=(\mathbb C^2)^{\otimes n}}, with #{\dim_{\mathbb C}S=2^n},
 and periods #{N_j\ge3}. Give scalar fields on the fundamental box
 #{0\le x_j<N_j} the antiperiodic extension
-##{f(x+N_je_j)=-f(x)\qquad(1\le j\le d).}
+##{f(x+N_je_j)=-f(x)\qquad(1\le j\le n).}
 The forward shift #{T_j^-} uses this extension at a seam. It is a
 signed permutation, hence unitary in the counting pairing; shifts in
 different coordinates commute. They act on the lattice factor only,
-so they commute with the Clifford matrices on #{S}. Define
-##{D^- =\sum_{j=1}^d\gamma_j\otimes
+so they commute with the represented generators on #{S}. Define
+##{D^- =\sum_{j=1}^n\rho(\iota(\varepsilon_j))\otimes
           \frac{T_j^--(T_j^-)^{-1}}2.}
 These are fixed flat line twists, each with holonomy minus one.}
 
@@ -27,7 +27,7 @@ of two allowed momenta are periodic Fourier momenta, so the same
 geometric-sum proof as \ref{fdip-000S} makes these functions a complete
 orthonormal basis of fields on the box. On its momentum block,
 ##{\begin{aligned}
-D^-(p)&=i\sum_j\gamma_j\sin p_j,\\
+D^-(p)&=\ui\sum_j\rho(\iota(\varepsilon_j))\sin p_j,\\
 -D^-(p)^2&=\left(\sum_j\sin^2p_j\right)\bbI_S.
 \end{aligned}}
 The square follows from the Clifford anticommutators and commuting
@@ -40,7 +40,7 @@ only possible zero is #{p_j=\pi}, which requires
 even. Hence
 ##{\dim_{\mathbb C}\ker D^-=
 \begin{cases}
-2^d,&\text{all periods are odd},\\
+2^n,&\text{all periods are odd},\\
 0,&\text{at least one period is even}.
 \end{cases}}
 For two directions the comparison with \ref{fdip-000T} is

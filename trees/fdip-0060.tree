@@ -6,7 +6,7 @@
 \date{2026-11-01}
 
 \p{For an \vocabk{interacting selected background}{fdip-005Y}, put
-#{n=\dim H} and #{r=\operatorname{rank}P}. Write #{\iota_X:X\to H} and
+#{r=\operatorname{rank}P}. Write #{\iota_X:X\to H} and
 #{\iota_Y:Y\to H} for the inclusions of the image and kernel of #{P}.
 Define
 ##{\begin{aligned}
@@ -43,7 +43,7 @@ this fiber integral.}
 
 \proof{
 \p{Choose orthonormal basis maps #{B:\mathbb R^r\to X} and
-#{B_\perp:\mathbb R^{n-r}\to Y}, and use them as the inclusions
+#{B_\perp:\mathbb R^{(\dim H)-r}\to Y}, and use them as the inclusions
 #{\iota_X} and #{\iota_Y} for this calculation. A full field is
 #{\phi=Bx+B_\perp y}. Orthogonality preserves the volume and gives
 ##{\begin{aligned}
@@ -55,8 +55,8 @@ The second term is minimized uniquely at #{y=\mu(x)}. Normalizing
 its density proves the conditional law at every #{x}. Writing
 #{v_x(y)=Bx+B_\perp y}, it also gives
 ##{\begin{aligned}
-c_D&=\frac{(2\pi)^{(n-r)/2}}{\sqrt{\det D}},\\
-\int_{\mathbb R^{n-r}}&\ue^{-\frac12\langle v_x(y),Qv_x(y)\rangle}
+c_D&=\frac{(2\pi)^{((\dim H)-r)/2}}{\sqrt{\det D}},\\
+\int_{\mathbb R^{(\dim H)-r}}&\ue^{-\frac12\langle v_x(y),Qv_x(y)\rangle}
         \ue^{-\lambda\mathcal V(v_x(y))}\,dy\\
  &=c_D\ue^{-\frac12x^TSx}\ue^{-F_\lambda(x)}.
 \end{aligned}}
@@ -83,7 +83,7 @@ polynomial coefficients.}
 
 \p{The massive lattice analogue is
 \citet{Theorem 8.26, p. 399}{friedli2017statistical}: on a finite
-domain of #{\mathbb Z^d}, the conditional field has the massive
+domain of #{\mathbb Z^n}, the conditional field has the massive
 harmonic mean determined by its boundary values and a killed-walk
 Green covariance. That theorem uses its normalized lattice Laplacian;
 it does not supply the arbitrary-projector argument above. The

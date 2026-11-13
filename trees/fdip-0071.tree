@@ -6,19 +6,19 @@
 \date{2026-11-01}
 
 \p{Let the vertices be
-#{\Lambda=\prod_{j=1}^d\mathbb Z/L_j\mathbb Z}, with #{L_j\ge3}.
+#{\Lambda=\prod_{j=1}^n\mathbb Z/L_j\mathbb Z}, with #{L_j\ge3}.
 Give each edge #{(x,j):x\to x+e_j} weight one and a unitary or
 orthogonal transport #{U_{x,j}} on a fixed fiber. For the
-\vocabk{determinant action}{fdip-0070}, put #{D=2d+m^2}, where #{m>0},
+\vocabk{determinant action}{fdip-0070}, put #{D=2n+m^2}, where #{m>0},
 and let #{H_U} be the covariant adjacency operator. Then
-##{Q_U=D\bbI-H_U,\qquad \|H_U\|\le2d<D,}
+##{Q_U=D\bbI-H_U,\qquad \|H_U\|\le2n<D,}
 and
 ##{\cW(U)=\kappa N\log D-
  \kappa\sum_{k\ge1}\frac{\trace_{\mathbb K}(H_U^k)}{kD^k}.}
 The series is absolutely convergent, uniformly over all such unitary
 connections. For #{K\ge0}, its remainder after length #{K} satisfies
 ##{|R_K(U)|\le\frac{\kappa N}{K+1}
- \frac{(2d/D)^{K+1}}{1-2d/D}.}
+ \frac{(2n/D)^{K+1}}{1-2n/D}.}
 Each trace is the sum of fiber holonomy traces over all based oriented
 closed nearest-neighbor walks of length #{k}.}
 
@@ -27,14 +27,14 @@ closed nearest-neighbor walks of length #{k}.}
 ##{(T_j\phi)(x)=U_{x-e_j,j}\phi(x-e_j).}
 A permutation of sites and the unitary fiber maps preserve the norm,
 so #{T_j} is unitary. Expanding the difference energy gives
-##{H_U=\sum_{j=1}^d(T_j+T_j^{\dagger}),\qquad Q_U=(2d+m^2)\bbI-H_U.}
+##{H_U=\sum_{j=1}^n(T_j+T_j^{\dagger}),\qquad Q_U=(2n+m^2)\bbI-H_U.}
 Thus #{H_U} is self-adjoint and the triangle inequality gives
-#{\|H_U\|\le2d}. If its eigenvalues are #{h_1,\ldots,h_N},
+#{\|H_U\|\le2n}. If its eigenvalues are #{h_1,\ldots,h_N},
 then #{|h_i|/D<1}. Apply the scalar Taylor series for
 #{\log(1-h_i/D)} to
 #{\log\det Q_U=N\log D+\sum_i\log(1-h_i/D)}.
 There are finitely many eigenvalues and
-##{|\trace(H_U^k)|\le N(2d)^k,}
+##{|\trace(H_U^k)|\le N(2n)^k,}
 so the resulting trace series is absolutely convergent. For
 #{k\ge K+1}, bound #{1/k\le 1/(K+1)} and sum the geometric tail.
 This proves the stated uniform remainder.}
@@ -53,13 +53,13 @@ total is real even for a complex fiber.}
 \p{Mathlib's
 \leanref{Real.hasSum_pow_div_log_of_abs_lt_one} states, for a real
 #{x} with #{|x|<1},
-##{\sum_{n\ge0}\frac{x^{n+1}}{n+1}=-\log(1-x).}
+##{\sum_{t\ge0}\frac{x^{t+1}}{t+1}=-\log(1-x).}
 It supplies the scalar series used for each real eigenvalue. Spectral
 reduction, the walk interpretation, the lattice norm bound and the
 uniform trace remainder are the additional arguments above; the
 formal declaration does not state this lattice expansion.}
 
-\p{The numerical bound #{2d} and scalar diagonal #{D} use this
+\p{The numerical bound #{2n} and scalar diagonal #{D} use this
 regular lattice and its unit edge weights. For arbitrary weights or
 degrees one must change the diagonal decomposition and norm estimate;
 the displayed bound is not asserted unchanged.}
