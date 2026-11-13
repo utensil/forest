@@ -198,7 +198,10 @@
 \newcommand{\psI}{\boldsymbol{I}}
 \newcommand{\ui}{\mathrm{i}}
 \newcommand{\ue}{\mathrm{e}}
-\newcommand{\trace}{\operatorname{tr}}
+%% physics.sty also declares \trace as the operator tr. A later
+%% standalone pass loads that package from diagrams.tex, after this
+%% preamble, so the definition waits until that pass has run.
+\AtBeginDocument{\providecommand{\trace}{\operatorname{tr}}}
 \newcommand{\im}{\operatorname{im}}
 \newcommand{\spec}{\operatorname{spec}}
 \newcommand{\Spec}{\operatorname{Spec}}
