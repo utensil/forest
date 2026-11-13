@@ -1,0 +1,61 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{Binary tetrahedral directions form the group algebra}
+\date{2026-11-12}
+
+\p{Let #{2T} be the group of \ref{fdip-00MK}. Let #{C} be the union
+of #{\{\pm i,\pm j,\pm k\}} with the #{4} quaternions
+##{\frac{-1+i+j+k}{2},\ 
+\frac{-1+i-j-k}{2},\ 
+\frac{-1-i+j-k}{2},\ 
+\frac{-1-i-j+k}{2}.}
+The set #{C} is conjugation-stable and generates #{2T}. The
+direction algebra with the trivial cocycle is #{k[2T]}, of rank
+#{24}. A Clifford algebra of a finite free module has rank a power
+of #{2}, and #{24} lies outside that list. The set #{C} contains
+an element of order #{3} and an element of order #{4}.}
+
+\proof{
+\p{The Lipschitz elements #{\pm i,\pm j,\pm k} square to #{-1}.
+For #{\omega=(-1+i+j+k)/2}, the cross terms in
+#{(i+j+k)^2} cancel, so
+#{\omega^2=(-1-i-j-k)/2} and #{\omega^3=1}. Thus #{\omega} has
+order #{3}, and it lies outside the Lipschitz units.}
+
+\p{Conjugation by #{i} is the automorphism #{j\mapsto -j},
+#{k\mapsto -k}. Expanding #{i\omega i^{-1}} with #{i^{-1}=-i}
+gives #{(-1+i-j-k)/2}. The cyclic automorphism
+#{i\mapsto j\mapsto k\mapsto i} fixes #{\omega} and sends
+#{i\omega i^{-1}} to #{j\omega j^{-1}} and then to
+#{k\omega k^{-1}}. Those two conjugates are the remaining displayed
+quaternions. A conjugate of an element of order #{3} has order
+#{3}, so all #{4} displayed quaternions lie outside the Lipschitz
+units. The same automorphisms permute those #{4} elements. The
+relations #{iji^{-1}=-j} and its cyclic copies permute
+#{\{\pm i,\pm j,\pm k\}}.}
+
+\p{The isomorphism of \ref{fdip-00MK} sends #{i}, #{j} and #{\omega}
+to the matrices #{\iota}, #{\eta} and #{\rho}, and it sends
+#{\kappa=\iota\eta} to the class of #{k}. The recorded cycle
+#{\rho\iota\rho^{-1}=\kappa}, #{\rho\kappa\rho^{-1}=\eta} and
+#{\rho\eta\rho^{-1}=\iota} therefore says
+#{\omega i\omega^{-1}=k}, #{\omega k\omega^{-1}=j} and
+#{\omega j\omega^{-1}=i}. The #{6} Lipschitz labels are stable under
+conjugation by #{\omega}. For a conjugate
+#{g=i\omega i^{-1}}, 
+#{\omega g\omega^{-1}=(\omega i\omega^{-1})\,\omega\,(\omega i\omega^{-1})^{-1}},
+which is a conjugate of #{\omega} by #{k} and hence one of the #{4}.
+The same holds for the conjugates by #{j} and by #{k}. Since
+#{i}, #{j} and #{\omega} generate a subgroup, and that subgroup
+contains the order-#{8} group #{\{\pm 1,\pm i,\pm j,\pm k\}} and
+the outside element #{\omega} of order #{3}, its order is a multiple
+of #{24}. It equals #{2T}. Every conjugation is therefore a word in
+conjugations that preserve #{C}, and #{C} generates #{2T}.}
+
+\p{The trivial cocycle gives the group algebra, free of rank
+#{24}. By \ref{fdip-00QB} a Clifford algebra of a free module of
+finite rank #{r} is free of rank #{2^r}. The integer #{24} lies
+outside that list of ranks.}
+}
