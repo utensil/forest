@@ -183,6 +183,35 @@
 % \newcommand{\newvocab}[1]{\textbf{\color{MidnightBlue} #1}}
 % \newcommand{\vocab}[1]{\textbf{#1}}
 
+%% FDIP notation. These are the LaTeX meanings of trees/fdip-macros.tree.
+%% Forester expands a macro in an ordinary math span. A raw display can
+%% still emit the control word, and the series PDF needs its meaning.
+%% \extD stays \mathrm{D} until the batch that sets the macro to \mathbf{D}.
+\newcommand{\extd}{\mathrm{d}}
+\newcommand{\extD}{\mathrm{D}}
+\newcommand{\extdag}{\mathrm{d}^{\dagger}}
+\newcommand{\cov}{\nabla}
+\newcommand{\covdot}{\nabla\cdot}
+\newcommand{\covwedge}{\nabla\wedge}
+\newcommand{\covsq}{\nabla^{2}}
+\newcommand{\bbI}{\mathbb{I}}
+\newcommand{\psI}{\boldsymbol{I}}
+\newcommand{\ui}{\mathrm{i}}
+\newcommand{\ue}{\mathrm{e}}
+%% physics.sty also declares \trace as the operator tr. A later
+%% standalone pass loads that package from diagrams.tex, after this
+%% preamble, so the definition waits until that pass has run.
+\AtBeginDocument{\providecommand{\trace}{\operatorname{tr}}}
+\newcommand{\im}{\operatorname{im}}
+\newcommand{\spec}{\operatorname{spec}}
+\newcommand{\Spec}{\operatorname{Spec}}
+\newcommand{\pr}{\mathrm{pr}}
+\newcommand{\cW}{\mathcal{W}}
+\newcommand{\TT}{\mathbb{T}}
+\newcommand{\cl}[1]{\overline{#1}}
+\newcommand{\Dom}[1]{\operatorname{Dom}#1}
+\newcommand{\basic}[1]{\operatorname{Open}(#1)}
+
 %% Code highlighting
 
 \input{code}
