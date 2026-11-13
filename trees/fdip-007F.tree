@@ -8,14 +8,14 @@
 \p{Fix a flat #{d}-dimensional torus with #{d\ge2}, a compact Lie
 group #{G}, and a unitary representation #{\rho:G\to U(r)}, #{r>0}.
 Choose smooth periodic skew-adjoint fields #{X_j(x)}, so
-#{X_j(x)^*=-X_j(x)}, lying in the image of the derived representation
+#{X_j(x)^{\dagger}=-X_j(x)}, lying in the image of the derived representation
 of the compact real form. All derivative bounds are fixed
 as the mesh spacing #{a\to0}; take meshes whose periods fit the
 torus. Define head-directed midpoint links
 ##{U_j(x)=\exp\left(a X_j(x+\tfrac a2 e_j)\right).}
 With the \vocabk{rightmost-first transport convention}{fdip-006N}, the
 #{j}-then-#{k} plaquette is
-##{U_{jk}(x)=U_k(x)^*U_j(x+ae_k)^*U_k(x+ae_j)U_j(x).}
+##{U_{jk}(x)=U_k(x)^{\dagger}U_j(x+ae_k)^{\dagger}U_k(x+ae_j)U_j(x).}
 Its curvature uses the real-algebra bracket #{[X,Y]=XY-YX}:
 ##{F_{jk}=\partial_jX_k-\partial_kX_j-[X_j,X_k].}
 The matrices #{F_{jk}} are skew-adjoint. The invariant form of this
@@ -41,18 +41,18 @@ representation of #{SU(r)} and #{\beta=a^{d-4}/g^2} for unit-charge
 
 \proof{
 \p{Taylor-expand the 4 midpoint values at #{x} and use
-#{\ue^{aX}=I+aX+\tfrac12a^2X^2+O(a^3)}.
+#{\ue^{aX}=\bbI+aX+\tfrac12a^2X^2+O(a^3)}.
 The terms of order #{a} cancel. The variation of the two transverse
 links contributes #{a^2(\partial_jX_k-\partial_kX_j)};
 the products of first-order terms contribute #{-a^2[X_j,X_k]}.
 The midpoint derivatives along each link cancel between opposite
 traversals. Hence, uniformly in #{x},
-##{U_{jk}(x)=I+a^2F_{jk}(x)+O(a^3).}
+##{U_{jk}(x)=\bbI+a^2F_{jk}(x)+O(a^3).}
 To obtain the real trace to the needed order, use the exact identity
 for a unitary #{r\times r} matrix:
 ##{1-\frac{\operatorname{Re}\trace U}{r}
- =\frac1{2r}\trace\bigl((U-I)^*(U-I)\bigr).}
-Since #{F_{jk}^*=-F_{jk}}, one has #{F_{jk}^*F_{jk}=-F_{jk}^2}, and
+ =\frac1{2r}\trace\bigl((U-\bbI)^{\dagger}(U-\bbI)\bigr).}
+Since #{F_{jk}^{\dagger}=-F_{jk}}, one has #{F_{jk}^{\dagger}F_{jk}=-F_{jk}^2}, and
 substitution yields
 ##{1-\frac{\operatorname{Re}\trace U_{jk}(x)}r
  =\frac{a^4}{2r}\bigl(-\trace(F_{jk}(x)^2)\bigr)+O(a^5).}

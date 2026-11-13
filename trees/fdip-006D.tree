@@ -30,14 +30,14 @@ For scalar weights #{w_e>0} and mass #{m>0}, let #{W} act on
 edge fields by #{(Wa)(e)=w_ea(e)}. Define
 ##{\begin{aligned}
 (\extd_Uf)(e)&=f(h(e))-U_ef(s(e)),\\
-L_U&=\extd_U^\dagger W\extd_U,\qquad Q_U=L_U+m^2I_H.
+L_U&=\extd_U^\dagger W\extd_U,\qquad Q_U=L_U+m^2\bbI_H.
 \end{aligned}}
 In a basis of the fiber, this weight is the block-diagonal operator
 of \ref{fdip-00LT}.
 The adjoint uses these declared inner products. Directly,
 ##{\langle f,Q_Uf\rangle
 =\sum_e w_e\|f(h(e))-U_ef(s(e))\|^2+m^2\|f\|^2.}
-Thus #{Q_U\ge m^2I_H>0}. This is the unitary connection version of
+Thus #{Q_U\ge m^2\bbI_H>0}. This is the unitary connection version of
 the [difference energy](fdip-0014); the adjoint qualification is also
 explicit in \citet{Section 3.3, p. 6}{kenyon2011spanning}.}
 
@@ -53,7 +53,7 @@ holonomy need not eliminate all parallel vectors in a higher-dimensional
 or nonfaithful representation.}
 
 \p{Mathlib's \leanref{LinearMap.ker_adjoint_comp_self} gives
-#{\ker(A^*A)=\ker A} for finite-dimensional inner-product spaces.
+#{\ker(A^{\dagger}A)=\ker A} for finite-dimensional inner-product spaces.
 Apply it to #{A=W^{1/2}\extd_U}; positive weights make #{W^{1/2}}
 invertible. This supports the kernel identity, not the connection,
 holonomy or normalizability assertions.}

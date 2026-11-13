@@ -27,24 +27,24 @@ and write #{D_H} for #{D} acting separately on each fiber. Each
 self-loop contributes twice to this sum. The quadratic form in the
 connection background expands as
 #{\langle f,Q_Uf\rangle=\sum_v D_v\|f_v\|^2-\sum_e 2w_e\operatorname{Re}\langle f(h(e)),U_ef(s(e))\rangle}.
-Let #{i_v:F\to F^V} and #{p_v:F^V\to F} be the canonical inclusion
+Let #{\iota_v:F\to F^V} and #{p_v:F^V\to F} be the canonical inclusion
 and evaluation at #{v}. The associated self-adjoint operator is
 #{Q_U=D_H-H_U}, where
-##{H_U=\sum_e w_e\bigl(i_{h(e)}U_ep_{s(e)}
-                    +i_{s(e)}U_e^*p_{h(e)}\bigr).}
-Thus a self-loop contributes #{w_e(U_e+U_e^*)} on its vertex fiber;
+##{H_U=\sum_e w_e\bigl(\iota_{h(e)}U_ep_{s(e)}
+                    +\iota_{s(e)}U_e^{\dagger}p_{h(e)}\bigr).}
+Thus a self-loop contributes #{w_e(U_e+U_e^{\dagger})} on its vertex fiber;
 parallel edges retain separate summands. Let
 #{K_U=D_H^{-1/2}H_UD_H^{-1/2}}. Then
-#{Q_U=D_H^{1/2}(I-K_U)D_H^{1/2}}, so
-#{\det Q_U=(\det D)^n\det(I-K_U)}. The identity connection has
-#{Q_I=Q_1\otimes I_F}, hence #{(\det Q_1)^n=\det Q_I}. It is enough to
-compare #{I-K_U} with #{I-K_I}.}
+#{Q_U=D_H^{1/2}(\bbI-K_U)D_H^{1/2}}, so
+#{\det Q_U=(\det D)^n\det(\bbI-K_U)}. The identity connection has
+#{Q_I=Q_1\otimes \bbI_F}, hence #{(\det Q_1)^n=\det Q_I}. It is enough to
+compare #{\bbI-K_U} with #{\bbI-K_I}.}
 
 \p{The scalar adjacency #{A} is the same sum of directed steps with
 each transport replaced by the scalar identity. In particular, a loop
 contributes #{2w_e} to the value at its vertex. Its
 normalized operator #{K_1=D^{-1/2}AD^{-1/2}} is self-adjoint, and
-#{K_I=K_1\otimes I_F}. The similar operator #{D^{-1}A} has row sums
+#{K_I=K_1\otimes \bbI_F}. The similar operator #{D^{-1}A} has row sums
 #{(D_v-m^2)/D_v<1}, because #{m>0}. Here the row-sum calculation uses
 the canonical delta basis of scalar functions on the finite vertex set.
 The maximum
@@ -65,7 +65,7 @@ of the self-adjoint operator #{K_U} are real and lie in the open interval
 \p{For every such eigenvalue,
 #{\log(1-\lambda)=-\sum_{k\ge 1}\lambda^k/k}. Summing over eigenvalues
 gives
-#{\log\det(I-K_U)=-\sum_{k\ge 1}\frac1k\trace(K_U^k)}.
+#{\log\det(\bbI-K_U)=-\sum_{k\ge 1}\frac1k\trace(K_U^k)}.
 Expanding the trace using the labeled directed-edge summands, a
 closed walk #{\gamma} of length #{k}
 contributes its positive weight
@@ -81,8 +81,8 @@ with equality exactly when the map is the identity. The trace
 parts against the walk weights. Hence
 #{\trace(K_U^k)\le\trace(K_I^k)=n\trace(K_1^k)}.
 Since each trace is at most the corresponding identity trace,
-#{\log\det(I-K_U)\ge\log\det(I-K_I)}. The logarithm is increasing, and
-#{\det(I-K_U)\ge\det(I-K_I)}. The powers of
+#{\log\det(\bbI-K_U)\ge\log\det(\bbI-K_I)}. The logarithm is increasing, and
+#{\det(\bbI-K_U)\ge\det(\bbI-K_I)}. The powers of
 #{\det D} cancel in the comparison. This is the asserted lower bound.}
 
 \p{Equality of the determinants forces equality of the two series. For

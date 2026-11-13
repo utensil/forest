@@ -6,22 +6,22 @@
 \date{2026-11-01}
 
 \p{For an \vocabk{interacting selected background}{fdip-005Y}, put
-#{n=\dim H} and #{r=\operatorname{rank}P}. Write #{i_X:X\to H} and
-#{i_Y:Y\to H} for the inclusions of the image and kernel of #{P}.
+#{n=\dim H} and #{r=\operatorname{rank}P}. Write #{\iota_X:X\to H} and
+#{\iota_Y:Y\to H} for the inclusions of the image and kernel of #{P}.
 Define
 ##{\begin{aligned}
-A&=i_X^*\,Q\,i_X,&K&=i_X^*\,Q\,i_Y,\\
-D&=i_Y^*\,Q\,i_Y>0,&S&=A-KD^{-1}K^*.
+A&=\iota_X^{\dagger}\,Q\,\iota_X,&K&=\iota_X^{\dagger}\,Q\,\iota_Y,\\
+D&=\iota_Y^{\dagger}\,Q\,\iota_Y>0,&S&=A-KD^{-1}K^{\dagger}.
 \end{aligned}}
 The eliminated component, conditionally on the retained vector
 #{x\in X}, has law
 ##{y=\mu(x)+\eta,\qquad
-   \mu(x)=-D^{-1}K^*x,\qquad \eta\sim N(0,D^{-1}).}
+   \mu(x)=-D^{-1}K^{\dagger}x,\qquad \eta\sim N(0,D^{-1}).}
 The full conditional mean and noise covariance are
-##{h(x)=i_Xx-i_YD^{-1}K^*x,\qquad
-   C=i_YD^{-1}i_Y^*.}
-The map #{h} is the harmonic extension: #{i_X^*h(x)=x} and
-#{i_Y^*Qh(x)=0}. It is the unique minimizer of the quadratic
+##{h(x)=\iota_Xx-\iota_YD^{-1}K^{\dagger}x,\qquad
+   C=\iota_YD^{-1}\iota_Y^{\dagger}.}
+The map #{h} is the harmonic extension: #{\iota_X^{\dagger}h(x)=x} and
+#{\iota_Y^{\dagger}Qh(x)=0}. It is the unique minimizer of the quadratic
 energy among fields whose retained component is #{x}. Orthonormal
 coordinates, the coordinate-selector formulas and the quartic
 components are given in \ref{fdip-00LS}.}
@@ -29,8 +29,8 @@ components are given in \ref{fdip-00LS}.}
 \p{Write #{F_\lambda(x)=F_{b,\mathcal V}(\lambda,x)}, with
 #{x\in X}. Then
 ##{\begin{aligned}
-a(x)&=\mathbb E\mathcal V(h(x)+i_Y\eta),\\
-b(x)&=\operatorname{Var}\bigl(\mathcal V(h(x)+i_Y\eta)\bigr),\\
+a(x)&=\mathbb E\mathcal V(h(x)+\iota_Y\eta),\\
+b(x)&=\operatorname{Var}\bigl(\mathcal V(h(x)+\iota_Y\eta)\bigr),\\
 F_\lambda(x)&=\lambda a(x)-\frac{\lambda^2}{2}b(x)
                    +O(\lambda^3).
 \end{aligned}}
@@ -44,7 +44,7 @@ this fiber integral.}
 \proof{
 \p{Choose orthonormal basis maps #{B:\mathbb R^r\to X} and
 #{B_\perp:\mathbb R^{n-r}\to Y}, and use them as the inclusions
-#{i_X} and #{i_Y} for this calculation. A full field is
+#{\iota_X} and #{\iota_Y} for this calculation. A full field is
 #{\phi=Bx+B_\perp y}. Orthogonality preserves the volume and gives
 ##{\begin{aligned}
 \langle\phi,Q\phi\rangle

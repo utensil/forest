@@ -7,11 +7,11 @@
 
 \p{For a \vocabk{selected background}{fdip-005A}, view #{P} as a map
 #{H\to X=\operatorname{im}P} and let #{r=\dim X}. Write
-#{i_X:X\to H} for the inclusion of the image. The counting inner
+#{\iota_X:X\to H} for the inclusion of the image. The counting inner
 product identifies #{X} with its dual, so the compressed operators
 below are endomorphisms of #{X}. The law #{\nu_b=P_*\mu_Q} is the
 centered Gaussian on #{X} with covariance and precision
-##{C_P=i_X^*\,G\,i_X:X\to X,\qquad S_P=C_P^{-1}.}
+##{C_P=\iota_X^{\dagger}\,G\,\iota_X:X\to X,\qquad S_P=C_P^{-1}.}
 The covariance #{C_P} is positive definite. Relative to the induced Euclidean volume #{\lambda_X}, its density is
 ##{\frac{d\nu_b}{d\lambda_X}(x)
  =\frac{\sqrt{\det_X S_P}}{(2\pi)^{r/2}}
@@ -22,26 +22,26 @@ on that basis.}
 
 \proof{
 \p{Let #{B:\mathbb R^r\to H} be an isometric inclusion with image
-#{X}, so #{BB^*=P}. Transporting the domain of #{B} along this
-isometry identifies #{B} with #{i_X}. For nonzero #{x\in X},
+#{X}, so #{BB^{\dagger}=P}. Transporting the domain of #{B} along this
+isometry identifies #{B} with #{\iota_X}. For nonzero #{x\in X},
 #{\langle x,C_Px\rangle=\langle x,Gx\rangle>0}.
-Set #{C=B^*GB}, so #{C>0}. The positive square roots of #{Q}
+Set #{C=B^{\dagger}GB}, so #{C>0}. The positive square roots of #{Q}
 and #{C} exist by the real spectral theorem. The density
 change of variables #{z=Q^{1/2}\phi} gives the standard Gaussian
 density #{(2\pi)^{-|V|/2}\ue^{-|z|^2/2}}: its Jacobian and the
 [normalizer](fdip-002T) cancel. Put
-##{T=C^{-1/2}B^*Q^{-1/2}.}
-Then #{TT^*=C^{-1/2}(B^*GB)C^{-1/2}=I_r}, so its rows extend
+##{T=C^{-1/2}B^{\dagger}Q^{-1/2}.}
+Then #{TT^{\dagger}=C^{-1/2}(B^{\dagger}GB)C^{-1/2}=\bbI_r}, so its rows extend
 to an orthonormal basis of #{H}. The resulting square orthogonal
 matrix carries #{z} to a standard Gaussian, since its Jacobian
 has absolute value one and it preserves the squared norm.
 Its first #{r} coordinates are #{Tz}; integration over the other
 coordinates gives the standard #{r}-dimensional density. Hence
-##{B^*\phi=C^{1/2}Tz}
+##{B^{\dagger}\phi=C^{1/2}Tz}
 has density #{(2\pi)^{-r/2}(\det C)^{-1/2}
 \ue^{-y^TC^{-1}y/2}} by an invertible change of variables.
 The isometry #{B} carries Euclidean volume to #{\lambda_X} and
-#{B(B^*\phi)=P\phi}. This proves the law and its density, rather
+#{B(B^{\dagger}\phi)=P\phi}. This proves the law and its density, rather
 than inferring a law from its covariance alone.}
 
 \p{For #{x,x'\in X}, the covariance of the corresponding linear
@@ -51,16 +51,16 @@ by the [inverse-precision formula](fdip-000B). The matrices of
 #{B'=BU}, are the identities in \ref{fdip-00LL}.}
 }
 
-\p{In the orthogonal split #{H=X\oplus Y}, write #{i_Y:Y\to H}
+\p{In the orthogonal split #{H=X\oplus Y}, write #{\iota_Y:Y\to H}
 for the inclusion of the complement. The blocks of #{Q} are the
 compositions
-##{A=i_X^*\,Q\,i_X,\qquad K=i_X^*\,Q\,i_Y,\qquad D=i_Y^*\,Q\,i_Y.}
+##{A=\iota_X^{\dagger}\,Q\,\iota_X,\qquad K=\iota_X^{\dagger}\,Q\,\iota_Y,\qquad D=\iota_Y^{\dagger}\,Q\,\iota_Y.}
 Since #{Q>0}, the operator #{D} is positive definite. Then
-##{S_P=A-KD^{-1}K^*.}
-The #{Y}-component of #{Q(i_Xx+i_Yy)=i_Xu} is #{K^*x+Dy=0},
-so #{y=-D^{-1}K^*x}, and the #{X}-component is
-#{(A-KD^{-1}K^*)x=u}. Positivity follows by evaluating the
-quadratic form on #{i_Xx-i_YD^{-1}K^*x}. Thus #{C_P} is the
+##{S_P=A-KD^{-1}K^{\dagger}.}
+The #{Y}-component of #{Q(\iota_Xx+\iota_Yy)=\iota_Xu} is #{K^{\dagger}x+Dy=0},
+so #{y=-D^{-1}K^{\dagger}x}, and the #{X}-component is
+#{(A-KD^{-1}K^{\dagger})x=u}. Positivity follows by evaluating the
+quadratic form on #{\iota_Xx-\iota_YD^{-1}K^{\dagger}x}. Thus #{C_P} is the
 inverse of this Schur complement. For #{P=P_R}, this recovers
 the [coordinate marginal](fdip-000E). If #{PQ=QP}, then #{K=0}
 and #{S_P} is the compression of #{Q} to #{X}; symmetry of a
