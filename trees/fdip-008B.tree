@@ -27,27 +27,27 @@ linear in the second argument. The [transfer operator](fdip-0080)
 #{T\otimes \bbI} preserves charged physical states and corresponds
 to #{F\mapsto TF}.}
 
-\p{Suppose further that #{R} is irreducible and put #{n=\dim R}.
+\p{Suppose further that #{R} is irreducible.
 Its [isotypic component](fdip-004V) in this complex Hilbert setting
 is #{\mathcal H_R}, defined as the
 closed span of all images #{F(R)} with #{F\in\mathcal M_R}.
 Then
 ##{\begin{aligned}
 R\otimes\mathcal M_R&\longrightarrow\mathcal H_R,\\
-v\otimes F&\longmapsto\sqrt n\,F(v)
+v\otimes F&\longmapsto\sqrt{\dim R}\,F(v)
 \end{aligned}}
 is a unitary representation isomorphism, with trivial #{K}-action
 on #{\mathcal M_R}. The charged physical space is
 #{\mathcal M_R}, whereas #{\mathcal H_R} includes the additional
 factor #{R}. In finite dimension, their dimensions are respectively
-#{\dim\mathcal M_R} and #{n\dim\mathcal M_R}.}
+#{\dim\mathcal M_R} and #{(\dim R)\dim\mathcal M_R}.}
 
 \proof{
 \p{For an elementary tensor define
 ##{\Phi(x\otimes\lambda)(v)=\lambda(v)x.}
-If #{e_1,\ldots,e_n} is an orthonormal basis of #{R} with dual
-basis #{e_1^*,\ldots,e_n^*}, the inverse is
-##{F\longmapsto\sum_{i=1}^nF(e_i)\otimes e_i^*.}
+If #{e_1,\ldots,e_{\dim R}} is an orthonormal basis of #{R} with dual
+basis #{e_1^*,\ldots,e_{\dim R}^*}, the inverse is
+##{F\longmapsto\sum_{i=1}^{\dim R}F(e_i)\otimes e_i^*.}
 Evaluating on the basis proves both inverse identities. The map
 #{\Phi} is basis independent, so its inverse is as well. Its norm
 is the [Hilbert–Schmidt norm](fdip-007T)
@@ -65,15 +65,15 @@ preserves intertwiners and corresponds to #{T\otimes \bbI}.}
 \p{For irreducible #{R}, unitarity and the intertwining identities
 show that #{F^{\dagger}G:R\to R} commutes with #{\rho(K)}.
 Complex Schur's lemma gives
-##{F^{\dagger}G=\frac{\trace(F^{\dagger}G)}n \bbI_R
- =\frac{\langle F,G\rangle_{\mathrm{HS}}}n \bbI_R.}
+##{F^{\dagger}G=\frac{\trace(F^{\dagger}G)}{\dim R} \bbI_R
+ =\frac{\langle F,G\rangle_{\mathrm{HS}}}{\dim R} \bbI_R.}
 One elementary proof of the lemma chooses an eigenvalue of a
 commuting complex endomorphism: its nonzero invariant eigenspace
 must be all of an irreducible representation. Therefore
 ##{\langle F(v),G(w)\rangle
- =\frac1n\langle v,w\rangle
+ =\frac1{\dim R}\langle v,w\rangle
        \langle F,G\rangle_{\mathrm{HS}}.}
-Extending by linearity in finite sums proves that #{\sqrt n}
+Extending by linearity in finite sums proves that #{\sqrt{\dim R}}
 times evaluation is isometric. Its range is closed, and contains
 every #{F(R)}; by the definition of #{\mathcal H_R}, it is onto.
 The intertwining identity makes it equivariant. This proves the
@@ -88,7 +88,7 @@ restriction on #{\mathcal H_{\mathrm{link}}}.
 The fixed-map step is formalized by
 \leanref{Representation.invariantsEquivIntertwiningMap} for the
 conjugation action on linear maps. The Hilbert–Schmidt isometry and
-#{\sqrt n} normalization are the direct arguments above. The earlier
+#{\sqrt{\dim R}} normalization are the direct arguments above. The earlier
 [real isotypic projectors](fdip-004V) and
 [multiplicity matrices](fdip-004Z) concern whole representation
 components; a projector onto such a component does not by itself
