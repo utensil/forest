@@ -16,14 +16,12 @@ D^2&=\bbI_S\otimes\sum_{j=1}^n\cov_j^2,\\
 In particular #{-D^2=D^{\dagger}D} is positive semidefinite.
 Its complete finite Fourier decomposition has blocks
 ##{\begin{aligned}
-D(p)&=\ui\sum_{j=1}^n\rho(\iota(\varepsilon_j))\sin p_j,\\
 -D(p)^2&=s(p)\bbI_S,\\
 s(p)&=\sum_{j=1}^n\sin^2p_j,
 \end{aligned}}
-where #{p_j=2\pi r_j/N_j} and #{0\le r_j<N_j}.
-The coefficient #{\ui} is the eigenvalue of the centered difference
-on the Fourier mode. It is not an identification of this complex
-Clifford module with a real Clifford algebra.
+where #{p_j=2\pi r_j/N_j}, #{0\le r_j<N_j}, and #{D(p)} is the
+block of #{D} on that character. An eigenvalue #{\mu} of the block
+satisfies #{-\mu^2=s(p)}. When #{s(p)=0} the block is zero.
 The sine convention agrees with the free propagator in
 \citet{Section 9.1, Equations (9.6)-(9.7), p. 20}{wingate2025lattice}
 after setting the spacing to one. The finite decomposition and
@@ -96,12 +94,21 @@ the two vector-valued formulas. Thus
 ##{K=\bigoplus_{r\in\mathcal R}
  S\otimes\mathbb C\chi_r.}
 The forward shift has
-#{T_j\chi_r=\ue^{\ui p_j}\chi_r}, hence
-#{\cov_j\chi_r=\ui\sin p_j\,\chi_r}.
-Each displayed summand is invariant under #{D}, with block
-#{D(p)=\ui\sum_j\gamma_j\sin p_j}.
-Expanding its square using the same anticommutators gives
-#{D(p)^2=-s(p)\bbI_S}.}
+#{T_j\chi_r=\ue^{\ui p_j}\chi_r}, and the backward shift has
+#{T_j^{-1}\chi_r=\ue^{-\ui p_j}\chi_r}. The centered difference
+therefore multiplies the character by
+#{\bigl(\ue^{\ui p_j}-\ue^{-\ui p_j}\bigr)/2}. Expanding the square gives
+##{\bigl(\ue^{\ui p_j}-\ue^{-\ui p_j}\bigr)^2
+=\ue^{2\ui p_j}+\ue^{-2\ui p_j}-2
+=2\cos(2p_j)-2=2(1-2\sin^2 p_j)-2=-4\sin^2 p_j,}
+so dividing by #{4} gives #{\cov_j^2\chi_r=-\sin^2 p_j\,\chi_r}.
+Each character block is invariant under #{D}. The same
+anticommutators as in the square of #{D} give
+#{D(p)^2=-s(p)\bbI_S}. An eigenvalue #{\mu} of the block
+therefore satisfies #{-\mu^2=s(p)}. The sum #{s(p)} vanishes
+exactly when #{\sin p_j=0} for every #{j}. Then
+#{\ue^{\ui p_j}=\ue^{-\ui p_j}} for every #{j}, so each
+#{\cov_j} kills the character and the block is zero.}
 }
 
 \p{Mathlib's \leanref{LinearMap.adjoint} and
