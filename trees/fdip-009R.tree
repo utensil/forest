@@ -47,6 +47,42 @@ remainders gives the stated operator-norm bound. Finally
 \end{aligned}}
 since the two signs cancel when #{i=j}, while the off-diagonal
 anticommutator was already zero.}
+\p{Suppose the dimension #{n=2m} is even, and write #{\Pi} for
+the ordered product of the operators
+#{\varepsilon_1^{S}\otimes\bbI_F} through
+#{\varepsilon_n^{S}\otimes\bbI_F}. This product is the
+pseudoscalar #{\psI} on the represented generators. Conjugation
+by one generator reverses each of the other #{n-1} factors and
+fixes that generator, so it reverses #{\Pi}. Thus #{\Pi}
+anticommutes with each generator. Conjugation by
+#{\varepsilon_\mu^{S}\otimes\bbI_F} sends
+#{\varepsilon_\nu^{S}\otimes\bbI_F} to its negative when
+#{\nu\neq\mu}, and fixes it when #{\nu=\mu}. Conjugation by
+#{\Pi} sends every generator to its negative. Conjugation by
+the product #{\Pi(\varepsilon_\mu^{S}\otimes\bbI_F)} is the
+composition of those two conjugations, so it sends
+#{\varepsilon_\nu^{S}\otimes\bbI_F} to its negative when
+#{\nu=\mu} and fixes it otherwise. For a corner #{\epsilon},
+the product of these elements over the axes with
+#{\epsilon_\mu=1} therefore contributes a minus to
+#{\varepsilon_\nu^{S}\otimes\bbI_F} exactly from the factor
+#{\mu=\nu}, and sends that generator to
+#{(-1)^{\epsilon_\nu}(\varepsilon_\nu^{S}\otimes\bbI_F)}.}
+\p{Reversing the #{n} factors of #{\Pi} takes #{m(2m-1)}
+interchanges, and #{m(2m-1)} has the parity of #{m}, so the
+reversed product is #{(-1)^{m}\Pi}. Each generator is
+self-adjoint, so #{\Pi^{\dagger}=(-1)^{m}\Pi}. The product of
+#{\Pi} with the reversed product is the identity, hence
+#{\Pi^{2}=(-1)^{m}\bbI}. Since #{\Pi} anticommutes with the
+generator,
+#{(\Pi(\varepsilon_\mu^{S}\otimes\bbI_F))^{2}=-\Pi^{2}}.
+When #{m} is even, #{\Pi^{2}=\bbI}, the element
+#{\Pi(\varepsilon_\mu^{S}\otimes\bbI_F)} is skew-adjoint of
+square #{-1}, and
+#{\ui\Pi(\varepsilon_\mu^{S}\otimes\bbI_F)} is self-adjoint of
+square #{+1}. When #{m} is odd, #{\Pi^{2}=-\bbI} and
+#{\Pi(\varepsilon_\mu^{S}\otimes\bbI_F)} is already
+self-adjoint of square #{+1}.}
 }
 
 \p{Thus the centered symbol has #{2^n} local first-order
@@ -54,6 +90,18 @@ branches on the same specified spinor/internal carrier. This is
 the algebraic doubling mechanism behind the sine propagator and
 opposite-slope discussion in
 \citet{Sections 9.1–9.2, Equations (9.6)–(9.7), (9.13)–(9.14), pp. 20–21}{wingate2025lattice}.
+Sharatchandra, Thun and Weisz index these #{2^n} corners by
+subsets of the axes, with symmetric difference as the product
+of two subsets. In even dimension, conjugation by the Clifford
+element of a subset sends each generator to itself times
+#{(-1)} when the axis lies in the subset and times #{(+1)}
+otherwise
+\citet{(2.9)–(2.12), p. 208; (2.13) and (2.16)–(2.19), p. 209}{sharatchandrathunweisz1981susskind}.
+The doubling transformations multiply the field by the Clifford
+element of a subset and by the phase of the corresponding
+corner. They leave the naive action invariant and permute the
+corners up to a sign
+\citet{(2.23)–(2.25), p. 210}{sharatchandrathunweisz1981susskind}.
 The finite periodic grid samples only #{2^e} of these corners
 exactly; an odd period need not sample #{\pi}. Fixed boundary
 twists alter the allowed momenta, as in \ref{fdip-006J}, without
