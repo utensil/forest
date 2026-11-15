@@ -1,0 +1,110 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{Lowest-order cubical Whitney forms commute with the coboundary}
+\date{2026-11-15}
+
+\p{Over #{\mathbb R}, let the dimension of the cubical torus
+of \ref{fdip-00OK} be #{n\ge 1}, and let #{N\ge 2}. Keep the
+coboundary written there. Realize each edge as an interval of
+length #{h>0}. That coboundary remains the difference of face
+values. It has no factor #{h^{-1}}.}
+
+\p{For a #{p}-cube #{c_I(x)}, the lowest-order cubical Whitney
+form is the tensor product of one-dimensional forms. In each
+direction #{i} belonging to #{I}, the factor is
+#{h^{-1}\,\extd y_i}, supported on that cube's own edge and
+equal to zero on every other edge. In each direction outside
+#{I}, the factor is the hat of the base vertex. The Whitney
+map #{\Wh} sends a real cochain to the linear combination of
+these forms with the cochain's values as coefficients. The
+de Rham map #{\Rh} integrates a form over each geometric cube.
+The cochain operator in the identity is the coboundary
+#{\covwedge} of \ref{fdip-00OK}, and the form operator is the
+exterior derivative. Then
+##{\Wh\,\covwedge=\extd\,\Wh,\qquad \Rh\Wh=\bbI.}
+Arnold, Boffi and Bonizzoni denote these forms by
+#{Q_1^{-}\Lambda^p}. They arise as the tensor product of the
+one-dimensional complex
+\citet{(11)–(12), p. 8}{arnoldboffibonizzoni2014cubic}.
+At this order their degrees of freedom are the integrals
+over faces of the same dimension
+\citet{(13), pp. 9–10}{arnoldboffibonizzoni2014cubic},
+and the assembled spaces form a subcomplex
+\citet{p. 10}{arnoldboffibonizzoni2014cubic}.
+The family name is theirs. The two identities on the periodic
+torus are proved here.}
+
+\proof{
+\p{In dimension one, write #{\lambda_j} for the hat that equals
+#{1} at the vertex #{j} and #{0} at every other vertex, and is
+affine on each edge. On the edge from #{j} to #{j+1} the hat
+#{\lambda_j} falls from #{1} to #{0}, so its derivative is
+#{-h^{-1}\,\extd y}. On the edge from #{j-1} to #{j} it rises
+from #{0} to #{1}, so its derivative is #{h^{-1}\,\extd y}.
+The Whitney form of a #{1}-cochain #{\beta} is
+#{\beta(e)\,h^{-1}\,\extd y} on the edge #{e}, and it equals
+zero on every other edge. Evaluation of the hats recovers a
+#{0}-cochain. The integral of #{h^{-1}\,\extd y} over an
+interval of length #{h} is #{1}, and the same form integrates
+to #{0} over every other edge, so integrating recovers a
+#{1}-cochain. Thus #{\Rh\Wh=\bbI} on the circle.}
+
+\p{The coboundary of a function #{f} has value
+#{f(j+1)-f(j)} on the edge from #{j} to #{j+1}, by
+\ref{fdip-00OK}. The exterior derivative of
+#{\sum_j f(j)\lambda_j} equals
+#{(f(j+1)-f(j))\,h^{-1}\,\extd y} on that edge, which is the
+Whitney form of the coboundary. Both sides vanish above
+degree #{1}. This is the circle in degrees #{0} and #{1}.}
+
+\p{In dimension #{n}, the form of a #{p}-cube is the tensor
+product of these one-dimensional forms: the hat of the base
+vertex in each transverse direction, and, in each direction
+#{i} of the cube, the form #{h^{-1}\,\extd y_i} supported on
+that cube's own edge and equal to zero on every other edge.
+The integral of this product over a product cube separates
+as a product. Each edge factor integrates to #{1} on its own
+edge and to #{0} on every other edge. On the cube each
+transverse coordinate is constant, so each transverse hat
+contributes its value at that cube's transverse vertex:
+#{1} at the base vertex and #{0} at every other vertex. The
+product of these values is #{1} on the cube itself and #{0}
+on every other cube of the same directions, so
+#{\Rh\Wh=\bbI}. A form whose directions are not the
+directions of the cube pulls back to #{0} on that cube.}
+
+\p{The exterior derivative hits one transverse hat at a time.
+On the side where the transverse index increases, the hat
+falls, so the derivative contributes #{-h^{-1}\,\extd y_j}.
+Passing that factor through the coordinate forms of the
+directions in #{I} that precede #{j} multiplies by
+#{(-1)^{\sigma}}, where #{\sigma=\sigma(j,I\cup\{j\})} is the
+count in the coboundary of \ref{fdip-00OK}. The two factors
+give the coefficient #{(-1)^{\sigma+1}}. The resulting form
+is supported on the edges of the enlarged cube based at the
+same vertex. The coboundary's value on that cube is the same
+#{(-1)^{\sigma+1}}. For a horizontal edge #{\sigma=1},
+so the value is #{+1}, which is the count in the next
+paragraph. On the other side the hat rises, so the
+derivative contributes #{h^{-1}\,\extd y_j}. The same passage
+multiplies by #{(-1)^{\sigma}}, and the coboundary value on
+the enlarged cube one step back is #{(-1)^{\sigma}}. The
+coefficient equals that value. The factor #{h^{-1}} brought
+by the derivative, together with the #{h^{-p}} from the
+#{p} edge
+factors, is the #{h^{-(p+1)}} in the Whitney form of a
+#{(p+1)}-cochain. Therefore
+#{\extd\,\Wh=\Wh\,\covwedge}.}
+
+\p{On the two-torus the degrees are #{0}, #{1} and #{2}. In
+degree #{2} the coboundary is zero and the exterior
+derivative of the area form is zero. For a horizontal edge
+of cochain value #{1}, the square on the side of increasing
+transverse coordinate receives #{+1} and the square on the
+other side receives #{-1}. That is the coboundary formula,
+and the transverse derivative of the hat produces the same
+two integrals. The vertical edge is the same count with the
+factors exchanged.}
+}
