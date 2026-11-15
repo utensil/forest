@@ -17,31 +17,41 @@ on the cubes whose vertices lie in #{U} and whose one-step
 shifts along the axes still lie in #{U}.}
 
 \proof{
-\p{Constancy gives #{f(y-\varepsilon_i)-f(y)=-a_i}. Define
-operators on cochains by
-##{(e_i\alpha)(c_I(x))
-=(-1)^{\sigma(i,I)}\alpha(c_{I\setminus\{i\}}(x+\varepsilon_i))}
+\p{Constancy gives #{f(y-\varepsilon_i)-f(y)=-a_i}. Write
+##{(S_i^+\alpha)(c_K(x))=\alpha(c_K(x+\varepsilon_i)),\qquad
+(S_i^-\alpha)(c_K(y))=\alpha(c_K(y-\varepsilon_i))}
+for the forward and backward shifts of a cochain. By the insertion
+rule of \ref{fdip-0092},
+##{((e_i\wedge)\beta)(c_I(x))=(-1)^{\sigma(i,I)}\beta(c_{I\setminus\{i\}}(x))}
 when #{i\in I}, and #{0} otherwise, and
-##{(\iota_i\alpha)(c_J(y))
-=(-1)^{\sigma(i,J\cup\{i\})+1}
-\alpha(c_{J\cup\{i\}}(y-\varepsilon_i))}
-when #{i\notin J}, and #{0} otherwise. \ref{fdip-00PJ} becomes
-#{[\extD,f]=\sum_i a_i(e_i+\iota_i)}.}
+##{((e_i\cdot)\beta)(c_J(y))=(-1)^{\sigma(i,J\cup\{i\})}\beta(c_{J\cup\{i\}}(y))}
+when #{i\notin J}, and #{0} otherwise. Thus
+\ref{fdip-00PJ} becomes
+##{[\extD,f]=\sum_i a_i\bigl((e_i\wedge)\circ S_i^+-(e_i\cdot)\circ S_i^-\bigr).}
+The sum is the forward shift followed by #{e_i\wedge}, minus the
+backward shift followed by #{e_i\cdot}. Relative to the unshifted
+generator #{e_i\wedge+e_i\cdot} of \ref{fdip-00R3}, the annihilation
+term carries a minus and the two shifts are opposite.}
 
-\p{The operator #{e_i} lands on cubes that contain #{i}, and
-#{\iota_i} lands on cubes that do not, so #{e_i^2=\iota_i^2=0}.
-On a cube that contains #{i}, #{e_i\iota_i} returns the same
-cube: the backward shift in #{\iota_i} is undone by the forward
-shift in #{e_i}, and the two signs are equal, so one minus
-remains. On a cube that does not contain #{i}, the same
-cancellation runs in the order #{\iota_i e_i}. Thus
-#{e_i\iota_i+\iota_i e_i=-1}. For #{i\neq j} the two orders of
-#{e_i e_j} reach the same shifted face, and the exponents
+\p{The operator #{(e_i\wedge)\circ S_i^+} lands on cubes that contain
+#{i}, and #{(e_i\cdot)\circ S_i^-} lands on cubes that do not, so
+each square vanishes. On a cube that contains #{i}, the forward
+shift undoes the backward shift. The two insertion signs agree, so
+#{((e_i\wedge)\circ S_i^+)((e_i\cdot)\circ S_i^-)} returns the same
+cube, and the minus in front of the annihilation leaves
+##{((e_i\wedge)\circ S_i^+)(-(e_i\cdot)\circ S_i^-)=-1}
+on that cube. On a cube that does not contain #{i}, the same
+cancellation runs in the other order. Thus
+##{\bigl((e_i\wedge)\circ S_i^+\bigr)\bigl(-(e_i\cdot)\circ S_i^-\bigr)
++\bigl(-(e_i\cdot)\circ S_i^-\bigr)\bigl((e_i\wedge)\circ S_i^+\bigr)=-1.} For #{i\neq j} the two orders
+of #{(e_i\wedge)\circ S_i^+} and #{(e_j\wedge)\circ S_j^+} reach the
+same shifted face, and the exponents
 #{\sigma(i,I)+\sigma(j,I\setminus\{i\})} differ by #{1}, so the
-orders anticommute. The same comparison of exponents gives the
-anticommutators of #{\iota_i} with #{\iota_j} and of #{e_i} with
-#{\iota_j}. Therefore
-##{\Bigl(\sum_i a_i(e_i+\iota_i)\Bigr)^2
+orders anticommute. Shifts along distinct axes commute, so the same
+comparison of exponents gives the anticommutators of
+#{(e_i\cdot)\circ S_i^-} with #{(e_j\cdot)\circ S_j^-} and of
+#{(e_i\wedge)\circ S_i^+} with #{(e_j\cdot)\circ S_j^-}. Therefore
+##{\Bigl(\sum_i a_i\bigl((e_i\wedge)\circ S_i^+-(e_i\cdot)\circ S_i^-\bigr)\Bigr)^2
 =-\sum_i a_i^2.}
 }
 
