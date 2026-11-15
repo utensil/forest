@@ -16,9 +16,14 @@ of site functions are pointwise. Define its gradient and directional derivative 
    F_z(q)=\langle z,\mathcal F(q)\rangle.}
 On #{\mathcal D=C_c^\infty(\mathsf Q)}, for arbitrary real
 #{r,z\in\mathsf Q}, the \vocabk{quantum scalar fields}{fdip-00H8}
-and \vocabk{conjugate momenta}{fdip-00H8} satisfy
+and the directional derivatives #{D_z} satisfy
 ##{\begin{aligned}
-[\Phi(r),\Phi(z)]&=[\Pi(r),\Pi(z)]=0,\\
+[\Phi(r),\Phi(z)]&=[D_r,D_z]=0,\\
+[D_z,\Phi(r)]&=\langle r,z\rangle\bbI.
+\end{aligned}}
+Set #{\Pi(z)=-\ui D_z}, the \vocabk{conjugate momentum}{fdip-00H8}.
+These operators satisfy
+##{\begin{aligned}
 [\Phi(r),\Pi(z)]&=\ui\langle r,z\rangle\bbI,\\
 \ui[H,\Phi(r)]&=\Pi(r),&
 \ui[H,\Pi(z)]&=-M_{F_z}.
@@ -48,7 +53,14 @@ The algebraic invariance of #{\mathcal D} does not assert
 its preservation by real-time evolution.}
 
 \proof{
-\p{The product rule on test functions gives the commutators.
+\p{The product rule on test functions gives
+#{[D_z,\Phi(r)]f=\langle r,z\rangle f}. Mixed partials give
+#{[D_r,D_z]=0}, and multiplications commute. With
+#{\Pi(z)=-\ui D_z},
+##{[\Phi(r),\Pi(z)]
+ =-\ui[\Phi(r),D_z]
+ =\ui[D_z,\Phi(r)]
+ =\ui\langle r,z\rangle\bbI.}
 In particular #{D_zU=F_z} and
 #{[M_U,\Pi(z)]f=\ui F_zf}, so multiplication
 by #{\ui} gives the negative force. This computes the canonical
