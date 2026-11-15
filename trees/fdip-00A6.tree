@@ -10,10 +10,10 @@ Gauge covariance makes its determinant constant on orbits. The comparison
 below identifies the minimum. It is the value on the identity connection,
 attained exactly when every closed walk acts as the identity on the fiber.}
 
-\p{Let #{F} have dimension #{n} over its scalar field, and let #{Q_1} be
+\p{Let #{F} have dimension #{r} over its scalar field, and let #{Q_1} be
 the scalar massive precision of the same finite graph, the same positive
 edge weights, and the same mass #{m>0}. For every connection,
-#{\det Q_U\ge(\det Q_1)^n}. Equality holds if and only if every closed
+#{\det Q_U\ge(\det Q_1)^r}. Equality holds if and only if every closed
 walk acts as the identity on #{F}. Every connection in the identity orbit
 has that property. So does every connection whose holonomy acts through
 the kernel of #{\rho}.}
@@ -22,88 +22,146 @@ the kernel of #{\rho}.}
 both determinants are #{1}, and the closed-walk condition is vacuous.
 Assume henceforth that the vertex set is nonempty. Write #{D} for the
 positive multiplication operator on scalar functions with
-##{D_v=m^2+\sum_e w_e\bigl(\mathbf1_{s(e)=v}+\mathbf1_{h(e)=v}\bigr),}
-and write #{D_H} for #{D} acting separately on each fiber. Each
-self-loop contributes twice to this sum. The quadratic form in the
+##{D_v=m^2+\sum_e w_e\bigl(\mathbf1_{s(e)=v}+\mathbf1_{h(e)=v}\bigr).}
+Each self-loop contributes twice to this sum. The quadratic form in the
 connection background expands as
 #{\langle f,Q_Uf\rangle=\sum_v D_v\|f_v\|^2-\sum_e 2w_e\operatorname{Re}\langle f(h(e)),U_ef(s(e))\rangle}.
-Let #{\iota_v:F\to F^V} and #{p_v:F^V\to F} be the canonical inclusion
-and evaluation at #{v}. The associated self-adjoint operator is
-#{Q_U=D_H-H_U}, where
-##{H_U=\sum_e w_e\bigl(\iota_{h(e)}U_ep_{s(e)}
-                    +\iota_{s(e)}U_e^{\dagger}p_{h(e)}\bigr).}
-Thus a self-loop contributes #{w_e(U_e+U_e^{\dagger})} on its vertex fiber;
-parallel edges retain separate summands. Let
-#{K_U=D_H^{-1/2}H_UD_H^{-1/2}}. Then
-#{Q_U=D_H^{1/2}(\bbI -K_U)D_H^{1/2}}, so
-#{\det Q_U=(\det D)^n\det(\bbI -K_U)}. The identity connection has
-#{Q_I=Q_1\otimes \bbI_F}, hence #{(\det Q_1)^n=\det Q_I}. It is enough to
-compare #{\bbI -K_U} with #{\bbI -K_I}.}
+Expanding #{\|U_ef(s(e))-f(h(e))\|^2} gives the same form,
+##{\langle f,Q_Uf\rangle=\sum_v m^2\|f_v\|^2+\sum_e w_e\|U_ef(s(e))-f(h(e))\|^2,}
+because #{D_v} contributes the mass and one weight for each end of an
+incident edge, and a self-loop is counted at both ends. Parallel edges
+retain separate summands. For the identity connection every transport is the identity, so the
+form is the scalar form of #{Q_1} on each vector of an orthonormal
+basis of #{F}. Thus #{Q_I=Q_1\otimes\bbI_F} and
+#{(\det Q_1)^r=\det Q_I}.}
 
-\p{The scalar adjacency #{A} is the same sum of directed steps with
-each transport replaced by the scalar identity. In particular, a loop
-contributes #{2w_e} to the value at its vertex. Its
-normalized operator #{K_1=D^{-1/2}AD^{-1/2}} is self-adjoint, and
-#{K_I=K_1\otimes \bbI_F}. The similar operator #{D^{-1}A} has row sums
-#{(D_v-m^2)/D_v<1}, because #{m>0}. Here the row-sum calculation uses
-the canonical delta basis of scalar functions on the finite vertex set.
-The maximum
-absolute row sum is strictly less than #{1}, so the spectral radius
-of #{D^{-1}A} is strictly less than #{1}. Since
-#{K_1=D^{1/2}(D^{-1}A)D^{-1/2}}, the operator #{K_1} has the same
-spectral radius. Self-adjointness gives #{\|K_1\|=\rho(K_1)<1}.}
+\p{The comparison is the following claim, applied with every mass equal
+to #{m}. Let each vertex #{v} carry a mass #{m_v>0}, and allow loops
+and parallel edges. For unitary or orthogonal fiber maps #{U_e},
+##{\langle f,Qf\rangle=\sum_v m_v^2\|f_v\|^2+\sum_e w_e\|U_ef(s(e))-f(h(e))\|^2,}
+and let #{Q_1} be the same expression on scalar functions with every
+transport equal to #{1}. Then #{\det Q\ge(\det Q_1)^r}, with equality
+if and only if every closed walk acts as the identity on #{F}.
+Parallel transport along #{e} sends a vector at the source to #{U_e}
+times that vector at the head. A walk acts by the ordered product,
+with the first edge on the right.}
 
-\p{The same comparison bounds the connection. For a section #{f}, set
-#{y_v=\|f_v\|}. Bound each directed edge contribution separately by
-unitarity, then apply the triangle inequality at each vertex. This gives
-#{\|(H_Uf)_v\|\le(Ay)_v}. Conjugating by #{D^{1/2}} yields
-#{\|(K_Uf)_v\|\le(K_1y)_v}. Therefore
-#{\|K_Uf\|\le\|K_1y\|\le\|K_1\|\|f\|}, and #{\|K_U\|<1}. The eigenvalues
-of the self-adjoint operator #{K_U} are real and lie in the open interval
-#{(-1,1)}.}
+\p{If #{A} is self-adjoint and positive definite and #{P} is
+self-adjoint and positive semidefinite, then, with respect to
+the inner product #{\langle u,Av\rangle}, the operator #{A^{-1}P}
+is self-adjoint. It is therefore diagonalizable over the scalar
+field of #{F}, with finitely many nonnegative eigenvalues. Thus
+#{\det(A+P)=\det(A)\prod(1+\lambda)}, and
+#{\det(A+P)\ge\det(A)}, with equality exactly when #{P=0}.}
 
-\p{For every such eigenvalue,
-#{\log(1-\lambda)=-\sum_{k\ge 1}\lambda^k/k}. Summing over eigenvalues
-gives
-#{\log\det(\bbI -K_U)=-\sum_{k\ge 1}\frac1k\trace(K_U^k)}.
-Expanding the trace using the labeled directed-edge summands, a
-closed walk #{\gamma} of length #{k}
-contributes its positive weight
-#{w(\gamma)=\prod_{e\in\gamma}\frac{w_e}{\sqrt{D_{s(e)}D_{h(e)}}}} times the
-trace of its holonomy. The holonomy is the ordered product of the fiber
-maps, with the first edge on the right, because parallel transport along
-#{e} sends #{f(s(e))} to #{U_ef(s(e))}. Both orientations of a
-self-loop occur as length-one steps, even when they have the same
-endpoints; parallel edge labels likewise remain distinct. A unitary or orthogonal map has
-eigenvalues on the circle, so the real part of its trace is at most #{n},
-with equality exactly when the map is the identity. The trace
-#{\trace(K_U^k)} is real and equals the sum of those real
-parts against the walk weights. Hence
-#{\trace(K_U^k)\le\trace(K_I^k)=n\trace(K_1^k)}.
-Since each trace is at most the corresponding identity trace,
-#{\log\det(\bbI -K_U)\ge\log\det(\bbI -K_I)}. The logarithm is increasing, and
-#{\det(\bbI -K_U)\ge\det(\bbI -K_I)}. The powers of
-#{\det D} cancel in the comparison. This is the asserted lower bound.}
+\p{Proceed by induction on the number of vertices. The empty graph has
+both determinants equal to #{1}. A self-loop at #{v} contributes
+#{w_e\|(U_e-\bbI)f_v\|^2}. The sum #{P} of those terms vanishes if and
+only if every loop transport is the identity, because each weight is
+positive. A scalar loop contributes #{0}, so removing the loops does
+not change #{Q_1}. Thus #{\det Q\ge\det Q^\circ}, where #{Q^\circ} is
+the loopless operator, with equality exactly when every loop acts as
+the identity. Deleting an identity loop from a closed walk does not
+change the holonomy. The claim on the original graph is therefore the
+claim on #{Q^\circ}.}
 
-\p{Equality of the determinants forces equality of the two series. For
-every #{k\ge 1},
-##{\trace(K_U^k)=\trace(K_I^k).}
-Their difference is the sum, over closed walks, of the positive weight
-times #{n-\operatorname{Re}\trace\operatorname{Hol}(\gamma)}.
-Each summand is nonnegative, so each vanishes. Every closed walk
-therefore acts as the identity on #{F}. Conversely, that condition makes every
-walk contribution agree with the identity connection, and the
-determinants agree.}
+\p{If a vertex #{v} meets no edge, its block is #{m_v^2\bbI_F}. The
+determinant factors as #{m_v^{2r}} times the determinant on the
+remaining vertices, and #{Q_1} contributes the factor #{m_v^2}. No
+closed walk meets #{v}. The inductive hypothesis gives the claim.}
 
-\p{These connections are exactly the identity orbit in the represented
-gauge group. Choose a root in each connected component and propagate
-#{\rho(U)} along any walk from that root. The product is independent of
-the walk because every closed walk acts as the identity. The resulting
-vertex operators #{g_v} satisfy #{U_e=g_{h(e)}g_{s(e)}^{-1}}. In the
-other direction, a gauge transform of the identity has determinant
-#{\det Q_I} by the covariance already cited. A holonomy in the kernel of
-#{\rho} is invisible to #{Q_U}: equality sees the action on #{F}, not a
-finer group element.}
+\p{Suppose #{v} meets at least one edge, and write
+#{\beta=m_v^2+\sum_{e\ni v}w_e}. The diagonal block at #{v} is
+#{\beta\bbI_F}. Each incident edge contributes #{w_e\|f_v\|^2}, and
+the cross terms lie off that block. Order the remaining vertices
+before #{v}, and write #{M} for the remaining block and #{B} for the
+cross block. Then
+##{Q^\circ=
+\begin{pmatrix}\bbI&\beta^{-1}B\\0&\bbI\end{pmatrix}
+\begin{pmatrix}S&0\\0&\beta\bbI_F\end{pmatrix}
+\begin{pmatrix}\bbI&0\\\beta^{-1}B^{\dagger}&\bbI\end{pmatrix},}
+with #{S=M-\beta^{-1}BB^{\dagger}}. The outer factors are unipotent, so
+#{\det Q^\circ=\beta^r\det S}. The same calculation on scalars gives
+#{\det Q_1=\beta\det S_1}.}
+
+\p{For each edge #{e} incident to #{v}, let #{u(e)} be the other end
+and let #{R_e} be the unitary or orthogonal map in
+#{w_e\|R_ef_{u(e)}-f_v\|^2}. Thus #{R_e=U_e} when #{e} points toward
+#{v}, and #{R_e=U_e^{\dagger}} when #{e} points away from #{v}. Edges
+that do not meet #{v}, and the original masses on the remaining
+vertices, stay as they are. Completing the square in #{f_v} subtracts
+#{\beta^{-1}\|\sum_e w_e R_ef_{u(e)}\|^2}. Write #{g_e=R_ef_{u(e)}}.
+Polarization expands the subtracted square as
+##{\Bigl\|\sum_e w_e g_e\Bigr\|^2
+=\sum_e w_e^2\|g_e\|^2
++\sum_{e<e'}w_ew_{e'}
+\bigl(\|g_e\|^2+\|g_{e'}\|^2-\|g_e-g_{e'}\|^2\bigr).}
+After the diagonal pair terms are moved, the coefficient of
+#{\|g_e\|^2} is #{w_e-\beta^{-1}w_e\sum_{e'}w_{e'}}. This equals
+#{w_em_v^2/\beta}, because #{m_v^2+\sum_{e'}w_{e'}=\beta}. Since
+#{R_e} preserves the norm, the same coefficient multiplies
+#{\|f_{u(e)}\|^2}. Therefore
+##{\sum_e w_e\|f_{u(e)}\|^2
+-\beta^{-1}\Bigl\|\sum_e w_e R_ef_{u(e)}\Bigr\|^2
+=\tfrac{m_v^2}{\beta}\sum_e w_e\|f_{u(e)}\|^2
++\tfrac1\beta\sum_{e<e'}w_ew_{e'}
+\|R_ef_{u(e)}-R_{e'}f_{u(e')}\|^2.}
+The first sum adds #{(m_v^2/\beta)w_e} to the mass squared at
+#{u(e)}, so every corrected mass stays positive. If
+#{u(e)\neq u(e')}, the pair is an edge from #{u(e)} to #{u(e')}
+of weight #{w_ew_{e'}/\beta} and transport #{R_{e'}^{\dagger}R_e};
+its full squared norm includes both diagonal weights. If
+#{u(e)=u(e')}, the pair is a positive semidefinite term of that
+weight, and it vanishes for every vector exactly when
+#{R_e=R_{e'}}. The corrected masses, the edges that miss #{v}, and
+the edges between distinct outer ends define #{Q^\sharp}. The
+same-end pairs are the remainder #{P}, so #{S=Q^\sharp+P}. Hence
+#{\det S\ge\det Q^\sharp}, with equality exactly when #{P=0}, that
+is, when every two edges from #{v} to the same neighbor have the
+same transport. For the scalar identity every same-end pair
+vanishes and every new transport is #{1}, so #{S_1} is the scalar
+form #{Q^\sharp_1} of #{Q^\sharp}.}
+
+\p{The operator #{Q^\sharp} has fewer vertices, positive weights, and
+a positive mass at each remaining vertex, so it is positive definite.
+By induction, #{\det Q^\sharp\ge(\det Q^\sharp_1)^r}, with equality
+exactly when every closed walk of #{Q^\sharp} acts as the identity.
+Therefore
+#{\det Q^\circ=\beta^r\det S\ge\beta^r(\det Q^\sharp_1)^r=(\det Q_1)^r}.
+Equality holds for #{Q^\circ} exactly when every repeated pair at
+#{v} has one transport and every closed walk of #{Q^\sharp} acts as
+the identity. Together with the removal of loops, equality holds for
+#{Q} exactly when every loop transport is the identity as well.}
+
+\p{A walk that enters #{v} on #{e} and leaves on #{e'} has transport
+#{R_{e'}^{\dagger}R_e}. Between distinct outer ends, that is the
+transport of the effective edge. At one outer end and with #{P=0},
+the transport is the identity and those two edges contribute no new
+edge. Suppose every closed walk of the original graph acts as the
+identity. Then every loop transport is the identity and every
+repeated pair at #{v} has one transport. Replacing each effective
+edge in a closed walk of #{Q^\sharp} by those two edges produces a
+closed walk of the original graph with the same holonomy, so every
+closed walk of #{Q^\sharp} acts as the identity. Conversely, suppose
+every loop transport is the identity, every repeated pair at #{v}
+has one transport, and every closed walk of #{Q^\sharp} acts as the
+identity. In an original closed walk, replace each entrance to
+#{v} and the following exit by the effective edge, or delete the
+pair when it is an identity return. The result is a closed walk of
+#{Q^\sharp} with the same holonomy, so the original walk acts as
+the identity. Thus these conditions hold if and only if every closed
+walk of the original graph acts as the identity. This is the claim.}
+
+\p{Equality in the theorem says that every closed walk acts as the
+identity on #{F}. These connections are exactly the identity orbit in
+the represented gauge group. Choose a root in each connected component
+and propagate #{\rho(U)} along any walk from that root. The product is
+independent of the walk because every closed walk acts as the identity.
+The resulting vertex operators #{g_v} satisfy
+#{U_e=g_{h(e)}g_{s(e)}^{-1}}. In the other direction, a gauge transform
+of the identity has determinant #{\det Q_I} by the covariance already
+cited. A holonomy in the kernel of #{\rho} is invisible to #{Q_U}:
+equality sees the action on #{F}, not a finer group element.}
 }
 
 \p{When #{F} is real, the induced action
