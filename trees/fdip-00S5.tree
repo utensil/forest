@@ -1,0 +1,61 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{A uniform diagonal weight scales the square by the spacing}
+\date{2026-11-15}
+
+\p{Let #{k} be a commutative unital ring, and let #{h} be a unit
+of #{k}. Keep the cubical torus and the coboundary of
+\ref{fdip-00OK}, in dimension #{n}. On #{p}-cochains, give every
+cube the weight #{h^{n-2p}}. This weight is the ratio of dual
+volume to primal volume for a cube of side #{h}, which is the
+ratio read from
+\citet{Definition 6.1, p. 15}{desbrunhiranileokmarsden2005dec}.
+The weighted pairing is then #{h^{n-2p}} times the counting
+pairing of \ref{fdip-00OL}.}
+
+\p{Let #{\extdag} be the adjoint of #{\covwedge} for this
+pairing, and let #{\extdag_0} be the counting adjoint. Then
+#{\extdag=h^{-2}\extdag_0} in every degree. The square
+#{\covsq=-(\covwedge\extdag+\extdag\covwedge)} equals
+#{h^{-2}} times the counting square.}
+
+\proof{
+\p{In each degree the cochain module is finite and free on
+the cubes. The counting pairing is the coordinate dot product,
+so the counting adjoint is the transpose, as in
+\ref{fdip-00OL}. Write #{W_p} for multiplication by the unit
+#{h^{n-2p}}. The ring is commutative, so this scalar is
+central and self-adjoint for the counting pairing. Its inverse
+is multiplication by #{h^{2p-n}}.}
+
+\p{The weighted pairing in degree #{p} is
+#{\langle\alpha,\beta\rangle_w=\langle W_p\alpha,\beta\rangle_0}.
+For a #{p}-cochain #{\alpha} and a #{(p+1)}-cochain #{\beta},
+##{\langle\covwedge\alpha,\beta\rangle_w
+=\langle W_{p+1}\covwedge\alpha,\beta\rangle_0
+=\langle\alpha,\extdag_0 W_{p+1}\beta\rangle_0
+=\langle\alpha,W_p^{-1}\extdag_0 W_{p+1}\beta\rangle_w.}
+The weighted adjoint is therefore
+#{W_p^{-1}\extdag_0 W_{p+1}}. The scalar ratio is
+##{h^{n-2(p+1)-(n-2p)}=h^{-2}.}
+The same ratio appears in every degree.}
+
+\p{On #{\mathbb{T}^2} the three weights are #{h^2}, #{1} and
+#{h^{-2}}. Each of the two adjoint steps, from degree #{0} to
+degree #{1} and from degree #{1} to degree #{2}, multiplies the
+counting adjoint by #{h^{-2}}.}
+
+\p{Each of #{\covwedge\extdag} and #{\extdag\covwedge}
+contains one adjoint, so both scale by #{h^{-2}}, and so does
+#{\covsq}. \ref{fdip-00OP} records the same conjugation when
+the ground ring is an ordered field and the weights are an
+arbitrary positive family. The scalar ratio here uses only
+that #{h} is a unit.}
+
+\p{\citet{Definition 12.2, p. 39}{desbrunhiranileokmarsden2005dec}
+multiplies the pairing in every degree by the constant #{1/n}.
+That constant cancels in the ratio of consecutive weights, so
+the adjoint is still #{h^{-2}} times the counting adjoint.}
+}
