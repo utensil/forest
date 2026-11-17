@@ -1,0 +1,67 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{The 15 classes of ordered unit pairs}
+\date{2026-11-17}
+
+\p{For the \vocabk{one-vertex Hurwitz model}{fdip-00ZA},
+let #{c_{s,t}} count the ordered pairs with scalars
+#{s,t} as in \ref{fdip-00ZD}. Its nonzero values are
+##{\begin{array}{r|r|r}
+s&t&c_{s,t}\\\hline
+0&0&1\\
+1&0&16\\
+2&0&28\\
+2&2&48\\
+3&0&16\\
+3&2&96\\
+4&0&46\\
+4&2&96\\
+4&4&24\\
+5&0&16\\
+5&2&96\\
+6&0&28\\
+6&2&48\\
+7&0&16\\
+8&0&1
+\end{array}}
+The counts sum to #{576}.}
+
+\proof{
+\p{The explicit list in \ref{fdip-00V1} splits into
+#{1}, #{-1}, the 6 axial units
+#{\pm\qi,\pm\qj,\pm\qk}, and two sets of #{8}
+half-integer units with real part #{1/2} or #{-1/2}.
+By \ref{fdip-00ZI}, their individual values of
+#{N(U^{-1}-1)} are respectively #{0,4,2,1,3}.}
+
+\p{A central factor makes #{t=0}. The 4 ordered
+central pairs contribute #{1,2,1} at #{s=0,4,8}.
+Pairs with one central and one axial factor contribute
+#{12} at each of #{s=2,6}. Pairs with one central and
+one half-integer factor contribute #{16} at each of
+#{s=1,3,5,7}. These counts include both orders.}
+
+\p{Among the #{36} axial pairs, each first unit has two
+second units on its own axis. The resulting #{12} pairs
+have #{s=4,t=0}; the other #{24} pairs have #{s=4,t=4}.
+For an axial and a half-integer unit the imaginary squared
+lengths are #{1,3/4}, with squared dot product #{1/4}.
+Thus #{t=2}. Each real-part sign of the half-integer unit
+gives #{2\cdot6\cdot8=96} pairs in both orders, at
+#{s=3} and #{s=5}, respectively.}
+
+\p{Fix the ordered real-part signs of two half-integer
+units. There are #{8\cdot8=64} imaginary sign pairs.
+For each first sign triple, two second triples are equal
+or opposite to it. These #{16} choices have squared dot
+product #{9/16} and #{t=0}. The remaining #{48} have
+squared dot product #{1/16} and #{t=2}, since both
+squared lengths are #{3/4}. Two positive real parts give
+#{s=2}, two negative real parts give #{s=6}, and the two
+mixed sign orders give #{s=4}. Adding these disjoint
+cases gives the table; in particular the count at
+#{(4,0)} is #{2+12+32=46}. Their total is
+#{4+24+64+36+192+256=576}.}
+}

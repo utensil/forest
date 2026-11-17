@@ -1,0 +1,36 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Lemma}
+\title{The trace total in each class}
+\date{2026-11-17}
+
+\p{For left multiplication on the rational Hurwitz fiber,
+##{\trace_F L_z=4\operatorname{Re}z.}
+For each class counted in \ref{fdip-00ZK},
+##{\sum_{(U,V)\text{ with }(s,t)}\trace_F L_U
+=c_{s,t}(4-s).}}
+
+\proof{
+\p{In the rational basis #{(1,\qi,\qj,\qk)}, left
+multiplication by each of #{\qi,\qj,\qk} has zero
+diagonal: it sends every basis element to a signed
+different basis element. The scalar part of #{z} acts
+as #{\operatorname{Re}z} on each of the 4 basis
+vectors. Linearity of trace gives the first identity;
+trace is unchanged by passage to the Hurwitz basis.}
+
+\p{Swapping #{U} and #{V} preserves #{s} and negates
+#{ab-ba}, so preserves #{t} as well. The two class
+sums of #{\trace_F L_U} and #{\trace_F L_V} are
+therefore equal. By \ref{fdip-00ZI}, at each pair
+##{\trace_F L_U+\trace_F L_V
+=4(\operatorname{Re}U+\operatorname{Re}V)=2(4-s).}
+Sum and divide by #{2} in #{\mathbb Q} to obtain the
+class total.}
+}
+
+\p{The left-multiplication trace component is
+\leanref/tauceti{QuaternionAlgebra.trace_mulLeft},
+specialized to ordinary quaternions. The finite class
+sum also uses the swap of the two loop links.}
