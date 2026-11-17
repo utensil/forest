@@ -1,0 +1,45 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Definition}
+\title{The cellular paired anti-reflection}
+\date{2026-11-17}
+
+\p{For the \vocabk{cellular sign model}{fdip-00XN}, define the
+\newvocab{cochain reflection} #{\cellref_U} by
+##{\begin{aligned}
+ (\cellref_0 f)(v_j)&=f(v_{1-j}),\\
+ (\cellref_1(U)a)(e_j)&=-u_ja(e_j)\qquad(j=0,1),\\
+ \cellref_U&=\cellref_0\oplus\cellref_1(U).
+\end{aligned}}
+The edge sign reverses orientation; its link factor transports
+from the reflected source back to the declared source.}
+
+\p{Use the common algebra
+#{\mathscr A=\operatorname{Fun}(\Omega,\mathcal A(V))}
+with pointwise exterior multiplication. Its
+\newvocab{cellular paired anti-reflection} is conjugate-linear
+on coefficients, fixes the link functions, and has generator
+rules
+##{\begin{aligned}
+ \Theta_U(\psi_c)&=\sum_a(\cellref_U)_{ac}\bar\psi_a,\\
+ \Theta_U(\bar\psi_c)&=\sum_a(\cellref_U)_{ac}\psi_a,\\
+ \Theta_U(ab)&=\Theta_U(b)\Theta_U(a).
+\end{aligned}}
+Thus #{(\Theta a)(U)=\Theta_U(a(U))}.
+Its \newvocab{strict positive half-algebra}
+#{\mathscr A_+} consists of constant families generated over
+#{k} by #{\psi_{v_1},\bar\psi_{v_1}}. The edge generators
+belong to the full algebra, not this open half.}
+
+\p{Let #{\mathcal I_V} be the
+\vocabk{ring paired coefficient}{fdip-00TJ}. The
+\newvocab{cellular paired functional} is
+##{\begin{aligned}
+ Z&=\sum_{U\in\Omega}\det K_U,\\
+ \ell(a)&=Z^{-1}\sum_{U\in\Omega}
+ \mathcal I_V\bigl(a(U)\extexp(\theta_{K_U})\bigr)
+ \qquad\text{when }Z\ne0.
+\end{aligned}}
+Here #{\extexp} is the finite exterior exponential and
+#{\theta_{K_U}=-\bar\psi(K_U\psi)}.}

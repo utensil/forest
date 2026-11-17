@@ -1,0 +1,46 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{The finite Hermitian Gram criterion}
+\date{2026-11-17}
+
+\p{The \vocabk{reflection form}{fdip-00XF} of a reflection-compatible
+functional is Hermitian. On any specified finite-dimensional
+half-subspace, reflection positivity is equivalent to positive
+semidefiniteness of its Gram matrix in one, and hence every, basis.}
+
+\proof{
+\p{Conjugate linearity in the first argument and linearity in
+the second follow from the definitions. Compatibility and order
+reversal give
+##{\begin{aligned}
+ \overline{B_\ell(a,b)}
+ &=\ell\bigl(\Theta((\Theta a)b)\bigr)\\
+ &=\ell((\Theta b)a)=B_\ell(b,a).
+\end{aligned}}
+In particular each diagonal value lies in #{k_0}.}
+
+\p{Choose a basis #{a_1,\ldots,a_N} of the specified subspace
+and write #{G_{ij}=\ell((\Theta a_i)a_j)}.
+For #{a=\sum_jz_ja_j}, expansion gives
+##{B_\ell(a,a)=\sum_{i,j}\bar z_iG_{ij}z_j.}
+Every coefficient vector occurs, so nonnegativity of this
+expression is exactly positive semidefiniteness of the
+Hermitian matrix #{G}. A change of basis with matrix #{C}
+replaces #{G} by #{C^\dagger GC}, where the dagger is conjugate
+transpose for the standard Hermitian pairing on coordinate
+vectors. The quadratic form itself is unchanged.}
+
+\p{For an exterior half-algebra on ordered odd generators,
+the increasing monomials, including the empty monomial,
+give the basis. For an even or gauge-invariant subspace,
+use a basis of that subspace instead. Neither a nonsingular
+Gram matrix nor a sign condition on a fermion determinant
+is needed.}
+}
+
+\p{The finite-matrix characterization is the component
+\leanref{Matrix.posSemidef_iff_dotProduct_mulVec}.
+The construction of #{\Theta}, the half-algebra and #{\ell}
+is additional data in this theorem.}
