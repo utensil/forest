@@ -1,0 +1,99 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{Universal Hurwitz coupling leaves the internal right algebra}
+\date{2026-11-17}
+
+\p{For the \vocabk{constant right actions}{fdip-00VK}, over
+every commutative ring #{k} and every uniform period
+#{N\ge1}, the geometric part of the universal commutant is
+the scalar action. The full
+\vocabk{universal right-action commutant}{fdip-00VK} is
+exactly the internal right algebra
+##{\{R_a^{\mathrm{int}}:a\in\mathcal O_k\}
+       \cong\mathcal O_k^{\mathrm{op}}.}
+This includes #{n=2} and #{n=4}. At the free background
+all geometric right actions commute when #{N=1} or
+#{N=2}; for #{N\ge3} the free geometric commutant is
+already scalar.}
+
+\proof{
+\p{Write #{L_z} for left multiplication by a coefficient
+#{z\in\mathcal O_k}. Geometric right actions commute with
+#{e_i\wedge+e_i\cdot}, which is left Clifford multiplication.
+Internal right actions commute with every #{L_z}.
+Both families commute with every vertex gauge. The free
+period statements are \ref{fdip-00OT}, with an unchanged
+coefficient factor.}
+
+\p{First suppose #{N=1}. Put the unit #{\qi} on direction
+#{i} and identity links on the other directions. The
+inverse-link formula gives #{T_i=-L_{\qi}} and
+#{T_i^{-1}=L_{\qi}}. Thus
+##{\extD_U=-(e_i\wedge+e_i\cdot)\otimes\bbI
+              -(e_i\wedge-e_i\cdot)\otimes L_{\qi}.}
+The first summand commutes with every geometric right
+action. Since #{L_{\qi}} is invertible, the commutator
+equation forces commutation with
+#{e_i\wedge-e_i\cdot}. Repeat this for each direction.}
+
+\p{The integral basis unit #{h} of \ref{fdip-00V1}
+satisfies #{h^{-1}=1-h}. With only this link nontrivial,
+the same transport formula gives
+##{\extD_U=-(e_i\wedge-e_i\cdot)\otimes L_h
+                 -(e_i\cdot)\otimes\bbI.}
+The preceding constraint removes the first commutator,
+so the action commutes with contraction. It then commutes
+with exterior multiplication as well. This argument uses
+the integral unit #{h}; it makes no division by #{2} in
+#{k}.}
+
+\p{For #{N=2}, fix a vertex #{x} and change only the
+positive labeled link #{(x,i)} from #{1} to #{h}.
+The incoming positive link #{(x+\varepsilon_i,i)}
+is a different label and remains #{1}. The change in
+the block carrying the cochain at #{x+\varepsilon_i}
+to the value at #{x} is
+##{-(e_i\wedge)\otimes L_h,}
+because #{h^{-1}-1=-h}. Subtract the free and changed
+commutator equations. Arbitrary values at this neighbor
+and invertibility of #{L_h} force commutation with
+#{e_i\wedge}. Commutation with the left Clifford sum
+then gives commutation with #{e_i\cdot}.}
+
+\p{If #{N\ge3}, the universal condition includes the free
+background. The vertices #{x\pm\varepsilon_i} are then
+distinct from one another and from #{x}. Prescribing a
+cochain at one neighbor and zero at the others separates
+the forward exterior multiplication and the backward
+contraction. Their commutators must vanish separately,
+as in the proof of \ref{fdip-00OT}.}
+
+\p{In all three period cases, a surviving geometric right
+action commutes with every exterior multiplication and
+contraction. Their products span the full endomorphism
+ring by \ref{fdip-0092}. Commutation with its matrix
+units makes the action scalar on the monomial basis.
+Its value on #{1} is #{c}, so #{c} is that scalar.
+Conversely scalar actions commute with everything.}
+
+\p{For a general element of #{\mathcal R}, the two
+families commute with one another, so it has an expression
+##{\sum_{a\in\{1,\qi,\qj,h\}}
+       R_{c_a}^{\mathrm{geom}}R_a^{\mathrm{int}}.}
+This expression is unique: applying it to
+#{1\otimes1} in the two algebra factors gives
+#{\sum_a c_a\otimes a}, and the displayed internal
+elements are a basis. More generally the operators
+#{R_a^{\mathrm{int}}} are linearly independent, since
+evaluation at #{1} gives that basis. They remain
+independent after an invertible left multiplication.
+Consequently each of the preceding background
+commutator equations imposes its geometric constraint
+on every #{c_a} separately. Each #{c_a} is scalar,
+leaving precisely an internal right multiplication.
+Finally #{R_a^{\mathrm{int}}R_b^{\mathrm{int}}
+=R_{ba}^{\mathrm{int}}}, which gives the opposite
+algebra.}
+}

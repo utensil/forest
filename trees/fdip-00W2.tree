@@ -1,0 +1,51 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{Translation covariance and the fixed-background criterion}
+\date{2026-11-17}
+
+\p{For the \vocabk{cochain and link translations}{fdip-00W0}
+with any finite free coefficient representation,
+##{\tau_a\extD_U\tau_a^{-1}=\extD_{\tau_a U}.}
+The translation commutes with #{\extD_U}
+exactly when it has
+\vocabk{represented-link invariance}{fdip-00W0}.
+If #{\rho} is faithful, this is equivalent to
+#{\tau_a U=U}. The criterion holds also at
+periods #{1} and #{2}.}
+
+\proof{
+\p{Substitution in the forward and inverse pullbacks
+gives
+##{\begin{aligned}
+(\tau_a T_i^U\tau_a^{-1}f)(x)
+ &=\rho(U_i(x+a))^{-1}f(x+\varepsilon_i),\\
+(\tau_a(T_i^U)^{-1}\tau_a^{-1}f)(x)
+ &=\rho(U_i(x+a-\varepsilon_i))f(x-\varepsilon_i).
+\end{aligned}}
+These are the pullbacks for #{\tau_a U}. The
+exterior operators commute with #{\tau_a}, so
+their sum has the asserted covariance. Equality
+of represented links gives equality of these
+pullbacks and hence of the two cochain operators.}
+
+\p{Conversely suppose
+#{\extD_{\tau_a U}=\extD_U}. Restrict to a
+degree-zero input and take the degree-one
+coefficient along #{e_i} at #{x}. The contractions
+vanish, leaving the difference of the two
+forward pullbacks. A function supported at
+#{x+\varepsilon_i} can take any value #{z\in F}
+there, so
+##{\rho(U_i(x+a))^{-1}z=\rho(U_i(x))^{-1}z}
+for every #{z}. The two endomorphisms are equal,
+and so are their inverses. This proves
+represented-link invariance. At period one the
+input site equals #{x}; the identical identity
+subtractions still cancel. At period two the
+argument still reads the labeled forward
+transport, so it does not merge the two positive
+links. Faithfulness gives the final literal-link
+criterion.}
+}

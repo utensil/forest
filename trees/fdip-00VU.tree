@@ -1,0 +1,56 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{The Hurwitz algebra splits over every odd prime field}
+\date{2026-11-17}
+
+\p{For every odd prime #{p}, there is an algebra
+isomorphism
+##{\mathcal O_{\mathbb F_p}
+       \cong\operatorname{End}_{\mathbb F_p}(\mathbb F_p^2).}
+It carries quaternion conjugation to the adjugate and
+the norm to the determinant. In particular the
+#{2T} action has image in #{\operatorname{SL}_2(\mathbb F_p)}.}
+
+\proof{
+\p{The square set in #{\mathbb F_p} has
+#{(p+1)/2} elements: zero, and one value for each
+pair #{\{x,-x\}} of nonzero elements. The two sets
+#{\{a^2\}} and #{\{-1-b^2\}} therefore intersect,
+since their sizes sum to #{p+1}. Choose #{a,b}
+with #{a^2+b^2=-1}. In a basis of #{\mathbb F_p^2},
+set
+##{Q_i=\begin{pmatrix}0&1\\-1&0\end{pmatrix},
+ \qquad
+ Q_j=\begin{pmatrix}a&b\\b&-a\end{pmatrix}.}
+Direct multiplication gives
+#{Q_i^2=Q_j^2=-\bbI} and #{Q_iQ_j=-Q_jQ_i}.
+As #{2} is invertible, the Hurwitz algebra has basis
+#{(1,\qi,\qj,\qk)}, and its integral generator
+#{h} is #{(1+\qi+\qj+\qk)/2}. These relations
+define the algebra homomorphism sending #{\qi,\qj}
+to #{Q_i,Q_j}.}
+
+\p{For the #{4} matrices
+#{(\bbI,Q_i,Q_j,Q_iQ_j)}, the bilinear pairing
+#{(A,B)\mapsto\trace(AB)} has diagonal Gram matrix
+##{\operatorname{diag}(2,-2,-2,-2).}
+Indeed each nonconstant basis matrix has trace zero,
+each squares to #{-\bbI}, and each product of
+distinct nonconstant basis matrices is a signed
+third one. All #{4} diagonal entries are nonzero.
+Pairing a linear relation with each matrix makes
+every coefficient zero. The matrices are therefore
+a basis of the four-dimensional endomorphism algebra,
+proving bijectivity.}
+
+\p{For an element with scalar coefficient #{a_0}, its
+image has trace #{2a_0}. Quaternion conjugation is
+#{x\mapsto2a_0-x}, while the two-by-two adjugate is
+#{A\mapsto(\trace A)\bbI -A}. The algebra map therefore
+intertwines them. Applying it to #{x\bar x=N(x)}
+and using #{A\adjugate(A)=(\det A)\bbI} proves the
+norm identity. Each unit from #{2T} has norm one
+by \ref{fdip-00V1}, so its determinant is one.}
+}

@@ -1,0 +1,52 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Lemma}
+\title{Creation minus contraction is a twisted right action}
+\date{2026-11-17}
+
+\p{Under the regular-module identification of
+\ref{fdip-00OS}, for every exterior element #{v},
+##{(e_i\wedge-e_i\cdot)v
+       =\bigl((-1)^{\deg}v\bigr)e_i.}
+Write #{\alpha(c)=(-1)^{\deg}c} for the Clifford degree
+involution. A \vocabk{geometric right action}{fdip-00VK}
+commutes with #{e_i\wedge-e_i\cdot} exactly when
+##{\alpha(c)e_i=e_i c.}
+For #{c=\sum_I c_I e_I}, this is equivalent to
+#{2c_I=0} for every #{I} containing #{i}. If #{2} is a unit,
+the simultaneous conditions for all #{i} leave only scalars.}
+
+\proof{
+\p{Take an ordered monomial #{e_I}. If #{i\notin I}, let
+#{s} be the number of its indices below #{i}. Right
+multiplication by #{e_i} moves through #{|I|-s} factors
+to reach its ordered place. The additional degree sign
+#{(-1)^{|I|}} leaves #{(-1)^s}, the sign of exterior
+insertion. If #{i\in I}, let #{s} again count the smaller
+indices. Moving the final #{e_i} left to its equal factor
+takes #{|I|-s-1} interchanges, after which #{e_i^2=1}.
+The degree sign leaves #{(-1)^{s+1}}, the negative of the
+contraction sign. This proves the operator formula on
+every basis element over #{k}.}
+
+\p{The degree involution is an algebra automorphism. The
+two orders of applying the right action and the displayed
+operator give
+#{\alpha(v)\alpha(c)e_i} and #{\alpha(v)e_i c}.
+Equality for all #{v} is equivalent to equality at #{v=1}.
+For a monomial omitting #{i}, the factors
+#{\alpha(e_I)e_i} and #{e_i e_I} agree. For a monomial
+containing #{i}, their signs are opposite. Right
+multiplication by #{e_i} permutes the monomial basis up to
+sign, so equality is precisely the stated coefficient
+condition. If #{2} is invertible, every nonempty coefficient
+vanishes after imposing all directions.}
+}
+
+\p{The component formula is the parity-twisted right
+multiplication of TauCeti's
+\leanref/tauceti{CliffordAlgebra.parityTwistedRight_apply}.
+Its input is the degree involution followed by multiplication
+by a vector. The universal coupled commutant additionally
+depends on the link operators.}
