@@ -1,0 +1,44 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{Cell-incidence walks retain signs and transports}
+\date{2026-11-17}
+
+\p{Choose a fiber basis for the
+\vocabk{invariant cochain pairing}{fdip-00SR}. Every power trace
+#{\trace(\extD_U^\ell)} is a finite sum over closed walks
+among the labeled cochain cells. Each step retains its exterior
+incidence sign and its actual fiber map. In rank one, the
+determinant permutation expansion of #{m\bbI+\extD_U}
+contains cycle covers with short cycles and mass fixed points.}
+
+\proof{
+\p{For a cell label #{(x,I)} and #{i\notin I}, put
+#{\epsilon(i,I)=(-1)^{|\{j\in I:j<i\}|}}.
+The raising block contributing to the output label
+#{(x,I\cup\{i\})} has two occurrences:
+##{\begin{array}{c|c}
+ \text{input label}&\text{fiber map}\\\hline
+ (x+\varepsilon_i,I)&\epsilon(i,I)\rho(U_i(x))^{-1}\\
+ (x,I)&-\epsilon(i,I)\bbI_F.
+\end{array}}
+The lowering occurrences are their adjoints, by
+\ref{fdip-00SS}. Even when periodic endpoints coincide,
+the two labeled occurrences remain separate summands.}
+
+\p{Matrix multiplication selects a sequence of such
+occurrences with matching cell labels. Its contribution is
+the ordered product of the fiber maps, including all written
+signs. A diagonal block closes the walk; its fiber trace then
+contributes to the full trace. This is a finite block-matrix
+expansion. The walks run among cells of adjacent cochain
+degrees, so a bare physical plaquette product omits data.}
+
+\p{For rank-one fibers, the determinant is the signed sum over
+permutations of the cell labels. Decomposing each permutation
+into cycles gives the cycle cover. Diagonal choices use the
+mass, and two-cycles can use a raising occurrence and a
+lowering occurrence. No restriction to long loops follows
+from this determinant expansion.}
+}
