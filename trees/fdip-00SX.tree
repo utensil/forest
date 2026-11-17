@@ -1,0 +1,40 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{Positive flat pairings identify harmonic cochains}
+\date{2026-11-17}
+
+\p{Let #{k} be an ordered field with a positive definite
+invariant symmetric coefficient pairing, or let #{k=\mathbb C}
+with a positive definite invariant Hermitian pairing. Suppose
+the represented connection is flat. Then
+##{\ker\extD_U=\ker\extd_U\cap\ker\extdag_U,}
+and its degree-#{p} subspace maps isomorphically to
+#{H^p(C^*(X;F),\extd_U)}. In particular,
+##{\dim\ker\extD_U=2^n\dim F^{H_1,\ldots,H_n}.}}
+
+\proof{
+\p{Flatness and adjointness give
+#{\extd_U^2=(\extdag_U)^2=0}. Hence
+##{\langle\extD_U^2v,v\rangle
+=\langle\extd_Uv,\extd_Uv\rangle
++\langle\extdag_Uv,\extdag_Uv\rangle.}
+If #{\extD_Uv=0}, positivity makes both terms zero and then
+both cochains zero. The reverse implication follows from the
+definition of #{\extD_U}.}
+
+\p{In degree #{p}, the orthogonal complement of
+#{\im\extd_U:C^{p-1}\to C^p} is
+#{\ker\extdag_U:C^p\to C^{p-1}}. A positive subspace has
+zero intersection with its orthogonal complement. The
+restriction of the pairing identifies that subspace with its
+dual, so rank-nullity gives their direct sum, exactly as in
+\ref{fdip-00OP}. A closed
+cochain thus splits as #{\extd_U\eta+h} with
+#{\extdag_Uh=0}; applying #{\extd_U} shows #{\extd_Uh=0}.
+A harmonic coboundary is zero by positivity. This proves the
+class isomorphism. The holonomies have finite order, and every
+positive integer is invertible in the present fields, so
+\ref{fdip-00SW} gives the dimension formula.}
+}

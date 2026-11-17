@@ -1,0 +1,52 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Definition}
+\title{A connection on based cubical cochains}
+\date{2026-11-17}
+
+\p{Let #{k} be a commutative unital ring, let #{G} be a finite
+group, and let #{F} be a #{k[G]}-module that is finitely generated
+and projective over #{k}. Write #{\rho(g)} for the action of
+#{g\in G}. Let #{n\ge1} and let #{N_1,\ldots,N_n} be positive
+integers. The cellular torus has vertex set
+##{X=\prod_{i=1}^n\mathbb Z/N_i\mathbb Z.}
+For a vertex #{x} and a subset #{I\subseteq\{1,\ldots,n\}},
+the cell #{c_I(x)} has the directions in #{I}, in increasing
+order, and base corner #{x}. This is the cellular convention of
+\ref{fdip-00OK}, allowing a separate period in each direction.}
+
+\p{A \newvocab{based cochain} assigns an element of #{F} to each
+cell. A degree-#{p} cochain is written
+##{\alpha=\sum_{|I|=p}e_I\otimes\alpha_I,\qquad
+\alpha_I:X\longrightarrow F,\qquad
+e_I=e_{i_1}\wedge\cdots\wedge e_{i_p}.}
+Thus
+#{C^p(X;F)=\bigoplus_{x\in X}\Lambda^p(k^n)\otimes_k F}.
+The coefficient at #{c_I(x)} belongs to the copy #{F_x}.
+The base corner is a cell label, including across a periodic
+seam.}
+
+\p{A \newvocab{coefficient connection} assigns #{U_i(x)\in G}
+to every positive labeled link #{(x,i)} from #{x} to
+#{x+\varepsilon_i}. It acts from #{F_x} to
+#{F_{x+\varepsilon_i}}, following the
+\vocabk{connection background}{fdip-006D}. Reverse traversal
+uses #{U_i(x)^{-1}}. For #{N_i=1} the link is a loop. For
+#{N_i=2} the two positive labeled links joining a pair of
+vertices remain distinct.}
+
+\p{The \newvocab{coefficient pullback} and the
+\newvocab{covariant cochain differential} are
+##{(T_i^U f)(x)=\rho(U_i(x))^{-1}f(x+\varepsilon_i),}
+##{\extd_U=\sum_{i=1}^n(e_i\wedge)(T_i^U-\bbI).}
+Each pullback acts only on the coefficient and site factors.
+The degree-one value is based at the source. Multiplying it by
+#{\rho(U_i(x))} gives the head-based difference
+#{f(x+\varepsilon_i)-\rho(U_i(x))f(x)} of
+the \vocabk{connection background}{fdip-006D}.}
+
+\p{A \newvocab{vertex gauge} is a function #{g:X\to G}. It
+acts on links and on each cochain coefficient by
+##{U_i^g(x)=g(x+\varepsilon_i)U_i(x)g(x)^{-1},\qquad
+(\mathcal G_g\alpha)_I(x)=\rho(g(x))\alpha_I(x).}}

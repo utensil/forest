@@ -1,0 +1,83 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{Finite Green identities survive curvature}
+\date{2026-11-17}
+
+\p{For the \vocabk{transported boundary form}{fdip-00T1},
+##{\begin{aligned}
+\mathcal B_M(v,w)
+&=\langle v,(\extD_UP_M-P_M\extD_U)w\rangle\\
+&=-\mathcal B_{M^c}(v,w).
+\end{aligned}}
+It depends only on the restrictions of #{v,w} to the declared
+boundary support. If a \vocabk{kernel complement}{fdip-00T1}
+is given, then #{E_U,H_U} are self-adjoint and
+##{\extD_UE_U=E_U\extD_U=\bbI-H_U,\qquad
+E_UH_U=H_UE_U=0.}
+For every cochain #{v} and test cochain #{\gamma},
+##{\begin{aligned}
+\langle v,\gamma\rangle_M
+={}&\langle\extD_Uv,E_U\gamma\rangle_M
++\langle v,H_U\gamma\rangle_M\\
+&-\mathcal B_M(v,E_U\gamma).
+\end{aligned}}
+On all cells this yields #{v=E_U\extD_Uv+H_Uv}. A kernel
+complement always exists over an ordered field with a positive
+definite symmetric pairing, and over #{\mathbb C} with a
+positive definite Hermitian pairing. None of these conclusions
+requires flatness.}
+
+\proof{
+\p{The coefficient projection #{P_M} is self-adjoint. Moving
+#{\extD_U} through the full pairing gives the commutator
+formula. Its diagonal blocks relative to #{M\sqcup M^c}
+vanish; only the two cross blocks remain. Removing cells that
+occur in neither nonzero cross block changes no summand.
+Replacing #{P_M} by #{\bbI-P_M} negates the commutator and
+proves the complementary identity. This argument uses only
+finite sums and perfect adjointness.}
+
+\p{For a declared complement, invariance and invertibility give
+#{W=\im\extD_U}. Indeed #{\extD_U} kills its
+kernel and maps #{W} onto #{W}. If #{h\in\ker\extD_U} and
+#{w=\extD_Uz\in W}, self-adjointness gives
+##{\langle h,w\rangle=\langle\extD_Uh,z\rangle=0,\qquad
+\langle w,h\rangle=\langle z,\extD_Uh\rangle=0.}
+The direct sum is therefore orthogonal. Its restricted
+pairings are perfect: the map to the dual is block diagonal
+for this sum and is an isomorphism on the whole module, so
+both diagonal maps are isomorphisms. Projection onto the
+kernel is self-adjoint. On #{W}, for #{u,w\in W},
+##{\langle E_Uu,w\rangle
+=\langle E_Uu,\extD_UE_Uw\rangle
+=\langle u,E_Uw\rangle.}
+Both sides vanish if one argument lies in the kernel. Hence
+#{E_U} is self-adjoint on all cochains. Evaluating on each
+direct summand gives both inverse identities and the zero
+products with #{H_U}.}
+
+\p{Substitute #{w=E_U\gamma} into the definition of
+#{\mathcal B_M} and use
+#{\extD_UE_U\gamma=\gamma-H_U\gamma}; rearrangement gives
+the displayed formula. For all cells the boundary form is
+zero. Move the self-adjoint maps to the first argument and
+use perfectness to obtain #{v=E_U\extD_Uv+H_Uv}.}
+
+\p{Finally, over a positive field let #{K=\ker\extD_U}.
+Restriction of the pairing identifies each finite-dimensional
+subspace with its dual, so #{C^*=K\oplus K^\perp}, by the
+rank argument in \ref{fdip-00P6}.
+Self-adjointness makes #{K^\perp} invariant. The restriction
+of #{\extD_U} to it has zero kernel and hence is bijective.
+Taking #{W=K^\perp} supplies the required complement.}
+}
+
+\p{Labeled face occurrences bound the boundary support, but
+ordinary cancelled cellular boundary coefficients need not
+detect it. For a period-one loop the two ordinary endpoints
+cancel, whereas #{\rho(U)^{-1}-\bbI} can be nonzero. This is
+why support above is defined by the actual transported blocks.
+Over a general ring an arbitrary complement, without the
+stated invariance and invertibility, does not supply this inverse.}
