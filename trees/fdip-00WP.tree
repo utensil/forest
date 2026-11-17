@@ -1,0 +1,22 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{The normalized group average is a projection}
+\date{2026-11-17}
+\lean{Representation.isProj_averageMap}
+\p{Let #{H} be a finite group acting on a #{k}-module
+#{E}, and suppose #{|H|} is a unit in #{k}. Then
+##{P_H=|H|^{-1}\sum_{h\in H}\rho_E(h)}
+is a projection onto the
+\vocabk{invariant submodule}{fdip-00WK}:
+#{\im P_H=E^H} and #{P_H^2=P_H}.}
+
+\proof{
+\p{For #{a\in H}, left multiplication permutes the
+summands, so #{\rho_E(a)P_H=P_H}. Thus the image is
+invariant. If #{v\in E^H}, every summand applied to
+#{v} equals #{v}, and hence #{P_Hv=|H|^{-1}|H|v=v}.
+The image therefore equals #{E^H}; applying the last
+identity to #{P_Hv} gives idempotence.}
+}

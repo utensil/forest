@@ -1,0 +1,49 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Lemma}
+\title{A cofactor polynomial for the dressed pair}
+\date{2026-11-17}
+
+\p{Use the matrix #{M} of \ref{fdip-00U9} over
+##{R=\mathbb Z[a,b,c,d,e]/(a^2-1,b^2-1,c^2-1,d^2-1,e^2-1).}
+Index its rows and columns from zero. Let #{N} be
+the #{7\times7} matrix obtained by deleting row
+zero and column one, with the remaining indices in
+increasing order. Then #{5\det N} equals
+##{\begin{aligned}
+ Q(a,b,c,d,e)={}&412470750(1+a)\\
+ &-4708635(bd+abd)+2803395(b+d)\\
+ &-1909890(c+ac+e+ae)\\
+ &+1866110(ab+ad+bce+cde)\\
+ &+928825(abce+acde)\\
+ &+915555(bc+be+cd+de)\\
+ &+30390(ce+ace)\\
+ &-21730(abc+abe+acd+ade)\\
+ &+17280(bcd+abcd+bde+abde)\\
+ &+12750(bcde+abcde).
+\end{aligned}}}
+
+\proof{
+\p{Relabel the rows and columns of #{N} by
+#{1,\ldots,7}. For
+#{S=\{j_1<\cdots<j_r\}\subseteq\{1,\ldots,7\}},
+set
+##{E(\varnothing)=1,\qquad
+ E(S)=\sum_{\ell=1}^r(-1)^{r+\ell}
+ N_{r,j_\ell}E(S\setminus\{j_\ell\}).}
+Expansion in the last row identifies #{E(S)} with
+the minor of the first #{r} rows and columns #{S};
+induction starts at the empty minor. Hence
+#{5E(\{1,\ldots,7\})=5\det N}.}
+
+\p{As in \ref{fdip-00U9}, the squarefree words are
+an integer basis of #{R}, and multiplying two words
+takes the symmetric difference of their letter sets.
+Substituting the displayed #{H,J} of that lemma into
+#{N} and applying this recurrence yields the
+displayed coefficients of #{Q}. This finite
+cofactor expansion proves the identity over #{R};
+any assignment of #{5} commuting involutions
+preserves it.}
+}
