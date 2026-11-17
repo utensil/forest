@@ -8,13 +8,13 @@
 \p{For the \vocabk{transported boundary form}{fdip-00T1},
 ##{\begin{aligned}
 \mathcal B_M(v,w)
-&=\langle v,(\extD_UP_M-P_M\extD_U)w\rangle\\
+&=\langle v,(\extD_U\pr_M-\pr_M\extD_U)w\rangle\\
 &=-\mathcal B_{M^c}(v,w).
 \end{aligned}}
 It depends only on the restrictions of #{v,w} to the declared
 boundary support. If a \vocabk{kernel complement}{fdip-00T1}
 is given, then #{E_U,H_U} are self-adjoint and
-##{\extD_UE_U=E_U\extD_U=\bbI-H_U,\qquad
+##{\extD_UE_U=E_U\extD_U=\bbI -H_U,\qquad
 E_UH_U=H_UE_U=0.}
 For every cochain #{v} and test cochain #{\gamma},
 ##{\begin{aligned}
@@ -30,26 +30,26 @@ positive definite Hermitian pairing. None of these conclusions
 requires flatness.}
 
 \proof{
-\p{The coefficient projection #{P_M} is self-adjoint. Moving
+\p{The coefficient projection #{\pr_M} is self-adjoint. Moving
 #{\extD_U} through the full pairing gives the commutator
 formula. Its diagonal blocks relative to #{M\sqcup M^c}
 vanish; only the two cross blocks remain. Removing cells that
 occur in neither nonzero cross block changes no summand.
-Replacing #{P_M} by #{\bbI-P_M} negates the commutator and
+Replacing #{\pr_M} by #{\bbI -\pr_M} negates the commutator and
 proves the complementary identity. This argument uses only
 finite sums and perfect adjointness.}
 
 \p{For a declared complement, invariance and invertibility give
-#{W=\im\extD_U}. Indeed #{\extD_U} kills its
-kernel and maps #{W} onto #{W}. If #{h\in\ker\extD_U} and
-#{w=\extD_Uz\in W}, self-adjointness gives
+#{\mathcal N=\im\extD_U}. Indeed #{\extD_U} kills its
+kernel and maps #{\mathcal N} onto #{\mathcal N}. If #{h\in\ker\extD_U} and
+#{w=\extD_Uz\in \mathcal N}, self-adjointness gives
 ##{\langle h,w\rangle=\langle\extD_Uh,z\rangle=0,\qquad
 \langle w,h\rangle=\langle z,\extD_Uh\rangle=0.}
 The direct sum is therefore orthogonal. Its restricted
 pairings are perfect: the map to the dual is block diagonal
 for this sum and is an isomorphism on the whole module, so
 both diagonal maps are isomorphisms. Projection onto the
-kernel is self-adjoint. On #{W}, for #{u,w\in W},
+kernel is self-adjoint. On #{\mathcal N}, for #{u,w\in \mathcal N},
 ##{\langle E_Uu,w\rangle
 =\langle E_Uu,\extD_UE_Uw\rangle
 =\langle u,E_Uw\rangle.}
@@ -71,7 +71,7 @@ subspace with its dual, so #{C^*=K\oplus K^\perp}, by the
 rank argument in \ref{fdip-00P6}.
 Self-adjointness makes #{K^\perp} invariant. The restriction
 of #{\extD_U} to it has zero kernel and hence is bijective.
-Taking #{W=K^\perp} supplies the required complement.}
+Taking #{\mathcal N=K^\perp} supplies the required complement.}
 }
 
 \p{Labeled face occurrences bound the boundary support, but

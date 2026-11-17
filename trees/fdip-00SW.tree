@@ -24,14 +24,16 @@ has values #{f(r+1)-f(r)} for #{r<N-1}, and
 #{H^{-1}f(0)-f(N-1)} at the seam. Define maps to and from
 #{F\xrightarrow{A}F} by
 ##{\begin{aligned}
-\pi_0f&=f(0),&\quad j_0v&=(v,\ldots,v),\\
-\pi_1a&=\sum_{r=0}^{N-1}a(r),& j_1w&=(0,\ldots,0,w).
+\pr^{\mathrm{red}}_0f&=f(0),&\quad \iota^{\mathrm{red}}_0v&=(v,\ldots,v),\\
+\pr^{\mathrm{red}}_1a&=\sum_{r=0}^{N-1}a(r),& \iota^{\mathrm{red}}_1w&=(0,\ldots,0,w).
 \end{aligned}}
+The superscript #{\mathrm{red}} distinguishes these maps
+between complexes from the averaging endomorphisms below.
 Set #{h(a)(0)=0} and #{h(a)(r)=\sum_{t<r}a(t)}. Telescoping
-gives #{\pi_1\extd=A\pi_0}, #{\extd j_0=j_1A},
-#{\pi j=\bbI}, and
-##{h\extd=\bbI-j_0\pi_0,\qquad
-\extd h=\bbI-j_1\pi_1.}
+gives #{\pr^{\mathrm{red}}_1\extd=A\pr^{\mathrm{red}}_0}, #{\extd \iota^{\mathrm{red}}_0=\iota^{\mathrm{red}}_1A},
+#{\pr^{\mathrm{red}}\iota^{\mathrm{red}}=\bbI}, and
+##{h\extd=\bbI -\iota^{\mathrm{red}}_0\pr^{\mathrm{red}}_0,\qquad
+\extd h=\bbI -\iota^{\mathrm{red}}_1\pr^{\mathrm{red}}_1.}
 For the second identity, every non-seam component is #{a(r)};
 at the seam it is #{-\sum_{t<N-1}a(t)}. For #{N=1}, #{h=0}
 and both comparison maps are identities.}
@@ -48,19 +50,19 @@ step. Successive steps give the stated Koszul complex without
 division.}
 
 \p{For its split calculation set
-##{P_i=\frac1{r_i}\sum_{a=0}^{r_i-1}H_i^{-a},\qquad
+##{\pr_i=\frac1{r_i}\sum_{a=0}^{r_i-1}H_i^{-a},\qquad
 Q_i=\frac1{r_i}\sum_{a=0}^{r_i-1}aH_i^{-a}.}
-The finite sums give #{P_i^2=P_i},
-#{\im P_i=\ker(H_i-\bbI)}, and
-##{(H_i^{-1}-\bbI)Q_i=Q_i(H_i^{-1}-\bbI)=\bbI-P_i.}
+The finite sums give #{\pr_i^2=\pr_i},
+#{\im \pr_i=\ker(H_i-\bbI)}, and
+##{(H_i^{-1}-\bbI)Q_i=Q_i(H_i^{-1}-\bbI)=\bbI -\pr_i.}
 For the last equality, shifting the sum leaves #{r_i\bbI}
 minus the geometric sum. All these maps commute. The identity
-##{\bbI=P_1\cdots P_n+
-\sum_{i=1}^n P_1\cdots P_{i-1}(\bbI-P_i)}
+##{\bbI=\pr_1\cdots \pr_n+
+\sum_{i=1}^n \pr_1\cdots \pr_{i-1}(\bbI -\pr_i)}
 is a decomposition into mutually orthogonal idempotents.
 On the image of the #{i}-th summand, #{Q_i(e_i\cdot)} is a
 contracting homotopy for the Koszul differential: their
-anticommutator is #{\bbI-P_i=\bbI}, and cross terms cancel.
+anticommutator is #{\bbI -\pr_i=\bbI}, and cross terms cancel.
 On the common fixed image, the differential is zero. This
 proves the cohomology formula. It does not assert that the
 fixed module or a ring cohomology module is free.}
