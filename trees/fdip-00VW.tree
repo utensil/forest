@@ -1,0 +1,54 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{Internal columns intertwine the coupled operator}
+\date{2026-11-17}
+
+\p{Let #{k=\mathbb F_p} with #{p} odd, and choose the
+algebra isomorphism of \ref{fdip-00VU}. Let #{S=k^2}
+with the resulting left #{2T} action. Then #{S} is
+simple and the column map gives an isomorphism
+##{\Phi:C^\bullet(X;\mathcal O_k)
+       \longrightarrow C^\bullet(X;S)\otimes_k k^2.}
+For every link field,
+##{\Phi\extD_{U,\mathcal O_k}
+       =(\extD_{U,S}\otimes\bbI_{k^2})\Phi.}
+Here the subscripts specify the coefficient module
+in the same \vocabk{cochain operator}{fdip-00SR}.
+The two column summands each have dimension
+#{2r}, with #{r=2^n|X|}; their sum has dimension #{4r}.}
+
+\proof{
+\p{Write a coefficient matrix as #{Z=(z_1,z_2)} and
+let #{w_1,w_2} be the standard basis of the final
+#{k^2}. At a based cell, send it to
+#{z_1\otimes w_1+z_2\otimes w_2}.
+Collecting columns is a linear bijection, with
+inverse assembling the two columns. Applying it
+independently at each cell gives #{\Phi}.}
+
+\p{The group contains the Hurwitz basis elements, so
+its matrix images span every endomorphism of #{S}.
+A subspace invariant under the group is invariant
+under all these endomorphisms. If it contains a
+nonzero vector, an endomorphism can send that vector
+to any chosen target, so the subspace is all of
+#{S}. This proves simplicity. The area form
+#{\epsilon(s,t)=s_1t_2-s_2t_1} is perfect and
+preserved by the determinant-one group image.
+Thus the inverse-transport adjoint convention
+also applies to #{S}.}
+
+\p{Every forward link multiplies each coefficient
+matrix on the left by the same inverse matrix;
+each backward link multiplies it by the same
+direct matrix. Left multiplication acts separately
+and identically on the two columns. Exterior
+multiplication and contraction act on the other
+tensor factor, while the site shift simply
+reindexes the column-valued functions. These
+identities give the displayed intertwiner term
+by term. There are #{r} exterior-site slots and
+#{2} coordinates in each column, proving the ranks.}
+}
