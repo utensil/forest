@@ -1,0 +1,69 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{Flat cohomology is a finite Koszul calculation}
+\date{2026-11-17}
+
+\p{For a represented-flat connection, let #{H_i} be the
+commuting seam holonomies of \ref{fdip-00SV}. The cochain
+complex #{(C^*(X;F),\extd_U)} is homotopy equivalent over #{k}
+to
+##{\left(\Lambda^*(k^n)\otimes_k F,
+\sum_i(e_i\wedge)(H_i^{-1}-\bbI)\right).}
+If each order #{r_i} of #{H_i} is a unit in #{k}, then
+##{H^p(C^*(X;F),\extd_U)
+\cong\Lambda^p(k^n)\otimes_k F^{H_1,\ldots,H_n}.}
+Without the unit-order hypothesis the first complex remains the
+cohomology calculation; the displayed simplification is not asserted.}
+
+\proof{
+\p{First consider one coordinate with period #{N} and seam
+#{H}, and put #{A=H^{-1}-\bbI}. The differential on #{F^N}
+has values #{f(r+1)-f(r)} for #{r<N-1}, and
+#{H^{-1}f(0)-f(N-1)} at the seam. Define maps to and from
+#{F\xrightarrow{A}F} by
+##{\begin{aligned}
+\pr^{\mathrm{red}}_0f&=f(0),&\quad \iota^{\mathrm{red}}_0v&=(v,\ldots,v),\\
+\pr^{\mathrm{red}}_1a&=\sum_{r=0}^{N-1}a(r),& \iota^{\mathrm{red}}_1w&=(0,\ldots,0,w).
+\end{aligned}}
+The superscript #{\mathrm{red}} distinguishes these maps
+between complexes from the averaging endomorphisms below.
+Set #{h(a)(0)=0} and #{h(a)(r)=\sum_{t<r}a(t)}. Telescoping
+gives #{\pr^{\mathrm{red}}_1\extd=A\pr^{\mathrm{red}}_0}, #{\extd \iota^{\mathrm{red}}_0=\iota^{\mathrm{red}}_1A},
+#{\pr^{\mathrm{red}}\iota^{\mathrm{red}}=\bbI}, and
+##{h\extd=\bbI -\iota^{\mathrm{red}}_0\pr^{\mathrm{red}}_0,\qquad
+\extd h=\bbI -\iota^{\mathrm{red}}_1\pr^{\mathrm{red}}_1.}
+For the second identity, every non-seam component is #{a(r)};
+at the seam it is #{-\sum_{t<N-1}a(t)}. For #{N=1}, #{h=0}
+and both comparison maps are identities.}
+
+\p{Apply these maps one coordinate at a time after
+\ref{fdip-00SV}. All other seam operators commute with the
+maps because the #{H_i} commute. On exterior degree, give
+#{h} the sign of contraction in that coordinate. Its
+anticommutator with each other-direction differential is zero:
+the coefficient maps commute and insertion past contraction
+has the opposite sign. The displayed one-dimensional homotopy
+identity therefore holds on the full total complex at each
+step. Successive steps give the stated Koszul complex without
+division.}
+
+\p{For its split calculation set
+##{\pr_i=\frac1{r_i}\sum_{a=0}^{r_i-1}H_i^{-a},\qquad
+Q_i=\frac1{r_i}\sum_{a=0}^{r_i-1}aH_i^{-a}.}
+The finite sums give #{\pr_i^2=\pr_i},
+#{\im \pr_i=\ker(H_i-\bbI)}, and
+##{(H_i^{-1}-\bbI)Q_i=Q_i(H_i^{-1}-\bbI)=\bbI -\pr_i.}
+For the last equality, shifting the sum leaves #{r_i\bbI}
+minus the geometric sum. All these maps commute. The identity
+##{\bbI=\pr_1\cdots \pr_n+
+\sum_{i=1}^n \pr_1\cdots \pr_{i-1}(\bbI -\pr_i)}
+is a decomposition into mutually orthogonal idempotents.
+On the image of the #{i}-th summand, #{Q_i(e_i\cdot)} is a
+contracting homotopy for the Koszul differential: their
+anticommutator is #{\bbI -\pr_i=\bbI}, and cross terms cancel.
+On the common fixed image, the differential is zero. This
+proves the cohomology formula. It does not assert that the
+fixed module or a ring cohomology module is free.}
+}

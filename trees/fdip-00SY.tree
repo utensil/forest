@@ -1,0 +1,57 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Example}
+\title{The flipped sign link removes the rational kernel}
+\date{2026-11-17}
+
+\p{Use the two negative plaquettes of \ref{fdip-00SM}, now with
+#{F=\mathbb Q} and its standard pairing. In site order
+#{(0,0),(1,0),(0,1),(1,1)}, write #{a=T_1^U-\bbI} and
+#{b=T_2^U-\bbI}. Their matrices are
+##{a=\begin{pmatrix}
+-1&-1&0&0\\1&-1&0&0\\0&0&-1&1\\0&0&1&-1
+\end{pmatrix},\quad
+b=\begin{pmatrix}
+-1&0&1&0\\0&-1&0&1\\1&0&-1&0\\0&1&0&-1
+\end{pmatrix}.}
+From even degrees #{(0,12)} to odd degrees #{(1,2)},
+##{B=\begin{pmatrix}a&-b^{\mathsf t}\\b&a^{\mathsf t}\end{pmatrix},
+\qquad
+\extD_U=\begin{pmatrix}0&B^{\mathsf t}\\B&0\end{pmatrix}.}
+The signs follow from #{(e_1\cdot)(e_1\wedge e_2)=e_2} and
+#{(e_2\cdot)(e_1\wedge e_2)=-e_1}. We calculate #{\det B=32}.}
+
+\p{Put
+##{a_0=\begin{pmatrix}-1&-1\\1&-1\end{pmatrix},\qquad
+a_1=\begin{pmatrix}-1&1\\1&-1\end{pmatrix}.}
+Group rows and columns by the second site coordinate, retaining
+the two parity components within each group. Each regrouping
+exchanges two blocks of size two and has positive sign. The
+matrix becomes #{\left(\begin{smallmatrix}A&E\\E&D\end{smallmatrix}\right)}, where
+##{A=\begin{pmatrix}a_0&\bbI_2\\-\bbI_2&a_0^{\mathsf t}\end{pmatrix},
+\quad E=\begin{pmatrix}0&-\bbI_2\\\bbI_2&0\end{pmatrix},
+\quad D=\begin{pmatrix}a_1&\bbI_2\\-\bbI_2&a_1\end{pmatrix}.}
+Since #{a_0^{\mathsf t}a_0=2\bbI_2}, block elimination gives
+#{\det A=\det(a_0^{\mathsf t}a_0+\bbI_2)=9}, and multiplication verifies
+##{A^{-1}=\frac13
+\begin{pmatrix}a_0^{\mathsf t}&-\bbI_2\\\bbI_2&a_0\end{pmatrix}.}}
+
+\p{The Schur complement #{D-EA^{-1}E}, multiplied by #{3}, is
+##{\begin{pmatrix}C&2\bbI_2\\-2\bbI_2&C^{\mathsf t}\end{pmatrix},
+\qquad C=3a_1+a_0=\begin{pmatrix}-4&2\\4&-4\end{pmatrix}.}
+Here #{\det C=8}. Eliminating the lower-left block over
+#{\mathbb Q} shows that its determinant is
+#{\det(C^{\mathsf t}C+4\bbI_2)}. Explicitly,
+##{C^{\mathsf t}C+4\bbI_2=
+\begin{pmatrix}36&-24\\-24&24\end{pmatrix},\qquad
+\det(C^{\mathsf t}C+4\bbI_2)=288.}
+It follows that #{\det B=9\cdot 288/3^4=32}. Thus
+#{\det\extD_U=32^2} and #{\ker\extD_U=0} over #{\mathbb Q}.
+With all links #{1}, \ref{fdip-00SX} gives kernel dimension
+#{4} on the same cochain space.}
+
+\p{The integral determinant calculation proves injectivity
+over #{\mathbb Z}, not invertibility there. Modulo #{2} the
+sign connection becomes trivial, so the rational conclusion
+does not carry to that coefficient field.}

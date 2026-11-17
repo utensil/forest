@@ -1,0 +1,55 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{The square detects represented plaquette holonomy}
+\date{2026-11-17}
+
+\p{For the \vocabk{covariant cochain differential}{fdip-00SH},
+##{\extd_U^2=
+\sum_{i<j}(e_i\wedge)(e_j\wedge)[T_i^U,T_j^U].}
+It vanishes exactly when every plaquette holonomy acts as the
+identity on #{F}. This is flatness of the represented connection
+#{\rho(U)}, and need not be flatness in #{G} when #{\rho} is
+not faithful.}
+
+\proof{
+\p{Exterior multiplication squares to zero and anticommutes in
+distinct directions, as in \ref{fdip-0092}.
+In the square of #{\sum_i(e_i\wedge)(T_i^U-\bbI)}, the two
+orders for #{i,j} leave exactly their commutator. At #{x}, the
+two terms act on #{f(x+\varepsilon_i+\varepsilon_j)} by
+##{\begin{aligned}
+T_i^UT_j^U &: \rho\bigl(U_j(x+\varepsilon_i)U_i(x)\bigr)^{-1},\\
+T_j^UT_i^U &: \rho\bigl(U_i(x+\varepsilon_j)U_j(x)\bigr)^{-1}.
+\end{aligned}}
+Equality says precisely that the closed walk formed from these
+two forward paths has trivial represented holonomy. Hence
+represented flatness makes every summand zero.}
+
+\texfig{\begin{tikzcd}[column sep=large,row sep=huge]
+F_x \arrow[r,"\rho(U_i(x))"] \arrow[d,"\rho(U_j(x))"'] &
+F_{x+\varepsilon_i} \arrow[d,"\rho(U_j(x+\varepsilon_i))"] \\
+F_{x+\varepsilon_j} \arrow[r,"\rho(U_i(x+\varepsilon_j))"'] &
+F_{x+\varepsilon_i+\varepsilon_j}
+\end{tikzcd}}
+
+\p{The square shows forward transports. The coefficient
+pullbacks in the formula traverse the inverse paths. The
+square commutes precisely when its represented holonomy is
+trivial.}
+
+\p{Conversely, apply #{\extd_U^2=0} to degree-zero cochains.
+The exterior monomials #{e_i\wedge e_j}, #{i<j}, are independent.
+For fixed #{x,i,j}, take a cochain supported at
+#{x+\varepsilon_i+\varepsilon_j} with arbitrary value in #{F}.
+The two displayed transport maps must agree on every value.
+This argument still applies when the shifted vertex is #{x};
+distinct vertices are not needed.}
+}
+
+\p{Two chosen paths with the same endpoints induce the same
+coefficient transport exactly when their closed comparison walk
+acts trivially. Changing paths independently in different cell
+degrees is therefore not automatically the single vertex gauge
+of \ref{fdip-00SI}.}

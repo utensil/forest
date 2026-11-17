@@ -1,0 +1,76 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{Transported subdivision has an exact curvature defect}
+\date{2026-11-17}
+
+\p{Subdivide a cellular torus dyadically as in
+\ref{fdip-00OW}. Declare every fine link
+on the torus with periods #{2N_i}. The coarse link in direction
+#{i} at #{x} is the ordered forward product of the two fine
+links from #{2x} to #{2x+2\varepsilon_i}. Let #{T_i} denote
+fine inverse pullback and let #{\operatorname{ev}} evaluate a
+fine coefficient at #{2x}. For an increasing direction set
+#{I}, put
+##{S_I=\prod_{i\in I}^{\mathrm{increasing}}(\bbI+T_i),\qquad
+(s_U^*\alpha)_I=\operatorname{ev}(S_I\alpha_I).}
+For the empty set this is evaluation. The products transport
+each fine subcell coefficient back along its ordered path.}
+
+\p{The full cochain defect is
+##{\begin{aligned}
+&\extd_{\mathrm{coarse}}s_U^*\alpha
+-s_U^*\extd_{\mathrm{fine}}\alpha\\
+&=\sum_{I,\ l\notin I}(e_l\wedge e_I)\otimes
+\operatorname{ev}\left(
+\bigl((T_l^2-\bbI)S_I-S_{I\cup\{l\}}(T_l-\bbI)\bigr)
+\alpha_I\right).
+\end{aligned}}
+It is zero on degree-zero inputs for every connection, and
+zero in every degree when the fine represented connection is
+flat. In two dimensions its degree-one coefficient is
+##{\operatorname{ev}\left(
+(\bbI+T_1)[T_1,T_2]\alpha_2-[T_2^2,T_1]\alpha_1
+\right).}
+All fine links, including interior square links, are part of
+the data; coarse factorization alone does not determine them.}
+
+\proof{
+\p{The coarse inverse pullback on an evaluated coefficient
+is #{\operatorname{ev}T_l^2}. Thus differentiating the
+subdivision sum gives the first operator in the full defect.
+Differentiating first inserts #{e_l} and then sums fine
+subcells in directions #{I\cup\{l\}}, giving the second
+operator. Sum over all pairs #{(l,I)} with their exterior
+factors; several pairs may contribute to one exterior
+monomial. For #{I=\varnothing}, the difference is zero by
+#{T_l^2-\bbI=(\bbI+T_l)(T_l-\bbI)}. Under flatness,
+\ref{fdip-00SL} makes all #{T_i} commute, so the same
+factorization cancels every term.}
+
+\p{In two dimensions the #{\alpha_2} contribution factors as
+#{(\bbI+T_1)[T_1,T_2]}. For #{\alpha_1}, moving
+#{e_2\wedge e_1} to positive orientation gives
+#{-[T_2^2,T_1]}. These are the two stated terms.}
+}
+
+\p{For a nonzero defect over #{\mathbb Z}, use the fine
+#{4\times4} sign torus with all links #{1} except
+#{U_1(0,0)=-1}, and form the coarse #{2\times2} links by
+the prescribed products. Set #{\alpha_1=0} and let
+#{\alpha_2} be #{1} at #{(1,1)} and zero elsewhere. At
+#{(0,0)}, the two paths in #{[T_1,T_2]\alpha_2} have values
+#{-1} and #{1}; their difference is #{-2}. The additional
+#{T_1}-shifted commutator is zero because its endpoint is not
+#{(1,1)}. The defect at the coarse origin is therefore #{-2}.}
+
+\p{The untransported sum can fail already in one dimension.
+Take a fine period-#{4} circle with successive links
+#{-1,1,1,1} and vertex values #{0,0,1,0}. Across the first
+coarse edge, the two ordinary-summed covariant differences
+give #{1}, whereas the coarse covariant difference is #{-1}.
+At trivial links, the cup-product and counting-adjoint
+failures in \ref{fdip-00OZ} still apply. Objectwise cochain
+maps therefore do not by themselves supply a compatible
+product, adjoint or inverse-limit operator.}
