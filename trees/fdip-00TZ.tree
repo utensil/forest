@@ -1,0 +1,40 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{Finite determinant coefficients and Newton relations}
+\date{2026-11-17}
+
+\p{For an endomorphism #{K} of a finite free rank-#{N} module
+over #{k}, put #{e_j(K)=\trace(\Lambda^jK)}, including
+#{e_0(K)=1}. Then
+##{\det(t\bbI -K)=
+ \sum_{j=0}^N(-1)^jt^{N-j}e_j(K).}
+For #{1\le j\le N}, the integral Newton relation is
+##{j e_j(K)=\sum_{\ell=1}^j(-1)^{\ell-1}
+       e_{j-\ell}(K)\trace(K^\ell).}
+Solving this recurrence for #{e_j(K)} requires #{j\in k^\times}.
+When #{1,\ldots,N} are units, all coefficients are polynomials
+in the first #{N} power traces with the indicated inverses.}
+
+\proof{
+\p{In a basis, expand the determinant by choosing either the
+diagonal #{t} or a matrix entry. A choice of #{j} matrix
+entries gives the sum of principal #{j}-minors with sign
+#{(-1)^j}. These minors are the diagonal entries of
+#{\Lambda^jK}, as in \ref{fdip-00TL}; their sum is its trace.
+This proves the first finite identity.}
+
+\p{Let #{P(t)=\det(\bbI+tK)=\sum_{j=0}^Ne_j(K)t^j}.
+Polynomial differentiation of the finite determinant gives
+#{P'(t)=\trace(\adjugate(\bbI+tK)K)}.
+In the truncated polynomial ring #{k[t]/(t^N)}, multiplication
+verifies the finite inverse
+##{(\bbI+tK)^{-1}=\sum_{\ell=0}^{N-1}(-tK)^\ell.}
+The adjugate identity consequently gives
+##{P'(t)=P(t)\sum_{\ell=1}^N(-1)^{\ell-1}
+       t^{\ell-1}\trace(K^\ell)\pmod{t^N}.}
+Comparing the coefficient of #{t^{j-1}} proves Newton's
+relation. Dividing by the specified unit #{j} gives the
+conditional recursive version.}
+}

@@ -1,0 +1,63 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{Adjugates and complementary source minors}
+\date{2026-11-17}
+
+\p{For every endomorphism #{K} of a finite free module, the
+\vocabk{ring paired coefficient}{fdip-00TJ} satisfies
+##{\begin{aligned}
+ \mathcal I_V\bigl((\psi\otimes\bar\psi)
+       \extexp(\theta_K)\bigr)&=\adjugate K,\\
+ \mathcal I_V\bigl(\bar\psi(B\psi)
+       \extexp(\theta_K)\bigr)&=-\trace(B\adjugate K).
+\end{aligned}}
+The first insertion is unbarred first. In a basis indexed by
+#{1,\ldots,N}, let #{I,J} be increasing subsets of equal size
+#{s}. The coefficient of #{\bar\eta_I\eta_J} in the
+\vocabk{ring source polynomial}{fdip-00TN} is
+##{(-1)^{s(s-1)/2+\sum I+\sum J}
+      \det K_{J^c,I^c}.}
+Coefficients with unequal source cardinalities vanish; empty
+minors and words equal one. No inverse is assumed.}
+
+\proof{
+\p{Perturb a single entry of #{K} by a scalar indeterminate
+#{t}. Since
+#{\theta_{K+tE_{ab}}=\theta_K+t\psi_b\bar\psi_a},
+\ref{fdip-00TH} gives
+##{\extexp(\theta_{K+tE_{ab}})
+ =\extexp(\theta_K)(1+t\psi_b\bar\psi_a).}
+Compare the #{t}-coefficients after applying \ref{fdip-00TL}.
+The determinant coefficient is the cofactor
+#{\operatorname{cof}_{ab}K=(\adjugate K)_{ba}}.
+This proves every matrix entry of the first insertion identity.
+The left side is intrinsically an endomorphism, so the coordinate
+identities assemble. Reversing the two odd generators changes
+the sign; contracting with #{B} gives the trace formula.}
+
+\p{Factor the finite source polynomial before integration as
+##{\extexp(\theta_K)
+ \prod_i(1+\bar\eta_i\psi_i)
+ \prod_j(1+\bar\psi_j\eta_j).}
+Selecting source sets #{I,J} leaves unbarred field indices
+#{I^c} and barred indices #{J^c}. Their cardinalities must be
+equal. By \ref{fdip-00TL}, the remaining grouped field
+coefficient is
+#{(-1)^{p(p-1)/2}\det K_{J^c,I^c}}, with #{p=N-s}.}
+
+\p{For the sign, put
+#{\delta_I=\sum I-s(s+1)/2}, and similarly for #{J}.
+Moving sources first, then grouping and sorting field words
+and comparing with #{\Omega_V}, gives the total exponent
+##{\begin{aligned}
+ &\frac{s(s-1)}2+\frac{s(s+1)}2+s^2+sp
+       +\delta_I+\delta_J\\
+ &\hspace{18mm}+\frac{p(p-1)}2+\frac{N(N-1)}2
+ \equiv\frac{s(s-1)}2+\sum I+\sum J\pmod2.
+\end{aligned}}
+The equality #{N=p+s} gives the last reduction. This finite
+reordering proves the complementary-minor formula over #{k}
+itself, including characteristic #{2}.}
+}

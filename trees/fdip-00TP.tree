@@ -1,0 +1,42 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{Odd translation and exact source completion}
+\date{2026-11-17}
+
+\p{Replacing any field generator by itself plus a source-only
+odd element preserves the \vocabk{ring paired coefficient}{fdip-00TJ}
+in the source algebra. If #{\det K\in k^\times}, the
+\vocabk{ring source polynomial}{fdip-00TN} satisfies
+##{\mathscr Z_K(\bar\eta,\eta)
+ =\det K\,\extexp\bigl(\bar\eta(K^{-1}\eta)\bigr).}}
+
+\proof{
+\p{Let #{\tau} fix every source generator and send a field
+generator #{z_a} to #{z_a+s_a}, with #{s_a} source-only and odd.
+The odd-square and anticommutation identities proved in
+\ref{fdip-00TH} give an exterior-algebra homomorphism.
+Subtracting the same #{s_a} gives its inverse. Any word using
+at least one replacement has fewer field generators, so cannot
+contribute to the field top coefficient. Hence
+#{\mathcal I_V(\tau P)=\mathcal I_V(P)} for every #{P}.
+Naturality from \ref{fdip-00TH} separately gives
+#{\extexp(\tau a)=\tau\extexp(a)}.}
+
+\p{For a finite free module, #{\det K} is a unit exactly
+when #{K} is invertible: the adjugate identity gives the inverse
+in one direction, and multiplicativity of the determinant gives
+the other. Put
+#{\chi=\psi-K^{-1}\eta} and
+#{\bar\chi=\bar\psi-\bar\eta K^{-1}}. Expansion in the
+written order gives
+##{\begin{aligned}
+ -\bar\psi K\psi+\bar\eta\psi+\bar\psi\eta
+ &=-\bar\chi K\chi+\bar\eta K^{-1}\eta.
+\end{aligned}}
+The two terms on the right are even. Multiplicativity of the
+finite polynomial, invariance under the odd translation and
+\ref{fdip-00TL} give the stated formula, with the source-only
+factor pulled out of #{\mathcal I_V}.}
+}

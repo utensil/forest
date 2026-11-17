@@ -1,0 +1,57 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Lemma}
+\title{A determinant polynomial in 5 signs}
+\date{2026-11-17}
+
+\p{Let #{a,b,c,d,e} commute and satisfy
+#{a^2=b^2=c^2=d^2=e^2=1}. Set
+##{H=\begin{pmatrix}
+21&1+a&1+c&0\\
+1+a&21&0&1+e\\
+1+c&0&21&b+d\\
+0&1+e&b+d&21
+\end{pmatrix},}
+##{J=\begin{pmatrix}
+0&0&0&ae-cd\\
+0&0&c-be&0\\
+0&d-a&0&0\\
+b-1&0&0&0
+\end{pmatrix}.}
+The determinant of #{M=\begin{pmatrix}H&J\\J^{\mathsf T}&H\end{pmatrix}}
+is the following integer polynomial, evaluated in the given ring:
+##{\begin{aligned}
+ P(a,b,c,d,e)={}&35803094657\\
+ &-330765108(a+c+bd+e)\\
+ &+163900282(b+ad+bce+acde)\\
+ &-3020608(ab+bc+d+acd)\\
+ &-3020608(be+abce+ade+cde)\\
+ &+1520952(ac+bcd+ae+bde)\\
+ &-728948(abc+cd+abe+de)\\
+ &+6062032(abd+ce)\\
+ &-34768(abcd+ace+abde+bcde)\\
+ &+1507128abcde.
+\end{aligned}}}
+
+\proof{
+\p{Work first in
+#{R=\mathbb Z[a,b,c,d,e]/(a^2-1,b^2-1,c^2-1,d^2-1,e^2-1)}.
+Successive division by these monic quadratics makes the
+#{32} squarefree words a basis. Multiplication cancels any
+repeated letter: the product of words on index sets #{I,J}
+is the word on #{I\mathbin\triangle J}.}
+
+\p{For #{S=\{j_1<\cdots<j_r\}\subseteq\{1,\ldots,8\}},
+the following finite recurrence computes the minors of the
+first #{r} rows:
+##{F(\varnothing)=1,\qquad
+ F(S)=\sum_{\ell=1}^r(-1)^{r+\ell}
+ M_{r,j_\ell}F(S\setminus\{j_\ell\}).}
+Induction on #{r}, expanding the last row, proves this
+minor interpretation. In particular
+#{F(\{1,\ldots,8\})=\det M}. Substituting the displayed
+#{H,J} and multiplying squarefree words by symmetric difference
+gives the displayed polynomial #{P}. Mapping #{R} into any commutative
+ring with the stated involutions preserves the identity.}
+}

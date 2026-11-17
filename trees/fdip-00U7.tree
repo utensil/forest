@@ -1,0 +1,32 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{A finite large-mass bound for the cochain kernel}
+\date{2026-11-17}
+
+\p{For the \vocabk{invariant cochain pairing}{fdip-00SR},
+assume the fiber is a real or complex inner-product space
+with positive invariant pairing. Then
+##{\|\extD_U\|\le2n.}
+If #{m>2n} and #{N=\dim C^\bullet(X;F)}, the primary kernel
+#{K_U=m\bbI+\extD_U} is positive definite and
+##{0<(m-2n)^N\le\det K_U\le(m+2n)^N.}
+In dimension #{2}, the choice #{m=5} works for every link
+assignment and every positive pair of periods.}
+
+\proof{
+\p{Put #{A_i=T_i^U-\bbI}. Each coefficient pullback is
+unitary, so #{\|A_i\|\le2}. Split exterior basis words
+according to whether they contain #{i}. Up to their incidence
+signs, the #{i}-th summand of #{\extD_U} is
+##{\begin{pmatrix}0&A_i^\dagger\\A_i&0\end{pmatrix}.}
+Its squared norm is #{\|A_i\|^2}, since its square has
+diagonal blocks #{A_i^\dagger A_i} and #{A_iA_i^\dagger}.
+The triangle inequality gives the bound #{2n}.}
+
+\p{The operator is self-adjoint by \ref{fdip-00SS}. Each
+of its real eigenvalues lies in #{[-2n,2n]}, so each eigenvalue
+of #{K_U} lies in #{[m-2n,m+2n]}. Their finite product proves
+positivity and the determinant bounds.}
+}

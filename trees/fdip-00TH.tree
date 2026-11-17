@@ -1,0 +1,55 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Lemma}
+\title{Odd substitutions preserve the finite polynomial}
+\date{2026-11-17}
+
+\p{The \vocabk{finite exterior exponential}{fdip-00TF} satisfies
+##{\extexp(a+b)=\extexp(a)\extexp(b),\qquad
+ \extexp(uv)=1+uv}
+for positive even #{a,b} and arbitrary odd #{u,v}. Let #{M'}
+also be finite free. If an algebra homomorphism
+#{\varphi:\Lambda_k M\to\Lambda_k M'}
+sends generators to odd elements, then
+##{\varphi(\extexp(a))=\extexp(\varphi(a)).}
+Consequently the polynomial is independent of the ordered basis.
+Its divided coefficients satisfy
+##{\begin{aligned}
+ \divcoef{a+b}{j}&=\sum_{r+s=j}\divcoef{a}{r}\divcoef{b}{s},\\
+ \divcoef{ca}{j}&=c^j\divcoef{a}{j}\quad(c\in k),\\
+ \divcoef{a}{r}\divcoef{a}{s}
+ &=\binom{r+s}{r}\divcoef{a}{r+s},\qquad
+ a^j=j!\divcoef{a}{j}.
+\end{aligned}}}
+
+\proof{
+\p{Every nonempty basis word squares to zero. Even basis words
+commute, so #{1+(a_I+b_I)z_I=(1+a_Iz_I)(1+b_Iz_I)} proves
+the addition identity. Every odd element squares to zero as
+well: expand its square in odd basis words. Each diagonal term
+vanishes; the two orders of each pair of distinct words cancel.
+This cancellation remains valid in characteristic #{2}.}
+
+\p{Write #{u=\sum_{I\text{ odd}}u_Iz_I}. All nonzero words
+in #{z_Iv} contain #{I}, so their pairwise products vanish.
+Hence #{\extexp(u_Iz_Iv)=1+u_Iz_Iv}. Moreover
+#{(z_Iv)(z_Jv)=-z_Iz_Jv^2=0}. The addition identity now gives
+#{\extexp(uv)=\prod_I(1+u_Iz_Iv)=1+uv}.}
+
+\p{Each positive even word is a product of two odd words.
+Its image under #{\varphi} therefore has finite exterior
+exponential equal to one plus that image. Apply the addition
+identity to the finite word expansion of #{a}; the resulting
+product is precisely #{\varphi(\extexp(a))}. A change of
+ordered basis is such a homomorphism, proving independence.}
+
+\p{In the polynomial #{\extexp(ta)}, the coefficient of
+#{t^j} selects #{j} distinct factors. For a product of the
+#{r}-th and #{s}-th coefficients, any repeated factor vanishes.
+Each selection of #{r+s} factors appears
+#{\binom{r+s}{r}} times. Selecting #{j} factors from #{a^j}
+counts the #{j!} orders of the same selection. The addition
+and scalar identities follow from the polynomial construction.
+These arguments use integer multiplicities and no division.}
+}

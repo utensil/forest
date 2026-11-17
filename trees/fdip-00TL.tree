@@ -1,0 +1,52 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{Determinants and exterior powers from paired coefficients}
+\date{2026-11-17}
+
+\p{The element #{\Omega_V} in the
+\vocabk{ring paired coefficient}{fdip-00TJ} is a canonical
+basis generator of #{\Lambda_k^{2N}(V^*\oplus V)}. For every
+endomorphism #{K}, including singular ones,
+##{\mathcal I_V\extexp(\theta_K)=\det_V K.}
+For #{0\le j\le N}, let #{\mu_j} wedge the dual factor
+before the primal factor. Then
+##{\divcoef{\theta_K}{j}
+ =(-1)^{j(j-1)/2}\mu_j
+ \bigl((\bbI\otimes\Lambda^jK)
+ \operatorname{coev}_{\Lambda^j V}\bigr).}
+Here #{(\Lambda^jV)^*=\Lambda^j(V^*)} via the determinant
+pairing. The determinant is the scalar action on #{\Lambda^NV}.}
+
+\proof{
+\p{Choose dual bases. Since #{\theta=\sum_i\psi_i\bar\psi_i},
+\ref{fdip-00TH} gives
+##{\extexp(\theta)=\prod_i(1+\psi_i\bar\psi_i),\qquad
+ \Omega_V=\psi_1\bar\psi_1\cdots\psi_N\bar\psi_N.}
+This word is a basis generator of the top free rank-one module.
+The coevaluation is independent of the basis: the two change
+matrices cancel. Naturality in \ref{fdip-00TH} makes
+#{\Omega_V} independent as well. This proves the stated
+coefficient functional exists, also over the zero ring; no
+nonzeroness argument or chosen volume is required.}
+
+\p{Write
+#{\theta_K=\sum_i(\sum_jK_{ij}\psi_j)\bar\psi_i}.
+Each summand is a product of two odd elements, so its finite
+exterior exponential is one plus that summand. To reach top
+degree, choose the nonconstant term from every factor. The
+surviving terms choose each unbarred generator once. They give
+##{\sum_{\sigma\in S_N}\operatorname{sgn}(\sigma)
+ \prod_iK_{i,\sigma(i)}=\det K.}
+Indeed moving all bars to the right and then back contributes
+the same sign twice, leaving the sign of the unbarred
+permutation. The empty product gives the rank-zero case.}
+
+\p{For increasing subsets #{I,J} of size #{j}, the same
+expansion gives the coefficient of #{\psi_I\bar\psi_J} as
+##{(-1)^{j(j-1)/2}\det K_{J,I}.}
+The sign moves each barred factor past the later unbarred
+factors. The minors are exactly the entries of #{\Lambda^jK}
+in the exterior bases, proving the claimed intrinsic formula.}
+}

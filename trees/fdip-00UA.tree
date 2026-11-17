@@ -1,0 +1,80 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Example}
+\title{An exact rational coupled sum on the sign torus}
+\date{2026-11-17}
+
+\p{Take #{X=(\mathbb Z/2\mathbb Z)^2},
+#{G=C_2}, #{F=\mathbb Q} in the sign representation,
+#{m=5} and #{w(U)=1}. Use the counting cochain pairing and
+the primary kernel #{K_U=5\bbI+\extD_U}. The
+[unnormalized partition coefficient](fdip-00TU), over all
+#{2^8=256} link assignments, is
+##{Z=9165592232192.}
+For the horizontal two-edge loop based at #{(0,0)}, let
+#{L_x(U)=U_1(1,0)U_1(0,0)}. Its normalized mean is
+##{\langle L_x\rangle=-\frac{330765108}{35803094657}.}
+All connection weights are positive by \ref{fdip-00U7}.}
+
+\p{Order the sites as #{(0,0),(1,0),(0,1),(1,1)}.
+A spanning-tree gauge sets
+#{U_1(0,0)=U_2(0,0)=U_2(1,0)=1}. The remaining signs are
+##{\begin{aligned}
+ a&=U_1(1,0),& b&=U_1(0,1),& c&=U_2(0,1),\\
+ d&=U_1(1,1),& e&=U_2(1,1).
+\end{aligned}}
+Fixing the gauge at #{(0,0)} determines it uniquely along
+the tree. Every full stabilizer consists of the two constant
+gauges: each nonzero sign link forces its endpoint gauges
+equal. Thus each of the #{32} representatives has an orbit
+of size #{16/2=8}.}
+
+\p{The coefficient pullbacks in this gauge are
+##{T_1=\begin{pmatrix}
+0&1&0&0\\a&0&0&0\\0&0&0&b\\0&0&d&0
+\end{pmatrix},\qquad
+T_2=\begin{pmatrix}
+0&0&1&0\\0&0&0&1\\c&0&0&0\\0&e&0&0
+\end{pmatrix}.}
+Put #{A=T_1-\bbI}, #{B=T_2-\bbI}.
+Order even cochains by degrees #{0,2} and odd cochains by
+directions #{1,2}. The even-to-odd block is
+##{C=\begin{pmatrix}A&-B^{\mathsf T}\\B&A^{\mathsf T}\end{pmatrix}.}
+Block elimination over #{\mathbb Q} gives
+##{\det(5\bbI+\extD_U)=\det(25\bbI_8-C^{\mathsf T}C).}
+Multiplying the displayed blocks yields exactly the matrix
+#{M} of \ref{fdip-00U9}; its determinant is #{P(a,b,c,d,e)}.}
+
+\p{The representative weights have the following finite
+distribution, obtained by substituting the signs in that
+polynomial. The last column sums their values of #{a}:
+##{\begin{array}{r|r|r}
+\det K_U&\text{count}&\sum a\\\hline
+33871089681&1&1\\
+35128130625&1&1\\
+35140126849&8&4\\
+35152125121&2&0\\
+35792477721&8&0\\
+36463048209&8&-4\\
+36469158961&3&-1\\
+37822859361&1&-1
+\end{array}}}
+
+\p{Equivalently, summing a nonconstant squarefree word over
+all #{32} sign choices gives zero: pair the two values of any
+letter occurring in it. Only the constant coefficient of #{P}
+survives. The orbit size therefore gives
+##{Z=8\cdot32\cdot35803094657=9165592232192.}
+The loop has #{L_x=a} in the fixed gauge. In the sum of
+#{aP}, only the coefficient of #{a} in #{P} survives.
+Dividing by #{Z} gives the displayed mean. Gauge invariance
+from \ref{fdip-00TW} makes these representative calculations
+equal to the full sums.}
+
+\p{The sum includes curved configurations: #{b=-1} with the
+other signs one has the two negative plaquettes of
+\ref{fdip-00SM}, translated by one vertical step. Uniform
+link counting gives zero mean for #{L_x}; the computed
+nonzero mean therefore records the change caused by the
+matter determinant.}

@@ -1,0 +1,62 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{Massive Wilson positivity for a finite group}
+\date{2026-11-17}
+
+\p{Use the spin space #{S}, self-adjoint Clifford operators
+#{\gamma_j}, grading #{\Gamma}, positive spacing #{a} and
+positive periods of the
+\vocabk{massive graded Wilson data}{fdip-00IN}.
+Let #{F} be a nonzero finite-dimensional complex unitary
+representation of a finite group #{G}. On
+#{\ell^2(X)\otimes S\otimes F}, use
+##{\begin{aligned}
+ (T_j^Uv)(x)&=\rho(U_j(x))^{-1}v(x+\varepsilon_j),\\
+ D_{a,U}&=\frac1{2a}\sum_j\gamma_j(T_j^U-(T_j^U)^{-1}),\\
+ L_{a,U}&=-\frac1{a^2}\sum_j(2\bbI -T_j^U-(T_j^U)^{-1}),\\
+ K_U^{\mathrm W}&=m\bbI+D_{a,U}-c_WL_{a,U},
+ \qquad m>0,\quad c_W\ge0.
+\end{aligned}}
+The spin operators act trivially on #{F}. Then
+##{(K_U^{\mathrm W})^\dagger
+ =\Gamma K_U^{\mathrm W}\Gamma,\qquad
+ \|(K_U^{\mathrm W})^{-1}\|\le m^{-1},\qquad
+ \det K_U^{\mathrm W}>0.}
+If #{N=|X|\dim S\dim F} and
+#{M=m+n/a+4nc_W/a^2}, then
+#{m^N\le\det K_U^{\mathrm W}\le M^N}.}
+
+\proof{
+\p{Translation by one lattice step is a permutation of #{X}
+for every positive period, and each #{\rho(U_j(x))} is
+unitary. Thus #{T_j^U} is unitary, including periods #{1}
+and #{2}. It commutes with the spin operators. Consequently
+##{D_{a,U}^\dagger=-D_{a,U},\qquad
+ -a^2L_{a,U}=\sum_j(\bbI -T_j^U)^\dagger(\bbI -T_j^U)\ge0.}
+The supplied grading anticommutes with #{D_{a,U}} and
+commutes with #{L_{a,U}}, proving the adjoint relation.}
+
+\p{For every vector #{v},
+##{\operatorname{Re}\langle v,K_U^{\mathrm W}v\rangle
+ =m\|v\|^2-c_W\langle v,L_{a,U}v\rangle
+ \ge m\|v\|^2.}
+Cauchy–Schwarz gives #{\|K_U^{\mathrm W}v\|\ge m\|v\|}.
+Finite-dimensional injectivity gives invertibility and the
+inverse bound. This establishes nonvanishing independently
+of determinant reality.}
+
+\p{For #{0\le s\le1}, apply the same argument to
+#{K_s=m\bbI+s(D_{a,U}-c_WL_{a,U})}. The grading identity
+gives
+##{\overline{\det K_s}=\det K_s^\dagger
+ =\det(\Gamma K_s\Gamma)=\det K_s.}
+This continuous real determinant never vanishes and starts at
+#{m^N}>0, so it stays positive. Finally
+#{\|D_{a,U}\|\le n/a} and #{\|L_{a,U}\|\le 4n/a^2}.
+All singular values therefore lie between #{m} and #{M};
+their product is the positive determinant. This proves the
+bounds and extends \ref{fdip-00IP} to the stated finite-group
+internal action.}
+}

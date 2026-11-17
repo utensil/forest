@@ -1,0 +1,29 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Remark}
+\title{The analytic closed-walk series comparison}
+\date{2026-11-17}
+
+\p{For readers using real analytic series, Mathlib's
+\leanref{Real.hasSum_pow_div_log_of_abs_lt_one} gives, for
+#{x\in\mathbb R} with #{|x|<1},
+##{\sum_{t\ge0}\frac{x^{t+1}}{t+1}=-\log(1-x).}
+Apply this scalar identity to the finitely many real eigenvalues
+of #{H_U/D} from \ref{fdip-0071}. It gives the absolutely
+convergent series
+##{\cW(U)=\kappa N\log D-
+ \kappa\sum_{j\ge1}\frac{\trace(H_U^j)}{jD^j}.}
+The estimate #{|\trace(H_U^j)|\le N(2n)^j} gives uniform
+convergence over the unitary link assignments. The formal
+scalar declaration supplies neither the lattice norm estimate
+nor the walk interpretation. The finite determinant and exact
+finite-sum remainder in \ref{fdip-0071} have their own proofs.}
+
+\p{Kazakov and Migdal's adjoint-matrix model gives a trace-log
+and loop weights involving #{|\trace U[\Gamma]|^2}; see
+\citet{§2, p. 2, (3)–(4)}{kazakov1992induced}.
+This compares the closed-walk method for an adjoint matrix
+field with the real scalar field used in \ref{fdip-0072}.
+The finite scalar plaquette coefficient follows from the
+counting proof there.}
