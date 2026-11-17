@@ -1,0 +1,64 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Lemma}
+\title{The quaternion block determinant}
+\date{2026-11-17}
+
+\p{For the \vocabk{one-vertex Hurwitz model}{fdip-00ZA},
+put
+##{a=U^{-1}-1,\qquad b=V^{-1}-1,\qquad
+s=N(a)+N(b),\qquad t=N(ab-ba).}
+Then the following identity holds in #{\mathbb Q[m]}:
+##{\det K_{U,V}(m)=\bigl((m^2-s)^2-t\bigr)^4.}
+It therefore holds at every rational mass, including
+singular kernels.}
+
+\proof{
+\p{Order the even slots as #{(1,e_1\wedge e_2)} and
+the odd slots as #{(e_1,e_2)}. Each entry below is a
+rational linear map of the rank-#{4} fiber. Exterior
+insertion and deletion give
+##{\extD_{U,V}=\begin{pmatrix}0&A^\dagger\\A&0\end{pmatrix},
+\qquad
+A=\begin{pmatrix}L_a&-L_{\bar b}\\L_b&L_{\bar a}\end{pmatrix}.}
+The upper-right minus sign in #{A} comes from deleting
+#{e_2} from #{e_1\wedge e_2}. The adjoints are those
+of \ref{fdip-00ZC}.}
+
+\p{Direct composition of these coefficient maps gives
+##{A^\dagger A=s\bbI+B,\qquad
+B=\begin{pmatrix}
+0&L_{\overline{ab-ba}}\\L_{ab-ba}&0
+\end{pmatrix},\qquad B^2=t\bbI.}
+For example the upper-right block is
+#{L_{-\bar a\bar b+\bar b\bar a}
+=L_{\overline{ab-ba}}}.
+The diagonal blocks of #{A^\dagger A} are the sums
+of the scalar norms of #{a} and #{b}. Squaring #{B}
+uses #{\bar z z=z\bar z=N(z)}.}
+
+\p{For an indeterminate #{x}, eliminate the lower-left
+block of #{x\bbI -B} over #{\mathbb Q(x)}. The diagonal
+blocks after elimination are #{x\bbI_F} and
+#{x\bbI_F-x^{-1}t\bbI_F}; the eliminating block
+triangular map has determinant one. Hence
+##{\det(x\bbI -B)=(x^2-t)^4.}
+Both sides are polynomials, so the identity holds in
+#{\mathbb Q[x]}, including at #{x=0}. Similarly, over
+#{\mathbb Q(m)}, eliminating the upper-right block of
+#{K_{U,V}(m)} using its lower diagonal block gives
+##{\det K_{U,V}(m)
+=\det(m^2\bbI -A^\dagger A)
+=\det((m^2-s)\bbI -B).}
+The first determinant on the right is of a rank-#{8}
+space. Substituting #{x=m^2-s} in the preceding identity
+proves the asserted polynomial equality.}
+}
+
+\p{The scalar norm relation is
+\leanref{Quaternion.star_mul_self}; invertible-block
+elimination is the component
+\leanref{Matrix.det_fromBlocks₂₂}. The polynomial
+specialization above also covers the masses where an
+elimination block is not invertible.}

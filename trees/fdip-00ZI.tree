@@ -1,0 +1,40 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Lemma}
+\title{Unit differences and imaginary components}
+\date{2026-11-17}
+
+\p{For the Hurwitz units of \ref{fdip-00V1},
+##{N(U^{-1}-1)=2-2\operatorname{Re}U.}
+Writing #{u=U-\operatorname{Re}U} and
+#{v=V-\operatorname{Re}V} for their imaginary components,
+the scalars of \ref{fdip-00ZD} satisfy
+##{\begin{aligned}
+s&=4-2(\operatorname{Re}U+\operatorname{Re}V),\\
+t&=4\bigl(|u|^2|v|^2-(u\cdot v)^2\bigr).
+\end{aligned}}
+Here the dot product and squared lengths are the ordinary
+rational coordinate expressions in #{(\qi,\qj,\qk)}.}
+
+\proof{
+\p{Since #{U^{-1}=\bar U} and #{N(U)=1}, multiplication
+of the conjugate pair gives
+#{N(\bar U-1)=(U-1)(\bar U-1)=2-U-\bar U}.
+The scalar part of #{U+\bar U} is #{2\operatorname{Re}U},
+which proves the first formula and its sum for #{s}.}
+
+\p{Scalar parts commute with every quaternion, so
+#{ab-ba=uv-vu} for #{a=\bar U-1} and #{b=\bar V-1}.
+Write #{u=u_1\qi+u_2\qj+u_3\qk} and
+#{v=v_1\qi+v_2\qj+v_3\qk}. Expanding the quaternion
+products gives
+##{uv-vu=2\bigl(
+ (u_2v_3-u_3v_2)\qi
+ +(u_3v_1-u_1v_3)\qj
+ +(u_1v_2-u_2v_1)\qk\bigr).}
+Its squared norm is #{4} times the sum of the three
+squared minors. Expanding those squares gives
+#{4(|u|^2|v|^2-(u\cdot v)^2)}, proving the formula for
+#{t}.}
+}

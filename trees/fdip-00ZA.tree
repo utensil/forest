@@ -1,0 +1,51 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Definition}
+\title{The one-vertex Hurwitz model}
+\date{2026-11-17}
+
+\p{The \newvocab{one-vertex Hurwitz model} uses the
+\vocabk{based cochains}{fdip-00SH} with #{n=2},
+#{N_1=N_2=1}, scalar field #{\mathbb Q}, and coefficient
+fiber #{F=\mathcal O\otimes_{\mathbb Z}\mathbb Q}.
+The Hurwitz order and its #{24}-element unit group
+#{G=2T} are those of \ref{fdip-00V1}. Write #{L_z(x)=zx}
+for left multiplication on #{F}. A connection is an
+ordered pair #{(U,V)\in G^2}, one unit on each positive
+labeled loop at the vertex #{*}.}
+
+\p{The cochain space and its ordered cell slots are
+##{\mathcal V=\Lambda(\mathbb Q^2)\otimes_{\mathbb Q}F,
+\qquad
+\begin{array}{c|c|c}
+\text{degree}&\text{cell slots}&\mathbb Q\text{-rank}\\\hline
+0&1&4\\
+1&e_1,e_2&8\\
+2&e_1\wedge e_2&4
+\end{array}.}
+Thus #{\mathcal V} has rank #{16}. The face orientation
+is #{e_1\wedge e_2}. On each slot use the norm pairing
+#{\langle x,y\rangle_0=\operatorname{Re}(\bar x y)}
+of the \vocabk{Hurwitz fiber}{fdip-00V2}; distinct slots
+are orthogonal. The resulting cochain pairing is their
+sum. The ordered Hurwitz basis in each slot is
+#{(1,\qi,\qj,h)}, where #{h=(1+\qi+\qj+\qk)/2}.}
+
+\p{The inverse-link pullbacks are #{T_1=L_{U^{-1}}}
+and #{T_2=L_{V^{-1}}}. For the
+\vocabk{cochain operator}{fdip-00SR}, this gives
+##{\begin{aligned}
+\extd_{U,V}&=(e_1\wedge)(T_1-\bbI)
+                 +(e_2\wedge)(T_2-\bbI),\\
+\extdag_{U,V}&=(e_1\cdot)(T_1^{-1}-\bbI)
+                 +(e_2\cdot)(T_2^{-1}-\bbI),\\
+\extD_{U,V}&=\extd_{U,V}+\extdag_{U,V},\qquad
+K_{U,V}(m)=m\bbI+\extD_{U,V}.
+\end{aligned}}
+Here #{m\in\mathbb Q}. The
+\vocabk{coupled finite coefficient functional}{fdip-00TU}
+has weight #{w(U,V)=1}, so its partition coefficient is
+##{Z(m)=\sum_{(U,V)\in G^2}\det K_{U,V}(m).}
+The sum counts all #{576} ordered pairs. Normalization
+means division by #{Z(m)} only when it is nonzero.}
