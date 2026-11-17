@@ -1,0 +1,42 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{The right commutant and all invariant Hurwitz forms}
+\date{2026-11-17}
+
+\p{For the \vocabk{integral Hurwitz fiber and form}{fdip-00V2},
+write #{\mathcal O_k=\mathcal O\otimes_{\mathbb Z}k}.
+The \vocabk{commutant}{fdip-003T} of its left #{2T} action is
+##{\operatorname{End}_{k[2T]}(F_k)\cong\mathcal O_k^{\mathrm{op}},}
+where #{a} acts by right multiplication #{R_a(x)=xa}.
+Every invariant #{k}-bilinear form on #{F_k} has the unique
+expression
+##{c_a(x,y)=b_k(x,ya),\qquad a\in\mathcal O_k.}
+This form is perfect exactly when #{a} is a unit. Its
+symmetry and alternation require their own checks.}
+
+\proof{
+\p{The units #{1,\qi,\qj,h} form a basis of #{\mathcal O}
+by \ref{fdip-00V1}. A linear map commuting with their left
+actions therefore commutes with left multiplication by every
+#{x\in\mathcal O_k}. It satisfies
+#{T(x)=T(x\cdot 1)=xT(1)}, so is #{R_a} for the unique
+#{a=T(1)}. Conversely every right multiplication commutes
+with all left multiplications. Since
+#{R_a\circ R_b=R_{ba}}, this identifies the opposite algebra.
+The proof uses no averaging or semisimplicity.}
+
+\p{Perfectness of #{b_k}, proved in \ref{fdip-00V4}, gives
+a unique endomorphism #{T} with #{c(x,y)=b_k(x,Ty)}
+for every bilinear form #{c}. Invariance of #{c} and #{b_k}
+gives #{b_k(x,u^{-1}Tu\,y)=b_k(x,Ty)} for each #{u\in 2T}.
+Perfectness makes this equivalent to #{T} commuting with
+the left action. The preceding argument gives #{T=R_a}.
+The form #{c_a} is perfect precisely when #{R_a} is invertible.}
+
+\p{If #{a} is a unit, #{R_{a^{-1}}} is its inverse.
+Conversely, if #{R_a} is bijective, choose #{b} with #{ba=1}.
+Then #{(ab-1)a=0}; injectivity of #{R_a} gives #{ab=1}.
+Thus #{a} is a two-sided unit, proving the criterion.}
+}

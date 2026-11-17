@@ -1,0 +1,45 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{A perfect invariant form at every coefficient ring}
+\date{2026-11-17}
+
+\p{The \vocabk{integral alternating Hurwitz form}{fdip-00V2}
+is perfect and invariant under left #{2T}. These properties
+hold after scalar extension to every commutative ring #{k}.
+For every unit #{u\in 2T}, the #{b_k}-adjoint of left
+multiplication by #{u} is left multiplication by #{u^{-1}}.}
+
+\proof{
+\p{Put #{c=\qi +\qj}. Right multiplication by #{c} has
+adjoint right multiplication by #{\bar c=-c} for the
+rational norm pairing. Indeed, the scalar part of a product
+of two quaternions is unchanged by reversing their order,
+which gives
+#{\langle xc,y\rangle_0=\langle x,y\bar c\rangle_0}.
+It follows that #{\langle x,yc\rangle_0} is alternating.
+Evaluating it on #{1,\qi,\qj,h} gives exactly the integer
+matrix in \ref{fdip-00V3}; for instance
+#{hc=\qj -1} gives its last column #{(-1,0,1,0)^{\mathsf T}}.
+This proves the stated rational expression and its integrality
+on the entire lattice.}
+
+\p{Every #{u\in 2T} has norm one by \ref{fdip-00V1}.
+Left multiplication by #{u} preserves the norm pairing and
+commutes with right multiplication by #{c}. Consequently
+##{b_{\mathbb Z}(ux,uy)
+ =\langle ux,u(yc)\rangle_0
+ =\langle x,yc\rangle_0=b_{\mathbb Z}(x,y).}
+The integer Gram matrix is alternating, and
+\ref{fdip-00V3} computes its determinant as one. Its inverse
+therefore has integer entries, so the form is perfect.}
+
+\p{All these equalities are equalities of integer matrices.
+Scalar extension preserves them and the determinant one,
+including in characteristic #{2}. Finally invariance gives
+#{b_k(ux,y)=b_k(x,u^{-1}y)}. Perfectness identifies the
+adjoint uniquely, proving the inverse-unit formula. Over
+#{\mathbb Q} or #{\mathbb R}, the positive norm pairing
+has the same inverse-unit adjoints.}
+}

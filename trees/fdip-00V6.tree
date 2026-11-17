@@ -1,0 +1,58 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{The coupled Hurwitz kernel has an alternating form}
+\date{2026-11-17}
+
+\p{Use the \vocabk{integral alternating Hurwitz form}{fdip-00V2}
+on each based cochain slot and its direct-sum
+\vocabk{cochain pairing}{fdip-00SR} #{B}. If there are #{N}
+slots, the cochain module has rank #{4N}, and #{B} is
+perfect alternating. For every link assignment and mass
+#{m\in k}, put #{K_U=m\bbI +\extD_U}. Then
+##{B(v,K_Uv)=0\quad\text{for every }v.}
+Thus its \vocabk{kernel form}{fdip-00UV} is alternating, and
+##{\det K_U=p_B(K_U)^2.}
+In the basis ordered by slots and then #{(1,\qi,\qj,h)},
+#{\pfaffian(B)=(-1)^N} and #{p_B(m\bbI)=m^{2N}}.
+These are integral identities and remain valid in
+characteristic #{2}.}
+
+\proof{
+\p{A direct sum of perfect alternating forms is perfect
+alternating. Each block has Pfaffian #{-1}, so matching
+within the blocks gives #{\pfaffian(B)=(-1)^N}.
+By \ref{fdip-00V4}, coefficient transport has inverse-unit
+adjoint. Reindexing the cochain sum and taking the signed
+insertion/deletion adjoints, exactly as in \ref{fdip-00SS},
+gives #{\extd_U^\dagger=\extdag_U} and
+#{\extD_U^\dagger=\extD_U}.}
+
+\p{Write #{v=\sum_pv_p} by cell degree. Distinct degrees
+are orthogonal for #{B}. Since #{\extd_U} raises degree
+and #{\extdag_U} lowers it,
+##{\begin{aligned}
+ B(v,\extD_Uv)
+ &=\sum_p\bigl(B(v_{p+1},\extd_Uv_p)
+                 +B(v_p,\extdag_Uv_{p+1})\bigr)\\
+ &=\sum_p\bigl(B(v_{p+1},\extd_Uv_p)
+                 +B(\extd_Uv_p,v_{p+1})\bigr)=0.
+\end{aligned}}
+Alternation also gives #{B(v,mv)=0}. This proves the
+zero-diagonal condition directly, with no cancellation of
+#{2}. The transpose identity
+#{K_U^{\mathsf T}B=BK_U} follows from self-adjointness,
+but the degree argument supplies the additional alternation
+required by \ref{fdip-00UX}. That theorem gives the square
+identity and the scalar value.}
+
+\p{The same computation works first over #{\mathbb Z[m]}
+and then under every scalar extension. Over #{\mathbb Q}
+or #{\mathbb R}, the rational positive norm pairing has
+exactly the same inverse-transport and exterior-slot adjoints.
+It therefore gives the same algebraic operator #{\extD_U},
+not a different kernel. In particular the large-mass result
+\ref{fdip-00U7} applies to this kernel through its positive
+norm pairing, while the integral square identity uses #{B}.}
+}

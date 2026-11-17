@@ -1,0 +1,45 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{A basis-independent square root of the determinant}
+\date{2026-11-17}
+
+\p{For the \vocabk{kernel form}{fdip-00UV}, suppose
+#{A_{B,K}} is alternating. For a top-volume generator
+#{\omega}, the scalar #{\pfaffian_\omega(B)} is a unit,
+and
+##{p_B(K)=\pfaffian_\omega(A_{B,K})
+                   \pfaffian_\omega(B)^{-1}}
+is independent of the volume generator and of any basis.
+It satisfies
+##{\det K=p_B(K)^2,\qquad p_B(m\bbI)=m^s.}
+In particular the determinant is nonnegative over an ordered
+field. The scalar #{p_B(K)} is invariant under changes of
+basis preserving #{B}, including coefficient gauge changes
+that preserve that form.}
+
+\proof{
+\p{Choose an ordered basis and its dual top volume.
+The matrices of the two forms are #{B} and #{BK}.
+Perfectness makes #{\det B} a unit.
+By \ref{fdip-00UT}, #{\pfaffian(B)^2=\det B}; hence
+#{\pfaffian(B)} is a unit as well. Applying the same identity
+to #{BK} and using determinant multiplicativity gives
+##{\det B\det K=\det(BK)=\pfaffian(BK)^2.}
+Cancel the unit #{\det B=\pfaffian(B)^2} to obtain the
+square formula. Each term of the matching polynomial has
+#{s} entries, giving #{\pfaffian(mB)=m^s\pfaffian(B)}.}
+
+\p{For a basis change #{P}, the matrices become
+##{B'=P^{\mathsf T}BP,\qquad K'=P^{-1}KP,\qquad
+ B'K'=P^{\mathsf T}BKP.}
+By congruence in \ref{fdip-00UT}, numerator and denominator
+of the quotient each acquire the unit #{\det P}. Their
+ratio is unchanged. More generally, replacing a volume
+#{\omega} by #{c\omega}, for any unit #{c}, multiplies
+each scalar Pfaffian by #{c^{-1}}. Their quotient is
+unchanged, also in rank zero. This includes orientation
+reversal over an ordered field. In such a field a square
+is nonnegative, giving the sign assertion.}
+}

@@ -1,0 +1,59 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Lemma}
+\title{The Hurwitz basis as matrices modulo three}
+\date{2026-11-17}
+
+\p{The basis #{(1,\qi,\qj,h)} of \ref{fdip-00V1} has
+images in #{M_2(\mathbb F_3)}
+##{\begin{aligned}
+ Q_1&=\begin{pmatrix}1&0\\0&1\end{pmatrix},&
+ Q_i&=\begin{pmatrix}0&1\\2&0\end{pmatrix},\\
+ Q_j&=\begin{pmatrix}1&1\\1&2\end{pmatrix},&
+ Q_h&=\begin{pmatrix}0&2\\1&1\end{pmatrix}.
+\end{aligned}}
+They define an algebra isomorphism
+##{\mathcal O/3\mathcal O\ \cong\ M_2(\mathbb F_3).}
+Quaternion conjugation becomes the matrix adjugate, and norm
+becomes determinant. Left multiplication on columns gives an
+irreducible module #{S=\mathbb F_3^2} for #{2T}, with
+commutant #{\mathbb F_3}.}
+
+\proof{
+\p{Direct multiplication gives
+#{Q_i^2=Q_j^2=-Q_1}, #{Q_iQ_j=-Q_jQ_i}, and
+#{Q_h=(Q_1+Q_i+Q_j+Q_iQ_j)/2} over #{\mathbb F_3}.
+Since #{2} is invertible here, these relations reproduce
+the quaternion products and the Hurwitz multiplication table
+of \ref{fdip-00V1}. They define the algebra map.}
+
+\p{Flattening each matrix in row order gives the rows of
+##{\begin{pmatrix}
+1&0&0&1\\0&1&2&0\\1&1&1&2\\0&2&1&1
+\end{pmatrix}.}
+Subtract its first row from the third. The remaining
+#{3\times 3} determinant is
+#{0-2(1-2)=2} modulo #{3}. Thus the 4 images form a
+basis, proving bijectivity. This gives an explicit basis
+version of the algebra identification in \ref{fdip-00MK};
+its #{h} is the element #{\omega+1}.}
+
+\p{For two-by-two matrices the adjugate is linear.
+It fixes #{Q_1}, negates #{Q_i,Q_j}, and sends #{Q_h}
+to #{Q_1-Q_h}, just as quaternion conjugation acts on the
+basis. Hence conjugation becomes adjugation on every element.
+The identity #{X\adjugate X=(\det X)Q_1} then identifies
+the norm with the determinant. In particular all unit images
+lie in #{\operatorname{SL}_2(\mathbb F_3)}.}
+
+\p{The unit images span the full matrix algebra, because
+the 4 basis elements are units. A nonzero subspace of
+#{S} invariant under them is invariant under every matrix.
+A matrix can send any chosen nonzero vector to any target
+vector, so this subspace is all of #{S}. An endomorphism
+commuting with all matrices is scalar: commuting with the
+two diagonal matrix units makes it diagonal, and commuting
+with an off-diagonal matrix unit equates its diagonal entries.
+This proves the two module assertions.}
+}
