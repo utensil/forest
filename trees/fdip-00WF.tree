@@ -1,0 +1,54 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{Endpoint cancellation makes the pair invariant}
+\date{2026-11-17}
+
+\p{The \vocabk{dressed pair}{fdip-00WD} is a
+\vocabk{gauge-invariant family}{fdip-00TU} if its insertion
+is covariant. This includes every fixed
+#{M\in\operatorname{End}_G(F_x)}. Its path transport obeys
+##{h_\gamma(U^g)
+ =\rho(g(x))h_\gamma(U)\rho(g(y))^{-1}.}}
+
+\proof{
+\p{Let the successive path vertices be
+#{y=v_0,v_1,\ldots,v_\ell=x}.
+For either orientation, the transformed map of its
+#{j}-th traversal is
+#{\rho(g(v_j))h_j\rho(g(v_{j-1}))^{-1}}.
+In their ordered product, each pair at an intermediate
+vertex cancels. The remaining endpoint factors give the
+displayed identity, including the empty path.}
+
+\p{Write #{G_x=\rho(g(x))} and #{G_y=\rho(g(y))}
+within this proof. The paired-algebra action
+#{R_g} from the [coupled functional](fdip-00TU) acts on
+the universal field coefficients as
+#{R_g\psi_y=G_y^{-1}\psi_y} and
+#{R_g\bar\psi_x=\bar\psi_xG_x}.
+Indeed the unbarred generators belong to the dual
+summand and the barred generators to the original summand.
+Consequently
+##{R_gP_{\gamma,M}(U)
+ =\bar\psi_xG_xM_Uh_\gamma(U)G_y^{-1}\psi_y.}
+Covariance of #{M_U} and the path identity make this
+#{P_{\gamma,M}(U^g)}. A fixed #{M} commuting with every
+#{\rho(g(x))} satisfies the same covariance.}
+}
+
+\texfig{\begin{tikzcd}[column sep=large,row sep=large]
+F_y \arrow[r,"h_\gamma(U)"] \arrow[d,"\rho(g(y))"']
+  & F_x \arrow[d,"\rho(g(x))"]\\
+F_y \arrow[r,"h_\gamma(U^g)"']
+  & F_x
+\end{tikzcd}}
+
+\p{The square expresses the endpoint identity. In the
+equivalent simultaneous change of field coordinates
+#{\psi_y'=G_y\psi_y},
+#{\bar\psi_x'=\bar\psi_xG_x^{-1}},
+the transformed transport and insertion give the same
+scalar contraction. The inverse action on the algebra
+generators above is the pullback of this coordinate change.}

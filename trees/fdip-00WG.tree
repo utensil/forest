@@ -1,0 +1,52 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{A dressed coefficient is a fiber trace}
+\date{2026-11-17}
+
+\p{For the \vocabk{dressed pair}{fdip-00WD}, let
+#{K_U\in\operatorname{End}_k(\mathcal V)} be the kernel
+in the \vocabk{coupled finite coefficient functional}{fdip-00TU}.
+The unnormalized coefficient at #{U} is
+##{\begin{aligned}
+ &\mathcal I_{\mathcal V}\bigl(
+ P_{\gamma,M}(U)\extexp(\theta_{K_U})\bigr)\\
+ &\qquad=-\trace_{F_x}\bigl(
+ M_Uh_\gamma(U)\pr_y(\adjugate K_U)\iota_x\bigr).
+\end{aligned}}
+This formula includes singular backgrounds.
+The kernel is invertible exactly when #{\det K_U} is a unit.
+Under that hypothesis its normalized coefficient at #{U} is
+##{-\trace_{F_x}\bigl(
+ M_Uh_\gamma(U)\pr_yK_U^{-1}\iota_x\bigr).}}
+
+\proof{
+\p{The paired insertion theorem \ref{fdip-00TQ}, with
+#{A_U=\iota_xM_Uh_\gamma(U)\pr_y}, gives the full trace
+#{-\trace_{\mathcal V}(A_U\adjugate K_U)}.
+For maps #{a:F_x\to\mathcal V} and
+#{b:\mathcal V\to F_x}, choose finite bases and expand:
+##{\trace_{\mathcal V}(ab)
+ =\sum_{i,j}a_{ij}b_{ji}
+ =\sum_{j,i}b_{ji}a_{ij}
+ =\trace_{F_x}(ba).}
+Commutativity of #{k} proves the middle equality.
+Take #{a=\iota_x} and
+#{b=M_Uh_\gamma(U)\pr_y\adjugate K_U}.
+This gives precisely the asserted fiber trace.}
+
+\p{If #{\det K_U} is a unit, the finite cofactor identities
+#{K_U\adjugate K_U=(\det K_U)\bbI
+=(\adjugate K_U)K_U}
+give the inverse #{(\det K_U)^{-1}\adjugate K_U}.
+Conversely, an inverse gives
+#{\det K_U\,\det(K_U^{-1})=1}.
+Divide the first formula by #{\det K_U} only in this case.
+The cofactor formula itself is polynomial in the entries
+and requires no such division.}
+}
+
+\p{The matrix form of the determinant-unit equivalence is
+\leanref{Matrix.isUnit_iff_isUnit_det}. The barred-first
+minus sign is supplied by \ref{fdip-00TQ}.}
