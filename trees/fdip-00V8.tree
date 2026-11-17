@@ -1,0 +1,48 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Example}
+\title{Two columns and the reduced alternating form}
+\date{2026-11-17}
+
+\p{In the matrix realization of \ref{fdip-00V7}, write
+#{X=(x_1,x_2)} by columns. The map #{X\mapsto(x_1,x_2)}
+is the explicit left-#{2T}-module isomorphism
+##{\mathcal O/3\mathcal O\cong S\oplus S,\qquad
+ S=\mathbb F_3^2.}
+The Hurwitz fiber has rank #{4}; each column module has rank
+two. Its full internal commutant is #{M_2(\mathbb F_3)^{\mathrm{op}}}
+by \ref{fdip-00V5}, whereas the commutant on one column is
+scalar by \ref{fdip-00V7}.}
+
+\p{For the area form
+#{\epsilon(u,v)=u_1v_2-u_2v_1}, reduction of the
+[integral alternating Hurwitz form](fdip-00V2) is
+##{b_{\mathbb F_3}(X,Y)=\epsilon(x_1,y_1)+\epsilon(x_1,y_2)
+                         +\epsilon(x_2,y_1).}
+Its multiplicity-space matrix is
+#{\left(\begin{smallmatrix}1&1\\1&0\end{smallmatrix}\right)},
+whose determinant is #{-1}. Thus this is a perfect alternating
+form on the two-column module.}
+
+\p{To calculate the specific form, let
+##{C=Q_i+Q_j=\begin{pmatrix}1&2\\0&2\end{pmatrix}.}
+The reduced trace #{t(z)=z+\bar z=2\operatorname{Re}(z)}
+becomes ordinary matrix trace under \ref{fdip-00V7}, since
+#{X+\adjugate X=(\trace X)\bbI}. Thus
+##{b_{\mathbb F_3}(X,Y)=\tfrac{1}{2}\trace(\adjugate(X)YC).}
+This reduction is legitimate over #{\mathbb Z[1/2]} and
+then #{\mathbb F_3}, where #{1/2=2}. Expanding by columns,
+##{\trace(\adjugate(X)YC)
+ =-\epsilon(x_2,y_1)+2\epsilon(x_1,y_1)+2\epsilon(x_1,y_2).}
+Multiplication by #{2} in #{\mathbb F_3} gives the displayed
+three-term formula. Equivalently it reproduces the integer
+Gram matrix modulo #{3} on the 4 basis images.}
+
+\p{Setting #{X=Y} cancels the two mixed area terms and
+kills the diagonal area term, proving alternation.
+The tensor of the invertible area matrix with the displayed
+invertible multiplicity matrix is invertible, proving
+perfectness. Every unit image has determinant one by
+\ref{fdip-00V7}, so it preserves #{\epsilon}; acting on both
+columns proves invariance of the reduced form directly.}

@@ -1,0 +1,67 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{The real irreducible commutant from adjunction}
+\date{2026-11-17}
+
+\p{Let a finite group #{G} act irreducibly on a nonzero
+finite-dimensional real vector space #{V}. Then its
+\vocabk{commutant}{fdip-003T}, with composition as multiplication,
+is isomorphic as a real algebra to exactly one of
+##{\mathbb R,\qquad\mathbb C,\qquad\mathbb H.}
+For an invariant positive inner product, adjunction corresponds
+to the usual conjugation in these algebras. This statement
+has real coefficients.}
+
+\proof{
+\p{Sum any positive inner product over the finite group.
+Every nonzero vector has a strictly positive contribution,
+and reindexing the sum proves invariance. A commuting map
+has invariant kernel and image; irreducibility makes a
+nonzero such map invertible. Thus the commutant #{\mathcal C}
+is a finite-dimensional real division algebra. Adjunction
+preserves it, since the group acts orthogonally.}
+
+\p{A self-adjoint element of #{\mathcal C} has a real
+orthogonal eigenspace decomposition by \ref{fdip-002R}.
+Each eigenspace is invariant under #{G}, so irreducibility
+leaves one eigenvalue. Every self-adjoint commuting map is
+therefore scalar. Decompose an arbitrary element into
+self-adjoint and skew-adjoint parts to get
+##{\mathcal C=\mathbb R\bbI\oplus\mathfrak a,\qquad
+ \mathfrak a=\{a\in\mathcal C:a^\dagger=-a\}.}
+For #{a\ne 0} in #{\mathfrak a}, the operator
+#{a^\dagger a=-a^2} is a positive scalar multiple of the
+identity. Polarization defines a positive inner product on
+#{\mathfrak a} by
+##{-\tfrac{1}{2}(ab+ba)=\langle a,b\rangle_{\mathfrak a}\bbI.}
+The right side is scalar because the squares of #{a}, #{b}
+and #{a+b} are scalar; bilinearity and positivity follow
+from this formula and #{a^\dagger a}.}
+
+\p{If #{\mathfrak a=0}, the algebra is #{\mathbb R}.
+If its dimension is one, a unit vector #{u} has
+#{u^2=-\bbI}, giving #{\mathbb C}. Otherwise choose
+orthonormal #{u,v}. Then
+#{u^2=v^2=-\bbI} and #{uv=-vu}. The element #{w=uv}
+is skew-adjoint, satisfies #{w^2=-\bbI}, and anticommutes
+with #{u,v}. Thus #{u,v,w} are orthonormal.}
+
+\p{Let #{z\in\mathfrak a} be perpendicular to those three.
+It anticommutes with each. Anticommuting with #{u} and #{v}
+also makes it commute with #{uv=w}; together these relations
+give #{2wz=0}. Since #{2} and #{w} are invertible, #{z=0}.
+The skew subspace is therefore exactly three-dimensional.
+The products of #{u,v,w} are the Hamilton quaternion rules,
+giving #{\mathbb H}. Adjunction fixes the scalar part and
+negates the skew part in all three cases, so it is the
+stated conjugation. Their real dimensions #{1,2,4}
+distinguish the algebras.}
+}
+
+\p{This proves the real classification used in
+\ref{fdip-004Z} directly from the finite real spectral theorem.
+For its representation-theoretic setting, compare
+\citet{§13.2, pp. 106–109}{serre1977linear}.
+No trichotomy over arbitrary coefficient rings is asserted.}

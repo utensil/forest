@@ -1,0 +1,83 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Lemma}
+\title{Integral Pfaffian identities}
+\date{2026-11-17}
+
+\p{Let #{b} be an alternating form on the finite free
+module #{E} of rank #{2s}, and let #{\omega} be a volume
+form as in the \vocabk{ring Pfaffian}{fdip-00UR}.
+For every endomorphism #{P:E\to E}, its pullback
+#{(P^*b)(x,y)=b(Px,Py)} satisfies
+##{\pfaffian_\omega(P^*b)=\det(P)\pfaffian_\omega(b).}
+Define #{b^\flat:E\to E^*} by #{b^\flat(x)=b(x,-)},
+and let #{\xi\in\Lambda^{2s}E} satisfy #{\omega(\xi)=1}.
+Then
+##{(\Lambda^{2s}b^\flat)(\xi)
+       =\pfaffian_\omega(b)^2\omega.}
+Neither identity requires #{P} or #{b^\flat} invertible.}
+
+\proof{
+\p{First use an ordered basis of #{E} with dual basis
+#{z_1,\ldots,z_{2s}} and volume
+#{\omega_0=z_1\cdots z_{2s}}. Let #{A} represent #{b}
+and write #{\pfaffian(A)=\pfaffian_{\omega_0}(b)}.
+Then #{a_b=\sum_{i<j}A_{ij}z_iz_j}. In the finite
+product defining #{\extexp(ta_b)}, a
+nonzero term of degree #{t^s} selects disjoint pairs covering
+all generators. Even pair words commute, and sorting the
+selected word gives precisely its matching sign. This proves
+the matching formula
+##{\pfaffian(A)=\sum_{\mathfrak m}\varepsilon(\mathfrak m)
+                      \prod_{(i,j)\in\mathfrak m}A_{ij}.}
+Here each pair in a perfect matching has #{i<j}, pairs
+are ordered by their first index, and
+#{\varepsilon(\mathfrak m)} is the sign of the resulting
+word of #{2s} indices. Substitute
+#{z_i\mapsto\sum_jP_{ij}z_j}. The alternating quadratic
+coefficient matrix becomes #{P^{\mathsf T}AP}, including
+zero diagonal. Naturality in \ref{fdip-00TH} carries the
+#{s}-th divided coefficient to the new one. The top word
+is multiplied by #{\det P}, by its finite alternating
+expansion. Comparing coefficients proves congruence over
+#{k} itself:
+#{\pfaffian(P^{\mathsf T}AP)=\det(P)\pfaffian(A)}.}
+
+\p{For the square identity, take the generic alternating
+matrix with independent strict-upper entries over
+#{k_0=\mathbb Z[a_{ij}:i<j]}. The claimed equality is between
+two polynomials in this domain. Work temporarily in its
+fraction field and induct on #{s}; the empty identity is
+#{1=1}. When #{s>0}, the pivot #{a=a_{12}} is nonzero.
+For each #{j>2}, replace the basis vector by
+##{e'_j=e_j+\frac{a_{2j}}a e_1-\frac{a_{1j}}a e_2,\qquad
+ e'_1=e_1,\quad e'_2=e_2.}
+The change has determinant one. Direct evaluation gives
+##{A(e'_1,e'_j)=A(e'_2,e'_j)=0.}
+Thus the new matrix is
+##{\begin{pmatrix}0&a\\-a&0\end{pmatrix}\oplus A_0.}
+In its matching sum, the first index must pair with the
+second; hence its Pfaffian is #{a\pfaffian(A_0)}.
+Its determinant is #{a^2\det A_0}. Congruence and the
+inductive identity in rank #{2s-2} prove
+#{\det A=\pfaffian(A)^2} in the fraction field.}
+
+\p{The domain #{k_0} injects into its fraction field, so the
+two integer polynomials were already equal in #{k_0}.
+Specializing their variables proves the identity over every
+commutative ring. The pivot denominator belongs only to the
+proof field; no denominator is inverted in the target ring.}
+
+\p{The matrix of #{b^\flat} is #{A^{\mathsf T}}, whose
+determinant is #{\det A}; thus the square identity is the
+claimed identity between top exterior powers for #{\omega_0}.
+For an arbitrary volume #{\omega=c\omega_0}, the scalar
+#{c} is a unit, #{\xi=c^{-1}\xi_0}, and
+#{\pfaffian_\omega(b)=c^{-1}\pfaffian_{\omega_0}(b)}.
+Both sides of the exterior-power identity scale by
+#{c^{-1}}; both sides of the pullback identity scale by
+#{c^{-1}} as well. This proves the statements for the
+chosen volume. In rank zero the prescribed volume is
+#{1}, and both statements reduce to #{1=1}.}
+}

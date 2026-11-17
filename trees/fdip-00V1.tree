@@ -1,0 +1,57 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Lemma}
+\title{A Hurwitz basis and its norm-one units}
+\date{2026-11-17}
+
+\p{In the rational Hamilton quaternion algebra, write
+#{\qi^2=\qj^2=-1} and #{\qk=\qi\qj=-\qj\qi}.
+The \vocabk{Hurwitz order}{fgap-0016} has ordered
+#{\mathbb Z}-basis
+##{(1,\qi,\qj,h),\qquad h=(1+\qi +\qj +\qk)/2.}
+The earlier generator is #{\omega=h-1}.
+This lattice is a ring stable under quaternion conjugation.
+For #{x=a+b\qi +c\qj +dh}, its norm is
+##{N(x)=a^2+b^2+c^2+d(a+b+c)+d^2\in\mathbb Z.}
+Its units are exactly the #{24} norm-one elements
+##{\{\pm 1,\pm\qi,\pm\qj,\pm\qk\}
+ \ \cup\ 
+ \{(\pm 1\pm\qi\pm\qj\pm\qk)/2\}.}
+They form the Hurwitz-unit realization of #{2T} in
+\ref{fdip-007G}.}
+
+\proof{
+\p{Changing from #{(1,\qi,\qj,\omega)} to the displayed
+basis adds the first basis vector to the last, so is integral
+and invertible. The nontrivial products of its generators are
+##{\begin{aligned}
+ \qi\qj&=2h-1-\qi -\qj,&
+ \qj\qi&=-2h+1+\qi +\qj,\\
+ \qi h&=h-1-\qj,& h\qi&=\qi +\qj -h,\\
+ \qj h&=\qi +\qj -h,& h\qj&=h-1-\qi,\\
+ h^2&=h-1.
+\end{aligned}}
+Together with #{\qi^2=\qj^2=-1}, these prove closure.
+Conjugation negates #{\qi,\qj} and sends #{h} to #{1-h},
+so it preserves the lattice.}
+
+\p{The 4 rational coordinates of #{x} in the basis
+#{(1,\qi,\qj,\qk)} are
+#{(a+d/2,b+d/2,c+d/2,d/2)}. Their squared sum is the
+displayed norm. Quaternion multiplication and reversal of
+products under conjugation give #{N(xy)=N(x)N(y)}.
+The norm of a nonzero rational quaternion is positive.
+If #{x} is an integral unit, its norm and its inverse's norm
+are positive integers with product one; hence #{N(x)=1}.
+Conversely #{N(x)=1} gives #{x^{-1}=\bar x} in the lattice.}
+
+\p{The 4 coordinates are either all integers or all
+half-integers. Integer coordinates with squared sum one have
+one entry #{\pm 1} and the other entries zero, giving #{8}
+units. Half-integer coordinates with squared sum one all
+have absolute value #{1/2}, giving #{16} units. They are the
+listed elements. The quaternion action and tetrahedral
+identification are those of \ref{fdip-007G} and
+\ref{fdip-00M6}.}
+}

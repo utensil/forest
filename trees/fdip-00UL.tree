@@ -1,0 +1,37 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Definition}
+\title{The dual action and a chosen bilinear self-duality}
+\date{2026-11-17}
+
+\p{Let #{\rho:G\to\operatorname{Aut}_k(F)} be a
+\vocabk{coefficient representation}{fdip-00SH}, with #{F}
+finite free over a commutative ring #{k}. Its
+\newvocab{algebraic dual action} on #{F^*} is
+##{\rho^\vee(g)=(\rho(g^{-1}))^*.}
+The star denotes the algebraic transpose. On the finite direct
+sum of based cochain slots, evaluation identifies
+#{C^\bullet(X;F)^*} with #{C^\bullet(X;F^*)}; corresponding
+cell slots are paired, with no degree reversal.}
+
+\p{A \newvocab{bilinear self-duality} is a chosen
+#{G}-equivariant isomorphism #{\beta:F\to F^*}.
+Its bilinear form is #{b(x,y)=\beta(y)(x)}. Equivalently,
+#{b} is perfect and #{b(\rho(g)x,\rho(g)y)=b(x,y)}.
+Symmetry, alternation and positivity are separate properties.
+The dual action exists without choosing #{\beta}.}
+
+\p{For the \vocabk{ring paired coefficient}{fdip-00TJ},
+canonical biduality identifies #{V^{**}} with #{V}.
+The \newvocab{signed paired exchange}
+#{\mathcal E:\mathcal A(V^*)\to\mathcal A(V)} is the
+exterior-algebra map induced by
+##{V^{**}\oplus V^*\longrightarrow V^*\oplus V,\qquad
+ (x,\lambda)\longmapsto(-\lambda,x).}
+It swaps the two summands, with a minus sign on the primal
+summand of its domain.}
+
+\p{The algebraic dual action is the construction in Mathlib's
+\leanref{Representation.dual_apply}. That declaration specifies
+the representation on the dual; it makes no choice of #{\beta}.}

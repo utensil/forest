@@ -1,0 +1,65 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{Dual cochain kernels have the same paired coefficient}
+\date{2026-11-17}
+
+\p{Use the \vocabk{algebraic dual action}{fdip-00UL} and the
+algebraic inverse-transport formulas of
+\vocabk{the cochain operators}{fdip-00SR} on both fibers.
+At the same link assignment #{U} and mass #{m\in k}, let
+#{K_F=m\bbI +\extD_{F,U}} and
+#{K_{F^*}=m\bbI +\extD_{F^*,U}}. Then
+##{K_F^*=K_{F^*},\qquad \det K_F=\det K_{F^*}.}
+For #{V=C^\bullet(X;F)}, the
+\vocabk{signed paired exchange}{fdip-00UL} satisfies
+##{\mathcal E(\theta_{K_{F^*}})=\theta_{K_F},\qquad
+ \mathcal I_V\circ\mathcal E=\mathcal I_{V^*}.}
+Consequently every #{P\in\mathcal A(V^*)} satisfies
+##{\mathcal I_V\bigl(\mathcal E(P)\extexp(\theta_{K_F})\bigr)
+ =\mathcal I_{V^*}\bigl(P\extexp(\theta_{K_{F^*}})\bigr).}}
+
+\proof{
+\p{For coefficient functions #{f:X\to F} and
+#{\lambda:X\to F^*}, reindexing the finite evaluation sum gives
+##{\begin{aligned}
+ &\sum_x\lambda(x)\bigl(\rho(U_i(x))^{-1}f(x+\varepsilon_i)\bigr)\\
+ &=\sum_y\bigl(\rho(U_i(y-\varepsilon_i))^{-1}\bigr)^*
+       \lambda(y-\varepsilon_i)\bigl(f(y)\bigr).
+\end{aligned}}
+The covector on the right is the inverse pullback for the
+contragredient fiber. Thus #{(T_i^F)^*=(T_i^{F^*})^{-1}}.
+Signed insertion and deletion transpose to each other on the
+exterior slot labels. Therefore
+##{\begin{aligned}
+ (\extd_{F,U})^*&=\extdag_{F^*,U},\\
+ (\extdag_{F,U})^*&=\extd_{F^*,U}.
+\end{aligned}}
+Adding them and the scalar mass proves the kernel identity.
+In dual bases the two matrices are transposes. Reindexing a
+determinant's permutation sum by the inverse permutation
+proves their determinants equal. This last component is also
+Mathlib's \leanref{Matrix.det_transpose}.}
+
+\p{In dual bases the exchange sends
+#{\psi'_i\mapsto\bar\psi_i} and
+#{\bar\psi'_i\mapsto-\psi_i}. Apply it to the primed
+quadratic element:
+##{\begin{aligned}
+ \mathcal E\left(-\sum_{i,j}\bar\psi'_i(K_F)_{ji}\psi'_j\right)
+ &=\sum_{i,j}\psi_i(K_F)_{ji}\bar\psi_j\\
+ &=-\sum_{i,j}\bar\psi_j(K_F)_{ji}\psi_i
+ =\theta_{K_F}.
+\end{aligned}}
+Each paired factor obeys
+#{\mathcal E(\psi'_i\bar\psi'_i)
+ =\bar\psi_i(-\psi_i)=\psi_i\bar\psi_i}.
+Hence the canonical top generator maps to the canonical top
+generator. Lower exterior degrees remain lower, proving
+#{\mathcal I_V\circ\mathcal E=\mathcal I_{V^*}}.
+Naturality of the finite exterior polynomial in
+\ref{fdip-00TH} now proves the inserted identity.
+The signs are exterior identities over #{k}, including
+characteristic #{2}.}
+}
