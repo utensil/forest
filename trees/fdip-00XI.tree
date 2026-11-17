@@ -1,0 +1,33 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{Restriction through a half-preserving algebra map}
+\date{2026-11-17}
+
+\p{Let #{(\mathscr A,\Theta_{\mathscr A},\mathscr A_+)}
+and #{(\mathscr B,\Theta_{\mathscr B},\mathscr B_+)}
+have the \vocabk{algebraic anti-reflections}{fdip-00XF}.
+Let #{\alpha :\mathscr B\to\mathscr A} be a unital #{k}-algebra
+homomorphism satisfying
+##{\alpha \Theta_{\mathscr B}=\Theta_{\mathscr A}\alpha ,\qquad
+ \alpha (\mathscr B_+)\subseteq\mathscr A_+.}
+If #{\ell} is reflection compatible and reflection positive
+on #{\mathscr A_+}, then #{\ell\circ \alpha } has the corresponding
+properties on #{\mathscr B_+}. Normalization is preserved.}
+
+\proof{
+\p{For #{b\in\mathscr B}, intertwining gives
+##{\ell(\alpha \Theta_{\mathscr B}b)
+ =\ell(\Theta_{\mathscr A}\alpha b)=\overline{\ell(\alpha b)}.}
+Multiplicativity gives the identity
+##{B_{\ell\circ \alpha }(b,c)=B_\ell(\alpha b,\alpha c).}
+For #{b=c\in\mathscr B_+}, the right side is nonnegative
+by the assumed half-preservation. Finally #{\alpha 1=1}.}
+}
+
+\p{In coordinates the form restriction is a congruence
+#{G\mapsto C^\dagger GC}; its positivity is the matrix
+component \leanref{Matrix.PosSemidef.conjTranspose_mul_mul_same}.
+The algebra and half-preservation hypotheses identify that
+congruence with the asserted functional restriction.}

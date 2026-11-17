@@ -1,0 +1,33 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Example}
+\title{The cellular operator}
+\date{2026-11-17}
+
+\tikzfigs{0.55}{\begin{tikzpicture}[
+ vertex/.style={circle,draw,minimum size=8mm,inner sep=0pt},
+ edge/.style={-{Stealth[length=2mm]},thick}
+]
+\node[vertex] (v0) at (0,0) {$v_0$};
+\node[vertex] (v1) at (3.2,0) {$v_1$};
+\draw[edge] (v0) to[bend left=50] node[pos=.3,above=3mm] {$e_0$} (v1);
+\draw[edge] (v1) to[bend left=50] node[pos=.3,below=3mm] {$e_1$} (v0);
+\draw[dashed] (1.6,-1.6) -- (1.6,1.6);
+\node[above] at (1.6,1.6) {$\vartheta$};
+\end{tikzpicture}}
+
+\p{Reflection in the dashed line exchanges the vertices and
+fixes each arc as an unoriented cell. The arrows specify the
+two declared edge orientations.}
+
+\p{In the ordered vertex and edge bases of the
+[cellular sign model](fdip-00XN),
+##{\extd_U=\begin{pmatrix}-1&u_0\\u_1&-1\end{pmatrix},
+\qquad
+\extD_U=\begin{pmatrix}0&\extd_U^{\mathsf t}\\
+                      \extd_U&0\end{pmatrix}.}
+For the trivial connection the two edge rows are negatives of
+one another. For #{(u_0,u_1)=(1,-1)}, the two rows are
+orthogonal. Both assignments belong to the same cellular
+model; the labeled edges remain distinct in each case.}

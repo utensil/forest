@@ -1,0 +1,40 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Lemma}
+\title{Cochain reflection and gauge transport}
+\date{2026-11-17}
+
+\p{The \vocabk{cochain reflection}{fdip-00XQ} is an orthogonal
+involution and commutes with #{\extD_U} and #{K_U}. For a
+vertex gauge #{g=(g_0,g_1)\in C_2^2}, its joint covariance is
+##{\cellref_{U^g}G_g=G_{\vartheta g}\cellref_U,\qquad
+ \vartheta g=(g_1,g_0),}
+where #{G_g} multiplies each cell coefficient by the sign
+at that cell's source.}
+
+\proof{
+\p{The vertex swap and signed edge actions square to the
+identity and preserve the cell pairing. Directly from the source-based
+edge formula,
+##{\extd_U\cellref_0
+ =\begin{pmatrix}u_0&-1\\-1&u_1\end{pmatrix}
+ =\cellref_1(U)\extd_U.}
+Transposing gives
+#{\cellref_0\extd_U^{\mathsf t}
+ =\extd_U^{\mathsf t}\cellref_1(U)}.
+These are the two off-diagonal blocks of commutation with
+#{\extD_U}; adding the scalar mass preserves commutation.}
+
+\p{Gauge transformation replaces both links by
+#{u_j^g=g_0g_1u_j}. On vertices the covariance equation is
+#{\cellref_0\operatorname{diag}(g_0,g_1)
+ =\operatorname{diag}(g_1,g_0)\cellref_0}.
+On edges it is
+##{-\operatorname{diag}(g_0g_1u_0,g_0g_1u_1)
+       \operatorname{diag}(g_0,g_1)
+ =-\operatorname{diag}(g_1,g_0)
+       \operatorname{diag}(u_0,u_1).}
+Each equality follows entry by entry from #{g_j^2=1}.
+Together they prove the joint identity.}
+}

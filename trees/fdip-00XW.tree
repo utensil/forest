@@ -1,0 +1,44 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Lemma}
+\title{The determinant and two vertex coefficients}
+\date{2026-11-17}
+
+\p{For the \vocabk{cellular sign model}{fdip-00XN}, put
+#{s=u_0+u_1} and #{b_j=\bar\psi_{v_j}\psi_{v_j}}.
+Then
+##{\begin{aligned}
+ \det K_U&=529-s^2,\\
+ \mathcal I_V\bigl(b_j\extexp(\theta_{K_U})\bigr)&=-115
+       \quad(j=0,1),\\
+ \mathcal I_V\bigl(b_0b_1\extexp(\theta_{K_U})\bigr)&=25.
+\end{aligned}}
+In particular every background determinant is strictly positive.}
+
+\proof{
+\p{The edge matrix gives
+##{\extd_U^{\mathsf t}\extd_U
+ =\begin{pmatrix}2&-s\\-s&2\end{pmatrix}.}
+Eliminating the invertible edge block #{5\bbI_2} in #{K_U}
+yields
+##{\det K_U
+ =\det(25\bbI_2-\extd_U^{\mathsf t}\extd_U)
+ =23^2-s^2.}
+Since #{s^2} is #{0} or #{4}, the possible values are
+#{529} and #{525}.}
+
+\p{Perturb the two vertex diagonal entries by independent
+scalar indeterminates #{t_0,t_1}. The same block elimination
+calculates the entire determinant polynomial:
+##{\det\bigl(K_U+\operatorname{diag}(t_0,t_1,0,0)\bigr)
+ =(23+5t_0)(23+5t_1)-s^2.}
+The finite exponential changes by the factor
+#{(1-t_0b_0)(1-t_1b_1)}, because each #{b_j} squares to
+zero and the two even elements commute. Apply the paired
+determinant identity of \ref{fdip-00TL} over #{k[t_0,t_1]}
+and compare coefficients. The coefficients of #{t_j} are
+#{115}, giving the minus sign in the single insertion;
+the coefficient of #{t_0t_1} is #{25}, and the two minus
+signs cancel.}
+}
