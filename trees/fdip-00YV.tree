@@ -1,0 +1,29 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Definition}
+\title{The proposed edge-direction operator}
+\date{2026-11-17}
+
+\p{Use the rank-#{64} cochain module of \ref{fdip-00YP} over
+#{k=\mathbb Z} or #{\mathbb Q}, now with all rotational links
+#{R_i(x)=1}. Let #{a_i(x)\in k^2} be arbitrary translation
+labels. On coefficients set
+#{(T_i f)_I(x)=f_I(x+\varepsilon_i)}, the trivial-link shift, and
+#{(M_i f)_I(x)=c(a_i(x))f_I(x)}. The proposed
+\vocab{edge-direction operator} is
+##{\begin{aligned}
+\edgeop_a^+&=\sum_{i=1}^2(u_i\wedge)M_i(T_i-\bbI),\\
+\edgeop_a^-&=\sum_{i=1}^2(u_i\cdot)(T_i^{-1}-\bbI)M_i,\\
+\edgeop_a&=\edgeop_a^+ +\edgeop_a^-.
+\end{aligned}}
+The order in the second line is part of the formula. The adjoint
+identity for the counting pairing is proved in \ref{fdip-00YX}.
+More explicitly, if #{I=\{i_1<\cdots<i_p\}}, then
+##{(\edgeop_a^+f)_I(x)=\sum_{j=1}^p(-1)^{j-1}c(a_{i_j}(x))
+ \bigl(f_{I\setminus\{i_j\}}(x+\varepsilon_{i_j})
+       -f_{I\setminus\{i_j\}}(x)\bigr).}
+The operators #{\edgeop_a^+} and #{\edgeop_a^-} raise and lower
+cubical degree. The internal Clifford direction acts on the other
+exterior factor. This is a separate proposal from
+the \vocabk{rotation-only matter operator}{fdip-00YO} #{\extD_R}.}

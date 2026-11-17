@@ -1,0 +1,43 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Lemma}
+\title{The ordered adjoint of the proposal}
+\date{2026-11-17}
+
+\p{The \vocabk{internal Clifford direction}{fdip-00YU} #{c(v)} is self-adjoint
+for #{B} and satisfies #{c(v)^2=b(v,v)\bbI_E}.
+The displayed #{\edgeop_a^-} in the
+\vocabk{edge-direction operator}{fdip-00YV} is the adjoint
+of #{\edgeop_a^+} for the counting pairing. It vanishes on cubical
+degree zero.}
+
+\proof{
+\p{Expanding the determinant pairing along its first row gives
+##{B(v\wedge\omega,\eta)=B(\omega,(b(v,-)\cdot)\eta)}
+for pure wedges of the corresponding degrees. Different degrees
+pair to zero. Bilinearity extends the identity to all exterior
+vectors. Symmetry of #{B} gives the reverse adjoint relation,
+so the sum #{c(v)} is self-adjoint.}
+
+\p{Exterior multiplication by #{v} squares to zero. Contraction
+by #{b(v,-)} also squares to zero: the terms deleting two distinct
+factors cancel in pairs, with opposite deletion signs. Inserting
+#{v} and then contracting gives the term #{b(v,v)\omega};
+the terms contracting an original factor cancel those obtained
+by contraction before insertion. Hence
+##{(b(v,-)\cdot)(v\wedge)+(v\wedge)(b(v,-)\cdot)
+ =b(v,v)\bbI_E.}
+Adding these three identities proves the square formula without
+dividing by #{2}. These are the wedge and contraction relations
+used in \ref{fdip-0092}.}
+
+\p{Each #{M_i} is self-adjoint by the first assertion, and the
+finite counting pairing gives #{T_i^\dagger=T_i^{-1}}.
+Taking the adjoint reverses the order, so
+#{(M_i(T_i-\bbI))^\dagger=(T_i^{-1}-\bbI)M_i}.
+Cubical insertion is adjoint to cubical deletion; both commute
+with these internal coefficient maps. This proves exactly the
+ordered [edge-direction formula](fdip-00YV). Cubical deletion kills degree
+zero, which proves the last assertion.}
+}
