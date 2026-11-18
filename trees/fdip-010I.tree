@@ -1,0 +1,63 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{Joint integrals on the circle and three-sphere}
+\date{2026-11-19}
+
+\p{Use a finite graph with the based face walks of the
+\vocabk{orbit gauge–Higgs weight}{fdip-010A}. Take either #{U(1)}
+acting on the unit circle by multiplication, or #{SU(2)} acting
+on the unit sphere in #{\mathbb C^2} by its defining action.
+Use the real part of the standard Hermitian inner product. Supply
+a normalized bi-invariant Haar probability #{\mu_G} as in the
+\vocabk{joint gauge and real-matter measure}{fdip-0076}. Fix a
+reference unit vector #{\phi^\circ} and give the orbit the pushforward
+#{\mu_{\mathcal O}} by #{g\mapsto g\phi^\circ}. Use the product
+probabilities #{\mu_E=\mu_G^{\otimes E}} for links and
+#{\mu_X=\mu_{\mathcal O}^{\otimes X}} for sites.}
+
+\p{For continuous real face, edge and site factors with the same
+invariances as in the finite model, the joint density #{\Xi} and
+its product reference measure are invariant under each vertex
+gauge. The two marginal densities are
+##{\begin{aligned}
+ w_{\rm link}(U)&=\int\Xi(U,\phi)\,\extd\mu_X(\phi),\\
+ w_{\rm site}(\phi)&=\int\Xi(U,\phi)\,\extd\mu_E(U).
+\end{aligned}}
+Both are invariant under their respective gauge actions and both
+integrate to the same partition integral #{Z}. If #{\Xi\ge0} and
+#{Z>0}, then #{\Xi/Z} is a probability density. The conditional
+scalar density is #{\Xi(U,\cdot)/w_{\rm link}(U)} at each #{U}
+with positive marginal. The conditional link density at #{\phi}
+is obtained in the other order under the corresponding positivity
+condition.}
+
+\proof{
+\p{Circle multiplication identifies #{U(1)} with the orbit of
+#{1}. For #{SU(2)}, choose an orthonormal basis whose first vector
+is #{\phi^\circ}. A unit column #{(a,b)} in this basis is the
+first column of a unique special unitary operator. Its second
+column is #{(-\bar b,\bar a)}. The columns are orthonormal and
+the determinant is #{|a|^2+|b|^2=1}. Any other unit orthogonal
+column differs by a scalar of modulus one, which the determinant
+fixes. This inverse is continuous. Thus each orbit is the whole
+specified sphere, and left translation of Haar proves invariance
+of the orbit probability. The two actions preserve the displayed
+real pairing.}
+
+\p{For fixed vertex gauges the link change at each edge is a left
+translation followed by a right translation. The two-sided Haar
+change of variables of \ref{fdip-00MR} preserves its measure, and
+the scalar change at each site preserves #{\mu_{\mathcal O}}.
+The finite product is therefore preserved. Endpoint cancellation
+proves invariance of the density exactly as in \ref{fdip-010C}.
+Changing the scalar variable in the first marginal, or the link
+variable in the second, proves their gauge invariance. Continuous
+factors on the compact product are bounded, so product integration
+in either order gives #{Z}. In the nonnegative case each stated
+conditional density integrates to one. Multiplication by its
+marginal recovers the joint density. Backgrounds of zero marginal
+contribute zero to the integral of a bounded measurable observable. This proves
+the conditional formula for the normalized probability law.}
+}

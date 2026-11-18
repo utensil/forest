@@ -1,0 +1,36 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{Summing the field at a fixed connection}
+\date{2026-11-19}
+
+\p{Over the commutative ring #{k}, the \vocabk{connection marginal
+weight}{fdip-010E} is constant on vertex-gauge orbits of links.
+The \vocabk{scalar marginal weight}{fdip-010E} is invariant under
+the vertex gauges on fields. The total coefficient satisfies
+##{Z=\sum_U w_{\rm link}(U)=\sum_\phi w_{\rm site}(\phi).}
+If #{Z} is a unit, a link observable has normalized value
+##{\langle f\rangle=Z^{-1}\sum_U w_{\rm link}(U)f(U).}
+For a general observable one may first take each conditional scalar
+value and then this link average whenever all of those marginal
+denominators are units. The corresponding statements with links
+and sites exchanged also hold.}
+
+\proof{
+\p{The permutation #{\phi\mapsto\phi^g} of the scalar configurations
+and \ref{fdip-010C} give
+##{w_{\rm link}(U^g)
+ =\sum_\phi\Xi(U^g,\phi^g)
+ =\sum_\phi\Xi(U,\phi)=w_{\rm link}(U).}
+Reindexing the connections by #{U\mapsto U^g} instead gives
+#{w_{\rm site}(\phi^g)=w_{\rm site}(\phi)}. Summing first one
+variable and then the other visits every pair once. Each gauge orbit
+of links contributes its cardinality times the common marginal weight
+of its members. When the
+observable depends only on #{U}, its value factors out of the inner
+scalar sum. For a general observable at #{U}, multiplying its
+conditional value by #{w_{\rm link}(U)} recovers the inner sum.
+Summing this equality and dividing by #{Z} gives the iterated
+formula. The other order follows by the same finite summation.}
+}
