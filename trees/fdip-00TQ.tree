@@ -14,14 +14,21 @@
  \mathcal I_V\bigl(\bar\psi(B\psi)
        \extexp(\theta_K)\bigr)&=-\trace(B\adjugate K).
 \end{aligned}}
-The first insertion is unbarred first. In a basis indexed by
-#{1,\ldots,N}, let #{I,J} be increasing subsets of equal size
-#{s}. The coefficient of #{\bar\eta_I\eta_J} in the
-\vocabk{ring source polynomial}{fdip-00TN} is
-##{(-1)^{s(s-1)/2+\sum I+\sum J}
-      \det K_{J^c,I^c}.}
-Coefficients with unequal source cardinalities vanish; empty
-minors and words equal one. No inverse is assumed.}
+The first insertion is unbarred first.}
+
+\p{For #{0\le s\le N=\operatorname{rank}V}, the perfect wedge
+pairing into #{\Lambda^NV} determines an endomorphism
+#{\adjugate_s K} of #{\Lambda^sV} by
+##{((\adjugate_s K)u)\wedge v
+   =u\wedge(\Lambda^{N-s}K)v}
+for #{u\in\Lambda^sV} and #{v\in\Lambda^{N-s}V}. In the
+\vocabk{ring source polynomial}{fdip-00TN}, put the barred
+sources first. The component of barred and unbarred degrees
+#{(s,s)} then belongs to #{\Lambda^sV\otimes(\Lambda^sV)^*}.
+Under its identification with #{\operatorname{End}_k(\Lambda^sV)}
+this component equals #{(-1)^{s(s-1)/2}\adjugate_s K}.
+Components of unequal source degrees vanish. These identities
+hold for every #{K} over the commutative ring #{k}.}
 
 \proof{
 \p{Perturb a single entry of #{K} by a scalar indeterminate
@@ -42,23 +49,38 @@ the sign; contracting with #{B} gives the trace formula.}
 ##{\extexp(\theta_K)
  \prod_i(1+\bar\eta_i\psi_i)
  \prod_j(1+\bar\psi_j\eta_j).}
-Selecting source sets #{I,J} leaves unbarred field indices
+In a basis indexed by #{1,\ldots,N}, select increasing
+source sets #{I,J} for the word #{\bar\eta_I\eta_J}. This
+leaves unbarred field indices
 #{I^c} and barred indices #{J^c}. Their cardinalities must be
-equal. By \ref{fdip-00TL}, the remaining grouped field
+equal, so put #{s=|I|=|J|}. By \ref{fdip-00TL}, the remaining grouped field
 coefficient is
 #{(-1)^{p(p-1)/2}\det K_{J^c,I^c}}, with #{p=N-s}.}
 
-\p{For the sign, put
-#{\delta_I=\sum I-s(s+1)/2}, and similarly for #{J}.
-Moving sources first, then grouping and sorting field words
-and comparing with #{\Omega_V}, gives the total exponent
+\p{Moving sources first, then grouping and sorting field words
+and comparing with #{\Omega_V} gives the total exponent
 ##{\begin{aligned}
  &\frac{s(s-1)}2+\frac{s(s+1)}2+s^2+sp
-       +\delta_I+\delta_J\\
- &\hspace{18mm}+\frac{p(p-1)}2+\frac{N(N-1)}2
- \equiv\frac{s(s-1)}2+\sum I+\sum J\pmod2.
+       +\left(\sum I-\frac{s(s+1)}2\right)\\
+ &+\left(\sum J-\frac{s(s+1)}2\right)
+       +\frac{p(p-1)}2+\frac{N(N-1)}2\\
+ &\qquad\equiv\frac{s(s-1)}2+\sum I+\sum J\pmod2.
 \end{aligned}}
-The equality #{N=p+s} gives the last reduction. This finite
-reordering proves the complementary-minor formula over #{k}
-itself, including characteristic #{2}.}
+The equality #{N=p+s} gives the last reduction. The coefficient
+of #{\bar\eta_I\eta_J} is therefore
+##{(-1)^{s(s-1)/2+\sum I+\sum J}\det K_{J^c,I^c},}
+with empty minors and words equal to one.}
+
+\p{Each exterior basis wedge pairs with its complementary wedge
+to give a signed generator of #{\Lambda^NV}, and with every
+other wedge of complementary degree to give zero. This proves
+perfection and hence existence and uniqueness of #{\adjugate_s K}.
+In its defining identity take #{u=e_J} and #{v=e_{I^c}}.
+On the left only the #{e_I} coefficient survives. On the right
+the coefficient of #{e_{J^c}} in #{(\Lambda^{N-s}K)e_{I^c}}
+is #{\det K_{J^c,I^c}}. The signs of #{e_I\wedge e_{I^c}}
+and #{e_J\wedge e_{J^c}} differ by #{(-1)^{\sum I+\sum J}}.
+Thus the source coefficient is #{(-1)^{s(s-1)/2}} times the
+#{(I,J)} entry of #{\adjugate_s K}, over #{k} itself, including
+characteristic #{2}.}
 }

@@ -5,19 +5,21 @@
 \title{The induced scalar plaquette coefficient}
 \date{2026-11-01}
 
-\p{On a square torus with both periods at least 6, take a real
-scalar field and #{G=\{1,-1\}} in its sign representation.
-Use unit weights, #{m>0}, #{N=|\Lambda|} and #{D=4+m^2}.
+\p{On a square torus with vertex set #{X} and both periods at least 6,
+take a real scalar field and #{G=\{1,-1\}} in its sign representation.
+Use unit weights, #{m>0}, and #{N=|X|}.
 For the \vocabk{plaquette holonomies}{fdip-006N},
 ##{\begin{aligned}
-\cW(U)={}&C(D,N)-\frac1{D^4}\sum_pU_p+R(U),\\
-C(D,N)={}&\frac N2\log D-\frac N{D^2}-\frac{7N}{2D^4},\\
-|R(U)|\le{}&\frac N{12}\frac{(4/D)^6}{1-4/D}.
+\cW(U)&=C(4+m^2,N)+R(U)\\
+ &\qquad-\frac{1}{(4+m^2)^4}\sum_pU_p,\\
+C(4+m^2,N)&=\frac N2\log(4+m^2)-\frac{N}{(4+m^2)^2}\\
+ &\qquad-\frac{7N}{2(4+m^2)^4},\\
+|R(U)|&\le\frac N{12}\frac{4^6}{m^2(4+m^2)^5}.
 \end{aligned}}
 Thus the fourth-order induced Wilson coefficient is
 #{\beta_{\mathrm{ind}}=(4+m^2)^{-4}>0}. The remainder is uniformly
-#{O(D^{-6})} in the connection at fixed finite volume as
-#{D\to\infty}.}
+#{O((4+m^2)^{-6})} in the connection at fixed finite volume as
+#{m\to\infty}.}
 
 \proof{
 \p{A torus walk of length at most 5 lifts to a walk in
@@ -45,7 +47,7 @@ its exact remainder bound.}
 }
 
 \p{The exact matter factor can therefore be written
-##{\ue^{-\cW(U)}=\ue^{-C(D,N)}
+##{\ue^{-\cW(U)}=\ue^{-C(4+m^2,N)}
  \exp\left(\beta_{\mathrm{ind}}\sum_pU_p\right)\ue^{-R(U)}.}
 The displayed plaquette term favors positive holonomy. Higher closed
 walks remain in #{R}; the complete determinant is not replaced by a
