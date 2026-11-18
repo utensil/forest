@@ -5,22 +5,20 @@
 \title{A determinant polynomial in 5 signs}
 \date{2026-11-17}
 
-\p{Let #{a,b,c,d,e} commute and satisfy
-#{a^2=b^2=c^2=d^2=e^2=1}. Set
-##{H=\begin{pmatrix}
-21&1+a&1+c&0\\
-1+a&21&0&1+e\\
-1+c&0&21&b+d\\
-0&1+e&b+d&21
-\end{pmatrix},}
-##{J=\begin{pmatrix}
-0&0&0&ae-cd\\
-0&0&c-be&0\\
-0&d-a&0&0\\
-b-1&0&0&0
-\end{pmatrix}.}
-The determinant of #{M=\begin{pmatrix}H&J\\J^{\mathsf T}&H\end{pmatrix}}
-is the following integer polynomial, evaluated in the given ring:
+\p{On the cellular torus #{X=(\mathbb Z/2\mathbb Z)^2}, use
+cochains with coefficients in a commutative ring #{k} and the
+counting pairing.
+Assign the positive labeled links
+#{U_1(0,0)=U_2(0,0)=U_2(1,0)=1} and
+##{\begin{aligned}
+U_1(1,0)&=a,&U_1(0,1)&=b,&U_2(0,1)&=c,\\
+U_1(1,1)&=d,&U_2(1,1)&=e.
+\end{aligned}}
+Here #{a,b,c,d,e\in k} have square one and act by scalar
+multiplication. Let #{C:C^{\mathrm{even}}\to C^{\mathrm{odd}}}
+be the even-to-odd part of the \vocabk{cochain operator}{fdip-00SR}
+#{\extD_U}. Then #{M=25\bbI -C^\dagger C} on even cochains has
+determinant #{P(a,b,c,d,e)}, where
 ##{\begin{aligned}
  P(a,b,c,d,e)={}&35803094657\\
  &-330765108(a+c+bd+e)\\
@@ -41,6 +39,32 @@ Successive division by these monic quadratics makes the
 #{32} squarefree words a basis. Multiplication cancels any
 repeated letter: the product of words on index sets #{I,J}
 is the word on #{I\mathbin\triangle J}.}
+
+\p{Order the sites as #{(0,0),(1,0),(0,1),(1,1)}, the even
+slots by degrees #{0,2} with face orientation #{e_1\wedge e_2},
+and the odd slots by directions #{1,2}. For the signed
+pullbacks put #{A=T_1^U-\bbI}, #{B=T_2^U-\bbI}. Raising and
+lowering on these slots gives
+##{C=\begin{pmatrix}A&-B^{\mathsf T}\\B&A^{\mathsf T}\end{pmatrix}.}
+The counting adjoint is the transpose. Each pullback permutes the sites
+with weights whose squares are one. Hence its transpose is
+its inverse.
+Thus the diagonal blocks of #{M} are equal. The upper off-diagonal
+block is #{(BA-AB)^{\mathsf T}}. Substituting the link values
+gives #{M=\left(\begin{smallmatrix}H&J\\J^{\mathsf T}&H\end{smallmatrix}\right)}
+with
+##{H=\begin{pmatrix}
+21&1+a&1+c&0\\
+1+a&21&0&1+e\\
+1+c&0&21&b+d\\
+0&1+e&b+d&21
+\end{pmatrix},}
+##{J=\begin{pmatrix}
+0&0&0&ae-cd\\
+0&0&c-be&0\\
+0&d-a&0&0\\
+b-1&0&0&0
+\end{pmatrix}.}}
 
 \p{For #{S=\{j_1<\cdots<j_r\}\subseteq\{1,\ldots,8\}},
 the following finite recurrence computes the minors of the

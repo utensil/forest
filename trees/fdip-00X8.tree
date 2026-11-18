@@ -5,12 +5,21 @@
 \title{A cofactor polynomial for the dressed pair}
 \date{2026-11-17}
 
-\p{Use the matrix #{M} of \ref{fdip-00U9} over
-##{R=\mathbb Z[a,b,c,d,e]/(a^2-1,b^2-1,c^2-1,d^2-1,e^2-1).}
-Index its rows and columns from zero. Let #{N} be
-the #{7\times7} matrix obtained by deleting row
-zero and column one, with the remaining indices in
-increasing order. Then #{5\det N} equals
+\p{Use the rank-one sign links on the #{2\times2} torus of
+\ref{fdip-00U9}, over any commutative ring #{k} with the #{5}
+specified involutions. Let #{F_z=k} at every site #{z} and
+take #{K=5\bbI+\extD_U} on #{\mathcal V=C^\bullet(X;k)}. Set #{x=(0,0)}, #{y=(1,0)} and let
+#{\gamma:y\to x} reverse the positive tree edge from #{x} to #{y}.
+For the degree-zero inclusion #{\iota_x:F_x\to\mathcal V},
+projection #{\pr_y:\mathcal V\to F_y} and transport
+#{h_\gamma(U):F_y\to F_x}, the unnormalized coefficient of
+the barred-first \vocabk{dressed pair}{fdip-00WD} with identity
+insertion is
+##{\begin{aligned}
+&-\trace_{F_x}\bigl(h_\gamma(U)\pr_y(\adjugate K)\iota_x\bigr)\\
+&\qquad=Q(a,b,c,d,e),
+\end{aligned}}
+where
 ##{\begin{aligned}
  Q(a,b,c,d,e)={}&412470750(1+a)\\
  &-4708635(bd+abd)+2803395(b+d)\\
@@ -25,6 +34,36 @@ increasing order. Then #{5\det N} equals
 \end{aligned}}}
 
 \proof{
+\p{Work in the integral sign ring #{R} of \ref{fdip-00U9}.
+Both parity modules have rank #{8}. In their cellular bases,
+let #{t,s} be indeterminates, and perturb the even block
+of the mass-#{t} kernel by #{sE_{ij}} for a matrix unit
+#{E_{ij}} on even cochains. Eliminating the odd block #{t\bbI} after inverting #{t}
+gives
+##{\begin{aligned}
+&\det\begin{pmatrix}t\bbI+sE_{ij}&C^{\mathsf T}\\C&t\bbI\end{pmatrix}\\
+&\qquad=\det(t^2\bbI -C^{\mathsf T}C+stE_{ij}).
+\end{aligned}}
+Indeed the odd block contributes #{t^8}, which clears the
+denominators of the even block #{t\bbI+sE_{ij}-t^{-1}C^{\mathsf T}C}.
+Both determinants are polynomials in #{R[t,s]}; multiplication
+by the indeterminate #{t} is injective, so the identity already
+holds there. The linear coefficient of #{s} is the cofactor
+selected by #{E_{ij}} on the left and #{t} times the corresponding
+cofactor on the right. Varying #{i,j} and setting #{t=5} proves
+that the even-even block of #{\adjugate K} equals
+#{5\adjugate M} over #{R}, with #{M=25\bbI -C^\dagger C}.}
+
+\p{The chosen link is one, so its reverse transport is one.
+The fiber-trace formula of \ref{fdip-00WG} selects the negative
+of the adjugate entry with output at #{y} and input at #{x}.
+In the order of \ref{fdip-00U9} these are indices #{1,0}
+counting from zero. The entry #{(\adjugate M)_{1,0}} deletes
+row zero and column one of #{M}; write #{N} for the remaining
+matrix, keeping its order. The cofactor sign is
+#{(-1)^{0+1}=-1}. The barred-first minus sign therefore
+gives #{5\det N}.}
+
 \p{Relabel the rows and columns of #{N} by
 #{1,\ldots,7}. For
 #{S=\{j_1<\cdots<j_r\}\subseteq\{1,\ldots,7\}},
