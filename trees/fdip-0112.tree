@@ -1,0 +1,45 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{Residual gauge orbits of reduced connections}
+\date{2026-11-19}
+
+\p{For an \vocabk{orbit section}{fdip-010X} and #{a\in G}, define
+the stabilizer element
+##{t(a,o)=\orbitlift(ao)^{-1}a\,\orbitlift(o).}
+It satisfies
+#{t(ab,o)=t(a,bo)t(b,o)}. Under a vertex gauge #{a\in G^X}
+the reduced links transform as
+##{\check U_e\longmapsto
+  t(a_{h(e)},\phi_{h(e)})\check U_e\,
+  t(a_{s(e)},\phi_{s(e)})^{-1}.}
+Changing the section also changes the reduced connection only
+within its orbit under the endpoint action of #{(G^\circ)^X}.
+Taking this entire orbit identifies joint vertex-gauge orbits
+bijectively with residual orbits of reduced connections.}
+
+\proof{
+\p{Applying #{t(a,o)} to #{\phi^\circ} gives #{\phi^\circ}. In
+the product #{t(a,bo)t(b,o)} the two intermediate section values
+cancel. At each site the gauged frame is
+#{a_xg_x t(a_x,\phi_x)^{-1}}, which gives the displayed endpoint
+action. Any other normalized section has values
+#{\orbitlift(o)a^\circ(o)} with #{a^\circ(o)\in G^\circ} and
+#{a^\circ(\phi^\circ)=1}. Substitution changes #{\check U_e} to
+#{a^\circ(\phi_{h(e)})^{-1}\check U_e a^\circ(\phi_{s(e)})}. Thus the
+residual orbit is independent of the section.}
+
+\p{Every joint orbit contains the constant scalar configuration
+with its reduced connection, by \ref{fdip-010Y}. Two such
+representatives are related by a vertex gauge exactly when all
+its vertex values fix #{\phi^\circ} and carry the first link
+tuple to the second. This gives both directions of the orbit
+bijection.}
+}
+
+\p{The underlying orbit equivalence is formalized by
+\leanref/tauceti{TauCeti.MulAction.orbitRelQuotientStabilizerEquiv}.
+Here #{G^X} acts on the link tuples #{G^E} and transitively on
+the scalar configurations #{\mathcal O^X}. The stabilizer of the
+constant scalar is #{(G^\circ)^X}.}
