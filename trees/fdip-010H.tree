@@ -1,0 +1,45 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Example}
+\title{The partition coefficient of a two-by-two sign torus}
+\date{2026-11-19}
+
+\p{Use the [labeled cellular torus](fdip-00SH) with both periods
+two. At each of its #{4} vertices place a sign #{\phi_x}. Each of
+its #{8} positive labeled links carries an independent sign #{U_e}.
+Each of its #{4} square faces uses the two coordinate directions,
+traversing its boundary once. The two positive links between any
+neighboring pair remain distinct, as in \ref{fdip-00SM}. Give each
+face weight #{2} when its product is #{+1} and weight #{1} when its
+product is #{-1}. Give transported agreement factor #{2} and disagreement
+factor #{1}. With unit site weights, the [joint counting
+sum](fdip-010E) is #{Z=550656}.}
+
+\p{Write #{U_f} for the sign product around face #{f}, and for
+each edge put #{t_e=\phi_{h(e)}U_e\phi_{s(e)}}. A sign #{z} has
+the required factor #{(3+z)/2}. Compute the integer sum over the
+rationals by expanding the product of these #{12} factors.
+A term selects a set #{A} of faces and a set #{B} of edges whose
+signs occur, with coefficient #{2^{-12}3^{12-|A|-|B|}}. Let
+#{E_A} be the labeled edges traversed an odd number of times by
+the selected face boundaries. In the monomial
+#{\prod_{f\in A}U_f\prod_{e\in B}t_e}, summation over each
+independent #{U_e} is zero unless #{B=E_A}.}
+
+\p{At each vertex the traversals of a closed face walk meet its
+endpoints in pairs. Taking their union modulo two leaves an even
+number of edge ends of #{E_A} at each vertex. Thus when #{B=E_A},
+every site sign also has even exponent. The monomial is then one
+on all #{2^{12}} joint configurations, canceling the denominator.
+The contribution of #{A} is #{3^{12-|A|-|E_A|}}.}
+
+\p{The empty set and the full set of faces have empty boundary.
+A singleton has #{4} boundary edges, as does its complement. Of
+the #{6} pairs, #{4} pairs are neighbors in the same row or column.
+Each shares two labeled edges and leaves #{4} boundary edges.
+The other two pairs share no edge and leave #{8}. Summing gives
+##{\begin{aligned}
+ Z={}&3^{12}+4\cdot3^7+4\cdot3^6\\
+    &+2\cdot3^2+4\cdot3^5+3^8=550656.
+\end{aligned}}}

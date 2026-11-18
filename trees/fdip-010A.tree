@@ -1,0 +1,35 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Definition}
+\title{The gauge–Higgs weight of an orbit field}
+\date{2026-11-19}
+
+\p{Fix the \vocabk{orbit field}{fdip-00ZW} on a finite graph with
+vertex set #{X}, edge set #{E}, group #{G}, scalar orbit #{\mathcal O}
+in a #{k[G]}-module and commutative unital ring #{k}. A connection
+#{U\in G^E} transports a scalar from the source #{s(e)} to the head
+#{h(e)} by #{v\mapsto U_e v}. Traversing an edge backwards uses
+#{U_e^{-1}}. The group leaves the underlying graph fixed. The joint configurations are
+#{(U,\phi)\in G^E\times\mathcal O^X}. A vertex gauge #{g\in G^X}
+acts by
+##{U_e^g=g_{h(e)}U_e g_{s(e)}^{-1},\qquad
+ \phi_x^g=g_x\phi_x.}
+These are the endpoint actions of the \vocabk{coefficient
+connection}{fdip-00SH}.}
+
+\p{Supply a finite set of faces #{\mathcal P}, possibly empty. For
+each face #{f} choose an oriented, based, closed edge walk and let
+#{U_f} be its ordered transport, the first traversed edge acting
+first. For a square this is its \vocabk{plaquette holonomy}{fdip-006N}.
+Give each face a class function #{a_f:G\to k}, constant on conjugacy
+classes. Give each edge a diagonally invariant factor
+#{b_e:\mathcal O\times\mathcal O\to k} and each site an invariant
+factor #{c_x:\mathcal O\to k}. The \newvocab{orbit gauge–Higgs weight}
+is
+##{\Xi(U,\phi)=
+ \prod_{f\in\mathcal P}a_f(U_f)
+ \prod_{e\in E}b_e(\phi_{h(e)},U_e\phi_{s(e)})
+ \prod_{x\in X}c_x(\phi_x).}
+The empty face product is #{1}. A noninvariant site factor instead
+specifies explicit breaking, as in \ref{fdip-0100}.}
