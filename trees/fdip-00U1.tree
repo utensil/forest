@@ -5,16 +5,23 @@
 \title{Cell-incidence walks retain signs and transports}
 \date{2026-11-17}
 
-\p{Choose a fiber basis for the
-\vocabk{invariant cochain pairing}{fdip-00SR}. Every power trace
-#{\trace(\extD_U^\ell)} is a finite sum over closed walks
-among the labeled cochain cells. Each step retains its exterior
-incidence sign and its actual fiber map. In rank one, the
-determinant permutation expansion of #{m\bbI+\extD_U}
-contains cycle covers with short cycles and mass fixed points.}
+\p{For a finite free fiber with the
+\vocabk{invariant cochain pairing}{fdip-00SR}, the power traces of
+#{\extD_U} and #{\cov_U} are sums over closed walks among the
+labeled cochain cells. Each walk contributes the fiber trace of
+the ordered product of its signed incidence maps. For #{\cov_U} each lowering
+step has an additional minus sign. For #{r\ge 0},
+##{\begin{aligned}
+\trace(\cov_U^{2r})&=(-1)^r\trace(\extD_U^{2r}),\\
+\trace(\cov_U^{2r+1})&=\trace(\extD_U^{2r+1})=0.
+\end{aligned}}
+In rank one, the determinants of #{m\bbI+\extD_U} and
+#{m\bbI+\cov_U} are signed sums over cycle covers with these
+same step weights, allowing short cycles and mass fixed points.}
 
 \proof{
-\p{For a cell label #{(x,I)} and #{i\notin I}, put
+\p{Choose a basis of the free fiber and order the cells.
+For a cell label #{(x,I)} and #{i\notin I}, put
 #{\epsilon(i,I)=(-1)^{|\{j\in I:j<i\}|}}.
 The raising block contributing to the output label
 #{(x,I\cup\{i\})} has two occurrences:
@@ -23,22 +30,29 @@ The raising block contributing to the output label
  (x+\varepsilon_i,I)&\epsilon(i,I)\rho(U_i(x))^{-1}\\
  (x,I)&-\epsilon(i,I)\bbI_F.
 \end{array}}
-The lowering occurrences are their adjoints, by
-\ref{fdip-00SS}. Even when periodic endpoints coincide,
-the two labeled occurrences remain separate summands.}
+Reversing each occurrence gives its adjoint for the lowering
+part of #{\extD_U}, by \ref{fdip-00SS}. For #{\cov_U} the
+reversed maps are the negatives of those adjoints. Even when
+periodic endpoints coincide, the two labeled occurrences remain
+separate summands.}
 
 \p{Matrix multiplication selects a sequence of such
 occurrences with matching cell labels. Its contribution is
 the ordered product of the fiber maps, including all written
 signs. A diagonal block closes the walk; its fiber trace then
-contributes to the full trace. This is a finite block-matrix
-expansion. The walks run among cells of adjacent cochain
-degrees, so a bare physical plaquette product omits data.}
+contributes to the full trace. Each raising step increases the
+cochain degree by one and each lowering step decreases it by one.
+A closed walk has equally many of each. Thus it has even length
+#{2r}, and precisely #{r} factors change sign for #{\cov_U}.
+A plaquette transport alone omits the incidence signs and the
+cochain degrees visited by the walk.}
 
 \p{For rank-one fibers, the determinant is the signed sum over
 permutations of the cell labels. Decomposing each permutation
 into cycles gives the cycle cover. Diagonal choices use the
 mass, and two-cycles can use a raising occurrence and a
-lowering occurrence. No restriction to long loops follows
-from this determinant expansion.}
+lowering occurrence. The sign of the permutation is the same
+for both determinants. In the product of its weights, each
+chosen lowering occurrence for #{\cov_U} contributes the extra
+minus sign, while every mass fixed point contributes #{m}.}
 }

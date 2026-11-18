@@ -13,7 +13,9 @@ over #{k}, put #{e_j(K)=\trace(\Lambda^jK)}, including
 For #{1\le j\le N}, the integral Newton relation is
 ##{j e_j(K)=\sum_{\ell=1}^j(-1)^{\ell-1}
        e_{j-\ell}(K)\trace(K^\ell).}
-Solving this recurrence for #{e_j(K)} requires #{j\in k^\times}.
+If the image of #{j} in #{k} is a unit, multiplication by its
+inverse recovers #{e_j(K)} from the preceding coefficients and
+power traces.
 When #{1,\ldots,N} are units, all coefficients are polynomials
 in the first #{N} power traces with the indicated inverses.}
 
@@ -38,3 +40,12 @@ Comparing the coefficient of #{t^{j-1}} proves Newton's
 relation. Dividing by the specified unit #{j} gives the
 conditional recursive version.}
 }
+
+\p{Even if #{j} is a nonunit, injectivity of multiplication by
+#{j} gives uniqueness in this equation. The exterior-power
+coefficient of #{K} supplies existence. For instance, let #{K} act
+on the two summands of #{\mathbb Z\oplus\mathbb Z} by multiplication
+by #{2} and #{3}, respectively. Its first two power traces are
+#{5} and #{13}.
+Hence #{2e_2=5^2-13=12}, with the unique integer solution #{e_2=6}.
+In characteristic two this uniqueness can fail, as in \ref{fdip-00U0}.}
