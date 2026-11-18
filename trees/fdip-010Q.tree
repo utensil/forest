@@ -1,0 +1,41 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{Site factors after summation over links}
+\date{2026-11-19}
+
+\p{For the \vocabk{orbit gauge–Higgs weight}{fdip-010A} over a
+commutative unital ring #{k}, the sum of #{\Xi(U,\phi)} over
+#{U} is a single coefficient #{w_*\in k} independent of #{\phi}.
+Multiply the joint weight by arbitrary functions
+#{t_x:\mathcal O\to k}, one at each site, evaluated at #{\phi_x}.
+Write #{z_x=\sum_{o\in\mathcal O}t_x(o)}. The resulting scalar
+marginal and partition coefficient are
+##{w_{{\rm site},t}(\phi)=w_*\prod_x t_x(\phi_x),
+ \qquad Z_t=w_*\prod_x z_x.}
+For #{o\in\mathcal O} the unnormalized weight of #{\phi_x=o} is
+##{w_*t_x(o)\prod_{y\ne x}z_y.}
+If #{Z_t} is a unit, the normalized scalar weight is the product
+of the one-site weights #{t_x(\phi_x)/z_x}. In particular a
+#{k}-module-valued test function #{f} of the selected site has value
+##{\langle f(\phi_x)\rangle_t=z_x^{-1}\sum_{o\in\mathcal O}t_x(o)f(o).}}
+
+\proof{
+\p{For two scalar configurations choose a group element at each site
+carrying its first value to its second, using transitivity of the
+orbit. Together these elements form a vertex gauge. The
+[scalar marginal weight](fdip-010E) is invariant by \ref{fdip-010G},
+so both configurations give the same sum over links. The extra
+factors are independent of the links and multiply this sum.
+Summation in each scalar variable gives #{z_y}; holding the
+selected value fixed omits precisely that site's sum.}
+
+\p{In a commutative ring each factor of a unit product is a unit.
+Thus the joint normalization supplies inverses of #{w_*} and of
+every #{z_y}. Dividing the two unnormalized identities by #{Z_t}
+now gives the product and its single-site functional. If only
+#{z_x} is a unit, the one-orbit quotient still defines a functional
+on that orbit. A joint normalized value requires #{Z_t} itself
+to be a unit.}
+}
