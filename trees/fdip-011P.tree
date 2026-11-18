@@ -1,0 +1,41 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{The paired Yukawa determinant over a ring}
+\date{2026-11-19}
+
+\p{For the \vocabk{Yukawa map}{fdip-011M}, suppose the fermion
+fibre is finite free, so the total cochain module #{\mathcal V}
+is finite free of rank #{N}. Use the universal odd vector #{\psi},
+odd covector #{\bar\psi}, and \vocabk{ring paired coefficient}{fdip-00TJ}.
+Set #{\theta_{K}=-\bar\psi(K\psi)} for #{K=K_{U,\phi}}, with
+the barred coefficient multiplying first. The onsite contribution
+to this quadratic element is #{-\bar\psi(Y_\phi\psi)}. Then
+##{\mathcal I_{\mathcal V}\extexp(\theta_K)=\det K.}
+Both the determinant and the joint weight #{\Xi(U,\phi)\det K}
+are invariant under vertex gauges. For #{A=\extD_U+Y_\phi}
+one has the finite polynomial identity
+##{\det(m\bbI+A)=
+ \sum_{j=0}^N m^{N-j}\trace(\Lambda^jA).}
+These identities include singular kernels over every commutative
+unital coefficient ring.}
+
+\proof{
+\p{The contraction is linear in the endomorphism, so its three
+terms are the mass, cochain and onsite contributions with the
+same barred-first sign. Apply \ref{fdip-00TL} with its canonical
+paired top orientation to obtain the determinant, with no division
+by factorials. Under a vertex gauge the two odd arguments
+transform as a vector and a dual covector. The induced change
+on the exterior algebra is that of \ref{fdip-00TW}; it preserves
+the top coefficient and transports the kernel by conjugation
+as in \ref{fdip-011N}. Conjugation preserves the determinant,
+and the scalar and connection weight is invariant by
+\ref{fdip-010C}. Finally apply \ref{fdip-00TZ} to #{-A}.
+Since #{\Lambda^j(-A)=(-1)^j\Lambda^j A}, the two signs cancel.
+The zeroth exterior trace is one.}
+}
+
+\p{Conjugation invariance of the determinant is formalized by
+\leanref{LinearMap.det_conj}.}
