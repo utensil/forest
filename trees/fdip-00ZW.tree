@@ -1,0 +1,32 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Definition}
+\title{An orbit field and its weight}
+\date{2026-11-19}
+
+\p{Let #{X} be the nonempty vertex set of a
+\vocabk{finite incidence presentation}{fdip-0002}, with oriented edge
+set #{E}, source #{s} and head #{h}. Fix a commutative unital ring
+#{k}, a finite group #{G} acting linearly on a #{k}-module #{F}, and
+one orbit #{\mathcal O=G\phi^\circ\subset F}. An \newvocab{orbit field}
+is a configuration #{\phi:X\to\mathcal O}. The global action is
+#{(g\phi)_x=g\phi_x}, with the same #{g} at every vertex.}
+
+\p{Give each vertex a function #{c_x:\mathcal O\to k} and each edge a
+function #{b_e:\mathcal O\times\mathcal O\to k} with
+#{b_e(gu,gv)=b_e(u,v)}. The \newvocab{orbit weight} and its partition
+coefficient are
+##{\xi(\phi)=\prod_{x\in X}c_x(\phi_x)
+              \prod_{e\in E}b_e(\phi_{h(e)},\phi_{s(e)}),
+ \qquad Z=\sum_{\phi\in\mathcal O^X}\xi(\phi).}
+For a \vocabk{module-valued observable}{fdip-00WK} #{f}, its
+weighted value is #{\sum_\phi\xi(\phi)f(\phi)}. When #{Z} is a unit,
+#{\langle f\rangle=Z^{-1}\sum_\phi\xi(\phi)f(\phi)} is linear in
+#{f}. Over the real numbers, nonnegative weights and #{Z>0} give the
+probability law with point masses #{\xi(\phi)/Z}.}
+
+\p{On a real inner product space with an isometric group action and
+real edge weights #{w_e}, the \newvocab{hopping weight} is the product
+of the edge factors #{b_e(u,v)=\ue^{w_e\langle u,v\rangle}}. This
+product is defined on a finite graph for an infinite orbit as well.}

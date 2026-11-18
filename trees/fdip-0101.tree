@@ -1,0 +1,75 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Example}
+\title{A row calculation on the three-by-three torus}
+\date{2026-11-19}
+
+\p{On the [periodic square lattice](fdip-006M) of periods three, take
+uniform real edge coupling #{w} and uniform external field #{\eta}
+in the direction of a reference unit spin. For the sign model label
+each spin by #{a=\pm1}. For the three-state clock label it by
+#{a\in\mathbb Z/3\mathbb Z}, with the reference spin at #{0}. Write
+#{B(a,b)} for the spin inner product and #{u(a)} for the component
+along the reference spin. Their numerical values are
+##{\begin{aligned}
+ \text{sign:}\quad & B(a,b)=ab,\qquad u(a)=a,\\
+ \text{clock:}\quad & B(a,b)=\cos(2\pi(a-b)/3),\\
+ & u(a)=\cos(2\pi a/3).
+\end{aligned}}}
+
+\p{Let #{A} be the set of rows of three labels. For rows
+#{a,b\in A}, indices #{i} are read modulo three. Put
+##{\begin{aligned}
+ H(a)&=\sum_i B(a_i,a_{i+1}),&
+ C(a,b)&=\sum_i B(a_i,b_i),\\
+ u_{\rm row}(a)&=\sum_i u(a_i).
+\end{aligned}}
+Define the row operator #{\transferop_\eta} on real functions of
+#{A} by its kernel in the row-indicator basis,
+##{\transferop_\eta(a,b)=
+ \ue^{w H(a)+\eta u_{\rm row}(a)+w C(a,b)}.}
+Thus #{(\transferop_\eta f)(a)=\sum_{b\in A}\transferop_\eta(a,b)f(b)}.
+Let #{M_u} multiply a row function by #{u(a_0)}. Then at any vertex
+#{x} the partition and the mean component along the field are
+##{Z(\eta)=\trace(\transferop_\eta^3),\qquad
+ \langle u(\phi_x)\rangle_\eta=
+ \frac{\trace(M_u\transferop_\eta^3)}{\trace(\transferop_\eta^3)}.}
+Here #{u(\phi_x)} means the component of the spin with its indicated
+label. For the sign this component is the field itself. In the clock
+model reflection in the reference axis preserves each factor and
+reverses the perpendicular component. Thus the full mean equals
+the displayed component times the reference spin.}
+
+\p{Indeed, expanding the trace sums over ordered rows #{a,b,c} the
+product #{\transferop_\eta(a,b)\transferop_\eta(b,c)\transferop_\eta(c,a)}.
+This counts each of the #{9} sites, #{9} horizontal links and #{9}
+vertical links once. Inserting #{M_u} measures the first site of row
+#{a}. Translations give the same mean at every site. The row spaces
+have dimensions #{8} and #{27}. At #{\eta=0} the means vanish by
+\ref{fdip-00ZY}. At #{w=0} the sites are independent. Their single-site
+partitions and means along the reference direction are respectively
+##{\begin{aligned}
+ \text{sign:}\quad &2\cosh\eta,\qquad \tanh\eta,\\
+ \text{clock:}\quad &\ue^{\eta}+2\ue^{-\eta /2},\qquad
+ \frac{\ue^{\eta}-\ue^{-\eta /2}}{\ue^{\eta}+2\ue^{-\eta /2}}.
+\end{aligned}}
+The torus partition is the ninth power of the corresponding
+single-site partition.}
+
+\p{For an integer-weight calculation give an edge factor #{2} for
+equal spins and #{1} otherwise. Give a site factor #{2} for the
+reference spin and #{1} otherwise. In the same row sum the kernel
+entry is #{2^{j(a)+j_0(a)+\ell(a,b)}}, where #{j(a)} counts equal
+horizontal neighbors, #{j_0(a)} counts reference spins and #{\ell(a,b)}
+counts matching columns. For each row #{a} form the sum
+#{z(a)=\sum_{b,c}\transferop(a,b)\transferop(b,c)\transferop(c,a)}.
+Grouping by the first spin gives
+##{\begin{array}{c|r|r}
+ &\sum_{a_0\ {\rm reference}}z(a)&\sum_{a_0\ {\rm other}}z(a)\\ \hline
+ \text{sign}&181730304&10865664\\
+ \text{clock}&254508320&38808320
+\end{array}}
+Thus the partition coefficients are #{192595968} and #{293316640}.
+The nonreference spins have component #{-1} and #{-1/2} respectively,
+giving means #{1030/1161} and #{1469401/1833229} along the field.}
