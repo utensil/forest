@@ -6,20 +6,20 @@
 \date{2026-11-01}
 
 \p{Let the vertices be
-#{\Lambda=\prod_{j=1}^n\mathbb Z/L_j\mathbb Z}, with #{L_j\ge3}.
+#{X=\prod_{j=1}^n\mathbb Z/L_j\mathbb Z}, with #{L_j\ge3}.
 Give each edge #{(x,j):x\to x+e_j} weight one and a unitary or
 orthogonal transport #{U_{x,j}} on a fixed fiber. For the
-\vocabk{determinant action}{fdip-0070}, put #{D=2n+m^2}, where #{m>0},
-and let #{H_U} be the covariant adjacency operator. Then
-##{Q_U=D\bbI -H_U,\qquad \|H_U\|\le2n<D,}
+\vocabk{determinant action}{fdip-0070} with #{m>0}, let #{H_U}
+be the covariant adjacency operator. Then
+##{Q_U=(2n+m^2)\bbI -H_U,\qquad \|H_U\|\le2n<2n+m^2,}
 and the determinant has the finite expansion
-##{\det Q_U=\sum_{j=0}^N(-1)^jD^{N-j}
+##{\det Q_U=\sum_{j=0}^N(-1)^j(2n+m^2)^{N-j}
                  \trace_{\mathbb K}(\Lambda^jH_U).}
 Here #{N=\dim_{\mathbb K}\mathcal H} includes the fiber dimension,
 and #{\cW(U)=\kappa\log\det Q_U}.}
 
-\p{Put #{A=H_U/D} and #{r=2n/D<1}. For every integer #{K\ge0},
-##{\cW(U)=\kappa N\log D-
+\p{Put #{A=H_U/(2n+m^2)} and #{r=2n/(2n+m^2)<1}. For every integer #{K\ge0},
+##{\cW(U)=\kappa N\log(2n+m^2)-
  \kappa\sum_{j=1}^K\frac{\trace_{\mathbb K}(A^j)}j+R_K(U),}
 where the exact remainder and its uniform bound are
 ##{\begin{aligned}
@@ -40,10 +40,10 @@ so #{T_j} is unitary. Expanding the difference energy gives
 Thus #{H_U} is self-adjoint and #{\|H_U\|\le2n}. In particular
 #{Q_U\ge m^2\bbI} and its determinant is positive.}
 
-\p{In the determinant of #{D\bbI -H_U}, choose the scalar
-#{D} on the complement of a subset of #{j} coordinate indices.
+\p{In the determinant of #{(2n+m^2)\bbI -H_U}, choose the scalar
+#{2n+m^2} on the complement of a subset of #{j} coordinate indices.
 The remaining signed permutation sum is the corresponding principal
-#{j}-minor of #{H_U}, with factor #{(-1)^jD^{N-j}}. These
+#{j}-minor of #{H_U}, with factor #{(-1)^j(2n+m^2)^{N-j}}. These
 minors are the diagonal coefficients of #{\Lambda^jH_U};
 their sum is its trace. Summing over #{j=0,\ldots,N} proves
 the finite determinant formula.}
@@ -76,7 +76,7 @@ Taking fiber traces proves the walk formula. Reverse walks pair
 adjoint products, so the total is real for a complex fiber.}
 }
 
-\p{The numerical bound #{2n} and scalar diagonal #{D} use this
+\p{The numerical bound #{2n} and scalar diagonal #{2n+m^2} use this
 regular lattice and its unit edge weights. For arbitrary weights or
 degrees, the diagonal decomposition and norm estimate must be
 recomputed.}
