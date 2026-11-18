@@ -5,7 +5,8 @@
 \title{Odd substitutions preserve the finite polynomial}
 \date{2026-11-17}
 
-\p{The \vocabk{finite exterior exponential}{fdip-00TF} satisfies
+\p{There is a unique \vocabk{finite exterior exponential}{fdip-00TF}
+satisfying
 ##{\extexp(a+b)=\extexp(a)\extexp(b),\qquad
  \extexp(uv)=1+uv}
 for positive even #{a,b} and arbitrary odd #{u,v}. Let #{M'}
@@ -24,6 +25,17 @@ Its divided coefficients satisfy
 \end{aligned}}}
 
 \proof{
+\p{Choose an ordered basis #{z_1,\ldots,z_s}. For an increasing
+index set #{I}, write #{z_I} for its ordered basis word.
+Each nonempty even word is a product of two odd words: separate
+its first letter from the rest. Including the scalar coefficient
+in the first factor, the two defining identities force the
+value at #{a=\sum_I a_Iz_I} to be
+##{\prod_{\substack{I\ne\varnothing\\ |I|\text{ even}}}(1+a_Iz_I).}
+At zero the product law for #{uv=0} forces the empty product, one.
+Thus there is at most one such map.
+To prove existence, take this product in the chosen basis.}
+
 \p{Every nonempty basis word squares to zero. Even basis words
 commute, so #{1+(a_I+b_I)z_I=(1+a_Iz_I)(1+b_Iz_I)} proves
 the addition identity. Every odd element squares to zero as
@@ -35,17 +47,20 @@ This cancellation remains valid in characteristic #{2}.}
 in #{z_Iv} contain #{I}, so their pairwise products vanish.
 Hence #{\extexp(u_Iz_Iv)=1+u_Iz_Iv}. Moreover
 #{(z_Iv)(z_Jv)=-z_Iz_Jv^2=0}. The addition identity now gives
-#{\extexp(uv)=\prod_I(1+u_Iz_Iv)=1+uv}.}
+#{\extexp(uv)=\prod_I(1+u_Iz_Iv)=1+uv}.
+The product thus satisfies both identities.}
 
-\p{Each positive even word is a product of two odd words.
-Its image under #{\varphi} therefore has finite exterior
-exponential equal to one plus that image. Apply the addition
+\p{Under #{\varphi}, the two odd factors of each positive even
+word have odd images. Hence the finite exterior exponential of
+the image of that word is one plus the image. Apply the addition
 identity to the finite word expansion of #{a}; the resulting
 product is precisely #{\varphi(\extexp(a))}. A change of
 ordered basis is such a homomorphism, proving independence.}
 
 \p{In the polynomial #{\extexp(ta)}, the coefficient of
-#{t^j} selects #{j} distinct factors. For a product of the
+#{t^j} selects #{j} distinct factors. A nonzero product uses
+at least #{2j} distinct basis letters, which gives the degree
+bound. For quadratic #{a} it uses exactly #{2j}. For a product of the
 #{r}-th and #{s}-th coefficients, any repeated factor vanishes.
 Each selection of #{r+s} factors appears
 #{\binom{r+s}{r}} times. Selecting #{j} factors from #{a^j}
