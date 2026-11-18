@@ -1,0 +1,34 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{The algebra of finite invariant functions}
+\date{2026-11-19}
+
+\p{For a finite group and a \vocabk{scalar frame}{fdip-010X} at
+each site, the algebra of gauge-invariant #{k}-valued functions of
+the joint configuration is canonically isomorphic to
+##{k^{\,G^E/(G^\circ)^X}.}
+Here the reference scalar is fixed, #{k} is any commutative unital
+ring, and the quotient consists of residual orbits of whole link
+tuples. The indicators #{\mathbf 1_C} of these orbits form an
+indexed #{k}-basis. Their pointwise product is zero for distinct
+orbits, and each is idempotent.}
+
+\proof{
+\p{Restrict an invariant function to the constant reference
+scalar. By \ref{fdip-0112} this assigns one value to each
+residual orbit, and each assignment extends uniquely to an
+invariant function by giving the same value to its joint orbit.
+Restriction and extension preserve constants, sums and products,
+all evaluated pointwise. For an orbit #{C}, its indicator takes
+value one on #{C} and zero elsewhere. Any assignment #{f} has
+the finite expansion #{\sum_C f(C)\mathbf 1_C}. Evaluation on
+each orbit recovers its coefficient, and evaluation gives the
+stated multiplication rules.}
+}
+
+\p{Descent of an invariant map to orbits is formalized by
+\leanref/tauceti{TauCeti.MulAction.orbitRelQuotientLift}.
+The basis on the resulting finite function space is
+\leanref{Pi.basisFun}.}
