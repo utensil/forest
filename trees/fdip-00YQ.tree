@@ -8,14 +8,17 @@
 \p{For any subgroup #{H} carrying the
 \vocabk{exterior rotational action}{fdip-00YI}, the
 \vocabk{rotation-only matter operators}{fdip-00YO} obey
-##{\extd_{R'}\mathcal G_S=\mathcal G_S\extd_R,
-\qquad \extdag_{R'}\mathcal G_S=\mathcal G_S\extdag_R,
-\qquad \extD_{R'}\mathcal G_S=\mathcal G_S\extD_R.}
+##{\begin{aligned}
+\extd_{R'}\mathcal G_S&=\mathcal G_S\extd_R,\\
+\extdag_{R'}\mathcal G_S&=\mathcal G_S\extdag_R,\\
+\extD_{R'}\mathcal G_S&=\mathcal G_S\extD_R,\\
+\cov_{R'}\mathcal G_S&=\mathcal G_S\cov_R.
+\end{aligned}}
 The counting pairing is perfect,
 #{(T_i^R)^\dagger=(T_i^R)^{-1}},
-#{(\extd_R)^\dagger=\extdag_R}, and
-#{(\extD_R)^\dagger=\extD_R}. Here #{\dagger} denotes the
-adjoint for that pairing. No average over #{H} is involved.}
+#{(\extd_R)^\dagger=\extdag_R},
+#{(\extD_R)^\dagger=\extD_R}, and #{(\cov_R)^\dagger=-\cov_R}.
+Here #{\dagger} denotes the adjoint for that pairing. No average over #{H} is involved.}
 
 \proof{
 \p{At the source #{x}, the edge law and the representation law
@@ -29,7 +32,9 @@ of \ref{fdip-00YK} give
 \end{aligned}}
 Cubical insertion and deletion commute with the internal action.
 Taking inverse transports in this identity gives covariance for
-both sums, and then for their sum.}
+each lowering summand, just as the forward identity gives it for
+each raising summand. Adding or subtracting the lowering part
+gives the two remaining identities.}
 
 \p{There are finitely many pairs #{(x,I)}, and each copy of
 #{E} has the perfect symmetric form of \ref{fdip-00YG}.
@@ -45,7 +50,8 @@ insertion and deletion on the cubical monomial basis are adjoint,
 and these maps commute with transport. The adjoint of the first
 sum is therefore the second sum. Symmetry and perfection imply
 that taking adjoints twice returns the initial operator, so their
-sum is self-adjoint. Every #{\mathcal G_S} is an isometry by
+sum is self-adjoint. The adjoint of their difference is
+#{\extdag_R-\extd_R=-\cov_R}. Every #{\mathcal G_S} is an isometry by
 \ref{fdip-00YK}. All arguments use only a finite sum over sites,
 not finiteness of #{H}.}
 }
