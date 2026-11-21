@@ -2,75 +2,21 @@
 \meta{agent-authored}{true}
 \tag{fdip}
 \taxon{Example}
-\title{The witness determinant and its diagonal bound}
+\title{The determinant and diagonal bound on the residual edge}
 \date{2026-11-21}
 
-\p{Let #{M} be the indicator matrix of \ref{fdip-012P}, written
-#{M=D+pc^{\top}} with #{D} the diagonal matrix of the squares
-#{\beta_j^2}. Then
-##{\det(M)=73\cdot144\cdot\Bigl(\frac{25}{4}\Bigr)^4
- \cdot\Bigl(\frac{9}{4}\Bigr)^4.}
-Let #{R} be the rescaled matrix of \ref{fdip-012U}. Then
-#{R} and #{M} have the same characteristic polynomial and the
-same determinant, and the diagonal entries of #{R} sum to
-#{358}. Under the Rayleigh inequality, the largest eigenvalue
-of #{R} is at least #{125/2}.}
+\p{On the edge of \ref{fdip-012P}, the indicator matrix is the
+update of \ref{fdip-013I}, the rescaling is the one in
+\ref{fdip-012U}, and the Rayleigh inequality is the hypothesis
+of \ref{fdip-012Y}. The determinant and the diagonal bound are
+the quantities given by \ref{fdip-013I}.}
 
 \proof{
-\p{\ref{fdip-012O} gives the normalized real parts
-#{1}, #{1/2}, #{0}, #{-1/2} and #{-1}. \ref{fdip-012F} adds
-#{2} to each of them, so the values of #{B} are #{3},
-#{5/2}, #{2}, #{3/2} and #{1}. Each is nonzero, so every
-diagonal entry of #{D} is nonzero and #{D} is invertible.
-\ref{fdip-012Q} applies to the columns #{p} and #{-c}:
-##{\det(D+pc^{\top})
- =\det(D)\bigl(1+c^{\top}D^{-1}p\bigr).}
-The #{j}-th summand is
-#{s_j\beta_j\cdot\beta_j/\beta_j^2=s_j}. \ref{fdip-0126}
-supplies #{6} cosets of size #{3} and #{6} of size #{9}, so the
-sum of the sizes is #{72}. The second factor is #{1+72=73}.}
-
-\p{\ref{fdip-0130} places one square #{9}, one square #{1},
-two squares #{4}, and #{4} squares of each of #{25/4} and
-#{9/4}. The product of those squares is
-##{9\cdot1\cdot4^2\cdot\Bigl(\frac{25}{4}\Bigr)^4
- \cdot\Bigl(\frac{9}{4}\Bigr)^4
- =144\cdot\Bigl(\frac{25}{4}\Bigr)^4
- \cdot\Bigl(\frac{9}{4}\Bigr)^4.}
-Multiplying by #{73} gives the determinant.}
-
-\p{On the diagonal the square-root factor of \ref{fdip-012U}
-equals #{1}, so #{t-R_{jj}=t-M_{jj}}. Off the diagonal,
-#{R_{mj}=\sqrt{s_m/s_j}\,M_{mj}}, hence
-##{(t{\bbI}-R)_{mj}=\sqrt{\frac{s_m}{s_j}}\,(t{\bbI}-M)_{mj}.}
-The same identity holds on the diagonal because the square-root
-factor equals #{1}. A permutation product for #{t{\bbI}-R}
-therefore equals the corresponding product for #{t{\bbI}-M},
-multiplied by
-#{\prod_m\sqrt{s_m/s_{\sigma(m)}}}. That product is a quotient
-of the same square roots in a different order, so it equals
-#{1}. Every permutation product agrees. The characteristic
-polynomials agree. Each of the #{12} factors in a permutation
-product for #{-M} contributes a sign #{-1}, and those signs
-form #{6} pairs of value #{1}, so #{\det(-M)=\det(M)}. The
-same count gives #{\det(-R)=\det(R)}. The common
-characteristic polynomial at #{0} is therefore the displayed
-determinant. The diagonal entries of #{R} are the summands
-whose total \ref{fdip-012P} computes as #{358}.}
-
-\p{The diagonal entry of #{R} on a coset of value #{\beta} and
-size #{s} is #{\beta^2(1+s)}. The #{7} combinations from
-\ref{fdip-0130} are
-##{9\cdot4=36,\quad
- \frac{25}{4}\cdot10=\frac{125}{2},\quad
- \frac{25}{4}\cdot4=25,\quad
- 4\cdot10=40,}
-##{\frac{9}{4}\cdot10=\frac{45}{2},\quad
- \frac{9}{4}\cdot4=9,\quad
- 1\cdot4=4.}
-Then #{\frac{125}{2}-40=\frac{45}{2}}, #{40-36=4},
-#{36-25=11}, #{25-\frac{45}{2}=\frac{5}{2}},
-#{\frac{45}{2}-9=\frac{27}{2}} and #{9-4=5}. Each difference
-is positive, so the largest diagonal entry is #{125/2}.
-\ref{fdip-0134} gives the bound.}
+\p{The values of #{B} are #{3}, #{5/2}, #{2}, #{3/2} and
+#{1}, by adding #{2} to the normalized pairings of
+\ref{fdip-012O}. Each is nonzero, so the diagonal matrix of
+the squares is invertible. \ref{fdip-012U} takes the rescaling
+factors to be the positive square roots of the coset sizes.
+\ref{fdip-012Y} assumes the Rayleigh inequality for the
+rescaled matrix. \ref{fdip-013I} applies.}
 }

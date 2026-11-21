@@ -1,0 +1,33 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{A rank-one update fixes the determinant and the polynomial}
+\date{2026-11-21}
+
+\p{Let #{D} be an invertible diagonal matrix over a commutative
+unital ring, and let #{p} and #{c} be columns of the same
+size. Set #{M=D+pc^{\top}}. Then
+##{\det(M)=\det(D)\bigl(1+c^{\top}D^{-1}p\bigr).}
+Let #{z_j} be invertible elements of the ring, one for each
+index, and define #{R} by
+#{R_{mj}=z_m z_j^{-1}M_{mj}}. Then #{R} is similar to #{M},
+so the two matrices have the same characteristic polynomial
+and the same determinant. If #{R} is symmetric, with entries
+in an ordered field, and #{\lambda} in that field satisfies
+the Rayleigh inequality for #{R}, then #{\lambda} is at least
+every diagonal entry of #{R}.}
+
+\proof{
+\p{The identity #{M=D-p(-c)^{\top}} and \ref{fdip-012Q} give
+##{\det(M)=\det(D)\bigl(1-(-c)^{\top}D^{-1}p\bigr),}
+which is the displayed formula. Let #{S} be the diagonal
+matrix with entries #{z_j}. Then
+##{(SMS^{-1})_{mj}=z_m M_{mj}z_j^{-1}=R_{mj},}
+so #{R=SMS^{-1}}. Hence
+##{\det(t{\bbI}-R)
+ =\det\bigl(S(t{\bbI}-M)S^{-1}\bigr)
+ =\det(t{\bbI}-M),}
+because #{\det(S)\det(S^{-1})=1}. The Rayleigh bound is
+\ref{fdip-0134} applied to #{R}.}
+}
