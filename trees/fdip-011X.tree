@@ -1,0 +1,78 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Lemma}
+\title{A simple largest eigenvalue of a symmetric nonnegative matrix}
+\date{2026-11-21}
+
+\p{Let #{A} be a symmetric matrix of fixed finite size, with nonnegative
+entries in an ordered field. Write #{\langle x,y\rangle} for the standard
+dot product on its index space. Assume that #{A} has a largest eigenvalue
+#{\lambda} in the ordered field, that #{\langle x,Ax\rangle\le\lambda\langle x,x\rangle}
+for every nonzero vector #{x}, and that equality holds exactly when
+#{Ax=\lambda x}. Let the support graph have the indices as vertices and an
+undirected edge between distinct indices exactly where the corresponding
+entry is positive, and assume that this graph is connected.}
+
+\p{Then #{\lambda} is simple, #{\lambda} is at least the absolute value of
+every eigenvalue in the ordered field, and #{\lambda} has an entrywise
+positive eigenvector. If some power of #{A} is entrywise positive, every
+other eigenvalue has strictly smaller absolute value.}
+
+\proof{
+\p{If the index set has one element, the matrix is a nonnegative scalar,
+its eigenvalue is simple, and a positive eigenvector is immediate. Now
+suppose there are at least two indices. Connectedness supplies an edge,
+so some off-diagonal entry #{A_{ij}} is positive. The vector with those
+two coordinates equal to #{1}, and the others equal to #{0}, has positive
+quadratic form. Thus #{\lambda>0}.}
+
+\p{Let #{v} be a nonzero eigenvector for #{\lambda}, and let #{|v|} be its
+entrywise absolute value. Nonnegativity gives
+#{\lvert\langle v,Av\rangle\rvert\le\langle|v|,A|v|\rangle}, because each
+summand is bounded by the corresponding summand of the second form. The
+Rayleigh hypothesis bounds the second form by #{\lambda\langle v,v\rangle}.
+Since #{\langle v,Av\rangle=\lambda\langle v,v\rangle} and #{\lambda>0},
+both inequalities are equalities. Hence #{A|v|=\lambda|v|}. Equality of
+the two forms forces #{v_av_b\ge0} whenever #{A_{ab}>0}.}
+
+\p{The eigenvector equation for #{|v|} forces every neighbor of a zero
+coordinate to vanish as well. The set of nonzero coordinates is therefore
+a union of connected components. It is nonempty, so #{|v|} is entrywise
+positive. The sign condition and connectedness then give #{v} a single
+strict sign. Replacing #{v} by its negative if needed produces an
+entrywise positive eigenvector #{p}.}
+
+\p{For an eigenvalue #{\mu} with nonzero eigenvector #{w},
+#{\lvert\mu\rvert\langle w,w\rangle
+=\lvert\langle w,Aw\rangle\rvert
+\le\langle|w|,A|w|\rangle
+\le\lambda\langle w,w\rangle},
+so #{\lvert\mu\rvert\le\lambda}. If #{u} is any eigenvector for
+#{\lambda}, the scalar #{\frac{\langle u,p\rangle}{\langle p,p\rangle}} is defined
+because #{p} is entrywise positive. Subtracting that multiple of #{p}
+gives an eigenvector orthogonal to #{p}. The absolute-value argument
+makes its absolute value an eigenvector, hence entrywise positive or
+zero, and the sign argument gives it one strict sign unless it is zero.
+A vector of one strict sign is not orthogonal to #{p}. Thus the
+difference vanishes and the eigenspace is the line through #{p}.}
+
+\p{Suppose a power #{A^s} is entrywise positive, and let #{\mu} be an
+eigenvalue with #{\lvert\mu\rvert=\lambda} and eigenvector #{w\ne0}.
+The comparison already proved gives equality, so #{|w|} is an entrywise
+positive eigenvector for #{\lambda}. Then #{A^s|w|=\lambda^s|w|}, while
+#{A^sw=\mu^sw}, and #{\lvert\mu\rvert^s=\lambda^s}. Nonnegativity of the
+entries of #{A^s} gives
+#{\lvert\langle w,A^sw\rangle\rvert\le\langle|w|,A^s|w|\rangle}.
+Both sides equal #{\lambda^s\langle w,w\rangle}, so every summand
+#{(A^s)_{ab}w_aw_b} has one common sign. Every entry of #{A^s} is
+positive and #{|w|} has no zero, so #{w} itself has one strict sign:
+#{w=\pm|w|}. Combined with #{A|w|=\lambda|w|} and #{Aw=\mu w}, each
+choice of sign forces #{\mu=\lambda}.}
+}
+
+\p{The Rayleigh hypothesis is the part of the real spectral theorem used
+here. \ref{fdip-011Y} records its source. The bound and the positive
+eigenvector are the symmetric nonnegative case of the theorem associated
+with Perron and with Frobenius; the argument above uses the ordering,
+finite sums and connectedness.}
