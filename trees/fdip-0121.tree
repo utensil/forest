@@ -1,0 +1,35 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Definition}
+\title{A finite scalar set, a neutral bit and its weight}
+\date{2026-11-21}
+
+\p{Let #{G} be a finite group and let #{S} be a finite set with a left
+#{G}-action. Write #{\mathcal O_i}, for #{i} in a finite label set
+#{\mathcal I}, for the orbits of this action. Choose a reference
+point #{\phi^\circ_i\in\mathcal O_i} and write #{G^\circ_i} for its
+stabilizer. The orbit is a \newvocab{fixed-point orbit} when
+#{G^\circ_i=G}, equivalently when #{\mathcal O_i} has one point.
+A \newvocab{sector labeling} is a function
+#{\lambda:X\to\mathcal I} on the vertex set of a
+\vocabk{finite incidence presentation}{fdip-0002}. The scalar
+configurations of that labeling are the functions #{\phi} with
+#{\phi_x\in\mathcal O_{\lambda(x)}}.}
+
+\p{A \newvocab{neutral bit} is a function #{\zeta:X\to\{0,1\}}. A
+vertex gauge does not change #{\zeta}. An environment input selects,
+for each vertex #{x} and each bit value #{\varepsilon\in\{0,1\}}, a
+function #{\alpha_{\varepsilon,x}:S\to k} satisfying
+#{\alpha_{\varepsilon,x}(gs)=\alpha_{\varepsilon,x}(s)}. Give each
+face a class function #{a_f:G\to k} and each edge a factor
+#{b_e:S\times S\to k} with #{b_e(gu,gv)=b_e(u,v)}, as in the
+\vocabk{orbit gauge–Higgs weight}{fdip-010A}. The
+\newvocab{extended orbit weight} is
+##{\Xi(U,\phi,\zeta)=
+ \prod_f a_f(U_f)
+ \prod_e b_e(\phi_{h(e)},U_e\phi_{s(e)})
+ \prod_x\alpha_{\zeta_x,x}(\phi_x).}
+The empty face product is #{1}. The ring #{k} is commutative and
+unital. Configurations are triples
+#{(U,\phi,\zeta)\in G^E\times S^X\times\{0,1\}^X}.}
