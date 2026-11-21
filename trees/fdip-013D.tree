@@ -1,0 +1,59 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Example}
+\title{The residual action has two eigenvalues}
+\date{2026-11-21}
+
+\p{Let #{h} be the order-#{3} stabilizer element of
+\ref{fdip-0126}, acting on #{\mathbb C^2} by the faithful
+homomorphism of that example, and let #{v} be the vector it
+fixes. In a basis of eigenvectors the action is diagonal, with
+eigenvalues #{1} and a root #{\mu} of #{t^2+t+1}. The
+eigenspace for #{1} is the line through #{v}, and the
+eigenspace for #{\mu} is another line.}
+
+\proof{
+\p{\ref{fdip-0126} sends the class #{[u,m]} to the matrix
+#{\gamma^m M(u)}. That map is a homomorphism into #{U(2)}, and
+it is faithful. The same example sets #{v=(1,\alpha)}, shows
+that #{h} fixes #{v}, shows that #{h^3} is the identity, and
+shows that #{h} is distinct from the identity. Faithfulness
+therefore sends #{h} to a matrix other than the identity.
+The homomorphism sends #{h^3} to the cube of that matrix, so
+the cube is the identity matrix. The first coordinate of #{v}
+is #{1}, so #{v} is nonzero and extends to a basis #{v,w} of
+#{\mathbb C^2}. The first column of the matrix is #{(1,0)}.
+Write the image of #{w} as #{av+\mu w}. One more application
+sends #{w} to
+#{av+\mu(av+\mu w)=a(1+\mu)v+\mu^2 w}. A third application
+sends #{w} to
+#{a(1+\mu)v+\mu^2(av+\mu w)=a(1+\mu+\mu^2)v+\mu^3 w}.
+The cube is the identity, so this image equals #{w}.
+Independence of the basis equates coefficients, hence
+#{\mu^3=1} and #{a(1+\mu+\mu^2)=0}. If #{\mu=1}, then
+#{3a=0}. In the scalar field of \ref{fdip-0126}, #{3\ne0}, so
+#{a=0} and the matrix is the identity. Faithfulness excludes
+that matrix, so #{\mu\ne1}. In that field
+#{\mu^3-1=({\mu}-1)(\mu^2+\mu+1)=0}, and the first factor is
+nonzero, so #{\mu^2+\mu+1=0}. Set
+#{u=w+\frac{a}{{\mu}-1}v}. The coefficient of #{w} is #{1},
+so #{u} does not lie on the line through #{v}. The matrix
+sends #{u} to
+##{av+\mu w+\frac{a}{{\mu}-1}v
+=\mu w+\frac{a\mu}{{\mu}-1}v.}
+The identity
+#{1+\frac{1}{{\mu}-1}=\frac{\mu}{{\mu}-1}} rewrites the
+coefficient of #{v} as #{\frac{a\mu}{{\mu}-1}}. The
+right-hand side equals #{\mu u}. Thus #{u} is an eigenvector
+for #{\mu}.}
+
+\p{Let #{u} be the eigenvector just constructed. A general
+vector is #{xv+zu}. The matrix sends it to #{xv+\mu zu}.
+That image equals the original vector exactly when
+#{\mu z=z}, hence #{({\mu}-1)z=0}. Since #{\mu\ne1}, this
+forces #{z=0}, so the eigenspace for #{1} is the line through
+#{v}. The image equals #{\mu} times the original vector
+exactly when #{x=\mu x}, hence #{({\mu}-1)x=0}, so #{x=0}.
+The eigenspace for #{\mu} is the line through #{u}.}
+}
