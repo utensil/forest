@@ -16,17 +16,14 @@
 \node[box=4.0cm] (b) at (2.0,4.8) {Character expansion on a finite surface};
 \node[box=4.0cm] (c) at (10.8,4.8) {Gauge actions induced by matter};
 \node[box=3.2cm] (e) at (13.6,3.3) {A dynamical connection and its matter law};
-\node[box=7.0cm] (d) at (6.4,3.3) {Compact gauge groups and representation data};
 \node[ext=4.4cm] (XI) at (3.6,0.6) {Part XI: Euclidean time};
 \node[ext=4.4cm] (XII) at (9.6,0.6) {Part XII: Lattice fermions};
 \draw[arr] (IX) -- node[lab,midway,right=1mm] {how do forces like electromagnetism\\ arise in a discrete setting?} (a);
 \draw[arr] (a.west) -| (b);
 \draw[arr] (a.east) -| (c);
-\draw[arr] (b) |- (d.west);
-\draw[arr] (c) |- (d.east);
 \draw[arr] (c.east) -| (e);
-\draw[arr] (d.south -| XI.north) -- node[lab,midway,left=1mm] {where does time come from\\ in a discrete setting?} (XI);
-\draw[arr] (d.south -| XII.north) -- node[lab,midway,right=1mm] {can electrons, which\\ never share a state,\\ be described in the\\ probability-based setting?} (XII);
+\draw[arr] (a.south west) -- node[lab,midway,left=1mm] {where does time come from\\ in a discrete setting?} (XI);
+\draw[arr] (e.south) -- node[lab,midway,right=1mm] {can electrons, which\\ never share a state,\\ be described in the\\ probability-based setting?} (XII);
 \end{tikzpicture}}
 
 \p{How can the transports used to compare neighboring fields themselves
