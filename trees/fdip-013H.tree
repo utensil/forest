@@ -2,44 +2,45 @@
 \meta{agent-authored}{true}
 \tag{fdip}
 \taxon{Proposition}
-\title{Values and sizes determine the one-edge polynomial}
+\title{Declared values and sizes determine the one-edge polynomial}
 \date{2026-11-21}
 
 \p{Let #{B} be a \vocabk{double-coset kernel}{fdip-012C}, with
 value #{\beta_j} on the #{j}-th double coset, and let that
-coset have size #{s_j}. Let #{\mathcal K} be the
-\vocabk{class-function kernel}{fdip-012C} with value #{2} at
-the identity and value #{1} at every other element. On
-functions constant on the double cosets, the
-\vocabk{one-edge operator}{fdip-012C} has matrix
-#{D+pc^{\top}} in the indicator basis. Here #{D} is the
-diagonal matrix of the squares #{\beta_j^2}, the column #{p}
-has entries #{\beta_j}, and the column #{c} has entries
-#{s_j\beta_j}. The diagonal entry is #{\beta_j^2(1+s_j)}, and
-the off-diagonal entry from #{j} to #{m} is
-#{\beta_m s_j\beta_j}. The characteristic polynomial is
-therefore determined by the values #{\beta_j} and the sizes
-#{s_j}. The rank equals the number of double cosets, and
-\ref{fdip-013G} equates that number with the sum of the
-squares of the invariant dimensions.}
+coset have size #{s_j}. Let #{\mathcal K} be a
+\vocabk{class-function kernel}{fdip-012C}. On functions
+constant on the double cosets, the
+\vocabk{one-edge operator}{fdip-012C} has the following
+matrix in the indicator basis. For #{g} in the #{m}-th
+double coset, the entry from the #{j}-th coset to the
+#{m}-th equals #{\beta_m\beta_j} times the sum of the values
+#{\mathcal K(gx^{-1})} as #{x} runs through the #{j}-th
+double coset. The sum does not depend on the choice of #{g}
+in its coset. The characteristic polynomial, the determinant
+of #{t{\bbI}} minus this matrix, is determined by the
+declared values of #{B} and of #{\mathcal K} and by the
+double-coset sizes. The rank equals the number of double
+cosets, and \ref{fdip-013G} equates that number with the sum
+of the squares of the invariant dimensions.}
 
 \proof{
-\p{For this kernel,
-##{(C_{\mathcal K}f)(g)=f(g)+\sum_{x\in G}f(x),}
-because the identity term is counted once in the sum and the
-value #{2} adds it once more. Therefore
-##{(\transferop f)(g)
- =B(g)^2 f(g)+B(g)\sum_{x\in G}B(x)f(x).}
-On the indicator of the #{j}-th coset the inner sum equals
-#{s_j\beta_j}. On the #{m}-th coset the value is
-#{\beta_m^2} when #{m=j}, together with
-#{\beta_m s_j\beta_j} for every pair. Those are the entries
-of #{D+pc^{\top}}. Each entry is a polynomial in the values
-and the sizes, so the characteristic polynomial, the
-determinant of #{t{\bbI}} minus that matrix, is determined by
-the same data. \ref{fdip-012D} shows that the operator
-preserves this space and that the indicators form a basis, so
-the rank is the number of double cosets. \ref{fdip-013G}
-identifies that number with the sum of the squares of the
-invariant dimensions.}
+\p{Let #{e_j} be the indicator of the #{j}-th double coset.
+Multiplication by #{B}, as in the definition of the
+[one-edge operator](fdip-012C), sends #{e_j} to
+#{\beta_j e_j}. For #{g} in the #{m}-th double coset,
+##{(C_{\mathcal K}(\beta_j e_j))(g)
+ =\beta_j\sum_{x\in G}\mathcal K(gx^{-1})e_j(x),}
+and the one-edge operator at #{g} equals #{\beta_m} times
+this value. The values lie in the commutative unital ring of
+that definition. \ref{fdip-012D} shows that the operator
+sends functions constant on double cosets to functions of the
+same kind, so the sum is constant for #{g} in the #{m}-th
+coset. The indicators form a basis, and these constants are
+the matrix entries. Each sum runs through #{s_j} elements,
+and each summand is a declared value of #{\mathcal K}. Each
+entry is therefore determined by the declared values of both
+kernels and by the size #{s_j}. The characteristic polynomial
+is a polynomial in those entries. \ref{fdip-012D} gives the
+rank, and \ref{fdip-013G} identifies it with the sum of the
+squares of the invariant dimensions.}
 }

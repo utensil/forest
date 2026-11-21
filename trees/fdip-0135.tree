@@ -2,32 +2,16 @@
 \meta{agent-authored}{true}
 \tag{fdip}
 \taxon{Example}
-\title{The sign edge has determinant 12 and diagonal bound 8}
+\title{The determinant and diagonal bound on the sign edge}
 \date{2026-11-21}
 
 \p{The sign matrix of \ref{fdip-012H} is the update of
-\ref{fdip-013I} for that edge. It has determinant #{12}.
-Under the Rayleigh inequality proved in \ref{fdip-012X}, its
-largest eigenvalue is at least #{8}, and the difference from
-#{8} is positive.}
+\ref{fdip-013I} for that edge. The determinant and the
+diagonal bound are the quantities given by \ref{fdip-013I}.}
 
 \proof{
-\p{Let #{A} be the matrix
-##{\begin{pmatrix}8&2\\2&2\end{pmatrix}.}
-Its determinant is #{8\cdot2-2\cdot2=12}. Then
-##{t{\bbI}-A=\begin{pmatrix}t-8&-2\\-2&t-2\end{pmatrix},}
-and the determinant of that matrix is
-#{(t-8)(t-2)-4}. \ref{fdip-012H} expands the same
-polynomial as #{t^2-10t+12}. At #{t=0} the matrix is
-#{-A}, and
-#{\det(-A)=(-8)(-2)-(-2)(-2)=16-4=12}. The constant
-term equals the determinant of #{A}.}
-
-\p{\ref{fdip-012X} proves
-#{\langle v,Av\rangle\le\lambda\langle v,v\rangle} for
-#{\lambda=\frac{10+\sqrt{52}}{2}} and every #{v}.
-\ref{fdip-0134} gives #{\lambda\ge8}. The same example
-computes #{{{\lambda}-8}=\frac{\sqrt{52}-6}{2}}. The
-positive square root of #{52} exceeds #{6} because
-#{52>36}. Thus #{\lambda>8}.}
+\p{The indicator matrix computed in \ref{fdip-012H} is the
+update named in \ref{fdip-013I}, so that proposition gives
+the determinant and the diagonal bound. \ref{fdip-012X}
+supplies the Rayleigh inequality for this edge.}
 }
