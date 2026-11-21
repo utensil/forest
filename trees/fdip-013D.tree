@@ -1,0 +1,57 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Example}
+\title{The residual action splits an equivariant endomorphism}
+\date{2026-11-21}
+
+\p{Let #{h} be the order-#{3} stabilizer element of
+\ref{fdip-0126}, acting on #{\mathbb C^2} by the faithful
+homomorphism of that example, and let #{v} be the vector it
+fixes. In a basis of eigenvectors the action is diagonal, with
+eigenvalues #{1} and a root #{\mu} of #{t^2+t+1}. An
+endomorphism #{Y(v)} that commutes with this action is
+diagonal in the same basis. The eigenvalues of
+#{m{\bbI}+Y(v)} are #{m+y_1} and #{m+y_2}.}
+
+\proof{
+\p{\ref{fdip-0126} sends the class #{[u,m]} to the matrix
+#{\gamma^m M(u)}. That map is a homomorphism into #{U(2)}, and
+it is faithful. The same example sets #{v=(1,\alpha)}, shows
+that #{h} fixes #{v}, shows that #{h^3} is the identity, and
+shows that #{h} is distinct from the identity. Faithfulness
+therefore sends #{h} to a matrix other than the identity.
+The homomorphism sends #{h^3} to the cube of that matrix, so
+the cube is the identity matrix. The first coordinate of #{v}
+is #{1}, so #{v} is nonzero and extends to a basis #{v,w} of
+#{\mathbb C^2}. The first column of the matrix is #{(1,0)}.
+Write the image of #{w} as #{av+\mu w}. The cube of the matrix
+sends #{w} to #{a(1+\mu+\mu^2)v+\mu^3 w}. Independence of the
+basis equates coefficients with those of #{w}, so
+#{\mu^3=1} and #{a(1+\mu+\mu^2)=0}. If #{\mu=1}, then
+#{3a=0}. In the scalar field of \ref{fdip-0126}, #{3\ne0}, so
+#{a=0} and the matrix is the identity. Faithfulness excludes
+that matrix, so #{\mu\ne1}. In that field
+#{\mu^3-1=({\mu}-1)(\mu^2+\mu+1)=0}, and the first factor is
+nonzero, so #{\mu^2+\mu+1=0}. The vector
+#{w+\frac{a}{{\mu}-1}v} is nonzero and is an eigenvector for
+#{\mu}.}
+
+\p{At the fixed vector, equivariance of a
+[Yukawa map](fdip-011M) says that #{Y(v)} commutes with the
+matrix of #{h}. Let #{u} be the second eigenvector. A general
+vector is #{xv+zu}. Applying the matrix multiplies the second
+coordinate by #{\mu}. The result equals the original vector
+exactly when #{z=0}, so the eigenspace for #{1} is the line
+through #{v}. It equals #{\mu} times the original vector
+exactly when #{x=0}, so the eigenspace for #{\mu} is the line
+through #{u}. Commutation says that #{Y(v)} applied after the
+matrix equals the matrix applied after #{Y(v)}. The matrix
+fixes #{v}, so #{Y(v)v} is fixed and lies on the line through
+#{v}. On #{u} the matrix acts by #{\mu}, so the same identity
+sends #{Y(v)u} to #{\mu} times itself, and that image lies on
+the line through #{u}. In this basis #{Y(v)} is diagonal.
+Write its diagonal entries as #{y_1} and #{y_2}. Adding
+#{m{\bbI}} adds #{m} to each of them, so the eigenvalues are
+#{m+y_1} and #{m+y_2}.}
+}
