@@ -1,0 +1,42 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Lemma}
+\title{The determinant of a rank-one update}
+\date{2026-11-21}
+
+\p{Let #{x} be a column and #{y^{\top}} a row, with entries in a
+commutative unital ring. Then
+##{\det({\bbI}-xy^{\top})=1-y^{\top}x.}
+If #{A} is an invertible square matrix of the same size, and
+#{p} and #{c} are columns,
+##{\det(A-pc^{\top})=\det(A)\bigl(1-c^{\top}A^{-1}p\bigr).}}
+
+\proof{
+\p{Form the block matrix with upper blocks #{\bbI,x} and lower
+blocks #{y^{\top},1}. The determinant is the alternating sum of
+permutation products. Suppose column #{j} equals column #{\ell},
+with #{j\ne\ell}. Pair each permutation #{\sigma} with the
+permutation that applies #{\sigma} and then swaps the column
+indices #{j} and #{\ell}. The swap changes the sign. The two columns agree, so the entry
+in each row, read from the swapped column index, equals the
+original entry. Each pair is a product minus the same product,
+and the sum of the pairs is #{0}. Multilinearity in the columns
+then shows that adding a scalar multiple of one column to a
+different column adds a determinant with two equal columns. That
+determinant is #{0}, so the operation leaves the determinant
+unchanged. The same pairing of row indices gives the row
+operations. The column operations clear the
+upper part of the last column and leave the corner
+#{1-y^{\top}x}. The row operations, applied instead to the
+original block matrix, clear the upper right block and leave
+#{{\bbI}-xy^{\top}} in the upper left. In each reduced matrix
+the last column has only its bottom entry nonzero, so every
+surviving permutation product uses that entry. The determinant
+equals that entry times the determinant of the complementary
+block. One complementary block is the identity and the other is
+#{{\bbI}-xy^{\top}}. Thus
+#{\det({\bbI}-xy^{\top})=1-y^{\top}x}. For invertible #{A},
+##{A-pc^{\top}=A({\bbI}-A^{-1}pc^{\top}),}
+and the identity already proved supplies the second factor.}
+}

@@ -1,0 +1,25 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Lemma}
+\title{Rational roots of a rational polynomial}
+\date{2026-11-21}
+
+\p{A polynomial with rational coefficients is either the zero
+polynomial or has at most as many rational roots as its degree.}
+
+\proof{
+\p{A nonzero constant has no root. Suppose #{e} has degree #{m}
+and #{e(z)=0}. Define #{d_{m-1}=e_m} and
+#{d_j=e_{j+1}+zd_{j+1}}. The product
+#{(t-z)\sum_j d_j t^j} has leading coefficient #{d_{m-1}},
+coefficient #{d_{j-1}-zd_j} of #{t^j} for
+#{1\le j\le m-1}, and constant term #{-zd_0}. The recurrence
+makes #{d_{j-1}-zd_j=e_j}. Define #{p_m=e_m} and
+#{p_j=e_j+zp_{j+1}}. Downward induction gives
+#{p_j=\sum_{i\ge j}e_i z^{i-j}}, so #{p_0=e(z)=0}. The quotient
+coefficients satisfy #{d_j=p_{j+1}}, hence
+#{e_0+zd_0=p_0=0} and the constant term equals #{e_0}. Therefore
+#{e(t)=(t-z)\sum_j d_j t^j}. The quotient has smaller degree.
+By induction, #{e} has at most #{m} rational roots.}
+}

@@ -1,0 +1,37 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Example}
+\title{The binary icosahedral edge}
+\date{2026-11-21}
+
+\p{Let #{2I} act on #{\mathbb C^2} as in \ref{fdip-0127}. The
+stabilizer of #{e_1=(1,0)} is trivial, so the double cosets are
+singletons. \ref{fdip-012D} gives a preserved space of rank
+#{120}. For #{g\in 2I}, write the special unitary matrix of
+\ref{fdip-007G} as
+##{\begin{pmatrix}z&w\\-\overline w&\overline z\end{pmatrix}.}
+Its first column is #{ge_1=(z,-\overline w)}. The product of
+\ref{fdip-0127} gives
+#{\langle e_1,ge_1\rangle=\overline z}, so
+##{\operatorname{Re}\langle e_1,ge_1\rangle=\operatorname{Re}z
+ =\frac12\trace g.}
+The pairing kernel #{B(g)=2+\operatorname{Re}\langle e_1,ge_1\rangle}
+is therefore constant on conjugacy classes. For a class-function
+kernel, \ref{fdip-012L} says that the
+[one-edge operator](fdip-012C) preserves
+the class functions on #{2I}.}
+
+\proof{
+\p{The stabilizer and the order #{120} are \ref{fdip-0127}, so
+\ref{fdip-012D} supplies one singleton double coset for each group
+element. The displayed matrix form is \ref{fdip-007G}, so its
+trace is #{z+\overline z} and its first column is the image of
+#{(1,0)}. Conjugate linearity in the second slot of the product
+sends that column to #{\overline z}. For square matrices of this
+size, the trace of a product equals the trace of the reversed
+product, because both expand to the same sum of entrywise
+products. Hence
+#{\trace(hgh^{-1})=\trace g}, and #{B(hgh^{-1})=B(g)}.
+\ref{fdip-012L} applies.}
+}
