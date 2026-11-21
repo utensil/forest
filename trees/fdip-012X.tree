@@ -1,0 +1,50 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Example}
+\title{The sign edge meets the Rayleigh hypothesis}
+\date{2026-11-21}
+
+\p{The sign edge of \ref{fdip-012H} has matrix
+##{\begin{pmatrix}8&2\\2&2\end{pmatrix}}
+in the basis of its two group elements. Both double cosets have
+size #{1}, so dividing by the square root of the size leaves
+the matrix unchanged, and the displayed matrix equals its
+transpose. Its characteristic polynomial is #{t^2-10t+12}.
+Let the ordered field contain a positive square root of #{52},
+and set #{\lambda=\frac{10+\sqrt{52}}{2}}. Then #{\lambda} is an
+eigenvalue, #{\langle v,Av\rangle\le\lambda\langle v,v\rangle}
+for every #{v}, and equality holds exactly when
+#{Av=\lambda v}. The off-diagonal entries are positive, so
+\ref{fdip-011X} applies in this field.}
+
+\proof{
+\p{The discriminant of #{t^2-10t+12} is #{100-48=52}. Thus
+#{\lambda} and #{\frac{10-\sqrt{52}}{2}} are the two roots.
+Their sum is #{10} and their product is #{12}, so both are
+positive, and #{\lambda} is the larger one. Then
+#{{{\lambda}-8}=\frac{\sqrt{52}-6}{2}} and
+#{{{\lambda}-2}=\frac{\sqrt{52}+6}{2}}. Hence
+##{({\lambda}-8)({\lambda}-2)
+ =\frac{(\sqrt{52}-6)(\sqrt{52}+6)}{4}
+ =\frac{52-36}{4}=4,}
+so #{{{\lambda}-8}=\frac{4}{{\lambda}-2}}. For #{v=(x,y)},
+##{\lambda{\langle v,v\rangle}-{\langle v,Av\rangle}
+ =\frac{4}{{\lambda}-2}x^2-4xy+({\lambda}-2)y^2
+ =\frac{1}{{\lambda}-2}\bigl(2x-({\lambda}-2)y\bigr)^2.}
+The right side is nonnegative. It vanishes exactly when
+#{2x=({\lambda}-2)y}. The vector
+#{\bigl({\lambda}-2,\,2\bigr)} is nonzero because
+#{{{\lambda}-2}} is positive. Its image under the matrix has
+second coordinate #{2({\lambda}-2)+4=2\lambda}. The first
+coordinate is #{8({\lambda}-2)+4=8{\lambda}-12}. The eigenvalue
+equation #{\lambda^2-10\lambda+12=0} rearranges to
+#{\lambda({\lambda}-2)=8{\lambda}-12}, so the vector is an
+eigenvector for #{\lambda}. The other root is different, so
+that line is the whole eigenspace. Equality in the quadratic
+form therefore holds exactly when #{Av=\lambda v}. The support
+graph joins the two indices. Since the matrix itself is
+entrywise positive, \ref{fdip-011X} gives a simple largest
+eigenvalue and a strictly smaller absolute value for the other
+eigenvalue.}
+}

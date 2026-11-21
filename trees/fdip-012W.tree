@@ -1,0 +1,23 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{A finite eigenbasis makes correlations finite sums}
+\date{2026-11-21}
+
+\p{Let #{A} be a real symmetric matrix of finite size, and assume
+an orthonormal basis of eigenvectors #{v_i} with eigenvalues
+#{\lambda_i}. This eigenbasis is the hypothesis recorded in
+\ref{fdip-011Y}; the argument below does not prove it. For
+every vector #{u} and every nonnegative integer #{N},
+##{\langle u,A^N u\rangle=\sum_i\lambda_i^N\langle u,v_i\rangle^2.}
+The sum has one term for each basis vector.}
+
+\proof{
+\p{Orthonormality gives #{u=\sum_i\langle v_i,u\rangle v_i}.
+Applying #{A^N} multiplies the #{i}-th coefficient by
+#{\lambda_i^N}. The real product is symmetric, so
+#{\langle u,v_i\rangle=\langle v_i,u\rangle}, and the inner
+product with #{u} retains the square of that coefficient.
+There are finitely many indices, so the sum is finite.}
+}

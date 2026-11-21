@@ -1,0 +1,28 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{Inversion-invariant kernels are self-adjoint for counting}
+\date{2026-11-21}
+
+\p{Let #{B} and #{\mathcal K} take real values, and let
+#{\transferop} be the \vocabk{one-edge operator}{fdip-012C}.
+Suppose #{\mathcal K(g)=\mathcal K(g^{-1})} for every
+#{g\in G}. For real functions #{f,h} on #{G}, the counting
+product
+##{\langle f,h\rangle=\sum_{g\in G}f(g)h(g)}
+satisfies #{\langle f,\transferop h\rangle=\langle\transferop f,h\rangle}.}
+
+\proof{
+\p{Expanding the definition gives
+##{\langle f,\transferop h\rangle
+ =\sum_{g,x}f(g)B(g)\mathcal K(gx^{-1})B(x)h(x).}
+The counting product is symmetric, so
+#{\langle\transferop f,h\rangle=\langle h,\transferop f\rangle}.
+The expansion of #{\langle h,\transferop f\rangle}, with the
+names #{g} and #{x} exchanged, has kernel factor
+#{\mathcal K(xg^{-1})}. That argument is the inverse of
+#{gx^{-1}}, so the hypothesis makes
+#{\langle f,\transferop h\rangle} equal to
+#{\langle h,\transferop f\rangle}.}
+}
