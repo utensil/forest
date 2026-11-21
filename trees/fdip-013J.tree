@@ -1,0 +1,68 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Lemma}
+\title{Invariant subspaces and invariant forms split}
+\date{2026-11-21}
+
+\p{Let a finite group #{G} act linearly on a finite-dimensional
+vector space over #{\mathbb C}. Every #{G}-invariant subspace
+has a #{G}-invariant complement. On an irreducible
+representation, averaging the standard Hermitian product gives
+a #{G}-invariant positive definite product, linear in its first
+argument. For a subgroup #{H}, that product matches the
+#{H}-invariant vectors with the #{H}-invariant linear forms.}
+
+\proof{
+\p{Since the scalar field is #{\mathbb C}, #{|G|} is invertible.
+Let #{W} be invariant, and let #{\pi} be a linear projection
+onto #{W}. Set
+##{P=\frac{1}{|G|}\sum_{g\in G}\rho(g)\,\pi\,\rho(g)^{-1}.}
+For #{w\in W} and every #{g}, invariance gives
+#{\rho(g)^{-1}w\in W}, so #{\pi} fixes that vector and
+#{Pw=w}. For an arbitrary vector #{v}, #{\pi} lands in #{W}
+and #{W} is invariant, so #{Pv\in W}. Thus #{P} projects onto
+#{W}. Conjugating the sum gives
+##{\rho(h)P\rho(h)^{-1}
+ =\frac{1}{|G|}\sum_{g\in G}\rho(hg)\,\pi\,\rho(hg)^{-1}.}
+Reindex by #{g\mapsto hg}. The sum is #{P}, so
+#{\rho(h)P=P\rho(h)}. The kernel of #{P} is an invariant
+complement. A minimal nonzero invariant subspace has no proper
+nonzero invariant subspace, so it is irreducible.}
+
+\p{Choose a basis and let
+#{\langle\sum_i a_i e_i,\sum_j b_j e_j\rangle_0
+ =\sum_i a_i\overline{b_i}}.
+This product is linear in its first argument, and
+#{\langle v,v\rangle_0} is a sum of squared moduli, hence
+positive for #{v\ne0}. On an irreducible #{V}, define
+##{\langle u,w\rangle
+ =\sum_{g\in G}\langle\rho(g)u,\rho(g)w\rangle_0.}
+The summand at #{g}, evaluated on #{\rho(h)u} and #{\rho(h)w},
+is the summand at #{gh}. Reindex by #{g\mapsto gh}. The sum is
+unchanged, so
+#{\langle\rho(h)u,\rho(h)w\rangle=\langle u,w\rangle}.
+Substitute #{h=a^{-1}} and replace the second argument #{w}
+by #{\rho(a)w}. This gives
+#{\langle\rho(a)^{-1}u,w\rangle=\langle u,\rho(a)w\rangle}.
+For the square,
+#{\langle u,u\rangle
+ =\sum_g\langle\rho(g)u,\rho(g)u\rangle_0.}
+Each #{\rho(g)} is invertible, so #{u\ne0} forces every
+summand to be positive. The product is positive definite.}
+
+\p{Write #{\ell_w(u)=\langle u,w\rangle}. Since
+#{\langle w,w\rangle} is positive for #{w\ne0}, the map
+#{w\mapsto\ell_w} is injective. The two spaces have the same
+finite dimension, so every linear form is #{\ell_w} for a
+unique #{w}. If #{\rho(a)w=w} for every #{a\in H}, the
+identity gives #{\ell_w(\rho(a)^{-1}u)=\ell_w(u)}. As #{a}
+runs through #{H}, so does #{a^{-1}}, so this is equivalent
+to #{\ell_w(\rho(a)u)=\ell_w(u)}. If instead
+#{\ell_w(\rho(a)^{-1}u)=\ell_w(u)} for every #{u}, the
+identity gives #{\langle u,\rho(a)w\rangle=\langle u,w\rangle},
+hence #{\langle u,\rho(a)w-w\rangle=0}. Taking
+#{u=\rho(a)w-w} and using positive definiteness forces
+#{\rho(a)w=w}. Invariant vectors and invariant forms
+correspond bijectively.}
+}

@@ -1,0 +1,65 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Lemma}
+\title{Invariant dimensions count the double cosets}
+\date{2026-11-21}
+
+\p{Let #{G} be a finite group and let #{H} be a subgroup. Work
+over #{\mathbb C}. Let #{E} be the space of functions on the
+left cosets #{G/H}, with
+##{(g\cdot f)(xH)=f(g^{-1}xH).}
+Decompose #{E} into irreducible representations. For each
+irreducible #{V}, the multiplicity equals the dimension of the
+#{H}-invariants in #{V}. The number of double cosets
+#{H\backslash G/H} equals the sum of the squares of those
+invariant dimensions. The same sum runs over every irreducible
+representation of #{G}, up to isomorphism.}
+
+\proof{
+\p{A function fixed by #{H} takes the same value at #{xH} and
+at #{axH} for every #{a\in H}, so it is constant on double
+cosets. The indicators of the double cosets are disjoint and
+span the invariant functions, so the invariant dimension of
+#{E} is the number of double cosets.}
+
+\p{\ref{fdip-013J} gives every invariant subspace an invariant
+complement, and it gives each irreducible summand an invariant
+positive definite product. Repeating that splitting writes
+#{E} as a direct sum of irreducible subrepresentations. The
+same lemma matches the #{H}-invariant vectors in each
+summand with the #{H}-invariant linear forms.}
+
+\p{Take one complex eigenvalue of a map that commutes with the
+action, as in the eigenvalue step of \ref{fdip-008B}. The
+eigenspace is invariant, so an endomorphism of an irreducible
+is scalar. The kernel and the image of a map between
+irreducible representations are invariant, so the map is zero
+or an isomorphism. A map into copies of #{V} is one scalar
+on each copy.}
+
+\p{An invariant linear form #{\ell} determines
+##{(\Psi_\ell v)(gH)=\ell\bigl(\rho(g)^{-1}v\bigr).}
+Invariance of #{\ell} makes the value depend only on the
+coset. For #{x\in G},
+##{(x\cdot\Psi_\ell v)(gH)
+ =\ell\bigl(\rho(g)^{-1}\rho(x)v\bigr)
+ =(\Psi_\ell(\rho(x)v))(gH),}
+so #{\Psi_\ell} is a map of representations. Conversely, a map
+#{\Psi} of representations determines
+#{\ell(v)=(\Psi v)(eH)}, and equivariance forces
+#{\ell(\rho(a)v)=\ell(v)}. Evaluation at the identity coset
+inverts the two constructions. The number of copies therefore
+equals the dimension of the invariant forms, and hence the
+dimension of the invariant vectors.}
+
+\p{The averaging projection onto the #{H}-invariants preserves
+each invariant summand, so the invariant dimension of a direct
+sum is the sum of the invariant dimensions. On the copies of
+one #{V} that dimension is the square of
+#{\dim V^{H}}. Summing over the summands gives the number of
+double cosets. If an irreducible representation does not occur
+in #{E}, its invariant dimension is #{0}: a nonzero invariant
+form would give a nonzero map into #{E}. The sum over every
+irreducible representation is the same number.}
+}
