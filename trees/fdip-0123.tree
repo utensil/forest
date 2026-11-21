@@ -1,0 +1,57 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{Unitary gauge for one sector labeling}
+\date{2026-11-21}
+
+\p{Fix a \vocabk{sector labeling}{fdip-0121} #{\lambda}. For each
+label #{i} choose a section #{\orbitlift_i:\mathcal O_i\to G} with
+#{\orbitlift_i(o)\phi^\circ_i=o} and #{\orbitlift_i(\phi^\circ_i)=1}.
+The frame at #{x} is #{g_x=\orbitlift_{\lambda(x)}(\phi_x)}, and the
+reduced link is #{\check U_e=g_{h(e)}^{-1}U_e g_{s(e)}}. Define
+##{\sigma_i(a,o)=\orbitlift_i(ao)^{-1}a\,\orbitlift_i(o).}
+Then #{\sigma_i(a,o)\in G^\circ_i}. Retaining the scalar and
+replacing every link by its reduced link is a bijection from the
+joint configurations of #{\lambda} to
+#{\prod_x\mathcal O_{\lambda(x)}\times G^E}. Under a vertex gauge
+#{a\in G^X} the reduced links transform by
+##{\check U_e\longmapsto
+ \sigma_{\lambda(h(e))}(a_{h(e)},\phi_{h(e)})\,
+ \check U_e\,
+ \sigma_{\lambda(s(e))}(a_{s(e)},\phi_{s(e)})^{-1}.}
+Joint orbits of #{G^X} are in bijection with orbits of
+#{\prod_x G^\circ_{\lambda(x)}} acting on #{G^E}. The #{k}-algebra
+of invariant functions of a joint configuration is isomorphic to
+##{k^{\,G^E/\prod_x G^\circ_{\lambda(x)}}.}
+The one-orbit case is \ref{fdip-011E}. On a fixed-point orbit the
+section value is #{1} and the residual factor at that vertex is
+#{G}.}
+
+\proof{
+\p{The inverse bijection recovers the frames from the retained
+scalar and sets #{U_e=g_{h(e)}V_e g_{s(e)}^{-1}}. Applying
+#{\sigma_i(a,o)} to #{\phi^\circ_i} returns #{\phi^\circ_i}, so the
+cocycle value lies in the stabilizer. The gauged frame at #{x} is
+#{a_x g_x\sigma_{\lambda(x)}(a_x,\phi_x)^{-1}}, and substitution
+gives the displayed endpoint action. Any other normalized section
+of orbit #{i} has the form #{\orbitlift_i(o)a^\circ(o)} with
+#{a^\circ(o)\in G^\circ_i} and #{a^\circ(\phi^\circ_i)=1}. It
+changes a reduced link only by the endpoint action of those
+stabilizer values. Thus the residual orbit does not depend on the
+choice of sections.}
+
+\p{The vertex gauge with value #{g_x^{-1}} at each site carries
+#{(U,\phi)} to the reduced connection and the reference scalar of
+#{\lambda}. Two such reference configurations lie in one joint
+orbit exactly when a vertex gauge fixes every reference scalar and
+carries one link tuple to the other, which means the gauge lies in
+#{\prod_x G^\circ_{\lambda(x)}}. This is the orbit bijection. An
+invariant function is constant on joint orbits, so restriction to
+the reference scalar assigns one value to each residual orbit, and
+every such assignment extends uniquely by constancy on the joint
+orbit. Restriction preserves pointwise sums and products. If
+#{G^\circ_i=G}, then #{\mathcal O_i} has one point, the normalized
+section sends it to #{1}, and the residual factor at each vertex
+labeled #{i} is #{G}.}
+}

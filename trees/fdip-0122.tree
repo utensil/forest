@@ -1,0 +1,41 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{Exact elimination of the neutral bit}
+\date{2026-11-21}
+
+\p{For the \vocabk{extended orbit weight}{fdip-0121}, summing the
+neutral bit replaces each site factor by the sum of its two bit
+weights. Explicitly, for every connection and every scalar
+configuration,
+##{\sum_{\zeta\in\{0,1\}^X}\Xi(U,\phi,\zeta)
+ =\Xi_c(U,\phi),}
+where #{\Xi_c} is the weight with the same face and edge factors
+and with site factors
+##{c_x(s)=\alpha_{0,x}(s)+\alpha_{1,x}(s).}
+Each #{c_x} is constant on every orbit. Its value on the orbit
+of #{\phi^\circ_i} is
+#{\alpha_{0,x}(\phi^\circ_i)+\alpha_{1,x}(\phi^\circ_i)}, so two
+orbits may carry different constants. For an observable
+#{f(U,\phi)} with values in a #{k}-module and independent of
+#{\zeta},
+##{\sum_{U,\phi,\zeta}\Xi(U,\phi,\zeta)\,f(U,\phi)
+ =\sum_{U,\phi}\Xi_c(U,\phi)\,f(U,\phi).}
+The two sides are equal as elements of the module. When their common
+sum for #{f=1} is a unit of #{k}, the two normalized values of
+#{f} are equal.}
+
+\proof{
+\p{The face and edge products do not depend on #{\zeta}. The site
+product is #{\prod_x\alpha_{\zeta_x,x}(\phi_x)}. Summing a finite
+product of independent two-point choices factors as a product of
+sums, which is the displayed formula for #{c_x}. Invariance of each
+bit weight gives #{c_x(gs)=c_x(s)}, so #{c_x} is constant on each
+orbit. Two orbits may receive different constants: on
+#{\mathcal O_i} and #{\mathcal O_j} the values are the sums of the
+two bit weights at the chosen reference points of those orbits.
+Multiplying by #{f(U,\phi)} and summing over #{U} and #{\phi}
+preserves the equality. If the common sum #{Z} is a unit, both
+normalized values equal #{Z^{-1}} times the displayed module element.}
+}
