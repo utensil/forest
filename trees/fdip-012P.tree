@@ -1,0 +1,68 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Example}
+\title{The characteristic polynomial of the witness edge}
+\date{2026-11-21}
+
+\p{On the witness group, let #{B} be the pairing kernel of
+\ref{fdip-012F} for the vector of \ref{fdip-0126}, and let
+#{\mathcal K} equal #{2} at the identity and #{1} at every other
+element. In the indicator basis of the #{12} double cosets, the
+one-edge operator has characteristic polynomial
+##{(t-9)(t-1)(t-4)^2\Bigl(t-\frac{25}{4}\Bigr)^4
+ \Bigl(t-\frac{9}{4}\Bigr)^4
+ \Biggl(1-\frac{27}{t-9}-\frac{3}{t-1}-\frac{72}{t-4}
+ -\frac{150}{t-\frac{25}{4}}-\frac{54}{t-\frac{9}{4}}\Biggr).}
+The trace is #{358}.}
+
+\proof{
+\p{By \ref{fdip-012F} and \ref{fdip-012O}, the values of #{B} are
+#{3}, #{5/2}, #{2}, #{3/2} and #{1}, on #{3}, #{24}, #{18},
+#{24} and #{3} elements. The value #{3} occurs exactly on the
+stabilizer, which is one double coset of size #{3}. The value
+#{1} occupies #{3} elements, hence one further double coset of
+size #{3}. \ref{fdip-0126} supplies #{6} double cosets of size
+#{3} and #{6} of size #{9}, so #{4} of size #{3} and #{6} of size
+#{9} remain for the three middle values. A double coset carries
+one value. The count #{18} uses cosets of these two sizes.
+#{6} cosets of size #{3} would be required to make #{18} with no
+size #{9}, and only #{4} remain. One coset of size #{9} leaves
+#{9}, hence three cosets of size #{3}. Three or more cosets of
+size #{9} exceed #{18}. The only remaining combination is two
+cosets of size #{9}. That choice leaves #{4} cosets of each size
+for the two blocks of #{24}. A block of #{24} cannot use three
+cosets of size #{9}, since #{27} already exceeds #{24}. It cannot
+use one: the remainder #{15} would require #{5} cosets of size
+#{3}, and only #{4} remain. It cannot use none: #{24} is not a
+multiple of #{9}, and #{8} cosets of size #{3} exceed #{4}. Thus
+each block uses two cosets of size #{9} and two of size #{3}.}
+
+\p{For this kernel,
+#{(C_{\mathcal K}f)(g)=f(g)+\sum_x f(x)}. Thus
+##{(\transferop f)(g)=B(g)^2 f(g)+B(g)\sum_x B(x)f(x).}
+On the indicator of a double coset of size #{s_j} and value
+#{\beta_j}, the value on a double coset of value #{\beta_m} is
+#{\beta_m^2} when the cosets agree, together with the product
+#{\beta_m s_j\beta_j} for every pair of cosets, including that
+diagonal pair. Let #{D} be the diagonal matrix of the squares
+#{\beta_j^2}, let #{p} be the column of entries #{\beta_m}, and
+let #{c} be the column of entries #{s_j\beta_j}. The matrix is
+#{D+pc^{\top}}. Its diagonal entry is #{\beta_j^2(1+s_j)}. Set
+#{A=t{\bbI}-D}. For #{t} distinct from every square, #{A} is
+invertible, and \ref{fdip-012Q} gives
+##{\det(A-pc^{\top})=\det(A)\bigl(1-c^{\top}A^{-1}p\bigr).}
+The second factor equals
+#{1-\sum_j s_j\beta_j^2/(t-\beta_j^2)}. Grouping equal squares
+gives the displayed product. Each denominator divides the product
+of the factors #{(t-\beta_j^2)}, so clearing it produces a
+polynomial. That polynomial agrees with the determinant at every
+rational #{t} outside those #{5} squares. Their difference
+vanishes at every rational outside those points, so
+\ref{fdip-012R} says the difference is the zero polynomial. The
+trace is the sum of the diagonal entries
+#{\beta_j^2(1+s_j)}:
+##{9\cdot4+1\cdot4+2\cdot25+2\cdot\frac{125}{2}
+ +2\cdot40+2\cdot9+2\cdot\frac{45}{2}=358.}
+}
+}

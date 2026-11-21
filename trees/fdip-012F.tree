@@ -1,0 +1,33 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{The pairing kernel is largest exactly on the stabilizer}
+\date{2026-11-21}
+
+\p{Let a finite group act on #{\mathbb C^2} by matrices that preserve
+the Hermitian product of \ref{fdip-0127}, and let #{v} be a nonzero
+vector with stabilizer #{G^\circ}. The function
+##{B(g)=2+\frac{\operatorname{Re}\langle v,gv\rangle}{\langle v,v\rangle}}
+is a double-coset kernel. It satisfies #{B(g)\le 3}, with equality
+exactly when #{g\in G^\circ}. The maximizing set is the identity
+double coset.}
+
+\proof{
+\p{Preservation of the product gives
+#{\langle gv,gw\rangle=\langle v,w\rangle}. For
+#{a,b\in G^\circ},
+##{\langle v,agbv\rangle=\langle a^{-1}v,gbv\rangle
+ =\langle v,gv\rangle,}
+so #{B} is constant on double cosets. For a vector #{w} of the
+same norm, \ref{fdip-0127} makes the product linear in its first
+argument and sends #{\langle w,v\rangle} to the conjugate of
+#{\langle v,w\rangle}, so
+##{\langle v-w,v-w\rangle
+ =2{\langle v,v\rangle}-2\operatorname{Re}\langle v,w\rangle.}
+The left side is the sum of the squared moduli of the two
+coordinates of #{v-w}, hence it vanishes exactly when #{w=v}.
+Thus #{\operatorname{Re}\langle v,w\rangle\le\langle v,v\rangle},
+with equality exactly at #{w=v}. Taking #{w=gv} gives
+#{B(g)\le 3}, with equality exactly when #{gv=v}.}
+}
