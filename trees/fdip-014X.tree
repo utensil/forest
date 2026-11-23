@@ -1,0 +1,74 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{Cochains and the staggered operator at trivial links}
+\date{2026-11-23}
+
+\p{Take the \vocabk{fine-site map}{fdip-014V} on a torus
+#{X} of dimension #{n\ge1} with coarse periods #{N_j\ge3}.
+Use trivial links, a nonzero finite-dimensional constant
+complex Hermitian fiber #{F}, and the
+\vocabk{counting adjoint}{fdip-0007} on cochains. The map
+defined on a field supported at #{c_I(x)} by
+##{e_I\otimes\delta_x\otimes v\longmapsto
+\ui^{|I|}\delta_s\otimes v,\qquad
+s=2x+\sum_{i\in I}\varepsilon_i,}
+is unitary onto #{\ell^2(\tilde X)\otimes F}. It takes cell
+parity to site parity and intertwines #{\extd+\extdag} with
+#{2\ui D^{\mathrm{st}}_{1,1}}. The fine spacing is one and
+the second subscript denotes trivial links. These two operators
+have the same spectrum with multiplicities and each kernel has
+dimension #{2^n\dim F}.}
+
+\proof{
+\p{Choose #{0\le s_j<2N_j}. The remainder of #{s_j} on
+division by two gives membership of #{j} in #{I}, and the
+quotient is the unique coarse representative #{x_j}. This
+inverts the fine-site map. Shifting any coarse representative
+by #{N_j} changes the corresponding fine coordinate by #{2N_j}.
+The map permutes the orthogonal cell summands, multiplies each
+by a unit phase, and acts by the identity on #{F}. It is
+therefore unitary. Since #{\sum_j s_j} and #{|I|} have the same
+parity, it intertwines the two parity multiplications.}
+
+\p{Fix an output cell #{c_I(x)} and its fine site #{s}. In
+direction #{j} let #{\sigma(j,I)} count the members of #{I}
+less than #{j}, as in \ref{fdip-00OK}. Inserting or removing
+#{j} in the increasing wedge order has sign
+#{(-1)^{\sigma(j,I)}=(-1)^{s_1+\cdots+s_{j-1}}}.
+If #{j\in I}, put #{J=I\setminus\{j\}}. The
+[forward coboundary](fdip-00SH) contributes
+##{(-1)^{\sigma(j,I)}
+\bigl(\alpha_J(x+\varepsilon_j)-\alpha_J(x)\bigr).}
+The two inputs are at #{s+\varepsilon_j} and
+#{s-\varepsilon_j}, respectively. Their phase ratio from input
+to output is #{\ui^{|I|}/\ui^{|J|}=\ui}.}
+
+\p{If #{j\notin I}, put #{J=I\cup\{j\}}. Transposing the
+forward difference in the counting product gives
+##{(-1)^{\sigma(j,I)}
+\bigl(\alpha_J(x-\varepsilon_j)-\alpha_J(x)\bigr).}
+These inputs are at #{s-\varepsilon_j} and #{s+\varepsilon_j}.
+The output phase divided by the input phase is now #{-\ui}.
+Thus in both cases conjugation gives coefficients
+#{\ui(-1)^{s_1+\cdots+s_{j-1}}} at the forward site and its
+negative at the backward site. These computations use addition
+modulo #{N_j} at the coarse base and modulo #{2N_j} at the fine
+site. Crossing the seam preserves their correspondence and the
+degree phases. Summing over #{j} gives #{2\ui D^{\mathrm{st}}_{1,1}}
+by the [staggered difference](fdip-014Q).}
+
+\p{Unitary conjugacy preserves the spectrum with multiplicities.
+To count the kernel, apply \ref{fdip-009Q} to the Pauli spin
+module on the fine torus. All #{n} periods are even, so the
+centered kernel has dimension #{2^{2n}\dim F}.
+By \ref{fdip-014S} this operator is the direct sum of
+#{2^n} identical copies of the staggered operator. Each copy
+therefore has kernel dimension #{2^n\dim F}. Multiplying by
+#{2\ui} leaves its kernel unchanged.}
+}
+
+\p{Mathlib's \leanref{finProdFinEquiv} gives the coordinate
+bijection between a coarse index paired with its remainder
+bit and a fine index.}

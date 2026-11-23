@@ -1,0 +1,67 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{Spin diagonalization on even tori}
+\date{2026-11-23}
+
+\p{Let #{S} be a nonzero finite-dimensional complex Hermitian
+Clifford module with self-adjoint Euclidean generators
+#{\varepsilon_j^S}. Take the \vocabk{staggered operator}{fdip-014Q}
+for #{n\ge1}, #{a>0}, even #{N_j\ge3}, and any unitary
+connection on #{F}. In the centered operator of
+the \vocabk{spaced Wilson construction}{fdip-009U}, use these
+generators on #{S}. Define #{\Upsilon} at site #{x} to act by
+#{\Upsilon_x\otimes\bbI_F}, where
+##{\Upsilon_x=(\varepsilon_1^S)^{x_1}\cdots
+(\varepsilon_n^S)^{x_n}.}
+This frame is unitary and
+##{\Upsilon^{-1}D_{a,U}\Upsilon
+ =D^{\mathrm{st}}_{a,U}\otimes\bbI_S,}
+where the tensor factors on the right are ordered by site,
+fiber and spin. The staggered operator is skew-adjoint and
+odd for site parity.}
+
+\p{If a site-independent self-adjoint grading #{\Gamma} on
+#{S\otimes F} anticommutes with every
+#{\varepsilon_j^S\otimes\bbI_F}, then pointwise
+##{\Upsilon^{-1}\Gamma\Upsilon=(-1)^{|x|}\Gamma.}
+This includes the even-dimensional volume grading #{C} of
+\ref{fdip-009X}.}
+
+\proof{
+\p{Each generator is a unitary involution, so the ordered
+product is unitary. Only the odd exponents contribute.
+Multiplying on the left by #{\varepsilon_j^S} moves it past
+the generators with indices less than #{j}, acquiring the
+factor #{(-1)^{x_1+\cdots+x_{j-1}}}. It cancels the
+#{j}-th generator if present and inserts it otherwise.
+At either neighbor #{x\pm e_j}, exactly the #{j}-th parity
+changes, also across the seam because #{N_j} is even. Thus
+##{\Upsilon_x^{-1}\varepsilon_j^S\Upsilon_{x\pm e_j}
+ =(-1)^{x_1+\cdots+x_{j-1}}\bbI_S.}}
+
+\p{At #{x}, the forward input is transported by #{U_j(x)^{-1}}
+and the backward one by #{U_j(x-e_j)}. Both maps act on #{F},
+so the spin calculation applies to each edge separately.
+Taking their difference and dividing by #{2a} gives the
+claimed operator on each spin component. The directional sign
+is real and constant along its own shift. Hence it commutes
+with both shifts, whose difference is skew-adjoint. Their
+signed sum is skew-adjoint. Each edge changes site parity, so
+conjugation by site parity reverses every summand.}
+
+\p{Passing #{\Gamma} through the #{|x|} generator factors
+of #{\Upsilon_x\otimes\bbI_F} gives the sign #{(-1)^{|x|}}.
+This proves the pointwise grading identity.}
+}
+
+\p{An orthogonal projection on #{S} commutes with the transformed
+operator. Conjugating back gives the site projection
+#{\Upsilon_x P\Upsilon_x^{-1}} for a fixed spin projection #{P}.
+Its range and kernel are invariant, and a rank-one range carries
+one copy of the staggered operator. The generator toggle with
+its preceding-index sign occurs in TauCeti's
+\leanref/tauceti{CliffordAlgebra.ι_mul_basis}.
+Mathlib's \leanref{LinearMap.IsIdempotentElem.commute_iff}
+relates commuting projections to the two invariant subspaces.}
