@@ -1,0 +1,33 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Definition}
+\title{Signed counts and local degrees}
+\date{2026-11-23}
+
+\p{Let #{f:R\to k^n} on the \vocabk{simplicial momentum grid}{fdip-013X}.
+For #{\sigma=\sigma_{r,\pi}} with ordered vertices #{v_0,\ldots,v_n}
+put
+##{o_f(\sigma)=\operatorname{sgn}(\pi)\,
+\operatorname{sgn}\det\bigl(f(v_1)-f(v_0),\ldots,f(v_n)-f(v_0)\bigr),}
+with #{\operatorname{sgn}(0)=0}. A value #{y\in k^n} is
+\newvocab{regular} if no proper face of any grid simplex has
+#{y} in the convex hull of its values. The \newvocab{signed count}
+#{\deg(f;y)} sums #{o_f(\sigma)} over the grid simplices whose
+image hull contains #{y}.}
+
+\p{A \newvocab{nondegenerate vertex zero} is a vertex #{r}
+with #{f(r)=0} such that in each incident grid simplex the other
+#{n} vertex values are linearly independent. Choose a direction
+#{u} outside the spans of all proper subsets of these #{n}-tuples,
+including the span of the empty set. The \newvocab{local degree}
+#{\deg_r f} sums #{o_f(\sigma)} over the incident simplices
+for which #{u} is a nonnegative linear combination of their
+other vertex values.}
+
+\p{When every vertex zero is nondegenerate, choose #{u\ne0}
+outside every affine span of a proper face image in the whole
+grid whose span contains zero. For sufficiently small #{t>0},
+the \newvocab{off-grid degree} #{\deg^\circ(f)} is the part of
+#{\deg(f;tu)} from simplices with no zero vertex. Independence
+of these choices is part of \ref{fdip-0140}.}

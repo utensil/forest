@@ -1,0 +1,73 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{Clifford symbols: zero blocks and local volume elements}
+\date{2026-11-23}
+
+\p{On the \vocabk{simplicial momentum grid}{fdip-013X} take a nonzero
+finite-dimensional complex Hermitian Clifford module #{S} with
+self-adjoint Euclidean generators #{\varepsilon_j^S}, and a
+nonzero constant Hermitian space #{F} of finite dimension.
+Let the translation-invariant #{D} on
+#{\ell^2(\Lambda)\otimes S\otimes F} have Fourier blocks
+##{D(p)=\ui\sum_{j=1}^n f_j(r)(\varepsilon_j^S\otimes\bbI_F)+m(r)\bbI,}
+where #{f:R\to\mathbb R^n}, #{m:R\to\mathbb R} and
+#{p_j=2\pi r_j/N_j}. Then
+##{D(p)^\dagger D(p)=(|f(r)|^2+m(r)^2)\bbI.}
+Thus a block vanishes exactly when #{f(r)=0=m(r)}, and every
+other block is invertible. Suppose a site-independent complex-linear
+self-adjoint involution #{\Gamma} on #{S\otimes F} anticommutes
+with every #{\varepsilon_j^S\otimes\bbI_F}. Then in every
+dimension #{\Gamma D(p)+D(p)\Gamma=2m(r)\Gamma}.
+The spin grading of the [massive graded Wilson data](fdip-00IN)
+extends by the identity on #{F} to give such an involution.
+In even dimension the volume grading #{C} of \ref{fdip-009X}
+also satisfies this hypothesis.}
+
+\p{At a vertex zero #{r}, suppose there is one invertible real
+linear map #{J} such that for every simplex containing #{r}
+and every vertex #{r+w} of that simplex, #{f(r+w)=Jw}.
+Here #{w} is the offset in the local grid coordinates at #{r}.
+Then #{r} is a \vocabk{nondegenerate vertex zero}{fdip-013Y}
+with #{\deg_r f=\operatorname{sgn}\det J}. In the generating
+vector space put #{\varepsilon'_h=\sum_jJ_{jh}\varepsilon_j}.
+Before representing the Clifford algebra on #{S}, one has
+##{\varepsilon'_1\wedge\cdots\wedge\varepsilon'_n
+=(\det J)\,\varepsilon_1\wedge\cdots\wedge\varepsilon_n.}
+The local degree records the orientation of this volume.
+In geometric algebra the product of two vectors contains both
+their inner and exterior products. For the #{n} transformed
+vectors, taking the top-grade part of their product extracts
+the oriented volume, a multiple of #{\psI}.}
+
+\proof{
+\p{Write #{A=\sum_j f_j(r)(\varepsilon_j^S\otimes\bbI_F)}.
+Self-adjointness and the Clifford relations give #{A^\dagger=A}
+and #{A^2=|f(r)|^2\bbI}. Multiplying #{m\bbI-\ui A} by
+#{m\bbI+\ui A} gives the block formula. A positive scalar on
+the right gives an inverse by dividing #{D(p)^\dagger} by that
+scalar. The supplied #{\Gamma} anticommutes with each term of #{A}
+and commutes with the real mass, giving the stated anticommutator.}
+
+\p{In a lifted unit cube the simplex with steps in order #{\pi}
+is the region #{1\ge x_{\pi(1)}\ge\cdots\ge x_{\pi(n)}\ge0}.
+The successive differences in this chain of inequalities
+are its barycentric weights. Sorting coordinates covers each
+cube, with ties on common faces. These regions match across
+cube faces. Hence the cones based at #{r} cover every direction,
+and a direction outside their proper faces belongs to exactly
+one cone. The map #{J} preserves this property and independence.
+In the ordered simplex the edge determinant is
+#{\operatorname{sgn}(\pi)}, since successive column subtractions
+give the permuted unit vectors. Applying #{J} multiplies that
+determinant by #{\det J}. The signed contribution in the unique
+selected cone is therefore #{\operatorname{sgn}\det J}. Expanding
+the exterior product by multilinearity, repeated indices vanish
+and the permutations contribute their signs. Their coefficient
+sum is #{\det J}.}
+}
+
+\p{Mathlib's \leanref{exteriorPower.ιMultiDual_apply_ιMulti}
+computes the basis coordinate of a wedge by the determinant of
+the corresponding coordinate matrix.}
