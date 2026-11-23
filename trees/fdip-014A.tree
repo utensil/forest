@@ -1,0 +1,70 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{Ginsparg–Wilson operators are pairs of gradings}
+\date{2026-11-23}
+
+\p{For a \vocabk{graded-hermitian}{fdip-0148} #{D} on a
+finite-dimensional complex Hilbert space with self-adjoint
+grading #{\Gamma} and spacing #{a>0}, the Ginsparg–Wilson
+relation holds exactly when #{\Gamma'=\Gamma(\bbI-aD)} is a
+self-adjoint grading. Conversely every self-adjoint grading
+#{\Gamma'} gives such an operator
+#{D=a^{-1}(\bbI-\Gamma\Gamma')}. Then #{\bbI-aD} is unitary,
+#{D} is normal, and #{\Gamma D=-D\Gamma'}.}
+
+\p{Write #{\mathcal H_{st}} for the simultaneous eigenspace
+with signs #{s} for #{\Gamma} and #{t} for #{\Gamma'}. Their
+orthogonal complement #{\mathcal H_0} is stable under both
+gradings, and each has trace zero there. The kernel of #{D}
+is #{\mathcal H_{++}\oplus\mathcal H_{--}}, while
+#{\ker(D-2a^{-1}\bbI)=\mathcal H_{+-}\oplus\mathcal H_{-+}}.
+On #{\mathcal H_0} each eigenvalue #{\lambda} satisfies
+#{|1-a\lambda|=1} and #{\lambda\ne0,2a^{-1}}.}
+
+\proof{
+\p{Graded hermiticity gives #{(\Gamma')^\dagger=\Gamma'}.
+Expanding yields
+##{(\Gamma')^2-\bbI=-a\Gamma(\Gamma D+D\Gamma-aD\Gamma D).}
+Conversely #{D=a^{-1}(\bbI-\Gamma\Gamma')} satisfies
+#{D^\dagger=\Gamma D\Gamma} whenever #{\Gamma'} is
+self-adjoint. Thus the square identity gives the equivalence
+in both directions. Rearranging the quadratic relation gives
+#{\Gamma D=-D\Gamma'}. The product #{\Gamma\Gamma'=\bbI-aD} has
+adjoint and inverse #{\Gamma'\Gamma}. Conjugation by #{\Gamma}
+also gives that inverse. Since the product commutes with its
+adjoint, #{D} commutes with #{D^\dagger}.}
+
+\p{For a complex Hermitian operator, apply the real spectral
+decomposition of \ref{fdip-002R} with inner product
+#{\operatorname{Re}\langle x,y\rangle}. Its real eigenspaces
+are stable under multiplication by #{\ui}. Orthogonality to
+both #{y} and #{\ui y} in the real inner product gives complex
+orthogonality, so complex orthonormal bases in the eigenspaces
+form one for the whole space. The Hermitian operators
+#{(\Gamma\Gamma'+\Gamma'\Gamma)/2} and
+#{(\Gamma\Gamma'-\Gamma'\Gamma)/(2\ui)} commute.
+The second preserves every eigenspace of the first. Diagonalizing
+its Hermitian restriction on each gives a common orthonormal basis.
+Adding the first operator to #{\ui} times the second shows that
+this basis diagonalizes #{\Gamma\Gamma'}.}
+
+\p{For a nonzero eigenvector #{\Gamma\Gamma'v=zv}, unitarity
+gives #{|z|=1}. Then #{(\Gamma\Gamma')\Gamma v
+=\Gamma(\Gamma\Gamma')^{-1}v=z^{-1}\Gamma v}, so #{\Gamma}
+exchanges the eigenspaces of #{z} and #{z^{-1}}. Since
+#{\Gamma'v=z\Gamma v}, the second grading exchanges
+the same pair of spaces. For nonreal #{z} both gradings have
+zero diagonal blocks on the pair, hence trace zero. For
+#{z=\pm1} the eigenspace is #{\Gamma}-stable. Splitting it by
+the grading projectors of \ref{fdip-003O} gives the joint
+spaces, since #{\Gamma'=z\Gamma} there. Finally
+#{D=a^{-1}(\bbI-\Gamma\Gamma')} acts by #{a^{-1}(1-z)} on each
+such eigenspace. This gives the assertions on the orthogonal sum.}
+}
+
+\p{For a finite-dimensional complex normal operator, TauCeti's
+\leanref/tauceti{LinearMap.exists_orthonormalBasis_apply_eq_smul_of_isStarNormal}
+supplies an orthonormal eigenbasis. The exchange of the eigenspaces
+under the two gradings gives the trace statement above.}
