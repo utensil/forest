@@ -1,0 +1,52 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{The index in each irreducible representation}
+\date{2026-11-23}
+
+\p{Let #{A} and #{\Gamma} satisfy \ref{fdip-013P} on #{V} over
+#{k}. Suppose a finite group #{G} acts linearly on #{V}, its
+order is invertible in #{k}, and the action commutes with both
+#{A} and #{\Gamma}. For every irreducible representation #{\rho}
+over #{k}, its multiplicity in the positive part of the generalized
+kernel minus its multiplicity in the negative part equals its
+multiplicity in #{V_+} minus its multiplicity in #{V_-}.
+On #{\ell^2(\Lambda)\otimes S\otimes F} over #{\mathbb C},
+when #{A} and #{\Gamma} commute with translations, this identity
+holds in each Fourier block of \ref{fdip-000S}.}
+
+\proof{
+\p{Every invariant subspace has an invariant complement. Indeed,
+average a linear projection onto the subspace over its conjugates
+by #{G}, dividing by #{|G|}. Each conjugate still maps into that
+subspace and fixes it pointwise. The average does likewise, and
+commutes with #{G} because conjugating permutes the summands.
+Its kernel supplies the complement. This averaging argument of
+\ref{fdip-013J} uses only the invertibility of #{|G|} in #{k}.
+Induction on dimension splits any such representation into
+irreducible summands.}
+
+\p{A nonzero equivariant map between irreducible representations
+is an isomorphism, since its kernel and image are invariant.
+Thus equivariant endomorphisms of #{\rho} form a division algebra.
+Equivariant maps from #{\rho} to one copy of itself form a
+one-dimensional right space over this algebra by precomposition.
+Maps to any inequivalent irreducible summand vanish. The number
+of copies of #{\rho} is therefore independent of the
+decomposition and is additive under direct sums.}
+
+\p{Write #{d=\dim V}. The summands #{\ker A^d} and #{\im A^d}
+in \ref{fdip-013P} are invariant under #{G}. Their positive and
+negative parts are invariant too. On #{\im A^d} the operator
+#{A} is a #{G}-isomorphism between these two parts. The same
+multiplicity of #{\rho} is therefore subtracted from both
+ambient multiplicities when passing to the generalized kernel.
+Over #{\mathbb C} the grid characters in \ref{fdip-000S} give
+the translation types. Their blocks are preserved under the
+stated commutation hypotheses.}
+}
+
+\p{Mathlib's \leanref{MonoidAlgebra.Submodule.exists_isCompl}
+supplies an invariant complement when the finite group order is
+nonzero in the field.}
