@@ -1,0 +1,53 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{The modified rotation fixes the bilinear}
+\date{2026-11-23}
+
+\p{Let #{V} be finite-dimensional over a field #{k} with #{2\ne0}.
+Let #{\Gamma,\Gamma'} be \vocabk{gradings}{fdip-013N} on #{V},
+with eigenspaces #{V_\pm,V'_\pm}, respectively. For
+#{u\in k^\times}, let #{u^\Gamma} act by #{u} on #{V_+} and by
+#{u^{-1}} on #{V_-}. Define #{u^{\Gamma'}} using #{V'_\pm}.
+On the algebra #{\mathcal A(V)=\Lambda_k(V^*\oplus V)} of the
+[ring paired coefficient](fdip-00TJ), let #{\beta_u} act on unbarred
+generators in #{V^*} by the algebraic dual of #{u^{\Gamma'}}
+and on barred generators in #{V} by #{u^\Gamma}. This modified rotation is a
+degree-preserving automorphism. For every endomorphism #{K} of #{V},
+##{\beta_u(\theta_K)=\theta_{u^\Gamma K u^{\Gamma'}}.}
+If #{\Gamma K=-K\Gamma'}, it fixes #{\theta_K} and its finite
+exterior exponential. This includes operators odd for #{\Gamma}
+when #{\Gamma'=\Gamma}, and Ginsparg–Wilson operators with their
+modified grading by \ref{fdip-014A}.}
+
+\proof{
+\p{The projectors of \ref{fdip-003O} split #{V} into the two
+eigenspaces of either grading. Put #{A=u^\Gamma} and #{B=u^{\Gamma'}}.
+On each eigenspace the inverse is obtained by replacing #{u} by
+#{u^{-1}}. On #{V^*} the algebraic dual sends #{\ell} to
+#{\ell\circ B}. Together with #{A} on #{V}, it extends by
+exterior multiplication in every degree. Using the inverse
+linear maps gives the inverse on the generators and hence on
+the algebra.}
+
+\p{In dual bases write #{\psi_j} for the unbarred generator and
+#{\bar\psi_i} for the barred generator as in
+[the paired coefficient](fdip-00TJ). Their images are
+#{\sum_n B_{jn}\psi_n} and #{\sum_m A_{mi}\bar\psi_m},
+respectively. Substituting into
+#{\theta_K=-\sum_{i,j}\bar\psi_i K_{ij}\psi_j} leaves the
+barred factor first. The coefficient of #{-\bar\psi_m\psi_n} is
+#{\sum_{i,j} A_{mi}K_{ij}B_{jn}=(AKB)_{mn}}. This gives
+the transformation for arbitrary #{K}.}
+
+\p{For #{v\in V'_\sigma} with #{\sigma=\pm1}, the intertwining
+relation gives #{\Gamma Kv=-\sigma Kv}. Thus
+#{AKBv=u^\sigma u^{-\sigma}Kv=Kv}. The two primed eigenspaces
+span #{V}, so #{AKB=K}. Naturality of the finite exterior
+exponential under odd substitutions in \ref{fdip-00TH} gives
+#{\beta_u(\extexp(\theta_K))=\extexp(\theta_K)}.}
+}
+
+\p{Mathlib's \leanref{LinearMap.dualMap_apply} gives the
+evaluation of the algebraic dual by precomposition.}

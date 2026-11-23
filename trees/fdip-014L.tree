@@ -1,0 +1,60 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{The Jacobian of the modified rotation}
+\date{2026-11-23}
+
+\p{For the modified rotation #{\beta_u} of \ref{fdip-014K},
+form the integer
+##{d=(\dim V_+-\dim V_-)+(\dim V'_+-\dim V'_-).}
+The action on the normalized top word and the inverse pullback
+of the coefficient functional on the entire algebra satisfy
+##{\beta_u(\Omega_V)=u^d\Omega_V,\qquad
+\mathcal I_V\circ\beta_u^{-1}=u^{-d}\mathcal I_V.}
+The coefficient functional is invariant exactly when #{u^d=1}.
+For a complex Ginsparg–Wilson operator #{D} with its modified
+grading, #{d=2\,\sdim\ker D}. If #{d\ne0}, the units of modulus
+one fixing the functional are the roots of unity whose orders
+divide #{|d|}. If #{d=0}, every unit fixes it.}
+
+\proof{
+\p{Write #{N=\dim V}, #{A=u^\Gamma} and #{B=u^{\Gamma'}}.
+By \ref{fdip-00TL} the degree-#{2N} component of
+#{\extexp(\theta_{\bbI})} is #{\Omega_V}. Applying #{\beta_u}
+preserves degree. By \ref{fdip-00TH} and \ref{fdip-014K}
+the resulting polynomial is #{\extexp(\theta_{AB})}.
+Its top coefficient is #{\det(AB)} by \ref{fdip-00TL},
+so #{\beta_u(\Omega_V)=\det(A)\det(B)\Omega_V}. In a basis
+adapted to #{\Gamma}, the diagonal entries of #{A} give
+#{\det(A)=u^{\dim V_+-\dim V_-}}. A basis adapted to #{\Gamma'}
+gives #{\det(B)=u^{\dim V'_+-\dim V'_-}}. Multiplying gives
+#{u^d}. These dimension differences are integers also in
+positive characteristic, where their images in #{k} are the
+[grading traces](fdip-013N).}
+
+\p{For any element write its top component as #{c\Omega_V}.
+Under #{\beta_u^{-1}} this becomes #{u^{-d}c\Omega_V}.
+Every lower-degree component stays below degree #{2N}, where
+the functional vanishes. This proves the inverse pullback on
+every input, in the direction of \ref{fdip-00UG}. Testing it
+on #{\Omega_V}, whose coefficient is one, gives the claimed
+invariance criterion. At #{N=0} the top word is #{1}, #{d=0}
+and #{\mathcal I_0=\bbI_k}. For cell parity on a finite cell model #{Y}
+with #{\Gamma'=\Gamma} and fiber rank #{r}, each grading
+contributes #{\chi(Y)r}, in agreement with \ref{fdip-00UF}.}
+
+\p{Over #{\mathbb C} each grading trace equals its integer
+difference of dimensions. Thus #{d=\trace(\Gamma+\Gamma')},
+and the ordinary kernel index formula of \ref{fdip-014B}
+gives #{d=2\,\sdim\ker D}. For nonzero #{d} the equation
+#{u^d=1} is equivalent to #{u^{|d|}=1}. The order of #{u}
+then divides #{|d|}, and conversely every such root satisfies
+the equation.}
+}
+
+\p{On the generator space the determinant of the dual block
+equals that of #{u^{\Gamma'}} by Mathlib's \leanref{LinearMap.det_dualMap}.
+TauCeti's \leanref/tauceti{LinearMap.map_exteriorPower_finrank_eq_det_smul}
+identifies the induced action on the top exterior power with
+multiplication by the determinant.}
