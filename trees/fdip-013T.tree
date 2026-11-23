@@ -1,0 +1,90 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{Inversion and charge conjugation of the grading}
+\date{2026-11-23}
+
+\p{For the \vocabk{covariant centered differences}{fdip-009O}
+on the Pauli module of \ref{fdip-00LB}, every dimension #{n\ge1}
+admits antiunitaries #{c_\pm} with
+#{c_\pm^2=\bbI} and
+#{c_\pm\varepsilon_j^Sc_\pm^{-1}=\pm\varepsilon_j^S}.
+At spacing #{a>0} take the centered operator #{D_{a,U}},
+the Laplacian with #{-L_{a,U}\ge0}, and the
+\vocabk{Wilson operator}{fdip-009U}
+#{D_{W,a,U}=D_{a,U}-c_WL_{a,U}}.
+For any antiunitary #{c_F} on the fiber, put
+#{\mathcal Q=c_\pm\otimes c_F} sitewise and
+#{U^{\mathcal Q}=c_F U c_F^{-1}} on the represented links. Then
+##{\begin{aligned}
+\mathcal Q D_{a,U}\mathcal Q^{-1}&=\pm D_{a,U^{\mathcal Q}},\\
+\mathcal Q L_{a,U}\mathcal Q^{-1}&=L_{a,U^{\mathcal Q}}.
+\end{aligned}}
+In dimension #{n=2m} both maps take the volume grading #{C} of
+\ref{fdip-009X} to #{(-1)^m C}.}
+
+\p{In positive even dimension, inversion #{\mathcal P} reflects
+every site coordinate except the first and acts on spin by
+#{\varepsilon_1^S}. For any Hermitian Euclidean Clifford module
+it takes the centered, Laplace and Wilson operators to those
+of the reflected links #{U^{\mathcal P}} and takes #{C} to #{-C}.
+On transported grading-stable kernels and generalized kernels,
+inversion reverses the index and charge conjugation multiplies
+it by #{(-1)^m}.}
+
+\proof{
+\p{Let #{c_+} conjugate the coefficients in the product basis
+of \ref{fdip-00LB}. It is antiunitary of square #{\bbI}. The
+generators are real and hence commute with #{c_+}. For the sign
+array #{Z} put #{c_-=Z^{\otimes n}c_+}. The real unitary
+#{Z^{\otimes n}} commutes with #{c_+} and squares to #{\bbI}, so
+#{c_-} too is antiunitary of square #{\bbI}. Conjugating by
+#{Z} fixes the sign and identity factors but negates the single
+flip in each generator. This gives the minus branch. Since the
+generators are real symmetric, in this basis also
+##{Z^{\otimes n}\varepsilon_j^S(Z^{\otimes n})^{-1}
+=-(\varepsilon_j^S)^T.}}
+
+\p{The rule #{s\otimes v\mapsto c_\pm(s)\otimes c_F(v)}
+conjugates a scalar on either factor, so it defines an antiunitary
+with square #{\bbI_S\otimes c_F^2}. The new links belong to the
+conjugated representation #{g\mapsto c_F\rho(g)c_F^{-1}} and
+remain in the original represented group if #{c_F} normalizes it.
+The shift formulas of the [covariant centered differences](fdip-009O)
+conjugate link transports and their inverses. The coefficients of
+the differences and Laplacian are real, giving the stated operator
+identities. When #{n=2m}, the product #{P=\psI} of all generators
+is fixed by either sign. Conjugating the scalar in #{C=\ui^m P}
+gives #{(-\ui)^m=(-1)^m\ui^m}.}
+
+\p{Write #{h(x)=(x_1,-x_2,\ldots,-x_n)} and let
+#{\varepsilon_j} be the positive unit step in site direction #{j}. The
+[source-to-head convention](fdip-006D) gives
+##{\begin{aligned}
+U^{\mathcal P}_1(x)&=U_1(hx),\\
+U^{\mathcal P}_j(x)&=U_j(hx-\varepsilon_j)^{-1}
+\quad(j>1).
+\end{aligned}}
+Pullback by #{h} preserves the forward shift in direction one,
+with reflected links. For #{j>1} it gives the backward value at
+#{x-\varepsilon_j} multiplied by #{U_j(hx)^{-1}}, precisely
+#{U_j^{\mathcal P}(x-\varepsilon_j)}. Each reflected difference
+therefore changes sign. Conjugation by #{\varepsilon_1^S}
+reverses exactly the corresponding generators, and exchanging
+shifts preserves their sum in the Laplacian. Hence
+##{\begin{aligned}
+\mathcal P D_{a,U}\mathcal P^{-1}&=D_{a,U^{\mathcal P}},\\
+\mathcal P L_{a,U}\mathcal P^{-1}&=L_{a,U^{\mathcal P}}.
+\end{aligned}}
+Their Wilson combination transforms with them.}
+
+\p{Inversion exchanges the grading eigenspaces since
+#{\varepsilon_1^S} anticommutes with #{C}. Charge conjugation
+preserves or exchanges them according to #{(-1)^m}.
+Both maps preserve complex dimension. Any intertwining
+#{A_U\mapsto\pm A_{U'}} transports kernels of all powers, so
+subtracting the parity dimensions gives the claimed index signs.
+When #{U^{\mathcal P}=U}, the centered kernel is invariant under
+inversion and has index zero.}
+}

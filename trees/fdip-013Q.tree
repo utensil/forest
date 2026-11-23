@@ -1,0 +1,32 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Corollary}
+\title{Normal operators and balanced gradings}
+\date{2026-11-23}
+
+\p{Let #{A} and #{\Gamma} satisfy \ref{fdip-013P}.
+If #{\ker A\cap\im A=0}, then the ordinary kernel equals the
+generalized kernel and has index #{\sdim V}. The kernel
+condition holds for every normal operator on a finite-dimensional
+complex Hilbert space, including self-adjoint and skew-adjoint
+operators. When #{\dim V_+=\dim V_-}, the kernel under this
+condition has index zero.}
+
+\proof{
+\p{If #{j\ge2} and #{A^jv=0}, then #{A^{j-1}v} belongs to the
+kernel and image of #{A}, so it vanishes. Iteration gives
+#{Av=0}. The zero-dimensional case is immediate. Thus
+\ref{fdip-013P} gives the claimed index.}
+
+\p{For a normal operator, #{AA^\dagger=A^\dagger A} implies
+#{\|A^\dagger v\|^2=\|Av\|^2}. Its kernel therefore equals
+#{\ker A^\dagger}, which is perpendicular to #{\im A} by the
+adjoint identity. Positive definiteness forces their intersection
+to vanish. If #{A^\dagger=A} or #{A^\dagger=-A}, the two
+products coincide, so both cases are normal.}
+}
+
+\p{For a normal bounded operator, Mathlib's
+\leanref{ContinuousLinearMap.IsStarNormal.orthogonal_range} identifies its kernel
+with the orthogonal complement of its range.}

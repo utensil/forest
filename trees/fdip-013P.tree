@@ -1,0 +1,38 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{The index of the generalized kernel}
+\date{2026-11-23}
+
+\p{Let #{V} be a finite-dimensional space over a field #{k} with
+#{2\ne0}, and let #{A} be \vocabk{odd for a grading}{fdip-013N}
+#{\Gamma} of #{V}. Its kernel and generalized kernel are stable
+under #{\Gamma}, and
+##{\sdim\ker A^{\dim V}=\sdim V=\dim V_+-\dim V_-.}
+The image of this integer in #{k} is #{\trace\Gamma}.
+In characteristic zero the trace determines the integer index.}
+
+\proof{
+\p{Put #{d=\dim V} and #{L=\im A^d}. The images of successive
+powers decrease. Each strict inclusion lowers dimension, and
+equality persists after applying #{A}. Thus #{A(L)=L}. The
+restriction of #{A} to #{L} is surjective and hence bijective.
+Its #{d}-th power is injective on #{L}, so
+#{L\cap\ker A^d=0}. Rank-nullity for #{A^d} now gives
+##{V=\ker A^d\oplus L.}}
+
+\p{For every #{j\ge0}, moving #{\Gamma} past each factor of
+#{A^j} gives #{\Gamma A^j=(-1)^j A^j\Gamma}. Both the kernel
+and image of #{A^j} are therefore grading-stable. On #{L},
+the invertible odd operator #{A} interchanges #{L\cap V_+}
+and #{L\cap V_-} bijectively. Their dimensions cancel in the
+super-dimension of the displayed sum. This gives the integer
+identity, and the trace formula follows from the
+[super-dimension](fdip-013N).}
+}
+
+\p{Mathlib's \leanref{LinearMap.isCompl_iSup_ker_pow_iInf_range_pow}
+gives complementary stabilized kernels and images under the
+Artinian and Noetherian module hypotheses. Here the parity
+exchange on the image gives the equality of indices.}
