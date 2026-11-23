@@ -1,0 +1,110 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{Signed zeros cancel}
+\date{2026-11-23}
+
+\p{Let #{f:R\to k^n} on the \vocabk{simplicial momentum grid}{fdip-013X}
+over an ordered field. At each \vocabk{regular value}{fdip-013Y} #{y},
+#{\deg(f;y)=0}. When every vertex zero is nondegenerate, the
+local and off-grid degrees are well defined and
+##{\sum_{f(r)=0}\deg_r f+\deg^\circ(f)=0.}
+In particular the vertex degrees sum to zero if no simplex
+without a zero vertex contains a zero of #{\tilde f}.}
+
+\proof{
+\p{Give each ordered simplex #{[v_0,\ldots,v_n]} the coefficient
+#{\operatorname{sgn}(\pi)}. In its boundary the face omitting
+#{v_i} has the further factor #{(-1)^i}. For #{0<i<n} the same
+ordered face occurs with opposite coefficient upon interchanging
+steps #{i} and #{i+1}. The face omitting #{v_0} occurs again
+as the last omission in the cube starting at #{v_1}, with steps
+#{\pi(2),\ldots,\pi(n),\pi(1)}. The new factor is
+#{(-1)^n(-1)^{n-1}=-1}, also across a periodic seam.
+Thus the oriented sum has zero boundary.}
+
+\p{For any #{n+2} ordered image points #{b_i\in k^n}, consider
+their alternating boundary of #{n}-simplices. Suppose #{y} is
+in no hull of at most #{n} of these points. Its signed count on
+this boundary is zero. Indeed, let #{B} have columns #{(1,b_i)}
+and set #{c_i=(-1)^i\det B_{\widehat i}}, deleting column #{i}.
+Subtracting the first retained column from the others shows that
+#{\operatorname{sgn} c_i} is precisely the signed orientation
+of that boundary face. If #{B} lacks full row rank all counts
+vanish. Otherwise cofactor expansion gives #{Bc=0}, and the
+solutions of #{B\lambda=(1,y)} form a line with direction #{c}.}
+
+\p{The conditions #{\lambda_i\ge0} cut this line in an empty
+set or a bounded closed interval, since #{c\ne0} and
+#{\sum_i c_i=0}. Its endpoints are finite maxima and minima
+of coordinate bounds. Two zero coordinates at once would place
+#{y} in a forbidden hull. Thus a nonempty interval has distinct
+endpoints, as a singleton would attain both a lower and an upper
+bound. No coordinate can vanish identically there, since another
+vanishes at an endpoint. Exactly two facets then contain #{y},
+with #{c_i>0} at the entering end and #{c_j<0} at the leaving
+end. Their contributions cancel.}
+
+\p{Cone each image simplex #{[a_0,\ldots,a_n]} to one point #{q},
+prepending #{q} to its vertex list. Choose #{q\ne y} as follows.
+For each nonempty face of at most #{n-1} original vertices with
+image affine span #{H}, avoid #{\operatorname{aff}(H,y)} if
+#{y\notin H}, and avoid #{H} otherwise. These are finitely many
+proper affine subspaces. Each lies in an affine hyperplane. The product of the defining
+affine polynomials is nonzero and cannot vanish on all of #{k^n},
+since an ordered field is infinite. Then #{y} lies
+in no augmented hull of at most #{n} vertices. When #{y\in H},
+its weight on #{q} would have to be zero and original regularity
+excludes the remaining hull. The cone boundary consists of the
+base minus the cone on its boundary. Applying the preceding
+identity and canceling all paired side faces leaves
+#{\deg(f;y)=0}, including for collapsed image simplices.}
+
+\p{Fix a nondegenerate vertex zero #{r}. In the sum of incident
+simplices the faces containing #{r} cancel in pairs. The remaining
+boundary faces opposite #{r} have linearly independent vertex
+values. Their affine spans omit zero. This time choose #{q\ne0}
+outside those spans and outside #{\operatorname{aff}(0,F)} for
+each nonempty proper subface image #{F} of these opposite faces.
+Every cone on an opposite face is nondegenerate, and none of
+its facet hyperplanes contains zero. Its signed count is constant
+in some box about zero because its affine barycentric coordinates
+retain their strict signs there. A common box works for the
+finitely many cones.}
+
+\p{For a regular probe #{y} in that box, the signed count in the
+star of #{r} equals this coned boundary count. To apply the cone
+identity, one may first move #{y} slightly inside the box to
+avoid every affine span of a face of at most #{n} vertices in the
+augmented simplices. Every original star simplex contains #{y}
+with all barycentric coordinates positive or misses it with at
+least one negative, so its count persists under this move.
+Every open box contains a point outside finitely many proper
+affine subspaces by the same polynomial argument. This also
+works for a probe regular only in the star. For #{y=tu} with
+#{u} as in the definition of local degree, its coefficients on
+the #{n} other vertex values are #{t} times the coordinates of
+#{u} in their basis. For small #{t>0} the remaining coefficient
+is positive. The star count is therefore #{\deg_r f}, independent
+of this direction.}
+
+\p{Finally choose a direction for the [off-grid degree](fdip-013Y). Spans missing zero meet its ray at most once,
+so #{tu} is regular for all sufficiently small #{t>0}.
+Two distinct nondegenerate zero vertices cannot share a simplex,
+since one of the other's independent values would be zero.
+Subtracting their star counts from the zero global count gives
+the stated choice-independent off-grid degree. If a remaining
+simplex misses zero, its contribution vanishes near zero.
+An invertible image simplex has a negative barycentric coordinate
+at zero, and a singular one has orientation zero. Finiteness gives
+one bound for them all.}
+}
+
+\p{An image simplex of zero determinant cannot contain a regular
+value. In a positive barycentric representation with affinely
+dependent support, subtract a multiple of an affine dependence
+until the first positive weight becomes zero. This removes a
+vertex without changing the point. Mathlib's
+\leanref{Caratheodory.mem_convexHull_erase} gives this deletion
+for an affinely dependent finite set.}

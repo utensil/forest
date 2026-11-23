@@ -1,0 +1,49 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Example}
+\title{The centered symbol and signs under sampling}
+\date{2026-11-23}
+
+\p{For the centered Fourier symbol of \ref{fdip-000S},
+#{f_j(r)=\sin p_j} and #{m=0}. Within any unit cube the
+univariate linear interpolant of the two endpoint samples in
+coordinate #{j} is affine in the cube coordinates. It agrees
+with #{f_j} on every vertex, hence with #{\tilde f_j} throughout
+each simplex. A common zero is therefore a product of scalar
+zeros. The sampled sine has an increasing zero at #{p_j=0} and
+a decreasing one at #{\pi}. For even #{N_j} the latter is a
+vertex. For odd #{N_j} the two samples straddling #{\pi} are
+opposites and the zero is their midpoint. There are no other
+zeros, since each remaining edge has endpoints of the same
+strict sign or ends at one of these zeros.}
+
+\p{Near each product zero every component is strictly monotone
+in its own coordinate. Each sufficiently small regular probe has
+one preimage there. In the simplex containing it, the determinant
+in grid coordinates is the product of the one-dimensional
+slopes, so the sign is the product of their signs. This also
+counts a zero on a face between simplices. At a vertex zero
+#{r} the linear criterion applies. For each offset #{w_j=-1,0,1}
+in its star,
+##{\sin(p_j+2\pi w_j/N_j)=\cos p_j\,\sin(2\pi/N_j)\,w_j.}
+The diagonal map in \ref{fdip-0141} is invertible, since
+#{N_j\ge3}. Its sign #{\prod_j\cos p_j} agrees with the corner generator signs of \ref{fdip-009R}.}
+
+\p{If #{e} counts the even periods, exactly #{2^e} of the
+#{2^n} interpolated zeros are vertices, as in the zero-block count of \ref{fdip-009Q}. With an even period, pairing
+the two choices on that axis cancels the vertex signs and also
+the signs of the #{2^n-2^e} remaining zeros. On an all-odd grid
+the origin is the only vertex zero and has degree #{1}. The
+#{2^n-1} off-grid zeros together have degree #{-1} by
+\ref{fdip-0140}. For example, with two odd periods the three
+off-grid signs are #{-1,-1,+1}.}
+
+\p{For the centered symbol the coordinate derivative signs
+agree with these finite signs. To see how sampling can change
+a sign even for a finite-range operator, take #{N=8} and #{f(p)=\sin p-\tfrac35\sin(2p)}.
+The first and second harmonics use shifts of at most two sites.
+The positive neighbor has #{f(\pi/4)=\sqrt2/2-3/5>0}, and the
+negative neighbor has the opposite value. The vertex degree at
+zero is therefore #{+1} by \ref{fdip-013Z}, although the
+derivative of the continuous symbol there is #{1-6/5=-1/5}.}
