@@ -1,0 +1,46 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{The finite overlap construction}
+\date{2026-11-23}
+
+\p{Let #{K} be \vocabk{graded-hermitian}{fdip-0148} on a
+finite-dimensional complex Hilbert space with self-adjoint
+grading #{\Gamma}, and let #{\Gamma K} be invertible.
+The sign grading #{\Gamma_K} is a real polynomial in
+#{\Gamma K}. For #{a>0} the overlap operator #{D_K}
+satisfies the Ginsparg–Wilson relation with modified grading
+#{-\Gamma_K}, and
+##{\sdim\ker D_K=\tfrac12(\trace\Gamma-\trace\Gamma_K).}
+The trace of #{\Gamma_K} counts the positive eigenvalues of
+#{\Gamma K} minus the negative ones, with multiplicity.}
+
+\proof{
+\p{Let #{H=\Gamma K}. Then #{H^\dagger=K^\dagger\Gamma=H}.
+Realification as in the proof of \ref{fdip-014A}, using
+\ref{fdip-002R}, supplies a complex orthonormal basis of
+#{H}-eigenvectors with real eigenvalues. Let #{E} be the finite
+set of distinct eigenvalues. Invertibility excludes zero. The
+real polynomial
+##{p(t)=\sum_{\lambda\in E}\operatorname{sgn}(\lambda)
+\prod_{\mu\in E,\ \mu\ne\lambda}\frac{t-\mu}{\lambda-\mu}}
+takes value #{\operatorname{sgn}(\lambda)} at each #{\lambda}.
+Indeed, at that node its own product equals one and each other
+product has a zero factor. On an eigenvector #{v} of eigenvalue
+#{\lambda}, polynomial evaluation gives
+#{p(H)v=p(\lambda)v}. Thus #{p(H)=\Gamma_K}. On the zero
+space the empty sum gives its unique endomorphism.}
+
+\p{The signs on this eigenbasis make #{\Gamma_K} a self-adjoint
+involution with the stated trace. The formula for #{D_K} takes
+the form #{a^{-1}(\bbI-\Gamma(-\Gamma_K))}. Applying
+\ref{fdip-014A} to the two gradings gives graded hermiticity and
+the quadratic relation. The modified grading is #{-\Gamma_K},
+so \ref{fdip-014B} gives its kernel index.}
+}
+
+\p{Mathlib's \leanref{LinearMap.IsSymmetric.eigenvectorBasis}
+supplies the Hermitian eigenbasis, and
+\leanref{Lagrange.eval_interpolate_at_node} gives the value of
+the interpolating polynomial at each distinct node.}

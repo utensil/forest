@@ -1,0 +1,58 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Example}
+\title{The overlap of the Wilson kernel}
+\date{2026-11-23}
+
+\p{Take the [Wilson operator](fdip-009U) at trivial links with
+#{a>0}, #{c_W=a/2}, and periods #{N_j\ge3}. Shift its mass by
+putting #{K=D_{W,a,U}-a^{-1}\bbI}. In any dimension #{n\ge1}
+let #{\Gamma} be a site-independent self-adjoint grading on
+#{S\otimes F} anticommuting with every represented generator.
+With #{f,m} from \ref{fdip-0144}, write
+#{A=\sum_j f_j(r)(\varepsilon_j^S\otimes\bbI_F)}. The block is
+#{K(p)=(m(r)-a^{-1})\bbI+\ui A}. Conjugation by #{\Gamma} negates #{A}, so
+#{\Gamma K(p)\Gamma=K(p)^\dagger} and
+##{\begin{aligned}
+(\Gamma K(p))^2&=K(p)^\dagger K(p)=b(r)^2\bbI,\\
+b(r)&=\sqrt{|f(r)|^2+(m(r)-a^{-1})^2}.
+\end{aligned}}
+At a grid corner with #{h} coordinates equal to #{\pi},
+#{m(r)=2h/a}. Thus #{m(r)-a^{-1}=(2h-1)/a} is nonzero.
+Away from the corners #{f(r)\ne0}, so every #{b(r)>0}.}
+
+\p{On each block the eigenvalues of the Hermitian #{\Gamma K(p)}
+belong to #{\{-b(r),b(r)\}}. Its sign grading is
+#{\Gamma_K(p)=\Gamma K(p)/b(r)}. Hence the overlap formula of
+\ref{fdip-014D} gives
+##{D_K(p)=a^{-1}\left(\bbI+\frac{K(p)}{b(r)}\right).}
+Its vector part is #{f(r)/(ab(r))}. The only zero block is at
+the origin, where the mass becomes #{0}. The other sampled
+corners have mass #{2a^{-1}}. At a zero vertex each of the
+other values in an incident simplex is scaled by a positive
+factor. The spanned cone and the sign of its determinant are
+preserved, so each local degree agrees with \ref{fdip-0142}.
+The origin has degree #{1}.}
+
+\p{More explicitly, write #{d_i=1/(ab(r_i))} at the vertices
+of any grid simplex. Given barycentric weights #{\lambda_i} for
+the rescaled map, put
+##{\mu_i=\frac{d_i\lambda_i}{\sum_jd_j\lambda_j}.}
+The rescaled interpolated vector is #{\sum_jd_j\lambda_j}
+times the original interpolated vector at #{\mu}. This
+correspondence preserves faces and is invertible by the same
+formula with reciprocal factors. Thus it carries rescaled zeros
+to original zeros, possibly at different barycentric positions.
+The equal vertex degrees and \ref{fdip-0140} give equal aggregate
+off-grid degrees.}
+
+\p{The first represented generator conjugates #{\Gamma} to
+#{-\Gamma}, and #{\Gamma} conjugates #{\Gamma A} to
+#{-\Gamma A}. Both traces vanish, so
+#{\Gamma_K(p)=((m(r)-a^{-1})\Gamma+\ui\Gamma A)/b(r)}
+has trace zero on every block. The full #{\Gamma} also has
+trace zero, and \ref{fdip-014D} gives #{\sdim\ker D_K=0}.
+Directly the whole constant block survives and the first generator
+exchanges its two grading spaces. In even dimension this includes
+the volume grading #{C}.}
