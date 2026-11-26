@@ -1,0 +1,54 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{Matching traces on a finite adjoint-closed algebra}
+\date{2026-11-26}
+
+\p{Let #{\mathscr A} be a unital adjoint-closed complex algebra
+of operators on a nonzero finite-dimensional Hermitian space.
+Let #{\pi_1,\pi_2} be two unital complex-linear representations
+on finite-dimensional complex Hermitian spaces, preserving
+adjoints. They are unitarily equivalent exactly when
+##{\trace(\pi_1(x))=\trace(\pi_2(x))\qquad(x\in\mathscr A).}}
+
+\proof{
+\p{Take the orthogonal projections of \ref{fdip-018V}. In
+each equivalence class choose a representative #{p_r}.
+For #{p_i} in the class choose #{v_i\in p_i\mathscr A p_r}
+with initial projection #{p_r} and final projection #{p_i}.
+Take #{v_r=p_r}. Then #{e_{ij}=v_i v_j^\dagger} has adjoint
+#{e_{ji}}. Within the class,
+#{e_{ij}e_{kl}=\delta_{jk}e_{il}} because the ranges of
+different #{v_j} are orthogonal and #{v_j^\dagger v_j=p_r}.
+Products between classes vanish. Every #{x\in\mathscr A} is
+the sum of its corners #{p_i x p_j}. Within a class the
+nonzero #{e_{ij}} spans this corner space, and the corner is
+zero between classes. Thus these matrix units span the algebra.}
+
+\p{In either representation the images #{\pi_s(p_i)} give an
+orthogonal decomposition of the representation space, allowing
+zero summands. Within a class, #{\pi_s(v_i)} identifies the
+range of #{\pi_s(p_r)} isometrically with that of #{\pi_s(p_i)}.
+Trace equality on #{p_r} says the two representative ranges
+have the same dimension, since an orthogonal projection has
+trace equal to its rank. Choose a unitary #{b_r} from the first
+representative range to the second, including the unique map
+between zero spaces. On the range of #{\pi_1(p_i)} use
+##{b_i=\pi_2(v_i)b_r\pi_1(v_i)^\dagger.}
+These isometries give an onto unitary on the orthogonal sum.
+For each #{e_{ij}}, both compositions on the #{j}th
+range equal #{\pi_2(v_i)b_r\pi_1(v_j)^\dagger}, and both are
+zero on all other ranges. Linearity supplies intertwining on
+every element. Conversely, unitary conjugation preserves trace.}
+}
+
+\p{TauCeti's
+\leanref/tauceti{IsSemisimpleModule.nonempty_linearEquiv_of_trace_eq}
+obtains a linear module equivalence from equality of all action
+traces for finite-dimensional semisimple modules over an algebra
+in characteristic zero. For the complex representations here,
+the orthogonal complement of each invariant subspace is
+invariant because adjoints are in the action. Splitting by
+dimension gives semisimplicity. The range identifications
+above preserve the supplied Hermitian metrics.}

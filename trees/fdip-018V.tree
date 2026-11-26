@@ -1,0 +1,42 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Lemma}
+\title{Projections and the corners between them}
+\date{2026-11-26}
+
+\p{Let #{\mathscr A} be a unital complex subalgebra of
+endomorphisms of a nonzero finite-dimensional Hermitian space,
+closed under adjoints, as in \ref{fdip-018U}. There are
+nonzero orthogonal projections #{p_i\in\mathscr A} summing to
+#{\bbI} with #{p_i\mathscr A p_i=\mathbb C p_i}.
+For any two such projections the space #{p_i\mathscr A p_j}
+is zero or is the complex span of a map #{v} satisfying
+#{v^\dagger v=p_j} and #{vv^\dagger=p_i}. Nonzero corners
+define equivalence classes of the projections.}
+
+\proof{
+\p{Start with #{p=\bbI}. If the corner #{p\mathscr A p}
+contains a nonscalar self-adjoint element #{h}, its restriction
+to #{pE} has at least two distinct real eigenvalues, where
+#{E} is the ambient space. Interpolate a polynomial equal to
+one at one eigenvalue and zero at the others. Evaluate it in
+the corner, with #{p} as its identity. The result is a proper
+nonzero orthogonal projection #{e\le p}. Split #{p} into #{e}
+and #{p-e}. Each split increases the number of positive-rank
+orthogonal projections by one, so the procedure terminates.
+In a remaining corner the self-adjoint real and imaginary
+parts of any element are both real scalar multiples of its
+identity. The whole corner is therefore #{\mathbb C p_i}.}
+
+\p{For nonzero #{x\in p_i\mathscr A p_j}, positivity gives
+#{x^\dagger x=\lambda p_j} and #{xx^\dagger=\mu p_i}
+with #{\lambda,\mu>0}. From #{(xx^\dagger)x=x(x^\dagger x)}
+we get #{\lambda=\mu}. Thus #{v=x/\sqrt{\lambda}} has the
+stated two products, and sends the range of #{p_j} isometrically
+onto that of #{p_i}. For any #{y} in the corner,
+#{v^\dagger y} is scalar on #{p_j}, and
+#{y=v(v^\dagger y)}. Hence #{v} spans the corner. Identity
+projections, adjoints and composites of these isometries give
+reflexivity, symmetry and transitivity of the relation.}
+}

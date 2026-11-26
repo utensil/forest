@@ -1,0 +1,37 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{A cubic commutator and its word trace}
+\date{2026-11-26}
+
+\p{For Hermitian endomorphisms #{A,B} of a finite-dimensional
+complex Hermitian space, put #{K=AB-BA}. Then
+##{\trace(K^3)=6\ui\,\operatorname{Im}\trace(ABA^2B^2).}
+When #{\dim E=3}, where #{E} is their common space, this gives
+##{\det K=\trace(K^3)/3
+       =2\ui\,\operatorname{Im}\trace(ABA^2B^2).}}
+
+\proof{
+\p{Write #{P=AB} and #{R=BA}. Under the trace the two pure
+cubic terms in #{(P-R)^3} cancel by cyclicity. The three
+terms containing two copies of #{R} have trace
+#{\trace(PR^2)}, and the three with two copies of #{P}
+have trace #{-\trace(P^2R)} including their signs.
+Moving factors cyclically gives
+#{\trace(PR^2)=\trace(ABA^2B^2)}.
+The word in #{P^2R} is a cyclic permutation of the
+reverse word in #{ABA^2B^2}. Since the letters are Hermitian,
+its trace is the complex conjugate of the first.
+Subtracting gives the cubic identity.}
+
+\p{The commutator is skew-adjoint and has trace zero by
+cyclicity. Multiplying it by #{\ui} gives a Hermitian operator,
+which has an orthonormal eigenbasis. In that basis #{K} is
+diagonal too. In complex dimension three its eigenvalues
+#{x,y,z} satisfy #{x+y+z=0}.
+Expanding #{(x+y)^3} and substituting #{z=-x-y} gives
+#{x^3+y^3+z^3=3xyz}. The right side is #{3\det K}.
+The dimension assumption is used precisely in this last
+step, as the real pair in \ref{fdip-0192} illustrates.}
+}

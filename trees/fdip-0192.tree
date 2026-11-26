@@ -1,0 +1,25 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Example}
+\title{Rephasing two coordinates and changing the eigenbasis}
+\date{2026-11-26}
+
+\p{On a complex plane take the Hermitian operators whose
+matrices in the initial orthonormal basis are
+##{A=\begin{pmatrix}2&1\\1&2\end{pmatrix},\qquad
+B=\begin{pmatrix}2&\ui\\-\ui&2\end{pmatrix}.}
+Both have eigenvalues #{1,3}. Diagonal unitary basis changes
+multiply both upper off-diagonal entries by the same unit
+phase. Their ratio is imaginary, so these changes alone cannot
+make both entries real.}
+
+\p{For the initial vectors #{e_1,e_2}, use instead
+#{(e_1+e_2)/\sqrt{2}} and #{\ui(e_1-e_2)/\sqrt{2}}. In this
+orthonormal eigenbasis of #{A}, the two matrices are
+##{\begin{pmatrix}3&0\\0&1\end{pmatrix},\qquad
+\begin{pmatrix}2&1\\1&2\end{pmatrix}.}
+This implements \ref{fdip-0191}. Their commutator #{AB-BA} in
+the real basis has upper entry #{2}, lower entry #{-2} and
+zero diagonal. Its determinant is #{4}, although both
+operators preserve the same real form.}

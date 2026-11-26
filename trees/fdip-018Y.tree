@@ -1,0 +1,37 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{A bounded trace test for conjugation symmetry}
+\date{2026-11-26}
+
+\p{Let #{A,B} be Hermitian endomorphisms of a complex Hermitian
+space #{E} of dimension #{d\ge1}. An antiunitary on #{E}
+commutes with both operators if and only if the pair is unitarily
+equivalent to its conjugate pair on the conjugate space. Both
+conditions are equivalent to
+##{\trace(w(A,B))\in\mathbb R\qquad
+   \text{for every word of length at most } 2d^2-1.}
+In particular the test applies to every
+\vocabk{ordered Gram pair}{fdip-018P}.}
+
+\proof{
+\p{Let #{c:E\to\bar E} be canonical conjugation and set
+#{A'=cAc^{-1}}, #{B'=cBc^{-1}}. For every word,
+#{w(A',B')=c\,w(A,B)c^{-1}}. In an orthonormal basis and its conjugate basis the
+two matrices are entrywise conjugates. In particular their
+traces are complex conjugates. Thus the stated reality is precisely
+equality of the two coordinate traces on the bounded words.
+By \ref{fdip-018U} these evaluations span the full simultaneous
+adjoint-closed algebra. Its two coordinate representations
+preserve both the identity and adjoints, so \ref{fdip-018X}
+gives a unitary #{u:E\to\bar E} intertwining both generators.
+Conversely any such unitary gives trace equality on all words
+by cyclicity. This equivalence uses no preferred basis.}
+
+\p{Given the unitary, #{c^{-1}u} is an antiunitary commuting
+with #{A,B}. Given such an antiunitary #{j}, the composite
+#{cj} is a linear unitary intertwining each operator with
+its conjugate. With #{d=0} the pair is empty, and the unique
+map on the zero space satisfies the symmetry requirement.}
+}
