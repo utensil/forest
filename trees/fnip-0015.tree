@@ -1,0 +1,37 @@
+\import{fnip-macros}
+\import{lean-macros}
+\meta{agent-authored}{true}
+\tag{fnip}
+\taxon{Definition}
+\title{Phase portrait}
+\date{2026-11-26}
+
+\p{The \newvocab{orbit} of a point #{x_{0}} is the set of points
+#{\varphi^{t}(x_{0})} for those times #{t} at which the
+\vocabk{flow}{fnip-0004} is defined. The
+\vocabk{trajectory}{fnip-0009} through #{x_{0}} parametrizes that set.
+The \newvocab{phase portrait} is the partition of the state space into
+orbits.}
+
+\p{A set #{S} is an \newvocab{invariant set} when #{x_{0}\in S} implies
+#{\varphi^{t}(x_{0})\in S} for every time #{t} at which the flow is
+defined at #{x_{0}}. Each orbit is an invariant set. An
+\vocabk{equilibrium}{fnip-0014} is an orbit with one point.}
+
+\p{\citet{Definition 1.2, §1.2, p. 8}{kuznetsov2004elements} is the
+orbit, including the restriction to times at which the evolution
+operator is defined, and that page also calls an orbit a trajectory.
+\citet{Definition 1.6, §1.2, p. 10}{kuznetsov2004elements} is the phase
+portrait.
+\citet{Definition 1.7, §1.3.1, p. 10}{kuznetsov2004elements} is the
+invariant set. The same page says that an invariant set consists of
+orbits. Definition 1.7 quantifies over every time in the time set. In
+these notes the flow at a state is defined on the interval of its
+trajectory, and the inclusion is required on that interval.}
+
+\p{Mathlib's \leanref{IsInvariant} and \code{Flow.orbit}, read at commit
+\code{8fc0483a875e84b83c6cdb6f5c124bcbb3530370},
+are the same two conditions for a flow defined at every time of its
+monoid. \code{Flow.orbit_eq_range} says the orbit is the range of
+#{t\mapsto \varphi^{t}(x)}, and \code{Flow.isInvariant_orbit} says that
+range is invariant.}
