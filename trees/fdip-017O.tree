@@ -1,0 +1,66 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{Conjugation signs on a simple module}
+\date{2026-11-26}
+
+\p{For a nonzero simple complex Hermitian module on #{n\ge1}
+positive Euclidean directions, the possible
+\vocabk{charge conjugation signs}{fdip-017H} and their squares
+depend only on the residue of #{n} modulo #{8}. A plus or minus
+entry gives the sign multiplying #{\bbI_S} in #{c_\eta^2}.
+A dot means the sign #{\eta} is unavailable on that simple module.
+##{\begin{array}{c|cc}
+n\bmod 8 & \eta=+1 & \eta=-1\\ \hline
+0 & + & +\\
+1 & + & \cdot\\
+2 & + & -\\
+3 & \cdot & -\\
+4 & - & -\\
+5 & - & \cdot\\
+6 & - & +\\
+7 & \cdot & +
+\end{array}}}
+
+\proof{
+\p{On the tensor model in \ref{fdip-017M} let #{\kappa_0}
+be conjugation in the displayed basis. The odd-index directions
+are real and the even-index ones are purely imaginary. With each product
+in increasing order set
+##{\begin{aligned}
+c_{\mathrm{im}}&=(\varepsilon_2\varepsilon_4\cdots\varepsilon_{2m})\kappa_0,\\
+c_{\mathrm{re}}&=(\varepsilon_1\varepsilon_3\cdots\varepsilon_{2m-1})\kappa_0.
+\end{aligned}}
+The empty product is the identity.
+Both maps are antiunitary. Conjugating a generator by a product
+of #{m} distinct directions gives sign #{(-1)^{m-1}} if it
+belongs to the product and #{(-1)^m} otherwise. Coordinate
+conjugation itself negates the imaginary generators only.
+The two maps therefore have respective uniform signs
+#{(-1)^m} and #{(-1)^{m+1}} on the first #{2m} directions.}
+
+\p{The square of either linear product is #{(-1)^{m(m-1)/2}}
+times the identity by reordering. Moving #{\kappa_0} past the
+imaginary product gives another #{(-1)^m}, while the real
+product is fixed. Thus
+##{c_{\mathrm{im}}^2=(-1)^{m(m+1)/2}\bbI,\qquad
+c_{\mathrm{re}}^2=(-1)^{m(m-1)/2}\bbI.}
+Their even-dimensional signs exhaust the choices. For a given
+sign the ratio of any two antiunitaries, one composed with
+the other's inverse, is a unitary linear endomorphism commuting
+with all directions. It is a unit scalar on a simple by the
+argument of \ref{fdip-017J}. Scaling an antiunitary by a unit
+scalar leaves its square unchanged.}
+
+\p{For odd dimension, use #{\varepsilon_{2m+1}=\sigma C_{2m}}
+from \ref{fdip-017N}. Conjugating the phase #{\ui^m} changes
+it by #{(-1)^m}, and the #{2m} direction signs multiply to
+#{1}. Thus every candidate acts on the last direction by
+#{(-1)^m}, which must equal the requested #{\eta}.
+The imaginary-product map has that sign. At #{m=0} it is
+coordinate conjugation on a scalar line, and the last operator
+is already a real scalar. The square is the same for both
+simple types. The signs of the two squares repeat under
+#{m\mapsto m+4}, giving the displayed residues.}
+}

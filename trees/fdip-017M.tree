@@ -1,0 +1,56 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Lemma}
+\title{The matrix algebra in even dimension}
+\date{2026-11-26}
+
+\p{For #{2m} positive complex Clifford directions, #{m\ge0},
+the algebra generated subject only to the Clifford relations of
+\ref{fdip-00LZ} is the full matrix algebra on
+#{S_0=(\mathbb C^2)^{\otimes m}}. Every unital finite-dimensional
+Hermitian module with self-adjoint directions is unitarily
+equivalent to #{S_0\otimes E}, with the algebra acting on the
+first factor. The simple module is #{S_0} up to equivalence.}
+
+\proof{
+\p{Use the orthonormal tensor basis of \ref{fdip-00IO}. Let
+#{X} exchange its two single-factor basis vectors, let
+#{Z=\operatorname{diag}(1,-1)}, and take #{Y=\ui XZ}.
+Thus #{Y} sends the first vector to #{\ui} times the second
+and the second to #{-\ui} times the first. For #{1\le r\le m},
+the operators in positions #{2r-1,2r} are
+##{\begin{aligned}
+\varepsilon_{2r-1}&=Z^{\otimes(r-1)}\otimes X\otimes\bbI^{\otimes(m-r)},\\
+\varepsilon_{2r}&=Z^{\otimes(r-1)}\otimes Y\otimes\bbI^{\otimes(m-r)} .
+\end{aligned}}
+Each is a self-adjoint involution. At a common active position
+#{X} and #{Y} anticommute. At different active positions the
+earlier #{X} or #{Y} crosses the later string's #{Z} exactly
+once, and all other factors commute. These arrays represent
+the relations.}
+
+\p{In the first factor the generated algebra contains #{X,Y}
+and #{Z=-\ui XY}. Inductively the earlier single-factor
+#{Z}'s cancel the string at position #{r}, recovering #{X,Y,Z}
+on that factor alone. The projections #{(\bbI\pm Z)/2} and
+their products with #{X} give all single-factor matrix units.
+Their tensor products give the matrix units for #{S_0}.
+The image is therefore the full matrix algebra, of dimension
+#{(2^m)^2}. Reordering and cancelling repeated generators spans
+the abstract algebra by at most #{2^{2m}} increasing words.
+The dimensions force the representation to be an isomorphism.
+At #{m=0} the algebra and the tensor model are both scalars.}
+
+\p{Write #{e_{ij}} for these matrix units and #{E=e_{11}S}
+for the first diagonal subspace of a module #{S}. In this
+realization #{e_{ij}^\dagger=e_{ji}}, and the represented
+units retain this identity because the generators are
+self-adjoint. The #{e_{ii}} are orthogonal projections summing
+to the identity. The map #{e_{i1}} carries #{E} isometrically
+onto #{e_{ii}S}, with inverse #{e_{1i}} on that range.
+Taking the #{i}th basis vector of #{S_0} tensored with #{v}
+to #{e_{i1}v} is the desired unitary intertwiner.
+The full matrix action on #{S_0} is irreducible, and splitting
+#{E} in an orthonormal basis writes every module as its copies.}
+}
