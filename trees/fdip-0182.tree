@@ -1,0 +1,70 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{Reflected transports in the centered and Wilson operators}
+\date{2026-11-26}
+
+\p{For the \vocabk{spinor time map}{fdip-017Z}, take a
+\vocabk{connection}{fdip-006D} with unitary represented
+transport #{U_j(x)} on each positive edge #{x\to x+e_j},
+where #{e_j} is one step along direction #{j}. At spacing
+#{a>0} use the shifts and operators
+##{\begin{aligned}
+(T_j^U\psi)(x)&=(\bbI_S\otimes U_j(x)^{-1})\psi(x+e_j),\\
+D_{a,U}&=\frac1{2a}\sum_j(\varepsilon_j\otimes\bbI_F)
+   \bigl(T_j^U-(T_j^U)^{-1}\bigr),\\
+L_{a,U}&=a^{-2}\sum_j \bigl(T_j^U+(T_j^U)^{-1}-2\bbI\bigr).
+\end{aligned}}
+Thus #{-L_{a,U}\ge0}. With a real coefficient #{c_W} put
+#{D_{W,a,U}=D_{a,U}-c_W L_{a,U}} as for the
+[Wilson operator](fdip-009U).}
+
+\p{Let #{b_F(u)=c_F^{-1}u c_F} for a represented fiber
+unitary #{u}. The reflected positive links are
+##{\begin{aligned}
+ U'_j(x)&=b_F(U_j(\theta_s x)) &&(j\ne t),\\
+ U'_t(x)&=b_F(U_t(\theta_s x-e_t)^{-1}).
+\end{aligned}}
+Conjugation by #{S_t} takes #{T_j^U} to #{T_j^{U'}} for
+#{j\ne t} and takes #{T_t^U} to #{(T_t^{U'})^{-1}}. For
+every one of #{D_{a,U},L_{a,U},D_{W,a,U}}, it gives the
+same operator with #{U'} in place of #{U} and the same
+coefficient. The new links take values in the image of the
+represented group under #{b_F}.}
+
+\proof{
+\p{The inverse shift uses #{U_j(x-e_j)} on the value at
+#{x-e_j}. This follows by composing the forward shift with
+that formula. Each shift is unitary by reindexing the norm
+sum and using unitary links. Hence
+#{2\bbI - T_j^U-(T_j^U)^{-1}=(\bbI - T_j^U)^\dagger
+(\bbI - T_j^U)}, proving the sign of the Laplacian.}
+
+\p{Conjugation by #{\mathcal Q^{-1}} changes each transport
+#{u} to #{b_F(u)}. The last spin multiplier commutes with
+fiber maps. Pullback fixes the direction of spatial steps, so
+the transformed forward spatial coefficient is
+#{b_F(U_j(\theta_s x)^{-1})=U'_j(x)^{-1}}. For the time
+step the reflected forward action reads at #{x} the value
+at #{x-e_t}, with coefficient #{b_F(U_t(\theta_s x)^{-1})}.
+That coefficient must be #{U'_t(x-e_t)} in the inverse
+target shift. Since #{\theta_s(x-e_t)=\theta_s x+e_t},
+the displayed time link gives exactly this coefficient.
+Its base is the reflected head of the positive time edge,
+as in \ref{fdip-00PY}.}
+
+\p{The inverse spin antiunitary commutes with all directions.
+Conjugation by #{\varepsilon_t} fixes #{\varepsilon_t} and
+negates each spatial direction, while #{\Gamma} negates every
+direction. Their product #{\Gamma\varepsilon_t} thus negates
+only the time direction. In the time summand of #{D_{a,U}}
+both the direction and the difference change sign, giving
+the positive centered covariance. The Laplacian uses a sum
+invariant under interchanging a shift and its inverse. The
+Wilson combination follows because #{c_W} is real.
+Normalization of the represented group by #{c_F} keeps the
+reflected transports in that group. A connection is fixed when
+its transformed links equal its original links. An identification
+of two connections must intertwine their represented transports.}
+}
