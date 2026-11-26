@@ -1,0 +1,55 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{Isometric exchanges and a prescribed group action}
+\date{2026-11-26}
+
+\p{Let #{V,V'} be finite-dimensional complex Hermitian spaces
+with self-adjoint \vocabk{gradings}{fdip-013N}. Give them
+unitary actions of groups #{G,G'} preserving the sign spaces
+and fix a homomorphism #{\alpha:G\to G'}. Choose
+#{\sigma} to be the identity or complex conjugation.
+An isometric #{\sigma}-semilinear
+\vocabk{equivariant sector exchange}{fdip-018A} from #{V}
+onto #{V'} exists precisely when there are bijective
+#{\sigma}-semilinear maps #{b_+:V_+\to V'_-} and
+#{b_-:V_-\to V'_+} satisfying, for every #{g\in G},
+##{\begin{aligned}
+ b_+\rho_+(g)&=\rho'_-(\alpha(g))b_+,\\
+ b_-\rho_-(g)&=\rho'_+(\alpha(g))b_-.
+\end{aligned}}
+For conjugation these are equivalences from the conjugate
+source modules to the corresponding pulled-back target modules.
+For a single graded action and #{\alpha=\mathrm{id}}, an
+intertwining bijection #{V_+\to V_-} of the chosen scalar type
+suffices, using its inverse on the other summand.}
+
+\proof{
+\p{An isometric exchange restricts to the indicated bijections.
+Conversely, in the conjugate-linear case let #{c:v\mapsto\bar v}
+be the canonical antiunitary from a summand to its conjugate
+space, with action #{c(v)\mapsto c(\rho(g)v)}.
+Write #{b=Lc} on that summand. Then #{L} is linear,
+bijective and intertwines this action with the target action
+pulled back by #{\alpha}. In the linear case use #{L=b}.}
+
+\p{For either source action #{r} and target action #{s}, the
+identity #{Lr(g)=s(g)L} and unitarity give
+#{r(g)^\dagger L^\dagger Lr(g)=L^\dagger L}. Thus the source
+action preserves the eigenspaces of the positive definite
+#{L^\dagger L}. On its eigenspace with eigenvalue
+#{\lambda>0}, multiply by #{\lambda^{-1/2}} to form
+#{(L^\dagger L)^{-1/2}}. This commutes with the action.
+The resulting #{L(L^\dagger L)^{-1/2}} is onto and preserves
+the inner product, as in \ref{fdip-017J}. Composing with #{c}
+when required gives the desired isometry on each summand.
+The self-adjoint gradings make both decompositions orthogonal,
+so the two isometries assemble to an isometry of the sums.}
+
+\p{For the same untwisted action the inverse of an isometric
+intertwiner of the chosen scalar type is an isometric
+intertwiner of that type in the reverse direction. With a
+prescribed #{\alpha} the two displayed equations apply to
+their respective restrictions.}
+}

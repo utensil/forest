@@ -1,0 +1,53 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{The inversion test at a reflected site}
+\date{2026-11-26}
+
+\p{Give fields on a finite periodic grid values in a
+finite-dimensional complex Hermitian space #{S\otimes F}.
+Choose self-adjoint Euclidean directions on #{S}, an axis #{t}
+and a constant self-adjoint \vocabk{grading}{fdip-013N}
+#{\Gamma} on values. Write #{u=\varepsilon_t\otimes\bbI_F}
+and suppose #{u\Gamma=-\Gamma u}. Let #{h} fix coordinate #{t}
+and negate the others. The inversion #{(\mathcal P\psi)(x)
+=u\psi(hx)} exchanges the sign spaces. Give these spaces
+unitary group actions #{\rho_\pm} at the source and
+#{\rho'_\pm} at the target, constant over sites.
+For a prescribed #{\alpha:G\to G'} it intertwines the actions
+precisely when, for both signs and every #{g\in G},
+##{u_\pm\rho_\pm(g)=\rho'_\mp(\alpha(g))u_\pm,}
+where #{u_\pm:V_\pm\to V_\mp} are the value restrictions.
+For an internal action #{\bbI_S\otimes\rho_F} with the same
+action at the target and #{\alpha=\mathrm{id}}, equivariance
+holds whenever the sign spaces are stable.}
+
+\p{Let #{A_\pm(x;U,\phi)} be the blocks of an even onsite
+coefficient for a represented connection #{U} and scalar field
+#{\phi}. Prescribe destination scalar data #{\phi'} and
+destination blocks #{A'_\pm}. Put
+##{U^{\mathcal P}_t(x)=U_t(hx),\qquad
+ U^{\mathcal P}_j(x)=U_j(hx-e_j)^{-1}\quad(j\ne t),}
+where #{e_j} is one positive step. The inversion transports the
+whole onsite coefficient to the specified destination if and
+only if, at each #{x} and with both sign choices,
+##{u_\pm A_\pm(hx;U,\phi)
+ =A'_\mp(x;U^{\mathcal P},\phi')u_\pm.}}
+
+\proof{
+\p{The value map is a unitary involution. Anticommutation maps
+each #{\Gamma}-eigenspace onto the opposite one. Pullback
+permutes sites and commutes with constant value actions. On a
+field supported at #{hx}, testing group equivariance at #{x}
+gives exactly the two displayed restrictions, and those
+restrictions suffice at every site. The internal tensor-factor
+action commutes with #{u} on all values.}
+
+\p{The source edge over #{x\to x+e_t} runs forward from #{hx}.
+For #{j\ne t} it runs backward to #{hx-e_j}, so the stored
+positive transport there must be inverted, as in
+\ref{fdip-013T}. Acting on a field supported at #{hx} also
+gives the two coefficient identities by \ref{fdip-018F}.
+Every field is the sum of its site-supported parts.}
+}
