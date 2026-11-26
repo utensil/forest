@@ -1,0 +1,55 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{Total inversion of the massive Wilson kernel}
+\date{2026-11-26}
+
+\p{For \vocabk{graded total inversion}{fdip-019C} take a
+\vocabk{connection}{fdip-006D} with unitary represented
+positive links #{U_j(x)} from #{x} to #{x+e_j}. Put
+##{U^b_j(x)=U_j(-x-e_j)^{-1}.}
+At real spacing #{a>0} let #{D_{a,U}} be the centered operator,
+#{L_{a,U}} the Laplacian with #{-L_{a,U}\ge0}, and
+#{K_U=m\bbI+D_{a,U}-c_W L_{a,U}} with real #{m,c_W},
+as in the \vocabk{Wilson operator}{fdip-009U}. Then
+##{\begin{aligned}
+ U_- D_{a,U} U_-^{-1}&=D_{a,U^b},&
+ U_- L_{a,U} U_-^{-1}&=L_{a,U^b},\\
+ U_- K_U U_-^{-1}&=K_{U^b},&
+ \det K_U&=\det K_{U^b}.
+\end{aligned}}
+On a connection class closed under #{U\mapsto U^b}, any
+scalar gauge weight satisfying #{w_g(U^b)=w_g(U)} therefore
+gives the same product #{w_g(U)\det K_U} at both connections.}
+
+\proof{
+\p{Suppress identity factors on tensor products. The forward
+shift is #{(T_j^U\psi)(x)=U_j(x)^{-1}\psi(x+e_j)} and its
+inverse has coefficient #{U_j(x-e_j)} on #{\psi(x-e_j)}.
+Conjugating the forward shift by #{b^*} gives the backward
+value at #{x-e_j} with coefficient #{U_j(-x)^{-1}}.
+This is exactly #{U^b_j(x-e_j)}, so
+#{b^*T_j^U(b^*)^{-1}=(T_j^{U^b})^{-1}}. The positive
+link in the statement thus uses the reflected head as the
+base of its inverse transport. The spin grading commutes with
+both shifts and negates every direction.}
+
+\p{Each centered summand is #{\varepsilon_j
+(T_j^U-(T_j^U)^{-1})/(2a)}. Its two sign changes cancel.
+The Laplace summand #{(T_j^U+(T_j^U)^{-1}-2\bbI)/a^2}
+is symmetric under exchanging the shifts. Their unitarity
+gives #{2\bbI - T-T^{-1}=(\bbI - T)^\dagger(\bbI - T)} for
+each shift #{T}, giving the stated sign of #{L_{a,U}}.
+Taking the linear combination gives similarity for #{K_U}.
+Multiplicativity of determinant cancels the change of field
+variables, including when the kernel is singular. Multiplying
+by the specified invariant factor gives the weight identity.
+Closure under the final inversion suffices. A fixed
+connection requires its own links #{U^b=U}.}
+}
+
+\p{Mathlib's \leanref{LinearMap.det_conj} gives invariance of
+the determinant of an endomorphism conjugated by a linear
+equivalence. The reflected-link calculation supplies that
+equivalence here.}

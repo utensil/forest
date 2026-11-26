@@ -1,0 +1,54 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{The based plaquette under total inversion}
+\date{2026-11-26}
+
+\p{On a finite periodic coordinate grid let #{U} be a
+\vocabk{connection}{fdip-006D} in a unitary representation
+on a finite-dimensional complex Hermitian fiber. Count one
+positive elementary face at each site for each ordered choice
+#{i<j} of two coordinate directions, keeping the cell labels
+at all periods. Write #{H_{ij}(x;U)} for transport around
+the steps #{+i,+j,-i,-j}, with the first step acting first.
+The real-trace sum
+##{s_{\square}(U)=\sum_{x}\sum_{i<j}\operatorname{Re}\trace H_{ij}(x;U)}
+is invariant under vertex gauges and under the total link
+inversion #{U^b_j(x)=U_j(-x-e_j)^{-1}}. Every real function
+of #{s_{\square}(U)} gives an invariant scalar factor for
+\ref{fdip-019F}.}
+
+\proof{
+\p{Put #{y=-x-e_i-e_j}, and abbreviate the positive edges
+of the face at #{y} by
+##{u=U_i(y),\quad v=U_j(y+e_i),\quad
+ w=U_i(y+e_j),\quad z=U_j(y).}
+The ordered holonomy of \ref{fdip-006F} applies the first
+transport on the right, giving #{H=z^{-1}w^{-1}vu}.
+At #{x} the corresponding #{4} positive edges for #{U^b}
+in the same order of labels are #{w^{-1},z^{-1},u^{-1},v^{-1}}.
+Consequently its holonomy is
+##{vu z^{-1}w^{-1}=(vu)H(vu)^{-1}.}
+This is a change of starting corner on the same oriented
+face. The trace is invariant under conjugation.
+For each #{i<j} the map #{x\mapsto y} is a bijection, giving
+invariance after summation even for coincident vertices of
+different labeled edges.}
+
+\p{A vertex gauge acts on a source-to-head transport by left
+multiplication at the head and inverse right multiplication at
+the source. The interior gauge factors cancel around the
+face, leaving conjugation at the base. Reversing a chosen
+orientation would replace the unitary holonomy by its inverse
+and conjugate its trace, so the real trace is also independent
+of that choice. This argument gives the claimed scalar
+factors on any inversion-stable class, in the represented
+group of the connection. A spatial cubic example of this gauge
+weight is \ref{fdip-00ND}.}
+}
+
+\p{Mathlib's \leanref{Matrix.trace_conjTranspose} identifies
+the trace of the adjoint matrix with the conjugate trace over
+the complex numbers. For unitary holonomy its adjoint is its
+inverse.}

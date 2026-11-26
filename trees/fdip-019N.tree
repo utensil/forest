@@ -1,0 +1,56 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{Transport between the two reflected forms}
+\date{2026-11-26}
+
+\p{Let the \vocabk{connection half-algebras}{fdip-019L}
+have the indicated closed site halves. On the connection
+class #{\Omega} suppose the actions of #{b(x)=-x} and the
+\vocabk{site reflection}{fdip-007M} #{\theta_s} are
+measurable involutions given by oriented link pullback.
+Let their actions preserve the probability #{\nu}. Then
+#{b^*} sends #{\mathcal A_+} onto #{\mathcal A_-} and
+##{B_-(b^*f,b^*g)=B_+(f,g)\qquad(f,g\in\mathcal A_+).}
+Both forms are Hermitian. Positivity on either domain
+therefore gives positivity on the other. The map
+#{h=\theta_s b} preserves each half and satisfies
+##{B_+(h^*f,h^*g)=B_+(f,g)\qquad(f,g\in\mathcal A_+).}
+For this same-half equality it suffices that the spatial
+reversal #{h} and #{\theta_s} act measurably on #{\Omega} and
+commute, and that #{h} preserves the probability.}
+
+\proof{
+\p{The coordinate maps #{b,\theta_s} commute on vertices
+and on every oriented edge. Pullback consequently commutes
+on configurations, including inverses on reversed edges.
+Both maps exchange the closed halves and their endpoint-wise
+edge sets. A shared edge has both endpoints on time zero or
+both on time #{M}, so it is a spatial boundary edge.
+No time step joins the two boundary slices since #{M\ge2}.
+The pullback by either map takes the sigma-algebra from one
+restriction into that of the other. Each map is its own
+inverse, giving equality and the assertion about half-algebras.
+Their product #{h} preserves the two domains.}
+
+\p{For #{f,g} in the positive algebra the integrand on the
+left in the first identity is
+#{\overline{f(b\theta_s U)}\,g(bU)}.
+Commutation gives the positive integrand evaluated at
+#{bU}. Substitution under the invariant probability gives
+the first equality. Boundedness ensures integrability.
+Substituting #{\theta_s U} in the conjugate of #{B_\pm(g,f)}
+gives #{B_\pm(f,g)}, so each form is Hermitian. Onto
+transport in the first identity transfers any supplied
+nonnegativity of the diagonal values. With #{h} replacing
+#{b}, the same calculation compares functions in the same
+positive algebra, giving the last identity.}
+}
+
+\p{For the substitution, Mathlib's
+\leanref{MeasureTheory.MeasurePreserving.integral_comp}
+equates integrals after composition with a measure-preserving
+measurable embedding. The measurable involutions here are
+measurable equivalences, and the complex values form a real
+normed vector space.}
