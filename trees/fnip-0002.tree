@@ -10,6 +10,25 @@ recording alone does not name the situation.}
 
 \p{What data send the present situation to a later one?}
 
+\texfig{\begin{tikzpicture}[x=1cm,y=1cm,font=\sffamily,
+  box/.style={draw=black,line width=0.5pt,rounded corners=2pt,align=center,execute at begin node={\hyphenpenalty=10000\exhyphenpenalty=10000},
+    font=\sffamily\small,minimum height=7mm,inner sep=2.5pt,text width=7.2cm},
+  ext/.style={draw=black,densely dotted,line width=0.4pt,rounded corners=2pt,align=center,execute at begin node={\hyphenpenalty=10000\exhyphenpenalty=10000},
+    font=\sffamily\small,text=black!60,minimum height=7mm,inner sep=2.5pt,text width=7.2cm},
+  arr/.style={->,line width=0.6pt},
+  lab/.style={font=\sffamily\footnotesize\itshape,inner sep=1.5pt,fill=white,align=center,anchor=west,text width=4.6cm}]
+\node[box] (P) at (0,6.3) {\textbf{Purpose}\\ {\footnotesize rest, tonic spiking, and bursting}};
+\node[box] (A) at (0,4.2) {\textbf{State variables and phase space}\\ {\footnotesize the coordinates of the state}};
+\node[box] (B) at (0,2.1) {\textbf{Flows, fixed points and linearization}\\ {\footnotesize the equilibrium and the periodic orbit}};
+\node[ext] (C) at (0,0) {\textbf{Part 2}\\ {\footnotesize Single-neuron dynamics}};
+\draw[arr] (P) -- (A);
+\draw[arr] (A) -- (B);
+\draw[arr] (B) -- (C);
+\node[lab] at (0.7,5.25) {which coordinates name the situation?};
+\node[lab] at (0.7,3.15) {how does a state near an equilibrium move?};
+\node[lab] at (0.7,1.05) {how does one neuron spike?};
+\end{tikzpicture}}
+
 \transclude{fnip-0003}
 \transclude{fnip-0004}
 \transclude{fnip-0005}
