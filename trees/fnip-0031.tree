@@ -1,0 +1,23 @@
+\import{fnip-macros}
+\meta{agent-authored}{true}
+\tag{fnip}
+\taxon{Example}
+\title{Smooth neuron models, and a reset rule}
+\date{2026-11-26}
+
+\p{The Morris–Lecar velocity of \ref{fnip-0005} is a smooth map
+#{\mathbb{R}^{2}\to\mathbb{R}^{2}}, because #{\tanh} and #{\cosh}
+are smooth and the factor #{\cosh((V-V_{3})/(2V_{4}))} is at least
+#{1}. The FitzHugh–Nagumo velocity of \ref{fnip-0018} is a polynomial
+map on #{\mathbb{R}^{2}}. Both are locally Lipschitz. For each initial
+state, \ref{fnip-0029} supplies one trajectory on some open interval
+about time #{0}.}
+
+\p{The leaky integrate-and-fire model adds a reset. In the scaled form
+##{\dot v=b-v,}
+the value #{v} is sent to #{0} when it reaches #{1}.
+\citet{(8.1), §8.1.1, p. 268}{izhikevich2007dynamical}
+is that rule. The differential equation is linear, and the reset is a
+separate instruction at the threshold. The trajectories of
+\ref{fnip-0005} and \ref{fnip-0018} are the solutions of those
+smooth equations.}
