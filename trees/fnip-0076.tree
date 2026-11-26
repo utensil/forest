@@ -21,22 +21,35 @@ of \citet{Table 3.1, p. 51}{ermentrout2010mathematical}, a state
    +g_{\mathrm{K}} n_{\infty}(V)(V-E_{\mathrm{K}})
    +g_{\mathrm{Ca}} m_{\infty}(V)(V-E_{\mathrm{Ca}}).}}
 
+\p{A fold of either steady current is an applied current at which
+the number of equilibria changes.}
+
 \proof{
 \p{In the Hodgkin–Huxley system the temperature factor is
-#{1}, and each variable #{x} among #{n}, #{m}, and #{h} satisfies
-the [activation equation](fnip-0071). The formulas for
+#{1}, so each variable #{x} among #{n}, #{m}, and #{h} satisfies
+the [activation equation](fnip-0071). In that definition,
 #{\beta_{n}}, #{\beta_{m}}, and #{\alpha_{h}} are positive
-multiples of exponentials, so each sum of a rate and its partner
-is positive and each time constant is positive. The derivative
-#{\dot x} therefore vanishes if and only if #{x} equals its steady
-value. Substituting those values into the voltage equation gives
-#{I_{\mathrm{app}}=F(V)}. The same values make every component of
-the velocity zero, so the state is an equilibrium.}
+multiples of exponentials, and #{\beta_{h}} is the reciprocal of
+one plus an exponential, so #{\beta_{h}} is positive.
+#{\alpha_{n}} and #{\alpha_{m}} equal the positive limits recorded
+there at #{V=-55} and #{V=-40}. At every other voltage they are
+positive multiples of #{u/(1-e^{-u})}, and that quotient is
+positive for every real #{u} other than #{0}. Each sum of a rate
+and its partner is therefore positive, and each time constant is
+positive. The derivative #{\dot x} vanishes if and only if #{x}
+equals its steady value. With those three variables at their
+steady values, the voltage equation is
+#{C\dot V=I_{\mathrm{app}}-F(V)}. Since #{C} is positive,
+#{\dot V} vanishes if and only if #{I_{\mathrm{app}}=F(V)}.
+The state is an equilibrium if and only if both conditions hold.}
 
 \p{In the Morris–Lecar equation the factor #{\phi} is positive in
 every column of that table, and \ref{fnip-0005} records that
 #{\cosh((V-V_{3})/(2V_{4}))\ge 1}, so the time constant of #{n}
 is positive. Thus #{\dot n} vanishes if and only if
-#{n=n_{\infty}(V)}. The voltage equation is then the displayed
-balance, and the converse is the same substitution.}
+#{n=n_{\infty}(V)}. With #{n} at that value, a positive
+capacitance times #{\dot V} equals #{I_{\mathrm{app}}} minus the
+three ionic currents in the display. Thus #{\dot V} vanishes if
+and only if the displayed balance holds, and the state is an
+equilibrium if and only if both vanishings hold.}
 }
