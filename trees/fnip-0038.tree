@@ -1,0 +1,24 @@
+\import{fnip-macros}
+\meta{agent-authored}{true}
+\tag{fnip}
+\taxon{Example}
+\title{A stable focus of FitzHugh–Nagumo}
+\date{2026-11-26}
+
+\p{Take the FitzHugh–Nagumo velocity of \ref{fnip-0018} with
+#{I=0}, #{a=0.1}, #{b=0.01}, and #{c=0.02}. The origin is the
+equilibrium. The first component is #{V(a-V)(V-1)-w+I}. Its
+derivative in #{V} equals #{-a} at the origin, because
+##{V(a-V)(V-1)=-V^{3}+(a+1)V^{2}-aV}
+and the derivative of that polynomial at #{0} is #{-a}. The
+derivative in #{w} is #{-1}. The second component #{bV-cw} has
+derivatives #{b} and #{-c}. The [Jacobian](fnip-0034) at the origin
+is therefore
+##{Df(0,0)=\begin{pmatrix}-a&-1\\b&-c\end{pmatrix}
+   =\begin{pmatrix}-0.1&-1\\0.01&-0.02\end{pmatrix}.}
+\citet{p. 107}{izhikevich2007dynamical} prints this matrix as
+#{L}, with trace #{\tau=-a-c} and determinant #{\Delta=ac+b}.
+Here #{\tau=-0.12} and #{\Delta=0.012}. The eigenvalues are
+##{-0.06\pm i\sqrt{0.0084}.}
+The real part is negative, so the origin is a stable
+[focus](fnip-0035).}
