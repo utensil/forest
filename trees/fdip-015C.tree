@@ -1,0 +1,54 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{The phase of a charged rotation}
+\date{2026-11-26}
+
+\p{Let #{k} be a field with #{2\ne 0} and
+#{V=\bigoplus_{i=1}^s V^{(i)}} a finite sum of finite-dimensional spaces.
+Give each summand \vocabk{gradings}{fdip-013N} #{\Gamma_i,\Gamma_i'},
+with eigenspaces #{V^{(i)}_\pm,V'^{(i)}_\pm}, respectively. Form the integers
+##{d_i=(\dim V^{(i)}_+-\dim V^{(i)}_-)
+      +(\dim V'^{(i)}_+-\dim V'^{(i)}_-).}
+For integer charges #{z_i} and a unit #{u\in k^\times}, give the
+[paired coefficient algebra](fdip-00TJ)
+#{\mathcal A(V)=\Lambda_k(V^*\oplus V)} the automorphism #{\beta_u}
+acting on #{V^{(i)}} by #{(u^{z_i})^{\Gamma_i}} and on #{(V^{(i)})^*}
+by the algebraic dual of #{(u^{z_i})^{\Gamma_i'}}, as in \ref{fdip-014K}.
+Then
+##{\mathcal I_V\circ\beta_u^{-1}=u^{-\sum_i z_i d_i}\,\mathcal I_V.}
+The functional is fixed exactly when #{u^{\sum_i z_i d_i}=1}.
+If #{K=\bigoplus_i K_i} with #{\Gamma_iK_i=-K_i\Gamma_i'},
+then #{\beta_u(\theta_K)=\theta_K}.}
+
+\proof{
+\p{Put #{A_i=(u^{z_i})^{\Gamma_i}} and #{B_i=(u^{z_i})^{\Gamma_i'}},
+and let #{A,B} be their respective direct sums. The dual of a finite direct
+sum splits into the duals of its summands. Thus the generator map is
+#{B^*\oplus A}, and its inverse on generators induces the inverse
+exterior automorphism. In bases concatenated from the summands each
+determinant of a direct sum is the product of the block determinants.
+The top-word calculation of \ref{fdip-014L} therefore gives
+##{\beta_u(\Omega_V)
+=\prod_i\bigl(\det A_i\,\det B_i\bigr)\Omega_V
+=u^{\sum_i z_i d_i}\Omega_V.}
+Indeed, within each summand \ref{fdip-014L} evaluates the two determinants
+using a basis adapted to each respective grading.}
+
+\p{The inverse automorphism preserves degree. It multiplies the coefficient
+of #{\Omega_V} by #{u^{-\sum_i z_i d_i}}, and lower degrees do not
+contribute to #{\mathcal I_V}. Since #{\mathcal I_V(\Omega_V)=1}, evaluating
+on this word gives the converse in the invariance criterion. For the empty
+family the top word is #{1} and the sum is zero.}
+
+\p{The paired element for block-diagonal #{K} is the sum of the paired
+elements for the blocks, since the off-diagonal coefficients vanish.
+On the generators for block #{i}, \ref{fdip-014K} takes its paired
+element to the one for #{A_iK_iB_i}. The stated intertwining relation
+gives #{A_iK_iB_i=K_i} by that proposition with parameter #{u^{z_i}}.
+The sum is therefore fixed.}
+}
+
+\p{Mathlib's \leanref{LinearMap.det_prodMap} gives the determinant product
+for two finite-dimensional blocks.}
