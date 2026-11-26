@@ -1,0 +1,49 @@
+\import{fnip-macros}
+\meta{agent-authored}{true}
+\tag{fnip}
+\taxon{Remark}
+\title{A fixed voltage splits the equations}
+\date{2026-11-26}
+
+\p{While #{V} is held at a constant, the state stays in that
+constant-voltage slice, and #{n}, #{m}, and #{h} each satisfy a
+linear equation of their own. The explicit solution recorded with
+the [activation equation](fnip-0071) is then the whole trajectory
+on that slice, so a clamp record determines the steady value and
+the time constant.
+\citet{pp. 20–22}{ermentrout2010mathematical} separates the
+currents and computes the conductances in this way.}
+
+\p{\citet{draft pp. 41–42}{carnevale2004neuron} says that NEURON's
+default CVODE absolute error, #{10\,\mu\mathrm{V}} for the
+membrane potential, makes a classical Hodgkin–Huxley action
+potential at #{6.3^{\circ}\mathrm{C}} comparable to a second-order
+method with fixed step #{\Delta t=25\,\mu\mathrm{s}}.
+\citet{Figure 4.18, draft pp. 47–49}{carnevale2004neuron} is a
+different comparison, near threshold: a weak current pulse and a
+pulse twice as strong. Backward Euler at that same step moves the
+latency of the weak spike about as much as a change of one percent in
+the peak sodium conductance #{0.12\,\mathrm{S}/\mathrm{cm}^{2}}.}
+
+\texfig{\begin{tikzpicture}[line cap=round,font=\small]
+  \useasboundingbox (-0.75,-0.45) rectangle (6.7,3.15);
+\draw[->] (0,0) -- (6.15,0) node[right] {$t$};
+\draw[->] (0,0) -- (0,2.9) node[above] {$x$};
+\draw (0.000,0) -- (0.000,-0.05) node[below] {$0$};
+\draw (1.900,0) -- (1.900,-0.05) node[below] {$2$};
+\draw (3.800,0) -- (3.800,-0.05) node[below] {$4$};
+\draw (5.700,0) -- (5.700,-0.05) node[below] {$6$};
+\draw (0,0.150) -- (-0.05,0.150) node[left] {$0$};
+\draw (0,2.700) -- (-0.05,2.700) node[left] {$1$};
+\draw[thick] plot coordinates {(0.000,0.960) (0.238,1.173) (0.475,1.355) (0.713,1.512) (0.950,1.646) (1.188,1.762) (1.425,1.862) (1.662,1.947) (1.900,2.020) (2.138,2.083) (2.375,2.137) (2.613,2.184) (2.850,2.224) (3.088,2.258) (3.325,2.288) (3.562,2.313) (3.800,2.335) (4.038,2.353) (4.275,2.369) (4.513,2.383) (4.750,2.395) (4.987,2.405) (5.225,2.414) (5.462,2.421) (5.700,2.428)};
+\draw[thick,dashed] plot coordinates {(0.000,0.285) (0.238,1.808) (0.475,2.344) (0.713,2.532) (0.950,2.598) (1.188,2.622) (1.425,2.630) (1.662,2.633) (1.900,2.634) (2.138,2.634) (2.375,2.634) (2.613,2.634) (2.850,2.634) (3.088,2.634) (3.325,2.634) (3.562,2.634) (3.800,2.634) (4.038,2.634) (4.275,2.634) (4.513,2.634) (4.750,2.634) (4.987,2.634) (5.225,2.634) (5.462,2.634) (5.700,2.634)};
+\draw[thick,dotted] plot coordinates {(0.000,1.670) (0.238,1.343) (0.475,1.087) (0.713,0.886) (0.950,0.729) (1.188,0.605) (1.425,0.508) (1.662,0.433) (1.900,0.373) (2.138,0.326) (2.375,0.290) (2.613,0.261) (2.850,0.239) (3.088,0.221) (3.325,0.207) (3.562,0.196) (3.800,0.188) (4.038,0.181) (4.275,0.176) (4.513,0.172) (4.750,0.169) (4.987,0.166) (5.225,0.164) (5.462,0.163) (5.700,0.162)};
+\node[anchor=south] at (2.600,2.220) {$n$};
+\node[anchor=west] at (0.780,1.950) {$m$};
+\node[anchor=south] at (3.400,0.280) {$h$};
+\end{tikzpicture}}
+
+\p{The voltage is held at #{0} mV. Each variable starts at its rest
+value in \ref{fnip-0073} and follows the explicit solution. Solid
+is #{n}, dashed is #{m}, and dotted is #{h}. The drawing follows
+Figure 1.12 on p. 24.}
