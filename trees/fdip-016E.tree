@@ -1,0 +1,60 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{One translation orbit is induced from one block}
+\date{2026-11-26}
+
+\p{Over the field and grid of the
+\vocabk{translation block}{fdip-016C}, let #{V} be a finite-dimensional
+representation of #{G_\Lambda}. For each character label #{r},
+##{\pr_r=|\Lambda|^{-1}\sum_{x\in\Lambda}\alpha_r(x)^{-1}T_x}
+is the projection to #{V_r} along the sum of the other blocks. Each
+#{b\in G} maps #{V_r} onto #{V_{br}}. In particular #{V_r} carries
+an action of #{G_{\Lambda,r}}. For one representative #{r} of each
+orbit, the group action gives an isomorphism
+##{\begin{aligned}
+k[G_\Lambda]\otimes_{k[G_{\Lambda,r}]}V_r
+ &\longrightarrow\bigoplus_{s\in Gr}V_s,\\
+g\otimes v&\longmapsto gv.
+\end{aligned}}
+The direct sum of these isomorphisms covers #{V}.}
+
+\proof{
+\p{Every multiplicative character on the translations is one of the
+#{\alpha_r}. Its value at #{e_j} has #{N_j}th power one and is a unique
+power of #{\zeta_j}. The unit steps generate #{\Lambda}. Changing
+variables in the sum gives
+#{T_y\pr_r=\alpha_r(y)\pr_r}. For #{v\in V_s} the same sum acts by
+the average of the character #{\alpha_s\alpha_r^{-1}}. This average
+is one for #{s=r} and zero otherwise. In a coordinate with unequal
+residues the geometric sum vanishes, since its ratio differs from
+one and its #{N_j}th power equals one. Summing #{\alpha_r(x)^{-1}}
+over all labels instead gives #{|\Lambda|} at #{x=0} and zero
+elsewhere by the same coordinate calculation. Thus
+#{\sum_r\pr_r=\bbI_V}, and their ranges are the indicated
+independent blocks. From #{T_x b=b T_{b^{-1}x}} follows
+#{b V_r\subseteq V_{br}}. Applying #{b^{-1}} yields equality.}
+
+\p{On #{V_r}, #{(x,b)} for #{b\in G_r} acts by
+#{\alpha_r(x)b}. More generally this rule defines the action on
+#{F(r)} in the [induced module](fdip-016C), since
+#{\alpha_r(b y)=\alpha_r(y)} there. The displayed arrow is balanced because
+#{(gh)v=g(hv)} for #{h\in G_{\Lambda,r}}. It commutes with left
+multiplication. Choose one #{b\in G} with #{br=s} for each #{s\in Gr}
+and view #{b} as #{(0,b)}. Define the inverse on #{w\in V_s} by
+#{w\mapsto b\otimes b^{-1}w}. Changing #{b} to #{bh} with
+#{h\in G_r} gives the same tensor by balancing. Its forward image
+is #{w}. Conversely every #{g\in G_\Lambda} lies in one of
+the left cosets #{bG_{\Lambda,r}} since all translations belong to
+the subgroup. Writing #{g=bh'} shows the inverse sends #{gv} to
+#{b\otimes h'v=g\otimes v}. This proves both inverse identities.}
+}
+
+\p{Mathlib's \leanref{AddChar.sum_eq_zero_of_ne_one} gives the
+vanishing character sum over a finite additive group with values
+in a domain. Its \leanref{Representation.ind} uses coinvariants
+of the diagonal subgroup action. In those coordinates
+#{g\otimes v} corresponds to the class of #{g^{-1}\otimes v}.
+Left multiplication on #{g} becomes right multiplication by an
+inverse on #{g^{-1}}.}

@@ -1,0 +1,59 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Corollary}
+\title{Irreducible modules on a translation orbit}
+\date{2026-11-26}
+
+\p{Use the grid group and field of \ref{fdip-016E}. Its irreducible
+representations are obtained by taking one label #{r} per orbit and
+the \vocabk{induced module}{fdip-016C} of #{F(r)} for each irreducible
+#{k}-representation #{F} of #{G_r}. Two entries are equivalent
+exactly when the representative and the #{G_r}-type agree. If
+#{|G|} is invertible in #{k}, a finite-dimensional representation #{V}
+of #{G_\Lambda} is a direct sum of these modules. The multiplicity
+at #{r,F} equals that of #{F} in #{V_r} as a #{G_r}-module.}
+
+\proof{
+\p{In #{k[G_\Lambda]\otimes_{k[G_{\Lambda,r}]}F(r)}, the left coset
+representatives #{b} give copies #{b\otimes F}, since the group
+algebra is the direct sum of the free right subgroup-algebra modules
+#{b\,k[G_{\Lambda,r}]}. On each such copy translation by #{x}
+acts by #{\alpha_r(b^{-1}x)=\alpha_{br}(x)}. A nonzero submodule
+is preserved by the projections of \ref{fdip-016E}, hence contains
+a nonzero vector in one copy. Transport it to the copy at #{r}.
+Irreducibility of #{F} supplies that whole copy, then transport
+supplies every other copy. Conversely an irreducible #{V} has only one
+nonzero orbit summand by \ref{fdip-016E}. A proper nonzero
+#{G_r}-submodule of #{V_r} would transport to a proper nonzero
+submodule across that orbit, by the same coset construction.
+An intertwining isomorphism preserves every translation block.
+The orbit and the representation on its chosen block therefore
+recover the original data.}
+
+\p{For the direct sum assertion, average a linear projection onto
+any #{G_r}-invariant subspace of #{V_r} over its conjugates by
+#{G_r}. Its order divides #{|G|} and is invertible in #{k}.
+The average fixes the subspace pointwise, has image in it and
+commutes with #{G_r}. Its kernel is an invariant complement.
+Induction on dimension splits #{V_r} into irreducibles, and
+tensoring distributes over their direct sum. An equivariant map
+between irreducibles is zero or an isomorphism by its kernel and
+image. Hence #{\operatorname{End}_{G_r}(F)} is a division algebra,
+and the dimension of #{\operatorname{Hom}_{G_r}(F,V_r)} as a
+right space over it, acting by precomposition, counts the copies.
+This argument also underlies the multiplicities in \ref{fdip-013S}.}
+
+\p{On the fields of \ref{fdip-016D},
+every block has dimension #{\dim_k F} for the supplied fiber #{F}.
+One orbit thus contributes #{|Gr|\dim_k F} to the dimension. Summing
+over orbits gives #{|\Lambda|\dim_k F}.}
+}
+
+\p{Serre treats the complex representations of a finite semidirect
+product with abelian normal subgroup in
+\citet{§8.2, Proposition 25, pp. 62-63}{serre1977linear}.
+The character projections above use only the stated roots and
+invertibility in #{k}. Mathlib's
+\leanref{MonoidAlgebra.Submodule.exists_isCompl} gives the invariant
+complement for a group algebra in the nondividing characteristic.}

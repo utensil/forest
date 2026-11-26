@@ -1,0 +1,47 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{Graded dimensions of the generalized kernel}
+\date{2026-11-26}
+
+\p{For the \vocabk{cyclic grading}{fdip-016I}, the projections onto
+the degree spaces along the sum of the others are
+##{\pr_\nu=\ell^{-1}\sum_{j=0}^{\ell-1}\zeta^{-j\nu}g^j.}
+Let #{V} be finite dimensional, #{d=\dim_k V}, and let
+#{A:V\to V} be a #{k}-linear map satisfying #{gA=\zeta A g}. The generalized kernel
+#{\ker A^d} is stable under #{g}. For all degrees #{\nu,\mu},
+##{\begin{aligned}
+\dim_k V_\nu-\dim_k V_\mu
+ &=\dim_k(V_\nu\cap\ker A^d)\\
+ &\quad-\dim_k(V_\mu\cap\ker A^d).
+\end{aligned}}
+These are integer differences. At #{\ell=2} this is the
+two-degree index of \ref{fdip-013P}.}
+
+\proof{
+\p{Use the finite character sum in \ref{fdip-016E} for the cyclic
+group of order #{\ell}, acting by powers of #{g}. Its character
+at exponent #{\nu} takes the generating step to #{\zeta^\nu},
+so the projections are precisely the displayed sums. This remains
+valid at #{\ell=1}, with its one projection #{\bbI_V}. Any
+#{g}-stable subspace is preserved by these projections.}
+
+\p{The identity #{gA^j=\zeta^j A^j g} makes both the kernel and
+image of each power of #{A} stable under #{g}. Write
+#{U=\im A^d}. Images of consecutive powers form a decreasing chain.
+Each strict decrease lowers the dimension, and equality persists
+under #{A}. Hence #{A} maps #{U} onto itself and is bijective there.
+Its #{d}th power is therefore injective on #{U}. Rank-nullity and
+#{U\cap\ker A^d=0} give #{V=\ker A^d\oplus U}. On #{U},
+#{A} sends degree #{\nu} into degree #{\nu+1}. Its inverse sends
+degree #{\nu+1} into degree #{\nu}, by the same commutation
+identity restricted to #{U}. Thus the degrees of #{U} all have
+the same dimension. Projecting the direct sum to each degree and
+subtracting cancels those equal contributions.}
+}
+
+\p{For an Artinian and Noetherian module, Mathlib's
+\leanref{LinearMap.eventually_isCompl_ker_pow_range_pow} gives
+complementary kernel and image for sufficiently large powers.
+The equal dimensions here use the cyclic degree shift on the image.}

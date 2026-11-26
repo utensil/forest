@@ -1,0 +1,67 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{Translation blocks for a symmetric connection}
+\date{2026-11-26}
+
+\p{On the complex field space with ordinary translations #{T_x},
+let #{D_U} be the [centered operator](fdip-009O) for a unitary
+connection #{U}. It preserves every
+\vocabk{translation block}{fdip-016C} precisely when it commutes with
+all #{T_x}. Suppose a group of coordinate changes acts on fields by invertible
+complex-linear maps #{R_b}, including its supplied lifts on spin and
+fiber. Assume
+#{R_bR_c=R_{bc}}, #{R_b T_x R_b^{-1}=T_{bx}}, and
+#{R_b D_U R_b^{-1}=D_{bU}} for the transported connections.
+An element with #{bU=U} commutes with #{D_U} through #{R_b}.}
+
+\p{More generally, suppose vertex gauge maps #{\mathcal G_b} identify #{bU}
+with #{U}, so that #{\mathcal G_b D_{bU} \mathcal G_b^{-1}=D_U}. The corrected maps
+#{\mathcal G_bR_b} commute with #{D_U}. They define a representation of
+the coordinate group precisely when
+##{\mathcal G_{bc}=\mathcal G_b R_b \mathcal G_c R_b^{-1}\quad\text{for all }b,c.}
+For this representation to extend the given translations to the
+semidirect product it must also satisfy
+#{(\mathcal G_bR_b)T_x(\mathcal G_bR_b)^{-1}=T_{bx}} for all #{b,x}.}
+
+\proof{
+\p{Commuting with every translation gives commutation with each
+finite projection in \ref{fdip-016E}, hence preservation of its
+range. Conversely, the translations act by scalars on each block.
+Preservation of the blocks gives commutation there, hence on their
+direct sum. At trivial links the ordinary translations commute with
+every centered difference, since the coordinate shifts commute.}
+
+\p{The field covariance at a [vertex gauge](fdip-009O) is
+\ref{fdip-009P}. Composing the two displayed covariance identities
+gives the commutation of #{\mathcal G_bR_b} with #{D_U}. Multiplying
+#{(\mathcal G_bR_b)(\mathcal G_cR_c)} and using #{R_bR_c=R_{bc}} gives the stated
+condition for equality with #{\mathcal G_{bc}R_{bc}}. Invertibility gives
+the identity element as well. The last translation relation is the
+multiplication rule of the semidirect product.}
+
+\p{For a circle of period #{N\ge3}, take a complex line as fiber.
+Let #{P} be exterior parity on the one-axis spin module. It fixes
+the scalar basis vector and negates the degree-one vector. The
+represented generator exchanges them, so #{P} anticommutes with it.
+Put #{(Rf)(y)=P f(-y)}. Site inversion exchanges the forward and
+backward shifts, negating their centered difference. The two signs
+give #{R D_1 R^{-1}=D_1} at trivial links, and #{R^2=\bbI}.}
+
+\p{Choose a primitive complex #{N}th root #{\zeta}. Write #{M_u}
+for multiplication by a scalar field #{u}, set #{h(y)=\zeta^y}
+and #{H=M_h}. The gauge transform #{U} of the trivial connection by
+#{h} stores the positive link #{h(y+1)h(y)^{-1}=\zeta}.
+Its forward pullback uses #{\zeta^{-1}}, and gauge covariance gives
+#{D_U=H D_1 H^{-1}}. Inversion sends the stored link to
+#{\zeta^{-1}}. The gauge #{h^2} sends this back to #{\zeta}, since
+#{h(y+1)^2/h(y)^2=\zeta^2}. The corrected reflection is
+#{R'=HRH^{-1}=M_{h^2}R}, as #{h(-y)=h(y)^{-1}}.
+Thus #{R'} commutes with #{D_U} and satisfies #{(R')^2=\bbI}, giving
+the required group law. Yet #{R T_x R^{-1}=T_{-x}}, so
+##{(R' T_x (R')^{-1}f)(y)
+  =\frac{h(y)^2}{h(y-x)^2}f(y-x)=\zeta^{2x}f(y-x).}
+At #{x=1} the factor differs from one because #{N\ge3}.
+This corrected action fails the translation relation.}
+}
