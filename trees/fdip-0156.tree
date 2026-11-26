@@ -1,0 +1,43 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{Eigenvalue signs and the index}
+\date{2026-11-26}
+
+\p{Let #{U} and #{U'} be unitary connections on the same grid with the same
+#{S}, #{\Gamma_S}, #{F} and #{a}. Order the eigenvalues of #{\Gamma K_U}
+with multiplicity as #{\lambda_1(U)\le\cdots\le\lambda_N(U)}, with
+#{N=\dim\mathcal H}. If both connections are regular, then
+#{\operatorname{ind}(U')-\operatorname{ind}(U)} is the number of indices
+#{i} with #{\lambda_i(U')<0\le\lambda_i(U)} minus the number with
+#{\lambda_i(U)<0\le\lambda_i(U')}. Put #{s(U)=\min_i|\lambda_i(U)|}.
+If #{U} is regular and #{\|\Gamma K_{U'}-\Gamma K_U\|<s(U)}, then #{U'}
+is regular and #{\operatorname{ind}(U')=\operatorname{ind}(U)}.}
+
+\p{Let #{U^{(0)},\ldots,U^{(L)}} be a finite chain on these same data with
+#{U^{(0)}} regular. If #{\|\Gamma K_{U^{(l+1)}}-\Gamma K_{U^{(l)}}\|<s(U^{(l)})}
+for every #{0\le l<L}, all its connections are regular and have the same index.}
+
+\proof{
+\p{By \ref{fdip-0155}, the index difference equals the change in the
+number of negative eigenvalues. Cancel the indices negative at both endpoints.
+The two remaining sets give the stated difference.}
+
+\p{Put #{A=\Gamma K_U} and #{B=\Gamma K_{U'}}. Both are Hermitian.
+On the positive spectral subspace of #{A}, the spectral decomposition gives
+##{\langle x,Bx\rangle\ge\bigl(s(U)-\|B-A\|\bigr)\|x\|^2.}
+On its negative spectral subspace the same bound holds for
+#{-\langle x,Bx\rangle}. Under the strict norm bound the first subspace
+meets the nonpositive spectral subspace of #{B} only at zero. Its
+dimension is therefore at most the positive count of #{B}. Likewise
+the negative count of #{B} is at least that of #{A}. The two lower
+bounds sum to #{N} because #{A} is invertible. Hence both counts agree
+and #{B} has no zero eigenvalues. Apply the count formula again.
+Induction from the regular first connection gives the chain assertion,
+including a chain of length zero.}
+}
+
+\p{For the spectral decomposition, Mathlib's
+\leanref{LinearMap.IsSymmetric.eigenvectorBasis} supplies an orthonormal
+eigenbasis of a finite-dimensional Hermitian operator.}

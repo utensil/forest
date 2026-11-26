@@ -1,0 +1,26 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{Sections have a constant flux}
+\date{2026-11-26}
+
+\p{Let #{n\ge 3} and #{i<j}. For a site #{y}, let #{T_{ij}(y)} be the sum of the plaquettes
+#{(x;i,j)} with #{x_k=y_k} for every #{k\notin\{i,j\}}, a
+\vocabk{closed plaquette surface}{fdip-015V}. Suppose that every plaquette of the grid is
+plain with angle in #{(-\tfrac{\pi}{3},\tfrac{\pi}{3})}. Then #{\operatorname{fl}(T_{ij}(y))} is an integer that
+does not depend on #{y}.}
+
+\proof{
+\p{The edges of a section cancel in pairs by periodicity, so
+\ref{fdip-015X} gives its integrality. Fix #{k\notin\{i,j\}}.
+Sum the cubes in directions #{(i,j,k)} based at the sites of
+#{T_{ij}(y)}, with the product orientation in that order. Their top
+and bottom faces contribute #{T_{ij}(y+e_k)-T_{ij}(y)}. Each lateral
+face also occurs in the adjacent cube with the opposite sign, including
+across the periodic seams in #{i} and #{j}. Hence only the two section
+terms remain in the boundary. The bound on the 6 angles in \ref{fdip-015X}
+gives zero flux on the boundary of each individual cube. Adding these
+equalities gives equal fluxes on adjacent sections. Finitely many steps
+in the transverse directions join any two sections.}
+}
