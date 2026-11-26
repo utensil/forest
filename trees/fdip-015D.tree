@@ -1,0 +1,32 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Corollary}
+\title{The linear condition on the charges}
+\date{2026-11-26}
+
+\p{In \ref{fdip-015C}, take complex Hilbert spaces #{V^{(i)}} and
+\vocabk{Ginsparg–Wilson operators}{fdip-0148} #{D_i} with their original
+gradings #{\Gamma_i} and modified gradings #{\Gamma_i'}. Set
+#{K=\bigoplus_iD_i}. Then
+##{\sum_i z_i d_i=2\sum_i z_i\,\sdim\ker D_i.}
+A unit #{u} of modulus one fixes #{\mathcal I_V} exactly when
+#{u^{2\sum_i z_i\,\sdim\ker D_i}=1}. For #{\ell\ge 1}, every
+#{\ell}-th root of unity fixes the functional exactly when
+#{\ell} divides #{2\sum_i z_i\,\sdim\ker D_i}.}
+
+\proof{
+\p{By \ref{fdip-014L}, each complex block has
+#{d_i=2\,\sdim\ker D_i}. Multiply these equalities by #{z_i} and sum.
+The fixed-unit criterion now follows from \ref{fdip-015C}. Write #{h}
+for this integer exponent. If #{h=\ell b} with #{b\in\mathbb Z}, then
+#{u^h=(u^\ell)^b=1} for every #{\ell}-th root, including when #{h=0}.
+Conversely #{\zeta=\ue^{\frac{2\pi\ui}{\ell}}} has order #{\ell}, since
+#{\zeta^r=1} for an integer #{r} exactly when #{r/\ell} is an integer.
+If every #{\ell}-th root fixes the functional, then #{\zeta^h=1},
+giving the stated divisibility for either sign of #{h}.}
+}
+
+\p{The root and its integer-power criterion correspond to Mathlib's
+\leanref{Complex.isPrimitiveRoot_exp} and
+\leanref{IsPrimitiveRoot.zpow_eq_one_iff_dvd}.}
