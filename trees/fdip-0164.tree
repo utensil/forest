@@ -1,0 +1,33 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Definition}
+\title{Period-preserving signed permutations}
+\date{2026-11-26}
+
+\p{Let #{n\ge1} and let #{N_1,\ldots,N_n} be positive integers.
+For each period #{N} occurring in this list, put
+#{I_N=\{j:N_j=N\}}. A \newvocab{period-preserving signed permutation}
+consists of a permutation #{\pi} of the axes with
+#{N_{\pi(j)}=N_j} and signs #{s_j\in\{1,-1\}}. It sends the
+positive direction labeled #{j} to direction #{\pi(j)} with sign
+#{s_j}. Composition of these changes forms a group #{B_\Lambda}.
+On the sites #{\Lambda=\prod_j\mathbb Z/N_j\mathbb Z} it acts by
+#{(bx)_{\pi(j)}=s_j x_j}. Signs belong to the labeled directions
+even when their two images are equal as sites. On each #{I_N} one
+can independently permute all axes and choose a sign for each.
+Thus #{B_\Lambda} is the product over #{N} of the groups
+#{\{1,-1\}^{I_N}\rtimes\operatorname{Sym}(I_N)}, where permutations
+act by permuting the sign coordinates.}
+
+\p{Write #{r_j} for residues modulo #{N_j}. The associated
+multiplicative character #{\alpha_r} of the translations sends the
+unit step #{e_j} to #{\ue^{2\pi\ui r_j/N_j}}. The normalized Fourier
+vector of \ref{fdip-000S} is #{\chi_r=|\Lambda|^{-1/2}\alpha_r}.
+The action on characters is
+##{(b\cdot\alpha_r)(x)=\alpha_r(b^{-1}x)=\alpha_{b\cdot r}(x),
+\qquad (b\cdot r)_{\pi(j)}=s_jr_j.}
+The \newvocab{orbit of a momentum
+label} #{r} is the set #{B_\Lambda\cdot r} of its images. Its
+\newvocab{stabilizer} is the subgroup
+#{B_{\Lambda,r}=\{b\in B_\Lambda:b\cdot r=r\}}.}

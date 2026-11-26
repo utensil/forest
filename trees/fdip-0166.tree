@@ -1,0 +1,39 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{Symmetries normalizing translations}
+\date{2026-11-26}
+
+\p{Let #{n\ge1} and #{N_j\ge3} for every #{j}. Join two sites of
+the [periodic grid](fdip-000R) #{\Lambda=\prod_j\mathbb Z/N_j\mathbb Z}
+by an undirected edge when their
+difference is #{e_j} or #{-e_j} for some #{j}. In the graph
+automorphism group the \vocabk{normalizer}{fgap-000F} of the translations
+is #{\Lambda\rtimes B_\Lambda}, with the action of the
+\vocabk{period-preserving signed permutations}{fdip-0164}.
+Each of its elements has a unique expression #{x\mapsto a+bx},
+with #{a\in\Lambda} and #{b\in B_\Lambda}. Its subgroup fixing zero
+is #{B_\Lambda}.}
+
+\proof{
+\p{Write #{\tau_y(x)=x+y}. If the graph automorphism #{g}
+normalizes the translations, compose it with the translation by
+#{-g(0)} to obtain a normalizing automorphism #{b} fixing zero.
+For each #{y} the conjugate #{b\tau_y b^{-1}} is a translation.
+Evaluating at zero identifies it as #{\tau_{b(y)}}. Evaluating
+#{b\tau_y=\tau_{b(y)}b} at #{x} now gives
+#{b(x+y)=b(x)+b(y)}.}
+
+\p{The neighbors of zero are the #{2n} distinct sites #{\pm e_j}.
+The additive bijection #{b} permutes them, carries opposite sites
+to opposite sites and preserves the order #{N_j} of #{e_j}. Thus
+#{b(e_j)=s_j e_{\pi(j)}} with #{N_{\pi(j)}=N_j}. These images
+determine #{b} since the unit steps generate #{\Lambda}, and their
+distinct signs and axes determine the signed permutation uniquely.
+Conversely every such signed permutation preserves adjacency and
+conjugates #{\tau_y} to #{\tau_{b(y)}}. Translations also preserve
+adjacency. In the resulting expression #{x\mapsto a+bx} the value
+at zero is #{a}; after removing it the values on the unit steps
+determine #{b}. Composition gives the stated semidirect product.}
+}
