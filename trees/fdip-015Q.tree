@@ -1,0 +1,53 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{Chiralities are integers and cancel}
+\date{2026-11-26}
+
+\p{Let #{\Sigma} be a \vocabk{closed surface}{fdip-015O} with every triangle regular, on a grid of any
+dimension #{n\ge 2}. Let the Hermitian symbol act on a finite-dimensional complex Hilbert space.
+At every vertex of #{\Sigma} suppose it is invertible with the same number #{q\ge 1}
+of negative eigenvalues. The triangle products and fluxes are independent of the chosen orthonormal bases. Then
+#{\operatorname{chir}(\Sigma)} is an integer, and #{\operatorname{chir}(-\Sigma)=-\operatorname{chir}(\Sigma)}.
+Now let #{n\ge 3}, and let #{\mathcal Z=\sum_\sigma c_\sigma\sigma} be a combination of oriented
+three-dimensional simplices of the grid with integer coefficients and zero boundary. Let #{R_0} be the
+set of vertices at which #{\mathcal B} is not invertible, let #{\mathcal Y} be the sum of the terms of
+#{\mathcal Z} whose simplex has a vertex in #{R_0}, and put #{\mathcal W=\mathcal Z-\mathcal Y}.
+Suppose that every triangle of the boundary #{\partial\sigma} of every simplex of #{\mathcal W} is
+regular, with #{q} negative eigenvalues at its vertices. Then
+##{\operatorname{chir}(\partial\mathcal Y)=-\sum_{\sigma\in\mathcal W}c_\sigma\operatorname{chir}(\partial\sigma),}
+each term being an integer. In particular, if the boundary of every simplex of #{\mathcal W} has chirality #{0},
+then #{\operatorname{chir}(\partial\mathcal Y)=0}.}
+
+\proof{
+\p{Write #{d_{vw}=\det(V_v^\dagger V_w)} on oriented edges. Changing the
+two orthonormal bases by unitaries #{A_v,A_w} multiplies #{d_{vw}} by
+#{(\det A_v)^{-1}\det A_w}. These factors cancel around a triangle, so
+#{z} and its principal argument are unchanged. On a regular triangle
+each edge determinant is nonzero. Divide each by its absolute value to
+obtain an edge unit. Reversing the edge conjugates its determinant and
+inverts the unit. The product of the three units on #{t} is
+#{\ue^{\ui\operatorname{flux}(t)}}.}
+
+\p{Raise each triangle product of units to its signed coefficient #{c_t}
+and multiply. The exponent of each oriented edge is its coefficient in
+#{\partial\Sigma}, hence zero. Thus #{\sum_t c_t\operatorname{flux}(t)}
+is an integral multiple of #{2\pi}. Reversal conjugates the triangle
+product, and its principal argument changes sign because the cut is
+excluded. This gives integrality and the reversal formula.}
+
+\p{Every edge in the boundary of a simplex boundary occurs twice with
+opposite signs. Hence each #{\partial\sigma} is closed. On the simplices
+of #{\mathcal W} the regularity and rank hypotheses give an integer
+on each such boundary. Since #{\partial\mathcal Z=0},
+#{\partial\mathcal Y=-\partial\mathcal W} coefficient by coefficient.
+Every triangle surviving on either side occurs in a boundary from
+#{\mathcal W}, so it has a defined flux. Summing its angle with
+the induced coefficients gives the displayed equality by linearity,
+and a sum of zero terms vanishes.}
+}
+
+\p{Mathlib's \leanref{Matrix.det_conjTranspose} gives the reversed
+edge determinant. Its \leanref{Complex.exp_eq_one_iff} gives the
+integer periods of the complex exponential.}
