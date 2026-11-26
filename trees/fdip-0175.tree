@@ -1,0 +1,55 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{Transport of a stabilizer representation}
+\date{2026-11-26}
+
+\p{Let #{\rho_r,\rho_{r'}} be unitary representations of
+stabilizing groups #{G_r,G_{r'}} on complex Hermitian spaces
+#{V_r,V_{r'}}. Suppose #{\phi:G_r\to G_{r'}} is a group
+isomorphism and #{u:V_r\to V_{r'}} a unitary or antiunitary
+bijection such that
+##{u\rho_r(g)u^{-1}=\rho_{r'}(\phi(g))\quad(g\in G_r).}
+For unitary #{u} the target representation is equivalent to
+#{\rho_r\circ\phi^{-1}}. For antiunitary #{u} it is equivalent
+to the conjugate of that representation.}
+
+\p{Use a \vocabk{choice of cyclic generators}{fdip-0173}
+#{a_r,a_{r'}} of order #{\ell}. For the degrees it suffices that
+##{u\rho_r(a_r)u^{-1}=\rho_{r'}(a_{r'})^d}
+with #{d} invertible modulo #{\ell}. This holds in particular
+when #{\phi(a_r)=a_{r'}^d}.
+Write #{\sigma=1} for a unitary and #{\sigma=-1} for an
+antiunitary. Then #{u} maps degree #{\nu} bijectively onto
+degree #{\nu'} with
+##{d\nu'=\sigma\nu\pmod\ell.}
+In particular, for #{\ell>1} the new degree is
+#{d^{-1}\sigma\nu} modulo #{\ell}.}
+
+\proof{
+\p{For #{g'\in G_{r'}}, insert #{g=\phi^{-1}(g')} in the
+intertwining relation and apply it to a vector. When #{u} is
+linear this already gives the equivalence. In the conjugate
+space #{\overline{V_r}}, write #{\bar v} for the copy of #{v}
+and set #{z\bar v=\overline{\bar z v}}. The conjugate action
+sends #{\bar v} to #{\overline{\rho_r(g)v}}. For antiunitary
+#{u} the map #{\bar v\mapsto u(v)} is a complex-linear
+isometry onto #{V_{r'}}. The same relation makes it an
+intertwiner.}
+
+\p{If #{v} has multiplier #{\zeta^\nu}, then
+#{\rho_{r'}(a_{r'})^d u(v)=\zeta^{\sigma\nu}u(v)}.
+Indeed #{u} preserves or conjugates the scalar, and
+#{\bar\zeta=\zeta^{-1}}. The cyclic projections of
+\ref{fdip-016K} split the target into degrees. On degree #{j}
+the power on the left acts by #{\zeta^{dj}}. Primitivity and
+invertibility of #{d} select exactly the stated residue.
+Applying the inverse intertwiner gives surjectivity onto that
+degree. At order one both sides have only degree zero.}
+}
+
+\p{Mathlib's \<html:span>[class]{lean-ref}{[\code{LinearIsometryEquiv.map_smulₛₗ}](https://leanprover-community.github.io/mathlib4_docs/find/#doc/LinearIsometryEquiv.map_smul\%25E2\%2582\%259B\%25E2\%2582\%2597)}
+expresses scalar transport by the scalar homomorphism of a
+semilinear isometric equivalence. Here that homomorphism is
+identity or complex conjugation.}
