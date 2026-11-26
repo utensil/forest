@@ -1,0 +1,33 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{Moving a label in its orbit}
+\date{2026-11-26}
+
+\p{Let a group #{G} act on a set #{X}, let #{r\in X}, and write
+#{G_r=\{g:gr=r\}} for its stabilizer. The map #{gG_r\mapsto gr}
+is a bijection from the left cosets of #{G_r} onto the orbit #{Gr}.
+At every point #{br} of this orbit, #{G_{br}=bG_rb^{-1}}.
+If #{G} is finite, then
+##{|Gr|\,|G_r|=|G|.}
+For the \vocabk{orbit of a momentum label}{fdip-0164} these formulas
+use #{G=B_\Lambda} and #{G_r=B_{\Lambda,r}}.}
+
+\proof{
+\p{Two elements #{g,h} have the same image of #{r} precisely when
+#{h^{-1}g} fixes #{r}. That condition is equivalent to
+#{gG_r=hG_r}. Hence the map on cosets is well defined and
+injective, and every point in the orbit is an image. Each left
+coset has cardinality #{|G_r|} by left multiplication, yielding
+the count for finite #{G}. Finally #{gbr=br} holds precisely when
+#{b^{-1}gb} fixes #{r}; taking all such #{g} gives the conjugacy
+formula.}
+}
+
+\p{Mathlib's \leanref{MulAction.orbitEquivQuotientStabilizer}
+gives the inverse bijection, from the orbit to the cosets.
+Its finite cardinality formula is
+\leanref{MulAction.card_orbit_mul_card_stabilizer_eq_card_group}.
+Conjugacy of the two fixing subgroups is
+\leanref{MulAction.stabilizer_smul_eq_stabilizer_map_conj}.}
