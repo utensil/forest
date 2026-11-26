@@ -1,0 +1,52 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Lemma}
+\title{Ordered products of negative Clifford generators}
+\date{2026-11-26}
+
+\p{Let #{n\ge1}. In the real unital associative algebra presented by
+#{d_1,\ldots,d_n} with #{d_j^2=-1} and
+#{d_i d_j=-d_j d_i} for #{i\ne j}, the ordered products on
+subsets of the axes, including #{1}, form a basis. The even and odd lengths give a grading by parity.
+A nonzero product of vectors has the parity of its number of
+factors.
+On the real span of the generators use the inner product for
+which they are orthonormal. For a product #{a} of #{p} unit
+vectors the action
+##{v\longmapsto(-1)^p a v a^{-1}}
+is a composition of #{p} orthogonal reflections.}
+
+\proof{
+\p{Interchange unequal neighboring indices and remove repeated
+pairs using the relations. This gives spanning. For independence,
+let #{d_j} act on the real exterior algebra of #{\mathbb R^n} by
+wedging on the left with the #{j}th unit vector minus contracting
+with that vector. On an ordered exterior basis element with
+index set #{I} this toggles #{j} with sign
+#{(-1)^{|\{i\in I:i<j\}|}} when inserting and the opposite sign
+when deleting. Toggling twice gives minus the identity. For two
+distinct indices, toggling the smaller changes the insertion or
+deletion sign at the larger while the reverse change leaves the
+smaller sign alone. Thus these operators satisfy the defining
+relations. The ordered products on distinct subsets take the
+exterior unit to distinct exterior basis vectors. This proves
+independence. Multiplication preserves the sum of lengths modulo
+two. The even and odd spans have zero intersection, so a nonzero
+homogeneous product has a unique parity.}
+
+\p{For unit #{w} in the real vector span the relations give
+#{w^2=-1} and #{wv+vw=-2\langle w,v\rangle}.
+Thus #{-w v w^{-1}=v-2\langle w,v\rangle w}, reflection across
+the hyperplane perpendicular to #{w}. Conjugations compose and
+their scalar signs multiply, giving the stated action.}
+}
+
+\p{The exterior-unit calculation also appears for general
+bilinear forms in \ref{fdip-00QB}. For an orthogonal basis, TauCeti's
+\leanref/tauceti{CliffordAlgebra.basis_eq_prod_map_sort}
+identifies the element indexed by a finite subset with its
+increasing product. With quadratic form #{v\mapsto-\langle v,v\rangle},
+\<html:span>[class]{lean-ref}{[\code{CliffordAlgebra.pinToOrthogonal_ι_apply}](https://taucetiproject.github.io/TauCeti/docs/find/#doc/CliffordAlgebra.pinToOrthogonal_\%25CE\%25B9_apply)}
+gives the reflection from a vector of quadratic value #{-1}.
+It acts on vectors by signed conjugation.}
