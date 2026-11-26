@@ -8,24 +8,12 @@
 \p{Take the FitzHugh–Nagumo velocity of \ref{fnip-0018} with #{I=0},
 #{b=0.01}, and #{a=c=0.1}. An equilibrium satisfies
 #{w=(b/c)V=V/10} and #{V(a-V)(V-1)=w}. One solution is the origin.
-The others solve #{V^{2}-1.1V+0.2=0}, so
-##{V=\frac{1.1\pm\sqrt{0.41}}{2},}
-approximately #{0.2298} and #{0.8702}, with recovery coordinates
-approximately #{0.0230} and #{0.0870}. The [Jacobian](fnip-0034) is
-##{Df(V,w)=\begin{pmatrix}-3V^{2}+2.2V-0.1&-1\\0.01&-0.1\end{pmatrix}.}
-At the origin this matrix is
-##{\begin{pmatrix}-0.1&-1\\0.01&-0.1\end{pmatrix},}
-with trace #{-0.2}, determinant #{0.02}, and eigenvalues
-##{-0.1\pm 0.1\,i.}
-The origin is a stable [focus](fnip-0035). At
-#{(0.2298,0.0230)} the matrix is approximately
-##{\begin{pmatrix}0.24717&-1\\0.01&-0.1\end{pmatrix},}
-with eigenvalues approximately #{-0.0683} and #{0.2155}. The
-eigenvalues are real and of opposite sign, so the equilibrium is a
-[saddle](fnip-0035). At #{(0.8702,0.0870)} the matrix is approximately
-##{\begin{pmatrix}-0.45717&-1\\0.01&-0.1\end{pmatrix},}
-with eigenvalues approximately #{-0.4265} and #{-0.1306}. Both are
-negative, so the equilibrium is a stable [node](fnip-0035).}
+Any further equilibrium has nonzero voltage and satisfies
+##{V^{2}-(a+1)V+\bigl(a+\tfrac{b}{c}\bigr)=0.}
+For these parameter values that quadratic has positive discriminant,
+so there are two further equilibria. The origin is a stable
+[focus](fnip-0035). One of the other two is a [saddle](fnip-0035),
+and the remaining one is a stable [node](fnip-0035).}
 
 \p{Figure 4.22 of \citet{p. 109}{izhikevich2007dynamical} uses these
 parameters. \citet{§4.3.1, p. 108}{izhikevich2007dynamical} records two
