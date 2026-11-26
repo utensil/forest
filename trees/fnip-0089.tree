@@ -1,0 +1,37 @@
+\import{fnip-macros}
+\meta{agent-authored}{true}
+\tag{fnip}
+\taxon{Example}
+\title{Two folds in the SNLC column}
+\date{2026-11-27}
+
+\p{In the SNLC column of \ref{fnip-0086}, the equilibrium voltage
+drawn against the applied current has two folds. Between them the
+lower equilibrium is stable and the other two are not.
+\citet{p. 59}{ermentrout2010mathematical} states that fact. The fold met
+as the current increases is the one Figure 3.6a on p. 60 labels
+#{\mathrm{SN}_{2}}.}
+
+\texfig{\begin{tikzpicture}[line cap=round,font=\small]
+  \useasboundingbox (-1.15,-0.55) rectangle (7.9,3.55);
+  \draw[->] (0,0) -- (6.7,0) node[right] {$I_{\mathrm{app}}$};
+  \draw[->] (0,0) -- (0,3.25) node[above] {$V$};
+  \draw (0,0) -- (0,-0.06) node[below] {$-20$};
+  \draw (1.600,0) -- (1.600,-0.06) node[below] {$0$};
+  \draw (3.200,0) -- (3.200,-0.06) node[below] {$20$};
+  \draw (4.800,0) -- (4.800,-0.06) node[below] {$40$};
+  \draw (6.400,0) -- (6.400,-0.06) node[below] {$60$};
+  \draw (0,0.400) -- (-0.06,0.400) node[left] {$-60$};
+  \draw (0,1.200) -- (-0.06,1.200) node[left] {$-40$};
+  \draw (0,2.000) -- (-0.06,2.000) node[left] {$-20$};
+  \draw (0,2.800) -- (-0.06,2.800) node[left] {$0$};
+  \draw[thick] plot coordinates {(-0.028,0.000) (0.223,0.064) (0.472,0.128) (0.721,0.192) (0.969,0.256) (1.215,0.320) (1.459,0.384) (1.702,0.448) (1.942,0.512) (2.179,0.576) (2.412,0.640) (2.642,0.704) (2.868,0.768) (3.087,0.832) (3.301,0.896) (3.507,0.960) (3.705,1.024) (3.893,1.088) (4.070,1.152) (4.233,1.216) (4.380,1.280) (4.510,1.344) (4.620,1.408) (4.706,1.472) (4.765,1.536) (4.795,1.600) (4.797,1.624)};
+  \draw[thick,dashed] plot coordinates {(4.797,1.624) (4.787,1.672) (4.755,1.720) (4.701,1.768) (4.622,1.816) (4.517,1.864) (4.385,1.912) (4.226,1.960) (4.039,2.008) (3.823,2.056) (3.581,2.104) (3.315,2.152) (3.027,2.200) (2.721,2.248) (2.406,2.296) (2.087,2.344) (1.776,2.392) (1.483,2.440) (1.223,2.488) (1.012,2.536) (0.866,2.584) (0.805,2.632) (0.804,2.638)};
+  \draw[thick,dashed] plot coordinates {(0.804,2.638) (0.810,2.654) (0.829,2.670) (0.861,2.686) (0.906,2.702) (0.967,2.718) (1.043,2.734) (1.135,2.750) (1.244,2.766) (1.371,2.782) (1.515,2.798) (1.679,2.814) (1.861,2.830) (2.064,2.846) (2.286,2.862) (2.530,2.878) (2.795,2.894) (3.081,2.910) (3.389,2.926) (3.720,2.942) (4.072,2.958) (4.448,2.974) (4.846,2.990) (5.267,3.006) (5.710,3.022) (6.176,3.038) (6.400,3.045)};
+  \fill (0.804,2.638) circle[radius=1.15pt] node[above left=1pt] {$\mathrm{SN}_{1}$};
+  \fill (4.797,1.624) circle[radius=1.15pt] node[right=2pt] {$\mathrm{SN}_{2}$};
+\end{tikzpicture}}
+
+\p{The solid arc is stable and the dashed arcs are unstable. Figure
+3.6a on p. 60 also marks a Hopf point on the upper branch. The
+drawing here is the equilibrium voltage through the two folds.}
