@@ -1,0 +1,40 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{A margin from the range of the symbol}
+\date{2026-11-26}
+
+\p{On the real \vocabk{simplicial momentum grid}{fdip-013X} put
+#{p_i=2\pi r_i/N_i}. For a finite set of frequencies #{\alpha\in\mathbb Z^n}
+and real coefficients let
+##{\begin{aligned}
+f_j(r)&=\sum_\alpha\bigl(a^j_\alpha\cos(\alpha\cdot p)
+                   +b^j_\alpha\sin(\alpha\cdot p)\bigr),\\
+\varrho_j&=\sum_\alpha(|a^j_\alpha|+|b^j_\alpha|)
+                        \sum_i|\alpha_i|\frac{2\pi}{N_i}.
+\end{aligned}} Suppose no edge joins two zero vertices.
+Among the grid simplices and their faces with no zero vertex, consider those maximal
+under inclusion. If each such face has a vertex #{v} and an index #{j} with
+#{|f_j(v)|>\varrho_j}, then #{\tilde f} is \vocabk{resolved}{fdip-015I}.}
+
+\proof{
+\p{Lift a unit grid cube to consecutive coordinates even when it crosses
+a periodic seam. For two of its vertices the phase of frequency #{\alpha}
+changes by at most #{\sum_i|\alpha_i|\frac{2\pi}{N_i}}. Integer frequencies
+make this lift give the original sample values. Both sine and cosine
+change by at most the absolute change in their argument, by the
+mean-value theorem and their derivative bounds. Multiplying by the
+absolute coefficients and summing gives
+#{|f_j(v')-f_j(v)|\le\varrho_j} for any two vertices of the simplex.}
+
+\p{On a tested face all vertex values of the chosen component therefore
+have the same strict sign as #{f_j(v)}, and every convex combination
+retains that sign. Every face without zero vertices is contained in
+a maximal such face, since the grid has finitely many faces. The
+convex-hull test of \ref{fdip-015K} holds on every one of them. The
+separate condition on zero edges completes that test.}
+}
+
+\p{Mathlib's \leanref{Real.abs_sin_sub_sin_le} and
+\leanref{Real.abs_cos_sub_cos_le} give the two scalar variation bounds.}

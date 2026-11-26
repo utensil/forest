@@ -1,0 +1,37 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{Tests for a resolved symbol}
+\date{2026-11-26}
+
+\p{Let #{k} be an ordered field and #{f:R\to k^n} a map on the \vocabk{simplicial momentum grid}{fdip-013X}. Its interpolant is \vocabk{resolved}{fdip-015I} if and only if no edge joins two zero vertices and, for every simplex without
+a zero vertex, the origin is not a convex combination of the values of #{f} at its vertices.
+These are finite tests over #{k}, with faces of every dimension included. If the vertex
+zeros are nondegenerate, the sum of their degrees is then zero.}
+
+\p{Suppose that #{f_j(r)=g_j(r_j)} depends only on the coordinate #{r_j}, and that each
+#{g_j} has a zero sample. Then #{\tilde f} is resolved if and only if no #{g_j} has two
+cyclically adjacent samples of strictly opposite sign or two cyclically adjacent zero samples.}
+
+\proof{
+\p{A zero edge is zero throughout. On a simplex without zero vertices,
+a convex combination equal to zero gives a zero different from all its
+vertices. Conversely, take the positive barycentric support of a zero.
+If any support values are nonzero, remove all zero values and divide
+the other weights by their positive sum. This represents zero on a face
+without zero vertices, contrary to the test. Thus every support vertex
+is zero. Any two of them would span a zero edge, so the support is a
+single vertex. With nondegenerate vertex zeros, \ref{fdip-0140} now gives
+the degree sum since there is no off-grid contribution.}
+
+\p{In a lifted grid simplex each coordinate takes at most two adjacent
+sample values. If these never have strictly opposite signs, a weighted
+coordinate sum can vanish only if all its positive-weight terms vanish.
+Applying this in every coordinate makes all support vertices zero.
+Two distinct such vertices would differ in a coordinate with adjacent
+zero samples. Conversely, fix zero samples in the other coordinates.
+Two opposite strict signs give an interior zero of the intervening axis
+edge by linear interpolation. Two adjacent zero samples give a whole
+zero edge. This reasoning includes the edge across a periodic seam.}
+}

@@ -1,0 +1,52 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Lemma}
+\title{The oriented angle of a spherical triangle}
+\date{2026-11-26}
+
+\p{Let #{u,v,w} be unit vectors in one open hemisphere of the unit sphere
+in #{\mathbb R^3}. Join them in order by shorter great-circle arcs.
+Write #{\Omega} for the signed area of the resulting spherical triangle,
+positive for #{D=\det(u,v,w)>0} and zero for #{D=0}. With
+#{x=u\cdot v}, #{y=v\cdot w}, #{z=w\cdot u}, set #{A=1+x+y+z}.
+Then #{A+\ui D} avoids the nonpositive real axis and
+##{\Omega=2\arg(A+\ui D),\qquad -2\pi<\Omega<2\pi.}}
+
+\proof{
+\p{If #{D=0}, all directions lie on a great circle in an open semicircle,
+including the case of coincident vectors. Choose angles on that semicircle.
+Their three successive differences #{a,b,c} sum to zero and have absolute
+value less than #{\pi}. The cosine addition formula gives
+##{A=4\cos(a/2)\cos(b/2)\cos(c/2)>0.} The triangle has zero area.}
+
+\p{Otherwise put #{d=|D|}, and let #{\alpha,\beta,\gamma} be the interior
+angles at #{u,v,w}. At #{u} the tangent directions are the normalized
+vectors #{v-xu,w-zu}. Their dot product and the norm of their cross
+product give
+##{\ue^{\ui\alpha}
+ =\frac{y-xz+\ui d}{\sqrt{(1-x^2)(1-z^2)}}.}
+Use the cyclic expressions at the other two vertices. The Gram
+determinant gives #{d^2=1+2xyz-x^2-y^2-z^2} and hence
+#{A^2+d^2=2(1+x)(1+y)(1+z)}. Expanding with this value of #{d^2} gives
+##{\prod_{\mathrm{cyc}}(y-xz+\ui d)
+=-\tfrac{1}{2}(1-x)(1-y)(1-z)(A+\ui d)^2.}
+Dividing by the product of the three positive denominators yields
+##{-\ue^{\ui(\alpha+\beta+\gamma)}=(A+\ui d)^2/(A^2+d^2).}}
+
+\p{Take the three side hemispheres containing the opposite vertex.
+Their intersection is the short-arc triangle: in the basis
+#{u,v,w} these half-spaces prescribe nonnegative coefficients.
+Each pair intersects in the lune at their common vertex, of area
+twice its interior angle, since a longitude sector of angle #{\alpha}
+occupies the fraction #{\frac{\alpha}{2\pi}} of the full sphere.
+Off the side circles, a point in #{m} of the hemispheres belongs
+to #{\binom{m}{2}} lunes, and its antipode belongs to
+#{\binom{3-m}{2}}. Their total multiplicity is three on the triangle
+and its antipode, and one elsewhere. Counting area in antipodal pairs
+gives #{2(\alpha+\beta+\gamma)=2\pi+2E}, where #{E} is the unsigned area.
+The triangle has positive area strictly less than a hemisphere's
+area, so #{0<E<2\pi}. The exponential identity gives
+#{E=2\arg(A+\ui d)} since both lie in this interval.
+Restoring the sign of #{D} gives the signed formula.}
+}

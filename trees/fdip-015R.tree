@@ -1,0 +1,59 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{The Pauli symbol}
+\date{2026-11-26}
+
+\p{Take #{n\ge 2}, a complex space of dimension #{2}, a map #{f:R\to\mathbb R^3}, interpolated barycentrically on each grid simplex, and
+#{\mathcal B(r)=\sum_{j=1}^3f_j(r)\sigma_j} with the ordered Pauli matrices #{\sigma_j} of \ref{fcap-002L}. Let #{\Sigma} be a
+\vocabk{closed surface}{fdip-015O} on no triangle of which #{\tilde f} vanishes. Then every triangle is
+regular, #{q=1} at its vertices, and
+##{\operatorname{chir}(\Sigma)=-\frac{1}{4\pi}\sum_t c_t\Omega_t,}
+where #{\Omega_t} is the signed solid angle at the origin of #{\mathbb R^3} of the triangle with
+vertices #{f(v_0),f(v_1),f(v_2)}. Equivalently, this is minus the signed intersection count of its image with a generic ray
+from the origin. If #{n\ge 3} and #{\sigma=(v_0,v_1,v_2,v_3)} is an oriented
+simplex with no zero of #{\tilde f} on #{\partial\sigma}, then #{\operatorname{chir}(\partial\sigma)} is
+#{-\operatorname{sgn}\det(b_1-b_0,b_2-b_0,b_3-b_0)}, with #{b_j=f(v_j)}, when #{\tilde f} has a zero in
+#{\sigma}, and #{0} otherwise.}
+
+\proof{
+\p{On a triangle take the point #{b} nearest zero in the convex hull of
+its three image vertices. For every point #{a} of this hull,
+minimizing along #{b+s(a-b)} gives #{b\cdot a\ge |b|^2>0}.
+Thus the three normalized directions #{u,v,w} lie in a common open
+hemisphere. Normalizing the vertices preserves their positive cone.
+For independent directions each covered ray meets the affine triangle
+once, with orientation sign #{\operatorname{sgn}\det(u,v,w)} from its
+oriented normal paired with the intersection point. The negative line for direction #{u} has projector
+#{P_u=(\bbI -u\cdot\sigma)/2}. Multiplying the rank-one projectors
+shows that #{\trace(P_uP_vP_w)} is the cyclic overlap product. Using
+#{(u\cdot\sigma)(v\cdot\sigma)=(u\cdot v)\bbI+\ui(u\times v)\cdot\sigma}
+and the zero Pauli traces gives
+##{4\trace(P_uP_vP_w)=1+u\cdot v+v\cdot w+w\cdot u-\ui\det(u,v,w).}
+By \ref{fdip-0160} its argument is #{-\Omega_t/2} and it avoids
+the cut. Summing the angles gives the formula.}
+
+\p{Cut the sphere along all great circles containing the projected
+triangle edges of positive length. Away from the edges, count covering
+triangles with their radial orientation signs and coefficients.
+This is their signed ray intersection count. Across an open chamber
+wall its change is the oriented boundary multiplicity on that wall:
+an oriented triangle contributes opposite jumps on entering and leaving.
+Subdivide walls at edge endpoints and intersections. Collapsed triangles
+have zero area and their boundary arcs cancel on subdivision, since a
+closed path along an interval crosses each interior point equally often
+both ways. The original chain is closed, so the change is zero everywhere.
+A path avoiding the finitely many wall vertices and crossing transversely
+joins any two chambers. Summing chamber areas gives total signed area
+#{4\pi} times the common count.}
+
+\p{For an invertible affine tetrahedral image the outward boundary gives
+one more exit than entry along a generic ray starting inside, and equal
+numbers outside. The ordered tetrahedron multiplies this count by its
+determinant sign. For a singular linear part, an interior zero would
+extend along a kernel line to a forbidden boundary zero. Its image
+lies in a plane. Choose a ray parallel to a plane missing zero or
+transverse to a plane through zero. It and nearby generic rays miss the image. Thus its
+count is zero.}
+}
