@@ -1,0 +1,39 @@
+\import{fnip-macros}
+\import{lean-macros}
+\meta{agent-authored}{true}
+\tag{fnip}
+\taxon{Definition}
+\title{Dynamical system}
+\date{2026-11-25}
+
+\p{A \newvocab{dynamical system} is a triple
+#{\{T, X, \varphi^{t}\}}.
+The \newvocab{time set} #{T} indexes the family. The
+\newvocab{state space} #{X} is a set. Each
+\newvocab{evolution operator}
+#{\varphi^{t}: X \to X}
+is a map defined for #{t \in T}, on whatever part of #{X} the time
+#{t} reaches. The same map is also written #{\varphi_{t}}.}
+
+\p{The family satisfies two identities wherever both sides are defined.
+##{\varphi^{0} = \mathrm{id}_{X},
+   \qquad
+   \varphi^{t+s} = \varphi^{t} \circ \varphi^{s}.}
+The first says that time zero does not move a state. The second says
+that evolving for time #{s} and then for time #{t} agrees with evolving
+once for time #{t+s}. In the continuous-time case the family is called
+a \newvocab{flow}.}
+
+\p{\citet{Definition 1.1, §1.1.4, p. 7}{kuznetsov2004elements} is the
+triple. \citet{(DS.0) and (DS.1), p. 6}{kuznetsov2004elements} are the
+two identities, including the proviso that both sides be defined.
+\citet{p. 5}{kuznetsov2004elements} calls the continuous-time family a
+flow. Kuznetsov writes #{\varphi^{t}}; the subscript is only a change
+of notation.}
+
+\p{Mathlib's \leanref{Flow}, read at commit
+\code{8fc0483a875e84b83c6cdb6f5c124bcbb3530370},
+is a jointly continuous action of a topological monoid. The
+operator is defined at every time of that monoid. The theorems
+\code{map_zero_apply} and \code{map_add} are the two identities
+under those hypotheses.}
