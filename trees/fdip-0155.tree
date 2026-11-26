@@ -1,0 +1,53 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{Symmetries of the index}
+\date{2026-11-26}
+
+\p{The \vocabk{Wilson kernel}{fdip-0153} #{K_U} is
+\vocabk{graded-hermitian}{fdip-0148}. For a regular connection,
+##{\operatorname{ind}(U)=\tfrac{1}{2}(\nu_{-}-\nu_{+})=\nu_{-}-\tfrac{1}{2}\dim\mathcal H.}}
+
+\p{Let #{g_x} be a unitary on #{F} at each site and let #{\mathcal G} act
+pointwise by #{\bbI_S\otimes g_x}. Under the gauge transformation of \ref{fdip-006E},
+#{U_j^g(x)=g_{x+e_j}U_j(x)g_x^{-1}}, the kernels satisfy
+#{K_{U^g}=\mathcal G K_U\mathcal G^{-1}}. Regularity is preserved in both
+directions, and for a regular connection
+#{\operatorname{ind}(U^g)=\operatorname{ind}(U)}. For connections in a
+represented finite group, its group-valued site gauges give a finite set
+of orbits on the regular connections.}
+
+\p{In every dimension #{n\ge 1}, the reflection #{\mathcal P} of
+\ref{fdip-013T} preserves regularity in both directions and gives
+#{\operatorname{ind}(U^{\mathcal P})=-\operatorname{ind}(U)} for regular #{U}.
+For #{n=2m}, take the Pauli module of \ref{fdip-00LB} with the volume grading
+#{\Gamma_S=C} of \ref{fdip-009X} and let #{\mathcal Q=c_+\otimes c_F}
+use a fiber antiunitary #{c_F} as in \ref{fdip-013T}. Then #{U^{\mathcal Q}}
+is regular if and only if #{U} is, and for regular #{U},
+#{\operatorname{ind}(U^{\mathcal Q})=(-1)^m\operatorname{ind}(U)}.}
+
+\proof{
+\p{The shifts and their adjoints commute with the spin grading. The centered
+operator of \ref{fdip-009P} is skew-adjoint and odd, while the [nonnegative Wilson Laplacian](fdip-009U) #{-L_{a,U}} is
+self-adjoint and even. Thus #{\Gamma K_U\Gamma=K_U^\dagger}.
+The first Clifford generator exchanges the grading spaces, so
+#{\trace\Gamma=0}. For regular #{U}, \ref{fdip-014D} gives the first equality, and
+#{\nu_-+\nu_+=\dim\mathcal H} gives the second.}
+
+\p{The forward row of the shift uses
+#{(U_j^g(x))^{-1}=g_xU_j(x)^{-1}g_{x+e_j}^{-1}}. Thus the shifts,
+their adjoints and the Wilson kernel are conjugated by #{\mathcal G}.
+It commutes with #{\Gamma}, so the Hermitian operators have identical spectra.
+A finite represented group has finitely many assignments to the edges of the
+finite grid, hence finitely many regular orbits.}
+
+\p{By \ref{fdip-013T}, conjugation by #{\mathcal P} takes #{K_U} to
+#{K_{U^{\mathcal P}}} and #{\Gamma} to #{-\Gamma}. Thus #{\Gamma K_{U^{\mathcal P}}} has the negatives of the eigenvalues of
+#{\Gamma K_U} with the same multiplicities.
+The same result gives #{\mathcal Q K_U\mathcal Q^{-1}=K_{U^{\mathcal Q}}}
+and #{\mathcal Q\Gamma\mathcal Q^{-1}=(-1)^m\Gamma} for the stated Pauli
+grading. Antiunitary conjugation preserves the real eigenvalues with their
+multiplicities. Both transformations preserve invertibility, and the inertia
+formula gives their index signs.}
+}

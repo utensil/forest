@@ -1,0 +1,42 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{Commuting links split into characters}
+\date{2026-11-26}
+
+\p{Let #{U} be a connection for the \vocabk{Wilson kernel}{fdip-0153} whose link
+operators #{U_j(x)} commute pairwise over all sites and directions. There
+is an orthogonal decomposition of #{F} into #{d=\dim F} common invariant
+complex lines. On line #{k} every link acts by a scalar #{\zeta_j^{(k)}(x)}
+of modulus one. With these scalars as links, let #{U^{(k)}} be the connection
+on #{\mathbb C} for the same grid, #{S}, #{\Gamma_S} and #{a}.
+Then #{U} is a \vocabk{regular connection}{fdip-0153} exactly when every
+#{U^{(k)}} is regular. The positive and negative eigenvalue counts of
+#{\Gamma K_U} are the respective sums of those for #{\Gamma K_{U^{(k)}}}.
+For regular #{U},
+##{\operatorname{ind}(U)=\sum_{k=1}^d\operatorname{ind}(U^{(k)}).}}
+
+\proof{
+\p{Each link and its inverse preserve every eigenspace of every other
+link, by commutation. Diagonalize one unitary using the finite spectral
+argument in \ref{fdip-014A}. Restrict the next unitary to each eigenspace
+and diagonalize again. The restrictions are unitary because both the
+operator and its inverse preserve the space. After the last of the
+finitely many links, choose an orthonormal basis in each joint eigenspace.
+The spans of the basis vectors give the asserted orthogonal lines.
+Multiplication and inversion of the links multiply and invert their scalars
+on each line, giving a character of the group they generate.}
+
+\p{Identify each line with #{\mathbb C} by its chosen unit vector.
+The [unitary shifts](fdip-009O) and their adjoints restrict to the shifts
+and adjoints for the corresponding scalar links. The spin generators
+and grading preserve every summand. Thus #{\Gamma K_U} is the orthogonal
+direct sum of the #{\Gamma K_{U^{(k)}}}. Such a sum is invertible exactly
+when all summands are, and its positive and negative spaces are the
+respective sums. For regular #{U}, \ref{fdip-0155} now gives the formula.}
+}
+
+\p{TauCeti's
+\leanref/tauceti{LinearMap.exists_orthonormalBasis_apply_eq_smul_of_isStarNormal}
+gives the orthonormal eigenbasis used at each single-unitary step.}

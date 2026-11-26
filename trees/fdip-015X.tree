@@ -1,0 +1,51 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{Flux integers and their cancellation}
+\date{2026-11-26}
+
+\p{Let #{n\ge 2} and let #{U} be a unitary connection on #{F}. If #{c} is a
+\vocabk{closed plaquette surface}{fdip-015V} whose plaquettes are all
+\vocabk{plain}{fdip-015V}, then its \vocabk{plaquette flux}{fdip-015V} #{\operatorname{fl}(c)} is
+an integer. The flux is additive in #{c}, changes sign with #{-c}, and is the same for #{U}
+and for every gauge transform #{U^g}.}
+
+\p{Let #{n\ge 3} and let #{\mathcal C} be an integer combination of oriented cubes with zero
+boundary. Let #{\mathcal C'} be its part on the cubes that have a plaquette that is not plain,
+and #{\mathcal C''=\mathcal C-\mathcal C'}. Then #{\partial\mathcal C'} is a closed plaquette
+surface whose plaquettes are all plain, and
+##{\operatorname{fl}(\partial\mathcal C')=-\sum_Qc_Q\operatorname{fl}(\partial Q),}
+the sum over the cubes #{Q} of #{\mathcal C''}, with each term an integer. A term is zero when
+the 6 plaquette angles of #{Q} lie in #{(-\tfrac{\pi}{3},\tfrac{\pi}{3})}.}
+
+\proof{
+\p{For each positively oriented edge #{e} write #{t_e} for its link
+determinant. Reversing #{e} replaces #{t_e} by its inverse. The product
+of the 4 oriented edge determinants is #{u_p}. Collect like edges
+in the product over plaquettes to obtain
+##{\prod_pu_p^{c_p}=\prod_et_e^{(\partial c)(e)}=1.}
+The last equality uses #{\partial c=0}. On the support of #{c},
+#{u_p=\ue^{\ui\varphi_p}}. Hence the real sum #{\sum_pc_p\varphi_p}
+lies in #{2\pi\mathbb Z}, proving integrality. The sum is linear
+in the coefficients, giving additivity and the reversal sign. In a
+gauge transformation the intermediate site factors cancel around
+the plaquette, leaving conjugation at its base point in the
+[plaquette holonomy](fdip-006N). Its determinant and principal angle are unchanged.}
+
+\p{The identity #{\partial\mathcal C'=-\partial\mathcal C''} holds
+coefficient by coefficient. Every face occurring in the right side
+belongs to a cube with only plain faces. Each edge of a cube occurs
+twice with opposite signs in the boundaries of its faces, so
+#{\partial\partial Q=0}. It follows that #{\partial\mathcal C'} is
+closed and supported on plain faces. For every cube of #{\mathcal C''},
+the first part gives an integer on #{\partial Q}. Sum these integers
+with their coefficients and reverse the sign to get the displayed
+identity. When all 6 angles have absolute value less than #{\tfrac{\pi}{3}},
+their oriented sum has absolute value less than #{2\pi}. Its only
+possible multiple of #{2\pi} is zero.}
+}
+
+\p{In a chosen basis, \leanref{Matrix.det_mul} gives multiplicativity
+of the determinant. Mathlib's \leanref{Complex.exp_eq_one_iff} gives
+the integral periods of the complex exponential.}

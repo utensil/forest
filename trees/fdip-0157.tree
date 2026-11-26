@@ -1,0 +1,36 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{No index near the trivial connection}
+\date{2026-11-26}
+
+\p{Let #{b(r)^2=|f(r)|^2+(m(r)-a^{-1})^2} be the squared length of the block of the
+Wilson kernel at trivial links in \ref{fdip-014F}, and put #{b_0=\min_{r\in R}b(r)}. Then
+#{b_0>0}. Write #{\delta_j=\max_x\|U_j(x)-\bbI_F\|}. If
+##{2a^{-1}\sum_{j=1}^n\delta_j<b_0,}
+then #{U} is regular and #{\operatorname{ind}(U)=0}.}
+
+\proof{
+\p{At the trivial connection #{1}, the finite set of free blocks in
+\ref{fdip-014F} has least absolute eigenvalue #{b_0>0}.
+Write #{T_j^U} for the [unitary shift](fdip-009O) and let
+#{\widehat\varepsilon_j} act by #{\varepsilon_j^S\otimes\bbI_F}
+at each site. Expanding the centered differences and the [Wilson term](fdip-009U) at #{c_W=a/2} gives
+##{\begin{aligned}
+ K_U={}&\frac{n-1}{a}\bbI
+ +\frac{1}{2a}\sum_j(\widehat\varepsilon_j-\bbI)T_j^U\\
+ &-\frac{1}{2a}\sum_j(\widehat\varepsilon_j+\bbI)(T_j^U)^\dagger .
+\end{aligned}}}
+
+\p{The shift difference is the free unitary shift followed by
+multiplication at #{x} by #{U_j(x)^{-1}-\bbI_F}. The multiplication
+norm is the maximum of its site norms. Each equals
+#{\|U_j(x)-\bbI_F\|} by unitarity, so both the shift difference and its
+adjoint have norm #{\delta_j}. The generator coefficients
+#{\widehat\varepsilon_j\pm\bbI} have norm at most two. The triangle
+inequality and unitarity of #{\Gamma} therefore give
+##{\|\Gamma K_U-\Gamma K_1\|\le\frac{2}{a}\sum_j\delta_j.}
+Now \ref{fdip-0156} transfers regularity and the zero index of
+\ref{fdip-0154} from #{1} to #{U}.}
+}
