@@ -1,0 +1,53 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{The square and fixed sites of the time map}
+\date{2026-11-26}
+
+\p{The \vocabk{spinor time map}{fdip-017Z} is antiunitary.
+Its square fixes the site labels and acts on their values by
+##{S_t^2=\bigl((\Gamma\varepsilon_t)c^{-1}
+   (\Gamma\varepsilon_t)c^{-1}\bigr)\otimes c_F^{-2}.}
+If #{n=2m} and the chosen grading is
+#{C=\ui^m\psI}, with #{\psI=\varepsilon_1\cdots\varepsilon_n}
+in the specified direction order, then
+##{S_t^2=(-1)^{m+1}c^{-2}\otimes c_F^{-2}.}
+The site reflection fixes only the time slice at zero for odd
+#{N_t}, and fixes the slices at zero and #{N_t/2} for even
+#{N_t}.}
+
+\proof{
+\p{On pure tensors the rule #{v\otimes w\mapsto
+c^{-1}v\otimes c_F^{-1}w} conjugates a scalar moved across
+either factor. It respects the tensor relations, giving one
+conjugate-linear map on values. Its inverse uses #{c,c_F} in
+the same way. The inner product on two pure tensors is the
+product of the two factor inner products. The new product
+is its conjugate, and summing over pairs of terms proves the
+identity for arbitrary values. Applying it at each site gives
+an antiunitary on the full field. Site pullback preserves the
+sum by reindexing, and #{\Gamma\varepsilon_t} is unitary as
+a product of unitaries. This proves antiunitarity of #{S_t}.}
+
+\p{Site pullback commutes with every constant value action and
+squares to the identity. Composing the two remaining actions
+on a pure tensor gives the displayed general square. For the
+even volume, #{c^{-1}} fixes each direction and conjugates
+#{\ui^m} to #{(-1)^m\ui^m}. Consequently
+#{c^{-1}(C\varepsilon_t)c=(-1)^m C\varepsilon_t}.
+The grading anticommutes with #{\varepsilon_t}, so
+#{(C\varepsilon_t)^2=-\bbI_S}. Substitution gives the
+stated square without any assumption on the two input squares.}
+
+\p{A time residue #{u} is fixed precisely when #{2u=0}
+modulo #{N_t}. For odd period two is invertible, and for
+even period #{2M} the solutions are #{0,M}. In the setting
+#{M\ge2} of the [closed positive half](fdip-007M), these are
+its two boundary slices.}
+}
+
+\p{Mathlib's \leanref{TensorProduct.congr_tmul} gives the
+pure-tensor action of two semilinear equivalences with the
+same scalar homomorphism. Here they both conjugate complex
+scalars. The Hermitian isometry uses the tensor inner product.}
