@@ -1,0 +1,57 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Lemma}
+\title{Recovering multiplicities from characters}
+\date{2026-11-26}
+
+\p{For a finite group #{G}, two finite-dimensional unitary
+complex representations with equal \vocabk{characters}{fgap-001M}
+are unitarily equivalent. If #{W} is irreducible and #{V} is
+one of the representations, the multiplicity of #{W} is
+##{\frac{1}{|G|}\sum_{g\in G}\chi_V(g)\bar{\chi_W(g)}.}
+Here #{\chi_V(g)=\trace(\rho_V(g))} for the action #{\rho_V}.}
+
+\proof{
+\p{On the space of complex-linear maps #{T:W\to V}, average
+#{T\mapsto\rho_V(g)T\rho_W(g)^{-1}} over #{G}. Reindexing the
+sum by left multiplication shows that the average takes values
+in the intertwining maps. It fixes each such map, so it is a
+projection onto them. Its trace equals the dimension of its
+image. In orthonormal bases use the maps that take one source
+basis vector to one target basis vector and kill the others.
+For the summand at #{g}, the diagonal coefficient on the map
+with target #{i} and source #{j} is the product of diagonal
+entries #{(\rho_V(g))_{ii}(\rho_W(g)^{-1})_{jj}}. Their sum
+is #{\chi_V(g)\bar{\chi_W(g)}} by unitarity.}
+
+\p{An invariant subspace has an invariant orthogonal complement.
+Splitting in finite dimension gives orthogonal sums of irreducibles.
+Any nonzero intertwiner between irreducibles is invertible by
+its kernel and image. An endomorphism of a complex irreducible
+has an eigenvalue, and the kernel after subtracting that scalar
+is a nonzero invariant subspace. The endomorphism is therefore
+scalar. The dimension just calculated counts the copies of #{W},
+as in the multiplicity argument of \ref{fdip-016F}.}
+
+\p{Equal characters now give equal multiplicities for every
+irreducible in either decomposition. Match summands of the same
+type by invertible intertwiners, obtaining an intertwiner #{L}
+of the whole spaces. The positive definite operator #{L^\dagger L}
+commutes with the source representation since both actions are
+unitary. Each of its eigenspaces is invariant. The operator
+#{(L^\dagger L)^{-1/2}} multiplies each eigenspace by the
+inverse square root of its eigenvalue. It is a finite polynomial
+in the positive operator by interpolation at the distinct
+eigenvalues and is also equivariant.
+Hence #{L(L^\dagger L)^{-1/2}} is an isometric, onto intertwiner.}
+}
+
+\p{Mathlib's
+\leanref{Representation.card_inv_mul_sum_char_mul_char_eq_finrank}
+gives the character average as the dimension of the intertwiner
+space when the group order is invertible in the field.
+TauCeti's \leanref/tauceti{Representation.nonempty_equiv_of_character_eq}
+gives the linear equivalence for finite-dimensional representations
+of a finite group over a characteristic-zero field. The Hermitian
+metrics enter the unitary normalization above.}

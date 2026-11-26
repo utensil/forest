@@ -1,0 +1,47 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{An ordered trace test for charge conjugation}
+\date{2026-11-26}
+
+\p{For the directions of \ref{fdip-00LZ} on any finite-dimensional
+complex Hermitian space, an antiunitary with the
+\vocabk{charge conjugation sign}{fdip-017H} #{\eta} exists exactly
+when every subset #{I\subseteq\{1,\ldots,n\}} satisfies
+##{\trace(\varepsilon_I)=\eta^{|I|}\bar{\trace(\varepsilon_I)}.}
+Here #{\varepsilon_I} is the product in increasing order and
+#{\varepsilon_\varnothing=\bbI_S}.}
+
+\proof{
+\p{Let #{\bar S} be the conjugate space, with canonical
+conjugate-linear isometry #{s\mapsto\bar s}. For a linear
+operator #{T} on #{S}, set #{\bar T\bar s=\bar{Ts}}.
+Use #{\eta\bar\varepsilon_j} as directions on #{\bar S}.
+A unitary intertwiner from this space to #{S}, composed with
+canonical conjugation, is exactly an antiunitary with the
+stated sign. The trace of each product on #{\bar S} is
+#{\eta^{|I|}\bar{\trace(\varepsilon_I)}}. Linear equivalence
+therefore implies the test.}
+
+\p{To reverse the argument, form a group of pairs #{(a,I)}
+with #{a=\pm1} and #{I} a subset of the directions. Multiply by
+##{(a,I)(b,I')=
+(ab(-1)^{d(I,I')},\,I\mathbin{\triangle}I'),}
+where #{d(I,I')} counts pairs #{i\in I,j\in I'} with #{i>j} and
+#{\triangle} is symmetric difference. Modulo two, #{d} is
+additive in each subset under symmetric difference. Expanding
+the two exponents in a triple product gives associativity.
+The identity is #{(1,\varnothing)}. Each square is a scalar
+sign, so multiplication by that same sign times the original
+pair gives the inverse. Reordering directions uses precisely
+these interchanges and deletes equal pairs by
+#{\varepsilon_j^2=\bbI_S}. Thus #{(a,I)\mapsto a\varepsilon_I}
+is a unitary representation, and so is the corresponding action
+from the twisted directions on #{\bar S}.}
+
+\p{The trace test gives equality of characters on both signs
+of every subset, hence on this entire finite group.
+By \ref{fdip-017J} a unitary intertwiner exists. Its relations
+at the singletons give the required conjugation.}
+}

@@ -1,0 +1,89 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{Transposing a field operator and its links}
+\date{2026-11-26}
+
+\p{On a finite periodic grid #{\Lambda} with unit steps #{e_j},
+take a spin module #{S} with a
+\vocabk{charge conjugation of sign}{fdip-017H} #{c_\eta}.
+Let #{F} be a finite-dimensional complex Hermitian fiber with
+unitary represented links #{U_j(x)}. For its conjugate space
+#{\bar F}, let #{c_F:F\to\bar F} be the canonical antiunitary
+#{v\mapsto\bar v}. The links
+#{\bar U_j(x)=c_F U_j(x)c_F^{-1}} act on #{\bar F}.
+On fields with values in #{S\otimes F}, apply
+#{c_\eta\otimes c_F} at each site to obtain the antiunitary
+##{\mathcal Q:\ell^2(\Lambda;S\otimes F)
+\longrightarrow \ell^2(\Lambda;S\otimes\bar F).}}
+
+\p{Take spacing #{a>0} and use the
+\vocabk{covariant lattice Dirac operator}{fdip-009O} and
+\vocabk{Wilson operator}{fdip-009U} with these directions,
+with #{-L_{a,U}\ge0}. For adjoints in the field inner product,
+##{\begin{aligned}
+\mathcal Q D_{a,U}^{\dagger}\mathcal Q^{-1}
+  &=-\eta D_{a,\bar U},\\
+\mathcal Q L_{a,U}^{\dagger}\mathcal Q^{-1}
+  &=L_{a,\bar U}.
+\end{aligned}}
+For #{\eta=-1} and the same real Wilson coefficient #{c_W},
+##{\mathcal Q D_{W,a,U}^{\dagger}\mathcal Q^{-1}
+=D_{W,a,\bar U}.}
+These identities act on the field space with fiber #{\bar F}.}
+
+\proof{
+\p{Moving a scalar between the spin and fiber factors conjugates
+it on either one. Thus the stated action on elementary tensors
+is well defined and antiunitary for the tensor inner product.
+The forward shift at #{x} uses #{U_j(x)^{-1}} on the value at
+#{x+e_j}. Its inverse uses #{U_j(x-e_j)} on the value at
+#{x-e_j}. Conjugation by #{c_F} carries these maps to the
+inverse and the direct transport for #{\bar U} at the respective
+sites. Each centered difference is a real multiple of the
+difference of a shift and its inverse. The Laplacian uses their
+sum with real coefficients. Using the generator sign on spin gives
+##{\begin{aligned}
+\mathcal Q D_{a,U}\mathcal Q^{-1}&=\eta D_{a,\bar U},\\
+\mathcal Q L_{a,U}\mathcal Q^{-1}&=L_{a,\bar U}.
+\end{aligned}}}
+
+\p{The centered differences are skew-adjoint and commute with
+the self-adjoint spin directions. Their weighted sum #{D_{a,U}}
+is skew-adjoint as in \ref{fdip-009P}. The same unitary shifts
+give #{L_{a,U}^\dagger=L_{a,U}} by the
+[Wilson formula](fdip-009U). This proves the two adjoint
+identities. When #{\eta=-1} both terms of
+#{D_{a,U}-c_W L_{a,U}} have positive sign under this operation,
+giving the Wilson identity.}
+
+\p{Choose the site basis and orthonormal bases on #{S} and #{F}.
+Use the same spin basis in the target and the #{c_F}-images
+of the fiber basis there. The target link entries are then the
+complex conjugates of the source entries. Write
+#{c_\eta=V_\eta\kappa_0}, where #{\kappa_0} conjugates spin
+coordinates. Extending the unitary matrix #{V_\eta} by identity
+on site and fiber indices, #{\mathcal Q} acts on field coordinates
+by full coordinate conjugation followed by #{V_\eta}. Conjugating
+the entries of a full adjoint gives its transpose on all site,
+spin and fiber indices. In particular
+#{D_{a,U}^{T}=-\bar{D_{a,U}}} and
+#{L_{a,U}^{T}=\bar{L_{a,U}}}. The adjoint identities read
+##{\begin{aligned}
+ V_\eta D_{a,U}^{T}V_\eta^{-1}&=-\eta D_{a,\bar U},\\
+ V_\eta L_{a,U}^{T}V_\eta^{-1}&=L_{a,\bar U}.
+\end{aligned}}
+At #{\eta=-1} the same coefficient gives
+##{V_\eta D_{W,a,U}^{T}V_\eta^{-1}=D_{W,a,\bar U}.}
+On the real product spin space, #{V_-=Z^{\otimes n}}
+by \ref{fdip-013T}.}
+
+\p{A supplied antiunitary from #{F} to itself can replace the
+canonical map to #{\bar F}. Its unitary matrix factor then
+accompanies #{V_\eta} in the transpose comparison in a common
+fiber basis. If it normalizes the represented group, the
+transported links belong to that same group. A relation with
+the original connection requires equality of the link data
+or an intertwining identification with that connection.}
+}
