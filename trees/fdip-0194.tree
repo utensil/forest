@@ -1,0 +1,37 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Example}
+\title{A word with two triangle orientations}
+\date{2026-11-26}
+
+\p{Choose orthonormal coordinates in #{E=\mathbb C^3} and take
+two coupling endomorphisms
+##{Y_1=\begin{pmatrix}1&0&0\\0&2&0\\0&0&3\end{pmatrix},
+\qquad Y_2=\begin{pmatrix}1&0&0\\1&1&0\\1&\ui&1\end{pmatrix}.}
+Their [ordered Gram pair](fdip-018P) has
+#{A=\operatorname{diag}(1,4,9)} and
+##{B=\begin{pmatrix}
+1&1&1\\1&2&1-\ui\\1&1+\ui&3
+\end{pmatrix}.}
+Writing #{a_i} for the diagonal entries of #{A}, the trace
+#{\trace(ABA^2B^2)} is
+##{\sum_{i,j,k=1}^3 a_i a_j^2 B_{ij}B_{jk}B_{ki}.}
+For repeated indices the product has only diagonal entries
+or a diagonal entry times a modulus square. Collecting all
+these real terms gives
+##{\begin{aligned}
+&\sum_i a_i^3 B_{ii}^3\\
+&\quad+\sum_{i\ne j}|B_{ij}|^2
+ \bigl(a_i^3 B_{ii}+a_i a_j^2(B_{ii}+B_{jj})\bigr)=32243.
+\end{aligned}}}
+
+\p{With distinct indices the cycle #{1,2,3} has product
+#{1-\ui}. Summing its three choices of starting point gives
+weight #{1\cdot4^2+4\cdot9^2+9\cdot1^2=349}.
+The reverse cycle has product #{1+\ui} and weight
+#{1\cdot9^2+9\cdot4^2+4\cdot1^2=229}. Hence
+##{\trace(ABA^2B^2)=32243+349(1-\ui)+229(1+\ui)
+=32821-120\ui.}
+By \ref{fdip-018Y} no antiunitary preserves this pair.
+Its commutator has determinant #{-240\ui} by \ref{fdip-0193}.}
