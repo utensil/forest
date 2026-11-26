@@ -1,0 +1,54 @@
+\import{fnip-macros}
+\meta{agent-authored}{true}
+\tag{fnip}
+\taxon{Example}
+\title{The Morris–Lecar state}
+\date{2026-11-25}
+
+\p{The Morris–Lecar equations, in the form of
+\citet{§3.2, (3.1), pp. 49–50}{ermentrout2010mathematical}, are
+##{C_{\mathrm{M}}\dot V
+   = I_{\mathrm{app}}
+   - g_{\mathrm{L}}(V-E_{\mathrm{L}})
+   - g_{\mathrm{K}} n (V-E_{\mathrm{K}})
+   - g_{\mathrm{Ca}} m_{\infty}(V)(V-E_{\mathrm{Ca}}),}
+##{\dot n = \phi\,(n_{\infty}(V)-n)/\tau_{n}(V),}
+with
+##{m_{\infty}(V)=\tfrac12\bigl(1+\tanh((V-V_{1})/V_{2})\bigr),}
+##{\tau_{n}(V)=1/\cosh((V-V_{3})/(2V_{4})),}
+##{n_{\infty}(V)=\tfrac12\bigl(1+\tanh((V-V_{3})/V_{4})\bigr).}
+The state at one instant is the pair #{(V,n)\in\mathbb{R}^{2}}. The
+right-hand side is the velocity of that pair. Both #{\tanh} and
+#{\cosh} are smooth on #{\mathbb{R}}, and
+#{\cosh((V-V_{3})/(2V_{4}))\ge 1}
+for every real #{V}, so the denominator does not vanish. The velocity
+is a smooth map #{\mathbb{R}^{2}\to\mathbb{R}^{2}}.}
+
+\p{The Hopf column of
+\citet{Table 3.1, p. 51}{ermentrout2010mathematical}
+fixes every parameter except the applied current:
+##{\phi=0.04,\ 
+   g_{\mathrm{Ca}}=4.4,\ 
+   V_{3}=2,\ 
+   V_{4}=30,\ 
+   E_{\mathrm{Ca}}=120,\ 
+   E_{\mathrm{K}}=-84,}
+##{E_{\mathrm{L}}=-60,\ 
+   g_{\mathrm{K}}=8,\ 
+   g_{\mathrm{L}}=2,\ 
+   V_{1}=-1.2,\ 
+   V_{2}=18,\ 
+   C_{\mathrm{M}}=20.}
+Figure 3.1 of the same source uses this column with
+#{I_{\mathrm{app}}=60}
+and with
+#{I_{\mathrm{app}}=100}.}
+
+\texfig{\begin{tikzpicture}[line cap=round,font=\small]
+  \draw[->] (0,0) -- (3.6,0) node[below] {$V$};
+  \draw[->] (0,0) -- (0,2.6) node[left] {$n$};
+  \fill (2.1,1.45) circle[radius=1.15pt] node[above right=3pt] {$(V,n)$};
+\end{tikzpicture}}
+
+\p{The point drawn above is a state. Its two coordinates are the two
+numbers the equations evolve.}
