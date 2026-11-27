@@ -1,0 +1,20 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Lemma}
+\title{Deforming the constant-flux kernel}
+\date{2026-11-27}
+
+\p{On the torus of \ref{fdip-019X} take a single oriented two-dimensional spin copy, #{aM=1}, and constant scalar plaquette angle #{|\phi|<1/32}. Let #{E_y} denote the #{\ue^{\ui y}}-subspace of the second shift and #{X} the first shift. Then #{X:E_y\to E_{y+\phi}} is unitary. On two copies of the space of site fields, the dimensionless Hermitian kernel can be joined along a regular self-adjoint path, after unitary identification, to the operator with diagonal actions #{-\sin y,\sin y} and upper-right action #{b-tX}, where
+##{b(y)=\max(-\cos y-1/4,0),\qquad t(y)=\max(\cos y-1/4,0).}
+Functions of #{y} act by their values on the orthogonal subspaces #{E_y}.}
+
+\proof{\p{The orientation and inverse-link forward shifts give #{XT_2=\ue^{-\ui\phi}T_2X}. Hence #{X} advances the eigenangle as stated. Choose #{\varepsilon_1=\sigma_3} and #{\varepsilon_2=\sigma_2} on spin, so #{C=\sigma_1}. In these Pauli coordinates the initial operator has diagonal #{d=-\sin y} and #{-d}. The term #{\ui\sigma_1\sigma_2\sin y} gives its first diagonal entry. In the upper-right entry the first-direction terms sum to #{-X}; the remainder is #{1-\cos y}. Thus the upper-right entry is #{B=b-tX} with initial functions #{b=1-\cos y}, #{t=1}, and the lower-left entry is #{B^\dagger}.}
+
+\p{Interpolate both functions linearly to the stated endpoint. Throughout they have angular Lipschitz constants at most #{1}, with #{0\le b\le2}, #{0\le t\le1}. The difference #{b-t} differs from #{-\cos y} by at most #{1/4}, so #{d^2+(b-t)^2\ge 9/16} by the triangle inequality for the two real coordinates. In the operator square the upper diagonal is #{d^2+BB^\dagger}. For vectors on neighboring angle subspaces use #{2|\langle v,w\rangle|\le\|v\|^2+\|w\|^2} after identifying them by #{X}. The off-diagonal terms #{-bX^\dagger t-tXb} thus give the diagonal lower bound
+##{BB^\dagger\ge b(y)^2+t(y)^2-b(y)t(y+\phi)-t(y)b(y-\phi)
+\ge (b(y)-t(y))^2-3|\phi|.}
+Applying the same inequality to the lower summand gives
+##{B^\dagger B\ge b(y)^2+t(y+\phi)^2-b(y)t(y)-b(y+\phi)t(y+\phi)
+\ge (b(y)-t(y))^2-5|\phi|.}
+Indeed #{t^2} varies by at most #{2|\phi|} and #{bt} by at most #{3|\phi|}. The upper-right part of the square is #{[d,B]}, whose norm is at most #{|\phi|} by the Lipschitz bound for sine. The self-adjoint operator formed by this part and its adjoint has the same norm, as seen by squaring it. The full square stays at least #{(9/16-6|\phi|)\bbI>0}.}}

@@ -1,0 +1,21 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{The index is the bulk integer times the flux}
+\date{2026-11-27}
+
+\p{Take an oriented two-dimensional torus with even periods #{N_1,N_2\ge4}, spacing #{a>0} and scalar links #{u_j(x)\bbI_F} of modulus one. Use the Wilson coefficient #{a/2} and #{\mu=aM\notin\{0,2,4\}}. The grading #{\Gamma} on the complex spin-fiber is a site-independent self-adjoint involution anticommuting with both self-adjoint Clifford directions. Put #{C=\ui\varepsilon_1\varepsilon_2} on the spin-fiber, #{s=\trace(C\Gamma)/2} and
+##{\theta=\begin{cases}
+\min(1/32,d^2/1200),&0<\mu<4,\quad d=\min_{j=0,1,2}|2j-\mu|,\\
+1/32,&\mu<0\ \text{or}\ \mu>4 .
+\end{cases}}
+Measure the \vocabk{plaquette angles}{fdip-015V} and torus flux #{w} on the scalar line #{u}, in the order #{(1,2)}. If every angle has absolute value less than #{\theta}, then #{H=\Gamma(D_{W,a,U}-M\bbI)} is invertible. Write #{\operatorname{ind}_{\Gamma,M}(U)=\sdim\ker D_K} for the overlap index of this shifted kernel #{K=D_{W,a,U}-M\bbI} from \ref{fdip-014D}. With the \vocabk{bulk integer}{fdip-019W} of the free Wilson symbol,
+##{\operatorname{ind}_{\Gamma,M}(U)=\tfrac12(\nu_-(H)-\nu_+(H))=-s\kappa(M)w.}
+For #{\Gamma=C}, #{s=(\dim S)(\dim F)/2}.}
+
+\proof{\p{Scalar links commute with the grading. Its anticommutation with the centered directions gives #{(aH)^2=(aK)^\dagger(aK)} for #{K=D_{W,a,U}-M\bbI}, by the calculation in \ref{fdip-0155}. A Clifford direction exchanges the grading eigenspaces, so #{\trace\Gamma=0}. The trace formula of \ref{fdip-014D} therefore gives the half-signature. At #{M=1/a} and #{\Gamma=\Gamma_S\otimes\bbI_F} this is the [overlap index](fdip-0153). The signed sum of identical oriented spin copies in \ref{fdip-01A1} reduces the index to #{s} times the one-copy index. By \ref{fdip-019Y} the two interior windows have bulk integers #{1,-1}, respectively.}
+
+\p{In the first window \ref{fdip-01A5} bounds the kernel away from zero along the whole mass segment from #{\mu} to #{1}. At mass parameter #{1}, \ref{fdip-01A4} joins the field to the constant-curvature representative without increasing the maximum angle. Its index is constant by \ref{fdip-01A3}. The deformation and signature count of \ref{fdip-01A6} and \ref{fdip-01A7} give #{-w}.}
+
+\p{In the second window negate both scalar links, giving a field #{U'} with the same oriented plaquettes. Both shifts change sign, so the hop formula of \ref{fdip-01A5} gives #{aK_{\mu}(U)=-aK_{4-\mu}(U')}, where the subscript is the dimensionless mass. Applying the first window at #{4-\mu} reverses the index. In the exterior windows #{|2-\mu|>2}. Each projected forward and backward shift combined in one direction is unitary, as it acts by a unitary separately on two orthogonal summands. The sum in both directions has norm at most #{2}. Scaling that sum to zero keeps #{aK} invertible, ending at #{(2-\mu)\bbI}. The grading has equal positive and negative dimensions since a Clifford direction exchanges them. Thus the exterior index vanishes.}}
