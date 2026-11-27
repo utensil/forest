@@ -18,16 +18,19 @@ already derive the corresponding physics.}
 The [Grassmann integration chapter](fdip-008E),
 [fermionic elimination](fdip-009I),
 [covariant Dirac operators](fdip-009N) and the
-[Wilson term and the graded index](fdip-009T) lead to the
+[Wilson term and the graded index](fdip-009T) lead through
+[gauge fields and lattice chirality](fdip-0150) and
+[symmetries of graded spin fields](fdip-0170) to the
 [charged Grassmann fields and Abelian connection law](fdip-00IL).
 The [finite-group coupling chapter](fdip-00SE) then develops
 based cochains, paired coefficients over a ring and exact singlet
 observations. [Scalar fields on group orbits](fdip-00ZT) then
 count the gauge orbits of scalar fields on one or several group orbits,
 reduce each link by a scalar frame, measure transport along paths and
-add an onsite fermion coupling. They give the one-edge transfer matrix,
-its double-coset count and characteristic polynomial, and its response
-to environment constants. The [compatibility test](fdip-009Y)
+add an onsite fermion coupling. Word traces test whether two specified
+Hermitian coupling products admit a common antiunitary symmetry. The one-edge
+transfer has an exact double-coset count, characteristic polynomial
+and response to environment constants. The [compatibility test](fdip-009Y)
 fixes one finite spinor datum. The [larger proposals](fdip-00A2) remain open tests.
 A solid arrow into open material records an intended prerequisite,
 not a result already proved. In the part diagrams, a dotted box names a
@@ -44,7 +47,7 @@ neighboring part; every arrow is solid.}
 \node[box=9cm] (I) at (0,21.95) {\textbf{I\enspace Foundations}\\ {\footnotesize fields on a finite graph · pairings · differences · elimination}};
 \node[box=9cm] (II) at (0,20.0) {\textbf{II\enspace Gaussian laws}\\ {\footnotesize states · reference measure · Gaussian laws · retained laws}};
 \node[box=13.6cm] (III) at (0,18.05) {\textbf{III\enspace Backgrounds and symmetry}\\ {\footnotesize backgrounds · relabelings · group-algebra sectors}};
-\node[box=2.6cm] (IV) at (-6.55,15.25) {\textbf{IV\enspace Finite-group symmetry}\\ {\footnotesize isotypic sectors · equivariant laws}};
+\node[box=2.6cm] (IV) at (-6.55,15.25) {\textbf{IV\enspace Finite-group symmetry}\\ {\footnotesize isotypic sectors · momentum blocks · Gaussian laws}};
 \node[box=8.8cm] (V) at (2.6,15.25) {\textbf{V\enspace Clifford algebras, Dirac operators}\\ {\footnotesize Clifford algebras · Dirac operators · comparison}};
 \node[box=3.0cm] (VIII) at (2.3,11.5) {\textbf{VIII\enspace Geometric realization}\\ {\footnotesize triangles · forgotten weights · gluing}};
 \node[box=3.4cm] (VII) at (-1.5,11.95) {\textbf{VII\enspace Continuum approximation}\\ {\footnotesize supplied circle · fixed modes}};
@@ -52,7 +55,7 @@ neighboring part; every arrow is solid.}
 \node[box=2.6cm] (VI) at (6.45,12.5) {\textbf{VI\enspace Arithmetic}\\ {\footnotesize every prime · Euler products}};
 \node[box=8.0cm] (X) at (-1.8,7.15) {\textbf{X\enspace Gauge fields}\\ {\footnotesize finite gauge groups · matter}};
 \node[box=5.6cm] (XI) at (-4.6,5.05) {\textbf{XI\enspace Euclidean time}\\ {\footnotesize reflection positivity · transfer · Gauss's law}};
-\node[box=5.0cm] (XII) at (2.05,4.45) {\textbf{XII\enspace Lattice fermions}\\ {\footnotesize Grassmann integration · doubling and chirality}};
+\node[box=5.0cm] (XII) at (2.05,4.45) {\textbf{XII\enspace Lattice fermions}\\ {\footnotesize Grassmann integration · doubling · chirality · spin-field symmetries}};
 \node[box=8.4cm] (XIII) at (-1.8,2.65) {\textbf{XIII\enspace Structure}\\ {\footnotesize states · cochains · spectral geometry · coarse-graining · gluing}};
 \node[box=14.6cm] (XIV) at (0,0.6) {\textbf{XIV\enspace Explorations and synthesis}\\ {\footnotesize Wilson tests · discrete induction and its open interfaces}};
 \draw[arr] (R) -- node[lab,midway,right=1mm] {what is a classical field like\\ in a discrete setting?} (I);
@@ -112,8 +115,12 @@ questions to the closing explorations.}
   positive and constrained Gaussian laws, and retained observables.}
   \li{Part III, [Backgrounds and symmetry](fdip-0019): transported
   data, observables and half-turn sectors.}
-  \li{Part IV, [Finite-group symmetry](fdip-004R): real isotypic
-  projectors, multiplicities and Gaussian sector laws.}
+  \li{Part IV, [Finite-group symmetry](fdip-004R),
+  [coordinate symmetries of momentum blocks](fdip-0161),
+  [equivariant precision and real types](fdip-004Y), and
+  [Gaussian laws over symmetry sectors](fdip-0054). Real isotypic
+  projectors separate the Gaussian sectors. On a grid the subgroup
+  fixing a momentum label acts within its block.}
   \li{Part V, [Clifford algebras](fdip-001B),
   [spatial Dirac operators](fdip-001C) and
   [enriched comparison](fdip-001E): distinct questions about quadratic
@@ -132,7 +139,8 @@ questions to the closing explorations.}
   \li{Part X, [Gauge fields](fdip-006L): finite surface laws,
   [cyclic duality and torus flux sectors](fdip-00NH),
   matter-induced actions and dynamical connections.}
-  \li{Part XI, [Euclidean time](fdip-007L): reflected pairings,
+  \li{Part XI, [Euclidean time](fdip-007L): reflected pairings on
+  observables, the [time map on spinor fields](fdip-017Z),
   Gaussian and gauge transfer,
   [coarse gauge fields](fdip-00MN) and
   [gauge vacua and time correlations](fdip-00N4), then
@@ -155,7 +163,11 @@ questions to the closing explorations.}
   cochain operators. [Gauge fields, charges and sampling in lattice chirality](fdip-0150) adds the
   index in a gauge field, a condition linear in the charges of several species
   under one charged rotation, and finite tests for sampled symbols, with the
-  chirality of a closed surface for Hermitian symbols. The
+  chirality of a closed surface for Hermitian symbols.
+  The next chapter, [Symmetries of graded spin fields](fdip-0170),
+  transports rotations fixing a momentum label, tests charge conjugation
+  and exchange of grading sectors, and transports the Wilson kernel
+  under total inversion. The
   [charged Grassmann law](fdip-00IL) couples these fields to an Abelian
   connection and derives exact source identities and dressed observations.}
   \li{Part XIII, [Structure](fdip-008R): operator-algebra,
@@ -163,7 +175,8 @@ questions to the closing explorations.}
   together with [matter transported by finite-group links](fdip-00SE)
   and [scalar fields on group orbits](fdip-00ZT): gauge-invariant
   weights, scalar frames and reduced links, path observables, an onsite
-  Yukawa coupling and the exact one-edge transfer.
+  Yukawa coupling, [conjugation symmetry of two coupling products](fdip-018N)
+  for specified channels, and the exact one-edge transfer.
   Speculative and optional sections retain those qualifications.}
   \li{Part XIV, [Explorations and synthesis](fdip-003W): the existing
   conjecture and finite interfaces, the
