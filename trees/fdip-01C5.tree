@@ -1,0 +1,23 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Lemma}
+\title{A lower bound for the magnetic operator}
+\date{2026-11-27}
+
+\p{In the \vocabk{ordered evaluation}{fdip-01C3} suppose all frozen symbols have least singular value at least #{g>0}. Let #{Q\ge 1} bound both #{\sum_s\sup_y\|f_s(y)\|} and #{\operatorname{Lip}(d)+\sum_s\operatorname{Lip}(f_s)} in angular distance. Set
+##{P=\max(4,\lceil 16\pi Q/g\rceil+4),\qquad h=2\pi /P .}
+If #{|\phi|<h} and #{|\phi|<g h/(4\pi Q\sqrt P)}, then #{\|H\psi\|\ge(g/2)\|\psi\|}.}
+
+\proof{\p{At any center #{v}, replace each angular coefficient by its value at #{v} and retain the shift #{X}. The resulting operator #{H_v} has gain at least #{g}: diagonalizing #{X} gives the frozen matrices at its eigenangles. At the #{P} equally spaced centers #{v_j} put #{u_j(y)=\cos(\pi\operatorname{dist}(y,v_j)/(2h))} for distance at most #{h} and zero elsewhere. On each interval between adjacent centers the two squared cosines add to #{1}, giving #{\sum_j u_j^2=1}. Each has Lipschitz constant at most #{\pi /(2h)}.}
+
+\p{Write #{\delta=|\phi|}. A vector #{\zeta=u_j(Y)\psi} has both components supported within #{h} of #{v_j}. In the upper entry #{(f_s(Y)-f_s(v_j))X^s} the shift moves this support by at most #{\delta} by \ref{fdip-01C4}. In its adjoint the coefficient difference acts before translation. The two component bounds are therefore #{\operatorname{Lip}(f_s)(h+\delta)} and #{\operatorname{Lip}(f_s)h}. Their maximum bounds the off-diagonal block on the supported space. Adding the diagonal error gives #{\|(H-H_{v_j})\zeta\|\le Q(h+\delta)\|\zeta\|\le(g/4)\|\zeta\|}.}
+
+\p{Since #{u_j(Y)} is scalar in #{W}, the commutators come only from the shifts of these angular functions. Thus #{\|[H,u_j(Y)]\|\le Q\pi\delta /(2h)} on both components. Apply the triangle inequality to the direct sum over the finite set of centers:
+##{\begin{aligned}
+\|H\psi\|&=\Big(\sum_j\|u_j(Y)H\psi\|^2\Big)^{1/2}\\
+&\ge\Big(\sum_j\|H u_j(Y)\psi\|^2\Big)^{1/2}
+ -\sqrt{P}Q\pi\delta\|\psi\|/(2h)\\
+&\ge (3g/4-\sqrt{P}Q\pi\delta /(2h))\|\psi\|.
+\end{aligned}}
+The second smallness assumption makes the last coefficient at least #{g/2}.}}

@@ -1,0 +1,23 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{The product of the plane fluxes}
+\date{2026-11-27}
+
+\p{Let #{n=2m\ge 2}, with even periods at least #{4}, spacing #{a>0}, Wilson coefficient #{a/2} and real mass parameter #{\mu=aM\notin\{0,2,\ldots,2n\}}. In each successive ordered coordinate pair #{(2j-1,2j)} take charge-one scalar links depending only on those two coordinates, with oriented scalar line flux #{w_j}. On the common spin-fiber let the Clifford directions and anticommuting grading #{\Gamma} be site-independent self-adjoint involutions. In the order given, put #{C=\ui^m\psI} and #{s=2^{-m}\trace(C\Gamma)}, with the trace on the spin-fiber. If every scalar plaquette angle has absolute value less than #{t_n(\mu)} below, the Hermitian kernel is regular and the mass-shifted index is
+##{\operatorname{ind}_{\Gamma,M}(U)=(-1)^m s\,\kappa(M)\prod_{j=1}^m w_j.}
+Here #{\kappa} is the \vocabk{bulk integer}{fdip-019W} of the free Wilson symbol. The same conclusion holds after any scalar site gauge. Interchanging the two coordinates of a plane reverses its flux and the sign of the ordered volume relative to the original coordinates.}
+
+\p{Take #{t_2} from \ref{fdip-019X}. For dimension #{j} let #{d_j(\lambda)} be the least distance from #{\lambda} to its corners #{0,2,\ldots,2j}; take #{D_j(\lambda)} from \ref{fdip-01A5} in that dimension, and put
+##{r_j(\lambda)=\min\left(1,\frac{d_j(\lambda)^2}{2\binom{2j}{2}D_j(\lambda)}\right).}
+For #{n\ge 4} use #{k=n-2}, #{L_\mu=\{\mu,\mu -2,\mu -4\}} and #{\gamma=\min(1,\min_{\lambda\in L_\mu}d_k(\lambda)/\sqrt{2})}. Form #{Q,g} as in \ref{fdip-01C9}, then #{P,h} as in \ref{fdip-01C5}, and set
+##{t_n(\mu)=\min\left(r_n(\mu),1/32,h,\frac{gh}{4\pi Q\sqrt{P}},
+\min_{\lambda\in L_\mu} r_k(\lambda),\min_{\lambda\in L_\mu} t_k(\lambda)\right).}
+All three inner masses avoid the #{k}-dimensional corners, so the recursion gives a positive bound depending only on #{n,\mu}.}
+
+\proof{\p{A scalar site gauge commutes with the site-independent grading and intertwines the Wilson kernels by \ref{fdip-0155}, preserving the inertia. The estimate of \ref{fdip-01A5} gives squared gain at least #{d_j(\lambda)^2/2} at angles below #{r_j(\lambda)}, since the chord is at most the angle magnitude. Apply \ref{fdip-01A4} in each plane to reach constant curvatures. Along that path the mixed plaquettes stay trivial; regularity at the full mass and \ref{fdip-01A3} preserve inertia. By \ref{fdip-01A1} it suffices to compute on a minimal canonical spin copy and multiply by #{s}. A Clifford direction exchanges the two grading signs, so the trace formula of \ref{fdip-014D} gives the stated half-signature interpretation.}
+
+\p{Dimension two is \ref{fdip-019X}. In the induction step, \ref{fdip-01C6} identifies the full graded kernel after positive scaling by #{a}. At the three inner masses the gain bound gives #{\gamma}. Apply \ref{fdip-01C7}, \ref{fdip-01C9} and \ref{fdip-01C5}: the last plane has constant angle no larger than the original maximum in magnitude, so this deformation also preserves inertia. At the two poles the ordered endpoint pairs are #{(H'_\mu,H'_{\mu -2})} and #{(H'_{\mu -2},H'_{\mu -4})}. With #{I_k(\lambda)} denoting the inner half-signature on the unchanged inner field, \ref{fdip-01CA} gives
+##{I_n(\mu)=-w_m\big(I_k(\mu)-2I_k(\mu -2)+I_k(\mu -4)\big).}
+All three inner angle bounds hold by construction. In the corner sum of \ref{fdip-019Y}, sorting the last two bits by weight #{0,1,2} gives the same second difference of the three inner bulk integers. The induction hypothesis now supplies the product with one additional factor #{-w_m}.}}
