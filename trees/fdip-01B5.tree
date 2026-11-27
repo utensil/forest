@@ -1,0 +1,16 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Lemma}
+\title{Inertia after eliminating a subspace}
+\date{2026-11-27}
+
+\p{Let a finite Hermitian space split orthogonally as #{I\oplus J}, and let #{H=H^\dagger} have compressions #{A} on #{I} and #{D} on #{J}. Write #{C=P_I H|_J:J\to I}. If #{A} is invertible, its Schur complement, extending the real positive case of \ref{fdip-000D}, is #{S=D-C^\dagger A^{-1}C}, and
+##{\nu_\pm(H)=\nu_\pm(A)+\nu_\pm(S),\qquad
+\ker H=\{(-A^{-1}Cy,y):y\in\ker S\}.}
+For singular #{A}, one may eliminate #{I\ominus\ker A} and retain #{\ker A\oplus J}.}
+
+\proof{
+\p{Evaluate the Hermitian form of #{H} at #{(x-A^{-1}Cy,y)}. Its cross terms cancel, leaving #{\langle x,Ax\rangle+\langle y,Sy\rangle}. This change of variables is invertible. The positive subspace of a self-adjoint operator has maximal dimension among the subspaces on which the form is positive definite, since projection onto it is injective on every such subspace. Applying the same argument to the negative form proves invariance of both dimensions under the change of variables. The equation in #{I} forces #{x_{\rm old}=-A^{-1}Cy}, after which the equation in #{J} becomes #{Sy=0}. The restriction of a self-adjoint #{A} to the orthogonal complement of its kernel is invertible there.}
+}
+\p{Mathlib's \leanref{Matrix.fromBlocks_eq_of_invertible₁₁} gives the finite matrix factorization behind this change of variables.}
