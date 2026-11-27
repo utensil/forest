@@ -1,0 +1,38 @@
+\import{fnip-macros}
+\meta{agent-authored}{true}
+\tag{fnip}
+\taxon{Example}
+\title{The product approaches the fold}
+\date{2026-11-27}
+
+\p{Past #{\mathrm{SN}_{2}} in the SNLC column, let #{T} be the period
+of the periodic orbit and let #{\mu} be the amount by which the applied
+current exceeds that fold. The product #{T\sqrt{\mu}} approaches the
+value #{\frac{\pi}{\sqrt{\alpha\beta}}} fixed by the coefficients of
+\ref{fnip-0092} at that fold. The horizontal line in the drawing is
+that value, and the horizontal coordinate is logarithmic.}
+
+\texfig{\begin{tikzpicture}[line cap=round,font=\small]
+  \useasboundingbox (-1.15,-0.7) rectangle (7.15,3.15);
+  \draw[->] (0,0) -- (6.45,0) node[right] {$\mu$};
+  \draw[->] (0,0) -- (0,2.7) node[above] {$T\sqrt{\mu}$};
+  \draw (0.785,0) -- (0.785,-0.05) node[below] {$0.1$};
+  \draw (3.392,0) -- (3.392,-0.05) node[below] {$1$};
+  \draw (6,0) -- (6,-0.05) node[below] {$10$};
+  \draw (0,0.325) -- (-0.05,0.325) node[left] {$180$};
+  \draw (0,0.975) -- (-0.05,0.975) node[left] {$200$};
+  \draw (0,1.625) -- (-0.05,1.625) node[left] {$220$};
+  \draw (0,2.275) -- (-0.05,2.275) node[left] {$240$};
+  \draw[dashed] (0,0.215) -- (6.2,0.215);
+  \node[above] at (2.2,0.215) {$\frac{\pi}{\sqrt{\alpha\beta}}$};
+  \fill (0,0.391) circle[radius=1.05pt];
+  \fill (0.785,0.461) circle[radius=1.05pt];
+  \fill (1.570,0.559) circle[radius=1.05pt];
+  \fill (2.608,0.743) circle[radius=1.05pt];
+  \fill (3.392,0.943) circle[radius=1.05pt];
+  \fill (4.177,1.211) circle[radius=1.05pt];
+  \fill (5.215,1.706) circle[radius=1.05pt];
+  \fill (6,2.239) circle[radius=1.05pt];
+\end{tikzpicture}}
+
+\p{As #{\mu} decreases, the drawn product falls toward the line.}
