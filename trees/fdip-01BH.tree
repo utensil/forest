@@ -1,0 +1,47 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{The projected normal recurrence}
+\date{2026-11-27}
+
+\p{For the \vocabk{normal transfer}{fdip-01BF} decompose the
+value on layer #{l} as #{\psi_l=u_l+v_l} in #{W_+\oplus W_-}.
+The kernel equation there is
+##{B_{+,l}u_l+tE_lv_l=u_{l-1},\qquad
+v_{l+1}=B_{-,l}v_l-tE_l^\dagger u_l.}
+It determines a unique output #{(u_l,v_{l+1})} for every input
+#{(u_{l-1},v_l)} exactly when #{B_{+,l}} is invertible.
+In that case the step is #{T_l}. If all steps exist, the
+kernel of the free-ended slab is isomorphic via #{v_1} to
+##{\ker\left(P_- T_L\cdots T_1\big|_{W_-}\right).}}
+
+\tikzfigs{0.76}{\begin{tikzpicture}[
+ pair/.style={draw,rounded corners,inner sep=5pt},
+ slice advance/.style={-{Stealth[length=2mm]},thick}
+]
+\node[pair] (input) at (0,0) {$(u_{l-1},v_l)$};
+\node[pair] (output) at (4,0) {$(u_l,v_{l+1})$};
+\draw[slice advance] (input) to node[above] {$T_l$} (output);
+\end{tikzpicture}}
+\p{At the bottom the first input has #{u_0=0}.
+At the top the last output must have #{v_{L+1}=0}.}
+
+\proof{
+\p{In the common frame the two normal hops of the Wilson
+kernel are #{-P_+\psi_{l-1}/t} and #{-P_-\psi_{l+1}/t}.
+The normal Wilson term adds #{\psi_l/t} on the same layer.
+Thus #{tK_{L,U}\psi} there is
+#{(\bbI+tA_l+tD_l)\psi_l-u_{l-1}-v_{l+1}}.
+The centered term is skew-adjoint and exchanges the normal
+ranges, so its component from #{W_+} to #{W_-} is
+#{-E_l^\dagger}. Projection gives the two equations.
+Solving first for #{u_l} gives the displayed step.
+If #{0\ne u_l\in\ker B_{+,l}}, both this value and zero
+give solutions at zero input, with their respective #{v_{l+1}}.}
+
+\p{The absent end hops give exactly the two end conditions.
+Starting at #{(0,v_1)} and following the steps recovers every
+layer uniquely. The last condition is the vanishing of the
+#{W_-} projection of #{T_L\cdots T_1(0,v_1)}.}
+}
