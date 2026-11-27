@@ -1,0 +1,16 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Lemma}
+\title{Deforming the symbol at the two poles}
+\date{2026-11-27}
+
+\p{Keep #{d(y)=-\sin y} in \ref{fdip-01C6}. Suppose #{H'_\lambda} is regular at #{\lambda=\mu,\mu -2,\mu -4}, with least gain at least #{\gamma} for #{0<\gamma\le 1}. At #{\sigma=0,\pi} write
+##{A_\sigma=H'_{\mu -2+\cos\sigma+1},\qquad D_\sigma=H'_{\mu -2+\cos\sigma -1}.}
+Put #{\chi_0(y)=\min(1,\max(0,4\cos y-1))} and #{\chi_\pi(y)=\min(1,\max(0,-4\cos y-1))}. There is a continuous deformation through degree-one Laurent symbols ending at the sum of two terms supported by these cutoffs. In the #{\sigma}-term there is an orthonormal basis of #{W} in which each entry is #{\chi_\sigma(y)a\ue^{\ui l x}} with #{a,b\in\{1,-1\}} and #{l=(b-a)/2}. The sign lists #{a,b} have the multiplicities of #{\operatorname{sgn}A_\sigma,\operatorname{sgn}D_\sigma}, respectively. The bases at the two poles may differ.}
+
+\proof{\p{At either pole, with #{c=\cos x}, the symbol in \ref{fdip-01C6} is
+##{F_\sigma(x)=\tfrac{1+c}{2}A_\sigma+\tfrac{1-c}{2}D_\sigma -\ui\sin x\,\bbI .}
+First interpolate affinely from the initial #{F(x,y)} to #{\chi_0(y)F_0(x)+\chi_\pi(y)F_\pi(x)}. Its two pole values stay fixed. In each pole expression now interpolate the two Hermitian endpoints separately to their spectral signs. Absolute eigenvalues stay at least #{\gamma}. Conjugate the flattened #{D_\sigma} along a unitary path until it is diagonal in an eigenbasis of the flattened #{A_\sigma}. A unitary between the two required bases exists, and diagonalizing that unitary supplies a path from the identity by multiplying its eigenangles by the path parameter. Both endpoint gains remain one.}
+
+\p{In each resulting joint eigenline of signs #{a,b}, if #{a=b} damp the coefficient of #{-\ui\sin x} to zero. If #{a=-b}, keep the symbol fixed. In the first case the final entry is #{a}, of exponent zero. In the second case it is #{a\cos x-\ui\sin x=a\ue^{-\ui a x}}. Their exponents are exactly #{(b-a)/2}. Multiplying by the same disjoint cutoffs throughout these last operations leaves a continuous path of Laurent degree at most one.}}

@@ -1,0 +1,15 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Lemma}
+\title{The sign remaining at each band edge}
+\date{2026-11-27}
+
+\p{Use the endpoint of \ref{fdip-01C7} for a constant scalar plane with #{V_0} sites, #{\phi=2\pi w/V_0} and #{|\phi|<1/32}. Write #{I(T)=(\nu_{-}(T)-\nu_{+}(T))/2}. The endpoint half-signature is
+##{-w\big(I(A_0)-I(D_0)\big)+w\big(I(A_\pi)-I(D_\pi)\big).}}
+
+\proof{\p{Take the increasing arc #{-\pi /2\le y<\pi /2} around zero and its half-open complement around #{\pi}. Use the orthonormal sign lines of the corresponding pole on each arc. A lower #{E_y} on a line of exponent #{l} can connect only to upper #{E_z} with #{z=y+l\phi}, weight #{a\chi_\sigma(z)} and unitary transport #{X^l}. A nonzero weight requires #{|\cos z|>1/4}; by the Lipschitz bound for cosine each seam is farther than #{1/4} from #{z}. Thus both ends lie in the same arc whenever the weight is nonzero. Pair those lower and upper spaces whenever both angles are in the arc, even if their connecting weight vanishes. All other spaces carry only their diagonal action.}
+
+\p{After the fiber identification the determinant of each paired scalar matrix is #{-\sin y\sin z-\chi_\sigma(z)^2}. A positive sine product makes it negative. Otherwise the short interval between these two angles contains that arc's sine zero, including equality at an endpoint. Both angles are then within #{|\phi|} of that pole, giving #{\chi_\sigma(z)=1} and absolute sine product at most #{|\phi|^2<1}. Every pair therefore contributes zero half-signature.}
+
+\p{On the arc around zero, for #{l\phi>0} the unmatched lower fibers exit at the positive seam, where their diagonal #{\sin y} is positive. The unmatched uppers enter at the negative seam, where #{-\sin z} is positive. Both signs reverse for #{l\phi<0}. On the complementary arc the two signs for each direction are reversed. If #{l w\ne 0}, each collection of unmatched angles occupies a half-open interval of length #{|\phi|}. As in \ref{fdip-01A7}, set #{b=\gcd(|w|,V_0)}, #{L=V_0/b}, #{j=|w|/b}. Each orbit consists of #{L} equally spaced points of one common fiber dimension #{e_o}; each such interval contains exactly #{j} of those points, including exact seam hits under its half-open convention. Since #{\sum_o L e_o=V_0}, each collection has dimension #{|w|}. When #{l w=0} there are no unmatched spaces. Each joint line contributes #{-lw} on the inner arc and #{lw} on the outer. Finally #{\sum l=(\trace\operatorname{sgn}D_\sigma -\trace\operatorname{sgn}A_\sigma)/2=I(A_\sigma)-I(D_\sigma)}, giving the formula.}}
