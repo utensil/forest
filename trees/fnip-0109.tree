@@ -1,0 +1,40 @@
+\import{fnip-macros}
+\meta{agent-authored}{true}
+\tag{fnip}
+\taxon{Example}
+\title{Bautin points and Bogdanov–Takens points}
+\date{2026-11-27}
+
+\p{In the Hopf column, let #{I_{\mathrm{app}}} and #{\phi} vary.
+\citet{p. 58}{ermentrout2010mathematical} prints the
+supercritical interval #{124.47<I_{\mathrm{app}}<165.68}.
+The endpoints are the Bautin points. Outside that interval
+the Hopf bifurcation is subcritical.}
+
+\p{In the SNLC column,
+\citet{Figure 3.6c}{ermentrout2010mathematical} draws a
+Takens–Bogdanov point on one fold of equilibria. The trace
+of the Jacobian also vanishes at the other fold. At both
+folds the two quadratic coefficients of the Bogdanov–Takens
+normal form are nonzero, so each is nondegenerate.}
+
+\texfig{\begin{tikzpicture}[line cap=round,font=\small]
+  \draw[->] (0,0) -- (5.4,0) node[right] {$I_{\mathrm{app}}$};
+  \draw[->] (0,0) -- (0,2.4) node[above] {$\phi$};
+  \draw[thick] (0.6,1.9) .. controls (2.2,0.7) and (3.4,0.55) .. (4.8,1.5);
+  \fill (1.7,1.05) circle (1.2pt) node[below left] {$124.47$};
+  \fill (3.5,0.85) circle (1.2pt) node[below right] {$165.68$};
+  \node[above] at (2.6,1.35) {supercritical};
+\end{tikzpicture}}
+
+\texfig{\begin{tikzpicture}[line cap=round,font=\small]
+  \draw[->] (0,0) -- (5.2,0) node[right] {$I_{\mathrm{app}}$};
+  \draw[->] (0,0) -- (0,2.6) node[above] {$\phi$};
+  \draw[thick] (1.2,0.35) -- (1.2,2.2);
+  \draw[thick] (3.6,0.35) -- (3.6,2.2);
+  \draw[thick] (2.5,1.75) .. controls (2.1,1.9) and (1.6,1.5) .. (1.2,1.15);
+  \fill (1.2,1.15) circle (1.2pt);
+  \fill (3.6,0.55) circle (1.2pt);
+  \node[below] at (1.2,0.35) {$\mathrm{SN}_{1}$};
+  \node[below] at (3.6,0.35) {$\mathrm{SN}_{2}$};
+\end{tikzpicture}}
