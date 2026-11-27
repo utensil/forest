@@ -4,76 +4,74 @@
 \title{Motivation and aim}
 \date{2026-11-26}
 
-\p{A few nonlinear equations carry a model neuron from rest to tonic
-spiking and to bursting.
-\citet{§1.2, pp. 8–10}{izhikevich2007dynamical}
-treats the neuron as a dynamical system. The Hodgkin–Huxley model
-on p. 8 takes as its state the membrane potential #{V} together with
-the gating variables #{n}, #{m}, and #{h} for the persistent potassium
-current and the transient sodium current, and its law is a system of
-ordinary differential equations: the next moment depends on the input
-and on the state at the present moment. The same section shows rest, periodic
-spiking, and bursting. Bursting there is a rhythmic return from a spiking mode to rest
-and back again, and a slow conductance can bring that return about.
-\citet{§3.1, p. 49}{ermentrout2010mathematical}
-reads the solutions of such equations as curves in phase space, and uses
-that geometry to sort the solutions a model neuron can have: whether it
-fires, for which parameter values it oscillates, and how the frequency
-depends on those values.}
+\p{The core interest is the neuron, its synapses and the whole brain as
+dynamical processes with nonlinear behavior: bifurcations, attractors
+and chaos. A few nonlinear differential equations can look innocuous,
+hinting at nothing exotic, yet they show how a system pushed past a
+critical point snaps into a qualitatively different regime, with
+outcomes highly sensitive near that point; in neurons, rest gives way to
+tonic spiking, bursting or irregular firing.
+\citet{§1.2, pp. 8–10}{izhikevich2007dynamical} treats the neuron as a
+dynamical system and shows rest, periodic spiking and bursting, and
+\citet{§3.1, p. 49}{ermentrout2010mathematical} reads the solutions of
+such equations as curves in phase space. This richness develops from
+single neurons through synapses and networks to the whole brain.}
 
-\p{By contrast, a fixed map from a stimulus to a response misses the
-dependence on the state at which the stimulus arrives. For one model
-neuron,
-\citet{§3.3.2, p. 53}{ermentrout2010mathematical}
-records that a small perturbation of voltage from rest decays back to
-rest, while a sufficiently large perturbation continues to increase and
-makes an action potential.
-\citet{Figure 3.1a, pp. 50–51}{ermentrout2010mathematical}
-draws those two outcomes in the excitable Morris–Lecar regime.
-\citet{§1.1.2, p. 3}{izhikevich2007dynamical}
-sets the classical picture, one voltage above which a shock produces
-a spike, beside two experiments. In one, brief strong shocks of several
-amplitudes depolarize the membrane to several values. In the other,
-long weak pulses of several amplitudes produce a slow depolarization
-and then a spike. The section finds no voltage that separates the
-trials which spike from the trials which do not, and it asks where, in
-the slow rise, the depolarization ends and the spike begins. We take
-the ongoing activity of brain networks to be a background process, and
-a stimulus to be an arrival into that process. The books cited in this
-section treat single model neurons. The network sentence is a view of
-the notes.}
+\p{A naive model that treats external stimuli as the primary driver of
+neural activity gives a static map from stimulus to response. It does
+not capture that the same stimulus can produce drastically different
+responses depending on the system's prior trajectory. For one model
+neuron, \citet{§3.3.2, p. 53}{ermentrout2010mathematical} records that a
+small perturbation of voltage from rest decays back to rest, while a
+sufficiently large perturbation makes an action potential, and
+\citet{Figure 3.1a, pp. 50–51}{ermentrout2010mathematical} draws the two
+outcomes. \citet{§1.1.2, p. 3}{izhikevich2007dynamical} finds no single
+voltage that separates the trials which spike from the trials which do
+not. This points to an ongoing activity that constitutes a background
+dynamical process under such influence. Think of an ocean: it is a
+natural flow that carries the system on its own. When a stimulus enters
+the flow, like a drop into the ocean, what we observe is only its
+surface expression. The books cited here treat single model neurons, and
+for networks this reading is our view.}
 
-\p{The notes therefore take the state and its evolution as the object
-of study. A recorded voltage is one coordinate of that state. The same
-stimulus can arrive at different states and leave different traces.
-The examples come from neuron models, and the statements concern flows,
-equilibria, and periodic orbits. Which evolution of the state produces
-the voltage that a recording keeps?}
+\p{We therefore take the state and its evolution as the object of study,
+and a recorded voltage as one coordinate of that state. Which evolution
+of the state produces the voltage that a recording keeps?}
 
-\p{Control enters in two senses, and the notes keep the senses separate.
-In one sense the brain is a controller. Motor control moves the body,
-and homeostasis holds internal quantities near the values the organism
-maintains. In the other sense the brain is an object that can be
-observed, steered, or triggered from outside. Stimulation and an
-interface that both records and stimulates act on the brain in that
-second sense.}
+\p{Control theory enters in two ways. The brain is itself a control
+system, with its own control behaviors such as motor control and
+homeostasis. The brain is also an object that can be observed, steered
+or triggered from outside, through stimulation and brain–computer
+interfaces.}
 
-\p{A single control description of the whole brain would blur
-distinctions that the phenomena keep separate. The notes therefore
-separate measurement, state, behavior, and intervention. Measurement
-is the record, since a recording does not hand over the state.
-The state is the point that evolves. Behavior is an observable output
-of that state. Intervention is an input to the dynamics, and it includes
-sensory arrival and stimulation applied from outside.}
+\p{Modeling the brain in a control-theoretic way as one object would
+blur distinctions that matter. We therefore factorize it into layers:
+measurement, state, behavior, and intervention, where measurement is
+what we record of the brain, since we never access its state directly,
+and intervention is what acts on the brain's dynamics, including sensory
+input and deliberate stimulation from outside.}
 
-\p{Structure and development supply the physical origin of these
-dynamics. The account runs from the way a neuron is built, through the
-development of a general cell into a neuron, to the growth and refinement
-of synapses from infancy to adulthood, and to the behavior that growth
-produces.}
+\p{Structure and development complete the picture: how a neuron is
+built, how a general cell develops into a neuron, how synapses grow and
+are refined from infancy to adulthood, and how that growth produces
+external output in behavior.}
 
-\p{Therefore the mathematics remains the focus. Biology supplies the
-worked examples, and the notes propose no biological theory. A method
-familiar in neuroscience is recovered from a mathematical statement.
-Each chapter keeps a remark that relates the two, and a worked example
-that carries the recovery on a neuron model.}
+\p{FNIP studies mathematics motivated by these questions of neuron
+interaction, in the way FDIP studies mathematics motivated by physics,
+in the same family as FTIP and the other math notes in utensil/forest.
+The biology serves as motivating worked examples only; no biological
+theory is proposed. The methods familiar to neuroscientists are treated
+as application-level tools, and each is recovered from a deeper
+mathematical statement: a limit, a reduction or a special case. Each
+chapter keeps a remark relating that derivation to the familiar method,
+and a worked example that carries out the recovery on a standard neuron
+model.}
+
+\p{We study the nonlinear dynamics of neurons, synapses and the brain
+through dynamical systems, and the higher function and emergent behavior
+they give rise to. We also study this behavior through the lens of
+control theory, looking at how the brain acts as a controller and how it
+may be steered by stimulation and neural interfaces. We then take a
+deeper dive into how a neuron is built and develops from a general cell
+into circuits capable of self-sustained activity, both reactive and
+proactive.}
