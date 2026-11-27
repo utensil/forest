@@ -36,6 +36,13 @@ two returns, reduced to 180 samples. The zoom is the orbit from
 samples. The dashed ellipse is the curve
 V = V* + 0.6324 cos theta + 0.7804 sin theta,
 n = n* + 0.004 cos theta, 81 equally spaced angles.
+--fig bistable (fnip-0102): phase plane at I_app = 90. Nullclines use
+the same window and step as --fig nullclines. The outer orbit is one
+return of the upcrossing of V* after a 400 ms transient from (0, 0.4),
+classical RK4, h = 0.02, reduced to 120 samples and closed. The inner
+orbit is the same section run backward from (V* + 4, n*) after 900 ms,
+then reversed so the sample order is forward time, reduced to 80 samples
+and closed. Stderr reports the stability signs and no prose decimal.
 
 The prose does not print the decimals this script reports.
 """
@@ -372,6 +379,73 @@ def cycle_lists():
     return [transient, cycle, ellipse, zoom, voltage]
 
 
+def upcrossings(v, n, current, h, count):
+    ve = eq_v(current)
+    prev = v
+    hits = []
+    pts = []
+    t = 0.0
+    while len(hits) < count and t < 2000:
+        v, n = rk4(v, n, current, h)
+        t += abs(h)
+        pts.append((v, n))
+        if prev < ve <= v:
+            hits.append(len(pts) - 1)
+        prev = v
+    if len(hits) < count:
+        raise SystemExit("section did not return")
+    return pts, hits
+
+
+def bistable_lists():
+    current = 90.0
+    ve, ne = eq_v(current), ninf(eq_v(current))
+    v, n = 0.0, 0.4
+    for _ in range(int(round(400 / 0.02))):
+        v, n = rk4(v, n, current, 0.02)
+    outer_raw, outer_hits = upcrossings(v, n, current, 0.02, 2)
+    outer = decimate(outer_raw[outer_hits[0] : outer_hits[1] + 1], 120)
+    outer.append(outer[0])
+
+    v, n = ve + 4.0, ne
+    for _ in range(int(round(900 / 0.02))):
+        v, n = rk4(v, n, current, -0.02)
+    inner_raw, inner_hits = upcrossings(v, n, current, -0.02, 2)
+    inner = decimate(inner_raw[inner_hits[0] : inner_hits[1] + 1], 80)
+    inner.reverse()
+    inner.append(inner[0])
+
+    a, b, c, d = jacobian(ve, ne)
+    print("author-check I=90 trace", "negative" if a + d < 0 else "NONNEGATIVE", file=sys.stderr)
+    # A displacement off each orbit, one return, compared with the section gap.
+    def gap(orbit, step):
+        v0, n0 = orbit[0]
+        w, z = v0, n0 + 0.004
+        for _ in range(int(round(80 / abs(step)))):
+            w, z = rk4(w, z, current, step)
+        back, hits = upcrossings(w, z, current, step, 1)
+        return abs(back[hits[0]][1] - n0)
+
+    print(
+        "author-check inner displacement grows"
+        if gap(inner, 0.02) > 0.004
+        else "author-check INNER DID NOT GROW",
+        file=sys.stderr,
+    )
+    print(
+        "author-check outer displacement shrinks"
+        if gap(outer, 0.02) < 0.004
+        else "author-check OUTER DID NOT SHRINK",
+        file=sys.stderr,
+    )
+    return [
+        null_curve(current, "v"),
+        null_curve(current, "n"),
+        [(xm(v), ym(n)) for v, n in inner],
+        [(xm(v), ym(n)) for v, n in outer],
+    ]
+
+
 FIGS = {
     "orbit": ("fnip-0011.tree", orbit_lists),
     "nullclines": ("fnip-0017.tree", nullcline_lists),
@@ -379,6 +453,7 @@ FIGS = {
     "spiral": ("fnip-0046.tree", spiral_lists),
     "cycle": ("fnip-0056.tree", cycle_lists),
     "equilibrium": ("fnip-0084.tree", equilibrium_lists),
+    "bistable": ("fnip-0102.tree", bistable_lists),
 }
 
 

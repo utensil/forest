@@ -1,0 +1,77 @@
+\import{fnip-macros}
+\meta{agent-authored}{true}
+\tag{fnip}
+\taxon{Theorem}
+\title{Normal form of an Andronov–Hopf bifurcation}
+\date{2026-11-27}
+
+\p{Suppose a smooth family in the plane has an
+\vocabk{equilibrium}{fnip-0014} at the origin for every small
+parameter value, and the eigenvalues there are
+##{\mu(\alpha)\pm i\omega(\alpha),}
+with #{\mu(0)=0} and #{\omega(0)=\omega_{0}>0}. Suppose
+#{\mu'(0)} is nonzero and the first Lyapunov coefficient
+#{\ell_{1}(0)} is nonzero. Invertible coordinate and parameter
+changes and a reparametrization of time bring the family to
+##{\dot y_{1}=\beta y_{1}-y_{2}\pm(y_{1}^{2}+y_{2}^{2})y_{1},}
+##{\dot y_{2}=y_{1}+\beta y_{2}\pm(y_{1}^{2}+y_{2}^{2})y_{2},}
+through cubic terms. The sign is the sign of #{\ell_{1}(0)}.
+The \vocabk{topological normal form}{fnip-0082} is this cubic
+truncation.
+\citet{Theorems 3.3 and 3.4, p. 98}{kuznetsov2004elements} are
+these statements, cited here and not proved in these notes. On
+that page the condition on #{\ell_{1}(0)} is the nondegeneracy
+condition, and the condition on #{\mu'(0)} is the transversality
+condition.}
+
+\p{Set #{y_{1}=r\cos\theta} and #{y_{2}=r\sin\theta}. Through cubic
+terms the same truncation is
+##{\dot r=\beta r\pm r^{3},\qquad\dot\theta=1.}}
+
+\proof{
+\p{Differentiating #{r^{2}=y_{1}^{2}+y_{2}^{2}} gives
+#{r\dot r=y_{1}\dot y_{1}+y_{2}\dot y_{2}}. Substitute the truncation.
+The cross terms #{-y_{1}y_{2}} and #{y_{2}y_{1}} cancel, so
+##{r\dot r=\beta r^{2}\pm r^{4}.}
+Thus #{\dot r=\beta r\pm r^{3}} for #{r>0}, and at #{r=0} by
+continuity. The angle satisfies
+#{r^{2}\dot\theta=y_{1}\dot y_{2}-y_{2}\dot y_{1}}. The same
+substitution gives
+##{r^{2}\dot\theta=r^{2},}
+and therefore #{\dot\theta=1}.}}
+
+\p{In #{\mathbb{R}^{n}}, suppose the derivative at an equilibrium
+has a simple pair #{\pm i\omega} with #{\omega>0}, and no other
+eigenvalue has real part zero. If the real part of that pair
+crosses zero with nonzero speed, the
+\vocabk{center manifold}{fnip-0059} carries the same cubic
+truncation. A positive coefficient gives an unstable periodic
+orbit on the side of the parameter where the equilibrium is
+stable. A negative coefficient gives a stable periodic orbit
+on the side where the equilibrium is unstable.
+\citet{Theorem 3.4.2, pp. 151–152}{guckenheimer1983nonlinear}
+is this statement, cited here and not proved in these notes.}
+
+\p{\citet{(3.4.11), p. 152}{guckenheimer1983nonlinear} is the
+cubic coefficient when the linear part is rotation by
+#{\omega}. In any dimension the coefficient is
+##{\ell_{1}(0)=\frac{1}{2\omega_{0}}\mathrm{Re}(T_{1}-2T_{2}+T_{3}),}
+##{T_{1}=\langle p,C(q,q,\bar q)\rangle,}
+##{T_{2}=\langle p,B(q,A^{-1}B(q,\bar q))\rangle,}
+##{T_{3}=\langle p,B(\bar q,w)\rangle,}
+##{w=(2i\omega_{0}I-A)^{-1}B(q,q),}
+where #{Aq=i\omega_{0}q}, #{A^{T}p=-i\omega_{0}p}, and
+#{\langle p,q\rangle=1}. The product is
+#{\sum_{i}\bar p_{i}q_{i}}. The multilinear maps #{B} and #{C}
+are the quadratic and cubic terms.}
+
+\p{\citet{(5.39), p. 180}{kuznetsov2004elements}
+is this formula.}
+
+\p{##{\ell_{1}(0)=\frac{1}{2\omega_{0}^{2}}\mathrm{Re}(ig_{20}g_{11}+\omega_{0}g_{21})}
+is \citet{(3.20), p. 98}{kuznetsov2004elements}. In that
+formula #{g_{20}=\langle p,B(q,q)\rangle},
+#{g_{11}=\langle p,B(q,\bar q)\rangle}, and
+#{g_{21}=\langle p,C(q,q,\bar q)\rangle}. The value
+depends on the scaling of the eigenvectors. The sign does not,
+once #{\langle p,q\rangle=1}.}
