@@ -1,0 +1,39 @@
+\import{fnip-macros}
+\meta{agent-authored}{true}
+\tag{fnip}
+\taxon{Example}
+\title{One line and one nullcline}
+\date{2026-11-27}
+
+\p{With #{h=0.89-1.1n} and #{m=m_{\infty}(V)}, the voltage
+equation and the equation for #{n} are a planar system.
+\citet{Fig. 5.21, p. 150}{izhikevich2007dynamical} draws an
+N-shaped #{V}-nullcline. It meets #{n=n_{\infty}(V)} once,
+so there is one equilibrium. At #{I=0} that equilibrium is
+stable. The same figure at #{I=12} has a limit cycle.}
+
+\p{\citet{Fig. 5.19, p. 149}{izhikevich2007dynamical} draws
+the orbit in the #{(n,h)} plane near #{h=0.89-1.1n}.
+\citet{Fig. 3.11, p. 67}{ermentrout2010mathematical} draws
+the same projection at three currents, and the line moves
+with the current.}
+
+% scripts/fnip/figures/hh_planar.py
+
+\texfig{\begin{tikzpicture}[line cap=round,font=\small]
+  \begin{scope}
+    \draw[->] (0,0) -- (3.4,0) node[right] {$n$};
+    \draw[->] (0,0) -- (0,2.5) node[above] {$h$};
+    \draw[thick] (0.64,1.47) -- (2.24,0.26);
+    \draw[thick] (0.72,1.58) .. controls (1.35,1.05) and (1.55,0.85) .. (2.15,0.42)
+      .. controls (1.45,0.62) and (1.15,1.15) .. (0.72,1.58);
+    \node[above] at (1.3,1.7) {$h=0.89-1.1n$};
+  \end{scope}
+  \begin{scope}[xshift=4.4cm]
+    \draw[->] (0,0) -- (3.6,0) node[right] {$V$};
+    \draw[->] (0,0) -- (0,2.5) node[above] {$n$};
+    \draw[thick] plot coordinates {(0.40,0.91) (0.52,1.30) (0.64,1.60) (0.76,1.80) (0.88,1.93) (1.00,1.99) (1.12,1.99) (1.24,1.93) (1.36,1.83) (1.48,1.70) (1.60,1.54) (1.72,1.36) (1.84,1.17) (1.96,0.98) (2.08,0.79) (2.20,0.63) (2.32,0.49) (2.44,0.38) (2.56,0.32) (2.68,0.31) (2.80,0.35) (2.92,0.47) (3.04,0.66) (3.16,0.94) (3.28,1.31)};
+    \draw[thick] plot coordinates {(0.40,0.47) (0.52,0.95) (0.64,1.70) (0.76,2.18) (0.88,2.34) (1.00,2.39) (1.12,2.40) (1.24,2.40) (1.36,2.40) (1.48,2.40) (1.60,2.40) (1.72,2.40) (1.84,2.40) (1.96,2.40) (2.08,2.40) (2.20,2.40) (2.32,2.40) (2.44,2.40) (2.56,2.40) (2.68,2.40) (2.80,2.40) (2.92,2.40) (3.04,2.40) (3.16,2.40) (3.28,2.40)};
+    \fill (0.61,1.52) circle (1.2pt);
+  \end{scope}
+\end{tikzpicture}}
