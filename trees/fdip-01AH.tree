@@ -1,0 +1,77 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{Exact boundary modes}
+\date{2026-11-27}
+
+\p{For the \vocabk{slab operator}{fdip-01AE}, write on
+layer #{l}, using that layer's transverse shifts #{T_j^U},
+##{\begin{aligned}
+W_l&=\sum_{j\ne s}\left(\bbI -
+   \tfrac12(T_j^U+(T_j^U)^\dagger)\right),\\
+D_l&=\tfrac12\sum_{j\ne s} E_j(T_j^U-(T_j^U)^\dagger).
+\end{aligned}}
+The null fields supported on the bottom layer have exactly
+the values
+##{\im P_- \cap \ker D_1 \cap
+\ker\bigl(W_1+(1-aM)\bbI\bigr).}
+At the top the formula uses #{P_+,D_L,W_L}.}
+
+\p{On a face with trivial transverse links, these values form
+the orthogonal sum of the \vocabk{translation blocks}{fdip-016C}
+at transverse corners with #{k} components #{\pi} and
+#{aM=2k+1}, restricted to the indicated projector range.
+If every transverse link is trivial and the normal link
+#{U_s(x,l)} is independent of #{x} at every step, the two
+single-face spaces exhaust #{\ker H_L(U)}. More generally, if
+transverse shifts commute and normal transports intertwine them
+between layers, the kernel consists of the two end ranges on
+joint sign tuples with #{k} minus signs and #{aM=2k+1}.}
+
+\proof{
+\p{#{\ker H_L(U)=\ker K_{L,U}} since #{\Gamma} is invertible. In
+#{aK_{L,U}} a bottom value #{v} contributes #{-P_+V_U^\dagger v}
+on layer #{2}. Unitary transport commutes with #{P_+}, so this
+vanishes exactly when #{P_+v=0}.
+On the bottom layer the remaining two terms are
+#{(W_1+(1-aM)\bbI)v} in #{\im P_-} and
+#{D_1v} in #{\im P_+}. They vanish together exactly when each
+vanishes. At the top the incoming hop tests #{P_-v}, giving
+the other formula.}
+
+\p{For a face with trivial transverse links write
+#{p_j=2\pi r_j/N_j} and
+##{\begin{aligned}
+d(p)&=1-aM+\sum_{j\ne s}(1-\cos p_j),\\
+b(p)&=\sum_{j\ne s} E_j\sin p_j,\qquad
+c(p)=\sum_{j\ne s}\sin^2p_j.
+\end{aligned}}
+On this character the on-site operator is #{d(p)\bbI+\ui b(p)}.
+Its adjoint times itself is #{(d(p)^2+c(p))\bbI}, since
+#{b(p)} is self-adjoint and its Clifford square is #{c(p)\bbI}.
+The finite geometric sum in \ref{fdip-000S} includes periods one
+and two. Hence only sampled corners with #{d(p)=0} contribute. In dimension #{2} at #{aM=1}, only #{p=0} survives:
+the bottom and top fields are constant, with values in
+#{\im P_-} and #{\im P_+}, respectively.}
+
+\p{For trivial transverse links take layerwise gauges #{g_1=\bbI_F}, #{g_{l+1}=g_lU_s(l)^{-1}}. These [gauges](fdip-009O) set the normal links to the identity
+and preserve the transverse links and the projector ranges. With #{V} the forward shift in this gauge,
+put #{N=P_-V+P_+V^\dagger}. Each shift leaves the open chain after #{L} steps. Thus
+#{V^L=(V^\dagger)^L=0} and, on the respective normal ranges, #{N^L=0}. Each character has #{aK_{L,U}=(d(p)\bbI -N)+\ui b(p)}.
+Since #{b(p)} exchanges the normal ranges and commutes with #{V},
+#{N^\dagger b(p)=b(p)N}. Consequently
+##{a^2H_L(U)^2=(d(p)\bbI -N)^\dagger(d(p)\bbI -N)+c(p)\bbI .}
+A noncorner has #{c(p)>0}. At a corner with #{d(p)\ne0},
+multiplying #{d(p)\bbI -N} by
+#{\sum_{j=0}^{L-1}d(p)^{L-1-j}N^j} gives #{d(p)^L\bbI}.
+At a matching corner the two components of #{N} kill only
+the bottom #{P_-} field and the top #{P_+} field, respectively.
+The gauges preserve each of these single-face spaces.}
+
+\p{For commuting, intertwined shifts use the same gauges pointwise
+in #{x}. They identify the transverse shifts on every layer.
+The grading and Clifford actions preserve their joint subspaces.
+On each, insert its scalar multipliers #{\ue^{\ui p_j}} in the same
+square formula. It gives exactly the stated end spaces.}
+}
