@@ -1,0 +1,36 @@
+\import{fnip-macros}
+\meta{agent-authored}{true}
+\tag{fnip}
+\taxon{Example}
+\title{A step and a ramp}
+\date{2026-11-27}
+
+\p{Take the Hopf column of \ref{fnip-0005} at rest with
+#{I_{\mathrm{app}}=60}. A step to #{I_{\mathrm{app}}=85} fires
+one spike. A linear ramp from #{60} to #{85} over #{500} ms
+does not. A ramp from #{60} to #{88} fires when it lasts
+#{50} ms and does not when it lasts #{100} ms. The step and
+the slow ramp end at the same current, and only the step fires.}
+
+\p{\citet{§7.1.5, p. 224}{izhikevich2007dynamical} traces that
+difference to the state the protocol leaves on the phase
+portrait at the final current. The ramp follows the resting
+equilibrium as the equilibrium moves. The step leaves the
+state where the old equilibrium was.}
+
+\texfig{\begin{tikzpicture}[line cap=round,font=\small]
+  \begin{scope}
+    \draw[->] (0,0) -- (2.8,0) node[right] {$t$};
+    \draw[->] (0,0) -- (0,1.8) node[above] {$V$};
+    \draw[thick] (0.2,0.4) -- (0.55,0.4)
+      .. controls (0.85,0.55) and (0.95,1.55) .. (1.25,1.45)
+      .. controls (1.55,1.35) and (1.7,0.35) .. (2.4,0.45);
+    \node[below] at (1.3,-0.05) {step};
+  \end{scope}
+  \begin{scope}[xshift=3.6cm]
+    \draw[->] (0,0) -- (2.8,0) node[right] {$t$};
+    \draw[->] (0,0) -- (0,1.8) node[above] {$V$};
+    \draw[thick] (0.2,0.4) .. controls (1.1,0.5) and (1.8,0.7) .. (2.4,0.9);
+    \node[below] at (1.3,-0.05) {ramp};
+  \end{scope}
+\end{tikzpicture}}
