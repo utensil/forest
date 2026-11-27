@@ -14,3 +14,36 @@ The equation #{\cos p_*=1/(2c)} has a solution #{0<p_*<h} because
 #{\cos h<1/(2c)<1}. Thus the underlying symbol has a further zero
 on each side of the origin, strictly before the neighboring sample. Such a #{c} exists for every period #{N\ge 5}, which extends the case #{N=8},
 #{c=3/5} of \ref{fdip-0142} to all these periods. Thus for every period #{N\ge 5} the sign of the derivative of a range-#{2} symbol at a zero vertex need not equal the degree of that vertex for the sampled interpolant: here the derivative is negative and the degree is #{+1}.}
+
+\p{Fix now #{c>\tfrac{1}{2}} independently of #{N}, still with
+#{N\ge5}, and put #{p_*=\arccos(1/(2c))}, so
+#{0<p_*<\tfrac{\pi}{2}}. The same formula for #{f(\pm h)}
+gives vertex degree #{+1} when #{h>p_*} and #{-1} when
+#{h<p_*}. Thus no fixed #{c} gives the mismatch at every
+period. At #{h=p_*}, the samples at #{-h,0,h} all vanish:
+the interpolant is zero on both adjacent edges, and the origin has
+no nondegenerate [vertex degree](fdip-013Y). For #{c=3/5},
+#{\cos(\pi/5)<5/6<\cos(\pi/6)} places #{N=10} on the
+first branch and #{N=12} on the second.}
+
+\p{When #{h<p_*}, the two sampled crossings beside the origin
+each contribute #{+1}. Indeed,
+#{f(p)=\sin p(1-2c\cos p)} is negative before #{p_*}
+and positive after it in #{(0,\pi)}. Consecutive samples
+bracketing #{p_*} therefore give an upward affine crossing;
+if #{p_*} is a sample, its two neighbors instead give
+vertex degree #{+1} by \ref{fdip-013Z}. Oddness gives the
+other upward crossing. The edge crossings need not occur at
+the continuous zeros #{\pm p_*}.}
+
+\p{If #{4} divides #{N}, both endpoints of
+#{[-\pi/2,\pi/2]} are samples, with values #{-1} and #{1}.
+Choose a [regular value](fdip-013Y) #{y} with #{-1<y<1}.
+On the oriented edge from #{p} to #{p+h}, the signed crossing is
+##{\frac{\operatorname{sgn}(f(p+h)-y)
+-\operatorname{sgn}(f(p)-y)}2.}
+Summing over that interval cancels every interior sample and
+gives #{(1-(-1))/2=1}. This also holds at #{h=p_*}, when
+the zero vertices are degenerate. The endpoints remain samples
+on every integer-multiple refinement, so this interval count
+stays #{+1} for the fixed symbol.}

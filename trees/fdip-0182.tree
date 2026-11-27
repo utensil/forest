@@ -5,11 +5,23 @@
 \title{Reflected transports in the centered and Wilson operators}
 \date{2026-11-26}
 
-\p{For the \vocabk{spinor time map}{fdip-017Z}, take a
-\vocabk{connection}{fdip-006D} with unitary represented
-transport #{U_j(x)} on each positive edge #{x\to x+e_j},
-where #{e_j} is one step along direction #{j}. At spacing
-#{a>0} use the shifts and operators
+\p{For the \vocabk{spinor time map}{fdip-017Z}, index a
+\vocabk{connection}{fdip-006D} by the positive steps.
+Use the \vocabk{finite incidence presentation}{fdip-0002}
+with vertices #{\Lambda} and one edge #{(x,j)} from #{x}
+to #{x+e_j} for every site and direction, where #{e_j}
+is one step along direction #{j}. Its represented
+unitary transport is #{U_j(x)}. For #{N_j\ge3} these are
+the positive nearest-neighbor edges of the
+[covariant lattice Dirac operator](fdip-009O). For #{N_j=2},
+#{(x,j)} and #{(x+e_j,j)} are distinct edges with independent
+links, not formal reverses of one another. For #{N_j=1},
+the edge is a loop; reversing that edge inverts its transport.
+The chosen time direction is reversed as a labeled direction,
+even when its two signed site images agree, as in a
+\vocabk{period-preserving signed permutation}{fdip-0164}.}
+
+\p{At spacing #{a>0} use the shifts and operators
 ##{\begin{aligned}
 (T_j^U\psi)(x)&=(\bbI_S\otimes U_j(x)^{-1})\psi(x+e_j),\\
 D_{a,U}&=\frac1{2a}\sum_j(\varepsilon_j\otimes\bbI_F)
@@ -51,8 +63,13 @@ at #{x-e_t}, with coefficient #{b_F(U_t(\theta_s x)^{-1})}.
 That coefficient must be #{U'_t(x-e_t)} in the inverse
 target shift. Since #{\theta_s(x-e_t)=\theta_s x+e_t},
 the displayed time link gives exactly this coefficient.
-Its base is the reflected head of the positive time edge,
-as in \ref{fdip-00PY}.}
+Reflection sends the positive time step from #{x} to the formal
+reverse of the positive step based at #{\theta_s x-e_t},
+the reflected head of the original edge, as in \ref{fdip-00PY}.
+Spatial steps keep their positive orientation. These rules
+also apply to parallel steps and loops.
+All the reindexings above are bijections at every positive
+period, so the same coefficient identities hold there.}
 
 \p{The inverse spin antiunitary commutes with all directions.
 Conjugation by #{\varepsilon_t} fixes #{\varepsilon_t} and
