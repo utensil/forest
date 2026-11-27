@@ -1,0 +1,25 @@
+\import{fnip-macros}
+\meta{agent-authored}{true}
+\tag{fnip}
+\taxon{Remark}
+\title{A quasi-threshold}
+\date{2026-11-27}
+
+\p{For a resonator the boundary between a small response and
+a spike need not be a single curve.
+\citet{§7.2.4, p. 241}{izhikevich2007dynamical} calls the thin
+set of intermediate trajectories a quasi-threshold, after
+FitzHugh. In the Hodgkin–Huxley model that set is thinner
+than the fluctuations of the membrane, so a practical
+experiment still sees an all-or-none spike.}
+
+\texfig{\begin{tikzpicture}[line cap=round,font=\small]
+  \draw[->] (0,0) -- (4.2,0) node[right] {$V$};
+  \draw[->] (0,0) -- (0,2.4) node[above] {$n$};
+  \fill (0.8,0.7) circle (1.4pt);
+  \draw[thick] (0.8,0.7) .. controls (1.6,0.9) and (2.2,1.3) .. (3.2,1.1)
+    .. controls (2.4,0.5) and (1.4,0.45) .. (0.8,0.7);
+  \draw[thick,dashed] (0.8,0.7) .. controls (2.0,1.6) and (3.4,1.8) .. (3.6,0.9)
+    .. controls (2.6,0.3) and (1.5,0.35) .. (0.8,0.7);
+  \node[right] at (2.3,1.7) {quasi-threshold};
+\end{tikzpicture}}
