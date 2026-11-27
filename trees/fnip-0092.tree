@@ -1,0 +1,46 @@
+\import{fnip-macros}
+\meta{agent-authored}{true}
+\tag{fnip}
+\taxon{Theorem}
+\title{Square-root growth of the period}
+\date{2026-11-27}
+
+\p{Suppose #{a} and #{b} are positive and
+##{\dot V=a(I-I_{\mathrm{SN}})+b(V-V_{\mathrm{SN}})^{2}.}
+For #{I>I_{\mathrm{SN}}} the equation has no
+\vocabk{equilibrium}{fnip-0014}. The time taken for #{V} to go
+from #{-\infty} to #{\infty} is
+##{\frac{\pi}{\sqrt{ab(I-I_{\mathrm{SN}})}}.}
+\citet{(3.8), p. 72}{ermentrout2010mathematical} is this quadratic
+model, and the displayed time is the time for this model. The
+nondegeneracy conditions of \ref{fnip-0087} make the quadratic part
+of the equation on the \vocabk{center manifold}{fnip-0059} the same
+expression, and a cubic remainder remains. That reduction is cited
+there and is not proved in this theorem. The canonical theta model
+##{\dot\theta=(1-\cos\theta)+(1+\cos\theta)I}
+has period #{\frac{\pi}{\sqrt{I}}} for #{I>0}. It is the normalization
+#{c=1} and #{ab=c} of
+##{\dot\theta=c(1-\cos\theta)+\frac{ab}{c}(1+\cos\theta)(I-I_{\mathrm{SN}}),}
+with the current measured from the fold.
+\citet{(3.9), p. 73}{ermentrout2010mathematical} prints that
+equation, and the exercise attributes the normal form to Ermentrout
+and Kopell.
+\citet{§8.1.5, p. 278}{izhikevich2007dynamical} names the quadratic
+model as a canonical model for a fold on a closed curve.}
+
+\proof{
+\p{Write #{u=V-V_{\mathrm{SN}}} and #{\mu=I-I_{\mathrm{SN}}}.
+For #{a}, #{b}, and #{\mu} positive, the antiderivative of the
+reciprocal of #{a\mu+bu^{2}} is
+#{(ab\mu)^{-\frac{1}{2}}\arctan\bigl(u\sqrt{\frac{b}{a\mu}}\bigr)}.
+Evaluating it from #{-\infty} to #{\infty} gives
+##{\int_{-\infty}^{\infty}\frac{du}{a\mu+bu^{2}}
+=\frac{\pi}{\sqrt{ab\mu}}.}}
+\p{For the canonical theta model set #{x=\tan(\frac{\theta}{2})}. Then
+##{\cos\theta=\frac{1-x^{2}}{1+x^{2}},\qquad
+\dot\theta=\frac{2(x^{2}+I)}{1+x^{2}},}
+and #{\frac{dx}{d\theta}=\frac{1+x^{2}}{2}}, so #{\dot x=x^{2}+I}.
+One full turn carries #{x} from #{-\infty} to #{\infty}. The
+time is the integral above with #{a=b=1} and with the parameter
+equal to #{I}.}
+}

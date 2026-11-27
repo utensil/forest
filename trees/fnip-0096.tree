@@ -1,0 +1,35 @@
+\import{fnip-macros}
+\meta{agent-authored}{true}
+\tag{fnip}
+\taxon{Example}
+\title{The theta neuron on the circle}
+\date{2026-11-27}
+
+\p{For #{I<0} the canonical equation in \ref{fnip-0092} has two
+equilibria on the circle. The filled point is the node, where
+#{x=\tan(\frac{\theta}{2})} is negative, and the open point is the saddle.
+At #{I=0} the two equilibria meet. For #{I>0} every solution
+continues around the circle, and the period is #{\frac{\pi}{\sqrt{I}}}.}
+
+\texfig{\begin{tikzpicture}[line cap=round,font=\small]
+  \useasboundingbox (-0.3,-0.55) rectangle (6.35,2.85);
+  \draw (1.35,1.25) circle[radius=1];
+  \draw[->] (2.35,1.25) -- (2.35,0.85);
+  \draw[->] (1.35,2.25) -- (0.95,2.25);
+  \draw[->] (0.55,0.55) -- (0.95,0.25);
+  \fill ({1.35+cos(-70)},{1.25+sin(-70)}) circle[radius=1.15pt];
+  \draw ({1.35+cos(70)},{1.25+sin(70)}) circle[radius=1.2pt];
+  \node at (1.35,-0.15) {$I<0$};
+  \draw (4.55,1.25) circle[radius=1];
+  \draw[->] (5.55,1.25) -- (5.55,1.65);
+  \draw[->] (4.55,2.25) -- (4.15,2.25);
+  \draw[->] (3.55,1.25) -- (3.55,0.85);
+  \draw[->] (4.55,0.25) -- (4.95,0.25);
+  \node at (4.55,-0.15) {$I>0$};
+\end{tikzpicture}}
+
+\p{On the left, both branches of the flow run from the saddle to the
+node. On the right the flow runs one way around the circle.}
+
+\p{\citet{Exercise 8, p. 73}{ermentrout2010mathematical} asks for
+these three phase lines, including the meeting at #{I=0}.}

@@ -1,0 +1,50 @@
+\import{fnip-macros}
+\meta{agent-authored}{true}
+\tag{fnip}
+\taxon{Example}
+\title{The closed curve in the SNLC column}
+\date{2026-11-27}
+
+\p{In the SNLC column of \ref{fnip-0086}, take an applied current between
+the two folds. The unstable manifold of the saddle meets the stable
+node along a short branch and along a long branch, and those branches
+form a closed curve. The upper equilibrium stays off that curve. Past
+the fold #{\mathrm{SN}_{2}} of Figure 3.6a, the node and the saddle
+have disappeared and the curve is a stable periodic orbit. The upper
+equilibrium remains inside it.}
+
+\texfig{\begin{tikzpicture}[line cap=round,font=\small]
+  \useasboundingbox (-0.95,-0.85) rectangle (7.85,2.45);
+  \draw[->] (0,0) -- (3.45,0) node[right] {$V$};
+  \draw[->] (0,0) -- (0,2.2) node[above] {$n$};
+  \draw (0,0) -- (0,-0.05) node[below] {$-60$};
+  \draw (1.067,0) -- (1.067,-0.05) node[below] {$-30$};
+  \draw (2.133,0) -- (2.133,-0.05) node[below] {$0$};
+  \draw (3.2,0) -- (3.2,-0.05) node[below] {$30$};
+  \draw (0,0.186) -- (-0.05,0.186) node[left] {$0$};
+  \draw (0,0.932) -- (-0.05,0.932) node[left] {$0.2$};
+  \draw (0,1.677) -- (-0.05,1.677) node[left] {$0.4$};
+  \draw[thick] plot coordinates {(1.266,0.240) (1.317,0.247) (1.370,0.253) (1.430,0.259) (1.494,0.266) (1.568,0.274) (1.635,0.282) (1.709,0.291) (1.812,0.303) (1.966,0.322) (2.199,0.358) (2.518,0.431) (2.841,0.561) (3.068,0.736) (3.176,0.926) (3.185,1.113) (3.126,1.281) (3.027,1.426) (2.910,1.541) (2.785,1.629) (2.660,1.688) (2.536,1.718) (2.410,1.723) (2.276,1.703) (2.124,1.660) (1.938,1.597) (1.708,1.515) (1.447,1.414) (1.194,1.299) (0.979,1.176) (0.810,1.051) (0.682,0.930) (0.589,0.817) (0.522,0.716) (0.478,0.628) (0.449,0.553) (0.433,0.490) (0.426,0.414) (0.436,0.342) (0.459,0.294) (0.497,0.255) (0.545,0.229) (0.591,0.214) (0.646,0.204) (0.704,0.199) (0.762,0.198) (0.819,0.199) (0.874,0.202)};
+  \draw[thick] plot coordinates {(1.238,0.238) (1.225,0.237) (1.211,0.236) (1.198,0.234) (1.185,0.233) (1.172,0.231) (1.159,0.229) (1.145,0.228) (1.130,0.226) (1.116,0.225) (1.102,0.223) (1.087,0.222) (1.072,0.220) (1.058,0.219) (1.046,0.218) (1.032,0.216) (1.019,0.214) (1.005,0.214) (0.993,0.212) (0.979,0.211) (0.965,0.209) (0.951,0.208)};
+  \fill (0.906,0.204) circle[radius=1.1pt] node[below left=1pt] {$N$};
+  \draw (1.251,0.240) circle[radius=1.15pt] node[above=1pt] {$S$};
+  \draw (2.295,1.297) circle[radius=1.15pt] node[right=1pt] {$U$};
+  \node at (1.6,-0.62) {$I<I_{\mathrm{SN}_{2}}$};
+  \begin{scope}[xshift=4cm]
+    \draw[->] (0,0) -- (3.45,0) node[right] {$V$};
+    \draw[->] (0,0) -- (0,2.2) node[above] {$n$};
+    \draw (0,0) -- (0,-0.05) node[below] {$-60$};
+    \draw (1.067,0) -- (1.067,-0.05) node[below] {$-30$};
+    \draw (2.133,0) -- (2.133,-0.05) node[below] {$0$};
+    \draw (3.2,0) -- (3.2,-0.05) node[below] {$30$};
+  \end{scope}
+  \draw[thick] plot coordinates {(6.136,0.336) (6.810,0.527) (7.193,0.905) (7.151,1.279) (6.926,1.552) (6.668,1.704) (6.413,1.740) (6.123,1.675) (5.704,1.523) (5.189,1.300) (4.810,1.045) (4.599,0.809) (4.499,0.621) (4.463,0.484) (4.465,0.389) (4.486,0.326) (4.518,0.284) (4.554,0.255) (4.592,0.237) (4.629,0.224) (4.664,0.215) (4.697,0.210) (4.728,0.206) (4.755,0.203) (4.782,0.202) (4.806,0.201) (4.828,0.201) (4.867,0.201) (4.901,0.202) (4.930,0.203) (4.957,0.204) (4.980,0.206) (5.001,0.207) (5.021,0.209) (5.049,0.211) (5.075,0.214) (5.101,0.216) (5.128,0.218) (5.148,0.221) (5.169,0.222) (5.192,0.225) (5.220,0.228) (5.254,0.231) (5.274,0.233) (5.297,0.236) (5.325,0.239) (5.359,0.242) (5.401,0.247) (5.458,0.253) (5.539,0.262) (5.669,0.276) (5.920,0.305) (6.136,0.336)};
+  \draw (6.306,1.325) circle[radius=1.15pt] node[right=1pt] {$U$};
+  \node at (5.6,-0.62) {$I>I_{\mathrm{SN}_{2}}$};
+\end{tikzpicture}}
+
+\p{The left drawing is the closed curve through #{N} and #{S}, with
+the upper equilibrium #{U}. The right drawing is the periodic orbit
+after the fold, still with #{U} inside.
+\citet{Figure 3.5, p. 59}{ermentrout2010mathematical} draws
+the phase plane before repetitive firing and the later periodic orbit.}
