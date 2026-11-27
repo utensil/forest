@@ -1,0 +1,21 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Example}
+\title{A strip with fractional flux}
+\date{2026-11-27}
+
+\p{Take normal period #{2m} with #{m\ge2}, transverse period #{4}, and let #{A} run from column #{0} through #{m-1}. All normal links are identities. All transverse links are identities except on column #{m}, where they have phase #{\ue^{\ui \alpha}}, #{0<\alpha<\pi /2}. The only nontrivial plaquette rows have angles #{+\alpha} on column #{m-1} and #{-\alpha} on column #{m}. The [strip fluxes](fdip-01B3) are #{w_A=4\alpha /(2\pi)} and #{w_B=-w_A}. Their sum is zero while #{0<w_A<1}.}
+
+\tikzfigs{0.78}{\begin{tikzpicture}[x=1cm,y=1cm]
+\draw (0,0) rectangle (2.8,1.2);
+\draw (2.8,0) rectangle (5.6,1.2);
+\node at (1.4,.6) {$A$};
+\node at (4.2,.6) {$B$};
+\draw[-{Stealth[length=2mm]},thick] (2.65,.15) to (2.65,1.05);
+\draw[-{Stealth[length=2mm]},thick] (2.95,1.05) to (2.95,.15);
+\node[below] at (0,0) {$0$};
+\node[below] at (2.8,0) {$m$};
+\node[below] at (5.6,0) {$2m\equiv0$};
+\end{tikzpicture}}
+\p{The transverse circles of the two strips have opposite boundary orientations at their common cut. Multiplying all plaquette phases of #{A} cancels every internal link with its inverse, leaving just the oriented boundary holonomy #{\ue^{2\pi\ui w_A}}. The marked circle contributes #{\ue^{4\ui\alpha}} in the orientation of #{A}.}

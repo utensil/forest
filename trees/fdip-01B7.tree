@@ -1,0 +1,27 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{Wall links do not determine the half-signature}
+\date{2026-11-27}
+
+\p{For every integer #{R\ge0} and every angle window #{\delta>0}, two regular \vocabk{domain-wall operators}{fdip-01B3} on one periodic square lattice have identical links throughout the wall neighborhood of radius #{R}, the same mass on corresponding strips, and zero flux in each strip. All plaquette angles have magnitude less than #{\delta}. Their half-signatures differ by #{2}. Thus adding any fixed mass-dependent linear combination of the two strip fluxes preserves this difference.}
+
+\proof{
+\p{Use \ref{fdip-01B6} with #{m=2R+8}. Let #{q=R+3} and put #{c_q=-1}, #{c_{q+1}=1}, #{c_x=0} elsewhere. Vary the transverse links alone, giving them phase #{\ue^{\ui \theta c_x}}. Both changed columns lie outside that neighborhood. The plaquette phase is #{\ue^{\ui \theta(c_{x+1}-c_x)}}. If #{2|\theta|<\pi}, its principal angles telescope to zero over each strip.}
+
+\p{Let #{P} project onto the two zero lines of #{H(0)}, #{Q=\bbI -P}, and let #{g>0} be the least gain of #{QH(0)Q} on #{\im Q}, that is, the minimum norm of its value on a unit vector there. Use the amplitudes of \ref{fdip-01B6} with the transverse character normalized separately. On #{\im P} the change of the sine term is exactly #{\sin\theta\,D_0}. This operator #{D_0} acts on the plus and minus lines, respectively, by
+##{|u_{q+1}|^2-|u_q|^2,\qquad |v_q|^2-|v_{q+1}|^2.}
+Their minimum #{\lambda} is positive by the ratios in that lemma. Within the constant transverse character the change of the cosine term is #{(1-\cos\theta)\Gamma} times the projection onto the two columns. Compression cannot increase its norm.}
+
+\p{Write #{r=\tan(\theta /2)}. On the full space the change of the transverse hopping term has norm at most #{|\ue^{\ui \theta}-1|\le2|r|}. Before multiplication by the unitary #{\Gamma}, each of the two changed shifts acts on its own orthogonal #{E_y} sign range. Each shift changes in norm by #{|\ue^{\ui \theta}-1|}. Thus #{\|QH(\theta)P\|\le2|r|}. For #{|r|<g/4}, the compression to #{\im Q} has gain at least #{g-2|r|} and inverse norm at most #{2/g}. Its form keeps its original sign on each old positive and negative subspace, so their dimensions stay fixed.}
+
+\p{Eliminating #{\im Q} by \ref{fdip-01B5} leaves an operator #{S_0(\theta)} on the two zero lines with
+##{\|S_0(\theta)-\sin\theta\,D_0\|
+ \le 1-\cos\theta+8r^2/g
+ \le (2+8/g)r^2.}
+For #{|r|<1}, #{|\sin\theta|=2|r|/(1+r^2)\ge|r|}. Choose
+##{0<r<\min\{1,g/4,\lambda /(2+8/g),\delta /4,\pi /8\},\qquad
+\theta=2\arctan r.}
+The two reduced operators at #{+\theta} and #{-\theta} are positive and negative definite, respectively. The fixed complement dimensions add to theirs. Both endpoints are regular and #{h(H(\theta))-h(H(-\theta))=-2}. The choice #{2|\theta|\le4r} gives the required angle window.}
+}
