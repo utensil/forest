@@ -1,0 +1,61 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{Energy sign and the slice kernel}
+\date{2026-11-27}
+
+\p{For a \vocabk{normal transfer}{fdip-01BF} #{T} on a
+single slice, let #{H'=E_sK'} be its
+\vocabk{graded slice kernel}{fdip-01BF}. If #{B_+>0},
+##{\nu_\pm(\bbI -T)=\nu_\pm(H'),\qquad
+\ker(\bbI -T)=\ker H'.}
+In particular these are the energy-sign dimensions when
+#{T>0}. The positive subspaces can be distinct.}
+
+\proof{
+\p{Write #{t=a_s}, let #{\iota:W_+\to W} be inclusion and
+put #{Q=t^{-1}B_+}, #{X=(\bbI -T)/t}. On the orthogonal
+ranges of #{P_+,P_-} the restrictions of #{H'} have the form
+##{H'=\begin{pmatrix}
+ A_+ & E\\ E^\dagger & -A_-
+\end{pmatrix}.}
+From the defining equations for #{T},
+##{X=H'-H'\iota Q^{-1}\iota^\dagger H'.}
+Indeed its upper restrictions are #{A_+B_+^{-1}} and
+#{B_+^{-1}E}, since #{B_+=\bbI_++tA_+}. The lower ones
+are #{E^\dagger B_+^{-1}} and #{-A_--tE^\dagger B_+^{-1}E},
+which are the same terms obtained by subtraction on the right.}
+
+\p{On #{W\oplus W_+} the form
+##{\langle z+\iota w,H'(z+\iota w)\rangle+t^{-1}\|w\|^2}
+is congruent to the form of #{H'\oplus t^{-1}\bbI_+} by
+the invertible shear #{(z,w)\mapsto(z+\iota w,w)}.
+Completing the square in #{w} gives
+##{\langle z,Xz\rangle+
+\langle w+Q^{-1}\iota^\dagger H'z,\,
+Q(w+Q^{-1}\iota^\dagger H'z)\rangle .}
+The second expression is congruent to #{X\oplus Q}.
+An invertible change of variables preserves the maximal dimensions
+of strictly positive and strictly negative subspaces. For either
+sign this maximum is the dimension of its spectral subspace:
+orthogonal projection onto that subspace is injective on every
+definite subspace of that sign. As #{Q} and #{t^{-1}\bbI_+}
+are positive on the same space, their contributions cancel.
+Thus #{X} and #{H'} have equal sign dimensions. The identity
+for #{X} gives #{\ker H'\subseteq\ker X}; equal nullities
+give equality of kernels, and #{t>0} gives the formula.}
+
+\p{For distinct sign spaces use the second slice of
+\ref{fdip-01BJ} with spin dimension #{2}. There
+#{A=\bbI}, #{B_+=2\bbI_+}, and #{E:W_-\to W_+} is
+unitary. Hence #{(H')^2=2\bbI}, #{\trace H'=0}, and
+#{\bbI -T=H'/2-P_-}. This operator does not commute with
+#{H'} because #{E\ne0}. If their positive lines coincided,
+so would their orthogonal negative lines, and the two
+operators would commute.}
+}
+
+\p{Mathlib's \leanref{Matrix.fromBlocks_eq_of_invertible₂₂} gives
+the factorization underlying completion of the square at an
+invertible lower-right restriction.}
