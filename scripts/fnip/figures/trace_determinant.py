@@ -1,9 +1,9 @@
 """Trace-determinant plane.
 
-Book: the parabola tau^2 = 4 Delta, and the three foci marked on the
-zoomed panel. Morris-Lecar uses the Hopf column of Ermentrout and
-Terman, Table 3.1, p. 51. The FitzHugh-Nagumo mark is the origin of
-V' = V (0.1 - V) (V - 1) - w, w' = 0.01 V - 0.02 w.
+Book: Izhikevich, Figure 4.15, p. 104, for the trace-determinant
+plane. The parabola is tau^2 = 4 Delta. Morris-Lecar uses the Hopf
+column of Ermentrout and Terman, Table 3.1, p. 51. The FitzHugh-Nagumo
+mark is the origin of V' = V (0.1 - V) (V - 1) - w, w' = 0.01 V - 0.02 w.
 
 --fig plane (fnip-0040): both parabolas are tau^2 = 4 Delta, 81 points.
 Zoomed panel: Delta from -0.004 to 0.022, tau from -0.20 to 0.10,
@@ -132,6 +132,9 @@ def deviation(got, pub):
 def check_plane():
     pub = published("fnip-0040.tree")
     got = plane_lists()
+    if len(got) != len(pub):
+        print("FAIL plane lists", len(got), len(pub))
+        return 1
     worst = 0.0
     for i, (g, p) in enumerate(zip(got, pub)):
         m = deviation(g, p)

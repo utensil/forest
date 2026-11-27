@@ -149,11 +149,11 @@ dips = sum(1 for i in range(1, len(fs)) if fs[i] < fs[i - 1] - 1e-7)
 Vr = rest()
 nr, mr, hr, tnr, tmr, thr = gates(Vr)
 eigs = eigenvalues(jacobian(Vr))
-print("monotonic_dips", dips)
-print("rest", Vr, nr, mr, hr)
-print("tau_rest", tnr, tmr, thr)
+print("monotonic_dips", dips, file=sys.stderr)
+print("rest", Vr, nr, mr, hr, file=sys.stderr)
+print("tau_rest", tnr, tmr, thr, file=sys.stderr)
 for z in eigs:
-    print("eig", round(z.real, 6), round(z.imag, 6))
+    print("eig", round(z.real, 6), round(z.imag, 6), file=sys.stderr)
 
 # steady curves, V in [-100, 40]
 grid = [v for v in range(-100, 41, 5)]
@@ -182,7 +182,7 @@ def y_tau(y):
 
 # clamp at 0 from rest gates, closed form, 0 to 6 ms
 ninf, minf, hinf, tn0, tm0, th0 = gates(0.0)
-print("clamp0", ninf, minf, hinf, tn0, tm0, th0)
+print("clamp0", ninf, minf, hinf, tn0, tm0, th0, file=sys.stderr)
 clamp_t = [i * 0.25 for i in range(25)]
 
 
@@ -226,8 +226,8 @@ while t <= 20.0 + 1e-12:
     prev = state[0]
     state = rk4(state, 0.0, dt)
     t += dt
-print("spike_crossings", cross, "peak", peak, "tpeak", tpeak, "endV", state[0])
-print("gmax", max(p[2] for p in traj), max(p[3] for p in traj))
+print("spike_crossings", cross, "peak", peak, "tpeak", tpeak, "endV", state[0], file=sys.stderr)
+print("gmax", max(p[2] for p in traj), max(p[3] for p in traj), file=sys.stderr)
 
 # tikz
 out = []
@@ -269,11 +269,12 @@ for name, sty in (("tn", "thick"), ("tm", "thick,dashed"), ("th", "thick,dotted"
 for name, key, v, anch, dx, dy in (
     ("n", "tn", -75, "anchor=south", 0.15, 0.06),
     ("h", "th", -65, "anchor=north west", 0.12, -0.02),
-    ("m", "tm", -20, "anchor=west", 0.08, 0.0),
 ):
     vv, yy = min(curves[key], key=lambda p: abs(p[0] - v))
     A.append(r"  \node[{}] at ({:.3f},{:.3f}) {{$\tau_{{{}}}$}};".format(
         anch, x_of(vv) + dx, y_tau(yy) + dy, name))
+# The published drawing places this label by hand, off the curve's peak.
+A.append(r"  \node[anchor=south] at (3.400,0.480) {$\tau_{m}$};")
 A.append(r"\end{scope}")
 
 B = []

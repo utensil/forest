@@ -1,5 +1,9 @@
 """Closed-form phase portraits.
 
+Book, node and saddle: Izhikevich, Figures 4.16 and 4.17, p. 105.
+Book, flat curves: Guckenheimer and Holmes, (3.2.1), section 3.2,
+p. 124, and Figure 3.2.1, p. 125.
+
 --fig node-saddle (fnip-0039): solutions of
 x' = -x, y' = -3y (stable node, y = K x^3) and
 x' = x, y' = -y (saddle, x y = C).

@@ -367,6 +367,7 @@ def main():
                 "eigenvalues",
                 round(LAM_U, 6),
                 round(LAM_S, 6),
+                file=sys.stderr,
             )
             lists = separatrix_lists()
         else:

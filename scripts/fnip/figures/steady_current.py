@@ -6,8 +6,9 @@ on [-90, 40] at step 1 mV, and the zoom on [-90, -50] at step 0.5 mV,
 after a monotonicity scan at step 0.05 mV. Closed form. Parameters as in
 hh.py: g_Na = 120, g_K = 36, g_L = 0.3, E_Na = 50, E_K = -77, E_L = -54.4.
 --fig ml (fnip-0078, lower drawing): Morris-Lecar SNLC column,
-phi = 0.067, g_Ca = 4, V3 = 12, V4 = 17.4, and the shared Table 3.1
-reversal potentials. F(V) from V = -50 mV at step 0.5 mV while F <= 70,
+Table 3.1, p. 51. phi = 0.067, g_Ca = 4, V3 = 12, V4 = 17.4,
+E_Ca = 120, E_K = -84, E_L = -60, g_K = 8, g_L = 2, V1 = -1.2,
+V2 = 18, C = 20. F(V) from V = -50 mV at step 0.5 mV while F <= 70,
 after a fold scan on [-80, 80] at step 0.01 mV.
 
 The prose does not print the decimals this script reports.
@@ -81,8 +82,8 @@ def count_roots(vals, level):
 
 
 vs, vals, dips, folds = scan(hh_F, -90.0, 40.0, 0.05)
-print("hh dips", dips, "Fends", vals[0], vals[-1], "folds", folds)
-print("hh roots at 0", count_roots(vals, 0.0))
+print("hh dips", dips, "Fends", vals[0], vals[-1], "folds", folds, file=sys.stderr)
+print("hh roots at 0", count_roots(vals, 0.0), file=sys.stderr)
 
 # Morris-Lecar SNLC column, Table 3.1. Names stay off the Hodgkin-Huxley constants.
 PHI = 0.067
@@ -109,14 +110,14 @@ def ml_F(V):
 
 
 mvs, mvals, mdips, mfolds = scan(ml_F, -80.0, 80.0, 0.01)
-print("ml dips", mdips, "folds", mfolds)
+print("ml dips", mdips, "folds", mfolds, file=sys.stderr)
 for vf in mfolds:
-    print(" fold", vf, "F", ml_F(vf), "n", ninf(vf))
+    print(" fold", vf, "F", ml_F(vf), "n", ninf(vf), file=sys.stderr)
 if len(mfolds) >= 2:
     lo, hi = sorted(ml_F(v) for v in mfolds)
-    print("between", lo, hi)
+    print("between", lo, hi, file=sys.stderr)
     for level in (lo - 5, 0.5 * (lo + hi), hi + 5):
-        print(" roots", level, count_roots(mvals, level))
+        print(" roots", level, count_roots(mvals, level), file=sys.stderr)
 
 
 def emit(path, samples, x_of, y_of, draws):
@@ -124,7 +125,7 @@ def emit(path, samples, x_of, y_of, draws):
     body = "\n".join(draws)
     body += "\n\\draw[thick] plot coordinates {" + pts + "};"
     open(path, "w").write(body + "\n")
-    print("wrote", path, "pts", len(samples))
+    print("wrote", path, "pts", len(samples), file=sys.stderr)
 
 
 def samples(F, a, b, step, y_lo, y_hi):
@@ -139,10 +140,10 @@ def samples(F, a, b, step, y_lo, y_hi):
     return out
 
 
-print("debug F-90", hh_F(-90.0), "F-50", hh_F(-50.0))
+print("debug F-90", hh_F(-90.0), "F-50", hh_F(-50.0), file=sys.stderr)
 hh_full = samples(hh_F, -90.0, 40.0, 1.0, -1000.0, 4000.0)
 hh_zoom = samples(hh_F, -90.0, -50.0, 0.5, -30.0, 80.0)
-print("debug lens", len(hh_full), len(hh_zoom), hh_zoom[:2])
+print("debug lens", len(hh_full), len(hh_zoom), hh_zoom[:2], file=sys.stderr)
 
 def xh(v):
     return (v + 100.0) * 5.6 / 140.0
@@ -181,7 +182,7 @@ pts = " ".join("({:.3f},{:.3f})".format(xz(v), yz(f)) for v, f in hh_zoom)
 lines.append(r"  \draw[thick] plot coordinates {" + pts + "};")
 lines.append(r"\end{scope}")
 HH_BODY = "\n".join(lines)
-print("fig-hh", len(hh_full), len(hh_zoom), "yz0", round(yz(0), 3), "yz ends", round(yz(hh_zoom[0][1]), 3), round(yz(hh_zoom[-1][1]), 3))
+print("fig-hh", len(hh_full), len(hh_zoom), "yz0", round(yz(0), 3), "yz ends", round(yz(hh_zoom[0][1]), 3), round(yz(hh_zoom[-1][1]), 3), file=sys.stderr)
 
 ml_win = []
 v = -50.0
@@ -191,7 +192,7 @@ while v <= 15.0 + 1e-9:
         break
     ml_win.append((v, f))
     v += 0.5
-print("ml window", ml_win[0], ml_win[-1], "n", len(ml_win))
+print("ml window", ml_win[0], ml_win[-1], "n", len(ml_win), file=sys.stderr)
 
 def xm(v):
     return (v + 50.0) * 5.6 / 60.0
@@ -210,7 +211,7 @@ for f, lab in ((-20, "-20"), (0, "0"), (20, "20"), (40, "40"), (60, "60")):
 pts = " ".join("({:.3f},{:.3f})".format(xm(v), ym(f)) for v, f in ml_win)
 ml_lines.append(r"\draw[thick] plot coordinates {" + pts + "};")
 ML_BODY = "\n".join(ml_lines)
-print("fig-ml", "ym fold region", round(ym(40), 3), round(ym(-10), 3))
+print("fig-ml", "ym fold region", round(ym(40), 3), round(ym(-10), 3), file=sys.stderr)
 
 FIGS = {"hh": HH_BODY, "ml": ML_BODY}
 _PLOT = re.compile(r"plot coordinates \{([^{}]*)\}")

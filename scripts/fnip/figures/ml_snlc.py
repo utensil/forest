@@ -369,7 +369,7 @@ def main():
             return
         if name == "circle":
             sn2 = folds()[0]
-            print("SN2", round(sn2, 4), "I", round(steady(sn2), 4))
+            print("SN2", round(sn2, 4), "I", round(steady(sn2), 4), file=sys.stderr)
             emit(circle_lists())
             return
     raise SystemExit("use --fig folds, --fig circle, or --check")
