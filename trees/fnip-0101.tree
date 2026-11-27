@@ -1,0 +1,34 @@
+\import{fnip-macros}
+\meta{agent-authored}{true}
+\tag{fnip}
+\taxon{Example}
+\title{Both Hopf points in the Hopf column}
+\date{2026-11-27}
+
+\p{In the Hopf column of \ref{fnip-0005}, the invariant formula
+gives a positive coefficient at both values where the
+equilibrium changes stability. Both bifurcations are
+subcritical. \citet{p. 57}{ermentrout2010mathematical} places
+the fold of periodic orbits at #{88.3}. The model is bistable
+for #{88.3<I_{\mathrm{app}}<94} and for
+#{212<I_{\mathrm{app}}<217}: a stable equilibrium and a stable
+periodic orbit are present together, with the unstable
+periodic orbit between them. The frequency of a periodic orbit
+born at either Hopf point stays away from zero.}
+
+\texfig{\begin{tikzpicture}[line cap=round,font=\small]
+  \useasboundingbox (-0.2,-0.55) rectangle (6.7,3.35);
+  \draw[->] (0,0) -- (6.35,0) node[right] {$I_{\mathrm{app}}$};
+  \draw[->] (0,0) -- (0,3.15) node[above] {$V$};
+  \draw (1.55,0) -- (1.55,-0.06) node[below] {$88.3$};
+  \draw (1.85,0) -- (1.85,-0.06) node[below] {$94$};
+  \draw (4.55,0) -- (4.55,-0.06) node[below] {$212$};
+  \draw (4.85,0) -- (4.85,-0.06) node[below] {$217$};
+  \draw[thick] (0.35,0.55) -- (1.85,0.85);
+  \draw[thick,dashed] (1.85,0.85) -- (4.55,1.85);
+  \draw[thick] (4.55,1.85) -- (6.05,2.35);
+  \draw[thick,dashed] (1.55,0.72) .. controls (1.15,1.15) and (1.15,0.35) .. (1.55,0.78);
+  \draw[thick] (1.55,0.45) .. controls (3.2,2.85) and (3.2,0.15) .. (4.85,2.15);
+  \draw[thick] (1.55,1.05) .. controls (3.2,2.95) and (3.2,1.35) .. (4.85,1.55);
+  \draw[thick,dashed] (4.85,1.95) .. controls (5.25,2.35) and (5.25,1.55) .. (4.85,1.72);
+\end{tikzpicture}}
