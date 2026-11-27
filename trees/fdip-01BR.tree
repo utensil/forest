@@ -1,0 +1,14 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{Restricting momentum labels to a coarser grid}
+\date{2026-11-27}
+
+\p{Under \vocabk{site refinement}{fdip-01BP} the character of fine label #{r'} restricts to the coarse label #{r_j=r'_j\bmod N_j}. All coarse labels have #{k^n} lifts. The \vocabk{period-preserving signed permutations}{fdip-0164} act compatibly; every stabilizer of a fine label is contained in the stabilizer of its restriction.}
+
+\p{On each axis the fine self-opposite residues are zero and, if #{kN} is even, #{kN/2}. The second residue lies over zero when #{k} is even and over #{N/2} when #{k} is odd and #{N} is even.}
+
+\proof{\p{The embedding #{x\mapsto kx} is injective since #{kN_j} divides #{k(x_j-y_j)} precisely when #{N_j} divides #{x_j-y_j}. In the fine character evaluated at #{kx}, the #{k} in each exponent cancels the extra #{k} of its denominator. Each residue has #{k} lifts on each axis. The reduction in one coordinate is the quotient homomorphism given in Mathlib by \leanref{ZMod.castHom} for the divisibility #{N_j\mid kN_j}.}
+
+\p{The Fourier normalization of \ref{fdip-000S} multiplies a character by the inverse square root of the site count. Thus a normalized fine character restricts to #{k^{-n/2}} times the corresponding normalized coarse one. Linear combination adds the coefficients of all fine labels over the same coarse label with this factor. Uniform scaling preserves the equality classes of periods, and coordinate permutations and signs commute with residue reduction. Finally, for #{0\le r'<kN}, the congruence #{2r'=0\bmod kN} gives #{2r'=0} or #{2r'=kN}; reducing the latter solution gives the two alternatives.}}
