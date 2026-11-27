@@ -1,0 +1,12 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Example}
+\title{The Wilson bulk integer}
+\date{2026-11-27}
+
+\p{In dimension #{n\ge1}, let #{N_j\ge3}, and let #{e} count the even periods. At trivial links, with Wilson coefficient #{a/2}, the centered coefficients are #{a^{-1}\sin p_j}. The unshifted dimensionless mass is #{\sum_j(1-\cos p_j)}. By \ref{fdip-0142} each vertex zero is obtained by putting #{\pi} on a subset of the even axes and zero elsewhere. At a subset of size #{j} the mass is #{2j}, and the local orientation is #{(-1)^j}. Thus the [bulk integer](fdip-019W) is
+##{\kappa(M)=\sum_{0\le j\le e,\,2j<aM}(-1)^j\binom ej.}
+For #{0\le\ell<e} and #{2\ell<aM<2\ell+2}, Pascal's identity cancels successive terms to give #{(-1)^\ell\binom{e-1}{\ell}}. Above every corner threshold the sum is #{(1-1)^e} for #{e>0}, hence zero. When #{e=0} the origin alone contributes for #{aM>0}. Below the first threshold the sum is empty.}
+
+\p{The Mathlib declaration \leanref{Int.alternating_sum_range_choose_eq_choose} gives this partial alternating binomial sum with upper binomial index #{n+1}.}

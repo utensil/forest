@@ -1,0 +1,25 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{A uniform mass window for regularity}
+\date{2026-11-27}
+
+\p{In dimension #{n\ge1}, use scalar links on any finite periodic grid, the self-adjoint Clifford directions, real mass parameter #{\lambda=aM} and Wilson coefficient #{a/2}. Let #{\epsilon} be the largest distance of a scalar oriented plaquette phase from #{1}, or zero when #{n=1}. Put
+##{\begin{aligned}
+d&=\min_{0\le j\le n}|2j-\lambda|,\qquad
+D=(|n-\lambda|+2n)^2+2^n\max_{0\le j\le n}(2j-\lambda)^2,\\
+(aK)^\dagger(aK)&\ \ge\bigl(d^2-\tbinom{2n}{2}D\epsilon\bigr)\bbI ,
+\qquad K=D_{W,a,U}-M\bbI .
+\end{aligned}}
+In particular in dimension #{2}, for #{0<h<2} and #{d_h=\min(h,2-h)}, if #{\epsilon<d_h^2/1200} the squared dimensionless kernel is bounded below by #{(d_h^2/2)\bbI} on the mass segment from #{h} to #{1}.}
+
+\proof{\p{With #{P_{j,\pm}=(\bbI\pm\varepsilon_j)/2} and #{T_j} the forward shift with inverse link, the dimensionless operator is
+##{aK=(n-\lambda)\bbI -\sum_j(P_{j,-}T_j+P_{j,+}T_j^\dagger).}
+Two signed shifts in distinct directions commute to error at most #{\epsilon} in norm. Their two paths between sites give products whose ratio is a translated plaquette phase or its inverse. Put #{L_{j,b}=(\bbI+(-1)^bT_j)/2} for #{b=0,1}, and for a bit vector #{b} put #{A_b=L_{n,b_n}\cdots L_{1,b_1}}, #{E_b=A_b^\dagger A_b}. Then #{E_b\ge0} and #{\sum_b E_b=\bbI}: sum from the last direction inward using #{\sum_{b_j}L_{j,b_j}^\dagger L_{j,b_j}=\bbI}.}
+
+\p{When the shifts are commuting scalar variables #{\ue^{\ui p_j}}, the weights #{E_b} are the probabilities of independent bits with probabilities #{(1-\cos p_j)/2} of being one. For #{|b|=\sum_j b_j} the squared mean plus variance of #{2|b|-\lambda} is
+##{\Big(\sum_j(1-\cos p_j)-\lambda\Big)^2+\sum_j\sin^2 p_j.}
+This is precisely the free Clifford square, giving the Laurent identity #{(aK)^\dagger(aK)=\sum_b(2|b|-\lambda)^2 E_b} for commuting variables. Equality for every set of unit scalar arguments gives equality of sorted Laurent coefficients: multiply by a monomial to obtain ordinary polynomials and use the one-variable root bound successively.}
+
+\p{In the actual shifts sort every signed word by direction, canceling neighboring inverse factors. Each has length at most #{2n}, requiring at most #{\binom{2n}{2}} swaps. Each swap costs at most #{\epsilon} times the norm of its coefficient, since surrounding shifts are unitary. The coefficient norms on the left sum to at most #{(|n-\lambda|+2n)^2}; on the right each #{L} factor has coefficient-norm sum at most #{1}. Thus #{D} bounds both sums together. The sorted expressions agree, while the positive unsorted sum on the right is at least #{d^2\bbI}. This proves the inequality. For #{n=2}, #{0\le\lambda\le2}, one has #{D\le36+4\cdot16=100}. On the indicated segment #{d\ge d_h}. Finally #{|1-\ue^{\ui\phi}|\le|\phi|} transfers the estimate to the angle hypothesis of \ref{fdip-019X}.}}
