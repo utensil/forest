@@ -1,0 +1,16 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{Pfaffian factors at real and paired labels}
+\date{2026-11-27}
+
+\p{Let #{b} be a translation-invariant real alternating form with \vocabk{compatible Fourier volumes}{fdip-01AR}. On each paired summand let #{L_o} be the skew-adjoint endomorphism specified by #{b(v,w)=\langle L_ov,w\rangle_{\mathbb R}}, and put #{A_o=-J_oL_o}. Then #{A_o} is complex-linear and Hermitian for #{J_o}. With the chosen total and self-opposite covolumes the \vocabk{Pfaffian}{fdip-008I} is
+##{\pfaffian_{\omega}(b)=
+ \prod_{r=-r}\pfaffian_{\omega_r}(b|_{E_r})\,
+ \prod_o\det_{\mathbb C}A_o.}
+An individual paired factor is strictly positive exactly when #{A_o} is nonsingular and the complex dimension of its negative part is even. For nonsingular #{b}, the sign equals the product of self-opposite Pfaffian signs exactly when the sum of these negative dimensions is even.}
+
+\proof{\p{On complexification, translating two argument vectors multiplies their bilinear pairing by the product of their characters. Unless those characters are mutual inverses, some translation makes this product different from one, hence the pairing vanishes. Thus the real restrictions have no cross terms. Each #{L_o} commutes with translations by invariance and orthogonality, hence preserves both character spaces on complexification and commutes with #{J_o}. Since #{J_o} and #{L_o} are commuting skew-adjoint operators, #{-J_oL_o} is self-adjoint and commutes with #{J_o}. It is Hermitian for the associated complex inner product.}
+
+\p{On an orthonormal complex eigenbasis #{v_j} of #{A_o}, use the real unit frame whose successive pairs are #{v_j,J_ov_j}. The identity #{L_o=J_oA_o} gives #{b(v_j,J_ov_j)=\lambda_j} for the corresponding real eigenvalue and zero across different planes. The normalized top exterior power in this frame is #{(\prod_j\lambda_j)\omega_o}. For all the summands together, the only surviving term in the top power uses the top degree of each restriction. The multinomial coefficient cancels its factorial with the factorials in their normalized powers. This gives the factorization, including a zero eigenvalue. For an invertible Hermitian endomorphism the determinant sign is the parity sign of its negative complex dimension, proving both sign assertions.}}
