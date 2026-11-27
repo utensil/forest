@@ -1,0 +1,56 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Definition}
+\title{A slab and its operator}
+\date{2026-11-27}
+
+\p{Choose a normal axis #{s} among #{n\ge1} axes. The
+\newvocab{slab} is #{\Lambda_L=\Lambda'\times\{1,\ldots,L\}},
+#{L\ge2}, where #{\Lambda'} is the product of the transverse
+cyclic grids of positive periods #{N_j}. Every positive step
+carries its own oriented link, including a loop at period one.
+Fields have values in #{S\otimes F}, for nonzero finite
+Hermitian spin and fiber spaces, with the counting inner product.
+Write #{E_j=\varepsilon_j^S\otimes\bbI_F} for the self-adjoint
+Clifford directions, #{E_iE_j+E_jE_i=2\delta_{ij}\bbI}, and
+#{P_{j,\pm}=(\bbI\pm E_j)/2}. On the normal axis write
+#{P_\pm=P_{s,\pm}}. Supply a constant self-adjoint
+\vocabk{grading}{fdip-013N} #{\Gamma} anticommuting with
+each #{E_j} and commuting with every represented fiber link.}
+
+\p{On each layer use the \vocabk{unitary shifts}{fdip-009O}
+#{T_j^U} in the transverse directions. In the normal direction put
+##{(V_U\psi)(x,l)=
+\begin{cases}
+(\bbI_S\otimes U_s(x,l)^{-1})\psi(x,l+1),&l<L,\\
+0,&l=L.
+\end{cases}}
+For spacing #{a>0} and real mass #{M}, the
+\newvocab{slab operator} is #{H_L(U)=\Gamma K_{L,U}}, where
+##{\begin{aligned}
+aK_{L,U}={}&(n-aM)\bbI -P_-V_U-P_+V_U^\dagger\\
+&-\sum_{j\ne s}\bigl(P_{j,-}T_j^U+P_{j,+}(T_j^U)^\dagger\bigr).
+\end{aligned}}
+The \vocabk{Wilson operator}{fdip-009U} with #{c_W=a/2}
+gives these coefficients when the two hops across the cut are
+removed. The term at the same site keeps its coefficient at both
+ends.}
+
+\tikzfigs{0.82}{\begin{tikzpicture}[
+ sector/.style={draw,rounded corners,inner sep=4pt},
+ hop/.style={-{Stealth[length=2mm]},thick}
+]
+\node at (0,1.2) {bottom};
+\node at (4.6,1.2) {top};
+\node[sector] (bp) at (0,0.5) {$P_+$};
+\node[sector] (bm) at (0,-0.9) {$P_-$};
+\node[sector] (tp) at (4.6,0.5) {$P_+$};
+\node[sector] (tm) at (4.6,-0.9) {$P_-$};
+\draw[hop] (bp) to[bend left=12] node[midway,above,sloped] {$-\Gamma U_s$} (tm);
+\draw[hop] (tm) to[bend left=12] node[midway,below,sloped] {$-\Gamma U_s^{-1}$} (bp);
+\end{tikzpicture}}
+
+\p{For two layers the arrows show where a field value contributes
+under the normal hops of #{aH_L(U)}. The bottom #{P_-} and top
+#{P_+} ranges have no outgoing hop.}

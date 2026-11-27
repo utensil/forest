@@ -1,0 +1,40 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Corollary}
+\title{The signed count on one face}
+\date{2026-11-27}
+
+\p{Suppose the bottom face has trivial transverse links.
+Let #{e} count the even transverse periods and
+#{h=\dim_{\mathbb C}(S\otimes F)/2}. For an integer #{k\ge0} and #{aM=2k+1},
+count the null fields supported only on the bottom, weighting
+each corner by the product of its transverse cosine signs. The
+signed dimension is
+##{h(-1)^k\binom{e}{k},}
+where #{\binom{e}{k}=0} for #{k>e}.
+For periods at least #{3}, comparison with a free periodic
+grid having the same transverse periods and an even normal
+period gives #{h\kappa(M')} whenever #{2k<aM'<2k+2},
+with the \vocabk{bulk integer}{fdip-019W} taken on that grid.}
+
+\proof{
+\p{The label #{\pi} is present precisely on an even axis.
+Choose the #{k} such axes among #{e}; all others have label zero.
+Every resulting corner has weight #{(-1)^k} and dimension #{h}
+on one face by \ref{fdip-01AG} and \ref{fdip-01AH}.
+In dimension one the transverse tuple is empty and has weight
+#{1}. For transverse periods at least #{3} the signs at these
+sampled zeros are the local degrees of \ref{fdip-0142}.}
+
+\p{The periodic grid has #{e+1} even axes. At a vertex with
+#{j} components #{\pi} its mass is negative exactly when
+#{2j<aM'}, and its degree is #{(-1)^j} by \ref{fdip-0144}.
+Pascal's identity therefore gives
+##{\kappa(M')=\sum_{j=0}^k(-1)^j\binom{e+1}{j}
+=(-1)^k\binom{e}{k}.}
+For an odd normal period the sum uses #{e} in place of #{e+1}.
+For example, with one even transverse period, an odd normal
+period and #{2<aM'<4}, the periodic vertex count is #{1-1=0}.
+The signed bottom dimension at #{aM=3} is #{-h}.}
+}

@@ -1,0 +1,52 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{Off the matching mass}
+\date{2026-11-27}
+
+\p{Take the \vocabk{slab operator}{fdip-01AE} with trivial
+transverse links and normal links constant across each layer.
+On a nonzero transverse corner space with #{k} components
+#{\pi}, put #{d=2k+1-aM}. Write #{m_L} for the least value
+of #{\|H_L(U)\psi\|} on its unit sphere. The corner restriction
+is invertible exactly when #{d\ne0}, and
+##{\frac{|d|^L}{a\sum_{j=0}^{L-1}|d|^j}
+ \le m_L \le
+\frac{|d|^L}{a\bigl(\sum_{j=0}^{L-1}|d|^{2j}\bigr)^{1/2}}.}}
+
+\proof{
+\p{In the layer gauge of \ref{fdip-01AH}, #{aK_{L,U}=d\bbI -N}.
+The operator #{N} is a contraction since its two truncated shifts
+on #{\im P_\pm} are contractions with orthogonal images.
+For #{d\ne0}, #{N^L=0} gives the two-sided inverse
+#{\sum_{j=0}^{L-1}d^{-j-1}N^j} by finite multiplication.
+The triangle inequality bounds its norm and gives the lower
+bound, since #{\Gamma} is unitary. This invertibility also
+follows from Mathlib's \leanref{IsNilpotent.isUnit_one_sub}
+applied to #{d^{-1}N}.}
+
+\p{Choose a unit value #{v\in\im P_-} in the corner space
+on one layer. Put #{\psi_l=d^{l-1}v}. Its norm squared is
+#{\sum_{j=0}^{L-1}|d|^{2j}}. All layers of
+#{(d\bbI -N)\psi} vanish except the top, with value #{d^Lv}.
+This proves the upper bound, including #{d=0}. For
+#{0<|d|\le1} the two bounds give
+#{|d|^L/(aL)\le m_L\le |d|^L/a}. Thus a uniform positive
+lower coefficient on #{|d|^{L-1}} fails for arbitrarily small
+nonzero #{d}.}
+
+\p{A normal link that changes character can also produce a
+kernel away from every odd mass. Take two layers, one transverse
+axis of period #{12}, a scalar fiber and trivial transverse links.
+Put #{p=\pi /6}, #{U_s(x,1)^{-1}=\ue^{2\ui px}} and
+#{aM=(3-\sqrt{3})/2}. For #{0\ne v\in\im P_-} let
+#{w=v-\ui E_t v}, with #{t} the transverse axis. Give the
+bottom and top the fields #{\ue^{\ui px}w} and
+#{\ue^{-\ui px}w}, respectively. Here #{d(\pm p)=1/2}.
+Their on-site factors before grading and division by #{a}
+take #{w} to #{(\bbI+\ui E_t)w/2=v} and
+#{(\bbI -\ui E_t)w/2=-\ui E_t v}. The two normal hops cancel
+these values, since #{P_-w=v}, #{P_+w=-\ui E_t v} and the
+normal transport supplies the corresponding characters.}
+}
