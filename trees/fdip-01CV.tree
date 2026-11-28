@@ -1,0 +1,23 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Definition}
+\title{Wick powers with a variance parameter}
+\date{2026-11-28}
+
+\p{Over a commutative ring, define polynomials in #{z} with parameter
+#{s} recursively by
+##{W_0(z;s)=1,\qquad
+W_{n+1}(z;s)=zW_n(z;s)-s\,\partial_zW_n(z;s).}
+The derivative is the formal polynomial derivative. The
+\newvocab{Wick power} of degree #{n} with parameter #{s} is
+##{{:z^n:}_s=W_n(z;s).}
+This definition uses finitely many polynomial operations for each
+#{n}. In the Gaussian applications the ring is #{\RR} and
+#{s\ge0} is the specified variance.}
+
+\p{The recursion is the declaration
+\leanref/tauceti{TauCeti.hermiteHeat}. Its variance-one specialization
+is the probabilists' Hermite normalization used in
+\ref{fdip-007U}. This polynomial definition supplies neither a
+Gaussian probability nor a conditional-expectation map.}
