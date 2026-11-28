@@ -1,0 +1,62 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{Box covariance as an operator pairing}
+\date{2026-11-28}
+
+\p{Under the hypotheses of \ref{fdip-01D4}, use coordinate
+volume #{\extd x} on the unit torus #{\TT^n=\RR^n/\ZZ^n}.
+Suppose a bounded positive self-adjoint operator #{C} on
+#{L^2(\TT^n,\extd x;\RR)} is supplied, with
+#{\lVert C\rVert\le 1/\mu}, and its complexification satisfies
+##{C e_\kappa=v(\kappa)e_\kappa,\qquad
+e_\kappa(x)=\ue^{2\pi\ui\kappa\cdot x},\qquad
+v(\kappa)=\frac1{\mu+4\pi^2\kappa\cdot K\kappa}}
+for every #{\kappa\in\ZZ^n}. For a fixed integer
+#{B\ge1}, let #{I_b} be the half-open coordinate box with
+lower corner #{b/B} and side length #{1/B}, and put
+#{f_b=B^n\mathbf1_{I_b}}. The covariance of the limiting
+box law in \ref{fdip-01D6} satisfies
+##{\operatorname{Cov}_{\gamma_B}(z(b),z(c))
+=\langle f_b,Cf_c\rangle_{L^2}.}}
+
+\proof{
+\p{For a real function #{h} sampled on the grid, put
+##{X_N(h)=N^{-n}\sum_{j\in\Lambda_N}h(j/N)\varphi(j),
+\qquad
+\lVert h\rVert_N^2=N^{-n}\sum_{j\in\Lambda_N}|h(j/N)|^2.}
+Since the covariance of #{\varphi} is #{N^nQ_N^{-1}},
+its covariance pairing #{\mathcal B_N(h,k)=\mathbb E[X_N(h)X_N(k)]}
+obeys
+##{|\mathcal B_N(h,k)|\le\frac2\mu
+\lVert h\rVert_N\lVert k\rVert_N}
+for all sufficiently large #{N}, by \ref{fdip-01D4}.
+For real trigonometric polynomials #{p,q}, that theorem and
+the assumed Fourier multipliers of #{C} give
+#{\mathcal B_N(p,q)\to\langle p,Cq\rangle_{L^2}}:
+only finitely many Fourier coefficients occur on either side.}
+
+\p{Take #{N} through multiples of #{B}. Then
+#{X_N(f_b)=(A_{B,N}\varphi)(b)} exactly, including the
+chosen half-open boundaries. Real trigonometric polynomials are
+dense in real #{L^2} on the torus. Choose such #{p,q} close
+to #{f_b,f_c}, respectively. For each fixed choice, the
+normalized discrete squared norms of #{f_b-p}, #{f_c-q},
+#{f_c} and #{p} tend to their continuum squared norms by
+Riemann integration: these bounded functions are continuous
+away from the finitely many box boundary hyperplanes.}
+
+\p{Bilinearity and the uniform covariance bound give
+##{|\mathcal B_N(f_b,f_c)-\mathcal B_N(p,q)|
+\le\frac2\mu\left(
+\lVert f_b-p\rVert_N\lVert f_c\rVert_N
++\lVert p\rVert_N\lVert f_c-q\rVert_N\right).}
+The analogous continuum bound follows with #{1/\mu}
+from the hypothesis on #{C}. First let #{N\to\infty}
+at fixed #{p,q}; the box covariance has the limit from
+\ref{fdip-01D6}, and the polynomial pairing has the limit
+already proved. Then take the approximation errors to zero.
+The norms of the approximating polynomials remain bounded,
+so both error bounds vanish and give the asserted equality.}
+}

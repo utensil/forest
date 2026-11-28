@@ -1,0 +1,86 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{Box means retain mass and second moments}
+\date{2026-11-28}
+
+\p{Under the hypotheses and field normalization of
+\ref{fdip-01D4}, fix #{B\ge1}. As #{N\to\infty} through
+multiples of #{B}, the law of #{A_{B,N}\varphi} converges to a
+centered Gaussian probability law #{\gamma_B} on the finite
+counting space #{\RR^{(\ZZ /B)^n}}. Its covariance
+depends on the coefficient family only through #{\mu} and #{K}.
+Thus two such families with the same #{\mu,K} have the same
+limit at every fixed box partition.}
+
+\proof{
+\p{Choose a set #{I_N} of integer frequency representatives
+with #{|\kappa_i|\le N/2}; for even #{N}, choose only one of
+the two endpoints in each coordinate. Finite Fourier inversion
+and \ref{fdip-01D4} give
+##{\mathbb E[(A_{B,N}\varphi)(b)(A_{B,N}\varphi)(c)]
+=\sum_{\kappa\in I_N}
+\frac{w_{B,N,b}(\kappa)\overline{w_{B,N,c}(\kappa)}}
+{\mu_N+N^2\alpha_N(2\pi\kappa /N)},}
+where
+##{w_{B,N,b}(\kappa)=
+\ue^{2\pi\ui\kappa\cdot b/B}
+\prod_{i=1}^n D_{B,N}(\kappa_i),\qquad
+D_{B,N}(t)=M^{-1}\sum_{j=0}^{M-1}\ue^{2\pi\ui t j/N}.}
+All sums in these formulas are finite.}
+
+\p{For #{t=0}, #{D_{B,N}(t)=1}. For a nonzero representative,
+the geometric sum and the chord bound
+#{\sin(\pi|t|/N)\ge2|t|/N} give
+##{|D_{B,N}(t)|^2
+=\frac{B^2\sin^2(\pi t/B)}{N^2\sin^2(\pi t/N)}
+\le\frac{B^2}{4t^2}.}
+An average of unit complex numbers also has modulus at most one.
+Put #{f_B(0)=1} and
+#{f_B(t)=\min(1,B^2/(4t^2))} for #{t\ne0}. Then the absolute
+value of the numerator in the covariance formula is at most
+#{\prod_i f_B(\kappa_i)}. The inverse denominator is at most
+#{2/\mu} for all sufficiently large #{N}, by \ref{fdip-01D4}.}
+
+\p{For integers #{L\ge T\ge1}, finite telescoping sums give
+##{\begin{aligned}
+\sum_{|t|\le L}f_B(t)&\le1+B^2,\\
+\sum_{T<|t|\le L}f_B(t)&\le\frac{B^2}{2T}.
+\end{aligned}}
+Indeed the terms #{t=1,-1} are bounded separately, and for
+#{t\ge2} one has
+#{t^{-2}\le(t-1)^{-1}-t^{-1}}. The same telescoping inequality
+starting at #{T+1} proves the second bound. A union bound over
+the #{n} coordinates therefore bounds the part of the finite
+covariance sum with some #{|\kappa_i|>T} by
+##{\frac{nB^2(1+B^2)^{n-1}}{\mu T},}
+uniformly in all sufficiently large #{N}.}
+
+\p{For each fixed integer #{t}, the geometric sum gives
+#{D_{B,N}(t)\to d_B(t)}, where
+##{d_B(0)=1,\qquad
+d_B(t)=\ue^{\pi\ui t/B}\frac{B\sin(\pi t/B)}{\pi t}
+\quad(t\ne0).}
+Thus every term with #{|\kappa_i|\le T} converges, by the mode
+variance limit in \ref{fdip-01D4}. Given a positive tolerance,
+first choose #{T} so the two tail bounds are smaller than that
+tolerance, then make the difference of the finitely many retained
+terms small by taking both grid sizes large. The covariance entries
+are Cauchy. The identical argument for two coefficient families
+with the same #{\mu,K} shows their limiting entries are equal.
+No infinite covariance sum is needed for either conclusion.}
+
+\p{The limiting covariance operator is positive semidefinite,
+since each approximating operator is. On the fixed finite-dimensional
+box space it defines a centered Gaussian probability law, allowing
+singularity. Convergence of its Gaussian characteristic functions
+proves convergence to #{\gamma_B}. This passage from positive
+semidefinite covariance matrices to Gaussian probabilities is
+formalized by
+\leanref/tauceti{TauCeti.Probability.continuous_multivariateGaussian}.}
+}
+
+\p{For #{n=1}, multiplication of the present field by
+#{\sqrt{\kappa_0}}, where #{K=\kappa_0}, gives the field and
+box-law normalization of \ref{fdip-00G1}.}
