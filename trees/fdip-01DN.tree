@@ -1,0 +1,125 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{One-step estimates from bounds on the potential}
+\date{2026-11-28}
+
+\p{Fix #{p,a,M,B} as in the
+\vocabk{controlled input domain}{fdip-01DK}. There are
+#{\epsilon,C>0}, depending only on these constants, such that
+#{0<h\le g_*\le\epsilon} and #{V\in\mathcal D(h,g_*)}
+imply that the exact \vocabk{normalized marginal map}{fdip-01DJ}
+is defined. Its Gaussian coefficients #{h'=\mathcal P_4\blockmap V}
+and #{\nu'=\mathcal P_2\blockmap V} satisfy
+##{\begin{aligned}
+|h'-h+\beta_ph^2|&\le Ch^3,\\
+|\nu'-\lambda^{-1}\nu+D_ph^2|&\le Ch^3,\\
+\beta_p&=36(p-1)/p,\\
+D_p&=\lambda\left[144\lambda s(p-1)
++48(p-1)(p-2)/p\right].
+\end{aligned}}
+The even output remainder
+#{R'=\blockmap V-h'W_4(\cdot;s)-\nu'W_2(\cdot;s)} satisfies
+##{\mathcal P_0R'=\mathcal P_2R'=\mathcal P_4R'=0,
+\qquad \lVert R'\rVert_*\le Ch^2.}
+The output has at most quartic growth. No membership of the output
+in #{\mathcal D(h',g_*)} is asserted.}
+
+\proof{
+\p{Write #{u=y/r}, #{S_q=\sum_t\zeta_t^q}, and
+##{A=\sum_t[V(u+\zeta_t)-V(u)].}
+Taylor's integral formula and #{\sum_t\zeta_t=0} cancel all
+linear terms. The two curvature bounds give
+##{A\ge -\frac{Bh}{2}S_2,\qquad
+|A|\le C_0g_*[(1+u^2)S_2+S_4],\qquad
+|\mathbb EA|\le C_1g_*(1+u^2).}
+Here and below constants depend only on #{p,a,M,B}.
+The upper bound follows from
+#{|V''(u+t z)|\le Bg_*(1+2u^2+2z^2)} for #{0\le t\le1}.
+The last bound uses the fixed Gaussian moments of #{S_2,S_4}.}
+
+\p{Separate the quartic contribution:
+##{\begin{aligned}
+A&=hB_4+E_R,\\
+B_4&=(6u^2-6s)S_2+4uS_3+S_4,\\
+E_R&=\nu S_2+\sum_t[R(u+\zeta_t)-R(u)].
+\end{aligned}}
+In the last sum the linear derivative terms again cancel.
+The derivative norm bounds the remaining Taylor integrals.
+Using #{(u+t z)^2\le2u^2+2z^2} and #{\zeta_t^2\le S_2}
+yields
+##{\begin{aligned}
+|E_R|&\le C_2h^2[(1+u^2)S_2+S_4]
+\ue^{2au^2+2aS_2},\\
+|A|&\le C_3h[(1+u^2)S_2+S_4]
+\ue^{2au^2+2aS_2}.
+\end{aligned}}
+The second bound also uses #{h\le1}; the cubic term in #{B_4}
+is bounded using #{|u\zeta_t^3|\le(u^2\zeta_t^2+\zeta_t^4)/2}.}
+
+\p{For #{0\le t\le1} set #{Z(t,y)=\mathbb E\ue^{-tA}}.
+Jensen's inequality and the curvature bounds imply
+##{Z(t,y)\ge\ue^{-C_1g_*(1+u^2)},\qquad
+\ue^{-tA}\le\ue^{BhS_2/2}.}
+On the zero-sum fluctuation space the Gaussian density is proportional
+to #{\ue^{-S_2/2}}. Choose #{\epsilon} so that
+#{6a+B\epsilon /2<1/4}. Cubing the preceding small bound for #{A}
+leaves integrable polynomial Gaussian moments and gives
+##{\mathbb E[|A|^3\ue^{-tA}]
+\le C_4h^3(1+|u|^6)\ue^{6au^2}.}
+The corresponding bounds for powers one and two, and this third
+bound, justify three derivatives in #{t}, including endpoint
+limits. The third derivative of #{-\log Z} is the third centered
+moment of #{A} in the tilted probability. Its absolute value is
+at most #{8} times the tilted third absolute moment: apply
+#{|a-b|^3\le4(|a|^3+|b|^3)} and Jensen to its mean. Taylor's
+integral remainder at #{t=0} therefore gives
+##{F_V=\mathcal LV-\tfrac12\operatorname{Var}A+E_V,}
+with
+##{|E_V(y)|\le C_5h^3(1+|u|^6)
+\ue^{(6a+C_1g_*)u^2+C_1g_*}.}
+Reduce #{\epsilon} further so that
+#{(6a+C_1\epsilon)/r^2<1/(4s)}. This envelope controls both
+its #{\mathcal P_2,\mathcal P_4} integrals and its
+#{\lVert\cdot\rVert_*} norm by a constant times #{h^3}.}
+
+\p{The exact output itself has at most quartic growth.
+Indeed #{F_V(y)=pV(u)-\log Z(1,y)}. The lower curvature
+bound gives a constant upper bound for #{Z(1,y)}, whereas its
+Jensen lower bound gives #{-\log Z(1,y)\le C_1g_*(1+u^2)}.
+The curvature growth bound makes #{V} at most quartic by two
+integrations of #{V''}. Thus all Gaussian coefficients used
+here exist. Reflection of #{\zeta} proves evenness; finiteness
+and the lower bound follow also from \ref{fdip-01DE}.}
+
+\p{For the nonlinear remainder feedback, Gaussian moments give
+##{\begin{aligned}
+\mathbb E E_R^2&\le C_6h^4(1+u^4)\ue^{4au^2},\\
+\mathbb E B_4^2&\le C_7(1+u^4).
+\end{aligned}}
+The first bound uses #{4a<1/4} to absorb the fluctuation exponential.
+Expanding the variance and applying Cauchy-Schwarz to its cross
+term proves
+##{|\operatorname{Var}A-h^2\operatorname{Var}B_4|
+\le C_8h^3(1+u^4)\ue^{4au^2}.}
+This error also has coefficient integrals and function norm of
+order #{h^3}. The linear identity of \ref{fdip-01DM} and
+#{\mathcal P_jR=0} leave exactly #{h} and #{\lambda^{-1}\nu}
+in the two coefficients of #{\mathcal LV}. In
+\ref{fdip-01DG} take #{d=1}, #{w=s/r^2=\lambda s}; its
+pure-quartic half-variance has Gaussian coefficients
+#{\beta_p,D_p}. The two stated estimates follow.}
+
+\p{Finally the pure-quartic half-variance is an even polynomial
+of degree at most #{4}, so #{\bbI -\Pi} annihilates it. The linear
+identity also gives #{\Pi\mathcal LR=0}. Consequently
+##{R'=\mathcal LR+(\bbI -\Pi)
+\left[-\tfrac12(\operatorname{Var}A-h^2\operatorname{Var}B_4)+E_V\right].}
+The input function bound and Gaussian integration give
+##{|\mathcal LR(y)|\le C_9h^2(1+|u|^4)\ue^{2au^2}.}
+Its function norm is at most #{C_{10}h^2}. The other two terms
+have norm at most #{C_{11}h^3} by the estimates above, and
+#{\Pi} is bounded in that norm by \ref{fdip-01DM}.
+This proves the remainder estimate and completes the proof.}
+}
