@@ -1,0 +1,78 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{Towers and their profiles}
+\date{2026-11-28}
+
+\p{For the \vocabk{blocking step}{fdip-01CJ},
+##{\begin{aligned}
+\Phi_{\lambda,k}(P_0^{(k)})&=0,\\
+\Phi_{\lambda,k}(P_j^{(k)})&=\lambda^{-1}P_{j-1}^{(k-1)}
+\qquad(1\le j\le k).
+\end{aligned}}
+If #{Q} is positive hierarchical at depth #{k}, the field map #{T_k}
+pushes its Gaussian probability law forward to that of
+#{\Phi_{\lambda,k}(Q)}. After #{n\ge0} steps from depth #{k+n}
+to depth #{k}, the eigenvalue on #{\im P_i^{(k)}} is
+#{\lambda^{-n}c_{i+n}^{(k+n)}} for #{0\le i\le k}.
+Thus only the coefficients on
+#{\im P_n^{(k+n)},\ldots,\im P_{k+n}^{(k+n)}} remain.}
+
+\p{The \vocabk{profile}{fdip-01CJ} gives a bijection between
+\vocabk{towers}{fdip-01CJ} and positive functions on the nonnegative
+integers. The precision at depth #{k} is
+##{Q_k=\lambda^k\sum_{s=0}^k g(s)P_{k-s}^{(k)}.}
+The \vocabk{fixed towers}{fdip-01CJ} are exactly those for which
+##{g(s)=a\lambda^{-s}\quad(s\ge1),\qquad g(0)=b,}
+with independent parameters #{a>0} and #{b>0}. Equivalently,
+##{Q_k=a\sum_{j<k}\lambda^jP_j^{(k)}+b\lambda^kP_k^{(k)}.}
+}
+
+\proof{
+\p{The counting adjoint and lift satisfy
+#{A_k^{\dagger}=S_k/p}, #{A_kS_k=\bbI} and
+#{S_kA_k=E_1^{(k)}} by \ref{fdip-009A}.
+That same calculation gives #{A_kP_0^{(k)}=0} and
+#{E_j^{(k)}S_k=S_kE_{j-1}^{(k-1)}} for #{1\le j\le k}.
+Subtract consecutive averages, keeping the top projector separately,
+to obtain the two displayed images under #{\Phi_{\lambda,k}}.}
+
+\p{A hierarchical #{Q} commutes with #{E_1^{(k)}}. Its retained
+Gaussian field is therefore governed by its compression, by
+\ref{fdip-01CH}. In the coarse counting pairing the covariance of
+#{T_k\xi} is
+##{p\lambda A_kQ^{-1}A_k^{\dagger}
+=\lambda A_kQ^{-1}S_k.}
+Multiplication by #{\lambda^{-1}A_kQS_k} in either order gives
+#{\bbI}, using #{S_kA_k=E_1^{(k)}} and the commutation relation.
+The linear image is Gaussian, as in \ref{fdip-00C1}, so its precision
+is #{\Phi_{\lambda,k}(Q)}. The projector images show that one step
+replaces #{c_i} by #{c_{i+1}/\lambda}; induction gives the stated
+#{n}-step formula, including the unchanged case #{n=0}.}
+
+\p{For a tower the shift relation is
+##{c_j^{(k-1)}=\lambda^{-1}c_{j+1}^{(k)}.}
+Fix #{s\le k} and iterate until depth #{s}. It gives
+##{\lambda^{-k}c_{k-s}^{(k)}
+=\lambda^{-s}c_0^{(s)}=g(s).}
+This proves the profile formula and uniqueness. Conversely, given any
+positive #{g}, the formula defines a positive precision at every depth.
+The projector images remove the #{s=k} term and turn the others into
+#{\lambda^{k-1}g(s)P_{k-1-s}^{(k-1)}}. Their sum is #{Q_{k-1}},
+so these precisions form a tower with the prescribed profile.}
+
+\p{For a fixed tower write #{a_j} for its depth-independent
+coefficient at index #{j} below the top. The shift relation, used at
+any depth #{k\ge j+2}, gives #{a_{j+1}=\lambda a_j}.
+Consequently #{a_j=a\lambda^j} with #{a=a_0>0}. The profile formula
+at #{k=s\ge1} then gives #{g(s)=a\lambda^{-s}}.
+The value #{g(0)=b>0} is independent of these relations.
+Conversely these profile values yield exactly the displayed precision,
+whose lower coefficients do not depend on depth.}
+}
+
+\p{Taking #{a=1} and #{b=m} recovers the
+[fixed-ratio precision](fdip-00BY) and its return under one step
+(\ref{fdip-00C2}). The arbitrary positive profile allows lower
+coefficients that depend on depth, as in \ref{fdip-01CK}.}

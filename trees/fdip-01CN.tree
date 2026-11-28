@@ -1,0 +1,51 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Corollary}
+\title{Every tower has a probability law on coherent sequences}
+\date{2026-11-28}
+
+\p{Let #{(Q_k)} be a \vocabk{tower}{fdip-01CJ}, and let #{\nu_k}
+be the centered Gaussian probability law of #{Q_k} on #{F_k}.
+Give the product #{\prod_{k\ge0}F_k} its product topology, and set
+##{\mathcal X=\{(x_k)_{k\ge0}:x_{k-1}=T_kx_k
+\text{ for every }k\ge1\}.}
+There is a unique Borel probability measure on #{\mathcal X} whose
+projection to #{F_k} has probability law #{\nu_k} for every #{k}.
+The space #{\mathcal X} is the \vocabk{inverse limit}{tt-002D} of the field spaces with
+the maps #{T_k}.}
+
+\proof{
+\p{For integers #{0\le j\le k}, let #{T_{j,k}:F_k\to F_j}
+be the composite of the consecutive field maps, and put
+#{T_{k,k}=\bbI}. By \ref{fdip-01CL},
+#{(T_{j,k})_*\nu_k=\nu_j}. For a finite nonempty set #{J} of
+depths, take #{k=\max J} and push #{\nu_k} forward by
+#{x\mapsto(T_{j,k}x)_{j\in J}}. These finite joint probabilities
+are consistent: passing to a larger maximum and then projecting
+uses the same composite maps and the same pushforward identity.}
+
+\p{Each #{F_k} is a finite-dimensional Euclidean Borel space.
+Apply the countable projective probability construction used in
+\ref{fdip-00C3} to the finite joint probabilities just specified.
+It gives a unique probability measure on #{\prod_{k\ge0}F_k}
+with those finite marginals. For each #{k\ge1}, the event
+#{x_{k-1}=T_kx_k} is closed and has probability one, by its
+specified two-coordinate marginal. The intersection of these
+countably many events is #{\mathcal X}, so #{\mathcal X} is closed
+and has probability one. Restriction gives the required measure.}
+
+\p{Conversely, on #{\mathcal X} every finite group of coordinates
+is determined by its largest-depth coordinate. Any probability
+with the asserted single-depth marginals therefore has precisely
+the finite joint probabilities above. Cylinder sets generate the
+Borel sigma-algebra of this countable product and its closed
+subspace, which proves uniqueness.}
+}
+
+\p{A sample #{(x_k)} is one point of this inverse limit; the Gaussian
+probability is a measure on those points. The construction does not
+require a pointwise field on the inverse limit of the residue sets.
+The additional density conclusions and obstructions for the
+fixed-ratio family remain those of \ref{fdip-00FG} and
+\ref{fdip-00FL}.}
