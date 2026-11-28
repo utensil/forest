@@ -1,0 +1,39 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{Block fields of a commuting precision}
+\date{2026-11-28}
+
+\p{Let #{Q} be a self-adjoint \vocabk{positive precision}{fdip-0004}
+on a finite-dimensional real inner-product space #{F}. Let #{E} be an
+orthogonal projector, and give #{X=\im E} and #{Y=\ker E} the restricted
+inner products. Write #{\iota_X,\iota_Y} for the inclusions and
+#{p_X,p_Y} for the orthogonal projections. If #{\xi} has the
+\vocabk{Gaussian probability law}{fdip-0005} of #{Q}, the precision
+of #{p_X\xi} equals the compression #{Q_X=p_XQ\iota_X} exactly when
+#{QE=EQ}. Under this condition #{p_X\xi} and #{p_Y\xi} are independent.}
+
+\proof{
+\p{Set #{B=p_XQ\iota_Y} and #{C=p_YQ\iota_Y}. Positivity makes
+#{C} invertible, and \ref{fdip-000D} with \ref{fdip-000E} gives
+marginal precision
+##{Q_X-BC^{-1}B^{\dagger}.}
+The adjoint uses the restricted pairings. If this equals #{Q_X},
+then for every #{u\in X},
+##{0=\langle u,BC^{-1}B^{\dagger}u\rangle
+=\langle B^{\dagger}u,C^{-1}B^{\dagger}u\rangle.}
+The inverse #{C^{-1}} is positive, so #{B^{\dagger}u=0} for every
+#{u}. Hence #{B=0}. Conversely #{B=0} makes the marginal precision
+#{Q_X}. Since #{Q} is self-adjoint, #{B=0} says precisely that both
+#{X} and #{Y} are invariant under #{Q}, equivalently #{QE=EQ}.}
+
+\p{When these subspaces are invariant, the quadratic form is
+##{\langle x+y,Q(x+y)\rangle
+=\langle x,Q_Xx\rangle+\langle y,Cy\rangle.}
+The orthogonal product volume of \ref{fdip-002Q} and Gaussian normalization
+therefore make the normalized density the product of the densities
+on #{X} and #{Y}. This proves independence. If one summand is zero,
+its Gaussian probability is unit mass on its only point, and the same
+argument applies.}
+}

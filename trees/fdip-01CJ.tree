@@ -1,0 +1,44 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Definition}
+\title{The blocking step and compatible precisions}
+\date{2026-11-28}
+
+\p{Fix an integer #{p\ge2} and a real number #{\lambda>0}. At depth
+#{k\ge0}, let #{X_k=\mathbb Z/(p^k)} and let
+#{F_k=\mathbb R^{X_k}} carry the counting inner product.
+Use the averages and projectors of \ref{fdip-0099}: #{E_j^{(k)}}
+replaces a field by its means on classes modulo #{p^{k-j}}, and
+##{P_j^{(k)}=E_j^{(k)}-E_{j+1}^{(k)}\quad(j<k),
+\qquad P_k^{(k)}=E_k^{(k)}.}
+At depth zero there is one site and #{P_0^{(0)}=\bbI}.
+A positive hierarchical precision has the form
+##{Q_k=\sum_{j=0}^k c_j^{(k)}P_j^{(k)},\qquad c_j^{(k)}>0.}
+Here #{c_j^{(k)}} is the eigenvalue on #{\im P_j^{(k)}}.}
+
+\p{For #{k\ge1} let #{A_k:F_k\to F_{k-1}} be the class mean and
+#{S_k:F_{k-1}\to F_k} its constant lift:
+##{\begin{aligned}
+(A_kx)(r)&=\frac1p\sum_{t=0}^{p-1}x(r+tp^{k-1}),\\
+(S_ky)(r+tp^{k-1})&=y(r).
+\end{aligned}}
+The \newvocab{blocking step} on hierarchical operators is
+##{\Phi_{\lambda,k}(Q)=\lambda^{-1}A_kQS_k,}
+and its field map is #{T_k=\sqrt{p\lambda}\,A_k}.
+The domain of #{\Phi_{\lambda,k}} is the real span of
+#{P_0^{(k)},\ldots,P_k^{(k)}}; its target is the corresponding span
+at depth #{k-1}.}
+
+\p{A \newvocab{tower} is a choice of positive hierarchical precision
+#{Q_k} at every depth such that
+##{\Phi_{\lambda,k}(Q_k)=Q_{k-1}\qquad(k\ge1).}
+Its \newvocab{profile} is the positive function on nonnegative integers
+specified by
+##{g(s)=\lambda^{-s}c_0^{(s)}.}
+In particular #{g(0)} is the precision of the one-site field.
+A \newvocab{fixed tower} is a tower for which, for each fixed
+#{j\ge0}, the coefficient #{c_j^{(k)}} is independent of #{k>j}.
+Thus the lower coefficients repeat with depth; the top coefficient
+is allowed to depend on depth. A fixed point of blocking here means
+such a fixed tower.}
