@@ -1,0 +1,101 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{Mass and second moments survive on the periodic grid}
+\date{2026-11-28}
+
+\p{Fix integers #{n,R\ge1}. Put
+#{\mathcal R=\{r\in\ZZ^n:0<|r|_\infty\le R\}}.
+For #{N>2R}, let #{c_{r,N}=c_{-r,N}} be real coefficients,
+and let #{\mu_N>0}. Suppose #{c_{r,N}\to c_r} and
+#{\mu_N\to\mu>0}. Define
+##{\begin{aligned}
+\alpha_N(\theta)&=\sum_{r\in\mathcal R}
+c_{r,N}(1-\cos(r\cdot\theta)),\\
+\alpha(\theta)&=\sum_{r\in\mathcal R}
+c_r(1-\cos(r\cdot\theta)),\qquad
+K=\frac12\sum_{r\in\mathcal R}c_r\,r\otimes r.
+\end{aligned}}
+Assume #{\alpha(\theta)>0} for
+#{\theta\notin2\pi\ZZ^n}, and assume that the symmetric
+operator #{K} on #{\RR^n} is positive definite. On the
+counting space of #{\Lambda_N=(\ZZ /N)^n}, define
+##{(A_Nx)(j)=\sum_{r\in\mathcal R}c_{r,N}(x(j)-x(j+r)),
+\qquad Q_N=\mu_N\bbI+N^2A_N.}
+For all sufficiently large #{N},
+#{A_N\ge0} and #{Q_N\ge(\mu /2)\bbI}.}
+
+\p{Let #{x} have the centered Gaussian probability law of #{Q_N}
+for such #{N}, and set #{\varphi=N^{n/2}x}. For an integer
+frequency #{\kappa\in\ZZ^n}, put
+##{a_{N,\kappa}=N^{-n}\sum_{j\in\Lambda_N}
+\ue^{-2\pi\ui\kappa\cdot j/N}\varphi(j).}
+Then
+##{v_N(\kappa):=\mathbb E|a_{N,\kappa}|^2
+=\frac1{\mu_N+N^2\alpha_N(2\pi\kappa /N)}.}
+The conjugate covariance vanishes for frequencies distinct modulo
+#{N}; the unconjugated covariance vanishes unless the frequencies
+are opposite modulo #{N}, in which case it equals #{v_N(\kappa)}.
+For every fixed finite set of integer frequencies the joint laws
+converge, with real and imaginary parts viewed as real coordinates.
+Their limit is the centered Gaussian law with
+##{v(\kappa)=\frac1{\mu+4\pi^2\kappa\cdot K\kappa},}
+with zero conjugate covariance at distinct frequencies and
+unconjugated covariance #{v(\kappa)} precisely at opposite
+frequencies. This permits the relations
+#{a_{-\kappa}=\overline{a_\kappa}} and a real zero mode.}
+
+\proof{
+\p{Symmetry of the coefficients makes #{A_N} self-adjoint in
+the counting pairing. Its complexified eigenvector
+#{j\mapsto\ue^{2\pi\ui\kappa\cdot j/N}} has eigenvalue
+#{\alpha_N(2\pi\kappa /N)}: the sine terms cancel between
+#{r} and #{-r}. The finite Fourier characters form an orthogonal
+basis, each with squared norm #{N^n}.}
+
+\p{On #{[-\pi,\pi]^n}, Taylor's theorem gives
+#{\alpha(\theta)=\theta\cdot K\theta+O(|\theta|^4)}.
+The finite displacement set makes the remainder bound uniform.
+Positivity of #{K} gives #{\alpha(\theta)\ge a|\theta|^2}
+near zero for some #{a>0}. Away from a small ball, the continuous
+positive function #{\alpha(\theta)/|\theta|^2} has a positive
+minimum on the remaining compact set. Thus, after reducing #{a},
+#{\alpha(\theta)\ge a|\theta|^2} on the whole cube. Also
+##{|\alpha_N(\theta)-\alpha(\theta)|
+\le\frac12\sum_{r\in\mathcal R}|c_{r,N}-c_r|\,|r|^2
+\,|\theta|^2.}
+The finite coefficient sum tends to zero. Eventually
+#{\alpha_N(\theta)\ge(a/2)|\theta|^2} and #{\mu_N\ge\mu /2}.
+Choosing representatives of all Fourier angles in the cube proves
+#{A_N\ge0} and the asserted lower bound for #{Q_N}.
+Individual coefficients need not be nonnegative.}
+
+\p{The counting covariance of #{\varphi} is #{N^nQ_N^{-1}}.
+Pairing its Fourier eigenvectors and dividing by #{N^{2n}}
+gives the displayed variance and conjugate covariance. Since
+#{\varphi} is real, the unconjugated covariance at
+#{\kappa,\ell} equals the conjugate covariance at
+#{\kappa,-\ell}.}
+
+\p{For every fixed #{\kappa}, Taylor's remainder and boundedness
+of the finitely many coefficient sequences give
+##{N^2\alpha_N(2\pi\kappa /N)
+=\frac12\sum_{r\in\mathcal R}c_{r,N}
+(2\pi r\cdot\kappa)^2+O_\kappa(N^{-2})
+\longrightarrow4\pi^2\kappa\cdot K\kappa.}
+A fixed finite set of frequencies and their negatives eventually
+have no congruences except exact equalities. Thus all real
+covariances converge. The centered Gaussian characteristic
+functions give convergence of the joint laws, including any
+degenerate relations among the real coordinates. This last
+continuity step is formalized, including singular covariance
+matrices, by
+\leanref/tauceti{TauCeti.Probability.continuous_multivariateGaussian}.}
+}
+
+\p{For #{n=1}, write #{K=\kappa_0>0}. The field in
+\ref{fdip-00G0} is #{\sqrt{\kappa_0}\,\varphi}, so its
+covariance is #{\kappa_0} times the covariance here and its mass
+coordinate is #{m^2=\mu /\kappa_0}. Here the field amplitude is
+fixed, allowing #{\mu} and #{K} to be recovered separately.}

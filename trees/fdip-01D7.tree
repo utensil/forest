@@ -1,0 +1,60 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Corollary}
+\title{A probability law on coherent box means}
+\date{2026-11-28}
+
+\p{Let #{\gamma_B} be the limiting probability laws of
+\ref{fdip-01D6}, for all positive integers #{B}. They satisfy
+##{(M_{B',B})_*\gamma_B=\gamma_{B'}\qquad(B'\mid B).}
+There is a unique Borel probability measure on
+##{\mathcal Y=\{(z_B)_{B\ge1}:z_B\in\RR^{(\ZZ /B)^n},
+\quad z_{B'}=M_{B',B}z_B\text{ whenever }B'\mid B\}}
+whose #{B}-coordinate has law #{\gamma_B} for every #{B}.
+The space #{\mathcal Y}, with its topology inherited from the
+countable product of these finite-dimensional spaces, is their
+\vocabk{inverse limit}{tt-002D} under merging. A coherent assignment of box means
+is a point of this space; the probability is a measure on it.}
+
+\proof{
+\p{For the [box and merging maps](fdip-01D5), every
+#{B'}-box is the disjoint union of #{q^n} equal-size #{B}-boxes,
+where #{q=B/B'}. Averaging over this partition gives
+#{A_{B',N}=M_{B',B}A_{B,N}}. For #{B''\mid B'\mid B},
+partitioning once more gives
+#{M_{B'',B'}M_{B',B}=M_{B'',B}}; also #{M_{B,B}=\bbI}.
+Fix #{B'\mid B} and take #{N\to\infty} through multiples
+of #{B}. The first identity passes to the
+limits of \ref{fdip-01D6}, since merging is a fixed continuous
+linear map. This proves consistency.}
+
+\p{The chain #{B_j=j!}, for #{j\ge1}, is cofinal: every
+positive integer #{B} divides #{j!} for all #{j\ge B}.
+Apply the countable projective probability construction used in
+\ref{fdip-01CN} to the consistent laws #{\gamma_{j!}} and
+their successive merging maps. It gives a probability on coherent
+factorial coordinates. From such a sequence define #{z_B} by
+merging from any factorial coordinate divisible by #{B}.
+Choosing a larger factorial does not change the result, by
+coherence and composition of merging. Each new coordinate is a
+continuous linear image of a fixed factorial coordinate, so this
+defines a measurable map into the full countable product. Its
+image is in #{\mathcal Y}, and its #{B}-coordinate has law
+#{\gamma_B}.}
+
+\p{The coherence equations define closed subsets of the product;
+their countable intersection is #{\mathcal Y}. Finally, every
+finite set of box coordinates is determined, on this space, by
+the coordinate at a common multiple of their sizes. Any probability
+with the prescribed single-coordinate laws therefore has the same
+finite joint laws. Cylinder sets generate the Borel sigma-algebra
+of the product and of its closed subspace, proving uniqueness.}
+}
+
+\p{These partitions have rational coordinate boundaries. Every
+finite collection of rational coordinate boundaries belongs to
+a sufficiently fine factorial partition. Powers of two alone
+are not cofinal in this system: no such power is divisible by
+#{3}. They define a restricted system, rather than the full
+system used here.}

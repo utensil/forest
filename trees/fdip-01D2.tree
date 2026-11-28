@@ -1,0 +1,51 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Theorem}
+\title{Basins of the towers}
+\date{2026-11-28}
+
+\p{Fix the \vocabk{blocking step}{fdip-01CJ} with #{p\ge2} and
+#{\lambda>0}. At each depth #{K}, let #{Q^{(K)}} be a positive
+hierarchical precision, and write #{c_j^{(K)}} for its eigenvalue on
+#{\im P_j^{(K)}}. Let #{(Q_k)} be a tower with positive profile
+#{g}. The following conditions are equivalent:}
+\ol{
+  \li{For every fixed #{k\ge0}, blocking the Gaussian probability
+  law of #{Q^{(K)}} down to depth #{k} gives laws converging to the
+  Gaussian probability law of #{Q_k} as #{K\to\infty}.}
+  \li{For every fixed #{s\ge0},
+  ##{\lambda^{-K}c_{K-s}^{(K)}\longrightarrow g(s)
+  \qquad(K\to\infty,\ K\ge s).}}
+}
+
+\proof{
+\p{At depth #{k}, \ref{fdip-01CL} gives the blocked eigenvalue
+#{\lambda^{-(K-k)}c_{K-k+i}^{(K)}} on #{\im P_i^{(k)}}.
+Put #{s=k-i}. Under the second condition this tends to
+#{\lambda^k g(s)}, which is exactly the corresponding eigenvalue
+of #{Q_k}. There are only #{k+1} projectors at this fixed depth.
+Their limiting eigenvalues are positive, so the covariance operators
+converge by taking their reciprocals. The Gaussian characteristic
+functions then converge as in \ref{fdip-00C6}, proving the first
+condition. The covariance-to-probability continuity used here is
+formalized by
+\leanref/tauceti{TauCeti.Probability.continuous_multivariateGaussian}.}
+
+\p{Conversely, fix #{s} and use the first condition at depth
+#{k=s}. The range of #{P_0^{(s)}} is nonzero, including at depth
+zero. Choose a unit vector #{e} in that range. The scalar pairing
+with #{e} has centered Gaussian variance
+#{v_K=(\lambda^{-(K-s)}c_{K-s}^{(K)})^{-1}}. The limit has variance
+#{v=(\lambda^s g(s))^{-1}>0}. Weak convergence gives convergence
+of the characteristic functions at #{1}, namely
+#{\ue^{-v_K/2}\to\ue^{-v/2}}. Taking logarithms gives
+#{v_K\to v}, and then reciprocals give the second condition.}
+}
+
+\p{The profile #{g(0)=m}, #{g(s)=\lambda^{-s}} for #{s\ge1}
+recovers the limit in \ref{fdip-00C6}. The
+massive tower in \ref{fdip-01CK} instead has
+#{g(0)=\mu} and #{g(s)=\lambda^{-s}+\mu} for #{s\ge1}.
+No restriction to finitely many profile parameters is asserted:
+every positive profile itself supplies a compatible tower.}

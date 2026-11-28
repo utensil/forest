@@ -1,0 +1,68 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{Recovering the surviving parameters}
+\date{2026-11-28}
+
+\p{For the grid limits of \ref{fdip-01D4}, the variances at
+#{0}, #{e_i}, and #{e_i+e_j} for #{1\le i<j\le n} determine
+#{\mu} and #{K}. Here #{e_i} are the standard unit vectors
+in the supplied grid coordinates. Explicitly,
+##{\begin{aligned}
+\mu&=v(0)^{-1},\\
+K_{ii}&=\frac{v(e_i)^{-1}-\mu}{4\pi^2},\\
+K_{ij}&=\frac{v(e_i+e_j)^{-1}-v(e_i)^{-1}
+-v(e_j)^{-1}+\mu}{8\pi^2}\quad(i<j).
+\end{aligned}}
+Thus two families satisfying that theorem have the same finite
+mode limits exactly when their #{\mu,K} agree. This is also
+equivalent to equality of their box limits #{\gamma_B} for
+every #{B\ge1}. Equality at a single partition is not asserted
+to determine the parameters.}
+
+\proof{
+\p{The mode variance formula gives the three displayed identities
+by expansion of #{(e_i+e_j)\cdot K(e_i+e_j)}. Symmetry determines
+the remaining entries. The same formula then proves both directions
+for the mode limits, since their centered Gaussian covariances
+are specified by those variances. Equal #{\mu,K} give equal
+box limits by \ref{fdip-01D6}. It remains to recover modes
+from all box limits.}
+
+\p{Fix #{\kappa\in\ZZ^n}. For #{N} divisible by #{B},
+form the linear combination of box means
+##{b_{B,N,\kappa}=B^{-n}\sum_b
+\ue^{-2\pi\ui\kappa\cdot b/B}(A_{B,N}\varphi)(b).}
+It is the normalized lattice pairing with the function that is
+constant on each box and takes the Fourier character's value at
+that box's lower corner. For #{j} in the box labeled #{b},
+#{|j_i/N-b_i/B|\le 1/B}, so
+##{|\ue^{-2\pi\ui\kappa\cdot j/N}
+-\ue^{-2\pi\ui\kappa\cdot b/B}|
+\le\frac{2\pi|\kappa|_1}{B}.}
+The covariance of #{\varphi} is #{N^nQ_N^{-1}}, and
+#{Q_N^{-1}\le(2/\mu)\bbI}. Applying this operator inequality
+to the difference of the two lattice test functions gives
+##{\mathbb E|b_{B,N,\kappa}-a_{N,\kappa}|^2
+\le\frac2\mu\Bigl(\frac{2\pi|\kappa|_1}{B}\Bigr)^2.}
+The calculation uses the complexified counting pairing and holds
+for real and imaginary parts together.}
+
+\p{For fixed #{B}, convergence of box covariances gives a limit
+#{w_B(\kappa)} of #{\mathbb E|b_{B,N,\kappa}|^2}; it is
+determined by #{\gamma_B}. The triangle inequality in Gaussian
+mean square gives
+##{|\sqrt{w_B(\kappa)}-\sqrt{v(\kappa)}|
+\le\sqrt{\frac2\mu}\frac{2\pi|\kappa|_1}{B},}
+after letting #{N\to\infty} through multiples of #{B}.
+Thus the collection of box laws determines #{v(\kappa)}
+by letting #{B} grow. Equal box laws for two families force
+equal mode variances, even if their initial mass parameters
+were different; the separate error bounds both tend to zero.
+The displayed reconstruction formulas finish the proof.}
+}
+
+\p{For #{B=1}, the only box mean is the constant Fourier mode.
+Its limiting variance is #{1/\mu}, independent of #{K}. This
+explains why the assertion uses all box partitions.}
