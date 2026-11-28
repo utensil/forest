@@ -1,0 +1,82 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{Second-order blocking of a quartic}
+\date{2026-11-28}
+
+\p{Use the Gaussian block and #{r=\sqrt{p\lambda}} of
+\ref{fdip-01DE}. Suppose the fine site variance is #{s_f}, and put
+##{d=c_0^{-1},\qquad v=d(1-1/p),\qquad
+w=s_f-v>0,\qquad s_c=r^2w.}
+Thus #{s_c} is the coarse site variance. For
+#{V(x)=gW_4(x;s_f)+\nu W_2(x;s_f)}, the degree-at-most-two
+coupling polynomial of #{F_V} is
+##{F^{[2]}(y)=g'_{[2]}W_4(y;s_c)
++\nu'_{[2]}W_2(y;s_c)+z'_{[2]},}
+where
+##{\begin{aligned}
+g'_{[2]}&=r^{-4}(pg-36M_2g^2),\\
+\nu'_{[2]}&=r^{-2}\bigl[p\nu -(144wM_2+48M_3)g^2
+-12M_2g\nu\bigr],\\
+z'_{[2]}&=-(72w^2M_2+48wM_3+12M_4)g^2-M_2\nu^2,\\
+M_2&=d^2(p-1),\qquad
+M_3=d^3(p-1)(p-2)/p,\\
+M_4&=d^4\bigl((p-1)^4+(p-1)\bigr)/p^3.
+\end{aligned}}
+The coupling polynomial means #{\mathbb E U-\operatorname{Var}(U)/2},
+with #{U=\sum_t V(y/r+\zeta_t)}, keeping degree at most two in
+#{g,\nu}. It has no field term of degree #{6} or #{8}.}
+
+\proof{
+\p{Choose the site coordinates inside this block and set
+#{u=y/r}, #{C_{tt'}=d(\delta_{tt'}-1/p)}, and
+#{Z_j=\sum_t W_j(\zeta_t;v)}. The zero-sum constraint gives
+#{Z_1=0}. For #{j,l\ge1}, the Gaussian exponential identity is
+##{\mathbb E\bigl[\ue^{a\zeta_t-va^2/2}
+\ue^{b\zeta_{t'}-vb^2/2}\bigr]=\ue^{C_{tt'}ab}.}
+Differentiate #{j} times in #{a} and #{l} times in #{b} at zero.
+The finite Wick expression of \ref{fdip-01CX} identifies the
+left derivatives. Gaussian polynomial envelopes justify these
+finitely many differentiations. The right side contributes only
+when #{j=l}, giving
+##{\mathbb E Z_j=0,\qquad
+\mathbb E(Z_jZ_l)=\delta_{jl}j!\sum_{t,t'}C_{tt'}^j.}
+For #{j=2,3,4}, the last sum is
+#{d^j[p(1-1/p)^j+p(p-1)(-1/p)^j]}, which simplifies to the
+stated #{M_j}.}
+
+\p{The finite addition identity of \ref{fdip-01CX} gives
+##{\begin{aligned}
+\sum_tW_4(u+\zeta_t;s_f)
+ &=pW_4(u;w)+6W_2(u;w)Z_2+4uZ_3+Z_4,\\
+\sum_tW_2(u+\zeta_t;s_f)&=pW_2(u;w)+Z_2.
+\end{aligned}}
+Their centered linear combination is
+#{(6gW_2(u;w)+\nu)Z_2+4guZ_3+gZ_4}. Orthogonality of
+its three terms yields
+##{\begin{aligned}
+F^{[2]}={}&pgW_4(u;w)+p\nu W_2(u;w)\\
+&-36M_2g^2W_2(u;w)^2-48M_3g^2u^2-12M_4g^2\\
+&-12M_2g\nu W_2(u;w)-M_2\nu^2.
+\end{aligned}}
+Now use
+#{W_2(u;w)^2=W_4(u;w)+4wW_2(u;w)+2w^2},
+#{u^2=W_2(u;w)+w}, and
+#{W_j(y/r;w)=r^{-j}W_j(y;r^2w)}.
+These finite identities prove every coefficient. The centered
+quartic fluctuation has degree at most two in #{u}; its variance
+therefore has degree at most #{4}. This explains the sextic
+cancellation directly from #{Z_1=0}.}
+}
+
+\p{This specializes the [second cumulant](fdip-00GM);
+its exact asymptotic meaning for a bounded-below quartic follows
+from \ref{fdip-00GN}. The degree-zero term is retained until
+normalization of the probability.}
+
+\p{The underlying finite Gaussian moment contraction is supported by
+\leanref/tauceti{ProbabilityTheory.HasGaussianLaw.integral_prod_sub_eq_sum_perfectMatching}.
+That declaration permits the degenerate jointly Gaussian block
+fluctuation; the Wick-polynomial regrouping and the effective
+coefficients are the finite calculations proved above.}

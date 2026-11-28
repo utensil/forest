@@ -1,0 +1,73 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{A conditional decrease along the finite blocking flow}
+\date{2026-11-28}
+
+\p{Fix #{p,a,M,B} and the
+\vocabk{controlled input domain}{fdip-01DK}. There are
+#{\epsilon,C>0}, depending only on these constants, with the
+following property. Let #{K\ge1}, #{0<g\le\epsilon}, and
+suppose there is one real number #{\nu_0} such that the exact
+iterates
+##{V_0=gW_4(\cdot;s)+\nu_0W_2(\cdot;s),\qquad V_{n+1}=\blockmap V_n}
+of the \vocabk{normalized marginal map}{fdip-01DJ} satisfy
+##{V_n\in\mathcal D(h_n,g),\qquad h_n=\mathcal P_4V_n,
+\qquad 0\le n<K.}
+The same initial mass #{\nu_0} is used for all these steps.
+Write #{\nu_n=\mathcal P_2V_n} and
+#{R_n=V_n-h_nW_4(\cdot;s)-\nu_nW_2(\cdot;s)}. Then, for every #{0\le n\le K},
+##{\begin{aligned}
+\left|h_n-\frac{g}{1+\beta_p n g}\right|
+&\le \frac{Cg^2[1+\log(1+ng)]}{(1+\beta_p n g)^2},\\
+|\nu_n|&\le Ch_n^2,\qquad
+\lVert R_n\rVert_*\le Ch_n^2,\\
+\mathcal P_0R_n&=\mathcal P_2R_n=\mathcal P_4R_n=0,
+\qquad \beta_p=36(p-1)/p.
+\end{aligned}}
+Moreover #{0<h_{n+1}<h_n} for #{n<K}. The existence of an
+initial mass satisfying the stated domain hypothesis is an
+assumption of this proposition.}
+
+\proof{
+\p{\ref{fdip-01DN} applies at every input step, with
+constants independent of #{K,n}. It gives
+##{h_{n+1}=h_n-\beta_ph_n^2+e_n,\qquad |e_n|\le C_0h_n^3.}
+Reduce #{\epsilon} so that #{C_0\epsilon\le\beta_p/2} and
+#{3\beta_p\epsilon /2\le 1/2}. Then
+##{\tfrac12h_n\le h_{n+1}\le h_n-\tfrac12\beta_ph_n^2,}
+and direct division yields
+##{\frac{\beta_p}{2}\le\frac1{h_{n+1}}-\frac1{h_n}
+\le3\beta_p,\qquad
+\left|\frac1{h_{n+1}}-\frac1{h_n}-\beta_p\right|\le C_1h_n.}
+For the last inequality use
+#{(h_n-h_{n+1})/(h_nh_{n+1})}
+and #{h_{n+1}/h_n=1-\beta_ph_n+O(h_n^2)}, whose denominator
+is at least #{1/2}. Summing the first two bounds gives
+##{\frac{g}{1+3\beta_p n g}\le h_n
+\le\frac{g}{1+\beta_p n g/2}.}
+The remaining reciprocal errors have absolute sum at most
+#{C_1\sum_{j<n}h_j}. For #{n\ge1}, the upper bound above and
+the integral of the decreasing function #{g/(1+\beta_pgt/2)}
+give
+##{\sum_{j<n}h_j\le g+\frac2{\beta_p}
+\log(1+\beta_p n g/2)
+\le C_2[1+\log(1+ng)].}
+Hence the difference between #{1/h_n} and #{1/g+\beta_pn}
+has this bound. Multiplying by
+#{h_n g/(1+\beta_p n g)} and using their established comparison
+proves the scalar estimate. For #{n=0} it is immediate.}
+
+\p{The input mass bounds give #{|\nu_n|\le Mh_n^2} for
+#{n<K}. At the final step, the second estimate of
+\ref{fdip-01DN} gives
+##{|\nu_K|\le(\lambda^{-1}M+D_p+C_0\epsilon)h_{K-1}^2
+\le C_3h_K^2.}
+For every #{1\le n\le K}, its output estimate gives
+#{\lVert R_n\rVert_*\le C_4h_{n-1}^2\le4C_4h_n^2}.
+At #{n=0}, #{R_0=0}. Gaussian normalization and the coefficient
+identities in \ref{fdip-01DM} give the three zero projections
+at every step. This proves both terminal estimates without a
+domain assumption at #{n=K}.}
+}

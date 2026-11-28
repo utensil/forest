@@ -1,0 +1,51 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Lemma}
+\title{Gaussian coefficients under the linear average}
+\date{2026-11-28}
+
+\p{For the \vocabk{normalized marginal map}{fdip-01DJ}, every
+site of its Gaussian reference tower has variance #{s}. If #{f}
+has at most polynomial growth, then
+##{\mathcal P_j(\mathcal Lf)=pr^{-j}\mathcal P_jf
+\qquad(j=0,2,4).}
+The Gaussian polynomial projection satisfies #{\Pi^2=\Pi} and
+is bounded in the function norm #{\lVert\cdot\rVert_*} of the
+\vocabk{controlled input domain}{fdip-01DK}.}
+
+\proof{
+\p{The diagonal values of the orthogonal projectors in
+\ref{fdip-009B} give the site variance
+##{(1-1/p)\sum_{j=0}^{k-1}(p\lambda)^{-j}
++s(p\lambda)^{-k}
+=(1-\lambda^2)\frac{1-\lambda^k}{1-\lambda}
++s\lambda^k=s.}
+At #{k=0}, the sum is empty and the same value follows from
+#{Q_0=s^{-1}\bbI}. The projector coefficients also give the
+fixed-tower identity by \ref{fdip-01CL}.}
+
+\p{For a block coordinate put #{X_t=Y/r+\zeta_t}. Then
+#{\operatorname{Var}(X_t)=s/r^2+1-1/p=s} and
+#{\operatorname{Cov}(X_t,Y)=s/r}. The conditional Gaussian
+of #{Y} given #{X_t=x} has mean #{x/r} and variance
+#{s(1-r^{-2})}. Gaussian smoothing and scaling from
+\ref{fdip-01CX} therefore give
+##{\mathbb E[W_j(Y;s)\mid X_t=x]=r^{-j}W_j(x;s).}
+Multiplication by #{f(X_t)}, followed by Gaussian integration
+and summation over the #{p} sites, proves the coefficient identity.
+Polynomial growth supplies integrable envelopes for Fubini.}
+
+\p{The same finite Gaussian differentiation used in
+\ref{fdip-01DG}, now with covariance #{s}, gives
+#{\mathbb E[W_i(Y;s)W_j(Y;s)]=\delta_{ij}j!s^j}.
+Thus the three coefficient functionals are dual to
+#{W_0(\cdot;s),W_2(\cdot;s),W_4(\cdot;s)}, proving #{\Pi^2=\Pi}.
+If #{\lVert f\rVert_*\le A}, then
+#{|f(y)|\le A(1+|y|^6)\ue^{y^2/(4s)}}.
+In each coefficient integral the Gaussian density leaves
+#{\ue^{-y^2/(4s)}} times a fixed polynomial. Its integral is
+finite by \ref{fdip-002W}, so
+#{|\mathcal P_jf|\le C_jA}. Each #{W_j(\cdot;s)} also has finite
+#{\lVert\cdot\rVert_*} norm, proving the boundedness of #{\Pi}.}
+}

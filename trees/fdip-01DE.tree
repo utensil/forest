@@ -1,0 +1,49 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{Blocking a single-site weight}
+\date{2026-11-28}
+
+\p{Let #{Q=\sum_{j=0}^k c_jP_j>0}, #{k\ge1}, be a
+\vocabk{hierarchical precision}{fdip-01CJ} on the real counting
+inner-product space #{\RR^{X_k}}. Let #{\lambda>0},
+#{r=\sqrt{p\lambda}}, and let #{V:\RR\to\RR}
+be finite Borel and bounded below. Give the Gaussian probability
+of precision #{Q} the weight
+#{\prod_{x\in X_k}\ue^{-V(\phi(x))}}, and normalize it.
+Its pushforward by #{T=rA} is the Gaussian probability of precision
+#{\Phi_\lambda(Q)} weighted and normalized by
+#{\prod_{b\in X_{k-1}}\ue^{-F_V(y(b))}}, where
+##{F_V(y)=-\log\mathbb E_\zeta
+\exp\left[-\sum_{t=0}^{p-1}V(y/r+\zeta_t)\right].}
+Here #{\zeta} is the centered Gaussian on the zero-sum subspace
+of #{\RR^p}, with covariance operator
+#{c_0^{-1}(\bbI -E)}, where #{E} is the orthogonal projection onto
+constant vectors. The function #{F_V} is finite Borel and bounded
+below. If #{V} is continuous, so is #{F_V}. Additive constants in
+#{F_V} do not change the normalized probability.}
+
+\proof{
+\p{The orthogonal splitting into #{\im E_1} and #{\ker E_1}
+commutes with #{Q}. The two Gaussian components are independent,
+and the second has covariance #{c_0^{-1}P_0}; this is the
+hierarchical case of \ref{fdip-01CH}. Its summands on different
+blocks are independent and each has the stated covariance operator.
+Conditioned on #{T\phi=y}, the retained fine field is #{Sy/r}.
+Thus the conditional expectation of the product weight factors
+as #{\prod_b\ue^{-F_V(y(b))}}. The marginal Gaussian has
+precision #{\Phi_\lambda(Q)} by \ref{fdip-01CH}. Multiplying its
+density by that conditional expectation and dividing by its integral
+proves the assertion, by the same Gaussian disintegration as
+\ref{fdip-00GI}.}
+
+\p{If #{V\ge -b}, the integrand is strictly positive and at most
+#{\ue^{pb}}. Its expectation is positive and finite at every #{y},
+so #{F_V\ge -pb}. Parameter integration of a nonnegative Borel
+function is Borel. For continuous #{V}, the same constant bounds
+the integrand while #{y} varies, and dominated convergence proves
+continuity of the expectation and then of its logarithm.
+The normalizer is positive and finite. Consequently the same
+operation can be repeated with #{F_V}, as in \ref{fdip-00GK}.}
+}

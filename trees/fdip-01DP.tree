@@ -1,0 +1,58 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{A small Gaussian remainder can retain a quartic tail}
+\date{2026-11-28}
+
+\p{Fix #{p,a,M} as in the
+\vocabk{controlled input domain}{fdip-01DK}. There is a constant
+#{B_0>0} such that, for #{B\ge B_0} and all sufficiently small
+#{0<h\le g_*}, the domain #{\mathcal D(h,g_*)} contains a
+potential with #{\nu=0} and
+##{|V(x)-g_*x^4|\le C_V(1+|x|^3)\qquad(x\in\RR).}
+Here #{C_V} may depend on the chosen potential; #{B_0} does not
+depend on #{h,g_*}.}
+
+\proof{
+\p{For #{L>0}, put #{f_L(x)=(|x|-L)_+^4}, where
+#{t_+=\max(t,0)}. This is even, convex and #{C^2}, with
+#{f_L''(x)=12(|x|-L)_+^2}. Each derivative through order two
+is supported where #{|x|>L} and is bounded by a fixed multiple
+of #{|x|^{4-j}}. Thus its Gaussian-damped derivative norm can
+be made arbitrarily small by increasing #{L}. Each Gaussian
+coefficient #{\mathcal P_jf_L} can also be made arbitrarily
+small: its integrand is bounded by a fixed integrable polynomial
+times the Gaussian density and is supported outside #{[-L,L]}.
+The finite Wick polynomials have finite derivative norm, so
+#{\lVert f_L-\Pi f_L\rVert_{a,4,2}} can be made arbitrarily
+small as well.}
+
+\p{Choose #{L} large enough that #{|\mathcal P_4f_L|<1/2},
+and set
+##{A_L=\frac{g_*-h}{1-\mathcal P_4f_L},\qquad
+R=A_L(f_L-\Pi f_L),\qquad V=hW_4(\cdot;s)+R.}
+Then #{0\le A_L\le2g_*}. The finite Gaussian differentiation in
+\ref{fdip-01DG}, with covariance #{s}, gives
+#{\mathbb E[W_i(Y;s)W_j(Y;s)]=\delta_{ij}j!s^j}. Hence
+#{\Pi^2=\Pi} and #{\mathcal P_jR=0}. Increase #{L} so
+that #{\lVert R\rVert_{a,4,2}\le Mh^2} and
+#{|A_L\mathcal P_2f_L|+|A_L\mathcal P_4f_L|\le h^2}.
+The leading coefficient is exactly
+#{h+A_L(1-\mathcal P_4f_L)=g_*}; expansion of #{(|x|-L)^4}
+outside #{[-L,L]} proves the stated growth estimate and
+boundedness below.}
+
+\p{Differentiating gives
+##{\begin{aligned}
+V''(x)={}&12(h-A_L\mathcal P_4f_L)x^2-12hs\\
+&+12sA_L\mathcal P_4f_L-2A_L\mathcal P_2f_L
++A_Lf_L''(x).
+\end{aligned}}
+For small #{h}, the coefficient #{h-A_L\mathcal P_4f_L}
+is at least #{h/2}. Convexity of #{f_L} and the small projection
+errors imply #{V''\ge -B_0h} for a constant depending only on
+#{s}. Also #{f_L''\le12x^2} and #{A_L\le2g_*} give
+#{|V''(x)|\le B_0g_*(1+x^2)} after increasing #{B_0}.
+All conditions of the domain now hold.}
+}

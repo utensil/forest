@@ -1,0 +1,31 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Definition}
+\title{Bounds on the input potential}
+\date{2026-11-28}
+
+\p{Use #{p,r,s,W_j(\cdot;s),\mathcal P_j} of the
+\vocabk{normalized marginal map}{fdip-01DJ}.
+Choose #{a>0} with #{6a<1/8} and #{6a/r^2<1/(8s)}, and
+fix #{M,B>0}. For an even #{C^2} function #{R}, define
+##{\lVert R\rVert_{a,4,2}=
+\max_{j=0,1,2}\sup_{x\in\RR}
+\frac{\ue^{-ax^2}|R^{(j)}(x)|}{1+|x|^{4-j}}.}
+For any function #{f}, define the weaker function norm
+##{\lVert f\rVert_*=\sup_{y\in\RR}
+\frac{\ue^{-y^2/(4s)}|f(y)|}{1+|y|^6}.}
+For #{0<h\le g_*}, the \newvocab{controlled input domain}
+#{\mathcal D(h,g_*)} consists of even #{C^2} potentials
+##{V=hW_4(\cdot;s)+\nu W_2(\cdot;s)+R}
+satisfying all of
+##{\begin{gathered}
+\mathcal P_0R=\mathcal P_2R=\mathcal P_4R=0,\qquad
+|\nu|\le Mh^2,\qquad \lVert R\rVert_{a,4,2}\le Mh^2,\\
+\inf_{x\in\RR}V(x)>-\infty,\qquad
+V''(x)\ge -Bh,\qquad |V''(x)|\le Bg_*(1+x^2)
+\quad(x\in\RR).
+\end{gathered}}
+The derivative and curvature bounds are separate requirements.
+The norm #{\lVert\cdot\rVert_*} will measure an output remainder;
+it is not part of the definition of #{\mathcal D(h,g_*)}.}

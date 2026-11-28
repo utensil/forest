@@ -1,0 +1,29 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Definition}
+\title{The normalized marginal map and Gaussian coefficients}
+\date{2026-11-28}
+
+\p{Fix an integer #{p\ge2} and set
+##{\lambda=p^{-1/2},\qquad r=p^{1/4},\qquad s=1+\lambda.}
+Use the fixed Gaussian precision tower
+##{Q_k=\sum_{j<k}\lambda^jP_j+s^{-1}\lambda^kP_k,}
+including #{Q_0=s^{-1}\bbI}, a \vocabk{fixed tower}{fdip-01CJ} by \ref{fdip-01CL}.
+Let #{\zeta} be centered Gaussian with covariance operator
+#{\bbI -E} on a block, independently of #{Y\sim N(0,s)}.
+Use #{W_j(x;s)} for the
+\vocabk{Wick powers}{fdip-01CV}. For a function #{f} with the
+required integrable products, its \newvocab{Gaussian coefficients}
+are
+##{\mathcal P_jf=\frac{\mathbb E[f(Y)W_j(Y;s)]}{j!s^j}
+\quad(j=0,2,4),\qquad
+\Pi f=(\mathcal P_0f)+ (\mathcal P_2f)W_2(\cdot;s)+(\mathcal P_4f)W_4(\cdot;s).}
+For finite continuous bounded-below #{V} whose #{F_V} has these
+integrable products, the \newvocab{normalized marginal map} is
+##{\blockmap V=F_V-\mathcal P_0F_V,\qquad
+F_V(y)=-\log\mathbb E\exp\left[-\sum_tV(y/r+\zeta_t)\right].}
+Its associated linear average is
+##{(\mathcal Lf)(y)=\sum_t\mathbb E f(y/r+\zeta_t).}
+The exact map is the single-block map of \ref{fdip-01DE}; the
+constant subtraction fixes its normalization.}
