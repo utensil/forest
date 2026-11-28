@@ -1,0 +1,65 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{Wick powers under blocking}
+\date{2026-11-28}
+
+\p{Let #{Q} be a positive hierarchical precision at depth #{k\ge1},
+and let #{Q'=\Phi_{\lambda,k}(Q)} under the
+\vocabk{blocking step}{fdip-01CJ}. Write #{c_0>0} for its eigenvalue
+on #{\im P_0^{(k)}}. Let #{\sigma^2} and #{\tau^2} be the site
+variances of the centered Gaussian probabilities of #{Q} and #{Q'}.
+Then
+##{\sigma^2=\frac{\tau^2}{p\lambda}+v,
+\qquad v=c_0^{-1}(1-p^{-1}).}
+For every integer #{n\ge0}, the canonical conditional Gaussian
+probability given #{T_k\xi=y} satisfies, at every #{y\in F_{k-1}},
+##{\mathbb E\left[
+\sum_{x\in X_k}{:\xi(x)^n:}_{\sigma^2}\,\middle|\,T_k\xi=y\right]
+=p(p\lambda)^{-n/2}
+\sum_{r\in X_{k-1}}{:y(r)^n:}_{\tau^2}.}
+The colon expressions are the \vocabk{Wick powers}{fdip-01CV}.}
+
+\p{Consequently, on any \vocabk{tower}{fdip-01CJ}, the polynomial
+observables
+##{U_{n,k}(x)=\sum_{a\in X_k}{:x(a)^n:}_{\sigma_k^2}}
+form a \vocabk{scaling direction}{fdip-01CQ} for the
+conditional-expectation step, with positive eigenvalue
+#{p(p\lambda)^{-n/2}}. The variance #{\sigma_k^2} is that of
+the actual reference probability at depth #{k}.}
+
+\proof{
+\p{The retained and fluctuation fields are independent by
+\ref{fdip-01CH}, since #{Q} commutes with #{E_1^{(k)}}.
+Write #{\zeta=P_0^{(k)}\xi}. The conditional field at a given
+#{y} is
+##{\xi=\frac{S_ky}{\sqrt{p\lambda}}+\zeta.}
+Indeed #{E_1^{(k)}\xi=S_kA_k\xi} and
+#{A_k\xi=y/\sqrt{p\lambda}}; the independent fluctuation keeps
+its original Gaussian probability. Its covariance on the fine space
+is #{c_0^{-1}P_0^{(k)}}. In the counting basis, the diagonal of
+#{P_0^{(k)}=\bbI -E_1^{(k)}} is #{1-p^{-1}}, so every
+#{\zeta(x)} has variance #{v}. The block value at site #{x} has
+variance #{\tau^2/(p\lambda)}. Independence adds these two
+variances, proving the first display. The site variances are uniform
+by \ref{fdip-009B}; at depth zero there is only one site.}
+
+\p{For a site #{x=r+tp^{k-1}}, put
+#{u=y(r)/\sqrt{p\lambda}} and #{s=\tau^2/(p\lambda)}.
+The smoothing identity in \ref{fdip-01CX} gives
+##{\mathbb E{: (u+\zeta(x))^n:}_{s+v}
+={:u^n:}_s
+=(p\lambda)^{-n/2}{:y(r)^n:}_{\tau^2},}
+where the last equality is its scaling identity. There are #{p}
+sites with this coarse label #{r}. Summing proves the claimed
+conditional expectation. Only finite sums and finite polynomial
+moments occur. The formula remains valid at #{n=0}, when each fine
+site contributes one.}
+
+\p{For a tower, #{Q'} is the next reference precision by definition,
+so the formula is exactly the stated identity for consecutive
+observables #{U_{n,k}}. Each observable is a nonzero polynomial:
+its highest-degree part is the sum of the #{n}-th powers of the
+coordinates, and for #{n=0} it is the positive number #{p^k}.}
+}

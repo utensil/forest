@@ -1,0 +1,66 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Lemma}
+\title{Finite Wick identities and Gaussian smoothing}
+\date{2026-11-28}
+
+\p{The \vocabk{Wick powers}{fdip-01CV} have the finite expression
+##{W_n(z;s)=\sum_{j=0}^{\lfloor n/2\rfloor}
+\binom n{2j}(2j-1)!!\,(-s)^jz^{n-2j},}
+where #{(2j-1)!!=1\cdot3\cdots(2j-1)} and the empty product is
+one. Over every commutative ring they satisfy
+##{W_n(az;a^2s)=a^nW_n(z;s)}
+and
+##{W_n(u+z;s+v)=\sum_{j=0}^n\binom nj
+W_{n-j}(u;s)W_j(z;v).}
+For real #{u,s}, #{v\ge0}, and a centered Gaussian #{Z} of
+variance #{v}, including unit mass at zero when #{v=0},
+##{\mathbb E W_n(u+Z;s+v)=W_n(u;s).}
+All expectations here are finite polynomial moments.}
+
+\proof{
+\p{The integer #{\binom n{2j}(2j-1)!!} counts the ways to choose
+#{j} disjoint unordered pairs among #{n} labeled positions. Give
+each pair weight #{-s} and each unpaired position weight #{z}.
+The sum of the products of these weights is the displayed finite
+polynomial. On adjoining one labeled position, leave it unpaired,
+which multiplies by #{z}, or pair it with one of the previously
+unpaired positions. The latter operation contributes #{-s} times
+the derivative with respect to #{z}. The finite sum therefore obeys
+the defining recursion and has initial value one, proving the formula.}
+
+\p{In each summand, replacing #{z} by #{az} and #{s} by #{a^2s}
+contributes #{a^{n-2j}a^{2j}=a^n}, proving scaling without division
+by #{a}. For the addition identity, expand the weights #{u+z} on
+unpaired positions and #{-(s+v)} on pairs. Color a position by its
+chosen variable, and color both positions of a pair together by
+its chosen parameter. A set of #{j} positions colored with #{z,v}
+and its complement colored with #{u,s} contribute
+#{W_j(z;v)W_{n-j}(u;s)}. There are #{\binom nj} such sets. Grouping
+this finite expansion proves the identity over any commutative ring.}
+
+\p{For #{v>0}, reflection makes every odd Gaussian moment zero.
+Integration by parts in its scalar density gives
+##{\mathbb E Z^{2r}=(2r-1)v\,\mathbb E Z^{2r-2}\qquad(r\ge1).}
+The boundary term is zero by the polynomial Gaussian envelope of
+\ref{fdip-002W}; all integrals are finite by the same result.
+Thus #{\mathbb E Z^{2r}=(2r-1)!!v^r}. For #{v=0}, the random
+variable is identically zero and its moments give the same conclusion.
+Using the finite expression for #{W_n}, odd #{n} have expectation
+zero, while for #{n=2m>0},
+##{\begin{aligned}
+\mathbb E W_{2m}(Z;v)
+&=\frac{(2m)!v^m}{2^m}
+\sum_{j=0}^m\frac{(-1)^j}{j!(m-j)!}\\
+&=\frac{(2m)!v^m}{2^m m!}(1-1)^m=0.
+\end{aligned}}
+The degree-zero expectation is one. Apply these identities term by
+term to the addition formula: only its #{j=0} term remains.}
+}
+
+\p{The scaling identity is
+\leanref/tauceti{TauCeti.hermiteHeat_sq_mul_comp}, with no
+invertibility hypothesis on #{a}. That declaration supports the
+polynomial rescaling; the Gaussian averaging and block calculation
+use the moment argument above.}

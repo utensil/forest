@@ -1,0 +1,64 @@
+\import{fdip-macros}
+\meta{agent-authored}{true}
+\tag{fdip}
+\taxon{Proposition}
+\title{Powers of the hierarchical Laplacian}
+\date{2026-11-28}
+
+\p{For every integer #{n\ge0}, the family of powers of the
+\vocabk{nonnegative hierarchical Laplacian}{fdip-01CQ} satisfies
+##{\Phi_{\lambda,k}(H_k^n)
+=\lambda^{n-1}H_{k-1}^n\qquad(k\ge1).}
+Thus #{H^n} is a \vocabk{scaling direction}{fdip-01CQ} with positive
+eigenvalue #{\lambda^{n-1}}. If #{\lambda\ne1}, then at each fixed
+depth #{k} the operators
+#{\bbI,H_k,\ldots,H_k^k} form a basis of the algebra spanned by
+#{P_0^{(k)},\ldots,P_k^{(k)}}. If #{\lambda=1}, the powers span
+#{\operatorname{span}_{\RR}\{\bbI,E_k^{(k)}\}}, which has
+dimension two for #{k\ge1} and dimension one for #{k=0}.}
+
+\p{For #{0<\lambda<1}, the identity direction is relevant,
+#{H} is marginal, and #{H^n} for #{n\ge2} is irrelevant.
+For #{\lambda>1}, the identity direction is irrelevant,
+#{H} remains marginal, and #{H^n} for #{n\ge2} is relevant.
+For #{\lambda=1}, these named directions are all marginal.}
+
+\proof{
+\p{For #{n\ge1}, orthogonality of the projectors gives
+##{H_k^n=\sum_{j<k}\lambda^{jn}P_j^{(k)}.}
+The blocking step kills #{P_0^{(k)}} and shifts every other
+projector by \ref{fdip-01CL}. Therefore
+##{\begin{aligned}
+\Phi_{\lambda,k}(H_k^n)
+&=\sum_{j=1}^{k-1}\lambda^{jn-1}P_{j-1}^{(k-1)}\\
+&=\lambda^{n-1}\sum_{i<k-1}\lambda^{in}P_i^{(k-1)}
+=\lambda^{n-1}H_{k-1}^n.
+\end{aligned}}
+When #{k=1}, both sums are empty and #{H_0^n=0}.
+For #{n=0}, \ref{fdip-01CR} supplies
+#{\Phi_{\lambda,k}(\bbI)=\lambda^{-1}\bbI}; no value of #{0^0}
+is used. Each family is nonzero, since #{H_1=P_0^{(1)}\ne0}.}
+
+\p{At depth #{k}, write #{h_j=\lambda^j} for #{j<k} and
+#{h_k=0}. If #{\lambda\ne1}, these #{k+1} real numbers are distinct.
+For each #{j}, the polynomial of degree at most #{k}
+##{f_j(t)=\prod_{\substack{0\le i\le k\\i\ne j}}
+\frac{t-h_i}{h_j-h_i}}
+has value one at #{h_j} and zero at the other #{h_i}.
+Evaluation on the orthogonal projector decomposition gives
+#{f_j(H_k)=P_j^{(k)}}. Every projector is therefore in the span of
+the stated powers. Their span has dimension #{k+1}, since every
+projector has nonzero range and the projectors are independent.
+There are exactly #{k+1} powers, so they form a basis.
+For #{k=0}, the empty product is one and the sole power is #{\bbI}.}
+
+\p{If #{\lambda=1}, then #{H_k=\bbI -E_k^{(k)}} and
+#{H_k^n=H_k} for #{n\ge1}. At #{k\ge1}, the mean projector is
+neither zero nor the identity, giving the dimension two assertion.
+At depth zero it equals the identity. Finally compare the positive
+number #{\lambda^{n-1}} with one to obtain the stated classifications.}
+}
+
+\p{The basis assertion is at a fixed depth. It does not restrict how
+the polynomial coefficients may change with depth, as the family in
+\ref{fdip-01CR} demonstrates.}
